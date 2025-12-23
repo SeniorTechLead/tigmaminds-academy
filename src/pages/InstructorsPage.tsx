@@ -1,0 +1,108 @@
+import { useEffect, useState } from 'react';
+import { Linkedin, Award } from 'lucide-react';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import { supabase, Instructor } from '../lib/supabase';
+
+export default function InstructorsPage() {
+  const [instructors, setInstructors] = useState<Instructor[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchInstructors();
+  }, []);
+
+  const fetchInstructors = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('instructors')
+        .select('*')
+        .order('created_at', { ascending: true });
+
+      if (error) throw error;
+      setInstructors(data || []);
+    } catch (error) {
+      console.error('Error fetching instructors:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
+      <Header />
+      <section className="pt-32 pb-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 transition-colors">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-300 px-4 py-2 rounded-full mb-4">
+              <Award className="w-4 h-4" />
+              <span className="text-sm font-semibold">Expert Instructors</span>
+            </div>
+            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+              Learn from Industry Leaders
+            </h1>
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              Our instructors are working professionals from top tech companies who bring real-world experience to every lesson
+            </p>
+          </div>
+
+          {loading ? (
+            <div className="text-center py-12">
+              <div className="text-lg text-gray-600 dark:text-gray-300">Loading instructors...</div>
+            </div>
+          ) : (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {instructors.map((instructor) => (
+                <div key={instructor.id} className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 group">
+                  <div className="h-64 bg-gradient-to-br from-slate-700 to-slate-900 relative overflow-hidden">
+                    {instructor.image_url ? (
+                      <img
+                        src={instructor.image_url}
+                        alt={instructor.name}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 bg-blue-600 opacity-10 group-hover:opacity-20 transition-opacity"></div>
+                    )}
+                  </div>
+
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
+                      {instructor.name}
+                    </h3>
+                    <div className="text-sm font-semibold text-blue-600 dark:text-blue-400 mb-2">
+                      {instructor.title}
+                    </div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                      {instructor.company}
+                    </div>
+
+                    <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+                      {instructor.bio}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {instructor.expertise.map((skill, idx) => (
+                        <span key={idx} className="bg-blue-50 dark:bg-blue-900 text-blue-700 dark:text-blue-300 text-xs px-3 py-1 rounded-full">
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+
+                    {instructor.linkedin_url && (
+                      <button className="flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors">
+                        <Linkedin className="w-4 h-4" />
+                        <span className="text-sm font-semibold">View Profile</span>
+                      </button>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+      <Footer />
+    </div>
+  );
+}
