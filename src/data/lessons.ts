@@ -23,7 +23,7 @@ export interface Lesson {
   };
   illustration: string;
   track: 'school' | 'bootcamp' | 'both';
-  playground?: 'elephant' | 'dragonfly' | 'library' | 'firefly' | 'dolphin'; // which interactive playground to embed
+  playground?: 'elephant' | 'dragonfly' | 'library' | 'firefly' | 'dolphin' | 'muga'; // which interactive playground to embed
   lesson?: {
     objectives: string[];
     prerequisites: string[];
@@ -368,12 +368,12 @@ To this day, muga silk is found only in Assam — the only golden silk in the wo
       icon: Sparkles,
       color: 'from-yellow-400 to-amber-500',
       skills: [
-        'Biology of silk production (sericin, fibroin)',
-        'Protein structure and molecular self-assembly',
-        'Materials testing — tensile strength, elasticity',
-        'Microscopy fundamentals',
-        'Comparing natural vs synthetic materials',
-        'Scientific method and hypothesis testing',
+        'Silk biology — proteins, β-sheet crystals, fibroin — Level 1 — L1-1',
+        'Why muga silk is golden — xanthurenic acid chemistry — Level 1 — L1-2',
+        'Tensile testing and stress-strain curves — Level 1 — L1-3',
+        'Experimental design — hypothesis, variables, controls — Level 1 — L1-4',
+        'Data analysis — means, error bars, conclusions — Level 1 — L1-5',
+        'Microscopy and hands-on fibre testing — Level 2',
       ],
       project: {
         title: 'Materials Science Investigation',
@@ -395,6 +395,7 @@ To this day, muga silk is found only in Assam — the only golden silk in the wo
     },
     illustration: '/content/illustrations/weaver-girl.webp',
     track: 'school',
+    playground: 'muga' as const,
     lesson: {
       objectives: [
         'Describe the biology of silk production — from silkworm diet to protein extrusion',

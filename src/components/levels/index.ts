@@ -30,6 +30,10 @@ const registry: Record<string, LevelComponents> = {
     Level1: lazy(() => import('./DolphinLevel1')),
     Level2: lazy(() => import('./DolphinLevel2')),
   },
+  'why-the-muga-silk-is-golden': {
+    Level1: lazy(() => import('./MugaSilkLevel1')),
+    Level2: lazy(() => import('./MugaSilkLevel2')),
+  },
 };
 
 export function getLevelComponents(slug: string): LevelComponents {
