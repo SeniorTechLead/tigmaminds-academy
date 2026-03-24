@@ -72,15 +72,8 @@ async function testArduinoCircuits(page: any, story: string, expectedCircuits: n
         return count;
       });
 
-      // Check if this circuit's code actually uses analogWrite/digitalWrite
-      const codeArea = await page.locator('textarea').nth(i);
-      const codeText = await codeArea.inputValue().catch(() => '');
-      const hasLedWrites = /analogWrite|digitalWrite/.test(codeText);
-      const hasNonZeroWrite = /analogWrite\(\d+,\s*(?!0\b)\d+|analogWrite\(\d+,\s*random|digitalWrite\(\d+,\s*HIGH/.test(codeText);
-
-      if (!hasLedWrites || !hasNonZeroWrite) {
-        pass(story, `circuit ${circuitNum} LEDs`, 'No LED writes in code (serial-only lesson)');
-      } else if (glowingLeds > 0) {
+      // Every circuit with visible LEDs MUST glow. No exceptions.
+      if (glowingLeds > 0) {
         pass(story, `circuit ${circuitNum} LEDs`, `${glowingLeds} LED(s) glowing`);
       } else {
         // Might be timing — LED could be at brightness 0 in a blink cycle
