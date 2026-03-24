@@ -112,18 +112,29 @@ void setup() {
 }
 
 void loop() {
-  // Simulated echo time (microseconds)
-  // Real code: pulseIn(echoPin, HIGH)
+  // Ping and measure
   Serial.println("Ping! Measuring...");
   Serial.println("Echo time: 1450 microseconds");
-
-  // distance = time * 0.0343 / 2
-  // 1450 * 0.0343 / 2 = 24.9 cm
   Serial.println("Distance: 24.9 cm");
-  Serial.println("Object detected at ~25 cm");
-  Serial.println("");
+  analogWrite(2, 200);
+  delay(500);
 
-  delay(1000);
+  Serial.println("");
+  Serial.println("Ping! Measuring...");
+  Serial.println("Echo time: 5830 microseconds");
+  Serial.println("Distance: 100.0 cm");
+  analogWrite(2, 60);
+  delay(500);
+
+  Serial.println("");
+  Serial.println("Ping! Measuring...");
+  Serial.println("Echo time: 580 microseconds");
+  Serial.println("Distance: 9.9 cm — CLOSE!");
+  analogWrite(2, 255);
+  delay(500);
+
+  analogWrite(2, 0);
+  delay(300);
 }`,
       ledCount: 1,
       challenge: 'Change the echo time to 3000 microseconds. What distance does that give? (3000 × 0.0343 / 2 = 51.5 cm)',
@@ -390,9 +401,12 @@ void loop() {
   Serial.println("");
 
   analogWrite(2, 200);
-  delay(500);
-  analogWrite(2, 0);
-  delay(1500);
+  Serial.println("LED: proximity indicator ON");
+  delay(800);
+  analogWrite(2, 80);
+  delay(400);
+  analogWrite(2, 200);
+  delay(600);
 }`,
       ledCount: 1,
       challenge: 'You\'ve gone from "sound bounces" to a complete measurement system with temperature correction and noise filtering. Level 2 builds the real hardware.',
