@@ -11,7 +11,7 @@ const storyToSTEM = [
     description: 'How do scientists use AI to understand animal behavior? Start with a story, end with a neural network.',
     icon: Cpu,
     color: 'from-emerald-400 to-teal-500',
-    illustration: '/content/illustrations/elephant-ant.png',
+    illustration: '/content/illustrations/elephant-rongpharpi.webp',
   },
   {
     slug: 'firefly-festival-of-majuli',
@@ -20,7 +20,7 @@ const storyToSTEM = [
     description: 'From river-island fireflies to building your own glowing circuits. Science hides in the most beautiful places.',
     icon: Lightbulb,
     color: 'from-amber-400 to-orange-500',
-    illustration: '/content/illustrations/majuli-born.png',
+    illustration: '/content/illustrations/majuli-born.webp',
   },
   {
     slug: 'river-dolphins-secret',
@@ -29,7 +29,7 @@ const storyToSTEM = [
     description: 'Dolphins navigate murky waters with sound. You\'ll build a sensor that does the same.',
     icon: Bot,
     color: 'from-sky-400 to-blue-500',
-    illustration: '/content/illustrations/brahmaputra-angry.png',
+    illustration: '/content/illustrations/brahmaputra-angry.webp',
   },
   {
     slug: 'boy-who-built-a-library',
@@ -38,7 +38,7 @@ const storyToSTEM = [
     description: 'One boy\'s dream to share knowledge with everyone. You\'ll build the digital version.',
     icon: Code2,
     color: 'from-violet-400 to-purple-500',
-    illustration: '/content/illustrations/boy-clouds.png',
+    illustration: '/content/illustrations/boy-clouds.webp',
   },
   {
     slug: 'dragonfly-and-the-paddy-field',
@@ -47,7 +47,7 @@ const storyToSTEM = [
     description: 'A dragonfly sees what we can\'t. Learn to give machines the same power — and protect the harvest.',
     icon: Rocket,
     color: 'from-rose-400 to-pink-500',
-    illustration: '/content/illustrations/tea-leaf-fly.png',
+    illustration: '/content/illustrations/tea-leaf-fly.webp',
   },
   {
     slug: 'why-the-muga-silk-is-golden',
@@ -56,7 +56,7 @@ const storyToSTEM = [
     description: 'The world\'s only golden silk comes from Assam. Discover the science woven into every thread.',
     icon: Sparkles,
     color: 'from-yellow-400 to-amber-500',
-    illustration: '/content/illustrations/weaver-girl.png',
+    illustration: '/content/illustrations/weaver-girl.webp',
   },
 ];
 

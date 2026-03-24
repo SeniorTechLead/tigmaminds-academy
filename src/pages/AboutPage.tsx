@@ -51,7 +51,7 @@ export default function AboutPage() {
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div>
             <img
-              src="/content/illustrations/boy-clouds.png"
+              src="/content/illustrations/boy-clouds.webp"
               alt="A boy dreaming of building"
               className="rounded-2xl shadow-lg w-full object-cover h-[360px]"
             />

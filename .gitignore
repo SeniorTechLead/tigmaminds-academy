@@ -22,6 +22,8 @@ dist-ssr
 *.sw?
 .env
 
-# Large illustration assets (tracked via Git LFS or managed externally)
+# Illustration assets (watermarked PNGs, raw Midjourney, and WebP output)
 content/illustrations/
+content/illustrations-raw/
 public/content/
+compareimagevariants/
