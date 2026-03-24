@@ -149,27 +149,27 @@ void setup() {
 }
 
 void loop() {
-  // Fade in: 0 -> 255
-  analogWrite(2, 0);
-  delay(200);
-  analogWrite(2, 50);
-  delay(200);
-  analogWrite(2, 100);
-  delay(200);
-  analogWrite(2, 180);
-  delay(200);
+  // Fade in: dim -> bright
+  analogWrite(2, 30);
+  delay(150);
+  analogWrite(2, 80);
+  delay(150);
+  analogWrite(2, 140);
+  delay(150);
+  analogWrite(2, 200);
+  delay(150);
   analogWrite(2, 255);
-  delay(200);
+  delay(250);
 
-  // Fade out: 255 -> 0
-  analogWrite(2, 180);
-  delay(200);
-  analogWrite(2, 100);
-  delay(200);
-  analogWrite(2, 50);
-  delay(200);
-  analogWrite(2, 0);
-  delay(400);
+  // Fade out: bright -> dim (never fully off)
+  analogWrite(2, 200);
+  delay(150);
+  analogWrite(2, 140);
+  delay(150);
+  analogWrite(2, 80);
+  delay(150);
+  analogWrite(2, 30);
+  delay(250);
 }`,
       ledCount: 1,
       challenge: 'Add more intermediate steps for a smoother fade. Try steps of 25 instead of 50-80. More steps = smoother glow, but more code.',
