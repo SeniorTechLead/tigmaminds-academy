@@ -1,6 +1,6 @@
 export default function VariablesDiagram() {
   return (
-    <svg viewBox="0 0 600 180" className="w-full max-w-xl mx-auto my-6" role="img" aria-label="Three labeled jars representing variables">
+    <svg viewBox="0 0 600 200" className="w-full max-w-xl mx-auto my-6" role="img" aria-label="Three labeled jars representing variables">
       {/* Jar 1: frequency */}
       <g transform="translate(60, 20)">
         {/* Jar body */}
