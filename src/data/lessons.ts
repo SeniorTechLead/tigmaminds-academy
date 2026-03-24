@@ -23,7 +23,7 @@ export interface Lesson {
   };
   illustration: string;
   track: 'school' | 'bootcamp' | 'both';
-  playground?: 'elephant' | 'dragonfly' | 'library'; // which interactive playground to embed
+  playground?: 'elephant' | 'dragonfly' | 'library' | 'firefly' | 'dolphin'; // which interactive playground to embed
   lesson?: {
     objectives: string[];
     prerequisites: string[];
@@ -112,11 +112,13 @@ From that night on, Joon was never afraid of the dark again — because he under
       icon: Lightbulb,
       color: 'from-amber-400 to-orange-500',
       skills: [
-        'How bioluminescence works (luciferin + luciferase)',
-        'Basic circuit design — series vs parallel',
-        'LED programming with Arduino',
-        'PWM (pulse width modulation) for dimming effects',
-        'Soldering fundamentals',
+        'Electricity, voltage, current, and Ohm\'s Law — Level 1 — L1-1',
+        'PWM — smooth brightness control for LEDs — Level 1 — L1-2',
+        'Parallel circuits — wiring multiple independent LEDs — Level 1 — L1-3',
+        'Randomness and constrained variation — Level 1 — L1-4',
+        'Firefly synchronization (Kuramoto model) — Level 1 — L1-5',
+        'Arduino for-loops and arrays — Level 2',
+        'Soldering and physical circuit construction — Level 2',
       ],
       project: {
         title: 'Build a Firefly Jar',
@@ -138,6 +140,7 @@ From that night on, Joon was never afraid of the dark again — because he under
     },
     illustration: '/content/illustrations/majuli-born.webp',
     track: 'school',
+    playground: 'firefly' as const,
     lesson: {
       objectives: [
         'Explain how bioluminescence works at a chemical level (luciferin + luciferase + oxygen)',
@@ -194,12 +197,13 @@ The dolphin had taught him her secret: *the world speaks to those who close thei
       icon: Bot,
       color: 'from-sky-400 to-blue-500',
       skills: [
-        'How echolocation and sonar work',
-        'Ultrasonic sensor (HC-SR04) wiring and physics',
-        'Arduino programming in C++',
-        'Distance calculation from time-of-flight',
-        'Servo motor control for scanning',
-        'Basic data visualization',
+        'Sound, echoes, and the distance formula — Level 1 — L1-1',
+        'Proximity alerts and threshold logic — Level 1 — L1-2',
+        'Sonar scanning with servo motors — Level 1 — L1-3',
+        'Temperature correction for accuracy — Level 1 — L1-4',
+        'Noise filtering and sensor averaging — Level 1 — L1-5',
+        'HC-SR04 wiring and real hardware — Level 2',
+        'Radar sweep visualization in Python — Level 2',
       ],
       project: {
         title: 'Build a Sonar Range Finder',
@@ -221,6 +225,7 @@ The dolphin had taught him her secret: *the world speaks to those who close thei
     },
     illustration: '/content/illustrations/brahmaputra-angry.webp',
     track: 'school',
+    playground: 'dolphin' as const,
   },
   {
     slug: 'boy-who-built-a-library',
