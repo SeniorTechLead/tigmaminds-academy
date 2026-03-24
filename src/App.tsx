@@ -1,36 +1,40 @@
+import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
-import ProgramsPage from './pages/ProgramsPage';
-import ContactPage from './pages/ContactPage';
-import PrivacyPage from './pages/PrivacyPage';
-import TermsPage from './pages/TermsPage';
-import StudentsPage from './pages/StudentsPage';
-import MentorsPage from './pages/MentorsPage';
-import InstructorsPage from './pages/InstructorsPage';
-import CareersPage from './pages/CareersPage';
-import BlogsPage from './pages/BlogsPage';
-import BlogPostPage from './pages/BlogPostPage';
-import CookiePage from './pages/CookiePage';
+
+const HomePage = lazy(() => import('./pages/HomePage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const ProgramsPage = lazy(() => import('./pages/ProgramsPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
+const TermsPage = lazy(() => import('./pages/TermsPage'));
+const StudentsPage = lazy(() => import('./pages/StudentsPage'));
+const MentorsPage = lazy(() => import('./pages/MentorsPage'));
+const InstructorsPage = lazy(() => import('./pages/InstructorsPage'));
+const CareersPage = lazy(() => import('./pages/CareersPage'));
+const BlogsPage = lazy(() => import('./pages/BlogsPage'));
+const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
+const CookiePage = lazy(() => import('./pages/CookiePage'));
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/programs" element={<ProgramsPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/privacy" element={<PrivacyPage />} />
-        <Route path="/terms" element={<TermsPage />} />
-        <Route path="/students" element={<StudentsPage />} />
-        <Route path="/mentors" element={<MentorsPage />} />
-        <Route path="/instructors" element={<InstructorsPage />} />
-        <Route path="/careers" element={<CareersPage />} />
-        <Route path="/blog" element={<BlogsPage />} />
-        <Route path="/blog/:slug" element={<BlogPostPage />} />
-        <Route path="/cookies" element={<CookiePage />} />
-      </Routes>
+      <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="w-8 h-8 border-4 border-amber-500 border-t-transparent rounded-full animate-spin" /></div>}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/programs" element={<ProgramsPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/students" element={<StudentsPage />} />
+          <Route path="/mentors" element={<MentorsPage />} />
+          <Route path="/instructors" element={<InstructorsPage />} />
+          <Route path="/careers" element={<CareersPage />} />
+          <Route path="/blog" element={<BlogsPage />} />
+          <Route path="/blog/:slug" element={<BlogPostPage />} />
+          <Route path="/cookies" element={<CookiePage />} />
+        </Routes>
+      </Suspense>
     </Router>
   );
 }
