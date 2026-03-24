@@ -165,7 +165,7 @@ export default function StudentsPage() {
       <section className="pt-32 pb-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 transition-colors">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-300 px-4 py-2 rounded-full mb-4">
+            <div className="inline-flex items-center gap-2 bg-amber-50 dark:bg-amber-900/40 text-amber-600 dark:text-amber-300 px-4 py-2 rounded-full mb-4">
               <GraduationCap className="w-4 h-4" />
               <span className="text-sm font-semibold">Student Application</span>
             </div>
@@ -193,13 +193,13 @@ export default function StudentsPage() {
               ].map(({ key, label }) => (
                 <label
                   key={key}
-                  className="flex items-start gap-3 p-4 rounded-lg border-2 border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 cursor-pointer transition-colors"
+                  className="flex items-start gap-3 p-4 rounded-lg border-2 border-gray-200 dark:border-gray-700 hover:border-amber-500 dark:hover:border-amber-500 cursor-pointer transition-colors"
                 >
                   <input
                     type="checkbox"
                     checked={eligibility[key]}
                     onChange={() => handleEligibilityChange(key)}
-                    className="mt-1 w-5 h-5 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
+                    className="mt-1 w-5 h-5 text-amber-600 rounded focus:ring-2 focus:ring-amber-500"
                   />
                   <span className="text-gray-900 dark:text-white flex-1">{label}</span>
                   {eligibility[key] && (
@@ -233,7 +233,7 @@ export default function StudentsPage() {
                     value={formData.full_name}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                   />
                 </div>
 
@@ -247,7 +247,7 @@ export default function StudentsPage() {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                   />
                 </div>
               </div>
@@ -261,7 +261,7 @@ export default function StudentsPage() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                 />
               </div>
 
@@ -274,7 +274,7 @@ export default function StudentsPage() {
                     name="education_level"
                     value={formData.education_level}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                   >
                     <option value="">Select...</option>
                     <option value="high_school">High School</option>
@@ -296,7 +296,7 @@ export default function StudentsPage() {
                     value={formData.years_experience}
                     onChange={handleInputChange}
                     min="0"
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                   />
                 </div>
               </div>
@@ -309,15 +309,15 @@ export default function StudentsPage() {
                   name="preferred_course"
                   value={formData.preferred_course}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                 >
-                  <option value="">Select a course...</option>
-                  <option value="web_development">Web Development</option>
-                  <option value="data_science">Data Science</option>
-                  <option value="cloud_computing">Cloud Computing</option>
-                  <option value="ux_ui_design">UX/UI Design</option>
-                  <option value="blockchain">Blockchain Development</option>
-                  <option value="mobile_development">Mobile Development</option>
+                  <option value="">Select a track...</option>
+                  <option value="bootcamp_fullstack">24-Week Bootcamp — Full-Stack Development</option>
+                  <option value="bootcamp_ai">24-Week Bootcamp — AI & Machine Learning</option>
+                  <option value="bootcamp_cloud">24-Week Bootcamp — Cloud & DevOps</option>
+                  <option value="school_robotics">12-Month School — Robotics & Arduino</option>
+                  <option value="school_python">12-Month School — Python & AI</option>
+                  <option value="school_creative">12-Month School — Creative Coding</option>
                 </select>
               </div>
 
@@ -329,7 +329,7 @@ export default function StudentsPage() {
                   name="availability"
                   value={formData.availability}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                 >
                   <option value="">Select...</option>
                   <option value="full_time">Full-time (40+ hours/week)</option>
@@ -356,7 +356,7 @@ export default function StudentsPage() {
                       value={formData.linkedin_url}
                       onChange={handleInputChange}
                       placeholder="https://linkedin.com/in/yourprofile"
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     />
                   </div>
 
@@ -370,7 +370,7 @@ export default function StudentsPage() {
                       value={formData.portfolio_url}
                       onChange={handleInputChange}
                       placeholder="https://yourportfolio.com"
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     />
                   </div>
 
@@ -384,7 +384,7 @@ export default function StudentsPage() {
                       value={formData.github_url}
                       onChange={handleInputChange}
                       placeholder="https://github.com/yourusername"
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     />
                   </div>
 
@@ -394,7 +394,7 @@ export default function StudentsPage() {
                     </label>
                     <div className="flex items-center gap-4">
                       <label className="flex-1 cursor-pointer">
-                        <div className="flex items-center gap-3 px-4 py-3 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 hover:border-blue-500 dark:hover:border-blue-500 transition-colors">
+                        <div className="flex items-center gap-3 px-4 py-3 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 hover:border-amber-500 dark:hover:border-amber-500 transition-colors">
                           <Upload className="w-5 h-5 text-gray-400" />
                           <span className="text-gray-600 dark:text-gray-300">
                             {resumeFile ? resumeFile.name : 'Upload PDF, DOC, or TXT'}
@@ -420,7 +420,7 @@ export default function StudentsPage() {
                       onChange={handleInputChange}
                       rows={6}
                       placeholder="Tell us why you want to join TigmaMinds Academy and what you hope to achieve..."
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent resize-none"
                     />
                   </div>
                 </div>
@@ -445,7 +445,7 @@ export default function StudentsPage() {
               <button
                 type="submit"
                 disabled={!allEligibilityMet || isSubmitting}
-                className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white px-8 py-4 rounded-lg transition-colors shadow-lg hover:shadow-xl font-semibold text-lg"
+                className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white px-8 py-4 rounded-lg transition-colors shadow-lg hover:shadow-xl font-semibold text-lg"
               >
                 {isSubmitting ? (
                   <>Processing...</>

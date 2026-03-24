@@ -19,7 +19,7 @@ export default function CookiePage() {
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">1. What Are Cookies?</h2>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
                 Cookies are small text files that are placed on your device when you visit a website. They are widely used to
-                make websites work more efficiently and provide information to website owners. TigmaMinds Private Limited uses
+                make websites work more efficiently and provide information to website owners. TigmaMinds Academy uses
                 cookies and similar technologies to enhance your experience on our platform.
               </p>
             </section>
@@ -177,7 +177,7 @@ export default function CookiePage() {
                 If you have questions about our use of cookies or this Cookie Policy, please contact us at:
               </p>
               <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
-                <p className="text-gray-900 dark:text-white font-semibold mb-2">TigmaMinds Private Limited</p>
+                <p className="text-gray-900 dark:text-white font-semibold mb-2">TigmaMinds Academy</p>
                 <p className="text-gray-600 dark:text-gray-300">Email: privacy@tigmaminds.com</p>
                 <p className="text-gray-600 dark:text-gray-300">Phone: +91-XXXX-XXXXXX</p>
               </div>

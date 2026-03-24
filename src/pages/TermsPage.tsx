@@ -18,17 +18,17 @@ export default function TermsPage() {
             <section className="mb-8">
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">1. Agreement to Terms</h2>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                By accessing or using the services provided by TigmaMinds Foundation ("Foundation," "we," "us," or "our"),
+                By accessing or using the services provided by TigmaMinds Academy ("Academy," "we," "us," or "our"),
                 you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.
               </p>
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">2. About Our Foundation</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">2. About Our Academy</h2>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                TigmaMinds Foundation is a non-profit organization dedicated to empowering communities through education,
-                child welfare, and elderly care. We provide assistance programs, resources, and support to vulnerable populations,
-                helping individuals and families build better futures.
+                TigmaMinds Academy is an education technology company that teaches programming, AI, and robotics through
+                hands-on projects and expert-led instruction. We offer bootcamp and school programs designed to build
+                job-ready skills and creative confidence.
               </p>
             </section>
 
@@ -39,7 +39,7 @@ export default function TermsPage() {
               </p>
               <ul className="list-disc pl-6 text-gray-600 dark:text-gray-300 space-y-2 mb-4">
                 <li>Provide accurate and truthful information when applying for assistance or making inquiries</li>
-                <li>Respect the privacy and dignity of other beneficiaries and community members</li>
+                <li>Respect the privacy and dignity of other students and community members</li>
                 <li>Use our services only for lawful purposes</li>
                 <li>Not misrepresent your circumstances or needs to obtain assistance</li>
               </ul>
@@ -55,21 +55,20 @@ export default function TermsPage() {
                 <li>You agree to provide necessary documentation to verify your need for assistance</li>
                 <li>You understand that resources are limited and distributed based on need and availability</li>
                 <li>You agree to use provided resources and support for their intended purposes</li>
-                <li>You will respect program staff, volunteers, and other participants</li>
+                <li>You will respect program staff, instructors, and other participants</li>
               </ul>
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">5. Donations and Contributions</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">5. Payments and Fees</h2>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                When making donations to TigmaMinds Foundation:
+                Regarding payments for our programs:
               </p>
               <ul className="list-disc pl-6 text-gray-600 dark:text-gray-300 space-y-2 mb-4">
-                <li>All donations are voluntary and non-refundable unless required by law</li>
-                <li>Donations are processed securely through authorized payment partners</li>
-                <li>You will receive acknowledgment of your donation for tax purposes where applicable</li>
-                <li>Donations are used to support our programs in accordance with our mission</li>
-                <li>You may specify how you want your donation used, though we reserve the right to redirect funds if needed to serve our mission effectively</li>
+                <li>Program fees are outlined on the respective program pages</li>
+                <li>Payments are processed securely through authorized payment partners</li>
+                <li>Refund policies are specified in your enrollment agreement</li>
+                <li>We may offer scholarships or fee waivers at our discretion</li>
               </ul>
             </section>
 
@@ -77,7 +76,7 @@ export default function TermsPage() {
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">6. Intellectual Property Rights</h2>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
                 All content on our website, including text, images, logos, and educational materials, is the property of
-                TigmaMinds Foundation and is protected by copyright and trademark laws. You may not:
+                TigmaMinds Academy and is protected by copyright and trademark laws. You may not:
               </p>
               <ul className="list-disc pl-6 text-gray-600 dark:text-gray-300 space-y-2 mb-4">
                 <li>Use our name, logo, or branding without written permission</li>
@@ -90,13 +89,13 @@ export default function TermsPage() {
             <section className="mb-8">
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">7. Privacy and Confidentiality</h2>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                We are committed to protecting your privacy and the privacy of all beneficiaries:
+                We are committed to protecting your privacy and the privacy of all students:
               </p>
               <ul className="list-disc pl-6 text-gray-600 dark:text-gray-300 space-y-2 mb-4">
                 <li>Personal information is collected and used in accordance with our Privacy Policy</li>
-                <li>Beneficiary information is kept confidential and shared only as necessary to provide services</li>
-                <li>Photos or stories of beneficiaries are shared only with explicit consent</li>
-                <li>We respect the dignity and privacy of all individuals we serve</li>
+                <li>Student information is kept confidential and shared only as necessary to deliver our programs</li>
+                <li>Photos or stories of students are shared only with explicit consent</li>
+                <li>We respect the privacy of all students and community members</li>
               </ul>
             </section>
 
@@ -116,7 +115,7 @@ export default function TermsPage() {
             <section className="mb-8">
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">9. Limitation of Liability</h2>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                To the maximum extent permitted by law, TigmaMinds Foundation shall not be liable for any indirect,
+                To the maximum extent permitted by law, TigmaMinds Academy shall not be liable for any indirect,
                 incidental, special, or consequential damages arising from your use of our services or participation in
                 our programs. We do our best to serve our community with care and integrity, but we cannot be held
                 responsible for outcomes beyond our reasonable control.
@@ -146,7 +145,7 @@ export default function TermsPage() {
                 If you have any questions about these Terms of Service, please contact us at:
               </p>
               <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
-                <p className="text-gray-900 dark:text-white font-semibold mb-2">TigmaMinds Foundation</p>
+                <p className="text-gray-900 dark:text-white font-semibold mb-2">TigmaMinds Academy</p>
                 <p className="text-gray-600 dark:text-gray-300">5, Bonbononi Path, Bongaon, Beltola</p>
                 <p className="text-gray-600 dark:text-gray-300">Guwahati, Assam-781028</p>
                 <p className="text-gray-600 dark:text-gray-300 mt-2">Email: info@tigmaminds.org</p>

@@ -37,7 +37,7 @@ export default function CareersPage() {
       <section className="pt-32 pb-20 bg-gradient-to-br from-blue-50 to-white dark:from-gray-800 dark:to-gray-900 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-300 px-4 py-2 rounded-full mb-6">
+            <div className="inline-flex items-center gap-2 bg-amber-50 dark:bg-amber-900/40 text-amber-600 dark:text-amber-300 px-4 py-2 rounded-full mb-6">
               <Award className="w-5 h-5" />
               <span className="text-sm font-semibold">Join Our Team</span>
             </div>
@@ -51,8 +51,8 @@ export default function CareersPage() {
 
           <div className="grid md:grid-cols-2 gap-8 mb-16">
             <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
-              <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-6">
-                <Heart className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+              <div className="w-16 h-16 bg-amber-100 dark:bg-amber-900/40 rounded-full flex items-center justify-center mb-6">
+                <Heart className="w-8 h-8 text-amber-600 dark:text-amber-400" />
               </div>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                 Why Become a Mentor?
@@ -93,31 +93,31 @@ export default function CareersPage() {
               </p>
               <ul className="space-y-4 text-gray-600 dark:text-gray-300">
                 <li className="flex items-start gap-3">
-                  <TrendingUp className="w-6 h-6 text-blue-500 flex-shrink-0 mt-0.5" />
+                  <TrendingUp className="w-6 h-6 text-amber-500 flex-shrink-0 mt-0.5" />
                   <span>3+ years of professional experience in your field</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Heart className="w-6 h-6 text-blue-500 flex-shrink-0 mt-0.5" />
+                  <Heart className="w-6 h-6 text-amber-500 flex-shrink-0 mt-0.5" />
                   <span>A genuine passion for teaching and student success</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Award className="w-6 h-6 text-blue-500 flex-shrink-0 mt-0.5" />
+                  <Award className="w-6 h-6 text-amber-500 flex-shrink-0 mt-0.5" />
                   <span>Strong communication and presentation skills</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle className="w-6 h-6 text-blue-500 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-6 h-6 text-amber-500 flex-shrink-0 mt-0.5" />
                   <span>Commitment to delivering high-quality instruction</span>
                 </li>
               </ul>
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl shadow-2xl p-8 md:p-12 mb-16">
+          <div className="bg-gradient-to-br from-amber-600 to-orange-700 rounded-2xl shadow-2xl p-8 md:p-12 mb-16">
             <div className="text-center mb-8">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
                 Program Tracks We're Hiring For
               </h2>
-              <p className="text-blue-100 text-lg">
+              <p className="text-amber-100 text-lg">
                 We're looking for experts in the following areas:
               </p>
             </div>
@@ -146,7 +146,7 @@ export default function CareersPage() {
               </h2>
 
               <div className="space-y-6 mb-8">
-                <div className="border-l-4 border-blue-600 pl-6 py-2">
+                <div className="border-l-4 border-amber-500 pl-6 py-2">
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                     1. Expertise in Our Program Tracks
                   </h3>
@@ -165,29 +165,29 @@ export default function CareersPage() {
                 </div>
               </div>
 
-              <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 mb-8">
+              <div className="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-6 mb-8">
                 <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">
                   What You'll Do as a Mentor:
                 </h3>
                 <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                   <li className="flex items-start gap-2">
-                    <span className="text-blue-600 dark:text-blue-400 font-bold">•</span>
+                    <span className="text-amber-600 dark:text-amber-400 font-bold">•</span>
                     <span>Design and deliver engaging course content</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-blue-600 dark:text-blue-400 font-bold">•</span>
+                    <span className="text-amber-600 dark:text-amber-400 font-bold">•</span>
                     <span>Provide personalized guidance and feedback to students</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-blue-600 dark:text-blue-400 font-bold">•</span>
+                    <span className="text-amber-600 dark:text-amber-400 font-bold">•</span>
                     <span>Host live Q&A sessions and code reviews</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-blue-600 dark:text-blue-400 font-bold">•</span>
+                    <span className="text-amber-600 dark:text-amber-400 font-bold">•</span>
                     <span>Create practical projects and assessments</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-blue-600 dark:text-blue-400 font-bold">•</span>
+                    <span className="text-amber-600 dark:text-amber-400 font-bold">•</span>
                     <span>Contribute to our curriculum development</span>
                   </li>
                 </ul>
@@ -196,13 +196,13 @@ export default function CareersPage() {
               <div className="text-center">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-3 bg-blue-600 text-white px-10 py-4 rounded-lg hover:bg-blue-700 transition-all transform hover:scale-105 shadow-lg font-bold text-lg group"
+                  className="inline-flex items-center gap-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-10 py-4 rounded-lg hover:from-amber-600 hover:to-orange-600 transition-all transform hover:scale-105 shadow-lg font-bold text-lg group"
                 >
                   <span>Apply to Become a Mentor</span>
                   <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <p className="mt-4 text-gray-600 dark:text-gray-400">
-                  Questions? <Link to="/contact" className="text-blue-600 dark:text-blue-400 hover:underline">Contact us</Link> to learn more
+                  Questions? <Link to="/contact" className="text-amber-600 dark:text-amber-400 hover:underline">Contact us</Link> to learn more
                 </p>
               </div>
             </div>

@@ -34,7 +34,7 @@ export default function InstructorsPage() {
       <section className="pt-32 pb-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-300 px-4 py-2 rounded-full mb-4">
+            <div className="inline-flex items-center gap-2 bg-amber-50 dark:bg-amber-900/40 text-amber-600 dark:text-amber-300 px-4 py-2 rounded-full mb-4">
               <Award className="w-4 h-4" />
               <span className="text-sm font-semibold">Expert Instructors</span>
             </div>
@@ -70,7 +70,7 @@ export default function InstructorsPage() {
                     <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
                       {instructor.name}
                     </h3>
-                    <div className="text-sm font-semibold text-blue-600 dark:text-blue-400 mb-2">
+                    <div className="text-sm font-semibold text-amber-600 dark:text-amber-400 mb-2">
                       {instructor.title}
                     </div>
                     <div className="text-sm text-gray-600 dark:text-gray-400 mb-4">
@@ -83,14 +83,14 @@ export default function InstructorsPage() {
 
                     <div className="flex flex-wrap gap-2 mb-4">
                       {instructor.expertise.map((skill, idx) => (
-                        <span key={idx} className="bg-blue-50 dark:bg-blue-900 text-blue-700 dark:text-blue-300 text-xs px-3 py-1 rounded-full">
+                        <span key={idx} className="bg-amber-50 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 text-xs px-3 py-1 rounded-full">
                           {skill}
                         </span>
                       ))}
                     </div>
 
                     {instructor.linkedin_url && (
-                      <button className="flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors">
+                      <button className="flex items-center gap-2 text-amber-600 dark:text-amber-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors">
                         <Linkedin className="w-4 h-4" />
                         <span className="text-sm font-semibold">View Profile</span>
                       </button>

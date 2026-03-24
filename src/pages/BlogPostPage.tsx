@@ -96,7 +96,7 @@ export default function BlogPostPage() {
           <div className="text-center">
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Article Not Found</h1>
             <p className="text-gray-600 dark:text-gray-300 mb-8">The article you're looking for doesn't exist.</p>
-            <Link to="/blog" className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:underline">
+            <Link to="/blog" className="inline-flex items-center gap-2 text-amber-600 dark:text-amber-400 hover:underline">
               <ArrowLeft className="w-4 h-4" />
               Back to Blog
             </Link>
@@ -113,13 +113,13 @@ export default function BlogPostPage() {
 
       <article className="pt-32 pb-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link to="/blog" className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:underline mb-8">
+          <Link to="/blog" className="inline-flex items-center gap-2 text-amber-600 dark:text-amber-400 hover:underline mb-8">
             <ArrowLeft className="w-4 h-4" />
             Back to All Articles
           </Link>
 
           {blog.category && (
-            <div className="inline-block px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300 text-sm font-semibold mb-4">
+            <div className="inline-block px-3 py-1 rounded-full bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-300 text-sm font-semibold mb-4">
               {blog.category}
             </div>
           )}
@@ -159,7 +159,7 @@ export default function BlogPostPage() {
             prose-p:text-[1.3rem] prose-p:leading-[1.7] prose-p:text-gray-800 dark:prose-p:text-gray-200 prose-p:mb-8
             prose-ul:my-8 prose-ul:space-y-4 prose-ul:ml-8 prose-ul:list-disc
             prose-li:text-[1.3rem] prose-li:leading-[1.7] prose-li:text-gray-800 dark:prose-li:text-gray-200 prose-li:pl-3 prose-li:marker:text-gray-800 dark:prose-li:marker:text-gray-200
-            prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:font-medium prose-a:no-underline hover:prose-a:underline
+            prose-a:text-amber-600 dark:prose-a:text-amber-400 prose-a:font-medium prose-a:no-underline hover:prose-a:underline
             prose-strong:text-gray-900 dark:prose-strong:text-white prose-strong:font-bold
             prose-code:text-gray-900 dark:prose-code:text-gray-100 prose-code:text-sm prose-code:bg-gray-100 dark:prose-code:bg-gray-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:font-mono
             prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:rounded-xl prose-pre:shadow-lg
@@ -193,7 +193,7 @@ export default function BlogPostPage() {
             </div>
           )}
 
-          <div className="bg-blue-50 dark:bg-blue-900/20 rounded-2xl p-8 mb-12">
+          <div className="bg-amber-50 dark:bg-amber-900/20 rounded-2xl p-8 mb-12">
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
               Ready to Start Your Tech Journey?
             </h3>
@@ -202,7 +202,7 @@ export default function BlogPostPage() {
             </p>
             <Link
               to="/students"
-              className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold"
+              className="inline-block bg-gradient-to-r from-amber-500 to-orange-500 text-white px-8 py-3 rounded-lg hover:from-amber-600 hover:to-orange-600 transition-colors font-semibold"
             >
               Apply Now
             </Link>

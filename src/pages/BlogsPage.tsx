@@ -72,7 +72,7 @@ export default function BlogsPage() {
       <section className="pt-32 pb-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 transition-colors">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-300 px-4 py-2 rounded-full mb-4">
+            <div className="inline-flex items-center gap-2 bg-amber-50 dark:bg-amber-900/40 text-amber-600 dark:text-amber-300 px-4 py-2 rounded-full mb-4">
               <BookOpen className="w-4 h-4" />
               <span className="text-sm font-semibold">Tech Insights & Career Advice</span>
             </div>
@@ -92,7 +92,7 @@ export default function BlogsPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search articles..."
-                className="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                className="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-colors"
               />
             </div>
           </div>
@@ -102,7 +102,7 @@ export default function BlogsPage() {
               onClick={() => setSelectedCategory('all')}
               className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
                 selectedCategory === 'all'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-amber-600 text-white'
                   : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
               }`}
             >
@@ -114,7 +114,7 @@ export default function BlogsPage() {
                 onClick={() => setSelectedCategory(category as string)}
                 className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
                   selectedCategory === category
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-amber-600 text-white'
                     : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
                 }`}
               >
@@ -137,7 +137,7 @@ export default function BlogsPage() {
                   setSearchQuery('');
                   setSelectedCategory('all');
                 }}
-                className="text-blue-600 dark:text-blue-400 hover:underline"
+                className="text-amber-600 dark:text-amber-400 hover:underline"
               >
                 Clear filters
               </button>
@@ -151,7 +151,7 @@ export default function BlogsPage() {
                 >
                   <div className="p-6 sm:p-8">
                     {blog.category && (
-                      <div className="inline-block px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300 text-sm font-semibold mb-4">
+                      <div className="inline-block px-3 py-1 rounded-full bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-300 text-sm font-semibold mb-4">
                         {blog.category}
                       </div>
                     )}
@@ -199,7 +199,7 @@ export default function BlogsPage() {
 
                     <Link
                       to={`/blog/${blog.slug}`}
-                      className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 font-semibold hover:gap-3 transition-all"
+                      className="inline-flex items-center gap-2 text-amber-600 dark:text-amber-400 font-semibold hover:gap-3 transition-all"
                     >
                       Read Full Article
                       <span>→</span>

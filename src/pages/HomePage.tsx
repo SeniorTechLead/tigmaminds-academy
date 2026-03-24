@@ -1,279 +1,271 @@
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, Users, GraduationCap, HandHeart, ArrowRight, Target, Award, TrendingUp } from 'lucide-react';
+import { ArrowRight, Sparkles, Cpu, Bot, Code2, Lightbulb, Rocket } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { supabase } from '../lib/supabase';
 
-interface Program {
-  id: string;
-  title: string;
-  category: string;
-  description: string;
-  image_url: string;
-  beneficiaries_count: number;
-}
+const storyToSTEM = [
+  {
+    story: 'The Girl Who Spoke to Elephants',
+    lesson: 'AI & Wildlife Tracking',
+    description: 'How do scientists use AI to understand animal behavior? Start with a story, end with a neural network.',
+    icon: Cpu,
+    color: 'from-emerald-400 to-teal-500',
+    illustration: '/content/illustrations/elephant-ant.png',
+  },
+  {
+    story: 'The Firefly Festival of Majuli',
+    lesson: 'LEDs, Circuits & Bioluminescence',
+    description: 'From river-island fireflies to building your own glowing circuits. Science hides in the most beautiful places.',
+    icon: Lightbulb,
+    color: 'from-amber-400 to-orange-500',
+    illustration: '/content/illustrations/majuli-born.png',
+  },
+  {
+    story: 'The River Dolphin\'s Secret',
+    lesson: 'Sonar Sensors & Arduino',
+    description: 'Dolphins navigate murky waters with sound. You\'ll build a sensor that does the same.',
+    icon: Bot,
+    color: 'from-sky-400 to-blue-500',
+    illustration: '/content/illustrations/brahmaputra-angry.png',
+  },
+  {
+    story: 'The Boy Who Built a Library',
+    lesson: 'Web Development & Databases',
+    description: 'One boy\'s dream to share knowledge with everyone. You\'ll build the digital version.',
+    icon: Code2,
+    color: 'from-violet-400 to-purple-500',
+    illustration: '/content/illustrations/boy-clouds.png',
+  },
+  {
+    story: 'The Dragonfly and the Paddy Field',
+    lesson: 'Drones & Computer Vision',
+    description: 'A dragonfly sees what we can\'t. Learn to give machines the same power — and protect the harvest.',
+    icon: Rocket,
+    color: 'from-rose-400 to-pink-500',
+    illustration: '/content/illustrations/tea-leaf-fly.png',
+  },
+  {
+    story: 'Why the Muga Silk Is Golden',
+    lesson: 'Biology & Materials Science',
+    description: 'The world\'s only golden silk comes from Assam. Discover the science woven into every thread.',
+    icon: Sparkles,
+    color: 'from-yellow-400 to-amber-500',
+    illustration: '/content/illustrations/weaver-girl.png',
+  },
+];
 
-interface ImpactStory {
-  id: string;
-  name: string;
-  role: string;
-  story: string;
-  location: string;
-}
+const tracks = [
+  {
+    title: '24-Week Bootcamp',
+    audience: 'Career changers & college grads',
+    subjects: ['Full-Stack Development', 'AI & Machine Learning', 'Cloud & DevOps'],
+    color: 'from-sky-500 to-cyan-400',
+  },
+  {
+    title: '12-Month School Program',
+    audience: 'Grades 6–12',
+    subjects: ['Robotics & Arduino', 'Python & AI', 'Creative Coding'],
+    color: 'from-emerald-500 to-green-400',
+  },
+];
 
 export default function HomePage() {
-  const [programs, setPrograms] = useState<Program[]>([]);
-  const [testimonials, setTestimonials] = useState<ImpactStory[]>([]);
-
-  useEffect(() => {
-    fetchPrograms();
-    fetchTestimonials();
-  }, []);
-
-  const fetchPrograms = async () => {
-    const categories = ['education', 'child_welfare', 'old_age'];
-    const programsData: Program[] = [];
-
-    for (const category of categories) {
-      const { data, error } = await supabase
-        .from('programs')
-        .select('*')
-        .eq('active', true)
-        .eq('category', category)
-        .limit(1)
-        .maybeSingle();
-
-      if (data && !error) {
-        programsData.push(data);
-      }
-    }
-
-    setPrograms(programsData);
-  };
-
-  const fetchTestimonials = async () => {
-    const { data, error } = await supabase
-      .from('impact_stories')
-      .select('*')
-      .eq('featured', true)
-      .order('sort_order', { ascending: true })
-      .limit(2);
-
-    if (data && !error) {
-      setTestimonials(data);
-    }
-  };
-
-  const totalBeneficiaries = programs.reduce((sum, p) => sum + p.beneficiaries_count, 0);
-
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
       <Header />
 
-      <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-sky-50 via-white to-green-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 -z-10"></div>
+      {/* Hero */}
+      <section className="relative pt-28 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-white to-sky-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 -z-10" />
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in">
+              <div className="inline-flex items-center gap-2 bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 px-4 py-2 rounded-full mb-6 text-sm font-medium">
+                <Sparkles className="w-4 h-4" />
+                Where stories spark STEM curiosity
+              </div>
               <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
-                Building a Better
-                <span className="block text-gradient">Tomorrow</span>
+                Learn to Build
+                <span className="block text-gradient">Through Imagination</span>
               </h1>
-              <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
-                Empowering communities through education, child welfare, and elderly care.
-                Join us in creating lasting positive change.
+              <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed max-w-lg">
+                Programming, AI, and robotics — taught through illustrated stories
+                that make science feel like an adventure.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
-                  to="/get-involved"
-                  className="inline-flex items-center justify-center bg-gradient-to-r from-sky-500 to-green-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200"
+                  to="/programs"
+                  className="inline-flex items-center justify-center bg-gradient-to-r from-amber-500 to-orange-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200"
                 >
-                  Make a Difference
+                  Explore Programs
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
                 <Link
                   to="/about"
-                  className="inline-flex items-center justify-center border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-8 py-4 rounded-full font-semibold text-lg hover:border-sky-500 hover:text-sky-600 dark:hover:text-sky-400 transition-all duration-200"
+                  className="inline-flex items-center justify-center border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-8 py-4 rounded-full font-semibold text-lg hover:border-amber-500 hover:text-amber-600 dark:hover:text-amber-400 transition-all duration-200"
                 >
-                  Learn More
+                  Our Story
                 </Link>
               </div>
             </div>
             <div className="relative animate-slide-up">
-              <img
-                src="https://images.pexels.com/photos/16034402/pexels-photo-16034402.jpeg"
-                alt="Indian schoolchildren learning together"
-                className="rounded-2xl shadow-2xl w-full object-cover h-[500px]"
-              />
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                <img
+                  src="/content/illustrations/bridge-grew.png"
+                  alt="Illustrated children building and learning together"
+                  className="w-full object-cover h-[480px]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+              </div>
+              {/* Floating accent cards */}
+              <div className="absolute -bottom-4 -left-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg px-4 py-3 flex items-center gap-3 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center">
+                  <Bot className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-gray-900 dark:text-white">Robotics</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">Hands-on builds</p>
+                </div>
+              </div>
+              <div className="absolute -top-4 -right-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg px-4 py-3 flex items-center gap-3 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-400 to-purple-500 flex items-center justify-center">
+                  <Code2 className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-gray-900 dark:text-white">Coding</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">Python, JS, more</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
+      {/* Story → STEM Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-amber-50/50 dark:from-gray-900 dark:to-gray-800/50">
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-sky-50 to-sky-100 dark:from-sky-900/30 dark:to-sky-800/30 transform hover:scale-105 transition-transform duration-200">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-sky-500 rounded-full mb-4">
-                <Target className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Our Mission</h3>
-              <p className="text-gray-600 dark:text-gray-300 font-medium">Creating Positive Change</p>
-            </div>
-            <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/30 transform hover:scale-105 transition-transform duration-200">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-green-500 rounded-full mb-4">
-                <Award className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Local Impact</h3>
-              <p className="text-gray-600 dark:text-gray-300 font-medium">Community Focused</p>
-            </div>
-            <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/30 dark:to-orange-800/30 transform hover:scale-105 transition-transform duration-200">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-orange-500 rounded-full mb-4">
-                <TrendingUp className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Sustainable Programs</h3>
-              <p className="text-gray-600 dark:text-gray-300 font-medium">Long-term solutions</p>
-            </div>
-          </div>
-
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Our Focus Areas</h2>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              Every Lesson Begins with a Story
+            </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Three pillars of change that drive our mission to build stronger communities
+              We pair illustrated children's stories with real STEM projects.
+              Curiosity first, curriculum second.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {programs.map((program, index) => (
-              <div
-                key={program.id}
-                className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 animate-scale-in"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="relative h-48 overflow-hidden">
-                  {program.image_url ? (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {storyToSTEM.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={item.story}
+                  className="group bg-white dark:bg-gray-800 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden animate-scale-in"
+                  style={{ animationDelay: `${index * 80}ms` }}
+                >
+                  <div className="relative h-48 overflow-hidden">
                     <img
-                      src={program.image_url}
-                      alt={program.title}
-                      className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-300"
+                      src={item.illustration}
+                      alt={item.story}
+                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                     />
-                  ) : (
-                    <div className={`w-full h-full flex items-center justify-center ${
-                      program.category === 'education' ? 'bg-gradient-to-br from-sky-400 to-sky-600' :
-                      program.category === 'child_welfare' ? 'bg-gradient-to-br from-green-400 to-green-600' :
-                      'bg-gradient-to-br from-orange-400 to-orange-600'
-                    }`}>
-                      <div className="text-white">
-                        {program.category === 'education' && <GraduationCap className="h-16 w-16" />}
-                        {program.category === 'child_welfare' && <Heart className="h-16 w-16" />}
-                        {program.category === 'old_age' && <HandHeart className="h-16 w-16" />}
-                      </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
+                    <div className={`absolute top-4 left-4 bg-gradient-to-r ${item.color} w-10 h-10 rounded-full flex items-center justify-center shadow-lg`}>
+                      <Icon className="w-5 h-5 text-white" />
                     </div>
-                  )}
-                  <div className="absolute top-4 right-4 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm px-3 py-1 rounded-full">
-                    <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">
-                      {program.beneficiaries_count.toLocaleString()}+ helped
-                    </span>
+                  </div>
+                  <div className="p-6">
+                    <p className="text-sm font-semibold text-amber-600 dark:text-amber-400 mb-1 uppercase tracking-wide">
+                      Story → Lesson
+                    </p>
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
+                      {item.story}
+                    </h3>
+                    <p className={`text-sm font-semibold bg-gradient-to-r ${item.color} bg-clip-text text-transparent mb-3`}>
+                      → {item.lesson}
+                    </p>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                      {item.description}
+                    </p>
                   </div>
                 </div>
-                <div className="p-6">
-                  <div className="flex items-center mb-3">
-                    {program.category === 'education' && <GraduationCap className="h-5 w-5 text-sky-500 mr-2" />}
-                    {program.category === 'child_welfare' && <Heart className="h-5 w-5 text-green-500 mr-2" />}
-                    {program.category === 'old_age' && <HandHeart className="h-5 w-5 text-orange-500 mr-2" />}
-                    <span className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">
-                      {program.category === 'education' && 'Education'}
-                      {program.category === 'child_welfare' && 'Child Welfare'}
-                      {program.category === 'old_age' && 'Old Age Support'}
-                    </span>
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{program.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">{program.description}</p>
-                  <Link
-                    to="/programs"
-                    className="inline-flex items-center text-sky-600 dark:text-sky-400 font-semibold hover:text-sky-700 dark:hover:text-sky-300 transition-colors"
-                  >
-                    Learn More
-                    <ArrowRight className="ml-1 h-4 w-4" />
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <Link
-              to="/programs"
-              className="inline-flex items-center text-sky-600 dark:text-sky-400 font-semibold text-lg hover:text-sky-700 dark:hover:text-sky-300 transition-colors"
-            >
-              View All Programs
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
-        <div className="max-w-7xl mx-auto">
+      {/* Two Tracks */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
+        <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Stories of Change</h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Real stories from the lives we've touched and the communities we've transformed
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Two Paths, One Mission</h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300">
+              Whether you're switching careers or just starting to dream — there's a track for you.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            {testimonials.map((story) => (
-              <div key={story.id} className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-sky-500 to-green-500 rounded-full flex items-center justify-center">
-                    <span className="text-white font-bold text-xl">{story.name[0]}</span>
-                  </div>
-                  <div className="ml-4">
-                    <h4 className="font-bold text-gray-900 dark:text-white">{story.name}</h4>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">{story.role} • {story.location}</p>
-                  </div>
-                </div>
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed italic">"{story.story}"</p>
+          <div className="grid md:grid-cols-2 gap-8">
+            {tracks.map((track) => (
+              <div
+                key={track.title}
+                className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 border border-gray-100 dark:border-gray-700 hover:shadow-xl transition-shadow duration-300"
+              >
+                <div className={`absolute top-0 left-0 right-0 h-1.5 rounded-t-2xl bg-gradient-to-r ${track.color}`} />
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 mt-2">{track.title}</h3>
+                <p className="text-gray-500 dark:text-gray-400 mb-6 font-medium">{track.audience}</p>
+                <ul className="space-y-3">
+                  {track.subjects.map((subject) => (
+                    <li key={subject} className="flex items-center gap-3">
+                      <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${track.color}`} />
+                      <span className="text-gray-700 dark:text-gray-300 font-medium">{subject}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  to="/programs"
+                  className="inline-flex items-center mt-6 text-sky-600 dark:text-sky-400 font-semibold hover:text-sky-700 dark:hover:text-sky-300 transition-colors"
+                >
+                  View Details
+                  <ArrowRight className="ml-1 h-4 w-4" />
+                </Link>
               </div>
             ))}
-          </div>
-
-          <div className="text-center">
-            <Link
-              to="/impact"
-              className="inline-flex items-center text-sky-600 dark:text-sky-400 font-semibold text-lg hover:text-sky-700 dark:hover:text-sky-300 transition-colors"
-            >
-              Read More Stories
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
           </div>
         </div>
       </section>
 
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-sky-500 to-green-500">
-        <div className="max-w-4xl mx-auto text-center">
+      {/* Illustrated CTA Banner */}
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src="/content/illustrations/dancing-deer.png"
+            alt=""
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-900/90 via-gray-900/75 to-gray-900/60" />
+        </div>
+        <div className="relative max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Join Us in Making a Difference
+            The Best Time to Start Is Now
           </h2>
-          <p className="text-xl text-white/90 mb-8 leading-relaxed">
-            Every contribution, big or small, helps us transform lives and build stronger communities.
-            Together, we can create lasting change.
+          <p className="text-xl text-white/85 mb-8 leading-relaxed max-w-2xl mx-auto">
+            Join a community of learners who believe that code, circuits, and creativity
+            can change the world — one story at a time.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              to="/get-involved"
-              className="inline-flex items-center justify-center bg-white text-sky-600 px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200"
+              to="/programs"
+              className="inline-flex items-center justify-center bg-gradient-to-r from-amber-500 to-orange-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200"
             >
-              Join Us
-              <Heart className="ml-2 h-5 w-5" fill="currentColor" />
+              Explore Programs
+              <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
             <Link
-              to="/get-involved"
-              className="inline-flex items-center justify-center border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-sky-600 transition-all duration-200"
+              to="/contact"
+              className="inline-flex items-center justify-center border-2 border-white/80 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-gray-900 transition-all duration-200"
             >
-              Become a Volunteer
+              Get in Touch
             </Link>
           </div>
         </div>
