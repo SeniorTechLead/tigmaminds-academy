@@ -284,30 +284,29 @@ void setup() {
 void loop() {
   // Simulated readings at different temperatures
   Serial.println("--- Cold morning (10°C) ---");
-  // speed = 331.3 + 0.606 * 10 = 337.4 m/s
   Serial.println("Speed of sound: 337.4 m/s");
   Serial.println("Echo time: 5830 us");
-  // 5830 * 0.03374 / 2 = 98.3 cm
   Serial.println("Distance: 98.3 cm");
-  Serial.println("");
-
+  analogWrite(2, 60);
   delay(500);
 
+  Serial.println("");
   Serial.println("--- Hot afternoon (35°C) ---");
-  // speed = 331.3 + 0.606 * 35 = 352.5 m/s
   Serial.println("Speed of sound: 352.5 m/s");
   Serial.println("Echo time: 5830 us (same object!)");
-  // 5830 * 0.03525 / 2 = 102.8 cm
   Serial.println("Distance: 102.8 cm");
-  Serial.println("");
+  analogWrite(2, 50);
+  delay(500);
 
+  Serial.println("");
   Serial.println("Same echo time, different distance!");
-  Serial.println("4.5 cm difference from temperature alone.");
-  Serial.println("");
-
-  delay(1000);
+  Serial.println("4.5 cm error without correction.");
+  analogWrite(2, 120);
+  delay(400);
+  analogWrite(2, 50);
+  delay(400);
 }`,
-      ledCount: 0,
+      ledCount: 1,
       challenge: 'What about humidity? Humid air is actually lighter than dry air (water molecules weigh less than nitrogen/oxygen), so sound travels faster. Real weather stations account for both temperature AND humidity.',
       successHint: 'Precision matters. A self-driving car using sonar at 100 km/h covers 28 meters per second. A 3cm error at that speed could mean the difference between stopping in time and a collision. Temperature correction isn\'t optional — it\'s safety-critical.',
     },
@@ -340,18 +339,26 @@ void loop() {
   Serial.println("Sorted: 97, 98, 101, 102, 145");
   Serial.println("Trimmed (drop min & max): 98, 101, 102");
   Serial.println("Trimmed mean: 100.3 cm");
-  Serial.println("");
+  analogWrite(2, 60);
+  delay(500);
 
+  Serial.println("");
   Serial.println("Without filtering: 108.6 cm (WRONG)");
+  analogWrite(2, 180);
+  delay(400);
+
   Serial.println("With filtering: 100.3 cm (ACCURATE)");
+  analogWrite(2, 60);
+  delay(400);
+
   Serial.println("");
-
-  Serial.println("The glitch (145) was eliminated.");
-  Serial.println("Real sensors do this 10-50 times/second.");
-
-  delay(2000);
+  Serial.println("Glitch eliminated. LED shows the difference.");
+  analogWrite(2, 180);
+  delay(300);
+  analogWrite(2, 60);
+  delay(400);
 }`,
-      ledCount: 0,
+      ledCount: 1,
       challenge: 'What if you have 10 readings instead of 5? More samples = more stable average, but slower response time. This is the filtering trade-off: accuracy vs. speed.',
       successHint: 'Every sensor system in the world uses filtering. Your phone\'s accelerometer, a weather station\'s thermometer, a car\'s radar — all take multiple readings and filter the noise. You now understand why.',
     },
