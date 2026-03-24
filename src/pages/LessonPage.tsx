@@ -245,21 +245,31 @@ print("✓ Generated 3 rumble patterns")
 print(f"  Sample rate: {sample_rate} Hz")
 print(f"  Duration: {duration}s each")
 print()
-print("🎯 Experiments to try (edit the code above, then hit Run):")
-print()
-print("  1. Line 11: Change 80 → 200 in the calm signal.")
-print("     What does a higher base frequency look like?")
-print()
-print("  2. Line 11: Change 0.5 → 4 (the pulse rate).")
-print("     'Calm' now pulses rapidly — does it still look calm?")
-print()
-print("  3. Line 14: Change 3 → 0.5 in the nervous signal.")
-print("     Nervous with a slow pulse — can you tell it from calm?")
-print()
-print("  4. Line 18: Change 8 → 1 in the danger hammering.")
-print("     Slow hammering vs fast — how does the shape change?")
+print("✓ Try the experiments below — edit the code and hit Run again.")
 `}
                   />
+
+                  <div className="mt-8 bg-amber-50 dark:bg-amber-900/20 rounded-2xl p-6 border border-amber-200 dark:border-amber-800">
+                    <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Experiments — edit the code above, then hit Run</h4>
+                    <div className="space-y-4">
+                      {[
+                        { line: 11, change: '80 → 200', target: 'the calm signal base frequency', question: 'What does a higher base frequency look like? Does the waveform get tighter?' },
+                        { line: 11, change: '0.5 → 4', target: 'the calm signal pulse rate', question: '"Calm" now pulses rapidly — does it still look calm? At what pulse rate does calm start looking nervous?' },
+                        { line: 14, change: '3 → 0.5', target: 'the nervous signal pulse rate', question: 'Nervous with a slow pulse — can you still tell it apart from calm? What\'s the real difference between these signals?' },
+                        { line: 18, change: '8 → 1', target: 'the danger hammering rate', question: 'Slow hammering vs fast — how does the waveform shape change? Which version would scare you more?' },
+                      ].map((exp, i) => (
+                        <div key={i} className="flex items-start gap-3">
+                          <span className="w-6 h-6 rounded-full bg-amber-500 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">{i + 1}</span>
+                          <div>
+                            <p className="text-gray-900 dark:text-white font-medium">
+                              Line {exp.line}: Change <code className="bg-amber-100 dark:bg-amber-900/40 px-1.5 py-0.5 rounded text-amber-700 dark:text-amber-300 text-sm">{exp.change}</code> in {exp.target}
+                            </p>
+                            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{exp.question}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </>
             )}
