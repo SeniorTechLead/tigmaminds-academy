@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 
 const storyToSTEM = [
   {
+    slug: 'girl-who-spoke-to-elephants',
     story: 'The Girl Who Spoke to Elephants',
     lesson: 'AI & Wildlife Tracking',
     description: 'How do scientists use AI to understand animal behavior? Start with a story, end with a neural network.',
@@ -13,6 +14,7 @@ const storyToSTEM = [
     illustration: '/content/illustrations/elephant-ant.png',
   },
   {
+    slug: 'firefly-festival-of-majuli',
     story: 'The Firefly Festival of Majuli',
     lesson: 'LEDs, Circuits & Bioluminescence',
     description: 'From river-island fireflies to building your own glowing circuits. Science hides in the most beautiful places.',
@@ -21,6 +23,7 @@ const storyToSTEM = [
     illustration: '/content/illustrations/majuli-born.png',
   },
   {
+    slug: 'river-dolphins-secret',
     story: 'The River Dolphin\'s Secret',
     lesson: 'Sonar Sensors & Arduino',
     description: 'Dolphins navigate murky waters with sound. You\'ll build a sensor that does the same.',
@@ -29,6 +32,7 @@ const storyToSTEM = [
     illustration: '/content/illustrations/brahmaputra-angry.png',
   },
   {
+    slug: 'boy-who-built-a-library',
     story: 'The Boy Who Built a Library',
     lesson: 'Web Development & Databases',
     description: 'One boy\'s dream to share knowledge with everyone. You\'ll build the digital version.',
@@ -37,6 +41,7 @@ const storyToSTEM = [
     illustration: '/content/illustrations/boy-clouds.png',
   },
   {
+    slug: 'dragonfly-and-the-paddy-field',
     story: 'The Dragonfly and the Paddy Field',
     lesson: 'Drones & Computer Vision',
     description: 'A dragonfly sees what we can\'t. Learn to give machines the same power — and protect the harvest.',
@@ -45,6 +50,7 @@ const storyToSTEM = [
     illustration: '/content/illustrations/tea-leaf-fly.png',
   },
   {
+    slug: 'why-the-muga-silk-is-golden',
     story: 'Why the Muga Silk Is Golden',
     lesson: 'Biology & Materials Science',
     description: 'The world\'s only golden silk comes from Assam. Discover the science woven into every thread.',
@@ -158,7 +164,8 @@ export default function HomePage() {
             {storyToSTEM.map((item, index) => {
               const Icon = item.icon;
               return (
-                <div
+                <Link
+                  to={`/lessons/${item.slug}`}
                   key={item.story}
                   className="group bg-white dark:bg-gray-800 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden animate-scale-in"
                   style={{ animationDelay: `${index * 80}ms` }}
@@ -188,7 +195,7 @@ export default function HomePage() {
                       {item.description}
                     </p>
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>
