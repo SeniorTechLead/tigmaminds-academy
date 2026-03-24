@@ -245,7 +245,9 @@ print("✓ Generated 3 rumble patterns")
 print(f"  Sample rate: {sample_rate} Hz")
 print(f"  Duration: {duration}s each")
 print()
-print("✓ Try the experiments below — edit the code and hit Run again.")
+print("  Calm: 80 Hz base, 0.5 Hz pulse")
+print("  Nervous: 110 Hz base, 3 Hz pulse")
+print("  Danger: 40 Hz boom + 55 Hz @ 8 Hz pulse")
 `}
                   />
 
