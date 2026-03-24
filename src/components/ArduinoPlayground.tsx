@@ -77,37 +77,40 @@ function simulateArduino(code: string, ledCount: number, onLedUpdate: (leds: Led
     let iteration = 0;
     const maxIterations = 20;
 
-    const runIteration = () => {
-      if (signal.aborted || iteration >= maxIterations) { resolve(); return; }
-      iteration++;
+    // Process lines sequentially with real delays so LED state changes are visible
+    const processLines = async () => {
+      for (let iter = 0; iter < maxIterations; iter++) {
+        if (signal.aborted) break;
 
-      let totalDelay = 0;
-      for (const line of loopBody) {
-        if (signal.aborted) { resolve(); return; }
+        for (const line of loopBody) {
+          if (signal.aborted) break;
 
-        const write = getWrite(line);
-        if (write) {
-          const led = leds.find(l => l.pin === write.pin);
-          if (led) {
-            led.brightness = write.value;
-            onLedUpdate([...leds]);
+          const write = getWrite(line);
+          if (write) {
+            const ledIdx = leds.findIndex(l => l.pin === write.pin);
+            if (ledIdx >= 0) {
+              leds[ledIdx] = { ...leds[ledIdx], brightness: write.value };
+              onLedUpdate(leds.map(l => ({ ...l })));
+            }
+          }
+
+          const serial = getSerial(line);
+          if (serial) {
+            output.push(serial);
+            onSerial(output.join('\n'));
+          }
+
+          const delay = getDelay(line);
+          if (delay > 0) {
+            // Real delay (capped and sped up 4x) so React can re-render
+            await new Promise(r => setTimeout(r, Math.min(delay, 500) / 4));
           }
         }
-
-        const serial = getSerial(line);
-        if (serial) {
-          output.push(serial);
-          onSerial(output.join('\n'));
-        }
-
-        const delay = getDelay(line);
-        if (delay > 0) totalDelay += Math.min(delay, 500); // Cap at 500ms for simulation
       }
-
-      setTimeout(runIteration, Math.max(totalDelay / 4, 100)); // Speed up simulation 4x
+      resolve();
     };
 
-    runIteration();
+    processLines();
   });
 }
 
