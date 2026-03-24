@@ -21,6 +21,9 @@ interface MiniLessonProps {
   /** The answer (revealed on click) */
   checkAnswer?: string;
 
+  /** React element to render as a visual diagram between concept and code */
+  diagram?: React.ReactNode;
+
   // --- Code section ---
   /** Code the student starts with */
   code: string;
@@ -56,6 +59,7 @@ export default function MiniLesson({
   storyConnection,
   checkQuestion,
   checkAnswer,
+  diagram,
   code: initialCode,
   codeIntro,
   challenge,
@@ -194,6 +198,13 @@ len(plt.get_fignums()) > 0
           </div>
         )}
       </div>
+
+      {/* ===== DIAGRAM ===== */}
+      {diagram && (
+        <div className="px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+          {diagram}
+        </div>
+      )}
 
       {/* ===== CODE SECTION ===== */}
       {codeIntro && (
