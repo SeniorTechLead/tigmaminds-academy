@@ -23,7 +23,7 @@ export interface Lesson {
   };
   illustration: string;
   track: 'school' | 'bootcamp' | 'both';
-  playground?: 'elephant'; // which interactive playground to embed
+  playground?: 'elephant' | 'dragonfly'; // which interactive playground to embed
   lesson?: {
     objectives: string[];
     prerequisites: string[];
@@ -300,12 +300,15 @@ By September, the pest army was defeated. The rice stood tall, heads bowing unde
       icon: Rocket,
       color: 'from-rose-400 to-pink-500',
       skills: [
-        'How computer vision works (pixels → features → predictions)',
-        'Image classification with Python',
-        'Drone flight principles and regulations',
-        'Using pre-trained models (transfer learning)',
-        'Precision agriculture concepts',
-        'Data collection and labeling',
+        'Pixels and RGB color — how computers represent images — Level 1 — L1-1',
+        'Color channels and vegetation detection — Level 1 — L1-2',
+        'Thresholds, binary masks, and detection trade-offs — Level 1 — L1-3',
+        'Image arrays and NumPy operations on pixels — Level 1 — L1-4',
+        'From pixel counts to field health reports — Level 1 — L1-5',
+        'Edge detection and shape analysis — Level 1 — L1-6',
+        'Image classification with ML — Level 2 — L2-1',
+        'Feature extraction from images — Level 2 — L2-4',
+        'Training a crop health classifier — Level 3',
       ],
       project: {
         title: 'Build a Crop Health Detector',
@@ -327,6 +330,7 @@ By September, the pest army was defeated. The rice stood tall, heads bowing unde
     },
     illustration: '/content/illustrations/tea-leaf-fly.webp',
     track: 'both',
+    playground: 'dragonfly' as const,
   },
   {
     slug: 'why-the-muga-silk-is-golden',
