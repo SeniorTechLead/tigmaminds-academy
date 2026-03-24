@@ -191,10 +191,10 @@ export default function LessonPage() {
                     packages={['numpy', 'matplotlib']}
                     description="Write Python to analyze and classify elephant rumble patterns. Press Run (⌘↵) to execute."
                     steps={[
-                      { title: 'Generate signals', hint: 'Use numpy to create sine waves at different frequencies' },
-                      { title: 'Visualize', hint: 'Plot the waveform with matplotlib' },
-                      { title: 'Spectrogram', hint: 'Use plt.specgram() to see frequency over time' },
-                      { title: 'Classify', hint: 'Write a function that detects the dominant frequency' },
+                      { title: 'Generate signals', hint: 'Create sine waves at different frequencies and pulse rates', lines: [1, 19] as [number, number] },
+                      { title: 'Visualize', hint: 'Plot the 3 waveforms with matplotlib', lines: [21, 38] as [number, number] },
+                      { title: 'Read output', hint: 'Check the signal parameters printed below the chart', lines: [40, 45] as [number, number] },
+                      { title: 'Experiment', hint: 'Change values on lines 11, 14, 18 and re-run', lines: [11, 18] as [number, number] },
                     ]}
                     starterCode={`import numpy as np
 import matplotlib.pyplot as plt

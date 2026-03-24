@@ -10,8 +10,8 @@ interface CodePlaygroundProps {
   title?: string;
   /** Description text */
   description?: string;
-  /** Guided steps the student works through */
-  steps?: { title: string; hint: string }[];
+  /** Guided steps the student works through. lines is 1-indexed [start, end] inclusive. */
+  steps?: { title: string; hint: string; lines?: [number, number] }[];
 }
 
 type PyodideState = 'idle' | 'loading' | 'ready' | 'running' | 'error';
@@ -287,19 +287,76 @@ len(plt.get_fignums()) > 0
           </div>
         )}
 
-        {/* Editor */}
+        {/* Editor with line numbers and highlights */}
         <div className="flex-1 min-w-0">
-          <div className="relative">
-            <div className="absolute top-2 left-4 text-xs text-gray-600 select-none">Python</div>
-            <textarea
-              ref={textareaRef}
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              onKeyDown={handleKeyDown}
-              spellCheck={false}
-              className="w-full bg-gray-900 text-gray-100 font-mono text-sm p-4 pt-8 resize-none focus:outline-none focus:ring-1 focus:ring-emerald-600 min-h-[200px] leading-6"
-              style={{ tabSize: 4 }}
-            />
+          <div className="relative flex">
+            {/* Line number gutter + highlight indicators */}
+            <div
+              className="flex-shrink-0 bg-gray-800/50 pt-2 pb-4 select-none text-right pr-2 border-r border-gray-700"
+              style={{ width: '3rem', paddingTop: '0.5rem' }}
+              aria-hidden
+            >
+              {code.split('\n').map((_, i) => {
+                const lineNum = i + 1;
+                const activeStep = steps?.find(
+                  (s) => s.lines && currentStep === steps.indexOf(s)
+                );
+                const isHighlighted = activeStep?.lines
+                  ? lineNum >= activeStep.lines[0] && lineNum <= activeStep.lines[1]
+                  : false;
+                return (
+                  <div
+                    key={i}
+                    className="leading-6 text-xs font-mono"
+                    style={{
+                      color: isHighlighted ? '#f59e0b' : '#4b5563',
+                      fontWeight: isHighlighted ? 700 : 400,
+                    }}
+                  >
+                    {lineNum}
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Code area with highlight backdrop */}
+            <div className="flex-1 relative min-w-0">
+              {/* Highlight backdrop */}
+              <div className="absolute inset-0 pointer-events-none pt-2" aria-hidden>
+                {code.split('\n').map((_, i) => {
+                  const lineNum = i + 1;
+                  const activeStep = steps?.find(
+                    (s) => s.lines && currentStep === steps.indexOf(s)
+                  );
+                  const isHighlighted = activeStep?.lines
+                    ? lineNum >= activeStep.lines[0] && lineNum <= activeStep.lines[1]
+                    : false;
+                  return (
+                    <div
+                      key={i}
+                      className="leading-6 transition-colors duration-200"
+                      style={{
+                        backgroundColor: isHighlighted ? 'rgba(245, 158, 11, 0.08)' : 'transparent',
+                        borderLeft: isHighlighted ? '2px solid #f59e0b' : '2px solid transparent',
+                      }}
+                    >
+                      &nbsp;
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Actual textarea */}
+              <textarea
+                ref={textareaRef}
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                onKeyDown={handleKeyDown}
+                spellCheck={false}
+                className="w-full bg-transparent text-gray-100 font-mono text-sm pl-3 pr-4 pt-2 pb-4 resize-none focus:outline-none min-h-[200px] leading-6 relative z-10"
+                style={{ tabSize: 4 }}
+              />
+            </div>
           </div>
         </div>
       </div>
