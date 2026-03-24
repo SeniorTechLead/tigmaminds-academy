@@ -317,12 +317,128 @@ print("Bottom: rumble x pulse = a signal that breathes")`,
       {/* Mini lessons */}
       <div className="space-y-8">
         {miniLessons.map((lesson, i) => {
-          // Diagrams for specific lessons
           const diagrams: Record<number, React.ReactNode> = {
             0: <VariablesDiagram />,
             3: <NumPyRulerDiagram />,
             4: <SineWaveDiagram />,
             5: <AmplitudeModDiagram />,
+          };
+
+          const practiceProblems: Record<number, { label: string; prompt: string; starterCode: string; hint?: string }[]> = {
+            0: [ // Variables
+              {
+                label: 'Reinforce',
+                prompt: 'Create variables for a nervous elephant and print them.',
+                starterCode: `# Create 3 variables for a nervous elephant\nfrequency = ???\npulse_rate = ???\nname = ???\n\nprint("Signal:", name)\nprint("Frequency:", frequency, "Hz")\nprint("Pulse rate:", pulse_rate)`,
+                hint: 'Nervous = 110 Hz, 3 pulses per second. Replace the ??? with actual values.',
+              },
+              {
+                label: 'Apply',
+                prompt: 'A researcher tracks 3 elephants. Create a variable for each one\'s frequency. Which is calmest?',
+                starterCode: `elephant_a_freq = 80\nelephant_b_freq = 95\nelephant_c_freq = 110\n\nprint("Elephant A:", elephant_a_freq, "Hz")\nprint("Elephant B:", elephant_b_freq, "Hz")\nprint("Elephant C:", elephant_c_freq, "Hz")\n\n# Which is calmest? (lowest frequency)\ncalmest = ???\nprint("Calmest:", calmest)`,
+                hint: 'The calmest elephant has the lowest frequency. Use min() or just look at the numbers.',
+              },
+              {
+                label: 'Challenge',
+                prompt: 'What does frequency = frequency + 10 do? Predict first, then run.',
+                starterCode: `frequency = 80\nprint("Before:", frequency)\n\nfrequency = frequency + 10\nprint("After:", frequency)\n\n# What happened? Why does this work?\n# Try it again:\nfrequency = frequency + 10\nprint("After again:", frequency)`,
+                hint: 'Python reads the right side first (frequency + 10 = 90), then stores the result back in frequency.',
+              },
+            ],
+            1: [ // Math
+              {
+                label: 'Reinforce',
+                prompt: 'How many vibrations does a danger signal (55 Hz) produce in 10 seconds?',
+                starterCode: `frequency = 55\nduration = 10\n\ntotal = frequency * duration\nprint(total, "vibrations in", duration, "seconds")`,
+                hint: 'Just multiply. The formula is the same — only the inputs change.',
+              },
+              {
+                label: 'Apply',
+                prompt: 'A sensor records for 3 seconds at 8000 samples/sec. How many data points is that?',
+                starterCode: `sample_rate = 8000  # samples per second\nduration = 3  # seconds\n\ntotal_samples = ???\nprint("Total data points:", total_samples)`,
+                hint: 'Same pattern: rate × time = total. This is how we\'ll create our signal arrays in lesson 4.',
+              },
+              {
+                label: 'Challenge',
+                prompt: 'Two elephants are rumbling. One at 80 Hz for 5 seconds, another at 110 Hz for 3 seconds. Who produces more total vibrations?',
+                starterCode: `# Elephant A\nfreq_a = 80\ntime_a = 5\ntotal_a = freq_a * time_a\n\n# Elephant B\nfreq_b = 110\ntime_b = 3\ntotal_b = freq_b * time_b\n\nprint("Elephant A:", total_a, "vibrations")\nprint("Elephant B:", total_b, "vibrations")\n\nif total_a > total_b:\n    print("A produced more")\nelse:\n    print("B produced more")`,
+              },
+            ],
+            2: [ // Lists
+              {
+                label: 'Reinforce',
+                prompt: 'Create a list of 10 vibration readings. Find the min, max, and length.',
+                starterCode: `readings = [0.1, 0.4, 0.7, 1.0, 0.9, 0.6, 0.3, 0.5, 0.8, 0.2]\n\nprint("Count:", len(readings))\nprint("Min:", min(readings))\nprint("Max:", max(readings))\nprint("Range:", max(readings) - min(readings))`,
+              },
+              {
+                label: 'Apply',
+                prompt: 'Given two lists of readings, combine them into one and find the overall average.',
+                starterCode: `morning = [0.3, 0.5, 0.7, 0.8]\nafternoon = [0.2, 0.4, 0.6, 0.9, 1.0]\n\n# Combine with +\nall_readings = morning + afternoon\n\nprint("Morning readings:", len(morning))\nprint("Afternoon readings:", len(afternoon))\nprint("Total:", len(all_readings))\nprint("Overall average:", sum(all_readings) / len(all_readings))`,
+                hint: 'In Python, + on two lists concatenates them into a new list.',
+              },
+              {
+                label: 'Challenge',
+                prompt: 'Create a list and access the 3rd element, the last element, and a slice of elements 2-4.',
+                starterCode: `data = [10, 20, 30, 40, 50, 60, 70]\n\nprint("3rd element (index 2):", data[2])\nprint("Last element:", data[-1])\nprint("Elements 2-4:", data[1:4])\n\n# What does data[::2] do?\nprint("Every other:", data[::2])`,
+                hint: 'data[1:4] gives elements at index 1, 2, 3 (not 4). data[::2] steps by 2.',
+              },
+            ],
+            3: [ // NumPy
+              {
+                label: 'Reinforce',
+                prompt: 'Create a time axis for a 5-second recording at 4000 samples/sec. How many points?',
+                starterCode: `import numpy as np\n\nduration = 5\nsample_rate = 4000\ncount = duration * sample_rate\n\nt = np.linspace(0, duration, count)\nprint("Points:", len(t))\nprint("Step size:", t[1] - t[0], "seconds")`,
+              },
+              {
+                label: 'Apply',
+                prompt: 'Create two arrays: one of 10 temperatures and one of 10 pressures. Find which temperature is highest.',
+                starterCode: `import numpy as np\n\ntemps = np.array([22.1, 23.5, 21.8, 24.2, 23.1, 25.0, 22.7, 24.8, 23.9, 22.3])\n\nprint("Highest temp:", np.max(temps))\nprint("At index:", np.argmax(temps))\nprint("Average:", np.mean(temps))`,
+                hint: 'np.argmax() returns the INDEX of the maximum value, not the value itself.',
+              },
+              {
+                label: 'Challenge',
+                prompt: 'Use np.arange() instead of np.linspace(). What\'s the difference?',
+                starterCode: `import numpy as np\n\n# linspace: specify number of points\na = np.linspace(0, 1, 5)\nprint("linspace(0, 1, 5):", a)\n\n# arange: specify step size\nb = np.arange(0, 1, 0.25)\nprint("arange(0, 1, 0.25):", b)\n\n# How many points does each give?\nprint("linspace count:", len(a))\nprint("arange count:", len(b))`,
+                hint: 'linspace includes the endpoint and you control count. arange excludes the endpoint and you control step size.',
+              },
+            ],
+            4: [ // Sine waves
+              {
+                label: 'Reinforce',
+                prompt: 'Generate a 200 Hz wave and a 20 Hz wave. Plot them both and compare.',
+                starterCode: `import numpy as np\nimport matplotlib.pyplot as plt\n\nt = np.linspace(0, 0.1, 2000)  # 0.1 seconds\n\nlow = np.sin(2 * np.pi * 20 * t)\nhigh = np.sin(2 * np.pi * 200 * t)\n\nfig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 4))\nfig.patch.set_facecolor('#1f2937')\nfor ax, sig, label, color in [(ax1, low, '20 Hz', '#22c55e'), (ax2, high, '200 Hz', '#ef4444')]:\n    ax.plot(t, sig, color=color, linewidth=0.8)\n    ax.set_ylabel(label, color='white')\n    ax.set_facecolor('#111827')\n    ax.tick_params(colors='gray')\nax2.set_xlabel('Time (seconds)', color='white')\nplt.tight_layout()\nplt.show()`,
+              },
+              {
+                label: 'Apply',
+                prompt: 'Add two sine waves together: 80 Hz + 160 Hz. What does the combined shape look like?',
+                starterCode: `import numpy as np\nimport matplotlib.pyplot as plt\n\nt = np.linspace(0, 0.05, 2000)\n\nwave1 = np.sin(2 * np.pi * 80 * t)\nwave2 = 0.5 * np.sin(2 * np.pi * 160 * t)  # half amplitude\ncombined = wave1 + wave2\n\nfig, ax = plt.subplots(figsize=(10, 3))\nfig.patch.set_facecolor('#1f2937')\nax.set_facecolor('#111827')\nax.plot(t, combined, color='#f59e0b', linewidth=1)\nax.set_title('80 Hz + 160 Hz combined', color='white')\nax.tick_params(colors='gray')\nplt.tight_layout()\nplt.show()\n\nprint("160 Hz is the 2nd harmonic of 80 Hz")\nprint("Real sounds are always combinations of frequencies")`,
+                hint: 'Adding waves is how real sounds work. A guitar string vibrates at a base frequency plus its harmonics.',
+              },
+              {
+                label: 'Challenge',
+                prompt: 'Create a square wave using sine waves. A square wave = sin(f) + sin(3f)/3 + sin(5f)/5 + ...',
+                starterCode: `import numpy as np\nimport matplotlib.pyplot as plt\n\nt = np.linspace(0, 0.05, 2000)\nf = 80\n\n# Build up a square wave from odd harmonics\nresult = np.zeros_like(t)\nfor n in range(1, 20, 2):  # 1, 3, 5, 7...\n    result += np.sin(2 * np.pi * n * f * t) / n\n\nfig, ax = plt.subplots(figsize=(10, 3))\nfig.patch.set_facecolor('#1f2937')\nax.set_facecolor('#111827')\nax.plot(t, result, color='#8b5cf6', linewidth=1)\nax.set_title('Square wave from sine harmonics', color='white')\nax.tick_params(colors='gray')\nplt.tight_layout()\nplt.show()`,
+                hint: 'This is Fourier synthesis — building complex shapes from simple sines. FFT (Level 2) does the reverse: decomposing a complex signal into its sine components.',
+              },
+            ],
+            5: [ // Amplitude modulation
+              {
+                label: 'Reinforce',
+                prompt: 'Create a nervous elephant signal (110 Hz, 3 Hz pulse) and plot it.',
+                starterCode: `import numpy as np\nimport matplotlib.pyplot as plt\n\nt = np.linspace(0, 3, 24000)\n\nrumble = np.sin(2 * np.pi * 110 * t)\npulse = 0.5 + 0.5 * np.sin(2 * np.pi * 3 * t)\nnervous = rumble * pulse\n\nfig, ax = plt.subplots(figsize=(10, 3))\nfig.patch.set_facecolor('#1f2937')\nax.set_facecolor('#111827')\nax.plot(t[:3000], nervous[:3000], color='#f59e0b', linewidth=0.8)\nax.set_title('Nervous elephant (110 Hz, 3 Hz pulse)', color='white')\nax.tick_params(colors='gray')\nplt.tight_layout()\nplt.show()`,
+              },
+              {
+                label: 'Apply',
+                prompt: 'Create the danger signal: a decaying boom + frantic hammering. Plot all 3 moods.',
+                starterCode: `import numpy as np\nimport matplotlib.pyplot as plt\n\nt = np.linspace(0, 3, 24000)\n\ncalm = np.sin(2 * np.pi * 80 * t) * (0.5 + 0.5 * np.sin(2 * np.pi * 0.5 * t))\nnervous = np.sin(2 * np.pi * 110 * t) * (0.5 + 0.5 * np.sin(2 * np.pi * 3 * t))\n\nboom = np.exp(-t * 3) * np.sin(2 * np.pi * 40 * t)\nhammering = np.sin(2 * np.pi * 55 * t) * (0.5 + 0.5 * np.sin(2 * np.pi * 8 * t))\ndanger = boom + hammering * (1 - np.exp(-t * 3))\n\nfig, axes = plt.subplots(3, 1, figsize=(10, 5))\nfig.patch.set_facecolor('#1f2937')\nfor ax, sig, label, c in [(axes[0],calm,'Calm','#22c55e'),(axes[1],nervous,'Nervous','#f59e0b'),(axes[2],danger,'Danger','#ef4444')]:\n    ax.plot(t[:2000], sig[:2000], color=c, linewidth=0.8)\n    ax.set_ylabel(label, color='white', fontsize=9)\n    ax.set_facecolor('#111827')\n    ax.tick_params(colors='gray')\nplt.tight_layout()\nplt.show()`,
+              },
+              {
+                label: 'Challenge',
+                prompt: 'Invent a 4th mood: "playful". What frequency and pulse rate would you use? Create and plot it.',
+                starterCode: `import numpy as np\nimport matplotlib.pyplot as plt\n\nt = np.linspace(0, 3, 24000)\n\n# Design your own "playful" elephant signal\n# Choose a frequency and pulse rate that feels playful\nplayful_freq = ???  # try something between calm and nervous\nplayful_pulse = ???  # how fast should it pulse?\n\nrumble = np.sin(2 * np.pi * playful_freq * t)\npulse = 0.5 + 0.5 * np.sin(2 * np.pi * playful_pulse * t)\nplayful = rumble * pulse\n\nfig, ax = plt.subplots(figsize=(10, 3))\nfig.patch.set_facecolor('#1f2937')\nax.set_facecolor('#111827')\nax.plot(t[:3000], playful[:3000], color='#8b5cf6', linewidth=0.8)\nax.set_title(f'Playful ({playful_freq} Hz, {playful_pulse} Hz pulse)', color='white')\nax.tick_params(colors='gray')\nplt.tight_layout()\nplt.show()`,
+                hint: 'There\'s no right answer — you\'re designing a signal. Maybe playful is 90 Hz with a 1.5 Hz pulse? Or something irregular? Real elephant communication has many more moods than 3.',
+              },
+            ],
           };
 
           return (
@@ -341,6 +457,7 @@ print("Bottom: rumble x pulse = a signal that breathes")`,
               code={lesson.code}
               challenge={lesson.challenge}
               successHint={lesson.successHint}
+              practice={practiceProblems[i]}
               pyodideRef={pyodideRef}
               onLoadPyodide={loadPyodide}
               pyReady={pyReady}

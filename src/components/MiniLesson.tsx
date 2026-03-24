@@ -34,6 +34,15 @@ interface MiniLessonProps {
   /** Shown after successful run */
   successHint?: string;
 
+  // --- Practice problems (collapsible, after main exercise) ---
+  /** Extra practice problems to reinforce the concept */
+  practice?: {
+    label: string; // e.g. "Reinforce", "Apply", "Challenge"
+    prompt: string;
+    starterCode: string;
+    hint?: string;
+  }[];
+
   // --- Shared state ---
   pyodideRef: React.MutableRefObject<any>;
   onLoadPyodide: () => Promise<any>;
@@ -67,6 +76,7 @@ export default function MiniLesson({
   pyodideRef,
   onLoadPyodide,
   pyReady,
+  practice,
   explanation,
 }: MiniLessonProps) {
   const [code, setCode] = useState(initialCode);
@@ -75,6 +85,12 @@ export default function MiniLesson({
   const [running, setRunning] = useState(false);
   const [hasRun, setHasRun] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
+  const [showPractice, setShowPractice] = useState(false);
+  const [activePractice, setActivePractice] = useState<number | null>(null);
+  const [practiceCode, setPracticeCode] = useState<Record<number, string>>({});
+  const [practiceOutput, setPracticeOutput] = useState<Record<number, string>>({});
+  const [practiceImage, setPracticeImage] = useState<Record<number, string | null>>({});
+  const [practiceRunning, setPracticeRunning] = useState<number | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // Use concept if provided, fall back to explanation for backwards compat
@@ -286,6 +302,136 @@ len(plt.get_fignums()) > 0
             <CheckCircle className="w-4 h-4 inline mr-1" />
             {successHint}
           </p>
+        </div>
+      )}
+
+      {/* ===== PRACTICE PROBLEMS ===== */}
+      {practice && practice.length > 0 && (
+        <div className="border-t border-gray-200 dark:border-gray-700">
+          <button
+            onClick={() => setShowPractice(!showPractice)}
+            className="w-full px-6 py-3 flex items-center justify-between text-sm font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors"
+          >
+            <span className="flex items-center gap-2">
+              <span className="w-5 h-5 rounded-full bg-violet-100 dark:bg-violet-900/30 text-violet-600 dark:text-violet-400 flex items-center justify-center text-xs font-bold">{practice.length}</span>
+              Practice Problems
+            </span>
+            {showPractice ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+          </button>
+
+          {showPractice && (
+            <div className="px-6 pb-4 space-y-4">
+              {practice.map((prob, i) => {
+                const pCode = practiceCode[i] ?? prob.starterCode;
+                const pOutput = practiceOutput[i] ?? '';
+                const pImage = practiceImage[i] ?? null;
+                const isRunning = practiceRunning === i;
+                const isOpen = activePractice === i;
+                const pLineCount = pCode.split('\n').length;
+
+                const runPractice = async () => {
+                  let pyodide = pyodideRef.current;
+                  if (!pyodide) { pyodide = await onLoadPyodide(); if (!pyodide) return; }
+                  setPracticeRunning(i);
+                  setPracticeOutput(prev => ({ ...prev, [i]: '' }));
+                  setPracticeImage(prev => ({ ...prev, [i]: null }));
+                  try {
+                    await pyodide.runPythonAsync('_stdout_capture.clear()');
+                    await pyodide.runPythonAsync(pCode);
+                    const stdout = await pyodide.runPythonAsync('_stdout_capture.get_output()');
+                    setPracticeOutput(prev => ({ ...prev, [i]: stdout || '(no output)' }));
+                    try {
+                      const hasPlot = await pyodide.runPythonAsync('import matplotlib.pyplot as plt\nlen(plt.get_fignums()) > 0');
+                      if (hasPlot) {
+                        const img = await pyodide.runPythonAsync('_get_plot_as_base64()');
+                        setPracticeImage(prev => ({ ...prev, [i]: `data:image/png;base64,${img}` }));
+                      }
+                    } catch {}
+                  } catch (err: any) {
+                    setPracticeOutput(prev => ({ ...prev, [i]: err.message || String(err) }));
+                  } finally {
+                    setPracticeRunning(null);
+                  }
+                };
+
+                return (
+                  <div key={i} className="rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+                    {/* Problem header */}
+                    <button
+                      onClick={() => setActivePractice(isOpen ? null : i)}
+                      className="w-full px-4 py-3 flex items-center gap-3 text-left hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors"
+                    >
+                      <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${
+                        prob.label === 'Reinforce' ? 'bg-sky-100 dark:bg-sky-900/30 text-sky-600 dark:text-sky-400' :
+                        prob.label === 'Apply' ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400' :
+                        'bg-rose-100 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400'
+                      }`}>
+                        {prob.label === 'Reinforce' ? 'R' : prob.label === 'Apply' ? 'A' : 'C'}
+                      </span>
+                      <div className="flex-1 min-w-0">
+                        <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">{prob.label}</span>
+                        <p className="text-sm text-gray-700 dark:text-gray-300">{prob.prompt}</p>
+                      </div>
+                      {isOpen ? <ChevronUp className="w-4 h-4 text-gray-400 flex-shrink-0" /> : <ChevronDown className="w-4 h-4 text-gray-400 flex-shrink-0" />}
+                    </button>
+
+                    {isOpen && (
+                      <>
+                        {prob.hint && (
+                          <div className="px-4 py-2 bg-violet-50 dark:bg-violet-900/20 border-t border-gray-200 dark:border-gray-700">
+                            <p className="text-xs text-violet-700 dark:text-violet-300"><strong>Hint:</strong> {prob.hint}</p>
+                          </div>
+                        )}
+
+                        {/* Mini editor */}
+                        <div className="flex bg-gray-900 border-t border-gray-700">
+                          <div className="flex-shrink-0 pt-3 pb-3 pr-2 pl-3 select-none border-r border-gray-700" aria-hidden>
+                            {Array.from({ length: pLineCount }).map((_, li) => (
+                              <div key={li} className="leading-6 text-xs font-mono text-gray-600">{li + 1}</div>
+                            ))}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <textarea
+                              value={pCode}
+                              onChange={(e) => setPracticeCode(prev => ({ ...prev, [i]: e.target.value }))}
+                              spellCheck={false}
+                              rows={pLineCount}
+                              className="w-full bg-transparent text-gray-100 font-mono text-sm pl-3 pr-4 py-3 resize-none focus:outline-none leading-6"
+                              style={{ tabSize: 4 }}
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); runPractice(); }
+                              }}
+                            />
+                          </div>
+                          <div className="flex-shrink-0 p-2">
+                            <button
+                              onClick={runPractice}
+                              disabled={isRunning}
+                              className="p-2 bg-emerald-600 hover:bg-emerald-700 disabled:bg-gray-700 text-white rounded-lg transition-colors"
+                              title="Run (⌘↵)"
+                            >
+                              {isRunning ? <Loader2 className="w-4 h-4 animate-spin" /> : <Play className="w-4 h-4" />}
+                            </button>
+                          </div>
+                        </div>
+
+                        {pOutput && (
+                          <div className="border-t border-gray-700 bg-gray-900">
+                            <pre className="px-4 py-3 text-sm text-gray-300 font-mono whitespace-pre-wrap max-h-[120px] overflow-y-auto">{pOutput}</pre>
+                          </div>
+                        )}
+                        {pImage && (
+                          <div className="border-t border-gray-700 bg-gray-800/50 p-4 flex justify-center">
+                            <img src={pImage} alt="Plot" className="max-w-full rounded-lg" />
+                          </div>
+                        )}
+                      </>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       )}
     </div>
