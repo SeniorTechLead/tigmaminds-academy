@@ -1,4 +1,4 @@
-import { Cpu, Lightbulb, Bot, Code2, Rocket, Sparkles } from 'lucide-react';
+import { Cpu, Lightbulb, Bot, Code2, Rocket, Sparkles, Leaf } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
 export interface Lesson {
@@ -23,7 +23,7 @@ export interface Lesson {
   };
   illustration: string;
   track: 'school' | 'bootcamp' | 'both';
-  playground?: 'elephant' | 'dragonfly' | 'library' | 'firefly' | 'dolphin' | 'muga'; // which interactive playground to embed
+  playground?: string; // story slug identifier for level components
   lesson?: {
     objectives: string[];
     prerequisites: string[];
@@ -421,6 +421,58 @@ To this day, muga silk is found only in Assam — the only golden silk in the wo
         'Optional: muga silk sample (available online from Assam weavers)',
       ],
     },
+  },
+  {
+    slug: 'tejimola-the-girl-who-became-a-plant',
+    story: {
+      title: 'Tejimola — The Girl Who Became a Plant',
+      tagline: 'A kind girl whose spirit refused to be silenced, growing back as tulsi, gourd, lotus, and champa tree.',
+      content: `In a village by the river, there lived a girl named **Tejimola**. She was kind to every creature — she fed the sparrows, she sang to the fish, and she never passed a person without smiling.
+
+When her father went on a long journey, her cruel stepmother buried Tejimola in the garden. But from that spot, a beautiful **tulsi plant** grew overnight — green and fragrant and reaching for the sun.
+
+The stepmother pulled it out. From the riverbank, a **gourd vine** grew. She tore it down. A **lotus** bloomed in the pond. She plucked it. A **champa tree** grew — tall and golden-flowered, filling the air with perfume.
+
+No matter what the stepmother did, Tejimola kept coming back — as a plant, as a flower, as a tree. Each time more beautiful than before.
+
+When Tejimola's father returned, the champa tree bent its branches and touched his face. *"Father, I am here. I never left."*
+
+Tejimola's story tells us that kindness cannot be destroyed. You can bury it, pull it out, throw it away — but it grows back, every time, in a new form.`,
+    },
+    stem: {
+      title: 'Plant Biology & Genetics',
+      description: 'Tejimola kept growing back as different plants. In the real world, plants regenerate through vegetative propagation — a single cell can become an entire organism. This lesson explores cells, photosynthesis, DNA, and genetics.',
+      icon: Leaf,
+      color: 'from-emerald-400 to-green-500',
+      skills: [
+        'Plant cells and photosynthesis — Level 1 — L1-1',
+        'Vegetative propagation — cloning vs seeds — Level 1 — L1-3',
+        'Growth stages and the sigmoid curve — Level 1 — L1-4',
+        'DNA structure and base pairing — Level 1 — L1-6',
+        'Mendelian genetics and Punnett squares — Level 2 — L2-1',
+        'Natural selection and evolution — Level 2 — L2-5',
+      ],
+      project: {
+        title: 'Plant Growth Experiment',
+        description: 'Grow plants from seeds and cuttings, measure growth daily, plot sigmoid curves, and compare clone vs. seed-grown variation.',
+        steps: [
+          'Plant tulsi seeds and tulsi stem cuttings side by side',
+          'Measure height daily for 4 weeks',
+          'Plot growth curves — do they follow the sigmoid model?',
+          'Compare variation: are cuttings more uniform than seedlings?',
+          'Test a variable: does light intensity affect growth rate?',
+          'Write a lab report with hypothesis, data, and conclusion',
+        ],
+      },
+      realWorld: [
+        'Tissue culture propagation produces millions of identical banana plants per year',
+        'CRISPR gene editing is creating disease-resistant rice varieties for climate change',
+        'India\'s Green Revolution (1960s-70s) used selective breeding to double wheat production',
+      ],
+    },
+    illustration: '/content/illustrations/tejimola.webp',
+    track: 'school',
+    playground: 'tejimola' as const,
   },
 ];
 
