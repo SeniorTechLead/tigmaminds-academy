@@ -1,6 +1,10 @@
 import { useState, useRef, useCallback } from 'react';
 import { Loader2, Sparkles } from 'lucide-react';
 import MiniLesson from './MiniLesson';
+import VariablesDiagram from './diagrams/VariablesDiagram';
+import NumPyRulerDiagram from './diagrams/NumPyRulerDiagram';
+import SineWaveDiagram from './diagrams/SineWaveDiagram';
+import AmplitudeModDiagram from './diagrams/AmplitudeModDiagram';
 
 export default function ElephantLevel1() {
   const pyodideRef = useRef<any>(null);
@@ -312,26 +316,37 @@ print("Bottom: rumble x pulse = a signal that breathes")`,
 
       {/* Mini lessons */}
       <div className="space-y-8">
-        {miniLessons.map((lesson, i) => (
-          <MiniLesson
-            key={i}
-            id={`L1-${i + 1}`}
-            number={i + 1}
-            title={lesson.title}
-            concept={lesson.concept}
-            analogy={lesson.analogy}
-            storyConnection={lesson.storyConnection}
-            checkQuestion={lesson.checkQuestion}
-            checkAnswer={lesson.checkAnswer}
-            codeIntro={lesson.codeIntro}
-            code={lesson.code}
-            challenge={lesson.challenge}
-            successHint={lesson.successHint}
-            pyodideRef={pyodideRef}
-            onLoadPyodide={loadPyodide}
-            pyReady={pyReady}
-          />
-        ))}
+        {miniLessons.map((lesson, i) => {
+          // Diagrams for specific lessons
+          const diagrams: Record<number, React.ReactNode> = {
+            0: <VariablesDiagram />,
+            3: <NumPyRulerDiagram />,
+            4: <SineWaveDiagram />,
+            5: <AmplitudeModDiagram />,
+          };
+
+          return (
+            <MiniLesson
+              key={i}
+              id={`L1-${i + 1}`}
+              number={i + 1}
+              title={lesson.title}
+              concept={lesson.concept}
+              analogy={lesson.analogy}
+              storyConnection={lesson.storyConnection}
+              checkQuestion={lesson.checkQuestion}
+              checkAnswer={lesson.checkAnswer}
+              diagram={diagrams[i]}
+              codeIntro={lesson.codeIntro}
+              code={lesson.code}
+              challenge={lesson.challenge}
+              successHint={lesson.successHint}
+              pyodideRef={pyodideRef}
+              onLoadPyodide={loadPyodide}
+              pyReady={pyReady}
+            />
+          );
+        })}
       </div>
     </div>
   );
