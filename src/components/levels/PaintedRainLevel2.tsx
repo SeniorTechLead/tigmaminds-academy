@@ -23,603 +23,597 @@ export default function PaintedRainLevel2() {
 
   const miniLessons = [
     {
-      title: 'RGB vs CMYK — two languages of color',
-      concept: `In Level 1, we learned that light uses additive primaries (RGB) and pigments use subtractive primaries (CMY). Now let's get precise about how these systems encode color digitally.
+      title: 'RGB vs CMYK — the two languages of color',
+      concept: `Digital screens and physical printers speak different color languages. Understanding both is essential for anyone working with color professionally.
 
-**RGB (Red, Green, Blue):**
-- Each channel: 0-255 (8 bits) → 256 levels per channel
-- Total colors: 256 × 256 × 256 = **16,777,216** (16.7 million)
+**RGB (Red, Green, Blue)** — Additive model
+- Each channel: 0-255 (8-bit) or 0.0-1.0
+- Total colors: 256 × 256 × 256 = **16.7 million**
 - (0, 0, 0) = black, (255, 255, 255) = white
-- (255, 0, 0) = pure red, (0, 255, 0) = pure green
-- Used by: monitors, cameras, web, phones
+- Used in: monitors, cameras, TVs, phones, web design
 
-**CMYK (Cyan, Magenta, Yellow, Key/Black):**
+**CMYK (Cyan, Magenta, Yellow, Key/Black)** — Subtractive model
 - Each channel: 0-100%
-- (0, 0, 0, 0) = white (no ink), (0, 0, 0, 100) = black
-- K (Key) exists because C+M+Y in practice makes muddy brown, not true black
-- Used by: printers, offset printing, packaging
+- K (black) added because CMY inks can't produce a true, deep black
+- Used in: offset printing, inkjet printers, publishing
 
-**The gamut problem:** RGB can represent colors that CMYK cannot (especially vivid blues and greens), and vice versa. Converting between them always loses some colors. This is why a photo that looks vivid on screen often looks duller when printed.`,
-      analogy: 'RGB and CMYK are like Celsius and Fahrenheit — two scales measuring the same thing (color/temperature) but with different ranges and strengths. You can convert between them, but the conversion is imperfect because their gamuts (ranges) don\'t perfectly overlap.',
-      storyConnection: 'If the girl who painted rain posted a photo of her painting online, the colors would shift twice: once when the camera converted real pigments to RGB, and again if someone printed the photo (RGB to CMYK). The monsoon gray she mixed with real pigments cannot be perfectly captured by either digital system.',
-      checkQuestion: 'Why does CMYK need a separate black (K) channel when mixing C+M+Y should theoretically produce black?',
-      checkAnswer: 'Three reasons: (1) Real inks are impure — CMY mixed gives muddy brown, not black. (2) Using K for dark areas saves expensive color ink. (3) Black text printed with CMY would require perfect alignment of three ink passes; a single K pass is sharper and faster. Economics and physics both demand the K channel.',
-      codeIntro: 'Convert between RGB and CMYK and visualize the gamut difference.',
+**The conversion problem**: RGB has colors that CMYK cannot reproduce (especially bright blues and greens), and vice versa. This is why a design that looks vibrant on screen can look dull when printed. The set of reproducible colors is called the **gamut** of a device.
+
+The formula (simplified):
+- C = 1 - R/255, M = 1 - G/255, Y = 1 - B/255
+- K = min(C, M, Y)
+- Final C = (C - K)/(1 - K), etc.`,
+      analogy: 'RGB and CMYK are like Celsius and Fahrenheit — they measure the same thing (color/temperature) with different scales. Converting between them is possible but not always exact. Some "temperatures" in one scale don\'t map perfectly to the other — just as some RGB colors have no exact CMYK equivalent.',
+      storyConnection: 'If the girl who painted rain wanted to share her monsoon painting digitally — scanning it and posting it online — the scanner would convert her subtractive pigment colors into RGB values. Some of her subtle ochre and indigo shades might shift in the process, because the CMYK gamut of her paints and the RGB gamut of a screen don\'t overlap perfectly.',
+      checkQuestion: 'A designer creates a logo with RGB value (0, 100, 255) — a vivid electric blue. When printed in CMYK, it looks duller. Why?',
+      checkAnswer: 'That specific saturated blue is outside the CMYK gamut. CMYK inks cannot reproduce the pure spectral quality of light emitted by an RGB screen at that value. The printer substitutes the closest available CMYK blue, which appears less saturated. This is called "gamut clipping" and it\'s the #1 source of print disappointments.',
+      codeIntro: 'Convert colors between RGB and CMYK and visualize the difference.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
 def rgb_to_cmyk(r, g, b):
-    """Convert RGB (0-255) to CMYK (0-100%)."""
-    r, g, b = r/255, g/255, b/255
-    k = 1 - max(r, g, b)
+    """Convert RGB (0-255) to CMYK (0-1)."""
+    r_, g_, b_ = r/255, g/255, b/255
+    k = 1 - max(r_, g_, b_)
     if k == 1:
-        return 0, 0, 0, 100
-    c = (1 - r - k) / (1 - k) * 100
-    m = (1 - g - k) / (1 - k) * 100
-    y = (1 - b - k) / (1 - k) * 100
-    return round(c, 1), round(m, 1), round(y, 1), round(k * 100, 1)
+        return 0, 0, 0, 1
+    c = (1 - r_ - k) / (1 - k)
+    m = (1 - g_ - k) / (1 - k)
+    y = (1 - b_ - k) / (1 - k)
+    return c, m, y, k
 
 def cmyk_to_rgb(c, m, y, k):
-    """Convert CMYK (0-100%) to RGB (0-255)."""
-    c, m, y, k = c/100, m/100, y/100, k/100
+    """Convert CMYK (0-1) to RGB (0-255)."""
     r = 255 * (1 - c) * (1 - k)
     g = 255 * (1 - m) * (1 - k)
     b = 255 * (1 - y) * (1 - k)
-    return int(round(r)), int(round(g)), int(round(b))
+    return int(r), int(g), int(b)
 
-# Show some color conversions
-test_colors = [
-    ('Pure Red', 255, 0, 0),
-    ('Pure Green', 0, 255, 0),
-    ('Pure Blue', 0, 0, 255),
-    ('Vivid Cyan', 0, 255, 255),
-    ('Muga Gold', 218, 165, 32),
-    ('Indigo', 75, 0, 130),
-    ('Monsoon Gray', 128, 128, 128),
-]
-
-fig, axes = plt.subplots(len(test_colors), 3, figsize=(12, len(test_colors) * 1.2))
-fig.patch.set_facecolor('#1f2937')
-fig.suptitle('RGB → CMYK → RGB Round-Trip', color='white', fontsize=14, y=1.02)
-
-for i, (name, r, g, b) in enumerate(test_colors):
-    # Original RGB
-    c, m, y, k = rgb_to_cmyk(r, g, b)
-    # Round-trip back
-    r2, g2, b2 = cmyk_to_rgb(c, m, y, k)
-
-    # Original color swatch
-    axes[i, 0].set_facecolor((r/255, g/255, b/255))
-    axes[i, 0].set_xlim(0, 1); axes[i, 0].set_ylim(0, 1)
-    axes[i, 0].text(0.5, 0.5, f'{name}\\nRGB({r},{g},{b})', ha='center', va='center',
-                     color='white' if (r+g+b) < 400 else 'black', fontsize=8, fontweight='bold')
-    axes[i, 0].set_xticks([]); axes[i, 0].set_yticks([])
-
-    # CMYK values
-    axes[i, 1].set_facecolor('#111827')
-    axes[i, 1].set_xlim(0, 1); axes[i, 1].set_ylim(0, 1)
-    axes[i, 1].text(0.5, 0.5, f'C={c}% M={m}%\\nY={y}% K={k}%', ha='center', va='center',
-                     color='white', fontsize=8)
-    axes[i, 1].set_xticks([]); axes[i, 1].set_yticks([])
-
-    # Round-trip color
-    axes[i, 2].set_facecolor((r2/255, g2/255, b2/255))
-    axes[i, 2].set_xlim(0, 1); axes[i, 2].set_ylim(0, 1)
-    diff = abs(r-r2) + abs(g-g2) + abs(b-b2)
-    axes[i, 2].text(0.5, 0.5, f'RGB({r2},{g2},{b2})\\nDrift: {diff}', ha='center', va='center',
-                     color='white' if (r2+g2+b2) < 400 else 'black', fontsize=8, fontweight='bold')
-    axes[i, 2].set_xticks([]); axes[i, 2].set_yticks([])
-
-axes[0, 0].set_title('Original (RGB)', color='white', fontsize=10)
-axes[0, 1].set_title('Converted (CMYK)', color='white', fontsize=10)
-axes[0, 2].set_title('Round-trip (back to RGB)', color='white', fontsize=10)
-
-plt.tight_layout()
-plt.show()
-
-print("RGB -> CMYK -> RGB round-trip is lossless for pure math,")
-print("but REAL printers have limited gamuts.")
-print("Vivid screen blues often become duller in print.")
-print("This is the #1 frustration for digital artists going to print.")`,
-      challenge: 'Find an RGB color that produces negative CMYK values (which is impossible to print). What does this tell you about the CMYK gamut?',
-      successHint: 'Every designer and photographer must understand the RGB-CMYK boundary. If you design on screen and print without checking, you will be disappointed. Always soft-proof your work in CMYK before printing.',
-    },
-    {
-      title: 'Color spaces — mapping all possible colors',
-      concept: `RGB and CMYK are **device-dependent** color spaces — the same RGB values look different on different monitors. We need a **device-independent** system to describe color absolutely.
-
-**HSL (Hue, Saturation, Lightness):**
-- Hue: the angle on the color wheel (0° = red, 120° = green, 240° = blue)
-- Saturation: 0% = gray, 100% = vivid
-- Lightness: 0% = black, 50% = full color, 100% = white
-- Intuitive for humans: "make it more orange" = shift hue, "make it muted" = reduce saturation
-
-**HSV (Hue, Saturation, Value):**
-- Similar to HSL but Value = brightness of the brightest channel
-- Preferred by many artists because it separates color (hue) from intensity (value)
-
-**Lab (CIELAB):**
-- L = lightness (0-100), a = green-red axis, b = blue-yellow axis
-- Designed so that equal numerical distances correspond to equal **perceptual** differences
-- The gold standard for color comparison in industry (paint, textiles, food)
-
-The key insight: there are many ways to parameterize color space. Each has trade-offs between intuitiveness, perceptual uniformity, and computational convenience.`,
-      analogy: 'Color spaces are like map projections. A globe (reality) can be projected onto flat paper in many ways — Mercator, Robinson, Peters. Each projection preserves some property (area, shape, direction) while distorting others. RGB preserves screen hardware logic, HSL preserves human intuition, Lab preserves perceptual distance.',
-      storyConnection: 'The girl who painted rain mixed her pigments by intuition — adjusting hue, making colors brighter or duller. She was working in HSL space without knowing it. A scientist analyzing the same colors would use Lab space to measure the exact perceptual difference between her monsoon gray and the real sky.',
-      checkQuestion: 'In RGB, (128, 128, 128) and (130, 128, 128) differ by just 2 units. Is this the same perceptual difference as (250, 0, 0) and (252, 0, 0)?',
-      checkAnswer: 'No. Human color perception is nonlinear. We are much more sensitive to changes in dark colors and mid-tones than in bright saturated colors. The two-unit change in gray is more noticeable than the same two-unit change in bright red. This is exactly why Lab space was invented — to make equal numerical differences correspond to equal perceptual differences.',
-      codeIntro: 'Visualize the HSL color space as a hue-saturation wheel.',
-      code: `import numpy as np
-import matplotlib.pyplot as plt
-import colorsys
-
-# Create an HSL color wheel
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
-fig.patch.set_facecolor('#1f2937')
-
-# HSL Hue-Saturation wheel (Lightness = 0.5)
-n = 360
-m = 50
-hue_wheel = np.zeros((m, n, 3))
-for i in range(m):  # saturation: outer = 1, inner = 0
-    sat = i / m
-    for j in range(n):  # hue: 0-360 degrees
-        hue = j / n
-        r, g, b = colorsys.hls_to_rgb(hue, 0.5, sat)
-        hue_wheel[i, j] = [r, g, b]
-
-ax1.set_facecolor('#111827')
-# Convert to polar-like image in cartesian
-size = 200
-img = np.zeros((size, size, 3))
-center = size // 2
-for y in range(size):
-    for x in range(size):
-        dx, dy = x - center, y - center
-        dist = np.sqrt(dx**2 + dy**2) / center
-        if dist <= 1.0:
-            angle = (np.arctan2(dy, dx) + np.pi) / (2 * np.pi)
-            r, g, b = colorsys.hls_to_rgb(angle, 0.5, dist)
-            img[y, x] = [r, g, b]
-
-ax1.imshow(img, extent=[-1, 1, -1, 1])
-ax1.set_title('HSL Color Wheel\\n(Hue = angle, Saturation = radius, L=0.5)', color='white', fontsize=10)
-ax1.set_xlabel('← Green / Cyan          Red / Magenta →', color='gray', fontsize=8)
-ax1.set_ylabel('← Blue / Violet          Yellow / Orange →', color='gray', fontsize=8)
-ax1.tick_params(colors='gray')
-
-# Show lightness strip for a fixed hue (blue, H=240)
-lightness_vals = np.linspace(0, 1, 100)
-sat_vals = np.linspace(0, 1, 50)
-ls_grid = np.zeros((50, 100, 3))
-for i, s in enumerate(sat_vals):
-    for j, l in enumerate(lightness_vals):
-        r, g, b = colorsys.hls_to_rgb(240/360, l, s)
-        ls_grid[i, j] = [r, g, b]
-
-ax2.imshow(ls_grid, extent=[0, 100, 0, 100], aspect='auto', origin='lower')
-ax2.set_xlabel('Lightness (%)', color='white', fontsize=10)
-ax2.set_ylabel('Saturation (%)', color='white', fontsize=10)
-ax2.set_title('Blue (H=240°): Saturation vs Lightness', color='white', fontsize=10)
-ax2.tick_params(colors='gray')
-
-plt.tight_layout()
-plt.show()
-
-print("HSL separates three intuitive properties:")
-print("  Hue: WHAT color (red, blue, green...)")
-print("  Saturation: HOW vivid (gray to pure)")
-print("  Lightness: HOW bright (black to white)")
-print()
-print("This is how CSS works: hsl(240, 100%, 50%) = pure blue")
-print("Designers think in HSL. Hardware thinks in RGB.")`,
-      challenge: 'Create a similar wheel but for HSV instead of HSL. The difference: in HSL, L=100% is white; in HSV, V=100% is the brightest version of the color. Which feels more intuitive to you?',
-      successHint: 'Color spaces are not just theory — CSS uses hsl(), Photoshop uses Lab, and every camera sensor outputs raw RGB. Knowing which space to use for which task separates beginners from professionals.',
-    },
-    {
-      title: 'CIE chromaticity — mapping human vision',
-      concept: `In 1931, the **Commission Internationale de l'Eclairage** (CIE) ran experiments where observers matched colors by adjusting three light sources. The result was the **CIE 1931 chromaticity diagram** — a map of all colors visible to the average human eye.
-
-Key features of the CIE diagram:
-- The **horseshoe shape** represents the boundary of all visible (spectral) colors
-- The curved edge = monochromatic light (single wavelengths: 380-700 nm)
-- The straight bottom edge = the "line of purples" (mixtures of red and violet, not in the spectrum)
-- Any two colors connected by a straight line can be mixed to produce any color on that line
-- The **white point** (D65 illuminant) sits near the center: (0.3127, 0.3290)
-- The area enclosed = the full gamut of human vision (~10 million distinguishable colors)
-
-**Color gamuts** are triangles or polygons drawn on this diagram:
-- **sRGB** (standard screens): a small triangle covering about 35% of visible colors
-- **Adobe RGB**: a larger triangle (~50%), better greens
-- **DCI-P3** (modern Apple displays): similar to Adobe RGB but different shape
-- **Rec. 2020** (HDR video): much larger, approaching 75% of visible colors`,
-      analogy: 'The CIE diagram is like a map of an island (all visible colors). RGB is a small village on that island — it can only represent colors within its borders. Adobe RGB is a larger town. Rec. 2020 is a big city. But none of them cover the entire island. Some colors you can see with your eyes simply cannot be displayed on any screen.',
-      storyConnection: 'The vivid greens of Assam\'s monsoon rice paddies and the deep indigo of hand-dyed Muga silk sit outside the sRGB gamut. When the girl\'s paintings are photographed and uploaded to the web, those colors are clipped to the nearest sRGB equivalent — losing the very intensity that made them special.',
-      checkQuestion: 'If sRGB covers only ~35% of visible colors, why do photos on sRGB screens look "realistic" to most people?',
-      checkAnswer: 'Two reasons: (1) Most common everyday colors (skin tones, sky blue, grass green, wood brown) fall well within sRGB. The missing 65% are mostly extremely vivid greens, cyans, and deep violets that rarely appear in everyday scenes. (2) People have no reference to compare — if you have never seen a wider gamut screen showing the same image, you don\'t know what you\'re missing.',
-      codeIntro: 'Plot the CIE 1931 chromaticity diagram with color gamut triangles.',
-      code: `import numpy as np
-import matplotlib.pyplot as plt
-
-# CIE 1931 spectral locus (approximate xy coordinates)
-spectral_x = [0.1741, 0.1740, 0.1738, 0.1736, 0.1733, 0.1730, 0.1726, 0.1721, 0.1714, 0.1703,
-              0.1689, 0.1669, 0.1644, 0.1611, 0.1566, 0.1510, 0.1440, 0.1355, 0.1241, 0.1096,
-              0.0913, 0.0687, 0.0454, 0.0235, 0.0082, 0.0039, 0.0139, 0.0389, 0.0743, 0.1142,
-              0.1547, 0.1929, 0.2296, 0.2658, 0.3016, 0.3373, 0.3731, 0.4087, 0.4441, 0.4788,
-              0.5125, 0.5448, 0.5752, 0.6029, 0.6270, 0.6482, 0.6658, 0.6801, 0.6915, 0.7006,
-              0.7079, 0.7140, 0.7190, 0.7230, 0.7260, 0.7283, 0.7300, 0.7311, 0.7320, 0.7327,
-              0.7334, 0.7340, 0.7344, 0.7346]
-spectral_y = [0.0050, 0.0050, 0.0049, 0.0049, 0.0048, 0.0048, 0.0048, 0.0048, 0.0051, 0.0058,
-              0.0069, 0.0086, 0.0109, 0.0138, 0.0177, 0.0227, 0.0297, 0.0399, 0.0578, 0.0868,
-              0.1327, 0.2007, 0.2950, 0.4127, 0.5384, 0.6548, 0.7502, 0.8120, 0.8338, 0.8262,
-              0.8059, 0.7816, 0.7543, 0.7243, 0.6923, 0.6589, 0.6245, 0.5896, 0.5547, 0.5202,
-              0.4866, 0.4544, 0.4242, 0.3965, 0.3725, 0.3514, 0.3340, 0.3197, 0.3083, 0.2993,
-              0.2920, 0.2859, 0.2809, 0.2770, 0.2740, 0.2717, 0.2700, 0.2689, 0.2680, 0.2673,
-              0.2666, 0.2660, 0.2656, 0.2654]
-
-# Close the horseshoe with line of purples
-spectral_x_closed = spectral_x + [spectral_x[0]]
-spectral_y_closed = spectral_y + [spectral_y[0]]
-
-fig, ax = plt.subplots(figsize=(8, 8))
-fig.patch.set_facecolor('#1f2937')
-ax.set_facecolor('#111827')
-
-# Fill the spectral locus area
-ax.fill(spectral_x_closed, spectral_y_closed, alpha=0.15, color='white')
-ax.plot(spectral_x_closed, spectral_y_closed, color='white', linewidth=1.5)
-
-# Color gamut triangles
-gamuts = {
-    'sRGB': {'coords': [(0.64, 0.33), (0.30, 0.60), (0.15, 0.06)], 'color': '#ef4444'},
-    'Adobe RGB': {'coords': [(0.64, 0.33), (0.21, 0.71), (0.15, 0.06)], 'color': '#3b82f6'},
-    'DCI-P3': {'coords': [(0.680, 0.320), (0.265, 0.690), (0.150, 0.060)], 'color': '#22c55e'},
+# Test colors
+test_colors = {
+    'Vivid Red': (255, 0, 0),
+    'Electric Blue': (0, 100, 255),
+    'Neon Green': (0, 255, 0),
+    'Muga Gold': (212, 160, 23),
+    'Deep Purple': (75, 0, 130),
+    'Coral': (255, 127, 80),
+    'Teal': (0, 128, 128),
+    'Hot Pink': (255, 20, 147),
 }
 
-for name, data in gamuts.items():
-    coords = data['coords'] + [data['coords'][0]]
-    xs, ys = zip(*coords)
-    ax.plot(xs, ys, color=data['color'], linewidth=2, label=name)
-    ax.fill(xs, ys, alpha=0.05, color=data['color'])
-
-# White point D65
-ax.plot(0.3127, 0.3290, 'o', color='white', markersize=8, zorder=5)
-ax.annotate('D65 (white)', xy=(0.3127, 0.3290), xytext=(0.35, 0.36),
-            color='white', fontsize=9, arrowprops=dict(arrowstyle='->', color='white'))
-
-# Label some wavelengths
-wl_labels = [(0, '380nm'), (15, '460nm'), (20, '480nm'), (25, '500nm'),
-             (30, '520nm'), (35, '540nm'), (40, '560nm'), (50, '600nm'),
-             (55, '620nm'), (60, '660nm')]
-for idx, label in wl_labels:
-    if idx < len(spectral_x):
-        ax.annotate(label, xy=(spectral_x[idx], spectral_y[idx]),
-                    fontsize=7, color='gray', textcoords='offset points',
-                    xytext=(10, 5))
-
-ax.set_xlabel('x', color='white', fontsize=12)
-ax.set_ylabel('y', color='white', fontsize=12)
-ax.set_title('CIE 1931 Chromaticity Diagram', color='white', fontsize=14)
-ax.set_xlim(-0.05, 0.8)
-ax.set_ylim(-0.05, 0.9)
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax.tick_params(colors='gray')
-
-plt.tight_layout()
-plt.show()
-
-print("The horseshoe = all colors visible to the human eye")
-print("Gamut areas (approximate):")
-print("  sRGB:      ~35% of visible colors (standard screens)")
-print("  Adobe RGB: ~50% (professional photography)")
-print("  DCI-P3:    ~45% (modern Apple displays, cinema)")
-print("  Rec. 2020: ~75% (future HDR standard)")`,
-      challenge: 'The Rec. 2020 gamut has primaries at (0.708, 0.292), (0.170, 0.797), and (0.131, 0.046). Add it to the plot. How much bigger is it than sRGB?',
-      successHint: 'The CIE diagram is the Rosetta Stone of color science. Every display specification, every printer profile, every camera sensor is defined by its triangle on this map. Mastering it means understanding the limits of every color device.',
-    },
-    {
-      title: 'Color perception — how your brain invents color',
-      concept: `Here is the most unsettling truth about color: **it doesn't exist outside your brain**. There is no "red" in the physical world — only electromagnetic radiation at ~620-700 nm. "Red" is an experience your brain constructs.
-
-Your retina has three types of **cone cells**:
-- **S-cones** (short wavelength): peak sensitivity ~420 nm (blue)
-- **M-cones** (medium): peak sensitivity ~530 nm (green)
-- **L-cones** (long): peak sensitivity ~560 nm (yellow-green, not red!)
-
-Color perception is a **comparison** of signals from these three cone types. Your brain computes ratios, not absolute values. This is why:
-
-- **Color constancy**: a white shirt looks white in sunlight AND under yellow indoor light, even though the wavelengths reaching your eye are completely different
-- **Simultaneous contrast**: a gray square looks bluer on a yellow background and yellower on a blue background
-- **Optical illusions**: the famous "checker shadow" illusion — squares that are physically identical in RGB appear completely different colors
-
-The takeaway: what you "see" is a processed interpretation, not raw data. Your visual cortex is doing heavy computation to construct a stable, useful color experience from messy, ambiguous input.`,
-      analogy: 'Your eye is like a camera with only three color filters (S, M, L cones), but your brain is like Photoshop running a massive auto-correction algorithm. It adjusts white balance, compensates for lighting, fills in missing data, and produces a final "image" that is useful for survival — but not necessarily accurate to the physics.',
-      storyConnection: 'The girl painting monsoon rain knew that the same river looked different at dawn (golden), noon (silver-blue), and dusk (gray-purple). The water molecules were identical — the light changed, and her brain recalculated the colors. Her greatest skill was overriding her brain\'s auto-correction to see and paint the actual wavelengths.',
-      checkQuestion: 'A banana looks yellow. But if you put it under pure blue light (no yellow wavelengths at all), what color does it look? Is it still yellow?',
-      checkAnswer: 'Under pure blue light, the banana appears very dark — almost black. Yellow pigment in the banana skin absorbs blue and reflects yellow/green/red. But if the only available light is blue, there is no yellow light to reflect. The banana absorbs the blue and reflects almost nothing. Color is not a fixed property of objects — it depends entirely on the illumination.',
-      codeIntro: 'Model the three cone types and show how they respond to different wavelengths.',
-      code: `import numpy as np
-import matplotlib.pyplot as plt
-
-wavelengths = np.arange(380, 701)
-
-# Approximate cone sensitivity curves (normalized Gaussian approximations)
-def cone_response(wl, peak, width):
-    return np.exp(-0.5 * ((wl - peak) / width) ** 2)
-
-s_cone = cone_response(wavelengths, 420, 26)  # Blue-sensitive
-m_cone = cone_response(wavelengths, 530, 44)  # Green-sensitive
-l_cone = cone_response(wavelengths, 560, 48)  # Red-sensitive (peak actually yellowish)
-
-fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 8))
+fig, axes = plt.subplots(2, 4, figsize=(16, 6))
 fig.patch.set_facecolor('#1f2937')
+fig.suptitle('RGB vs CMYK Round-Trip: What Changes?', color='white', fontsize=14, y=1.02)
 
-# Cone sensitivity curves
-ax1.set_facecolor('#111827')
-ax1.fill_between(wavelengths, s_cone, alpha=0.2, color='#3b82f6')
-ax1.fill_between(wavelengths, m_cone, alpha=0.2, color='#22c55e')
-ax1.fill_between(wavelengths, l_cone, alpha=0.2, color='#ef4444')
-ax1.plot(wavelengths, s_cone, color='#3b82f6', linewidth=2, label='S-cone (peak 420nm)')
-ax1.plot(wavelengths, m_cone, color='#22c55e', linewidth=2, label='M-cone (peak 530nm)')
-ax1.plot(wavelengths, l_cone, color='#ef4444', linewidth=2, label='L-cone (peak 560nm)')
-ax1.axvline(420, color='#3b82f6', linestyle=':', alpha=0.3)
-ax1.axvline(530, color='#22c55e', linestyle=':', alpha=0.3)
-ax1.axvline(560, color='#ef4444', linestyle=':', alpha=0.3)
-ax1.set_xlabel('Wavelength (nm)', color='white')
-ax1.set_ylabel('Relative sensitivity', color='white')
-ax1.set_title('Human Cone Cell Sensitivity', color='white', fontsize=13)
-ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax1.tick_params(colors='gray')
+for ax, (name, (r, g, b)) in zip(axes.flatten(), test_colors.items()):
+    ax.set_facecolor('#111827')
 
-# How the brain sees different colors
-test_wavelengths = [450, 520, 580, 620, 500, 570]
-test_names = ['Blue', 'Green', 'Yellow', 'Red', 'Cyan', 'Yellow-green']
+    # Original RGB
+    c, m, y, k = rgb_to_cmyk(r, g, b)
+    # Round-trip: RGB → CMYK → RGB
+    r2, g2, b2 = cmyk_to_rgb(c, m, y, k)
 
-responses = []
-for wl in test_wavelengths:
-    s = cone_response(wl, 420, 26)
-    m = cone_response(wl, 530, 44)
-    l = cone_response(wl, 560, 48)
-    total = s + m + l
-    responses.append((s/total if total > 0 else 0,
-                       m/total if total > 0 else 0,
-                       l/total if total > 0 else 0))
+    # Show both colors
+    ax.add_patch(plt.Rectangle((0, 0.5), 1, 0.5, color=(r/255, g/255, b/255)))
+    ax.add_patch(plt.Rectangle((0, 0), 1, 0.5, color=(r2/255, g2/255, b2/255)))
 
-ax2.set_facecolor('#111827')
-x = np.arange(len(test_wavelengths))
-width = 0.25
-s_vals = [r[0] for r in responses]
-m_vals = [r[1] for r in responses]
-l_vals = [r[2] for r in responses]
+    ax.text(0.5, 0.75, f'RGB\\n({r},{g},{b})', ha='center', va='center',
+            color='white' if (r+g+b)/3 < 128 else '#1f2937', fontsize=7, fontweight='bold')
+    ax.text(0.5, 0.25, f'Round-trip\\n({r2},{g2},{b2})', ha='center', va='center',
+            color='white' if (r2+g2+b2)/3 < 128 else '#1f2937', fontsize=7, fontweight='bold')
 
-ax2.bar(x - width, s_vals, width, color='#3b82f6', label='S-cone', alpha=0.8)
-ax2.bar(x, m_vals, width, color='#22c55e', label='M-cone', alpha=0.8)
-ax2.bar(x + width, l_vals, width, color='#ef4444', label='L-cone', alpha=0.8)
-
-ax2.set_xticks(x)
-ax2.set_xticklabels([f'{n}\\n({w}nm)' for n, w in zip(test_names, test_wavelengths)],
-                     color='white', fontsize=9)
-ax2.set_ylabel('Relative cone response', color='white')
-ax2.set_title('Cone Response Ratios for Different Colors', color='white', fontsize=13)
-ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax2.tick_params(colors='gray')
-
-plt.tight_layout()
-plt.show()
-
-print("Your brain reads color as RATIOS between S, M, and L cones:")
-print("  Blue (450nm): S high, M low, L low")
-print("  Green (520nm): S low, M high, L medium")
-print("  Yellow (580nm): S zero, M high, L high (no yellow cone!)")
-print("  Red (620nm): S zero, M low, L high")
-print()
-print("Key insight: there is no 'yellow' cone.")
-print("Yellow = M and L cones firing equally. Your brain INFERS yellow.")`,
-      challenge: 'Monochromatic yellow (580nm) and a mix of red (620nm) + green (520nm) look identical to your eyes — both stimulate M and L cones equally. Plot both scenarios to prove it.',
-      successHint: 'Color perception is not passive observation — it is active computation by your brain. This is why color illusions work, why colorblind people see differently, and why AI needs special training to handle color the way humans do.',
-    },
-    {
-      title: 'Color blindness — when cones are different',
-      concept: `About 8% of men and 0.5% of women have some form of **color vision deficiency** (CVD). It's not "blindness" — it's a difference in cone cell response curves.
-
-Types of color vision deficiency:
-- **Protanopia** (~1% of males): L-cones missing or shifted. Red looks dark/brownish. Confuse red/green.
-- **Deuteranopia** (~1% of males): M-cones missing or shifted. Most common type. Also confuse red/green.
-- **Tritanopia** (very rare, ~0.003%): S-cones missing. Confuse blue/yellow.
-- **Anomalous trichromacy** (~6% of males): all three cones present, but one has a shifted sensitivity curve. Colors are distinguishable but less vivid.
-
-CVD is usually **X-linked recessive** — the gene for L and M cones is on the X chromosome. Men (XY) have only one X, so one defective copy means CVD. Women (XX) need two defective copies, which is much rarer.
-
-Design implications:
-- Never use red/green as the only way to distinguish information (traffic lights add position: top/bottom)
-- Always provide redundant cues: text labels, patterns, shapes — not just color
-- Tools like Coblis and Color Oracle simulate CVD for designers`,
-      analogy: 'Color blindness is like listening to music through speakers that are missing certain frequencies. If your subwoofer is broken (like missing L-cones), bass-heavy sounds (red) disappear or sound strange. The music is still there — you just perceive it differently. And you might not even know what you\'re missing if you\'ve never heard full-range speakers.',
-      storyConnection: 'If the girl who painted rain had protanopia, her monsoon paintings would look completely different — the warm reds and oranges of Assamese sunsets would appear as muddy browns and yellows. Her art would be just as beautiful, but it would represent a genuinely different perceptual reality. About 1 in 12 viewers of her art would see it differently from what she intended.',
-      checkQuestion: 'Traffic lights use red (stop) and green (go). How do colorblind drivers tell them apart?',
-      checkAnswer: 'Position: red is always on top, green on bottom (or left/right at horizontal lights). Additionally, modern traffic lights use specific shades — the "green" has blue mixed in, and the "red" has orange mixed in — making them more distinguishable even to people with red-green CVD. Japan actually calls traffic lights "blue" instead of "green" because their green light has such a strong blue tint.',
-      codeIntro: 'Simulate how an image appears to people with different types of color vision deficiency.',
-      code: `import numpy as np
-import matplotlib.pyplot as plt
-
-# Simulate CVD using transformation matrices
-# Based on Machado et al. (2009) simulation
-
-def simulate_protanopia(rgb):
-    """Simulate protanopia (no L-cones) using LMS transformation."""
-    # Simplified: shift red channel toward green
-    r, g, b = rgb[..., 0], rgb[..., 1], rgb[..., 2]
-    new_r = 0.152 * r + 1.053 * g - 0.205 * b
-    new_g = 0.115 * r + 0.786 * g + 0.099 * b
-    new_b = -0.004 * r - 0.048 * g + 1.052 * b
-    return np.clip(np.stack([new_r, new_g, new_b], axis=-1), 0, 1)
-
-def simulate_deuteranopia(rgb):
-    """Simulate deuteranopia (no M-cones)."""
-    r, g, b = rgb[..., 0], rgb[..., 1], rgb[..., 2]
-    new_r = 0.367 * r + 0.861 * g - 0.228 * b
-    new_g = 0.280 * r + 0.673 * g + 0.047 * b
-    new_b = -0.012 * r + 0.043 * g + 0.969 * b
-    return np.clip(np.stack([new_r, new_g, new_b], axis=-1), 0, 1)
-
-def simulate_tritanopia(rgb):
-    """Simulate tritanopia (no S-cones)."""
-    r, g, b = rgb[..., 0], rgb[..., 1], rgb[..., 2]
-    new_r = 1.256 * r - 0.077 * g - 0.179 * b
-    new_g = -0.078 * r + 0.931 * g + 0.148 * b
-    new_b = 0.005 * r + 0.691 * g + 0.304 * b
-    return np.clip(np.stack([new_r, new_g, new_b], axis=-1), 0, 1)
-
-# Create a test image: color gradient
-x = np.linspace(0, 1, 300)
-y = np.linspace(0, 1, 60)
-X, Y = np.meshgrid(x, y)
-
-# Rainbow gradient
-img = np.zeros((60, 300, 3))
-for i in range(300):
-    hue = i / 300
-    # Simple HSV to RGB
-    h = hue * 6
-    c = 1.0
-    x_val = c * (1 - abs(h % 2 - 1))
-    if h < 1: r, g, b = c, x_val, 0
-    elif h < 2: r, g, b = x_val, c, 0
-    elif h < 3: r, g, b = 0, c, x_val
-    elif h < 4: r, g, b = 0, x_val, c
-    elif h < 5: r, g, b = x_val, 0, c
-    else: r, g, b = c, 0, x_val
-    img[:, i] = [r, g, b]
-
-fig, axes = plt.subplots(4, 1, figsize=(12, 6))
-fig.patch.set_facecolor('#1f2937')
-fig.suptitle('Color Vision Deficiency Simulation', color='white', fontsize=14)
-
-titles = ['Normal vision', 'Protanopia (no L-cones, ~1% males)',
-          'Deuteranopia (no M-cones, ~1% males)', 'Tritanopia (no S-cones, rare)']
-images = [img, simulate_protanopia(img), simulate_deuteranopia(img), simulate_tritanopia(img)]
-
-for ax, title, image in zip(axes, titles, images):
-    ax.imshow(image, aspect='auto')
-    ax.set_ylabel(title, color='white', fontsize=8, rotation=0, ha='right', va='center')
-    ax.set_xticks([])
-    ax.set_yticks([])
-
-plt.tight_layout()
-plt.show()
-
-print("What each type confuses:")
-print("  Protanopia: red/green -> both look brownish-yellow")
-print("  Deuteranopia: red/green -> both look brownish-yellow")
-print("  Tritanopia: blue/yellow -> both look pinkish")
-print()
-print("Design rule: NEVER rely on color alone.")
-print("Use labels, patterns, and position as redundant cues.")
-print(f"About 300 million people worldwide have some form of CVD.")`,
-      challenge: 'Create a 2x2 grid of colored squares (red, green, blue, yellow) and run all three CVD simulations on it. Which pairs become indistinguishable under each type?',
-      successHint: 'Designing for color blindness is not optional — it is a requirement for accessible design. Every chart, map, UI, and data visualization should be tested with CVD simulation before release.',
-    },
-    {
-      title: 'Digital color manipulation with Python',
-      concept: `Now we combine everything into practical programming. Digital images are 3D arrays: height × width × 3 (RGB channels). Each pixel is three numbers from 0-255. Manipulating these numbers = manipulating color.
-
-Common color operations in code:
-- **Grayscale conversion**: weighted average of RGB (not equal — human eyes are most sensitive to green)
-  - Formula: Gray = 0.299R + 0.587G + 0.114B
-- **Brightness**: multiply all channels by a factor
-- **Contrast**: stretch the histogram (map darkest to 0, lightest to 255)
-- **Hue shift**: convert to HSL, add offset to H, convert back
-- **Color filtering**: zero out one or two channels
-- **Thresholding**: convert to binary (black/white) based on brightness cutoff
-
-These operations are the foundation of Instagram filters, Photoshop adjustments, and computer vision preprocessing. Every "filter" is just math applied to arrays of numbers.`,
-      analogy: 'A digital image is a spreadsheet with millions of rows (pixels), three columns (R, G, B), and values from 0-255. Color manipulation is applying formulas to these columns — multiply, add, threshold, swap. Photoshop is just a fancy spreadsheet editor for pixels.',
-      storyConnection: 'If the girl\'s monsoon paintings were digitized, each brushstroke would become thousands of RGB pixels. A Python script could analyze her palette — which colors she favored, how she mixed them, whether her style shifted between dry and wet season paintings. Digital color analysis turns art into data.',
-      checkQuestion: 'Why is the grayscale formula weighted (0.299R + 0.587G + 0.114B) instead of a simple average ((R+G+B)/3)?',
-      checkAnswer: 'Because human eyes are not equally sensitive to all colors. We are most sensitive to green (hence the 0.587 weight), moderately sensitive to red (0.299), and least sensitive to blue (0.114). A simple average would make blue areas appear too bright and green areas too dark compared to how we perceive luminance.',
-      codeIntro: 'Build a set of image color manipulation tools from scratch.',
-      code: `import numpy as np
-import matplotlib.pyplot as plt
-
-# Create a synthetic "monsoon landscape" image
-np.random.seed(42)
-h, w = 150, 300
-
-# Sky gradient (blue to gray)
-sky = np.zeros((75, w, 3))
-for y in range(75):
-    t = y / 75
-    sky[y, :, 0] = 100 + 80 * t  # R: gray increases
-    sky[y, :, 1] = 120 + 60 * t  # G
-    sky[y, :, 2] = 180 - 20 * t  # B: blue decreases
-
-# Ground (green paddy fields with brown river)
-ground = np.zeros((75, w, 3))
-for x in range(w):
-    if 120 < x < 180:  # River
-        ground[:, x, 0] = 100 + np.random.randint(0, 20, 75)
-        ground[:, x, 1] = 80 + np.random.randint(0, 20, 75)
-        ground[:, x, 2] = 60 + np.random.randint(0, 20, 75)
-    else:  # Paddy
-        ground[:, x, 0] = 30 + np.random.randint(0, 30, 75)
-        ground[:, x, 1] = 120 + np.random.randint(0, 40, 75)
-        ground[:, x, 2] = 20 + np.random.randint(0, 20, 75)
-
-img = np.vstack([sky, ground]).astype(np.uint8)
-
-# Color operations
-def to_grayscale(img):
-    return (0.299 * img[:,:,0] + 0.587 * img[:,:,1] + 0.114 * img[:,:,2]).astype(np.uint8)
-
-def adjust_brightness(img, factor):
-    return np.clip(img * factor, 0, 255).astype(np.uint8)
-
-def isolate_channel(img, channel):
-    result = np.zeros_like(img)
-    result[:,:,channel] = img[:,:,channel]
-    return result
-
-def invert(img):
-    return (255 - img).astype(np.uint8)
-
-def warm_filter(img):
-    result = img.astype(np.float64)
-    result[:,:,0] = np.clip(result[:,:,0] * 1.2, 0, 255)  # boost red
-    result[:,:,2] = np.clip(result[:,:,2] * 0.8, 0, 255)  # reduce blue
-    return result.astype(np.uint8)
-
-fig, axes = plt.subplots(2, 4, figsize=(14, 6))
-fig.patch.set_facecolor('#1f2937')
-fig.suptitle('Digital Color Manipulation', color='white', fontsize=14)
-
-operations = [
-    ('Original', img),
-    ('Grayscale', np.stack([to_grayscale(img)]*3, axis=-1)),
-    ('Bright (+50%)', adjust_brightness(img, 1.5)),
-    ('Red channel', isolate_channel(img, 0)),
-    ('Green channel', isolate_channel(img, 1)),
-    ('Blue channel', isolate_channel(img, 2)),
-    ('Inverted', invert(img)),
-    ('Warm filter', warm_filter(img)),
-]
-
-for ax, (title, image) in zip(axes.flat, operations):
-    ax.imshow(image)
-    ax.set_title(title, color='white', fontsize=9)
+    # Calculate color difference
+    diff = np.sqrt((r-r2)**2 + (g-g2)**2 + (b-b2)**2)
+    ax.set_title(f'{name}\\ndE={diff:.1f}', color='white', fontsize=9)
+    ax.set_xlim(0, 1); ax.set_ylim(0, 1)
     ax.set_xticks([]); ax.set_yticks([])
 
 plt.tight_layout()
 plt.show()
 
-print("Every Instagram filter is combinations of these operations:")
-print("  Grayscale: 0.299R + 0.587G + 0.114B")
-print("  Brightness: multiply all channels")
-print("  Warm filter: boost red, reduce blue")
-print("  Sepia: grayscale + warm tint")
+print("RGB <-> CMYK round-trip results:")
+for name, (r, g, b) in test_colors.items():
+    c, m, y, k = rgb_to_cmyk(r, g, b)
+    r2, g2, b2 = cmyk_to_rgb(c, m, y, k)
+    diff = np.sqrt((r-r2)**2 + (g-g2)**2 + (b-b2)**2)
+    print(f"  {name}: ({r},{g},{b}) -> CMYK({c:.2f},{m:.2f},{y:.2f},{k:.2f}) -> ({r2},{g2},{b2}) dE={diff:.1f}")`,
+      challenge: 'The round-trip should be lossless in theory (it is for these pure math conversions). But real printers have limited ink precision. Add random noise (+-3%) to each CMYK value before converting back and see how much the colors shift.',
+      successHint: 'The RGB/CMYK distinction is not academic — it affects every designer, photographer, and print professional. Understanding gamuts prevents costly reprinting mistakes.',
+    },
+    {
+      title: 'Color spaces — mapping all possible colors',
+      concept: `RGB and CMYK define how devices produce color, but they don't describe all colors humans can see. For that, we need **color spaces** — mathematical models that map every perceptible color to a coordinate.
+
+Key color spaces:
+- **sRGB**: the standard for web and most screens. Covers ~35% of visible colors.
+- **Adobe RGB**: wider gamut, used in professional photography. ~50% of visible.
+- **Display P3**: Apple's wide-gamut standard. ~45% of visible.
+- **ProPhoto RGB**: very wide, covers ~90%, but includes "imaginary" colors.
+
+**HSL/HSV** — more intuitive than RGB:
+- **H** (Hue): the color itself, as an angle on a wheel (0°=red, 120°=green, 240°=blue)
+- **S** (Saturation): how vivid the color is (0=grey, 100=pure color)
+- **L/V** (Lightness/Value): how bright (0=black, 100=white)
+
+HSL is how humans naturally think about color: "a dark, vivid blue" = H:240, S:high, L:low. Designers and artists prefer HSL because adjusting one parameter (e.g., making a color lighter) doesn't affect the other two — unlike RGB where lightening a blue means increasing all three channels.`,
+      analogy: 'Color spaces are like different map projections of the Earth. A Mercator projection distorts areas near the poles; a globe doesn\'t distort at all. Similarly, RGB distorts color relationships (small RGB changes can mean big perceived changes or vice versa). CIE Lab is like the globe — it tries to make distances proportional to perceived differences.',
+      storyConnection: 'The girl\'s monsoon palette existed in a "color space" defined by her available pigments — a limited gamut of earthy tones. A wider pigment set would have expanded her gamut, just as upgrading from sRGB to Display P3 expands a screen\'s gamut. Her artistic choices were shaped by the boundaries of her color space.',
+      checkQuestion: 'Two colors are 10 units apart in RGB space. Are they guaranteed to look different to a human?',
+      checkAnswer: 'No. RGB is not perceptually uniform. A 10-unit change in the dark range (e.g., from (5,5,5) to (15,15,15)) is easily visible, but a 10-unit change in bright yellows might be imperceptible. This is why perceptually uniform color spaces like CIE Lab exist — in Lab, equal distances correspond to equal perceived differences.',
+      codeIntro: 'Visualize the HSL color wheel and compare sRGB vs wider gamuts.',
+      code: `import numpy as np
+import matplotlib.pyplot as plt
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
+fig.patch.set_facecolor('#1f2937')
+
+# --- HSL Color Wheel ---
+ax1.set_facecolor('#111827')
+theta = np.linspace(0, 2*np.pi, 360)
+r_inner, r_outer = 0.5, 1.0
+for i in range(360):
+    # Convert hue angle to RGB
+    h = i / 360.0
+    # HSL to RGB (S=1, L=0.5 = fully saturated)
+    c = 1.0  # chroma
+    x = c * (1 - abs((h * 6) % 2 - 1))
+    if h < 1/6: rgb = (c, x, 0)
+    elif h < 2/6: rgb = (x, c, 0)
+    elif h < 3/6: rgb = (0, c, x)
+    elif h < 4/6: rgb = (0, x, c)
+    elif h < 5/6: rgb = (x, 0, c)
+    else: rgb = (c, 0, x)
+
+    a1 = theta[i]
+    a2 = theta[(i+1) % 360]
+    wedge = plt.Polygon([
+        [0.5 + r_inner * np.cos(a1), 0.5 + r_inner * np.sin(a1)],
+        [0.5 + r_outer * np.cos(a1), 0.5 + r_outer * np.sin(a1)],
+        [0.5 + r_outer * np.cos(a2), 0.5 + r_outer * np.sin(a2)],
+        [0.5 + r_inner * np.cos(a2), 0.5 + r_inner * np.sin(a2)],
+    ], color=rgb)
+    ax1.add_patch(wedge)
+
+# Label angles
+for angle, label in [(0, 'Red 0°'), (60, 'Yellow 60°'), (120, 'Green 120°'),
+                      (180, 'Cyan 180°'), (240, 'Blue 240°'), (300, 'Magenta 300°')]:
+    rad = np.radians(angle)
+    ax1.text(0.5 + 1.15*np.cos(rad), 0.5 + 1.15*np.sin(rad), label,
+             ha='center', va='center', color='white', fontsize=7, fontweight='bold')
+
+ax1.set_xlim(-0.8, 1.8); ax1.set_ylim(-0.8, 1.8)
+ax1.set_aspect('equal')
+ax1.set_xticks([]); ax1.set_yticks([])
+ax1.set_title('HSL Hue Wheel (S=100%, L=50%)', color='white', fontsize=12)
+
+# --- Gamut comparison (simplified 2D projection) ---
+ax2.set_facecolor('#111827')
+
+# Approximate gamut triangles in CIE xy coordinates
+# (simplified vertices)
+gamuts = {
+    'sRGB': {'verts': [(0.64, 0.33), (0.30, 0.60), (0.15, 0.06)], 'color': '#3b82f6'},
+    'Adobe RGB': {'verts': [(0.64, 0.33), (0.21, 0.71), (0.15, 0.06)], 'color': '#22c55e'},
+    'Display P3': {'verts': [(0.68, 0.32), (0.265, 0.69), (0.15, 0.06)], 'color': '#f59e0b'},
+}
+
+# Draw spectral locus (approximate)
+spectral_x = [0.175, 0.12, 0.08, 0.07, 0.10, 0.17, 0.30, 0.44, 0.55, 0.63, 0.69, 0.73]
+spectral_y = [0.005, 0.06, 0.15, 0.30, 0.50, 0.65, 0.70, 0.60, 0.50, 0.37, 0.31, 0.27]
+ax2.fill(spectral_x, spectral_y, alpha=0.1, color='white')
+ax2.plot(spectral_x, spectral_y, color='gray', linewidth=1, linestyle='--', alpha=0.5)
+
+for name, data in gamuts.items():
+    verts = data['verts'] + [data['verts'][0]]  # close triangle
+    xs, ys = zip(*verts)
+    ax2.plot(xs, ys, color=data['color'], linewidth=2, label=name)
+    ax2.fill(xs, ys, alpha=0.08, color=data['color'])
+
+ax2.set_xlabel('CIE x', color='white')
+ax2.set_ylabel('CIE y', color='white')
+ax2.set_title('Color Gamut Comparison (CIE xy)', color='white', fontsize=12)
+ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=9)
+ax2.tick_params(colors='gray')
+ax2.set_xlim(0, 0.8); ax2.set_ylim(0, 0.8)
+
+plt.tight_layout()
+plt.show()
+
+print("Gamut coverage (approximate % of visible colors):")
+print("  sRGB:       ~35% — standard web/screen")
+print("  Adobe RGB:  ~50% — professional photography")
+print("  Display P3: ~45% — modern Apple devices")
 print()
-print("An image is just a numpy array. Color is just math.")`,
-      challenge: 'Create a "monsoon filter": increase blue by 20%, decrease saturation by 30%, and add a slight blur. These three steps would give any photo a rainy, moody feel.',
-      successHint: 'You now understand color from photons to pixels to code. Level 1 gave you the physics and chemistry; Level 2 gave you the math and programming. Combined, you can analyze, create, and manipulate color at every level — which is exactly what painters, designers, photographers, and vision scientists do.',
+print("Key insight: no RGB gamut covers ALL visible colors.")
+print("Some colors you can see cannot be displayed on any screen.")`,
+      challenge: 'Create a saturation gradient: pick one hue (e.g., H=200 for blue) and create a row of 10 color swatches from S=0% (grey) to S=100% (vivid blue), all at L=50%. This is how designers explore color variations.',
+      successHint: 'Color spaces are the invisible infrastructure of digital color. Every photo you edit, every website you design, every video you watch — all operate within a specific color space. Knowing which one you are in is the difference between professional and amateur color work.',
+    },
+    {
+      title: 'CIE chromaticity — the map of all visible colors',
+      concept: `In 1931, the Commission Internationale de l'Éclairage (CIE) created the definitive map of human color perception. The **CIE chromaticity diagram** is a 2D plot where every color a human can see has a specific (x, y) coordinate.
+
+How it was built:
+1. Researchers showed observers mixtures of three monochromatic lights (red, green, blue)
+2. Observers adjusted the mixture until it matched a test color
+3. The amounts of R, G, B needed were recorded as **color matching functions** (x̄, ȳ, z̄)
+4. These functions were transformed into a 2D (x, y) diagram
+
+Key features of the diagram:
+- The **horseshoe shape** is the spectral locus — pure single-wavelength colors around the edge
+- The **straight bottom line** (purple line) connects the extreme red and violet — these purples don't exist as single wavelengths
+- The **white point** is near the center (~0.33, 0.33)
+- The interior contains all mixable colors
+- Any two colors can be mixed by drawing a line between them; all colors on that line are achievable
+
+The CIE diagram is the foundation of all modern color science — display calibration, printing standards, lighting design, and even legal definitions of color (traffic light specifications reference CIE coordinates).`,
+      analogy: 'The CIE diagram is like a map of a country. The border (spectral locus) is defined by the purest, most saturated colors — like coastline. Interior points are mixtures — like inland cities. Moving toward the center is like moving away from the coast: colors get less saturated, more grey. The white point is the capital city, where all colors converge.',
+      storyConnection: 'Every color the girl mixed on her palette occupies a specific point on the CIE diagram. Her gamut — the range of colors she could create — forms a polygon on this map. Natural pigments tend to cluster in the warm, desaturated region of the diagram. Her monsoon painting lived in a specific, bounded region of color space.',
+      checkQuestion: 'Why is the CIE diagram shaped like a horseshoe rather than a circle or triangle?',
+      checkAnswer: 'The horseshoe shape comes from how our cone cells respond to light. The spectral locus follows the path of single-wavelength light through CIE color space. Because our three cone types have overlapping, asymmetric response curves, the path of monochromatic light traces a horseshoe, not a smooth circle. The straight purple line at the bottom connects the two ends because purple requires mixing red and violet — it has no single wavelength.',
+      codeIntro: 'Plot the CIE 1931 chromaticity diagram with the spectral locus.',
+      code: `import numpy as np
+import matplotlib.pyplot as plt
+
+# CIE 1931 spectral locus data points (x, y at each wavelength)
+# Wavelengths from 380 to 700 nm
+wl_data = [
+    (380, 0.1741, 0.0050), (390, 0.1740, 0.0050), (400, 0.1714, 0.0051),
+    (410, 0.1644, 0.0051), (420, 0.1566, 0.0177), (430, 0.1440, 0.0297),
+    (440, 0.1241, 0.0578), (450, 0.0913, 0.1327), (460, 0.0687, 0.2007),
+    (470, 0.0454, 0.2950), (480, 0.0235, 0.4127), (490, 0.0082, 0.5384),
+    (500, 0.0039, 0.6548), (510, 0.0139, 0.7502), (520, 0.0743, 0.8338),
+    (530, 0.1547, 0.8059), (540, 0.2296, 0.7543), (550, 0.3016, 0.6923),
+    (560, 0.3731, 0.6245), (570, 0.4441, 0.5547), (580, 0.5125, 0.4866),
+    (590, 0.5752, 0.4242), (600, 0.6270, 0.3725), (610, 0.6658, 0.3340),
+    (620, 0.6915, 0.3083), (630, 0.7079, 0.2920), (640, 0.7190, 0.2809),
+    (650, 0.7260, 0.2740), (660, 0.7300, 0.2700), (670, 0.7320, 0.2680),
+    (680, 0.7334, 0.2666), (690, 0.7340, 0.2660), (700, 0.7347, 0.2653),
+]
+
+wl = [d[0] for d in wl_data]
+cx = [d[1] for d in wl_data]
+cy = [d[2] for d in wl_data]
+
+fig, ax = plt.subplots(figsize=(9, 9))
+fig.patch.set_facecolor('#1f2937')
+ax.set_facecolor('#111827')
+
+# Fill the horseshoe
+all_x = cx + [cx[0]]
+all_y = cy + [cy[0]]
+ax.fill(all_x, all_y, alpha=0.15, color='white')
+
+# Spectral locus
+ax.plot(cx, cy, color='white', linewidth=2)
+# Purple line (connect ends)
+ax.plot([cx[0], cx[-1]], [cy[0], cy[-1]], color='#a855f7', linewidth=2, linestyle='--',
+        label='Purple line')
+
+# Label wavelengths
+for i in range(0, len(wl_data), 3):
+    w, x, y = wl_data[i]
+    # Offset direction
+    dx = x - 0.33
+    dy = y - 0.33
+    dist = np.sqrt(dx**2 + dy**2)
+    ax.annotate(f'{w}', xy=(x, y), xytext=(x + dx/dist*0.04, y + dy/dist*0.04),
+                color='gray', fontsize=7, ha='center')
+
+# Plot gamut triangles
+srgb = [(0.64, 0.33), (0.30, 0.60), (0.15, 0.06), (0.64, 0.33)]
+p3 = [(0.68, 0.32), (0.265, 0.69), (0.15, 0.06), (0.68, 0.32)]
+
+sx, sy = zip(*srgb)
+px, py = zip(*p3)
+ax.plot(sx, sy, color='#3b82f6', linewidth=2, label='sRGB', linestyle='-')
+ax.plot(px, py, color='#f59e0b', linewidth=2, label='Display P3', linestyle='-')
+
+# White point (D65)
+ax.plot(0.3127, 0.3290, '*', color='white', markersize=15, label='D65 White Point')
+
+ax.set_xlabel('CIE x', color='white', fontsize=12)
+ax.set_ylabel('CIE y', color='white', fontsize=12)
+ax.set_title('CIE 1931 Chromaticity Diagram', color='white', fontsize=14)
+ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=10, loc='upper right')
+ax.tick_params(colors='gray')
+ax.set_xlim(-0.05, 0.8)
+ax.set_ylim(-0.05, 0.9)
+ax.set_aspect('equal')
+ax.grid(True, alpha=0.1, color='gray')
+
+plt.tight_layout()
+plt.show()
+
+print("The CIE 1931 diagram: the complete map of human color vision")
+print()
+print("Key features:")
+print("  Horseshoe boundary = spectral (single-wavelength) colors")
+print("  Purple line = non-spectral purples (need R+V mix)")
+print("  D65 = standard daylight white point")
+print("  sRGB triangle covers only ~35% of the visible area")
+print("  Display P3 is wider but still misses saturated cyans/greens")`,
+      challenge: 'Plot a line between two colors on the diagram (e.g., 480nm blue and 580nm yellow). All colors along this line can be produced by mixing those two wavelengths. Where does the line cross through the white point? That tells you which pairs of colors are complementary.',
+      successHint: 'The CIE diagram is nearly 100 years old and still the foundation of all color science. Every display you buy, every print standard, every color specification ultimately references these coordinates.',
+    },
+    {
+      title: 'Color perception — how the brain constructs color',
+      concept: `Color is not "out there" in the world — it is constructed by your brain. The same physical stimulus can appear as completely different colors depending on context. This is not a flaw; it is a feature that helps us perceive consistent colors under changing lighting.
+
+**Color constancy**: A red apple looks red in sunlight, under fluorescent light, at sunset, and in shade — even though the wavelengths reaching your eye are dramatically different each time. Your brain compensates for the illuminant and "adjusts" the perceived color.
+
+**Simultaneous contrast**: A grey patch on a yellow background looks bluish; the same grey on a blue background looks yellowish. The surrounding colors shift your perception.
+
+**Chromatic adaptation**: Walk from outside (blue-white daylight) into a room lit by warm incandescent bulbs. At first everything looks orange, but within minutes your brain adapts and whites look white again. Your cone cells adjust their sensitivity.
+
+**Afterimages**: Stare at a green patch for 30 seconds, then look at a white wall. You see magenta (the opponent color). This is because the green-sensitive cones become fatigued and temporarily underrespond.
+
+These phenomena prove that color is a neural computation, not a direct readout of wavelength.`,
+      analogy: 'Your visual system is like an auto-adjusting camera that goes far beyond any real camera. It adjusts white balance (color constancy), contrast (simultaneous contrast), and exposure (chromatic adaptation) — all in real-time, without you knowing. The "photo" your brain produces is heavily processed, not raw.',
+      storyConnection: 'The girl painted rain under monsoon clouds — diffused, grey light. Yet she could still see colors accurately because her brain compensated for the dim, blue-shifted illumination. Her ability to match colors on the palette to colors in the scene was a feat of neural color constancy. A camera in auto mode would have struggled more.',
+      checkQuestion: 'The famous "dress" photo in 2015 divided the internet: some saw it as blue-and-black, others as white-and-gold. How can the same photo produce opposite color perceptions?',
+      checkAnswer: 'The photo was ambiguous about the lighting conditions. People who assumed the dress was in shadow (warm light behind it) compensated by subtracting warm tones, seeing blue-and-black. People who assumed the dress was in bright, blue-white light subtracted blue tones, seeing white-and-gold. Both groups applied color constancy correctly — they just assumed different illuminants. This proved how much of color is constructed by the brain.',
+      codeIntro: 'Demonstrate simultaneous contrast — the same grey looks different on different backgrounds.',
+      code: `import numpy as np
+import matplotlib.pyplot as plt
+
+fig, axes = plt.subplots(2, 3, figsize=(15, 8))
+fig.patch.set_facecolor('#1f2937')
+fig.suptitle('Color Perception Illusions', color='white', fontsize=14, y=1.02)
+
+# The SAME grey in all patches
+grey_value = 0.5
+
+# --- Row 1: Simultaneous contrast ---
+backgrounds = [
+    ((0.2, 0.2, 0.2), 'Dark grey BG'),
+    ((0.8, 0.8, 0.8), 'Light grey BG'),
+    ((0.8, 0.6, 0.2), 'Warm BG'),
+]
+
+for ax, (bg, label) in zip(axes[0], backgrounds):
+    ax.set_facecolor(bg)
+    patch = plt.Rectangle((0.3, 0.3), 0.4, 0.4, color=(grey_value, grey_value, grey_value))
+    ax.add_patch(patch)
+    ax.text(0.5, 0.1, f'Same grey (0.5, 0.5, 0.5)', ha='center', color='white',
+            fontsize=8, fontweight='bold',
+            bbox=dict(boxstyle='round', facecolor='black', alpha=0.7))
+    ax.set_title(label, color='white', fontsize=11)
+    ax.set_xlim(0, 1); ax.set_ylim(0, 1)
+    ax.set_xticks([]); ax.set_yticks([])
+
+# --- Row 2: Chromatic contrast ---
+chromatic_bgs = [
+    ((0.9, 0.2, 0.2), 'Red BG'),
+    ((0.2, 0.9, 0.2), 'Green BG'),
+    ((0.2, 0.2, 0.9), 'Blue BG'),
+]
+
+for ax, (bg, label) in zip(axes[1], chromatic_bgs):
+    ax.set_facecolor(bg)
+    patch = plt.Rectangle((0.3, 0.3), 0.4, 0.4, color=(grey_value, grey_value, grey_value))
+    ax.add_patch(patch)
+    ax.text(0.5, 0.1, f'Same grey (0.5, 0.5, 0.5)', ha='center', color='white',
+            fontsize=8, fontweight='bold',
+            bbox=dict(boxstyle='round', facecolor='black', alpha=0.7))
+    ax.set_title(label, color='white', fontsize=11)
+    ax.set_xlim(0, 1); ax.set_ylim(0, 1)
+    ax.set_xticks([]); ax.set_yticks([])
+
+plt.tight_layout()
+plt.show()
+
+print("ALL six grey patches are IDENTICAL: RGB (128, 128, 128)")
+print()
+print("But they look different because your brain adjusts:")
+print("  On dark background: grey looks LIGHTER")
+print("  On light background: grey looks DARKER")
+print("  On red background: grey looks slightly CYAN (greenish)")
+print("  On green background: grey looks slightly MAGENTA (pinkish)")
+print("  On blue background: grey looks slightly YELLOW")
+print()
+print("Your brain pushes perceived color AWAY from the surround.")
+print("This is simultaneous contrast — a fundamental law of vision.")`,
+      challenge: 'Create the same illusion with a colored patch (e.g., a pale yellow) on different backgrounds. Does the effect get stronger or weaker with chromatic (colored) patches compared to grey?',
+      successHint: 'Color perception illusions are not just curiosities — they are fundamental constraints that designers, artists, and display engineers must account for. The same color, in different contexts, WILL look different. There is no escaping this fact of neuroscience.',
+    },
+    {
+      title: 'Color blindness — when cone cells differ',
+      concept: `About 8% of men and 0.5% of women have some form of **color vision deficiency** (CVD). This is not blindness — it is a difference in cone cell function.
+
+Types:
+- **Protanopia**: missing L-cones (red). Red and green look similar. ~1% of males.
+- **Deuteranopia**: missing M-cones (green). Also confuses red/green. ~1% of males.
+- **Protanomaly/Deuteranomaly**: shifted L or M-cones (less severe). ~6% of males.
+- **Tritanopia**: missing S-cones (blue). Very rare (~0.003%). Blue and yellow confused.
+- **Achromatopsia**: no working cones at all. Sees only shades of grey. Extremely rare.
+
+Why mostly males? The genes for L and M-cones are on the **X chromosome**. Males (XY) have only one X — if it carries a defective gene, there's no backup. Females (XX) have two X chromosomes — a working gene on one can compensate for a defective gene on the other.
+
+Designing for CVD means:
+- Never use color alone to convey information (add patterns, labels, shapes)
+- Avoid red/green as the only distinction
+- Use color palettes tested with CVD simulators
+- About 300 million people worldwide have CVD — that's more than the population of the USA`,
+      analogy: 'Imagine you have three radio receivers tuned to different stations (L, M, S cones). If one receiver is broken, you can still hear two stations — you don\'t go deaf. But you can\'t distinguish songs that differ only in the broken station\'s frequency range. Color blindness is losing one "channel," not all of them.',
+      storyConnection: 'If the girl who painted rain had deuteranopia, her monsoon painting would look different to her — the greens of wet leaves and the reds of laterite soil might appear as similar muddy tones. But she could still paint beautifully; she would just work with a different subset of distinguishable colors. Many great artists have had CVD.',
+      checkQuestion: 'A traffic light uses red, yellow, and green — all of which can be confused by protanopes. How do traffic lights remain usable for color-blind drivers?',
+      checkAnswer: 'Position encodes the information redundantly: red is always on top, green always on bottom. Modern LED traffic lights also use specific shades with added blue (green signal) to increase distinguishability. Some jurisdictions use different shapes for each light. The key principle: never rely on color alone.',
+      codeIntro: 'Simulate how different types of color blindness affect color perception.',
+      code: `import numpy as np
+import matplotlib.pyplot as plt
+
+def simulate_cvd(rgb, cvd_type):
+    """Simulate color vision deficiency using transformation matrices."""
+    r, g, b = rgb
+    if cvd_type == 'normal':
+        return rgb
+    elif cvd_type == 'protanopia':
+        # Missing L-cones
+        m = np.array([[0.567, 0.433, 0.000],
+                       [0.558, 0.442, 0.000],
+                       [0.000, 0.242, 0.758]])
+    elif cvd_type == 'deuteranopia':
+        # Missing M-cones
+        m = np.array([[0.625, 0.375, 0.000],
+                       [0.700, 0.300, 0.000],
+                       [0.000, 0.300, 0.700]])
+    elif cvd_type == 'tritanopia':
+        # Missing S-cones
+        m = np.array([[0.950, 0.050, 0.000],
+                       [0.000, 0.433, 0.567],
+                       [0.000, 0.475, 0.525]])
+    result = m @ np.array([r, g, b])
+    return tuple(np.clip(result, 0, 1))
+
+# Test palette
+colors = {
+    'Red': (0.9, 0.2, 0.1),
+    'Green': (0.2, 0.8, 0.2),
+    'Blue': (0.2, 0.3, 0.9),
+    'Yellow': (0.95, 0.9, 0.1),
+    'Orange': (0.95, 0.5, 0.1),
+    'Purple': (0.6, 0.1, 0.8),
+    'Cyan': (0.1, 0.8, 0.8),
+    'Brown': (0.6, 0.3, 0.1),
+}
+
+cvd_types = ['normal', 'protanopia', 'deuteranopia', 'tritanopia']
+cvd_labels = ['Normal Vision', 'Protanopia (no red cones)', 'Deuteranopia (no green cones)', 'Tritanopia (no blue cones)']
+
+fig, axes = plt.subplots(4, 1, figsize=(14, 8))
+fig.patch.set_facecolor('#1f2937')
+
+for ax, cvd, label in zip(axes, cvd_types, cvd_labels):
+    ax.set_facecolor('#111827')
+    for i, (name, rgb) in enumerate(colors.items()):
+        simulated = simulate_cvd(rgb, cvd)
+        ax.add_patch(plt.Rectangle((i, 0), 0.9, 1, color=simulated))
+        ax.text(i + 0.45, -0.15, name, ha='center', va='top', color='white',
+                fontsize=7, rotation=30)
+    ax.set_xlim(-0.2, len(colors) + 0.1)
+    ax.set_ylim(-0.4, 1.1)
+    ax.set_title(label, color='white', fontsize=10, loc='left')
+    ax.set_xticks([]); ax.set_yticks([])
+
+plt.tight_layout()
+plt.show()
+
+print("Color confusion pairs:")
+print("  Protanopia: red≈green, orange≈brown")
+print("  Deuteranopia: red≈green (different from protanopia)")
+print("  Tritanopia: blue≈green, yellow≈pink")
+print()
+print("Design rules for accessibility:")
+print("  1. Never use color ALONE to convey meaning")
+print("  2. Add patterns, text labels, or shapes")
+print("  3. Test with CVD simulators")
+print(f"  4. ~300 million people have CVD worldwide")`,
+      challenge: 'Create a pie chart with 6 categories. First, color it with a standard palette (rainbow colors). Then create a CVD-friendly version using patterns, textures, or a colorblind-safe palette (like viridis). Which is more universally readable?',
+      successHint: 'Accessibility is not optional — it is ethical engineering. Understanding color blindness is not just medical knowledge; it is essential for every designer, developer, and data scientist.',
+    },
+    {
+      title: 'Digital color manipulation with Python',
+      concept: `Every digital image is a 3D array of numbers: rows × columns × color channels. A 1920×1080 RGB image is a matrix of shape (1080, 1920, 3), containing 6.2 million numbers.
+
+Manipulating images programmatically means manipulating these numbers:
+- **Brightness**: multiply all channels by a constant (>1 = brighter, <1 = darker)
+- **Contrast**: stretch the range of values (increase the difference between dark and light)
+- **Saturation**: in HSL space, adjust the S channel
+- **Color balance**: multiply individual R, G, or B channels
+- **Inversion**: new_value = 255 - old_value
+- **Thresholding**: set pixels above/below a value to white/black
+- **Convolution**: apply kernels (blur, sharpen, edge detection)
+
+Instagram filters are literally sequences of these mathematical operations applied to pixel arrays. Every photo editing app — from Photoshop to Snapseed — operates on the same matrix math.
+
+Python libraries: **Pillow** (PIL) for basic operations, **OpenCV** for advanced computer vision, **scikit-image** for scientific image processing, **NumPy** for raw array manipulation. Matplotlib can display the results.`,
+      analogy: 'Think of a digital image as a spreadsheet with millions of cells, each containing three numbers (R, G, B). Changing brightness is like multiplying an entire column. Changing color balance is like multiplying only specific columns. Blur is like replacing each cell with the average of its neighbors. Every photo effect is a spreadsheet operation.',
+      storyConnection: 'If the girl\'s monsoon painting were photographed and loaded into Python, it would become a matrix of numbers. Adjusting the warmth to capture the golden light before rain, boosting the contrast of dark clouds against bright sky, desaturating to mimic the muted monsoon palette — all possible by manipulating the numbers that encode her colors.',
+      checkQuestion: 'Why do JPEG images lose quality when saved repeatedly, but PNG images do not?',
+      checkAnswer: 'JPEG uses lossy compression — it approximates blocks of pixels with mathematical functions (DCT), discarding detail to reduce file size. Each save re-approximates, losing more detail (generation loss). PNG uses lossless compression — it encodes the exact pixel values using patterns (like zip), so no information is ever lost. JPEG trades quality for small files; PNG preserves quality at larger sizes.',
+      codeIntro: 'Generate a synthetic image and apply color transformations programmatically.',
+      code: `import numpy as np
+import matplotlib.pyplot as plt
+
+# Generate a synthetic "monsoon scene" gradient
+h, w = 200, 400
+img = np.zeros((h, w, 3))
+
+# Sky gradient (dark blue-grey at top to lighter at bottom)
+for y in range(h):
+    t = y / h
+    # Top: dark blue-grey, bottom: warm grey
+    img[y, :, 0] = 0.25 + 0.2 * t  # R
+    img[y, :, 1] = 0.3 + 0.15 * t   # G
+    img[y, :, 2] = 0.45 - 0.1 * t   # B
+
+# Add some "rain" texture
+np.random.seed(42)
+rain = np.random.random((h, w)) > 0.97
+img[rain] = [0.7, 0.75, 0.8]
+
+# Apply transformations
+def adjust_brightness(img, factor):
+    return np.clip(img * factor, 0, 1)
+
+def adjust_contrast(img, factor):
+    mean = np.mean(img)
+    return np.clip((img - mean) * factor + mean, 0, 1)
+
+def warm_filter(img, strength=0.1):
+    result = img.copy()
+    result[:,:,0] = np.clip(result[:,:,0] + strength, 0, 1)  # more red
+    result[:,:,2] = np.clip(result[:,:,2] - strength, 0, 1)  # less blue
+    return result
+
+def cool_filter(img, strength=0.1):
+    result = img.copy()
+    result[:,:,0] = np.clip(result[:,:,0] - strength, 0, 1)
+    result[:,:,2] = np.clip(result[:,:,2] + strength, 0, 1)
+    return result
+
+def invert(img):
+    return 1.0 - img
+
+def desaturate(img, amount=0.5):
+    grey = np.mean(img, axis=2, keepdims=True)
+    return np.clip(img * (1 - amount) + grey * amount, 0, 1)
+
+transformations = [
+    ('Original', img),
+    ('Brighter (×1.5)', adjust_brightness(img, 1.5)),
+    ('High Contrast', adjust_contrast(img, 2.0)),
+    ('Warm Filter', warm_filter(img, 0.15)),
+    ('Cool Filter', cool_filter(img, 0.15)),
+    ('Desaturated', desaturate(img, 0.8)),
+    ('Inverted', invert(img)),
+    ('Dark + Warm', warm_filter(adjust_brightness(img, 0.6), 0.1)),
+]
+
+fig, axes = plt.subplots(2, 4, figsize=(16, 6))
+fig.patch.set_facecolor('#1f2937')
+
+for ax, (title, transformed) in zip(axes.flatten(), transformations):
+    ax.imshow(transformed, aspect='auto')
+    ax.set_title(title, color='white', fontsize=10)
+    ax.set_xticks([]); ax.set_yticks([])
+
+plt.tight_layout()
+plt.show()
+
+print("Each transformation is pure math on a pixel array:")
+print("  Brightness: pixel × factor")
+print("  Contrast: (pixel - mean) × factor + mean")
+print("  Warm filter: R += amount, B -= amount")
+print("  Cool filter: R -= amount, B += amount")
+print("  Desaturate: blend toward greyscale")
+print("  Invert: 1.0 - pixel")
+print()
+print("Instagram filters = chains of these basic operations.")
+print("Every photo app uses the same underlying math.")`,
+      challenge: 'Create a "vintage photo" filter by combining: desaturate by 40%, add warmth, reduce contrast slightly, and add a slight vignette (darken the edges). Chain these operations in sequence.',
+      successHint: 'Digital color manipulation is where physics, math, and art converge. Every pixel is a number, and every visual effect is an equation. With Python, you have complete, precise control over every one of those numbers.',
     },
   ];
 
@@ -629,11 +623,11 @@ print("An image is just a numpy array. Color is just math.")`,
         <div className="flex items-center gap-2 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 px-4 py-2 rounded-full text-sm font-semibold">
           <Sparkles className="w-4 h-4" /> Level 2: Innovator
         </div>
-        <span className="text-sm text-gray-500 dark:text-gray-400">Builds on Level 1 color science foundations</span>
+        <span className="text-sm text-gray-500 dark:text-gray-400">Some science background helpful</span>
       </div>
       {!pyReady && (
         <div className="mb-8 bg-gray-50 dark:bg-gray-800 rounded-xl p-6 text-center">
-          <p className="text-gray-600 dark:text-gray-300 mb-4">These exercises use Python for digital color manipulation. Click to start.</p>
+          <p className="text-gray-600 dark:text-gray-300 mb-4">These exercises use Python for color science and image processing. Click to start.</p>
           <button onClick={loadPyodide} disabled={loading} className="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-500 text-white px-6 py-3 rounded-full font-semibold transition-colors">
             {loading ? (<><Loader2 className="w-5 h-5 animate-spin" />{loadProgress}</>) : (<><Sparkles className="w-5 h-5" />Load Python</>)}
           </button>

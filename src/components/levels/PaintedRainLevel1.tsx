@@ -24,533 +24,525 @@ export default function PaintedRainLevel1() {
   const miniLessons = [
     {
       title: 'What is color? — Light, wavelengths, and perception',
-      concept: `When the girl in the story painted rain falling over the Brahmaputra, she wasn't just capturing water — she was capturing **light**. Color is not a property of objects. It's a property of the light that reaches your eyes.
+      concept: `When the girl in the story painted rain on her canvas, the colors she saw weren't really "in" the paint — they were in her eyes and brain. **Color is how our brains interpret different wavelengths of light.**
 
-**Visible light** is electromagnetic radiation with wavelengths between roughly 380 nm (violet) and 700 nm (red). When white sunlight hits an object, the object absorbs some wavelengths and reflects others. The reflected wavelengths are what you see as "color."
+Light is an electromagnetic wave. The wavelength — the distance between wave peaks — determines the color we see:
+- **Red**: ~700 nm (long wavelength)
+- **Orange**: ~600 nm
+- **Yellow**: ~580 nm
+- **Green**: ~520 nm
+- **Blue**: ~470 nm
+- **Violet**: ~400 nm (short wavelength)
 
-Key facts:
-- **White** light contains all visible wavelengths mixed together
-- A red flower absorbs blue and green light, reflects red
-- A green leaf absorbs red and blue, reflects green
-- A black object absorbs almost all wavelengths
-- A white object reflects almost all wavelengths
-
-Isaac Newton proved this in 1666 by splitting white sunlight through a prism into a rainbow of colors — and then recombining them back into white.`,
-      analogy: 'Color is like a musical chord. White light is every note played at once. A prism separates them into individual notes (wavelengths). A red object is like a filter that blocks every note except one — you hear (see) only the red.',
-      storyConnection: 'The girl painted rain, and rain scatters sunlight into all its component colors — that is literally what a rainbow is. Her monsoon paintings captured the full spectrum of light bouncing off water droplets, mud, green fields, and gray skies. Each color in her palette was a different wavelength of light reflected into her eyes.',
-      checkQuestion: 'Why do objects look different colors under different lighting? A shirt that looks blue in sunlight might look purple under a warm incandescent bulb.',
-      checkAnswer: 'Sunlight contains all wavelengths roughly equally. An incandescent bulb emits more red/yellow wavelengths and fewer blue ones. The blue shirt reflects blue light — but if the light source provides very little blue, there is less blue to reflect. The excess red from the bulb mixes with the reduced blue, and you perceive purple.',
+When white light (all wavelengths mixed together) hits a red pigment, the pigment **absorbs** blue and green wavelengths and **reflects** red. That reflected red light enters your eye, hits cone cells in your retina, and your brain says "red." Color is not a property of objects — it's a property of the light that bounces off them and how your brain interprets that light.`,
+      analogy: 'Imagine a crowd of people walking toward a wall. The wall has holes that only let short people through. The tall people bounce back. If you could only see the bounced-back people, you\'d say "that wall is tall-person-colored." Pigments work the same way — they let some wavelengths through (absorb them) and bounce others back (reflect them).',
+      storyConnection: 'The girl painted rain using colors found in nature — the grey of clouds, the silver of falling water, the green of wet leaves. Each color she mixed was really a cocktail of wavelengths. Her art succeeded because she understood, intuitively, which wavelengths to reflect off her canvas to recreate the monsoon.',
+      checkQuestion: 'If a leaf absorbs red and blue light, what color does it appear?',
+      checkAnswer: 'Green. The leaf reflects the wavelengths it does not absorb. Since it absorbs red and blue, the remaining reflected light is primarily green — which is exactly why most leaves look green. The chlorophyll molecule is responsible for this specific absorption pattern.',
       codeIntro: 'Visualize the visible light spectrum and how wavelength maps to color.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.colors import hsv_to_rgb
 
-# Approximate wavelength-to-RGB mapping for visible spectrum
-def wavelength_to_rgb(wavelength):
-    """Convert wavelength (380-700 nm) to RGB tuple (0-1)."""
-    if 380 <= wavelength < 440:
-        r = -(wavelength - 440) / (440 - 380)
-        g = 0.0
-        b = 1.0
-    elif 440 <= wavelength < 490:
-        r = 0.0
-        g = (wavelength - 440) / (490 - 440)
-        b = 1.0
-    elif 490 <= wavelength < 510:
-        r = 0.0
-        g = 1.0
-        b = -(wavelength - 510) / (510 - 490)
-    elif 510 <= wavelength < 580:
-        r = (wavelength - 510) / (580 - 510)
-        g = 1.0
-        b = 0.0
-    elif 580 <= wavelength < 645:
-        r = 1.0
-        g = -(wavelength - 645) / (645 - 580)
-        b = 0.0
-    elif 645 <= wavelength <= 700:
-        r = 1.0
-        g = 0.0
-        b = 0.0
+# Create the visible spectrum (380-750 nm)
+wavelengths = np.linspace(380, 750, 1000)
+
+def wavelength_to_rgb(wl):
+    """Convert wavelength in nm to approximate RGB."""
+    if 380 <= wl < 440:
+        r, g, b = -(wl - 440) / (440 - 380), 0.0, 1.0
+    elif 440 <= wl < 490:
+        r, g, b = 0.0, (wl - 440) / (490 - 440), 1.0
+    elif 490 <= wl < 510:
+        r, g, b = 0.0, 1.0, -(wl - 510) / (510 - 490)
+    elif 510 <= wl < 580:
+        r, g, b = (wl - 510) / (580 - 510), 1.0, 0.0
+    elif 580 <= wl < 645:
+        r, g, b = 1.0, -(wl - 645) / (645 - 580), 0.0
+    elif 645 <= wl <= 750:
+        r, g, b = 1.0, 0.0, 0.0
     else:
-        r = g = b = 0.0
+        r, g, b = 0.0, 0.0, 0.0
     # Intensity falls off at edges
-    if 380 <= wavelength < 420:
-        factor = 0.3 + 0.7 * (wavelength - 380) / (420 - 380)
-    elif 420 <= wavelength <= 680:
-        factor = 1.0
-    elif 680 < wavelength <= 700:
-        factor = 0.3 + 0.7 * (700 - wavelength) / (700 - 680)
+    if 380 <= wl < 420:
+        factor = 0.3 + 0.7 * (wl - 380) / (420 - 380)
+    elif 700 < wl <= 750:
+        factor = 0.3 + 0.7 * (750 - wl) / (750 - 700)
     else:
-        factor = 0.0
-    return (r * factor, g * factor, b * factor)
+        factor = 1.0
+    return [r * factor, g * factor, b * factor]
 
-wavelengths = np.arange(380, 701)
-colors = [wavelength_to_rgb(w) for w in wavelengths]
+colors = np.array([wavelength_to_rgb(wl) for wl in wavelengths])
 
-fig, ax = plt.subplots(figsize=(12, 3))
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 5), gridspec_kw={'height_ratios': [1, 2]})
 fig.patch.set_facecolor('#1f2937')
-ax.set_facecolor('#111827')
 
-for i, (w, c) in enumerate(zip(wavelengths, colors)):
-    ax.axvline(w, color=c, linewidth=2)
+# Spectrum bar
+ax1.set_facecolor('#111827')
+for i in range(len(wavelengths) - 1):
+    ax1.axvspan(wavelengths[i], wavelengths[i+1], color=colors[i], alpha=1)
+ax1.set_xlim(380, 750)
+ax1.set_yticks([])
+ax1.set_title('The Visible Light Spectrum', color='white', fontsize=13)
+ax1.set_xlabel('Wavelength (nm)', color='white')
+ax1.tick_params(colors='gray')
 
-ax.set_xlim(380, 700)
-ax.set_xlabel('Wavelength (nm)', color='white', fontsize=11)
-ax.set_title('The Visible Light Spectrum', color='white', fontsize=13)
-ax.tick_params(colors='gray')
+# Cone sensitivity curves
+ax2.set_facecolor('#111827')
+wl = np.linspace(380, 750, 500)
+# Approximate cone response curves (Gaussian)
+s_cone = np.exp(-0.5 * ((wl - 440) / 20)**2)  # blue
+m_cone = np.exp(-0.5 * ((wl - 535) / 40)**2)  # green
+l_cone = np.exp(-0.5 * ((wl - 565) / 45)**2)  # red
 
-# Label regions
-labels = [(400, 'Violet'), (450, 'Blue'), (500, 'Cyan'), (530, 'Green'),
-          (570, 'Yellow'), (610, 'Orange'), (660, 'Red')]
-for pos, name in labels:
-    ax.annotate(name, xy=(pos, 0.85), xycoords=('data', 'axes fraction'),
-                color='white', fontsize=8, ha='center', fontweight='bold',
-                bbox=dict(boxstyle='round,pad=0.2', facecolor='black', alpha=0.5))
+ax2.plot(wl, s_cone, color='#3b82f6', linewidth=2, label='S-cone (blue)')
+ax2.plot(wl, m_cone, color='#22c55e', linewidth=2, label='M-cone (green)')
+ax2.plot(wl, l_cone, color='#ef4444', linewidth=2, label='L-cone (red)')
+ax2.fill_between(wl, s_cone, alpha=0.1, color='#3b82f6')
+ax2.fill_between(wl, m_cone, alpha=0.1, color='#22c55e')
+ax2.fill_between(wl, l_cone, alpha=0.1, color='#ef4444')
+ax2.set_xlabel('Wavelength (nm)', color='white')
+ax2.set_ylabel('Relative sensitivity', color='white')
+ax2.set_title('Human Cone Cell Responses', color='white', fontsize=11)
+ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
+ax2.tick_params(colors='gray')
 
 plt.tight_layout()
 plt.show()
 
-print("Visible spectrum: 380 nm (violet) to 700 nm (red)")
-print("Below 380 nm: ultraviolet (UV) - invisible to humans")
-print("Above 700 nm: infrared (IR) - invisible to humans")
+print("Your eye has 3 types of cone cells:")
+print("  S-cones peak at ~440nm (blue)")
+print("  M-cones peak at ~535nm (green)")
+print("  L-cones peak at ~565nm (red-ish)")
 print()
-print("Each 'color' is a narrow band of wavelengths.")
-print("White light = all these wavelengths mixed together.")`,
-      challenge: 'Bees can see ultraviolet (down to ~300 nm) but cannot see red (above ~590 nm). Extend the spectrum to 300 nm and cut it off at 590 nm to show what a bee sees.',
-      successHint: 'Color is physics. What your eye calls "red" is really electromagnetic radiation at 620-700 nm. Understanding this is the first step to understanding pigments, painting, screens, and cameras.',
+print("Every color you see is your brain mixing")
+print("signals from these 3 cone types.")`,
+      challenge: 'What happens if you remove the M-cone (green) curve? Plot only S and L cones. How many distinct colors could you perceive with just two cone types? (Hint: dogs have only 2 cone types.)',
+      successHint: 'Color is a construction of your nervous system, not a property of the physical world. Understanding this distinction is the foundation of color science, display technology, and vision research.',
     },
     {
-      title: 'Primary colors — the great confusion between light and pigment',
-      concept: `Ask anyone: "What are the primary colors?" Most will say red, yellow, blue. They're wrong — or rather, they're only half right.
+      title: 'Primary colors — why light and paint play by different rules',
+      concept: `There are two completely different systems of primary colors, and confusing them is one of the most common mistakes in science education:
 
-There are **two completely different systems** of primary colors:
+**Additive primaries (light)**: Red, Green, Blue (RGB)
+- Mixing all three = **white** light
+- Used in screens, projectors, stage lighting
+- Start with darkness, add light
 
-**Additive primaries (light):** Red, Green, Blue (RGB)
-- Used by: screens, projectors, sunlight
-- Mixing: Red + Green = Yellow, Red + Blue = Magenta, Green + Blue = Cyan
-- All three together = **White**
+**Subtractive primaries (pigment)**: Cyan, Magenta, Yellow (CMY)
+- Mixing all three = **black** (absorbs all light)
+- Used in painting, printing, dyeing
+- Start with white (paper/canvas reflects all light), add pigments that absorb
 
-**Subtractive primaries (pigment):** Cyan, Magenta, Yellow (CMY)
-- Used by: paints, inks, dyes, printers
-- Mixing: Cyan + Magenta = Blue, Cyan + Yellow = Green, Magenta + Yellow = Red
-- All three together = **Black** (in theory; in practice, muddy brown — so printers add a K for blacK → CMYK)
+Why the difference? Light mixing adds wavelengths together. Pigment mixing subtracts wavelengths (each pigment absorbs some light, leaving less). The girl who painted rain used subtractive mixing — every brushstroke removed wavelengths from the white canvas.
 
-The traditional "red, yellow, blue" taught in elementary school is an imprecise version of CMY. It works roughly, but it can't produce as many colors as true CMY primaries.`,
-      analogy: 'Light primaries ADD wavelengths together (additive — start from darkness, add colors to get white). Pigment primaries SUBTRACT wavelengths from white light (subtractive — start from white paper, remove colors to get black). They are mirror images of each other.',
-      storyConnection: 'The girl who painted rain used pigments on paper — subtractive color mixing. Every stroke absorbed certain wavelengths and reflected others. When she mixed all her paints together trying to make the perfect gray of monsoon clouds, she got muddy brown — because real pigments aren\'t perfect subtractive filters.',
-      checkQuestion: 'Your phone screen shows yellow by mixing red and green pixels. There are no yellow LEDs in the screen. How does red + green = yellow in light, when mixing red and green paint gives brown?',
-      checkAnswer: 'In light (additive), red photons + green photons stimulate both the red and green cone cells in your eye. Your brain interprets that combined signal as yellow. In paint (subtractive), red pigment absorbs blue and green; green pigment absorbs red and blue. Together they absorb almost everything — leaving very little reflected light, which looks brown/dark.',
-      codeIntro: 'Visualize additive and subtractive color mixing side by side.',
+The old "primary colors are red, yellow, blue" taught in schools is actually wrong. The true subtractive primaries are cyan, magenta, and yellow — which is why printers use CMY(K) ink, not RYB.`,
+      analogy: 'Additive mixing is like three spotlights on a dark stage — overlap them and you get brighter (more light). Subtractive mixing is like three sunglasses stacked together — each one blocks more light, so stacking them all gives you darkness. Screens use spotlights. Paint uses sunglasses.',
+      storyConnection: 'When the girl mixed her pigments to capture the monsoon sky, she was doing subtractive color mixing. The grey of rainclouds? That required mixing pigments that together absorbed most wavelengths, reflecting only a little — creating a muted, desaturated color. The silver of rain required the opposite: pigments that reflected almost everything.',
+      checkQuestion: 'If you shine a red spotlight and a green spotlight on the same white wall, what color do you see? What if you mix red paint and green paint?',
+      checkAnswer: 'Red + green light = yellow (additive mixing — more wavelengths, brighter). Red + green paint = a muddy brown/olive (subtractive mixing — both paints absorb many wavelengths, leaving very little reflected light). Same "colors," opposite results, because light and paint follow different rules.',
+      codeIntro: 'Simulate additive (RGB) and subtractive (CMY) color mixing.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+fig, axes = plt.subplots(1, 2, figsize=(14, 6))
 fig.patch.set_facecolor('#1f2937')
 
-# Additive color mixing (light: RGB)
-ax1.set_facecolor('#000000')  # Start from black
-theta = np.linspace(0, 2*np.pi, 100)
+# --- Additive mixing (RGB) ---
+ax = axes[0]
+ax.set_facecolor('#111827')
+ax.set_aspect('equal')
+ax.set_title('Additive Mixing (Light)', color='white', fontsize=13)
 
-# Three overlapping circles
-centers = [(0, 0.4), (-0.35, -0.2), (0.35, -0.2)]
-colors_rgb = [(1, 0, 0, 0.5), (0, 1, 0, 0.5), (0, 0, 1, 0.5)]
-labels_rgb = ['Red', 'Green', 'Blue']
+theta = np.linspace(0, 2*np.pi, 300)
+r = 0.35
+centers = [(0, 0.2), (-0.17, -0.1), (0.17, -0.1)]
+colors_rgb = [(1,0,0,0.5), (0,1,0,0.5), (0,0,1,0.5)]
+labels = ['Red', 'Green', 'Blue']
 
-for (cx, cy), color, label in zip(centers, colors_rgb, labels_rgb):
-    circle = plt.Circle((cx, cy), 0.55, color=color[:3], alpha=0.5)
-    ax1.add_patch(circle)
-    ax1.annotate(label, xy=(cx*1.6, cy*1.6), color='white', fontsize=10,
-                 ha='center', fontweight='bold')
+for (cx, cy), col, label in zip(centers, colors_rgb, labels):
+    circle = plt.Circle((cx, cy), r, color=col[:3], alpha=0.4)
+    ax.add_patch(circle)
+    ax.text(cx + (cx - 0)*0.8, cy + (cy - 0.03)*0.8, label,
+            color='white', ha='center', fontsize=9, fontweight='bold')
 
 # Label overlaps
-ax1.annotate('Yellow', xy=(0, 0.7), color='#ffff00', fontsize=8, ha='center')
-ax1.annotate('Cyan', xy=(-0.1, -0.35), color='#00ffff', fontsize=8, ha='center')
-ax1.annotate('Magenta', xy=(0.15, -0.35), color='#ff00ff', fontsize=8, ha='center')
-ax1.annotate('WHITE', xy=(0, 0.05), color='white', fontsize=9, ha='center', fontweight='bold')
+ax.text(0, 0.0, 'White', color='white', ha='center', fontsize=8, fontweight='bold')
+ax.text(-0.12, 0.12, 'Yellow', color='#fbbf24', ha='center', fontsize=7)
+ax.text(0.12, 0.12, 'Magenta', color='#d946ef', ha='center', fontsize=7)
+ax.text(0, -0.08, 'Cyan', color='#22d3ee', ha='center', fontsize=7)
 
-ax1.set_xlim(-1.2, 1.2)
-ax1.set_ylim(-1, 1.2)
-ax1.set_aspect('equal')
-ax1.set_title('Additive (Light): RGB', color='white', fontsize=13)
-ax1.axis('off')
+ax.set_xlim(-0.7, 0.7)
+ax.set_ylim(-0.6, 0.7)
+ax.set_xticks([]); ax.set_yticks([])
 
-# Subtractive color mixing (pigment: CMY)
-ax2.set_facecolor('#ffffff')  # Start from white
+# --- Subtractive mixing (CMY) ---
+ax = axes[1]
+ax.set_facecolor('#f5f5f0')  # white-ish paper
+ax.set_aspect('equal')
+ax.set_title('Subtractive Mixing (Pigment)', color='white', fontsize=13)
 
-centers2 = [(0, 0.4), (-0.35, -0.2), (0.35, -0.2)]
 colors_cmy = [(0, 1, 1, 0.5), (1, 0, 1, 0.5), (1, 1, 0, 0.5)]
 labels_cmy = ['Cyan', 'Magenta', 'Yellow']
 
-for (cx, cy), color, label in zip(centers2, colors_cmy, labels_cmy):
-    circle = plt.Circle((cx, cy), 0.55, color=color[:3], alpha=0.5)
-    ax2.add_patch(circle)
-    ax2.annotate(label, xy=(cx*1.6, cy*1.6), color='black', fontsize=10,
-                 ha='center', fontweight='bold')
+for (cx, cy), col, label in zip(centers, colors_cmy, labels_cmy):
+    circle = plt.Circle((cx, cy), r, color=col[:3], alpha=0.4)
+    ax.add_patch(circle)
+    ax.text(cx + (cx - 0)*0.8, cy + (cy - 0.03)*0.8, label,
+            color='#1f2937', ha='center', fontsize=9, fontweight='bold')
 
-ax2.annotate('Blue', xy=(0, 0.7), color='#000088', fontsize=8, ha='center')
-ax2.annotate('Green', xy=(-0.15, -0.35), color='#006600', fontsize=8, ha='center')
-ax2.annotate('Red', xy=(0.15, -0.35), color='#880000', fontsize=8, ha='center')
-ax2.annotate('BLACK', xy=(0, 0.05), color='black', fontsize=9, ha='center', fontweight='bold')
+ax.text(0, 0.0, 'Black', color='white', ha='center', fontsize=8,
+        fontweight='bold', bbox=dict(boxstyle='round', facecolor='black', alpha=0.8))
+ax.text(-0.12, 0.12, 'Red', color='#dc2626', ha='center', fontsize=7, fontweight='bold')
+ax.text(0.12, 0.12, 'Blue', color='#2563eb', ha='center', fontsize=7, fontweight='bold')
+ax.text(0, -0.08, 'Green', color='#16a34a', ha='center', fontsize=7, fontweight='bold')
 
-ax2.set_xlim(-1.2, 1.2)
-ax2.set_ylim(-1, 1.2)
-ax2.set_aspect('equal')
-ax2.set_title('Subtractive (Pigment): CMY', color='black', fontsize=13)
-ax2.axis('off')
+ax.set_xlim(-0.7, 0.7)
+ax.set_ylim(-0.6, 0.7)
+ax.set_xticks([]); ax.set_yticks([])
 
 plt.tight_layout()
 plt.show()
 
-print("ADDITIVE (light, screens):")
-print("  R + G = Yellow    R + B = Magenta    G + B = Cyan")
-print("  R + G + B = White")
+print("ADDITIVE (light): R+G=Yellow, R+B=Magenta, G+B=Cyan, R+G+B=White")
+print("SUBTRACTIVE (pigment): C+M=Blue, C+Y=Green, M+Y=Red, C+M+Y=Black")
 print()
-print("SUBTRACTIVE (pigment, paint):")
-print("  C + M = Blue    C + Y = Green    M + Y = Red")
-print("  C + M + Y = Black (ideally)")`,
-      challenge: 'A stage light technician has only red, green, and blue spotlights. How would they create cyan light? What about orange? Modify the additive mixing to explore.',
-      successHint: 'Once you understand additive vs. subtractive mixing, you understand why your screen has RGB pixels, your printer has CMYK cartridges, and why mixing all your paints together never makes white.',
+print("Key insight: the secondary colors of one system")
+print("are the primary colors of the other!")`,
+      challenge: 'Printers use CMYK (K = black). Why add a separate black ink when C+M+Y should make black? Try mixing imperfect CMY values (e.g., C=0.8, M=0.75, Y=0.85) and see what color you get.',
+      successHint: 'Once you understand additive vs. subtractive mixing, you understand why TV screens use RGB pixels, printers use CMYK ink, and painters mix on palettes. These are not arbitrary choices — they follow directly from the physics of light.',
     },
     {
-      title: 'Pigment chemistry — what makes a color stick',
-      concept: `A **pigment** is a substance that absorbs specific wavelengths of light and reflects the rest. Unlike dyes (which dissolve), pigments are tiny solid particles that are suspended in a medium (oil, water, egg, acrylic).
+      title: 'Pigment chemistry — what makes a pigment a pigment?',
+      concept: `A **pigment** is a substance that absorbs specific wavelengths of light and reflects the rest. What makes something a good pigment?
 
-How pigments work at the molecular level:
-- Pigment molecules have **conjugated double bonds** — alternating single and double bonds between carbon atoms
-- These conjugated systems have electrons that can absorb photons of specific energies (wavelengths)
-- The more conjugated bonds, the longer the wavelength absorbed (shifting from UV toward visible light)
+1. **Conjugated bonds**: Molecules with alternating single-double bonds have electrons that can absorb visible light. The more conjugated bonds, the longer the wavelength absorbed (and the redder the color).
 
-Famous pigments and their chemistry:
-- **Ultramarine blue**: ground lapis lazuli (sulfur-containing aluminosilicate)
-- **Vermillion**: mercury sulfide (HgS) — brilliant red, but toxic
-- **Chrome yellow**: lead chromate (PbCrO₄) — used by Van Gogh, also toxic
-- **Ochre**: iron oxide (Fe₂O₃) — the oldest pigment, used in cave paintings 40,000+ years ago
-- **Indigo**: from the indigo plant — Assam was historically one of the world's largest indigo producers`,
-      analogy: 'A pigment molecule is like a bouncer at a club. It lets certain wavelengths (people) pass through or bounce off, but grabs and absorbs others. Which wavelengths get absorbed depends on the molecule\'s electron structure — its "rules list." Change the molecule, change the rules, change the color.',
-      storyConnection: 'The girl who painted rain didn\'t use synthetic paints from a store. She ground her own pigments from earth and plants — ochre from riverbank clay, indigo from local plants, turmeric yellow from the kitchen. These are the same pigments that have colored Assamese textiles and art for centuries.',
-      checkQuestion: 'Cave paintings from 40,000 years ago still show vibrant colors. Modern watercolors fade in decades. Why do ancient pigments last longer?',
-      checkAnswer: 'Ancient pigments are inorganic minerals (iron oxide, manganese oxide, carbon black). They are chemically stable — heat, light, and water barely affect them. Modern organic dyes have complex molecular structures that break down under UV light (photodegradation). The simpler the molecule, the more stable the color.',
-      codeIntro: 'Model how conjugated bond length affects the wavelength of light absorbed by a pigment.',
+2. **Stability**: A pigment must not break down in light, water, or air. Some pigments last millennia (iron oxide in cave paintings); others fade in weeks (many organic dyes).
+
+3. **Particle size**: Ground finer = more surface area = more intense color. Medieval artists spent hours grinding pigments with a muller on a stone slab.
+
+Common pigment types:
+- **Metal oxides**: Iron oxide (red ochre, yellow ochre), titanium dioxide (white)
+- **Metal compounds**: Cobalt blue, cadmium yellow, lead white (toxic!)
+- **Organic**: Indigo (from plants), carmine (from insects), saffron yellow
+- **Synthetic**: Prussian blue (first modern synthetic pigment, 1706)
+
+The chemistry of a pigment determines exactly which wavelengths it absorbs. Change one atom in the molecule and the color can shift dramatically.`,
+      analogy: 'Think of a pigment molecule as a tuning fork. Each tuning fork vibrates at a specific frequency (pitch). Similarly, each pigment molecule absorbs light at specific frequencies (colors). A red pigment is "tuned" to absorb blue and green light. Change the size or shape of the fork, and it vibrates at a different frequency — change the molecule, and it absorbs different colors.',
+      storyConnection: 'The girl gathered pigments from the earth around her — ochre from clay, green from crushed leaves, dark tones from charcoal. She was doing what humans have done for 40,000 years: extracting metal oxides and organic compounds from nature to make color. Her monsoon palette was chemistry, applied with intuition.',
+      checkQuestion: 'Why did so many historical pigments turn out to be poisonous (lead white, arsenic green, mercury vermilion)?',
+      checkAnswer: 'Heavy metals and metalloids form brightly colored compounds because their electron structures absorb visible light effectively. Unfortunately, the same electronic properties that make them colorful also make them reactive in biological systems — they disrupt enzymes, damage DNA, and accumulate in organs. Beautiful color and toxicity often share the same chemical root.',
+      codeIntro: 'Simulate the absorption spectra of different pigments.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
-# Particle-in-a-box model for conjugated systems
-# Absorbed wavelength ~ L^2 (box length, proportional to conjugation length)
-# lambda = 8 * m * L^2 / (h * (2n+1)) simplified
+wavelengths = np.linspace(380, 750, 500)
 
-# Number of conjugated double bonds
-n_bonds = np.arange(2, 15)
+def gaussian(x, mu, sigma, amplitude=1.0):
+    return amplitude * np.exp(-0.5 * ((x - mu) / sigma) ** 2)
 
-# Approximate absorption wavelength (nm) using particle-in-a-box
-# Each conjugated bond adds ~0.139 nm to the box length
-bond_length = 0.139e-9  # meters
-h = 6.626e-34  # Planck's constant
-m = 9.109e-31  # electron mass
-
-wavelengths = []
-for n in n_bonds:
-    L = n * bond_length * 2  # approximate box length
-    n_electrons = 2 * n  # 2 pi electrons per double bond
-    # Transition from HOMO to LUMO
-    lam = 8 * m * L**2 / (h * (2 * n_electrons + 1))
-    lam_nm = lam * 1e9 * 2e17  # scale to realistic nm range
-    wavelengths.append(lam_nm)
-
-# Use realistic approximate values instead
-wavelengths_approx = [200, 230, 270, 310, 360, 410, 450, 490, 530, 570, 610, 640, 670]
-
-fig, ax = plt.subplots(figsize=(10, 6))
-fig.patch.set_facecolor('#1f2937')
-ax.set_facecolor('#111827')
-
-# Color each point by what color it absorbs
-def wavelength_to_rgb(w):
-    if w < 380: return (0.5, 0.0, 0.5)
-    elif w < 440: return (0.5 - 0.5*(w-380)/60, 0.0, 1.0)
-    elif w < 490: return (0.0, (w-440)/50, 1.0)
-    elif w < 510: return (0.0, 1.0, 1.0-(w-490)/20)
-    elif w < 580: return ((w-510)/70, 1.0, 0.0)
-    elif w < 645: return (1.0, 1.0-(w-580)/65, 0.0)
-    elif w <= 700: return (1.0, 0.0, 0.0)
-    else: return (0.5, 0.0, 0.0)
-
-colors = [wavelength_to_rgb(w) for w in wavelengths_approx]
-
-ax.scatter(n_bonds, wavelengths_approx, c=colors, s=120, zorder=5, edgecolors='white', linewidths=1)
-ax.plot(n_bonds, wavelengths_approx, color='#9ca3af', linewidth=1, linestyle='--', alpha=0.5)
-
-# Mark the visible region
-ax.axhspan(380, 700, alpha=0.1, color='white', label='Visible range')
-ax.axhline(380, color='#a855f7', linestyle=':', linewidth=1, alpha=0.5)
-ax.axhline(700, color='#ef4444', linestyle=':', linewidth=1, alpha=0.5)
-
-# Annotate some examples
-examples = [(3, 'Ethylene\\n(UV, colorless)'), (7, 'Beta-carotene\\n(absorbs blue, looks orange)'),
-            (11, 'Chlorophyll\\n(absorbs red, looks green)')]
-for n, label in examples:
-    idx = n - 2
-    ax.annotate(label, xy=(n, wavelengths_approx[idx]),
-                xytext=(n + 0.8, wavelengths_approx[idx] + 40),
-                color='white', fontsize=9,
-                arrowprops=dict(arrowstyle='->', color='white', lw=0.8))
-
-ax.set_xlabel('Number of conjugated double bonds', color='white', fontsize=11)
-ax.set_ylabel('Approximate absorption wavelength (nm)', color='white', fontsize=11)
-ax.set_title('More Conjugation = Longer Wavelength Absorbed', color='white', fontsize=13)
-ax.tick_params(colors='gray')
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-
-plt.tight_layout()
-plt.show()
-
-print("Key insight: molecular structure determines color")
-print("  2-3 bonds: absorbs UV (molecule appears colorless)")
-print("  5-7 bonds: absorbs violet/blue (appears yellow/orange)")
-print("  8-10 bonds: absorbs blue/green (appears red/purple)")
-print("  11+ bonds: absorbs red (appears green/blue)")`,
-      challenge: 'Beta-carotene (in carrots) has 11 conjugated double bonds and absorbs blue light, appearing orange. If you could add 3 more bonds, what color would it absorb and what color would it appear?',
-      successHint: 'Pigment chemistry connects quantum physics to art. The color of every paint, dye, flower, and sunset depends on how electrons in molecules absorb light. Change the molecule, change the color.',
+# Pigment absorption spectra (simplified)
+pigments = {
+    'Red Ochre (Fe2O3)': {
+        'absorption': gaussian(wavelengths, 450, 40, 0.8) + gaussian(wavelengths, 530, 50, 0.9),
+        'color': '#b5451b'
     },
-    {
-      title: 'Mixing colors — the math behind mud and masterpieces',
-      concept: `When you mix two pigments, you don't get the "average" of their colors. Subtractive mixing is more complex because each pigment absorbs different wavelengths, and the mixture absorbs the **union** of what both absorb.
-
-The **Kubelka-Munk theory** (1931) is the standard model for pigment mixing:
-- Each pigment has an **absorption coefficient (K)** and a **scattering coefficient (S)** at each wavelength
-- The ratio K/S determines the reflectance
-- Mixing pigments at different concentrations changes K and S proportionally
-
-Practical rules:
-- **Complementary colors** (opposite on the color wheel) mixed together → gray/brown (they absorb almost everything)
-- **Analogous colors** (neighbors on the wheel) mixed → a clean intermediate color
-- **Tinting** (adding white) increases scattering → lighter, desaturated color
-- **Shading** (adding black) increases absorption → darker color
-- Every mix is **darker** than either parent — because you're always adding more absorption`,
-      analogy: 'Mixing pigments is like wearing multiple pairs of sunglasses at once. Each pair blocks certain wavelengths. Wear red-blocking and blue-blocking glasses together, and you only see green. Three pairs → almost nothing gets through → darkness. Every added pigment removes more light.',
-      storyConnection: 'The girl spent hours mixing pigments to match the exact gray-green of monsoon clouds over the Brahmaputra. This is the hardest color to mix — it requires balancing blue, yellow, and white with just a touch of red. Too much of any one pigment and the delicate balance tips into mud.',
-      checkQuestion: 'Why is it nearly impossible to make a bright, vivid purple by mixing red and blue paint, but easy on a screen?',
-      checkAnswer: 'Red paint absorbs blue and green. Blue paint absorbs red and green. Mixed, they both absorb green, and between them they absorb a lot of blue and red too — leaving very little light reflected. The result is a dull, dark purple. On a screen, red and blue pixels emit light simultaneously at full brightness — nothing is absorbed — giving vivid magenta/purple.',
-      codeIntro: 'Simulate subtractive color mixing by modeling reflectance spectra.',
-      code: `import numpy as np
-import matplotlib.pyplot as plt
-
-wavelengths = np.arange(380, 701)
-
-# Simplified reflectance spectra for pigments (0 to 1)
-def gaussian(x, center, width, height):
-    return height * np.exp(-((x - center) ** 2) / (2 * width ** 2))
-
-# Red pigment: reflects mostly red (600-700 nm)
-red_refl = gaussian(wavelengths, 640, 40, 0.9) + 0.05
-
-# Blue pigment: reflects mostly blue (430-490 nm)
-blue_refl = gaussian(wavelengths, 460, 35, 0.85) + 0.05
-
-# Yellow pigment: reflects green and red (500-700 nm)
-yellow_refl = gaussian(wavelengths, 560, 60, 0.85) + gaussian(wavelengths, 620, 50, 0.6) + 0.05
-
-# Subtractive mixing: multiply reflectances
-red_blue_mix = red_refl * blue_refl
-red_yellow_mix = red_refl * yellow_refl
-blue_yellow_mix = blue_refl * yellow_refl
-
-fig, axes = plt.subplots(2, 3, figsize=(14, 8))
-fig.patch.set_facecolor('#1f2937')
-
-def plot_spectrum(ax, wavelengths, spectrum, title, fill_color):
-    ax.set_facecolor('#111827')
-    ax.fill_between(wavelengths, spectrum, alpha=0.3, color=fill_color)
-    ax.plot(wavelengths, spectrum, color=fill_color, linewidth=2)
-    ax.set_ylim(0, 1)
-    ax.set_title(title, color='white', fontsize=10)
-    ax.tick_params(colors='gray')
-    ax.set_xlabel('Wavelength (nm)', color='gray', fontsize=8)
-
-plot_spectrum(axes[0, 0], wavelengths, red_refl, 'Red pigment', '#ef4444')
-plot_spectrum(axes[0, 1], wavelengths, blue_refl, 'Blue pigment', '#3b82f6')
-plot_spectrum(axes[0, 2], wavelengths, yellow_refl, 'Yellow pigment', '#eab308')
-plot_spectrum(axes[1, 0], wavelengths, red_blue_mix, 'Red + Blue = Dark purple', '#7c3aed')
-plot_spectrum(axes[1, 1], wavelengths, red_yellow_mix, 'Red + Yellow = Orange', '#f97316')
-plot_spectrum(axes[1, 2], wavelengths, blue_yellow_mix, 'Blue + Yellow = Green', '#22c55e')
-
-plt.suptitle('Subtractive Color Mixing: Reflectance Spectra', color='white', fontsize=14, y=1.02)
-plt.tight_layout()
-plt.show()
-
-print("Subtractive mixing = multiply reflectances")
-print("  Red + Blue: both absorb green, little light left -> dark purple")
-print("  Red + Yellow: overlap in orange region -> bright orange")
-print("  Blue + Yellow: overlap in green region -> green")
-print()
-print("Notice: every mixture is DARKER than either parent.")
-print("Subtractive mixing always removes light, never adds it.")`,
-      challenge: 'Mix all three pigments (red * blue * yellow reflectance). What color do you get? Plot the result. This is why mixing all your paints makes brown/black.',
-      successHint: 'Understanding reflectance spectra transforms color mixing from guesswork to science. Professional painters, textile designers, and cosmetics chemists all use spectral models to predict mixture colors.',
+    'Indigo': {
+        'absorption': gaussian(wavelengths, 600, 50, 0.95) + gaussian(wavelengths, 700, 40, 0.7),
+        'color': '#284b8c'
     },
-    {
-      title: 'Natural dyes of Assam — chemistry from the earth',
-      concept: `Assam has one of the richest traditions of natural dyeing in the world. The Mishing, Bodo, and Karbi communities have used plant-based dyes for centuries on Muga, Eri, and Pat silk.
-
-Major natural dyes of Assam and their chemistry:
-- **Indigo** (from *Strobilanthes cusia*, locally called "rum"): the molecule contains two conjugated ring systems; fermentation converts the precursor (indican) into indigotin, a deep blue
-- **Turmeric** (from *Curcuma longa*): curcumin absorbs blue light (420-430 nm), reflects yellow-orange; pH-sensitive — turns red in alkaline solutions
-- **Lac** (from lac insects on trees): anthraquinone-based red dye, used on Muga silk
-- **Iron rust** (from soaking iron in water): produces black/dark brown by forming iron tannate when combined with tannin-rich bark
-- **Symplocos bark**: used as a mordant — it doesn't add color but helps other dyes bind to fabric
-
-**Mordants** are metal salts (alum, iron, tin, chrome) that form a chemical bridge between the fiber and the dye molecule. Without a mordant, most natural dyes wash out. With one, they can last centuries.`,
-      analogy: 'A mordant is like glue between a sticker (dye) and a surface (fiber). The sticker alone might peel off in the wash. The glue (mordant) chemically bonds both to the dye and to the fiber, making the color permanent. Different glues (mordants) also change the color — iron darkens, alum brightens, tin yellows.',
-      storyConnection: 'The girl gathered her pigments from the land around her — riverbank clay for ochre, indigo leaves for blue, turmeric root for yellow. This is exactly how Assamese weavers have prepared dyes for generations. Her monsoon paintings were made with the same molecules that color Muga silk.',
-      checkQuestion: 'If you dip turmeric-dyed cloth into soapy water (which is alkaline), it turns red. Why? And what happens when you rinse it in vinegar (acidic)?',
-      checkAnswer: 'Curcumin is a pH indicator. In alkaline conditions (soap, pH > 8), the molecule changes shape — a proton is removed, altering the conjugated system and shifting absorption from blue to green. This makes it reflect red instead of yellow. In acid (vinegar, pH < 6), the proton returns, restoring the yellow color. It is a reversible chemical reaction.',
-      codeIntro: 'Plot the absorption spectra of major Assamese natural dyes.',
-      code: `import numpy as np
-import matplotlib.pyplot as plt
-
-wavelengths = np.arange(380, 701)
-
-def gaussian(x, center, width, height):
-    return height * np.exp(-((x - center) ** 2) / (2 * width ** 2))
-
-# Approximate absorption spectra of natural dyes
-dyes = {
-    'Indigo (rum plant)': {
-        'absorption': gaussian(wavelengths, 610, 35, 0.9) + gaussian(wavelengths, 660, 30, 0.6),
-        'color': '#1e40af',
-        'reflects': 'blue',
+    'Saffron Yellow': {
+        'absorption': gaussian(wavelengths, 420, 30, 0.9) + gaussian(wavelengths, 460, 35, 0.7),
+        'color': '#e6a817'
     },
-    'Turmeric (curcumin)': {
-        'absorption': gaussian(wavelengths, 425, 30, 0.85) + gaussian(wavelengths, 460, 25, 0.5),
-        'color': '#eab308',
-        'reflects': 'yellow-orange',
-    },
-    'Lac dye (anthraquinone)': {
-        'absorption': gaussian(wavelengths, 520, 35, 0.8) + gaussian(wavelengths, 490, 25, 0.5),
-        'color': '#dc2626',
-        'reflects': 'red',
-    },
-    'Iron tannate (black)': {
-        'absorption': 0.7 + gaussian(wavelengths, 500, 100, 0.25),
-        'color': '#374151',
-        'reflects': 'very little (dark)',
+    'Chlorophyll (leaf green)': {
+        'absorption': gaussian(wavelengths, 430, 20, 0.95) + gaussian(wavelengths, 660, 25, 0.85),
+        'color': '#2d7a3a'
     },
 }
 
-fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+fig, axes = plt.subplots(2, 2, figsize=(14, 8))
 fig.patch.set_facecolor('#1f2937')
-fig.suptitle('Natural Dyes of Assam: Absorption Spectra', color='white', fontsize=14)
 
-for ax, (name, data) in zip(axes.flat, dyes.items()):
+for ax, (name, data) in zip(axes.flatten(), pigments.items()):
     ax.set_facecolor('#111827')
-    absorption = np.clip(data['absorption'], 0, 1)
+    absorption = data['absorption']
     reflectance = 1 - absorption
 
-    ax.fill_between(wavelengths, absorption, alpha=0.4, color=data['color'])
-    ax.plot(wavelengths, absorption, color=data['color'], linewidth=2, label='Absorption')
-    ax.plot(wavelengths, reflectance, color='white', linewidth=1, linestyle='--', alpha=0.5, label='Reflectance')
+    ax.fill_between(wavelengths, absorption, alpha=0.3, color='#ef4444', label='Absorbed')
+    ax.fill_between(wavelengths, reflectance, alpha=0.3, color='#22c55e', label='Reflected')
+    ax.plot(wavelengths, absorption, color='#ef4444', linewidth=1.5)
+    ax.plot(wavelengths, reflectance, color='#22c55e', linewidth=1.5)
 
-    ax.set_title(name, color='white', fontsize=10)
-    ax.set_ylim(0, 1.1)
-    ax.set_xlabel('Wavelength (nm)', color='gray', fontsize=8)
-    ax.tick_params(colors='gray')
-    ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=7)
+    # Color swatch
+    ax.add_patch(plt.Rectangle((700, 0.75), 45, 0.2, color=data['color'], transform=ax.transData))
+    ax.text(722, 0.85, 'Color', color='white', ha='center', fontsize=7, fontweight='bold')
+
+    ax.set_title(name, color='white', fontsize=11)
+    ax.set_xlabel('Wavelength (nm)', color='white', fontsize=8)
+    ax.set_ylabel('Fraction', color='white', fontsize=8)
+    ax.set_ylim(0, 1.05)
+    ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=7, loc='center right')
+    ax.tick_params(colors='gray', labelsize=7)
 
 plt.tight_layout()
 plt.show()
 
-print("Natural dyes of Assam:")
-print("  Indigo: absorbs red/orange -> appears deep blue")
-print("  Turmeric: absorbs blue/violet -> appears yellow")
-print("  Lac: absorbs green/blue -> appears red")
-print("  Iron tannate: absorbs broadly -> appears black/dark brown")
+print("What makes each pigment its color:")
+print("  Red Ochre: absorbs blue+green, reflects red+orange")
+print("  Indigo: absorbs red+orange, reflects blue")
+print("  Saffron: absorbs violet+blue, reflects yellow+orange+red")
+print("  Chlorophyll: absorbs violet+blue AND red, reflects GREEN")
 print()
-print("These dyes have colored Muga silk for over 1,000 years.")
-print("The chemistry is the same as synthetic dyes —")
-print("conjugated bonds absorbing specific wavelengths.")`,
-      challenge: 'Turmeric changes color with pH. Model this: shift the absorption peak from 425 nm (yellow, pH 4) to 550 nm (red, pH 10). Plot both spectra on the same graph.',
-      successHint: 'Natural dyes are applied chemistry that predates chemistry as a field. Assamese weavers were practicing spectral absorption and mordant chemistry centuries before scientists had names for these processes.',
+print("Chlorophyll has TWO absorption peaks — that's why")
+print("leaves are green: it's the only color NOT absorbed.")`,
+      challenge: 'Design a pigment that appears purple. What wavelengths should it absorb? Create a new absorption spectrum with peaks in the green region (around 500-560nm) and see if the reflected light looks purple.',
+      successHint: 'Every color you see in the world — the blue sky, green leaves, red clay — is determined by which wavelengths are absorbed and which are reflected. Pigment chemistry is the molecular explanation for the visual world.',
     },
     {
-      title: 'Color in culture — why red means different things in different places',
-      concept: `Color is physics, but color **meaning** is culture. The same wavelength of light triggers completely different emotional and symbolic responses across civilizations.
+      title: 'Mixing colors — the math of subtractive blending',
+      concept: `When the girl mixed pigments on her palette, she was performing a mathematical operation: multiplying reflectance curves.
 
-In Assamese culture:
-- **Red** (rongali): fertility, marriage, prosperity. Brides wear red *mekhela sadors*. The Rongali Bihu festival name literally means "colorful/joyful."
-- **White** (boga): purity, mourning. Worn during Bohag Bihu prayers and funerals.
-- **Gold/Yellow** (xonali): Muga silk's natural golden color represents Assam's identity. The word "Muga" comes from "muga" meaning amber-colored.
-- **Indigo/Blue**: the working color — indigo-dyed cotton was everyday wear for farmers and weavers.
+If Pigment A reflects 80% of red light and Pigment B reflects 50% of red light, the mixture reflects approximately **0.8 × 0.5 = 40%** of red light. This is the **multiplicative model** of subtractive mixing:
 
-Contrast with other cultures:
-- In China, red = luck and prosperity (same as Assam). White = death and mourning (same as Assam, opposite of Western).
-- In the West, white = purity and weddings. Black = mourning. Red = danger or love.
-- In Islam, green is sacred. In Hinduism, saffron orange is sacred.
+**R_mix(λ) = R_A(λ) × R_B(λ)**
 
-These associations are learned, not innate. A newborn has no color associations — culture installs them.`,
-      analogy: 'Color symbolism is like language. The sound "dog" means a four-legged animal in English, but nothing in Japanese. Similarly, the color red means "stop" on a traffic light, "love" on a Valentine card, and "good luck" at a Chinese New Year celebration. Same stimulus, different meaning — because meaning is assigned by culture, not physics.',
-      storyConnection: 'The girl didn\'t just paint what she saw — she chose colors loaded with meaning. The vermillion red in her monsoon sky wasn\'t just a wavelength; it was rongali, the color of Bihu joy. The indigo in her clouds wasn\'t just absorbed orange; it was the color of Assamese working life. Her paintings spoke two languages: physics and culture.',
-      checkQuestion: 'Why do most warning signs around the world use red and yellow, even in cultures where those colors have positive meanings?',
-      checkAnswer: 'Biological constraints override cultural associations when survival is at stake. Red and yellow are the wavelengths our eyes detect most efficiently against green backgrounds (vegetation). Our primate ancestors evolved to spot ripe red fruit and yellow predators. This biological wiring for attention to red/yellow is universal, even though the cultural meanings vary.',
-      codeIntro: 'Map color associations across cultures using a visualization.',
+This is why mixing paints always makes colors **darker** — each pigment removes some light, and the combination removes more. It's also why mixing too many pigments gives you muddy brown/grey: you've absorbed most of the visible spectrum.
+
+Artists learn to mix with as few pigments as possible. A skilled painter can create any color from just 5-6 base pigments. The girl painting rain would need:
+- White (titanium dioxide — reflects everything)
+- A warm red, a cool blue, a bright yellow
+- Black (carbon — absorbs everything)
+- Perhaps a green (to avoid mixing blue+yellow, which often turns muddy)`,
+      analogy: 'Mixing pigments is like passing light through multiple filters. If you put on red sunglasses (blocks blue and green) and then put blue sunglasses on top (blocks red and green), almost no light gets through — you see near-black. Each filter/pigment subtracts; the combination subtracts more.',
+      storyConnection: 'The girl spent hours mixing on her palette to get the exact grey of monsoon clouds — not too blue, not too warm. That grey required a careful balance: enough absorption to darken the white canvas, but evenly across all wavelengths so no single color dominated. Grey is the hardest color to mix because it requires perfect balance.',
+      checkQuestion: 'Why does mixing all paint colors together give you a muddy dark brown instead of a clean black?',
+      checkAnswer: 'Real pigments are impure — they don\'t absorb exactly the wavelengths they should. Each has absorption "tails" that leak into neighboring wavelengths. When you mix many impure pigments, the overlapping tails leave small amounts of warm (red/orange) light reflected, giving that characteristic muddy brown. A true black requires a pigment like carbon black that absorbs uniformly across all wavelengths.',
+      codeIntro: 'Simulate subtractive color mixing by multiplying reflectance curves.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
-# Color associations across cultures
-cultures = ['Assamese', 'Western', 'Chinese', 'Japanese', 'Islamic']
-colors_list = ['Red', 'White', 'Black', 'Gold/Yellow', 'Green', 'Blue']
+wavelengths = np.linspace(380, 750, 500)
 
-# Association matrix: -1 (negative), 0 (neutral), 1 (positive)
-associations = np.array([
-    # Red  White Black Gold Green Blue
-    [ 1,    0,   -1,    1,    0,    0],  # Assamese
-    [ 0,    1,   -1,    1,    0,    0],  # Western
-    [ 1,   -1,    0,    1,    0,    0],  # Chinese
-    [ 0,   -1,   -1,    1,    0,    1],  # Japanese
-    [ 0,    1,   -1,    1,    1,    0],  # Islamic
-])
+def gaussian(x, mu, sigma, amp=1.0):
+    return amp * np.exp(-0.5 * ((x - mu) / sigma) ** 2)
 
-fig, ax = plt.subplots(figsize=(10, 6))
+# Define pigment reflectance curves
+cyan_r = 1 - (gaussian(wavelengths, 650, 60, 0.9) + gaussian(wavelengths, 700, 50, 0.7))
+cyan_r = np.clip(cyan_r, 0.05, 1)
+
+yellow_r = 1 - (gaussian(wavelengths, 430, 30, 0.9) + gaussian(wavelengths, 400, 25, 0.8))
+yellow_r = np.clip(yellow_r, 0.05, 1)
+
+magenta_r = 1 - (gaussian(wavelengths, 530, 40, 0.9))
+magenta_r = np.clip(magenta_r, 0.05, 1)
+
+# Subtractive mixing = multiply reflectances
+green_mix = cyan_r * yellow_r  # cyan + yellow = green
+blue_mix = cyan_r * magenta_r  # cyan + magenta = blue
+red_mix = magenta_r * yellow_r  # magenta + yellow = red
+dark_mix = cyan_r * magenta_r * yellow_r  # all three ≈ black
+
+fig, axes = plt.subplots(2, 2, figsize=(14, 8))
 fig.patch.set_facecolor('#1f2937')
-ax.set_facecolor('#111827')
 
-# Custom colormap: red for negative, gray for neutral, green for positive
-from matplotlib.colors import LinearSegmentedColormap
-cmap = LinearSegmentedColormap.from_list('custom', ['#ef4444', '#374151', '#22c55e'])
+mixes = [
+    ('Cyan + Yellow = Green', [cyan_r, yellow_r], green_mix, ['#06b6d4', '#eab308'], '#22c55e'),
+    ('Cyan + Magenta = Blue', [cyan_r, magenta_r], blue_mix, ['#06b6d4', '#d946ef'], '#3b82f6'),
+    ('Magenta + Yellow = Red', [magenta_r, yellow_r], red_mix, ['#d946ef', '#eab308'], '#ef4444'),
+    ('C + M + Y = Near-Black', [cyan_r, magenta_r, yellow_r], dark_mix, ['#06b6d4', '#d946ef', '#eab308'], '#374151'),
+]
 
-im = ax.imshow(associations, cmap=cmap, aspect='auto', vmin=-1, vmax=1)
-
-ax.set_xticks(range(len(colors_list)))
-ax.set_xticklabels(colors_list, color='white', fontsize=10, rotation=30, ha='right')
-ax.set_yticks(range(len(cultures)))
-ax.set_yticklabels(cultures, color='white', fontsize=10)
-
-# Add text labels
-labels = {1: 'Positive', 0: 'Neutral', -1: 'Negative'}
-for i in range(len(cultures)):
-    for j in range(len(colors_list)):
-        val = associations[i, j]
-        text_color = 'white' if val != 0 else 'gray'
-        ax.text(j, i, labels[val], ha='center', va='center',
-                color=text_color, fontsize=8, fontweight='bold')
-
-ax.set_title('Color Symbolism Across Cultures', color='white', fontsize=13)
-
-# Add colorbar
-cbar = plt.colorbar(im, ax=ax, ticks=[-1, 0, 1])
-cbar.ax.set_yticklabels(['Negative\\n(mourning,\\ndanger)', 'Neutral', 'Positive\\n(luck,\\npurity)'], color='white', fontsize=8)
-cbar.ax.tick_params(colors='gray')
+for ax, (title, components, result, comp_colors, res_color) in zip(axes.flatten(), mixes):
+    ax.set_facecolor('#111827')
+    for comp, cc in zip(components, comp_colors):
+        ax.plot(wavelengths, comp, color=cc, linewidth=1, alpha=0.5, linestyle='--')
+    ax.plot(wavelengths, result, color=res_color, linewidth=2.5, label='Mixed result')
+    ax.fill_between(wavelengths, result, alpha=0.2, color=res_color)
+    ax.set_title(title, color='white', fontsize=11)
+    ax.set_xlabel('Wavelength (nm)', color='white', fontsize=8)
+    ax.set_ylabel('Reflectance', color='white', fontsize=8)
+    ax.set_ylim(0, 1.05)
+    ax.tick_params(colors='gray', labelsize=7)
 
 plt.tight_layout()
 plt.show()
 
-print("Same color, different meaning:")
-print("  Red: marriage joy (Assam) vs. danger (West) vs. luck (China)")
-print("  White: mourning (Assam, China) vs. purity (West)")
-print("  Gold: sacred across almost all cultures")
+print("Subtractive mixing results:")
+print("  Cyan + Yellow = Green (both reflect green)")
+print("  Cyan + Magenta = Blue (both reflect blue)")
+print("  Magenta + Yellow = Red (both reflect red)")
+print("  C + M + Y = near-black (almost nothing reflected)")
 print()
-print("Color physics is universal. Color meaning is cultural.")
-print("A painter must understand both to communicate effectively.")`,
-      challenge: 'Add a row for your own cultural background. What do the six colors mean to you? Are your associations more like Assamese or Western patterns?',
-      successHint: 'From wavelengths to pigment chemistry to cultural symbolism — color sits at the intersection of physics, chemistry, biology, and anthropology. In Level 2, we move into digital color: RGB, color spaces, and programming with color.',
+print("Each pigment REMOVES light. More pigments = less light = darker.")`,
+      challenge: 'Mix cyan and yellow at different ratios (e.g., 70% cyan + 30% yellow) by weighting the reflectances: mix = cyan_r**0.7 * yellow_r**0.3. How does the resulting green shift?',
+      successHint: 'Color mixing is not guesswork — it is multiplication of reflectance spectra. Every painter, printer, and textile dyer applies this principle, whether they know the math or not.',
+    },
+    {
+      title: 'Natural dyes of Assam — chemistry from the land',
+      concept: `Assam has one of the richest natural dyeing traditions in the world. The Bodo, Mishing, and Karbi communities have used plant-based dyes for centuries:
+
+- **Turmeric** (haldi): bright yellow from the molecule **curcumin** — a conjugated diketone
+- **Lac** (lakh): deep crimson from scale insects — the molecule **laccaic acid**
+- **Indigo** (neel): blue from the Indigofera plant — the molecule **indigotin**
+- **Iron mud** (from rice paddy fields): black/dark brown from **iron tannate** compounds
+- **Jackfruit wood**: golden-yellow from **morin**, a flavonoid
+- **Symplocos bark**: used as a **mordant** — it doesn't give color itself but helps other dyes bond permanently to fibers
+
+A **mordant** is a chemical bridge between the fiber and the dye. Without it, many dyes wash out. Common mordants: alum (aluminum potassium sulfate), iron (ferrous sulfate), tin, and plant-based ones like Symplocos.
+
+The chemistry: mordant metal ions form coordination complexes with both the dye molecule and the fiber molecule, creating a stable three-way bond. Different mordants with the same dye give different colors — iron darkens, alum brightens, tin intensifies.`,
+      analogy: 'A mordant is like double-sided tape. The dye is a poster, the fiber is the wall. Without tape (mordant), the poster falls off when it rains (washing). With tape, the poster stays fixed. Different tapes (mordants) hold differently and can even change how the poster looks.',
+      storyConnection: 'The girl\'s natural pigments came from the same earth and plants that Assamese weavers have used for generations. When she ground ochre from clay and squeezed green from leaves, she was extracting the same iron oxides and chlorophylls. Her painting was rooted — literally — in the chemistry of Assam\'s soil.',
+      checkQuestion: 'Turmeric-dyed cloth fades quickly in sunlight. Indigo-dyed cloth lasts for decades. Both are plant dyes. What makes indigo so much more stable?',
+      checkAnswer: 'Indigo (indigotin) is insoluble in water and has a very stable molecular structure — its conjugated ring system resists UV breakdown. Curcumin (turmeric) is partially soluble and has bonds that UV light can break (photodegradation). Stability depends on the specific molecular structure, not just whether it\'s "natural." Some natural dyes outlast synthetics; some fade in days.',
+      codeIntro: 'Compare the color stability of natural dyes over time (simulated UV exposure).',
+      code: `import numpy as np
+import matplotlib.pyplot as plt
+
+# Simulate color fading under UV light (wash/sun cycles)
+cycles = np.arange(0, 52)  # 1 year of weekly sun/wash
+
+# Fading models: exponential decay with different half-lives
+dyes = {
+    'Turmeric (curcumin)': {'half_life': 4, 'color': '#e6a817', 'initial': 100},
+    'Saffron': {'half_life': 8, 'color': '#d97706', 'initial': 100},
+    'Lac (laccaic acid)': {'half_life': 20, 'color': '#dc2626', 'initial': 100},
+    'Indigo (indigotin)': {'half_life': 80, 'color': '#3b82f6', 'initial': 100},
+    'Iron mud (iron tannate)': {'half_life': 150, 'color': '#374151', 'initial': 100},
+}
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
+fig.patch.set_facecolor('#1f2937')
+
+# Fading curves
+ax1.set_facecolor('#111827')
+for name, d in dyes.items():
+    decay = d['initial'] * (0.5 ** (cycles / d['half_life']))
+    ax1.plot(cycles, decay, color=d['color'], linewidth=2.5, label=name)
+
+ax1.set_xlabel('Weeks of sun/wash exposure', color='white')
+ax1.set_ylabel('Color intensity (%)', color='white')
+ax1.set_title('Color Fading: Natural Dye Stability', color='white', fontsize=13)
+ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
+ax1.tick_params(colors='gray')
+ax1.set_ylim(0, 105)
+
+# Mordant effect
+ax2.set_facecolor('#111827')
+mordants = ['No mordant', 'Alum', 'Iron', 'Tin']
+# Turmeric with different mordants (half-life improvement)
+half_lives = [4, 12, 25, 18]
+colors_m = ['#fbbf24', '#f59e0b', '#92400e', '#d97706']
+
+for mordant, hl, col in zip(mordants, half_lives, colors_m):
+    decay = 100 * (0.5 ** (cycles / hl))
+    ax2.plot(cycles, decay, color=col, linewidth=2.5, label=f'{mordant} (t½={hl}w)')
+
+ax2.set_xlabel('Weeks of exposure', color='white')
+ax2.set_ylabel('Color intensity (%)', color='white')
+ax2.set_title('Turmeric + Different Mordants', color='white', fontsize=13)
+ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
+ax2.tick_params(colors='gray')
+ax2.set_ylim(0, 105)
+
+plt.tight_layout()
+plt.show()
+
+print("Key findings:")
+print("  Turmeric fades fastest (half-life: 4 weeks)")
+print("  Iron mud is most stable (half-life: 150 weeks)")
+print("  Mordants dramatically improve stability:")
+print("    Turmeric alone: t½ = 4 weeks")
+print("    Turmeric + iron mordant: t½ = 25 weeks (6× better)")
+print()
+print("This is why traditional dyers always use mordants —")
+print("the chemistry of bonding matters as much as the color itself.")`,
+      challenge: 'Add a synthetic dye (e.g., "Synthetic reactive dye" with half_life=200) to the first chart. Compare it with the natural dyes. Why have synthetic dyes replaced natural ones in most commercial textiles?',
+      successHint: 'Assam\'s natural dye traditions encode centuries of empirical chemistry. Modern textile science is rediscovering these techniques as sustainable alternatives to synthetic dyes.',
+    },
+    {
+      title: 'Color in culture — why colors mean different things everywhere',
+      concept: `Color is not just physics and chemistry — it is deeply cultural. The same wavelength of light can mean joy in one culture and mourning in another:
+
+- **White**: purity in Western weddings, mourning in Hindu/Buddhist traditions
+- **Red**: danger in traffic signs, prosperity in Chinese culture, bridal color in India
+- **Saffron/orange**: sacred in Hinduism, autumn in Western culture
+- **Green**: Islam's sacred color, nature/eco in modern branding, Assam's tea gardens
+
+In Assam specifically:
+- **Muga gold** (from muga silk): royalty, prestige, Assamese identity — the golden shimmer of muga silk is unique to Assam in the entire world
+- **Red** (eri silk border patterns): auspiciousness in mekhela chador designs
+- **White with red border**: traditional Assamese bihu gamosa — purity with vitality
+- **Green**: the tea gardens, the Brahmaputra's banks, fertility of the land
+
+Color associations are learned, not innate. Babies don't prefer any particular color. Language also shapes perception — the Russian language has separate words for light blue (goluboy) and dark blue (siniy), and Russian speakers can distinguish those shades faster than English speakers.`,
+      analogy: 'Color meaning is like word meaning — it depends on the language. The sound "gift" means a present in English but poison in German. Similarly, white means celebration in New York but mourning in Varanasi. The physics (sound waves, light waves) is the same; the interpretation is cultural.',
+      storyConnection: 'The girl chose her monsoon colors deliberately — not just for physical accuracy but for emotional truth. The grey of rainclouds carries a cultural weight in Assam: it means the monsoon has arrived, the paddy fields will flood, life will renew. She painted not just wavelengths but meaning.',
+      checkQuestion: 'Ancient Greek texts (Homer\'s Iliad) describe the sea as "wine-dark" rather than blue. Does this mean the Greeks couldn\'t see blue?',
+      checkAnswer: 'No — their cone cells worked identically to ours. But ancient Greek had no single word for "blue." Without a distinct linguistic category, they grouped blue shades with dark/purple tones. Studies show that language affects how quickly and accurately we categorize colors, though the underlying perception is the same. This is a mild version of the Sapir-Whorf hypothesis.',
+      codeIntro: 'Visualize how different cultures associate colors with concepts.',
+      code: `import numpy as np
+import matplotlib.pyplot as plt
+
+# Cultural color associations
+cultures = ['Western', 'Indian/Hindu', 'Chinese', 'Assamese', 'Japanese']
+concepts = ['Joy', 'Mourning', 'Royalty', 'Purity', 'Danger', 'Nature']
+
+# Color associations (approximate RGB values)
+associations = {
+    'Western':      {'Joy': '#fbbf24', 'Mourning': '#1f2937', 'Royalty': '#7c3aed', 'Purity': '#f5f5f5', 'Danger': '#ef4444', 'Nature': '#22c55e'},
+    'Indian/Hindu': {'Joy': '#ef4444', 'Mourning': '#f5f5f5', 'Royalty': '#f59e0b', 'Purity': '#f59e0b', 'Danger': '#1f2937', 'Nature': '#22c55e'},
+    'Chinese':      {'Joy': '#ef4444', 'Mourning': '#f5f5f5', 'Royalty': '#fbbf24', 'Purity': '#f5f5f5', 'Danger': '#1f2937', 'Nature': '#22c55e'},
+    'Assamese':     {'Joy': '#d4a017', 'Mourning': '#f5f5f5', 'Royalty': '#d4a017', 'Purity': '#f5f5f5', 'Danger': '#ef4444', 'Nature': '#16a34a'},
+    'Japanese':     {'Joy': '#ef4444', 'Mourning': '#1f2937', 'Royalty': '#7c3aed', 'Purity': '#f5f5f5', 'Danger': '#ef4444', 'Nature': '#22c55e'},
+}
+
+fig, ax = plt.subplots(figsize=(14, 7))
+fig.patch.set_facecolor('#1f2937')
+ax.set_facecolor('#111827')
+
+cell_w, cell_h = 1.0, 0.8
+for i, culture in enumerate(cultures):
+    for j, concept in enumerate(concepts):
+        color = associations[culture][concept]
+        rect = plt.Rectangle((j * cell_w + 0.05, (len(cultures) - 1 - i) * cell_h + 0.05),
+                              cell_w - 0.1, cell_h - 0.1, facecolor=color, edgecolor='gray', linewidth=0.5)
+        ax.add_patch(rect)
+        # Add text label for readability
+        brightness = sum(int(color[k:k+2], 16) for k in (1, 3, 5)) / (3 * 255)
+        text_color = '#1f2937' if brightness > 0.5 else 'white'
+        ax.text(j * cell_w + cell_w/2, (len(cultures) - 1 - i) * cell_h + cell_h/2,
+                color, ha='center', va='center', color=text_color, fontsize=7, fontfamily='monospace')
+
+# Labels
+for i, culture in enumerate(cultures):
+    ax.text(-0.15, (len(cultures) - 1 - i) * cell_h + cell_h/2, culture,
+            ha='right', va='center', color='white', fontsize=10, fontweight='bold')
+for j, concept in enumerate(concepts):
+    ax.text(j * cell_w + cell_w/2, len(cultures) * cell_h + 0.1, concept,
+            ha='center', va='bottom', color='white', fontsize=10, fontweight='bold')
+
+ax.set_xlim(-0.2, len(concepts) * cell_w + 0.1)
+ax.set_ylim(-0.1, len(cultures) * cell_h + 0.4)
+ax.set_aspect('equal')
+ax.set_xticks([]); ax.set_yticks([])
+ax.set_title('Color Associations Across Cultures', color='white', fontsize=14, pad=15)
+
+plt.tight_layout()
+plt.show()
+
+print("Same color, different meanings:")
+print("  White: wedding dress (West) vs mourning sari (India)")
+print("  Red: danger/stop (West) vs prosperity/bridal (India/China)")
+print("  Gold: luxury (everywhere) but uniquely Assamese (muga silk)")
+print()
+print("Color meaning is LEARNED, not built into the wavelength.")
+print("A 580nm photon doesn't 'contain' happiness or danger —")
+print("your culture taught you what it means.")`,
+      challenge: 'Research the color associations of one more culture (e.g., Egyptian, Maori, or Brazilian) and add it to the chart. What patterns do you notice? Are any color associations nearly universal?',
+      successHint: 'Understanding color as a cultural phenomenon — not just a physical one — is essential for design, art, communication, and cross-cultural understanding. The girl who painted rain understood this instinctively: she painted not just light but meaning.',
     },
   ];
 
