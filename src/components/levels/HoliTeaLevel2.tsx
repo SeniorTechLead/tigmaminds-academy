@@ -262,6 +262,91 @@ print("of a molecule before it is even synthesized.")`,
       successHint: 'Chromophore chemistry is molecular engineering. Understanding how structure creates colour lets you design dyes rationally rather than by trial and error. This is the foundation of materials science, pharmaceutical chemistry, and photovoltaic research.',
     },
     {
+      title: 'Chromophores — the minimum unit of colour',
+      concept: `A **chromophore** is the specific part of a molecule responsible for absorbing visible light. It is the minimum structural unit that produces colour — strip it away and the molecule becomes colourless.
+
+Common chromophores in dyes and nature:
+- **Azo group** (-N=N-): the single most important chromophore in the dye industry. Two nitrogen atoms double-bonded, linking aromatic rings. Azo dyes account for ~70% of all commercial dyes.
+- **Carbonyl group** (C=O): when conjugated with aromatic rings (as in anthraquinone dyes), absorbs visible light. Found in alizarin (red from madder root).
+- **Quinoid system**: alternating single-double bonds in a ring. Found in indigo (the blue of jeans).
+- **Porphyrin ring**: the chromophore in chlorophyll (green) and haemoglobin (red). A large, planar ring with a metal atom at the centre.
+
+The colour of a chromophore can be fine-tuned by attaching **auxochromes** — groups that modify the electron distribution without being chromophores themselves. Common auxochromes: -OH (hydroxyl), -NH2 (amino), -NO2 (nitro), -SO3H (sulphonic acid).
+
+The relationship: chromophore + auxochrome = the full dye molecule. The chromophore provides the base colour; the auxochrome adjusts the shade, solubility, and fibre-binding ability.`,
+      analogy: 'If a dye molecule is a car, the chromophore is the engine (it produces the essential function — colour). The auxochromes are the accessories: turbocharger (deepens colour), air conditioning (adds water solubility), tow hook (adds fibre-binding). You cannot drive without the engine, but the accessories determine where and how well you drive.',
+      storyConnection: 'Every colour in the tea garden Holi celebration exists because of a specific chromophore. The yellow of turmeric: a bis-keto chromophore. The blue of indigo: a quinoid chromophore. The red of lac dye: an anthraquinone chromophore. Nature invented these chromophores; chemists learned to read and replicate them.',
+      checkQuestion: 'The azo group (-N=N-) is the most common chromophore in synthetic dyes. But there are almost no azo chromophores in nature. Why might evolution have avoided this structure?',
+      checkAnswer: 'Azo bonds are relatively unstable to enzymatic reduction — bacteria in soil and gut can easily cleave them, releasing the aromatic amines on either side. Some of these amines are toxic or carcinogenic. Evolution may have selected against azo-based pigments because they would break down into harmful fragments inside living organisms. Synthetic chemistry does not face this selection pressure, which is why azo dyes dominate industrially but are absent biologically.',
+      codeIntro: 'Visualize the major chromophore families and their absorption characteristics.',
+      code: `import numpy as np
+import matplotlib.pyplot as plt
+
+wavelengths = np.linspace(300, 750, 500)
+
+def gaussian_peak(wl, center, width, intensity=1.0):
+    return intensity * np.exp(-0.5 * ((wl - center) / width) ** 2)
+
+# Major chromophore families
+chromophores = {
+    'Azo (-N=N-)': {'peak': 480, 'width': 35, 'color': '#ef4444', 'apparent': 'Red-Orange'},
+    'Anthraquinone (C=O)': {'peak': 520, 'width': 30, 'color': '#a855f7', 'apparent': 'Red-Violet'},
+    'Quinoid (indigo)': {'peak': 610, 'width': 28, 'color': '#3b82f6', 'apparent': 'Blue'},
+    'Porphyrin (chlorophyll)': {'peak': 430, 'width': 20, 'color': '#22c55e', 'apparent': 'Green'},
+    'Triphenylmethane': {'peak': 590, 'width': 25, 'color': '#06b6d4', 'apparent': 'Blue-Green'},
+}
+
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 8))
+fig.patch.set_facecolor('#1f2937')
+
+# Absorption spectra
+ax1.set_facecolor('#111827')
+for name, data in chromophores.items():
+    spectrum = gaussian_peak(wavelengths, data['peak'], data['width'])
+    ax1.plot(wavelengths, spectrum, linewidth=2, color=data['color'],
+             label=f"{name} (abs: {data['peak']}nm)")
+    ax1.fill_between(wavelengths, spectrum, alpha=0.1, color=data['color'])
+
+ax1.set_xlabel('Wavelength (nm)', color='white')
+ax1.set_ylabel('Absorption', color='white')
+ax1.set_title('Absorption Spectra of Major Chromophore Families', color='white', fontsize=13)
+ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
+ax1.tick_params(colors='gray')
+
+# Commercial usage bar chart
+ax2.set_facecolor('#111827')
+names = list(chromophores.keys())
+market_share = [70, 12, 5, 0, 8]  # approximate % of synthetic dye market
+apparent_colors = [d['apparent'] for d in chromophores.values()]
+colors = [d['color'] for d in chromophores.values()]
+
+bars = ax2.barh(names, market_share, color=colors, alpha=0.8)
+ax2.set_xlabel('Share of synthetic dye market (%)', color='white')
+ax2.set_title('Chromophore Usage in Industry', color='white', fontsize=13)
+ax2.tick_params(colors='gray')
+
+for bar, share, app in zip(bars, market_share, apparent_colors):
+    ax2.text(bar.get_width() + 1, bar.get_y() + bar.get_height()/2,
+             f'{share}% — appears {app}', va='center', color='white', fontsize=9)
+
+plt.tight_layout()
+plt.show()
+
+print("Chromophore families:")
+for name, data in chromophores.items():
+    print(f"  {name}")
+    print(f"    Absorbs at: {data['peak']} nm")
+    print(f"    Appears: {data['apparent']}")
+print()
+print("Azo dyes dominate (70% market share) because:")
+print("  - Easy to synthesize (diazotization + coupling)")
+print("  - Wide colour range (modify auxochromes)")
+print("  - Good fastness properties")
+print("  - Low cost")`,
+      challenge: 'Porphyrin chromophores appear in chlorophyll (green, Mg centre) and haemoglobin (red, Fe centre). Same chromophore, different metal, different colour. Why does the metal matter?',
+      successHint: 'The chromophore concept reduces the complexity of dye chemistry to a manageable set of structural motifs. Learn these five families and you can understand the colour of any molecule.',
+    },
+    {
       title: 'Spectrophotometry — measuring colour scientifically',
       concept: `How do we know exactly what wavelengths a substance absorbs? We use a **spectrophotometer** — an instrument that shines light through a sample and measures how much is absorbed at each wavelength.
 

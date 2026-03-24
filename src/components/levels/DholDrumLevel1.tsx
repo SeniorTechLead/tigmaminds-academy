@@ -617,6 +617,124 @@ print("  C.V. Raman, India's Nobel laureate in physics,")
 print("  studied this in the 1930s and called it 'one of the")
 print("  most fascinating problems in acoustics.'")`,
       challenge: 'The Manipuri pung drum is also tonal (uses a paste similar to syahi). Research: is the pung paste composition the same as tabla syahi? What cultural exchange might explain the similarity?',
+      successHint: 'The distinction between tonal and non-tonal drums is one of the most fascinating intersections of physics and culture. The tabla\'s syahi paste is an ancient engineering solution that predated the mathematics needed to explain it by centuries.',
+    },
+    {
+      title: 'Cultural significance — the drum as communicator',
+      concept: `In many NE Indian traditions, the drum is not just a musical instrument — it is a **communicator**. Specific rhythm patterns signal specific events: celebration, mourning, harvest, war, prayer.
+
+**Dhol in Bihu**: the heartbeat of Assamese Rongali Bihu. The dhol player (dhulia) leads the celebration, and different rhythm patterns (matras) communicate specific moods and instructions:
+- Fast, syncopated patterns = joy, invitation to dance
+- Slow, measured patterns = longing, seasonal transition
+- Specific sequences = signal to form a circle, change dance formation, or end
+
+**Khol in Vaishnavite music**: the clay drum used in Sattriya dance and Borgeet devotional music. Its tonal quality carries melodic information alongside rhythm.
+
+**Pung in Manipur**: central to Meitei martial arts (thang-ta) and Raas Leela performances. The pung player is considered the "director" of the performance.
+
+**Nagara (kettledrum)**: ceremonial drum of royal courts and temples across NE India. Its deep boom announces important events — it was the "public address system" before electricity.
+
+The drum encodes cultural knowledge: a trained listener can identify the occasion, the region, and even the specific village tradition from the rhythm alone. This is an oral tradition preserved in muscle memory rather than written notation.`,
+      analogy: 'Drums as communicators are like a language with vocabulary (individual sounds), grammar (rhythm patterns), and dialects (regional variations). A Bihu dhol pattern is a "sentence" — it conveys specific meaning to listeners who know the "language." Just as spoken language varies by region, drum languages vary by community.',
+      storyConnection: 'The dhol in the story does not just make noise — it "speaks." The thunder carries a message across villages. This is not metaphor — in traditional Assamese communities, the dhol genuinely communicated: announcing Bihu, calling villagers to assembly, marking festivals. The drum was the village\'s voice before the loudspeaker.',
+      checkQuestion: 'If drum rhythms encode cultural knowledge, what happens when younger generations stop learning them?',
+      checkAnswer: 'The knowledge is lost — permanently. Unlike written traditions, drum language exists only in the bodies and memories of practitioners. When a master dhulia dies without teaching, their specific rhythmic vocabulary dies with them. This is why UNESCO and organizations like Sangeet Natak Akademi document and archive traditional drum performances. Digital recording preserves the sound; apprenticeship preserves the understanding.',
+      codeIntro: 'Visualize and compare rhythm patterns from different NE Indian drum traditions.',
+      code: `import numpy as np
+import matplotlib.pyplot as plt
+
+fig, axes = plt.subplots(3, 2, figsize=(14, 10))
+fig.patch.set_facecolor('#1f2937')
+fig.suptitle('Drum Rhythm Patterns of NE India', color='white', fontsize=14)
+
+# Helper: create a rhythm pattern visualization
+def plot_rhythm(ax, pattern, name, color, beats_per_cycle=8):
+    subdivisions = len(pattern)
+    x = np.arange(subdivisions)
+    ax.set_facecolor('#111827')
+    ax.bar(x, pattern, width=0.6, color=color, alpha=0.8)
+    ax.set_ylim(0, 1.3)
+    ax.set_title(name, color=color, fontsize=11, fontweight='bold')
+    ax.set_xlabel('Subdivisions', color='white', fontsize=8)
+    ax.tick_params(colors='gray', labelsize=7)
+    # Mark main beats
+    for i in range(0, subdivisions, subdivisions // beats_per_cycle):
+        ax.axvline(i, color='gray', linestyle=':', linewidth=0.3)
+
+# 1. Bihu Dhol - Jeng Bihu (fast, celebratory)
+bihu_fast = [1, 0, 0.5, 0, 1, 0, 0.8, 0, 1, 0, 0.5, 0, 0.8, 0, 1, 0,
+             1, 0, 0.5, 0, 1, 0, 0.8, 0, 0.5, 0, 1, 0, 0.8, 0.5, 1, 0]
+plot_rhythm(axes[0, 0], bihu_fast, 'Bihu Dhol — Jeng Bihu (celebration)', '#f59e0b')
+
+# 2. Bihu Dhol - slow pattern (Husori)
+bihu_slow = [1, 0, 0, 0, 0.5, 0, 0, 0, 0.8, 0, 0, 0, 0.5, 0, 0, 0,
+             1, 0, 0, 0, 0.5, 0, 0, 0, 0.8, 0, 0, 0, 0.3, 0, 0.5, 0]
+plot_rhythm(axes[0, 1], bihu_slow, 'Bihu Dhol — Husori (devotional)', '#22c55e')
+
+# 3. Khol pattern (Borgeet)
+khol = [0.8, 0, 0.4, 0, 0.6, 0, 0.3, 0, 0.8, 0, 0.4, 0, 0.5, 0.3, 0.7, 0,
+        0.8, 0, 0.4, 0, 0.6, 0, 0.3, 0, 0.9, 0, 0.5, 0.3, 0.7, 0.4, 0.8, 0]
+plot_rhythm(axes[1, 0], khol, 'Khol — Borgeet (devotional song)', '#3b82f6')
+
+# 4. Pung - Manipuri Raas Leela
+pung = [1, 0, 0.6, 0.3, 0, 0.5, 0, 0.8, 0.3, 0, 0.6, 0, 1, 0, 0.5, 0,
+        0.8, 0.3, 0, 0.6, 0, 0.5, 0.3, 0.8, 0, 0.6, 0, 1, 0.3, 0, 0.5, 0]
+plot_rhythm(axes[1, 1], pung, 'Pung — Raas Leela (Manipuri dance)', '#a855f7')
+
+# 5. Comparative analysis radar chart
+ax = axes[2, 0]
+ax.set_facecolor('#111827')
+drums = ['Dhol\\n(Assam)', 'Khol\\n(Assam)', 'Pung\\n(Manipur)', 'Nagara\\n(ceremonial)']
+tempo = [9, 5, 7, 3]
+complexity = [7, 8, 9, 4]
+volume = [10, 5, 7, 10]
+spiritual = [6, 9, 9, 8]
+
+x = np.arange(len(drums))
+w = 0.2
+ax.bar(x - 1.5*w, tempo, w, label='Tempo', color='#f59e0b')
+ax.bar(x - 0.5*w, complexity, w, label='Complexity', color='#22c55e')
+ax.bar(x + 0.5*w, volume, w, label='Volume', color='#3b82f6')
+ax.bar(x + 1.5*w, spiritual, w, label='Spiritual role', color='#a855f7')
+ax.set_xticks(x)
+ax.set_xticklabels(drums, color='white', fontsize=8)
+ax.set_ylabel('Score (0-10)', color='white')
+ax.set_title('Drum Traditions Compared', color='white', fontsize=11)
+ax.legend(facecolor='#1f2937', labelcolor='white', fontsize=7)
+ax.tick_params(colors='gray')
+
+# 6. Pattern density (notes per cycle)
+ax = axes[2, 1]
+ax.set_facecolor('#111827')
+patterns = {'Bihu fast': bihu_fast, 'Bihu slow': bihu_slow, 'Khol': khol, 'Pung': pung}
+names = list(patterns.keys())
+densities = [sum(1 for x in p if x > 0) for p in patterns.values()]
+avg_intensities = [np.mean([x for x in p if x > 0]) for p in patterns.values()]
+pattern_colors = ['#f59e0b', '#22c55e', '#3b82f6', '#a855f7']
+
+ax.scatter(densities, avg_intensities, s=[200]*4, c=pattern_colors, edgecolors='white', linewidth=1)
+for name, d, ai, c in zip(names, densities, avg_intensities, pattern_colors):
+    ax.annotate(name, xy=(d, ai), xytext=(d + 0.3, ai + 0.02), color=c, fontsize=10)
+
+ax.set_xlabel('Notes per cycle (density)', color='white')
+ax.set_ylabel('Average intensity', color='white')
+ax.set_title('Rhythm Character Map', color='white', fontsize=11)
+ax.tick_params(colors='gray')
+
+plt.tight_layout()
+plt.show()
+
+print("NE India drum traditions:")
+print("  Bihu Dhol: the voice of celebration, community gathering")
+print("  Khol: the companion of devotional song (Borgeet)")
+print("  Pung: the director of Manipuri classical performance")
+print("  Nagara: the announcer of ceremony and authority")
+print()
+print("Each tradition encodes cultural knowledge in rhythm.")
+print("The patterns are not random — they are a language.")
+print("When a master drummer dies without passing on their")
+print("repertoire, a vocabulary is lost forever.")`,
+      challenge: 'Create a "fusion" rhythm that combines the Bihu dhol\'s energy with the khol\'s melodic complexity. What musical rules would you follow to make it feel authentic rather than random?',
       successHint: 'Drums are where physics meets culture. The same vibrating membrane that obeys Bessel function mathematics also carries stories, signals celebrations, and defines community identity. Understanding the physics deepens appreciation for the music, not diminishes it.',
     },
   ];
