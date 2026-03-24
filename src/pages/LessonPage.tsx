@@ -213,8 +213,14 @@ export default function LessonPage() {
                 {activeLevel === 'explorer' && <ElephantLevel1 />}
 
                 {activeLevel === 'builder' && (
-                  <div className="space-y-8">
+                  <div className="space-y-12">
                     <ElephantPlayground />
+                    <div>
+                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Now Build the Classifier</h3>
+                      <p className="text-gray-600 dark:text-gray-300 mb-6">
+                        You classified by ear — now do it with code. Edit the parameters, hit Run, and see the waveforms change.
+                      </p>
+                    </div>
                     <CodePlayground
                       title="Elephant Sound Classifier"
                       packages={['numpy', 'matplotlib']}
