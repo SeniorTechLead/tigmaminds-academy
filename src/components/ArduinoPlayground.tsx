@@ -24,16 +24,45 @@ function simulateArduino(code: string, ledCount: number, onLedUpdate: (leds: Led
     // Parse the code for key patterns
     const lines = code.split('\n').map(l => l.trim()).filter(l => l && !l.startsWith('//') && !l.startsWith('#'));
 
-    // Extract delay value
+    // Extract delay value (supports literal and random())
     const getDelay = (line: string): number => {
       const m = line.match(/delay\((\d+)\)/);
-      return m ? parseInt(m[1]) : 0;
+      if (m) return parseInt(m[1]);
+      const r = line.match(/delay\(random\((\d+),\s*(\d+)\)\)/);
+      if (r) return parseInt(r[1]) + Math.floor(Math.random() * (parseInt(r[2]) - parseInt(r[1])));
+      return 0;
+    };
+
+    // Evaluate a value expression: literal number or random(min, max)
+    const evalValue = (expr: string): number => {
+      const num = expr.match(/^(\d+)$/);
+      if (num) return parseInt(num[1]);
+      const rand = expr.match(/random\((\d+),\s*(\d+)\)/);
+      if (rand) {
+        const min = parseInt(rand[1]), max = parseInt(rand[2]);
+        return min + Math.floor(Math.random() * (max - min));
+      }
+      return 0;
     };
 
     // Extract analogWrite/digitalWrite
     const getWrite = (line: string): { pin: number; value: number } | null => {
+      // analogWrite(random(min, max), value) — random pin selection
+      const awRandPin = line.match(/analogWrite\(random\((\d+),\s*(\d+)\),\s*(\d+)\)/);
+      if (awRandPin) {
+        const min = parseInt(awRandPin[1]), max = parseInt(awRandPin[2]);
+        return { pin: min + Math.floor(Math.random() * (max - min)), value: parseInt(awRandPin[3]) };
+      }
+      // analogWrite(pin, random(min, max))
+      const awRandVal = line.match(/analogWrite\((\d+),\s*random\((\d+),\s*(\d+)\)\)/);
+      if (awRandVal) {
+        const min = parseInt(awRandVal[2]), max = parseInt(awRandVal[3]);
+        return { pin: parseInt(awRandVal[1]), value: min + Math.floor(Math.random() * (max - min)) };
+      }
+      // analogWrite(pin, literal)
       const aw = line.match(/analogWrite\((\d+),\s*(\d+)\)/);
       if (aw) return { pin: parseInt(aw[1]), value: parseInt(aw[2]) };
+      // digitalWrite
       const dw = line.match(/digitalWrite\((\d+),\s*(HIGH|LOW|1|0)\)/);
       if (dw) return { pin: parseInt(dw[1]), value: dw[2] === 'HIGH' || dw[2] === '1' ? 255 : 0 };
       return null;
