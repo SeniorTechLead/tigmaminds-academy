@@ -43,6 +43,18 @@ export interface Mentor {
   created_at: string;
 }
 
+export interface Instructor {
+  id: string;
+  name: string;
+  title: string;
+  bio: string;
+  company: string;
+  expertise: string[];
+  image_url: string | null;
+  linkedin_url: string | null;
+  created_at: string;
+}
+
 export interface StudentApplication {
   id: string;
   full_name: string;

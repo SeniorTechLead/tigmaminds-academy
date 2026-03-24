@@ -18,9 +18,9 @@ export default function PrivacyPage() {
             <section className="mb-8">
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">1. Introduction</h2>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                TigmaMinds Foundation ("we," "our," or "us") respects your privacy and is committed to protecting your
+                TigmaMinds Academy ("we," "our," or "us") respects your privacy and is committed to protecting your
                 personal data. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when
-                you interact with our foundation, use our website, or participate in our programs.
+                you interact with our academy, use our website, or participate in our programs.
               </p>
             </section>
 
@@ -57,13 +57,13 @@ export default function PrivacyPage() {
                 We use your information for the following purposes:
               </p>
               <ul className="list-disc pl-6 text-gray-600 dark:text-gray-300 space-y-2 mb-4">
-                <li>To deliver our programs and services to beneficiaries</li>
-                <li>To process donations and manage donor relationships</li>
+                <li>To deliver our programs and services to students</li>
+                <li>To process payments and manage enrollments</li>
                 <li>To communicate with you about our programs, impact, and opportunities to help</li>
                 <li>To assess eligibility for our assistance programs</li>
                 <li>To measure and report on the impact of our work</li>
                 <li>To comply with legal and regulatory obligations</li>
-                <li>To protect the safety and well-being of our beneficiaries and staff</li>
+                <li>To protect the safety and well-being of our students and staff</li>
                 <li>To improve our programs and services based on feedback and outcomes</li>
               </ul>
             </section>
@@ -77,9 +77,9 @@ export default function PrivacyPage() {
                 <li><strong>With your consent:</strong> When you authorize us to share your information</li>
                 <li><strong>Service providers:</strong> With trusted third-party vendors who help us operate (payment processors, hosting providers, communication services)</li>
                 <li><strong>Program partners:</strong> With partner organizations delivering services on our behalf (only necessary information)</li>
-                <li><strong>Donors and supporters:</strong> Aggregated, anonymized information about program impact and outcomes</li>
+                <li><strong>Analytics:</strong> Aggregated, anonymized information about program outcomes and platform usage</li>
                 <li><strong>Legal requirements:</strong> When required by law or to protect the rights and safety of individuals</li>
-                <li><strong>Regulatory bodies:</strong> As required for compliance with charitable organization regulations</li>
+                <li><strong>Regulatory bodies:</strong> As required for compliance with applicable regulations</li>
               </ul>
             </section>
 
@@ -131,7 +131,7 @@ export default function PrivacyPage() {
             <section className="mb-8">
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">8. Children's Privacy</h2>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                As a foundation serving vulnerable populations including children, we take special care to protect the privacy
+                As an academy serving students and career changers including children, we take special care to protect the privacy
                 of minors. When we collect information about children participating in our programs, we do so with appropriate
                 consent from parents or legal guardians. We implement enhanced safeguards to protect children's personal data
                 and never share identifying information publicly without explicit consent.
@@ -161,7 +161,7 @@ export default function PrivacyPage() {
                 If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at:
               </p>
               <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
-                <p className="text-gray-900 dark:text-white font-semibold mb-2">TigmaMinds Foundation</p>
+                <p className="text-gray-900 dark:text-white font-semibold mb-2">TigmaMinds Academy</p>
                 <p className="text-gray-600 dark:text-gray-300">5, Bonbononi Path, Bongaon, Beltola</p>
                 <p className="text-gray-600 dark:text-gray-300">Guwahati, Assam-781028</p>
                 <p className="text-gray-600 dark:text-gray-300 mt-2">Email: info@tigmaminds.org</p>

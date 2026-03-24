@@ -2,9 +2,9 @@ import { Download } from 'lucide-react';
 
 export default function DownloadProject() {
   const handleDownload = () => {
-    const readmeContent = `# TigmaMinds Foundation
+    const readmeContent = `# TigmaMinds Academy
 
-A modern web application for the TigmaMinds Foundation, showcasing programs, impact stories, and providing ways to get involved.
+A modern web application for the TigmaMinds Academy, showcasing programs, impact stories, and providing ways to get involved.
 
 ## Features
 
@@ -72,12 +72,12 @@ npm run build
 
 1. Build the image:
    \`\`\`bash
-   docker build -t tigmaminds-foundation .
+   docker build -t tigmaminds-academy .
    \`\`\`
 
 2. Run the container:
    \`\`\`bash
-   docker run -p 3000:3000 tigmaminds-foundation
+   docker run -p 3000:3000 tigmaminds-academy
    \`\`\`
 
 ## Database Setup
@@ -212,7 +212,7 @@ Thumbs.db
 
 Instructions:
 - Use your IDE or file manager to copy/export the entire project folder
-- Or use: zip -r tigmaminds-foundation.zip . -x "node_modules/*" "dist/*" ".git/*"
+- Or use: zip -r tigmaminds-academy.zip . -x "node_modules/*" "dist/*" ".git/*"
 - Or use Git to clone: git clone [your-repo-url]
 
 Docker configuration files are shown below. Save them to your project root.`);

@@ -10,9 +10,8 @@ export default function Header() {
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
     { name: 'Programs', href: '/programs' },
-    { name: 'Impact', href: '/impact' },
-    { name: 'Apply for Help', href: '/apply' },
-    { name: 'Get Involved', href: '/get-involved' },
+    { name: 'Mentors', href: '/mentors' },
+    { name: 'Blog', href: '/blog' },
     { name: 'Contact', href: '/contact' },
   ];
 
@@ -21,14 +20,14 @@ export default function Header() {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <Link to="/" className="flex items-center space-x-3">
-            <div className="relative w-14 h-14 rounded-full bg-gradient-to-br from-cyan-400 to-green-500 p-[3px] shadow-md">
+            <div className="relative w-14 h-14 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 p-[3px] shadow-md">
               <div className="w-full h-full rounded-full bg-white dark:bg-gray-900 flex items-center justify-center">
-                <span className="text-cyan-500 font-extrabold text-lg tracking-tighter">TMF</span>
+                <span className="text-amber-600 dark:text-amber-400 font-extrabold text-lg tracking-tighter">TMA</span>
               </div>
             </div>
             <div>
               <span className="text-xl font-bold text-gray-900 dark:text-white">TigmaMinds</span>
-              <span className="block text-[10px] text-gray-600 dark:text-gray-400 tracking-[0.52em] uppercase font-medium">Foundation</span>
+              <span className="block text-[10px] text-gray-600 dark:text-gray-400 tracking-[0.52em] uppercase font-medium">Academy</span>
             </div>
           </Link>
 
@@ -37,17 +36,17 @@ export default function Header() {
               <Link
                 key={item.name}
                 to={item.href}
-                className="text-gray-700 dark:text-gray-300 hover:text-sky-600 dark:hover:text-sky-400 font-medium transition-colors relative group"
+                className="text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 font-medium transition-colors relative group"
               >
                 {item.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-sky-600 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-500 group-hover:w-full transition-all duration-300"></span>
               </Link>
             ))}
             <Link
-              to="/get-involved"
-              className="bg-gradient-to-r from-sky-500 to-green-500 text-white px-6 py-2.5 rounded-full font-semibold hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200"
+              to="/students"
+              className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-2.5 rounded-full font-semibold hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200"
             >
-              Get Involved
+              Apply Now
             </Link>
             <SettingsMenu />
           </div>
@@ -73,18 +72,18 @@ export default function Header() {
               <Link
                 key={item.name}
                 to={item.href}
-                className="block text-gray-700 dark:text-gray-300 hover:text-sky-600 dark:hover:text-sky-400 font-medium py-2 hover:bg-gray-50 dark:hover:bg-gray-800 px-4 rounded-lg transition-colors"
+                className="block text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 font-medium py-2 hover:bg-gray-50 dark:hover:bg-gray-800 px-4 rounded-lg transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.name}
               </Link>
             ))}
             <Link
-              to="/get-involved"
-              className="block bg-gradient-to-r from-sky-500 to-green-500 text-white px-6 py-3 rounded-full font-semibold text-center"
+              to="/students"
+              className="block bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-3 rounded-full font-semibold text-center"
               onClick={() => setIsMenuOpen(false)}
             >
-              Get Involved
+              Apply Now
             </Link>
           </div>
         )}
