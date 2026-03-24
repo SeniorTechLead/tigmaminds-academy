@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
-import { Play, Volume2, CheckCircle, XCircle, RotateCcw, Sparkles } from 'lucide-react';
+import { Play, Square, Volume2, CheckCircle, XCircle, RotateCcw, Sparkles } from 'lucide-react';
 
 type Mood = 'calm' | 'nervous' | 'danger';
 
@@ -316,14 +316,23 @@ export default function ElephantPlayground() {
           {gameState === 'playing' && (
             <>
               <button
-                onClick={() => currentPattern && playRumble(currentPattern)}
-                disabled={isPlaying}
-                className="w-full flex items-center justify-center gap-3 bg-gray-800 text-white py-4 rounded-xl mb-6 hover:bg-gray-700 disabled:opacity-50 transition-colors"
+                onClick={() => {
+                  if (isPlaying) {
+                    stopAudio();
+                  } else if (currentPattern) {
+                    playRumble(currentPattern);
+                  }
+                }}
+                className={`w-full flex items-center justify-center gap-3 py-4 rounded-xl mb-6 transition-colors ${
+                  isPlaying
+                    ? 'bg-red-600 hover:bg-red-700 text-white'
+                    : 'bg-gray-800 hover:bg-gray-700 text-white'
+                }`}
               >
                 {isPlaying ? (
                   <>
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    Listening to the ground...
+                    <Square className="w-5 h-5" />
+                    Stop
                   </>
                 ) : (
                   <>
