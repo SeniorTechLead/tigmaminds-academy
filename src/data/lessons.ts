@@ -83,7 +83,7 @@ After that night, Rongpharpi became the village's **elephant listener** — a br
         'Google\'s Bioacoustics team uses ML to monitor coral reef health through sound',
       ],
     },
-    illustration: '/content/illustrations/elephant-ant.png',
+    illustration: '/content/illustrations/elephant-rongpharpi.webp',
     track: 'both',
     playground: 'elephant',
   },
@@ -136,7 +136,7 @@ From that night on, Joon was never afraid of the dark again — because he under
         'Firefly light is "cold light" — nearly 100% energy efficient vs ~10% for incandescent bulbs',
       ],
     },
-    illustration: '/content/illustrations/majuli-born.png',
+    illustration: '/content/illustrations/majuli-born.webp',
     track: 'school',
     lesson: {
       objectives: [
@@ -219,7 +219,7 @@ The dolphin had taught him her secret: *the world speaks to those who close thei
         'Medical ultrasound uses sound waves to image organs and unborn babies',
       ],
     },
-    illustration: '/content/illustrations/brahmaputra-angry.png',
+    illustration: '/content/illustrations/brahmaputra-angry.webp',
     track: 'school',
   },
   {
@@ -272,7 +272,7 @@ His mother smiled. "You didn't build it from nothing, Dipankar. You built it fro
         'Little Free Library has 150,000+ registered book-sharing boxes worldwide, tracked via web app',
       ],
     },
-    illustration: '/content/illustrations/boy-clouds.png',
+    illustration: '/content/illustrations/boy-clouds.webp',
     track: 'bootcamp',
   },
   {
@@ -325,7 +325,7 @@ By September, the pest army was defeated. The rice stood tall, heads bowing unde
         'India\'s ICRISAT uses satellite + drone imagery to advise 4 million smallholder farmers',
       ],
     },
-    illustration: '/content/illustrations/tea-leaf-fly.png',
+    illustration: '/content/illustrations/tea-leaf-fly.webp',
     track: 'both',
   },
   {
@@ -382,7 +382,7 @@ To this day, muga silk is found only in Assam — the only golden silk in the wo
         'Biomimetic materials science draws from nature to create stronger, lighter, smarter materials',
       ],
     },
-    illustration: '/content/illustrations/weaver-girl.png',
+    illustration: '/content/illustrations/weaver-girl.webp',
     track: 'school',
     lesson: {
       objectives: [

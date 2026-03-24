@@ -72,7 +72,7 @@ export default function ProgramsPage() {
             </div>
             <div className="relative">
               <img
-                src="/content/illustrations/brahmaputra-angry.png"
+                src="/content/illustrations/brahmaputra-angry.webp"
                 alt="Students building and coding"
                 className="rounded-2xl shadow-lg w-full object-cover h-[420px]"
               />
@@ -88,7 +88,7 @@ export default function ProgramsPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             <div className="order-2 lg:order-1 relative">
               <img
-                src="/content/illustrations/elephant-ant.png"
+                src="/content/illustrations/elephant-ant.webp"
                 alt="Young learners exploring science"
                 className="rounded-2xl shadow-lg w-full object-cover h-[420px]"
               />
