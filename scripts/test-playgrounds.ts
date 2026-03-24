@@ -151,12 +151,21 @@ async function main() {
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
 
   const stories = [
+    // Original 6
     { slug: 'girl-who-spoke-to-elephants', name: 'Elephant', type: 'pyodide' },
     { slug: 'dragonfly-and-the-paddy-field', name: 'Dragonfly', type: 'pyodide' },
     { slug: 'boy-who-built-a-library', name: 'Library', type: 'html' },
     { slug: 'firefly-festival-of-majuli', name: 'Firefly', type: 'arduino', circuits: 6 },
     { slug: 'river-dolphins-secret', name: 'Dolphin', type: 'arduino', circuits: 6 },
     { slug: 'why-the-muga-silk-is-golden', name: 'Muga Silk', type: 'pyodide' },
+    // OurAssam folklore stories
+    { slug: 'tejimola-the-girl-who-became-a-plant', name: 'Tejimola', type: 'pyodide' },
+    { slug: 'golden-deer-of-kamakhya', name: 'Golden Deer', type: 'pyodide' },
+    { slug: 'boy-who-talked-to-clouds', name: 'Clouds', type: 'pyodide' },
+    { slug: 'how-majuli-island-was-born', name: 'Majuli', type: 'pyodide' },
+    { slug: 'bamboo-flute-of-nagaland', name: 'Bamboo Flute', type: 'pyodide' },
+    { slug: 'dancing-deer-of-loktak-lake', name: 'Dancing Deer', type: 'pyodide' },
+    { slug: 'bridge-that-grew', name: 'Bridge', type: 'pyodide' },
   ];
 
   for (const story of stories) {

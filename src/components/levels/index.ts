@@ -38,6 +38,30 @@ const registry: Record<string, LevelComponents> = {
     Level1: lazy(() => import('./TejimolaLevel1')),
     Level2: lazy(() => import('./TejimolaLevel2')),
   },
+  'golden-deer-of-kamakhya': {
+    Level1: lazy(() => import('./GoldenDeerLevel1')),
+    Level2: lazy(() => import('./GoldenDeerLevel2')),
+  },
+  'boy-who-talked-to-clouds': {
+    Level1: lazy(() => import('./CloudsLevel1')),
+    Level2: lazy(() => import('./CloudsLevel2')),
+  },
+  'how-majuli-island-was-born': {
+    Level1: lazy(() => import('./MajuliLevel1')),
+    Level2: lazy(() => import('./MajuliLevel2')),
+  },
+  'bamboo-flute-of-nagaland': {
+    Level1: lazy(() => import('./BambooFluteLevel1')),
+    Level2: lazy(() => import('./BambooFluteLevel2')),
+  },
+  'dancing-deer-of-loktak-lake': {
+    Level1: lazy(() => import('./DancingDeerLevel1')),
+    Level2: lazy(() => import('./DancingDeerLevel2')),
+  },
+  'bridge-that-grew': {
+    Level1: lazy(() => import('./BridgeLevel1')),
+    Level2: lazy(() => import('./BridgeLevel2')),
+  },
 };
 
 export function getLevelComponents(slug: string): LevelComponents {
