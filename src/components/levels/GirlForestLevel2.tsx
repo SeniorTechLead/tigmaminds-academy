@@ -23,713 +23,733 @@ export default function GirlForestLevel2() {
 
   const miniLessons = [
     {
-      title: 'Carbon accounting — measuring what matters',
-      concept: `**Carbon accounting** is the systematic process of measuring, recording, and reporting greenhouse gas (GHG) emissions. It is the foundation of all climate policy: you cannot reduce what you do not measure.
+      title: 'Carbon accounting — counting every tonne',
+      concept: `**Carbon accounting** is the systematic process of measuring, recording, and reporting greenhouse gas (GHG) emissions. It works like financial accounting but for carbon.
 
-**The GHG Protocol** divides emissions into three scopes:
-- **Scope 1**: direct emissions from sources you own (your factory's smokestack, your company vehicles)
-- **Scope 2**: indirect emissions from purchased energy (the power plant that generates your electricity)
-- **Scope 3**: all other indirect emissions in your value chain (suppliers, transportation, product use, waste)
+**The GHG Protocol** defines three scopes:
+- **Scope 1**: Direct emissions from sources you own (factory smokestacks, company vehicles)
+- **Scope 2**: Indirect emissions from purchased electricity and heat
+- **Scope 3**: All other indirect emissions (supply chain, employee commuting, product use, waste)
 
-For most companies, Scope 3 is the largest (often 70-90% of total emissions) but the hardest to measure.
+For a country or forest project, the accounting is:
+- **Emissions** = fossil fuels burned + deforestation + agriculture + industrial processes
+- **Removals** = forest growth + soil carbon increase + ocean absorption
+- **Net emissions** = Emissions - Removals
 
 **Units:**
-- Emissions are reported in **tonnes of CO₂ equivalent (tCO₂e)**
-- "Equivalent" because different GHGs have different warming potentials:
-  - CO₂: GWP = 1 (baseline)
-  - Methane (CH₄): GWP = 28 (28× stronger than CO₂ over 100 years)
-  - Nitrous oxide (N₂O): GWP = 265
-  - HFCs: GWP = 1,000-10,000+
+- **tCO₂e** (tonnes of CO₂ equivalent): the standard unit. Methane (CH₄) is 80x more potent than CO₂ over 20 years, so 1 tonne of methane = 80 tCO₂e.
+- **GtCO₂** (gigatonnes): global scale. World emits ~40 GtCO₂/year.
 
-**Forests in carbon accounting:**
-- A hectare of restored forest absorbs ~5-15 tCO₂/year (depends on species, age, climate)
-- This absorption is called a **carbon sink** or **negative emissions**
-- Forest degradation and fires are positive emissions (releasing stored carbon)`,
-      analogy: 'Carbon accounting is like a bank statement for greenhouse gases. Scope 1 is your cash spending (direct). Scope 2 is your credit card bill (indirect, energy). Scope 3 is everything your money touches along the supply chain. Just as you need to see all three to understand your financial situation, you need all three scopes to understand your carbon footprint.',
-      storyConnection: 'The Girl Who Grew a Forest was, unknowingly, creating a carbon sink — a negative entry in the atmospheric carbon ledger. If her forest covered 100 hectares and absorbed 10 tCO₂/hectare/year, she was removing 1,000 tonnes of CO₂ annually. Carbon accounting turns her intuitive good deed into measurable climate action.',
-      checkQuestion: 'A factory emits 5,000 tCO₂ per year (Scope 1). It buys electricity that generates 3,000 tCO₂ (Scope 2). Its supply chain generates 20,000 tCO₂ (Scope 3). The factory installs solar panels and eliminates Scope 2. Has it made a significant dent?',
-      checkAnswer: 'Not really. Total was 28,000 tCO₂. Eliminating Scope 2 saves 3,000 tCO₂ (only 11% of the total). Scope 3 at 20,000 tCO₂ (71%) remains untouched. This is why companies focusing only on their own operations and electricity miss the big picture. Real emissions reduction requires supply chain engagement.',
-      codeIntro: 'Build a carbon accounting model for a hypothetical company with forest offset.',
+Accurate carbon accounting is essential for:
+- Setting reduction targets
+- Verifying whether targets are met
+- Carbon trading (you can only trade what you can measure)
+- Climate policy (countries report emissions under the Paris Agreement)`,
+      analogy: 'Carbon accounting is bookkeeping for the planet. Emissions are expenses, removals are income, and net emissions are your profit or loss. A net-zero target means your carbon budget must balance — every tonne emitted must be matched by a tonne removed. Right now, the planet is running a massive deficit.',
+      storyConnection: 'If we applied carbon accounting to the Girl\'s forest: her emissions (Scope 1) were nearly zero — she used hand tools and walked. Her removals were enormous — thousands of trees absorbing CO₂ for decades. Her forest project would be deeply "carbon negative" — removing far more carbon than it caused. This is the kind of project that generates carbon credits.',
+      checkQuestion: 'A company claims to be "carbon neutral" because it bought carbon offsets for all its Scope 1 and 2 emissions. But it ignores Scope 3. Is it truly carbon neutral?',
+      checkAnswer: 'No. For most companies, Scope 3 emissions are 70-90% of total emissions (supply chain, product use, employee commuting). Ignoring Scope 3 is like a household claiming it has no expenses because it only counts rent but ignores food, transport, and entertainment. True carbon neutrality requires accounting for all three scopes.',
+      codeIntro: 'Build a carbon accounting model for a reforestation project.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
-# Company carbon accounting
-years = np.arange(2020, 2031)
+# Carbon accounting for a 1,000-hectare reforestation project over 30 years
+years = np.arange(0, 31)
+area_ha = 1000
 
-# Scope 1: direct emissions (slowly declining with efficiency improvements)
-scope1 = 5000 * np.exp(-0.03 * (years - 2020))
+# EMISSIONS from the project
+# Scope 1: machinery for planting (Year 0-2)
+scope1 = np.zeros(31)
+scope1[0:3] = 50  # tonnes CO2/year for tractors, transport
 
-# Scope 2: electricity (drops sharply with solar installation in 2024)
-scope2 = np.where(years < 2024, 3000, 3000 * np.exp(-0.4 * (years - 2024)))
+# Scope 2: nursery electricity
+scope2 = np.zeros(31)
+scope2[0:5] = 20  # tonnes CO2/year for nursery operations
 
-# Scope 3: supply chain (slowly declining as suppliers decarbonize)
-scope3 = 20000 * np.exp(-0.02 * (years - 2020))
+# Scope 3: supply chain (seedlings, tools, worker transport)
+scope3 = np.zeros(31)
+scope3[0:3] = 100
+scope3[3:10] = 30  # ongoing maintenance
 
-# Forest offset: planted in 2022, growing capacity
-forest_offset = np.where(years < 2022, 0,
-                np.minimum(2000, 200 * (years - 2022)**1.3))
+total_emissions = scope1 + scope2 + scope3
 
-# Net emissions
-total = scope1 + scope2 + scope3
-net = total - forest_offset
+# REMOVALS: carbon sequestration by growing trees
+# Trees absorb more as they grow, following a sigmoid-derivative pattern
+max_annual_removal = area_ha * 8  # 8 tCO2/ha/year at peak
+k = 0.2
+t_mid = 10
+annual_removal = max_annual_removal * k * np.exp(-k * (years - t_mid)) / (1 + np.exp(-k * (years - t_mid)))**2
+annual_removal = np.maximum(annual_removal, 0)
+
+# Cumulative balance
+net_annual = annual_removal - total_emissions
+cumulative = np.cumsum(net_annual)
 
 fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 9))
 fig.patch.set_facecolor('#1f2937')
 
-# Stacked area chart
+# Annual flows
 ax1.set_facecolor('#111827')
-ax1.fill_between(years, 0, scope1, alpha=0.7, color='#ef4444', label='Scope 1 (direct)')
-ax1.fill_between(years, scope1, scope1+scope2, alpha=0.7, color='#f59e0b', label='Scope 2 (electricity)')
-ax1.fill_between(years, scope1+scope2, total, alpha=0.7, color='#3b82f6', label='Scope 3 (supply chain)')
-ax1.fill_between(years, 0, -forest_offset, alpha=0.5, color='#22c55e', label='Forest offset')
-ax1.plot(years, net, 'o-', color='white', linewidth=2, markersize=4, label='Net emissions')
+ax1.bar(years, -total_emissions, color='#ef4444', alpha=0.8, label='Emissions (project activities)')
+ax1.bar(years, annual_removal, color='#22c55e', alpha=0.8, label='Removals (tree growth)')
+ax1.plot(years, net_annual, 'o-', color='#f59e0b', linewidth=2, markersize=4, label='Net balance')
 ax1.axhline(0, color='#6b7280', linewidth=0.5)
-
-ax1.set_ylabel('tCO₂e per year', color='white')
-ax1.set_title('Company Carbon Account (2020-2030)', color='white', fontsize=13)
-ax1.legend(facecolor='#1f2937', labelcolor='white', fontsize=9, loc='upper right')
+ax1.set_ylabel('tCO₂/year', color='white')
+ax1.set_title('Annual Carbon Flows: 1,000 ha Reforestation Project', color='white', fontsize=13)
+ax1.legend(facecolor='#1f2937', labelcolor='white', fontsize=9)
 ax1.tick_params(colors='gray')
 
-# Scope breakdown comparison: 2020 vs 2030
+# Cumulative
 ax2.set_facecolor('#111827')
-labels = ['Scope 1', 'Scope 2', 'Scope 3', 'Forest offset', 'NET']
-vals_2020 = [scope1[0], scope2[0], scope3[0], -forest_offset[0], net[0]]
-vals_2030 = [scope1[-1], scope2[-1], scope3[-1], -forest_offset[-1], net[-1]]
-colors_bar = ['#ef4444', '#f59e0b', '#3b82f6', '#22c55e', 'white']
-
-x = np.arange(len(labels))
-w = 0.35
-bars1 = ax2.bar(x - w/2, vals_2020, w, color=colors_bar, alpha=0.5, edgecolor='white', linewidth=0.5, label='2020')
-bars2 = ax2.bar(x + w/2, vals_2030, w, color=colors_bar, alpha=0.9, edgecolor='white', linewidth=0.5, label='2030')
-
-ax2.set_xticks(x)
-ax2.set_xticklabels(labels, color='white')
-ax2.set_ylabel('tCO₂e', color='white')
-ax2.set_title('2020 vs 2030: Emissions by Scope', color='white', fontsize=12)
-ax2.legend(facecolor='#1f2937', labelcolor='white')
-ax2.tick_params(colors='gray')
+ax2.fill_between(years, cumulative, where=cumulative >= 0, alpha=0.2, color='#22c55e')
+ax2.fill_between(years, cumulative, where=cumulative < 0, alpha=0.2, color='#ef4444')
+ax2.plot(years, cumulative, color='#22c55e', linewidth=2)
 ax2.axhline(0, color='#6b7280', linewidth=0.5)
+
+# Find break-even point
+breakeven = np.where(cumulative >= 0)[0]
+if len(breakeven) > 0:
+    be_year = breakeven[0]
+    ax2.plot(be_year, 0, 'o', color='#f59e0b', markersize=12, zorder=5)
+    ax2.annotate(f'Break-even: Year {be_year}', xy=(be_year, 0), xytext=(be_year+3, -500),
+                color='#f59e0b', fontsize=10, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
+
+ax2.set_xlabel('Years', color='white')
+ax2.set_ylabel('Cumulative tCO₂', color='white')
+ax2.set_title('Cumulative Carbon Balance (when does the project "pay off"?)', color='white', fontsize=11)
+ax2.tick_params(colors='gray')
 
 plt.tight_layout()
 plt.show()
 
-reduction = (1 - net[-1]/net[0]) * 100
-print(f"Carbon accounting summary:")
-print(f"  2020 total: {total[0]:,.0f} tCO₂e | Net: {net[0]:,.0f} tCO₂e")
-print(f"  2030 total: {total[-1]:,.0f} tCO₂e | Net: {net[-1]:,.0f} tCO₂e")
-print(f"  Reduction: {reduction:.1f}%")
-print(f"  Forest offset in 2030: {forest_offset[-1]:,.0f} tCO₂e")
-print()
-print(f"Scope 3 remains the elephant in the room:")
-print(f"  2020: {scope3[0]:,.0f} ({scope3[0]/total[0]*100:.0f}% of total)")
-print(f"  2030: {scope3[-1]:,.0f} ({scope3[-1]/total[-1]*100:.0f}% of total)")`,
-      challenge: 'The company wants to reach "net zero" by 2040. How much additional forest would need to be planted, OR how much faster must Scope 3 decline? Model both pathways and compare them.',
-      successHint: 'Carbon accounting is the language of climate action. Without it, pledges like "net zero by 2050" are meaningless. With it, you can track progress, identify priorities, and hold companies and countries accountable — exactly what the Girl\'s forest does, one tonne at a time.',
+total_emitted = sum(total_emissions)
+total_removed = sum(annual_removal)
+print(f"30-year carbon account:")
+print(f"  Total emissions:  {total_emitted:,.0f} tCO₂")
+print(f"  Total removals:   {total_removed:,.0f} tCO₂")
+print(f"  Net sequestered:  {total_removed - total_emitted:,.0f} tCO₂")
+print(f"  Break-even year:  {be_year}")
+print(f"  Removal/emission ratio: {total_removed/total_emitted:.0f}:1")`,
+      challenge: 'Add a wildfire in Year 15 that destroys 20% of the forest (releasing 20% of stored carbon back to atmosphere). How does this change the cumulative balance? Does the project still break even? This is called "permanence risk" — a key issue in carbon markets.',
+      successHint: 'Carbon accounting transforms climate action from vague intentions to precise measurements. Without it, a reforestation project is just "planting trees." With it, it becomes a quantified carbon removal asset worth real money in carbon markets.',
     },
     {
       title: 'Net-zero calculations — the math of climate targets',
-      concept: `**Net zero** means that the total amount of greenhouse gases emitted equals the total amount removed from the atmosphere. It does NOT mean zero emissions — it means emissions minus removals equals zero.
+      concept: `**Net zero** means that the total amount of greenhouse gases emitted equals the total amount removed from the atmosphere. It doesn't mean zero emissions — it means the emissions that remain are balanced by removals.
 
-**The global net-zero math:**
-- Current annual emissions: ~50 Gt CO₂e
-- Paris Agreement goal: limit warming to 1.5°C
-- Carbon budget remaining (for 50% chance of 1.5°C): ~400 Gt CO₂
-- At current rates, budget exhausted by ~2030
-- To stay within budget: emissions must halve by 2030, reach net zero by ~2050
+**The global net-zero target:** reach net-zero CO₂ by 2050 to limit warming to 1.5°C.
 
-**Pathways to net zero:**
-1. **Reduce emissions**: efficiency, renewables, electrification, behavior change (~80% of the solution)
-2. **Remove carbon**: forests, soil, direct air capture, BECCS (~20% of the solution)
+**The math:**
+- Current emissions: ~40 GtCO₂/year
+- Current removals (natural sinks): ~20 GtCO₂/year
+- Current net: +20 GtCO₂/year (accumulating in atmosphere)
+- To reach net zero: either reduce emissions to 20 GtCO₂ OR increase removals to 40 GtCO₂ OR both
 
-**Carbon removal options:**
-- Reforestation: $5-50/tCO₂, limited by land availability
-- Soil carbon: $10-100/tCO₂, uncertain permanence
-- BECCS (bioenergy + CCS): $100-200/tCO₂, unproven at scale
-- Direct Air Capture (DAC): $250-600/tCO₂, energy-intensive but scalable
-- Enhanced weathering: $50-200/tCO₂, slow but permanent
+**Reduction pathways:**
+- 50% reduction by 2030 (from 2019 levels) to stay on track for 1.5°C
+- This means cutting ~4% of emissions per year, compounding
 
-The Girl's forest is the cheapest carbon removal option. But even if we reforested every available hectare on Earth, it would offset only ~10% of current emissions. Forests are necessary but not sufficient — emission reductions are the priority.`,
-      analogy: 'Net zero is like a bathtub. The faucet (emissions) is running. The drain (removals) is open. Net zero means adjusting both until the water level (atmospheric CO₂) stops rising. Right now, the faucet is blasting and the drain is a trickle. We need to mostly turn off the faucet (reduce emissions) and slightly widen the drain (increase removals).',
-      storyConnection: 'The Girl\'s forest was a local drain — removing carbon from her patch of atmosphere. But net zero requires thinking globally. Her 100 hectares might offset the emissions of a small factory. The world needs millions of such projects PLUS massive emission reductions. Her story is inspiring but must be multiplied a million-fold.',
-      checkQuestion: 'If global emissions are 50 Gt CO₂/year and all available land for reforestation could absorb 5 Gt CO₂/year, what percentage of emissions can reforestation offset? Why is this number important for policy?',
-      checkAnswer: 'Only 10%. This means 90% of the solution MUST come from reducing emissions at source (clean energy, efficiency, industrial processes). Reforestation is vital but insufficient alone. Policy must prioritize emission reduction. Over-relying on tree planting risks "greenwashing" — using forests as an excuse to keep emitting.',
-      codeIntro: 'Model pathways to net zero and the role of carbon removal.',
+**Carbon budget:** the total CO₂ we can still emit before crossing 1.5°C:
+- Remaining budget: ~400 GtCO₂ (as of 2024)
+- At current rates: budget exhausted by ~2034
+- With reductions: budget can last until 2050+
+
+**India's targets:**
+- Net-zero by 2070 (20 years after most developed nations)
+- 50% electricity from non-fossil sources by 2030
+- Reduce carbon intensity of GDP by 45% by 2030 (vs. 2005)`,
+      analogy: 'Net zero is like a bathtub. The faucet (emissions) is on full blast. The drain (removals) is half open. The water level (atmospheric CO₂) keeps rising. Net zero means adjusting the faucet and drain until the water level stops rising. You don\'t need to turn the faucet off completely — just match the flow with drainage.',
+      storyConnection: 'The Girl\'s forest was a natural removal system — a bigger drain. But no forest can offset an industrial economy. The lesson of her story scales up: every community can contribute to removals, but the real solution requires turning down the faucet (reducing emissions) at the same time.',
+      checkQuestion: 'If the world needs to cut emissions by 50% by 2030 (from 40 to 20 GtCO₂), is it realistic to achieve this through reforestation alone?',
+      checkAnswer: 'No. All the world\'s reforestation combined could remove at most 3-5 GtCO₂/year (there isn\'t enough suitable land for more). We need to remove 20 GtCO₂ from the current flow. That requires cutting fossil fuel use (energy, transport, industry) — reforestation is a supplement, not a substitute. A common trap is treating tree planting as an alternative to emission reductions. It\'s both, not either/or.',
+      codeIntro: 'Model different emission reduction pathways to net zero.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
-years = np.arange(2024, 2061)
+years = np.arange(2024, 2071)
+current_emissions = 40  # GtCO2/year
 
-# Business as usual: 1% annual growth
-bau = 50 * 1.01**(years - 2024)
+# Pathway 1: Linear reduction to net-zero by 2050
+pathway_2050 = current_emissions * (1 - (years - 2024) / (2050 - 2024))
+pathway_2050 = np.maximum(pathway_2050, 0)
 
-# Paris-aligned pathway: rapid decline to net zero by 2050
-decline_rate = np.log(50) / (2050 - 2024)  # exponential decline
-paris = 50 * np.exp(-decline_rate * (years - 2024))
-paris = np.maximum(paris, 0)
+# Pathway 2: Gradual start, accelerating (India-like, net-zero 2070)
+pathway_2070 = current_emissions * np.exp(-0.04 * (years - 2024))
+pathway_2070[years > 2065] = pathway_2070[years == 2065]  # plateau near zero
 
-# Realistic pathway: slower decline, needs carbon removal
-realistic_emissions = 50 * np.exp(-0.05 * (years - 2024))
+# Pathway 3: Delayed action (no reduction until 2030, then steep)
+pathway_delayed = np.where(years < 2030, current_emissions,
+                           current_emissions * (1 - (years - 2030) / (2045 - 2030)))
+pathway_delayed = np.maximum(pathway_delayed, 0)
 
-# Carbon removal ramp-up
-removal_forest = np.minimum(5, 0.2 * (years - 2024))  # forests max at 5 Gt
-removal_tech = np.where(years < 2030, 0, np.minimum(5, 0.3 * (years - 2030)**1.2))
-total_removal = removal_forest + removal_tech
+# Natural removal capacity
+removal_capacity = 20  # GtCO2/year (forests + oceans)
+enhanced_removal = np.where(years < 2030, 20, 20 + 0.5 * (years - 2030))
+enhanced_removal = np.minimum(enhanced_removal, 30)  # max realistic enhancement
 
-net_realistic = realistic_emissions - total_removal
+# Carbon budget remaining
+budget = 400  # GtCO2 remaining for 1.5°C
+cumulative_2050 = np.cumsum(pathway_2050)
+cumulative_2070 = np.cumsum(pathway_2070)
+cumulative_delayed = np.cumsum(pathway_delayed)
 
 fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 9))
 fig.patch.set_facecolor('#1f2937')
 
 # Emission pathways
 ax1.set_facecolor('#111827')
-ax1.plot(years, bau, color='#ef4444', linewidth=2, linestyle='--', label='Business as usual')
-ax1.plot(years, paris, color='#22c55e', linewidth=2, label='Paris-aligned (1.5°C)')
-ax1.plot(years, realistic_emissions, color='#f59e0b', linewidth=2, label='Realistic emissions')
-ax1.fill_between(years, realistic_emissions, net_realistic,
-                alpha=0.3, color='#3b82f6', label='Carbon removal')
-ax1.plot(years, net_realistic, color='white', linewidth=2, label='Net emissions (realistic)')
-ax1.axhline(0, color='#6b7280', linewidth=1)
+ax1.plot(years, pathway_2050, color='#22c55e', linewidth=2, label='Net-zero 2050 (linear)')
+ax1.plot(years, pathway_2070, color='#3b82f6', linewidth=2, label='Net-zero 2070 (gradual)')
+ax1.plot(years, pathway_delayed, color='#ef4444', linewidth=2, label='Delayed action (2030 start)')
+ax1.fill_between(years, enhanced_removal, alpha=0.15, color='#a855f7')
+ax1.plot(years, enhanced_removal, color='#a855f7', linewidth=1, linestyle='--', label='Removal capacity')
+ax1.axhline(0, color='#6b7280', linewidth=0.5)
 
-# Find net-zero year
-nz_idx = np.argmin(np.abs(net_realistic))
-ax1.plot(years[nz_idx], net_realistic[nz_idx], '*', color='#f59e0b', markersize=15, zorder=5)
-ax1.annotate(f'Net zero: ~{years[nz_idx]}', xy=(years[nz_idx], 0),
-            xytext=(years[nz_idx]-5, 15), color='#f59e0b', fontsize=11,
-            arrowprops=dict(arrowstyle='->', color='#f59e0b'))
-
-ax1.set_ylabel('Gt CO₂e / year', color='white')
-ax1.set_title('Pathways to Net Zero', color='white', fontsize=13)
+ax1.set_ylabel('GtCO₂/year', color='white')
+ax1.set_title('Emission Reduction Pathways to Net Zero', color='white', fontsize=13)
 ax1.legend(facecolor='#1f2937', labelcolor='white', fontsize=9)
 ax1.tick_params(colors='gray')
 
-# Carbon removal breakdown
+# Cumulative emissions vs carbon budget
 ax2.set_facecolor('#111827')
-ax2.fill_between(years, 0, removal_forest, alpha=0.7, color='#22c55e', label='Forest restoration')
-ax2.fill_between(years, removal_forest, total_removal, alpha=0.7, color='#3b82f6', label='Technology (DAC, BECCS)')
-ax2.plot(years, total_removal, color='white', linewidth=1.5)
+ax2.plot(years, cumulative_2050, color='#22c55e', linewidth=2, label='Net-zero 2050')
+ax2.plot(years, cumulative_2070, color='#3b82f6', linewidth=2, label='Net-zero 2070')
+ax2.plot(years, cumulative_delayed, color='#ef4444', linewidth=2, label='Delayed action')
+ax2.axhline(budget, color='#f59e0b', linewidth=2, linestyle='--', label=f'1.5°C budget ({budget} Gt)')
+
+# Find budget exhaustion years
+for path, name, color in [(cumulative_2050, '2050', '#22c55e'),
+                            (cumulative_2070, '2070', '#3b82f6'),
+                            (cumulative_delayed, 'Delayed', '#ef4444')]:
+    exceed = np.where(path > budget)[0]
+    if len(exceed) > 0:
+        yr = years[exceed[0]]
+        ax2.plot(yr, budget, 'x', color=color, markersize=12, markeredgewidth=3)
+        ax2.annotate(f'Budget exceeded: {yr}', xy=(yr, budget),
+                    xytext=(yr+2, budget+50), color=color, fontsize=8)
 
 ax2.set_xlabel('Year', color='white')
-ax2.set_ylabel('Carbon removal (Gt CO₂e/year)', color='white')
-ax2.set_title('Carbon Removal Ramp-Up Required', color='white', fontsize=12)
-ax2.legend(facecolor='#1f2937', labelcolor='white')
+ax2.set_ylabel('Cumulative emissions (GtCO₂)', color='white')
+ax2.set_title('Cumulative Emissions vs Carbon Budget', color='white', fontsize=11)
+ax2.legend(facecolor='#1f2937', labelcolor='white', fontsize=9)
 ax2.tick_params(colors='gray')
 
 plt.tight_layout()
 plt.show()
 
-# Carbon budget calculation
-cumulative_bau = np.cumsum(bau)
-cumulative_real = np.cumsum(net_realistic)
-budget = 400  # Gt CO2 remaining for 1.5C
-
-print(f"Carbon budget analysis (remaining ~400 Gt CO₂ for 1.5°C):")
-bau_exhausted = 2024 + np.argmax(cumulative_bau > budget)
-real_exhausted = 2024 + np.argmax(cumulative_real > budget) if any(cumulative_real > budget) else 'Never'
-print(f"  Business as usual: budget exhausted by {bau_exhausted}")
-print(f"  Realistic pathway: budget exhausted by {real_exhausted}")
-print(f"  Net zero year: ~{years[nz_idx]}")
-print()
-print(f"Removal in 2050: {total_removal[2050-2024]:.1f} Gt/year")
-print(f"  Forests: {removal_forest[2050-2024]:.1f} Gt")
-print(f"  Technology: {removal_tech[2050-2024]:.1f} Gt")`,
-      challenge: 'What if Direct Air Capture costs fall from $500/tCO₂ to $100/tCO₂ by 2040 (following a learning curve)? Model the cost of removal over time. At what point does technological removal become cheaper than forest restoration?',
-      successHint: 'Net-zero math is unforgiving: the numbers must add up. Forests provide the cheapest early removal, but technology must scale for the long term. The Girl\'s forest is part of the answer, but only the global accounting tells us whether we\'re on track.',
+print("Pathway analysis:")
+print(f"  Net-zero 2050: cumulative = {cumulative_2050[-1]:.0f} GtCO₂")
+print(f"  Net-zero 2070: cumulative = {cumulative_2070[-1]:.0f} GtCO₂")
+print(f"  Delayed action: cumulative = {cumulative_delayed[-1]:.0f} GtCO₂")
+print(f"\\n  1.5°C carbon budget: {budget} GtCO₂")
+print(f"  At 40 Gt/year, budget exhausted in {budget/40:.0f} years ({2024 + budget//40})")`,
+      challenge: 'India argues it should have a later net-zero date (2070) because its cumulative historical emissions are much lower than the US or EU. Calculate cumulative emissions for India (starting at 3 GtCO₂/year, growing 4%/year) vs. USA (starting at 5 GtCO₂/year, declining 2%/year). Who has the bigger cumulative total by 2070?',
+      successHint: 'Net-zero is a math problem with a hard deadline. The carbon budget is finite, pathways are computable, and every year of delay narrows our options. Understanding the math is what separates credible climate plans from political rhetoric.',
     },
     {
-      title: 'REDD+ program — paying forests to stand',
-      concept: `**REDD+** (Reducing Emissions from Deforestation and Forest Degradation) is a UN-backed framework that creates financial incentives for developing countries to preserve their forests.
+      title: 'REDD+ program — paying countries to keep forests standing',
+      concept: `**REDD+** stands for Reducing Emissions from Deforestation and Forest Degradation (plus conservation, sustainable management, and enhancement of forest carbon stocks). It's a UN framework that creates financial incentives for developing countries to protect their forests.
 
 **The logic:**
-- Standing forests absorb and store carbon
-- Cutting them releases that carbon
-- If we pay landowners MORE to keep forests standing than they'd earn by cutting them, rational economics keeps the forest alive
+- Tropical deforestation causes ~10% of global emissions
+- It's often cheaper to prevent deforestation than to reduce industrial emissions
+- Pay forest countries NOT to cut down their trees
 
-**How REDD+ works:**
-1. **Baseline**: establish how much deforestation would happen without intervention
-2. **Monitoring**: use satellites to track actual deforestation
-3. **Credits**: if actual deforestation is less than baseline, the difference generates carbon credits
-4. **Payment**: credits are sold on carbon markets; revenue goes to forest communities and governments
+**How it works:**
+1. Establish a **baseline**: what deforestation rate would occur without the REDD+ program?
+2. **Measure** actual deforestation (using satellites)
+3. **Calculate** avoided emissions: (baseline deforestation - actual deforestation) × carbon per hectare
+4. **Issue credits**: each tonne of CO₂ avoided = 1 credit
+5. **Sell credits**: rich countries/companies buy credits to offset their emissions
 
-**REDD+ in practice:**
-- Covers 350+ million hectares across 65+ countries
-- Has reduced deforestation in some areas by 30-50%
-- Total investment: $10+ billion since 2008
+**Challenges:**
+- **Leakage**: protecting forest in one area may just push deforestation to another area
+- **Additionality**: would the forest have survived anyway? Credits for forests that weren't threatened are worthless
+- **Permanence**: what if the forest is cut down later? The carbon "saved" gets re-released
+- **Indigenous rights**: forests are home to 370 million Indigenous people. Their consent and benefit-sharing are essential
 
-**Criticisms:**
-- **Baseline gaming**: setting artificially high baselines to generate more credits
-- **Leakage**: protecting one forest may just push deforestation to a neighboring area
-- **Permanence**: what if a protected forest burns 10 years later?
-- **Indigenous rights**: some REDD+ projects displaced communities who lived in the forests
-- **Additionality**: does the credit represent real additional emission reductions?`,
-      analogy: 'REDD+ is like paying a farmer NOT to plow a field. It sounds strange, but if that field stores carbon worth more than the crops it would produce, paying the farmer to leave it alone is economically rational. The challenge is proving the farmer would have plowed (additionality) and that they won\'t secretly plow next year (permanence).',
-      storyConnection: 'If the Girl\'s community had access to REDD+, they could have received payments for keeping their restored forest standing. The carbon stored in her trees would have generated credits sellable on international markets. Her environmental work would have become economic work too — aligning the community\'s financial interests with the forest\'s survival.',
-      checkQuestion: 'A REDD+ project claims it "saved" 10,000 hectares of forest from deforestation. But the baseline assumed 50% of the forest would be cut (5,000 ha), while historically only 10% was ever cut. How many credits should the project legitimately receive?',
-      checkAnswer: 'The legitimate baseline is 10% (1,000 hectares), not 50%. The project should receive credits for preventing 1,000 hectares of deforestation, not 5,000. If the inflated baseline stands, the project generates 4,000 hectares worth of "phantom" credits — carbon savings that were never at risk. This is the baseline gaming problem that undermines REDD+ credibility.',
-      codeIntro: 'Model a REDD+ project: baseline deforestation, actual outcomes, and credit generation.',
+**Scale:**
+- $5-10 billion/year in REDD+ finance as of 2024
+- Could potentially reduce 1-5 GtCO₂/year if fully funded`,
+      analogy: 'REDD+ is like paying a farmer NOT to plow a field. The farmer gives up the income from crops; in return, they receive payment for the environmental service the untouched field provides (carbon storage, biodiversity, water). The challenge is proving the farmer would actually have plowed — otherwise you\'re paying for nothing.',
+      storyConnection: 'The Girl\'s forest, once established, could qualify for REDD+ credits. If satellite data showed that nearby forests were being cleared but hers remained standing, the "avoided deforestation" credits could generate income for her community. REDD+ turns the Girl\'s environmental work into an economic asset.',
+      checkQuestion: 'A REDD+ project claims it prevented deforestation of 10,000 hectares and issues credits for 1.5 million tCO₂ avoided. But critics point out the forest was in a national park that was already protected by law. Is this a valid REDD+ project?',
+      checkAnswer: 'Probably not — this fails the "additionality" test. If the forest was legally protected and enforcement was effective, it would have survived without REDD+ money. The credits represent carbon that was never at risk of being released. Issuing them is like selling fire insurance for a building made of fireproof materials. Legitimate REDD+ requires demonstrating that deforestation would genuinely have occurred without the program.',
+      codeIntro: 'Model a REDD+ carbon crediting scenario with baseline projections.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
 np.random.seed(42)
 
-# REDD+ project simulation over 20 years
-years = np.arange(2025, 2046)
-n_years = len(years)
+# REDD+ scenario: a 100,000 hectare tropical forest
+total_forest = 100000  # hectares
+carbon_per_ha = 150  # tonnes C per hectare
 
-# Forest area (hectares)
-initial_forest = 50000
+years = np.arange(2020, 2041)
 
-# Historical deforestation rate: 3% per year
-hist_rate = 0.03
+# Baseline: deforestation without REDD+ (3% per year)
+baseline_rate = 0.03
+forest_baseline = total_forest * (1 - baseline_rate) ** (years - 2020)
 
-# Without REDD+ (counterfactual baseline)
-forest_no_redd = initial_forest * (1 - hist_rate)**np.arange(n_years)
+# With REDD+: deforestation reduced to 0.5% per year
+redd_rate = 0.005
+forest_redd = total_forest * (1 - redd_rate) ** (years - 2020)
 
-# With REDD+ (reduced deforestation to 1% per year)
-redd_rate = 0.01
-forest_with_redd = initial_forest * (1 - redd_rate)**np.arange(n_years)
+# Avoided deforestation
+avoided_ha = forest_redd - forest_baseline
+avoided_carbon = avoided_ha * carbon_per_ha  # tonnes C
+avoided_co2 = avoided_carbon * 3.67  # tonnes CO2
 
-# Inflated baseline (bad practice: claims 5% would be lost)
-inflated_rate = 0.05
-forest_inflated = initial_forest * (1 - inflated_rate)**np.arange(n_years)
+# Annual credits
+annual_credits = np.diff(avoided_co2)
+annual_credits = np.insert(annual_credits, 0, 0)
 
-# Carbon per hectare: 150 tonnes C = 550 tCO2
-carbon_per_ha = 550  # tCO2
+# Financial value ($5/tonne CO2)
+price_per_tonne = 5
+annual_revenue = np.abs(annual_credits) * price_per_tonne
 
-# Credits generated per year (legitimate vs inflated)
-saved_legit = (forest_no_redd - forest_with_redd) * carbon_per_ha / 1e6  # MtCO2
-saved_inflated = (forest_inflated - forest_with_redd) * carbon_per_ha / 1e6
-
-fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 8))
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 9))
 fig.patch.set_facecolor('#1f2937')
 
-# Forest area under different scenarios
+# Forest area comparison
 ax1.set_facecolor('#111827')
-ax1.plot(years, forest_no_redd, color='#ef4444', linewidth=2, label='Without REDD+ (3%/yr loss)')
-ax1.plot(years, forest_with_redd, color='#22c55e', linewidth=2, label='With REDD+ (1%/yr loss)')
-ax1.plot(years, forest_inflated, color='#f59e0b', linewidth=2, linestyle='--', label='Inflated baseline (5%/yr)')
-ax1.fill_between(years, forest_no_redd, forest_with_redd, alpha=0.15, color='#22c55e',
-                label='Legitimate savings')
-ax1.fill_between(years, forest_inflated, forest_no_redd, alpha=0.1, color='#f59e0b',
-                label='Phantom savings (inflated)')
+ax1.fill_between(years, forest_baseline/1000, alpha=0.2, color='#ef4444')
+ax1.fill_between(years, forest_redd/1000, alpha=0.2, color='#22c55e')
+ax1.plot(years, forest_baseline/1000, color='#ef4444', linewidth=2, label='Without REDD+ (3%/yr loss)')
+ax1.plot(years, forest_redd/1000, color='#22c55e', linewidth=2, label='With REDD+ (0.5%/yr loss)')
 
-ax1.set_ylabel('Forest area (hectares)', color='white')
-ax1.set_title('REDD+ Project: Forest Preservation Scenarios', color='white', fontsize=13)
-ax1.legend(facecolor='#1f2937', labelcolor='white', fontsize=8)
+# Shade avoided deforestation
+ax1.fill_between(years, forest_baseline/1000, forest_redd/1000, alpha=0.3, color='#f59e0b',
+                 label='Avoided deforestation')
+
+ax1.set_ylabel('Forest area (thousand hectares)', color='white')
+ax1.set_title('REDD+ Impact: Forest Area Over Time', color='white', fontsize=13)
+ax1.legend(facecolor='#1f2937', labelcolor='white', fontsize=9)
 ax1.tick_params(colors='gray')
 
 # Credits and revenue
 ax2.set_facecolor('#111827')
-price_per_tco2 = 15  # USD
-revenue_legit = np.cumsum(saved_legit) * price_per_tco2
-revenue_inflated = np.cumsum(saved_inflated) * price_per_tco2
+ax2_twin = ax2.twinx()
 
-ax2.plot(years, revenue_legit, color='#22c55e', linewidth=2, label='Legitimate revenue')
-ax2.plot(years, revenue_inflated, color='#f59e0b', linewidth=2, linestyle='--', label='Revenue with inflated baseline')
-ax2.fill_between(years, revenue_legit, revenue_inflated, alpha=0.15, color='#ef4444',
-                label='Over-credited revenue')
+ax2.bar(years, annual_revenue / 1e6, color='#f59e0b', alpha=0.6, label='Revenue ($M)')
+ax2_twin.plot(years, np.cumsum(np.abs(annual_credits)) / 1e6, color='#22c55e', linewidth=2,
+              label='Cumulative credits (MtCO₂)')
 
 ax2.set_xlabel('Year', color='white')
-ax2.set_ylabel('Cumulative revenue ($ millions)', color='white')
-ax2.set_title('REDD+ Revenue: Legitimate vs Inflated Credits', color='white', fontsize=12)
-ax2.legend(facecolor='#1f2937', labelcolor='white', fontsize=8)
-ax2.tick_params(colors='gray')
+ax2.set_ylabel('Annual revenue ($M)', color='#f59e0b')
+ax2_twin.set_ylabel('Cumulative credits (MtCO₂)', color='#22c55e')
+ax2.set_title('REDD+ Carbon Credits and Revenue', color='white', fontsize=11)
+ax2.tick_params(colors='gray', axis='x')
+ax2.tick_params(colors='#f59e0b', axis='y')
+ax2_twin.tick_params(colors='#22c55e')
+
+# Combined legend
+lines1, labels1 = ax2.get_legend_handles_labels()
+lines2, labels2 = ax2_twin.get_legend_handles_labels()
+ax2.legend(lines1 + lines2, labels1 + labels2, facecolor='#1f2937', labelcolor='white', fontsize=9)
 
 plt.tight_layout()
 plt.show()
 
-print(f"20-year REDD+ project results:")
-print(f"  Forest saved (legitimate): {forest_with_redd[-1] - forest_no_redd[-1]:,.0f} hectares")
-print(f"  Carbon credits (legitimate): {np.sum(saved_legit):.2f} MtCO₂")
-print(f"  Carbon credits (inflated):   {np.sum(saved_inflated):.2f} MtCO₂")
-print(f"  Over-crediting: {np.sum(saved_inflated) - np.sum(saved_legit):.2f} MtCO₂ ({((np.sum(saved_inflated)/np.sum(saved_legit))-1)*100:.0f}% excess)")
-print(f"\\n  Revenue at $15/tCO₂:")
-print(f"    Legitimate: ${revenue_legit[-1]:.1f}M")
-print(f"    Inflated:   ${revenue_inflated[-1]:.1f}M")
-print(f"    Over-payment: ${revenue_inflated[-1] - revenue_legit[-1]:.1f}M")`,
-      challenge: 'Add a "leakage" scenario: REDD+ reduces deforestation in the project area but 30% of the prevented deforestation shifts to a neighboring unprotected area. Recalculate the NET carbon savings after accounting for leakage.',
-      successHint: 'REDD+ is the most ambitious attempt to financially value standing forests. Its problems (baselines, leakage, permanence) are real but solvable with better monitoring and governance. The Girl\'s forest, registered as a REDD+ project, could generate income for her community while protecting the climate.',
+total_avoided = (forest_redd[-1] - forest_baseline[-1])
+total_co2 = total_avoided * carbon_per_ha * 3.67
+total_revenue = sum(annual_revenue)
+print(f"20-year REDD+ results:")
+print(f"  Forest saved: {total_avoided:,.0f} hectares")
+print(f"  CO₂ avoided: {total_co2/1e6:,.1f} million tonnes")
+print(f"  Total revenue at {price_per_tonne}/tonne: {total_revenue/1e6:,.1f} million")
+print(f"  Revenue per hectare saved: {total_revenue/total_avoided:,.0f}")
+print()
+print("Challenges:")
+print("  Leakage: does deforestation just move elsewhere?")
+print("  Permanence: will the forest still stand in 50 years?")
+print("  Additionality: would it have been cut without REDD+?")`,
+      challenge: 'Model "leakage": 30% of the avoided deforestation in the REDD+ area shifts to an adjacent unprotected forest. Recalculate the net carbon savings. Is the project still worth funding?',
+      successHint: 'REDD+ is the most ambitious attempt to put a price on standing forests. It has real flaws (leakage, additionality, permanence), but the alternative — no financial value for forests — leads to even more deforestation. Understanding the model helps you evaluate which REDD+ projects are legitimate and which are greenwashing.',
     },
     {
-      title: 'Carbon credit markets — trading the right to emit',
-      concept: `A **carbon credit** represents one tonne of CO₂ equivalent either reduced or removed from the atmosphere. Credits are traded on markets, creating a price signal that makes pollution costly and conservation profitable.
+      title: 'Carbon credit markets — buying and selling the right to emit',
+      concept: `A **carbon credit** represents 1 tonne of CO₂ that has been either avoided (not emitted) or removed (taken from the atmosphere). Carbon markets allow these credits to be bought and sold.
 
 **Two types of carbon markets:**
 
-1. **Compliance markets** (regulated):
-   - Government sets a cap on total emissions
-   - Companies receive or buy allowances (permits to emit)
-   - If you emit less than your allowance, you sell the surplus
-   - If you emit more, you must buy credits from others
-   - EU ETS price: ~€80-100/tCO₂ (2024)
+**1. Compliance markets** (mandatory):
+- Governments set a cap on total emissions
+- Companies receive or buy allowances (permits to emit)
+- If you emit less than your allowance, you can sell surplus
+- If you emit more, you must buy from others
+- Example: EU Emissions Trading System (EU ETS) — largest at ~$90/tonne (2023)
 
-2. **Voluntary markets** (unregulated):
-   - Companies buy credits voluntarily to offset their emissions
-   - Credits come from projects: forests, renewables, cookstoves, etc.
-   - Much lower prices: $5-50/tCO₂
-   - Growing rapidly but plagued by quality concerns
+**2. Voluntary markets** (optional):
+- Companies buy credits voluntarily (CSR, branding, genuine climate commitment)
+- Credits come from projects: reforestation, renewable energy, cookstoves, etc.
+- Prices: $5-50/tonne (huge variation in quality)
+- Total market: ~$2 billion/year (small but growing fast)
 
-**The pricing problem:**
-- The "social cost of carbon" (true damage per tonne) is estimated at $50-200
-- Most carbon credits trade at $5-20 (voluntary) or $80-100 (compliance)
-- The gap between market price and true cost means carbon is still underpriced globally
-- Underpriced carbon = insufficient incentive to reduce emissions
+**Price determines behavior:**
+- At $10/tonne: only the cheapest reductions happen (LED lightbulbs, basic efficiency)
+- At $50/tonne: renewable energy becomes cheaper than coal
+- At $100/tonne: electric vehicles, building efficiency, industrial changes
+- At $250+/tonne: direct air capture, green hydrogen, deep decarbonization
 
-**Forest carbon credits:**
-- Reforestation: grows trees, generates credits as trees absorb CO₂
-- Avoided deforestation (REDD+): prevents emissions by keeping forests standing
-- Improved forest management: sustainable logging practices vs. clear-cutting`,
-      analogy: 'A carbon market is like a parking permit system. The city (government) decides how many cars (emissions) the downtown area can handle. It issues permits. If you don\'t need yours, sell it. If you need more, buy one. Over time, the city reduces the total number of permits, forcing everyone to find alternatives to driving (emitting).',
-      storyConnection: 'The Girl\'s restored forest could generate carbon credits sold to a company in Mumbai or New York that needs to offset its emissions. Her trees absorb the CO₂; the company pays for the removal. It\'s an invisible trade route — carbon flows up into the trees, money flows to the community. A modern silk route where the commodity is clean air.',
-      checkQuestion: 'Company A buys cheap carbon credits at $5/tonne from a questionable tree-planting project instead of reducing its own emissions (which would cost $50/tonne). What\'s wrong with this picture?',
-      checkAnswer: 'Multiple problems: (1) If the credits don\'t represent real, permanent, additional carbon removal, the company is paying $5 for nothing — its emissions continue and no offsetting occurs. (2) Even if credits are legitimate, $5/tonne is far below the social cost of carbon ($50-200), meaning the true damage isn\'t being priced. (3) Offsetting delays the structural changes (clean energy, efficiency) that are needed for long-term decarbonization. Cheap credits can be a license to keep polluting.',
-      codeIntro: 'Model carbon credit pricing, supply, demand, and market dynamics.',
+The "social cost of carbon" (the true cost of damages from 1 tonne of CO₂) is estimated at $50-200/tonne. Most markets price carbon well below this — a market failure.`,
+      analogy: 'A carbon market is like a diet club with tradeable "calorie credits." Members who eat less than their allowance can sell surplus credits to members who overate. The total calories consumed by the group stays the same (the cap), but individuals have flexibility. The cap is tightened each year until the group reaches its target weight.',
+      storyConnection: 'The Girl\'s forest generates carbon credits simply by existing and growing. Each year, as the trees absorb CO₂, the forest produces measurable, verifiable credits. A company in Europe might buy those credits to offset its factory emissions. Money flows from the polluter to the forest protector — the Girl\'s community. This is environmental justice through markets.',
+      checkQuestion: 'If carbon is priced at $10/tonne and a steel company can reduce emissions by installing new equipment at a cost of $15/tonne, will it reduce emissions or buy credits?',
+      checkAnswer: 'It will buy credits ($10/tonne is cheaper than $15/tonne to abate). This means the company keeps polluting. Only when the carbon price rises above $15/tonne will it become economically rational to invest in cleaner equipment. This is why environmentalists push for higher carbon prices — low prices don\'t change behavior enough.',
+      codeIntro: 'Model carbon credit market dynamics and price impacts on behavior.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
-# Carbon market simulation
-prices = np.linspace(1, 200, 100)  # USD per tCO2
-
-# Supply: at higher prices, more projects become viable
-# Forests: cheap (viable at $5+)
-forest_supply = 3 * (1 - np.exp(-0.03 * prices))  # GtCO2, max ~3
-
-# Tech removal (DAC): expensive (viable at $100+)
-tech_supply = np.where(prices < 80, 0, 5 * (1 - np.exp(-0.01 * (prices - 80))))
-
-# Renewables/efficiency credits
-efficiency_supply = 10 * (1 - np.exp(-0.02 * prices))
-
-total_supply = forest_supply + tech_supply + efficiency_supply
-
-# Demand: compliance + voluntary
-compliance_demand = 15 * np.exp(-0.005 * prices)  # regulated market
-voluntary_demand = 3 * np.exp(-0.02 * prices)  # voluntary market
-total_demand = compliance_demand + voluntary_demand
+# Carbon price vs. abatement behavior
+# Different technologies become viable at different carbon prices
+technologies = {
+    'LED lighting': {'cost': 5, 'potential': 0.5},
+    'Solar power': {'cost': 20, 'potential': 8.0},
+    'Wind power': {'cost': 25, 'potential': 5.0},
+    'Electric vehicles': {'cost': 50, 'potential': 4.0},
+    'Building efficiency': {'cost': 60, 'potential': 3.0},
+    'Green hydrogen': {'cost': 100, 'potential': 3.0},
+    'Industrial CCS': {'cost': 120, 'potential': 4.0},
+    'Direct air capture': {'cost': 250, 'potential': 2.0},
+}
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
 fig.patch.set_facecolor('#1f2937')
 
-# Supply and demand curves
+# Marginal abatement cost curve
 ax1.set_facecolor('#111827')
-ax1.plot(total_supply, prices, color='#22c55e', linewidth=2, label='Total supply')
-ax1.plot(total_demand, prices, color='#3b82f6', linewidth=2, label='Total demand')
+sorted_tech = sorted(technologies.items(), key=lambda x: x[1]['cost'])
+cumulative_potential = 0
+colors_tech = ['#22c55e', '#3b82f6', '#22c55e', '#3b82f6', '#f59e0b', '#ef4444', '#a855f7', '#ec4899']
 
-# Supply components
-ax1.fill_betweenx(prices, 0, forest_supply, alpha=0.15, color='#22c55e')
-ax1.fill_betweenx(prices, forest_supply, forest_supply+efficiency_supply, alpha=0.15, color='#f59e0b')
-ax1.fill_betweenx(prices, forest_supply+efficiency_supply, total_supply, alpha=0.15, color='#a855f7')
+for i, (name, data) in enumerate(sorted_tech):
+    ax1.barh(i, data['cost'], height=0.6, color=colors_tech[i], alpha=0.8)
+    ax1.text(data['cost'] + 5, i, f'{data["cost"]}/t ({data["potential"]} Gt)',
+            color='white', fontsize=8, va='center')
 
-# Labels for supply components
-ax1.text(1.5, 15, 'Forests', color='#22c55e', fontsize=9)
-ax1.text(5, 50, 'Efficiency', color='#f59e0b', fontsize=9)
-ax1.text(7, 150, 'DAC', color='#a855f7', fontsize=9)
-
-# Equilibrium
-diff = np.abs(total_supply - total_demand)
-eq_idx = np.argmin(diff)
-ax1.plot(total_supply[eq_idx], prices[eq_idx], 'o', color='#f59e0b', markersize=12, zorder=5)
-ax1.annotate(f'Equilibrium\\n${prices[eq_idx]:.0f}/tCO₂',
-            xy=(total_supply[eq_idx], prices[eq_idx]),
-            xytext=(total_supply[eq_idx]+3, prices[eq_idx]+20),
-            color='#f59e0b', fontsize=10, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
-
-# Social cost range
-ax1.axhspan(50, 200, alpha=0.05, color='#ef4444')
-ax1.text(1, 120, 'Social cost\\nof carbon\\n($50-200)', color='#ef4444', fontsize=8)
-
-ax1.set_xlabel('Quantity (GtCO₂/year)', color='white')
-ax1.set_ylabel('Price ($/tCO₂)', color='white')
-ax1.set_title('Global Carbon Credit Market', color='white', fontsize=13)
-ax1.legend(facecolor='#1f2937', labelcolor='white')
+ax1.set_yticks(range(len(sorted_tech)))
+ax1.set_yticklabels([t[0] for t in sorted_tech], color='white', fontsize=9)
+ax1.set_xlabel('Cost per tonne CO₂ reduced ($)', color='white')
+ax1.set_title('Abatement Cost by Technology', color='white', fontsize=12)
 ax1.tick_params(colors='gray')
 
-# Price scenarios and their impact
+# Draw price lines
+for price, label, color in [(10, 'Current avg ($10)', '#ef4444'),
+                              (90, 'EU ETS ($90)', '#f59e0b'),
+                              (200, 'Social cost ($200)', '#22c55e')]:
+    ax1.axvline(price, color=color, linestyle='--', linewidth=1.5, alpha=0.7)
+    ax1.text(price, len(sorted_tech)-0.5, label, color=color, fontsize=8, rotation=90, va='top')
+
+# Market growth
 ax2.set_facecolor('#111827')
-price_scenarios = [5, 15, 50, 100, 200]
-scenario_labels = ['$5\\n(current\\nvoluntary)', '$15\\n(avg\\nvoluntary)', '$50\\n(low\\nsocial cost)',
-                   '$100\\n(EU ETS)', '$200\\n(high\\nsocial cost)']
+market_years = [2017, 2018, 2019, 2020, 2021, 2022, 2023]
+compliance_value = [46, 56, 45, 53, 84, 91, 95]  # $ per tonne (EU ETS)
+voluntary_size = [0.3, 0.3, 0.4, 0.5, 1.0, 1.8, 2.0]  # billion USD
 
-for p, label in zip(price_scenarios, scenario_labels):
-    forest_s = 3 * (1 - np.exp(-0.03 * p))
-    tech_s = max(0, 5 * (1 - np.exp(-0.01 * (p - 80)))) if p > 80 else 0
-    eff_s = 10 * (1 - np.exp(-0.02 * p))
+ax2_twin = ax2.twinx()
+ax2.bar(market_years, voluntary_size, color='#22c55e', alpha=0.7, label='Voluntary market ($B)')
+ax2_twin.plot(market_years, compliance_value, 'o-', color='#f59e0b', linewidth=2,
+              markersize=6, label='EU ETS price ($/tonne)')
 
-    ax2.bar(label, forest_s, color='#22c55e', label='Forest' if p == 5 else '')
-    ax2.bar(label, eff_s, bottom=forest_s, color='#f59e0b', label='Efficiency' if p == 5 else '')
-    ax2.bar(label, tech_s, bottom=forest_s+eff_s, color='#a855f7', label='Technology' if p == 5 else '')
+ax2.set_xlabel('Year', color='white')
+ax2.set_ylabel('Voluntary market size ($B)', color='#22c55e')
+ax2_twin.set_ylabel('EU ETS price ($/tonne)', color='#f59e0b')
+ax2.set_title('Carbon Market Growth', color='white', fontsize=12)
+ax2.tick_params(colors='gray', axis='x')
+ax2.tick_params(colors='#22c55e', axis='y')
+ax2_twin.tick_params(colors='#f59e0b')
 
-ax2.set_ylabel('Carbon reduction (GtCO₂/year)', color='white')
-ax2.set_title('Carbon Reduction at Different Prices', color='white', fontsize=12)
-ax2.legend(facecolor='#1f2937', labelcolor='white')
-ax2.tick_params(colors='gray')
-plt.setp(ax2.get_xticklabels(), color='white', fontsize=8)
+lines1, labels1 = ax2.get_legend_handles_labels()
+lines2, labels2 = ax2_twin.get_legend_handles_labels()
+ax2.legend(lines1 + lines2, labels1 + labels2, facecolor='#1f2937', labelcolor='white', fontsize=9)
 
 plt.tight_layout()
 plt.show()
 
-print("Carbon price impact:")
-for p in price_scenarios:
-    forest_s = 3 * (1 - np.exp(-0.03 * p))
-    tech_s = max(0, 5 * (1 - np.exp(-0.01 * (p - 80)))) if p > 80 else 0
-    eff_s = 10 * (1 - np.exp(-0.02 * p))
-    total = forest_s + tech_s + eff_s
-    print(f"  At ${p:>3}/tCO₂: {total:.1f} GtCO₂/year reduced")
-print()
-print("Key insight: at $5/tCO₂, only forests are viable.")
-print("At $100+/tCO₂, technology kicks in and reductions multiply.")`,
-      challenge: 'If the Girl\'s forest covers 200 hectares and sequesters 10 tCO₂/ha/year, calculate her annual credit income at $5, $15, $50, and $100/tCO₂. At which price does forest conservation become more profitable than converting the land to agriculture ($500/ha/year)?',
-      successHint: 'Carbon markets are the mechanism that turns the Girl\'s environmental work into economic value. The price of carbon determines whether forests are worth more standing or cut. Getting that price right is one of the most important policy challenges of the 21st century.',
+# Calculate total abatement at different prices
+print("Total abatement potential at different carbon prices:")
+for price in [10, 50, 100, 200, 300]:
+    total = sum(d['potential'] for _, d in technologies.items() if d['cost'] <= price)
+    print(f"  {price}/tonne: {total:.1f} GtCO₂/year")
+print(f"\\nWorld needs: ~20 GtCO₂/year reduction")
+print(f"This requires carbon price > $100/tonne to unlock enough technology")`,
+      challenge: 'If the Girl\'s forest generates 5,000 credits per year at $10/tonne, the community earns $50,000/year. But at $50/tonne (EU ETS level), they\'d earn $250,000. What carbon price makes community forestry more profitable than palm oil farming (which earns ~$1,000/hectare/year)? This is the critical threshold.',
+      successHint: 'Carbon markets are an attempt to put a price on pollution and a value on forests. When the price is right, economic incentives align with environmental needs. When the price is too low, markets fail. Understanding market design is essential for anyone working on climate policy.',
     },
     {
-      title: 'Modeling forest growth — predicting the future',
-      concept: `Forest growth models predict how a forest will develop over time — how much carbon it will store, what species will dominate, and when it will reach maturity. These models are essential for planning reforestation and estimating carbon credits.
+      title: 'Modeling forest growth — predicting the future from data',
+      concept: `Forest growth models use mathematics to predict how forests will develop over time. These models are essential for reforestation planning, timber management, and carbon projections.
 
-**Key modeling approaches:**
+**Types of forest growth models:**
 
-1. **Empirical models**: use measured data from real forests to predict growth
-   - Growth tables: average height and diameter by age for each species
-   - Site index: classification of land quality that predicts growth potential
+**1. Empirical models**: fit curves to measured data
+- Height-age curves (site index)
+- Diameter-age relationships
+- Volume equations
 
-2. **Process-based models**: simulate the underlying biology
-   - Photosynthesis, respiration, water use, nutrient cycling
-   - Can predict growth under changing climate conditions
+**2. Process-based models**: simulate the biology
+- Photosynthesis, respiration, water use, nutrient cycling
+- Respond to climate inputs (temperature, rainfall, CO₂)
+- Can predict growth under future climate scenarios
 
-3. **Gap models**: simulate individual trees competing for light and space
-   - Trees grow, reproduce, and die based on resources
-   - Forest composition changes over decades (succession)
+**3. Gap models**: simulate individual trees
+- Each tree grows, competes for light and water, and eventually dies
+- New trees fill gaps created by dead trees
+- Emergent forest structure arises from individual-level rules
 
-**The Chapman-Richards growth model** (widely used):
-**H(t) = H_max × (1 - e^(-k×t))^p**
-- H_max: maximum height the species can reach
-- k: growth rate parameter
-- p: shape parameter (determines when growth is fastest)
-- t: age in years
+**Key parameters:**
+- **Site index**: a measure of site quality (better sites → taller trees at a given age)
+- **Stand density**: trees per hectare (more trees → more competition → thinner trees)
+- **Basal area**: total cross-sectional area of all tree trunks (measure of forest "fullness")
+- **Leaf area index (LAI)**: total leaf area per unit ground area (drives photosynthesis capacity)
 
-**Forest succession:**
-- **Pioneer species** (years 0-15): fast-growing, sun-loving (bamboo, alder)
-- **Secondary species** (years 10-50): moderate growth, partial shade tolerance
-- **Climax species** (years 30-200+): slow-growing, shade-tolerant (dipterocarp, sal)`,
-      analogy: 'Forest growth modeling is like a weather forecast but for decades instead of days. Just as meteorologists use physics equations to predict tomorrow\'s rain, forest modelers use biological equations to predict next decade\'s canopy. Both are imperfect but essential for planning.',
-      storyConnection: 'If the Girl could model her forest\'s growth, she\'d know that the fast-growing pioneers she planted first would be overtaken by slower climax species within 30 years. The forest she started is not the forest that will stand a century from now. Growth models let us see this future, plan for succession, and maximize long-term carbon storage.',
-      checkQuestion: 'A reforestation project plants fast-growing eucalyptus because it grows 3x faster than native species. Is this a good strategy for maximizing long-term carbon storage?',
-      checkAnswer: 'No. Eucalyptus grows fast but is short-lived (30-50 years), stores relatively little carbon per tree, and creates low-biodiversity monocultures that are vulnerable to disease. Native climax species grow slower but ultimately store far more total carbon (they live for centuries) and support diverse ecosystems. Short-term speed is not the same as long-term capacity. The best strategy is mixed species: pioneers for quick cover, climax species for permanent storage.',
-      codeIntro: 'Simulate forest growth and succession using the Chapman-Richards model.',
-      code: `import numpy as np
-import matplotlib.pyplot as plt
-
-# Chapman-Richards growth model: H(t) = Hmax * (1 - exp(-k*t))^p
-years = np.arange(0, 201)
-
-# Species parameters
-species = {
-    'Bamboo (pioneer)': {'hmax': 25, 'k': 0.15, 'p': 1.5, 'lifespan': 60, 'c_density': 30},
-    'Alder (pioneer)': {'hmax': 20, 'k': 0.08, 'p': 2.0, 'lifespan': 80, 'c_density': 50},
-    'Teak (secondary)': {'hmax': 35, 'k': 0.04, 'p': 2.5, 'lifespan': 150, 'c_density': 120},
-    'Sal (climax)': {'hmax': 40, 'k': 0.025, 'p': 3.0, 'lifespan': 300, 'c_density': 200},
-    'Hollong (climax)': {'hmax': 50, 'k': 0.02, 'p': 3.5, 'lifespan': 500, 'c_density': 300},
-}
-
-colors_sp = ['#22c55e', '#3b82f6', '#f59e0b', '#ef4444', '#a855f7']
-
-fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 8))
-fig.patch.set_facecolor('#1f2937')
-
-# Height growth curves
-ax1.set_facecolor('#111827')
-for (name, params), color in zip(species.items(), colors_sp):
-    height = params['hmax'] * (1 - np.exp(-params['k'] * years))**params['p']
-    # Apply mortality (decline after lifespan)
-    mortality = np.where(years > params['lifespan'],
-                        np.exp(-0.05 * (years - params['lifespan'])), 1.0)
-    effective_height = height * mortality
-    ax1.plot(years, effective_height, color=color, linewidth=2, label=name)
-
-ax1.set_ylabel('Height (m)', color='white')
-ax1.set_title('Tree Growth Curves: Pioneer → Climax Succession', color='white', fontsize=13)
-ax1.legend(facecolor='#1f2937', labelcolor='white', fontsize=8, loc='upper left')
-ax1.tick_params(colors='gray')
-
-# Shade phases
-ax1.axvspan(0, 15, alpha=0.05, color='#22c55e')
-ax1.axvspan(15, 50, alpha=0.05, color='#f59e0b')
-ax1.axvspan(50, 200, alpha=0.05, color='#a855f7')
-ax1.text(7, 45, 'Pioneer phase', color='#22c55e', fontsize=8, ha='center')
-ax1.text(32, 45, 'Secondary', color='#f59e0b', fontsize=8, ha='center')
-ax1.text(125, 45, 'Climax phase', color='#a855f7', fontsize=8, ha='center')
-
-# Carbon storage over time (forest-level)
-ax2.set_facecolor('#111827')
-
-# Simplified forest carbon: weighted sum of species contributions
-# Early: dominated by pioneers. Late: dominated by climax
-forest_carbon = np.zeros_like(years, dtype=float)
-for name, params in species.items():
-    # Abundance shifts over time (succession)
-    if 'pioneer' in name:
-        abundance = np.exp(-0.02 * years) * 0.5
-    elif 'secondary' in name:
-        abundance = 0.3 * np.exp(-0.005 * (years - 30)**2 / 500)
-    else:
-        abundance = 0.3 * (1 - np.exp(-0.02 * years))
-
-    height = params['hmax'] * (1 - np.exp(-params['k'] * years))**params['p']
-    # Carbon ~ height^2.5 (allometric relationship)
-    tree_carbon = params['c_density'] * (height / params['hmax'])**2.5
-    forest_carbon += abundance * tree_carbon
-
-ax2.fill_between(years, forest_carbon, alpha=0.3, color='#22c55e')
-ax2.plot(years, forest_carbon, color='#22c55e', linewidth=2)
-ax2.set_xlabel('Years since planting', color='white')
-ax2.set_ylabel('Carbon stored (tC/ha)', color='white')
-ax2.set_title('Forest-Level Carbon Accumulation (with succession)', color='white', fontsize=12)
-ax2.tick_params(colors='gray')
-
-# Annotate phases
-ax2.annotate(f'50 yr: {forest_carbon[50]:.0f} tC/ha', xy=(50, forest_carbon[50]),
-            xytext=(70, forest_carbon[50]+20), color='#f59e0b', fontsize=9,
-            arrowprops=dict(arrowstyle='->', color='#f59e0b'))
-ax2.annotate(f'100 yr: {forest_carbon[100]:.0f} tC/ha', xy=(100, forest_carbon[100]),
-            xytext=(120, forest_carbon[100]+15), color='#f59e0b', fontsize=9,
-            arrowprops=dict(arrowstyle='->', color='#f59e0b'))
-
-plt.tight_layout()
-plt.show()
-
-print("Forest growth phases:")
-print("  0-15 years:  Pioneer species dominate, rapid canopy closure")
-print("  15-50 years: Secondary species overtake, carbon accumulates fast")
-print("  50-200 years: Climax species dominate, maximum carbon storage")
-print()
-print(f"Carbon storage milestones:")
-for yr in [10, 25, 50, 100, 200]:
-    print(f"  Year {yr:>3}: {forest_carbon[yr]:>6.1f} tC/ha ({forest_carbon[yr]*3.67:>6.0f} tCO₂/ha)")`,
-      challenge: 'Climate change increases temperature by 2°C, which increases the growth rate (k) by 20% but also increases drought stress (reduce Hmax by 15%). Model this climate-change scenario alongside the baseline. Does the forest store more or less carbon under warming?',
-      successHint: 'Forest growth models turn ecology into data science. With the right parameters, you can predict how much carbon a reforestation project will store decades into the future. This is how REDD+ credits are calculated, how reforestation projects are evaluated, and how the Girl\'s forest can be valued in the global carbon economy.',
-    },
-    {
-      title: 'Remote sensing for deforestation detection — algorithms that save forests',
-      concept: `Detecting deforestation from satellite imagery is a **classification problem** — for each pixel, determine whether it's forest, non-forest, or recently deforested. Modern systems combine multiple data sources and algorithms.
-
-**Data sources:**
-- **Optical** (Landsat, Sentinel-2): NDVI, color, texture. Resolution: 10-30m. Problem: clouds.
-- **Radar** (Sentinel-1): SAR backscatter. Penetrates clouds. Lower resolution but always available.
-- **LiDAR** (airborne): measures canopy height with cm accuracy. Expensive, limited coverage.
-- **Nighttime light** (VIIRS): detects fires and human activity expansion.
-
-**Detection algorithms:**
-
-1. **Thresholding**: if NDVI drops below 0.3, flag as deforested. Simple, fast, many false positives.
-
-2. **Time-series analysis** (BFAST, LandTrendr): analyze the NDVI history of each pixel over years. A sudden drop indicates deforestation. A gradual decline may indicate degradation.
-
-3. **Machine learning** (Random Forest, CNN): train on labeled examples of "forest" and "not forest." Can achieve 90%+ accuracy. Requires training data.
-
-4. **Change detection (differencing)**: subtract before-image from after-image. Large negative values = loss.
-
-**Global Forest Watch** uses a combination of these methods to provide near-real-time deforestation alerts worldwide. Alert latency: ~1 week for tropical regions.
-
-**NE India challenge:** persistent monsoon cloud cover means optical satellites can be blinded for months. Radar (Sentinel-1) is critical for year-round monitoring in this region.`,
-      analogy: 'Deforestation detection is like a security camera system for forests. Optical satellites are daytime cameras (useless in fog/clouds). Radar is an infrared camera (works in any weather). Time-series analysis is like reviewing security footage — looking for the moment something changed. Machine learning is a trained security guard who can spot intruders in the footage automatically.',
-      storyConnection: 'If the Girl\'s region had access to real-time deforestation alerts, the illegal logging that destroyed the original forest might have been caught and stopped. Today, anyone can go to Global Forest Watch, type in a location in NE India, and see exactly where forests are being lost, week by week. The technology exists — the challenge is using it to drive action.',
-      checkQuestion: 'A deforestation detection algorithm flags 100 pixels as "deforested." Ground truthing reveals only 60 are actually deforested; 40 are false alarms (clouds, seasonal leaf drop). What is the precision? Is this acceptable?',
-      checkAnswer: 'Precision = true positives / (true positives + false positives) = 60/100 = 60%. This is not great — 40% false alarm rate wastes investigation resources. However, the alternative is missing deforestation entirely. In practice, systems are tuned for high recall (catching all real deforestation, even at the cost of false alarms) because missing real deforestation is worse than investigating a false alarm.',
-      codeIntro: 'Implement a simple deforestation detection algorithm using NDVI time series.',
+**Yield tables**: foresters use lookup tables that predict volume, height, and diameter at different ages for different species and site qualities. These are essentially pre-computed model outputs.`,
+      analogy: 'A forest growth model is like a weather forecast for trees. Just as weather models use physics (pressure, temperature, humidity) to predict tomorrow\'s conditions, forest models use biology (photosynthesis, competition, mortality) to predict next decade\'s forest. Both improve with better data and more computing power.',
+      storyConnection: 'If the Girl had a forest growth model, she could have predicted exactly when her trees would reach canopy closure, when the first timber harvest would be sustainable, and how much carbon her forest would store by 2050. The model would have validated her intuition with numbers.',
+      checkQuestion: 'Why do forest growth models need to account for competition between trees? Why not just model each tree independently?',
+      checkAnswer: 'Trees compete for light, water, and nutrients. A tree growing alone in a field behaves very differently from the same tree in a dense stand. In competition, trees grow taller (reaching for light) but thinner (less energy for diameter growth). Dense stands have more total biomass but smaller individual trees. Ignoring competition would overpredict individual tree size and underpredict stand-level carbon storage.',
+      codeIntro: 'Build a simple forest growth model with individual trees competing for light.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
 np.random.seed(42)
 
-# Simulate NDVI time series for 3 pixels over 5 years (monthly data)
-months = np.arange(60)  # 5 years of monthly data
-dates = [f'{2020 + m//12}-{(m%12)+1:02d}' for m in months]
+# Simple gap model: simulate 100 trees competing for light
+n_trees = 100
+years = 50
+max_height = 35  # meters (tropical hardwood)
+max_dbh = 60  # cm (diameter at breast height)
 
-# Pixel 1: Stable forest (seasonal variation only)
-seasonal = 0.15 * np.sin(2 * np.pi * months / 12)
-forest_stable = 0.75 + seasonal + np.random.normal(0, 0.03, 60)
+# Each tree has: height, dbh, alive status, growth rate modifier
+heights = np.random.uniform(0.5, 2.0, n_trees)  # initial seedling heights
+dbh = np.random.uniform(1, 5, n_trees)  # initial diameters (cm)
+alive = np.ones(n_trees, dtype=bool)
+growth_rate = np.random.uniform(0.7, 1.3, n_trees)  # genetic variation
 
-# Pixel 2: Deforestation event at month 30
-forest_deforested = np.copy(forest_stable)
-forest_deforested[30:] = 0.15 + np.random.normal(0, 0.05, 30)
-forest_deforested[30:33] = np.linspace(forest_stable[29], 0.15, 3)  # transition
+# Track statistics over time
+yearly_data = {'mean_h': [], 'max_h': [], 'alive': [], 'basal_area': [], 'biomass': []}
 
-# Pixel 3: Gradual degradation
-forest_degraded = 0.75 + seasonal - 0.008 * months + np.random.normal(0, 0.03, 60)
+for year in range(years):
+    # Light competition: taller trees get more light
+    light_fraction = heights / (np.max(heights) + 0.1)
+    light_fraction = np.clip(light_fraction, 0.1, 1.0)
 
-# Detection: BFAST-like breakpoint detection (simplified)
-def detect_change(ndvi, window=12):
-    """Simple change detection: compare recent mean to historical mean"""
-    alerts = []
-    for i in range(window, len(ndvi)):
-        historical_mean = np.mean(ndvi[max(0, i-2*window):i-window])
-        recent_mean = np.mean(ndvi[i-window:i])
-        change = recent_mean - historical_mean
-        if change < -0.2:  # significant drop
-            alerts.append((i, change))
-    return alerts
+    # Growth: proportional to light received
+    h_growth = growth_rate * light_fraction * (1 - heights / max_height) * 0.8
+    d_growth = growth_rate * light_fraction * (1 - dbh / max_dbh) * 1.5
 
-fig, axes = plt.subplots(3, 1, figsize=(14, 9), sharex=True)
+    heights[alive] += h_growth[alive]
+    dbh[alive] += d_growth[alive]
+
+    # Mortality: smaller trees in dense shade die
+    mortality_prob = 0.02 + 0.05 * (1 - light_fraction)
+    deaths = np.random.random(n_trees) < mortality_prob
+    alive[deaths] = False
+
+    # Record stats
+    if np.any(alive):
+        yearly_data['mean_h'].append(np.mean(heights[alive]))
+        yearly_data['max_h'].append(np.max(heights[alive]))
+        yearly_data['alive'].append(np.sum(alive))
+        ba = np.sum(np.pi * (dbh[alive]/200)**2)  # m²
+        yearly_data['basal_area'].append(ba)
+        # Biomass approximation: proportional to dbh^2 * height
+        biomass = np.sum(0.05 * dbh[alive]**2 * heights[alive])  # kg
+        yearly_data['biomass'].append(biomass / 1000)  # tonnes
+
+fig, axes = plt.subplots(2, 2, figsize=(12, 8))
 fig.patch.set_facecolor('#1f2937')
-fig.suptitle('NDVI Time Series: Deforestation Detection', color='white', fontsize=14)
+fig.suptitle(f'Forest Growth Simulation: {n_trees} Trees, {years} Years', color='white', fontsize=14)
 
-pixels = [
-    ('Stable forest', forest_stable, '#22c55e'),
-    ('Deforestation (month 30)', forest_deforested, '#ef4444'),
-    ('Gradual degradation', forest_degraded, '#f59e0b'),
-]
+# Height over time
+ax1 = axes[0][0]
+ax1.set_facecolor('#111827')
+ax1.plot(yearly_data['mean_h'], color='#22c55e', linewidth=2, label='Mean height')
+ax1.plot(yearly_data['max_h'], color='#f59e0b', linewidth=2, label='Max height')
+ax1.set_ylabel('Height (m)', color='white')
+ax1.set_title('Tree Height', color='white', fontsize=11)
+ax1.legend(facecolor='#1f2937', labelcolor='white', fontsize=8)
+ax1.tick_params(colors='gray')
 
-for idx, (label, ndvi, color) in enumerate(pixels):
-    ax = axes[idx]
-    ax.set_facecolor('#111827')
-    ax.plot(months, ndvi, color=color, linewidth=1.5, alpha=0.8)
+# Survival
+ax2 = axes[0][1]
+ax2.set_facecolor('#111827')
+ax2.plot(yearly_data['alive'], color='#3b82f6', linewidth=2)
+ax2.set_ylabel('Trees alive', color='white')
+ax2.set_title(f'Survival (started: {n_trees})', color='white', fontsize=11)
+ax2.tick_params(colors='gray')
 
-    # Detection threshold
-    ax.axhline(0.3, color='#6b7280', linestyle=':', linewidth=1, alpha=0.5)
-    ax.text(58, 0.32, 'Alert threshold', color='#6b7280', fontsize=7, ha='right')
+# Basal area
+ax3 = axes[1][0]
+ax3.set_facecolor('#111827')
+ax3.plot(yearly_data['basal_area'], color='#a855f7', linewidth=2)
+ax3.set_xlabel('Year', color='white')
+ax3.set_ylabel('Basal area (m²)', color='white')
+ax3.set_title('Stand Basal Area', color='white', fontsize=11)
+ax3.tick_params(colors='gray')
 
-    # Run detection
-    alerts = detect_change(ndvi)
-    for alert_month, change_val in alerts:
-        ax.axvline(alert_month, color='#ef4444', linestyle='--', linewidth=1, alpha=0.7)
-        ax.text(alert_month + 0.5, 0.9, f'ALERT\\n(Δ={change_val:.2f})',
-               color='#ef4444', fontsize=7)
-
-    # Confidence bands (rolling mean ± std)
-    window = 6
-    rolling_mean = np.convolve(ndvi, np.ones(window)/window, mode='same')
-    rolling_std = np.array([np.std(ndvi[max(0,i-window):i+1]) for i in range(len(ndvi))])
-    ax.fill_between(months, rolling_mean - 2*rolling_std, rolling_mean + 2*rolling_std,
-                   alpha=0.1, color=color)
-
-    ax.set_ylabel('NDVI', color='white')
-    ax.set_title(label, color=color, fontsize=11)
-    ax.tick_params(colors='gray')
-    ax.set_ylim(-0.1, 1.0)
-
-axes[-1].set_xlabel('Month', color='white')
-# Add year labels
-for yr in range(5):
-    axes[-1].text(yr*12 + 6, -0.05, f'{2020+yr}', color='#9ca3af', ha='center', fontsize=8)
+# Biomass (carbon proxy)
+ax4 = axes[1][1]
+ax4.set_facecolor('#111827')
+ax4.fill_between(range(len(yearly_data['biomass'])), yearly_data['biomass'], alpha=0.2, color='#22c55e')
+ax4.plot(yearly_data['biomass'], color='#22c55e', linewidth=2)
+ax4.set_xlabel('Year', color='white')
+ax4.set_ylabel('Biomass (tonnes)', color='white')
+ax4.set_title('Total Stand Biomass (~50% is carbon)', color='white', fontsize=11)
+ax4.tick_params(colors='gray')
 
 plt.tight_layout()
 plt.show()
 
-print("Detection results:")
-for label, ndvi, _ in pixels:
-    alerts = detect_change(ndvi)
-    print(f"  {label}:")
-    if alerts:
-        for month, change in alerts:
-            print(f"    Alert at month {month} (NDVI drop: {change:.2f})")
-    else:
-        print(f"    No alerts (forest intact)")
-print()
-print("Detection challenges:")
-print("  - Cloud cover creates false NDVI drops")
-print("  - Seasonal leaf drop mimics degradation")
-print("  - Gradual degradation is harder to detect than abrupt clearing")
-print("  - Radar (SAR) data helps fill gaps when clouds block optical sensors")`,
-      challenge: 'Add noise to the deforestation signal (simulate cloud contamination by randomly setting 20% of pixels to NDVI=0.1). How does this affect the detection algorithm? Implement a cloud filter that ignores anomalously low single-month readings.',
-      successHint: 'From carbon accounting to net-zero math to REDD+ to carbon markets to growth models to remote sensing — you now have the full toolkit of climate-forest science. The Girl Who Grew a Forest did the planting. The science quantifies the impact. Together, they represent humanity\'s best response to the climate crisis.',
+final = yearly_data
+print(f"Simulation results after {years} years:")
+print(f"  Trees surviving: {final['alive'][-1]} of {n_trees} ({final['alive'][-1]/n_trees*100:.0f}%)")
+print(f"  Mean height: {final['mean_h'][-1]:.1f} m")
+print(f"  Max height: {final['max_h'][-1]:.1f} m")
+print(f"  Total biomass: {final['biomass'][-1]:.1f} tonnes")
+print(f"  Estimated carbon: {final['biomass'][-1]*0.5:.1f} tonnes")
+print(f"\\nCompetition killed {n_trees - final['alive'][-1]} trees (natural thinning)")
+print("Survivors are taller and have more resources per tree.")`,
+      challenge: 'Add a "thinning" intervention at Year 20: remove the 30 smallest trees. Does this increase or decrease total biomass at Year 50? Foresters call this "release" — freeing resources for the remaining trees to grow faster.',
+      successHint: 'Forest growth models are where biology meets computation. From carbon accounting to net-zero calculations to REDD+ crediting to carbon markets to growth modeling — you now have the full toolkit for understanding forests as both ecosystems and climate assets. The Girl Who Grew a Forest started with a single sapling. You started with a single lesson. Both grew into something much larger.',
+    },
+    {
+      title: 'Remote sensing for deforestation detection — algorithms that watch forests',
+      concept: `Modern deforestation detection uses satellite imagery combined with machine learning algorithms to identify forest loss in near-real-time. Systems like **Global Forest Watch** and **DETER** (Brazil) can detect new deforestation within days.
+
+**Detection pipeline:**
+
+1. **Image acquisition**: satellites capture images every 5-16 days
+   - Landsat (30m, every 16 days)
+   - Sentinel-2 (10m, every 5 days)
+   - Planet (3m, daily)
+
+2. **Cloud masking**: remove cloud-covered pixels (critical in tropics)
+
+3. **Change detection algorithms**:
+   - **NDVI differencing**: compare current NDVI to baseline; flag drops > threshold
+   - **BFAST** (Breaks For Additive Season and Trend): detects breaks in the seasonal NDVI pattern
+   - **Time series analysis**: build a model of "normal" seasonal variation; flag anomalies
+   - **Machine learning**: train classifiers on labeled deforestation examples
+
+4. **Alert generation**: pixels flagged as probable deforestation → sent to authorities
+
+5. **Verification**: ground teams or high-resolution imagery confirm or reject alerts
+
+**Accuracy challenges:**
+- False positives: seasonal deciduous leaf drop looks like deforestation
+- False negatives: gradual degradation (selective logging) is harder to detect than clear-cutting
+- Cloud cover: in monsoon regions like NE India, optical satellites may see the ground only 30% of days
+- SAR (Synthetic Aperture Radar): penetrates clouds but has lower spatial detail
+
+**Impact:** Brazil's DETER system, combined with enforcement, helped reduce Amazon deforestation by 80% between 2004 and 2012. When political enforcement weakened, deforestation surged again — proving that technology alone isn't enough.`,
+      analogy: 'Deforestation detection algorithms are like security cameras for forests. The satellites take the pictures, the algorithms are the software that flags suspicious activity, and the enforcement teams are the security guards who respond to alerts. The whole system fails if any link in the chain breaks — especially enforcement.',
+      storyConnection: 'The Girl\'s forest would appear as a growing green patch in satellite imagery. But more importantly, algorithms watching the surrounding area could detect threats before they reach her forest — illegal logging creeping closer, fire outbreaks nearby. Remote sensing gives the Girl eyes in the sky, seeing what no single person on the ground could see.',
+      checkQuestion: 'A satellite image shows a sharp NDVI drop from 0.8 to 0.2 in a tropical forest area. Is this definitely deforestation?',
+      checkAnswer: 'Not necessarily. Possible causes include: (1) Deforestation (most likely for such a large drop). (2) Severe drought causing leaf drop. (3) Wildfire. (4) Flooding (water has negative NDVI). (5) Sensor error or cloud shadow misclassification. This is why detection algorithms use time series (is the drop persistent?) and spatial context (is it adjacent to roads or existing clearings?) to reduce false positives.',
+      codeIntro: 'Implement a simple NDVI time series anomaly detection algorithm for deforestation.',
+      code: `import numpy as np
+import matplotlib.pyplot as plt
+
+np.random.seed(42)
+
+# Simulate 3 years of NDVI time series for a forest pixel
+# Data every 16 days (Landsat revisit)
+n_observations = 3 * 23  # ~23 obs per year
+
+time_days = np.arange(0, n_observations * 16, 16)
+time_years = time_days / 365.25
+
+# Normal forest NDVI: seasonal variation around 0.75
+seasonal = 0.08 * np.sin(2 * np.pi * time_years)  # seasonal cycle
+noise = np.random.normal(0, 0.03, n_observations)  # sensor noise
+base_ndvi = 0.75 + seasonal + noise
+
+# Inject deforestation event at month 20 (observation ~38)
+deforest_obs = 38
+ndvi_with_deforest = base_ndvi.copy()
+ndvi_with_deforest[deforest_obs:] = 0.15 + np.random.normal(0, 0.03, n_observations - deforest_obs)
+
+# Inject cloud gaps (missing data)
+cloud_mask = np.random.random(n_observations) > 0.3  # 70% clear in tropics is optimistic
+ndvi_observed = ndvi_with_deforest.copy()
+ndvi_observed[~cloud_mask] = np.nan
+
+# Simple detection: rolling mean anomaly
+window = 5  # 5-observation rolling mean
+rolling_mean = np.full(n_observations, np.nan)
+for i in range(window, n_observations):
+    valid = ndvi_observed[i-window:i]
+    valid = valid[~np.isnan(valid)]
+    if len(valid) >= 2:
+        rolling_mean[i] = np.nanmean(valid)
+
+# Detect: where rolling mean drops below threshold
+threshold = 0.5
+alerts = (rolling_mean < threshold) & ~np.isnan(rolling_mean)
+
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 8))
+fig.patch.set_facecolor('#1f2937')
+
+# Full NDVI time series
+ax1.set_facecolor('#111827')
+ax1.plot(time_years, base_ndvi, color='#22c55e', linewidth=1, alpha=0.4, label='True NDVI (no deforestation)')
+ax1.plot(time_years, ndvi_with_deforest, color='#3b82f6', linewidth=1, alpha=0.4, label='True NDVI (with deforestation)')
+
+# Observed (with cloud gaps)
+valid_mask = ~np.isnan(ndvi_observed)
+ax1.scatter(time_years[valid_mask], ndvi_observed[valid_mask], s=15, color='white', zorder=5, label='Satellite observations')
+ax1.scatter(time_years[~valid_mask], np.full(np.sum(~valid_mask), 0.05), s=5, color='#6b7280', alpha=0.3, label='Cloud-blocked')
+
+deforest_time = time_years[deforest_obs]
+ax1.axvline(deforest_time, color='#ef4444', linestyle='--', linewidth=1.5, label=f'Deforestation event (year {deforest_time:.1f})')
+
+ax1.set_ylabel('NDVI', color='white')
+ax1.set_title('NDVI Time Series: Forest Pixel with Deforestation Event', color='white', fontsize=13)
+ax1.legend(facecolor='#1f2937', labelcolor='white', fontsize=8, loc='lower left')
+ax1.tick_params(colors='gray')
+ax1.set_ylim(-0.1, 1.0)
+
+# Detection algorithm output
+ax2.set_facecolor('#111827')
+ax2.plot(time_years, rolling_mean, color='#f59e0b', linewidth=2, label='Rolling mean NDVI')
+ax2.axhline(threshold, color='#ef4444', linestyle='--', linewidth=1, label=f'Alert threshold ({threshold})')
+
+# Mark alerts
+alert_times = time_years[alerts]
+alert_vals = rolling_mean[alerts]
+if len(alert_times) > 0:
+    ax2.scatter(alert_times, alert_vals, s=50, color='#ef4444', zorder=5, label='ALERTS')
+    first_alert = alert_times[0]
+    delay = first_alert - deforest_time
+    ax2.annotate(f'First alert: year {first_alert:.2f}\\nDelay: {delay*365:.0f} days',
+                xy=(first_alert, alert_vals[0]), xytext=(first_alert+0.3, 0.35),
+                color='#ef4444', fontsize=10, arrowprops=dict(arrowstyle='->', color='#ef4444'))
+
+ax2.axvline(deforest_time, color='#ef4444', linestyle='--', linewidth=1, alpha=0.5)
+ax2.set_xlabel('Time (years)', color='white')
+ax2.set_ylabel('Rolling mean NDVI', color='white')
+ax2.set_title('Deforestation Detection Algorithm', color='white', fontsize=11)
+ax2.legend(facecolor='#1f2937', labelcolor='white', fontsize=9)
+ax2.tick_params(colors='gray')
+
+plt.tight_layout()
+plt.show()
+
+if len(alert_times) > 0:
+    delay_days = (alert_times[0] - deforest_time) * 365
+    print(f"Detection results:")
+    print(f"  Deforestation event: year {deforest_time:.2f}")
+    print(f"  First alert: year {alert_times[0]:.2f}")
+    print(f"  Detection delay: {delay_days:.0f} days")
+    print(f"  Total alerts: {len(alert_times)}")
+else:
+    print("No deforestation detected (algorithm may need tuning)")
+print(f"\\nCloud cover caused {np.sum(~cloud_mask)} of {n_observations} observations to be lost")
+print(f"Effective coverage: {np.sum(cloud_mask)/n_observations*100:.0f}%")`,
+      challenge: 'Lower the threshold from 0.5 to 0.6 to detect deforestation faster. What happens to the detection delay? But also count how many false alerts occur before the actual deforestation event. This is the precision-recall trade-off — a fundamental concept in all detection systems.',
+      successHint: 'From carbon accounting to net-zero pathways to REDD+ crediting to carbon markets to growth modeling to satellite detection — you now command the full toolkit of climate forestry. The Girl Who Grew a Forest worked by hand and by heart. You work with data and algorithms. Together, both approaches are needed to protect the world\'s forests.',
     },
   ];
 

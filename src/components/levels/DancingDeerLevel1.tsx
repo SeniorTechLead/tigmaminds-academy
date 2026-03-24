@@ -642,7 +642,7 @@ print("The full strategy costs more but is the only path to long-term survival."
       )}
       <div className="space-y-8">
         {miniLessons.map((lesson, i) => (
-          <MiniLesson key={i} id={`L1-{i + 1}`} number={i + 1}
+          <MiniLesson key={i} id={`L1-${i + 1}`} number={i + 1}
             title={lesson.title} concept={lesson.concept} analogy={lesson.analogy}
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}

@@ -836,7 +836,7 @@ print("The difference is preparedness, not nature.")
 print("\\nCost-effectiveness winners:")
 for name, data in sorted(interventions.items(), key=lambda x: x[1]['cost']/x[1]['lives_saved_per_event']):
     cpl = data['cost'] / data['lives_saved_per_event'] * 1e6
-    print(f"  {name.replace(chr(10), ' ')}: ${cpl:,.0f} per life saved")`,
+    print(f"  {name.replace(chr(10), ' ')}: {cpl:,.0f} per life saved")`,
       challenge: 'A government has $100 million to spend on disaster preparedness. Using the cost-effectiveness data above, design the optimal portfolio of interventions. Which combination saves the most lives?',
       successHint: 'Disaster preparedness is where atmospheric science meets civil engineering, social science, economics, and politics. India\'s 100x improvement in cyclone survival is one of the greatest public health achievements of the 21st century — and it\'s replicable anywhere with the political will to invest in preparedness over response.',
     },

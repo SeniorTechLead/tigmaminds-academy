@@ -197,7 +197,7 @@ ax2.set_title('Major Bilateral Trade Flows', color='white', fontsize=11)
 ax2.tick_params(colors='gray')
 
 for i, v in enumerate(values):
-    ax2.text(v + 5, i, f'${v}B', color='white', fontsize=9, va='center')
+    ax2.text(v + 5, i, f'{v}B', color='white', fontsize=9, va='center')
 
 plt.tight_layout()
 plt.show()

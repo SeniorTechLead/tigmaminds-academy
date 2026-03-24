@@ -584,6 +584,113 @@ print("(about 1% of global emissions)")`,
       challenge: 'Add a "hybrid" scenario: concrete foundation + CLT upper floors (the most practical current approach). How does its carbon profile compare to all-concrete and all-CLT? What is the optimal number of concrete floors vs. CLT floors?',
       successHint: 'From stress-strain to moisture to joints to CLT to sustainability — you\'ve traced timber engineering from molecular properties to global climate impact. The Sal tree that "never bends" is not just a story — it\'s a blueprint for sustainable construction.',
     },
+    {
+      title: 'Sustainable building materials — the future of construction',
+      concept: `The construction industry uses 40% of global raw materials and produces 38% of CO2 emissions. Rethinking materials is not optional — it's urgent.
+
+**Emerging sustainable materials:**
+- **Mass timber (CLT, glulam)**: carbon-negative, renewable, strong. Already in buildings up to 25 storeys.
+- **Bamboo composites**: strand-woven bamboo has steel-like strength, grows in 3-5 years. Ideal for tropical construction.
+- **Rammed earth**: compressed soil walls, extremely low carbon, good thermal mass. Ancient technique, modern revival.
+- **Hempcrete**: hemp fiber + lime binder. Carbon-negative (hemp sequesters CO2). Excellent insulation.
+- **Mycelium composites**: grown from fungal networks binding agricultural waste. Lightweight, fire-resistant, fully biodegradable.
+- **Recycled steel/concrete**: reduces embodied carbon by 50-75% compared to virgin materials.
+
+**The NE India opportunity:**
+NE India has abundant bamboo (~50% of India's reserves), Sal forests, and traditional earthen construction knowledge. Combining traditional materials with modern engineering (lamination, treatment, CLT) could create a regionally appropriate, low-carbon construction industry.
+
+**Lifecycle thinking**: the best material isn't always the strongest or cheapest — it's the one with the lowest total environmental impact over its entire life: extraction, processing, transport, use, and disposal.`,
+      analogy: 'Choosing sustainable building materials is like choosing a diet. The "healthiest" food isn\'t just about calories (strength) or taste (appearance) — it\'s about the whole system: how it was grown (extraction), how far it traveled (transport), what waste it creates (disposal), and whether the land can keep producing it (renewability). Sustainable materials are the "whole foods" of construction.',
+      storyConnection: 'The Sal tree "never bends" — and sustainable construction must never bend either. The principles that make Sal strong (cellulose + lignin composites, interlocked grain, dense heartwood) are the same principles engineers use to design the next generation of building materials. Nature solved the engineering problem; we just need to learn from it.',
+      checkQuestion: 'If mycelium (mushroom) composites can be grown in a mold in 5 days, why haven\'t they replaced styrofoam insulation already?',
+      checkAnswer: 'Three barriers: (1) Scale: mycelium production is still small-scale and artisanal. Industrial-scale bioreactors are being developed but aren\'t yet competitive. (2) Moisture sensitivity: mycelium absorbs water unless treated, which degrades performance. (3) Building codes: no standards exist yet for mycelium in construction. Regulatory approval takes 5-10 years. But all three barriers are being actively worked on — mycelium insulation may be mainstream within a decade.',
+      codeIntro: 'Build a multi-criteria sustainability comparison of building materials.',
+      code: `import numpy as np
+import matplotlib.pyplot as plt
+
+# Sustainable materials comparison
+materials = {
+    'Concrete': {'strength': 40, 'carbon': 150, 'renewable': 1, 'cost': 50, 'local_ne': 5, 'color': '#94a3b8'},
+    'Steel': {'strength': 250, 'carbon': 2500, 'renewable': 1, 'cost': 800, 'local_ne': 2, 'color': '#6b7280'},
+    'Sal CLT': {'strength': 120, 'carbon': -500, 'renewable': 6, 'cost': 600, 'local_ne': 9, 'color': '#8b4513'},
+    'Bamboo\\ncomposite': {'strength': 185, 'carbon': -800, 'renewable': 9, 'cost': 400, 'local_ne': 10, 'color': '#22c55e'},
+    'Rammed\\nearth': {'strength': 3, 'carbon': 20, 'renewable': 10, 'cost': 30, 'local_ne': 8, 'color': '#d2691e'},
+    'Hempcrete': {'strength': 1, 'carbon': -100, 'renewable': 8, 'cost': 200, 'local_ne': 4, 'color': '#86efac'},
+}
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
+fig.patch.set_facecolor('#1f2937')
+
+# Carbon footprint vs strength
+ax1.set_facecolor('#111827')
+for name, props in materials.items():
+    size = props['renewable'] * 30 + 50
+    ax1.scatter(props['strength'], props['carbon'], s=size, color=props['color'],
+                edgecolor='white', linewidth=1.5, zorder=5)
+    ax1.annotate(name.replace('\\n', ' '), xy=(props['strength'], props['carbon']),
+                 xytext=(props['strength']+5, props['carbon']+80),
+                 color=props['color'], fontsize=7)
+
+ax1.axhline(0, color='#22c55e', linestyle='--', linewidth=1)
+ax1.text(200, 50, 'CARBON POSITIVE (above)', color='#ef4444', fontsize=7)
+ax1.text(200, -100, 'CARBON NEGATIVE (below)', color='#22c55e', fontsize=7)
+
+ax1.set_xlabel('Compressive strength (MPa)', color='white')
+ax1.set_ylabel('Embodied carbon (kg CO2/m3)', color='white')
+ax1.set_title('Strength vs Carbon Footprint\\n(bubble size = renewability)', color='white', fontsize=11)
+ax1.tick_params(colors='gray')
+
+# NE India suitability score
+ax2.set_facecolor('#111827')
+categories = ['Strength', 'Low carbon', 'Renewable', 'Affordable', 'Locally\\navailable']
+N = len(categories)
+angles = np.linspace(0, 2*np.pi, N, endpoint=False).tolist()
+angles += angles[:1]
+
+for name, props in materials.items():
+    # Normalize scores to 0-10
+    strength_score = min(props['strength'] / 25, 10)
+    carbon_score = min((3000 - props['carbon']) / 350, 10)
+    renew_score = props['renewable']
+    cost_score = min((1000 - props['cost']) / 100, 10)
+    local_score = props['local_ne']
+
+    values = [strength_score, carbon_score, renew_score, cost_score, local_score]
+    values += values[:1]
+    ax2.plot(angles, values, 'o-', linewidth=1.5, label=name.replace('\\n', ' '),
+             color=props['color'], markersize=3)
+    ax2.fill(angles, values, alpha=0.05, color=props['color'])
+
+ax2.set_xticks(angles[:-1])
+ax2.set_xticklabels(categories, color='white', fontsize=8)
+ax2.set_ylim(0, 10)
+ax2.set_yticks([2, 4, 6, 8, 10])
+ax2.set_yticklabels(['2', '4', '6', '8', '10'], color='gray', fontsize=7)
+ax2.legend(loc='upper right', bbox_to_anchor=(1.45, 1.1), facecolor='#1f2937',
+           edgecolor='gray', labelcolor='white', fontsize=6)
+ax2.set_title('NE India Suitability Score', color='white', fontsize=11, pad=20)
+
+plt.tight_layout()
+plt.show()
+
+print("NE India sustainable construction potential:")
+print()
+print("Best options by application:")
+print("  Structural frame: Sal CLT or bamboo composite")
+print("    -> Carbon negative, locally available, strong")
+print("  Walls: Rammed earth or bamboo panels")
+print("    -> Ultra-low carbon, affordable, traditional knowledge exists")
+print("  Insulation: Hempcrete or bamboo fiber")
+print("    -> Carbon negative, good thermal performance")
+print("  Foundation: Concrete (still needed for waterproofing/strength)")
+print("    -> Minimize amount, use recycled aggregate")
+print()
+print("A hybrid building using these materials could be")
+print("carbon-negative over its lifecycle — absorbing more CO2")
+print("than it emits. This is the future of construction.")`,
+      challenge: 'Design a carbon-negative 3-storey building for Guwahati using only materials available in NE India. Specify the material for each component (foundation, frame, walls, roof, insulation) and calculate the total lifecycle carbon. Can you achieve net-negative?',
+      successHint: 'Sustainable building materials bring together everything from this course: wood science, bamboo biology, materials engineering, and carbon accounting. The knowledge to build a carbon-negative future already exists — in the forests and traditions of NE India.',
+    },
   ];
 
   return (

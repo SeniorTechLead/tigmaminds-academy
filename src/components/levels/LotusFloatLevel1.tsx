@@ -717,7 +717,7 @@ ax4.set_title('Savings at Scale (Solar Farms)', color='white', fontsize=12)
 ax4.tick_params(colors='gray')
 for bar, s in zip(bars4, farm_savings_20yr):
     ax4.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 5,
-             f'${s/1000:,.0f}k', ha='center', color='white', fontsize=9)
+             f'{s/1000:,.0f}k', ha='center', color='white', fontsize=9)
 
 plt.tight_layout()
 plt.show()
@@ -727,9 +727,9 @@ print(f"  No cleaning: {annual_no_clean:.0f} kWh ({annual_no_clean/annual_max*10
 print(f"  Monthly cleaning: {annual_manual:.0f} kWh ({annual_manual/annual_max*100:.0f}%)")
 print(f"  Lotus coating: {annual_lotus:.0f} kWh ({annual_lotus/annual_max*100:.0f}%)")
 print(f"\\nLotus coating payback period: {payback:.1f} years")
-print(f"20-year savings per panel: ${cumulative_savings[-1]:.0f}")
+print(f"20-year savings per panel: {cumulative_savings[-1]:.0f}")
 print(f"\\nFor a 100,000-panel desert farm:")
-print(f"  20-year savings: ${100000 * cumulative_savings[-1]:,.0f}")`,
+print(f"  20-year savings: {100000 * cumulative_savings[-1]:,.0f}")`,
       challenge: 'Add a "sandstorm" event that drops efficiency by 30% in a single day. How does the lotus coating handle sandstorms vs. regular dust? Does it still self-clean after a major dust event, or does it need manual intervention?',
       successHint: 'From Archimedes\' principle to aerenchyma to surface tension to the lotus effect to aquatic adaptations to biomimicry — you\'ve traced a complete scientific arc from fundamental physics to real-world engineering. Level 2 goes deeper into fluid mechanics and the mathematics of surfaces.',
     },

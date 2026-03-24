@@ -873,7 +873,7 @@ print("Where you looked and found nothing is as important as where you looked an
       )}
       <div className="space-y-8">
         {miniLessons.map((lesson, i) => (
-          <MiniLesson key={i} id={`L2-{i + 1}`} number={i + 1}
+          <MiniLesson key={i} id={`L2-${i + 1}`} number={i + 1}
             title={lesson.title} concept={lesson.concept} analogy={lesson.analogy}
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
