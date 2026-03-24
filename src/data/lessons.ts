@@ -23,7 +23,7 @@ export interface Lesson {
   };
   illustration: string;
   track: 'school' | 'bootcamp' | 'both';
-  playground?: 'elephant' | 'dragonfly'; // which interactive playground to embed
+  playground?: 'elephant' | 'dragonfly' | 'library'; // which interactive playground to embed
   lesson?: {
     objectives: string[];
     prerequisites: string[];
@@ -247,12 +247,13 @@ His mother smiled. "You didn't build it from nothing, Dipankar. You built it fro
       icon: Code2,
       color: 'from-violet-400 to-purple-500',
       skills: [
-        'HTML, CSS, and responsive design',
-        'JavaScript fundamentals',
-        'React components and state management',
-        'Database design (tables, relationships)',
-        'CRUD operations (Create, Read, Update, Delete)',
-        'User authentication basics',
+        'HTML structure — headings, lists, semantic markup — Level 1 — L1-1',
+        'CSS styling — colors, fonts, spacing, borders — Level 1 — L1-2',
+        'Flexbox layout — responsive card grids — Level 1 — L1-3',
+        'JavaScript interactivity — search, events, DOM — Level 1 — L1-4',
+        'State management — data, rendering, updates — Level 1 — L1-5',
+        'React components and props — Level 2',
+        'Database design and CRUD operations — Level 2',
       ],
       project: {
         title: 'Build a Community Library App',
@@ -274,6 +275,7 @@ His mother smiled. "You didn't build it from nothing, Dipankar. You built it fro
     },
     illustration: '/content/illustrations/boy-clouds.webp',
     track: 'bootcamp',
+    playground: 'library' as const,
   },
   {
     slug: 'dragonfly-and-the-paddy-field',
