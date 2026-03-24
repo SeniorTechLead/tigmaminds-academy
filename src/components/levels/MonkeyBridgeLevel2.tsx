@@ -586,7 +586,7 @@ print(f"  Edge depth: {edge_depth}m on each side")
 print(f"  Minimum width for interior habitat: {2*edge_depth}m")
 for sp, req in species_reqs.items():
     cost = req['min_width'] * 1000 * cost_per_m2 / 1e6
-    print(f"  {sp}: width >= {req['min_width']}m, length <= {req['max_length']}m, cost: ${cost:.1f}M/km")`,
+    print(f"  {sp}: width >= {req['min_width']}m, length <= {req['max_length']}m, cost: {cost:.1f}M/km")`,
       challenge: 'Design an optimal corridor for Namdapha: it needs to serve langurs (150m width) over a 3km gap. Calculate the total area of restored habitat, the cost, and the number of trees needed (assuming 400 trees/hectare).',
       successHint: 'Corridor design is where ecology meets engineering and economics. The math of edge effects, crossing probability, and cost-effectiveness is used by conservation planners worldwide to make the best use of limited funding.',
     },

@@ -445,12 +445,12 @@ This pattern — Model-View-Controller — is the foundation of React, Vue, Angu
     function render() {
       const catalog = document.getElementById('catalog');
       catalog.innerHTML = books.map(book => \`
-        <div class="book \${book.available ? '' : 'borrowed'}">
+        <div class="book \{book.available ? '' : 'borrowed'}">
           <div>
-            <h3>\${book.title}</h3>
-            <p>\${book.available ? '✓ Available' : '📖 Borrowed by ' + book.borrower}</p>
+            <h3>\{book.title}</h3>
+            <p>\{book.available ? '✓ Available' : '📖 Borrowed by ' + book.borrower}</p>
           </div>
-          \${book.available
+          \{book.available
             ? '<button class="btn btn-borrow" onclick="borrowBook(' + book.id + ')">Borrow</button>'
             : '<button class="btn btn-return" onclick="returnBook(' + book.id + ')">Return</button>'}
         </div>
@@ -561,18 +561,18 @@ In Level 2, you'll learn:
       const avail = books.filter(b => b.avail).length;
 
       document.getElementById('stats-bar').innerHTML = \`
-        <div class="stat"><div class="num">\${books.length}</div><div class="label">Total Books</div></div>
-        <div class="stat"><div class="num">\${avail}</div><div class="label">Available</div></div>
-        <div class="stat"><div class="num">\${books.length - avail}</div><div class="label">Borrowed</div></div>
+        <div class="stat"><div class="num">\{books.length}</div><div class="label">Total Books</div></div>
+        <div class="stat"><div class="num">\{avail}</div><div class="label">Available</div></div>
+        <div class="stat"><div class="num">\{books.length - avail}</div><div class="label">Borrowed</div></div>
       \`;
 
       document.getElementById('catalog').innerHTML = filtered.map(b => \`
-        <div class="book \${b.avail ? '' : 'unavail'}">
+        <div class="book \{b.avail ? '' : 'unavail'}">
           <div>
-            <h3>\${b.title} <span class="tag">\${b.cat}</span></h3>
-            <p class="meta">\${b.avail ? '✓ Available' : '📖 Borrowed by ' + b.who}</p>
+            <h3>\{b.title} <span class="tag">\{b.cat}</span></h3>
+            <p class="meta">\{b.avail ? '✓ Available' : '📖 Borrowed by ' + b.who}</p>
           </div>
-          \${b.avail
+          \{b.avail
             ? '<button class="btn btn-primary" onclick="borrow('+b.id+')">Borrow</button>'
             : '<button class="btn btn-secondary" onclick="ret('+b.id+')">Return</button>'}
         </div>
