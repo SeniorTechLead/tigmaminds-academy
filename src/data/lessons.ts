@@ -1,4 +1,4 @@
-import { Cpu, Lightbulb, Bot, Code2, Rocket, Sparkles, Leaf } from 'lucide-react';
+import { Cpu, Lightbulb, Bot, Code2, Rocket, Sparkles, Leaf, Sun, Cloud, Mountain, Music, TreePine, Construction } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
 export interface Lesson {
@@ -473,6 +473,226 @@ Tejimola's story tells us that kindness cannot be destroyed. You can bury it, pu
     illustration: '/content/illustrations/tejimola.webp',
     track: 'school',
     playground: 'tejimola' as const,
+  },
+  {
+    slug: 'golden-deer-of-kamakhya',
+    story: {
+      title: 'The Golden Deer of Kamakhya',
+      tagline: 'A golden deer whose coat shines like the sun grants one wish to anyone pure of heart.',
+      content: `On top of **Nilachal Hill** in Guwahati, where the ancient Kamakhya temple watches over the Brahmaputra valley, a **golden deer** once lived. Its coat shone like the sun, and its eyes sparkled like stars reflected in the river.
+
+The deer could grant one wish to anyone whose heart was truly pure. Many climbed the hill — kings, merchants, scholars — but the deer vanished every time, because each wished for themselves.
+
+One day, a farmer's daughter named **Junali** climbed the hill carrying nothing but a handful of rice. Instead of wishing, she offered to share her rice with the deer.
+
+*"You came to a wishing deer, and instead of wishing, you offered to share. What do you truly want?"*
+
+"I wish the river would be kinder to my village."
+
+The deer stamped its hoof, and a spring of clear water bubbled up — water that flows to this day.`,
+    },
+    stem: {
+      title: 'Optics & Light',
+      description: 'The golden deer\'s coat "shone like the sun" — but why does gold shimmer? How does light create color, reflection, and sparkle? This lesson explores the physics of light.',
+      icon: Sun,
+      color: 'from-yellow-400 to-amber-500',
+      skills: [
+        'What light is — electromagnetic waves — Level 1 — L1-1',
+        'Reflection and shiny surfaces — Level 1 — L1-2',
+        'Refraction — light bending through water — Level 1 — L1-3',
+        'Color and wavelengths — Level 1 — L1-4',
+        'Lenses and optical instruments — Level 2 — L2-1',
+        'Spectroscopy — splitting light into colors — Level 2 — L2-2',
+      ],
+      project: { title: 'Build a Spectroscope', description: 'Build a simple spectroscope from a cardboard tube and a CD to split light into its component colors.', steps: ['Understand how diffraction gratings work', 'Build the spectroscope housing', 'Observe sunlight, LED light, and fluorescent light', 'Sketch the spectrum for each light source', 'Compare to known emission spectra', 'Identify the light source from its spectrum alone'] },
+      realWorld: ['Fiber optics carry 99% of international internet data using light', 'Spectroscopy identifies elements in distant stars — same technique, cosmic scale', 'Solar panels convert light energy to electricity using the photoelectric effect'],
+    },
+    illustration: '/content/illustrations/golden-deer.webp',
+    track: 'school',
+    playground: 'golden-deer' as const,
+  },
+  {
+    slug: 'boy-who-talked-to-clouds',
+    story: {
+      title: 'The Boy Who Talked to Clouds',
+      tagline: 'In Cherrapunji, where it rains more than anywhere on Earth, a boy discovers why clouds are always giving.',
+      content: `In **Cherrapunji**, in the hills of Meghalaya, it rains almost every day. A boy named **Bah Kit** always wondered why. One morning, he climbed to a rocky ledge and reached into a cloud.
+
+"Why are you always crying?" he asked.
+
+*"I'm not crying. I'm giving. Water. The rivers need it. The trees need it. Even you drank some this morning."*
+
+"Don't you get tired of giving?"
+
+*"Sometimes. Sometimes I wish someone would give something to me."*
+
+"What do you want?"
+
+*"Company."*
+
+Bah Kit sat inside the cloud and listened to its journey — from the Bay of Bengal, over Bangladesh, hitting the Khasi Hills where cool air squeezed the water out like wringing a towel.
+
+From that day on, the rain in Cherrapunji fell softer. As if it knew someone cared.`,
+    },
+    stem: {
+      title: 'Meteorology & Climate',
+      description: 'Why does Cherrapunji get 12,000mm of rain per year? How do clouds form, travel, and release water? This lesson explores weather science through the wettest place on Earth.',
+      icon: Cloud,
+      color: 'from-sky-400 to-indigo-500',
+      skills: [
+        'The atmosphere — layers and air pressure — Level 1 — L1-1',
+        'Water cycle — evaporation, condensation, rain — Level 1 — L1-3',
+        'Cloud types and what they predict — Level 1 — L1-4',
+        'Monsoon science — why NE India is so wet — Level 1 — L1-6',
+        'Weather data analysis — Level 2 — L2-1',
+        'Climate change — CO2 and temperature trends — Level 2 — L2-5',
+      ],
+      project: { title: 'Build a Weather Station', description: 'Log temperature, humidity, and pressure data using sensors, analyze patterns, and make forecasts.', steps: ['Set up temperature + humidity sensors', 'Log readings every hour for a week', 'Plot temperature vs time — find the daily pattern', 'Correlate humidity with rainfall', 'Make a 24-hour forecast based on trends', 'Compare your forecast to the actual weather'] },
+      realWorld: ['Mawsynram (near Cherrapunji) holds the record for wettest place on Earth', 'Weather satellites use infrared cameras to track cloud formation from space', 'Climate models use millions of equations running on supercomputers'],
+    },
+    illustration: '/content/illustrations/boy-clouds.webp',
+    track: 'school',
+    playground: 'clouds' as const,
+  },
+  {
+    slug: 'how-majuli-island-was-born',
+    story: {
+      title: 'How Majuli Island Was Born',
+      tagline: 'The world\'s largest river island — created by the Brahmaputra, threatened by it, loved by all.',
+      content: `**Majuli** is the largest river island in the world, sitting in the middle of the mighty Brahmaputra. The story says that long ago, the river was a single wide channel. But one monsoon, it swelled so large that it split into two arms, leaving a piece of land between them.
+
+That land became Majuli — home to the **Mishing people**, to ancient **satras** (monasteries), to one-horned rhinos and river dolphins. For centuries, the island was enormous — over 1,200 square kilometers.
+
+But the Brahmaputra that created Majuli is also destroying it. Every year, the river eats away at the edges. The island has shrunk to less than 500 square kilometers. Villages have been swallowed. Fields have become riverbed.
+
+The people of Majuli are fighting back — planting bamboo, building embankments, and asking the world to notice. Because Majuli isn't just an island. It's a civilization that lives on borrowed land.`,
+    },
+    stem: {
+      title: 'Geography & River Dynamics',
+      description: 'How does a river create an island? How does erosion threaten it? This lesson explores the geology, hydrology, and conservation challenges of the world\'s largest river island.',
+      icon: Mountain,
+      color: 'from-teal-400 to-cyan-500',
+      skills: [
+        'Rivers — erosion and deposition — Level 1 — L1-1',
+        'Sediment transport — what rivers carry — Level 1 — L1-2',
+        'River island formation — Level 1 — L1-3',
+        'Majuli\'s erosion data — real measurements — Level 1 — L1-5',
+        'Satellite imagery analysis — Level 2 — L2-4',
+        'Engineering solutions for erosion — Level 2 — L2-6',
+      ],
+      project: { title: 'Map Erosion Over Time', description: 'Analyze satellite images of Majuli from different years to measure how much land has been lost.', steps: ['Find satellite images of Majuli (1990, 2000, 2010, 2020)', 'Trace the island boundary in each image', 'Calculate area change per decade', 'Identify the most eroded sections', 'Research what protection measures exist', 'Propose a conservation plan based on data'] },
+      realWorld: ['Majuli has lost over 50% of its area since 1950 — documented by satellite', 'The Brahmaputra carries 600 million tonnes of sediment annually — one of the highest in the world', 'Bangladesh faces similar challenges — riverbank erosion displaces 100,000+ people per year'],
+    },
+    illustration: '/content/illustrations/majuli-born.webp',
+    track: 'school',
+    playground: 'majuli' as const,
+  },
+  {
+    slug: 'bamboo-flute-of-nagaland',
+    story: {
+      title: 'The Bamboo Flute of Nagaland',
+      tagline: 'A boy carves a flute from forest bamboo and discovers that music lives inside the wood.',
+      content: `In the hills of **Nagaland**, where bamboo forests cover the mountains like green fur, a boy named **Zapuvisie** found a perfect piece of bamboo — straight, hollow, and singing in the wind.
+
+He carved holes in it with his father's knife, spaced the way his grandfather taught him. When he blew across the top, the bamboo sang — not his song, but the song of the forest. The wind in the trees, the birds in the morning, the river over stones.
+
+His grandfather said: "The music was always inside the bamboo. You just let it out."
+
+Zapuvisie played his flute every evening, and the village gathered to listen. Each hole he covered changed the note. Each breath he gave changed the mood. The same bamboo tube could sound like laughter or like rain.
+
+"How does the same tube make different sounds?" he asked his grandfather.
+
+"The air inside is learning new shapes," said the old man. And he was right — though he didn't know it was called physics.`,
+    },
+    stem: {
+      title: 'Acoustics & Sound',
+      description: 'How does a hollow bamboo tube make music? Why do different holes produce different notes? This lesson explores the physics of sound — waves, frequency, resonance, and musical scales.',
+      icon: Music,
+      color: 'from-purple-400 to-fuchsia-500',
+      skills: [
+        'Sound as pressure waves — Level 1 — L1-1',
+        'Frequency and pitch — Level 1 — L1-2',
+        'Resonance — why tubes sing — Level 1 — L1-3',
+        'Harmonics — timbre and tone color — Level 1 — L1-4',
+        'Digital audio — generating sound in code — Level 2 — L2-1',
+        'FFT — decomposing complex sounds — Level 2 — L2-3',
+      ],
+      project: { title: 'Build a Digital Flute', description: 'Create a program that generates flute-like tones at different frequencies — a virtual bamboo flute.', steps: ['Generate pure sine tones at musical note frequencies', 'Add harmonics to make it sound like a flute (not a beep)', 'Map keyboard keys to notes (a simple synthesizer)', 'Add a reverb effect using delay lines', 'Play a simple melody programmatically', 'Compare your digital flute to a recording of a real bamboo flute'] },
+      realWorld: ['Auto-Tune uses FFT to detect and correct vocal pitch in real time', 'Noise-cancelling headphones generate inverse sound waves to cancel noise', 'Musical instrument digital interface (MIDI) standardized electronic music in 1983'],
+    },
+    illustration: '/content/illustrations/bamboo-flute.webp',
+    track: 'school',
+    playground: 'bamboo-flute' as const,
+  },
+  {
+    slug: 'dancing-deer-of-loktak-lake',
+    story: {
+      title: 'The Dancing Deer of Loktak Lake',
+      tagline: 'On floating islands in Manipur, the last sangai deer dance at dawn — fewer than 300 remain.',
+      content: `In **Manipur**, there is a lake unlike any other. **Loktak Lake** is covered with floating islands called **phumdis** — thick mats of vegetation, soil, and organic matter that drift across the water. On these floating islands lives the **sangai** — the brow-antlered deer, found nowhere else on Earth.
+
+The sangai is called the "dancing deer" because of the way it walks on the soft, floating phumdis — each step a careful, graceful movement, as if it's dancing on water. Fewer than **300 sangai** remain in the wild.
+
+The lake is shrinking. The phumdis are thinning. Pollution and a dam have changed the water levels. The sangai's floating world is sinking beneath them.
+
+But the people of Manipur haven't given up. Keibul Lamjao National Park — the world's only floating national park — protects the sangai's last habitat. Scientists, rangers, and local communities work together to save the dancing deer.
+
+Because some dances are too beautiful to lose.`,
+    },
+    stem: {
+      title: 'Ecology & Conservation',
+      description: 'Why is the sangai endangered? What makes a wetland ecosystem work? This lesson explores food chains, biodiversity, population dynamics, and the science of saving species.',
+      icon: TreePine,
+      color: 'from-green-400 to-emerald-500',
+      skills: [
+        'Ecosystems — living and non-living interactions — Level 1 — L1-1',
+        'Food chains and energy flow — Level 1 — L1-2',
+        'Wetland ecology — why wetlands matter — Level 1 — L1-3',
+        'Biodiversity measurement — Level 1 — L1-4',
+        'Population dynamics — growth and decline — Level 2 — L2-1',
+        'Conservation strategies — protected areas and community — Level 2 — L2-6',
+      ],
+      project: { title: 'Species Conservation Plan', description: 'Analyze population data, model growth scenarios, and propose a conservation strategy for an endangered species.', steps: ['Research current sangai population data', 'Model population growth with and without protection', 'Identify threats: habitat loss, poaching, climate', 'Calculate minimum viable population size', 'Design a conservation plan with measurable goals', 'Present findings as a scientific poster'] },
+      realWorld: ['The sangai population dropped to ~14 in the 1970s — conservation brought it back to ~300', 'Wetlands cover 6% of Earth\'s surface but contain 40% of all species', 'India has 75 Ramsar wetland sites — Loktak Lake is one of them'],
+    },
+    illustration: '/content/illustrations/dancing-deer.webp',
+    track: 'school',
+    playground: 'dancing-deer' as const,
+  },
+  {
+    slug: 'bridge-that-grew',
+    story: {
+      title: 'The Bridge That Grew',
+      tagline: 'In Meghalaya, the Khasi people grow bridges from living tree roots — engineering that takes decades but lasts centuries.',
+      content: `In the rainforests of **Meghalaya**, where rivers swell to torrents in the monsoon and wooden bridges rot in a single season, the **Khasi people** found a solution that takes patience but lasts forever: they grow their bridges.
+
+They guide the roots of the **Ficus elastica** (rubber fig tree) across rivers using bamboo scaffolding and hollowed-out betel nut trunks. The roots grow, thicken, and intertwine over **15 to 20 years** until they form a bridge strong enough to hold 50 people at once.
+
+These **living root bridges** get stronger with age. Some are over **500 years old** and still in use. They don't rust, don't rot (they're alive), and they repair themselves when damaged.
+
+The most famous is the **double-decker root bridge** at Nongriat village — two bridges stacked on top of each other, both grown from living roots.
+
+In an age of steel and concrete, the Khasi people remind us that sometimes the best engineering is patient, alive, and rooted in the earth.`,
+    },
+    stem: {
+      title: 'Bio-engineering & Structures',
+      description: 'How can a living tree become a bridge? What forces act on a bridge? This lesson explores structural engineering, materials science, and the revolutionary field of bio-engineering.',
+      icon: Construction,
+      color: 'from-orange-400 to-red-500',
+      skills: [
+        'Forces — compression, tension, and balance — Level 1 — L1-1',
+        'Bridge types — beam, arch, suspension, root — Level 1 — L1-2',
+        'Materials comparison — steel, wood, roots — Level 1 — L1-3',
+        'Load distribution and stress — Level 1 — L1-4',
+        'Structural analysis — free body diagrams — Level 2 — L2-1',
+        'Designing for safety — factors of safety — Level 2 — L2-4',
+      ],
+      project: { title: 'Design a Bridge', description: 'Design, model, and test a bridge structure — compare materials, calculate loads, and optimize for strength.', steps: ['Calculate forces on a simple beam bridge', 'Build a model bridge from craft sticks or spaghetti', 'Test to failure — measure the maximum load', 'Compare beam vs. arch vs. truss designs', 'Calculate the safety factor of your best design', 'Research how living root bridges compare to engineered ones'] },
+      realWorld: ['Living root bridges self-repair and strengthen over time — no maintenance needed', 'The Golden Gate Bridge requires 40 full-time painters working year-round', 'Biomimetic architecture is growing structures using mycelium (mushroom roots)'],
+    },
+    illustration: '/content/illustrations/bridge-grew.webp',
+    track: 'school',
+    playground: 'bridge' as const,
   },
 ];
 
