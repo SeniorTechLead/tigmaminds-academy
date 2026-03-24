@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, CheckCircle, ExternalLink, BookOpen, Wrench, Lightbulb, Gamepad2, Clock, Target, Package, ListChecks } from 'lucide-react';
 import Header from '../components/Header';
@@ -5,10 +6,14 @@ import Footer from '../components/Footer';
 import { getLessonBySlug, lessons } from '../data/lessons';
 import ElephantPlayground from '../components/ElephantPlayground';
 import CodePlayground from '../components/CodePlayground';
+import ElephantLevel1 from '../components/ElephantLevel1';
+
+type Level = 'explorer' | 'builder' | 'engineer';
 
 export default function LessonPage() {
   const { slug } = useParams<{ slug: string }>();
   const lesson = slug ? getLessonBySlug(slug) : undefined;
+  const [activeLevel, setActiveLevel] = useState<Level>('explorer');
 
   if (!lesson) {
     return (
@@ -169,34 +174,58 @@ export default function LessonPage() {
       {/* Playground (if available) */}
       {lesson.playground && (
         <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
-          <div className="max-w-3xl mx-auto">
-            <div className="flex items-center gap-3 mb-8">
+          <div className="max-w-4xl mx-auto">
+            <div className="flex items-center gap-3 mb-4">
               <Gamepad2 className="w-6 h-6 text-emerald-500" />
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Try It Yourself</h2>
             </div>
             <p className="text-gray-600 dark:text-gray-300 mb-8">
-              Before we get to the science — experience it. Rongpharpi learned to read elephant vibrations through the ground. Can you?
+              Choose your level. Everyone starts with the story — the code gets deeper as you go.
             </p>
+
+            {/* Level tabs */}
+            <div className="flex gap-2 mb-10 flex-wrap">
+              {([
+                { key: 'explorer' as Level, label: 'Level 1: Explorer', desc: 'No coding experience', color: 'emerald' },
+                { key: 'builder' as Level, label: 'Level 2: Builder', desc: 'Some coding', color: 'amber' },
+                { key: 'engineer' as Level, label: 'Level 3: Engineer', desc: 'Ready for ML', color: 'rose' },
+              ]).map((lvl) => (
+                <button
+                  key={lvl.key}
+                  onClick={() => setActiveLevel(lvl.key)}
+                  className={`px-5 py-3 rounded-xl font-semibold text-sm transition-all ${
+                    activeLevel === lvl.key
+                      ? lvl.color === 'emerald' ? 'bg-emerald-600 text-white shadow-lg' :
+                        lvl.color === 'amber' ? 'bg-amber-500 text-white shadow-lg' :
+                        'bg-rose-600 text-white shadow-lg'
+                      : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
+                  }`}
+                >
+                  <span className="block">{lvl.label}</span>
+                  <span className={`block text-xs mt-0.5 ${activeLevel === lvl.key ? 'text-white/80' : 'text-gray-400'}`}>{lvl.desc}</span>
+                </button>
+              ))}
+            </div>
+
+            {/* Level content */}
             {lesson.playground === 'elephant' && (
               <>
-                <ElephantPlayground />
+                {activeLevel === 'explorer' && <ElephantLevel1 />}
 
-                <div className="mt-12">
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Now Build the Classifier</h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-6">
-                    You just classified elephant sounds by ear. Now do it with code. The Python playground below has numpy and matplotlib pre-installed — generate signals, visualize them as spectrograms, and build a simple classifier.
-                  </p>
-                  <CodePlayground
-                    title="Elephant Sound Classifier"
-                    packages={['numpy', 'matplotlib']}
-                    description="Write Python to analyze and classify elephant rumble patterns. Press Run (⌘↵) to execute."
-                    steps={[
-                      { title: 'Generate signals', hint: 'Create sine waves at different frequencies and pulse rates', lines: [1, 19] as [number, number] },
-                      { title: 'Visualize', hint: 'Plot the 3 waveforms with matplotlib', lines: [21, 38] as [number, number] },
-                      { title: 'Read output', hint: 'Check the signal parameters printed below the chart', lines: [40, 45] as [number, number] },
-                      { title: 'Experiment', hint: 'Change values on lines 11, 14, 18 and re-run', lines: [11, 18] as [number, number] },
-                    ]}
-                    starterCode={`import numpy as np
+                {activeLevel === 'builder' && (
+                  <div className="space-y-8">
+                    <ElephantPlayground />
+                    <CodePlayground
+                      title="Elephant Sound Classifier"
+                      packages={['numpy', 'matplotlib']}
+                      description="Generate elephant rumble signals, visualize waveforms, and experiment with parameters."
+                      steps={[
+                        { title: 'Generate signals', hint: 'Create sine waves at different frequencies and pulse rates', lines: [1, 19] as [number, number] },
+                        { title: 'Visualize', hint: 'Plot the 3 waveforms with matplotlib', lines: [21, 38] as [number, number] },
+                        { title: 'Read output', hint: 'Check the signal parameters printed below the chart', lines: [40, 45] as [number, number] },
+                        { title: 'Experiment', hint: 'Change values on lines 11, 14, 18 and re-run', lines: [11, 18] as [number, number] },
+                      ]}
+                      starterCode={`import numpy as np
 import matplotlib.pyplot as plt
 
 # === Step 1: Generate elephant rumble signals ===
@@ -244,35 +273,23 @@ plt.show()
 print("✓ Generated 3 rumble patterns")
 print(f"  Sample rate: {sample_rate} Hz")
 print(f"  Duration: {duration}s each")
-print()
 print("  Calm: 80 Hz base, 0.5 Hz pulse")
 print("  Nervous: 110 Hz base, 3 Hz pulse")
 print("  Danger: 40 Hz boom + 55 Hz @ 8 Hz pulse")
 `}
-                  />
-
-                  <div className="mt-8 bg-amber-50 dark:bg-amber-900/20 rounded-2xl p-6 border border-amber-200 dark:border-amber-800">
-                    <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Experiments — edit the code above, then hit Run</h4>
-                    <div className="space-y-4">
-                      {[
-                        { line: 11, change: '80 → 200', target: 'the calm signal base frequency', question: 'What does a higher base frequency look like? Does the waveform get tighter?' },
-                        { line: 11, change: '0.5 → 4', target: 'the calm signal pulse rate', question: '"Calm" now pulses rapidly — does it still look calm? At what pulse rate does calm start looking nervous?' },
-                        { line: 14, change: '3 → 0.5', target: 'the nervous signal pulse rate', question: 'Nervous with a slow pulse — can you still tell it apart from calm? What\'s the real difference between these signals?' },
-                        { line: 18, change: '8 → 1', target: 'the danger hammering rate', question: 'Slow hammering vs fast — how does the waveform shape change? Which version would scare you more?' },
-                      ].map((exp, i) => (
-                        <div key={i} className="flex items-start gap-3">
-                          <span className="w-6 h-6 rounded-full bg-amber-500 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">{i + 1}</span>
-                          <div>
-                            <p className="text-gray-900 dark:text-white font-medium">
-                              Line {exp.line}: Change <code className="bg-amber-100 dark:bg-amber-900/40 px-1.5 py-0.5 rounded text-amber-700 dark:text-amber-300 text-sm">{exp.change}</code> in {exp.target}
-                            </p>
-                            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{exp.question}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
+                    />
                   </div>
-                </div>
+                )}
+
+                {activeLevel === 'engineer' && (
+                  <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 text-center">
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Level 3: Engineer</h3>
+                    <p className="text-gray-600 dark:text-gray-300 mb-4">
+                      Record real audio, compute spectrograms, train a k-nearest-neighbors classifier, and measure accuracy.
+                    </p>
+                    <p className="text-amber-600 dark:text-amber-400 font-semibold">Coming soon — this level is part of the 24-week bootcamp curriculum.</p>
+                  </div>
+                )}
               </>
             )}
           </div>
