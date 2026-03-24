@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, CheckCircle, ExternalLink, BookOpen, Wrench, Lightbulb, Gamepad2 } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle, ExternalLink, BookOpen, Wrench, Lightbulb, Gamepad2, Clock, Target, Package, ListChecks } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { getLessonBySlug, lessons } from '../data/lessons';
@@ -62,6 +62,89 @@ export default function LessonPage() {
           </div>
         </div>
       </section>
+
+      {/* Lesson Overview (structured lessons only) */}
+      {lesson.lesson && (
+        <section className="py-12 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800">
+          <div className="max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+              <div className="flex items-start gap-3">
+                <Clock className="w-5 h-5 text-amber-500 mt-1 flex-shrink-0" />
+                <div>
+                  <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Duration</p>
+                  <p className="text-gray-900 dark:text-white font-medium">{lesson.lesson.estimatedTime}</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <Target className="w-5 h-5 text-amber-500 mt-1 flex-shrink-0" />
+                <div>
+                  <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Track</p>
+                  <p className="text-gray-900 dark:text-white font-medium">
+                    {lesson.track === 'school' ? '12-Month School Program' : lesson.track === 'bootcamp' ? '24-Week Bootcamp' : 'Both Tracks'}
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <ListChecks className="w-5 h-5 text-amber-500 mt-1 flex-shrink-0" />
+                <div>
+                  <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Prerequisites</p>
+                  <p className="text-gray-900 dark:text-white font-medium">None</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <Package className="w-5 h-5 text-amber-500 mt-1 flex-shrink-0" />
+                <div>
+                  <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Materials</p>
+                  <p className="text-gray-900 dark:text-white font-medium">{lesson.lesson.materials.length} items needed</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Learning Objectives */}
+              <div className="bg-amber-50 dark:bg-amber-900/20 rounded-2xl p-6">
+                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                  <Target className="w-5 h-5 text-amber-600" /> Learning Objectives
+                </h3>
+                <ul className="space-y-3">
+                  {lesson.lesson.objectives.map((obj) => (
+                    <li key={obj} className="flex items-start gap-3">
+                      <CheckCircle className="w-4 h-4 text-amber-600 flex-shrink-0 mt-1" />
+                      <span className="text-sm text-gray-700 dark:text-gray-300">{obj}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Materials List */}
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-6">
+                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                  <Package className="w-5 h-5 text-amber-600" /> Materials List
+                </h3>
+                <ul className="space-y-2">
+                  {lesson.lesson.materials.map((mat) => (
+                    <li key={mat} className="flex items-start gap-3">
+                      <span className="text-amber-500 mt-0.5">•</span>
+                      <span className="text-sm text-gray-700 dark:text-gray-300">{mat}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Prerequisites */}
+            {lesson.lesson.prerequisites.length > 0 && (
+              <div className="mt-6 bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4 flex items-start gap-3">
+                <ListChecks className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-sm font-semibold text-gray-900 dark:text-white mb-1">Prerequisites</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">{lesson.lesson.prerequisites.join(' • ')}</p>
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* Story Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-amber-50/50 to-white dark:from-gray-800/50 dark:to-gray-900">

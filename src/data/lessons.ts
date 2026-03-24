@@ -24,6 +24,12 @@ export interface Lesson {
   illustration: string;
   track: 'school' | 'bootcamp' | 'both';
   playground?: 'elephant'; // which interactive playground to embed
+  lesson?: {
+    objectives: string[];
+    prerequisites: string[];
+    estimatedTime: string;
+    materials: string[];
+  };
 }
 
 export const lessons: Lesson[] = [
@@ -115,12 +121,12 @@ From that night on, Joon was never afraid of the dark again — because he under
         title: 'Build a Firefly Jar',
         description: 'Create an Arduino-powered LED installation that mimics the blinking patterns of real fireflies — including synchronized flashing.',
         steps: [
-          'Learn how real fireflies synchronize their flashing (coupled oscillators)',
-          'Build a basic LED circuit on a breadboard',
-          'Program an Arduino to blink LEDs with randomized timing',
-          'Add PWM to create smooth fade-in/fade-out (like real bioluminescence)',
-          'Wire multiple LEDs that gradually synchronize, mimicking a firefly swarm',
-          'House the project in a jar or enclosure for display',
+          'Session 1: The science of bioluminescence — draw the luciferin reaction chain, compare firefly efficiency (98%) to LEDs (40%) and incandescent bulbs (10%). Watch slow-motion footage of firefly abdomens.',
+          'Session 1: Build your first LED circuit — connect one LED + resistor to Arduino 5V. Learn Ohm\'s Law (V = IR) by calculating the right resistor value. Then wire 3 LEDs in parallel.',
+          'Session 1: Write your first Arduino sketch — blink one LED with delay(). Then randomize the timing using random() so each LED blinks independently, like individual fireflies.',
+          'Session 2: Replace digital on/off with analogWrite() (PWM) — create smooth fade-in/fade-out that mimics the organic glow of bioluminescence. Experiment with different fade curves.',
+          'Session 2: Wire 10 LEDs, each on its own PWM pin. Give each a random blink phase. Then implement the Kuramoto model: each LED slightly adjusts its timing toward its neighbors, gradually synchronizing — exactly how real fireflies do it.',
+          'Session 3: Build the enclosure — mount LEDs inside a glass jar with diffusion paper. Add a light sensor (LDR) so the jar only activates in darkness, like real fireflies. Solder permanent connections.',
         ],
       },
       realWorld: [
@@ -131,6 +137,30 @@ From that night on, Joon was never afraid of the dark again — because he under
     },
     illustration: '/content/illustrations/majuli-born.png',
     track: 'school',
+    lesson: {
+      objectives: [
+        'Explain how bioluminescence works at a chemical level (luciferin + luciferase + oxygen)',
+        'Build a working LED circuit on a breadboard — series and parallel configurations',
+        'Program an Arduino to produce PWM-controlled fading effects that mimic organic light',
+        'Understand how fireflies synchronize their flashing and relate it to coupled oscillator theory',
+      ],
+      prerequisites: [
+        'No prior electronics experience required',
+        'Basic math (multiplication, simple fractions)',
+        'Curiosity about how living things produce light',
+      ],
+      estimatedTime: '3 sessions × 2 hours (6 hours total)',
+      materials: [
+        'Arduino Uno or Nano',
+        'Breadboard and jumper wires',
+        '10× green LEDs (5mm)',
+        '10× 220Ω resistors',
+        'USB cable for Arduino',
+        'Computer with Arduino IDE installed',
+        'Optional: clear glass jar for final enclosure',
+        'Optional: soldering iron + solder for permanent build',
+      ],
+    },
   },
   {
     slug: 'river-dolphins-secret',
@@ -337,12 +367,12 @@ To this day, muga silk is found only in Assam — the only golden silk in the wo
         title: 'Materials Science Investigation',
         description: 'Compare the properties of different fibres (silk, cotton, nylon, spider silk) through hands-on experiments and microscopy.',
         steps: [
-          'Study how silkworms produce fibre at the molecular level',
-          'Examine silk, cotton, and synthetic fibres under a microscope',
-          'Design tensile strength experiments — which fibre is strongest?',
-          'Test water absorption, heat resistance, and UV degradation',
-          'Research why muga silk\'s golden colour never fades (UV-resistant proteins)',
-          'Write a materials science report comparing your findings',
+          'Session 1: Silk biology deep dive — trace the journey from som leaf → silkworm gut → spinneret → cocoon. Draw the molecular structure of fibroin (β-sheet crystals). Understand why muga silk is golden: xanthurenic acid pigment bound into the protein, not a surface dye.',
+          'Session 1: Collect samples — cotton thread, nylon fishing line, raw muga silk (or eri/pat silk), and polyester. Prepare slides and examine each under a microscope (40x–100x). Sketch the fibre cross-sections and surface textures.',
+          'Session 2: Tensile strength testing — build a simple test rig with a clamp, ruler, and small weights. Record the breaking force for each fibre at the same thickness. Calculate stress (force/area) and create a comparison bar chart.',
+          'Session 2: Water absorption test — weigh dry samples, submerge for 30 minutes, weigh again. Which fibre absorbs most? Least? Connect this to protein structure (hydrophilic vs hydrophobic regions).',
+          'Session 3: UV degradation experiment — expose samples to direct sunlight for 48 hours (or a UV lamp for 4 hours). Compare colour change, strength loss, and texture. Muga silk should show minimal degradation — document why.',
+          'Session 3: Write your materials science report — hypothesis, method, data tables, charts, analysis, and conclusion. Include a section: "If you were designing a medical suture, which fibre would you choose and why?"',
         ],
       },
       realWorld: [
@@ -353,6 +383,31 @@ To this day, muga silk is found only in Assam — the only golden silk in the wo
     },
     illustration: '/content/illustrations/weaver-girl.png',
     track: 'school',
+    lesson: {
+      objectives: [
+        'Describe the biology of silk production — from silkworm diet to protein extrusion',
+        'Explain why muga silk is golden at the molecular level (xanthurenic acid in fibroin)',
+        'Design and execute materials science experiments: tensile strength, water absorption, UV resistance',
+        'Compare natural and synthetic fibres using the scientific method and present findings in a formal report',
+      ],
+      prerequisites: [
+        'No prior science lab experience required',
+        'Basic understanding of measurement (grams, centimeters)',
+        'Ability to follow a written procedure and record observations',
+      ],
+      estimatedTime: '3 sessions × 2 hours (6 hours total)',
+      materials: [
+        'Fibre samples: cotton thread, nylon line, silk thread (any type), polyester thread',
+        'Microscope (40x minimum) or USB digital microscope',
+        'Glass slides and slide covers',
+        'Small weights (washers, coins, or a kitchen scale)',
+        'Ruler and clamp or binder clip for tensile testing',
+        'Small containers for water absorption test',
+        'UV lamp or access to direct sunlight',
+        'Lab notebook or printed worksheet',
+        'Optional: muga silk sample (available online from Assam weavers)',
+      ],
+    },
   },
 ];
 
