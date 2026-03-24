@@ -208,7 +208,7 @@ export default function LessonPage() {
 
             {/* Level content — loaded dynamically per story */}
             {(() => {
-              const { Level1, Level2 } = getLevelComponents(lesson.slug);
+              const { Level1, Level2, Level3 } = getLevelComponents(lesson.slug);
               return (
                 <Suspense fallback={<div className="text-center py-8"><div className="w-8 h-8 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto" /></div>}>
                   {activeLevel === 'explorer' && Level1 && <Level1 />}
@@ -224,13 +224,15 @@ export default function LessonPage() {
                     </div>
                   )}
                   {activeLevel === 'engineer' && (
-                    <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 text-center">
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Level 3: Engineer</h3>
-                      <p className="text-gray-600 dark:text-gray-300 mb-4">
-                        Advanced project with real-world data and ML techniques.
-                      </p>
-                      <p className="text-amber-600 dark:text-amber-400 font-semibold">Coming soon — this level is part of the 24-week bootcamp curriculum.</p>
-                    </div>
+                    Level3 ? <Level3 /> : (
+                      <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 text-center">
+                        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Level 3: Engineer</h3>
+                        <p className="text-gray-600 dark:text-gray-300 mb-4">
+                          Advanced project with real-world data and production techniques.
+                        </p>
+                        <p className="text-amber-600 dark:text-amber-400 font-semibold">Coming soon — this level is part of the 24-week bootcamp curriculum.</p>
+                      </div>
+                    )
                   )}
                 </Suspense>
               );

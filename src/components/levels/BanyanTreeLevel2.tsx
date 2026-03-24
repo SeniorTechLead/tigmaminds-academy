@@ -432,7 +432,7 @@ print("Urban tree canopy impacts:")
 print(f"  0% canopy: {base_temp} C (full heat island)")
 print(f"  20% canopy: {base_temp - 0.12*20:.1f} C")
 print(f"  40% canopy: {base_temp - 0.12*40:.1f} C (near rural)")
-print(f"\\nA 50-year-old urban tree provides ~${total_value[49]:,.0f}/year in services")`,
+print(f"\\nA 50-year-old urban tree provides ~{total_value[49]:,.0f}/year in services")`,
       challenge: 'Model climate change: add 2 degrees C to the base temperature. How much additional canopy is needed to maintain current heat levels?',
       successHint: 'Urban forestry is where ecology meets city planning. Trees are the cheapest cooling, cleaning, and calming technology a city can deploy.',
     },

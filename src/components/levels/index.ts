@@ -3,17 +3,18 @@ import { lazy, ComponentType } from 'react';
 interface LevelComponents {
   Level1?: ComponentType;
   Level2?: ComponentType;
+  Level3?: ComponentType;
 }
 
 // Registry maps story slugs to lazy-loaded level components
 // The slug must match the `slug` field in lessons.ts
 const registry: Record<string, LevelComponents> = {
   // Original 6 stories
-  'girl-who-spoke-to-elephants': { Level1: lazy(() => import('../ElephantLevel1')), Level2: lazy(() => import('../ElephantLevel2')) },
-  'dragonfly-and-the-paddy-field': { Level1: lazy(() => import('./DragonflyLevel1')), Level2: lazy(() => import('./DragonflyLevel2')) },
-  'boy-who-built-a-library': { Level1: lazy(() => import('./LibraryLevel1')), Level2: lazy(() => import('./LibraryLevel2')) },
-  'firefly-festival-of-majuli': { Level1: lazy(() => import('./FireflyLevel1')), Level2: lazy(() => import('./FireflyLevel2')) },
-  'river-dolphins-secret': { Level1: lazy(() => import('./DolphinLevel1')), Level2: lazy(() => import('./DolphinLevel2')) },
+  'girl-who-spoke-to-elephants': { Level1: lazy(() => import('../ElephantLevel1')), Level2: lazy(() => import('../ElephantLevel2')), Level3: lazy(() => import('./ElephantLevel3')) },
+  'dragonfly-and-the-paddy-field': { Level1: lazy(() => import('./DragonflyLevel1')), Level2: lazy(() => import('./DragonflyLevel2')), Level3: lazy(() => import('./DragonflyLevel3')) },
+  'boy-who-built-a-library': { Level1: lazy(() => import('./LibraryLevel1')), Level2: lazy(() => import('./LibraryLevel2')), Level3: lazy(() => import('./LibraryLevel3')) },
+  'firefly-festival-of-majuli': { Level1: lazy(() => import('./FireflyLevel1')), Level2: lazy(() => import('./FireflyLevel2')), Level3: lazy(() => import('./FireflyLevel3')) },
+  'river-dolphins-secret': { Level1: lazy(() => import('./DolphinLevel1')), Level2: lazy(() => import('./DolphinLevel2')), Level3: lazy(() => import('./DolphinLevel3')) },
   'why-the-muga-silk-is-golden': { Level1: lazy(() => import('./MugaSilkLevel1')), Level2: lazy(() => import('./MugaSilkLevel2')) },
 
   // OurAssam folklore stories
