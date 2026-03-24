@@ -23,6 +23,7 @@ export interface Lesson {
   };
   illustration: string;
   track: 'school' | 'bootcamp' | 'both';
+  playground?: 'elephant'; // which interactive playground to embed
 }
 
 export const lessons: Lesson[] = [
@@ -77,6 +78,7 @@ After that night, Rongpharpi became the village's **elephant listener** — a br
     },
     illustration: '/content/illustrations/elephant-ant.png',
     track: 'both',
+    playground: 'elephant',
   },
   {
     slug: 'firefly-festival-of-majuli',

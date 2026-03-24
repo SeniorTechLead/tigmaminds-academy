@@ -1,8 +1,9 @@
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, CheckCircle, ExternalLink, BookOpen, Wrench, Lightbulb } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle, ExternalLink, BookOpen, Wrench, Lightbulb, Gamepad2 } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { getLessonBySlug, lessons } from '../data/lessons';
+import ElephantPlayground from '../components/ElephantPlayground';
 
 export default function LessonPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -80,6 +81,22 @@ export default function LessonPage() {
           </div>
         </div>
       </section>
+
+      {/* Playground (if available) */}
+      {lesson.playground && (
+        <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
+          <div className="max-w-3xl mx-auto">
+            <div className="flex items-center gap-3 mb-8">
+              <Gamepad2 className="w-6 h-6 text-emerald-500" />
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Try It Yourself</h2>
+            </div>
+            <p className="text-gray-600 dark:text-gray-300 mb-8">
+              Before we get to the science — experience it. Rongpharpi learned to read elephant vibrations through the ground. Can you?
+            </p>
+            {lesson.playground === 'elephant' && <ElephantPlayground />}
+          </div>
+        </section>
+      )}
 
       {/* STEM Connection */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
