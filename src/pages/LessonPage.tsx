@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { getLessonBySlug, lessons } from '../data/lessons';
 import ElephantPlayground from '../components/ElephantPlayground';
+import CodePlayground from '../components/CodePlayground';
 
 export default function LessonPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -176,7 +177,84 @@ export default function LessonPage() {
             <p className="text-gray-600 dark:text-gray-300 mb-8">
               Before we get to the science — experience it. Rongpharpi learned to read elephant vibrations through the ground. Can you?
             </p>
-            {lesson.playground === 'elephant' && <ElephantPlayground />}
+            {lesson.playground === 'elephant' && (
+              <>
+                <ElephantPlayground />
+
+                <div className="mt-12">
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Now Build the Classifier</h3>
+                  <p className="text-gray-600 dark:text-gray-300 mb-6">
+                    You just classified elephant sounds by ear. Now do it with code. The Python playground below has numpy and matplotlib pre-installed — generate signals, visualize them as spectrograms, and build a simple classifier.
+                  </p>
+                  <CodePlayground
+                    title="Elephant Sound Classifier"
+                    packages={['numpy', 'matplotlib']}
+                    description="Write Python to analyze and classify elephant rumble patterns. Press Run (⌘↵) to execute."
+                    steps={[
+                      { title: 'Generate signals', hint: 'Use numpy to create sine waves at different frequencies' },
+                      { title: 'Visualize', hint: 'Plot the waveform with matplotlib' },
+                      { title: 'Spectrogram', hint: 'Use plt.specgram() to see frequency over time' },
+                      { title: 'Classify', hint: 'Write a function that detects the dominant frequency' },
+                    ]}
+                    starterCode={`import numpy as np
+import matplotlib.pyplot as plt
+
+# === Step 1: Generate elephant rumble signals ===
+# Real elephants rumble at 8-25 Hz (infrasonic)
+# We'll simulate 3 moods at audible frequencies
+
+sample_rate = 8000  # samples per second
+duration = 3        # seconds
+t = np.linspace(0, duration, sample_rate * duration)
+
+# Calm: low frequency, slow pulsing
+calm = np.sin(2 * np.pi * 80 * t) * (0.5 + 0.5 * np.sin(2 * np.pi * 0.5 * t))
+
+# Nervous: higher frequency, rapid pulsing
+nervous = np.sin(2 * np.pi * 110 * t) * (0.5 + 0.5 * np.sin(2 * np.pi * 3 * t))
+
+# Danger: low boom then frantic hammering
+boom = np.exp(-t * 3) * np.sin(2 * np.pi * 40 * t)
+hammering = np.sin(2 * np.pi * 55 * t) * (0.5 + 0.5 * np.sin(2 * np.pi * 8 * t))
+danger = boom + hammering * (1 - np.exp(-t * 3))
+
+# === Step 2: Plot the waveforms ===
+fig, axes = plt.subplots(3, 1, figsize=(10, 6))
+fig.patch.set_facecolor('#1f2937')
+
+for ax, signal, label, color in [
+    (axes[0], calm, 'Calm & Feeding', '#22c55e'),
+    (axes[1], nervous, 'Nervous & Alert', '#f59e0b'),
+    (axes[2], danger, 'Danger — Run!', '#ef4444'),
+]:
+    ax.plot(t[:2000], signal[:2000], color=color, linewidth=0.8)
+    ax.set_ylabel(label, color='white', fontsize=9)
+    ax.set_facecolor('#111827')
+    ax.tick_params(colors='gray')
+    ax.spines['bottom'].set_color('gray')
+    ax.spines['left'].set_color('gray')
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+
+axes[2].set_xlabel('Time (seconds)', color='white')
+plt.suptitle('Elephant Rumble Patterns', color='white', fontsize=14, fontweight='bold')
+plt.tight_layout()
+plt.show()
+
+print("✓ Generated 3 rumble patterns")
+print(f"  Sample rate: {sample_rate} Hz")
+print(f"  Duration: {duration}s each")
+print(f"  Calm: 80 Hz base, 0.5 Hz pulse")
+print(f"  Nervous: 110 Hz base, 3 Hz pulse")
+print(f"  Danger: 40 Hz boom + 55 Hz @ 8 Hz pulse")
+print()
+print("🎯 Next: Try changing the frequencies and re-running!")
+print("   What happens if you increase the pulse rate?")
+`}
+                  />
+                </div>
+              </>
+            )}
           </div>
         </section>
       )}

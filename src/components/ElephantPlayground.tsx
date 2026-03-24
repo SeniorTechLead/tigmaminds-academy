@@ -21,17 +21,17 @@ const patterns: RumblePattern[] = [
     mood: 'calm',
     label: 'Calm & Feeding',
     description: 'Low, steady rumble — the herd is relaxed, grazing peacefully. Like a gentle hum through the earth.',
-    baseFreq: 18,
+    baseFreq: 80,
     pulseRate: 0.5,
     duration: 4,
-    amplitude: 0.3,
+    amplitude: 0.4,
     color: '#22c55e',
   },
   {
     mood: 'nervous',
     label: 'Nervous & Alert',
     description: 'Quick, sharp pulses — something has caught their attention. The herd is on edge, ready to move.',
-    baseFreq: 25,
+    baseFreq: 110,
     pulseRate: 3,
     duration: 3,
     amplitude: 0.5,
@@ -41,10 +41,10 @@ const patterns: RumblePattern[] = [
     mood: 'danger',
     label: 'Danger — Run!',
     description: 'A single, enormous boom through the earth followed by frantic hammering. The herd is fleeing. Get out of the way.',
-    baseFreq: 14,
+    baseFreq: 55,
     pulseRate: 8,
     duration: 3,
-    amplitude: 0.8,
+    amplitude: 0.7,
     color: '#ef4444',
   },
 ];
@@ -85,11 +85,15 @@ export default function ElephantPlayground() {
     };
   }, [stopAudio]);
 
-  const playRumble = useCallback((pattern: RumblePattern) => {
+  const playRumble = useCallback(async (pattern: RumblePattern) => {
     stopAudio();
 
     const ctx = new AudioContext();
     audioContextRef.current = ctx;
+    // Chrome requires resume() after user gesture
+    if (ctx.state === 'suspended') {
+      await ctx.resume();
+    }
     const analyser = ctx.createAnalyser();
     analyserRef.current = analyser;
     analyser.fftSize = 256;
@@ -127,7 +131,7 @@ export default function ElephantPlayground() {
       const boom = ctx.createOscillator();
       const boomGain = ctx.createGain();
       boom.type = 'sine';
-      boom.frequency.value = 10;
+      boom.frequency.value = 40;
       boomGain.gain.setValueAtTime(0.9, ctx.currentTime);
       boomGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.8);
       boom.connect(boomGain).connect(analyser);
