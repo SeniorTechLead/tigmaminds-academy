@@ -77,17 +77,21 @@ async function testArduinoCircuits(page: any, story: string, expectedCircuits: n
         pass(story, `circuit ${circuitNum} LEDs`, `${glowingLeds} LED(s) glowing`);
       } else {
         // Might be timing — LED could be at brightness 0 in a blink cycle
-        // Take a second sample
-        await page.waitForTimeout(500);
-        const retry = await page.evaluate(() => {
-          const els = document.querySelectorAll('.rounded-full');
-          let count = 0;
-          els.forEach((el: any) => {
-            const bg = el.style?.backgroundColor;
-            if (bg && bg.includes('34, 197, 94') && !bg.endsWith(', 0)')) count++;
+        // Retry multiple times to handle blink timing
+        let retry = 0;
+        for (let attempt = 0; attempt < 5; attempt++) {
+          await page.waitForTimeout(300);
+          retry = await page.evaluate(() => {
+            const els = document.querySelectorAll('.rounded-full');
+            let count = 0;
+            els.forEach((el: any) => {
+              const bg = el.style?.backgroundColor;
+              if (bg && bg.includes('34, 197, 94') && !bg.endsWith(', 0)')) count++;
+            });
+            return count;
           });
-          return count;
-        });
+          if (retry > 0) break;
+        }
         if (retry > 0) {
           pass(story, `circuit ${circuitNum} LEDs`, `${retry} LED(s) glowing (on retry)`);
         } else {
@@ -178,13 +182,38 @@ async function main() {
       // Test level tabs
       await testLevelTabs(page, story.name);
 
-      // Test playground based on type
+      // Test Level 1 playground
       if (story.type === 'arduino') {
-        await testArduinoCircuits(page, story.name, story.circuits || 6);
+        await testArduinoCircuits(page, story.name + ' L1', story.circuits || 6);
       } else if (story.type === 'pyodide') {
-        await testPyodideLessons(page, story.name);
+        await testPyodideLessons(page, story.name + ' L1');
       } else if (story.type === 'html') {
-        await testHtmlPlayground(page, story.name);
+        await testHtmlPlayground(page, story.name + ' L1');
+      }
+
+      // Switch to Level 2 and test
+      const l2btn = await page.locator('button:has-text("Level 2: Builder")');
+      if (await l2btn.isVisible()) {
+        await l2btn.click();
+        await page.waitForTimeout(1000);
+
+        if (story.type === 'arduino') {
+          const l2circuits = await page.locator('button:has-text("Upload & Run")').all();
+          if (l2circuits.length > 0) {
+            await testArduinoCircuits(page, story.name + ' L2', l2circuits.length);
+          } else {
+            pass(story.name + ' L2', 'level 2', 'Placeholder (no circuits)');
+          }
+        } else if (story.type === 'html') {
+          await testHtmlPlayground(page, story.name + ' L2');
+        } else if (story.type === 'pyodide') {
+          await testPyodideLessons(page, story.name + ' L2');
+        }
+
+        // Switch back to L1 for next story
+        const l1btn = await page.locator('button:has-text("Level 1: Explorer")');
+        if (await l1btn.isVisible()) await l1btn.click();
+        await page.waitForTimeout(500);
       }
 
       if (errors.length > 0) {

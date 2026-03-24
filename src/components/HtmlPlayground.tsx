@@ -99,7 +99,7 @@ export default function HtmlPlayground({
             ref={iframeRef}
             srcDoc={preview}
             title="Preview"
-            sandbox="allow-scripts"
+            sandbox="allow-scripts allow-same-origin"
             className="w-full border-0"
             style={{ height: previewHeight }}
           />

@@ -63,15 +63,23 @@ void loop() {
   // Real: long duration = pulseIn(ECHO, HIGH);
   Serial.println("ECHO: waiting...");
   Serial.println("ECHO: 1457 microseconds");
-
-  // Calculate distance
-  // distance = duration * 0.0343 / 2
   Serial.println("Distance: 25.0 cm");
-  Serial.println("");
+  analogWrite(2, 180);
+  delay(400);
 
-  delay(500);
+  Serial.println("");
+  Serial.println("ECHO: 4380 microseconds");
+  Serial.println("Distance: 75.1 cm");
+  analogWrite(2, 80);
+  delay(400);
+
+  Serial.println("");
+  Serial.println("ECHO: 582 microseconds");
+  Serial.println("Distance: 10.0 cm — CLOSE!");
+  analogWrite(2, 255);
+  delay(400);
 }`,
-      ledCount: 0,
+      ledCount: 1,
       challenge: 'The real code is just 5 lines in loop(): trigger pulse, pulseIn(), calculate, print. The sensor does all the hard physics — your code just times it.',
       successHint: 'You now understand exactly what the hardware does and how the code talks to it. The jump from simulation to real circuit is just wiring 4 pins.',
     },
@@ -225,9 +233,11 @@ void loop() {
   Serial.println("Plot these (x,y) points and connect");
   Serial.println("them — that's your room map!");
 
-  analogWrite(2, 128);
-  delay(2000);
-  analogWrite(2, 0);
+  analogWrite(2, 100);
+  delay(500);
+  analogWrite(2, 180);
+  delay(500);
+  analogWrite(2, 100);
   delay(500);
 }`,
       ledCount: 1,

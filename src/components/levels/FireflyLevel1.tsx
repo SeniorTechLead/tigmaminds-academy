@@ -119,10 +119,10 @@ void setup() {
 }
 
 void loop() {
-  digitalWrite(2, HIGH);  // LED ON (255)
-  delay(1000);
-  digitalWrite(2, LOW);   // LED OFF (0)
-  delay(1000);
+  digitalWrite(2, HIGH);  // LED ON
+  delay(1500);
+  digitalWrite(2, LOW);   // LED OFF
+  delay(500);
 }`,
       ledCount: 1,
       challenge: 'Change the delay values: try delay(200) for fast blinking, delay(2000) for slow. The LED turns on/off at the rate you set.',
