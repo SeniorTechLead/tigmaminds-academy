@@ -316,12 +316,28 @@ print("  Danger: 40 Hz boom + 55 Hz @ 8 Hz pulse")
             <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8">
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">What You'll Learn</h3>
               <ul className="space-y-3">
-                {lesson.stem.skills.map((skill) => (
-                  <li key={skill} className="flex items-start gap-3">
-                    <CheckCircle className={`w-5 h-5 flex-shrink-0 mt-0.5 text-${lesson.stem.color.includes('emerald') ? 'emerald' : lesson.stem.color.includes('amber') ? 'amber' : lesson.stem.color.includes('sky') ? 'sky' : lesson.stem.color.includes('violet') ? 'violet' : lesson.stem.color.includes('rose') ? 'rose' : 'yellow'}-500`} />
-                    <span className="text-gray-700 dark:text-gray-300">{skill}</span>
-                  </li>
-                ))}
+                {lesson.stem.skills.map((skill) => {
+                  const levelMatch = skill.match(/— (Level \d)/);
+                  const levelTag = levelMatch?.[1];
+                  const skillText = levelMatch ? skill.replace(/\s*— Level \d/, '') : skill;
+                  const levelColor = levelTag === 'Level 1' ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300'
+                    : levelTag === 'Level 2' ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300'
+                    : levelTag === 'Level 3' ? 'bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300'
+                    : '';
+                  return (
+                    <li key={skill} className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 flex-shrink-0 mt-0.5 text-amber-500" />
+                      <span className="text-gray-700 dark:text-gray-300">
+                        {skillText}
+                        {levelTag && (
+                          <span className={`ml-2 inline-block text-xs font-semibold px-2 py-0.5 rounded-full ${levelColor}`}>
+                            {levelTag}
+                          </span>
+                        )}
+                      </span>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
 

@@ -58,11 +58,12 @@ After that night, Rongpharpi became the village's **elephant listener** — a br
       icon: Cpu,
       color: 'from-emerald-400 to-teal-500',
       skills: [
-        'Introduction to machine learning concepts',
-        'Audio signal processing basics',
-        'Python for data analysis',
-        'How neural networks recognize patterns',
-        'Real sensor data from wildlife projects',
+        'Variables, lists, and math in Python — Level 1',
+        'Sine waves and signal generation with NumPy — Level 1',
+        'Amplitude modulation: how pulsing encodes mood — Level 1',
+        'Waveform visualization with Matplotlib — Level 2',
+        'Frequency analysis and pattern detection — Level 2',
+        'Machine learning classification (k-NN) — Level 3',
       ],
       project: {
         title: 'Build an Animal Sound Classifier',
