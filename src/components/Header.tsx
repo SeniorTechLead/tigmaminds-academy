@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
-import SettingsMenu from './SettingsMenu';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,7 +10,6 @@ export default function Header() {
     { name: 'About', href: '/about' },
     { name: 'Programs', href: '/programs' },
     { name: 'Mentors', href: '/mentors' },
-    { name: 'Blog', href: '/blog' },
     { name: 'Contact', href: '/contact' },
   ];
 
@@ -48,11 +46,9 @@ export default function Header() {
             >
               Apply Now
             </Link>
-            <SettingsMenu />
           </div>
 
-          <div className="lg:hidden flex items-center gap-2">
-            <SettingsMenu />
+          <div className="lg:hidden">
             <button
               className="p-2"
               onClick={() => setIsMenuOpen(!isMenuOpen)}

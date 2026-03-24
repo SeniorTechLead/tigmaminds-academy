@@ -1,0 +1,45 @@
+import { createContext, useContext, useState, ReactNode } from 'react';
+
+type EditorTheme = 'dark' | 'light';
+
+interface PrefsContextType {
+  editorTheme: EditorTheme;
+  setEditorTheme: (theme: EditorTheme) => void;
+  soundEnabled: boolean;
+  setSoundEnabled: (enabled: boolean) => void;
+}
+
+const PrefsContext = createContext<PrefsContextType | undefined>(undefined);
+
+export function PrefsProvider({ children }: { children: ReactNode }) {
+  const [editorTheme, setEditorThemeState] = useState<EditorTheme>(() => {
+    return (localStorage.getItem('editorTheme') as EditorTheme) || 'dark';
+  });
+
+  const [soundEnabled, setSoundEnabledState] = useState(() => {
+    const saved = localStorage.getItem('soundEnabled');
+    return saved === null ? true : saved === 'true';
+  });
+
+  const setEditorTheme = (theme: EditorTheme) => {
+    setEditorThemeState(theme);
+    localStorage.setItem('editorTheme', theme);
+  };
+
+  const setSoundEnabled = (enabled: boolean) => {
+    setSoundEnabledState(enabled);
+    localStorage.setItem('soundEnabled', String(enabled));
+  };
+
+  return (
+    <PrefsContext.Provider value={{ editorTheme, setEditorTheme, soundEnabled, setSoundEnabled }}>
+      {children}
+    </PrefsContext.Provider>
+  );
+}
+
+export function usePrefs() {
+  const context = useContext(PrefsContext);
+  if (!context) throw new Error('usePrefs must be used within PrefsProvider');
+  return context;
+}

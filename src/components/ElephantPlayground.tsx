@@ -1,5 +1,6 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
-import { Play, Square, Volume2, CheckCircle, XCircle, RotateCcw, Sparkles } from 'lucide-react';
+import { Play, Square, Volume2, VolumeX, CheckCircle, XCircle, RotateCcw, Sparkles } from 'lucide-react';
+import { usePrefs } from '../contexts/PrefsContext';
 
 type Mood = 'calm' | 'nervous' | 'danger';
 
@@ -56,6 +57,7 @@ function generateRound(): RumblePattern {
 }
 
 export default function ElephantPlayground() {
+  const { soundEnabled, setSoundEnabled } = usePrefs();
   const [gameState, setGameState] = useState<'intro' | 'playing' | 'answered' | 'finished'>('intro');
   const [currentPattern, setCurrentPattern] = useState<RumblePattern | null>(null);
   const [selectedAnswer, setSelectedAnswer] = useState<Mood | null>(null);
@@ -143,7 +145,10 @@ export default function ElephantPlayground() {
     lfo.connect(lfoGain).connect(gainNode.gain);
     osc.connect(gainNode).connect(analyser);
     osc2.connect(gain2).connect(analyser);
-    analyser.connect(ctx.destination);
+    // Only output audio if sound is enabled; always connect analyser for visualization
+    if (soundEnabled) {
+      analyser.connect(ctx.destination);
+    }
 
     osc.start(ctx.currentTime);
     osc2.start(ctx.currentTime);
@@ -202,7 +207,7 @@ export default function ElephantPlayground() {
     setTimeout(() => {
       setIsPlaying(false);
     }, pattern.duration * 1000);
-  }, [stopAudio]);
+  }, [stopAudio, soundEnabled]);
 
   const startGame = () => {
     setScore(0);
@@ -269,6 +274,13 @@ export default function ElephantPlayground() {
                 className="inline-flex items-center gap-2 bg-emerald-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-emerald-600 transition-colors"
               >
                 <Play className="w-5 h-5" /> Start Listening
+              </button>
+              <button
+                onClick={() => setSoundEnabled(!soundEnabled)}
+                className="mt-3 flex items-center gap-2 text-xs text-gray-400 hover:text-white transition-colors mx-auto"
+              >
+                {soundEnabled ? <Volume2 className="w-3 h-3" /> : <VolumeX className="w-3 h-3" />}
+                Sound: {soundEnabled ? 'On' : 'Off (visual only)'}
               </button>
             </div>
           </div>

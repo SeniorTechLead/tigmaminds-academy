@@ -31,7 +31,6 @@ export default function Footer() {
               <li><Link to="/about" className="hover:text-amber-400 transition-colors">About</Link></li>
               <li><Link to="/programs" className="hover:text-amber-400 transition-colors">Programs</Link></li>
               <li><Link to="/mentors" className="hover:text-amber-400 transition-colors">Mentors</Link></li>
-              <li><Link to="/blog" className="hover:text-amber-400 transition-colors">Blog</Link></li>
               <li><Link to="/careers" className="hover:text-amber-400 transition-colors">Teach With Us</Link></li>
               <li><Link to="/contact" className="hover:text-amber-400 transition-colors">Contact</Link></li>
             </ul>
