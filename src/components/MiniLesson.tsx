@@ -2,6 +2,8 @@ import { useState, useRef, useCallback } from 'react';
 import { Play, Loader2, CheckCircle, RotateCcw } from 'lucide-react';
 
 interface MiniLessonProps {
+  /** HTML id for scroll targeting */
+  id?: string;
   /** Lesson number for display */
   number: number;
   /** Short title */
@@ -23,6 +25,7 @@ interface MiniLessonProps {
 }
 
 export default function MiniLesson({
+  id,
   number,
   title,
   explanation,
@@ -99,7 +102,7 @@ len(plt.get_fignums()) > 0
   const lineCount = code.split('\n').length;
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+    <div id={id} className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden scroll-mt-24">
       {/* Header */}
       <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
         <div className="flex items-center gap-3 mb-2">
