@@ -21,3 +21,7 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# Large illustration assets (tracked via Git LFS or managed externally)
+content/illustrations/
+public/content/
