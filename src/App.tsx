@@ -11,8 +11,6 @@ const StudentsPage = lazy(() => import('./pages/StudentsPage'));
 const MentorsPage = lazy(() => import('./pages/MentorsPage'));
 const InstructorsPage = lazy(() => import('./pages/InstructorsPage'));
 const CareersPage = lazy(() => import('./pages/CareersPage'));
-const BlogsPage = lazy(() => import('./pages/BlogsPage'));
-const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
 const CookiePage = lazy(() => import('./pages/CookiePage'));
 const LessonPage = lazy(() => import('./pages/LessonPage'));
 
@@ -31,8 +29,6 @@ function App() {
           <Route path="/mentors" element={<MentorsPage />} />
           <Route path="/instructors" element={<InstructorsPage />} />
           <Route path="/careers" element={<CareersPage />} />
-          <Route path="/blog" element={<BlogsPage />} />
-          <Route path="/blog/:slug" element={<BlogPostPage />} />
           <Route path="/cookies" element={<CookiePage />} />
           <Route path="/lessons/:slug" element={<LessonPage />} />
         </Routes>

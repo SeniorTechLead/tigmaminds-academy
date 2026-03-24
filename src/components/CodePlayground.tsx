@@ -1,5 +1,6 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
-import { Play, RotateCcw, Loader2, CheckCircle, Terminal, ChevronRight } from 'lucide-react';
+import { Play, RotateCcw, Loader2, CheckCircle, Terminal, ChevronRight, Sun, Moon } from 'lucide-react';
+import { usePrefs } from '../contexts/PrefsContext';
 
 interface CodePlaygroundProps {
   /** Initial code in the editor */
@@ -23,6 +24,8 @@ export default function CodePlayground({
   description,
   steps,
 }: CodePlaygroundProps) {
+  const { editorTheme, setEditorTheme } = usePrefs();
+  const isDark = editorTheme === 'dark';
   const [code, setCode] = useState(starterCode);
   const [output, setOutput] = useState('');
   const [imageOutput, setImageOutput] = useState<string | null>(null);
@@ -204,12 +207,12 @@ len(plt.get_fignums()) > 0
   }, [code]);
 
   return (
-    <div className="bg-gray-900 rounded-2xl overflow-hidden border border-gray-700">
+    <div className={`${isDark ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-300'} rounded-2xl overflow-hidden border`}>
       {/* Header */}
-      <div className="px-6 py-4 border-b border-gray-700 flex items-center justify-between">
+      <div className={`px-6 py-4 border-b ${isDark ? 'border-gray-700' : 'border-gray-200'} flex items-center justify-between`}>
         <div className="flex items-center gap-3">
-          <Terminal className="w-5 h-5 text-emerald-400" />
-          <h3 className="text-white font-bold">{title}</h3>
+          <Terminal className={`w-5 h-5 ${isDark ? 'text-emerald-400' : 'text-emerald-600'}`} />
+          <h3 className={`${isDark ? 'text-white' : 'text-gray-900'} font-bold`}>{title}</h3>
           {pyState === 'ready' && (
             <span className="flex items-center gap-1 text-xs text-emerald-400 bg-emerald-900/30 px-2 py-0.5 rounded-full">
               <CheckCircle className="w-3 h-3" /> Python Ready
@@ -223,6 +226,13 @@ len(plt.get_fignums()) > 0
             title="Reset code"
           >
             <RotateCcw className="w-4 h-4" />
+          </button>
+          <button
+            onClick={() => setEditorTheme(isDark ? 'light' : 'dark')}
+            className={`p-2 ${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-500 hover:text-gray-900'} transition-colors`}
+            title={isDark ? 'Light editor' : 'Dark editor'}
+          >
+            {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
           <button
             onClick={runCode}
@@ -353,7 +363,7 @@ len(plt.get_fignums()) > 0
                 onChange={(e) => setCode(e.target.value)}
                 onKeyDown={handleKeyDown}
                 spellCheck={false}
-                className="w-full bg-transparent text-gray-100 font-mono text-sm pl-3 pr-4 pt-2 pb-4 resize-none focus:outline-none min-h-[200px] leading-6 relative z-10"
+                className={`w-full bg-transparent font-mono text-sm pl-3 pr-4 pt-2 pb-4 resize-none focus:outline-none min-h-[200px] leading-6 relative z-10 ${isDark ? 'text-gray-100' : 'text-gray-900'}`}
                 style={{ tabSize: 4 }}
               />
             </div>
