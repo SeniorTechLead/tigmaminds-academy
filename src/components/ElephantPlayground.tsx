@@ -246,15 +246,15 @@ export default function ElephantPlayground() {
   return (
     <div className="bg-gray-900 rounded-2xl overflow-hidden">
       {/* Visualization canvas */}
-      <div className="relative">
+      <div className="relative" style={{ minHeight: gameState === 'intro' || gameState === 'finished' ? '280px' : '160px' }}>
         <canvas
           ref={canvasRef}
           width={800}
-          height={200}
-          className="w-full h-[200px]"
+          height={160}
+          className="w-full h-[160px]"
         />
         {gameState === 'intro' && (
-          <div className="absolute inset-0 flex items-center justify-center bg-gray-900/80">
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-900/95">
             <div className="text-center">
               <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-emerald-500/20 flex items-center justify-center">
                 <Volume2 className="w-8 h-8 text-emerald-400" />
@@ -274,7 +274,7 @@ export default function ElephantPlayground() {
           </div>
         )}
         {gameState === 'finished' && (
-          <div className="absolute inset-0 flex items-center justify-center bg-gray-900/80">
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-900/95">
             <div className="text-center">
               <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-amber-500/20 flex items-center justify-center">
                 <Sparkles className="w-8 h-8 text-amber-400" />

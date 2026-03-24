@@ -194,12 +194,12 @@ len(plt.get_fignums()) > 0
     }
   };
 
-  // Auto-resize textarea
+  // Match textarea height to content (gutter syncs via flex)
   useEffect(() => {
     const textarea = textareaRef.current;
     if (textarea) {
       textarea.style.height = 'auto';
-      textarea.style.height = Math.max(200, textarea.scrollHeight) + 'px';
+      textarea.style.height = textarea.scrollHeight + 'px';
     }
   }, [code]);
 
@@ -289,7 +289,7 @@ len(plt.get_fignums()) > 0
 
         {/* Editor with line numbers and highlights */}
         <div className="flex-1 min-w-0">
-          <div className="relative flex">
+          <div className="relative flex max-h-[400px] overflow-y-auto">
             {/* Line number gutter + highlight indicators */}
             <div
               className="flex-shrink-0 bg-gray-800/50 pt-2 pb-4 select-none text-right pr-2 border-r border-gray-700"
