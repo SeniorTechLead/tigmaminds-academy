@@ -4,10 +4,8 @@ import { ArrowLeft, ArrowRight, CheckCircle, ExternalLink, BookOpen, Wrench, Lig
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { getLessonBySlug, lessons } from '../data/lessons';
-import ElephantPlayground from '../components/ElephantPlayground';
-import CodePlayground from '../components/CodePlayground';
-import ElephantLevel1 from '../components/ElephantLevel1';
-import ElephantLevel2 from '../components/ElephantLevel2';
+import { Suspense } from 'react';
+import { getLevelComponents } from '../components/levels';
 
 type Level = 'explorer' | 'builder' | 'engineer';
 
@@ -208,24 +206,35 @@ export default function LessonPage() {
               ))}
             </div>
 
-            {/* Level content */}
-            {lesson.playground === 'elephant' && (
-              <>
-                {activeLevel === 'explorer' && <ElephantLevel1 />}
-
-                {activeLevel === 'builder' && <ElephantLevel2 />}
-
-                {activeLevel === 'engineer' && (
-                  <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 text-center">
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Level 3: Engineer</h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-4">
-                      Record real audio, compute spectrograms, train a k-nearest-neighbors classifier, and measure accuracy.
-                    </p>
-                    <p className="text-amber-600 dark:text-amber-400 font-semibold">Coming soon — this level is part of the 24-week bootcamp curriculum.</p>
-                  </div>
-                )}
-              </>
-            )}
+            {/* Level content — loaded dynamically per story */}
+            {(() => {
+              const { Level1, Level2 } = getLevelComponents(lesson.slug);
+              return (
+                <Suspense fallback={<div className="text-center py-8"><div className="w-8 h-8 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto" /></div>}>
+                  {activeLevel === 'explorer' && Level1 && <Level1 />}
+                  {activeLevel === 'builder' && Level2 && <Level2 />}
+                  {activeLevel === 'explorer' && !Level1 && (
+                    <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 text-center">
+                      <p className="text-gray-600 dark:text-gray-300">Level 1 content for this story is coming soon.</p>
+                    </div>
+                  )}
+                  {activeLevel === 'builder' && !Level2 && (
+                    <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 text-center">
+                      <p className="text-gray-600 dark:text-gray-300">Level 2 content for this story is coming soon.</p>
+                    </div>
+                  )}
+                  {activeLevel === 'engineer' && (
+                    <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 text-center">
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Level 3: Engineer</h3>
+                      <p className="text-gray-600 dark:text-gray-300 mb-4">
+                        Advanced project with real-world data and ML techniques.
+                      </p>
+                      <p className="text-amber-600 dark:text-amber-400 font-semibold">Coming soon — this level is part of the 24-week bootcamp curriculum.</p>
+                    </div>
+                  )}
+                </Suspense>
+              );
+            })()}
           </div>
         </section>
       )}
