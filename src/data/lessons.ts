@@ -58,11 +58,11 @@ After that night, Rongpharpi became the village's **elephant listener** — a br
       icon: Cpu,
       color: 'from-emerald-400 to-teal-500',
       skills: [
-        'Variables, lists, and math in Python — Level 1',
-        'Sine waves and signal generation with NumPy — Level 1',
-        'Amplitude modulation: how pulsing encodes mood — Level 1',
-        'Waveform visualization with Matplotlib — Level 2',
-        'Frequency analysis and pattern detection — Level 2',
+        'Variables, lists, and math in Python — Level 1 — L1-1',
+        'Sine waves and signal generation with NumPy — Level 1 — L1-5',
+        'Amplitude modulation: how pulsing encodes mood — Level 1 — L1-6',
+        'Waveform visualization with Matplotlib — Level 2 — L2-1',
+        'Frequency analysis and pattern detection — Level 2 — L2-4',
         'Machine learning classification (k-NN) — Level 3',
       ],
       project: {

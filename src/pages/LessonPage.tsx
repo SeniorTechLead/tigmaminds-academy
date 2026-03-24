@@ -7,6 +7,7 @@ import { getLessonBySlug, lessons } from '../data/lessons';
 import ElephantPlayground from '../components/ElephantPlayground';
 import CodePlayground from '../components/CodePlayground';
 import ElephantLevel1 from '../components/ElephantLevel1';
+import ElephantLevel2 from '../components/ElephantLevel2';
 
 type Level = 'explorer' | 'builder' | 'engineer';
 
@@ -212,80 +213,7 @@ export default function LessonPage() {
               <>
                 {activeLevel === 'explorer' && <ElephantLevel1 />}
 
-                {activeLevel === 'builder' && (
-                  <div className="space-y-12">
-                    <ElephantPlayground />
-                    <div>
-                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Now Build the Classifier</h3>
-                      <p className="text-gray-600 dark:text-gray-300 mb-6">
-                        You classified by ear — now do it with code. Edit the parameters, hit Run, and see the waveforms change.
-                      </p>
-                    </div>
-                    <CodePlayground
-                      title="Elephant Sound Classifier"
-                      packages={['numpy', 'matplotlib']}
-                      description="Generate elephant rumble signals, visualize waveforms, and experiment with parameters."
-                      steps={[
-                        { title: 'Generate signals', hint: 'Create sine waves at different frequencies and pulse rates', lines: [1, 19] as [number, number] },
-                        { title: 'Visualize', hint: 'Plot the 3 waveforms with matplotlib', lines: [21, 38] as [number, number] },
-                        { title: 'Read output', hint: 'Check the signal parameters printed below the chart', lines: [40, 45] as [number, number] },
-                        { title: 'Experiment', hint: 'Change values on lines 11, 14, 18 and re-run', lines: [11, 18] as [number, number] },
-                      ]}
-                      starterCode={`import numpy as np
-import matplotlib.pyplot as plt
-
-# === Step 1: Generate elephant rumble signals ===
-# Real elephants rumble at 8-25 Hz (infrasonic)
-# We'll simulate 3 moods at audible frequencies
-
-sample_rate = 8000  # samples per second
-duration = 3        # seconds
-t = np.linspace(0, duration, sample_rate * duration)
-
-# Calm: low frequency, slow pulsing
-calm = np.sin(2 * np.pi * 80 * t) * (0.5 + 0.5 * np.sin(2 * np.pi * 0.5 * t))
-
-# Nervous: higher frequency, rapid pulsing
-nervous = np.sin(2 * np.pi * 110 * t) * (0.5 + 0.5 * np.sin(2 * np.pi * 3 * t))
-
-# Danger: low boom then frantic hammering
-boom = np.exp(-t * 3) * np.sin(2 * np.pi * 40 * t)
-hammering = np.sin(2 * np.pi * 55 * t) * (0.5 + 0.5 * np.sin(2 * np.pi * 8 * t))
-danger = boom + hammering * (1 - np.exp(-t * 3))
-
-# === Step 2: Plot the waveforms ===
-fig, axes = plt.subplots(3, 1, figsize=(10, 6))
-fig.patch.set_facecolor('#1f2937')
-
-for ax, signal, label, color in [
-    (axes[0], calm, 'Calm & Feeding', '#22c55e'),
-    (axes[1], nervous, 'Nervous & Alert', '#f59e0b'),
-    (axes[2], danger, 'Danger — Run!', '#ef4444'),
-]:
-    ax.plot(t[:2000], signal[:2000], color=color, linewidth=0.8)
-    ax.set_ylabel(label, color='white', fontsize=9)
-    ax.set_facecolor('#111827')
-    ax.tick_params(colors='gray')
-    ax.spines['bottom'].set_color('gray')
-    ax.spines['left'].set_color('gray')
-    ax.spines['top'].set_visible(False)
-    ax.spines['right'].set_visible(False)
-
-axes[2].set_xlabel('Time (seconds)', color='white')
-plt.suptitle('Elephant Rumble Patterns', color='white', fontsize=14, fontweight='bold')
-plt.tight_layout()
-plt.show()
-
-print("✓ Generated 3 rumble patterns")
-print(f"  Sample rate: {sample_rate} Hz")
-print(f"  Duration: {duration}s each")
-print("  Calm: 80 Hz base, 0.5 Hz pulse")
-print("  Nervous: 110 Hz base, 3 Hz pulse")
-print("  Danger: 40 Hz boom + 55 Hz @ 8 Hz pulse")
-`}
-                    />
-                  </div>
-                )}
+                {activeLevel === 'builder' && <ElephantLevel2 />}
 
                 {activeLevel === 'engineer' && (
                   <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 text-center">
@@ -319,20 +247,40 @@ print("  Danger: 40 Hz boom + 55 Hz @ 8 Hz pulse")
                 {lesson.stem.skills.map((skill) => {
                   const levelMatch = skill.match(/— (Level \d)/);
                   const levelTag = levelMatch?.[1];
-                  const skillText = levelMatch ? skill.replace(/\s*— Level \d/, '') : skill;
+                  const anchorMatch = skill.match(/— (L\d-\d+)$/);
+                  const anchor = anchorMatch?.[1];
+                  const skillText = skill.replace(/\s*— Level \d.*$/, '');
                   const levelColor = levelTag === 'Level 1' ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300'
                     : levelTag === 'Level 2' ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300'
                     : levelTag === 'Level 3' ? 'bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300'
                     : '';
+                  const targetLevel = levelTag === 'Level 1' ? 'explorer' as Level
+                    : levelTag === 'Level 2' ? 'builder' as Level
+                    : levelTag === 'Level 3' ? 'engineer' as Level
+                    : null;
+
+                  const handleSkillClick = () => {
+                    if (!targetLevel) return;
+                    setActiveLevel(targetLevel);
+                    if (anchor) {
+                      setTimeout(() => {
+                        document.getElementById(anchor)?.scrollIntoView({ behavior: 'smooth' });
+                      }, 100);
+                    }
+                  };
+
                   return (
                     <li key={skill} className="flex items-start gap-3">
                       <CheckCircle className="w-5 h-5 flex-shrink-0 mt-0.5 text-amber-500" />
                       <span className="text-gray-700 dark:text-gray-300">
                         {skillText}
                         {levelTag && (
-                          <span className={`ml-2 inline-block text-xs font-semibold px-2 py-0.5 rounded-full ${levelColor}`}>
-                            {levelTag}
-                          </span>
+                          <button
+                            onClick={handleSkillClick}
+                            className={`ml-2 inline-block text-xs font-semibold px-2 py-0.5 rounded-full cursor-pointer hover:ring-2 hover:ring-offset-1 hover:ring-amber-400 transition-all ${levelColor}`}
+                          >
+                            {levelTag} →
+                          </button>
                         )}
                       </span>
                     </li>

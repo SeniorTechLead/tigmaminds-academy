@@ -285,6 +285,7 @@ print("Bottom: rumble × pulse = a signal that breathes")`,
         {miniLessons.map((lesson, i) => (
           <MiniLesson
             key={i}
+            id={`L1-${i + 1}`}
             number={i + 1}
             title={lesson.title}
             explanation={lesson.explanation}
