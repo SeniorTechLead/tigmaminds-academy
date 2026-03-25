@@ -15,6 +15,7 @@ const CookiePage = lazy(() => import('./pages/CookiePage'));
 const LessonsIndexPage = lazy(() => import('./pages/LessonsIndexPage'));
 const CertificatePage = lazy(() => import('./pages/CertificatePage'));
 const LessonPlanPage = lazy(() => import('./pages/LessonPlanPage'));
+const AuthPage = lazy(() => import('./pages/AuthPage'));
 const LessonPage = lazy(() => import('./pages/LessonPage'));
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
           <Route path="/lessons" element={<LessonsIndexPage />} />
           <Route path="/certificate" element={<CertificatePage />} />
           <Route path="/plan" element={<LessonPlanPage />} />
+          <Route path="/auth" element={<AuthPage />} />
           <Route path="/lessons/:slug" element={<LessonPage />} />
         </Routes>
       </Suspense>
