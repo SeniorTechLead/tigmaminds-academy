@@ -2082,6 +2082,71 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     stem: { title: 'Paper Engineering', description: 'The science of waterproofing.', icon: Construction, color: 'from-amber-400 to-orange-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
     illustration: '/content/illustrations/fun-facts.webp', track: 'school', subjects: ['Engineering' as Subject, 'Chemistry' as Subject], estimatedHours: 12, playground: 'paper-umbrella' as const,
   },
+  {
+    slug: 'witch-doctor', story: { title: 'The Witch Doctor\'s Apprentice', tagline: 'Medicinal plants and pharmacology.', content: '' },
+    stem: { title: 'Medicinal Plants', description: 'Medicinal plants and pharmacology.', icon: Leaf, color: 'from-emerald-400 to-green-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
+    illustration: '/content/illustrations/fun-facts.webp', track: 'school', subjects: ['Biology' as Subject, 'Chemistry' as Subject], estimatedHours: 12, playground: 'witch-doctor' as const,
+  },
+  {
+    slug: 'turtle-slow', story: { title: 'Why Turtles Are Slow on Land', tagline: 'Evolution and body plan trade-offs.', content: '' },
+    stem: { title: 'Evolution & Body Plans', description: 'Evolution and body plan trade-offs.', icon: Leaf, color: 'from-green-400 to-teal-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
+    illustration: '/content/illustrations/fun-facts.webp', track: 'school', subjects: ['Biology' as Subject], estimatedHours: 12, playground: 'turtle-slow' as const,
+  },
+  {
+    slug: 'market-day-tura', story: { title: 'The Market Day Surprise', tagline: 'Economics and trade in a hill town.', content: '' },
+    stem: { title: 'Economics & Trade', description: 'Economics and trade in a hill town.', icon: Cpu, color: 'from-amber-400 to-orange-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
+    illustration: '/content/illustrations/fun-facts.webp', track: 'school', subjects: ['Economics' as Subject], estimatedHours: 12, playground: 'market-day-tura' as const,
+  },
+  {
+    slug: 'elephant-corridor', story: { title: 'The Elephant Corridor', tagline: 'Wildlife corridors and habitat connectivity.', content: '' },
+    stem: { title: 'Wildlife Corridors', description: 'Wildlife corridors and habitat connectivity.', icon: Leaf, color: 'from-green-500 to-emerald-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
+    illustration: '/content/illustrations/elephant-ant.webp', track: 'school', subjects: ['Ecology' as Subject, 'Biology' as Subject], estimatedHours: 12, playground: 'elephant-corridor' as const,
+  },
+  {
+    slug: 'golden-hilsa', story: { title: 'The Old Fisherman and the Golden Hilsa', tagline: 'Sustainable fishing and marine biology.', content: '' },
+    stem: { title: 'Sustainable Fishing', description: 'Sustainable fishing and marine biology.', icon: Leaf, color: 'from-blue-400 to-cyan-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
+    illustration: '/content/illustrations/brahmaputra-angry.webp', track: 'school', subjects: ['Biology' as Subject, 'Ecology' as Subject], estimatedHours: 12, playground: 'golden-hilsa' as const,
+  },
+  {
+    slug: 'cloud-refused-rain', story: { title: 'The Cloud That Refused to Rain', tagline: 'Cloud seeding and weather modification.', content: '' },
+    stem: { title: 'Cloud Seeding & Weather', description: 'Cloud seeding and weather modification.', icon: Cloud, color: 'from-sky-400 to-blue-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
+    illustration: '/content/illustrations/fun-facts.webp', track: 'school', subjects: ['Physics' as Subject, 'Chemistry' as Subject], estimatedHours: 12, playground: 'cloud-refused-rain' as const,
+  },
+  {
+    slug: 'friendship-bridge', story: { title: 'The Friendship Bridge', tagline: 'Bridge engineering between two villages.', content: '' },
+    stem: { title: 'Bridge Engineering', description: 'Bridge engineering between two villages.', icon: Construction, color: 'from-orange-400 to-red-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
+    illustration: '/content/illustrations/bridge-grew.webp', track: 'school', subjects: ['Engineering' as Subject], estimatedHours: 12, playground: 'friendship-bridge' as const,
+  },
+  {
+    slug: 'mountain-echoes', story: { title: 'Why Mountains Have Echoes', tagline: 'Sound reflection and wave physics.', content: '' },
+    stem: { title: 'Sound Reflection', description: 'Sound reflection and wave physics.', icon: Music, color: 'from-purple-400 to-indigo-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
+    illustration: '/content/illustrations/fun-facts.webp', track: 'school', subjects: ['Physics' as Subject], estimatedHours: 12, playground: 'mountain-echoes' as const,
+  },
+  {
+    slug: 'dancer-floating-market', story: { title: 'The Dancer of the Floating Market', tagline: 'Economics of floating markets.', content: '' },
+    stem: { title: 'Floating Market Economics', description: 'Economics of floating markets.', icon: Cpu, color: 'from-violet-400 to-purple-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
+    illustration: '/content/illustrations/fun-facts.webp', track: 'school', subjects: ['Economics' as Subject], estimatedHours: 12, playground: 'dancer-floating-market' as const,
+  },
+  {
+    slug: 'ferrymans-riddle', story: { title: 'The Ferryman\'s Riddle', tagline: 'Fluid mechanics and river transport.', content: '' },
+    stem: { title: 'Fluid Mechanics', description: 'Fluid mechanics and river transport.', icon: Rocket, color: 'from-cyan-400 to-blue-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
+    illustration: '/content/illustrations/brahmaputra-angry.webp', track: 'school', subjects: ['Physics' as Subject, 'Engineering' as Subject], estimatedHours: 12, playground: 'ferrymans-riddle' as const,
+  },
+  {
+    slug: 'wild-orchids-trees', story: { title: 'Why Wild Orchids Grow on Trees', tagline: 'Epiphytes and symbiosis.', content: '' },
+    stem: { title: 'Epiphytes & Symbiosis', description: 'Epiphytes and symbiosis.', icon: Leaf, color: 'from-fuchsia-400 to-pink-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
+    illustration: '/content/illustrations/fun-facts.webp', track: 'school', subjects: ['Biology' as Subject, 'Ecology' as Subject], estimatedHours: 12, playground: 'wild-orchids-trees' as const,
+  },
+  {
+    slug: 'guwahati-name', story: { title: 'How Guwahati Got Its Name', tagline: 'Etymology and urban geography.', content: '' },
+    stem: { title: 'Etymology & Urban Geography', description: 'Etymology and urban geography.', icon: Mountain, color: 'from-amber-400 to-orange-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
+    illustration: '/content/illustrations/fun-facts.webp', track: 'school', subjects: ['Geography' as Subject], estimatedHours: 12, playground: 'guwahati-name' as const,
+  },
+  {
+    slug: 'story-garden', story: { title: 'The Story Garden', tagline: 'Storytelling and narrative structure — how stories teach.', content: '' },
+    stem: { title: 'Storytelling & Narrative', description: 'Storytelling and narrative structure — how stories teach.', icon: Sparkles, color: 'from-rose-400 to-pink-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
+    illustration: '/content/illustrations/fun-facts.webp', track: 'school', subjects: ['Music & Arts' as Subject], estimatedHours: 12, playground: 'story-garden' as const,
+  },
 ];
 
 export function getLessonBySlug(slug: string): Lesson | undefined {
