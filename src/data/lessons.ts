@@ -2051,7 +2051,38 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     subjects: ['Biology'] as Subject[],
     estimatedHours: 12,
     playground: 'takin-face' as const,
-  },];
+  },
+  {
+    slug: 'talking-parrot-hajo', story: { title: 'The Talking Parrot of Hajo', tagline: 'A parrot that speaks every language.', content: '' },
+    stem: { title: 'Language & Communication', description: 'How communication works.', icon: Cpu, color: 'from-violet-400 to-purple-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
+    illustration: '/content/illustrations/fun-facts.webp', track: 'school', subjects: ['Computer Science' as Subject], estimatedHours: 12, playground: 'talking-parrot-hajo' as const,
+  },
+  {
+    slug: 'secret-garden-loktak', story: { title: 'The Secret Garden of Loktak Lake', tagline: 'Floating islands that grow gardens.', content: '' },
+    stem: { title: 'Aquatic Botany', description: 'Floating island ecology.', icon: Leaf, color: 'from-teal-400 to-cyan-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
+    illustration: '/content/illustrations/dancing-deer.webp', track: 'school', subjects: ['Biology' as Subject, 'Ecology' as Subject], estimatedHours: 12, playground: 'secret-garden-loktak' as const,
+  },
+  {
+    slug: 'stars-ziro-valley', story: { title: 'Why Stars Are Brighter in Ziro Valley', tagline: 'Light pollution and astronomy.', content: '' },
+    stem: { title: 'Light Pollution & Astronomy', description: 'Where darkness reveals the universe.', icon: Sparkles, color: 'from-indigo-400 to-violet-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
+    illustration: '/content/illustrations/fun-facts.webp', track: 'school', subjects: ['Physics' as Subject], estimatedHours: 12, playground: 'stars-ziro-valley' as const,
+  },
+  {
+    slug: 'mishing-fish', story: { title: 'How the Mishing People Learned to Fish', tagline: 'Traditional fishing meets science.', content: '' },
+    stem: { title: 'Fishing Technology', description: 'Fishing technology and innovation.', icon: Leaf, color: 'from-blue-400 to-cyan-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
+    illustration: '/content/illustrations/brahmaputra-angry.webp', track: 'school', subjects: ['Biology' as Subject], estimatedHours: 12, playground: 'mishing-fish' as const,
+  },
+  {
+    slug: 'coconut-jackfruit', story: { title: 'The Coconut That Wanted to Be a Jackfruit', tagline: 'Genetics and species identity.', content: '' },
+    stem: { title: 'Genetics & Species Identity', description: 'Can one species become another?', icon: Leaf, color: 'from-green-400 to-emerald-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
+    illustration: '/content/illustrations/fun-facts.webp', track: 'school', subjects: ['Biology' as Subject], estimatedHours: 12, playground: 'coconut-jackfruit' as const,
+  },
+  {
+    slug: 'paper-umbrella', story: { title: 'The Paper Umbrella of Sualkuchi', tagline: 'Paper engineering and waterproofing.', content: '' },
+    stem: { title: 'Paper Engineering', description: 'The science of waterproofing.', icon: Construction, color: 'from-amber-400 to-orange-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
+    illustration: '/content/illustrations/fun-facts.webp', track: 'school', subjects: ['Engineering' as Subject, 'Chemistry' as Subject], estimatedHours: 12, playground: 'paper-umbrella' as const,
+  },
+];
 
 export function getLessonBySlug(slug: string): Lesson | undefined {
   return lessons.find((l) => l.slug === slug);
