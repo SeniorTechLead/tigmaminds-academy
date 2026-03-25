@@ -59,6 +59,26 @@ export const SUBJECTS: { key: Subject; color: string; icon: string }[] = [
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'orange-sunsets-assam' as const,
+    level0: {
+      vocabulary: [
+        ['LED', 'Light Emitting Diode — a tiny electronic component that glows when electricity flows through it'],
+        ['Circuit', 'A complete path that electricity can flow through, from power source back to power source'],
+        ['Bioluminescence', 'Light produced by living organisms through chemical reactions'],
+        ['Voltage', 'The electrical pressure that pushes electrons through a circuit, measured in volts'],
+        ['Resistor', 'A component that limits how much electricity flows — like a narrow pipe for water'],
+      ],
+      trueFalse: [
+        { statement: 'Fireflies produce light through electricity, just like a light bulb.', isTrue: false, explanation: 'Fireflies use a chemical reaction (luciferin + oxygen → light). This is bioluminescence — completely different from electrical light. Firefly light is nearly 100% efficient, while incandescent bulbs waste 90% as heat.' },
+        { statement: 'An LED needs a complete circuit to work — if any wire is disconnected, it stops.', isTrue: true, explanation: 'Electricity must flow in a complete loop. Break the circuit anywhere and the flow stops, just like breaking a water pipe stops all water flow downstream.' },
+        { statement: 'All fireflies blink at the same rate.', isTrue: false, explanation: 'Different species have different flash patterns — it\'s how they find mates. Some flash once per second, others have complex multi-flash sequences. Scientists can identify species by their flash pattern alone.' },
+      ],
+      facts: [
+        'Firefly light is called "cold light" because nearly 100% of the energy becomes light, not heat. An incandescent bulb converts only about 10% to light — the rest is wasted as heat.',
+        'Scientists study firefly synchronization to improve wireless network protocols — the same math that makes fireflies flash in unison can help phones communicate more efficiently.',
+        'There are over 2,000 species of fireflies worldwide, and each has a unique flash pattern — like a Morse code for love.',
+      ],
+      offlineActivity: 'Find a flashlight or phone light. Try blinking it in a pattern: on for 2 seconds, off for 1 second, repeat. Now try a different pattern: quick flash, quick flash, long pause. How many different "messages" can you create with just on and off? This is exactly how fireflies communicate.',
+    },
   },
   {
     slug: 'fishermans-daughter-storm',
@@ -71,6 +91,26 @@ export const SUBJECTS: { key: Subject; color: string; icon: string }[] = [
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'fishermans-daughter-storm' as const,
+    level0: {
+      vocabulary: [
+        ['LED', 'Light Emitting Diode — a tiny electronic component that glows when electricity flows through it'],
+        ['Circuit', 'A complete path that electricity can flow through, from power source back to power source'],
+        ['Bioluminescence', 'Light produced by living organisms through chemical reactions'],
+        ['Voltage', 'The electrical pressure that pushes electrons through a circuit, measured in volts'],
+        ['Resistor', 'A component that limits how much electricity flows — like a narrow pipe for water'],
+      ],
+      trueFalse: [
+        { statement: 'Fireflies produce light through electricity, just like a light bulb.', isTrue: false, explanation: 'Fireflies use a chemical reaction (luciferin + oxygen → light). This is bioluminescence — completely different from electrical light. Firefly light is nearly 100% efficient, while incandescent bulbs waste 90% as heat.' },
+        { statement: 'An LED needs a complete circuit to work — if any wire is disconnected, it stops.', isTrue: true, explanation: 'Electricity must flow in a complete loop. Break the circuit anywhere and the flow stops, just like breaking a water pipe stops all water flow downstream.' },
+        { statement: 'All fireflies blink at the same rate.', isTrue: false, explanation: 'Different species have different flash patterns — it\'s how they find mates. Some flash once per second, others have complex multi-flash sequences. Scientists can identify species by their flash pattern alone.' },
+      ],
+      facts: [
+        'Firefly light is called "cold light" because nearly 100% of the energy becomes light, not heat. An incandescent bulb converts only about 10% to light — the rest is wasted as heat.',
+        'Scientists study firefly synchronization to improve wireless network protocols — the same math that makes fireflies flash in unison can help phones communicate more efficiently.',
+        'There are over 2,000 species of fireflies worldwide, and each has a unique flash pattern — like a Morse code for love.',
+      ],
+      offlineActivity: 'Find a flashlight or phone light. Try blinking it in a pattern: on for 2 seconds, off for 1 second, repeat. Now try a different pattern: quick flash, quick flash, long pause. How many different "messages" can you create with just on and off? This is exactly how fireflies communicate.',
+    },
   },
   {
     slug: 'snow-leopards-promise',
@@ -83,6 +123,26 @@ export const SUBJECTS: { key: Subject; color: string; icon: string }[] = [
     learningTracks: ['AI & Data' as Track, 'Programming' as Track],
     estimatedHours: 12,
     playground: 'snow-leopards-promise' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'map-makers-granddaughter',
@@ -95,6 +155,26 @@ export const SUBJECTS: { key: Subject; color: string; icon: string }[] = [
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'map-makers-granddaughter' as const,
+    level0: {
+      vocabulary: [
+        ['Artificial Intelligence', 'Computer systems that can learn from data and make decisions'],
+        ['Sensor', 'A device that detects physical changes like sound, light, or vibration'],
+        ['Classification', 'Sorting data into categories based on patterns'],
+        ['Signal processing', 'Analyzing and extracting information from recorded data'],
+        ['Neural network', 'A computer model inspired by how brain cells connect'],
+      ],
+      trueFalse: [
+        { statement: 'AI can help scientists study animals without disturbing them.', isTrue: true, explanation: 'AI-powered cameras, microphones, and sensors can monitor wildlife 24/7 from a distance, collecting data that would take humans years to gather manually.' },
+        { statement: 'Computers can learn to identify animal species from their sounds.', isTrue: true, explanation: 'Machine learning models trained on audio recordings can distinguish between species, individual animals, and even emotional states from their calls.' },
+        { statement: 'AI will replace all wildlife scientists.', isTrue: false, explanation: 'AI is a tool that helps scientists work faster, but it cannot replace human understanding, creativity, and ethical judgment in conservation decisions.' },
+      ],
+      facts: [
+        'AI-powered camera traps can identify individual animals by their unique markings — like facial recognition, but for tigers and leopards.',
+        'Acoustic monitoring stations in rainforests can detect illegal logging by recognizing the sound of chainsaws, even from kilometers away.',
+        'Conservation drones equipped with thermal cameras can count animal populations at night without disturbing them.',
+      ],
+      offlineActivity: 'Go outside and spend 10 minutes just listening. Close your eyes. How many different sounds can you identify? Birds, insects, wind, traffic? Scientists do exactly this — but with AI helping them identify what they hear.',
+    },
   },
   {
     slug: 'old-banyan-trees-stories',
@@ -107,6 +187,26 @@ export const SUBJECTS: { key: Subject; color: string; icon: string }[] = [
     learningTracks: ['Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'old-banyan-trees-stories' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'tigers-whisker',
@@ -119,6 +219,26 @@ export const SUBJECTS: { key: Subject; color: string; icon: string }[] = [
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'tigers-whisker' as const,
+    level0: {
+      vocabulary: [
+        ['Photosynthesis', 'The process plants use to convert sunlight, water, and CO₂ into sugar and oxygen'],
+        ['Chlorophyll', 'The green pigment in plants that absorbs sunlight for photosynthesis'],
+        ['Vegetative propagation', 'Growing a new plant from a fragment of the parent — without seeds'],
+        ['Totipotent', 'A cell that can develop into any cell type — plant cells have this superpower'],
+        ['Cell wall', 'A rigid outer layer made of cellulose that gives plant cells their shape and strength'],
+      ],
+      trueFalse: [
+        { statement: 'Plants eat soil to get their food.', isTrue: false, explanation: 'Plants make their own food through photosynthesis using sunlight, water, and CO₂ from air. The soil provides minerals and water, but the actual "food" (sugar) is manufactured inside the leaves using solar energy.' },
+        { statement: 'A single plant cell can grow into an entire new plant.', isTrue: true, explanation: 'Unlike most animal cells, many plant cells are totipotent — they retain the ability to become any cell type. This is why you can grow a new plant from a cutting — the cut stem cells reorganize into roots, stems, and leaves.' },
+        { statement: 'All plants reproduce using seeds.', isTrue: false, explanation: 'Many plants can also reproduce vegetatively — through cuttings, runners, tubers, or bulbs. Every banana plant in your grocery store is a clone, grown from a cutting rather than a seed.' },
+      ],
+      facts: [
+        'Photosynthesis produces all the oxygen we breathe. Every other breath you take comes from algae and plants splitting water molecules apart.',
+        'The world\'s largest organism is a clonal colony of aspen trees in Utah called "Pando" — 47,000 tree stems all connected by a single root system, weighing 6,600 tonnes.',
+        'Tulsi (holy basil) contains eugenol, a natural antiseptic. Traditional medicine used it for centuries — modern science has confirmed its antimicrobial properties.',
+      ],
+      offlineActivity: 'Take a cutting from a plant (a small piece of stem with a few leaves). Place it in a glass of water on a windowsill. Check every day — within a week, you should see tiny roots forming. You\'re witnessing vegetative propagation — the same process that makes Tejimola\'s story biologically plausible.',
+    },
   },
   {
     slug: 'basket-weavers-song',
@@ -131,6 +251,26 @@ export const SUBJECTS: { key: Subject; color: string; icon: string }[] = [
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'basket-weavers-song' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'honey-hunters-lesson',
@@ -143,6 +283,26 @@ export const SUBJECTS: { key: Subject; color: string; icon: string }[] = [
     learningTracks: ['Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'honey-hunters-lesson' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'bamboo-taught-wind',
@@ -155,6 +315,26 @@ export const SUBJECTS: { key: Subject; color: string; icon: string }[] = [
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'bamboo-taught-wind' as const,
+    level0: {
+      vocabulary: [
+        ['Photosynthesis', 'The process plants use to convert sunlight, water, and CO₂ into sugar and oxygen'],
+        ['Chlorophyll', 'The green pigment in plants that absorbs sunlight for photosynthesis'],
+        ['Vegetative propagation', 'Growing a new plant from a fragment of the parent — without seeds'],
+        ['Totipotent', 'A cell that can develop into any cell type — plant cells have this superpower'],
+        ['Cell wall', 'A rigid outer layer made of cellulose that gives plant cells their shape and strength'],
+      ],
+      trueFalse: [
+        { statement: 'Plants eat soil to get their food.', isTrue: false, explanation: 'Plants make their own food through photosynthesis using sunlight, water, and CO₂ from air. The soil provides minerals and water, but the actual "food" (sugar) is manufactured inside the leaves using solar energy.' },
+        { statement: 'A single plant cell can grow into an entire new plant.', isTrue: true, explanation: 'Unlike most animal cells, many plant cells are totipotent — they retain the ability to become any cell type. This is why you can grow a new plant from a cutting — the cut stem cells reorganize into roots, stems, and leaves.' },
+        { statement: 'All plants reproduce using seeds.', isTrue: false, explanation: 'Many plants can also reproduce vegetatively — through cuttings, runners, tubers, or bulbs. Every banana plant in your grocery store is a clone, grown from a cutting rather than a seed.' },
+      ],
+      facts: [
+        'Photosynthesis produces all the oxygen we breathe. Every other breath you take comes from algae and plants splitting water molecules apart.',
+        'The world\'s largest organism is a clonal colony of aspen trees in Utah called "Pando" — 47,000 tree stems all connected by a single root system, weighing 6,600 tonnes.',
+        'Tulsi (holy basil) contains eugenol, a natural antiseptic. Traditional medicine used it for centuries — modern science has confirmed its antimicrobial properties.',
+      ],
+      offlineActivity: 'Take a cutting from a plant (a small piece of stem with a few leaves). Place it in a glass of water on a windowsill. Check every day — within a week, you should see tiny roots forming. You\'re witnessing vegetative propagation — the same process that makes Tejimola\'s story biologically plausible.',
+    },
   },
   {
     slug: 'woodpeckers-drum',
@@ -167,6 +347,26 @@ export const SUBJECTS: { key: Subject; color: string; icon: string }[] = [
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'woodpeckers-drum' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },];
 
 export interface Lesson {
@@ -446,6 +646,26 @@ The dolphin had taught him her secret: *the world speaks to those who close thei
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'dolphin' as const,
+    level0: {
+      vocabulary: [
+        ['Echolocation', 'Finding objects by sending out sound and listening for the echo that bounces back'],
+        ['Ultrasonic', 'Sound waves too high-pitched for humans to hear (above 20,000 Hz)'],
+        ['Echo', 'Sound that bounces off a surface and returns to the listener'],
+        ['Frequency', 'How many sound waves pass a point per second, measured in Hertz (Hz)'],
+        ['Transducer', 'A device that converts one form of energy to another — like sound to electricity'],
+      ],
+      trueFalse: [
+        { statement: 'Dolphins can "see" underwater using sound.', isTrue: true, explanation: 'Dolphins send out clicks and listen for echoes. Their brain creates a 3D mental image from the echo patterns — they can detect fish, obstacles, and even the shape of objects in murky water where eyes are useless.' },
+        { statement: 'Sound travels faster in water than in air.', isTrue: true, explanation: 'Sound travels about 1,500 m/s in water vs 343 m/s in air — over 4 times faster. This is because water molecules are packed closer together, transmitting vibrations more efficiently.' },
+        { statement: 'Only marine animals use echolocation.', isTrue: false, explanation: 'Bats use echolocation in air to catch insects at night. Some birds (oilbirds, swiftlets) and even some blind humans have learned to use tongue clicks to navigate by echo.' },
+      ],
+      facts: [
+        'The Gangetic river dolphin is nearly blind — its eyes can only tell light from dark. It navigates entirely by sonar, clicking up to 200 times per second.',
+        'Medical ultrasound uses the same principle as dolphin sonar — high-frequency sound waves bounce off organs and create an image. This is how doctors see babies before they\'re born.',
+        'Submarines use sonar arrays that can detect objects hundreds of kilometers away. The same technology helps map the ocean floor, discovering new species and underwater mountains.',
+      ],
+      offlineActivity: 'Stand in a large room or hallway and clap once. Listen for the echo. Now try it in a smaller room — is the echo faster or slower? Try clapping near a wall vs in the middle of a room. You\'re doing exactly what a dolphin does: using sound to understand the shape of your environment.',
+    },
   },
   {
     slug: 'boy-who-built-a-library',
@@ -505,6 +725,26 @@ His mother smiled. "You didn't build it from nothing, Dipankar. You built it fro
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'library' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'dragonfly-and-the-paddy-field',
@@ -566,6 +806,26 @@ By September, the pest army was defeated. The rice stood tall, heads bowing unde
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'dragonfly' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'why-the-muga-silk-is-golden',
@@ -709,6 +969,26 @@ Tejimola's story tells us that kindness cannot be destroyed. You can bury it, pu
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'tejimola' as const,
+    level0: {
+      vocabulary: [
+        ['Photosynthesis', 'The process plants use to convert sunlight, water, and CO₂ into sugar and oxygen'],
+        ['Chlorophyll', 'The green pigment in plants that absorbs sunlight for photosynthesis'],
+        ['Vegetative propagation', 'Growing a new plant from a fragment of the parent — without seeds'],
+        ['Totipotent', 'A cell that can develop into any cell type — plant cells have this superpower'],
+        ['Cell wall', 'A rigid outer layer made of cellulose that gives plant cells their shape and strength'],
+      ],
+      trueFalse: [
+        { statement: 'Plants eat soil to get their food.', isTrue: false, explanation: 'Plants make their own food through photosynthesis using sunlight, water, and CO₂ from air. The soil provides minerals and water, but the actual "food" (sugar) is manufactured inside the leaves using solar energy.' },
+        { statement: 'A single plant cell can grow into an entire new plant.', isTrue: true, explanation: 'Unlike most animal cells, many plant cells are totipotent — they retain the ability to become any cell type. This is why you can grow a new plant from a cutting — the cut stem cells reorganize into roots, stems, and leaves.' },
+        { statement: 'All plants reproduce using seeds.', isTrue: false, explanation: 'Many plants can also reproduce vegetatively — through cuttings, runners, tubers, or bulbs. Every banana plant in your grocery store is a clone, grown from a cutting rather than a seed.' },
+      ],
+      facts: [
+        'Photosynthesis produces all the oxygen we breathe. Every other breath you take comes from algae and plants splitting water molecules apart.',
+        'The world\'s largest organism is a clonal colony of aspen trees in Utah called "Pando" — 47,000 tree stems all connected by a single root system, weighing 6,600 tonnes.',
+        'Tulsi (holy basil) contains eugenol, a natural antiseptic. Traditional medicine used it for centuries — modern science has confirmed its antimicrobial properties.',
+      ],
+      offlineActivity: 'Take a cutting from a plant (a small piece of stem with a few leaves). Place it in a glass of water on a windowsill. Check every day — within a week, you should see tiny roots forming. You\'re witnessing vegetative propagation — the same process that makes Tejimola\'s story biologically plausible.',
+    },
   },
   {
     slug: 'golden-deer-of-kamakhya',
@@ -750,6 +1030,26 @@ The deer stamped its hoof, and a spring of clear water bubbled up — water that
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'golden-deer' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'boy-who-talked-to-clouds',
@@ -797,6 +1097,26 @@ From that day on, the rain in Cherrapunji fell softer. As if it knew someone car
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'clouds' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'how-majuli-island-was-born',
@@ -834,6 +1154,26 @@ The people of Majuli are fighting back — planting bamboo, building embankments
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'majuli' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'bamboo-flute-of-nagaland',
@@ -875,6 +1215,26 @@ Zapuvisie played his flute every evening, and the village gathered to listen. Ea
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'bamboo-flute' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'dancing-deer-of-loktak-lake',
@@ -914,6 +1274,26 @@ Because some dances are too beautiful to lose.`,
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'dancing-deer' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'bridge-that-grew',
@@ -953,6 +1333,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'bridge' as const,
+    level0: {
+      vocabulary: [
+        ['Tensile strength', 'How much pulling force a material can withstand before it breaks'],
+        ['Fibre', 'A thin, thread-like strand — natural (silk, cotton) or synthetic (nylon, polyester)'],
+        ['Protein', 'A large molecule made of amino acids — the building material of muscles, hair, and silk'],
+        ['UV resistance', 'The ability to withstand ultraviolet light from the sun without degrading'],
+        ['Biodegradable', 'Able to be broken down naturally by bacteria and other living organisms'],
+      ],
+      trueFalse: [
+        { statement: 'Muga silk is the only naturally golden silk in the world.', isTrue: true, explanation: 'Muga silk from Assam gets its golden color from xanthurenic acid, a pigment chemically bonded into the fibroin protein. Unlike dyes that sit on the surface, this color is part of the molecule and never fades.' },
+        { statement: 'Synthetic materials like nylon are always better than natural materials.', isTrue: false, explanation: 'Each material has trade-offs. Nylon is stronger and cheaper but made from petroleum and takes centuries to decompose. Silk is biodegradable and renewable but expensive and limited in supply. The "best" material depends on the application.' },
+        { statement: 'Spider silk is stronger than steel.', isTrue: true, explanation: 'By weight, spider silk is about 5 times stronger than steel. Scientists are trying to mass-produce synthetic spider silk for bulletproof vests, surgical sutures, and aerospace applications.' },
+      ],
+      facts: [
+        'Muga silk gets more lustrous with each wash — the opposite of most fabrics. This is because washing removes surface sericin, exposing more of the naturally golden fibroin underneath.',
+        'A single silkworm cocoon contains up to 1 kilometer of continuous silk thread. It takes about 5,000 cocoons to make 1 kilogram of raw silk.',
+        'Biomimetic scientists study natural materials to design better synthetic ones. Gecko-inspired adhesives, lotus-inspired self-cleaning surfaces, and abalone-inspired armor are all based on nature\'s engineering.',
+      ],
+      offlineActivity: 'Find three different fabrics at home (e.g., cotton t-shirt, polyester bag, wool sweater). Hold each up to the light — which lets more light through? Pull gently — which stretches more? Drop water on each — which absorbs fastest? You\'re doing basic materials testing, just like a scientist.',
+    },
   },
   {
     slug: 'the-little-boat',
@@ -973,6 +1373,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'the-little-boat' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'the-hornbills-crown',
@@ -993,6 +1413,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'the-hornbills-crown' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'why-fish-jump',
@@ -1013,6 +1453,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'why-fish-jump' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'tortoise-and-hare',
@@ -1033,6 +1493,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'tortoise-and-hare' as const,
+    level0: {
+      vocabulary: [
+        ['Photosynthesis', 'The process plants use to convert sunlight, water, and CO₂ into sugar and oxygen'],
+        ['Chlorophyll', 'The green pigment in plants that absorbs sunlight for photosynthesis'],
+        ['Vegetative propagation', 'Growing a new plant from a fragment of the parent — without seeds'],
+        ['Totipotent', 'A cell that can develop into any cell type — plant cells have this superpower'],
+        ['Cell wall', 'A rigid outer layer made of cellulose that gives plant cells their shape and strength'],
+      ],
+      trueFalse: [
+        { statement: 'Plants eat soil to get their food.', isTrue: false, explanation: 'Plants make their own food through photosynthesis using sunlight, water, and CO₂ from air. The soil provides minerals and water, but the actual "food" (sugar) is manufactured inside the leaves using solar energy.' },
+        { statement: 'A single plant cell can grow into an entire new plant.', isTrue: true, explanation: 'Unlike most animal cells, many plant cells are totipotent — they retain the ability to become any cell type. This is why you can grow a new plant from a cutting — the cut stem cells reorganize into roots, stems, and leaves.' },
+        { statement: 'All plants reproduce using seeds.', isTrue: false, explanation: 'Many plants can also reproduce vegetatively — through cuttings, runners, tubers, or bulbs. Every banana plant in your grocery store is a clone, grown from a cutting rather than a seed.' },
+      ],
+      facts: [
+        'Photosynthesis produces all the oxygen we breathe. Every other breath you take comes from algae and plants splitting water molecules apart.',
+        'The world\'s largest organism is a clonal colony of aspen trees in Utah called "Pando" — 47,000 tree stems all connected by a single root system, weighing 6,600 tonnes.',
+        'Tulsi (holy basil) contains eugenol, a natural antiseptic. Traditional medicine used it for centuries — modern science has confirmed its antimicrobial properties.',
+      ],
+      offlineActivity: 'Take a cutting from a plant (a small piece of stem with a few leaves). Place it in a glass of water on a windowsill. Check every day — within a week, you should see tiny roots forming. You\'re witnessing vegetative propagation — the same process that makes Tejimola\'s story biologically plausible.',
+    },
   },
   {
     slug: 'red-panda-mask',
@@ -1053,6 +1533,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'red-panda-mask' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'clouded-leopard',
@@ -1073,6 +1573,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'clouded-leopard' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'peacocks-dance',
@@ -1093,6 +1613,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'peacocks-dance' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'elephant-mud-bath',
@@ -1113,6 +1653,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'elephant-mud-bath' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'brave-mithun',
@@ -1133,6 +1693,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'brave-mithun' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'cuckoo-calls-dawn',
@@ -1153,6 +1733,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'cuckoo-calls-dawn' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'orchid-colors',
@@ -1173,6 +1773,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'orchid-colors' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'pitcher-plant',
@@ -1193,6 +1813,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'pitcher-plant' as const,
+    level0: {
+      vocabulary: [
+        ['Photosynthesis', 'The process plants use to convert sunlight, water, and CO₂ into sugar and oxygen'],
+        ['Chlorophyll', 'The green pigment in plants that absorbs sunlight for photosynthesis'],
+        ['Vegetative propagation', 'Growing a new plant from a fragment of the parent — without seeds'],
+        ['Totipotent', 'A cell that can develop into any cell type — plant cells have this superpower'],
+        ['Cell wall', 'A rigid outer layer made of cellulose that gives plant cells their shape and strength'],
+      ],
+      trueFalse: [
+        { statement: 'Plants eat soil to get their food.', isTrue: false, explanation: 'Plants make their own food through photosynthesis using sunlight, water, and CO₂ from air. The soil provides minerals and water, but the actual "food" (sugar) is manufactured inside the leaves using solar energy.' },
+        { statement: 'A single plant cell can grow into an entire new plant.', isTrue: true, explanation: 'Unlike most animal cells, many plant cells are totipotent — they retain the ability to become any cell type. This is why you can grow a new plant from a cutting — the cut stem cells reorganize into roots, stems, and leaves.' },
+        { statement: 'All plants reproduce using seeds.', isTrue: false, explanation: 'Many plants can also reproduce vegetatively — through cuttings, runners, tubers, or bulbs. Every banana plant in your grocery store is a clone, grown from a cutting rather than a seed.' },
+      ],
+      facts: [
+        'Photosynthesis produces all the oxygen we breathe. Every other breath you take comes from algae and plants splitting water molecules apart.',
+        'The world\'s largest organism is a clonal colony of aspen trees in Utah called "Pando" — 47,000 tree stems all connected by a single root system, weighing 6,600 tonnes.',
+        'Tulsi (holy basil) contains eugenol, a natural antiseptic. Traditional medicine used it for centuries — modern science has confirmed its antimicrobial properties.',
+      ],
+      offlineActivity: 'Take a cutting from a plant (a small piece of stem with a few leaves). Place it in a glass of water on a windowsill. Check every day — within a week, you should see tiny roots forming. You\'re witnessing vegetative propagation — the same process that makes Tejimola\'s story biologically plausible.',
+    },
   },
   {
     slug: 'bamboo-grows-fast',
@@ -1213,6 +1853,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'bamboo-grows-fast' as const,
+    level0: {
+      vocabulary: [
+        ['Photosynthesis', 'The process plants use to convert sunlight, water, and CO₂ into sugar and oxygen'],
+        ['Chlorophyll', 'The green pigment in plants that absorbs sunlight for photosynthesis'],
+        ['Vegetative propagation', 'Growing a new plant from a fragment of the parent — without seeds'],
+        ['Totipotent', 'A cell that can develop into any cell type — plant cells have this superpower'],
+        ['Cell wall', 'A rigid outer layer made of cellulose that gives plant cells their shape and strength'],
+      ],
+      trueFalse: [
+        { statement: 'Plants eat soil to get their food.', isTrue: false, explanation: 'Plants make their own food through photosynthesis using sunlight, water, and CO₂ from air. The soil provides minerals and water, but the actual "food" (sugar) is manufactured inside the leaves using solar energy.' },
+        { statement: 'A single plant cell can grow into an entire new plant.', isTrue: true, explanation: 'Unlike most animal cells, many plant cells are totipotent — they retain the ability to become any cell type. This is why you can grow a new plant from a cutting — the cut stem cells reorganize into roots, stems, and leaves.' },
+        { statement: 'All plants reproduce using seeds.', isTrue: false, explanation: 'Many plants can also reproduce vegetatively — through cuttings, runners, tubers, or bulbs. Every banana plant in your grocery store is a clone, grown from a cutting rather than a seed.' },
+      ],
+      facts: [
+        'Photosynthesis produces all the oxygen we breathe. Every other breath you take comes from algae and plants splitting water molecules apart.',
+        'The world\'s largest organism is a clonal colony of aspen trees in Utah called "Pando" — 47,000 tree stems all connected by a single root system, weighing 6,600 tonnes.',
+        'Tulsi (holy basil) contains eugenol, a natural antiseptic. Traditional medicine used it for centuries — modern science has confirmed its antimicrobial properties.',
+      ],
+      offlineActivity: 'Take a cutting from a plant (a small piece of stem with a few leaves). Place it in a glass of water on a windowsill. Check every day — within a week, you should see tiny roots forming. You\'re witnessing vegetative propagation — the same process that makes Tejimola\'s story biologically plausible.',
+    },
   },
   {
     slug: 'sal-tree',
@@ -1233,6 +1893,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'sal-tree' as const,
+    level0: {
+      vocabulary: [
+        ['Photosynthesis', 'The process plants use to convert sunlight, water, and CO₂ into sugar and oxygen'],
+        ['Chlorophyll', 'The green pigment in plants that absorbs sunlight for photosynthesis'],
+        ['Vegetative propagation', 'Growing a new plant from a fragment of the parent — without seeds'],
+        ['Totipotent', 'A cell that can develop into any cell type — plant cells have this superpower'],
+        ['Cell wall', 'A rigid outer layer made of cellulose that gives plant cells their shape and strength'],
+      ],
+      trueFalse: [
+        { statement: 'Plants eat soil to get their food.', isTrue: false, explanation: 'Plants make their own food through photosynthesis using sunlight, water, and CO₂ from air. The soil provides minerals and water, but the actual "food" (sugar) is manufactured inside the leaves using solar energy.' },
+        { statement: 'A single plant cell can grow into an entire new plant.', isTrue: true, explanation: 'Unlike most animal cells, many plant cells are totipotent — they retain the ability to become any cell type. This is why you can grow a new plant from a cutting — the cut stem cells reorganize into roots, stems, and leaves.' },
+        { statement: 'All plants reproduce using seeds.', isTrue: false, explanation: 'Many plants can also reproduce vegetatively — through cuttings, runners, tubers, or bulbs. Every banana plant in your grocery store is a clone, grown from a cutting rather than a seed.' },
+      ],
+      facts: [
+        'Photosynthesis produces all the oxygen we breathe. Every other breath you take comes from algae and plants splitting water molecules apart.',
+        'The world\'s largest organism is a clonal colony of aspen trees in Utah called "Pando" — 47,000 tree stems all connected by a single root system, weighing 6,600 tonnes.',
+        'Tulsi (holy basil) contains eugenol, a natural antiseptic. Traditional medicine used it for centuries — modern science has confirmed its antimicrobial properties.',
+      ],
+      offlineActivity: 'Take a cutting from a plant (a small piece of stem with a few leaves). Place it in a glass of water on a windowsill. Check every day — within a week, you should see tiny roots forming. You\'re witnessing vegetative propagation — the same process that makes Tejimola\'s story biologically plausible.',
+    },
   },
   {
     slug: 'tiny-frog',
@@ -1253,6 +1933,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'tiny-frog' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'the-girl-who-painted-rain',
@@ -1273,6 +1973,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'the-girl-who-painted-rain' as const,
+    level0: {
+      vocabulary: [
+        ['Photosynthesis', 'The process plants use to convert sunlight, water, and CO₂ into sugar and oxygen'],
+        ['Chlorophyll', 'The green pigment in plants that absorbs sunlight for photosynthesis'],
+        ['Vegetative propagation', 'Growing a new plant from a fragment of the parent — without seeds'],
+        ['Totipotent', 'A cell that can develop into any cell type — plant cells have this superpower'],
+        ['Cell wall', 'A rigid outer layer made of cellulose that gives plant cells their shape and strength'],
+      ],
+      trueFalse: [
+        { statement: 'Plants eat soil to get their food.', isTrue: false, explanation: 'Plants make their own food through photosynthesis using sunlight, water, and CO₂ from air. The soil provides minerals and water, but the actual "food" (sugar) is manufactured inside the leaves using solar energy.' },
+        { statement: 'A single plant cell can grow into an entire new plant.', isTrue: true, explanation: 'Unlike most animal cells, many plant cells are totipotent — they retain the ability to become any cell type. This is why you can grow a new plant from a cutting — the cut stem cells reorganize into roots, stems, and leaves.' },
+        { statement: 'All plants reproduce using seeds.', isTrue: false, explanation: 'Many plants can also reproduce vegetatively — through cuttings, runners, tubers, or bulbs. Every banana plant in your grocery store is a clone, grown from a cutting rather than a seed.' },
+      ],
+      facts: [
+        'Photosynthesis produces all the oxygen we breathe. Every other breath you take comes from algae and plants splitting water molecules apart.',
+        'The world\'s largest organism is a clonal colony of aspen trees in Utah called "Pando" — 47,000 tree stems all connected by a single root system, weighing 6,600 tonnes.',
+        'Tulsi (holy basil) contains eugenol, a natural antiseptic. Traditional medicine used it for centuries — modern science has confirmed its antimicrobial properties.',
+      ],
+      offlineActivity: 'Take a cutting from a plant (a small piece of stem with a few leaves). Place it in a glass of water on a windowsill. Check every day — within a week, you should see tiny roots forming. You\'re witnessing vegetative propagation — the same process that makes Tejimola\'s story biologically plausible.',
+    },
   },
   {
     slug: 'cloud-weaver-of-tawang',
@@ -1293,6 +2013,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'cloud-weaver-of-tawang' as const,
+    level0: {
+      vocabulary: [
+        ['LED', 'Light Emitting Diode — a tiny electronic component that glows when electricity flows through it'],
+        ['Circuit', 'A complete path that electricity can flow through, from power source back to power source'],
+        ['Bioluminescence', 'Light produced by living organisms through chemical reactions'],
+        ['Voltage', 'The electrical pressure that pushes electrons through a circuit, measured in volts'],
+        ['Resistor', 'A component that limits how much electricity flows — like a narrow pipe for water'],
+      ],
+      trueFalse: [
+        { statement: 'Fireflies produce light through electricity, just like a light bulb.', isTrue: false, explanation: 'Fireflies use a chemical reaction (luciferin + oxygen → light). This is bioluminescence — completely different from electrical light. Firefly light is nearly 100% efficient, while incandescent bulbs waste 90% as heat.' },
+        { statement: 'An LED needs a complete circuit to work — if any wire is disconnected, it stops.', isTrue: true, explanation: 'Electricity must flow in a complete loop. Break the circuit anywhere and the flow stops, just like breaking a water pipe stops all water flow downstream.' },
+        { statement: 'All fireflies blink at the same rate.', isTrue: false, explanation: 'Different species have different flash patterns — it\'s how they find mates. Some flash once per second, others have complex multi-flash sequences. Scientists can identify species by their flash pattern alone.' },
+      ],
+      facts: [
+        'Firefly light is called "cold light" because nearly 100% of the energy becomes light, not heat. An incandescent bulb converts only about 10% to light — the rest is wasted as heat.',
+        'Scientists study firefly synchronization to improve wireless network protocols — the same math that makes fireflies flash in unison can help phones communicate more efficiently.',
+        'There are over 2,000 species of fireflies worldwide, and each has a unique flash pattern — like a Morse code for love.',
+      ],
+      offlineActivity: 'Find a flashlight or phone light. Try blinking it in a pattern: on for 2 seconds, off for 1 second, repeat. Now try a different pattern: quick flash, quick flash, long pause. How many different "messages" can you create with just on and off? This is exactly how fireflies communicate.',
+    },
   },
   {
     slug: 'the-magic-japi-hat',
@@ -1313,6 +2053,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'the-magic-japi-hat' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'star-fell-deepor',
@@ -1333,6 +2093,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'star-fell-deepor' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'orange-sunsets',
@@ -1353,6 +2133,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'orange-sunsets' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'kite-festival',
@@ -1373,6 +2173,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'kite-festival' as const,
+    level0: {
+      vocabulary: [
+        ['LED', 'Light Emitting Diode — a tiny electronic component that glows when electricity flows through it'],
+        ['Circuit', 'A complete path that electricity can flow through, from power source back to power source'],
+        ['Bioluminescence', 'Light produced by living organisms through chemical reactions'],
+        ['Voltage', 'The electrical pressure that pushes electrons through a circuit, measured in volts'],
+        ['Resistor', 'A component that limits how much electricity flows — like a narrow pipe for water'],
+      ],
+      trueFalse: [
+        { statement: 'Fireflies produce light through electricity, just like a light bulb.', isTrue: false, explanation: 'Fireflies use a chemical reaction (luciferin + oxygen → light). This is bioluminescence — completely different from electrical light. Firefly light is nearly 100% efficient, while incandescent bulbs waste 90% as heat.' },
+        { statement: 'An LED needs a complete circuit to work — if any wire is disconnected, it stops.', isTrue: true, explanation: 'Electricity must flow in a complete loop. Break the circuit anywhere and the flow stops, just like breaking a water pipe stops all water flow downstream.' },
+        { statement: 'All fireflies blink at the same rate.', isTrue: false, explanation: 'Different species have different flash patterns — it\'s how they find mates. Some flash once per second, others have complex multi-flash sequences. Scientists can identify species by their flash pattern alone.' },
+      ],
+      facts: [
+        'Firefly light is called "cold light" because nearly 100% of the energy becomes light, not heat. An incandescent bulb converts only about 10% to light — the rest is wasted as heat.',
+        'Scientists study firefly synchronization to improve wireless network protocols — the same math that makes fireflies flash in unison can help phones communicate more efficiently.',
+        'There are over 2,000 species of fireflies worldwide, and each has a unique flash pattern — like a Morse code for love.',
+      ],
+      offlineActivity: 'Find a flashlight or phone light. Try blinking it in a pattern: on for 2 seconds, off for 1 second, repeat. Now try a different pattern: quick flash, quick flash, long pause. How many different "messages" can you create with just on and off? This is exactly how fireflies communicate.',
+    },
   },
   {
     slug: 'grandmothers-pitha',
@@ -1393,6 +2213,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'grandmothers-pitha' as const,
+    level0: {
+      vocabulary: [
+        ['LED', 'Light Emitting Diode — a tiny electronic component that glows when electricity flows through it'],
+        ['Circuit', 'A complete path that electricity can flow through, from power source back to power source'],
+        ['Bioluminescence', 'Light produced by living organisms through chemical reactions'],
+        ['Voltage', 'The electrical pressure that pushes electrons through a circuit, measured in volts'],
+        ['Resistor', 'A component that limits how much electricity flows — like a narrow pipe for water'],
+      ],
+      trueFalse: [
+        { statement: 'Fireflies produce light through electricity, just like a light bulb.', isTrue: false, explanation: 'Fireflies use a chemical reaction (luciferin + oxygen → light). This is bioluminescence — completely different from electrical light. Firefly light is nearly 100% efficient, while incandescent bulbs waste 90% as heat.' },
+        { statement: 'An LED needs a complete circuit to work — if any wire is disconnected, it stops.', isTrue: true, explanation: 'Electricity must flow in a complete loop. Break the circuit anywhere and the flow stops, just like breaking a water pipe stops all water flow downstream.' },
+        { statement: 'All fireflies blink at the same rate.', isTrue: false, explanation: 'Different species have different flash patterns — it\'s how they find mates. Some flash once per second, others have complex multi-flash sequences. Scientists can identify species by their flash pattern alone.' },
+      ],
+      facts: [
+        'Firefly light is called "cold light" because nearly 100% of the energy becomes light, not heat. An incandescent bulb converts only about 10% to light — the rest is wasted as heat.',
+        'Scientists study firefly synchronization to improve wireless network protocols — the same math that makes fireflies flash in unison can help phones communicate more efficiently.',
+        'There are over 2,000 species of fireflies worldwide, and each has a unique flash pattern — like a Morse code for love.',
+      ],
+      offlineActivity: 'Find a flashlight or phone light. Try blinking it in a pattern: on for 2 seconds, off for 1 second, repeat. Now try a different pattern: quick flash, quick flash, long pause. How many different "messages" can you create with just on and off? This is exactly how fireflies communicate.',
+    },
   },
   {
     slug: 'lost-temple',
@@ -1413,6 +2253,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'lost-temple' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'seven-sisters',
@@ -1433,6 +2293,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'seven-sisters' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'little-potter',
@@ -1453,6 +2333,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'little-potter' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'map-maker',
@@ -1473,6 +2373,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'map-maker' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'monkey-bridge',
@@ -1493,6 +2413,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'monkey-bridge' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'fisherman-storm',
@@ -1513,6 +2453,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'fisherman-storm' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'boy-counted-butterflies',
@@ -1533,6 +2493,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'boy-counted-butterflies' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'honey-hunter',
@@ -1553,6 +2533,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'honey-hunter' as const,
+    level0: {
+      vocabulary: [
+        ['Artificial Intelligence', 'Computer systems that can learn from data and make decisions'],
+        ['Sensor', 'A device that detects physical changes like sound, light, or vibration'],
+        ['Classification', 'Sorting data into categories based on patterns'],
+        ['Signal processing', 'Analyzing and extracting information from recorded data'],
+        ['Neural network', 'A computer model inspired by how brain cells connect'],
+      ],
+      trueFalse: [
+        { statement: 'AI can help scientists study animals without disturbing them.', isTrue: true, explanation: 'AI-powered cameras, microphones, and sensors can monitor wildlife 24/7 from a distance, collecting data that would take humans years to gather manually.' },
+        { statement: 'Computers can learn to identify animal species from their sounds.', isTrue: true, explanation: 'Machine learning models trained on audio recordings can distinguish between species, individual animals, and even emotional states from their calls.' },
+        { statement: 'AI will replace all wildlife scientists.', isTrue: false, explanation: 'AI is a tool that helps scientists work faster, but it cannot replace human understanding, creativity, and ethical judgment in conservation decisions.' },
+      ],
+      facts: [
+        'AI-powered camera traps can identify individual animals by their unique markings — like facial recognition, but for tigers and leopards.',
+        'Acoustic monitoring stations in rainforests can detect illegal logging by recognizing the sound of chainsaws, even from kilometers away.',
+        'Conservation drones equipped with thermal cameras can count animal populations at night without disturbing them.',
+      ],
+      offlineActivity: 'Go outside and spend 10 minutes just listening. Close your eyes. How many different sounds can you identify? Birds, insects, wind, traffic? Scientists do exactly this — but with AI helping them identify what they hear.',
+    },
   },
   {
     slug: 'monsoon-home',
@@ -1573,6 +2573,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'monsoon-home' as const,
+    level0: {
+      vocabulary: [
+        ['Photosynthesis', 'The process plants use to convert sunlight, water, and CO₂ into sugar and oxygen'],
+        ['Chlorophyll', 'The green pigment in plants that absorbs sunlight for photosynthesis'],
+        ['Vegetative propagation', 'Growing a new plant from a fragment of the parent — without seeds'],
+        ['Totipotent', 'A cell that can develop into any cell type — plant cells have this superpower'],
+        ['Cell wall', 'A rigid outer layer made of cellulose that gives plant cells their shape and strength'],
+      ],
+      trueFalse: [
+        { statement: 'Plants eat soil to get their food.', isTrue: false, explanation: 'Plants make their own food through photosynthesis using sunlight, water, and CO₂ from air. The soil provides minerals and water, but the actual "food" (sugar) is manufactured inside the leaves using solar energy.' },
+        { statement: 'A single plant cell can grow into an entire new plant.', isTrue: true, explanation: 'Unlike most animal cells, many plant cells are totipotent — they retain the ability to become any cell type. This is why you can grow a new plant from a cutting — the cut stem cells reorganize into roots, stems, and leaves.' },
+        { statement: 'All plants reproduce using seeds.', isTrue: false, explanation: 'Many plants can also reproduce vegetatively — through cuttings, runners, tubers, or bulbs. Every banana plant in your grocery store is a clone, grown from a cutting rather than a seed.' },
+      ],
+      facts: [
+        'Photosynthesis produces all the oxygen we breathe. Every other breath you take comes from algae and plants splitting water molecules apart.',
+        'The world\'s largest organism is a clonal colony of aspen trees in Utah called "Pando" — 47,000 tree stems all connected by a single root system, weighing 6,600 tonnes.',
+        'Tulsi (holy basil) contains eugenol, a natural antiseptic. Traditional medicine used it for centuries — modern science has confirmed its antimicrobial properties.',
+      ],
+      offlineActivity: 'Take a cutting from a plant (a small piece of stem with a few leaves). Place it in a glass of water on a windowsill. Check every day — within a week, you should see tiny roots forming. You\'re witnessing vegetative propagation — the same process that makes Tejimola\'s story biologically plausible.',
+    },
   },
   {
     slug: 'grandmother-remembered',
@@ -1593,6 +2613,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'grandmother-remembered' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'singing-bamboo',
@@ -1613,6 +2653,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'singing-bamboo' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'snow-leopard',
@@ -1633,6 +2693,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'snow-leopard' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'festival-lights',
@@ -1653,6 +2733,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'festival-lights' as const,
+    level0: {
+      vocabulary: [
+        ['Artificial Intelligence', 'Computer systems that can learn from data and make decisions'],
+        ['Sensor', 'A device that detects physical changes like sound, light, or vibration'],
+        ['Classification', 'Sorting data into categories based on patterns'],
+        ['Signal processing', 'Analyzing and extracting information from recorded data'],
+        ['Neural network', 'A computer model inspired by how brain cells connect'],
+      ],
+      trueFalse: [
+        { statement: 'AI can help scientists study animals without disturbing them.', isTrue: true, explanation: 'AI-powered cameras, microphones, and sensors can monitor wildlife 24/7 from a distance, collecting data that would take humans years to gather manually.' },
+        { statement: 'Computers can learn to identify animal species from their sounds.', isTrue: true, explanation: 'Machine learning models trained on audio recordings can distinguish between species, individual animals, and even emotional states from their calls.' },
+        { statement: 'AI will replace all wildlife scientists.', isTrue: false, explanation: 'AI is a tool that helps scientists work faster, but it cannot replace human understanding, creativity, and ethical judgment in conservation decisions.' },
+      ],
+      facts: [
+        'AI-powered camera traps can identify individual animals by their unique markings — like facial recognition, but for tigers and leopards.',
+        'Acoustic monitoring stations in rainforests can detect illegal logging by recognizing the sound of chainsaws, even from kilometers away.',
+        'Conservation drones equipped with thermal cameras can count animal populations at night without disturbing them.',
+      ],
+      offlineActivity: 'Go outside and spend 10 minutes just listening. Close your eyes. How many different sounds can you identify? Birds, insects, wind, traffic? Scientists do exactly this — but with AI helping them identify what they hear.',
+    },
   },
   {
     slug: 'little-train',
@@ -1673,6 +2773,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'little-train' as const,
+    level0: {
+      vocabulary: [
+        ['LED', 'Light Emitting Diode — a tiny electronic component that glows when electricity flows through it'],
+        ['Circuit', 'A complete path that electricity can flow through, from power source back to power source'],
+        ['Bioluminescence', 'Light produced by living organisms through chemical reactions'],
+        ['Voltage', 'The electrical pressure that pushes electrons through a circuit, measured in volts'],
+        ['Resistor', 'A component that limits how much electricity flows — like a narrow pipe for water'],
+      ],
+      trueFalse: [
+        { statement: 'Fireflies produce light through electricity, just like a light bulb.', isTrue: false, explanation: 'Fireflies use a chemical reaction (luciferin + oxygen → light). This is bioluminescence — completely different from electrical light. Firefly light is nearly 100% efficient, while incandescent bulbs waste 90% as heat.' },
+        { statement: 'An LED needs a complete circuit to work — if any wire is disconnected, it stops.', isTrue: true, explanation: 'Electricity must flow in a complete loop. Break the circuit anywhere and the flow stops, just like breaking a water pipe stops all water flow downstream.' },
+        { statement: 'All fireflies blink at the same rate.', isTrue: false, explanation: 'Different species have different flash patterns — it\'s how they find mates. Some flash once per second, others have complex multi-flash sequences. Scientists can identify species by their flash pattern alone.' },
+      ],
+      facts: [
+        'Firefly light is called "cold light" because nearly 100% of the energy becomes light, not heat. An incandescent bulb converts only about 10% to light — the rest is wasted as heat.',
+        'Scientists study firefly synchronization to improve wireless network protocols — the same math that makes fireflies flash in unison can help phones communicate more efficiently.',
+        'There are over 2,000 species of fireflies worldwide, and each has a unique flash pattern — like a Morse code for love.',
+      ],
+      offlineActivity: 'Find a flashlight or phone light. Try blinking it in a pattern: on for 2 seconds, off for 1 second, repeat. Now try a different pattern: quick flash, quick flash, long pause. How many different "messages" can you create with just on and off? This is exactly how fireflies communicate.',
+    },
   },
   {
     slug: 'postman-hills',
@@ -1693,6 +2813,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'postman-hills' as const,
+    level0: {
+      vocabulary: [
+        ['Tensile strength', 'How much pulling force a material can withstand before it breaks'],
+        ['Fibre', 'A thin, thread-like strand — natural (silk, cotton) or synthetic (nylon, polyester)'],
+        ['Protein', 'A large molecule made of amino acids — the building material of muscles, hair, and silk'],
+        ['UV resistance', 'The ability to withstand ultraviolet light from the sun without degrading'],
+        ['Biodegradable', 'Able to be broken down naturally by bacteria and other living organisms'],
+      ],
+      trueFalse: [
+        { statement: 'Muga silk is the only naturally golden silk in the world.', isTrue: true, explanation: 'Muga silk from Assam gets its golden color from xanthurenic acid, a pigment chemically bonded into the fibroin protein. Unlike dyes that sit on the surface, this color is part of the molecule and never fades.' },
+        { statement: 'Synthetic materials like nylon are always better than natural materials.', isTrue: false, explanation: 'Each material has trade-offs. Nylon is stronger and cheaper but made from petroleum and takes centuries to decompose. Silk is biodegradable and renewable but expensive and limited in supply. The "best" material depends on the application.' },
+        { statement: 'Spider silk is stronger than steel.', isTrue: true, explanation: 'By weight, spider silk is about 5 times stronger than steel. Scientists are trying to mass-produce synthetic spider silk for bulletproof vests, surgical sutures, and aerospace applications.' },
+      ],
+      facts: [
+        'Muga silk gets more lustrous with each wash — the opposite of most fabrics. This is because washing removes surface sericin, exposing more of the naturally golden fibroin underneath.',
+        'A single silkworm cocoon contains up to 1 kilometer of continuous silk thread. It takes about 5,000 cocoons to make 1 kilogram of raw silk.',
+        'Biomimetic scientists study natural materials to design better synthetic ones. Gecko-inspired adhesives, lotus-inspired self-cleaning surfaces, and abalone-inspired armor are all based on nature\'s engineering.',
+      ],
+      offlineActivity: 'Find three different fabrics at home (e.g., cotton t-shirt, polyester bag, wool sweater). Hold each up to the light — which lets more light through? Pull gently — which stretches more? Drop water on each — which absorbs fastest? You\'re doing basic materials testing, just like a scientist.',
+    },
   },
   {
     slug: 'night-market-imphal',
@@ -1713,6 +2853,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'night-market-imphal' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'turtle-mountain',
@@ -1733,6 +2893,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'turtle-mountain' as const,
+    level0: {
+      vocabulary: [
+        ['Artificial Intelligence', 'Computer systems that can learn from data and make decisions'],
+        ['Sensor', 'A device that detects physical changes like sound, light, or vibration'],
+        ['Classification', 'Sorting data into categories based on patterns'],
+        ['Signal processing', 'Analyzing and extracting information from recorded data'],
+        ['Neural network', 'A computer model inspired by how brain cells connect'],
+      ],
+      trueFalse: [
+        { statement: 'AI can help scientists study animals without disturbing them.', isTrue: true, explanation: 'AI-powered cameras, microphones, and sensors can monitor wildlife 24/7 from a distance, collecting data that would take humans years to gather manually.' },
+        { statement: 'Computers can learn to identify animal species from their sounds.', isTrue: true, explanation: 'Machine learning models trained on audio recordings can distinguish between species, individual animals, and even emotional states from their calls.' },
+        { statement: 'AI will replace all wildlife scientists.', isTrue: false, explanation: 'AI is a tool that helps scientists work faster, but it cannot replace human understanding, creativity, and ethical judgment in conservation decisions.' },
+      ],
+      facts: [
+        'AI-powered camera traps can identify individual animals by their unique markings — like facial recognition, but for tigers and leopards.',
+        'Acoustic monitoring stations in rainforests can detect illegal logging by recognizing the sound of chainsaws, even from kilometers away.',
+        'Conservation drones equipped with thermal cameras can count animal populations at night without disturbing them.',
+      ],
+      offlineActivity: 'Go outside and spend 10 minutes just listening. Close your eyes. How many different sounds can you identify? Birds, insects, wind, traffic? Scientists do exactly this — but with AI helping them identify what they hear.',
+    },
   },
   {
     slug: 'rainbow-fish',
@@ -1753,6 +2933,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'rainbow-fish' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'holi-tea-gardens',
@@ -1773,6 +2973,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'holi-tea-gardens' as const,
+    level0: {
+      vocabulary: [
+        ['LED', 'Light Emitting Diode — a tiny electronic component that glows when electricity flows through it'],
+        ['Circuit', 'A complete path that electricity can flow through, from power source back to power source'],
+        ['Bioluminescence', 'Light produced by living organisms through chemical reactions'],
+        ['Voltage', 'The electrical pressure that pushes electrons through a circuit, measured in volts'],
+        ['Resistor', 'A component that limits how much electricity flows — like a narrow pipe for water'],
+      ],
+      trueFalse: [
+        { statement: 'Fireflies produce light through electricity, just like a light bulb.', isTrue: false, explanation: 'Fireflies use a chemical reaction (luciferin + oxygen → light). This is bioluminescence — completely different from electrical light. Firefly light is nearly 100% efficient, while incandescent bulbs waste 90% as heat.' },
+        { statement: 'An LED needs a complete circuit to work — if any wire is disconnected, it stops.', isTrue: true, explanation: 'Electricity must flow in a complete loop. Break the circuit anywhere and the flow stops, just like breaking a water pipe stops all water flow downstream.' },
+        { statement: 'All fireflies blink at the same rate.', isTrue: false, explanation: 'Different species have different flash patterns — it\'s how they find mates. Some flash once per second, others have complex multi-flash sequences. Scientists can identify species by their flash pattern alone.' },
+      ],
+      facts: [
+        'Firefly light is called "cold light" because nearly 100% of the energy becomes light, not heat. An incandescent bulb converts only about 10% to light — the rest is wasted as heat.',
+        'Scientists study firefly synchronization to improve wireless network protocols — the same math that makes fireflies flash in unison can help phones communicate more efficiently.',
+        'There are over 2,000 species of fireflies worldwide, and each has a unique flash pattern — like a Morse code for love.',
+      ],
+      offlineActivity: 'Find a flashlight or phone light. Try blinking it in a pattern: on for 2 seconds, off for 1 second, repeat. Now try a different pattern: quick flash, quick flash, long pause. How many different "messages" can you create with just on and off? This is exactly how fireflies communicate.',
+    },
   },
   {
     slug: 'kaziranga-grass',
@@ -1793,6 +3013,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'kaziranga-grass' as const,
+    level0: {
+      vocabulary: [
+        ['LED', 'Light Emitting Diode — a tiny electronic component that glows when electricity flows through it'],
+        ['Circuit', 'A complete path that electricity can flow through, from power source back to power source'],
+        ['Bioluminescence', 'Light produced by living organisms through chemical reactions'],
+        ['Voltage', 'The electrical pressure that pushes electrons through a circuit, measured in volts'],
+        ['Resistor', 'A component that limits how much electricity flows — like a narrow pipe for water'],
+      ],
+      trueFalse: [
+        { statement: 'Fireflies produce light through electricity, just like a light bulb.', isTrue: false, explanation: 'Fireflies use a chemical reaction (luciferin + oxygen → light). This is bioluminescence — completely different from electrical light. Firefly light is nearly 100% efficient, while incandescent bulbs waste 90% as heat.' },
+        { statement: 'An LED needs a complete circuit to work — if any wire is disconnected, it stops.', isTrue: true, explanation: 'Electricity must flow in a complete loop. Break the circuit anywhere and the flow stops, just like breaking a water pipe stops all water flow downstream.' },
+        { statement: 'All fireflies blink at the same rate.', isTrue: false, explanation: 'Different species have different flash patterns — it\'s how they find mates. Some flash once per second, others have complex multi-flash sequences. Scientists can identify species by their flash pattern alone.' },
+      ],
+      facts: [
+        'Firefly light is called "cold light" because nearly 100% of the energy becomes light, not heat. An incandescent bulb converts only about 10% to light — the rest is wasted as heat.',
+        'Scientists study firefly synchronization to improve wireless network protocols — the same math that makes fireflies flash in unison can help phones communicate more efficiently.',
+        'There are over 2,000 species of fireflies worldwide, and each has a unique flash pattern — like a Morse code for love.',
+      ],
+      offlineActivity: 'Find a flashlight or phone light. Try blinking it in a pattern: on for 2 seconds, off for 1 second, repeat. Now try a different pattern: quick flash, quick flash, long pause. How many different "messages" can you create with just on and off? This is exactly how fireflies communicate.',
+    },
   },
   {
     slug: 'banyan-tree',
@@ -1813,6 +3053,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'banyan-tree' as const,
+    level0: {
+      vocabulary: [
+        ['Photosynthesis', 'The process plants use to convert sunlight, water, and CO₂ into sugar and oxygen'],
+        ['Chlorophyll', 'The green pigment in plants that absorbs sunlight for photosynthesis'],
+        ['Vegetative propagation', 'Growing a new plant from a fragment of the parent — without seeds'],
+        ['Totipotent', 'A cell that can develop into any cell type — plant cells have this superpower'],
+        ['Cell wall', 'A rigid outer layer made of cellulose that gives plant cells their shape and strength'],
+      ],
+      trueFalse: [
+        { statement: 'Plants eat soil to get their food.', isTrue: false, explanation: 'Plants make their own food through photosynthesis using sunlight, water, and CO₂ from air. The soil provides minerals and water, but the actual "food" (sugar) is manufactured inside the leaves using solar energy.' },
+        { statement: 'A single plant cell can grow into an entire new plant.', isTrue: true, explanation: 'Unlike most animal cells, many plant cells are totipotent — they retain the ability to become any cell type. This is why you can grow a new plant from a cutting — the cut stem cells reorganize into roots, stems, and leaves.' },
+        { statement: 'All plants reproduce using seeds.', isTrue: false, explanation: 'Many plants can also reproduce vegetatively — through cuttings, runners, tubers, or bulbs. Every banana plant in your grocery store is a clone, grown from a cutting rather than a seed.' },
+      ],
+      facts: [
+        'Photosynthesis produces all the oxygen we breathe. Every other breath you take comes from algae and plants splitting water molecules apart.',
+        'The world\'s largest organism is a clonal colony of aspen trees in Utah called "Pando" — 47,000 tree stems all connected by a single root system, weighing 6,600 tonnes.',
+        'Tulsi (holy basil) contains eugenol, a natural antiseptic. Traditional medicine used it for centuries — modern science has confirmed its antimicrobial properties.',
+      ],
+      offlineActivity: 'Take a cutting from a plant (a small piece of stem with a few leaves). Place it in a glass of water on a windowsill. Check every day — within a week, you should see tiny roots forming. You\'re witnessing vegetative propagation — the same process that makes Tejimola\'s story biologically plausible.',
+    },
   },
   {
     slug: 'basket-weaver',
@@ -1833,6 +3093,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'basket-weaver' as const,
+    level0: {
+      vocabulary: [
+        ['Photosynthesis', 'The process plants use to convert sunlight, water, and CO₂ into sugar and oxygen'],
+        ['Chlorophyll', 'The green pigment in plants that absorbs sunlight for photosynthesis'],
+        ['Vegetative propagation', 'Growing a new plant from a fragment of the parent — without seeds'],
+        ['Totipotent', 'A cell that can develop into any cell type — plant cells have this superpower'],
+        ['Cell wall', 'A rigid outer layer made of cellulose that gives plant cells their shape and strength'],
+      ],
+      trueFalse: [
+        { statement: 'Plants eat soil to get their food.', isTrue: false, explanation: 'Plants make their own food through photosynthesis using sunlight, water, and CO₂ from air. The soil provides minerals and water, but the actual "food" (sugar) is manufactured inside the leaves using solar energy.' },
+        { statement: 'A single plant cell can grow into an entire new plant.', isTrue: true, explanation: 'Unlike most animal cells, many plant cells are totipotent — they retain the ability to become any cell type. This is why you can grow a new plant from a cutting — the cut stem cells reorganize into roots, stems, and leaves.' },
+        { statement: 'All plants reproduce using seeds.', isTrue: false, explanation: 'Many plants can also reproduce vegetatively — through cuttings, runners, tubers, or bulbs. Every banana plant in your grocery store is a clone, grown from a cutting rather than a seed.' },
+      ],
+      facts: [
+        'Photosynthesis produces all the oxygen we breathe. Every other breath you take comes from algae and plants splitting water molecules apart.',
+        'The world\'s largest organism is a clonal colony of aspen trees in Utah called "Pando" — 47,000 tree stems all connected by a single root system, weighing 6,600 tonnes.',
+        'Tulsi (holy basil) contains eugenol, a natural antiseptic. Traditional medicine used it for centuries — modern science has confirmed its antimicrobial properties.',
+      ],
+      offlineActivity: 'Take a cutting from a plant (a small piece of stem with a few leaves). Place it in a glass of water on a windowsill. Check every day — within a week, you should see tiny roots forming. You\'re witnessing vegetative propagation — the same process that makes Tejimola\'s story biologically plausible.',
+    },
   },
   {
     slug: 'seed-keeper',
@@ -1853,6 +3133,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'seed-keeper' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'cloud-namer',
@@ -1873,6 +3173,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'cloud-namer' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'kingfisher-blue',
@@ -1893,6 +3213,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'kingfisher-blue' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'owl-wisest',
@@ -1913,6 +3253,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'owl-wisest' as const,
+    level0: {
+      vocabulary: [
+        ['LED', 'Light Emitting Diode — a tiny electronic component that glows when electricity flows through it'],
+        ['Circuit', 'A complete path that electricity can flow through, from power source back to power source'],
+        ['Bioluminescence', 'Light produced by living organisms through chemical reactions'],
+        ['Voltage', 'The electrical pressure that pushes electrons through a circuit, measured in volts'],
+        ['Resistor', 'A component that limits how much electricity flows — like a narrow pipe for water'],
+      ],
+      trueFalse: [
+        { statement: 'Fireflies produce light through electricity, just like a light bulb.', isTrue: false, explanation: 'Fireflies use a chemical reaction (luciferin + oxygen → light). This is bioluminescence — completely different from electrical light. Firefly light is nearly 100% efficient, while incandescent bulbs waste 90% as heat.' },
+        { statement: 'An LED needs a complete circuit to work — if any wire is disconnected, it stops.', isTrue: true, explanation: 'Electricity must flow in a complete loop. Break the circuit anywhere and the flow stops, just like breaking a water pipe stops all water flow downstream.' },
+        { statement: 'All fireflies blink at the same rate.', isTrue: false, explanation: 'Different species have different flash patterns — it\'s how they find mates. Some flash once per second, others have complex multi-flash sequences. Scientists can identify species by their flash pattern alone.' },
+      ],
+      facts: [
+        'Firefly light is called "cold light" because nearly 100% of the energy becomes light, not heat. An incandescent bulb converts only about 10% to light — the rest is wasted as heat.',
+        'Scientists study firefly synchronization to improve wireless network protocols — the same math that makes fireflies flash in unison can help phones communicate more efficiently.',
+        'There are over 2,000 species of fireflies worldwide, and each has a unique flash pattern — like a Morse code for love.',
+      ],
+      offlineActivity: 'Find a flashlight or phone light. Try blinking it in a pattern: on for 2 seconds, off for 1 second, repeat. Now try a different pattern: quick flash, quick flash, long pause. How many different "messages" can you create with just on and off? This is exactly how fireflies communicate.',
+    },
   },
   {
     slug: 'night-jasmine',
@@ -1933,6 +3293,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'night-jasmine' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'woodpecker-drum',
@@ -1953,6 +3333,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'woodpecker-drum' as const,
+    level0: {
+      vocabulary: [
+        ['Photosynthesis', 'The process plants use to convert sunlight, water, and CO₂ into sugar and oxygen'],
+        ['Chlorophyll', 'The green pigment in plants that absorbs sunlight for photosynthesis'],
+        ['Vegetative propagation', 'Growing a new plant from a fragment of the parent — without seeds'],
+        ['Totipotent', 'A cell that can develop into any cell type — plant cells have this superpower'],
+        ['Cell wall', 'A rigid outer layer made of cellulose that gives plant cells their shape and strength'],
+      ],
+      trueFalse: [
+        { statement: 'Plants eat soil to get their food.', isTrue: false, explanation: 'Plants make their own food through photosynthesis using sunlight, water, and CO₂ from air. The soil provides minerals and water, but the actual "food" (sugar) is manufactured inside the leaves using solar energy.' },
+        { statement: 'A single plant cell can grow into an entire new plant.', isTrue: true, explanation: 'Unlike most animal cells, many plant cells are totipotent — they retain the ability to become any cell type. This is why you can grow a new plant from a cutting — the cut stem cells reorganize into roots, stems, and leaves.' },
+        { statement: 'All plants reproduce using seeds.', isTrue: false, explanation: 'Many plants can also reproduce vegetatively — through cuttings, runners, tubers, or bulbs. Every banana plant in your grocery store is a clone, grown from a cutting rather than a seed.' },
+      ],
+      facts: [
+        'Photosynthesis produces all the oxygen we breathe. Every other breath you take comes from algae and plants splitting water molecules apart.',
+        'The world\'s largest organism is a clonal colony of aspen trees in Utah called "Pando" — 47,000 tree stems all connected by a single root system, weighing 6,600 tonnes.',
+        'Tulsi (holy basil) contains eugenol, a natural antiseptic. Traditional medicine used it for centuries — modern science has confirmed its antimicrobial properties.',
+      ],
+      offlineActivity: 'Take a cutting from a plant (a small piece of stem with a few leaves). Place it in a glass of water on a windowsill. Check every day — within a week, you should see tiny roots forming. You\'re witnessing vegetative propagation — the same process that makes Tejimola\'s story biologically plausible.',
+    },
   },
   {
     slug: 'tiger-whisker',
@@ -1973,6 +3373,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'tiger-whisker' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'music-dimasa',
@@ -1993,6 +3413,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'music-dimasa' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'silk-route',
@@ -2013,6 +3453,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'silk-route' as const,
+    level0: {
+      vocabulary: [
+        ['Echolocation', 'Finding objects by sending out sound and listening for the echo that bounces back'],
+        ['Ultrasonic', 'Sound waves too high-pitched for humans to hear (above 20,000 Hz)'],
+        ['Echo', 'Sound that bounces off a surface and returns to the listener'],
+        ['Frequency', 'How many sound waves pass a point per second, measured in Hertz (Hz)'],
+        ['Transducer', 'A device that converts one form of energy to another — like sound to electricity'],
+      ],
+      trueFalse: [
+        { statement: 'Dolphins can "see" underwater using sound.', isTrue: true, explanation: 'Dolphins send out clicks and listen for echoes. Their brain creates a 3D mental image from the echo patterns — they can detect fish, obstacles, and even the shape of objects in murky water where eyes are useless.' },
+        { statement: 'Sound travels faster in water than in air.', isTrue: true, explanation: 'Sound travels about 1,500 m/s in water vs 343 m/s in air — over 4 times faster. This is because water molecules are packed closer together, transmitting vibrations more efficiently.' },
+        { statement: 'Only marine animals use echolocation.', isTrue: false, explanation: 'Bats use echolocation in air to catch insects at night. Some birds (oilbirds, swiftlets) and even some blind humans have learned to use tongue clicks to navigate by echo.' },
+      ],
+      facts: [
+        'The Gangetic river dolphin is nearly blind — its eyes can only tell light from dark. It navigates entirely by sonar, clicking up to 200 times per second.',
+        'Medical ultrasound uses the same principle as dolphin sonar — high-frequency sound waves bounce off organs and create an image. This is how doctors see babies before they\'re born.',
+        'Submarines use sonar arrays that can detect objects hundreds of kilometers away. The same technology helps map the ocean floor, discovering new species and underwater mountains.',
+      ],
+      offlineActivity: 'Stand in a large room or hallway and clap once. Listen for the echo. Now try it in a smaller room — is the echo faster or slower? Try clapping near a wall vs in the middle of a room. You\'re doing exactly what a dolphin does: using sound to understand the shape of your environment.',
+    },
   },
   {
     slug: 'girl-grew-forest',
@@ -2033,6 +3493,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'girl-grew-forest' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'firewalker',
@@ -2053,6 +3533,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'firewalker' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'frogs-sing-rain',
@@ -2073,6 +3573,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'frogs-sing-rain' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'eri-silk',
@@ -2093,6 +3613,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'eri-silk' as const,
+    level0: {
+      vocabulary: [
+        ['Echolocation', 'Finding objects by sending out sound and listening for the echo that bounces back'],
+        ['Ultrasonic', 'Sound waves too high-pitched for humans to hear (above 20,000 Hz)'],
+        ['Echo', 'Sound that bounces off a surface and returns to the listener'],
+        ['Frequency', 'How many sound waves pass a point per second, measured in Hertz (Hz)'],
+        ['Transducer', 'A device that converts one form of energy to another — like sound to electricity'],
+      ],
+      trueFalse: [
+        { statement: 'Dolphins can "see" underwater using sound.', isTrue: true, explanation: 'Dolphins send out clicks and listen for echoes. Their brain creates a 3D mental image from the echo patterns — they can detect fish, obstacles, and even the shape of objects in murky water where eyes are useless.' },
+        { statement: 'Sound travels faster in water than in air.', isTrue: true, explanation: 'Sound travels about 1,500 m/s in water vs 343 m/s in air — over 4 times faster. This is because water molecules are packed closer together, transmitting vibrations more efficiently.' },
+        { statement: 'Only marine animals use echolocation.', isTrue: false, explanation: 'Bats use echolocation in air to catch insects at night. Some birds (oilbirds, swiftlets) and even some blind humans have learned to use tongue clicks to navigate by echo.' },
+      ],
+      facts: [
+        'The Gangetic river dolphin is nearly blind — its eyes can only tell light from dark. It navigates entirely by sonar, clicking up to 200 times per second.',
+        'Medical ultrasound uses the same principle as dolphin sonar — high-frequency sound waves bounce off organs and create an image. This is how doctors see babies before they\'re born.',
+        'Submarines use sonar arrays that can detect objects hundreds of kilometers away. The same technology helps map the ocean floor, discovering new species and underwater mountains.',
+      ],
+      offlineActivity: 'Stand in a large room or hallway and clap once. Listen for the echo. Now try it in a smaller room — is the echo faster or slower? Try clapping near a wall vs in the middle of a room. You\'re doing exactly what a dolphin does: using sound to understand the shape of your environment.',
+    },
   },
   {
     slug: 'river-braid',
@@ -2113,6 +3653,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'river-braid' as const,
+    level0: {
+      vocabulary: [
+        ['Photosynthesis', 'The process plants use to convert sunlight, water, and CO₂ into sugar and oxygen'],
+        ['Chlorophyll', 'The green pigment in plants that absorbs sunlight for photosynthesis'],
+        ['Vegetative propagation', 'Growing a new plant from a fragment of the parent — without seeds'],
+        ['Totipotent', 'A cell that can develop into any cell type — plant cells have this superpower'],
+        ['Cell wall', 'A rigid outer layer made of cellulose that gives plant cells their shape and strength'],
+      ],
+      trueFalse: [
+        { statement: 'Plants eat soil to get their food.', isTrue: false, explanation: 'Plants make their own food through photosynthesis using sunlight, water, and CO₂ from air. The soil provides minerals and water, but the actual "food" (sugar) is manufactured inside the leaves using solar energy.' },
+        { statement: 'A single plant cell can grow into an entire new plant.', isTrue: true, explanation: 'Unlike most animal cells, many plant cells are totipotent — they retain the ability to become any cell type. This is why you can grow a new plant from a cutting — the cut stem cells reorganize into roots, stems, and leaves.' },
+        { statement: 'All plants reproduce using seeds.', isTrue: false, explanation: 'Many plants can also reproduce vegetatively — through cuttings, runners, tubers, or bulbs. Every banana plant in your grocery store is a clone, grown from a cutting rather than a seed.' },
+      ],
+      facts: [
+        'Photosynthesis produces all the oxygen we breathe. Every other breath you take comes from algae and plants splitting water molecules apart.',
+        'The world\'s largest organism is a clonal colony of aspen trees in Utah called "Pando" — 47,000 tree stems all connected by a single root system, weighing 6,600 tonnes.',
+        'Tulsi (holy basil) contains eugenol, a natural antiseptic. Traditional medicine used it for centuries — modern science has confirmed its antimicrobial properties.',
+      ],
+      offlineActivity: 'Take a cutting from a plant (a small piece of stem with a few leaves). Place it in a glass of water on a windowsill. Check every day — within a week, you should see tiny roots forming. You\'re witnessing vegetative propagation — the same process that makes Tejimola\'s story biologically plausible.',
+    },
   },
   {
     slug: 'lotus-float',
@@ -2133,6 +3693,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'lotus-float' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'first-rice',
@@ -2153,6 +3733,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'first-rice' as const,
+    level0: {
+      vocabulary: [
+        ['Photosynthesis', 'The process plants use to convert sunlight, water, and CO₂ into sugar and oxygen'],
+        ['Chlorophyll', 'The green pigment in plants that absorbs sunlight for photosynthesis'],
+        ['Vegetative propagation', 'Growing a new plant from a fragment of the parent — without seeds'],
+        ['Totipotent', 'A cell that can develop into any cell type — plant cells have this superpower'],
+        ['Cell wall', 'A rigid outer layer made of cellulose that gives plant cells their shape and strength'],
+      ],
+      trueFalse: [
+        { statement: 'Plants eat soil to get their food.', isTrue: false, explanation: 'Plants make their own food through photosynthesis using sunlight, water, and CO₂ from air. The soil provides minerals and water, but the actual "food" (sugar) is manufactured inside the leaves using solar energy.' },
+        { statement: 'A single plant cell can grow into an entire new plant.', isTrue: true, explanation: 'Unlike most animal cells, many plant cells are totipotent — they retain the ability to become any cell type. This is why you can grow a new plant from a cutting — the cut stem cells reorganize into roots, stems, and leaves.' },
+        { statement: 'All plants reproduce using seeds.', isTrue: false, explanation: 'Many plants can also reproduce vegetatively — through cuttings, runners, tubers, or bulbs. Every banana plant in your grocery store is a clone, grown from a cutting rather than a seed.' },
+      ],
+      facts: [
+        'Photosynthesis produces all the oxygen we breathe. Every other breath you take comes from algae and plants splitting water molecules apart.',
+        'The world\'s largest organism is a clonal colony of aspen trees in Utah called "Pando" — 47,000 tree stems all connected by a single root system, weighing 6,600 tonnes.',
+        'Tulsi (holy basil) contains eugenol, a natural antiseptic. Traditional medicine used it for centuries — modern science has confirmed its antimicrobial properties.',
+      ],
+      offlineActivity: 'Take a cutting from a plant (a small piece of stem with a few leaves). Place it in a glass of water on a windowsill. Check every day — within a week, you should see tiny roots forming. You\'re witnessing vegetative propagation — the same process that makes Tejimola\'s story biologically plausible.',
+    },
   },
   {
     slug: 'dhol-drum',
@@ -2173,6 +3773,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'dhol-drum' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'little-chef',
@@ -2193,6 +3813,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'little-chef' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'flying-squirrel',
@@ -2213,6 +3853,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'flying-squirrel' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'fireflies-dont-burn',
@@ -2233,6 +3893,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'fireflies-dont-burn' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'seed-travel',
@@ -2253,6 +3933,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'seed-travel' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'siang-river',
@@ -2273,6 +3973,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'siang-river' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'takin-face',
@@ -2293,6 +4013,26 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'takin-face' as const,
+    level0: {
+      vocabulary: [
+        ['Variable', 'A value that can change — the thing you measure or control in science'],
+        ['Observation', 'Noticing and recording something using your senses or instruments'],
+        ['Pattern', 'A repeated or predictable arrangement — nature is full of patterns'],
+        ['Model', 'A simplified representation of something complex — helps us understand and predict'],
+        ['Evidence', 'Data or observations that support or disprove a claim'],
+      ],
+      trueFalse: [
+        { statement: 'Science is only done in laboratories.', isTrue: false, explanation: 'Science happens everywhere — in fields, forests, rivers, kitchens, and yes, laboratories. Some of the most important discoveries were made by people observing nature in their everyday surroundings.' },
+        { statement: 'Making mistakes is an important part of learning.', isTrue: true, explanation: 'Errors and unexpected results often lead to the most important discoveries. Penicillin was discovered from a contaminated experiment. Post-it notes came from a "failed" adhesive. In science and in learning, mistakes are data.' },
+        { statement: 'You need expensive equipment to do science.', isTrue: false, explanation: 'Many important observations can be made with just your senses, a notebook, and curiosity. Jane Goodall studied chimpanzees for decades with primarily observation and patience.' },
+      ],
+      facts: [
+        'The scientific method has been used for over 1,000 years — the earliest version was described by Ibn al-Haytham (Alhazen) in 11th century Iraq.',
+        'Northeast India is a biodiversity hotspot — one of 36 globally recognized regions with exceptional concentrations of endemic species.',
+        'The best way to remember something is to teach it to someone else. This is called the "protégé effect" — your brain organizes information more thoroughly when preparing to explain it.',
+      ],
+      offlineActivity: 'Keep a "science journal" for one week. Each day, write down one thing you observed in nature — a cloud shape, an insect, a plant growing, water flowing. Draw what you see. Ask "why?" for each observation. At the end of the week, pick your most interesting observation and research it.',
+    },
   },
   {
     slug: 'talking-parrot-hajo', story: { title: 'The Talking Parrot of Hajo', tagline: 'A parrot that speaks every language.', content: '' },
