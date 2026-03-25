@@ -202,6 +202,16 @@ export interface Lesson {
     estimatedTime: string;
     materials: string[];
   };
+  level0?: {
+    /** Story-specific vocabulary matching pairs [term, definition] */
+    vocabulary: [string, string][];
+    /** Story-specific true/false questions */
+    trueFalse: { statement: string; isTrue: boolean; explanation: string }[];
+    /** Story-specific "did you know" facts */
+    facts: string[];
+    /** Story-specific offline activity description */
+    offlineActivity?: string;
+  };
 }
 
 export const lessons: Lesson[] = [
@@ -262,6 +272,32 @@ After that night, Rongpharpi became the village's **elephant listener** — a br
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'elephant',
+    level0: {
+      vocabulary: [
+        ['Infrasonic', 'Sound below human hearing range (below 20 Hz) — elephants communicate at 8-25 Hz'],
+        ['Echolocation', 'Using sound echoes to detect objects — dolphins and bats do this, elephants use ground vibrations'],
+        ['Frequency', 'How many times something vibrates per second, measured in Hertz (Hz)'],
+        ['Seismic communication', 'Sending messages through vibrations in the ground'],
+        ['Pacinian corpuscles', 'Pressure sensors in elephant feet that detect ground vibrations'],
+        ['Spectrogram', 'A visual picture of sound — shows which frequencies are present over time'],
+      ],
+      trueFalse: [
+        { statement: 'Elephants can communicate over distances of up to 10 kilometers using ground vibrations.', isTrue: true, explanation: 'Elephants produce infrasonic rumbles at 8-25 Hz that travel through the earth. Other elephants detect these vibrations through sensitive receptors in their feet called Pacinian corpuscles.' },
+        { statement: 'Humans can hear all the sounds that elephants make.', isTrue: false, explanation: 'Most elephant rumbles are below 20 Hz — the lower limit of human hearing. We can sometimes feel them as a low vibration in our chest, but we can\'t hear them as sound. Scientists use special equipment to detect and record infrasonic communication.' },
+        { statement: 'A calm elephant and a nervous elephant produce exactly the same vibration pattern.', isTrue: false, explanation: 'Calm elephants produce slow, steady rumbles (about 0.5 pulses per second). Nervous elephants pulse much faster (about 3 per second). Danger signals are even more frantic. The pulse rate is what carries the "mood" information.' },
+        { statement: 'Scientists use artificial intelligence to help understand elephant communication.', isTrue: true, explanation: 'The Elephant Listening Project at Cornell University uses AI to analyze thousands of hours of recordings. The AI can classify different types of calls (contact calls, alarm calls, greeting rumbles) much faster than humans can.' },
+        { statement: 'Only elephants communicate through ground vibrations.', isTrue: false, explanation: 'Many animals use seismic communication! Spiders detect prey vibrations through their webs, mole rats drum the ground with their heads, and even some plants respond to vibrations from pollinating insects.' },
+      ],
+      facts: [
+        'An elephant\'s foot contains a special fatty pad that acts like a natural seismometer — it can detect vibrations equivalent to a small earthquake from miles away.',
+        'The Karbi Anglong hills in Assam (where the story is set) are home to over 1,200 wild Asian elephants — one of the largest populations in India.',
+        'Elephant herds are led by a matriarch — the oldest, most experienced female. She remembers water sources, safe paths, and danger zones from decades of experience.',
+        'A single elephant rumble can contain multiple layers of information: who is calling, their emotional state, their location, and even their identity (each elephant has a unique "voice").',
+        'Scientists at Stanford University used earthquake sensors (geophones) to detect wild elephants from over 20 miles away — the same technology used to monitor volcanoes.',
+        'The word "infrasonic" means "below sound" — these vibrations are real, physical waves traveling through the earth, just too low-pitched for human ears to process as sound.',
+      ],
+      offlineActivity: 'Press your ear against the ground or a wooden floor while someone walks in another room. Can you feel the vibrations? Try to guess how far away they are just from what you feel. This is exactly what Rongpharpi did — and what elephants do every day. Draw a picture of what you think the vibrations would look like if you could see them.',
+    },
   },
   {
     slug: 'firefly-festival-of-majuli',

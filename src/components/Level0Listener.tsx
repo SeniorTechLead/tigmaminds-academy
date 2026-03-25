@@ -231,25 +231,38 @@ export default function Level0Listener({ lesson }: Props) {
           </p>
         </div>
 
-        {/* Did you know facts */}
-        <DidYouKnow facts={
-          lesson.stem.realWorld.length > 0
-            ? lesson.stem.realWorld
-            : [
-                `${lesson.stem.title} is used in real-world applications every day.`,
-                'Scientists and engineers use the concepts in this lesson to solve problems that affect millions of people.',
-                'The best scientists start by being curious — just like the characters in this story.',
-              ]
+        {/* Did you know facts — story-specific first, then real-world */}
+        <DidYouKnow facts={[
+          ...(lesson.level0?.facts || []),
+          ...lesson.stem.realWorld,
+          ...(lesson.level0?.facts?.length ? [] : [
+            `${lesson.stem.title} is used in real-world applications every day.`,
+            'The best scientists start by being curious — just like the characters in this story.',
+          ]),
+        ].slice(0, 8)
         } />
       </ConceptCard>
 
-      {/* ===== VOCABULARY MATCHING ===== */}
-      <ConceptCard title="Key Terms" icon={<Lightbulb className="w-6 h-6 text-amber-500" />}>
+      {/* ===== STORY-SPECIFIC VOCABULARY ===== */}
+      {lesson.level0?.vocabulary && lesson.level0.vocabulary.length > 0 && (
+        <ConceptCard title={`${lesson.stem.title} — Key Terms`} icon={<Lightbulb className="w-6 h-6 text-amber-500" />}>
+          <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+            This story introduces important terms from {lesson.stem.title.toLowerCase()}. Match each term to its meaning:
+          </p>
+          <MatchingActivity
+            title="Match the term to its definition"
+            pairs={lesson.level0.vocabulary.slice(0, 5) as [string, string][]}
+          />
+        </ConceptCard>
+      )}
+
+      {/* ===== SCIENCE METHOD VOCABULARY (universal) ===== */}
+      <ConceptCard title="Science Method — Key Terms" icon={<Lightbulb className="w-6 h-6 text-sky-500" />}>
         <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
-          Every field of science has special words. Match each term to its meaning:
+          Every field of science uses the same method. Match each step to its meaning:
         </p>
         <MatchingActivity
-          title="Match the term to its definition"
+          title="Match the scientific method term to its definition"
           pairs={[
             ['Hypothesis', 'An educated guess that can be tested'],
             ['Experiment', 'A test designed to answer a question'],
@@ -259,10 +272,22 @@ export default function Level0Listener({ lesson }: Props) {
         />
       </ConceptCard>
 
-      {/* ===== TRUE OR FALSE ===== */}
-      <ConceptCard title="Test Your Intuition" icon={<HelpCircle className="w-6 h-6 text-violet-500" />}>
+      {/* ===== STORY-SPECIFIC TRUE/FALSE ===== */}
+      {lesson.level0?.trueFalse && lesson.level0.trueFalse.length > 0 && (
+        <ConceptCard title={`Test Your Knowledge — ${lesson.stem.title}`} icon={<HelpCircle className="w-6 h-6 text-violet-500" />}>
+          <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+            How much do you know about {lesson.stem.title.toLowerCase()}? True or false:
+          </p>
+          {lesson.level0.trueFalse.map((tf, i) => (
+            <TrueFalse key={i} statement={tf.statement} isTrue={tf.isTrue} explanation={tf.explanation} />
+          ))}
+        </ConceptCard>
+      )}
+
+      {/* ===== GENERAL TRUE/FALSE (universal) ===== */}
+      <ConceptCard title="Test Your Intuition — Science Basics" icon={<HelpCircle className="w-6 h-6 text-sky-500" />}>
         <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
-          Before you learn the details — what do you already know? Answer true or false:
+          Some general science questions — what do you already know?
         </p>
         <TrueFalse
           statement="Scientists always know the answer before they start an experiment."
@@ -273,11 +298,6 @@ export default function Level0Listener({ lesson }: Props) {
           statement="You can learn science from stories and everyday observations."
           isTrue={true}
           explanation="Many scientific discoveries started with someone noticing something in nature and asking 'why?' — exactly like the characters in these stories."
-        />
-        <TrueFalse
-          statement={`${lesson.stem.title} is only useful for scientists in laboratories.`}
-          isTrue={false}
-          explanation={`${lesson.stem.title} affects everyday life — from the technology you use to the food you eat to the natural world around you.`}
         />
       </ConceptCard>
 
@@ -301,17 +321,31 @@ export default function Level0Listener({ lesson }: Props) {
       {/* ===== OFFLINE ACTIVITY ===== */}
       <ConceptCard title="Try This at Home (No Computer Needed)" icon={<Sparkles className="w-6 h-6 text-rose-500" />}>
         <div className="bg-rose-50 dark:bg-rose-900/20 rounded-xl p-5">
-          <p className="text-sm text-rose-800 dark:text-rose-300 leading-relaxed mb-3">
-            <strong>Mini-project:</strong> After reading the story, try this activity with just a notebook and pen:
-          </p>
+          {lesson.level0?.offlineActivity ? (
+            <>
+              <p className="text-sm text-rose-800 dark:text-rose-300 leading-relaxed mb-3">
+                <strong>Story-specific activity:</strong>
+              </p>
+              <p className="text-sm text-rose-700 dark:text-rose-300 leading-relaxed mb-4">
+                {lesson.level0.offlineActivity}
+              </p>
+              <div className="border-t border-rose-200 dark:border-rose-800 pt-3 mt-3">
+                <p className="text-xs text-rose-600 dark:text-rose-400 font-semibold mb-2">Also try these general activities:</p>
+              </div>
+            </>
+          ) : (
+            <p className="text-sm text-rose-800 dark:text-rose-300 leading-relaxed mb-3">
+              <strong>Mini-project:</strong> After reading the story, try this with just a notebook and pen:
+            </p>
+          )}
           <ol className="space-y-2 text-sm text-rose-700 dark:text-rose-300">
             <li className="flex items-start gap-2"><span className="font-bold">1.</span> Write down 3 things from the story that surprised you.</li>
-            <li className="flex items-start gap-2"><span className="font-bold">2.</span> Draw a picture of the main scientific concept — what does {lesson.stem.title.toLowerCase()} look like?</li>
-            <li className="flex items-start gap-2"><span className="font-bold">3.</span> Find one example of {lesson.stem.title.toLowerCase()} in your own life or neighborhood.</li>
-            <li className="flex items-start gap-2"><span className="font-bold">4.</span> Explain what you learned to a friend or family member in your own words.</li>
+            <li className="flex items-start gap-2"><span className="font-bold">2.</span> Draw a picture of the main concept — what does {lesson.stem.title.toLowerCase()} look like?</li>
+            <li className="flex items-start gap-2"><span className="font-bold">3.</span> Find one example in your own life or neighborhood.</li>
+            <li className="flex items-start gap-2"><span className="font-bold">4.</span> Explain what you learned to someone in your own words.</li>
           </ol>
           <p className="text-xs text-rose-600 dark:text-rose-400 mt-4">
-            Teaching someone else is the best way to check if you truly understand something.
+            Teaching someone else is the best way to check if you truly understand.
           </p>
         </div>
       </ConceptCard>
