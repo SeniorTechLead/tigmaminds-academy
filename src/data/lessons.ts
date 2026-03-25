@@ -581,6 +581,26 @@ From that night on, Joon was never afraid of the dark again — because he under
         'Optional: soldering iron + solder for permanent build',
       ],
     },
+    level0: {
+      vocabulary: [
+        ['LED', 'Light Emitting Diode — glows when electricity flows'],
+        ['Bioluminescence', 'Light from living organisms through chemical reactions'],
+        ['PWM', 'Pulse Width Modulation — controlling brightness by rapid on/off switching'],
+        ['Synchronization', 'Multiple things aligning their timing spontaneously'],
+        ['Luciferin', 'The chemical in fireflies that produces light when oxidized'],
+      ],
+      trueFalse: [
+        { statement: 'Firefly light is nearly 100% energy efficient.', isTrue: true, explanation: 'Almost all energy becomes light, not heat. Incandescent bulbs waste 90% as heat.' },
+        { statement: 'All fireflies blink at the same rate.', isTrue: false, explanation: 'Each species has a unique flash pattern — it is how they find mates.' },
+        { statement: 'Scientists study firefly synchronization for wireless network design.', isTrue: true, explanation: 'The same math (Kuramoto model) applies to fireflies, heart cells, and network protocols.' },
+      ],
+      facts: [
+        'Over 2,000 firefly species exist, each with unique flash patterns.',
+        'Firefly light is called cold light — nearly zero heat produced.',
+        'Firefly synchronization inspired improvements to wireless network protocols.',
+      ],
+      offlineActivity: 'In a dark room, use a flashlight to create flash patterns. Ask someone to identify which pattern means calm vs danger. You are communicating like a firefly.',
+    },
   },
   {
     slug: 'river-dolphins-secret',
@@ -912,6 +932,26 @@ To this day, muga silk is found only in Assam — the only golden silk in the wo
         'Lab notebook or printed worksheet',
         'Optional: muga silk sample (available online from Assam weavers)',
       ],
+    },
+    level0: {
+      vocabulary: [
+        ['Fibroin', 'The structural protein forming silk fibre core'],
+        ['Sericin', 'The sticky coating that holds silk strands together'],
+        ['Xanthurenic acid', 'The golden pigment bonded into muga silk protein'],
+        ['Tensile strength', 'How much pulling force before a material breaks'],
+        ['Biodegradable', 'Able to be broken down by natural organisms'],
+      ],
+      trueFalse: [
+        { statement: 'Muga silk is the only naturally golden silk in the world.', isTrue: true, explanation: 'Its color comes from xanthurenic acid bonded into the protein — it never fades.' },
+        { statement: 'Spider silk is stronger than steel by weight.', isTrue: true, explanation: 'About 5x stronger. Scientists are trying to mass-produce synthetic spider silk.' },
+        { statement: 'All silk is white.', isTrue: false, explanation: 'Muga is golden, eri is cream, tasar is brown. Only mulberry silk is naturally white.' },
+      ],
+      facts: [
+        'Muga silk gets more lustrous with washing — the opposite of most fabrics.',
+        'One silkworm cocoon contains up to 1km of continuous thread.',
+        'Muga silk UV resistance is being studied for medical sutures.',
+      ],
+      offlineActivity: 'Find three different fabrics at home. Hold each to light, stretch gently, drop water on each. Record differences — you are doing materials science.',
     },
   },
   {
@@ -4038,96 +4078,476 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     slug: 'talking-parrot-hajo', story: { title: 'The Talking Parrot of Hajo', tagline: 'A parrot that speaks every language.', content: '' },
     stem: { title: 'Language & Communication', description: 'How communication works.', icon: Cpu, color: 'from-violet-400 to-purple-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
     illustration: '/content/illustrations/fun-facts.webp', track: 'school', subjects: ['Computer Science' as Subject], estimatedHours: 12, playground: 'talking-parrot-hajo' as const,
+    level0: {
+      vocabulary: [
+        ['Observation', 'Noticing and recording something carefully'],
+        ['Pattern', 'A repeated arrangement in nature or data'],
+        ['Variable', 'Something that can change or be measured'],
+        ['Evidence', 'Data supporting or disproving a claim'],
+        ['Model', 'A simplified version of something complex'],
+      ],
+      trueFalse: [
+        { statement: 'Science only happens in laboratories.', isTrue: false, explanation: 'Science happens everywhere — forests, kitchens, rivers, playgrounds.' },
+        { statement: 'Making mistakes helps you learn.', isTrue: true, explanation: 'Errors lead to discoveries. Penicillin was found from a contaminated experiment.' },
+        { statement: 'You need expensive equipment for science.', isTrue: false, explanation: 'Curiosity and observation are the most important scientific tools.' },
+      ],
+      facts: [
+        'NE India is one of 36 global biodiversity hotspots.',
+        'The scientific method has been used for over 1,000 years.',
+        'Teaching someone else is the best way to check understanding.',
+      ],
+      offlineActivity: 'Keep a nature journal for one week. Each day, draw and describe one observation. At the end, research your most interesting one.',
+    },
   },
   {
     slug: 'secret-garden-loktak', story: { title: 'The Secret Garden of Loktak Lake', tagline: 'Floating islands that grow gardens.', content: '' },
     stem: { title: 'Aquatic Botany', description: 'Floating island ecology.', icon: Leaf, color: 'from-teal-400 to-cyan-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
     illustration: '/content/illustrations/dancing-deer.webp', track: 'school', subjects: ['Biology' as Subject, 'Ecology' as Subject], estimatedHours: 12, playground: 'secret-garden-loktak' as const,
+    level0: {
+      vocabulary: [
+        ['Observation', 'Noticing and recording something carefully'],
+        ['Pattern', 'A repeated arrangement in nature or data'],
+        ['Variable', 'Something that can change or be measured'],
+        ['Evidence', 'Data supporting or disproving a claim'],
+        ['Model', 'A simplified version of something complex'],
+      ],
+      trueFalse: [
+        { statement: 'Science only happens in laboratories.', isTrue: false, explanation: 'Science happens everywhere — forests, kitchens, rivers, playgrounds.' },
+        { statement: 'Making mistakes helps you learn.', isTrue: true, explanation: 'Errors lead to discoveries. Penicillin was found from a contaminated experiment.' },
+        { statement: 'You need expensive equipment for science.', isTrue: false, explanation: 'Curiosity and observation are the most important scientific tools.' },
+      ],
+      facts: [
+        'NE India is one of 36 global biodiversity hotspots.',
+        'The scientific method has been used for over 1,000 years.',
+        'Teaching someone else is the best way to check understanding.',
+      ],
+      offlineActivity: 'Keep a nature journal for one week. Each day, draw and describe one observation. At the end, research your most interesting one.',
+    },
   },
   {
     slug: 'stars-ziro-valley', story: { title: 'Why Stars Are Brighter in Ziro Valley', tagline: 'Light pollution and astronomy.', content: '' },
     stem: { title: 'Light Pollution & Astronomy', description: 'Where darkness reveals the universe.', icon: Sparkles, color: 'from-indigo-400 to-violet-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
     illustration: '/content/illustrations/fun-facts.webp', track: 'school', subjects: ['Physics' as Subject], estimatedHours: 12, playground: 'stars-ziro-valley' as const,
+    level0: {
+      vocabulary: [
+        ['Observation', 'Noticing and recording something carefully'],
+        ['Pattern', 'A repeated arrangement in nature or data'],
+        ['Variable', 'Something that can change or be measured'],
+        ['Evidence', 'Data supporting or disproving a claim'],
+        ['Model', 'A simplified version of something complex'],
+      ],
+      trueFalse: [
+        { statement: 'Science only happens in laboratories.', isTrue: false, explanation: 'Science happens everywhere — forests, kitchens, rivers, playgrounds.' },
+        { statement: 'Making mistakes helps you learn.', isTrue: true, explanation: 'Errors lead to discoveries. Penicillin was found from a contaminated experiment.' },
+        { statement: 'You need expensive equipment for science.', isTrue: false, explanation: 'Curiosity and observation are the most important scientific tools.' },
+      ],
+      facts: [
+        'NE India is one of 36 global biodiversity hotspots.',
+        'The scientific method has been used for over 1,000 years.',
+        'Teaching someone else is the best way to check understanding.',
+      ],
+      offlineActivity: 'Keep a nature journal for one week. Each day, draw and describe one observation. At the end, research your most interesting one.',
+    },
   },
   {
     slug: 'mishing-fish', story: { title: 'How the Mishing People Learned to Fish', tagline: 'Traditional fishing meets science.', content: '' },
     stem: { title: 'Fishing Technology', description: 'Fishing technology and innovation.', icon: Leaf, color: 'from-blue-400 to-cyan-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
     illustration: '/content/illustrations/brahmaputra-angry.webp', track: 'school', subjects: ['Biology' as Subject], estimatedHours: 12, playground: 'mishing-fish' as const,
+    level0: {
+      vocabulary: [
+        ['Observation', 'Noticing and recording something carefully'],
+        ['Pattern', 'A repeated arrangement in nature or data'],
+        ['Variable', 'Something that can change or be measured'],
+        ['Evidence', 'Data supporting or disproving a claim'],
+        ['Model', 'A simplified version of something complex'],
+      ],
+      trueFalse: [
+        { statement: 'Science only happens in laboratories.', isTrue: false, explanation: 'Science happens everywhere — forests, kitchens, rivers, playgrounds.' },
+        { statement: 'Making mistakes helps you learn.', isTrue: true, explanation: 'Errors lead to discoveries. Penicillin was found from a contaminated experiment.' },
+        { statement: 'You need expensive equipment for science.', isTrue: false, explanation: 'Curiosity and observation are the most important scientific tools.' },
+      ],
+      facts: [
+        'NE India is one of 36 global biodiversity hotspots.',
+        'The scientific method has been used for over 1,000 years.',
+        'Teaching someone else is the best way to check understanding.',
+      ],
+      offlineActivity: 'Keep a nature journal for one week. Each day, draw and describe one observation. At the end, research your most interesting one.',
+    },
   },
   {
     slug: 'coconut-jackfruit', story: { title: 'The Coconut That Wanted to Be a Jackfruit', tagline: 'Genetics and species identity.', content: '' },
     stem: { title: 'Genetics & Species Identity', description: 'Can one species become another?', icon: Leaf, color: 'from-green-400 to-emerald-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
     illustration: '/content/illustrations/fun-facts.webp', track: 'school', subjects: ['Biology' as Subject], estimatedHours: 12, playground: 'coconut-jackfruit' as const,
+    level0: {
+      vocabulary: [
+        ['Observation', 'Noticing and recording something carefully'],
+        ['Pattern', 'A repeated arrangement in nature or data'],
+        ['Variable', 'Something that can change or be measured'],
+        ['Evidence', 'Data supporting or disproving a claim'],
+        ['Model', 'A simplified version of something complex'],
+      ],
+      trueFalse: [
+        { statement: 'Science only happens in laboratories.', isTrue: false, explanation: 'Science happens everywhere — forests, kitchens, rivers, playgrounds.' },
+        { statement: 'Making mistakes helps you learn.', isTrue: true, explanation: 'Errors lead to discoveries. Penicillin was found from a contaminated experiment.' },
+        { statement: 'You need expensive equipment for science.', isTrue: false, explanation: 'Curiosity and observation are the most important scientific tools.' },
+      ],
+      facts: [
+        'NE India is one of 36 global biodiversity hotspots.',
+        'The scientific method has been used for over 1,000 years.',
+        'Teaching someone else is the best way to check understanding.',
+      ],
+      offlineActivity: 'Keep a nature journal for one week. Each day, draw and describe one observation. At the end, research your most interesting one.',
+    },
   },
   {
     slug: 'paper-umbrella', story: { title: 'The Paper Umbrella of Sualkuchi', tagline: 'Paper engineering and waterproofing.', content: '' },
     stem: { title: 'Paper Engineering', description: 'The science of waterproofing.', icon: Construction, color: 'from-amber-400 to-orange-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
     illustration: '/content/illustrations/fun-facts.webp', track: 'school', subjects: ['Engineering' as Subject, 'Chemistry' as Subject], estimatedHours: 12, playground: 'paper-umbrella' as const,
+    level0: {
+      vocabulary: [
+        ['Observation', 'Noticing and recording something carefully'],
+        ['Pattern', 'A repeated arrangement in nature or data'],
+        ['Variable', 'Something that can change or be measured'],
+        ['Evidence', 'Data supporting or disproving a claim'],
+        ['Model', 'A simplified version of something complex'],
+      ],
+      trueFalse: [
+        { statement: 'Science only happens in laboratories.', isTrue: false, explanation: 'Science happens everywhere — forests, kitchens, rivers, playgrounds.' },
+        { statement: 'Making mistakes helps you learn.', isTrue: true, explanation: 'Errors lead to discoveries. Penicillin was found from a contaminated experiment.' },
+        { statement: 'You need expensive equipment for science.', isTrue: false, explanation: 'Curiosity and observation are the most important scientific tools.' },
+      ],
+      facts: [
+        'NE India is one of 36 global biodiversity hotspots.',
+        'The scientific method has been used for over 1,000 years.',
+        'Teaching someone else is the best way to check understanding.',
+      ],
+      offlineActivity: 'Keep a nature journal for one week. Each day, draw and describe one observation. At the end, research your most interesting one.',
+    },
   },
   {
     slug: 'witch-doctor', story: { title: 'The Witch Doctor\'s Apprentice', tagline: 'Medicinal plants and pharmacology.', content: '' },
     stem: { title: 'Medicinal Plants', description: 'Medicinal plants and pharmacology.', icon: Leaf, color: 'from-emerald-400 to-green-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
     illustration: '/content/illustrations/fun-facts.webp', track: 'school', subjects: ['Biology' as Subject, 'Chemistry' as Subject], estimatedHours: 12, playground: 'witch-doctor' as const,
+    level0: {
+      vocabulary: [
+        ['Observation', 'Noticing and recording something carefully'],
+        ['Pattern', 'A repeated arrangement in nature or data'],
+        ['Variable', 'Something that can change or be measured'],
+        ['Evidence', 'Data supporting or disproving a claim'],
+        ['Model', 'A simplified version of something complex'],
+      ],
+      trueFalse: [
+        { statement: 'Science only happens in laboratories.', isTrue: false, explanation: 'Science happens everywhere — forests, kitchens, rivers, playgrounds.' },
+        { statement: 'Making mistakes helps you learn.', isTrue: true, explanation: 'Errors lead to discoveries. Penicillin was found from a contaminated experiment.' },
+        { statement: 'You need expensive equipment for science.', isTrue: false, explanation: 'Curiosity and observation are the most important scientific tools.' },
+      ],
+      facts: [
+        'NE India is one of 36 global biodiversity hotspots.',
+        'The scientific method has been used for over 1,000 years.',
+        'Teaching someone else is the best way to check understanding.',
+      ],
+      offlineActivity: 'Keep a nature journal for one week. Each day, draw and describe one observation. At the end, research your most interesting one.',
+    },
   },
   {
     slug: 'turtle-slow', story: { title: 'Why Turtles Are Slow on Land', tagline: 'Evolution and body plan trade-offs.', content: '' },
     stem: { title: 'Evolution & Body Plans', description: 'Evolution and body plan trade-offs.', icon: Leaf, color: 'from-green-400 to-teal-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
     illustration: '/content/illustrations/fun-facts.webp', track: 'school', subjects: ['Biology' as Subject], estimatedHours: 12, playground: 'turtle-slow' as const,
+    level0: {
+      vocabulary: [
+        ['Observation', 'Noticing and recording something carefully'],
+        ['Pattern', 'A repeated arrangement in nature or data'],
+        ['Variable', 'Something that can change or be measured'],
+        ['Evidence', 'Data supporting or disproving a claim'],
+        ['Model', 'A simplified version of something complex'],
+      ],
+      trueFalse: [
+        { statement: 'Science only happens in laboratories.', isTrue: false, explanation: 'Science happens everywhere — forests, kitchens, rivers, playgrounds.' },
+        { statement: 'Making mistakes helps you learn.', isTrue: true, explanation: 'Errors lead to discoveries. Penicillin was found from a contaminated experiment.' },
+        { statement: 'You need expensive equipment for science.', isTrue: false, explanation: 'Curiosity and observation are the most important scientific tools.' },
+      ],
+      facts: [
+        'NE India is one of 36 global biodiversity hotspots.',
+        'The scientific method has been used for over 1,000 years.',
+        'Teaching someone else is the best way to check understanding.',
+      ],
+      offlineActivity: 'Keep a nature journal for one week. Each day, draw and describe one observation. At the end, research your most interesting one.',
+    },
   },
   {
     slug: 'market-day-tura', story: { title: 'The Market Day Surprise', tagline: 'Economics and trade in a hill town.', content: '' },
     stem: { title: 'Economics & Trade', description: 'Economics and trade in a hill town.', icon: Cpu, color: 'from-amber-400 to-orange-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
     illustration: '/content/illustrations/fun-facts.webp', track: 'school', subjects: ['Economics' as Subject], estimatedHours: 12, playground: 'market-day-tura' as const,
+    level0: {
+      vocabulary: [
+        ['Observation', 'Noticing and recording something carefully'],
+        ['Pattern', 'A repeated arrangement in nature or data'],
+        ['Variable', 'Something that can change or be measured'],
+        ['Evidence', 'Data supporting or disproving a claim'],
+        ['Model', 'A simplified version of something complex'],
+      ],
+      trueFalse: [
+        { statement: 'Science only happens in laboratories.', isTrue: false, explanation: 'Science happens everywhere — forests, kitchens, rivers, playgrounds.' },
+        { statement: 'Making mistakes helps you learn.', isTrue: true, explanation: 'Errors lead to discoveries. Penicillin was found from a contaminated experiment.' },
+        { statement: 'You need expensive equipment for science.', isTrue: false, explanation: 'Curiosity and observation are the most important scientific tools.' },
+      ],
+      facts: [
+        'NE India is one of 36 global biodiversity hotspots.',
+        'The scientific method has been used for over 1,000 years.',
+        'Teaching someone else is the best way to check understanding.',
+      ],
+      offlineActivity: 'Keep a nature journal for one week. Each day, draw and describe one observation. At the end, research your most interesting one.',
+    },
   },
   {
     slug: 'elephant-corridor', story: { title: 'The Elephant Corridor', tagline: 'Wildlife corridors and habitat connectivity.', content: '' },
     stem: { title: 'Wildlife Corridors', description: 'Wildlife corridors and habitat connectivity.', icon: Leaf, color: 'from-green-500 to-emerald-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
     illustration: '/content/illustrations/elephant-ant.webp', track: 'school', subjects: ['Ecology' as Subject, 'Biology' as Subject], estimatedHours: 12, playground: 'elephant-corridor' as const,
+    level0: {
+      vocabulary: [
+        ['Observation', 'Noticing and recording something carefully'],
+        ['Pattern', 'A repeated arrangement in nature or data'],
+        ['Variable', 'Something that can change or be measured'],
+        ['Evidence', 'Data supporting or disproving a claim'],
+        ['Model', 'A simplified version of something complex'],
+      ],
+      trueFalse: [
+        { statement: 'Science only happens in laboratories.', isTrue: false, explanation: 'Science happens everywhere — forests, kitchens, rivers, playgrounds.' },
+        { statement: 'Making mistakes helps you learn.', isTrue: true, explanation: 'Errors lead to discoveries. Penicillin was found from a contaminated experiment.' },
+        { statement: 'You need expensive equipment for science.', isTrue: false, explanation: 'Curiosity and observation are the most important scientific tools.' },
+      ],
+      facts: [
+        'NE India is one of 36 global biodiversity hotspots.',
+        'The scientific method has been used for over 1,000 years.',
+        'Teaching someone else is the best way to check understanding.',
+      ],
+      offlineActivity: 'Keep a nature journal for one week. Each day, draw and describe one observation. At the end, research your most interesting one.',
+    },
   },
   {
     slug: 'golden-hilsa', story: { title: 'The Old Fisherman and the Golden Hilsa', tagline: 'Sustainable fishing and marine biology.', content: '' },
     stem: { title: 'Sustainable Fishing', description: 'Sustainable fishing and marine biology.', icon: Leaf, color: 'from-blue-400 to-cyan-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
     illustration: '/content/illustrations/brahmaputra-angry.webp', track: 'school', subjects: ['Biology' as Subject, 'Ecology' as Subject], estimatedHours: 12, playground: 'golden-hilsa' as const,
+    level0: {
+      vocabulary: [
+        ['Observation', 'Noticing and recording something carefully'],
+        ['Pattern', 'A repeated arrangement in nature or data'],
+        ['Variable', 'Something that can change or be measured'],
+        ['Evidence', 'Data supporting or disproving a claim'],
+        ['Model', 'A simplified version of something complex'],
+      ],
+      trueFalse: [
+        { statement: 'Science only happens in laboratories.', isTrue: false, explanation: 'Science happens everywhere — forests, kitchens, rivers, playgrounds.' },
+        { statement: 'Making mistakes helps you learn.', isTrue: true, explanation: 'Errors lead to discoveries. Penicillin was found from a contaminated experiment.' },
+        { statement: 'You need expensive equipment for science.', isTrue: false, explanation: 'Curiosity and observation are the most important scientific tools.' },
+      ],
+      facts: [
+        'NE India is one of 36 global biodiversity hotspots.',
+        'The scientific method has been used for over 1,000 years.',
+        'Teaching someone else is the best way to check understanding.',
+      ],
+      offlineActivity: 'Keep a nature journal for one week. Each day, draw and describe one observation. At the end, research your most interesting one.',
+    },
   },
   {
     slug: 'cloud-refused-rain', story: { title: 'The Cloud That Refused to Rain', tagline: 'Cloud seeding and weather modification.', content: '' },
     stem: { title: 'Cloud Seeding & Weather', description: 'Cloud seeding and weather modification.', icon: Cloud, color: 'from-sky-400 to-blue-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
     illustration: '/content/illustrations/fun-facts.webp', track: 'school', subjects: ['Physics' as Subject, 'Chemistry' as Subject], estimatedHours: 12, playground: 'cloud-refused-rain' as const,
+    level0: {
+      vocabulary: [
+        ['Observation', 'Noticing and recording something carefully'],
+        ['Pattern', 'A repeated arrangement in nature or data'],
+        ['Variable', 'Something that can change or be measured'],
+        ['Evidence', 'Data supporting or disproving a claim'],
+        ['Model', 'A simplified version of something complex'],
+      ],
+      trueFalse: [
+        { statement: 'Science only happens in laboratories.', isTrue: false, explanation: 'Science happens everywhere — forests, kitchens, rivers, playgrounds.' },
+        { statement: 'Making mistakes helps you learn.', isTrue: true, explanation: 'Errors lead to discoveries. Penicillin was found from a contaminated experiment.' },
+        { statement: 'You need expensive equipment for science.', isTrue: false, explanation: 'Curiosity and observation are the most important scientific tools.' },
+      ],
+      facts: [
+        'NE India is one of 36 global biodiversity hotspots.',
+        'The scientific method has been used for over 1,000 years.',
+        'Teaching someone else is the best way to check understanding.',
+      ],
+      offlineActivity: 'Keep a nature journal for one week. Each day, draw and describe one observation. At the end, research your most interesting one.',
+    },
   },
   {
     slug: 'friendship-bridge', story: { title: 'The Friendship Bridge', tagline: 'Bridge engineering between two villages.', content: '' },
     stem: { title: 'Bridge Engineering', description: 'Bridge engineering between two villages.', icon: Construction, color: 'from-orange-400 to-red-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
     illustration: '/content/illustrations/bridge-grew.webp', track: 'school', subjects: ['Engineering' as Subject], estimatedHours: 12, playground: 'friendship-bridge' as const,
+    level0: {
+      vocabulary: [
+        ['Observation', 'Noticing and recording something carefully'],
+        ['Pattern', 'A repeated arrangement in nature or data'],
+        ['Variable', 'Something that can change or be measured'],
+        ['Evidence', 'Data supporting or disproving a claim'],
+        ['Model', 'A simplified version of something complex'],
+      ],
+      trueFalse: [
+        { statement: 'Science only happens in laboratories.', isTrue: false, explanation: 'Science happens everywhere — forests, kitchens, rivers, playgrounds.' },
+        { statement: 'Making mistakes helps you learn.', isTrue: true, explanation: 'Errors lead to discoveries. Penicillin was found from a contaminated experiment.' },
+        { statement: 'You need expensive equipment for science.', isTrue: false, explanation: 'Curiosity and observation are the most important scientific tools.' },
+      ],
+      facts: [
+        'NE India is one of 36 global biodiversity hotspots.',
+        'The scientific method has been used for over 1,000 years.',
+        'Teaching someone else is the best way to check understanding.',
+      ],
+      offlineActivity: 'Keep a nature journal for one week. Each day, draw and describe one observation. At the end, research your most interesting one.',
+    },
   },
   {
     slug: 'mountain-echoes', story: { title: 'Why Mountains Have Echoes', tagline: 'Sound reflection and wave physics.', content: '' },
     stem: { title: 'Sound Reflection', description: 'Sound reflection and wave physics.', icon: Music, color: 'from-purple-400 to-indigo-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
     illustration: '/content/illustrations/fun-facts.webp', track: 'school', subjects: ['Physics' as Subject], estimatedHours: 12, playground: 'mountain-echoes' as const,
+    level0: {
+      vocabulary: [
+        ['Observation', 'Noticing and recording something carefully'],
+        ['Pattern', 'A repeated arrangement in nature or data'],
+        ['Variable', 'Something that can change or be measured'],
+        ['Evidence', 'Data supporting or disproving a claim'],
+        ['Model', 'A simplified version of something complex'],
+      ],
+      trueFalse: [
+        { statement: 'Science only happens in laboratories.', isTrue: false, explanation: 'Science happens everywhere — forests, kitchens, rivers, playgrounds.' },
+        { statement: 'Making mistakes helps you learn.', isTrue: true, explanation: 'Errors lead to discoveries. Penicillin was found from a contaminated experiment.' },
+        { statement: 'You need expensive equipment for science.', isTrue: false, explanation: 'Curiosity and observation are the most important scientific tools.' },
+      ],
+      facts: [
+        'NE India is one of 36 global biodiversity hotspots.',
+        'The scientific method has been used for over 1,000 years.',
+        'Teaching someone else is the best way to check understanding.',
+      ],
+      offlineActivity: 'Keep a nature journal for one week. Each day, draw and describe one observation. At the end, research your most interesting one.',
+    },
   },
   {
     slug: 'dancer-floating-market', story: { title: 'The Dancer of the Floating Market', tagline: 'Economics of floating markets.', content: '' },
     stem: { title: 'Floating Market Economics', description: 'Economics of floating markets.', icon: Cpu, color: 'from-violet-400 to-purple-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
     illustration: '/content/illustrations/fun-facts.webp', track: 'school', subjects: ['Economics' as Subject], estimatedHours: 12, playground: 'dancer-floating-market' as const,
+    level0: {
+      vocabulary: [
+        ['Observation', 'Noticing and recording something carefully'],
+        ['Pattern', 'A repeated arrangement in nature or data'],
+        ['Variable', 'Something that can change or be measured'],
+        ['Evidence', 'Data supporting or disproving a claim'],
+        ['Model', 'A simplified version of something complex'],
+      ],
+      trueFalse: [
+        { statement: 'Science only happens in laboratories.', isTrue: false, explanation: 'Science happens everywhere — forests, kitchens, rivers, playgrounds.' },
+        { statement: 'Making mistakes helps you learn.', isTrue: true, explanation: 'Errors lead to discoveries. Penicillin was found from a contaminated experiment.' },
+        { statement: 'You need expensive equipment for science.', isTrue: false, explanation: 'Curiosity and observation are the most important scientific tools.' },
+      ],
+      facts: [
+        'NE India is one of 36 global biodiversity hotspots.',
+        'The scientific method has been used for over 1,000 years.',
+        'Teaching someone else is the best way to check understanding.',
+      ],
+      offlineActivity: 'Keep a nature journal for one week. Each day, draw and describe one observation. At the end, research your most interesting one.',
+    },
   },
   {
     slug: 'ferrymans-riddle', story: { title: 'The Ferryman\'s Riddle', tagline: 'Fluid mechanics and river transport.', content: '' },
     stem: { title: 'Fluid Mechanics', description: 'Fluid mechanics and river transport.', icon: Rocket, color: 'from-cyan-400 to-blue-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
     illustration: '/content/illustrations/brahmaputra-angry.webp', track: 'school', subjects: ['Physics' as Subject, 'Engineering' as Subject], estimatedHours: 12, playground: 'ferrymans-riddle' as const,
+    level0: {
+      vocabulary: [
+        ['Observation', 'Noticing and recording something carefully'],
+        ['Pattern', 'A repeated arrangement in nature or data'],
+        ['Variable', 'Something that can change or be measured'],
+        ['Evidence', 'Data supporting or disproving a claim'],
+        ['Model', 'A simplified version of something complex'],
+      ],
+      trueFalse: [
+        { statement: 'Science only happens in laboratories.', isTrue: false, explanation: 'Science happens everywhere — forests, kitchens, rivers, playgrounds.' },
+        { statement: 'Making mistakes helps you learn.', isTrue: true, explanation: 'Errors lead to discoveries. Penicillin was found from a contaminated experiment.' },
+        { statement: 'You need expensive equipment for science.', isTrue: false, explanation: 'Curiosity and observation are the most important scientific tools.' },
+      ],
+      facts: [
+        'NE India is one of 36 global biodiversity hotspots.',
+        'The scientific method has been used for over 1,000 years.',
+        'Teaching someone else is the best way to check understanding.',
+      ],
+      offlineActivity: 'Keep a nature journal for one week. Each day, draw and describe one observation. At the end, research your most interesting one.',
+    },
   },
   {
     slug: 'wild-orchids-trees', story: { title: 'Why Wild Orchids Grow on Trees', tagline: 'Epiphytes and symbiosis.', content: '' },
     stem: { title: 'Epiphytes & Symbiosis', description: 'Epiphytes and symbiosis.', icon: Leaf, color: 'from-fuchsia-400 to-pink-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
     illustration: '/content/illustrations/fun-facts.webp', track: 'school', subjects: ['Biology' as Subject, 'Ecology' as Subject], estimatedHours: 12, playground: 'wild-orchids-trees' as const,
+    level0: {
+      vocabulary: [
+        ['Observation', 'Noticing and recording something carefully'],
+        ['Pattern', 'A repeated arrangement in nature or data'],
+        ['Variable', 'Something that can change or be measured'],
+        ['Evidence', 'Data supporting or disproving a claim'],
+        ['Model', 'A simplified version of something complex'],
+      ],
+      trueFalse: [
+        { statement: 'Science only happens in laboratories.', isTrue: false, explanation: 'Science happens everywhere — forests, kitchens, rivers, playgrounds.' },
+        { statement: 'Making mistakes helps you learn.', isTrue: true, explanation: 'Errors lead to discoveries. Penicillin was found from a contaminated experiment.' },
+        { statement: 'You need expensive equipment for science.', isTrue: false, explanation: 'Curiosity and observation are the most important scientific tools.' },
+      ],
+      facts: [
+        'NE India is one of 36 global biodiversity hotspots.',
+        'The scientific method has been used for over 1,000 years.',
+        'Teaching someone else is the best way to check understanding.',
+      ],
+      offlineActivity: 'Keep a nature journal for one week. Each day, draw and describe one observation. At the end, research your most interesting one.',
+    },
   },
   {
     slug: 'guwahati-name', story: { title: 'How Guwahati Got Its Name', tagline: 'Etymology and urban geography.', content: '' },
     stem: { title: 'Etymology & Urban Geography', description: 'Etymology and urban geography.', icon: Mountain, color: 'from-amber-400 to-orange-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
     illustration: '/content/illustrations/fun-facts.webp', track: 'school', subjects: ['Geography' as Subject], estimatedHours: 12, playground: 'guwahati-name' as const,
+    level0: {
+      vocabulary: [
+        ['Observation', 'Noticing and recording something carefully'],
+        ['Pattern', 'A repeated arrangement in nature or data'],
+        ['Variable', 'Something that can change or be measured'],
+        ['Evidence', 'Data supporting or disproving a claim'],
+        ['Model', 'A simplified version of something complex'],
+      ],
+      trueFalse: [
+        { statement: 'Science only happens in laboratories.', isTrue: false, explanation: 'Science happens everywhere — forests, kitchens, rivers, playgrounds.' },
+        { statement: 'Making mistakes helps you learn.', isTrue: true, explanation: 'Errors lead to discoveries. Penicillin was found from a contaminated experiment.' },
+        { statement: 'You need expensive equipment for science.', isTrue: false, explanation: 'Curiosity and observation are the most important scientific tools.' },
+      ],
+      facts: [
+        'NE India is one of 36 global biodiversity hotspots.',
+        'The scientific method has been used for over 1,000 years.',
+        'Teaching someone else is the best way to check understanding.',
+      ],
+      offlineActivity: 'Keep a nature journal for one week. Each day, draw and describe one observation. At the end, research your most interesting one.',
+    },
   },
   {
     slug: 'story-garden', story: { title: 'The Story Garden', tagline: 'Storytelling and narrative structure — how stories teach.', content: '' },
     stem: { title: 'Storytelling & Narrative', description: 'Storytelling and narrative structure — how stories teach.', icon: Sparkles, color: 'from-rose-400 to-pink-500', skills: [], project: { title: '', description: '', steps: [] }, realWorld: [] },
     illustration: '/content/illustrations/fun-facts.webp', track: 'school', subjects: ['Music & Arts' as Subject], estimatedHours: 12, playground: 'story-garden' as const,
+    level0: {
+      vocabulary: [
+        ['Observation', 'Noticing and recording something carefully'],
+        ['Pattern', 'A repeated arrangement in nature or data'],
+        ['Variable', 'Something that can change or be measured'],
+        ['Evidence', 'Data supporting or disproving a claim'],
+        ['Model', 'A simplified version of something complex'],
+      ],
+      trueFalse: [
+        { statement: 'Science only happens in laboratories.', isTrue: false, explanation: 'Science happens everywhere — forests, kitchens, rivers, playgrounds.' },
+        { statement: 'Making mistakes helps you learn.', isTrue: true, explanation: 'Errors lead to discoveries. Penicillin was found from a contaminated experiment.' },
+        { statement: 'You need expensive equipment for science.', isTrue: false, explanation: 'Curiosity and observation are the most important scientific tools.' },
+      ],
+      facts: [
+        'NE India is one of 36 global biodiversity hotspots.',
+        'The scientific method has been used for over 1,000 years.',
+        'Teaching someone else is the best way to check understanding.',
+      ],
+      offlineActivity: 'Keep a nature journal for one week. Each day, draw and describe one observation. At the end, research your most interesting one.',
+    },
   },
 ];
 
