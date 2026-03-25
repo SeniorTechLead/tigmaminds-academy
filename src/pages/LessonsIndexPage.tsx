@@ -3,21 +3,28 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Clock, CheckCircle, BookOpen } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { lessons, SUBJECTS, Subject } from '../data/lessons';
+import { lessons, SUBJECTS, Subject, SKILLS, Skill, TRACKS, Track } from '../data/lessons';
 import { useProgress } from '../contexts/ProgressContext';
 
+type FilterType = 'subject' | 'skill' | 'track';
+
 export default function LessonsIndexPage() {
+  const [filterType, setFilterType] = useState<FilterType>('subject');
   const [selectedSubject, setSelectedSubject] = useState<Subject | null>(null);
+  const [selectedSkill, setSelectedSkill] = useState<Skill | null>(null);
+  const [selectedTrack, setSelectedTrack] = useState<Track | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const { isStoryComplete, isLevelComplete, getCompletedCount } = useProgress();
 
   const filtered = lessons.filter((lesson) => {
     const matchesSubject = !selectedSubject || lesson.subjects?.includes(selectedSubject);
+    const matchesSkill = !selectedSkill || lesson.toolSkills?.includes(selectedSkill);
+    const matchesTrack = !selectedTrack || lesson.learningTracks?.includes(selectedTrack);
     const matchesSearch = !searchQuery ||
       lesson.story.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       lesson.stem.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       lesson.story.tagline.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesSubject && matchesSearch;
+    return matchesSubject && matchesSkill && matchesTrack && matchesSearch;
   });
 
   return (
@@ -56,32 +63,56 @@ export default function LessonsIndexPage() {
             />
           </div>
 
-          {/* Subject filters */}
+          {/* Filter type tabs */}
+          <div className="flex gap-1 bg-gray-100 dark:bg-gray-800 rounded-xl p-1 max-w-md mx-auto mb-4">
+            {([
+              { key: 'subject' as FilterType, label: 'By Subject' },
+              { key: 'skill' as FilterType, label: 'By Skill' },
+              { key: 'track' as FilterType, label: 'By Track' },
+            ]).map(tab => (
+              <button key={tab.key} onClick={() => { setFilterType(tab.key); setSelectedSubject(null); setSelectedSkill(null); setSelectedTrack(null); }}
+                className={`flex-1 py-2 rounded-lg text-sm font-semibold transition-all ${filterType === tab.key ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm' : 'text-gray-500 dark:text-gray-400'}`}>
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Filter pills */}
           <div className="flex flex-wrap gap-2 justify-center mb-4">
-            <button
-              onClick={() => setSelectedSubject(null)}
-              className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${
-                !selectedSubject
-                  ? 'bg-amber-500 text-white shadow-md'
-                  : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
-              }`}
-            >
+            <button onClick={() => { setSelectedSubject(null); setSelectedSkill(null); setSelectedTrack(null); }}
+              className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${!selectedSubject && !selectedSkill && !selectedTrack ? 'bg-amber-500 text-white shadow-md' : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400'}`}>
               All ({lessons.length})
             </button>
-            {SUBJECTS.map((subject) => {
-              const count = lessons.filter(l => l.subjects?.includes(subject.key)).length;
+
+            {filterType === 'subject' && SUBJECTS.map(s => {
+              const count = lessons.filter(l => l.subjects?.includes(s.key)).length;
               if (count === 0) return null;
               return (
-                <button
-                  key={subject.key}
-                  onClick={() => setSelectedSubject(selectedSubject === subject.key ? null : subject.key)}
-                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${
-                    selectedSubject === subject.key
-                      ? 'bg-amber-500 text-white shadow-md'
-                      : `${subject.color} hover:ring-2 hover:ring-amber-400`
-                  }`}
-                >
-                  {subject.icon} {subject.key} ({count})
+                <button key={s.key} onClick={() => setSelectedSubject(selectedSubject === s.key ? null : s.key)}
+                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${selectedSubject === s.key ? 'bg-amber-500 text-white shadow-md' : `${s.color} hover:ring-2 hover:ring-amber-400`}`}>
+                  {s.icon} {s.key} ({count})
+                </button>
+              );
+            })}
+
+            {filterType === 'skill' && SKILLS.map(s => {
+              const count = lessons.filter(l => l.toolSkills?.includes(s.key)).length;
+              if (count === 0) return null;
+              return (
+                <button key={s.key} onClick={() => setSelectedSkill(selectedSkill === s.key ? null : s.key)}
+                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${selectedSkill === s.key ? 'bg-amber-500 text-white shadow-md' : `${s.color} hover:ring-2 hover:ring-amber-400`}`}>
+                  {s.key} ({count})
+                </button>
+              );
+            })}
+
+            {filterType === 'track' && TRACKS.map(t => {
+              const count = lessons.filter(l => l.learningTracks?.includes(t.key)).length;
+              if (count === 0) return null;
+              return (
+                <button key={t.key} onClick={() => setSelectedTrack(selectedTrack === t.key ? null : t.key)}
+                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${selectedTrack === t.key ? `${t.color} text-white shadow-md` : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200'}`}>
+                  {t.icon} {t.key} ({count})
                 </button>
               );
             })}
