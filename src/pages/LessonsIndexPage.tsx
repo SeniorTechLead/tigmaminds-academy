@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Clock, CheckCircle } from 'lucide-react';
+import { ArrowRight, Clock, CheckCircle, BookOpen } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { lessons, SUBJECTS, Subject } from '../data/lessons';
@@ -30,6 +30,14 @@ export default function LessonsIndexPage() {
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-4">
             {lessons.length} stories, each with interactive STEM lessons. Filter by subject or search for a topic.
           </p>
+          <div className="flex gap-3 justify-center mb-4">
+            <Link to="/plan" className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-colors">
+              <BookOpen className="w-4 h-4" /> Build a Lesson Plan
+            </Link>
+            <Link to="/certificate" className="inline-flex items-center gap-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+              Your Certificate
+            </Link>
+          </div>
           {getCompletedCount() > 0 && (
             <div className="inline-flex items-center gap-2 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 px-4 py-2 rounded-full text-sm font-semibold mb-4">
               <CheckCircle className="w-4 h-4" />
