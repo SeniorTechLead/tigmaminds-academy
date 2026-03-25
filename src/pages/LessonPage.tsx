@@ -7,13 +7,14 @@ import { getLessonBySlug, lessons } from '../data/lessons';
 import { Suspense } from 'react';
 import { getLevelComponents } from '../components/levels';
 import { useProgress } from '../contexts/ProgressContext';
+import Level0Listener from '../components/Level0Listener';
 
-type Level = 'explorer' | 'builder' | 'engineer';
+type Level = 'listener' | 'explorer' | 'builder' | 'engineer' | 'creator';
 
 export default function LessonPage() {
   const { slug } = useParams<{ slug: string }>();
   const lesson = slug ? getLessonBySlug(slug) : undefined;
-  const [activeLevel, setActiveLevel] = useState<Level>('explorer');
+  const [activeLevel, setActiveLevel] = useState<Level>('listener');
   const { markLevelComplete, isLevelComplete } = useProgress();
 
   if (!lesson) {
@@ -187,16 +188,18 @@ export default function LessonPage() {
             {/* Level tabs */}
             <div className="flex gap-2 mb-10 flex-wrap">
               {([
-                { key: 'explorer' as Level, label: 'Level 1: Explorer', desc: 'No coding experience', color: 'emerald' },
-                { key: 'builder' as Level, label: 'Level 2: Builder', desc: 'Some coding', color: 'amber' },
-                { key: 'engineer' as Level, label: 'Level 3: Engineer', desc: 'Ready for ML', color: 'rose' },
+                { key: 'listener' as Level, label: 'Level 0: Listener', desc: 'No coding needed', color: 'sky' },
+                { key: 'explorer' as Level, label: 'Level 1: Explorer', desc: 'Intro to coding', color: 'emerald' },
+                { key: 'builder' as Level, label: 'Level 2: Builder', desc: 'Intermediate', color: 'amber' },
+                { key: 'engineer' as Level, label: 'Level 3: Engineer', desc: 'Advanced', color: 'rose' },
               ]).map((lvl) => (
                 <button
                   key={lvl.key}
                   onClick={() => setActiveLevel(lvl.key)}
                   className={`px-5 py-3 rounded-xl font-semibold text-sm transition-all ${
                     activeLevel === lvl.key
-                      ? lvl.color === 'emerald' ? 'bg-emerald-600 text-white shadow-lg' :
+                      ? lvl.color === 'sky' ? 'bg-sky-500 text-white shadow-lg' :
+                        lvl.color === 'emerald' ? 'bg-emerald-600 text-white shadow-lg' :
                         lvl.color === 'amber' ? 'bg-amber-500 text-white shadow-lg' :
                         'bg-rose-600 text-white shadow-lg'
                       : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
@@ -213,6 +216,7 @@ export default function LessonPage() {
               const { Level1, Level2, Level3 } = getLevelComponents(lesson.slug);
               return (
                 <Suspense fallback={<div className="text-center py-8"><div className="w-8 h-8 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto" /></div>}>
+                  {activeLevel === 'listener' && <Level0Listener lesson={lesson} />}
                   {activeLevel === 'explorer' && Level1 && <Level1 />}
                   {activeLevel === 'builder' && Level2 && <Level2 />}
                   {activeLevel === 'explorer' && !Level1 && (
