@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, CheckCircle, ExternalLink, BookOpen, Wrench, Lightbulb, Gamepad2, Clock, Target, Package, ListChecks } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle, ExternalLink, BookOpen, Wrench, Lightbulb, Gamepad2, Clock, Target, Package, ListChecks, Trophy } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { getLessonBySlug, lessons } from '../data/lessons';
 import { Suspense } from 'react';
 import { getLevelComponents } from '../components/levels';
+import { useProgress } from '../contexts/ProgressContext';
 
 type Level = 'explorer' | 'builder' | 'engineer';
 
@@ -13,6 +14,7 @@ export default function LessonPage() {
   const { slug } = useParams<{ slug: string }>();
   const lesson = slug ? getLessonBySlug(slug) : undefined;
   const [activeLevel, setActiveLevel] = useState<Level>('explorer');
+  const { markLevelComplete, isLevelComplete } = useProgress();
 
   if (!lesson) {
     return (
@@ -237,6 +239,63 @@ export default function LessonPage() {
                 </Suspense>
               );
             })()}
+          </div>
+        </section>
+      )}
+
+      {/* Progress tracking */}
+      {lesson.playground && (
+        <section className="py-8 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6 border border-gray-200 dark:border-gray-700">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                  <Trophy className="w-5 h-5 text-amber-500" /> Your Progress
+                </h3>
+                <div className="flex gap-1">
+                  {[1, 2, 3].map((level) => (
+                    <div
+                      key={level}
+                      className={`w-8 h-2 rounded-full ${
+                        isLevelComplete(lesson.slug, level as 1 | 2 | 3)
+                          ? 'bg-emerald-500'
+                          : 'bg-gray-200 dark:bg-gray-700'
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+              <div className="flex gap-3">
+                {([
+                  { level: 1 as const, name: 'Level 1: Explorer', tab: 'explorer' as Level },
+                  { level: 2 as const, name: 'Level 2: Builder', tab: 'builder' as Level },
+                  { level: 3 as const, name: 'Level 3: Engineer', tab: 'engineer' as Level },
+                ]).map(({ level, name, tab }) => {
+                  const complete = isLevelComplete(lesson.slug, level);
+                  return (
+                    <button
+                      key={level}
+                      onClick={() => {
+                        if (!complete) {
+                          markLevelComplete(lesson.slug, level);
+                        }
+                      }}
+                      className={`flex-1 py-3 px-4 rounded-xl text-sm font-semibold transition-all ${
+                        complete
+                          ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 cursor-default'
+                          : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-amber-100 dark:hover:bg-amber-900/30 hover:text-amber-700 dark:hover:text-amber-400'
+                      }`}
+                    >
+                      {complete ? (
+                        <span className="flex items-center justify-center gap-1"><CheckCircle className="w-4 h-4" /> {name}</span>
+                      ) : (
+                        <span>Mark {name} Complete</span>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </section>
       )}

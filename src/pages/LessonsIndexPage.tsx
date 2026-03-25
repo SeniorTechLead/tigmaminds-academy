@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Clock, Filter } from 'lucide-react';
+import { ArrowRight, Clock, CheckCircle } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { lessons, SUBJECTS, Subject } from '../data/lessons';
+import { useProgress } from '../contexts/ProgressContext';
 
 export default function LessonsIndexPage() {
   const [selectedSubject, setSelectedSubject] = useState<Subject | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const { isStoryComplete, isLevelComplete, getCompletedCount } = useProgress();
 
   const filtered = lessons.filter((lesson) => {
     const matchesSubject = !selectedSubject || lesson.subjects?.includes(selectedSubject);
@@ -25,9 +27,15 @@ export default function LessonsIndexPage() {
       <section className="pt-32 pb-6 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-amber-50 via-white to-orange-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800">
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-5xl font-bold text-gray-900 dark:text-white mb-4">All Lessons</h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-4">
             {lessons.length} stories, each with interactive STEM lessons. Filter by subject or search for a topic.
           </p>
+          {getCompletedCount() > 0 && (
+            <div className="inline-flex items-center gap-2 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+              <CheckCircle className="w-4 h-4" />
+              {getCompletedCount()} of {lessons.length} stories completed
+            </div>
+          )}
 
           {/* Search */}
           <div className="max-w-md mx-auto mb-6">
@@ -111,6 +119,19 @@ export default function LessonsIndexPage() {
                       <div className={`absolute top-3 left-3 bg-gradient-to-r ${lesson.stem.color} w-9 h-9 rounded-full flex items-center justify-center shadow-lg`}>
                         <Icon className="w-4 h-4 text-white" />
                       </div>
+                      {isStoryComplete(lesson.slug) && (
+                        <div className="absolute top-3 right-3 bg-emerald-500 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-lg">
+                          <CheckCircle className="w-5 h-5" />
+                        </div>
+                      )}
+                      {/* Progress dots */}
+                      {(isLevelComplete(lesson.slug, 1) || isLevelComplete(lesson.slug, 2)) && !isStoryComplete(lesson.slug) && (
+                        <div className="absolute top-3 right-3 flex gap-1">
+                          {[1, 2, 3].map((lvl) => (
+                            <div key={lvl} className={`w-2 h-2 rounded-full ${isLevelComplete(lesson.slug, lvl as 1|2|3) ? 'bg-emerald-400' : 'bg-white/40'}`} />
+                          ))}
+                        </div>
+                      )}
                     </div>
                     <div className="p-5">
                       <div className="flex items-center gap-2 mb-2">
