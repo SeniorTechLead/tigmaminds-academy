@@ -13,6 +13,7 @@ const InstructorsPage = lazy(() => import('./pages/InstructorsPage'));
 const CareersPage = lazy(() => import('./pages/CareersPage'));
 const CookiePage = lazy(() => import('./pages/CookiePage'));
 const LessonsIndexPage = lazy(() => import('./pages/LessonsIndexPage'));
+const CertificatePage = lazy(() => import('./pages/CertificatePage'));
 const LessonPage = lazy(() => import('./pages/LessonPage'));
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
           <Route path="/careers" element={<CareersPage />} />
           <Route path="/cookies" element={<CookiePage />} />
           <Route path="/lessons" element={<LessonsIndexPage />} />
+          <Route path="/certificate" element={<CertificatePage />} />
           <Route path="/lessons/:slug" element={<LessonPage />} />
         </Routes>
       </Suspense>
