@@ -94,6 +94,16 @@ const registry: Record<string, LevelComponents> = {
   'little-chef': { Level1: lazy(() => import('./LittleChefLevel1')), Level2: lazy(() => import('./LittleChefLevel2')) },
   'siang-river': { Level1: lazy(() => import('./RiverBraidLevel1')), Level2: lazy(() => import('./RiverBraidLevel2')) },
   'fireflies-dont-burn': { Level1: lazy(() => import('./FireflyLevel1')), Level2: lazy(() => import('./FireflyLevel2')) },
+  'orange-sunsets-assam': { Level1: lazy(() => import('./OrangeSunsetsLevel1')), Level2: lazy(() => import('./OrangeSunsetsLevel2')) },
+  'fishermans-daughter-storm': { Level1: lazy(() => import('./FishermanStormLevel1')), Level2: lazy(() => import('./FishermanStormLevel2')) },
+  'snow-leopards-promise': { Level1: lazy(() => import('./SnowLeopardLevel1')), Level2: lazy(() => import('./SnowLeopardLevel2')) },
+  'map-makers-granddaughter': { Level1: lazy(() => import('./MapMakerLevel1')), Level2: lazy(() => import('./MapMakerLevel2')) },
+  'old-banyan-trees-stories': { Level1: lazy(() => import('./BanyanTreeLevel1')), Level2: lazy(() => import('./BanyanTreeLevel2')) },
+  'tigers-whisker': { Level1: lazy(() => import('./TigerWhiskerLevel1')), Level2: lazy(() => import('./TigerWhiskerLevel2')) },
+  'basket-weavers-song': { Level1: lazy(() => import('./BasketWeaverLevel1')), Level2: lazy(() => import('./BasketWeaverLevel2')) },
+  'honey-hunters-lesson': { Level1: lazy(() => import('./HoneyHunterLevel1')), Level2: lazy(() => import('./HoneyHunterLevel2')) },
+  'bamboo-taught-wind': { Level1: lazy(() => import('./BambooWindLevel1')), Level2: lazy(() => import('./BambooWindLevel2')) },
+  'woodpeckers-drum': { Level1: lazy(() => import('./WoodpeckerLevel1')), Level2: lazy(() => import('./WoodpeckerLevel2')) },
 };
 
 export function getLevelComponents(slug: string): LevelComponents {
