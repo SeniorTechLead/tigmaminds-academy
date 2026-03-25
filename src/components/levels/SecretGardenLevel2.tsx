@@ -663,7 +663,7 @@ print(f"  Limiting factor: {max(required_areas, key=required_areas.get)}")
 print(f"  Required area: {design_area:.0f} m² ({design_area/10000:.2f} hectares)")
 print(f"  Retention time: {design_area * depth / flow_rate:.1f} days")
 print()
-print(f"  Cost estimate: ${design_area * 50:,.0f} (vs ${flow_rate * 365 * 2:,.0f}/yr for conventional)")`,
+print(f"  Cost estimate: {design_area * 50:,.0f} (vs {flow_rate * 365 * 2:,.0f}/yr for conventional)")`,
       challenge: 'A village produces 500 m³/day of wastewater. Design a constructed wetland to reduce BOD from 300 to 30 mg/L. What area is needed? How does it compare to the village size?',
       successHint: 'Constructed wetlands are one of the most elegant engineering solutions ever developed — we copied nature\'s billion-year-old design and applied it to our waste problem. From Loktak\'s phumdis to engineered floating gardens, the principle is the same.',
     },

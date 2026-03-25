@@ -268,15 +268,15 @@ ax2.set_title('Wetland Ecosystem Service Values', color='white', fontsize=12)
 ax2.tick_params(colors='gray')
 for bar, val in zip(bars, values):
     ax2.text(bar.get_width() + 50, bar.get_y() + bar.get_height()/2,
-            f'${val:,}', va='center', color='white', fontsize=9)
+            f'{val:,}', va='center', color='white', fontsize=9)
 
 plt.tight_layout()
 plt.show()
 
 total = sum(values)
-print(f"Total estimated value: ${total:,}/hectare/year")
+print(f"Total estimated value: {total:,}/hectare/year")
 print(f"Loktak Lake area: ~287 km² = 28,700 hectares")
-print(f"Estimated annual ecosystem services: ${total * 28700:,.0f}")
+print(f"Estimated annual ecosystem services: {total * 28700:,.0f}")
 print()
 print("This is why destroying wetlands is economically irrational —")
 print("the 'free' services they provide far exceed development value.")`,

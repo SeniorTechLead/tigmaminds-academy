@@ -435,7 +435,7 @@ ax1.invert_yaxis()
 ax2.set_facecolor('#111827')
 ax2.bar(range(len(stages)), cost_millions, color=colors_stage, width=0.6)
 ax2.set_ylabel('Cost ($M)', color='white')
-ax2.set_title(f'Cost at Each Stage (Total: ~${sum(cost_millions):,}M)', color='white', fontsize=13)
+ax2.set_title(f'Cost at Each Stage (Total: ~{sum(cost_millions):,}M)', color='white', fontsize=13)
 ax2.tick_params(colors='gray')
 
 # Attrition funnel
@@ -459,7 +459,7 @@ print(f"  Start: {compounds_remaining[0]:,} compounds")
 print(f"  Market: {compounds_remaining[-1]:.0f} approved drug")
 print(f"  Success rate: {compounds_remaining[-1]/compounds_remaining[0]*100:.2f}%")
 print(f"  Time: ~{sum(years):.0f} years")
-print(f"  Cost: ~${sum(cost_millions):,} million")
+print(f"  Cost: ~{sum(cost_millions):,} million")
 print()
 print("And that's for ONE drug. Companies run dozens of pipelines simultaneously.")`,
       challenge: 'AI-accelerated drug discovery claims to cut the timeline by 30-50%. Modify the years array to show an AI-accelerated pipeline. Which stages benefit most from AI? (Hint: hit finding and lead optimization.)',
