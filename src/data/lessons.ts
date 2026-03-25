@@ -1,6 +1,31 @@
 import { Cpu, Lightbulb, Bot, Code2, Rocket, Sparkles, Leaf, Sun, Cloud, Mountain, Music, TreePine, Construction } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
+export type Subject =
+  | 'Biology'
+  | 'Physics'
+  | 'Chemistry'
+  | 'Computer Science'
+  | 'Engineering'
+  | 'Geography'
+  | 'Ecology'
+  | 'Mathematics'
+  | 'Economics'
+  | 'Music & Arts';
+
+export const SUBJECTS: { key: Subject; color: string; icon: string }[] = [
+  { key: 'Biology', color: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300', icon: '🧬' },
+  { key: 'Physics', color: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300', icon: '⚡' },
+  { key: 'Chemistry', color: 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300', icon: '🧪' },
+  { key: 'Computer Science', color: 'bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-300', icon: '💻' },
+  { key: 'Engineering', color: 'bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300', icon: '🔧' },
+  { key: 'Geography', color: 'bg-teal-100 text-teal-700 dark:bg-teal-900/30 dark:text-teal-300', icon: '🌍' },
+  { key: 'Ecology', color: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300', icon: '🌿' },
+  { key: 'Mathematics', color: 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300', icon: '📐' },
+  { key: 'Economics', color: 'bg-sky-100 text-sky-700 dark:bg-sky-900/30 dark:text-sky-300', icon: '📊' },
+  { key: 'Music & Arts', color: 'bg-fuchsia-100 text-fuchsia-700 dark:bg-fuchsia-900/30 dark:text-fuchsia-300', icon: '🎵' },
+];
+
 export interface Lesson {
   slug: string;
   story: {
@@ -23,6 +48,8 @@ export interface Lesson {
   };
   illustration: string;
   track: 'school' | 'bootcamp' | 'both';
+  subjects: Subject[];
+  estimatedHours?: number; // total estimated hours across all levels
   playground?: string; // story slug identifier for level components
   lesson?: {
     objectives: string[];
@@ -85,6 +112,8 @@ After that night, Rongpharpi became the village's **elephant listener** — a br
     },
     illustration: '/content/illustrations/elephant-rongpharpi.webp',
     track: 'both',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'elephant',
   },
   {
@@ -140,6 +169,8 @@ From that night on, Joon was never afraid of the dark again — because he under
     },
     illustration: '/content/illustrations/majuli-born.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'firefly' as const,
     lesson: {
       objectives: [
@@ -225,6 +256,8 @@ The dolphin had taught him her secret: *the world speaks to those who close thei
     },
     illustration: '/content/illustrations/brahmaputra-angry.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'dolphin' as const,
   },
   {
@@ -280,6 +313,8 @@ His mother smiled. "You didn't build it from nothing, Dipankar. You built it fro
     },
     illustration: '/content/illustrations/boy-clouds.webp',
     track: 'bootcamp',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'library' as const,
   },
   {
@@ -337,6 +372,8 @@ By September, the pest army was defeated. The rice stood tall, heads bowing unde
     },
     illustration: '/content/illustrations/tea-leaf-fly.webp',
     track: 'both',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'dragonfly' as const,
   },
   {
@@ -395,6 +432,8 @@ To this day, muga silk is found only in Assam — the only golden silk in the wo
     },
     illustration: '/content/illustrations/weaver-girl.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'muga' as const,
     lesson: {
       objectives: [
@@ -472,6 +511,8 @@ Tejimola's story tells us that kindness cannot be destroyed. You can bury it, pu
     },
     illustration: '/content/illustrations/tejimola.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'tejimola' as const,
   },
   {
@@ -509,6 +550,8 @@ The deer stamped its hoof, and a spring of clear water bubbled up — water that
     },
     illustration: '/content/illustrations/golden-deer.webp',
     track: 'school',
+    subjects: ['Physics'] as Subject[],
+    estimatedHours: 12,
     playground: 'golden-deer' as const,
   },
   {
@@ -552,6 +595,8 @@ From that day on, the rain in Cherrapunji fell softer. As if it knew someone car
     },
     illustration: '/content/illustrations/boy-clouds.webp',
     track: 'school',
+    subjects: ['Physics', 'Geography'] as Subject[],
+    estimatedHours: 12,
     playground: 'clouds' as const,
   },
   {
@@ -585,6 +630,8 @@ The people of Majuli are fighting back — planting bamboo, building embankments
     },
     illustration: '/content/illustrations/majuli-born.webp',
     track: 'school',
+    subjects: ['Geography'] as Subject[],
+    estimatedHours: 12,
     playground: 'majuli' as const,
   },
   {
@@ -622,6 +669,8 @@ Zapuvisie played his flute every evening, and the village gathered to listen. Ea
     },
     illustration: '/content/illustrations/bamboo-flute.webp',
     track: 'school',
+    subjects: ['Physics', 'Music & Arts'] as Subject[],
+    estimatedHours: 12,
     playground: 'bamboo-flute' as const,
   },
   {
@@ -657,6 +706,8 @@ Because some dances are too beautiful to lose.`,
     },
     illustration: '/content/illustrations/dancing-deer.webp',
     track: 'school',
+    subjects: ['Ecology', 'Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'dancing-deer' as const,
   },
   {
@@ -692,6 +743,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/bridge-grew.webp',
     track: 'school',
+    subjects: ['Engineering', 'Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'bridge' as const,
   },
   {
@@ -708,6 +761,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/brahmaputra-angry.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'the-little-boat' as const,
   },
   {
@@ -724,6 +779,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'the-hornbills-crown' as const,
   },
   {
@@ -740,6 +797,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/brahmaputra-angry.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'why-fish-jump' as const,
   },
   {
@@ -756,6 +815,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/rhino-horn.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'tortoise-and-hare' as const,
   },
   {
@@ -772,6 +833,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'red-panda-mask' as const,
   },
   {
@@ -788,6 +851,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'clouded-leopard' as const,
   },
   {
@@ -804,6 +869,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'peacocks-dance' as const,
   },
   {
@@ -820,6 +887,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/elephant-ant.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'elephant-mud-bath' as const,
   },
   {
@@ -836,6 +905,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'brave-mithun' as const,
   },
   {
@@ -852,6 +923,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'cuckoo-calls-dawn' as const,
   },
   {
@@ -868,6 +941,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'orchid-colors' as const,
   },
   {
@@ -884,6 +959,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'pitcher-plant' as const,
   },
   {
@@ -900,6 +977,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/bamboo-flute.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'bamboo-grows-fast' as const,
   },
   {
@@ -916,6 +995,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/bridge-grew.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'sal-tree' as const,
   },
   {
@@ -932,6 +1013,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'tiny-frog' as const,
   },
   {
@@ -948,6 +1031,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'the-girl-who-painted-rain' as const,
   },
   {
@@ -964,6 +1049,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'cloud-weaver-of-tawang' as const,
   },
   {
@@ -980,6 +1067,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'the-magic-japi-hat' as const,
   },
   {
@@ -996,6 +1085,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'star-fell-deepor' as const,
   },
   {
@@ -1012,6 +1103,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'orange-sunsets' as const,
   },
   {
@@ -1028,6 +1121,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'kite-festival' as const,
   },
   {
@@ -1044,6 +1139,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'grandmothers-pitha' as const,
   },
   {
@@ -1060,6 +1157,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'lost-temple' as const,
   },
   {
@@ -1076,6 +1175,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'seven-sisters' as const,
   },
   {
@@ -1092,6 +1193,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'little-potter' as const,
   },
   {
@@ -1108,6 +1211,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'map-maker' as const,
   },
   {
@@ -1124,6 +1229,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'monkey-bridge' as const,
   },
   {
@@ -1140,6 +1247,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/brahmaputra-angry.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'fisherman-storm' as const,
   },
   {
@@ -1156,6 +1265,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'boy-counted-butterflies' as const,
   },
   {
@@ -1172,6 +1283,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/tea-leaf-fly.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'honey-hunter' as const,
   },
   {
@@ -1188,6 +1301,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/brahmaputra-angry.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'monsoon-home' as const,
   },
   {
@@ -1204,6 +1319,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'grandmother-remembered' as const,
   },
   {
@@ -1220,6 +1337,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/bamboo-flute.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'singing-bamboo' as const,
   },
   {
@@ -1236,6 +1355,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'snow-leopard' as const,
   },
   {
@@ -1252,6 +1373,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'festival-lights' as const,
   },
   {
@@ -1268,6 +1391,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'little-train' as const,
   },
   {
@@ -1284,6 +1409,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'postman-hills' as const,
   },
   {
@@ -1300,6 +1427,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'night-market-imphal' as const,
   },
   {
@@ -1316,6 +1445,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'turtle-mountain' as const,
   },
   {
@@ -1332,6 +1463,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'rainbow-fish' as const,
   },
   {
@@ -1348,6 +1481,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'holi-tea-gardens' as const,
   },
   {
@@ -1364,6 +1499,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'kaziranga-grass' as const,
   },
   {
@@ -1380,6 +1517,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'banyan-tree' as const,
   },
   {
@@ -1396,6 +1535,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'basket-weaver' as const,
   },
   {
@@ -1412,6 +1553,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'seed-keeper' as const,
   },
   {
@@ -1428,6 +1571,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'cloud-namer' as const,
   },
   {
@@ -1444,6 +1589,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'kingfisher-blue' as const,
   },
   {
@@ -1460,6 +1607,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'owl-wisest' as const,
   },
   {
@@ -1476,6 +1625,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'night-jasmine' as const,
   },
   {
@@ -1492,6 +1643,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'woodpecker-drum' as const,
   },
   {
@@ -1508,6 +1661,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/golden-deer.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'tiger-whisker' as const,
   },
   {
@@ -1524,6 +1679,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'music-dimasa' as const,
   },
   {
@@ -1540,6 +1697,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/weaver-girl.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'silk-route' as const,
   },
   {
@@ -1556,6 +1715,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'girl-grew-forest' as const,
   },
   {
@@ -1572,6 +1733,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'firewalker' as const,
   },
   {
@@ -1588,6 +1751,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'frogs-sing-rain' as const,
   },
   {
@@ -1604,6 +1769,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/weaver-girl.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'eri-silk' as const,
   },
   {
@@ -1620,6 +1787,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/brahmaputra-angry.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'river-braid' as const,
   },
   {
@@ -1636,6 +1805,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'lotus-float' as const,
   },
   {
@@ -1652,6 +1823,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'first-rice' as const,
   },
   {
@@ -1668,6 +1841,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'dhol-drum' as const,
   },
   {
@@ -1684,6 +1859,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'little-chef' as const,
   },
   {
@@ -1700,6 +1877,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'flying-squirrel' as const,
   },
   {
@@ -1716,6 +1895,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/majuli-born.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'fireflies-dont-burn' as const,
   },
   {
@@ -1732,6 +1913,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'seed-travel' as const,
   },
   {
@@ -1748,6 +1931,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/brahmaputra-angry.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'siang-river' as const,
   },
   {
@@ -1764,6 +1949,8 @@ In an age of steel and concrete, the Khasi people remind us that sometimes the b
     },
     illustration: '/content/illustrations/fun-facts.webp',
     track: 'school',
+    subjects: ['Biology'] as Subject[],
+    estimatedHours: 12,
     playground: 'takin-face' as const,
   },];
 
