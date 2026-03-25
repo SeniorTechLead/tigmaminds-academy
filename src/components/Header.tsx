@@ -9,6 +9,7 @@ export default function Header() {
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
     { name: 'Programs', href: '/programs' },
+    { name: 'Lessons', href: '/lessons' },
     { name: 'Mentors', href: '/mentors' },
     { name: 'Contact', href: '/contact' },
   ];

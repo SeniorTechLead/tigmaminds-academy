@@ -12,6 +12,7 @@ const MentorsPage = lazy(() => import('./pages/MentorsPage'));
 const InstructorsPage = lazy(() => import('./pages/InstructorsPage'));
 const CareersPage = lazy(() => import('./pages/CareersPage'));
 const CookiePage = lazy(() => import('./pages/CookiePage'));
+const LessonsIndexPage = lazy(() => import('./pages/LessonsIndexPage'));
 const LessonPage = lazy(() => import('./pages/LessonPage'));
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path="/instructors" element={<InstructorsPage />} />
           <Route path="/careers" element={<CareersPage />} />
           <Route path="/cookies" element={<CookiePage />} />
+          <Route path="/lessons" element={<LessonsIndexPage />} />
           <Route path="/lessons/:slug" element={<LessonPage />} />
         </Routes>
       </Suspense>
