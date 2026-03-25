@@ -26,7 +26,7 @@ function SonarMiniLesson({ lesson, number }: { lesson: SonarLesson; number: numb
   const [showAnswer, setShowAnswer] = useState(false);
 
   return (
-    <div id={`L3-${number}`} className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden scroll-mt-24">
+    <div id={`L3-{number}`} className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden scroll-mt-24">
       <div className="px-6 pt-6 pb-4">
         <div className="flex items-center gap-3 mb-4">
           <span className="w-8 h-8 rounded-full bg-gradient-to-r from-sky-500 to-blue-500 text-white flex items-center justify-center text-sm font-bold flex-shrink-0">{number}</span>
