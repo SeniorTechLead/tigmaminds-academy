@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Sparkles, Cpu, Bot, Code2, Lightbulb, Rocket } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { lessons } from '../data/lessons';
 
 const storyToSTEM = [
   {
@@ -198,6 +199,16 @@ export default function HomePage() {
                 </Link>
               );
             })}
+          </div>
+
+          <div className="text-center mt-12">
+            <Link
+              to="/lessons"
+              className="inline-flex items-center text-amber-600 dark:text-amber-400 font-semibold text-lg hover:text-amber-700 dark:hover:text-amber-300 transition-colors"
+            >
+              Browse All {lessons.length} Lessons
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
           </div>
         </div>
       </section>
