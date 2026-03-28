@@ -1,6 +1,12 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Cpu } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
+import CarbonCycleDiagram from '../diagrams/CarbonCycleDiagram';
+import WaterCycleDiagram from '../diagrams/WaterCycleDiagram';
+import PopulationGrowthCurve from '../diagrams/PopulationGrowthCurve';
+import CorrelationDiagram from '../diagrams/CorrelationDiagram';
+import LinearGraphDiagram from '../diagrams/LinearGraphDiagram';
+import NEIndiaBiomesDiagram from '../diagrams/NEIndiaBiomesDiagram';
 
 export default function BanyanTreeLevel4() {
   const pyodideRef = useRef<any>(null);
@@ -1195,6 +1201,7 @@ print("science, scientific reporting.")`,
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
+            diagram={[CarbonCycleDiagram, WaterCycleDiagram, PopulationGrowthCurve, CorrelationDiagram, LinearGraphDiagram, NEIndiaBiomesDiagram][i] ? createElement([CarbonCycleDiagram, WaterCycleDiagram, PopulationGrowthCurve, CorrelationDiagram, LinearGraphDiagram, NEIndiaBiomesDiagram][i]) : undefined}
             pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
         ))}
       </div>
