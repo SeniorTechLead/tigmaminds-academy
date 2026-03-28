@@ -186,8 +186,8 @@ export default function LessonPage() {
               Choose your level. Everyone starts with the story — the code gets deeper as you go.
             </p>
 
-            {/* Level tabs */}
-            <div className="flex gap-2 mb-10 flex-wrap">
+            {/* Level tabs — sticky so they stay visible while scrolling */}
+            <div className="flex gap-2 mb-10 flex-wrap sticky top-16 z-30 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm py-3 -mx-4 px-4">
               {([
                 { key: 'listener' as Level, label: 'Level 0: Listener', desc: 'No coding needed', color: 'sky' },
                 { key: 'explorer' as Level, label: 'Level 1: Explorer', desc: 'Intro to coding', color: 'emerald' },
