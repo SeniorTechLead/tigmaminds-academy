@@ -107,14 +107,15 @@ The people of Assam say that if you watch the sunset quietly, you can feel Rongi
 *The end.*` },
     stem: { title: 'Atmospheric Optics & Scattering', description: 'The physics of why the sky turns golden over the Brahmaputra.', icon: Sun, color: 'from-orange-400 to-red-500', skills: ['Understand Rayleigh scattering and wavelength-dependent light behavior', 'Model photon paths through atmospheric layers', 'Analyze spectral data from sunlight at different times of day', 'Calculate scattering cross-sections for different wavelengths'], project: {
         title: 'Build a Sunset Color Simulator',
-        description: 'Create a Python program that simulates how sunlight scatters through the atmosphere at different sun angles, producing the color gradient of a sunset.',
+        description: 'Create a Python program that predicts the dominant color of tonight\'s sunset from atmospheric conditions. Level 4 (Creator) walks you through this project step by step — from data collection to a deployed prediction tool.',
         outputDiagram: 'SunsetSimulatorOutputDiagram',
         steps: [
-          'Research the Rayleigh scattering formula and how wavelength affects scattering intensity',
-          'Define the visible spectrum (380-700 nm) and assign RGB values to each wavelength',
-          'Calculate scattering intensity for each wavelength at various sun elevation angles',
-          'Render a gradient image showing the sky color from horizon to zenith',
-          'Compare your simulated sunset colors with photographs of actual Assam sunsets',
+          'Level 4.1 — Design the project: define features (humidity, aerosol, sun angle) and generate training data',
+          'Level 4.2 — Build the feature engineering pipeline: transform raw measurements into physics-ready inputs',
+          'Level 4.3 — Implement spectral-to-RGB conversion: solar spectrum → Beer-Lambert filtering → CIE XYZ → sRGB',
+          'Level 4.4 — Train a machine learning model to correct physics-based predictions using real data',
+          'Level 4.5 — Build a visualization dashboard showing predicted sunset colors across conditions',
+          'Level 4.6 — Polish, document, and deploy as a portfolio project',
         ],
       }, realWorld: [
         'Atmospheric scientists use scattering models to predict air quality from satellite imagery',
