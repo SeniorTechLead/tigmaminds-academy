@@ -95,7 +95,7 @@ const registry: Record<string, LevelComponents> = {
   'little-chef': {Level1: lazy(() => import('./LittleChefLevel1')), Level2: lazy(() => import('./LittleChefLevel2')), Level3: lazy(() => import('./LittleChefLevel3')), Level4: lazy(() => import('./LittleChefLevel4')) },
   'siang-river': { Level1: lazy(() => import('./RiverBraidLevel1')), Level2: lazy(() => import('./RiverBraidLevel2')) },
   'fireflies-dont-burn': {Level1: lazy(() => import('./FireflyLevel1')), Level2: lazy(() => import('./FireflyLevel2')), Level3: lazy(() => import('./FireflyLevel3')), Level4: lazy(() => import('./FireflyLevel4')) },
-  'orange-sunsets-assam': { Level1: lazy(() => import('./OrangeSunsetsLevel1')), Level2: lazy(() => import('./OrangeSunsetsLevel2')) },
+  'orange-sunsets-assam': { Level1: lazy(() => import('./OrangeSunsetsLevel1')), Level2: lazy(() => import('./OrangeSunsetsLevel2')), Level3: lazy(() => import('./OrangeSunsetsLevel3')), Level4: lazy(() => import('./OrangeSunsetsLevel4')) },
   'fishermans-daughter-storm': {Level1: lazy(() => import('./FishermanStormLevel1')), Level2: lazy(() => import('./FishermanStormLevel2')), Level3: lazy(() => import('./FishermanStormLevel3')), Level4: lazy(() => import('./FishermanStormLevel4')) },
   'snow-leopards-promise': {Level1: lazy(() => import('./SnowLeopardLevel1')), Level2: lazy(() => import('./SnowLeopardLevel2')), Level3: lazy(() => import('./SnowLeopardLevel3')), Level4: lazy(() => import('./SnowLeopardLevel4')) },
   'map-makers-granddaughter': {Level1: lazy(() => import('./MapMakerLevel1')), Level2: lazy(() => import('./MapMakerLevel2')), Level3: lazy(() => import('./MapMakerLevel3')), Level4: lazy(() => import('./MapMakerLevel4')) },
