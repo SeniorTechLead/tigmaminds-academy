@@ -1,6 +1,12 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Cpu } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
+import AltitudeProfileDiagram from '../diagrams/AltitudeProfileDiagram';
+import PopulationGrowthCurve from '../diagrams/PopulationGrowthCurve';
+import NEIndiaBiomesDiagram from '../diagrams/NEIndiaBiomesDiagram';
+import CorrelationDiagram from '../diagrams/CorrelationDiagram';
+import LinearGraphDiagram from '../diagrams/LinearGraphDiagram';
+import ClimateFactorsDiagram from '../diagrams/ClimateFactorsDiagram';
 
 export default function SnowLeopardLevel3() {
   const pyodideRef = useRef<any>(null);
@@ -1313,6 +1319,7 @@ print("and crepuscular hunting avoids peak UV hours.")`,
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
+            diagram={[AltitudeProfileDiagram, PopulationGrowthCurve, NEIndiaBiomesDiagram, CorrelationDiagram, LinearGraphDiagram, ClimateFactorsDiagram][i] ? createElement([AltitudeProfileDiagram, PopulationGrowthCurve, NEIndiaBiomesDiagram, CorrelationDiagram, LinearGraphDiagram, ClimateFactorsDiagram][i]) : undefined}
             pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
         ))}
       </div>

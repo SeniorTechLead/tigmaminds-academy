@@ -526,7 +526,31 @@ Diki still herds yaks on Khangchendzonga's slopes. She has never seen the snow l
         'Snow leopards have evolved extra-large nasal cavities that warm and humidify thin mountain air before it reaches their lungs.',
         'The Brahmaputra River begins as the Yarlung Tsangpo on the Tibetan Plateau at over 4,000 meters altitude, where water boils at about 87°C.',
       ],
-      offlineActivity: 'Fill a balloon at ground level and measure its size with a string. Then carry it to the highest point you can find (a hilltop, upper floor of a building). Does the balloon expand slightly? This shows how lower air pressure at height lets gases expand — the same principle that makes breathing harder at altitude.',
+      offlineActivity: 'Fill a balloon at ground level and measure its size with a string. Then carry it to the highest point you can find (a hilltop, upper floor of a building). Does the balloon expand slightly? This shows how lower air pressure at height lets gases expand \u2014 the same principle that makes breathing harder at altitude.',
+      codeTeaser: `import numpy as np
+
+# How does air pressure change with altitude?
+altitude = 5500  # metres (Everest Base Camp)
+sea_level_pressure = 101325  # Pascals
+
+# Barometric formula
+pressure = sea_level_pressure * (1 - 2.25577e-5 * altitude)**5.256
+oxygen_percent = 20.9  # always the same!
+oxygen_available = pressure * oxygen_percent / 100
+
+print(f"Altitude: {altitude} m")
+print(f"Pressure: {pressure:.0f} Pa ({pressure/sea_level_pressure*100:.0f}% of sea level)")
+print(f"Oxygen per breath: {oxygen_available/sea_level_pressure/oxygen_percent*100*100:.0f}% of sea level")
+print(f"A snow leopard thrives here. You would gasp.")`,
+      referenceLinks: [
+        { slug: 'altitude-and-atmosphere', reason: 'Full guide to how pressure, temperature, and oxygen change with altitude' },
+        { slug: 'human-body-systems', reason: 'How lungs, blood, and the heart work together to deliver oxygen to your body' },
+      ],
+      nextLessons: [
+        { slug: 'cloud-weaver-of-tawang', reason: 'Mountain weather and orographic precipitation \u2014 the climate that shapes snow leopard habitat' },
+        { slug: 'red-panda-mask', reason: 'Another high-altitude animal with cold-weather adaptations \u2014 fur, coloration, and thermoregulation' },
+        { slug: 'turtle-mountain', reason: 'A different approach to mountains \u2014 slow, steady, and ectothermic vs the snow leopard\u2019s speed' },
+      ],
     },
   },
   {
