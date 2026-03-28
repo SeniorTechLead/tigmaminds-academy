@@ -1,0 +1,96 @@
+import { useState, useRef, useCallback } from 'react';
+import { Loader2, Cpu } from 'lucide-react';
+import MiniLesson from '../MiniLesson';
+
+export default function OwlLevel4() {
+  const pyodideRef = useRef<any>(null);
+  const [pyReady, setPyReady] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [loadProgress, setLoadProgress] = useState('');
+
+  const loadPyodide = useCallback(async () => {
+    if (pyodideRef.current) return pyodideRef.current;
+    setLoading(true);
+    setLoadProgress('Loading Python runtime...');
+    try {
+      if (!(window as any).loadPyodide) {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js';
+        document.head.appendChild(script);
+        await new Promise<void>((resolve, reject) => { script.onload = () => resolve(); script.onerror = () => reject(new Error('Failed')); });
+      }
+      setLoadProgress('Starting Python...');
+      const pyodide = await (window as any).loadPyodide({ indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/' });
+      setLoadProgress('Installing numpy & matplotlib...');
+      await pyodide.loadPackage('micropip');
+      const micropip = pyodide.pyimport('micropip');
+      for (const pkg of ['numpy', 'matplotlib']) {
+        try { await micropip.install(pkg); } catch { await pyodide.loadPackage(pkg).catch(() => {}); }
+      }
+      await pyodide.runPythonAsync(`
+import sys, io
+class OutputCapture:
+    def __init__(self): self.output = []
+    def write(self, text): self.output.append(text)
+    def flush(self): pass
+    def get_output(self): return ''.join(self.output)
+    def clear(self): self.output = []
+_stdout_capture = OutputCapture()
+sys.stdout = _stdout_capture
+sys.stderr = _stdout_capture
+import matplotlib; matplotlib.use('AGG')
+import matplotlib.pyplot as plt; import base64
+def _get_plot_as_base64():
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png', dpi=100, bbox_inches='tight', facecolor='#1f2937', edgecolor='none')
+    buf.seek(0); img_str = base64.b64encode(buf.read()).decode('utf-8'); plt.close('all'); return img_str
+`);
+      pyodideRef.current = pyodide; setPyReady(true); setLoading(false); setLoadProgress('');
+      return pyodide;
+    } catch (err: any) { setLoading(false); setLoadProgress('Error: ' + err.message); return null; }
+  }, []);
+
+    const miniLessons = [
+    {
+      title: 'Capstone — Build a Sound Localization Model using binaural cues',
+      concept: 'In this capstone you will build a computational model of how owls locate prey using sound alone — in complete darkness. The model uses two binaural cues: Interaural Time Difference (ITD, the time delay between sound arriving at left vs right ear) and Interaural Level Difference (ILD, the loudness difference). ITD provides horizontal angle: ITD = d × sin(θ)/c, where d is ear separation and c is speed of sound. ILD provides additional information at high frequencies where the head creates an acoustic shadow.\n\nThe model combines both cues using a maximum likelihood framework: for a given sound, compute the expected ITD and ILD at each possible angle, compare with measured values, and select the angle with the best match. You will test the model under different noise conditions and frequencies, revealing why owls are most accurate at detecting high-frequency rustling sounds (like a mouse in leaves).',
+      analogy: "Sound localization is like playing 'Marco Polo' with math. When someone calls 'Marco,' you estimate their direction by noticing which ear hears it first (ITD) and louder (ILD). Your brain does this computation in milliseconds. The owl's brain is the ultimate Marco Polo player — it can locate a mouse in total darkness from a single rustle, accurate to within 1 degree.",
+      storyConnection: "The wise owl in the story hunts at night using hearing alone. Your model explains the physics behind this remarkable ability: the time difference of sound arriving at each ear, measured in microseconds, is enough to pinpoint a mouse's location. The owl's evolved brain is essentially running this same mathematical algorithm in real-time neural circuitry.",
+      checkQuestion: "An owl's ears are separated by 6 cm. A mouse rustles at 30 degrees to the left. Calculate the ITD. If the owl can detect time differences as small as 10 microseconds, what is its angular resolution?",
+      checkAnswer: 'ITD = 0.06 × sin(30°) / 343 = 0.06 × 0.5 / 343 = 87.5 microseconds. Angular resolution: the minimum detectable angle change corresponds to a 10 μs ITD change. dITD/dθ = d × cos(θ)/c. At θ=0 (straight ahead): dθ = c × dt / (d × cos(0)) = 343 × 10e-6 / 0.06 = 0.057 radians = 3.3°. At θ=30°: resolution = 343 × 10e-6 / (0.06 × cos(30°)) = 3.8°. Owls achieve better resolution (~1°) by also using ILD and frequency-dependent cues from asymmetric ear placement.',
+      codeIntro: 'Build an owl-inspired sound localization system that combines ITD and ILD cues to estimate sound source direction.',
+      code: 'import numpy as np\nimport matplotlib.pyplot as plt\n\nnp.random.seed(42)\n\n# Sound Localization Model — how owls locate prey by sound\nc_sound = 343  # m/s speed of sound in air\near_separation = 0.06  # m (owl head width)\n\ndef itd_from_angle(angle_deg):\n    angle_rad = np.radians(angle_deg)\n    return ear_separation * np.sin(angle_rad) / c_sound\n\ndef ild_from_angle(angle_deg, freq_hz):\n    angle_rad = np.radians(angle_deg)\n    wavelength = c_sound / freq_hz\n    if wavelength > ear_separation * 4:\n        return 3 * np.abs(np.sin(angle_rad))\n    else:\n        return 15 * np.abs(np.sin(angle_rad))\n\ndef localize_sound(itd_measured, ild_measured, freq):\n    angles = np.linspace(-90, 90, 361)\n    itd_expected = np.array([itd_from_angle(a) for a in angles])\n    ild_expected = np.array([ild_from_angle(a, freq) for a in angles])\n    itd_err = (itd_expected - itd_measured)**2 / (20e-6)**2\n    ild_err = (ild_expected - ild_measured)**2 / 4**2\n    combined = itd_err + ild_err\n    best_idx = np.argmin(combined)\n    return angles[best_idx], combined\n\nfig, axes = plt.subplots(2, 2, figsize=(14, 11))\nfig.patch.set_facecolor(\'#1f2937\')\n\n# Plot 1: ITD vs angle\nax = axes[0, 0]\nax.set_facecolor(\'#111827\')\nangles = np.linspace(-90, 90, 361)\nitds = [itd_from_angle(a) * 1e6 for a in angles]\nax.plot(angles, itds, color=\'#3b82f6\', linewidth=2.5)\nax.axhline(0, color=\'gray\', linewidth=0.5)\nax.fill_between(angles, itds, 0, alpha=0.15, color=\'#3b82f6\')\nax.set_xlabel(\'Sound source angle (degrees)\', color=\'white\')\nax.set_ylabel(\'Interaural time difference (microseconds)\', color=\'white\')\nax.set_title(\'ITD vs Sound Source Angle\', color=\'white\', fontsize=12, fontweight=\'bold\')\nax.tick_params(colors=\'gray\')\nax.annotate(f\'Max ITD: {max(itds):.0f} us\\n(ear separation: {ear_separation*100:.0f} cm)\',\n            (70, max(itds)*0.8), color=\'#fbbf24\', fontsize=10)\n\n# Plot 2: ILD vs angle at different frequencies\nax2 = axes[0, 1]\nax2.set_facecolor(\'#111827\')\nfreqs = [500, 2000, 5000, 8000]\nfreq_colors = [\'#3b82f6\', \'#22c55e\', \'#f59e0b\', \'#ef4444\']\nfor freq, color in zip(freqs, freq_colors):\n    ilds = [ild_from_angle(a, freq) for a in angles]\n    ax2.plot(angles, ilds, color=color, linewidth=2, label=f\'{freq} Hz\')\nax2.set_xlabel(\'Sound source angle (degrees)\', color=\'white\')\nax2.set_ylabel(\'Interaural level difference (dB)\', color=\'white\')\nax2.set_title(\'ILD vs Angle at Different Frequencies\', color=\'white\', fontsize=12, fontweight=\'bold\')\nax2.legend(fontsize=9, facecolor=\'#1f2937\', edgecolor=\'gray\', labelcolor=\'white\')\nax2.tick_params(colors=\'gray\')\n\n# Plot 3: Localization accuracy simulation\nax3 = axes[1, 0]\nax3.set_facecolor(\'#111827\')\ntrue_angles = np.linspace(-80, 80, 33)\nn_trials = 20\nnoise_levels = [0, 5e-6, 15e-6, 30e-6]\nnoise_labels = [\'No noise\', \'Low noise\', \'Medium noise\', \'High noise\']\nnoise_colors = [\'#22c55e\', \'#3b82f6\', \'#f59e0b\', \'#ef4444\']\nfor noise, label, color in zip(noise_levels, noise_labels, noise_colors):\n    errors = []\n    for true_a in true_angles:\n        trial_errors = []\n        for _ in range(n_trials):\n            itd_true = itd_from_angle(true_a)\n            ild_true = ild_from_angle(true_a, 4000)\n            itd_noisy = itd_true + np.random.normal(0, noise)\n            ild_noisy = ild_true + np.random.normal(0, noise * 1e5)\n            est_angle, _ = localize_sound(itd_noisy, ild_noisy, 4000)\n            trial_errors.append(abs(est_angle - true_a))\n        errors.append(np.mean(trial_errors))\n    ax3.plot(true_angles, errors, \'o-\', color=color, linewidth=1.5, markersize=4, label=label)\nax3.set_xlabel(\'True angle (degrees)\', color=\'white\')\nax3.set_ylabel(\'Localization error (degrees)\', color=\'white\')\nax3.set_title(\'Localization Accuracy vs Noise\', color=\'white\', fontsize=12, fontweight=\'bold\')\nax3.legend(fontsize=9, facecolor=\'#1f2937\', edgecolor=\'gray\', labelcolor=\'white\')\nax3.tick_params(colors=\'gray\')\n\n# Plot 4: Combined ITD+ILD localization landscape\nax4 = axes[1, 1]\nax4.set_facecolor(\'#111827\')\ntrue_angle = 30\ntrue_itd = itd_from_angle(true_angle)\ntrue_ild = ild_from_angle(true_angle, 4000)\nangles_fine = np.linspace(-90, 90, 361)\nest_angle, likelihood = localize_sound(true_itd, true_ild, 4000)\nprobability = np.exp(-likelihood / 2)\nprobability /= probability.max()\nax4.plot(angles_fine, probability, color=\'#a855f7\', linewidth=2.5)\nax4.fill_between(angles_fine, 0, probability, alpha=0.2, color=\'#a855f7\')\nax4.axvline(true_angle, color=\'#fbbf24\', linestyle=\'--\', linewidth=2, label=f\'True angle ({true_angle} deg)\')\nax4.axvline(est_angle, color=\'#22c55e\', linestyle=\':\', linewidth=2, label=f\'Estimated ({est_angle:.0f} deg)\')\nax4.set_xlabel(\'Angle (degrees)\', color=\'white\')\nax4.set_ylabel(\'Localization probability\', color=\'white\')\nax4.set_title(\'Sound Source Probability Map\', color=\'white\', fontsize=12, fontweight=\'bold\')\nax4.legend(fontsize=9, facecolor=\'#1f2937\', edgecolor=\'gray\', labelcolor=\'white\')\nax4.tick_params(colors=\'gray\')\n\nplt.tight_layout()\nplt.show()\n\nprint("=" * 65)\nprint("    SOUND LOCALIZATION MODEL — CAPSTONE REPORT")\nprint("=" * 65)\nprint(f"\\nOwl head width: {ear_separation*100:.0f} cm")\nprint(f"Max ITD: {itd_from_angle(90)*1e6:.0f} microseconds")\nprint(f"Angular resolution (ITD only): ~{2*np.degrees(np.arcsin(c_sound * 20e-6 / ear_separation)):.0f} degrees")\nprint(f"\\nLocalization test (true angle = {true_angle} deg):")\nprint(f"  Estimated angle: {est_angle:.0f} degrees")\nprint(f"  Error: {abs(est_angle - true_angle):.1f} degrees")\nprint(f"\\nOwls achieve ~1 degree accuracy in the wild by combining")\nprint(f"ITD, ILD, and asymmetric ear placement for elevation cues.")',
+      challenge: 'Extend the model to 3D localization: owls have asymmetric ears (one higher than the other) that provide elevation information. Add a vertical ITD component and show how the owl can locate prey in both azimuth and elevation from a single sound.',
+      successHint: "You have built a computational model of biological sound localization — the same principles used in hearing aids, robot audition, and sonar systems. The owl's solution, refined by millions of years of evolution, remains one of the most elegant examples of natural signal processing.",
+    },
+  ];
+
+  return (
+    <div>
+      <div className="flex items-center gap-3 mb-6">
+        <div className="flex items-center gap-2 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 px-4 py-2 rounded-full text-sm font-semibold">
+          <Cpu className="w-4 h-4" /> Level 4: Capstone
+        </div>
+        <span className="text-sm text-gray-500 dark:text-gray-400">Build a Sound Localization Model using binaural auditory cues</span>
+      </div>
+      {!pyReady && (
+        <div className="mb-8 bg-gray-50 dark:bg-gray-800 rounded-xl p-6 text-center">
+          <p className="text-gray-600 dark:text-gray-300 mb-4">This capstone project uses Python with numpy and matplotlib to build a paper strength predictor. Click to start.</p>
+          <button onClick={loadPyodide} disabled={loading} className="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-500 text-white px-6 py-3 rounded-full font-semibold transition-colors">
+            {loading ? (<><Loader2 className="w-5 h-5 animate-spin" />{loadProgress}</>) : (<><Cpu className="w-5 h-5" />Load Python + NumPy</>)}
+          </button>
+        </div>
+      )}
+      <div className="space-y-8">
+        {miniLessons.map((lesson, i) => (
+          <MiniLesson key={i} id={`L4-${i + 1}`} number={i + 1}
+            title={lesson.title} concept={lesson.concept} analogy={lesson.analogy}
+            storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
+            checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
+            code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
+            pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
+        ))}
+      </div>
+    </div>
+  );
+}
