@@ -1,6 +1,12 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Sparkles } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
+import AltitudeProfileDiagram from '../diagrams/AltitudeProfileDiagram';
+import HeatTransferDiagram from '../diagrams/HeatTransferDiagram';
+import ClimateFactorsDiagram from '../diagrams/ClimateFactorsDiagram';
+import MonsoonDiagram from '../diagrams/MonsoonDiagram';
+import AdaptationDiagram from '../diagrams/AdaptationDiagram';
+import NEIndiaBiomesDiagram from '../diagrams/NEIndiaBiomesDiagram';
 
 export default function SnowLeopardLevel1() {
   const pyodideRef = useRef<any>(null);
@@ -505,6 +511,7 @@ print("  Status: Vulnerable (IUCN)")`,
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
+            diagram={[AltitudeProfileDiagram, HeatTransferDiagram, ClimateFactorsDiagram, MonsoonDiagram, AdaptationDiagram, NEIndiaBiomesDiagram][i] ? createElement([AltitudeProfileDiagram, HeatTransferDiagram, ClimateFactorsDiagram, MonsoonDiagram, AdaptationDiagram, NEIndiaBiomesDiagram][i]) : undefined}
             pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
         ))}
       </div>

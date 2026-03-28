@@ -1,6 +1,12 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Sparkles } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
+import AltitudeProfileDiagram from '../diagrams/AltitudeProfileDiagram';
+import PopulationGrowthCurve from '../diagrams/PopulationGrowthCurve';
+import ClimateZonesDiagram from '../diagrams/ClimateZonesDiagram';
+import HeatTransferDiagram from '../diagrams/HeatTransferDiagram';
+import LinearGraphDiagram from '../diagrams/LinearGraphDiagram';
+import CorrelationDiagram from '../diagrams/CorrelationDiagram';
 
 export default function SnowLeopardLevel2() {
   const pyodideRef = useRef<any>(null);
@@ -621,6 +627,7 @@ print("  - Equipment failures may take weeks to fix")`,
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
+            diagram={[AltitudeProfileDiagram, LinearGraphDiagram, PopulationGrowthCurve, ClimateZonesDiagram, HeatTransferDiagram, CorrelationDiagram][i] ? createElement([AltitudeProfileDiagram, LinearGraphDiagram, PopulationGrowthCurve, ClimateZonesDiagram, HeatTransferDiagram, CorrelationDiagram][i]) : undefined}
             pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
         ))}
       </div>
