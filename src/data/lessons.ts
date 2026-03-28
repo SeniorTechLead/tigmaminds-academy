@@ -681,6 +681,30 @@ Anusha kept drawing maps. Maps of her school. Maps of her grandmother's kitchen.
         'The Great Trigonometrical Survey of India (1802\u20131871) was the project that first measured the height of Mount Everest \u2014 then called Peak XV.',
       ],
       offlineActivity: 'Draw a map of your route from home to school without looking at any existing map. Include landmarks (trees, shops, turns). Then walk the route and check: what did you get right? What did you miss? This is exactly how early surveyors worked \u2014 walk, observe, draw, verify.',
+      codeTeaser: `# Plot your school on a coordinate grid
+latitude = 26.14   # Guwahati (degrees North)
+longitude = 91.74  # Guwahati (degrees East)
+
+# How far is Delhi?
+delhi_lat, delhi_lon = 28.61, 77.21
+
+# Each degree of latitude ≈ 111 km
+dist_north = (delhi_lat - latitude) * 111  # km
+dist_east = (delhi_lon - longitude) * 111 * 0.89  # adjusted for latitude
+total = (dist_north**2 + dist_east**2)**0.5
+
+print(f"Your location: {latitude}°N, {longitude}°E")
+print(f"Delhi: {delhi_lat}°N, {delhi_lon}°E")
+print(f"Straight-line distance: {total:.0f} km")`,
+      referenceLinks: [
+        { slug: 'maps-and-navigation', reason: 'Full guide to latitude, longitude, map projections, GPS, and GIS' },
+        { slug: 'coordinate-geometry', reason: 'The mathematics behind coordinates \u2014 distance formula, midpoints, and plotting on a grid' },
+      ],
+      nextLessons: [
+        { slug: 'seven-sisters', reason: 'Geography of all seven NE Indian states \u2014 maps, biodiversity, and why each state is unique' },
+        { slug: 'postman-hills', reason: 'Route optimisation through Meghalaya\u2019s hills \u2014 graph theory applied to real geography' },
+        { slug: 'silk-route', reason: 'Trade routes as geographic networks \u2014 how maps shaped commerce across centuries' },
+      ],
     },
   },
   {
