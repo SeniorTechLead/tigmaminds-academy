@@ -4,7 +4,7 @@ import MiniLesson from '../MiniLesson';
 import SunsetSimulatorOutputDiagram from '../diagrams/SunsetSimulatorOutputDiagram';
 import SunsetPathDiagram from '../diagrams/SunsetPathDiagram';
 import WavelengthSpectrum from '../diagrams/WavelengthSpectrum';
-import FlowchartDiagram from '../diagrams/FlowchartDiagram';
+import RayleighScatteringDiagram from '../diagrams/RayleighScatteringDiagram';
 import CorrelationDiagram from '../diagrams/CorrelationDiagram';
 import LinearGraphDiagram from '../diagrams/LinearGraphDiagram';
 
@@ -1335,7 +1335,7 @@ print("  - Add twilight purple (ozone Chappuis band absorption)")`,
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
-            diagram={[FlowchartDiagram, CorrelationDiagram, WavelengthSpectrum, LinearGraphDiagram, SunsetSimulatorOutputDiagram, SunsetPathDiagram][i] ? createElement([FlowchartDiagram, CorrelationDiagram, WavelengthSpectrum, LinearGraphDiagram, SunsetSimulatorOutputDiagram, SunsetPathDiagram][i]) : undefined}
+            diagram={[RayleighScatteringDiagram, CorrelationDiagram, WavelengthSpectrum, LinearGraphDiagram, SunsetSimulatorOutputDiagram, SunsetPathDiagram][i] ? createElement([RayleighScatteringDiagram, CorrelationDiagram, WavelengthSpectrum, LinearGraphDiagram, SunsetSimulatorOutputDiagram, SunsetPathDiagram][i]) : undefined}
             pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
         ))}
       </div>
