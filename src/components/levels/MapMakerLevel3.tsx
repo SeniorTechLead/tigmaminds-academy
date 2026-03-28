@@ -1,6 +1,12 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Cpu } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
+import LatLongGridDiagram from '../diagrams/LatLongGridDiagram';
+import ContourMapDiagram from '../diagrams/ContourMapDiagram';
+import MapProjectionDiagram from '../diagrams/MapProjectionDiagram';
+import CoordinatePlaneDiagram from '../diagrams/CoordinatePlaneDiagram';
+import LinearGraphDiagram from '../diagrams/LinearGraphDiagram';
+import NEIndiaBiomesDiagram from '../diagrams/NEIndiaBiomesDiagram';
 
 export default function MapMakerLevel3() {
   const pyodideRef = useRef<any>(null);
@@ -340,6 +346,7 @@ print("Analysis complete")`,
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
+            diagram={[LatLongGridDiagram, ContourMapDiagram, MapProjectionDiagram, CoordinatePlaneDiagram, LinearGraphDiagram, NEIndiaBiomesDiagram][i] ? createElement([LatLongGridDiagram, ContourMapDiagram, MapProjectionDiagram, CoordinatePlaneDiagram, LinearGraphDiagram, NEIndiaBiomesDiagram][i]) : undefined}
             pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
         ))}
       </div>
