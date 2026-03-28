@@ -1,6 +1,12 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Cpu } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
+import FlowchartDiagram from '../diagrams/FlowchartDiagram';
+import SpectrogramDiagram from '../diagrams/SpectrogramDiagram';
+import KNNClassificationDiagram from '../diagrams/KNNClassificationDiagram';
+import CorrelationDiagram from '../diagrams/CorrelationDiagram';
+import TrainTestSplitDiagram from '../diagrams/TrainTestSplitDiagram';
+import NeuralNetworkDiagram from '../diagrams/NeuralNetworkDiagram';
 
 export default function ElephantLevel4() {
   const pyodideRef = useRef<any>(null);
@@ -1305,6 +1311,7 @@ print("classification, model evaluation, software design, conservation tech.")`,
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
+            diagram={[FlowchartDiagram, SpectrogramDiagram, KNNClassificationDiagram, CorrelationDiagram, TrainTestSplitDiagram, NeuralNetworkDiagram][i] ? createElement([FlowchartDiagram, SpectrogramDiagram, KNNClassificationDiagram, CorrelationDiagram, TrainTestSplitDiagram, NeuralNetworkDiagram][i]) : undefined}
             pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
         ))}
       </div>

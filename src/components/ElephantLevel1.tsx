@@ -5,6 +5,8 @@ import VariablesDiagram from './diagrams/VariablesDiagram';
 import NumPyRulerDiagram from './diagrams/NumPyRulerDiagram';
 import SineWaveDiagram from './diagrams/SineWaveDiagram';
 import AmplitudeModDiagram from './diagrams/AmplitudeModDiagram';
+import NumberLineDiagram from './diagrams/NumberLineDiagram';
+import HistogramDiagram from './diagrams/HistogramDiagram';
 
 export default function ElephantLevel1() {
   const pyodideRef = useRef<any>(null);
@@ -319,6 +321,8 @@ print("Bottom: rumble x pulse = a signal that breathes")`,
         {miniLessons.map((lesson, i) => {
           const diagrams: Record<number, React.ReactNode> = {
             0: <VariablesDiagram />,
+            1: <NumberLineDiagram />,
+            2: <HistogramDiagram />,
             3: <NumPyRulerDiagram />,
             4: <SineWaveDiagram />,
             5: <AmplitudeModDiagram />,

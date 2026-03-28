@@ -1,6 +1,12 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Cpu } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
+import SpectrogramDiagram from '../diagrams/SpectrogramDiagram';
+import SineWaveDiagram from '../diagrams/SineWaveDiagram';
+import FlowchartDiagram from '../diagrams/FlowchartDiagram';
+import CorrelationDiagram from '../diagrams/CorrelationDiagram';
+import HistogramDiagram from '../diagrams/HistogramDiagram';
+import NeuralNetworkDiagram from '../diagrams/NeuralNetworkDiagram';
 
 export default function ElephantLevel3() {
   const pyodideRef = useRef<any>(null);
@@ -1063,6 +1069,7 @@ print("  - But the same core idea: gradient descent on a loss function.")`,
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
+            diagram={[SpectrogramDiagram, SineWaveDiagram, HistogramDiagram, FlowchartDiagram, CorrelationDiagram, NeuralNetworkDiagram][i] ? createElement([SpectrogramDiagram, SineWaveDiagram, HistogramDiagram, FlowchartDiagram, CorrelationDiagram, NeuralNetworkDiagram][i]) : undefined}
             pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
         ))}
       </div>

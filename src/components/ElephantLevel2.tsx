@@ -4,6 +4,10 @@ import MiniLesson from './MiniLesson';
 import ElephantPlayground from './ElephantPlayground';
 import PlotAnatomyDiagram from './diagrams/PlotAnatomyDiagram';
 import SpectrogramDiagram from './diagrams/SpectrogramDiagram';
+import SineWaveDiagram from './diagrams/SineWaveDiagram';
+import AmplitudeModDiagram from './diagrams/AmplitudeModDiagram';
+import EcholocationDiagram from './diagrams/EcholocationDiagram';
+import FlowchartDiagram from './diagrams/FlowchartDiagram';
 
 export default function ElephantLevel2() {
   const pyodideRef = useRef<any>(null);
@@ -396,7 +400,11 @@ print("Level 3 uses ML to learn them from data.")`,
   // Map lesson index to diagram
   const diagrams: Record<number, React.ReactNode> = {
     0: <PlotAnatomyDiagram />,
+    1: <SineWaveDiagram />,
+    2: <AmplitudeModDiagram />,
     3: <SpectrogramDiagram />,
+    4: <EcholocationDiagram />,
+    5: <FlowchartDiagram />,
   };
 
   return (
