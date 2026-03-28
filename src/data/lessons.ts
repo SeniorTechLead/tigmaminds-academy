@@ -186,6 +186,22 @@ The people of Assam say that if you watch the sunset quietly, you can feel Rongi
       ],
       offlineActivity: 'Fill a clear glass with water and add a few drops of milk (just enough to make it slightly cloudy). Shine a flashlight through the glass from one side. Look at the glass from the side — the beam appears bluish. Now look through the glass from the far end — the light appears orange or reddish. You have just created Rayleigh scattering: the tiny milk particles scatter short (blue) wavelengths sideways while long (red) wavelengths pass straight through, exactly like the atmosphere does with sunlight.',
       offlineActivityDiagram: 'MilkScatteringDiagram',
+      codeTeaser: `import numpy as np
+import matplotlib.pyplot as plt
+
+# The Rayleigh scattering formula
+# Blue light scatters much more than red!
+wavelengths = np.linspace(380, 700, 100)  # nm
+scattering = 1 / wavelengths**4           # Rayleigh's law
+scattering = scattering / scattering.max()
+
+plt.figure(figsize=(10, 5))
+plt.fill_between(wavelengths, scattering, alpha=0.3)
+plt.plot(wavelengths, scattering, linewidth=2)
+plt.xlabel("Wavelength (nm)")
+plt.ylabel("Scattering intensity")
+plt.title("Why Blue Scatters More Than Red")
+plt.show()  # What does this plot tell you?`,
       referenceLinks: [
         { slug: 'light-and-color', reason: 'Deep dive into wavelengths, the electromagnetic spectrum, and all three types of scattering' },
         { slug: 'waves-and-properties', reason: 'Understand how waves work \u2014 frequency, wavelength, and amplitude \u2014 the foundation behind light and color' },
@@ -340,7 +356,33 @@ In the fishing villages along the Brahmaputra, the people of Assam still tell th
         'The 1970 Bhola cyclone in the Bay of Bengal killed an estimated 300,000-500,000 people, mostly from storm surge — it led to massive international investment in cyclone warning systems and coastal shelters.',
         'A cyclone is essentially a heat engine: it converts thermal energy from warm ocean water (above 26.5\u00B0C) into the kinetic energy of wind, with latent heat released by condensation as the main power source.',
       ],
-      offlineActivity: 'Fill a large bowl with water and let it settle completely. Stir the water rapidly in a circle, then slowly lift your finger out. Watch how a vortex (spinning funnel) forms in the center — this is the same physics that creates a cyclone\'s eye. The spinning water pulls away from the center, just as spinning air creates the low-pressure eye of a cyclone. Now try adding a few drops of food coloring at the edge and watch how the spiral bands form as the color gets pulled into the rotation.',
+      offlineActivity: 'Fill a large bowl with water and let it settle completely. Stir the water rapidly in a circle, then slowly lift your finger out. Watch how a vortex (spinning funnel) forms in the center \u2014 this is the same physics that creates a cyclone\'s eye. The spinning water pulls away from the center, just as spinning air creates the low-pressure eye of a cyclone. Now try adding a few drops of food coloring at the edge and watch how the spiral bands form as the color gets pulled into the rotation.',
+      codeTeaser: `import numpy as np
+
+# How much sunlight survives the atmospheric path?
+# Beer-Lambert law: surviving = initial * e^(-scattering * path)
+
+sea_temp = 28.5       # °C — Bay of Bengal surface
+pressure = 1013       # millibars — normal
+wind_speed = 120      # km/h — severe cyclone
+
+# Cyclone pressure drop (simplified)
+eye_pressure = pressure - (wind_speed / 3.5) ** 2
+storm_surge = wind_speed * 0.04  # rough estimate in metres
+
+print(f"Sea surface temp: {sea_temp}°C (>{26.5} = cyclone fuel)")
+print(f"Eye pressure: {eye_pressure:.0f} mb (normal: 1013)")
+print(f"Estimated storm surge: {storm_surge:.1f} metres")
+print(f"Danger level: {'EXTREME' if storm_surge > 3 else 'HIGH'}")`,
+      referenceLinks: [
+        { slug: 'weather-and-climate', reason: 'Full guide to atmospheric pressure, wind systems, and how weather patterns form and move' },
+        { slug: 'waves-and-properties', reason: 'How waves carry energy \u2014 the same physics applies to ocean waves, storm surge, and sound' },
+      ],
+      nextLessons: [
+        { slug: 'cloud-refused-rain', reason: 'Explores cloud seeding and rain formation \u2014 the water cycle that feeds cyclones' },
+        { slug: 'the-little-boat', reason: 'Fluid dynamics and buoyancy on the Brahmaputra \u2014 how boats survive river currents and floods' },
+        { slug: 'monsoon-home', reason: 'Architecture designed for monsoon climate \u2014 the human response to the storms you just learned about' },
+      ],
     },
   },
   {
@@ -1594,6 +1636,24 @@ Because the earth carries every voice — if you are patient enough to listen.
         'The word "infrasonic" means "below sound" — these vibrations are real, physical waves traveling through the earth, just too low-pitched for human ears to process as sound.',
       ],
       offlineActivity: 'Press your ear against the ground or a wooden floor while someone walks in another room. Can you feel the vibrations? Try to guess how far away they are just from what you feel. Now try different surfaces \u2014 wood, concrete, soil. Which carries vibrations best? This is exactly what Rongpharpi did \u2014 and what elephants do every day through the Pacinian corpuscles in their feet.',
+      codeTeaser: `# Simulate an elephant rumble signal
+import numpy as np
+
+# A calm elephant rumbles at ~12 Hz
+frequency = 12       # vibrations per second
+duration = 3         # seconds
+pulse_rate = 0.5     # slow, steady pulses
+
+# Generate the signal
+t = np.linspace(0, duration, 1000)
+rumble = np.sin(2 * np.pi * frequency * t)
+envelope = 0.5 + 0.5 * np.sin(2 * np.pi * pulse_rate * t)
+signal = rumble * envelope
+
+print(f"Frequency: {frequency} Hz (below human hearing!)")
+print(f"Pulse rate: {pulse_rate}/sec (calm)")
+print(f"Signal length: {len(signal)} samples")
+# Next: plot it, then classify the mood...`,
       referenceLinks: [
         { slug: 'sound-and-vibration', reason: 'Deep dive into frequency, wavelength, amplitude, and how sound waves travel through different materials' },
         { slug: 'machine-learning', reason: 'How neural networks learn from labelled data \u2014 the same AI that classifies elephant calls' },

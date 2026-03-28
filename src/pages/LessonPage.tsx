@@ -442,28 +442,24 @@ export default function LessonPage() {
                 <span className="text-gray-400 text-xs ml-2">Level 1: Explorer — Python</span>
               </div>
               <div className="bg-gray-900 p-4 overflow-x-auto">
-                <pre className="text-sm font-mono text-gray-100 leading-relaxed whitespace-pre">{`import numpy as np
+                <pre className="text-sm font-mono text-gray-100 leading-relaxed whitespace-pre">{lesson.level0?.codeTeaser || `import numpy as np
 import matplotlib.pyplot as plt
 
-# The Rayleigh scattering formula
-# Blue light scatters much more than red!
-wavelengths = np.linspace(380, 700, 100)  # nm
-scattering = 1 / wavelengths**4           # Rayleigh's law
+# Your first data analysis with Python
+data = [45, 52, 38, 67, 41, 55, 48]  # measurements
+mean = np.mean(data)
 
-# Normalize so we can compare
-scattering = scattering / scattering.max()
-
-plt.figure(figsize=(10, 5))
-plt.fill_between(wavelengths, scattering, alpha=0.3)
-plt.plot(wavelengths, scattering, linewidth=2)
-plt.xlabel("Wavelength (nm)")
-plt.ylabel("Scattering intensity")
-plt.title("Why Blue Scatters More Than Red")
-plt.show()  # What does this plot tell you?`}</pre>
+plt.bar(range(len(data)), data)
+plt.axhline(mean, color='red', linestyle='--', label=f'Mean: {mean:.1f}')
+plt.xlabel("Sample")
+plt.ylabel("Value")
+plt.title("${lesson.stem.title} — Sample Data")
+plt.legend()
+plt.show()`}</pre>
               </div>
               <div className="bg-gray-800/50 px-4 py-3">
                 <p className="text-xs text-gray-400">
-                  This is just the first of 6 coding exercises. You will build a full sunset simulator, model atmospheric paths, and compare your results with real photographs.
+                  This is just the first of 6 coding exercises in Level 1. By Level 4, you will build: {lesson.stem.project.title}.
                 </p>
               </div>
             </div>
