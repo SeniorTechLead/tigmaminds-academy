@@ -1,6 +1,12 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Sparkles } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
+import PhotosynthesisDiagram from '../diagrams/PhotosynthesisDiagram';
+import CarbonCycleDiagram from '../diagrams/CarbonCycleDiagram';
+import WaterCycleDiagram from '../diagrams/WaterCycleDiagram';
+import FoodWebDiagram from '../diagrams/FoodWebDiagram';
+import PopulationGrowthCurve from '../diagrams/PopulationGrowthCurve';
+import NEIndiaBiomesDiagram from '../diagrams/NEIndiaBiomesDiagram';
 
 export default function BanyanTreeLevel1() {
   const pyodideRef = useRef<any>(null);
@@ -778,6 +784,7 @@ print("that makes these trees keystone organisms.")`,
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
+            diagram={[PhotosynthesisDiagram, CarbonCycleDiagram, WaterCycleDiagram, FoodWebDiagram, PopulationGrowthCurve, NEIndiaBiomesDiagram][i] ? createElement([PhotosynthesisDiagram, CarbonCycleDiagram, WaterCycleDiagram, FoodWebDiagram, PopulationGrowthCurve, NEIndiaBiomesDiagram][i]) : undefined}
             pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
         ))}
       </div>

@@ -843,6 +843,30 @@ Dimpi climbed down from the branch, walked home in the golden evening light, and
         'Banyan trees start life as epiphytes — a seed deposited by a bird on another tree grows roots downward, eventually strangling and replacing the host tree.',
       ],
       offlineActivity: 'Find the largest tree near you. Measure around its trunk with a string (this is the circumference). Divide by 3.14 to get the diameter. Research how to estimate a tree\'s age from its diameter for that species. Draw the tree and label its parts: trunk, branches, roots, leaves, bark.',
+      codeTeaser: `# How much carbon does a tree store?
+trunk_diameter = 1.5  # metres (a large banyan)
+height = 15           # metres
+
+# Approximate volume (simplified cylinder)
+import math
+volume = math.pi * (trunk_diameter/2)**2 * height  # cubic metres
+wood_density = 600    # kg per cubic metre (average wood)
+mass = volume * wood_density
+carbon = mass * 0.5   # trees are ~50% carbon by dry weight
+
+print(f"Trunk volume: {volume:.1f} cubic metres")
+print(f"Wood mass: {mass:.0f} kg")
+print(f"Carbon stored: {carbon:.0f} kg")
+print(f"That is {carbon * 3.67:.0f} kg of CO2 pulled from the air!")`,
+      referenceLinks: [
+        { slug: 'plant-biology', reason: 'How roots, stems, and leaves work together \u2014 the biology behind photosynthesis and tree growth' },
+        { slug: 'ecosystems-and-biomes', reason: 'Energy flow and carbon cycling in forest ecosystems \u2014 why trees matter for climate' },
+      ],
+      nextLessons: [
+        { slug: 'girl-grew-forest', reason: 'One person planted a forest on a Brahmaputra sandbar \u2014 reforestation and carbon sequestration in action' },
+        { slug: 'bridge-that-grew', reason: 'Living root bridges of Meghalaya \u2014 another story of trees as engineering solutions' },
+        { slug: 'wild-orchids-trees', reason: 'Orchids that grow on banyan branches \u2014 epiphytic ecology and symbiosis' },
+      ],
     },
   },
   {
