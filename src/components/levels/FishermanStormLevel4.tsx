@@ -1,6 +1,12 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Cpu } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
+import CycloneCrossSectionDiagram from '../diagrams/CycloneCrossSectionDiagram';
+import CorrelationDiagram from '../diagrams/CorrelationDiagram';
+import LinearGraphDiagram from '../diagrams/LinearGraphDiagram';
+import MonsoonDiagram from '../diagrams/MonsoonDiagram';
+import BuoyancyDiagram from '../diagrams/BuoyancyDiagram';
+import ClimateZonesDiagram from '../diagrams/ClimateZonesDiagram';
 
 export default function FishermanStormLevel4() {
   const pyodideRef = useRef<any>(null);
@@ -1421,6 +1427,7 @@ print(f"{'=' * 60}")`,
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
+            diagram={[CycloneCrossSectionDiagram, CorrelationDiagram, LinearGraphDiagram, MonsoonDiagram, BuoyancyDiagram, ClimateZonesDiagram][i] ? createElement([CycloneCrossSectionDiagram, CorrelationDiagram, LinearGraphDiagram, MonsoonDiagram, BuoyancyDiagram, ClimateZonesDiagram][i]) : undefined}
             pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
         ))}
       </div>

@@ -1,6 +1,12 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Sparkles } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
+import NewtonForceDiagram from '../diagrams/NewtonForceDiagram';
+import CycloneCrossSectionDiagram from '../diagrams/CycloneCrossSectionDiagram';
+import PressureDepthDiagram from '../diagrams/PressureDepthDiagram';
+import MonsoonDiagram from '../diagrams/MonsoonDiagram';
+import BuoyancyDiagram from '../diagrams/BuoyancyDiagram';
+import WaterCycleDiagram from '../diagrams/WaterCycleDiagram';
 
 export default function FishermanStormLevel1() {
   const pyodideRef = useRef<any>(null);
@@ -748,6 +754,7 @@ print("  - Political will: governments issue evacuation orders early")`,
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
+            diagram={[NewtonForceDiagram, WaterCycleDiagram, CycloneCrossSectionDiagram, MonsoonDiagram, BuoyancyDiagram, PressureDepthDiagram][i] ? createElement([NewtonForceDiagram, WaterCycleDiagram, CycloneCrossSectionDiagram, MonsoonDiagram, BuoyancyDiagram, PressureDepthDiagram][i]) : undefined}
             pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
         ))}
       </div>
