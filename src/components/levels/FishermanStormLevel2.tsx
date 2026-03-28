@@ -1,6 +1,12 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Sparkles } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
+import PressureDepthDiagram from '../diagrams/PressureDepthDiagram';
+import NewtonForceDiagram from '../diagrams/NewtonForceDiagram';
+import CycloneCrossSectionDiagram from '../diagrams/CycloneCrossSectionDiagram';
+import LinearGraphDiagram from '../diagrams/LinearGraphDiagram';
+import ClimateZonesDiagram from '../diagrams/ClimateZonesDiagram';
+import HeatTransferDiagram from '../diagrams/HeatTransferDiagram';
 
 export default function FishermanStormLevel2() {
   const pyodideRef = useRef<any>(null);
@@ -865,6 +871,7 @@ for name, data in sorted(interventions.items(), key=lambda x: x[1]['cost']/x[1][
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
+            diagram={[PressureDepthDiagram, NewtonForceDiagram, CycloneCrossSectionDiagram, LinearGraphDiagram, ClimateZonesDiagram, HeatTransferDiagram][i] ? createElement([PressureDepthDiagram, NewtonForceDiagram, CycloneCrossSectionDiagram, LinearGraphDiagram, ClimateZonesDiagram, HeatTransferDiagram][i]) : undefined}
             pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
         ))}
       </div>

@@ -1,6 +1,12 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Cpu } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
+import PressureDepthDiagram from '../diagrams/PressureDepthDiagram';
+import MonsoonDiagram from '../diagrams/MonsoonDiagram';
+import CycloneCrossSectionDiagram from '../diagrams/CycloneCrossSectionDiagram';
+import LinearGraphDiagram from '../diagrams/LinearGraphDiagram';
+import BuoyancyDiagram from '../diagrams/BuoyancyDiagram';
+import ClimateFactorsDiagram from '../diagrams/ClimateFactorsDiagram';
 
 export default function FishermanStormLevel3() {
   const pyodideRef = useRef<any>(null);
@@ -855,6 +861,7 @@ print("For Brahmaputra delta communities, every tenth of a degree matters.")`,
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
+            diagram={[PressureDepthDiagram, MonsoonDiagram, CycloneCrossSectionDiagram, LinearGraphDiagram, BuoyancyDiagram, ClimateFactorsDiagram][i] ? createElement([PressureDepthDiagram, MonsoonDiagram, CycloneCrossSectionDiagram, LinearGraphDiagram, BuoyancyDiagram, ClimateFactorsDiagram][i]) : undefined}
             pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
         ))}
       </div>
