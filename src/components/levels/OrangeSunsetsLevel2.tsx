@@ -1,6 +1,12 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Sparkles } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
+import WavelengthSpectrum from '../diagrams/WavelengthSpectrum';
+import RayleighScatteringDiagram from '../diagrams/RayleighScatteringDiagram';
+import SunsetPathDiagram from '../diagrams/SunsetPathDiagram';
+import MieVsRayleighDiagram from '../diagrams/MieVsRayleighDiagram';
+import HeatTransferDiagram from '../diagrams/HeatTransferDiagram';
+import WaveEquationDiagram from '../diagrams/WaveEquationDiagram';
 
 export default function OrangeSunsetsLevel2() {
   const pyodideRef = useRef<any>(null);
@@ -23,21 +29,24 @@ export default function OrangeSunsetsLevel2() {
 
   const miniLessons = [
     {
-      title: 'The electromagnetic spectrum — beyond visible light',
-      concept: `Visible light (380-700 nm) is a tiny sliver of the **electromagnetic (EM) spectrum**. All EM waves are the same phenomenon — oscillating electric and magnetic fields — differing only in wavelength.
+      title: 'Beyond the rainbow — the electromagnetic spectrum',
+      concept: `In Level 1, you plotted visible light from 380 nm (violet) to 700 nm (red). But light does not stop at these boundaries. There are wavelengths shorter than violet and longer than red — your eyes just cannot detect them.
 
-The full spectrum, shortest to longest:
-- **Gamma rays** (<0.01 nm): from nuclear reactions, extremely energetic
-- **X-rays** (0.01-10 nm): penetrate soft tissue, used in medical imaging
-- **Ultraviolet** (10-380 nm): causes sunburn, drives vitamin D synthesis
-- **Visible light** (380-700 nm): the narrow band our eyes detect
-- **Infrared** (700 nm - 1 mm): heat radiation, remote controls, thermal imaging
-- **Microwaves** (1 mm - 30 cm): cooking, WiFi, radar, cell phones
-- **Radio waves** (>30 cm): broadcasting, astronomy, MRI
+Think of it as a radio dial. Your eyes can tune into one tiny station (visible light). But the dial extends in both directions:
 
-All travel at c = 3 × 10⁸ m/s in vacuum. Energy is inversely proportional to wavelength: E = hc/λ (Planck's equation). Short wavelength = high energy = dangerous (gamma rays break DNA). Long wavelength = low energy = harmless (radio waves pass through walls).
+**Shorter than violet** (higher energy, more dangerous):
+- Ultraviolet (UV) — causes sunburn. The ozone layer blocks most of it.
+- X-rays — pass through soft tissue. Used in medical imaging.
+- Gamma rays — from nuclear reactions. Would destroy DNA.
 
-The atmosphere has two main **transparency windows**: visible/near-IR and radio. Most other wavelengths are blocked by ozone (UV), water vapor (IR), or the ionosphere (long radio). This is why optical and radio telescopes work from the ground, but X-ray and gamma-ray telescopes must be in space.`,
+**Longer than red** (lower energy, harmless):
+- Infrared (IR) — you feel it as heat. Remote controls use it.
+- Microwaves — WiFi, phone signals, microwave ovens.
+- Radio waves — FM radio, TV, radar.
+
+All of these are the **same thing** — electromagnetic waves — just at different wavelengths. They all travel at the speed of light (3 × 10⁸ m/s). The only difference is energy: \`E = hc/λ\` — shorter wavelength means higher energy.
+
+The atmosphere blocks most of these except two "windows": visible light and radio. This is why ground telescopes use optics or radio dishes, while X-ray telescopes must be in space.`,
       analogy: 'The EM spectrum is like a piano keyboard stretching from here to the Moon. Visible light is a single octave in the middle — the only notes our eyes can "hear." Radio waves are the deep bass notes far to the left; gamma rays are the ultrasonic notes far to the right. We built instruments (radios, X-ray machines, infrared cameras) to detect the notes our eyes miss.',
       storyConnection: 'Assam\'s orange sunsets exist because our eyes evolved to detect exactly the wavelengths the Sun emits most strongly. If we could see infrared, the sky would glow uniformly with heat. If we could see UV, ozone absorption would make the sky appear dark above us. The sunset is beautiful precisely because of our biological limitations.',
       checkQuestion: 'Why did our eyes evolve to detect 380-700 nm and not, say, infrared or UV?',
@@ -108,29 +117,23 @@ print("  Everything else: blocked → need space telescopes")`,
       successHint: 'The visible spectrum is a narrow window into a vast electromagnetic universe. Orange sunsets are just one color of a much larger, invisible painting that instruments reveal across the full spectrum.',
     },
     {
-      title: 'Scattering equations — the math behind Rayleigh',
-      concept: `Lord Rayleigh derived the scattering equation in 1871: **I ∝ (1 + cos²θ) / λ⁴**
+      title: 'Scattering equations — putting numbers on it',
+      concept: `In Level 1, you plotted \`1/λ**4\` and saw that blue scatters ~6× more than red. Now let's go further — calculate *exactly* how much light survives at sunset.
 
-Where θ is the scattering angle and λ the wavelength. The **1/λ⁴** term is the key: shorter wavelengths scatter enormously more than longer ones.
+Two new concepts:
 
-The **optical depth** τ quantifies how much light is removed:
-- **I = I₀ × e^(-τ)** (Beer-Lambert law)
-- τ_Rayleigh = 0.0088 × (λ_ref/λ)⁴ at sea level, per unit airmass
+**Optical depth (τ)** — measures how much scattering a light ray encounters. The more air it passes through, the higher τ. The surviving light follows: **I = I₀ × e^(-τ)** (the Beer-Lambert law you used in Level 1's sunset exercise).
 
-**Airmass** is the path length relative to zenith:
-- Zenith (overhead): airmass = 1
+**Airmass** — how many "thicknesses" of atmosphere the light passes through:
+- Sun overhead (noon): airmass = 1
 - 60° from zenith: airmass = 2
-- Sunset (90°): airmass ≈ 38
+- Sunset (horizon): airmass ≈ 38 (the light skims sideways through 38× more air)
 
-At sunset (airmass 38):
-- Blue (470nm): τ ≈ 0.18 × 38 = 6.8 → transmission = e⁻⁶·⁸ = **0.1%**
-- Red (700nm): τ ≈ 0.04 × 38 = 1.5 → transmission = e⁻¹·⁵ = **22%**
+Now combine them. At sunset (airmass 38):
+- Blue (470nm): τ ≈ 0.18 × 38 = 6.8 → e^(-6.8) = **0.1% survives**
+- Red (700nm): τ ≈ 0.04 × 38 = 1.5 → e^(-1.5) = **22% survives**
 
-Red survives **220 times** better than blue at sunset. That is the quantitative explanation for orange sunsets.
-
-The **(1 + cos²θ)** angular factor means:
-- Maximum scattering forward (0°) and backward (180°)
-- Minimum at 90° — where the sky is deepest blue and most polarized`,
+Red light survives **220 times** better than blue at sunset. That single calculation explains every orange sky you have ever seen.`,
       analogy: 'The 1/λ⁴ law is like a sieve with holes sized for red light. Blue photons are too "big" (scatter too much) and get caught; red photons are "small" enough to pass through. Make the sieve thicker (longer path at sunset), and even medium photons (green, yellow) get caught. Only the smallest (red) make it through.',
       storyConnection: 'Rayleigh\'s equation perfectly predicts Assam\'s sunset colors. The Brahmaputra valley\'s high humidity adds Mie scattering (weaker λ dependence), which explains why Assam sunsets are often orange rather than deep red: moisture particles scatter all colors slightly, adding warmth without the stark red of dry desert sunsets.',
       checkQuestion: 'At what zenith angle does blue light first become "mostly gone" (τ > 3, meaning 95% scattered)?',
@@ -218,25 +221,18 @@ print("  This IS the orange sunset, expressed as mathematics.")`,
       successHint: 'A single equation — I ∝ 1/λ⁴ — explains both the blue sky and the orange sunset. Path length is the only difference. This is physics at its most elegant: one formula, two beautiful phenomena.',
     },
     {
-      title: 'Polarization — when scattered light has direction',
-      concept: `Light is a transverse wave: the electric field oscillates perpendicular to travel. **Polarization** is the direction of this oscillation.
+      title: 'Polarization — light with a direction',
+      concept: `Shake a rope up and down — the wave is **vertical**. Shake it side to side — **horizontal**. Light waves work the same way, except the "shaking" is an electric field. The direction it shakes is called **polarization**.
 
-- **Unpolarized**: field oscillates in all perpendicular directions (sunlight, light bulbs)
-- **Linearly polarized**: field oscillates in one plane only
-- **Circularly polarized**: field rotates as it propagates
+Sunlight is **unpolarized** — the electric field shakes in random directions. But when Rayleigh scattering bounces light sideways, something interesting happens: the scattered light becomes **polarized**. At 90° from the Sun, the sky is almost completely polarized in one direction.
 
-Rayleigh scattering naturally **polarizes** light. At 90° from the Sun, scattered skylight is almost 100% linearly polarized. Why:
-1. Incident wave oscillates the air molecule along the E-field direction
-2. Oscillating molecule radiates — but cannot radiate along its oscillation axis
-3. At 90°, one polarization direction is completely suppressed
+Why does this matter?
+- **Polarizing sunglasses** block reflected glare (reflected light is partially polarized)
+- **Camera polarizers** deepen blue skies by blocking the polarized component
+- **LCD screens** use two polarizers to control every pixel
+- **Bees** navigate using the sky's polarization pattern — they can "see" what we cannot
 
-**Malus's Law**: When polarized light passes through a polarizer at angle θ to the polarization direction: I = I₀ cos²θ
-
-Applications:
-- Polarizing sunglasses reduce glare (reflected light is partially polarized)
-- Camera polarizers deepen blue skies (polarized skylight at 90° from Sun)
-- LCD screens use polarization to control pixel brightness
-- Bees navigate using the sky's polarization pattern`,
+The rule is simple: when polarized light passes through a filter at angle θ to its polarization, the intensity follows **Malus's Law: I = I₀ × cos²θ**. At 0° — full transmission. At 90° — nothing passes. You will plot this in the code below.`,
       analogy: 'Imagine waving a rope through a picket fence. Vertical waves pass through vertical slits. Horizontal waves are blocked. A polarizing filter is a picket fence for photons — it passes one oscillation direction and blocks the perpendicular one.',
       storyConnection: 'A photographer at the Brahmaputra capturing the orange sunset would use a polarizing filter rotated to 90° from the Sun. The filter darkens the polarized blue sky, making the orange sunset pop against deep blue. Polarization is invisible to the naked eye but controls the aesthetics of every sunset photograph.',
       checkQuestion: 'Two polarizers are crossed at 90° — no light passes. Insert a third at 45° between them. Does light now pass through?',
@@ -324,26 +320,19 @@ print("  This demonstrates that polarizers PROJECT, not just filter.")`,
       successHint: 'Polarization adds an invisible dimension to light. It enables glare reduction, sky-deepening photography, LCD screens, 3D cinema, and bee navigation. Rayleigh scattering gives us this polarization for free, every clear day.',
     },
     {
-      title: 'Atmospheric modeling — simulating sky color with code',
-      concept: `To predict sky color computationally, we solve the **radiative transfer equation** through layers of atmosphere:
+      title: 'Building a sky model — predicting sunset colour',
+      concept: `You now have all the ingredients: Rayleigh scattering (1/λ⁴), Beer-Lambert law (e^(-τ)), and airmass. Let's combine them into a **function** that predicts the sky colour for any Sun angle, any humidity, any dust level.
 
-**dI/ds = -κI + j**
+The approach:
+1. Pick a Sun angle (0° = noon, 89° = sunset)
+2. Calculate **airmass** from the angle: \`airmass = 1 / cos(angle)\`
+3. For each wavelength, calculate **optical depth**: Rayleigh + Mie scattering × airmass
+4. Apply Beer-Lambert: \`surviving = solar × exp(-optical_depth)\`
+5. Convert the surviving spectrum to an RGB colour
 
-Where κ is the extinction coefficient and j is the source function (scattered light from other directions). A simplified single-scattering model:
+This is the core of what professional atmospheric models (MODTRAN, libRadtran) do — just with more layers and more physics. You are building a simplified version that produces surprisingly realistic results.
 
-1. Divide atmosphere into layers of thickness Δh
-2. At each layer: compute Rayleigh + Mie optical depth
-3. Apply Beer-Lambert: I = I₀ × e^(-τ)
-4. Add scattered light: each layer scatters some light toward the observer
-
-Real models (MODTRAN, libRadtran) include:
-- Multiple scattering (important at sunset)
-- Aerosol size distributions (log-normal)
-- Molecular absorption bands (O₃, H₂O, O₂, CO₂)
-- Surface albedo and terrain
-- Refraction (Sun visible after geometric set)
-
-A key insight: **atmospheric refraction** bends sunlight by about 0.5° near the horizon, making the Sun visible for ~2 minutes after it has geometrically set. This means every sunset you watch lasts slightly longer than pure geometry would predict.`,
+**Bonus physics:** Atmospheric refraction bends sunlight by about 0.5° near the horizon. This means you can see the Sun for ~2 minutes *after* it has geometrically set below the horizon. Every sunset lasts slightly longer than geometry predicts.`,
       analogy: 'An atmospheric model is like a flight simulator for photons. Instead of simulating an airplane flying through weather, it simulates billions of light rays bouncing through atmospheric layers. Each layer has its own temperature, density, and particle content. The output: a predicted sky color at any location, any time, any weather condition.',
       storyConnection: 'To predict the exact color of tonight\'s sunset over the Brahmaputra, you would need current weather data (humidity, aerosol content, cloud cover) fed into an atmospheric model. Such models exist and are used for satellite calibration, solar energy forecasting, and air quality assessment. The sunset is, in principle, calculable.',
       checkQuestion: 'Atmospheric refraction makes the Sun visible after it has set. Can you ever see a sunrise before the Sun has geometrically risen?',
@@ -437,8 +426,8 @@ print("  Desert (dry) → deep blue, vivid red sunsets")`,
       successHint: 'Computational atmospheric modeling is used for satellite calibration, solar energy prediction, and climate science. Your simplified model captures the essential physics that determines every sunset\'s color.',
     },
     {
-      title: 'Color temperature — light\'s warmth measured in Kelvin',
-      concept: `**Color temperature** describes a light source's color by matching it to a blackbody heated to that temperature:
+      title: 'Colour temperature — why sunsets feel warm',
+      concept: `Have you noticed that sunset light feels "warm" and fluorescent light feels "cold"? Photographers and filmmakers measure this with **colour temperature** in Kelvin:
 
 - **1,800 K**: candle — deep orange-red
 - **2,700 K**: incandescent bulb — warm yellow
@@ -528,8 +517,8 @@ print(f"  Candle: {2898000/1800:.0f} nm (infrared — mostly heat!)")`,
       successHint: 'Color temperature quantifies the warmth of light in a single number. It enables precise communication between photographers, cinematographers, display engineers, and lighting designers. The sunset\'s warmth is not just poetic — it is 2,200 Kelvin.',
     },
     {
-      title: 'Spectrophotometry — measuring light precisely',
-      concept: `**Spectrophotometry** measures light intensity as a function of wavelength. It is the workhorse measurement technique across physics, chemistry, biology, and environmental science.
+      title: 'Spectrophotometry — the instrument behind the science',
+      concept: `Everything you have coded so far — scattering curves, sunset spectra, transmission — a real scientist measures with a **spectrophotometer**. It shines light through a sample and records exactly how much of each wavelength comes out the other side. Your eye says "orange sunset." A spectrophotometer says "580nm: 0.43 W/m²/nm, 600nm: 0.51, 620nm: 0.48."
 
 A spectrophotometer has three parts:
 1. **Light source** (tungsten for visible, deuterium for UV)
@@ -664,6 +653,7 @@ print("  Stellar composition (astronomical spectroscopy)")`,
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
+            diagram={[WavelengthSpectrum, RayleighScatteringDiagram, WaveEquationDiagram, SunsetPathDiagram, HeatTransferDiagram, MieVsRayleighDiagram][i] ? createElement([WavelengthSpectrum, RayleighScatteringDiagram, WaveEquationDiagram, SunsetPathDiagram, HeatTransferDiagram, MieVsRayleighDiagram][i]) : undefined}
             pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
         ))}
       </div>

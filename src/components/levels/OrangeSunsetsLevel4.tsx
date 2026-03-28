@@ -1,6 +1,12 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Cpu } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
+import SunsetSimulatorOutputDiagram from '../diagrams/SunsetSimulatorOutputDiagram';
+import SunsetPathDiagram from '../diagrams/SunsetPathDiagram';
+import WavelengthSpectrum from '../diagrams/WavelengthSpectrum';
+import FlowchartDiagram from '../diagrams/FlowchartDiagram';
+import CorrelationDiagram from '../diagrams/CorrelationDiagram';
+import LinearGraphDiagram from '../diagrams/LinearGraphDiagram';
 
 export default function OrangeSunsetsLevel4() {
   const pyodideRef = useRef<any>(null);
@@ -1329,6 +1335,7 @@ print("  - Add twilight purple (ozone Chappuis band absorption)")`,
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
+            diagram={[FlowchartDiagram, CorrelationDiagram, WavelengthSpectrum, LinearGraphDiagram, SunsetSimulatorOutputDiagram, SunsetPathDiagram][i] ? createElement([FlowchartDiagram, CorrelationDiagram, WavelengthSpectrum, LinearGraphDiagram, SunsetSimulatorOutputDiagram, SunsetPathDiagram][i]) : undefined}
             pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
         ))}
       </div>

@@ -1,6 +1,12 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Cpu } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
+import RayleighScatteringDiagram from '../diagrams/RayleighScatteringDiagram';
+import MieVsRayleighDiagram from '../diagrams/MieVsRayleighDiagram';
+import SunsetPathDiagram from '../diagrams/SunsetPathDiagram';
+import WavelengthSpectrum from '../diagrams/WavelengthSpectrum';
+import SunsetSimulatorOutputDiagram from '../diagrams/SunsetSimulatorOutputDiagram';
+import WaveEquationDiagram from '../diagrams/WaveEquationDiagram';
 
 export default function OrangeSunsetsLevel3() {
   const pyodideRef = useRef<any>(null);
@@ -1011,6 +1017,7 @@ print("This is why sunset photos never look quite right.")`,
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
+            diagram={[RayleighScatteringDiagram, MieVsRayleighDiagram, SunsetPathDiagram, WavelengthSpectrum, SunsetSimulatorOutputDiagram, WaveEquationDiagram][i] ? createElement([RayleighScatteringDiagram, MieVsRayleighDiagram, SunsetPathDiagram, WavelengthSpectrum, SunsetSimulatorOutputDiagram, WaveEquationDiagram][i]) : undefined}
             pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
         ))}
       </div>
