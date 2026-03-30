@@ -19,6 +19,12 @@ import ActivitySilkTestDiagram from '../diagrams/ActivitySilkTestDiagram';
 import FoodWebDiagram from '../diagrams/FoodWebDiagram';
 import RayleighScatteringDiagram from '../diagrams/RayleighScatteringDiagram';
 import RiverErosionDiagram from '../diagrams/RiverErosionDiagram';
+import RiverSourceDiagram from '../diagrams/RiverSourceDiagram';
+import RiverTransportDiagram from '../diagrams/RiverTransportDiagram';
+import RiverBraidedDiagram from '../diagrams/RiverBraidedDiagram';
+import RiverFloodplainDiagram from '../diagrams/RiverFloodplainDiagram';
+import RiverDeltaDiagram from '../diagrams/RiverDeltaDiagram';
+import RiverOxbowDiagram from '../diagrams/RiverOxbowDiagram';
 import EcholocationDiagram from '../diagrams/EcholocationDiagram';
 import MusicalWavesDiagram from '../diagrams/MusicalWavesDiagram';
 import NewtonForceDiagram from '../diagrams/NewtonForceDiagram';
@@ -484,9 +490,19 @@ import AeroWingShapesDiagram from '../diagrams/AeroWingShapesDiagram';
 import BrainNeuronDiagram from '../diagrams/BrainNeuronDiagram';
 import BrainSynapseDiagram from '../diagrams/BrainSynapseDiagram';
 import BrainPlasticityDiagram from '../diagrams/BrainPlasticityDiagram';
+// Reference: Geology & Earth Science
+import GeoMountainGrowthDiagram from '../diagrams/GeoMountainGrowthDiagram';
+import GeoVolcanoDiagram from '../diagrams/GeoVolcanoDiagram';
+import GeoFossilDiagram from '../diagrams/GeoFossilDiagram';
+import GeoErosionProcessDiagram from '../diagrams/GeoErosionProcessDiagram';
 // Reference: Hydrology & Water Science
 import HydroAquiferDiagram from '../diagrams/HydroAquiferDiagram';
 import HydroPurificationDiagram from '../diagrams/HydroPurificationDiagram';
+import HydroGroundwaterDiagram from '../diagrams/HydroGroundwaterDiagram';
+import HydroWellDiagram from '../diagrams/HydroWellDiagram';
+import HydroRiverStagesDiagram from '../diagrams/HydroRiverStagesDiagram';
+import HydroFloodDroughtDiagram from '../diagrams/HydroFloodDroughtDiagram';
+import HydroDesalinationDiagram from '../diagrams/HydroDesalinationDiagram';
 // Reference: Structural Engineering
 import StructForcesDiagram from '../diagrams/StructForcesDiagram';
 import StructTriangleDiagram from '../diagrams/StructTriangleDiagram';
@@ -503,6 +519,25 @@ import SonarSensorDiagram from '../diagrams/SonarSensorDiagram';
 import TideMoonDiagram from '../diagrams/TideMoonDiagram';
 import TideSpringNeapDiagram from '../diagrams/TideSpringNeapDiagram';
 import OceanCurrentDiagram from '../diagrams/OceanCurrentDiagram';
+import OceanWaveAnatomyDiagram from '../diagrams/OceanWaveAnatomyDiagram';
+import OceanStormSurgeDiagram from '../diagrams/OceanStormSurgeDiagram';
+import OceanDepthZonesDiagram from '../diagrams/OceanDepthZonesDiagram';
+import OceanCoralReefDiagram from '../diagrams/OceanCoralReefDiagram';
+import OceanFunctionsDiagram from '../diagrams/OceanFunctionsDiagram';
+// Reference: Climate & Climate Zones
+import ClimateVsWeatherDiagram from '../diagrams/ClimateVsWeatherDiagram';
+import ClimateChangeDiagram from '../diagrams/ClimateChangeDiagram';
+// Reference: Maps & Navigation
+import MapGPSSatelliteDiagram from '../diagrams/MapGPSSatelliteDiagram';
+import MapGISLayersDiagram from '../diagrams/MapGISLayersDiagram';
+// Reference: Population & Urbanization
+import PopDistributionDiagram from '../diagrams/PopDistributionDiagram';
+import PopUrbanizationDiagram from '../diagrams/PopUrbanizationDiagram';
+import PopSustainabilityDiagram from '../diagrams/PopSustainabilityDiagram';
+// Reference: Natural Resources
+import ResourceRenewableDiagram from '../diagrams/ResourceRenewableDiagram';
+import ResourceForestDiagram from '../diagrams/ResourceForestDiagram';
+import ResourceCircularDiagram from '../diagrams/ResourceCircularDiagram';
 
 const registry: Record<string, ComponentType> = {
   SineWaveDiagram,
@@ -519,6 +554,12 @@ const registry: Record<string, ComponentType> = {
   FoodWebDiagram,
   RayleighScatteringDiagram,
   RiverErosionDiagram,
+  RiverSourceDiagram,
+  RiverTransportDiagram,
+  RiverBraidedDiagram,
+  RiverFloodplainDiagram,
+  RiverDeltaDiagram,
+  RiverOxbowDiagram,
   EcholocationDiagram,
   MusicalWavesDiagram,
   NewtonForceDiagram,
@@ -990,9 +1031,19 @@ const registry: Record<string, ComponentType> = {
   BrainNeuronDiagram,
   BrainSynapseDiagram,
   BrainPlasticityDiagram,
+  // Reference: Geology & Earth Science
+  GeoMountainGrowthDiagram,
+  GeoVolcanoDiagram,
+  GeoFossilDiagram,
+  GeoErosionProcessDiagram,
   // Reference: Hydrology & Water Science
   HydroAquiferDiagram,
   HydroPurificationDiagram,
+  HydroGroundwaterDiagram,
+  HydroWellDiagram,
+  HydroRiverStagesDiagram,
+  HydroFloodDroughtDiagram,
+  HydroDesalinationDiagram,
   // Reference: Structural Engineering
   StructForcesDiagram,
   StructTriangleDiagram,
@@ -1009,6 +1060,25 @@ const registry: Record<string, ComponentType> = {
   TideMoonDiagram,
   TideSpringNeapDiagram,
   OceanCurrentDiagram,
+  OceanWaveAnatomyDiagram,
+  OceanStormSurgeDiagram,
+  OceanDepthZonesDiagram,
+  OceanCoralReefDiagram,
+  OceanFunctionsDiagram,
+  // Reference: Climate & Climate Zones
+  ClimateVsWeatherDiagram,
+  ClimateChangeDiagram,
+  // Reference: Maps & Navigation
+  MapGPSSatelliteDiagram,
+  MapGISLayersDiagram,
+  // Reference: Population & Urbanization
+  PopDistributionDiagram,
+  PopUrbanizationDiagram,
+  PopSustainabilityDiagram,
+  // Reference: Natural Resources
+  ResourceRenewableDiagram,
+  ResourceForestDiagram,
+  ResourceCircularDiagram,
 };
 
 export default registry;
