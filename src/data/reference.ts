@@ -21,7 +21,9 @@ export interface InteractiveConfig {
 
 export interface ReferenceSection {
   title: string;
-  content: string;
+  content: string;            // Level 0 — everyone reads this (analogies, try-this, zero jargon)
+  goDeeper?: string;          // Level 1-2 — formulas, calculations, code snippets
+  advanced?: string;          // Level 3-4 — derivations, research, edge cases
   code?: string;
   diagram?: string;           // key into DiagramRegistry
   interactive?: InteractiveConfig;

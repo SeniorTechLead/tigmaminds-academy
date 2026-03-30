@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { ReferenceSection } from '../../data/reference';
 import diagramRegistry from './DiagramRegistry';
 import DiagramZoom from '../DiagramZoom';
@@ -175,12 +176,31 @@ interface Props {
   section: ReferenceSection;
 }
 
+function DepthTier({ label, icon, color, children }: { label: string; icon: string; color: string; children: React.ReactNode }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className={`mt-3 rounded-lg border ${color} overflow-hidden`}>
+      <button
+        onClick={() => setOpen(!open)}
+        className={`w-full flex items-center gap-2 px-3 py-2 text-left text-sm font-semibold transition-colors ${color}`}
+      >
+        <span>{icon}</span>
+        <span>{label}</span>
+        <svg className={`w-4 h-4 ml-auto transition-transform ${open ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      {open && (
+        <div className="px-3 pb-3 pt-1">
+          {children}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function SectionRenderer({ section }: Props) {
   const DiagramComponent = section.diagram ? diagramRegistry[section.diagram] : null;
-
-  if (section.diagram) {
-    console.log(`[SectionRenderer] title="${section.title}" diagram="${section.diagram}" found=${!!DiagramComponent} registryKeys=${Object.keys(diagramRegistry).join(',')}`);
-  }
 
   return (
     <div className="mb-6 last:mb-0">
@@ -188,8 +208,30 @@ export default function SectionRenderer({ section }: Props) {
         {section.title}
       </h4>
 
-      {/* Content text */}
+      {/* Level 0 content — everyone reads this */}
       {section.content && renderContent(section.content)}
+
+      {/* Level 1-2: Go Deeper — formulas, calculations */}
+      {section.goDeeper && (
+        <DepthTier
+          label="Go Deeper"
+          icon="🔬"
+          color="border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300"
+        >
+          {renderContent(section.goDeeper)}
+        </DepthTier>
+      )}
+
+      {/* Level 3-4: Advanced — derivations, research */}
+      {section.advanced && (
+        <DepthTier
+          label="Advanced"
+          icon="🚀"
+          color="border-purple-200 dark:border-purple-800 bg-purple-50/50 dark:bg-purple-950/30 text-purple-700 dark:text-purple-300"
+        >
+          {renderContent(section.advanced)}
+        </DepthTier>
+      )}
 
       {/* Code block */}
       {section.code && (
