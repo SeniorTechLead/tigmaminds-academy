@@ -538,6 +538,13 @@ import PopSustainabilityDiagram from '../diagrams/PopSustainabilityDiagram';
 import ResourceRenewableDiagram from '../diagrams/ResourceRenewableDiagram';
 import ResourceForestDiagram from '../diagrams/ResourceForestDiagram';
 import ResourceCircularDiagram from '../diagrams/ResourceCircularDiagram';
+// Reference: Music & Arts
+import MusicHarmonicsDiagram from '../diagrams/MusicHarmonicsDiagram';
+import MusicDecibelDiagram from '../diagrams/MusicDecibelDiagram';
+import RhythmBeatDiagram from '../diagrams/RhythmBeatDiagram';
+import DrumVibrationDiagram from '../diagrams/DrumVibrationDiagram';
+import ColorSpectrumArtDiagram from '../diagrams/ColorSpectrumArtDiagram';
+import PerspectiveDiagram from '../diagrams/PerspectiveDiagram';
 
 const registry: Record<string, ComponentType> = {
   SineWaveDiagram,
@@ -1079,6 +1086,13 @@ const registry: Record<string, ComponentType> = {
   ResourceRenewableDiagram,
   ResourceForestDiagram,
   ResourceCircularDiagram,
+  // Reference: Music & Arts
+  MusicHarmonicsDiagram,
+  MusicDecibelDiagram,
+  RhythmBeatDiagram,
+  DrumVibrationDiagram,
+  ColorSpectrumArtDiagram,
+  PerspectiveDiagram,
 };
 
 export default registry;
