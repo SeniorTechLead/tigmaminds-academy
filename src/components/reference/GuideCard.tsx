@@ -61,14 +61,17 @@ export default function GuideCard({ guide, defaultTab = 'understand', expandedSl
       }`}
     >
       {/* Collapsed header — always visible */}
-      <button
+      <div
         onClick={() => setIsExpanded(!isExpanded)}
-        className="w-full flex items-center gap-3 p-4 text-left"
+        className="w-full flex items-center gap-3 p-4 text-left cursor-pointer select-text"
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setIsExpanded(!isExpanded); }}
       >
         <span className="text-2xl flex-shrink-0">{guide.icon}</span>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
-            <h3 className="font-bold text-gray-900 dark:text-white text-base">
+            <h3 className="font-bold text-gray-900 dark:text-white text-base select-text">
               {highlightMatch(guide.title, searchQuery)}
             </h3>
             {category && (
@@ -104,7 +107,7 @@ export default function GuideCard({ guide, defaultTab = 'understand', expandedSl
         >
           <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
         </svg>
-      </button>
+      </div>
 
       {/* Expanded content */}
       <div
