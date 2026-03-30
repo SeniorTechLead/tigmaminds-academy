@@ -3005,52 +3005,99 @@ Tejimola's story tells us that kindness cannot be killed. You can bury it. You c
     level0: {
       concepts: [
         {
-          title: 'Vegetative Propagation: Growing Without Seeds',
+          title: 'Seeds of Survival: How Plants Make More Plants',
           paragraphs: [
-            'Most people think of plant reproduction in terms of seeds — but many plants can reproduce without them, through vegetative propagation. In this process, a new plant grows from a fragment of the parent plant: a stem cutting, a leaf, a piece of root, or a specialized structure like a tuber or runner. The new plant is genetically identical to the parent — a clone. This is possible because plant cells retain the ability to develop into any cell type, a property called totipotency.',
-            'Vegetative propagation occurs naturally in many species. Strawberry plants send out runners (stolons) — horizontal stems that grow along the ground, putting down roots at intervals and growing new plants at each node. Potatoes reproduce through tubers — swollen underground stems that store energy and sprout new plants from "eyes" (buds). Banyan trees send down aerial roots that become new trunks. Aspen trees spread through underground root systems: an entire grove of aspens may be a single organism, connected underground. The largest known organism on Earth is a quaking aspen clone in Utah called Pando — 47,000 trunks sharing one root system, covering 43 hectares.',
-            'Humans have used vegetative propagation for thousands of years. Grafting — attaching a cutting (scion) from one plant onto the rootstock of another — allows farmers to combine the fruit quality of one variety with the disease resistance or vigor of another. Nearly all apple trees in commercial orchards are grafted clones. Assamese farmers propagate tea plants from cuttings rather than seeds to maintain consistent leaf quality. Plant tissue culture takes this further: a few cells grown in a nutrient medium in a laboratory can produce thousands of identical plantlets, enabling rapid multiplication of valuable or endangered species.',
+            'Imagine you want to make copies of your favourite drawing. You have two options: trace it exactly (you get a perfect copy, but if the paper tears, every copy has the same weak spot) — or hand it to a friend and say "draw something like this" (every version is a little different, and some might actually be better than the original). Plants face this exact choice every time they reproduce. The first method — exact copying — is called **vegetative propagation**. The second — mixing instructions from two parents — is **sexual reproduction** using seeds. Both work. Both have trade-offs. And understanding those trade-offs is the key to understanding how life survives.',
+            'Let\'s start with seeds. A flower is not decoration — it is a reproductive factory. Inside every flower are **pollen grains** (the plant\'s version of sperm) and **ovules** (the plant\'s version of eggs). When pollen lands on the right flower — carried by wind, water, or a bee\'s fuzzy legs — it fuses with an ovule. The result is a **seed**: a tiny package containing an embryo (baby plant), a food supply (to fuel early growth), and a tough coat (to survive drought, cold, or being eaten by a bird and pooped out kilometres away). Each seed carries DNA from *two* parents, so every seedling is genetically unique. That uniqueness is why seeds matter: in a field of 10,000 unique seedlings, at least some will survive whatever disease, drought, or pest comes next.',
+            'Now the other option: **vegetative propagation** — making new plants without seeds at all. Cut a stem from a tulsi plant, put it in water, and roots grow from the cut end within a week. The new plant is a perfect genetic copy — a **clone**. Strawberries send horizontal stems called runners along the ground; each runner puts down roots and becomes a new plant. Potatoes sprout from underground tubers. Banyan trees drop aerial roots that become new trunks. The largest organism on Earth is a clonal grove of aspen trees in Utah called Pando — 47,000 trunks sharing one root system. Every trunk is genetically identical. Cloning is fast and reliable, but it carries a hidden danger: if one clone is vulnerable to a disease, *every* clone is vulnerable. In the 1950s, the Gros Michel banana — the world\'s favourite — was wiped out by a fungus. Every tree was a clone. Today\'s Cavendish banana is also a clone, and a new strain of the same fungus is threatening it right now.',
+            'Before you move on, make a prediction: if a farmer wants identical, predictable fruit, should they use seeds or cuttings? What about a forest conservationist trying to save an endangered species? The answer is different for each — and by the end of this concept, you should be able to explain why.',
           ],
-          keyIdea: 'Plants can reproduce without seeds through vegetative propagation — cuttings, runners, tubers, and tissue culture all produce clones, possible because plant cells are totipotent (able to become any cell type).',
+          keyIdea: 'Plants reproduce two ways: seeds (mix DNA from two parents, create unique offspring, ensure diversity) and vegetative propagation (clone from one parent, fast and identical, but vulnerable to shared threats).',
+          diagram: 'TejimolaPlantReproDiagram',
         },
         {
-          title: 'Totipotency: Every Cell Contains the Whole Blueprint',
+          title: 'The Instruction Manual Inside Every Cell',
           paragraphs: [
-            'Totipotency is the ability of a single cell to divide and develop into a complete, new organism. In animals, only the fertilized egg and the first few cells after division are totipotent — after that, cells specialize and lose the ability to become other cell types. But in plants, differentiated cells can reverse their specialization and revert to an undifferentiated state capable of forming any tissue. A leaf cell can become a root cell. A stem cell can become a flower. This is fundamentally different from how animal bodies work.',
-            'The molecular basis of totipotency lies in gene regulation. Every cell in an organism contains the same complete set of DNA — the same genome. What makes a leaf cell different from a root cell is not different genes, but different genes being switched on and off. In plant cells, these switches can be reset more easily than in animal cells, partly because plants use different epigenetic mechanisms (chemical modifications to DNA and its associated proteins that control gene expression without changing the DNA sequence). When a plant cell is wounded or exposed to certain hormones, the epigenetic marks can be erased, returning the cell to a stem-cell-like state.',
-            'This property is exploited in plant tissue culture. Scientists place small pieces of plant tissue on a nutrient medium containing specific ratios of two plant hormones: auxin and cytokinin. High auxin promotes root formation; high cytokinin promotes shoot formation; equal amounts promote the formation of undifferentiated cell masses called callus. By adjusting the hormone ratios in sequence — first callus formation, then shoot induction, then root induction — a single plant cell can be guided to regenerate an entire new plant. This technique is used to produce millions of identical plants for agriculture, conserve endangered species, and create genetically modified crops.',
+            'You and a tulsi plant don\'t look anything alike. But zoom in far enough — past the skin, past the tissue, down to a single cell — and you\'ll find the same molecule running the show in both of you: **DNA**. DNA is a long, twisted ladder (the famous **double helix**) made of just four chemical "letters": **A** (adenine), **T** (thymine), **C** (cytosine), and **G** (guanine). These four letters, arranged in different orders, spell out every instruction needed to build and run a living organism. Your DNA has about 3.2 billion letters. A tulsi plant has about 386 million. Wheat has 17 billion — five times more than you. Size doesn\'t equal complexity; what matters is which instructions are active.',
+            'Here\'s the rule that makes DNA work: **A always pairs with T, and C always pairs with G**. These are called base-pairing rules (or Chargaff\'s rules, after the scientist who discovered them). The two strands of the DNA ladder are held together by these pairs, like a zipper with matched teeth. This pairing rule is what allows DNA to copy itself: unzip the ladder, and each half is a template for rebuilding the other half. Every time a cell divides — in your body right now, roughly 3.8 million times per second — every letter of your DNA is copied. Most copies are perfect. When they\'re not, that\'s a mutation (we\'ll get to those next).',
+            'A **gene** is a section of DNA that contains the instructions for building one specific protein. Proteins do everything: they build cell walls, run photosynthesis, create flower pigments, fight infections, digest food. You have about 20,000 genes; a tulsi plant has roughly 35,000. But here\'s the twist: every cell in your body has the same complete set of DNA — the same 20,000 genes. What makes a skin cell different from a brain cell is not different DNA, but different genes being **switched on and off**. A leaf cell reads the "make chlorophyll" gene; a root cell reads the "absorb water" gene. Same cookbook, different recipes active in different rooms.',
+            'Check yourself: if every cell in your body has the same DNA, why can\'t your skin cells do photosynthesis? (Hint: it\'s not that they lack the gene — it\'s that the gene is switched off. Plants have the gene switched on in their leaf cells because of a different pattern of gene regulation.)',
           ],
-          keyIdea: 'Plant cells are totipotent — any cell can become any other cell type because gene switches can be reset by plant hormones — which is why a cutting can grow into a whole new plant.',
+          keyIdea: 'DNA is a four-letter code (A, T, C, G) that carries all instructions for life. Genes are sections of DNA that build proteins. Every cell has the same DNA — different genes switched on = different cell types.',
+          diagram: 'TejimolaDNADiagram',
         },
         {
-          title: 'Meristems: The Growth Engines of Plants',
+          title: 'When Genes Go Wrong: Mutations',
           paragraphs: [
-            'Unlike animals, which generally stop growing when they reach adult size, plants continue growing throughout their entire lives. This perpetual growth occurs at specific regions called meristems — clusters of undifferentiated cells that divide rapidly, producing the raw material for new leaves, stems, roots, flowers, and wood. There are two main types: apical meristems at the tips of shoots and roots (responsible for lengthening the plant) and lateral meristems within the stems (responsible for thickening).',
-            'Apical meristems are tiny — the shoot apical meristem of most plants is less than 1 millimeter across — but they are extraordinarily productive. The meristem at the tip of a bamboo shoot can drive growth of up to 91 centimeters per day (the fastest-growing plant on record). Meristem cells divide in carefully controlled patterns: some daughter cells remain as meristem cells (maintaining the growth zone), while others begin to differentiate into specialized tissues — vascular tissue (for water and nutrient transport), epidermal tissue (the plant\'s skin), or ground tissue (for storage and photosynthesis).',
-            'Meristems are critical for vegetative propagation because they are the source of new growth. When you take a stem cutting and place it in water or soil, the meristem cells at the nodes (where leaves attach to the stem) are activated by the plant hormone auxin, which accumulates at the cut end due to gravity (gravitropism). These activated meristem cells begin dividing and differentiating into root cells — a process called adventitious root formation. This is how a piece of a plant can regenerate into a complete organism: the meristem provides the growth potential, and the hormonal signals tell it what to become.',
+            'Every time a cell divides, its DNA is copied — all 3.2 billion letters (in humans) or 386 million (in tulsi). The copying machinery is astonishingly accurate: it makes roughly one mistake per billion letters. But even one-in-a-billion adds up. Over your lifetime, your cells divide trillions of times. Mistakes accumulate. Each mistake is called a **mutation** — a permanent change in the DNA sequence.',
+            'There are three main types. A **substitution** swaps one letter for another (like changing "CAT" to "CAR" — same length, different meaning). An **insertion** adds an extra letter (like changing "THE CAT SAT" to "THE CAAT SAT" — everything after the insertion is shifted and becomes gibberish). A **deletion** removes a letter (same problem — everything shifts). Insertions and deletions are called **frameshift mutations** because they shift the "reading frame" of the gene, usually destroying the protein it encodes.',
+            'Most mutations are **neutral** — they fall in parts of the DNA that don\'t code for anything important, or they change a letter without changing the resulting protein. Some are **harmful** — they break a gene, causing disease (sickle cell anemia is caused by a single letter change in the hemoglobin gene). But very rarely, a mutation is **beneficial** — it creates a protein that works better than the original. A tulsi plant with a mutation that produces more eugenol (its natural insect repellent) would be better at surviving, produce more seeds, and pass that mutation to its offspring. Over thousands of generations, the entire population would carry that beneficial mutation. This is how evolution works: random mutations + natural selection = adaptation.',
+            'Humans now deliberately create mutations. **GMOs** (genetically modified organisms) like Bt cotton have a bacterial gene inserted that makes the plant poisonous to bollworms but harmless to humans. **CRISPR** gene editing can change a single letter of DNA with surgical precision — like a find-and-replace in a 3-billion-letter document. Golden rice has been engineered to produce vitamin A, addressing blindness in millions of children. Whether you think GMOs are a miracle or a risk, the underlying biology is the same: change the DNA, change the organism.',
           ],
-          keyIdea: 'Meristems are regions of undifferentiated dividing cells at shoot tips and root tips — they enable plants to grow indefinitely and are the biological basis for why cuttings can root and regenerate into new plants.',
-          diagram: 'PhotosynthesisDiagram',
+          keyIdea: 'Mutations are copying errors in DNA — most are neutral, some are harmful, and rare beneficial ones drive evolution. Humans now deliberately create mutations through genetic engineering (GMOs, CRISPR).',
+          diagram: 'TejimolaMutationDiagram',
+        },
+        {
+          title: 'From Myth to Medicine: Plants, People, and Genetics',
+          paragraphs: [
+            'For thousands of years before anyone knew what DNA was, people around the world discovered which plants could heal. In Assam, grandmothers made tulsi tea for colds. In South India, turmeric paste went on every wound. Neem leaves were crushed and spread around grain stores to keep insects away. These weren\'t superstitions — they were empirical observations, tested over hundreds of generations. The tradition of using plants for medicine is as old as human civilization itself.',
+            'Modern science has confirmed what traditional knowledge discovered by trial and error — and explained *why* it works. Tulsi\'s healing properties come from **eugenol**, a molecule produced by a specific gene family (EGS genes) that acts as an antimicrobial — it kills bacteria on contact. Turmeric\'s anti-inflammatory effect comes from **curcumin**, synthesized by CURS genes, which blocks a protein called NF-kB that triggers inflammation. Neem\'s insecticidal power is **azadirachtin**, a complex terpenoid that disrupts insect hormones so they can\'t feed or reproduce. In each case, the traditional use pointed scientists to the right plant, and genetics revealed the mechanism.',
+            'This intersection of traditional knowledge and modern genetics is one of the most exciting frontiers in biology. Scientists are now using genomics (reading the complete DNA of an organism) to identify which genes produce which medicinal compounds, and then using CRISPR to boost production. A tulsi plant engineered to produce 5x more eugenol could replace synthetic antiseptics. A turmeric variety with higher curcumin content could improve cancer treatments. India\'s Traditional Knowledge Digital Library (TKDL) has documented over 300,000 traditional formulations specifically to protect them from being patented by foreign companies — recognizing that this knowledge is both scientifically valuable and culturally owned.',
+            'Tejimola\'s story ends with a champa tree that cannot be cut down. In real life, the knowledge of how plants work — from DNA to medicinal compounds — is the thing that cannot be destroyed. Every generation inherits it, adds to it, and passes it on. The "spirit" in the story is knowledge itself: it keeps growing back, in new forms, more powerful each time.',
+          ],
+          keyIdea: 'Traditional plant medicine (tulsi, neem, turmeric) works because specific genes produce specific healing compounds — modern genetics is now identifying those genes and engineering plants to produce more of them.',
+          diagram: 'TejimolaTraditionalMedicineDiagram',
         },
       ],
       vocabulary: [
-        ['Photosynthesis', 'The process plants use to convert sunlight, water, and CO₂ into sugar and oxygen'],
-        ['Chlorophyll', 'The green pigment in plants that absorbs sunlight for photosynthesis'],
-        ['Vegetative propagation', 'Growing a new plant from a fragment of the parent — without seeds'],
-        ['Totipotent', 'A cell that can develop into any cell type — plant cells have this superpower'],
-        ['Cell wall', 'A rigid outer layer made of cellulose that gives plant cells their shape and strength'],
+        ['Vegetative propagation', 'Growing a new plant from a fragment of the parent — a cutting, runner, or tuber — without seeds, producing a genetic clone'],
+        ['DNA (deoxyribonucleic acid)', 'The molecule inside every cell that carries all genetic instructions, written in a four-letter code: A, T, C, G'],
+        ['Gene', 'A section of DNA that contains instructions for building one specific protein — the functional unit of heredity'],
+        ['Mutation', 'A permanent change in the DNA sequence — can be neutral, harmful, or (rarely) beneficial'],
+        ['Clone', 'An organism genetically identical to its parent, produced by vegetative propagation or artificial copying'],
+        ['CRISPR', 'A gene-editing tool that can change specific letters of DNA with precision — like find-and-replace for genetics'],
+        ['Eugenol', 'The antimicrobial compound in tulsi (holy basil) that gives it its characteristic smell and healing properties'],
       ],
       trueFalse: [
-        { statement: 'Plants eat soil to get their food.', isTrue: false, explanation: 'Plants make their own food through photosynthesis using sunlight, water, and CO₂ from air. The soil provides minerals and water, but the actual "food" (sugar) is manufactured inside the leaves using solar energy.' },
-        { statement: 'A single plant cell can grow into an entire new plant.', isTrue: true, explanation: 'Unlike most animal cells, many plant cells are totipotent — they retain the ability to become any cell type. This is why you can grow a new plant from a cutting — the cut stem cells reorganize into roots, stems, and leaves.' },
-        { statement: 'All plants reproduce using seeds.', isTrue: false, explanation: 'Many plants can also reproduce vegetatively — through cuttings, runners, tubers, or bulbs. Every banana plant in your grocery store is a clone, grown from a cutting rather than a seed.' },
+        { statement: 'A plant grown from a cutting has different DNA from its parent.', isTrue: false, explanation: 'A cutting produces a clone — genetically identical to the parent. Only sexual reproduction (seeds) mixes DNA from two parents to create unique offspring.' },
+        { statement: 'Most mutations in DNA are harmful.', isTrue: false, explanation: 'Most mutations are neutral — they fall in non-coding regions or don\'t change the resulting protein. Only a small fraction are harmful, and even fewer are beneficial. But beneficial mutations, over time, drive evolution.' },
+        { statement: 'Tulsi has been used as medicine for thousands of years because it contains eugenol, a natural antimicrobial.', isTrue: true, explanation: 'Traditional use of tulsi for treating colds and infections predates modern science by millennia. The active compound eugenol was identified later, confirming that the traditional knowledge was scientifically sound.' },
       ],
       facts: [
-        'Photosynthesis produces all the oxygen we breathe. Every other breath you take comes from algae and plants splitting water molecules apart.',
-        'The world\'s largest organism is a clonal colony of aspen trees in Utah called "Pando" — 47,000 tree stems all connected by a single root system, weighing 6,600 tonnes.',
-        'Tulsi (holy basil) contains eugenol, a natural antiseptic. Traditional medicine used it for centuries — modern science has confirmed its antimicrobial properties.',
+        'The world\'s largest organism is Pando, a clonal grove of aspen trees in Utah — 47,000 trunks sharing one root system, covering 43 hectares, all genetically identical.',
+        'Your body copies its DNA roughly 3.8 million times per second, with about one mistake per billion letters copied — yet over a lifetime, those rare errors add up to thousands of mutations.',
+        'India\'s Traditional Knowledge Digital Library has documented over 300,000 traditional formulations to protect ancestral plant medicine knowledge from being patented by foreign companies.',
       ],
-      offlineActivity: 'Take a cutting from a plant (a small piece of stem with a few leaves). Place it in a glass of water on a windowsill. Check every day — within a week, you should see tiny roots forming. You\'re witnessing vegetative propagation — the same process that makes Tejimola\'s story biologically plausible.',
+      offlineActivity: 'Grow tulsi two ways at the same time: (1) plant 5 tulsi seeds in a small pot of moist soil, and (2) cut a 10 cm stem from an existing tulsi plant and place it in a glass of water. Observe both every day for 3 weeks. Measure height, count leaves, and note when roots appear on the cutting. The seeds produce genetically unique plants (sexual reproduction); the cutting is a clone (vegetative propagation). Which grows faster? Which shows more variation in height? Your results demonstrate the trade-off between speed and diversity.',
+      offlineActivityDiagram: 'ActivitySeedGrowDiagram',
+      codeTeaser: `# How fast do cells multiply?
+import numpy as np
+import matplotlib.pyplot as plt
+
+hours = np.arange(0, 168)   # one week
+cells = 2 ** (hours / 24)   # doubling daily
+
+plt.figure(figsize=(8, 4))
+plt.plot(hours, cells, color='#22c55e')
+plt.xlabel('Time (hours)')
+plt.ylabel('Number of cells')
+plt.title('One cell becomes 128 in a week')
+plt.show()
+# What if cells divided every 12 hours instead?`,
+      referenceLinks: [
+        { slug: 'dna-and-genes', reason: 'Complete reference on DNA structure, base pairing, gene expression, and protein synthesis' },
+        { slug: 'mutations-and-evolution', reason: 'Detailed coverage of mutation types, natural selection, and how populations evolve' },
+      ],
+      nextLessons: [
+        { slug: 'golden-deer-of-kamakhya', reason: 'Explores animal genetics and inheritance patterns — the next step after plant genetics' },
+        { slug: 'muga-silk-golden', reason: 'Connects plant biology to the som tree that feeds muga silkworms — biology meets materials science' },
+      ],
+      quiz: [
+        { question: 'What is the main advantage of sexual reproduction (seeds) over vegetative propagation (cloning)?', options: ['It is faster', 'It produces genetic diversity', 'The offspring are stronger', 'It requires less energy'], answer: 1 },
+        { question: 'Which base always pairs with adenine (A) in DNA?', options: ['Cytosine (C)', 'Guanine (G)', 'Thymine (T)', 'Uracil (U)'], answer: 2 },
+        { question: 'What type of mutation shifts the entire reading frame of a gene?', options: ['Substitution', 'Duplication', 'Insertion or deletion', 'Silent mutation'], answer: 2 },
+        { question: 'Why does tulsi have antimicrobial properties?', options: ['Because of its green colour', 'Because it contains eugenol, encoded by EGS genes', 'Because it absorbs UV light', 'Because it grows near temples'], answer: 1 },
+      ],
     },
   },
   {
@@ -3170,53 +3217,77 @@ The spring still flows. If you climb Nilachal Hill past the Kamakhya temple and 
     level0: {
       concepts: [
         {
-          title: 'The Electromagnetic Spectrum and Visible Light',
+          title: 'What Is Light?',
           paragraphs: [
-            'Light is electromagnetic radiation — oscillating electric and magnetic fields that travel through space at 299,792,458 meters per second (the speed of light, c). The electromagnetic spectrum encompasses an enormous range of wavelengths: from radio waves (wavelengths of meters to kilometers) through microwaves, infrared, visible light, ultraviolet, X-rays, to gamma rays (wavelengths smaller than atomic nuclei). Visible light occupies a remarkably narrow band — from about 380 nm to 700 nm — just a tiny fraction of the full spectrum.',
-            'The energy of electromagnetic radiation is inversely proportional to its wavelength: E = hc/λ, where h is Planck\'s constant (6.626 × 10⁻³⁴ J·s). This means short-wavelength radiation (violet, ultraviolet, X-rays) carries more energy per photon than long-wavelength radiation (red, infrared, radio). This is why ultraviolet light can cause sunburn (its photons have enough energy to damage DNA molecules) while infrared light just makes you feel warm (its photons can only excite molecular vibrations, not break chemical bonds).',
-            'Why can we see only this narrow band? Because water — which fills our eyes and bodies — is transparent to these wavelengths. Shorter wavelengths (UV) are absorbed by the cornea and lens. Longer wavelengths (infrared) are absorbed by the water in the vitreous humor. Our eyes evolved to use the narrow window of wavelengths that can actually pass through biological tissue and reach the retina. It is also no coincidence that the sun\'s emission peaks near this same range — our eyes evolved to make the best use of the available light.',
+            'In the story, the golden deer stood in a forest clearing and its coat *glowed*. Not with fire. Not with paint. With **light**. But what actually is light? Where does it come from? And how does it travel from a deer\u2019s coat to your eyes?',
+            'Here is an experiment you have already done without realising it. Drop a stone into a still pond. Ripples spread outward in circles \u2014 peaks and troughs, peaks and troughs. Those ripples are **waves**. Now imagine the ripples are invisible, travel at **300,000 kilometres per second**, and carry energy. That is light. It is a wave \u2014 specifically, an **electromagnetic wave** \u2014 a ripple in electric and magnetic fields that needs no water, no air, nothing at all to travel through. Light moves happily through the vacuum of space. That is how sunlight reaches Earth from 150 million kilometres away in just 8 minutes and 20 seconds.',
+            'Light waves have two key measurements. **Wavelength** is the distance from one peak to the next (measured in nanometres \u2014 billionths of a metre). **Frequency** is how many peaks pass a point per second (measured in Hertz). These are linked by a simple rule: **speed = wavelength \u00d7 frequency**. Since the speed of light is constant, shorter wavelength always means higher frequency and more energy.',
+            'Here is the surprising part: the light your eyes can see \u2014 the **visible spectrum** from violet (380 nm) to red (700 nm) \u2014 is a tiny sliver of a much larger family. Radio waves, microwaves, infrared, ultraviolet, X-rays, gamma rays \u2014 these are *all* light, just at wavelengths your eyes cannot detect. Your phone uses radio waves (wavelengths of centimetres). A hospital X-ray uses light with wavelengths smaller than atoms. The golden deer\u2019s colour? That is light at roughly 570\u2013600 nm \u2014 a narrow band we perceive as gold.',
+            '**Check yourself:** If light travels at 300,000 km/s and the Moon is 384,400 km away, how long does moonlight take to reach you? (Answer: about 1.28 seconds. Fast \u2014 but not instant. When Apollo astronauts spoke to Houston, there was a noticeable delay.)',
           ],
-          keyIdea: 'Visible light is a tiny slice of the electromagnetic spectrum — we see it because water is transparent to these wavelengths and the sun emits most strongly in this range, so our eyes evolved to use it.',
-          diagram: 'WavelengthSpectrum',
+          keyIdea: 'Light is an electromagnetic wave travelling at 300,000 km/s. Its wavelength determines everything: colour, energy, and what it can do. Visible light is just a tiny slice of the full spectrum \u2014 the golden deer\u2019s coat reflected wavelengths around 570\u2013600 nm.',
+          diagram: 'DeerLightSpectrumDiagram',
         },
         {
-          title: 'Emission Spectra: How Every Element Has a Unique Fingerprint',
+          title: 'Why Gold Shines',
           paragraphs: [
-            'When an element is heated to high temperature (in a flame or an electric discharge), its atoms emit light — but not at all wavelengths. Instead, each element emits only at specific wavelengths, producing a pattern of bright colored lines called an emission spectrum. Hydrogen emits at 656 nm (red), 486 nm (blue-green), 434 nm (violet), and a few others. Sodium emits a characteristic bright yellow doublet at 589.0 and 589.6 nm — the color you see in sodium streetlights. No two elements have the same emission spectrum.',
-            'This happens because of quantum mechanics. Electrons in an atom can only occupy specific energy levels — not any energy they want, but discrete, quantized values determined by the atom\'s structure. When an electron absorbs energy (from heat or electricity), it jumps to a higher energy level. When it falls back down, it emits a photon whose energy exactly equals the difference between the two levels: E_photon = E_high - E_low. Since the energy levels are unique to each element, the photon energies (and therefore wavelengths) are unique too. The emission spectrum is essentially a fingerprint of the atom\'s internal structure.',
-            'Spectroscopy — the analysis of emission and absorption spectra — is one of the most powerful tools in science. Astronomers determine the composition of distant stars by analyzing their light spectra. Environmental scientists detect pollutants by their spectral signatures. Forensic scientists identify materials at crime scenes. Even the element helium was discovered in the sun\'s spectrum (1868) before it was found on Earth (1895) — its name comes from Helios, the Greek sun god. Every element in the universe announces its presence through its unique pattern of light.',
+            'The story says the deer\u2019s coat had \u201ca warm, pulsing glow, as if the animal were lit from within.\u201d That is beautiful writing \u2014 but physically, nothing was lit from within. The deer shone because of **reflection**: light from the sun hit the coat and bounced back to the observers\u2019 eyes. That is all \u201cshining\u201d is \u2014 reflected light.',
+            'Reflection follows one iron rule: **the angle of incidence equals the angle of reflection**. Imagine throwing a ball at a flat wall \u2014 it bounces off at the same angle it hit. Light does exactly this. But *how* it bounces depends on the surface.',
+            'A **mirror** (or polished metal, or still water) is smooth at the microscopic level. Light rays all bounce in the same direction, so you see a clear image. This is **specular reflection**. A sheet of **paper** (or cloth, or deer fur) is rough at the microscopic level. Light rays hit bumps pointing in different directions and scatter everywhere. This is **diffuse reflection** \u2014 you can see the surface from any angle, but there is no clear image.',
+            'Now the key question: **why does gold look golden?** When white light (which contains all colours) hits gold metal, the surface absorbs blue and violet wavelengths. The remaining wavelengths \u2014 reds, oranges, yellows \u2014 bounce back to your eyes. Your brain combines them and says \u201cgold.\u201d Silver, by contrast, reflects all wavelengths almost equally, so it looks white-grey. A red T-shirt absorbs everything except red and reflects that back. **The colour of any object is determined by which wavelengths it reflects and which it absorbs.**',
+            '**A prediction you can test:** Find a red object and look at it under pure blue light (cover a phone torch with blue cellophane). The red object will look almost black \u2014 because there is no red light to reflect. The object has not changed; the available light has.',
           ],
-          keyIdea: 'Each element emits light at specific wavelengths determined by its electron energy levels — this unique spectral fingerprint allows scientists to identify elements in stars, flames, and forensic samples.',
+          keyIdea: 'An object\u2019s colour is determined by which wavelengths it reflects and which it absorbs. Gold absorbs blue light and reflects yellow-red wavelengths, which is why gold \u2014 and the golden deer \u2014 appears golden.',
+          diagram: 'DeerReflectionDiagram',
         },
         {
-          title: 'Color Perception: How Your Brain Creates Color',
+          title: 'Bending Light',
           paragraphs: [
-            'Color does not exist in the physical world — it is a construct of the brain. What exists physically is electromagnetic radiation at various wavelengths. What you perceive as "red" is your brain\'s interpretation of signals from cone cells in your retina that are stimulated by light near 620-700 nm. Other animals with different cone cells perceive the same wavelengths differently or not at all. A dog sees the world mostly in blues and yellows because it has only two types of cone cells, while a mantis shrimp has sixteen types and perceives colors we cannot even imagine.',
-            'Human color vision works through three types of cone cells, labeled S (short-wavelength, peaking near 420 nm/blue), M (medium, peaking near 530 nm/green), and L (long, peaking near 560 nm/yellow-green). Each cone type responds to a broad range of wavelengths, not just one. Your brain determines color by comparing the relative activation of all three cone types. For example, light at 580 nm (pure yellow) stimulates L cones strongly and M cones moderately. But a mixture of red (620 nm) and green (540 nm) light — two different wavelengths — stimulates the same ratio of L and M cones, so your brain perceives the same yellow. This is called metamerism, and it is why TV screens can create millions of apparent colors using only red, green, and blue pixels.',
-            'The golden color of the deer in the story — or of Muga silk, or of a sunset — is perceived as gold because it activates L and M cones strongly while activating S cones weakly. Gold is essentially a warm yellow with reduced blue content. Interestingly, there is no single wavelength of light that corresponds to all perceived colors. Magenta, for instance, has no wavelength — it is your brain\'s invention to represent the simultaneous stimulation of L (red-sensitive) and S (blue-sensitive) cones without M (green-sensitive) activation. Color is fundamentally a neural computation, not a property of light.',
+            'Reflection is light bouncing. **Refraction** is light bending \u2014 and it creates some of the most beautiful effects in nature: rainbows, the shimmer of water, and the sparkle of diamonds.',
+            'Here is the key idea. Light travels at different speeds in different materials. In vacuum (or air), it moves at 300,000 km/s. In water, it slows to about 225,000 km/s. In glass, about 200,000 km/s. In diamond, only 124,000 km/s. When a light ray crosses from one material to another at an angle, **the speed change causes it to bend**. This is refraction.',
+            'Think of it like this: imagine you are running on a beach toward the sea at an angle. One foot hits the water first and slows down, while the other foot is still on dry sand, moving fast. What happens? You swerve \u2014 your direction changes. Light does exactly the same thing at the boundary between air and water, or air and glass.',
+            'This explains **prisms and rainbows**. White sunlight enters a glass prism. Different colours have slightly different speeds in glass: violet slows down the most, red slows down the least. So violet bends the most and red bends the least. The colours separate, and white light fans out into a rainbow. A raindrop does the same thing \u2014 sunlight enters, refracts, reflects off the back, and refracts again on the way out. Billions of raindrops, each at a slightly different angle to your eye, create the arc of a rainbow.',
+            '**Check yourself:** You put a straw in a glass of water and it looks \u201cbroken\u201d at the waterline. Is the straw actually bent? (Answer: no \u2014 the light rays coming from the underwater part of the straw bend as they exit the water into air. Your brain assumes light travels in straight lines, so it \u201csees\u201d the straw in the wrong position. The straw is fine; your perception is tricked.)',
           ],
-          keyIdea: 'Color is a brain construction, not a physical property — three types of cone cells respond to broad wavelength ranges, and your brain infers color from their relative activation ratios.',
-          diagram: 'EyeAnatomyDiagram',
+          keyIdea: 'Light bends (refracts) when it changes speed between materials. Different wavelengths bend by different amounts \u2014 violet most, red least \u2014 which is why prisms and raindrops split white light into a rainbow.',
+          diagram: 'DeerRefractionDiagram',
+        },
+        {
+          title: 'Seeing Is Believing?',
+          paragraphs: [
+            'The villagers in the story saw the golden deer and were stunned. But here is a question the story does not ask: **can you always trust what you see?** The answer, surprisingly, is no. Your eyes are good, but your brain is the one that actually \u201csees\u201d \u2014 and your brain makes shortcuts that can be wrong.',
+            'Your eyes work like a camera. Light enters through the **cornea** (the clear front window), passes through the **pupil** (the adjustable aperture), gets focused by the **lens**, and projects an upside-down image onto the **retina** at the back. The retina has about 130 million **rod cells** (which detect brightness) and 6 million **cone cells** (which detect colour \u2014 three types: red, green, blue). These cells convert light into electrical signals that travel along the **optic nerve** to your brain.',
+            'Here is where it gets interesting. The retina sends your brain a rough, incomplete image. The brain fills in gaps, corrects the upside-down flip, smooths out the blind spot (where the optic nerve exits \u2014 no light detectors there), and makes assumptions about depth, motion, and colour. Most of the time these assumptions are perfect. But **optical illusions** exploit the exact places where the assumptions go wrong.',
+            'Two squares of identical grey look different when one is on a dark background and one is on a light background \u2014 because your brain judges brightness *relative to surroundings*, not in absolute terms. Two lines of identical length look different when one has outward arrows and one has inward arrows (the M\u00fcller-Lyer illusion) \u2014 because your brain uses arrow direction as a depth cue. **Persistence of vision** makes a spinning fan blade look like a solid disc \u2014 because your retina holds an image for about 1/25th of a second after the light is gone, so fast-moving images blur together. This is exactly how movies work: 24 still frames per second, blended by your brain into smooth motion.',
+            '**A prediction:** If you stare at a bright red circle for 30 seconds, then look at a white wall, you will see a **cyan (blue-green) ghost circle**. Why? Your red cone cells get tired and temporarily stop responding. The white wall reflects all colours, but your fatigued red cones cannot report the red portion \u2014 so your brain sees only the blue-green that remains. Try it.',
+          ],
+          keyIdea: 'Your eyes detect light, but your brain constructs what you \u201csee\u201d \u2014 filling gaps, making assumptions, and sometimes getting tricked. Optical illusions reveal the shortcuts your brain uses, and persistence of vision is why movies and spinning objects appear to move smoothly.',
+          diagram: 'DeerOpticalIllusionDiagram',
         },
       ],
       vocabulary: [
-        ['Wavelength', 'The distance between two peaks of a light wave — different wavelengths appear as different colors, from violet (380 nm) to red (700 nm)'],
-        ['Reflection', 'When light bounces off a surface — the color you see depends on which wavelengths are reflected toward your eyes and which are absorbed'],
-        ['Refraction', 'The bending of light as it passes from one material to another (like air to water) — this is how prisms split white light into a rainbow'],
-        ['Spectrum', 'The full range of light wavelengths — visible light is just a tiny slice of the electromagnetic spectrum, which includes radio waves, X-rays, and more'],
-        ['Cone Cell', 'A light-detecting cell in your retina that senses color — humans have three types (red, green, blue), and your brain combines their signals to create every color you perceive'],
+        ['Electromagnetic wave', 'A ripple of electric and magnetic fields that travels through space at 300,000 km/s \u2014 light, radio waves, X-rays, and microwaves are all electromagnetic waves, differing only in wavelength'],
+        ['Wavelength', 'The distance from one wave peak to the next \u2014 measured in nanometres for light; short wavelengths (violet, 380 nm) carry more energy than long wavelengths (red, 700 nm)'],
+        ['Reflection', 'Light bouncing off a surface \u2014 smooth surfaces give specular (mirror-like) reflection; rough surfaces give diffuse (scattered) reflection that lets you see objects from any angle'],
+        ['Refraction', 'Light bending as it changes speed between materials (like air to water) \u2014 this is how prisms split white light into a rainbow and why straws look broken in a glass of water'],
+        ['Visible spectrum', 'The narrow band of wavelengths (380\u2013700 nm) that human eyes can detect \u2014 from violet through blue, green, yellow, orange to red; the golden deer reflects wavelengths around 570\u2013600 nm'],
+        ['Retina', 'The light-sensitive layer at the back of your eye, containing 130 million rod cells (brightness) and 6 million cone cells (colour) that convert light into electrical signals for your brain'],
+        ['Persistence of vision', 'Your retina holds an image for about 1/25th of a second after the light source is gone \u2014 this blurs fast-moving images together and is the reason movies (24 frames/second) appear as smooth motion'],
       ],
       trueFalse: [
-        { statement: 'White light is actually a mixture of all visible colors combined.', isTrue: true, explanation: 'Isaac Newton demonstrated this in 1666 by passing white sunlight through a glass prism, which separated it into a rainbow of colors. Recombining all those colors with a second prism produced white light again.' },
-        { statement: 'Objects have a fixed color that stays the same regardless of the light source.', isTrue: false, explanation: 'An object\'s apparent color depends on the light illuminating it. A red shirt looks red in sunlight because it reflects red wavelengths. Under pure blue light, the same shirt appears nearly black because there are no red wavelengths to reflect.' },
-        { statement: 'The golden color of Muga silk and a sunset are produced by the same physical principle.', isTrue: false, explanation: 'Muga silk appears golden because the silk protein\'s molecular structure selectively reflects yellow-gold wavelengths. Sunsets appear golden-red because the atmosphere scatters short blue wavelengths away, leaving long red-orange wavelengths — two completely different mechanisms producing a similar color.' },
+        { statement: 'White light is actually a mixture of all visible colours combined.', isTrue: true, explanation: 'Isaac Newton proved this in 1666 by passing sunlight through a glass prism, which split it into a rainbow. He then used a second prism to recombine all the colours back into white light \u2014 proving white is not a single colour but a blend of every visible wavelength.' },
+        { statement: 'A red T-shirt is red because it generates red light.', isTrue: false, explanation: 'The T-shirt generates no light at all. It absorbs every wavelength of white light except red, and reflects the red wavelengths back to your eyes. Under pure blue light, the same shirt looks nearly black because there is no red light to reflect.' },
+        { statement: 'A straw in a glass of water is physically bent by the water.', isTrue: false, explanation: 'The straw is perfectly straight. Light rays from the underwater part bend (refract) as they pass from water into air. Your brain assumes light travels in straight lines, so it perceives the straw as broken at the waterline \u2014 a refraction illusion, not a real bend.' },
+        { statement: 'Gold looks golden because it absorbs blue light and reflects yellow-red wavelengths.', isTrue: true, explanation: 'Gold metal has a special electronic structure that absorbs blue and violet photons while reflecting wavelengths in the yellow-red range (around 570\u2013700 nm). Your brain combines these reflected wavelengths and perceives them as the warm, metallic colour we call gold.' },
       ],
       facts: [
-        'The human eye can distinguish approximately 10 million different colors, all constructed by the brain from just three types of cone cells.',
-        'Muga silk from Assam is the only naturally golden silk in the world — its color comes from the molecular structure of the silk protein, not from any dye.',
-        'Mantis shrimps have 16 types of color receptors compared to our 3 — they can see ultraviolet and polarized light that is completely invisible to humans.',
+        'Light from the Sun takes 8 minutes and 20 seconds to reach Earth \u2014 so when you watch a sunset, you are seeing the Sun as it was over 8 minutes ago.',
+        'A rainbow is not at a fixed location \u2014 it moves with you because it depends on the angle between you, the Sun, and the raindrops. Two people standing side by side see slightly different rainbows.',
+        'Your eye has a blind spot where the optic nerve exits the retina \u2014 no light detectors there at all \u2014 but your brain fills it in so seamlessly that you never notice the gap unless you test for it.',
+        'Movies work because of persistence of vision: 24 still images per second, each held on your retina just long enough to blend into the next, creating the illusion of smooth motion.',
       ],
-      offlineActivity: 'Fill a glass with water and hold it in sunlight near a white wall or paper. Tilt the glass slowly until you see a rainbow projected on the white surface. The water acts like a prism, separating white light into its component colors. Can you identify all the colors? Which band is widest? Which is narrowest?',
+      offlineActivity: 'Fill a clear glass with water and hold it in a beam of sunlight near a white wall or sheet of paper. Tilt the glass slowly until you see a rainbow projected on the white surface. The water acts as a prism, bending different wavelengths by different amounts. Which colour band is widest? Which is narrowest? (Hint: red usually appears widest, violet narrowest.) Now try the same experiment with a torch instead of sunlight \u2014 does the rainbow change? Why?',
+      offlineActivityDiagram: 'ActivityPrismDiagram',
     },
   },
   {
@@ -3315,53 +3386,91 @@ The clouds, of course, don't answer. But Dawan is certain they appreciate being 
     level0: {
       concepts: [
         {
-          title: 'How Clouds Form: Water Vapor, Condensation, and Nucleation',
+          title: 'Where Do Clouds Come From?',
           paragraphs: [
-            'Clouds are visible masses of tiny water droplets or ice crystals suspended in the atmosphere. They form when air containing water vapor cools to its dew point — the temperature at which the air becomes saturated and can no longer hold all its moisture as invisible vapor. The most common cooling mechanism is adiabatic cooling: when air rises (pushed up by mountains, convection, or weather fronts), it expands because atmospheric pressure decreases with altitude, and expanding gas cools. Dry air cools at 9.8°C per 1,000 meters of ascent; moist air cools at about 5-6°C per 1,000 meters (slower because condensation releases latent heat).',
-            'But cooling alone is not enough for cloud formation. Water vapor needs a surface to condense on — a condensation nucleus. These nuclei are tiny particles (0.1-1 micrometer) floating in the atmosphere: dust, sea salt, pollen, volcanic ash, or pollution particles. Without them, air can become supersaturated (relative humidity above 100%) without forming droplets. Cloud seeding — the artificial stimulation of rainfall — works by injecting condensation nuclei (usually silver iodide crystals, whose structure mimics ice) into clouds to trigger condensation where it would not otherwise occur.',
-            'The water droplets in a cloud are extraordinarily small — typically 10-20 micrometers in diameter, about one-tenth the thickness of a human hair. They are so light that even gentle updrafts of air (as slow as 1 cm/s) can keep them suspended indefinitely. A typical cumulus cloud weighs about 500,000 kilograms — half a million kilos of water — but this mass is distributed across billions of droplets spread over a cubic kilometer of sky. Rain forms only when droplets collide and merge (coalescence) until they reach about 2,000 micrometers (2 mm) in diameter — heavy enough to fall against the updraft.',
+            'Dawan watched clouds every day in Mawsynram. But where did they come from? Let\u2019s build the answer from the ground up \u2014 starting with a puddle.\n\nAfter rain, you see puddles on the road. A few hours later, the puddles are gone. Nobody mopped them up. The water didn\u2019t sink into the tarmac. It **evaporated** \u2014 the sun\u2019s heat gave the water molecules enough energy to break free from the liquid surface and float into the air as **water vapour**, which is completely invisible. You cannot see water vapour. If you can see it, it\u2019s not vapour \u2014 it\u2019s already tiny droplets.',
+            'Now, warm air rises (you feel this when hot air balloons go up, or when heat shimmers above a road). As this vapour-laden air rises, it enters regions of lower pressure, so it **expands and cools**. Here\u2019s the key number: air cools about 6.5\u00b0C for every 1 000 metres it climbs. Eventually, the air cools to a temperature called the **dew point** \u2014 the temperature where the air simply cannot hold its moisture as invisible vapour any more.\n\n**Try to predict:** On a humid day versus a dry day, which will have a lower cloud base \u2014 and why? (Hint: think about when the air reaches its dew point.)',
+            'At the dew point, the vapour is ready to condense. But it needs a surface to condense *on*. These surfaces are tiny particles floating in the air \u2014 dust, pollen, sea salt, even pollution \u2014 called **condensation nuclei**. The vapour latches onto these specks and forms minuscule water droplets, each only about 10\u201320 micrometres across (one-tenth the width of a hair). Billions of these droplets together make a visible cloud.\n\n**Check yourself:** A cloud that weighs 500 000 kg is floating in the sky. How? Because each droplet is so tiny that even the gentlest upward breeze keeps it suspended. Rain only forms when droplets collide and merge until they\u2019re about 100 times bigger \u2014 heavy enough to fall.',
           ],
-          keyIdea: 'Clouds form when rising air cools adiabatically to its dew point and water vapor condenses on tiny particles (condensation nuclei) — each cloud droplet is just 10-20 micrometers across.',
-          diagram: 'WaterCycleDiagram',
+          keyIdea: 'Clouds form when the sun evaporates water, the vapour rises and cools to its dew point, and condenses on tiny dust particles into billions of droplets too small to fall.',
+          diagram: 'CloudsFormationDiagram',
         },
         {
-          title: 'Cloud Types and What They Tell Us About Weather',
+          title: 'Cloud Families \u2014 What Each One Predicts',
           paragraphs: [
-            'Clouds are classified by altitude and shape into ten main types, first organized by Luke Howard in 1802 using Latin names. High clouds (above 6,000 m) include cirrus (thin, wispy, made of ice crystals), cirrocumulus (small white puffs), and cirrostratus (thin sheet covering the sky). Middle clouds (2,000-6,000 m) include altostratus (gray sheet) and altocumulus (white/gray puffs). Low clouds (below 2,000 m) include stratus (flat gray sheet), stratocumulus (lumpy gray sheet), and nimbostratus (thick dark rain cloud). Vertically developed clouds — cumulus (puffy, fair weather) and cumulonimbus (massive thunderstorm towers reaching up to 15,000 m) — span multiple altitude levels.',
-            'Each cloud type carries weather information. Cirrus clouds often appear 24-48 hours before a warm front arrives, as high-altitude moisture precedes the approaching weather system — they are the advance warning of coming rain. Cumulonimbus clouds indicate severe weather: heavy rain, lightning, hail, and sometimes tornadoes. A sky covered in flat stratus clouds typically brings drizzle or gray, overcast weather. Fair-weather cumulus — small, puffy clouds with flat bases and rounded tops — indicate stable conditions and are a sign of good weather.',
-            'In Assam, cloud reading has practical importance for rice farmers and fishermen. The monsoon season (June-September) brings massive cumulonimbus formations that produce the heavy rainfall rice paddies depend on. Experienced farmers can estimate rainfall timing by watching cloud development patterns through the day: morning fog (stratus) burning off by midday, afternoon cumulus building into towering cumulonimbus by evening, producing the heavy late-afternoon rains typical of the monsoon. Traditional weather knowledge and modern meteorology use the same observational principles — the difference is the scale and precision of modern instruments.',
+            'Dawan named his clouds by personality: "grumpy Bah Rum," "shy scout Ka Lum." Scientists do something similar — they classify clouds by **shape** and **height**, using Latin names invented by Luke Howard in 1802. The four families you need to know are:\n\n• **Cirrus** (Latin: "curl of hair") — thin, wispy streaks high up (above 6 000 m), made of ice crystals. They look harmless, but they’re often the **advance scouts of a storm**. If you see cirrus on a clear day, rain may arrive in 24–48 hours. Dawan’s "shy Ka Lum" was exactly this.\n• **Cumulus** (Latin: "heap") — puffy, cotton-ball clouds with flat bases. Small ones mean fair weather. But watch them — if they keep growing taller through the afternoon, they’re building into trouble.\n• **Stratus** (Latin: "layer") — flat grey sheets that cover the sky like a blanket. They bring drizzle and grey, gloomy days. Dawan’s "steady Kong Lynshing" who brought gentle rain for the paddies.\n• **Cumulonimbus** (Latin: "rain heap") — the monster. A towering cloud that can reach 15 000 m, taller than Mount Everest. It brings thunderstorms, heavy rain, lightning, and sometimes hail. Dawan’s "grumpy Bah Rum."',
+            '**Prediction exercise:** Right now (or next time you’re outside), look at the sky. Can you identify which family the clouds belong to? Here’s a quick test:\n• Are they thin and wispy, high up? → Cirrus\n• Puffy with a flat bottom? → Cumulus\n• A flat grey blanket? → Stratus\n• Massive, dark, towering? → Cumulonimbus\n\nIf cumulus clouds are growing taller as the afternoon goes on, what weather might follow by evening?',
+            'The weather scientist who visited Dawan was amazed because his "personalities" matched real meteorological categories. He had independently invented a classification system through pure observation. This is exactly how science works — before instruments, farmers and sailors worldwide developed cloud-reading skills that kept them alive. Modern meteorology uses the same core observations; the difference is **scale and precision**, not principle.',
           ],
-          keyIdea: 'The ten main cloud types reveal upcoming weather — cirrus warns of fronts 24-48 hours ahead, cumulonimbus signals severe storms, and flat stratus means drizzle.',
-          diagram: 'ClimateFactorsDiagram',
+          keyIdea: 'Cirrus (high, wispy) warns of rain in 1–2 days. Cumulus (puffy) means fair weather unless it grows tall. Stratus (flat sheet) brings drizzle. Cumulonimbus (towering) means storms.',
+          diagram: 'CloudsFamilyDiagram',
         },
         {
-          title: 'Weather Prediction: From Observation to Computation',
+          title: 'The Water Cycle Engine',
           paragraphs: [
-            'Modern weather prediction is based on numerical weather prediction (NWP) — solving the equations of fluid dynamics that govern atmospheric behavior using computers. The atmosphere is divided into a three-dimensional grid of cells (typically 10-25 km wide for global models, 1-3 km for regional models), and for each cell, the computer calculates temperature, pressure, humidity, wind speed, and wind direction at each time step (typically every few minutes). Starting from current observations, the model steps forward in time, computing how each cell evolves based on the physical laws of thermodynamics, fluid motion, and radiation.',
-            'The initial conditions — the starting state of the atmosphere — come from a global network of observations: weather stations, weather balloons (radiosondes launched twice daily from about 900 stations worldwide), aircraft measurements, ship reports, ocean buoys, and satellites. Data assimilation algorithms combine these observations (which are sparse and imperfect) with the previous forecast to create the best possible estimate of current conditions. This is one of the largest data-processing tasks in the world — the European Centre for Medium-Range Weather Forecasts (ECMWF) processes about 40 million observations per day.',
-            'Despite enormous computing power, weather forecasts become less accurate further into the future because the atmosphere is a chaotic system — tiny errors in initial conditions grow exponentially over time. Current models are skillful out to about 10 days for large-scale features (will it be warm or cold?) and about 3-5 days for specific details (will it rain at 3 PM on Thursday?). To account for this uncertainty, forecasters run ensemble models — the same model started from slightly different initial conditions 50 times — to estimate the range of possible outcomes. When most ensemble members agree, confidence is high; when they diverge, the forecast is uncertain.',
+            'Clouds are not a one-time event — they’re part of a continuous engine that has been running for billions of years. Here’s the full loop, step by step:\n\n**Step 1 — Evaporation.** The sun heats oceans, lakes, and rivers. Water molecules escape the surface as invisible vapour. (Plants also release vapour through their leaves — this is called **transpiration**, and forests pump huge amounts of water into the air.)\n\n**Step 2 — Rising and cooling.** Warm, moist air rises. As it climbs, it cools. When it reaches the dew point, vapour condenses on dust particles — forming clouds.\n\n**Step 3 — Precipitation.** Cloud droplets collide and merge. When they’re heavy enough (~2 mm), they fall as rain. In cold air, they fall as snow or hail.\n\n**Step 4 — Collection.** Rain flows into streams, rivers, and underground aquifers, all eventually returning to the ocean. Then the cycle starts again.',
+            'Why does Mawsynram get 12 000 mm of rain per year — more than anywhere on Earth? Because of **geography acting as a pump**. Moisture-laden winds blow north from the Bay of Bengal. When they hit the Khasi Hills, the air is forced *upward* (this is called **orographic lift**). As it rises, it cools rapidly, dumping enormous amounts of rain on the windward side. Mawsynram sits right in the bullseye of this process. The same mechanism happens wherever moist air meets mountains — the western coast of Scotland, the Pacific Northwest of the USA, the windward side of Hawaii.\n\n**Think about it:** If Mawsynram’s hills were removed, would it still be the wettest place on Earth? What does that tell you about the role of geography in weather?',
+            'The water cycle is powered entirely by the sun. Without solar energy, there would be no evaporation, no rising air, no clouds, no rain. Every drop of rain that falls on Mawsynram was once part of the ocean, and will be again. The same water molecules that Dawan watched falling from "Kong Lynshing" may have been in the Pacific Ocean a month earlier, in a glacier a thousand years ago, or in a dinosaur’s drinking pool 100 million years ago. Water is never created or destroyed — it just keeps cycling.',
           ],
-          keyIdea: 'Weather forecasts solve fluid dynamics equations on a 3D grid using millions of observations as starting conditions — but atmospheric chaos limits accurate prediction to about 10 days.',
+          keyIdea: 'The water cycle is a sun-powered loop: evaporation → rising air → condensation (clouds) → precipitation (rain) → collection (rivers) → back to the ocean. The same water has been cycling for billions of years.',
+          diagram: 'CloudsWaterEngineDiagram',
+        },
+        {
+          title: 'Weather Forecasting — And Why It Goes Wrong',
+          paragraphs: [
+            'Dawan predicted weather better than the radio. How? He observed the same sky every day for months, building a personal database of patterns. Modern forecasters do exactly the same thing, but with vastly more data.\n\n**Reading clouds** is the oldest method. Cirrus appearing on a clear day? A warm front is probably approaching — expect rain in a day or two. Cumulus growing into tall towers by afternoon? Thunderstorms by evening. A barometer (which measures air pressure) adds another clue: **falling pressure means storm coming, rising pressure means clearing skies**. For centuries, sailors and farmers survived using just these two tools — their eyes and a barometer.',
+            'Modern weather forecasting uses **numerical weather prediction (NWP)**: supercomputers divide the atmosphere into millions of 3D grid cells and calculate how temperature, pressure, humidity, and wind change at each cell over time, using the laws of physics. The starting conditions come from a worldwide network — weather stations, weather balloons launched twice daily from 900 locations, ships, aircraft, ocean buoys, and satellites. The European weather centre (ECMWF) processes about 40 million observations every day.\n\n**Prediction you can test:** Check tomorrow’s weather forecast right now. Then check what actually happens. Was the temperature prediction within 2°C? Was the "rain/no rain" call correct?',
+            'So why do forecasts go wrong? Because the atmosphere is a **chaotic system** — a term from mathematics meaning that tiny differences in starting conditions lead to wildly different outcomes over time. Imagine two identical weather models, but one starts with the temperature at one station being 0.001°C different. After 3 days, the forecasts are similar. After 7 days, they’re noticeably different. After 14 days, they might disagree completely — one predicts sun, the other predicts storm.\n\nThis is why forecasters run **ensemble models** — the same model started 50 times with slightly different initial conditions. If all 50 runs agree (say, all predict rain on Thursday), confidence is high. If they scatter (half say rain, half say sun), the forecast is uncertain. This is why weather apps show a "percentage chance of rain" rather than a simple yes or no. The ~10-day limit on useful forecasts is not a failure of technology — it’s a fundamental property of the atmosphere itself.',
+          ],
+          keyIdea: 'Forecasting combines cloud observation, barometric pressure, and supercomputer models. But the atmosphere is chaotic — tiny measurement errors grow over time, limiting useful prediction to about 10 days.',
+          diagram: 'CloudsForecastDiagram',
         },
       ],
       vocabulary: [
-        ['Cumulus', 'Puffy, cotton-ball shaped clouds that form when warm air rises and cools — they often signal fair weather but can grow into thunderstorms'],
-        ['Condensation', 'When water vapor (invisible gas) cools and turns into tiny liquid droplets — this is how clouds form and how dew appears on grass'],
-        ['Precipitation', 'Any form of water falling from clouds to the ground — rain, snow, sleet, or hail, depending on temperature'],
+        ['Evaporation', 'When liquid water gains enough energy from the sun to become invisible water vapour — the first step of cloud formation and the water cycle'],
+        ['Dew Point', 'The temperature at which air becomes saturated and can no longer hold its moisture as vapour — below this temperature, condensation begins and clouds form'],
+        ['Condensation Nucleus', 'A tiny particle (dust, pollen, sea salt) that water vapour condenses onto to form a cloud droplet — without these, clouds would not form even in saturated air'],
+        ['Cumulus', 'Puffy, cotton-ball shaped clouds with flat bases — small ones mean fair weather, but if they grow tall they can become thunderstorms'],
+        ['Cumulonimbus', 'A massive storm cloud that towers up to 15 000 m, bringing heavy rain, lightning, and hail — Dawan’s "grumpy Bah Rum"'],
         ['Barometer', 'An instrument that measures air pressure — falling pressure often predicts storms, rising pressure suggests clearing skies'],
-        ['Monsoon', 'A seasonal wind pattern that brings heavy rains — the Indian monsoon delivers about 80% of India\'s annual rainfall between June and September'],
+        ['Orographic Lift', 'When moist air is forced upward by hills or mountains, cooling rapidly and producing heavy rainfall — this is why Mawsynram is the wettest place on Earth'],
       ],
       trueFalse: [
-        { statement: 'Clouds are made of water vapor — invisible water gas floating in the sky.', isTrue: false, explanation: 'Clouds are made of tiny liquid water droplets or ice crystals — small enough to float on air currents. Water vapor is invisible. You can see clouds precisely because the water has condensed from vapor into visible droplets.' },
-        { statement: 'Mawsynram in Meghalaya receives more rainfall than anywhere else on Earth.', isTrue: true, explanation: 'Mawsynram receives an average of about 11,871 mm of rain per year. This extreme rainfall occurs because moisture-laden winds from the Bay of Bengal are forced upward by the Khasi Hills, cooling rapidly and dumping their water.' },
-        { statement: 'Weather forecasts more than two weeks ahead are generally unreliable.', isTrue: true, explanation: 'The atmosphere is a chaotic system — tiny errors in initial measurements grow exponentially over time. Current models are skillful out to about 10 days for large-scale patterns and 3-5 days for specific details like exact rainfall timing.' },
+        { statement: 'Clouds are made of water vapour — invisible water gas floating in the sky.', isTrue: false, explanation: 'Clouds are made of tiny liquid water droplets or ice crystals — small enough to float on air currents. Water vapour is invisible. You can see clouds precisely because the water has condensed from vapour into visible droplets.' },
+        { statement: 'Mawsynram in Meghalaya receives more rainfall than anywhere else on Earth.', isTrue: true, explanation: 'Mawsynram receives an average of about 11 871 mm of rain per year. This extreme rainfall occurs because moisture-laden winds from the Bay of Bengal are forced upward by the Khasi Hills, cooling rapidly and dumping their water — a process called orographic lift.' },
+        { statement: 'Weather forecasts more than two weeks ahead are generally unreliable.', isTrue: true, explanation: 'The atmosphere is a chaotic system — tiny errors in initial measurements grow exponentially over time. Current models are skillful out to about 10 days for large-scale patterns and 3–5 days for specific details like exact rainfall timing.' },
       ],
       facts: [
-        'A single cumulonimbus thundercloud can hold 300,000 tonnes of water — equivalent to about 120 Olympic swimming pools.',
-        'The European weather center (ECMWF) processes about 40 million weather observations per day from stations, balloons, ships, aircraft, and satellites.',
-        'Cherrapunji once received 26,461 mm of rain in a single year (1861) — enough to fill a room over 26 meters deep.',
+        'A single cumulonimbus thundercloud can hold 300 000 tonnes of water — equivalent to about 120 Olympic swimming pools floating in the sky.',
+        'The European weather centre (ECMWF) processes about 40 million weather observations per day from stations, balloons, ships, aircraft, and satellites.',
+        'Cherrapunji once received 26 461 mm of rain in a single year (1861) — enough to fill a room over 26 metres deep.',
       ],
-      offlineActivity: 'Keep a cloud journal for 5 days. Each morning and evening, look at the sky and draw the clouds you see. Note their shape (puffy, flat, wispy, towering), color, and height. Record the weather that follows. After 5 days, look for patterns: did certain cloud types predict rain? Did wispy high clouds mean different weather than low gray ones?',
+      offlineActivity: 'Keep a cloud journal for 5 days. Each morning and evening, look at the sky and draw the clouds you see. Note their shape (puffy, flat, wispy, towering), colour, and height. Record the weather that follows. After 5 days, look for patterns: did certain cloud types predict rain? Did wispy high clouds mean different weather than low grey ones? You are doing exactly what Dawan did — building a personal weather database through observation.',
+      offlineActivityDiagram: 'ActivityCloudWatchDiagram',
+      codeTeaser: `# How much water is hiding in a cloud?
+# Let's calculate the mass of a cumulus cloud
+
+cloud_volume_m3 = 1e9       # 1 cubic kilometre = 1 billion m³
+droplet_density = 0.3e-3    # 0.3 grams of water per m³ of cloud
+water_mass_kg = cloud_volume_m3 * droplet_density / 1000
+
+print(f"Cloud volume: {cloud_volume_m3:.0e} m\u00b3")
+print(f"Water mass:   {water_mass_kg:,.0f} kg")
+print(f"That's        {water_mass_kg / 1000:,.0f} tonnes!")
+print(f"Or about      {water_mass_kg / 2500:.0f} Olympic pools")
+
+# Why doesn't it fall? Because each droplet is
+# only 10-20 micrometres across — so light that
+# a gentle breeze of 1 cm/s keeps it floating.`,
+      referenceLinks: [
+        { slug: 'weather-and-climate', reason: 'Deep dive into atmospheric layers, pressure systems, and the difference between weather and climate' },
+        { slug: 'water-cycle-and-rivers', reason: 'The complete water cycle in detail — evaporation, transpiration, precipitation, and groundwater' },
+      ],
+      nextLessons: [
+        { slug: 'fishermans-daughter-storm', reason: 'Cyclones are powered by the same condensation process — cloud formation on a massive, spinning scale' },
+        { slug: 'monsoon-home', reason: 'The monsoon that drenches Meghalaya starts with clouds exactly like the ones you just learned about' },
+        { slug: 'how-majuli-island-was-born', reason: 'All that rain from Mawsynram’s clouds feeds the Brahmaputra — the river that created and is eroding Majuli' },
+      ],
     },
   },
   {
@@ -3455,52 +3564,97 @@ Majuli is not just an island. It is a reminder that everything borrowed is worth
     level0: {
       concepts: [
         {
-          title: 'River Erosion: How Water Shapes the Land',
+          title: 'Rivers Build and Destroy',
           paragraphs: [
-            'Erosion is the process by which flowing water removes and transports sediment — particles of rock, soil, and organic material. A river erodes its bed and banks through four mechanisms: hydraulic action (the force of moving water dislodging particles), abrasion (sediment carried by the river acts like sandpaper, grinding against the bed and banks), attrition (sediment particles collide with each other in the flow, breaking into smaller pieces), and solution (slightly acidic river water dissolves certain minerals, particularly limestone and calcium carbonate).',
-            'The erosive power of a river depends primarily on its velocity and volume. Velocity increases with gradient (slope) and channel depth. The critical insight is that a river\'s carrying capacity — the amount of sediment it can transport — increases roughly with the fifth or sixth power of velocity. This means that doubling a river\'s speed increases its carrying capacity by 32-64 times. During floods, when velocity and volume both increase dramatically, a river can erode and transport thousands of times more sediment than during normal flow. This is why most erosion happens during flood events, not during ordinary flow.',
-            'The Brahmaputra is one of the most erosive rivers on Earth. It carries about 735 million tonnes of sediment per year — the second highest sediment load of any river (after the Yellow River in China). This enormous sediment load comes from the rapid erosion of young, relatively soft Himalayan rock. The Brahmaputra\'s braided channel pattern — multiple shifting channels separated by temporary sand islands — is a direct result of this sediment overload: the river deposits material faster than it can carry it away, creating ever-shifting bars and islands.',
+            'Every river does two things at once: it **tears land apart** in one place, and **builds new land** somewhere else. These two forces \u2014 **erosion** and **deposition** \u2014 are happening constantly, in every river on Earth, right now.',
+            'Erosion is easy to understand with an analogy. Imagine dragging your hand through a sandbox. Your fingers carve a groove, and the sand piles up ahead of your hand and to the sides. The river does exactly this \u2014 except instead of fingers, it uses the sheer force of moving water (called **hydraulic action**) and the grit of sand and gravel it carries (called **abrasion**, because the sediment acts like sandpaper grinding against the riverbed).',
+            'Now here is the key insight, and it surprises most people: a river\u2019s carrying power does not increase gradually with speed. It increases explosively. If you double a river\u2019s velocity, its carrying capacity increases by roughly **32 to 64 times**. This means that during a monsoon flood, when the Brahmaputra\u2019s speed jumps from 0.5 m/s to 3 m/s, the river suddenly becomes capable of carrying **thousands of times** more sediment than during calm weather. Most erosion happens not during ordinary flow, but during these brief, violent flood events.',
+            '**Deposition** is what happens when the water slows down. Fast water can carry boulders; slow water can only carry fine silt. So when a river widens (spreading the same water over a larger area, which reduces speed), or enters a flatter section, or flows around an obstacle, the heavy particles drop first, then the medium ones, then the finest last. The pile of dropped material is new land \u2014 and on the Brahmaputra, those piles can become islands.',
+            '**Check yourself:** A farmer notices that the inside of a river bend always has a sandy beach, while the outside of the same bend is a steep, crumbling cliff. Using what you just learned about erosion and deposition, can you explain why? (Hint: think about where the water flows fastest and slowest at a bend.)',
           ],
-          keyIdea: 'River erosion happens through hydraulic action, abrasion, attrition, and solution — the Brahmaputra carries 735 million tonnes of sediment per year, making it one of the most erosive rivers on Earth.',
-          diagram: 'RiverErosionDiagram',
+          keyIdea: 'Rivers erode land where they flow fast and deposit sediment where they slow down. The Brahmaputra\u2019s carrying power increases explosively during floods, which is why most landscape change happens during the monsoon.',
+          diagram: 'MajuliErosionDepositionDiagram',
         },
         {
-          title: 'Deposition: Building Land from Water',
+          title: 'The World\u2019s Largest River Island',
           paragraphs: [
-            'Deposition is the reverse of erosion — it occurs when flowing water slows down and can no longer carry its sediment load. The largest particles (gravel, coarse sand) settle first when velocity drops even slightly, while the finest particles (silt, clay) remain suspended until the water is nearly still. This sorting by size is called graded bedding, and it is visible in river deposits: coarse material at the bottom, fine material on top.',
-            'River islands form through deposition in several ways. Mid-channel bars form when the river slows (at a bend or widening) and deposits sediment in the middle of the channel, creating a low ridge that divides the flow. Over time, more sediment accumulates on the bar, it rises above the normal water level, vegetation colonizes it, and the roots stabilize the sediment — converting a temporary sandbar into a semi-permanent island. Avulsion — when a river suddenly shifts its main channel to a new path — can also create islands by leaving a body of land between the old and new channels.',
-            'Majuli island in the Brahmaputra was formed through avulsion. Historical records and geological evidence show that the Brahmaputra originally flowed north of Majuli, while a tributary (the Subansiri) flowed south. Over centuries, the Brahmaputra shifted its course southward, eventually capturing the Subansiri\'s channel and creating an island between the old and new river courses. Today, Majuli is the largest river island in India (though it has shrunk from about 880 km² in 1901 to about 352 km² today due to ongoing erosion — the same dynamic process that created it is now destroying it).',
+            'Majuli did not appear suddenly. It was born over centuries through a process called **avulsion** \u2014 when a river abandons its old channel and carves a new one through softer ground nearby.',
+            'Picture this: thousands of years ago, the Brahmaputra flowed through the Assam valley as a single enormous channel, kilometres wide during monsoon. A tributary called the **Subansiri** ran roughly parallel, some distance to the south. Between these two waterways lay a broad stretch of land \u2014 flat, fertile, covered with forest.',
+            'Then the Brahmaputra began to shift. Rivers do this because they constantly deposit sediment in their own channels, gradually raising the riverbed. Eventually, the riverbed gets so high that during the next big flood, the water finds it easier to flow somewhere else. The Brahmaputra migrated southward over centuries, eventually merging with the Subansiri\u2019s channel. And the land that was left between the river\u2019s old path and its new one became an island.',
+            'That island is **Majuli**. At its peak, it covered over **1,200 km\u00B2** \u2014 larger than the city of Mumbai. It was not a barren sandbar but a living world: dense tropical forest, fertile soil enriched by centuries of monsoon silt, home to the Mishing people and 22 Vaishnavite monasteries (satras) preserving centuries of Assamese art, dance, and music.',
+            '**A prediction:** If rivers create islands by shifting their channels, then river islands should be made of the same material the river carries \u2014 sand, silt, and clay, not solid rock. And they are. Majuli\u2019s soil is entirely alluvial \u2014 deposited by water. Dig anywhere on the island and you find layers of river sediment, not bedrock. This is also why Majuli is so vulnerable: it is made of the same soft material the river can easily carry away.',
           ],
-          keyIdea: 'Deposition occurs when water slows and drops its sediment — Majuli island formed when the Brahmaputra shifted course, but the same erosion-deposition dynamics that created it have shrunk it by 60% in a century.',
+          keyIdea: 'Majuli formed when the Brahmaputra shifted its channel southward over centuries (avulsion), leaving a vast body of alluvial land surrounded by water. The island is made entirely of river-deposited sediment \u2014 which is why it is fertile, and why it is fragile.',
+          diagram: 'MajuliFormationDiagram',
         },
         {
-          title: 'River Geomorphology: The Life of a River',
+          title: 'Shrinking Every Year',
           paragraphs: [
-            'A river\'s behavior changes predictably from source to mouth, following patterns described by geomorphology — the study of landforms and the processes that shape them. In its upper course (near the source, typically in mountains), a river has a steep gradient, high velocity, and a narrow V-shaped valley carved by vertical erosion. In the middle course, the gradient decreases, the valley widens, and the river begins to meander — forming sinuous curves as it erodes the outer bank of each bend (where velocity is highest) and deposits sediment on the inner bank (where velocity is lowest).',
-            'In the lower course (approaching the sea), the river flows across a broad, flat floodplain. Its gradient is very low, its channel is wide and deep, and it carries an enormous volume of water and sediment. Floodplains are built by repeated flooding: when the river overflows its banks, the flood water slows immediately upon leaving the channel and deposits its sediment. The coarsest sediment settles closest to the channel, building natural levees (raised banks), while the finest sediment is carried furthest, slowly building up the floodplain surface over centuries.',
-            'The Brahmaputra in Assam is a classic lower-course river with an exceptionally wide floodplain and a braided channel pattern. Braiding occurs when sediment supply is high relative to the river\'s ability to transport it: the excess sediment accumulates as bars and islands, forcing the river to split into multiple channels that weave around the obstructions. The Brahmaputra\'s braided reach can be 10-15 km wide during the monsoon. This dynamic, ever-changing landscape is simultaneously creative (building new land, enriching soil with silt) and destructive (eroding riverbanks, destroying villages, swallowing agricultural land).',
+            'The same river that created Majuli is now taking it back, and the numbers are alarming. In 1901, Majuli\u2019s area was approximately **880 km\u00B2**. By 2020, it had shrunk to roughly **352 km\u00B2** \u2014 a loss of **60%** in just over a century. That is not a slow geological process happening over millennia. It is happening within living memory.',
+            'How do we know this so precisely? **Satellite imagery.** Since the 1970s, satellites have photographed the Earth\u2019s surface at regular intervals. By tracing Majuli\u2019s outline on images from different years, researchers can calculate exactly how many square kilometres have been lost per decade. The erosion is not uniform \u2014 the southern and eastern edges, where the Brahmaputra\u2019s main current hits hardest, lose the most land.',
+            'The process is brutal and fast. During monsoon, the swollen river attacks Majuli\u2019s banks. The alluvial soil \u2014 soft, loosely packed sand and silt held together by grass roots \u2014 undercuts, cracks, and collapses in great slabs that dissolve into the brown water like sugar in tea. A farmer can go to sleep with a rice field and wake up to find it gone. Entire villages have had to relocate, and satras that once stood in the island\u2019s centre now perch at its eroding edge.',
+            'A key factor accelerating the erosion: the **1950 Assam earthquake** (magnitude 8.6, one of the strongest ever recorded). It triggered massive landslides in the Himalayas that dumped enormous quantities of sediment into the Brahmaputra, raising the riverbed and changing flow patterns. Since 1950, Majuli\u2019s erosion has been significantly faster than before.',
+            '**Check yourself:** If Majuli lost 528 km\u00B2 in 119 years (1901\u20132020), what is the average loss per year? Now calculate: at that rate, how many years until the island disappears entirely? (The answer might surprise you \u2014 and it is why the situation is urgent.)',
           ],
-          keyIdea: 'Rivers evolve from steep, eroding upper courses to wide, depositing lower courses — the Brahmaputra\'s braided pattern results from sediment overload that forces the river to split around ever-shifting islands.',
+          keyIdea: 'Majuli has lost 60% of its area since 1901, tracked by satellite imagery. The erosion is accelerating, driven by monsoon floods and worsened by the 1950 earthquake that changed the Brahmaputra\u2019s sediment load.',
+          diagram: 'MajuliShrinkingDiagram',
+        },
+        {
+          title: 'Can We Save Majuli?',
+          paragraphs: [
+            'The people of Majuli do not wait for rescue. They fight back using a combination of traditional knowledge and modern engineering \u2014 and this is where the science gets practical.',
+            '**Natural solutions** work with the river instead of against it. **Vetiver grass** has roots that grow 3\u20134 metres deep, binding the soil like living rebar in concrete. Planted along the eroding bank, a row of vetiver creates an invisible underground wall. **Bamboo porcupines** \u2014 cross-braced bamboo structures placed in the river near the bank \u2014 slow the current and trap sediment, gradually rebuilding the bank. These methods are cheap, biodegradable, and self-repairing (the grass grows back; new sediment accumulates).',
+            '**Engineered solutions** use stronger materials. **Geotextile bags** are large fabric sacks filled with sand, stacked along the bank to absorb wave energy. **Gabion walls** are wire cages filled with rock, heavy enough to resist the current. Concrete embankments are the strongest option but also the most expensive, and they can fail catastrophically \u2014 when one section breaks, the river pours through the gap with even greater force than before.',
+            'Here is the real-world dilemma: natural solutions are cheap and sustainable but slow to establish and weaker against extreme floods. Engineered solutions are strong and fast to deploy but expensive and temporary (gabions rust, bags degrade, concrete cracks). The best protection combines both \u2014 engineered barriers for immediate defence, with natural solutions growing behind them for long-term stability.',
+            '**Think about this:** A village on Majuli\u2019s eroding southern bank has a budget of \u20B910 lakh (about \u00A39,500). A concrete wall costs \u20B950 lakh. Gabions cost \u20B915 lakh. Geotextile bags cost \u20B98 lakh. Vetiver grass costs \u20B91 lakh. How would you spend the budget? What combination gives the best protection for the money? This is the kind of decision engineers on Majuli face every monsoon season.',
+          ],
+          keyIdea: 'Protecting Majuli requires combining natural solutions (vetiver grass, bamboo porcupines) with engineered barriers (geotextile bags, gabion walls). The best approach uses both \u2014 engineering for immediate defence, nature for long-term resilience.',
+          diagram: 'MajuliProtectionDiagram',
         },
       ],
       vocabulary: [
-        ['Sediment', 'Sand, silt, clay, and gravel carried by flowing water — the Brahmaputra carries more sediment than almost any other river on Earth'],
-        ['Erosion', 'The wearing away of land by water, wind, or ice — rivers erode their banks and beds, reshaping the landscape over time'],
-        ['Floodplain', 'The flat area alongside a river that gets covered with water during floods — built up over centuries by repeated deposits of sediment'],
-        ['Meander', 'A curve or bend in a river — rivers naturally develop S-shaped curves as they erode the outer bank and deposit sediment on the inner bank'],
-        ['Braided Channel', 'A river pattern where the water splits into multiple channels weaving around sand bars and islands — caused by more sediment than the river can carry in one channel'],
+        ['Erosion', 'The wearing away of land by water, wind, or ice \u2014 on the Brahmaputra, the river tears away soft alluvial soil, especially during monsoon floods'],
+        ['Deposition', 'When flowing water slows down and drops the sediment it was carrying \u2014 this is how river islands, deltas, and floodplains are built'],
+        ['Avulsion', 'When a river suddenly shifts its main channel to a new path \u2014 this is how Majuli was created, as the Brahmaputra migrated southward over centuries'],
+        ['Alluvial soil', 'Soil made of sand, silt, and clay deposited by river water \u2014 Majuli is entirely alluvial, which makes it fertile but also vulnerable to erosion'],
+        ['Braided channel', 'A river pattern where the water splits into multiple channels weaving around sand bars \u2014 the Brahmaputra is braided because it carries more sediment than a single channel can handle'],
+        ['Geotextile', 'A permeable fabric used in civil engineering to stabilise soil \u2014 geotextile bags filled with sand are used to protect Majuli\u2019s eroding banks'],
       ],
       trueFalse: [
-        { statement: 'Majuli is the world\'s largest river island and it has been the same size for centuries.', isTrue: false, explanation: 'While Majuli is indeed one of the world\'s largest river islands, it has been shrinking dramatically due to erosion. It has lost roughly half its area since the 1950s — from about 1,250 sq km to around 550 sq km. The Brahmaputra constantly reshapes it.' },
-        { statement: 'The Brahmaputra carries ground-up rock from the Himalayas all the way to the Bay of Bengal.', isTrue: true, explanation: 'The Brahmaputra originates on the Tibetan Plateau and cuts through the Himalayas, picking up enormous amounts of sediment — sand, silt, and clay from eroding mountains. It carries about 735 million tonnes of sediment per year, depositing some along the way and delivering the rest to the sea.' },
-        { statement: 'Rivers always flow in a straight line from source to sea.', isTrue: false, explanation: 'Rivers naturally develop curves (meanders) because any slight bend causes faster flow on the outside of the curve (eroding it further) and slower flow on the inside (depositing sediment). Over time, small bends become large loops. The Brahmaputra\'s braided pattern is even more complex, splitting into multiple channels.' },
+        { statement: 'Majuli has been the same size for centuries \u2014 it only started shrinking recently.', isTrue: false, explanation: 'Majuli has been shrinking for over a century. Records show it was about 880 km\u00B2 in 1901 and only 352 km\u00B2 by 2020 \u2014 a 60% loss. The erosion accelerated after the 1950 earthquake but was already happening before.' },
+        { statement: 'If you double a river\u2019s speed, its carrying capacity roughly doubles too.', isTrue: false, explanation: 'A river\u2019s carrying capacity increases with the fifth or sixth power of velocity. Doubling speed increases carrying capacity by 32\u201364 times, not 2 times. This is why floods are so much more destructive than normal flow.' },
+        { statement: 'Majuli island is made of solid rock underneath, with only a thin layer of soil on top.', isTrue: false, explanation: 'Majuli is entirely alluvial \u2014 made of sand, silt, and clay deposited by the river over centuries. There is no bedrock. This is precisely why it erodes so easily.' },
       ],
       facts: [
-        'The Brahmaputra is one of the few rivers in the world that has a braided channel pattern up to 10-15 km wide during monsoon season.',
-        'Majuli island is home to over 150,000 people and 22 Vaishnavite monasteries (satras) that preserve Assamese art, dance, and culture — some dating back to the 15th century.',
-        'The Brahmaputra\'s course has shifted dramatically over history — a massive earthquake in 1950 changed the river\'s flow pattern significantly, accelerating erosion of Majuli.',
+        'The Brahmaputra carries about 735 million tonnes of sediment per year \u2014 enough to fill 73,500 Olympic swimming pools with mud, sand, and silt.',
+        'Majuli is home to over 150,000 people and 22 Vaishnavite satras (monasteries) that preserve centuries of Assamese dance, theatre, and manuscript painting.',
+        'Jadav Payeng, the "Forest Man of India," planted trees on a barren sandbar near Majuli for decades, single-handedly creating a forest larger than New York\u2019s Central Park.',
       ],
-      offlineActivity: 'Build a mini river on a sloped tray of sand or soil. Slowly pour water from the top and watch what happens. Where does the water carve channels? Where does it deposit sand? Try placing a small mound of sand in the path — does the water go around it, creating an "island"? This shows how rivers create and destroy landforms like Majuli.',
+      offlineActivity: 'Build a mini river on a sloped tray of sand or soil. Prop up one end of the tray about 5 cm. Slowly pour water from the high end and watch: where does the water carve channels (erosion)? Where does sand pile up (deposition)? Now place a small mound of packed sand in the middle of the flow path \u2014 does the water go around it, creating an "island"? Finally, pour a LOT of water quickly (a "monsoon flood") and see how much more land it moves. This is exactly how the Brahmaputra shapes Majuli.',
+      offlineActivityDiagram: 'ActivityErosionModelDiagram',
+      codeTeaser: `import numpy as np
+import matplotlib.pyplot as plt
+
+# Majuli\'s shrinking area over time
+years = np.array([1901, 1917, 1950, 1972, 2001, 2014, 2020])
+area  = np.array([880, 770, 700, 550, 420, 370, 352])  # km\u00B2
+
+plt.fill_between(years, area, alpha=0.3, color="teal")
+plt.plot(years, area, "o-", color="teal", linewidth=2)
+plt.xlabel("Year")
+plt.ylabel("Area (km\u00B2)")
+plt.title("Majuli Is Disappearing")
+plt.ylim(0, 1000)
+plt.show()  # Can you fit a trendline and predict when area = 0?`,
+      referenceLinks: [
+        { slug: 'earth-and-geology', reason: 'Full guide to plate tectonics, rock cycles, and the geological forces that shape landscapes like the Brahmaputra valley' },
+        { slug: 'weather-and-climate', reason: 'Monsoon patterns drive the Brahmaputra\u2019s seasonal floods \u2014 understand the atmospheric science behind them' },
+      ],
+      nextLessons: [
+        { slug: 'the-river-braid', reason: 'Explores the Brahmaputra\u2019s braided channel in depth \u2014 the same river dynamics that created and are destroying Majuli' },
+        { slug: 'fishermans-storm-lesson', reason: 'Cyclones and monsoons drive the extreme floods that erode Majuli \u2014 learn the atmospheric physics behind them' },
+        { slug: 'girl-grew-forest', reason: 'Jadav Payeng grew a forest near Majuli \u2014 explore how trees stabilize ecosystems and fight erosion' },
+      ],
     },
   },
   {
@@ -3593,53 +3747,93 @@ Vini held a bamboo tube of black rice to her ear, as if listening for the story 
     level0: {
       concepts: [
         {
-          title: 'Tube Resonance: How a Hollow Tube Produces Sound',
+          title: 'How a Tube Makes Music',
           paragraphs: [
-            'A hollow tube can produce sound when air inside it vibrates at specific frequencies. When you blow across the open end of a bamboo tube, the airstream is split by the edge, creating a disturbance that travels down the tube as a sound wave. When this wave reaches the other end (whether open or closed), it reflects back. If the tube length corresponds to a resonant frequency — where the reflected wave reinforces the outgoing wave — a standing wave forms and a clear, sustained note is produced.',
-            'For a tube open at both ends (like a basic bamboo flute), the resonant wavelengths are λ = 2L/n, where L is the tube length and n is a positive integer (1, 2, 3...). The fundamental frequency (n=1) has a wavelength equal to twice the tube length, giving f₁ = v/2L, where v is the speed of sound (343 m/s at 20°C). For a 30 cm bamboo tube, the fundamental frequency is 343/(2×0.3) = 572 Hz — approximately the note D₅. The tube also resonates at all integer multiples of this frequency: 1,144 Hz, 1,716 Hz, etc. These are the harmonics.',
-            'For a tube closed at one end (like some bamboo instruments used in Nagaland), only odd harmonics are produced: f₁, 3f₁, 5f₁, 7f₁... This happens because the closed end must be a pressure maximum (antinode) while the open end must be a pressure minimum (node), and only odd-numbered standing wave patterns satisfy both conditions simultaneously. This gives closed-tube instruments a distinctly hollow, woody quality compared to open-tube instruments — the missing even harmonics create a different tonal character.',
+            'Pick up an empty bottle and blow across the top. You hear a clear, humming note. Now try a shorter bottle \u2014 the note is higher. A longer one \u2014 lower. You have just built the simplest wind instrument in the world. But why does a hollow tube make a sound at all?',
+            'When you blow across the opening, the stream of air splits at the edge and creates a tiny disturbance \u2014 a pulse of compressed air \u2014 that races down the tube at the speed of sound (343 m/s). When it hits the far end, it bounces back. The reflected pulse meets the next incoming pulse, and if the timing is right, they **reinforce** each other. Energy builds up. The air inside the tube starts vibrating powerfully at one specific frequency. This is a **standing wave** \u2014 a wave pattern that appears to stand still inside the tube.',
+            'A standing wave has two key features: **nodes** (points that never move) and **antinodes** (points that vibrate the most). In a tube open at both ends, both ends are antinodes \u2014 the air vibrates freely there. The simplest standing wave that fits is one with a single node in the middle: half a wavelength spans the tube. So the wavelength equals twice the tube length: \u03bb = 2L. From this, the fundamental frequency is **f = v / 2L**. A 30 cm tube gives f = 343 / (2 \u00d7 0.30) = 572 Hz \u2014 roughly the note D\u2085.',
+            '**Check yourself:** You have two bamboo tubes \u2014 one 30 cm long, one 60 cm long. Predict which plays the higher note and by how much. (Answer: the 30 cm tube plays at 572 Hz, the 60 cm tube at 286 Hz. The short tube is exactly one octave higher \u2014 double the frequency \u2014 because halving the length doubles the frequency.)',
           ],
-          keyIdea: 'A bamboo tube produces sound when air resonates at frequencies determined by its length — open tubes produce all harmonics (f, 2f, 3f...) while closed tubes produce only odd harmonics (f, 3f, 5f...).',
-          diagram: 'MusicalWavesDiagram',
+          keyIdea: 'A tube makes music when air bouncing back and forth inside it creates a standing wave. The fundamental frequency is f = v / 2L \u2014 shorter tube, higher note.',
+          diagram: 'FluteStandingWaveDiagram',
         },
         {
-          title: 'Harmonics and Timbre: Why Instruments Sound Different',
+          title: 'Finger Holes Change the Note',
           paragraphs: [
-            'When you play a note on a bamboo flute, you hear a single pitch — but the sound actually contains multiple frequencies simultaneously. The lowest frequency is the fundamental (which determines the perceived pitch), and layered on top of it are the harmonics — the second harmonic at twice the fundamental frequency, the third at three times, and so on. The relative loudness of each harmonic determines the timbre (tonal quality) of the sound — the quality that lets you distinguish a flute from a trumpet playing the same note.',
-            'A pure sine wave (a single frequency with no harmonics) sounds thin and electronic — like a tuning fork or a basic synthesizer tone. A bamboo flute produces a warm, breathy sound because its harmonics are relatively weak beyond the first few, and the irregular interior of the bamboo tube damps high harmonics more than low ones. A metal flute has a brighter, more penetrating sound because its smooth, rigid walls reflect sound waves more efficiently, preserving higher harmonics. A clarinet (which behaves like a closed tube) sounds distinctively hollow because it produces only odd harmonics.',
-            'Sound engineers and musicians describe timbre using spectral analysis — breaking a sound into its component frequencies using a mathematical technique called Fourier analysis. Any periodic sound, no matter how complex, can be decomposed into a sum of simple sine waves at the fundamental frequency and its harmonics. This is the Fourier theorem, one of the most important results in mathematics and physics. Digital audio recording and playback relies entirely on this principle: sounds are stored as frequency information and reconstructed by combining sine waves.',
+            'A flute with no holes plays only one note \u2014 not very musical. Drill a row of holes along the tube, and suddenly you can play melodies. Each time you open a hole, the pitch jumps up. Why?',
+            'The standing wave inside the tube does not care about the physical end of the tube \u2014 it cares about where air can escape. When you open a finger hole, air leaks out there. The standing wave now reflects from that hole instead of from the far end. You have **shortened the vibrating air column** without cutting the bamboo. A shorter column means a shorter wavelength, which means a higher frequency, which your ear hears as a higher pitch.',
+            'Here is the rule: the **effective length** L\u2032 is the distance from the embouchure (blow hole) to the first open finger hole. The frequency becomes f = v / 2L\u2032. Open a hole that cuts the column from 30 cm to 22 cm: f goes from 572 Hz to 780 Hz \u2014 a jump of almost a perfect fifth (the interval from C to G). This is exactly how Naga flute makers space their holes: they place each one at the precise point that shortens the column by the right amount for the next note in their scale.',
+            '**Prediction you can test:** If you have a flute with 6 holes, the bottom hole (closest to the far end) makes only a small pitch change when opened, because it barely shortens the column. The top hole (closest to the embouchure) makes a bigger change. Try it on any recorder or flute and listen \u2014 the pitch jump gets bigger as you open holes closer to the mouthpiece.',
           ],
-          keyIdea: 'Timbre — what makes a bamboo flute sound different from a metal one playing the same note — comes from the relative strength of harmonics, which can be analyzed mathematically using Fourier decomposition.',
-          diagram: 'SineWaveDiagram',
+          keyIdea: 'Each open finger hole acts as a new end for the vibrating air column. Opening a hole shortens the column, raises the frequency, and produces a higher note.',
+          diagram: 'FluteFingerHoleDiagram',
         },
         {
-          title: 'Pitch, Scales, and the Mathematics of Music',
+          title: 'Overtones \u2014 Why a Flute Sounds Different from a Trumpet',
           paragraphs: [
-            'Pitch is the perceptual quality of sound that we describe as "high" or "low" — it corresponds primarily to frequency. Higher frequency means higher pitch. The relationship between musical intervals and frequency ratios was first described by Pythagoras around 500 BCE. An octave — the interval from one C to the next C — corresponds to a frequency ratio of exactly 2:1. A perfect fifth (C to G) is 3:2. A perfect fourth (C to F) is 4:3. These simple integer ratios produce intervals that sound consonant (harmonious) to the human ear.',
-            'The Western chromatic scale divides the octave into 12 equal semitones, each with a frequency ratio of 2^(1/12) ≈ 1.0595. This equal temperament system, standardized around the 18th century, is a mathematical compromise: no interval except the octave is a perfect integer ratio, but all intervals are close enough to sound good, and the system allows music to be played in any key without retuning. Many Asian musical traditions, including some used by Naga musicians, use different tuning systems — pentatonic (5-note) scales that emphasize different intervals.',
-            'On a bamboo flute, different notes are produced by opening and closing finger holes drilled along the tube. Each open hole effectively shortens the resonating air column — the standing wave reflects from the first open hole rather than the end of the tube. The spacing of holes must follow precise mathematical relationships to produce the correct frequency ratios for the desired scale. Traditional bamboo flute makers in Nagaland and across Asia achieved remarkably accurate tuning through generations of trial-and-error refinement — empirically discovering the same mathematical relationships that Pythagoras described theoretically.',
+            'Play middle C on a flute and on a trumpet. Both are 262 Hz. Both are equally loud. But you can tell them apart instantly, even with your eyes closed. How? The answer is **overtones** (also called harmonics).',
+            'When a tube vibrates at its fundamental frequency (say 262 Hz), it also vibrates \u2014 more quietly \u2014 at 2\u00d7 that frequency (524 Hz), 3\u00d7 (786 Hz), 4\u00d7 (1048 Hz), and so on. These are the **harmonics**. Every instrument produces them, but in different proportions. A bamboo flute produces a very strong fundamental with weak upper harmonics \u2014 that is why it sounds pure and breathy. A trumpet produces strong harmonics all the way up \u2014 that is why it sounds bright and brassy. A clarinet (a closed tube) suppresses even harmonics (2nd, 4th, 6th) and keeps only odd ones (3rd, 5th, 7th) \u2014 that is why it sounds hollow.',
+            'The specific recipe of harmonics \u2014 which ones are present and how loud each is \u2014 is called the **timbre** (pronounced TAM-ber) of the instrument. Timbre is to sound what colour is to light: it is the quality that tells you *what* is making the sound. Your brain decodes it effortlessly, which is why you can recognise a friend\u2019s voice in a noisy room. The voice has a unique harmonic fingerprint, just like a flute, a trumpet, or a bamboo stalk in the wind.',
+            '**Check yourself:** A clarinet and a flute both play the note A4 (440 Hz). The clarinet sounds hollow; the flute sounds pure. Which harmonics does the clarinet suppress? (Answer: even harmonics \u2014 880, 1760, 2640 Hz. It keeps the odd ones: 1320, 2200, 3080 Hz. The missing even harmonics create the hollow character.)',
           ],
-          keyIdea: 'Musical intervals correspond to frequency ratios — an octave is 2:1, a fifth is 3:2 — and flute holes are spaced to shorten the resonating air column by precise amounts that produce the notes of a musical scale.',
+          keyIdea: 'Every instrument produces a unique mixture of harmonics on top of the fundamental. This mixture \u2014 the timbre \u2014 is what makes a bamboo flute sound warm and a trumpet sound bright, even on the same note.',
+          diagram: 'FluteOvertonesDiagram',
+        },
+        {
+          title: 'Building an Instrument \u2014 The Physics of Design',
+          paragraphs: [
+            'A Naga flute maker does not just chop a piece of bamboo and drill random holes. Every choice \u2014 the length of the tube, its inner diameter, the thickness of the walls, the size and placement of each hole, even the species of bamboo \u2014 shapes the physics of the sound. Instrument design is applied physics.',
+            '**Bore shape** is the most important factor. A cylindrical bore (same diameter throughout) produces a clear, pure tone with weak upper harmonics. A conical bore (wider at one end) amplifies higher harmonics, giving a richer, more complex sound. A bamboo flute is naturally cylindrical, which is one reason it sounds so clean. An oboe has a conical bore, which is why it sounds much richer and more nasal.',
+            '**Material** matters because it determines how much sound energy the walls absorb. Bamboo is porous and slightly flexible \u2014 it absorbs high-frequency vibrations, damping the upper harmonics and giving the flute its warm, breathy character. A metal flute (silver or nickel alloy) has hard, smooth walls that reflect sound efficiently, preserving high harmonics and producing a brighter, more penetrating tone. Same physics, different materials, completely different voice.',
+            '**Prediction you can test:** Tap a bamboo tube and a metal tube of the same length with a pencil. The bamboo produces a dull *thock* that dies quickly. The metal rings clearly and sustains much longer. The bamboo absorbs vibration energy; the metal reflects it. This is the same physics that makes a bamboo flute sound warm and a silver flute sound bright.',
+          ],
+          keyIdea: 'Every design choice in an instrument \u2014 bore shape, material, wall thickness, hole placement \u2014 changes which harmonics are amplified or absorbed, shaping the instrument\u2019s unique voice.',
+          diagram: 'FluteDesignDiagram',
         },
       ],
       vocabulary: [
-        ['Frequency', 'The number of sound wave vibrations per second, measured in Hertz (Hz) — higher frequency means higher pitch'],
-        ['Resonance', 'When an object vibrates strongly at its natural frequency — this is how a bamboo tube amplifies sound'],
-        ['Amplitude', 'The height of a sound wave — bigger amplitude means louder sound'],
-        ['Harmonics', 'Higher-pitched overtones that vibrate along with the main note, giving each instrument its unique tone color'],
-        ['Standing wave', 'A wave pattern that stays in place inside a tube or string — the air column in a flute forms standing waves to produce notes'],
+        ['Standing wave', 'A wave pattern that appears to stand still inside a tube, with fixed nodes (no vibration) and antinodes (maximum vibration) \u2014 this is how a flute produces a steady note'],
+        ['Fundamental frequency', 'The lowest frequency a tube can produce \u2014 f = v / 2L for an open tube \u2014 this is the note you hear as the pitch'],
+        ['Harmonics', 'Frequencies that are exact multiples of the fundamental (2f, 3f, 4f...) \u2014 they vibrate simultaneously with the fundamental and give each instrument its unique character'],
+        ['Timbre', 'The quality of a sound determined by its unique mixture of harmonics \u2014 what lets you tell a flute from a trumpet even when they play the same note (pronounced TAM-ber)'],
+        ['Node / Antinode', 'A node is a point in a standing wave that never moves; an antinode is a point that vibrates the most \u2014 open ends of a tube are always antinodes'],
+        ['Bore', 'The hollow interior of a wind instrument \u2014 its shape (cylindrical vs conical) determines which harmonics are amplified'],
       ],
       trueFalse: [
-        { statement: 'Sound can travel through empty space (a vacuum).', isTrue: false, explanation: 'Sound needs a medium — air, water, or solid material — to travel. In a vacuum there are no molecules to vibrate, so sound cannot propagate. This is why there is no sound in outer space.' },
-        { statement: 'A shorter air column inside a flute produces a higher-pitched note.', isTrue: true, explanation: 'When you open a finger hole on a flute, you shorten the vibrating air column. A shorter column vibrates at a higher frequency, producing a higher pitch. This is the fundamental principle behind how all wind instruments change notes.' },
-        { statement: 'All musical instruments around the world use the same 12-note scale.', isTrue: false, explanation: 'Many musical traditions use different scales. Indian classical music uses ragas with microtones between the Western semitones. Traditional Naga music often uses pentatonic (5-note) scales. The 12-note chromatic scale is just one system among many.' },
+        { statement: 'A shorter bamboo tube produces a lower-pitched note than a longer one.', isTrue: false, explanation: 'Shorter tube = shorter wavelength = higher frequency = higher pitch. The formula f = v / 2L shows this directly: halve the length and the frequency doubles (one octave higher).' },
+        { statement: 'Opening a finger hole on a flute effectively shortens the vibrating air column.', isTrue: true, explanation: 'The standing wave reflects from the first open hole rather than the far end of the tube. This makes the effective length shorter, which raises the frequency and produces a higher note.' },
+        { statement: 'A flute and a trumpet playing the same note produce identical sound waves.', isTrue: false, explanation: 'They produce the same fundamental frequency, but completely different harmonic profiles. The flute has weak upper harmonics (pure tone); the trumpet has strong upper harmonics (bright tone). These different timbres make the identical pitch sound very different.' },
       ],
       facts: [
-        'Sound travels at about 343 meters per second in air at room temperature — roughly 1,235 km/h. It travels even faster through water (about 1,500 m/s) and fastest through solids like steel (about 5,960 m/s).',
-        'Bamboo is one of the oldest materials used for musical instruments. Bamboo flutes dating back over 9,000 years have been found in China, making them among the earliest known musical instruments in human history.',
-        'The human ear can detect sounds ranging from about 20 Hz (a deep rumble) to 20,000 Hz (a high whistle). Dogs can hear up to 65,000 Hz, and bats can detect frequencies above 100,000 Hz.',
+        'Bamboo flutes are among the oldest known musical instruments. Bone flutes found in China\u2019s Henan province date back over 9,000 years, and bamboo instruments almost certainly predate them \u2014 bamboo simply does not survive in the archaeological record the way bone does.',
+        'The speed of sound in air changes with temperature: 343 m/s at 20\u00b0C, but only 331 m/s at 0\u00b0C. This is why wind instruments go slightly flat in cold weather \u2014 the lower speed of sound lowers all frequencies.',
+        'Naga tribes in northeast India use bamboo in over a dozen different instruments including flutes, mouth organs, and percussion tubes. The bamboo mouth organ (similar to the Laotian khaen) produces chords by vibrating free reeds cut from bamboo \u2014 a completely different sound-production mechanism from a flute.',
       ],
-      offlineActivity: 'Make a simple pan flute from 5 drinking straws cut to different lengths (e.g., 12 cm, 10 cm, 8 cm, 6 cm, 4 cm). Seal one end of each straw with tape or clay, then tape them together side by side from longest to shortest. Blow across the open tops and listen to the different pitches. Which straw makes the highest note? Measure the lengths and see if you can figure out the relationship between length and pitch.',
+      offlineActivity: 'Make a pan flute from 5 drinking straws cut to different lengths: 12 cm, 10 cm, 8 cm, 6 cm, and 4 cm. Seal one end of each straw with tape or modelling clay (this makes them closed tubes). Tape the straws together side by side, with the open ends aligned at the top. Blow gently across each straw\u2019s open top. The shortest straw plays the highest note. Now measure and predict: using f = v / 4L (closed tube formula), calculate the expected frequency for each straw. The 12 cm straw should produce about 715 Hz; the 4 cm straw about 2144 Hz. Does halving the length really double the pitch?',
+      offlineActivityDiagram: 'ActivityFluteBuildDiagram',
+      codeTeaser: `import numpy as np
+import matplotlib.pyplot as plt
+
+# The bamboo flute equation: f = v / 2L
+tube_lengths = np.array([0.50, 0.40, 0.30, 0.25, 0.20])  # metres
+v_sound = 343  # m/s at 20\u00b0C
+frequencies = v_sound / (2 * tube_lengths)
+
+plt.bar(range(len(tube_lengths)), frequencies, color='#22c55e')
+plt.xticks(range(len(tube_lengths)),
+           [f"\${L*100:.0f} cm" for L in tube_lengths])
+plt.ylabel("Frequency (Hz)")
+plt.title("Bamboo Tube Length vs Pitch")
+plt.show()  # What pattern do you see?`,
+      referenceLinks: [
+        { slug: 'music-and-arts', reason: 'Deep dive into harmonics, decibels, rhythm, and how sound becomes music' },
+        { slug: 'waves-and-properties', reason: 'The physics of all waves \u2014 frequency, wavelength, amplitude, interference \u2014 the foundation for understanding sound' },
+      ],
+      nextLessons: [
+        { slug: 'singing-bamboo', reason: 'The same bamboo physics but in nature \u2014 how wind creates sound in bamboo groves through vortex shedding' },
+        { slug: 'woodpeckers-drum', reason: 'Another story about sound and vibration \u2014 the woodpecker creates drumming rhythms through controlled impacts' },
+        { slug: 'girl-who-spoke-to-elephants', reason: 'Elephants communicate using infrasound (below 20 Hz) \u2014 the same wave physics, applied to frequencies too low for humans to hear' },
+      ],
     },
   },
   {
@@ -4251,53 +4445,105 @@ To this day, the great hornbill wears its golden crown through the forests of Na
     level0: {
       concepts: [
         {
-          title: 'Avian Flight Mechanics: How Birds Fly',
+          title: 'The Casque — Nature’s Hard Hat',
           paragraphs: [
-            'Bird flight is governed by the same aerodynamic principles as airplane flight, involving four forces: lift (upward, opposing gravity), weight (downward, due to gravity), thrust (forward, from flapping wings), and drag (backward, from air resistance). Lift is generated by the shape of the wing — an airfoil. The upper surface of a bird\'s wing is curved (cambered) while the lower surface is relatively flat. Air flowing over the curved upper surface must travel a longer path, moving faster and creating lower pressure (Bernoulli\'s principle). The pressure difference between the upper and lower surfaces produces the upward lift force.',
-            'Hornbills are large birds (the Great Hornbill weighs 2.5-4 kg with a wingspan of about 1.5 meters) that use a combination of flapping and gliding flight. During flapping, the downstroke generates both lift and thrust: the wing moves downward and forward, pushing air backward and downward (Newton\'s third law generates an equal and opposite force — forward and upward). During the upstroke, the wing partially folds to reduce drag. In gliding, the bird holds its wings outstretched and converts altitude into forward distance, descending slowly along a path determined by its lift-to-drag ratio.',
-            'To support flight, bird skeletons have evolved to minimize weight while maintaining strength. Bird bones are hollow, with internal struts (trabeculae) arranged along lines of maximum stress — an engineering technique called truss construction, identical in principle to the internal structure of airplane wings. A hornbill\'s skeleton weighs only about 5-7% of its total body mass, compared to 15% in a typical mammal. Birds also have a unique respiratory system with air sacs that extend into their hollow bones, allowing continuous airflow through the lungs during both inhalation and exhalation — far more efficient than mammalian breathing.',
+            'Look at a great hornbill and the first thing you notice is that massive yellow-and-black structure sitting on top of its bill. It looks heavy, like a helmet made of bone. But here is the surprise: pick one up (researchers have) and it weighs almost nothing. How can something that big be that light?',
+            'The answer is the same trick engineers use in bicycle helmets, airplane wings, and cardboard boxes: **make it hollow with internal supports**. The casque is made of **keratin** — the exact same protein that forms your fingernails and hair. The outer walls are thin but stiff. Inside, a network of bony struts criss-crosses the space like the framework of a building, creating air pockets. This is called a **cellular structure**. The material sits only where stress is highest (the surface), and is removed where it is not needed (the interior). Maximum strength, minimum weight.',
+            'Why does this matter for the bird? A hornbill weighs 2.5–4 kg and needs to fly through dense forest canopy. Every extra gram on its head shifts its centre of gravity forward, making flight harder. Evolution solved this by building a casque that *looks* imposing (useful for scaring rivals and attracting mates) while *weighing* very little (essential for flight). The Helmeted Hornbill is the one exception — its casque is solid, ivory-like material, making it the only hornbill with a truly heavy head. Males of that species crash into each other casque-first in midair battles, so the solid structure works as a battering ram.',
+            '**Check yourself:** A hollow tube is stronger per gram than a solid rod of the same material. Can you think of other examples where nature or engineering uses hollow structures for strength? (Hint: bamboo, bird bones, bicycle frames, the Eiffel Tower’s legs.)',
           ],
-          keyIdea: 'Birds fly using the same four forces as airplanes — lift from airfoil-shaped wings, thrust from flapping, and hollow bones with internal truss structures that minimize weight while maintaining strength.',
-          diagram: 'BernoulliDiagram',
+          keyIdea: 'The hornbill casque is made of keratin (like your fingernails), built hollow with internal struts — the same lightweight-but-strong engineering found in bike helmets and airplane wings.',
+          diagram: 'HornbillCasqueDiagram',
         },
         {
-          title: 'The Casque: Structure and Function of the Hornbill\'s Crown',
+          title: 'Why Hornbills Seal Themselves In',
           paragraphs: [
-            'The most distinctive feature of hornbills is the casque — a large, often brightly colored structure on top of the bill. The casque varies dramatically across hornbill species: in the Great Hornbill, it is a large, concave-sided structure of solid keratin and bone. In the Rhinoceros Hornbill, it curves upward like a horn. In the Helmeted Hornbill, uniquely, the casque is solid ivory-like material (hornbill ivory) rather than hollow — making it the only bird with a solid casque, and unfortunately a target for illegal wildlife trade.',
-            'For most hornbill species, the casque is surprisingly lightweight despite its large size. The Great Hornbill\'s casque is mostly hollow, with thin walls of keratin (the same protein as human fingernails) supported by an internal network of bony struts — a natural cellular or foam structure. This is the same engineering principle as sandwich panels used in aerospace: thin, stiff outer surfaces separated by a lightweight core. The result is a structure that appears massive and imposing but adds relatively little weight to the bird\'s skull, preserving its ability to fly.',
-            'The casque serves multiple functions. It acts as a resonating chamber that amplifies the hornbill\'s calls — the hollow interior modifies the sound produced by the syrinx (the bird\'s voice organ), giving hornbill calls their distinctive booming quality that carries through dense forest. The casque also plays a role in sexual selection: larger, more brightly colored casques may signal health and genetic fitness to potential mates. In the Helmeted Hornbill, males engage in aerial jousting, colliding casque-to-casque in midair — the solid casque absorbs these impacts, functioning as a natural helmet. The casque grows throughout the bird\'s life, with its size and color changing with age, serving as a visual indicator of maturity.',
+            'Imagine locking yourself inside a room for three months. No going out. Someone passes food to you through a tiny slit in the wall. That is exactly what a female hornbill does every breeding season — and it is one of the most extraordinary nesting strategies in the animal kingdom.',
+            'Here is how it works. The female finds a large natural cavity in a tree trunk (hornbills cannot excavate their own holes — they rely on existing ones). She climbs inside and then **seals the entrance** from the inside using mud, droppings, and chewed fruit pulp, leaving only a narrow vertical slit — just wide enough for the male’s bill tip to poke through. She stays sealed inside for **2–4 months**, laying eggs, incubating them, and raising the chicks until they are strong enough to survive outside.',
+            'During this entire time, the **male is the sole provider**. He flies back and forth 50–70 times per day, carrying fruits (mostly figs) to the slit and passing them to the female inside. If the male dies or is unable to return, the female and chicks usually die too — which is why hornbills mate for life and defend their territory fiercely.',
+            '**Why seal at all?** The mud wall is a fortress. Snakes, monitor lizards, and climbing predators cannot get through it. The slit is too narrow for any predator to reach inside. The cavity also maintains a stable temperature and humidity — a natural incubator. When the chicks are nearly ready to fledge, the female breaks out of the seal. In some species, the chicks then reseal the entrance themselves and continue being fed until they are fully feathered.',
+            '**Prediction you can test:** Large old trees with natural cavities are rare. If logging removes old-growth trees, hornbills lose nesting sites. This is a major conservation problem — no old trees, no hornbills.',
           ],
-          keyIdea: 'The hornbill casque is a lightweight cellular structure (hollow with internal struts) that amplifies calls, signals fitness to mates, and in some species serves as an impact-absorbing helmet during aerial combat.',
+          keyIdea: 'The female hornbill seals herself inside a tree cavity for months, protected by a mud wall, while the male delivers food through a tiny slit — an extreme strategy to protect eggs and chicks from predators.',
+          diagram: 'HornbillNestDiagram',
         },
         {
-          title: 'Seed Dispersal: Hornbills as Forest Architects',
+          title: 'Keystone Species — Remove One, Lose Many',
           paragraphs: [
-            'Hornbills are among the most important seed dispersers in tropical and subtropical forests across Asia and Africa. They feed on fruits — especially figs, which can constitute 50-80% of their diet — and swallow the fruits whole. The seeds pass through the hornbill\'s digestive system and are deposited in droppings far from the parent tree, often several kilometers away. This long-distance dispersal is critical for forest ecology because it allows trees to colonize new areas, reduces competition between parent trees and their offspring, and maintains genetic diversity by mixing populations.',
-            'The seed dispersal effectiveness of hornbills is exceptional. Their large body size allows them to swallow and transport large seeds that smaller birds cannot handle. They fly long distances between fruiting trees, dispersing seeds across a wide area. And their digestive process actually enhances germination: the seed coat is partially broken down by stomach acids, and the droppings provide a nutrient-rich medium for the seedling. Studies in Southeast Asian forests have found that some tree species depend entirely on hornbills for dispersal — without hornbills, these trees cannot reproduce beyond the shadow of their own canopy.',
-            'The loss of hornbills from a forest triggers an ecological cascade. Without large-bodied dispersers, large-seeded tree species decline because their seeds fall directly below the parent tree and cannot establish in the deep shade. Small-seeded tree species (dispersed by smaller birds and wind) gradually replace them, changing the forest composition. Over decades, the entire forest structure shifts — canopy height decreases, species diversity declines, and carbon storage drops. This is why hornbill conservation is forest conservation — protecting hornbills protects the process that builds and maintains the forest itself.',
+            'A **keystone** is the wedge-shaped stone at the top of a stone arch. Remove it and the entire arch collapses. A **keystone species** works the same way in an ecosystem: remove it and the whole system changes, even though it may not be the most numerous animal there.',
+            'Hornbills are keystone species because of **seed dispersal**. They eat fruits — especially figs, which can make up 80% of their diet — and swallow them whole. The seeds pass through their digestive system and come out in droppings far from the parent tree, sometimes 12 km away. This is not accidental gardening; it is essential for forest survival. A seed that falls directly under its parent tree usually fails: the shade is too deep, and it must compete with the parent for water, light, and nutrients. Seeds need to travel.',
+            'Hornbills are uniquely good at this job. Their large body size lets them swallow seeds that smaller birds cannot handle — the big seeds of canopy trees that form the forest’s backbone. Their stomach acids partially break down the seed coat, actually *helping* germination. And their droppings provide a nutrient-rich starter package for the seedling. Studies in Southeast Asian forests found that some tree species depend **entirely** on hornbills for dispersal. No hornbills, no new trees of those species. Ever.',
+            '**Now imagine removing them.** Without hornbills, large-seeded trees stop spreading. Over decades, they are replaced by small-seeded species that wind and small birds can disperse. The canopy gets shorter. Species that depended on tall trees (epiphytes, primates, woodpeckers) lose their habitat. Carbon storage drops because small trees store less carbon than large ones. One missing species reshapes the entire forest. That is the keystone effect.',
+            '**Check yourself:** Can you think of other keystone species? Hint: wolves in Yellowstone (they control deer, which controls plant growth), bees (pollination), and sea otters (they eat sea urchins, which eat kelp forests).',
           ],
-          keyIdea: 'Hornbills disperse large seeds across kilometers, and some tree species depend entirely on them — losing hornbills triggers an ecological cascade that changes forest composition, reduces diversity, and decreases carbon storage.',
-          diagram: 'FoodWebDiagram',
+          keyIdea: 'Hornbills disperse the large seeds that build forests — remove them and big trees stop spreading, the canopy shrinks, biodiversity falls, and the whole ecosystem shifts. One species, massive impact.',
+          diagram: 'HornbillKeystoneDiagram',
+        },
+        {
+          title: 'Communication Without Words',
+          paragraphs: [
+            'Hornbills cannot speak. But they have a remarkably rich communication system that uses **sound**, **visual displays**, and even the **noise of their wings** to send messages across the forest.',
+            'Sound comes first. A hornbill’s voice is produced by the **syrinx** — a vocal organ located where the windpipe splits into the two bronchi (all birds have one). Air pushed over membranes in the syrinx creates vibrations, much like blowing across the top of a bottle. But hornbills have an amplifier that most birds do not: the **casque**. The hollow interior of the casque acts as a resonating chamber, boosting the volume and adding a deep, booming quality. The result is a call that carries 2–4 km through dense forest — essential when your territory covers several square kilometres of canopy.',
+            'Different calls mean different things. **Territory calls** are loud, repetitive booms that say “this forest patch is occupied.” **Mating duets** are complex, back-and-forth calls between a pair, reinforcing their bond. **Alarm calls** are short, sharp bursts that warn of predators — and other birds (and even monkeys) eavesdrop on hornbill alarms because hornbills sit high in the canopy and spot danger early.',
+            'Then there is the wingbeat. Most large birds fly silently (owls are the masters of this). Hornbills are the opposite — their flight feathers lack the soft fringe that dampens sound in owl feathers, so every wingbeat produces a loud “whoosh-whoosh-whoosh” audible from 800 metres away. This is essentially an unintentional broadcast: “a large hornbill is flying through.” Whether this is a cost (it alerts predators) or a benefit (it signals dominance) is still debated by ornithologists.',
+            '**Prediction you can test:** Go outside and listen for bird calls for 10 minutes. How many different call types can you distinguish? Territory songs are usually repetitive. Alarm calls are short and sharp. Contact calls between a pair are softer. See if you can match the pattern to the purpose.',
+          ],
+          keyIdea: 'Hornbills communicate through booming calls (amplified by the casque), visual displays, and even wingbeat noise — each type of call serves a specific purpose: territory, mating, or alarm.',
+          diagram: 'HornbillCallDiagram',
         },
       ],
       vocabulary: [
-        ['Casque', 'The large, helmet-like structure on top of a hornbill\'s bill — it amplifies calls and may signal fitness to mates'],
-        ['Seed dispersal', 'The movement of seeds away from the parent plant — hornbills are key seed dispersers in tropical forests'],
-        ['Keystone species', 'A species whose impact on its ecosystem is disproportionately large relative to its numbers'],
-        ['Ecological cascade', 'A chain reaction of changes through an ecosystem when one species is added or removed'],
+        ['Keratin', 'A tough, fibrous protein that makes up fingernails, hair, feathers, and the hornbill’s casque — lightweight yet rigid'],
+        ['Casque', 'The large, helmet-like structure on top of a hornbill’s bill — mostly hollow, it amplifies calls and signals maturity'],
+        ['Keystone species', 'A species whose removal causes disproportionately large changes in its ecosystem — like the keystone in an arch'],
+        ['Seed dispersal', 'The movement of seeds away from the parent plant, often by animals, wind, or water — essential for forest regeneration'],
+        ['Ecological cascade', 'A chain reaction of changes through an ecosystem triggered when one species is added or removed'],
+        ['Syrinx', 'The vocal organ in birds, located where the windpipe branches — produces sound from vibrating membranes'],
         ['Mutualism', 'A relationship where both species benefit — hornbills get food from fruit trees, and the trees get their seeds dispersed'],
       ],
       trueFalse: [
-        { statement: 'The hornbill\'s casque is solid bone and makes the bird\'s head very heavy.', isTrue: false, explanation: 'The casque is mostly hollow, made of a lightweight keratin honeycomb structure (the same protein as your fingernails). In most species it weighs very little relative to the bird\'s body. The hollow interior acts as a resonating chamber that amplifies the hornbill\'s calls.' },
-        { statement: 'Female hornbills seal themselves inside tree holes during nesting.', isTrue: true, explanation: 'The female hornbill walls herself into a tree cavity using mud, droppings, and fruit pulp, leaving only a narrow slit. The male feeds her through this slit for the entire nesting period (2-4 months). This protects the eggs and chicks from snakes and other predators.' },
+        { statement: 'The hornbill’s casque is solid bone and makes the bird’s head very heavy.', isTrue: false, explanation: 'The casque is mostly hollow, made of a lightweight keratin structure with internal struts (the same protein as your fingernails). In most species it weighs very little relative to the bird’s body. The hollow interior also acts as a resonating chamber that amplifies calls.' },
+        { statement: 'Female hornbills seal themselves inside tree holes during nesting, and the male feeds the family through a slit.', isTrue: true, explanation: 'The female walls herself into a tree cavity using mud, droppings, and fruit pulp, leaving only a narrow slit. The male delivers fruit 50–70 times per day for 2–4 months. This protects eggs and chicks from snakes and other climbing predators.' },
         { statement: 'If hornbills disappear from a forest, the forest eventually changes in structure and species composition.', isTrue: true, explanation: 'Hornbills disperse large seeds that smaller birds cannot carry. Without hornbills, large-seeded trees fail to spread and are gradually replaced by small-seeded species, reducing canopy height, biodiversity, and carbon storage over decades.' },
       ],
       facts: [
-        'There are about 60 species of hornbills worldwide, and Northeast India is home to several including the great hornbill, wreathed hornbill, and rufous-necked hornbill. The Nyishi people of Arunachal Pradesh traditionally wore hornbill casques in their headgear.',
-        'Great hornbills can live over 50 years in the wild and mate for life. A pair will return to the same nesting tree year after year, and some nesting trees have been used continuously for over a century by successive generations of hornbills.',
-        'A single great hornbill can disperse seeds of over 40 different tree species and may carry seeds up to 12 kilometers from the parent tree — making them one of the most effective long-distance seed dispersers in Asian forests.',
+        'There are about 60 species of hornbills worldwide, and Northeast India is home to several including the great hornbill, wreathed hornbill, and rufous-necked hornbill. The Nyishi people of Arunachal Pradesh traditionally wore hornbill casques in their headgear, though conservation programmes now promote fibre replicas.',
+        'Great hornbills can live over 50 years in the wild and mate for life. A pair returns to the same nesting tree year after year, and some nesting trees have been used continuously for over a century by successive generations.',
+        'A single great hornbill can disperse seeds of over 40 different tree species and may carry seeds up to 12 kilometres from the parent tree — making them one of the most effective long-distance seed dispersers in Asian forests.',
       ],
-      offlineActivity: 'Investigate seed dispersal in your neighborhood. Collect 5 different seeds or fruits from plants around your home (look for berries, winged seeds, sticky seeds, fluffy seeds). For each one, figure out how it travels: wind, water, animal fur, bird droppings, or explosion? Draw each seed and label its dispersal method. Which method moves seeds the farthest? Think about why different plants evolved different strategies.',
+      offlineActivity: 'Become a bird-watcher for 30 minutes. Sit quietly in your garden, balcony, or a park. For every bird you see or hear, write down: (1) the time, (2) what the bird looks like, (3) where it is (ground, tree, rooftop, flying), (4) what it is doing (feeding, calling, preening, fighting), and (5) what its call sounds like (try writing it out: \u201ccaw-caw,\u201d \u201ctweet-tweet,\u201d \u201ckooo-kooo\u201d). After 30 minutes, count: how many species did you find? Which was the most common? Which spent the most time calling \u2014 and can you guess why?',
+      offlineActivityDiagram: 'ActivityBirdWatchDiagram',
+      codeTeaser: `# How far does a hornbill carry seeds?
+import numpy as np
+
+# A hornbill eats a fig, flies, and drops the seed
+flight_speed_kmh = 50        # km/h
+gut_retention_hours = 0.5    # how long seed stays inside
+
+dispersal_km = flight_speed_kmh * gut_retention_hours
+print(f"Seed dispersal distance: \${dispersal_km} km")
+
+# What if we model many flights?
+np.random.seed(42)
+distances = np.random.uniform(0.5, 12, size=100)  # km
+print(f"Average dispersal: \${distances.mean():.1f} km")
+print(f"Maximum dispersal: \${distances.max():.1f} km")
+# A tree without hornbills: seeds fall 0 km from parent`,
+      referenceLinks: [
+        { slug: 'ecosystems-and-biomes', reason: 'Full guide to keystone species, food webs, and how ecosystems stay in balance' },
+        { slug: 'plant-biology', reason: 'How seeds germinate, how trees grow, and why dispersal matters for forest health' },
+      ],
+      nextLessons: [
+        { slug: 'banyan-tree-of-japi', reason: 'Another story about trees and the ecosystems they support \u2014 the banyan\u2019s aerial roots and forest architecture' },
+        { slug: 'girl-grew-forest', reason: 'One person planted an entire forest on a Brahmaputra sandbar \u2014 the reverse of the ecological cascade you learned about here' },
+        { slug: 'the-woodpeckers-drum', reason: 'Another bird with extraordinary skull engineering \u2014 how woodpeckers survive 1,200 g impacts without brain damage' },
+      ],
+      quiz: [
+        { question: 'What is the hornbill\u2019s casque primarily made of?', options: ['Solid bone', 'Keratin (same protein as fingernails)', 'Calcium carbonate (like seashells)', 'Cartilage (like your nose)'], answer: 1 },
+        { question: 'Why does the female hornbill seal herself inside a tree cavity?', options: ['To hibernate during winter', 'To protect eggs and chicks from predators like snakes', 'Because she cannot fly during nesting', 'To store food for the dry season'], answer: 1 },
+        { question: 'What happens to a forest if hornbills disappear?', options: ['Nothing changes \u2014 other birds take over', 'Large-seeded trees stop spreading, canopy shrinks, biodiversity falls', 'The forest grows taller without hornbills eating the fruit', 'Only fig trees are affected'], answer: 1 },
+        { question: 'How does the hornbill\u2019s casque help with communication?', options: ['It produces sound directly like a speaker', 'It acts as a hollow resonating chamber that amplifies calls', 'It vibrates at ultrasonic frequencies', 'It has no role in communication'], answer: 1 },
+      ],
     },
   },
   {
@@ -4381,53 +4627,105 @@ And that is why, to this very day, if you sit by the Barak River and wait quietl
     level0: {
       concepts: [
         {
-          title: 'Swim Bladders and Buoyancy Control',
+          title: 'Dissolved Oxygen \u2014 Fish Need to Breathe Too',
           paragraphs: [
-            'Most bony fish have an internal organ called a swim bladder — a gas-filled sac that works like a built-in life jacket. By adjusting the amount of gas inside the bladder, a fish can rise, sink, or hover at any depth without wasting energy swimming. This is the principle of neutral buoyancy: when the upward buoyant force exactly equals the downward pull of gravity, the fish floats effortlessly in place.',
-            'The swim bladder fills with gas through one of two mechanisms. In physostomous fish (like salmon and carp), a duct connects the bladder to the esophagus, so the fish can gulp air at the surface. In physoclistous fish (like perch and bass), a network of blood vessels called the rete mirabile extracts dissolved gases from the blood and pumps them into the bladder. This second method is slower but allows precise depth control without surfacing.',
-            'When a fish leaps out of the water, the swim bladder plays a role in the launch. The compressed gas provides a small amount of upward thrust as the fish rockets toward the surface. Once airborne, the bladder is essentially useless — the fish is in free fall, governed entirely by gravity and air resistance. The splash-down re-compresses the bladder, and the fish must quickly readjust to regain neutral buoyancy.',
+            'You breathe air, which is about 21% oxygen. Fish breathe water \u2014 and here is the surprise: water contains only a tiny amount of dissolved oxygen, roughly 8\u201312 milligrams per litre in a healthy river. That is less than 1% of what air contains. So how do fish get enough?',
+            'The answer is gills. As water flows over a fish\u2019s gills, oxygen passes through thin membranes into the blood. The trick is **countercurrent exchange**: blood flows in the opposite direction to the water. This keeps a concentration difference along the entire gill surface, allowing the fish to extract up to 80\u201390% of the dissolved oxygen \u2014 far more efficient than our lungs (~25%). Think of it like wringing out a wet towel: by twisting the opposite way, you squeeze out more water.',
+            'Here is the critical problem: **warm water holds less oxygen**. At 5\u00B0C, water can dissolve about 12.8 mg/L of oxygen. At 30\u00B0C, it drops to about 7.5 mg/L. Gas molecules move faster in warm water and escape into the air more easily. Add pollution (which feeds oxygen-consuming bacteria) and algal blooms (which consume O\u2082 at night), and you can get dangerously low levels.',
+            'When dissolved oxygen drops below about 4 mg/L, fish become stressed. They gasp at the surface, cluster near rapids (where water is churned and aerated), or \u2014 as Borali showed us \u2014 they jump. Jumping is a last-resort survival behaviour: the fish is literally trying to gulp air because the water is not providing enough oxygen.',
           ],
-          keyIdea: 'A swim bladder lets fish control their depth by adjusting internal gas volume — the same buoyancy principle that makes submarines rise and sink.',
-          diagram: 'BuoyancyDiagram',
+          keyIdea: 'Fish breathe dissolved O\u2082 through their gills. Warm water holds less oxygen, so hot weather + pollution = stressed fish that gasp and jump.',
+          diagram: 'FishOxygenDiagram',
+          checkYourself: 'Predict: would fish in a fast-flowing mountain stream or a warm, still pond be more likely to jump from low oxygen? Why?',
+          checkAnswer: 'The warm, still pond. Mountain streams are cold (more dissolved O\u2082) and fast-flowing (constantly mixed with air). A warm, still pond has less oxygen capacity and no turbulence to replenish it. Fish there are much more likely to become oxygen-stressed.',
         },
         {
-          title: 'Muscle Contraction and the Physics of a Fish Leap',
+          title: 'Why Fish Jump \u2014 Four Survival Reasons',
           paragraphs: [
-            'A fish jump is an explosive burst of power that begins with the myomeres — W-shaped blocks of muscle arranged in segments along the fish\'s body. When these muscles contract in a rapid wave from head to tail, they bend the body into a tight C-shape and then snap it straight, driving the tail fin against the water like a paddle. The reaction force (Newton\'s third law) propels the fish upward and forward.',
-            'The speed of this tail stroke determines how high the fish can jump. A salmon, for example, can accelerate from rest to over 20 km/h in a fraction of a second. The kinetic energy at the water surface converts to potential energy as the fish rises — the same trade-off you see when you throw a ball upward. A 3 kg salmon launching at 6 m/s has enough energy to clear a 1.8-meter waterfall, which is roughly its maximum recorded jump height.',
-            'Muscle fiber type matters enormously. Fish have two main types: red (slow-twitch) fibers for sustained cruising, and white (fast-twitch) fibers for explosive bursts like jumping. White muscle can contract much faster but fatigues quickly because it relies on anaerobic metabolism — breaking down glycogen without oxygen. This is why a fish that jumps repeatedly needs rest periods to clear the lactic acid that builds up in its muscles.',
+            'A fish jumping out of water looks dramatic, but it is never random. Every jump is a response to a specific pressure. Let\u2019s walk through the four main reasons, because understanding them turns a simple splash into a readable signal.',
+            '**1. Low oxygen.** As we just learned, when dissolved O\u2082 drops too low, some fish leap to gulp air at the surface. Certain species (like climbing perch and snakeheads) have a special \u201Clabyrinth organ\u201D that lets them breathe air directly. But even species without this organ will jump and splash \u2014 the impact stirs up the water surface, mixing in a tiny bit of extra oxygen.',
+            '**2. Parasite removal.** Fish carry external parasites \u2014 leeches, flukes, and lice that attach to gills, fins, and scales. Jumping and slapping back against the water surface generates a shock force that can dislodge these hitchhikers. Studies on salmon show that heavily parasitized fish jump significantly more often than clean fish. The harder the landing, the more parasites get knocked off.',
+            '**3. Predator escape.** When a heron strikes from above or a larger fish attacks from below, prey fish explode out of the water in an unpredictable direction. This works because aquatic predators cannot follow into the air, and the random re-entry point makes it nearly impossible to predict where the fish will land. It is the underwater equivalent of a surprise exit through a window.',
+            '**4. Migration barriers.** During spawning season, salmon and mahseer must travel upstream to reach shallow, gravelly breeding grounds. When they hit a waterfall or rapids, they jump. These are not panic jumps \u2014 the fish reads the current, positions itself in the fastest upward flow, and launches at 60\u201380\u00B0 from horizontal. Biologists have measured that this angle range maximizes height for a given speed.',
           ],
-          keyIdea: 'Fish jump using explosive fast-twitch muscle contractions that convert kinetic energy at the surface into gravitational potential energy in the air.',
+          keyIdea: 'Fish jump to gulp oxygen, shake off parasites, escape predators, or clear migration obstacles. Each jump type has a different trigger and purpose.',
+          diagram: 'FishJumpReasonsDiagram',
+          checkYourself: 'A fisherman notices fish jumping much more than usual on a hot, still afternoon after heavy rain washed fertiliser into the river. Which of the four reasons is most likely? Why?',
+          checkAnswer: 'Low oxygen. Fertiliser feeds algae, which bloom rapidly. At night, algae consume oxygen instead of producing it. Combined with warm water (which holds less O\u2082) and still conditions (no mixing), dissolved oxygen plummets. The fish are gasping.',
         },
         {
-          title: 'Why Fish Jump: Dissolved Oxygen and Behavioral Triggers',
+          title: 'The Physics of a Fish Jump',
           paragraphs: [
-            'Fish jump for many reasons, and dissolved oxygen (DO) is one of the most important triggers. Oxygen dissolves into water from the atmosphere and from photosynthesizing aquatic plants. Warm water holds less dissolved oxygen than cold water — at 30°C, water holds roughly half the oxygen it can hold at 5°C. When DO drops below about 4 mg/L, many fish species become stressed and may jump to gulp air directly.',
-            'Parasite removal is another major reason. Fish leap and slap back against the surface to dislodge external parasites like sea lice, leeches, and flukes. Studies on salmon have shown that heavily parasitized fish jump significantly more often than clean fish. The impact force of landing can shake loose parasites that have attached to the gills, fins, or scales.',
-            'Predator evasion drives some of the most spectacular jumps. When a pike or heron attacks, prey fish explode out of the water in unpredictable directions. This is an escape strategy because most aquatic predators cannot follow into the air, and aerial predators do not expect prey to come from below the surface. The randomness of the jump direction makes it nearly impossible for the predator to predict where the fish will re-enter the water.',
-            'Finally, during spawning migrations, fish like salmon and mahseer must leap over waterfalls and rapids to reach upstream breeding grounds. These are not panic jumps but calculated efforts — the fish swims to the base of the falls, reads the water currents, positions itself in the fastest upward flow, and launches at the optimal angle. Biologists have measured that most successful jumps occur at takeoff angles between 60° and 80° from horizontal.',
+            'A fish jump is a physics problem in disguise. It starts underwater with what biologists call a **C-start**: the fish bends its body into a tight C-shape by contracting the muscles along one side, then snaps straight by contracting the other side. This drives the tail against the water like a paddle. By Newton\u2019s third law, the water pushes back \u2014 and the fish rockets upward.',
+            'The muscles doing this work are called **myomeres** \u2014 W-shaped blocks arranged in segments along the body. Fish have two types of muscle fibre: red (slow-twitch) for cruising, and white (fast-twitch) for explosive bursts. A jump uses almost entirely white muscle, which can contract extremely fast but fatigues quickly because it runs on anaerobic metabolism (no oxygen). This is why a fish that jumps repeatedly needs rest periods to clear lactic acid.',
+            'Once the fish breaks the surface, it becomes a **projectile**. The same equations that describe a thrown ball apply: horizontal distance depends on speed and launch angle, and maximum height depends on vertical speed. Using h = v\u00B2sin\u00B2\u03B8 / 2g, a salmon launching at 6 m/s at 70\u00B0 reaches about 1.6 metres \u2014 close to the observed maximum of 3.7 m for the fastest species at steeper angles.',
+            'The energy trade-off is clean: kinetic energy at the surface (\u00BDmv\u00B2) converts entirely to gravitational potential energy at the peak (mgh). The mass cancels out, which means a small fish and a large fish launched at the same speed reach the same height. What differs is the force needed to reach that speed \u2014 bigger fish need more powerful tails.',
           ],
-          keyIdea: 'Fish jump to gulp oxygen in low-DO water, remove parasites, escape predators, and navigate upstream obstacles during migration.',
+          keyIdea: 'A fish jump is a C-start muscle burst followed by projectile motion. Kinetic energy at the surface converts to potential energy in the air: \u00BDmv\u00B2 = mgh.',
+          diagram: 'FishBiomechanicsDiagram',
+          checkYourself: 'A mahseer launches at 4 m/s straight up (90\u00B0). Using h = v\u00B2/2g (with g = 10 m/s\u00B2 for easy maths), how high does it go? Would that clear a 1-metre waterfall?',
+          checkAnswer: 'h = 4\u00B2 / (2 \u00D7 10) = 16/20 = 0.8 metres. No, it would not clear a 1-metre waterfall. The fish would need to launch faster \u2014 at least v = \u221A(2 \u00D7 10 \u00D7 1) = \u221A20 \u2248 4.5 m/s \u2014 or find a spot with a strong upward current to boost its effective speed.',
+        },
+        {
+          title: 'River Health Indicators \u2014 Fish as Living Sensors',
+          paragraphs: [
+            'Here is the powerful idea: **fish behaviour is a real-time indicator of river health**. You do not need expensive instruments to know something is wrong with a river. You just need to watch the fish.',
+            'In a healthy river (dissolved O\u2082 above 8 mg/L), you see a diverse mix of species \u2014 mahseer, hilsa, mayfly larvae, freshwater mussels. Fish jump occasionally, mostly for normal reasons (feeding, parasite control). In a stressed river (4\u20136 mg/L), sensitive species disappear first. You see more surface gasping, more frequent jumping, and fewer types of fish. In a degraded river (below 2 mg/L), only pollution-tolerant species survive: tubifex worms, rat-tail maggots, blue-green algae. Fish kills become common.',
+            'Scientists use a concept called **bioindicator species** \u2014 organisms whose presence (or absence) tells you about water quality without any chemical tests. Mayfly larvae, for instance, can only survive in clean, oxygen-rich water. If you find them, the river is healthy. If they are gone but tubifex worms thrive, the river is polluted. Indigenous fishermen along the Barak have tracked these patterns for generations \u2014 modern ecology confirms their knowledge.',
+            'This is where citizen science comes in. You can monitor your local river by counting fish jumps per 10-minute period, recording conditions (time, temperature, weather, water clarity), and tracking changes over weeks. A sudden increase in jump frequency at the same location is a warning signal. Reporting it to local fisheries departments is real science \u2014 the same data professionals collect, just gathered by you.',
+          ],
+          keyIdea: 'Fish are living sensors. Changes in their behaviour \u2014 especially jumping frequency \u2014 signal changes in water quality before instruments detect them.',
+          diagram: 'FishRiverHealthDiagram',
+          checkYourself: 'A river section has abundant mayfly larvae, freshwater mussels, and mahseer. A nearby section has only catfish and snails. What does this tell you without any chemical tests?',
+          checkAnswer: 'The first section is healthy (high dissolved oxygen, clean water) because it supports sensitive indicator species. The second section is stressed or mildly polluted \u2014 the sensitive species have been eliminated, leaving only hardier, pollution-tolerant organisms. Something between the two locations is degrading the water, possibly a discharge pipe or runoff.',
         },
       ],
       vocabulary: [
-        ['Dissolved oxygen', 'Oxygen gas mixed into water — fish breathe this through their gills, and warm water holds less of it'],
-        ['Gills', 'Feathery organs that extract dissolved oxygen from water as it flows over them — the fish equivalent of lungs'],
-        ['Migration', 'A regular, seasonal journey animals make — many fish migrate upstream to spawn in shallow, gravelly waters'],
-        ['Lateral line', 'A sensory organ along a fish\'s side that detects vibrations and water pressure changes — like underwater hearing'],
-        ['Swim bladder', 'A gas-filled sac inside a fish that controls buoyancy — by adjusting gas levels, fish float at different depths without effort'],
+        ['Dissolved oxygen (DO)', 'Oxygen gas (O\u2082) mixed into water that fish breathe through their gills \u2014 measured in mg/L, typically 8\u201312 in healthy rivers'],
+        ['Gills', 'Feathery organs packed with thin-walled lamellae that extract dissolved oxygen from water using countercurrent exchange'],
+        ['Countercurrent exchange', 'A system where blood and water flow in opposite directions across the gills, maintaining a concentration gradient that maximises oxygen extraction'],
+        ['Bioindicator species', 'Organisms whose presence or absence reveals water quality \u2014 mayfly larvae indicate clean water, tubifex worms indicate pollution'],
+        ['C-start', 'The explosive muscle contraction sequence where a fish bends into a C-shape and snaps straight to generate thrust for a jump'],
+        ['Myomeres', 'W-shaped blocks of muscle along a fish\u2019s body that contract in sequence to produce swimming and jumping movements'],
       ],
       trueFalse: [
-        { statement: 'Fish can breathe the oxygen in water molecules (H2O).', isTrue: false, explanation: 'Fish breathe dissolved oxygen (O2 gas) that has mixed into the water from the atmosphere or from photosynthesizing plants. They cannot split water molecules — that would require enormous energy. Their gills extract the tiny amount of O2 gas dissolved between water molecules.' },
-        { statement: 'Warm water holds less dissolved oxygen than cold water.', isTrue: true, explanation: 'As water temperature rises, gas molecules move faster and escape more easily from the liquid. At 30 degrees C, water holds roughly half the dissolved oxygen it can hold at 5 degrees C. This is why fish in tropical rivers are more likely to jump and gulp air during hot weather.' },
-        { statement: 'Fish jump out of water only to catch flying insects.', isTrue: false, explanation: 'While some fish do jump to catch insects, fish also jump to escape predators, dislodge parasites, gulp air when dissolved oxygen is low, and leap over obstacles during upstream migration. Each type of jump has a different trigger and serves a different survival purpose.' },
+        { statement: 'Fish can breathe the oxygen atoms in water molecules (H\u2082O).', isTrue: false, explanation: 'Fish breathe dissolved O\u2082 gas that has mixed into the water from the atmosphere or from photosynthesising plants. They cannot split water molecules \u2014 that would require enormous energy. Their gills extract the tiny amount of O\u2082 gas dissolved between water molecules.' },
+        { statement: 'Warm water holds less dissolved oxygen than cold water.', isTrue: true, explanation: 'As water temperature rises, gas molecules move faster and escape more easily from the liquid. At 30\u00B0C, water holds roughly 7.5 mg/L of dissolved oxygen versus 12.8 mg/L at 5\u00B0C. This is why fish in warm, stagnant water are more likely to become oxygen-stressed.' },
+        { statement: 'Fish jump out of water only to catch flying insects.', isTrue: false, explanation: 'While some fish do jump to catch insects, fish also jump to escape predators, dislodge parasites, gulp air when dissolved oxygen is low, and leap over obstacles during upstream migration. Each type of jump has a different trigger and purpose.' },
+        { statement: 'A heavier fish needs to swim faster than a lighter fish to reach the same jump height.', isTrue: false, explanation: 'Jump height depends on launch speed and angle, not mass. The equation h = v\u00B2sin\u00B2\u03B8/2g has no mass term \u2014 mass cancels when kinetic energy converts to potential energy. A heavier fish needs more force to reach the same speed, but once at that speed, it reaches the same height.' },
       ],
       facts: [
-        'The Barak River system in southern Assam is home to over 100 fish species, including the golden mahseer — a powerful fish that can grow over a meter long and is famous for leaping waterfalls during its upstream spawning migration.',
-        'Some fish have a special organ called a labyrinth that lets them breathe air directly. Climbing perch (Anabas testudineus), found in Northeast Indian rivers, can actually walk short distances overland using their pectoral fins and survive out of water for hours.',
-        'A salmon can leap up to 3.7 meters (12 feet) high — roughly the height of a one-story building. They achieve this by swimming at high speed into the fastest upward current at the base of a waterfall and launching at angles between 60 and 80 degrees.',
+        'The Barak River system in southern Assam is home to over 100 fish species, including the golden mahseer \u2014 a powerful fish that can grow over a metre long and is famous for leaping waterfalls during its upstream spawning migration.',
+        'Some fish have a special organ called a labyrinth that lets them breathe air directly. Climbing perch (Anabas testudineus), found in Northeast Indian rivers, can walk short distances overland using their pectoral fins and survive out of water for hours.',
+        'A salmon can leap up to 3.7 metres (12 feet) high \u2014 roughly the height of a one-storey building. They achieve this by swimming at high speed into the fastest upward current at the base of a waterfall and launching at angles between 60 and 80 degrees.',
       ],
-      offlineActivity: 'Test how temperature affects dissolved oxygen using two identical glasses of water. Put one in the fridge for an hour (cold) and leave one at room temperature (warm). Then pour each glass back and forth between two cups exactly 10 times to add the same amount of air. Look closely at the sides of each glass after 5 minutes — you\'ll see tiny bubbles clinging to the glass walls. Count the bubbles in each. The cold water should have more bubbles (more dissolved gas). This is why fish in warm, stagnant water become stressed and jump.',
+      offlineActivity: 'Go to a river bank, pond, or bridge over a stream. Sit quietly for 5 minutes, then count how many times you see fish jump or break the surface in a 20-minute period. Record the time, weather, water clarity, and whether the water is still or flowing. Return at a different time of day or on a hotter day and repeat. Compare your two counts. If you see more jumps when it is hotter, you may be observing the dissolved oxygen effect \u2014 warm water holds less oxygen, so fish jump more. You just did what fisheries scientists do: behavioural observation.',
+      offlineActivityDiagram: 'ActivityFishObserveDiagram',
+      codeTeaser: `import numpy as np
+import matplotlib.pyplot as plt
+
+# How does water temperature affect dissolved oxygen?
+temps = np.array([5, 10, 15, 20, 25, 30, 35])
+do2 = np.array([12.8, 11.3, 10.1, 9.1, 8.2, 7.5, 6.9])  # mg/L
+
+plt.figure(figsize=(8, 5))
+plt.plot(temps, do2, 'o-', color='#3b82f6', linewidth=2)
+plt.axhline(y=4, color='red', linestyle='--', label='Stress zone')
+plt.fill_between(temps, 0, 4, alpha=0.1, color='red')
+plt.xlabel("Water temperature (\u00B0C)")
+plt.ylabel("Dissolved oxygen (mg/L)")
+plt.title("Warmer Water = Less Oxygen for Fish")
+plt.legend()
+plt.show()  # At what temperature do fish start struggling?`,
+      referenceLinks: [
+        { slug: 'ecology-and-populations', reason: 'Understand carrying capacity and population dynamics \u2014 the ecological framework behind fish populations' },
+        { slug: 'animal-senses-and-behavior', reason: 'How animals sense their environment \u2014 lateral lines, electroreception, and behavioural responses' },
+      ],
+      nextLessons: [
+        { slug: 'river-that-ran-away', reason: 'River erosion and the Brahmaputra\u2019s shifting course \u2014 the geology that shapes fish habitats' },
+        { slug: 'golden-hilsa', reason: 'The hilsa fish\u2019s epic migration and the science of sustainable fishing in the Brahmaputra' },
+        { slug: 'cloud-refused-rain', reason: 'Weather and rainfall patterns \u2014 the monsoon that controls river levels and dissolved oxygen' },
+      ],
     },
   },
   {
@@ -4658,52 +4956,111 @@ If you ever see a red panda in the wild — curled on a branch, peering at you w
     level0: {
       concepts: [
         {
-          title: 'Fur as an Insulation System',
+          title: 'Why Animals Have Patterns \u2014 The Three Disguises',
           paragraphs: [
-            'Red pandas live in cold mountain forests between 2,200 and 4,800 meters elevation, where temperatures can drop below -10°C. Their survival depends on extraordinary insulation. Red panda fur is dense — up to 40,000 hairs per square centimeter on the belly — with two layers: a thick woolly undercoat that traps warm air, and longer guard hairs that repel water and snow.',
-            'The physics of fur insulation is essentially the physics of trapped air. Air is a poor conductor of heat (thermal conductivity of about 0.025 W/m·K, compared to 0.6 for water or 80 for steel). When fur traps a layer of still air next to the skin, it creates an insulating barrier that slows heat transfer from the warm body to the cold environment. The thicker the trapped air layer, the better the insulation — which is why red pandas fluff up their fur in winter.',
-            'The soles of red panda feet are also covered in thick fur — an unusual adaptation shared with few other mammals (polar bears and Arctic foxes being notable examples). This prevents heat loss through contact with frozen branches and snow-covered ground, a form of conductive heat transfer that can drain body heat rapidly. Combined with their bushy tail (which they wrap around themselves while sleeping), red pandas maintain a core body temperature of about 38°C even in freezing conditions.',
+            'Imagine you are a small animal in a forest. Eagles soar above. Leopards stalk below. You cannot run faster than them. You cannot fight them. Your only hope is to **not be seen**. This is the survival problem that camouflage solves \u2014 and nature has invented three completely different solutions.',
+            '**Solution 1: Crypsis (background matching).** The simplest trick: look like your background. A brown moth on brown bark. A green grasshopper on a green leaf. A sandy-coloured mouse on sandy soil. The animal\'s colour and texture match the place it lives, so predators look right past it. The peppered moth is the most famous example \u2014 during the Industrial Revolution, when tree bark turned dark with soot, the dark-coloured moths suddenly survived better than light ones. When the air cleaned up, light moths came back. Same species, same trees, but the "best" colour flipped because the background changed.',
+            '**Solution 2: Disruptive coloration.** Instead of blending in, some animals use **bold, contrasting patches** that break up their body outline. A predator\'s brain recognises prey by shape \u2014 it looks for "animal-shaped" objects. Zebra stripes, for example, make it hard to see where one zebra ends and another begins in a running herd. The red panda\'s face mask works this way too \u2014 the sharp white-and-dark patches make the face harder to recognise as a face in dappled forest light.',
+            '**Solution 3: Mimicry.** Some harmless animals copy the appearance of dangerous ones. The harmless king snake has red, black, and yellow bands that look almost identical to the deadly coral snake. Predators who have learned to avoid coral snakes avoid king snakes too \u2014 even though king snakes are completely harmless. The mimic gets protection without paying the cost of actually being venomous.',
+            '**Check yourself:** A white Arctic hare turns brown in summer. Which type of camouflage is this? (Answer: crypsis \u2014 background matching. The hare changes colour to match the changing background, from white snow to brown earth.)',
           ],
-          keyIdea: 'Red panda fur traps a layer of still air that acts as thermal insulation — the same principle used in double-glazed windows and down jackets.',
+          keyIdea: 'Animals use three main camouflage strategies: crypsis (matching the background), disruptive coloration (breaking up the outline), and mimicry (copying a dangerous species). Each solves the same problem \u2014 avoid being eaten \u2014 in a different way.',
+          diagram: 'PandaCamouflageDiagram',
         },
         {
-          title: 'Counter-Current Heat Exchange',
+          title: 'Natural Selection \u2014 How Traits Spread Without Anyone Choosing',
           paragraphs: [
-            'One of the most elegant thermal adaptations in nature is the counter-current heat exchanger, found in the limbs of many animals that live in cold environments. In this system, arteries carrying warm blood from the core run right alongside veins carrying cool blood back from the extremities. Heat transfers from the warm arterial blood to the cool venous blood before it ever reaches the feet or ears.',
-            'The result is a temperature gradient along the limb. Near the body core, the blood is at full body temperature (around 38°C). By the time it reaches the paw, it may be only 5-10°C above the ground temperature. This sounds like a problem, but it is actually a solution: by keeping the extremities cool, the animal dramatically reduces the temperature difference between its feet and the environment, which in turn reduces heat loss (heat flows proportionally to the temperature difference, per Newton\'s law of cooling).',
-            'Red pandas, along with wolves, penguins, and dolphins, all use variations of this system. Engineers have borrowed this principle for industrial heat exchangers in power plants, HVAC systems, and chemical processing. The key insight is the same: when two fluid streams flow in opposite directions with a shared boundary, they can exchange heat far more efficiently than in any other configuration. Nature discovered this engineering solution hundreds of millions of years before humans did.',
+            'Here is a puzzle: if camouflage helps animals survive, how did it develop? Did animals *choose* to be camouflaged? Did they *try* to match their background? No. The answer is **natural selection** \u2014 arguably the most important idea in all of biology.',
+            'Let\u2019s walk through it step by step with a thought experiment. Imagine a population of 100 mice living on dark volcanic rock. Most mice are light brown (easy to spot against dark rock), but a few are dark brown (hard to spot). Hawks hunt by sight.\n\n\u2022 **Step 1: Variation exists.** Not all mice are the same colour. Random DNA mutations create a range from light to dark.\n\u2022 **Step 2: Some variants survive better.** Dark mice are harder for hawks to see, so they get eaten less often.\n\u2022 **Step 3: Survivors pass on their genes.** The dark mice that survive have babies. Those babies inherit the "dark fur" genes.\n\u2022 **Step 4: The population shifts.** After many generations, most mice are dark \u2014 not because anyone planned it, but because dark mice kept surviving and light mice kept getting eaten.',
+            'This is natural selection in four sentences: **variation** (differences exist), **pressure** (something kills some variants more than others), **inheritance** (survivors pass traits to offspring), **shift** (the population changes over time). No plan. No goal. No designer. Just survival and reproduction, repeated over thousands of generations.',
+            'Darwin figured this out by studying finches on the Gal\u00e1pagos Islands. He noticed that finches on different islands had different beak shapes \u2014 thick beaks on islands with hard seeds, thin beaks on islands with insects. The beaks weren\u2019t designed for the food. The food *selected* which beaks survived.',
+            '**Prediction question:** If the volcanic rock in our mouse example gets covered by white sand (say, after a sandstorm), what happens to the dark mice? (Think about it before reading on.) Answer: Now the dark mice are easy to see and the light mice are hidden. Hawks eat the dark mice. Over generations, the population shifts back to light. Natural selection reversed direction because the *environment* changed.',
           ],
-          keyIdea: 'Counter-current heat exchange lets warm arterial blood pre-heat cold venous blood returning from extremities, minimizing heat loss in cold environments.',
+          keyIdea: 'Natural selection requires four ingredients: variation in a trait, selective pressure (some variants survive better), inheritance (survivors pass genes to offspring), and time. No planning needed \u2014 just differential survival.',
+          diagram: 'PandaSelectionDiagram',
         },
         {
-          title: 'Camouflage and the Science of Coloration',
+          title: 'The Red Panda\u2019s Mask \u2014 What It Actually Does',
           paragraphs: [
-            'The red panda\'s distinctive "mask" — dark fur around the eyes on a white face — seems like it would make the animal more visible, not less. But in the dappled light of a bamboo forest canopy, this high-contrast face pattern actually breaks up the animal\'s outline, a camouflage strategy called disruptive coloration. Predators (primarily snow leopards and martens) recognize prey by body shape, and bold contrasting patches make it harder to perceive the animal as a single organism.',
-            'The reddish-brown fur on the red panda\'s back serves a different camouflage function: background matching. The forests where red pandas live are rich in reddish-brown moss, lichen, and bark. From above (a raptor\'s perspective), a red panda curled on a mossy branch is nearly invisible. From below, the dark belly blends with the shadowed canopy. This dual strategy — disruption on the face, background matching on the body — provides protection from predators attacking from different directions.',
-            'The pigments responsible for red panda coloration are primarily pheomelanins (red-brown) and eumelanins (black-dark brown), the same two melanin types found in human hair. The white patches lack melanin and scatter all wavelengths of light equally. Unlike structural colors (which we see in peacock feathers or butterfly wings), melanin-based colors do not change with viewing angle. This makes them reliable for camouflage regardless of how the animal is positioned — a crucial advantage for an animal that spends its life climbing and twisting through branches.',
+            'Now that you understand camouflage types and natural selection, let\u2019s look at the red panda\u2019s famous face with scientific eyes. That "mask" \u2014 dark patches around the eyes on a white face, with rust-red fur everywhere else \u2014 is not decorative. It serves **three distinct survival functions**, each shaped by millions of years of natural selection in the misty forests of the eastern Himalayas.',
+            '**Function 1: Disruptive coloration.** The sharp contrast between the white face and dark eye patches breaks up the face outline. In the dappled light filtering through bamboo canopy, a predator looking down sees a confusing patchwork of light and dark \u2014 not a recognisable animal face. This is the same principle as a zebra\'s stripes, but applied to the face.',
+            '**Function 2: Glare reduction.** Red pandas live at 2,200\u20134,800 metres altitude, where snow reflects intense sunlight. The dark fur around their eyes absorbs light instead of reflecting it, reducing glare \u2014 exactly like the black paint athletes put under their eyes, or the dark fur around a cheetah\'s eyes. This helps the red panda see clearly in bright, snowy mountain conditions.',
+            '**Function 3: Background matching on the body.** While the face uses disruptive coloration, the red-brown fur on the back and sides serves a completely different purpose: it matches the reddish-brown moss, lichen, and bark in the forests where red pandas live. From above (a raptor\u2019s view), a red panda curled on a mossy branch is nearly invisible. From below, the darker belly blends with the shadowed canopy. The body and face use *different* camouflage strategies simultaneously, protecting against predators from different directions.',
+            '**Check yourself:** Why would a red panda\u2019s camouflage fail if you moved it to a tropical rainforest? (Answer: the colours wouldn\u2019t match. Tropical forests are green, not reddish-brown. The red panda evolved to match the specific colours of its Himalayan habitat \u2014 the moss, bark, and lichen of high-altitude temperate forests. Move it to the wrong background, and background matching collapses.)',
           ],
-          keyIdea: 'The red panda\'s face mask uses disruptive coloration to break up its outline, while its reddish fur matches the mossy bark of its forest habitat.',
-          diagram: 'AdaptationDiagram',
+          keyIdea: 'The red panda\u2019s mask serves three functions: disruptive coloration (breaks up face outline), glare reduction (dark eye patches absorb snow glare), and background matching (red-brown fur matches mossy bark). Different parts of the body use different camouflage strategies.',
+          diagram: 'PandaMaskFunctionDiagram',
+        },
+        {
+          title: 'Convergent Evolution \u2014 Why Raccoons Have the Same Mask',
+          paragraphs: [
+            'Here is a surprising fact: the red panda is **not a bear**. Despite sharing the name "panda" with the giant panda, the two are not closely related at all. Red pandas belong to their own unique family, **Ailuridae** \u2014 the only living member. Giant pandas are bears (family Ursidae). Their last common ancestor lived roughly **40\u201355 million years ago**.',
+            'So why do they both eat bamboo, both have a "false thumb" (an extended wrist bone for gripping stems), and both live in Asian mountain forests? This is **convergent evolution** \u2014 when unrelated species independently evolve similar traits because they face similar problems. Same challenge, same solution, different ancestors.',
+            'The face mask tells the same story. Look at three animals that all have dark eye patches on light faces: the **red panda** (family Ailuridae), the **raccoon** (family Procyonidae, native to North America), and the **giant panda** (family Ursidae). These three are not closely related \u2014 they diverged tens of millions of years ago. Yet all three independently evolved dark facial masks. Why? Because all three live in environments where dark eye patches provide a survival advantage: glare reduction for the mountain-dwelling red panda and giant panda, and improved night vision contrast for the nocturnal raccoon.',
+            'Convergent evolution is powerful evidence that natural selection is real and repeatable. It shows that evolution is not random wandering \u2014 it is constrained by physics and ecology. If you are a forest-dwelling, tree-climbing mammal, dark eye patches *work*. Evolution "finds" this solution again and again, in species that have never met and share no recent ancestor.',
+            '**Check yourself:** The thylacine (Tasmanian tiger) looked almost identical to a wolf but was actually a marsupial \u2014 more closely related to kangaroos than to dogs. Is this convergent evolution or shared ancestry? (Answer: convergent evolution. Wolves and thylacines faced the same ecological niche \u2014 medium-sized predator chasing prey \u2014 on different continents, and evolved nearly identical body plans independently.)',
+          ],
+          keyIdea: 'Convergent evolution occurs when unrelated species independently evolve similar traits because they face similar survival challenges. The red panda, raccoon, and giant panda all evolved dark eye masks independently \u2014 proof that natural selection finds similar solutions to similar problems.',
+          diagram: 'PandaConvergentDiagram',
         },
       ],
       vocabulary: [
-        ['Camouflage', 'Colors or patterns that help an animal blend with its surroundings — making it harder for predators to spot'],
-        ['Natural selection', 'The process where organisms with traits better suited to their environment survive and reproduce more — driving evolution over generations'],
-        ['Pigment', 'A chemical substance that gives color — melanin produces browns and blacks, while pheomelanin produces reds and oranges'],
-        ['Disruptive coloration', 'Bold contrasting patches that break up an animal\'s body outline, making it harder for predators to recognize the shape'],
-        ['Adaptation', 'A trait that has evolved over many generations because it helps an organism survive in its specific environment'],
+        ['Crypsis', 'A type of camouflage where an animal\u2019s colour and texture match its background \u2014 making it nearly invisible to predators'],
+        ['Disruptive coloration', 'Bold contrasting patches that break up an animal\u2019s body outline, making it harder for predators to recognise the shape'],
+        ['Mimicry', 'When a harmless species evolves to look like a dangerous one, gaining protection without actually being venomous or toxic'],
+        ['Natural selection', 'The process where organisms with traits better suited to their environment survive and reproduce more \u2014 driving gradual change in populations over generations'],
+        ['Convergent evolution', 'When unrelated species independently evolve similar traits because they face similar survival challenges \u2014 like red pandas and raccoons both evolving dark eye masks'],
+        ['Counter-shading', 'Dark colours on top and light colours on the belly, which cancels out shadows and makes an animal look flat instead of three-dimensional'],
       ],
       trueFalse: [
-        { statement: 'The red panda is closely related to the giant panda.', isTrue: false, explanation: 'Despite sharing the name "panda" and a love of bamboo, red pandas and giant pandas are not closely related. Red pandas belong to their own unique family (Ailuridae), while giant pandas are bears. Their similarities evolved independently — a phenomenon called convergent evolution.' },
-        { statement: 'The red panda\'s reddish fur helps it hide on mossy tree branches.', isTrue: true, explanation: 'The forests where red pandas live are covered in reddish-brown moss and lichen. From above (a raptor\'s view), a red panda curled on a mossy branch is nearly invisible. This is called background matching — one of the most common camouflage strategies in nature.' },
-        { statement: 'Animals choose their own colors to match their environment.', isTrue: false, explanation: 'Animals cannot change their genetic coloration by choice. Camouflage colors evolve over many generations through natural selection — animals with colors that better match their habitat survive longer and have more offspring, gradually shifting the population\'s appearance.' },
+        { statement: 'The red panda is closely related to the giant panda.', isTrue: false, explanation: 'Despite sharing the name "panda" and a love of bamboo, red pandas and giant pandas are not closely related. Red pandas belong to their own unique family (Ailuridae), while giant pandas are bears. Their similarities evolved independently \u2014 a phenomenon called convergent evolution.' },
+        { statement: 'The red panda\u2019s reddish fur helps it hide on mossy tree branches.', isTrue: true, explanation: 'The forests where red pandas live are covered in reddish-brown moss and lichen. From above (a raptor\u2019s view), a red panda curled on a mossy branch is nearly invisible. This is called background matching \u2014 one of the most common camouflage strategies in nature.' },
+        { statement: 'Animals choose their own colours to match their environment.', isTrue: false, explanation: 'Animals cannot change their genetic coloration by choice. Camouflage colours evolve over many generations through natural selection \u2014 animals whose colours better match their habitat survive longer and have more offspring, gradually shifting the population\u2019s appearance.' },
+        { statement: 'Zebra stripes are an example of disruptive coloration.', isTrue: true, explanation: 'Zebra stripes break up the body outline, making it harder for predators to see where one animal ends and another begins \u2014 especially in a moving herd. This is disruptive coloration, not background matching (zebras don\u2019t live in striped environments).' },
       ],
       facts: [
-        'Red pandas were discovered by Western science 48 years before giant pandas. The name "panda" originally referred to the red panda — it likely comes from the Nepali word "ponya" meaning bamboo-eater.',
+        'Red pandas were discovered by Western science 48 years before giant pandas. The name "panda" originally referred to the red panda \u2014 it likely comes from the Nepali word "ponya" meaning bamboo-eater.',
         'Red pandas spend up to 13 hours a day eating bamboo. Despite being classified in the order Carnivora, they are almost entirely herbivorous and must eat roughly 1.5 kg of bamboo leaves daily because they can only digest about 24% of what they consume.',
-        'The red panda\'s "false thumb" — an extended wrist bone — helps it grip bamboo stems. Giant pandas independently evolved an almost identical structure, making this one of the most remarkable examples of convergent evolution in mammals.',
+        'The red panda\u2019s "false thumb" \u2014 an extended wrist bone \u2014 helps it grip bamboo stems. Giant pandas independently evolved an almost identical structure, making this one of the most remarkable examples of convergent evolution in mammals.',
       ],
-      offlineActivity: 'Test camouflage in your own environment. Cut 20 small paper squares (about 2 cm) in 4 different colors — 5 of each color. Scatter all 20 squares in your garden or a patch of ground. Ask a friend to find as many as they can in 30 seconds. Which colors were found fastest? Which were hardest to spot? The hardest-to-find colors are the best "camouflaged" for that environment. This is exactly how natural selection works — predators find the most visible prey first, so the best-camouflaged individuals survive.',
+      offlineActivity: 'Test camouflage in your own environment. Cut 20 small paper squares (about 2 cm) in 4 different colours \u2014 5 of each colour (red, green, yellow, brown). Scatter all 20 squares in your garden or a patch of ground. Ask a friend to find as many as they can in 30 seconds. Record how many of each colour were found. Which colours were found fastest? Which were hardest to spot? The hardest-to-find colours are the best "camouflaged" for that environment. This is exactly how natural selection works \u2014 predators find the most visible prey first, so the best-camouflaged individuals survive.',
+      offlineActivityDiagram: 'ActivityCamouflageGameDiagram',
+      codeTeaser: `# Simulating natural selection on fur colour
+# Watch how a population shifts over generations
+
+import random
+
+# Start with 100 animals: colour 0 (light) to 100 (dark)
+population = [random.randint(0, 100) for _ in range(100)]
+background = 75  # dark forest floor
+
+for gen in range(20):
+    # Fitness = how close to background (closer = harder to spot)
+    fitness = [1 / (1 + abs(c - background)) for c in population]
+    total = sum(fitness)
+    probs = [f / total for f in fitness]
+
+    # Reproduce proportional to fitness (+ small mutation)
+    population = [
+        min(100, max(0, random.choices(population, probs)[0]
+            + random.randint(-3, 3)))
+        for _ in range(100)
+    ]
+
+avg = sum(population) / len(population)
+print(f"After 20 generations, average colour: {avg:.0f}")
+print(f"Background colour: {background}")
+print(f"The population evolved toward the background!")`,
+      referenceLinks: [
+        { slug: 'evolution-and-selection', reason: 'Full reference on Darwin\u2019s theory, evidence for evolution, and how natural selection drives speciation' },
+        { slug: 'ecology-and-populations', reason: 'How predator-prey relationships create the selective pressure that drives camouflage evolution' },
+        { slug: 'human-body-systems', reason: 'The red panda\u2019s counter-current heat exchange uses the same circulatory principles that keep your own extremities warm' },
+      ],
+      nextLessons: [
+        { slug: 'snow-leopard', reason: 'Another high-altitude Himalayan animal with remarkable camouflage \u2014 spots that match rocky terrain' },
+        { slug: 'clouded-leopard', reason: 'Cloud-shaped spots as disruptive coloration in a forest canopy \u2014 a different camouflage solution in a different habitat' },
+        { slug: 'takin-face', reason: 'The takin\u2019s bizarre body plan as a case study in how morphology evolves from accumulated adaptations' },
+      ],
     },
   },
   {
@@ -5072,7 +5429,7 @@ And sometimes, Gaja thought, the things you're most afraid of turn out to be the
     },
     illustration: '/content/illustrations/little-elephants-mud-bath.webp',
     track: 'school',
-    subjects: ['Biology'] as Subject[],
+    subjects: ['Biology' as Subject, 'Physics' as Subject, 'Ecology' as Subject],
     toolSkills: ['Python' as Skill, 'NumPy' as Skill, 'Matplotlib' as Skill, 'Data Analysis' as Skill],
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
@@ -5080,55 +5437,94 @@ And sometimes, Gaja thought, the things you're most afraid of turn out to be the
     level0: {
       concepts: [
         {
-          title: 'Thermoregulation in Megafauna: The Surface Area Problem',
+          title: 'Why Elephants Love Mud',
           paragraphs: [
-            'Elephants face a fundamental physics problem: they generate enormous amounts of metabolic heat but have relatively little surface area to dissipate it. This is the surface-area-to-volume ratio challenge. As an object gets larger, its volume (which generates heat) increases as the cube of its dimensions, while its surface area (which loses heat) increases only as the square. A 5,000 kg Asian elephant produces roughly 10 times the heat of a 500 kg horse, but has only about 4.6 times the surface area.',
-            'To solve this problem, elephants have evolved several cooling adaptations. Their large, thin ears are packed with blood vessels and act as radiators — blood flows through the ears, loses heat to the surrounding air, and returns cooler to the body core. African elephants, which live in hotter habitats, have significantly larger ears than Asian elephants. Flapping the ears increases heat loss by up to 100% by replacing the warm air boundary layer with cooler air (forced convection).',
-            'Mud bathing is another critical thermoregulatory strategy. Wet mud on the skin dramatically increases evaporative cooling — as the water in the mud evaporates, it absorbs heat from the skin at a rate of about 2,260 joules per gram of water evaporated. A mud layer also reflects more solar radiation than bare gray skin, reducing radiant heat gain. Elephants may lose up to 75% of their metabolic heat through evaporation during the hottest parts of the day.',
+            'Imagine standing outside on a 40 \u00b0C day in Kaziranga. You are sweating buckets. Now imagine you cannot sweat at all \u2014 not a single drop. That is life for an elephant. Elephants have almost no sweat glands. For an animal that weighs 4,000 kg and generates enormous body heat, this sounds like a death sentence. So how do they survive?',
+            'The answer is mud. When an elephant rolls in a mud wallow, three things happen at once. First, the cool mud conducts heat away from the body (like pressing an ice pack on your forehead). Second, as the mud dries, the water inside it slowly evaporates. Every gram of water that evaporates absorbs 2,260 joules of heat from the elephant\u2019s skin \u2014 that is a LOT of cooling. Third, the dried mud layer reflects sunlight and blocks UV rays, acting as a natural sunscreen with roughly SPF 5\u201310.',
+            'But that is not all. Dried mud also forms a physical armour against biting flies, ticks, and mosquitoes. When the mud eventually flakes off, it carries attached parasites with it \u2014 a free exfoliation that removes pests along with dead skin. So a single mud bath is simultaneously air conditioning, sunscreen, and bug repellent. Gaja in the story did not just discover fun \u2014 she discovered the elephant\u2019s most important survival tool.',
           ],
-          keyIdea: 'Large animals generate heat faster than they can lose it because volume grows faster than surface area — elephants use ears and mud to bridge this gap.',
-          diagram: 'Volume3DDiagram',
+          keyIdea: 'Mud bathing is not play \u2014 it is the elephant\u2019s primary cooling system, sunscreen, and parasite shield, all in one.',
+          diagram: 'ElephantThermoregDiagram',
         },
         {
-          title: 'Skin as the Largest Organ',
+          title: 'Heat and Your Body',
           paragraphs: [
-            'Elephant skin is an extraordinary organ — up to 2.5 centimeters thick on the back and sides, but thin and sensitive behind the ears and around the eyes. Despite its apparent toughness, elephant skin is riddled with a network of microscopic crevices and wrinkles that serve a crucial function: they trap and hold moisture. A 2018 study in Nature Communications revealed that these crevices are not folds in the traditional sense but are actually cracks in the brittle outermost skin layer (the stratum corneum), similar to how dried mud cracks in a riverbed.',
-            'These cracks increase the skin\'s effective surface area by up to 10 times compared to smooth skin. When an elephant bathes in mud or water, the crevices trap moisture like tiny reservoirs, keeping the skin damp for hours after the bath. This extends the period of evaporative cooling far beyond what smooth skin could provide. The thick mud layer also creates a physical barrier against ultraviolet radiation, functioning as a natural sunscreen with an estimated SPF of 5-10.',
-            'Elephant skin also lacks sebaceous glands (oil-producing glands) that most mammals have to keep their skin supple. Without these glands, the skin dries out and cracks more readily — which, counterintuitively, is adaptive because it creates the moisture-trapping crevice network. This is a beautiful example of how evolution can turn an apparent weakness into a strength. The "problem" of dry, cracking skin becomes the "solution" of enhanced evaporative cooling.',
+            'Heat always moves from hot to cold. Your body at 37 \u00b0C is warmer than a 25 \u00b0C room, so heat flows out of you constantly. But HOW does heat move? There are four main ways, and understanding them explains everything from why you shiver to why elephants flap their ears.',
+            '**Conduction** is heat moving through direct contact. Touch a cold metal railing and your hand feels cold \u2014 heat is conducting from your warm skin into the cold metal. When an elephant stands in a cool river, heat conducts from its legs into the water. Water conducts heat 24 times better than air, which is why a 20 \u00b0C pool feels much colder than 20 \u00b0C air.',
+            '**Convection** is heat carried away by moving fluid (air or water). A breeze feels cooling because moving air replaces the warm layer near your skin with fresh cool air. Elephants flap their blood-rich ears to create their own breeze \u2014 forced convection that can double their ear\u2019s heat loss.',
+            '**Radiation** is heat emitted as invisible infrared light. Every object above absolute zero radiates heat. At night, elephants radiate infrared energy toward the cold sky. The hotter the object, the more it radiates (the power goes as temperature to the fourth power \u2014 Stefan-Boltzmann law).',
+            '**Evaporation** is the most powerful cooling method. When liquid water becomes gas, it must absorb energy from its surroundings. That energy comes from whatever surface the water is on \u2014 your skin, an elephant\u2019s mud coating. This is why stepping out of a pool on a windy day feels freezing even when the air is warm. An elephant\u2019s mud bath uses all four methods at once: conduction (cool mud touches skin), convection (wind over wet surface), radiation (skin emits infrared), and evaporation (water in mud slowly turns to gas).',
           ],
-          keyIdea: 'Elephant skin cracks are not damage — they are adaptive micro-channels that trap water and extend evaporative cooling for hours after a mud bath.',
+          keyIdea: 'Heat moves by conduction, convection, radiation, and evaporation. A mud bath uses all four simultaneously \u2014 it is a complete cooling system.',
+          diagram: 'ElephantHeatTransferDiagram',
         },
         {
-          title: 'Parasite Ecology and the Mud Shield',
+          title: 'Surface Area vs Volume',
           paragraphs: [
-            'Mud bathing serves a third critical function beyond cooling and sun protection: parasite control. Elephants are hosts to a wide range of ectoparasites including ticks, biting flies, mosquitoes, and lice. A thick layer of dried mud creates a physical barrier that parasites cannot penetrate to reach the skin. When the mud eventually flakes off, it carries attached parasites with it — a natural "exfoliation" that removes both dead skin cells and their unwanted passengers.',
-            'The relationship between elephants and their parasites is a miniature ecosystem. Ticks attach and feed on blood, potentially transmitting diseases like babesiosis. Warble flies lay eggs on the skin; the larvae burrow inward and develop inside the tissue for weeks before emerging. Stomach bots (Cobboldia elephantis) colonize the digestive tract. Each parasite species has adapted to exploit a specific niche on or in the elephant\'s body, and the elephant has counter-adaptations including mud bathing, dust bathing, and rubbing against trees.',
-            'This arms race between host and parasite is an example of coevolution — each side evolves in response to the other over millions of years. The Red Queen hypothesis (named after the character in Alice in Wonderland who must keep running just to stay in place) describes this dynamic: both species must continuously evolve just to maintain the status quo. If elephants evolve thicker skin, parasites evolve longer mouthparts. If elephants discover mud bathing, parasites adapt to colonize areas the mud does not reach.',
-            'Interestingly, elephants are also ecosystem engineers through their mud wallows. The depressions they create fill with rainwater and become micro-habitats for frogs, insects, and aquatic plants. Other animals use these wallows too — buffalo, rhinos, and wild pigs all benefit from elephant-created mud baths. A single elephant wallow can persist for decades, supporting a community of organisms that would not exist without the elephant\'s thermoregulatory behavior.',
+            'Here is a puzzle: if you break one big ice cube into many tiny pieces, the ice melts much faster. Same amount of ice, same temperature \u2014 so what changed? The surface area. Tiny pieces have far more total surface exposed to warm air than one big cube. This simple idea \u2014 called the cube-square law \u2014 explains why elephants overheat and mice freeze.',
+            'The math: if you double the size of an object, its surface area grows by 4\u00d7 (squared), but its volume grows by 8\u00d7 (cubed). This means bigger animals have relatively less surface compared to their volume. A mouse has about 100 cm\u00b2 of skin per cm\u00b3 of body. An elephant? About 0.5 cm\u00b2 per cm\u00b3 \u2014 two hundred times less.',
+            'Why does this matter? Every cell in the body produces heat (that is metabolism). Heat is generated throughout the VOLUME. But heat can only escape through the SURFACE (the skin). A mouse has tons of surface per unit volume, so it loses heat rapidly \u2014 which is why mice must eat 25% of their body weight every day just to stay warm. An elephant has the opposite problem: it produces massive heat in its huge volume but has relatively little skin to dump it through.',
+            'This is why elephants evolved large ears (more surface area for heat radiation), wrinkled skin (crevices increase effective surface area by up to 10\u00d7), and mud bathing (adds evaporative cooling surface). It is also why African elephants, which live in hotter open savannas, have bigger ears than Asian elephants in cooler forests. And it explains Allen\u2019s rule: animals in cold climates have small ears (Arctic hare), while animals in hot climates have huge ears (desert jackrabbit).',
           ],
-          keyIdea: 'Dried mud physically blocks parasites from reaching elephant skin, and when it flakes off, it removes attached ticks and fly larvae with it.',
+          keyIdea: 'Bigger animals have less surface area relative to their volume, so they trap heat. Elephants evolved big ears, wrinkled skin, and mud bathing to compensate.',
+          diagram: 'ElephantSurfaceAreaDiagram',
+        },
+        {
+          title: 'Elephants as Engineers',
+          paragraphs: [
+            'When an elephant digs a mud wallow, it is not just helping itself \u2014 it is reshaping the landscape for hundreds of other species. Ecologists call this being an **ecosystem engineer**: a species that creates or modifies habitats that other organisms depend on.',
+            'In Kaziranga, elephants engineer their environment in at least five ways. They dig water holes by using their tusks and feet to excavate dry riverbeds, reaching underground water that rhinos, deer, and birds then drink from. They create trails by repeatedly walking the same paths through dense grass, forming highways that smaller animals use. They push over trees, opening the forest canopy so sunlight reaches the ground and grasslands can grow \u2014 creating habitat for grazers.',
+            'Their mud wallows are especially important. After an elephant leaves, the depression fills with rainwater and becomes a tiny pond. Frogs lay eggs there. Dragonflies breed. Water beetles colonize it. Aquatic plants take root. A single wallow can persist for decades, supporting an entire community of organisms that would not exist without the elephant\u2019s digging. Even elephant dung matters: elephants eat fruit and walk kilometres before depositing the seeds, wrapped in fertilizer, far from the parent tree. Some tree species can ONLY germinate after passing through an elephant\u2019s digestive system.',
+            'This is why conservationists call elephants a keystone species \u2014 remove them, and the entire ecosystem changes. Fewer wallows means fewer frog breeding sites. Fewer trails means some areas become inaccessible. Fewer pushed-over trees means forests close in and grasslands shrink. The little elephant in the story is not just taking a bath \u2014 she is beginning her life\u2019s work as a landscape architect.',
+          ],
+          keyIdea: 'Elephants reshape their environment by digging water holes, creating trails, and building wallows that become habitats for frogs, insects, and plants.',
+          diagram: 'ElephantEcosystemDiagram',
         },
       ],
       vocabulary: [
-        ['Thermoregulation', 'The process of maintaining a stable body temperature — elephants use mud, ear-flapping, and shade to stay cool'],
-        ['Ectoparasite', 'A parasite that lives on the outside of its host\'s body — ticks, lice, and biting flies are common elephant ectoparasites'],
-        ['Evaporative cooling', 'Cooling caused by liquid turning to gas — when water or mud evaporates from skin, it absorbs heat and lowers body temperature'],
-        ['Coevolution', 'When two species evolve in response to each other over time — elephants evolved mud bathing partly in response to parasites evolving to exploit them'],
-        ['Ecosystem engineer', 'A species that creates or modifies habitats — elephant mud wallows become micro-ponds used by frogs, insects, and other animals'],
+        ['Thermoregulation', 'Maintaining a stable body temperature \u2014 elephants use mud, ear-flapping, and shade because they cannot sweat'],
+        ['Evaporative cooling', 'Cooling that happens when liquid turns to gas \u2014 each gram of water that evaporates absorbs 2,260 joules of heat from the surface it was on'],
+        ['Conduction', 'Heat transfer through direct contact \u2014 heat flows from a warm elephant foot into cool mud'],
+        ['Convection', 'Heat carried away by moving fluid \u2014 wind blowing over wet skin replaces warm air with cool air'],
+        ['Cube-square law', 'When you scale something up, volume grows faster than surface area \u2014 this is why big animals overheat and small animals freeze'],
+        ['Ecosystem engineer', 'A species that creates or modifies habitats \u2014 elephant wallows become micro-ponds used by frogs, insects, and aquatic plants'],
       ],
       trueFalse: [
-        { statement: 'Elephants take mud baths mainly because they enjoy playing in mud.', isTrue: false, explanation: 'Mud bathing serves critical survival functions: it cools the body through evaporative cooling, blocks UV radiation from the sun (elephants can get sunburned), and creates a physical barrier against biting parasites. What looks like play is actually essential health maintenance.' },
-        { statement: 'An elephant\'s ears help it cool down.', isTrue: true, explanation: 'Elephant ears are filled with a network of blood vessels. When an elephant flaps its ears, air flows over these vessels and cools the blood by up to 5 degrees C before it circulates back through the body. African elephants have larger ears than Asian elephants because they live in hotter, more open habitats.' },
-        { statement: 'Dried mud on elephant skin helps protect against insect bites.', isTrue: true, explanation: 'A thick layer of dried mud creates a physical barrier that biting flies, ticks, and mosquitoes cannot penetrate to reach the skin. When the mud eventually cracks and falls off, it carries attached parasites with it — a natural exfoliation that removes both dead skin and unwanted hitchhikers.' },
+        { statement: 'Elephants take mud baths mainly because they enjoy playing in mud.', isTrue: false, explanation: 'Mud bathing serves critical survival functions: evaporative cooling (the water in mud absorbs body heat as it evaporates), UV protection (dried mud reflects sunlight like SPF 5\u201310 sunscreen), and parasite defence (dried mud blocks biting flies and ticks). What looks like play is life-or-death thermoregulation.' },
+        { statement: 'A mouse loses body heat faster than an elephant, relative to its size.', isTrue: true, explanation: 'A mouse has about 200 times more surface area per unit volume than an elephant (the cube-square law). More surface relative to volume means heat escapes faster. This is why mice must eat 25% of their body weight daily just to replace lost heat, while elephants struggle with the opposite problem \u2014 they cannot dump heat fast enough.' },
+        { statement: 'An elephant\u2019s wrinkled skin is a sign of old age or poor health.', isTrue: false, explanation: 'The wrinkles are adaptive. The cracks in elephant skin are not damage \u2014 they are micro-channels that trap water and mud like tiny reservoirs. This increases the skin\u2019s effective surface area by up to 10\u00d7, keeping the elephant cool for hours after a mud bath. Smoother skin would dry out in minutes.' },
       ],
       facts: [
-        'Asian elephants in Kaziranga National Park can consume up to 150 kg of food and drink 100 liters of water per day. Their massive body generates so much metabolic heat that without cooling behaviors like mud bathing and swimming, they would overheat within hours on a hot day.',
-        'Elephant skin is up to 2.5 cm thick but is surprisingly sensitive — elephants can feel a fly landing on their back. The skin is covered in deep wrinkles that trap moisture and mud, keeping the animal cool up to 5-10 times longer than smooth skin would.',
-        'A single elephant mud wallow can persist for decades and become a vital micro-habitat. During dry seasons, these depressions hold rainwater and support communities of frogs, dragonflies, water beetles, and aquatic plants that would not exist without the elephant\'s digging.',
+        'An Asian elephant in Kaziranga eats up to 150 kg of food and drinks 100 litres of water daily. Its massive body generates so much metabolic heat that without mud baths, ear flapping, and shade-seeking, it would overheat within hours on a 40 \u00b0C day.',
+        'Elephant skin is up to 2.5 cm thick yet so sensitive that an elephant can feel a fly landing on its back. The deep wrinkles are not folds \u2014 they are actual cracks in the outer skin layer that trap moisture and extend cooling for hours.',
+        'A single elephant mud wallow can persist for decades. During dry seasons, these depressions hold rainwater and support entire communities of frogs, dragonflies, water beetles, and aquatic plants that would not exist without the elephant\u2019s digging.',
       ],
-      offlineActivity: 'Test evaporative cooling on yourself. Wet the back of one hand with water and leave the other dry. Wave both hands in the air for 30 seconds. Which hand feels cooler? The wet hand loses heat as water evaporates — the same principle elephants use with mud and water. Now try the same experiment with a thin layer of mud (mix soil and water). Does it stay cool longer than plain water? Elephants discovered millions of years ago what you just tested: mud\'s slow evaporation provides longer-lasting cooling than water alone.',
-    },
-  },
+      offlineActivity: 'Test evaporative cooling with three hands. (1) Leave one hand completely dry. (2) Wet the back of your other hand with plain water. (3) Coat a forearm with a thin layer of mud (mix garden soil with water). Wave all three in the air for 30 seconds. The dry hand feels normal. The wet hand feels cold quickly but dries fast. The muddy arm stays cool for MUCH longer because mud holds water and releases it slowly. You just proved why elephants prefer mud over plain water \u2014 longer-lasting cooling from slow evaporation.',
+      offlineActivityDiagram: 'ActivityCoolingExperimentDiagram',
+      codeTeaser: `# What temperature does an elephant reach without mud?
+body_temp = 36.0  # starting body temperature in \u00b0C
+air_temp = 40.0   # Kaziranga summer day
+
+for hour in range(1, 7):
+    # Heat gain: metabolism + hot environment
+    heat_gain = 0.3 + 0.1 * (air_temp - body_temp)
+    # Without mud: only ears help (a little)
+    ear_cooling = 0.15
+    body_temp += heat_gain - ear_cooling
+    status = "OK" if body_temp < 38 else "DANGER" if body_temp < 40 else "LETHAL"
+    print(f"Hour {hour}: {body_temp:.1f}\u00b0C [{status}]")
+
+print("\\nWithout mud, elephants overheat in hours.")
+print("Level 1 builds the full simulation with mud bathing.")`,
+      referenceLinks: [
+        { slug: 'biology-heat-transfer', reason: 'Deep dive into conduction, convection, radiation, and evaporation in biological systems' },
+        { slug: 'biology-animal-cell', reason: 'How cells produce metabolic heat through cellular respiration' },
+      ],
+      nextLessons: [
+        { slug: 'girl-who-spoke-to-elephants', reason: 'Uses AI and data science to track elephant herds in the wild' },
+        { slug: 'elephant-corridor', reason: 'Explores elephant migration corridors and conservation challenges' },
+      ],
+    },  },
   {
     id: 32,
     slug: 'brave-mithun',
@@ -5660,53 +6056,97 @@ And if that's not a lesson worth learning, what is?
     level0: {
       concepts: [
         {
-          title: 'Nitrogen-Limited Ecosystems: Why Plants Turn Carnivorous',
+          title: 'Why Would a Plant Eat Insects?',
           paragraphs: [
-            'Carnivorous plants are not hungry for energy — they photosynthesize just like every other plant. What they need is nitrogen, phosphorus, and other mineral nutrients that are scarce in their native habitats. Pitcher plants (Nepenthes khasiana, the only Nepenthes species native to India, found in the Khasi Hills of Meghalaya) grow in nutrient-poor, acidic soils where rainfall leaches minerals away faster than decomposition can replace them.',
-            'In most ecosystems, plants obtain nitrogen from the soil through their roots. Soil bacteria convert atmospheric N₂ into ammonium (NH₄⁺) and nitrate (NO₃⁻) through nitrogen fixation and nitrification. But in the waterlogged, acidic bogs where pitcher plants grow, these bacterial processes are suppressed. The soil is essentially a nitrogen desert. Carnivorous plants evolved an alternative nitrogen source: animal protein, which is 16% nitrogen by mass.',
-            'The evolution of carnivory in plants has occurred independently at least 12 times across 5 different plant orders, producing remarkably diverse trapping mechanisms: pitfall traps (pitcher plants), snap traps (Venus flytrap), flypaper traps (sundews), suction traps (bladderworts), and lobster-pot traps (corkscrew plants). This convergent evolution — the same solution arising independently in unrelated lineages — is strong evidence that nitrogen limitation is a powerful selective pressure driving plant adaptation.',
+            'Every plant needs three things to grow: sunlight (for energy), water, and **mineral nutrients** from the soil \u2014 especially **nitrogen** and **phosphorus**. Nitrogen is essential because it is a building block of proteins, DNA, and chlorophyll. Without nitrogen, a plant cannot make new cells, cannot photosynthesize properly, and cannot grow.',
+            'Most plants get nitrogen through their roots. Soil bacteria convert nitrogen gas (N\u2082) from the air into forms plants can absorb \u2014 ammonium (NH\u2084\u207a) and nitrate (NO\u2083\u207b). This process, called **nitrogen fixation**, works well in healthy, well-drained soil with plenty of organic matter decomposing into it.',
+            'But what happens when the soil is terrible? In the **Khasi Hills of Meghalaya**, rainfall exceeds 11,000 mm per year \u2014 the wettest place on Earth. All that rain washes nutrients out of the thin, rocky soil faster than bacteria can replace them. The soil becomes a **nitrogen desert**: less than 10 mg/kg of available nitrogen, compared to 200 mg/kg in a normal garden. A plant growing here faces a problem: plenty of sunlight for energy, but almost no minerals to build with.',
+            'Some plants solved this problem by evolving the ability to **catch and digest insects**. An ant is about 16% nitrogen by mass. One digested ant gives the plant more nitrogen than it could absorb from the soil in weeks. This is not about energy \u2014 the plant still photosynthesizes for that. Carnivory is supplementary feeding for minerals only. Think of it this way: the plant has a solar roof (photosynthesis) but no grocery store (nutrient-poor soil), so it set up a trap to get the protein it cannot find any other way.',
           ],
-          keyIdea: 'Carnivorous plants evolved to capture animal prey not for energy but for nitrogen and phosphorus — nutrients that are desperately scarce in their bog habitats.',
+          keyIdea: 'Pitcher plants eat insects not for energy but for nitrogen \u2014 a mineral nutrient that is desperately scarce in their waterlogged, rain-leached soils.',
+          diagram: 'PitcherNutrientDiagram',
         },
         {
-          title: 'The Pitcher Trap: Surface Tension and Fluid Dynamics',
+          title: 'The Perfect Trap',
           paragraphs: [
-            'The pitcher plant\'s trap is a marvel of passive engineering. The pitcher is a modified leaf rolled into a tube, with a slippery rim (peristome) at the top, a waxy inner wall, and a pool of digestive fluid at the bottom. An insect landing on the peristome finds it feels like solid ground — until it takes a step. The peristome\'s surface is covered in microscopic ridges that, when wet with nectar or rain, create an aquaplaning effect. The insect\'s feet hydroplane on a thin water film, just as car tires lose grip on a wet road.',
-            'The waxy zone below the peristome presents a second barrier to escape. This region is coated with loose wax crystals (about 1 micrometer in size) that detach when an insect tries to grip them. It is like trying to climb a wall covered in loose powder — every foothold crumbles. The insect slides downward into the digestive pool. Experiments have shown that the wax crystals specifically clog the adhesive pads on insect feet, disabling the same sticky-pad mechanism that lets flies walk on ceilings.',
-            'The digestive fluid at the bottom of the pitcher is not just water. It is a complex solution containing hydrochloric acid (bringing pH down to 2-3, similar to human stomach acid), proteolytic enzymes (like nepenthesin, analogous to pepsin), wetting agents that reduce surface tension (making it harder for insects to float), and antimicrobial compounds that prevent the fluid from being colonized by competing bacteria. The entire system — peristome, wax zone, and digestive fluid — works as an integrated unit where each component makes the others more effective.',
+            'A pitcher plant does not chase its prey. It cannot move. Instead, it builds a **passive trap** so effective that insects walk into it voluntarily and cannot escape. The trap is a modified leaf, rolled into a tube shape, with four distinct zones working together.',
+            '**Zone 1 \u2014 The Lid (Operculum).** A small canopy sits over the opening, keeping heavy rain from diluting the digestive fluid inside. In some species, the lid also secretes nectar to attract insects from above.',
+            '**Zone 2 \u2014 The Slippery Rim (Peristome).** This is the most critical part. The rim is covered in microscopic ridges, like tiny grooves carved into the surface. When nectar or rain wets these ridges, they form a continuous water film. An insect landing on the rim finds it feels like solid ground \u2014 until it takes a step. Its feet **hydroplane** on the thin water film, exactly like car tires losing grip on a wet road. The insect slides inward before it can react.',
+            '**Zone 3 \u2014 The Waxy Wall.** Below the rim, the inner wall is coated with loose wax crystals, each about 1 micrometer across. When an insect tries to grip the wall, the crystals detach and clog its adhesive foot-pads \u2014 the same sticky pads that let flies walk on ceilings. With its grip disabled, the insect slides further down.',
+            '**Zone 4 \u2014 The Digestive Pool.** At the bottom sits a pool of fluid at pH 2\u20133 (as acidic as your stomach). It contains **nepenthesin** (a protein-digesting enzyme), **wetting agents** that reduce surface tension (so insects cannot float), and antimicrobial compounds. A trapped ant is fully digested in 5\u20138 days. Only the hard exoskeleton remains.',
           ],
-          keyIdea: 'The pitcher trap uses wet peristome surfaces for hydroplaning, loose wax crystals to disable insect grip, and acidic enzyme-rich fluid to digest prey.',
-          diagram: 'BuoyancyDiagram',
+          keyIdea: 'The pitcher is a four-zone trap: a nectar-baited lid, a hydroplaning rim, a wax-crystal wall that disables insect grip, and an acidic enzyme pool that digests prey.',
+          diagram: 'PitcherAnatomyDiagram',
         },
         {
-          title: 'Enzyme Biochemistry: How the Plant Digests Protein',
+          title: 'Surface Tension and Fluid Dynamics',
           paragraphs: [
-            'Once an insect falls into the pitcher, digestion begins. The pitcher secretes enzymes — biological catalysts that break large molecules into smaller ones without being consumed in the process. The key enzyme is nepenthesin, an aspartic protease similar to pepsin in the human stomach. It cleaves proteins at specific points (between hydrophobic amino acid residues), breaking long protein chains into shorter peptides.',
-            'Enzyme function depends on protein structure. Nepenthesin is a chain of about 400 amino acids folded into a precise 3D shape with an active site — a pocket where the substrate (prey protein) fits like a key in a lock. Two aspartic acid residues in the active site activate a water molecule, which then attacks and breaks the peptide bond. This mechanism works optimally at pH 2.5-3.5, which is why the pitcher maintains an acidic environment.',
-            'After the initial protein breakdown, other enzymes continue the process. Lipases break down fats. Phosphatases release phosphorus from organic molecules. Chitinases degrade chitin (the main component of insect exoskeletons). The end products — amino acids, fatty acids, phosphate, and other nutrients — are absorbed through the inner wall of the pitcher through specialized glands. A single large pitcher can digest an insect completely in 5-8 days, leaving only the indigestible exoskeleton behind.',
-            'Interestingly, not everything in the pitcher is prey. Many organisms have evolved to live inside pitchers as commensals — they benefit without harming the plant, or even help it. Mosquito larvae, mites, and certain crab spiders live in pitcher fluid, feeding on trapped insects and breaking them down faster. Their waste products (rich in dissolved nitrogen) are more easily absorbed by the plant than intact insect bodies. This makes the pitcher not just a trap, but a miniature ecosystem.',
+            'Why can a water strider walk on a pond but an ant drowns in pitcher fluid? The answer is **surface tension** \u2014 a property of liquids that makes their surface behave like a thin elastic sheet.',
+            'Water molecules attract each other (through hydrogen bonds). Molecules inside the liquid are pulled equally in all directions by their neighbors. But molecules at the surface have no neighbors above them \u2014 they are pulled only sideways and downward, creating a "skin" effect. This surface tension is strong enough to support small insects. A water strider distributes its weight across long, waxy legs, and the surface tension holds it up.',
+            'Pitcher plant fluid defeats this defense with **surfactants** \u2014 molecules that reduce surface tension. Surfactants have one end that loves water and one end that hates it. They wedge themselves into the surface layer, pushing water molecules apart and weakening the hydrogen bonds. With lower surface tension, the liquid surface can no longer support an insect. The ant breaks through and sinks.',
+            'The peristome uses a different fluid trick: **wettability**. The microscopic ridges on the rim are hydrophilic (water-loving). When wet, water spreads into the grooves and forms a continuous film. An insect stepping onto this wet surface has no solid contact \u2014 its feet touch only water. This is called the **aquaplaning effect**, and it is the same physics that causes cars to skid on wet roads. The insect cannot generate friction, cannot grip, and slides into the pitcher.',
+            'These two mechanisms \u2014 reduced surface tension in the pool and engineered wettability on the rim \u2014 are examples of how evolution produced solutions that engineers only recently learned to copy. "SLIPS" coatings (Slippery Liquid-Infused Porous Surfaces), inspired by pitcher plants, are now used on medical devices and boat hulls to repel fouling.',
           ],
-          keyIdea: 'Pitcher plants digest prey using aspartic proteases that work like stomach enzymes, breaking proteins into absorbable amino acids at pH 2.5-3.5.',
+          keyIdea: 'The pitcher uses surfactants to break surface tension (so insects sink) and a wet microridge rim for aquaplaning (so insects slide in) \u2014 two fluid dynamics tricks working together.',
+          diagram: 'PitcherSurfaceTensionDiagram',
+        },
+        {
+          title: 'Nepenthes of Meghalaya',
+          paragraphs: [
+            '**Nepenthes khasiana** is the only pitcher plant species in the genus Nepenthes that is native to India, and it grows exclusively in the **Khasi Hills and Jaintia Hills of Meghalaya**, at altitudes between 1,000 and 1,500 metres. It was first described scientifically in 1882 by Joseph Dalton Hooker, who received specimens from botanists working in the region.',
+            'Why does it grow here and nowhere else in India? Three factors combine: (1) **Extreme rainfall** (Mawsynram and Cherrapunji receive over 11,000 mm per year) leaches nutrients from the soil, creating the nutrient poverty that favors carnivory. (2) **Acidic laterite soils** on exposed rocky outcrops provide poor substrate for most plants but suit Nepenthes. (3) **Subtropical cloud-forest climate** at 1,000\u20131,500 m altitude provides the constant humidity and moderate temperatures the plant requires.',
+            'N. khasiana is an **endangered species**, listed in Schedule VI of the Indian Wildlife Protection Act and in Appendix II of CITES (the international trade treaty). Its main threats are habitat loss from mining and shifting cultivation, overharvesting by collectors, and forest fires. The Meghalaya government has established the **Baghmara Pitcher Plant Reserve** \u2014 one of the few protected areas in the world dedicated to a single plant species.',
+            'Globally, there are about 170 known Nepenthes species, mostly in Southeast Asia. The largest, **N. rajah** from Borneo, produces pitchers that hold up to 3.5 litres and have been found containing drowned rats. The smallest are barely 5 cm tall. One species, **N. lowii**, has evolved a toilet-shaped pitcher that catches nutrient-rich droppings from tree shrews rather than insects. This extraordinary diversity shows how a single evolutionary innovation \u2014 the pitcher trap \u2014 can radiate into wildly different ecological niches.',
+          ],
+          keyIdea: 'Nepenthes khasiana is India\'s only native pitcher plant, found exclusively in Meghalaya\'s cloud forests, and is endangered due to habitat loss and overharvesting.',
+          diagram: 'PitcherSpeciesDiagram',
         },
       ],
       vocabulary: [
-        ['Photosynthesis', 'The process plants use to convert sunlight, water, and CO₂ into sugar and oxygen'],
-        ['Chlorophyll', 'The green pigment in plants that absorbs sunlight for photosynthesis'],
-        ['Vegetative propagation', 'Growing a new plant from a fragment of the parent — without seeds'],
-        ['Totipotent', 'A cell that can develop into any cell type — plant cells have this superpower'],
-        ['Cell wall', 'A rigid outer layer made of cellulose that gives plant cells their shape and strength'],
+        ['Nitrogen fixation', 'The conversion of atmospheric N\u2082 gas into ammonium (NH\u2084\u207a) by soil bacteria \u2014 the main way nitrogen enters ecosystems'],
+        ['Peristome', 'The slippery rim of a pitcher plant, covered in microscopic ridges that create a hydroplaning surface when wet'],
+        ['Surface tension', 'The tendency of a liquid surface to behave like an elastic sheet, caused by cohesive forces between surface molecules'],
+        ['Surfactant', 'A molecule that reduces surface tension by wedging between water molecules at the surface \u2014 pitcher plants add these to their digestive fluid'],
+        ['Nepenthesin', 'The protein-digesting enzyme secreted by pitcher plants, similar to pepsin in the human stomach, working best at pH 2\u20133'],
       ],
       trueFalse: [
-        { statement: 'Plants eat soil to get their food.', isTrue: false, explanation: 'Plants make their own food through photosynthesis using sunlight, water, and CO₂ from air. The soil provides minerals and water, but the actual "food" (sugar) is manufactured inside the leaves using solar energy.' },
-        { statement: 'A single plant cell can grow into an entire new plant.', isTrue: true, explanation: 'Unlike most animal cells, many plant cells are totipotent — they retain the ability to become any cell type. This is why you can grow a new plant from a cutting — the cut stem cells reorganize into roots, stems, and leaves.' },
-        { statement: 'All plants reproduce using seeds.', isTrue: false, explanation: 'Many plants can also reproduce vegetatively — through cuttings, runners, tubers, or bulbs. Every banana plant in your grocery store is a clone, grown from a cutting rather than a seed.' },
+        { statement: 'Pitcher plants eat insects because they cannot photosynthesize.', isTrue: false, explanation: 'Pitcher plants photosynthesize perfectly well \u2014 they eat insects for nitrogen and phosphorus, minerals that are scarce in their waterlogged, rain-leached soil. Insect digestion supplements mineral nutrition, not energy production.' },
+        { statement: 'The rim of a pitcher plant becomes more slippery when it is wet.', isTrue: true, explanation: 'The peristome is covered in microscopic ridges that channel water into a continuous film. When dry, insects can walk safely on the rim. When wet (from rain or nectar), the water film causes aquaplaning \u2014 the same physics that makes wet roads dangerous for cars.' },
+        { statement: 'Nepenthes khasiana grows all across India wherever the soil is poor.', isTrue: false, explanation: 'N. khasiana is found only in the Khasi and Jaintia Hills of Meghalaya. It requires a specific combination of extreme rainfall, acidic laterite soils, and subtropical cloud-forest humidity that exists nowhere else in India.' },
       ],
       facts: [
-        'Photosynthesis produces all the oxygen we breathe. Every other breath you take comes from algae and plants splitting water molecules apart.',
-        'The world\'s largest organism is a clonal colony of aspen trees in Utah called "Pando" — 47,000 tree stems all connected by a single root system, weighing 6,600 tonnes.',
-        'Tulsi (holy basil) contains eugenol, a natural antiseptic. Traditional medicine used it for centuries — modern science has confirmed its antimicrobial properties.',
+        'Nepenthes khasiana is the only Nepenthes species native to India and grows exclusively in the Khasi Hills of Meghalaya at 1,000\u20131,500 m altitude.',
+        'The digestive fluid in a pitcher plant has a pH of 2\u20133 \u2014 as acidic as the hydrochloric acid in your stomach \u2014 and can fully dissolve a trapped insect in 5\u20138 days.',
+        'Engineers have copied the pitcher plant\'s slippery surface to create SLIPS coatings (Slippery Liquid-Infused Porous Surfaces) used on medical devices, airplane wings, and boat hulls to prevent fouling and ice buildup.',
       ],
-      offlineActivity: 'Take a cutting from a plant (a small piece of stem with a few leaves). Place it in a glass of water on a windowsill. Check every day — within a week, you should see tiny roots forming. You\'re witnessing vegetative propagation — the same process that makes Tejimola\'s story biologically plausible.',
+      offlineActivity: 'Build a pitcher plant trap model. Roll three paper cones with different rim widths (narrow, medium, wide). Coat the inner rims with: (A) nothing, (B) cooking oil, (C) oil plus a water spray. Drop 10 small beads (simulating insects) down each rim and record how many fall into the cone. Which combination captures the most? Compare your results with real pitcher plant anatomy \u2014 the oily, wet coating mimics the pitcher\'s waxy, nectar-covered peristome.',
+      offlineActivityDiagram: 'ActivityTrapModelDiagram',
+      codeTeaser: `import numpy as np
+import matplotlib.pyplot as plt
+
+# Compare nitrogen from soil vs from insects
+soil_n_mg_per_day = 0.5     # mg N absorbed from poor bog soil
+ant_n_mg = 1.2              # mg N per ant (dry mass ~2mg, 16% N)
+# One ant = how many days of soil absorption?
+days_equivalent = ant_n_mg / soil_n_mg_per_day
+
+ants_per_month = np.array([0, 1, 3, 5, 8, 12])
+soil_n = 30 * soil_n_mg_per_day  # monthly soil N
+total_n = soil_n + ants_per_month * ant_n_mg
+
+plt.bar(ants_per_month, total_n, color='#22c55e')
+plt.xlabel("Ants caught per month")
+plt.ylabel("Total nitrogen (mg/month)")
+plt.title(f"One ant = \${days_equivalent:.0f} days of soil nitrogen!")
+plt.show()  # Why is carnivory worth the cost?`,
+      referenceLinks: [
+        { slug: 'ecology-and-ecosystems', reason: 'Understand food webs, nutrient cycling, and why some ecosystems have nutrient-poor soils' },
+        { slug: 'chemistry-fundamentals', reason: 'Learn about pH, acids, enzymes, and protein structure \u2014 the chemistry behind pitcher plant digestion' },
+      ],
+      nextLessons: [
+        { slug: 'tejimola-lives-again', reason: 'Explores plant biology from a different angle \u2014 vegetative propagation and how plant cells rebuild entire organisms' },
+        { slug: 'wild-orchids-clouds', reason: 'Another Meghalaya story about plants with remarkable adaptations \u2014 orchids that grow on trees without soil' },
+      ],
     },
   },
   {
