@@ -5,6 +5,10 @@ import MatchingActivity from '../interactive/MatchingActivity';
 import TrueFalse from '../interactive/TrueFalse';
 import DidYouKnow from '../interactive/DidYouKnow';
 import FrequencySlider from '../interactive/FrequencySlider';
+import TonePlayer from '../interactive/TonePlayer';
+import IntervalPlayer from '../interactive/IntervalPlayer';
+import BeatMachine from '../interactive/BeatMachine';
+import HarmonicsExplorer from '../interactive/HarmonicsExplorer';
 
 /**
  * Render inline markdown: **bold** and `code`.
@@ -154,6 +158,14 @@ function renderInteractive(config: NonNullable<ReferenceSection['interactive']>)
       return <DidYouKnow facts={config.props.facts as string[]} />;
     case 'slider':
       return <FrequencySlider />;
+    case 'tone-player':
+      return <TonePlayer />;
+    case 'interval-player':
+      return <IntervalPlayer />;
+    case 'beat-machine':
+      return <BeatMachine />;
+    case 'harmonics-explorer':
+      return <HarmonicsExplorer />;
     default:
       return null;
   }

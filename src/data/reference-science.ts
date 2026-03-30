@@ -3604,16 +3604,8 @@ export const scienceReferences: ReferenceGuide[] = [
         content:
           'Sound is a **mechanical wave** — a vibration that travels through a medium (air, water, wood, metal) by causing molecules to bump into each other in a chain reaction. Unlike light, sound cannot travel through a vacuum because there are no molecules to transmit the vibration. When a drum skin vibrates, it pushes the air molecules in front of it together (a **compression**), and when it moves back, it creates a region of lower pressure (a **rarefaction**). These alternating compressions and rarefactions propagate outward as a sound wave.\n\n**Try this:** Put your hand on your throat and hum. Feel the vibrations? Those vibrations push on the air, creating the sound that reaches someone else\'s ears. Now hum a higher note — feel how the vibrations get faster? That\'s frequency changing in real time, right under your fingertips.\n\nThe **frequency** of a sound wave — the number of complete vibrations per second, measured in Hertz (Hz) — determines its **pitch**. A high-frequency vibration (say, 4,000 Hz) sounds high-pitched, like a bird\'s chirp. A low-frequency vibration (say, 80 Hz) sounds low-pitched, like a bass drum. The human ear can detect frequencies from roughly 20 Hz to 20,000 Hz, though this range narrows with age. Middle C on a piano vibrates at about 262 Hz, meaning the string oscillates back and forth 262 times every second.\n\nThe **amplitude** of the wave — the height of the compression peaks — determines **volume** (loudness). A louder sound has bigger amplitude, meaning the molecules are displaced farther from their resting position.\n\nThe **speed of sound** depends on the medium. In air at room temperature, sound travels at about 343 metres per second (roughly 1,235 km/h). In water it travels about 4.3 times faster (~1,480 m/s), and in steel about 15 times faster (~5,960 m/s). This is because molecules in denser, stiffer materials transmit vibrations more quickly.\n\n**Check yourself:** If you see lightning and count 3 seconds before hearing thunder, how far away was the lightning strike? (Answer: about 1 km — sound travels ~343 m/s, so 343 x 3 = roughly 1,029 metres.)',
         interactive: {
-          type: 'matching',
-          props: {
-            title: 'Match each property of sound to what it determines',
-            pairs: [
-              ['Frequency (Hz)', 'Pitch — how high or low a sound is'],
-              ['Amplitude', 'Volume — how loud or quiet a sound is'],
-              ['Speed of sound', 'How fast the vibration travels through a medium (343 m/s in air)'],
-              ['Wavelength', 'The physical distance between consecutive compressions'],
-            ],
-          },
+          type: 'tone-player',
+          props: {},
         },
       },
       {
@@ -3621,6 +3613,10 @@ export const scienceReferences: ReferenceGuide[] = [
         diagram: 'MusicHarmonicsDiagram',
         content:
           'Here is a mystery: a guitar and a flute can both play middle C (262 Hz). The pitch is identical. Yet you can tell them apart instantly, even with your eyes closed. Why?\n\nThe answer is **harmonics** (also called **overtones**). When a guitar string vibrates at 262 Hz, it does not vibrate only at that frequency. It simultaneously vibrates at 2x (524 Hz), 3x (786 Hz), 4x (1,048 Hz), 5x, 6x, and beyond — all at the same time. The 262 Hz vibration is the **fundamental** (the pitch you perceive), and the higher multiples are the harmonics. Each harmonic has a different loudness relative to the fundamental, and this mix is what gives each instrument its unique **timbre** (tone color).\n\nA guitar has strong harmonics all the way up to the 6th or higher — the string\'s stiffness, the resonating wooden body, and the way you pluck or strum all contribute upper harmonics. The resulting waveform is complex and jagged when you add all these sine waves together.\n\nA flute, by contrast, produces a nearly **pure tone** — the fundamental is very strong, the 2nd harmonic is weak, and higher harmonics are almost absent. This is because the smooth, cylindrical air column and the way air is blown across the embouchure produce very clean vibrations. The resulting waveform looks almost like a textbook sine wave.\n\n**The key insight:** The same fundamental pitch + different harmonic recipes = different timbres. This is why orchestras sound rich — every instrument adds its own harmonic fingerprint to the mix.\n\n**Predict before you read on:** Would a square wave (like old 8-bit video game music) sound more like a flute or more like a buzzy synth? Think about what shape implies about harmonics. (Answer: A square wave contains ALL odd harmonics at high amplitudes — 3rd, 5th, 7th, etc. — making it sound buzzy and electronic, not smooth like a flute.)',
+        interactive: {
+          type: 'harmonics-explorer',
+          props: {},
+        },
       },
       {
         title: 'The Decibel Scale — From Whisper to Thunder',
@@ -3644,6 +3640,10 @@ export const scienceReferences: ReferenceGuide[] = [
         diagram: 'WaveEquationDiagram',
         content:
           'An **octave** is the interval between a note and the note with double its frequency. If a string vibrates at 440 Hz (the note A4), the note one octave higher vibrates at 880 Hz (A5), and one octave lower at 220 Hz (A3). Our ears perceive notes an octave apart as being "the same note, just higher or lower" — this is a universal feature of human hearing, observed across every musical culture on Earth.\n\nWithin an octave, different cultures divide the frequency range in different ways to create **scales**. Western music typically uses a 12-note **chromatic scale**, with each note separated by a **semitone** (a frequency ratio of approximately 1.0595, the twelfth root of 2). The **major scale** (do-re-mi-fa-sol-la-ti-do) uses 7 of the 12 notes in a specific pattern of whole and half steps (W-W-H-W-W-W-H). The **pentatonic scale** uses only 5 notes and is found in folk music around the world — many NE Indian traditional melodies, Chinese folk songs, Celtic music, and blues all use pentatonic patterns.\n\nWhy do some note combinations sound "good" (consonant) and others "bad" (dissonant)? When two notes have frequencies in simple ratios — like 2:1 (octave), 3:2 (perfect fifth), or 4:3 (perfect fourth) — their wave patterns align regularly, creating a smooth, blended sound. When the ratio is complex — like 16:15 (a semitone) — the waves interfere in irregular patterns, creating tension. This interplay of tension and release is the emotional engine of music.\n\nIndian classical music uses a system of **ragas** that prescribe not just which notes to use but how to move between them — which notes to emphasize, which to glide through, and which combinations evoke particular moods or times of day.\n\n**Check yourself:** The note A4 is 440 Hz. What frequency is a perfect fifth above it (ratio 3:2)? (Answer: 440 x 1.5 = 660 Hz, which is the note E5.)',
+        interactive: {
+          type: 'interval-player',
+          props: {},
+        },
       },
       {
         title: 'Rhythm and Time Signatures',
@@ -3714,6 +3714,10 @@ export const scienceReferences: ReferenceGuide[] = [
         diagram: 'RhythmBeatDiagram',
         content:
           'A beat is the basic unit of musical time — the steady pulse. But not all beats are equal. In any time signature, some beats are naturally **strong** (accented) and others are **weak**.\n\n**4/4 time** (also called "common time") is the most widespread: four beats per measure, with beat 1 strongest, beat 3 moderately strong, and beats 2 and 4 weak. Count along: **ONE** two **THREE** four, **ONE** two **THREE** four. This is the pulse behind most rock, pop, hip-hop, and marching music. It feels stable and driving.\n\n**3/4 time** has three beats per measure: **ONE** two three, **ONE** two three. Only beat 1 is strong, creating a lilting, swaying feel — the waltz. Many folk dances worldwide use 3/4 because the asymmetry naturally creates a rocking motion.\n\n**6/8 time** has six eighth-note beats per measure, felt as two groups of three: **ONE** two three **FOUR** five six. It sounds like a gentle gallop and appears in folk music from Ireland to Assam to West Africa.\n\nThe key insight is that **grouping creates feeling**. The exact same tempo can feel marching (in 4/4), dancing (in 3/4), or galloping (in 6/8) depending on which beats get the accent. The notes themselves might be identical — what changes is the pattern of emphasis.\n\n**Predict:** If a song switches from 4/4 to 3/4 without changing the tempo, what will happen to the feel? (Answer: The marching/driving feel will transform into a swaying/dancing feel, because the accent pattern shifts from every-other-beat to every-third-beat.)',
+        interactive: {
+          type: 'beat-machine',
+          props: {},
+        },
       },
       {
         title: 'Polyrhythms — Two Rhythms at Once',
@@ -3757,6 +3761,10 @@ export const scienceReferences: ReferenceGuide[] = [
         title: 'Build a Beat — Constructing Rhythm from Simple Rules',
         content:
           'Every complex rhythm pattern, from a Bihu dhol groove to an electronic dance track, can be built from simple rules applied step by step.\n\n**Step 1: Choose your grid.** Divide time into equal slots. A common starting grid is 16 slots per measure (called 16th notes in 4/4 time). Number them 1 through 16.\n\n**Step 2: Place the foundation.** The kick drum (or the *bam* side of the dhol) usually lands on beats 1, 5, 9, and 13 — the four main beats. This is the pulse.\n\n**Step 3: Add the backbeat.** The snare drum (or the *chati* side of the dhol) typically hits beats 5 and 13 — the "2" and "4" of the measure. This creates the driving feel of most popular music.\n\n**Step 4: Fill the gaps.** Hi-hat or taal (cymbals) play every other slot: 1, 3, 5, 7, 9, 11, 13, 15 — creating eighth-note subdivision. For more energy, play every slot (16th notes).\n\n**Step 5: Syncopate.** Move one or two kick drum hits slightly off the grid — say, from slot 9 to slot 8, or add a ghost note on slot 11. Suddenly the pattern has groove.\n\nThis layered approach — foundation, backbeat, subdivision, syncopation — is how every drummer thinks, whether they are playing a drum kit, a tabla, or programming beats on a computer. The beauty is that incredibly complex-sounding rhythms emerge from very simple, rule-based construction.\n\n**The Euclidean rhythm insight:** Mathematician Godfried Toussaint discovered that many traditional rhythm patterns from around the world can be generated by a simple algorithm: distribute a given number of beats as evenly as possible across a given number of slots. Distribute 3 beats across 8 slots and you get the Cuban tresillo (X..X..X.). Distribute 5 across 8 and you get the West African bell pattern (X.XX.XX.). The mathematical beauty behind musical groove.\n\n**Check yourself:** If you distribute 4 beats as evenly as possible across 12 slots, what pattern do you get? (Answer: X..X..X..X.. — a beat every 3 slots, which is a straight 4/4 feel over a triplet grid, common in many African and Afro-Cuban rhythms.)',
+        interactive: {
+          type: 'beat-machine',
+          props: {},
+        },
       },
     ],
   },

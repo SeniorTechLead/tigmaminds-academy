@@ -15,7 +15,7 @@ export type ReferenceCategory =
   | 'economics' | 'engineering' | 'music-arts';
 
 export interface InteractiveConfig {
-  type: 'matching' | 'true-false' | 'slider' | 'did-you-know';
+  type: 'matching' | 'true-false' | 'slider' | 'did-you-know' | 'tone-player' | 'interval-player' | 'beat-machine' | 'harmonics-explorer';
   props: Record<string, unknown>;
 }
 
