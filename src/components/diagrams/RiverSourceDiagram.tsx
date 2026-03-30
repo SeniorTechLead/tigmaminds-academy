@@ -1,102 +1,184 @@
 export default function RiverSourceDiagram() {
+  /* Generate raindrop positions */
+  const raindrops = [
+    { x: 95, d: '0s' }, { x: 115, d: '0.3s' }, { x: 135, d: '0.7s' },
+    { x: 155, d: '0.1s' }, { x: 175, d: '0.5s' }, { x: 195, d: '0.9s' },
+    { x: 215, d: '0.2s' }, { x: 235, d: '0.6s' }, { x: 255, d: '0.4s' },
+    { x: 275, d: '0.8s' }, { x: 145, d: '1.0s' }, { x: 205, d: '0.15s' },
+  ];
+
+  /* Particle positions along the stream/river paths */
+  const streamParticles1 = [0, 0.2, 0.4, 0.6, 0.8];
+  const streamParticles2 = [0.1, 0.3, 0.5, 0.7, 0.9];
+  const tributaryParticles = [0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9];
+  const riverParticles = [0, 0.08, 0.16, 0.24, 0.32, 0.4, 0.48, 0.56, 0.64, 0.72, 0.8, 0.88];
+
   return (
     <div className="w-full max-w-2xl mx-auto my-4">
-      <svg
-        viewBox="0 0 640 380"
-        xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-auto"
-        role="img"
-        aria-label="Diagram showing how rivers begin: spring and rainfall collect into streams, tributaries, and finally a river"
-      >
+      <svg viewBox="0 0 600 400" className="w-full h-auto" role="img"
+        aria-label="Animated diagram showing how rivers begin: rain falls on mountains, water gathers into streams, streams merge into tributaries, and tributaries form a river">
         <style>{`
-          .label { font-family: system-ui, sans-serif; font-size: 11px; }
-          .title { font-family: system-ui, sans-serif; font-size: 14px; font-weight: 600; }
-          .sm { font-family: system-ui, sans-serif; font-size: 10px; }
-          @keyframes rain-fall {
-            0% { opacity: 0; transform: translateY(-8px); }
-            50% { opacity: 1; }
-            100% { opacity: 0; transform: translateY(8px); }
+          @keyframes rs-rain {
+            0% { transform: translateY(-20px); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translateY(60px); opacity: 0; }
           }
-          .rain { animation: rain-fall 1.2s linear infinite; }
-          .rain2 { animation: rain-fall 1.2s linear 0.4s infinite; }
-          .rain3 { animation: rain-fall 1.2s linear 0.8s infinite; }
+          @keyframes rs-flow1 {
+            0% { offset-distance: 0%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { offset-distance: 100%; opacity: 0; }
+          }
+          @keyframes rs-spring-pulse {
+            0%, 100% { r: 5; opacity: 0.7; }
+            50% { r: 8; opacity: 1; }
+          }
+          @keyframes rs-cloud-drift {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+          }
+          @keyframes rs-ripple {
+            0% { r: 2; opacity: 0.8; }
+            100% { r: 8; opacity: 0; }
+          }
+          .rs-rain { animation: rs-rain 1.4s linear infinite; }
+          .rs-spring { animation: rs-spring-pulse 2s ease-in-out infinite; }
+          .rs-cloud { animation: rs-cloud-drift 6s ease-in-out infinite; }
+          .rs-flow { offset-rotate: 0deg; animation: rs-flow1 3s linear infinite; }
+          .rs-flow-slow { offset-rotate: 0deg; animation: rs-flow1 5s linear infinite; }
+          .rs-flow-river { offset-rotate: 0deg; animation: rs-flow1 4s linear infinite; }
+          .rs-ripple { animation: rs-ripple 2s ease-out infinite; }
         `}</style>
 
-        <rect width="640" height="380" rx="8" className="fill-white dark:fill-slate-950" />
+        <defs>
+          <marker id="rs-arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+            <path d="M0,0 L8,3 L0,6 Z" fill="#0284c7" />
+          </marker>
+          {/* Stream path 1 */}
+          <path id="rs-stream1" d="M175,115 Q170,145 165,170 Q155,195 160,220" />
+          {/* Stream path 2 */}
+          <path id="rs-stream2" d="M240,130 Q235,155 228,175 Q218,200 210,220" />
+          {/* Tributary path */}
+          <path id="rs-trib" d="M165,225 Q180,245 200,255 Q220,262 245,268" />
+          {/* Second tributary */}
+          <path id="rs-trib2" d="M350,195 Q355,225 365,250 Q375,268 395,285" />
+          {/* Main river */}
+          <path id="rs-river" d="M250,272 Q300,285 360,292 Q420,298 480,305 Q530,312 570,318" />
+        </defs>
 
-        <text x="320" y="28" textAnchor="middle" className="title fill-gray-900 dark:fill-slate-50">
+        <rect width="600" height="400" rx="8" className="fill-white dark:fill-slate-950" />
+
+        <text x="300" y="26" textAnchor="middle" fontSize="14" fontWeight="600" className="fill-gray-900 dark:fill-slate-50">
           How Rivers Begin
         </text>
 
-        {/* Mountain / high ground */}
-        <polygon points="80,120 180,50 280,120" fill="#78716c" />
-        <polygon points="180,50 220,65 180,80" fill="#e2e8f0" opacity="0.7" />
-        <text x="180" y="44" textAnchor="middle" className="sm fill-gray-500 dark:fill-slate-400">Mountain</text>
+        {/* Sky gradient */}
+        <rect x="0" y="32" width="600" height="120" fill="#e0f2fe" opacity="0.3" rx="4" className="dark:opacity-10" />
 
-        {/* Rain cloud */}
-        <g transform="translate(120, 60)">
-          <ellipse cx="30" cy="0" rx="28" ry="14" fill="#94a3b8" />
-          <ellipse cx="10" cy="4" rx="18" ry="12" fill="#94a3b8" />
-          <ellipse cx="50" cy="4" rx="18" ry="12" fill="#94a3b8" />
-          {/* Raindrops */}
-          <line x1="15" y1="16" x2="15" y2="24" stroke="#38bdf8" strokeWidth="1.5" strokeLinecap="round" className="rain" />
-          <line x1="30" y1="16" x2="30" y2="24" stroke="#38bdf8" strokeWidth="1.5" strokeLinecap="round" className="rain2" />
-          <line x1="45" y1="16" x2="45" y2="24" stroke="#38bdf8" strokeWidth="1.5" strokeLinecap="round" className="rain3" />
+        {/* Cloud — animated drift */}
+        <g className="rs-cloud" style={{ transformOrigin: '180px 55px' }}>
+          <ellipse cx="180" cy="52" rx="45" ry="18" fill="#94a3b8" opacity="0.7" />
+          <ellipse cx="155" cy="58" rx="30" ry="15" fill="#94a3b8" opacity="0.6" />
+          <ellipse cx="210" cy="58" rx="28" ry="14" fill="#94a3b8" opacity="0.6" />
         </g>
 
-        {/* Spring source */}
-        <circle cx="170" cy="100" r="6" fill="#38bdf8" stroke="#0284c7" strokeWidth="1.5" />
-        <text x="200" y="98" className="sm fill-blue-600 dark:fill-blue-400">Spring</text>
+        {/* Raindrops falling */}
+        {raindrops.map((r, i) => (
+          <line key={i} x1={r.x} y1={72} x2={r.x} y2={82}
+            stroke="#38bdf8" strokeWidth="1.5" strokeLinecap="round"
+            className="rs-rain" style={{ animationDelay: r.d }} />
+        ))}
 
-        {/* Small streams flowing down from mountain */}
-        <path d="M170,106 Q175,130 165,155 Q155,175 160,195" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" />
-        <path d="M240,120 Q235,145 230,165 Q220,185 210,200" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" />
+        {/* Mountain */}
+        <polygon points="60,145 180,55 300,145" fill="#78716c" className="dark:fill-stone-700" />
+        <polygon points="180,55 215,72 180,85" fill="#e2e8f0" opacity="0.6" />
+        <text x="180" y="48" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Mountain</text>
+
+        {/* Hill to the right */}
+        <polygon points="280,190 370,145 460,190" fill="#78716c" opacity="0.5" className="dark:fill-stone-800" />
+
+        {/* Spring source — pulsing */}
+        <circle cx="175" cy="110" r="5" fill="#38bdf8" stroke="#0284c7" strokeWidth="1.5" className="rs-spring" style={{ transformOrigin: '175px 110px' }} />
+        <circle cx="175" cy="110" r="5" fill="none" stroke="#38bdf8" strokeWidth="0.8" className="rs-ripple" style={{ transformOrigin: '175px 110px' }} />
+        <text x="200" y="108" fontSize="10" className="fill-blue-600 dark:fill-blue-400" fontWeight="600">Spring</text>
+
+        {/* Stream paths (static background) */}
+        <path d="M175,115 Q170,145 165,170 Q155,195 160,220" fill="none" stroke="#38bdf8" strokeWidth="2.5" strokeLinecap="round" opacity="0.3" />
+        <path d="M240,130 Q235,155 228,175 Q218,200 210,220" fill="none" stroke="#38bdf8" strokeWidth="2.5" strokeLinecap="round" opacity="0.3" />
 
         {/* Stream labels */}
-        <text x="135" y="155" className="sm fill-blue-600 dark:fill-blue-400">Stream</text>
-        <text x="245" y="160" className="sm fill-blue-600 dark:fill-blue-400">Stream</text>
+        <text x="132" y="172" fontSize="10" className="fill-blue-600 dark:fill-blue-400">Stream</text>
+        <text x="243" y="168" fontSize="10" className="fill-blue-600 dark:fill-blue-400">Stream</text>
 
-        {/* Streams merge into tributary */}
-        <path d="M160,195 Q175,215 195,225 Q210,230 230,235" fill="none" stroke="#38bdf8" strokeWidth="3" strokeLinecap="round" />
-        <path d="M210,200 Q215,215 225,225 Q230,230 235,235" fill="none" stroke="#38bdf8" strokeWidth="3" strokeLinecap="round" />
+        {/* Flowing particles — Stream 1 */}
+        {streamParticles1.map((off, i) => (
+          <circle key={`s1-${i}`} r="2.5" fill="#38bdf8"
+            className="rs-flow"
+            style={{ offsetPath: `path("M175,115 Q170,145 165,170 Q155,195 160,220")`, animationDelay: `${off * 3}s` }} />
+        ))}
 
-        {/* Confluence point */}
-        <circle cx="232" cy="235" r="4" fill="#0284c7" />
-        <text x="260" y="225" className="sm fill-blue-600 dark:fill-blue-400">Tributary</text>
+        {/* Flowing particles — Stream 2 */}
+        {streamParticles2.map((off, i) => (
+          <circle key={`s2-${i}`} r="2.5" fill="#38bdf8"
+            className="rs-flow"
+            style={{ offsetPath: `path("M240,130 Q235,155 228,175 Q218,200 210,220")`, animationDelay: `${off * 3}s` }} />
+        ))}
 
-        {/* Tributary flows into main river */}
-        <path d="M232,239 Q260,265 300,280 Q360,300 420,305 Q480,310 540,315" fill="none" stroke="#38bdf8" strokeWidth="5" strokeLinecap="round" />
+        {/* Confluence point 1 */}
+        <circle cx="185" cy="238" r="4" fill="#0284c7" opacity="0.6" />
 
-        {/* Second tributary joining */}
-        <path d="M350,200 Q360,240 370,260 Q380,275 400,290" fill="none" stroke="#38bdf8" strokeWidth="2.5" strokeLinecap="round" />
-        <circle cx="400" cy="293" r="3" fill="#0284c7" />
-        <text x="370" y="195" className="sm fill-blue-600 dark:fill-blue-400">Tributary</text>
+        {/* Tributary path (static) */}
+        <path d="M165,225 Q180,245 200,255 Q220,262 245,268" fill="none" stroke="#38bdf8" strokeWidth="4" strokeLinecap="round" opacity="0.3" />
+        <text x="218" y="248" fontSize="10" className="fill-blue-600 dark:fill-blue-400" fontWeight="600">Tributary</text>
 
-        {/* Gentle terrain (lower ground) */}
-        <path d="M280,320 Q400,310 540,325 L640,340 L640,380 L0,380 L0,340 Q80,340 200,330 Z" fill="#65a30d" opacity="0.2" />
+        {/* Flowing particles — Tributary */}
+        {tributaryParticles.map((off, i) => (
+          <circle key={`t-${i}`} r="3" fill="#38bdf8"
+            className="rs-flow-slow"
+            style={{ offsetPath: `path("M165,225 Q180,245 200,255 Q220,262 245,268")`, animationDelay: `${off * 5}s` }} />
+        ))}
+
+        {/* Second tributary */}
+        <path d="M350,195 Q355,225 365,250 Q375,268 395,285" fill="none" stroke="#38bdf8" strokeWidth="3" strokeLinecap="round" opacity="0.3" />
+        <text x="370" y="218" fontSize="10" className="fill-blue-600 dark:fill-blue-400">Tributary</text>
+        <circle cx="395" cy="288" r="3" fill="#0284c7" opacity="0.6" />
+
+        {streamParticles2.map((off, i) => (
+          <circle key={`t2-${i}`} r="2.5" fill="#38bdf8"
+            className="rs-flow-slow"
+            style={{ offsetPath: `path("M350,195 Q355,225 365,250 Q375,268 395,285")`, animationDelay: `${off * 5}s` }} />
+        ))}
+
+        {/* Main river path (static — wider) */}
+        <path d="M250,272 Q300,285 360,292 Q420,298 480,305 Q530,312 570,318"
+          fill="none" stroke="#38bdf8" strokeWidth="7" strokeLinecap="round" opacity="0.25" />
+
+        {/* Flowing particles — River (larger, more) */}
+        {riverParticles.map((off, i) => (
+          <circle key={`r-${i}`} r="3.5" fill="#0ea5e9"
+            className="rs-flow-river"
+            style={{ offsetPath: `path("M250,272 Q300,285 360,292 Q420,298 480,305 Q530,312 570,318")`, animationDelay: `${off * 4}s` }} />
+        ))}
 
         {/* River label */}
-        <text x="490" y="298" className="label fill-blue-700 dark:fill-blue-300" fontWeight="600">River</text>
+        <text x="510" y="295" fontSize="12" fontWeight="600" className="fill-blue-700 dark:fill-blue-300">River</text>
 
-        {/* Arrow showing direction to sea */}
-        <line x1="540" y1="315" x2="590" y2="318" stroke="#0284c7" strokeWidth="2" markerEnd="url(#river-arrow)" />
-        <defs>
-          <marker id="river-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-            <path d="M0,0 L8,3 L0,6 Z" fill="#0284c7" />
-          </marker>
-        </defs>
-        <text x="610" y="315" className="sm fill-gray-500 dark:fill-slate-400">To sea</text>
+        {/* Arrow to sea */}
+        <line x1="560" y1="318" x2="590" y2="320" stroke="#0284c7" strokeWidth="2" markerEnd="url(#rs-arr)" />
+        <text x="588" y="335" fontSize="10" className="fill-gray-500 dark:fill-slate-400">To sea</text>
 
-        {/* Legend / labels at bottom */}
-        <g transform="translate(20, 345)">
-          <text x="0" y="12" className="sm fill-gray-500 dark:fill-slate-400">
-            Rainfall and springs → Streams → Tributaries merge → River
-          </text>
-        </g>
+        {/* Gentle terrain */}
+        <path d="M250,330 Q400,318 560,335 L600,345 L600,400 L0,400 L0,355 Q80,345 200,340 Z"
+          fill="#65a30d" opacity="0.12" />
 
-        {/* Watershed boundary (dashed) */}
-        <path d="M60,130 Q180,20 310,130 Q370,180 400,180" fill="none" stroke="#a78bfa" strokeWidth="1.5" strokeDasharray="4 3" />
-        <text x="310" y="155" className="sm fill-purple-500 dark:fill-purple-400">Watershed boundary</text>
+        {/* Watershed boundary */}
+        <path d="M50,155 Q180,35 320,155 Q380,200 410,200" fill="none" stroke="#a78bfa" strokeWidth="1.5" strokeDasharray="4,3" />
+        <text x="330" y="170" fontSize="10" className="fill-purple-500 dark:fill-purple-400">Watershed boundary</text>
+
+        {/* Bottom legend */}
+        <text x="300" y="385" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">
+          Rainfall + springs → streams → tributaries merge → river flows to sea
+        </text>
       </svg>
     </div>
   );
