@@ -9,7 +9,7 @@ export default function DistanceFormulaDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 400 350" className="w-full max-w-lg mx-auto" role="img" aria-label="Distance formula diagram">
+      <svg viewBox="0 0 420 367" className="w-full max-w-lg mx-auto" role="img" aria-label="Distance formula diagram">
         {/* Grid lines */}
         {Array.from({ length: 10 }, (_, i) => (
           <g key={`grid-${i}`}>

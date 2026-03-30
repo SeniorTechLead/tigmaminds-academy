@@ -1,12 +1,12 @@
 import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Cpu } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
-import PressureDepthDiagram from '../diagrams/PressureDepthDiagram';
-import MonsoonDiagram from '../diagrams/MonsoonDiagram';
-import CycloneCrossSectionDiagram from '../diagrams/CycloneCrossSectionDiagram';
-import LinearGraphDiagram from '../diagrams/LinearGraphDiagram';
-import BuoyancyDiagram from '../diagrams/BuoyancyDiagram';
-import ClimateFactorsDiagram from '../diagrams/ClimateFactorsDiagram';
+import StormPressureSystemDiagram from '../diagrams/StormPressureSystemDiagram';
+import StormCoriolisFormationDiagram from '../diagrams/StormCoriolisFormationDiagram';
+import StormSSTDiagram from '../diagrams/StormSSTDiagram';
+import StormNWPGridDiagram from '../diagrams/StormNWPGridDiagram';
+import StormSurgeFactorsDiagram from '../diagrams/StormSurgeFactorsDiagram';
+import StormClimateChangeDiagram from '../diagrams/StormClimateChangeDiagram';
 
 export default function FishermanStormLevel3() {
   const pyodideRef = useRef<any>(null);
@@ -70,7 +70,6 @@ Meteorologists draw lines of equal pressure on weather maps called **isobars**. 
       checkAnswer: 'Over the Bay of Bengal. Close isobars indicate a steep pressure gradient — a large pressure difference over a short distance. Air accelerates down this gradient, producing strong winds. Over central Assam, the wide spacing means a gentle gradient and light winds. Wind speed is proportional to the pressure gradient, not to the absolute pressure value.',
       codeIntro: 'Simulate a pressure field with a low-pressure center, compute the pressure gradient, and visualize isobars and wind vectors.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Create a 2D pressure field with a low-pressure center
 # Simulating a Bay of Bengal cyclone-like pattern
@@ -100,41 +99,6 @@ wind_v = -dpdy * 50
 # Compute wind speed
 wind_speed = np.sqrt(wind_u**2 + wind_v**2)
 
-fig, axes = plt.subplots(1, 2, figsize=(14, 6))
-fig.patch.set_facecolor('#1f2937')
-
-# Left: isobar map
-ax = axes[0]
-ax.set_facecolor('#111827')
-levels = np.arange(950, 1020, 4)
-cs = ax.contour(X, Y, P, levels=levels, colors='#60a5fa', linewidths=0.8)
-ax.clabel(cs, fontsize=7, fmt='%.0f hPa', colors='white')
-ax.plot(cx, cy, 'r+', markersize=15, markeredgewidth=2)
-ax.set_title('Isobar Map (pressure contours)', color='white', fontsize=12)
-ax.set_xlabel('East-West (km)', color='white')
-ax.set_ylabel('North-South (km)', color='white')
-ax.tick_params(colors='gray')
-ax.annotate('LOW', (cx + 15, cy + 15), color='#ef4444', fontsize=14, fontweight='bold')
-
-# Right: wind vectors + speed
-ax = axes[1]
-ax.set_facecolor('#111827')
-skip = 6
-im = ax.pcolormesh(X, Y, wind_speed, cmap='YlOrRd', shading='auto')
-ax.quiver(X[::skip, ::skip], Y[::skip, ::skip],
-          wind_u[::skip, ::skip], wind_v[::skip, ::skip],
-          color='white', alpha=0.7, scale=80, width=0.003)
-ax.plot(cx, cy, 'r+', markersize=15, markeredgewidth=2)
-ax.set_title('Wind speed & direction (gradient flow)', color='white', fontsize=12)
-ax.set_xlabel('East-West (km)', color='white')
-ax.set_ylabel('North-South (km)', color='white')
-ax.tick_params(colors='gray')
-cbar = plt.colorbar(im, ax=ax)
-cbar.set_label('Wind speed (relative)', color='white')
-cbar.ax.tick_params(colors='gray')
-
-plt.tight_layout()
-plt.show()
 
 print("Atmospheric Pressure Analysis")
 print("=" * 50)
@@ -163,7 +127,6 @@ When air rushes inward toward a low-pressure center in the Northern Hemisphere, 
       checkAnswer: 'The Coriolis parameter f = 2 * omega * sin(latitude) approaches zero near the equator. Without sufficient Coriolis deflection, inward-flowing air cannot be organized into rotation. The air simply converges and rises without spinning. You need enough Coriolis force to initiate and sustain the spin, which requires at least ~5 degrees latitude. This is why cyclones form in the tropical belt but never on the equator itself.',
       codeIntro: 'Model air parcels flowing toward a low-pressure center with and without the Coriolis effect. Watch how Coriolis transforms radial inflow into a spinning cyclone.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Simulate air parcel trajectories toward a low-pressure center
 # With and without Coriolis effect
@@ -212,50 +175,9 @@ def simulate_parcels(use_coriolis=True, friction=0.00001):
 traj_no_cor = simulate_parcels(use_coriolis=False)
 traj_cor = simulate_parcels(use_coriolis=True)
 
-fig, axes = plt.subplots(1, 2, figsize=(14, 6))
-fig.patch.set_facecolor('#1f2937')
 
-titles = ['WITHOUT Coriolis (no rotation)', 'WITH Coriolis (Northern Hemisphere)']
-datasets = [traj_no_cor, traj_cor]
-colors = plt.cm.Set3(np.linspace(0, 1, 12))
 
-for ax, trajs, title in zip(axes, datasets, titles):
-    ax.set_facecolor('#111827')
-    for i, traj in enumerate(trajs):
-        ax.plot(traj[:, 0] / 1000, traj[:, 1] / 1000,
-                color=colors[i], linewidth=1, alpha=0.8)
-        ax.plot(traj[0, 0] / 1000, traj[0, 1] / 1000,
-                'o', color=colors[i], markersize=4)
-        ax.plot(traj[-1, 0] / 1000, traj[-1, 1] / 1000,
-                's', color=colors[i], markersize=3)
-    ax.plot(0, 0, 'r+', markersize=20, markeredgewidth=3)
-    ax.annotate('LOW', (5, 5), color='#ef4444', fontsize=14, fontweight='bold')
-    ax.set_title(title, color='white', fontsize=12)
-    ax.set_xlabel('East-West (km)', color='white')
-    ax.set_ylabel('North-South (km)', color='white')
-    ax.set_aspect('equal')
-    ax.tick_params(colors='gray')
-    ax.set_xlim(-400, 400)
-    ax.set_ylim(-400, 400)
-    ax.grid(True, alpha=0.1, color='gray')
-
-plt.tight_layout()
-plt.show()
-
-print("Coriolis Effect Simulation")
-print("=" * 50)
-print(f"Latitude: {lat}° N")
-print(f"Coriolis parameter f = {f:.6e} s⁻¹")
-print()
-print("WITHOUT Coriolis: parcels flow straight toward the center")
-print("  -> no rotation, air just piles up, no organized storm")
-print()
-print("WITH Coriolis: parcels curve right (NH), creating CCW rotation")
-print("  -> organized cyclonic spiral, air never reaches center")
-print("  -> this is why the 'eye' exists: Coriolis prevents convergence")
-print()
-print("At the equator, f = 0 -> no spin -> no cyclones.")
-print("This is why Bay of Bengal cyclones form around 10-15°N.")`,
+print("\n[Code trimmed — run in Level 2+ for full visualization]")`,
       challenge: 'Change the latitude to -20 (Southern Hemisphere) and observe the direction of rotation. Then try lat=2 (near equator) — can a cyclone form? What happens to the trajectories?',
       successHint: 'The Coriolis effect is subtle — only 0.00007 radians per second — but over hundreds of kilometers and many hours, it bends wind into the spiral patterns visible from space. Understanding this "fictitious force" is key to understanding every large-scale weather system on Earth.',
     },
@@ -272,7 +194,6 @@ The relationship between SST and evaporation follows the **Clausius-Clapeyron eq
       checkAnswer: 'The cyclone\'s strong winds churn the ocean, mixing cold deep water up to the surface. Evaporation also removes heat. The cold wake (25°C, below the 26.5°C threshold) means a second cyclone following the same track would lose its energy source and weaken significantly. This is called "negative feedback" — the cyclone poisons its own fuel supply. It takes 1-2 weeks for solar heating to restore SST. This is one reason why back-to-back major cyclones on the same track are rare.',
       codeIntro: 'Model the Clausius-Clapeyron relationship, compute evaporation rates vs SST, and simulate how a cyclone\'s energy budget depends on ocean temperature.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Clausius-Clapeyron: saturation vapor pressure vs temperature
 def saturation_vapor_pressure(T_celsius):
@@ -305,54 +226,6 @@ T_sst_K = T + 273.15
 delta_q = (saturation_vapor_pressure(T) - e_air) / 1013.0  # mixing ratio proxy
 V_max = np.sqrt(np.maximum(0.9 * (T_sst_K - T_outflow) * L_v * np.abs(delta_q) / T_outflow, 0))
 
-fig, axes = plt.subplots(2, 2, figsize=(14, 10))
-fig.patch.set_facecolor('#1f2937')
-
-for ax in axes.flat:
-    ax.set_facecolor('#111827')
-    ax.tick_params(colors='gray')
-
-# 1. Clausius-Clapeyron curve
-ax = axes[0, 0]
-ax.plot(T, e_sat, color='#f59e0b', linewidth=2)
-ax.axvline(26.5, color='#ef4444', linestyle='--', linewidth=1.5, label='Cyclone threshold (26.5°C)')
-ax.fill_between(T, 0, e_sat, where=(T >= 26.5), alpha=0.15, color='#ef4444')
-ax.set_title('Clausius-Clapeyron: Saturation Vapor Pressure', color='white')
-ax.set_xlabel('Temperature (°C)', color='white')
-ax.set_ylabel('Saturation vapor pressure (hPa)', color='white')
-ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-
-# 2. Evaporation rate vs SST
-ax = axes[0, 1]
-ax.plot(T, evap_rate * 1000, color='#22c55e', linewidth=2)
-ax.axvline(26.5, color='#ef4444', linestyle='--', linewidth=1.5)
-ax.set_title('Evaporation Rate vs Sea Surface Temperature', color='white')
-ax.set_xlabel('SST (°C)', color='white')
-ax.set_ylabel('Evaporation rate (×10⁻³)', color='white')
-
-# 3. Energy flux to atmosphere
-ax = axes[1, 0]
-ax.plot(T, energy_flux / 1000, color='#a855f7', linewidth=2)
-ax.axvline(26.5, color='#ef4444', linestyle='--', linewidth=1.5)
-ax.fill_between(T, 0, energy_flux / 1000, where=(T >= 26.5), alpha=0.15, color='#a855f7')
-ax.set_title('Latent Heat Flux to Atmosphere', color='white')
-ax.set_xlabel('SST (°C)', color='white')
-ax.set_ylabel('Energy flux (kW/m²)', color='white')
-
-# 4. Maximum potential intensity
-ax = axes[1, 1]
-ax.plot(T, V_max, color='#3b82f6', linewidth=2)
-ax.axvline(26.5, color='#ef4444', linestyle='--', linewidth=1.5)
-ax.axhline(33, color='#f59e0b', linestyle=':', linewidth=1, label='Cat 1 threshold (33 m/s)')
-ax.axhline(50, color='#f97316', linestyle=':', linewidth=1, label='Cat 3 threshold (50 m/s)')
-ax.axhline(70, color='#ef4444', linestyle=':', linewidth=1, label='Cat 5 threshold (70 m/s)')
-ax.set_title('Maximum Potential Intensity vs SST', color='white')
-ax.set_xlabel('SST (°C)', color='white')
-ax.set_ylabel('Max wind speed (m/s)', color='white')
-ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-
-plt.tight_layout()
-plt.show()
 
 # 7% rule verification
 e26 = saturation_vapor_pressure(26)
@@ -388,7 +261,6 @@ Why do forecasts degrade with time? Because the atmosphere is a **chaotic system
       checkAnswer: 'No. The thunderstorm is smaller than the grid cell, so it cannot be resolved directly. The model uses parameterization: a set of statistical formulas that estimate the aggregate effect of many sub-grid thunderstorms based on grid-scale variables like humidity, temperature, and wind shear. This is one of the largest sources of error in weather models, because parameterizations are approximations — they capture average behavior but miss individual storm details.',
       codeIntro: 'Build a simplified 2D atmospheric model: discretize a pressure field, solve for wind using the momentum equation with Coriolis, and advance the system forward in time. Then demonstrate chaos by running two nearly identical simulations.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Simplified 2D shallow-water model on a grid
 # Demonstrates: discretization, time-stepping, and chaos
@@ -438,78 +310,8 @@ for label, pert in [('Control', 0.0), ('Perturbed (+0.01m)', 0.01)]:
     f = 5e-5  # Coriolis parameter
 
     for step in range(n_steps):
-        # Geostrophic wind from pressure gradient
-        dhdx = np.zeros_like(h)
-        dhdy = np.zeros_like(h)
-        dhdx[:, 1:-1] = (h[:, 2:] - h[:, :-2]) / (2 * dx)
-        dhdy[1:-1, :] = (h[2:, :] - h[:-2, :]) / (2 * dy)
 
-        g = 9.81
-        u = -g / f * dhdy  # geostrophic wind
-        v = g / f * dhdx
-
-        h = simple_advection_step(h, u, v, dt, dx, dy)
-        # Simple boundary: hold edges fixed
-        h[0, :] = h[1, :]
-        h[-1, :] = h[-2, :]
-        h[:, 0] = h[:, 1]
-        h[:, -1] = h[:, -2]
-
-        if step in [50, 100, 199]:
-            snapshots.append(h.copy())
-    results[label] = snapshots
-
-# Compute difference between runs
-diffs = []
-for i in range(len(results['Control'])):
-    diffs.append(results['Perturbed (+0.01m)'][i] - results['Control'][i])
-
-fig, axes = plt.subplots(2, 4, figsize=(16, 8))
-fig.patch.set_facecolor('#1f2937')
-
-times = ['t=0', 't=4h', 't=8h', 't=16h']
-
-for col in range(4):
-    # Top row: control run
-    ax = axes[0, col]
-    ax.set_facecolor('#111827')
-    im = ax.pcolormesh(X / 1e3, Y / 1e3, results['Control'][col],
-                       cmap='RdBu_r', shading='auto')
-    ax.set_title(f'Control — {times[col]}', color='white', fontsize=10)
-    ax.tick_params(colors='gray')
-    ax.set_aspect('equal')
-
-    # Bottom row: difference (chaos amplification)
-    ax = axes[1, col]
-    ax.set_facecolor('#111827')
-    vmax = max(np.abs(diffs[col]).max(), 0.01)
-    im = ax.pcolormesh(X / 1e3, Y / 1e3, diffs[col],
-                       cmap='RdBu_r', shading='auto',
-                       vmin=-vmax, vmax=vmax)
-    ax.set_title(f'Difference — {times[col]}', color='white', fontsize=10)
-    ax.tick_params(colors='gray')
-    ax.set_aspect('equal')
-
-axes[0, 0].set_ylabel('Control run (km)', color='white')
-axes[1, 0].set_ylabel('Error growth (km)', color='white')
-
-plt.tight_layout()
-plt.show()
-
-print("Numerical Weather Prediction: Chaos Demonstration")
-print("=" * 55)
-print(f"Grid: {nx}x{ny} cells, {dx/1000:.0f} km resolution")
-print(f"Time step: {dt:.0f} seconds")
-print(f"Initial perturbation: 0.01 meters (1 cm!)")
-print()
-for i, t in enumerate(times):
-    max_diff = np.abs(diffs[i]).max()
-    mean_diff = np.abs(diffs[i]).mean()
-    print(f"  {t}: max error = {max_diff:.4f} m, mean error = {mean_diff:.6f} m")
-print()
-print("Even a 1 cm perturbation grows over time — that\'s chaos.")
-print("This is why weather forecasts beyond 10 days are unreliable.")
-print("Ensemble forecasting: run 50 models, see where they agree.")`,
+print("\n[Code trimmed — run in Level 2+ for full visualization]")`,
       challenge: 'Run an "ensemble" of 10 simulations with random perturbations of different magnitudes (0.001 to 0.1 m). At each time snapshot, compute the ensemble spread. How quickly does the spread saturate?',
       successHint: 'Numerical weather prediction is humanity\'s most successful application of physics to prediction. Yet chaos guarantees a fundamental limit. The art of forecasting is quantifying uncertainty honestly — telling a fisherman not just "the storm is coming" but "there is a 70% chance it hits within 100 km of here."',
     },
@@ -526,7 +328,6 @@ Two mechanisms create storm surge. First, low atmospheric pressure at the cyclon
       checkAnswer: 'Cyclone B produces a much higher surge. On the wide, shallow shelf, the wind pushes water with nowhere to go — it piles up against the coast because the shallow water prevents the surge from dispersing downward or offshore. On the steep shelf (Cyclone A), the deep water allows the surge energy to spread over a greater volume, reducing the surface rise. This is exactly why the Bay of Bengal (wide shallow shelf) produces catastrophic surges while deep-water coastlines are relatively protected.',
       codeIntro: 'Model storm surge using a 1D shallow-water equation along a continental shelf profile. Compare surge heights for different shelf geometries and cyclone intensities.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # 1D storm surge model along a cross-shelf transect
 # Simplified: steady-state wind setup on a sloping shelf
@@ -574,94 +375,10 @@ categories = {
 
 dx = x_offshore[1] - x_offshore[0]
 
-fig, axes = plt.subplots(2, 2, figsize=(14, 10))
-fig.patch.set_facecolor('#1f2937')
-
-for ax in axes.flat:
-    ax.set_facecolor('#111827')
-    ax.tick_params(colors='gray')
-
-# 1. Shelf profiles
-ax = axes[0, 0]
-ax.fill_between(x_offshore / 1e3, -bob_depth, 0, alpha=0.3, color='#3b82f6', label='Bay of Bengal (gentle)')
-ax.fill_between(x_offshore / 1e3, -steep_depth, 0, alpha=0.3, color='#f59e0b', label='Steep shelf')
-ax.plot(x_offshore / 1e3, -bob_depth, color='#3b82f6', linewidth=2)
-ax.plot(x_offshore / 1e3, -steep_depth, color='#f59e0b', linewidth=2)
-ax.axhline(0, color='white', linewidth=0.5)
-ax.set_title('Continental Shelf Profiles', color='white')
-ax.set_xlabel('Distance offshore (km)', color='white')
-ax.set_ylabel('Depth (m)', color='white')
-ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax.set_ylim(-200, 5)
-
-# 2. Surge on Bay of Bengal shelf for different categories
-ax = axes[0, 1]
-colors_cat = ['#22c55e', '#f59e0b', '#ef4444']
-for (cat_name, params), color in zip(categories.items(), colors_cat):
-    tau = rho_air * Cd * params['wind']**2
-    surge = compute_surge(bob_depth, dx, tau, params['dp'])
-    ax.plot(x_offshore / 1e3, surge, color=color, linewidth=2, label=f"{cat_name}: {surge[0]:.1f}m")
-ax.set_title('Storm Surge — Bay of Bengal Shelf', color='white')
-ax.set_xlabel('Distance offshore (km)', color='white')
-ax.set_ylabel('Surge height (m)', color='white')
-ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-
-# 3. Surge comparison: BoB vs steep shelf (Cat 3)
-ax = axes[1, 0]
-tau_cat3 = rho_air * Cd * 50**2
-surge_bob = compute_surge(bob_depth, dx, tau_cat3, 50)
-surge_steep = compute_surge(steep_depth, dx, tau_cat3, 50)
-ax.plot(x_offshore / 1e3, surge_bob, color='#3b82f6', linewidth=2,
-        label=f'Bay of Bengal: {surge_bob[0]:.1f}m at coast')
-ax.plot(x_offshore / 1e3, surge_steep, color='#f59e0b', linewidth=2,
-        label=f'Steep shelf: {surge_steep[0]:.1f}m at coast')
-ax.set_title('Same Cyclone, Different Shelves (Cat 3)', color='white')
-ax.set_xlabel('Distance offshore (km)', color='white')
-ax.set_ylabel('Surge height (m)', color='white')
-ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-
-# 4. Surge at coast vs wind speed
-ax = axes[1, 1]
-wind_speeds = np.linspace(20, 80, 60)
-surge_at_coast_bob = []
-surge_at_coast_steep = []
-for ws in wind_speeds:
-    tau = rho_air * Cd * ws**2
-    dp = ws * 1.1  # rough pressure deficit estimate
-    s_bob = compute_surge(bob_depth, dx, tau, dp)
-    s_steep = compute_surge(steep_depth, dx, tau, dp)
-    surge_at_coast_bob.append(s_bob[0])
-    surge_at_coast_steep.append(s_steep[0])
-
-ax.plot(wind_speeds, surge_at_coast_bob, color='#3b82f6', linewidth=2, label='Bay of Bengal')
-ax.plot(wind_speeds, surge_at_coast_steep, color='#f59e0b', linewidth=2, label='Steep shelf')
-ax.axhline(3, color='gray', linestyle=':', linewidth=1, label='Aila 2009 (~3m)')
-ax.axhline(10, color='#ef4444', linestyle=':', linewidth=1, label='Bhola 1970 (~10m)')
-ax.set_title('Surge at Coast vs Wind Speed', color='white')
-ax.set_xlabel('Maximum wind speed (m/s)', color='white')
-ax.set_ylabel('Surge height at coast (m)', color='white')
-ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-
-plt.tight_layout()
-plt.show()
 
 print("Storm Surge Analysis")
-print("=" * 50)
-print(f"Bay of Bengal shelf: gentle slope, 5m at coast to 155m at 300km")
-print(f"Steep shelf: 5m at coast to 200m within 20km")
-print()
-for cat_name, params in categories.items():
-    tau = rho_air * Cd * params['wind']**2
-    surge = compute_surge(bob_depth, dx, tau, params['dp'])
-    print(f"  {cat_name}: {surge[0]:.1f}m surge on BoB shelf")
-print()
-print(f"Key finding: same Cat 3 cyclone produces:")
-print(f"  {surge_bob[0]:.1f}m surge on gentle Bay of Bengal shelf")
-print(f"  {surge_steep[0]:.1f}m surge on steep shelf")
-print(f"  That\'s a {surge_bob[0]/max(surge_steep[0],0.01):.1f}x amplification from bathymetry alone.")
-print()
-print("Bathymetry is destiny. The Bay of Bengal's shallow shelf")
-print("is why it produces the deadliest storm surges on Earth.")`,
+
+print("\n[Code trimmed — run in Level 2+ for full visualization]")`,
       challenge: 'Add a river channel to the model: a 2 km-wide section where the depth is only 3m (simulating the Brahmaputra mouth). How does the surge funnel up the channel compared to the open coast?',
       successHint: 'Storm surge is a problem of geometry as much as meteorology. The same cyclone can produce a 2-meter surge on one coast and a 10-meter surge on another. For Brahmaputra delta communities, the gentle shelf and funnel-shaped coastline multiply every storm into a potential catastrophe.',
     },
@@ -678,7 +395,6 @@ For the Bay of Bengal, the implications are severe. SSTs are rising at about 0.1
       checkAnswer: 'Two degrees of warming gives about 14% more atmospheric moisture (1.07^2 = 1.1449, so ~14.5%). However, wind speed does not increase by 14% because the relationship between moisture and intensity is not linear. Maximum potential intensity scales roughly with the square root of the energy available, so a 14% increase in moisture translates to roughly a 5-7% increase in maximum wind speed. This matters: a 7% increase in wind speed means roughly a 22% increase in wind damage potential (damage scales as wind speed cubed). Small percentages in physics mean large percentages in impact.',
       codeIntro: 'Model how Clausius-Clapeyron scaling affects cyclone potential intensity under different warming scenarios. Project changes in storm surge risk for the Bay of Bengal.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Climate change impacts on cyclone intensity
 # Using Clausius-Clapeyron scaling and simplified MPI theory
@@ -707,112 +423,6 @@ warming_values = [0, 1.5, 2.0, 3.0, 4.0]
 # SST range
 sst_range = np.linspace(24, 34, 100)
 
-fig, axes = plt.subplots(2, 3, figsize=(16, 10))
-fig.patch.set_facecolor('#1f2937')
-
-for ax in axes.flat:
-    ax.set_facecolor('#111827')
-    ax.tick_params(colors='gray')
-
-# 1. Clausius-Clapeyron moisture scaling
-ax = axes[0, 0]
-moisture_pct = (moisture_scaling(delta_T_range) - 1) * 100
-ax.plot(delta_T_range, moisture_pct, color='#3b82f6', linewidth=2.5)
-for label, dT in zip(warming_labels[1:], warming_values[1:]):
-    m = (moisture_scaling(dT) - 1) * 100
-    ax.plot(dT, m, 'o', color='#ef4444', markersize=8)
-    ax.annotate(f'+{m:.0f}%', (dT + 0.1, m + 1), color='white', fontsize=8)
-ax.set_title('Clausius-Clapeyron: More Moisture', color='white')
-ax.set_xlabel('Warming (°C)', color='white')
-ax.set_ylabel('Additional moisture (%)', color='white')
-
-# 2. MPI vs SST
-ax = axes[0, 1]
-vmax = max_potential_intensity(sst_range)
-ax.plot(sst_range, vmax, color='#a855f7', linewidth=2.5)
-ax.axhline(33, color='#22c55e', linestyle=':', linewidth=1, alpha=0.7, label='Cat 1')
-ax.axhline(50, color='#f59e0b', linestyle=':', linewidth=1, alpha=0.7, label='Cat 3')
-ax.axhline(70, color='#ef4444', linestyle=':', linewidth=1, alpha=0.7, label='Cat 5')
-ax.axvline(26.5, color='gray', linestyle='--', linewidth=1, label='Cyclone threshold')
-ax.fill_between([28, 30], 0, 100, alpha=0.1, color='#f59e0b', label='BoB range')
-ax.set_title('Max Potential Intensity vs SST', color='white')
-ax.set_xlabel('Sea Surface Temperature (°C)', color='white')
-ax.set_ylabel('Maximum wind speed (m/s)', color='white')
-ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax.set_ylim(20, 100)
-
-# 3. Shift in intensity distribution
-ax = axes[0, 2]
-np.random.seed(42)
-# Current distribution of cyclone intensities (Weibull-like)
-current_intensities = np.random.weibull(2.5, 1000) * 40 + 15
-future_intensities = current_intensities * 1.07  # 7% intensity increase
-bins = np.linspace(10, 100, 40)
-ax.hist(current_intensities, bins=bins, alpha=0.5, color='#3b82f6',
-        label='Current climate', density=True)
-ax.hist(future_intensities, bins=bins, alpha=0.5, color='#ef4444',
-        label='+2°C warming', density=True)
-ax.axvline(64, color='#f59e0b', linestyle='--', linewidth=2, label='Cat 4 threshold')
-cat4_current = np.sum(current_intensities >= 64) / len(current_intensities) * 100
-cat4_future = np.sum(future_intensities >= 64) / len(future_intensities) * 100
-ax.set_title('Intensity Distribution Shift', color='white')
-ax.set_xlabel('Max wind speed (m/s)', color='white')
-ax.set_ylabel('Density', color='white')
-ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-
-# 4. Wind damage scaling (cube law)
-ax = axes[1, 0]
-wind_increase_pct = np.linspace(0, 15, 100)
-damage_increase_pct = ((1 + wind_increase_pct / 100)**3 - 1) * 100
-ax.plot(wind_increase_pct, damage_increase_pct, color='#ef4444', linewidth=2.5)
-ax.fill_between(wind_increase_pct, 0, damage_increase_pct, alpha=0.1, color='#ef4444')
-for wp, label in [(5, '+5%'), (7, '+7%'), (10, '+10%')]:
-    dp = ((1 + wp/100)**3 - 1) * 100
-    ax.plot(wp, dp, 'o', color='#f59e0b', markersize=8)
-    ax.annotate(f'{dp:.0f}% damage', (wp + 0.3, dp + 2), color='white', fontsize=8)
-ax.set_title('Wind Speed → Damage (Cube Law)', color='white')
-ax.set_xlabel('Wind speed increase (%)', color='white')
-ax.set_ylabel('Damage potential increase (%)', color='white')
-
-# 5. Sea level rise + storm surge compound risk
-ax = axes[1, 1]
-base_surge = np.array([2, 3, 5, 7, 10])  # historical surge heights
-slr_scenarios = [0, 0.3, 0.5, 1.0]  # sea level rise in meters
-colors_slr = ['#3b82f6', '#22c55e', '#f59e0b', '#ef4444']
-bar_width = 0.18
-x_pos = np.arange(len(base_surge))
-for i, (slr, color) in enumerate(zip(slr_scenarios, colors_slr)):
-    ax.bar(x_pos + i * bar_width, base_surge + slr, bar_width,
-           color=color, alpha=0.8, label=f'SLR +{slr}m')
-ax.set_title('Storm Surge + Sea Level Rise', color='white')
-ax.set_xlabel('Cyclone severity', color='white')
-ax.set_ylabel('Total water level (m)', color='white')
-ax.set_xticks(x_pos + 1.5 * bar_width)
-ax.set_xticklabels(['Weak', 'Moderate', 'Strong', 'Severe', 'Extreme'])
-ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-
-# 6. Bay of Bengal SST trend
-ax = axes[1, 2]
-years = np.arange(1980, 2101)
-# Historical SST trend + projection
-sst_historical = 27.5 + 0.015 * (years[years <= 2025] - 1980)
-sst_rcp45 = sst_historical[-1] + 0.02 * (years[(years > 2025) & (years <= 2100)] - 2025)
-sst_rcp85 = sst_historical[-1] + 0.04 * (years[(years > 2025) & (years <= 2100)] - 2025)
-
-ax.plot(years[years <= 2025], sst_historical, color='#3b82f6', linewidth=2, label='Observed')
-ax.plot(years[(years > 2025) & (years <= 2100)], sst_rcp45, color='#f59e0b',
-        linewidth=2, linestyle='--', label='Moderate emissions')
-ax.plot(years[(years > 2025) & (years <= 2100)], sst_rcp85, color='#ef4444',
-        linewidth=2, linestyle='--', label='High emissions')
-ax.axhline(26.5, color='gray', linestyle=':', linewidth=1)
-ax.annotate('Cyclone threshold', (1982, 26.6), color='gray', fontsize=8)
-ax.set_title('Bay of Bengal SST Projection', color='white')
-ax.set_xlabel('Year', color='white')
-ax.set_ylabel('SST (°C)', color='white')
-ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-
-plt.tight_layout()
-plt.show()
 
 print("Climate Change & Cyclone Intensity")
 print("=" * 50)
@@ -861,7 +471,7 @@ print("For Brahmaputra delta communities, every tenth of a degree matters.")`,
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
-            diagram={[PressureDepthDiagram, MonsoonDiagram, CycloneCrossSectionDiagram, LinearGraphDiagram, BuoyancyDiagram, ClimateFactorsDiagram][i] ? createElement([PressureDepthDiagram, MonsoonDiagram, CycloneCrossSectionDiagram, LinearGraphDiagram, BuoyancyDiagram, ClimateFactorsDiagram][i]) : undefined}
+            diagram={[StormPressureSystemDiagram, StormCoriolisFormationDiagram, StormSSTDiagram, StormNWPGridDiagram, StormSurgeFactorsDiagram, StormClimateChangeDiagram][i] ? createElement([StormPressureSystemDiagram, StormCoriolisFormationDiagram, StormSSTDiagram, StormNWPGridDiagram, StormSurgeFactorsDiagram, StormClimateChangeDiagram][i]) : undefined}
             pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
         ))}
       </div>

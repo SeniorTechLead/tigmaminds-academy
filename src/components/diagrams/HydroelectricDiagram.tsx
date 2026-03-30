@@ -1,7 +1,7 @@
 export default function HydroelectricDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 500 300" className="w-full max-w-xl mx-auto" role="img" aria-label="Hydroelectric dam cross-section">
+      <svg viewBox="0 0 590 342" className="w-full max-w-xl mx-auto" role="img" aria-label="Hydroelectric dam cross-section">
         <defs>
           <marker id="hydroArrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
             <polygon points="0 0, 8 3, 0 6" className="fill-gray-500 dark:fill-gray-400" />

@@ -1,6 +1,13 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Sparkles } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
+import { createElement } from 'react';
+import StarMagnitudeScaleDiagram from '../diagrams/StarMagnitudeScaleDiagram';
+import StarBrightnessStepDiagram from '../diagrams/StarBrightnessStepDiagram';
+import StarTwinklingDiagram from '../diagrams/StarTwinklingDiagram';
+import StarBortleScaleDiagram from '../diagrams/StarBortleScaleDiagram';
+import StarInverseSquareDiagram from '../diagrams/StarInverseSquareDiagram';
+import StarTelescopeDiagram from '../diagrams/StarTelescopeDiagram';
 
 export default function StarsZiroLevel1() {
   const pyodideRef = useRef<any>(null);
@@ -45,7 +52,6 @@ Over 80% of the world's population lives under light-polluted skies. A third of 
       checkAnswer: 'Satellite data shows artificial light increasing by about 2% per year globally. At this rate, the last truly dark sites (remote deserts, deep forests, and valleys like Ziro) could be affected within 50-100 years. Some researchers argue that LEDs, while energy-efficient, have accelerated light pollution because they are cheap and encourage more lighting.',
       codeIntro: 'Simulate how many stars are visible at different levels of light pollution.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Star visibility model
 # Human eye can see stars to ~magnitude 6.5 in perfect darkness
@@ -58,46 +64,6 @@ limiting_mag = np.array([7.5, 7.0, 6.5, 6.0, 5.5, 5.0, 4.5, 4.0, 3.5])
 # N(m) ≈ 10^(0.6*m - 0.4) (rough approximation)
 stars_visible = 10**(0.6 * limiting_mag - 0.4)
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
-fig.patch.set_facecolor('#1f2937')
-
-# Stars visible
-ax1.set_facecolor('#111827')
-bars = ax1.bar(bortle_classes, stars_visible, color=plt.cm.YlOrRd(np.linspace(0.1, 0.9, 9)))
-ax1.set_xlabel('Bortle Class (1=pristine, 9=city)', color='white')
-ax1.set_ylabel('Stars visible to naked eye', color='white')
-ax1.set_title('Stars Lost to Light Pollution', color='white', fontsize=12)
-ax1.tick_params(colors='gray')
-ax1.set_yscale('log')
-
-# Add labels
-locations = ['Remote\\nwilderness', '', 'Rural\\nvillage', '', 'Suburban',
-             '', 'City\\nedge', '', 'City\\ncenter']
-for b, s, loc in zip(bortle_classes, stars_visible, locations):
-    ax1.text(b, s * 1.3, f'{s:.0f}', ha='center', color='white', fontsize=8)
-    if loc:
-        ax1.text(b, 10, loc, ha='center', color='gray', fontsize=7, rotation=45)
-
-# Sky brightness over time
-ax2.set_facecolor('#111827')
-years = np.arange(1950, 2030)
-# Sky brightness increasing ~2% per year (log scale)
-base_brightness = 21.5  # mag/arcsec² (natural dark sky)
-brightness = base_brightness - 0.02 * (years - 1950)  # getting brighter = lower number
-
-ax2.plot(years, brightness, color='#f59e0b', linewidth=2)
-ax2.axhline(21.5, color='#22c55e', linestyle='--', alpha=0.5, label='Natural dark sky')
-ax2.axhline(19.0, color='#ef4444', linestyle='--', alpha=0.5, label='Milky Way invisible')
-ax2.fill_between(years, brightness, 21.5, alpha=0.1, color='#f59e0b')
-ax2.set_xlabel('Year', color='white')
-ax2.set_ylabel('Sky brightness (mag/arcsec²)\\n← brighter | darker →', color='white')
-ax2.set_title('Global Average Sky Getting Brighter', color='white', fontsize=12)
-ax2.legend(facecolor='#1f2937', labelcolor='white')
-ax2.tick_params(colors='gray')
-ax2.invert_yaxis()
-
-plt.tight_layout()
-plt.show()
 
 print(f"Stars visible from Ziro Valley (Bortle 2): ~{stars_visible[1]:.0f}")
 print(f"Stars visible from Delhi (Bortle 8):       ~{stars_visible[7]:.0f}")
@@ -131,63 +97,12 @@ So the Sun is 2.512^(6.5 - (-26.7)) = 2.512^33.2 ≈ 1.6 × 10¹³ times brighte
       checkAnswer: 'Brightness ratio = 2.512^(6.0 - 1.0) = 2.512^5 = 100. The magnitude 1 star is exactly 100 times brighter. This is by design — Pogson defined the scale in 1856 so that 5 magnitudes = exactly 100× brightness, giving 2.512 as the base per magnitude step.',
       codeIntro: 'Explore the magnitude scale and plot star brightness relationships.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Magnitude-brightness relationship
 magnitudes = np.linspace(-2, 8, 200)
 # Relative brightness (magnitude 0 = reference)
 brightness = 2.512 ** (-magnitudes)
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
-fig.patch.set_facecolor('#1f2937')
-
-# Magnitude vs brightness
-ax1.set_facecolor('#111827')
-ax1.semilogy(magnitudes, brightness, color='#f59e0b', linewidth=2)
-ax1.set_xlabel('Apparent magnitude (← brighter | fainter →)', color='white')
-ax1.set_ylabel('Relative brightness (log scale)', color='white')
-ax1.set_title('The Magnitude-Brightness Relationship', color='white', fontsize=12)
-ax1.tick_params(colors='gray')
-
-# Mark famous objects
-objects = [
-    ('Sirius', -1.46, '#60a5fa'),
-    ('Vega (reference)', 0.0, '#22c55e'),
-    ('Polaris', 2.0, '#f59e0b'),
-    ('Faintest naked eye', 6.5, '#ef4444'),
-]
-for name, mag, color in objects:
-    b = 2.512 ** (-mag)
-    ax1.plot(mag, b, 'o', color=color, markersize=8)
-    ax1.annotate(name, xy=(mag, b), xytext=(mag+0.5, b*1.5),
-                color=color, fontsize=9, arrowprops=dict(arrowstyle='->', color=color))
-
-# Simulated night sky
-ax2.set_facecolor('#0a0a14')  # Very dark blue-black
-
-np.random.seed(42)
-n_stars = 500
-star_mags = np.random.exponential(2.5, n_stars) - 1  # magnitude distribution
-star_x = np.random.uniform(0, 10, n_stars)
-star_y = np.random.uniform(0, 10, n_stars)
-
-# Size and alpha based on magnitude
-star_sizes = np.clip(50 * 2.512 ** (-star_mags / 2), 0.5, 50)
-star_alpha = np.clip(1.0 - star_mags / 8, 0.05, 1.0)
-
-# Only show stars brighter than limiting magnitude
-lim_mag = 6.5  # Dark sky
-visible = star_mags < lim_mag
-
-ax2.scatter(star_x[visible], star_y[visible], s=star_sizes[visible],
-           c='white', alpha=star_alpha[visible], edgecolors='none')
-ax2.set_title(f'Simulated Sky (limit mag {lim_mag}, {np.sum(visible)} stars)', color='white', fontsize=11)
-ax2.set_xlim(0, 10)
-ax2.set_ylim(0, 10)
-ax2.axis('off')
-
-plt.tight_layout()
-plt.show()
 
 print("Brightness ratios:")
 for name, mag, _ in objects:
@@ -220,7 +135,6 @@ Every element absorbs and emits specific wavelengths — its spectral "fingerpri
       checkAnswer: 'Earth\'s atmosphere blocks most wavelengths. It is transparent to visible light and radio waves but opaque to most infrared, ultraviolet, X-rays, and gamma rays. Space telescopes like Hubble (visible/UV), Chandra (X-ray), and JWST (infrared) can observe wavelengths that never reach the ground. Additionally, the atmosphere blurs visible light (why stars twinkle) — space telescopes see sharp images.',
       codeIntro: 'Model blackbody radiation curves for stars of different temperatures.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Planck's blackbody radiation law
 def planck(wavelength, T):
@@ -244,58 +158,6 @@ stars = {
     'Rigel (12100K)': {'T': 12100, 'color': '#60a5fa'},
 }
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 5))
-fig.patch.set_facecolor('#1f2937')
-
-# Blackbody curves
-ax1.set_facecolor('#111827')
-
-# Visible light band
-ax1.axvspan(400, 700, alpha=0.15, color='white', label='Visible light')
-
-for name, props in stars.items():
-    radiance = planck(wavelengths, props['T'])
-    radiance_norm = radiance / radiance.max()  # Normalize
-    ax1.plot(wavelengths_nm, radiance_norm, color=props['color'], linewidth=2, label=name)
-
-    # Wien's law: peak wavelength
-    peak = 2.898e-3 / props['T'] * 1e9  # nm
-    if 50 < peak < 3000:
-        ax1.axvline(peak, color=props['color'], linestyle=':', alpha=0.3)
-
-ax1.set_xlabel('Wavelength (nm)', color='white')
-ax1.set_ylabel('Relative intensity', color='white')
-ax1.set_title('Blackbody Radiation: Star Temperatures', color='white', fontsize=12)
-ax1.legend(facecolor='#1f2937', labelcolor='white', fontsize=8)
-ax1.tick_params(colors='gray')
-ax1.set_xlim(100, 2500)
-
-# Electromagnetic spectrum overview
-ax2.set_facecolor('#111827')
-bands = [
-    ('Gamma', 0.001, 0.01, '#a855f7'),
-    ('X-ray', 0.01, 10, '#3b82f6'),
-    ('UV', 10, 400, '#60a5fa'),
-    ('Visible', 400, 700, '#22c55e'),
-    ('IR', 700, 1e6, '#f59e0b'),
-    ('Microwave', 1e6, 1e9, '#ef4444'),
-    ('Radio', 1e9, 1e12, '#dc2626'),
-]
-
-for i, (name, low, high, color) in enumerate(bands):
-    ax2.barh(i, np.log10(high) - np.log10(low), left=np.log10(low),
-            color=color, alpha=0.7, height=0.6)
-    ax2.text(np.log10(low) + (np.log10(high)-np.log10(low))/2, i,
-            name, ha='center', va='center', color='white', fontsize=9, fontweight='bold')
-
-# Atmospheric transparency
-ax2.set_xlabel('log₁₀(wavelength in nm)', color='white')
-ax2.set_title('Electromagnetic Spectrum', color='white', fontsize=12)
-ax2.set_yticks([])
-ax2.tick_params(colors='gray')
-
-plt.tight_layout()
-plt.show()
 
 print("Wien's displacement law: λ_peak = 2,898,000 / T")
 for name, props in stars.items():
@@ -323,7 +185,6 @@ GPS has replaced celestial navigation for most purposes, but every spacecraft st
       checkAnswer: 'Polaris is almost directly above Earth\'s North Pole. Your latitude = the angle between your position and the equator, measured from Earth\'s center. This is also the angle at which you see Polaris above your horizon. At the North Pole (90°N), you look straight up to see Polaris. At the equator (0°), Polaris is at the horizon. At Ziro (27°N), Polaris is 27° up. Geometry makes latitude measurement trivially easy if you can find Polaris.',
       codeIntro: 'Simulate star trails showing Earth\'s rotation effect on the night sky.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Simulate star trails (long-exposure photograph)
 np.random.seed(42)
@@ -354,59 +215,6 @@ def equatorial_to_altaz(ra, dec, lat, lst):
 
     return np.degrees(alt), np.degrees(az)
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5.5))
-fig.patch.set_facecolor('#0a0a14')
-
-# Single moment snapshot
-ax1.set_facecolor('#0a0a14')
-alt0, az0 = equatorial_to_altaz(ra, dec, lat, 0)
-visible = alt0 > 0
-sizes = brightness[visible] * 5
-ax1.scatter(az0[visible], alt0[visible], s=sizes, c='white', alpha=0.8, edgecolors='none')
-
-# Mark Polaris (approximately Dec=89.3°, RA=37.95°)
-alt_p, az_p = equatorial_to_altaz(37.95, 89.3, lat, 0)
-ax1.scatter([az_p], [alt_p], s=50, c='#f59e0b', marker='*', zorder=5)
-ax1.annotate('Polaris', xy=(az_p, alt_p), xytext=(az_p+10, alt_p+5),
-            color='#f59e0b', fontsize=10)
-ax1.axhline(lat, color='#22c55e', linestyle='--', alpha=0.3)
-ax1.text(-170, lat+2, f'Polaris altitude = latitude = {lat}°', color='#22c55e', fontsize=8)
-ax1.set_xlabel('Azimuth (°)', color='gray')
-ax1.set_ylabel('Altitude (°)', color='gray')
-ax1.set_title('Night Sky from Ziro Valley (snapshot)', color='white', fontsize=11)
-ax1.tick_params(colors='gray')
-ax1.set_ylim(0, 90)
-
-# Star trails (4-hour exposure)
-ax2.set_facecolor('#0a0a14')
-hours = np.linspace(0, 60, 30)  # 60 degrees = 4 hours of rotation
-
-for i in range(min(n_stars, 100)):
-    trail_alt = []
-    trail_az = []
-    for lst in hours:
-        a, z = equatorial_to_altaz(ra[i], dec[i], lat, lst)
-        if a > 0:
-            trail_alt.append(a)
-            trail_az.append(z)
-
-    if len(trail_az) > 1:
-        alpha = min(brightness[i] / 5, 0.8)
-        ax2.plot(trail_az, trail_alt, color='white', alpha=alpha, linewidth=0.5)
-
-# Polaris stays nearly fixed
-ax2.scatter([az_p], [alt_p], s=80, c='#f59e0b', marker='*', zorder=5)
-ax2.annotate('Polaris\\n(nearly fixed)', xy=(az_p, alt_p), xytext=(az_p+15, alt_p-10),
-            color='#f59e0b', fontsize=9, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
-
-ax2.set_xlabel('Azimuth (°)', color='gray')
-ax2.set_ylabel('Altitude (°)', color='gray')
-ax2.set_title('Star Trails (4-hour exposure)', color='white', fontsize=11)
-ax2.tick_params(colors='gray')
-ax2.set_ylim(0, 90)
-
-plt.tight_layout()
-plt.show()
 
 print(f"Observer latitude: {lat}°N (Ziro Valley)")
 print(f"Polaris altitude: {alt_p:.1f}° (≈ latitude)")
@@ -443,7 +251,6 @@ The largest telescopes:
       checkAnswer: 'Light-gathering power ∝ area ∝ diameter². JWST/Hubble = (6.5/2.4)² = 7.3×. JWST collects 7.3 times more light. But JWST observes in infrared (not visible), so it sees different things — cooler objects, more distant galaxies, and objects hidden by dust. The comparison is not just "more light" but "different light."',
       codeIntro: 'Calculate and visualize how telescope size determines what you can see.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Telescope aperture vs limiting magnitude
 apertures_mm = np.array([7, 25, 50, 100, 200, 500, 1000, 2400, 6500, 10000, 39000])
@@ -458,36 +265,6 @@ limiting_mags = m_eye + 5 * np.log10(apertures_mm / D_eye)
 # Approximate number of objects visible
 n_objects = 10**(0.6 * limiting_mags - 2)
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
-fig.patch.set_facecolor('#1f2937')
-
-# Aperture vs limiting magnitude
-ax1.set_facecolor('#111827')
-ax1.semilogx(apertures_mm, limiting_mags, 'o-', color='#f59e0b', linewidth=2, markersize=6)
-for d, m, name in zip(apertures_mm, limiting_mags, names):
-    ax1.annotate(name, xy=(d, m), xytext=(d*1.2, m+0.5),
-                color='white', fontsize=7, rotation=0)
-ax1.set_xlabel('Aperture (mm, log scale)', color='white')
-ax1.set_ylabel('Limiting magnitude (fainter →)', color='white')
-ax1.set_title('Bigger Telescope = Fainter Objects', color='white', fontsize=12)
-ax1.tick_params(colors='gray')
-
-# Number of visible objects
-ax2.set_facecolor('#111827')
-ax2.semilogy(names[:8], n_objects[:8], 'o-', color='#22c55e', linewidth=2, markersize=6)
-ax2.set_xlabel('Telescope', color='white')
-ax2.set_ylabel('Approx. objects visible (log scale)', color='white')
-ax2.set_title('Objects Visible per Telescope Size', color='white', fontsize=12)
-ax2.tick_params(colors='gray', axis='y')
-ax2.tick_params(colors='white', axis='x')
-plt.setp(ax2.xaxis.get_majorticklabels(), rotation=45, ha='right', fontsize=8)
-
-for n, name in zip(n_objects[:8], names[:8]):
-    ax2.annotate(f'{n:.0e}', xy=(name, n), xytext=(0, 10),
-                textcoords='offset points', color='#f59e0b', fontsize=8, ha='center')
-
-plt.tight_layout()
-plt.show()
 
 print("Telescope comparison:")
 print(f"{'Telescope':<15} {'Aperture':>10} {'Lim mag':>10} {'Light gain':>12}")
@@ -520,7 +297,6 @@ The next frontier: analyzing exoplanet atmospheres for biosignatures — gases l
       checkAnswer: 'They are small (tiny transit depth: 0.008%), far from their star (long orbital period: 1 year means you need to watch for years to see repeated transits), and their gravitational tug is tiny (0.09 m/s radial velocity — at the noise limit of current instruments). Finding another Earth requires extreme precision, long observation campaigns, and space-based telescopes above atmospheric interference.',
       codeIntro: 'Simulate an exoplanet transit light curve and radial velocity signal.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Transit light curve simulation
 def transit_lightcurve(t, t0, period, r_ratio, duration):
@@ -549,44 +325,6 @@ r_ratio_earth = 0.009  # Earth/Sun ratio
 flux_earth = transit_lightcurve(t, 1.0, period, r_ratio_earth, duration)
 flux_earth_obs = flux_earth + noise
 
-fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(12, 9))
-fig.patch.set_facecolor('#1f2937')
-
-# Hot Jupiter transit
-ax1.set_facecolor('#111827')
-ax1.plot(t, flux_observed, '.', color='gray', markersize=1, alpha=0.3)
-ax1.plot(t, flux_jupiter, color='#f59e0b', linewidth=1.5)
-ax1.set_ylabel('Relative flux', color='white')
-ax1.set_title(f'Hot Jupiter Transit (R_p/R_star = {r_ratio}, depth = {r_ratio**2*100:.1f}%)', color='white', fontsize=11)
-ax1.tick_params(colors='gray')
-ax1.set_ylim(0.985, 1.005)
-
-# Earth-like transit
-ax2.set_facecolor('#111827')
-ax2.plot(t, flux_earth_obs, '.', color='gray', markersize=1, alpha=0.3)
-ax2.plot(t, flux_earth, color='#22c55e', linewidth=1.5)
-ax2.set_ylabel('Relative flux', color='white')
-ax2.set_title(f'Earth-like Transit (R_p/R_star = {r_ratio_earth}, depth = {r_ratio_earth**2*100:.4f}%)', color='white', fontsize=11)
-ax2.tick_params(colors='gray')
-ax2.set_ylim(0.995, 1.005)
-ax2.text(5, 0.996, 'Transit is buried in noise!', color='#ef4444', fontsize=10, ha='center')
-
-# Radial velocity
-ax3.set_facecolor('#111827')
-rv_amplitude = 50  # m/s for hot Jupiter
-rv = rv_amplitude * np.sin(2 * np.pi * t / period)
-rv_noise = np.random.normal(0, 5, len(t))
-
-ax3.plot(t, rv + rv_noise, '.', color='gray', markersize=2, alpha=0.5)
-ax3.plot(t, rv, color='#3b82f6', linewidth=1.5)
-ax3.axhline(0, color='gray', linestyle=':', alpha=0.3)
-ax3.set_xlabel('Time (days)', color='white')
-ax3.set_ylabel('Radial velocity (m/s)', color='white')
-ax3.set_title(f'Radial Velocity Signal (K = {rv_amplitude} m/s)', color='white', fontsize=11)
-ax3.tick_params(colors='gray')
-
-plt.tight_layout()
-plt.show()
 
 print("Detection comparison:")
 print(f"  Hot Jupiter: transit depth = {r_ratio**2*100:.1f}% — EASY to detect")
@@ -623,6 +361,7 @@ print(f"  From Ziro Valley, ground-based telescopes can detect ~{r_ratio**2*100:
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
+            diagram={[StarMagnitudeScaleDiagram, StarBrightnessStepDiagram, StarTwinklingDiagram, StarBortleScaleDiagram, StarInverseSquareDiagram, StarTelescopeDiagram][i] ? createElement([StarMagnitudeScaleDiagram, StarBrightnessStepDiagram, StarTwinklingDiagram, StarBortleScaleDiagram, StarInverseSquareDiagram, StarTelescopeDiagram][i]) : undefined}
             pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
         ))}
       </div>

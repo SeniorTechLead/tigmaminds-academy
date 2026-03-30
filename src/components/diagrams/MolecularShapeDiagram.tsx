@@ -6,7 +6,7 @@ export default function MolecularShapeDiagram() {
   return (
     <div className="my-4">
       <svg
-        viewBox="0 0 520 250"
+        viewBox="0 0 546 262"
         className="w-full max-w-xl mx-auto"
         role="img"
         aria-label="Molecular shapes: linear, bent, tetrahedral, trigonal planar"

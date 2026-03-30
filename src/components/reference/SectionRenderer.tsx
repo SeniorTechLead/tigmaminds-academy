@@ -1,5 +1,6 @@
 import type { ReferenceSection } from '../../data/reference';
 import diagramRegistry from './DiagramRegistry';
+import DiagramZoom from '../DiagramZoom';
 import MatchingActivity from '../interactive/MatchingActivity';
 import TrueFalse from '../interactive/TrueFalse';
 import DidYouKnow from '../interactive/DidYouKnow';
@@ -190,7 +191,9 @@ export default function SectionRenderer({ section }: Props) {
       {/* Diagram */}
       {DiagramComponent && (
         <div className="mt-3">
-          <DiagramComponent />
+          <DiagramZoom>
+            <DiagramComponent />
+          </DiagramZoom>
         </div>
       )}
 

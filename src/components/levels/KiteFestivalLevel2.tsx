@@ -170,7 +170,7 @@ Typical Reynolds numbers:
 - Boeing 747: Re ~ 300,000,000`,
       analogy: 'Reynolds number is like the difference between walking through water (low Re: viscous forces dominate, everything is slow and smooth) and walking through air (high Re: inertial forces dominate, you can move freely). At low Re, air feels "thick" to tiny insects. At high Re, air feels "thin" to airplanes. Same fluid, different experience based on size and speed.',
       storyConnection: 'A festival kite in Guwahati operates at Re ~ 100,000. At this Reynolds number, the boundary layer is mostly laminar, and small changes in angle of attack have dramatic effects (which is why kites are twitchy). A Boeing flying over Guwahati at Re ~ 300,000,000 has a fully turbulent boundary layer — more stable but requiring much more power. Same air, completely different physics.',
-      checkQuestion: 'Why can't you just build a 10× larger model airplane and expect it to fly the same way?',
+      checkQuestion: 'Why can\'t you just build a 10× larger model airplane and expect it to fly the same way?',
       checkAnswer: 'Scaling up 10× increases the characteristic length L by 10×. At the same airspeed, Re increases 10×. The flow transitions from laminar to turbulent, drag coefficients change, stall characteristics change, and the airfoil that worked at small Re may not work at large Re. To maintain the same Re when scaling up, you\'d need to reduce airspeed by 10× — but then you might not have enough lift. This is called the "scale effect" and it\'s why wind tunnel testing must carefully match Reynolds numbers.',
       codeIntro: 'Calculate Reynolds numbers and show how flow characteristics change with scale.',
       code: `import numpy as np

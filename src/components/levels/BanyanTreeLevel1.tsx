@@ -1,12 +1,12 @@
 import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Sparkles } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
-import PhotosynthesisDiagram from '../diagrams/PhotosynthesisDiagram';
-import CarbonCycleDiagram from '../diagrams/CarbonCycleDiagram';
-import WaterCycleDiagram from '../diagrams/WaterCycleDiagram';
-import FoodWebDiagram from '../diagrams/FoodWebDiagram';
-import PopulationGrowthCurve from '../diagrams/PopulationGrowthCurve';
-import NEIndiaBiomesDiagram from '../diagrams/NEIndiaBiomesDiagram';
+import BanyanPhotosynthesisDiagram from '../diagrams/BanyanPhotosynthesisDiagram';
+import BanyanRootsDiagram from '../diagrams/BanyanRootsDiagram';
+import BanyanCarbonDiagram from '../diagrams/BanyanCarbonDiagram';
+import BanyanGrowthRingsDiagram from '../diagrams/BanyanGrowthRingsDiagram';
+import BanyanWaterTransportDiagram from '../diagrams/BanyanWaterTransportDiagram';
+import BanyanEcosystemDiagram from '../diagrams/BanyanEcosystemDiagram';
 
 export default function BanyanTreeLevel1() {
   const pyodideRef = useRef<any>(null);
@@ -53,7 +53,6 @@ This is why you can count a tree's age by counting its **growth rings**. A 500-y
       checkAnswer: 'No. The nail stays at exactly 2 meters. Trees grow taller from the TIPS (apical meristems), not by stretching the trunk. The trunk only grows WIDER (secondary growth). The nail will eventually be engulfed by new wood growth, but it won\'t move up. This surprises most people — they expect the trunk to "push up" like a rising elevator.',
       codeIntro: 'Model tree ring growth over 100 years, with ring width varying by climate conditions.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 np.random.seed(42)
 
@@ -80,54 +79,6 @@ ring_widths = base_growth * np.clip(rainfall_factor, 0.1, 2.0)
 # Calculate cumulative radius
 radii = np.cumsum(ring_widths)
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
-fig.patch.set_facecolor('#1f2937')
-
-# Ring width time series
-ax1.set_facecolor('#111827')
-ax1.bar(ages, ring_widths, color='#22c55e', alpha=0.7, width=1.0)
-ax1.set_xlabel('Year', color='white')
-ax1.set_ylabel('Ring width (mm)', color='white')
-ax1.set_title('Annual Growth Ring Width', color='white', fontsize=13)
-ax1.tick_params(colors='gray')
-
-# Mark drought years
-for dy in drought_years:
-    if dy < n_years:
-        ax1.annotate('drought', xy=(dy, ring_widths[dy]), color='#ef4444', fontsize=8,
-                     xytext=(dy+3, ring_widths[dy]+1),
-                     arrowprops=dict(arrowstyle='->', color='#ef4444'))
-
-# Cross-section view (concentric rings)
-ax2.set_facecolor('#111827')
-ax2.set_aspect('equal')
-
-# Draw rings (every 5th year for visibility)
-for i in range(0, n_years, 1):
-    r = radii[i]
-    # Colour: lighter for earlywood (wet years), darker for latewood
-    intensity = 0.3 + 0.4 * min(ring_widths[i] / 6, 1)
-    color = (intensity * 0.6, intensity * 0.4, intensity * 0.2)
-    circle = plt.Circle((0, 0), r, fill=False, color=color, linewidth=0.8)
-    ax2.add_patch(circle)
-
-# Mark some years
-for year_mark in [10, 25, 50, 75, 100]:
-    if year_mark <= n_years:
-        r = radii[year_mark - 1]
-        ax2.plot(r, 0, 'o', color='#f59e0b', markersize=4)
-        ax2.annotate(f'Year {year_mark}', xy=(r, 0), xytext=(r+10, 15),
-                     color='#f59e0b', fontsize=8,
-                     arrowprops=dict(arrowstyle='->', color='#f59e0b'))
-
-max_r = radii[-1]
-ax2.set_xlim(-max_r * 1.3, max_r * 1.3)
-ax2.set_ylim(-max_r * 1.1, max_r * 1.3)
-ax2.set_title(f'Cross-Section: {n_years} Growth Rings', color='white', fontsize=13)
-ax2.tick_params(colors='gray')
-
-plt.tight_layout()
-plt.show()
 
 print(f"Tree statistics after {n_years} years:")
 print(f"  Total radius: {radii[-1]:.0f} mm ({radii[-1]/10:.1f} cm)")
@@ -163,7 +114,6 @@ The Great Banyan in Howrah, Kolkata, has a canopy that covers 1.89 hectares (4.6
       checkAnswer: 'The strangler fig\'s aerial roots surround the host trunk, fuse together, and gradually compress it. Meanwhile, the fig\'s canopy grows above the host, stealing its light. Over decades, the host tree is strangled and dies (from compression and light deprivation). The fig\'s fused aerial roots form a hollow cylinder where the host trunk used to be — a ghost of the original tree.',
       codeIntro: 'Model how a banyan tree spreads over time by adding aerial roots and expanding its canopy.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 np.random.seed(42)
 
@@ -200,63 +150,6 @@ for year in range(n_years):
         new_y = distance * np.sin(angle)
         trunks.append((new_x, new_y, year))
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 7))
-fig.patch.set_facecolor('#1f2937')
-
-# Top-down view of the tree
-ax1.set_facecolor('#111827')
-ax1.set_aspect('equal')
-
-# Draw canopy
-canopy_r = canopy_radius_history[-1]
-canopy = plt.Circle((0, 0), canopy_r, fill=True, color='#22c55e', alpha=0.15)
-ax1.add_patch(canopy)
-canopy_edge = plt.Circle((0, 0), canopy_r, fill=False, color='#22c55e', linewidth=2)
-ax1.add_patch(canopy_edge)
-
-# Draw trunks (sized by age)
-for x, y, yr in trunks:
-    age = n_years - yr
-    size = min(2 + age * 0.1, 15)  # older trunks are bigger
-    alpha = min(0.3 + age / n_years, 1.0)
-    ax1.plot(x, y, 'o', color='#8B4513', markersize=size, alpha=alpha)
-
-# Mark original trunk
-ax1.plot(0, 0, 'o', color='#f59e0b', markersize=15, label='Original trunk', zorder=5)
-
-ax1.set_xlim(-canopy_r * 1.2, canopy_r * 1.2)
-ax1.set_ylim(-canopy_r * 1.2, canopy_r * 1.2)
-ax1.set_title(f'Banyan After {n_years} Years (top view)', color='white', fontsize=13)
-ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax1.tick_params(colors='gray')
-
-# Growth statistics over time
-ax2.set_facecolor('#111827')
-years_list = range(n_years)
-trunk_counts = []
-for year in years_list:
-    count = sum(1 for t in trunks if t[2] <= year)
-    trunk_counts.append(count)
-
-ax2_twin = ax2.twinx()
-ax2.plot(years_list, canopy_radius_history, color='#22c55e', linewidth=2.5, label='Canopy radius (m)')
-ax2_twin.plot(years_list, trunk_counts, color='#f59e0b', linewidth=2.5, label='Number of trunks')
-
-ax2.set_xlabel('Years', color='white')
-ax2.set_ylabel('Canopy radius (meters)', color='#22c55e')
-ax2_twin.set_ylabel('Number of trunks', color='#f59e0b')
-ax2.set_title('Banyan Growth: Canopy and Trunks Over Time', color='white', fontsize=13)
-ax2.tick_params(axis='y', colors='#22c55e')
-ax2_twin.tick_params(axis='y', colors='#f59e0b')
-ax2.tick_params(axis='x', colors='gray')
-
-# Combined legend
-lines1, labels1 = ax2.get_legend_handles_labels()
-lines2, labels2 = ax2_twin.get_legend_handles_labels()
-ax2.legend(lines1 + lines2, labels1 + labels2, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-
-plt.tight_layout()
-plt.show()
 
 print(f"After {n_years} years:")
 print(f"  Total trunks/prop roots: {len(trunks)}")
@@ -295,7 +188,6 @@ Ecologically, the banyan is both creator and destroyer: it creates habitat for a
       checkAnswer: 'Both. Bad for plant diversity (the banyan suppresses almost all understory plants). Good for animal diversity (the banyan provides food — figs — for birds, bats, monkeys; shelter in its complex root structure; and a reliable microclimate). The net effect depends on what you value: if plant diversity, the banyan is destructive. If animal habitat, it\'s constructive. Most ecologists see large banyans as "keystone structures" — their benefits to the animal community outweigh the plant diversity loss.',
       codeIntro: 'Model the banyan\'s shade competition strategy and how it excludes other plants.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 np.random.seed(42)
 
@@ -339,36 +231,6 @@ for year in range(n_years):
     if year in [0, 10, 25, 49]:
         snapshots[year] = (grid.copy(), light.copy())
 
-fig, axes = plt.subplots(2, 4, figsize=(16, 8))
-fig.patch.set_facecolor('#1f2937')
-
-for idx, (year, (g, l)) in enumerate(snapshots.items()):
-    # Grid view
-    ax = axes[0, idx]
-    ax.set_facecolor('#111827')
-    cmap = plt.cm.colors.ListedColormap(['#111827', '#22c55e', '#8B4513'])
-    ax.imshow(g, cmap=cmap, vmin=0, vmax=2)
-    ax.set_title(f'Year {year+1}', color='white', fontsize=11)
-    ax.tick_params(colors='gray')
-
-    # Count species
-    other_plants = np.sum(g == 1)
-    banyan_area = np.sum(g == 2)
-    empty = np.sum(g == 0)
-
-    # Light map
-    ax = axes[1, idx]
-    ax.set_facecolor('#111827')
-    im = ax.imshow(l, cmap='YlOrRd_r', vmin=0, vmax=100)
-    ax.set_title(f'Light level (Year {year+1})', color='white', fontsize=11)
-    ax.tick_params(colors='gray')
-
-# Labels
-axes[0, 0].set_ylabel('Vegetation', color='white')
-axes[1, 0].set_ylabel('Light (%)', color='white')
-
-plt.tight_layout()
-plt.show()
 
 # Statistics
 print("Banyan expansion over 50 years:")
@@ -408,7 +270,6 @@ Dendrochronology has been used to:
       checkAnswer: 'Possibly, but suspicious. The outermost ring (1510) is the earliest the tree was felled. After felling, the wood would be seasoned for 2-10 years before use. So the panel was likely made between 1512-1520. A painting dated 1485 would require a panel made at least 25 years before it was supposedly painted on. This doesn\'t prove forgery (old panels are sometimes reused), but it raises serious doubts.',
       codeIntro: 'Simulate cross-dating: match ring patterns between trees to build a chronology.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 np.random.seed(42)
 
@@ -443,55 +304,6 @@ tree_c_climate = climate[tree_c_start:tree_c_end]
 tree_c_rings = tree_c_climate + np.random.normal(0, 0.15, len(tree_c_climate))
 tree_c_rings = np.clip(tree_c_rings, 0.1, 3.0)
 
-fig, axes = plt.subplots(4, 1, figsize=(14, 10), sharex=True)
-fig.patch.set_facecolor('#1f2937')
-
-# Climate signal
-ax = axes[0]
-ax.set_facecolor('#111827')
-ax.fill_between(range(n_climate_years), climate, 1, where=climate > 1, alpha=0.3, color='#3b82f6')
-ax.fill_between(range(n_climate_years), climate, 1, where=climate < 1, alpha=0.3, color='#ef4444')
-ax.plot(range(n_climate_years), climate, color='white', linewidth=1)
-ax.axhline(1, color='gray', linestyle='--', linewidth=0.5)
-ax.set_ylabel('Climate index', color='white')
-ax.set_title('Regional Climate Signal (300 years)', color='white', fontsize=13)
-ax.tick_params(colors='gray')
-
-# Tree A
-ax = axes[1]
-ax.set_facecolor('#111827')
-years_a = range(tree_a_start, tree_a_end)
-ax.bar(years_a, tree_a_rings, color='#22c55e', alpha=0.7, width=1)
-ax.set_ylabel('Ring width', color='white')
-ax.set_title(f'Tree A (living): years {tree_a_start}-{tree_a_end}', color='#22c55e', fontsize=11)
-ax.tick_params(colors='gray')
-
-# Tree B
-ax = axes[2]
-ax.set_facecolor('#111827')
-years_b = range(tree_b_start, tree_b_end)
-ax.bar(years_b, tree_b_rings, color='#f59e0b', alpha=0.7, width=1)
-ax.set_ylabel('Ring width', color='white')
-ax.set_title(f'Tree B (old beam): years {tree_b_start}-{tree_b_end}', color='#f59e0b', fontsize=11)
-ax.tick_params(colors='gray')
-
-# Tree C
-ax = axes[3]
-ax.set_facecolor('#111827')
-years_c = range(tree_c_start, tree_c_end)
-ax.bar(years_c, tree_c_rings, color='#3b82f6', alpha=0.7, width=1)
-ax.set_ylabel('Ring width', color='white')
-ax.set_title(f'Tree C (ancient log): years {tree_c_start}-{tree_c_end}', color='#3b82f6', fontsize=11)
-ax.set_xlabel('Year', color='white')
-ax.tick_params(colors='gray')
-
-# Mark overlap regions
-for ax in axes[1:]:
-    ax.axvspan(100, 150, alpha=0.05, color='white')
-    ax.axvspan(100, 250, alpha=0.03, color='white')
-
-plt.tight_layout()
-plt.show()
 
 # Cross-correlation between trees in overlap period
 overlap_ab = range(max(tree_a_start, tree_b_start), min(tree_a_end, tree_b_end))
@@ -535,7 +347,6 @@ The banyan's longevity secret is aerial roots: even if the original trunk dies, 
       checkAnswer: 'Trees die from external causes, not internal aging: (1) Storm damage breaks branches or topples the trunk, (2) Fire kills the cambium, (3) Fungal or insect attacks overwhelm defenses, (4) Lightning strikes, (5) Drought or flooding, (6) Structural failure — the heartwood rots and the trunk can\'t support the crown. Very old trees often die from accumulated structural damage rather than "old age." In theory, if protected from all external threats, a tree could live indefinitely.',
       codeIntro: 'Visualize the world\'s oldest trees and compare their ages to human history.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # World's oldest trees and human history timeline
 trees = {
@@ -557,53 +368,6 @@ history = {
     'Internet': 35,
 }
 
-fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(14, 9))
-fig.patch.set_facecolor('#1f2937')
-
-# Tree ages (log scale)
-ax1.set_facecolor('#111827')
-names = list(trees.keys())
-ages = [trees[n]['age'] for n in names]
-colors = [trees[n]['color'] for n in names]
-
-bars = ax1.barh(range(len(names)), ages, color=colors, alpha=0.8)
-ax1.set_yticks(range(len(names)))
-ax1.set_yticklabels(names, color='white', fontsize=10)
-ax1.set_xlabel('Age (years)', color='white')
-ax1.set_title("World's Oldest Living Organisms", color='white', fontsize=13)
-ax1.set_xscale('log')
-ax1.tick_params(colors='gray')
-
-for bar, age in zip(bars, ages):
-    ax1.text(bar.get_width() * 1.1, bar.get_y() + bar.get_height()/2,
-             f'{age:,} years', va='center', color='white', fontsize=10)
-
-# Timeline comparison
-ax2.set_facecolor('#111827')
-
-# Draw tree lifespans
-for i, (name, props) in enumerate(trees.items()):
-    start = -props['age']
-    ax2.barh(i + len(history), -start, left=start, height=0.6,
-             color=props['color'], alpha=0.6)
-    ax2.text(start - 200, i + len(history), name, ha='right', color=props['color'],
-             fontsize=8, va='center')
-
-# Draw history events
-for i, (event, year_ago) in enumerate(history.items()):
-    ax2.axvline(-year_ago, color='gray', linestyle=':', alpha=0.3)
-    ax2.text(-year_ago, i, event, color='white', fontsize=9, va='center',
-             rotation=0, ha='center',
-             bbox=dict(boxstyle='round,pad=0.3', facecolor='#1f2937', edgecolor='gray'))
-
-ax2.set_xlabel('Years (negative = before present)', color='white')
-ax2.set_title('Tree Lifespans vs Human History', color='white', fontsize=13)
-ax2.set_xlim(-15000, 500)
-ax2.tick_params(colors='gray')
-ax2.set_yticks([])
-
-plt.tight_layout()
-plt.show()
 
 print("Perspective check:")
 print(f"  Methuselah germinated {trees['Methuselah (bristlecone)']['age']} years ago")
@@ -650,7 +414,6 @@ print("In 5,000 years, today's young banyans could be as old as Methuselah.")`,
       checkAnswer: 'No, and the math proves it. The 200-year-old banyan stores ~20 tonnes of carbon. Cutting it releases most of that carbon immediately. 100 saplings will take 50-100 years to collectively store the same amount. In the meantime, the cavity-nesting birds, the mycorrhizal network, the cultural value, and the water regulation services are lost. Net carbon impact: NEGATIVE for decades. Net biodiversity impact: devastating. This is why conserving old trees is almost always better than planting new ones.',
       codeIntro: 'Quantify ecosystem services of old vs young trees.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Ecosystem services: old tree vs young tree vs 100 saplings
 
@@ -670,80 +433,6 @@ saplings_total = 100 * tree_carbon(ages) / 5  # each sapling smaller
 old_tree_carbon = tree_carbon(200)  # 200-year-old tree
 cut_and_replant = -old_tree_carbon + saplings_total  # net = released + new growth
 
-fig, axes = plt.subplots(2, 2, figsize=(14, 9))
-fig.patch.set_facecolor('#1f2937')
-
-# Carbon comparison
-ax = axes[0, 0]
-ax.set_facecolor('#111827')
-ax.plot(ages, single_tree, color='#22c55e', linewidth=2.5, label='Keep old tree (200yr)')
-ax.plot(ages, cut_and_replant, color='#ef4444', linewidth=2.5, label='Cut + plant 100 saplings')
-ax.axhline(0, color='gray', linestyle='--', linewidth=0.5)
-ax.fill_between(ages, cut_and_replant, single_tree[-1], where=cut_and_replant < single_tree[-1],
-                alpha=0.15, color='#ef4444')
-ax.set_xlabel('Years after decision', color='white')
-ax.set_ylabel('Net carbon stored (tonnes)', color='white')
-ax.set_title('Carbon: Keep Old Tree vs Replace', color='white', fontsize=12)
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax.tick_params(colors='gray')
-
-# Find break-even year
-breakeven = np.argmax(cut_and_replant > single_tree[-1])
-if breakeven > 0:
-    ax.axvline(breakeven, color='#f59e0b', linestyle=':', linewidth=2)
-    ax.text(breakeven + 5, 0, f'Break-even:\\nyear {breakeven}', color='#f59e0b', fontsize=10)
-
-# Ecosystem services by tree age
-ax = axes[0, 1]
-ax.set_facecolor('#111827')
-services = ['Carbon\\nstorage', 'Cavity\\nhabitat', 'Canopy\\ncover', 'Root\\nnetwork', 'Cultural\\nvalue']
-young_scores = [15, 5, 20, 10, 5]       # 10-year-old tree
-medium_scores = [50, 30, 60, 45, 30]     # 50-year-old tree
-old_scores = [90, 85, 95, 90, 95]        # 200-year-old tree
-
-x = np.arange(len(services))
-width = 0.25
-ax.bar(x - width, young_scores, width, label='10 years', color='#22c55e', alpha=0.5)
-ax.bar(x, medium_scores, width, label='50 years', color='#3b82f6', alpha=0.7)
-ax.bar(x + width, old_scores, width, label='200 years', color='#f59e0b', alpha=0.9)
-ax.set_xticks(x)
-ax.set_xticklabels(services, color='gray', fontsize=9)
-ax.set_ylabel('Service level (%)', color='white')
-ax.set_title('Ecosystem Services by Tree Age', color='white', fontsize=12)
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax.tick_params(colors='gray')
-
-# Biodiversity support
-ax = axes[1, 0]
-ax.set_facecolor('#111827')
-tree_ages_bio = [10, 25, 50, 100, 200, 500]
-species_supported = [5, 15, 35, 65, 100, 130]
-ax.plot(tree_ages_bio, species_supported, 'o-', color='#22c55e', linewidth=2.5, markersize=8)
-ax.fill_between(tree_ages_bio, species_supported, alpha=0.15, color='#22c55e')
-ax.set_xlabel('Tree age (years)', color='white')
-ax.set_ylabel('Species supported', color='white')
-ax.set_title('Biodiversity Support Increases with Age', color='white', fontsize=12)
-ax.tick_params(colors='gray')
-
-# Economic valuation
-ax = axes[1, 1]
-ax.set_facecolor('#111827')
-categories = ['Carbon\\nvalue', 'Stormwater\\nmanagement', 'Air\\npurification', 'Property\\nvalue boost', 'Cultural/\\naesthetic']
-old_value = [5000, 3000, 2000, 15000, 10000]   # USD per year for 200yr tree
-young_value = [200, 500, 300, 2000, 500]         # USD per year for 10yr tree
-
-x = np.arange(len(categories))
-ax.bar(x - 0.2, [v/1000 for v in old_value], 0.35, label='200-year tree', color='#f59e0b', alpha=0.8)
-ax.bar(x + 0.2, [v/1000 for v in young_value], 0.35, label='10-year tree', color='#3b82f6', alpha=0.6)
-ax.set_xticks(x)
-ax.set_xticklabels(categories, color='gray', fontsize=8)
-ax.set_ylabel('Annual value ($K)', color='white')
-ax.set_title('Economic Value of Ecosystem Services', color='white', fontsize=12)
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax.tick_params(colors='gray')
-
-plt.tight_layout()
-plt.show()
 
 print("The 200-year-old banyan:")
 print(f"  Carbon stored: {tree_carbon(200):.0f} tonnes CO₂")
@@ -784,7 +473,7 @@ print("that makes these trees keystone organisms.")`,
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
-            diagram={[PhotosynthesisDiagram, CarbonCycleDiagram, WaterCycleDiagram, FoodWebDiagram, PopulationGrowthCurve, NEIndiaBiomesDiagram][i] ? createElement([PhotosynthesisDiagram, CarbonCycleDiagram, WaterCycleDiagram, FoodWebDiagram, PopulationGrowthCurve, NEIndiaBiomesDiagram][i]) : undefined}
+            diagram={[BanyanPhotosynthesisDiagram, BanyanRootsDiagram, BanyanCarbonDiagram, BanyanGrowthRingsDiagram, BanyanWaterTransportDiagram, BanyanEcosystemDiagram][i] ? createElement([BanyanPhotosynthesisDiagram, BanyanRootsDiagram, BanyanCarbonDiagram, BanyanGrowthRingsDiagram, BanyanWaterTransportDiagram, BanyanEcosystemDiagram][i]) : undefined}
             pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
         ))}
       </div>

@@ -86,7 +86,7 @@ export default function PhaseChangeDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 520 300" className="w-full max-w-lg mx-auto" role="img" aria-label="Phase change diagram showing temperature plateaus during melting and boiling">
+      <svg viewBox="0 0 546 330" className="w-full max-w-lg mx-auto" role="img" aria-label="Phase change diagram showing temperature plateaus during melting and boiling">
         {/* Y-axis */}
         <line x1={plotLeft} y1={plotTop - 5} x2={plotLeft} y2={plotBottom + 5} className="stroke-gray-400 dark:stroke-gray-500" strokeWidth="1.5" />
         {/* X-axis */}

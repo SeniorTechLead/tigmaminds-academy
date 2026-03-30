@@ -30,7 +30,7 @@ export default function InterferenceDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 520 260" className="w-full max-w-2xl mx-auto" role="img" aria-label="Constructive and destructive wave interference">
+      <svg viewBox="0 0 546 284" className="w-full max-w-2xl mx-auto" role="img" aria-label="Constructive and destructive wave interference">
         {/* ======== CONSTRUCTIVE (left) ======== */}
         <text x={cLeftX + panelWidth / 2} y={18} textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="700">Constructive Interference</text>
         <text x={cLeftX + panelWidth / 2} y={32} textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">Waves in phase</text>

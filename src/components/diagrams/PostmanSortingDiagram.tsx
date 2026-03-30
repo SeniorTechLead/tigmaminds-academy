@@ -75,7 +75,7 @@ export default function PostmanSortingDiagram() {
 
       <div className="p-5">
         {/* Postman scene */}
-        <svg viewBox="0 0 600 200" className="w-full max-w-lg mx-auto mb-4" role="img" aria-label="Postman sorting parcels">
+        <svg viewBox="0 0 630 210" className="w-full max-w-lg mx-auto mb-4" role="img" aria-label="Postman sorting parcels">
           {/* Postman figure */}
           <g transform="translate(30, 40)">
             {/* Body */}

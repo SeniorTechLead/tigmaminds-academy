@@ -4,7 +4,7 @@ export default function CarbonBondingDiagram() {
   return (
     <div className="my-4">
       <svg
-        viewBox="0 0 540 200"
+        viewBox="0 0 567 235"
         className="w-full max-w-xl mx-auto"
         role="img"
         aria-label="Carbon bonding: tetrahedral, chain, and benzene ring"

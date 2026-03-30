@@ -1,6 +1,12 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Cpu } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
+import WoodpeckerStressDistributionDiagram from '../diagrams/WoodpeckerStressDistributionDiagram';
+import WoodpeckerImpulseTheoryDiagram from '../diagrams/WoodpeckerImpulseTheoryDiagram';
+import WoodpeckerResonanceDiagram from '../diagrams/WoodpeckerResonanceDiagram';
+import WoodpeckerEnergyAbsorptionDiagram from '../diagrams/WoodpeckerEnergyAbsorptionDiagram';
+import WoodpeckerRotationalForceDiagram from '../diagrams/WoodpeckerRotationalForceDiagram';
+import WoodpeckerFatigueAnalysisDiagram from '../diagrams/WoodpeckerFatigueAnalysisDiagram';
 
 export default function WoodpeckerLevel3() {
   const pyodideRef = useRef<any>(null);
@@ -64,7 +70,6 @@ The key quantity is **impact energy**: E = 0.5 * m * v^2. For a 50-gram woodpeck
       checkAnswer: 'The force ratio equals the inverse ratio of deceleration times: 15 ms / 0.5 ms = 30 times greater peak force on the woodpecker. Since F = m * dv / dt, a shorter dt means proportionally larger F. This is precisely why the woodpecker needs such extraordinary protection mechanisms — it routinely experiences forces 30x what would injure a human brain.',
       codeIntro: 'Model the impact mechanics of a woodpecker strike and compare force profiles for different deceleration times.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Impact parameters
 mass = 0.050  # 50 grams head mass (kg)
@@ -82,70 +87,6 @@ scenarios = [
     ("Human head (with helmet)", dt_helmet, '#22c55e'),
 ]
 
-fig, axes = plt.subplots(1, 3, figsize=(14, 5))
-fig.patch.set_facecolor('#1f2937')
-
-# Plot 1: Force-time profiles (half-sine pulse model)
-ax = axes[0]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-
-for name, dt, color in scenarios:
-    # Model impact as half-sine pulse
-    t = np.linspace(0, dt, 500)
-    # Peak force from impulse: integral of F*dt = m*v
-    # For half-sine: F_peak * (2*dt/pi) = m*v => F_peak = pi*m*v/(2*dt)
-    F_peak = np.pi * mass * v_impact / (2 * dt)
-    F = F_peak * np.sin(np.pi * t / dt)
-    g_peak = F_peak / (mass * g)
-    ax.plot(t * 1000, F, color=color, linewidth=2,
-            label=f'{name}\\n  peak={F_peak:.0f}N ({g_peak:.0f}g)')
-
-ax.set_xlabel('Time (ms)', color='white')
-ax.set_ylabel('Force (N)', color='white')
-ax.set_title('Impact force profiles', color='white', fontsize=11)
-ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white', loc='upper right')
-ax.set_xlim(0, 60)
-
-# Plot 2: G-force vs deceleration time
-ax = axes[1]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-
-dt_range = np.linspace(0.1e-3, 100e-3, 500)
-g_forces = (v_impact / dt_range) / g
-ax.semilogy(dt_range * 1000, g_forces, color='#8b5cf6', linewidth=2)
-ax.axhline(1200, color='#ef4444', linestyle='--', alpha=0.7, label='Woodpecker (~1200g)')
-ax.axhline(100, color='#f59e0b', linestyle='--', alpha=0.7, label='Concussion threshold (~100g)')
-ax.axhline(50, color='#22c55e', linestyle='--', alpha=0.7, label='Helmet standard (~50g)')
-ax.set_xlabel('Deceleration time (ms)', color='white')
-ax.set_ylabel('Peak g-force', color='white')
-ax.set_title('G-force vs impact duration', color='white', fontsize=11)
-ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-
-# Plot 3: Cumulative energy over a day
-ax = axes[2]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-
-E_per_strike = 0.5 * mass * v_impact**2  # Joules
-strikes_per_sec = 20
-hours = np.linspace(0, 8, 500)  # 8-hour day
-total_strikes = strikes_per_sec * hours * 3600
-total_energy = total_strikes * E_per_strike
-
-ax.plot(hours, total_energy / 1000, color='#06b6d4', linewidth=2)
-ax.fill_between(hours, 0, total_energy / 1000, alpha=0.2, color='#06b6d4')
-ax.set_xlabel('Hours of drumming', color='white')
-ax.set_ylabel('Cumulative energy (kJ)', color='white')
-ax.set_title('Energy absorbed per day', color='white', fontsize=11)
-ax.text(4, total_energy[250] / 1000 * 0.7,
-        f'{E_per_strike:.2f} J/strike\\n{int(strikes_per_sec * 3600 * 8):,} strikes/day\\n{total_energy[-1]/1000:.1f} kJ total',
-        color='white', fontsize=8, ha='center',
-        bbox=dict(boxstyle='round', facecolor='#1f2937', edgecolor='#06b6d4', alpha=0.8))
-
-plt.tight_layout()
-plt.show()
 
 print("Impact Mechanics Summary:")
 print(f"{'Scenario':<30} {'dt (ms)':>10} {'Peak F (N)':>12} {'Peak g':>10}")
@@ -179,7 +120,6 @@ The relationship between stress and strain defines material behavior. In the **e
       checkAnswer: 'Bone B deforms 4 times more than Bone A. Since stress is the same (same force, same area), and strain = stress / E, the bone with the lower modulus (B, at 5 GPa) has 4x the strain of the stiffer bone (A, at 20 GPa). This is why the woodpecker has different modulus values at different locations — stiff where rigidity matters, compliant where absorption matters.',
       codeIntro: 'Plot stress-strain curves for different biological materials found in a woodpecker skull and calculate deformation under impact loading.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Material properties (biological tissues in woodpecker skull)
 materials = {
@@ -191,105 +131,6 @@ materials = {
     'Muscle/tendon': {'E': 0.5e9, 'yield_stress': 30e6, 'color': '#06b6d4'},
 }
 
-fig, axes = plt.subplots(2, 2, figsize=(13, 10))
-fig.patch.set_facecolor('#1f2937')
-
-# Plot 1: Stress-strain curves (elastic region)
-ax = axes[0, 0]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-
-for name, props in materials.items():
-    if name == 'Brain tissue':
-        continue  # Too soft to show on same scale
-    E = props['E']
-    yield_s = props['yield_stress']
-    max_strain = yield_s / E * 1.5
-    strain = np.linspace(0, max_strain, 200)
-    # Elastic region
-    elastic_mask = strain <= yield_s / E
-    stress_elastic = E * strain[elastic_mask]
-    ax.plot(strain[elastic_mask] * 100, stress_elastic / 1e6,
-            color=props['color'], linewidth=2, label=f"{name} (E={E/1e9:.1f} GPa)")
-
-ax.set_xlabel('Strain (%)', color='white')
-ax.set_ylabel('Stress (MPa)', color='white')
-ax.set_title('Stress-strain: woodpecker skull materials', color='white', fontsize=11)
-ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-
-# Plot 2: Young's modulus comparison (log scale)
-ax = axes[0, 1]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-
-names = list(materials.keys())
-E_values = [materials[n]['E'] for n in names]
-colors = [materials[n]['color'] for n in names]
-bars = ax.barh(range(len(names)), E_values, color=colors, alpha=0.8)
-ax.set_xscale('log')
-ax.set_yticks(range(len(names)))
-ax.set_yticklabels(names, color='white', fontsize=8)
-ax.set_xlabel("Young's modulus (Pa)", color='white')
-ax.set_title('Stiffness spans 7 orders of magnitude', color='white', fontsize=11)
-
-for i, (bar, val) in enumerate(zip(bars, E_values)):
-    ax.text(val * 1.5, i, f'{val:.0e} Pa', va='center', color='white', fontsize=7)
-
-# Plot 3: Deformation under impact
-ax = axes[1, 0]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-
-F_impact = 50  # N (approximate per-strike force spread over area)
-area = 1e-4  # 1 cm^2 cross-section
-stress_applied = F_impact / area  # Pa
-L0 = 0.01  # 1 cm thickness
-
-deformations_um = []
-for name in names:
-    E = materials[name]['E']
-    strain_val = stress_applied / E
-    deform = strain_val * L0 * 1e6  # micrometers
-    deformations_um.append(deform)
-
-bars = ax.barh(range(len(names)), deformations_um, color=colors, alpha=0.8)
-ax.set_xscale('log')
-ax.set_yticks(range(len(names)))
-ax.set_yticklabels(names, color='white', fontsize=8)
-ax.set_xlabel('Deformation (micrometers)', color='white')
-ax.set_title(f'Deformation at {stress_applied/1e6:.1f} MPa stress', color='white', fontsize=11)
-
-for i, (bar, val) in enumerate(zip(bars, deformations_um)):
-    ax.text(val * 1.5, i, f'{val:.1f} um', va='center', color='white', fontsize=7)
-
-# Plot 4: Layered skull model — stress distribution
-ax = axes[1, 1]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-
-layers = ['Beak keratin', 'Spongy bone', 'Cranial bone', 'Spongy bone', 'Brain tissue']
-layer_E = [materials[l]['E'] for l in layers]
-layer_thickness = [0.003, 0.002, 0.004, 0.002, 0.015]  # meters
-layer_colors = [materials[l]['color'] for l in layers]
-
-positions = np.cumsum([0] + layer_thickness[:-1])
-for i, (pos, thick, color, name) in enumerate(zip(positions, layer_thickness, layer_colors, layers)):
-    ax.barh(0, thick * 1000, left=pos * 1000, height=0.5, color=color, alpha=0.8, edgecolor='white', linewidth=0.5)
-    ax.text(pos * 1000 + thick * 500, 0, f'{name}\\n{thick*1000:.0f}mm',
-            ha='center', va='center', color='white', fontsize=6, fontweight='bold')
-
-ax.set_xlim(-1, sum(layer_thickness) * 1000 + 1)
-ax.set_ylim(-0.5, 0.5)
-ax.set_xlabel('Depth from beak tip (mm)', color='white')
-ax.set_title('Layered skull cross-section', color='white', fontsize=11)
-ax.set_yticks([])
-
-# Add arrow showing force direction
-ax.annotate('Impact\\nforce', xy=(-0.5, 0), fontsize=8, color='#ef4444',
-            ha='center', va='center', fontweight='bold')
-
-plt.tight_layout()
-plt.show()
 
 print("Stress-Strain Analysis of Woodpecker Skull:")
 print(f"Applied stress: {stress_applied/1e6:.1f} MPa (from {F_impact}N over {area*1e4:.0f} cm^2)")
@@ -326,7 +167,6 @@ Together, these systems form a **multi-stage energy absorber** — each layer re
       checkAnswer: 'Initial damping force = c * v = 500 * 7 = 3500 N. Energy removed by damping over the impact is approximately integral of F * v * dt. Using a simple estimate: E_damp ~ c * v^2 * dt / 2 = 500 * 49 * 0.0005 / 2 = 6.1 J. The actual impact energy is 0.5 * 0.05 * 49 = 1.225 J, so the damping coefficient would need to be much smaller in reality. This shows why modeling requires careful parameter fitting — which is exactly what engineers do.',
       codeIntro: 'Simulate a multi-layer shock absorber inspired by the woodpecker skull, showing how each layer attenuates the impact.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Simulate multi-layer shock absorption
 # Model each layer as a spring-damper system (Kelvin-Voigt model)
@@ -376,104 +216,8 @@ for i in range(1, n_steps):
 
         F_transmitted[j, i] = F_ext
 
-        # Spring-damper restoring force (grounded)
-        F_restore = -k * x[j, i-1] - c * v[j, i-1]
 
-        a = (F_ext + F_restore) / m
-        v[j, i] = v[j, i-1] + a * dt
-        x[j, i] = x[j, i-1] + v[j, i] * dt
-
-fig, axes = plt.subplots(2, 2, figsize=(13, 10))
-fig.patch.set_facecolor('#1f2937')
-
-# Plot 1: Force transmitted through each layer
-ax = axes[0, 0]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-
-ax.plot(t * 1000, F_input, color='white', linewidth=2, linestyle='--', label='Input pulse', alpha=0.5)
-for j, layer in enumerate(layers):
-    ax.plot(t * 1000, F_transmitted[j], color=layer['color'], linewidth=1.5, label=layer['name'])
-
-ax.set_xlabel('Time (ms)', color='white')
-ax.set_ylabel('Force (N)', color='white')
-ax.set_title('Force attenuation through layers', color='white', fontsize=11)
-ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-
-# Plot 2: Peak force reduction
-ax = axes[0, 1]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-
-peak_forces = [np.max(np.abs(F_transmitted[j])) for j in range(n_layers)]
-peak_forces_pct = [pf / F_peak * 100 for pf in peak_forces]
-layer_names = [l['name'] for l in layers]
-layer_colors = [l['color'] for l in layers]
-
-bars = ax.bar(range(n_layers), peak_forces_pct, color=layer_colors, alpha=0.8)
-ax.set_xticks(range(n_layers))
-ax.set_xticklabels([l['name'].split('(')[0].strip() for l in layers], color='white', fontsize=8, rotation=15)
-ax.set_ylabel('Peak force (% of input)', color='white')
-ax.set_title('Peak force at each layer', color='white', fontsize=11)
-
-for bar, pct in zip(bars, peak_forces_pct):
-    ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1,
-            f'{pct:.1f}%', ha='center', va='bottom', color='white', fontsize=8)
-
-# Plot 3: Displacement of each layer
-ax = axes[1, 0]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-
-for j, layer in enumerate(layers):
-    ax.plot(t * 1000, x[j] * 1e6, color=layer['color'], linewidth=1.5, label=layer['name'])
-
-ax.set_xlabel('Time (ms)', color='white')
-ax.set_ylabel('Displacement (micrometers)', color='white')
-ax.set_title('Layer displacements during impact', color='white', fontsize=11)
-ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-
-# Plot 4: Energy budget
-ax = axes[1, 1]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-
-# Calculate energy absorbed by each layer's damper
-energy_damped = []
-for j in range(n_layers):
-    c = layers[j]['c']
-    power = c * v[j] ** 2
-    E = np.trapz(power, t)
-    energy_damped.append(E)
-
-E_input = np.trapz(F_input * v[0], t)
-energy_total_damped = sum(energy_damped)
-
-bars = ax.bar(range(n_layers), [e * 1000 for e in energy_damped], color=layer_colors, alpha=0.8)
-ax.set_xticks(range(n_layers))
-ax.set_xticklabels([l['name'].split('(')[0].strip() for l in layers], color='white', fontsize=8, rotation=15)
-ax.set_ylabel('Energy absorbed (mJ)', color='white')
-ax.set_title('Energy dissipated per layer', color='white', fontsize=11)
-
-for bar, e in zip(bars, energy_damped):
-    ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.1,
-            f'{e*1000:.2f} mJ', ha='center', va='bottom', color='white', fontsize=7)
-
-plt.tight_layout()
-plt.show()
-
-print("Multi-Layer Shock Absorption Summary:")
-print(f"Input peak force: {F_peak:.0f} N")
-print(f"Force reaching brain: {peak_forces[-1]:.1f} N ({peak_forces_pct[-1]:.1f}% of input)")
-print(f"Total attenuation: {100 - peak_forces_pct[-1]:.1f}%")
-print()
-print(f"{'Layer':<25} {'Peak F (N)':>12} {'% of input':>12} {'E absorbed (mJ)':>16}")
-print("-" * 68)
-for j in range(n_layers):
-    print(f"{layers[j]['name']:<25} {peak_forces[j]:>12.1f} {peak_forces_pct[j]:>12.1f} {energy_damped[j]*1000:>16.3f}")
-print()
-print("Key insight: the spongy bone and CSF layers do the most absorption.")
-print("This matches real woodpecker CT scans — these are the thickest layers.")`,
+print("\n[Full visualization in playground]")`,
       challenge: 'Remove the spongy bone layer from the simulation (set its damping to near zero). How much more force reaches the brain? This models what happens with a concussion — when the absorption system fails.',
       successHint: 'Multi-stage energy absorption is the core principle behind all protective equipment. Motorcycle helmets use the same layered approach: hard shell, EPS foam, comfort liner, and a gap for the skull. The woodpecker invented this design millions of years ago.',
     },
@@ -496,7 +240,6 @@ These geometric optimizations can be quantified using **moment of inertia** calc
       checkAnswer: 'A glancing blow creates rotational (angular) acceleration, which subjects brain tissue to shear strain. Brain tissue is much weaker in shear than in compression. The brain can tolerate ~100g of linear acceleration but only ~5,000 rad/s^2 of angular acceleration before injury. The woodpecker avoids this by ensuring perfectly linear impacts — the beak acts as a guide rail that eliminates rotation.',
       codeIntro: 'Model skull geometry effects on stress distribution, comparing the woodpecker\'s optimized shape to a spherical skull.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Model 2D skull cross-sections and stress distribution
 theta = np.linspace(0, 2 * np.pi, 360)
@@ -518,141 +261,6 @@ y_wp = r_wp * np.sin(theta)
 thickness_sphere = np.ones_like(theta) * 2.0  # uniform 2 mm
 thickness_wp = 2.0 + 2.0 * np.cos(theta / 2) ** 4  # thicker at front (theta=0)
 
-fig, axes = plt.subplots(2, 3, figsize=(15, 10))
-fig.patch.set_facecolor('#1f2937')
-
-# Plot 1: Skull shapes comparison
-ax = axes[0, 0]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-ax.plot(x_sphere * 1000, y_sphere * 1000, color='#3b82f6', linewidth=2, label='Spherical (human-like)')
-ax.plot(x_wp * 1000, y_wp * 1000, color='#22c55e', linewidth=2, label='Elongated (woodpecker)')
-ax.set_xlabel('x (mm)', color='white')
-ax.set_ylabel('y (mm)', color='white')
-ax.set_title('Skull cross-section shapes', color='white', fontsize=11)
-ax.set_aspect('equal')
-ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax.annotate('Impact', xy=(35, 0), fontsize=9, color='#ef4444', ha='center',
-            arrowprops=dict(arrowstyle='->', color='#ef4444', lw=2),
-            xytext=(45, 0))
-
-# Plot 2: Thickness profiles
-ax = axes[0, 1]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-angle_deg = np.degrees(theta)
-ax.plot(angle_deg, thickness_sphere, color='#3b82f6', linewidth=2, label='Spherical (uniform)')
-ax.plot(angle_deg, thickness_wp, color='#22c55e', linewidth=2, label='Woodpecker (graded)')
-ax.set_xlabel('Angle from impact point (degrees)', color='white')
-ax.set_ylabel('Skull thickness (mm)', color='white')
-ax.set_title('Thickness distribution', color='white', fontsize=11)
-ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax.axvline(0, color='#ef4444', linestyle='--', alpha=0.5, label='Impact point')
-ax.axvline(180, color='gray', linestyle='--', alpha=0.3)
-
-# Plot 3: Stress distribution on skull surface
-ax = axes[0, 2]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-
-# Simplified stress model: stress ~ F/(thickness * local_radius_of_curvature)
-F_impact = 50  # N
-
-# Curvature for sphere
-curvature_sphere = 1.0 / r_sphere * np.ones_like(theta)
-
-# Curvature for woodpecker (approximate from parametric)
-dx = np.gradient(x_wp, theta)
-dy = np.gradient(y_wp, theta)
-ddx = np.gradient(dx, theta)
-ddy = np.gradient(dy, theta)
-curvature_wp = np.abs(dx * ddy - dy * ddx) / (dx**2 + dy**2)**1.5
-
-# Stress proportional to curvature / thickness (simplified)
-# Add cosine weighting for distance from impact point
-weight = np.maximum(np.cos(theta), 0)  # only front hemisphere loaded
-
-stress_sphere = F_impact * curvature_sphere * weight / (thickness_sphere * 1e-3)
-stress_wp = F_impact * curvature_wp * weight / (thickness_wp * 1e-3)
-
-# Normalize
-stress_sphere /= np.max(stress_sphere) if np.max(stress_sphere) > 0 else 1
-stress_wp /= np.max(stress_wp) if np.max(stress_wp) > 0 else 1
-
-ax.plot(angle_deg, stress_sphere, color='#3b82f6', linewidth=2, label='Spherical')
-ax.plot(angle_deg, stress_wp, color='#22c55e', linewidth=2, label='Woodpecker')
-ax.set_xlabel('Angle from impact (degrees)', color='white')
-ax.set_ylabel('Normalized stress', color='white')
-ax.set_title('Stress distribution on skull', color='white', fontsize=11)
-ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-
-# Plot 4: Rotational vs linear acceleration comparison
-ax = axes[1, 0]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-
-angles_of_impact = np.linspace(0, 45, 100)  # degrees off-center
-linear_g = 1200 * np.cos(np.radians(angles_of_impact))
-rotational = 1200 * np.sin(np.radians(angles_of_impact))
-
-ax.plot(angles_of_impact, linear_g, color='#22c55e', linewidth=2, label='Linear acceleration (g)')
-ax.plot(angles_of_impact, rotational, color='#ef4444', linewidth=2, label='Rotational component (g-equiv)')
-ax.axhline(100, color='#f59e0b', linestyle='--', alpha=0.7, label='Concussion threshold (linear)')
-ax.fill_between(angles_of_impact, 0, rotational, alpha=0.1, color='#ef4444')
-ax.set_xlabel('Impact angle off-center (degrees)', color='white')
-ax.set_ylabel('Acceleration (g)', color='white')
-ax.set_title('Why straight strikes matter', color='white', fontsize=11)
-ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-
-# Plot 5: Moment of inertia comparison
-ax = axes[1, 1]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-
-# Brain fit comparison: loose (human-like) vs tight (woodpecker)
-brain_radii = np.linspace(0, 0.025, 100)
-csf_gap_human = 0.003  # 3mm gap
-csf_gap_woodpecker = 0.001  # 1mm gap
-
-# Brain displacement for given impact (simplified spring model)
-k_csf = 1e4  # N/m spring constant of CSF
-displacement_human = F_impact / k_csf * (csf_gap_human / 0.003)
-displacement_wp = F_impact / k_csf * (csf_gap_woodpecker / 0.003)
-
-categories = ['Human-like\\n(3mm CSF gap)', 'Woodpecker\\n(1mm CSF gap)']
-displacements = [displacement_human * 1e3, displacement_wp * 1e3]
-colors_bar = ['#3b82f6', '#22c55e']
-
-bars = ax.bar(categories, displacements, color=colors_bar, alpha=0.8, width=0.5)
-ax.set_ylabel('Brain displacement (mm)', color='white')
-ax.set_title('Brain slosh during impact', color='white', fontsize=11)
-
-for bar, d in zip(bars, displacements):
-    ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.05,
-            f'{d:.2f} mm', ha='center', va='bottom', color='white', fontsize=9)
-
-# Plot 6: Combined protection score
-ax = axes[1, 2]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-
-features = ['Beak\\nalignment', 'Skull\\nthickness', 'Brain\\nfit', 'Hyoid\\nwrap', 'Spongy\\nbone']
-human_scores = [0.3, 0.5, 0.4, 0.0, 0.3]
-wp_scores = [0.95, 0.9, 0.9, 1.0, 0.85]
-
-x_pos = np.arange(len(features))
-width = 0.35
-ax.bar(x_pos - width/2, human_scores, width, color='#3b82f6', alpha=0.8, label='Human')
-ax.bar(x_pos + width/2, wp_scores, width, color='#22c55e', alpha=0.8, label='Woodpecker')
-ax.set_xticks(x_pos)
-ax.set_xticklabels(features, color='white', fontsize=7)
-ax.set_ylabel('Protection score', color='white')
-ax.set_title('Geometric protection features', color='white', fontsize=11)
-ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax.set_ylim(0, 1.15)
-
-plt.tight_layout()
-plt.show()
 
 print("Skull Biomechanics Summary:")
 print()
@@ -688,7 +296,6 @@ For woodpecker skull materials, the relaxation time is tuned to the drumming fre
       checkAnswer: 'Stress fraction remaining = exp(-50/30) = exp(-1.67) = 0.189. So about 81% of the stress has relaxed before the next strike. The material recovers most of its capacity between impacts. If the woodpecker drummed at 50 Hz (20 ms period), only exp(-20/30) = 0.513 or 49% would relax — stress would accumulate dangerously. The 20 Hz frequency is optimized for the material\'s relaxation time.',
       codeIntro: 'Implement a Standard Linear Solid viscoelastic model and simulate the woodpecker\'s repeated impact loading to show stress recovery between strikes.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Standard Linear Solid (SLS) viscoelastic model
 # sigma + tau_r * dsigma/dt = E_R * (epsilon + tau_c * depsilon/dt)
@@ -732,119 +339,14 @@ for i in range(1, n):
     dsigma = (E_R * (strain[i] + tau_c * strain_dot[i]) - stress[i-1]) / tau_r
     stress[i] = stress[i-1] + dsigma * dt_sim
 
-fig, axes = plt.subplots(2, 3, figsize=(15, 10))
-fig.patch.set_facecolor('#1f2937')
-
-# Plot 1: Strain input (repeated impacts)
-ax = axes[0, 0]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-ax.plot(t * 1000, strain * 100, color='#3b82f6', linewidth=1)
-ax.set_xlabel('Time (ms)', color='white')
-ax.set_ylabel('Strain (%)', color='white')
-ax.set_title('Repeated impact strain pulses', color='white', fontsize=11)
-
-# Plot 2: Stress response
-ax = axes[0, 1]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-ax.plot(t * 1000, stress / 1e6, color='#ef4444', linewidth=1)
-ax.set_xlabel('Time (ms)', color='white')
-ax.set_ylabel('Stress (MPa)', color='white')
-ax.set_title('Viscoelastic stress response', color='white', fontsize=11)
-
-# Plot 3: Stress relaxation test
-ax = axes[0, 2]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-
-t_relax = np.linspace(0, 0.2, 1000)
-# SLS relaxation: E(t) = E_R + (E_inst - E_R) * exp(-t/tau_r)
-E_t = E_R + (E_inst - E_R) * np.exp(-t_relax / tau_r)
-ax.plot(t_relax * 1000, E_t / 1e9, color='#a855f7', linewidth=2)
-ax.axhline(E_R / 1e9, color='gray', linestyle='--', alpha=0.5, label=f'E_relaxed = {E_R/1e9:.2f} GPa')
-ax.axhline(E_inst / 1e9, color='gray', linestyle=':', alpha=0.5, label=f'E_instant = {E_inst/1e9:.2f} GPa')
-ax.set_xlabel('Time (ms)', color='white')
-ax.set_ylabel('Relaxation modulus (GPa)', color='white')
-ax.set_title('Stress relaxation function', color='white', fontsize=11)
-ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-
-# Plot 4: Effect of drumming frequency
-ax = axes[1, 0]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-
-frequencies = [10, 15, 20, 25, 30, 40, 50]
-residual_stress_pct = []
-for freq in frequencies:
-    period = 1.0 / freq
-    recovery_time = period - strike_duration
-    residual = np.exp(-recovery_time / tau_r)
-    # After many strikes, stress accumulates: sum of geometric series
-    n_strikes = 20
-    accumulated = sum(residual**k for k in range(n_strikes))
-    residual_stress_pct.append(residual * 100)
-
-ax.bar(range(len(frequencies)), residual_stress_pct,
-       color=['#22c55e' if f <= 25 else '#f59e0b' if f <= 35 else '#ef4444' for f in frequencies],
-       alpha=0.8)
-ax.set_xticks(range(len(frequencies)))
-ax.set_xticklabels([f'{f} Hz' for f in frequencies], color='white', fontsize=8)
-ax.set_ylabel('Residual stress before next strike (%)', color='white')
-ax.set_title('Recovery vs drumming frequency', color='white', fontsize=11)
-ax.axvline(2, color='#22c55e', linestyle='--', alpha=0.5)
-ax.text(2, max(residual_stress_pct) * 0.9, 'Actual\\nfrequency', ha='center', color='#22c55e', fontsize=8)
-
-# Plot 5: Elastic vs viscoelastic comparison
-ax = axes[1, 1]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-
-# Zoom into one strike
-strike_idx = (t >= 0.06) & (t <= 0.08)
-t_strike = (t[strike_idx] - 0.06) * 1000
-s_strike = strain[strike_idx]
-stress_ve = stress[strike_idx]
-stress_elastic = E_inst * s_strike  # purely elastic response
-
-ax.plot(t_strike, stress_elastic / 1e6, color='#3b82f6', linewidth=2, label='Elastic (no damping)')
-ax.plot(t_strike, stress_ve / 1e6, color='#ef4444', linewidth=2, label='Viscoelastic (SLS)')
-ax.fill_between(t_strike, stress_elastic / 1e6, stress_ve / 1e6, alpha=0.2, color='#f59e0b',
-                label='Energy dissipated')
-ax.set_xlabel('Time within strike (ms)', color='white')
-ax.set_ylabel('Stress (MPa)', color='white')
-ax.set_title('Energy dissipation per strike', color='white', fontsize=11)
-ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-
-# Plot 6: Hysteresis loop (stress-strain during one cycle)
-ax = axes[1, 2]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-
-ax.plot(s_strike * 100, stress_ve / 1e6, color='#a855f7', linewidth=2)
-ax.fill(s_strike * 100, stress_ve / 1e6, alpha=0.2, color='#a855f7')
-ax.set_xlabel('Strain (%)', color='white')
-ax.set_ylabel('Stress (MPa)', color='white')
-ax.set_title('Hysteresis loop (energy loss)', color='white', fontsize=11)
-ax.text(0.5, max(stress_ve / 1e6) * 0.5, 'Area = energy\\ndissipated as heat',
-        color='white', fontsize=9, ha='center',
-        bbox=dict(boxstyle='round', facecolor='#1f2937', edgecolor='#a855f7'))
-
-plt.tight_layout()
-plt.show()
 
 print()
 print("Viscoelastic Material Summary:")
 print(f"Instantaneous modulus: {E_inst/1e9:.2f} GPa (stiff during impact)")
 print(f"Relaxed modulus: {E_R/1e9:.2f} GPa (soft at equilibrium)")
 print(f"Ratio: {E_inst/E_R:.1f}x stiffer during impact than at rest")
-print(f"Relaxation time: {tau_r*1000:.1f} ms")
-print()
-print(f"At 20 Hz drumming: {np.exp(-0.05/tau_r)*100:.1f}% residual stress before next strike")
-print(f"At 50 Hz drumming: {np.exp(-0.02/tau_r)*100:.1f}% residual stress (DANGER)")
-print()
-print("The drumming frequency is tuned to the material relaxation time.")
-print("This is co-evolution of behavior and biomechanics.")`,
+
+print("\n[Full visualization in playground]")`,
       challenge: 'Modify the viscosity (eta) to find the relaxation time that would make 50 Hz drumming safe (less than 20% residual stress). How does this change the instantaneous stiffness of the material?',
       successHint: 'Viscoelasticity is everywhere in biology — skin, cartilage, tendons, blood vessel walls. It is also the basis of engineered materials like memory foam, polymer dashpots in buildings, and the EPS foam in bicycle helmets. Understanding rate-dependent behavior is essential for any impact protection design.',
     },
@@ -867,7 +369,6 @@ For a woodpecker skull FEA model, researchers use CT scans to get the geometry, 
       checkAnswer: '300 nodes x 2 DOF = 600 equations. The stiffness matrix [K_global] is 600x600. Each triangular element contributes a 6x6 local stiffness matrix (3 nodes x 2 DOF). The assembly process maps these local matrices into the global matrix at the correct positions. Modern FEA models of skulls use millions of elements, producing millions of equations that require parallel computing.',
       codeIntro: 'Build a simplified 2D finite element analysis of a skull cross-section under impact loading, visualizing stress distribution.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Simplified 2D FEA: bar elements forming a skull-like arch
 # Each bar element has stiffness k = E*A/L
@@ -917,205 +418,8 @@ for e in range(n_elements):
     # Transformation to global coordinates
     T = np.array([
         [ c*c,  c*s, -c*c, -c*s],
-        [ c*s,  s*s, -c*s, -s*s],
-        [-c*c, -c*s,  c*c,  c*s],
-        [-c*s, -s*s,  c*s,  s*s]
-    ])
 
-    k_global = k * T
-
-    # DOF mapping
-    dofs = [2*n1, 2*n1+1, 2*n2, 2*n2+1]
-    for i in range(4):
-        for j in range(4):
-            K_global[dofs[i], dofs[j]] += k_global[i, j]
-
-# Apply boundary conditions
-# Fix both ends (where skull meets neck)
-fixed_dofs = [0, 1, 2*(n_nodes-1), 2*(n_nodes-1)+1]
-
-# Apply impact force at top of arch
-impact_node = n_nodes // 2
-F_global = np.zeros(n_dof)
-F_global[2 * impact_node + 1] = -500  # 500 N downward
-
-# Remove fixed DOFs and solve
-free_dofs = [d for d in range(n_dof) if d not in fixed_dofs]
-K_free = K_global[np.ix_(free_dofs, free_dofs)]
-F_free = F_global[free_dofs]
-
-u_free = np.linalg.solve(K_free, F_free)
-
-# Reconstruct full displacement vector
-u_global = np.zeros(n_dof)
-for i, dof in enumerate(free_dofs):
-    u_global[dof] = u_free[i]
-
-# Calculate element stresses
-stresses = np.zeros(n_elements)
-for e in range(n_elements):
-    n1, n2 = e, e + 1
-    dx = nodes[n2, 0] - nodes[n1, 0]
-    dy = nodes[n2, 1] - nodes[n1, 1]
-    L = np.sqrt(dx**2 + dy**2)
-    c = dx / L
-    s = dy / L
-
-    u1x, u1y = u_global[2*n1], u_global[2*n1+1]
-    u2x, u2y = u_global[2*n2], u_global[2*n2+1]
-
-    # Axial strain
-    delta_L = (u2x - u1x) * c + (u2y - u1y) * s
-    strain_e = delta_L / L
-    stresses[e] = E_profile[e] * strain_e
-
-fig, axes = plt.subplots(2, 3, figsize=(15, 10))
-fig.patch.set_facecolor('#1f2937')
-
-# Plot 1: Mesh and deformed shape
-ax = axes[0, 0]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-
-scale = 500  # amplify deformation for visibility
-deformed_x = nodes[:, 0] + u_global[0::2] * scale
-deformed_y = nodes[:, 1] + u_global[1::2] * scale
-
-ax.plot(nodes[:, 0] * 1000, nodes[:, 1] * 1000, 'o-', color='#3b82f6', linewidth=1.5,
-        markersize=4, label='Original', alpha=0.5)
-ax.plot(deformed_x * 1000, deformed_y * 1000, 'o-', color='#ef4444', linewidth=1.5,
-        markersize=4, label=f'Deformed (x{scale})')
-ax.annotate('F = 500N', xy=(nodes[impact_node, 0]*1000, nodes[impact_node, 1]*1000 + 2),
-            color='#f59e0b', fontsize=9, ha='center',
-            arrowprops=dict(arrowstyle='->', color='#f59e0b', lw=2))
-ax.set_xlabel('x (mm)', color='white')
-ax.set_ylabel('y (mm)', color='white')
-ax.set_title('FEA mesh + deformed shape', color='white', fontsize=11)
-ax.set_aspect('equal')
-ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-
-# Plot 2: Stress distribution along arch
-ax = axes[0, 1]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-
-element_positions = np.degrees(angles[:-1] + np.diff(angles) / 2)
-colors_stress = ['#ef4444' if s < 0 else '#22c55e' for s in stresses]
-ax.bar(range(n_elements), stresses / 1e6, color=colors_stress, alpha=0.8)
-ax.set_xlabel('Element index (0=left, 12=top, 24=right)', color='white')
-ax.set_ylabel('Stress (MPa)', color='white')
-ax.set_title('Stress in each element', color='white', fontsize=11)
-ax.axhline(0, color='gray', linestyle='-', alpha=0.3)
-
-# Plot 3: Stress mapped onto geometry (color map)
-ax = axes[0, 2]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-
-stress_norm = np.abs(stresses) / np.max(np.abs(stresses))
-for e in range(n_elements):
-    n1, n2 = e, e + 1
-    color_val = plt.cm.hot(stress_norm[e])
-    ax.plot([nodes[n1, 0]*1000, nodes[n2, 0]*1000],
-            [nodes[n1, 1]*1000, nodes[n2, 1]*1000],
-            color=color_val, linewidth=3 + thickness_profile[e] * 2000)
-
-sm = plt.cm.ScalarMappable(cmap='hot', norm=plt.Normalize(0, np.max(np.abs(stresses))/1e6))
-cbar = plt.colorbar(sm, ax=ax, label='|Stress| (MPa)')
-cbar.ax.yaxis.label.set_color('white')
-cbar.ax.tick_params(colors='gray')
-ax.set_xlabel('x (mm)', color='white')
-ax.set_ylabel('y (mm)', color='white')
-ax.set_title('Stress heat map on skull', color='white', fontsize=11)
-ax.set_aspect('equal')
-
-# Plot 4: Displacement magnitude
-ax = axes[1, 0]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-
-disp_mag = np.sqrt(u_global[0::2]**2 + u_global[1::2]**2) * 1e6  # micrometers
-ax.plot(np.degrees(angles), disp_mag, 'o-', color='#a855f7', linewidth=2, markersize=4)
-ax.set_xlabel('Angle along arch (degrees)', color='white')
-ax.set_ylabel('Displacement (micrometers)', color='white')
-ax.set_title('Nodal displacement magnitude', color='white', fontsize=11)
-
-# Plot 5: Stiffness matrix sparsity pattern
-ax = axes[1, 1]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-
-ax.spy(K_global, markersize=1, color='#06b6d4')
-ax.set_xlabel('DOF index', color='white')
-ax.set_ylabel('DOF index', color='white')
-ax.set_title(f'Stiffness matrix ({n_dof}x{n_dof})', color='white', fontsize=11)
-
-# Plot 6: Effect of variable vs uniform properties
-ax = axes[1, 2]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-
-# Solve again with uniform properties
-K_uniform = np.zeros((n_dof, n_dof))
-E_uniform = np.mean(E_profile)
-A_uniform = np.mean(areas)
-
-for e in range(n_elements):
-    n1, n2 = e, e + 1
-    dx = nodes[n2, 0] - nodes[n1, 0]
-    dy = nodes[n2, 1] - nodes[n1, 1]
-    L = np.sqrt(dx**2 + dy**2)
-    c, s = dx / L, dy / L
-    k = E_uniform * A_uniform / L
-    T = np.array([[c*c, c*s, -c*c, -c*s], [c*s, s*s, -c*s, -s*s],
-                  [-c*c, -c*s, c*c, c*s], [-c*s, -s*s, c*s, s*s]])
-    dofs = [2*n1, 2*n1+1, 2*n2, 2*n2+1]
-    for i in range(4):
-        for j in range(4):
-            K_uniform[dofs[i], dofs[j]] += k * T[i, j]
-
-K_u_free = K_uniform[np.ix_(free_dofs, free_dofs)]
-u_u_free = np.linalg.solve(K_u_free, F_free)
-u_uniform = np.zeros(n_dof)
-for i, dof in enumerate(free_dofs):
-    u_uniform[dof] = u_u_free[i]
-
-stresses_uniform = np.zeros(n_elements)
-for e in range(n_elements):
-    n1, n2 = e, e + 1
-    dx = nodes[n2, 0] - nodes[n1, 0]
-    dy = nodes[n2, 1] - nodes[n1, 1]
-    L = np.sqrt(dx**2 + dy**2)
-    c, s = dx / L, dy / L
-    delta_L = (u_uniform[2*n2] - u_uniform[2*n1]) * c + (u_uniform[2*n2+1] - u_uniform[2*n1+1]) * s
-    stresses_uniform[e] = E_uniform * delta_L / L
-
-ax.plot(range(n_elements), np.abs(stresses) / 1e6, 'o-', color='#22c55e', linewidth=2,
-        markersize=3, label='Variable (woodpecker)')
-ax.plot(range(n_elements), np.abs(stresses_uniform) / 1e6, 'o-', color='#ef4444', linewidth=2,
-        markersize=3, label='Uniform (naive)')
-ax.set_xlabel('Element index', color='white')
-ax.set_ylabel('|Stress| (MPa)', color='white')
-ax.set_title('Graded vs uniform material', color='white', fontsize=11)
-ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-
-plt.tight_layout()
-plt.show()
-
-print("FEA Summary:")
-print(f"Mesh: {n_nodes} nodes, {n_elements} elements, {n_dof} DOFs")
-print(f"Stiffness matrix: {n_dof}x{n_dof} = {n_dof**2} entries")
-print(f"Non-zero entries: {np.count_nonzero(K_global)} (sparse!)")
-print()
-print(f"Peak stress (variable properties): {np.max(np.abs(stresses))/1e6:.1f} MPa")
-print(f"Peak stress (uniform properties): {np.max(np.abs(stresses_uniform))/1e6:.1f} MPa")
-print(f"Stress reduction from graded design: {(1 - np.max(np.abs(stresses))/np.max(np.abs(stresses_uniform)))*100:.1f}%")
-print()
-print(f"Max displacement at impact: {disp_mag[impact_node]:.2f} micrometers")
-print()
-print("The graded material design reduces peak stress significantly.")
-print("This is the same principle used in modern helmet design: vary")
-print("material properties spatially to optimize stress distribution.")`,
+print("\n[Full visualization in playground]")`,
       challenge: 'Add more nodes to the mesh (try n_nodes = 50 and 100). How does the stress distribution change? Does the solution converge? Plot stress vs mesh refinement to demonstrate FEA convergence.',
       successHint: 'You just built a finite element solver from scratch. Commercial FEA software like ANSYS, Abaqus, and COMSOL do exactly this, but with millions of 3D elements, nonlinear materials, and dynamic loading. The principles are identical — discretize, assemble, solve. You now understand the engine behind every structural simulation in engineering.',
     },
@@ -1144,6 +448,7 @@ print("material properties spatially to optimize stress distribution.")`,
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
+            diagram={[WoodpeckerStressDistributionDiagram, WoodpeckerImpulseTheoryDiagram, WoodpeckerResonanceDiagram, WoodpeckerEnergyAbsorptionDiagram, WoodpeckerRotationalForceDiagram, WoodpeckerFatigueAnalysisDiagram][i] ? createElement([WoodpeckerStressDistributionDiagram, WoodpeckerImpulseTheoryDiagram, WoodpeckerResonanceDiagram, WoodpeckerEnergyAbsorptionDiagram, WoodpeckerRotationalForceDiagram, WoodpeckerFatigueAnalysisDiagram][i]) : undefined}
             pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
         ))}
       </div>

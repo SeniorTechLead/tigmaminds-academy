@@ -32,7 +32,7 @@ export default function DogVsCatDiagram() {
       </div>
 
       <div className="p-5">
-        <svg viewBox="0 0 600 340" className="w-full max-w-lg mx-auto" role="img" aria-label="Dogs vs cats classification">
+        <svg viewBox="0 0 630 357" className="w-full max-w-lg mx-auto" role="img" aria-label="Dogs vs cats classification">
           {/* Dog side */}
           <g transform="translate(20, 30)">
             <text x="50" y="0" textAnchor="middle" fontSize="40">🐕</text>

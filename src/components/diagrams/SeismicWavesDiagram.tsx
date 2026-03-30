@@ -1,7 +1,7 @@
 export default function SeismicWavesDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 500 250" className="w-full max-w-2xl mx-auto" role="img" aria-label="P-waves and S-waves comparison diagram">
+      <svg viewBox="0 0 580 292" className="w-full max-w-2xl mx-auto" role="img" aria-label="P-waves and S-waves comparison diagram">
         <defs>
           <marker id="sw-arrow" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
             <polygon points="0 0, 7 2.5, 0 5" className="fill-gray-500 dark:fill-gray-400" />

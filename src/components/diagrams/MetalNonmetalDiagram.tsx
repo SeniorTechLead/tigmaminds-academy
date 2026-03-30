@@ -43,7 +43,7 @@ export default function MetalNonmetalDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 500 300" className="w-full max-w-lg mx-auto" role="img" aria-label="Mini periodic table showing metals, nonmetals, and metalloids with staircase line">
+      <svg viewBox="0 0 525 343" className="w-full max-w-lg mx-auto" role="img" aria-label="Mini periodic table showing metals, nonmetals, and metalloids with staircase line">
         <text x="250" y="25" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="14" fontWeight="bold">Metals, Nonmetals &amp; Metalloids</text>
 
         {/* Metal cells */}

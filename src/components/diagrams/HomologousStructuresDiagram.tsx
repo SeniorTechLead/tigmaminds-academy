@@ -8,7 +8,7 @@ export default function HomologousStructuresDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 540 250" className="w-full max-w-xl mx-auto" role="img" aria-label="Homologous structures in four vertebrate forelimbs">
+      <svg viewBox="0 0 610 295" className="w-full max-w-xl mx-auto" role="img" aria-label="Homologous structures in four vertebrate forelimbs">
         {/* Title */}
         <text x="270" y="16" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">Homologous Structures — Same Bones, Different Functions</text>
 

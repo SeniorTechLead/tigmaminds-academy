@@ -1,11 +1,11 @@
 import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Cpu } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
-import LatLongGridDiagram from '../diagrams/LatLongGridDiagram';
-import ContourMapDiagram from '../diagrams/ContourMapDiagram';
-import MapProjectionDiagram from '../diagrams/MapProjectionDiagram';
-import CoordinatePlaneDiagram from '../diagrams/CoordinatePlaneDiagram';
-import LinearGraphDiagram from '../diagrams/LinearGraphDiagram';
+import MapMercatorMathDiagram from '../diagrams/MapMercatorMathDiagram';
+import MapInterpolationDiagram from '../diagrams/MapInterpolationDiagram';
+import MapVectorRasterDiagram from '../diagrams/MapVectorRasterDiagram';
+import MapBufferOverlayDiagram from '../diagrams/MapBufferOverlayDiagram';
+import MapNetworkDiagram from '../diagrams/MapNetworkDiagram';
 import NEIndiaBiomesDiagram from '../diagrams/NEIndiaBiomesDiagram';
 
 export default function MapMakerLevel3() {

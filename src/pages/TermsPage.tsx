@@ -12,144 +12,132 @@ export default function TermsPage() {
             <FileText className="w-12 h-12 text-sky-600" />
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Terms of Service</h1>
           </div>
-          <p className="text-gray-600 dark:text-gray-400 mb-8">Last Updated: January 27, 2025</p>
+          <p className="text-gray-600 dark:text-gray-400 mb-8">Last Updated: March 26, 2026</p>
 
           <div className="prose prose-lg dark:prose-invert max-w-none">
             <section className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">1. Agreement to Terms</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">1. What This Is</h2>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                By accessing or using the services provided by TigmaMinds Academy ("Academy," "we," "us," or "our"),
-                you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.
+                TigmaMinds Academy is an education platform that teaches STEM subjects through illustrated stories
+                from Northeast India. By using our website or enrolling in our programs, you agree to these terms.
+                If you are under 18, your parent or guardian must agree on your behalf.
               </p>
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">2. About Our Academy</h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
-                TigmaMinds Academy is an education technology company that teaches programming, AI, and robotics through
-                hands-on projects and expert-led instruction. We offer bootcamp and school programs designed to build
-                job-ready skills and creative confidence.
-              </p>
-            </section>
-
-            <section className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">3. Use of Website and Services</h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
-                When using our website and services, you agree to:
-              </p>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">2. What You Get</h2>
               <ul className="list-disc pl-6 text-gray-600 dark:text-gray-300 space-y-2 mb-4">
-                <li>Provide accurate and truthful information when applying for assistance or making inquiries</li>
-                <li>Respect the privacy and dignity of other students and community members</li>
-                <li>Use our services only for lawful purposes</li>
-                <li>Not misrepresent your circumstances or needs to obtain assistance</li>
+                <li><strong>Free access</strong> to all stories, lessons, reference materials, and interactive diagrams on the website</li>
+                <li><strong>In-browser Python coding</strong> powered by Pyodide — no installation required, runs entirely on your device</li>
+                <li><strong>Progress tracking</strong> across levels (Listener, Explorer, Builder, Engineer, Creator) when you create an account</li>
+                <li><strong>School and bootcamp programs</strong> with instructor-led sessions, available by application</li>
               </ul>
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">4. Program Participation</h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
-                If you participate in our assistance programs:
-              </p>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">3. Your Responsibilities</h2>
               <ul className="list-disc pl-6 text-gray-600 dark:text-gray-300 space-y-2 mb-4">
-                <li>You must meet the eligibility criteria for the specific program</li>
-                <li>You agree to provide necessary documentation to verify your need for assistance</li>
-                <li>You understand that resources are limited and distributed based on need and availability</li>
-                <li>You agree to use provided resources and support for their intended purposes</li>
-                <li>You will respect program staff, instructors, and other participants</li>
+                <li>Provide accurate information when creating an account or applying to a program</li>
+                <li>Keep your login credentials secure and do not share your account</li>
+                <li>Use the platform for learning — not for any harmful, illegal, or disruptive purpose</li>
+                <li>Treat other students, mentors, and staff with respect in any interactions</li>
+                <li>Do not attempt to access other users' accounts or data</li>
               </ul>
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">5. Payments and Fees</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">4. Content and Intellectual Property</h2>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                Regarding payments for our programs:
+                All content on this platform — stories, illustrations, lessons, diagrams, code examples, reference
+                materials, and the TigmaMinds name and logo — is owned by TigmaMinds Academy and protected by
+                copyright law.
+              </p>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
+                <strong>You may:</strong> Use the content for your own personal learning. Share links to our pages.
+                Reference our content in school projects with attribution.
+              </p>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
+                <strong>You may not:</strong> Copy, redistribute, or sell our content. Scrape our website. Use our
+                materials to create a competing product. Remove copyright notices.
+              </p>
+            </section>
+
+            <section className="mb-8">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">5. Your Code and Work</h2>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
+                Code you write in our Python environment runs in your browser and belongs to you. We do not claim
+                ownership of anything you create. Projects you build during bootcamp programs are yours to keep,
+                publish, and include in your portfolio.
+              </p>
+            </section>
+
+            <section className="mb-8">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">6. Program Enrollment</h2>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
+                For our school and bootcamp programs:
               </p>
               <ul className="list-disc pl-6 text-gray-600 dark:text-gray-300 space-y-2 mb-4">
-                <li>Program fees are outlined on the respective program pages</li>
-                <li>Payments are processed securely through authorized payment partners</li>
-                <li>Refund policies are specified in your enrollment agreement</li>
-                <li>We may offer scholarships or fee waivers at our discretion</li>
+                <li>Enrollment is subject to eligibility criteria and available capacity</li>
+                <li>Program fees, if any, are communicated before enrollment. Scholarships may be available.</li>
+                <li>We reserve the right to remove a participant who violates our code of conduct</li>
+                <li>Completion of a program does not guarantee employment or admission to any institution</li>
               </ul>
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">6. Intellectual Property Rights</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">7. Account Termination</h2>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                All content on our website, including text, images, logos, and educational materials, is the property of
-                TigmaMinds Academy and is protected by copyright and trademark laws. You may not:
+                You can delete your account at any time. We may suspend or terminate accounts that violate these
+                terms. If your account is terminated, you lose access to your progress data, but we will delete
+                your personal information within 30 days as described in our Privacy Policy.
               </p>
-              <ul className="list-disc pl-6 text-gray-600 dark:text-gray-300 space-y-2 mb-4">
-                <li>Use our name, logo, or branding without written permission</li>
-                <li>Reproduce our materials for commercial purposes</li>
-                <li>Claim ownership of or misrepresent the source of our content</li>
-                <li>Remove or modify any copyright or trademark notices</li>
-              </ul>
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">7. Privacy and Confidentiality</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">8. Disclaimers</h2>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                We are committed to protecting your privacy and the privacy of all students:
+                The platform is provided "as is." We strive for accuracy in our educational content but cannot
+                guarantee it is error-free. Our lessons are educational resources, not professional advice.
+                Science content reflects current understanding and may be updated as knowledge evolves.
               </p>
-              <ul className="list-disc pl-6 text-gray-600 dark:text-gray-300 space-y-2 mb-4">
-                <li>Personal information is collected and used in accordance with our Privacy Policy</li>
-                <li>Student information is kept confidential and shared only as necessary to deliver our programs</li>
-                <li>Photos or stories of students are shared only with explicit consent</li>
-                <li>We respect the privacy of all students and community members</li>
-              </ul>
-            </section>
-
-            <section className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">8. Disclaimer of Warranties</h2>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                While we strive to provide the best possible services and support:
+                We do not guarantee that the platform will be available 24/7 without interruption. We may take
+                the site down for maintenance, updates, or unforeseen issues.
               </p>
-              <ul className="list-disc pl-6 text-gray-600 dark:text-gray-300 space-y-2 mb-4">
-                <li>Our website and services are provided "as is" without warranties of any kind</li>
-                <li>We cannot guarantee specific outcomes from our programs</li>
-                <li>Program availability and resources are subject to funding and capacity limitations</li>
-                <li>We reserve the right to modify or discontinue programs as necessary</li>
-              </ul>
             </section>
 
             <section className="mb-8">
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">9. Limitation of Liability</h2>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                To the maximum extent permitted by law, TigmaMinds Academy shall not be liable for any indirect,
-                incidental, special, or consequential damages arising from your use of our services or participation in
-                our programs. We do our best to serve our community with care and integrity, but we cannot be held
-                responsible for outcomes beyond our reasonable control.
+                To the extent permitted by law, TigmaMinds Academy is not liable for indirect, incidental, or
+                consequential damages arising from your use of the platform. Our total liability is limited to
+                the amount you paid us in the 12 months before the claim (which may be zero for free users).
               </p>
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">10. Changes to Terms</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">10. Changes to These Terms</h2>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                We may update these Terms of Service from time to time. Changes will be posted on our website with an
-                updated "Last Updated" date. Continued use of our services after changes are posted constitutes acceptance
-                of the modified terms.
+                We may update these terms. Material changes will be communicated via the platform. Continued use
+                after changes are posted constitutes acceptance.
               </p>
             </section>
 
             <section className="mb-8">
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">11. Governing Law</h2>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                These Terms of Service are governed by the laws of India. Any disputes arising from these terms shall be
-                subject to the jurisdiction of the courts in Guwahati, Assam, India.
+                These terms are governed by the laws of India. Disputes will be resolved in the courts of
+                Guwahati, Assam.
               </p>
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">12. Contact Information</h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
-                If you have any questions about these Terms of Service, please contact us at:
-              </p>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">12. Contact</h2>
               <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
                 <p className="text-gray-900 dark:text-white font-semibold mb-2">TigmaMinds Academy</p>
                 <p className="text-gray-600 dark:text-gray-300">5, Bonbononi Path, Bongaon, Beltola</p>
-                <p className="text-gray-600 dark:text-gray-300">Guwahati, Assam-781028</p>
-                <p className="text-gray-600 dark:text-gray-300 mt-2">Email: info@tigmaminds.org</p>
-                <p className="text-gray-600 dark:text-gray-300">Phone: +91 96000 07705</p>
+                <p className="text-gray-600 dark:text-gray-300">Guwahati, Assam 781028, India</p>
+                <p className="text-gray-600 dark:text-gray-300 mt-2">Email: hello@tigmaminds.academy</p>
               </div>
             </section>
           </div>

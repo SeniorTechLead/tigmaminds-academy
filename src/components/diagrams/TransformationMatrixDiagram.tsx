@@ -7,7 +7,7 @@ export default function TransformationMatrixDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 400 350" className="w-full max-w-md mx-auto" role="img" aria-label="Transformation matrix diagram showing a unit square being transformed into a parallelogram">
+      <svg viewBox="0 0 440 395" className="w-full max-w-md mx-auto" role="img" aria-label="Transformation matrix diagram showing a unit square being transformed into a parallelogram">
         <text x="200" y="22" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">Matrix Transformation</text>
 
         {/* Grid */}

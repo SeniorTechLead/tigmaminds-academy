@@ -1,12 +1,12 @@
 import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Sparkles } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
-import NewtonForceDiagram from '../diagrams/NewtonForceDiagram';
-import CycloneCrossSectionDiagram from '../diagrams/CycloneCrossSectionDiagram';
-import PressureDepthDiagram from '../diagrams/PressureDepthDiagram';
-import MonsoonDiagram from '../diagrams/MonsoonDiagram';
-import BuoyancyDiagram from '../diagrams/BuoyancyDiagram';
-import WaterCycleDiagram from '../diagrams/WaterCycleDiagram';
+import StormWindPressureDiagram from '../diagrams/StormWindPressureDiagram';
+import StormFormationDiagram from '../diagrams/StormFormationDiagram';
+import StormAnatomyDiagram from '../diagrams/StormAnatomyDiagram';
+import StormCoriolisDiagram from '../diagrams/StormCoriolisDiagram';
+import StormSurgeCoastDiagram from '../diagrams/StormSurgeCoastDiagram';
+import StormWarningDiagram from '../diagrams/StormWarningDiagram';
 
 export default function FishermanStormLevel1() {
   const pyodideRef = useRef<any>(null);
@@ -216,132 +216,37 @@ print("\\nSST alone doesn't determine cyclones — wind shear matters too.")`,
       checkAnswer: 'The eye is a region of sinking air. As air spirals inward at the surface, the Coriolis effect prevents it from reaching the exact center — it curves around it, creating a wall of rising air (the eyewall). Inside this wall, air descends from the top. Sinking air warms (compression) and dries out, clearing the clouds. The eye is calm because the air is going DOWN, not up.',
       codeIntro: 'Model a cyclone\'s cross-section — wind speed, pressure, and temperature at different radii.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
-# Cyclone radial profiles (Holland 1980 model)
-# Pressure: P(r) = Pc + (Pn - Pc) * exp(-(Rm/r)^B)
-# Wind: V(r) = sqrt(B/rho * (Rm/r)^B * (Pn-Pc) * exp(-(Rm/r)^B) + (r*f/2)^2) - r*f/2
-
-r = np.linspace(1, 400, 500)  # radius in km
-Pc = 940   # central pressure (hPa)
-Pn = 1013  # environmental pressure (hPa)
-Rm = 40    # radius of max wind (km)
+# Holland 1980 cyclone model: pressure and wind vs distance from center
+r = np.linspace(1, 400, 200)  # distance in km
+Pc = 940   # central pressure (hPa) — lower = stronger
+Pn = 1013  # normal atmospheric pressure
+Rm = 40    # radius of maximum wind (km)
 B = 1.5    # shape parameter
-rho = 1.15 # air density (kg/m3)
-f = 5e-5   # Coriolis parameter
 
-# Pressure profile
+# Pressure rises as you move away from center
 pressure = Pc + (Pn - Pc) * np.exp(-(Rm / r) ** B)
 
-# Wind profile (simplified gradient wind)
-dp_dr = (Pn - Pc) * B * (Rm ** B) / (r ** (B + 1)) * np.exp(-(Rm / r) ** B) * 100  # Pa/km -> Pa/m (/1000 later)
-wind = np.sqrt(np.maximum(0, dp_dr * 1000 / rho)) / 1000 * 3600  # rough km/h conversion
-# Normalize to realistic values
-wind = wind / wind.max() * 220  # max wind ~220 km/h (Cat 4)
+# Wind peaks at the eyewall, then drops off both ways
+dp_dr = (Pn-Pc) * B * (Rm**B) / (r**(B+1)) * np.exp(-(Rm/r)**B)
+wind = np.sqrt(np.maximum(0, dp_dr * 100000 / 1.15)) * 3.6
+wind = wind / wind.max() * 220  # scale to realistic Cat 4
 
-fig, axes = plt.subplots(2, 2, figsize=(13, 10))
-fig.patch.set_facecolor('#1f2937')
+# Print the anatomy
+print("CYCLONE ANATOMY")
+print(f"  Eye: 0-{int(Rm*0.5)} km — calm, clear, sinking air")
+print(f"  Eyewall: ~{Rm} km — MAX wind {wind.max():.0f} km/h")
+print(f"  Rainbands: 100-300 km — widespread rain, gusty")
+print(f"  Central pressure: {Pc} hPa (drop of {Pn-Pc} hPa)")
+print()
 
-# Pressure profile
-ax1 = axes[0, 0]
-ax1.set_facecolor('#111827')
-ax1.plot(r, pressure, color='#3b82f6', linewidth=2)
-ax1.fill_between(r, pressure, Pn, alpha=0.1, color='#3b82f6')
-ax1.axhline(Pc, color='#ef4444', linestyle=':', alpha=0.5)
-ax1.annotate(f'Central pressure: {Pc} hPa', xy=(50, Pc+2), color='#ef4444', fontsize=9)
-ax1.set_xlabel('Radius from center (km)', color='white')
-ax1.set_ylabel('Pressure (hPa)', color='white')
-ax1.set_title('Pressure Profile', color='white', fontsize=12)
-ax1.tick_params(colors='gray')
+# How wind varies with distance
+for dist in [10, Rm, 100, 200, 300]:
+    idx = np.argmin(np.abs(r - dist))
+    print(f"  At {dist:3d} km: wind={wind[idx]:5.0f} km/h  pressure={pressure[idx]:.0f} hPa")
 
-# Wind profile
-ax2 = axes[0, 1]
-ax2.set_facecolor('#111827')
-ax2.plot(r, wind, color='#ef4444', linewidth=2)
-ax2.fill_between(r, wind, alpha=0.1, color='#ef4444')
-ax2.axvline(Rm, color='#f59e0b', linestyle='--')
-ax2.annotate(f'Eyewall: {Rm} km\\nMax wind: {wind.max():.0f} km/h', xy=(Rm, wind.max()),
-            xytext=(Rm+50, wind.max()-20), color='#f59e0b', fontsize=10,
-            arrowprops=dict(arrowstyle='->', color='#f59e0b'))
-ax2.set_xlabel('Radius from center (km)', color='white')
-ax2.set_ylabel('Wind speed (km/h)', color='white')
-ax2.set_title('Wind Speed Profile', color='white', fontsize=12)
-ax2.tick_params(colors='gray')
-
-# Cyclone structure (top-down view)
-ax3 = axes[1, 0]
-ax3.set_facecolor('#111827')
-theta = np.linspace(0, 2*np.pi, 200)
-
-# Draw rainbands (spiral)
-for band in range(4):
-    r_band = np.linspace(Rm + 30 + band*60, Rm + 80 + band*60, 200)
-    theta_band = theta + band * 0.8
-    x_band = r_band * np.cos(theta_band)
-    y_band = r_band * np.sin(theta_band)
-    ax3.plot(x_band, y_band, color='#3b82f6', alpha=0.3, linewidth=5)
-
-# Eyewall
-x_eye = Rm * np.cos(theta)
-y_eye = Rm * np.sin(theta)
-ax3.fill(x_eye, y_eye, color='#ef4444', alpha=0.4, label='Eyewall')
-
-# Eye
-eye_r = Rm * 0.5
-x_eye_inner = eye_r * np.cos(theta)
-y_eye_inner = eye_r * np.sin(theta)
-ax3.fill(x_eye_inner, y_eye_inner, color='#1f2937', label='Eye (calm)')
-
-ax3.set_xlim(-300, 300)
-ax3.set_ylim(-300, 300)
-ax3.set_title('Cyclone Structure (top view)', color='white', fontsize=12)
-ax3.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax3.set_xlabel('km', color='white')
-ax3.tick_params(colors='gray')
-ax3.set_aspect('equal')
-
-# Cross section (vertical)
-ax4 = axes[1, 1]
-ax4.set_facecolor('#111827')
-r_cross = np.linspace(-300, 300, 300)
-
-# Tropopause height (dips at eyewall due to warming)
-tropo = 15 - 2 * np.exp(-(np.abs(r_cross) - Rm)**2 / 500) + 3 * np.exp(-r_cross**2 / 200)
-
-# Updraft arrows in eyewall
-for sign in [-1, 1]:
-    r_ew = sign * Rm
-    ax4.annotate('', xy=(r_ew, 14), xytext=(r_ew, 2),
-                arrowprops=dict(arrowstyle='->', color='#ef4444', lw=2))
-    ax4.text(r_ew, 8, 'UP', color='#ef4444', fontsize=8, ha='center')
-
-# Downdraft in eye
-ax4.annotate('', xy=(0, 2), xytext=(0, 12),
-            arrowprops=dict(arrowstyle='->', color='#3b82f6', lw=2))
-ax4.text(0, 7, 'DOWN', color='#3b82f6', fontsize=8, ha='center')
-
-# Outflow arrows at top
-for sign in [-1, 1]:
-    ax4.annotate('', xy=(sign*200, 15), xytext=(sign*80, 14.5),
-                arrowprops=dict(arrowstyle='->', color='#f59e0b', lw=1.5))
-
-ax4.plot(r_cross, tropo, color='white', linewidth=1)
-ax4.fill_between(r_cross, 0, 2, color='#3b82f6', alpha=0.2, label='Ocean')
-ax4.set_xlabel('Radius (km)', color='white')
-ax4.set_ylabel('Height (km)', color='white')
-ax4.set_title('Vertical Cross-Section', color='white', fontsize=12)
-ax4.set_ylim(0, 18)
-ax4.tick_params(colors='gray')
-ax4.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-
-plt.tight_layout()
-plt.show()
-
-print("Cyclone anatomy:")
-print(f"  Eye radius: ~{Rm*0.5:.0f} km (calm, clear, sinking air)")
-print(f"  Eyewall radius: ~{Rm} km (max winds: {wind.max():.0f} km/h)")
-print(f"  Rainbands: extend to ~{300} km")
-print(f"  Central pressure: {Pc} hPa (drop of {Pn-Pc} hPa)")`,
+print("\\nKey: strongest winds are NOT at the center (eye is calm).")
+print("They're in the eyewall — the ring just outside the eye.")`,
       challenge: 'Change the central pressure from 940 to 970 hPa (a weaker storm). How do the wind speeds change? The pressure-wind relationship is not linear — explore why.',
       successHint: 'A cyclone\'s structure is an elegant physical machine. Understanding eye, eyewall, and rainbands is essential for interpreting satellite images, predicting storm impacts, and knowing when the danger is truly past (it\'s not over when the eye passes).',
     },
@@ -365,103 +270,31 @@ The Coriolis effect is zero at the equator and strongest at the poles. That's wh
       checkAnswer: 'They would collapse within hours. Without the Coriolis effect, air would flow directly from high to low pressure in straight lines. The low-pressure centers would fill immediately. No rotation = no spiral = no sustained storm. The Coriolis effect is what prevents the pressure equalization that would kill the storm. Earth\'s rotation is literally what keeps cyclones alive.',
       codeIntro: 'Visualize the Coriolis effect on air parcels moving toward a low-pressure center.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
-# Simulate air parcels moving toward a low-pressure center
-# with Coriolis effect
-dt = 0.1  # time step (hours)
-n_steps = 500
-f = 5e-5  # Coriolis parameter (mid-latitudes)
+# Simulate air parcels spiraling toward a low-pressure center
+# The Coriolis parameter controls the deflection
 
-# Multiple parcels starting from different directions
-n_parcels = 8
-start_angles = np.linspace(0, 2*np.pi, n_parcels, endpoint=False)
-start_radius = 300  # km from center
+lat = 15  # degrees (Bay of Bengal)
+f = 2 * 7.29e-5 * np.sin(np.radians(lat))  # Coriolis parameter
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 6))
-fig.patch.set_facecolor('#1f2937')
+# Without Coriolis: straight inward
+# With Coriolis: deflected right (N. Hemisphere) → spiral
 
-# WITH Coriolis effect (Northern Hemisphere)
-ax1.set_facecolor('#111827')
-colors = plt.cm.rainbow(np.linspace(0, 1, n_parcels))
+print("Coriolis Effect on Cyclone Spin")
+print(f"Latitude: {lat}°N")
+print(f"Coriolis parameter: {f:.2e} /s")
+print()
 
-for i, angle in enumerate(start_angles):
-    x = [start_radius * np.cos(angle)]
-    y = [start_radius * np.sin(angle)]
-    vx = -np.cos(angle) * 20  # initial velocity toward center
-    vy = -np.sin(angle) * 20
+# Show how deflection increases with latitude
+for lat_test in [0, 5, 10, 15, 20, 30]:
+    f_test = 2 * 7.29e-5 * np.sin(np.radians(lat_test))
+    spin = "NO spin" if lat_test < 5 else f"{'weak' if lat_test < 10 else 'strong'} counterclockwise"
+    print(f"  {lat_test:2d}°N: f = {f_test:.2e}  → {spin}")
 
-    for step in range(n_steps):
-        # Pressure gradient force (toward center)
-        r = np.sqrt(x[-1]**2 + y[-1]**2) + 0.1
-        pgf_x = -x[-1] / r * 0.5
-        pgf_y = -y[-1] / r * 0.5
-
-        # Coriolis force (perpendicular to velocity, rightward in NH)
-        cor_x = f * vy * 3600  # convert to consistent units
-        cor_y = -f * vx * 3600
-
-        # Friction
-        friction = 0.01
-        vx += (pgf_x + cor_x - friction * vx) * dt
-        vy += (pgf_y + cor_y - friction * vy) * dt
-
-        x.append(x[-1] + vx * dt)
-        y.append(y[-1] + vy * dt)
-
-    ax1.plot(x, y, color=colors[i], linewidth=1.5, alpha=0.7)
-    ax1.plot(x[0], y[0], 'o', color=colors[i], markersize=5)
-
-ax1.plot(0, 0, 'x', color='white', markersize=15, markeredgewidth=3)
-ax1.set_title('WITH Coriolis Effect\\n(Northern Hemisphere — CCW spiral)', color='white', fontsize=12)
-ax1.set_xlim(-350, 350)
-ax1.set_ylim(-350, 350)
-ax1.set_aspect('equal')
-ax1.set_xlabel('km', color='white')
-ax1.set_ylabel('km', color='white')
-ax1.tick_params(colors='gray')
-
-# WITHOUT Coriolis effect
-ax2.set_facecolor('#111827')
-
-for i, angle in enumerate(start_angles):
-    x = [start_radius * np.cos(angle)]
-    y = [start_radius * np.sin(angle)]
-    vx = -np.cos(angle) * 20
-    vy = -np.sin(angle) * 20
-
-    for step in range(n_steps):
-        r = np.sqrt(x[-1]**2 + y[-1]**2) + 0.1
-        pgf_x = -x[-1] / r * 0.5
-        pgf_y = -y[-1] / r * 0.5
-
-        friction = 0.01
-        vx += (pgf_x - friction * vx) * dt
-        vy += (pgf_y - friction * vy) * dt
-
-        x.append(x[-1] + vx * dt)
-        y.append(y[-1] + vy * dt)
-
-    ax2.plot(x, y, color=colors[i], linewidth=1.5, alpha=0.7)
-    ax2.plot(x[0], y[0], 'o', color=colors[i], markersize=5)
-
-ax2.plot(0, 0, 'x', color='white', markersize=15, markeredgewidth=3)
-ax2.set_title('WITHOUT Coriolis Effect\\n(Air flows straight to center)', color='white', fontsize=12)
-ax2.set_xlim(-350, 350)
-ax2.set_ylim(-350, 350)
-ax2.set_aspect('equal')
-ax2.set_xlabel('km', color='white')
-ax2.tick_params(colors='gray')
-
-plt.tight_layout()
-plt.show()
-
-print("Coriolis effect summary:")
-print("  - Caused by Earth's rotation, not a real force")
-print("  - Deflects moving air RIGHT in Northern Hemisphere")
-print("  - Creates counterclockwise rotation around lows (NH)")
-print("  - Zero at equator, maximum at poles")
-print("  - Without it: no cyclones, no trade winds, no jet stream")`,
+print()
+print("Key: Coriolis = 0 at equator → no cyclones there.")
+print("Bay of Bengal (10-20°N) = strong enough to spin storms.")
+print("Southern Hemisphere: f is negative → clockwise spin.")`,
       challenge: 'Change the Coriolis parameter to negative (Southern Hemisphere). Does the spiral reverse direction? What if you double f (higher latitude)?',
       successHint: 'The Coriolis effect is why weather exists as we know it. Without Earth\'s rotation, there would be one simple convection cell per hemisphere, no jet stream, no cyclones, and a radically different climate. This "fictitious force" shapes the entire atmosphere.',
     },
@@ -484,128 +317,32 @@ Warning time is critical. Even a 24-hour advance warning can save tens of thousa
       checkAnswer: 'Three reasons: (1) The Bay of Bengal is funnel-shaped — the coastline narrows toward Bangladesh, concentrating the water. (2) The continental shelf is very shallow and wide, allowing water to pile up. (3) Many areas are at or below sea level (river deltas). The same storm that produces 3m surge on a steep coast produces 6-10m surge in the Bay of Bengal funnel.',
       codeIntro: 'Model storm surge height based on wind speed, pressure drop, and coastal geometry.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
-# Storm surge model (simplified)
-# Surge height = wind_setup + pressure_effect + wave_setup
+# Storm surge depends on: wind speed, pressure drop, and coastal shape
+# Simple empirical model: surge ≈ wind * factor / (water depth)
 
-# Wind setup: S = (wind^2 * fetch) / (g * depth)
-# Pressure: 1 cm per hPa drop
-# Bathymetry matters enormously
+wind_speeds = [80, 120, 160, 200, 250]  # km/h
+shelf_depth = 20  # metres (Bay of Bengal is shallow!)
+funnel_factor = 1.5  # Bay of Bengal's funnel shape amplifies surge
 
-wind_speeds = np.linspace(50, 250, 200)  # km/h
+print("STORM SURGE ESTIMATES")
+print(f"Coastal shelf depth: {shelf_depth}m (shallow = worse)")
+print(f"Funnel amplification: {funnel_factor}x")
+print()
+print(f"{'Wind (km/h)':>12} {'Surge (m)':>10} {'Danger':>10}")
+print("-" * 35)
 
-# Convert to m/s
-wind_ms = wind_speeds / 3.6
+for wind in wind_speeds:
+    # Simplified surge formula
+    base_surge = (wind / 100) ** 2 * 2.5  # quadratic relationship
+    surge = base_surge * funnel_factor * (30 / shelf_depth)  # shallow = more
+    danger = "EXTREME" if surge > 5 else "HIGH" if surge > 3 else "MODERATE"
+    print(f"{wind:>12} {surge:>10.1f} {danger:>10}")
 
-# Parameters
-g = 9.81
-fetch = 500e3  # 500 km (Bay of Bengal typical)
-C_drag = 2e-6  # drag coefficient
-
-# Different coastal depths
-depths = {'Deep coast (50m)': 50, 'Medium (20m)': 20, 'Shallow (5m)': 5}
-depth_colors = ['#22c55e', '#f59e0b', '#ef4444']
-
-fig, axes = plt.subplots(2, 2, figsize=(13, 10))
-fig.patch.set_facecolor('#1f2937')
-
-# Surge vs wind speed at different depths
-ax1 = axes[0, 0]
-ax1.set_facecolor('#111827')
-for (label, depth), color in zip(depths.items(), depth_colors):
-    wind_setup = C_drag * wind_ms**2 * fetch / (g * depth)
-    pressure_drop = (1013 - (1013 - 0.15 * wind_ms)) / 100  # rough hPa drop, converted to m
-    total_surge = wind_setup + np.maximum(pressure_drop, 0)
-    ax1.plot(wind_speeds, total_surge, color=color, linewidth=2, label=label)
-
-ax1.set_xlabel('Wind speed (km/h)', color='white')
-ax1.set_ylabel('Storm surge height (m)', color='white')
-ax1.set_title('Storm Surge vs Wind Speed & Depth', color='white', fontsize=12)
-ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax1.tick_params(colors='gray')
-
-# Bay of Bengal funnel effect
-ax2 = axes[0, 1]
-ax2.set_facecolor('#111827')
-# Simplified bay shape (width decreasing northward)
-y_position = np.linspace(0, 1000, 100)  # km from open ocean
-bay_width_open = 1500  # km at mouth
-bay_width_narrow = 300  # km at head
-bay_width = bay_width_open - (bay_width_open - bay_width_narrow) * (y_position / 1000)**0.8
-
-# Water volume is conserved: surge ~ 1/width
-surge_amplification = bay_width_open / bay_width
-base_surge = 2  # meters at mouth
-surge_along_bay = base_surge * surge_amplification
-
-ax2.fill_betweenx(y_position, -bay_width/2, bay_width/2, alpha=0.2, color='#3b82f6')
-ax2.plot(-bay_width/2, y_position, color='#3b82f6', linewidth=2)
-ax2.plot(bay_width/2, y_position, color='#3b82f6', linewidth=2)
-
-# Color-code surge height
-for i in range(len(y_position)-1):
-    color_val = min(surge_along_bay[i] / 10, 1)
-    ax2.fill_betweenx([y_position[i], y_position[i+1]], [-bay_width[i]/2, -bay_width[i+1]/2],
-                      [bay_width[i]/2, bay_width[i+1]/2], alpha=0.3 + 0.3*color_val,
-                      color=plt.cm.hot_r(color_val))
-
-ax2.set_xlabel('Width (km)', color='white')
-ax2.set_ylabel('Distance from open ocean (km)', color='white')
-ax2.set_title('Bay Funnel Effect on Surge', color='white', fontsize=12)
-ax2.tick_params(colors='gray')
-
-# Historical surges
-ax3 = axes[1, 0]
-ax3.set_facecolor('#111827')
-events = {
-    'Bhola 1970': 10.6,
-    'Odisha 1999': 6.0,
-    'Sidr 2007': 5.0,
-    'Nargis 2008': 4.0,
-    'Amphan 2020': 3.5,
-    'Phailin 2013': 3.0,
-}
-deaths = {
-    'Bhola 1970': 300000,
-    'Odisha 1999': 10000,
-    'Sidr 2007': 3500,
-    'Nargis 2008': 138000,
-    'Amphan 2020': 128,
-    'Phailin 2013': 45,
-}
-
-bars = ax3.barh(list(events.keys()), list(events.values()), color='#3b82f6', alpha=0.8)
-for bar, (name, surge) in zip(bars, events.items()):
-    ax3.text(bar.get_width() + 0.1, bar.get_y() + bar.get_height()/2,
-            f'{surge}m ({deaths[name]:,} deaths)', color='white', fontsize=8, va='center')
-ax3.set_xlabel('Storm surge height (m)', color='white')
-ax3.set_title('Historic Bay of Bengal Storm Surges', color='white', fontsize=12)
-ax3.tick_params(colors='gray')
-ax3.set_yticklabels(list(events.keys()), color='white')
-
-# Warning time vs lives saved
-ax4 = axes[1, 1]
-ax4.set_facecolor('#111827')
-warning_hours = np.array([0, 6, 12, 24, 48, 72])
-death_reduction = np.array([0, 30, 55, 80, 92, 97])  # % lives saved with warning
-
-ax4.plot(warning_hours, death_reduction, color='#22c55e', linewidth=2, marker='o', markersize=8)
-ax4.fill_between(warning_hours, death_reduction, alpha=0.15, color='#22c55e')
-ax4.set_xlabel('Warning time (hours)', color='white')
-ax4.set_ylabel('Lives saved (%)', color='white')
-ax4.set_title('Warning Time Saves Lives', color='white', fontsize=12)
-ax4.tick_params(colors='gray')
-
-plt.tight_layout()
-plt.show()
-
-print("Storm surge: the #1 killer in tropical cyclones")
-print("  Shallow, funnel-shaped bays amplify surge dramatically")
-print("  Bay of Bengal is the worst-case geography")
-print("  Better warnings have cut deaths from hundreds of thousands to hundreds")
-print("  Bhola 1970 (no warning): ~300,000 dead")
-print("  Phailin 2013 (72h warning, mass evacuation): 45 dead")`,
+print()
+print("The 1970 Bhola cyclone: ~200 km/h → 10m surge → 300,000+ dead")
+print("Storm surge causes 90% of cyclone deaths, not wind.")
+print("Shallow + funnel-shaped Bay of Bengal = worst case.")`,
       challenge: 'If sea level rises by 0.5m due to climate change, how does that change the storm surge impact for a 4-meter surge? Consider: it\'s not just 0.5m higher — the water reaches further inland. Model the additional inundation area for a flat coastal plain.',
       successHint: 'Storm surge is the intersection of physics (wind, pressure, fluid dynamics), geography (coastal shape, depth), and human preparedness (warnings, evacuation, shelters). Understanding it saves lives — literally.',
     },
@@ -632,100 +369,34 @@ The transformation: In 1999 (Odisha super cyclone), 10,000+ died despite the sto
       checkAnswer: 'Multiple reasons: (1) "Cry wolf" effect — past warnings that didn\'t result in cyclones reduce trust. (2) Economic pressure — leaving means losing a day\'s catch. (3) Language/format — warnings in technical jargon or a different language aren\'t understood. (4) No shelter available — knowing the storm is coming doesn\'t help if there\'s nowhere to go. (5) Belief that "it won\'t hit us." Effective warnings must address ALL these barriers, not just the information gap.',
       codeIntro: 'Visualize a cyclone track forecast with uncertainty cones and warning zones.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
-np.random.seed(42)
+# Cyclone track forecast with uncertainty cone
+# Real forecasters update every 6 hours as the storm moves
 
-# Simulated cyclone track (Bay of Bengal)
-hours = np.arange(0, 96, 6)  # 96-hour forecast
-# Track: moving northwest from Bay of Bengal toward coast
-base_lat = 12 + hours * 0.08
-base_lon = 88 - hours * 0.05
+# Simulated cyclone path (Bay of Bengal → Odisha coast)
+hours = np.arange(0, 73, 6)  # 0 to 72 hours
+lat = 12 + hours * 0.12 + np.random.normal(0, 0.1, len(hours)).cumsum() * 0.05
+lon = 88 - hours * 0.03 + np.random.normal(0, 0.05, len(hours)).cumsum() * 0.02
 
-# Add some natural wobble
-lat = base_lat + 0.3 * np.sin(hours / 12)
-lon = base_lon + 0.2 * np.cos(hours / 10)
+# Uncertainty grows with forecast time
+uncertainty_km = 30 + hours * 2.5  # ±30 km at t=0, ±210 km at t=72h
 
-# Forecast uncertainty (grows with time)
-uncertainty = 30 + hours * 2  # km
+print("CYCLONE TRACK FORECAST")
+print(f"{'Hour':>5} {'Lat':>7} {'Lon':>7} {'Uncertainty':>12} {'Action'}")
+print("-" * 50)
 
-# Convert to approximate degree offset
-uncert_deg = uncertainty / 111  # ~111 km per degree
+for i, h in enumerate(hours):
+    action = ""
+    if h == 0:  action = "← Detection"
+    elif h == 24: action = "← Warning issued"
+    elif h == 48: action = "← Evacuation begins"
+    elif h == 72: action = "← LANDFALL"
+    print(f"{h:>5}h {lat[i]:>7.1f}°N {lon[i]:>6.1f}°E  ±{uncertainty_km[i]:>4.0f} km  {action}")
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 6))
-fig.patch.set_facecolor('#1f2937')
-
-# Track with uncertainty cone
-ax1.set_facecolor('#111827')
-
-# Draw uncertainty cone
-for i in range(len(hours)):
-    circle = plt.Circle((lon[i], lat[i]), uncert_deg[i], fill=True,
-                        alpha=0.05, color='#ef4444')
-    ax1.add_patch(circle)
-
-# Draw track
-ax1.plot(lon, lat, 'o-', color='#ef4444', linewidth=2, markersize=5)
-
-# Color-code by wind speed
-wind_forecast = 80 + hours * 1.5  # intensifying
-wind_forecast[hours > 60] = wind_forecast[hours == 60][0] - (hours[hours > 60] - 60) * 2  # weakening after landfall
-
-scatter = ax1.scatter(lon, lat, c=wind_forecast, cmap='hot_r', s=50, zorder=5, edgecolors='white', linewidth=0.5)
-plt.colorbar(scatter, ax=ax1, label='Wind speed (km/h)', shrink=0.7)
-
-# Mark time labels
-for i in range(0, len(hours), 4):
-    ax1.annotate(f'T+{hours[i]}h', xy=(lon[i], lat[i]),
-                xytext=(lon[i]+0.3, lat[i]+0.3), color='white', fontsize=7)
-
-# Simplified coastline
-coast_lon = [87, 86.5, 86, 85.5, 85]
-coast_lat = [20, 19.5, 19, 18.5, 18]
-ax1.plot(coast_lon, coast_lat, 's-', color='#f59e0b', linewidth=2, markersize=3)
-ax1.fill_between([84, 88], [22, 22], [23, 23], alpha=0.1, color='#f59e0b')
-
-ax1.set_xlabel('Longitude (°E)', color='white')
-ax1.set_ylabel('Latitude (°N)', color='white')
-ax1.set_title('Cyclone Track Forecast with Uncertainty', color='white', fontsize=12)
-ax1.tick_params(colors='gray')
-ax1.set_xlim(82, 90)
-ax1.set_ylim(10, 23)
-
-# Warning timeline
-ax2.set_facecolor('#111827')
-warning_stages = [
-    (72, 'Cyclone Watch', '#f59e0b', 'General alert issued'),
-    (48, 'Cyclone Warning', '#ef4444', 'Specific coast warned'),
-    (36, 'Fishermen recalled', '#3b82f6', 'All boats to harbor'),
-    (24, 'Red Alert', '#ef4444', 'Evacuation begins'),
-    (12, 'Landfall bulletin', '#a855f7', 'Final position update'),
-    (6, 'Maximum alert', '#ef4444', 'Stay in shelter'),
-    (0, 'LANDFALL', '#ffffff', 'Storm hits coast'),
-]
-
-for i, (hrs, label, color, action) in enumerate(warning_stages):
-    ax2.barh(i, hrs, color=color, alpha=0.5, height=0.6)
-    ax2.text(hrs + 1, i, f'{label}: {action}', color=color, fontsize=9, va='center')
-
-ax2.set_yticks([])
-ax2.set_xlabel('Hours before landfall', color='white')
-ax2.set_title('Warning Timeline', color='white', fontsize=12)
-ax2.invert_xaxis()
-ax2.tick_params(colors='gray')
-
-plt.tight_layout()
-plt.show()
-
-print("Warning system improvements:")
-print("  1999 (Odisha): 10,000+ deaths, warnings didn't reach villages")
-print("  2013 (Phailin): 45 deaths, 1 million evacuated in 48 hours")
-print("  2020 (Amphan): 128 deaths, 3 million evacuated")
-print("\\nKey factors:")
-print("  - Cell phone penetration: warnings reach individuals directly")
-print("  - Cyclone shelters: 2,000+ along India's coast")
-print("  - Community training: people know what to do")
-print("  - Political will: governments issue evacuation orders early")`,
+print()
+print("At 72h: ±210 km uncertainty = warn 420 km of coast")
+print("At 24h: ± 90 km uncertainty = warn 180 km of coast")
+print("Better forecast = fewer false alarms = saves money + trust")`,
       challenge: 'The forecast uncertainty at 72 hours is about 200 km. At 24 hours, it\'s about 80 km. Model how much more coastline must be warned at 72 hours vs 24 hours. What\'s the economic cost of this "over-warning" (false alarms for places that don\'t get hit)?',
       successHint: 'Weather warnings are where physical science meets social science, engineering, and politics. The science of forecasting is only half the problem — the other half is making sure warnings reach people, are understood, and lead to action. This is one of the greatest success stories in disaster risk reduction.',
     },
@@ -754,7 +425,7 @@ print("  - Political will: governments issue evacuation orders early")`,
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
-            diagram={[NewtonForceDiagram, WaterCycleDiagram, CycloneCrossSectionDiagram, MonsoonDiagram, BuoyancyDiagram, PressureDepthDiagram][i] ? createElement([NewtonForceDiagram, WaterCycleDiagram, CycloneCrossSectionDiagram, MonsoonDiagram, BuoyancyDiagram, PressureDepthDiagram][i]) : undefined}
+            diagram={[StormWindPressureDiagram, StormFormationDiagram, StormAnatomyDiagram, StormCoriolisDiagram, StormSurgeCoastDiagram, StormWarningDiagram][i] ? createElement([StormWindPressureDiagram, StormFormationDiagram, StormAnatomyDiagram, StormCoriolisDiagram, StormSurgeCoastDiagram, StormWarningDiagram][i]) : undefined}
             pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
         ))}
       </div>

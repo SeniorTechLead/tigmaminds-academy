@@ -16,7 +16,7 @@ export default function ModularClockDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 350 350" className="w-full max-w-md mx-auto" role="img" aria-label="Modular arithmetic clock showing 7 plus 8 equals 3 mod 12">
+      <svg viewBox="0 0 367 367" className="w-full max-w-md mx-auto" role="img" aria-label="Modular arithmetic clock showing 7 plus 8 equals 3 mod 12">
         {/* Clock face */}
         <circle cx={cx} cy={cy} r={r} fill="none" className="stroke-gray-300 dark:stroke-gray-600" strokeWidth="3" />
         <circle cx={cx} cy={cy} r={r - 2} fill="none" className="stroke-gray-200 dark:stroke-gray-700" strokeWidth="1" />

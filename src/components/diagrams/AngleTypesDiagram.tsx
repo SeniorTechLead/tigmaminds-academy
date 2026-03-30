@@ -14,7 +14,7 @@ export default function AngleTypesDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 540 200" className="w-full max-w-xl mx-auto" role="img" aria-label="Types of angles diagram">
+      <svg viewBox="0 0 567 230" className="w-full max-w-xl mx-auto" role="img" aria-label="Types of angles diagram">
         {angles.map((a, i) => {
           const ox = 15 + i * 108;
           const rad = (a.degrees * Math.PI) / 180;

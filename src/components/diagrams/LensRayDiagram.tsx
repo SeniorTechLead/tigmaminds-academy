@@ -1,7 +1,7 @@
 export default function LensRayDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 540 250" className="w-full max-w-2xl mx-auto" role="img" aria-label="Convex and concave lens ray diagrams">
+      <svg viewBox="0 0 650 264" className="w-full max-w-2xl mx-auto" role="img" aria-label="Convex and concave lens ray diagrams">
         {/* ======== CONVEX LENS (left panel) ======== */}
         <text x={135} y={16} textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="12" fontWeight="700">Convex (Converging) Lens</text>
 

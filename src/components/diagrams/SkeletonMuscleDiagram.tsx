@@ -1,7 +1,7 @@
 export default function SkeletonMuscleDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 400 300" className="w-full max-w-md mx-auto" role="img" aria-label="Bicep and tricep antagonistic muscle pair diagram">
+      <svg viewBox="0 0 430 345" className="w-full max-w-md mx-auto" role="img" aria-label="Bicep and tricep antagonistic muscle pair diagram">
         {/* Title */}
         <text x="200" y="18" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">Antagonistic Muscle Pair: Bicep &amp; Tricep</text>
 

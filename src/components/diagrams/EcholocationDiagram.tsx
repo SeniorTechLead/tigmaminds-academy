@@ -1,7 +1,7 @@
 export default function EcholocationDiagram() {
   return (
     <svg
-      viewBox="0 0 600 250"
+      viewBox="0 0 630 281"
       className="w-full max-w-2xl mx-auto my-6"
       role="img"
       aria-label="Echolocation diagram showing how dolphins use sound waves to detect objects"

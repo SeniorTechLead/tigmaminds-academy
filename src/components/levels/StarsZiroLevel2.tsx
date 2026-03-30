@@ -1,6 +1,13 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Sparkles } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
+import { createElement } from 'react';
+import StarSpectrumDiagram from '../diagrams/StarSpectrumDiagram';
+import StarHRDiagram from '../diagrams/StarHRDiagram';
+import StarColorTempDiagram from '../diagrams/StarColorTempDiagram';
+import StarPhotometryDiagram from '../diagrams/StarPhotometryDiagram';
+import StarAtmosphereLayersDiagram from '../diagrams/StarAtmosphereLayersDiagram';
+import StarLightPollutionMapDiagram from '../diagrams/StarLightPollutionMapDiagram';
 
 export default function StarsZiroLevel2() {
   const pyodideRef = useRef<any>(null);
@@ -45,7 +52,6 @@ A single spectrum contains more information about a star than any image could. T
       checkAnswer: 'Because spectral lines are universal — each element has exactly the same absorption/emission wavelengths everywhere in the universe (adjusted for Doppler shift). The unknown lines in the Sun\'s spectrum did not match any known element. They were assigned to a new element named "helium" (from helios, Greek for sun). When helium was later found in uranium ore on Earth, its spectrum matched perfectly.',
       codeIntro: 'Simulate the absorption spectrum of a star showing element fingerprints.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Simulate a stellar absorption spectrum
 wavelengths = np.linspace(380, 700, 5000)  # visible range in nm
@@ -78,54 +84,6 @@ for name, center, depth, width in absorption_lines:
     gaussian = depth * np.exp(-((wavelengths - center) / width)**2)
     spectrum -= gaussian * continuum
 
-fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(14, 7))
-fig.patch.set_facecolor('#1f2937')
-
-# Full spectrum with rainbow background
-ax1.set_facecolor('#111827')
-# Color the background with approximate visible colors
-rainbow_colors = plt.cm.Spectral(np.linspace(0, 1, len(wavelengths)))
-for i in range(len(wavelengths)-1):
-    ax1.fill_between(wavelengths[i:i+2], 0, spectrum[i:i+2],
-                     color=rainbow_colors[i], alpha=0.3)
-ax1.plot(wavelengths, spectrum, color='white', linewidth=0.5)
-ax1.plot(wavelengths, continuum, '--', color='gray', linewidth=0.5, alpha=0.5, label='Continuum')
-
-# Label strongest lines
-labeled = set()
-for name, center, depth, width in absorption_lines:
-    if name not in labeled and depth > 0.3:
-        ax1.annotate(name, xy=(center, spectrum[np.argmin(np.abs(wavelengths-center))]),
-                    xytext=(center, 1.05), color='#f59e0b', fontsize=8, ha='center',
-                    arrowprops=dict(arrowstyle='->', color='#f59e0b', lw=0.5))
-        labeled.add(name)
-
-ax1.set_ylabel('Relative intensity', color='white')
-ax1.set_title('Solar Absorption Spectrum', color='white', fontsize=13)
-ax1.legend(facecolor='#1f2937', labelcolor='white')
-ax1.tick_params(colors='gray')
-ax1.set_ylim(0, 1.2)
-
-# Zoom on hydrogen Balmer series
-ax2.set_facecolor('#111827')
-h_lines = [(656.3, 'H-α (red)'), (486.1, 'H-β (blue-green)'),
-           (434.0, 'H-γ (violet)'), (410.2, 'H-δ (violet)')]
-
-for center, name in h_lines:
-    mask = (wavelengths > center - 5) & (wavelengths < center + 5)
-    color = '#ef4444' if 'red' in name else '#3b82f6' if 'blue' in name else '#a855f7'
-    ax2.axvline(center, color=color, linestyle='--', alpha=0.5)
-    ax2.text(center, 1.1, name, ha='center', color=color, fontsize=9, rotation=45)
-
-ax2.plot(wavelengths, spectrum, color='white', linewidth=1)
-ax2.set_xlabel('Wavelength (nm)', color='white')
-ax2.set_ylabel('Relative intensity', color='white')
-ax2.set_title('Hydrogen Balmer Series — The Most Recognizable Pattern in Astronomy', color='white', fontsize=11)
-ax2.tick_params(colors='gray')
-ax2.set_ylim(0, 1.3)
-
-plt.tight_layout()
-plt.show()
 
 print("Elements identified in this spectrum:")
 elements = set(name.split()[0].split('-')[0] for name, _, _, _ in absorption_lines)
@@ -160,7 +118,6 @@ The Sun has been on the main sequence for 4.6 billion years and will remain ther
       checkAnswer: 'Luminosity = surface area × flux per area. Same temperature means same flux per unit area. So star A must have 10,000× more surface area. Since surface area ∝ radius², star A has 100× the radius. If B is the Sun, A is 100 solar radii — a red giant or supergiant. This is how the HR diagram reveals stellar sizes without directly measuring them.',
       codeIntro: 'Generate an HR diagram and plot different types of stars.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 np.random.seed(42)
 
@@ -193,54 +150,6 @@ rg_t, rg_l = generate_red_giants()
 wd_t, wd_l = generate_white_dwarfs()
 sg_t, sg_l = generate_supergiants()
 
-fig, ax = plt.subplots(figsize=(10, 8))
-fig.patch.set_facecolor('#1f2937')
-ax.set_facecolor('#111827')
-
-# Color by temperature
-def temp_color(T):
-    if T > 10000: return '#93c5fd'
-    elif T > 7500: return '#bfdbfe'
-    elif T > 6000: return '#fef9c3'
-    elif T > 4500: return '#fed7aa'
-    else: return '#fca5a5'
-
-# Plot each group
-ax.scatter(ms_t, ms_l, s=3, alpha=0.4, c=[temp_color(t) for t in ms_t], label='Main Sequence')
-ax.scatter(rg_t, rg_l, s=15, alpha=0.6, c=[temp_color(t) for t in rg_t], marker='o', label='Red Giants')
-ax.scatter(wd_t, wd_l, s=8, alpha=0.5, c=[temp_color(t) for t in wd_t], marker='s', label='White Dwarfs')
-ax.scatter(sg_t, sg_l, s=30, alpha=0.7, c=[temp_color(t) for t in sg_t], marker='D', label='Supergiants')
-
-# Mark famous stars
-famous = [
-    ('Sun', 5778, 1, '#f59e0b'),
-    ('Sirius', 9940, 25, '#93c5fd'),
-    ('Betelgeuse', 3500, 1.3e5, '#ef4444'),
-    ('Rigel', 12100, 1.2e5, '#60a5fa'),
-    ('Proxima Cen', 3042, 0.0017, '#ef4444'),
-    ('Sirius B', 25200, 0.026, '#93c5fd'),
-]
-for name, t, l, color in famous:
-    ax.plot(t, l, '*', color=color, markersize=12, markeredgecolor='white', markeredgewidth=0.5)
-    ax.annotate(name, xy=(t, l), xytext=(t*0.75, l*2), color=color, fontsize=9,
-               arrowprops=dict(arrowstyle='->', color=color, lw=0.5))
-
-ax.set_xscale('log')
-ax.set_yscale('log')
-ax.invert_xaxis()  # Hot on left, cool on right
-ax.set_xlabel('Temperature (K) ← hotter | cooler →', color='white', fontsize=11)
-ax.set_ylabel('Luminosity (solar units)', color='white', fontsize=11)
-ax.set_title('Hertzsprung-Russell Diagram', color='white', fontsize=14)
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=9)
-ax.tick_params(colors='gray')
-
-# Add spectral class labels
-for t, label in [(30000, 'O'), (10000, 'B'), (7500, 'A'), (6000, 'F'),
-                 (5200, 'G'), (3700, 'K'), (3000, 'M')]:
-    ax.text(t, 5e5, label, ha='center', color='white', fontsize=10, fontweight='bold')
-
-plt.tight_layout()
-plt.show()
 
 print("Star regions on the HR diagram:")
 print(f"  Main Sequence: {len(ms_t)} stars (90% of all stars)")
@@ -274,7 +183,6 @@ Despite decades of searching, dark matter has never been directly detected. It i
       checkAnswer: 'Several approaches: (1) Underground detectors watch for rare dark matter particle collisions with normal atoms (XENON, LUX experiments). (2) Particle accelerators try to create dark matter particles (LHC at CERN). (3) Space telescopes look for gamma rays from dark matter annihilation. So far, no direct detection — but the indirect gravitational evidence is overwhelming. We know it is there; we just do not know what it is.',
       codeIntro: 'Plot a galaxy rotation curve showing the evidence for dark matter.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Galaxy rotation curve
 # v(r) = orbital velocity at distance r from galaxy center
@@ -301,48 +209,6 @@ v_obs = np.sqrt(v_visible[np.searchsorted(r, r_obs)]**2 +
                v_dark[np.searchsorted(r, r_obs)]**2)
 v_obs += np.random.normal(0, 8, len(r_obs))
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 5.5))
-fig.patch.set_facecolor('#1f2937')
-
-# Rotation curve
-ax1.set_facecolor('#111827')
-ax1.plot(r, v_visible, '--', color='#f59e0b', linewidth=2, label='Visible matter only')
-ax1.plot(r, v_dark, ':', color='#a855f7', linewidth=2, label='Dark matter halo')
-ax1.plot(r, v_total, '-', color='#22c55e', linewidth=2, label='Total (visible + dark)')
-ax1.errorbar(r_obs, v_obs, yerr=10, fmt='o', color='white', markersize=4,
-            ecolor='gray', capsize=2, label='Observed', zorder=5)
-
-ax1.set_xlabel('Distance from center (kpc)', color='white')
-ax1.set_ylabel('Orbital velocity (km/s)', color='white')
-ax1.set_title('Galaxy Rotation Curve: Evidence for Dark Matter', color='white', fontsize=12)
-ax1.legend(facecolor='#1f2937', labelcolor='white', fontsize=9)
-ax1.tick_params(colors='gray')
-
-# Annotate the discrepancy
-ax1.annotate('Expected drop-off\\n(without dark matter)', xy=(30, v_visible[120]),
-            xytext=(35, 80), color='#f59e0b', fontsize=9,
-            arrowprops=dict(arrowstyle='->', color='#f59e0b'))
-ax1.annotate('Observed: stays flat!', xy=(30, v_total[120]),
-            xytext=(35, 250), color='#22c55e', fontsize=9,
-            arrowprops=dict(arrowstyle='->', color='#22c55e'))
-
-# Universe composition pie chart
-ax2.set_facecolor('#1f2937')
-sizes = [68.3, 26.8, 4.9]
-labels = ['Dark Energy\n68.3%', 'Dark Matter\n26.8%', 'Ordinary Matter\n4.9%']
-colors = ['#3b82f6', '#a855f7', '#22c55e']
-explode = (0.02, 0.02, 0.08)
-
-wedges, texts = ax2.pie(sizes, explode=explode, labels=labels, colors=colors,
-                         startangle=90, labeldistance=1.15,
-                         wedgeprops=dict(edgecolor='#1f2937', linewidth=2))
-for t in texts:
-    t.set_color('white')
-    t.set_fontsize(10)
-ax2.set_title('Composition of the Universe', color='white', fontsize=12, pad=15)
-
-plt.tight_layout()
-plt.show()
 
 print("The dark matter problem:")
 print(f"  Visible matter predicts velocity dropping as 1/sqrt(r)")
@@ -378,7 +244,6 @@ Gravitational lensing is:
       checkAnswer: 'Einstein\'s general relativity predicted that the Sun\'s gravity would bend starlight by exactly 1.75 arcseconds. Newton\'s gravity predicted only 0.87 arcseconds (half the value). Eddington\'s measurement matched Einstein\'s prediction, confirming that gravity curves spacetime, not just pulls objects. Headlines read "LIGHTS ALL ASKEW IN THE HEAVENS" — and Einstein became a household name overnight.',
       codeIntro: 'Simulate gravitational lensing of a background source by a foreground mass.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Gravitational lensing simulation (point mass lens)
 # Lens equation: theta_s = theta - theta_E^2 / theta
@@ -400,52 +265,6 @@ alpha_y = theta_E**2 * Y / R**2
 source_X = X - alpha_x
 source_Y = Y - alpha_y
 
-fig, axes = plt.subplots(1, 3, figsize=(15, 5))
-fig.patch.set_facecolor('#1f2937')
-
-# Background source (a circular galaxy)
-source_x0, source_y0 = 0.3, 0.2  # slightly offset from lens
-source_r = 0.3
-source = np.exp(-((source_X - source_x0)**2 + (source_Y - source_y0)**2) / (2 * source_r**2))
-
-# Unlensed source
-unlensed = np.exp(-((X - source_x0)**2 + (Y - source_y0)**2) / (2 * source_r**2))
-
-# Plot unlensed source
-axes[0].set_facecolor('#0a0a14')
-axes[0].imshow(unlensed, extent=[-3, 3, -3, 3], cmap='inferno', vmin=0, vmax=1, origin='lower')
-axes[0].plot(0, 0, '+', color='#22c55e', markersize=15, markeredgewidth=2)
-axes[0].set_title('Source (no lens)', color='white', fontsize=11)
-axes[0].set_xlabel('arcseconds', color='gray')
-axes[0].tick_params(colors='gray')
-
-# Plot lensed image
-axes[1].set_facecolor('#0a0a14')
-axes[1].imshow(source, extent=[-3, 3, -3, 3], cmap='inferno', vmin=0, vmax=1, origin='lower')
-axes[1].plot(0, 0, '+', color='#22c55e', markersize=15, markeredgewidth=2)
-circle = plt.Circle((0, 0), theta_E, fill=False, color='#22c55e', linestyle='--', linewidth=1)
-axes[1].add_patch(circle)
-axes[1].set_title('Lensed Image (arc/ring)', color='white', fontsize=11)
-axes[1].set_xlabel('arcseconds', color='gray')
-axes[1].tick_params(colors='gray')
-axes[1].text(0.5, -2.5, f'Einstein radius = {theta_E}"', color='#22c55e', fontsize=9)
-
-# Magnification map
-magnification = 1.0 / np.abs(1 - (theta_E / R)**4)
-magnification = np.clip(magnification, 0, 20)
-
-axes[2].set_facecolor('#0a0a14')
-im = axes[2].imshow(magnification, extent=[-3, 3, -3, 3], cmap='hot', vmin=1, vmax=10, origin='lower')
-axes[2].plot(0, 0, '+', color='#22c55e', markersize=15, markeredgewidth=2)
-circle2 = plt.Circle((0, 0), theta_E, fill=False, color='#22c55e', linestyle='--', linewidth=1)
-axes[2].add_patch(circle2)
-axes[2].set_title('Magnification Map', color='white', fontsize=11)
-axes[2].set_xlabel('arcseconds', color='gray')
-axes[2].tick_params(colors='gray')
-plt.colorbar(im, ax=axes[2], shrink=0.8, label='Magnification factor')
-
-plt.tight_layout()
-plt.show()
 
 print("Gravitational lensing key facts:")
 print(f"  Einstein radius: {theta_E} arcsecond")
@@ -485,7 +304,6 @@ The expansion means the universe had a beginning — the Big Bang, ~13.8 billion
       checkAnswer: 'No. Every point in the universe sees every other point receding. It is like the balloon analogy: no dot on the balloon is the "center of expansion." The expansion is uniform — there is no center, no edge. This is called the cosmological principle: the universe looks the same from every point (on large scales). The children of Ziro are no more or less "central" than observers anywhere else in the cosmos.',
       codeIntro: 'Visualize Hubble\'s Law and the expanding universe.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Hubble's Law: v = H0 * d
 H0 = 70  # km/s/Mpc (Hubble constant)
@@ -500,65 +318,6 @@ redshift_approx = velocities / c
 # More accurate: 1+z = sqrt((1+v/c)/(1-v/c)) for special relativity
 # But for cosmological redshift, need full GR. Use approximation for visualization.
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5.5))
-fig.patch.set_facecolor('#1f2937')
-
-# Hubble diagram
-ax1.set_facecolor('#111827')
-ax1.plot(distances, velocities, color='#ef4444', linewidth=2)
-ax1.set_xlabel('Distance (Mpc)', color='white')
-ax1.set_ylabel('Recession velocity (km/s)', color='white')
-ax1.set_title("Hubble's Law: v = H₀ × d", color='white', fontsize=12)
-ax1.tick_params(colors='gray')
-
-# Add some "observed galaxies"
-np.random.seed(42)
-obs_d = np.random.uniform(50, 4000, 30)
-obs_v = H0 * obs_d + np.random.normal(0, 500, 30)
-ax1.scatter(obs_d, obs_v, c='white', s=20, alpha=0.7, zorder=5, label='Observed galaxies')
-
-ax1.text(1000, 300000, f'H₀ = {H0} km/s/Mpc', color='#f59e0b', fontsize=11)
-ax1.text(1000, 270000, f'Slope = Hubble constant', color='#f59e0b', fontsize=9)
-ax1.legend(facecolor='#1f2937', labelcolor='white')
-
-# Expansion visualization (dots on expanding grid)
-ax2.set_facecolor('#0a0a14')
-
-# Show universe at 3 different times
-np.random.seed(7)
-n_galaxies = 15
-base_x = np.random.uniform(-1, 1, n_galaxies)
-base_y = np.random.uniform(-1, 1, n_galaxies)
-
-scale_factors = [0.5, 0.75, 1.0]
-times = ['Early universe', 'Middle age', 'Today']
-colors = ['#3b82f6', '#f59e0b', '#22c55e']
-offsets = [-3, 0, 3]
-
-for sf, t, color, offset in zip(scale_factors, times, colors, offsets):
-    gx = base_x * sf + offset
-    gy = base_y * sf
-    ax2.scatter(gx, gy, c=color, s=40, alpha=0.8, zorder=5)
-    ax2.text(offset, -1.8, f'{t}\\n(a={sf})', ha='center', color=color, fontsize=9)
-
-    # Draw expansion arrows between epochs
-    if sf < 1.0:
-        next_sf = scale_factors[scale_factors.index(sf) + 1]
-        next_offset = offsets[scale_factors.index(sf) + 1]
-
-# Arrows showing expansion
-for i in range(len(scale_factors)-1):
-    ax2.annotate('', xy=(offsets[i+1]-1.2, 0), xytext=(offsets[i]+1.2, 0),
-                arrowprops=dict(arrowstyle='->', color='white', lw=1.5))
-    ax2.text((offsets[i]+offsets[i+1])/2, 0.3, 'expansion', ha='center', color='white', fontsize=8)
-
-ax2.set_title('Universe Expansion: Galaxies Move Apart', color='white', fontsize=12)
-ax2.set_xlim(-5, 5)
-ax2.set_ylim(-2.5, 2)
-ax2.axis('off')
-
-plt.tight_layout()
-plt.show()
 
 # Lookback times for different redshifts
 print("Redshift → lookback time → distance:")
@@ -602,6 +361,7 @@ print(f"(Larger than 13.8 Gly because space expanded during light travel)")`,
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
+            diagram={[StarSpectrumDiagram, StarHRDiagram, StarColorTempDiagram, StarPhotometryDiagram, StarAtmosphereLayersDiagram, StarLightPollutionMapDiagram][i] ? createElement([StarSpectrumDiagram, StarHRDiagram, StarColorTempDiagram, StarPhotometryDiagram, StarAtmosphereLayersDiagram, StarLightPollutionMapDiagram][i]) : undefined}
             pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
         ))}
       </div>

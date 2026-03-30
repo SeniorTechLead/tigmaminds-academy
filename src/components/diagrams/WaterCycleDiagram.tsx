@@ -1,7 +1,7 @@
 export default function WaterCycleDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 540 350" className="w-full max-w-2xl mx-auto" role="img" aria-label="Water cycle diagram showing evaporation, condensation, precipitation, runoff, and infiltration">
+      <svg viewBox="0 0 620 378" className="w-full max-w-2xl mx-auto" role="img" aria-label="Water cycle diagram showing evaporation, condensation, precipitation, runoff, and infiltration">
         <defs>
           <marker id="wc-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
             <polygon points="0 0, 8 3, 0 6" className="fill-blue-500 dark:fill-blue-400" />

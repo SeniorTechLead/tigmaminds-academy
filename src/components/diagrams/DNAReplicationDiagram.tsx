@@ -1,7 +1,7 @@
 export default function DNAReplicationDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 500 300" className="w-full max-w-lg mx-auto" role="img" aria-label="DNA Replication Fork diagram">
+      <svg viewBox="0 0 570 336" className="w-full max-w-lg mx-auto" role="img" aria-label="DNA Replication Fork diagram">
         <defs>
           <marker id="dnaArrow" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
             <polygon points="0 0, 7 2.5, 0 5" className="fill-gray-500" />

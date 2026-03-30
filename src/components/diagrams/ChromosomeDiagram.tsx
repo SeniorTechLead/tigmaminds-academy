@@ -1,7 +1,7 @@
 export default function ChromosomeDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 500 200" className="w-full max-w-lg mx-auto" role="img" aria-label="DNA to chromatin to chromosome hierarchy diagram">
+      <svg viewBox="0 0 570 235" className="w-full max-w-lg mx-auto" role="img" aria-label="DNA to chromatin to chromosome hierarchy diagram">
         {/* Title */}
         <text x="250" y="16" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">DNA Packaging: Three Levels of Coiling</text>
 

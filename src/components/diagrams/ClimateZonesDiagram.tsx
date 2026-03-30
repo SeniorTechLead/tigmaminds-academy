@@ -1,7 +1,7 @@
 export default function ClimateZonesDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 540 300" className="w-full max-w-2xl mx-auto" role="img" aria-label="World climate zones with NE India marked as humid subtropical">
+      <svg viewBox="0 0 567 315" className="w-full max-w-2xl mx-auto" role="img" aria-label="World climate zones with NE India marked as humid subtropical">
         {/* Climate zone bands (simplified horizontal strips) */}
         {/* Polar North */}
         <rect x="20" y="15" width="400" height="30" className="fill-gray-100 dark:fill-gray-700" />

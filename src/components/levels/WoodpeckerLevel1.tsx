@@ -1,6 +1,12 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Sparkles } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
+import WoodpeckerImpactDiagram from '../diagrams/WoodpeckerImpactDiagram';
+import WoodpeckerSkullLayersDiagram from '../diagrams/WoodpeckerSkullLayersDiagram';
+import WoodpeckerHyoidDiagram from '../diagrams/WoodpeckerHyoidDiagram';
+import WoodpeckerSpongyBoneDiagram from '../diagrams/WoodpeckerSpongyBoneDiagram';
+import WoodpeckerBrainFitDiagram from '../diagrams/WoodpeckerBrainFitDiagram';
+import WoodpeckerHelmetDiagram from '../diagrams/WoodpeckerHelmetDiagram';
 
 export default function WoodpeckerLevel1() {
   const pyodideRef = useRef<any>(null);
@@ -40,7 +46,6 @@ A human head hitting a dashboard at 50 km/h experiences about 100g of decelerati
       checkAnswer: 'Deceleration = v/t = 7 / 0.001 = 7,000 m/s^2. In g-forces: 7,000 / 9.8 = ~714g. Real measurements show peaks up to 1,200g because the beak doesn\'t decelerate uniformly. Even at 714g, this is more than 7 times the threshold for human concussion (~100g).',
       codeIntro: 'Calculate and visualize the impact forces during a woodpecker strike.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Woodpecker strike parameters
 mass = 0.002  # head mass in kg (~2 grams)
@@ -54,30 +59,6 @@ t = np.linspace(0, strike_duration, 500)
 decel = (velocity / strike_duration) * np.sin(np.pi * t / strike_duration)
 force = mass * decel
 
-fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 7))
-fig.patch.set_facecolor('#1f2937')
-
-# Deceleration in g-forces
-ax1.set_facecolor('#111827')
-ax1.plot(t * 1000, decel / 9.8, color='#ef4444', linewidth=2)
-ax1.fill_between(t * 1000, decel / 9.8, alpha=0.15, color='#ef4444')
-ax1.axhline(100, color='#f59e0b', linestyle='--', linewidth=1, label='Human concussion threshold (~100g)')
-ax1.set_ylabel('Deceleration (g-forces)', color='white')
-ax1.set_title('Deceleration During a Single Woodpecker Strike', color='white', fontsize=13)
-ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax1.tick_params(colors='gray')
-
-# Force profile
-ax2.set_facecolor('#111827')
-ax2.plot(t * 1000, force, color='#3b82f6', linewidth=2)
-ax2.fill_between(t * 1000, force, alpha=0.15, color='#3b82f6')
-ax2.set_xlabel('Time (milliseconds)', color='white')
-ax2.set_ylabel('Force (Newtons)', color='white')
-ax2.set_title('Impact Force During Strike', color='white', fontsize=11)
-ax2.tick_params(colors='gray')
-
-plt.tight_layout()
-plt.show()
 
 peak_g = velocity / strike_duration / 9.8
 print(f"Peak deceleration: {peak_g:.0f}g")
@@ -115,7 +96,6 @@ The g-force scale spans four orders of magnitude from comfortable to lethal. The
       checkAnswer: '1,200 / 4 = 300 times more. And the astronaut needs a specially designed capsule, a heat shield, and physical training to survive 4g. The woodpecker does 300x that using nothing but evolved anatomy, 12,000 times a day.',
       codeIntro: 'Compare deceleration across different scenarios on a logarithmic scale.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Deceleration scenarios (in g-forces)
 scenarios = [
@@ -134,29 +114,6 @@ names = [s[0] for s in scenarios]
 values = [s[1] for s in scenarios]
 colors = [s[2] for s in scenarios]
 
-fig, ax = plt.subplots(figsize=(10, 6))
-fig.patch.set_facecolor('#1f2937')
-ax.set_facecolor('#111827')
-
-bars = ax.barh(range(len(names)), values, color=colors, height=0.6)
-ax.set_xscale('log')
-ax.set_yticks(range(len(names)))
-ax.set_yticklabels(names, color='white', fontsize=10)
-ax.set_xlabel('Deceleration (g-forces, log scale)', color='white')
-ax.set_title('Deceleration Comparison: From Braking to Woodpecker', color='white', fontsize=13)
-ax.tick_params(colors='gray')
-
-# Add value labels
-for i, (bar, val) in enumerate(zip(bars, values)):
-    ax.text(val * 1.3, i, f'{val}g', va='center', color='white', fontsize=9)
-
-# Danger zone
-ax.axvline(100, color='#ef4444', linestyle='--', linewidth=1, alpha=0.7)
-ax.text(100, len(names) - 0.5, 'Human brain\\ndamage threshold', color='#ef4444',
-        fontsize=8, ha='center')
-
-plt.tight_layout()
-plt.show()
 
 print("Key insight: the woodpecker operates at 12x the human concussion threshold.")
 print("It does this ~12,000 times per day, for years, without brain damage.")
@@ -188,7 +145,6 @@ The key equation: **Energy = Force x Distance**. If you can increase the distanc
       checkAnswer: 'Force is inversely proportional to distance (for the same energy). With crumple zone: distance = 0.5m. Without: distance = 0.01m. Ratio: 0.5/0.01 = 50. The crumple zone reduces peak force by 50x. This is why modern cars are designed to crumple — a destroyed car with a living driver is better than an intact car with a dead one.',
       codeIntro: 'Simulate how different stopping distances affect impact force.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Impact energy is constant: E = 0.5 * m * v^2
 # Force * distance = Energy, so F = E / d
@@ -202,44 +158,6 @@ distances = np.linspace(0.0001, 0.01, 500)  # in meters
 forces = energy / distances
 g_forces = forces / (mass * 9.8)
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
-fig.patch.set_facecolor('#1f2937')
-
-# Force vs distance
-ax1.set_facecolor('#111827')
-ax1.plot(distances * 1000, forces, color='#3b82f6', linewidth=2)
-ax1.fill_between(distances * 1000, forces, alpha=0.1, color='#3b82f6')
-ax1.set_xlabel('Stopping distance (mm)', color='white')
-ax1.set_ylabel('Peak force (N)', color='white')
-ax1.set_title('Force vs Stopping Distance', color='white', fontsize=13)
-ax1.tick_params(colors='gray')
-
-# Mark key distances
-markers = [(0.5, '#ef4444', 'Rigid skull'), (2, '#f59e0b', 'Some absorption'),
-           (5, '#22c55e', 'Woodpecker skull')]
-for d_mm, c, label in markers:
-    f = energy / (d_mm / 1000)
-    ax1.plot(d_mm, f, 'o', color=c, markersize=8)
-    ax1.annotate(f'{label}\\n{f:.1f}N', xy=(d_mm, f), xytext=(d_mm + 0.5, f + 0.01),
-                 color=c, fontsize=9)
-
-# Energy absorption comparison
-ax2.set_facecolor('#111827')
-materials = ['Rigid bone', 'Spongy bone', 'Hyoid bone\\n(wrapped)', 'Full woodpecker\\nskull system']
-absorption_pct = [10, 35, 25, 70]
-colors = ['#ef4444', '#f59e0b', '#3b82f6', '#22c55e']
-bars = ax2.bar(materials, absorption_pct, color=colors, width=0.6)
-ax2.set_ylabel('Energy absorbed (%)', color='white')
-ax2.set_title('Shock Absorption by Component', color='white', fontsize=13)
-ax2.tick_params(colors='gray')
-ax2.set_xticklabels(materials, color='white', fontsize=9)
-
-for bar, pct in zip(bars, absorption_pct):
-    ax2.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1,
-             f'{pct}%', ha='center', color='white', fontsize=10)
-
-plt.tight_layout()
-plt.show()
 
 print(f"Impact energy per strike: {energy*1000:.2f} mJ")
 print(f"At 12,000 strikes/day: {energy * 12000:.1f} J total")
@@ -269,7 +187,6 @@ Together these features form an integrated shock management system — no single
       checkAnswer: 'Two reasons: (1) The woodpecker\'s brain fits very tightly in its skull cavity with minimal cerebrospinal fluid, so there\'s almost no room for the brain to move. (2) The hyoid bone distributes forces around the skull rather than transmitting them through it. In humans, the brain floats in fluid, which normally protects it but allows dangerous movement during sudden deceleration.',
       codeIntro: 'Visualize the force distribution pathways in a woodpecker skull vs. a human skull.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Model force transmission through different skull structures
 # Simulate a 1D shock wave passing through layers
@@ -291,38 +208,6 @@ after_hyoid = np.exp(-((time - 3.5) ** 2) / 1.2) * 1200 * 0.7 * 0.6
 # Layer 3: Tight fit prevents sloshing, reduces peak by ~30%
 brain_force = np.exp(-((time - 4) ** 2) / 1.8) * 1200 * 0.7 * 0.6 * 0.7
 
-fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 7))
-fig.patch.set_facecolor('#1f2937')
-
-# Human skull
-ax1.set_facecolor('#111827')
-ax1.plot(time, input_pulse, color='#6b7280', linewidth=1, linestyle='--', label='Impact force')
-ax1.plot(time, human_brain_force, color='#ef4444', linewidth=2, label='Force at brain')
-ax1.fill_between(time, human_brain_force, alpha=0.15, color='#ef4444')
-ax1.axhline(100, color='#f59e0b', linestyle=':', label='Concussion threshold')
-ax1.set_title('Human Skull: Minimal Absorption', color='white', fontsize=13)
-ax1.set_ylabel('Force (g)', color='white')
-ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=9)
-ax1.tick_params(colors='gray')
-ax1.set_ylim(0, 1400)
-
-# Woodpecker skull
-ax2.set_facecolor('#111827')
-ax2.plot(time, input_pulse, color='#6b7280', linewidth=1, linestyle='--', label='Impact force')
-ax2.plot(time, after_spongy, color='#f59e0b', linewidth=1.5, label='After spongy bone (-30%)')
-ax2.plot(time, after_hyoid, color='#3b82f6', linewidth=1.5, label='After hyoid bone (-40%)')
-ax2.plot(time, brain_force, color='#22c55e', linewidth=2, label='Force at brain (-30%)')
-ax2.fill_between(time, brain_force, alpha=0.15, color='#22c55e')
-ax2.axhline(100, color='#f59e0b', linestyle=':', label='Concussion threshold')
-ax2.set_title('Woodpecker Skull: Layered Absorption', color='white', fontsize=13)
-ax2.set_xlabel('Time (ms)', color='white')
-ax2.set_ylabel('Force (g)', color='white')
-ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=9)
-ax2.tick_params(colors='gray')
-ax2.set_ylim(0, 1400)
-
-plt.tight_layout()
-plt.show()
 
 peak_human = max(human_brain_force)
 peak_woodpecker = max(brain_force)
@@ -365,7 +250,6 @@ The woodpecker is the g-force champion of the animal kingdom.`,
       checkAnswer: 'A woodpecker pecks ~12,000 times per day at ~1,200g. An F1 driver at 5g would need 12,000 exposures just to match the count — but at 240x lower g-force. To match both count AND intensity, a human would need 12,000 exposures at 1,200g per day. No human body could survive even one.',
       codeIntro: 'Map the g-force spectrum across nature and technology.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # G-force spectrum
 events = [
@@ -388,29 +272,6 @@ g_vals = [e[1] for e in events]
 durations = [e[2] for e in events]
 colors = [e[3] for e in events]
 
-fig, ax = plt.subplots(figsize=(10, 7))
-fig.patch.set_facecolor('#1f2937')
-ax.set_facecolor('#111827')
-
-bars = ax.barh(range(len(names)), g_vals, color=colors, height=0.6)
-ax.set_xscale('log')
-ax.set_yticks(range(len(names)))
-ax.set_yticklabels(names, color='white', fontsize=9)
-ax.set_xlabel('G-force (log scale)', color='white')
-ax.set_title('The G-Force Spectrum: From Standing to Bullets', color='white', fontsize=13)
-ax.tick_params(colors='gray')
-
-# Labels with duration
-for i, (bar, val, dur) in enumerate(zip(bars, g_vals, durations)):
-    x_pos = val * 1.5 if val < 50000 else val * 0.3
-    ax.text(x_pos, i, f'{val:,}g ({dur})', va='center', color='white', fontsize=8)
-
-# Zones
-ax.axvline(100, color='#ef4444', linestyle='--', linewidth=1, alpha=0.5)
-ax.text(100, -0.8, 'Human brain\\ndamage', color='#ef4444', fontsize=8, ha='center')
-
-plt.tight_layout()
-plt.show()
 
 print("Notice the LOG scale — each grid line is 10x more.")
 print()
@@ -443,7 +304,6 @@ Biomimicry isn't just copying — it's understanding the **principle** behind na
       checkAnswer: 'Many examples: shark skin → drag-reducing swimsuits and ship hulls; kingfisher beak → Shinkansen bullet train nose (reduced sonic boom); gecko feet → reusable adhesives; termite mounds → passive building ventilation; spider silk → strong, lightweight fibers; butterfly wings → iridescent displays without pigment. Nature has a 3.8 billion year R&D head start.',
       codeIntro: 'Compare the shock absorption of a woodpecker-inspired multi-layer helmet vs. a traditional single-layer helmet.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Simulate impact absorption: single layer vs multi-layer (woodpecker-inspired)
 time = np.linspace(0, 20, 1000)  # milliseconds
@@ -464,24 +324,6 @@ layer2 = np.exp(-((time - 5.5) ** 2) / 1.8) * 500 * 0.80 * 0.60
 # Layer 3: inner liner (tight fit, distributes) -30% of remaining
 bio_output = np.exp(-((time - 6.5) ** 2) / 2.5) * 500 * 0.80 * 0.60 * 0.70
 
-fig, ax = plt.subplots(figsize=(10, 5))
-fig.patch.set_facecolor('#1f2937')
-ax.set_facecolor('#111827')
-
-ax.plot(time, impact, color='#6b7280', linewidth=1, linestyle='--', label='No helmet (raw impact)')
-ax.plot(time, trad_output, color='#f59e0b', linewidth=2, label=f'Traditional helmet ({trad_absorption*100:.0f}% reduction)')
-ax.plot(time, bio_output, color='#22c55e', linewidth=2, label=f'Woodpecker-inspired ({(1-0.8*0.6*0.7)*100:.0f}% reduction)')
-ax.fill_between(time, bio_output, alpha=0.1, color='#22c55e')
-ax.axhline(100, color='#ef4444', linestyle=':', linewidth=1, label='Concussion threshold (100g)')
-
-ax.set_xlabel('Time (ms)', color='white')
-ax.set_ylabel('Force at brain (g)', color='white')
-ax.set_title('Helmet Comparison: Traditional vs Woodpecker-Inspired', color='white', fontsize=13)
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=9)
-ax.tick_params(colors='gray')
-
-plt.tight_layout()
-plt.show()
 
 trad_peak = max(trad_output)
 bio_peak = max(bio_output)
@@ -526,6 +368,7 @@ print("Biomimicry: 3.8 billion years of R&D, free to copy.")`,
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
+            diagram={[WoodpeckerImpactDiagram, WoodpeckerSkullLayersDiagram, WoodpeckerHyoidDiagram, WoodpeckerSpongyBoneDiagram, WoodpeckerBrainFitDiagram, WoodpeckerHelmetDiagram][i] ? createElement([WoodpeckerImpactDiagram, WoodpeckerSkullLayersDiagram, WoodpeckerHyoidDiagram, WoodpeckerSpongyBoneDiagram, WoodpeckerBrainFitDiagram, WoodpeckerHelmetDiagram][i]) : undefined}
             pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
         ))}
       </div>

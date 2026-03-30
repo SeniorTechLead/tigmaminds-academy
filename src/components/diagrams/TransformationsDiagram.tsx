@@ -13,7 +13,7 @@ export default function TransformationsDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 540 200" className="w-full max-w-xl mx-auto" role="img" aria-label="Geometric transformations: translation, rotation, and reflection">
+      <svg viewBox="0 0 586 242" className="w-full max-w-xl mx-auto" role="img" aria-label="Geometric transformations: translation, rotation, and reflection">
         {/* Panel 1: Translation */}
         <g>
           <Grid ox={10} oy={30} w={160} h={140} />

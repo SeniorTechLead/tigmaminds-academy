@@ -1,7 +1,7 @@
 export default function BatteryCrossSectionDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 300 350" className="w-full max-w-sm mx-auto" role="img" aria-label="Battery cross-section diagram">
+      <svg viewBox="0 0 373 390" className="w-full max-w-sm mx-auto" role="img" aria-label="Battery cross-section diagram">
         <defs>
           <marker id="batArrow" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
             <polygon points="0 0, 7 2.5, 0 5" className="fill-yellow-500" />

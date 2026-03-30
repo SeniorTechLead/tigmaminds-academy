@@ -97,7 +97,7 @@ export default function MeanMedianModeDiagram() {
       </div>
 
       <svg
-        viewBox="0 0 520 220"
+        viewBox="0 0 546 242"
         className="w-full"
         role="img"
         aria-label="Mean, Median, and Mode diagram"

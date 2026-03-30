@@ -15,11 +15,11 @@ const attentionMatrix: number[][] = [
 ];
 
 const explanations: Record<number, string> = {
-  0: "\"The\" is a function word. The model distributes attention broadly, with a lean toward \"elephant\" \u2014 the noun it modifies.",
-  1: "\"Elephant\" attends to itself, \"rumbled\" (what it did), and \"nervous\" (its state) \u2014 building a picture of the subject.",
+  0: "\"The\" is a function word. The model distributes attention broadly, with a lean toward \"elephant\" — the noun it modifies.",
+  1: "\"Elephant\" attends to itself, \"rumbled\" (what it did), and \"nervous\" (its state) — building a picture of the subject.",
   2: "To understand \"rumbled\", the model attends most to \"elephant\" (what rumbled?) and \"nervous\" (evidence of nervousness).",
   3: "\"Because\" is a connector. It looks ahead to \"nervous\" (the reason) and back to \"rumbled\" (the effect).",
-  4: "The model learns that \"it\" refers to \"elephant\" \u2014 not \"rumbled\" or \"because\". This is self-attention: each word looks at every other word to understand context.",
+  4: "The model learns that \"it\" refers to \"elephant\" — not \"rumbled\" or \"because\". This is self-attention: each word looks at every other word to understand context.",
   5: "\"Was\" links subject to state. It attends strongly to \"it\" (the subject) and \"nervous\" (the predicate).",
   6: "To understand \"nervous\", the model attends most to \"elephant\" (what is nervous?) and \"rumbled\" (evidence of nervousness).",
 };
@@ -46,7 +46,7 @@ export default function TransformerAttentionDiagram() {
   return (
     <div className="w-full max-w-xl mx-auto">
       <svg
-        viewBox="0 0 560 420"
+        viewBox="0 0 588 441"
         className="w-full h-auto"
         role="img"
         aria-label="Transformer self-attention diagram showing how words attend to each other"

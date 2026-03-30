@@ -2,7 +2,7 @@ export default function EnergyProfileDiagram() {
   return (
     <div className="my-4">
       <svg
-        viewBox="0 0 450 300"
+        viewBox="0 0 540 340"
         className="w-full max-w-lg mx-auto"
         role="img"
         aria-label="Energy profile diagram comparing reaction with and without catalyst"

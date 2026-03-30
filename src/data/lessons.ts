@@ -1,8 +1,6 @@
 import { Cpu, Lightbulb, Bot, Code2, Rocket, Sparkles, Leaf, Sun, Cloud, Mountain, Music, TreePine, Construction } from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
-
-export type Skill = 'Python' | 'HTML/CSS' | 'JavaScript' | 'Arduino' | 'NumPy' | 'Matplotlib' | 'Data Analysis' | 'Machine Learning' | 'Circuit Design' | 'Lab Skills';
-export type Track = 'Programming' | 'AI & Data' | 'Robotics & Electronics' | 'Web Development' | 'Science & Lab';
+import type { Lesson, Subject, Skill, Track } from './lesson-types';
+export type { Lesson, Subject, Skill, Track };
 
 export const SKILLS: { key: Skill; color: string }[] = [
   { key: 'Python', color: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300' },
@@ -25,18 +23,6 @@ export const TRACKS: { key: Track; color: string; icon: string; description: str
   { key: 'Science & Lab', color: 'bg-emerald-500', icon: '🔬', description: 'Biology, chemistry, physics experiments' },
 ];
 
-export type Subject =
-  | 'Biology'
-  | 'Physics'
-  | 'Chemistry'
-  | 'Computer Science'
-  | 'Engineering'
-  | 'Geography'
-  | 'Ecology'
-  | 'Mathematics'
-  | 'Economics'
-  | 'Music & Arts';
-
 export const SUBJECTS: { key: Subject; color: string; icon: string }[] = [
   { key: 'Biology', color: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300', icon: '🧬' },
   { key: 'Physics', color: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300', icon: '⚡' },
@@ -52,7 +38,9 @@ export const SUBJECTS: { key: Subject; color: string; icon: string }[] = [
 
 export const lessons: Lesson[] = [
 {
+    id: 1,
     slug: 'orange-sunsets-assam',
+    tradition: 'Northeast India',
     story: { title: 'Why Assam\'s Sunsets Are Orange', tagline: 'The physics of why the sky turns golden over the Brahmaputra.', content: `
 **The Sky Painter**
 
@@ -185,7 +173,7 @@ The people of Assam say that if you watch the sunset quietly, you can feel Rongi
         'Your eyes detect all colors using just three types of cone cells (red, green, blue) — this is why computer screens can reproduce millions of colors using only three colored sub-pixels (RGB).',
       ],
       offlineActivity: 'Fill a clear glass with water and add a few drops of milk (just enough to make it slightly cloudy). Shine a flashlight through the glass from one side. Look at the glass from the side — the beam appears bluish. Now look through the glass from the far end — the light appears orange or reddish. You have just created Rayleigh scattering: the tiny milk particles scatter short (blue) wavelengths sideways while long (red) wavelengths pass straight through, exactly like the atmosphere does with sunlight.',
-      offlineActivityDiagram: 'MilkScatteringDiagram',
+      offlineActivityDiagram: 'ActivityMilkGlassDiagram',
       codeTeaser: `import numpy as np
 import matplotlib.pyplot as plt
 
@@ -214,7 +202,9 @@ plt.show()  # What does this plot tell you?`,
     },
   },
   {
+    id: 2,
     slug: 'fishermans-daughter-storm',
+    tradition: 'Northeast India',
     story: { title: 'The Fisherman\'s Daughter and the Storm', tagline: 'Surviving a cyclone — the science of storms and the sea.', content: `
 **The Nets**
 
@@ -284,6 +274,7 @@ In the fishing villages along the Brahmaputra, the people of Assam still tell th
     stem: { title: 'Ocean Science & Storm Formation', description: 'Surviving a cyclone — the science of storms and the sea.', icon: Cloud, color: 'from-slate-400 to-blue-500', skills: ['Understand how cyclones form from warm ocean surfaces and low-pressure systems', 'Read weather maps and interpret pressure isobars', 'Analyze wind speed and storm surge data', 'Model storm trajectories using historical datasets'], project: {
         title: 'Track and Visualize Historical Cyclone Paths',
         description: 'Use real cyclone track data from the Bay of Bengal to plot storm paths, analyze wind speed trends, and identify the regions most at risk.',
+        outputDiagram: 'StormDashboardDiagram',
         steps: [
           'Download historical cyclone data from IMD or IBTrACS databases',
           'Parse the CSV data and extract latitude, longitude, wind speed, and pressure',
@@ -326,6 +317,7 @@ In the fishing villages along the Brahmaputra, the people of Assam still tell th
             '**Think about this:** If the Earth did not rotate, would cyclones exist? (Answer: No. Without rotation, there would be no Coriolis effect, no spin, and the rising air would just go straight up and spread out \u2014 you would get thunderstorms, not cyclones.)',
           ],
           keyIdea: 'Earth\u2019s rotation deflects the inflowing winds (Coriolis effect), turning them into a spiral. This is why cyclones spin, and why they cannot form at the equator where the effect is zero.',
+          diagram: 'CoriolisEffectDiagram',
         },
         {
           title: 'Storm Surge \u2014 The Part That Kills',
@@ -337,6 +329,7 @@ In the fishing villages along the Brahmaputra, the people of Assam still tell th
             '**Question to think about:** Why is storm surge more dangerous at high tide than at low tide? (Answer: the surge height adds on top of the existing tide level, so a 5-metre surge at high tide floods much farther inland than the same surge at low tide.)',
           ],
           keyIdea: 'Storm surge \u2014 a wall of ocean water, not just waves \u2014 causes 90% of cyclone deaths. Shallow seabeds and funnel-shaped coasts like the Bay of Bengal make it far worse.',
+          diagram: 'StormSurgeDiagram',
         },
       ],
       vocabulary: [
@@ -357,10 +350,11 @@ In the fishing villages along the Brahmaputra, the people of Assam still tell th
         'A cyclone is essentially a heat engine: it converts thermal energy from warm ocean water (above 26.5\u00B0C) into the kinetic energy of wind, with latent heat released by condensation as the main power source.',
       ],
       offlineActivity: 'Fill a large bowl with water and let it settle completely. Stir the water rapidly in a circle, then slowly lift your finger out. Watch how a vortex (spinning funnel) forms in the center \u2014 this is the same physics that creates a cyclone\'s eye. The spinning water pulls away from the center, just as spinning air creates the low-pressure eye of a cyclone. Now try adding a few drops of food coloring at the edge and watch how the spiral bands form as the color gets pulled into the rotation.',
+      offlineActivityDiagram: 'ActivityVortexDiagram',
       codeTeaser: `import numpy as np
 
-# How much sunlight survives the atmospheric path?
-# Beer-Lambert law: surviving = initial * e^(-scattering * path)
+# Estimate cyclone intensity from sea temperature
+# Warmer ocean = lower eye pressure = stronger winds
 
 sea_temp = 28.5       # °C — Bay of Bengal surface
 pressure = 1013       # millibars — normal
@@ -386,7 +380,9 @@ print(f"Danger level: {'EXTREME' if storm_surge > 3 else 'HIGH'}")`,
     },
   },
   {
+    id: 3,
     slug: 'snow-leopards-promise',
+    tradition: 'Northeast India',
     story: { title: 'The Snow Leopard\'s Promise', tagline: 'Survival in the high mountains of Sikkim — altitude science.', content: `
 **The Mountain Above the Clouds**
 
@@ -454,6 +450,7 @@ Diki still herds yaks on Khangchendzonga's slopes. She has never seen the snow l
     stem: { title: 'Altitude & Mountain Physics', description: 'Survival in the high mountains of Sikkim — altitude science.', icon: Mountain, color: 'from-slate-400 to-gray-500', skills: ['Understand how atmospheric pressure and oxygen levels change with altitude', 'Analyze temperature lapse rates in mountain environments', 'Model altitude-dependent physiological responses like acclimatization', 'Interpret topographic maps and elevation profiles'], project: {
         title: 'Build an Altitude Effects Calculator',
         description: 'Create a tool that calculates air pressure, oxygen availability, boiling point of water, and temperature at any given altitude on Khangchendzonga.',
+        outputDiagram: 'MountainBarometricDiagram',
         steps: [
           'Research the barometric formula relating altitude to atmospheric pressure',
           'Implement calculations for pressure, O2 partial pressure, and boiling point vs altitude',
@@ -496,6 +493,7 @@ Diki still herds yaks on Khangchendzonga's slopes. She has never seen the snow l
             'Snow leopards live at 3,000\u20135,500 m, where temperatures can drop to -40\u00b0C in winter. They survive with a thick double-layered fur coat, wide furry paws (natural snowshoes), and a long thick tail they wrap around their body like a scarf while sleeping.',
           ],
           keyIdea: 'Mountains are cold because the ground heats the air from below (not the sun directly), and rising air expands and cools. Temperature drops about 6.5\u00b0C per 1,000 m of altitude.',
+          diagram: 'MountainTemperatureDiagram',
         },
         {
           title: 'How Bodies Adapt to Thin Air',
@@ -507,6 +505,7 @@ Diki still herds yaks on Khangchendzonga's slopes. She has never seen the snow l
             '**Think about this:** Diki\u2019s family are yak herders at high altitude. Yaks also have more haemoglobin and larger lungs than lowland cattle. The same problem \u2014 thin air \u2014 produces similar solutions in completely different species.',
           ],
           keyIdea: 'Oxygen percentage stays the same at every altitude (20.9%) \u2014 but fewer total air molecules means less oxygen per breath. The body adapts with faster breathing, more red blood cells, and (over generations) genetic changes.',
+          diagram: 'AltitudeAdaptationDiagram',
         },
       ],
       vocabulary: [
@@ -527,6 +526,7 @@ Diki still herds yaks on Khangchendzonga's slopes. She has never seen the snow l
         'The Brahmaputra River begins as the Yarlung Tsangpo on the Tibetan Plateau at over 4,000 meters altitude, where water boils at about 87°C.',
       ],
       offlineActivity: 'Fill a balloon at ground level and measure its size with a string. Then carry it to the highest point you can find (a hilltop, upper floor of a building). Does the balloon expand slightly? This shows how lower air pressure at height lets gases expand \u2014 the same principle that makes breathing harder at altitude.',
+      offlineActivityDiagram: 'ActivityBalloonDiagram',
       codeTeaser: `import numpy as np
 
 # How does air pressure change with altitude?
@@ -554,7 +554,9 @@ print(f"A snow leopard thrives here. You would gasp.")`,
     },
   },
   {
+    id: 4,
     slug: 'map-makers-granddaughter',
+    tradition: 'Northeast India',
     story: { title: 'The Map Maker\'s Granddaughter', tagline: 'Mapping the hills of Meghalaya — cartography as exploration.', content: `
 **The Girl With Maps in Her Head**
 
@@ -608,6 +610,7 @@ Anusha kept drawing maps. Maps of her school. Maps of her grandmother's kitchen.
     stem: { title: 'Cartography & GIS', description: 'Mapping the hills of Meghalaya — cartography as exploration.', icon: Mountain, color: 'from-emerald-400 to-teal-500', skills: ['Understand coordinate systems, projections, and map scales', 'Use GIS tools to overlay geographic data layers', 'Convert between latitude/longitude and grid references', 'Analyze spatial data to identify geographic patterns'], project: {
         title: 'Create a Digital Map of Your Neighborhood',
         description: 'Build an interactive map using Python that plots landmarks, paths, and points of interest in your local area with proper geographic coordinates.',
+        outputDiagram: 'MapWebGISDiagram',
         steps: [
           'Collect GPS coordinates of 10-15 landmarks in your neighborhood using a phone',
           'Research map projections and choose one appropriate for your region',
@@ -681,6 +684,7 @@ Anusha kept drawing maps. Maps of her school. Maps of her grandmother's kitchen.
         'The Great Trigonometrical Survey of India (1802\u20131871) was the project that first measured the height of Mount Everest \u2014 then called Peak XV.',
       ],
       offlineActivity: 'Draw a map of your route from home to school without looking at any existing map. Include landmarks (trees, shops, turns). Then walk the route and check: what did you get right? What did you miss? This is exactly how early surveyors worked \u2014 walk, observe, draw, verify.',
+      offlineActivityDiagram: 'ActivityMapDrawDiagram',
       codeTeaser: `# Plot your school on a coordinate grid
 latitude = 26.14   # Guwahati (degrees North)
 longitude = 91.74  # Guwahati (degrees East)
@@ -708,7 +712,9 @@ print(f"Straight-line distance: {total:.0f} km")`,
     },
   },
   {
+    id: 5,
     slug: 'old-banyan-trees-stories',
+    tradition: 'Northeast India',
     story: { title: 'The Old Banyan Tree\'s Stories', tagline: 'A tree that lives for centuries — the biology of longevity.', content: `
 **The Oldest Resident**
 
@@ -770,6 +776,7 @@ Dimpi climbed down from the branch, walked home in the golden evening light, and
     stem: { title: 'Tree Biology & Longevity', description: 'A tree that lives for centuries — the biology of longevity.', icon: TreePine, color: 'from-green-500 to-emerald-600', skills: ['Understand tree ring analysis (dendrochronology) for dating and climate study', 'Analyze how trees transport water from roots to canopy via transpiration', 'Model tree growth rates under different environmental conditions', 'Identify symbiotic relationships between trees and other organisms'], project: {
         title: 'Analyze Tree Growth Using Ring Data',
         description: 'Study tree ring width data to reconstruct historical climate patterns and calculate the growth rate and age of a banyan tree.',
+        outputDiagram: 'BanyanGrowthModelDiagram',
         steps: [
           'Find or create a dataset of tree ring widths from a sample core',
           'Plot ring width over time to visualize growth patterns',
@@ -812,6 +819,7 @@ Dimpi climbed down from the branch, walked home in the golden evening light, and
             '**Think about this:** Why do banyans grow better in humid climates like Assam than in dry climates? (Hint: the aerial roots need moisture from the air while they are dangling, before they reach the soil.)',
           ],
           keyIdea: 'Banyan aerial roots grow down from branches to become new trunks \u2014 like adding pillars to a building. This lets one tree expand into a forest-sized canopy with no limit.',
+          diagram: 'BanyanRootsDiagram',
         },
         {
           title: 'Old Trees and Carbon \u2014 Why Ancient Banyans Matter for Climate',
@@ -843,6 +851,7 @@ Dimpi climbed down from the branch, walked home in the golden evening light, and
         'Banyan trees start life as epiphytes — a seed deposited by a bird on another tree grows roots downward, eventually strangling and replacing the host tree.',
       ],
       offlineActivity: 'Find the largest tree near you. Measure around its trunk with a string (this is the circumference). Divide by 3.14 to get the diameter. Research how to estimate a tree\'s age from its diameter for that species. Draw the tree and label its parts: trunk, branches, roots, leaves, bark.',
+      offlineActivityDiagram: 'ActivityTreeMeasureDiagram',
       codeTeaser: `# How much carbon does a tree store?
 trunk_diameter = 1.5  # metres (a large banyan)
 height = 15           # metres
@@ -870,7 +879,9 @@ print(f"That is {carbon * 3.67:.0f} kg of CO2 pulled from the air!")`,
     },
   },
   {
+    id: 6,
     slug: 'tigers-whisker',
+    tradition: 'Northeast India',
     story: { title: 'The Tiger\'s Whisker', tagline: 'What whiskers can feel — sensory systems and haptic technology.', content: `
 **The Sick Grandfather**
 
@@ -1009,7 +1020,9 @@ And somewhere in the green hills, a tiger still comes to a certain rock at dawn,
     },
   },
   {
+    id: 7,
     slug: 'basket-weavers-song',
+    tradition: 'Northeast India',
     story: { title: 'The Basket Weaver\'s Song', tagline: 'The mathematics of weaving patterns.', content: `
 **The Girl with Two Loves**
 
@@ -1093,57 +1106,92 @@ In Manipur, they still say that the best weavers are the ones who sing while the
     level0: {
       concepts: [
         {
-          title: 'Tessellations: When Shapes Fill Space Perfectly',
+          title: "Start Here — Weaving Is Counting",
           paragraphs: [
-            'A tessellation is a pattern of shapes that covers a flat surface completely with no gaps and no overlaps. The simplest tessellations use a single regular polygon repeated across a plane. Only three regular polygons can tessellate by themselves: equilateral triangles (interior angle 60°, and 6 × 60° = 360°), squares (4 × 90° = 360°), and regular hexagons (3 × 120° = 360°). The key rule is that the angles meeting at every vertex must sum to exactly 360°.',
-            'Basket weaving naturally produces tessellations because strips of material (bamboo, cane, or palm leaf) are interlaced in repeating patterns. The simplest weave — over one, under one — creates a square tessellation. More complex weaves like twill (over two, under two, offset by one) create diagonal patterns. Traditional Assamese bamboo weavers create extraordinary patterns that mathematicians would classify as wallpaper groups — the 17 possible symmetry patterns that can repeat across a plane. These artisans discovered through craft what mathematicians proved through algebra.',
-            'Tessellations appear throughout nature and engineering: honeycomb cells are hexagonal tessellations (the most area-efficient shape with the least perimeter), the Giant\'s Causeway in Ireland shows natural basalt tessellations, fish scales overlap in tessellating patterns, and modern architecture uses tessellated facades for both structural and aesthetic reasons. Understanding tessellations is fundamental to computer graphics, where every 3D surface is broken into tessellating triangles for rendering.',
+            "In the story, old Tomba asks Thoibi how she makes her diamond pattern. Her answer: 'Over two, under one. Over two, under one. Then shift by one and repeat.' That is a **counting rule** — a set of instructions that, when followed exactly, produces a pattern. No drawing required. No artistic talent. Just counting.",
+            "**Try this right now.** Interlace your fingers loosely. Your fingers are going over-one-under-one-over-one-under-one. That is the simplest weaving pattern — called **plain weave**. Every strip crosses over one neighbour, then under the next, then over, then under. The result is a grid of tiny squares, like graph paper.",
+            "Now imagine changing the rule. Instead of over-1-under-1, you go **over-2-under-1**. And on the next row, you *shift* everything one position to the right. Now the 'over' sections create **diagonal lines** running across the fabric. This is called **twill weave** — it is how denim jeans are made. Change the counting rule again (say, over-3-under-1 with a shift of 2) and you get a completely different pattern.",
+            "What Thoibi is following is called an **algorithm** — a word that sounds complicated but is not. An algorithm is simply a **list of steps you follow in order to complete a task**. A recipe is an algorithm: step 1, chop onions; step 2, heat oil; step 3, fry until golden. Done — three steps, task complete. Some algorithms have a loop built in: a weaving pattern says step 1, go over 2; step 2, go under 1; step 3, shift one position; step 4, go back to step 1. That loop is what creates the repeating pattern. But the key idea is the same: **follow the steps exactly, and you get the same result every time** — no guessing, no talent needed, just counting.",
+            "The stunning thing is: **every weaving pattern in the world** — from Thoibi's Manipuri baskets to Scottish tartans to Japanese sashiko — is nothing more than an algorithm. Different numbers, different shifts, different results. Change the counting rule and you change the pattern. A computer program is also an algorithm — just written in code instead of bamboo. The weaver was programming 5,000 years before computers existed.",
+            "**Check yourself:** If you weave over-1-under-1 you get a grid of tiny squares. If you weave over-2-under-1 with a shift, you get diagonal stripes. What would over-1-under-1-over-1-under-3 produce? (Hint: the long 'under-3' sections would create wide horizontal bands separated by thin gridded rows.)",
           ],
-          keyIdea: 'A tessellation fills a surface with no gaps or overlaps — only equilateral triangles, squares, and hexagons can do this alone, and basket weaving naturally produces these mathematical patterns.',
-          diagram: 'TessellationDiagram',
+          keyIdea: "An algorithm is a list of steps you follow in order to complete a task. A recipe, a weaving pattern, and a computer program are all algorithms. Weaving algorithms loop — and the three numbers (over how many, under how many, shift by how many) determine the pattern.",
+          diagram: 'AlgorithmStepsDiagram',
         },
         {
-          title: 'Structural Geometry: Why Woven Shapes Are Strong',
+          title: "Why Weaving Makes Weak Things Strong",
           paragraphs: [
-            'The geometry of a woven structure determines its strength. A single bamboo strip is flexible and weak — it bends easily. But when strips are interlaced at right angles and pulled tight, each strip constrains the movement of every strip it crosses. The friction at each crossing point locks the strips in place, creating a rigid structure from flexible components. This is an example of emergent properties: the whole has properties that none of the parts have individually.',
-            'The key structural principle is that triangles are inherently rigid while rectangles are not. A square frame made of four strips with hinged corners can collapse into a diamond (it has one degree of freedom). But adding a diagonal strip — creating two triangles — makes the frame rigid. Many advanced basket weaving patterns incorporate diagonal elements precisely because weavers discovered empirically that diagonal crossings make stronger baskets. The mathematical term for this property is triangulation, and it is the same principle used in bridge trusses, bicycle frames, and geodesic domes.',
-            'The strength-to-weight ratio of a well-woven bamboo basket is remarkable. Bamboo itself has a tensile strength of about 350-500 MPa — comparable to mild steel — but is only about one-tenth as dense. A woven bamboo structure distributes loads across many crossing points, so no single strip bears the full force. This is why a thin bamboo basket can hold 20 or 30 kilograms of rice without breaking. Modern composite materials like carbon fiber weaves use the same principle: strong fibers woven together in optimized patterns to create lightweight, incredibly strong structures.',
+            "Pick up a single sheet of paper. Bend it. Trivially easy — paper is weak. Now **roll it into a tube**. Try to crush the tube from the ends. Suddenly it is surprisingly strong. The same material, arranged differently, has completely different strength. Weaving does the same trick with bamboo.",
+            "A single bamboo strip is thin, flexible, and weak — you can snap it with one hand. But when you interlace 20 strips tightly in a grid, each strip **locks every other strip in place**. Try to pull one strip out and it is held by friction at every crossing point. Try to push the basket sideways and each strip resists because it is pinned by the strips running the other direction. The whole thing is rigid, even though every individual piece is floppy.",
+            "Here is a key insight: **squares are weak, but triangles are strong.** Make a square frame from four sticks with loose joints at the corners. Push one corner sideways and the whole thing collapses into a diamond — it has no resistance. Now add one diagonal stick, turning the square into two triangles. Try pushing again. It will not budge. The diagonal locks the shape.",
+            "This is why traditional weavers in Assam and Manipur often add **diagonal strips** to their baskets. The basic over-under grid gives you squares. Adding strips at 60° angles turns those squares into triangles — and the basket becomes dramatically stronger. The same principle is why bridges have criss-crossing beams, bicycle frames use triangular tubes, and geodesic domes are made of triangles.",
+            "**Try this:** Make a square from four pencils and tape the corners loosely. Push one corner — it collapses. Now tape a fifth pencil diagonally across the square. Push again. The triangle holds.",
           ],
-          keyIdea: 'Weaving turns flexible strips into rigid structures because each crossing point constrains movement — the same triangulation principle that makes bridges and bicycle frames strong.',
+          keyIdea: "Weaving turns floppy strips into rigid structures because each crossing point locks the strips in place. Adding diagonal elements creates triangles — the strongest shape in engineering.",
+          diagram: 'SquareVsTriangleDiagram',
         },
         {
-          title: 'Symmetry and Pattern Mathematics',
+          title: "Patterns, Rhythm, and the Connection to Music",
           paragraphs: [
-            'Every repeating pattern has underlying symmetry — a set of transformations that map the pattern onto itself. The four fundamental symmetry operations are: translation (sliding the pattern in a direction), rotation (turning around a point), reflection (mirror image across a line), and glide reflection (a combination of sliding and mirroring). In 1891, the Russian mathematician Fedorov proved that there are exactly 17 distinct combinations of these symmetries possible for patterns that repeat across a plane — called the 17 wallpaper groups.',
-            'Traditional basket weaving patterns from around the world — including Assamese bamboo work — display nearly all 17 wallpaper groups. A simple over-under-over-under weave has the symmetry group p4m (four-fold rotational symmetry with mirror lines). A twill weave has p2 (two-fold rotation, no mirror symmetry). Herringbone patterns have pmg (glide reflections). These artisan traditions independently discovered and explored the complete mathematical landscape of planar symmetry, centuries before mathematicians formally classified it.',
-            'Symmetry analysis has practical applications beyond aesthetics. In crystallography, the symmetry of a material\'s atomic arrangement determines its physical properties — conductivity, strength, optical behavior. In computer science, recognizing symmetry in patterns allows image compression algorithms to store only one unit cell of a repeating pattern rather than the entire image. In weaving, understanding symmetry helps predict how a pattern will behave when the basket curves or meets a corner — certain symmetry groups handle curvature gracefully while others produce distortions.',
+            "Old Tomba turned Thoibi's weaving instructions into a song: 'Over two, under one. Over two, under one.' The counting became a **rhythm**. And that is not a coincidence — weaving patterns and musical rhythms are built from the same mathematics.",
+            "Think about a drum beat: **BOOM-tap-tap-BOOM-tap-tap**. That is a repeating pattern with a rule: one strong beat, two weak beats, repeat. Now think about a weave: **OVER-under-under-OVER-under-under**. Same rule. Same pattern. One is sound in time, the other is bamboo in space. The numbers are identical — only the material changes.",
+            "This connection goes deeper than you might expect. In 1804, a French weaver named Joseph-Marie Jacquard built a loom controlled by **punched cards**. Each card had holes that told the loom: this thread over, this thread under. Different cards made different patterns. Decades later, a mathematician named Charles Babbage saw the Jacquard loom and thought: *if you can encode a weaving pattern on a card, you can encode any calculation on a card.* He designed the first mechanical computer based on the same punched-card idea.",
+            "So the next time you look at a woven basket, remember: you are looking at a physical algorithm, a frozen rhythm, and the ancestor of every computer program ever written.",
+            "**Check yourself:** Why is weaving sometimes called 'binary'? (Answer: at every crossing point, a strip is either OVER or UNDER — only two options, just like the 1s and 0s in a computer. Every weaving pattern is a sequence of binary choices.)",
           ],
-          keyIdea: 'Every repeating pattern belongs to one of exactly 17 symmetry groups — basket weavers discovered these patterns empirically, centuries before mathematicians proved only 17 are possible.',
-          diagram: 'SymmetryDiagram',
+          keyIdea: "Weaving and music share the same mathematics — repeating counting patterns. The Jacquard loom's punched cards for weaving patterns directly inspired the design of the first computers.",
+          diagram: 'RhythmPlayerDiagram',
         },
       ],
       vocabulary: [
-        ['Tessellation', 'A pattern of shapes that fit together perfectly with no gaps or overlaps — like tiles on a floor or a woven basket surface'],
-        ['Symmetry', 'When a shape or pattern looks the same after a transformation like rotation, reflection, or translation'],
-        ['Unit Cell', 'The smallest repeating piece of a pattern — copy and paste it in every direction to recreate the entire design'],
-        ['Warp and Weft', 'The two sets of threads in weaving — warp threads run lengthwise (up-down) and weft threads run crosswise (left-right), interlacing to create the fabric'],
-        ['Algorithm', 'A step-by-step set of instructions to complete a task — a weaving pattern is an algorithm that tells the weaver exactly which threads to cross'],
+        ['Plain weave', 'The simplest weaving pattern — over one, under one, repeating. Creates a grid of tiny squares, like a chessboard'],
+        ['Twill weave', 'Over two (or more), under one, shifted one position each row — creates diagonal lines. Denim jeans use twill weave'],
+        ['Warp and weft', 'The two sets of strips in any weave — warp runs up-down (fixed), weft runs left-right (woven through). Together they create the fabric'],
+        ['Algorithm', 'A list of steps you follow in order, then repeat — a recipe, a weaving pattern, and a computer program are all algorithms. Change the steps and you change the result'],
+        ['Binary', 'A system with only two options (like on/off or over/under) — both weaving and computers work in binary'],
       ],
       trueFalse: [
-        { statement: 'A basic over-under-over-under weave pattern has mathematical symmetry.', isTrue: true, explanation: 'A plain weave has p4m symmetry — it looks the same when rotated 90°, reflected horizontally, or reflected vertically. Weavers discovered this symmetry empirically, long before mathematicians classified it.' },
-        { statement: 'There are hundreds of different types of repeating pattern symmetries possible on a flat surface.', isTrue: false, explanation: 'Mathematicians have proven that there are exactly 17 wallpaper groups — only 17 distinct ways a pattern can repeat across a flat surface. Traditional basket weavers around the world independently discovered nearly all 17.' },
-        { statement: 'Weaving patterns are purely decorative and have no connection to mathematics or computing.', isTrue: false, explanation: 'Weaving is deeply mathematical. The Jacquard loom (1804) used punched cards to control thread patterns — the same concept that inspired Charles Babbage\'s computer designs. Weaving is essentially binary: each crossing is either over or under, like 1 or 0.' },
+        { statement: 'Changing the over-under counting rule changes the pattern of the weave.', isTrue: true, explanation: 'Over-1-under-1 makes a grid. Over-2-under-1 with a shift makes diagonal stripes. Over-3-under-1 with a different shift makes yet another pattern. The counting rule IS the pattern.' },
+        { statement: 'A woven basket is strong because bamboo is a strong material.', isTrue: false, explanation: 'A single bamboo strip snaps easily. The strength comes from interlacing — each strip locks every other strip at their crossing points, making the whole structure rigid even though each piece alone is floppy.' },
+        { statement: 'The Jacquard loom\'s punched cards helped inspire the invention of computers.', isTrue: true, explanation: 'Charles Babbage saw that punched cards could encode weaving patterns (each hole = a binary choice: over or under). He realised the same idea could encode calculations — and designed the first mechanical computer based on the same principle.' },
       ],
       facts: [
-        'The Jacquard loom, which used punched cards to weave complex patterns, directly inspired the design of early computers — Ada Lovelace compared her programming to "weaving algebraical patterns."',
-        'Assamese bamboo and cane weaving traditions display nearly all 17 mathematically possible wallpaper symmetry groups.',
-        'A hexagonal weave (like a bamboo basket) is structurally stronger than a square weave because forces are distributed across three directions instead of two.',
+        'Every crossing point in a weave is a binary decision: over or under. A basket with 1,000 crossing points contains 1,000 bits of information — like a tiny computer program woven in bamboo.',
+        'Ada Lovelace, the first computer programmer, described her work as "weaving algebraical patterns" — she saw the direct connection between loom instructions and computational instructions.',
+        'Traditional Manipuri basket weavers can produce over 50 distinct patterns by changing just three numbers: how many to go over, how many to go under, and how many positions to shift each row.',
       ],
-      offlineActivity: 'Cut 10 strips of paper (about 1 cm wide, 20 cm long) in two different colors — 5 of each. Weave them together in a basic over-under pattern. Then try a twill pattern: over two, under one, shifting by one strip each row. Compare the patterns. Which one is more flexible? Which one looks more interesting?',
+      offlineActivity: 'Cut 10 strips of paper (about 1 cm wide, 20 cm long) in two different colours — 5 of each. First, weave them in plain weave: over-1-under-1. Then undo it and try twill: over-2-under-1, shifting one position each row. Compare the two: which looks like a grid? Which has diagonal lines? Now try making up your own counting rule and see what pattern it produces.',
+      offlineActivityDiagram: 'TessellationDiagram',
+      codeTeaser: `# Generate a weaving pattern from a counting rule
+# Each cell is either OVER (1) or UNDER (0)
+
+rows, cols = 8, 16
+over, under, shift = 2, 1, 1  # twill weave
+
+for row in range(rows):
+    line = ""
+    offset = (row * shift) % (over + under)
+    for col in range(cols):
+        pos = (col + offset) % (over + under)
+        line += "█" if pos < over else "░"
+    print(line)
+
+# Try changing over=1, under=1 for plain weave
+# Or over=3, under=1, shift=2 for satin weave`,
+      referenceLinks: [
+        { slug: 'patterns-in-nature', reason: 'The same repeating-pattern mathematics that governs weaving also appears in honeycombs, snowflakes, and spiral shells' },
+        { slug: 'geometry-essentials', reason: 'Understand the angles, shapes, and symmetry operations that underlie every weaving pattern' },
+      ],
+      nextLessons: [
+        { slug: 'the-magic-japi-hat', reason: 'The japi hat uses a triaxial weave at 60° — a more advanced version of the same interlacing you learned about here' },
+        { slug: 'honey-hunters-lesson', reason: 'Bees build hexagonal honeycomb — nature\'s own tessellation, using the same geometry that appears in woven baskets' },
+      ],
     },
   },
   {
+    id: 8,
     slug: 'honey-hunters-lesson',
+    tradition: 'Northeast India',
     story: { title: 'The Honey Hunter\'s Lesson', tagline: 'Sustainable honey — the science of bees and pollination.', content: `
 **The Boy Who Wanted Honey**
 
@@ -1211,6 +1259,7 @@ And whenever a young child in the village complained that something was taking t
     stem: { title: 'Entomology & Bee Biology', description: 'Sustainable honey — the science of bees and pollination.', icon: Leaf, color: 'from-amber-400 to-yellow-500', skills: ['Understand bee colony structure: queen, workers, drones and their roles', 'Analyze the waggle dance as a communication system encoding distance and direction', 'Model pollination networks connecting plants and their pollinators', 'Calculate honey production rates from foraging data'], project: {
         title: 'Simulate a Bee Colony Foraging Network',
         description: 'Model how bees communicate flower locations through waggle dances and optimize foraging routes across a landscape.',
+        outputDiagram: 'BeeForagingModelDiagram',
         steps: [
           'Place flower patches at random coordinates on a 2D map with varying nectar values',
           'Simulate scout bees discovering patches and encoding distance/direction in waggle dances',
@@ -1233,56 +1282,108 @@ And whenever a young child in the village complained that something was taking t
     level0: {
       concepts: [
         {
-          title: 'Inside the Hive: Colony Organization and Division of Labor',
+          title: "Start Here — A City of 50,000 With No Boss",
           paragraphs: [
-            'A honeybee colony is a superorganism — a single genetic and functional unit composed of 20,000 to 80,000 individual bees. The colony has three castes: the queen (one per hive, the only fully reproductive female), workers (all female, non-reproductive, making up 95% of the colony), and drones (male, whose sole function is to mate with queens from other colonies). The queen can lay up to 2,000 eggs per day, and she determines the sex of each egg: fertilized eggs become female workers, unfertilized eggs become male drones.',
-            'Worker bees change jobs as they age in a system called temporal polyethism. For the first three days of adult life, a worker cleans cells. From days 3-10, she feeds larvae with a protein-rich secretion called royal jelly. From days 10-20, she builds wax comb, processes nectar into honey, and guards the hive entrance. After day 20, she becomes a forager, venturing out to collect nectar, pollen, water, and plant resins. This age-based division of labor maximizes the colony\'s efficiency — each bee does the job her body is currently best equipped for.',
-            'Communication within the colony relies on pheromones (chemical signals) and the famous waggle dance. When a forager finds a rich flower source, she returns to the hive and performs a figure-eight dance on the vertical comb surface. The direction of the straight-line waggle portion indicates the direction of the food relative to the sun, and the duration of the waggle indicates the distance — about 1 second per kilometer. This dance language was decoded by Austrian zoologist Karl von Frisch, who received the Nobel Prize in 1973 for this discovery.',
+            "Imagine a city with 50,000 residents. Everyone has a job. There are nurses, builders, guards, cleaners, and food collectors. The city runs perfectly — no traffic jams, no shortages, no chaos. Now here is the twist: **there is no mayor, no manager, no boss telling anyone what to do.** Every resident just *knows* their job and does it. Welcome to a beehive.",
+            "A honeybee colony has three types of bee. The **queen** — there is only one — lays eggs. Up to 2,000 a day. That is her entire job. She does not give orders, despite her royal name. The **drones** (males) exist only to mate — they do not work, do not forage, do not even feed themselves. And then there are the **workers** — all female, making up 95% of the colony — who do *everything* else.",
+            "Here is the part that baffled scientists for years: **a worker bee changes jobs as she ages**. In her first 3 days of adult life, she cleans cells. From days 3 to 10, she feeds baby bees. From 10 to 20, she builds wax comb and guards the entrance. After day 20, she becomes a forager — flying out to collect nectar and pollen. No one assigns these roles. Each bee's body chemistry changes with age, and the new chemistry drives her toward the next job automatically.",
+            "**Check yourself:** If the queen is not the boss, why is she called 'queen'? (Answer: the name is misleading. Her role is egg-laying, not ruling. The colony's decisions — where to forage, when to swarm, how warm to keep the hive — are made collectively by thousands of workers, not by one leader.)",
           ],
-          keyIdea: 'A bee colony is a superorganism with age-based division of labor: each worker changes jobs as she ages, from cell cleaner to nurse to builder to forager, communicating through dances and pheromones.',
+          keyIdea: "A bee colony runs without a boss. The queen lays eggs, drones mate, and workers do everything else — changing jobs automatically as they age, driven by body chemistry rather than orders.",
+          diagram: 'BeeColonyDiagram',
         },
         {
-          title: 'Pollination: The Partnership Between Flowers and Bees',
+          title: "The Waggle Dance — GPS Made of Dancing",
           paragraphs: [
-            'Pollination is the transfer of pollen grains from the male part of a flower (anther) to the female part (stigma), enabling fertilization and seed production. While some plants rely on wind or water for pollination, about 75% of the world\'s flowering plants and 35% of food crops depend on animal pollinators — primarily bees. When a bee visits a flower to collect nectar (a sugary liquid), pollen grains stick to the bee\'s fuzzy body. When the bee visits the next flower, some of that pollen rubs off onto the stigma, completing pollination.',
-            'This relationship is mutualistic — both species benefit. The plant gets its pollen transported to another flower of the same species (cross-pollination, which increases genetic diversity), and the bee gets food. Flowers have evolved remarkable strategies to attract bees: bright colors (bees see ultraviolet light, so many flowers have UV patterns invisible to humans that guide bees to the nectar), sweet scents, and nectar rewards. Some flowers have evolved shapes that only specific pollinators can access, ensuring their pollen goes to the right species.',
-            'The economic value of bee pollination is staggering. Globally, pollination services are estimated to be worth $235-$577 billion per year. In India, bee pollination is crucial for crops including mustard, sunflower, apple, lychee, and many vegetables. Without bees, these crops would produce 70-90% less fruit and seed. The recent global decline in bee populations — caused by pesticides (especially neonicotinoids), habitat loss, disease, and climate change — is one of the most serious agricultural threats facing humanity.',
+            "A forager bee has found a patch of mustard flowers 800 metres north of the hive. The flowers are loaded with nectar. She flies back to tell the others. But bees cannot talk. They cannot draw maps. They cannot point. So how does she tell 50,000 sisters *exactly* where the food is?",
+            "She **dances**. On the vertical surface of the honeycomb, in the dark hive, the forager performs a figure-eight dance called the **waggle dance**. The crucial part is the straight-line run in the middle, where she waggles her body side to side. Two pieces of information are encoded in this waggle:\n\n• **Direction:** The angle of the waggle run relative to 'straight up' on the comb tells the other bees the direction of the food relative to the sun. If she waggles at 30° to the right of vertical, the food is 30° to the right of the sun.\n• **Distance:** The longer she waggles, the farther away the food is — roughly 1 second of waggling per kilometre.",
+            "**Try this:** Stand up and face a window (pretend the window is the sun). Now point toward your kitchen. Notice the angle between 'toward the window' and 'toward the kitchen.' A bee would encode that exact angle in her dance. If your kitchen is far away, she would waggle longer. If it is close, a quick waggle.",
+            "This dance language was decoded by scientist **Karl von Frisch**, who spent 20 years watching bees before he cracked the code. He won the Nobel Prize for it in 1973. Think about that — a bee has a brain smaller than a sesame seed, yet she can encode direction, distance, and quality of a food source in a dance, in the dark, on a vertical surface.",
           ],
-          keyIdea: 'Bees pollinate 75% of flowering plants by transferring pollen as they collect nectar — this service is worth hundreds of billions of dollars globally and is essential for food production.',
-          diagram: 'FoodWebDiagram',
+          keyIdea: "The waggle dance encodes direction (angle relative to the sun) and distance (duration of waggle) — a GPS system built from body movement, decoded by a Nobel Prize-winning scientist.",
+          diagram: 'BeeWaggleDanceDiagram',
         },
         {
-          title: 'Honey Chemistry: From Nectar to Preservation',
+          title: "The Deal — What Bees and Flowers Trade",
           paragraphs: [
-            'Honey begins as flower nectar — a dilute sugar solution (about 20-40% sugar, mostly sucrose) that plants produce to attract pollinators. A forager bee collects nectar in a special organ called the honey crop (a expandable section of the foregut). In the crop, an enzyme called invertase begins breaking down sucrose (a disaccharide) into glucose and fructose (monosaccharides). When the forager returns to the hive, she passes the nectar to a house bee mouth-to-mouth, and the process continues with further enzyme addition.',
-            'The house bees then spread the processed nectar across the comb in thin layers and fan it vigorously with their wings. This evaporation process reduces the water content from about 70% to below 18% — a critical threshold. At 18% water, honey is too concentrated for any microorganism to grow in it. Bacteria, yeasts, and molds all need water to survive, and honey is so hygroscopic (water-absorbing) that it actually draws water out of any microbe that lands on it, killing it through osmotic dehydration. When the honey reaches the right consistency, bees cap the cell with a thin layer of wax.',
-            'This preservation chemistry is so effective that edible honey has been found in Egyptian tombs over 3,000 years old. Honey also contains hydrogen peroxide (produced by the enzyme glucose oxidase), a mildly acidic pH of 3.2-4.5, and various antimicrobial compounds from the plants the nectar came from. This combination of low water activity, acidity, and antimicrobial agents makes honey a natural wound dressing — a use documented since ancient times and still used in modern medicine as Medihoney for treating burns and chronic wounds.',
+            "Why do flowers exist? Not for us to admire — flowers evolved for a single purpose: to **attract pollinators**. A flower is an advertisement. Its bright petals are a billboard. Its sweet scent is a radio jingle. Its nectar is a free sample. All of it says one thing to passing bees: *come here*.",
+            "When a bee lands on a flower to drink nectar, tiny grains of **pollen** (the flower's male cells) stick to her fuzzy body. She does not notice — she is focused on the nectar. When she flies to the next flower of the same species, some of that pollen rubs off onto the new flower's sticky **stigma** (the female part). The flower is now pollinated — it can make seeds and fruit.",
+            "This is a **trade**. The bee gets food (nectar and pollen). The flower gets its pollen carried to another flower. Both sides benefit. Neither is doing the other a favour — each is using the other for its own survival. Scientists call this **mutualism**.",
+            "Here is how important this trade is: **one-third of the food you eat** exists because a bee pollinated it. Apples, almonds, mangoes, cucumbers, coffee, mustard — all depend on bees. Without bee pollination, these crops produce 70–90% less fruit. Globally, the value of bee pollination is estimated at **$200–500 billion per year**.",
+            "**A prediction:** Flowers that rely on bees tend to be yellow, blue, or purple — because bees see these colours best (they cannot see red). Flowers that rely on birds are often red — because birds see red well. Next time you see a red flower, check: is it shaped for a bird's beak or a bee's tongue?",
           ],
-          keyIdea: 'Bees transform dilute nectar into honey by adding enzymes and evaporating water below 18% — at this concentration, no microorganism can survive, which is why honey never spoils.',
+          keyIdea: "Flowers trade nectar for pollination — bees get food, flowers get their pollen carried. This mutualism produces one-third of the food humans eat, worth hundreds of billions of dollars globally.",
+          diagram: 'BeePollinationDiagram',
+        },
+        {
+          title: "Honey — The Food That Never Spoils",
+          paragraphs: [
+            "Nectar is mostly water — about 70% water with some sugar dissolved in it. If you left a cup of sugar water on the table for a week, it would grow mould and go rotten. So how do bees turn watery nectar into honey that **literally never spoils**? (Archaeologists found 3,000-year-old honey in Egyptian tombs — still edible.)",
+            "The trick has two steps. First, the bee adds an **enzyme** (a chemical helper) that breaks the sugar into simpler sugars. Second — and this is the key — the house bees spread the nectar in thin layers across the honeycomb and **fan it with their wings** for hours. This evaporates the water. The nectar goes from 70% water down to below **18% water**.",
+            "At 18% water, something remarkable happens: the sugar concentration is so high that **no living thing can grow in it**. Bacteria, yeast, mould — they all need water to survive. Honey is so concentrated that it actually **sucks water out** of any microbe that lands on it, killing it instantly. It is like trying to live in pure salt — nothing survives.",
+            "This is why honey never spoils, why it has been used as a wound dressing for thousands of years (it kills bacteria on contact), and why bees cap each cell with wax once the honey reaches the right thickness — they are sealing a **perfectly preserved food supply** for winter.",
+            "**Check yourself:** If you dilute honey with water (say, to make a drink), will it still resist spoiling? (Answer: no — once you add water above 18%, microorganisms can grow again. That is actually how mead, the world's oldest alcoholic drink, is made — diluted honey that ferments.)",
+          ],
+          keyIdea: "Bees evaporate nectar from 70% water down to 18%, creating a concentration so high that no microorganism can survive — which is why honey never spoils, even after thousands of years.",
+          diagram: 'BeeHoneymakingDiagram',
         },
       ],
       vocabulary: [
-        ['Pollination', 'The transfer of pollen from one flower to another, enabling plants to produce seeds — bees are the most important pollinators on Earth'],
-        ['Colony', 'A group of organisms of the same species living and working together — a honeybee colony can contain 20,000 to 80,000 bees'],
-        ['Nectar', 'A sugary liquid produced by flowers to attract pollinators — bees collect it and transform it into honey'],
-        ['Waggle Dance', 'A figure-eight dance performed by forager bees to communicate the direction and distance of a food source to other bees in the hive'],
-        ['Enzyme', 'A protein that speeds up a chemical reaction — bees add the enzyme invertase to nectar to break down complex sugars into simple ones'],
+        ['Pollination', 'When pollen (male cells) moves from one flower to another, allowing the plant to make seeds and fruit — bees do this accidentally while collecting nectar'],
+        ['Waggle dance', 'A figure-eight dance bees perform in the dark hive to tell others where food is — the angle means direction, the duration means distance'],
+        ['Nectar', 'A sugary liquid that flowers make to attract pollinators — bees collect it and transform it into honey by evaporating the water'],
+        ['Colony', 'A group of the same species living and working together — a bee colony has a queen (eggs), drones (mating), and workers (everything else)'],
+        ['Mutualism', 'A relationship where both sides benefit — bees get food from flowers, and flowers get their pollen carried to other flowers'],
       ],
       trueFalse: [
-        { statement: 'A honeybee visits only one type of flower during each foraging trip.', isTrue: true, explanation: 'This is called flower constancy — a bee that starts collecting from mustard flowers will visit only mustard flowers on that trip. This is efficient for the bee and ensures effective cross-pollination for the plant.' },
-        { statement: 'Honey can spoil if you leave it long enough.', isTrue: false, explanation: 'Properly sealed honey never spoils. Its water content is below 18%, making it too concentrated for any microorganism to survive. Edible honey has been found in Egyptian tombs over 3,000 years old.' },
-        { statement: 'The queen bee makes all the decisions for the hive.', isTrue: false, explanation: 'The queen\'s main role is laying eggs — up to 2,000 per day. Hive decisions (where to forage, when to swarm, hive temperature) are made collectively by worker bees through chemical signals and dances. It is a democracy, not a monarchy.' },
+        { statement: 'The queen bee decides where the other bees should forage.', isTrue: false, explanation: 'The queen only lays eggs. Foraging decisions are made collectively by worker bees using waggle dances — each forager "votes" for a food source by dancing about it, and more bees follow the most enthusiastic dancers.' },
+        { statement: 'Honey found in 3,000-year-old Egyptian tombs was still edible.', isTrue: true, explanation: 'Honey below 18% water is too concentrated for any microorganism to survive. Sealed in a tomb with no added moisture, it remains perfectly preserved for millennia.' },
+        { statement: 'A bee visits many different types of flower during a single foraging trip.', isTrue: false, explanation: 'Bees show "flower constancy" — a bee collecting from mustard flowers sticks to mustard for the whole trip. This makes pollination more effective because pollen reaches the right species of flower.' },
       ],
       facts: [
-        'A single honeybee visits 50 to 1,000 flowers per foraging trip and must visit about 2 million flowers to produce one pound of honey.',
-        'Bees can communicate the exact location of a flower patch using their waggle dance — the angle of the dance indicates direction relative to the sun, and the duration indicates distance.',
-        'One-third of the food we eat depends on bee pollination, including apples, almonds, cucumbers, and coffee.',
+        'To make one pound of honey, bees must visit roughly 2 million flowers and fly a combined distance of about 88,000 kilometres — more than twice around the Earth.',
+        'Bees see ultraviolet light that humans cannot — many flowers have UV patterns (invisible to us) that act like runway lights guiding bees to the nectar.',
+        'In the Khasi Hills of Meghalaya, traditional honey hunters use smoke and humming songs to calm wild rock bees before harvesting — a technique passed down for generations.',
       ],
-      offlineActivity: 'Go outside and watch a flower for 10 minutes. Count how many insects visit it. Note what type of insect (bee, butterfly, fly, beetle) and how long each one stays. Does the insect touch the center of the flower where the pollen is? Draw the flower and mark where each visitor landed.',
+      offlineActivity: 'Go outside and find a flowering plant. Watch it for 10 minutes and count every insect that visits. For each visitor, note: what type (bee, butterfly, fly, beetle)? How long did it stay? Did it touch the centre of the flower where the pollen is? Draw the flower and mark where each visitor landed. You have just collected real pollination data — scientists do exactly this to study which insects are the most important pollinators.',
+      offlineActivityDiagram: 'ActivityFlowerWatchDiagram',
+      codeTeaser: `# Simulating a bee's waggle dance
+# Encode direction and distance in movement
+
+import math
+
+# Flower is 800m away, 45° east of the sun
+sun_direction = 0          # degrees (straight ahead)
+flower_direction = 45      # degrees east of sun
+flower_distance = 800      # metres
+
+# The waggle angle encodes direction
+waggle_angle = flower_direction - sun_direction
+# The waggle duration encodes distance
+waggle_seconds = flower_distance / 1000  # ~1 sec per km
+
+print(f"Waggle angle: {waggle_angle}° from vertical")
+print(f"Waggle duration: {waggle_seconds:.1f} seconds")
+print(f"Message: fly {waggle_angle}° from the sun,")
+print(f"         for about {flower_distance}m")
+
+# Try changing flower_direction to 90 or 180!`,
+      referenceLinks: [
+        { slug: 'ecology-and-populations', reason: 'Understand how bee populations fit into food webs and why their decline threatens entire ecosystems' },
+        { slug: 'symbiosis-and-interactions', reason: 'The bee-flower trade is a textbook example of mutualism — explore other partnerships in nature' },
+        { slug: 'food-webs-energy-flow', reason: 'See how nectar energy flows from flowers to bees to honey — and what happens when a link in the chain breaks' },
+      ],
+      nextLessons: [
+        { slug: 'the-magic-japi-hat', reason: 'The honeycomb is made of hexagons — the same shape that appears in the japi hat, and for a related geometric reason' },
+        { slug: 'firefly-festival-of-majuli', reason: 'Another insect story — fireflies communicate with light flashes, just as bees communicate with dances' },
+        { slug: 'girl-grew-forest', reason: 'Explores what happens to ecosystems when habitats grow — and why pollinators are the first to benefit' },
+      ],
     },
   },
   {
+    id: 9,
     slug: 'bamboo-taught-wind',
+    tradition: 'Northeast India',
     story: { title: 'How the Bamboo Taught the Wind to Dance', tagline: 'Bamboo groves that sing — resonance and Aeolian sound.', content: `
 **The Restless Wind**
 
@@ -1372,57 +1473,104 @@ And somewhere in the music of bamboo and wind, you can hear the echo of two lone
     level0: {
       concepts: [
         {
-          title: 'What Is Resonance?',
+          title: 'Why Bamboo Sings in Wind',
           paragraphs: [
-            'Every physical object has one or more natural frequencies — specific rates at which it vibrates most easily. Push a child on a swing at just the right moment and the swing goes higher with each push. That "right moment" is the swing\'s natural frequency. When an external force matches an object\'s natural frequency, energy transfers efficiently into the oscillation, and the amplitude (size of the vibration) grows dramatically. This phenomenon is called resonance.',
-            'A bamboo stalk in the wind demonstrates resonance beautifully. The stalk has a natural frequency determined by its length, stiffness, and mass — typically between 0.5 and 5 Hz for mature bamboo. When wind gusts happen to match this frequency, the bamboo sways with large, graceful oscillations. When the wind frequency does not match, the bamboo barely moves. This is why bamboo groves seem to dance selectively in the wind — different stalks have different natural frequencies, and at any given moment, only those whose frequency matches the wind\'s rhythm respond strongly.',
-            'Resonance can be both useful and destructive. Musical instruments exploit resonance to amplify sound (a guitar body resonates with the string vibrations to produce audible volume). But resonance can also destroy bridges — the most famous example being the Tacoma Narrows Bridge, which collapsed in 1940 when steady wind excited its torsional resonance frequency. Engineers must design structures to avoid resonance with common environmental frequencies, while musicians design instruments to maximize it.',
+            'Have you ever heard a hollow tube whistle when wind blows across it? Try blowing across the top of an empty bottle \u2014 you get a clear tone. Now blow across a bottle of a different size \u2014 you get a different tone. Something about the tube itself decides which note it produces. What is that "something"?',
+            'When wind flows past a round object like a bamboo stalk, the air cannot simply pass straight through. It has to split and flow around both sides. As it does, it creates spinning pockets of air behind the stalk called **vortices**. These vortices do not form randomly \u2014 they alternate: one peels off the left side, then one from the right, then left again, like a zigzag pattern trailing behind the bamboo. This alternating pattern is called a **von K\u00e1rm\u00e1n vortex street**, named after the engineer who first described it mathematically.',
+            'Each time a vortex peels away, it creates a tiny pressure pulse \u2014 a push. These alternating pushes happen at a specific frequency determined by a beautifully simple formula: **f = St \u00d7 V / D**, where St is a fixed number (about 0.2), V is the wind speed, and D is the bamboo\u2019s diameter. A 5 cm bamboo stalk in a 5 m/s breeze produces vortices at about 20 Hz \u2014 right at the lowest edge of human hearing, a deep hum you feel in your chest more than hear with your ears.',
+            '**Check yourself:** A thin wire (3 mm) and a thick bamboo pole (5 cm) are both in the same 10 m/s wind. Using f = 0.2 \u00d7 V / D, which one produces a higher-pitched sound? Calculate both frequencies before reading on.',
           ],
-          keyIdea: 'Resonance occurs when an external force matches an object\'s natural frequency, causing vibration amplitude to grow dramatically — bamboo stalks sway strongly only when wind frequency matches their natural frequency.',
+          keyIdea: 'Wind flowing past bamboo creates alternating vortices (a von K\u00e1rm\u00e1n vortex street) that produce pressure pulses at a frequency determined by f = St \u00d7 V / D \u2014 the thinner the object or faster the wind, the higher the pitch.',
+          diagram: 'BambooVortexDiagram',
         },
         {
-          title: 'Standing Waves and Harmonics',
+          title: 'Resonance \u2014 When Shaking Gets Dangerous',
           paragraphs: [
-            'When a wave travels along a string or inside a tube and reflects back, the outgoing and returning waves can interfere with each other. At specific frequencies, the waves combine to create a pattern that appears to stand still — the string vibrates up and down in fixed segments. These are called standing waves. The points that remain stationary are called nodes, and the points of maximum vibration are called antinodes.',
-            'The lowest frequency that produces a standing wave is called the fundamental (or first harmonic) — this is the object\'s natural frequency. For a string fixed at both ends (like a guitar string), the fundamental has one antinode and two nodes (at the fixed ends). The second harmonic has two antinodes and three nodes — it vibrates at exactly twice the fundamental frequency. The third harmonic has three antinodes at three times the frequency, and so on. This series of whole-number multiples — f, 2f, 3f, 4f... — is called the harmonic series.',
-            'In bamboo, standing waves form in the air column inside the hollow stem. The bamboo\'s nodes (the solid walls that divide the stem into segments) act as boundaries that reflect sound waves. Each hollow segment between two nodes can support its own standing wave pattern, with the fundamental frequency determined by the segment length. Longer segments produce lower-pitched sounds. When wind blows across an opening in bamboo (or across a crack), it excites these standing wave modes, producing the musical humming sounds that bamboo groves are famous for.',
+            'Imagine pushing a child on a swing. If you push at random moments, the swing barely moves \u2014 your pushes sometimes help and sometimes fight the swing\u2019s motion, cancelling each other out. But if you push at exactly the right moment \u2014 once per swing, always at the top of the arc \u2014 each push adds to the last, and the swing goes higher and higher. That "right moment" is the swing\u2019s **natural frequency**.',
+            'Every object has a natural frequency: a tuning fork, a bridge, a bamboo stalk, a wine glass. It depends on the object\u2019s mass, stiffness, and shape. When an outside force pushes at exactly this frequency, energy piles up with each cycle. The vibrations grow and grow. This is **resonance**.',
+            'Resonance can be beautiful \u2014 it is how every musical instrument works. A guitar body resonates with the strings to amplify sound. A bamboo flute resonates with the air column inside to produce clear notes. But resonance can also be catastrophic. The most famous example: the **Tacoma Narrows Bridge** in Washington State, USA. In 1940, steady 64 km/h winds created vortices that matched the bridge\u2019s twisting frequency. The bridge began to oscillate wildly, twisting back and forth in enormous waves, and after about an hour it tore itself apart and collapsed into the river below.',
+            'This is why soldiers break step when crossing a bridge. Marching in step creates a rhythmic force. If that rhythm matches the bridge\u2019s natural frequency, resonance could build to dangerous levels. After the Broughton Suspension Bridge collapsed in 1831 under 74 marching soldiers, breaking step on bridges became military doctrine worldwide.',
+            '**Prediction you can test:** Fill two identical glasses with different amounts of water and tap each with a spoon. They ring at different pitches because the water changes their natural frequency. The fuller glass has more mass and vibrates at a lower frequency.',
           ],
-          keyIdea: 'Standing waves form when reflections create stable vibration patterns with fixed nodes and antinodes — the harmonic series (f, 2f, 3f...) determines which frequencies a bamboo segment can produce.',
-          diagram: 'MusicalWavesDiagram',
+          keyIdea: 'Resonance occurs when a forcing frequency matches an object\u2019s natural frequency, causing vibration amplitude to grow dramatically \u2014 this is how instruments make music, and how bridges can be destroyed.',
+          diagram: 'BambooResonanceDiagram',
         },
         {
-          title: 'Musical Acoustics: How Bamboo Makes Music',
+          title: 'The Mathematics of Music',
           paragraphs: [
-            'The pitch of a note produced by a vibrating air column depends on the length of the column and whether the tube is open or closed at each end. For a tube open at both ends, the fundamental wavelength is twice the tube length (λ = 2L), and the fundamental frequency is f = v/(2L), where v is the speed of sound (about 343 m/s in air at 20°C). For a tube closed at one end, the fundamental wavelength is four times the tube length (λ = 4L), and only odd harmonics (f, 3f, 5f, 7f...) are produced — giving closed tubes a distinctly different tonal quality from open tubes.',
-            'A bamboo flute is an open tube with finger holes drilled along its length. Covering or uncovering a hole effectively changes the acoustic length of the tube — the standing wave reflects from the first open hole rather than the end of the tube. By opening holes progressively from the far end toward the mouthpiece, the player shortens the effective tube length, raising the pitch. This is how a flute player produces different notes from a single tube. The exact placement of holes follows precise mathematical ratios that correspond to the notes of a musical scale.',
-            'The timbre (tonal quality) of a bamboo instrument — what makes it sound different from a metal flute playing the same note — comes from the relative strength of its harmonics. Bamboo\'s natural material properties (its density, elasticity, and the rough inner surface of the stem) dampen high harmonics more than low ones, producing a warm, mellow sound. Metal tubes reflect more efficiently at the walls, preserving higher harmonics and producing a brighter, more penetrating tone. The cross-section shape also matters: bamboo\'s slightly irregular, natural bore creates subtle variations that musicians describe as giving the instrument a "living" quality.',
+            'When you blow across a bamboo tube, the air inside vibrates back and forth. The sound wave travels to the far end, bounces back, and meets the next wave coming in. If the tube is the right length, the outgoing and returning waves reinforce each other perfectly, creating a **standing wave** \u2014 a pattern that appears to stand still, with fixed points that never move (**nodes**) and points that vibrate wildly (**antinodes**).',
+            'The lowest frequency that fits perfectly inside the tube is the **fundamental** (first harmonic). For a tube open at both ends (like a bamboo flute), the fundamental wavelength is twice the tube length: \u03bb = 2L. From this, the frequency is **f = v / 2L**, where v is the speed of sound (343 m/s in air). A 50 cm bamboo tube produces a fundamental of 343 / (2 \u00d7 0.5) = 343 Hz \u2014 roughly the note E4, in the middle of a piano.',
+            'But the tube does not produce only one frequency. Waves that fit exactly two, three, four times inside the tube also form stable standing waves. These are the **harmonics**: 2f, 3f, 4f, and so on. The fundamental gives the note its pitch. The harmonics give it its character \u2014 its **timbre**. This is why a bamboo flute and a metal flute playing the same note sound completely different: bamboo\u2019s soft, rough inner walls dampen the higher harmonics, producing a warm, mellow sound. Metal preserves them, producing a bright, penetrating tone.',
+            'Here is the connection to music theory that musicians figured out thousands of years before physicists: the ratio 2:1 between harmonics is an **octave**. The ratio 3:2 is a **perfect fifth**. The ratio 4:3 is a **perfect fourth**. Music theory is applied physics \u2014 the notes that sound good together are the ones whose frequencies form simple ratios, because their standing wave patterns reinforce rather than clash.',
+            '**Check yourself:** A bamboo tube is 25 cm long (open-open). What is its fundamental frequency? What note is that closest to? (Hint: A4 = 440 Hz.)',
           ],
-          keyIdea: 'A bamboo tube\'s pitch depends on its length (f = v/2L for open tubes) — finger holes change the effective length, and bamboo\'s natural material properties create its characteristically warm timbre.',
-          diagram: 'SineWaveDiagram',
+          keyIdea: 'Standing waves inside bamboo tubes produce a fundamental frequency f = v / 2L plus harmonics at 2f, 3f, 4f \u2014 the relative strength of these harmonics creates each instrument\u2019s unique timbre.',
+          diagram: 'BambooHarmonicsDiagram',
+        },
+        {
+          title: 'Bamboo \u2014 The Wonder Material',
+          paragraphs: [
+            'The story says the Bamboo "bent but did not break." This is not poetic licence \u2014 it is engineering fact. Bamboo has a **strength-to-weight ratio** that rivals steel. A bamboo pole can support the same load as a steel bar of equal weight, but because bamboo is far lighter (density ~0.6 g/cm\u00b3 vs steel\u2019s 7.8 g/cm\u00b3), it achieves roughly **11 times the strength per kilogram** of steel.',
+            'How does a grass (bamboo is technically a giant grass, not a tree) achieve such extraordinary strength? Three design features work together. First, bamboo is a **hollow tube**. A hollow tube resists bending far better than a solid rod of the same weight, because the material is distributed far from the centre, maximising the **moment of inertia**. This is the same principle used in bicycle frames, aircraft fuselages, and your own bones. Second, bamboo\u2019s walls are made of **fibres** embedded in a softer matrix, like fibreglass or carbon fibre composites. The fibres (cellulose) carry tension; the matrix (lignin) carries compression. Third, the fibres are **concentrated on the outer surface** where bending stress is highest \u2014 a natural optimisation that human engineers only learned to mimic in the 20th century.',
+            'Because it is a grass, bamboo grows extraordinarily fast \u2014 some species add **91 cm per day**, making it the fastest-growing plant on Earth. A bamboo grove can be harvested every 3\u20135 years without killing the root system, while a hardwood tree takes 30\u201350 years. This makes bamboo one of the most **sustainable building materials** on the planet. Engineers in earthquake-prone regions of South and Southeast Asia have long used bamboo frames because they flex rather than shatter during tremors \u2014 exactly the "bend without breaking" principle from the story.',
+            '**A question to think about:** Aircraft wings and fishing rods are also designed to flex under load rather than stay rigid. Why might flexibility be safer than rigidity in these cases? Think about what happens to the energy of impact or turbulence in a flexible structure versus a rigid one.',
+          ],
+          keyIdea: 'Bamboo achieves 11\u00d7 the strength-to-weight ratio of steel through three engineering tricks: hollow tube geometry, fibre-composite walls, and fibre concentration at the surface \u2014 plus it regrows in 3\u20135 years.',
+          diagram: 'BambooMaterialDiagram',
         },
       ],
       vocabulary: [
-        ['Photosynthesis', 'The process plants use to convert sunlight, water, and CO₂ into sugar and oxygen'],
-        ['Chlorophyll', 'The green pigment in plants that absorbs sunlight for photosynthesis'],
-        ['Vegetative propagation', 'Growing a new plant from a fragment of the parent — without seeds'],
-        ['Totipotent', 'A cell that can develop into any cell type — plant cells have this superpower'],
-        ['Cell wall', 'A rigid outer layer made of cellulose that gives plant cells their shape and strength'],
+        ['Vortex shedding', 'When wind flows past a round object, alternating spinning pockets of air peel off each side \u2014 this creates the rhythmic pressure pulses that make bamboo (and power lines) hum'],
+        ['Natural frequency', 'The frequency at which an object vibrates most easily when disturbed \u2014 determined by its mass, stiffness, and shape, like how a swing has one natural rhythm'],
+        ['Resonance', 'The dramatic amplification that occurs when a forcing frequency matches an object\u2019s natural frequency \u2014 small pushes at the right timing create enormous vibrations'],
+        ['Standing wave', 'A wave pattern that appears to stand still, with fixed nodes (no vibration) and antinodes (maximum vibration) \u2014 formed when outgoing and reflected waves reinforce each other'],
+        ['Strength-to-weight ratio', 'How strong a material is relative to how heavy it is \u2014 bamboo\u2019s is ~11\u00d7 higher than steel\u2019s, which is why it can support heavy loads while being light enough to sway in the wind'],
       ],
       trueFalse: [
-        { statement: 'Plants eat soil to get their food.', isTrue: false, explanation: 'Plants make their own food through photosynthesis using sunlight, water, and CO₂ from air. The soil provides minerals and water, but the actual "food" (sugar) is manufactured inside the leaves using solar energy.' },
-        { statement: 'A single plant cell can grow into an entire new plant.', isTrue: true, explanation: 'Unlike most animal cells, many plant cells are totipotent — they retain the ability to become any cell type. This is why you can grow a new plant from a cutting — the cut stem cells reorganize into roots, stems, and leaves.' },
-        { statement: 'All plants reproduce using seeds.', isTrue: false, explanation: 'Many plants can also reproduce vegetatively — through cuttings, runners, tubers, or bulbs. Every banana plant in your grocery store is a clone, grown from a cutting rather than a seed.' },
+        { statement: 'Wind makes a sound when it blows past bamboo because the bamboo is hollow and acts like a whistle.', isTrue: false, explanation: 'The hollow tube matters for the note that resonates, but the initial sound comes from vortex shedding \u2014 alternating pressure pulses created as wind splits around the outside of the stalk. Even a solid pole produces Aeolian sound. The hollow interior then amplifies certain frequencies through resonance.' },
+        { statement: 'A thinner wire in the same wind produces a higher-pitched sound than a thicker bamboo pole.', isTrue: true, explanation: 'From the Strouhal formula f = 0.2 \u00d7 V / D, frequency is inversely proportional to diameter. A 3 mm wire in 10 m/s wind produces 667 Hz (a clear whistle), while a 5 cm bamboo in the same wind produces only 40 Hz (a low hum). Thinner = higher pitch.' },
+        { statement: 'The Tacoma Narrows Bridge collapsed because the wind was too strong for the structure.', isTrue: false, explanation: 'The wind was only 64 km/h \u2014 well within the bridge\u2019s design capacity for static load. The bridge collapsed because the wind\u2019s vortex shedding frequency matched the bridge\u2019s torsional natural frequency, causing resonance. The vibrations grew with each cycle until the structure failed. It was a frequency problem, not a force problem.' },
       ],
       facts: [
-        'Photosynthesis produces all the oxygen we breathe. Every other breath you take comes from algae and plants splitting water molecules apart.',
-        'The world\'s largest organism is a clonal colony of aspen trees in Utah called "Pando" — 47,000 tree stems all connected by a single root system, weighing 6,600 tonnes.',
-        'Tulsi (holy basil) contains eugenol, a natural antiseptic. Traditional medicine used it for centuries — modern science has confirmed its antimicrobial properties.',
+        'Northeast India has over 90 species of bamboo, the highest diversity in India. The Barak Valley mentioned in the story is one of the richest bamboo regions, where groves produce haunting sounds on windy nights that local communities have woven into folklore for centuries.',
+        'The fastest-growing plant ever recorded was a bamboo species in Japan: 91 cm (nearly 3 feet) in a single day. Bamboo achieves this because it does not grow by adding rings like a tree \u2014 every cell in the stalk elongates simultaneously.',
+        'Engineers at the University of Pittsburgh measured the quality factor (Q) of bamboo wind instruments at 20\u201350, meaning a bamboo tube rings for 20\u201350 cycles before the vibration decays. For comparison, a crystal oscillator in a watch has Q = 25,000 \u2014 it rings 25,000 times before stopping.',
       ],
-      offlineActivity: 'Take a cutting from a plant (a small piece of stem with a few leaves). Place it in a glass of water on a windowsill. Check every day — within a week, you should see tiny roots forming. You\'re witnessing vegetative propagation — the same process that makes Tejimola\'s story biologically plausible.',
+      offlineActivity: 'Build a straw pan flute to explore resonance. Cut 5 drinking straws to these lengths: 20 cm, 16 cm, 13 cm, 10 cm, and 8 cm. Seal one end of each straw (pinch it flat and tape it shut). Line them up from longest to shortest and tape them together. Now blow gently across the open top of each straw \u2014 angle your breath so it skims the opening, like blowing across a bottle top. The longest straw produces the lowest note, the shortest produces the highest. You have just demonstrated f = v / (4L): halve the length, double the frequency. You have built an instrument that works on exactly the same physics as bamboo singing in the wind.',
+      offlineActivityDiagram: 'ActivityBambooFluteDiagram',
+      codeTeaser: `# How does bamboo "choose" which note to sing?
+# The Strouhal formula: f = St * V / D
+
+St = 0.2  # Strouhal number (constant for cylinders)
+
+# Bamboo in a gentle breeze
+V = 5      # wind speed in m/s
+D = 0.05   # diameter in metres (5 cm)
+f_bamboo = St * V / D
+
+# Telephone wire in the same breeze
+D_wire = 0.003  # 3 mm
+f_wire = St * V / D_wire
+
+print(f"Bamboo (5 cm): \${f_bamboo:.0f} Hz - low hum")
+print(f"Wire (3 mm): \${f_wire:.0f} Hz - high whistle")
+print(f"\\nThe wire sings \${f_wire/f_bamboo:.0f}x higher!")
+print(f"Thinner object = higher pitch (same wind)")`,
+      referenceLinks: [
+        { slug: 'waves-and-properties', reason: 'Deep dive into wave behaviour \u2014 frequency, wavelength, amplitude, and how waves interact to form standing wave patterns' },
+        { slug: 'forces-and-motion', reason: 'Understand how forces create vibration \u2014 the F = ma foundation behind why objects oscillate at natural frequencies' },
+      ],
+      nextLessons: [
+        { slug: 'woodpeckers-drum', reason: 'Another story about how animals handle mechanical forces \u2014 the woodpecker absorbs impact that would destroy a human skull' },
+        { slug: 'girl-who-spoke-to-elephants', reason: 'Elephants communicate through ground vibrations at infrasonic frequencies \u2014 the same wave physics, applied to seismic communication' },
+        { slug: 'bamboo-flute-of-nagaland', reason: 'From the physics of bamboo sound to actually building and playing a bamboo flute \u2014 hands-on acoustics' },
+      ],
     },
   },
   {
+    id: 10,
     slug: 'woodpeckers-drum',
+    tradition: 'Northeast India',
     story: { title: 'The Woodpecker\'s Drum', tagline: 'Drumming without brain damage — impact biomechanics.', content: `
 **The Idea**
 
@@ -1472,6 +1620,7 @@ If you visit Manas National Park and listen carefully, you'll hear Thoka's desce
     stem: { title: 'Biomechanics & Skull Design', description: 'Drumming without brain damage — impact biomechanics.', icon: Construction, color: 'from-red-400 to-orange-500', skills: ['Analyze impact forces and deceleration during repeated head strikes', 'Understand shock-absorbing biological structures: spongy bone, hyoid apparatus', 'Model stress distribution in layered composite materials', 'Calculate g-forces experienced during rapid deceleration'], project: {
         title: 'Model Woodpecker Impact Forces',
         description: 'Calculate the g-forces a woodpecker experiences during drumming and compare its biological shock absorbers with human-engineered helmets.',
+        outputDiagram: 'WoodpeckerCapstoneProjectDiagram',
         steps: [
           'Research woodpecker drumming speed (strikes per second) and deceleration values',
           'Calculate the g-force using F = ma for each impact',
@@ -1494,57 +1643,111 @@ If you visit Manas National Park and listen carefully, you'll hear Thoka's desce
     level0: {
       concepts: [
         {
-          title: 'The Physics of Impact: Force, Acceleration, and G-Forces',
+          title: "Start Here — The Problem No One Notices",
           paragraphs: [
-            'When a woodpecker strikes a tree, its beak decelerates from about 7 meters per second to zero in less than a millisecond — an impact that subjects its skull to peak decelerations of 1,000-1,500 g (where 1 g is the acceleration due to gravity, 9.8 m/s²). For comparison, a human concussion typically occurs at just 80-100 g. A woodpecker experiences forces 10-15 times the human concussion threshold, thousands of times per day, and suffers no brain damage.',
-            'The force of an impact depends on the impulse equation: F × Δt = m × Δv, where F is force, Δt is the time of impact, m is mass, and Δv is the change in velocity. To reduce the peak force, you can either reduce the velocity or increase the time over which the deceleration occurs. A car\'s crumple zone works on this principle — it extends the collision time, reducing the peak force on passengers. The woodpecker\'s skull uses a different strategy: its small brain mass (about 2 grams) means that even at 1,200 g, the total force on the brain is only about 23 newtons — roughly the weight of two apples.',
-            'Newton\'s second law (F = ma) tells us that the same acceleration applied to a smaller mass produces less force. This is why a woodpecker\'s small skull is actually a crucial advantage. If a human head (brain mass ~1,400 grams) experienced 1,200 g, the force on the brain would be about 16,500 newtons — enough to cause catastrophic injury. The woodpecker\'s solution relies on physics rather than material strength: keep the mass small, and the forces remain manageable even at extreme accelerations.',
+            "A woodpecker slams its beak into a tree trunk **20 times per second**. That is 12,000 times a day. Every single day. Year after year. And here is what should bother you: **it never gets a headache.** It never gets dizzy. It never gets a concussion. Why not?",
+            "To understand why this is strange, try this thought experiment. Imagine running headfirst into a wall. Even at slow jogging speed, you would be dizzy, in pain, possibly concussed. Now imagine doing it 12,000 times before dinner. Absurd — your brain would be destroyed.",
+            "The difference is **g-forces** — a way of measuring how hard a sudden stop hits your body. Standing still, you experience 1 g (just gravity). On a rollercoaster, you might feel 3-4 g. A human gets a concussion at about **80-100 g**. A woodpecker experiences **1,200 g** on every single peck. That is 12 times the force that would scramble a human brain.",
+            "So the question is not 'why does the woodpecker peck?' — that is easy (food, nesting, communication). The real question is: **what is inside that skull that lets it survive 1,200 g, twelve thousand times a day?**",
+            "**Check yourself:** A fighter pilot blacks out at about 9 g. A woodpecker experiences 1,200 g. How many times more force does the woodpecker handle? (Answer: about 130 times more. And the pilot has a special suit to help.)",
           ],
-          keyIdea: 'A woodpecker endures 1,000-1,500 g per strike without injury partly because its tiny 2-gram brain experiences low total force even at extreme acceleration — F = ma means small mass equals small force.',
-          diagram: 'NewtonForceDiagram',
+          keyIdea: "A woodpecker hits trees at 1,200 g — 12 times the force that causes human concussions — 12,000 times a day. The question is not why it pecks, but how it survives.",
+          diagram: 'WoodpeckerImpactDiagram',
         },
         {
-          title: 'Skull Design: Nature\'s Shock Absorber',
+          title: "Trick #1 — A Tiny Brain Is a Safe Brain",
           paragraphs: [
-            'The woodpecker skull contains several specialized structures that manage impact forces. The hyoid bone — which in humans is a small horseshoe-shaped bone in the throat — in woodpeckers wraps all the way around the skull like a seatbelt. This band of bone and cartilage starts at the right nostril, passes under the jaw, splits into two bands that wrap around the back of the skull, and reconnects at the top. It acts as a shock-absorbing strap that distributes impact forces around the skull rather than concentrating them at the point of impact.',
-            'The skull bones themselves have a unique spongy structure. The outer layers are dense cortical bone, but the inner layer is trabecular (spongy) bone arranged in a pattern optimized for absorbing and distributing compressive forces. This arrangement is similar to the honeycomb cores used in aerospace engineering — stiff outer faces with a lightweight, energy-absorbing core. The beak is also asymmetric: the upper beak is slightly longer than the lower beak, which directs the impact force downward, away from the brain.',
-            'The cerebrospinal fluid (CSF) surrounding the brain is minimal in woodpeckers — their brain fits very tightly inside the skull, leaving almost no space for the brain to slosh around. In humans, the CSF provides cushioning, but during a sudden impact, the brain can slide within the fluid and strike the opposite side of the skull (a coup-contrecoup injury). The woodpecker avoids this entirely by eliminating the gap. Additionally, woodpeckers always strike perpendicular to the surface, ensuring the force is directed straight through the skull along its strongest axis, never at a rotation-inducing angle.',
+            "Here is a surprising fact: **being small-brained is actually the woodpecker's best defence.** Not because it is stupid (it is not), but because of a physics rule you already know intuitively.",
+            "Think about catching a tennis ball vs catching a bowling ball. Both thrown at the same speed. The tennis ball stings a bit. The bowling ball breaks your fingers. Same speed, but the bowling ball **hurts more because it is heavier**. That is Newton's second law: **Force = mass × acceleration** (F = ma). More mass at the same deceleration means more force.",
+            "A woodpecker's brain weighs about **2 grams** — the weight of two paperclips. A human brain weighs about **1,400 grams** — 700 times heavier. At 1,200 g of deceleration, the force on the woodpecker's brain is about 23 newtons — roughly the weight of two apples resting in your hand. The same 1,200 g on a human brain would produce 16,500 newtons — like a small car sitting on your head.",
+            "So the woodpecker's tiny brain simply does not generate enough force to damage itself. It is like the difference between flicking a grain of rice at a wall (nothing happens) and throwing a brick at the same speed (hole in the wall). Same speed, but mass changes everything.",
+            "**Try this in your head:** If you could shrink a human brain to 2 grams (keeping everything else the same), could a person headbutt a wall at woodpecker speed without injury? (Answer: mathematically yes — the force would drop to safe levels. But you would also lose the ability to think, so this is not a practical solution.)",
           ],
-          keyIdea: 'The woodpecker skull absorbs impact through multiple design features: a hyoid bone seatbelt, spongy bone core, minimal cerebrospinal fluid, and perfectly linear strike alignment.',
+          keyIdea: "Force = mass × acceleration. The woodpecker's 2-gram brain at 1,200 g produces only 23 newtons of force — safe. A human's 1,400-gram brain at the same deceleration would experience a devastating 16,500 newtons.",
+          diagram: 'WoodpeckerForceMassDiagram',
         },
         {
-          title: 'Bio-Inspired Engineering: Learning from Woodpeckers',
+          title: "Trick #2 — The Skull's Four Layers of Protection",
           paragraphs: [
-            'Engineers have studied woodpecker skull design to improve impact protection in human technology. In 2011, researchers at the University of California, Berkeley created a shock-absorbing system inspired by woodpecker anatomy that protected electronics from impacts up to 60,000 g — far beyond what conventional foam padding could survive. The design used nested cylindrical shells (mimicking the hyoid bone), close-fitting internal packing (mimicking the tight brain fit), and a layered composite structure (mimicking the spongy-dense bone sandwich).',
-            'Helmet design has also benefited from woodpecker research. Traditional helmets use a hard outer shell and a foam liner, but this design has a fundamental limitation: the foam can only compress once before it loses its protective ability. Woodpecker-inspired designs use multi-layer structures with different densities and materials — similar to the skull\'s cortical-spongy-cortical bone layers — that can distribute forces across a larger area and manage multiple impacts. Some motorcycle helmets now incorporate angled shear layers inspired by the relative movement between the woodpecker\'s skull layers.',
-            'The principle extends beyond impact protection. The concept of hierarchical structures — materials organized at multiple size scales, from molecular to macroscopic — appears throughout biological shock absorbers. Woodpecker bone, abalone shells, deer antlers, and ram horns all use hierarchical designs where the arrangement of material at each scale contributes to the overall toughness. This has inspired the development of new metamaterials — engineered structures with properties not found in any natural material — designed for everything from blast-resistant building panels to protective packaging for sensitive spacecraft instruments.',
+            "Small brain mass helps, but it is not the whole story. The woodpecker's skull has **four design features** that work together like a crash-protection system. Understand all four and you understand why engineers study woodpeckers to design better helmets.",
+            "**Layer 1 — The seatbelt bone.** In your throat, there is a small horseshoe-shaped bone called the hyoid. In a woodpecker, this bone is **enormous** — it wraps all the way around the skull like a seatbelt, starting at one nostril, going under the jaw, splitting into two bands around the back of the skull, and reconnecting at the top. Every time the beak hits wood, this bone-strap absorbs and spreads the force around the skull instead of letting it concentrate at one point.",
+            "**Layer 2 — The spongy sandwich.** The skull is not solid bone. It is a sandwich: **hard outer layers** with **spongy bone** in the middle. The spongy layer is full of tiny air pockets — like bubble wrap inside the skull wall. These pockets compress slightly on impact, absorbing energy. Same idea as the crumple zone in a car.",
+            "**Layer 3 — The tight fit.** In your head, your brain floats in fluid. This is usually good — the fluid cushions everyday bumps. But in a hard impact, your brain **slides forward inside the fluid and hits the front of your skull**, then bounces back and hits the rear (this is how concussions work). The woodpecker avoids this entirely — its brain is **packed tightly** against the skull with almost no fluid gap. No gap means no sloshing. No sloshing means no impact.",
+            "**Layer 4 — Straight hits only.** A woodpecker *always* strikes perfectly straight — beak perpendicular to the tree. It never pecks at an angle. Why? Because a straight hit sends force directly through the skull along its strongest axis. An angled hit would create **rotation**, which is the most dangerous type of brain injury (it twists and tears brain tissue). Straight = safe. Angled = dangerous.",
           ],
-          keyIdea: 'Woodpecker skull design has inspired shock-absorbing systems for electronics, helmets, and metamaterials — the key principle is hierarchical structures that distribute impact forces across multiple layers and scales.',
+          keyIdea: "Four layers of protection: a hyoid bone seatbelt that distributes force, spongy bone that absorbs it, a tight brain fit that prevents sloshing, and always-straight strikes that eliminate rotation.",
+          diagram: 'WoodpeckerSkullLayersDiagram',
+        },
+        {
+          title: "Copying Nature — What Helmets Can Learn",
+          paragraphs: [
+            "When engineers saw how the woodpecker's skull works, they thought: *can we build helmets that do the same thing?* The answer is yes — and the results are impressive.",
+            "A standard bike or cricket helmet has two layers: a hard plastic shell (the outer skull) and a foam liner (the cushion). It works for one crash. But the foam **crushes permanently** — after one impact, the helmet is useless. You have to buy a new one. The woodpecker drums 12,000 times a day. Its skull cannot afford to break after one hit.",
+            "Woodpecker-inspired helmets use **multiple layers of different materials** — hard, soft, hard, soft — mimicking the skull's dense-spongy-dense bone sandwich. Each layer handles a different part of the impact: the hard layers spread the force over a wider area, and the soft layers absorb the energy. Because no single layer takes the full hit, the helmet can handle **many impacts** instead of just one.",
+            "The same idea was used by engineers at UC Berkeley to protect electronics. They built a woodpecker-inspired shock absorber that kept a circuit board safe at **60,000 g** — 50 times what a woodpecker experiences and thousands of times beyond what foam padding can handle. The design: nested tubes (like the hyoid seatbelt), a close-fitting inner casing (like the tight brain fit), and layered walls (like spongy bone).",
+            "**A prediction:** If you wrapped an egg in a single thick layer of cotton, it might survive a 1-metre drop. But if you used three thin layers of different materials (cloth, then crumpled paper, then bubble wrap), it would survive a much higher drop. The layers work together better than one thick cushion — exactly the woodpecker principle.",
+          ],
+          keyIdea: "Engineers copy the woodpecker's multi-layer skull design to build helmets that survive multiple impacts and shock absorbers that protect electronics at 60,000 g — layers of different materials beat one thick cushion.",
+          diagram: 'WoodpeckerHelmetDiagram',
         },
       ],
       vocabulary: [
-        ['Biomechanics', 'The study of how living things move and withstand forces — it combines biology with physics and engineering'],
-        ['Deceleration', 'The rate at which something slows down — a woodpecker\'s beak decelerates from 7 m/s to zero in less than a millisecond on each strike'],
-        ['Spongy Bone', 'Bone with a porous, honeycomb-like internal structure — it absorbs impact energy by deforming slightly, like a built-in cushion'],
-        ['Hyoid Bone', 'A U-shaped bone that wraps around the woodpecker\'s skull like a seatbelt — it distributes impact forces away from the brain'],
-        ['Biomimicry', 'Designing human technology by copying solutions that nature has already evolved — woodpecker skulls have inspired better helmets and shock absorbers'],
+        ['G-force', 'A measure of how hard a sudden stop or turn hits your body — 1 g is normal gravity, a woodpecker experiences 1,200 g on every peck'],
+        ['Hyoid bone', 'A bone that wraps around the woodpecker\'s skull like a seatbelt — it spreads impact force around the skull instead of concentrating it at one point'],
+        ['Spongy bone', 'Bone with tiny air pockets inside, like built-in bubble wrap — it compresses slightly on impact to absorb energy'],
+        ['Concussion', 'A brain injury caused by the brain sloshing inside the skull and hitting the skull wall — woodpeckers avoid this because their brain fits tightly with no room to move'],
+        ['Biomimicry', 'Designing human technology by studying and copying nature\'s solutions — the woodpecker\'s skull has inspired better helmets and shock absorbers'],
       ],
       trueFalse: [
-        { statement: 'A woodpecker\'s brain sloshes around inside its skull during pecking, just like a human brain during a head impact.', isTrue: false, explanation: 'A woodpecker\'s brain fits very tightly inside the skull with almost no gap for cerebrospinal fluid. This tight fit prevents the brain from moving independently and slamming into the skull wall — the opposite of what happens in human concussions.' },
-        { statement: 'Woodpeckers experience deceleration forces of up to 1,200 g when pecking.', isTrue: true, explanation: 'Each peck subjects the woodpecker\'s head to about 1,000-1,200 g of force. For comparison, a human concussion can occur at just 80-100 g. The woodpecker\'s skull structure distributes these forces safely.' },
-        { statement: 'Woodpeckers peck trees mainly to make noise and attract mates.', isTrue: false, explanation: 'While drumming on resonant wood is used for communication, most pecking is for feeding — woodpeckers drill into bark to find insects and larvae hiding inside. They also excavate nest cavities in tree trunks.' },
+        { statement: 'A woodpecker\'s brain is cushioned by a thick layer of fluid, just like a human brain.', isTrue: false, explanation: 'It is the opposite. A woodpecker\'s brain fits tightly against the skull with almost no fluid gap. This prevents the brain from sloshing and hitting the skull wall — the exact mechanism that causes human concussions.' },
+        { statement: 'The woodpecker\'s small brain size actually helps protect it from injury.', isTrue: true, explanation: 'Force = mass × acceleration. At 1,200 g, a 2-gram woodpecker brain experiences only 23 newtons of force (safe). A 1,400-gram human brain at the same deceleration would experience 16,500 newtons (catastrophic).' },
+        { statement: 'Woodpeckers sometimes peck at angles to reach insects more easily.', isTrue: false, explanation: 'Woodpeckers always strike perpendicular to the surface — perfectly straight. An angled hit would create dangerous rotational forces that could twist brain tissue. Straight-line impact is much safer.' },
       ],
       facts: [
-        'A woodpecker pecks up to 20 times per second and about 12,000 times per day — yet never gets a headache or brain injury.',
-        'Engineers at UC Berkeley created a woodpecker-inspired shock absorber that protected electronics from impacts of 60,000 g — far beyond what conventional foam padding can handle.',
-        'The woodpecker\'s tongue wraps around the back of its skull and over the top of its head — when extended, it can be twice the length of the beak, with a barbed sticky tip for extracting insects.',
+        'A woodpecker\'s tongue is so long it wraps around the back of its skull and over the top of its head. When extended, it can be twice the length of the beak, with a barbed sticky tip for pulling insects out of tunnels.',
+        'A fighter pilot in a special pressure suit blacks out at about 9 g. A woodpecker handles 1,200 g — over 130 times more — with no protection beyond its own skull.',
+        'The greater flameback woodpecker (Thoka in the story) is found across Northeast India, with a golden back and crimson crest. It drums on dead branches to communicate, choosing the most resonant wood for maximum volume.',
       ],
-      offlineActivity: 'Drop a raw egg from waist height onto a hard surface — it breaks. Now wrap another egg in layers of different materials: first a thin cloth, then crumpled paper, then bubble wrap or leaves. Drop it again. Does it survive? This demonstrates the woodpecker\'s layered protection principle — multiple materials of different densities absorb impact better than one thick layer.',
+      offlineActivity: 'Test the woodpecker\'s layered protection principle with eggs. Drop a raw egg from waist height onto a hard surface — it smashes. Now wrap a second egg in ONE thick layer of cotton wool. Drop it. Then wrap a third egg in THREE thin layers of DIFFERENT materials: first a thin cloth, then crumpled newspaper, then a layer of leaves or bubble wrap. Drop this one from the same height. The multi-layer egg almost always survives better — because each material absorbs a different part of the impact, just like the woodpecker\'s skull.',
+      offlineActivityDiagram: 'ActivityEggDropDiagram',
+      codeTeaser: `# How much force does a woodpecker's brain feel?
+# Compare woodpecker vs human using F = ma
+
+g = 9.8  # m/s² (Earth's gravity)
+
+# Woodpecker stats
+wp_brain_kg = 0.002     # 2 grams
+wp_g_force = 1200       # g's per peck
+wp_force = wp_brain_kg * wp_g_force * g
+
+# Human stats
+hu_brain_kg = 1.4       # 1,400 grams
+hu_concussion_g = 100   # g's for concussion
+hu_force = hu_brain_kg * hu_concussion_g * g
+
+print(f"Woodpecker brain force: {wp_force:.1f} N")
+print(f"  (like holding {wp_force/g:.0f} apples)")
+print(f"Human concussion force: {hu_force:.1f} N")
+print(f"  (like a {hu_force/g:.0f} kg weight on your head)")
+print(f"\\nWoodpecker handles {wp_g_force/hu_concussion_g:.0f}x")
+print(f"more g-force but feels {hu_force/wp_force:.0f}x less force!")`,
+      referenceLinks: [
+        { slug: 'forces-and-motion', reason: 'The full story of Newton\'s laws, F = ma, and how forces work — the foundation for understanding why small mass means small force' },
+        { slug: 'animal-senses-and-behavior', reason: 'Explore how other animals have evolved extraordinary physical adaptations — from echolocation to infrared vision' },
+        { slug: 'engineering-design', reason: 'Learn how engineers take biological solutions like the woodpecker skull and turn them into human technology' },
+      ],
+      nextLessons: [
+        { slug: 'honey-hunters-lesson', reason: 'Another animal with remarkable biology — bees build structures and communicate in ways that inspire human engineering' },
+        { slug: 'bamboo-taught-wind', reason: 'Bamboo bends without breaking in the wind — a different strategy for handling force, but the same physics principle' },
+        { slug: 'girl-who-spoke-to-elephants', reason: 'Elephants communicate through ground vibrations — another example of animals using physics in ways humans are just beginning to understand' },
+      ],
     },
   },
 
   {
+    id: 11,
     slug: 'girl-who-spoke-to-elephants',
+    tradition: 'Northeast India',
     story: {
       title: 'The Girl Who Spoke to Elephants',
       tagline: 'A Karbi girl discovers she can understand elephant language by pressing her ear to the ground.',
@@ -1625,6 +1828,7 @@ Because the earth carries every voice — if you are patient enough to listen.
       project: {
         title: 'Build an Elephant Rumble Classifier',
         description: 'Build a complete machine learning pipeline that classifies elephant mood from audio recordings \u2014 the same technology used by conservation teams to detect poaching in real time. Level 4 walks you through this step by step.',
+        outputDiagram: 'ElephantPipelineDiagram',
         steps: [
           'Level 4.1 \u2014 Design the pipeline: define 6 mood categories (calm, alert, danger, greeting, distress, playful) and generate synthetic audio data',
           'Level 4.2 \u2014 Feature extraction: convert waveforms to spectral features (frequency, bandwidth, rolloff, zero-crossing rate)',
@@ -1659,7 +1863,7 @@ Because the earth carries every voice — if you are patient enough to listen.
             '**Try this:** Put your hand flat on a table and have someone tap the far end. You feel the vibration through the table. Now imagine your whole body is the table, and the tap is an elephant rumble 5 km away. That gives you a sense of how sensitive elephant communication is.',
           ],
           keyIdea: 'Elephants communicate using infrasound (8-25 Hz) \u2014 too low for us to hear, but it travels up to 10 km because long wavelengths lose less energy and bend around obstacles.',
-          diagram: 'SineWaveDiagram',
+          diagram: 'ElephantRumblePlayerDiagram',
         },
         {
           title: 'Listening Through the Ground',
@@ -1670,27 +1874,28 @@ Because the earth carries every voice — if you are patient enough to listen.
             'Scientists at Stanford University study this using **geophones** \u2014 the same instruments that monitor earthquakes. They placed arrays of geophones near elephant herds and discovered that elephants can distinguish between familiar and unfamiliar callers from ground vibrations alone. Each elephant has a unique "voice" \u2014 even through the ground.',
           ],
           keyIdea: 'Elephant calls travel through the ground as seismic waves. Elephants detect them through pressure sensors in their feet and can determine direction using the same triangulation principle as earthquake detection.',
-          diagram: 'SeismicWavesDiagram',
+          diagram: 'ElephantGroundWaveDiagram',
         },
         {
           title: 'How Computers Learn to Understand Elephant Calls',
           paragraphs: [
-            'The Elephant Listening Project at Cornell University has recorded **hundreds of thousands of hours** of audio from elephant habitats. No human team could ever listen to all of it. So they taught computers to do it.',
-            'The process starts by converting sound into a picture called a **spectrogram** \u2014 a chart where the x-axis is time, the y-axis is frequency, and the colour shows volume. An elephant rumble appears as a bright horizontal band in the 8-25 Hz zone. A bird call appears as a thin line at 2,000-5,000 Hz. A gunshot appears as a vertical spike across all frequencies.',
-            'Researchers show the computer thousands of labelled spectrograms: "this pattern is a contact call," "this is an alarm call," "this is a greeting." The computer \u2014 a type of AI called a **neural network** \u2014 learns to recognise the visual patterns that distinguish each call type. After training, it can classify new, unseen calls with over 90% accuracy.',
-            'This matters for conservation:\n\n\u2022 **Poaching detection** \u2014 elephants produce distinctive alarm calls when threatened; the AI flags these in real time so rangers can respond\n\u2022 **Population counting** \u2014 identify individual elephants by their unique "voice" without disturbing them\n\u2022 **Mood monitoring** \u2014 track stress levels across entire herds over months\n\nThe same approach now works for whales, birds, bats, and forest ecosystems \u2014 turning sound into conservation data at a scale humans could never achieve alone.',
+            'The Elephant Listening Project at Cornell University has recorded **hundreds of thousands of hours** of audio from elephant habitats across Africa and Asia. No human team could ever listen to all of it. So they taught computers to do it. But how do you teach a computer to "hear"?',
+            'Step one: turn sound into a picture. A **spectrogram** is a chart where time runs left to right, frequency runs bottom to top, and colour shows how loud each frequency is at each moment. An elephant rumble shows up as a **bright horizontal band** near the bottom (8-25 Hz). A bird call appears as a thin streak near the top (2,000-5,000 Hz). A gunshot appears as a vertical spike across *all* frequencies at once.',
+            '**Check yourself:** If you saw a spectrogram with a bright band at 15 Hz that pulses slowly in brightness, what would you guess? (Answer: a calm elephant \u2014 low frequency with slow amplitude modulation. You already know this from the first concept.)',
+            'Step two: show the computer thousands of labelled examples. "This spectrogram pattern is a contact call." "This is an alarm." "This is a greeting." The computer finds the visual differences between them \u2014 just as you would if you stared at enough examples. After seeing thousands, it can classify new calls it has never heard before with over 90% accuracy.',
+            'Why this matters for real elephants:\n\n\u2022 **Poaching alerts** \u2014 elephants produce distinctive alarm calls when threatened; the AI flags these in real time so rangers can respond within minutes\n\u2022 **Population counting** \u2014 each elephant has a unique "voice," so the AI can identify individuals without ever disturbing them\n\u2022 **Stress monitoring** \u2014 track how an entire herd\'s mood changes over months by measuring pulse rates in their calls',
           ],
-          keyIdea: 'Machine learning converts elephant call recordings into spectrograms, then trains neural networks to classify call types \u2014 enabling automatic poaching detection, population monitoring, and mood analysis.',
-          diagram: 'SpectrogramDiagram',
+          keyIdea: 'Computers learn to classify elephant calls by converting sound into spectrograms (pictures of frequency over time) and training on thousands of labelled examples \u2014 enabling poaching detection and mood monitoring at a scale humans could never achieve.',
+          diagram: 'ElephantSpectrogramDiagram',
         },
       ],
       vocabulary: [
-        ['Infrasonic', 'Sound below human hearing range (below 20 Hz) — elephants communicate at 8-25 Hz'],
-        ['Echolocation', 'Using sound echoes to detect objects — dolphins and bats do this, elephants use ground vibrations'],
-        ['Frequency', 'How many times something vibrates per second, measured in Hertz (Hz)'],
-        ['Seismic communication', 'Sending messages through vibrations in the ground'],
-        ['Pacinian corpuscles', 'Pressure sensors in elephant feet that detect ground vibrations'],
-        ['Spectrogram', 'A visual picture of sound — shows which frequencies are present over time'],
+        ['Infrasound', 'Sound below 20 Hz — too low for human ears but elephants use it to talk across kilometres'],
+        ['Frequency', 'How many times something vibrates per second, measured in Hertz (Hz) — elephant rumbles are 8-25 Hz'],
+        ['Seismic communication', 'Sending messages through vibrations in the ground — elephants rumble through their feet into the earth'],
+        ['Pacinian corpuscles', 'Pressure sensors in elephant feet that detect ground vibrations — like having ears in your soles'],
+        ['Spectrogram', 'A visual picture of sound — time on the x-axis, frequency on the y-axis, colour shows volume'],
+        ['Amplitude modulation', 'When the volume of a signal rises and falls in a pattern — the pulse rate tells you the elephant\'s mood'],
       ],
       trueFalse: [
         { statement: 'Elephants can communicate over distances of up to 10 kilometers using ground vibrations.', isTrue: true, explanation: 'Elephants produce infrasonic rumbles at 8-25 Hz that travel through the earth. Other elephants detect these vibrations through sensitive receptors in their feet called Pacinian corpuscles.' },
@@ -1708,6 +1913,7 @@ Because the earth carries every voice — if you are patient enough to listen.
         'The word "infrasonic" means "below sound" — these vibrations are real, physical waves traveling through the earth, just too low-pitched for human ears to process as sound.',
       ],
       offlineActivity: 'Press your ear against the ground or a wooden floor while someone walks in another room. Can you feel the vibrations? Try to guess how far away they are just from what you feel. Now try different surfaces \u2014 wood, concrete, soil. Which carries vibrations best? This is exactly what Rongpharpi did \u2014 and what elephants do every day through the Pacinian corpuscles in their feet.',
+      offlineActivityDiagram: 'ActivityEarGroundDiagram',
       codeTeaser: `# Simulate an elephant rumble signal
 import numpy as np
 
@@ -1738,7 +1944,9 @@ print(f"Signal length: {len(signal)} samples")
     },
   },
   {
+    id: 12,
     slug: 'firefly-festival-of-majuli',
+    tradition: 'Northeast India',
     story: {
       title: 'The Firefly Festival of Majuli',
       tagline: 'On the world\'s largest river island, a boy discovers that even the smallest lights can turn darkness into magic.',
@@ -1808,6 +2016,7 @@ Every monsoon, when the power goes out on Majuli, the fireflies still come. The 
       project: {
         title: 'Build a Firefly Jar',
         description: 'Create an Arduino-powered LED installation that mimics the blinking patterns of real fireflies — including synchronized flashing.',
+        outputDiagram: 'FireflyJarDiagram',
         steps: [
           'Session 1: The science of bioluminescence — draw the luciferin reaction chain, compare firefly efficiency (98%) to LEDs (40%) and incandescent bulbs (10%). Watch slow-motion footage of firefly abdomens.',
           'Session 1: Build your first LED circuit — connect one LED + resistor to Arduino 5V. Learn Ohm\'s Law (V = IR) by calculating the right resistor value. Then wire 3 LEDs in parallel.',
@@ -1857,56 +2066,107 @@ Every monsoon, when the power goes out on Majuli, the fireflies still come. The 
     level0: {
       concepts: [
         {
-          title: 'Bioluminescence: Light from Chemistry',
+          title: "Start Here — How Does a Firefly Glow?",
           paragraphs: [
-            'Bioluminescence is the production of light by living organisms through chemical reactions. The core reaction in fireflies involves a molecule called luciferin, which is oxidized (combined with oxygen) in the presence of an enzyme called luciferase and a molecule of ATP (the universal energy currency of cells). The reaction produces oxyluciferin in an excited electronic state, and when this molecule relaxes to its ground state, it releases the excess energy as a photon of visible light — typically yellow-green, with a wavelength around 560 nanometers.',
-            'The extraordinary feature of bioluminescence is its efficiency. A standard incandescent light bulb converts only about 5% of electrical energy into light — the other 95% is wasted as heat. A firefly\'s bioluminescent reaction converts nearly 100% of the chemical energy into light, with virtually no heat produced. This is why firefly light is called "cold light." The efficiency comes from the tight coupling between the chemical reaction and light emission — the enzyme luciferase holds the reactants in precisely the right orientation to maximize photon output.',
-            'Fireflies control their flashing by regulating the oxygen supply to the light-producing cells (photocytes) in their abdomen. Nerve signals trigger the release of nitric oxide (NO), which causes mitochondria in the photocytes to stop consuming oxygen, making it available for the luciferin reaction instead. When the nerve signal stops, mitochondria resume oxygen consumption and the light switches off. This on-off switching takes only about 50-100 milliseconds, allowing fireflies to produce the precise flash patterns they use for communication.',
+            "Touch a light bulb that has been on for a few minutes. It is hot — painfully hot. That is because a regular bulb wastes **95% of its energy as heat** and only turns 5% into light. Your bulb is mostly a heater that happens to glow a little.",
+            "Now imagine catching a firefly and holding it gently in your cupped hands. Its abdomen pulses with soft green light. But there is **no heat at all**. The firefly's body is cool to the touch. How is it making light without fire, without electricity, without getting hot?",
+            "The answer is a chemical reaction happening inside the firefly's belly. The firefly has a special molecule called **luciferin** (from the Latin word *lux*, meaning light). When luciferin meets **oxygen** from the air, and a helper molecule called **luciferase** brings them together, the reaction produces a tiny flash of yellow-green light. That is it — no flame, no wire, no heat. Just chemistry glowing in the dark.",
+            "**Try this in your head:** If a light bulb turns 5% of energy into light and a firefly turns 98% into light, how many times more efficient is the firefly? (Answer: about 20 times. The firefly wastes almost nothing.)",
+            "Scientists call this **bioluminescence** — 'bio' means living, 'luminescence' means light. The firefly is a living lamp, and it is far better at making light than anything humans have invented.",
           ],
-          keyIdea: 'Firefly light comes from a nearly 100% efficient chemical reaction: luciferin + oxygen + ATP, catalyzed by luciferase, produces a photon of yellow-green light with almost no waste heat.',
+          keyIdea: "Fireflies produce light through a chemical reaction (luciferin + oxygen → light), and they waste almost nothing as heat — 98% efficient compared to a light bulb's 5%.",
+          diagram: 'BioluminescenceReactionDiagram',
+        },
+        {
+          title: "Why Does a Firefly Flash On and Off?",
+          paragraphs: [
+            "A firefly does not just glow steadily like a night-light. It **blinks** — on, off, on, off — in a pattern. Why? Because each flash is a **message**.",
+            "Think about it this way. If you were standing on a hilltop at night and wanted to signal a friend across the valley, you would not just leave your torch on. You would flash it — maybe three short flashes for 'come here' or one long flash for 'I'm okay.' The pattern carries the meaning, not just the light.",
+            "Fireflies do exactly this, but for finding a mate. A male firefly flies through the air flashing a specific pattern — say, two quick flashes followed by a pause. A female of the **same species**, sitting on a leaf below, recognises the pattern and flashes back. If the pattern matches, he flies toward her. If it does not match, she ignores him.",
+            "Here is the clever part: there are over **2,000 species** of firefly, and each species has its own unique flash code. They can all be in the same field at the same time without confusion, because each is tuned to its own signal — like different radio stations on different frequencies.",
+            "**Check yourself:** If a firefly just glowed steadily instead of flashing, what problem would that create? (Answer: every firefly would look the same — there would be no way to tell species apart, and no way to send or receive specific messages.)",
+          ],
+          keyIdea: "Fireflies flash in species-specific patterns to communicate — each pattern is a code, and only fireflies of the same species respond to each other's signals.",
+          diagram: 'FireflySpeciesCodeDiagram',
+        },
+        {
+          title: "The Mystery — How Do Thousands Flash Together?",
+          paragraphs: [
+            "In parts of Southeast Asia and the Smoky Mountains of the USA, something extraordinary happens: **thousands of fireflies flash in perfect unison**. On. Off. On. Off. The entire riverbank or forest blinks like a single giant organism. No leader. No conductor. No one counting '1, 2, 3, go!' How?",
+            "Here is an experiment you can do right now. **Clap your hands at your own pace.** Now imagine you are in a room with 20 people, all clapping at their own pace. At first, it sounds like random noise. But something strange happens — after a minute or two, people start clapping together. You hear someone near you and unconsciously adjust your timing to match. They adjust to match the person next to *them*. Within a few minutes, the whole room is clapping in sync.",
+            "Nobody decided to lead. Nobody counted down. Each person just made a **tiny adjustment** — speeding up slightly or slowing down slightly — every time they heard a neighbour's clap. That tiny adjustment, repeated by everyone, pulls the whole group into synchrony.",
+            "Fireflies do the same thing with light instead of sound. Each firefly has its own internal rhythm. But every time it sees a neighbour flash, it nudges its own timing slightly toward the neighbour's. Nudge by nudge, the whole swarm locks into step. Scientists call this **synchronization**, and the math behind it (called the Kuramoto model) explains everything from fireflies to heart cells beating in rhythm to power grids staying in phase.",
+            "**A prediction:** If you covered one firefly's eyes so it could not see its neighbours, it would flash at its own pace while the rest of the swarm synchronised. The rule is simple: you must *watch* to *sync*.",
+          ],
+          keyIdea: "Fireflies synchronize without a leader — each one nudges its timing toward its neighbours, and these tiny adjustments add up until thousands flash in perfect unison.",
+          diagram: 'FireflySyncDiagram',
+        },
+        {
+          title: "From Firefly to LED — Can We Copy Nature?",
+          paragraphs: [
+            "Humans wanted light without fire too. In 1962, an engineer named Nick Holonyak built the first practical **LED** — a Light Emitting Diode. An LED is a tiny chip of special material that glows when electricity flows through it. No flame, no filament, no hot glass — just a small, cool light.",
+            "How does it work? Think of a waterfall. Water at the top has energy (height). As it falls to a lower level, that energy has to go somewhere — it becomes the crash and spray at the bottom. In an LED, **electrons** (tiny charged particles) 'fall' from a high energy level to a low one inside the chip. The energy they release comes out as **light** instead of crash and spray.",
+            "The colour depends on how big the 'fall' is. A big energy drop makes blue light (short wavelength, high energy). A smaller drop makes red light (long wavelength, lower energy). Green is in between. This is why LEDs come in every colour — engineers choose the material to set the size of the drop.",
+            "Modern LEDs are about **50% efficient** — ten times better than old light bulbs, but still not as good as a firefly's 98%. Nature had a 400-million-year head start. But LEDs have one superpower fireflies do not: you can switch them on and off **billions of times per second**. That is how your phone screen, fibre-optic internet cables, and traffic lights all work.",
+            "**Check yourself:** Why is an LED sometimes called the 'human-made firefly'? (Answer: both produce cool light without fire — one through chemistry, the other through electricity — and both are far more efficient than an incandescent bulb.)",
+          ],
+          keyIdea: "LEDs produce light when electrons drop from high to low energy inside a chip — the size of the drop determines the colour. At 50% efficient, LEDs are 10× better than bulbs but still trail the firefly's 98%.",
           diagram: 'CircuitDiagram',
-        },
-        {
-          title: 'LEDs: The Human-Made Equivalent',
-          paragraphs: [
-            'A light-emitting diode (LED) produces light through electroluminescence — a process where electrical energy, rather than chemical energy, excites electrons in a semiconductor material. An LED is made of two types of semiconductor: an n-type layer (with excess electrons) and a p-type layer (with electron "holes" — places where electrons are missing). When a voltage is applied across the junction between these layers, electrons flow from the n-type to the p-type side, falling into the holes and releasing energy as photons.',
-            'The color of an LED depends on the semiconductor material used and the energy gap between the electron\'s excited state and its ground state. A larger energy gap produces higher-energy photons (shorter wavelength, bluer color), while a smaller gap produces lower-energy photons (longer wavelength, redder color). Red LEDs use gallium arsenide phosphide (GaAsP). Green LEDs use gallium phosphide (GaP). Blue LEDs — whose invention by Isamu Akasaki, Hiroshi Amano, and Shuji Nakamura won the 2014 Nobel Prize in Physics — use gallium nitride (GaN). White LEDs combine a blue LED with a yellow phosphor coating.',
-            'Modern LEDs are about 50-70% efficient — vastly better than incandescent bulbs (5%) and fluorescent tubes (20%), though still not as efficient as firefly bioluminescence (near 100%). However, LEDs have a huge advantage in controllability: they can be switched on and off billions of times per second, making them essential for fiber-optic communication, display screens, and data transmission. A single LED can last 50,000 hours — about 50 times longer than an incandescent bulb — and they contain no mercury or other toxic materials, unlike fluorescent lights.',
-          ],
-          keyIdea: 'LEDs produce light by pushing electrons across a semiconductor junction — the material determines the color, and their 50-70% efficiency, long life, and fast switching make them the dominant lighting technology.',
-        },
-        {
-          title: 'Synchronization: How Fireflies Flash in Unison',
-          paragraphs: [
-            'In certain species — particularly Pteroptyx malaccae in Southeast Asia and Photinus carolinus in the Great Smoky Mountains — thousands of fireflies synchronize their flashes, blinking on and off in perfect unison. This phenomenon puzzled scientists for decades: how do thousands of independent organisms, with no leader or central clock, coordinate their timing so precisely?',
-            'The answer lies in a mathematical concept called coupled oscillators. Each firefly has its own internal flash rhythm (an oscillator), and when it sees a neighbor flash, it adjusts its own timing slightly — speeding up or slowing down to match. This is the same principle by which two pendulum clocks on the same wall eventually synchronize their swings (first observed by Christiaan Huygens in 1665). The mathematical model, described by the Kuramoto equations, shows that if each oscillator adjusts by even a tiny amount in response to its neighbors, the entire population will converge to synchrony within a few cycles.',
-            'This biological synchronization has inspired algorithms for human technology. Wireless sensor networks use firefly-inspired protocols to synchronize their clocks without a central server — each sensor adjusts its timing based on signals from neighbors, just as fireflies adjust to their neighbors\' flashes. The same mathematical framework applies to heart pacemaker cells (which must fire in synchrony), power grid generators (which must match their AC frequency), and even audiences clapping in unison. Nature solved the distributed synchronization problem millions of years before computer scientists encountered it.',
-          ],
-          keyIdea: 'Fireflies synchronize through coupled oscillators — each adjusts its timing slightly when it sees a neighbor flash, and the Kuramoto equations show this simple rule inevitably produces perfect collective synchrony.',
         },
       ],
       vocabulary: [
-        ['LED', 'Light Emitting Diode — glows when electricity flows'],
-        ['Bioluminescence', 'Light from living organisms through chemical reactions'],
-        ['PWM', 'Pulse Width Modulation — controlling brightness by rapid on/off switching'],
-        ['Synchronization', 'Multiple things aligning their timing spontaneously'],
-        ['Luciferin', 'The chemical in fireflies that produces light when oxidized'],
+        ['Bioluminescence', 'Light made by living things through chemical reactions — "bio" means living, "luminescence" means light'],
+        ['Luciferin', 'The special molecule inside a firefly that reacts with oxygen to produce light — named from the Latin word for light'],
+        ['LED', 'Light Emitting Diode — a tiny chip that glows when electricity flows through it, with no flame or hot filament'],
+        ['Synchronization', 'When many things that start at different times gradually align their rhythm — like an audience clapping in unison'],
+        ['Efficiency', 'How much useful output (light) you get compared to the total energy input — fireflies score 98%, light bulbs only 5%'],
       ],
       trueFalse: [
-        { statement: 'Firefly light is nearly 100% energy efficient.', isTrue: true, explanation: 'Almost all energy becomes light, not heat. Incandescent bulbs waste 90% as heat.' },
-        { statement: 'All fireflies blink at the same rate.', isTrue: false, explanation: 'Each species has a unique flash pattern — it is how they find mates.' },
-        { statement: 'Scientists study firefly synchronization for wireless network design.', isTrue: true, explanation: 'The same math (Kuramoto model) applies to fireflies, heart cells, and network protocols.' },
+        { statement: 'A firefly produces light by burning a tiny fuel inside its body.', isTrue: false, explanation: 'There is no burning (combustion) involved. Firefly light comes from a chemical reaction between luciferin and oxygen — it produces almost no heat at all, which is why it is called "cold light."' },
+        { statement: 'Each firefly species has its own unique flash pattern.', isTrue: true, explanation: 'Over 2,000 species exist, and each has a distinct blink code — different timing, number of flashes, and intervals. This is how they find mates of their own species in a field full of other fireflies.' },
+        { statement: 'Fireflies need a leader to synchronize their flashing.', isTrue: false, explanation: 'No leader exists. Each firefly simply adjusts its timing slightly every time it sees a neighbour flash. These tiny individual adjustments add up until the whole swarm blinks in unison.' },
       ],
       facts: [
-        'Over 2,000 firefly species exist, each with unique flash patterns.',
-        'Firefly light is called cold light — nearly zero heat produced.',
-        'Firefly synchronization inspired improvements to wireless network protocols.',
+        'A firefly is nearly 20 times more efficient at producing light than a standard light bulb — 98% of its energy becomes light, compared to just 5% for an incandescent bulb.',
+        'In Ziro Valley in Arunachal Pradesh and the forests of Meghalaya, firefly displays light up riverbanks during the monsoon season — some of the best bioluminescent shows in India.',
+        'The clapping-audience experiment really works: next time you are in a crowd that claps, listen carefully — within 30 seconds, random clapping almost always synchronizes without anyone leading it.',
       ],
-      offlineActivity: 'In a dark room, use a flashlight to create flash patterns. Ask someone to identify which pattern means calm vs danger. You are communicating like a firefly.',
+      offlineActivity: 'Try the synchronization experiment with friends or family. Give everyone a small torch or phone flashlight. Stand apart in a dark room and start blinking your lights at your own pace. The only rule: every time you see someone else blink, adjust your timing *slightly* toward theirs. See how long it takes before everyone is blinking together. (It usually takes less than 2 minutes!)',
+      offlineActivityDiagram: 'ActivityFlashlightSyncDiagram',
+      codeTeaser: `# Simulating firefly synchronization
+# Watch random flashers gradually sync up!
+
+import random
+
+fireflies = [random.uniform(0, 1) for _ in range(6)]
+nudge = 0.05   # how much each adjusts toward neighbours
+
+for step in range(20):
+    # Each firefly nudges toward the average
+    avg = sum(fireflies) / len(fireflies)
+    fireflies = [f + nudge * (avg - f) for f in fireflies]
+
+    spread = max(fireflies) - min(fireflies)
+    bar = "#" * int(spread * 50)
+    print(f"Step {step+1:2d}: spread={spread:.3f} {bar}")
+
+# After 20 steps, spread → 0 = perfectly synced!`,
+      referenceLinks: [
+        { slug: 'electricity-and-current', reason: 'Understand how electrons flow in circuits — the foundation for building your own LED firefly jar' },
+        { slug: 'light-and-color', reason: 'Learn why different LEDs glow different colours — it connects to the same wavelength physics behind firefly green' },
+        { slug: 'ecology-and-populations', reason: 'Explore how firefly populations interact with their environment and why light pollution threatens them' },
+      ],
+      nextLessons: [
+        { slug: 'festival-lights', reason: 'Takes the LED and circuit concepts further — build decorative light displays inspired by Assamese festivals' },
+        { slug: 'fireflies-dont-burn', reason: 'A deeper dive into bioluminescence — explores other glowing organisms beyond fireflies' },
+        { slug: 'stars-ziro-valley', reason: 'Another story about light and darkness — how light pollution steals the stars, just as it threatens firefly habitats' },
+      ],
     },
   },
   {
+    id: 13,
     slug: 'river-dolphins-secret',
+    tradition: 'Northeast India',
     story: {
       title: 'The River Dolphin\'s Secret',
       tagline: 'A blind dolphin teaches a boy that seeing isn\'t the only way to understand the world.',
@@ -1997,56 +2257,106 @@ The river dolphin had taught him her secret: the world speaks to those who close
     level0: {
       concepts: [
         {
-          title: 'Sound Waves in Water: How Echolocation Works',
+          title: 'Seeing with Sound',
           paragraphs: [
-            'Sound travels about 4.3 times faster in water than in air — approximately 1,480 m/s compared to 343 m/s. This is because water molecules are much closer together than air molecules, so the compression waves that constitute sound can be transmitted more quickly from one molecule to the next. Sound also travels farther in water because less energy is lost to absorption. This makes sound the ideal sense for underwater navigation, which is why dolphins, whales, and many fish have evolved to rely on it.',
-            'Echolocation works by emitting a sound pulse and listening for the echo that bounces back from objects. The Ganges river dolphin (Platanista gangetica) produces clicks — sharp, broadband sound pulses lasting less than a millisecond — by forcing air through structures called phonic lips in the nasal passages. These clicks are focused into a beam by the melon, a fatty organ in the dolphin\'s forehead that acts as an acoustic lens. The focused beam travels outward, hits an object (a fish, a riverbed, an obstacle), and reflects back as an echo.',
-            'The Ganges river dolphin is functionally blind — its eyes lack lenses, making it unable to form images. It lives in the murky, silt-laden waters of the Ganges and Brahmaputra river systems where visibility is often less than a few centimeters. It has evolved to rely almost entirely on echolocation, producing up to 100 clicks per second to build a continuous acoustic picture of its environment. This makes it one of the most sophisticated biosonar users on Earth, navigating complex underwater landscapes at high speed using sound alone.',
+            'Imagine you are standing in a completely dark room. You cannot see anything. But if you clap your hands, you hear the echo bounce off the walls \u2014 and from that echo, you can tell roughly how big the room is and where the walls are. That is the basic idea behind **echolocation**: sending out a sound and listening to what comes back.',
+            'The Ganges river dolphin does this hundreds of times per second. It produces sharp clicking sounds using structures called **phonic lips** inside its nasal passages. Each click lasts less than a thousandth of a second. The click travels outward through the water, hits an object \u2014 a fish, a rock, the riverbed \u2014 and bounces back as an **echo**. The dolphin\u2019s brain measures how long the echo took to return and calculates how far away the object is.',
+            '**Prediction before you read on:** if the echo returns quickly, is the object close or far away? Think about it. The answer: close. A quick echo means the sound didn\u2019t have to travel far. A slow echo means the object is distant. This one idea \u2014 **time delay tells you distance** \u2014 is the foundation of all sonar, radar, and ultrasound technology.',
+            'The dolphin doesn\u2019t just get distance. The echo also carries information about what the object *is*. Hard objects like rocks produce loud, sharp echoes. Soft objects like fish produce quieter, more muffled echoes. Small objects reflect high-pitched sounds but let low-pitched sounds pass by. The dolphin\u2019s brain reads all of these clues \u2014 loudness, pitch, timing \u2014 and assembles a detailed mental picture, like building a 3D model from sound alone.',
           ],
-          keyIdea: 'Sound travels 4.3 times faster in water than in air, making echolocation ideal for underwater navigation — the nearly blind Ganges river dolphin relies entirely on sonar, producing up to 100 clicks per second.',
-          diagram: 'EcholocationDiagram',
+          keyIdea: 'Echolocation is seeing with sound: send a click, listen for the echo, and measure how long it takes to return. Quick echo = close object. Slow echo = far object. The dolphin does this 100 times per second.',
+          diagram: 'DolphinEcholocationDiagram',
         },
         {
-          title: 'Echo Timing and Distance Calculation',
+          title: 'The Speed of Sound in Water',
           paragraphs: [
-            'The fundamental equation of echolocation is deceptively simple: distance = (speed × time) / 2. The dolphin emits a click, the click travels to an object, bounces back, and the dolphin measures the time delay. If the echo returns in 0.01 seconds and sound travels at 1,480 m/s in water, the round-trip distance is 1,480 × 0.01 = 14.8 meters, and the object is half that — 7.4 meters away. The factor of 2 accounts for the fact that the sound travels to the object and back.',
-            'But dolphins extract far more than just distance from echoes. The frequency content of the echo reveals the size, shape, and material of the object. Small objects reflect high frequencies better than low frequencies (because the wavelength must be comparable to or smaller than the object to reflect efficiently). Soft objects absorb more sound than hard objects. A fish-shaped echo has a different frequency profile than a rock-shaped echo. The dolphin\'s brain processes all these acoustic details — arrival time, frequency content, amplitude, and echo duration — to build a detailed mental image of the object.',
-            'Scientists measure dolphin echolocation ability by testing their discrimination in controlled experiments. Ganges river dolphins can distinguish between two objects differing in diameter by just 10% using echolocation alone. They can detect a thin wire (1 mm diameter) at several meters distance. They can tell the difference between a hollow metal sphere and a solid one of the same size. This level of acoustic discrimination rivals or exceeds the best human-built sonar systems, achieved with a brain that uses only about 30 watts of power — while a comparable naval sonar system consumes thousands of watts.',
+            'Sound is a vibration that travels through matter by bumping molecules into each other, like a chain of dominoes. The closer together the molecules are, the faster the vibration passes from one to the next. In **air**, molecules are spread far apart, so sound travels at about **343 meters per second** (roughly the length of 3 football fields every second). In **water**, molecules are packed much more tightly, so sound travels at about **1,480 m/s** \u2014 more than **4 times faster**.',
+            '**Check yourself:** if sound is 4.3 times faster in water, and a dolphin\u2019s click takes 0.01 seconds to echo back from a fish, how far away is the fish? Work it out: distance = speed \u00d7 time / 2 = 1,480 \u00d7 0.01 / 2 = **7.4 meters**. The division by 2 is because the sound travels *to* the fish and *back* \u2014 the round trip is twice the actual distance.',
+            'This speed difference is why sonar works so much better underwater than in air. In water, sound covers enormous distances before fading out. Whale songs can travel thousands of kilometres across the ocean. In air, sounds fade quickly because the molecules are too spread out to carry the vibration efficiently. A submarine\u2019s sonar can detect objects 10 km away; an ultrasonic sensor in air maxes out at about 4 meters.',
+            '**Temperature matters too.** Warm water transmits sound faster than cold water (molecules move faster when heated). The formula for sound speed in air is: speed = 331.3 + (0.606 \u00d7 temperature_\u00b0C) m/s. At 0\u00b0C, sound is 331 m/s; at 35\u00b0C, it\u2019s 352.5 m/s. A sonar system that doesn\u2019t account for temperature will give wrong distances \u2014 off by several centimetres, which matters for precision applications like medical ultrasound.',
           ],
-          keyIdea: 'Echolocation distance is calculated as (speed x time) / 2, but dolphins also extract size, shape, and material from echo frequency and amplitude — achieving discrimination that rivals military sonar technology.',
+          keyIdea: 'Sound travels 4.3 times faster in water (1,480 m/s) than in air (343 m/s) because water molecules are packed tightly. This makes water the ideal medium for sonar \u2014 and is why dolphins evolved echolocation.',
+          diagram: 'DolphinSonarWaveDiagram',
         },
         {
-          title: 'Signal Processing: From Raw Sound to Information',
+          title: 'Building a Sonar Sensor',
           paragraphs: [
-            'When an echo returns to the dolphin, it does not arrive as a single clean signal. It is a complex mixture of the original reflection plus echoes from the riverbed, the surface, floating debris, other fish, and the river current itself — all arriving within milliseconds of each other. The dolphin\'s auditory system must separate the useful signal from this noise, a challenge that signal processing engineers call the signal-to-noise ratio (SNR) problem.',
-            'The dolphin solves this using several strategies that engineers have since incorporated into artificial sonar. First, the dolphin uses beamforming — by focusing its clicks into a narrow beam (about 10-12° wide), it illuminates only a small area at a time, reducing clutter from off-axis objects. Second, the dolphin adjusts the rate and intensity of its clicks based on the environment: in open water, it uses louder, less frequent clicks; in cluttered environments near the riverbed, it uses quieter, more frequent clicks to get rapid updates. This is analogous to adjusting radar parameters for different environments.',
-            'Third, and most impressively, the dolphin\'s brain performs what engineers call matched filtering — it compares the returning echo to a stored template of what the emitted click sounded like, looking for correlations. This dramatically improves detection sensitivity in noisy environments. Modern sonar systems, radar systems, and even medical ultrasound machines all use matched filtering, but the dolphin\'s brain implements it using biological neural networks rather than digital processors. Understanding how dolphins process acoustic signals continues to inspire advances in underwater robotics, submarine detection, and medical imaging technology.',
+            'You can build your own echolocation device using an Arduino microcontroller and an **HC-SR04 ultrasonic sensor** \u2014 a small, inexpensive circuit board with two metal cylinders on the front. One cylinder is a **speaker** that sends out a 40 kHz ultrasonic pulse (too high-pitched for humans to hear, but the same principle as the dolphin\u2019s click). The other is a **microphone** that listens for the echo.',
+            'Here is exactly how it works, step by step. You send a 10-microsecond electrical pulse to the TRIG (trigger) pin. The sensor fires an ultrasonic chirp. The sound travels outward, hits an object, and bounces back. The sensor\u2019s ECHO pin goes HIGH (turns on) the instant the echo starts returning, and goes LOW (turns off) when the echo ends. Your Arduino code uses a function called `pulseIn()` to measure exactly how many microseconds the ECHO pin stayed HIGH. That duration is the round-trip travel time of the sound.',
+            '**Now do the math:** distance_cm = duration_\u03bcs \u00d7 0.0343 / 2. Where does 0.0343 come from? Sound travels at 343 m/s, which is 0.0343 cm/\u03bcs. So if the echo duration is 1,450 microseconds: distance = 1,450 \u00d7 0.0343 / 2 = **24.9 cm**. You just measured distance using sound \u2014 exactly like a dolphin.',
+            'Real sensors are noisy. One reading might say 100 cm, the next says 98, then 103, then a wild 145 cm (a glitch from electrical interference). The fix: take 5 readings, throw away the highest and lowest, and average the rest. This is called a **trimmed mean**, and it\u2019s the simplest form of **signal filtering**. The dolphin\u2019s brain does something similar \u2014 it clicks 100 times per second and averages the echoes into a stable, reliable picture.',
           ],
-          keyIdea: 'Dolphins solve the signal-to-noise problem using biological versions of beamforming, adaptive pulse rate, and matched filtering — techniques that engineers have independently developed for radar, sonar, and medical imaging.',
+          keyIdea: 'The HC-SR04 sensor is a human-built echolocator: it sends a 40 kHz ping, times the echo, and calculates distance using the same formula the dolphin uses \u2014 distance = speed \u00d7 time / 2.',
+          diagram: 'DolphinArduinoSensorDiagram',
+        },
+        {
+          title: 'Blind but Not Lost',
+          paragraphs: [
+            'The Ganges river dolphin (Platanista gangetica) is one of the most extreme examples of adaptation on Earth. It lives in the silt-laden waters of the Ganges and Brahmaputra river systems, where underwater visibility is often less than **5 centimetres**. Over millions of years, its eyes lost their lenses entirely \u2014 they can detect light and dark but cannot form images. It is, for all practical purposes, **blind**.',
+            'So how does it navigate at high speed through murky, debris-filled rivers without crashing? Through a suite of adaptations that work together. Its **melon** (a fatty lump in its forehead) focuses outgoing clicks into a narrow beam, like a biological spotlight. Its **oil-filled lower jaw** conducts returning echoes directly to the inner ear, working like a sensitive antenna. It even **swims on its side**, trailing one flipper along the riverbed for tactile feedback \u2014 a backup navigation system.',
+            '**Think about what this means for engineering.** The dolphin\u2019s brain processes hundreds of echoes per second, extracting distance, size, shape, and material of objects \u2014 all while swimming, hunting, and avoiding obstacles. It does this with about 30 watts of brain power. A comparable naval sonar system consumes thousands of watts and fills an entire room with electronics. Nature solved the sonar problem millions of years before engineers did, and did it more efficiently.',
+            'This kind of evolutionary solution inspires a field called **biomimicry** \u2014 engineering designs copied from nature. The dolphin\u2019s melon inspired acoustic lens designs for underwater robots. Its side-swimming inspired tactile navigation for robots that operate in zero-visibility environments like collapsed buildings. When Nabajit followed the dolphin through the fog, he was witnessing a navigation system that engineers still study today.',
+          ],
+          keyIdea: 'The Ganges river dolphin lost its eyesight but evolved a sonar system superior to most human technology \u2014 using a biological acoustic lens, a jaw antenna, and side-swimming for tactile feedback.',
+          diagram: 'DolphinAdaptationDiagram',
         },
       ],
       vocabulary: [
-        ['Echolocation', 'Finding objects by sending out sound and listening for the echo that bounces back'],
-        ['Ultrasonic', 'Sound waves too high-pitched for humans to hear (above 20,000 Hz)'],
-        ['Echo', 'Sound that bounces off a surface and returns to the listener'],
-        ['Frequency', 'How many sound waves pass a point per second, measured in Hertz (Hz)'],
-        ['Transducer', 'A device that converts one form of energy to another — like sound to electricity'],
+        ['Echolocation', 'Finding objects by sending out a sound and listening for the echo \u2014 the time delay reveals distance, and the echo\u2019s character reveals the object\u2019s size, shape, and material'],
+        ['Ultrasonic', 'Sound waves above 20,000 Hz, too high-pitched for human ears \u2014 dolphins click at 20\u2013130 kHz, and the HC-SR04 sensor operates at 40 kHz'],
+        ['Time-of-flight', 'The time it takes for a signal (sound, light, or radio) to travel to a target and return \u2014 divide by 2 and multiply by speed to get distance'],
+        ['Transducer', 'A device that converts one form of energy to another \u2014 the HC-SR04\u2019s speaker converts electricity to sound, and its microphone converts sound back to electricity'],
+        ['Biomimicry', 'Designing technology by copying solutions that nature evolved \u2014 the dolphin\u2019s melon inspired acoustic lenses, and bat sonar inspired ultrasonic cane sensors for the visually impaired'],
       ],
       trueFalse: [
-        { statement: 'Dolphins can "see" underwater using sound.', isTrue: true, explanation: 'Dolphins send out clicks and listen for echoes. Their brain creates a 3D mental image from the echo patterns — they can detect fish, obstacles, and even the shape of objects in murky water where eyes are useless.' },
-        { statement: 'Sound travels faster in water than in air.', isTrue: true, explanation: 'Sound travels about 1,500 m/s in water vs 343 m/s in air — over 4 times faster. This is because water molecules are packed closer together, transmitting vibrations more efficiently.' },
-        { statement: 'Only marine animals use echolocation.', isTrue: false, explanation: 'Bats use echolocation in air to catch insects at night. Some birds (oilbirds, swiftlets) and even some blind humans have learned to use tongue clicks to navigate by echo.' },
+        { statement: 'The Ganges river dolphin is completely blind and cannot detect even light.', isTrue: false, explanation: 'Its eyes can detect light and dark (it knows if it\u2019s day or night), but they lack lenses and cannot form images. It is functionally blind for navigation but not totally without light perception.' },
+        { statement: 'Sound travels faster in water than in air because water molecules are closer together.', isTrue: true, explanation: 'Water molecules are packed tightly, so vibrations pass from one to the next much faster \u2014 1,480 m/s in water vs 343 m/s in air. This is why sonar is the dominant sensing technology underwater.' },
+        { statement: 'An ultrasonic sensor measures distance by measuring how loud the echo is.', isTrue: false, explanation: 'It measures the time the echo takes to return, not its loudness. Distance = speed \u00d7 time / 2. Loudness tells you about the object\u2019s material and size, but not its distance.' },
       ],
       facts: [
-        'The Gangetic river dolphin is nearly blind — its eyes can only tell light from dark. It navigates entirely by sonar, clicking up to 200 times per second.',
-        'Medical ultrasound uses the same principle as dolphin sonar — high-frequency sound waves bounce off organs and create an image. This is how doctors see babies before they\'re born.',
-        'Submarines use sonar arrays that can detect objects hundreds of kilometers away. The same technology helps map the ocean floor, discovering new species and underwater mountains.',
+        'The Gangetic river dolphin is nearly blind \u2014 its eyes can only tell light from dark. It navigates entirely by sonar, clicking up to 200 times per second.',
+        'Medical ultrasound uses the same principle as dolphin sonar \u2014 high-frequency sound waves bounce off organs and create an image. This is how doctors image babies before they\u2019re born.',
+        'Submarines use sonar arrays that can detect objects hundreds of kilometres away. The same technology helps map the ocean floor, discovering new species and underwater mountains.',
       ],
       offlineActivity: 'Stand in a large room or hallway and clap once. Listen for the echo. Now try it in a smaller room — is the echo faster or slower? Try clapping near a wall vs in the middle of a room. You\'re doing exactly what a dolphin does: using sound to understand the shape of your environment.',
+      offlineActivityDiagram: 'ActivitySonarDiagram',
+      codeTeaser: `import numpy as np
+import matplotlib.pyplot as plt
+
+# Simulate a sonar sweep (angle vs distance)
+angles = np.arange(0, 181, 10)  # 0 to 180 degrees
+distances = [120, 95, 85, 45, 60, 200, 180, 150,
+             28, 35, 90, 110, 130, 85, 70, 95, 105, 88, 120]
+
+# Convert polar to Cartesian (x, y)
+rads = np.radians(angles)
+x = distances * np.cos(rads)
+y = distances * np.sin(rads)
+
+plt.figure(figsize=(10, 6))
+plt.scatter(x, y, c=distances, cmap="cool", s=60)
+plt.colorbar(label="Distance (cm)")
+plt.title("Sonar Sweep: Room Map from Sound")
+plt.xlabel("x (cm)")
+plt.ylabel("y (cm)")
+plt.axis("equal")
+plt.grid(True, alpha=0.3)
+plt.show()  # What shape is the room?`,
+      referenceLinks: [
+        { slug: 'waves-and-properties', reason: 'Understand how sound waves work \u2014 frequency, wavelength, and amplitude \u2014 the physics behind echolocation' },
+        { slug: 'forces-and-motion', reason: 'The distance formula (d = v \u00d7 t) used in sonar is the same equation that governs all motion' },
+      ],
+      nextLessons: [
+        { slug: 'the-little-boat', reason: 'Explores water physics and navigation \u2014 the environment where dolphin sonar operates' },
+        { slug: 'bamboo-flute-of-nagaland', reason: 'Dives deeper into sound waves, frequency, and resonance \u2014 the physics behind the dolphin\u2019s clicks' },
+        { slug: 'girl-who-spoke-to-elephants', reason: 'Uses sound analysis (infrasound) for wildlife tracking \u2014 the same sensor-to-data pipeline but for elephants' },
+      ],
     },
   },
   {
+    id: 14,
     slug: 'boy-who-built-a-library',
+    tradition: 'Northeast India',
     story: {
       title: 'The Boy Who Built a Library',
       tagline: 'A village boy with no books builds a bamboo library that changes his village forever.',
@@ -2191,7 +2501,9 @@ His mother smiled. "You didn't build it from nothing, Dipankar. You built it fro
     },
   },
   {
+    id: 15,
     slug: 'dragonfly-and-the-paddy-field',
+    tradition: 'Northeast India',
     story: {
       title: 'The Dragonfly and the Paddy Field',
       tagline: 'A dragonfly protects the rice harvest by eating the pests that threaten it — a story about the small heroes we never notice.',
@@ -2350,7 +2662,9 @@ And if her wings catch the light just right, and you see that flash of impossibl
     },
   },
   {
+    id: 16,
     slug: 'why-the-muga-silk-is-golden',
+    tradition: 'Northeast India',
     story: {
       title: 'Why the Muga Silk Is Golden',
       tagline: 'The world\'s only golden silk comes from Assam. A folktale about generosity and the sun\'s gift.',
@@ -2465,56 +2779,102 @@ To this day, **muga silk** is found only in Assam — the only golden silk in th
     level0: {
       concepts: [
         {
-          title: 'Silk Fibroin: The Protein Architecture of Silk',
+          title: 'The Caterpillar\u2019s Golden Thread',
           paragraphs: [
-            'Silk is a natural protein fiber produced by the larvae (caterpillars) of silk moths. The primary protein in silk is fibroin, a large molecule consisting of repeating sequences of amino acids — primarily glycine (45%), alanine (30%), and serine (12%). These amino acids are the smallest in nature, which allows the protein chains to pack together very tightly. When a silkworm spins silk, it extrudes a solution of fibroin through spinnerets and the protein chains crystallize into an antiparallel beta-sheet structure — flat, zigzagging sheets stacked on top of each other and held together by hydrogen bonds.',
-            'The beta-sheet crystal regions give silk its remarkable tensile strength — the resistance to being pulled apart. Silk fibroin has a tensile strength of about 500-600 MPa, which is comparable to steel wire of the same diameter but at only one-sixth the density. Between the crystalline regions are amorphous (disordered) sections that give silk its elasticity — the ability to stretch and return to shape. This combination of crystalline strength and amorphous flexibility is what makes silk simultaneously strong, light, and supple — a combination that synthetic materials struggle to replicate.',
-            'Muga silk, produced by the Antheraea assamensis moth found only in Assam, has a distinctive golden color that comes from carotenoid pigments in the fibroin. Unlike cultivated mulberry silk (Bombyx mori), which is white, Muga silk retains its gold color permanently — it actually becomes more lustrous with washing and use. The golden pigment is incorporated into the protein structure during spinning and cannot be removed without destroying the fiber. Muga silk is also exceptionally durable: it can last over 50 years, making it one of the strongest natural fibers known.',
+            'Silk is not a fabric you weave from plant fibres like cotton. It is a **protein** \u2014 a long chain of tiny building blocks called amino acids \u2014 produced inside the body of a caterpillar. Specifically, the caterpillar makes a protein called **fibroin** in two long glands that run the length of its body, filled with a thick, gooey solution of dissolved protein.',
+            'When the caterpillar is ready to build its cocoon, it squeezes this protein solution through a tiny nozzle on its head called a **spinneret**. Think of it like squeezing toothpaste through a tube \u2014 except as the fibroin comes out, something remarkable happens. The narrow opening forces the tangled protein chains to line up in parallel, like combing messy hair into neat rows. Once aligned, the chains lock together into flat, stacked sheets called **\u03B2-sheet crystals**, held by millions of tiny hydrogen bonds.',
+            'A second protein called **sericin** coats the fibroin as it emerges, acting like glue to hold the two strands together and stick the cocoon into shape. One caterpillar produces a single continuous thread **300 to 900 metres long** \u2014 nearly a kilometre of silk from an animal smaller than your little finger.',
+            '**Check yourself:** A silkworm\u2019s spinneret works at room temperature, using water as a solvent. Nylon factories need temperatures above 250\u00B0C and toxic chemicals. Which process is more energy-efficient? What does that tell you about what nature has figured out that we haven\u2019t?',
           ],
-          keyIdea: 'Silk fibroin uses beta-sheet protein crystals for strength and amorphous regions for elasticity — Muga silk from Assam has a permanent golden color from carotenoid pigments woven into the protein structure.',
-          diagram: 'SilkStructureDiagram',
+          keyIdea: 'Silk is a protein fibre, not a plant fibre. Caterpillars produce fibroin in glands and extrude it through a spinneret, where the protein chains align into \u03B2-sheet crystals \u2014 giving silk its strength, smoothness, and sheen.',
+          diagram: 'MugaSilkFibroinDiagram',
         },
         {
-          title: 'Tensile Strength: Why Silk Is Stronger Than Steel',
+          title: 'Why Muga Silk Glows Gold',
           paragraphs: [
-            'Tensile strength measures how much pulling force a material can withstand before breaking, expressed as force per unit area (Pascals or megapascals). When we say silk is "stronger than steel," we mean per unit weight (specific strength = tensile strength / density). Silk\'s tensile strength is about 500-600 MPa with a density of 1.3 g/cm³. Mild steel has a tensile strength of about 400-550 MPa with a density of 7.8 g/cm³. So per gram, silk is about 5-6 times stronger than mild steel.',
-            'The source of silk\'s strength lies in the molecular alignment of its fibroin chains. During spinning, the silkworm pulls the fibroin solution through a narrow duct, which aligns the protein chains along the fiber axis — like combing tangled hair into parallel strands. This alignment means that when you pull on a silk fiber, you are pulling against millions of covalent bonds in the protein backbone simultaneously. The beta-sheet crystals lock adjacent chains together, preventing them from sliding past each other. The hydrogen bonds between sheets, while individually weak, number in the billions per centimeter of fiber, providing enormous collective resistance.',
-            'Materials scientists are intensely interested in understanding and replicating silk\'s mechanical properties. Spider dragline silk (from Nephila spiders) is even stronger than silkworm silk — about 1,000-1,600 MPa — and has a toughness (energy absorbed before breaking) that exceeds Kevlar. Researchers have genetically engineered bacteria, yeast, and even goats to produce spider silk proteins, but so far no synthetic process replicates the spinning method that creates the precise molecular alignment. The silkworm\'s spinneret, operating at room temperature and in water, outperforms any industrial fiber-manufacturing process in terms of energy efficiency.',
+            'Most silk is white. Mulberry silk from Bombyx mori caterpillars is white. Eri silk is cream. Tasar silk is brown. But muga silk is **golden** \u2014 the only naturally golden silk on Earth. Why?',
+            'The answer is chemistry. The Antheraea assamensis caterpillar feeds on the leaves of **som** and **sualu** trees. These leaves contain an amino acid called **tryptophan**. Inside the caterpillar\u2019s body, tryptophan gets converted into a golden pigment called **xanthurenic acid**. Here is the crucial part: this pigment doesn\u2019t sit on the surface of the thread like a dye on a cotton shirt. It is **chemically bonded into the fibroin protein itself** \u2014 woven into the molecular structure.',
+            'Imagine the difference between writing on a wall with chalk (surface dye) and mixing yellow paint into wet plaster before it dries (structural colour). The chalk washes off in the rain. The coloured plaster is yellow all the way through \u2014 you cannot remove the colour without destroying the wall. Muga silk\u2019s gold works the same way. You cannot wash it out. Sunlight cannot break it down, because the bond between xanthurenic acid and fibroin is UV-stable.',
+            'Even more remarkably, muga silk gets **more lustrous with every wash**. This is because the sericin coating (which is slightly dull) gradually wears away, exposing more of the golden fibroin underneath. Most fabrics fade with use; muga silk gets more beautiful.',
+            '**A prediction you can test:** If you could somehow raise an Antheraea assamensis caterpillar on mulberry leaves instead of som leaves, its silk would likely be pale or white \u2014 because without the specific tryptophan chemistry from som leaves, the caterpillar cannot produce enough xanthurenic acid. The gold comes from the diet, not from the caterpillar alone.',
           ],
-          keyIdea: 'Silk is stronger than steel per unit weight because fibroin chains are aligned along the fiber axis and locked by billions of hydrogen bonds — a molecular architecture that no synthetic process has fully replicated.',
+          keyIdea: 'Muga silk is golden because xanthurenic acid \u2014 produced when the caterpillar digests som tree leaves \u2014 bonds directly into the fibroin protein. This structural colour never fades, resists UV, and actually improves with washing.',
+          diagram: 'MugaSilkNanostructureDiagram',
         },
         {
-          title: 'From Caterpillar to Cloth: The Biology of Silk Production',
+          title: 'From Cocoon to Cloth',
           paragraphs: [
-            'Silk production begins when the silkworm larva prepares to pupate — to transform into a moth inside a protective cocoon. The larva has two silk glands, each a long tube running along the length of its body, filled with a concentrated solution of fibroin protein. As the larva moves its head in a figure-eight pattern, it draws fibroin from both glands simultaneously, combining the two strands into a single fiber. A coating protein called sericin (a sticky, gummy substance) glues the twin fibroin strands together and helps the cocoon hold its shape.',
-            'A single silkworm cocoon contains one continuous fiber that can be 300 to 900 meters long — nearly a kilometer of silk from one tiny caterpillar. The Muga silkworm of Assam feeds exclusively on the leaves of som (Persea bombycina) and soalu (Litsea monopetala) trees, and the specific chemicals in these leaves contribute to the silk\'s golden color and unique properties. Unlike mulberry silkworms, which have been domesticated for 5,000 years and cannot survive in the wild, Muga silkworms are semi-domesticated — they are raised on outdoor trees, exposed to natural weather and predators.',
-            'To harvest the silk, the cocoons must be processed before the moth emerges (which would break the continuous fiber into short fragments). Traditional sericulture involves boiling the cocoons in water to soften the sericin and then carefully unreeling the fibroin fiber. For Muga silk, this process is particularly delicate because the golden fiber is thinner and more fragile than mulberry silk. Several cocoon fibers are combined and twisted together to make a thread strong enough for weaving. Assam produces about 150 tonnes of Muga silk per year — the only place on Earth where this silk is produced commercially.',
+            'A cocoon is a protective shell, not a garment. Turning it into wearable fabric requires several steps, each of which can go wrong if done carelessly. Understanding this process is understanding why muga silk is expensive and precious.',
+            'First, the cocoons must be collected **before the moth emerges**. If the moth chews its way out, it breaks the continuous thread into thousands of short fragments that cannot be reeled. (Eri silk, by contrast, is called "peace silk" because the moth is allowed to emerge \u2014 but eri silk must be spun from short fibres, not reeled as one long thread.)',
+            'Next, the cocoons are **boiled** in water (traditionally, water with ash, which is mildly alkaline). The heat softens the sericin glue, allowing the end of the thread to be found and attached to a reel. A skilled worker unreels the thread slowly and steadily \u2014 one cocoon, one continuous strand, up to 900 metres. Several strands are combined and twisted together to make a thread strong enough for weaving.',
+            'The sericin is then fully removed in a process called **degumming** \u2014 soaking the thread in warm soapy water. This reveals the pure golden fibroin underneath. The degummed thread is dried, wound onto bobbins, and finally woven on a loom into fabric \u2014 traditionally, the **mekhela chador**, the two-piece garment worn by Assamese women.',
+            '**Check yourself:** Why must several cocoon threads be combined into one weaving thread? (Think about how thin a single strand is \u2014 thinner than a human hair. One strand alone would be too fragile for a loom.)',
           ],
-          keyIdea: 'Each silkworm spins up to 900 meters of continuous silk fiber from protein glands — Muga silk, found only in Assam, requires specific tree leaves for its golden color and is produced semi-wild on outdoor trees.',
+          keyIdea: 'Muga silk production goes: cocoon \u2192 boil to soften sericin \u2192 reel the continuous thread \u2192 degum to reveal golden fibroin \u2192 twist multiple strands \u2192 weave. Each step requires skill passed down through generations.',
+          diagram: 'MugaSilkProcessDiagram',
+        },
+        {
+          title: 'The Only Golden Silk on Earth',
+          paragraphs: [
+            'People have tried to produce muga silk outside Assam. Every attempt has failed. Why? Because muga silk is not just a product of a caterpillar \u2014 it is a product of an **entire ecosystem**.',
+            'The Antheraea assamensis moth needs four things that exist together only in the **Brahmaputra Valley** of Assam:\n\n\u2022 **Host trees**: Som (Persea bombycina) and sualu (Litsea monopetala). The caterpillar will eat only these leaves, and the specific compounds in these leaves produce the golden pigment.\n\u2022 **Climate**: Warm temperatures (25\u201333\u00B0C) with no frost, ever. The caterpillars are cold-sensitive and die below about 10\u00B0C.\n\u2022 **Humidity**: The Brahmaputra valley stays above 80% relative humidity year-round. The caterpillars need this moisture to survive their moults.\n\u2022 **Semi-wild rearing**: Unlike mulberry silkworms (which have been fully domesticated for 5,000 years and cannot survive outdoors), muga silkworms are raised on outdoor trees. They need the natural environment \u2014 the right predators, parasites, and microbial balance \u2014 to complete their life cycle.',
+            'When researchers tried transplanting Antheraea assamensis to other Indian states \u2014 even nearby states with similar climates \u2014 the caterpillars either died, produced less silk, or produced silk that was pale rather than golden. The entire chain depends on a specific place: specific trees, specific weather, specific ecology.',
+            'This makes muga silk **endemic** to Assam in the deepest sense. It is not just that the moth lives there. It is that the golden colour, the lustre, and the durability all depend on an ecological chain that cannot be replicated elsewhere. Assam produces about 150 tonnes per year \u2014 a tiny fraction of global silk production \u2014 making muga one of the rarest textiles on Earth.',
+            '**Think about this:** What other products can only come from one specific place because of ecological requirements? (Hints: champagne grapes, certain teas, volcanic terroir wines.)',
+          ],
+          keyIdea: 'Muga silk is endemic to Assam because the Antheraea assamensis moth requires a specific combination of host trees, warm humid climate, and semi-wild rearing that exists nowhere else \u2014 making it one of the rarest textiles on Earth.',
+          diagram: 'MugaSilkEndemicDiagram',
         },
       ],
       vocabulary: [
-        ['Fibroin', 'The structural protein forming silk fibre core'],
-        ['Sericin', 'The sticky coating that holds silk strands together'],
-        ['Xanthurenic acid', 'The golden pigment bonded into muga silk protein'],
-        ['Tensile strength', 'How much pulling force before a material breaks'],
-        ['Biodegradable', 'Able to be broken down by natural organisms'],
+        ['Fibroin', 'The structural protein forming the core of silk fibre \u2014 made of repeating amino acid chains that fold into strong \u03B2-sheet crystals'],
+        ['Sericin', 'A sticky coating protein that glues twin fibroin strands together in the cocoon \u2014 removed during degumming to reveal the lustrous fibre'],
+        ['Xanthurenic acid', 'The golden pigment chemically bonded into muga silk fibroin \u2014 produced from tryptophan in som tree leaves, it cannot be washed out'],
+        ['\u03B2-sheet crystal', 'A flat, stacked arrangement of protein chains held by hydrogen bonds \u2014 the source of silk\u2019s tensile strength'],
+        ['Endemic', 'Found naturally in only one specific geographic area \u2014 muga silk production is endemic to the Brahmaputra Valley of Assam'],
       ],
       trueFalse: [
-        { statement: 'Muga silk is the only naturally golden silk in the world.', isTrue: true, explanation: 'Its color comes from xanthurenic acid bonded into the protein — it never fades.' },
-        { statement: 'Spider silk is stronger than steel by weight.', isTrue: true, explanation: 'About 5x stronger. Scientists are trying to mass-produce synthetic spider silk.' },
-        { statement: 'All silk is white.', isTrue: false, explanation: 'Muga is golden, eri is cream, tasar is brown. Only mulberry silk is naturally white.' },
+        { statement: 'Muga silk\u2019s golden colour comes from a dye applied after weaving.', isTrue: false, explanation: 'The colour comes from xanthurenic acid bonded into the fibroin protein during spinning inside the caterpillar. No dye is applied \u2014 the gold is structural.' },
+        { statement: 'A single muga silkworm cocoon contains up to 900 metres of continuous thread.', isTrue: true, explanation: 'The caterpillar spins one unbroken strand, 300\u2013900 metres long, from its protein glands. This continuous thread is what allows reeling rather than spinning from short fibres.' },
+        { statement: 'Muga silk fades with repeated washing, like most dyed fabrics.', isTrue: false, explanation: 'The opposite \u2014 muga silk gets more lustrous with washing because the dull sericin coating wears away, exposing more golden fibroin underneath.' },
       ],
       facts: [
-        'Muga silk gets more lustrous with washing — the opposite of most fabrics.',
-        'One silkworm cocoon contains up to 1km of continuous thread.',
-        'Muga silk UV resistance is being studied for medical sutures.',
+        'Muga silk is the only naturally golden silk on Earth \u2014 all other silks are white, cream, or brown.',
+        'A silkworm\u2019s spinneret produces silk at room temperature using water as a solvent, while nylon factories need 250\u00B0C+ and toxic chemicals to make a weaker fibre.',
+        'Assam\u2019s Sualkuchi village, called the "Manchester of the East," has been weaving muga silk for over 600 years.',
       ],
-      offlineActivity: 'Find three different fabrics at home. Hold each to light, stretch gently, drop water on each. Record differences — you are doing materials science.',
+      offlineActivity: 'Find three different fabrics at home (a cotton shirt, a synthetic jacket, a silk scarf or smooth pillowcase). For each one: (1) hold it up to a window \u2014 does light pass through? (2) Pull a single thread gently \u2014 how far does it stretch? (3) Drop a single drop of water on it \u2014 does it bead up or soak in? Make a table with your results. You are doing materials science \u2014 every lab starts with careful observation.',
+      offlineActivityDiagram: 'ActivitySilkTestDiagram',
+      codeTeaser: `import numpy as np
+import matplotlib.pyplot as plt
+
+# Compare fibre properties
+fibres = ["Muga Silk", "Mulberry Silk", "Cotton", "Nylon", "Spider Silk"]
+strength = [500, 600, 400, 900, 1400]    # MPa
+density  = [1.3, 1.3, 1.5, 1.1, 1.3]    # g/cm3
+
+# Strength-to-weight ratio
+specific = [s/d for s, d in zip(strength, density)]
+
+plt.barh(fibres, specific, color=["#C8962E","#E5E7EB","#A3E635","#3B82F6","#EF4444"])
+plt.xlabel("Specific Strength (MPa per g/cm3)")
+plt.title("Which fibre is strongest for its weight?")
+plt.show()  # Muga is strong AND golden AND biodegradable`,
+      referenceLinks: [
+        { slug: 'chemistry-of-materials', reason: 'Understand protein structure, hydrogen bonds, and why molecular architecture determines material properties' },
+        { slug: 'ecology-and-populations', reason: 'Muga silk depends on a specific ecosystem \u2014 learn how species and environments are interconnected' },
+      ],
+      nextLessons: [
+        { slug: 'the-magic-japi-hat', reason: 'Another traditional craft from Northeast India \u2014 the japi hat uses geometry to create strength from woven bamboo, just as silk uses molecular structure' },
+        { slug: 'honey-hunters-lesson', reason: 'Bees and silkworms both produce remarkable materials (honey and silk) through biological processes that humans cannot fully replicate' },
+        { slug: 'tejimola-the-girl-who-became-a-plant', reason: 'Explores plant biology in depth \u2014 including the som tree that feeds the muga silkworm' },
+      ],
     },
   },
   {
+    id: 17,
     slug: 'tejimola-the-girl-who-became-a-plant',
+    tradition: 'Northeast India',
     story: {
       title: 'Tejimola — The Girl Who Became a Plant',
       tagline: 'A kind girl whose spirit refused to be silenced, growing back as tulsi, gourd, lotus, and champa tree.',
@@ -2694,7 +3054,9 @@ Tejimola's story tells us that kindness cannot be killed. You can bury it. You c
     },
   },
   {
+    id: 18,
     slug: 'golden-deer-of-kamakhya',
+    tradition: 'Northeast India',
     story: {
       title: 'The Golden Deer of Kamakhya',
       tagline: 'A golden deer whose coat shines like the sun grants one wish to anyone pure of heart.',
@@ -2858,7 +3220,9 @@ The spring still flows. If you climb Nilachal Hill past the Kamakhya temple and 
     },
   },
   {
+    id: 19,
     slug: 'boy-who-talked-to-clouds',
+    tradition: 'Northeast India',
     story: {
       title: 'The Boy Who Talked to Clouds',
       tagline: 'In Cherrapunji, where it rains more than anywhere on Earth, a boy discovers why clouds are always giving.',
@@ -3001,7 +3365,9 @@ The clouds, of course, don't answer. But Dawan is certain they appreciate being 
     },
   },
   {
+    id: 20,
     slug: 'how-majuli-island-was-born',
+    tradition: 'Northeast India',
     story: {
       title: 'How Majuli Island Was Born',
       tagline: 'The world\'s largest river island — created by the Brahmaputra, threatened by it, loved by all.',
@@ -3138,7 +3504,9 @@ Majuli is not just an island. It is a reminder that everything borrowed is worth
     },
   },
   {
+    id: 21,
     slug: 'bamboo-flute-of-nagaland',
+    tradition: 'Northeast India',
     story: {
       title: 'The Bamboo Flute of Nagaland',
       tagline: 'A boy carves a flute from forest bamboo and discovers that music lives inside the wood.',
@@ -3275,7 +3643,9 @@ Vini held a bamboo tube of black rice to her ear, as if listening for the story 
     },
   },
   {
+    id: 22,
     slug: 'dancing-deer-of-loktak-lake',
+    tradition: 'Northeast India',
     story: {
       title: 'The Dancing Deer of Loktak Lake',
       tagline: 'On floating islands in Manipur, the last sangai deer dance at dawn — fewer than 300 remain.',
@@ -3374,56 +3744,106 @@ Tomba grew up to become a healer himself — one who always asked before he pick
     level0: {
       concepts: [
         {
-          title: 'Wetland Ecosystems: Where Water Meets Land',
+          title: 'The Floating Island \u2014 What on Earth Is a Phumdi?',
           paragraphs: [
-            'A wetland is an ecosystem where the soil is saturated with water for all or part of the year. Wetlands include marshes (dominated by grasses and reeds), swamps (dominated by trees), bogs (acidic, peat-accumulating), and fens (alkaline, groundwater-fed). Loktak Lake in Manipur is a unique freshwater wetland featuring phumdis — floating mats of decomposing vegetation and soil that cover much of the lake surface. These phumdis are the largest floating biomass in the world, and they create a distinctive ecosystem found nowhere else.',
-            'Wetlands are among the most productive ecosystems on Earth — producing more biomass per square meter than most forests or grasslands. This productivity comes from the constant supply of water and nutrients. The shallow water allows sunlight to reach the bottom, supporting dense growth of aquatic plants. Decomposing plant material releases nutrients back into the water, fueling more growth. Wetlands also serve as nutrient filters: they trap sediment and absorb excess nitrogen and phosphorus from agricultural runoff, cleaning the water before it reaches rivers and lakes downstream.',
-            'The phumdis of Loktak Lake are composed of soil, organic matter, and roots of various plants that have accumulated over centuries. They vary in thickness from a few centimeters to over 2 meters. The thicker phumdis support trees, shrubs, and even small huts built by local fishermen. The Keibul Lamjao National Park, established on the phumdis of Loktak Lake, is the world\'s only floating national park — a protected area that literally rises and falls with the water level. During the monsoon, the lake level can rise by 2-3 meters, and the phumdis float upward to maintain their position at the surface.',
+            'Imagine an island that moves. Not a boat \u2014 an actual island, with grass, bushes, and soil, floating on a lake like a giant green raft. In **Manipur**, in northeast India, **Loktak Lake** has hundreds of these floating islands. They are called **phumdis**, and they are unlike anything else on Earth.',
+            'A phumdi is a thick mat of tangled vegetation, roots, soil, and decomposing organic matter that has built up over decades or centuries. The mat floats because decomposition happening inside it produces **gas bubbles** \u2014 methane and carbon dioxide \u2014 that get trapped in the tangled roots, making the whole mass lighter than water. Think of it as a giant sponge with gas pockets: heavy enough to walk on, light enough to float.',
+            'The thickest phumdis are about **2 metres** thick \u2014 strong enough to support trees, huts, and entire families. An actual village called **Champu Khangpok** sits on phumdis: real houses, real gardens, real people living on a floating world. The phumdis drift with the wind, so your view changes every day.',
+            '**Check yourself:** A phumdi is organic matter that should be denser than water. Why does it float? (Answer: trapped gas bubbles from decomposition reduce the mat\u2019s bulk density below that of water \u2014 the same reason a sealed empty bottle floats even though plastic is denser than water. Remove the gas, and the phumdi sinks.)',
           ],
-          keyIdea: 'Wetlands are extraordinarily productive ecosystems — Loktak Lake\'s phumdis are the world\'s largest floating biomass, supporting the only floating national park on Earth.',
+          keyIdea: 'Phumdis are floating islands of tangled vegetation and trapped gas \u2014 some 2 metres thick, strong enough to hold houses. They are the world\u2019s largest floating biomass, found only on Loktak Lake.',
+          diagram: 'LoktakPhumdiDiagram',
         },
         {
-          title: 'The Sangai Deer: An Endangered Species on Floating Ground',
+          title: 'Sangai \u2014 The Dancing Deer',
           paragraphs: [
-            'The Sangai (Rucervus eldii eldii), also called Manipur\'s brow-antlered deer or the dancing deer, is one of the most endangered deer species on Earth. With a wild population of about 260 individuals (as of recent surveys), all confined to the Keibul Lamjao National Park on Loktak Lake, the Sangai is critically dependent on a single, fragile habitat. Its name "dancing deer" comes from its distinctive gait — walking on the floating phumdis requires a careful, high-stepping movement that looks like dancing, as the ground shifts and bounces underfoot.',
-            'The Sangai has evolved several adaptations for life on floating vegetation. Its hooves are broad and slightly splayed, distributing its weight over a larger area — the same principle as snowshoes. Its legs are sturdy but relatively short for a deer of its size, keeping its center of gravity low for better balance on the unstable surface. The Sangai feeds primarily on the grasses and plants growing on the phumdis, and its seasonal movement patterns follow the availability of food and the thickness of the floating mats — during the monsoon, when phumdis are thinner and more waterlogged, the deer move to thicker, more stable areas.',
-            'The Sangai was believed to be extinct until 1953, when a small population was rediscovered on Loktak Lake. Since then, conservation efforts have focused on protecting its habitat, but the Sangai faces ongoing threats: the Ithai Barrage (a dam built in 1983 to generate hydroelectric power) raised the lake level permanently, drowning some phumdis and reducing the thickness and stability of others. Invasive species, encroachment by local communities, and the degradation of the phumdis through pollution and altered hydrology all threaten the Sangai\'s survival. It is classified as Endangered on the IUCN Red List.',
+            'Now put a deer on that floating island. Not just any deer \u2014 the **Sangai** (*Rucervus eldii eldii*), also called Manipur\u2019s brow-antlered deer. There are roughly **260 left alive**. All of them live on the phumdis of Loktak Lake \u2014 nowhere else on the planet. This is the only deer in the world that lives on floating ground.',
+            'Walking on a phumdi is like walking on a waterbed. The surface bounces, dips, and shifts with every step. The Sangai has evolved a remarkable solution: **broad, splayed hooves** that spread its weight over a larger area, exactly like snowshoes on snow. Its legs are **short and sturdy**, keeping its centre of gravity low for balance. And its walk is a careful, **high-stepping gait** \u2014 lifting each foot high and placing it deliberately \u2014 that looks, from a distance, like dancing. That is where the name "dancing deer" comes from.',
+            '**A prediction:** If the Sangai\u2019s hooves were narrow and pointed like a stiletto heel, what would happen? The pressure per square centimetre would be much higher. The hoof would punch through the soft phumdi surface. The deer would sink. This is the same physics as why snowshoes work: spread your weight over a bigger area and you press down less on each point. A 100 kg deer with hooves spanning 80 cm\u00b2 exerts about 1.25 kg per cm\u00b2. Halve that hoof area and the pressure doubles to 2.5 kg/cm\u00b2 \u2014 enough to break through thin phumdi.',
+            'The Sangai was believed **extinct** until 1953, when a small group was spotted on the phumdis. From near-zero, careful protection brought the population back to about 260. That sounds hopeful \u2014 until you realise that every single one of those 260 deer depends on the same small patch of floating habitat.',
           ],
-          keyIdea: 'The Sangai deer — just 260 individuals left — survives only on Loktak Lake\'s floating phumdis, with broad hooves and a "dancing" gait adapted to life on unstable, waterlogged vegetation.',
+          keyIdea: 'The Sangai deer \u2014 about 260 left \u2014 survives on floating phumdis using broad hooves (snowshoe principle), short legs (low centre of gravity), and a high-stepping "dancing" gait. It exists nowhere else on Earth.',
+          diagram: 'LoktakSangaiDiagram',
         },
         {
-          title: 'Habitat Conservation and Ecological Balance',
+          title: 'Why Loktak Is Dying \u2014 The Dam That Changed Everything',
           paragraphs: [
-            'Habitat loss is the primary driver of species extinction worldwide — more significant than hunting, pollution, or climate change alone. The Sangai deer illustrates this principle starkly: it is not hunted (it is legally protected and culturally revered in Manipur), but it is still critically endangered because its habitat is degrading. The deer\'s survival depends entirely on the health of the phumdis, which depends on the lake\'s hydrology, which has been altered by the Ithai Barrage — a cascade of ecological connections that conservation must address.',
-            'Ecological balance in a wetland like Loktak Lake involves complex interdependencies. The phumdis provide food and shelter for the Sangai, but they also filter water, support fish breeding grounds (critical for local fishermen\'s livelihoods), and store carbon. When the barrage raised water levels, it disrupted the natural cycle of phumdi formation and decomposition: phumdis became more waterlogged, thinner, and less stable. Some broke apart and were washed away. Fish populations declined as breeding habitat was lost. Local fishermen, their catch reduced, began extracting phumdi material for fuel, further degrading the habitat.',
-            'Effective conservation requires understanding and managing these interconnections — not just protecting a single species. Current conservation approaches for Loktak include periodic management of water levels (coordinating with the barrage operators), manual removal of invasive water hyacinth that competes with native phumdi vegetation, community-based conservation programs that provide local fishermen with alternative livelihoods, and captive breeding programs for the Sangai as insurance against wild population collapse. The lesson from Loktak is universal: saving a species means saving its habitat, and saving a habitat means understanding the entire ecosystem.',
+            'In 1983, the Indian government built the **Ithai Barrage** downstream of Loktak Lake to generate hydroelectric power. The dam raised the lake\u2019s dry-season water level by **2 to 3 metres** \u2014 permanently. That sounds like a small number. It was a catastrophe.',
+            'Here is why. A phumdi floats because its bulk density (with trapped gas) is *slightly* less than water. Raise the water level and the phumdi must rise too \u2014 but the mat cannot thicken overnight. Instead, higher water **saturates** the mat, filling gas pockets with water, making the phumdi heavier. The phumdi gets **thinner and more waterlogged**. Before the dam: phumdis were 1.5\u20132 metres thick, firm enough to hold a deer. After the dam: many phumdis thinned to less than 0.5 metres \u2014 too soggy and weak to support a deer\u2019s weight.',
+            'It got worse. Thinner phumdis **fragment** \u2014 wave action on deeper water breaks them into small pieces. Small fragments dry out faster, support fewer plants, and drift apart. Fish breeding grounds under the phumdis were destroyed. Fish catches dropped. Fishermen, losing their income, began **ripping out phumdi material** to use as fuel \u2014 further destroying the very habitat the deer needed.',
+            '**Check yourself:** The dam raised water by 2\u20133 metres. Couldn\u2019t the phumdis just float higher? (Answer: they do float higher, but the *extra* water saturates the mat from below. The phumdi doesn\u2019t gain new material \u2014 it just gets waterlogged. Imagine adding 3 cm of water to a sponge that is only 5 cm thick: the sponge doesn\u2019t grow taller, it just becomes soaked and heavy. That is what happened to the phumdis.)',
           ],
-          keyIdea: 'Habitat loss, not hunting, is the primary threat to the Sangai — saving the species requires managing the entire Loktak Lake ecosystem, from water levels to phumdi health to community livelihoods.',
-          diagram: 'FoodWebDiagram',
+          keyIdea: 'The Ithai Barrage (1983) raised Loktak\u2019s water level by 2\u20133 metres, waterlogging and thinning the phumdis from 2 m to under 0.5 m \u2014 destroying the only habitat the Sangai has.',
+          diagram: 'LoktakDamImpactDiagram',
+        },
+        {
+          title: 'How to Save a Lake \u2014 Conservation as a System',
+          paragraphs: [
+            'Saving the Sangai is not as simple as "stop hunting the deer." Nobody hunts the Sangai \u2014 it is legally protected and culturally revered in Manipur. The threat is **habitat loss**, and fixing that means fixing the entire lake ecosystem. Conservation scientists think in terms of **carrying capacity**: the maximum number of individuals an environment can support. For the Sangai, carrying capacity depends on phumdi area, phumdi thickness, food plant availability, and water levels. Change any one factor and the capacity shifts.',
+            'The current strategy has five connected parts: (1) **Water level management** \u2014 coordinating with the Ithai Barrage operators to lower dry-season levels closer to natural. (2) **Phumdi restoration** \u2014 removing invasive water hyacinth that chokes native plants, and manually reinforcing thin phumdis with fresh organic material. (3) **Community livelihoods** \u2014 giving local fishermen alternative income (fish farming, eco-tourism) so they stop extracting phumdi for fuel. (4) **Monitoring** \u2014 regular deer censuses using camera traps and direct observation. (5) **Captive breeding** \u2014 a small insurance population in zoos in case the wild population crashes.',
+            'Notice how everything connects. If fishermen have no income, they destroy phumdi. If phumdi thins, deer capacity drops. If water stays high, phumdi thins. If invasive plants spread, native food disappears. No single action works alone \u2014 you must manage the **whole system**. This is the central lesson of conservation ecology: species do not exist in isolation. To save one species, you often need to manage its entire ecosystem.',
+            '**A prediction:** If the Ithai Barrage were removed tomorrow, would the Sangai be saved? Not immediately. The phumdis would take years to regain thickness (organic matter accumulates slowly). Invasive species would still need removal. But long-term, restored natural water cycling would allow phumdis to recover \u2014 and with them, the deer\u2019s carrying capacity would rise.',
+          ],
+          keyIdea: 'Saving the Sangai requires managing the whole Loktak ecosystem as a system \u2014 water levels, phumdi health, invasive species, and community livelihoods all connect. No single fix works alone.',
+          diagram: 'LoktakConservationDiagram',
         },
       ],
       vocabulary: [
-        ['Ecosystem', 'A community of living organisms interacting with their non-living environment — Loktak Lake is a wetland ecosystem'],
-        ['Habitat', 'The natural home of an organism, providing food, shelter, and conditions it needs to survive'],
-        ['Endemic', 'Found naturally in only one specific place — the Sangai deer is endemic to Loktak Lake'],
-        ['Food web', 'A network of interconnected food chains showing how energy flows through an ecosystem'],
-        ['Biodiversity', 'The variety of different species living in an area — high biodiversity means a healthier, more resilient ecosystem'],
+        ['Phumdi', 'A floating mat of tangled vegetation, roots, and decomposing organic matter held up by trapped gas \u2014 the world\u2019s only floating biomass thick enough to support a national park'],
+        ['Carrying capacity', 'The maximum number of individuals an environment can support long-term \u2014 for the Sangai, this depends on phumdi area, thickness, and food quality'],
+        ['Endemic', 'Found naturally in only one specific place \u2014 the Sangai deer is endemic to Loktak Lake and exists nowhere else on Earth'],
+        ['Habitat loss', 'Destruction or degradation of the natural home an organism needs to survive \u2014 the primary cause of species extinction worldwide'],
+        ['Bulk density', 'Mass divided by volume \u2014 a phumdi floats because its bulk density (with trapped gas) is less than water\u2019s density of 1 g/cm\u00b3'],
       ],
       trueFalse: [
-        { statement: 'The Sangai deer is endangered mainly because of hunting.', isTrue: false, explanation: 'The Sangai is legally protected and culturally revered in Manipur. Its main threat is habitat loss — the degradation of the floating phumdi islands on Loktak Lake caused by changes in water levels from the Ithai Barrage.' },
-        { statement: 'Protecting one species often requires protecting its entire ecosystem.', isTrue: true, explanation: 'The Sangai depends on healthy phumdis, which depend on proper water levels, which depend on barrage management. Saving the deer means managing the whole lake ecosystem — species do not exist in isolation.' },
-        { statement: 'Wetlands are wasteland with no ecological value.', isTrue: false, explanation: 'Wetlands are among the most productive ecosystems on Earth. They filter water, support fish breeding, store carbon, prevent floods, and provide habitat for countless species. Loktak Lake alone supports over 200 bird species and dozens of fish species.' },
+        { statement: 'The Sangai deer is endangered mainly because of hunting.', isTrue: false, explanation: 'The Sangai is legally protected and culturally revered in Manipur. Its main threat is habitat loss \u2014 the degradation of the floating phumdi islands caused by the Ithai Barrage raising water levels and waterlogging the mats.' },
+        { statement: 'A phumdi floats because trapped gas bubbles from decomposition reduce its bulk density below that of water.', isTrue: true, explanation: 'Decomposition inside the phumdi produces methane and CO2 that get trapped in the tangled root structure. These gas pockets make the mat lighter than water, like air inside a sealed bottle.' },
+        { statement: 'Raising the water level of a lake helps floating islands because they just float higher.', isTrue: false, explanation: 'Higher water saturates the phumdi mat from below without adding new material. The phumdi becomes waterlogged, thinner, and weaker \u2014 eventually too fragile to support deer or even its own vegetation.' },
       ],
       facts: [
-        'The Sangai (Eld\'s deer, Manipur subspecies) has a population of fewer than 300 individuals, all living on the floating phumdis of Loktak Lake — making it one of the rarest deer species on Earth.',
-        'Loktak Lake is the largest freshwater lake in Northeast India, covering about 287 square kilometers. Its floating phumdis are so unique that the lake was designated a Ramsar Wetland of International Importance in 1990.',
-        'The phumdis of Loktak Lake are masses of vegetation, soil, and organic matter that float on the water surface. Some are thick enough to support houses — an entire community of fishermen lives on them in a floating village called Champu Khangpok.',
+        'The Sangai was believed extinct until 1953, when a handful were rediscovered on Loktak Lake. Conservation brought the population from near-zero to about 260 \u2014 but all 260 depend on the same fragile floating habitat.',
+        'Loktak Lake\u2019s Keibul Lamjao National Park is the world\u2019s only **floating** national park \u2014 the entire protected area rises and falls with the water level. It was designated a Ramsar Wetland of International Importance in 1990.',
+        'Champu Khangpok, a village on Loktak Lake, is built entirely on phumdis. Families live in houses on floating islands, growing vegetables and fishing from their front doors \u2014 a community literally living on water.',
       ],
-      offlineActivity: 'Create a mini food web for a local pond or garden. Observe for 30 minutes and list every living thing you see (plants, insects, birds, worms, etc.). Then draw arrows showing "who eats whom" — arrow points from food to eater. How many connections does each organism have? Which organism, if removed, would affect the most others? That organism is a keystone species in your mini ecosystem.',
+      offlineActivity: 'Build a mini phumdi in a bowl. Layer pieces of kitchen sponge, a thin layer of soil, and grass clippings. Press them together and float the "island" in a bowl of water. Now place coins on it one at a time \u2014 that is your deer load. How many coins before it sinks? That number is your carrying capacity. Now add more water to raise the level (simulating the dam). Does the island hold the same number of coins? Remove some sponge layers (simulating phumdi thinning). What happens? You have just modelled the Sangai\u2019s crisis.',
+      offlineActivityDiagram: 'ActivityWetlandModelDiagram',
+      codeTeaser: `# Modelling carrying capacity
+# How many deer can floating phumdis support?
+
+phumdi_area_km2 = 40      # Keibul Lamjao park area
+phumdi_thickness_m = 1.5   # average thickness
+deer_weight_kg = 100       # one sangai
+
+# Thicker phumdi = more load capacity
+# Rough model: 1 m thick phumdi supports ~8 deer/km2
+density_per_km2 = 8 * (phumdi_thickness_m / 1.0)
+carrying_capacity = int(density_per_km2 * phumdi_area_km2)
+
+print(f"Phumdi thickness: {phumdi_thickness_m} m")
+print(f"Carrying capacity: {carrying_capacity} deer")
+
+# Now simulate the dam: phumdi thins to 0.5 m
+phumdi_thickness_m = 0.5
+density_per_km2 = 8 * (phumdi_thickness_m / 1.0)
+new_capacity = int(density_per_km2 * phumdi_area_km2)
+print(f"\nAfter dam (0.5 m): {new_capacity} deer")
+print(f"Capacity lost: {carrying_capacity - new_capacity}")`,
+      referenceLinks: [
+        { slug: 'ecology-and-populations', reason: 'Understand carrying capacity, population growth models, and why small populations are fragile' },
+        { slug: 'food-webs-energy-flow', reason: 'See how energy flows through wetland food webs and why removing one link affects everything' },
+        { slug: 'human-impact-environment', reason: 'The Ithai Barrage is a textbook case of how engineering changes cascade through ecosystems' },
+      ],
+      nextLessons: [
+        { slug: 'bridge-that-grew', reason: 'Another NE India story about how humans interact with living ecosystems \u2014 but this time building with nature instead of against it' },
+        { slug: 'girl-grew-forest', reason: 'If Loktak shows what happens when habitat is destroyed, this story shows what happens when someone grows it back' },
+        { slug: 'boy-counted-butterflies', reason: 'Population monitoring in action \u2014 the same census techniques used for the Sangai apply to butterfly surveys' },
+      ],
     },
   },
   {
+    id: 23,
     slug: 'bridge-that-grew',
+    tradition: 'Northeast India',
     story: {
       title: 'The Bridge That Grew',
       tagline: 'In Meghalaya, the Khasi people grow bridges from living tree roots — engineering that takes decades but lasts centuries.',
@@ -3515,57 +3935,116 @@ Ka Thaïng's grandchildren walked to school dry-footed. Five hundred years later
     level0: {
       concepts: [
         {
-          title: 'Living Root Bridges: Bio-Engineering in Action',
+          title: 'Living Architecture \u2014 The Rubber Fig\u2019s Aerial Roots',
           paragraphs: [
-            'In the wettest place on Earth — the Khasi and Jaintia hills of Meghalaya, where annual rainfall exceeds 11,000 mm — indigenous communities have spent centuries growing bridges from the living aerial roots of the Indian rubber fig tree (Ficus elastica). The process begins by guiding young aerial roots across a stream using hollow betel nut trunks or bamboo scaffolding. Over 15-30 years, the roots grow across the gap, anchor into the soil on the far bank, and thicken into a living structural network capable of supporting the weight of dozens of people simultaneously.',
-            'These living root bridges are a remarkable example of bio-engineering — using living organisms as structural materials. Unlike conventional bridges made from dead materials (steel, concrete, wood), living root bridges grow stronger with age as the roots thicken and interconnect. Some living root bridges in Meghalaya are estimated to be over 500 years old and can support loads of 35 or more adult humans at once. The roots naturally intertwine and fuse together through a process called inosculation (anastomosis), where tissues of roots in contact grow together, creating a single interconnected structural network.',
-            'The Ficus elastica was chosen by the Khasi people for specific biological properties: it produces abundant aerial roots, its roots are flexible enough to be guided when young but become very strong and rigid when mature, it tolerates extreme moisture (critical in a region with 11 meters of rain per year), and it has a lifespan of several hundred years. A steel bridge in the same environment would rust and fail within decades. The living bridge not only survives but improves — it is the ultimate self-repairing, self-strengthening infrastructure.',
+            'Imagine a tree that grows its own ropes. The **Ficus elastica** (Indian rubber fig) does exactly this. From its trunk and branches, it sends down pale, flexible tendrils called **aerial roots**. These roots are not looking for soil in the usual way \u2014 they are reaching downward through the air, searching for something to anchor to. When they find the ground, they burrow in and thicken. When they find another root, they press against it and, over years, **fuse into one piece** through a process called **inosculation**.',
+            'Now picture this tree growing on a riverbank in the **Khasi Hills of Meghalaya**, where it rains 11,000 millimetres a year \u2014 eleven *metres* of water. Steel rusts. Wood rots. Concrete cracks. But the rubber fig\u2019s roots thrive in moisture. The **War-Khasi people** realised something extraordinary: if you could guide these aerial roots across a river, the tree would build a bridge for you.',
+            'The technique: cut a hollow **betel nut trunk**, split it into a trough, and lay it across the gap. Place a young aerial root inside the trough. The root grows through the channel, reaches the far bank, and anchors itself in the soil. Guide a second root. A third. A dozen. Wait. Over **15 to 30 years**, the roots thicken, intertwine, and fuse into a dense living lattice \u2014 a bridge that can hold 50 people at once.',
+            '**Prediction:** If a steel bridge and a root bridge are both built in Meghalaya today, which one will be stronger in 100 years? Think about what happens to each material in 11 metres of annual rain.\n\n(Answer: The root bridge. Steel corrodes in moisture and weakens over time. The living roots keep growing thicker, fusing tighter, and repairing damage. Some root bridges in Meghalaya are over 500 years old and still getting stronger.)',
           ],
-          keyIdea: 'Khasi communities grow bridges from living Ficus elastica roots that strengthen over decades — unlike steel bridges that rust, living root bridges self-repair and can last over 500 years in extreme rainfall.',
+          keyIdea: 'The Khasi people of Meghalaya grow bridges by guiding Ficus elastica aerial roots across rivers \u2014 a process that takes decades but produces structures that self-repair, strengthen with age, and outlast steel by centuries.',
+          diagram: 'BridgeRootGrowthDiagram',
         },
         {
-          title: 'Tensile Strength of Roots: Biology Meets Mechanics',
+          title: 'Why Roots Are Stronger Than Steel (Per Job)',
           paragraphs: [
-            'The mechanical strength of a root comes from its internal structure. A root cross-section reveals concentric layers: the outer epidermis (protection), the cortex (storage and transport), the endodermis (a selective barrier), and the central vascular cylinder containing xylem (water transport) and phloem (sugar transport). The xylem cells have thick walls reinforced with lignin — a complex polymer that is the second most abundant organic compound on Earth (after cellulose) and gives wood its rigidity and strength.',
-            'Tensile strength tests on Ficus elastica roots show values of approximately 10-40 MPa, which is lower than steel (400 MPa) or silk (500 MPa), but the comparison is misleading. A living root bridge uses hundreds of interwoven roots working together, and the total cross-sectional area of root material can be enormous — far greater than the cross-section of a steel cable spanning the same gap. More importantly, when a root is stressed, the living tissue responds by growing thicker at the stress point — the same way human bones strengthen in response to exercise. This adaptive thickening means the bridge automatically reinforces itself where forces are greatest.',
-            'The concept of tensile strength versus compressive strength is important here. Roots excel at resisting tension (pulling forces) — they evolved to anchor trees against wind loads and to suspend aerial structures. They are less effective at resisting compression (pushing forces). Living root bridges are designed as suspension structures — the roots hang in a catenary curve between supports, carrying the load through tension. This is the same structural principle as suspension cables in modern bridges like the Golden Gate Bridge. The Khasi bridge builders intuitively understood suspension mechanics centuries before European engineers formalized the theory.',
+            'Let\u2019s be precise. A steel cable has a **tensile strength** of about 400 MPa (megapascals). A single Ficus elastica root? Only 10\u201340 MPa. Steel wins \u2014 right? Not so fast.',
+            'Tensile strength measures how much *pulling force* a material can take before snapping. But a root bridge doesn\u2019t use one root. It uses **hundreds**, woven and fused together. The total cross-sectional area of root material in a mature bridge is *far larger* than any steel cable that would span the same gap. It\u2019s like comparing one thick rope to a net made of a hundred thinner ropes \u2014 the net is harder to break because the load is shared.',
+            'But here\u2019s the real advantage: **roots adapt**. When a root is under stress \u2014 being pulled by the weight of people crossing \u2014 the living tissue responds by growing **thicker at the stress point**. It\u2019s the same principle as your bones getting denser when you exercise. A steel cable cannot do this. It starts strong and gets weaker (fatigue, rust, micro-cracks). A root starts modest and gets stronger.',
+            'Inside a root, the strength comes from **lignin** \u2014 a rigid polymer that reinforces the walls of **xylem** cells (the tubes that carry water up the tree). Lignin is the second most abundant organic molecule on Earth. It\u2019s what makes wood hard. In a root under tension, lignin-reinforced xylem cells act like microscopic steel cables packed together in concentric rings.',
+            '**Check yourself:** A bridge root is pulled from both ends (the tree on one bank, the anchor on the other). Is the root in compression or tension? (Answer: Tension \u2014 it\u2019s being stretched. Roots are naturally excellent in tension because they evolved to anchor trees against wind. The Khasi people exploit this by building their bridges as suspension structures, where roots hang in a curve and carry loads through tension.)',
           ],
-          keyIdea: 'Root tensile strength comes from lignin-reinforced xylem cells, and living roots automatically grow thicker where stressed — making root bridges self-reinforcing suspension structures that strengthen under load.',
-          diagram: 'WorkForceDiagram',
+          keyIdea: 'Individual roots are weaker than steel, but hundreds of fused roots sharing the load \u2014 plus the ability to grow thicker where stressed \u2014 make root bridges self-reinforcing structures that get stronger under use.',
+          diagram: 'BridgeTensileStrengthDiagram',
         },
         {
-          title: 'Sustainable Architecture: Building with Nature',
+          title: 'Engineering Without Blueprints \u2014 Indigenous Knowledge',
           paragraphs: [
-            'Conventional construction is resource-intensive and generates enormous waste. Producing one tonne of cement (the key ingredient in concrete) releases about 0.6-0.9 tonnes of CO₂. Steel production emits roughly 1.8 tonnes of CO₂ per tonne of steel. Globally, the construction industry accounts for about 39% of all energy-related CO₂ emissions and consumes about 40% of raw materials. A living root bridge, by contrast, has near-zero carbon emissions during construction — the tree actually absorbs CO₂ as it grows.',
-            'Bio-integrated design — architecture that incorporates living organisms as functional structural elements — is gaining serious scientific attention. Researchers at MIT, ETH Zurich, and TU Delft are studying how living root bridges work to develop new approaches to sustainable infrastructure. Projects include growing mycelium (fungal networks) into structural building blocks, using bacteria to self-heal cracks in concrete (the bacteria produce limestone when exposed to water and air), and designing green facades where plant root systems contribute to a building\'s structural integrity.',
-            'The living root bridges of Meghalaya demonstrate four principles that modern sustainable architecture aspires to achieve: zero-carbon construction (the bridge grows from atmospheric CO₂), self-repair (damaged roots regrow), increasing strength over time (roots thicken with age), and minimal maintenance (no painting, rust treatment, or replacement parts needed). While living root bridges are not practical for highways or railways, the underlying principles — using biology to complement engineering, designing structures that improve rather than degrade, and working with natural processes rather than against them — represent a fundamentally different approach to building our world.',
+            'Modern engineers design bridges using mathematics: calculating forces, running computer simulations, testing scale models in labs. The Khasi bridge builders had **none of this**. No equations, no software, no formal training. Yet they built structures that outperform modern engineering in one of the harshest climates on Earth.',
+            'How? Through **accumulated observation over generations**. A grandmother guides roots across a river. Her grandchildren observe which techniques work and which fail. They teach their children, adding improvements. Over centuries, the community develops a sophisticated understanding of root behaviour, growth rates, soil conditions, and structural principles \u2014 all encoded in oral tradition and apprenticeship, not in textbooks.',
+            'This is **indigenous engineering knowledge**: problem-solving refined by trial and error across many lifetimes. It looks different from university engineering, but the underlying process is the same \u2014 observe, hypothesise, test, refine. The Khasi builders understood suspension mechanics (roots in tension, banks in compression), load distribution (many intertwined roots sharing the weight), and adaptive design (guiding new roots to weak spots) centuries before European engineers formalised these concepts.',
+            '**Think about this:** Modern suspension bridges like the Golden Gate use steel cables hanging in a curve between towers. The cables carry the bridge deck\u2019s weight through tension. Living root bridges do exactly the same thing \u2014 roots hang in a natural curve (a catenary) between anchor trees, carrying foot traffic through tension. The Khasi people and the Golden Gate engineers arrived at the same structural solution independently. What does that tell you about the nature of good engineering? (It tells you that physics is universal \u2014 the same forces apply whether you use steel or roots, and clever problem-solvers anywhere in the world will converge on similar solutions.)',
           ],
-          keyIdea: 'Living root bridges achieve what modern engineering aspires to: zero-carbon construction, self-repair, and increasing strength with age — principles now inspiring bio-integrated design at leading universities.',
-          diagram: 'HeatTransferDiagram',
+          keyIdea: 'The Khasi bridge builders developed suspension engineering through centuries of observation and apprenticeship \u2014 arriving at the same structural principles as modern engineers, without equations or computers.',
+          diagram: 'BridgeLoadDistributionDiagram',
+        },
+        {
+          title: 'Growing a Bridge Takes 30 Years \u2014 And That\u2019s the Point',
+          paragraphs: [
+            'A concrete bridge can be built in months. A root bridge takes **15 to 30 years** before it can carry foot traffic. Why would anyone choose the slower option?',
+            'Because the concrete bridge starts dying the day it\u2019s finished. Rain dissolves its surface. Cracks form. Steel reinforcement rusts. In Meghalaya\u2019s extreme rainfall, a concrete bridge might last 50 years before needing costly replacement. The root bridge, meanwhile, is just getting started. After 30 years it\u2019s walkable. After 100 years it\u2019s stronger than ever. After 500 years it\u2019s still growing. The **total lifetime** of a root bridge is at least 10 times longer than concrete.',
+            'And the root bridge costs **nothing** to maintain. No painting. No rust treatment. No inspections. If a root is damaged by a falling branch or a flood, the tree sends new roots to fill the gap \u2014 it repairs itself. The Umshiang **Double-Decker Root Bridge** at Nongriat village is two bridges stacked one above the other, both grown from the roots of the same fig tree, spanning a gorge with a waterfall below. It has survived centuries of the heaviest rainfall on Earth.',
+            'This patience \u2014 investing 30 years for a structure that serves your great-great-grandchildren \u2014 is a fundamentally different way of thinking about engineering. Modern construction asks: *How fast can we build it?* The Khasi tradition asks: *How long will it last?* Researchers at MIT and TU Delft now study root bridges as models for **sustainable infrastructure** \u2014 structures that absorb CO\u2082 instead of producing it, that improve instead of decaying, that need no maintenance budget.',
+            '**Question:** A village needs a river crossing. They can build a steel bridge in 6 months (lifespan: 50 years, needs maintenance every 5 years) or grow a root bridge in 25 years (lifespan: 500+ years, zero maintenance). If the village is thinking 200 years ahead, which is the better investment? (The root bridge: one 25-year wait versus rebuilding steel bridges 4 times, each with decades of maintenance costs.)',
+          ],
+          keyIdea: 'Root bridges take decades to grow but last for centuries with zero maintenance \u2014 a model of sustainable engineering where patience today creates infrastructure that serves generations.',
+          diagram: 'BridgeTimelineDiagram',
         },
       ],
       vocabulary: [
-        ['Tensile strength', 'How much pulling force a material can withstand before it breaks'],
-        ['Fibre', 'A thin, thread-like strand — natural (silk, cotton) or synthetic (nylon, polyester)'],
-        ['Protein', 'A large molecule made of amino acids — the building material of muscles, hair, and silk'],
-        ['UV resistance', 'The ability to withstand ultraviolet light from the sun without degrading'],
-        ['Biodegradable', 'Able to be broken down naturally by bacteria and other living organisms'],
+        ['Tensile strength', 'How much pulling force a material can handle before it breaks \u2014 roots are excellent in tension because they evolved to anchor trees against wind'],
+        ['Inosculation', 'When two living roots pressed together long enough fuse into one piece \u2014 the process that turns separate roots into a single bridge structure'],
+        ['Aerial root', 'A root that grows from a trunk or branch down through the air, rather than underground \u2014 Ficus elastica produces dozens of these'],
+        ['Lignin', 'A rigid polymer that reinforces plant cell walls \u2014 the molecule that makes wood hard and gives roots their strength'],
+        ['Catenary', 'The natural curve a flexible cable or root makes when hanging under its own weight between two supports \u2014 the shape of both root bridges and suspension cables'],
       ],
       trueFalse: [
-        { statement: 'Muga silk is the only naturally golden silk in the world.', isTrue: true, explanation: 'Muga silk from Assam gets its golden color from xanthurenic acid, a pigment chemically bonded into the fibroin protein. Unlike dyes that sit on the surface, this color is part of the molecule and never fades.' },
-        { statement: 'Synthetic materials like nylon are always better than natural materials.', isTrue: false, explanation: 'Each material has trade-offs. Nylon is stronger and cheaper but made from petroleum and takes centuries to decompose. Silk is biodegradable and renewable but expensive and limited in supply. The "best" material depends on the application.' },
-        { statement: 'Spider silk is stronger than steel.', isTrue: true, explanation: 'By weight, spider silk is about 5 times stronger than steel. Scientists are trying to mass-produce synthetic spider silk for bulletproof vests, surgical sutures, and aerospace applications.' },
+        { statement: 'Living root bridges get weaker over time, just like steel bridges.', isTrue: false, explanation: 'The opposite is true. Steel bridges degrade through rust and fatigue. Living root bridges get *stronger* because the roots keep growing thicker, more roots join the structure, and inosculation fuses them into a denser network. Some root bridges in Meghalaya are over 500 years old and still strengthening.' },
+        { statement: 'The Khasi people use the same structural principle as modern suspension bridges.', isTrue: true, explanation: 'Both root bridges and suspension bridges carry loads through tension \u2014 roots or cables hanging in a catenary curve between anchor points. The Khasi builders arrived at this solution through centuries of observation, independently of European suspension bridge engineering.' },
+        { statement: 'A single Ficus elastica root is stronger than a steel cable of the same thickness.', isTrue: false, explanation: 'Steel has a tensile strength of about 400 MPa versus 10\u201340 MPa for a root. But root bridges use hundreds of intertwined roots with a much larger total cross-section, and living roots grow thicker where stressed \u2014 so the bridge as a whole can match or exceed steel\u2019s practical performance over time.' },
       ],
       facts: [
-        'Muga silk gets more lustrous with each wash — the opposite of most fabrics. This is because washing removes surface sericin, exposing more of the naturally golden fibroin underneath.',
-        'A single silkworm cocoon contains up to 1 kilometer of continuous silk thread. It takes about 5,000 cocoons to make 1 kilogram of raw silk.',
-        'Biomimetic scientists study natural materials to design better synthetic ones. Gecko-inspired adhesives, lotus-inspired self-cleaning surfaces, and abalone-inspired armor are all based on nature\'s engineering.',
+        'Meghalaya receives about 11,000 mm of rain per year \u2014 more than almost anywhere else on Earth. A steel bridge in this environment corrodes rapidly, but the Ficus elastica roots *thrive* in moisture, making root bridges the ideal solution.',
+        'The Umshiang Double-Decker Root Bridge at Nongriat village is two bridges stacked vertically, both grown from the same tree. Reaching it requires descending about 3,500 stone steps into a river valley.',
+        'Researchers at MIT and TU Delft are studying Meghalaya\u2019s root bridges to develop bio-integrated architecture \u2014 buildings that use living organisms as structural elements, self-repair damage, and absorb CO\u2082 instead of producing it.',
       ],
-      offlineActivity: 'Find three different fabrics at home (e.g., cotton t-shirt, polyester bag, wool sweater). Hold each up to the light — which lets more light through? Pull gently — which stretches more? Drop water on each — which absorbs fastest? You\'re doing basic materials testing, just like a scientist.',
+      offlineActivity: 'Build two model bridges between two stacks of books (about 30 cm apart). Bridge 1: a single piece of string stretched between the stacks, with a small card laid on top as a deck. Bridge 2: three pieces of string side by side, with short cross-ties (small string pieces) connecting them every few centimetres, and the same card on top. Load each bridge with coins, one at a time. Which holds more weight? Which sags less? You are testing the same principle the Khasi people discovered: a network of connected members is stronger than a single member, even if the total material is similar.',
+      offlineActivityDiagram: 'ActivityBridgeModelDiagram',
+      codeTeaser: `# How strong is a bridge with multiple roots?
+# Compare one thick root vs many thin roots
+
+import math
+
+# Single root
+single_radius = 0.05  # 5 cm radius
+single_area = math.pi * single_radius ** 2
+single_strength = 25  # MPa (tensile strength)
+single_force = single_area * single_strength * 1e6  # in Newtons
+
+# 20 thinner roots (same total material)
+n_roots = 20
+thin_radius = single_radius / math.sqrt(n_roots)
+total_area = n_roots * math.pi * thin_radius ** 2
+network_force = total_area * single_strength * 1e6
+
+print(f"Single root: \${single_force:.0f} N capacity")
+print(f"\${n_roots} thin roots: \${network_force:.0f} N capacity")
+print(f"Same total material, same strength")
+print(f"But if 1 root breaks in the network:")
+print(f"  Remaining capacity: \${network_force * (n_roots-1)/n_roots:.0f} N")
+print(f"  That is \${(n_roots-1)/n_roots*100:.0f}% still working!")
+print(f"If the single root breaks: 0 N. Total failure.")`,
+      referenceLinks: [
+        { slug: 'forces-and-structures', reason: 'Full guide to compression, tension, load distribution, and how bridges work' },
+        { slug: 'plant-biology', reason: 'How roots, xylem, and lignin work \u2014 the biology behind the bridge\u2019s strength' },
+      ],
+      nextLessons: [
+        { slug: 'banyan-tree-of-japi', reason: 'Another story about extraordinary tree biology \u2014 how the banyan grows, photosynthesises, and supports entire ecosystems' },
+        { slug: 'girl-grew-forest', reason: 'One person planted a forest on a Brahmaputra sandbar \u2014 reforestation and carbon sequestration' },
+        { slug: 'monsoon-home', reason: 'Architecture designed for Meghalaya\u2019s extreme rainfall \u2014 the same climate that shaped root bridges' },
+      ],
+      quiz: [
+        { question: 'What biological process allows separate roots to fuse into one structure?', options: ['Photosynthesis', 'Inosculation', 'Germination', 'Transpiration'], answer: 1 },
+        { question: 'Why are root bridges built as suspension structures (roots hanging in a curve)?', options: ['Roots are strongest in compression', 'The curve looks more beautiful', 'Roots evolved to resist tension (pulling forces)', 'It uses less root material'], answer: 2 },
+        { question: 'A root bridge takes 25 years to become walkable. Why is this considered good engineering?', options: ['Slow construction is always better', 'The bridge lasts 500+ years with zero maintenance, far outlasting steel alternatives', 'The builders had no other option', 'Faster bridges are illegal in Meghalaya'], answer: 1 },
+        { question: 'What happens when a living root is under stress from heavy loads?', options: ['It snaps immediately', 'It stays exactly the same thickness', 'It grows thicker at the stress point, reinforcing itself', 'It shrinks to reduce weight'], answer: 2 },
+      ],
     },
   },
   {
+    id: 24,
     slug: 'the-little-boat',
+    tradition: 'Northeast India',
     story: { title: 'The Little Boat on the Brahmaputra', tagline: 'A paper boat travels the mighty river, meeting friends along the way.', content: `
 **The Launch**
 
@@ -3692,7 +4171,9 @@ And somewhere in Dibrugarh, Pari folded another boat. Because that's the thing a
     },
   },
   {
+    id: 25,
     slug: 'the-hornbills-crown',
+    tradition: 'Northeast India',
     story: { title: 'The Hornbill\'s Crown', tagline: 'How the great hornbill earned its golden crown by listening, not fighting.', content: `
 **The Forest Without a King**
 
@@ -3820,7 +4301,9 @@ To this day, the great hornbill wears its golden crown through the forests of Na
     },
   },
   {
+    id: 26,
     slug: 'why-fish-jump',
+    tradition: 'Northeast India',
     story: { title: 'Why Fish Jump in the Barak River', tagline: 'A fish who wanted to see the sky — aquatic ecosystems explained.', content: `
 **The Curious Fish**
 
@@ -3948,7 +4431,9 @@ And that is why, to this very day, if you sit by the Barak River and wait quietl
     },
   },
   {
+    id: 27,
     slug: 'tortoise-and-hare',
+    tradition: 'Northeast India',
     story: { title: 'The Tortoise and the Hare of Pobitora', tagline: 'The classic race retold with rhinos and a surprise ending.', content: `
 **The Challenge**
 
@@ -4085,7 +4570,9 @@ Khargosh never bragged about speed again. And Kaaso? She went back to sitting in
     },
   },
   {
+    id: 28,
     slug: 'red-panda-mask',
+    tradition: 'Northeast India',
     story: { title: 'How the Red Panda Got Its Mask', tagline: 'A shy mountain animal receives a mask of courage from the forest.', content: `
 **The Shyest Animal**
 
@@ -4220,7 +4707,9 @@ If you ever see a red panda in the wild — curled on a branch, peering at you w
     },
   },
   {
+    id: 29,
     slug: 'clouded-leopard',
+    tradition: 'Northeast India',
     story: { title: 'The Boy Who Befriended a Clouded Leopard', tagline: 'A friendship that teaches the hardest lesson — letting go.', content: `
 **The Cry in the Forest**
 
@@ -4364,7 +4853,9 @@ And every now and then, on the mossy log at the edge of the forest, Akum would f
     },
   },
   {
+    id: 30,
     slug: 'peacocks-dance',
+    tradition: 'Northeast India',
     story: { title: 'Why Peacocks Dance Before Rain', tagline: 'A promise between a bird and the clouds.', content: `
 **The Dry Season**
 
@@ -4495,7 +4986,9 @@ To this very day, in the forests and fields of Assam and all across India, the p
     },
   },
   {
+    id: 31,
     slug: 'elephant-mud-bath',
+    tradition: 'Northeast India',
     story: { title: 'The Little Elephant\'s First Mud Bath', tagline: 'The best things in life are sometimes the messiest.', content: `
 **The Clean Elephant**
 
@@ -4637,7 +5130,9 @@ And sometimes, Gaja thought, the things you're most afraid of turn out to be the
     },
   },
   {
+    id: 32,
     slug: 'brave-mithun',
+    tradition: 'Northeast India',
     story: { title: 'The Brave Mithun of Arunachal', tagline: 'The sacred bison leads a village to safety.', content: `
 **The Endless Winter**
 
@@ -4768,7 +5263,9 @@ Doying lived to a great old age, wandering the hills freely, eating where he ple
     },
   },
   {
+    id: 33,
     slug: 'cuckoo-calls-dawn',
+    tradition: 'Northeast India',
     story: { title: 'Why the Cuckoo Calls at Dawn', tagline: 'The cuckoo keeps perfect time — biological clocks.', content: `
 **The World That Overslept**
 
@@ -4914,7 +5411,9 @@ And if you ever wonder why the cuckoo's call feels different from every other bi
     },
   },
   {
+    id: 34,
     slug: 'orchid-colors',
+    tradition: 'Northeast India',
     story: { title: 'How the Orchid Got Its Colors', tagline: 'An Arunachal tale about the most diverse flower family.', content: `
 **The Contest in the Forest**
 
@@ -5063,7 +5562,9 @@ The people of Assam and Arunachal Pradesh still call the orchid **Kopou Phool**.
     },
   },
   {
+    id: 35,
     slug: 'pitcher-plant',
+    tradition: 'Northeast India',
     story: { title: 'How the Pitcher Plant Learned to Catch', tagline: 'A plant that eats insects — the ultimate adaptation.', content: `
 **The Hungry Plant**
 
@@ -5209,7 +5710,9 @@ And if that's not a lesson worth learning, what is?
     },
   },
   {
+    id: 36,
     slug: 'bamboo-grows-fast',
+    tradition: 'Northeast India',
     story: { title: 'Why Bamboo Grows So Fast', tagline: '91cm per day — the fastest-growing plant on Earth.', content: `
 **The Argument**
 
@@ -5352,7 +5855,9 @@ Bamboo still grows faster than almost any plant on Earth. And teak still grows s
     },
   },
   {
+    id: 37,
     slug: 'sal-tree',
+    tradition: 'Northeast India',
     story: { title: 'Why the Sal Tree Never Bends', tagline: 'The strength of tropical hardwood.', content: `
 **Two Seeds**
 
@@ -5492,7 +5997,9 @@ That is why, in the forests of Northeast India, you will always find the sal and
     },
   },
   {
+    id: 38,
     slug: 'tiny-frog',
+    tradition: 'Northeast India',
     story: { title: 'The Tiny Frog of the Rainforest', tagline: 'Miniature frogs — where small size means big science.', content: `
 **Smaller Than Small**
 
@@ -5629,7 +6136,9 @@ Because size, as the people of Northeast India have always known, has nothing to
     },
   },
   {
+    id: 39,
     slug: 'the-girl-who-painted-rain',
+    tradition: 'Northeast India',
     story: { title: 'The Girl Who Painted Rain', tagline: 'Rain is every color if you know how to look.', content: `
 **The Wettest Place**
 
@@ -5760,7 +6269,9 @@ If you ever visit Cherrapunji and it's raining — which it almost certainly wil
     },
   },
   {
+    id: 40,
     slug: 'cloud-weaver-of-tawang',
+    tradition: 'Northeast India',
     story: { title: 'The Cloud Weaver of Tawang', tagline: 'Clouds become stories waiting to be woven.', content: `
 **Above the Clouds**
 
@@ -5895,7 +6406,9 @@ And on quiet mornings, when the clouds sit below Tawang like a white ocean, you 
     },
   },
   {
+    id: 41,
     slug: 'the-magic-japi-hat',
+    tradition: 'Northeast India',
     story: { title: 'The Magic Japi Hat', tagline: 'A wishing hat that teaches hard work beats wishes.', content: `
 **The Old Japi**
 
@@ -5975,7 +6488,7 @@ Rituraj spent that summer building a bicycle from scrap parts. It wasn't as shin
     },
     illustration: '/content/illustrations/magic-japi-hat.webp',
     track: 'school',
-    subjects: ['Biology'] as Subject[],
+    subjects: ['Mathematics'] as Subject[],
     toolSkills: ['Python' as Skill, 'NumPy' as Skill, 'Matplotlib' as Skill, 'Data Analysis' as Skill],
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
@@ -5983,57 +6496,102 @@ Rituraj spent that summer building a bicycle from scrap parts. It wasn't as shin
     level0: {
       concepts: [
         {
-          title: 'Symmetry: The Mathematics of Balance',
+          title: "Start Here — What Makes a Pattern a Pattern?",
           paragraphs: [
-            'The japi — the iconic broad-brimmed hat of Assam — is a masterwork of rotational symmetry. A shape has rotational symmetry if you can rotate it by some angle less than 360° and it looks exactly the same. The japi, viewed from above, typically has 6-fold, 8-fold, or 12-fold rotational symmetry, meaning it looks identical after rotation by 60°, 45°, or 30° respectively. Mathematicians describe these symmetries using group theory — the branch of mathematics that classifies all possible symmetry operations.',
-            'Symmetry in nature and art is not merely aesthetic — it encodes deep mathematical structure. The set of all symmetry operations that leave an object unchanged forms a mathematical "group," with specific rules about how operations combine. The symmetries of a regular hexagon (common in japi designs) form the dihedral group D₆, which contains 12 elements: 6 rotations (by 0°, 60°, 120°, 180°, 240°, 300°) and 6 reflections (across 6 different axes). Every japi pattern, no matter how intricate, must obey the constraints of one of these symmetry groups.',
-            'The concept of symmetry extends far beyond geometry. In physics, Noether\'s theorem (1918) proved that every symmetry corresponds to a conservation law. Translational symmetry (the laws of physics are the same everywhere) implies conservation of momentum. Rotational symmetry (the laws are the same in every direction) implies conservation of angular momentum. Time symmetry (the laws don\'t change over time) implies conservation of energy. The japi maker arranging symmetric patterns on a hat is, in a sense, exploring the same mathematical structures that govern the fundamental laws of the universe.',
+            "Look at the floor of your room. If it has tiles, notice how they fit together — no gaps, no overlaps, every piece the same shape, repeating over and over. That repetition is what makes it a **pattern**. But here is a question most people never ask: *why tiles and not random blobs?* Why do floors use squares or rectangles instead of, say, stars or circles?",
+            "Try this experiment in your head. Imagine covering a table with coins (circles). No matter how carefully you arrange them, there will always be gaps between the coins — little curved triangles of empty space. **Circles cannot tile a flat surface.** Now imagine using square coasters instead. They fit perfectly — no gaps, no overlaps. Squares work. Circles do not.",
+            "This is not just about floors. It is a deep mathematical fact about shapes. Only **three regular shapes** can tile a flat surface all by themselves: **triangles, squares, and hexagons**. That is it. Not pentagons (they leave gaps). Not octagons (gaps again). Just those three. Every tiled floor, every honeycomb, every woven mat in the world uses one of these three shapes — or a clever combination of them.",
+            "**Check yourself:** Why can hexagons tile a surface but pentagons cannot? (Hint: think about the angles at each corner. At a meeting point, the angles must add up to exactly 360°. A hexagon's corner is 120° — three of them make 360°. A pentagon's corner is 108° — three make only 324°, leaving a gap.)",
           ],
-          keyIdea: 'Symmetry is classified by group theory — the 6-fold symmetry of a japi pattern belongs to the same mathematical framework that governs conservation laws in physics.',
-          diagram: 'SymmetryDiagram',
-        },
-        {
-          title: 'Tessellations: Tiling Without Gaps',
-          paragraphs: [
-            'A tessellation is a pattern of shapes that covers a flat surface with no gaps and no overlaps — like tiles on a floor. The japi\'s woven surface is itself a tessellation: strips of bamboo and palm leaf interlock in repeating patterns that leave no uncovered space. Mathematically, only certain combinations of regular polygons can tessellate the plane. Regular triangles, squares, and hexagons can each tile a surface alone. No other regular polygon can.',
-            'This geometric constraint has deep consequences for design. When japi weavers create patterns, they work within the mathematical limits of what their weaving geometry allows. Most japi use a hexagonal weave (three sets of parallel strips crossing at 60° angles), which naturally produces hexagonal tessellations. Within this framework, the weaver can vary strip widths, colors, and crossing patterns to create an enormous variety of designs — but all designs are ultimately variations on hexagonal symmetry.',
-            'The mathematics of tessellations was rigorously classified in 1891 by the Russian crystallographer Evgraf Fedorov, who proved that there are exactly 17 distinct wallpaper groups — 17 fundamentally different ways to create a repeating 2D pattern. Every periodic pattern ever created — from Islamic geometric art to Scottish tartans to Assamese japi designs — belongs to one of these 17 groups. A japi weaver who independently discovers a new pattern has not invented new mathematics; they have rediscovered one of Fedorov\'s 17 symmetry types, using bamboo strips instead of equations.',
-          ],
-          keyIdea: 'There are exactly 17 mathematically distinct ways to create a repeating 2D pattern — every japi design, however original, belongs to one of these 17 wallpaper groups.',
+          keyIdea: "Only triangles, squares, and hexagons can tile a flat surface alone — because only their corner angles divide evenly into 360°. This simple rule governs every tiled floor and woven pattern in the world.",
           diagram: 'TessellationDiagram',
         },
         {
-          title: 'The Geometry of Weaving',
+          title: "The Japi — A Hat Built on Hexagons",
           paragraphs: [
-            'Weaving is applied geometry. Every woven fabric, from a cotton shirt to a bamboo japi, is a physical implementation of a mathematical pattern. The fundamental unit is the "float" — the number of strips a given strip passes over before going under. In plain weave (over-1-under-1), each strip alternates over and under its neighbors. In twill weave (over-2-under-1, or over-3-under-1), the pattern shifts by one position in each row, creating diagonal lines.',
-            'The japi uses a triaxial weave — three sets of strips crossing at 60° angles, rather than the two perpendicular sets used in most cloth weaving. Triaxial weaving creates an inherently more stable structure because each strip is locked in place by strips running in two different directions (instead of one). The resulting fabric resists stretching and shearing in all directions, making it ideal for a hat that must maintain its shape under wind, rain, and the weight of decorative elements.',
-            'The angle of crossing determines the mechanical properties of the weave. At 60° (as in the japi), the structure has equal stiffness in all directions — it is mechanically isotropic. If the angles are changed (for example, to 45° and 90°), the fabric becomes stiffer in some directions than others — mechanically anisotropic. Aerospace engineers exploit this principle in carbon fiber composites, layering sheets of fibers at different angles to create materials with precisely tailored stiffness and strength in each direction. The japi weaver and the Boeing engineer are solving the same structural problem using the same geometric principles.',
+            "The **japi** is the iconic broad-brimmed hat of Assam — woven from bamboo and palm leaf, shaped like a wide cone, and decorated with patterns that have been passed down for generations. But the japi is not just art. It is geometry you can wear.",
+            "Look at a japi from above. The weaving uses **three sets of bamboo strips**, crossing each other at **60-degree angles**. When three lines cross at 60°, they naturally create **hexagons** — the same shape as honeycomb cells. The japi weaver is building a hexagonal grid without ever thinking about geometry class.",
+            "Why does this work so well? Because a hexagonal weave locks every strip in place from **two different directions**. In an ordinary cloth weave (like your shirt), strips cross at 90° — just two directions. Pull diagonally, and the fabric stretches and distorts. But the japi's three-direction weave resists pulling in *every* direction equally. It is why the hat keeps its shape through monsoon rain, strong wind, and years of use.",
+            "**Try this:** Take a piece of cloth (a handkerchief or T-shirt) and pull it diagonally — corner to corner. It stretches easily. Now imagine if a third set of threads ran diagonally through the fabric, locking the other two in place. That is what the japi's triaxial weave does. Same idea is used in carbon fibre for racing cars and aircraft wings.",
+            "**A prediction:** If a japi weaver changed the crossing angle from 60° to 45°, the hat would be stiffer in some directions and flexible in others — it would warp unevenly. The 60° angle is not tradition for tradition's sake. It is the mathematically correct angle for equal strength everywhere.",
           ],
-          keyIdea: 'Triaxial weaving at 60° angles creates an isotropic structure with equal strength in all directions — the same principle used in advanced aerospace composites.',
+          keyIdea: "The japi's three-direction weave at 60° angles creates hexagons — a structure equally strong in all directions. The same principle is used in carbon fibre for aircraft and racing cars.",
+          diagram: 'JapiTopViewDiagram',
+        },
+        {
+          title: "Symmetry — When Turning Changes Nothing",
+          paragraphs: [
+            "Hold a plain, round plate in front of you. Now close your eyes and ask a friend to rotate the plate. Open your eyes. Can you tell it was turned? **No** — because a circle looks identical from every angle. Mathematicians say it has **infinite rotational symmetry**.",
+            "Now look at a japi from above. Its decorative pattern repeats — often **six times** around the centre. If you rotate the japi by exactly 60° (one-sixth of a full turn), the pattern looks identical. Turn it another 60°, and it still looks the same. Six turns of 60° bring you back to the start. This is called **6-fold rotational symmetry**.",
+            "But symmetry is not just about rotation. It can also be **reflection** — when one half mirrors the other. Draw an imaginary line through the centre of the japi: the left half is a mirror image of the right. A japi with 6-fold symmetry has **six mirror lines** and **six rotation positions** — 12 symmetry operations in total.",
+            "**Here is what makes this powerful:** these rules are not just for japis. Every repeating pattern in the world — bathroom tiles, wallpaper, Islamic art, Scottish tartans — must obey one of exactly **17 possible symmetry types**. Mathematicians proved this in 1891. Traditional artisans across cultures discovered nearly all 17 types centuries before the proof existed, working by eye and intuition alone.",
+            "**Check yourself:** A stop sign (regular octagon) has 8-fold rotational symmetry. How many degrees do you rotate it before it looks the same? (Answer: 360° ÷ 8 = 45°.)",
+          ],
+          keyIdea: "Symmetry means a shape looks the same after a transformation (rotation or reflection). The japi has 6-fold symmetry — and every repeating pattern in the world belongs to one of exactly 17 mathematically possible symmetry types.",
+          diagram: 'SymmetryDiagram',
+        },
+        {
+          title: "Why Cones? — The Shape That Sheds Rain",
+          paragraphs: [
+            "The japi is not flat like a frisbee. It is shaped like a **cone** — tall in the middle, sloping outward to a wide brim. This is not just style. It is physics solving a problem: **how do you keep rain off your head and shoulders?**",
+            "Imagine rain falling on a flat disc held above your head. The water pools in the middle, gets heavy, and eventually drips right onto your head — exactly where you do not want it. Now tilt the disc into a cone. Gravity pulls the water *down the slope* and off the edge, away from your body. The steeper the cone, the faster the water runs off.",
+            "But there is a trade-off. A steep, narrow cone sheds rain perfectly but gives almost no shade — the brim is tiny. A flat, wide brim gives great shade but holds water. The japi's shape is a **compromise**: angled enough to shed rain quickly, wide enough to shade your head, face, and shoulders from the Assam sun.",
+            "This is the same trade-off architects face when designing roofs. A steep pitched roof sheds rain and snow well (think Swiss chalets). A flat roof is cheaper and gives more usable space (think city buildings). In heavy-rain regions like Assam, Meghalaya, and Kerala, traditional buildings use **steep slopes** — the same geometry as the japi, scaled up.",
+            "**Try this:** Next time it rains, hold a plate flat and then tilt it at different angles. Watch how the angle changes where the water goes. The japi's designers solved this optimisation problem by trial and error over generations.",
+          ],
+          keyIdea: "The japi's conical shape is a geometric compromise — steep enough to shed monsoon rain, wide enough to shade from the sun. The same slope-vs-coverage trade-off appears in every roof design.",
+          diagram: 'ConicalShapeDiagram',
         },
       ],
       vocabulary: [
-        ['Symmetry', 'When a shape looks the same after being flipped, rotated, or slid — the japi has rotational symmetry'],
-        ['Tessellation', 'A pattern of shapes that fit together perfectly with no gaps — like tiles on a floor or strips in a woven hat'],
-        ['Rotational symmetry', 'When a shape looks identical after being turned by a certain angle — a japi looks the same every 60 degrees'],
-        ['Isotropic', 'Having equal properties in all directions — the japi\'s triaxial weave is equally strong no matter which way you pull'],
-        ['Wallpaper group', 'One of exactly 17 mathematically possible ways to create a repeating 2D pattern — every japi design belongs to one'],
+        ['Tessellation', 'A pattern of shapes that fit together with no gaps and no overlaps — like tiles on a floor or the hexagons in a honeycomb'],
+        ['Rotational symmetry', 'When a shape looks identical after being turned by a certain angle — the japi looks the same every 60°, which is 6-fold symmetry'],
+        ['Hexagon', 'A six-sided shape with 120° corners — the only regular shape (besides triangles and squares) that can tile a flat surface alone'],
+        ['Triaxial weave', 'Weaving with three sets of strips crossing at 60° angles — creates a structure equally strong in all directions, unlike ordinary two-direction weaving'],
+        ['Conical', 'Shaped like a cone — a surface that slopes from a peak to a circular base, naturally shedding rain by gravity'],
       ],
       trueFalse: [
-        { statement: 'There are exactly 17 mathematically distinct ways to tile a flat surface with a repeating pattern.', isTrue: true, explanation: 'Mathematicians have proven that every possible repeating 2D pattern belongs to one of exactly 17 symmetry groups (called wallpaper groups). This was proven in 1891 and applies to everything from bathroom tiles to japi weaving patterns.' },
-        { statement: 'A circle has more lines of symmetry than any polygon.', isTrue: true, explanation: 'A circle has infinite lines of symmetry — you can draw a line through its center at any angle and both halves will be mirror images. No polygon can match this, though regular polygons with many sides (like a 100-gon) come close.' },
-        { statement: 'Weaving patterns are artistic but have nothing to do with mathematics.', isTrue: false, explanation: 'Every woven pattern is a physical implementation of mathematical rules — the over-under sequence, the crossing angles, and the repeating unit are all governed by geometry. The japi\'s triaxial weave at 60-degree angles uses the same geometric principles as aerospace carbon fiber composites.' },
+        { statement: 'Regular pentagons can tile a flat surface with no gaps.', isTrue: false, explanation: 'A pentagon\'s interior angle is 108°. Three pentagons at a corner add up to 324° — leaving a 36° gap. Only triangles (60°), squares (90°), and hexagons (120°) have angles that divide evenly into 360°.' },
+        { statement: 'The japi\'s weave uses three sets of strips crossing at 60° angles.', isTrue: true, explanation: 'This triaxial weave creates hexagonal cells and makes the hat equally strong in all directions — unlike ordinary cloth which stretches easily on the diagonal.' },
+        { statement: 'A flat hat would keep you drier in the rain than a cone-shaped hat.', isTrue: false, explanation: 'A flat surface holds water in the middle, right above your head. A cone uses gravity to pull rain down the slope and off the edge, away from your body.' },
       ],
       facts: [
-        'The japi uses triaxial weaving — three sets of bamboo strips crossing at 60-degree angles — which creates a structure that is equally strong in all directions, unlike ordinary two-direction weaving.',
-        'Mathematicians proved in 1891 that there are exactly 17 distinct ways to create a repeating pattern on a flat surface — and traditional artisans around the world discovered nearly all of them centuries before the proof.',
-        'The conical shape of the japi is not just tradition — a cone is one of the strongest geometric shapes for distributing the weight of rain evenly, which is why it appears in hat designs across Asia.',
+        'Only three regular shapes can tile a flat surface alone: triangles, squares, and hexagons. Every tiled floor in the world uses one of these (or a combination).',
+        'The japi\'s triaxial weave at 60° angles creates the same hexagonal geometry found in honeycombs, carbon fibre composites, and graphene — one of the strongest structures known.',
+        'Mathematicians proved in 1891 that there are exactly 17 distinct ways to create a repeating 2D pattern — and traditional artisans around the world had already discovered nearly all of them centuries earlier, working by eye alone.',
       ],
-      offlineActivity: 'Create your own tessellation pattern using paper. Cut out a simple shape (triangle, square, or hexagon) and trace it repeatedly to tile a page with no gaps. Then try modifying one edge of your shape — any bump you add to one side must be cut from the opposite side so the pieces still fit. Color your tessellation and identify what type of symmetry it has: does it have mirror symmetry, rotational symmetry, or both?',
+      offlineActivity: 'Grab a sheet of paper and try to tile it with one shape only — no gaps, no overlaps. Start with squares (easy). Then try triangles (harder but possible). Then try hexagons (trace around a hex nut or draw them). Finally, try pentagons — you will find it is impossible. You have just discovered one of the oldest results in geometry: only 3 regular shapes tessellate.',
+      offlineActivityDiagram: 'TessellationDiagram',
+      codeTeaser: `# Which shapes can tile a floor?
+# Test if a regular polygon's angle divides into 360°
+
+for sides in range(3, 13):
+    angle = (sides - 2) * 180 / sides
+    fits = 360 % angle == 0
+
+    name = {3:"Triangle", 4:"Square", 5:"Pentagon",
+            6:"Hexagon", 7:"Heptagon", 8:"Octagon",
+            9:"Nonagon", 10:"Decagon", 11:"Hendecagon",
+            12:"Dodecagon"}[sides]
+
+    status = "YES - tiles!" if fits else "no - leaves gaps"
+    print(f"{name:12s} ({sides} sides, {angle:5.1f}°): {status}")
+
+# Only 3 shapes say YES — can you predict which?`,
+      referenceLinks: [
+        { slug: 'geometry-essentials', reason: 'The foundation for everything in this lesson — angles, polygons, symmetry, and how shapes fit together' },
+        { slug: 'patterns-in-nature', reason: 'Explore how the same hexagonal patterns appear in honeycombs, snowflakes, and basalt columns' },
+      ],
+      nextLessons: [
+        { slug: 'basket-weavers-song', reason: 'Another Assamese weaving tradition — explores the mathematics of over-under patterns and how counting sequences create designs' },
+        { slug: 'honey-hunters-lesson', reason: 'Hexagons again — but this time built by bees, with a completely different reason (maximum storage, minimum wax)' },
+      ],
     },
   },
   {
+    id: 42,
     slug: 'star-fell-deepor',
+    tradition: 'Northeast India',
     story: { title: 'The Star That Fell Into Deepor Beel', tagline: 'A star becomes something beautiful in a wetland.', content: `
 **The Falling Star**
 
@@ -6167,7 +6725,9 @@ Sometimes, the place you land isn't the place you planned. But that doesn't mean
   },
 
   {
+    id: 43,
     slug: 'kite-festival',
+    tradition: 'Northeast India',
     story: { title: 'The Kite Festival of Guwahati', tagline: 'Kites over the river — flight in your hands.', content: `
 **The Contest**
 
@@ -6261,7 +6821,7 @@ And the next January, at the kite festival, there were fewer store-bought kites 
     },
     illustration: '/content/illustrations/kite-festival-guwahati.webp',
     track: 'school',
-    subjects: ['Biology'] as Subject[],
+    subjects: ['Physics' as Subject],
     toolSkills: ['Python' as Skill, 'NumPy' as Skill, 'Matplotlib' as Skill, 'Data Analysis' as Skill],
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
@@ -6269,57 +6829,110 @@ And the next January, at the kite festival, there were fewer store-bought kites 
     level0: {
       concepts: [
         {
-          title: 'Lift and the Bernoulli Principle',
+          title: 'How Kites Fly \u2014 Lift from the Angle of Attack',
           paragraphs: [
-            'A kite flies because of lift — an upward aerodynamic force generated when air flows over a surface at an angle. The key principle is that when a kite is tilted relative to the oncoming wind (this tilt is called the angle of attack), it deflects air downward. By Newton\'s third law, if the kite pushes air down, the air pushes the kite up. This is the simplest and most fundamental explanation of lift, and it applies to kites, airplane wings, and bird wings alike.',
-            'The Bernoulli principle provides a complementary explanation. When air flows over the curved upper surface of a kite, it speeds up (it has a longer path to travel in the same time). Bernoulli\'s equation states that faster-moving fluid has lower pressure. So the pressure above the kite is lower than the pressure below it, creating a net upward force. For a typical kite at a 15° angle of attack, the pressure difference is only about 0.1-0.5% of atmospheric pressure — but acting over the entire kite surface, this produces enough force to hold the kite aloft.',
-            'In reality, both explanations (Newtonian deflection and Bernoulli pressure difference) are describing the same phenomenon from different perspectives. The air is deflected downward AND the pressure is lower on top — these are two aspects of a single physical process. Modern aerodynamics unifies both views using the circulation theory of lift, which describes how the flow pattern around an airfoil generates a net upward force through a combination of pressure differences and momentum transfer.',
+            'Hold a piece of stiff paper flat in front of a fan. Nothing happens \u2014 the air slides past on both sides equally. Now tilt the paper slightly, so the front edge is higher than the back. The paper pushes air *downward*. And by Newton\u2019s third law (every action has an equal and opposite reaction), the air pushes the paper *upward*. That upward push is called **lift**.',
+            'The tilt angle matters enormously. It has a name: the **angle of attack**. At 0\u00b0 (flat), there is no lift. Tilt a little (around 10\u201315\u00b0), and lift increases steadily. But tilt too far (past about 20\u00b0 for a flat surface), and the smooth airflow over the top breaks apart into chaotic swirls \u2014 the paper suddenly *drops*. This sudden loss of lift is called a **stall**. Every kite, every airplane wing, every bird has a stall angle.',
+            'There is a second way to think about the same physics. When air flows over the tilted top surface, it speeds up (it has further to travel). The physicist Daniel Bernoulli showed that faster-moving air has *lower pressure*. So the pressure above the kite is lower than the pressure below. This pressure difference pushes the kite up. Newton and Bernoulli are not competing explanations \u2014 they are two descriptions of the same thing: air being deflected downward creates an upward force.',
+            '**Check yourself:** If you hold a kite flat (0\u00b0 angle of attack) in a strong wind, will it fly? Why or why not? (Answer below \u2014 think first!)',
+            'Answer: No. At 0\u00b0 the air flows equally over both sides. No air is deflected downward, so there is no upward push. The kite needs to be tilted into the wind. That is exactly what the **bridle** (the string that connects the kite to the flying line) does \u2014 it holds the kite at the right angle.',
           ],
-          keyIdea: 'Kites generate lift by deflecting air downward (Newton) while simultaneously creating lower pressure above than below (Bernoulli) — both describe the same physics.',
-          diagram: 'BernoulliDiagram',
+          keyIdea: 'A kite flies because it is tilted into the wind (angle of attack). This deflects air downward, and the air pushes the kite upward \u2014 that upward push is called lift. Too much tilt causes a stall.',
+          diagram: 'KiteLiftDiagram',
         },
         {
-          title: 'Drag: The Force That Fights Flight',
+          title: 'The Tug of War \u2014 Drag vs Lift',
           paragraphs: [
-            'Drag is the aerodynamic force that opposes motion through a fluid. For a kite, drag acts in the direction the wind is blowing — it tries to push the kite downwind. Two types of drag dominate: pressure drag and skin friction drag. Pressure drag comes from the kite creating a low-pressure wake behind it (air separates from the surface and forms turbulent vortices). Skin friction drag comes from air molecules rubbing against the kite\'s surface.',
-            'The drag force is proportional to the square of the wind speed: double the wind speed and drag quadruples. This is described by the drag equation: F_D = ½ρv²C_DA, where ρ is air density, v is wind speed, C_D is the drag coefficient (a dimensionless number that depends on shape), and A is the reference area. A flat plate perpendicular to the wind has C_D ≈ 1.2, while a streamlined shape has C_D ≈ 0.04. Kite designs balance the need for lift (which requires a large angle of attack, increasing drag) against the need for stability (which requires manageable drag forces).',
-            'The kite string transmits force in a direction that resolves both lift and drag. The string angle from vertical tells you the ratio of drag to lift: a kite flying at a 45° string angle has equal lift and drag forces. A kite at a steep angle (nearly overhead) has much more lift than drag — this is the goal of efficient kite design. Competition kite flyers and kite energy systems (which use kites to generate electricity) optimize the lift-to-drag ratio, aiming for values of 5:1 or higher.',
+            'You have felt drag a thousand times without knowing the word. Stick your hand out of a moving car window, palm facing forward. The wind pushes your hand backward. That backward push is **drag** \u2014 the force that resists motion through air.',
+            'Now here is the key insight: a kite in flight is caught in a tug of war between two forces. **Lift** pulls it upward. **Drag** pushes it backward (in the direction the wind blows). The kite string anchors the kite so it cannot blow away, and the angle the string makes with the ground tells you who is winning the tug of war.\n\n\u2022 String nearly vertical (kite overhead): lift is much greater than drag \u2014 efficient kite!\n\u2022 String at 45\u00b0: lift and drag are equal\n\u2022 String nearly horizontal: drag dominates \u2014 the kite is more of a flag than a wing',
+            'Drag has a nasty property: it grows with the **square** of wind speed. Double the wind speed and drag does not double \u2014 it *quadruples*. This is why a kite that flies beautifully in a gentle breeze can be ripped apart in a strong gust. Biren\u2019s bamboo frame *flexed* in gusts instead of fighting them, and his newspaper skin let some air through, reducing the force. Ronit\u2019s rigid fibreglass delta had no such flexibility.',
+            'A **tail** is not decoration. It creates drag *behind* the kite\u2019s body, pulling the bottom downwind. This keeps the kite face-on to the wind. Without a tail, most flat kites spin wildly \u2014 any tiny wobble gets amplified because the forces become uneven. The tail acts like a damper, absorbing wobble energy as drag. The same principle puts the tail at the back of an airplane.',
+            '**Prediction you can test:** Next time you fly a kite, try shortening the tail. It should become less stable. Try removing it entirely \u2014 many kites will spin out and crash.',
           ],
-          keyIdea: 'Drag increases with the square of wind speed — kite design is fundamentally about maximizing the ratio of lift force to drag force.',
+          keyIdea: 'Drag opposes lift and grows with the square of wind speed. The string angle reveals the lift-to-drag balance. A tail creates drag behind the kite to keep it stable \u2014 it is a physics tool, not decoration.',
+          diagram: 'KiteDragForceDiagram',
         },
         {
-          title: 'Angle of Attack and Stability',
+          title: 'Why Shape Matters \u2014 Diamond, Delta, and Box',
           paragraphs: [
-            'The angle of attack (AoA) is the angle between the kite\'s surface and the direction of oncoming wind. It is the single most important variable in kite performance. At 0° AoA, the kite generates no lift (air flows along both surfaces equally). As AoA increases, lift increases — but only up to a critical angle, typically 15-20° for a flat kite. Beyond this critical angle, the airflow separates from the upper surface, creating turbulence, and lift drops sharply while drag soars. This is called a stall.',
-            'Kite stability depends on the bridle — the arrangement of strings that connects the kite to the flying line. The bridle sets the kite\'s resting angle of attack and determines how the kite responds to gusts. A well-designed bridle creates a negative feedback loop: if a gust increases the AoA beyond the optimal, the resulting increase in drag rotates the kite back toward its equilibrium angle. If the AoA decreases, reduced drag allows the kite to rotate forward. This self-correcting behavior is the hallmark of a stable kite.',
-            'A tail serves a similar stabilizing function through a different mechanism. The tail creates drag far behind the kite\'s center of pressure, pulling the bottom of the kite downwind and keeping the kite oriented with its face to the wind. Without a tail, many kites spin wildly because any small perturbation creates asymmetric forces that amplify the rotation (positive feedback). The tail converts this positive feedback into negative feedback by adding a restoring torque. In engineering terms, the tail moves the kite\'s center of drag behind its center of lift, creating static stability — the same principle that puts the tail at the back of an airplane.',
+            'Not all kites are the same shape, and the shape is not just for looks. Each design makes a different trade-off between lift, drag, stability, and the wind conditions it works best in.',
+            '**The diamond** (what Biren built) is the simplest. Two crossed sticks, a flat surface, a tail for stability. It is light and cheap but not the most efficient \u2014 a flat surface generates more drag than a curved one. Its advantage: it is forgiving. You can build one from newspaper and bamboo, and it will fly in moderate wind. The tail does most of the stabilising work.',
+            '**The delta** (what Ronit bought) looks like a triangle with a keel underneath. The keel replaces the tail \u2014 it hangs below the kite and acts like the keel of a sailboat, preventing side-to-side wobble. Deltas have the best **lift-to-drag ratio** of common kites, meaning they fly at steeper string angles (more overhead). But they are designed for steady breezes. In gusty wind, a delta can be overpowered because it cannot shed air the way a flexible diamond can.',
+            '**The box kite** is three-dimensional \u2014 a rectangular frame with two fabric-covered cells and an open middle. It catches wind from any direction and is inherently stable without a tail. Box kites generate the most lift in strong wind and were historically used to carry weather instruments to high altitude. The trade-off: they are heavy and need strong wind just to get airborne.',
+            '**Think about this:** Why did Biren\u2019s simple diamond beat Ronit\u2019s sleek delta? Because the afternoon wind at the Guwahati festival was *gusty*. The diamond\u2019s flexibility and the newspaper\u2019s slight porosity made it resilient. Ronit\u2019s delta was designed for a different wind. Good engineering is matching design to conditions \u2014 not buying the most expensive option.',
           ],
-          keyIdea: 'The angle of attack determines lift — too steep causes a stall; bridles and tails create negative feedback that keeps the kite at its optimal angle.',
-          diagram: 'AngleTypesDiagram',
+          keyIdea: 'Kite shape determines how it handles lift, drag, and stability. Diamonds are simple and forgiving, deltas are efficient in steady wind, box kites are powerful in strong wind. The best kite matches its design to the conditions.',
+          diagram: 'KiteShapesDiagram',
+        },
+        {
+          title: 'Wind \u2014 The Invisible River',
+          paragraphs: [
+            'A kite without wind is just decorated paper. Wind is the energy source. But wind is not a simple, steady flow \u2014 it varies in speed, direction, and even in the vertical dimension. Understanding wind is what separated Biren from the other children.',
+            'Sailors and meteorologists measure wind using the **Beaufort scale**, invented in 1805 by Admiral Francis Beaufort. It runs from 0 (dead calm) to 12 (hurricane). Kites fly best in Beaufort force 3 to 5 (roughly 12\u201338 km/h). Below that, there is not enough energy to generate lift. Above that, the drag forces become dangerous \u2014 remember, they grow with the *square* of wind speed.',
+            'But wind is not just horizontal. On sunny days, the ground heats unevenly \u2014 a dark parking lot gets hotter than a green field. Hot ground warms the air above it, and warm air rises in invisible columns called **thermals**. Birds soar by circling inside thermals. Kites get unexpected bursts of extra lift when a thermal passes underneath. At the Guwahati festival, the Brahmaputra river creates thermals along the bank because the water temperature differs from the land temperature \u2014 that is partly why the riverbank is the best place to fly.',
+            'You can measure wind speed with an **anemometer** (spinning cups), but you can estimate it for free: watch the trees. Leaves rustling = Beaufort 2\u20133. Small branches moving = force 4\u20135. Whole trees swaying = too strong for most kites. Biren watched the wind for three weeks before building his kite. He knew which direction it came from, how strong it got in the afternoon, and where the gusts were worst. That knowledge was worth more than Ronit\u2019s eight hundred rupees.',
+            '**Try this:** On a windy day, stand in an open area and hold a wet finger up. The cool side faces the wind \u2014 evaporation cools the skin that the wind hits. You have just used your body as a wind vane.',
+          ],
+          keyIdea: 'Wind is a kite\u2019s energy source. It is measured on the Beaufort scale (force 3\u20135 is ideal). Thermals give extra lift. The best kite flyers study the wind *before* they build \u2014 design follows conditions, not the other way round.',
+          diagram: 'KiteWindDiagram',
         },
       ],
       vocabulary: [
-        ['Lift', 'The upward aerodynamic force generated when air flows over a surface at an angle — it opposes gravity and is what keeps a kite or airplane in the air'],
-        ['Drag', 'The aerodynamic force that opposes motion through air — it increases with the square of wind speed, so doubling the wind quadruples the drag'],
-        ['Angle of Attack', 'The angle between a kite\'s surface and the direction of oncoming wind — increasing it raises lift up to a critical angle (about 15-20\u00B0), beyond which the kite stalls'],
-        ['Bernoulli Principle', 'Faster-moving fluid has lower pressure — air speeds up over the curved top of a kite, creating lower pressure above than below, which contributes to lift'],
-        ['Stall', 'The sudden loss of lift that occurs when the angle of attack exceeds a critical value — airflow separates from the upper surface, creating turbulence, and the kite or aircraft drops'],
+        ['Lift', 'The upward force on a kite created by air flowing over its tilted surface \u2014 it is what holds the kite up against gravity'],
+        ['Drag', 'The force that pushes a kite backward in the wind direction \u2014 it increases with the square of wind speed, so doubling the wind quadruples the drag'],
+        ['Angle of Attack', 'The tilt of the kite\u2019s surface relative to the oncoming wind \u2014 more tilt means more lift, up to about 15\u201320\u00b0, beyond which the kite stalls'],
+        ['Stall', 'The sudden loss of lift when the angle of attack is too steep \u2014 smooth airflow breaks apart into turbulence and the kite drops'],
+        ['Beaufort Scale', 'A 0\u201312 scale for estimating wind speed from visual clues \u2014 force 3\u20135 (12\u201338 km/h) is ideal for kite flying'],
       ],
       trueFalse: [
-        { statement: 'A kite can fly without any wind because the string pulls it upward.', isTrue: false, explanation: 'A kite needs moving air (wind) to generate lift. The string does not pull the kite up — it anchors the kite against the wind so that air flows over its tilted surface, creating the pressure difference and air deflection that produce lift.' },
-        { statement: 'Doubling the wind speed quadruples the drag force on a kite.', isTrue: true, explanation: 'Drag is proportional to the square of wind speed (F_D = \u00BDpv\u00B2C_DA). So if wind speed doubles, v\u00B2 increases by a factor of 4, and drag force quadruples. This is why kites can be ripped apart in strong gusts.' },
-        { statement: 'A kite tail is mainly decorative and does not affect how the kite flies.', isTrue: false, explanation: 'A tail is a critical stability device. It creates drag behind the kite\'s center of pressure, pulling the bottom downwind and keeping the kite face-on to the wind. Without a tail, many kites spin wildly because small perturbations create asymmetric forces that amplify the rotation.' },
+        { statement: 'A kite can fly without any wind if the string is pulled tight enough.', isTrue: false, explanation: 'A kite needs moving air to generate lift. Running with a kite in still air works because *you* create the relative wind. But the string alone cannot pull a kite upward \u2014 it anchors the kite against the wind so the angle of attack is maintained.' },
+        { statement: 'Doubling the wind speed quadruples the drag force on a kite.', isTrue: true, explanation: 'Drag is proportional to the square of wind speed. So if wind speed doubles (say from 15 to 30 km/h), drag increases by 2\u00b2 = 4 times. This is why kites can be ripped apart in sudden gusts.' },
+        { statement: 'A kite tail is mainly decorative and has no effect on flight.', isTrue: false, explanation: 'The tail creates drag behind the kite, pulling the bottom downwind and keeping the kite face-on to the wind. Without it, most flat kites spin uncontrollably \u2014 any small wobble creates uneven forces that amplify the spin.' },
       ],
       facts: [
-        'The lift-to-drag ratio determines kite efficiency — competition kites and kite energy systems aim for ratios of 5:1 or higher, meaning five times more upward force than backward force.',
-        'The string angle from vertical reveals the ratio of drag to lift: a kite flying at 45\u00B0 has equal lift and drag, while a kite nearly overhead has much more lift than drag — the hallmark of efficient design.',
-        'Kite energy systems are being developed to generate electricity using high-altitude kites — they fly in figure-eight patterns at heights of 200-600 meters where winds are stronger and more consistent than at ground level.',
+        'The lift-to-drag ratio tells you how efficient a kite is. A ratio of 5:1 means five times more upward force than backward force \u2014 that kite flies nearly overhead. Biren\u2019s diamond probably achieved 2:1 to 3:1, which was enough to beat Ronit\u2019s delta in gusty conditions.',
+        'The string angle from vertical reveals the force balance: at 45\u00b0, lift equals drag. A kite flying nearly overhead has far more lift than drag \u2014 it is an efficient wing, not just a wind catcher.',
+        'Kite energy companies are testing giant kites that fly at 200\u2013600 metres altitude, where wind is stronger and steadier. They fly in figure-eight patterns, pulling cables that turn generators on the ground \u2014 wind power without towers.',
       ],
-      offlineActivity: 'Hold a sheet of paper by one short edge so it droops down. Now blow steadily across the top surface. The paper rises! This demonstrates the Bernoulli principle: the fast-moving air you blow across the top has lower pressure than the still air below, creating lift. Next, try tilting the paper at different angles to a fan or breeze — notice how a small tilt gives lift, but too much tilt makes it flutter wildly (stall). This is the angle of attack in action.',
+      offlineActivity: 'Build a simple diamond kite from two sticks (bamboo, reeds, or wooden dowels), a sheet of newspaper, tape, thread, and a plastic-bag tail (see the diagram for steps). Fly it and measure the string angle. Then change ONE thing \u2014 shorten the tail, move the bridle point, or swap the newspaper for a plastic bag \u2014 and see what happens. Record your results. This is how real engineers work: change, measure, compare.',
+      offlineActivityDiagram: 'ActivityKiteBuildDiagram',
+      codeTeaser: `import numpy as np
+import matplotlib.pyplot as plt
+
+# Kite force balance \u2014 how string angle reveals efficiency
+wind_speed = np.linspace(5, 40, 100)   # km/h
+
+# Lift and drag both grow with v^2, but at different rates
+lift = 0.5 * 1.2 * (wind_speed / 3.6)**2 * 0.8 * 0.3  # simplified
+drag = 0.5 * 1.2 * (wind_speed / 3.6)**2 * 1.0 * 0.3
+
+# String angle from vertical: arctan(drag / lift)
+angle = np.degrees(np.arctan2(drag, lift))
+
+plt.figure(figsize=(10, 5))
+plt.plot(wind_speed, angle, linewidth=2, color='#f59e0b')
+plt.axhline(45, color='#ef4444', linestyle='--', label='45\u00b0 = equal lift and drag')
+plt.xlabel("Wind speed (km/h)")
+plt.ylabel("String angle from vertical (\u00b0)")
+plt.title("How Wind Speed Affects Kite String Angle")
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.show()  # What happens at high wind speeds?`,
+      referenceLinks: [
+        { slug: 'forces-and-motion', reason: 'Full guide to Newton\u2019s laws, force diagrams, and how objects balance forces \u2014 the foundation of kite physics' },
+        { slug: 'weather-and-climate', reason: 'How wind forms, pressure systems, and weather patterns \u2014 understanding the invisible river that powers kites' },
+      ],
+      nextLessons: [
+        { slug: 'the-little-boat', reason: 'Fluid dynamics on the Brahmaputra \u2014 the same forces (lift and drag) that fly a kite also move a boat through water' },
+        { slug: 'flying-squirrel', reason: 'How a flying squirrel uses a skin membrane as an airfoil \u2014 nature\u2019s kite, with angle of attack and glide ratio' },
+        { slug: 'fishermans-daughter-storm', reason: 'Wind at its most powerful \u2014 cyclone physics, the Beaufort scale pushed to its limits' },
+      ],
     },
   },
   {
+    id: 44,
     slug: 'grandmothers-pitha',
+    tradition: 'Northeast India',
     story: { title: 'Grandmother\'s Pitha Stories', tagline: 'Every pitha has a story — food science in every bite.', content: `
 **The Kitchen That Was a Library**
 
@@ -6460,7 +7073,9 @@ Mrinmoyee bit into the sunga pitha. It was warm and sweet and smoky, and it tast
     },
   },
   {
+    id: 45,
     slug: 'lost-temple',
+    tradition: 'Northeast India',
     story: { title: 'The Lost Temple of Madan Kamdev', tagline: 'Ancient carved stones — archaeology and time.', content: `
 **The Hill Trail**
 
@@ -6599,7 +7214,9 @@ They walked back down the hill as the sun set behind Guwahati, leaving the old s
     },
   },
   {
+    id: 46,
     slug: 'seven-sisters',
+    tradition: 'Northeast India',
     story: { title: 'How the Seven Sisters Became States', tagline: 'Seven sisters, seven landscapes — geography as story.', content: `
 **The Seven Daughters**
 
@@ -6716,7 +7333,9 @@ And when the rest of the world asks, "Why do you call them the Seven Sisters?" t
     },
   },
   {
+    id: 47,
     slug: 'little-potter',
+    tradition: 'Northeast India',
     story: { title: 'The Little Potter of Dhubri', tagline: 'Clay pots — where art meets material science.', content: `
 **The Potter's Daughter**
 
@@ -6860,7 +7479,9 @@ The next year, and every year after, Juri made Diwali lamps. They were never per
   },
 
   {
+    id: 48,
     slug: 'monkey-bridge',
+    tradition: 'Northeast India',
     story: { title: 'The Monkey Bridge of Namdapha', tagline: 'Primates crossing a river — forest canopy science.', content: `
 **The Rising Waters**
 
@@ -7018,7 +7639,9 @@ In Namdapha, the people of Assam and Arunachal Pradesh tell this story when the 
   },
 
   {
+    id: 49,
     slug: 'boy-counted-butterflies',
+    tradition: 'Northeast India',
     story: { title: 'The Boy Who Counted Butterflies', tagline: 'Data science starts with counting.', content: `
 **The Butterfly Notebook**
 
@@ -7156,7 +7779,9 @@ Talo kept counting. He is still counting. His notebooks now fill an entire shelf
   },
 
   {
+    id: 50,
     slug: 'monsoon-home',
+    tradition: 'Northeast India',
     story: { title: 'How the Monsoon Found Its Way Home', tagline: 'Climate science in a story about rain.', content: `
 **The Monsoon's Problem**
 
@@ -7289,7 +7914,9 @@ Some places are just easy to love. And even the clouds know it.
     },
   },
   {
+    id: 51,
     slug: 'grandmother-remembered',
+    tradition: 'Northeast India',
     story: { title: 'The Grandmother Who Remembered Everything', tagline: 'Memory as technology — neuroscience of oral tradition.', content: `
 **The Village Without Books**
 
@@ -7440,7 +8067,9 @@ Yaruini smiled. "Good. Paper is useful. But remember, child — paper burns and 
     },
   },
   {
+    id: 52,
     slug: 'singing-bamboo',
+    tradition: 'Northeast India',
     story: { title: 'The Singing Bamboo of Mizoram', tagline: 'Bamboo groves that sing — resonance in nature.', content: `
 **The Lonely Hill**
 
@@ -7577,7 +8206,9 @@ Vala never felt lonely on his hilltop again. He had a whole orchestra growing in
   },
 
   {
+    id: 53,
     slug: 'festival-lights',
+    tradition: 'Northeast India',
     story: { title: 'The Festival of Lights on the River', tagline: 'Floating lamps — the science of light and energy.', content: `
 **The Night of Lamps**
 
@@ -7717,7 +8348,9 @@ The people of Assam say that during Kati Bihu, the Brahmaputra isn't just a rive
     },
   },
   {
+    id: 54,
     slug: 'little-train',
+    tradition: 'Northeast India',
     story: { title: 'The Little Train of the Hills', tagline: 'Narrow gauge railways — engineering on steep gradients.', content: `
 **The Smallest Engine**
 
@@ -7859,7 +8492,9 @@ In the hills of Northeast India, they say that every train has a soul, and the s
     },
   },
   {
+    id: 55,
     slug: 'postman-hills',
+    tradition: 'Northeast India',
     story: { title: 'The Postman of the Hills', tagline: 'Delivering mail across mountains — logistics and optimization.', content: `
 **The Route**
 
@@ -8002,7 +8637,9 @@ Today, the villages have mobile phone towers and internet connections. But the o
     },
   },
   {
+    id: 56,
     slug: 'night-market-imphal',
+    tradition: 'Northeast India',
     story: { title: 'The Night Market of Imphal', tagline: 'Commerce and community — market economics.', content: `
 **The Market of Mothers**
 
@@ -8153,7 +8790,9 @@ He decided, right then, that when he grew up, he would tell the world about Ima 
     },
   },
   {
+    id: 57,
     slug: 'turtle-mountain',
+    tradition: 'Northeast India',
     story: { title: 'The Turtle Who Carried a Mountain', tagline: 'A Bodo creation tale — plate tectonics.', content: `
 **The Sacred Stone**
 
@@ -8288,7 +8927,9 @@ To this day, the Bodo people of Assam tell the story of Oma when a task seems to
     },
   },
   {
+    id: 58,
     slug: 'rainbow-fish',
+    tradition: 'Northeast India',
     story: { title: 'The Rainbow Fish of Umiam Lake', tagline: 'Fish that shimmer — the optics of iridescence.', content: `
 **The Lake Above the Clouds**
 
@@ -8425,7 +9066,9 @@ And somewhere below the surface, Ka Ri Bneng would drift past — her scales shi
     },
   },
   {
+    id: 59,
     slug: 'holi-tea-gardens',
+    tradition: 'Northeast India',
     story: { title: 'The Colors of Holi in the Tea Gardens', tagline: 'Natural vs synthetic — the chemistry of dyes.', content: `
 **The Morning Before**
 
@@ -8561,7 +9204,9 @@ Sunita smiled. The colours on her skin were fading in the evening light, but the
     },
   },
   {
+    id: 60,
     slug: 'kaziranga-grass',
+    tradition: 'Northeast India',
     story: { title: 'How the Kaziranga Grass Grows Tall', tagline: 'Elephant grass — fire ecology and grassland management.', content: `
 **The Naked Park**
 
@@ -8704,7 +9349,9 @@ And if you visit Kaziranga and stand at the edge of the elephant grass, listenin
     },
   },
   {
+    id: 61,
     slug: 'banyan-tree',
+    tradition: 'Northeast India',
     story: { title: 'The Old Banyan Tree\'s Stories', tagline: 'A tree that lives for centuries — the biology of longevity.', content: `
 **The Oldest Resident**
 
@@ -8845,7 +9492,9 @@ Dimpi climbed down from the branch, walked home in the golden evening light, and
     },
   },
   {
+    id: 62,
     slug: 'basket-weaver',
+    tradition: 'Northeast India',
     story: { title: 'The Basket Weaver\'s Song', tagline: 'The mathematics of weaving patterns.', content: `
 **The Girl with Two Loves**
 
@@ -8986,7 +9635,9 @@ In Manipur, they still say that the best weavers are the ones who sing while the
     },
   },
   {
+    id: 63,
     slug: 'seed-keeper',
+    tradition: 'Northeast India',
     story: { title: 'The Seed Keeper of Nagaland', tagline: 'Genetic diversity — why traditional varieties matter.', content: `
 **The Grandmother's Room**
 
@@ -9125,7 +9776,9 @@ Vini held a bamboo tube of black rice to her ear, as if listening for the story 
     },
   },
   {
+    id: 64,
     slug: 'cloud-namer',
+    tradition: 'Northeast India',
     story: { title: 'The Child Who Named the Clouds', tagline: 'Classifying everything — taxonomy as science.', content: `
 **The Wettest Place on Earth**
 
@@ -9270,7 +9923,9 @@ The clouds, of course, don't answer. But Dawan is certain they appreciate being 
     },
   },
   {
+    id: 65,
     slug: 'kingfisher-blue',
+    tradition: 'Northeast India',
     story: { title: 'Why the Kingfisher Has a Blue Coat', tagline: 'Color without pigment — nanostructures.', content: `
 **The Plain Brown Bird**
 
@@ -9417,7 +10072,9 @@ So the next time you see a kingfisher flash across the Brahmaputra — a streak 
     },
   },
   {
+    id: 66,
     slug: 'owl-wisest',
+    tradition: 'Northeast India',
     story: { title: 'Why the Owl Is the Wisest', tagline: 'Silent flight and night vision — owl physics.', content: `
 **The Great Debate**
 
@@ -9551,7 +10208,9 @@ And that is why, among the people of Assam and across the forests of the Northea
     },
   },
   {
+    id: 67,
     slug: 'night-jasmine',
+    tradition: 'Northeast India',
     story: { title: 'Why the Night Jasmine Blooms After Dark', tagline: 'Plants that tell time — circadian rhythms.', content: `
 **The Garden of Show-Offs**
 
@@ -9682,7 +10341,9 @@ And yet she is the most beloved flower in the gardens of Assam — proof that yo
     },
   },
   {
+    id: 68,
     slug: 'woodpecker-drum',
+    tradition: 'Northeast India',
     story: { title: 'The Woodpecker\'s Drum', tagline: 'Drumming without brain damage — impact biomechanics.', content: `
 **The Idea**
 
@@ -9812,7 +10473,9 @@ If you visit Manas National Park and listen carefully, you'll hear Thoka's desce
   },
 
   {
+    id: 69,
     slug: 'music-dimasa',
+    tradition: 'Northeast India',
     story: { title: 'How Music Came to the Dimasa Kingdom', tagline: 'Rhythm and melody — music theory meets physics.', content: `
 **The Silent Kingdom**
 
@@ -9946,7 +10609,9 @@ Dijou's gift was not invention. It was *translation*. She took the language of t
     },
   },
   {
+    id: 70,
     slug: 'silk-route',
+    tradition: 'Northeast India',
     story: { title: 'The Silk Route of the Caterpillars', tagline: 'Ancient trade networks — economic geography.', content: `
 **Three Friends**
 
@@ -10045,21 +10710,21 @@ They never argued about which silk was best again. Because the answer, they now 
     playground: 'silk-route' as const,
     level0: {
       vocabulary: [
-        ['Echolocation', 'Finding objects by sending out sound and listening for the echo that bounces back'],
-        ['Ultrasonic', 'Sound waves too high-pitched for humans to hear (above 20,000 Hz)'],
-        ['Echo', 'Sound that bounces off a surface and returns to the listener'],
-        ['Frequency', 'How many sound waves pass a point per second, measured in Hertz (Hz)'],
-        ['Transducer', 'A device that converts one form of energy to another — like sound to electricity'],
+        ['Echolocation', 'Finding objects by sending out a sound and listening for the echo \u2014 the time delay reveals distance, and the echo\u2019s character reveals the object\u2019s size, shape, and material'],
+        ['Ultrasonic', 'Sound waves above 20,000 Hz, too high-pitched for human ears \u2014 dolphins click at 20\u2013130 kHz, and the HC-SR04 sensor operates at 40 kHz'],
+        ['Time-of-flight', 'The time it takes for a signal (sound, light, or radio) to travel to a target and return \u2014 divide by 2 and multiply by speed to get distance'],
+        ['Transducer', 'A device that converts one form of energy to another \u2014 the HC-SR04\u2019s speaker converts electricity to sound, and its microphone converts sound back to electricity'],
+        ['Biomimicry', 'Designing technology by copying solutions that nature evolved \u2014 the dolphin\u2019s melon inspired acoustic lenses, and bat sonar inspired ultrasonic cane sensors for the visually impaired'],
       ],
       trueFalse: [
-        { statement: 'Dolphins can "see" underwater using sound.', isTrue: true, explanation: 'Dolphins send out clicks and listen for echoes. Their brain creates a 3D mental image from the echo patterns — they can detect fish, obstacles, and even the shape of objects in murky water where eyes are useless.' },
-        { statement: 'Sound travels faster in water than in air.', isTrue: true, explanation: 'Sound travels about 1,500 m/s in water vs 343 m/s in air — over 4 times faster. This is because water molecules are packed closer together, transmitting vibrations more efficiently.' },
-        { statement: 'Only marine animals use echolocation.', isTrue: false, explanation: 'Bats use echolocation in air to catch insects at night. Some birds (oilbirds, swiftlets) and even some blind humans have learned to use tongue clicks to navigate by echo.' },
+        { statement: 'The Ganges river dolphin is completely blind and cannot detect even light.', isTrue: false, explanation: 'Its eyes can detect light and dark (it knows if it\u2019s day or night), but they lack lenses and cannot form images. It is functionally blind for navigation but not totally without light perception.' },
+        { statement: 'Sound travels faster in water than in air because water molecules are closer together.', isTrue: true, explanation: 'Water molecules are packed tightly, so vibrations pass from one to the next much faster \u2014 1,480 m/s in water vs 343 m/s in air. This is why sonar is the dominant sensing technology underwater.' },
+        { statement: 'An ultrasonic sensor measures distance by measuring how loud the echo is.', isTrue: false, explanation: 'It measures the time the echo takes to return, not its loudness. Distance = speed \u00d7 time / 2. Loudness tells you about the object\u2019s material and size, but not its distance.' },
       ],
       facts: [
-        'The Gangetic river dolphin is nearly blind — its eyes can only tell light from dark. It navigates entirely by sonar, clicking up to 200 times per second.',
-        'Medical ultrasound uses the same principle as dolphin sonar — high-frequency sound waves bounce off organs and create an image. This is how doctors see babies before they\'re born.',
-        'Submarines use sonar arrays that can detect objects hundreds of kilometers away. The same technology helps map the ocean floor, discovering new species and underwater mountains.',
+        'The Gangetic river dolphin is nearly blind \u2014 its eyes can only tell light from dark. It navigates entirely by sonar, clicking up to 200 times per second.',
+        'Medical ultrasound uses the same principle as dolphin sonar \u2014 high-frequency sound waves bounce off organs and create an image. This is how doctors image babies before they\u2019re born.',
+        'Submarines use sonar arrays that can detect objects hundreds of kilometres away. The same technology helps map the ocean floor, discovering new species and underwater mountains.',
       ],
       offlineActivity: 'Stand in a large room or hallway and clap once. Listen for the echo. Now try it in a smaller room — is the echo faster or slower? Try clapping near a wall vs in the middle of a room. You\'re doing exactly what a dolphin does: using sound to understand the shape of your environment.',
       concepts: [
@@ -10095,7 +10760,9 @@ They never argued about which silk was best again. Because the answer, they now 
     },
   },
   {
+    id: 71,
     slug: 'girl-grew-forest',
+    tradition: 'Northeast India',
     story: { title: 'The Girl Who Grew a Forest', tagline: 'Reforestation and carbon science.', content: `
 **The Empty Sandbar**
 
@@ -10176,57 +10843,111 @@ And every morning, Junali still paddles out to her forest and plants one more tr
     playground: 'girl-grew-forest' as const,
     level0: {
       vocabulary: [
-        ['Carbon sequestration', 'The process of capturing and storing carbon dioxide from the atmosphere — trees do this naturally through photosynthesis'],
-        ['Ecological succession', 'The gradual process by which one community of plants and animals replaces another over time'],
-        ['Pioneer species', 'The first plants to colonize bare or degraded land — fast-growing species that prepare the soil for others'],
-        ['Biodiversity', 'The variety of all living things in an ecosystem — more diverse systems are more resilient and productive'],
-        ['Nitrogen fixation', 'The conversion of atmospheric nitrogen gas into forms plants can use — done by bacteria in the roots of certain trees and legumes'],
+        ['Ecological succession', 'The gradual process by which one community of plants and animals replaces another over time \u2014 bare land becomes grassland, then shrubland, then forest'],
+        ['Pioneer species', 'The first plants to colonize bare or degraded land \u2014 fast-growing, sun-loving species that prepare the soil for others'],
+        ['Carbon sequestration', 'The process of capturing and storing atmospheric CO\u2082 \u2014 trees do this naturally by turning carbon dioxide into wood through photosynthesis'],
+        ['Erosion', 'The wearing away of soil by wind and water \u2014 roots prevent it, bare land suffers it'],
+        ['Biodiversity', 'The variety of all living things in an ecosystem \u2014 more diverse systems are more resilient and productive'],
+        ['Nitrogen fixation', 'The conversion of atmospheric nitrogen gas into forms plants can use \u2014 done by bacteria in the roots of certain trees and legumes'],
       ],
       trueFalse: [
         { statement: 'A single person cannot grow an entire forest.', isTrue: false, explanation: 'Jadav Payeng, the "Forest Man of Majuli" who inspired this story, planted trees on a barren sandbar starting in 1979. By 2009, his forest had grown to 550 hectares (larger than Central Park) and supports elephants, tigers, rhinos, and over 100 bird species.' },
-        { statement: 'Young, fast-growing forests absorb more carbon dioxide per year than old-growth forests.', isTrue: true, explanation: 'Young forests in their rapid growth phase absorb carbon dioxide at a higher rate because they are actively building new wood, leaves, and roots. Old-growth forests store enormous amounts of carbon but absorb less new carbon annually because growth has slowed.' },
+        { statement: 'Young, fast-growing forests absorb more carbon dioxide per year than old-growth forests.', isTrue: true, explanation: 'Young forests in their rapid growth phase absorb CO\u2082 at a higher rate because they are actively building new wood, leaves, and roots. Old-growth forests store enormous amounts of carbon but absorb less new CO\u2082 annually because growth has slowed.' },
         { statement: 'You can plant any tree species and it will help restore a forest.', isTrue: false, explanation: 'Successful reforestation requires choosing the right species for local soil, climate, and ecological conditions. Planting non-native species can actually harm ecosystems. The best approach uses native pioneer species that fix nitrogen and build soil, creating conditions for later species to establish naturally.' },
       ],
       facts: [
-        'A single mature tree can absorb roughly 22 kg of carbon dioxide per year and release enough oxygen for two people to breathe. A hectare of forest stores 100-400 tonnes of carbon in its biomass and soil.',
-        'Jadav Payeng began planting on a barren sandbar in the Brahmaputra River in 1979. His forest now covers 550 hectares and supports a complete ecosystem including elephants, Bengal tigers, Indian rhinoceros, and over 100 bird species.',
-        'Nitrogen-fixing pioneer trees like Albizia can add 50-200 kg of nitrogen per hectare per year to degraded soil, jump-starting the natural succession process and enabling other species to establish and grow.',
+        'A single mature tree can absorb roughly 22 kg of CO\u2082 per year and release enough oxygen for two people to breathe. A hectare of forest stores 100\u2013400 tonnes of carbon in its biomass and soil.',
+        'Jadav Payeng began planting on a barren sandbar in the Brahmaputra in 1979. His forest now covers 550 hectares and supports elephants, Bengal tigers, Indian rhinoceros, and over 100 bird species.',
+        'Nitrogen-fixing pioneer trees like Albizia can add 50\u2013200 kg of nitrogen per hectare per year to degraded soil, jump-starting the succession process and enabling other species to grow.',
       ],
-      offlineActivity: 'Plant a mini-forest experiment. Collect 5-10 seeds from local trees (look under trees for fallen seeds or fruits). Plant them in small pots with soil. Also leave one pot with just bare soil as a control. Water them equally and observe over 4-6 weeks. Which seeds sprout first? These are your pioneer species. Measure and record growth weekly. Calculate how much taller the fastest grower gets compared to the slowest — this mirrors how real forests develop with fast pioneers and slow successors.',
+      offlineActivity: 'Plant a mini-forest experiment. Collect 5\u201310 seeds from local trees (look under trees for fallen seeds or fruits). Plant them in small pots with soil. Leave one pot with just bare soil as a control. Water them equally and observe over 4\u20136 weeks. Which seeds sprout first? These are your pioneer species. Measure and record growth weekly. Calculate how much taller the fastest grower gets compared to the slowest \u2014 this mirrors how real forests develop with fast pioneers and slow successors.',
+      offlineActivityDiagram: 'ActivityTreePlantDiagram',
+      codeTeaser: `# How many trees does it take to offset one car?
+car_co2_per_year = 4600   # kg CO2 (average car)
+tree_co2_per_year = 22    # kg CO2 absorbed by one mature tree
+
+trees_needed = car_co2_per_year / tree_co2_per_year
+print(f"One car emits {car_co2_per_year} kg CO2/year")
+print(f"One tree absorbs {tree_co2_per_year} kg CO2/year")
+print(f"Trees needed to offset one car: {trees_needed:.0f}")
+
+# Jadav Payeng planted 1 tree/day for 30 years
+total_trees = 1 * 365 * 30
+offset_cars = (total_trees * tree_co2_per_year) / car_co2_per_year
+print(f"\\nPayeng planted ~{total_trees:,} trees")
+print(f"That offsets ~{offset_cars:.0f} cars every year!")`,
+      referenceLinks: [
+        { slug: 'plant-biology', reason: 'How roots, stems, and leaves work together \u2014 the biology behind photosynthesis and tree growth' },
+        { slug: 'ecosystems-and-biomes', reason: 'Energy flow and carbon cycling in forest ecosystems \u2014 why trees matter for climate' },
+      ],
+      nextLessons: [
+        { slug: 'banyan-tree-witness', reason: 'A single banyan can cover an acre \u2014 explore how trees grow, store carbon, and support entire ecosystems' },
+        { slug: 'honey-hunters-climb', reason: 'Bees pollinate the trees that make forests possible \u2014 the hidden link between insects and reforestation' },
+        { slug: 'bridge-that-grew', reason: 'Living root bridges of Meghalaya \u2014 another story of trees as engineering solutions' },
+      ],
+      quiz: [
+        { question: 'What is the correct order of ecological succession?', options: ['Forest \u2192 shrubs \u2192 grass \u2192 bare land', 'Bare land \u2192 grasses \u2192 shrubs \u2192 forest', 'Shrubs \u2192 bare land \u2192 forest \u2192 grass', 'Forest \u2192 bare land \u2192 grass \u2192 shrubs'], answer: 1 },
+        { question: 'Where does most of a tree\u2019s mass come from?', options: ['Soil through the roots', 'Water from rain', 'CO\u2082 from the air', 'Minerals from rocks'], answer: 2 },
+        { question: 'Why do pioneer species eventually get replaced?', options: ['They die of old age', 'Animals eat them all', 'They create shade and soil that favour taller, slower-growing species', 'Humans cut them down'], answer: 2 },
+        { question: 'What prevents erosion on a hillside?', options: ['More rainfall', 'Removing trees to reduce weight', 'Plant roots holding the soil together', 'Paving the surface with concrete'], answer: 2 },
+        { question: 'Jadav Payeng\u2019s forest on Majuli Island is roughly how big?', options: ['5 hectares (a large garden)', '55 hectares (a small farm)', '550 hectares (larger than Central Park)', '5,500 hectares (a national park)'], answer: 2 },
+      ],
       concepts: [
         {
-          title: 'Primary and Secondary Succession',
+          title: 'How a Forest Grows from Nothing',
           paragraphs: [
-          '**Ecological succession** is the process by which biological communities change over time, with one community of species gradually replacing another. **Primary succession** begins on bare surfaces with no prior life — cooled lava, retreating glaciers, or newly formed sand dunes. It starts with lichens and mosses that break down rock into soil, followed by grasses, shrubs, and eventually trees over centuries.',
-          '**Secondary succession** occurs on land that was previously vegetated but disturbed — abandoned farmland, burned forest, or logged areas. Because soil and seed banks already exist, secondary succession is much faster than primary succession, often reaching forest in 50-100 years rather than the centuries required for primary succession.',
-          'The story of a girl growing a forest describes secondary succession, likely on degraded land. Early colonizers (**pioneer species**) like grasses and fast-growing shrubs stabilize soil, fix nitrogen, and create shade. These conditions favor slower-growing, shade-tolerant tree species that eventually overtop and replace the pioneers. The pioneers create the conditions for their own replacement — a process ecologists call **facilitation**.',
+            'Imagine an empty car park \u2014 just concrete and dust. Now imagine nobody touches it for 200 years. What happens? First, cracks appear. Tiny mosses and grasses push through. Their roots break the concrete further. Dead grass adds a thin layer of soil. After a few years, shrubs arrive \u2014 they can grow in shallow soil. Their leaves fall, decay, and make the soil deeper. Insects and worms move in. After a few decades, tree seedlings sprout in the shade of the shrubs. The trees grow taller than the shrubs, stealing the sunlight. The shrubs die back. Eventually, you have a forest standing where a car park used to be.',
+            'This process is called **ecological succession**. It always follows the same sequence: bare ground \u2192 mosses and grasses (**pioneer species**) \u2192 shrubs \u2192 young trees \u2192 mature forest. The pioneers are the key \u2014 they are the first to arrive because they can survive in terrible conditions (no shade, no soil, blazing sun). But here is the twist: *they create the very conditions that allow their replacements to grow*. Grasses build soil. Shrubs create shade. Young trees create the canopy that shade-loving species need. Each stage makes the next one possible.',
+            'In the story, Junali plants sisoo and bamboo first. These are classic pioneers \u2014 fast-growing, tough, and able to survive in sand. Their roots grip the sand and hold it in place. Their fallen leaves rot and become soil. Within a few years, the "sandbar" starts to feel like land. That is succession in action, accelerated by a girl with a plan.',
+            '**Try this:** Find a crack in a pavement or an abandoned patch of ground. Look closely. Can you spot the pioneers? Mosses, weeds, tiny grasses? These are the very first stage of succession happening right in front of you.',
+            '**Check yourself:** Why do pioneer species eventually disappear from the forest they helped create? (Hint: think about what happens when taller plants block the sunlight.)',
           ],
-          keyIdea: 'Primary succession starts from bare rock and takes centuries; secondary succession restarts on disturbed soil and takes decades. Pioneer species facilitate their own replacement by creating conditions that favor later species.',
+          keyIdea: 'Forests grow in stages: bare ground \u2192 pioneers \u2192 shrubs \u2192 young trees \u2192 mature forest. Each stage creates the conditions the next stage needs. Pioneers are the heroes who start the process but get replaced by what they made possible.',
+          diagram: 'ForestSuccessionDiagram',
         },
         {
-          title: 'Facilitation: How Species Help Each Other',
+          title: 'Carbon \u2014 The Invisible Gift',
           paragraphs: [
-          '**Facilitation** is the ecological process where one species modifies the environment in ways that benefit other species. Pioneer plants on bare ground provide shade (reducing soil temperature and evaporation), add organic matter to soil (improving water retention and nutrient availability), and host symbiotic fungi (mycorrhizae) that help later-arriving plants absorb nutrients.',
-          'Nitrogen-fixing plants are especially important facilitators. Species like *Albizia* (silk tree) and *Sesbania* harbor bacteria in their root nodules that convert atmospheric nitrogen (N₂) into ammonia (NH₃) — a form plants can use. A single nitrogen-fixing tree can add 50-200 kg of nitrogen per hectare per year to the soil, replacing what was lost from degraded land and enabling non-fixing species to establish.',
-          'Jadav Payeng, the real-life "Forest Man of Majuli" who inspired this story, began planting on a barren sandbar in the Brahmaputra. He started with nitrogen-fixing bamboo and fast-growing native trees. Within 30 years, the planted area had grown into a 550-hectare forest supporting elephants, tigers, rhinos, deer, and over 100 bird species. One man accelerated natural succession by strategically planting facilitator species.',
+            'Here is a question that puzzled scientists for centuries: **where does a tree\u2019s mass come from?** A mature oak tree can weigh 10,000 kg. Did all that mass come from the soil? If you weighed the soil before and after growing a tree, you would find the soil barely lost any weight. So where did 10,000 kg of tree come from?',
+            'The answer is the air. Specifically, **carbon dioxide (CO\u2082)** \u2014 an invisible gas that makes up about 0.04% of the atmosphere. Through **photosynthesis**, trees pull CO\u2082 from the air, split it apart using energy from sunlight, keep the carbon (C), and release the oxygen (O\u2082) for us to breathe. The carbon becomes wood, bark, leaves, and roots. A tree is, quite literally, *solid air*.',
+            'The formula is: **6CO\u2082 + 6H\u2082O + sunlight \u2192 C\u2086H\u2081\u2082O\u2086 + 6O\u2082**. In plain English: six molecules of carbon dioxide plus six molecules of water, powered by sunlight, produce one molecule of sugar (glucose) plus six molecules of oxygen. The tree then converts that sugar into cellulose and lignin \u2014 the structural materials of wood.',
+            'This means every tree is a **carbon store**. A single mature tree holds roughly 50% carbon by dry weight. When Junali plants a tree, she is building a machine that pulls CO\u2082 from the atmosphere and locks it away as solid wood. One tree absorbs about **22 kg of CO\u2082 per year**. Multiply that by a thousand trees and you have a serious climate solution.',
+            '**Check yourself:** If a tree weighing 500 kg is roughly 50% carbon by dry weight, and each kg of carbon originally came from 3.67 kg of CO\u2082, how much CO\u2082 did that tree pull from the air over its lifetime? (Answer: 500 \u00d7 0.5 \u00d7 3.67 = 917.5 kg.)',
           ],
-          keyIdea: 'Facilitation drives succession: early species modify soil, light, and nutrients in ways that allow later species to establish. Nitrogen-fixing plants are keystone facilitators that jump-start the process on degraded land.',
+          keyIdea: 'Most of a tree\u2019s mass comes from CO\u2082 in the air, not from the soil. Through photosynthesis, trees convert atmospheric carbon into solid wood \u2014 making every forest a massive carbon store.',
+          diagram: 'ForestCarbonCycleDiagram',
         },
         {
-          title: 'Carbon Sequestration: Forests as Climate Solutions',
+          title: 'Roots Hold Everything Together',
           paragraphs: [
-          'Growing forests absorb CO₂ from the atmosphere through photosynthesis and store it as **biomass** (wood, leaves, roots) and **soil organic carbon**. A typical tropical forest stores 150-250 tonnes of carbon per hectare in living biomass, plus 50-100 tonnes in the soil. The process of increasing this stored carbon over time is called **carbon sequestration**.',
-          'Young, actively growing forests sequester carbon fastest because they are adding biomass rapidly. A secondary forest recovering from disturbance can absorb 5-15 tonnes of CO₂ per hectare per year during its first 20-30 years — roughly the annual emissions of 1-3 average cars per hectare. Old-growth forests sequester carbon more slowly (they are near equilibrium) but contain the largest total stocks.',
-          'Afforestation (planting forests on previously unforested land) and reforestation (replanting after deforestation) are recognized climate change mitigation strategies. The IPCC estimates that global forest restoration could sequester 3.6 billion tonnes of CO₂ per year — about 10% of current annual emissions. However, the permanence of forest carbon storage depends on protecting those forests from future clearing, fire, and climate-driven die-off.',
+            'Try this thought experiment. Take a bucket of sand and tilt it to 45 degrees. The sand slides off immediately. Now imagine that same sand threaded with thousands of thin, tangled threads \u2014 like a net woven through it. Tilt it again. The sand holds. That is what roots do for soil.',
+            'Forest soil is not just dirt. It is a layered system that took centuries to form. The top layer (**topsoil**) is rich in decayed leaves, dead insects, and worm castings \u2014 this is called **humus**, and it is where most nutrients live. Below that is **subsoil**, denser and full of minerals washed down from above. Below that is **parent rock**, slowly crumbling into future soil. Tree roots penetrate all these layers, binding them together like rebar in concrete.',
+            'When you remove the trees (deforestation), the roots die. The next monsoon rain hits bare soil with nothing to hold it. The topsoil \u2014 the most nutrient-rich layer, the one that took centuries to build \u2014 washes away in hours. This is **erosion**, and it is devastating. Without topsoil, new plants struggle to grow. Without plants, more soil washes away. It is a downward spiral.',
+            'In the story, Junali\u2019s sisoo trees "put down roots that gripped the sand like fingers, and their roots held the soil together, and the soil held more moisture, and the moisture helped more trees survive." That is not poetic exaggeration \u2014 it is exactly how reforestation works. Roots hold soil. Soil holds water. Water supports more plants. More plants make more roots. It is a virtuous cycle.',
+            '**Try this:** After the next rain, compare a bare patch of ground with a grassy patch. Where does the water pool? Where does the soil look washed away? You are seeing erosion versus root protection in real time.',
           ],
-          keyIdea: 'Growing forests remove CO₂ from the atmosphere and store it as biomass and soil carbon. Young forests sequester carbon fastest, absorbing 5-15 tonnes of CO₂ per hectare per year during active growth.',
-          diagram: 'CarbonCycleDiagram',
+          keyIdea: 'Tree roots bind soil layers together and prevent erosion. Without roots, monsoon rains can strip centuries of topsoil in hours. Reforestation reverses this: roots hold soil, soil holds water, water supports more trees.',
+          diagram: 'ForestSoilLayersDiagram',
+        },
+        {
+          title: 'One Girl, 300 Acres \u2014 The Maths of Scaling Up',
+          paragraphs: [
+            'Junali\u2019s story sounds like a fairy tale, but the maths behind it is completely real. One tree per day for five years is 1,825 trees. Over 30 years, that is nearly 11,000 trees. If you space trees 3 metres apart (standard for tropical reforestation), each tree needs about 9 square metres. So 11,000 trees cover roughly 99,000 m\u00b2 \u2014 about 10 hectares, or 25 acres.',
+            'But Jadav Payeng, the real person who inspired this story, achieved far more than that. His Molai Forest on Majuli Island grew to **550 hectares** (over 1,350 acres) because nature helps. Once pioneer trees establish, they drop seeds. Wind and birds carry seeds further. Animals move in and spread seeds in their droppings. The forest *self-propagates*. Payeng planted the first trees; nature multiplied them.',
+            'Here is the scaling maths: Payeng\u2019s 550 hectares of forest absorb roughly 5\u201315 tonnes of CO\u2082 per hectare per year during active growth. At 10 tonnes per hectare, that is **5,500 tonnes of CO\u2082 per year** \u2014 equivalent to taking about 1,200 cars off the road. One man, planting one tree at a time, created the carbon-offsetting equivalent of removing over a thousand cars from traffic. Every. Single. Year.',
+            'The lesson is about **compound growth**. One tree leads to shade. Shade leads to soil moisture. Moisture leads to more seedlings. More seedlings lead to a canopy. A canopy creates a microclimate that sustains itself. Small, consistent action, compounded over time, produces extraordinary results. Payeng did not build a forest in a day. He built a system that built itself.',
+            '**Check yourself:** If you planted 2 trees per day instead of 1, how many years would it take to plant 10,000 trees? (Answer: 10,000 \u00f7 2 \u00f7 365 = about 13.7 years.) What if 10 volunteers each planted 1 tree per day? (Answer: 10,000 \u00f7 10 \u00f7 365 = about 2.7 years.)',
+          ],
+          keyIdea: 'One tree per day, compounded over decades, creates a self-sustaining forest. Jadav Payeng\u2019s 550-hectare forest offsets roughly 1,200 cars per year \u2014 proof that small, persistent action scales to massive impact.',
+          diagram: 'ForestScalingDiagram',
         },
       ],
     },
   },
-  {
+    {
+    id: 72,
     slug: 'firewalker',
+    tradition: 'Northeast India',
     story: { title: 'The Firewalker\'s Daughter', tagline: 'Walking on coals — heat transfer physics.', content: `
 **The Girl With Maps in Her Head**
 
@@ -10359,7 +11080,9 @@ Anusha kept drawing maps. Maps of her school. Maps of her grandmother's kitchen.
     },
   },
   {
+    id: 73,
     slug: 'frogs-sing-rain',
+    tradition: 'Northeast India',
     story: { title: 'Why Frogs Sing After Rain', tagline: 'Wetland chorus — bioacoustics.', content: `
 **The Dry Pond**
 
@@ -10496,7 +11219,9 @@ And that is why, every monsoon, when the first rain fills the ponds of Assam, th
     },
   },
   {
+    id: 74,
     slug: 'eri-silk',
+    tradition: 'Northeast India',
     story: { title: 'How the Eri Silk Moth Found Peace', tagline: 'Non-violent silk — biology meets ethics.', content: `
 **The Cocoon's Fear**
 
@@ -10577,21 +11302,21 @@ Among the people of Assam, they say that eri silk is the warmest silk in the wor
     playground: 'eri-silk' as const,
     level0: {
       vocabulary: [
-        ['Echolocation', 'Finding objects by sending out sound and listening for the echo that bounces back'],
-        ['Ultrasonic', 'Sound waves too high-pitched for humans to hear (above 20,000 Hz)'],
-        ['Echo', 'Sound that bounces off a surface and returns to the listener'],
-        ['Frequency', 'How many sound waves pass a point per second, measured in Hertz (Hz)'],
-        ['Transducer', 'A device that converts one form of energy to another — like sound to electricity'],
+        ['Echolocation', 'Finding objects by sending out a sound and listening for the echo \u2014 the time delay reveals distance, and the echo\u2019s character reveals the object\u2019s size, shape, and material'],
+        ['Ultrasonic', 'Sound waves above 20,000 Hz, too high-pitched for human ears \u2014 dolphins click at 20\u2013130 kHz, and the HC-SR04 sensor operates at 40 kHz'],
+        ['Time-of-flight', 'The time it takes for a signal (sound, light, or radio) to travel to a target and return \u2014 divide by 2 and multiply by speed to get distance'],
+        ['Transducer', 'A device that converts one form of energy to another \u2014 the HC-SR04\u2019s speaker converts electricity to sound, and its microphone converts sound back to electricity'],
+        ['Biomimicry', 'Designing technology by copying solutions that nature evolved \u2014 the dolphin\u2019s melon inspired acoustic lenses, and bat sonar inspired ultrasonic cane sensors for the visually impaired'],
       ],
       trueFalse: [
-        { statement: 'Dolphins can "see" underwater using sound.', isTrue: true, explanation: 'Dolphins send out clicks and listen for echoes. Their brain creates a 3D mental image from the echo patterns — they can detect fish, obstacles, and even the shape of objects in murky water where eyes are useless.' },
-        { statement: 'Sound travels faster in water than in air.', isTrue: true, explanation: 'Sound travels about 1,500 m/s in water vs 343 m/s in air — over 4 times faster. This is because water molecules are packed closer together, transmitting vibrations more efficiently.' },
-        { statement: 'Only marine animals use echolocation.', isTrue: false, explanation: 'Bats use echolocation in air to catch insects at night. Some birds (oilbirds, swiftlets) and even some blind humans have learned to use tongue clicks to navigate by echo.' },
+        { statement: 'The Ganges river dolphin is completely blind and cannot detect even light.', isTrue: false, explanation: 'Its eyes can detect light and dark (it knows if it\u2019s day or night), but they lack lenses and cannot form images. It is functionally blind for navigation but not totally without light perception.' },
+        { statement: 'Sound travels faster in water than in air because water molecules are closer together.', isTrue: true, explanation: 'Water molecules are packed tightly, so vibrations pass from one to the next much faster \u2014 1,480 m/s in water vs 343 m/s in air. This is why sonar is the dominant sensing technology underwater.' },
+        { statement: 'An ultrasonic sensor measures distance by measuring how loud the echo is.', isTrue: false, explanation: 'It measures the time the echo takes to return, not its loudness. Distance = speed \u00d7 time / 2. Loudness tells you about the object\u2019s material and size, but not its distance.' },
       ],
       facts: [
-        'The Gangetic river dolphin is nearly blind — its eyes can only tell light from dark. It navigates entirely by sonar, clicking up to 200 times per second.',
-        'Medical ultrasound uses the same principle as dolphin sonar — high-frequency sound waves bounce off organs and create an image. This is how doctors see babies before they\'re born.',
-        'Submarines use sonar arrays that can detect objects hundreds of kilometers away. The same technology helps map the ocean floor, discovering new species and underwater mountains.',
+        'The Gangetic river dolphin is nearly blind \u2014 its eyes can only tell light from dark. It navigates entirely by sonar, clicking up to 200 times per second.',
+        'Medical ultrasound uses the same principle as dolphin sonar \u2014 high-frequency sound waves bounce off organs and create an image. This is how doctors image babies before they\u2019re born.',
+        'Submarines use sonar arrays that can detect objects hundreds of kilometres away. The same technology helps map the ocean floor, discovering new species and underwater mountains.',
       ],
       offlineActivity: 'Stand in a large room or hallway and clap once. Listen for the echo. Now try it in a smaller room — is the echo faster or slower? Try clapping near a wall vs in the middle of a room. You\'re doing exactly what a dolphin does: using sound to understand the shape of your environment.',
       concepts: [
@@ -10627,7 +11352,9 @@ Among the people of Assam, they say that eri silk is the warmest silk in the wor
     },
   },
   {
+    id: 75,
     slug: 'river-braid',
+    tradition: 'Northeast India',
     story: { title: 'Why Rivers Braid Near the Sea', tagline: 'River patterns — braided channel geomorphology.', content: `
 **The River That Loved the Land**
 
@@ -10754,7 +11481,9 @@ So the next time you see a river braid, know this: it is not confused, and it is
     },
   },
   {
+    id: 76,
     slug: 'lotus-float',
+    tradition: 'Northeast India',
     story: { title: 'How the Lotus Learned to Float', tagline: 'Buoyancy and the lotus effect.', content: `
 **The Seed at the Bottom**
 
@@ -10893,7 +11622,9 @@ And Poddo, petals open to the sun, thought: *He\u2019s right. My fear wasn\u2019
     },
   },
   {
+    id: 77,
     slug: 'first-rice',
+    tradition: 'Northeast India',
     story: { title: 'How the First Rice Was Planted', tagline: 'A Tiwa origin tale — the birth of agriculture.', content: `
 **Before Rice**
 
@@ -11032,7 +11763,9 @@ Every grain of rice on your plate began with a girl on a hillside, watching bird
     },
   },
   {
+    id: 78,
     slug: 'dhol-drum',
+    tradition: 'Northeast India',
     story: { title: 'How the Dhol Drum Got Its Thunder', tagline: 'The heartbeat of celebration — percussion physics.', content: `
 **The Silent Drum**
 
@@ -11176,7 +11909,9 @@ And from that Bihu onward, the dhol has carried the thunder\u2019s voice. If you
     },
   },
   {
+    id: 79,
     slug: 'little-chef',
+    tradition: 'Northeast India',
     story: { title: 'The Little Chef of Jorhat', tagline: 'Cooking as chemistry.', content: `
 **Majoni's Kitchen**
 
@@ -11321,7 +12056,9 @@ Majoni thought about it and nodded. The secret wasn't a special ingredient or a 
     },
   },
   {
+    id: 80,
     slug: 'flying-squirrel',
+    tradition: 'Northeast India',
     story: { title: 'The Flying Squirrel of Hollongapar', tagline: 'Gliding through the canopy — aerodynamics.', content: `
 **The Night Hike**
 
@@ -11462,7 +12199,9 @@ Biren nodded. He knew he would come back. The daytime forest was wonderful, but 
     },
   },
   {
+    id: 81,
     slug: 'fireflies-dont-burn',
+    tradition: 'Northeast India',
     story: { title: 'Why Fireflies Don\'t Burn', tagline: 'Cold light chemistry — bioluminescence.', content: `
 **The Question**
 
@@ -11609,7 +12348,9 @@ Junmoni grinned. She couldn't wait.
     },
   },
   {
+    id: 82,
     slug: 'seed-travel',
+    tradition: 'Northeast India',
     story: { title: 'The Seed That Traveled a Thousand Miles', tagline: 'How seeds move — dispersal mechanisms.', content: `
 **The Seed Falls**
 
@@ -11749,7 +12490,9 @@ The people of the valley called the tree **Meihou-thing** — the "traveler tree
     },
   },
   {
+    id: 83,
     slug: 'siang-river',
+    tradition: 'Northeast India',
     story: { title: 'How the Siang River Carved Its Path', tagline: 'Geological erosion over millions of years.', content: `
 **The River That Could Choose**
 
@@ -11882,7 +12625,9 @@ The Siang chose the hard path, and the hard path chose her back. That is the sto
     },
   },
   {
+    id: 84,
     slug: 'takin-face',
+    tradition: 'Northeast India',
     story: { title: 'How the Takin Got Its Funny Face', tagline: 'Unusual shapes — genetics and morphology.', content: `
 **The Great Animal Workshop**
 
@@ -12048,7 +12793,9 @@ The Great Maker, watching from the top of Kanchenjunga, smiled. The takin was he
     },
   },
   {
-    slug: 'talking-parrot-hajo', story: { title: 'The Talking Parrot of Hajo', tagline: 'A parrot that speaks every language.', content: `
+    id: 85,
+    slug: 'talking-parrot-hajo',
+    tradition: 'Northeast India', story: { title: 'The Talking Parrot of Hajo', tagline: 'A parrot that speaks every language.', content: `
 **The Hill of Many Prayers**
 
 **Hajo** is a small town in Assam where something remarkable happens every day. On one hill stands **Hayagriva Madhava Temple**, sacred to Hindus. Nearby rises the **Poa Mecca mosque**, revered by Muslims. And not far away are ancient sites that Buddhists consider holy. Three faiths, side by side, in a town so small you can walk across it in twenty minutes.
@@ -12159,7 +12906,9 @@ The people of Assam still tell Hira's story when someone asks how Hajo stays pea
     },
   },
   {
-    slug: 'secret-garden-loktak', story: { title: 'The Secret Garden of Loktak Lake', tagline: 'Floating islands that grow gardens.', content: `
+    id: 86,
+    slug: 'secret-garden-loktak',
+    tradition: 'Northeast India', story: { title: 'The Secret Garden of Loktak Lake', tagline: 'Floating islands that grow gardens.', content: `
 **The Floating World**
 
 **Loktak Lake** in **Manipur** is unlike any lake in the world. Its islands *float*. They are made of tangled vegetation and organic matter called **phumdi** — thick enough to walk on, light enough to drift with the wind. Some are as small as a dining table. Others are large enough to hold houses, gardens, and entire families.
@@ -12297,7 +13046,9 @@ Tomba grew up to become a healer himself — one who always asked before he pick
     },
   },
   {
-    slug: 'stars-ziro-valley', story: { title: 'Why Stars Are Brighter in Ziro Valley', tagline: 'Light pollution and astronomy.', content: `
+    id: 87,
+    slug: 'stars-ziro-valley',
+    tradition: 'Northeast India', story: { title: 'Why Stars Are Brighter in Ziro Valley', tagline: 'Light pollution and astronomy.', content: `
 **The Boy Who Counted Stars**
 
 In **Ziro Valley**, in the heart of **Arunachal Pradesh**, where the Apatani people have grown rice in flooded terraces for longer than anyone can count, there lived a boy named **Tamo**. Tamo was ten years old and he had a hobby that no one else in his family understood: he counted stars.
@@ -12368,6 +13119,7 @@ And that is why, the people of Ziro Valley say, their stars are the brightest in
     stem: { title: 'Light Pollution & Astronomy', description: 'Where darkness reveals the universe.', icon: Sparkles, color: 'from-indigo-400 to-violet-500', skills: ['Understand light pollution: sky glow, glare, and their effect on astronomical observation', 'Analyze the inverse square law for light intensity falloff', 'Model the Bortle scale for sky darkness classification', 'Calculate limiting stellar magnitude visible under different light conditions'], project: {
         title: 'Measure Light Pollution in Your Area',
         description: 'Quantify sky brightness at multiple locations using star counts and a phone-based sky quality meter.',
+        outputDiagram: 'StarSkyQualityDiagram',
         steps: [
           'Learn to identify 3-4 constellations and their component stars with known magnitudes',
           'On a clear night, count visible stars in a specific constellation from 3 locations (urban, suburban, rural)',
@@ -12424,6 +13176,7 @@ And that is why, the people of Ziro Valley say, their stars are the brightest in
             "**Check yourself:** If someone says 'magnitude 3 is two steps above magnitude 5,' how many times brighter is it? (Answer: 2.5 \u00d7 2.5 = about 6.3 times brighter.)",
           ],
           keyIdea: "Each magnitude step multiplies brightness by 2.5 (not adds). Five steps = 100\u00d7. This is a logarithmic scale \u2014 it matches how our eyes actually perceive brightness.",
+          diagram: 'StarBrightnessStepDiagram',
         },
         {
           title: "Why Do Stars Twinkle?",
@@ -12446,12 +13199,41 @@ And that is why, the people of Ziro Valley say, their stars are the brightest in
             "The fix is surprisingly simple: **shielded lights** that point downward instead of spraying light in all directions. A shielded streetlight provides the same ground illumination with less energy and almost no sky glow. Some communities in India are beginning to adopt these \u2014 Hanle in Ladakh became India's first dark sky reserve.",
           ],
           keyIdea: "The Bortle scale rates sky darkness from 1 (pristine) to 9 (inner city). Light pollution does not just hide stars \u2014 it kills birds, disorients turtles, and disrupts insect pollination. Shielded lights are the fix.",
+          diagram: 'StarBortleScaleDiagram',
         },
+      ],
+      offlineActivityDiagram: 'ActivityStarCountDiagram',
+      codeTeaser: `# How many stars can you see?
+# The Bortle scale meets the magnitude limit
+
+bortle_class = 4          # your sky darkness (1-9)
+mag_limit = 7.0 - (bortle_class * 0.5)
+
+print(f"From a Class {bortle_class} sky:")
+print(f"You can see stars down to magnitude {mag_limit:.1f}")
+
+# Each magnitude step = 2.5× more stars
+total_stars = int(50 * (2.512 ** mag_limit))
+print(f"That's roughly {total_stars:,} visible stars!")
+
+# Try changing bortle_class to 1 (Ziro Valley)
+# or 9 (inner city) — watch the count change`,
+      referenceLinks: [
+        { slug: 'light-and-color', reason: 'Understand how light wavelengths and Rayleigh scattering work — the same physics behind both sunsets and star colour' },
+        { slug: 'optics-and-lenses', reason: 'Learn how telescopes gather more light than your eyes, letting you see fainter stars' },
+        { slug: 'solar-system-and-space', reason: 'Explore what else is out there beyond the stars you can see — planets, galaxies, and nebulae' },
+      ],
+      nextLessons: [
+        { slug: 'star-fell-deepor', reason: 'Explores what happens when space objects actually reach Earth — meteorites, craters, and impact physics' },
+        { slug: 'orange-sunsets-assam', reason: 'Uses the same Rayleigh scattering that makes stars twinkle to explain why Assam sunsets glow orange' },
+        { slug: 'kingfisher-blue', reason: 'Another story where light physics creates beauty — structural colour in feathers instead of pigment' },
       ],
     },
   },
   {
-    slug: 'mishing-fish', story: { title: 'How the Mishing People Learned to Fish', tagline: 'Traditional fishing meets science.', content: `
+    id: 88,
+    slug: 'mishing-fish',
+    tradition: 'Northeast India', story: { title: 'How the Mishing People Learned to Fish', tagline: 'Traditional fishing meets science.', content: `
 **The Hungry Village**
 
 Long ago, before anyone can remember, the **Mishing** people lived on the banks of the **Brahmaputra** in houses built high on bamboo stilts. They grew rice in the wet fields and gathered wild greens from the forest. But when the monsoon floods came and the fields went underwater, there was little to eat.
@@ -12570,7 +13352,9 @@ To this day, the Mishing people of Assam are among the finest river fishers in a
     },
   },
   {
-    slug: 'coconut-jackfruit', story: { title: 'The Coconut That Wanted to Be a Jackfruit', tagline: 'Genetics and species identity.', content: `
+    id: 89,
+    slug: 'coconut-jackfruit',
+    tradition: 'Northeast India', story: { title: 'The Coconut That Wanted to Be a Jackfruit', tagline: 'Genetics and species identity.', content: `
 **The Envious Coconut**
 
 In a garden in **Jorhat**, there grew two trees side by side — a **coconut palm**, tall and slender, and a **jackfruit tree**, wide and generous with shade. On the coconut palm hung a small, round coconut named **Nari**. On the jackfruit tree hung a massive, bumpy jackfruit named **Kothal**.
@@ -12694,7 +13478,9 @@ And in that garden in Jorhat, no coconut ever envied a jackfruit again — becau
     },
   },
   {
-    slug: 'paper-umbrella', story: { title: 'The Paper Umbrella of Sualkuchi', tagline: 'Paper engineering and waterproofing.', content: `
+    id: 90,
+    slug: 'paper-umbrella',
+    tradition: 'Northeast India', story: { title: 'The Paper Umbrella of Sualkuchi', tagline: 'Paper engineering and waterproofing.', content: `
 **The Leftover Silk**
 
 In the weaving village of **Sualkuchi**, on the banks of the Brahmaputra, every family owned a loom. The click-clack of shuttles was the village's heartbeat, and the air always smelled of raw silk and tamarind dye. **Meghali**, a girl of ten, was the daughter of the finest weaver in the village — her mother, **Bandana**, who could weave a *mekhela chador* so fine it could pass through a ring.
@@ -12817,7 +13603,9 @@ In Sualkuchi, the silk umbrella tradition continues. Every monsoon, the patchwor
     },
   },
   {
-    slug: 'witch-doctor', story: { title: 'The Witch Doctor\'s Apprentice', tagline: 'Medicinal plants and pharmacology.', content: `
+    id: 91,
+    slug: 'witch-doctor',
+    tradition: 'Northeast India', story: { title: 'The Witch Doctor\'s Apprentice', tagline: 'Medicinal plants and pharmacology.', content: `
 **The Boy Who Was Always Sick**
 
 In a **Tiwa** village perched on a misty hill in central Assam, there lived a boy named **Hambir** who caught every illness the seasons could throw at him. Monsoon fevers. Winter coughs. Spring allergies that made his eyes water like tiny rivers. The other children ran and climbed and swam; Hambir sat on the veranda with a blanket around his shoulders, sneezing.
@@ -12941,7 +13729,9 @@ When Oja Mahir was too old to tend his garden, Hambir took over. He expanded it,
     },
   },
   {
-    slug: 'turtle-slow', story: { title: 'Why Turtles Are Slow on Land', tagline: 'Evolution and body plan trade-offs.', content: `
+    id: 92,
+    slug: 'turtle-slow',
+    tradition: 'Northeast India', story: { title: 'Why Turtles Are Slow on Land', tagline: 'Evolution and body plan trade-offs.', content: `
 **The Speed Market**
 
 Long ago, before the world was fully made, there was a **Speed Market** on the banks of the Brahmaputra where every animal could buy speed. The market was run by the **River Spirit**, a shimmering figure made of mist and current, who measured out speed in little clay pots.
@@ -13059,7 +13849,9 @@ And that is why, to this very day, turtles are slow on land but fast in water. T
     },
   },
   {
-    slug: 'market-day-tura', story: { title: 'The Market Day Surprise', tagline: 'Economics and trade in a hill town.', content: `
+    id: 93,
+    slug: 'market-day-tura',
+    tradition: 'Northeast India', story: { title: 'The Market Day Surprise', tagline: 'Economics and trade in a hill town.', content: `
 **Market Morning**
 
 Every Saturday, the **Tura market** in the **Garo Hills** of Meghalaya came alive like a creature waking from sleep. By six in the morning, the stalls were up \u2014 bamboo poles and blue tarpaulins stretching down the main road. By seven, the road was a river of people, animals, and the most wonderful smells in the world.
@@ -13185,7 +13977,9 @@ The next Saturday, Rikme went back to the market with her fifty rupees \u2014 fo
     },
   },
   {
-    slug: 'elephant-corridor', story: { title: 'The Elephant Corridor', tagline: 'Wildlife corridors and habitat connectivity.', content: `
+    id: 94,
+    slug: 'elephant-corridor',
+    tradition: 'Northeast India', story: { title: 'The Elephant Corridor', tagline: 'Wildlife corridors and habitat connectivity.', content: `
 **The Night Visitors**
 
 In a village surrounded by **tea gardens** in upper Assam, the elephants came every October. They arrived at night \u2014 a herd of fifteen or twenty, silent as shadows despite their size \u2014 and walked through the village on their way from the hills to the river. They had been walking this path for longer than the village had existed. Longer than the tea gardens. Longer than anyone\u2019s memory.
@@ -13307,7 +14101,9 @@ The village discovered what Mrinmoyee had known all along: sharing space with el
     },
   },
   {
-    slug: 'golden-hilsa', story: { title: 'The Old Fisherman and the Golden Hilsa', tagline: 'Sustainable fishing and marine biology.', content: `
+    id: 95,
+    slug: 'golden-hilsa',
+    tradition: 'Northeast India', story: { title: 'The Old Fisherman and the Golden Hilsa', tagline: 'Sustainable fishing and marine biology.', content: `
 **The Man Who Knew the River**
 
 On the banks of the **Brahmaputra**, near a village where the river bends like a sleeping snake, there lived an old fisherman named **Boren**. He was seventy-two years old, his hands were rough as bark, and he had fished the same stretch of river since he was nine.
@@ -13374,62 +14170,105 @@ Boren kept fishing with his old net and his creaky boat. He never caught another
         'Coastal communities implement traditional fishing bans (closed seasons) backed by scientific data',
         'Seafood certification programs (like MSC) verify that fish products come from sustainable fisheries',
       ] },
-    illustration: '/content/illustrations/golden-hilsa-fisherman.webp', track: 'school', subjects: ['Biology' as Subject, 'Ecology' as Subject], estimatedHours: 12, playground: 'golden-hilsa' as const,
+    illustration: '/content/illustrations/golden-hilsa-fisherman.webp', track: 'school', subjects: ['Biology' as Subject, 'Ecology' as Subject],
+    toolSkills: ['Python' as Skill, 'NumPy' as Skill, 'Matplotlib' as Skill, 'Data Analysis' as Skill],
+    learningTracks: ['Science & Lab' as Track, 'Programming' as Track],
+    estimatedHours: 12, playground: 'golden-hilsa' as const,
     level0: {
-      vocabulary: [
-        ['Observation', 'Noticing and recording something carefully'],
-        ['Pattern', 'A repeated arrangement in nature or data'],
-        ['Variable', 'Something that can change or be measured'],
-        ['Evidence', 'Data supporting or disproving a claim'],
-        ['Model', 'A simplified version of something complex'],
-      ],
-      trueFalse: [
-        { statement: 'Science only happens in laboratories.', isTrue: false, explanation: 'Science happens everywhere — forests, kitchens, rivers, playgrounds.' },
-        { statement: 'Making mistakes helps you learn.', isTrue: true, explanation: 'Errors lead to discoveries. Penicillin was found from a contaminated experiment.' },
-        { statement: 'You need expensive equipment for science.', isTrue: false, explanation: 'Curiosity and observation are the most important scientific tools.' },
-      ],
-      facts: [
-        'NE India is one of 36 global biodiversity hotspots.',
-        'The scientific method has been used for over 1,000 years.',
-        'Teaching someone else is the best way to check understanding.',
-      ],
-      offlineActivity: 'Keep a nature journal for one week. Each day, draw and describe one observation. At the end, research your most interesting one.',
-    
       concepts: [
         {
-          title: "Fish Migration \u2014 The Journey Upstream",
+          title: 'Why Fish Swim Upstream \u2014 The Incredible Journey of Hilsa',
           paragraphs: [
-            "The **hilsa** (*Tenualosa ilisha*) is one of the most important migratory fish in South Asia, undertaking epic journeys from the **Bay of Bengal** upstream into rivers like the Brahmaputra, Padma, and Ganges to spawn. This **anadromous migration** (sea to freshwater) is triggered by monsoon flooding, which raises water levels and creates the fast-flowing, turbid conditions that hilsa prefer for spawning.",
-            "Migration is energetically expensive: swimming against a river current for hundreds of kilometres burns enormous fat reserves. Hilsa stop feeding during migration, relying entirely on stored lipids. The fat content of hilsa flesh drops from about 19% at the start of migration to under 5% at the spawning grounds \u2014 which is why freshly caught ocean hilsa tastes richer than river-caught hilsa. The fish literally burns its own fat as fuel.",
-            "Migration timing is critical for the species' survival. If fish arrive at spawning grounds too early (before monsoon floods create suitable habitat) or too late (after flows recede), reproductive success drops sharply. Climate change is altering monsoon patterns, and dams fragment rivers \u2014 both threaten hilsa by disrupting the environmental cues and physical pathways that migration depends on.",
+            'Imagine you live by the sea, but every year you walk hundreds of kilometres back to the exact village where you were born \u2014 without a map, without roads, through dangerous terrain, eating nothing the entire way. That is what the **hilsa** fish does. Every monsoon, millions of hilsa leave the Bay of Bengal and swim *upstream* into the Brahmaputra, Padma, and Ganges rivers to lay their eggs. This behaviour is called **anadromous migration** \u2014 "anadromous" means "running upward" in Greek.',
+            'Why go through all this trouble? The answer is **spawning instinct** \u2014 a deep, inherited drive to reproduce in freshwater. The ocean is full of predators that eat fish eggs. Rivers, especially during monsoon floods when the water is murky and fast-flowing, are safer nurseries. The muddy, turbid water hides the eggs from predators, and the current carries the tiny larvae downstream toward food-rich estuaries as they grow.',
+            'The journey is brutal. Hilsa stop eating entirely once they enter the river \u2014 their stomachs actually shrink. They burn stored body fat as fuel. A hilsa that starts migration with 19% body fat arrives at the spawning ground with barely 5%. This is why ocean-caught hilsa tastes richer and oilier than river-caught hilsa \u2014 the river fish has literally burned its fat swimming upstream. It is one of the great endurance feats in the animal kingdom.',
+            '**A prediction:** If you blocked a river with a dam that hilsa could not pass, the fish population upstream would collapse within a few years \u2014 because no new adults could reach the spawning grounds. This is exactly what has happened on dammed rivers in India and Bangladesh. Fish ladders (stepped channels around dams) are one solution, but hilsa rarely use them \u2014 they prefer wide, fast-flowing channels, not narrow steps.',
           ],
-          keyIdea: "Hilsa migrate hundreds of kilometres from sea to river to spawn, burning stored fat as fuel \u2014 this journey depends on monsoon timing and unobstructed river pathways, both now threatened.",
+          keyIdea: 'Hilsa migrate hundreds of kilometres from sea to river to spawn, burning stored fat as fuel. This anadromous journey depends on monsoon timing and unobstructed river pathways \u2014 dams and climate change threaten both.',
+          diagram: 'HilsaMigrationDiagram',
         },
         {
-          title: "Osmoregulation \u2014 Surviving the Salt Shift",
+          title: 'The Nose That Smells Home \u2014 How Fish Navigate by Smell',
           paragraphs: [
-            "Moving from saltwater to freshwater is a physiological crisis. In the ocean, the surrounding water is **hypertonic** (saltier than the fish's blood), so water tends to flow out of the fish's body by osmosis, and salt tends to flow in. In freshwater, the reverse: the water is **hypotonic** (less salty), so water floods into the fish and salt leaks out.",
-            "Hilsa manage this transition through **osmoregulation** \u2014 actively controlling their internal salt and water balance. In saltwater, specialized cells in the gills called **chloride cells** (or ionocytes) actively pump excess salt (Na+ and Cl-) out of the blood. The fish also drinks seawater constantly and excretes concentrated urine. In freshwater, the same chloride cells reverse direction, actively absorbing salt from the dilute water to prevent dangerous salt depletion, while the kidneys produce large volumes of very dilute urine to expel excess water.",
-            "This switchover does not happen instantly \u2014 it takes days, during which the fish lingers in **brackish water** (estuaries where salt and fresh water mix), gradually adjusting its osmoregulatory machinery. The hormones **prolactin** (for freshwater adaptation) and **cortisol** (for saltwater adaptation) orchestrate the cellular changes. Not all fish can do this \u2014 species locked into one salinity are called **stenohaline**, while adaptable species like hilsa are **euryhaline**.",
+            'Here is a puzzle: if you released a hilsa in the middle of the Bay of Bengal, hundreds of kilometres from land, it would swim back to the *same river* it was born in. Not just any river \u2014 the same tributary, the same stretch. How does it find its way? The answer is astonishing: it **smells** its way home.',
+            'Every river has a unique chemical signature \u2014 a cocktail of dissolved minerals, amino acids, plant chemicals, and soil compounds that is as distinctive as a fingerprint. When a hilsa is a tiny larva, its brain **imprints** on the chemical smell of its home river, storing it as a permanent memory. Years later, as an adult in the open ocean, the fish detects traces of that smell in the water and follows the **chemical gradient** \u2014 swimming toward increasing concentration, like following a scent trail.',
+            'The fish\u2019s nose is incredibly sensitive. Hilsa have paired nostrils on their snout, each containing a folded structure called the **olfactory rosette** packed with millions of receptor cells. These receptors can detect amino acids at concentrations of *parts per billion* \u2014 that is like detecting one drop of perfume in an Olympic swimming pool. Water flows into one nostril, over the rosette, and out the other nostril in a continuous stream, so the fish is constantly sampling the water.',
+            '**Try this at home:** Blindfold a friend and place three cups of water in front of them \u2014 one plain, one with a drop of lemon juice, one with a pinch of salt. Can they tell which is which by smell alone? Probably not \u2014 our noses are poor in water. A fish\u2019s olfactory system is thousands of times more sensitive. The hilsa is navigating an invisible chemical map that we cannot even perceive.',
           ],
-          keyIdea: "Hilsa switch between saltwater and freshwater by reversing the direction of salt pumps in their gills \u2014 this osmoregulatory flexibility (euryhalinity) is what makes their migration physiologically possible.",
-          diagram: 'CellMembraneDiagram',
+          keyIdea: 'Fish navigate home by smelling their birth river\u2019s unique chemical signature, detected at parts-per-billion concentrations by olfactory rosettes \u2014 an invisible chemical GPS imprinted in infancy.',
+          diagram: 'HilsaOlfactoryDiagram',
         },
         {
-          title: "Maximum Sustainable Yield \u2014 The Math of Not Overfishing",
+          title: 'Overfishing \u2014 When We Take Too Much',
           paragraphs: [
-            "**Maximum sustainable yield (MSY)** is the largest catch that can be taken from a fish population indefinitely without causing the population to decline. It sounds simple, but calculating it requires understanding the population's growth dynamics. The **logistic growth model** predicts that population growth rate is highest at intermediate population sizes \u2014 specifically, at half the carrying capacity (K/2).",
-            "At very low population sizes, there are few fish to reproduce. At sizes near carrying capacity, resources are scarce and growth slows (competition). The sweet spot \u2014 where the population adds the most new biomass per year \u2014 is the midpoint. MSY is the amount of fish you can harvest at this point while keeping the population stable. For hilsa, estimating MSY requires data on spawning biomass, recruitment (how many juveniles survive to maturity), and natural mortality \u2014 all of which are difficult to measure in wild populations.",
-            "The danger is **overshoot**: if fishing pressure pushes the population below K/2, the growth rate declines, and MSY drops. If fishing continues at the old rate, the population collapses. This is exactly what happened to Atlantic cod off Newfoundland in the 1990s. For hilsa, Bangladesh and India have implemented fishing bans during peak spawning periods \u2014 a crude but effective way to ensure enough fish reproduce to sustain the population. Getting MSY right is the central challenge of fishery management worldwide.",
+            'Boren in the story fished for "enough." But what happens when a whole village \u2014 or a whole country \u2014 fishes for "as much as possible"? The fish population crashes. This is **overfishing**, and it is one of the biggest ecological crises in the world.',
+            'Think of a fish population like a bank account. Every year, new fish are born (deposits) and some die of natural causes (expenses). The balance grows at a rate that depends on how many fish there are. If there are very few fish, growth is slow (few parents = few babies). If there are many fish near the environment\u2019s limit (called the **carrying capacity**, K), growth is also slow (competition for food). Growth is *fastest* when the population is at about half its carrying capacity \u2014 not too few, not too many.',
+            'The **maximum sustainable yield (MSY)** is the most fish you can catch each year without shrinking the population. It equals the growth rate at the sweet spot (K/2). If you catch less than MSY, the population stays healthy. If you catch *more* than MSY, the population declines \u2014 and here is the trap: as the population shrinks, fishermen catch fewer fish per trip, so they fish *harder* (more nets, more hours), which accelerates the decline. This is the **tragedy of the commons** \u2014 each individual acting in self-interest destroys the shared resource.',
+            '**A prediction:** If 100 fishermen share a lake and each catches 5% of the fish per year, the total harvest is 500% of what the lake can replace. The population crashes to zero in a few years. But if they agreed to each take only 0.5%, the lake would sustain them forever. The math is simple \u2014 the coordination is hard. Bangladesh\u2019s hilsa fishing ban during October\u2013November spawning season is exactly this kind of coordination, and it has helped hilsa populations partially recover.',
           ],
-          keyIdea: "MSY is the largest harvest a fishery can sustain indefinitely \u2014 it occurs when the population is at half its carrying capacity, and exceeding it triggers a downward spiral toward collapse.",
-          diagram: 'PopulationGrowthCurve',
+          keyIdea: 'Maximum sustainable yield (MSY) is the most fish a population can lose and still replace itself. Exceeding MSY triggers a collapse spiral where declining catches drive even harder fishing \u2014 the tragedy of the commons.',
+          diagram: 'HilsaPopulationDiagram',
         },
+        {
+          title: 'River Health = Fish Health \u2014 Reading Water Like a Scientist',
+          paragraphs: [
+            'Old Boren in the story could read the river \u2014 he knew where the fish would be, when the current was right, when something was wrong. Scientists do the same thing, but with measurements instead of instinct. The most important number is **dissolved oxygen (DO)** \u2014 the amount of oxygen gas dissolved in the water, measured in milligrams per litre (mg/L).',
+            'Fish breathe oxygen just like you do, but they extract it from water using gills instead of lungs. Healthy river water contains 8\u201312 mg/L of dissolved oxygen. Below 6 mg/L, sensitive species like hilsa and mahseer become stressed. Below 4 mg/L, most fish cannot survive. Below 2 mg/L, the water is essentially dead \u2014 only pollution-tolerant worms and bacteria remain. Warm water holds less dissolved oxygen than cold water, which is why fish kills often happen during summer heatwaves.',
+            'But you do not need a lab to assess river health. Ecologists use **indicator species** \u2014 organisms whose presence or absence tells you about water quality. Mayfly larvae, freshwater mussels, and hilsa only live in clean, oxygen-rich water. If you find them, the river is healthy. Tubifex worms (thin red worms in mud) and rat-tail maggots *thrive* in polluted, low-oxygen water. If you see only these, the river is in trouble. The animals are biological sensors \u2014 living test kits.',
+            '**Try this:** Next time you visit a river, pond, or even a drainage ditch, look at the edges. Do you see dragonfly larvae clinging to stones? (Clean water.) Green algae covering everything? (Nutrient pollution \u2014 probably fertiliser runoff.) A foul smell like rotten eggs? (Hydrogen sulphide from anaerobic decomposition \u2014 no oxygen at all.) You are reading the water\u2019s health report, just like Boren read the Brahmaputra.',
+          ],
+          keyIdea: 'Dissolved oxygen is the single most important measure of river health \u2014 and you can estimate it without any equipment by looking at which species are present. Hilsa need >6 mg/L; their absence is a warning.',
+          diagram: 'HilsaRiverHealthDiagram',
+        },
+      ],
+      vocabulary: [
+        ['Anadromous', 'A fish that migrates from saltwater to freshwater to spawn \u2014 hilsa, salmon, and shad are anadromous'],
+        ['Carrying capacity (K)', 'The maximum population size an environment can sustain indefinitely with available food, water, and space'],
+        ['Dissolved oxygen', 'The amount of oxygen gas dissolved in water \u2014 measured in mg/L, critical for fish survival'],
+        ['Indicator species', 'An organism whose presence or absence reveals the health of an ecosystem \u2014 like a living test kit'],
+        ['Olfactory', 'Related to the sense of smell \u2014 fish use olfactory receptors to navigate chemical gradients in water'],
+      ],
+      trueFalse: [
+        { statement: 'Hilsa stop eating during their upstream migration.', isTrue: true, explanation: 'Hilsa burn stored body fat as fuel during migration. Their stomachs shrink and they lose over two-thirds of their fat content by the time they reach spawning grounds.' },
+        { statement: 'Fish navigate upstream by following the sound of waterfalls.', isTrue: false, explanation: 'Migratory fish like hilsa primarily use olfactory (smell) navigation, detecting the unique chemical signature of their home river at parts-per-billion concentrations.' },
+        { statement: 'Catching as many fish as possible every year is the best way to feed people.', isTrue: false, explanation: 'Overfishing collapses fish populations. Maximum sustainable yield \u2014 catching only what the population can replace \u2014 feeds more people over decades than short-term greed.' },
+      ],
+      facts: [
+        'Hilsa is the national fish of Bangladesh and contributes over 1% of the country\u2019s GDP \u2014 a single fish species supporting an entire economy.',
+        'A single hilsa can produce 100,000 to 2 million eggs per spawning event, but fewer than 1% survive to adulthood \u2014 which is why protecting spawning grounds matters enormously.',
+        'The Brahmaputra is one of the world\u2019s great rivers \u2014 it carries more sediment than any river except the Amazon, creating the murky water that hilsa prefer for spawning.',
+      ],
+      offlineActivity: 'Visit a river, pond, or fish market. Count and record every fish species you can identify (or ask the fisherman). Note the water colour, smell, and flow speed. Back home, draw a bar chart of species counts and guess whether the water body is healthy, stressed, or polluted based on what you found.',
+      offlineActivityDiagram: 'ActivityFishCountDiagram',
+      codeTeaser: `# How many fish can a river sustain?
+K = 10000        # carrying capacity
+population = 500 # starting fish
+growth_rate = 0.3
+
+for year in range(1, 21):
+    growth = growth_rate * population * (1 - population / K)
+    population = population + growth
+    print(f"Year {year}: {population:.0f} fish")
+
+# Try changing growth_rate to 0.1 — how many years
+# does it take to reach 5000? That\u2019s the sweet spot
+# where fishing can be sustainable (MSY).`,
+      referenceLinks: [
+        { slug: 'ecology-and-populations', reason: 'Full guide to carrying capacity, logistic growth, and population dynamics' },
+        { slug: 'animal-senses-and-behavior', reason: 'How animals use smell, sight, and other senses to navigate and survive' },
+        { slug: 'conservation-biology', reason: 'Why species decline and what science-based strategies protect them' },
+      ],
+      nextLessons: [
+        { slug: 'why-fish-jump', reason: 'Why fish leap in the Barak River \u2014 aquatic ecosystems, dissolved oxygen, and fish behaviour' },
+        { slug: 'river-that-ran-away', reason: 'River erosion and the Brahmaputra\u2019s shifting course \u2014 the geology that shapes hilsa habitat' },
+        { slug: 'cloud-refused-rain', reason: 'Weather and rainfall patterns \u2014 the monsoon that triggers hilsa migration upstream' },
       ],
     },
   },
   {
-    slug: 'cloud-refused-rain', story: { title: 'The Cloud That Refused to Rain', tagline: 'Cloud seeding and weather modification.', content: `
+    id: 96,
+    slug: 'cloud-refused-rain',
+    tradition: 'Northeast India', story: { title: 'The Cloud That Refused to Rain', tagline: 'Cloud seeding and weather modification.', content: `
 **The Heaviest Cloud**
 
 Above the pine-covered hills of **Shillong**, where the sky sits so close you can almost touch it, there once lived a cloud named **Meghi**. She was a monsoon cloud — big, dark, and swollen with rain — and she was the most stubborn cloud in all of **Meghalaya**.
@@ -13507,59 +14346,112 @@ Meghi never hoarded again. She learned what every cloud eventually learns: that 
     illustration: '/content/illustrations/cloud-refused-rain.webp', track: 'school', subjects: ['Physics' as Subject, 'Chemistry' as Subject], estimatedHours: 12, playground: 'cloud-refused-rain' as const,
     level0: {
       vocabulary: [
-        ['Observation', 'Noticing and recording something carefully'],
-        ['Pattern', 'A repeated arrangement in nature or data'],
-        ['Variable', 'Something that can change or be measured'],
-        ['Evidence', 'Data supporting or disproving a claim'],
-        ['Model', 'A simplified version of something complex'],
+        ['Evaporation', 'When liquid water absorbs heat and escapes into the air as invisible water vapor \u2014 the first step in cloud formation'],
+        ['Condensation Nucleus', 'A tiny particle (dust, pollen, salt, or smoke) that water vapor grabs onto to form a droplet \u2014 without these seeds, clouds cannot form even in humid air'],
+        ['Dew Point', 'The temperature at which air becomes so saturated that water vapor must condense into liquid droplets \u2014 reach the dew point and you get fog, mist, or clouds'],
+        ['Cloud Seeding', 'The deliberate release of particles like silver iodide into clouds to trigger rain \u2014 essentially giving the cloud artificial condensation nuclei'],
+        ['Cumulonimbus', 'A towering storm cloud that can reach from near the ground to over 12 km altitude \u2014 produces heavy rain, thunder, lightning, and sometimes hail'],
       ],
       trueFalse: [
-        { statement: 'Science only happens in laboratories.', isTrue: false, explanation: 'Science happens everywhere — forests, kitchens, rivers, playgrounds.' },
-        { statement: 'Making mistakes helps you learn.', isTrue: true, explanation: 'Errors lead to discoveries. Penicillin was found from a contaminated experiment.' },
-        { statement: 'You need expensive equipment for science.', isTrue: false, explanation: 'Curiosity and observation are the most important scientific tools.' },
+        { statement: 'Clouds are made of water vapor (invisible gas).', isTrue: false, explanation: 'Clouds are made of tiny liquid water droplets or ice crystals \u2014 small enough to float in air. Water vapor is invisible. When you see a cloud, you are seeing liquid or ice, not gas.' },
+        { statement: 'A cloud can exist for hours without producing any rain.', isTrue: true, explanation: 'Cloud droplets are about 10 micrometres across \u2014 far too small and light to fall. A raindrop needs roughly 1 million cloud droplets to merge together before it is heavy enough to overcome updrafts and reach the ground.' },
+        { statement: 'Cloud seeding can make rain fall from a clear blue sky.', isTrue: false, explanation: 'Cloud seeding only works on clouds that already contain moisture. It adds missing nuclei to help existing water droplets grow into rain. No cloud = no rain, no matter how much silver iodide you release.' },
       ],
       facts: [
-        'NE India is one of 36 global biodiversity hotspots.',
-        'The scientific method has been used for over 1,000 years.',
-        'Teaching someone else is the best way to check understanding.',
+        'Mawsynram and Cherrapunji in Meghalaya receive over 11,000 mm of rain per year \u2014 among the wettest places on Earth \u2014 because moist Bay of Bengal air is forced upward by the Khasi Hills, cooling rapidly and forming massive rain clouds.',
+        'A single cumulonimbus cloud can contain 300,000 tonnes of water \u2014 equivalent to about 120 Olympic swimming pools \u2014 yet the droplets are so tiny they float.',
+        'The UAE spent over \$15 million on cloud seeding in a single year, using salt flares fired from aircraft to increase rainfall over desert regions by 5\u201315%.',
       ],
-      offlineActivity: 'Keep a nature journal for one week. Each day, draw and describe one observation. At the end, research your most interesting one.',
-    
+      offlineActivity: 'Make a cloud in a jar: pour warm water into a glass jar, drop in a lit match (for smoke particles), and place a bag of ice on top. Watch a cloud form inside. Then try it WITHOUT the match \u2014 notice how much weaker the cloud is. The smoke provides condensation nuclei, just like dust does in the real atmosphere.',
+      offlineActivityDiagram: 'ActivityCloudJarDiagram',
+      codeTeaser: `import numpy as np
+
+# Cloud formation: when does rising air hit the dew point?
+# The atmosphere cools about 6.5\u00B0C per 1000m (lapse rate)
+
+ground_temp = 30       # \u00B0C \u2014 hot day in Shillong
+dew_point = 18         # \u00B0C \u2014 temperature where clouds form
+lapse_rate = 6.5       # \u00B0C per 1000m
+
+# Calculate cloud base height
+cloud_base = (ground_temp - dew_point) / lapse_rate * 1000
+
+# Cloud droplet vs raindrop
+cloud_droplet = 0.01   # mm (10 micrometres)
+raindrop = 2.0         # mm (2000 micrometres)
+droplets_needed = (raindrop / cloud_droplet) ** 3
+
+print(f"Ground temperature: \${ground_temp}\u00B0C")
+print(f"Dew point: \${dew_point}\u00B0C")
+print(f"Cloud base forms at: \${cloud_base:.0f} m altitude")
+print(f"Droplets needed per raindrop: \${droplets_needed:,.0f}")
+print(f"That is why Meghi could hold rain for so long!")`,
+      referenceLinks: [
+        { slug: 'weather-and-climate', reason: 'Full guide to atmospheric pressure, wind systems, and the water cycle that drives cloud formation' },
+        { slug: 'states-of-matter', reason: 'Phase changes \u2014 evaporation, condensation, and freezing \u2014 are the physics behind every cloud' },
+      ],
+      nextLessons: [
+        { slug: 'fishermans-daughter-storm', reason: 'Cyclones are powered by the same condensation process \u2014 cloud formation on a massive, spinning scale' },
+        { slug: 'monsoon-home', reason: 'The monsoon that drenches Meghalaya starts with clouds exactly like the ones you just learned about' },
+        { slug: 'boy-who-talked-to-clouds', reason: 'Another perspective on clouds and weather \u2014 different story, same atmospheric science' },
+      ],
       concepts: [
         {
-          title: "The Bergeron Process \u2014 How Rain Actually Forms",
+          title: 'How Clouds Form \u2014 From Invisible Vapor to Visible Cloud',
           paragraphs: [
-            "Most rain that falls in temperate and tropical regions originates as **ice** in the upper atmosphere, even in summer. The **Bergeron process** (also called the Bergeron-Findeisen process) explains why: in a cloud containing both **supercooled water droplets** (liquid below 0\u00b0C, which is common) and **ice crystals**, the ice crystals grow at the expense of the water droplets.",
-            "This happens because the **saturation vapor pressure** over ice is lower than over liquid water at the same sub-zero temperature. Water vapor molecules are more attracted to the structured surface of ice than to the disordered surface of liquid water. So in a mixed-phase cloud, the air can be simultaneously supersaturated with respect to ice and undersaturated with respect to liquid \u2014 vapor deposits onto ice crystals while liquid droplets evaporate. The ice crystals grow rapidly, become heavy, and fall.",
-            "As the ice crystals fall through warmer air below the cloud, they melt into rain. If the air below is cold enough, they reach the ground as snow, sleet, or hail. The Bergeron process explains why clouds can exist for hours without raining (they lack ice nuclei to start the process), and why seeding clouds with ice-forming particles can trigger precipitation.",
+            'Boil a kettle and watch the spout. Right at the opening, you see nothing \u2014 that is actual water vapor, and it is invisible. A few centimetres away, a white plume appears. That is where the hot vapor has cooled enough to condense into tiny liquid droplets. You are watching a cloud form in your kitchen.',
+            'The same process happens in the atmosphere, but on a planetary scale. The sun heats water in oceans, rivers, and soil. Water molecules at the surface gain enough energy to escape as vapor \u2014 this is **evaporation**. The invisible vapor rises because warm air is less dense than cool air. As it rises, it expands (because atmospheric pressure decreases with altitude) and cools at roughly **6.5\u00B0C per 1,000 metres** \u2014 this steady cooling rate is called the **lapse rate**.',
+            'At some altitude, the rising air cools to its **dew point** \u2014 the temperature at which it is holding as much water vapor as it physically can. Below the dew point, excess vapor must condense. But here is the catch: vapor molecules bouncing around in air will not spontaneously clump into a droplet on their own. They need a surface to condense onto \u2014 a **condensation nucleus**.',
+            'Condensation nuclei are everywhere: dust blown from deserts, sea salt flung up by breaking waves, pollen from plants, soot from fires, even bacteria. Each tiny particle (typically 0.1\u20131 micrometre) acts as a seed. Water vapor molecules stick to it, building a droplet about 10 micrometres across \u2014 roughly one-tenth the width of a human hair. Billions of these droplets, packed together, scatter sunlight in all directions and become visible as a **cloud**.',
+            '**Check yourself:** On a humid day in Shillong (ground temperature 30\u00B0C, dew point 18\u00B0C), at what altitude would you expect clouds to form? Use the lapse rate: (30 \u2013 18) \u00F7 6.5 \u00D7 1000 = about 1,850 metres. Look up from Ward\u2019s Lake and the cloud base is predictable.',
           ],
-          keyIdea: "The Bergeron process: in mixed-phase clouds, ice crystals grow at the expense of liquid droplets because vapor pressure over ice is lower \u2014 this is how most rain actually begins, as ice that melts on the way down.",
+          keyIdea: 'Clouds form when rising air cools to the dew point and water vapor condenses onto tiny particles called condensation nuclei. No nuclei, no cloud \u2014 even at 100% humidity.',
+          diagram: 'CloudFormationDiagram',
         },
         {
-          title: "Cloud Seeding \u2014 Silver Iodide and Artificial Rain",
+          title: 'Why Some Clouds Rain and Others Don\u2019t',
           paragraphs: [
-            "**Cloud seeding** is the deliberate introduction of particles into clouds to encourage precipitation. The most common agent is **silver iodide (AgI)**, whose crystal structure closely resembles ice \u2014 so closely that supercooled water droplets freeze onto AgI particles as if they were natural ice crystals. This mimics and accelerates the Bergeron process.",
-            "Silver iodide is delivered by aircraft flying through clouds or by ground-based generators that burn a solution containing AgI, sending microscopic particles into rising air currents. Each gram of silver iodide can produce roughly **10 trillion** ice-forming nuclei. Other seeding agents include dry ice (solid CO2, which cools air so rapidly that ice crystals form spontaneously) and hygroscopic salts (which absorb water and help droplets grow large enough to fall).",
-            "The effectiveness of cloud seeding is debated. Controlled experiments show that seeding can increase precipitation by **5\u201315%** under favorable conditions (when clouds already contain supercooled water and sufficient moisture but lack natural ice nuclei). It cannot make rain from clear skies \u2014 there must be existing clouds with the right microphysical properties. China, the UAE, and several other countries invest heavily in operational cloud seeding programs, particularly for drought mitigation and reservoir replenishment.",
+            'A cloud droplet is about 10 micrometres across. A raindrop is about 2,000 micrometres (2 mm). That means a raindrop contains roughly **one million** cloud droplets merged together. This is why Meghi could drift over the Khasi Hills for days, heavy with water, without a single drop falling \u2014 her droplets were too small.',
+            'There are two main ways droplets grow large enough to fall. The first is **collision-coalescence** (the warm rain process). In a cloud, not all droplets are the same size. Slightly larger droplets fall faster than tiny ones. As they fall through the cloud, they collide with and absorb smaller droplets \u2014 like a snowball rolling downhill. Each collision makes the drop bigger and faster, triggering more collisions. This chain reaction can produce a raindrop in about 20 minutes in a thick cloud.',
+            'The second way is the **Bergeron process** (the ice-crystal process), and it is responsible for most rain outside the tropics. In tall clouds, the top is below 0\u00B0C but many droplets stay liquid \u2014 they are **supercooled**. If even a few ice crystals form among these supercooled droplets, something remarkable happens: water vapor evaporates from the liquid droplets and deposits onto the ice crystals, because the vapor pressure over ice is lower than over liquid water at the same temperature. The ice crystals steal water from the droplets and grow rapidly. Eventually they become heavy enough to fall, and if the air below is warm, they melt into rain.',
+            '**Prediction exercise:** Imagine two clouds over Cherrapunji. Cloud A is shallow (1 km thick) and entirely above 0\u00B0C. Cloud B is towering (10 km tall) with its top well below freezing. Which one rains more easily? (Answer: Cloud B \u2014 it has both the collision-coalescence process AND the Bergeron process working simultaneously, plus much more water content.)',
           ],
-          keyIdea: "Cloud seeding introduces ice-nucleating particles (like silver iodide) into clouds to trigger the Bergeron process \u2014 it can boost rainfall by 5\u201315% but only works on clouds that already have moisture and the right conditions.",
-          diagram: 'WaterCycleDiagram',
+          keyIdea: 'Rain needs droplets to grow from 10 \u00B5m to 2,000 \u00B5m. Two processes do this: collision-coalescence (big droplets absorb small ones) and the Bergeron process (ice crystals steal water from liquid droplets). Clouds without these processes just sit there, like Meghi.',
+          diagram: 'CloudRainProcessDiagram',
         },
         {
-          title: "Nucleation \u2014 Why Raindrops Need a Seed",
+          title: 'Cloud Seeding \u2014 Making Rain on Demand',
           paragraphs: [
-            "**Nucleation** is the process by which a new phase (solid, liquid, or gas) begins to form within an existing phase. A raindrop does not appear from nowhere \u2014 water vapor must condense onto a pre-existing **cloud condensation nucleus (CCN)**: a tiny particle (dust, salt crystal, pollen, or pollutant) typically 0.1\u20131 micrometre in diameter. Without CCN, air would have to be supersaturated by several hundred percent before spontaneous (**homogeneous**) nucleation occurs \u2014 a condition that almost never exists in the atmosphere.",
-            "Ice nucleation is even more demanding. Liquid water can remain supercooled to as low as -40\u00b0C without freezing, as long as no suitable **ice nucleating particle (INP)** is present. INPs must have a crystal structure that templates ice formation \u2014 mineral dust, certain bacteria (*Pseudomonas syringae*), and silver iodide are effective INPs. The rarity of natural INPs is why many clouds contain supercooled water instead of ice, and why cloud seeding can make a difference.",
-            "Nucleation theory connects to many fields beyond meteorology. The same physics governs how crystals grow in geology, how proteins fold (or misfold, causing diseases like Alzheimer's), how metals solidify during casting, and how bubbles form in carbonated drinks. The **nucleation energy barrier** \u2014 the energy needed to form a stable nucleus \u2014 is a universal concept: every phase transition in nature must overcome it, whether it is rain forming in a cloud or ice cream crystallizing in a freezer.",
+            'If a cloud has plenty of water but will not rain, could you give it a push? That is exactly the idea behind **cloud seeding** \u2014 humanity\u2019s attempt to make stubborn clouds release their water. It was invented in 1946 by Vincent Schaefer, who discovered that dropping dry ice (solid CO\u2082) into a supercooled cloud chamber instantly produced ice crystals.',
+            'The most common seeding agent today is **silver iodide (AgI)**. Its crystal structure is almost identical to ice, so supercooled water droplets freeze onto AgI particles as if they were natural ice. A single gram of silver iodide produces roughly **10 trillion** ice-forming nuclei. It is delivered by aircraft flying through clouds (burning flares that release AgI smoke) or by ground-based generators that burn an AgI solution and let wind carry the particles upward.',
+            'Does it actually work? The honest answer: **sometimes, under the right conditions**. Controlled experiments show cloud seeding can increase rainfall by about **5\u201315%** when clouds already contain supercooled water and sufficient moisture but lack natural ice nuclei. It cannot conjure rain from a clear sky \u2014 you need an existing cloud with the right properties. The UAE spends over \$15 million per year on cloud seeding to supplement scarce rainfall. China deployed over 35,000 cloud-seeding rockets during the 2008 Beijing Olympics to keep rain away from the opening ceremony.',
+            'The controversy: If you seed clouds over your region and it rains there, does that mean less rain falls on the next region downwind? This is the "rain stealing" debate, and it remains unresolved. Some countries have accused neighbours of stealing their rain. There are also environmental concerns about silver iodide accumulation in soil and water, though studies suggest the concentrations from seeding are far below harmful levels.',
+            '**Check yourself:** In the story, the East Wind tells Meghi she has become "a prisoner of what you refuse to release." If a cloud seeding plane flew through Meghi, what would it actually do? (Answer: release silver iodide particles that mimic ice crystals, triggering the Bergeron process and causing Meghi\u2019s supercooled droplets to freeze, grow, and fall as rain.)',
           ],
-          keyIdea: "Nucleation requires a seed particle to overcome an energy barrier \u2014 without cloud condensation nuclei, rain cannot form, which is why clean air paradoxically means fewer but larger raindrops.",
-          diagram: 'MolecularMotionDiagram',
+          keyIdea: 'Cloud seeding adds artificial ice nuclei (usually silver iodide) to clouds to trigger the Bergeron process. It can boost rainfall by 5\u201315% but only works on clouds that already have moisture \u2014 it is a nudge, not a miracle.',
+          diagram: 'CloudSeedingDiagram',
+        },
+        {
+          title: 'Reading the Sky \u2014 What Cloud Types Tell You',
+          paragraphs: [
+            'Before weather apps and satellites, farmers, sailors, and herders in Meghalaya and across the world predicted weather by reading clouds. They were right more often than you might think, because cloud shape, altitude, and colour encode real information about atmospheric conditions.',
+            '**Cirrus** clouds are thin, wispy streaks high in the sky (6\u201312 km). They are made entirely of ice crystals. Seeing cirrus usually means fair weather right now, but if they thicken and lower over 24\u201348 hours, a warm front (and rain) may be approaching. The Khasi elders call spreading cirrus "the sky combing its hair before the rain."',
+            '**Cumulus** clouds are the puffy, cotton-ball shapes you see on sunny afternoons (1\u20136 km). Small, flat-bottomed cumulus means fair weather \u2014 the sun is heating the ground, creating thermals, and the moisture in each thermal condenses at the same altitude (that flat base). But if cumulus keeps growing taller through the afternoon, watch out: the atmosphere is unstable, and those towers can develop into thunderstorms.',
+            '**Stratus** clouds are flat, grey blankets that cover the sky below about 2 km. They form when a large mass of air is gently lifted (not by strong thermals, but by gradual ascent over a wide area). Stratus brings overcast skies, drizzle, and gloom, but rarely heavy rain. Fog is simply stratus that has reached the ground.',
+            '**Cumulonimbus** is the king of clouds. It starts near the ground and can tower to 12 km or higher, punching through the troposphere into the stratosphere. Its flat anvil top (where the rising air hits the stratosphere ceiling and spreads sideways) is a signature shape visible from 100 km away. Cumulonimbus produces heavy rain, thunder, lightning, hail, and sometimes tornadoes. **Meghi in the story was a cumulonimbus** \u2014 dark, heavy, sagging under her own weight, full of water but refusing to let go.',
+            '**Quick identification guide:** Thin + high = cirrus (fair now, maybe rain later). Puffy + growing = cumulus (fair, but watch the towers). Flat + grey = stratus (drizzle). Towering + dark + anvil = cumulonimbus (take shelter).',
+          ],
+          keyIdea: 'Clouds are weather forecasts written in the sky. Cirrus warns of distant change, cumulus shows thermal activity, stratus means stable drizzle, and cumulonimbus means heavy rain and storms. Learning to read clouds is practical, free, and works anywhere.',
+          diagram: 'CloudTypesDiagram',
         },
       ],
     },
   },
   {
-    slug: 'friendship-bridge', story: { title: 'The Friendship Bridge', tagline: 'Bridge engineering between two villages.', content: `
+    id: 97,
+    id: 97,
+    slug: 'friendship-bridge',
+    tradition: 'Northeast India', story: { title: 'The Friendship Bridge', tagline: 'Bridge engineering between two villages.', content: `
 **The Two Sides**
 
 In the hills of **Karbi Anglong**, there were two villages separated by a river. The river wasn't very wide — you could throw a stone across it — but it was deep and fast, with slippery rocks on the bottom, and no one had ever built a bridge.
@@ -13701,7 +14593,9 @@ They built a wider bridge, strong enough for adults and carts. But they kept the
     },
   },
   {
-    slug: 'mountain-echoes', story: { title: 'Why Mountains Have Echoes', tagline: 'Sound reflection and wave physics.', content: `
+    id: 98,
+    slug: 'mountain-echoes',
+    tradition: 'Northeast India', story: { title: 'Why Mountains Have Echoes', tagline: 'Sound reflection and wave physics.', content: `
 **The Shouting Girl**
 
 In a village high in the **Naga Hills**, where the clouds dragged their bellies across the rooftops and the valleys below looked like green oceans, there lived a girl named **Azenuo**. She was seven years old and she loved to shout.
@@ -13841,7 +14735,9 @@ To this day, if you visit the Naga Hills and call out across a valley, the mount
     },
   },
   {
-    slug: 'dancer-floating-market', story: { title: 'The Dancer of the Floating Market', tagline: 'Economics of floating markets.', content: `
+    id: 99,
+    slug: 'dancer-floating-market',
+    tradition: 'Northeast India', story: { title: 'The Dancer of the Floating Market', tagline: 'Economics of floating markets.', content: `
 **The Floating Islands**
 
 **Loktak Lake** in **Manipur** is unlike any lake in the world. Its surface is dotted with **phumdis** — floating islands made of tangled vegetation, soil, and organic matter that drift slowly across the water like green rafts. People live on some of these phumdis. They build huts, grow vegetables, and fish from their edges. Their homes move with the wind.
@@ -13971,7 +14867,9 @@ Tombi's phumdi didn't sink. It grew. New vegetation knit itself to the old edges
     },
   },
   {
-    slug: 'ferrymans-riddle', story: { title: 'The Ferryman\'s Riddle', tagline: 'Fluid mechanics and river transport.', content: `
+    id: 100,
+    slug: 'ferrymans-riddle',
+    tradition: 'Northeast India', story: { title: 'The Ferryman\'s Riddle', tagline: 'Fluid mechanics and river transport.', content: `
 **The Ferryman of Nimatighat**
 
 At the old ferry crossing of **Nimatighat**, where boats carried people across the mighty Brahmaputra to **Majuli**, there lived a ferryman named **Gokul**. He was old, his beard was white as river foam, and his wooden boat had carried ten thousand passengers over fifty years.
@@ -14091,7 +14989,9 @@ Among the people of Assam, they say that riddles are not puzzles to be solved bu
     },
   },
   {
-    slug: 'wild-orchids-trees', story: { title: 'Why Wild Orchids Grow on Trees', tagline: 'Epiphytes and symbiosis.', content: `
+    id: 101,
+    slug: 'wild-orchids-trees',
+    tradition: 'Northeast India', story: { title: 'Why Wild Orchids Grow on Trees', tagline: 'Epiphytes and symbiosis.', content: `
 **The Flower That Had No Home**
 
 Long ago, in the misty forests of **Meghalaya**, every flower had a home. Roses lived in gardens. Lotuses lived in ponds. Sunflowers lived in open fields where the sun could find them. But the **orchid** had no home at all.
@@ -14211,7 +15111,9 @@ Next time you see a wild orchid clinging to a tree branch in the forests of Nort
     },
   },
   {
-    slug: 'guwahati-name', story: { title: 'How Guwahati Got Its Name', tagline: 'Etymology and urban geography.', content: `
+    id: 102,
+    slug: 'guwahati-name',
+    tradition: 'Northeast India', story: { title: 'How Guwahati Got Its Name', tagline: 'Etymology and urban geography.', content: `
 **The Question**
 
 On a school trip to the **Kamakhya Temple**, while her classmates took selfies and her teacher explained ancient history, a girl named **Simanta** asked a question that nobody expected.
@@ -14330,7 +15232,9 @@ Among the people of Assam, a tamul-paan offered with both hands is still the war
     },
   },
   {
-    slug: 'story-garden', story: { title: 'The Story Garden', tagline: 'Storytelling and narrative structure — how stories teach.', content: `
+    id: 103,
+    slug: 'story-garden',
+    tradition: 'Northeast India', story: { title: 'The Story Garden', tagline: 'Storytelling and narrative structure — how stories teach.', content: `
 **The Hidden Garden**
 
 Somewhere in **Northeast India** — nobody knows exactly where, though some say it's in the misty hills of Meghalaya, and others swear it's on a hidden island in the Brahmaputra — there is a garden where stories grow.
@@ -14471,7 +15375,9 @@ It is still growing. Because the story garden never closes, and the stories of N
     },
   },
   {
+    id: 104,
     slug: 'little-monk-tawang',
+    tradition: 'Northeast India',
     story: { title: 'The Little Monk of Tawang', tagline: 'A young monk\'s first lesson at Tawang Monastery — compassion in the cold mountain rain.', content: `
 **The Newest Monk**
 
@@ -14624,7 +15530,9 @@ And if Dawa happened to be nearby — old and fat and purring — she would blin
     },
   },
   {
+    id: 105,
     slug: 'moonlit-boat-race',
+    tradition: 'Northeast India',
     story: { title: 'The Moonlit Boat Race of Majuli', tagline: 'A girl\'s team wins not by rowing hardest, but by reading the river\'s currents.', content: `
 The Moonlit Boat Race of Majuli
 
@@ -14785,7 +15693,9 @@ And on full-moon nights, when the Brahmaputra shines like hammered silver, you c
     },
   },
   {
+    id: 106,
     slug: 'little-river-joined',
+    tradition: 'Northeast India',
     story: { title: 'The Little River That Joined the Big One', tagline: 'Joining something bigger doesn\'t mean disappearing — it means becoming part of something extraordinary.', content: `
 The Little River That Joined the Big One
 
@@ -14948,7 +15858,9 @@ That is Nini. Still small. Still clear. Still perfectly herself.
     },
   },
   {
+    id: 107,
     slug: 'haflong-blue-mountains',
+    tradition: 'Northeast India',
     story: { title: 'Why the Mountains of Haflong Turn Blue', tagline: 'The blue hills of Dima Hasao — a painter spirit\'s beautiful accident.', content: `
 Why the Mountains of Haflong Turn Blue
 
@@ -15095,7 +16007,9 @@ And that is why, if you visit Haflong and stand on a hilltop at sunset, you will
     },
   },
   {
+    id: 108,
     slug: 'girl-python',
+    tradition: 'Northeast India',
     story: { title: 'The Girl Who Made Friends with a Python', tagline: 'Fear slowly turns into understanding — coexistence in wild places.', content: `
 The Girl Who Made Friends with a Python
 
@@ -15248,7 +16162,9 @@ In Kaziranga, where rhinos and elephants and tigers share the land with farmers 
     },
   },
   {
+    id: 109,
     slug: 'kite-eagle-dimapur',
+    tradition: 'Northeast India',
     story: { title: 'The Kite and the Eagle Over Dimapur', tagline: 'A paper kite and a real eagle share the sky — the wind treats them the same.', content: `
 The Kite and the Eagle Over Dimapur
 
@@ -15391,7 +16307,9 @@ The people of Assam and the Northeast have a saying: *the sky is big enough for 
     },
   },
   {
+    id: 110,
     slug: 'boy-raced-brahmaputra',
+    tradition: 'Northeast India',
     story: { title: 'The Boy Who Raced the Brahmaputra', tagline: 'A boy on a bicycle tries to outrun the mightiest river in the Northeast.', content: `
 The Boy Who Raced the Brahmaputra
 
@@ -15545,6 +16463,14 @@ Among the people of Assam, the Brahmaputra is not just a river. It is a teacher.
   },
 ];
 
+// Mythology lessons (separate file for maintainability)
+import { mythologyLessons } from './lessons-mythology';
+lessons.push(...mythologyLessons);
+
 export function getLessonBySlug(slug: string): Lesson | undefined {
   return lessons.find((l) => l.slug === slug);
+}
+
+export function getLessonById(id: number): Lesson | undefined {
+  return lessons.find((l) => l.id === id);
 }

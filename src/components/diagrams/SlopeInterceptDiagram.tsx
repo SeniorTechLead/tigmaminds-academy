@@ -6,7 +6,7 @@ export default function SlopeInterceptDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 400 350" className="w-full max-w-md mx-auto" role="img" aria-label="Slope intercept diagram with three lines showing positive, zero, and negative slopes">
+      <svg viewBox="0 0 420 395" className="w-full max-w-md mx-auto" role="img" aria-label="Slope intercept diagram with three lines showing positive, zero, and negative slopes">
         <text x="200" y="22" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="14" fontWeight="bold">Slope-Intercept Form: y = mx + b</text>
 
         {/* Grid */}

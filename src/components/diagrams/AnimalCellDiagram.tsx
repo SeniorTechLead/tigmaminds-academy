@@ -1,7 +1,7 @@
 export default function AnimalCellDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 500 400" className="w-full max-w-lg mx-auto" role="img" aria-label="Animal cell diagram">
+      <svg viewBox="0 0 572 420" className="w-full max-w-lg mx-auto" role="img" aria-label="Animal cell diagram">
         <defs>
           <marker id="cell-arrow" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto">
             <polygon points="0 0, 6 2, 0 4" className="fill-gray-500 dark:fill-gray-400" />

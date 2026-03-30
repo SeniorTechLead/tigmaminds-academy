@@ -1,7 +1,7 @@
 export default function NEIndiaBiomesDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 540 300" className="w-full max-w-xl mx-auto" role="img" aria-label="Northeast India biomes elevation cross-section from Brahmaputra valley to alpine peaks">
+      <svg viewBox="0 0 660 343" className="w-full max-w-xl mx-auto" role="img" aria-label="Northeast India biomes elevation cross-section from Brahmaputra valley to alpine peaks">
         {/* Sky gradient */}
         <defs>
           <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">

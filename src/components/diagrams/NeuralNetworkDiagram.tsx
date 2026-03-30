@@ -41,9 +41,9 @@ const hiddenToOutput = [
 
 // Strongest-path info per output node
 const outputExplanations: Record<string, string> = {
-  o0: "Low frequency + slow pulse \u2192 Calm",
-  o1: "Moderate frequency + rising pulse \u2192 Nervous",
-  o2: "High amplitude + fast pulse \u2192 Danger",
+  o0: "Low frequency + slow pulse → Calm",
+  o1: "Moderate frequency + rising pulse → Nervous",
+  o2: "High amplitude + fast pulse → Danger",
 };
 
 // For each output, define which paths are "strong" (input->hidden weight * hidden->output weight)
@@ -135,7 +135,7 @@ export default function NeuralNetworkDiagram() {
   return (
     <div className="w-full max-w-xl mx-auto">
       <svg
-        viewBox="0 0 560 420"
+        viewBox="0 0 588 441"
         className="w-full h-auto"
         role="img"
         aria-label="Neural network diagram with input, hidden, and output layers"

@@ -1,65 +1,19 @@
+import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Sparkles, Cpu, Bot, Code2, Lightbulb, Rocket } from 'lucide-react';
+import { ArrowRight, Sparkles, Bot, Code2 } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { lessons } from '../data/lessons';
+import { useLessonMeta } from '../contexts/LessonMetaContext';
 
-const storyToSTEM = [
-  {
-    slug: 'girl-who-spoke-to-elephants',
-    story: 'The Girl Who Spoke to Elephants',
-    lesson: 'AI & Wildlife Tracking',
-    description: 'How do scientists use AI to understand animal behavior? Start with a story, end with a neural network.',
-    icon: Cpu,
-    color: 'from-emerald-400 to-teal-500',
-    illustration: '/content/illustrations/elephant-rongpharpi.webp',
-  },
-  {
-    slug: 'firefly-festival-of-majuli',
-    story: 'The Firefly Festival of Majuli',
-    lesson: 'LEDs, Circuits & Bioluminescence',
-    description: 'From river-island fireflies to building your own glowing circuits. Science hides in the most beautiful places.',
-    icon: Lightbulb,
-    color: 'from-amber-400 to-orange-500',
-    illustration: '/content/illustrations/majuli-born.webp',
-  },
-  {
-    slug: 'river-dolphins-secret',
-    story: 'The River Dolphin\'s Secret',
-    lesson: 'Sonar Sensors & Arduino',
-    description: 'Dolphins navigate murky waters with sound. You\'ll build a sensor that does the same.',
-    icon: Bot,
-    color: 'from-sky-400 to-blue-500',
-    illustration: '/content/illustrations/brahmaputra-angry.webp',
-  },
-  {
-    slug: 'boy-who-built-a-library',
-    story: 'The Boy Who Built a Library',
-    lesson: 'Web Development & Databases',
-    description: 'One boy\'s dream to share knowledge with everyone. You\'ll build the digital version.',
-    icon: Code2,
-    color: 'from-violet-400 to-purple-500',
-    illustration: '/content/illustrations/boy-clouds.webp',
-  },
-  {
-    slug: 'dragonfly-and-the-paddy-field',
-    story: 'The Dragonfly and the Paddy Field',
-    lesson: 'Drones & Computer Vision',
-    description: 'A dragonfly sees what we can\'t. Learn to give machines the same power — and protect the harvest.',
-    icon: Rocket,
-    color: 'from-rose-400 to-pink-500',
-    illustration: '/content/illustrations/tea-leaf-fly.webp',
-  },
-  {
-    slug: 'why-the-muga-silk-is-golden',
-    story: 'Why the Muga Silk Is Golden',
-    lesson: 'Biology & Materials Science',
-    description: 'The world\'s only golden silk comes from Assam. Discover the science woven into every thread.',
-    icon: Sparkles,
-    color: 'from-yellow-400 to-amber-500',
-    illustration: '/content/illustrations/weaver-girl.webp',
-  },
-];
+function shuffleArray<T>(arr: T[]): T[] {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
 
 const tracks = [
   {
@@ -77,6 +31,12 @@ const tracks = [
 ];
 
 export default function HomePage() {
+  const { isDemoStory } = useLessonMeta();
+  const featuredStories = useMemo(() => {
+    const demos = lessons.filter(l => isDemoStory(l.slug));
+    return shuffleArray(demos).slice(0, 6);
+  }, [isDemoStory]);
+
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
       <Header />
@@ -124,25 +84,6 @@ export default function HomePage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
               </div>
-              {/* Floating accent cards */}
-              <div className="absolute -bottom-4 -left-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg px-4 py-3 flex items-center gap-3 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center">
-                  <Bot className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <p className="text-sm font-bold text-gray-900 dark:text-white">Robotics</p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">Hands-on builds</p>
-                </div>
-              </div>
-              <div className="absolute -top-4 -right-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg px-4 py-3 flex items-center gap-3 animate-fade-in" style={{ animationDelay: '0.6s' }}>
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-400 to-purple-500 flex items-center justify-center">
-                  <Code2 className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <p className="text-sm font-bold text-gray-900 dark:text-white">Coding</p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">Python, JS, more</p>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -162,38 +103,38 @@ export default function HomePage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {storyToSTEM.map((item, index) => {
-              const Icon = item.icon;
+            {featuredStories.map((lesson, index) => {
+              const Icon = lesson.stem.icon;
               return (
                 <Link
-                  to={`/lessons/${item.slug}`}
-                  key={item.story}
+                  to={`/lessons/${lesson.slug}`}
+                  key={lesson.slug}
                   className="group bg-white dark:bg-gray-800 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden animate-scale-in"
                   style={{ animationDelay: `${index * 80}ms` }}
                 >
                   <div className="relative h-48 overflow-hidden">
                     <img
-                      src={item.illustration}
-                      alt={item.story}
+                      src={lesson.illustration}
+                      alt={lesson.story.title}
                       className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
-                    <div className={`absolute top-4 left-4 bg-gradient-to-r ${item.color} w-10 h-10 rounded-full flex items-center justify-center shadow-lg`}>
+                    <div className={`absolute top-4 left-4 bg-gradient-to-r ${lesson.stem.color} w-10 h-10 rounded-full flex items-center justify-center shadow-lg`}>
                       <Icon className="w-5 h-5 text-white" />
                     </div>
                   </div>
                   <div className="p-6">
                     <p className="text-sm font-semibold text-amber-600 dark:text-amber-400 mb-1 uppercase tracking-wide">
-                      Story → Lesson
+                      Story &rarr; Lesson
                     </p>
                     <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
-                      {item.story}
+                      {lesson.story.title}
                     </h3>
-                    <p className={`text-sm font-semibold bg-gradient-to-r ${item.color} bg-clip-text text-transparent mb-3`}>
-                      → {item.lesson}
+                    <p className={`text-sm font-semibold bg-gradient-to-r ${lesson.stem.color} bg-clip-text text-transparent mb-3`}>
+                      &rarr; {lesson.stem.title}
                     </p>
                     <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                      {item.description}
+                      {lesson.stem.description}
                     </p>
                   </div>
                 </Link>

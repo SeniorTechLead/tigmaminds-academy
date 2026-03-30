@@ -9,14 +9,25 @@ import { getLevelComponents } from '../components/levels';
 import { useProgress } from '../contexts/ProgressContext';
 import Level0Listener from '../components/Level0Listener';
 import diagramRegistry from '../components/reference/DiagramRegistry';
+import DiagramZoom from '../components/DiagramZoom';
+import { useLessonMeta } from '../contexts/LessonMetaContext';
+import { Lock } from 'lucide-react';
 
 type Level = 'listener' | 'explorer' | 'builder' | 'engineer' | 'creator';
 
 export default function LessonPage() {
   const { slug } = useParams<{ slug: string }>();
   const lesson = slug ? getLessonBySlug(slug) : undefined;
-  const [activeLevel, setActiveLevel] = useState<Level>('listener');
+  const [activeLevel, setActiveLevelRaw] = useState<Level>('listener');
   const { markLevelComplete, isLevelComplete } = useProgress();
+  const { isDemoStory } = useLessonMeta();
+  const isDemo = lesson ? isDemoStory(lesson.slug) : false;
+
+  // Prevent setting a locked level
+  const setActiveLevel = (lvl: Level) => {
+    if (lvl !== 'listener' && !isDemo) return;
+    setActiveLevelRaw(lvl);
+  };
 
   if (!lesson) {
     return (
@@ -174,9 +185,8 @@ export default function LessonPage() {
         </div>
       </section>
 
-      {/* Playground (if available) */}
-      {lesson.playground && (
-        <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
+      {/* Level tabs + content */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center gap-3 mb-4">
               <Gamepad2 className="w-6 h-6 text-emerald-500" />
@@ -194,28 +204,57 @@ export default function LessonPage() {
                 { key: 'builder' as Level, label: 'Level 2: Builder', desc: 'Intermediate', color: 'amber' },
                 { key: 'engineer' as Level, label: 'Level 3: Engineer', desc: 'Advanced', color: 'rose' },
                 { key: 'creator' as Level, label: 'Level 4: Creator', desc: 'Capstone project', color: 'purple' },
-              ]).map((lvl) => (
-                <button
-                  key={lvl.key}
-                  onClick={() => setActiveLevel(lvl.key)}
-                  className={`px-5 py-3 rounded-xl font-semibold text-sm transition-all ${
-                    activeLevel === lvl.key
-                      ? lvl.color === 'sky' ? 'bg-sky-500 text-white shadow-lg' :
-                        lvl.color === 'emerald' ? 'bg-emerald-600 text-white shadow-lg' :
-                        lvl.color === 'amber' ? 'bg-amber-500 text-white shadow-lg' :
-                        lvl.color === 'rose' ? 'bg-rose-600 text-white shadow-lg' :
-                        'bg-purple-600 text-white shadow-lg'
-                      : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
-                  }`}
-                >
-                  <span className="block">{lvl.label}</span>
-                  <span className={`block text-xs mt-0.5 ${activeLevel === lvl.key ? 'text-white/80' : 'text-gray-400'}`}>{lvl.desc}</span>
-                </button>
-              ))}
+              ]).map((lvl) => {
+                const locked = !isDemo && lvl.key !== 'listener';
+                return (
+                  <button
+                    key={lvl.key}
+                    onClick={() => !locked && setActiveLevel(lvl.key)}
+                    className={`px-5 py-3 rounded-xl font-semibold text-sm transition-all ${
+                      locked
+                        ? 'bg-gray-100 dark:bg-gray-800/50 text-gray-400 dark:text-gray-500 cursor-not-allowed opacity-60'
+                        : activeLevel === lvl.key
+                          ? lvl.color === 'sky' ? 'bg-sky-500 text-white shadow-lg' :
+                            lvl.color === 'emerald' ? 'bg-emerald-600 text-white shadow-lg' :
+                            lvl.color === 'amber' ? 'bg-amber-500 text-white shadow-lg' :
+                            lvl.color === 'rose' ? 'bg-rose-600 text-white shadow-lg' :
+                            'bg-purple-600 text-white shadow-lg'
+                          : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
+                    }`}
+                  >
+                    <span className="block flex items-center gap-1.5 justify-center">
+                      {locked && <Lock className="w-3.5 h-3.5" />}
+                      {lvl.label}
+                    </span>
+                    <span className={`block text-xs mt-0.5 ${locked ? 'text-gray-400 dark:text-gray-500' : activeLevel === lvl.key ? 'text-white/80' : 'text-gray-400'}`}>
+                      {locked ? 'Enroll to unlock' : lvl.desc}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
 
             {/* Level content — loaded dynamically per story */}
             {(() => {
+              const lockedLevel = !isDemo && activeLevel !== 'listener';
+              if (lockedLevel) {
+                return (
+                  <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-12 text-center">
+                    <Lock className="w-12 h-12 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
+                    <h3 className="text-xl font-bold text-gray-700 dark:text-gray-300 mb-2">Levels 1-4 are available for enrolled students</h3>
+                    <p className="text-gray-500 dark:text-gray-400 mb-6 max-w-md mx-auto">
+                      Level 0 gives you the full science story. Enroll to unlock hands-on coding projects across all levels.
+                    </p>
+                    <Link
+                      to="/programs"
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-xl transition-colors"
+                    >
+                      View Programs <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                );
+              }
+
               const { Level1, Level2, Level3, Level4 } = getLevelComponents(lesson.slug);
               return (
                 <Suspense fallback={<div className="text-center py-8"><div className="w-8 h-8 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto" /></div>}>
@@ -251,7 +290,6 @@ export default function LessonPage() {
             })()}
           </div>
         </section>
-      )}
 
       {/* === Everything below is hidden on Level 0 (Listener) === */}
       {activeLevel !== 'listener' && lesson.playground && (
@@ -403,7 +441,9 @@ export default function LessonPage() {
               return (
                 <Suspense fallback={<div className="h-48 rounded-xl bg-gray-100 dark:bg-gray-700/30 animate-pulse mb-6" />}>
                   <div className="mb-6">
-                    <OutputDiagram />
+                    <DiagramZoom>
+                      <OutputDiagram />
+                    </DiagramZoom>
                   </div>
                 </Suspense>
               );
@@ -474,7 +514,9 @@ plt.show()`}</pre>
                     By Level 4, enrolled students build: <strong className="text-amber-400">{lesson.stem.project.title}</strong>
                   </p>
                   <Suspense fallback={<div className="h-48 rounded-xl bg-gray-800 animate-pulse" />}>
-                    <OutputDiagram />
+                    <DiagramZoom>
+                      <OutputDiagram />
+                    </DiagramZoom>
                   </Suspense>
                 </div>
               );

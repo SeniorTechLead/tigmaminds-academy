@@ -36,6 +36,115 @@ MAPPING = {
     # These two raws have no current friendly name:
     "4bdb5359": "rhino-children-bridge",  # new: colorful rhino with children on red bridge
     "414b18a7": "brahmaputra-flood",      # new: flooding river through villages
+
+    # 100 Stories illustrations (upscaled from Midjourney)
+    "27047fa0": "girl-who-spoke-to-elephants",   # young Karbi girl pressing ear to ground
+    "38242f38": "river-dolphins-secret",          # Gangetic river dolphin surfacing
+    "f5b754b4": "clouded-leopard",                # Naga boy with clouded leopard cub
+    "fdaccdea": "snow-leopards-promise",          # Sikkimese child freeing snow leopard
+    "80abaeab": "little-elephants-mud-bath",      # baby elephant belly-flopping mud
+    "ba9fd15c": "magic-japi-hat",                 # boy holding ornate japi
+    "bb39ab42": "fishermans-daughter-storm",       # brave girl steering boat through storm
+    "002676d5": "talking-parrot-hajo",             # green parrot on temple pillar
+    "648269e2": "secret-garden-loktak",            # child discovering floating phumdi island
+    "ff988e24": "little-potter-dhubri",            # child at potter's wheel making lamps
+    "1e828b0d": "pitcher-plant",                   # large Nepenthes in Meghalaya forest
+    "d767892f": "brave-mithun",                    # large mithun leading villagers through snow
+    "c154e57d": "peacock-dance",                   # peacock with full tail spread
+    "533c88c7": "tortoise-and-hare",               # turtle sliding past stuck hare
+    "130fe847": "red-panda-mask",                  # red panda on mossy branch
+    "324a3023": "little-boat-brahmaputra",         # paper boat on Brahmaputra
+    "28a1213c": "orange-sunsets-assam",            # spirit woman painting sky orange
+    "239b6f18": "little-monk-tawang",              # young monk at Tawang monastery
+    "36072d15": "singing-bamboo-mizoram",          # Mizo boy playing flute in bamboo grove
+    "39680c86": "cloud-weaver-tawang",             # Monpa girl on stone wall above clouds
+    "31aea4b7": "map-makers-granddaughter",        # girl drawing map of NE India
+    "f5521625": "cuckoo-calls-dawn",               # Asian koel singing at dawn
+    "6500c505": "grandmothers-pitha",              # elderly woman making pithas
+    "8ddee4f9": "star-fell-deepor",                # golden lotuses on Deepor Beel
+    "0c61e8e7": "festival-lights-river",           # clay lamps floating on Brahmaputra
+    "a6e2f8a6": "monkey-bridge-namdapha",          # monkeys forming living bridge
+    "6e248e78": "seven-sisters-states",            # seven women in traditional attire
+    "0a1d50f2": "fish-jump-barak",                 # silver fish leaping from Barak River
+    "8f2b7509": "lost-temple-madan-kamdev",        # children discovering ancient ruins
+    "3dc58a92": "orchid-colors",                   # vibrant orchids on tree branches
+    "33243340": "muga-silk-golden",                  # tiny golden silkworm on som tree
+    "f492fdac": "firefly-festival-majuli",           # young boy in dark paddy field with fireflies
+    "70667638": "hornbills-crown",                   # majestic great Indian hornbill
+    "37a5b464": "girl-who-painted-rain",             # young Khasi girl under root bridge
+
+    # Batch 2 — Stories 35-100
+    "a544d402": "kite-festival-guwahati",              # boy flying kite above Guwahati
+    "240687a5": "old-banyan-tree",                     # enormous ancient banyan tree
+    "845f28b0": "holi-tea-gardens",                    # tea workers celebrating Holi
+    "071e4ea2": "postman-hills",                       # postman on Meghalaya mountain path
+    "c5782b62": "turtle-carried-mountain",             # turtle carrying stone up hillside
+    "21d8a280": "sal-tree-never-bends",                # sal tree standing firm in storm
+    "bc4d81fd": "rainbow-fish-umiam",                  # rainbow fish in Umiam Lake
+    "880d89b0": "monsoon-found-home",                  # monsoon clouds over tea gardens
+    "f2d91008": "tiny-frog-rainforest",                # tiny frog on leaf
+    "5b33b950": "grandmother-remembered",              # grandmother telling stories on veranda
+    "c9e03e2c": "stars-ziro-valley",                   # Apatani child under Milky Way
+    "c5d4a053": "little-train-hills",                  # narrow-gauge train through hills
+    "2efc32c3": "dragonfly-paddy-field",               # dragonfly over golden paddy
+    "f1525a4f": "mishing-learned-fish",                # Mishing boy watching heron
+    "c9c521d4": "coconut-jackfruit",                   # coconut looking up at jackfruit
+    "23e966cc": "night-market-imphal",                 # child exploring Ima Keithel
+    "50dbab7f": "rivers-braid-near-sea",               # aerial braided Brahmaputra
+    "0f6b2a9a": "tigers-whisker-naga",                 # Naga girl near tiger
+    "aefadf8f": "boy-counted-butterflies",             # boy with butterflies in Namdapha
+    "3a8c3c7d": "music-dimasa-kingdom",                # Dimasa princess listening to forest
+    "44d6c71d": "seed-traveled-thousand",              # seed traveling across landscapes
+    "e7624b2e": "moonlit-boat-race",                   # boats racing under full moon
+    "c5e775db": "kingfisher-blue-coat",                # kingfisher diving into river
+    "52c04e91": "witch-doctor-apprentice",             # boy learning medicinal plants
+    "ed413112": "lotus-learned-float",                 # lotus bud on pond surface
+    "dbe827d3": "turtles-slow-land",                   # turtle swimming vs walking split
+    "bc45a204": "girl-grew-forest",                    # girl planting sapling, forest timeline
+    "97a0dc0f": "boy-built-library",                   # boy arranging books in bamboo hut
+    "58c9e588": "flying-squirrel-hollongapar",         # flying squirrel gliding at night
+    "54125825": "owl-wisest-bird",                     # owl at moonlit forest council
+    "b679c527": "dhol-drum-thunder",                   # Bihu drummer with thunder clouds
+    "6c3e660e": "golden-hilsa-fisherman",              # fisherman releasing golden hilsa
+    "caaa0bdf": "market-day-tura",                     # Garo child at Tura market
+    "ee834556": "frogs-sing-rain",                     # frogs singing on lily pads
+    "3fee8d92": "eri-silk-moth",                       # eri silk moth emerging from cocoon
+
+    # Batch 3 — newly upscaled
+    "e99dcea8": "honey-hunters-lesson",                # Khasi boy sitting near beehive
+    "f81cb2a4": "cloud-namer",                         # Khasi child on hill pointing at clouds
+    "69bebc11": "dancer-floating-market",              # Manipuri girl dancing on floating island
+    "e9e8861a": "mountain-echoes",                     # Naga child shouting into valley
+    "68f949bc": "fireflies-dont-burn",                 # curious child holding glowing firefly
+    "b86033fd": "paper-umbrella",                      # girl holding silk umbrella in rain
+    "fc24dbd0": "elephant-corridor",                   # herd of elephants through corridor
+    "92d3848e": "story-garden",                        # magical garden with glowing books
+    "86d17bbe": "takin-face",                          # takin looking at reflection
+    "c76443f3": "woodpeckers-drum",                    # woodpecker drumming forest concert
+    "55f9bbe4": "little-chef",                         # child making pithas
+    "aff48cab": "guwahati-name",                       # ancient betel nut market
+    "42780af6": "seed-keeper",                         # Naga grandmother showing seeds
+    "5b8941f8": "wild-orchids-trees",                  # orchids growing on tree branches
+    "c0273b3b": "kaziranga-grass",                     # tall elephant grass with rhino
+
+    # Batch 4
+    "7cbf80b1": "basket-weavers-song",                 # Manipuri girl weaving bamboo basket
+    "14db62f2": "cloud-refused-rain",                  # stubborn cloud over Shillong
+    "b2afa93c": "first-rice",                          # Tiwa girl watching birds drop seeds
+    "edaab891": "night-jasmine",                       # white night jasmine blooming moonlit
+
+    # Batch 5 — re-runs and new stories
+    "2a2cd096": "silk-route-caterpillars",              # three silk caterpillars (re-run)
+    "abf86f0c": "bamboo-taught-wind",                  # bamboo and wind dance (re-run)
+    "c453c5a8": "girl-python-kaziranga",               # calm girl with python on veranda
+    "ffc9b7ac": "boy-raced-brahmaputra",               # boy pedaling bicycle along river
+    "e9373eb8": "ferrymans-riddle",                    # old ferryman asking riddle
+    "59b3c92f": "firewalker",                            # young Rabha girl at village gathering
+    "60c9c39b": "bamboo-grows-fast",                     # bamboo shoot racing beside teak tree
+    "7db6c6d0": "moonlit-boat-race",                    # boats racing under full moon
+    "610c7a92": "little-river-joined",                  # small stream merging into Brahmaputra
+    "8ef6647b": "haflong-blue-mountains",               # blue hills of Haflong at twilight
+    "e71a482b": "kite-eagle-dimapur",                   # paper kite and eagle over Dimapur
 }
 
 # Skip duplicates (the "(1)" file)

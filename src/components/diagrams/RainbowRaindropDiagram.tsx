@@ -1,82 +1,106 @@
 export default function RainbowRaindropDiagram() {
-  const cx = 200;
-  const cy = 130;
-  const r = 65;
+  const cx = 250;
+  const cy = 170;
+  const r = 85;
 
   return (
     <div className="bg-gray-900 rounded-xl p-4 my-4">
-      <p className="text-center text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">
+      <p className="text-center text-sm font-bold text-gray-300 uppercase tracking-wider mb-3">
         Inside a Raindrop — How a Rainbow Forms
       </p>
-      <svg viewBox="0 0 440 260" className="w-full max-w-md mx-auto">
-        {/* Raindrop (large circle) */}
-        <circle cx={cx} cy={cy} r={r} fill="rgba(100,180,255,0.1)" stroke="rgba(100,180,255,0.4)" strokeWidth={2} />
-        <text x={cx} y={cy - r - 10} textAnchor="middle" className="text-[9px]" fill="#94a3b8">Raindrop</text>
+      <svg viewBox="0 0 680 380" className="w-full max-w-xl mx-auto">
+        {/* Raindrop */}
+        <circle cx={cx} cy={cy} r={r} fill="rgba(100,180,255,0.08)" stroke="rgba(100,180,255,0.4)" strokeWidth={2.5} />
+        <text x={cx} y={cy - r - 14} textAnchor="middle" fontSize="12" className="fill-gray-500 dark:fill-slate-400">Raindrop</text>
 
-        {/* Step 1: White light enters — refraction */}
-        <line x1="40" y1="100" x2={cx - r + 10} y2="105" stroke="white" strokeWidth={2.5} opacity={0.7} />
-        <text x="40" y="92" className="text-[8px]" fill="white">White light →</text>
+        {/* Step 1: White light enters */}
+        <line x1="40" y1="130" x2={cx - r + 12} y2="138" stroke="white" strokeWidth={3} opacity={0.7} />
+        <text x="40" y="118" fontSize="11" fill="white">White light →</text>
 
-        {/* Entry point */}
-        <circle cx={cx - r + 10} cy={105} r={3} fill="#fbbf24" />
+        <circle cx={cx - r + 12} cy={138} r={4} fill="#fbbf24" />
 
         {/* Step 1 label */}
-        <rect x="10" y="30" width="100" height="28" rx="6" fill="rgba(251,191,36,0.15)" />
-        <text x="60" y="43" textAnchor="middle" className="text-[8px] font-bold" fill="#fbbf24">1. Refraction</text>
-        <text x="60" y="53" textAnchor="middle" className="text-[7px]" fill="#d4a017">Light bends entering</text>
+        <rect x="10" y="35" width="140" height="38" rx="6" fill="rgba(251,191,36,0.12)" />
+        <text x="80" y="52" textAnchor="middle" fontSize="11" fontWeight="700" fill="#fbbf24">1. Refraction</text>
+        <text x="80" y="66" textAnchor="middle" fontSize="10" fill="#d4a017">Light bends on entry</text>
 
-        {/* Refracted rays inside drop — splitting into colors */}
-        <line x1={cx - r + 12} y1={106} x2={cx + 20} y2={cy + r - 20} stroke="#ef4444" strokeWidth={1.5} opacity={0.7} />
-        <line x1={cx - r + 12} y1={105} x2={cx + 15} y2={cy + r - 15} stroke="#f97316" strokeWidth={1.2} opacity={0.6} />
-        <line x1={cx - r + 12} y1={104} x2={cx + 10} y2={cy + r - 10} stroke="#eab308" strokeWidth={1.2} opacity={0.6} />
-        <line x1={cx - r + 12} y1={103} x2={cx + 5} y2={cy + r - 8} stroke="#22c55e" strokeWidth={1.2} opacity={0.5} />
-        <line x1={cx - r + 12} y1={102} x2={cx} y2={cy + r - 5} stroke="#3b82f6" strokeWidth={1.2} opacity={0.5} />
-        <line x1={cx - r + 12} y1={101} x2={cx - 5} y2={cy + r - 3} stroke="#8b5cf6" strokeWidth={1.2} opacity={0.4} />
+        {/* Refracted rays inside — splitting into colors */}
+        {[
+          { dy: 0, color: '#ef4444', w: 2 },
+          { dy: -1, color: '#f97316', w: 1.5 },
+          { dy: -2, color: '#eab308', w: 1.5 },
+          { dy: -3, color: '#22c55e', w: 1.5 },
+          { dy: -4, color: '#3b82f6', w: 1.5 },
+          { dy: -5, color: '#8b5cf6', w: 1.2 },
+        ].map((ray, i) => (
+          <line key={`in-${i}`}
+            x1={cx - r + 14} y1={138 + ray.dy}
+            x2={cx + 25 - i * 5} y2={cy + r - 25 + i * 3}
+            stroke={ray.color} strokeWidth={ray.w} opacity={0.6}
+          />
+        ))}
 
-        {/* Step 2: Reflection at back of drop */}
-        <circle cx={cx + 10} cy={cy + r - 15} r={3} fill="rgba(255,255,255,0.5)" />
+        {/* Step 2: Reflection at back */}
+        <circle cx={cx + 15} cy={cy + r - 18} r={4} fill="rgba(255,255,255,0.5)" />
 
-        <rect x="280" y="170" width="100" height="28" rx="6" fill="rgba(255,255,255,0.1)" />
-        <text x="330" y="183" textAnchor="middle" className="text-[8px] font-bold" fill="white">2. Reflection</text>
-        <text x="330" y="193" textAnchor="middle" className="text-[7px]" fill="#94a3b8">Bounces off back wall</text>
+        <rect x="370" y="220" width="145" height="38" rx="6" fill="rgba(255,255,255,0.08)" />
+        <text x="442" y="237" textAnchor="middle" fontSize="11" fontWeight="700" fill="white">2. Reflection</text>
+        <text x="442" y="251" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Bounces off back wall</text>
 
-        {/* Reflected rays going back */}
-        <line x1={cx + 18} y1={cy + r - 20} x2={cx - 25} y2={cy - r + 25} stroke="#ef4444" strokeWidth={1.5} opacity={0.7} />
-        <line x1={cx + 13} y1={cy + r - 15} x2={cx - 30} y2={cy - r + 22} stroke="#f97316" strokeWidth={1.2} opacity={0.6} />
-        <line x1={cx + 8} y1={cy + r - 10} x2={cx - 35} y2={cy - r + 20} stroke="#eab308" strokeWidth={1.2} opacity={0.5} />
-        <line x1={cx + 3} y1={cy + r - 8} x2={cx - 38} y2={cy - r + 18} stroke="#22c55e" strokeWidth={1.2} opacity={0.5} />
-        <line x1={cx - 2} y1={cy + r - 5} x2={cx - 42} y2={cy - r + 16} stroke="#3b82f6" strokeWidth={1.2} opacity={0.5} />
-        <line x1={cx - 7} y1={cy + r - 3} x2={cx - 45} y2={cy - r + 14} stroke="#8b5cf6" strokeWidth={1.2} opacity={0.4} />
+        {/* Reflected rays back */}
+        {[
+          { sx: 22, sy: -25, ex: -30, ey: 30, color: '#ef4444', w: 2 },
+          { sx: 17, sy: -20, ex: -36, ey: 27, color: '#f97316', w: 1.5 },
+          { sx: 12, sy: -15, ex: -42, ey: 24, color: '#eab308', w: 1.5 },
+          { sx: 7, sy: -12, ex: -46, ey: 21, color: '#22c55e', w: 1.5 },
+          { sx: 2, sy: -8, ex: -52, ey: 18, color: '#3b82f6', w: 1.5 },
+          { sx: -3, sy: -5, ex: -56, ey: 15, color: '#8b5cf6', w: 1.2 },
+        ].map((ray, i) => (
+          <line key={`ref-${i}`}
+            x1={cx + ray.sx} y1={cy + r + ray.sy}
+            x2={cx + ray.ex} y2={cy - r + ray.ey}
+            stroke={ray.color} strokeWidth={ray.w} opacity={0.5}
+          />
+        ))}
 
-        {/* Step 3: Refraction exiting — colors separate further */}
-        <circle cx={cx - 30} cy={cy - r + 22} r={3} fill="#fbbf24" />
+        {/* Step 3: Exit refraction */}
+        <circle cx={cx - 36} cy={cy - r + 27} r={4} fill="#fbbf24" />
 
-        <rect x="10" y="180" width="120" height="28" rx="6" fill="rgba(251,191,36,0.15)" />
-        <text x="70" y="193" textAnchor="middle" className="text-[8px] font-bold" fill="#fbbf24">3. Refraction (exit)</text>
-        <text x="70" y="203" textAnchor="middle" className="text-[7px]" fill="#d4a017">Colors spread apart more</text>
+        <rect x="10" y="240" width="160" height="38" rx="6" fill="rgba(251,191,36,0.12)" />
+        <text x="90" y="257" textAnchor="middle" fontSize="11" fontWeight="700" fill="#fbbf24">3. Refraction (exit)</text>
+        <text x="90" y="271" textAnchor="middle" fontSize="10" fill="#d4a017">Colours spread apart more</text>
 
-        {/* Exiting colored rays — spread out */}
-        <line x1={cx - 32} y1={cy - r + 24} x2="350" y2="40" stroke="#ef4444" strokeWidth={2} opacity={0.8} />
-        <line x1={cx - 35} y1={cy - r + 21} x2="355" y2="52" stroke="#f97316" strokeWidth={1.8} opacity={0.7} />
-        <line x1={cx - 38} y1={cy - r + 19} x2="358" y2="64" stroke="#eab308" strokeWidth={1.5} opacity={0.7} />
-        <line x1={cx - 41} y1={cy - r + 17} x2="360" y2="76" stroke="#22c55e" strokeWidth={1.5} opacity={0.6} />
-        <line x1={cx - 44} y1={cy - r + 15} x2="362" y2="88" stroke="#3b82f6" strokeWidth={1.5} opacity={0.6} />
-        <line x1={cx - 47} y1={cy - r + 13} x2="363" y2="100" stroke="#8b5cf6" strokeWidth={1.5} opacity={0.5} />
+        {/* Exiting colored rays */}
+        {[
+          { ex: 480, ey: 42, color: '#ef4444', w: 2.5 },
+          { ex: 485, ey: 60, color: '#f97316', w: 2 },
+          { ex: 490, ey: 78, color: '#eab308', w: 2 },
+          { ex: 495, ey: 96, color: '#22c55e', w: 2 },
+          { ex: 498, ey: 114, color: '#3b82f6', w: 2 },
+          { ex: 500, ey: 132, color: '#8b5cf6', w: 1.8 },
+        ].map((ray, i) => (
+          <line key={`out-${i}`}
+            x1={cx - 38 - i * 3} y1={cy - r + 25 + i * 2}
+            x2={ray.ex} y2={ray.ey}
+            stroke={ray.color} strokeWidth={ray.w} opacity={0.7}
+          />
+        ))}
 
-        {/* Color labels */}
-        <text x="370" y="42" className="text-[8px] font-semibold" fill="#ef4444">Red (42°)</text>
-        <text x="375" y="66" className="text-[7px]" fill="#f97316">Orange</text>
-        <text x="378" y="78" className="text-[7px]" fill="#eab308">Yellow</text>
-        <text x="380" y="90" className="text-[7px]" fill="#22c55e">Green</text>
-        <text x="382" y="102" className="text-[7px]" fill="#3b82f6">Blue</text>
-        <text x="383" y="108" className="text-[8px] font-semibold" fill="#8b5cf6">Violet (40°)</text>
+        {/* Color labels — well spaced */}
+        <text x="510" y="46" fontSize="12" fontWeight="600" fill="#ef4444">Red (42°)</text>
+        <text x="515" y="64" fontSize="11" fill="#f97316">Orange</text>
+        <text x="518" y="82" fontSize="11" fill="#eab308">Yellow</text>
+        <text x="522" y="100" fontSize="11" fill="#22c55e">Green</text>
+        <text x="525" y="118" fontSize="11" fill="#3b82f6">Blue</text>
+        <text x="528" y="138" fontSize="12" fontWeight="600" fill="#8b5cf6">Violet (40°)</text>
 
         {/* Summary */}
-        <text x="220" y="240" textAnchor="middle" className="text-[9px]" fill="#fbbf24">
+        <rect x="100" y="310" width="480" height="48" rx="8" fill="rgba(251,191,36,0.08)" />
+        <text x="340" y="332" textAnchor="middle" fontSize="12" fontWeight="600" fill="#fbbf24">
           Refract → Reflect → Refract = white light splits into a rainbow
         </text>
-        <text x="220" y="253" textAnchor="middle" className="text-[8px]" fill="#94a3b8">
-          Each color exits at a slightly different angle — red at 42°, violet at 40°
+        <text x="340" y="349" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">
+          Each colour exits at a slightly different angle — red at 42°, violet at 40°
         </text>
       </svg>
     </div>

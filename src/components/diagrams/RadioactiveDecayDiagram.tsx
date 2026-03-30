@@ -1,7 +1,7 @@
 export default function RadioactiveDecayDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 500 250" className="w-full max-w-lg mx-auto" role="img" aria-label="Radioactive decay diagram showing alpha, beta, and gamma radiation penetration through paper, aluminum, and lead">
+      <svg viewBox="0 0 577 298" className="w-full max-w-lg mx-auto" role="img" aria-label="Radioactive decay diagram showing alpha, beta, and gamma radiation penetration through paper, aluminum, and lead">
         <text x="250" y="22" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="14" fontWeight="bold">Types of Radioactive Decay</text>
 
         {/* Radiation source */}

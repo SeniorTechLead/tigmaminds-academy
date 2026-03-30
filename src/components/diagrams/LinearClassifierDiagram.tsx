@@ -98,7 +98,7 @@ export default function LinearClassifierDiagram() {
       </div>
 
       <svg
-        viewBox="0 0 500 460"
+        viewBox="0 0 533 483"
         className="w-full"
         style={{ background: "#0f172a", borderRadius: 12 }}
       >

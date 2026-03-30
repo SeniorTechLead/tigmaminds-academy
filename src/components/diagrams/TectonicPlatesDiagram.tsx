@@ -1,7 +1,7 @@
 export default function TectonicPlatesDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 540 300" className="w-full max-w-2xl mx-auto" role="img" aria-label="Simplified world map showing major tectonic plates">
+      <svg viewBox="0 0 570 346" className="w-full max-w-2xl mx-auto" role="img" aria-label="Simplified world map showing major tectonic plates">
         {/* Ocean background */}
         <rect x="0" y="0" width="540" height="300" rx="4" className="fill-blue-100 dark:fill-blue-950" />
 

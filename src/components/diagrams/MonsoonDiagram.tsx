@@ -2,7 +2,7 @@ export default function MonsoonDiagram() {
   return (
     <div className="w-full max-w-2xl mx-auto my-6">
       <svg
-        viewBox="0 0 540 280"
+        viewBox="0 0 570 315"
         className="w-full"
         role="img"
         aria-label="Cross-section diagram showing summer monsoon mechanics: sun heats land, moist ocean air rushes in, hits mountains, rises and produces rain"

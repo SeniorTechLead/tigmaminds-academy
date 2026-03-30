@@ -25,7 +25,7 @@ export default function DominantRecessiveDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 500 300" className="w-full max-w-lg mx-auto" role="img" aria-label="Dominant and recessive flower color inheritance diagram">
+      <svg viewBox="0 0 545 340" className="w-full max-w-lg mx-auto" role="img" aria-label="Dominant and recessive flower color inheritance diagram">
         {/* Title */}
         <text x="250" y="16" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">Dominant vs Recessive Inheritance</text>
 

@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html><head><link rel="stylesheet" href="/src/index.css" /><style>body{margin:0;background:#0f172a;display:flex;justify-content:center;padding:20px}</style></head>
+<body><div id="root" style="max-width:900px;width:100%"></div>
+<script type="module">
+import {createRoot} from 'react-dom/client';
+import {createElement} from 'react';
+import C from '/src/components/diagrams/BanyanWaterPotentialDiagram.tsx';
+createRoot(document.getElementById('root')).render(createElement(C));
+</script></body></html>

@@ -41,7 +41,7 @@ export default function SpectrogramDiagram() {
   }
 
   return (
-    <svg viewBox="0 0 600 250" className="w-full max-w-xl mx-auto my-6" role="img" aria-label="Spectrogram diagram showing frequency over time with intensity as color">
+    <svg viewBox="0 0 630 285" className="w-full max-w-xl mx-auto my-6" role="img" aria-label="Spectrogram diagram showing frequency over time with intensity as color">
       <text x="300" y="14" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="11" fontWeight="600">
         Spectrogram: what a computer "sees" instead of hearing
       </text>

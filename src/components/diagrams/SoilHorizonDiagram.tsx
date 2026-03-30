@@ -1,7 +1,7 @@
 export default function SoilHorizonDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 350 400" className="w-full max-w-md mx-auto" role="img" aria-label="Soil horizons cross-section showing O, A, B, C horizons and bedrock">
+      <svg viewBox="0 0 395 420" className="w-full max-w-md mx-auto" role="img" aria-label="Soil horizons cross-section showing O, A, B, C horizons and bedrock">
         {/* Title */}
         <text x="175" y="20" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">
           Soil Horizons (Layers)

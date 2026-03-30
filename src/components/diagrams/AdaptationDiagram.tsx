@@ -1,7 +1,7 @@
 export default function AdaptationDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 540 220" className="w-full max-w-xl mx-auto" role="img" aria-label="Adaptation examples from NE India">
+      <svg viewBox="0 0 567 233" className="w-full max-w-xl mx-auto" role="img" aria-label="Adaptation examples from NE India">
         {/* Title */}
         <text x="270" y="20" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">
           Adaptations in NE India Wildlife

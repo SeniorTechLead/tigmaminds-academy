@@ -11,11 +11,11 @@ const StudentsPage = lazy(() => import('./pages/StudentsPage'));
 const MentorsPage = lazy(() => import('./pages/MentorsPage'));
 const InstructorsPage = lazy(() => import('./pages/InstructorsPage'));
 const CareersPage = lazy(() => import('./pages/CareersPage'));
-const CookiePage = lazy(() => import('./pages/CookiePage'));
 const LessonsIndexPage = lazy(() => import('./pages/LessonsIndexPage'));
 const CertificatePage = lazy(() => import('./pages/CertificatePage'));
 const LessonPlanPage = lazy(() => import('./pages/LessonPlanPage'));
 const AuthPage = lazy(() => import('./pages/AuthPage'));
+const ReferencePage = lazy(() => import('./pages/ReferencePage'));
 const LessonPage = lazy(() => import('./pages/LessonPage'));
 
 function App() {
@@ -33,11 +33,12 @@ function App() {
           <Route path="/mentors" element={<MentorsPage />} />
           <Route path="/instructors" element={<InstructorsPage />} />
           <Route path="/careers" element={<CareersPage />} />
-          <Route path="/cookies" element={<CookiePage />} />
           <Route path="/lessons" element={<LessonsIndexPage />} />
           <Route path="/certificate" element={<CertificatePage />} />
           <Route path="/plan" element={<LessonPlanPage />} />
           <Route path="/auth" element={<AuthPage />} />
+          <Route path="/reference" element={<ReferencePage />} />
+          <Route path="/reference/:slug" element={<ReferencePage />} />
           <Route path="/lessons/:slug" element={<LessonPage />} />
         </Routes>
       </Suspense>

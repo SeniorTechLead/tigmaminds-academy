@@ -89,7 +89,7 @@ export default function TessellationDiagram() {
   return (
     <div className="w-full max-w-lg mx-auto my-6">
       <svg
-        viewBox="0 0 500 350"
+        viewBox="0 0 525 367"
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-auto"
         role="img"
@@ -120,7 +120,7 @@ export default function TessellationDiagram() {
         {/* Honeycomb label */}
         <text
           x={250}
-          y={200}
+          y={218}
           textAnchor="middle"
           fontSize={12}
           fontWeight={600}

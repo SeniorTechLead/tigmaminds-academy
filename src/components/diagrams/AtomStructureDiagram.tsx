@@ -28,7 +28,7 @@ export default function AtomStructureDiagram() {
         @keyframes orbit1 { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes orbit2 { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
       `}</style>
-      <svg viewBox="0 0 400 400" className="w-full max-w-lg mx-auto" role="img" aria-label="Bohr model of a carbon atom">
+      <svg viewBox="0 0 420 420" className="w-full max-w-lg mx-auto" role="img" aria-label="Bohr model of a carbon atom">
         {/* Shell orbit circles */}
         <circle cx={cx} cy={cy} r={shell1R} fill="none" className="stroke-gray-400 dark:stroke-gray-500" strokeWidth="1" strokeDasharray="6,4" />
         <circle cx={cx} cy={cy} r={shell2R} fill="none" className="stroke-gray-400 dark:stroke-gray-500" strokeWidth="1" strokeDasharray="6,4" />

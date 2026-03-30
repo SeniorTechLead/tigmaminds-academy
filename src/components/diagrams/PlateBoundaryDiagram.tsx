@@ -1,7 +1,7 @@
 export default function PlateBoundaryDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 540 200" className="w-full max-w-2xl mx-auto" role="img" aria-label="Three types of plate boundaries: convergent, divergent, and transform">
+      <svg viewBox="0 0 595 242" className="w-full max-w-2xl mx-auto" role="img" aria-label="Three types of plate boundaries: convergent, divergent, and transform">
         <defs>
           <marker id="pb-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
             <polygon points="0 0, 8 3, 0 6" className="fill-gray-600 dark:fill-gray-300" />

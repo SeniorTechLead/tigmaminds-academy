@@ -9,7 +9,7 @@ export default function PlotAnatomyDiagram() {
   const pathStr = points.map((p, i) => `${i === 0 ? 'M' : 'L'}${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
 
   return (
-    <svg viewBox="0 0 600 230" className="w-full max-w-xl mx-auto my-6" role="img" aria-label="Anatomy of a plot: axes, labels, title, and data line">
+    <svg viewBox="0 0 630 275" className="w-full max-w-xl mx-auto my-6" role="img" aria-label="Anatomy of a plot: axes, labels, title, and data line">
       <text x="300" y="16" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="11" fontWeight="600">
         Anatomy of a plot — what plt.plot() creates
       </text>

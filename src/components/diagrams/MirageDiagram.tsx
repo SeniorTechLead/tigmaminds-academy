@@ -1,12 +1,10 @@
 export default function MirageDiagram() {
   return (
     <div className="bg-gradient-to-b from-sky-200 to-amber-100 rounded-xl p-4 my-4">
-      <p className="text-center text-xs font-bold text-gray-600 uppercase tracking-wider mb-3">
+      <p className="text-center text-sm font-bold text-gray-600 uppercase tracking-wider mb-3">
         How Mirages Form — Light Bending Near Hot Ground
       </p>
-      <svg viewBox="0 0 500 250" className="w-full max-w-lg mx-auto">
-        {/* Sky */}
-        <rect x="0" y="0" width="500" height="140" fill="url(#sky-grad)" />
+      <svg viewBox="0 0 720 360" className="w-full max-w-xl mx-auto">
         <defs>
           <linearGradient id="sky-grad" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#87CEEB" />
@@ -14,59 +12,66 @@ export default function MirageDiagram() {
           </linearGradient>
         </defs>
 
+        {/* Sky */}
+        <rect x="0" y="0" width="720" height="190" fill="url(#sky-grad)" />
+
         {/* Sun */}
-        <circle cx="400" cy="35" r="20" fill="#FFD700" opacity={0.8} />
-
-        {/* Road surface (hot) */}
-        <rect x="0" y="140" width="500" height="50" fill="#555" />
-        <rect x="0" y="140" width="500" height="3" fill="#777" />
-        {/* Heat shimmer lines */}
-        {[50, 120, 200, 280, 360, 430].map((x, i) => (
-          <path key={i} d={`M ${x} 143 Q ${x+5} 135 ${x+10} 143`} stroke="rgba(255,100,0,0.3)" strokeWidth={1} fill="none" />
-        ))}
-        <text x="250" y="175" textAnchor="middle" className="text-[9px] font-bold" fill="#ff8c00">HOT GROUND — heats air above it</text>
-
-        {/* Temperature labels */}
-        <text x="480" y="100" textAnchor="end" className="text-[7px]" fill="#4682B4">Cool air (dense)</text>
-        <text x="480" y="135" textAnchor="end" className="text-[7px]" fill="#ff6347">Hot air (thin)</text>
+        <circle cx="580" cy="45" r="25" fill="#FFD700" opacity={0.8} />
 
         {/* Air layers */}
-        <line x1="0" y1="110" x2="500" y2="110" stroke="rgba(70,130,180,0.2)" strokeWidth={0.5} strokeDasharray="4 4" />
-        <line x1="0" y1="125" x2="500" y2="125" stroke="rgba(255,99,71,0.2)" strokeWidth={0.5} strokeDasharray="4 4" />
+        <line x1="0" y1="140" x2="720" y2="140" stroke="rgba(70,130,180,0.2)" strokeWidth={1} strokeDasharray="5 4" />
+        <line x1="0" y1="170" x2="720" y2="170" stroke="rgba(255,99,71,0.2)" strokeWidth={1} strokeDasharray="5 4" />
 
-        {/* Object: a tree in the distance */}
-        <rect x="80" y="105" width="8" height="35" fill="#5a3825" />
-        <circle cx="84" cy="100" r="15" fill="#2d8a4e" />
-        <text x="84" y="82" textAnchor="middle" className="text-[7px]" fill="#2d5a30">Real tree</text>
+        {/* Temperature labels */}
+        <text x="680" y="125" textAnchor="end" fontSize="11" fill="#4682B4">Cool air (dense)</text>
+        <text x="680" y="178" textAnchor="end" fontSize="11" fill="#ff6347">Hot air (thin, less dense)</text>
 
-        {/* Light ray — normal path (straight) from tree to eye */}
-        <line x1="90" y1="110" x2="350" y2="120" stroke="#3b82f6" strokeWidth={1.5} strokeDasharray="4 2" opacity={0.5} />
-        <text x="220" y="108" textAnchor="middle" className="text-[7px]" fill="#3b82f6">Normal ray (straight)</text>
+        {/* Road surface */}
+        <rect x="0" y="190" width="720" height="60" fill="#555" />
+        <rect x="0" y="190" width="720" height="4" fill="#777" />
 
-        {/* Light ray — mirage path (curves down then up) */}
-        <path d="M 90 115 Q 180 145 250 140 Q 320 136 350 125" stroke="#ef4444" strokeWidth={2} fill="none" opacity={0.8} />
-        {/* Arrow showing curve direction */}
-        <text x="200" y="150" textAnchor="middle" className="text-[8px] font-semibold" fill="#ef4444">Light bends away</text>
-        <text x="200" y="160" textAnchor="middle" className="text-[8px]" fill="#ef4444">from hot air</text>
+        {/* Heat shimmer */}
+        {[60, 150, 250, 350, 450, 550, 640].map((x, i) => (
+          <path key={i} d={`M ${x} 194 Q ${x+6} 184 ${x+12} 194`} stroke="rgba(255,100,0,0.4)" strokeWidth={1.5} fill="none" />
+        ))}
+        <text x="360" y="228" textAnchor="middle" fontSize="12" fontWeight="700" fill="#ff8c00">
+          HOT GROUND — heats air above it
+        </text>
+
+        {/* Tree (real object) */}
+        <rect x="100" y="135" width="10" height="55" fill="#5a3825" />
+        <circle cx="105" cy="128" r="20" fill="#2d8a4e" />
+        <text x="105" y="100" textAnchor="middle" fontSize="11" fontWeight="600" fill="#2d5a30">Real tree</text>
+
+        {/* Normal light ray (straight, blue dashed) */}
+        <line x1="115" y1="140" x2="500" y2="155" stroke="#3b82f6" strokeWidth={2} strokeDasharray="5 3" opacity={0.5} />
+        <text x="300" y="138" textAnchor="middle" fontSize="11" fill="#3b82f6">Normal ray (straight)</text>
+
+        {/* Mirage light ray (curves — bends away from hot air) */}
+        <path d="M 115 148 Q 250 192 360 185 Q 450 180 500 162" stroke="#ef4444" strokeWidth={2.5} fill="none" opacity={0.8} />
+        <text x="270" y="200" textAnchor="middle" fontSize="11" fontWeight="600" fill="#ef4444">Light bends away</text>
+        <text x="270" y="215" textAnchor="middle" fontSize="11" fill="#ef4444">from hot air layer</text>
 
         {/* Observer's eye */}
-        <ellipse cx="360" cy="122" rx="8" ry="5" fill="white" stroke="#333" strokeWidth={1} />
-        <circle cx="360" cy="122" r="3" fill="#4a3728" />
-        <circle cx="361" cy="121" r="1" fill="white" />
-        <text x="360" y="115" textAnchor="middle" className="text-[7px]" fill="#333">Your eye</text>
+        <ellipse cx="510" cy="158" rx="10" ry="7" fill="white" stroke="#333" strokeWidth={1.5} />
+        <circle cx="510" cy="158" r="4" fill="#4a3728" />
+        <circle cx="511" cy="157" r="1.5" fill="white" />
+        <text x="510" y="145" textAnchor="middle" fontSize="11" fontWeight="600" fill="#333">Your eye</text>
 
-        {/* Where the brain THINKS the light came from — below ground */}
-        <line x1="350" y1="125" x2="250" y2="190" stroke="#ef4444" strokeWidth={1} strokeDasharray="3 3" opacity={0.5} />
+        {/* Brain's projected line (below ground) */}
+        <line x1="500" y1="162" x2="360" y2="290" stroke="#ef4444" strokeWidth={1.5} strokeDasharray="4 3" opacity={0.4} />
 
-        {/* Mirage image (inverted tree, below road) */}
-        <rect x="240" y="190" width="6" height="25" fill="#5a3825" opacity={0.3} />
-        <circle cx="243" cy="218" r="10" fill="#2d8a4e" opacity={0.2} />
-        <text x="280" y="205" className="text-[8px] font-semibold" fill="#ef4444">Mirage!</text>
-        <text x="280" y="215" className="text-[7px]" fill="#999">Brain sees inverted image</text>
-        <text x="280" y="225" className="text-[7px]" fill="#999">(looks like water reflection)</text>
+        {/* Underground area */}
+        <rect x="0" y="250" width="720" height="110" fill="rgba(168,136,104,0.2)" />
 
-        {/* Ground line */}
-        <rect x="0" y="190" width="500" height="60" fill="#a8886850" />
+        {/* Mirage image (inverted, faded) */}
+        <rect x="350" y="270" width="8" height="35" fill="#5a3825" opacity={0.25} />
+        <circle cx="354" cy="308" r="14" fill="#2d8a4e" opacity={0.15} />
+
+        <text x="410" y="280" fontSize="13" fontWeight="700" fill="#ef4444">Mirage!</text>
+        <text x="410" y="298" fontSize="11" fill="#888">Brain sees inverted image</text>
+        <text x="410" y="314" fontSize="11" fill="#888">below ground — looks like</text>
+        <text x="410" y="330" fontSize="11" fill="#888">water reflecting the tree</text>
       </svg>
     </div>
   );

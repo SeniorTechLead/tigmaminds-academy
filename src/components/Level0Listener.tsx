@@ -8,6 +8,7 @@ import MatchingActivity from './interactive/MatchingActivity';
 import TrueFalse from './interactive/TrueFalse';
 import DidYouKnow from './interactive/DidYouKnow';
 import diagramRegistry from './reference/DiagramRegistry';
+import DiagramZoom from './DiagramZoom';
 
 interface Props {
   lesson: Lesson;
@@ -24,14 +25,15 @@ function ConceptCard({ title, icon, children }: { title: string; icon: React.Rea
   const [expanded, setExpanded] = useState(true);
   return (
     <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden mb-6">
-      <button onClick={() => setExpanded(!expanded)}
-        className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors">
-        <div className="flex items-center gap-3">
-          {icon}
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white">{title}</h3>
+      <div className="px-6 py-4 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors">
+        <div className="flex items-center gap-3 min-w-0">
+          <span className="flex-shrink-0">{icon}</span>
+          <h3 className="text-lg font-bold text-gray-900 dark:text-white select-text cursor-text">{title}</h3>
         </div>
-        <ArrowRight className={`w-5 h-5 text-gray-400 transition-transform ${expanded ? 'rotate-90' : ''}`} />
-      </button>
+        <button onClick={() => setExpanded(!expanded)} className="flex-shrink-0 ml-3 p-1 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors" aria-label={expanded ? 'Collapse section' : 'Expand section'}>
+          <ArrowRight className={`w-5 h-5 text-gray-400 transition-transform ${expanded ? 'rotate-90' : ''}`} />
+        </button>
+      </div>
       {expanded && <div className="px-6 pb-6">{children}</div>}
     </div>
   );
@@ -53,6 +55,7 @@ export default function Level0Listener({ lesson }: Props) {
   const [completed, setCompleted] = useState(false);
 
   const concepts = lesson.level0?.concepts;
+  const realWorldFacts: string[] = (lesson.stem as any)?.realWorld ?? [];
   const hasSpecificVocab = lesson.level0?.vocabulary &&
     !lesson.level0.vocabulary.some(([term]) => term === 'Variable' || term === 'Observation');
 
@@ -221,7 +224,9 @@ export default function Level0Listener({ lesson }: Props) {
             {DiagramComponent && (
               <Suspense fallback={<div className="h-48 rounded-xl bg-gray-100 dark:bg-gray-700/30 animate-pulse mt-4" />}>
                 <div className="mt-4">
-                  <DiagramComponent />
+                  <DiagramZoom>
+                    <DiagramComponent />
+                  </DiagramZoom>
                 </div>
               </Suspense>
             )}
@@ -235,11 +240,11 @@ export default function Level0Listener({ lesson }: Props) {
       })}
 
       {/* ===== DID YOU KNOW FACTS ===== */}
-      {(lesson.level0?.facts?.length || lesson.stem.realWorld.length > 0) && (
+      {(lesson.level0?.facts?.length || realWorldFacts.length > 0) && (
         <ConceptCard title="Did You Know?" icon={<Sparkles className="w-6 h-6 text-amber-500" />}>
           <DidYouKnow facts={[
             ...(lesson.level0?.facts || []),
-            ...lesson.stem.realWorld,
+            ...realWorldFacts,
           ].slice(0, 8)} />
         </ConceptCard>
       )}
@@ -270,10 +275,10 @@ export default function Level0Listener({ lesson }: Props) {
       )}
 
       {/* ===== REAL WORLD CONNECTIONS ===== */}
-      {lesson.stem.realWorld.length > 0 && (
+      {realWorldFacts.length > 0 && (
         <ConceptCard title="In the Real World" icon={<Globe className="w-6 h-6 text-emerald-500" />}>
           <div className="space-y-3">
-            {lesson.stem.realWorld.map((fact, i) => (
+            {realWorldFacts.map((fact, i) => (
               <div key={i} className="flex items-start gap-3 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg p-3">
                 <span className="w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">{i + 1}</span>
                 <p className="text-sm text-emerald-800 dark:text-emerald-300">{fact}</p>
@@ -297,7 +302,9 @@ export default function Level0Listener({ lesson }: Props) {
                 return (
                   <Suspense fallback={<div className="h-32 rounded-xl bg-gray-100 dark:bg-gray-700/30 animate-pulse mt-3" />}>
                     <div className="mt-3">
-                      <ActivityDiagram />
+                      <DiagramZoom>
+                        <ActivityDiagram />
+                      </DiagramZoom>
                     </div>
                   </Suspense>
                 );

@@ -14,7 +14,7 @@ export default function MapProjectionDiagram() {
   return (
     <div className="w-full max-w-2xl mx-auto my-6">
       <svg
-        viewBox="0 0 540 220"
+        viewBox="0 0 567 231"
         className="w-full"
         role="img"
         aria-label="Three map projections compared: Mercator, Peters Equal-area, and Globe"

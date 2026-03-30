@@ -16,7 +16,7 @@ export default function SineWaveDiagram() {
     pts.map((p, i) => `${i === 0 ? 'M' : 'L'}${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
 
   return (
-    <svg viewBox="0 0 600 280" className="w-full max-w-xl mx-auto my-6" role="img" aria-label="Annotated sine wave showing frequency, amplitude, and period">
+    <svg viewBox="0 0 690 312" className="w-full max-w-xl mx-auto my-6" role="img" aria-label="Annotated sine wave showing frequency, amplitude, and period">
 
       {/* === Low frequency wave === */}
       <text x="300" y="18" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="11" fontWeight="600">

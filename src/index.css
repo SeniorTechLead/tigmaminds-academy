@@ -8,6 +8,15 @@
     --color-secondary: 34 197 94;
     --color-accent: 249 115 22;
     --color-warm: 251 146 60;
+    --diagram-bg: #ffffff;
+    --diagram-text: #1e293b;
+    --diagram-text-muted: #64748b;
+  }
+
+  .dark {
+    --diagram-bg: #0f172a;
+    --diagram-text: #f8fafc;
+    --diagram-text-muted: #94a3b8;
   }
 
   body {

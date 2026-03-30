@@ -52,7 +52,7 @@ export default function ElectronShellDiagram() {
       </div>
 
       <svg
-        viewBox="0 0 400 400"
+        viewBox="0 0 420 426"
         className="w-full max-w-md mx-auto"
         role="img"
         aria-label={`Electron shell diagram for ${el.name}`}

@@ -50,7 +50,7 @@ export default function DemographicTransitionDiagram() {
   return (
     <div className="w-full max-w-2xl mx-auto my-6">
       <svg
-        viewBox="0 0 500 300"
+        viewBox="0 0 525 315"
         className="w-full"
         role="img"
         aria-label="Demographic Transition Model showing 4 stages with birth rate and death rate curves"

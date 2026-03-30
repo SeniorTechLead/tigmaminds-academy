@@ -1,6 +1,12 @@
 import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Sparkles } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
+import MountainPressureDiagram from '../diagrams/MountainPressureDiagram';
+import MountainOxygenDiagram from '../diagrams/MountainOxygenDiagram';
+import MountainLapseRateDiagram from '../diagrams/MountainLapseRateDiagram';
+import MountainWeatherDiagram from '../diagrams/MountainWeatherDiagram';
+import MountainBodyAdaptDiagram from '../diagrams/MountainBodyAdaptDiagram';
+import SnowLeopardAnatomyDiagram from '../diagrams/SnowLeopardAnatomyDiagram';
 import AltitudeProfileDiagram from '../diagrams/AltitudeProfileDiagram';
 import HeatTransferDiagram from '../diagrams/HeatTransferDiagram';
 import ClimateFactorsDiagram from '../diagrams/ClimateFactorsDiagram';

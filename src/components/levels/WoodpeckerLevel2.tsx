@@ -1,6 +1,12 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Sparkles } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
+import WoodpeckerForceMassDiagram from '../diagrams/WoodpeckerForceMassDiagram';
+import WoodpeckerDecelerationDiagram from '../diagrams/WoodpeckerDecelerationDiagram';
+import WoodpeckerTongueDiagram from '../diagrams/WoodpeckerTongueDiagram';
+import WoodpeckerDrumPatternDiagram from '../diagrams/WoodpeckerDrumPatternDiagram';
+import WoodpeckerMaterialsDiagram from '../diagrams/WoodpeckerMaterialsDiagram';
+import WoodpeckerEvolutionDiagram from '../diagrams/WoodpeckerEvolutionDiagram';
 
 export default function WoodpeckerLevel2() {
   const pyodideRef = useRef<any>(null);
@@ -47,7 +53,6 @@ The area under the force-vs-time curve is always the same. Only the shape change
       checkAnswer: 'Impulse = m * (v_final - v_initial) = 0.15 * (50 - (-40)) = 0.15 * 90 = 13.5 N*s. (Note: initial velocity is negative because it reverses direction.) Average force = J/dt = 13.5 / 0.001 = 13,500 N — about 1.5 tons of force from a bat. That\'s why baseballs deform during contact.',
       codeIntro: 'Demonstrate that different force profiles can deliver the same impulse.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Same impulse (momentum change), different force profiles
 # Impulse J = m * delta_v = 0.002 * 7 = 0.014 N*s
@@ -73,37 +78,6 @@ dt3 = 3.0
 F3 = (J / (dt3 / 1000)) * np.exp(-((time - 2.5) ** 2) / (2 * (dt3/2.5)**2))
 F3 = F3 / (np.trapz(F3, time / 1000)) * J
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
-fig.patch.set_facecolor('#1f2937')
-
-# Force profiles
-ax1.set_facecolor('#111827')
-ax1.plot(time, F1, color='#ef4444', linewidth=2, label=f'Rigid ({max(F1):.0f}N peak)')
-ax1.plot(time, F2, color='#f59e0b', linewidth=2, label=f'Padded ({max(F2):.0f}N peak)')
-ax1.plot(time, F3, color='#22c55e', linewidth=2, label=f'Bio-inspired ({max(F3):.0f}N peak)')
-ax1.set_xlabel('Time (ms)', color='white')
-ax1.set_ylabel('Force (N)', color='white')
-ax1.set_title('Same Impulse, Different Force Profiles', color='white', fontsize=13)
-ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=9)
-ax1.tick_params(colors='gray')
-
-# Cumulative impulse (should all reach the same value)
-ax2.set_facecolor('#111827')
-cum1 = np.cumsum(F1) * (time[1] - time[0]) / 1000
-cum2 = np.cumsum(F2) * (time[1] - time[0]) / 1000
-cum3 = np.cumsum(F3) * (time[1] - time[0]) / 1000
-ax2.plot(time, cum1 * 1000, color='#ef4444', linewidth=2, label='Rigid')
-ax2.plot(time, cum2 * 1000, color='#f59e0b', linewidth=2, label='Padded')
-ax2.plot(time, cum3 * 1000, color='#22c55e', linewidth=2, label='Bio-inspired')
-ax2.axhline(J * 1000, color='white', linestyle='--', linewidth=1, label=f'Total impulse = {J*1000:.1f} mN*s')
-ax2.set_xlabel('Time (ms)', color='white')
-ax2.set_ylabel('Cumulative impulse (mN*s)', color='white')
-ax2.set_title('All Profiles Deliver the Same Total Impulse', color='white', fontsize=13)
-ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=9)
-ax2.tick_params(colors='gray')
-
-plt.tight_layout()
-plt.show()
 
 print(f"Impulse = m * v = {m} * {v} = {J} N*s = {J*1000} mN*s")
 print()
@@ -141,7 +115,6 @@ That's the difference between fatal and survivable.`,
       checkAnswer: 'Three limits: (1) The car has a fixed length — more crumple zone means less passenger space. (2) Beyond a certain crush distance, the structure "bottoms out" and force spikes again. (3) The occupant is connected to the car via seatbelt/airbag, which has its own force limits. The optimal design balances crush distance against these constraints — typically 0.5-0.8m for modern cars.',
       codeIntro: 'Simulate a car crash with and without a crumple zone.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Car crash simulation
 mass = 1500  # kg
@@ -176,64 +149,6 @@ for i in range(1, len(distances)):
         decel = force_profile[i] / mass
         v_crumple[i] = max(0, np.sqrt(max(0, v_crumple[i-1]**2 - 2 * decel * dt_step)))
 
-fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(12, 9))
-fig.patch.set_facecolor('#1f2937')
-
-# Velocity vs distance
-ax1.set_facecolor('#111827')
-ax1.plot(distances * 100, v_rigid * 3.6, color='#ef4444', linewidth=2, label='Rigid car')
-ax1.plot(distances * 100, v_crumple * 3.6, color='#22c55e', linewidth=2, label='Crumple zone')
-ax1.set_xlabel('Crush distance (cm)', color='white')
-ax1.set_ylabel('Speed (km/h)', color='white')
-ax1.set_title('Speed vs Crush Distance', color='white', fontsize=11)
-ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax1.tick_params(colors='gray')
-
-# Force comparison
-ax2.set_facecolor('#111827')
-labels = ['Rigid car', 'Crumple zone']
-forces_kn = [F_rigid / 1000, F_crumple / 1000]
-colors = ['#ef4444', '#22c55e']
-bars = ax2.bar(labels, forces_kn, color=colors, width=0.5)
-ax2.set_ylabel('Average force (kN)', color='white')
-ax2.set_title('Peak Force Comparison', color='white', fontsize=11)
-ax2.tick_params(colors='gray')
-for bar, f in zip(bars, forces_kn):
-    ax2.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 20,
-             f'{f:.0f} kN', ha='center', color='white', fontsize=11)
-
-# G-forces on occupant
-ax3.set_facecolor('#111827')
-occupant_mass = 75  # kg
-g_rigid = F_rigid / (occupant_mass * 9.8)
-g_crumple = F_crumple / (occupant_mass * 9.8)
-bars3 = ax3.bar(labels, [g_rigid, g_crumple], color=colors, width=0.5)
-ax3.axhline(80, color='#f59e0b', linestyle='--', linewidth=1, label='Survivability limit (~80g)')
-ax3.set_ylabel('G-force on occupant', color='white')
-ax3.set_title('Occupant G-Force', color='white', fontsize=11)
-ax3.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax3.tick_params(colors='gray')
-for bar, g in zip(bars3, [g_rigid, g_crumple]):
-    ax3.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 2,
-             f'{g:.0f}g', ha='center', color='white', fontsize=11)
-
-# Energy absorption
-ax4.set_facecolor('#111827')
-crush_d = np.linspace(0.05, 1.0, 100)
-force_for_d = KE / crush_d / 1000  # kN
-g_for_d = KE / crush_d / (occupant_mass * 9.8)
-ax4.plot(crush_d * 100, g_for_d, color='#3b82f6', linewidth=2)
-ax4.axhline(80, color='#f59e0b', linestyle='--', linewidth=1, label='Survivability limit')
-ax4.fill_between(crush_d * 100, g_for_d, 80, where=g_for_d > 80, alpha=0.15, color='#ef4444')
-ax4.fill_between(crush_d * 100, g_for_d, 0, where=g_for_d <= 80, alpha=0.15, color='#22c55e')
-ax4.set_xlabel('Crush distance (cm)', color='white')
-ax4.set_ylabel('Occupant g-force', color='white')
-ax4.set_title('Required Crush Distance for Survival', color='white', fontsize=11)
-ax4.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax4.tick_params(colors='gray')
-
-plt.tight_layout()
-plt.show()
 
 min_d = KE / (80 * occupant_mass * 9.8)
 print(f"Kinetic energy: {KE:,.0f} J ({KE/1000:.1f} kJ)")
@@ -266,7 +181,6 @@ Each generation addressed a new failure mode, getting closer to nature's solutio
       checkAnswer: 'The brain is made of layers (gray matter, white matter) with different densities. Rotational acceleration causes these layers to slide against each other, shearing the axons (nerve fibers) that connect them. This is called diffuse axonal injury and is the most common cause of severe concussion and traumatic brain injury. Linear forces compress the brain; rotational forces tear it.',
       codeIntro: 'Compare the protection characteristics of different helmet generations.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Helmet generation comparison
 # Simulate a 5 m/s impact (typical cycling crash)
@@ -294,54 +208,6 @@ gen3_rotational = gen2 * 0.4  # much better rotational
 gen4 = 200 * np.exp(-((time - 6)**2) / 8)
 gen4 = gen4 / np.trapz(gen4, time/1000) * J
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
-fig.patch.set_facecolor('#1f2937')
-
-# Linear force comparison
-ax1.set_facecolor('#111827')
-ax1.plot(time, gen1 / (head_mass * 9.8), color='#6b7280', linewidth=2, label='Gen 1: Hard shell')
-ax1.plot(time, gen2 / (head_mass * 9.8), color='#f59e0b', linewidth=2, label='Gen 2: EPS foam')
-ax1.plot(time, gen4 / (head_mass * 9.8), color='#22c55e', linewidth=2, label='Gen 4: Bio-inspired')
-ax1.axhline(150, color='#ef4444', linestyle='--', linewidth=1, label='Concussion risk (150g)')
-ax1.set_xlabel('Time (ms)', color='white')
-ax1.set_ylabel('Linear acceleration (g)', color='white')
-ax1.set_title('Linear Impact: Helmet Generations', color='white', fontsize=13)
-ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=9)
-ax1.tick_params(colors='gray')
-
-# Radar chart of protection features
-categories = ['Linear\\nabsorption', 'Rotational\\nprotection', 'Multi-impact\\nsurvival', 'Weight', 'Ventilation', 'Cost']
-N = len(categories)
-angles = np.linspace(0, 2 * np.pi, N, endpoint=False).tolist()
-angles += angles[:1]
-
-helmets = {
-    'Gen 1: Hard shell': [3, 1, 8, 3, 4, 9],
-    'Gen 2: EPS foam': [7, 3, 2, 7, 6, 7],
-    'Gen 3: MIPS': [7, 7, 2, 6, 5, 5],
-    'Gen 4: Bio-inspired': [9, 8, 6, 5, 4, 3],
-}
-h_colors = {'Gen 1: Hard shell': '#6b7280', 'Gen 2: EPS foam': '#f59e0b',
-            'Gen 3: MIPS': '#3b82f6', 'Gen 4: Bio-inspired': '#22c55e'}
-
-ax2 = fig.add_subplot(122, polar=True)
-ax2.set_facecolor('#111827')
-for name, values in helmets.items():
-    values_plot = values + values[:1]
-    ax2.plot(angles, values_plot, 'o-', linewidth=2, label=name, color=h_colors[name])
-    ax2.fill(angles, values_plot, alpha=0.08, color=h_colors[name])
-
-ax2.set_xticks(angles[:-1])
-ax2.set_xticklabels(categories, color='white', fontsize=8)
-ax2.set_ylim(0, 10)
-ax2.set_yticks([2, 4, 6, 8, 10])
-ax2.set_yticklabels(['2', '4', '6', '8', '10'], color='gray', fontsize=7)
-ax2.legend(loc='upper right', bbox_to_anchor=(1.4, 1.1), facecolor='#1f2937',
-           edgecolor='gray', labelcolor='white', fontsize=8)
-ax2.set_title('Feature Comparison', color='white', fontsize=11, pad=20)
-
-plt.tight_layout()
-plt.show()
 
 print("Helmet evolution summary:")
 print("  Gen 1 (Hard shell): Prevents skull fracture, poor energy absorption")
@@ -379,7 +245,6 @@ Thresholds:
       checkAnswer: 'The 2.5 exponent comes from empirical data on cadaver skull fractures. It makes HIC highly sensitive to peak acceleration — a 2x increase in peak g causes a 5.7x increase in HIC (2^2.5 = 5.66). With exponent 1.0, HIC would be just the average acceleration times duration, which doesn\'t capture the outsized danger of peak forces. The non-linear exponent reflects the non-linear way brain tissue responds to acceleration.',
       codeIntro: 'Calculate the HIC value for different impact profiles.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Calculate HIC (Head Injury Criterion)
 # HIC = max over (t1,t2) of: (t2-t1) * [1/(t2-t1) * integral(a, t1, t2)]^2.5
@@ -421,43 +286,6 @@ profiles = [
     ('Bio-inspired', a_good, '#22c55e'),
 ]
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
-fig.patch.set_facecolor('#1f2937')
-
-# Force profiles
-ax1.set_facecolor('#111827')
-hic_values = []
-for name, accel, color in profiles:
-    ax1.plot(time * 1000, accel, color=color, linewidth=2, label=name)
-    hic_val, t1, t2 = calculate_hic(time, accel)
-    hic_values.append((name, hic_val, max(accel), color))
-
-ax1.axhline(300, color='white', linestyle=':', linewidth=1, alpha=0.5, label='CPSC limit (300g)')
-ax1.set_xlabel('Time (ms)', color='white')
-ax1.set_ylabel('Acceleration (g)', color='white')
-ax1.set_title('Impact Acceleration Profiles', color='white', fontsize=13)
-ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=9)
-ax1.tick_params(colors='gray')
-
-# HIC comparison
-ax2.set_facecolor('#111827')
-names = [h[0] for h in hic_values]
-hics = [h[1] for h in hic_values]
-bar_colors = [h[3] for h in hic_values]
-bars = ax2.bar(names, hics, color=bar_colors, width=0.5)
-ax2.axhline(700, color='#f59e0b', linestyle='--', linewidth=1, label='Low risk limit (700)')
-ax2.axhline(1000, color='#ef4444', linestyle='--', linewidth=1, label='High risk limit (1000)')
-ax2.set_ylabel('HIC value', color='white')
-ax2.set_title('Head Injury Criterion (HIC)', color='white', fontsize=13)
-ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=9)
-ax2.tick_params(colors='gray')
-ax2.set_xticklabels(names, color='white', fontsize=9)
-for bar, hic in zip(bars, hics):
-    ax2.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 20,
-             f'{hic:.0f}', ha='center', color='white', fontsize=11)
-
-plt.tight_layout()
-plt.show()
 
 print("HIC Analysis:")
 for name, hic, peak, _ in hic_values:
@@ -495,7 +323,6 @@ FEA requires three things: **geometry** (the shape), **material model** (how the
       checkAnswer: 'Accuracy improves (up to a point — there are diminishing returns). But computation time increases roughly as N^2 to N^3 (depending on the solver), where N is the number of elements. Doubling elements can quadruple or octuple solve time. This is why FEA is a balance between accuracy and computational cost — fine meshes in critical areas, coarse meshes elsewhere.',
       codeIntro: 'Create a simple 2D FEA-style simulation of stress in a beam under impact.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Simple 2D stress visualization for a beam under impact
 # This is a conceptual FEA demonstration
@@ -522,49 +349,6 @@ stress_with_spongy = stress.copy()
 stress_with_spongy[spongy_layer] *= 0.4  # spongy bone reduces transmission
 stress_without = stress.copy()
 
-fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(14, 4))
-fig.patch.set_facecolor('#1f2937')
-
-# Without spongy bone
-ax1.set_facecolor('#111827')
-im1 = ax1.pcolormesh(x, y, stress_without, cmap='hot', shading='flat')
-ax1.plot(impact_x, impact_y, 'v', color='white', markersize=12)
-ax1.set_title('Rigid Bone (no spongy layer)', color='white', fontsize=10)
-ax1.set_xlabel('Position (mm)', color='white')
-ax1.set_ylabel('Depth (mm)', color='white')
-ax1.tick_params(colors='gray')
-plt.colorbar(im1, ax=ax1, label='Stress (MPa)')
-
-# With spongy bone
-ax2.set_facecolor('#111827')
-im2 = ax2.pcolormesh(x, y, stress_with_spongy, cmap='hot', shading='flat',
-                      vmin=0, vmax=stress_without.max())
-ax2.plot(impact_x, impact_y, 'v', color='white', markersize=12)
-ax2.axhline(18, color='#22c55e', linestyle='--', linewidth=1, label='Spongy bone boundary')
-ax2.set_title('With Spongy Bone Layer', color='white', fontsize=10)
-ax2.set_xlabel('Position (mm)', color='white')
-ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
-ax2.tick_params(colors='gray')
-plt.colorbar(im2, ax=ax2, label='Stress (MPa)')
-
-# Stress through depth (vertical line at impact point)
-ax3.set_facecolor('#111827')
-center_col = nx // 2
-stress_depth_rigid = stress_without[:, center_col]
-stress_depth_spongy = stress_with_spongy[:, center_col]
-y_centers = y[:-1] + np.diff(y)/2
-
-ax3.plot(stress_depth_rigid, y_centers, color='#ef4444', linewidth=2, label='Rigid bone')
-ax3.plot(stress_depth_spongy, y_centers, color='#22c55e', linewidth=2, label='With spongy layer')
-ax3.axhline(18, color='#22c55e', linestyle=':', linewidth=1, alpha=0.5)
-ax3.set_xlabel('Stress at impact center (MPa)', color='white')
-ax3.set_ylabel('Depth from bottom (mm)', color='white')
-ax3.set_title('Stress vs Depth', color='white', fontsize=10)
-ax3.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=9)
-ax3.tick_params(colors='gray')
-
-plt.tight_layout()
-plt.show()
 
 peak_rigid = stress_without.min()
 brain_stress_rigid = stress_without[0, center_col]
@@ -606,7 +390,6 @@ Key findings from this field:
       checkAnswer: 'At 10 headers per game, 50 games per year, 20 years: 10 * 50 * 20 = 10,000 headers at 20-30g each. A woodpecker does 12,000 pecks per day at 1,200g each. In ONE DAY, the woodpecker exceeds a soccer player\'s entire career in both count and intensity. Yet the woodpecker shows no brain damage. This is why researchers are so interested in the woodpecker skull.',
       codeIntro: 'Model cumulative brain damage from repeated impacts in humans vs. woodpeckers.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Cumulative brain damage model
 # Simplified: damage accumulates as sum of (g-force / threshold)^n per impact
@@ -636,60 +419,6 @@ soccer_damage = cumulative_damage(soccer_impacts * 20, soccer_g, 150, 0.002)
 # But with much higher threshold and recovery
 woodpecker_damage = cumulative_damage(12000 * 365, 1200, 15000, 0.01)
 
-fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(12, 9))
-fig.patch.set_facecolor('#1f2937')
-
-# Football career
-seasons_fb = np.linspace(0, 15, len(football_damage))
-ax1.set_facecolor('#111827')
-ax1.plot(seasons_fb, football_damage, color='#ef4444', linewidth=2)
-ax1.fill_between(seasons_fb, football_damage, alpha=0.15, color='#ef4444')
-ax1.axhline(100, color='#f59e0b', linestyle='--', linewidth=1, label='CTE risk threshold')
-ax1.set_xlabel('Seasons', color='white')
-ax1.set_ylabel('Cumulative damage index', color='white')
-ax1.set_title('Football: 500 impacts/season at 80g', color='white', fontsize=11)
-ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax1.tick_params(colors='gray')
-
-# Soccer career
-seasons_sc = np.linspace(0, 20, len(soccer_damage))
-ax2.set_facecolor('#111827')
-ax2.plot(seasons_sc, soccer_damage, color='#f59e0b', linewidth=2)
-ax2.fill_between(seasons_sc, soccer_damage, alpha=0.15, color='#f59e0b')
-ax2.axhline(100, color='#f59e0b', linestyle='--', linewidth=1, label='CTE risk threshold')
-ax2.set_xlabel('Seasons', color='white')
-ax2.set_ylabel('Cumulative damage index', color='white')
-ax2.set_title('Soccer: 200 headers/season at 25g', color='white', fontsize=11)
-ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax2.tick_params(colors='gray')
-
-# Woodpecker lifetime
-days_wp = np.linspace(0, 365 * 8, len(woodpecker_damage))  # 8 year lifespan
-ax3.set_facecolor('#111827')
-ax3.plot(days_wp / 365, woodpecker_damage, color='#22c55e', linewidth=2)
-ax3.fill_between(days_wp / 365, woodpecker_damage, alpha=0.15, color='#22c55e')
-ax3.set_xlabel('Years', color='white')
-ax3.set_ylabel('Cumulative damage index', color='white')
-ax3.set_title('Woodpecker: 12,000 pecks/day at 1,200g', color='white', fontsize=11)
-ax3.tick_params(colors='gray')
-
-# Comparison bar chart
-ax4.set_facecolor('#111827')
-scenarios = ['Football\\n(15 seasons)', 'Soccer\\n(20 seasons)', 'Woodpecker\\n(8 years)']
-final_damage = [football_damage[-1], soccer_damage[-1], woodpecker_damage[-1]]
-colors = ['#ef4444', '#f59e0b', '#22c55e']
-bars = ax4.bar(scenarios, final_damage, color=colors, width=0.5)
-ax4.axhline(100, color='#f59e0b', linestyle='--', linewidth=1, label='CTE risk')
-ax4.set_ylabel('Final damage index', color='white')
-ax4.set_title('Lifetime Cumulative Damage', color='white', fontsize=11)
-ax4.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax4.tick_params(colors='gray')
-for bar, d in zip(bars, final_damage):
-    ax4.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 5,
-             f'{d:.0f}', ha='center', color='white', fontsize=11)
-
-plt.tight_layout()
-plt.show()
 
 total_fb = football_impacts * 15
 total_sc = soccer_impacts * 20
@@ -733,6 +462,7 @@ print("  4. Straight-line impacts only (no rotation — the main CTE cause)")`,
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
+            diagram={[WoodpeckerForceMassDiagram, WoodpeckerDecelerationDiagram, WoodpeckerTongueDiagram, WoodpeckerDrumPatternDiagram, WoodpeckerMaterialsDiagram, WoodpeckerEvolutionDiagram][i] ? createElement([WoodpeckerForceMassDiagram, WoodpeckerDecelerationDiagram, WoodpeckerTongueDiagram, WoodpeckerDrumPatternDiagram, WoodpeckerMaterialsDiagram, WoodpeckerEvolutionDiagram][i]) : undefined}
             pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
         ))}
       </div>

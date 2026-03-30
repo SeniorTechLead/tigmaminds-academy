@@ -1,7 +1,7 @@
 export default function TotalInternalReflectionDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 500 250" className="w-full max-w-lg mx-auto" role="img" aria-label="Total internal reflection showing three cases: below, at, and above the critical angle">
+      <svg viewBox="0 0 583 295" className="w-full max-w-lg mx-auto" role="img" aria-label="Total internal reflection showing three cases: below, at, and above the critical angle">
         <text x="250" y="20" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">Total Internal Reflection</text>
 
         {/* Case 1: Below critical angle */}

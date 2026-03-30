@@ -4,7 +4,7 @@ export default function MilkScatteringDiagram() {
       <p className="text-center text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">
         Milk-in-Water Scattering Experiment
       </p>
-      <svg viewBox="0 0 440 200" className="w-full max-w-md mx-auto">
+      <svg viewBox="0 0 500 243" className="w-full max-w-md mx-auto">
         {/* Table surface */}
         <rect x="20" y="170" width="400" height="8" rx="2" fill="#5c4a32" />
 

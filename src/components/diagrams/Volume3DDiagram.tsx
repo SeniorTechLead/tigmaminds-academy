@@ -1,7 +1,7 @@
 export default function Volume3DDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 540 250" className="w-full max-w-xl mx-auto" role="img" aria-label="Four 3D shapes with volume formulas: cube, cylinder, sphere, and cone">
+      <svg viewBox="0 0 620 265" className="w-full max-w-xl mx-auto" role="img" aria-label="Four 3D shapes with volume formulas: cube, cylinder, sphere, and cone">
         <text x="270" y="20" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="14" fontWeight="bold">Volume of 3D Shapes</text>
 
         {/* Cube */}

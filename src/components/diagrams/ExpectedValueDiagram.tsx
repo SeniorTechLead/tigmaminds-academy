@@ -7,7 +7,7 @@ export default function ExpectedValueDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 500 250" className="w-full max-w-xl mx-auto" role="img" aria-label="Expected value dice game diagram">
+      <svg viewBox="0 0 585 282" className="w-full max-w-xl mx-auto" role="img" aria-label="Expected value dice game diagram">
         {/* Title */}
         <text x="250" y="22" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="14" fontWeight="bold">
           Dice Game: Pay $2 to play

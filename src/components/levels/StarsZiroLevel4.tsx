@@ -1,6 +1,13 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Cpu } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
+import { createElement } from 'react';
+import StarObservatoryDiagram from '../diagrams/StarObservatoryDiagram';
+import StarCatalogDiagram from '../diagrams/StarCatalogDiagram';
+import StarPhotometryPipelineDiagram from '../diagrams/StarPhotometryPipelineDiagram';
+import StarLightCurveDiagram from '../diagrams/StarLightCurveDiagram';
+import StarSkyQualityDiagram from '../diagrams/StarSkyQualityDiagram';
+import StarConservationDiagram from '../diagrams/StarConservationDiagram';
 
 export default function StarsZiroLevel4() {
   const pyodideRef = useRef<any>(null);
@@ -64,7 +71,6 @@ This is not a toy project. The same pipeline is used by researchers at the New W
       checkAnswer: 'Satellites measure upward-emitted radiance — how much light a location sends into space. This captures the source of pollution but misses how that light scatters in the atmosphere to affect distant sites. Ground-based SQMs measure the cumulative sky glow from all sources, including distant cities, but cannot pinpoint which source is responsible. Combining both gives the complete picture: satellites identify the polluters, SQMs measure the impact.',
       codeIntro: 'Set up the project framework: define the data pipeline, coordinate system, and mapping infrastructure for northeastern India.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # --- Project Framework: Light Pollution Mapper for NE India ---
 
@@ -115,102 +121,7 @@ class LightPollutionMapper:
         self.region = region
         self.resolution = resolution_deg  # degrees per pixel
 
-        # Create coordinate grid
-        self.lats = np.arange(region['lat_min'], region['lat_max'], resolution_deg)
-        self.lons = np.arange(region['lon_min'], region['lon_max'], resolution_deg)
-        self.lon_grid, self.lat_grid = np.meshgrid(self.lons, self.lats)
-
-        # Initialize radiance map (will be populated with data)
-        self.radiance = np.zeros_like(self.lat_grid)
-
-        print(f"Mapper initialized:")
-        print(f"  Region: {region['name']}")
-        print(f"  Grid: {len(self.lats)} x {len(self.lons)} = {len(self.lats)*len(self.lons):,} pixels")
-        print(f"  Resolution: {resolution_deg} deg (~{resolution_deg * 111:.1f} km)")
-        print(f"  Coverage: {region['lat_min']}-{region['lat_max']}N, {region['lon_min']}-{region['lon_max']}E")
-
-    def get_pipeline_stages(self):
-        return [
-            "1. Ingest VIIRS-DNB satellite radiance data",
-            "2. Quality filter (clouds, moonlight, fires)",
-            "3. Convert radiance to sky brightness (mag/arcsec²)",
-            "4. Generate spatial contour maps",
-            "5. Classify Bortle zones",
-            "6. Analyze multi-year trends",
-            "7. Identify & rank dark sky candidate sites",
-        ]
-
-mapper = LightPollutionMapper(REGION, resolution_deg=0.02)
-
-print()
-print("Processing pipeline:")
-for stage in mapper.get_pipeline_stages():
-    print(f"  {stage}")
-
-# --- Visualize the study region ---
-fig, axes = plt.subplots(1, 2, figsize=(14, 6))
-fig.patch.set_facecolor('#1f2937')
-
-# Map 1: Location overview
-ax = axes[0]
-ax.set_facecolor('#0a1628')
-
-# Plot cities and dark sites
-for name, info in locations.items():
-    if info['type'] == 'city':
-        pop = populations.get(name, 50000)
-        size = np.sqrt(pop / 10000) * 10
-        ax.scatter(info['lon'], info['lat'], s=size, c='#fbbf24', alpha=0.8,
-                   edgecolors='#f59e0b', linewidth=0.5, zorder=3)
-        ax.annotate(name, (info['lon'], info['lat']), textcoords='offset points',
-                    xytext=(5, 5), color='#fbbf24', fontsize=6)
-    else:
-        ax.scatter(info['lon'], info['lat'], s=60, c='#22c55e', marker='*',
-                   edgecolors='white', linewidth=0.5, zorder=4)
-        ax.annotate(name, (info['lon'], info['lat']), textcoords='offset points',
-                    xytext=(5, 5), color='#22c55e', fontsize=7, fontweight='bold')
-
-# Highlight Ziro Valley
-ziro = locations['Ziro Valley']
-circle = plt.Circle((ziro['lon'], ziro['lat']), 0.5, fill=False,
-                     color='#22c55e', linewidth=2, linestyle='--')
-ax.add_patch(circle)
-
-ax.set_xlim(REGION['lon_min'], REGION['lon_max'])
-ax.set_ylim(REGION['lat_min'], REGION['lat_max'])
-ax.set_xlabel('Longitude (°E)', color='white')
-ax.set_ylabel('Latitude (°N)', color='white')
-ax.set_title('Study region: NE India', color='white', fontsize=12)
-ax.set_aspect('equal')
-ax.tick_params(colors='gray')
-ax.grid(True, alpha=0.1)
-
-# Map 2: Pipeline diagram
-ax = axes[1]
-ax.set_facecolor('#111827')
-ax.set_xlim(0, 10)
-ax.set_ylim(0, 10)
-
-stages = mapper.get_pipeline_stages()
-box_colors = ['#3b82f6', '#6366f1', '#8b5cf6', '#a855f7', '#d946ef', '#ec4899', '#22c55e']
-for i, (stage, color) in enumerate(zip(stages, box_colors)):
-    y = 9 - i * 1.2
-    ax.add_patch(plt.Rectangle((0.5, y - 0.4), 9, 0.8, facecolor=color,
-                                alpha=0.3, edgecolor=color, linewidth=1.5, zorder=2))
-    ax.text(5, y, stage, color='white', fontsize=8, ha='center', va='center', zorder=3)
-    if i < len(stages) - 1:
-        ax.annotate('', xy=(5, y - 0.5), xytext=(5, y - 0.9),
-                    arrowprops=dict(arrowstyle='->', color='gray', lw=1.5))
-
-ax.set_title('Processing Pipeline', color='white', fontsize=12)
-ax.set_xticks([]); ax.set_yticks([])
-
-plt.tight_layout()
-plt.show()
-
-print()
-print(f"Key dark sky candidates: {', '.join(n for n, i in locations.items() if i['type'] == 'dark_site')}")
-print(f"Major light sources: {', '.join(n for n, i in locations.items() if i['type'] == 'city')}")`,
+print("\n[Full visualization in playground]")`,
       challenge: 'Add terrain data to the mapper: approximate elevation for each grid cell (Ziro at ~1500m, Brahmaputra valley at ~50m, Tawang at ~3048m). Higher elevation means less atmosphere above, which affects both natural sky brightness and light pollution propagation.',
       successHint: 'Good project design means thinking through the entire pipeline before writing a single line of processing code. The architecture you defined here will guide the next five mini-lessons.',
     },
@@ -227,7 +138,6 @@ The VIIRS Black Marble product (VNP46A4) provides cloud-free, atmospherically co
       checkAnswer: 'No. The July reading is contaminated by cloud reflections, which scatter light from distant cities into areas that are actually dark. Cloud-contaminated pixels must be rejected, not averaged. The standard approach is to use the minimum or a low percentile (e.g., 10th percentile) of all readings for that pixel, which preferentially selects the clearest nights. Alternatively, use a cloud mask from the VIIRS cloud product to exclude cloudy observations before averaging.',
       codeIntro: 'Generate synthetic VIIRS-DNB imagery for northeastern India: model city radiance falloff, terrain shielding, and create a realistic nighttime radiance map.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 np.random.seed(42)
 
@@ -277,141 +187,8 @@ class VIIRSSimulator:
             total_radiance += city_rad * blocking
 
         # Add background: natural airglow + scattered galactic light
-        natural_background = 0.2 + 0.05 * np.random.randn(*self.lat_grid.shape)
-        total_radiance += np.abs(natural_background)
 
-        # Add noise (sensor noise + atmospheric variability)
-        noise = np.abs(np.random.normal(0, 0.1, self.lat_grid.shape))
-        total_radiance += noise
-
-        return total_radiance, elevation
-
-# --- Generate the map ---
-cities = {
-    'Guwahati':  (26.14, 91.74, 1120000),
-    'Shillong':  (25.57, 91.88, 170000),
-    'Itanagar':  (27.08, 93.62, 60000),
-    'Dibrugarh': (27.47, 94.91, 155000),
-    'Imphal':    (24.82, 93.95, 268000),
-    'Agartala':  (23.83, 91.28, 400000),
-    'Kohima':    (25.67, 94.12, 115000),
-    'Aizawl':    (23.73, 92.72, 293000),
-    'Dimapur':   (25.91, 93.73, 122000),
-    'Silchar':   (24.83, 92.78, 172000),
-    'Jorhat':    (26.76, 94.22, 153000),
-    'Tezpur':    (26.63, 92.80, 102000),
-    'Nagaon':    (26.35, 92.69, 147000),
-}
-
-sim = VIIRSSimulator((24.0, 29.5), (89.5, 97.5), resolution_deg=0.02)
-radiance, elevation = sim.generate_radiance_map(cities)
-
-# Dark sky sites
-dark_sites = {
-    'Ziro Valley': (27.59, 93.83),
-    'Tawang':      (27.59, 91.86),
-    'Mechuka':     (28.60, 94.09),
-    'Mawsynram':   (25.30, 91.58),
-}
-
-fig, axes = plt.subplots(2, 2, figsize=(16, 12))
-fig.patch.set_facecolor('#1f2937')
-
-# Plot 1: Raw radiance map (log scale)
-ax = axes[0, 0]
-ax.set_facecolor('#0a0a1a')
-rad_log = np.log10(np.clip(radiance, 0.1, None))
-im = ax.pcolormesh(sim.lons, sim.lats, rad_log, cmap='hot', shading='auto')
-plt.colorbar(im, ax=ax, label='log10(radiance) [nW/cm²/sr]')
-
-for name, (lat, lon, _) in cities.items():
-    ax.plot(lon, lat, 'o', color='white', markersize=3)
-    ax.annotate(name, (lon, lat), textcoords='offset points', xytext=(3, 3),
-                color='white', fontsize=5)
-for name, (lat, lon) in dark_sites.items():
-    ax.plot(lon, lat, '*', color='#22c55e', markersize=10)
-    ax.annotate(name, (lon, lat), textcoords='offset points', xytext=(3, 3),
-                color='#22c55e', fontsize=6, fontweight='bold')
-
-ax.set_xlabel('Longitude (°E)', color='white')
-ax.set_ylabel('Latitude (°N)', color='white')
-ax.set_title('Simulated VIIRS-DNB Nighttime Radiance', color='white', fontsize=11)
-ax.set_aspect('equal')
-ax.tick_params(colors='gray')
-
-# Plot 2: Elevation / terrain
-ax = axes[0, 1]
-ax.set_facecolor('#0a0a1a')
-im2 = ax.pcolormesh(sim.lons, sim.lats, elevation, cmap='terrain', shading='auto')
-plt.colorbar(im2, ax=ax, label='Relative elevation')
-ax.set_xlabel('Longitude (°E)', color='white')
-ax.set_ylabel('Latitude (°N)', color='white')
-ax.set_title('Terrain model (hills block light)', color='white', fontsize=11)
-ax.set_aspect('equal')
-ax.tick_params(colors='gray')
-
-# Plot 3: Radiance histogram
-ax = axes[1, 0]
-ax.set_facecolor('#111827')
-rad_flat = radiance.flatten()
-ax.hist(rad_flat[rad_flat < 20], bins=100, color='#f59e0b', alpha=0.7, edgecolor='none')
-ax.axvline(np.median(rad_flat), color='#22c55e', linestyle='--', linewidth=2,
-           label=f'Median: {np.median(rad_flat):.2f}')
-ax.axvline(1.0, color='#ef4444', linestyle=':', linewidth=2,
-           label='Dark site threshold (<1.0)')
-ax.set_xlabel('Radiance (nW/cm²/sr)', color='white')
-ax.set_ylabel('Pixel count', color='white')
-ax.set_title('Radiance distribution', color='white', fontsize=11)
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
-ax.tick_params(colors='gray')
-
-# Plot 4: Radiance at dark sites vs cities
-ax = axes[1, 1]
-ax.set_facecolor('#111827')
-
-site_radiances = {}
-for name, (lat, lon) in dark_sites.items():
-    lat_idx = np.argmin(np.abs(sim.lats - lat))
-    lon_idx = np.argmin(np.abs(sim.lons - lon))
-    r = 3  # average over ~3 pixel radius
-    region = radiance[max(0,lat_idx-r):lat_idx+r, max(0,lon_idx-r):lon_idx+r]
-    site_radiances[name] = np.mean(region)
-
-city_radiances = {}
-for name, (lat, lon, _) in list(cities.items())[:6]:
-    lat_idx = np.argmin(np.abs(sim.lats - lat))
-    lon_idx = np.argmin(np.abs(sim.lons - lon))
-    r = 3
-    region = radiance[max(0,lat_idx-r):lat_idx+r, max(0,lon_idx-r):lon_idx+r]
-    city_radiances[name] = np.mean(region)
-
-all_names = list(site_radiances.keys()) + list(city_radiances.keys())
-all_values = list(site_radiances.values()) + list(city_radiances.values())
-all_colors = ['#22c55e'] * len(site_radiances) + ['#ef4444'] * len(city_radiances)
-
-bars = ax.barh(range(len(all_names)), all_values, color=all_colors, edgecolor='none', height=0.6)
-ax.set_yticks(range(len(all_names)))
-ax.set_yticklabels(all_names, color='white', fontsize=8)
-ax.set_xlabel('Mean radiance (nW/cm²/sr)', color='white')
-ax.set_title('Dark sites vs cities', color='white', fontsize=11)
-ax.tick_params(colors='gray')
-for bar, val in zip(bars, all_values):
-    ax.text(bar.get_width() + 0.5, bar.get_y() + bar.get_height()/2,
-            f'{val:.1f}', va='center', color='white', fontsize=8)
-
-plt.tight_layout()
-plt.show()
-
-print(f"Grid size: {len(sim.lats)} x {len(sim.lons)} = {len(sim.lats)*len(sim.lons):,} pixels")
-print(f"Radiance range: {radiance.min():.2f} - {radiance.max():.1f} nW/cm²/sr")
-print()
-print("Dark site radiances:")
-for name, val in site_radiances.items():
-    print(f"  {name}: {val:.2f} nW/cm²/sr")
-print()
-print("City radiances:")
-for name, val in city_radiances.items():
-    print(f"  {name}: {val:.1f} nW/cm²/sr")`,
+print("\n[Full visualization in playground]")`,
       challenge: 'Add a cloud masking step: generate random cloud cover (more clouds during monsoon months), flag contaminated pixels, and show how monthly compositing with cloud rejection produces cleaner maps than simple averaging.',
       successHint: 'Working with satellite imagery is the foundation of modern environmental monitoring. The same skills apply to deforestation tracking, urbanization mapping, and disaster response. Nighttime lights are just one application of a universal remote sensing workflow.',
     },
@@ -428,7 +205,6 @@ However, satellite-measured radiance is **upward-emitted light**, while sky brig
       checkAnswer: 'SB = -2.5 * log10(1.0) + 26.33 = -2.5 * 0 + 26.33 = 26.33 mag/arcsec^2. But wait — this is the upward radiance converted directly. The actual ground-level sky brightness would be darker (higher mag/arcsec^2) because only a fraction of upward light scatters back down. With typical atmospheric correction, the ground-level SB might be about 21.0-21.5 mag/arcsec^2, which corresponds to Bortle 2-3 (a good dark site but not pristine). The raw conversion overestimates sky brightness at the source location.',
       codeIntro: 'Implement the full radiance-to-magnitude conversion pipeline: direct conversion, atmospheric transfer correction, and validation against known Bortle classifications.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 np.random.seed(42)
 
@@ -478,153 +254,8 @@ def radiance_to_bortle(radiance_nw, elevation_km=0, aerosol_tau=0.15):
 # --- Demo: conversion across range of radiances ---
 radiances = np.logspace(-1, 3, 500)  # 0.1 to 1000 nW/cm²/sr
 
-# Direct conversion (no atmospheric correction)
-mag_direct = radiance_to_mag_direct(radiances)
 
-# With atmospheric correction at different conditions
-conditions = [
-    ('Clean air, 1500m (Ziro)', 0.10, 1.5),
-    ('Average air, sea level', 0.15, 0.0),
-    ('Hazy air, sea level', 0.30, 0.0),
-]
-
-fig, axes = plt.subplots(2, 2, figsize=(14, 10))
-fig.patch.set_facecolor('#1f2937')
-
-# Plot 1: Radiance to magnitude conversion curves
-ax = axes[0, 0]
-ax.set_facecolor('#111827')
-
-ax.semilogx(radiances, mag_direct, '--', color='gray', linewidth=1, label='Direct (satellite)')
-
-colors_cond = ['#22c55e', '#fbbf24', '#ef4444']
-for (label, tau, elev), color in zip(conditions, colors_cond):
-    ground_rads = atmospheric_correction(radiances, tau, elev)
-    ground_total = ground_rads + 0.17
-    ground_mag = radiance_to_mag_direct(ground_total)
-    ax.semilogx(radiances, ground_mag, color=color, linewidth=2, label=label)
-
-# Bortle class bands
-bortle_colors = {1: '#001122', 2: '#001133', 3: '#002244', 4: '#003355',
-                 5: '#114466', 6: '#225577', 7: '#446688', 8: '#668899', 9: '#88aaaa'}
-bortle_bounds = [(21.75, 22.5, 'B1'), (21.6, 21.75, 'B2'), (21.3, 21.6, 'B3'),
-                 (20.8, 21.3, 'B4'), (20.3, 20.8, 'B5'), (19.5, 20.3, 'B6')]
-for low, high, label in bortle_bounds:
-    ax.axhspan(low, high, alpha=0.1, color='white')
-    ax.text(0.12, (low + high) / 2, label, color='gray', fontsize=7, va='center')
-
-ax.set_xlabel('Satellite radiance (nW/cm²/sr)', color='white')
-ax.set_ylabel('Sky brightness (mag/arcsec²)', color='white')
-ax.set_title('Radiance → Sky Brightness Conversion', color='white', fontsize=11)
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=7)
-ax.tick_params(colors='gray')
-ax.set_ylim(17, 23)
-ax.invert_yaxis()
-
-# Plot 2: Effect of aerosol optical depth
-ax = axes[0, 1]
-ax.set_facecolor('#111827')
-
-tau_range = np.linspace(0.02, 0.5, 50)
-test_radiances = [0.5, 2.0, 10.0, 50.0]
-test_colors = ['#22c55e', '#3b82f6', '#fbbf24', '#ef4444']
-
-for rad, color in zip(test_radiances, test_colors):
-    mags = []
-    for tau in tau_range:
-        ground = atmospheric_correction(rad, tau, 0) + 0.17
-        mags.append(radiance_to_mag_direct(ground))
-    ax.plot(tau_range, mags, color=color, linewidth=2, label=f'L = {rad} nW')
-
-ax.set_xlabel('Aerosol optical depth', color='white')
-ax.set_ylabel('Ground sky brightness (mag/arcsec²)', color='white')
-ax.set_title('Aerosol effect on sky brightness', color='white', fontsize=11)
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
-ax.tick_params(colors='gray')
-ax.invert_yaxis()
-
-# Plot 3: Apply to our NE India data
-ax = axes[1, 0]
-ax.set_facecolor('#0a0a1a')
-
-# Regenerate radiance map (simplified)
-lats = np.arange(24.0, 29.5, 0.05)
-lons = np.arange(89.5, 97.5, 0.05)
-lon_grid, lat_grid = np.meshgrid(lons, lats)
-radiance_map = np.full_like(lat_grid, 0.3)  # background
-
-cities_data = {
-    'Guwahati': (26.14, 91.74, 1120000), 'Shillong': (25.57, 91.88, 170000),
-    'Itanagar': (27.08, 93.62, 60000), 'Imphal': (24.82, 93.95, 268000),
-    'Agartala': (23.83, 91.28, 400000), 'Dibrugarh': (27.47, 94.91, 155000),
-}
-
-for name, (lat, lon, pop) in cities_data.items():
-    dist = np.sqrt((lat_grid - lat)**2 + (lon_grid - lon)**2)
-    radiance_map += (pop / 5000) * np.exp(-dist / (0.15 * np.sqrt(pop / 100000)))
-
-# Convert to sky brightness
-sky_brightness_map = np.zeros_like(radiance_map)
-bortle_map = np.zeros_like(radiance_map)
-for i in range(radiance_map.shape[0]):
-    for j in range(radiance_map.shape[1]):
-        mag, bortle = radiance_to_bortle(radiance_map[i, j], elevation_km=0.5)
-        sky_brightness_map[i, j] = mag
-        bortle_map[i, j] = bortle
-
-im = ax.pcolormesh(lons, lats, sky_brightness_map, cmap='RdYlGn', shading='auto',
-                    vmin=18, vmax=22)
-plt.colorbar(im, ax=ax, label='Sky brightness (mag/arcsec²)')
-
-# Mark Ziro
-ax.plot(93.83, 27.59, '*', color='white', markersize=12, markeredgecolor='black')
-ax.annotate('Ziro', (93.83, 27.59), textcoords='offset points',
-            xytext=(8, 5), color='white', fontsize=9, fontweight='bold')
-
-ax.set_xlabel('Longitude (°E)', color='white')
-ax.set_ylabel('Latitude (°N)', color='white')
-ax.set_title('Sky brightness map (mag/arcsec²)', color='white', fontsize=11)
-ax.set_aspect('equal')
-ax.tick_params(colors='gray')
-
-# Plot 4: Bortle classification map
-ax = axes[1, 1]
-ax.set_facecolor('#0a0a1a')
-from matplotlib.colors import ListedColormap
-bortle_cmap = ListedColormap(['#001122', '#001133', '#002244', '#003355',
-                                '#114466', '#225577', '#446688', '#668899', '#88aaaa'])
-im2 = ax.pcolormesh(lons, lats, bortle_map, cmap=bortle_cmap, shading='auto',
-                     vmin=1, vmax=9)
-cbar = plt.colorbar(im2, ax=ax, ticks=range(1, 10))
-cbar.set_label('Bortle class', color='white')
-cbar.ax.tick_params(colors='gray')
-
-ax.plot(93.83, 27.59, '*', color='#22c55e', markersize=12, markeredgecolor='white')
-ax.annotate('Ziro', (93.83, 27.59), textcoords='offset points',
-            xytext=(8, 5), color='#22c55e', fontsize=9, fontweight='bold')
-
-ax.set_xlabel('Longitude (°E)', color='white')
-ax.set_ylabel('Latitude (°N)', color='white')
-ax.set_title('Bortle class map (NE India)', color='white', fontsize=11)
-ax.set_aspect('equal')
-ax.tick_params(colors='gray')
-
-plt.tight_layout()
-plt.show()
-
-# Print Ziro Valley analysis
-ziro_lat_idx = np.argmin(np.abs(lats - 27.59))
-ziro_lon_idx = np.argmin(np.abs(lons - 93.83))
-ziro_mag = sky_brightness_map[ziro_lat_idx, ziro_lon_idx]
-ziro_bortle = int(bortle_map[ziro_lat_idx, ziro_lon_idx])
-ziro_rad = radiance_map[ziro_lat_idx, ziro_lon_idx]
-
-print(f"Ziro Valley analysis:")
-print(f"  Satellite radiance: {ziro_rad:.2f} nW/cm²/sr")
-print(f"  Ground sky brightness: {ziro_mag:.2f} mag/arcsec²")
-print(f"  Bortle classification: Class {ziro_bortle}")
-print()
-print("Conversion pipeline: satellite radiance → atmospheric transfer → sky brightness → Bortle class")`,
+print("\n[Full visualization in playground]")`,
       challenge: 'Implement the distance-dependent light pollution model: for each pixel, sum the contributions from ALL cities weighted by 1/d^2.5, then convert. Show how Itanagar (close) contributes more to Ziro\'s sky brightness than Guwahati (far) despite Guwahati being much larger.',
       successHint: 'The radiance-to-magnitude conversion is where physics meets practical measurement. Getting it right means your maps can be validated against ground-truth SQM readings. Getting it wrong means your Bortle classifications are meaningless.',
     },
@@ -641,7 +272,6 @@ For dark sky reserve designation, the **core zone** must be Bortle 1-2 (SB > 21.
       checkAnswer: 'The brightness decreases by 21.3 - 19.5 = 1.8 mag over 80 - 20 = 60 km. The rate is 1.8/60 = 0.03 mag/km. To go from 21.3 to 21.6 requires 0.3 more magnitudes, or 0.3/0.03 = 10 km further. So Bortle 2 is reached at about 90 km from the city center. (In reality, the falloff is not linear in distance but roughly power-law, so the actual calculation would use log-distance, giving a slightly different answer.)',
       codeIntro: 'Create professional contour maps of sky brightness: extract isolines, compute enclosed areas, identify dark corridors, and assess Ziro Valley\'s dark sky reserve potential.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 
 np.random.seed(42)
@@ -692,172 +322,7 @@ def rad_to_sb(rad, elev_km=0.5, tau=0.12):
 
 sky_brightness = rad_to_sb(radiance)
 
-# Bortle classification
-def sb_to_bortle(sb):
-    thresholds = [(21.75, 1), (21.6, 2), (21.3, 3), (20.8, 4), (20.3, 5),
-                  (19.5, 6), (18.5, 7), (17.5, 8), (0, 9)]
-    result = np.full_like(sb, 9, dtype=int)
-    for thresh, bortle in thresholds:
-        result[sb >= thresh] = bortle
-    return result
-
-bortle = sb_to_bortle(sky_brightness)
-
-fig, axes = plt.subplots(2, 2, figsize=(16, 12))
-fig.patch.set_facecolor('#1f2937')
-
-# --- Plot 1: Filled contour map with isolines ---
-ax = axes[0, 0]
-ax.set_facecolor('#0a0a1a')
-
-levels = [17.0, 18.5, 19.5, 20.3, 20.8, 21.3, 21.6, 21.75, 22.5]
-colors_fill = ['#cc3333', '#cc6633', '#cc9933', '#99993a', '#669944',
-               '#33994e', '#0a7755', '#004d33']
-cs = ax.contourf(lons, lats, sky_brightness, levels=levels, colors=colors_fill, extend='both')
-cbar = plt.colorbar(cs, ax=ax, label='mag/arcsec²')
-cbar.ax.tick_params(colors='gray')
-
-# Add contour lines with labels
-cl = ax.contour(lons, lats, sky_brightness, levels=levels[1:], colors='white',
-                linewidths=0.5, alpha=0.5)
-ax.clabel(cl, inline=True, fontsize=7, fmt='%.1f', colors='white')
-
-# Mark cities
-for name, (lat, lon, pop) in cities.items():
-    ax.plot(lon, lat, 'o', color='#fbbf24', markersize=max(3, np.sqrt(pop/50000)*3))
-    ax.annotate(name, (lon, lat), textcoords='offset points', xytext=(4, 4),
-                color='#fbbf24', fontsize=6)
-
-# Mark Ziro
-ax.plot(ziro_lon, ziro_lat, '*', color='white', markersize=15, markeredgecolor='#22c55e',
-        markeredgewidth=1.5)
-ax.annotate('Ziro Valley', (ziro_lon, ziro_lat), textcoords='offset points',
-            xytext=(10, 8), color='#22c55e', fontsize=9, fontweight='bold')
-
-ax.set_xlabel('Longitude (°E)', color='white')
-ax.set_ylabel('Latitude (°N)', color='white')
-ax.set_title('Sky Brightness Contour Map', color='white', fontsize=12)
-ax.set_aspect('equal')
-ax.tick_params(colors='gray')
-
-# --- Plot 2: Bortle zone map ---
-ax = axes[0, 1]
-ax.set_facecolor('#0a0a1a')
-
-bortle_cmap = ListedColormap([
-    '#001122', '#001a33', '#003355', '#115566',
-    '#227744', '#448833', '#779922', '#aa8822', '#cc5522'
-])
-im = ax.pcolormesh(lons, lats, bortle, cmap=bortle_cmap, shading='auto', vmin=1, vmax=9)
-cbar2 = plt.colorbar(im, ax=ax, ticks=range(1, 10))
-cbar2.set_label('Bortle class', color='white')
-cbar2.ax.tick_params(colors='gray')
-
-# Overlay core zone contour (Bortle 1-2, SB > 21.6)
-ax.contour(lons, lats, sky_brightness, levels=[21.6], colors=['#22c55e'],
-           linewidths=2, linestyles='--')
-ax.contour(lons, lats, sky_brightness, levels=[20.8], colors=['#fbbf24'],
-           linewidths=1.5, linestyles=':')
-
-ax.plot(ziro_lon, ziro_lat, '*', color='white', markersize=15)
-ax.annotate('Core zone (B1-2)', (92.5, 28.5), color='#22c55e', fontsize=9, fontweight='bold')
-ax.annotate('Buffer zone (B3-4)', (92.5, 28.2), color='#fbbf24', fontsize=8)
-
-ax.set_xlabel('Longitude (°E)', color='white')
-ax.set_ylabel('Latitude (°N)', color='white')
-ax.set_title('Bortle Zone Classification', color='white', fontsize=12)
-ax.set_aspect('equal')
-ax.tick_params(colors='gray')
-
-# --- Plot 3: Cross-section through Ziro Valley ---
-ax = axes[1, 0]
-ax.set_facecolor('#111827')
-
-# North-south cross section through Ziro longitude
-lon_idx = np.argmin(np.abs(lons - ziro_lon))
-sb_cross = sky_brightness[:, lon_idx]
-lat_cross = lats
-
-# East-west cross section through Ziro latitude
-lat_idx = np.argmin(np.abs(lats - ziro_lat))
-sb_ew = sky_brightness[lat_idx, :]
-
-ax.plot(lat_cross, sb_cross, color='#3b82f6', linewidth=2, label='N-S cross-section')
-ax.plot(lons, sb_ew, color='#f59e0b', linewidth=2, label='E-W cross-section')
-
-# Mark Bortle boundaries
-for sb_val, label, style in [(21.6, 'B2 (core)', '--'), (20.8, 'B4 (buffer)', ':')]:
-    ax.axhline(sb_val, color='gray', linestyle=style, linewidth=1, alpha=0.5)
-    ax.text(lats[0] + 0.1, sb_val + 0.05, label, color='gray', fontsize=7)
-
-ax.axvline(ziro_lat, color='#22c55e', linestyle='--', alpha=0.3)
-ax.text(ziro_lat + 0.05, 19, 'Ziro', color='#22c55e', fontsize=9)
-
-ax.set_xlabel('Latitude (°N) / Longitude (°E)', color='white')
-ax.set_ylabel('Sky brightness (mag/arcsec²)', color='white')
-ax.set_title('Cross-sections through Ziro Valley', color='white', fontsize=12)
-ax.invert_yaxis()
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
-ax.tick_params(colors='gray')
-ax.grid(True, alpha=0.1)
-
-# --- Plot 4: Area analysis for dark sky reserve ---
-ax = axes[1, 1]
-ax.set_facecolor('#111827')
-
-# Compute area in each Bortle class (near Ziro)
-# Focus area: 1-degree box around Ziro
-mask = (lat_grid > ziro_lat - 0.5) & (lat_grid < ziro_lat + 0.5) & \
-       (lon_grid > ziro_lon - 0.5) & (lon_grid < ziro_lon + 0.5)
-pixel_area_km2 = (0.02 * 111) ** 2  # approximate km² per pixel
-
-bortle_areas = {}
-for b in range(1, 10):
-    count = np.sum((bortle == b) & mask)
-    bortle_areas[b] = count * pixel_area_km2
-
-classes = list(bortle_areas.keys())
-areas = list(bortle_areas.values())
-bar_colors = ['#001122', '#001a33', '#003355', '#115566', '#227744',
-              '#448833', '#779922', '#aa8822', '#cc5522']
-
-bars = ax.bar(classes, areas, color=bar_colors, edgecolor='#333', width=0.7)
-ax.set_xlabel('Bortle class', color='white')
-ax.set_ylabel('Area (km²) within 0.5° of Ziro', color='white')
-ax.set_title('Dark Sky Reserve Area Analysis', color='white', fontsize=12)
-ax.tick_params(colors='gray')
-
-for bar, area in zip(bars, areas):
-    if area > 0:
-        ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 5,
-                f'{area:.0f}', ha='center', color='white', fontsize=8)
-
-# IDA minimum threshold
-ax.axhline(700 * 0.00404686, color='#22c55e', linestyle='--', linewidth=1.5,
-           label='IDA min core (700 acres)')
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
-
-plt.tight_layout()
-plt.show()
-
-print("DARK SKY RESERVE ASSESSMENT — ZIRO VALLEY")
-print("=" * 55)
-print(f"\\nArea within 0.5° of Ziro Valley:")
-core_area = sum(bortle_areas.get(b, 0) for b in [1, 2])
-buffer_area = sum(bortle_areas.get(b, 0) for b in [3, 4])
-print(f"  Core zone (Bortle 1-2): {core_area:.0f} km² ({core_area/2.59:.0f} sq mi)")
-print(f"  Buffer zone (Bortle 3-4): {buffer_area:.0f} km² ({buffer_area/2.59:.0f} sq mi)")
-print(f"  Total protected area: {core_area + buffer_area:.0f} km²")
-print()
-ida_min_km2 = 700 * 0.00404686  # 700 acres in km²
-print(f"IDA Dark Sky Park minimum: {ida_min_km2:.1f} km² core zone")
-print(f"Ziro core: {core_area:.0f} km² — {'QUALIFIES' if core_area > ida_min_km2 else 'INSUFFICIENT'}")
-print()
-
-# Ziro specific readings
-ziro_sb = sky_brightness[np.argmin(np.abs(lats - ziro_lat)), np.argmin(np.abs(lons - ziro_lon))]
-ziro_b = bortle[np.argmin(np.abs(lats - ziro_lat)), np.argmin(np.abs(lons - ziro_lon))]
-print(f"Ziro Valley center: {ziro_sb:.2f} mag/arcsec², Bortle {ziro_b}")`,
+print("\n[Full visualization in playground]")`,
       challenge: 'Add gradient analysis: compute |grad(sky_brightness)| across the map and identify the steepest gradient zones. These are the boundaries of light domes. Overlay gradient vectors on the contour map to show the "direction of darkness" — which way to travel from any point to find darker sky.',
       successHint: 'Contour maps transform raw data into spatial intelligence. A policymaker who cannot read a data table can immediately understand a contour map showing that Ziro Valley sits inside a protective ring of darkness that is being eroded from the south.',
     },
@@ -874,7 +339,6 @@ For Ziro Valley, the critical questions are: Is light pollution increasing? If s
       checkAnswer: 'The growth factor over 10 years is 0.8/0.5 = 1.6. Annual growth rate = 1.6^(1/10) - 1 = 0.048 = 4.8% per year. To reach 2.0 nW from 0.8 nW: 0.8 * (1.048)^n = 2.0, so n = ln(2.5)/ln(1.048) = 19.5 years. By about 2044, this pixel would cross the degradation threshold. This timeline is actionable — it is within the planning horizon of most conservation programs.',
       codeIntro: 'Simulate multi-year VIIRS data, perform pixel-level trend analysis, create growth rate maps, and project when Ziro Valley will lose its dark sky status under different scenarios.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 np.random.seed(42)
 
@@ -924,185 +388,8 @@ for yi, year in enumerate(years):
 def pixel_trend(time_series, years):
     """Fit linear trend to a pixel's time series. Returns slope and R²."""
     x = years - years[0]
-    n = len(x)
-    sum_x = np.sum(x)
-    sum_y = np.sum(time_series)
-    sum_xy = np.sum(x * time_series)
-    sum_x2 = np.sum(x**2)
-    slope = (n * sum_xy - sum_x * sum_y) / (n * sum_x2 - sum_x**2)
-    intercept = (sum_y - slope * sum_x) / n
 
-    # R²
-    y_pred = intercept + slope * x
-    ss_res = np.sum((time_series - y_pred)**2)
-    ss_tot = np.sum((time_series - np.mean(time_series))**2)
-    r2 = 1 - ss_res / ss_tot if ss_tot > 0 else 0
-
-    return slope, intercept, r2
-
-slope_map = np.zeros_like(lat_grid)
-r2_map = np.zeros_like(lat_grid)
-growth_rate_map = np.zeros_like(lat_grid)
-
-for i in range(len(lats)):
-    for j in range(len(lons)):
-        ts = annual_radiance[:, i, j]
-        slope, intercept, r2 = pixel_trend(ts, years)
-        slope_map[i, j] = slope
-        r2_map[i, j] = r2
-        # Percent growth rate
-        if ts[0] > 0.01:
-            growth_rate_map[i, j] = (slope / ts[0]) * 100  # % per year
-
-fig, axes = plt.subplots(2, 3, figsize=(18, 10))
-fig.patch.set_facecolor('#1f2937')
-
-ziro_lat, ziro_lon = 27.59, 93.83
-
-# Plot 1: 2014 radiance
-ax = axes[0, 0]
-ax.set_facecolor('#0a0a1a')
-im = ax.pcolormesh(lons, lats, np.log10(np.clip(annual_radiance[0], 0.1, None)),
-                    cmap='hot', shading='auto', vmin=-1, vmax=2.5)
-ax.plot(ziro_lon, ziro_lat, '*', color='#22c55e', markersize=12)
-ax.set_title('2014 radiance', color='white', fontsize=11)
-ax.set_aspect('equal'); ax.tick_params(colors='gray')
-
-# Plot 2: 2024 radiance
-ax = axes[0, 1]
-ax.set_facecolor('#0a0a1a')
-idx_2024 = np.argmin(np.abs(years - 2024))
-im = ax.pcolormesh(lons, lats, np.log10(np.clip(annual_radiance[idx_2024], 0.1, None)),
-                    cmap='hot', shading='auto', vmin=-1, vmax=2.5)
-ax.plot(ziro_lon, ziro_lat, '*', color='#22c55e', markersize=12)
-ax.set_title('2024 radiance', color='white', fontsize=11)
-ax.set_aspect('equal'); ax.tick_params(colors='gray')
-
-# Plot 3: Growth rate map
-ax = axes[0, 2]
-ax.set_facecolor('#0a0a1a')
-im = ax.pcolormesh(lons, lats, np.clip(growth_rate_map, 0, 15),
-                    cmap='YlOrRd', shading='auto', vmin=0, vmax=10)
-plt.colorbar(im, ax=ax, label='Growth rate (%/year)')
-ax.plot(ziro_lon, ziro_lat, '*', color='#22c55e', markersize=12)
-ax.contour(lons, lats, growth_rate_map, levels=[2, 5, 8], colors='white',
-           linewidths=0.5, alpha=0.5)
-ax.set_title('Annual growth rate', color='white', fontsize=11)
-ax.set_aspect('equal'); ax.tick_params(colors='gray')
-
-# Plot 4: Ziro Valley time series
-ax = axes[1, 0]
-ax.set_facecolor('#111827')
-
-ziro_i = np.argmin(np.abs(lats - ziro_lat))
-ziro_j = np.argmin(np.abs(lons - ziro_lon))
-ziro_ts = annual_radiance[:, ziro_i, ziro_j]
-
-ita_i = np.argmin(np.abs(lats - 27.08))
-ita_j = np.argmin(np.abs(lons - 93.62))
-ita_ts = annual_radiance[:, ita_i, ita_j]
-
-ax.plot(years, ziro_ts, 'o-', color='#22c55e', linewidth=2, markersize=5, label='Ziro Valley')
-ax.plot(years, ita_ts / 50, 'o-', color='#ef4444', linewidth=2, markersize=5,
-        label='Itanagar (/50)')
-
-# Trend line for Ziro
-slope, intercept, r2 = pixel_trend(ziro_ts, years)
-trend_line = intercept + slope * (years - years[0])
-ax.plot(years, trend_line, '--', color='#22c55e', linewidth=1, alpha=0.7)
-
-# Project forward
-future_years = np.arange(2031, 2051)
-future_trend = intercept + slope * (np.concatenate([years, future_years]) - years[0])
-ax.plot(np.concatenate([years, future_years]),
-        future_trend[:len(years) + len(future_years)],
-        ':', color='#fbbf24', linewidth=1.5, alpha=0.7, label='Projected')
-
-ax.set_xlabel('Year', color='white')
-ax.set_ylabel('Radiance (nW/cm²/sr)', color='white')
-ax.set_title(f'Ziro Valley trend (slope={slope:.4f}/yr, R²={r2:.2f})', color='white', fontsize=11)
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
-ax.tick_params(colors='gray')
-ax.grid(True, alpha=0.1)
-
-# Plot 5: Sky brightness trend (converted)
-ax = axes[1, 1]
-ax.set_facecolor('#111827')
-
-def rad_to_sb(rad):
-    ground = rad * 0.15 + 0.17
-    return -2.5 * np.log10(np.clip(ground, 1e-4, None)) + 26.33
-
-ziro_sb = [rad_to_sb(r) for r in ziro_ts]
-all_years_proj = np.concatenate([years, future_years])
-proj_rad = intercept + slope * (all_years_proj - years[0])
-proj_sb = [rad_to_sb(r) for r in proj_rad]
-
-ax.plot(years, ziro_sb, 'o-', color='#22c55e', linewidth=2, markersize=5, label='Measured')
-ax.plot(all_years_proj, proj_sb, ':', color='#fbbf24', linewidth=1.5, label='Projected')
-
-# Bortle boundaries
-ax.axhline(21.6, color='gray', linestyle='--', linewidth=1, alpha=0.5)
-ax.text(2015, 21.55, 'Bortle 2/3 boundary', color='gray', fontsize=7)
-ax.axhline(21.3, color='gray', linestyle=':', linewidth=1, alpha=0.5)
-ax.text(2015, 21.25, 'Bortle 3/4 boundary', color='gray', fontsize=7)
-
-ax.set_xlabel('Year', color='white')
-ax.set_ylabel('Sky brightness (mag/arcsec²)', color='white')
-ax.set_title('Ziro sky quality projection', color='white', fontsize=11)
-ax.invert_yaxis()
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
-ax.tick_params(colors='gray')
-ax.grid(True, alpha=0.1)
-
-# Plot 6: Scenario comparison
-ax = axes[1, 2]
-ax.set_facecolor('#111827')
-
-scenarios = {
-    'No action (current trend)': 1.0,
-    'Moderate controls': 0.5,
-    'Strong controls (shielding)': 0.2,
-    'Dark sky reserve (freeze)': 0.0,
-}
-
-scenario_colors = ['#ef4444', '#fbbf24', '#3b82f6', '#22c55e']
-proj_years = np.arange(2024, 2055)
-
-for (label, factor), color in zip(scenarios.items(), scenario_colors):
-    current_slope = slope * factor
-    current_val = ziro_ts[idx_2024]
-    proj = current_val + current_slope * (proj_years - 2024)
-    proj_sb_scen = [rad_to_sb(r) for r in proj]
-    ax.plot(proj_years, proj_sb_scen, linewidth=2, color=color, label=label)
-
-ax.axhline(21.6, color='gray', linestyle='--', linewidth=1, alpha=0.5)
-ax.text(2050, 21.55, 'B2/B3', color='gray', fontsize=7)
-ax.axhline(21.3, color='gray', linestyle=':', linewidth=1, alpha=0.5)
-ax.text(2050, 21.25, 'B3/B4', color='gray', fontsize=7)
-
-ax.set_xlabel('Year', color='white')
-ax.set_ylabel('Sky brightness (mag/arcsec²)', color='white')
-ax.set_title('Policy scenarios for Ziro', color='white', fontsize=11)
-ax.invert_yaxis()
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=7, loc='upper right')
-ax.tick_params(colors='gray')
-ax.grid(True, alpha=0.1)
-
-plt.tight_layout()
-plt.show()
-
-print("TREND ANALYSIS SUMMARY")
-print("=" * 55)
-print(f"Ziro Valley 2014 radiance: {ziro_ts[0]:.3f} nW/cm²/sr")
-print(f"Ziro Valley 2024 radiance: {ziro_ts[idx_2024]:.3f} nW/cm²/sr")
-print(f"Annual slope: +{slope:.4f} nW/cm²/sr per year")
-print(f"Growth rate: {(slope/ziro_ts[0])*100:.1f}% per year")
-print(f"R²: {r2:.3f}")
-print()
-print("Without intervention: Bortle 3 reached by ~{:.0f}".format(
-    2024 + (0.5 - ziro_ts[idx_2024]) / slope if slope > 0 else 9999))
-print("With strong controls: dark sky preserved indefinitely")`,
+print("\n[Full visualization in playground]")`,
       challenge: 'Add seasonal decomposition: separate the annual signal into trend + seasonal + residual components. NE India has strong monsoon seasonality that affects satellite measurements. Show the monsoon dip in "measurable" radiance (clouds block ground lights) and demonstrate that deseasonalized trends give more accurate growth rates.',
       successHint: 'Trend analysis turns snapshots into narratives. A single map shows where light pollution is. A trend analysis shows where it is going. Projections with policy scenarios turn science into action items for decision-makers.',
     },
@@ -1119,7 +406,6 @@ This is exactly the kind of analysis that organizations like the International D
       checkAnswer: 'Validation requires multiple data streams: (1) Compare VIIRS satellite data from before and after implementation — has the growth rate in the buffer zone decreased? (2) Install permanent SQM stations at the core site and buffer boundary to provide continuous ground-truth. (3) Conduct annual all-sky photography at fixed positions to track visual changes. (4) Compare actual sky brightness at the 5-year mark against the projected brightness from the "strong controls" scenario. If the data tracks the projection, the policy is working. If it tracks the "no action" scenario, enforcement has failed.',
       codeIntro: 'Build the final portfolio output: site rankings, threat assessments, conservation recommendations, and a complete dark sky mapper report for northeastern India.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch
 
 np.random.seed(42)
@@ -1169,204 +455,8 @@ class DarkSiteAssessment:
             recs.append(f"URGENT: Sky degrading at {abs(self.trend_slope)*100:.1f}% per decade")
         if self.city_dist < 50:
             recs.append(f"SHIELD: {self.nearest_city} ({self.city_dist:.0f}km) needs lighting ordinance")
-        if self.area_buffer < 200:
-            recs.append("EXPAND: Buffer zone insufficient, extend perimeter")
-        recs.append("MONITOR: Install permanent SQM station for validation")
-        return recs
 
-# --- Assess NE India dark sky candidates ---
-sites = [
-    DarkSiteAssessment(
-        'Ziro Valley', 27.59, 93.83, 21.72, 2, -0.015, 450, 800,
-        'Itanagar', 55, 0.06),
-    DarkSiteAssessment(
-        'Tawang', 27.59, 91.86, 21.80, 1, -0.005, 600, 1200,
-        'Bomdila', 80, 0.03),
-    DarkSiteAssessment(
-        'Mechuka', 28.60, 94.09, 21.85, 1, -0.003, 800, 1500,
-        'Along', 120, 0.02),
-    DarkSiteAssessment(
-        'Mawsynram', 25.30, 91.58, 21.20, 3, -0.025, 150, 300,
-        'Shillong', 35, 0.04),
-    DarkSiteAssessment(
-        'Dzukou Valley', 25.52, 94.07, 21.50, 3, -0.010, 200, 500,
-        'Kohima', 25, 0.03),
-    DarkSiteAssessment(
-        'Phawngpui Peak', 22.65, 93.02, 21.65, 2, -0.008, 350, 700,
-        'Aizawl', 90, 0.04),
-]
-
-# Sort by conservation score
-sites.sort(key=lambda s: s.conservation_score(), reverse=True)
-
-fig = plt.figure(figsize=(18, 14))
-fig.patch.set_facecolor('#1f2937')
-
-# --- Plot 1: Site ranking dashboard ---
-ax1 = fig.add_subplot(2, 2, 1)
-ax1.set_facecolor('#111827')
-
-names = [s.name for s in sites]
-scores = [s.conservation_score() for s in sites]
-bar_colors = ['#22c55e' if s > 70 else '#fbbf24' if s > 50 else '#ef4444' for s in scores]
-
-bars = ax1.barh(range(len(sites)), scores, color=bar_colors, edgecolor='none', height=0.6)
-ax1.set_yticks(range(len(sites)))
-ax1.set_yticklabels(names, color='white', fontsize=9)
-ax1.set_xlabel('Conservation Priority Score (0-100)', color='white')
-ax1.set_title('Dark Sky Site Rankings — NE India', color='white', fontsize=12, fontweight='bold')
-ax1.set_xlim(0, 105)
-ax1.tick_params(colors='gray')
-ax1.invert_yaxis()
-
-for bar, score, site in zip(bars, scores, sites):
-    ax1.text(bar.get_width() + 1, bar.get_y() + bar.get_height()/2,
-             f'{score:.0f} (B{site.current_bortle})', va='center', color='white', fontsize=9)
-
-# --- Plot 2: Threat timeline ---
-ax2 = fig.add_subplot(2, 2, 2)
-ax2.set_facecolor('#111827')
-
-future_years = np.arange(2024, 2074)
-site_colors = ['#22c55e', '#34d399', '#3b82f6', '#fbbf24', '#f97316', '#a78bfa']
-
-for site, color in zip(sites, site_colors):
-    sb_proj = site.current_sb + site.trend_slope * (future_years - 2024)
-    ax2.plot(future_years, sb_proj, linewidth=2, color=color, label=site.name)
-    # Mark when Bortle 3 is reached
-    yrs_to_b3 = site.years_to_bortle3()
-    if 0 < yrs_to_b3 < 50:
-        ax2.plot(2024 + yrs_to_b3, 21.6, 'x', color=color, markersize=10, markeredgewidth=2)
-
-ax2.axhline(21.6, color='white', linestyle='--', linewidth=1, alpha=0.3)
-ax2.text(2070, 21.55, 'B2/B3', color='gray', fontsize=7)
-ax2.axhline(21.3, color='white', linestyle=':', linewidth=1, alpha=0.3)
-ax2.text(2070, 21.25, 'B3/B4', color='gray', fontsize=7)
-
-ax2.set_xlabel('Year', color='white')
-ax2.set_ylabel('Sky brightness (mag/arcsec²)', color='white')
-ax2.set_title('Threat Timeline: When Sites Lose Dark Status', color='white', fontsize=12)
-ax2.invert_yaxis()
-ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=7, ncol=2)
-ax2.tick_params(colors='gray')
-ax2.grid(True, alpha=0.1)
-
-# --- Plot 3: Regional map with site scores ---
-ax3 = fig.add_subplot(2, 2, 3)
-ax3.set_facecolor('#0a0a1a')
-
-# Simple regional background
-lats_bg = np.arange(22, 30, 0.1)
-lons_bg = np.arange(89, 98, 0.1)
-lon_bg, lat_bg = np.meshgrid(lons_bg, lats_bg)
-bg = np.zeros_like(lat_bg)
-
-# Add city glow
-ne_cities = {
-    'Guwahati': (26.14, 91.74, 1120000), 'Shillong': (25.57, 91.88, 170000),
-    'Imphal': (24.82, 93.95, 268000), 'Agartala': (23.83, 91.28, 400000),
-    'Aizawl': (23.73, 92.72, 293000), 'Dimapur': (25.91, 93.73, 122000),
-}
-for _, (lat, lon, pop) in ne_cities.items():
-    dist = np.sqrt((lat_bg - lat)**2 + (lon_bg - lon)**2)
-    bg += (pop / 50000) * np.exp(-dist / 0.5)
-
-ax3.pcolormesh(lons_bg, lats_bg, np.log10(bg + 1), cmap='hot', shading='auto',
-                alpha=0.6, vmin=0, vmax=2)
-
-# Plot sites with score-proportional markers
-for site, color in zip(sites, site_colors):
-    score = site.conservation_score()
-    ax3.scatter(site.lon, site.lat, s=score * 3, c=color, edgecolors='white',
-                linewidth=1.5, zorder=5)
-    ax3.annotate(f'{site.name}\n(Score: {score:.0f})', (site.lon, site.lat),
-                 textcoords='offset points', xytext=(12, 5),
-                 color='white', fontsize=7, fontweight='bold',
-                 bbox=dict(boxstyle='round,pad=0.3', facecolor='#1f2937', alpha=0.8))
-
-ax3.set_xlim(89, 98)
-ax3.set_ylim(22, 30)
-ax3.set_xlabel('Longitude (°E)', color='white')
-ax3.set_ylabel('Latitude (°N)', color='white')
-ax3.set_title('Dark Sky Candidate Sites Map', color='white', fontsize=12)
-ax3.set_aspect('equal')
-ax3.tick_params(colors='gray')
-
-# --- Plot 4: Conservation recommendations summary ---
-ax4 = fig.add_subplot(2, 2, 4)
-ax4.set_facecolor('#111827')
-ax4.set_xlim(0, 10)
-ax4.set_ylim(0, 12)
-ax4.set_xticks([]); ax4.set_yticks([])
-
-# Title
-ax4.text(5, 11.5, 'CONSERVATION RECOMMENDATIONS', ha='center', color='white',
-         fontsize=13, fontweight='bold')
-ax4.text(5, 11.0, 'Top 3 Priority Sites', ha='center', color='gray', fontsize=10)
-
-y_pos = 10.0
-for i, site in enumerate(sites[:3]):
-    # Site header
-    score = site.conservation_score()
-    color = site_colors[i]
-    ax4.add_patch(FancyBboxPatch((0.3, y_pos - 0.4), 9.4, 0.7,
-                                  boxstyle="round,pad=0.1",
-                                  facecolor=color, alpha=0.15, edgecolor=color))
-    ax4.text(0.5, y_pos, f'#{i+1} {site.name}', color=color,
-             fontsize=11, fontweight='bold', va='center')
-    ax4.text(9.5, y_pos, f'Score: {score:.0f}', color=color,
-             fontsize=10, ha='right', va='center')
-
-    y_pos -= 0.8
-    recs = site.recommendations()
-    for rec in recs[:3]:
-        marker = '!' if 'URGENT' in rec else '*'
-        rec_color = '#ef4444' if 'URGENT' in rec else '#22c55e' if 'PROTECT' in rec else 'white'
-        ax4.text(0.8, y_pos, f'{marker} {rec}', color=rec_color, fontsize=7.5, va='center')
-        y_pos -= 0.5
-
-    yrs = site.years_to_bortle3()
-    yrs_text = f'{yrs:.0f} years' if yrs < 100 else 'Stable'
-    ax4.text(0.8, y_pos, f'  Time to Bortle 3: {yrs_text}', color='gray', fontsize=7, va='center')
-    y_pos -= 0.8
-
-ax4.set_title('Action Plan', color='white', fontsize=12)
-
-plt.tight_layout()
-plt.show()
-
-# --- Print final report ---
-print("=" * 70)
-print("  LIGHT POLLUTION MAPPER — NE INDIA DARK SKY ASSESSMENT REPORT")
-print("=" * 70)
-print()
-
-for i, site in enumerate(sites):
-    score = site.conservation_score()
-    yrs = site.years_to_bortle3()
-    yrs_text = f'{yrs:.0f} years' if yrs < 200 else 'Stable (>200 yr)'
-    print(f"#{i+1} {site.name}")
-    print(f"   Location: {site.lat:.2f}°N, {site.lon:.2f}°E")
-    print(f"   Sky quality: {site.current_sb:.2f} mag/arcsec² (Bortle {site.current_bortle})")
-    print(f"   Core area: {site.area_core:.0f} km² | Buffer: {site.area_buffer:.0f} km²")
-    print(f"   Trend: {site.trend_slope:+.3f} mag/arcsec²/yr")
-    print(f"   Nearest threat: {site.nearest_city} ({site.city_dist:.0f} km, {site.city_growth*100:.0f}% growth)")
-    print(f"   Time to Bortle 3: {yrs_text}")
-    print(f"   Conservation score: {score:.0f}/100")
-    print(f"   Recommendations:")
-    for rec in site.recommendations():
-        print(f"     - {rec}")
-    print()
-
-print("OVERALL RECOMMENDATIONS FOR NE INDIA:")
-print("  1. Designate Mechuka and Tawang as Dark Sky Parks (highest scores)")
-print("  2. Establish Ziro Valley lighting ordinance before Itanagar growth degrades it")
-print("  3. Install SQM monitoring network at all 6 candidate sites")
-print("  4. Engage Apatani, Monpa, and Adi tribal communities as sky stewards")
-print("  5. Propose NE India Dark Sky Corridor connecting Tawang-Mechuka-Ziro")
-print()
-print("This analysis was generated by a Light Pollution Mapper built from scratch.")
-print("Next steps: validate with ground-truth SQM readings and all-sky photography.")`,
+print("\n[Full visualization in playground]")`,
       challenge: 'Add an economic analysis: estimate the eco-tourism potential of each dark sky site based on accessibility, existing infrastructure, and sky quality. Calculate the cost-benefit ratio of lighting ordinance enforcement versus tourism revenue from astro-tourism. Real dark sky reserves like NamibRand and Aoraki Mackenzie generate significant economic returns.',
       successHint: 'You have built a complete scientific tool from first principles: physics, data processing, spatial analysis, trend detection, and policy recommendations. This is real-world conservation science. The same methodology is used by professional researchers, but you built it from scratch and understand every step. That is the difference between using a tool and being an engineer.',
     },
@@ -1395,6 +485,7 @@ print("Next steps: validate with ground-truth SQM readings and all-sky photograp
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
+            diagram={[StarObservatoryDiagram, StarCatalogDiagram, StarPhotometryPipelineDiagram, StarLightCurveDiagram, StarSkyQualityDiagram, StarConservationDiagram][i] ? createElement([StarObservatoryDiagram, StarCatalogDiagram, StarPhotometryPipelineDiagram, StarLightCurveDiagram, StarSkyQualityDiagram, StarConservationDiagram][i]) : undefined}
             pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
         ))}
       </div>

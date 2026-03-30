@@ -14,7 +14,7 @@ export default function WavelengthSpectrum() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 600 180" className="w-full max-w-xl mx-auto" role="img" aria-label="Visible light spectrum">
+      <svg viewBox="0 0 630 195" className="w-full max-w-xl mx-auto" role="img" aria-label="Visible light spectrum">
         {/* Spectrum bars */}
         {colors.map((c, i) => (
           <g key={c.label}>

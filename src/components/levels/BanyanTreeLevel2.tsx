@@ -1,12 +1,12 @@
 import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Sparkles } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
-import CarbonCycleDiagram from '../diagrams/CarbonCycleDiagram';
-import PhotosynthesisDiagram from '../diagrams/PhotosynthesisDiagram';
-import PopulationGrowthCurve from '../diagrams/PopulationGrowthCurve';
-import WaterCycleDiagram from '../diagrams/WaterCycleDiagram';
-import HistogramDiagram from '../diagrams/HistogramDiagram';
-import CorrelationDiagram from '../diagrams/CorrelationDiagram';
+import BanyanStomataCloseupDiagram from '../diagrams/BanyanStomataCloseupDiagram';
+import BanyanDendrochronologyDiagram from '../diagrams/BanyanDendrochronologyDiagram';
+import BanyanNutrientCycleDiagram from '../diagrams/BanyanNutrientCycleDiagram';
+import BanyanCompetitionDiagram from '../diagrams/BanyanCompetitionDiagram';
+import BanyanReproductionDiagram from '../diagrams/BanyanReproductionDiagram';
+import BanyanBiomassAllocationDiagram from '../diagrams/BanyanBiomassAllocationDiagram';
 
 export default function BanyanTreeLevel2() {
   const pyodideRef = useRef<any>(null);
@@ -54,7 +54,6 @@ Old-growth forests like the banyan's grove are particularly valuable: they store
       checkAnswer: 'Not even close. The most optimistic tree-planting scenarios (restoring all degraded forests globally) could absorb ~10 Gt CO2/year at maximum — about 25% of current emissions. And that\'s assuming the trees survive, grow, and aren\'t cut down. Tree planting is necessary but far from sufficient. We must also reduce emissions at source. Trees are part of the solution, not THE solution.',
       codeIntro: 'Model the carbon cycle for a forest over 500 years, including growth, death, and decomposition.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Forest carbon cycle model
 years = np.arange(0, 501)
@@ -86,66 +85,6 @@ for t in range(1, 501):
 
 total_carbon = living_biomass + dead_wood + soil_carbon
 
-fig, axes = plt.subplots(2, 2, figsize=(14, 9))
-fig.patch.set_facecolor('#1f2937')
-
-ax = axes[0, 0]
-ax.set_facecolor('#111827')
-ax.stackplot(years, living_biomass, dead_wood, soil_carbon,
-             colors=['#22c55e', '#8B4513', '#f59e0b'], alpha=0.7,
-             labels=['Living biomass', 'Dead wood', 'Soil carbon'])
-ax.set_xlabel('Years', color='white')
-ax.set_ylabel('Carbon (tonnes/ha)', color='white')
-ax.set_title('Forest Carbon Pools Over 500 Years', color='white', fontsize=12)
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', loc='upper left')
-ax.tick_params(colors='gray')
-
-ax = axes[0, 1]
-ax.set_facecolor('#111827')
-window = 10
-smooth_flux = np.convolve(atmosphere_flux, np.ones(window)/window, mode='same')
-ax.plot(years, smooth_flux, color='#3b82f6', linewidth=2)
-ax.fill_between(years, smooth_flux, 0, where=smooth_flux < 0, alpha=0.3, color='#22c55e', label='Carbon sink')
-ax.fill_between(years, smooth_flux, 0, where=smooth_flux > 0, alpha=0.3, color='#ef4444', label='Carbon source')
-ax.axhline(0, color='gray', linestyle='--', linewidth=0.5)
-ax.set_xlabel('Years', color='white')
-ax.set_ylabel('Net flux (+ = emission)', color='white')
-ax.set_title('Is the Forest a Sink or Source?', color='white', fontsize=12)
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax.tick_params(colors='gray')
-
-# Deforestation scenario at year 300
-defor_total = total_carbon.copy()
-for t in range(301, 501):
-    if t == 301:
-        defor_total[t] = total_carbon[t-1] * 0.2
-    else:
-        recovery = 200 * 0.015 * (1 - defor_total[t-1] / 250)
-        defor_total[t] = defor_total[t-1] + max(0, recovery)
-
-ax = axes[1, 0]
-ax.set_facecolor('#111827')
-ax.plot(years, total_carbon, color='#22c55e', linewidth=2.5, label='Undisturbed forest')
-ax.plot(years, defor_total, color='#ef4444', linewidth=2.5, label='Clear-cut at year 300')
-ax.axvline(300, color='#f59e0b', linestyle='--', linewidth=2)
-ax.set_xlabel('Years', color='white')
-ax.set_ylabel('Total carbon (tonnes/ha)', color='white')
-ax.set_title('Deforestation Carbon Impact', color='white', fontsize=12)
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax.tick_params(colors='gray')
-
-ax = axes[1, 1]
-ax.set_facecolor('#111827')
-carbon_debt = total_carbon - defor_total
-ax.fill_between(years[300:], carbon_debt[300:], alpha=0.5, color='#ef4444')
-ax.plot(years[300:], carbon_debt[300:], color='#ef4444', linewidth=2)
-ax.set_xlabel('Years', color='white')
-ax.set_ylabel('Carbon debt (tonnes/ha)', color='white')
-ax.set_title('Carbon Debt from Deforestation', color='white', fontsize=12)
-ax.tick_params(colors='gray')
-
-plt.tight_layout()
-plt.show()
 
 print(f"Forest carbon at year 300: {total_carbon[300]:.0f} tonnes C/ha")
 print(f"After clear-cut, immediate carbon loss: {total_carbon[300] - defor_total[301]:.0f} tonnes C/ha")
@@ -172,7 +111,6 @@ The banyan is a **late-successional** species — it thrives in established fore
       checkAnswer: 'Natural succession is almost always better. Planting climax species on recently burned ground often fails because the soil, microclimate, and mycorrhizal networks aren\'t ready. Pioneer species naturally prepare the site. Trying to skip stages rarely works.',
       codeIntro: 'Simulate 300 years of forest succession, tracking species composition and structural complexity.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 years = np.arange(0, 301)
 
@@ -197,51 +135,6 @@ complexity = np.clip(complexity, 0, 100)
 carbon = 200 / (1 + np.exp(-0.02 * (years - 100))) + 50 * np.log1p(years/50)
 biodiversity = 10 + 50 * (1 - np.exp(-0.015 * years)) + 20 * np.sin(years/50)**2
 
-fig, axes = plt.subplots(2, 2, figsize=(14, 9))
-fig.patch.set_facecolor('#1f2937')
-
-ax = axes[0, 0]
-ax.set_facecolor('#111827')
-ax.stackplot(years, pioneers_pct, early_pct, mid_pct, late_pct,
-             colors=['#f59e0b', '#22c55e', '#3b82f6', '#8B4513'], alpha=0.7,
-             labels=['Pioneer', 'Early', 'Mid', 'Late (climax)'])
-ax.set_ylabel('% of canopy cover', color='white')
-ax.set_title('Species Composition Over Succession', color='white', fontsize=12)
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
-ax.tick_params(colors='gray')
-
-ax = axes[0, 1]
-ax.set_facecolor('#111827')
-ax.plot(years, complexity, color='#a855f7', linewidth=2.5)
-ax.fill_between(years, complexity, alpha=0.15, color='#a855f7')
-stages = [(0, 'Pioneer'), (40, 'Early'), (120, 'Mid'), (220, 'Old-growth')]
-for yr, label in stages:
-    ax.axvline(yr, color='gray', linestyle=':', alpha=0.3)
-    ax.text(yr + 5, 95, label, color='white', fontsize=9)
-ax.set_ylabel('Structural complexity (%)', color='white')
-ax.set_title('Forest Structure Over Time', color='white', fontsize=12)
-ax.tick_params(colors='gray')
-
-ax = axes[1, 0]
-ax.set_facecolor('#111827')
-ax.plot(years, carbon, color='#22c55e', linewidth=2.5)
-ax.fill_between(years, carbon, alpha=0.15, color='#22c55e')
-ax.set_xlabel('Years', color='white')
-ax.set_ylabel('Carbon stored (tonnes/ha)', color='white')
-ax.set_title('Carbon Accumulation', color='white', fontsize=12)
-ax.tick_params(colors='gray')
-
-ax = axes[1, 1]
-ax.set_facecolor('#111827')
-ax.plot(years, biodiversity, color='#f59e0b', linewidth=2.5)
-ax.fill_between(years, biodiversity, alpha=0.15, color='#f59e0b')
-ax.set_xlabel('Years', color='white')
-ax.set_ylabel('Species richness index', color='white')
-ax.set_title('Biodiversity During Succession', color='white', fontsize=12)
-ax.tick_params(colors='gray')
-
-plt.tight_layout()
-plt.show()
 
 print("Succession milestones:")
 print("  Year 0-20: Pioneer stage")
@@ -269,7 +162,6 @@ In Northeast India, old-growth forests in the Eastern Himalayas are globally sig
       checkAnswer: 'No. Replanted forest (plantation) is a crop, not an ecosystem. It has even-aged trees of one species, no structural complexity, no dead wood, simplified soil ecology, and few specialist species. "Sustainable" forestry can maintain wood production, but it cannot maintain old-growth values.',
       codeIntro: 'Compare old-growth and secondary forest on multiple ecological metrics.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 metrics = {
     'Carbon storage': {'old_growth': 250, 'secondary': 120, 'plantation': 80},
@@ -280,58 +172,6 @@ metrics = {
     'Water retention': {'old_growth': 90, 'secondary': 60, 'plantation': 35},
 }
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
-fig.patch.set_facecolor('#1f2937')
-
-ax1.set_facecolor('#111827')
-cats = list(metrics.keys())
-x = np.arange(len(cats))
-width = 0.25
-
-og = [metrics[c]['old_growth'] for c in cats]
-sec = [metrics[c]['secondary'] for c in cats]
-plan = [metrics[c]['plantation'] for c in cats]
-
-og_norm = [100] * len(cats)
-sec_norm = [s/o*100 for s, o in zip(sec, og)]
-plan_norm = [p/o*100 for p, o in zip(plan, og)]
-
-ax1.bar(x - width, og_norm, width, label='Old-growth (200+ yr)', color='#22c55e', alpha=0.8)
-ax1.bar(x, sec_norm, width, label='Secondary (50 yr)', color='#f59e0b', alpha=0.8)
-ax1.bar(x + width, plan_norm, width, label='Plantation', color='#ef4444', alpha=0.8)
-ax1.set_xticks(x)
-ax1.set_xticklabels(cats, color='gray', fontsize=8, rotation=20, ha='right')
-ax1.set_ylabel('% of old-growth value', color='white')
-ax1.set_title('Forest Quality Comparison', color='white', fontsize=13)
-ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax1.tick_params(colors='gray')
-
-ax2.set_facecolor('#111827')
-recovery_years = np.arange(0, 501)
-metrics_recovery = {
-    'Carbon storage': {'rate': 0.007, 'color': '#22c55e'},
-    'Species richness': {'rate': 0.005, 'color': '#3b82f6'},
-    'Structural complexity': {'rate': 0.004, 'color': '#a855f7'},
-    'Soil ecology': {'rate': 0.003, 'color': '#f59e0b'},
-    'Specialist species': {'rate': 0.002, 'color': '#ef4444'},
-}
-
-for name, props in metrics_recovery.items():
-    recovery = 100 * (1 - np.exp(-props['rate'] * recovery_years))
-    ax2.plot(recovery_years, recovery, linewidth=2, color=props['color'], label=name)
-    t90 = -np.log(0.1) / props['rate']
-    if t90 < 500:
-        ax2.plot(t90, 90, 'o', color=props['color'], markersize=6)
-
-ax2.axhline(90, color='white', linestyle='--', alpha=0.3, label='90% recovery')
-ax2.set_xlabel('Years since disturbance', color='white')
-ax2.set_ylabel('% of old-growth level', color='white')
-ax2.set_title('Recovery Time to Match Old-Growth', color='white', fontsize=13)
-ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
-ax2.tick_params(colors='gray')
-
-plt.tight_layout()
-plt.show()
 
 print("Recovery times to reach 90% of old-growth level:")
 for name, props in metrics_recovery.items():
@@ -360,7 +200,6 @@ print("\\nSpecialist species take the longest: 500+ years.")`,
       checkAnswer: 'Protecting the 100 mature trees. Each provides 5-10x the services of a sapling. Many saplings will die before maturity (~30% urban tree mortality in first 5 years). The mature trees provide immediate, full-scale services. Plant saplings too, but never at the cost of existing mature trees.',
       codeIntro: 'Model the urban heat island effect and how tree canopy reduces it.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 canopy_pct = np.linspace(0, 60, 100)
 base_temp = 35
@@ -372,67 +211,6 @@ urban_temp = base_temp - temp_reduction
 mortality_baseline = 100
 mortality_risk = mortality_baseline * np.exp(0.15 * (urban_temp - 28))
 
-fig, axes = plt.subplots(2, 2, figsize=(14, 9))
-fig.patch.set_facecolor('#1f2937')
-
-ax = axes[0, 0]
-ax.set_facecolor('#111827')
-ax.plot(canopy_pct, urban_temp, color='#ef4444', linewidth=2.5, label='Urban temperature')
-ax.axhline(rural_temp, color='#22c55e', linestyle='--', linewidth=2, label=f'Rural ({rural_temp} C)')
-ax.fill_between(canopy_pct, urban_temp, rural_temp, alpha=0.15, color='#ef4444')
-ax.set_xlabel('Tree canopy coverage (%)', color='white')
-ax.set_ylabel('Temperature (C)', color='white')
-ax.set_title('Urban Heat Island vs Tree Canopy', color='white', fontsize=12)
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax.tick_params(colors='gray')
-
-ax = axes[0, 1]
-ax.set_facecolor('#111827')
-ax.plot(canopy_pct, mortality_risk, color='#ef4444', linewidth=2.5)
-ax.fill_between(canopy_pct, mortality_risk, alpha=0.15, color='#ef4444')
-ax.set_xlabel('Tree canopy coverage (%)', color='white')
-ax.set_ylabel('Heat deaths (per million/summer)', color='white')
-ax.set_title('Heat Mortality Risk', color='white', fontsize=12)
-ax.tick_params(colors='gray')
-
-ax = axes[1, 0]
-ax.set_facecolor('#111827')
-tree_ages = np.arange(1, 101)
-canopy_area = np.minimum(tree_ages ** 1.5 * 0.2, 80)
-shade_value = canopy_area * 5
-carbon_value = tree_ages * 0.5 * 50
-stormwater_value = canopy_area * 3
-property_value = canopy_area * 10
-total_value = shade_value + carbon_value + stormwater_value + property_value
-
-ax.stackplot(tree_ages, shade_value, carbon_value, stormwater_value, property_value,
-             colors=['#ef4444', '#22c55e', '#3b82f6', '#f59e0b'], alpha=0.7,
-             labels=['Cooling', 'Carbon', 'Stormwater', 'Property value'])
-ax.set_xlabel('Tree age (years)', color='white')
-ax.set_ylabel('Annual value ($/year)', color='white')
-ax.set_title('Ecosystem Service Value by Tree Age', color='white', fontsize=12)
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
-ax.tick_params(colors='gray')
-
-ax = axes[1, 1]
-ax.set_facecolor('#111827')
-cities = ['Singapore', 'Sydney', 'London', 'New York', 'Guwahati\\n(est.)', 'Delhi', 'Mumbai']
-canopy_data = [29, 26, 21, 20, 18, 12, 8]
-bar_colors = ['#22c55e' if c > 20 else '#f59e0b' if c > 15 else '#ef4444' for c in canopy_data]
-bars = ax.barh(range(len(cities)), canopy_data, color=bar_colors, alpha=0.8)
-ax.set_yticks(range(len(cities)))
-ax.set_yticklabels(cities, color='white')
-ax.set_xlabel('Tree canopy coverage (%)', color='white')
-ax.set_title('Urban Tree Canopy: City Comparison', color='white', fontsize=12)
-ax.tick_params(colors='gray')
-ax.axvline(20, color='#f59e0b', linestyle='--', linewidth=1, label='Recommended minimum')
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-for bar, pct in zip(bars, canopy_data):
-    ax.text(bar.get_width() + 0.5, bar.get_y() + bar.get_height()/2,
-            f'{pct}%', va='center', color='white', fontsize=10)
-
-plt.tight_layout()
-plt.show()
 
 print("Urban tree canopy impacts:")
 print(f"  0% canopy: {base_temp} C (full heat island)")
@@ -459,7 +237,6 @@ print(f"\\nA 50-year-old urban tree provides ~{total_value[49]:,.0f}/year in ser
       checkAnswer: 'Most illegal logging happens in remote areas. By the time authorities arrive weeks later, timber is gone. Near-real-time alerts allow enforcement while logging is happening. Studies show alert systems reduce deforestation by 10-20%.',
       codeIntro: 'Calculate NDVI from simulated satellite data and classify land cover types.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 np.random.seed(42)
 
@@ -489,56 +266,6 @@ nir = np.clip(nir, 0, 1)
 red = np.clip(red, 0, 1)
 ndvi = (nir - red) / (nir + red + 1e-10)
 
-fig, axes = plt.subplots(2, 2, figsize=(14, 10))
-fig.patch.set_facecolor('#1f2937')
-
-ax = axes[0, 0]
-ax.set_facecolor('#111827')
-cover_colors = {0: [0.1, 0.5, 0.1], 1: [0.3, 0.5, 0.2], 2: [0.7, 0.7, 0.3], 3: [0.5, 0.5, 0.5]}
-rgb = np.zeros((grid_size, grid_size, 3))
-for i in range(grid_size):
-    for j in range(grid_size):
-        rgb[i, j] = cover_colors[land_cover[i, j]]
-        rgb[i, j] += np.random.normal(0, 0.05, 3)
-rgb = np.clip(rgb, 0, 1)
-ax.imshow(rgb)
-ax.set_title('Simulated Satellite Image', color='white', fontsize=12)
-ax.tick_params(colors='gray')
-
-ax = axes[0, 1]
-ax.set_facecolor('#111827')
-im = ax.imshow(ndvi, cmap='RdYlGn', vmin=-0.2, vmax=0.9)
-plt.colorbar(im, ax=ax, label='NDVI')
-ax.set_title('NDVI Map', color='white', fontsize=12)
-ax.tick_params(colors='gray')
-
-ax = axes[1, 0]
-ax.set_facecolor('#111827')
-labels_list = ['Dense forest', 'Degraded', 'Agriculture', 'Urban']
-hist_colors = ['#22c55e', '#f59e0b', '#3b82f6', '#ef4444']
-for lc, label, color in zip(range(4), labels_list, hist_colors):
-    ax.hist(ndvi[land_cover == lc], bins=30, alpha=0.5, color=color, label=label, edgecolor='none')
-ax.set_xlabel('NDVI', color='white')
-ax.set_ylabel('Pixel count', color='white')
-ax.set_title('NDVI Distribution by Land Cover', color='white', fontsize=12)
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax.tick_params(colors='gray')
-
-ax = axes[1, 1]
-ax.set_facecolor('#111827')
-classified = np.zeros_like(land_cover)
-classified[ndvi > 0.6] = 0
-classified[(ndvi > 0.35) & (ndvi <= 0.6)] = 1
-classified[(ndvi > 0.1) & (ndvi <= 0.35)] = 2
-classified[ndvi <= 0.1] = 3
-accuracy = np.mean(classified == land_cover) * 100
-class_cmap = plt.cm.colors.ListedColormap(['#22c55e', '#f59e0b', '#3b82f6', '#ef4444'])
-ax.imshow(classified, cmap=class_cmap, vmin=0, vmax=3)
-ax.set_title(f'NDVI Classification (accuracy: {accuracy:.0f}%)', color='white', fontsize=12)
-ax.tick_params(colors='gray')
-
-plt.tight_layout()
-plt.show()
 
 print("NDVI classification thresholds:")
 print("  > 0.6: Dense forest")
@@ -566,7 +293,6 @@ print(f"\\nClassification accuracy: {accuracy:.0f}%")`,
       checkAnswer: 'Aboriginal burning was low-intensity, patchy, and timed to specific seasons. It created a mosaic of burned and unburned patches, maintaining biodiversity. It reduced fuel loads, preventing catastrophic fires. When Aboriginal burning stopped after European colonization, fuel accumulated and mega-fires became common.',
       codeIntro: 'Model fire regimes: compare natural fire cycles with fire suppression and their long-term effects.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 np.random.seed(42)
 
@@ -613,46 +339,6 @@ sup_bio, sup_fuel, sup_div, sup_fires = simulate_fire_regime(501, suppressed_yea
 np.random.seed(123)
 pre_bio, pre_fuel, pre_div, pre_fires = simulate_fire_regime(501)
 
-fig, axes = plt.subplots(3, 1, figsize=(14, 10), sharex=True)
-fig.patch.set_facecolor('#1f2937')
-
-scenarios = [
-    ('Natural fire regime', nat_bio, nat_fuel, nat_div, nat_fires, '#22c55e'),
-    ('Fire suppression (150yr)', sup_bio, sup_fuel, sup_div, sup_fires, '#ef4444'),
-    ('Prescribed burning', pre_bio, pre_fuel, pre_div, pre_fires, '#3b82f6'),
-]
-
-ax = axes[0]
-ax.set_facecolor('#111827')
-for name, bio, _, _, fires, color in scenarios:
-    ax.plot(years, bio, color=color, linewidth=1.5, label=name, alpha=0.8)
-ax.set_ylabel('Biomass (tonnes/ha)', color='white')
-ax.set_title('Forest Biomass Under Different Fire Regimes', color='white', fontsize=13)
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=9)
-ax.tick_params(colors='gray')
-
-ax = axes[1]
-ax.set_facecolor('#111827')
-for name, _, fuel, _, _, color in scenarios:
-    ax.plot(years, fuel, color=color, linewidth=1.5, alpha=0.8)
-ax.axhline(60, color='#f59e0b', linestyle='--', linewidth=1, label='Catastrophic threshold')
-ax.set_ylabel('Fuel load', color='white')
-ax.set_title('Accumulated Fuel (Fire Risk)', color='white', fontsize=13)
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=9)
-ax.tick_params(colors='gray')
-
-ax = axes[2]
-ax.set_facecolor('#111827')
-for name, _, _, div, _, color in scenarios:
-    ax.plot(years, div, color=color, linewidth=1.5, alpha=0.8)
-ax.set_xlabel('Years', color='white')
-ax.set_ylabel('Biodiversity index', color='white')
-ax.set_title('Biodiversity Response', color='white', fontsize=13)
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=9)
-ax.tick_params(colors='gray')
-
-plt.tight_layout()
-plt.show()
 
 for name, bio, fuel, div, fires, _ in scenarios:
     print(f"\\n{name}:")
@@ -687,7 +373,7 @@ for name, bio, fuel, div, fires, _ in scenarios:
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
-            diagram={[CarbonCycleDiagram, PhotosynthesisDiagram, PopulationGrowthCurve, WaterCycleDiagram, HistogramDiagram, CorrelationDiagram][i] ? createElement([CarbonCycleDiagram, PhotosynthesisDiagram, PopulationGrowthCurve, WaterCycleDiagram, HistogramDiagram, CorrelationDiagram][i]) : undefined}
+            diagram={[BanyanStomataCloseupDiagram, BanyanDendrochronologyDiagram, BanyanNutrientCycleDiagram, BanyanCompetitionDiagram, BanyanReproductionDiagram, BanyanBiomassAllocationDiagram][i] ? createElement([BanyanStomataCloseupDiagram, BanyanDendrochronologyDiagram, BanyanNutrientCycleDiagram, BanyanCompetitionDiagram, BanyanReproductionDiagram, BanyanBiomassAllocationDiagram][i]) : undefined}
             pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
         ))}
       </div>

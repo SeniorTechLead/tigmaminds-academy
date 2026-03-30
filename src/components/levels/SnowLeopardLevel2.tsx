@@ -1,12 +1,17 @@
 import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Sparkles } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
-import AltitudeProfileDiagram from '../diagrams/AltitudeProfileDiagram';
+import MountainTreelineDiagram from '../diagrams/MountainTreelineDiagram';
 import PopulationGrowthCurve from '../diagrams/PopulationGrowthCurve';
+import MountainZonationDiagram from '../diagrams/MountainZonationDiagram';
+import GlacierDiagram from '../diagrams/GlacierDiagram';
+import MountainClimateChangeDiagram from '../diagrams/MountainClimateChangeDiagram';
+import MountainWatershedDiagram from '../diagrams/MountainWatershedDiagram';
+import AltitudeProfileDiagram from '../diagrams/AltitudeProfileDiagram';
 import ClimateZonesDiagram from '../diagrams/ClimateZonesDiagram';
+import CorrelationDiagram from '../diagrams/CorrelationDiagram';
 import HeatTransferDiagram from '../diagrams/HeatTransferDiagram';
 import LinearGraphDiagram from '../diagrams/LinearGraphDiagram';
-import CorrelationDiagram from '../diagrams/CorrelationDiagram';
 
 export default function SnowLeopardLevel2() {
   const pyodideRef = useRef<any>(null);

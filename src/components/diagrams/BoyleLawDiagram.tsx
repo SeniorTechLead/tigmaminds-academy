@@ -1,7 +1,7 @@
 export default function BoyleLawDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 450 250" className="w-full max-w-lg mx-auto" role="img" aria-label="Boyle's Law diagram showing pressure and volume relationship">
+      <svg viewBox="0 0 472 291" className="w-full max-w-lg mx-auto" role="img" aria-label="Boyle's Law diagram showing pressure and volume relationship">
         {/* Title */}
         <text x="225" y="20" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">
           Boyle&apos;s Law: P × V = constant (at constant T)

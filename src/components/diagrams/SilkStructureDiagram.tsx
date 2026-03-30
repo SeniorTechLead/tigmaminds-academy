@@ -9,7 +9,7 @@ export default function SilkStructureDiagram() {
 
   return (
     <svg
-      viewBox="0 0 600 350"
+      viewBox="0 0 630 396"
       className="w-full max-w-2xl mx-auto"
       role="img"
       aria-label="Silk fiber protein structure diagram showing three zoom levels: whole fiber, cross-section with fibroin and sericin, and molecular beta-sheet crystal structure"

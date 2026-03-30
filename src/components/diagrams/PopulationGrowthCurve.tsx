@@ -45,7 +45,7 @@ export default function PopulationGrowthCurve() {
       `}</style>
 
       <svg
-        viewBox="0 0 500 300"
+        viewBox="0 0 592 342"
         className="w-full max-w-lg mx-auto my-6"
         role="img"
         aria-label="Population growth curves: exponential vs logistic, showing carrying capacity K = 300 sangai"

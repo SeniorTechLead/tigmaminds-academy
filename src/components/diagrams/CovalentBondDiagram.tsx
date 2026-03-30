@@ -6,7 +6,7 @@ export default function CovalentBondDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 540 200" className="w-full max-w-2xl mx-auto" role="img" aria-label="Covalent bond electron sharing diagram">
+      <svg viewBox="0 0 567 242" className="w-full max-w-2xl mx-auto" role="img" aria-label="Covalent bond electron sharing diagram">
         {/* Title */}
         <text x="270" y="18" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">
           Covalent Bonds: Sharing Electrons

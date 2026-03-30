@@ -35,7 +35,7 @@ export default function LightClockDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 500 300" className="w-full max-w-xl mx-auto" role="img" aria-label="Light clock thought experiment for time dilation">
+      <svg viewBox="0 0 525 337" className="w-full max-w-xl mx-auto" role="img" aria-label="Light clock thought experiment for time dilation">
         {/* Title */}
         <text x="250" y="22" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="14" fontWeight="bold">
           Light Clock — Time Dilation

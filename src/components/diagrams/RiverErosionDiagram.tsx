@@ -4,7 +4,7 @@ export default function RiverErosionDiagram() {
   return (
     <div className="my-4">
       <svg
-        viewBox="0 0 600 250"
+        viewBox="0 0 630 282"
         className="w-full max-w-2xl mx-auto"
         role="img"
         aria-label="River erosion diagram showing young, mature, and old river stages"

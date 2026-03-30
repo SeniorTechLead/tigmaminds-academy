@@ -3,7 +3,7 @@ export default function NumPyRulerDiagram() {
   const manyPoints = Array.from({ length: 31 }, (_, i) => i * 0.1);
 
   return (
-    <svg viewBox="0 0 600 200" className="w-full max-w-xl mx-auto my-6" role="img" aria-label="Two rulers comparing 10 points vs 30 points on a 0-3 scale">
+    <svg viewBox="0 0 670 210" className="w-full max-w-xl mx-auto my-6" role="img" aria-label="Two rulers comparing 10 points vs 30 points on a 0-3 scale">
       {/* Title area */}
       <text x="300" y="18" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="11" fontWeight="600">
         np.linspace(0, 3, count) — more points = finer detail
