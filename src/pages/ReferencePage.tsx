@@ -94,10 +94,10 @@ export default function ReferencePage() {
     </>
   );
 
-  const GuideGroup = ({ title, guides, icon }: { title: string; guides: ReferenceGuide[]; icon: React.ReactNode }) => {
+  const renderGuideGroup = (title: string, guides: ReferenceGuide[], icon: React.ReactNode) => {
     if (guides.length === 0) return null;
     return (
-      <div className="mb-8">
+      <div className="mb-8" key={title}>
         <div className="flex items-center gap-2 mb-4">
           {icon}
           <h2 className="text-lg font-bold text-gray-900 dark:text-white">{title}</h2>
@@ -240,22 +240,14 @@ export default function ReferencePage() {
             // Flat list when a specific category is selected
             <div className="space-y-3">
               {filtered.map(guide => (
-                <GuideCard key={guide.slug} guide={guide} expandedSlug={slug || null} searchQuery={searchQuery} />
+                <GuideCard key={guide.slug} guide={guide} expandedSlug={slug || null} searchQuery={searchQuery} level={level} />
               ))}
             </div>
           ) : (
             // Grouped view
             <>
-              <GuideGroup
-                title="Science & Nature"
-                guides={scienceGuides}
-                icon={<span className="text-2xl">🔬</span>}
-              />
-              <GuideGroup
-                title="Coding & Tools"
-                guides={codingGuides}
-                icon={<span className="text-2xl">💻</span>}
-              />
+              {renderGuideGroup("Science & Nature", scienceGuides, <span className="text-2xl">🔬</span>)}
+              {renderGuideGroup("Coding & Tools", codingGuides, <span className="text-2xl">💻</span>)}
             </>
           )}
         </div>

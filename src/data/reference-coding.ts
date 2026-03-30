@@ -33,6 +33,10 @@ export const codingReferences: ReferenceGuide[] = [
           'the computer follows them in order. When Priya wrote code to track elephants, her ' +
           'program was really just a recipe — take a photo, look for an elephant shape, write ' +
           'down where it was.',
+        goDeeper:
+          'Programs are built from four fundamental operations: **input** (getting data from the user, a file, or a sensor), **processing** (performing calculations and making decisions), **output** (displaying results or sending data), and **storage** (saving data for later). Every program, from a simple calculator to an AI system, is a combination of these four. A Python program to calculate elephant BMI: `weight = float(input("Weight in kg: "))`, `height = float(input("Height in m: "))`, `bmi = weight / height**2`, `print(f"BMI: {bmi:.1f}")`. This uses all four: input → processing → output, with variables providing temporary storage.',
+        advanced:
+          'At the hardware level, a program is a sequence of binary instructions (machine code) stored in memory. The CPU fetches each instruction, decodes it, and executes it — the fetch-decode-execute cycle, billions of times per second. Python is an **interpreted** language: the Python interpreter reads your source code, converts it to bytecode (.pyc files), and executes that bytecode on the Python Virtual Machine (PVM). This is slower than compiled languages (C, Rust) but much faster to develop with. **Just-in-time (JIT)** compilers like PyPy compile frequently-executed bytecode to machine code at runtime, achieving 10-100× speedups for computational workloads.',
       },
       {
         title: 'How Computers Follow Instructions',
@@ -42,6 +46,10 @@ export const codingReferences: ReferenceGuide[] = [
           'stand up, turn left, walk 12 steps, open the door... Python lets you write those ' +
           'instructions in words that look almost like English, so you can focus on *what* you ' +
           'want to happen rather than every tiny detail.',
+        goDeeper:
+          'Tracing code execution manually is a crucial debugging skill. For this code: `x = 5`, `y = x + 3`, `x = y * 2`, `print(x, y)` — trace step by step: after line 1, x=5. After line 2, y=8. After line 3, x=16 (x is reassigned, y unchanged). Output: **16 8**. Common mistake: thinking `x = y * 2` also changes y. Variables store values independently after assignment — changing x does not retroactively change y. Python evaluates the right side completely before assigning to the left side.',
+        advanced:
+          'Python uses **dynamic typing** (variables can change type at runtime) and **reference semantics** (variables are names pointing to objects in memory, not boxes containing values). When you write `a = [1, 2, 3]` and `b = a`, both names point to the SAME list object. Modifying `b.append(4)` also changes a, because they reference the same object. Use `b = a.copy()` or `b = a[:]` for an independent copy. This distinction between mutable objects (lists, dicts, sets) and immutable objects (ints, strings, tuples) is essential for avoiding subtle bugs in larger programs.',
       },
       {
         title: 'Variables Are Labeled Boxes',
@@ -51,6 +59,10 @@ export const codingReferences: ReferenceGuide[] = [
           '"Priya". Another is labeled "age" and holds the number 14. You can peek inside a box, ' +
           'change what\'s in it, or use its contents in a calculation. That\'s all a variable is — ' +
           'a labeled box the computer remembers for you.',
+        goDeeper:
+          'Variable naming conventions in Python: use `snake_case` for variables and functions (`elephant_weight`, `calculate_bmi`), `UPPER_CASE` for constants (`MAX_SPEED = 299792458`), and `PascalCase` for classes (`ElephantTracker`). Names must start with a letter or underscore, cannot contain spaces or special characters, and cannot be Python keywords (`if`, `for`, `class`, etc.). Type annotations document expected types: `weight: float = 4500.0`, `name: str = "Ranga"`. While Python does not enforce these types at runtime, tools like mypy check them statically, catching bugs before the code runs.',
+        advanced:
+          'Python\'s memory model uses **reference counting** and **garbage collection**. Each object has a reference count — when it reaches zero, the memory is freed. The `id()` function shows an object\'s memory address: `x = 42; print(id(x))` → something like 140234567890. Python **interns** small integers (-5 to 256) and short strings, meaning `a = 256; b = 256; a is b` returns True (same object), but `a = 257; b = 257; a is b` may return False (different objects with equal values). The `is` operator checks identity (same object), while `==` checks equality (same value) — a critical distinction when debugging.',
         diagram: 'VariablesDiagram',
       },
       {
@@ -61,6 +73,10 @@ export const codingReferences: ReferenceGuide[] = [
           'looks like `if temperature > 35: warn("heat alert")`. The computer checks the ' +
           'condition and picks one branch. You can chain conditions with `elif` (else-if) to ' +
           'handle many possibilities, like choosing clothing for different weather.',
+        goDeeper:
+          'Chained comparisons in Python: `18 <= age < 65` is equivalent to `age >= 18 and age < 65` but more readable. Boolean operators: `and` (both true), `or` (at least one true), `not` (inverts). Short-circuit evaluation: `if x != 0 and 10/x > 2` is safe because Python stops evaluating after `x != 0` is False, never dividing by zero. The ternary expression `result = "adult" if age >= 18 else "minor"` is a one-line if/else. Truthy/falsy values: `0`, `""`, `[]`, `None`, `False` are falsy; everything else is truthy.',
+        advanced:
+          'Pattern matching (Python 3.10+) uses `match/case` for structural pattern matching: `match command: case "quit": exit()`, `case ["move", x, y]: move_to(int(x), int(y))`, `case _: print("unknown")`. This is more powerful than if/elif chains for complex decision trees. Guard clauses (`case x if x > 0:`) add conditions to patterns. Under the hood, Python compiles match statements into efficient decision trees. In functional programming languages (Haskell, Erlang), pattern matching is the primary control flow mechanism — Python\'s adoption reflects the convergence of programming paradigms.',
         diagram: 'FlowchartDiagram',
       },
       {
@@ -71,6 +87,10 @@ export const codingReferences: ReferenceGuide[] = [
           'times, you say "for each paper in the stack, stamp it". Python\'s `for` loop does ' +
           'exactly this. A `while` loop keeps going until a condition changes — like stirring a ' +
           'pot *while* the sauce is still lumpy.',
+        goDeeper:
+          'Loop patterns to master: **accumulator** (`total = 0; for x in data: total += x`), **counter** (`count = 0; for x in data: if x > threshold: count += 1`), **search** (`for x in data: if condition: result = x; break`), **transform** (`new = [f(x) for x in data]`), **filter** (`kept = [x for x in data if condition]`). Enumerate gives index + value: `for i, name in enumerate(animals): print(f"{i}: {name}")`. Zip pairs elements: `for name, weight in zip(names, weights): print(f"{name}: {weight}kg")`.',
+        advanced:
+          'Generator expressions produce values lazily (one at a time, without storing the entire sequence in memory): `sum(x**2 for x in range(1_000_000))` uses constant memory regardless of the range size, while `sum([x**2 for x in range(1_000_000)])` creates a million-element list first. The `yield` keyword creates generator functions: `def fibonacci(): a, b = 0, 1; while True: yield a; a, b = b, a + b`. Iterators and generators implement the **iterator protocol** (`__iter__` and `__next__` methods) — the same protocol that `for` loops use internally. Understanding generators is essential for processing large datasets that do not fit in memory.',
         interactive: {
           type: 'matching',
           props: {
@@ -97,6 +117,10 @@ export const codingReferences: ReferenceGuide[] = [
           'monitoring code, the camera must capture a photo *before* the classifier can analyze ' +
           'it, and the classifier must produce a result *before* the alert can be sent. Each ' +
           'step depends on the one before it, just like following a recipe in the right order.',
+        goDeeper:
+          'The call stack tracks function execution. When `main()` calls `analyze()` which calls `sort()`, the stack is [main → analyze → sort]. When sort finishes, execution returns to analyze. A `RecursionError: maximum recursion depth exceeded` means the stack grew too deep — usually from a recursive function missing its base case. Python\'s default limit is 1,000 frames. Stack traces (tracebacks) read bottom-to-top: the last line is where the error occurred, and each line above shows the caller. Learning to read tracebacks is the single most valuable debugging skill.',
+        advanced:
+          'Python\'s Global Interpreter Lock (GIL) means only one thread executes Python bytecode at a time — even on multi-core CPUs. For CPU-bound work, use `multiprocessing` (separate processes with separate GILs) instead of `threading`. For I/O-bound work (network requests, file reads), `threading` or `asyncio` (cooperative multitasking) works well because the GIL is released during I/O waits. The `asyncio` event loop uses `async/await` syntax: `async def fetch(url): response = await session.get(url)`. Understanding concurrency models — threading, multiprocessing, and async — is essential for building responsive, high-performance Python applications.',
         diagram: 'FlowchartDiagram',
       },
       {
@@ -113,6 +137,10 @@ export const codingReferences: ReferenceGuide[] = [
           '`print(f"weight={weight}, height={height}")` right before the decision to check ' +
           'whether the data looks right. Most bugs turn out to be small — a missing colon, ' +
           'a wrong variable name, or an off-by-one error in a loop.',
+        goDeeper:
+          'Beyond print debugging, Python offers `pdb` (Python Debugger): insert `breakpoint()` in your code to pause execution and inspect variables interactively. Commands: `n` (next line), `s` (step into function), `c` (continue), `p variable` (print value), `l` (list code around current line). `assert` statements catch assumptions: `assert weight > 0, f"Invalid weight: {weight}"` raises AssertionError with a message if the condition fails. Try/except blocks handle expected errors gracefully: `try: value = int(input("Enter number: ")) except ValueError: print("That\'s not a number!")`.',
+        advanced:
+          'Professional debugging tools include IDE debuggers (VSCode, PyCharm) with breakpoints, watch expressions, and call stack visualization. **Logging** (`import logging; logging.debug("weight=%s", weight)`) is superior to print statements because you can set levels (DEBUG, INFO, WARNING, ERROR), direct output to files, and disable all debug messages with one setting change. **Unit testing** (`import unittest` or `pytest`) writes automated tests that verify each function works correctly — running hundreds of tests in seconds catches regressions before they reach users. Test-driven development (TDD) writes tests BEFORE code, ensuring every feature is testable by design.',
         interactive: {
           type: 'true-false',
           props: {
@@ -390,6 +418,10 @@ with open("elephant_data.csv", "r") as f:
           'visited — Google, YouTube, Wikipedia — is built from these same three languages. The browser ' +
           'is like a kitchen: HTML is the ingredients list, CSS is the plating instructions, and ' +
           'JavaScript is the cooking process that transforms everything into the final dish.',
+        goDeeper:
+          'The HTTP request/response cycle: your browser sends `GET /index.html HTTP/1.1` → the server responds with `HTTP/1.1 200 OK` and the HTML content. Status codes: 200=OK, 301=moved permanently, 404=not found, 500=server error. Chrome DevTools (F12) → Network tab shows every request, its size, and load time. A typical web page makes 50-100 requests (HTML, CSS, JS, images, fonts, analytics). **HTTPS** encrypts this traffic using TLS — the padlock icon means a man-in-the-middle cannot read your data. HTTP/2 multiplexes multiple requests over a single connection, and HTTP/3 uses QUIC (over UDP) for even faster connections.',
+        advanced:
+          'The **Document Object Model (DOM)** is a tree representation of the HTML that the browser constructs. JavaScript manipulates this tree: `document.getElementById("title").textContent = "New Title"` changes visible text without reloading the page. Modern frameworks (React, Vue, Svelte) use a **virtual DOM** — a lightweight JavaScript copy of the real DOM — to compute the minimal set of changes needed, then batch-apply them. This diffing algorithm (O(n) heuristic instead of O(n³) exact tree comparison) is what makes single-page applications feel fast. Web Components (Custom Elements, Shadow DOM, Templates) bring component-based architecture to vanilla HTML, reducing framework dependency.',
         interactive: {
           type: 'matching',
           props: {
@@ -415,6 +447,10 @@ with open("elephant_data.csv", "r") as f:
           'HTML does not control colors, fonts, or animations — that is CSS\'s job. HTML only says ' +
           '"there is a heading here, a paragraph here, an image here." Think of it as the blueprint ' +
           'of a house: it shows where the rooms and doors are, but not what color the walls are.',
+        goDeeper:
+          'Semantic HTML elements convey meaning: <header>, <nav>, <main>, <article>, <section>, <aside>, <footer>. Screen readers rely on semantic elements to navigate. Forms: <form>, <input type="email" required>, <select>, <textarea>. The required and pattern attributes provide client-side validation. Tables use <table>, <thead>, <tbody>, <tr>, <th>, <td> — never for page layout. The <template> and <slot> elements enable Web Components — reusable custom HTML elements with encapsulated styles.',
+        advanced:
+          'Web accessibility (a11y) ensures websites work for everyone. WCAG 2.1 requires: text alternatives (alt attributes), keyboard navigability, color contrast (4.5:1 minimum), proper heading hierarchy. ARIA attributes (role, aria-label, aria-expanded) add semantics for complex widgets. India\'s Rights of Persons with Disabilities Act 2016 mandates accessibility. Progressive Enhancement builds a working base experience in HTML, then layers CSS and JavaScript on top — ensuring the site works even if scripts fail to load or assistive technology strips styling.',
         interactive: {
           type: 'true-false',
           props: {
@@ -437,6 +473,10 @@ with open("elephant_data.csv", "r") as f:
           'part means that multiple rules can apply to the same element, and the most specific rule ' +
           'wins. CSS is what makes the difference between a plain white page of text and a beautiful, ' +
           'professional website.',
+        goDeeper:
+          'The CSS box model: content → padding → border → margin. box-sizing: border-box includes padding and border in width. Flexbox: display: flex; justify-content: space-between; align-items: center. Grid: display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem. Media queries for responsive design: @media (max-width: 768px) { .sidebar { display: none; } }. CSS transitions: transition: all 0.3s ease adds smooth animations to property changes.',
+        advanced:
+          'Modern CSS features: container queries (@container) style based on parent size, :has() selects parents based on children, CSS layers (@layer) control cascade ordering. CSS Custom Properties (--color: #2563eb) enable theming. The cascade resolves by specificity: inline (1000) > IDs (100) > classes (10) > elements (1). PostCSS and Tailwind CSS represent different approaches to CSS architecture — utility-first (small, composable classes) vs component-based (BEM methodology). CSS Houdini APIs let developers extend CSS with custom properties, layouts, and paint worklets.',
         diagram: 'CSSBoxModelDiagram',
       },
       {
@@ -450,6 +490,10 @@ with open("elephant_data.csv", "r") as f:
           'JavaScript. When you click "Add to Cart" and the cart count updates — JavaScript. It is ' +
           'the only programming language that runs directly in the browser, which is why it has become ' +
           'the most widely used language in the world.',
+        goDeeper:
+          'Core concepts: variables (let, const), functions (arrow: (a,b) => a+b), arrays ([1,2,3].map(x => x*2)), objects ({name: "Ranga", age: 25}). DOM: document.querySelector(".btn").addEventListener("click", handler). Template literals: `Hello ${name}`. Async: fetch("/api").then(r => r.json()). Error handling: try { risky() } catch(e) { console.error(e) }. The console object: .log(), .error(), .table(), .time()/.timeEnd() for debugging.',
+        advanced:
+          'ES6+ features: destructuring ({name, age} = obj), spread ([...arr1, ...arr2]), optional chaining (obj?.prop), nullish coalescing (val ?? default). The event loop: microtasks (Promises) run before macrotasks (setTimeout). Closures capture variables from outer scope — enabling private state and factory functions. Prototypal inheritance differs from classical OOP: objects inherit directly from other objects via the prototype chain. TypeScript adds static type checking: function add(a: number, b: number): number — catching type errors at compile time rather than runtime.',
         diagram: 'FlowchartDiagram',
       },
       {
@@ -463,6 +507,10 @@ with open("elephant_data.csv", "r") as f:
           'HTML goes in `.html` files, CSS goes in `.css` files (linked from the HTML), and JavaScript ' +
           'goes in `.js` files (also linked from the HTML). Keeping them separate makes your code ' +
           'organized and easier to maintain.',
+        goDeeper:
+          'DevTools inspection: right-click any element → Inspect to see its HTML, applied CSS rules, computed styles, and JavaScript event listeners. The Elements panel shows the live DOM (which may differ from the source HTML after JavaScript modifies it). The Console panel lets you run JavaScript interactively: document.querySelectorAll("p").length counts all paragraphs. The Network tab shows every resource loaded, its size, and timing — essential for diagnosing slow pages.',
+        advanced:
+          'The browser rendering pipeline: Parse HTML → build DOM tree → parse CSS → build CSSOM → merge into Render Tree → Layout (calculate positions) → Paint (fill pixels) → Composite (layer and display). Reflow (recalculating layout) is expensive; repaint (changing colors) is cheaper. JavaScript that reads layout properties (offsetHeight) then writes styles forces synchronous reflow — a performance antipattern called "layout thrashing." RequestAnimationFrame batches visual updates at 60fps. Web Workers run JavaScript in background threads for CPU-intensive tasks without blocking the UI.',
         interactive: {
           type: 'matching',
           props: {
@@ -491,6 +539,10 @@ with open("elephant_data.csv", "r") as f:
           '`document.createElement("li")` creates a new node, and `parent.appendChild(child)` attaches ' +
           'it. Every dynamic update on a webpage — adding a search result, removing an item from a cart, ' +
           'highlighting a word — is really just adding, removing, or changing nodes in this tree.',
+        goDeeper:
+          'DOM manipulation methods: document.createElement("div") creates an element; parent.appendChild(child) adds it to the page; element.remove() deletes it. Event delegation: instead of adding listeners to 100 list items, add one to the parent: ul.addEventListener("click", e => { if(e.target.tagName === "LI") handle(e.target) }). This uses event bubbling — events propagate up the DOM tree from the target to the root. Forms: form.addEventListener("submit", e => { e.preventDefault(); const data = new FormData(form); }).',
+        advanced:
+          'Shadow DOM encapsulates a component\'s internal structure and styles, preventing external CSS from affecting it and internal styles from leaking out. This is the foundation of Web Components: class MyWidget extends HTMLElement { constructor() { super(); this.attachShadow({mode: "open"}); } }. Virtual DOM (React, Vue) keeps a lightweight JavaScript representation and diffs it against the previous version, computing the minimal set of real DOM mutations. Svelte eliminates the virtual DOM entirely by compiling components to surgical DOM updates at build time — often faster than virtual DOM diffing.',
         interactive: {
           type: 'true-false',
           props: {
@@ -517,6 +569,10 @@ with open("elephant_data.csv", "r") as f:
           'The HTML stays the same — only the CSS rules change. The `<meta name="viewport">` tag in ' +
           'your HTML head tells the browser to use the device\'s actual width instead of pretending to ' +
           'be a desktop, which is essential for any responsive page.',
+        goDeeper:
+          'Mobile-first design: start with the smallest screen layout, then add complexity for larger screens using min-width media queries: @media (min-width: 768px) { .grid { grid-template-columns: 1fr 1fr; } }. The viewport meta tag (<meta name="viewport" content="width=device-width, initial-scale=1">) prevents mobile browsers from zooming out. Relative units: rem (relative to root font size), em (relative to parent), vw/vh (viewport width/height), % (parent size). Touch targets should be at least 44×44 CSS pixels for accessibility.',
+        advanced:
+          'Container queries (@container) enable components to adapt based on their parent\'s size rather than the viewport — crucial for reusable components that may appear in sidebars or main content areas. The CSS clamp() function (font-size: clamp(1rem, 2.5vw, 2rem)) creates fluid typography that scales smoothly between breakpoints. The :has() selector enables parent styling based on children (:has(> img) styles containers that contain images). These modern CSS features reduce JavaScript dependency for responsive behavior.',
       },
     ],
 
@@ -858,6 +914,10 @@ document.addEventListener("DOMContentLoaded", loadAnimals);`,
           'board through a USB cable, and the board runs that program forever until you unplug it. ' +
           'Arduino is used in robots, weather stations, home automation, art installations, and ' +
           'thousands of student projects around the world.',
+        goDeeper:
+          'An Arduino Uno uses the ATmega328P: 16 MHz clock, 32 KB flash (program), 2 KB SRAM (variables), 1 KB EEPROM (persistent). Compare to your phone: ~2 GHz (125× faster), 4-8 GB RAM (2 million × more). Yet Arduino excels at real-time hardware control — no OS overhead. analogRead(A0) returns 0-1023 (10-bit, 0-5V) in ~100 μs. analogWrite(pin, 0-255) uses PWM at ~490 Hz. Digital pins source/sink up to 20 mA — enough for an LED but not a motor (use a transistor or motor driver).',
+        advanced:
+          'The Arduino ecosystem spans 8-bit AVR (Uno, Nano) to 32-bit ARM (Due, Teensy 4.x at 600 MHz), RISC-V, and ESP32 (dual-core 240 MHz with WiFi/Bluetooth). Real-time operating systems (FreeRTOS on ESP32) enable multitasking. Direct register manipulation (PORTB |= (1 << PB5)) switches pins in ~62 ns vs ~4 μs for digitalWrite. Interrupts (attachInterrupt) respond within microseconds for encoder reading and communication protocols. The PlatformIO ecosystem provides cross-platform builds, unit testing, and library management for professional embedded development.',
         interactive: {
           type: 'matching',
           props: {
@@ -882,6 +942,10 @@ document.addEventListener("DOMContentLoaded", loadAnimals);`,
           'heartbeat of your project — read sensors, make decisions, control outputs, repeat. If you ' +
           'want something to happen once (play a startup sound), put it in setup(). If you want ' +
           'something to happen continuously (check if a button is pressed), put it in loop().',
+        goDeeper:
+          'The Arduino program structure: setup() runs once at power-on, loop() runs repeatedly. Essential functions: pinMode(pin, OUTPUT/INPUT/INPUT_PULLUP), digitalWrite(pin, HIGH/LOW), digitalRead(pin), analogRead(pin) → 0-1023, analogWrite(pin, 0-255), Serial.begin(9600), Serial.println(value), delay(ms), millis() (time since boot). A temperature logger: void loop() { int raw = analogRead(A0); float tempC = (raw * 5.0 / 1024.0 - 0.5) * 100; Serial.println(tempC); delay(1000); }.',
+        advanced:
+          'Non-blocking programming replaces delay() with millis() timing: if (millis() - lastRead > 1000) { lastRead = millis(); readSensor(); }. This handles multiple tasks simultaneously. **State machines** organize complex behavior: define states (IDLE, READING, ALERTING), transitions (IDLE→READING on timer), and actions for each state. This pattern scales from simple projects to industrial controllers. Watchdog timers (WDT) automatically reset the microcontroller if code hangs — essential for unattended deployments like weather stations and wildlife monitoring sensors.',
         diagram: 'CircuitDiagram',
       },
       {
@@ -895,6 +959,10 @@ document.addEventListener("DOMContentLoaded", loadAnimals);`,
           'called PWM (Pulse Width Modulation) that lets digital pins *simulate* analog output by ' +
           'flickering on and off so fast that an LED appears dimmed or a motor runs at half speed. ' +
           'PWM pins are marked with a ~ symbol on the board.',
+        goDeeper:
+          'Digital signals have two states: HIGH (5V on Arduino Uno) and LOW (0V). Like a light switch — on or off. Analog signals vary continuously between 0V and 5V. The Arduino reads analog with analogRead() returning 0-1023 (10-bit ADC: 2^10 = 1024 levels). Resolution: 5V/1024 ≈ 4.88 mV per step. analogWrite() uses PWM (Pulse Width Modulation) — rapidly switching between HIGH and LOW. duty cycle 50% = average 2.5V, 75% = 3.75V. LEDs dimmed this way flicker at ~490 Hz — too fast for your eye to see, so it looks like smooth dimming.',
+        advanced:
+          'ADC conversion time on the Arduino Uno is ~100 μs (10,000 samples/second max). For faster sampling, configure the ADC prescaler: ADCSRA = (ADCSRA & 0xF8) | 0x04 sets prescaler to 16, achieving ~77 kHz sampling at reduced accuracy. External ADCs (ADS1115: 16-bit, MCP3008: 10-bit SPI) provide better resolution and speed. DAC (Digital-to-Analog Converter) output is not available on the Uno — use PWM with an RC low-pass filter (R=10kΩ, C=100nF, cutoff ~159 Hz) to smooth the PWM into a true analog voltage for audio or control applications.',
         diagram: 'OhmsLawDiagram',
       },
       {
@@ -908,6 +976,10 @@ document.addEventListener("DOMContentLoaded", loadAnimals);`,
           'infrared) sensor detects body heat and outputs HIGH when someone walks by. Each sensor ' +
           'connects to an Arduino pin, and your code reads the value and decides what to do with it — ' +
           'that is the core pattern of every Arduino project.',
+        goDeeper:
+          'Common sensors and their interfaces: **Temperature** (LM35: analog, 10mV/°C; DHT22: digital, temp+humidity), **Light** (LDR: analog voltage divider; BH1750: I2C digital lux meter), **Distance** (HC-SR04 ultrasonic: trigger pulse, measure echo time; distance = time × 343/2 m/s), **Motion** (PIR: digital HIGH when motion detected), **Accelerometer** (MPU6050: I2C, 3-axis acceleration + gyroscope). Sensor readings are noisy — averaging 10 readings smooths the signal: total = 0; for(int i=0; i<10; i++) total += analogRead(A0); avg = total/10.',
+        advanced:
+          'I2C (Inter-Integrated Circuit) connects multiple sensors on just 2 wires (SDA, SCL). Each device has a unique 7-bit address (0x00-0x7F). The Wire library handles communication: Wire.beginTransmission(addr); Wire.write(reg); Wire.endTransmission(); Wire.requestFrom(addr, bytes). SPI (Serial Peripheral Interface) uses 4 wires but is faster (up to 10 MHz vs I2C\'s 400 kHz). Sensor fusion algorithms (complementary filter, Kalman filter) combine accelerometer and gyroscope data to get accurate orientation — essential for drone stabilization, robot balancing, and motion tracking.',
         interactive: {
           type: 'true-false',
           props: {
@@ -1107,6 +1179,10 @@ void loop() {
           'blast through them without stopping to look up each one. This speed difference does not ' +
           'matter for 10 numbers, but it is essential for millions — which is what real data science, ' +
           'machine learning, and image processing involve.',
+        goDeeper:
+          'NumPy arrays vs Python lists: np.arange(1_000_000).sum() runs **50-100× faster** than sum(range(1_000_000)) because NumPy uses compiled C loops on contiguous memory. Array creation: np.zeros((3,4)), np.ones(5), np.linspace(0, 2*np.pi, 100), np.random.randn(1000). Array attributes: a.shape, a.dtype, a.ndim, a.size. Reshaping: np.arange(12).reshape(3,4). Broadcasting: a * 2 doubles every element; a + np.array([1,2,3,4]) adds to every row.',
+        advanced:
+          'NumPy\'s vectorized operations replace Python loops with C-compiled array expressions. Matrix operations: A @ B (multiply), np.linalg.inv(A), np.linalg.eig(A), np.linalg.svd(A). np.fft.fft(signal) computes the FFT. Memory layout (row-major vs column-major) affects cache performance — iterating the wrong axis can be 10× slower. Advanced indexing: a[a > threshold] (boolean mask), a[indices] (fancy indexing), np.where(condition, x, y). Structured arrays store heterogeneous data (names, weights, coordinates) in contiguous memory for efficient processing.',
         diagram: 'NumPyRulerDiagram',
       },
       {
@@ -1120,6 +1196,10 @@ void loop() {
           'might take 200 milliseconds; NumPy does it in 2 milliseconds. This is not a minor ' +
           'optimization — it is the difference between a program that feels instant and one that ' +
           'makes you wait.',
+        goDeeper:
+          'NumPy achieves 50-100× speed over Python lists through: (1) contiguous memory layout (no pointer chasing), (2) compiled C/Fortran inner loops (no Python interpreter overhead), (3) SIMD instructions (Single Instruction Multiple Data — process 4-8 numbers simultaneously). Benchmark: squaring 1 million numbers — Python list: ~150ms, NumPy: ~1.5ms. The speedup increases with array size because the fixed overhead of calling NumPy becomes negligible. Memory efficiency: a Python list of 1M integers uses ~28 MB (each int is a 28-byte object), while a NumPy int64 array uses ~8 MB (raw 8-byte values in contiguous memory).',
+        advanced:
+          'NumPy delegates heavy computation to optimized libraries: BLAS (Basic Linear Algebra Subprograms) for matrix multiplication, LAPACK for eigenvalues and decompositions. These libraries use cache-blocking (processing data in chunks that fit in CPU cache), loop unrolling, and architecture-specific SIMD instructions. Intel\'s MKL and OpenBLAS provide multithreaded implementations. np.dot(A, B) for 1000×1000 matrices runs in ~20ms using these optimized kernels — a naive Python triple loop would take ~3 hours. Understanding this stack matters when debugging performance: if NumPy is slow, check whether you\'re accidentally creating Python loops instead of vectorized operations.',
         interactive: {
           type: 'true-false',
           props: {
@@ -1140,6 +1220,10 @@ void loop() {
           'np.linspace(0, 1, 50) gives 50 evenly spaced points from 0 to 1, which is perfect for ' +
           'plotting smooth curves. np.random.randn(1000) gives 1,000 random numbers from a bell ' +
           'curve — useful for simulations.',
+        goDeeper:
+          'Array creation patterns: np.zeros((rows, cols)) for initialized arrays, np.empty((rows, cols)) for uninitialized (faster but contains garbage), np.full((3,3), 7) for a specific value, np.eye(n) for identity matrix, np.diag([1,2,3]) for diagonal matrix. Random: np.random.seed(42) for reproducibility, np.random.randint(0, 100, size=(5,5)) for integers, np.random.normal(mean, std, size) for Gaussian. Structured arrays: dt = np.dtype([("name", "U20"), ("weight", "f4")]); data = np.array([("Ranga", 4500)], dtype=dt) — named fields like a database row.',
+        advanced:
+          'Memory layout: np.array([[1,2],[3,4]], order="C") stores rows contiguously (C order), while order="F" stores columns contiguously (Fortran order). Iterating along the contiguous axis is 3-10× faster due to CPU cache behavior. np.ascontiguousarray() converts layout. Views vs copies: slicing creates a view (shared memory): b = a[::2] modifies a. np.copy() creates an independent copy. Check with np.shares_memory(a, b). Memory-mapped files (np.memmap) work with datasets larger than RAM — the OS pages data in/out of memory transparently.',
       },
       {
         title: 'Math on Entire Arrays — No Loops Needed',
@@ -1150,6 +1234,10 @@ void loop() {
           '`[False, False, True]`), and even apply functions like `np.sqrt(a)` to every element. ' +
           'This is not just faster — it is also easier to read. Compare `[x**2 for x in my_list]` ' +
           'with `my_array ** 2`. The NumPy version is shorter and clearer about what it does.',
+        goDeeper:
+          'Element-wise operations: a + b, a * b, a ** 2, np.sqrt(a), np.sin(a) all operate on every element without loops. Comparison: a > 5 returns a boolean array. Aggregation: a.sum(), a.mean(), a.max(), a.min(), a.std() — add axis= parameter for row/column operations: a.sum(axis=0) sums each column, axis=1 sums each row. Universal functions (ufuncs) like np.add, np.multiply accept an out= parameter for in-place operation, avoiding temporary array allocation.',
+        advanced:
+          'Broadcasting rules: when operating on arrays of different shapes, NumPy automatically expands dimensions. Rules: (1) prepend 1s to the shorter shape, (2) dimensions of size 1 stretch to match the other. Example: (3,4) + (4,) → (3,4) + (1,4) → (3,4) — each row gets the (4,) array added. (3,1) + (1,4) → (3,4) — outer product-like behavior. Broadcasting avoids creating large temporary arrays: centering data (a - a.mean(axis=0)) broadcasts the mean across all rows without copying. Einstein summation (np.einsum("ij,jk->ik", A, B)) provides a powerful notation for complex tensor operations.',
       },
       {
         title: 'Filtering Data — Boolean Indexing',
@@ -1160,6 +1248,10 @@ void loop() {
           'only the hot days. You can combine conditions: `temps[(temps > 25) & (temps < 35)]` returns ' +
           'temperatures between 25 and 35. This replaces multi-line loops with a single, readable ' +
           'expression. Data scientists use this constantly to select subsets of data for analysis.',
+        goDeeper:
+          'Statistical operations: weights = np.array([4500, 3200, 4800, 5100, 3800]). Mean: np.mean(weights) = **4280**. Median: np.median(weights) = 4500. Std dev: np.std(weights) ≈ 716. Percentiles: np.percentile(weights, 75) = 4800. Sorting: np.sort(weights). Argmax: np.argmax(weights) = 3 (index of 5100). Boolean indexing: heavy = weights[weights > 4000] → [4500, 4800, 5100]. These operations run on entire arrays without Python loops.',
+        advanced:
+          'Real-world data analysis: loading CSV with np.genfromtxt("data.csv", delimiter=",", skip_header=1). Handling missing values: np.nanmean(data) ignores NaN. Linear regression via least squares: β = (XᵀX)⁻¹Xᵀy, computed as np.linalg.lstsq(X, y). Image processing: a grayscale image is a 2D array; image[100:200, 50:150] crops; np.mean(image, axis=0) averages along rows. Memory-mapped arrays (np.memmap) handle datasets larger than RAM by mapping file contents directly to memory.',
       },
       {
         title: 'Real-World Data Shapes',
@@ -1170,6 +1262,10 @@ void loop() {
           'A video is a 4D array: frames x rows x columns x channels. NumPy handles all of these ' +
           'with the same tools. The `.shape` attribute tells you the dimensions: (1000,) for 1D, ' +
           '(480, 640, 3) for an image. Thinking in shapes is the key to working with real data.',
+        goDeeper:
+          'Data dimensionality: 1D array = time series or sensor readings, 2D = spreadsheet/table or grayscale image, 3D = color image (height × width × channels) or time series of 2D frames, 4D = batch of images (batch × height × width × channels). Reshape without copying: a.reshape(3, -1) infers the second dimension. Transpose: a.T swaps axes. Stacking: np.vstack((a, b)) vertical, np.hstack horizontal, np.concatenate along any axis. The shape attribute is your most-used diagnostic tool — print(data.shape) should be your first debugging step.',
+        advanced:
+          'The NumPy → Pandas → scikit-learn pipeline: NumPy arrays hold the numerical data, Pandas DataFrames add labeled columns and handle missing values (NaN), scikit-learn models accept NumPy arrays or DataFrames for training. Image data flows: file → PIL/OpenCV → np.array → normalize to 0-1 → reshape for model. Audio: file → scipy.io.wavfile → np.array → FFT/spectrogram → feature extraction. Geospatial: rasterio reads GeoTIFF satellite images as NumPy arrays with coordinate metadata. Understanding how data flows between these libraries is as important as knowing any single library.',
         interactive: {
           type: 'matching',
           props: {
@@ -1284,6 +1380,10 @@ print(f"Correlation study hours vs scores: {r:.3f}")`,
         title: 'Boolean Indexing — Filtering Data',
         content:
           'Use comparisons to create boolean masks, then use those masks to select matching elements.',
+        goDeeper:
+          'Pearson correlation r measures linear association: r = Σ[(xᵢ-x̄)(yᵢ-ȳ)] / √[Σ(xᵢ-x̄)² × Σ(yᵢ-ȳ)²]. r = +1 (perfect positive), r = 0 (no linear relationship), r = -1 (perfect negative). Example: elephant height vs weight r ≈ 0.85 (strong positive). **Correlation ≠ causation**: ice cream sales and drowning deaths are correlated (both increase in summer) but ice cream doesn\'t cause drowning — the confounding variable is temperature. Always ask: is there a plausible mechanism? Could a third variable explain both?',
+        advanced:
+          'Spearman rank correlation measures monotonic (not necessarily linear) association — based on the ranks of values rather than the values themselves. It is robust to outliers and works for non-linear relationships. In research, partial correlation controls for confounding variables: the partial correlation between ice cream and drowning, controlling for temperature, is near zero. Multiple regression separates the contributions of several predictors simultaneously. Granger causality tests whether past values of X improve predictions of Y beyond what past values of Y alone provide — a temporal (not true causal) test used in economics and neuroscience.',
         code: `import numpy as np
 
 temps = np.array([22, 28, 35, 19, 31, 40, 27, 33, 18, 29])
@@ -1409,6 +1509,10 @@ print(f"Hottest day: #{hottest_day + 1} ({daily_avg[hottest_day]:.1f}°C)")`,
           'The statistics alone cannot tell them apart, but a single glance at the charts reveals everything. ' +
           'Matplotlib is Python\'s most popular plotting library, used by scientists, data analysts, ' +
           'and engineers worldwide.',
+        goDeeper:
+          'Anscombe\'s quartet: four datasets with identical statistical summaries (mean, variance, correlation, regression line) but completely different visual patterns — one linear, one curved, one with an outlier, one vertical cluster. Without plotting, you would think they are identical. The data literacy principle: **always plot your data before computing statistics**. Matplotlib\'s `plt.scatter(x, y)` takes seconds and can reveal patterns, outliers, and non-linearities that summary statistics hide. Box plots (`plt.boxplot(data)`) show median, quartiles, and outliers in one compact visualization.',
+        advanced:
+          'Edward Tufte\'s principles of graphical excellence: maximize the data-ink ratio (remove chartjunk — unnecessary gridlines, 3D effects, decorative elements), show the data above all else, and avoid distorting what the data say. The **lie factor** = (size of effect shown in graphic) / (size of effect in data) — it should be close to 1. Common distortions: truncated y-axes that exaggerate small changes, 3D pie charts where perspective distorts proportions, and dual y-axes that imply false correlations. Choosing the right chart type: use line charts for time series, scatter plots for relationships, bar charts for comparisons, and histograms for distributions.',
         diagram: 'CorrelationDiagram',
       },
       {
@@ -1422,6 +1526,10 @@ print(f"Hottest day: #{hottest_day + 1} ({daily_avg[hottest_day]:.1f}°C)")`,
           'variable — how many students scored between 70-80, 80-90, etc. *Pie charts* show parts of a ' +
           'whole, but most data scientists avoid them because humans are bad at comparing angles. ' +
           'Choosing the right chart type is half the battle in data visualization.',
+        goDeeper:
+          'Essential plot types: plt.plot(x, y) (line), plt.scatter(x, y, c=colors, s=sizes), plt.bar(categories, values), plt.hist(data, bins=30), plt.imshow(matrix, cmap="viridis"). Multi-panel: fig, axes = plt.subplots(2, 2, figsize=(10, 8)). Always label axes: ax.set_xlabel("Distance (km)"), ax.set_ylabel("Count"), ax.set_title("Elephant Sightings"). Save with plt.savefig("plot.png", dpi=150, bbox_inches="tight"). Use plt.tight_layout() to prevent overlapping labels.',
+        advanced:
+          'Publication-quality figures: set font sizes (plt.rcParams["font.size"] = 12), use colorblind-friendly palettes (viridis, cividis), add error bars (ax.errorbar(x, y, yerr=errors)). **Seaborn** provides statistical visualization: sns.heatmap(corr, annot=True), sns.violinplot(x="species", y="weight", data=df), sns.pairplot(df). For interactive exploration, **Plotly** creates zoomable, hoverable charts. **Altair** uses a declarative grammar of graphics. Each library has strengths: matplotlib for full control, seaborn for statistics, plotly for interactivity, altair for rapid exploration.',
         diagram: 'HistogramDiagram',
         interactive: {
           type: 'matching',
@@ -1447,6 +1555,10 @@ print(f"Hottest day: #{hottest_day + 1} ({daily_avg[hottest_day]:.1f}°C)")`,
           'values), *annotations* (arrows or text pointing to specific data points), and a *colorbar* ' +
           '(when colors represent a third variable). Understanding these parts lets you customize ' +
           'every aspect of your chart.',
+        goDeeper:
+          'Every matplotlib figure has a hierarchy: **Figure** (the canvas) → **Axes** (a single plot within the figure) → plot elements (lines, markers, text, legends). The object-oriented interface: fig, ax = plt.subplots(). ax.plot(x, y) adds a line. ax.set_xlabel(), ax.set_ylabel(), ax.set_title() label it. ax.legend() shows a key. ax.set_xlim(0, 100), ax.set_ylim(0, 50) control axis ranges. fig.savefig("plot.png", dpi=150) saves. The difference: plt.plot() is the quick "state-based" interface; ax.plot() is the explicit OO interface — use OO for anything beyond a quick look.',
+        advanced:
+          'Customization layers: rcParams set global defaults (plt.rcParams["font.family"] = "serif"), style sheets (plt.style.use("ggplot")) apply themed presets, and per-element kwargs override everything. Axes positioning: fig.add_axes([left, bottom, width, height]) for arbitrary placement (values 0-1 relative to figure). GridSpec provides flexible multi-panel layouts: gs = fig.add_gridspec(3, 3); ax1 = fig.add_subplot(gs[0, :]); ax2 = fig.add_subplot(gs[1:, 0]). Animation: FuncAnimation(fig, update, frames=100) creates animated plots — useful for real-time sensor data visualization.',
         diagram: 'PlotAnatomyDiagram',
       },
       {
@@ -1459,6 +1571,10 @@ print(f"Hottest day: #{hottest_day + 1} ({daily_avg[hottest_day]:.1f}°C)")`,
           'and "Days since start"). Keep titles short and descriptive. Remove unnecessary clutter: ' +
           'if grid lines do not help, turn them off. If a legend has only one item, it is redundant. ' +
           'The goal is to make the viewer understand the data in seconds, not minutes.',
+        goDeeper:
+          'Color palettes: sequential (light→dark for ordered data: "viridis", "plasma"), diverging (two-color gradient for data with a meaningful center: "coolwarm", "RdBu"), qualitative (distinct colors for categories: "Set2", "tab10"). **Colorblind-safe**: viridis, cividis (avoid red-green). Set color with c= or color= parameter. Marker styles: "o" (circle), "s" (square), "^" (triangle), "+" (plus). Line styles: "-" (solid), "--" (dashed), ":" (dotted). Alpha transparency (alpha=0.5) helps with overlapping data points in scatter plots.',
+        advanced:
+          'Effective data visualization follows principles: (1) data-ink ratio — maximize information per pixel, minimize decoration; (2) small multiples — repeated similar charts for comparison (use plt.subplots with shared axes); (3) annotation — ax.annotate("Peak", xy=(x, y), arrowprops=dict(arrowstyle="->")) draws attention to key features. Color perception: luminance (brightness) should encode the quantitative dimension because it is perceived linearly, while hue (color) should encode categories. Tools like ColorBrewer (colorbrewer2.org) provide tested palettes. Always include a colorbar for colormapped plots (plt.colorbar()).',
         interactive: {
           type: 'true-false',
           props: {
@@ -1479,6 +1595,10 @@ print(f"Hottest day: #{hottest_day + 1} ({daily_avg[hottest_day]:.1f}°C)")`,
           'your data, then switch to the OO interface when you need subplots, dual axes, or custom ' +
           'layouts. You can save charts as PNG, SVG, or PDF using `plt.savefig("chart.png", dpi=150)`. ' +
           'SVG is best for the web; PDF is best for papers and reports.',
+        goDeeper:
+          'Publication workflow: (1) fig, ax = plt.subplots(figsize=(6, 4)) for journal-width figure, (2) set font: plt.rcParams.update({"font.size": 11, "font.family": "serif"}), (3) use LaTeX labels: ax.set_xlabel(r"Temperature ($^\\circ$C)"), (4) add error bars: ax.errorbar(x, y, yerr=err, fmt="o", capsize=3), (5) tight_layout() prevents clipping, (6) save as vector: fig.savefig("fig.pdf") for journals or fig.savefig("fig.svg") for web. PDF/SVG scale perfectly at any size; use PNG (dpi=300) only when vector is not supported.',
+        advanced:
+          'Reproducible figures: save the plotting script alongside the figure so colleagues can modify it. Matplotlib backends: "Agg" (non-interactive, for scripts/servers), "TkAgg" (interactive window), "WebAgg" (browser-based). Jupyter integration: %matplotlib inline for static, %matplotlib widget for interactive. For interactive dashboards, consider Dash (Plotly), Streamlit, or Panel — they wrap matplotlib/plotly in web apps with sliders, dropdowns, and real-time updates. Publishing: many journals accept matplotlib figures directly; Nature and Science have specific style guides that can be encoded as matplotlib style sheets.',
         diagram: 'PlotAnatomyDiagram',
       },
     ],
@@ -1700,6 +1820,10 @@ plt.show()`,
           'not from a textbook but from hundreds of examples, matching vibrations to outcomes. In the ' +
           'Dragonfly story, a drone classifies crop health from images the same way. ML formalises the ' +
           'process both of them use.*',
+        goDeeper:
+          'The ML pipeline: (1) Collect data → (2) Clean/preprocess → (3) Split train/test (80/20) → (4) Choose model → (5) Train → (6) Evaluate → (7) Tune hyperparameters → (8) Deploy. **Overfitting**: model memorizes training data but fails on new data. Signs: high training accuracy, low test accuracy. Remedies: more data, simpler model, regularization, dropout. **Underfitting**: model too simple. The learning curve (plot accuracy vs training set size) diagnoses which problem you have.',
+        advanced:
+          'The **bias-variance tradeoff**: bias = error from oversimplifying, variance = error from over-sensitivity to training data. Total error = bias² + variance + irreducible noise. A linear model has high bias but low variance. A deep neural network has low bias but high variance. **Regularization** (L1/L2 penalties) and **ensemble methods** (random forests average many trees) navigate this tradeoff. The No Free Lunch theorem proves no single algorithm is best for all problems — domain knowledge guides model selection.',
         diagram: 'DogVsCatDiagram',
       },
       {
@@ -1725,6 +1849,10 @@ plt.show()`,
           '*In the Postman of the Hills story, the postal worker navigates Meghalaya\'s steep terrain. ' +
           'Sorting parcels is the classification problem; choosing the best delivery route is the ' +
           'optimisation problem — both are core ML applications.*',
+        goDeeper:
+          'Classification assigns items to categories: spam/not-spam, cat/dog, elephant/rhino. Regression predicts continuous values: temperature tomorrow, elephant weight from height. The difference matters because they use different loss functions: classification minimizes misclassification rate (or cross-entropy), regression minimizes squared error. A classifier\'s output is a category label (or probability per category); a regressor\'s output is a number. Some algorithms (decision trees, neural networks) can do both.',
+        advanced:
+          'The relationship between classification and function approximation: a classifier learns a decision boundary — a surface in feature space that separates classes. A linear classifier\'s boundary is a hyperplane (line in 2D, plane in 3D). A decision tree\'s boundary is a set of axis-aligned rectangular regions. A neural network\'s boundary can be arbitrarily complex. The universal approximation theorem states that a neural network with one hidden layer can approximate any continuous function — but it says nothing about how large the layer must be or how to find the right weights.',
         diagram: 'PostmanSortingDiagram',
       },
       {
@@ -1747,6 +1875,10 @@ plt.show()`,
           '**Machine learning is the formalisation of exactly this process.** Instead of a child\'s brain, ' +
           'we use an algorithm. Instead of pointing and saying "dog!", we give the algorithm labelled data. ' +
           'The rest is the same: extract features, learn weights, classify new examples.',
+        goDeeper:
+          'Supervised learning provides labeled examples: (input, correct_output) pairs. The model adjusts its internal parameters to minimize the difference between its predictions and the correct outputs. This is analogous to a teacher showing flashcards with pictures (inputs) and names (labels). With enough examples, the model generalizes — it correctly labels inputs it has never seen before. The critical question is: did it learn the concept, or just memorize the examples?',
+        advanced:
+          'Unsupervised learning finds structure without labels: clustering groups similar items (k-means, DBSCAN), dimensionality reduction finds compact representations (PCA, t-SNE), and anomaly detection identifies outliers. Self-supervised learning creates its own labels from data structure — BERT masks random words and predicts them, learning language representation. Contrastive learning (SimCLR) learns image features by maximizing agreement between different augmentations of the same image. These methods are essential when labeled data is scarce or expensive.',
       },
       {
         title: 'Features — The Lightbulb Moment',
@@ -1772,6 +1904,10 @@ plt.show()`,
           'Try the interactive below — toggle features on and off and watch how the classifier\'s accuracy ' +
           'changes. Some features are nearly worthless. Others are critical. The model has to figure this ' +
           'out from examples alone.',
+        goDeeper:
+          'Feature engineering transforms raw data into model inputs. For elephant tracking: GPS → distance_to_water, vegetation_density, time_of_day, season. **One-hot encoding**: species=["Asian","African"] → [1,0] or [0,1]. Feature scaling: StandardScaler (mean=0, std=1) or MinMaxScaler (0-1). Gradient descent: w_new = w_old - lr × ∂loss/∂w. Learning rate too high → diverges; too low → slow. Feature selection removes irrelevant inputs that add noise without improving predictions.',
+        advanced:
+          'Transfer learning reuses pretrained models: ResNet on ImageNet can be fine-tuned for elephant ID with ~500 images. **SHAP values** provide game-theory-based explanations for individual predictions. **Bayesian optimization** efficiently searches hyperparameter space. Neural Architecture Search (NAS) uses ML to design ML architectures. The feature importance hierarchy often reveals surprises — in wildlife tracking, time-of-day may matter more than GPS location because animal behavior follows circadian patterns. Domain expertise combined with automated feature selection produces the best models.',
         diagram: 'FeatureWeightsDiagram',
       },
       {
@@ -1786,6 +1922,10 @@ plt.show()`,
           'frequency, fast pulses). Danger signals cluster in a third.\n\n' +
           'The model\'s job is to learn where the boundaries between these clusters lie — so that when ' +
           'a NEW rumble arrives, it can look at which cluster the new point falls in and predict the mood.',
+        goDeeper:
+          'A feature vector is a list of numbers describing an observation. For an elephant: [weight_kg, height_m, tusk_length_cm, ear_area_m2, age_years] = [4500, 2.8, 60, 1.2, 25]. Each number is a dimension in feature space — this elephant is a point in 5D space. Similar elephants are nearby points; different species are far apart. Feature engineering chooses which measurements matter: tusk_length distinguishes Asian from African elephants, but tail_length probably does not. Good features make classification easy; poor features make it impossible regardless of the algorithm.',
+        advanced:
+          'Feature spaces can be visualized using dimensionality reduction. PCA (Principal Component Analysis) projects high-dimensional data onto the 2-3 directions of maximum variance. t-SNE and UMAP create 2D maps that preserve local neighborhoods — similar points stay close. These visualizations reveal cluster structure, outliers, and class overlap before training any model. In deep learning, the network learns its own features: early layers detect edges and textures, middle layers detect parts (ears, trunks), and final layers detect whole objects — automatically constructing a feature hierarchy from raw pixels.',
         diagram: 'FeatureExtractionDiagram',
       },
       {
@@ -1803,6 +1943,10 @@ plt.show()`,
           'You need many such examples — the more, the better the model learns. This is called ' +
           '**supervised learning**: the model is supervised by the labels, like a student supervised ' +
           'by a teacher who provides correct answers during practice.',
+        goDeeper:
+          'In supervised learning, each training example has a **label** — the correct answer the model should learn to predict. For classification: labels are categories (elephant, rhino, deer). For regression: labels are numbers (weight: 4500 kg). Labels can be hard to obtain: labeling 10,000 camera trap images requires human experts to examine each one. **Active learning** selects the most informative unlabeled examples for human annotation, reducing labeling effort by 50-80%. **Weak supervision** uses heuristic labeling functions (if image is near water AND large body → probably elephant) to generate approximate labels at scale.',
+        advanced:
+          'Label quality directly impacts model quality — "garbage in, garbage out." Inter-annotator agreement (Cohen\'s kappa) measures labeling consistency between humans. For ambiguous tasks (sentiment analysis, medical diagnosis), even expert humans disagree ~10-20% of the time — this sets an upper bound on model accuracy. **Label noise** (incorrect labels in training data) degrades performance; noise-robust loss functions (symmetric cross-entropy, generalized cross-entropy) and co-teaching (two models filter each other\'s noisy labels) help. **Semi-supervised learning** leverages large amounts of unlabeled data alongside small labeled sets — FixMatch achieves near-supervised accuracy with only 7 labeled images per class on CIFAR-10.',
       },
       {
         title: 'Training vs Testing — Why You Hide the Exam',
@@ -1816,6 +1960,10 @@ plt.show()`,
           'memorised rather than learned — that is called **overfitting**.\n\n' +
           'The wall between training and test data is sacred. Break it (by accidentally letting the model ' +
           'see test answers) and your evaluation is worthless. This is the most common mistake in ML.',
+        goDeeper:
+          'The train-test split prevents self-deception. If you evaluate on the same data you trained on, a model that memorized everything scores 100% — but fails on new data. The standard split: 80% train, 20% test. Never let the model see test data during training. **Cross-validation** (k-fold): divide data into k parts, train on k-1, test on 1, rotate k times. Average the k scores for a robust estimate. 5-fold or 10-fold is standard. Stratified splits ensure each fold has the same class proportions as the full dataset.',
+        advanced:
+          'Data leakage occurs when information from the test set contaminates training — invalidating results. Common sources: (1) normalizing before splitting (the mean/std includes test data), (2) feature selection on the full dataset, (3) duplicate data points in both sets. Always split first, then preprocess. Time series data requires chronological splits (train on past, test on future) — random splits leak future information. In production, model monitoring detects **data drift** (input distribution changes) and **concept drift** (the relationship between inputs and outputs changes) — triggering retraining when performance degrades.',
         diagram: 'TrainTestSplitDiagram',
       },
       {
@@ -1833,6 +1981,10 @@ plt.show()`,
           'K is the one choice you make. K=1 means "copy the nearest example" (brittle, overfits). ' +
           'K=15 means "take a wide vote" (smoother, but might blur boundaries). The Elephant story ' +
           'lets you try different K values and see how accuracy changes.',
+        goDeeper:
+          'KNN algorithm: for a new data point, (1) compute distance to all training points, (2) find the k closest, (3) majority vote determines the class. Distance metric matters: Euclidean (straight line), Manhattan (city blocks), cosine (angle between vectors — common for text). k=1 is noisy (single neighbor decides), k=too large includes distant irrelevant points. Typical: k=5 or k=√n. Feature scaling is critical: if weight is 3000-5000 and height is 1-3, distance is dominated by weight. Standardize first.',
+        advanced:
+          'KNN is a "lazy learner" — it stores all training data and computes at prediction time (no training phase). This makes prediction slow for large datasets: O(nd) per query for n training points in d dimensions. KD-trees and ball trees speed this to O(d·log n) for low-dimensional data but degrade in high dimensions. For very large datasets, approximate nearest neighbor methods (Annoy, FAISS, ScaNN) trade exact results for massive speedups — enabling billion-scale similarity search for recommendation engines and image retrieval systems.',
         diagram: 'KNNClassificationDiagram',
       },
       {
@@ -1847,6 +1999,10 @@ plt.show()`,
           '100% on training data but poorly on test data.\n\n' +
           'The cure: more diverse training data, larger K values, and always evaluating on a test set ' +
           'the model has never seen.',
+        goDeeper:
+          'Overfitting signs: training accuracy is high but test accuracy is much lower — the gap between them indicates the degree of overfitting. A model that achieves 99% training accuracy but only 60% test accuracy has memorized the training data. Remedies: (1) more training data, (2) simpler model (fewer parameters), (3) regularization (add a penalty for large weights), (4) dropout (randomly disable neurons during training), (5) early stopping (stop training when validation loss starts increasing).',
+        advanced:
+          'The bias-variance decomposition: Expected Error = Bias² + Variance + Irreducible Noise. High bias (underfitting): model is too simple — increase complexity, add features, train longer. High variance (overfitting): model is too sensitive to training data — get more data, simplify, regularize. Learning curves plot performance vs training set size: if train and test curves converge at high error → high bias; if they stay far apart → high variance. Ensemble methods (bagging reduces variance, boosting reduces bias) systematically address these issues.',
       },
       {
         title: 'Accuracy, Precision, Recall — Did It Actually Work?',
@@ -1862,6 +2018,10 @@ plt.show()`,
           'High recall = few missed threats.\n\n' +
           'For conservation, recall on "danger" matters most. A false alarm (precision error) means rangers ' +
           'investigate nothing. A missed danger (recall error) means an elephant herd crashes into a village.',
+        goDeeper:
+          'For binary classification (elephant/not-elephant): **Accuracy** = (TP + TN) / total — misleading when classes are imbalanced (99% "not elephant" in camera traps → always predicting "not elephant" gives 99% accuracy). **Precision** = TP / (TP + FP) — of all predicted elephants, how many were real? **Recall** = TP / (TP + FN) — of all real elephants, how many did we detect? **F1 score** = 2 × (Precision × Recall) / (Precision + Recall) — harmonic mean balancing both. For conservation: high recall is critical (missing a real elephant is worse than a false alarm).',
+        advanced:
+          'The **ROC curve** plots True Positive Rate (recall) vs False Positive Rate at every classification threshold. AUC (Area Under the ROC Curve) summarizes: AUC = 1.0 is perfect, 0.5 is random guessing. The **precision-recall curve** is more informative for imbalanced datasets. At each threshold, different precision-recall tradeoffs are available — choosing the threshold is a business decision. In medical screening: high recall (catch all disease cases) even at the cost of lower precision (more false positives requiring follow-up tests). In spam filtering: high precision (never lose real email) with acceptable recall.',
       },
       {
         title: 'The Confusion Matrix — Where Mistakes Live',
@@ -1875,6 +2035,10 @@ plt.show()`,
           '(duration of the rumble?) that separates nervous from danger.\n\n' +
           'This is how real ML engineers work: train → evaluate → read the confusion matrix → improve → ' +
           'repeat until the model is reliable enough for deployment.',
+        goDeeper:
+          'A confusion matrix is a table where rows represent actual classes and columns represent predicted classes. For 3 classes (elephant, rhino, deer), a 3×3 matrix shows counts for each actual→predicted combination. The diagonal shows correct predictions; off-diagonal elements show specific error patterns. If the model often confuses elephants with rhinos (high count in elephant-row, rhino-column), that reveals which classes need better features. Normalize rows to get per-class accuracy rates.',
+        advanced:
+          'Multi-class metrics extend binary concepts: macro-average computes metric per class then averages (treats all classes equally), micro-average pools all predictions (dominated by the majority class), weighted average accounts for class sizes. Cohen\'s kappa adjusts for chance agreement — important when classes are imbalanced. In multi-label classification (an image can contain both elephant AND rhino), each sample can have multiple correct labels — the Hamming loss measures the fraction of labels that are incorrect.',
         interactive: {
           type: 'matching',
           props: {
@@ -1907,6 +2071,10 @@ plt.show()`,
           'Listening Project at Cornell uses ML to monitor elephant populations across Africa.\n\n' +
           'Every one of these systems was built by someone who understood features, labels, training, ' +
           'testing, and evaluation — exactly what you are learning.',
+        goDeeper:
+          'ML applications across domains: **Computer Vision** — image classification, object detection, face recognition, medical imaging (detecting tumors in X-rays). **Natural Language Processing** — translation, sentiment analysis, chatbots, text summarization. **Audio** — speech recognition, music recommendation, species identification from calls. **Tabular data** — fraud detection, credit scoring, weather prediction. **Robotics** — navigation, grasping, autonomous driving. The same fundamental algorithms (neural networks, trees, SVMs) adapt to all these domains through appropriate feature engineering and architecture choices.',
+        advanced:
+          'The ML deployment cycle: (1) offline training on historical data, (2) model validation on held-out test set, (3) A/B testing against the current system with real users, (4) gradual rollout with monitoring, (5) continuous retraining as new data arrives. **MLOps** tools (MLflow, Weights & Biases, Kubeflow) track experiments, version models, and automate deployment. Edge deployment (running models on devices like phones, drones, or Arduino-class hardware) uses model compression: quantization (32-bit → 8-bit weights), pruning (removing unimportant connections), and knowledge distillation (training a small "student" model to mimic a large "teacher").',
       },
       // ── Beyond k-NN: Other Algorithms (visual) ──────────────
       {
@@ -1923,6 +2091,10 @@ plt.show()`,
           'to a patient: "your blood pressure is above 140, your age is above 60, and your ' +
           'cholesterol is elevated — the model recommends further testing." Try classifying ' +
           'animals in the interactive tree below.',
+        goDeeper:
+          'A decision tree asks a sequence of binary questions to classify data. At each node, it picks the feature and threshold that best separates the classes. "Best" is measured by information gain (decrease in entropy) or Gini impurity. For elephant classification: "Is weight > 4000 kg?" → Yes branch: "Is ear area > 1.5 m²?" → African. Trees are interpretable — you can follow the decision path for any prediction. But single trees overfit easily — deep trees memorize training data.',
+        advanced:
+          'Random forests and gradient boosting overcome single-tree weaknesses. **Random Forest**: train many trees on random subsets of data and features, then majority-vote. Reduces variance while maintaining low bias. **Gradient Boosting** (XGBoost, LightGBM): train trees sequentially, each correcting the errors of the previous ensemble. Often the top performer on tabular data. Feature importance: count how often each feature is used for splitting (or measure the total impurity reduction). SHAP values provide theoretically grounded feature importance that satisfies uniqueness, symmetry, and additivity axioms.',
         diagram: 'DecisionTreeDiagram',
       },
       {
@@ -1937,6 +2109,10 @@ plt.show()`,
           'But some problems are not linearly separable. Imagine calm rumbles surrounded by a ring ' +
           'of nervous rumbles — no single straight line can separate them. You need a **curved ' +
           'boundary**. That is exactly what neural networks learn to draw.',
+        goDeeper:
+          'A linear classifier draws a straight boundary: w₁x₁ + w₂x₂ + b = 0. Points on one side are class A, the other side class B. The weights w₁, w₂ determine the boundary\'s angle; the bias b shifts it. Logistic regression uses the sigmoid function σ(z) = 1/(1+e^(-z)) to convert the linear score to a probability: P(class=1) = σ(w·x + b). Training minimizes cross-entropy loss: L = -Σ[y·log(ŷ) + (1-y)·log(1-ŷ)]. Linear classifiers are fast, interpretable, and work well when classes are linearly separable.',
+        advanced:
+          'Support Vector Machines (SVM) find the maximum-margin hyperplane — the boundary with the largest gap between classes. Support vectors are the closest points to the boundary. The **kernel trick** maps data to higher dimensions where linear separation is possible: the RBF kernel K(x,y) = exp(-γ||x-y||²) effectively creates infinite-dimensional features without computing them explicitly. SVMs remain competitive for small-to-medium datasets with clear margins. For high-dimensional data (text classification), linear SVMs are surprisingly effective because the curse of dimensionality makes most data approximately linearly separable.',
         diagram: 'LinearClassifierDiagram',
       },
       {
@@ -1956,6 +2132,10 @@ plt.show()`,
           'the weights converge on values that classify accurately.\n\n' +
           'Tap an output node below to see which connections are strongest — which features matter ' +
           'most for each mood.',
+        goDeeper:
+          'A neural network chains layers of linear transformations with nonlinear activations. Layer output: y = activation(W·x + b). Common activations: ReLU (max(0, x) — simple, fast, standard), sigmoid (squashes to 0-1, used for output probabilities), softmax (multi-class probabilities). A 2-layer network: input → hidden layer (64 neurons, ReLU) → output layer (num_classes, softmax). Training uses backpropagation: compute loss, propagate gradients backward through all layers, update weights via gradient descent.',
+        advanced:
+          'Deep learning architectures: **CNNs** (Convolutional Neural Networks) apply learned filters to detect spatial features — dominant for images. **RNNs/LSTMs** process sequential data (text, time series) by maintaining hidden state. **Transformers** use self-attention to process entire sequences in parallel — GPT, BERT, and all modern LLMs are transformers. **GANs** (Generative Adversarial Networks) generate realistic images by training two networks against each other. **Diffusion models** (DALL-E, Stable Diffusion) generate images by learning to reverse a noise-adding process. Each architecture matches the structure of specific data types.',
         diagram: 'NeuralNetworkDiagram',
       },
       {
@@ -1976,6 +2156,10 @@ plt.show()`,
           'The model you might use to chat with an AI assistant was trained this way.\n\n' +
           'Click a word below to see its attention pattern — which other words it focuses on to ' +
           'understand context.',
+        goDeeper:
+          'Transformers process input through self-attention: each token attends to every other token, computing a weighted sum where weights reflect relevance. Attention(Q,K,V) = softmax(QKᵀ/√d)V, where Q (queries), K (keys), V (values) are learned projections of the input. Multi-head attention runs several attention functions in parallel, capturing different types of relationships. The transformer architecture: input embedding → positional encoding → N × (multi-head attention + feed-forward network + layer normalization) → output.',
+        advanced:
+          'Scaling laws: transformer performance improves predictably with model size, dataset size, and compute budget — following power laws. GPT-4 has ~1.7 trillion parameters trained on trillions of tokens. Emergent abilities appear at scale: chain-of-thought reasoning, in-context learning, and instruction following emerge in large models but are absent in small ones. Fine-tuning adapts pretrained models: RLHF (Reinforcement Learning from Human Feedback) aligns language models with human preferences. LoRA (Low-Rank Adaptation) fine-tunes models efficiently by training only small rank-decomposition matrices, reducing GPU memory by 10×.',
         diagram: 'TransformerAttentionDiagram',
       },
     ],
@@ -2185,6 +2369,10 @@ plt.show()`,
           'rapidly around its resting position. That back-and-forth motion creates a wave in ' +
           'the air, which your ear detects as sound. Almost everything that makes sound — a ' +
           'dhol drum, a bird\'s call, a river\'s rush — does so through vibration.',
+        goDeeper:
+          'A signal is any quantity that varies over time or space: sound pressure, voltage, temperature, stock prices. **Analog signals** are continuous; **digital signals** are sampled at discrete steps. The Nyquist theorem: to represent a signal with max frequency f_max, sample at ≥ 2f_max Hz. Human hearing: ~20 kHz, so CD audio uses 44.1 kHz. Sampling below Nyquist causes **aliasing** — high frequencies masquerade as low ones, like wagon wheels appearing to spin backward in film.',
+        advanced:
+          'The **Fourier Transform** converts signals from time to frequency domain: X(f) = ∫x(t)e^(-2πift) dt. The FFT computes the DFT in O(N log N) — for N=1,000,000, a 50,000× speedup. The power spectrum |X(f)|² shows which frequencies dominate. The spectrogram (Short-Time FT) shows how frequency content evolves over time — essential for speech recognition, music analysis, and earthquake seismology. The uncertainty principle (ΔtΔf ≥ 1/4π) means you cannot have perfect time AND frequency resolution simultaneously.',
         diagram: 'TransverseLongitudinalDiagram',
       },
       {
@@ -2193,6 +2381,14 @@ plt.show()`,
           'Frequency tells you how many times something vibrates per second, measured in Hertz ' +
           '(Hz). A low hum might be 100 Hz (100 vibrations per second). A high-pitched whistle ' +
           'might be 4,000 Hz. The higher the frequency, the higher the pitch you hear.',
+        goDeeper:
+          'Sampling methods: **random sampling** gives every member an equal chance — use random.sample() or np.random.choice(). **Stratified sampling** divides the population into groups (strata) and samples from each proportionally — ensures all subgroups are represented. **Systematic sampling** selects every kth member (e.g., every 10th elephant from a registry). The **margin of error** for proportions: MoE ≈ 1/√n for 95% confidence. A poll of n=1000 has MoE ≈ ±3.2%. To halve the margin of error, you need 4× the sample size.',
+        advanced:
+          'Selection bias occurs when the sample does not represent the population: surveying only city-dwelling elephants misses forest populations. Survivorship bias analyzes only "survivors" — studying successful startups without failed ones overestimates success factors. Response bias: people lie about sensitive topics. The Literary Digest poll (1936) famously predicted Landon over Roosevelt because its sample (telephone owners, car owners) skewed wealthy. Statistical power = P(detecting a real effect) = 1 - β. For α=0.05 and a medium effect size, you typically need n≈64 per group. Underpowered studies produce unreliable results — a major cause of the replication crisis.',
+        goDeeper:
+          'Frequency f (Hz) = cycles per second. A guitar string vibrating 440 times per second = 440 Hz = note A4. Period T = 1/f: T(440 Hz) = 2.27 ms. Human hearing range: ~20 Hz (deep bass rumble) to ~20,000 Hz (highest hiss). The frequency of a vibrating string: f = (1/2L)√(T/μ), where L = length, T = tension, μ = mass per unit length. Shorter string → higher pitch (frets on a guitar), tighter → higher (tuning pegs), thicker → lower (bass strings). This formula connects physics to music.',
+        advanced:
+          'The harmonic series of a vibrating string: f₁ (fundamental), 2f₁ (octave), 3f₁ (perfect fifth above octave), 4f₁ (second octave), 5f₁ (major third), etc. These harmonics determine timbre — why a violin and flute playing the same note sound different (different harmonic amplitudes). The Fourier series decomposes any periodic waveform into its harmonic components. Non-linear systems generate new frequencies: a distorted guitar creates harmonics and intermodulation products (sum and difference frequencies), enriching the sound spectrum.',
         diagram: 'WaveEquationDiagram',
       },
       {
@@ -2201,6 +2397,10 @@ plt.show()`,
           'Amplitude is how far the vibration swings from the center. A gentle whisper has tiny ' +
           'amplitude; a shout has large amplitude. On a wave diagram, amplitude is the height ' +
           'of the peaks. More amplitude means louder sound or stronger signal.',
+        goDeeper:
+          'Bit depth determines amplitude resolution: 8-bit = 256 levels, 16-bit = 65,536 (CD), 24-bit = 16.7 million (pro audio). SNR from quantization: SNR ≈ 6.02n + 1.76 dB. 16-bit: SNR ≈ 98 dB. ADC specs: resolution (bits), sample rate (Hz), input range (Volts). Arduino\'s ADC: 10-bit at up to 10 kHz — adequate for slow signals (temperature, light) but not audio. For audio capture, use an external I2S ADC module (e.g., INMP441 MEMS microphone) with 24-bit resolution at 44.1 kHz.',
+        advanced:
+          'Delta-sigma (ΔΣ) ADCs use 1-bit quantization at MHz rates, then noise-shaping pushes quantization noise to high frequencies where a digital filter removes it — achieving 24-bit effective resolution cheaply. This powers modern audio interfaces and digital scales. The Gabor limit (signal processing\'s uncertainty principle) states ΔtΔf ≥ 1/(4π) — you cannot localize both time and frequency perfectly. Wavelets (Daubechies, Morlet) provide multi-resolution analysis that adapts time-frequency tradeoff to the signal — better than fixed-window FFT for transient events like drum hits, seismic waves, and neural spikes.',
         diagram: 'SineWaveDiagram',
       },
       {
@@ -2211,6 +2411,10 @@ plt.show()`,
           'positions respond to different frequencies — high pitches near the entrance, low ' +
           'pitches deeper inside. Your brain combines all these responses to let you hear music, ' +
           'speech, and the call of a river dolphin.',
+        goDeeper:
+          'Sound enters the ear canal, vibrates the eardrum, which moves three tiny bones (hammer, anvil, stirrup) that amplify vibrations 20× and transmit them to the cochlea. The cochlea is a fluid-filled spiral with ~16,000 hair cells along the basilar membrane. Different positions respond to different frequencies: the base (narrow, stiff) responds to high frequencies, the apex (wide, flexible) to low. When hair cells bend, they generate electrical signals sent to the brain. This frequency-to-position mapping is the basis of place theory of pitch perception.',
+        advanced:
+          'The cochlea performs a real-time Fourier transform mechanically — separating complex sounds into frequency components along the basilar membrane. Each hair cell has ~100 stereocilia that open mechanically-gated ion channels when deflected. Outer hair cells amplify weak signals through electromotility (they physically change length in response to voltage), providing 40-60 dB of cochlear gain. This "cochlear amplifier" gives the ear its remarkable dynamic range (0-120 dB, a factor of 10⁶ in amplitude). Noise-induced hearing loss permanently damages hair cells (they don\'t regenerate in humans), starting with the high-frequency region — which is why hearing loss typically begins with difficulty hearing consonants.',
         diagram: 'MusicalWavesDiagram',
       },
       {
@@ -2221,6 +2425,10 @@ plt.show()`,
           'individual frequencies. This is how noise-canceling headphones know which frequencies ' +
           'to block, and how Priya\'s program could isolate an elephant\'s low-frequency rumble ' +
           'from jungle noise.',
+        goDeeper:
+          'The FFT (Fast Fourier Transform) decomposes a signal into its frequency components — like a prism splitting white light into colors. Input: N samples of the signal. Output: N/2 frequency bins, each showing how much energy is at that frequency. The frequency resolution = sample_rate / N. With 44,100 Hz sample rate and N=1024: resolution ≈ 43 Hz per bin. To detect a 440 Hz tone, look at bin 440/43 ≈ bin 10. In Python: spectrum = np.abs(np.fft.rfft(signal)); frequencies = np.fft.rfftfreq(len(signal), 1/sample_rate).',
+        advanced:
+          'Window functions (Hanning, Hamming, Blackman) are multiplied with the signal before FFT to reduce spectral leakage — the smearing of sharp frequency peaks caused by analyzing a finite-length segment. Without windowing, a pure 440 Hz tone appears spread across multiple bins. With a Hanning window, the peak is sharp but the main lobe is wider. The tradeoff: narrower main lobe → better frequency resolution but higher sidelobes. The Short-Time Fourier Transform (STFT) applies windowed FFTs at overlapping positions along the signal, producing a spectrogram — a time-frequency representation essential for speech, music, and vibration analysis.',
         interactive: {
           type: 'slider',
           props: {
@@ -2416,6 +2624,10 @@ plt.show()`,
           'When electrons flow through a wire, that flow is electricity — like water flowing ' +
           'through a pipe. The wire is the pipe, the battery is the pump, and the electrons ' +
           'are the water. This flow is called *current*.',
+        goDeeper:
+          'Electricity is the flow of electrons through a conductor. **Voltage** (V) is the "pressure" pushing electrons — like water pressure in a pipe. **Current** (I, in Amperes) is the flow rate — how many electrons pass per second. **Resistance** (R, in Ohms) opposes flow — like a narrow pipe. Ohm\'s Law: V = I × R. A 9V battery with a 1kΩ resistor: I = 9/1000 = 9 mA. Power: P = V × I = 9 × 0.009 = 0.081 W. An AA battery can supply about 1.5V at up to 500 mA for a few hours.',
+        advanced:
+          'At the atomic level, electrons in metals are delocalized (shared across the crystal lattice) and drift under applied voltage. The drift velocity is surprisingly slow (~0.1 mm/s for typical current), but the electric field propagates at near light speed — which is why a light switch works instantly. Semiconductors (silicon, germanium) have controllable conductivity: doping with phosphorus (extra electrons → n-type) or boron (missing electrons → p-type) creates the building blocks of transistors. A MOSFET transistor acts as a voltage-controlled switch — the basis of all modern digital electronics, with chips containing billions of transistors.',
         diagram: 'StaticElectricityDiagram',
       },
       {
@@ -2426,6 +2638,10 @@ plt.show()`,
           'circular track: if you remove a section of track, the train can\'t complete the loop. ' +
           'A switch is like a drawbridge on that track — open it to stop the train, close it to ' +
           'let it through.',
+        goDeeper:
+          'Current flows only in complete circuits — a closed loop from battery positive terminal, through the components, back to negative. An open switch breaks the loop; current stops everywhere instantly. Short circuit: a low-resistance path directly connecting battery terminals — enormous current flows, the wire heats up, and the battery may be damaged. Always include a load (resistor, LED, motor) in the circuit. Circuit diagrams use standard symbols: battery (long/short parallel lines), resistor (zigzag), LED (triangle with arrows), switch (gap with a lever).',
+        advanced:
+          'Kirchhoff\'s laws solve complex circuits. **KVL** (Voltage Law): voltages around any closed loop sum to zero — energy is conserved. Walk around a loop: battery gives +9V, resistor drops -5V, LED drops -2V, second resistor drops -2V → 9 - 5 - 2 - 2 = 0 ✓. **KCL** (Current Law): currents entering a node equal currents leaving — charge is conserved. At a junction: 10 mA in = 6 mA branch + 4 mA branch. These two laws, plus Ohm\'s Law, can solve any circuit. Mesh analysis (applying KVL to independent loops) and nodal analysis (applying KCL to nodes) are systematic methods for circuits with many components.',
         diagram: 'CircuitDiagram',
       },
       {
@@ -2436,6 +2652,10 @@ plt.show()`,
           'how many electrons pass per second. *Resistance* (R, in Ohms) is how much the wire ' +
           'or component restricts flow — like a narrow section of pipe. Ohm\'s Law ties them ' +
           'together: V = I x R. A 9V battery pushing through 100 Ohms gives 0.09 Amps (90 mA).',
+        goDeeper:
+          'Ohm\'s Law: **V = IR**. A 220Ω resistor with 5V across it draws I = 5/220 = 22.7 mA. Power: P = VI = I²R = V²/R. That resistor dissipates P = 5²/220 = 0.114 W — a 1/4W resistor is sufficient. For an LED: forward voltage ~2V, desired current ~20 mA. Series resistor R = (5V − 2V)/0.02A = **150Ω**. Resistor color code: brown-black-brown = 100Ω, red-violet-red = 2,700Ω = 2.7 kΩ. Kirchhoff\'s Voltage Law: voltages around a closed loop sum to zero. Kirchhoff\'s Current Law: currents entering a node equal currents leaving.',
+        advanced:
+          'Real circuit analysis uses Thévenin\'s theorem: any linear circuit with two terminals can be replaced by a single voltage source V_th in series with a resistance R_th. To find V_th: open-circuit the terminals and measure voltage. To find R_th: set all independent sources to zero (voltage sources → short, current sources → open) and measure resistance. This simplifies complex networks to a single equivalent circuit — essential for impedance matching, where maximum power transfer occurs when load resistance equals source resistance. Superposition applies to linear circuits: the response to multiple sources equals the sum of responses to each source individually.',
         diagram: 'CircuitDiagram',
         interactive: {
           type: 'slider',
@@ -2453,6 +2673,10 @@ plt.show()`,
           'delicate — too much current will burn it out instantly. A resistor limits the current ' +
           'to a safe level. For a typical LED that needs 20 mA and drops 2V, on a 5V Arduino: ' +
           'R = (5V - 2V) / 0.02A = 150 Ohms. Always use a resistor with an LED.',
+        goDeeper:
+          'An LED (Light Emitting Diode) has a fixed forward voltage drop (red: ~2V, green: ~2.2V, blue/white: ~3.3V) and no internal current limiting. Without a resistor, current is limited only by wire and battery resistance — far too much, destroying the LED instantly. The series resistor limits current to a safe level (typically 10-20 mA). Formula: R = (V_supply - V_LED) / I_desired. For a red LED on 5V at 15 mA: R = (5 - 2) / 0.015 = **200Ω** (use standard 220Ω). Brightness is proportional to current up to the rated maximum.',
+        advanced:
+          'LEDs are semiconductor devices: when current flows through the p-n junction, electrons recombine with holes, releasing energy as photons. The photon wavelength (color) depends on the bandgap energy of the semiconductor material: GaP (green, 2.26 eV), GaAsP (red/yellow), InGaN (blue/UV, 2.6-3.4 eV). White LEDs use a blue InGaN chip coated with yellow phosphor — the combination appears white. LED efficiency (lumens/watt) has improved dramatically: from 1 lm/W (1960s) to 200+ lm/W (current), surpassing incandescent (15 lm/W) and fluorescent (100 lm/W). OLEDs (organic LEDs) use thin organic films and can be made flexible — enabling foldable screens.',
         diagram: 'OhmsLawDiagram',
       },
       {
@@ -2462,6 +2686,10 @@ plt.show()`,
           'Your eye can\'t see the flickering, so an LED appears dimmer when it\'s off half the ' +
           'time (50% duty cycle) and brighter at 100%. This trick lets a digital pin (which can ' +
           'only be fully on or fully off) simulate any brightness level — or control motor speed.',
+        goDeeper:
+          'PWM (Pulse Width Modulation) switches a digital pin between HIGH and LOW very rapidly. The duty cycle (% of time HIGH) determines the average voltage. 50% duty → average 2.5V (on a 5V Arduino). analogWrite(pin, 127) = 50% duty (127/255). At 490 Hz, each cycle is ~2 ms — your eye sees only the average brightness. PWM controls LED brightness (analogWrite(3, 64) = dim), motor speed (via a transistor), and servo position (servo angle ∝ pulse width between 1-2 ms). It does NOT produce true analog voltage — use an RC filter to smooth if needed.',
+        advanced:
+          'PWM resolution: Arduino\'s 8-bit PWM gives 256 brightness levels — usually enough. ESP32 offers 16-bit PWM (65,536 levels) for smoother fading. PWM frequency selection: too low → visible flicker in LEDs, audible whine in motors; too high → switching losses in transistors. For RGB LED color mixing, use 3 PWM channels: analogWrite(redPin, r); analogWrite(greenPin, g); analogWrite(bluePin, b); where r,g,b are 0-255. This is the same principle as screen pixels — additive color mixing from three independently controlled light sources.',
         interactive: {
           type: 'true-false',
           props: {
@@ -2508,6 +2736,10 @@ print(f"Power: {P*1000:.0f} mW")  # 60 mW`,
         title: 'Series and Parallel Circuits',
         content:
           'In series, resistances add up. In parallel, the total resistance decreases.',
+        goDeeper:
+          'Series resistors: R_total = R₁ + R₂ + R₃. Three 100Ω resistors in series: R = **300Ω**. Parallel resistors: 1/R_total = 1/R₁ + 1/R₂ + 1/R₃. Three 100Ω in parallel: R = **33.3Ω**. For just two parallel resistors: R = R₁R₂/(R₁+R₂). Voltage divider: V_out = V_in × R₂/(R₁+R₂). With R₁=1kΩ, R₂=2kΩ, V_in=9V: V_out = 9 × 2/3 = **6V**. Current divider: I₁ = I_total × R₂/(R₁+R₂). These formulas are the building blocks of all circuit analysis.',
+        advanced:
+          'Capacitors and inductors add frequency-dependent behavior. A capacitor\'s impedance Z_C = 1/(2πfC) decreases with frequency — it blocks DC but passes AC (used in coupling and filtering). An inductor\'s impedance Z_L = 2πfL increases with frequency — it passes DC but blocks AC (used in power supply filtering). An RC low-pass filter (resistor in series, capacitor to ground) has cutoff frequency f_c = 1/(2πRC). For R=10kΩ, C=100nF: f_c = 1/(2π×10⁴×10⁻⁷) = **159 Hz** — it passes bass frequencies and blocks treble. LC resonant circuits combine at f_r = 1/(2π√(LC)), enabling radio tuning — the exact frequency selection principle behind every radio, TV, and WiFi receiver.',
         diagram: 'SeriesParallelCircuitDiagram',
         code: `# Series: R_total = R1 + R2 + R3
 def series(*resistors):
@@ -2659,6 +2891,10 @@ plt.show()`,
           'This makes learning much faster because you can experiment fearlessly. Professionals use ' +
           'simulators too: engineers simulate rocket circuits before building them, because testing ' +
           'on a real rocket is expensive and risky.',
+        goDeeper:
+          'Tinkercad (free, browser-based) simulates Arduino circuits: drag components, wire them, write code, and run. The simulator shows real-time voltage, current, and pin states. Starter projects: (1) Blink LED with variable delay, (2) Potentiometer → LED brightness via PWM, (3) Temperature sensor → serial monitor, (4) Ultrasonic distance → LED bar graph. Simulation catches wiring errors, logic bugs, and timing issues without risking hardware.',
+        advanced:
+          'Professional embedded development uses hardware-in-the-loop (HIL) simulation: microcontroller runs real firmware while sensors are simulated. This tests edge cases (sensor reads -40°C, GPS drops) that are hard to reproduce physically. PlatformIO supports unit testing on simulated hardware. For complex systems (drones, robots), Software-in-the-Loop (SIL) simulates both hardware and firmware. Continuous integration pipelines run automated tests on every commit, catching regressions before they reach physical devices.',
         interactive: {
           type: 'true-false',
           props: {
@@ -2678,6 +2914,10 @@ plt.show()`,
           'sensors, wires) onto a virtual breadboard and connect them to the Arduino board. Third, the ' +
           '*serial monitor* that shows text output from your program, just like the real one. Some ' +
           'simulators also show an oscilloscope view so you can see voltage changing over time.',
+        goDeeper:
+          'Building in simulation: (1) Draw a schematic, (2) Calculate component values (R = (V_supply - V_LED)/I_LED), (3) Wire in simulator, (4) Write code, (5) Test and debug. Traffic light project: 3 LEDs with 220Ω resistors on pins 2, 3, 4. Code sequences through green-yellow-red with appropriate delays. Add a pedestrian button: if(digitalRead(7) == LOW) { pedestrianSequence(); }. The simulator\'s serial monitor displays debug output just like real hardware.',
+        advanced:
+          'Moving from simulation to real hardware introduces: component tolerances (a "100Ω" resistor might be 95-105Ω), wire resistance, breadboard contact resistance (~0.1Ω), and electromagnetic interference (EMI). Decoupling capacitors (100nF ceramic near IC power pins) filter noise. Pull-up/pull-down resistors (10kΩ) ensure defined input states. Power supply considerations: USB provides 5V/500mA, but motors and LED strips need external power. Level shifting is needed when interfacing 5V Arduino with 3.3V sensors — a voltage divider or dedicated level shifter IC prevents damage.',
         diagram: 'CircuitDiagram',
       },
       {
@@ -2691,6 +2931,10 @@ plt.show()`,
           'or mixing up analogRead (for sensors, returns 0-1023) with digitalRead (for buttons, ' +
           'returns HIGH or LOW). The simulator\'s serial monitor helps you debug all of these by ' +
           'printing values so you can see exactly what your code is doing.',
+        goDeeper:
+          'Top simulator-catchable mistakes: (1) Forgetting a resistor with an LED — in simulation, the virtual LED shows "burned out." (2) Wrong pin mode — writing to a pin set as INPUT does nothing. (3) Reversed LED polarity — the long leg (anode) goes to positive. (4) Missing ground connection — circuit is not complete, nothing works. (5) analogRead on a digital-only pin — returns meaningless values. (6) Using delay() in a time-sensitive loop — blocks all other code. The serial monitor is your best debugging tool: Serial.println(analogRead(A0)) confirms the sensor is wired correctly.',
+        advanced:
+          'Debugging embedded systems differs from desktop programming: no debugger breakpoints on basic Arduino (the ATmega328P lacks hardware debug support). Serial.println() is the primary debugging tool. Timing issues: millis() overflow after ~50 days (use unsigned long subtraction, which handles overflow correctly). Memory issues: 2KB SRAM fills fast with strings — use F() macro for string literals: Serial.println(F("This stays in flash")). Stack overflow from deep recursion crashes silently. On ESP32 and ARM-based boards, JTAG debugging with breakpoints and variable inspection is available through hardware debug probes.',
         interactive: {
           type: 'matching',
           props: {
@@ -2714,6 +2958,10 @@ plt.show()`,
           'have tolerances (a "100 ohm" resistor might actually be 98 or 102 ohms), real wires can ' +
           'come loose, and real sensors have noise. But the logic and code stay exactly the same. ' +
           'Start in simulation, finish with real hardware.',
+        goDeeper:
+          'Transitioning checklist: (1) Double-check component values (resistors, capacitors) against schematic. (2) Check power supply: USB provides 5V/500mA — motors need external power. (3) Test each component individually before combining. (4) Use a multimeter: voltage mode checks supply, resistance mode checks connections, continuity mode finds broken wires (beep = connected). (5) Start with the simplest version that proves the concept works, then add complexity. (6) Secure connections: breadboard prototypes → soldered perfboard → custom PCB for permanent projects.',
+        advanced:
+          'PCB (Printed Circuit Board) design moves projects from prototype to product. KiCad (free, open-source) handles schematic capture and board layout. Design rules: trace width determines current capacity (0.25 mm for signals, 1+ mm for power), copper clearance prevents short circuits, ground planes reduce noise. Fabrication services (JLCPCB, PCBWay) produce 5 boards for ~$2-5 with 5-day turnaround. Surface-mount components (SMD) are smaller than through-hole but require a soldering iron with a fine tip or a reflow oven. Assembly houses can populate boards automatically for larger quantities.',
         diagram: 'SeriesParallelCircuitDiagram',
       },
     ],
@@ -2847,6 +3095,10 @@ void loop() {
           'groups. Scientists use statistics to decide if a medicine works. Sports analysts use it ' +
           'to compare players. Weather forecasters use it to predict tomorrow\'s temperature. ' +
           'Whenever you have data and want answers, statistics is the toolkit.',
+        goDeeper:
+          'Descriptive statistics: **center** (mean, median, mode) and **spread** (range, IQR, variance, std dev). For elephant weights [3200, 3800, 4500, 4800, 5100]: mean = 4280, median = 4500, range = 1900, IQR = 1000, σ ≈ 716. The median is more robust to outliers — adding a 10,000 kg outlier shifts mean to 5233 but median only to 4650. **Correlation** (r = -1 to +1) measures linear association but NOT causation: ice cream sales and drownings both rise in summer, but ice cream doesn\'t cause drowning.',
+        advanced:
+          'Inferential statistics draws conclusions about populations from samples. The **Central Limit Theorem**: sample means are approximately normal regardless of population distribution, with SE = σ/√n. A 95% confidence interval: x̄ ± 1.96 × SE. The p-value is the probability of observing your result if the null hypothesis were true. The **replication crisis** showed many p < 0.05 results fail to replicate — leading to calls for pre-registration, larger samples, effect sizes, and Bayesian methods. Always report confidence intervals alongside p-values.',
         interactive: {
           type: 'true-false',
           props: {
@@ -2868,6 +3120,10 @@ void loop() {
           '(maybe a different grading system), the mean would jump to 166, but the median would stay ' +
           'at 80. The median resists extreme values, which makes it more useful for things like ' +
           'household income where a few billionaires would skew the mean.',
+        goDeeper:
+          'Weighted mean accounts for unequal importance: if three exams are weighted 20%, 30%, 50% with scores 75, 80, 90: weighted mean = 0.20(75) + 0.30(80) + 0.50(90) = 15 + 24 + 45 = **84** (vs simple mean of 81.7). The geometric mean is appropriate for multiplicative quantities: investment returns of +20%, −10%, +15% over 3 years → geometric mean = (1.20 × 0.90 × 1.15)^(1/3) − 1 = (1.242)^(1/3) − 1 ≈ **7.5%** per year. The harmonic mean applies to rates: driving 60 km at 40 km/h and 60 km at 60 km/h → harmonic mean speed = 2/(1/40 + 1/60) = **48 km/h** (not 50).',
+        advanced:
+          'The **empirical rule** (68-95-99.7 rule) for normal distributions: ~68% of data falls within 1σ of the mean, ~95% within 2σ, ~99.7% within 3σ. If elephant weights are normally distributed with μ=4280 kg, σ=716 kg, then 95% of elephants weigh between 4280 ± 2(716) = 2848 to 5712 kg. Z-scores standardize any normal distribution: z = (x − μ)/σ. An elephant weighing 5700 kg has z = (5700−4280)/716 = 1.98, meaning it is heavier than ~97.6% of the population (from the z-table). Skewed distributions (income, city sizes) are better described by the median and IQR, or by log-transforming to achieve approximate normality.',
         diagram: 'MeanMedianModeDiagram',
       },
       {
@@ -2880,6 +3136,10 @@ void loop() {
           'a small SD means all darts land near the bullseye; a large SD means they are all over ' +
           'the board. In the first class (75-85), SD might be about 3. In the second (40-100), ' +
           'SD might be 20. This single number tells you how much variation to expect.',
+        goDeeper:
+          'Variance = average of squared deviations from the mean: σ² = Σ(xᵢ - x̄)² / n. Standard deviation σ = √(variance) — in the same units as the data. For weights [3200, 3800, 4500, 4800, 5100], mean = 4280: deviations = [-1080, -480, 220, 520, 820], squared = [1166400, 230400, 48400, 270400, 672400], mean of squares = 477600, σ = √477600 ≈ **691 kg**. Small σ means data clusters tightly around the mean; large σ means wide spread. Rule of thumb: ~68% of data falls within ±1σ of the mean for normal distributions.',
+        advanced:
+          'Population σ divides by n; sample standard deviation s divides by n-1 (Bessel\'s correction) because a sample underestimates variability. The coefficient of variation (CV = σ/μ × 100%) allows comparing spread across different scales: elephant weights (σ=700, μ=4300, CV=16%) vs mouse weights (σ=3, μ=25, CV=12%) — mice are relatively less variable. In quality control, Six Sigma means the process spread is so tight that defects occur only at 6 standard deviations from the mean — 3.4 defects per million. The Chebyshev inequality (≥ 1-1/k² of data within k standard deviations) holds for ANY distribution, not just normal.',
         diagram: 'StdDevDiagram',
       },
       {
@@ -2892,6 +3152,10 @@ void loop() {
           'high with a few low outliers; two peaks might mean two distinct groups. Histograms are the ' +
           'first chart a data scientist makes because they reveal the distribution — the overall ' +
           'pattern of where values tend to land.',
+        goDeeper:
+          'A histogram groups data into bins (ranges) and counts how many values fall in each bin. More bins = more detail but noisier; fewer bins = smoother but lose detail. Sturges\' rule: bins ≈ 1 + 3.322 × log₂(n). For n=100: ~8 bins. Distribution shapes: **symmetric** (bell-shaped normal), **right-skewed** (long tail to the right — income, house prices), **left-skewed** (long tail to the left — age at death in developed countries), **bimodal** (two peaks — mixed populations). Always check the histogram before computing mean/std — a bimodal distribution\'s mean falls between the peaks where few data points actually exist.',
+        advanced:
+          'Kernel Density Estimation (KDE) produces a smooth continuous estimate of the probability distribution, avoiding the arbitrary binning of histograms. Each data point is replaced by a small "kernel" (usually Gaussian), and the sum of all kernels creates the density curve. Bandwidth selection controls smoothness: too narrow → noisy, too wide → oversmoothed. The Q-Q plot (quantile-quantile) compares your data distribution against a theoretical one (usually normal): if the points follow a straight line, the data is approximately normal. Departures from the line reveal skewness, heavy tails, or outliers — more informative than any single test statistic.',
         diagram: 'HistogramDiagram',
       },
       {
@@ -2904,6 +3168,10 @@ void loop() {
           'interquartile range (IQR) beyond the quartiles, flag it as a potential outlier. Always ' +
           'investigate outliers before removing them — sometimes the outlier is the most interesting ' +
           'data point (like discovering a new species).',
+        goDeeper:
+          'An outlier is a data point far from the others. Detection methods: **IQR method** — compute Q1 (25th percentile), Q3 (75th), IQR = Q3 - Q1. Points below Q1 - 1.5×IQR or above Q3 + 1.5×IQR are outliers. For elephant weights: Q1=3800, Q3=4800, IQR=1000. Outlier thresholds: below 2300 or above 6300. **Z-score method**: |z| > 3 (more than 3 standard deviations from mean) flags outliers. Always investigate before removing — outliers might be errors (sensor malfunction) or genuine discoveries (unusually large elephant).',
+        advanced:
+          'Robust statistics are less sensitive to outliers: the median (vs mean), the MAD (Median Absolute Deviation, vs standard deviation), and the trimmed mean (discard top/bottom 5% before averaging). In machine learning, outlier detection algorithms (Isolation Forest, Local Outlier Factor, DBSCAN) identify anomalous points in multi-dimensional data — used for fraud detection, network intrusion detection, and quality control. The Mahalanobis distance accounts for correlations between features, identifying multivariate outliers that appear normal when each feature is examined individually.',
         diagram: 'StdDevDiagram',
       },
       {
@@ -2915,6 +3183,10 @@ void loop() {
           'statistics you calculate from it will be close to the true values for the whole population. ' +
           'Bigger samples give more reliable estimates. This is why election polls survey a few ' +
           'thousand people and can still predict results for millions of voters.',
+        goDeeper:
+          'Sampling methods: **random sampling** gives every member an equal chance. **Stratified sampling** divides into subgroups and samples each proportionally. **Systematic sampling** selects every kth member. Margin of error for proportions: MoE ≈ 1/√n for 95% confidence. A poll of n=1000 has MoE ≈ ±3.2%. To halve the margin, quadruple the sample. **Convenience sampling** (surveying whoever is easiest to reach) introduces bias. **Cluster sampling** randomly selects groups (villages, schools) then surveys everyone within — practical when populations are geographically dispersed.',
+        advanced:
+          'Selection bias occurs when samples do not represent the population. Survivorship bias analyzes only "survivors" — studying only successful startups overestimates success factors. The Literary Digest poll (1936) predicted Landon over Roosevelt because its sample skewed wealthy (telephone/car owners). Statistical power = P(detecting a real effect) = 1 - β. For α=0.05 and medium effect, you need n≈64 per group. Underpowered studies produce unreliable results. **Bootstrap resampling** (randomly sampling with replacement from your data, thousands of times) estimates confidence intervals without assumptions about the population distribution.',
         interactive: {
           type: 'true-false',
           props: {
@@ -2934,6 +3206,10 @@ void loop() {
           'screen time = lower sleep hours). A correlation near 0 means no relationship. The critical ' +
           'warning: correlation does not mean causation. Ice cream sales and drowning deaths both ' +
           'increase in summer, but ice cream does not cause drowning — hot weather causes both.',
+        goDeeper:
+          'Pearson r measures linear association: r = +1 (perfect positive line), 0 (no linear pattern), -1 (perfect negative). Compute from paired data: r = Σ[(xᵢ-x̄)(yᵢ-ȳ)] / √[Σ(xᵢ-x̄)² × Σ(yᵢ-ȳ)²]. **Correlation ≠ causation**: ice cream sales and drowning deaths correlate (confounding variable: temperature). r² (coefficient of determination) tells you what fraction of variation in y is explained by x: r = 0.9 means r² = 0.81, so 81% of the variation is explained. Always visualize with a scatter plot — non-linear relationships, outliers, and clusters can hide behind a single number.',
+        advanced:
+          'Spearman rank correlation measures monotonic (not just linear) association using ranks instead of values — robust to outliers. Kendall\'s tau is another rank-based measure, preferred for small samples. Partial correlation controls for confounding: the partial correlation between ice cream and drowning, controlling for temperature, is near zero. In practice, multiple regression (y = b₀ + b₁x₁ + b₂x₂ + ...) separates the contributions of multiple predictors. Granger causality tests whether past X values improve predictions of Y — a temporal (not true causal) test used in economics and neuroscience.',
         diagram: 'CorrelationDiagram',
         interactive: {
           type: 'matching',
@@ -3118,6 +3394,10 @@ print(f"Each extra hour ≈ +{m:.1f} points on the exam")`,
           'tall the wave is (amplitude), and the speed of rotation determines how quickly the wave ' +
           'repeats (frequency). Every sine wave is secretly a circle viewed from the side. This is ' +
           'why trigonometry (the math of triangles and circles) is at the heart of wave science.',
+        goDeeper:
+          'A sine wave y = A sin(2πft + φ) has amplitude A, frequency f (Hz), and phase φ (radians). Period T = 1/f. Angular frequency ω = 2πf. For 440 Hz (middle A): T = 2.27 ms, ω = 2764.6 rad/s. Wavelength λ = v/f: sound at 440 Hz in air (343 m/s): λ = 0.78 m. Light at 5×10¹⁴ Hz: λ = 600 nm (orange). The unit circle connection: sin(θ) = y-coordinate of a point moving around a unit circle at constant angular velocity ω — the projection of circular motion onto a straight line is a sine wave.',
+        advanced:
+          'Sine waves are eigenfunctions of linear time-invariant (LTI) systems: input sine → output sine of same frequency, changed only in amplitude and phase. This is why Fourier analysis works — decompose any signal into sines, process each independently. The Hilbert transform produces the analytic signal z(t) = x(t) + iH{x(t)}, whose magnitude is the envelope and whose phase derivative is the instantaneous frequency. Applications: AM radio demodulation, vibration analysis, and the mathematical basis of signal processing in MRI, radar, and telecommunications.',
         diagram: 'UnitCircleDiagram',
       },
       {
@@ -3129,6 +3409,10 @@ print(f"Each extra hour ≈ +{m:.1f} points on the exam")`,
           'hear frequencies roughly from 20 Hz to 20,000 Hz. Below 20 Hz, you feel vibrations ' +
           'rather than hear them — elephants communicate with infrasound down around 14 Hz. ' +
           'The *period* is the inverse: a 100 Hz wave has a period of 1/100 = 0.01 seconds per cycle.',
+        goDeeper:
+          'Musical intervals are frequency ratios: octave = 2:1, fifth = 3:2, fourth = 4:3. Equal temperament: 12 semitones, each 2^(1/12) ≈ 1.0595. Note formula: f = 440 × 2^((n-69)/12) for MIDI note n. Middle C (n=60): f ≈ **261.6 Hz**. The mel scale models human pitch perception (roughly logarithmic). Cent = 1/100 of a semitone: 1200 cents per octave. Tuning systems (Pythagorean, just intonation, equal temperament) make different tradeoffs between pure intervals and transposability.',
+        advanced:
+          'Pitch perception uses place coding (basilar membrane location) above ~4 kHz and temporal coding (neural firing sync) below. The **missing fundamental**: hearing 200, 300, 400 Hz → brain perceives 100 Hz (absent). Autocorrelation pitch detection finds the period at which a signal matches its delayed copy. Absolute pitch (the ability to name any note without a reference) affects ~1 in 10,000 people and appears to require both genetic predisposition and early musical training. The cochlear implant — which directly stimulates auditory neurons with electrode arrays — must encode frequency information for pitch perception, a major challenge in implant design.',
         diagram: 'SineWaveDiagram',
       },
       {
@@ -3140,6 +3424,10 @@ print(f"Each extra hour ≈ +{m:.1f} points on the exam")`,
           '+3 to -3. Doubling the amplitude doubles the energy carried by the wave — which is why ' +
           'turning up the volume on a speaker uses more battery. In the formula y = A * sin(2*pi*f*t), ' +
           'A is the amplitude.',
+        goDeeper:
+          'Amplitude A is the peak value of the wave — half the distance from trough to crest. For sound, amplitude determines loudness; for light, it determines brightness; for a pendulum, it is the maximum displacement. The energy carried by a wave is proportional to A² — doubling the amplitude quadruples the energy. Decibels (dB) measure loudness on a logarithmic scale: dB = 20 × log₁₀(A/A_ref). Doubling the amplitude adds ~6 dB. The human hearing range spans ~120 dB — from a pin drop (0 dB) to a jet engine (120 dB), a factor of 10⁶ in amplitude.',
+        advanced:
+          'RMS (Root Mean Square) amplitude is the standard measure for AC signals: A_rms = A_peak / √2 for a sine wave. India\'s 230V mains supply has V_peak ≈ 325V but V_rms = 230V — the RMS value matches the equivalent DC power. For complex waveforms, Parseval\'s theorem states that total power equals the sum of power at each frequency: ΣA²ₙ in the time domain equals Σ|X(f)|² in the frequency domain. This connects amplitude analysis to spectral analysis — the power at each frequency contributes to the total signal power.',
         interactive: {
           type: 'slider',
           props: {
@@ -3159,6 +3447,10 @@ print(f"Each extra hour ≈ +{m:.1f} points on the exam")`,
           'perfectly in phase double in strength (constructive interference), but two waves exactly ' +
           'half a cycle apart (180 degrees) cancel each other to zero (destructive interference). ' +
           'Noise-canceling headphones exploit this by generating a wave with opposite phase to the noise.',
+        goDeeper:
+          'Phase φ shifts a sine wave in time: y = sin(2πft + φ). φ = 0 starts at zero crossing (rising). φ = π/2 starts at the peak (= cosine). φ = π starts at zero (falling). φ = 3π/2 starts at the trough. Two waves at the same frequency with different phases: Δφ = 0 → perfectly in sync (constructive interference, double amplitude). Δφ = π → perfectly opposite (destructive interference, cancel out). Phase difference is measured in degrees or radians: 90° = π/2 rad, 180° = π rad.',
+        advanced:
+          'In electronics, phase relationships are critical for AC circuit analysis. A capacitor\'s current leads its voltage by 90° (π/2); an inductor\'s current lags by 90°. This is represented using complex impedance: Z_C = 1/(jωC), Z_L = jωL, where j = √(-1). Phasor diagrams show amplitude as length and phase as angle. In stereophonic audio, phase differences between left and right channels create the perception of sound source location. Noise-canceling headphones detect ambient sound, invert its phase (add π), and play the result — the two waves destructively interfere, reducing ambient noise by 20-30 dB.',
         diagram: 'InterferenceDiagram',
       },
       {
@@ -3171,6 +3463,10 @@ print(f"Each extra hour ≈ +{m:.1f} points on the exam")`,
           'because they have different mixes of harmonics. A pure sine wave has no harmonics at all, ' +
           'which is why it sounds plain and electronic. Real-world sounds are always combinations ' +
           'of many sine waves at harmonic frequencies.',
+        goDeeper:
+          'A musical note is not a single frequency but a fundamental plus harmonics. A violin A4 (440 Hz) contains harmonics at 880, 1320, 1760, 2200 Hz — integer multiples of the fundamental. The relative amplitudes of harmonics determine timbre (tone color): a flute has weak harmonics (nearly pure sine), while a trumpet has strong upper harmonics (bright, brassy). Fourier analysis decomposes any periodic waveform into its harmonic components. A square wave = fundamental + 1/3 × 3rd harmonic + 1/5 × 5th + 1/7 × 7th + ... (only odd harmonics).',
+        advanced:
+          'Inharmonicity occurs when overtones deviate from integer multiples — piano strings exhibit this because their stiffness causes higher modes to vibrate slightly faster than integer multiples. This is why pianos use "stretch tuning" (octaves slightly wider than 2:1). Bells have strongly inharmonic partials, which is why they produce a complex, clangorous sound. Synthesizers recreate any timbre by additively combining sine waves (additive synthesis) or starting with a harmonically rich waveform and filtering out unwanted harmonics (subtractive synthesis). FM synthesis (Yamaha DX7) creates complex spectra by modulating the frequency of one sine wave with another — generating sidebands at non-integer frequency ratios.',
         diagram: 'MusicalWavesDiagram',
       },
       {
@@ -3182,6 +3478,10 @@ print(f"Each extra hour ≈ +{m:.1f} points on the exam")`,
           '"wah-wah-wah" pulsing at 2 Hz — the difference between the two frequencies. Piano tuners ' +
           'use this effect: they adjust a string until the beats disappear, meaning the string matches ' +
           'the reference fork exactly. The beat frequency is always |f1 - f2|.',
+        goDeeper:
+          'When two sine waves of slightly different frequencies (f₁ and f₂) combine, the result pulsates at the **beat frequency** = |f₁ - f₂|. Example: 440 Hz + 442 Hz → you hear 441 Hz (average) with 2 beats per second (2 Hz pulsation). Musicians use beats to tune instruments: play two notes that should be identical, listen for beats, adjust until beats disappear (frequencies match). The mathematical explanation: sin(2πf₁t) + sin(2πf₂t) = 2cos(2π(f₁-f₂)t/2) × sin(2π(f₁+f₂)t/2) — the product of a slow envelope and a fast carrier.',
+        advanced:
+          'Beat frequencies have practical applications beyond tuning. In radio engineering, heterodyning mixes a signal with a local oscillator to shift frequencies: the beat frequency (difference) moves a high-frequency radio signal down to an audible or processable range — this is how AM radios, spectrum analyzers, and radar receivers work. Binaural beats (slightly different frequencies in each ear) create a perceived beat in the brain — studied (with mixed scientific evidence) for effects on meditation and focus. In acoustics, room modes create standing wave beats when reflections interfere, causing certain frequencies to be louder or quieter at specific locations.',
         diagram: 'AmplitudeModDiagram',
         interactive: {
           type: 'matching',
@@ -3400,6 +3700,10 @@ plt.show()
           'the world uses version control — it is as fundamental to coding as saving a document is to ' +
           'writing. Git is the most popular version control system by far, created in 2005 by Linus ' +
           'Torvalds (who also created Linux).',
+        goDeeper:
+          'Git tracks changes, not files. Each commit stores a snapshot plus metadata (author, timestamp, message, parent). The SHA-1 hash uniquely identifies each commit. Key commands: git init, git add file.py, git commit -m "message", git log --oneline, git diff, git status. The staging area lets you commit selectively: change 5 files, stage 2, commit those 2 — the rest remain uncommitted. The .gitignore file prevents tracking generated files (node_modules/, __pycache__/, .env).',
+        advanced:
+          'Git\'s data model is a **directed acyclic graph (DAG)** of commits. Branches are lightweight pointers — creating one is O(1). Merges create two-parent commits. Rebasing replays commits onto a new base for linear history. The reflog records every HEAD movement, enabling recovery of "lost" commits. Git\'s content-addressable storage deduplicates identical files across commits. Pack files compress similar objects together, making repositories 10-50× smaller than storing full copies. The three-tree architecture (HEAD, index, working directory) enables Git\'s powerful staging workflow.',
       },
       {
         title: 'Git Basics: init, add, commit, status, log',
@@ -3415,6 +3719,10 @@ plt.show()
           'commits, newest first, with the author, date, and message for each. Think of the log as a ' +
           'detailed diary of every save point in your project. These five commands — init, add, commit, ' +
           'status, and log — are the foundation of everything else in Git.',
+        goDeeper:
+          'The three areas: **Working Directory** (your files), **Staging Area** (index — selected changes for next commit), **Repository** (committed history). Workflow: edit files → git add file.py (stage) → git commit -m "message" (save). git diff shows unstaged changes; git diff --staged shows staged changes. git log --oneline --graph shows branch history graphically. Undo: git restore file.py discards working changes; git restore --staged file.py unstages. **Commits should be atomic** — each commit represents one logical change with a clear message.',
+        advanced:
+          'Git internals: a commit object contains a tree (snapshot of all files), parent pointer(s), author, and message. A tree object maps filenames to blob objects (file contents). Blobs are content-addressed — identical file contents are stored once regardless of filename. git cat-file -p <hash> inspects any object. The .git directory contains: objects/ (blobs, trees, commits), refs/ (branch pointers), HEAD (current branch pointer), index (staging area). Understanding these internals helps debug unusual situations: detached HEAD, lost commits, corrupted repositories.',
         interactive: {
           type: 'matching',
           props: {
@@ -3444,6 +3752,10 @@ plt.show()
           'Branches are lightweight in Git — they are just pointers to a commit, not full copies of files — ' +
           'so creating hundreds of branches costs almost nothing. Professional teams create a new branch for ' +
           'every bug fix and every feature, keeping the main branch always stable and deployable.',
+        goDeeper:
+          'Branch workflow: git branch feature-xyz (create), git switch feature-xyz (switch), make changes, commit, then git switch main; git merge feature-xyz. Merge conflicts occur when both branches modify the same lines — manually edit, then git add and commit. **Git flow**: main (production), develop (integration), feature/*, release/*, hotfix/*. Simpler: **trunk-based development** — short-lived branches merged frequently. GitHub/GitLab pull requests enable code review before merging.',
+        advanced:
+          'Advanced Git: **interactive rebase** (git rebase -i HEAD~5) reorders, squashes, edits, or drops commits. **Cherry-pick** (git cherry-pick abc123) applies a specific commit. **Bisect** (git bisect start/bad/good) binary-searches through history to find bug-introducing commits in O(log n) steps. **Submodules** manage repository dependencies. **Git hooks** run scripts before/after events (pre-commit: lint code, pre-push: run tests). **Git LFS** handles large binaries by storing pointers in the repo and actual files on a separate server.',
         diagram: 'DecisionTreeDiagram',
       },
       {
@@ -3461,6 +3773,10 @@ plt.show()
           'you can browse code, read commit history, file issues (bug reports), and manage pull requests. ' +
           'Over 100 million developers use GitHub, and most open-source projects live there — from Linux ' +
           'to Python to React.',
+        goDeeper:
+          'Remotes are copies of the repository on another machine (GitHub, GitLab, Bitbucket). git clone url downloads the entire history. git remote -v shows configured remotes. git push origin main uploads local commits. git pull origin main downloads and merges remote changes. git fetch downloads without merging (safer — inspect first with git log origin/main). **Forks** (GitHub) create your own copy of someone else\'s repository. **Pull Requests** propose merging your branch into the original — the standard collaboration mechanism in open source.',
+        advanced:
+          'Distributed version control means every clone has the complete history — no central server is required for local operations (commit, branch, merge, log). This enables offline work, fast operations, and resilience. GitHub Actions (CI/CD) runs automated tests on every push: on: push → jobs: test → steps: checkout, setup-python, pip install, pytest. Protected branches require passing tests and approving reviews before merging. SSH keys (ssh-keygen, add public key to GitHub) replace password authentication for push/pull operations — more secure and more convenient.',
       },
       {
         title: 'Collaboration Workflow: Pull Requests and Code Review',
@@ -3477,6 +3793,10 @@ plt.show()
           'commit the resolution. Code review and pull requests are not just about catching bugs; they ' +
           'spread knowledge across the team so everyone understands the codebase, and they create a written ' +
           'record of *why* changes were made — invaluable when debugging six months later.',
+        goDeeper:
+          'PR workflow: (1) Fork/clone the repo, (2) Create a feature branch: git switch -c feature-name, (3) Make changes, commit with clear messages, (4) Push: git push origin feature-name, (5) Open PR on GitHub with description, (6) Address review comments, push updates, (7) Maintainer merges. **Code review** catches bugs, improves design, and shares knowledge. Good PR practice: small, focused changes (not giant PRs); descriptive title and body; link to relevant issue; include tests.',
+        advanced:
+          'Advanced collaboration: **Conventional Commits** standardize messages (feat:, fix:, docs:, refactor:) enabling automated changelog generation. **Semantic Versioning** (MAJOR.MINOR.PATCH) communicates compatibility: breaking change → major bump, new feature → minor, bug fix → patch. **Monorepos** (Google, Meta) keep all code in one repository, using build tools (Bazel, Nx) to manage dependencies between projects. **Git hooks** automate quality checks: pre-commit runs linters, commit-msg validates format, pre-push runs tests. Husky (Node.js) and pre-commit (Python) manage hook installation across teams.',
         diagram: 'FlowchartDiagram',
         interactive: {
           type: 'true-false',
@@ -3519,6 +3839,10 @@ plt.show()
           '"students" table by roll number — which is why these are called *relational databases*. This ' +
           'structure avoids duplication: you store each student\'s name once, and every table that needs ' +
           'it just points to the right row.',
+        goDeeper:
+          'A relational database organizes data into **tables** (rows and columns). Each row is a record; each column is a field with a specific data type (INTEGER, TEXT, REAL, DATETIME). The **primary key** uniquely identifies each row (e.g., elephant_id). **Foreign keys** link tables: a sightings table might have elephant_id referencing the elephants table. Core SQL: `SELECT name, weight FROM elephants WHERE weight > 4000 ORDER BY weight DESC` retrieves heavy elephants sorted by weight. `INSERT INTO elephants (name, weight) VALUES ("Ranga", 4500)` adds a record. `UPDATE elephants SET weight = 4600 WHERE name = "Ranga"` modifies one.',
+        advanced:
+          'Database normalization reduces redundancy: **1NF** (no repeating groups), **2NF** (every non-key column depends on the whole primary key), **3NF** (no transitive dependencies — every non-key column depends ONLY on the key). Example: instead of storing elephant_name in every sighting record, store elephant_id (foreign key) and look up the name from the elephants table. **Indexing** (B-tree structures on frequently queried columns) speeds lookups from O(n) to O(log n). **ACID properties** (Atomicity, Consistency, Isolation, Durability) guarantee that transactions either complete fully or not at all — essential for financial systems. NoSQL databases (MongoDB, Redis) trade ACID guarantees for horizontal scalability, handling millions of requests/second for web applications.',
         interactive: {
           type: 'true-false',
           props: {
@@ -3543,6 +3867,10 @@ plt.show()
           'write step-by-step instructions. SQL was designed in the 1970s and is still the standard today. ' +
           'Almost every app you use — Instagram, Google, Zomato, banking apps — runs SQL queries behind ' +
           'the scenes every time you tap a button.',
+        goDeeper:
+          'JOIN combines tables: SELECT e.name, s.date FROM elephants e JOIN sightings s ON e.id = s.elephant_id WHERE s.date > "2024-01-01". Aggregates: SELECT location, COUNT(*), AVG(group_size) FROM sightings GROUP BY location HAVING COUNT(*) > 10. Subqueries: SELECT name FROM elephants WHERE id IN (SELECT elephant_id FROM sightings WHERE location = "Kaziranga"). Window functions: RANK() OVER (ORDER BY weight DESC) adds ranking without collapsing rows.',
+        advanced:
+          'Query optimization: the planner chooses table scan, index scan, or hash join. EXPLAIN ANALYZE shows execution plans. Create indexes on filtered/joined columns. Avoid SELECT * — fetch only needed columns. Database normalization (1NF, 2NF, 3NF) reduces redundancy but increases JOIN complexity. **Denormalization** (storing computed aggregates) speeds reads at the cost of write complexity. Modern databases use cost-based optimizers that estimate row counts and choose the cheapest plan. Connection pooling (PgBouncer, SQLAlchemy) reuses database connections to avoid the overhead of establishing new ones for every query.',
       },
       {
         title: 'Filtering and Sorting: ORDER BY, LIMIT, LIKE, AND/OR',
@@ -3557,6 +3885,10 @@ plt.show()
           'high-scoring students in class 10, while `WHERE class = 10 OR class = 12` finds students in ' +
           'either class. These operators let you express surprisingly complex questions in a single readable ' +
           'sentence — no loops, no if-statements, just a clear description of the data you want.',
+        goDeeper:
+          'WHERE clauses filter rows: WHERE weight > 4000, WHERE name LIKE "R%", WHERE location IN ("Kaziranga", "Manas"), WHERE date BETWEEN "2024-01-01" AND "2024-12-31". AND/OR combine conditions: WHERE weight > 4000 AND location = "Kaziranga". ORDER BY sorts results: ORDER BY weight DESC (heaviest first), ORDER BY name ASC (alphabetical). LIMIT restricts output: LIMIT 10 returns the first 10 rows. Combined: SELECT name, weight FROM elephants WHERE weight > 3500 ORDER BY weight DESC LIMIT 5 — top 5 heaviest elephants over 3500 kg.',
+        advanced:
+          'Query performance depends on whether indexes exist for filtered columns. Without an index, the database performs a full table scan (checking every row). With a B-tree index on the weight column, WHERE weight > 4000 jumps directly to the relevant portion — O(log n) vs O(n). Composite indexes (CREATE INDEX ON sightings(location, date)) optimize queries filtering on multiple columns. The EXPLAIN command shows the query plan: Sequential Scan (slow) vs Index Scan (fast). Trade-off: indexes speed up reads but slow down writes (every INSERT/UPDATE must update the index).',
         diagram: 'PostmanSortingDiagram',
         interactive: {
           type: 'matching',
@@ -3589,6 +3921,10 @@ plt.show()
           'match in the right table — useful for finding students who have not submitted any marks yet. ' +
           'Understanding joins is the key to working with any real database, because real-world data is ' +
           'almost always split across multiple related tables.',
+        goDeeper:
+          'JOIN types: **INNER JOIN** returns only matching rows from both tables. **LEFT JOIN** returns all rows from the left table, with NULLs where no right-table match exists. **RIGHT JOIN** is the mirror. **FULL OUTER JOIN** returns all rows from both tables. Example: SELECT e.name, COUNT(s.id) FROM elephants e LEFT JOIN sightings s ON e.id = s.elephant_id GROUP BY e.name — shows every elephant, even those with zero sightings (which INNER JOIN would omit). Self-joins compare rows within the same table: find elephant pairs of similar weight.',
+        advanced:
+          'Joins can be expensive for large tables. Nested loop join is O(n×m) — the database checks every combination. Hash join builds a hash table on the smaller table, then probes with the larger — O(n+m). Sort-merge join sorts both tables by the join key, then merges — O(n log n + m log m). The query planner chooses based on table sizes and available indexes. Denormalization (storing redundant data to avoid joins) is common in read-heavy applications: a sightings table might include elephant_name directly, avoiding a join for every query at the cost of update complexity. This tradeoff between normalization and performance is a core database design decision.',
       },
       {
         title: 'Creating and Modifying Data',
@@ -3607,6 +3943,10 @@ plt.show()
           'fail. If you are transferring money from one bank account to another, you need the debit and ' +
           'credit to happen together — a crash in between would lose money. Databases guarantee this ' +
           'atomicity, which is why banks, airlines, and hospitals trust them with critical data.',
+        goDeeper:
+          'INSERT adds rows: INSERT INTO elephants (name, weight, location) VALUES ("Mohini", 3800, "Kaziranga"). UPDATE modifies: UPDATE elephants SET weight = 3900 WHERE name = "Mohini". DELETE removes: DELETE FROM sightings WHERE date < "2020-01-01". **Transactions** group operations atomically: BEGIN; UPDATE accounts SET balance = balance - 100 WHERE id = 1; UPDATE accounts SET balance = balance + 100 WHERE id = 2; COMMIT; — either both updates happen or neither does (ACID atomicity). CREATE TABLE defines schema: CREATE TABLE elephants (id INTEGER PRIMARY KEY, name TEXT NOT NULL, weight REAL CHECK(weight > 0)).',
+        advanced:
+          'Schema migrations manage database changes over time: ALTER TABLE elephants ADD COLUMN last_seen DATE; Tools like Alembic (Python/SQLAlchemy) or Flyway (Java) version-control schema changes, applying them in order across development, staging, and production databases. Soft deletes (SET deleted_at = NOW() instead of DELETE) preserve data for audit trails. Triggers automatically execute code on events: CREATE TRIGGER log_update AFTER UPDATE ON elephants — useful for audit logging and maintaining derived data. Stored procedures run complex server-side logic, reducing network round-trips for multi-step operations.',
         interactive: {
           type: 'true-false',
           props: {
@@ -3647,6 +3987,10 @@ plt.show()
           'the domain name, and `/about` is the path to a specific page. Understanding this flow — DNS ' +
           'lookup, HTTP request, server processing, HTTP response, browser rendering — is the foundation ' +
           'for understanding everything else about web development and APIs.',
+        goDeeper:
+          'The internet is a network of networks. Your device → router → ISP → internet backbone → destination server. Data travels as packets: each packet has a source IP, destination IP, and payload. TCP breaks data into ordered packets and ensures delivery (retransmits lost packets). UDP sends without guarantees (faster, used for video streaming and gaming). DNS translates domain names (google.com) to IP addresses (142.250.80.46). HTTP is the protocol web browsers use: a request (GET /page.html) produces a response (200 OK + content).',
+        advanced:
+          'The OSI model describes 7 layers of networking: Physical (cables, radio) → Data Link (Ethernet frames, MAC addresses) → Network (IP packets, routing) → Transport (TCP/UDP, ports) → Session → Presentation → Application (HTTP, SMTP, DNS). In practice, the TCP/IP model collapses these to 4 layers. Content Delivery Networks (CDNs) cache content at servers worldwide — when you access a website, the CDN serves content from the nearest edge server. HTTPS uses TLS encryption: the server presents a certificate (verified by a Certificate Authority), a secure session key is negotiated, and all subsequent data is encrypted. Certificate Transparency logs make it detectable when fake certificates are issued.',
         diagram: 'FlowchartDiagram',
         interactive: {
           type: 'matching',
@@ -3681,6 +4025,10 @@ plt.show()
           'APIs have rules, documented in their API reference: which URLs (called *endpoints*) you can ' +
           'call, what data you must send, and what data you will get back. Following these rules is like ' +
           'ordering from the menu — you get reliable, predictable results.',
+        goDeeper:
+          'A REST API uses HTTP methods: **GET** (read data), **POST** (create new data), **PUT** (update existing data), **DELETE** (remove data). Example: `GET /api/elephants` returns a JSON list of elephants. `POST /api/elephants` with body `{"name": "Ranga", "weight": 4500}` creates a new record. `GET /api/elephants/42` returns elephant #42. Response includes a status code: 200 (success), 201 (created), 400 (bad request), 401 (unauthorized), 404 (not found), 500 (server error). Python: `response = requests.get("https://api.example.com/elephants"); data = response.json()`.',
+        advanced:
+          'API authentication protects resources: **API keys** (simple tokens in headers), **OAuth 2.0** (delegation protocol — "log in with Google" uses OAuth), **JWT** (JSON Web Tokens — self-contained signed tokens encoding user identity). Rate limiting prevents abuse: APIs typically allow 60-1000 requests/minute per key. **GraphQL** (Facebook, 2015) is an alternative to REST: clients specify exactly which fields they need in a query, reducing over-fetching. **WebSocket** provides full-duplex, persistent connections for real-time data (chat, live dashboards, IoT sensor streams). **gRPC** (Google) uses protocol buffers for high-performance, strongly-typed API communication between microservices.',
       },
       {
         title: 'REST APIs: GET, POST, PUT, DELETE, and JSON',
@@ -3699,6 +4047,10 @@ plt.show()
           'Java, Go, or Rust, the client does not care — it just sends HTTP requests and reads JSON ' +
           'responses. This separation is why the frontend (what you see) and backend (the server logic) ' +
           'can be built by completely different teams in completely different languages.',
+        goDeeper:
+          'Python requests library: resp = requests.get(url, params={"species": "asian"}, headers={"Authorization": "Bearer token"}). Check: resp.status_code, resp.raise_for_status(). Parse: data = resp.json(). POST: requests.post(url, json={"name": "Ranga"}). Handle errors: try/except requests.Timeout. **Pagination**: follow next_url links or increment page parameter. Rate limiting: respect Retry-After headers and implement exponential backoff for 429 (Too Many Requests) responses.',
+        advanced:
+          'Building APIs with FastAPI: @app.get("/elephants/{id}") async def get_elephant(id: int): return db.find(id). Auto-generates OpenAPI docs. **Middleware** adds CORS, logging, auth. Docker packages the API portably. **GraphQL** lets clients specify exactly which fields they need, reducing over-fetching. **WebSocket** provides real-time bidirectional communication. **gRPC** uses protocol buffers for high-performance inter-service communication. API versioning (/api/v1/, /api/v2/) maintains backward compatibility as the API evolves.',
         interactive: {
           type: 'matching',
           props: {
@@ -3732,6 +4084,10 @@ plt.show()
           'translate text, send SMS messages, generate AI images, and process payments — all by calling ' +
           'the right API with the right parameters. Modern software development is largely about choosing ' +
           'which APIs to use and wiring them together intelligently.',
+        goDeeper:
+          'Building a weather dashboard: (1) Get an API key from OpenWeatherMap. (2) Request: requests.get(f"https://api.openweathermap.org/data/2.5/weather?q=Guwahati&appid={key}&units=metric"). (3) Parse: data["main"]["temp"], data["weather"][0]["description"]. (4) Display or store. **Error handling**: check status codes, handle network timeouts, validate response format. **Caching**: save API responses locally to avoid hitting rate limits — store the result with a timestamp and reuse if less than 10 minutes old.',
+        advanced:
+          'API design principles: use nouns for resources (/elephants, /sightings), HTTP verbs for actions (GET=read, POST=create, PUT=update, DELETE=remove), consistent error format ({"error": "message", "code": 404}), pagination (page=2&per_page=20), and versioning (/api/v1/). HATEOAS (Hypermedia as the Engine of Application State) includes links in responses: {"next": "/elephants?page=3"}, allowing clients to discover available actions. API documentation (Swagger/OpenAPI) auto-generates interactive docs where developers can try endpoints directly in the browser.',
         interactive: {
           type: 'true-false',
           props: {
@@ -3772,6 +4128,10 @@ plt.show()
           'right algorithm is often the difference between software that feels instant and software that ' +
           'freezes for minutes. That is why algorithms are a core subject in computer science — they are ' +
           'the recipes that determine how fast and how well your program works.',
+        goDeeper:
+          'Algorithm efficiency is measured by **Big O notation**: O(1) = constant time (array access), O(log n) = logarithmic (binary search), O(n) = linear (scanning a list), O(n log n) = linearithmic (merge sort), O(n²) = quadratic (bubble sort), O(2ⁿ) = exponential (brute force). For n=1,000,000: O(n) takes ~1 ms, O(n log n) ~20 ms, O(n²) ~17 minutes, O(2ⁿ) → heat death of the universe. Binary search on a sorted array of 1 billion elements finds any item in at most **30 comparisons** (log₂ 10⁹ ≈ 30). This is why sorting data first (O(n log n) one-time cost) pays off with repeated O(log n) searches.',
+        advanced:
+          'The P vs NP problem asks whether every problem whose solution can be verified quickly (in polynomial time) can also be solved quickly. If P = NP, then problems like the travelling salesman, protein folding, and breaking RSA encryption would have efficient algorithms — transforming science, medicine, and rendering current cryptography useless. Most computer scientists believe P ≠ NP, but no proof exists. This is one of the seven Millennium Prize Problems ($1 million reward). **NP-complete** problems (Boolean satisfiability, graph coloring, subset sum) are the hardest in NP — solving any one efficiently would solve all of them. Practical approaches: heuristics, approximation algorithms, and quantum computing (which offers speedups for some problems but does not solve NP-complete problems in general).',
         diagram: 'FlowchartDiagram',
       },
       {
@@ -3789,6 +4149,10 @@ plt.show()
           'by key, and a *stack* enforces last-in-first-out order (like a stack of plates). Choosing the ' +
           'right data structure for the job is just as important as choosing the right algorithm — they ' +
           'go hand in hand.',
+        goDeeper:
+          'An array stores elements in contiguous memory. Access by index: O(1) — jump directly to position. Insert/delete at the end: O(1) amortized. Insert/delete in the middle: O(n) — must shift all subsequent elements. Python lists are dynamic arrays that automatically resize (doubling capacity when full). A linked list stores each element with a pointer to the next: insert/delete anywhere is O(1) if you have a reference to the position, but access by index is O(n) — you must walk from the start. Arrays for random access; linked lists for frequent insertion/deletion.',
+        advanced:
+          'Hash maps (Python dict, JavaScript Object/Map) combine arrays with hash functions for O(1) average lookup by key. The hash function maps keys to array indices; collisions (two keys mapping to the same index) are handled by chaining (linked lists at each index) or open addressing (probing for the next empty slot). Load factor (items/slots) affects performance: Python dicts resize when ~2/3 full. Stacks (LIFO: push/pop) and queues (FIFO: enqueue/dequeue) are abstract data types implementable with arrays or linked lists. Stacks handle function calls, undo operations, and expression parsing; queues handle print jobs, BFS, and message passing.',
         interactive: {
           type: 'matching',
           props: {
@@ -3820,6 +4184,10 @@ plt.show()
           'it sorted has its own cost. This is a recurring theme in computer science: every optimization ' +
           'has a trade-off. Linear search works on any list (sorted or not) and needs no preparation. ' +
           'Binary search is vastly faster but demands sorted input.',
+        goDeeper:
+          'Linear search: check each element from start to end. O(n) — works on any list. Binary search: for sorted data only. Compare with the middle element; if target is smaller, search the left half; if larger, search the right half. Each step halves the search space: O(log n). For 1 billion elements: linear search checks up to 10⁹ items; binary search checks at most log₂(10⁹) ≈ **30 items**. Implementation: lo, hi = 0, len(arr)-1; while lo <= hi: mid = (lo+hi)//2; if arr[mid] == target: return mid; elif arr[mid] < target: lo = mid+1; else: hi = mid-1.',
+        advanced:
+          'Binary search applies beyond sorted arrays: any scenario where you can determine which half contains the answer. **Binary search on answer**: "What is the minimum speed to arrive on time?" — binary search over possible speeds, checking each with a feasibility function. **Bisection method** (root finding): find where f(x) = 0 by repeatedly halving the interval where the sign changes. Git bisect uses binary search through commit history. Interpolation search improves on binary search for uniformly distributed data: instead of always checking the midpoint, it estimates the target\'s position proportionally — achieving O(log log n) average case.',
       },
       {
         title: 'Sorting: Bubble Sort and Merge Sort',
@@ -3839,6 +4207,10 @@ plt.show()
           'are small integers. Python\'s built-in `sort()` uses *Timsort*, a hybrid algorithm designed ' +
           'for real-world data. The key insight is not to memorize every algorithm but to understand that ' +
           'different approaches have wildly different performance characteristics.',
+        goDeeper:
+          'Sorting compared: **Bubble sort** O(n²) — swap adjacent pairs, repeat. **Merge sort** O(n log n) — divide, sort halves, merge; uses O(n) memory. **Quick sort** O(n log n) average — pick pivot, partition, recurse; fastest in practice. Python\'s sorted() uses **Timsort** — optimized for real-world data with partial ordering. For 1M items: bubble sort ≈ 17 min, merge sort ≈ 0.02 sec. Binary search on sorted data: O(log n) — finds any item in 1 billion elements in **30 steps**.',
+        advanced:
+          'Advanced data structures: **hash tables** (Python dict) give O(1) average lookup via hash functions. **BSTs** maintain sorted order with O(log n) operations. **Heaps** provide O(1) min/max — used in priority queues, Dijkstra\'s algorithm, and OS schedulers. **Graphs** model networks: BFS (shortest unweighted paths), Dijkstra (weighted), A* (heuristic). **Dynamic programming** solves optimization by caching subproblem results — the Fibonacci sequence computed naively is O(2ⁿ) but with memoization is O(n). DP is the key technique for coding interview problems and real-world optimization.',
         interactive: {
           type: 'true-false',
           props: {
@@ -3869,6 +4241,10 @@ plt.show()
           'vs 16 minutes. The gap only widens with more data. This is why choosing the right algorithm ' +
           'matters — it is not just academic; it determines whether your program finishes in the blink ' +
           'of an eye or never finishes at all.',
+        goDeeper:
+          'Big O describes how time grows with input size n: O(1) constant (array access, hash lookup), O(log n) logarithmic (binary search), O(n) linear (scan entire list), O(n log n) linearithmic (merge sort, Python sorted()), O(n²) quadratic (nested loops, bubble sort), O(2ⁿ) exponential (brute force subset enumeration). To find Big O: count nested loops. One loop over n → O(n). Two nested loops each over n → O(n²). A loop that halves n each iteration → O(log n). Drop constants and lower terms: O(3n² + 5n + 7) = O(n²).',
+        advanced:
+          'Space complexity measures memory usage: merge sort uses O(n) extra space; quicksort uses O(log n) stack space. In-place algorithms (heapsort) use O(1) extra space. Amortized analysis: Python list.append() is O(1) amortized — occasional O(n) resize is spread across n operations. The Master Theorem solves divide-and-conquer recurrences: T(n) = aT(n/b) + O(n^d). If d < log_b(a): T = O(n^(log_b(a))); if d = log_b(a): T = O(n^d log n); if d > log_b(a): T = O(n^d). For merge sort: a=2, b=2, d=1, log₂2 = 1 = d → T = O(n log n). This theorem covers most recursive algorithm analyses.',
       },
     ],
   },
@@ -3904,6 +4280,10 @@ plt.show()
           'gets breached, attackers try that same email-password combination on every other site. Using ' +
           'a password manager with 2FA enabled is the single most impactful thing you can do for your ' +
           'digital security.',
+        goDeeper:
+          'The CIA triad: **Confidentiality**, **Integrity**, **Availability**. Common attacks: phishing (91% of breaches), SQL injection, XSS (injecting scripts), MITM (intercepting traffic). Defense: input validation, parameterized queries, HTTPS, CSP headers, MFA. Password strength: entropy = log₂(pool^length). A random 12-character password from 95 printable ASCII characters: entropy = 12 × log₂(95) ≈ 79 bits — would take ~10¹⁶ years to brute force at 10 billion guesses/second.',
+        advanced:
+          'The OWASP Top 10 lists critical risks: Broken Access Control, Cryptographic Failures, Injection, Insecure Design. **Zero-trust** verifies every request. India\'s CERT-In mandates 6-hour breach reporting. MFA types ranked by security: hardware key (FIDO2) > authenticator app (TOTP) > SMS (vulnerable to SIM swap). OAuth 2.0 enables "Sign in with Google" without sharing passwords. JWTs (JSON Web Tokens) carry signed claims — but must be validated server-side and have short expiration to limit damage from theft.',
         interactive: {
           type: 'matching',
           props: {
@@ -3937,6 +4317,10 @@ plt.show()
           'anyone on the same network (like public WiFi) can read everything you send and receive — ' +
           'passwords, messages, credit card numbers, everything. Look for the padlock icon in your ' +
           'browser to confirm a site uses HTTPS.',
+        goDeeper:
+          'Symmetric encryption (AES-256): same key for encrypt/decrypt. 14 rounds of substitution and mixing on 128-bit blocks. Brute-forcing 2²⁵⁶ keys: impossible. Asymmetric (RSA): public key encrypts, private decrypts. Password hashing: bcrypt/argon2 use deliberately slow functions (100ms+) with unique salts. HTTPS uses TLS: asymmetric encryption exchanges a symmetric session key, then symmetric encrypts the actual data (faster). The padlock icon in your browser means this handshake succeeded.',
+        advanced:
+          'Post-quantum cryptography: NIST selected CRYSTALS-Kyber (lattice-based key exchange) and Dilithium (signatures). **Homomorphic encryption** computes on encrypted data — enabling privacy-preserving analytics. **Zero-knowledge proofs** prove knowledge without revealing it (used in crypto privacy, potential for age verification). End-to-end encryption (Signal protocol, WhatsApp) ensures only sender and receiver can read messages — even the service provider cannot decrypt. Forward secrecy generates unique session keys so past communications remain secure even if long-term keys are later compromised.',
       },
       {
         title: 'Common Threats: Phishing, Malware, and Social Engineering',
@@ -3958,6 +4342,10 @@ plt.show()
           'password, or a USB drive labeled "Employee Salaries" left in a parking lot (curiosity makes ' +
           'people plug it in, and it installs malware). The common thread is that attackers exploit human ' +
           'psychology — trust, fear, curiosity, helpfulness — rather than technical vulnerabilities.',
+        goDeeper:
+          'Phishing emails mimic legitimate senders — check the actual sender address (not display name), hover over links before clicking, be suspicious of urgency ("Your account will be closed in 24 hours!"). **Malware** types: virus (attaches to programs, requires user action), worm (self-propagating across networks), trojan (disguised as legitimate software), ransomware (encrypts files, demands payment). Defense: keep software updated (patches fix known vulnerabilities), use antivirus, don\'t download from untrusted sources, enable automatic updates.',
+        advanced:
+          'Social engineering exploits human psychology rather than technical vulnerabilities. **Pretexting** (creating a fake scenario to extract information), **baiting** (leaving infected USB drives in parking lots), **tailgating** (following authorized personnel through secure doors), and **vishing** (phone phishing) all bypass technical defenses. Defense requires security awareness training — organizations that conduct regular simulated phishing exercises reduce click rates from ~30% to ~5%. The weakest link in any security system is usually human behavior, which is why security culture matters more than technology alone.',
         diagram: 'FlowchartDiagram',
         interactive: {
           type: 'matching',
@@ -3992,6 +4380,10 @@ plt.show()
           'Turn off location sharing unless an app genuinely needs it. Limit who can see your posts and ' +
           'profile information. Think of personal data as currency: do not hand it out for free unless ' +
           'you understand the trade-off.',
+        goDeeper:
+          'Password best practices: use a password manager (Bitwarden, 1Password), generate unique 16+ character passwords for each site, enable 2FA everywhere (authenticator app > SMS). Personal data hygiene: minimize information shared on social media (birthdate, mother\'s maiden name — common security questions), use privacy-focused search engines and browsers, review app permissions regularly. Network safety: avoid public WiFi for sensitive transactions (or use a VPN), verify HTTPS before entering credentials, log out of shared computers.',
+        advanced:
+          'Threat modeling identifies what you need to protect, from whom, and the consequences of failure. For a student: protect social media accounts (reputation), email (password resets), and school accounts (grades). For a developer: protect source code (IP theft), API keys (unauthorized access), and user data (legal liability). Defense in depth layers multiple protections: strong passwords + 2FA + encrypted storage + regular backups + network monitoring. The principle of least privilege grants only the minimum access needed — don\'t run everyday tasks as administrator, don\'t give apps permissions they don\'t need.',
         interactive: {
           type: 'true-false',
           props: {
