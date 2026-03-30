@@ -21,7 +21,7 @@ const registry: Record<string, LevelComponents> = {
   // OurAssam folklore stories
   'tejimola-the-girl-who-became-a-plant': {Level1: lazy(() => import('./TejimolaLevel1')), Level2: lazy(() => import('./TejimolaLevel2')), Level3: lazy(() => import('./TejimolaLevel3')), Level4: lazy(() => import('./TejimolaLevel4')) },
   'golden-deer-of-kamakhya': {Level1: lazy(() => import('./GoldenDeerLevel1')), Level2: lazy(() => import('./GoldenDeerLevel2')), Level3: lazy(() => import('./GoldenDeerLevel3')), Level4: lazy(() => import('./GoldenDeerLevel4')) },
-  'boy-who-talked-to-clouds': { Level1: lazy(() => import('./CloudsLevel1')), Level2: lazy(() => import('./CloudsLevel2')) },
+  'boy-who-talked-to-clouds': { Level1: lazy(() => import('./CloudsLevel1')), Level2: lazy(() => import('./CloudsLevel2')), Level3: lazy(() => import('./CloudsLevel3')), Level4: lazy(() => import('./CloudsLevel4')) },
   'how-majuli-island-was-born': {Level1: lazy(() => import('./MajuliLevel1')), Level2: lazy(() => import('./MajuliLevel2')), Level3: lazy(() => import('./MajuliLevel3')), Level4: lazy(() => import('./MajuliLevel4')) },
   'bamboo-flute-of-nagaland': {Level1: lazy(() => import('./BambooFluteLevel1')), Level2: lazy(() => import('./BambooFluteLevel2')), Level3: lazy(() => import('./BambooFluteLevel3')), Level4: lazy(() => import('./BambooFluteLevel4')) },
   'dancing-deer-of-loktak-lake': {Level1: lazy(() => import('./DancingDeerLevel1')), Level2: lazy(() => import('./DancingDeerLevel2')), Level3: lazy(() => import('./DancingDeerLevel3')), Level4: lazy(() => import('./DancingDeerLevel4')) },
@@ -41,7 +41,7 @@ const registry: Record<string, LevelComponents> = {
   'grandmothers-pitha': {Level1: lazy(() => import('./PithaLevel1')), Level2: lazy(() => import('./PithaLevel2')), Level3: lazy(() => import('./PithaLevel3')), Level4: lazy(() => import('./PithaLevel4')) },
   'lost-temple': {Level1: lazy(() => import('./LostTempleLevel1')), Level2: lazy(() => import('./LostTempleLevel2')), Level3: lazy(() => import('./LostTempleLevel3')), Level4: lazy(() => import('./LostTempleLevel4')) },
   'peacocks-dance': {Level1: lazy(() => import('./PeacockLevel1')), Level2: lazy(() => import('./PeacockLevel2')), Level3: lazy(() => import('./PeacockLevel3')), Level4: lazy(() => import('./PeacockLevel4')) },
-  'elephant-mud-bath': {Level1: lazy(() => import('./MugaSilkLevel1')), Level2: lazy(() => import('./MugaSilkLevel2')), Level3: lazy(() => import('./MugaSilkLevel3')), Level4: lazy(() => import('./MugaSilkLevel4')) },
+  'elephant-mud-bath': {Level1: lazy(() => import('./ElephantMudLevel1')), Level2: lazy(() => import('./ElephantMudLevel2')), Level3: lazy(() => import('./ElephantMudLevel3')), Level4: lazy(() => import('./ElephantMudLevel4')) },
   'star-fell-deepor': { Level1: lazy(() => import('./StarDeepoorLevel1')), Level2: lazy(() => import('./StarDeepoorLevel2')) },
   'brave-mithun': {Level1: lazy(() => import('./MithunLevel1')), Level2: lazy(() => import('./MithunLevel2')), Level3: lazy(() => import('./MithunLevel3')), Level4: lazy(() => import('./MithunLevel4')) },
   'seven-sisters': {Level1: lazy(() => import('./SevenSistersLevel1')), Level2: lazy(() => import('./SevenSistersLevel2')), Level3: lazy(() => import('./SevenSistersLevel3')), Level4: lazy(() => import('./SevenSistersLevel4')) },

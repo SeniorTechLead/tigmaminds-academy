@@ -1029,7 +1029,275 @@ print("CAPSTONE COMPLETE: From Tejimola's regeneration story to a")
 print("complete tissue culture experiment plan with protocol,")
 print("statistical power, risk analysis, budget, and contingencies.")`,
       challenge: 'Create experiment plans for three endangered Assamese plant species simultaneously, sharing lab resources (300 vessels total, $3000 budget, one technician). Optimize the allocation of vessels across species to maximize the total number of regenerated plants. This is a resource allocation problem — which species should get more vessels?',
-      successHint: 'You have built a complete Tissue Culture Experiment Planner — from species database to protocol optimization to Monte Carlo risk analysis to budget and timeline planning. This is how real plant biotechnology projects are planned and funded. The story of Tejimola has become a systematic approach to plant regeneration: scientific, quantitative, and actionable.',
+      successHint: 'You have built a complete Tissue Culture Experiment Planner — from species database to protocol optimization to Monte Carlo risk analysis to budget and timeline planning. This is how real plant biotechnology projects are planned and funded.',
+    },
+    {
+      title: 'Capstone Part 5 — Sensitivity analysis and robustness testing',
+      concept: `A model is only as useful as its assumptions are valid. In Part 5, you stress-test your experiment planner by running **sensitivity analysis**: systematically varying each input parameter while holding others constant, to discover which parameters have the largest effect on the outcome.
+
+If a 10% change in auxin concentration changes your success rate by 50%, your experiment is fragile — a small pipetting error could ruin months of work. If a 50% change in temperature only shifts success by 5%, that parameter is robust. Sensitivity analysis tells you where to focus your precision and where you can relax.
+
+This technique is used in every engineering discipline:
+- **Pharmaceutical trials**: which drug doses matter most for efficacy?
+- **Climate models**: which parameters drive the biggest uncertainty in temperature projections?
+- **Finance**: which market variables have the largest impact on portfolio risk?
+
+You will generate **tornado diagrams** (showing which parameters matter most) and **spider plots** (showing how the output changes as each input varies).`,
+      analogy: 'Sensitivity analysis is like testing which ingredients matter most in a recipe. If you double the salt and the dish is ruined, salt is a sensitive parameter. If you double the oregano and it tastes the same, oregano is robust. You learn where to be careful and where to be casual.',
+      storyConnection: 'In Tejimola\'s story, each plant form survived or was destroyed by a single factor (the stepmother\'s axe, the location). In the lab, sensitivity analysis reveals which factors are the "axes" that can destroy your experiment and which are safely flexible.',
+      checkQuestion: 'If sensitivity analysis shows that contamination rate is the most impactful parameter but you cannot control it below 15%, what should you do?',
+      checkAnswer: 'You have several options: (1) increase sample size to absorb losses statistically, (2) invest in better sterile technique equipment (laminar flow hood, autoclaving protocols), (3) use antibiotics/fungicides in the medium to suppress contaminants, or (4) redesign the experiment to use a more contamination-tolerant culture method (e.g., temporary immersion bioreactors). The sensitivity analysis does not fix the problem — it tells you which problem to fix first.',
+      codeIntro: 'Run one-at-a-time sensitivity analysis on the experiment planner and generate tornado + spider plots.',
+      code: `import numpy as np
+import matplotlib.pyplot as plt
+
+np.random.seed(42)
+
+# Baseline parameters for the tissue culture model
+baseline = {
+    'auxin': 2.0,      # mg/L
+    'cytokinin': 1.0,  # mg/L
+    'sucrose': 30.0,   # g/L
+    'temp': 25.0,      # Celsius
+    'light': 16.0,     # hours/day
+    'contam_rate': 0.10 # 10% contamination
+}
+
+def predict_success(params):
+    """Simplified success rate model based on hormone and environment."""
+    a, c = params['auxin'], params['cytokinin']
+    ratio = a / (c + 0.01)
+    # Optimal ratio around 2:1 for callus + shoot formation
+    hormone_score = np.exp(-0.5 * ((np.log10(ratio) - 0.3) / 0.4) ** 2)
+    # Temperature optimum at 25C
+    temp_score = np.exp(-0.5 * ((params['temp'] - 25) / 3) ** 2)
+    # Light optimum at 16h
+    light_score = np.exp(-0.5 * ((params['light'] - 16) / 4) ** 2)
+    # Sucrose optimum at 30 g/L
+    sucrose_score = np.exp(-0.5 * ((params['sucrose'] - 30) / 10) ** 2)
+    # Contamination reduces success linearly
+    contam_penalty = 1 - params['contam_rate']
+
+    return hormone_score * temp_score * light_score * sucrose_score * contam_penalty
+
+# One-at-a-time sensitivity: vary each by +/- 30%
+perturbation = 0.30
+baseline_success = predict_success(baseline)
+
+sensitivities = {}
+for param in baseline:
+    low_params = dict(baseline)
+    high_params = dict(baseline)
+    low_params[param] = baseline[param] * (1 - perturbation)
+    high_params[param] = baseline[param] * (1 + perturbation)
+    low_val = predict_success(low_params)
+    high_val = predict_success(high_params)
+    sensitivities[param] = (low_val - baseline_success, high_val - baseline_success)
+
+# Tornado diagram
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5))
+fig.patch.set_facecolor('#1f2937')
+
+sorted_params = sorted(sensitivities.keys(),
+    key=lambda p: abs(sensitivities[p][1] - sensitivities[p][0]))
+y_pos = range(len(sorted_params))
+colors_low = '#ef4444'
+colors_high = '#22c55e'
+
+ax1.set_facecolor('#111827')
+for i, param in enumerate(sorted_params):
+    low, high = sensitivities[param]
+    ax1.barh(i, low, color=colors_low, height=0.6, alpha=0.8)
+    ax1.barh(i, high, color=colors_high, height=0.6, alpha=0.8)
+ax1.set_yticks(list(y_pos))
+ax1.set_yticklabels(sorted_params, color='white', fontsize=10)
+ax1.set_xlabel('Change in success rate', color='white')
+ax1.set_title('Tornado Diagram: Which Parameters Matter Most?',
+              color='white', fontsize=11)
+ax1.axvline(0, color='gray', linewidth=0.5)
+ax1.tick_params(colors='gray')
+ax1.legend(['-30%', '+30%'], facecolor='#1f2937', labelcolor='white', loc='lower right')
+
+# Spider plot: vary each parameter from -50% to +50%
+ax2.set_facecolor('#111827')
+sweep = np.linspace(-0.5, 0.5, 50)
+colors_spider = ['#ef4444', '#3b82f6', '#22c55e', '#f59e0b', '#a855f7', '#f472b6']
+
+for idx, param in enumerate(baseline):
+    values = []
+    for delta in sweep:
+        test_params = dict(baseline)
+        test_params[param] = baseline[param] * (1 + delta)
+        values.append(predict_success(test_params))
+    ax2.plot(sweep * 100, values, color=colors_spider[idx], linewidth=2,
+             label=param, alpha=0.9)
+
+ax2.axhline(baseline_success, color='gray', linewidth=0.5, linestyle='--')
+ax2.set_xlabel('Parameter change (%)', color='white')
+ax2.set_ylabel('Predicted success rate', color='white')
+ax2.set_title('Spider Plot: Parameter Sensitivity', color='white', fontsize=11)
+ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
+ax2.tick_params(colors='gray')
+
+plt.tight_layout()
+plt.show()
+
+print(f"Baseline success rate: {baseline_success:.3f}")
+print()
+print("Sensitivity ranking (most to least impactful):")
+for param in reversed(sorted_params):
+    low, high = sensitivities[param]
+    swing = abs(high - low)
+    print(f"  {param:<15}: swing = {swing:.4f} ({swing/baseline_success*100:.1f}%)")`,
+      challenge: 'Run a two-parameter interaction analysis: vary auxin and cytokinin together on a 20x20 grid. Create a heatmap showing success rate for each combination. Does the optimal auxin concentration depend on the cytokinin level? If so, the parameters interact (they are not independent).',
+      successHint: 'Sensitivity analysis transforms your model from a black box into an interpretable decision tool. You now know which parameters to control precisely and which can be approximate.',
+    },
+    {
+      title: 'Capstone Part 6 — Dashboard and final synthesis',
+      concept: `In the final part, you synthesize everything into a single **experiment dashboard**: one visualization that a lab manager could look at and make a go/no-go decision.
+
+The dashboard integrates:
+- **Protocol summary**: species, optimal hormones, medium composition
+- **Success prediction**: expected yield with confidence intervals
+- **Risk heatmap**: which parameters pose the greatest risk
+- **Budget breakdown**: cost per regenerated plant
+- **Timeline**: Gantt-chart-style representation of experiment phases
+
+This is the culmination of the capstone: from understanding totipotency (Part 1) to protocol optimization (Part 2) to statistical power (Part 3) to complete planning (Part 4) to robustness testing (Part 5) to this final presentation layer.
+
+In real labs, decisions worth millions of dollars are made from dashboards like this. The ability to synthesize complex data into a clear, actionable visualization is one of the most valuable skills in science and engineering.`,
+      analogy: 'A dashboard is like the cockpit of an airplane. The pilot does not need to understand every wire and circuit — but they need every critical instrument visible at a glance: altitude, speed, fuel, heading. Your experiment dashboard puts the critical metrics where the lab manager can see them instantly.',
+      storyConnection: 'Tejimola\'s story began with a single girl in a garden. Your capstone ends with a complete system for planning, predicting, and managing plant regeneration experiments. The journey from myth to method is complete — from one girl\'s refusal to stop growing, to a scientific framework for helping any plant grow back.',
+      checkQuestion: 'What makes a good scientific dashboard different from a pretty chart?',
+      checkAnswer: 'A good dashboard: (1) answers a specific question (go/no-go for this experiment), (2) shows uncertainty (confidence intervals, not just point estimates), (3) highlights the most important information (not everything equally), (4) is honest about limitations (what the model cannot predict), and (5) supports action (what should we do next?). A pretty chart just looks nice. A good dashboard drives decisions.',
+      codeIntro: 'Build the final experiment dashboard that synthesizes all previous work into an actionable one-page summary.',
+      code: `import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.patches import FancyBboxPatch
+
+np.random.seed(42)
+
+# =====================================================
+# FINAL DASHBOARD: Tissue Culture Experiment Summary
+# =====================================================
+
+species = 'Tulsi (Ocimum tenuiflorum)'
+opt_auxin, opt_cytokinin = 2.0, 1.0
+target_plants = 100
+success_rate = 0.72
+mc_mean, mc_std = 86, 14
+ci_low, ci_high = 62, 108
+total_cost = 1850
+timeline_weeks = 14
+p_target = 0.78
+
+# Sensitivity rankings
+param_impact = [
+    ('auxin:cytokinin ratio', 0.35),
+    ('contamination rate', 0.28),
+    ('temperature', 0.15),
+    ('sucrose concentration', 0.12),
+    ('light hours', 0.06),
+    ('pH', 0.04),
+]
+
+# Timeline phases
+phases = [
+    ('Explant prep', 0, 1, '#3b82f6'),
+    ('Callus induction', 1, 5, '#22c55e'),
+    ('Shoot regeneration', 5, 9, '#f59e0b'),
+    ('Root induction', 9, 11, '#a855f7'),
+    ('Acclimatization', 11, 14, '#ef4444'),
+]
+
+fig = plt.figure(figsize=(14, 10))
+fig.patch.set_facecolor('#1f2937')
+fig.suptitle(f'TISSUE CULTURE EXPERIMENT DASHBOARD',
+             color='white', fontsize=15, fontweight='bold', y=0.98)
+fig.text(0.5, 0.95, f'Species: {species}', ha='center', color='#94a3b8', fontsize=11)
+
+# 1. Yield distribution (top left)
+ax1 = fig.add_axes([0.05, 0.55, 0.28, 0.33])
+ax1.set_facecolor('#111827')
+mc_data = np.random.normal(mc_mean, mc_std, 5000).clip(0)
+ax1.hist(mc_data, bins=40, color='#22c55e', alpha=0.7, edgecolor='none')
+ax1.axvline(target_plants, color='#ef4444', linewidth=2, linestyle='--', label=f'Target: {target_plants}')
+ax1.axvline(mc_mean, color='#fbbf24', linewidth=2, label=f'Mean: {mc_mean}')
+ax1.fill_betweenx([0, 400], ci_low, ci_high, alpha=0.15, color='#22c55e')
+ax1.set_title('Predicted Yield Distribution', color='white', fontsize=10)
+ax1.set_xlabel('Plants regenerated', color='white', fontsize=9)
+ax1.legend(facecolor='#1f2937', labelcolor='white', fontsize=7, loc='upper left')
+ax1.tick_params(colors='gray', labelsize=8)
+
+# 2. Key metrics (top center)
+ax2 = fig.add_axes([0.38, 0.55, 0.25, 0.33])
+ax2.set_facecolor('#111827')
+ax2.axis('off')
+metrics = [
+    ('Success rate', f'{success_rate*100:.0f}%', '#22c55e'),
+    ('Expected yield', f'{mc_mean} +/- {mc_std}', '#3b82f6'),
+    ('P(reach target)', f'{p_target*100:.0f}%', '#f59e0b'),
+    ('Total cost', f'\${total_cost:,}', '#a855f7'),
+    ('Cost per plant', f'\${total_cost/mc_mean:.0f}', '#f472b6'),
+    ('Timeline', f'{timeline_weeks} weeks', '#22d3ee'),
+]
+ax2.text(0.5, 0.98, 'KEY METRICS', transform=ax2.transAxes,
+         ha='center', color='#fbbf24', fontsize=11, fontweight='bold')
+for i, (label, value, color) in enumerate(metrics):
+    y = 0.85 - i * 0.14
+    ax2.text(0.05, y, label, transform=ax2.transAxes, color='gray', fontsize=9)
+    ax2.text(0.95, y, value, transform=ax2.transAxes,
+             ha='right', color=color, fontsize=10, fontweight='bold')
+
+# 3. Risk heatmap (top right)
+ax3 = fig.add_axes([0.68, 0.55, 0.28, 0.33])
+ax3.set_facecolor('#111827')
+params = [p[0] for p in param_impact]
+impacts = [p[1] for p in param_impact]
+colors_risk = ['#ef4444' if v > 0.25 else '#f59e0b' if v > 0.1 else '#22c55e' for v in impacts]
+bars = ax3.barh(range(len(params)), impacts, color=colors_risk, height=0.6)
+ax3.set_yticks(range(len(params)))
+ax3.set_yticklabels(params, color='white', fontsize=8)
+ax3.set_xlabel('Impact on success', color='white', fontsize=9)
+ax3.set_title('Parameter Risk Ranking', color='white', fontsize=10)
+ax3.tick_params(colors='gray', labelsize=8)
+ax3.invert_yaxis()
+
+# 4. Timeline / Gantt (bottom)
+ax4 = fig.add_axes([0.05, 0.08, 0.9, 0.35])
+ax4.set_facecolor('#111827')
+for i, (name, start, end, color) in enumerate(phases):
+    ax4.barh(i, end - start, left=start, color=color, height=0.5, alpha=0.8)
+    ax4.text((start + end) / 2, i, name, ha='center', va='center',
+             color='white', fontsize=9, fontweight='bold')
+ax4.set_yticks(range(len(phases)))
+ax4.set_yticklabels(['' for _ in phases])
+ax4.set_xlabel('Weeks', color='white', fontsize=10)
+ax4.set_title('Experiment Timeline', color='white', fontsize=10)
+ax4.tick_params(colors='gray', labelsize=9)
+ax4.set_xlim(0, timeline_weeks + 1)
+ax4.invert_yaxis()
+
+# Decision box
+verdict = 'GO' if p_target > 0.7 and total_cost < 2500 else 'REVIEW'
+verdict_color = '#22c55e' if verdict == 'GO' else '#f59e0b'
+fig.text(0.5, 0.47, f'DECISION: {verdict}', ha='center',
+         color=verdict_color, fontsize=14, fontweight='bold',
+         bbox=dict(boxstyle='round,pad=0.4', facecolor=verdict_color, alpha=0.15))
+
+plt.show()
+
+print("EXPERIMENT DASHBOARD COMPLETE")
+print(f"Decision: {verdict}")
+print(f"  Success probability: {p_target:.0%}")
+print(f"  Expected yield: {mc_mean} plants (target: {target_plants})")
+print(f"  Budget: \${total_cost:,} (\${total_cost/mc_mean:.0f}/plant)")
+print(f"  Timeline: {timeline_weeks} weeks")
+print()
+print("CAPSTONE COMPLETE: From Tejimola's garden to a complete")
+print("scientific planning framework for plant regeneration.")`,
+      challenge: 'Add a "what-if" panel to the dashboard: if contamination doubles from 10% to 20%, how do all the metrics change? Show both scenarios side by side. This is scenario planning — the final skill that separates analysis from decision-making.',
+      successHint: 'You have completed the full journey: from a folktale about a girl who became a plant, through cell biology, genetics, tissue culture, Monte Carlo simulation, sensitivity analysis, and finally a professional experiment dashboard. This is computational biology in action.',
     },
   ];
 

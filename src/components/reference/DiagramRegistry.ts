@@ -18,6 +18,11 @@ import MugaSilkEndemicDiagram from '../diagrams/MugaSilkEndemicDiagram';
 import ActivitySilkTestDiagram from '../diagrams/ActivitySilkTestDiagram';
 import FoodWebDiagram from '../diagrams/FoodWebDiagram';
 import RayleighScatteringDiagram from '../diagrams/RayleighScatteringDiagram';
+import MajuliErosionDepositionDiagram from '../diagrams/MajuliErosionDepositionDiagram';
+import MajuliFormationDiagram from '../diagrams/MajuliFormationDiagram';
+import MajuliShrinkingDiagram from '../diagrams/MajuliShrinkingDiagram';
+import MajuliProtectionDiagram from '../diagrams/MajuliProtectionDiagram';
+import ActivityErosionModelDiagram from '../diagrams/ActivityErosionModelDiagram';
 import RiverErosionDiagram from '../diagrams/RiverErosionDiagram';
 import RiverSourceDiagram from '../diagrams/RiverSourceDiagram';
 import RiverTransportDiagram from '../diagrams/RiverTransportDiagram';
@@ -306,6 +311,12 @@ import LoktakSangaiDiagram from '../diagrams/LoktakSangaiDiagram';
 import LoktakDamImpactDiagram from '../diagrams/LoktakDamImpactDiagram';
 import LoktakConservationDiagram from '../diagrams/LoktakConservationDiagram';
 import ActivityWetlandModelDiagram from '../diagrams/ActivityWetlandModelDiagram';
+// Bamboo Flute of Nagaland
+import FluteStandingWaveDiagram from '../diagrams/FluteStandingWaveDiagram';
+import FluteFingerHoleDiagram from '../diagrams/FluteFingerHoleDiagram';
+import FluteOvertonesDiagram from '../diagrams/FluteOvertonesDiagram';
+import FluteDesignDiagram from '../diagrams/FluteDesignDiagram';
+import ActivityFluteBuildDiagram from '../diagrams/ActivityFluteBuildDiagram';
 import BambooVortexDiagram from '../diagrams/BambooVortexDiagram';
 import BambooResonanceDiagram from '../diagrams/BambooResonanceDiagram';
 import BambooHarmonicsDiagram from '../diagrams/BambooHarmonicsDiagram';
@@ -317,6 +328,12 @@ import HilsaOlfactoryDiagram from '../diagrams/HilsaOlfactoryDiagram';
 import HilsaPopulationDiagram from '../diagrams/HilsaPopulationDiagram';
 import HilsaRiverHealthDiagram from '../diagrams/HilsaRiverHealthDiagram';
 import ActivityFishCountDiagram from '../diagrams/ActivityFishCountDiagram';
+// Why Fish Jump in the Barak River
+import FishOxygenDiagram from '../diagrams/FishOxygenDiagram';
+import FishJumpReasonsDiagram from '../diagrams/FishJumpReasonsDiagram';
+import FishBiomechanicsDiagram from '../diagrams/FishBiomechanicsDiagram';
+import FishRiverHealthDiagram from '../diagrams/FishRiverHealthDiagram';
+import ActivityFishObserveDiagram from '../diagrams/ActivityFishObserveDiagram';
 import AltitudeAdaptationDiagram from '../diagrams/AltitudeAdaptationDiagram';
 import BanyanRootsDiagram from '../diagrams/BanyanRootsDiagram';
 import StarBrightnessStepDiagram from '../diagrams/StarBrightnessStepDiagram';
@@ -545,6 +562,49 @@ import RhythmBeatDiagram from '../diagrams/RhythmBeatDiagram';
 import DrumVibrationDiagram from '../diagrams/DrumVibrationDiagram';
 import ColorSpectrumArtDiagram from '../diagrams/ColorSpectrumArtDiagram';
 import PerspectiveDiagram from '../diagrams/PerspectiveDiagram';
+// Pitcher Plant — Carnivorous Plants & Adaptation
+import PitcherNutrientDiagram from '../diagrams/PitcherNutrientDiagram';
+import PitcherAnatomyDiagram from '../diagrams/PitcherAnatomyDiagram';
+import PitcherSurfaceTensionDiagram from '../diagrams/PitcherSurfaceTensionDiagram';
+import PitcherSpeciesDiagram from '../diagrams/PitcherSpeciesDiagram';
+import ActivityTrapModelDiagram from '../diagrams/ActivityTrapModelDiagram';
+// Tejimola — Plant Biology & Genetics
+import TejimolaPlantReproDiagram from '../diagrams/TejimolaPlantReproDiagram';
+import TejimolaDNADiagram from '../diagrams/TejimolaDNADiagram';
+import TejimolaMutationDiagram from '../diagrams/TejimolaMutationDiagram';
+import TejimolaTraditionalMedicineDiagram from '../diagrams/TejimolaTraditionalMedicineDiagram';
+import ActivitySeedGrowDiagram from '../diagrams/ActivitySeedGrowDiagram';
+// Golden Deer of Kamakhya — Optics & Light
+import DeerLightSpectrumDiagram from '../diagrams/DeerLightSpectrumDiagram';
+import DeerReflectionDiagram from '../diagrams/DeerReflectionDiagram';
+import DeerRefractionDiagram from '../diagrams/DeerRefractionDiagram';
+import DeerOpticalIllusionDiagram from '../diagrams/DeerOpticalIllusionDiagram';
+import ActivityPrismDiagram from '../diagrams/ActivityPrismDiagram';
+// Red Panda Mask — Evolution & Camouflage
+import PandaCamouflageDiagram from '../diagrams/PandaCamouflageDiagram';
+import PandaSelectionDiagram from '../diagrams/PandaSelectionDiagram';
+import PandaMaskFunctionDiagram from '../diagrams/PandaMaskFunctionDiagram';
+import PandaConvergentDiagram from '../diagrams/PandaConvergentDiagram';
+import ActivityCamouflageGameDiagram from '../diagrams/ActivityCamouflageGameDiagram';
+// Elephant Mud Bath — Thermoregulation
+import ElephantThermoregDiagram from '../diagrams/ElephantThermoregDiagram';
+import ElephantHeatTransferDiagram from '../diagrams/ElephantHeatTransferDiagram';
+import ElephantSurfaceAreaDiagram from '../diagrams/ElephantSurfaceAreaDiagram';
+import ElephantEcosystemDiagram from '../diagrams/ElephantEcosystemDiagram';
+import ActivityCoolingExperimentDiagram from '../diagrams/ActivityCoolingExperimentDiagram';
+// Boy Who Talked to Clouds — Meteorology
+import CloudsFormationDiagram from '../diagrams/CloudsFormationDiagram';
+import CloudsFamilyDiagram from '../diagrams/CloudsFamilyDiagram';
+import CloudsWaterEngineDiagram from '../diagrams/CloudsWaterEngineDiagram';
+import CloudsForecastDiagram from '../diagrams/CloudsForecastDiagram';
+import ActivityCloudWatchDiagram from '../diagrams/ActivityCloudWatchDiagram';
+
+// Hornbill's Crown — Ornithology & Animal Behavior
+import HornbillCasqueDiagram from '../diagrams/HornbillCasqueDiagram';
+import HornbillNestDiagram from '../diagrams/HornbillNestDiagram';
+import HornbillKeystoneDiagram from '../diagrams/HornbillKeystoneDiagram';
+import HornbillCallDiagram from '../diagrams/HornbillCallDiagram';
+import ActivityBirdWatchDiagram from '../diagrams/ActivityBirdWatchDiagram';
 
 const registry: Record<string, ComponentType> = {
   SineWaveDiagram,
@@ -983,6 +1043,12 @@ const registry: Record<string, ComponentType> = {
   ForestScalingDiagram,
   ActivityTreePlantDiagram,
   // Northeast India: Bamboo Taught Wind
+  // Bamboo Flute of Nagaland
+  FluteStandingWaveDiagram,
+  FluteFingerHoleDiagram,
+  FluteOvertonesDiagram,
+  FluteDesignDiagram,
+  ActivityFluteBuildDiagram,
   BambooVortexDiagram,
   BambooResonanceDiagram,
   BambooHarmonicsDiagram,
@@ -1093,6 +1159,54 @@ const registry: Record<string, ComponentType> = {
   DrumVibrationDiagram,
   ColorSpectrumArtDiagram,
   PerspectiveDiagram,
+  // Lesson: How Majuli Island Was Born
+  MajuliErosionDepositionDiagram,
+  MajuliFormationDiagram,
+  MajuliShrinkingDiagram,
+  MajuliProtectionDiagram,
+  ActivityErosionModelDiagram,
+  // Tejimola — Plant Biology & Genetics
+  TejimolaPlantReproDiagram,
+  TejimolaDNADiagram,
+  TejimolaMutationDiagram,
+  TejimolaTraditionalMedicineDiagram,
+  ActivitySeedGrowDiagram,
+  // Lesson: Golden Deer of Kamakhya — Optics & Light
+  DeerLightSpectrumDiagram,
+  DeerReflectionDiagram,
+  DeerRefractionDiagram,
+  DeerOpticalIllusionDiagram,
+  ActivityPrismDiagram,
+  // Red Panda Mask — Evolution & Camouflage
+  PandaCamouflageDiagram,
+  PandaSelectionDiagram,
+  PandaMaskFunctionDiagram,
+  PandaConvergentDiagram,
+  ActivityCamouflageGameDiagram,
+  // Elephant Mud Bath — Thermoregulation
+  ElephantThermoregDiagram,
+  ElephantHeatTransferDiagram,
+  ElephantSurfaceAreaDiagram,
+  ElephantEcosystemDiagram,
+  ActivityCoolingExperimentDiagram,
+  // Boy Who Talked to Clouds — Meteorology
+  CloudsFormationDiagram,
+  CloudsFamilyDiagram,
+  CloudsWaterEngineDiagram,
+  CloudsForecastDiagram,
+  ActivityCloudWatchDiagram,
+  // Hornbill's Crown — Ornithology & Animal Behavior
+  HornbillCasqueDiagram,
+  HornbillNestDiagram,
+  HornbillKeystoneDiagram,
+  HornbillCallDiagram,
+  ActivityBirdWatchDiagram,
+  // Pitcher Plant — Carnivorous Plants & Adaptation
+  PitcherNutrientDiagram,
+  PitcherAnatomyDiagram,
+  PitcherSurfaceTensionDiagram,
+  PitcherSpeciesDiagram,
+  ActivityTrapModelDiagram,
 };
 
 export default registry;
