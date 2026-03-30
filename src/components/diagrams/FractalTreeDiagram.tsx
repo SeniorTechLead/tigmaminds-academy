@@ -57,7 +57,7 @@ export default function FractalTreeDiagram() {
 
   return (
     <div className="w-full max-w-lg mx-auto my-6">
-      <svg viewBox="0 0 500 400" className="w-full" aria-label="Fractal tree diagram">
+      <svg viewBox="0 0 525 420" className="w-full" aria-label="Fractal tree diagram">
         {branches.map((b, i) => (
           <line
             key={i}

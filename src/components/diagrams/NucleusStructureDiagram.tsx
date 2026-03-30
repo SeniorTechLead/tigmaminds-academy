@@ -11,7 +11,7 @@ export default function NucleusStructureDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 350 300" className="w-full max-w-md mx-auto" role="img" aria-label="Nucleus structure showing protons and neutrons held by strong nuclear force">
+      <svg viewBox="0 0 400 340" className="w-full max-w-md mx-auto" role="img" aria-label="Nucleus structure showing protons and neutrons held by strong nuclear force">
         <text x="175" y="25" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="14" fontWeight="bold">Nucleus Structure</text>
 
         {/* Atom boundary (much larger, dashed) */}

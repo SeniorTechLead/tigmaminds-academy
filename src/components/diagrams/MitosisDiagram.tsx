@@ -1,7 +1,7 @@
 export default function MitosisDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 540 200" className="w-full max-w-xl mx-auto" role="img" aria-label="Mitosis stages diagram">
+      <svg viewBox="0 0 605 242" className="w-full max-w-xl mx-auto" role="img" aria-label="Mitosis stages diagram">
         {/* Title */}
         <text x="270" y="16" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">Stages of Mitosis</text>
 

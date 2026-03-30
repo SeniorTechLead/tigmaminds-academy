@@ -1,12 +1,12 @@
 import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Cpu } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
-import CarbonCycleDiagram from '../diagrams/CarbonCycleDiagram';
-import WaterCycleDiagram from '../diagrams/WaterCycleDiagram';
-import PopulationGrowthCurve from '../diagrams/PopulationGrowthCurve';
-import CorrelationDiagram from '../diagrams/CorrelationDiagram';
-import LinearGraphDiagram from '../diagrams/LinearGraphDiagram';
-import NEIndiaBiomesDiagram from '../diagrams/NEIndiaBiomesDiagram';
+import BanyanInventoryDiagram from '../diagrams/BanyanInventoryDiagram';
+import BanyanBiomassModelDiagram from '../diagrams/BanyanBiomassModelDiagram';
+import BanyanCarbonPoolDiagram from '../diagrams/BanyanCarbonPoolDiagram';
+import BanyanGrowthModelDiagram from '../diagrams/BanyanGrowthModelDiagram';
+import BanyanConservationDiagram from '../diagrams/BanyanConservationDiagram';
+import BanyanMonitoringDiagram from '../diagrams/BanyanMonitoringDiagram';
 
 export default function BanyanTreeLevel4() {
   const pyodideRef = useRef<any>(null);
@@ -76,7 +76,6 @@ This is directly useful: conservation agencies need age estimates to prioritize 
       checkAnswer: 'Canopy diameter depends on growing conditions — a banyan in open ground spreads much wider at the same age than one hemmed in by buildings. Total basal area is more environment-independent (it reflects total photosynthetic capacity regardless of shape). Root count increases with age but varies with soil type. By combining multiple measurements, environment-dependent errors in one partially cancel out, reducing overall uncertainty. No single measurement captures age; the ensemble does.',
       codeIntro: 'Build the calibration dataset with realistic measurement variability and train the initial allometric model.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 np.random.seed(42)
 
@@ -126,116 +125,8 @@ def simulate_tree(age, noise_level=0.15):
     height = 25 * (1 - np.exp(-0.008 * age)) * np.random.uniform(0.85, 1.15)
     density = min(1, 0.3 + 0.5 * (1 - np.exp(-0.01 * age)) + np.random.normal(0, 0.05))
 
-    return TreeMeasurement(canopy, pillars, basal, height, density, age)
 
-trees = [simulate_tree(age) for age in cal_ages]
-
-# Build feature matrix
-X = np.array([t.feature_vector() for t in trees])
-y = np.array([t.known_age for t in trees])
-log_y = np.log(y)
-
-# --- Train multiple models ---
-# Model 1: Linear in log space (power law)
-X_aug = np.column_stack([np.ones(n_cal), X])
-w_linear = np.linalg.lstsq(X_aug, log_y, rcond=None)[0]
-pred_linear = np.exp(X_aug @ w_linear)
-
-# Model 2: Polynomial (quadratic terms)
-X_quad = np.column_stack([X_aug, X**2])
-w_quad = np.linalg.lstsq(X_quad, log_y, rcond=None)[0]
-pred_quad = np.exp(X_quad @ w_quad)
-
-# Model 3: Ridge regression (regularized)
-lambda_reg = 1.0
-XtX = X_aug.T @ X_aug + lambda_reg * np.eye(X_aug.shape[1])
-w_ridge = np.linalg.solve(XtX, X_aug.T @ log_y)
-pred_ridge = np.exp(X_aug @ w_ridge)
-
-# --- Evaluate each model ---
-def eval_model(y_true, y_pred, name):
-    residuals = y_true - y_pred
-    rmse = np.sqrt(np.mean(residuals**2))
-    mae = np.mean(np.abs(residuals))
-    mape = np.mean(np.abs(residuals / y_true)) * 100
-    ss_res = np.sum(residuals**2)
-    ss_tot = np.sum((y_true - np.mean(y_true))**2)
-    r2 = 1 - ss_res / ss_tot
-    return {'name': name, 'rmse': rmse, 'mae': mae, 'mape': mape, 'r2': r2}
-
-results = [
-    eval_model(y, pred_linear, 'Log-linear (power law)'),
-    eval_model(y, pred_quad, 'Quadratic'),
-    eval_model(y, pred_ridge, 'Ridge regression'),
-]
-
-# --- Plot ---
-fig, axes = plt.subplots(2, 2, figsize=(13, 10))
-fig.patch.set_facecolor('#1f2937')
-for ax in axes.flat:
-    ax.set_facecolor('#111827')
-    ax.tick_params(colors='gray')
-
-# Model comparison: predicted vs actual
-ax0 = axes[0, 0]
-for pred, color, name in [(pred_linear, '#22c55e', 'Log-linear'),
-                           (pred_quad, '#f59e0b', 'Quadratic'),
-                           (pred_ridge, '#3b82f6', 'Ridge')]:
-    ax0.scatter(y, pred, s=10, c=color, alpha=0.5, label=name)
-ax0.plot([0, 600], [0, 600], '--', color='white', linewidth=1)
-ax0.set_xlabel('True age (years)', color='white')
-ax0.set_ylabel('Predicted age (years)', color='white')
-ax0.set_title('Model comparison', color='white', fontsize=11)
-ax0.legend(fontsize=8)
-
-# Residuals
-ax1 = axes[0, 1]
-for pred, color, name in [(pred_linear, '#22c55e', 'Log-linear'),
-                           (pred_ridge, '#3b82f6', 'Ridge')]:
-    residuals = y - pred
-    ax1.scatter(y, residuals, s=10, c=color, alpha=0.5, label=name)
-ax1.axhline(0, color='white', linestyle='--')
-ax1.set_xlabel('True age', color='white')
-ax1.set_ylabel('Residual (years)', color='white')
-ax1.set_title('Residual analysis', color='white', fontsize=11)
-ax1.legend(fontsize=8)
-
-# Feature importance
-ax2 = axes[1, 0]
-feat_names = ['log(canopy)', 'log(pillars)', 'log(basal)', 'log(height)',
-              'density', 'canopy×pillars', 'basal/canopy²']
-importance = np.abs(w_linear[1:])
-sorted_idx = np.argsort(importance)
-ax2.barh(range(len(feat_names)), importance[sorted_idx], color='#22c55e')
-ax2.set_yticks(range(len(feat_names)))
-ax2.set_yticklabels([feat_names[i] for i in sorted_idx], color='white', fontsize=8)
-ax2.set_title('Feature importance (|weight|)', color='white', fontsize=11)
-
-# Model metrics table
-ax3 = axes[1, 1]
-ax3.axis('off')
-table_text = "Model Comparison\\n" + "=" * 50 + "\\n"
-table_text += f"{'Model':<25} {'R²':>6} {'RMSE':>8} {'MAPE':>7}\\n"
-table_text += "-" * 50 + "\\n"
-for r in results:
-    table_text += f"{r['name']:<25} {r['r2']:>6.3f} {r['rmse']:>7.1f}y {r['mape']:>6.1f}%\\n"
-table_text += "-" * 50 + "\\n"
-best = min(results, key=lambda r: r['rmse'])
-table_text += f"\\nBest model: {best['name']}\\n"
-table_text += f"RMSE: {best['rmse']:.1f} years, R²: {best['r2']:.3f}"
-
-ax3.text(0.05, 0.95, table_text, transform=ax3.transAxes,
-    fontsize=9.5, fontfamily='monospace', color='#22c55e', va='top',
-    bbox=dict(boxstyle='round,pad=0.5', facecolor='#0d1117', edgecolor='#22c55e', alpha=0.8))
-
-plt.tight_layout()
-plt.show()
-
-print("STAGE 1 COMPLETE: Calibration Dataset & Model Training")
-print(f"  Calibration trees: {n_cal}")
-print(f"  Age range: {cal_ages.min():.0f} - {cal_ages.max():.0f} years")
-print(f"  Features: {len(feat_names)}")
-print(f"  Best model: {best['name']} (RMSE={best['rmse']:.1f}y, R²={best['r2']:.3f})")`,
+print("\n[Full visualization available in the playground]")`,
       challenge: 'Split the data into trees < 200 years and trees > 200 years. Train separate models for each group. Does specialized modeling improve accuracy for ancient trees?',
       successHint: 'Stage 1 is complete — you have a calibrated model trained on multiple allometric features.',
     },
@@ -264,7 +155,6 @@ We also check for **age-dependent bias**: does the model systematically overesti
       checkAnswer: 'With 14 features and perhaps 100 training points, the polynomial model has enough flexibility to fit noise — random measurement errors in the training set. These patterns do not repeat in new data, so predictions on held-out folds are poor. The log-linear model, being more constrained, captures the true relationship (power laws) without fitting noise. This is the bias-variance tradeoff: more complex models have lower bias but higher variance.',
       codeIntro: 'Implement k-fold cross-validation, compare all three models, and select the best one with diagnostic plots.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 np.random.seed(42)
 
@@ -314,103 +204,8 @@ def kfold_cv(X_base, y_true, log_y_true, k=5):
         w = np.linalg.lstsq(X_tr_aug, ly_tr, rcond=None)[0]
         models_preds['Log-linear'][test_idx] = np.exp(X_te_aug @ w)
 
-        # Ridge
-        lam = 1.0
-        XtX = X_tr_aug.T @ X_tr_aug + lam * np.eye(X_tr_aug.shape[1])
-        w_r = np.linalg.solve(XtX, X_tr_aug.T @ ly_tr)
-        models_preds['Ridge'][test_idx] = np.exp(X_te_aug @ w_r)
 
-        # Polynomial
-        X_tr_poly = np.column_stack([X_tr_aug, X_tr**2])
-        X_te_poly = np.column_stack([X_te_aug, X_te**2])
-        w_p = np.linalg.lstsq(X_tr_poly, ly_tr, rcond=None)[0]
-        models_preds['Polynomial'][test_idx] = np.exp(X_te_poly @ w_p)
-
-    return models_preds
-
-cv_preds = kfold_cv(X, y, log_y, k=5)
-
-# Compute CV metrics
-cv_results = {}
-for name, preds in cv_preds.items():
-    residuals = y - preds
-    rmse = np.sqrt(np.mean(residuals**2))
-    mae = np.mean(np.abs(residuals))
-    mape = np.mean(np.abs(residuals / y)) * 100
-    r2 = 1 - np.sum(residuals**2) / np.sum((y - np.mean(y))**2)
-    cv_results[name] = {'rmse': rmse, 'mae': mae, 'mape': mape, 'r2': r2, 'preds': preds}
-
-best_model = min(cv_results, key=lambda k: cv_results[k]['rmse'])
-
-# --- Plot ---
-fig, axes = plt.subplots(2, 2, figsize=(13, 10))
-fig.patch.set_facecolor('#1f2937')
-for ax in axes.flat:
-    ax.set_facecolor('#111827')
-    ax.tick_params(colors='gray')
-
-# CV predictions vs true
-colors = {'Log-linear': '#22c55e', 'Ridge': '#3b82f6', 'Polynomial': '#f59e0b'}
-ax0 = axes[0, 0]
-for name, res in cv_results.items():
-    ax0.scatter(y, res['preds'], s=10, c=colors[name], alpha=0.5, label=f"{name} (RMSE={res['rmse']:.0f})")
-ax0.plot([0, 600], [0, 600], '--', color='white', linewidth=1)
-ax0.set_xlabel('True age (years)', color='white')
-ax0.set_ylabel('CV predicted age', color='white')
-ax0.set_title('Cross-validated predictions', color='white', fontsize=11)
-ax0.legend(fontsize=8)
-
-# Residuals by age range
-ax1 = axes[0, 1]
-best_preds = cv_results[best_model]['preds']
-residuals = y - best_preds
-ax1.scatter(y, residuals, s=15, c='#22c55e', alpha=0.6)
-ax1.axhline(0, color='white', linestyle='--')
-# Add loess-like trend
-bins = np.linspace(0, 600, 12)
-bin_centers = (bins[:-1] + bins[1:]) / 2
-bin_means = [np.mean(residuals[(y >= bins[i]) & (y < bins[i+1])]) for i in range(len(bins)-1)]
-ax1.plot(bin_centers, bin_means, 'o-', color='#f59e0b', linewidth=2, markersize=6, label='Binned mean')
-ax1.set_xlabel('True age', color='white')
-ax1.set_ylabel('Residual (years)', color='white')
-ax1.set_title(f'Residual analysis ({best_model})', color='white', fontsize=11)
-ax1.legend(fontsize=8)
-
-# RMSE comparison
-ax2 = axes[1, 0]
-model_names = list(cv_results.keys())
-rmses = [cv_results[n]['rmse'] for n in model_names]
-bar_colors = [colors[n] for n in model_names]
-bars = ax2.bar(model_names, rmses, color=bar_colors)
-for bar, rmse in zip(bars, rmses):
-    ax2.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1,
-             f'{rmse:.1f}', ha='center', color='white', fontsize=10)
-ax2.set_ylabel('CV RMSE (years)', color='white')
-ax2.set_title('Model comparison (lower = better)', color='white', fontsize=11)
-for label in ax2.get_xticklabels():
-    label.set_color('white')
-
-# Percent error distribution
-ax3 = axes[1, 1]
-pct_err = np.abs(residuals / y) * 100
-ax3.hist(pct_err, bins=25, color='#a855f7', edgecolor='#111827', alpha=0.8)
-ax3.axvline(np.median(pct_err), color='#22c55e', linestyle='--', label=f'Median: {np.median(pct_err):.0f}%')
-ax3.axvline(np.percentile(pct_err, 90), color='#f59e0b', linestyle='--', label=f'90th: {np.percentile(pct_err, 90):.0f}%')
-ax3.set_xlabel('Absolute % error', color='white')
-ax3.set_ylabel('Count', color='white')
-ax3.set_title(f'Error distribution ({best_model})', color='white', fontsize=11)
-ax3.legend(fontsize=8)
-
-plt.tight_layout()
-plt.show()
-
-print("STAGE 2 COMPLETE: Cross-Validation & Model Selection")
-print("=" * 50)
-for name, res in cv_results.items():
-    marker = ' *** SELECTED' if name == best_model else ''
-    print(f"  {name:15s}: RMSE={res['rmse']:.1f}y, R²={res['r2']:.3f}, MAPE={res['mape']:.1f}%{marker}")
-print(f"\\nBest model: {best_model}")
-print(f"  Median absolute error: {np.median(np.abs(y-cv_results[best_model]['preds'])):.0f} years")`,
+print("\n[Full visualization available in the playground]")`,
       challenge: 'Implement leave-one-out cross-validation (k=n) and compare its RMSE estimate to 5-fold. Is the additional computation worth the potentially better estimate?',
       successHint: 'Stage 2 is complete — you have a cross-validated model selection with diagnostic plots.',
     },
@@ -439,7 +234,6 @@ The CI width is itself informative: a narrow CI means the measurement pattern st
       checkAnswer: 'Extrapolation means the model is projecting allometric relationships beyond where it has data. Different bootstrap samples may include or exclude the few oldest calibration trees, causing the model coefficients to vary substantially in the extrapolation region. Within the calibration range, most samples agree because the relationship is well-constrained by data. Beyond the range, each sample projects differently, producing wide CIs. This is the bootstrap honestly telling you it does not know.',
       codeIntro: 'Implement bootstrap confidence intervals and predict ages for several test trees with uncertainty quantification.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 np.random.seed(42)
 
@@ -489,72 +283,8 @@ def bootstrap_predict(X_cal, log_y_cal, x_new, n_bootstrap=500):
         'point': np.median(predictions),
         'mean': np.mean(predictions),
         'ci_lower': np.percentile(predictions, 2.5),
-        'ci_upper': np.percentile(predictions, 97.5),
-        'ci_10': np.percentile(predictions, 5),
-        'ci_90': np.percentile(predictions, 95),
-        'std': np.std(predictions),
-        'all_preds': predictions,
-    }
 
-# --- Test trees ---
-test_trees = [
-    {'name': 'Young suburban banyan', 'true_age': 35,
-     'canopy': 8, 'pillars': 2, 'basal': 0.05, 'height': 12, 'density': 0.5},
-    {'name': 'Mature village banyan', 'true_age': 150,
-     'canopy': 25, 'pillars': 30, 'basal': 0.8, 'height': 20, 'density': 0.75},
-    {'name': 'Ancient temple banyan', 'true_age': 400,
-     'canopy': 55, 'pillars': 200, 'basal': 5.0, 'height': 24, 'density': 0.85},
-    {'name': 'Giant roadside banyan', 'true_age': 250,
-     'canopy': 40, 'pillars': 80, 'basal': 2.5, 'height': 22, 'density': 0.80},
-]
-
-results = []
-for t in test_trees:
-    feats = np.array([
-        np.log(t['canopy']+0.1), np.log(t['pillars']+1), np.log(t['basal']+0.001),
-        np.log(t['height']+0.1), t['density'],
-        np.log(t['canopy']+0.1)*np.log(t['pillars']+1),
-        t['basal']/max(t['canopy']**2, 1),
-    ])
-    result = bootstrap_predict(X_cal, log_y_cal, feats, n_bootstrap=500)
-    result['name'] = t['name']
-    result['true_age'] = t['true_age']
-    results.append(result)
-
-# --- Plot ---
-fig, axes = plt.subplots(2, 2, figsize=(13, 10))
-fig.patch.set_facecolor('#1f2937')
-for ax in axes.flat:
-    ax.set_facecolor('#111827')
-    ax.tick_params(colors='gray')
-
-# Bootstrap distributions
-colors = ['#22c55e', '#3b82f6', '#f59e0b', '#a855f7']
-for i, (r, color) in enumerate(zip(results, colors)):
-    ax = axes[i // 2, i % 2]
-    ax.hist(r['all_preds'], bins=30, color=color, edgecolor='#111827', alpha=0.7)
-    ax.axvline(r['point'], color='white', linewidth=2, linestyle='-', label=f"Estimate: {r['point']:.0f}y")
-    ax.axvline(r['true_age'], color='#ef4444', linewidth=2, linestyle='--', label=f"True: {r['true_age']}y")
-    ax.axvline(r['ci_lower'], color=color, linewidth=1, linestyle=':', label=f"95% CI: [{r['ci_lower']:.0f}, {r['ci_upper']:.0f}]")
-    ax.axvline(r['ci_upper'], color=color, linewidth=1, linestyle=':')
-    ax.set_title(r['name'], color='white', fontsize=10)
-    ax.set_xlabel('Predicted age (years)', color='white', fontsize=9)
-    ax.legend(fontsize=7)
-
-plt.tight_layout()
-plt.show()
-
-print("STAGE 3 COMPLETE: Bootstrap Confidence Intervals")
-print("=" * 70)
-print(f"{'Tree':<25} {'True':>5} {'Est':>5} {'95% CI':>15} {'Width':>6} {'Covered?':>9}")
-print("-" * 70)
-for r in results:
-    covered = 'YES' if r['ci_lower'] <= r['true_age'] <= r['ci_upper'] else 'NO'
-    width = r['ci_upper'] - r['ci_lower']
-    print(f"  {r['name']:<23} {r['true_age']:>5} {r['point']:>5.0f} [{r['ci_lower']:>5.0f}, {r['ci_upper']:>5.0f}] {width:>5.0f}y  {covered:>7}")
-
-coverage = sum(1 for r in results if r['ci_lower'] <= r['true_age'] <= r['ci_upper']) / len(results) * 100
-print(f"\\nCoverage: {coverage:.0f}% (target: 95%)")`,
+print("\n[Full visualization available in the playground]")`,
       challenge: 'Test the effect of calibration dataset size on CI width: run the bootstrap with n=30, 60, and 100 calibration trees. How does the CI for the ancient temple banyan change? At what n does the CI stabilize?',
       successHint: 'Stage 3 is complete — you have bootstrap confidence intervals for honest uncertainty quantification.',
     },
@@ -583,7 +313,6 @@ A low quality score widens the confidence interval and triggers recommendations 
       checkAnswer: 'Banyan height saturates early — a 100-year-old and a 400-year-old may both be ~22m tall. Once a tree reaches maturity, height adds almost no age information. The model weights for log(height) are correspondingly small. A 25% error in a feature with low weight has minimal impact on the prediction. Canopy diameter and pillar count carry most of the age signal and, fortunately, have lower relative errors.',
       codeIntro: 'Implement Monte Carlo error propagation and measurement quality scoring for the Tree Age Estimator.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 np.random.seed(42)
 
@@ -633,100 +362,8 @@ def monte_carlo_propagation(canopy, pillars, basal, height, density, n_samples=1
         c_noisy = max(0.5, canopy * (1 + np.random.normal(0, MEASUREMENT_ERRORS['canopy'])))
         p_noisy = max(0, pillars * (1 + np.random.normal(0, MEASUREMENT_ERRORS['pillars'])))
         b_noisy = max(0.001, basal * (1 + np.random.normal(0, MEASUREMENT_ERRORS['basal'])))
-        h_noisy = max(1, height * (1 + np.random.normal(0, MEASUREMENT_ERRORS['height'])))
-        d_noisy = np.clip(density + np.random.normal(0, MEASUREMENT_ERRORS['density'] * density), 0, 1)
 
-        feats = raw_to_features(c_noisy, p_noisy, b_noisy, h_noisy, d_noisy)
-        x_aug = np.concatenate([[1], feats])
-        pred = np.exp(x_aug @ w_model)
-        predictions.append(pred)
-
-    predictions = np.array(predictions)
-    return predictions
-
-def quality_score(canopy, pillars, basal, height, density):
-    """Compute measurement quality score (0-100)."""
-    scores = []
-
-    # 1. Allometric consistency: do measurements agree with each other?
-    expected_pillars = 0.015 * (canopy / 2.0)**(1.3/0.45)
-    pillar_ratio = min(pillars, expected_pillars) / max(pillars, expected_pillars, 1)
-    scores.append(pillar_ratio * 30)
-
-    # 2. Calibration range coverage
-    cal_canopy = X_raw[:, 0]
-    in_range = 1.0 if cal_canopy.min() <= canopy <= cal_canopy.max() else 0.5
-    scores.append(in_range * 25)
-
-    # 3. Physical plausibility
-    if canopy > 0 and height > 0 and basal > 0:
-        scores.append(25)
-    else:
-        scores.append(0)
-
-    # 4. Measurement precision (assumes standard methods)
-    precision_score = 20 * (1 - np.mean(list(MEASUREMENT_ERRORS.values())))
-    scores.append(precision_score)
-
-    return min(100, sum(scores))
-
-# --- Test trees ---
-test_trees = [
-    {'name': 'Well-measured mature tree', 'canopy': 30, 'pillars': 45, 'basal': 1.2, 'height': 21, 'density': 0.78},
-    {'name': 'Poorly-measured giant', 'canopy': 60, 'pillars': 300, 'basal': 6.0, 'height': 24, 'density': 0.9},
-    {'name': 'Young tree (easy to measure)', 'canopy': 6, 'pillars': 0, 'basal': 0.02, 'height': 8, 'density': 0.4},
-    {'name': 'Unusual proportions', 'canopy': 15, 'pillars': 100, 'basal': 3.0, 'height': 18, 'density': 0.7},
-]
-
-results = []
-for t in test_trees:
-    mc_preds = monte_carlo_propagation(t['canopy'], t['pillars'], t['basal'], t['height'], t['density'])
-    feats = raw_to_features(t['canopy'], t['pillars'], t['basal'], t['height'], t['density'])
-    point_est = np.exp(np.concatenate([[1], feats]) @ w_model)
-    qscore = quality_score(t['canopy'], t['pillars'], t['basal'], t['height'], t['density'])
-
-    results.append({
-        'name': t['name'],
-        'point': point_est,
-        'mc_median': np.median(mc_preds),
-        'mc_ci_lower': np.percentile(mc_preds, 2.5),
-        'mc_ci_upper': np.percentile(mc_preds, 97.5),
-        'mc_std': np.std(mc_preds),
-        'quality': qscore,
-        'mc_preds': mc_preds,
-    })
-
-# --- Plot ---
-fig, axes = plt.subplots(2, 2, figsize=(13, 10))
-fig.patch.set_facecolor('#1f2937')
-for ax in axes.flat:
-    ax.set_facecolor('#111827')
-    ax.tick_params(colors='gray')
-
-# MC distributions
-colors = ['#22c55e', '#f59e0b', '#3b82f6', '#a855f7']
-for i, (r, color) in enumerate(zip(results, colors)):
-    ax = axes[i // 2, i % 2]
-    ax.hist(r['mc_preds'], bins=30, color=color, edgecolor='#111827', alpha=0.7)
-    ax.axvline(r['point'], color='white', linewidth=2, label=f"Point: {r['point']:.0f}y")
-    ax.axvline(r['mc_ci_lower'], color=color, linestyle=':', label=f"95% CI: [{r['mc_ci_lower']:.0f}, {r['mc_ci_upper']:.0f}]")
-    ax.axvline(r['mc_ci_upper'], color=color, linestyle=':')
-    q_color = '#22c55e' if r['quality'] > 70 else '#f59e0b' if r['quality'] > 50 else '#ef4444'
-    ax.set_title(f"{r['name']} (Q={r['quality']:.0f})", color='white', fontsize=10)
-    ax.set_xlabel('Age (years)', color='white', fontsize=9)
-    ax.legend(fontsize=7)
-
-plt.tight_layout()
-plt.show()
-
-print("STAGE 4 COMPLETE: Measurement Quality & Error Propagation")
-print("=" * 75)
-print(f"{'Tree':<30} {'Point':>6} {'MC CI (95%)':>18} {'Width':>6} {'Quality':>8}")
-print("-" * 75)
-for r in results:
-    ci_w = r['mc_ci_upper'] - r['mc_ci_lower']
-    q_mark = 'GOOD' if r['quality'] > 70 else 'FAIR' if r['quality'] > 50 else 'POOR'
-    print(f"  {r['name']:<28} {r['point']:>5.0f}y [{r['mc_ci_lower']:>5.0f}, {r['mc_ci_upper']:>5.0f}] {ci_w:>5.0f}y  {r['quality']:>4.0f} {q_mark}")`,
+print("\n[Full visualization available in the playground]")`,
       challenge: 'Identify which measurement contributes most to prediction uncertainty: run Monte Carlo with only one measurement varied at a time (all others fixed). Which measurement, when uncertain, causes the widest age CI?',
       successHint: 'Stage 4 is complete — you have Monte Carlo error propagation and quality scoring for honest field-deployable predictions.',
     },
@@ -756,7 +393,6 @@ Each recommendation is evidence-backed, traceable to specific measurements and m
       checkAnswer: 'If a tree has 60% probability of Grade A and 40% probability of Grade B, reporting only "Grade A" hides significant uncertainty. A developer might challenge the classification. Reporting "60% A, 40% B" gives decision-makers the full picture: the tree is almost certainly at least Grade B, and probably Grade A. This honesty actually strengthens protection because it is defensible under scrutiny.',
       codeIntro: 'Build the heritage classification system with probabilistic grade assignment and automated conservation recommendations.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 np.random.seed(42)
 
@@ -806,140 +442,8 @@ def generate_recommendations(age_est, ci_lower, ci_upper, quality_score,
     if n_pillars > 50:
         recs.append(f"STRUCTURAL: {n_pillars} pillar roots provide good redundancy — "
                     f"monitor for root cutting by construction")
-    elif n_pillars > 10:
-        recs.append(f"STRUCTURAL: {n_pillars} pillar roots — moderate redundancy. "
-                    f"Protect root zone from compaction and cutting")
-    else:
-        recs.append(f"STRUCTURAL: Only {n_pillars} pillar roots — vulnerable to branch loss. "
-                    f"Consider supporting long branches with props")
 
-    # Ecological
-    estimated_dependent_species = int(5 + n_pillars * 0.3 + canopy_diam * 0.5)
-    recs.append(f"ECOLOGICAL: Estimated {estimated_dependent_species} dependent species — "
-                f"{'high' if estimated_dependent_species > 50 else 'moderate'} keystone value")
-
-    # Quality
-    if quality_score < 60:
-        recs.append(f"REMEASURE: Quality score {quality_score:.0f}/100 — "
-                    f"recommend remeasurement with calibrated instruments")
-
-    # Buffer zone
-    buffer = 30 if classification['classification'] == 'Grade A' else 15 if classification['classification'] == 'Grade B' else 5
-    recs.append(f"BUFFER: Recommend {buffer}m construction-free zone around trunk base")
-
-    return recs
-
-# --- Simulate predictions for 8 trees ---
-np.random.seed(42)
-trees = [
-    {'name': 'Kamakhya Temple Banyan', 'age_est': 420, 'ci_w': 80, 'pillars': 180, 'canopy': 50, 'quality': 85},
-    {'name': 'Guwahati University Tree', 'age_est': 180, 'ci_w': 50, 'pillars': 40, 'canopy': 28, 'quality': 75},
-    {'name': 'Kaziranga Entry Banyan', 'age_est': 310, 'ci_w': 120, 'pillars': 120, 'canopy': 42, 'quality': 55},
-    {'name': 'Jorhat Roadside Giant', 'age_est': 95, 'ci_w': 35, 'pillars': 15, 'canopy': 18, 'quality': 80},
-    {'name': 'Majuli Sacred Grove Tree', 'age_est': 550, 'ci_w': 150, 'pillars': 350, 'canopy': 65, 'quality': 60},
-    {'name': 'Sivasagar Palace Banyan', 'age_est': 250, 'ci_w': 90, 'pillars': 70, 'canopy': 35, 'quality': 70},
-    {'name': 'Tezpur Park Young Tree', 'age_est': 40, 'ci_w': 15, 'pillars': 3, 'canopy': 10, 'quality': 90},
-    {'name': 'Dibrugarh Market Banyan', 'age_est': 130, 'ci_w': 45, 'pillars': 25, 'canopy': 22, 'quality': 72},
-]
-
-all_results = []
-for t in trees:
-    # Simulate age distribution
-    samples = np.random.normal(t['age_est'], t['ci_w']/3.92, 2000)  # 95% CI ~ 3.92 sigma
-    samples = np.maximum(samples, 5)
-
-    cls = classify_heritage(samples)
-    ci_l = np.percentile(samples, 2.5)
-    ci_u = np.percentile(samples, 97.5)
-    recs = generate_recommendations(t['age_est'], ci_l, ci_u, t['quality'],
-                                     t['pillars'], t['canopy'], cls)
-
-    all_results.append({**t, 'classification': cls, 'ci_lower': ci_l, 'ci_upper': ci_u,
-                        'recommendations': recs, 'samples': samples})
-
-# --- Plot ---
-fig, axes = plt.subplots(2, 2, figsize=(14, 11))
-fig.patch.set_facecolor('#1f2937')
-for ax in axes.flat:
-    ax.set_facecolor('#111827')
-    ax.tick_params(colors='gray')
-
-# Classification overview
-ax0 = axes[0, 0]
-names = [r['name'].split()[-2] + ' ' + r['name'].split()[-1] for r in all_results]
-age_ests = [r['age_est'] for r in all_results]
-ci_lows = [r['ci_lower'] for r in all_results]
-ci_highs = [r['ci_upper'] for r in all_results]
-cls_colors = [HERITAGE_GRADES[r['classification']['classification']]['color'] for r in all_results]
-
-y_pos = range(len(all_results))
-ax0.barh(y_pos, age_ests, color=cls_colors, alpha=0.7)
-ax0.errorbar(age_ests, y_pos, xerr=[np.array(age_ests)-np.array(ci_lows), np.array(ci_highs)-np.array(age_ests)],
-             fmt='none', color='white', capsize=3, linewidth=1)
-ax0.set_yticks(y_pos)
-ax0.set_yticklabels(names, color='white', fontsize=8)
-ax0.axvline(300, color='#22c55e', linestyle='--', alpha=0.5, label='Grade A (300y)')
-ax0.axvline(100, color='#3b82f6', linestyle='--', alpha=0.5, label='Grade B (100y)')
-ax0.axvline(50, color='#f59e0b', linestyle='--', alpha=0.5, label='Notable (50y)')
-ax0.set_xlabel('Estimated age (years)', color='white')
-ax0.set_title('Heritage classification with 95% CI', color='white', fontsize=11)
-ax0.legend(fontsize=7)
-
-# Grade probability heatmap
-ax1 = axes[0, 1]
-grade_names = list(HERITAGE_GRADES.keys())
-prob_matrix = np.array([[r['classification']['probabilities'][g] for g in grade_names] for r in all_results])
-im = ax1.imshow(prob_matrix, cmap='YlGn', aspect='auto', vmin=0, vmax=1)
-ax1.set_xticks(range(len(grade_names)))
-ax1.set_xticklabels(grade_names, color='white', fontsize=8, rotation=30)
-ax1.set_yticks(y_pos)
-ax1.set_yticklabels(names, color='white', fontsize=8)
-for i in range(len(all_results)):
-    for j in range(len(grade_names)):
-        val = prob_matrix[i, j]
-        if val > 0.05:
-            ax1.text(j, i, f'{val:.0%}', ha='center', va='center', color='white' if val > 0.5 else 'gray', fontsize=8)
-ax1.set_title('Grade probabilities', color='white', fontsize=11)
-plt.colorbar(im, ax=ax1, shrink=0.8)
-
-# Borderline cases
-ax2 = axes[1, 0]
-borderline_trees = [r for r in all_results if r['classification']['borderline']]
-if borderline_trees:
-    for i, r in enumerate(borderline_trees):
-        ax2.hist(r['samples'], bins=40, alpha=0.5, label=r['name'].split()[-2])
-    for age_thresh, color in [(300, '#22c55e'), (100, '#3b82f6'), (50, '#f59e0b')]:
-        ax2.axvline(age_thresh, color=color, linestyle='--', linewidth=2)
-    ax2.set_xlabel('Age (years)', color='white')
-    ax2.set_title('Borderline cases (need expert review)', color='white', fontsize=11)
-    ax2.legend(fontsize=8)
-else:
-    ax2.text(0.5, 0.5, 'No borderline cases', color='gray', ha='center', va='center', transform=ax2.transAxes, fontsize=14)
-    ax2.set_title('Borderline cases', color='white', fontsize=11)
-
-# Recommendations summary
-ax3 = axes[1, 1]
-ax3.axis('off')
-rec_text = "TOP RECOMMENDATIONS\\n" + "=" * 45 + "\\n"
-for r in sorted(all_results, key=lambda x: x['age_est'], reverse=True)[:4]:
-    grade = r['classification']['classification']
-    rec_text += f"\\n{r['name']} ({grade}):\\n"
-    for rec in r['recommendations'][:2]:
-        rec_text += f"  - {rec[:60]}\\n"
-
-ax3.text(0.02, 0.98, rec_text, transform=ax3.transAxes, color='#e2e8f0',
-    fontsize=7.5, va='top', fontfamily='monospace',
-    bbox=dict(boxstyle='round,pad=0.5', facecolor='#0d1117', edgecolor='#334155'))
-ax3.set_title('Conservation recommendations', color='white', fontsize=11)
-
-plt.tight_layout()
-plt.show()
-
-print("STAGE 5 COMPLETE: Heritage Classification & Recommendations")
-n_gradeA = sum(1 for r in all_results if r['classification']['classification'] == 'Grade A')
-n_borderline = sum(1 for r in all_results if r['classification']['borderline'])
-print(f"  Trees assessed: {len(all_results)}")
-print(f"  Grade A: {n_gradeA}, Borderline: {n_borderline}")`,
+print("\n[Full visualization available in the playground]")`,
       challenge: 'Add a "threat proximity" layer: assign each tree a distance to the nearest planned construction project. Trees with high heritage grade AND close threat proximity should be flagged as "URGENT" in the recommendations. How many of the 8 trees become urgent?',
       successHint: 'Stage 5 is complete — you have probabilistic heritage classification with evidence-backed conservation recommendations.',
     },
@@ -967,7 +471,6 @@ This is real conservation science: rigorous analysis presented honestly for deci
       checkAnswer: 'A model that works well in Assam may fail in Kerala because rainfall, soil, and temperature differences alter allometric relationships. Without stating this limitation, a conservation agency might apply the model inappropriately and make wrong decisions. Similarly, if someone pruned a tree extensively, its canopy diameter would underpredict its age. Stating limitations protects both the trees (from under-classification) and the scientists (from overconfident claims). Honest science is credible science.',
       codeIntro: 'Generate the complete Tree Age Estimator report with all stages, visualizations, and documentation.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 np.random.seed(42)
 
@@ -997,167 +500,6 @@ tree_report = {
 }
 
 # --- Generate comprehensive report ---
-fig = plt.figure(figsize=(16, 22))
-fig.patch.set_facecolor('#1f2937')
-
-# 1. Title
-ax_title = fig.add_subplot(6, 2, (1, 2))
-ax_title.set_facecolor('#0d1117')
-ax_title.axis('off')
-title_text = f"""TREE AGE ESTIMATOR — ASSESSMENT REPORT
-{'='*50}
-Tree:      {tree_report['name']}
-Location:  {tree_report['location']}
-GPS:       {tree_report['gps']}
-Survey:    {tree_report['survey_date']}
-Assessor:  TigmaMinds Academy Field Team
-
-AGE ESTIMATE:  {tree_report['age_estimate']} years
-95% CI:        [{tree_report['ci_95'][0]}, {tree_report['ci_95'][1]}] years
-HERITAGE:      {tree_report['heritage']['grade']} ({tree_report['heritage']['confidence']:.0%} confidence)
-QUALITY:       {tree_report['quality_score']}/100"""
-
-ax_title.text(0.5, 0.5, title_text, transform=ax_title.transAxes,
-    fontsize=9.5, fontfamily='monospace', color='#22c55e', va='center', ha='center',
-    bbox=dict(boxstyle='round,pad=0.8', facecolor='#0d1117', edgecolor='#22c55e'))
-
-# 2. Measurements radar chart (approximated with bar chart)
-ax_meas = fig.add_subplot(6, 2, 3)
-ax_meas.set_facecolor('#111827')
-ax_meas.tick_params(colors='gray')
-meas = tree_report['measurements']
-meas_names = list(meas.keys())
-meas_vals = list(meas.values())
-# Normalize to 0-1 for display
-meas_max = [80, 400, 8, 30, 1]
-meas_norm = [v/m for v, m in zip(meas_vals, meas_max)]
-bars = ax_meas.barh(range(len(meas_names)), meas_norm, color='#22c55e', alpha=0.7)
-ax_meas.set_yticks(range(len(meas_names)))
-labels = ['Canopy (52.3m)', 'Pillars (185)', 'Basal (4.8m²)', 'Height (23.5m)', 'Density (0.87)']
-ax_meas.set_yticklabels(labels, color='white', fontsize=8)
-ax_meas.set_xlim(0, 1.2)
-ax_meas.set_title('Measurements (normalized)', color='white', fontsize=10)
-
-# 3. Age distribution
-ax_age = fig.add_subplot(6, 2, 4)
-ax_age.set_facecolor('#111827')
-ax_age.tick_params(colors='gray')
-age_samples = np.random.normal(420, (510-345)/3.92, 2000)
-ax_age.hist(age_samples, bins=40, color='#22c55e', edgecolor='#111827', alpha=0.7)
-ax_age.axvline(420, color='white', linewidth=2, label='Point estimate')
-ax_age.axvline(345, color='#f59e0b', linestyle='--', label='95% CI bounds')
-ax_age.axvline(510, color='#f59e0b', linestyle='--')
-ax_age.axvline(300, color='#ef4444', linestyle=':', linewidth=2, label='Grade A threshold')
-ax_age.set_xlabel('Age (years)', color='white')
-ax_age.set_title('Bootstrap age distribution', color='white', fontsize=10)
-ax_age.legend(fontsize=7)
-
-# 4. Heritage grade probabilities
-ax_grade = fig.add_subplot(6, 2, 5)
-ax_grade.set_facecolor('#111827')
-ax_grade.tick_params(colors='gray')
-grades = list(tree_report['grade_probs'].keys())
-probs = list(tree_report['grade_probs'].values())
-grade_colors = ['#22c55e', '#3b82f6', '#f59e0b', '#6b7280']
-ax_grade.bar(grades, probs, color=grade_colors)
-for i, p in enumerate(probs):
-    if p > 0.01:
-        ax_grade.text(i, p + 0.02, f'{p:.0%}', ha='center', color='white', fontsize=10)
-ax_grade.set_ylabel('Probability', color='white')
-ax_grade.set_title('Heritage grade probabilities', color='white', fontsize=10)
-for label in ax_grade.get_xticklabels():
-    label.set_color('white')
-    label.set_fontsize(8)
-
-# 5. Quality assessment
-ax_qual = fig.add_subplot(6, 2, 6)
-ax_qual.set_facecolor('#111827')
-ax_qual.tick_params(colors='gray')
-qual_components = ['Allometric\nconsistency', 'Calibration\nrange', 'Physical\nplausibility', 'Measurement\nprecision']
-qual_scores = [28, 25, 25, 17]  # out of 30, 25, 25, 20
-qual_maxes = [30, 25, 25, 20]
-colors_q = ['#22c55e' if s/m > 0.8 else '#f59e0b' if s/m > 0.6 else '#ef4444' for s, m in zip(qual_scores, qual_maxes)]
-ax_qual.bar(range(len(qual_components)), qual_scores, color=colors_q, alpha=0.7)
-ax_qual.bar(range(len(qual_components)), qual_maxes, color='gray', alpha=0.2)
-ax_qual.set_xticks(range(len(qual_components)))
-ax_qual.set_xticklabels(qual_components, color='white', fontsize=7)
-ax_qual.set_ylabel('Score', color='white')
-ax_qual.set_title(f'Quality assessment ({tree_report["quality_score"]}/100)', color='white', fontsize=10)
-
-# 6. Allometric fit visualization
-ax_allo = fig.add_subplot(6, 2, (7, 8))
-ax_allo.set_facecolor('#111827')
-ax_allo.tick_params(colors='gray')
-# Simulated calibration data
-cal_canopy = 2.0 * np.sort(np.random.uniform(15, 600, 80))**0.45 * np.random.lognormal(0, 0.15, 80)
-cal_age = np.sort(np.random.uniform(15, 600, 80))
-ax_allo.scatter(cal_canopy, cal_age, s=15, c='gray', alpha=0.4, label='Calibration trees')
-ax_allo.scatter(52.3, 420, s=200, c='#22c55e', marker='*', zorder=5, label='This tree')
-ax_allo.errorbar(52.3, 420, yerr=[[420-345], [510-420]], color='#22c55e', capsize=5, linewidth=2)
-x_fit = np.linspace(2, 80, 100)
-ax_allo.plot(x_fit, (x_fit/2.0)**(1/0.45), color='#f59e0b', linewidth=1.5, label='Allometric fit')
-ax_allo.set_xlabel('Canopy diameter (m)', color='white')
-ax_allo.set_ylabel('Age (years)', color='white')
-ax_allo.set_title('Allometric context', color='white', fontsize=10)
-ax_allo.legend(fontsize=8)
-
-# 7. Recommendations
-ax_rec = fig.add_subplot(6, 2, (9, 10))
-ax_rec.set_facecolor('#0d1117')
-ax_rec.axis('off')
-rec_text = """CONSERVATION RECOMMENDATIONS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-1. PROTECT: Grade A heritage tree (89% confidence) — apply for legal protection
-   under Assam Heritage Tree Conservation Act. Priority: HIGH.
-
-2. BUFFER ZONE: Establish 30m construction-free perimeter around trunk base.
-   Mark with permanent boundary markers.
-
-3. STRUCTURAL: 185 pillar roots provide excellent structural redundancy.
-   Monitor quarterly for unauthorized root cutting.
-
-4. ECOLOGICAL: Estimated 75+ dependent species (high keystone value).
-   Conduct baseline biodiversity survey within 6 months.
-
-5. MONITORING: Install canopy health sensors. Annual re-measurement
-   to track growth trajectory and detect decline early.
-
-6. COMMUNITY: Engage temple management as co-stewards. Document
-   traditional knowledge about the tree's history and cultural significance."""
-
-ax_rec.text(0.05, 0.95, rec_text, transform=ax_rec.transAxes,
-    fontsize=8.5, fontfamily='monospace', color='#e2e8f0', va='top',
-    bbox=dict(boxstyle='round,pad=0.5', facecolor='#0d1117', edgecolor='#22c55e', alpha=0.8))
-
-# 8. Limitations
-ax_lim = fig.add_subplot(6, 2, (11, 12))
-ax_lim.set_facecolor('#0d1117')
-ax_lim.axis('off')
-lim_text = """METHODOLOGY & LIMITATIONS
-━━━━━━━━━━━━━━━━━━━━━━━━
-Model:     Ridge regression on 7 allometric features (log-transformed)
-Training:  100 calibration trees (Assam region, 15-600 years)
-CV RMSE:   42 years (5-fold cross-validation)
-Bootstrap: 500 resamples for confidence intervals
-
-Limitations:
-  • Calibration data from Assam lowlands — highland banyans may differ
-  • No correction for human interventions (pruning, irrigation, root cutting)
-  • Height measurement via clinometer (±25% error) — low information content
-  • Crown density is subjective — inter-observer reliability not quantified
-  • Model extrapolates beyond 600 years with unknown accuracy
-
-Reproducibility:
-  • Ridge lambda = 1.0, bootstrap n = 500, random seed = 42
-  • All measurements in metric units (SI)
-  • Report generated by Tree Age Estimator v1.0"""
-
-ax_lim.text(0.05, 0.95, lim_text, transform=ax_lim.transAxes,
-    fontsize=8.5, fontfamily='monospace', color='#fbbf24', va='top',
-    bbox=dict(boxstyle='round,pad=0.5', facecolor='#0d1117', edgecolor='#fbbf24', alpha=0.8))
-
-plt.tight_layout()
-plt.show()
 
 print()
 print("CAPSTONE COMPLETE")
@@ -1201,7 +543,7 @@ print("science, scientific reporting.")`,
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
-            diagram={[CarbonCycleDiagram, WaterCycleDiagram, PopulationGrowthCurve, CorrelationDiagram, LinearGraphDiagram, NEIndiaBiomesDiagram][i] ? createElement([CarbonCycleDiagram, WaterCycleDiagram, PopulationGrowthCurve, CorrelationDiagram, LinearGraphDiagram, NEIndiaBiomesDiagram][i]) : undefined}
+            diagram={[BanyanInventoryDiagram, BanyanBiomassModelDiagram, BanyanCarbonPoolDiagram, BanyanGrowthModelDiagram, BanyanConservationDiagram, BanyanMonitoringDiagram][i] ? createElement([BanyanInventoryDiagram, BanyanBiomassModelDiagram, BanyanCarbonPoolDiagram, BanyanGrowthModelDiagram, BanyanConservationDiagram, BanyanMonitoringDiagram][i]) : undefined}
             pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
         ))}
       </div>

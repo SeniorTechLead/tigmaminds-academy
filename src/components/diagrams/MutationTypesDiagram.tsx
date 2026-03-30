@@ -34,7 +34,7 @@ export default function MutationTypesDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 500 220" className="w-full max-w-lg mx-auto" role="img" aria-label="DNA mutation types diagram">
+      <svg viewBox="0 0 586 248" className="w-full max-w-lg mx-auto" role="img" aria-label="DNA mutation types diagram">
         {/* Title */}
         <text x="250" y="16" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">Types of DNA Mutations</text>
 

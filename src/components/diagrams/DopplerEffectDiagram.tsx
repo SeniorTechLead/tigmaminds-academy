@@ -28,7 +28,7 @@ export default function DopplerEffectDiagram() {
       </div>
 
       <svg
-        viewBox="0 0 520 280"
+        viewBox="0 0 598 297"
         className="w-full"
         role="img"
         aria-label="Doppler effect diagram showing wavefront compression and stretching"
@@ -310,11 +310,11 @@ export default function DopplerEffectDiagram() {
           <tspan fontSize={8} dy={3}>
             src
           </tspan>
-          <tspan dy={-3}>{" \u00D7 (v \u00B1 v"}</tspan>
+          <tspan dy={-3}>{" × (v ± v"}</tspan>
           <tspan fontSize={8} dy={3}>
             obs
           </tspan>
-          <tspan dy={-3}>{") / (v \u2213 v"}</tspan>
+          <tspan dy={-3}>{") / (v ∓ v"}</tspan>
           <tspan fontSize={8} dy={3}>
             src
           </tspan>

@@ -42,7 +42,7 @@ export default function CodonTableDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 500 400" className="w-full max-w-lg mx-auto" role="img" aria-label="Simplified codon table">
+      <svg viewBox="0 0 525 445" className="w-full max-w-lg mx-auto" role="img" aria-label="Simplified codon table">
         {/* Title */}
         <text x="250" y="20" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">
           Genetic Code: Codons → Amino Acids

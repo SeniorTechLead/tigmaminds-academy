@@ -1,7 +1,7 @@
 export default function DigestiveSystemDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 250 450" className="w-full max-w-xs mx-auto" role="img" aria-label="Digestive system diagram">
+      <svg viewBox="0 0 320 493" className="w-full max-w-xs mx-auto" role="img" aria-label="Digestive system diagram">
         {/* Title */}
         <text x="125" y="18" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">Digestive System</text>
 

@@ -1,7 +1,7 @@
 export default function MirrorReflectionDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 400 250" className="w-full max-w-lg mx-auto" role="img" aria-label="Mirror reflection diagram showing incident ray, normal, and reflected ray with equal angles">
+      <svg viewBox="0 0 442 295" className="w-full max-w-lg mx-auto" role="img" aria-label="Mirror reflection diagram showing incident ray, normal, and reflected ray with equal angles">
         {/* Mirror surface */}
         <rect x="195" y="30" width="10" height="190" rx="2" className="fill-sky-200 dark:fill-sky-800" />
         <rect x="205" y="30" width="6" height="190" rx="1" className="fill-gray-300 dark:fill-gray-600" />

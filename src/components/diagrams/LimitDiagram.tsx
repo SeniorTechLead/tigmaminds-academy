@@ -1,7 +1,7 @@
 export default function LimitDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 400 300" className="w-full max-w-lg mx-auto" role="img" aria-label="Limit concept diagram showing f(x) approaching L as x approaches a">
+      <svg viewBox="0 0 515 345" className="w-full max-w-lg mx-auto" role="img" aria-label="Limit concept diagram showing f(x) approaching L as x approaches a">
         {/* Axes */}
         <line x1="50" y1="260" x2="380" y2="260" className="stroke-gray-400 dark:stroke-gray-500" strokeWidth="1.5" />
         <line x1="50" y1="260" x2="50" y2="20" className="stroke-gray-400 dark:stroke-gray-500" strokeWidth="1.5" />

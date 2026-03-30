@@ -63,7 +63,7 @@ export default function AltitudeProfileDiagram() {
   return (
     <div className="w-full max-w-2xl mx-auto my-6">
       <svg
-        viewBox="0 0 600 400"
+        viewBox="0 0 630 420"
         className="w-full"
         role="img"
         aria-label="Altitude profile showing how temperature, pressure, and ecology change from sea level to Kangchenjunga"

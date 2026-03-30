@@ -88,7 +88,7 @@ export default function FiveKingdomsDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 540 250" className="w-full max-w-2xl mx-auto" role="img" aria-label="Five kingdoms of life classification">
+      <svg viewBox="0 0 567 262" className="w-full max-w-2xl mx-auto" role="img" aria-label="Five kingdoms of life classification">
         {/* Title */}
         <text x="270" y="20" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="14" fontWeight="bold">
           Five Kingdoms of Life

@@ -11,6 +11,11 @@ import WavelengthSpectrum from '../diagrams/WavelengthSpectrum';
 import PhotosynthesisDiagram from '../diagrams/PhotosynthesisDiagram';
 import PopulationGrowthCurve from '../diagrams/PopulationGrowthCurve';
 import SilkStructureDiagram from '../diagrams/SilkStructureDiagram';
+import MugaSilkFibroinDiagram from '../diagrams/MugaSilkFibroinDiagram';
+import MugaSilkNanostructureDiagram from '../diagrams/MugaSilkNanostructureDiagram';
+import MugaSilkProcessDiagram from '../diagrams/MugaSilkProcessDiagram';
+import MugaSilkEndemicDiagram from '../diagrams/MugaSilkEndemicDiagram';
+import ActivitySilkTestDiagram from '../diagrams/ActivitySilkTestDiagram';
 import FoodWebDiagram from '../diagrams/FoodWebDiagram';
 import RayleighScatteringDiagram from '../diagrams/RayleighScatteringDiagram';
 import RiverErosionDiagram from '../diagrams/RiverErosionDiagram';
@@ -184,6 +189,320 @@ import SunsetSimulatorOutputDiagram from '../diagrams/SunsetSimulatorOutputDiagr
 import MieVsRayleighDiagram from '../diagrams/MieVsRayleighDiagram';
 import MirageDiagram from '../diagrams/MirageDiagram';
 import RainbowRaindropDiagram from '../diagrams/RainbowRaindropDiagram';
+import BioluminescenceReactionDiagram from '../diagrams/BioluminescenceReactionDiagram';
+import FireflySyncDiagram from '../diagrams/FireflySyncDiagram';
+import FireflyCircuitBasicDiagram from '../diagrams/FireflyCircuitBasicDiagram';
+import FireflyPWMDiagram from '../diagrams/FireflyPWMDiagram';
+import FireflyParallelDiagram from '../diagrams/FireflyParallelDiagram';
+import FireflyRandomDiagram from '../diagrams/FireflyRandomDiagram';
+import FireflySyncStepsDiagram from '../diagrams/FireflySyncStepsDiagram';
+import FireflyJarDiagram from '../diagrams/FireflyJarDiagram';
+import FireflyForLoopDiagram from '../diagrams/FireflyForLoopDiagram';
+import FireflyArrayDiagram from '../diagrams/FireflyArrayDiagram';
+import FireflySineBreatheDiagram from '../diagrams/FireflySineBreatheDiagram';
+import FireflyPhaseOffsetDiagram from '../diagrams/FireflyPhaseOffsetDiagram';
+import FireflyKuramotoDiagram from '../diagrams/FireflyKuramotoDiagram';
+import FireflyProductionDiagram from '../diagrams/FireflyProductionDiagram';
+import FireflyEfficiencyDiagram from '../diagrams/FireflyEfficiencyDiagram';
+import FireflySpeciesCodeDiagram from '../diagrams/FireflySpeciesCodeDiagram';
+import FireflyLuciferinPathwayDiagram from '../diagrams/FireflyLuciferinPathwayDiagram';
+import FireflyNeuralControlDiagram from '../diagrams/FireflyNeuralControlDiagram';
+import FireflyNetworkProtocolDiagram from '../diagrams/FireflyNetworkProtocolDiagram';
+import FireflyConservationDiagram from '../diagrams/FireflyConservationDiagram';
+import JapiTopViewDiagram from '../diagrams/JapiTopViewDiagram';
+import ConicalShapeDiagram from '../diagrams/ConicalShapeDiagram';
+import SquareVsTriangleDiagram from '../diagrams/SquareVsTriangleDiagram';
+import WeavePatternDiagram from '../diagrams/WeavePatternDiagram';
+import JapiHexagonDiagram from '../diagrams/JapiHexagonDiagram';
+import ActivityJapiMakeDiagram from '../diagrams/ActivityJapiMakeDiagram';
+import AlgorithmStepsDiagram from '../diagrams/AlgorithmStepsDiagram';
+import RhythmPlayerDiagram from '../diagrams/RhythmPlayerDiagram';
+import ElephantRumblePlayerDiagram from '../diagrams/ElephantRumblePlayerDiagram';
+import ElephantGroundWaveDiagram from '../diagrams/ElephantGroundWaveDiagram';
+import ElephantSpectrogramDiagram from '../diagrams/ElephantSpectrogramDiagram';
+import CoriolisEffectDiagram from '../diagrams/CoriolisEffectDiagram';
+import StormSurgeDiagram from '../diagrams/StormSurgeDiagram';
+import MountainTemperatureDiagram from '../diagrams/MountainTemperatureDiagram';
+import MountainPressureDiagram from '../diagrams/MountainPressureDiagram';
+import MountainLapseRateDiagram from '../diagrams/MountainLapseRateDiagram';
+import MountainOxygenDiagram from '../diagrams/MountainOxygenDiagram';
+import MountainWeatherDiagram from '../diagrams/MountainWeatherDiagram';
+import MountainBodyAdaptDiagram from '../diagrams/MountainBodyAdaptDiagram';
+import MountainZonationDiagram from '../diagrams/MountainZonationDiagram';
+import MountainTreelineDiagram from '../diagrams/MountainTreelineDiagram';
+import MountainBarometricDiagram from '../diagrams/MountainBarometricDiagram';
+import MountainGasLawDiagram from '../diagrams/MountainGasLawDiagram';
+import MountainO2PartialDiagram from '../diagrams/MountainO2PartialDiagram';
+import MountainWindChillDiagram from '../diagrams/MountainWindChillDiagram';
+import MountainRadiationDiagram from '../diagrams/MountainRadiationDiagram';
+import MountainUVDiagram from '../diagrams/MountainUVDiagram';
+import BeeColonyDiagram from '../diagrams/BeeColonyDiagram';
+import BeeWaggleDanceDiagram from '../diagrams/BeeWaggleDanceDiagram';
+import BeePollinationDiagram from '../diagrams/BeePollinationDiagram';
+import BeeHoneymakingDiagram from '../diagrams/BeeHoneymakingDiagram';
+import BeeHiveTempDiagram from '../diagrams/BeeHiveTempDiagram';
+import BeeLifeCycleDiagram from '../diagrams/BeeLifeCycleDiagram';
+import BeeAnatomyDiagram from '../diagrams/BeeAnatomyDiagram';
+import BeeFlowerCoevolutionDiagram from '../diagrams/BeeFlowerCoevolutionDiagram';
+import BeeNavigationDiagram from '../diagrams/BeeNavigationDiagram';
+import BeeCommunicationDiagram from '../diagrams/BeeCommunicationDiagram';
+import BeeEcosystemServiceDiagram from '../diagrams/BeeEcosystemServiceDiagram';
+import BeeColonyCollapseDiagram from '../diagrams/BeeColonyCollapseDiagram';
+import BeeForagingModelDiagram from '../diagrams/BeeForagingModelDiagram';
+import BeePopulationDynamicsDiagram from '../diagrams/BeePopulationDynamicsDiagram';
+import BeeGeneticsDiagram from '../diagrams/BeeGeneticsDiagram';
+import BeeSwarmIntelligenceDiagram from '../diagrams/BeeSwarmIntelligenceDiagram';
+import BeeVenomChemistryDiagram from '../diagrams/BeeVenomChemistryDiagram';
+import BeeRobotDiagram from '../diagrams/BeeRobotDiagram';
+import BeeMonitoringDiagram from '../diagrams/BeeMonitoringDiagram';
+import BeePathOptimizationDiagram from '../diagrams/BeePathOptimizationDiagram';
+import BeeDiseaseDetectionDiagram from '../diagrams/BeeDiseaseDetectionDiagram';
+import BeePollinationNetworkDiagram from '../diagrams/BeePollinationNetworkDiagram';
+import BeeConservationPlanDiagram from '../diagrams/BeeConservationPlanDiagram';
+import BeeDataDashboardDiagram from '../diagrams/BeeDataDashboardDiagram';
+import WoodpeckerImpactDiagram from '../diagrams/WoodpeckerImpactDiagram';
+import WoodpeckerSkullLayersDiagram from '../diagrams/WoodpeckerSkullLayersDiagram';
+import WoodpeckerHyoidDiagram from '../diagrams/WoodpeckerHyoidDiagram';
+import WoodpeckerSpongyBoneDiagram from '../diagrams/WoodpeckerSpongyBoneDiagram';
+import WoodpeckerBrainFitDiagram from '../diagrams/WoodpeckerBrainFitDiagram';
+import WoodpeckerHelmetDiagram from '../diagrams/WoodpeckerHelmetDiagram';
+import WoodpeckerForceMassDiagram from '../diagrams/WoodpeckerForceMassDiagram';
+import WoodpeckerDecelerationDiagram from '../diagrams/WoodpeckerDecelerationDiagram';
+import WoodpeckerTongueDiagram from '../diagrams/WoodpeckerTongueDiagram';
+import WoodpeckerDrumPatternDiagram from '../diagrams/WoodpeckerDrumPatternDiagram';
+import WoodpeckerMaterialsDiagram from '../diagrams/WoodpeckerMaterialsDiagram';
+import WoodpeckerEvolutionDiagram from '../diagrams/WoodpeckerEvolutionDiagram';
+import WoodpeckerStressDistributionDiagram from '../diagrams/WoodpeckerStressDistributionDiagram';
+import WoodpeckerImpulseTheoryDiagram from '../diagrams/WoodpeckerImpulseTheoryDiagram';
+import WoodpeckerResonanceDiagram from '../diagrams/WoodpeckerResonanceDiagram';
+import WoodpeckerEnergyAbsorptionDiagram from '../diagrams/WoodpeckerEnergyAbsorptionDiagram';
+import WoodpeckerRotationalForceDiagram from '../diagrams/WoodpeckerRotationalForceDiagram';
+import WoodpeckerFatigueAnalysisDiagram from '../diagrams/WoodpeckerFatigueAnalysisDiagram';
+import WoodpeckerBioInspirationDiagram from '../diagrams/WoodpeckerBioInspirationDiagram';
+import WoodpeckerCrashTestDiagram from '../diagrams/WoodpeckerCrashTestDiagram';
+import WoodpeckerMetamaterialDiagram from '../diagrams/WoodpeckerMetamaterialDiagram';
+import WoodpeckerSensorDesignDiagram from '../diagrams/WoodpeckerSensorDesignDiagram';
+import WoodpeckerSafetyStandardDiagram from '../diagrams/WoodpeckerSafetyStandardDiagram';
+import WoodpeckerCapstoneProjectDiagram from '../diagrams/WoodpeckerCapstoneProjectDiagram';
+import ActivityEggDropDiagram from '../diagrams/ActivityEggDropDiagram';
+import ActivityStarCountDiagram from '../diagrams/ActivityStarCountDiagram';
+import ActivityFlowerWatchDiagram from '../diagrams/ActivityFlowerWatchDiagram';
+import ActivityVortexDiagram from '../diagrams/ActivityVortexDiagram';
+import ActivityBalloonDiagram from '../diagrams/ActivityBalloonDiagram';
+import ActivityMapDrawDiagram from '../diagrams/ActivityMapDrawDiagram';
+import ActivityTreeMeasureDiagram from '../diagrams/ActivityTreeMeasureDiagram';
+import ActivityMilkGlassDiagram from '../diagrams/ActivityMilkGlassDiagram';
+import ActivityEarGroundDiagram from '../diagrams/ActivityEarGroundDiagram';
+import ActivityFlashlightSyncDiagram from '../diagrams/ActivityFlashlightSyncDiagram';
+// Dancing Deer of Loktak Lake
+import LoktakPhumdiDiagram from '../diagrams/LoktakPhumdiDiagram';
+import LoktakSangaiDiagram from '../diagrams/LoktakSangaiDiagram';
+import LoktakDamImpactDiagram from '../diagrams/LoktakDamImpactDiagram';
+import LoktakConservationDiagram from '../diagrams/LoktakConservationDiagram';
+import ActivityWetlandModelDiagram from '../diagrams/ActivityWetlandModelDiagram';
+import BambooVortexDiagram from '../diagrams/BambooVortexDiagram';
+import BambooResonanceDiagram from '../diagrams/BambooResonanceDiagram';
+import BambooHarmonicsDiagram from '../diagrams/BambooHarmonicsDiagram';
+import BambooMaterialDiagram from '../diagrams/BambooMaterialDiagram';
+import ActivityBambooFluteDiagram from '../diagrams/ActivityBambooFluteDiagram';
+// Northeast India: Golden Hilsa — Sustainable Fishing
+import HilsaMigrationDiagram from '../diagrams/HilsaMigrationDiagram';
+import HilsaOlfactoryDiagram from '../diagrams/HilsaOlfactoryDiagram';
+import HilsaPopulationDiagram from '../diagrams/HilsaPopulationDiagram';
+import HilsaRiverHealthDiagram from '../diagrams/HilsaRiverHealthDiagram';
+import ActivityFishCountDiagram from '../diagrams/ActivityFishCountDiagram';
+import AltitudeAdaptationDiagram from '../diagrams/AltitudeAdaptationDiagram';
+import BanyanRootsDiagram from '../diagrams/BanyanRootsDiagram';
+import StarBrightnessStepDiagram from '../diagrams/StarBrightnessStepDiagram';
+import StarBortleScaleDiagram from '../diagrams/StarBortleScaleDiagram';
+// Mythology: Churning of the Ocean
+import ChurningEmulsionDiagram from '../diagrams/ChurningEmulsionDiagram';
+import DensityColumnDiagram from '../diagrams/DensityColumnDiagram';
+import PHScaleChurningDiagram from '../diagrams/PHScaleChurningDiagram';
+import DistillationDiagram from '../diagrams/DistillationDiagram';
+import ActivityDensityColumnDiagram from '../diagrams/ActivityDensityColumnDiagram';
+import ChurningCentrifugeDiagram from '../diagrams/ChurningCentrifugeDiagram';
+import ChurningChromatographyDiagram from '../diagrams/ChurningChromatographyDiagram';
+import ChurningColloidDiagram from '../diagrams/ChurningColloidDiagram';
+import ChurningDensityColumnDiagram from '../diagrams/ChurningDensityColumnDiagram';
+import ChurningDistillationDiagram from '../diagrams/ChurningDistillationDiagram';
+import ChurningEmulsifierDiagram from '../diagrams/ChurningEmulsifierDiagram';
+import ChurningIntermolecularDiagram from '../diagrams/ChurningIntermolecularDiagram';
+import ChurningMassSpecDiagram from '../diagrams/ChurningMassSpecDiagram';
+import ChurningPolarityDiagram from '../diagrams/ChurningPolarityDiagram';
+import ChurningSeparationPipelineDiagram from '../diagrams/ChurningSeparationPipelineDiagram';
+import ChurningTitrationDiagram from '../diagrams/ChurningTitrationDiagram';
+// Mythology: David and Goliath
+import SlingCircularMotionDiagram from '../diagrams/SlingCircularMotionDiagram';
+import ProjectileArcDiagram from '../diagrams/ProjectileArcDiagram';
+import KineticEnergyComparisonDiagram from '../diagrams/KineticEnergyComparisonDiagram';
+import ImpactPressureDiagram from '../diagrams/ImpactPressureDiagram';
+import ActivitySlingRangeDiagram from '../diagrams/ActivitySlingRangeDiagram';
+// Mythology: Sand Mandala
+import SymmetryTypesMandala from '../diagrams/SymmetryTypesMandala';
+import TessellationMandala from '../diagrams/TessellationMandala';
+import FractalZoomDiagram from '../diagrams/FractalZoomDiagram';
+import GoldenRatioNatureDiagram from '../diagrams/GoldenRatioNatureDiagram';
+import ActivityMandalaDiagram from '../diagrams/ActivityMandalaDiagram';
+// Mythology: Alhambra Geometry
+import TileAnglesDiagram from '../diagrams/TileAnglesDiagram';
+import SymmetryOperationsDiagram from '../diagrams/SymmetryOperationsDiagram';
+import WallpaperGroupsDiagram from '../diagrams/WallpaperGroupsDiagram';
+import CrystalSymmetryDiagram from '../diagrams/CrystalSymmetryDiagram';
+import ActivityTessellationDiagram from '../diagrams/ActivityTessellationDiagram';
+// Mythology: Hanuman Lifted a Mountain
+import HanumanTectonicDiagram from '../diagrams/HanumanTectonicDiagram';
+import HanumanAltitudeZonesDiagram from '../diagrams/HanumanAltitudeZonesDiagram';
+import HanumanDichotomousKeyDiagram from '../diagrams/HanumanDichotomousKeyDiagram';
+import HanumanMedicineDiagram from '../diagrams/HanumanMedicineDiagram';
+import ActivityHerbIdentifyDiagram from '../diagrams/ActivityHerbIdentifyDiagram';
+// Mythology: Astrolabe — Islamic Astronomy
+import AstrolabeSundialDiagram from '../diagrams/AstrolabeSundialDiagram';
+import AstrolabeProjectionDiagram from '../diagrams/AstrolabeProjectionDiagram';
+import AstrolabeCelestialNavDiagram from '../diagrams/AstrolabeCelestialNavDiagram';
+import AstrolabeFunctionsDiagram from '../diagrams/AstrolabeFunctionsDiagram';
+import ActivityStarNavigateDiagram from '../diagrams/ActivityStarNavigateDiagram';
+// Mythology: Ravana's Ten Heads
+import RavanaNeuronDiagram from '../diagrams/RavanaNeuronDiagram';
+import RavanaParallelDiagram from '../diagrams/RavanaParallelDiagram';
+import RavanaCPUGPUDiagram from '../diagrams/RavanaCPUGPUDiagram';
+import RavanaNeuralNetDiagram from '../diagrams/RavanaNeuralNetDiagram';
+import ActivityReactionTimeDiagram from '../diagrams/ActivityReactionTimeDiagram';
+// Mythology: Noah's Ark
+import ArkBuoyancyDiagram from '../diagrams/ArkBuoyancyDiagram';
+import ArkCapacityDiagram from '../diagrams/ArkCapacityDiagram';
+import ArkEcosystemDiagram from '../diagrams/ArkEcosystemDiagram';
+import ArkBiodiversityDiagram from '../diagrams/ArkBiodiversityDiagram';
+import ActivityFloatTestDiagram from '../diagrams/ActivityFloatTestDiagram';
+// Mythology: Bodhi Tree
+import BodhiSeedCuttingDiagram from '../diagrams/BodhiSeedCuttingDiagram';
+import BodhiDNACloneDiagram from '../diagrams/BodhiDNACloneDiagram';
+import BodhiGraftingDiagram from '../diagrams/BodhiGraftingDiagram';
+import BodhiCRISPRDiagram from '../diagrams/BodhiCRISPRDiagram';
+import ActivityCuttingDiagram from '../diagrams/ActivityCuttingDiagram';
+// Mythology: Wheel of Dharma
+import DharmaWheelFrictionDiagram from '../diagrams/DharmaWheelFrictionDiagram';
+import DharmaTorqueDiagram from '../diagrams/DharmaTorqueDiagram';
+import DharmaGyroscopeDiagram from '../diagrams/DharmaGyroscopeDiagram';
+import DharmaFlywheelDiagram from '../diagrams/DharmaFlywheelDiagram';
+import ActivitySpinningTopDiagram from '../diagrams/ActivitySpinningTopDiagram';
+// Mythology: Monastery Bells of Tawang
+import BellSoundWaveDiagram from '../diagrams/BellSoundWaveDiagram';
+import BellFrequencyDiagram from '../diagrams/BellFrequencyDiagram';
+import BellHarmonicsDiagram from '../diagrams/BellHarmonicsDiagram';
+import BellFourierDiagram from '../diagrams/BellFourierDiagram';
+import ActivityBellStrikeDiagram from '../diagrams/ActivityBellStrikeDiagram';
+// Mythology: Angulimala — Neuroplasticity
+import AngulimalaNeuroplasticityDiagram from '../diagrams/AngulimalaNeuroplasticityDiagram';
+import AngulimalaHabitPathwayDiagram from '../diagrams/AngulimalaHabitPathwayDiagram';
+import AngulimalaFMRIDiagram from '../diagrams/AngulimalaFMRIDiagram';
+import AngulimalaReinforcementDiagram from '../diagrams/AngulimalaReinforcementDiagram';
+import ActivityHabitTrackerDiagram from '../diagrams/ActivityHabitTrackerDiagram';
+// Mythology: Pushpaka Vimana — Aerodynamics & Flight
+import VimanaLiftDragDiagram from '../diagrams/VimanaLiftDragDiagram';
+import VimanaBernoulliDiagram from '../diagrams/VimanaBernoulliDiagram';
+import VimanaJetEngineDiagram from '../diagrams/VimanaJetEngineDiagram';
+import VimanaRocketDiagram from '../diagrams/VimanaRocketDiagram';
+import ActivityPaperPlaneDiagram from '../diagrams/ActivityPaperPlaneDiagram';
+// Mythology: Agni — Science of Fire
+import AgniCombustionTriangleDiagram from '../diagrams/AgniCombustionTriangleDiagram';
+import AgniFlameColorDiagram from '../diagrams/AgniFlameColorDiagram';
+import AgniHeatTransferDiagram from '../diagrams/AgniHeatTransferDiagram';
+import AgniSpectroscopyDiagram from '../diagrams/AgniSpectroscopyDiagram';
+import ActivityCandleDiagram from '../diagrams/ActivityCandleDiagram';
+// Mythology: Tower of Babel
+import BabelForcesDiagram from '../diagrams/BabelForcesDiagram';
+import BabelBucklingDiagram from '../diagrams/BabelBucklingDiagram';
+import BabelSkyscraperDiagram from '../diagrams/BabelSkyscraperDiagram';
+import BabelNLPDiagram from '../diagrams/BabelNLPDiagram';
+import ActivityTowerBuildDiagram from '../diagrams/ActivityTowerBuildDiagram';
+// Mythology: Al-Khwarizmi — Algebra & Algorithms
+import AlgebraBalanceScaleDiagram from '../diagrams/AlgebraBalanceScaleDiagram';
+import AlgebraLinearDiagram from '../diagrams/AlgebraLinearDiagram';
+import AlgebraQuadraticDiagram from '../diagrams/AlgebraQuadraticDiagram';
+import AlgebraAlgorithmDiagram from '../diagrams/AlgebraAlgorithmDiagram';
+import ActivityBalanceDiagram from '../diagrams/ActivityBalanceDiagram';
+// Mythology: Star of Bethlehem
+import BethlehemMagnitudeDiagram from '../diagrams/BethlehemMagnitudeDiagram';
+import BethlehemConjunctionDiagram from '../diagrams/BethlehemConjunctionDiagram';
+import BethlehemCelestialNavDiagram from '../diagrams/BethlehemCelestialNavDiagram';
+import BethlehemKeplerDiagram from '../diagrams/BethlehemKeplerDiagram';
+import ActivityStarFinderDiagram from '../diagrams/ActivityStarFinderDiagram';
+// Mythology: Parting of the Red Sea
+import RedSeaTideDiagram from '../diagrams/RedSeaTideDiagram';
+import RedSeaWindSetdownDiagram from '../diagrams/RedSeaWindSetdownDiagram';
+import RedSeaCFDDiagram from '../diagrams/RedSeaCFDDiagram';
+import RedSeaCrossSectionDiagram from '../diagrams/RedSeaCrossSectionDiagram';
+import ActivityTideModelDiagram from '../diagrams/ActivityTideModelDiagram';
+// Mythology: Well of Zamzam
+import ZamzamAquiferDiagram from '../diagrams/ZamzamAquiferDiagram';
+import ZamzamPorosityDiagram from '../diagrams/ZamzamPorosityDiagram';
+import ZamzamDarcyLawDiagram from '../diagrams/ZamzamDarcyLawDiagram';
+import ZamzamWaterCycleDiagram from '../diagrams/ZamzamWaterCycleDiagram';
+import ActivityWellModelDiagram from '../diagrams/ActivityWellModelDiagram';
+// Mythology: Muezzin's Call
+import MuezzinInverseSquareDiagram from '../diagrams/MuezzinInverseSquareDiagram';
+import MuezzinDomeAcousticsDiagram from '../diagrams/MuezzinDomeAcousticsDiagram';
+import MuezzinSpeakerDiagram from '../diagrams/MuezzinSpeakerDiagram';
+import MuezzinCityPropagationDiagram from '../diagrams/MuezzinCityPropagationDiagram';
+import ActivitySoundDistanceDiagram from '../diagrams/ActivitySoundDistanceDiagram';
+// NE India: The Girl Who Grew a Forest
+import ForestSuccessionDiagram from '../diagrams/ForestSuccessionDiagram';
+import ForestCarbonCycleDiagram from '../diagrams/ForestCarbonCycleDiagram';
+import ForestSoilLayersDiagram from '../diagrams/ForestSoilLayersDiagram';
+import ForestScalingDiagram from '../diagrams/ForestScalingDiagram';
+import ActivityTreePlantDiagram from '../diagrams/ActivityTreePlantDiagram';
+// NE India: The Bridge That Grew
+import BridgeRootGrowthDiagram from '../diagrams/BridgeRootGrowthDiagram';
+import BridgeTensileStrengthDiagram from '../diagrams/BridgeTensileStrengthDiagram';
+import BridgeLoadDistributionDiagram from '../diagrams/BridgeLoadDistributionDiagram';
+import BridgeTimelineDiagram from '../diagrams/BridgeTimelineDiagram';
+import ActivityBridgeModelDiagram from '../diagrams/ActivityBridgeModelDiagram';
+// River Dolphin's Secret — Echolocation & Sonar
+import DolphinEcholocationDiagram from '../diagrams/DolphinEcholocationDiagram';
+import DolphinSonarWaveDiagram from '../diagrams/DolphinSonarWaveDiagram';
+import DolphinArduinoSensorDiagram from '../diagrams/DolphinArduinoSensorDiagram';
+import DolphinAdaptationDiagram from '../diagrams/DolphinAdaptationDiagram';
+import ActivitySonarDiagram from '../diagrams/ActivitySonarDiagram';
+// Kite Festival of Guwahati — Aerodynamics & Flight
+import KiteLiftDiagram from '../diagrams/KiteLiftDiagram';
+import KiteDragForceDiagram from '../diagrams/KiteDragForceDiagram';
+import KiteShapesDiagram from '../diagrams/KiteShapesDiagram';
+import KiteWindDiagram from '../diagrams/KiteWindDiagram';
+import ActivityKiteBuildDiagram from '../diagrams/ActivityKiteBuildDiagram';
+// NE India: The Cloud That Refused to Rain
+import CloudFormationDiagram from '../diagrams/CloudFormationDiagram';
+import CloudRainProcessDiagram from '../diagrams/CloudRainProcessDiagram';
+import CloudSeedingDiagram from '../diagrams/CloudSeedingDiagram';
+import CloudTypesDiagram from '../diagrams/CloudTypesDiagram';
+import ActivityCloudJarDiagram from '../diagrams/ActivityCloudJarDiagram';
+// Reference: Aerodynamics & Flight
+import AeroFourForcesDiagram from '../diagrams/AeroFourForcesDiagram';
+import AeroBernoulliDiagram from '../diagrams/AeroBernoulliDiagram';
+import AeroWingShapesDiagram from '../diagrams/AeroWingShapesDiagram';
+// Reference: Neuroscience & The Brain
+import BrainNeuronDiagram from '../diagrams/BrainNeuronDiagram';
+import BrainSynapseDiagram from '../diagrams/BrainSynapseDiagram';
+import BrainPlasticityDiagram from '../diagrams/BrainPlasticityDiagram';
+// Reference: Hydrology & Water Science
+import HydroAquiferDiagram from '../diagrams/HydroAquiferDiagram';
+import HydroPurificationDiagram from '../diagrams/HydroPurificationDiagram';
+// Reference: Structural Engineering
+import StructForcesDiagram from '../diagrams/StructForcesDiagram';
+import StructTriangleDiagram from '../diagrams/StructTriangleDiagram';
+import StructSkyscraperDiagram from '../diagrams/StructSkyscraperDiagram';
+// Reference: Rotational Mechanics
+import RotTorqueDiagram from '../diagrams/RotTorqueDiagram';
+import RotGyroscopeDiagram from '../diagrams/RotGyroscopeDiagram';
+import RotGearsDiagram from '../diagrams/RotGearsDiagram';
+// Reference: Sonar & Echolocation
+import SonarEchoDiagram from '../diagrams/SonarEchoDiagram';
+import SonarBatDiagram from '../diagrams/SonarBatDiagram';
+import SonarSensorDiagram from '../diagrams/SonarSensorDiagram';
+// Reference: Tides & Oceanography
+import TideMoonDiagram from '../diagrams/TideMoonDiagram';
+import TideSpringNeapDiagram from '../diagrams/TideSpringNeapDiagram';
+import OceanCurrentDiagram from '../diagrams/OceanCurrentDiagram';
 
 const registry: Record<string, ComponentType> = {
   SineWaveDiagram,
@@ -370,6 +689,326 @@ const registry: Record<string, ComponentType> = {
   MieVsRayleighDiagram,
   MirageDiagram,
   RainbowRaindropDiagram,
+  BioluminescenceReactionDiagram,
+  FireflySyncDiagram,
+  FireflyCircuitBasicDiagram,
+  FireflyPWMDiagram,
+  FireflyParallelDiagram,
+  FireflyRandomDiagram,
+  FireflySyncStepsDiagram,
+  FireflyJarDiagram,
+  FireflyForLoopDiagram,
+  FireflyArrayDiagram,
+  FireflySineBreatheDiagram,
+  FireflyPhaseOffsetDiagram,
+  FireflyKuramotoDiagram,
+  FireflyProductionDiagram,
+  FireflyEfficiencyDiagram,
+  FireflySpeciesCodeDiagram,
+  FireflyLuciferinPathwayDiagram,
+  FireflyNeuralControlDiagram,
+  FireflyNetworkProtocolDiagram,
+  FireflyConservationDiagram,
+  JapiTopViewDiagram,
+  ConicalShapeDiagram,
+  SquareVsTriangleDiagram,
+  WeavePatternDiagram,
+  JapiHexagonDiagram,
+  ActivityJapiMakeDiagram,
+  AlgorithmStepsDiagram,
+  RhythmPlayerDiagram,
+  ElephantRumblePlayerDiagram,
+  ElephantGroundWaveDiagram,
+  ElephantSpectrogramDiagram,
+  CoriolisEffectDiagram,
+  StormSurgeDiagram,
+  MountainTemperatureDiagram,
+  MountainPressureDiagram,
+  MountainLapseRateDiagram,
+  MountainOxygenDiagram,
+  MountainWeatherDiagram,
+  MountainBodyAdaptDiagram,
+  MountainZonationDiagram,
+  MountainTreelineDiagram,
+  MountainBarometricDiagram,
+  MountainGasLawDiagram,
+  MountainO2PartialDiagram,
+  MountainWindChillDiagram,
+  MountainRadiationDiagram,
+  MountainUVDiagram,
+  BeeColonyDiagram,
+  BeeWaggleDanceDiagram,
+  BeePollinationDiagram,
+  BeeHoneymakingDiagram,
+  BeeHiveTempDiagram,
+  BeeLifeCycleDiagram,
+  BeeAnatomyDiagram,
+  BeeFlowerCoevolutionDiagram,
+  BeeNavigationDiagram,
+  BeeCommunicationDiagram,
+  BeeEcosystemServiceDiagram,
+  BeeColonyCollapseDiagram,
+  BeeForagingModelDiagram,
+  BeePopulationDynamicsDiagram,
+  BeeGeneticsDiagram,
+  BeeSwarmIntelligenceDiagram,
+  BeeVenomChemistryDiagram,
+  BeeRobotDiagram,
+  BeeMonitoringDiagram,
+  BeePathOptimizationDiagram,
+  BeeDiseaseDetectionDiagram,
+  BeePollinationNetworkDiagram,
+  BeeConservationPlanDiagram,
+  BeeDataDashboardDiagram,
+  WoodpeckerImpactDiagram,
+  WoodpeckerSkullLayersDiagram,
+  WoodpeckerHyoidDiagram,
+  WoodpeckerSpongyBoneDiagram,
+  WoodpeckerBrainFitDiagram,
+  WoodpeckerHelmetDiagram,
+  WoodpeckerForceMassDiagram,
+  WoodpeckerDecelerationDiagram,
+  WoodpeckerTongueDiagram,
+  WoodpeckerDrumPatternDiagram,
+  WoodpeckerMaterialsDiagram,
+  WoodpeckerEvolutionDiagram,
+  WoodpeckerStressDistributionDiagram,
+  WoodpeckerImpulseTheoryDiagram,
+  WoodpeckerResonanceDiagram,
+  WoodpeckerEnergyAbsorptionDiagram,
+  WoodpeckerRotationalForceDiagram,
+  WoodpeckerFatigueAnalysisDiagram,
+  WoodpeckerBioInspirationDiagram,
+  WoodpeckerCrashTestDiagram,
+  WoodpeckerMetamaterialDiagram,
+  WoodpeckerSensorDesignDiagram,
+  WoodpeckerSafetyStandardDiagram,
+  WoodpeckerCapstoneProjectDiagram,
+  ActivityEggDropDiagram,
+  ActivityStarCountDiagram,
+  ActivityFlowerWatchDiagram,
+  ActivityVortexDiagram,
+  ActivityBalloonDiagram,
+  ActivityMapDrawDiagram,
+  ActivityTreeMeasureDiagram,
+  ActivityMilkGlassDiagram,
+  ActivityEarGroundDiagram,
+  ActivityFlashlightSyncDiagram,
+  AltitudeAdaptationDiagram,
+  BanyanRootsDiagram,
+  StarBrightnessStepDiagram,
+  StarBortleScaleDiagram,
+  // Mythology: Churning of the Ocean
+  ChurningEmulsionDiagram,
+  DensityColumnDiagram,
+  PHScaleChurningDiagram,
+  DistillationDiagram,
+  ActivityDensityColumnDiagram,
+  ChurningCentrifugeDiagram,
+  ChurningChromatographyDiagram,
+  ChurningColloidDiagram,
+  ChurningDensityColumnDiagram,
+  ChurningDistillationDiagram,
+  ChurningEmulsifierDiagram,
+  ChurningIntermolecularDiagram,
+  ChurningMassSpecDiagram,
+  ChurningPolarityDiagram,
+  ChurningSeparationPipelineDiagram,
+  ChurningTitrationDiagram,
+  // Mythology: David and Goliath
+  SlingCircularMotionDiagram,
+  ProjectileArcDiagram,
+  KineticEnergyComparisonDiagram,
+  ImpactPressureDiagram,
+  ActivitySlingRangeDiagram,
+  // Mythology: Sand Mandala
+  SymmetryTypesMandala,
+  TessellationMandala,
+  FractalZoomDiagram,
+  GoldenRatioNatureDiagram,
+  ActivityMandalaDiagram,
+  // Mythology: Alhambra Geometry
+  TileAnglesDiagram,
+  SymmetryOperationsDiagram,
+  WallpaperGroupsDiagram,
+  CrystalSymmetryDiagram,
+  ActivityTessellationDiagram,
+  // Mythology: Hanuman Lifted a Mountain
+  HanumanTectonicDiagram,
+  HanumanAltitudeZonesDiagram,
+  HanumanDichotomousKeyDiagram,
+  HanumanMedicineDiagram,
+  ActivityHerbIdentifyDiagram,
+  // Mythology: Astrolabe — Islamic Astronomy
+  AstrolabeSundialDiagram,
+  AstrolabeProjectionDiagram,
+  AstrolabeCelestialNavDiagram,
+  AstrolabeFunctionsDiagram,
+  ActivityStarNavigateDiagram,
+  // Mythology: Ravana's Ten Heads
+  RavanaNeuronDiagram,
+  RavanaParallelDiagram,
+  RavanaCPUGPUDiagram,
+  RavanaNeuralNetDiagram,
+  ActivityReactionTimeDiagram,
+  ArkBuoyancyDiagram,
+  ArkCapacityDiagram,
+  ArkEcosystemDiagram,
+  ArkBiodiversityDiagram,
+  ActivityFloatTestDiagram,
+  // Mythology: Bodhi Tree
+  BodhiSeedCuttingDiagram,
+  BodhiDNACloneDiagram,
+  BodhiGraftingDiagram,
+  BodhiCRISPRDiagram,
+  ActivityCuttingDiagram,
+  // Mythology: Wheel of Dharma
+  DharmaWheelFrictionDiagram,
+  DharmaTorqueDiagram,
+  DharmaGyroscopeDiagram,
+  DharmaFlywheelDiagram,
+  ActivitySpinningTopDiagram,
+  // Mythology: Monastery Bells of Tawang
+  BellSoundWaveDiagram,
+  BellFrequencyDiagram,
+  BellHarmonicsDiagram,
+  BellFourierDiagram,
+  ActivityBellStrikeDiagram,
+  // Mythology: Angulimala — Neuroplasticity
+  AngulimalaNeuroplasticityDiagram,
+  AngulimalaHabitPathwayDiagram,
+  AngulimalaFMRIDiagram,
+  AngulimalaReinforcementDiagram,
+  ActivityHabitTrackerDiagram,
+  // Mythology: Pushpaka Vimana — Aerodynamics & Flight
+  VimanaLiftDragDiagram,
+  VimanaBernoulliDiagram,
+  VimanaJetEngineDiagram,
+  VimanaRocketDiagram,
+  ActivityPaperPlaneDiagram,
+  // Mythology: Agni — Science of Fire
+  AgniCombustionTriangleDiagram,
+  AgniFlameColorDiagram,
+  AgniHeatTransferDiagram,
+  AgniSpectroscopyDiagram,
+  ActivityCandleDiagram,
+  // Mythology: Tower of Babel
+  BabelForcesDiagram,
+  BabelBucklingDiagram,
+  BabelSkyscraperDiagram,
+  BabelNLPDiagram,
+  ActivityTowerBuildDiagram,
+  // Mythology: Al-Khwarizmi — Algebra & Algorithms
+  AlgebraBalanceScaleDiagram,
+  AlgebraLinearDiagram,
+  AlgebraQuadraticDiagram,
+  AlgebraAlgorithmDiagram,
+  ActivityBalanceDiagram,
+  // Mythology: Star of Bethlehem
+  BethlehemMagnitudeDiagram,
+  BethlehemConjunctionDiagram,
+  BethlehemCelestialNavDiagram,
+  BethlehemKeplerDiagram,
+  ActivityStarFinderDiagram,
+  // Mythology: Parting of the Red Sea
+  RedSeaTideDiagram,
+  RedSeaWindSetdownDiagram,
+  RedSeaCFDDiagram,
+  RedSeaCrossSectionDiagram,
+  ActivityTideModelDiagram,
+  // Mythology: Well of Zamzam
+  ZamzamAquiferDiagram,
+  ZamzamPorosityDiagram,
+  ZamzamDarcyLawDiagram,
+  ZamzamWaterCycleDiagram,
+  ActivityWellModelDiagram,
+  // Mythology: Muezzin's Call
+  MuezzinInverseSquareDiagram,
+  MuezzinDomeAcousticsDiagram,
+  MuezzinSpeakerDiagram,
+  MuezzinCityPropagationDiagram,
+  ActivitySoundDistanceDiagram,
+  // NE India: The Girl Who Grew a Forest
+  ForestSuccessionDiagram,
+  ForestCarbonCycleDiagram,
+  ForestSoilLayersDiagram,
+  ForestScalingDiagram,
+  ActivityTreePlantDiagram,
+  // Northeast India: Bamboo Taught Wind
+  BambooVortexDiagram,
+  BambooResonanceDiagram,
+  BambooHarmonicsDiagram,
+  BambooMaterialDiagram,
+  ActivityBambooFluteDiagram,
+  // Northeast India: Golden Hilsa — Sustainable Fishing
+  HilsaMigrationDiagram,
+  HilsaOlfactoryDiagram,
+  HilsaPopulationDiagram,
+  HilsaRiverHealthDiagram,
+  ActivityFishCountDiagram,
+  // NE India: The Bridge That Grew
+  BridgeRootGrowthDiagram,
+  BridgeTensileStrengthDiagram,
+  BridgeLoadDistributionDiagram,
+  BridgeTimelineDiagram,
+  ActivityBridgeModelDiagram,
+  // River Dolphin's Secret — Echolocation & Sonar
+  DolphinEcholocationDiagram,
+  DolphinSonarWaveDiagram,
+  DolphinArduinoSensorDiagram,
+  DolphinAdaptationDiagram,
+  ActivitySonarDiagram,
+  // Kite Festival of Guwahati — Aerodynamics & Flight
+  KiteLiftDiagram,
+  KiteDragForceDiagram,
+  KiteShapesDiagram,
+  KiteWindDiagram,
+  ActivityKiteBuildDiagram,
+  // NE India: The Cloud That Refused to Rain
+  CloudFormationDiagram,
+  CloudRainProcessDiagram,
+  CloudSeedingDiagram,
+  CloudTypesDiagram,
+  ActivityCloudJarDiagram,
+  // Dancing Deer of Loktak Lake
+  LoktakPhumdiDiagram,
+  LoktakSangaiDiagram,
+  LoktakDamImpactDiagram,
+  LoktakConservationDiagram,
+  ActivityWetlandModelDiagram,
+  // Muga Silk
+  MugaSilkFibroinDiagram,
+  MugaSilkNanostructureDiagram,
+  MugaSilkProcessDiagram,
+  MugaSilkEndemicDiagram,
+  ActivitySilkTestDiagram,
+  // Reference: Aerodynamics & Flight
+  AeroFourForcesDiagram,
+  AeroBernoulliDiagram,
+  AeroWingShapesDiagram,
+  // Reference: Neuroscience & The Brain
+  BrainNeuronDiagram,
+  BrainSynapseDiagram,
+  BrainPlasticityDiagram,
+  // Reference: Hydrology & Water Science
+  HydroAquiferDiagram,
+  HydroPurificationDiagram,
+  // Reference: Structural Engineering
+  StructForcesDiagram,
+  StructTriangleDiagram,
+  StructSkyscraperDiagram,
+  // Reference: Rotational Mechanics
+  RotTorqueDiagram,
+  RotGyroscopeDiagram,
+  RotGearsDiagram,
+  // Reference: Sonar & Echolocation
+  SonarEchoDiagram,
+  SonarBatDiagram,
+  SonarSensorDiagram,
+  // Reference: Tides & Oceanography
+  TideMoonDiagram,
+  TideSpringNeapDiagram,
+  OceanCurrentDiagram,
 };
 
 export default registry;

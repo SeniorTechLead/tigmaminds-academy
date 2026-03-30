@@ -49,7 +49,7 @@ export default function PeriodicTableOverviewDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 560 320" className="w-full max-w-2xl mx-auto" role="img" aria-label="Mini periodic table overview">
+      <svg viewBox="0 0 588 336" className="w-full max-w-2xl mx-auto" role="img" aria-label="Mini periodic table overview">
         {/* Title */}
         <text x="280" y="16" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="12" fontWeight="bold">Periodic Table Overview</text>
 

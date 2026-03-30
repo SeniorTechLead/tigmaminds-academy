@@ -8,7 +8,7 @@ export default function ConicSectionsDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 540 300" className="w-full max-w-xl mx-auto" role="img" aria-label="Conic sections diagram">
+      <svg viewBox="0 0 567 315" className="w-full max-w-xl mx-auto" role="img" aria-label="Conic sections diagram">
         {/* Title */}
         <text x="270" y="18" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">
           Conic Sections: Slicing a Cone

@@ -1,7 +1,7 @@
 export default function CellMembraneDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 500 250" className="w-full max-w-lg mx-auto" role="img" aria-label="Cell membrane phospholipid bilayer diagram">
+      <svg viewBox="0 0 525 284" className="w-full max-w-lg mx-auto" role="img" aria-label="Cell membrane phospholipid bilayer diagram">
         <defs>
           <marker id="cm-arrow" markerWidth="6" markerHeight="5" refX="6" refY="2.5" orient="auto">
             <polygon points="0 0, 6 2.5, 0 5" className="fill-gray-500 dark:fill-gray-400" />

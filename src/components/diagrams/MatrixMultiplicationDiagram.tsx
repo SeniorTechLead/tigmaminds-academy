@@ -1,7 +1,7 @@
 export default function MatrixMultiplicationDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 500 250" className="w-full max-w-lg mx-auto" role="img" aria-label="Matrix multiplication diagram showing 2x2 times 2x2 with row-by-column dot product">
+      <svg viewBox="0 0 525 271" className="w-full max-w-lg mx-auto" role="img" aria-label="Matrix multiplication diagram showing 2x2 times 2x2 with row-by-column dot product">
         {/* Matrix A */}
         <text x="65" y="30" textAnchor="middle" className="fill-gray-600 dark:fill-gray-300" fontSize="12" fontWeight="bold">A</text>
         <rect x="20" y="40" width="90" height="80" rx="4" fill="none" className="stroke-gray-500 dark:stroke-gray-400" strokeWidth="2" />

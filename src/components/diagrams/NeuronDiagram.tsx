@@ -1,7 +1,7 @@
 export default function NeuronDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 550 200" className="w-full max-w-xl mx-auto" role="img" aria-label="Labeled neuron diagram">
+      <svg viewBox="0 0 635 232" className="w-full max-w-xl mx-auto" role="img" aria-label="Labeled neuron diagram">
         <defs>
           <marker id="neuron-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
             <polygon points="0 0, 8 3, 0 6" className="fill-amber-500" />

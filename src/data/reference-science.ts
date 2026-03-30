@@ -3713,4 +3713,717 @@ export const scienceReferences: ReferenceGuide[] = [
       },
     ],
   },
+
+  // ──────────────────────────────────────────────────────────────
+  // Structural Engineering
+  // ──────────────────────────────────────────────────────────────
+  {
+    slug: 'structural-engineering',
+    title: 'Structural Engineering',
+    category: 'engineering',
+    icon: '🏗️',
+    tagline: 'Why buildings don\'t fall down, bridges use triangles, and skyscrapers sway on purpose.',
+    relatedStories: ['bridge-that-grew', 'boy-who-built-a-library'],
+    understand: [
+      {
+        title: 'Why Buildings Don\'t Fall Down',
+        diagram: 'StructForcesDiagram',
+        content:
+          'Every structure on Earth — a mud hut, a bamboo bridge, a concrete skyscraper — must resist three fundamental forces. **Compression** is a squeezing force that pushes material together, like the weight of a roof pressing down on walls. Stone and concrete are excellent at handling compression, which is why ancient builders used them for columns and arches. **Tension** is a pulling-apart force that stretches material, like the cables of a suspension bridge being pulled taut. Steel is superb at handling tension, which is why modern bridges use steel cables. **Shear** is a sliding force where one part of a structure tries to slide past another, like wind pushing the top of a building sideways while the foundation stays put. Every structure you see is a clever arrangement of materials designed to channel these three forces safely into the ground. When engineers get the balance wrong, structures fail — but when they get it right, buildings can stand for thousands of years.',
+        interactive: {
+          type: 'matching',
+          props: {
+            title: 'Match each force to where you experience it',
+            pairs: [
+              ['Compression', 'The legs of your chair being squeezed by your body weight'],
+              ['Tension', 'A rope in a tug-of-war being pulled from both ends'],
+              ['Shear', 'Cutting paper with scissors — blades slide past each other'],
+            ],
+          },
+        },
+      },
+      {
+        title: 'The Triangle — Nature\'s Strongest Shape',
+        diagram: 'StructTriangleDiagram',
+        content:
+          'Try this thought experiment: imagine four sticks connected at their corners with loose pins to form a square. Now push one corner sideways — the square collapses into a diamond shape because the joints can rotate freely. Replace it with three sticks forming a triangle, and push all you like — it cannot deform without actually breaking one of the sticks. This is why the triangle is the fundamental shape in structural engineering. A truss is a framework of triangles, and trusses are everywhere: bridge spans, roof frameworks, electricity pylons, crane arms, and the Eiffel Tower (which is essentially 18,000 iron pieces arranged into triangles). The living root bridges of Meghalaya, where Khasi people train the aerial roots of rubber fig trees across rivers, work partly on the same principle — the roots weave and branch at angles, creating natural triangulated networks that have carried foot traffic for centuries.',
+      },
+      {
+        title: 'Column Buckling — Why Tall Thin Things Snap',
+        content:
+          'A short, thick column can support enormous weight — think of the squat stone pillars in ancient temples. But make that same column tall and thin, and it suddenly fails by buckling: bowing sideways and snapping, even though the material itself is strong enough. The Swiss mathematician Leonhard Euler worked out the formula in 1757. The critical buckling load depends on the column\'s length squared — so a column twice as long can only carry one quarter of the load before it buckles. This is why a thin plastic ruler standing on end collapses if you press down on it, while the same ruler lying flat on a table can support a stack of books.\n\nEngineers fight buckling in several ways: making columns thicker (more material), bracing them with cross-members (shortening the effective length), or using hollow tubes (like bamboo, which is nature\'s anti-buckling design — a hollow cylinder is far more resistant to buckling than a solid rod of the same weight). The next time you see a steel scaffolding tower, notice the diagonal braces connecting the vertical poles — those diagonals are there specifically to prevent buckling.',
+        interactive: {
+          type: 'true-false',
+          props: {
+            statements: [
+              { text: 'A column twice as long can carry half the load before buckling.', answer: false, explanation: 'It can only carry one quarter — buckling load depends on length SQUARED, so doubling the length reduces the critical load by a factor of four.' },
+              { text: 'Bamboo is hollow because hollow tubes resist buckling better than solid rods of the same weight.', answer: true, explanation: 'The material is pushed away from the centre, increasing the moment of inertia — exactly the same reason steel I-beams have wide flanges.' },
+              { text: 'Short, thick columns usually fail by buckling.', answer: false, explanation: 'Short thick columns fail by crushing (compression failure). Buckling is a problem for tall, slender columns.' },
+            ],
+          },
+        },
+      },
+      {
+        title: 'Foundations — Buildings Need Feet Too',
+        content:
+          'A building is only as strong as the ground it stands on. Foundations spread the building\'s weight over a large enough area of soil or rock so that the ground does not sink or shift. For a small house, a simple "strip foundation" — a wide concrete strip under each wall — is enough. For a tall building on soft ground, engineers drive piles (long concrete or steel columns) deep into the earth until they reach solid bedrock, sometimes 50 metres or more below the surface. The world\'s tallest building, the Burj Khalifa in Dubai, sits on 194 piles driven 50 metres into the ground, even though the building itself is 828 metres tall.\n\nIn flood-prone regions of Assam, traditional houses are raised on stilts — bamboo or concrete pillars that keep the living space above floodwater. This is a form of pile foundation, and it solves two problems at once: it protects against floods and allows air to circulate beneath the house, keeping it cooler in the humid climate. The engineering principle is ancient, but the physics is timeless.',
+        interactive: {
+          type: 'did-you-know',
+          props: {
+            facts: [
+              'The Leaning Tower of Pisa tilts because it was built on soft clay without adequate foundations. Engineers spent 11 years (1990-2001) removing soil from the non-leaning side to straighten it by 45 centimetres.',
+              'The Burj Khalifa\'s foundation contains 45,000 cubic metres of concrete — enough to fill 18 Olympic swimming pools.',
+              'In Venice, Italy, the entire city sits on millions of wooden piles driven into the lagoon floor. The wood has survived for centuries because it is submerged in water and oxygen-starved, which prevents decay.',
+            ],
+          },
+        },
+      },
+      {
+        title: 'Wind Load — Skyscrapers Sway on Purpose',
+        diagram: 'StructSkyscraperDiagram',
+        content:
+          'Wind is one of the biggest challenges for tall buildings. Wind speed increases with height (because there are fewer obstacles to slow it down), and the force of wind on a flat surface increases with the square of the wind speed — so a wind twice as fast pushes four times as hard. A 300-metre skyscraper in a strong storm can experience wind forces of several thousand tonnes pushing on its sides.\n\nSurprisingly, the solution is not to make the building rigid. A perfectly rigid building would have to be impossibly massive to resist these forces. Instead, engineers design skyscrapers to flex — to sway gently in the wind, like a tree. The top of a typical skyscraper can sway 30 centimetres to 1 metre in each direction during a storm. You usually cannot feel it because the movement is slow and smooth. The building\'s steel frame acts like a giant spring, absorbing the wind energy and then slowly releasing it. The challenge is to limit the sway to a comfortable range — too much, and occupants feel seasick.',
+      },
+      {
+        title: 'Tuned Mass Dampers — Fighting Wobble with Wobble',
+        content:
+          'If you have ever tried to balance a broom on your palm, you know that countering an unwanted wobble requires moving in the opposite direction at the right time. Tuned mass dampers use exactly this principle at building scale. A massive weight — usually a steel pendulum or block — is suspended near the top of the building on cables or springs. When the building sways left in the wind, the damper swings right, and the forces partially cancel each other out.\n\nThe most famous tuned mass damper is in Taipei 101, a skyscraper in Taiwan. It contains a steel sphere 5.5 metres in diameter, weighing 730 tonnes — visible to visitors through a glass floor. When typhoon winds push the building one way, the giant ball swings the opposite way, reducing the building\'s sway by up to 40%. During Typhoon Soudelor in 2015, cameras recorded the ball swinging over 1 metre — working exactly as designed. Smaller dampers are used in bridges, transmission towers, and even in the handles of tennis rackets to reduce vibration.',
+        interactive: {
+          type: 'matching',
+          props: {
+            title: 'Match each anti-sway technique to how it works',
+            pairs: [
+              ['Tuned mass damper', 'A heavy pendulum that swings opposite to the building\'s sway'],
+              ['Cross-bracing', 'Diagonal steel members that prevent the frame from deforming into a parallelogram'],
+              ['Outrigger trusses', 'Connect the core to the perimeter columns, distributing forces across a wider base'],
+              ['Aerodynamic shaping', 'Building corners are rounded or stepped to reduce the wind force pushing on the surface'],
+            ],
+          },
+        },
+      },
+      {
+        title: 'Earthquake Engineering — Buildings That Dance Instead of Break',
+        content:
+          'An earthquake sends waves of energy through the ground, shaking a building\'s foundation sideways. A rigid building resists the shaking until the forces overwhelm it, and then it snaps catastrophically. Earthquake-resistant buildings use several strategies to survive. **Base isolation** places the building on rubber-and-steel pads that absorb ground movement — the ground shakes, but the building above barely moves, like a surfer riding a wave. **Energy dissipation devices** (dampers built into the frame) convert shaking energy into heat, much like a car\'s shock absorbers. **Flexible frames** are designed to deform without breaking — the building bends and sways during the quake but springs back to its original shape afterward.\n\nJapan, one of the most seismically active countries on Earth, leads the world in earthquake engineering. During the 2011 magnitude 9.0 earthquake (one of the most powerful ever recorded), not a single modern high-rise building in Tokyo collapsed, despite intense shaking that lasted several minutes. Traditional construction in NE India — bamboo-framed houses with light cladding — is naturally earthquake-resistant because it is flexible and lightweight. The bamboo frame bends with the shaking rather than fighting it.',
+      },
+      {
+        title: 'From Mud Huts to Mile-High Towers',
+        content:
+          'The history of structural engineering is the story of humans learning to resist larger and larger forces. Early humans built with mud, stone, and timber — materials that are strong in compression but weak in tension. The arch, invented independently by civilizations across the world, solved this by converting downward weight into outward compression along a curved path, allowing stone to span gaps. The Romans perfected concrete (a mixture of volcanic ash, lime, and water) and built the Pantheon dome in 126 AD — still the world\'s largest unreinforced concrete dome after nearly 2,000 years.\n\nThe Industrial Revolution brought steel, which is strong in both compression and tension. Steel frames made skyscrapers possible. Reinforced concrete — concrete with steel bars embedded inside — combined the compression strength of concrete with the tension strength of steel. Today\'s tallest buildings use high-strength concrete, structural steel, advanced computer modelling, and wind tunnel testing. The next frontier is buildings that actively respond to their environment: sensors detect wind and earthquakes, and computers adjust dampers and structural elements in real time. Some visionaries are designing buildings a mile (1.6 km) tall — taller than any mountain peak in many countries.',
+        interactive: {
+          type: 'matching',
+          props: {
+            title: 'Match each structural milestone to its key innovation',
+            pairs: [
+              ['Roman arches and domes', 'Converted tension into compression so stone could span wide gaps'],
+              ['Steel frames (1880s)', 'Made skyscrapers possible — strong in both compression and tension'],
+              ['Reinforced concrete', 'Combined concrete\'s compression strength with steel\'s tension strength'],
+              ['Base isolation (modern)', 'Separates building from ground to survive earthquake shaking'],
+            ],
+          },
+        },
+      },
+    ],
+  },
+
+  // ──────────────────────────────────────────────────────────────
+  // Rotational Mechanics
+  // ──────────────────────────────────────────────────────────────
+  {
+    slug: 'rotational-mechanics',
+    title: 'Rotational Mechanics',
+    category: 'physics',
+    icon: '⚙️',
+    tagline: 'Why wheels changed everything, figure skaters spin faster with arms in, and gears trade speed for force.',
+    relatedStories: ['wheel-of-dharma', 'potters-first-bowl', 'kite-festival'],
+    understand: [
+      {
+        title: 'Why Wheels Changed Everything',
+        content:
+          'Before the wheel, moving heavy objects meant dragging them — and dragging means fighting sliding friction, the force that resists one surface sliding against another. Sliding friction is large because every bump and groove on the two surfaces interlocks. The wheel replaced sliding friction with rolling friction, which is dramatically smaller. When a wheel rolls, only a tiny patch touches the ground at any instant, and that patch does not slide — it just presses down and lifts off. The result: a wheeled cart requires roughly 20 to 50 times less force to move than dragging the same load on the ground.\n\nThis is why the wheel is considered one of humanity\'s most important inventions. It did not just make transport easier — it enabled the potter\'s wheel (which allowed mass production of pottery), the waterwheel (which powered grain mills), and eventually every rotating machine from turbines to hard drives. Even today, nearly every machine that converts energy into motion uses rotation somewhere in its design.',
+        interactive: {
+          type: 'did-you-know',
+          props: {
+            facts: [
+              'The oldest known wheel was found in Slovenia and dates to about 3200 BC — over 5,000 years ago.',
+              'Ball bearings reduce friction even further by replacing sliding contact with rolling contact between tiny steel balls. A bicycle wheel with good bearings can spin freely for minutes.',
+              'The potter\'s wheel was probably invented before the transport wheel — humans figured out spinning clay before they thought of spinning a cart.',
+            ],
+          },
+        },
+      },
+      {
+        title: 'Torque — The Twisting Force',
+        diagram: 'RotTorqueDiagram',
+        content:
+          'Torque is the rotational equivalent of force. While force pushes or pulls in a straight line, torque twists around an axis. The formula is simple: torque equals force multiplied by the distance from the axis of rotation (called the lever arm). This is why door handles are placed as far from the hinges as possible — the same push from your hand produces much more torque when applied far from the pivot. Try opening a door by pushing right next to the hinge. It is nearly impossible, even though you are applying the same force.\n\nThe same principle explains why a longer wrench makes it easier to loosen a stuck bolt, why bicycle pedals are attached at the end of crank arms rather than directly to the axle, and why it is easier to turn a large steering wheel than a small one. Torque is measured in Newton-metres (N\u00B7m). A typical car engine produces around 200-400 N\u00B7m of torque, while your hand turning a doorknob produces only about 1-2 N\u00B7m.',
+      },
+      {
+        title: 'Angular Momentum — Why Spinning Things Stay Upright',
+        diagram: 'RotGyroscopeDiagram',
+        content:
+          'A stationary bicycle falls over instantly. A moving bicycle stays upright almost magically. The key is angular momentum — the rotational equivalent of regular (linear) momentum. A spinning object resists changes to its axis of rotation. The faster it spins and the more mass it has far from the axis, the stronger this resistance.\n\nThis is why a spinning top stays balanced, why a gyroscope maintains its orientation even when you tilt its base, and why a spiraling American football flies straight through the air. The angular momentum vector points along the axis of rotation, and physics dictates that this vector resists being tipped over. To change the direction of a spinning object\'s axis, you need to apply a torque — and the heavier and faster the spin, the more torque you need. Spacecraft use spinning reaction wheels (small flywheels inside the craft) to change orientation in space without using any fuel at all. By spinning a wheel one way, the spacecraft rotates the other way — conservation of angular momentum in action.',
+      },
+      {
+        title: 'Gears — Trading Speed for Force',
+        diagram: 'RotGearsDiagram',
+        content:
+          'Gears are one of the most elegant inventions in all of engineering. Two toothed wheels mesh together, and when one turns, the other turns in the opposite direction. The magic is in the size difference. If a small gear with 10 teeth drives a large gear with 20 teeth, the large gear turns at half the speed — but with twice the torque. You have traded speed for force.\n\nThis is exactly what bicycle gears do. In low gear (small front sprocket driving large rear sprocket), you pedal fast but the wheel turns slowly with lots of force — perfect for climbing steep hills. In high gear (large front sprocket driving small rear sprocket), each pedal turn makes the wheel spin many times — lots of speed but less force, perfect for flat roads. The gear ratio tells you the trade-off: a 2:1 gear ratio means the output shaft turns at half the speed but with double the torque.\n\nGears are everywhere: clocks, car transmissions, electric drills, food mixers, and even inside your wristwatch. The clock in a bell tower might have a gear ratio of 720:1, converting the slow fall of a weight into the fast tick of a second hand.',
+        interactive: {
+          type: 'matching',
+          props: {
+            title: 'Match each gear setup to its effect',
+            pairs: [
+              ['Small drives large (2:1)', 'Output is slower but has double the torque — good for climbing hills'],
+              ['Large drives small (1:2)', 'Output is faster but has half the torque — good for speed on flat ground'],
+              ['Same size gears (1:1)', 'Speed and torque stay the same — used to reverse direction of rotation'],
+              ['Worm gear', 'Very high gear ratio in compact space — used in guitar tuning pegs'],
+            ],
+          },
+        },
+      },
+      {
+        title: 'Moment of Inertia — Why Figure Skaters Spin Faster with Arms In',
+        content:
+          'In linear motion, mass determines how hard it is to accelerate an object. In rotation, the equivalent is moment of inertia — and it depends not just on how much mass there is, but on how far that mass is from the axis of rotation. Mass far from the axis contributes much more to the moment of inertia than the same mass close to the axis.\n\nThis is why a figure skater spins faster when they pull their arms in. Angular momentum (L = I x omega) is conserved — it cannot change unless an external torque acts. When the skater pulls their arms in, the moment of inertia (I) decreases because the mass is now closer to the spin axis. Since L must stay the same, the angular velocity (omega) must increase. Arms out: slow, graceful spin. Arms in: dazzling high-speed spin. No extra effort required — it is pure physics.\n\nThe same principle explains why a diver tucks into a ball to do fast somersaults, then extends their body to slow the rotation before entering the water. And why a helicopter\'s long rotor blades spin relatively slowly (they have high moment of inertia) while a small fan blade must spin very fast to move the same amount of air.',
+        interactive: {
+          type: 'true-false',
+          props: {
+            statements: [
+              { text: 'A figure skater needs to push harder to spin faster when pulling their arms in.', answer: false, explanation: 'No extra effort is needed. Conservation of angular momentum automatically increases the spin speed when moment of inertia decreases.' },
+              { text: 'A hollow cylinder has a higher moment of inertia than a solid cylinder of the same mass and radius.', answer: true, explanation: 'In a hollow cylinder, all the mass is at the maximum distance from the axis, maximising the moment of inertia.' },
+              { text: 'A long wrench makes a bolt easier to turn because it increases the moment of inertia.', answer: false, explanation: 'A longer wrench increases the lever arm, which increases torque (not moment of inertia). More torque means more twisting force on the bolt.' },
+            ],
+          },
+        },
+      },
+      {
+        title: 'Flywheels — Storing Energy in a Spinning Wheel',
+        content:
+          'A flywheel is a heavy wheel that stores energy as rotational kinetic energy. Spin it up, and it keeps spinning for a long time because its high moment of inertia resists changes in speed. This stored energy can be released later when needed. The potter\'s wheel is one of the earliest flywheels — the potter kicks it to spin it up, and the heavy wheel maintains a steady speed while the potter shapes the clay, smoothing out the jerky energy input from each kick.\n\nModern flywheels are used in everything from car engines (smoothing out the pulses from individual cylinder firings) to city buses (which capture braking energy in a flywheel and release it to accelerate again, saving up to 30% in fuel). NASA has tested flywheel batteries on the International Space Station — spinning carbon-fibre wheels at up to 60,000 revolutions per minute in a vacuum, storing enough energy to power systems during the station\'s passage through Earth\'s shadow. Unlike chemical batteries, flywheels do not degrade over millions of charge-discharge cycles and contain no toxic materials.',
+      },
+      {
+        title: 'Centripetal Force — The Force That Makes Things Go in Circles',
+        content:
+          'When you swing a stone on a string in a circle, the stone is constantly trying to fly off in a straight line (Newton\'s First Law — inertia). The string provides a centripetal force — a force directed inward, toward the center of the circle — that continuously redirects the stone\'s motion into a curve. Cut the string, and the stone flies off in a straight line tangent to the circle, not outward as many people expect.\n\nCentripetal force is not a new type of force — it is a role that any force can play. For the Moon orbiting Earth, gravity provides the centripetal force. For a car going around a curve, friction between the tyres and road provides it. For clothes in a washing machine\'s spin cycle, the drum wall pushes them inward. If the centripetal force is not strong enough for the speed and radius of the curve, the object flies off — which is why cars skid on icy bends (reduced friction) and why faster curves on racetracks are banked at an angle (using a component of the normal force to supplement friction).\n\nThe formula is F = mv\u00B2/r: centripetal force equals mass times speed squared divided by the radius. Notice that speed is squared — doubling your speed requires four times the centripetal force. This is why taking a curve too fast is so dangerous.',
+        interactive: {
+          type: 'matching',
+          props: {
+            title: 'Match each scenario to the force providing centripetal force',
+            pairs: [
+              ['Moon orbiting Earth', 'Gravity between Earth and the Moon'],
+              ['Car turning a corner', 'Friction between tyres and road surface'],
+              ['Stone on a string', 'Tension in the string pulling inward'],
+              ['Roller coaster loop', 'Normal force from the track pushing inward, supplemented by gravity'],
+            ],
+          },
+        },
+      },
+      {
+        title: 'From Potter\'s Wheel to Hard Drive — Spinning in Everyday Life',
+        content:
+          'Rotational motion is so fundamental that it is hard to find a machine that does not use it. The potter\'s wheel (invented around 3500 BC) was one of humanity\'s first precision machines. Waterwheels and windmills converted the energy of flowing water and wind into useful rotation for grinding grain. The steam engine converted heat into rotation, launching the Industrial Revolution. Electric motors convert electromagnetic energy into rotation, and generators do the reverse — they are the same machine run backward.\n\nToday, a typical household contains dozens of rotating devices: fans, washing machines, food processors, power drills, clocks, hard drives, CD/DVD players, and the electric motors inside refrigerators, air conditioners, and vacuum cleaners. A modern computer hard drive spins its platters at 7,200 revolutions per minute (some at 15,000 RPM) — that is 120 rotations every second, with the read/write head floating just 10 nanometres above the spinning surface, never touching it. The precision required is equivalent to a Boeing 747 flying at full speed, 1 millimetre above the ground.',
+        interactive: {
+          type: 'did-you-know',
+          props: {
+            facts: [
+              'A Formula 1 engine can spin at up to 15,000 RPM — that is 250 revolutions per second. The pistons travel up and down 500 times per second.',
+              'The Earth itself is a giant spinning object. At the equator, you are moving at about 1,670 km/h due to Earth\'s rotation — you just do not feel it because everything around you is moving at the same speed.',
+              'Neutron stars, the collapsed cores of dead massive stars, can spin at up to 716 rotations per second — faster than a kitchen blender.',
+            ],
+          },
+        },
+      },
+    ],
+  },
+
+  // ──────────────────────────────────────────────────────────────
+  // Sonar & Echolocation
+  // ──────────────────────────────────────────────────────────────
+  {
+    slug: 'sonar-and-echolocation',
+    title: 'Sonar & Echolocation',
+    category: 'physics',
+    icon: '🦇',
+    tagline: 'How bats hunt in darkness, dolphins see with sound, and submarines navigate the deep.',
+    relatedStories: ['river-dolphins-secret', 'girl-who-spoke-to-elephants', 'mountain-echoes'],
+    understand: [
+      {
+        title: 'Seeing with Sound — The Canyon Echo',
+        diagram: 'SonarEchoDiagram',
+        content:
+          'Stand at the edge of a canyon, shout "Hello!", and a moment later your voice comes back to you — an echo. That echo contains a surprising amount of information. The time delay tells you how far away the reflecting surface is: sound travels at about 343 metres per second in air, so if the echo takes 2 seconds to return, the cliff is 343 metres away (the sound traveled there AND back, so you divide by 2). The loudness of the echo tells you about the surface — a hard, flat cliff reflects sound well, while a rough, vegetated slope scatters and absorbs it. The pitch might change slightly if the surface is moving (the Doppler effect). With practice, you could map the shape of an entire canyon just by listening to echoes from different directions.\n\nThis is the basic principle behind all sonar and echolocation: send out a sound, listen for the echo, and use the information in the returning sound to build a picture of the world. Nature invented this technology millions of years before humans did.',
+      },
+      {
+        title: 'How Bats Hunt in Total Darkness',
+        diagram: 'SonarBatDiagram',
+        content:
+          'Most bats are nocturnal and hunt flying insects in complete darkness. They do this using echolocation — emitting high-frequency sound pulses (ultrasound, above the range of human hearing) and listening for the echoes. A hunting bat emits about 10 pulses per second while cruising. When it detects an insect, the pulse rate jumps to 200 per second in the final approach — a "feeding buzz" that gives the bat rapid, detailed updates on the insect\'s position.\n\nBat echolocation is astonishingly precise. They can detect objects as thin as a human hair, distinguish between a moth and a beetle by the different echo patterns their bodies produce, and track a moving insect through three-dimensional space while flying at speed through a dense forest. The bat\'s brain processes the returning echoes in real time, calculating distance (from the time delay), direction (from which ear receives the echo first and louder), size (from the echo\'s amplitude), and even texture and movement (from subtle changes in frequency and timing). No human-made sonar system matches this level of sophistication in such a compact package.',
+        interactive: {
+          type: 'did-you-know',
+          props: {
+            facts: [
+              'Some moths have evolved the ability to hear bat sonar and take evasive action — diving, looping, or even producing their own ultrasonic clicks to jam the bat\'s signal.',
+              'Bat calls are incredibly loud — up to 140 decibels at the source (louder than a jet engine). You cannot hear them only because the frequency is above human range.',
+              'The horseshoe bat adjusts the frequency of its calls to compensate for the Doppler shift caused by its own flight speed — a technique called Doppler shift compensation that human engineers did not develop until the 20th century.',
+            ],
+          },
+        },
+      },
+      {
+        title: 'Dolphin Sonar — 3D Sound Imaging',
+        content:
+          'While bats use echolocation in air, dolphins use it underwater, where sound travels about 4.4 times faster and much further than in air. A bottlenose dolphin produces clicks — short, sharp pulses of sound — using air sacs near its blowhole. These clicks are focused into a beam by the melon, a fatty organ in the dolphin\'s forehead that acts like an acoustic lens. The echoes return through the dolphin\'s lower jaw, which contains fat channels that conduct sound directly to the inner ear.\n\nDolphin sonar is so sensitive that they can detect a ping-pong ball at 100 metres, determine whether a hidden object is made of metal, plastic, or rubber (because different materials reflect sound differently), and even detect fish buried in sand by sensing the density difference between fish flesh and sand. River dolphins like the Ganges river dolphin of the Brahmaputra have especially sophisticated sonar because the murky river water makes vision almost useless — their eyes have evolved to be tiny, and they navigate and hunt almost entirely by sound. They are essentially swimming sonar stations.',
+      },
+      {
+        title: 'The Speed of Sound — Air vs Water vs Steel',
+        content:
+          'Sound is a vibration that travels through matter by molecules bumping into each other. The speed depends on how tightly packed the molecules are and how strongly they are connected. In air at 20\u00B0C, sound travels at about 343 m/s. In water, about 1,480 m/s — more than four times faster. In steel, about 5,960 m/s — more than seventeen times faster than in air.\n\nThe pattern makes intuitive sense: molecules in a solid are packed tightly and pass vibrations quickly, like a line of people standing shoulder-to-shoulder passing a nudge down the line. Gas molecules are spread far apart and moving randomly, so passing a vibration takes longer — like people spread across a field trying to pass a message by shouting. Temperature matters too: warmer air carries sound faster because the molecules move more energetically. This is why sound travels faster on a hot day than a cold one.\n\nNative Americans and other indigenous peoples knew to press an ear to the ground to detect approaching horses or buffalo from far away — sound in the solid earth reached them much sooner than sound through the air. They were practicing applied physics thousands of years before the science was formalized.',
+        interactive: {
+          type: 'matching',
+          props: {
+            title: 'Match each medium to the speed of sound through it',
+            pairs: [
+              ['Air (20\u00B0C)', '343 m/s — slow, because gas molecules are spread far apart'],
+              ['Water', '1,480 m/s — about 4x faster than air, molecules closer together'],
+              ['Steel', '5,960 m/s — about 17x faster than air, molecules tightly bonded'],
+              ['Vacuum (space)', 'Zero — sound cannot travel without molecules to vibrate'],
+            ],
+          },
+        },
+      },
+      {
+        title: 'Time-of-Flight — Measuring Distance with a Stopwatch and Sound',
+        content:
+          'The fundamental equation of sonar is beautifully simple: distance = (speed of sound \u00D7 time) \u00F7 2. You divide by 2 because the sound has to travel to the target AND back. If you shout at a cliff and the echo takes 3 seconds to return, the cliff is (343 \u00D7 3) \u00F7 2 = 514.5 metres away.\n\nThis "time-of-flight" principle is used everywhere. Parking sensors in cars emit ultrasonic pulses and measure the echo delay to tell you how close you are to a wall. Depth sounders on boats send sound pulses downward and measure how long the echo from the seabed takes to return — using the speed of sound in water (1,480 m/s) instead of air. Radar works identically but uses radio waves instead of sound, and lidar uses laser light. Even your GPS works on a similar principle — measuring the time it takes radio signals from satellites to reach your phone, though that uses the speed of light (300,000,000 m/s) instead of sound.\n\nTry this at home: stand about 50 metres from a large flat wall, clap your hands, and try to hear the echo. At 50 metres, the round trip is 100 metres, which takes about 0.29 seconds — just barely perceptible as a distinct echo. Get closer and the echo blends with the original clap.',
+      },
+      {
+        title: 'Building a Sonar Sensor',
+        diagram: 'SonarSensorDiagram',
+        content:
+          'You can build your own sonar distance sensor for less than the price of a cup of tea. The HC-SR04 ultrasonic sensor module has two cylindrical transducers — one transmitter and one receiver — and four pins that connect to a microcontroller like an Arduino. The transmitter sends out a burst of 40 kHz ultrasound (far above the 20 kHz upper limit of human hearing). The sensor measures the time until the receiver picks up the echo and outputs it as an electrical pulse.\n\nThe math is identical to the canyon echo: distance = (343 m/s \u00D7 time in seconds) \u00F7 2. In code, because the time is usually measured in microseconds, you divide by 58 to get centimetres directly. The sensor can measure distances from 2 cm to 400 cm with an accuracy of about 3 mm — good enough for a robot to navigate a room, a parking sensor to detect obstacles, or a project to measure the water level in a tank.\n\nYou are building the exact same technology that dolphins use, simplified into a circuit smaller than a postage stamp. The dolphin\'s version is more sophisticated — it has a phased array of emitters, adaptive signal processing, and millions of years of evolutionary refinement — but the fundamental physics is identical.',
+      },
+      {
+        title: 'Submarine Sonar — Active vs Passive',
+        content:
+          'Military submarines use two fundamentally different sonar modes. **Active sonar** sends out a loud "ping" and listens for echoes — exactly like a bat. The advantage is that it gives precise distance and direction to targets. The disadvantage is that it reveals the submarine\'s location to everyone within listening range — like turning on a flashlight in a dark room.\n\n**Passive sonar** just listens. Every ship, submarine, and marine animal makes noise — engine vibrations, propeller cavitation (tiny bubbles forming and collapsing), hull creaking, even the sound of the crew moving around. A submarine trailing a long array of hydrophones (underwater microphones) can detect, identify, and track other vessels without revealing itself. Expert sonar operators can distinguish between different classes of ships by their unique acoustic signatures, much as a birdwatcher identifies species by their calls.\n\nThe trade-off between active and passive sonar mirrors a dilemma in nature. Bats use active echolocation (they must be noisy to hunt), which is why some moths have evolved bat-detectors — ears tuned to bat frequencies. Owls, by contrast, use passive sonar of a sort — they hunt in silence, using their asymmetrically placed ears to pinpoint the rustling sounds of prey. Nature discovered both strategies long before the first submarine was launched.',
+        interactive: {
+          type: 'matching',
+          props: {
+            title: 'Match each sonar type to its characteristics',
+            pairs: [
+              ['Active sonar', 'Emits a sound pulse and listens for echoes — precise but reveals your position'],
+              ['Passive sonar', 'Only listens for sounds made by other objects — stealthy but less precise'],
+              ['Bat echolocation', 'Active — emits ultrasound pulses up to 200 times per second'],
+              ['Owl hunting', 'Passive — flies silently and listens for prey sounds with asymmetric ears'],
+            ],
+          },
+        },
+      },
+      {
+        title: 'Medical Ultrasound — Seeing Inside the Body with Sound',
+        content:
+          'Medical ultrasound uses the same time-of-flight principle as bat echolocation, submarine sonar, and your parking sensors — but pointed at the human body. A handheld probe placed on the skin sends pulses of high-frequency sound (typically 2-15 MHz, far above the range of human or even bat hearing) into the body. Every time the sound crosses a boundary between different tissue types — skin to fat, fat to muscle, muscle to bone — some of it reflects back. The machine measures the time and intensity of each reflection and assembles them into a real-time image.\n\nUltrasound is used to monitor babies during pregnancy (it is safe because it uses sound waves, not radiation), examine the heart, check for gallstones, guide needle biopsies, and even break up kidney stones (using focused, high-intensity ultrasound that vibrates the stone until it shatters). Doppler ultrasound measures blood flow velocity using the Doppler effect — the same frequency shift that makes an ambulance siren change pitch as it passes you.\n\nFrom a bat catching a moth in darkness, to a dolphin finding fish in murky water, to a doctor seeing a baby\'s heartbeat inside the womb — the physics is always the same: send out sound, listen for the echo, and build a picture of what you cannot see.',
+        interactive: {
+          type: 'true-false',
+          props: {
+            statements: [
+              { text: 'Medical ultrasound uses the same basic principle as bat echolocation.', answer: true, explanation: 'Both send out sound pulses and analyze the returning echoes to build an image of the surroundings.' },
+              { text: 'Ultrasound is dangerous because it uses radiation to see inside the body.', answer: false, explanation: 'Ultrasound uses sound waves, not ionizing radiation. It is considered one of the safest medical imaging techniques.' },
+              { text: 'Dolphin sonar can determine what material a hidden object is made of.', answer: true, explanation: 'Different materials reflect sound differently, allowing dolphins to distinguish metal from plastic from rubber.' },
+            ],
+          },
+        },
+      },
+    ],
+  },
+
+  // ──────────────────────────────────────────────────────────────
+  // Tides & Oceanography
+  // ──────────────────────────────────────────────────────────────
+  {
+    slug: 'tides-and-oceanography',
+    title: 'Tides & Oceanography',
+    category: 'geography',
+    icon: '🌊',
+    tagline: 'Why the ocean breathes with the Moon, waves carry energy but not water, and coral reefs are underwater cities.',
+    relatedStories: ['fishermans-storm-shelter', 'river-dolphins-secret', 'parting-red-sea'],
+    understand: [
+      {
+        title: 'Why the Ocean Breathes — The Moon Pulling Water',
+        diagram: 'TideMoonDiagram',
+        content:
+          'Twice a day, the ocean rises and falls along coastlines around the world. This rhythmic breathing is caused by the Moon\'s gravity. The Moon pulls on everything on Earth, but it pulls on the water closest to it slightly more than on the solid Earth beneath, because gravitational force decreases with distance. This extra pull stretches the ocean into a bulge on the side facing the Moon — a high tide.\n\nBut there is a second bulge on the opposite side of Earth too, which surprises many people. On the far side, the solid Earth is pulled toward the Moon more than the distant water, effectively leaving the water behind — creating another bulge. So Earth actually has two tidal bulges at any time: one facing the Moon and one facing away. As the Earth rotates on its axis every 24 hours, any given coastline passes through both bulges, producing two high tides and two low tides each day.\n\nThe difference between high tide and low tide (the tidal range) varies enormously. In the Mediterranean Sea, it can be less than 30 centimetres. In Canada\'s Bay of Fundy, the tidal range can exceed 16 metres — enough to cover a four-storey building. The bay\'s funnel shape amplifies the tidal wave as it is squeezed into a narrowing channel.',
+      },
+      {
+        title: 'Spring Tides and Neap Tides',
+        diagram: 'TideSpringNeapDiagram',
+        content:
+          'The Sun also pulls on Earth\'s oceans, but because it is so much further away (despite being far more massive), its tidal effect is only about 46% of the Moon\'s. When the Sun and Moon align — during a new moon or a full moon — their gravitational pulls add together, producing extra-large tides called spring tides (the name has nothing to do with the season — it comes from the old English word "springan," meaning to surge). During spring tides, high tides are higher and low tides are lower than average.\n\nWhen the Sun and Moon are at right angles to each other (during quarter moons), their pulls partially cancel out, producing smaller tides called neap tides. During neap tides, high tides are lower and low tides are higher than average — the tidal range is at its minimum.\n\nFishermen and sailors have tracked this cycle for thousands of years. In coastal Assam and the Sundarbans, fishermen plan their trips around the tidal calendar — strong spring tides mean stronger currents that can be dangerous for small boats, but also bring nutrient-rich water that attracts fish. Understanding tides is not abstract science — it is a matter of livelihood and safety.',
+        interactive: {
+          type: 'matching',
+          props: {
+            title: 'Match each tidal condition to its cause',
+            pairs: [
+              ['Spring tide (largest tidal range)', 'Sun and Moon aligned — gravitational pulls ADD together (new or full moon)'],
+              ['Neap tide (smallest tidal range)', 'Sun and Moon at right angles — gravitational pulls partially CANCEL (quarter moons)'],
+              ['Two tides per day', 'Earth rotates through two tidal bulges — one facing Moon, one on opposite side'],
+              ['Bay of Fundy\'s extreme 16 m range', 'Funnel-shaped bay amplifies the tidal wave as it squeezes into a narrow channel'],
+            ],
+          },
+        },
+      },
+      {
+        title: 'Ocean Currents — Rivers Inside the Ocean',
+        diagram: 'OceanCurrentDiagram',
+        content:
+          'The ocean is not a still body of water — it is crisscrossed by enormous currents that flow like rivers, some warm, some cold, carrying heat and nutrients around the planet. The Gulf Stream, for example, is a warm current that flows from the Gulf of Mexico northeast across the Atlantic. It carries so much heat that it keeps Western Europe significantly warmer than it would otherwise be — London, at the same latitude as Calgary in Canada, rarely sees temperatures below -5\u00B0C.\n\nThese currents are driven by two forces: wind (which drives surface currents) and differences in water density (which drives deep currents). Cold water is denser than warm water, and salty water is denser than fresh water. Near the poles, ocean water cools and becomes saltier as ice forms (ice excludes salt), making it very dense. This dense water sinks to the ocean floor and flows toward the equator as a deep, cold current. Meanwhile, warm surface water flows from the equator toward the poles to replace it. This global circulation — called the thermohaline circulation (thermo = heat, haline = salt) — acts like a giant conveyor belt, moving heat from the tropics to the poles and taking about 1,000 years to complete one full cycle. It is one of the most important regulators of Earth\'s climate.',
+      },
+      {
+        title: 'Waves — Energy Traveling, Not Water',
+        content:
+          'Watch a seagull floating on ocean waves. It bobs up and down, rises with each passing wave crest and drops into each trough — but it barely moves horizontally. This reveals a counterintuitive truth: ocean waves transport energy, not water. Each water molecule moves in a roughly circular path, returning almost to its starting position after each wave passes. The wave is a pattern of motion that travels across the surface, like a ripple running through a crowd doing "the wave" at a stadium — the people move up and down, but they stay in their seats.\n\nWaves are born when wind blows across the ocean surface. The wind\'s energy transfers to the water, creating small ripples that grow into larger waves as the wind continues to push. The size of a wave depends on three factors: wind speed, wind duration (how long the wind blows), and fetch (the distance of open water over which the wind blows). This is why the largest ocean waves are found in the Southern Ocean, which circles Antarctica with almost no land to interrupt the wind\'s fetch — waves there can build to over 20 metres.\n\nAs waves approach shore and the water becomes shallower, the bottom of the wave drags on the seabed, slowing it down. The top continues at full speed, causing the wave to steepen and eventually topple forward as a breaking wave — the surf that surfers ride.',
+        interactive: {
+          type: 'true-false',
+          props: {
+            statements: [
+              { text: 'Ocean waves carry water from the middle of the ocean to the shore.', answer: false, explanation: 'Waves transport energy, not water. Each water molecule moves in a circular path and ends up roughly where it started.' },
+              { text: 'Waves break near shore because the bottom of the wave slows down in shallow water.', answer: true, explanation: 'The bottom drags on the seabed while the top continues at full speed, causing the wave to topple forward.' },
+              { text: 'Bigger waves require stronger wind, longer wind duration, and greater fetch.', answer: true, explanation: 'All three factors — wind speed, duration, and fetch (open water distance) — contribute to wave size.' },
+            ],
+          },
+        },
+      },
+      {
+        title: 'Storm Surge — When Wind Pushes the Ocean onto Land',
+        content:
+          'A storm surge is one of the most dangerous phenomena in nature. During a powerful cyclone or hurricane, the sustained low pressure at the storm\'s center allows the ocean surface to rise (like sucking water up through a straw), and the fierce winds push this raised water toward the coast as a wall of seawater that can be several metres higher than the normal tide. In the 1970 Bhola cyclone in Bangladesh, a storm surge of up to 10 metres flooded low-lying coastal areas, killing an estimated 300,000 to 500,000 people — one of the deadliest natural disasters in recorded history.\n\nStorm surge is not a wave that breaks and retreats — it is a sustained rise in water level that can last for hours, flooding everything in its path. The damage depends on the storm\'s intensity, the shape of the coastline (funnel-shaped bays amplify the surge), the slope of the seabed (gently sloping seabeds push more water onto land), and timing — a storm surge arriving at spring high tide is far more devastating than one arriving at low tide.\n\nCoastal communities in cyclone-prone regions of the Bay of Bengal — including Assam\'s neighboring states — build raised cyclone shelters designed to protect people from storm surges. Understanding the physics of storm surge is literally lifesaving engineering.',
+      },
+      {
+        title: 'The Deep Ocean — Darker Than Space, Crushing Pressure',
+        content:
+          'The average depth of the ocean is about 3,688 metres — deeper than most people imagine. The deepest point, the Challenger Deep in the Mariana Trench, reaches 10,935 metres below the surface. At that depth, the pressure is over 1,000 atmospheres — roughly the weight of 50 jumbo jets stacked on top of you. Sunlight cannot penetrate beyond about 200 metres, so the vast majority of the ocean floor exists in total, permanent darkness.\n\nYet life thrives there. Deep-sea creatures have evolved extraordinary adaptations: bioluminescent fish that produce their own light (like underwater fireflies), giant squid with the largest eyes in the animal kingdom (to capture every photon in the near-total darkness), and tube worms that live near hydrothermal vents — cracks in the ocean floor where superheated, mineral-rich water gushes out at temperatures above 350\u00B0C. These vent communities get their energy not from sunlight but from chemicals dissolved in the vent fluid, through a process called chemosynthesis. They are proof that life can exist without sunlight — a discovery that transformed our search for life on other planets and moons.\n\nWe have explored more of the Moon\'s surface than we have of the deep ocean floor. As of today, only about 20% of the ocean floor has been mapped in high resolution.',
+        interactive: {
+          type: 'did-you-know',
+          props: {
+            facts: [
+              'At the bottom of the Mariana Trench, a styrofoam cup would be crushed to the size of a thimble by the pressure.',
+              'The deep ocean is so dark that many creatures have lost their eyes entirely — they navigate by touch, smell, and vibration.',
+              'Hydrothermal vents were not discovered until 1977. Scientists were astonished to find thriving ecosystems in a place they expected to be lifeless.',
+              'If you drained all the water from the ocean, the Mid-Atlantic Ridge would be the longest mountain range on Earth — over 65,000 kilometres long.',
+            ],
+          },
+        },
+      },
+      {
+        title: 'Coral Reefs — Underwater Cities',
+        content:
+          'Coral reefs are the rainforests of the ocean. They cover less than 1% of the ocean floor but support about 25% of all marine species — an astonishing concentration of biodiversity. A coral reef is built by tiny animals called coral polyps, each smaller than your fingernail, that secrete a hard limestone (calcium carbonate) skeleton. Over thousands of years, generations of polyps build on top of each other, creating massive reef structures that can be visible from space. The Great Barrier Reef off Australia stretches over 2,300 kilometres — the largest structure ever built by living organisms.\n\nMost reef-building corals have a partnership with microscopic algae called zooxanthellae that live inside their tissues. The algae photosynthesize (using sunlight to make food), and the coral gets up to 90% of its energy from this arrangement. In return, the coral provides the algae with shelter and nutrients. This is why coral reefs grow only in shallow, clear, warm tropical waters — the algae need sunlight.\n\nWhen water temperatures rise even 1-2\u00B0C above normal (due to climate change or El Ni\u00F1o events), the stressed coral expels its algae, turning ghostly white — a phenomenon called coral bleaching. Without the algae, the coral slowly starves. If temperatures return to normal quickly, the algae can recolonize and the coral recovers. If the heat persists, the coral dies. The world has lost about half its coral reef cover since the 1950s, making reef conservation one of the most urgent environmental challenges of our time.',
+      },
+      {
+        title: 'Why the Ocean Matters',
+        content:
+          'The ocean is not just a body of water — it is the engine that drives Earth\'s habitability. It absorbs about 30% of the carbon dioxide humans produce (slowing climate change, but at the cost of ocean acidification). It generates about 50% of the oxygen we breathe (through photosynthesis by phytoplankton — tiny floating algae). It absorbs over 90% of the excess heat from global warming (buffering the atmosphere but warming the water). It drives weather patterns through evaporation and ocean currents. And it provides food for billions of people — fish is the primary source of protein for over 3 billion people worldwide.\n\nThe Brahmaputra River, which flows through Assam, carries 650 million tonnes of sediment into the Bay of Bengal each year — one of the highest sediment loads of any river on Earth. This sediment builds the Sundarbans mangrove delta and fertilizes the coastal ocean, supporting fisheries that feed tens of millions of people. The river, the delta, and the ocean are one connected system — and understanding that connection is the heart of oceanography.\n\nThe ocean covers 71% of Earth\'s surface, yet we know more about the surface of Mars than about the deep ocean floor. Oceanography is one of the great frontiers of science — there are discoveries waiting to be made that we cannot yet even imagine.',
+        interactive: {
+          type: 'matching',
+          props: {
+            title: 'Match each ocean function to its impact',
+            pairs: [
+              ['Absorbs 30% of human CO2', 'Slows climate change but causes ocean acidification'],
+              ['Produces 50% of our oxygen', 'Phytoplankton photosynthesis — tiny floating algae are Earth\'s biggest oxygen factory'],
+              ['Absorbs 90% of excess heat', 'Buffers atmospheric warming but raises ocean temperatures'],
+              ['Thermohaline circulation', 'Distributes heat from equator to poles, regulating global climate'],
+            ],
+          },
+        },
+      },
+    ],
+  },
+
+  // ──────────────────────────────────────────────────────────────
+  // Aerodynamics & Flight
+  // ──────────────────────────────────────────────────────────────
+  {
+    slug: 'aerodynamics-and-flight',
+    title: 'Aerodynamics & Flight',
+    category: 'physics',
+    icon: '✈️',
+    tagline: 'Why birds soar, planes stay up, and skydivers stop accelerating.',
+    relatedStories: ['kite-festival', 'flying-squirrel'],
+    understand: [
+      {
+        title: 'Why Do Birds Fly but We Don\'t?',
+        diagram: 'AeroFourForcesDiagram',
+        content:
+          'Imagine standing on a windy hilltop holding a large sheet of cardboard. Tilt it just right and the wind tries to yank it upward out of your hands. That upward tug is **lift** — and it is the secret to flight.\n\nEvery flying object — bird, kite, helicopter, jumbo jet — must deal with exactly four forces:\n\n1. **Lift** — pushes upward (generated by wings or rotors)\n2. **Weight** (gravity) — pulls downward\n3. **Thrust** — pushes forward (engine, flapping wings, or the wind itself)\n4. **Drag** — pushes backward (air resistance)\n\nFor steady, level flight, lift must equal weight and thrust must equal drag. If lift exceeds weight, the object climbs. If drag exceeds thrust, it slows down.\n\nBirds achieve lift because their wings are shaped to force air downward; by Newton\'s Third Law, the air pushes the bird upward. Humans cannot fly under our own power because we are too heavy relative to the muscles we have — we would need a chest like a pigeon\'s (about 25% of body weight as flight muscle) to generate enough lift by flapping.\n\n**Check yourself:** If a plane\'s engines fail mid-flight, does it fall like a stone? No — it still has wings generating lift. It becomes a glider, trading altitude for forward speed, which is why pilots can land "dead-stick" (with no engine power).',
+      },
+      {
+        title: 'Bernoulli\'s Principle — The Paper Experiment',
+        diagram: 'AeroBernoulliDiagram',
+        content:
+          '**Try this right now:** Hold a sheet of paper by one edge so it hangs down limply in front of your mouth. Now blow hard across the top surface of the paper. What happens? The paper rises!\n\nThis demonstrates **Bernoulli\'s principle**: when air moves faster, its pressure drops. You blew fast air across the top of the paper, creating low pressure above it. The still air below the paper has higher pressure. The pressure difference pushes the paper up.\n\nAirplane wings (called **airfoils**) use the same trick permanently. The top surface of a wing is curved, so air traveling over it must cover a longer path than air going under the flat bottom. The top air speeds up, its pressure drops, and the higher pressure underneath pushes the wing up. That is lift.\n\nBernoulli\'s principle is named after Daniel Bernoulli, an 18th-century Swiss mathematician who discovered that in a flowing fluid, speed and pressure are inversely related. It explains why shower curtains blow inward (fast water creates low pressure inside), why two ships sailing close together get sucked toward each other, and why a spinning cricket ball curves in the air.\n\n**Check yourself:** Why does a convertible\'s soft top bulge upward when driving fast? (Answer: Fast air over the top creates low pressure; higher-pressure air inside pushes it up.)',
+      },
+      {
+        title: 'Angle of Attack — Hand Out the Car Window',
+        content:
+          '**Try this (safely, as a passenger):** On your next car trip, stick your hand out the window with your palm flat and fingers pointing forward. Now slowly tilt your hand upward. You feel your hand being pushed up and back. Tilt it too much and your hand gets shoved backward with barely any lift.\n\nThe **angle of attack** is the angle between the wing (or your hand) and the incoming airflow. At a small angle (about 2-5 degrees), the wing generates good lift with little drag — this is cruising flight. Increase the angle and lift increases, but so does drag. At about 15-20 degrees (depending on the wing shape), the air flow over the top surface separates and becomes turbulent. Lift collapses and drag spikes. This is called a **stall** — and it is the most dangerous moment in aviation.\n\nBirds instinctively manage angle of attack. Watch a pigeon landing: it tilts its wings to a high angle to create maximum lift at low speed, then at the last moment flares its wings almost vertical to kill all forward speed and touch down gently. Aircraft landing gear and flaps serve the same purpose — they allow high angles of attack at low speed without stalling.\n\n**Check yourself:** Why do planes lower their flaps during landing? (Answer: Flaps increase the wing\'s curve and area, generating more lift at lower speeds so the plane can fly slowly enough to land safely.)',
+      },
+      {
+        title: 'Wing Shapes and What They\'re For',
+        diagram: 'AeroWingShapesDiagram',
+        content:
+          'Not all wings are the same, because not all flying machines need the same things.\n\n**Long, thin wings** (high aspect ratio) — found on gliders, albatrosses, and passenger jets. These wings generate lots of lift with minimal drag. An albatross can glide for hours without flapping because its long wings are supremely efficient. The trade-off: they are fragile and bad at quick maneuvers.\n\n**Short, broad wings** (low aspect ratio) — found on hawks, sparrows, and fighter jets. These allow sharp turns and rapid acceleration. A sparrowhawk can twist through a forest at speed because its short wings respond instantly. The trade-off: they create more drag per unit of lift.\n\n**Delta wings** (triangular) — found on supersonic aircraft like the Concorde. At supersonic speeds, normal wings create huge drag from shock waves. Delta wings produce less wave drag and remain stable. The trade-off: they generate poor lift at low speeds, which is why Concordes needed very long runways.\n\n**Swept wings** — most modern jets use wings angled backward at 25-35 degrees. This delays the formation of shock waves as the plane approaches the speed of sound, reducing drag. Almost every commercial aircraft you see uses swept wings.\n\nEvolution and engineering arrived at similar solutions independently. The swift (a bird that sleeps on the wing) has swept-back wings remarkably similar to a modern fighter jet.',
+      },
+      {
+        title: 'How Helicopters Cheat — Rotary Wings',
+        content:
+          'Airplanes need to move forward to generate lift — their wings only work when air flows over them. Helicopters solved this problem by making the wing move instead of the whole aircraft.\n\nA helicopter\'s rotor blades are wings spinning in a circle. As they spin, air flows over them just like over an airplane wing, generating lift. The clever part: the pilot can tilt the spinning rotor disk in any direction. Tilt it forward, and some of the lift becomes forward thrust. Tilt it sideways, and the helicopter slides sideways. Keep it level, and the helicopter hovers in place.\n\nBut there is a catch. When the rotor spins one way, Newton\'s Third Law says the helicopter body wants to spin the opposite way. This is called **torque reaction**. Most helicopters solve this with a small tail rotor that pushes sideways, counteracting the spin. Without it, the helicopter would spin helplessly. Some helicopters (like the Chinook) use two main rotors spinning in opposite directions — the torques cancel each other out.\n\n**Did you know?** Hummingbirds are nature\'s helicopters. They can hover, fly backward, and even fly upside down briefly. Their wings rotate in a figure-8 pattern, generating lift on both the forward and backward stroke — something no airplane wing can do.\n\n**Check yourself:** Why does a helicopter need a tail rotor? (Answer: To counteract the torque from the main rotor that would otherwise spin the body in the opposite direction.)',
+      },
+      {
+        title: 'From Kites to Jets — A Brief History',
+        content:
+          'The story of human flight is a story of understanding the four forces — lift, weight, thrust, and drag — one at a time.\n\n**~500 BCE — Kites (China):** The first human-made objects to sustain flight. Kites exploit wind for thrust and angled surfaces for lift. They taught us that air could support weight.\n\n**1783 — Hot air balloons (France):** The Montgolfier brothers heated air inside a fabric envelope. Hot air is less dense than cool air, so the balloon floats — lift through buoyancy, not wing-generated aerodynamics.\n\n**1853 — Gliders (England):** George Cayley built the first heavier-than-air craft to carry a person. His coachman flew about 200 metres across a valley. No engine — just gravity converting altitude into forward speed.\n\n**1903 — Powered flight (USA):** The Wright brothers solved the last piece: sustained thrust from a lightweight engine. Their first flight at Kitty Hawk lasted 12 seconds and covered 37 metres — less than the wingspan of a modern Boeing 747.\n\n**1947 — Breaking the sound barrier:** Chuck Yeager flew the Bell X-1 faster than sound (Mach 1, about 1,235 km/h). Engineers had to completely rethink wing shapes for supersonic flight.\n\n**1969 — Leaving the atmosphere:** Apollo 11 used rockets (thrust from burning fuel ejected at high speed) to escape Earth\'s gravity entirely.\n\nEach breakthrough came from understanding one more piece of the physics. The science has not changed — we just got better at applying it.',
+      },
+      {
+        title: 'Drag — The Invisible Brake',
+        content:
+          'Every object moving through air experiences **drag** — a force pushing backward against the direction of motion. Drag is why you lean forward when cycling into a headwind, why cars are streamlined, and why parachutes work.\n\nThere are two main types:\n\n**Parasitic drag** increases with speed. It comes from the air literally pushing against the front of the object (form drag) and from friction as air slides along surfaces (skin friction drag). At low speeds, parasitic drag is small. At high speeds, it dominates — it increases with the square of speed, so doubling your speed quadruples the drag.\n\n**Induced drag** is the price you pay for generating lift. When a wing creates lift, it also creates spinning vortices at the wingtips (you can sometimes see these as vapor trails behind aircraft). These vortices waste energy, creating drag. Induced drag is highest at low speeds and decreases as speed increases.\n\nThe total drag is the sum of both types. There is a "sweet spot" speed where total drag is minimized — this is the most fuel-efficient cruising speed. Airlines fly at this speed to save fuel.\n\n**Try this:** Hold your hand flat out a car window at different speeds. At 30 km/h you feel gentle resistance. At 80 km/h the force is dramatically stronger — because drag increased by roughly (80/30)^2 = 7 times.\n\n**Check yourself:** Why do competitive cyclists wear tight clothing and tuck low on the bike? (Answer: To reduce their frontal area and surface friction, minimizing parasitic drag.)',
+      },
+      {
+        title: 'Terminal Velocity — Why Skydivers Don\'t Accelerate Forever',
+        content:
+          'When you jump out of a plane, gravity accelerates you downward at 9.8 m/s^2. After 1 second, you are falling at about 35 km/h. After 5 seconds, about 180 km/h. So why don\'t skydivers keep accelerating until they hit the ground at thousands of km/h?\n\nBecause drag increases with speed. As you fall faster, the air pushes back harder. At some point, the upward drag force exactly equals the downward gravitational force. The net force becomes zero, so acceleration stops. You continue falling, but at a constant speed called **terminal velocity**.\n\nFor a skydiver in a spread-eagle position, terminal velocity is about **200 km/h** (55 m/s). In a head-down dive with arms tucked, it increases to about **300 km/h** because the smaller frontal area means less drag. Felix Baumgartner, who jumped from 39 km altitude in 2012, briefly exceeded **1,357 km/h** (faster than sound) because the air is so thin at that altitude that drag was negligible.\n\nTerminal velocity depends on three things:\n- **Weight** — heavier objects have higher terminal velocity (a bowling ball falls faster than a tennis ball in air)\n- **Cross-sectional area** — larger area means more drag means lower terminal velocity (parachutes!)\n- **Air density** — thinner air means less drag means higher terminal velocity (why Baumgartner went supersonic)\n\nThe formula: `v_terminal = sqrt(2mg / (rho * A * Cd))` where m is mass, g is gravity, rho is air density, A is cross-sectional area, and Cd is the drag coefficient.\n\n**Check yourself:** A parachute works by massively increasing cross-sectional area. If a skydiver\'s terminal velocity without a parachute is 200 km/h, and the parachute has 50 times the area, roughly what is the new terminal velocity? (Hint: terminal velocity decreases with the square root of the area increase — so about 200 / sqrt(50) = 28 km/h, a survivable landing speed.)',
+        code: '# Terminal velocity calculator\nimport math\n\ndef terminal_velocity(mass_kg, area_m2, drag_coeff=1.0, air_density=1.225):\n    """Calculate terminal velocity in m/s.\n    \n    mass_kg: object mass in kilograms\n    area_m2: cross-sectional area in square metres\n    drag_coeff: drag coefficient (1.0 for a flat plate, 0.47 for a sphere)\n    air_density: kg/m^3 (1.225 at sea level)\n    """\n    g = 9.81  # m/s^2\n    v = math.sqrt((2 * mass_kg * g) / (air_density * area_m2 * drag_coeff))\n    return v\n\n# Skydiver: 80 kg, spread-eagle area ~0.7 m^2, Cd ~1.0\nv_free = terminal_velocity(80, 0.7, 1.0)\nprint(f"Skydiver (no chute): {v_free:.0f} m/s = {v_free * 3.6:.0f} km/h")\n\n# Same skydiver with parachute: area ~35 m^2, Cd ~1.5\nv_chute = terminal_velocity(80, 35, 1.5)\nprint(f"Skydiver (with chute): {v_chute:.1f} m/s = {v_chute * 3.6:.0f} km/h")',
+      },
+    ],
+  },
+
+  // ──────────────────────────────────────────────────────────────
+  // Neuroscience & The Brain
+  // ──────────────────────────────────────────────────────────────
+  {
+    slug: 'neuroscience-and-brain',
+    title: 'Neuroscience & The Brain',
+    category: 'biology',
+    icon: '🧠',
+    tagline: 'Your brain is an electrical storm — 86 billion neurons firing at lightning speed.',
+    relatedStories: [],
+    understand: [
+      {
+        title: 'Your Brain Is an Electrical Storm',
+        diagram: 'BrainNeuronDiagram',
+        content:
+          'Right now, as you read this sentence, approximately 86 billion **neurons** in your brain are firing electrical signals. Each neuron is a tiny cell — thinner than a hair — that works like a miniature wire with a switch.\n\nImagine a stadium of 86,000 people doing "the wave." One section stands up, the section next to them sees it and stands up too, and the wave ripples around the stadium. That is essentially how your brain works, except the "wave" is an electrical pulse called an **action potential**, it travels at up to 120 metres per second (430 km/h), and instead of 86,000 people, you have 86 billion neurons — more neurons than there are stars in the Milky Way.\n\nEach neuron has three main parts:\n- **Dendrites** — branch-like extensions that receive signals from other neurons (the "ears")\n- **Cell body (soma)** — processes the incoming signals and decides whether to fire (the "brain of the brain cell")\n- **Axon** — a long cable that carries the signal to the next neuron (the "voice")\n\nThe axon is wrapped in a fatty coating called **myelin** that works like the rubber insulation around an electrical wire — it speeds up signal transmission and prevents the signal from leaking away. Diseases that damage myelin (like multiple sclerosis) cause signals to slow down or stop, leading to movement and coordination problems.\n\n**Check yourself:** If a single neuron fires and passes its signal to 1,000 connected neurons, and each of those fires and passes to 1,000 more, how many neurons are involved after just 3 steps? (Answer: 1 + 1,000 + 1,000,000 + 1,000,000,000 = over a billion — showing how quickly information spreads through the brain.)',
+      },
+      {
+        title: 'How Neurons Talk — The Synapse',
+        diagram: 'BrainSynapseDiagram',
+        content:
+          'Neurons do not physically touch each other. Between the axon terminal of one neuron and the dendrite of the next, there is a tiny gap — about 20 nanometres wide (a nanometre is a billionth of a metre). This gap is called the **synapse**.\n\n**Analogy: Passing a note in class.** You cannot reach the person behind you, so you write a note and toss it across the gap. They pick it up, read it, and decide whether to pass it along.\n\nHere is what happens at a synapse:\n1. An electrical signal arrives at the axon terminal\n2. This triggers the release of tiny chemical messengers called **neurotransmitters** — they are stored in little bubbles called vesicles\n3. The neurotransmitters float across the synaptic gap\n4. They land on **receptors** on the next neuron — like a key fitting into a lock\n5. If enough neurotransmitters bind to enough receptors, the next neuron fires its own electrical signal\n\nDifferent neurotransmitters do different things:\n- **Dopamine** — reward and motivation ("that felt good, do it again")\n- **Serotonin** — mood and happiness\n- **GABA** — calms neural activity ("slow down")\n- **Glutamate** — excites neural activity ("speed up")\n- **Acetylcholine** — muscle movement and memory\n\nMany drugs and medications work by mimicking, boosting, or blocking specific neurotransmitters. Caffeine, for example, blocks receptors for adenosine (a neurotransmitter that makes you feel sleepy), which is why coffee makes you feel alert.\n\n**Check yourself:** Why might a drug that increases dopamine levels make someone feel happy? (Answer: Dopamine is the "reward" neurotransmitter. More dopamine = stronger reward signals = feeling of pleasure.)',
+        interactive: {
+          type: 'matching',
+          props: {
+            title: 'Match each neurotransmitter to its main role',
+            pairs: [
+              ['Dopamine', 'Reward and motivation — makes you want to repeat pleasurable actions'],
+              ['Serotonin', 'Mood regulation — low levels linked to depression'],
+              ['GABA', 'Inhibitory — calms neural activity, reduces anxiety'],
+              ['Glutamate', 'Excitatory — speeds up neural signals, essential for learning'],
+            ],
+          },
+        },
+      },
+      {
+        title: 'Can You Think Two Thoughts at Once?',
+        content:
+          'You probably believe you can multitask — text a friend while listening to a lecture while eating lunch. Research says otherwise.\n\nWhat feels like multitasking is actually **rapid task-switching**. Your brain\'s prefrontal cortex (the front part, behind your forehead) acts like an air traffic controller, directing attention to one task at a time. When you "multitask," your brain is rapidly switching between tasks — perhaps hundreds of times per minute — but it is never truly doing two thinking tasks simultaneously.\n\nThe cost of switching is real and measurable:\n- Each switch takes about **0.1 to 0.5 seconds** as your brain reloads the "mental context" of the new task\n- Studies show that people who multitask take **40% longer** to complete tasks compared to doing them sequentially\n- Error rates increase by up to **50%** during heavy multitasking\n- A study at the University of London found that multitasking during cognitive tasks reduced IQ scores by an average of 15 points — roughly the equivalent of staying up all night\n\nThere is one exception: you **can** do two things at once if one of them is so well-practiced it has become automatic. Walking and talking works because walking is automatic for most people. But walking and doing mental arithmetic is harder — try counting backward from 100 by 7s while walking and you will likely slow your pace or stumble.\n\n**Try this:** Ask a friend to read you a list of 10 words while you simultaneously try to solve 12 x 17 in your head. Afterward, how many words can you recall? (Most people remember 2-3 at best, showing that focused attention is a limited resource.)\n\n**Check yourself:** Is a concert pianist truly multitasking when they play with both hands, read music, and control the pedals? (Answer: Not quite — years of practice have made finger movements automatic, freeing conscious attention for musical interpretation. The mechanics are running on "autopilot.")',
+      },
+      {
+        title: 'Neuroplasticity — Your Brain Rewires Itself',
+        diagram: 'BrainPlasticityDiagram',
+        content:
+          'Until the 1960s, scientists believed the adult brain was fixed — that you were born with all the neural connections you would ever have, and it was all downhill from there. We now know this is completely wrong.\n\nYour brain physically changes every single day through a process called **neuroplasticity**. Every time you learn something new, practice a skill, or form a memory, your brain creates new connections between neurons or strengthens existing ones.\n\nThe principle is beautifully simple: **"neurons that fire together, wire together"** (Hebb\'s rule). When two neurons are activated at the same time repeatedly, the synapse between them gets stronger — more receptors grow, more neurotransmitter is released, and the connection becomes faster and more reliable. This is how practice makes you better at anything.\n\nThe most famous evidence comes from a study of **London taxi drivers**. To earn a license, London cabbies must memorize 25,000 streets and thousands of landmarks — a grueling process called "The Knowledge" that takes 3-4 years. Brain scans showed that the posterior hippocampus (the brain\'s navigation center) was **significantly larger** in taxi drivers than in bus drivers (who follow fixed routes). The longer someone had been a taxi driver, the larger it was. Their brains had physically grown new neural connections in response to demand.\n\nNeuroplasticity works in reverse too. If you stop using a skill, the neural pathways weaken — "use it or lose it." This is why skills get rusty with disuse and why rehabilitation after a stroke can partially rewire damaged brain areas.\n\n**Check yourself:** If neuroplasticity means the brain can always change, why is it harder to learn new languages as an adult? (Answer: The brain is most plastic in childhood — there is a "critical period" for language when neural circuits are especially receptive. Adult brains can still learn languages, but it takes more effort because the circuits are less flexible.)',
+      },
+      {
+        title: 'How We See Inside a Living Brain',
+        content:
+          'We cannot open someone\'s skull to watch their brain think (well, not ethically). So scientists have invented remarkable tools to peer inside without cutting.\n\n**EEG (Electroencephalography)** — Electrodes placed on the scalp detect the tiny electrical signals from millions of neurons firing together. Think of it like holding a microphone over a crowded stadium — you cannot hear individual conversations, but you can tell when the crowd cheers. EEG has excellent **time resolution** (it can detect changes in milliseconds) but poor spatial resolution (it cannot tell exactly where in the brain a signal comes from). It is used to study sleep stages, epilepsy, and reaction times.\n\n**fMRI (Functional Magnetic Resonance Imaging)** — Uses powerful magnets to detect changes in blood flow within the brain. Active brain regions need more oxygen, so more blood flows to them. fMRI creates beautiful 3D maps of brain activity with good **spatial resolution** (a few millimeters) but poor time resolution (changes take several seconds to appear). Those colorful brain images in news articles usually come from fMRI.\n\n**PET (Positron Emission Tomography)** — A small amount of radioactive tracer is injected into the bloodstream. The tracer accumulates in active brain areas, and a scanner detects the radiation. PET is used to study brain metabolism and to diagnose conditions like Alzheimer\'s disease.\n\nEach tool has trade-offs: EEG is fast but blurry. fMRI is detailed but slow. PET is metabolically informative but involves radiation. Researchers often combine multiple techniques to get a complete picture.\n\n**Check yourself:** Why can\'t we just use a single brain scanning technology for everything? (Answer: Each technology measures something different — electrical activity, blood flow, or metabolism — and each has different strengths in time vs. spatial resolution. No single tool captures everything.)',
+        interactive: {
+          type: 'matching',
+          props: {
+            title: 'Match each brain imaging tool to its key feature',
+            pairs: [
+              ['EEG (Electroencephalography)', 'Measures electrical activity — fast (milliseconds) but spatially blurry'],
+              ['fMRI (Functional MRI)', 'Measures blood flow — great spatial detail but slow (seconds)'],
+              ['PET (Positron Emission)', 'Uses radioactive tracer — shows brain metabolism, used for Alzheimer\'s diagnosis'],
+            ],
+          },
+        },
+      },
+      {
+        title: 'Memory — Short-Term vs Long-Term',
+        content:
+          'Your brain has two fundamentally different memory systems, and the computer analogy works perfectly here.\n\n**Short-term (working) memory** is like your computer\'s **RAM** — fast, but limited and temporary. It holds about **7 items** (plus or minus 2) for about 20-30 seconds. This is why phone numbers are 7 digits and why you can hold a sentence in your head long enough to understand it but forget what you had for lunch three days ago. If you do not actively rehearse information in short-term memory, it fades.\n\n**Long-term memory** is like your computer\'s **hard drive** — vast, durable, and relatively permanent. Its capacity is effectively unlimited — neuroscientists estimate the brain can store about **2.5 petabytes** of information (2.5 million gigabytes — enough to record 300 years of continuous TV). Long-term memories can last a lifetime, though they may become harder to retrieve over time.\n\nThe transfer from short-term to long-term memory happens primarily during **sleep**, in a brain region called the **hippocampus** (Greek for "sea horse" — it is shaped like one). During deep sleep, the hippocampus replays the day\'s experiences and decides what to move into long-term storage. This is why pulling an all-nighter before an exam is counterproductive — you may cram information into short-term memory, but without sleep, very little transfers to long-term memory.\n\nThere are different types of long-term memory:\n- **Episodic** — personal experiences ("my 10th birthday party")\n- **Semantic** — facts and knowledge ("Paris is the capital of France")\n- **Procedural** — skills ("how to ride a bicycle") — stored in the cerebellum, which is why you never forget how to ride a bike even after years\n\n**Try this:** Read this list once, then cover it and try to recall: 7, apple, chair, 42, blue, dog, piano. How many can you remember? Most people get 5-7 — that is your working memory in action.\n\n**Check yourself:** Why do you remember how to ride a bicycle even after years of not riding, but forget a phone number within minutes? (Answer: Bike riding is procedural memory stored in the cerebellum — it is extremely durable. Phone numbers are in short-term working memory which fades within seconds without rehearsal.)',
+      },
+      {
+        title: 'Reaction Time — Test Yours Right Now',
+        content:
+          'Your reaction time is the delay between sensing something and responding to it. It measures how fast signals travel from your eyes (or ears) → through your brain → to your muscles.\n\n**Try this with a friend:** Have them hold a 30 cm ruler vertically, with the 0 cm mark at the bottom, between your open thumb and index finger (do not touch the ruler). Without warning, they drop it. You catch it as fast as you can. Read the centimetre mark where your fingers caught it.\n\nConvert to reaction time: `time = sqrt(2 * distance / 9.81)`\n- Caught at 5 cm → 0.10 seconds (excellent)\n- Caught at 15 cm → 0.17 seconds (average)\n- Caught at 25 cm → 0.23 seconds (slow)\n- Missed at 30 cm → over 0.25 seconds\n\nAverage human visual reaction time is about **0.25 seconds** (250 milliseconds). Here is where that time goes:\n- **Light hitting your retina → signal to brain:** ~30 ms\n- **Brain processing and decision:** ~100 ms\n- **Brain sending signal to arm muscles:** ~20 ms\n- **Muscles contracting:** ~50 ms\n- **Finger movement:** ~50 ms\n\nReaction time varies with:\n- **Age** — fastest at 18-25, slows gradually after\n- **Alertness** — tired people react 50% slower\n- **Practice** — video game players often have faster reaction times\n- **Type of stimulus** — auditory reactions are ~40 ms faster than visual (sound signals take a shorter path through the brain)\n\n**Check yourself:** Why do sprinters react to the starter\'s gun (sound) rather than a visual signal? (Answer: Auditory reaction time is about 40 ms faster than visual reaction time, and in a 100 m sprint, 40 ms can be the difference between gold and silver.)',
+        code: '# Ruler-drop reaction time calculator\nimport math\n\ndef reaction_time(catch_distance_cm):\n    """Convert ruler catch distance to reaction time.\n    Uses free-fall equation: distance = 0.5 * g * t^2\n    Rearranged: t = sqrt(2 * d / g)\n    """\n    d = catch_distance_cm / 100  # convert to metres\n    g = 9.81  # m/s^2\n    t = math.sqrt(2 * d / g)\n    return t\n\n# Test different catch distances\nfor cm in [5, 10, 15, 20, 25, 30]:\n    t = reaction_time(cm)\n    ms = t * 1000\n    rating = "Excellent" if ms < 150 else "Good" if ms < 200 else "Average" if ms < 250 else "Slow"\n    print(f"Caught at {cm:2d} cm -> {ms:.0f} ms ({rating})")',
+      },
+      {
+        title: 'AI Neural Networks — Computers Copying Brains',
+        content:
+          'In the 1940s, scientists wondered: could we build a machine that processes information the way a brain does? The result, decades later, is the **artificial neural network** — the technology behind image recognition, language translation, self-driving cars, and tools like ChatGPT.\n\nAn artificial neural network is loosely inspired by biological neurons:\n- **Artificial neurons** (nodes) receive inputs, apply weights, and produce outputs — like biological neurons receiving signals through synapses\n- **Connections between nodes** have adjustable **weights** — like synaptic strength between real neurons\n- **Learning** happens by adjusting these weights — like neuroplasticity\n\nBut there are huge differences:\n- Your brain has **86 billion neurons** with **100 trillion connections**. The largest AI models have a few hundred billion parameters — impressive, but still far simpler\n- Biological neurons communicate with both electrical and chemical signals; artificial ones use pure mathematics\n- Your brain runs on **20 watts** of power (like a dim light bulb). Training a large AI model can consume **megawatts** — a million times more energy\n- Your brain learns from a handful of examples ("seeing one giraffe is enough"). AI typically needs thousands or millions of examples\n\nThe key process in AI learning is **backpropagation**: when the network makes a mistake, the error signal travels backward through the network, adjusting the weights at each connection to make the mistake less likely next time. This is mathematically elegant but biologically implausible — real brains probably learn through different mechanisms that we do not yet fully understand.\n\nNeuroscience and AI inform each other. Brain research inspires new AI architectures (like attention mechanisms inspired by how humans focus). AI models help neuroscientists simulate and understand brain processes. The two fields are converging, but we are still far from building anything that truly thinks like a human brain.\n\n**Check yourself:** Why does training an AI model require millions of examples when a child can learn what a "dog" is from seeing just a few dogs? (Answer: The human brain comes pre-wired with billions of years of evolved neural architecture optimized for learning. AI starts from scratch with random weights and must learn everything from data.)',
+        interactive: {
+          type: 'true-false',
+          props: {
+            statements: [
+              { text: 'Artificial neural networks work exactly like biological brains.', answer: false, explanation: 'They are loosely inspired by brains but use pure mathematics, not chemical neurotransmitters. The architectures are fundamentally different.' },
+              { text: 'The human brain uses about 20 watts of power — less than a light bulb.', answer: true, explanation: 'Despite its incredible processing power, the brain is remarkably energy-efficient compared to computers.' },
+              { text: 'AI learning through backpropagation is exactly how human brains learn.', answer: false, explanation: 'Backpropagation is a mathematical technique. Real brains likely learn through different, not yet fully understood mechanisms.' },
+              { text: 'Neuroplasticity in biological brains is analogous to weight adjustment in AI.', answer: true, explanation: 'Both involve strengthening or weakening connections based on experience, though the mechanisms are very different.' },
+            ],
+          },
+        },
+      },
+    ],
+  },
+
+  // ──────────────────────────────────────────────────────────────
+  // Geology & Earth Science
+  // ──────────────────────────────────────────────────────────────
+  {
+    slug: 'geology-and-earth',
+    title: 'Geology & Earth Science',
+    category: 'geography',
+    icon: '🌍',
+    tagline: 'The ground under your feet is moving, mountains are growing, and rocks tell stories.',
+    relatedStories: [],
+    understand: [
+      {
+        title: 'The Earth Is an Egg',
+        diagram: 'EarthLayersDiagram',
+        content:
+          'If you could slice the Earth in half like a boiled egg, you would see layers.\n\n**The shell = the crust.** This is the thin, solid outer layer where we live. Under the continents, it is 30-70 km thick (continental crust). Under the oceans, it is only 5-10 km thick (oceanic crust). Compared to the whole Earth, the crust is thinner than an eggshell is to an egg.\n\n**The egg white = the mantle.** This is a 2,900 km thick layer of hot, dense rock. It is not liquid, but it is not quite solid either — over millions of years, it flows like extremely thick honey. This slow churning (called **convection**) is what drives the movement of tectonic plates on the surface. The upper mantle reaches temperatures of about 1,000 degrees Celsius; the lower mantle exceeds 3,000 degrees Celsius.\n\n**The yolk = the core.** The outer core (2,200 km thick) is liquid iron and nickel at 4,000-5,000 degrees Celsius. It is this swirling liquid metal that generates Earth\'s magnetic field — the invisible shield that deflects solar radiation and makes compasses work. The inner core (1,200 km radius) is solid iron at over 5,000 degrees Celsius — as hot as the surface of the Sun. It is solid despite the extreme temperature because the pressure at the center of the Earth is over 3.6 million times atmospheric pressure, which forces the atoms to pack tightly into a solid.\n\n**Check yourself:** The inner core is as hot as the surface of the Sun. Why is it solid? (Answer: The immense pressure — 3.6 million atmospheres — forces atoms together so tightly that they cannot flow as a liquid.)',
+      },
+      {
+        title: 'Tectonic Plates — The Ground Is Moving Under Your Feet',
+        diagram: 'PlateBoundaryDiagram',
+        content:
+          'The Earth\'s crust is not a single unbroken shell. It is cracked into about **15 major tectonic plates** that float on the semi-liquid mantle below, like crackers floating on soup. These plates are in constant motion — typically 2-10 centimetres per year, roughly the speed your fingernails grow.\n\nThat sounds slow, but over millions of years it reshapes the world. 200 million years ago, all the continents were joined in a single supercontinent called **Pangaea**. Tectonic movement broke it apart and pushed the pieces to where they are today. South America and Africa were once joined — which is why their coastlines fit together like puzzle pieces and why you find identical fossils on both continents.\n\nPlates move because of **convection currents** in the mantle. Hot rock rises from near the core, flows sideways under the crust, cools, and sinks back down. This circulation drags the plates along.\n\nWhere plates meet, three things can happen:\n- **Divergent boundary** — plates pull apart, magma rises to fill the gap (mid-ocean ridges, like the Mid-Atlantic Ridge)\n- **Convergent boundary** — plates push together, one slides under the other (subduction), creating mountains and deep ocean trenches\n- **Transform boundary** — plates slide past each other sideways (like the San Andreas Fault in California)\n\n**Try this:** Take two sheets of paper and lay them flat on a table touching edge to edge. Now slowly push them together. Watch how they buckle upward — that is exactly how mountains form at convergent boundaries.\n\n**Check yourself:** If India is moving north at about 5 cm per year, how far will it have traveled in 1 million years? (Answer: 5 cm x 1,000,000 = 5,000,000 cm = 50 km — enough to significantly change the geography.)',
+      },
+      {
+        title: 'Mountains Are Still Growing',
+        content:
+          'The Himalayas — the tallest mountain range on Earth — are still growing. Mount Everest gains about **1 centimetre per year** because the Indian tectonic plate is still crashing into the Eurasian plate at about 5 cm per year.\n\nThis collision started about 50 million years ago when the Indian subcontinent, which had been drifting north after breaking away from Africa, slammed into Asia. The force was (and is) enormous — enough to crumple the Earth\'s crust upward like a car bonnet in a head-on collision.\n\nBut mountains do not grow forever. **Erosion** fights back. Wind, water, ice, and gravity constantly wear down mountains. The Appalachian Mountains in eastern North America were once as tall as the Himalayas — about 450 million years ago. After hundreds of millions of years of erosion with no new tectonic uplift, they have been worn down to gentle, rounded hills.\n\nThe height of a mountain at any moment is the balance between:\n- **Tectonic uplift** (pushing up) — active at convergent plate boundaries\n- **Erosion** (wearing down) — happening everywhere, all the time\n- **Isostatic adjustment** — the crust floats on the mantle like an iceberg in water. As erosion removes material from the top, the mountain rises slightly, like a ship rising as you unload cargo. This means mountains erode more slowly than you might expect.\n\n**Did you know?** The tallest mountain from base to peak is not Everest. Mauna Kea in Hawaii rises 10,203 metres from its base on the ocean floor to its summit — about 1,355 metres taller than Everest. But because most of it is underwater, its peak is only 4,207 metres above sea level.\n\n**Check yourself:** If Everest gains 1 cm per year from tectonic uplift but loses 0.5 cm per year to erosion, how much taller will it be in 10,000 years? (Answer: net gain = 0.5 cm/year x 10,000 = 5,000 cm = 50 metres — still growing, but slowly.)',
+        interactive: {
+          type: 'did-you-know',
+          props: {
+            facts: [
+              'The Himalayas are so massive that they affect weather patterns across all of Asia — they block cold Arctic air from reaching India and force monsoon winds upward, creating heavy rains.',
+              'India was once an island continent near Antarctica. It broke away about 130 million years ago and drifted north at an unusually fast 15 cm/year before colliding with Asia.',
+              'The summit of Everest contains limestone with marine fossils — the rock that forms the top of the world was once at the bottom of an ancient sea called the Tethys.',
+            ],
+          },
+        },
+      },
+      {
+        title: 'Volcanoes — Pressure Cookers Underground',
+        content:
+          '**Analogy:** Imagine shaking a bottle of fizzy drink. The gas dissolved in the liquid is under pressure. Open the cap and — WHOOSH — the gas expands violently and forces liquid out of the bottle. A volcanic eruption works on the same principle.\n\nDeep underground, rock is so hot that it melts into **magma** — a thick, glowing liquid containing dissolved gases (mainly water vapor, CO2, and sulfur dioxide). As magma rises toward the surface, pressure decreases. The dissolved gases start to expand — forming bubbles, just like in the fizzy drink. When the magma reaches the surface (now called **lava**), the gas expands explosively, shattering rock and hurling material into the air.\n\nNot all volcanoes erupt violently. It depends on the **viscosity** (thickness) of the magma:\n- **Low viscosity** (runny, like honey) — gas escapes easily, lava flows gently. Example: Hawaiian volcanoes, which produce spectacular lava fountains but rarely kill people.\n- **High viscosity** (thick, like peanut butter) — gas gets trapped, pressure builds, and eruptions are explosive. Example: Mount St. Helens (1980), which blew its entire north face off in a lateral blast.\n\nMost volcanoes sit along tectonic plate boundaries. The Pacific "Ring of Fire" — a horseshoe-shaped zone around the Pacific Ocean — contains 75% of the world\'s active volcanoes because multiple plates are converging and subducting there.\n\n**Check yourself:** Why is a volcano with thick, sticky magma more dangerous than one with runny magma? (Answer: Thick magma traps gas. The pressure builds until it exceeds the strength of the overlying rock, causing a violent explosion. Runny magma lets gas escape continuously, preventing pressure buildup.)',
+      },
+      {
+        title: 'Earthquakes — When Plates Get Stuck Then Snap',
+        content:
+          '**Analogy:** Bend a plastic ruler slowly. It bends and bends, storing energy. Then — SNAP — it breaks, and the energy is released all at once. Earthquakes work the same way.\n\nAt tectonic plate boundaries, enormous plates push against each other. Friction locks them in place — they cannot slide freely. Stress builds up over years, decades, or centuries. Eventually, the stress exceeds the friction holding them, and the plates suddenly lurch — sometimes by several metres in seconds. The stored energy radiates outward as **seismic waves** that shake the ground. This is an earthquake.\n\nThe point underground where the rock actually breaks is the **focus** (or hypocenter). The point on the surface directly above is the **epicenter** — this is what news reports give as the earthquake\'s location.\n\nEarthquakes produce two main types of waves:\n- **P-waves (Primary)** — compression waves that travel fastest (6-8 km/s through rock). They push and pull the ground in the direction they travel, like sound waves. They can travel through solids and liquids.\n- **S-waves (Secondary)** — shear waves that arrive after P-waves (3.5-4.5 km/s). They shake the ground side to side or up and down. They cannot travel through liquids — which is how we know the outer core is liquid (S-waves disappear when they hit it).\n\nEarthquake magnitude is measured on the **Richter scale** (or more precisely, the moment magnitude scale). Each whole number increase represents roughly **32 times** more energy. A magnitude 7 earthquake releases about 32 times more energy than a magnitude 6, and about 1,000 times more than a magnitude 5.\n\n**Check yourself:** How do we know Earth\'s outer core is liquid? (Answer: S-waves from earthquakes cannot travel through liquids. Seismometers on the opposite side of the Earth from an earthquake detect P-waves but not S-waves — the missing S-waves reveal a liquid layer in between.)',
+        diagram: 'SeismicWavesDiagram',
+      },
+      {
+        title: 'Rocks Tell Stories — Three Types of Rock',
+        diagram: 'RockCycleDiagram',
+        content:
+          'Every rock on Earth belongs to one of three families, and each family tells you something about the rock\'s history:\n\n**Igneous rocks** form when magma or lava cools and solidifies. "Igneous" means "born from fire." If the magma cools slowly underground, large crystals have time to grow — producing rocks like **granite** (the speckled rock used in kitchen countertops). If lava cools quickly at the surface, tiny crystals form — producing rocks like **basalt** (the dark rock of ocean floors and Hawaiian volcanoes). If lava cools extremely fast (like being ejected into air), you get **obsidian** — volcanic glass with no crystals at all.\n\n**Sedimentary rocks** form when layers of sediment (sand, mud, shells, dead organisms) accumulate and are compressed over millions of years. They are like geological history books — each layer records a different time period. **Sandstone** is compressed sand. **Limestone** is compressed seashells and coral. **Shale** is compressed mud. Fossils are almost always found in sedimentary rock.\n\n**Metamorphic rocks** form when existing rocks are transformed by extreme heat and pressure — "metamorphic" means "changed in form." Limestone becomes **marble**. Shale becomes **slate**. Sandstone becomes **quartzite**. The heat and pressure reorganize the minerals without melting the rock completely.\n\nThese three types cycle through each other over millions of years — the **rock cycle**. Igneous rock erodes into sediment, which becomes sedimentary rock, which gets pushed deep underground and transformed into metamorphic rock, which melts into magma, which cools into igneous rock again.\n\n**Check yourself:** You find a rock with visible layers and a fossil seashell embedded in it. What type of rock is it? (Answer: Sedimentary — the layers and fossil are dead giveaways. Fossils do not survive in igneous or metamorphic rock because the heat would destroy them.)',
+        interactive: {
+          type: 'matching',
+          props: {
+            title: 'Match each rock type to its formation process',
+            pairs: [
+              ['Igneous (e.g., granite, basalt)', 'Formed when magma or lava cools and solidifies'],
+              ['Sedimentary (e.g., sandstone, limestone)', 'Formed from compressed layers of sediment over millions of years'],
+              ['Metamorphic (e.g., marble, slate)', 'Formed when existing rock is transformed by extreme heat and pressure'],
+            ],
+          },
+        },
+      },
+      {
+        title: 'Fossils — Nature\'s Time Capsules',
+        content:
+          'A fossil is the preserved remains or traces of a living thing from the past. Most fossils are found in **sedimentary rock** because the gentle process of burial in sediment protects organisms from decay. (Igneous and metamorphic processes destroy organic remains.)\n\nHere is how most fossils form:\n1. An organism dies and is quickly buried by sediment (sand, mud, volcanic ash)\n2. Soft tissues decay, but hard parts (bones, shells, teeth) remain\n3. Over millions of years, minerals in groundwater slowly **replace** the original bone or shell molecule by molecule — turning it to stone while preserving the shape. This is **petrification** (literally "turning to stone")\n4. Tectonic forces and erosion eventually bring the fossil back to the surface\n\nNot all fossils are bones. **Trace fossils** record behavior: footprints, burrows, bite marks, and even fossilized dinosaur dung (called **coprolites** — yes, scientists study ancient poop to learn what dinosaurs ate).\n\nThe oldest fossils are about **3.5 billion years old** — single-celled organisms called stromatolites, found in ancient Australian rocks. The youngest fossils are just a few thousand years old. Together, they form a record of life on Earth spanning most of its 4.5-billion-year history.\n\n**Try this:** Next time you see a piece of limestone (many buildings and footpaths use it), look closely. You may spot tiny shell fragments or even complete fossils embedded in the stone — the remains of sea creatures from millions of years ago, now part of your sidewalk.\n\n**Check yourself:** Why are fossils almost never found in igneous rock? (Answer: Igneous rock forms from molten magma/lava at temperatures of 700-1,200 degrees Celsius — any organic remains would be completely destroyed.)',
+      },
+      {
+        title: 'Erosion — Water Is Patient and Powerful',
+        content:
+          'The Grand Canyon is 1,600 metres deep, 29 kilometres wide, and 446 kilometres long. It was carved almost entirely by water — the Colorado River — over about 5-6 million years. Water is patient.\n\n**Erosion** is the process by which rock and soil are worn away and transported by natural forces. The main agents are:\n\n**Water** — The most powerful erosion agent. Rainwater dissolves CO2 from the air, forming weak carbonic acid that slowly dissolves limestone and other rocks (this is how caves form). Rivers physically abrade their beds with the sediment they carry — sand and gravel act like natural sandpaper. Coastal waves pound cliffs with enormous force.\n\n**Ice** — Water seeps into cracks in rock, freezes, and expands by 9%. This **frost wedging** gradually splits rock apart. Glaciers — rivers of ice — scrape and gouge the landscape as they flow, carving U-shaped valleys and transporting boulders hundreds of kilometres.\n\n**Wind** — In deserts, wind-blown sand acts like a natural sandblaster, sculpting rocks into dramatic shapes. Wind also carries away topsoil, which can cause agricultural disasters (like the 1930s Dust Bowl in the USA).\n\n**Gravity** — The silent eroder. Rockfalls, landslides, and the slow creep of soil downhill are all gravity-driven erosion. Gravity ensures that any material loosened by water, ice, or wind moves downhill.\n\n**Biological erosion** — Plant roots grow into cracks and gradually pry rock apart. Burrowing animals mix and loosen soil. Lichens produce acids that dissolve rock surfaces.\n\nErosion is why no landscape is permanent. Given enough time, water and gravity will level any mountain. The question is always: is the mountain being pushed up faster than it is being worn down?\n\n**Check yourself:** The Himalayas are only 50 million years old but are the tallest mountains on Earth. The Appalachians are 480 million years old but are much shorter. Why? (Answer: The Himalayas are still being pushed up by active tectonic collision faster than erosion wears them down. The Appalachians have had no active uplift for hundreds of millions of years, so erosion has had free reign.)',
+      },
+    ],
+  },
+
+  // ──────────────────────────────────────────────────────────────
+  // Hydrology & Water Science
+  // ──────────────────────────────────────────────────────────────
+  {
+    slug: 'hydrology-and-water',
+    title: 'Hydrology & Water Science',
+    category: 'geography',
+    icon: '💧',
+    tagline: 'The same water dinosaurs drank is falling from your tap right now.',
+    relatedStories: [],
+    understand: [
+      {
+        title: 'The Water Cycle — The Same Water Dinosaurs Drank',
+        diagram: 'WaterCycleDiagram',
+        content:
+          'Here is a mind-bending fact: the water on Earth today is essentially the same water that has been here for 4 billion years. The water you drank this morning may have once been part of a Jurassic ocean, fallen as rain on a Roman battlefield, or frozen in an Ice Age glacier. No new water is being created — it just keeps cycling.\n\nThe **water cycle** (hydrological cycle) has four main stages:\n\n1. **Evaporation** — The Sun heats surface water (oceans, lakes, rivers), converting liquid water into water vapor (gas). About 86% of evaporation happens from the oceans. Plants also release water vapor through their leaves in a process called **transpiration** — a single large tree can release 400 litres of water per day.\n\n2. **Condensation** — As water vapor rises into the atmosphere, it cools. Cool air holds less moisture, so the vapor condenses into tiny water droplets that form **clouds**. Each cloud droplet is about 10 micrometres (0.01 mm) — too small to fall.\n\n3. **Precipitation** — Cloud droplets collide and merge until they are heavy enough to fall. This is **rain** (or snow, sleet, hail depending on temperature). A typical raindrop is about 2 mm — roughly 200 times larger than a cloud droplet, containing about 1 million merged droplets.\n\n4. **Collection** — Water flows downhill through rivers and streams (surface runoff), soaks into the ground (infiltration), or collects in lakes and oceans. Eventually, it evaporates again, and the cycle repeats.\n\nThe entire cycle is powered by just two things: **solar energy** (drives evaporation) and **gravity** (drives precipitation and runoff).\n\n**Check yourself:** Why does it rain more over mountains than flat areas? (Answer: Mountains force air upward. Rising air cools, causing water vapor to condense into clouds and rain. This is called orographic precipitation.)',
+      },
+      {
+        title: 'Groundwater — An Invisible Ocean Under Your Feet',
+        content:
+          'When it rains, not all the water flows into rivers. A large fraction soaks into the ground — this is **infiltration**. The water trickles downward through soil and rock, filling the tiny spaces between grains of sand, pebbles, and cracks in rock. This underground water is called **groundwater**, and there is a staggering amount of it.\n\nGroundwater accounts for about **30% of all freshwater on Earth** — far more than all the world\'s rivers and lakes combined (which hold less than 1%). Only the ice caps and glaciers hold more freshwater. If you could pump out all the groundwater and spread it evenly over Earth\'s land surface, it would be about 55 metres deep.\n\nGroundwater moves, but extremely slowly — typically a few metres per year, compared to the kilometres per day that river water travels. It follows gravity, flowing from higher elevations to lower ones, and eventually seeps out into rivers, lakes, springs, or the ocean.\n\nAbout **2 billion people** — roughly one quarter of the world\'s population — depend on groundwater as their primary drinking water source. In India, groundwater supplies about 85% of rural drinking water and 60% of irrigation.\n\n**The problem:** In many places, we are pumping groundwater out faster than rain can replenish it. The water table (the upper surface of the groundwater) is dropping — in parts of northern India, by over 1 metre per year. Wells that worked for decades are going dry. This is one of the most serious and least visible environmental crises in the world.\n\n**Check yourself:** Why is groundwater generally cleaner than surface water from rivers? (Answer: As water percolates down through layers of soil and rock, the grains act as a natural filter, trapping bacteria, sediment, and many pollutants. It is nature\'s own purification system.)',
+      },
+      {
+        title: 'Aquifers — Underground Sponges',
+        diagram: 'HydroAquiferDiagram',
+        content:
+          '**Analogy:** Imagine soaking a kitchen sponge with water. The sponge is solid, but it is full of tiny holes (pores) that hold water. Squeeze the sponge and water flows out. An **aquifer** is a layer of underground rock or gravel that works exactly the same way.\n\nTwo properties determine how good a rock is at being an aquifer:\n\n**Porosity** — the percentage of the rock that is empty space. Sandstone has high porosity (about 20-30% air space). Granite has almost zero porosity. Higher porosity means more water can be stored.\n\n**Permeability** — how easily water can flow through the connected spaces. A rock can be porous but not permeable if the spaces are not connected (like a sponge wrapped in plastic). Gravel is highly permeable — water flows through it easily. Clay is porous (it holds water) but has very low permeability — the spaces are too small for water to flow through quickly. This is why clay layers act as barriers.\n\nAn aquifer typically sits between two **impermeable layers** (like clay or solid granite). The water table is the upper surface of the saturated zone within the aquifer.\n\nThere are two types of aquifer:\n- **Unconfined** — the top is open to the surface (rain can soak directly in). The water table rises and falls with rainfall.\n- **Confined** — sandwiched between impermeable layers. Water enters from far away where the aquifer meets the surface. The water is under pressure — drill into a confined aquifer and water may shoot upward (an **artesian well**).\n\n**Check yourself:** A farmer drills a well into an unconfined aquifer during the rainy season. Why might the well go dry during a drought? (Answer: In an unconfined aquifer, the water table drops when there is not enough rain to recharge it. If the water table falls below the bottom of the well, no water can be pumped.)',
+      },
+      {
+        title: 'Why Wells Work — Water Table and Pressure',
+        content:
+          'A well is simply a hole drilled or dug down to the **water table** — the level below which all the spaces in rock and soil are filled with water.\n\nAbove the water table is the **unsaturated zone** (or vadose zone). Here, the spaces between soil grains contain both air and some water — like a damp sponge that is not fully soaked. Below the water table is the **saturated zone** — every space is completely filled with water, like a sponge held underwater.\n\nWhen you dig a well into the saturated zone, water seeps in from the surrounding rock and fills the hole to the level of the water table — the same way water fills a hole you dig at the beach. You pump water out, the level drops, and water flows in from the surrounding aquifer to replace it.\n\nThe water table is not flat — it roughly follows the surface topography, higher under hills and lower in valleys. This is why springs occur where the water table intersects the land surface — water simply flows out where the underground meets the above-ground.\n\n**Artesian wells** are special. In a confined aquifer (sandwiched between impermeable layers), water is under pressure — like water in a sealed pipe. When you drill into a confined aquifer, the pressure pushes water upward without any pumping needed. Some artesian wells produce water that shoots several metres above the ground.\n\n**In India:** Traditional **step-wells** (baolis) are an ingenious engineering solution. Rather than digging a narrow shaft, builders excavated a wide, terraced staircase descending to below the water table. As the water table rises and falls with the seasons, people simply walk to the current water level. The famous Chand Baori in Rajasthan has 3,500 steps descending 13 stories.\n\n**Check yourself:** Why does the water level in a well rise during the monsoon season? (Answer: Heavy rain recharges the groundwater — water percolates down through the soil and raises the water table. The well, connected to the same aquifer, rises with it.)',
+      },
+      {
+        title: 'Rivers — How Water Carves Landscapes',
+        content:
+          'A river begins as a tiny trickle of rain or meltwater on high ground. Gravity pulls it downhill, and as it collects more water, it grows into a stream, then a river. Along the way, it sculpts the landscape through three processes:\n\n**Erosion** — The river picks up and carries away rock and soil from its bed and banks. A fast river carries more sediment and erodes more aggressively. The Colorado River carved the Grand Canyon this way — 1,600 metres deep over about 5-6 million years.\n\n**Transportation** — Rivers carry sediment in four ways:\n- **Dissolved** — minerals dissolved in the water (invisible)\n- **Suspended** — fine particles floating in the water (this makes rivers look muddy — the Brahmaputra carries about 800 million tonnes of sediment per year)\n- **Saltation** — small pebbles bouncing along the bottom\n- **Traction** — large rocks rolling along the bottom\n\n**Deposition** — When a river slows down (entering a lake, reaching flat ground, or meeting the sea), it drops its sediment. The heaviest particles drop first, the finest last. This creates **deltas** — fan-shaped deposits of sediment where rivers meet the sea. The Ganges-Brahmaputra Delta is the largest in the world, covering 100,000 km^2 — most of Bangladesh sits on river sediment.\n\nRivers naturally **meander** (curve) across flat ground. Water flows faster on the outside of a bend (eroding the bank) and slower on the inside (depositing sediment). Over time, the curves grow more extreme until the river cuts through a narrow neck of land, forming an **oxbow lake** — a crescent-shaped body of water left behind when the river shortcut straightens its path.\n\n**Check yourself:** Why is river water in the upper mountains usually clear, while river water near the coast is often brown and murky? (Answer: In the mountains, the river is young and has not picked up much sediment. By the coast, it has traveled hundreds of kilometres, eroding and collecting sediment along the entire journey.)',
+      },
+      {
+        title: 'Floods and Droughts — Too Much and Too Little',
+        content:
+          'Water is essential for life, but too much or too little can be catastrophic.\n\n**Floods** happen when more water arrives than the land or river channel can handle. Common causes:\n- Heavy rainfall exceeding the ground\'s ability to absorb it\n- Rivers overflowing their banks during monsoons\n- Rapid snowmelt in spring\n- Storm surges pushing ocean water inland\n- Dam failures releasing stored water suddenly\n\nAssam experiences devastating floods almost every year. The Brahmaputra River swells during the monsoon, inundating vast areas. In 2022, floods affected over 5 million people across 32 districts. The flat floodplain geography means water has nowhere to drain quickly.\n\nBut floods are not entirely destructive. Floodplains are among the most fertile land on Earth because floods deposit nutrient-rich sediment. Ancient civilizations (Egypt, Mesopotamia, the Indus Valley) deliberately settled on floodplains because annual floods renewed the soil.\n\n**Droughts** happen when rainfall is significantly below normal for an extended period. Droughts develop slowly — unlike floods, which strike in hours or days, droughts build over weeks, months, or years. The effects cascade: crops fail, rivers shrink, groundwater drops, wells go dry, food prices rise, people migrate.\n\nClimate change is making both extremes worse. Warmer air holds more water vapor (about 7% more for every 1 degree Celsius of warming), so when it does rain, it rains harder. But the extra evaporation also dries out soils faster between rains. The result: more intense floods AND more severe droughts, sometimes in the same region in the same year.\n\n**Check yourself:** Why might climate change cause both more floods AND more droughts? (Answer: Warmer air evaporates more water from soils — causing drought. But it also holds more water vapor — so when rain does come, it is heavier, causing floods. The cycle becomes more extreme in both directions.)',
+      },
+      {
+        title: 'Water Purification — Making Dirty Water Safe',
+        diagram: 'HydroPurificationDiagram',
+        content:
+          'About 2 billion people worldwide lack access to safely managed drinking water. Dirty water kills more people than wars — about 485,000 deaths per year from waterborne diseases like cholera, typhoid, and dysentery. Understanding how water purification works is literally life-saving knowledge.\n\nModern water treatment follows these steps:\n\n**1. Screening** — Large debris (sticks, leaves, plastic) is removed by passing water through metal screens.\n\n**2. Coagulation and flocculation** — Chemicals (like aluminium sulfate) are added that cause tiny suspended particles to clump together into larger, heavier "flocs." Think of it like using a magnet to gather iron filings.\n\n**3. Sedimentation** — The water sits in a large tank. Gravity pulls the heavy flocs to the bottom, where they form sludge. The cleaner water flows off the top.\n\n**4. Filtration** — Water passes through layers of sand, gravel, and activated charcoal. Sand traps remaining particles. Charcoal adsorbs (sticks to its surface) dissolved chemicals, chlorine-resistant parasites, and substances that cause taste and odor.\n\n**5. Disinfection** — Chlorine, UV light, or ozone kills remaining bacteria, viruses, and parasites. Chlorine is most common because it continues to protect water as it travels through pipes to your tap.\n\n**In emergencies**, when treatment plants are unavailable:\n- **Boiling** for 1 minute kills virtually all pathogens\n- **Solar disinfection (SODIS)** — fill a clear plastic bottle with water and leave it in direct sunlight for 6 hours. UV light from the sun kills bacteria.\n- **Household chlorination** — a few drops of bleach per litre\n\n**Check yourself:** Why does boiling water make it safe to drink? (Answer: Boiling raises the water temperature to 100 degrees Celsius, which denatures (unfolds and destroys) the proteins in bacteria, viruses, and parasites, killing them. It does not remove chemical pollutants or sediment, though.)',
+      },
+      {
+        title: 'Desalination — Turning Ocean into Drinking Water',
+        content:
+          '97% of Earth\'s water is in the oceans — but it contains about 35 grams of salt per litre, making it undrinkable. **Desalination** removes the salt.\n\nThere are two main methods:\n\n**Reverse osmosis (RO)** — the most common modern method. Normal osmosis is when water naturally moves from a less salty solution to a more salty one through a semipermeable membrane (a filter with holes so tiny that water molecules pass through but salt ions do not). **Reverse** osmosis applies enormous pressure (50-80 atmospheres) to force seawater through the membrane in the opposite direction — clean water passes through, salt stays behind.\n\n**Distillation** — the oldest method. Heat seawater until it evaporates. The steam (pure water vapor) rises, leaving salt behind. Cool the steam and it condenses back into pure liquid water. This is energy-intensive, but some Middle Eastern countries use waste heat from power plants to run distillation cheaply.\n\nThe challenges of desalination:\n- **Energy** — RO requires about 3-5 kWh per cubic metre of water. Distillation requires even more. This makes desalinated water 3-5 times more expensive than conventional water treatment.\n- **Brine disposal** — For every litre of fresh water produced, about 1.5 litres of super-salty brine is left over. Dumping this back into the ocean can harm marine life.\n- **Scale** — The largest desalination plant in the world (Ras Al Khair, Saudi Arabia) produces 1 million cubic metres per day. That sounds like a lot, but it is less than 0.1% of global freshwater use.\n\nDesalination technology is improving rapidly. Solar-powered desalination could be transformative for coastal communities in water-scarce regions. Israel already gets about 80% of its household water from desalination.\n\n**Check yourself:** Why can\'t we simply boil seawater and collect the steam to solve the world\'s water crisis? (Answer: The energy cost. Boiling water requires enormous amounts of heat energy. For a country like India, desalinating enough water for the population would require more energy than the entire country currently produces. Reverse osmosis is more energy-efficient, but still expensive at scale.)',
+        code: '# Desalination energy calculator\n# Compare reverse osmosis vs distillation\n\ndef desalination_cost(volume_litres, method="ro"):\n    """Estimate energy to desalinate seawater.\n    \n    volume_litres: amount of fresh water needed\n    method: \"ro\" (reverse osmosis) or \"distill\" (distillation)\n    Returns: energy in kWh\n    """\n    volume_m3 = volume_litres / 1000\n    \n    if method == "ro":\n        kwh_per_m3 = 4.0  # typical RO energy\n    else:\n        kwh_per_m3 = 25.0  # thermal distillation\n    \n    energy = volume_m3 * kwh_per_m3\n    return energy\n\n# How much energy to provide water for a family of 4 for a year?\n# Average water use: ~150 litres/person/day\ndaily = 4 * 150  # 600 litres/day\nyearly = daily * 365  # 219,000 litres\n\nro_energy = desalination_cost(yearly, "ro")\ndistill_energy = desalination_cost(yearly, "distill")\n\nprint(f"Family of 4, one year ({yearly:,} litres):")\nprint(f"  Reverse osmosis: {ro_energy:.0f} kWh")\nprint(f"  Distillation:    {distill_energy:.0f} kWh")\nprint(f"  (A typical Indian household uses ~1,200 kWh/year total)")',
+      },
+    ],
+  },
 ];

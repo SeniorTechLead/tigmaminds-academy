@@ -18,7 +18,7 @@ export default function TranscriptionDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 500 200" className="w-full max-w-lg mx-auto" role="img" aria-label="Transcription diagram showing RNA polymerase reading DNA template strand and building mRNA">
+      <svg viewBox="0 0 525 227" className="w-full max-w-lg mx-auto" role="img" aria-label="Transcription diagram showing RNA polymerase reading DNA template strand and building mRNA">
         <text x="250" y="18" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">Transcription: DNA → mRNA</text>
 
         {/* Direction arrow */}

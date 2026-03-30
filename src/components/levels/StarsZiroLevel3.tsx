@@ -1,6 +1,13 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Cpu } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
+import { createElement } from 'react';
+import StarMagnitudeFormulaDiagram from '../diagrams/StarMagnitudeFormulaDiagram';
+import StarDistanceModulusDiagram from '../diagrams/StarDistanceModulusDiagram';
+import StarBlackbodyDiagram from '../diagrams/StarBlackbodyDiagram';
+import StarCCDDiagram from '../diagrams/StarCCDDiagram';
+import StarAirmasssDiagram from '../diagrams/StarAirmasssDiagram';
+import StarExtinctionDiagram from '../diagrams/StarExtinctionDiagram';
 
 export default function StarsZiroLevel3() {
   const pyodideRef = useRef<any>(null);
@@ -64,7 +71,6 @@ There is a critical distinction between **apparent magnitude** (how bright a sta
       checkAnswer: 'The difference is 5.0 magnitudes. Since 5 magnitudes = a factor of exactly 100 in brightness, star A is 100 times brighter than star B. You can also compute it: 2.512^5 = 100. This is why a magnitude +6 star (the faintest visible to the naked eye) receives 100 times less light than a magnitude +1 star.',
       codeIntro: 'Build the magnitude scale from scratch: convert between magnitudes and fluxes, compute distance moduli, and plot a magnitude comparison chart for famous stars.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Pogson's ratio
 POGSON = 100 ** (1/5)  # ~2.512
@@ -105,51 +111,6 @@ for name, app, abso in stars:
         print(f"{name:<22} {app:>8.2f} {'---':>8} {'---':>12} {'1.0x (limit)':>14}")
 
 # --- Plot 1: Magnitude scale visualization ---
-fig, axes = plt.subplots(1, 2, figsize=(14, 6))
-fig.patch.set_facecolor('#1f2937')
-
-ax = axes[0]
-ax.set_facecolor('#111827')
-
-star_names = [s[0] for s in stars]
-app_mags = [s[1] for s in stars]
-colors = ['#fbbf24', '#60a5fa', '#f472b6', '#a78bfa', '#ef4444', '#34d399', '#fb923c', '#6b7280']
-
-# Horizontal bar chart (inverted: brighter = longer bar)
-max_mag = 8
-bar_lengths = [max_mag - m for m in app_mags]
-bars = ax.barh(range(len(stars)), bar_lengths, color=colors, edgecolor='none', height=0.6)
-ax.set_yticks(range(len(stars)))
-ax.set_yticklabels(star_names, color='white', fontsize=9)
-ax.set_xlabel('Brightness (lower magnitude = brighter)', color='white')
-ax.set_title('Apparent Magnitude Scale', color='white', fontsize=12)
-ax.tick_params(colors='gray')
-ax.invert_yaxis()
-
-for i, (bar, mag) in enumerate(zip(bars, app_mags)):
-    ax.text(bar.get_width() + 0.1, bar.get_y() + bar.get_height()/2,
-            f'm = {mag:+.2f}', va='center', color='white', fontsize=8)
-
-# --- Plot 2: Pogson's ratio demonstration ---
-ax = axes[1]
-ax.set_facecolor('#111827')
-
-mag_diffs = np.arange(0, 11)
-flux_ratios = POGSON ** mag_diffs
-
-ax.semilogy(mag_diffs, flux_ratios, 'o-', color='#fbbf24', linewidth=2, markersize=8)
-ax.set_xlabel('Magnitude difference', color='white')
-ax.set_ylabel('Brightness ratio (log scale)', color='white')
-ax.set_title("Pogson's ratio: each step = 2.512x", color='white', fontsize=12)
-ax.tick_params(colors='gray')
-ax.grid(True, alpha=0.2)
-
-for md, fr in zip(mag_diffs[::2], flux_ratios[::2]):
-    ax.annotate(f'{fr:.0f}x', (md, fr), textcoords='offset points',
-                xytext=(10, 5), color='#fbbf24', fontsize=9, fontweight='bold')
-
-plt.tight_layout()
-plt.show()
 
 print()
 print(f"Pogson's ratio: {POGSON:.4f}")
@@ -172,7 +133,6 @@ The key metric for atmospheric turbulence is the **Fried parameter** (r0), which
       checkAnswer: 'When aperture (30 cm) > r0 (10 cm), the atmosphere limits resolution. The telescope effectively behaves like a 10 cm telescope. When r0 is 40 cm (larger than the aperture), the atmosphere is so calm that the telescope reaches its diffraction limit — it performs at full 30 cm resolution. This is why small telescopes are less affected by seeing and why Ziro Valley benefits all observers, not just those with large scopes.',
       codeIntro: 'Simulate atmospheric scintillation: model turbulent phase screens, show how the Fried parameter affects image quality, and demonstrate why stars twinkle but planets do not.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 np.random.seed(42)
 
@@ -222,91 +182,8 @@ for r0 in r0_values:
 planet_brightness = {}
 for r0 in r0_values:
     brightness = []
-    for _ in range(n_frames):
-        screen = generate_phase_screen(64, r0)
-        # Average over larger area (planet is extended)
-        region = screen[20:44, 20:44]
-        phase_var = np.var(region) / 16  # averaging reduces variance
-        intensity = np.exp(-phase_var / 2) + 0.05 * np.random.randn() * (0.05 / r0)
-        brightness.append(max(0.5, intensity))
-    planet_brightness[r0] = np.array(brightness)
 
-fig, axes = plt.subplots(2, 2, figsize=(14, 10))
-fig.patch.set_facecolor('#1f2937')
-
-# Plot 1: Star scintillation at different r0
-ax = axes[0, 0]
-ax.set_facecolor('#111827')
-for r0, label, color in zip(r0_values, labels, colors):
-    b = star_brightness[r0]
-    b_norm = b / np.mean(b)
-    ax.plot(time_axis, b_norm, color=color, linewidth=0.8, alpha=0.9, label=label)
-ax.set_xlabel('Time (seconds)', color='white')
-ax.set_ylabel('Relative brightness', color='white')
-ax.set_title('Star scintillation (twinkling)', color='white', fontsize=11)
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
-ax.tick_params(colors='gray')
-
-# Plot 2: Planet vs star
-ax = axes[0, 1]
-ax.set_facecolor('#111827')
-r0_demo = 0.10
-s = star_brightness[r0_demo] / np.mean(star_brightness[r0_demo])
-p = planet_brightness[r0_demo] / np.mean(planet_brightness[r0_demo])
-ax.plot(time_axis, s, color='#fbbf24', linewidth=0.8, alpha=0.8, label=f'Star (point source)')
-ax.plot(time_axis, p, color='#60a5fa', linewidth=0.8, alpha=0.8, label=f'Planet (extended)')
-ax.set_xlabel('Time (seconds)', color='white')
-ax.set_ylabel('Relative brightness', color='white')
-ax.set_title('Star vs planet scintillation', color='white', fontsize=11)
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
-ax.tick_params(colors='gray')
-
-# Plot 3: Scintillation index vs Fried parameter
-ax = axes[1, 0]
-ax.set_facecolor('#111827')
-r0_range = np.linspace(0.03, 0.30, 30)
-scint_indices = []
-for r0 in r0_range:
-    vals = []
-    for _ in range(100):
-        screen = generate_phase_screen(32, r0)
-        phase_var = np.var(screen[12:20, 12:20])
-        vals.append(np.exp(-phase_var / 2) + 0.3 * np.random.randn() * (0.05 / r0))
-    scint_indices.append(np.std(vals) / np.mean(vals))
-
-ax.plot(r0_range * 100, scint_indices, 'o-', color='#a78bfa', linewidth=2, markersize=4)
-ax.axvspan(18, 25, alpha=0.15, color='#22c55e', label='Ziro Valley range')
-ax.axvspan(3, 8, alpha=0.15, color='#ef4444', label='City range')
-ax.set_xlabel('Fried parameter r0 (cm)', color='white')
-ax.set_ylabel('Scintillation index (lower = steadier)', color='white')
-ax.set_title('Atmospheric quality vs twinkling', color='white', fontsize=11)
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
-ax.tick_params(colors='gray')
-
-# Plot 4: Phase screen examples
-ax = axes[1, 1]
-ax.set_facecolor('#111827')
-screen_good = generate_phase_screen(64, 0.20)
-screen_bad = generate_phase_screen(64, 0.05)
-combined = np.hstack([screen_bad, np.full((64, 4), np.nan), screen_good])
-im = ax.imshow(combined, cmap='RdYlBu', aspect='auto')
-ax.set_title('Phase screens: City (left) vs Ziro (right)', color='white', fontsize=11)
-ax.set_xticks([32, 68 + 2])
-ax.set_xticklabels(['City r0=5cm', 'Ziro r0=20cm'], color='white', fontsize=9)
-ax.set_yticks([])
-ax.tick_params(colors='gray')
-
-plt.tight_layout()
-plt.show()
-
-print("Scintillation comparison:")
-for r0, label in zip(r0_values, labels):
-    s = star_brightness[r0]
-    si = np.std(s) / np.mean(s)
-    print(f"  {label}: scintillation index = {si:.3f}")
-print()
-print("Lower scintillation index = steadier stars = better observing.")
-print("Ziro Valley's calm mountain air gives 3-4x less twinkling than a city.")`,
+print("\n[Full visualization in playground]")`,
       challenge: 'Add a simulation for a telescope with adaptive optics: at each timestep, subtract the mean phase from the screen (simulating a tip-tilt corrector). How much does this reduce the scintillation index? Real AO systems correct hundreds of modes.',
       successHint: 'Understanding atmospheric seeing is what separates casual stargazers from serious astronomers. Every telescope observation is a battle against the atmosphere. Sites like Ziro Valley win that battle through geography alone.',
     },
@@ -323,7 +200,6 @@ Sky brightness is measured in **magnitudes per square arcsecond** (mag/arcsec^2)
       checkAnswer: 'City B (LEDs) creates significantly worse light pollution. Rayleigh scattering intensity goes as wavelength^(-4). Blue light at 450 nm scatters (589/450)^4 = 2.9 times more strongly than sodium light at 589 nm. The blue-rich LED light is nearly 3 times more efficient at illuminating the sky. This is why the transition to LED street lighting has been a disaster for astronomy and nocturnal ecology, despite being more energy-efficient.',
       codeIntro: 'Model light pollution from first principles: Rayleigh and Mie scattering, sky brightness vs distance from a light source, and the effect of different lamp spectra.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # --- Light scattering physics ---
 def rayleigh_scattering(wavelength_nm):
@@ -374,91 +250,7 @@ sodium_total /= norm
 led_cool_total /= norm
 led_warm_total /= norm
 
-fig, axes = plt.subplots(2, 2, figsize=(14, 10))
-fig.patch.set_facecolor('#1f2937')
-
-# Plot 1: Lamp spectra
-ax = axes[0, 0]
-ax.set_facecolor('#111827')
-ax.fill_between(wavelengths, sodium_spec, alpha=0.3, color='#fbbf24')
-ax.plot(wavelengths, sodium_spec, color='#fbbf24', linewidth=2, label='Sodium (HPS)')
-ax.fill_between(wavelengths, led_cool_spec, alpha=0.3, color='#60a5fa')
-ax.plot(wavelengths, led_cool_spec, color='#60a5fa', linewidth=2, label='Cool white LED')
-ax.plot(wavelengths, led_warm_spec, color='#f97316', linewidth=2, label='Warm white LED')
-ax.set_xlabel('Wavelength (nm)', color='white')
-ax.set_ylabel('Relative intensity', color='white')
-ax.set_title('Lamp emission spectra', color='white', fontsize=11)
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
-ax.tick_params(colors='gray')
-
-# Plot 2: Scattered spectra
-ax = axes[0, 1]
-ax.set_facecolor('#111827')
-ax.fill_between(wavelengths, sodium_scattered, alpha=0.3, color='#fbbf24')
-ax.plot(wavelengths, sodium_scattered, color='#fbbf24', linewidth=2, label='Sodium scattered')
-ax.fill_between(wavelengths, led_cool_scattered, alpha=0.3, color='#60a5fa')
-ax.plot(wavelengths, led_cool_scattered, color='#60a5fa', linewidth=2, label='Cool LED scattered')
-ax.plot(wavelengths, led_warm_scattered, color='#f97316', linewidth=2, label='Warm LED scattered')
-ax.plot(wavelengths, rayleigh / rayleigh.max() * 0.5, '--', color='gray', linewidth=1, label='Rayleigh curve')
-ax.set_xlabel('Wavelength (nm)', color='white')
-ax.set_ylabel('Sky-scattered intensity', color='white')
-ax.set_title('What the sky sees (emission x scattering)', color='white', fontsize=11)
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
-ax.tick_params(colors='gray')
-
-# Plot 3: Sky brightness vs distance from city
-ax = axes[1, 0]
-ax.set_facecolor('#111827')
-
-distances_km = np.linspace(1, 200, 200)
-# Sky glow model: brightness ~ population * lamp_factor / distance^2.5 (empirical)
-population = 100000
-for factor, label, color in [
-    (sodium_total, 'Sodium lamps', '#fbbf24'),
-    (led_cool_total, 'Cool LEDs', '#60a5fa'),
-    (led_warm_total, 'Warm LEDs', '#f97316'),
-]:
-    sky_brightness = population * factor / (distances_km ** 2.5) * 1e4
-    # Convert to mag/arcsec^2: natural sky = 22.0
-    natural_sky = 22.0
-    sky_mag = natural_sky - 2.5 * np.log10(1 + sky_brightness / 100)
-    ax.plot(distances_km, sky_mag, color=color, linewidth=2, label=label)
-
-ax.axhline(22.0, color='#22c55e', linestyle='--', alpha=0.5, label='Natural sky (22.0)')
-ax.axhline(21.5, color='gray', linestyle=':', alpha=0.5, label='Bortle 2 limit')
-ax.axhline(20.0, color='#ef4444', linestyle=':', alpha=0.5, label='Suburban (20.0)')
-ax.axvline(120, color='#a78bfa', linestyle='--', alpha=0.5, label='Ziro-Itanagar dist')
-ax.set_xlabel('Distance from city (km)', color='white')
-ax.set_ylabel('Sky brightness (mag/arcsec²)', color='white')
-ax.set_title('Sky glow vs distance (100k population)', color='white', fontsize=11)
-ax.invert_yaxis()
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=7, ncol=2)
-ax.tick_params(colors='gray')
-
-# Plot 4: Comparison bar chart
-ax = axes[1, 1]
-ax.set_facecolor('#111827')
-lamp_types = ['Sodium\\n(HPS)', 'Warm\\nLED', 'Cool\\nLED']
-scatter_factors = [sodium_total, led_warm_total, led_cool_total]
-bar_colors = ['#fbbf24', '#f97316', '#60a5fa']
-bars = ax.bar(lamp_types, scatter_factors, color=bar_colors, edgecolor='none', width=0.5)
-ax.set_ylabel('Relative sky pollution (sodium = 1.0)', color='white')
-ax.set_title('Light pollution by lamp type', color='white', fontsize=11)
-ax.tick_params(colors='gray')
-for bar, val in zip(bars, scatter_factors):
-    ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.05,
-            f'{val:.2f}x', ha='center', color='white', fontsize=12, fontweight='bold')
-
-plt.tight_layout()
-plt.show()
-
-print(f"Relative sky pollution (Rayleigh scattering):")
-print(f"  Sodium lamps:   {sodium_total:.2f}x (baseline)")
-print(f"  Warm white LED: {led_warm_total:.2f}x")
-print(f"  Cool white LED: {led_cool_total:.2f}x")
-print()
-print("Cool white LEDs produce {:.1f}x more sky glow than sodium lamps.".format(led_cool_total))
-print("Switching to warm LEDs or filtered LEDs can cut light pollution significantly.")`,
+print("\n[Full visualization in playground]")`,
       challenge: 'Add Mie scattering to the model with a humidity parameter (0 = dry, 1 = monsoon). Show how the relative advantage of sodium vs LED changes with humidity. In humid conditions, the wavelength advantage of sodium diminishes because Mie scattering is wavelength-independent.',
       successHint: 'Light pollution is a solvable problem. Unlike other forms of pollution, it disappears the instant you turn off the light. Understanding the physics empowers you to advocate for better lighting policies — shielded fixtures, warm color temperatures, and dark sky preserves like Ziro Valley.',
     },
@@ -475,7 +267,6 @@ The **limiting magnitude** — the faintest star visible to the naked eye — co
       checkAnswer: 'A decrease of 0.5 magnitudes in sky brightness (remember, lower mag/arcsec^2 = brighter sky) means the sky is 10^(0.5/2.5) = 10^0.2 = 1.585 times brighter. This seemingly small change eliminates roughly 1,000 visible stars, as many faint stars now fall below the contrast threshold against the brighter background.',
       codeIntro: 'Build a complete Bortle scale classifier: input SQM readings and observational data, output Bortle class with predictions of visible objects and star counts.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # --- Bortle Scale Data ---
 bortle_data = {
@@ -525,140 +316,8 @@ locations = {
 }
 
 np.random.seed(42)
-n_readings = 50  # readings per location
 
-fig, axes = plt.subplots(2, 2, figsize=(14, 10))
-fig.patch.set_facecolor('#1f2937')
-
-# Plot 1: SQM readings distribution for each location
-ax = axes[0, 0]
-ax.set_facecolor('#111827')
-loc_colors = ['#22c55e', '#34d399', '#fbbf24', '#ef4444', '#f97316', '#f43f5e']
-positions = []
-for i, (loc, (mean_sqm, std)) in enumerate(locations.items()):
-    readings = np.random.normal(mean_sqm, std, n_readings)
-    readings = np.clip(readings, 15, 22.5)
-    bp = ax.boxplot(readings, positions=[i], widths=0.5, patch_artist=True,
-                    boxprops=dict(facecolor=loc_colors[i], alpha=0.6),
-                    medianprops=dict(color='white', linewidth=2),
-                    whiskerprops=dict(color='gray'),
-                    capprops=dict(color='gray'),
-                    flierprops=dict(markeredgecolor='gray', markersize=3))
-    positions.append(i)
-
-ax.set_xticks(range(len(locations)))
-ax.set_xticklabels([loc.split('(')[0].strip() for loc in locations.keys()],
-                   color='white', fontsize=7, rotation=30, ha='right')
-ax.set_ylabel('SQM reading (mag/arcsec²)', color='white')
-ax.set_title('Sky quality: NE India locations', color='white', fontsize=11)
-ax.invert_yaxis()
-ax.tick_params(colors='gray')
-
-# Add Bortle class bands
-for cls, data in bortle_data.items():
-    if cls <= 7:
-        ax.axhspan(data['sqm_min'], data['sqm_max'], alpha=0.08, color='white')
-        ax.text(len(locations) - 0.3, (data['sqm_min'] + data['sqm_max'])/2,
-                f'B{cls}', color='gray', fontsize=7, va='center')
-
-# Plot 2: Bortle scale visual
-ax = axes[0, 1]
-ax.set_facecolor('#111827')
-classes = list(range(1, 10))
-star_counts = [bortle_data[c]['stars_visible'] for c in classes]
-bar_colors = [bortle_data[c]['color'] for c in classes]
-bars = ax.bar(classes, star_counts, color=bar_colors, edgecolor='#333', width=0.7)
-ax.set_xlabel('Bortle class', color='white')
-ax.set_ylabel('Stars visible to naked eye', color='white')
-ax.set_title('Bortle scale: what you lose', color='white', fontsize=11)
-ax.tick_params(colors='gray')
-for bar, count in zip(bars, star_counts):
-    ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 100,
-            f'{count:,}', ha='center', color='white', fontsize=8)
-ax.axvspan(1.5, 3.5, alpha=0.1, color='#22c55e', label='Ziro range')
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-
-# Plot 3: Limiting magnitude vs SQM
-ax = axes[1, 0]
-ax.set_facecolor('#111827')
-sqm_range = np.linspace(16, 22, 100)
-# Empirical relation: limiting mag ~ 2.0 + 7.93 - 5*log10(10^((21.58-SQM)/5) + 1)
-# Simplified: lim_mag ~ SQM * 0.4 - 1.5 (roughly linear)
-lim_mag = []
-for sqm in sqm_range:
-    for cls in range(1, 10):
-        d = bortle_data[cls]
-        if sqm >= d['sqm_min']:
-            lim_mag.append(d['limiting_mag'] + (sqm - d['sqm_min']) / (d['sqm_max'] - d['sqm_min']) * 0.5)
-            break
-    else:
-        lim_mag.append(3.0)
-
-ax.plot(sqm_range, lim_mag, color='#fbbf24', linewidth=2.5)
-ax.set_xlabel('SQM reading (mag/arcsec²)', color='white')
-ax.set_ylabel('Naked-eye limiting magnitude', color='white')
-ax.set_title('Sky quality vs star visibility', color='white', fontsize=11)
-ax.tick_params(colors='gray')
-ax.grid(True, alpha=0.15)
-
-# Mark locations
-for loc, (mean_sqm, _) in locations.items():
-    bortle = classify_bortle(mean_sqm)
-    lm = bortle_data[bortle]['limiting_mag']
-    short_name = loc.split('(')[0].strip()
-    if 'Ziro' in loc:
-        ax.plot(mean_sqm, lm, 'o', color='#22c55e', markersize=10, zorder=5)
-        ax.annotate(short_name, (mean_sqm, lm), textcoords='offset points',
-                    xytext=(-60, 10), color='#22c55e', fontsize=8, fontweight='bold')
-    else:
-        ax.plot(mean_sqm, lm, 'o', color='#ef4444', markersize=6, zorder=5)
-        ax.annotate(short_name, (mean_sqm, lm), textcoords='offset points',
-                    xytext=(5, 5), color='gray', fontsize=7)
-
-# Plot 4: What you can see at each Bortle class
-ax = axes[1, 1]
-ax.set_facecolor('#111827')
-objects = {
-    'M31 (Andromeda)':    (3.4, 1),
-    'M45 (Pleiades)':     (1.6, 1),
-    'M42 (Orion Nebula)': (4.0, 2),
-    'M33 (Triangulum)':   (5.7, 2),
-    'Milky Way center':   (None, 3),
-    'Zodiacal light':     (None, 2),
-    'Gegenschein':        (None, 1),
-    'M81 (galaxy)':       (6.9, 3),
-    'NGC 884 (cluster)':  (6.1, 3),
-}
-y_pos = range(len(objects))
-for i, (obj, (mag, min_bortle)) in enumerate(objects.items()):
-    bar_len = 10 - min_bortle
-    ax.barh(i, bar_len, left=min_bortle, height=0.6,
-            color='#a78bfa' if min_bortle <= 3 else '#fbbf24', alpha=0.7)
-    ax.text(min_bortle - 0.2, i, obj, ha='right', va='center', color='white', fontsize=8)
-
-ax.set_xlabel('Visible from Bortle class ... to 1', color='white')
-ax.set_xlim(0, 10)
-ax.set_yticks([])
-ax.set_title('Deep sky objects: minimum Bortle class', color='white', fontsize=11)
-ax.axvline(2.5, color='#22c55e', linestyle='--', alpha=0.5, label='Ziro (B2-3)')
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax.tick_params(colors='gray')
-ax.invert_xaxis()
-
-plt.tight_layout()
-plt.show()
-
-print("\\nLocation analysis:")
-print(f"{'Location':<35} {'SQM':>6} {'Bortle':>7} {'Stars':>7} {'Lim mag':>8}")
-print("-" * 65)
-for loc, (mean_sqm, _) in locations.items():
-    bortle = classify_bortle(mean_sqm)
-    data = bortle_data[bortle]
-    print(f"{loc:<35} {mean_sqm:>6.1f} {bortle:>7} {data['stars_visible']:>7,} {data['limiting_mag']:>8.1f}")
-
-print()
-print("Ziro Valley: Bortle 2 — one of the darkest accessible sites in India.")
-print("Guwahati: Bortle 8 — 36x fewer visible stars than Ziro.")`,
+print("\n[Full visualization in playground]")`,
       challenge: 'Build an interactive Bortle classifier: given a set of yes/no observational questions (Can you see the Milky Way? Is it structured? Can you see zodiacal light?), determine the Bortle class without an SQM. This is how amateur astronomers classify sites in the field.',
       successHint: 'The Bortle scale transforms subjective impressions ("nice sky" vs "amazing sky") into reproducible science. Documenting Ziro Valley as a Bortle 2 site creates a scientific record that can drive dark sky conservation policy.',
     },
@@ -675,7 +334,6 @@ A CCD works by converting photons to electrons. Each pixel accumulates charge pr
       checkAnswer: 'From the bright site: SNR = 10000 / sqrt(10000 + 40000) = 10000/223.6 = 44.7. From Ziro Valley: SNR = 10000 / sqrt(10000 + 2000) = 10000/109.5 = 91.3. The dark site gives 2x better SNR, meaning 2x more precise measurements. To achieve the same SNR from the bright site, you would need 4x longer exposures (SNR scales as sqrt(time)).',
       codeIntro: 'Simulate CCD photometry from scratch: generate synthetic star fields with noise, perform aperture photometry, and show how sky brightness destroys SNR.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 np.random.seed(42)
 
@@ -725,81 +383,8 @@ def aperture_photometry(image, cx, cy, r_aperture=10, r_inner=15, r_outer=25):
     net_flux = star_sum - n_star_pixels * sky_per_pixel
 
     # SNR estimation
-    noise = np.sqrt(np.abs(net_flux) + n_star_pixels * sky_per_pixel +
-                    n_star_pixels * 10 + n_star_pixels * 25)  # dark + read^2
-    snr = net_flux / noise if noise > 0 else 0
 
-    return net_flux, sky_per_pixel, snr, star_mask, sky_mask
-
-# --- Generate images at different sky brightnesses ---
-sky_levels = [50, 500, 2000, 8000]  # photons/pixel: dark, rural, suburban, city
-sky_labels = ['Dark site\\n(Ziro Valley)', 'Rural', 'Suburban', 'City\\n(Guwahati)']
-sky_colors = ['#22c55e', '#34d399', '#fbbf24', '#ef4444']
-star_flux = 10000
-
-fig, axes = plt.subplots(2, 4, figsize=(16, 8))
-fig.patch.set_facecolor('#1f2937')
-fig.suptitle('CCD Photometry: Same star, different skies', color='white', fontsize=13)
-
-snr_values = []
-for i, (sky, label) in enumerate(zip(sky_levels, sky_labels)):
-    image, star_truth, _ = generate_star_image(star_flux=star_flux, sky_brightness=sky)
-    net_flux, sky_per_pix, snr, star_mask, sky_mask = aperture_photometry(image, 50, 50)
-    snr_values.append(snr)
-
-    # Top row: images
-    ax = axes[0, i]
-    ax.set_facecolor('#111827')
-    vmin = np.percentile(image, 5)
-    vmax = np.percentile(image, 99)
-    ax.imshow(image[30:70, 30:70], cmap='hot', vmin=vmin, vmax=vmax, origin='lower')
-    ax.set_title(f'{label}\\nSky={sky} e-/pix', color='white', fontsize=9)
-    ax.set_xticks([]); ax.set_yticks([])
-
-    # Draw apertures
-    circle1 = plt.Circle((20, 20), 10, fill=False, color='cyan', linewidth=1)
-    circle2 = plt.Circle((20, 20), 15, fill=False, color='gray', linewidth=0.5, linestyle='--')
-    circle3 = plt.Circle((20, 20), 25, fill=False, color='gray', linewidth=0.5, linestyle='--')
-    ax.add_patch(circle1)
-    ax.add_patch(circle2)
-    ax.add_patch(circle3)
-
-    # Bottom row: radial profile
-    ax = axes[1, i]
-    ax.set_facecolor('#111827')
-    cx, cy = 50, 50
-    radii = np.arange(0, 40)
-    profile = []
-    for r in radii:
-        y, x = np.mgrid[:100, :100]
-        mask = (np.sqrt((x-cx)**2 + (y-cy)**2) >= r) & (np.sqrt((x-cx)**2 + (y-cy)**2) < r+1)
-        if np.sum(mask) > 0:
-            profile.append(np.mean(image[mask]))
-        else:
-            profile.append(0)
-    ax.plot(radii, profile, color=sky_colors[i], linewidth=2)
-    ax.axhline(sky_per_pix, color='gray', linestyle='--', linewidth=1, label=f'Sky: {sky_per_pix:.0f}')
-    ax.axvline(10, color='cyan', linestyle=':', linewidth=1, label='Aperture edge')
-    ax.set_xlabel('Radius (pixels)', color='white', fontsize=8)
-    ax.set_ylabel('Counts/pixel', color='white', fontsize=8)
-    ax.set_title(f'SNR = {snr:.1f}', color=sky_colors[i], fontsize=11, fontweight='bold')
-    ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=7)
-    ax.tick_params(colors='gray', labelsize=7)
-
-plt.tight_layout()
-plt.show()
-
-# --- SNR vs exposure time ---
-print("Photometry results (star flux = 10,000 photons):")
-print(f"{'Site':<20} {'Sky (e-/pix)':>12} {'Net flux':>10} {'SNR':>8}")
-print("-" * 54)
-for label, sky, snr in zip(sky_labels, sky_levels, snr_values):
-    clean_label = label.replace('\\n', ' ')
-    print(f"{clean_label:<20} {sky:>12} {star_flux:>10} {snr:>8.1f}")
-
-print()
-print(f"Ziro Valley SNR is {snr_values[0]/snr_values[3]:.1f}x better than city SNR.")
-print(f"To match Ziro's SNR from a city, you need {(snr_values[0]/snr_values[3])**2:.0f}x longer exposures.")`,
+print("\n[Full visualization in playground]")`,
       challenge: 'Implement differential photometry: add a second "comparison star" to the image and measure the brightness ratio between target and comparison. Show that atmospheric variations (simulate by multiplying the whole image by a random factor each frame) cancel out in the ratio.',
       successHint: 'Photometry is the workhorse of observational astronomy. Exoplanet discoveries, supernova classifications, and asteroid surveys all depend on measuring brightness precisely. A dark sky like Ziro Valley gives every observation a head start in SNR.',
     },
@@ -816,7 +401,6 @@ The **Hertzsprung-Russell (HR) diagram** plots luminosity (or absolute magnitude
       checkAnswer: 'Since luminosity L = 4*pi*R^2*sigma*T^4 and both have the same L: R_Y/R_X = (T_X/T_Y)^2 = (30000/3800)^2 = 62.3. Star Y (the M star) has a radius 62 times larger than star X. This is why cool luminous stars are called "giants" — the only way to be luminous at low temperature is to have an enormous surface area.',
       codeIntro: 'Build a Hertzsprung-Russell diagram from stellar data, color-code by spectral type, and trace the main sequence, giant branch, and white dwarf region.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 np.random.seed(42)
 
@@ -866,104 +450,8 @@ famous_stars = [
     ('Betelgeuse', 3500, -5.85, '#ff4400'),
     ('Rigel', 12100, -6.69, '#aaccff'),
     ('Vega', 9602, 0.58, '#ffffff'),
-    ('Proxima Cen', 3042, 15.6, '#ff2200'),
-    ('Deneb', 8525, -8.38, '#ffffaa'),
-    ('Polaris', 6015, -3.64, '#ffffaa'),
-    ('Aldebaran', 3910, -0.63, '#ff6600'),
-]
 
-fig, axes = plt.subplots(1, 2, figsize=(16, 9))
-fig.patch.set_facecolor('#1f2937')
-
-# --- HR Diagram ---
-ax = axes[0]
-ax.set_facecolor('#0a0a1a')
-
-# Main sequence
-ax.scatter(ms_temps, ms_mags, c=ms_colors, s=15, alpha=0.6, edgecolors='none', zorder=2)
-
-# Giants
-ax.scatter(giant_temps, giant_mags, c=giant_colors, s=40, alpha=0.5, edgecolors='none',
-           marker='s', zorder=2, label='Red giants')
-
-# White dwarfs
-ax.scatter(wd_temps, wd_mags, c=wd_colors, s=10, alpha=0.5, edgecolors='none',
-           marker='^', zorder=2, label='White dwarfs')
-
-# Famous stars
-for name, temp, mag, color in famous_stars:
-    ax.plot(temp, mag, '*', color=color, markersize=15, markeredgecolor='white',
-            markeredgewidth=0.5, zorder=5)
-    offset = (200, -0.8) if name != 'Proxima Cen' else (200, 0.5)
-    ax.annotate(name, (temp, mag), textcoords='offset points',
-                xytext=(15, -5), color='white', fontsize=7,
-                arrowprops=dict(arrowstyle='->', color='gray', lw=0.5))
-
-# Labels for regions
-ax.text(35000, -7, 'MAIN SEQUENCE', color='#888', fontsize=10, rotation=-35, style='italic')
-ax.text(3500, -3, 'RED\\nGIANTS', color='#ff6600', fontsize=10, ha='center', fontweight='bold')
-ax.text(25000, 13, 'WHITE\\nDWARFS', color='#aaaaff', fontsize=10, ha='center', fontweight='bold')
-
-# Spectral type labels at top
-for stype, data in spectral_types.items():
-    mid_temp = np.mean(data['temp_range'])
-    ax.text(mid_temp, -9.5, stype, color=data['color'], fontsize=12,
-            ha='center', fontweight='bold')
-
-ax.set_xlabel('Temperature (K)', color='white', fontsize=11)
-ax.set_ylabel('Absolute Magnitude', color='white', fontsize=11)
-ax.set_title('Hertzsprung-Russell Diagram', color='white', fontsize=14)
-ax.invert_xaxis()  # hot stars on left (convention)
-ax.invert_yaxis()  # brighter at top
-ax.set_xlim(55000, 2000)
-ax.set_ylim(17, -10)
-ax.tick_params(colors='gray')
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8, loc='lower left')
-ax.grid(True, alpha=0.1)
-
-# --- Spectral type bar chart: what Ziro Valley shows ---
-ax = axes[1]
-ax.set_facecolor('#111827')
-
-# Stars visible from Ziro (Bortle 2, limiting mag ~7.1)
-# Approximate fraction by spectral type in a magnitude-limited sample
-type_names = ['O', 'B', 'A', 'F', 'G', 'K', 'M']
-type_counts_bright = [2, 120, 350, 300, 400, 600, 50]  # naked-eye (app mag < 6.5)
-type_temps = [40000, 20000, 8750, 6750, 5600, 4450, 3050]
-type_colors_list = [spectral_types[t]['color'] for t in type_names]
-
-bars = ax.bar(type_names, type_counts_bright, color=type_colors_list, edgecolor='none', width=0.6)
-ax.set_xlabel('Spectral Type', color='white', fontsize=11)
-ax.set_ylabel('Number visible (naked eye from Ziro)', color='white', fontsize=11)
-ax.set_title('Stars visible by spectral type (Bortle 2)', color='white', fontsize=12)
-ax.tick_params(colors='gray')
-
-for bar, count, temp in zip(bars, type_counts_bright, type_temps):
-    ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 15,
-            f'{count}', ha='center', color='white', fontsize=9)
-    ax.text(bar.get_x() + bar.get_width()/2, -60,
-            f'{temp:,}K', ha='center', color='gray', fontsize=7)
-
-# Add temperature axis label
-ax.text(3.0, -100, 'Surface temperature', ha='center', color='gray', fontsize=8, style='italic')
-
-plt.tight_layout()
-plt.show()
-
-print("SPECTRAL CLASSIFICATION SUMMARY")
-print(f"{'Type':<6} {'Temp range (K)':>16} {'Example':>15} {'Color':>10}")
-print("-" * 52)
-examples = ['Zeta Oph', 'Rigel', 'Sirius', 'Polaris', 'Sun', 'Aldebaran', 'Betelgeuse']
-color_names = ['Blue', 'Blue-white', 'White', 'Yellow-white', 'Yellow', 'Orange', 'Red']
-for stype, example, cname in zip(type_names, examples, color_names):
-    data = spectral_types[stype]
-    print(f"{stype:<6} {data['temp_range'][0]:>6,} - {data['temp_range'][1]:>6,} {example:>15} {cname:>10}")
-
-print()
-print(f"Total naked-eye stars from Ziro: ~{sum(type_counts_bright):,}")
-print("Most visible stars are K and G type (orange/yellow).")
-print("M stars are the most common in the universe, but most are too dim to see.")
-print("The HR diagram reveals that the night sky from Ziro is a living textbook of stellar evolution.")`,
+print("\n[Full visualization in playground]")`,
       challenge: 'Add stellar evolution tracks to the HR diagram: show how a Sun-like star moves from the main sequence to the red giant branch to the white dwarf region. Plot the track as a colored path with arrows showing the direction of evolution.',
       successHint: 'The HR diagram is to astronomy what the periodic table is to chemistry — a single visualization that organizes an entire field. Every star you see from Ziro Valley has a place on this diagram, and that place tells you its mass, temperature, size, age, and fate.',
     },
@@ -992,6 +480,7 @@ print("The HR diagram reveals that the night sky from Ziro is a living textbook 
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
+            diagram={[StarMagnitudeFormulaDiagram, StarDistanceModulusDiagram, StarBlackbodyDiagram, StarCCDDiagram, StarAirmasssDiagram, StarExtinctionDiagram][i] ? createElement([StarMagnitudeFormulaDiagram, StarDistanceModulusDiagram, StarBlackbodyDiagram, StarCCDDiagram, StarAirmasssDiagram, StarExtinctionDiagram][i]) : undefined}
             pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
         ))}
       </div>

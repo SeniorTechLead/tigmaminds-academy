@@ -22,7 +22,7 @@ export default function DNADoubleHelixDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 300 400" className="w-full max-w-xs mx-auto" role="img" aria-label="DNA double helix diagram">
+      <svg viewBox="0 0 380 420" className="w-full max-w-xs mx-auto" role="img" aria-label="DNA double helix diagram">
         <defs>
           <marker id="dna-arrow" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto">
             <polygon points="0 0, 6 2, 0 4" className="fill-gray-500 dark:fill-gray-400" />

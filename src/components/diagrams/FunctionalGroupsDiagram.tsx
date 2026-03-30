@@ -45,7 +45,7 @@ export default function FunctionalGroupsDiagram() {
   return (
     <div className="my-4">
       <svg
-        viewBox="0 0 500 250"
+        viewBox="0 0 525 262"
         className="w-full max-w-xl mx-auto"
         role="img"
         aria-label="Common functional groups in organic chemistry"

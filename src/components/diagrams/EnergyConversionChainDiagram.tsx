@@ -16,7 +16,7 @@ export default function EnergyConversionChainDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 520 150" className="w-full max-w-2xl mx-auto" role="img" aria-label="Energy conversion chain diagram">
+      <svg viewBox="0 0 546 190" className="w-full max-w-2xl mx-auto" role="img" aria-label="Energy conversion chain diagram">
         <defs>
           <marker id="ecArrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
             <polygon points="0 0, 8 3, 0 6" className="fill-gray-500 dark:fill-gray-400" />

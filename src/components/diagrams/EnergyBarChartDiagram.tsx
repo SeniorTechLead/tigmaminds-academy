@@ -38,7 +38,7 @@ export default function EnergyBarChartDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 520 280" className="w-full max-w-lg mx-auto" role="img" aria-label="Energy bar chart showing kinetic and potential energy of a ball rolling down a hill">
+      <svg viewBox="0 0 546 294" className="w-full max-w-lg mx-auto" role="img" aria-label="Energy bar chart showing kinetic and potential energy of a ball rolling down a hill">
         {/* Title */}
         <text x="260" y="20" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="12" fontWeight="700">
           Conservation of Energy

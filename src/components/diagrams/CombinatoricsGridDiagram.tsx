@@ -18,7 +18,7 @@ export default function CombinatoricsGridDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 500 250" className="w-full max-w-lg mx-auto" role="img" aria-label="Permutations vs Combinations diagram">
+      <svg viewBox="0 0 525 295" className="w-full max-w-lg mx-auto" role="img" aria-label="Permutations vs Combinations diagram">
         {/* Title */}
         <text x="250" y="18" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">
           Permutations vs Combinations

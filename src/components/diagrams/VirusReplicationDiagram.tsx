@@ -9,7 +9,7 @@ export default function VirusReplicationDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 540 220" className="w-full max-w-xl mx-auto" role="img" aria-label="Virus replication cycle in 5 steps: attachment, injection, replication, assembly, and lysis">
+      <svg viewBox="0 0 620 265" className="w-full max-w-xl mx-auto" role="img" aria-label="Virus replication cycle in 5 steps: attachment, injection, replication, assembly, and lysis">
         <text x="270" y="18" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">Lytic Cycle (Virus Replication)</text>
 
         {/* Step 1: Attachment - virus on cell surface */}

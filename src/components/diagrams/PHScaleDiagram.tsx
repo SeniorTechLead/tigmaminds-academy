@@ -18,7 +18,7 @@ export default function PHScaleDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 540 200" className="w-full max-w-2xl mx-auto" role="img" aria-label="pH scale from 0 to 14 with common substances">
+      <svg viewBox="0 0 567 210" className="w-full max-w-2xl mx-auto" role="img" aria-label="pH scale from 0 to 14 with common substances">
         {/* Title */}
         <text x="270" y="20" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">pH Scale</text>
 

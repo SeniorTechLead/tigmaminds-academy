@@ -1,18 +1,32 @@
 import { Link } from 'react-router-dom';
-import { Menu, X, User, LogOut } from 'lucide-react';
-import { useState } from 'react';
+import { Menu, X, User, LogOut, Sun, Moon } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+
+function useTheme() {
+  const [dark, setDark] = useState(() => document.documentElement.classList.contains('dark'));
+
+  const toggle = () => {
+    const next = !dark;
+    setDark(next);
+    document.documentElement.classList.toggle('dark', next);
+    localStorage.setItem('theme', next ? 'dark' : 'light');
+  };
+
+  return { dark, toggle };
+}
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, profile, signOut } = useAuth();
+  const { dark, toggle: toggleTheme } = useTheme();
 
   const navigation = [
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
     { name: 'Programs', href: '/programs' },
     { name: 'Lessons', href: '/lessons' },
-    { name: 'Mentors', href: '/mentors' },
+    { name: 'Reference', href: '/reference' },
     { name: 'Contact', href: '/contact' },
   ];
 
@@ -43,6 +57,15 @@ export default function Header() {
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-500 group-hover:w-full transition-all duration-300"></span>
               </Link>
             ))}
+
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              title={dark ? 'Switch to light mode' : 'Switch to dark mode'}
+              aria-label="Toggle theme"
+            >
+              {dark ? <Sun className="w-5 h-5 text-amber-400" /> : <Moon className="w-5 h-5 text-gray-500" />}
+            </button>
 
             {user ? (
               <div className="flex items-center gap-3">
@@ -96,6 +119,14 @@ export default function Header() {
                 {item.name}
               </Link>
             ))}
+            <button
+              onClick={toggleTheme}
+              className="flex items-center gap-2 px-4 py-2 text-gray-700 dark:text-gray-300 font-medium hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg w-full text-left"
+            >
+              {dark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-gray-500" />}
+              {dark ? 'Light Mode' : 'Dark Mode'}
+            </button>
+
             {user ? (
               <>
                 <Link to="/plan" className="block px-4 py-2 text-gray-600 dark:text-gray-300 font-medium" onClick={() => setIsMenuOpen(false)}>My Plan</Link>

@@ -56,7 +56,7 @@ export default function MusicalWavesDiagram() {
 
   return (
     <svg
-      viewBox="0 0 600 300"
+      viewBox="0 0 630 333"
       className="w-full max-w-2xl mx-auto my-6"
       role="img"
       aria-label="Diagram showing how tube length determines musical pitch, with standing waves and harmonics"

@@ -1,7 +1,7 @@
 export default function LungsDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 450 350" className="w-full max-w-lg mx-auto" role="img" aria-label="Lungs and gas exchange diagram">
+      <svg viewBox="0 0 517 370" className="w-full max-w-lg mx-auto" role="img" aria-label="Lungs and gas exchange diagram">
         <defs>
           <marker id="lung-red" markerWidth="6" markerHeight="5" refX="6" refY="2.5" orient="auto">
             <polygon points="0 0, 6 2.5, 0 5" className="fill-red-500" />

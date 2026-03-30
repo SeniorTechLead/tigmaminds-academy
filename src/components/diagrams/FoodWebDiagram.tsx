@@ -90,7 +90,7 @@ export default function FoodWebDiagram() {
   return (
     <div className="my-4">
       <svg
-        viewBox="0 0 600 400"
+        viewBox="0 0 670 443"
         className="w-full max-w-2xl mx-auto"
         role="img"
         aria-label="NE India food web diagram showing energy flow from producers to predators"

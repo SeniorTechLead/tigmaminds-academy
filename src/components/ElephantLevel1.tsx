@@ -1,12 +1,12 @@
 import { useState, useRef, useCallback } from 'react';
 import { Loader2, Sparkles } from 'lucide-react';
 import MiniLesson from './MiniLesson';
-import VariablesDiagram from './diagrams/VariablesDiagram';
-import NumPyRulerDiagram from './diagrams/NumPyRulerDiagram';
-import SineWaveDiagram from './diagrams/SineWaveDiagram';
-import AmplitudeModDiagram from './diagrams/AmplitudeModDiagram';
-import NumberLineDiagram from './diagrams/NumberLineDiagram';
-import HistogramDiagram from './diagrams/HistogramDiagram';
+import ElephantVariablesDiagram from './diagrams/ElephantVariablesDiagram';
+import ElephantMathDiagram from './diagrams/ElephantMathDiagram';
+import ElephantReadingsDiagram from './diagrams/ElephantReadingsDiagram';
+import ElephantTimeAxisDiagram from './diagrams/ElephantTimeAxisDiagram';
+import ElephantSineWaveDiagram from './diagrams/ElephantSineWaveDiagram';
+import ElephantPulseDiagram from './diagrams/ElephantPulseDiagram';
 
 export default function ElephantLevel1() {
   const pyodideRef = useRef<any>(null);
@@ -242,38 +242,33 @@ import matplotlib.pyplot as plt
 
 t = np.linspace(0, 3, 24000)
 
-rumble = np.sin(2 * np.pi * 80 * t)
+# The two ingredients
+rumble = np.sin(2 * np.pi * 80 * t)          # fast vibration
+pulse = 0.5 + 0.5 * np.sin(2 * np.pi * 0.5 * t)  # slow volume
 
-pulse_rate = 0.5
-pulse = 0.5 + 0.5 * np.sin(2 * np.pi * pulse_rate * t)
+# Multiply them: rumble × pulse = calm signal
+calm = rumble * pulse
 
-calm_signal = rumble * pulse
-
-fig, axes = plt.subplots(3, 1, figsize=(10, 6))
+# Plot all three
+fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(10, 5))
 fig.patch.set_facecolor('#1f2937')
-
-for ax, data, label, color in [
-    (axes[0], rumble[:2000], 'Rumble (80 Hz)', '#6b7280'),
-    (axes[1], pulse[:2000], f'Pulse ({pulse_rate} Hz)', '#f59e0b'),
-    (axes[2], calm_signal[:2000], 'Combined: Calm elephant', '#22c55e'),
-]:
-    ax.plot(t[:2000], data, color=color, linewidth=0.8)
-    ax.set_ylabel(label, color='white', fontsize=9)
+for ax in [ax1, ax2, ax3]:
     ax.set_facecolor('#111827')
     ax.tick_params(colors='gray')
-    ax.spines['top'].set_visible(False)
-    ax.spines['right'].set_visible(False)
-    ax.spines['bottom'].set_color('gray')
-    ax.spines['left'].set_color('gray')
 
-axes[2].set_xlabel('Time (seconds)', color='white')
-plt.suptitle('Amplitude Modulation', color='white', fontsize=14, fontweight='bold')
+ax1.plot(t[:2000], rumble[:2000], color='#6b7280', linewidth=0.8)
+ax1.set_ylabel('Rumble', color='white', fontsize=9)
+
+ax2.plot(t[:2000], pulse[:2000], color='#f59e0b', linewidth=0.8)
+ax2.set_ylabel('Pulse', color='white', fontsize=9)
+
+ax3.plot(t[:2000], calm[:2000], color='#22c55e', linewidth=0.8)
+ax3.set_ylabel('Combined', color='white', fontsize=9)
+ax3.set_xlabel('Time (seconds)', color='white')
+
+plt.suptitle('Calm elephant: rumble × pulse', color='white')
 plt.tight_layout()
-plt.show()
-
-print("Top: constant 80 Hz rumble")
-print("Middle: slow volume envelope (0.5 Hz)")
-print("Bottom: rumble x pulse = a signal that breathes")`,
+plt.show()`,
       challenge: 'Change pulse_rate from 0.5 to 3 on line 8. The combined wave now pulses rapidly — that\'s a nervous elephant. Try 8 for danger. Compare all three and notice how the *only* thing that changes is the pulse speed.',
       successHint: 'You\'ve just built the core insight of the whole classifier: the rumble frequency tells you it\'s an elephant, but the pulse rate tells you its mood. Calm = slow pulse, nervous = fast, danger = frantic.',
     },
@@ -320,12 +315,12 @@ print("Bottom: rumble x pulse = a signal that breathes")`,
       <div className="space-y-8">
         {miniLessons.map((lesson, i) => {
           const diagrams: Record<number, React.ReactNode> = {
-            0: <VariablesDiagram />,
-            1: <NumberLineDiagram />,
-            2: <HistogramDiagram />,
-            3: <NumPyRulerDiagram />,
-            4: <SineWaveDiagram />,
-            5: <AmplitudeModDiagram />,
+            0: <ElephantVariablesDiagram />,
+            1: <ElephantMathDiagram />,
+            2: <ElephantReadingsDiagram />,
+            3: <ElephantTimeAxisDiagram />,
+            4: <ElephantSineWaveDiagram />,
+            5: <ElephantPulseDiagram />,
           };
 
           const practiceProblems: Record<number, { label: string; prompt: string; starterCode: string; hint?: string }[]> = {

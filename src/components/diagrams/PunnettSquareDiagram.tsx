@@ -10,7 +10,7 @@ const crosses: Record<CrossType, {
   ratio: string;
 }> = {
   BbxBb: {
-    title: 'Brown eyes \u00d7 Brown eyes (Bb \u00d7 Bb)',
+    title: 'Brown eyes × Brown eyes (Bb × Bb)',
     parent1: ['B', 'b'],
     parent2: ['B', 'b'],
     offspring: [
@@ -22,7 +22,7 @@ const crosses: Record<CrossType, {
     ratio: '3 brown : 1 blue',
   },
   Bbxbb: {
-    title: 'Brown eyes \u00d7 Blue eyes (Bb \u00d7 bb)',
+    title: 'Brown eyes × Blue eyes (Bb × bb)',
     parent1: ['B', 'b'],
     parent2: ['b', 'b'],
     offspring: [
@@ -52,11 +52,11 @@ export default function PunnettSquareDiagram() {
           onClick={() => setCrossType(prev => prev === 'BbxBb' ? 'Bbxbb' : 'BbxBb')}
           className="px-3 py-1.5 text-sm rounded-lg bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-indigo-800/50 transition-colors font-medium"
         >
-          Toggle: {crossType === 'BbxBb' ? 'Switch to Bb \u00d7 bb' : 'Switch to Bb \u00d7 Bb'}
+          Toggle: {crossType === 'BbxBb' ? 'Switch to Bb × bb' : 'Switch to Bb × Bb'}
         </button>
       </div>
 
-      <svg viewBox="0 0 400 350" className="w-full max-w-md mx-auto" role="img" aria-label="Punnett square diagram">
+      <svg viewBox="0 0 420 388" className="w-full max-w-md mx-auto" role="img" aria-label="Punnett square diagram">
         {/* Title */}
         <text x="200" y="25" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="12" fontWeight="bold">
           {data.title}

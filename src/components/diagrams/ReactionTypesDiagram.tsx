@@ -5,7 +5,7 @@ export default function ReactionTypesDiagram() {
   return (
     <div className="my-4">
       <svg
-        viewBox="0 0 520 280"
+        viewBox="0 0 546 294"
         className="w-full max-w-xl mx-auto"
         role="img"
         aria-label="Four types of chemical reactions: synthesis, decomposition, single replacement, double replacement"

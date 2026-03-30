@@ -57,7 +57,7 @@ function ArrowMarker({ id, color }: { id: string; color: string }) {
   return (
     <marker
       id={id}
-      viewBox="0 0 10 7"
+      viewBox="0 0 540 456"
       refX="10"
       refY="3.5"
       markerWidth="8"

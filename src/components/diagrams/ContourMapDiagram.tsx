@@ -14,7 +14,7 @@ export default function ContourMapDiagram() {
   return (
     <div className="w-full max-w-xl mx-auto my-6">
       <svg
-        viewBox="0 0 400 350"
+        viewBox="0 0 420 388"
         className="w-full"
         role="img"
         aria-label="Topographic contour map of a hill with elevation labels from 100m to 500m"

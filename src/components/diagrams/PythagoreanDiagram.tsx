@@ -12,7 +12,7 @@ export default function PythagoreanDiagram() {
   return (
     <div className="my-4">
       <svg
-        viewBox="0 0 500 350"
+        viewBox="0 0 525 367"
         className="w-full max-w-lg mx-auto"
         role="img"
         aria-label="Pythagorean theorem diagram showing a²+b²=c² with a 3-4-5 triangle"

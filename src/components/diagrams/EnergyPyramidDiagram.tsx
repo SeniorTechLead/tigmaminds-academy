@@ -1,7 +1,7 @@
 export default function EnergyPyramidDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 500 320" className="w-full max-w-lg mx-auto" role="img" aria-label="Energy pyramid diagram showing trophic levels">
+      <svg viewBox="0 0 595 355" className="w-full max-w-lg mx-auto" role="img" aria-label="Energy pyramid diagram showing trophic levels">
         <defs>
           <marker id="ep-arrow" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto">
             <polygon points="0 0, 6 2, 0 4" className="fill-gray-500 dark:fill-gray-400" />

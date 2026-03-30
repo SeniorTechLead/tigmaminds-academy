@@ -79,7 +79,7 @@ export default function CSSBoxModelDiagram() {
   return (
     <div className="w-full max-w-lg mx-auto my-6 select-none">
       <svg
-        viewBox="0 0 500 350"
+        viewBox="0 0 525 367"
         className="w-full"
         role="img"
         aria-label="CSS Box Model diagram showing margin, border, padding, and content layers"

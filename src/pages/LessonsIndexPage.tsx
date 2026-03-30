@@ -1,10 +1,20 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Clock, CheckCircle, BookOpen } from 'lucide-react';
+import { ArrowRight, Clock, CheckCircle, BookOpen, Search } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { lessons, SUBJECTS, Subject, SKILLS, Skill, TRACKS, Track } from '../data/lessons';
 import { useProgress } from '../contexts/ProgressContext';
+
+function highlightMatch(text: string, query: string): React.ReactNode {
+  if (!query || query.length < 2) return text;
+  const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+  const parts = text.split(regex);
+  if (parts.length === 1) return text;
+  return parts.map((part, i) =>
+    regex.test(part) ? <mark key={i} className="bg-amber-200 dark:bg-amber-700/50 text-inherit rounded px-0.5">{part}</mark> : part
+  );
+}
 
 type FilterType = 'subject' | 'skill' | 'track';
 
@@ -41,8 +51,8 @@ export default function LessonsIndexPage() {
             <Link to="/plan" className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-colors">
               <BookOpen className="w-4 h-4" /> Build a Lesson Plan
             </Link>
-            <Link to="/certificate" className="inline-flex items-center gap-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-              Your Certificate
+            <Link to="/reference" className="inline-flex items-center gap-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+              <Search className="w-4 h-4" /> Reference Library
             </Link>
           </div>
           {getCompletedCount() > 0 && (
@@ -175,14 +185,14 @@ export default function LessonsIndexPage() {
                     <div className="p-5">
                       <div className="flex items-center gap-2 mb-2">
                         <p className="text-xs font-semibold text-amber-600 dark:text-amber-400 uppercase tracking-wide">
-                          {lesson.stem.title}
+                          {highlightMatch(lesson.stem.title, searchQuery)}
                         </p>
                       </div>
                       <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
-                        {lesson.story.title}
+                        {highlightMatch(lesson.story.title, searchQuery)}
                       </h3>
                       <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed line-clamp-2 mb-3">
-                        {lesson.story.tagline}
+                        {highlightMatch(lesson.story.tagline, searchQuery)}
                       </p>
 
                       {/* Subject tags */}

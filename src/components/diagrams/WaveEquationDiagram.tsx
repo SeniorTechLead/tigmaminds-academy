@@ -23,7 +23,7 @@ export default function WaveEquationDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 500 220" className="w-full max-w-xl mx-auto" role="img" aria-label="Wave equation diagram showing wavelength, amplitude, and the wave speed equation">
+      <svg viewBox="0 0 605 236" className="w-full max-w-xl mx-auto" role="img" aria-label="Wave equation diagram showing wavelength, amplitude, and the wave speed equation">
         {/* Equilibrium line */}
         <line x1={30} y1={midY} x2={470} y2={midY} stroke="currentColor" className="text-gray-300 dark:text-gray-600" strokeWidth="1" strokeDasharray="4,3" />
         <text x={475} y={midY + 4} className="fill-gray-400 dark:fill-gray-500" fontSize="10">equilibrium</text>

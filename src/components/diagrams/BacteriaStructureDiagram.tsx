@@ -1,7 +1,7 @@
 export default function BacteriaStructureDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 450 300" className="w-full max-w-lg mx-auto" role="img" aria-label="Bacteria structure diagram">
+      <svg viewBox="0 0 505 340" className="w-full max-w-lg mx-auto" role="img" aria-label="Bacteria structure diagram">
         <defs>
           <marker id="bacLabel" markerWidth="6" markerHeight="5" refX="6" refY="2.5" orient="auto">
             <polygon points="0 0, 6 2.5, 0 5" className="fill-gray-400" />

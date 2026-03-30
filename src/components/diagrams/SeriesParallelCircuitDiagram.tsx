@@ -19,7 +19,7 @@ export default function SeriesParallelCircuitDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 540 250" className="w-full max-w-2xl mx-auto" role="img" aria-label="Series vs Parallel circuit diagram">
+      <svg viewBox="0 0 567 271" className="w-full max-w-2xl mx-auto" role="img" aria-label="Series vs Parallel circuit diagram">
         {/* ======== SERIES CIRCUIT (left) ======== */}
         <text x={130} y={16} textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="700">Series Circuit</text>
 

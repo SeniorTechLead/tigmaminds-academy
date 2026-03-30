@@ -7,7 +7,7 @@ export default function PolymerChainDiagram() {
   return (
     <div className="my-4">
       <svg
-        viewBox="0 0 520 200"
+        viewBox="0 0 546 248"
         className="w-full max-w-xl mx-auto"
         role="img"
         aria-label="Polymer chain diagram: monomers linking into a polymer, connecting to silk fibroin"

@@ -1,5 +1,6 @@
 import { useState, useRef, useCallback } from 'react';
 import { Play, Loader2, CheckCircle, RotateCcw, HelpCircle, ChevronDown, ChevronUp } from 'lucide-react';
+import DiagramZoom from './DiagramZoom';
 
 interface MiniLessonProps {
   /** HTML id for scroll targeting */
@@ -218,7 +219,9 @@ len(plt.get_fignums()) > 0
       {/* ===== DIAGRAM ===== */}
       {diagram && (
         <div className="px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
-          {diagram}
+          <DiagramZoom>
+            {diagram}
+          </DiagramZoom>
         </div>
       )}
 

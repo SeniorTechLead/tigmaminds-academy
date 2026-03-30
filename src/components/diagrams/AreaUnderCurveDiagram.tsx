@@ -39,7 +39,7 @@ export default function AreaUnderCurveDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 450 350" className="w-full max-w-lg mx-auto" role="img" aria-label="Area under curve with Riemann sum">
+      <svg viewBox="0 0 480 367" className="w-full max-w-lg mx-auto" role="img" aria-label="Area under curve with Riemann sum">
         {/* Axes */}
         <line x1={gx} y1={gy} x2={gx} y2={gy + gh} className="stroke-gray-500 dark:stroke-gray-400" strokeWidth="1.5" />
         <line x1={gx} y1={gy + gh} x2={gx + gw} y2={gy + gh} className="stroke-gray-500 dark:stroke-gray-400" strokeWidth="1.5" />

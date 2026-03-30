@@ -36,7 +36,7 @@ export default function BalancingEquationDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 520 250" className="w-full max-w-2xl mx-auto" role="img" aria-label="Balancing chemical equation: 2H2 + O2 = 2H2O">
+      <svg viewBox="0 0 560 287" className="w-full max-w-2xl mx-auto" role="img" aria-label="Balancing chemical equation: 2H2 + O2 = 2H2O">
         {/* Title */}
         <text x="260" y="20" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">
           Balancing: 2H&#8322; + O&#8322; &#8594; 2H&#8322;O

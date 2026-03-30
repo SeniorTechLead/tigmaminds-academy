@@ -103,7 +103,7 @@ export default function BalanceScaleDiagram() {
   return (
     <div className="my-4">
       <svg
-        viewBox="0 0 500 280"
+        viewBox="0 0 525 294"
         className="w-full max-w-lg mx-auto"
         role="img"
         aria-label={`Balance scale showing equation step: ${current.label}`}

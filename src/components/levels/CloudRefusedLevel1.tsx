@@ -1,6 +1,11 @@
 import { useState, useRef, useCallback } from 'react';
 import { Loader2, Sparkles } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
+import CloudFormationDiagram from '../diagrams/CloudFormationDiagram';
+import CloudRainProcessDiagram from '../diagrams/CloudRainProcessDiagram';
+import CloudSeedingDiagram from '../diagrams/CloudSeedingDiagram';
+import CloudTypesDiagram from '../diagrams/CloudTypesDiagram';
+import ActivityCloudJarDiagram from '../diagrams/ActivityCloudJarDiagram';
 
 export default function CloudRefusedLevel1() {
   const pyodideRef = useRef<any>(null);
@@ -23,464 +28,491 @@ export default function CloudRefusedLevel1() {
 
   const miniLessons = [
     {
-      title: 'Water cycle fundamentals',
-      concept: `Water continuously moves between oceans, atmosphere, and land through the **water cycle**: evaporation (liquid to gas), condensation (gas to tiny droplets forming clouds), precipitation (rain/snow), and runoff (back to rivers and oceans).\n\nKey numbers:\n- Earth has 1.4 billion km3 of water\n- Only 2.5% is freshwater\n- Only 0.3% of freshwater is accessible surface water\n- The atmosphere holds about 12,900 km3 of water at any time\n- Average water molecule spends 9 days in the atmosphere before precipitating`,
-      analogy: 'The water cycle is like a giant distillery. The ocean is the boiler (evaporation), the atmosphere is the condenser (clouds form), and rain is the distilled water dripping into collection vessels (rivers, lakes). The sun provides the energy to run this planetary-scale distillation.',
-      storyConnection: 'The cloud in the story refuses to rain on the parched village. In meteorology, this happens when conditions for precipitation are not met: the cloud may have water droplets but they are too small to fall. Cloud seeding is humanity\'s attempt to convince reluctant clouds to release their water.',
-      checkQuestion: 'If the atmosphere always contains 12,900 km3 of water, why do droughts happen?',
-      checkAnswer: 'Because atmospheric water is not evenly distributed. It depends on wind patterns, temperature gradients, and geography. A drought occurs not because there is less water globally, but because atmospheric circulation patterns have shifted, directing moisture away from a region. The water is there, just not overhead.',
-      codeIntro: 'Model the water cycle: evaporation, atmospheric transport, and precipitation.',
+      title: 'How clouds form \u2014 evaporation, lapse rate, and dew point',
+      concept: `In the story, Meghi the cloud gathered water from the Bay of Bengal and carried it to the Khasi Hills. But what does "gathering water" actually mean physically?
+
+The sun heats water surfaces. Water molecules at the surface gain enough kinetic energy to escape as **vapor** (invisible gas). This vapor rises because warm air is less dense. As it rises, atmospheric pressure drops, so the air expands and cools at a steady rate: roughly **6.5\u00B0C per 1,000 metres** \u2014 the **environmental lapse rate**.
+
+At some altitude, the air cools to its **dew point**: the temperature where it holds maximum vapor. Below the dew point, vapor must condense. But it needs a surface to condense onto \u2014 a **condensation nucleus** (dust, salt, pollen, soot). Water molecules stick to these tiny particles, forming droplets ~10 micrometres across. Billions of these droplets = a visible cloud.
+
+**Key calculation:** If ground temperature is 30\u00B0C and dew point is 18\u00B0C:
+- Cloud base = (30 \u2013 18) / 6.5 \u00D7 1000 = **1,846 metres**
+- This is why Meghalaya\u2019s clouds hug the hills at a predictable altitude.`,
+      analogy: 'Cloud formation is like breathing on a cold window. Your breath (warm, moist air) hits the cold glass (like high altitude). The moisture condenses into visible droplets on the surface (the glass acts as a giant condensation nucleus). The colder the glass, the faster the condensation \u2014 just as higher altitude means colder air and more cloud formation.',
+      storyConnection: 'Meghi gathered water "all the way from the Bay of Bengal." This is real: monsoon winds carry water vapor thousands of kilometres from the ocean. When this moisture-laden air hits the Khasi Hills and is forced upward (orographic lift), it cools below its dew point and forms the massive clouds that make Meghalaya the wettest region on Earth.',
+      checkQuestion: 'On a 35\u00B0C day with dew point 20\u00B0C, at what altitude will clouds form? And why does Cherrapunji get more rain than Shillong, even though they are only 50 km apart?',
+      checkAnswer: 'Cloud base: (35 \u2013 20) / 6.5 \u00D7 1000 = 2,308 metres. Cherrapunji gets more rain because it sits at the edge of the Khasi plateau where moist air is forced up most steeply (strongest orographic lift). Shillong is on the plateau top \u2014 the air has already released much of its moisture before reaching there.',
+      codeIntro: 'Model how temperature drops with altitude and predict where clouds form.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
-# Simple water cycle box model
-# Reservoirs: ocean, atmosphere, land
-days = 365
-dt = 1  # day
+# Atmospheric lapse rate model
+altitude = np.linspace(0, 5000, 500)  # metres
+ground_temp = 30  # \u00B0C in Shillong valley
+lapse_rate = 6.5  # \u00B0C per 1000m
 
-ocean = np.zeros(days); atmos = np.zeros(days); land = np.zeros(days)
-ocean[0] = 1000; atmos[0] = 13; land[0] = 50
+# Temperature decreases with altitude
+temp = ground_temp - (lapse_rate / 1000) * altitude
 
-evap_rate = 0.003  # fraction of ocean per day
-precip_rate = 0.08  # fraction of atmosphere per day
-runoff_rate = 0.01  # fraction of land per day
+# Dew point (roughly constant in lower atmosphere)
+dew_point = 18  # \u00B0C
 
-precip_ocean_frac = 0.77  # 77% of precipitation falls on ocean
-rain = np.zeros(days)
+# Cloud forms where temperature = dew point
+cloud_base = (ground_temp - dew_point) / lapse_rate * 1000
 
-for t in range(1, days):
-    evap = evap_rate * ocean[t-1]
-    precip = precip_rate * atmos[t-1]
-    runoff = runoff_rate * land[t-1]
-    rain[t] = precip * (1 - precip_ocean_frac)
-    
-    ocean[t] = ocean[t-1] - evap + precip * precip_ocean_frac + runoff
-    atmos[t] = atmos[t-1] + evap - precip
-    land[t] = land[t-1] + rain[t] - runoff
-
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 6))
 fig.patch.set_facecolor('#1f2937')
 
+# Temperature profile
 ax1.set_facecolor('#111827')
-ax1.plot(atmos, color='#3b82f6', linewidth=2, label='Atmosphere')
-ax1.plot(land, color='#22c55e', linewidth=2, label='Land water')
-ax1.set_xlabel('Day', color='white')
-ax1.set_ylabel('Water (relative units)', color='white')
-ax1.set_title('Water Cycle Reservoirs Over 1 Year', color='white', fontsize=13)
+ax1.plot(temp, altitude, color='#ef4444', linewidth=2, label='Air temperature')
+ax1.axhline(cloud_base, color='#60a5fa', linestyle='--', linewidth=1.5, alpha=0.7)
+ax1.axvline(dew_point, color='#22c55e', linestyle='--', linewidth=1.5, label=f'Dew point ({dew_point}\u00B0C)')
+ax1.fill_betweenx(altitude, temp, dew_point, where=temp < dew_point,
+                  alpha=0.15, color='#60a5fa', label='Cloud zone')
+ax1.plot(dew_point, cloud_base, 'o', color='#f59e0b', markersize=10, zorder=5)
+ax1.annotate(f'Cloud base: {cloud_base:.0f}m', xy=(dew_point, cloud_base),
+            xytext=(dew_point + 3, cloud_base + 300), color='#f59e0b', fontsize=10,
+            arrowprops=dict(arrowstyle='->', color='#f59e0b'))
+ax1.set_xlabel('Temperature (\u00B0C)', color='white')
+ax1.set_ylabel('Altitude (m)', color='white')
+ax1.set_title('Where Clouds Form Over Shillong', color='white', fontsize=12)
 ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax1.tick_params(colors='gray')
 
+# Different ground temperatures
 ax2.set_facecolor('#111827')
-ax2.plot(rain, color='#3b82f6', linewidth=1, alpha=0.7, label='Daily rainfall on land')
-ax2.plot(np.convolve(rain, np.ones(30)/30, mode='same'), color='#f59e0b', linewidth=2, label='30-day average')
-ax2.set_xlabel('Day', color='white')
-ax2.set_ylabel('Rainfall', color='white')
-ax2.set_title('Rainfall Pattern', color='white', fontsize=13)
-ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
+for gt in [25, 28, 30, 33, 36]:
+    t = gt - (lapse_rate / 1000) * altitude
+    cb = (gt - dew_point) / lapse_rate * 1000
+    ax2.plot(t, altitude, linewidth=1.5, label=f'{gt}\u00B0C \u2192 cloud at {cb:.0f}m')
+    ax2.plot(dew_point, cb, 'o', markersize=6)
+
+ax2.axvline(dew_point, color='#22c55e', linestyle='--', linewidth=1, alpha=0.5)
+ax2.set_xlabel('Temperature (\u00B0C)', color='white')
+ax2.set_ylabel('Altitude (m)', color='white')
+ax2.set_title('Hotter Ground = Higher Cloud Base', color='white', fontsize=12)
+ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
 ax2.tick_params(colors='gray')
 
 plt.tight_layout()
 plt.show()
 
-print(f"Annual evaporation: {evap_rate * ocean[0] * 365:.0f} units")
-print(f"Annual precipitation: {precip_rate * atmos[0] * 365:.0f} units")
-print(f"Average atmospheric residence time: {atmos.mean() / (precip_rate * atmos.mean()):.0f} days")`,
-      challenge: 'Add seasonal variation: multiply evaporation rate by (1 + 0.3*sin(2*pi*t/365)) to simulate summer/winter. How does this change the rainfall pattern?',
-      successHint: 'The water cycle is the engine of all weather and climate. Understanding it quantitatively is the foundation for understanding droughts, floods, and cloud seeding.',
-    },    {
-      title: 'Cloud formation and types',
-      concept: `Clouds form when air rises, cools, and its water vapor condenses onto tiny particles called **condensation nuclei** (dust, salt, pollen). The temperature at which this happens is the **dew point**.\n\nCloud types by altitude:\n- **High (6-12 km)**: Cirrus (wispy ice crystals), cirrostratus, cirrocumulus\n- **Middle (2-6 km)**: Altostratus, altocumulus\n- **Low (0-2 km)**: Stratus (flat layers), stratocumulus, nimbostratus (rain)\n- **Vertical**: Cumulus (puffy), cumulonimbus (thunderstorms, up to 15 km)\n\nNot all clouds produce rain. Rain requires droplets to grow large enough to fall. A typical cloud droplet is 10 micrometers; a raindrop is 2,000 micrometers (200x larger). The droplet must grow by a factor of 200 before it can fall as rain.`,
-      analogy: 'Cloud formation is like breathing on a cold window. Your warm, moist breath (rising air) hits the cold glass (upper atmosphere) and condenses into tiny droplets. The droplets are the cloud. If enough accumulate, they run down the glass (precipitation).',
-      storyConnection: 'The stubborn cloud in the story is described as heavy and dark but refusing to release its water. This is a real phenomenon: a cloud can be saturated but lack the right conditions for droplets to coalesce into raindrops. The cloud needs a trigger to convert its tiny droplets into rain-sized drops.',
-      checkQuestion: 'Why are some clouds white and others dark gray?',
-      checkAnswer: 'White clouds are thin: light passes through, scattering in all directions (appearing white). Dark clouds are thick: light is absorbed and scattered so many times that little reaches the bottom, making them appear gray or black from below. A dark cloud is not dirty; it is just very thick with water droplets. Ironically, the darkest clouds are often the ones about to produce the most rain.',
-      codeIntro: 'Visualize cloud types by altitude and their precipitation potential.',
+print("Cloud formation physics:")
+print(f"  Ground temp: {ground_temp}\u00B0C, Dew point: {dew_point}\u00B0C")
+print(f"  Cloud base: {cloud_base:.0f} metres")
+print(f"  Lapse rate: {lapse_rate}\u00B0C per 1000m")
+print(f"  Hotter days push cloud base HIGHER (more cooling needed)")`,
+      challenge: 'During monsoon season, the dew point in Meghalaya rises to 24\u00B0C and ground temperature drops to 26\u00B0C. Recalculate the cloud base. Why does this explain Meghalaya\u2019s persistent low cloud cover during monsoon?',
+      successHint: 'You just derived the lifting condensation level (LCL) formula \u2014 the same equation meteorologists use worldwide. Every weather balloon launched carries instruments to measure exactly these numbers.',
+      diagram: CloudFormationDiagram,
+    },
+    {
+      title: 'Why some clouds rain and others just sit there',
+      concept: `Meghi held her rain for days. Is this realistic? Absolutely. Most clouds never produce rain at all. Here is why.
+
+A cloud droplet is about **10 micrometres** across. A raindrop is about **2,000 micrometres** (2 mm). That is a 200x difference in diameter, or about **one million times** the volume. A raindrop needs ~1 million cloud droplets to merge together.
+
+**Collision-coalescence (warm rain process):** Larger droplets fall faster than small ones. As they fall through the cloud, they collide with and absorb smaller droplets. Each collision makes the drop bigger and faster, triggering more collisions \u2014 a chain reaction. This works best in thick clouds with a wide range of droplet sizes.
+
+**Bergeron process (ice-crystal process):** In tall clouds, the top is below 0\u00B0C but many droplets remain liquid (**supercooled**). Ice crystals in this zone "steal" water vapor from liquid droplets (because vapor pressure over ice < vapor pressure over liquid). Ice crystals grow rapidly, fall, and melt into rain.
+
+**Why Meghi didn\u2019t rain:** Without enough collisions or ice nuclei, droplets stay tiny. The cloud is full of water but none of it can fall. Cloud seeding solves exactly this problem.`,
+      analogy: 'Imagine a room full of thousands of tiny soap bubbles floating in the air. None of them is heavy enough to fall to the floor. But if you start gently pushing bubbles together, they merge into bigger bubbles, and eventually they are heavy enough to sink. That merging process is collision-coalescence, and it is why rain needs TIME and THICKNESS to happen.',
+      storyConnection: 'The story says Meghi "grew heavier and heavier" but still did not rain. This is physically accurate: a cloud can contain hundreds of thousands of tonnes of water as microscopic droplets, each too small to overcome air resistance. Meghi was waterlogged but her droplets were too small to fall \u2014 she needed the coalescence process or ice nuclei to start the chain reaction.',
+      checkQuestion: 'A thin stratus cloud (500 m thick) rarely produces heavy rain, while a cumulonimbus (10 km tall) produces downpours. Explain why using what you know about droplet growth.',
+      checkAnswer: 'Three reasons: (1) The cumulonimbus has far more water content \u2014 more droplets to collide and merge. (2) The 10 km height means droplets have a much longer fall path through the cloud, giving them more time and distance to collide. (3) The top of the cumulonimbus is well below 0\u00B0C, so the Bergeron process activates \u2014 ice crystals grow rapidly from supercooled droplets. The thin stratus has none of these advantages.',
+      codeIntro: 'Simulate droplet growth through collision-coalescence.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
-fig, ax = plt.subplots(figsize=(12, 8))
-fig.patch.set_facecolor('#1f2937')
-ax.set_facecolor('#111827')
+# Simulate collision-coalescence: how a cloud droplet grows into a raindrop
+# A falling drop collides with smaller drops and grows
 
-clouds = [
-    ('Cirrus', 9, 0.5, '#e0e7ff', 'Ice crystals, no rain'),
-    ('Cirrostratus', 7.5, 1, '#c7d2fe', 'Thin veil, halo around sun'),
-    ('Altostratus', 4.5, 1.5, '#a5b4fc', 'Gray sheet, light rain possible'),
-    ('Altocumulus', 3.5, 1, '#818cf8', 'Puffy patches, occasionally rain'),
-    ('Stratus', 1, 1.5, '#6366f1', 'Flat gray layer, drizzle'),
-    ('Stratocumulus', 1.5, 1.5, '#4f46e5', 'Lumpy layer, light rain'),
-    ('Cumulus', 2, 3, '#22c55e', 'Fair weather puffy clouds'),
-    ('Cumulonimbus', 4, 10, '#ef4444', 'Thunderstorm! Heavy rain, hail'),
-    ('Nimbostratus', 2.5, 3, '#3b82f6', 'Thick gray, steady rain'),
-]
+def simulate_droplet_growth(initial_radius_um, cloud_thickness_m, cloud_lwc_g_m3):
+    """Simulate a droplet falling through a cloud, collecting smaller drops."""
+    r = initial_radius_um  # micrometres
+    height = cloud_thickness_m
+    dt = 0.1  # time step (seconds)
 
-for name, base, height, color, desc in clouds:
-    rect = plt.Rectangle((clouds.index((name, base, height, color, desc)) * 1.3, base),
-                          1, height, facecolor=color, alpha=0.6, edgecolor='white', linewidth=0.5)
-    ax.add_patch(rect)
-    ax.text(clouds.index((name, base, height, color, desc)) * 1.3 + 0.5, base + height/2,
-            f'{name}\n{base}-{base+height}km', ha='center', va='center', color='white', fontsize=7, fontweight='bold')
+    radii = [r]
+    heights = [height]
+    times = [0]
+    t = 0
 
-ax.set_xlim(-0.5, 12)
-ax.set_ylim(0, 15)
-ax.set_xlabel('Cloud type', color='white')
-ax.set_ylabel('Altitude (km)', color='white')
-ax.set_title('Cloud Types by Altitude and Precipitation Potential', color='white', fontsize=14)
-ax.tick_params(colors='gray')
-ax.set_xticks([])
-
-# Precipitation potential bars
-rain_potential = [0, 0.5, 2, 1, 3, 2, 0.5, 10, 7]
-ax_twin = ax.twinx()
-ax_twin.bar([i * 1.3 + 0.5 for i in range(len(rain_potential))], rain_potential,
-            width=0.8, alpha=0.3, color='#3b82f6')
-ax_twin.set_ylabel('Rain potential (relative)', color='#3b82f6')
-ax_twin.tick_params(colors='gray')
-
-plt.tight_layout()
-plt.show()
-
-print("Cloud types and rain potential:")
-for name, base, height, _, desc in clouds:
-    print(f"  {name}: {base}-{base+height}km - {desc}")`,
-      challenge: 'Add temperature and humidity profiles to the chart. At what altitude does the temperature cross the dew point? That is where clouds form.',
-      successHint: 'Knowing cloud types tells you what weather to expect. Cirrus means fair weather. Cumulonimbus means run for cover. The story\'s cloud that refuses to rain is likely a cumulus that has not yet developed into a cumulonimbus.',
-    },    {
-      title: 'Precipitation physics',
-      concept: `For rain to fall, tiny cloud droplets (10 micrometers) must grow to raindrop size (2000+ micrometers). Two mechanisms:\n\n**Collision-coalescence** (warm clouds):\n- Larger droplets fall faster than small ones\n- They collide and merge (coalesce) as they fall\n- This snowball effect produces rain in 20-30 minutes\n\n**Ice crystal process** (cold clouds, Bergeron process):\n- At temperatures below 0C, ice crystals and supercooled water droplets coexist\n- Ice crystals grow at the expense of droplets (lower saturation vapor pressure over ice)\n- Crystals grow large enough to fall, melting into rain as they descend\n\nThis is the physics that cloud seeding exploits: adding nuclei to accelerate these natural processes.`,
-      analogy: 'Rain formation is like a snowball rolling downhill. A tiny snowball (cloud droplet) picks up more snow (collides with other droplets) as it rolls, growing larger and faster. Below a certain size, friction stops it (droplet stays suspended). Above that size, gravity wins and it falls (rain).',
-      storyConnection: 'The cloud in the story is full of tiny droplets but they will not coalesce. In real clouds, coalescence requires droplets of different sizes. If all droplets are the same size, they fall at the same speed and never collide. The cloud needs diversity in droplet size to start the collision-coalescence cascade.',
-      checkQuestion: 'Why does it sometimes rain from a clear sky (sun showers)?',
-      checkAnswer: 'The rain is falling from a cloud that is either (1) directly overhead but small enough that sunlight comes around it, (2) upwind and the rain is being blown to where you are standing, or (3) at high altitude where it is invisible from below. True clear-sky rain is extremely rare and usually involves virga (rain that evaporates before reaching the ground) from very high, thin clouds.',
-      codeIntro: 'Simulate the collision-coalescence process and watch a raindrop grow.',
-      code: `import numpy as np
-import matplotlib.pyplot as plt
-
-np.random.seed(42)
-
-# Simulate droplet growth by collision-coalescence
-n_steps = 500
-n_droplets = 1000
-
-# Initial droplet sizes (log-normal distribution, mean 10 micrometers)
-sizes = np.random.lognormal(np.log(10), 0.5, n_droplets)
-
-growth_history = [sizes.copy()]
-mean_size = [np.mean(sizes)]
-max_size = [np.max(sizes)]
-
-for step in range(n_steps):
-    # Larger droplets collect smaller ones
-    # Probability of collision proportional to size difference
-    for i in range(min(50, len(sizes))):
-        idx = np.random.randint(0, len(sizes))
-        partner = np.random.randint(0, len(sizes))
-        if idx != partner:
-            # Collision probability increases with size difference
-            p_collision = abs(sizes[idx] - sizes[partner]) / 1000
-            if np.random.random() < p_collision:
-                sizes[idx] += sizes[partner] * 0.1  # absorb 10% of partner
-    
-    mean_size.append(np.mean(sizes))
-    max_size.append(np.max(sizes))
-
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
-fig.patch.set_facecolor('#1f2937')
-
-ax1.set_facecolor('#111827')
-ax1.plot(mean_size, color='#3b82f6', linewidth=2, label='Mean droplet size')
-ax1.plot(max_size, color='#ef4444', linewidth=2, label='Largest droplet')
-ax1.axhline(2000, color='#22c55e', linestyle='--', label='Raindrop threshold (2000 um)')
-ax1.set_xlabel('Time step', color='white')
-ax1.set_ylabel('Droplet size (micrometers)', color='white')
-ax1.set_title('Droplet Growth by Collision-Coalescence', color='white', fontsize=13)
-ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax1.tick_params(colors='gray')
-ax1.set_yscale('log')
-
-ax2.set_facecolor('#111827')
-ax2.hist(growth_history[0], bins=30, alpha=0.5, color='#3b82f6', label='Initial', density=True)
-ax2.hist(sizes, bins=30, alpha=0.5, color='#ef4444', label='Final', density=True)
-ax2.set_xlabel('Droplet size (micrometers)', color='white')
-ax2.set_ylabel('Density', color='white')
-ax2.set_title('Size Distribution: Before vs After', color='white', fontsize=13)
-ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax2.tick_params(colors='gray')
-
-plt.tight_layout()
-plt.show()
-
-print(f"Initial mean: {growth_history[0].mean():.0f} um, max: {growth_history[0].max():.0f} um")
-print(f"Final mean: {sizes.mean():.0f} um, max: {sizes.max():.0f} um")
-print(f"Droplets exceeding rain threshold: {np.sum(sizes > 2000)}")`,
-      challenge: 'Start with all droplets exactly the same size (no variation). Does coalescence happen? This demonstrates why droplet size diversity is critical for rain formation.',
-      successHint: 'Understanding precipitation physics is the key to cloud seeding. If we know why a cloud is not raining, we can design an intervention that addresses the specific bottleneck.',
-    },    {
-      title: 'Cloud seeding technology',
-      concept: `**Cloud seeding** is the deliberate introduction of particles into clouds to enhance precipitation. The main agents:\n\n- **Silver iodide (AgI)**: crystal structure similar to ice, acts as ice nuclei for the Bergeron process. Delivered by aircraft or ground generators.\n- **Dry ice (solid CO2)**: at -78C, it supercools air instantly, creating ice crystals from existing water vapor.\n- **Hygroscopic salts** (NaCl, KCl): absorb water, creating large droplets that trigger collision-coalescence.\n\nHow it works:\n1. Identify suitable clouds (must already contain moisture)\n2. Deliver seeding agent at the right altitude and temperature\n3. Agent provides nuclei for ice crystal or droplet formation\n4. Enhanced precipitation falls within 15-45 minutes\n\nCloud seeding cannot create rain from clear skies. It can only enhance precipitation from existing clouds by 10-30%.`,
-      analogy: 'Cloud seeding is like adding yeast to bread dough. The dough (cloud) already has all the ingredients (water, flour). Yeast (seeding agent) is the catalyst that triggers the rise (precipitation). Without dough, yeast does nothing. Without clouds, seeding agents do nothing.',
-      storyConnection: 'The story\'s village elder scatters sacred ash into the wind, calling the cloud to rain. Cloud seeding replaces sacred ash with silver iodide, and ritual incantation with atmospheric science. The impulse is the same: humans trying to bring rain in a drought.',
-      checkQuestion: 'If cloud seeding has existed since 1946, why is not every drought solved?',
-      checkAnswer: 'Several reasons: (1) It requires existing clouds with sufficient moisture, which droughts lack. (2) Results are modest, 10-30% enhancement, not drought-breaking. (3) It is difficult to prove statistically (how do you know it would not have rained anyway?). (4) It may redistribute rain from downwind areas (robbing Peter to pay Paul). (5) Costs and logistics are significant for uncertain returns. Cloud seeding is a tool, not a solution.',
-      codeIntro: 'Model cloud seeding: how adding nuclei changes the droplet size distribution and precipitation.',
-      code: `import numpy as np
-import matplotlib.pyplot as plt
-
-np.random.seed(42)
-
-# Cloud properties
-n_droplets = 10000
-# Unseeded: few large droplets, many small ones
-unseeded = np.random.lognormal(np.log(15), 0.4, n_droplets)
-
-# Seeded: AgI provides extra nuclei, more medium-sized droplets
-seeded_natural = np.random.lognormal(np.log(15), 0.4, n_droplets)
-seeded_extra = np.random.lognormal(np.log(25), 0.6, 2000)  # extra nuclei create larger droplets
-seeded = np.concatenate([seeded_natural, seeded_extra])
-
-# Growth simulation (simplified)
-def grow(droplets, steps=200):
-    d = droplets.copy()
-    for _ in range(steps):
-        for i in range(min(100, len(d))):
-            idx = np.random.randint(len(d))
-            partner = np.random.randint(len(d))
-            if idx != partner and abs(d[idx] - d[partner]) > 5:
-                d[idx] += d[partner] * 0.05
-    return d
-
-unseeded_grown = grow(unseeded)
-seeded_grown = grow(seeded)
-
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
-fig.patch.set_facecolor('#1f2937')
-
-ax1.set_facecolor('#111827')
-ax1.hist(unseeded_grown, bins=50, alpha=0.6, color='#ef4444', density=True, label='Unseeded cloud')
-ax1.hist(seeded_grown, bins=50, alpha=0.6, color='#22c55e', density=True, label='Seeded cloud')
-ax1.axvline(100, color='#f59e0b', linestyle='--', label='Rain threshold (simplified)')
-ax1.set_xlabel('Droplet size (um)', color='white')
-ax1.set_ylabel('Density', color='white')
-ax1.set_title('Droplet Size After Growth', color='white', fontsize=13)
-ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax1.tick_params(colors='gray')
-ax1.set_xlim(0, 200)
-
-# Precipitation comparison
-threshold = 100
-rain_unseeded = np.sum(unseeded_grown > threshold) / len(unseeded_grown) * 100
-rain_seeded = np.sum(seeded_grown > threshold) / len(seeded_grown) * 100
-
-ax2.set_facecolor('#111827')
-bars = ax2.bar(['Unseeded', 'Seeded'], [rain_unseeded, rain_seeded],
-               color=['#ef4444', '#22c55e'], width=0.5)
-ax2.set_ylabel('Droplets exceeding rain threshold (%)', color='white')
-ax2.set_title('Cloud Seeding Effectiveness', color='white', fontsize=13)
-ax2.tick_params(colors='gray')
-for bar, val in zip(bars, [rain_unseeded, rain_seeded]):
-    ax2.text(bar.get_x() + bar.get_width()/2, val + 0.5, f'{val:.1f}%',
-             ha='center', color='white', fontsize=12)
-
-enhancement = (rain_seeded - rain_unseeded) / rain_unseeded * 100 if rain_unseeded > 0 else 0
-ax2.text(0.5, max(rain_unseeded, rain_seeded) * 0.5,
-         f'+{enhancement:.0f}% enhancement', transform=ax2.transAxes,
-         ha='center', color='#f59e0b', fontsize=14, fontweight='bold')
-
-plt.tight_layout()
-plt.show()
-
-print(f"Unseeded: {rain_unseeded:.1f}% droplets reach rain size")
-print(f"Seeded: {rain_seeded:.1f}% droplets reach rain size")
-print(f"Enhancement: +{enhancement:.0f}%")
-print("Cloud seeding works by shifting the size distribution toward larger droplets.")`,
-      challenge: 'Test different seeding intensities: add 500, 1000, 2000, and 5000 extra nuclei. Is there an optimal seeding rate, or does more always mean better? (Hint: too many nuclei can cause over-seeding, where water is spread across too many small droplets.)',
-      successHint: 'Cloud seeding is real atmospheric engineering. Understanding the physics of droplet growth, nucleation, and coalescence transforms the story\'s magical rain-calling into actionable science.',
-    },    {
-      title: 'Weather modification ethics and law',
-      concept: `Cloud seeding raises profound ethical and legal questions:\n\n**Who owns the rain?** If Country A seeds clouds that were heading for Country B, is that water theft?\n\n**Transboundary effects**: China\'s massive cloud seeding program may affect rainfall in India and Southeast Asia.\n\n**Equity**: cloud seeding benefits those who can afford it. Rich regions seed clouds while poor regions downwind receive less rain.\n\n**Environmental risks**: silver iodide is toxic in high concentrations. Long-term effects on ecosystems are unknown.\n\n**Verification problem**: it is nearly impossible to prove that a specific rainfall event was caused by seeding rather than natural processes. This makes regulation difficult.\n\nThe UN passed a convention in 1977 banning weather modification for military purposes (ENMOD), but civilian use remains largely unregulated internationally.`,
-      analogy: 'Weather modification ethics are like water rights in a shared river. If upstream users divert water, downstream users suffer. Cloud seeding is atmospheric water diversion. Without international agreements, it becomes a tragedy of the atmospheric commons.',
-      storyConnection: 'The story\'s moral question is whether the cloud has the right to choose where it rains. In ethical terms, this translates to: who has the right to modify weather, and who bears the consequences? The cloud\'s refusal might be protecting another village downstream that needs the rain more.',
-      checkQuestion: 'Country A seeds clouds near its border with Country B. Country B experiences drought. Is Country A liable?',
-      checkAnswer: 'This is an unsolved legal question. Under international law, states have sovereignty over their airspace but also a duty not to cause transboundary harm (Trail Smelter principle, 1941). However, proving causation is nearly impossible: you cannot prove that specific rainfall would have fallen on Country B without seeding. This is the fundamental challenge of weather modification governance.',
-      codeIntro: 'Model the transboundary effects of cloud seeding on downwind regions.',
-      code: `import numpy as np
-import matplotlib.pyplot as plt
-
-np.random.seed(42)
-
-# 1D model: wind blows clouds from west to east
-# Region A (seeding) is at positions 0-50
-# Region B (downwind) is at positions 50-100
-n_positions = 100
-n_days = 365
-
-# Moisture content as clouds move east
-moisture = np.zeros((n_days, n_positions))
-
-# Scenario 1: No seeding
-for day in range(n_days):
-    moisture_initial = 80 + 20 * np.sin(2 * np.pi * day / 365)  # seasonal
-    m = moisture_initial
-    for pos in range(n_positions):
-        # Natural precipitation: 2% per km
-        precip = 0.02 * m
-        m -= precip
-        moisture[day, pos] = precip
-
-rain_natural = moisture.copy()
-
-# Scenario 2: Region A seeds (positions 20-40)
-moisture_seeded = np.zeros((n_days, n_positions))
-for day in range(n_days):
-    moisture_initial = 80 + 20 * np.sin(2 * np.pi * day / 365)
-    m = moisture_initial
-    for pos in range(n_positions):
-        if 20 <= pos <= 40:
-            precip = 0.04 * m  # double precipitation rate (seeding)
+    while height > 0 and r < 3000:  # stop at ground or max raindrop size
+        # Terminal velocity (Stokes' law for small drops, empirical for large)
+        if r < 40:
+            v_fall = 1.2e-4 * r**2  # cm/s -> roughly
         else:
-            precip = 0.02 * m
-        m -= precip
-        moisture_seeded[day, pos] = precip
+            v_fall = 0.8 * np.sqrt(r / 10)  # m/s, simplified
 
-rain_seeded = moisture_seeded
+        # Collection: drop sweeps a cylinder, collects a fraction of cloud water
+        efficiency = min(0.8, 0.01 * r / 10)  # collection efficiency increases with size
+        cross_section = np.pi * (r * 1e-6)**2  # m^2
+        water_collected = cross_section * v_fall * cloud_lwc_g_m3 * 1e-3 * dt * efficiency
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
+        # Volume growth
+        vol = (4/3) * np.pi * (r * 1e-6)**3 * 1000  # grams
+        vol += water_collected
+        r = ((vol / 1000) / ((4/3) * np.pi))**(1/3) * 1e6  # back to micrometres
+
+        height -= v_fall * dt
+        t += dt
+        radii.append(r)
+        heights.append(max(0, height))
+        times.append(t)
+
+    return np.array(times), np.array(radii), np.array(heights)
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 6))
 fig.patch.set_facecolor('#1f2937')
 
-# Annual rainfall by position
-annual_natural = rain_natural.sum(axis=0)
-annual_seeded = rain_seeded.sum(axis=0)
-
+# Different starting sizes
 ax1.set_facecolor('#111827')
-ax1.plot(annual_natural, color='#3b82f6', linewidth=2, label='No seeding')
-ax1.plot(annual_seeded, color='#ef4444', linewidth=2, label='Region A seeds')
-ax1.axvspan(20, 40, alpha=0.2, color='#22c55e', label='Seeding zone')
-ax1.axvspan(50, 100, alpha=0.1, color='#f59e0b', label='Region B')
-ax1.set_xlabel('Position (west to east)', color='white')
-ax1.set_ylabel('Annual rainfall (relative)', color='white')
-ax1.set_title('Rainfall Distribution: Seeding Steals Downwind Rain', color='white', fontsize=12)
+for r0, color, label in [(10, '#ef4444', '10 \u00B5m (typical cloud)'),
+                          (30, '#f59e0b', '30 \u00B5m (large cloud drop)'),
+                          (50, '#22c55e', '50 \u00B5m (drizzle seed)')]:
+    t, r, h = simulate_droplet_growth(r0, 3000, 0.3)
+    ax1.plot(t, r, color=color, linewidth=2, label=label)
+
+ax1.axhline(100, color='gray', linestyle=':', alpha=0.5)
+ax1.text(5, 120, 'Drizzle threshold (100 \u00B5m)', color='gray', fontsize=8)
+ax1.axhline(1000, color='gray', linestyle=':', alpha=0.5)
+ax1.text(5, 1100, 'Raindrop (1000 \u00B5m)', color='gray', fontsize=8)
+ax1.set_xlabel('Time (seconds)', color='white')
+ax1.set_ylabel('Droplet radius (\u00B5m)', color='white')
+ax1.set_title('Droplet Growth by Collision-Coalescence', color='white', fontsize=12)
+ax1.set_yscale('log')
+ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
+ax1.tick_params(colors='gray')
+
+# Cloud thickness effect
+ax2.set_facecolor('#111827')
+for thickness, color in [(500, '#ef4444'), (1000, '#f59e0b'),
+                         (3000, '#22c55e'), (5000, '#3b82f6')]:
+    t, r, h = simulate_droplet_growth(20, thickness, 0.3)
+    final_r = r[-1]
+    ax2.plot(t, r, color=color, linewidth=2, label=f'{thickness}m cloud \u2192 {final_r:.0f} \u00B5m')
+
+ax2.axhline(1000, color='gray', linestyle=':', alpha=0.5)
+ax2.set_xlabel('Time (seconds)', color='white')
+ax2.set_ylabel('Droplet radius (\u00B5m)', color='white')
+ax2.set_title('Thicker Cloud = Bigger Drops', color='white', fontsize=12)
+ax2.set_yscale('log')
+ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
+ax2.tick_params(colors='gray')
+
+plt.tight_layout()
+plt.show()
+
+print("Key insight:")
+print("  Thin clouds (500m): droplets barely grow \u2192 no rain")
+print("  Thick clouds (3000m+): droplets reach raindrop size")
+print("  This is why cumulus humilis (small) = fair weather")
+print("  and cumulonimbus (tall) = heavy rain")`,
+      challenge: 'Modify the cloud liquid water content (cloud_lwc_g_m3) from 0.1 to 1.0 and see how it affects growth rate. At what thickness does a cloud with low water content (0.1) finally produce rain?',
+      successHint: 'The collision-coalescence process is why warm tropical clouds can rain without any ice at all. Understanding droplet growth is the foundation of weather modification \u2014 if you can make droplets grow faster, you can make clouds rain sooner.',
+      diagram: CloudRainProcessDiagram,
+    },
+    {
+      title: 'Cloud seeding \u2014 silver iodide and making rain on demand',
+      concept: `If Meghi\u2019s droplets were too small to rain, could someone give them a push? That is exactly what **cloud seeding** does.
+
+Invented in 1946 by Vincent Schaefer, cloud seeding introduces particles into clouds to trigger precipitation. The main agent is **silver iodide (AgI)**, whose crystal structure mimics ice. Supercooled droplets freeze onto AgI particles, triggering the Bergeron process: ice crystals grow at the expense of liquid droplets, become heavy, and fall.
+
+**Methods:**
+- Aircraft fly through clouds burning AgI flares (most common)
+- Ground generators burn AgI solution; wind carries particles up
+- Dry ice (solid CO\u2082) dropped from planes supercools air instantly
+
+**Effectiveness:** 5\u201315% rainfall increase under favorable conditions. It ONLY works on clouds that already have moisture and supercooled water \u2014 you cannot make rain from clear sky.
+
+**The debate:** Does seeding one region "steal" rain from downwind areas? No one has proven it conclusively, but the concern is real. Who gets to decide where it rains?`,
+      analogy: 'Cloud seeding is like adding a catalyst to a chemical reaction. The reactants (water vapor, cold air) are already there, but the reaction (rain) needs a kick-start. Silver iodide is that catalyst \u2014 it does not create water; it helps existing water do what it was going to do eventually, just faster and in a specific location.',
+      storyConnection: 'The East Wind tells Meghi she has become "a prisoner of what you refuse to release." In meteorological terms, Meghi had supercooled water but lacked ice nuclei to start the Bergeron process. A cloud seeding plane flying through Meghi would release AgI particles, which would act as ice nuclei, causing her water to freeze, grow into crystals, and fall as rain. The East Wind was essentially suggesting natural cloud seeding \u2014 the conversation that triggered Meghi\u2019s decision to let go.',
+      checkQuestion: 'China deployed 35,000 cloud-seeding rockets before the 2008 Beijing Olympics opening ceremony. Were they trying to MAKE rain or PREVENT rain? Think carefully.',
+      checkAnswer: 'They were trying to MAKE rain fall BEFORE the ceremony \u2014 by seeding clouds approaching Beijing hours in advance, they hoped to drain the clouds before they reached the stadium. The strategy was: make the clouds rain early (over areas outside the city), so they arrive over the stadium already emptied. This is "rain avoidance" through premature precipitation, not rain prevention.',
+      codeIntro: 'Model the Bergeron process: how ice crystals grow at the expense of liquid droplets.',
+      code: `import numpy as np
+import matplotlib.pyplot as plt
+
+# Bergeron process: ice crystal growth in a mixed-phase cloud
+# The key is that saturation vapor pressure over ice < over liquid
+
+def saturation_vapor_pressure(T_celsius, phase='liquid'):
+    """Buck equation for saturation vapor pressure (hPa)."""
+    if phase == 'liquid':
+        return 6.1121 * np.exp((18.678 - T_celsius / 234.5) * T_celsius / (257.14 + T_celsius))
+    else:  # ice
+        return 6.1115 * np.exp((23.036 - T_celsius / 333.7) * T_celsius / (279.82 + T_celsius))
+
+temps = np.linspace(-40, 0, 200)
+e_liquid = np.array([saturation_vapor_pressure(t, 'liquid') for t in temps])
+e_ice = np.array([saturation_vapor_pressure(t, 'ice') for t in temps])
+supersaturation = (e_liquid - e_ice) / e_ice * 100  # % supersaturation over ice
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 6))
+fig.patch.set_facecolor('#1f2937')
+
+# Vapor pressure comparison
+ax1.set_facecolor('#111827')
+ax1.plot(temps, e_liquid, color='#3b82f6', linewidth=2, label='Over liquid water')
+ax1.plot(temps, e_ice, color='#06b6d4', linewidth=2, label='Over ice')
+ax1.fill_between(temps, e_ice, e_liquid, alpha=0.15, color='#22c55e', label='Difference (drives Bergeron)')
+ax1.set_xlabel('Temperature (\u00B0C)', color='white')
+ax1.set_ylabel('Saturation vapor pressure (hPa)', color='white')
+ax1.set_title('Why Ice Crystals Steal Water from Droplets', color='white', fontsize=12)
+ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
+ax1.tick_params(colors='gray')
+
+# Supersaturation over ice
+ax2.set_facecolor('#111827')
+ax2.plot(temps, supersaturation, color='#22c55e', linewidth=2)
+ax2.fill_between(temps, 0, supersaturation, alpha=0.15, color='#22c55e')
+peak_idx = np.argmax(supersaturation)
+ax2.plot(temps[peak_idx], supersaturation[peak_idx], 'o', color='#f59e0b', markersize=10, zorder=5)
+ax2.annotate(f'Peak: {supersaturation[peak_idx]:.1f}% at {temps[peak_idx]:.0f}\u00B0C',
+            xy=(temps[peak_idx], supersaturation[peak_idx]),
+            xytext=(temps[peak_idx] + 8, supersaturation[peak_idx] - 3),
+            color='#f59e0b', fontsize=10, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
+ax2.axvline(-12, color='#ef4444', linestyle='--', alpha=0.5)
+ax2.text(-11.5, 2, 'AgI activates\\nhere (-5 to -15\u00B0C)', color='#ef4444', fontsize=8)
+ax2.set_xlabel('Temperature (\u00B0C)', color='white')
+ax2.set_ylabel('Supersaturation over ice (%)', color='white')
+ax2.set_title('Ice Crystal Growth Rate (higher = faster)', color='white', fontsize=12)
+ax2.tick_params(colors='gray')
+
+plt.tight_layout()
+plt.show()
+
+print("Bergeron process physics:")
+print(f"  Maximum supersaturation: {supersaturation[peak_idx]:.1f}% at {temps[peak_idx]:.0f}\u00B0C")
+print(f"  This means ice crystals grow FASTEST around {temps[peak_idx]:.0f}\u00B0C")
+print(f"  Silver iodide works best when cloud temp is -5 to -15\u00B0C")
+print(f"  Below -40\u00B0C: water freezes on its own (no seeding needed)")`,
+      challenge: 'At what altitude in a cloud would AgI seeding be most effective? Use the lapse rate (6.5\u00B0C/km) to calculate the altitude where cloud temperature is at the peak supersaturation temperature.',
+      successHint: 'The gap between the two vapor pressure curves IS the Bergeron process. This single chart explains why clouds rain, why cloud seeding works, and why meteorologists care so much about cloud-top temperature.',
+      diagram: CloudSeedingDiagram,
+    },
+    {
+      title: 'Cloud classification \u2014 reading weather from the sky',
+      concept: `Before satellites and apps, people in Meghalaya predicted weather by reading clouds. Modern meteorology classifies clouds by altitude and shape, and each type tells a different weather story.
+
+**Cirrus** (6\u201312 km): Thin, wispy ice crystals. Fair now, but if thickening, rain may come in 24\u201348 hours. Khasi elders call spreading cirrus "the sky combing its hair before rain."
+
+**Cumulus** (1\u20136 km): Puffy cotton-balls on sunny days. Small ones = fair weather. Growing tall = approaching storms. The flat base marks the altitude where temperature = dew point (the LCL you calculated earlier!).
+
+**Stratus** (below 2 km): Flat grey blankets. Drizzle and gloom, rarely heavy rain. Fog = stratus at ground level.
+
+**Cumulonimbus** (ground to 12+ km): The king of clouds. Produces heavy rain, thunder, lightning, hail. Its anvil-shaped top (where rising air hits the tropopause and spreads sideways) is visible from 100 km away.
+
+**Meghi was a cumulonimbus** \u2014 dark, heavy, towering, packed with water, refusing to let go.`,
+      analogy: 'Cloud types are like different languages of the sky. Cirrus whispers "something is coming." Cumulus speaks cheerfully of sunny thermals. Stratus drones on monotonously. Cumulonimbus shouts "take shelter NOW." Learning to read these languages is the oldest weather forecasting skill in human history.',
+      storyConnection: 'The story describes Meghi as "big, dark, and swollen" with a belly that "sagged until she scraped the tops of the pine trees." Her color turned "from grey to black to a deep, bruised purple." This is a textbook description of a cumulonimbus cloud loaded with water. The progression from grey to dark purple indicates increasing thickness and water content \u2014 sunlight can no longer penetrate.',
+      checkQuestion: 'You are hiking in the Khasi Hills. In the morning, you see thin cirrus high up. By noon, cumulus clouds have flat bases at 2 km and are growing taller. By 3 PM, one has developed a dark base and an anvil top. What happened and what should you do?',
+      checkAnswer: 'The cirrus indicated an approaching weather system. Morning sun heated the ground, creating thermals that formed cumulus. As the atmosphere became more unstable (warm surface + cold upper air from the approaching system), cumulus grew into cumulonimbus. The dark base means heavy water content; the anvil top means it has reached the tropopause. You should seek shelter immediately \u2014 heavy rain, lightning, and possibly hail within 15\u201330 minutes.',
+      codeIntro: 'Classify cloud types by altitude and temperature, and predict weather.',
+      code: `import numpy as np
+import matplotlib.pyplot as plt
+
+# Cloud classification by altitude, temperature, and weather prediction
+cloud_types = {
+    'Cirrus': {'base': 6000, 'top': 12000, 'color': '#bfdbfe', 'weather': 'Fair (change in 24-48h)', 'phase': 'Ice'},
+    'Cirrostratus': {'base': 5500, 'top': 10000, 'color': '#93c5fd', 'weather': 'Rain approaching', 'phase': 'Ice'},
+    'Altostratus': {'base': 2000, 'top': 6000, 'color': '#6b7280', 'weather': 'Rain likely soon', 'phase': 'Mixed'},
+    'Cumulus': {'base': 1000, 'top': 3000, 'color': '#fbbf24', 'weather': 'Fair weather', 'phase': 'Liquid'},
+    'Stratus': {'base': 0, 'top': 2000, 'color': '#9ca3af', 'weather': 'Drizzle, fog', 'phase': 'Liquid'},
+    'Cumulonimbus': {'base': 500, 'top': 12000, 'color': '#ef4444', 'weather': 'Heavy rain, storms!', 'phase': 'Mixed/Ice'},
+}
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 7))
+fig.patch.set_facecolor('#1f2937')
+
+# Cloud altitude chart
+ax1.set_facecolor('#111827')
+for i, (name, info) in enumerate(cloud_types.items()):
+    ax1.barh(i, info['top'] - info['base'], left=info['base'], height=0.6,
+            color=info['color'], alpha=0.7, edgecolor='white', linewidth=0.5)
+    ax1.text(info['top'] + 200, i, f"{info['weather']}", color='white', fontsize=8, va='center')
+
+ax1.set_yticks(range(len(cloud_types)))
+ax1.set_yticklabels(cloud_types.keys(), color='white', fontsize=10)
+ax1.set_xlabel('Altitude (metres)', color='white')
+ax1.set_title('Cloud Types by Altitude', color='white', fontsize=12)
+ax1.tick_params(colors='gray')
+
+# Temperature at each level
+altitude = np.linspace(0, 12000, 100)
+lapse_rate = 6.5  # \u00B0C per km
+ground_temp = 28
+temp = ground_temp - (lapse_rate / 1000) * altitude
+
+ax1_twin = ax1.twiny()
+ax1_twin.plot(temp, np.interp(altitude, [0, 12000], [-0.5, 5.5]), color='#ef4444',
+             linewidth=1.5, linestyle='--', alpha=0.5)
+ax1_twin.set_xlabel('Temperature (\u00B0C)', color='#ef4444', fontsize=9)
+ax1_twin.tick_params(colors='#ef4444', labelsize=8)
+
+# Meghalaya annual cloud patterns
+months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+rainfall_mm = [15, 30, 65, 160, 500, 2500, 2800, 1800, 1200, 400, 60, 15]
+dominant_cloud = ['Stratus', 'Cumulus', 'Cumulus', 'Cb builds', 'Cb dominant',
+                  'Cb PEAK', 'Cb PEAK', 'Cb heavy', 'Cb waning', 'Cumulus', 'Cirrus', 'Stratus']
+
+ax2.set_facecolor('#111827')
+bars = ax2.bar(months, rainfall_mm, color=['#6b7280', '#fbbf24', '#fbbf24', '#f97316',
+               '#ef4444', '#dc2626', '#dc2626', '#ef4444', '#f97316', '#fbbf24', '#bfdbfe', '#6b7280'],
+               alpha=0.7, edgecolor='white', linewidth=0.5)
+
+for i, (bar, cloud) in enumerate(zip(bars, dominant_cloud)):
+    ax2.text(i, bar.get_height() + 50, cloud, ha='center', va='bottom',
+            color='white', fontsize=7, rotation=45)
+
+ax2.set_ylabel('Rainfall (mm)', color='white')
+ax2.set_title('Cherrapunji: Monthly Rainfall & Cloud Type', color='white', fontsize=12)
+ax2.tick_params(colors='gray')
+plt.xticks(rotation=45)
+
+plt.tight_layout()
+plt.show()
+
+total = sum(rainfall_mm)
+print(f"Cherrapunji annual rainfall: {total:,} mm")
+print(f"Monsoon months (Jun-Sep): {sum(rainfall_mm[5:9]):,} mm ({sum(rainfall_mm[5:9])/total*100:.0f}% of total)")
+print(f"Dry months (Nov-Feb): {sum(rainfall_mm[10:12]) + sum(rainfall_mm[0:2]):,} mm")
+print(f"Cumulonimbus dominates Apr-Sep = the rain season")`,
+      challenge: 'Add nimbostratus (rain-bearing flat cloud, 2000\u20135000m) and altocumulus (patchy mid-level, 2000\u20137000m) to the classification chart. What weather does each predict?',
+      successHint: 'Cloud reading is not just history \u2014 pilots, sailors, farmers, and outdoor guides still use it daily. Satellite images are just overhead views of the same cloud types you learned to identify from the ground.',
+      diagram: CloudTypesDiagram,
+    },
+    {
+      title: 'Meghalaya\u2019s rain \u2014 why the wettest place on Earth is right here',
+      concept: `Meghalaya receives more rain than almost anywhere on Earth. Mawsynram: 11,871 mm/year. Cherrapunji: 11,430 mm/year. That is about 10x more than London. Why HERE?
+
+**Orographic precipitation:** The Bay of Bengal heats up during summer. Moist air flows north toward the Himalayas. The Khasi Hills of Meghalaya (1,000\u20131,500m) sit directly in this airflow\u2019s path. The air is FORCED upward, cools rapidly, and dumps its moisture.
+
+Three factors combine:
+1. **Funnel geography:** The Himalayan foothills funnel moist air directly at Meghalaya
+2. **Steep terrain:** The southern edge of the Khasi plateau rises abruptly, forcing air up fast
+3. **Persistent moisture:** The Bay of Bengal provides unlimited water vapor for months
+
+The result: a natural cloud-making machine that runs from April to October. Meghi\u2019s journey from the Bay of Bengal to the Khasi Hills is the actual monsoon pathway.`,
+      analogy: 'Meghalaya\u2019s rainfall works like squeezing a sponge against a wall. The Bay of Bengal soaks the air (sponge) with moisture. The monsoon wind pushes it toward the Khasi Hills (wall). When the sponge hits the wall and is forced upward, the moisture gets squeezed out. The steeper the wall and the wetter the sponge, the more water comes out.',
+      storyConnection: 'Meghi carried water "all the way from the Bay of Bengal" and drifted over the Khasi Hills \u2014 this is the exact path of the Indian monsoon. The story is set in Meghalaya, which literally means "abode of clouds" in Sanskrit. The pine-covered hills, the village with its garden, and the cloud that refuses to rain are all part of the wettest landscape in the world.',
+      checkQuestion: 'If the Khasi Hills were only 200 metres tall instead of 1,500 metres, would Cherrapunji still be the wettest place? And what happens to the air AFTER it passes over the hills?',
+      checkAnswer: 'No \u2014 200m hills would not force air high enough to cool below the dew point efficiently. Much less condensation, much less rain. After passing over the hills, the air descends on the other side. Descending air warms (by compression) and becomes drier \u2014 this creates a "rain shadow." The area north of the Khasi Hills is indeed much drier. This is why Assam\u2019s Brahmaputra valley, just north of Meghalaya, gets significantly less rainfall than the southern slopes.',
+      codeIntro: 'Model orographic precipitation: how terrain forces air up and squeezes out rain.',
+      code: `import numpy as np
+import matplotlib.pyplot as plt
+
+# Orographic precipitation model
+# Moist air hits hills, rises, cools, condenses, rains
+
+distance_km = np.linspace(0, 200, 500)
+
+# Terrain profile (simplified Khasi Hills)
+terrain = np.zeros_like(distance_km)
+# Southern slope of Khasi plateau (steep)
+mask1 = (distance_km > 80) & (distance_km < 110)
+terrain[mask1] = 1500 * (distance_km[mask1] - 80) / 30
+# Plateau top
+mask2 = (distance_km >= 110) & (distance_km < 150)
+terrain[mask2] = 1500
+# Northern descent
+mask3 = (distance_km >= 150) & (distance_km < 180)
+terrain[mask3] = 1500 * (1 - (distance_km[mask3] - 150) / 30)
+
+# Air parcel trajectory (follows terrain but higher)
+air_height = terrain + 500
+
+# Temperature of air parcel
+ground_temp = 30  # Bay of Bengal side
+lapse_rate = 6.5 / 1000  # per metre
+air_temp = ground_temp - lapse_rate * air_height
+dew_point = 22  # monsoon air is very moist
+
+# Moisture content (decreases as rain falls)
+moisture = np.ones_like(distance_km) * 100  # relative scale
+for i in range(1, len(distance_km)):
+    if air_temp[i] < dew_point:  # condensation occurring
+        rain_rate = (dew_point - air_temp[i]) * 0.3
+        moisture[i] = max(0, moisture[i-1] - rain_rate * 0.4)
+    else:
+        moisture[i] = moisture[i-1]
+
+# Rainfall intensity (proportional to condensation rate)
+rainfall = np.zeros_like(distance_km)
+for i in range(1, len(distance_km)):
+    if air_temp[i] < dew_point and moisture[i] > 5:
+        rainfall[i] = (dew_point - air_temp[i]) * moisture[i] / 100
+
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 8))
+fig.patch.set_facecolor('#1f2937')
+
+# Terrain + air trajectory + temperature
+ax1.set_facecolor('#111827')
+ax1.fill_between(distance_km, 0, terrain, color='#6b7280', alpha=0.5, label='Khasi Hills terrain')
+ax1.plot(distance_km, air_height, color='#3b82f6', linewidth=2, label='Air parcel path')
+
+# Color the air path by temperature
+for i in range(len(distance_km) - 1):
+    color = '#ef4444' if air_temp[i] > dew_point else '#60a5fa'
+    ax1.plot(distance_km[i:i+2], air_height[i:i+2], color=color, linewidth=3)
+
+ax1.axhline(0, color='white', linewidth=0.5)
+ax1.text(10, 200, 'Bay of Bengal\\n(warm, moist)', color='#ef4444', fontsize=9)
+ax1.text(110, 1800, 'Cherrapunji', color='#60a5fa', fontsize=9, ha='center')
+ax1.text(170, 200, 'Rain shadow\\n(dry)', color='#f59e0b', fontsize=9)
+ax1.set_ylabel('Altitude (m)', color='white')
+ax1.set_title('Orographic Lift: Why Meghalaya Is the Wettest Place', color='white', fontsize=12)
 ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
 ax1.tick_params(colors='gray')
 
-# Winners and losers
-diff = annual_seeded - annual_natural
+# Rainfall distribution
 ax2.set_facecolor('#111827')
-colors_bar = ['#22c55e' if d > 0 else '#ef4444' for d in diff[::5]]
-ax2.bar(range(0, 100, 5), diff[::5], color=colors_bar, width=4)
-ax2.axhline(0, color='white', linewidth=0.5)
-ax2.axvspan(50, 100, alpha=0.1, color='#f59e0b')
-ax2.set_xlabel('Position', color='white')
-ax2.set_ylabel('Rainfall change', color='white')
-ax2.set_title('Winners (green) and Losers (red)', color='white', fontsize=13)
-ax2.tick_params(colors='gray')
+ax2.fill_between(distance_km, 0, rainfall, color='#3b82f6', alpha=0.5)
+ax2.plot(distance_km, rainfall, color='#3b82f6', linewidth=2)
+ax2.fill_between(distance_km, 0, terrain / terrain.max() * rainfall.max() * 0.3,
+                color='#6b7280', alpha=0.3)
+ax2.set_xlabel('Distance from Bay of Bengal (km)', color='white')
+ax2.set_ylabel('Rainfall intensity', color='white')
+ax2.set_title('Rainfall Peaks at the Windward Slope', color='white', fontsize=12)
 
-region_a_gain = annual_seeded[:50].sum() - annual_natural[:50].sum()
-region_b_loss = annual_seeded[50:].sum() - annual_natural[50:].sum()
+# Annotate
+peak_idx = np.argmax(rainfall)
+ax2.annotate(f'Peak rainfall at {distance_km[peak_idx]:.0f} km\\n(southern slope)',
+            xy=(distance_km[peak_idx], rainfall[peak_idx]),
+            xytext=(distance_km[peak_idx] + 30, rainfall[peak_idx] * 0.8),
+            color='#f59e0b', fontsize=9, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
+ax2.tick_params(colors='gray')
 
 plt.tight_layout()
 plt.show()
 
-print(f"Region A (seeder): +{region_a_gain:.0f} units rainfall ({region_a_gain/annual_natural[:50].sum()*100:.1f}% gain)")
-print(f"Region B (downwind): {region_b_loss:.0f} units rainfall ({region_b_loss/annual_natural[50:].sum()*100:.1f}% loss)")
-print(f"Global total rainfall: unchanged (just redistributed)")
-print()
-print("Cloud seeding does not create water. It redistributes it.")
-print("One region's gain is another region's loss.")`,
-      challenge: 'What if Region B also starts seeding? Model both regions seeding simultaneously. Does competitive seeding benefit or harm both? This is the atmospheric equivalent of an arms race.',
-      successHint: 'Weather modification is science with political consequences. Understanding both the physics and the ethics is essential for responsible atmospheric engineering.',
-    },    {
-      title: 'Drought monitoring and prediction',
-      concept: `Modern drought monitoring uses multiple data sources:\n\n- **Palmer Drought Severity Index (PDSI)**: combines temperature, precipitation, and soil moisture into a single number\n- **Standardized Precipitation Index (SPI)**: measures precipitation anomaly relative to historical averages\n- **Satellite remote sensing**: GRACE satellite measures groundwater changes from orbit\n- **Soil moisture sensors**: ground-based monitoring of available water\n- **Weather models**: numerical weather prediction (NWP) forecasts precipitation 1-14 days ahead\n\nDrought prediction is harder than flood prediction because droughts develop slowly (weeks to months) and result from persistent atmospheric patterns. Monsoon prediction is critical for South Asia: the Indian Meteorological Department issues monsoon forecasts that affect billions of people.`,
-      analogy: 'Drought monitoring is like checking a patient\'s vital signs. Temperature (air temp), blood pressure (atmospheric pressure), hydration (soil moisture), and blood work (satellite data) together give a complete picture. No single measurement tells the whole story.',
-      storyConnection: 'The story\'s village has no warning system. They realize the drought only when the well runs dry. Modern monitoring would have detected the declining rainfall pattern months earlier, giving time to conserve water, plant drought-resistant crops, or petition for cloud seeding operations.',
-      checkQuestion: 'The Indian monsoon forecast says 95% normal rainfall this year. Should farmers plant their rice?',
-      checkAnswer: 'It depends on distribution. 95% of normal averaged over all of India could mean some regions get 120% (flooding) while others get 70% (drought). Spatial and temporal distribution matters as much as the total. A farmer needs LOCAL forecast, not national average. This is why downscaled, regional forecasting is critical for agriculture.',
-      codeIntro: 'Build a simple drought index from temperature and precipitation data.',
-      code: `import numpy as np
-import matplotlib.pyplot as plt
-
-np.random.seed(42)
-
-# Generate 30 years of monthly data
-months = 30 * 12
-time = np.arange(months)
-
-# Normal precipitation (seasonal pattern)
-seasonal = 50 + 40 * np.sin(2 * np.pi * time / 12 - np.pi/2)  # peak in monsoon (July)
-precip = seasonal + np.random.normal(0, 15, months)
-precip = np.clip(precip, 0, 200)
-
-# Add a drought (years 15-17: reduced precipitation)
-drought_start = 15 * 12
-drought_end = 17 * 12
-precip[drought_start:drought_end] *= 0.5
-
-# Temperature (rising trend + seasonal)
-temp = 25 + 8 * np.sin(2 * np.pi * time / 12) + 0.02 * time + np.random.normal(0, 1, months)
-
-# Simple drought index: SPI (standardized precipitation index)
-# Rolling 3-month precipitation anomaly
-window = 3
-rolling_precip = np.convolve(precip, np.ones(window)/window, mode='same')
-mean_p = np.mean(rolling_precip)
-std_p = np.std(rolling_precip)
-spi = (rolling_precip - mean_p) / std_p
-
-fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(14, 10), sharex=True)
-fig.patch.set_facecolor('#1f2937')
-
-years = time / 12
-
-ax1.set_facecolor('#111827')
-ax1.bar(years, precip, width=1/12, color='#3b82f6', alpha=0.7)
-ax1.set_ylabel('Precipitation (mm)', color='white')
-ax1.set_title('Monthly Precipitation (30 years)', color='white', fontsize=13)
-ax1.axvspan(15, 17, alpha=0.2, color='#ef4444', label='Drought period')
-ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax1.tick_params(colors='gray')
-
-ax2.set_facecolor('#111827')
-ax2.plot(years, temp, color='#ef4444', linewidth=1)
-ax2.set_ylabel('Temperature (C)', color='white')
-ax2.set_title('Temperature (warming trend visible)', color='white', fontsize=13)
-ax2.tick_params(colors='gray')
-
-ax3.set_facecolor('#111827')
-colors_spi = ['#ef4444' if s < -1 else '#f59e0b' if s < 0 else '#22c55e' for s in spi]
-ax3.bar(years, spi, width=1/12, color=colors_spi, alpha=0.8)
-ax3.axhline(-1, color='#f59e0b', linestyle='--', label='Moderate drought')
-ax3.axhline(-2, color='#ef4444', linestyle='--', label='Severe drought')
-ax3.set_xlabel('Year', color='white')
-ax3.set_ylabel('SPI (drought index)', color='white')
-ax3.set_title('Standardized Precipitation Index', color='white', fontsize=13)
-ax3.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax3.tick_params(colors='gray')
-
-plt.tight_layout()
-plt.show()
-
-drought_months = np.sum(spi < -1)
-severe = np.sum(spi < -2)
-print(f"Total months with moderate drought (SPI < -1): {drought_months}")
-print(f"Total months with severe drought (SPI < -2): {severe}")
-print(f"Drought detected in years 15-17: SPI drops to {spi[drought_start:drought_end].min():.2f}")`,
-      challenge: 'Add a drought early warning system: trigger an alert when SPI drops below -0.5 for 3 consecutive months. How many months of lead time does this give before the severe drought?',
-      successHint: 'Drought monitoring is the first line of defense. Cloud seeding, water rationing, and crop insurance all work better with early warning. The story\'s village suffered because they had no warning system. Modern monitoring gives weeks to months of lead time.',
+print("Orographic precipitation model:")
+print(f"  Peak rainfall at {distance_km[peak_idx]:.0f} km from coast")
+print(f"  This matches Cherrapunji's position on the southern Khasi slope")
+print(f"  The 'rain shadow' north of the hills gets much less rain")
+print(f"  Same process happens worldwide: Seattle (Cascades), Bergen (Norway), Darjeeling")`,
+      challenge: 'What would happen if the Khasi Hills were twice as high (3,000m)? Would rainfall increase or decrease, and why? Consider: more lift means more cooling, but also means less moisture left for the top.',
+      successHint: 'Orographic precipitation explains not just Meghalaya but every mountain city\u2019s rainfall pattern. Once you understand "air goes up, rain comes out," you can predict wet and dry sides of mountains worldwide.',
+      diagram: ActivityCloudJarDiagram,
     },
   ];
 
   return (
     <div>
       <div className="flex items-center gap-3 mb-6">
-        <div className="flex items-center gap-2 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 px-4 py-2 rounded-full text-sm font-semibold">
+        <div className="flex items-center gap-2 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 px-4 py-2 rounded-full text-sm font-semibold">
           <Sparkles className="w-4 h-4" /> Level 1: Explorer
         </div>
-        <span className="text-sm text-gray-500 dark:text-gray-400">Cloud Seeding & Weather Modification</span>
+        <span className="text-sm text-gray-500 dark:text-gray-400">Cloud Science &amp; Rain Formation</span>
       </div>
       {!pyReady && (
         <div className="mb-8 bg-gray-50 dark:bg-gray-800 rounded-xl p-6 text-center">
-          <p className="text-gray-600 dark:text-gray-300 mb-4">These exercises use Python for simulations. Click to start.</p>
-          <button onClick={loadPyodide} disabled={loading} className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 disabled:bg-gray-500 text-white px-6 py-3 rounded-full font-semibold transition-colors">
+          <p className="text-gray-600 dark:text-gray-300 mb-4">These exercises use Python to model clouds and rain. Click to start.</p>
+          <button onClick={loadPyodide} disabled={loading} className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-500 text-white px-6 py-3 rounded-full font-semibold transition-colors">
             {loading ? (<><Loader2 className="w-5 h-5 animate-spin" />{loadProgress}</>) : (<><Sparkles className="w-5 h-5" />Load Python</>)}
           </button>
         </div>
@@ -492,7 +524,8 @@ print(f"Drought detected in years 15-17: SPI drops to {spi[drought_start:drought
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
-            pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
+            pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady}
+            diagram={lesson.diagram} />
         ))}
       </div>
     </div>

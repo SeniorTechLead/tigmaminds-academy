@@ -1,7 +1,7 @@
 export default function VoltaicCellDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 500 300" className="w-full max-w-lg mx-auto" role="img" aria-label="Voltaic cell diagram with zinc anode, copper cathode, salt bridge, and electron flow">
+      <svg viewBox="0 0 525 343" className="w-full max-w-lg mx-auto" role="img" aria-label="Voltaic cell diagram with zinc anode, copper cathode, salt bridge, and electron flow">
         <text x="250" y="22" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="14" fontWeight="bold">Voltaic (Galvanic) Cell</text>
 
         {/* Left beaker (Anode) */}

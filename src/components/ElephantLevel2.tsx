@@ -2,12 +2,10 @@ import { useState, useRef, useCallback } from 'react';
 import { Loader2, Zap } from 'lucide-react';
 import MiniLesson from './MiniLesson';
 import ElephantPlayground from './ElephantPlayground';
-import PlotAnatomyDiagram from './diagrams/PlotAnatomyDiagram';
-import SpectrogramDiagram from './diagrams/SpectrogramDiagram';
-import SineWaveDiagram from './diagrams/SineWaveDiagram';
-import AmplitudeModDiagram from './diagrams/AmplitudeModDiagram';
-import EcholocationDiagram from './diagrams/EcholocationDiagram';
-import FlowchartDiagram from './diagrams/FlowchartDiagram';
+import ElephantPlotAnatomyDiagram from './diagrams/ElephantPlotAnatomyDiagram';
+import ElephantPulseDiagram from './diagrams/ElephantPulseDiagram';
+import ElephantSpectrogramDiagram from './diagrams/ElephantSpectrogramDiagram';
+import ElephantClassifierDiagram from './diagrams/ElephantClassifierDiagram';
 
 export default function ElephantLevel2() {
   const pyodideRef = useRef<any>(null);
@@ -185,42 +183,29 @@ The key insight to watch for: the **shape** of each signal is different. Calm br
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
-sample_rate = 8000
-duration = 3
-t = np.linspace(0, duration, sample_rate * duration)
+t = np.linspace(0, 3, 24000)  # 3 seconds at 8000 samples/sec
 
-calm = np.sin(2 * np.pi * 80 * t) * (0.5 + 0.5 * np.sin(2 * np.pi * 0.5 * t))
-nervous = np.sin(2 * np.pi * 110 * t) * (0.5 + 0.5 * np.sin(2 * np.pi * 3 * t))
+# Three moods, three signals
+calm = np.sin(2*np.pi*80*t) * (0.5 + 0.5*np.sin(2*np.pi*0.5*t))
+nervous = np.sin(2*np.pi*110*t) * (0.5 + 0.5*np.sin(2*np.pi*3*t))
+boom = np.exp(-t*3) * np.sin(2*np.pi*40*t)
+danger = boom + np.sin(2*np.pi*55*t) * (0.5+0.5*np.sin(2*np.pi*8*t)) * (1-np.exp(-t*3))
 
-boom = np.exp(-t * 3) * np.sin(2 * np.pi * 40 * t)
-hammering = np.sin(2 * np.pi * 55 * t) * (0.5 + 0.5 * np.sin(2 * np.pi * 8 * t))
-danger = boom + hammering * (1 - np.exp(-t * 3))
-
-fig, axes = plt.subplots(3, 1, figsize=(10, 6))
+# Plot all three
+fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(10, 5))
 fig.patch.set_facecolor('#1f2937')
-
-for ax, sig, label, color in [
-    (axes[0], calm, 'Calm & Feeding', '#22c55e'),
-    (axes[1], nervous, 'Nervous & Alert', '#f59e0b'),
-    (axes[2], danger, 'Danger — Run!', '#ef4444'),
-]:
-    ax.plot(t[:2000], sig[:2000], color=color, linewidth=0.8)
+for ax, sig, label, c in [(ax1,calm,'Calm','#22c55e'),
+                           (ax2,nervous,'Nervous','#f59e0b'),
+                           (ax3,danger,'Danger','#ef4444')]:
+    ax.plot(t[:2000], sig[:2000], color=c, linewidth=0.8)
     ax.set_ylabel(label, color='white', fontsize=9)
     ax.set_facecolor('#111827')
     ax.tick_params(colors='gray')
-    ax.spines['top'].set_visible(False)
-    ax.spines['right'].set_visible(False)
-    ax.spines['bottom'].set_color('gray')
-    ax.spines['left'].set_color('gray')
 
-axes[2].set_xlabel('Time (seconds)', color='white')
-plt.suptitle('Elephant Rumble Patterns', color='white', fontsize=14, fontweight='bold')
+ax3.set_xlabel('Time (seconds)', color='white')
+plt.suptitle('Elephant Rumble Patterns', color='white')
 plt.tight_layout()
-plt.show()
-
-print("Calm: smooth breathing pattern (0.5 Hz pulse)")
-print("Nervous: rapid pulsing (3 Hz pulse)")
-print("Danger: boom at start, then frantic hammering (8 Hz)")`,
+plt.show()`,
       challenge: 'Look at the danger signal — can you see the boom at the start fading into hammering? Change line 11: try np.exp(-t * 0.5) for a slower fade. How does it change the shape?',
       successHint: 'You just visualized the complete signal set. A human can tell these apart by looking. The next step: teach a computer to tell them apart by measuring.',
     },
@@ -293,43 +278,33 @@ The differences are clear to the eye. A machine learning classifier does the sam
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
-sample_rate = 8000
-duration = 3
-t = np.linspace(0, duration, sample_rate * duration)
+t = np.linspace(0, 3, 24000)
 
-calm = np.sin(2 * np.pi * 80 * t) * (0.5 + 0.5 * np.sin(2 * np.pi * 0.5 * t))
-nervous = np.sin(2 * np.pi * 110 * t) * (0.5 + 0.5 * np.sin(2 * np.pi * 3 * t))
-boom = np.exp(-t * 3) * np.sin(2 * np.pi * 40 * t)
-hammering = np.sin(2 * np.pi * 55 * t) * (0.5 + 0.5 * np.sin(2 * np.pi * 8 * t))
-danger = boom + hammering * (1 - np.exp(-t * 3))
+calm = np.sin(2*np.pi*80*t) * (0.5 + 0.5*np.sin(2*np.pi*0.5*t))
+nervous = np.sin(2*np.pi*110*t) * (0.5 + 0.5*np.sin(2*np.pi*3*t))
+boom = np.exp(-t*3) * np.sin(2*np.pi*40*t)
+danger = boom + np.sin(2*np.pi*55*t)*(0.5+0.5*np.sin(2*np.pi*8*t))*(1-np.exp(-t*3))
 
-fig, axes = plt.subplots(3, 1, figsize=(10, 7))
+fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(10, 6))
 fig.patch.set_facecolor('#1f2937')
-
-for ax, sig, label in [
-    (axes[0], calm, 'Calm (80 Hz, slow pulse)'),
-    (axes[1], nervous, 'Nervous (110 Hz, fast pulse)'),
-    (axes[2], danger, 'Danger (40+55 Hz, boom then hammering)'),
-]:
-    ax.specgram(sig, Fs=sample_rate, cmap='inferno', NFFT=512)
+for ax, sig, label in [(ax1,calm,'Calm (80 Hz)'),
+                        (ax2,nervous,'Nervous (110 Hz)'),
+                        (ax3,danger,'Danger (40+55 Hz)')]:
+    ax.specgram(sig, Fs=8000, cmap='inferno', NFFT=512)
     ax.set_ylabel(label, color='white', fontsize=8)
     ax.set_ylim(0, 300)
     ax.set_facecolor('#111827')
     ax.tick_params(colors='gray')
 
-axes[2].set_xlabel('Time (seconds)', color='white')
-plt.suptitle('Elephant Mood Spectrograms', color='white', fontsize=14, fontweight='bold')
+ax3.set_xlabel('Time (seconds)', color='white')
+plt.suptitle('Elephant Mood Spectrograms', color='white')
 plt.tight_layout()
 plt.show()
 
-print("Calm: steady 80 Hz band, gentle pulsing")
-print("Nervous: 110 Hz band, rapid on-off flicker")
-print("Danger: burst at 40 Hz, then 55 Hz hammering")
-print()
 print("3 features separate the moods:")
-print("  1. Dominant frequency (where the band sits)")
+print("  1. Dominant frequency (where the bright band sits)")
 print("  2. Pulse rate (how fast it flickers)")
-print("  3. Initial burst (only danger)")`,
+print("  3. Initial burst (only danger has this)")`,
       challenge: 'What if nervous was at 85 Hz instead of 110? Change line 9. Can you still tell calm and nervous apart in the spectrogram? This is why pulse rate matters more than frequency for classification.',
       successHint: 'You can now read spectrograms — the same representation used by real wildlife AI. The last step: automate this reading with code.',
     },
@@ -349,49 +324,32 @@ This is the simplest possible classifier. It works perfectly on clean synthetic 
       codeIntro: 'Write a function that classifies any elephant signal by its dominant frequency.',
       code: `import numpy as np
 
-sample_rate = 8000
-duration = 3
-t = np.linspace(0, duration, sample_rate * duration)
+t = np.linspace(0, 3, 24000)
 
-calm = np.sin(2 * np.pi * 80 * t) * (0.5 + 0.5 * np.sin(2 * np.pi * 0.5 * t))
-nervous = np.sin(2 * np.pi * 110 * t) * (0.5 + 0.5 * np.sin(2 * np.pi * 3 * t))
-boom = np.exp(-t * 3) * np.sin(2 * np.pi * 40 * t)
-hammering = np.sin(2 * np.pi * 55 * t) * (0.5 + 0.5 * np.sin(2 * np.pi * 8 * t))
-danger = boom + hammering * (1 - np.exp(-t * 3))
+# Generate test signals
+calm = np.sin(2*np.pi*80*t) * (0.5+0.5*np.sin(2*np.pi*0.5*t))
+nervous = np.sin(2*np.pi*110*t) * (0.5+0.5*np.sin(2*np.pi*3*t))
+boom = np.exp(-t*3) * np.sin(2*np.pi*40*t)
+danger = boom + np.sin(2*np.pi*55*t)*(0.5+0.5*np.sin(2*np.pi*8*t))*(1-np.exp(-t*3))
 
-def classify_rumble(signal, sample_rate):
-    """Classify an elephant rumble by its dominant frequency."""
-    # FFT: convert time domain -> frequency domain
-    fft_result = np.fft.fft(signal)
-    frequencies = np.fft.fftfreq(len(signal), 1/sample_rate)
+def classify(signal):
+    """Find the peak frequency and classify the mood."""
+    fft = np.abs(np.fft.fft(signal))
+    freqs = np.fft.fftfreq(len(signal), 1/8000)
+    peak = freqs[freqs > 0][np.argmax(fft[freqs > 0])]
 
-    # Find the dominant frequency (ignore negatives)
-    positive = frequencies > 0
-    magnitudes = np.abs(fft_result[positive])
-    dominant_freq = frequencies[positive][np.argmax(magnitudes)]
+    if peak < 60:   return "DANGER", peak
+    elif peak < 95:  return "CALM", peak
+    else:            return "NERVOUS", peak
 
-    # Classify with simple thresholds
-    if dominant_freq < 60:
-        mood = "DANGER"
-    elif dominant_freq < 95:
-        mood = "CALM"
-    else:
-        mood = "NERVOUS"
+# Test all three
+for name, sig in [("Calm",calm), ("Nervous",nervous), ("Danger",danger)]:
+    mood, freq = classify(sig)
+    ok = "✓" if mood == name.upper() else "✗"
+    print(f"{ok} {name:8s} → {freq:.1f} Hz → {mood}")
 
-    return mood, dominant_freq
-
-for name, signal in [("Calm", calm), ("Nervous", nervous), ("Danger", danger)]:
-    mood, freq = classify_rumble(signal, sample_rate)
-    status = "✓" if mood == name.upper() else "✗"
-    print(f"{status} {name:8s} → {freq:6.1f} Hz → {mood}")
-
-print()
-print("How it works:")
-print("  1. FFT finds the peak frequency")
-print("  2. Rules: <60 Hz = danger, <95 Hz = calm, else = nervous")
-print()
-print("Weakness: these thresholds are hand-picked.")
-print("Level 3 uses ML to learn them from data.")`,
+print("\\nRule: <60=danger, 60-95=calm, >95=nervous")
+print("Weakness: hand-picked thresholds. Level 3 learns them.")`,
       challenge: 'Add noise to the calm signal: calm = calm + np.random.normal(0, 0.3, len(calm)) on line 8. Does the classifier still work? At what noise level does it break?',
       successHint: 'You built a working classifier from scratch — FFT for feature extraction, thresholds for classification. You understand the full pipeline: signal → frequency → mood. Level 3 replaces the if/else with a learned model.',
     },
@@ -399,12 +357,12 @@ print("Level 3 uses ML to learn them from data.")`,
 
   // Map lesson index to diagram
   const diagrams: Record<number, React.ReactNode> = {
-    0: <PlotAnatomyDiagram />,
-    1: <SineWaveDiagram />,
-    2: <AmplitudeModDiagram />,
-    3: <SpectrogramDiagram />,
-    4: <EcholocationDiagram />,
-    5: <FlowchartDiagram />,
+    0: <ElephantPlotAnatomyDiagram />,
+    1: <ElephantPulseDiagram />,
+    2: <ElephantPulseDiagram />,
+    3: <ElephantSpectrogramDiagram />,
+    4: <ElephantSpectrogramDiagram />,
+    5: <ElephantClassifierDiagram />,
   };
 
   return (

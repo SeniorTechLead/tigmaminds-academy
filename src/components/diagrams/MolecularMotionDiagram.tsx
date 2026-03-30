@@ -61,7 +61,7 @@ export default function MolecularMotionDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 540 200" className="w-full max-w-2xl mx-auto" role="img" aria-label="Molecular motion in solid, liquid, and gas states">
+      <svg viewBox="0 0 567 230" className="w-full max-w-2xl mx-auto" role="img" aria-label="Molecular motion in solid, liquid, and gas states">
         <style>{`
           @keyframes vibrate {
             0%, 100% { transform: translate(0, 0); }

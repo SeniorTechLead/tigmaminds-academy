@@ -131,7 +131,7 @@ export default function DecisionTreeDiagram() {
 
       {/* SVG Tree */}
       <svg
-        viewBox="0 0 560 420"
+        viewBox="0 0 588 441"
         className="w-full"
         style={{ background: "#0f172a", borderRadius: 12 }}
       >

@@ -21,7 +21,7 @@ export default function MetallicBondDiagram() {
   return (
     <div className="my-4">
       <svg
-        viewBox="0 0 400 250"
+        viewBox="0 0 420 295"
         className="w-full max-w-lg mx-auto"
         role="img"
         aria-label="Metallic bonding: sea of electrons model"

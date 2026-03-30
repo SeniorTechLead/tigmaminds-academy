@@ -27,7 +27,7 @@ export default function NaturalSelectionDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 540 250" className="w-full max-w-2xl mx-auto" role="img" aria-label="Natural selection on beetle color">
+      <svg viewBox="0 0 567 285" className="w-full max-w-2xl mx-auto" role="img" aria-label="Natural selection on beetle color">
         {/* Title */}
         <text x="270" y="18" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">
           Natural Selection: Beetle Color on Green Leaves

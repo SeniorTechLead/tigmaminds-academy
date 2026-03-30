@@ -1,7 +1,7 @@
 export default function FissionFusionDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 520 250" className="w-full max-w-xl mx-auto" role="img" aria-label="Nuclear fission and fusion comparison">
+      <svg viewBox="0 0 605 282" className="w-full max-w-xl mx-auto" role="img" aria-label="Nuclear fission and fusion comparison">
         {/* Divider */}
         <line x1="260" y1="10" x2="260" y2="240" className="stroke-gray-300 dark:stroke-gray-600" strokeWidth="1" strokeDasharray="4,4" />
 

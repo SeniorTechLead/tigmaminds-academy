@@ -1,7 +1,7 @@
 export default function FungiDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 400 350" className="w-full max-w-lg mx-auto" role="img" aria-label="Mushroom anatomy and fungi diagram">
+      <svg viewBox="0 0 510 393" className="w-full max-w-lg mx-auto" role="img" aria-label="Mushroom anatomy and fungi diagram">
         {/* Sky / above ground */}
         <rect x="0" y="0" width="400" height="180" className="fill-sky-50 dark:fill-gray-900" />
 

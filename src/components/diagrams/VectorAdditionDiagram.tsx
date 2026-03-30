@@ -93,7 +93,7 @@ export default function VectorAdditionDiagram() {
         <line x1={245} y1={80} x2={375} y2={80} className="stroke-gray-300 dark:stroke-gray-600" strokeWidth="0.5" />
         <text x={310} y={97} textAnchor="middle" fontSize="11" fontWeight="700" fill="#ef4444">R = A + B = (6, 7)</text>
         <text x={310} y={118} textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-gray-400">
-          |R| = {'\u221A'}(36+49) ≈ 9.22
+          |R| = {'√'}(36+49) ≈ 9.22
         </text>
 
         {/* Method labels */}

@@ -56,7 +56,7 @@ export default function MagneticFieldLinesDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 500 300" className="w-full max-w-lg mx-auto" role="img" aria-label="Magnetic field lines around a bar magnet">
+      <svg viewBox="0 0 525 338" className="w-full max-w-lg mx-auto" role="img" aria-label="Magnetic field lines around a bar magnet">
         {/* Title */}
         <text x="250" y="20" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="700">
           Magnetic Field Lines

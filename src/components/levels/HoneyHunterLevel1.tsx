@@ -1,6 +1,12 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Sparkles } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
+import BeeColonyDiagram from '../diagrams/BeeColonyDiagram';
+import BeeWaggleDanceDiagram from '../diagrams/BeeWaggleDanceDiagram';
+import BeePollinationDiagram from '../diagrams/BeePollinationDiagram';
+import BeeHoneymakingDiagram from '../diagrams/BeeHoneymakingDiagram';
+import BeeHiveTempDiagram from '../diagrams/BeeHiveTempDiagram';
+import BeeLifeCycleDiagram from '../diagrams/BeeLifeCycleDiagram';
 
 export default function HoneyHunterLevel1() {
   const pyodideRef = useRef<any>(null);
@@ -43,7 +49,6 @@ export default function HoneyHunterLevel1() {
       checkAnswer: 'The colony is doomed — but it takes weeks to die. Without queen pheromones, workers\' ovaries begin to develop, and some start laying eggs. But worker-laid eggs are unfertilized and can only produce drones (males). Without a queen to produce fertilized eggs (workers), the colony gradually shrinks as old workers die and no new ones hatch. This "queenless collapse" takes 4-8 weeks.',
       codeIntro: 'Model the population dynamics of a bee colony through the seasons.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Bee colony population model
 # Queen lays eggs at a rate that varies by season
@@ -89,77 +94,6 @@ for d in range(dev_time, 365):
     population[d] = max(5000, population[d-1] + new_workers - dying)
     population[d] = min(population[d], 80000)
 
-fig, axes = plt.subplots(2, 2, figsize=(13, 10))
-fig.patch.set_facecolor('#1f2937')
-
-# Population over year
-ax1 = axes[0, 0]
-ax1.set_facecolor('#111827')
-ax1.plot(days, population, color='#f59e0b', linewidth=2)
-ax1.fill_between(days, population, alpha=0.15, color='#f59e0b')
-ax1.set_xlabel('Day of year', color='white')
-ax1.set_ylabel('Worker population', color='white')
-ax1.set_title('Colony Population Through the Year', color='white', fontsize=12)
-ax1.tick_params(colors='gray')
-
-month_labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-for i, label in enumerate(month_labels):
-    ax1.axvline(i * 30.44, color='gray', linestyle=':', alpha=0.2)
-    ax1.text(i * 30.44 + 15, population.max() * 0.95, label, color='gray', fontsize=7, ha='center')
-
-# Egg-laying rate
-ax2 = axes[0, 1]
-ax2.set_facecolor('#111827')
-ax2.plot(days, egg_rate, color='#22c55e', linewidth=2)
-ax2.fill_between(days, egg_rate, alpha=0.15, color='#22c55e')
-ax2.set_xlabel('Day of year', color='white')
-ax2.set_ylabel('Eggs per day', color='white')
-ax2.set_title('Queen Egg-Laying Rate', color='white', fontsize=12)
-ax2.tick_params(colors='gray')
-
-# Colony composition (pie chart for peak season)
-ax3 = axes[1, 0]
-ax3.set_facecolor('#111827')
-composition = {
-    'Foragers (>21 days)': 35,
-    'House bees (3-21 days)': 40,
-    'Nurse bees (1-3 days)': 15,
-    'Queen': 0.002,
-    'Drones': 5,
-    'Brood (eggs+larvae)': 5,
-}
-colors = ['#f59e0b', '#22c55e', '#3b82f6', '#ef4444', '#a855f7', '#ec4899']
-wedges, texts, autotexts = ax3.pie(list(composition.values()), labels=list(composition.keys()),
-                                    colors=colors, autopct='%1.0f%%',
-                                    textprops={'color': 'white', 'fontsize': 8})
-for autotext in autotexts:
-    autotext.set_fontsize(7)
-ax3.set_title('Colony Composition (Peak Season)', color='white', fontsize=12)
-
-# Worker age and task
-ax4 = axes[1, 1]
-ax4.set_facecolor('#111827')
-tasks = [
-    ('Cell cleaning', 0, 3, '#3b82f6'),
-    ('Nursing larvae', 3, 10, '#22c55e'),
-    ('Wax building', 10, 15, '#f59e0b'),
-    ('Food processing', 15, 18, '#a855f7'),
-    ('Guard duty', 18, 21, '#ef4444'),
-    ('Foraging', 21, 42, '#ec4899'),
-]
-
-for task, start, end, color in tasks:
-    ax4.barh(task, end - start, left=start, color=color, alpha=0.8, height=0.6)
-    ax4.text(start + (end-start)/2, task, f'{end-start}d', color='white', fontsize=9,
-            ha='center', va='center')
-
-ax4.set_xlabel('Worker age (days)', color='white')
-ax4.set_title('Age-Based Division of Labor', color='white', fontsize=12)
-ax4.tick_params(colors='gray')
-ax4.set_yticklabels([t[0] for t in tasks], color='white', fontsize=9)
-
-plt.tight_layout()
-plt.show()
 
 print("Colony facts:")
 print(f"  Peak population: ~{population.max():.0f} workers")
@@ -192,7 +126,6 @@ print(f"  Worker lifespan: {summer_lifespan} days (summer), {winter_lifespan} da
       checkAnswer: 'Most almond varieties are self-incompatible — their own pollen can\'t fertilize their own flowers (a genetic mechanism to force cross-pollination). They NEED pollen from a different almond tree variety, carried by bees. Wind can\'t do it efficiently because almond pollen is heavy and sticky. So California\'s $6 billion almond industry depends entirely on rented bees. That\'s a $400 million annual pollination bill.',
       codeIntro: 'Model pollination efficiency: how many flowers a bee visits, and how many get successfully pollinated.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 np.random.seed(42)
 
@@ -216,105 +149,6 @@ total_visits = total_foragers * n_trips_per_day * n_flowers_per_trip
 successful_transfers = total_visits * p_transfer
 cross_pollinations = successful_transfers * p_cross
 
-fig, axes = plt.subplots(2, 2, figsize=(13, 10))
-fig.patch.set_facecolor('#1f2937')
-
-# Single bee foraging trip
-ax1 = axes[0, 0]
-ax1.set_facecolor('#111827')
-# Simulate flower visits
-n_visits = 100
-pollen_load = np.zeros(n_visits)
-transferred = np.zeros(n_visits)
-current_pollen = 0
-for i in range(n_visits):
-    # Pick up pollen
-    pickup = np.random.uniform(0.5, 1.5)
-    current_pollen += pickup
-    # Transfer some
-    if np.random.random() < p_transfer:
-        transfer = current_pollen * np.random.uniform(0.1, 0.3)
-        transferred[i] = transfer
-        current_pollen -= transfer
-    pollen_load[i] = current_pollen
-
-ax1.plot(range(n_visits), pollen_load, color='#f59e0b', linewidth=2, label='Pollen on bee')
-ax1.bar(range(n_visits), transferred, color='#22c55e', alpha=0.5, label='Pollen transferred')
-ax1.set_xlabel('Flower visit #', color='white')
-ax1.set_ylabel('Pollen amount', color='white')
-ax1.set_title('One Bee, One Foraging Trip', color='white', fontsize=12)
-ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax1.tick_params(colors='gray')
-
-# Crop dependence on pollinators
-ax2 = axes[0, 1]
-ax2.set_facecolor('#111827')
-crops = {
-    'Almonds': 100, 'Apples': 90, 'Blueberries': 90,
-    'Coffee': 30, 'Tomatoes': 25, 'Rice': 0,
-    'Wheat': 0, 'Mangoes': 70, 'Mustard': 60,
-}
-sorted_crops = sorted(crops.items(), key=lambda x: x[1], reverse=True)
-names = [c[0] for c in sorted_crops]
-deps = [c[1] for c in sorted_crops]
-colors = ['#ef4444' if d > 50 else '#f59e0b' if d > 20 else '#22c55e' for d in deps]
-
-ax2.barh(names, deps, color=colors, alpha=0.8)
-for bar, dep in zip(ax2.patches, deps):
-    ax2.text(bar.get_width() + 1, bar.get_y() + bar.get_height()/2,
-            f'{dep}%', color='white', fontsize=9, va='center')
-ax2.set_xlabel('Dependence on animal pollination (%)', color='white')
-ax2.set_title('Crop Pollination Dependence', color='white', fontsize=12)
-ax2.tick_params(colors='gray')
-ax2.set_yticklabels(names, color='white', fontsize=9)
-
-# Pollination service value
-ax3 = axes[1, 0]
-ax3.set_facecolor('#111827')
-# Colony count vs crop yield
-colonies = np.arange(0, 11)
-# Yield follows a saturation curve (more bees = more pollination, with diminishing returns)
-max_yield = 100  # % of maximum possible yield
-yield_per_colony = max_yield * (1 - np.exp(-0.5 * colonies))
-
-ax3.plot(colonies, yield_per_colony, 'o-', color='#22c55e', linewidth=2, markersize=8)
-ax3.fill_between(colonies, yield_per_colony, alpha=0.15, color='#22c55e')
-ax3.set_xlabel('Bee colonies per hectare', color='white')
-ax3.set_ylabel('Crop yield (% of maximum)', color='white')
-ax3.set_title('More Bees = More Food (with diminishing returns)', color='white', fontsize=12)
-ax3.tick_params(colors='gray')
-
-# Annotate economic value
-ax3.annotate('Each colony adds\nless yield as\nsaturation approaches', xy=(8, 98), color='#f59e0b', fontsize=9)
-
-# Scale of pollination
-ax4 = axes[1, 1]
-ax4.set_facecolor('#111827')
-ax4.axis('off')
-
-stats = [
-    f'Total forager bees: {total_foragers:,}',
-    f'Flower visits per day: {total_visits:,.0f}',
-    f'Successful pollen transfers: {successful_transfers:,.0f}',
-    f'Cross-pollinations: {cross_pollinations:,.0f}',
-    '',
-    f'That\\'s {cross_pollinations / 1e6:.0f} MILLION cross-pollinations per day',
-    f'from just {n_colonies} colonies!',
-    '',
-    'Global pollination value:',
-    '  $235-577 billion USD per year',
-    '  (more than the GDP of many countries)',
-]
-
-for i, line in enumerate(stats):
-    color = '#22c55e' if 'MILLION' in line or 'billion' in line else 'white'
-    ax4.text(0.1, 0.9 - i * 0.08, line, color=color, fontsize=11,
-            transform=ax4.transAxes, fontfamily='monospace')
-
-ax4.set_title('The Scale of Bee Pollination', color='white', fontsize=12)
-
-plt.tight_layout()
-plt.show()
 
 print(f"Daily pollination by {n_colonies} colonies:")
 print(f"  Foragers: {total_foragers:,}")
@@ -346,7 +180,6 @@ Karl von Frisch decoded this in 1945 and won the Nobel Prize in 1973. It was the
       checkAnswer: 'Bees have an internal clock that tracks the sun\'s movement. They continuously adjust the angle of their dance to compensate for the sun\'s apparent motion (~15° per hour). A bee that danced "30° right of vertical" at 10 AM will dance "45° right" at 11 AM for the SAME food source, because the sun has moved 15°. This means bees understand that the sun moves predictably — a form of time-compensated navigation.',
       codeIntro: 'Simulate the waggle dance and decode the direction and distance information.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Waggle dance decoder
 # Given: sun direction, dance angle, dance duration
@@ -379,106 +212,6 @@ dances = [
     ('Dance D', 180, 0.5, '180° → away from sun (north)'),   # opposite sun, 0.5 km
 ]
 
-fig, axes = plt.subplots(2, 2, figsize=(13, 10))
-fig.patch.set_facecolor('#1f2937')
-
-# Map of decoded food locations
-ax1 = axes[0, 0]
-ax1.set_facecolor('#111827')
-ax1.plot(0, 0, 's', color='#f59e0b', markersize=15, label='Hive')
-
-colors = ['#22c55e', '#3b82f6', '#ef4444', '#a855f7']
-for (name, angle, duration, desc), color in zip(dances, colors):
-    fx, fy, dist, direction = decode_waggle(sun_azimuth, angle, duration)
-    ax1.plot([0, fx], [0, fy], '--', color=color, linewidth=1.5, alpha=0.5)
-    ax1.plot(fx, fy, 'o', color=color, markersize=10)
-    ax1.annotate(f'{name}: {dist:.1f}km, {direction:.0f}°', xy=(fx, fy),
-                xytext=(fx + 0.2, fy + 0.2), color=color, fontsize=9)
-
-# Draw sun direction
-ax1.annotate('SUN ☀', xy=(0, -3.5), color='#f59e0b', fontsize=12, ha='center')
-ax1.annotate('', xy=(0, -3), xytext=(0, -0.5),
-            arrowprops=dict(arrowstyle='->', color='#f59e0b', lw=2))
-
-ax1.set_xlabel('East-West (km)', color='white')
-ax1.set_ylabel('North-South (km)', color='white')
-ax1.set_title('Decoded Food Source Locations', color='white', fontsize=12)
-ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
-ax1.set_aspect('equal')
-ax1.grid(True, alpha=0.1)
-ax1.tick_params(colors='gray')
-
-# Dance on the comb (figure-eight)
-ax2 = axes[0, 1]
-ax2.set_facecolor('#111827')
-
-# Simulate dance A (straight up = toward sun)
-t = np.linspace(0, 4*np.pi, 500)
-dance_angle_rad = np.radians(45)  # Dance B: 45° right
-
-# Figure-eight trajectory
-x_dance = np.sin(t) * 0.3
-y_base = np.cos(t) * 0.5
-# Rotate the straight runs by dance angle
-x_rotated = x_dance * np.cos(dance_angle_rad) - y_base * np.sin(dance_angle_rad)
-y_rotated = x_dance * np.sin(dance_angle_rad) + y_base * np.cos(dance_angle_rad)
-
-# Identify waggle run portion
-waggle_mask = np.cos(t) > 0.3
-ax2.plot(x_rotated, y_rotated, color='#3b82f6', linewidth=1, alpha=0.5)
-ax2.plot(x_rotated[waggle_mask], y_rotated[waggle_mask], color='#f59e0b', linewidth=3, label='Waggle run')
-
-# Draw reference lines
-ax2.annotate('UP (gravity)', xy=(0, 0.7), color='white', fontsize=9, ha='center')
-ax2.annotate('', xy=(0, 0.65), xytext=(0, 0.1),
-            arrowprops=dict(arrowstyle='->', color='white', lw=1.5))
-
-# Dance angle annotation
-ax2.annotate(f'Dance angle: 45°\\n→ food is 45° right of sun',
-            xy=(0.3, 0.3), color='#f59e0b', fontsize=9)
-
-ax2.set_title('Waggle Dance on Comb (Dance B)', color='white', fontsize=12)
-ax2.set_xlim(-0.8, 0.8)
-ax2.set_ylim(-0.8, 0.8)
-ax2.set_aspect('equal')
-ax2.tick_params(colors='gray')
-ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-
-# Distance encoding
-ax3 = axes[1, 0]
-ax3.set_facecolor('#111827')
-distances_real = np.array([0.2, 0.5, 1.0, 2.0, 5.0, 10.0])
-waggle_durations = distances_real  # approximately 1 sec per km
-
-ax3.plot(waggle_durations, distances_real, 'o-', color='#22c55e', linewidth=2, markersize=8)
-ax3.set_xlabel('Waggle run duration (seconds)', color='white')
-ax3.set_ylabel('Distance to food (km)', color='white')
-ax3.set_title('Distance Encoding: Longer Dance = Farther Food', color='white', fontsize=12)
-ax3.tick_params(colors='gray')
-
-for d, dur in zip(distances_real, waggle_durations):
-    ax3.annotate(f'{d}km', xy=(dur, d), xytext=(dur+0.3, d+0.2), color='#f59e0b', fontsize=9)
-
-# Time compensation
-ax4 = axes[1, 1]
-ax4.set_facecolor('#111827')
-hours = np.arange(6, 19)  # 6 AM to 6 PM
-sun_positions = (hours - 6) * 15  # sun moves 15°/hour from east (90°) at 6AM
-
-# Same food source: 2km, 60° from north (NE)
-food_direction = 60
-dance_angles = food_direction - sun_positions
-
-ax4.plot(hours, dance_angles, 'o-', color='#f59e0b', linewidth=2, markersize=8)
-ax4.axhline(0, color='white', linestyle=':', alpha=0.3)
-ax4.set_xlabel('Time of day (hour)', color='white')
-ax4.set_ylabel('Dance angle on comb (degrees)', color='white')
-ax4.set_title('Time Compensation: Same Food, Different Dance', color='white', fontsize=12)
-ax4.tick_params(colors='gray')
-ax4.annotate('Dance changes throughout the day\\nfor the SAME food source', xy=(12, -60), color='gray', fontsize=9, ha='center')
-
-plt.tight_layout()
-plt.show()
 
 print("Waggle dance decoded:")
 for name, angle, duration, desc in dances:
@@ -517,7 +250,6 @@ for name, angle, duration, desc in dances:
       checkAnswer: '2,000,000 visits ÷ 100 visits/trip = 20,000 trips. 20,000 trips ÷ 10 trips/day = 2,000 bee-days. That\'s equivalent to one bee working for 5.5 years (but since bees live ~42 days as foragers, it takes about 48 bees their entire foraging lives to make 1 kg of honey). Each jar represents the lifetime work of dozens of bees.',
       codeIntro: 'Model the honey production process: from nectar collection to final water content.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Honey production model
 
@@ -540,106 +272,6 @@ honey_water_pct = 17
 honey_yield_factor = (1 - nectar_water_pct/100) / (1 - honey_water_pct/100)
 daily_honey = daily_nectar * honey_yield_factor
 
-fig, axes = plt.subplots(2, 2, figsize=(13, 10))
-fig.patch.set_facecolor('#1f2937')
-
-# Evaporation over time
-ax1 = axes[0, 0]
-ax1.set_facecolor('#111827')
-hours = np.linspace(0, 72, 200)
-# Water content decreases exponentially
-water_pct = 17 + (70 - 17) * np.exp(-0.06 * hours)
-ax1.plot(hours, water_pct, color='#3b82f6', linewidth=2)
-ax1.axhline(18.6, color='#ef4444', linestyle='--', label='Capping threshold (18.6%)')
-ax1.axhline(17, color='#22c55e', linestyle=':', label='Target (17%)')
-ax1.fill_between(hours, water_pct, 17, where=water_pct > 18.6, alpha=0.1, color='#ef4444')
-ax1.fill_between(hours, water_pct, 17, where=water_pct <= 18.6, alpha=0.1, color='#22c55e')
-
-# Find capping time
-cap_time = -np.log((18.6 - 17) / (70 - 17)) / 0.06
-ax1.axvline(cap_time, color='#f59e0b', linestyle=':', alpha=0.7)
-ax1.annotate(f'Capping at {cap_time:.0f}h', xy=(cap_time, 18.6), xytext=(cap_time+5, 35),
-            color='#f59e0b', fontsize=10, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
-
-ax1.set_xlabel('Hours after deposition', color='white')
-ax1.set_ylabel('Water content (%)', color='white')
-ax1.set_title('Nectar → Honey: Water Evaporation', color='white', fontsize=12)
-ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax1.tick_params(colors='gray')
-
-# Composition comparison
-ax2 = axes[0, 1]
-ax2.set_facecolor('#111827')
-nectar_comp = {'Water': 70, 'Sucrose': 25, 'Glucose': 2.5, 'Fructose': 2.5}
-honey_comp = {'Water': 17, 'Sucrose': 1, 'Glucose': 31, 'Fructose': 38, 'Other': 13}
-
-categories = list(set(list(nectar_comp.keys()) + list(honey_comp.keys())))
-x_pos = np.arange(len(categories))
-nectar_vals = [nectar_comp.get(c, 0) for c in categories]
-honey_vals = [honey_comp.get(c, 0) for c in categories]
-
-ax2.bar(x_pos - 0.15, nectar_vals, width=0.3, color='#3b82f6', alpha=0.7, label='Nectar')
-ax2.bar(x_pos + 0.15, honey_vals, width=0.3, color='#f59e0b', alpha=0.7, label='Honey')
-ax2.set_xticks(x_pos)
-ax2.set_xticklabels(categories, color='white', fontsize=8, rotation=30)
-ax2.set_ylabel('Percentage (%)', color='white')
-ax2.set_title('Nectar vs Honey Composition', color='white', fontsize=12)
-ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax2.tick_params(colors='gray')
-
-# Production economics
-ax3 = axes[1, 0]
-ax3.set_facecolor('#111827')
-months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-# Monthly nectar flow (relative)
-nectar_flow = [5, 10, 40, 60, 80, 50, 30, 25, 35, 70, 40, 10]
-# Monthly consumption (colony needs)
-consumption = [20, 20, 25, 30, 35, 35, 30, 30, 25, 25, 20, 20]
-# Surplus = production - consumption (what becomes stored honey)
-surplus = [max(0, n - c) for n, c in zip(nectar_flow, consumption)]
-deficit = [max(0, c - n) for n, c in zip(nectar_flow, consumption)]
-
-x = np.arange(12)
-ax3.bar(x, nectar_flow, color='#22c55e', alpha=0.6, label='Nectar available')
-ax3.bar(x, [-c for c in consumption], color='#ef4444', alpha=0.6, label='Colony consumption')
-ax3.bar(x, surplus, bottom=0, color='#f59e0b', alpha=0.8, label='Surplus (→ honey)')
-
-ax3.set_xticks(x)
-ax3.set_xticklabels(months, color='white', fontsize=8)
-ax3.set_ylabel('Relative amount', color='white')
-ax3.set_title('Seasonal Nectar Budget', color='white', fontsize=12)
-ax3.axhline(0, color='white', linewidth=0.5)
-ax3.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
-ax3.tick_params(colors='gray')
-
-# Honey math
-ax4 = axes[1, 1]
-ax4.set_facecolor('#111827')
-ax4.axis('off')
-stats = [
-    'The Math of Honey:',
-    '',
-    f'Foragers per colony: {foragers:,}',
-    f'Trips per day: {trips_per_day}',
-    f'Flowers per trip: {flowers_per_trip}',
-    f'Daily nectar collected: {daily_nectar:.1f} kg',
-    f'Honey yield factor: {honey_yield_factor:.2f}',
-    f'Daily honey production: {daily_honey:.1f} kg',
-    '',
-    f'For 1 kg of honey:',
-    f'  Flower visits: ~{1 / (nectar_per_flower/1000 * honey_yield_factor):,.0f}',
-    f'  Foraging trips: ~{1 / (nectar_per_trip/1000 * honey_yield_factor):,.0f}',
-    f'  Bee-days: ~{1 / (nectar_per_trip/1000 * trips_per_day * honey_yield_factor):,.0f}',
-]
-
-for i, line in enumerate(stats):
-    weight = 'bold' if i == 0 else 'normal'
-    color = '#f59e0b' if 'For 1 kg' in line else 'white'
-    ax4.text(0.1, 0.95 - i * 0.065, line, color=color, fontsize=10,
-            transform=ax4.transAxes, fontweight=weight, fontfamily='monospace')
-
-plt.tight_layout()
-plt.show()
 
 print(f"Honey production summary:")
 print(f"  Daily nectar: {daily_nectar:.1f} kg from {foragers*trips_per_day*flowers_per_trip:,.0f} flower visits")
@@ -682,7 +314,6 @@ print(f"  Sustainable harvest (50%): ~{daily_honey * 180 * 0.5:.0f} kg")`,
       checkAnswer: 'Yes. While 5 ppb sounds tiny, bees are small. A forager consuming pollen with 5 ppb neonicotinoid accumulates enough to impair navigation within days. Studies show that at 10 ppb, foragers are 3x more likely to fail to return to the hive. At colony level, this "missing forager" problem reduces the colony\'s food income, weakening it for other threats (Varroa, winter). Sub-lethal doesn\'t mean safe.',
       codeIntro: 'Model colony decline under multiple stressors and identify tipping points.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 np.random.seed(42)
 
@@ -701,110 +332,6 @@ scenarios = {
     'All stressors combined': {'pesticide': 0.3, 'varroa': 0.25, 'habitat_loss': 0.2},
 }
 
-fig, axes = plt.subplots(2, 2, figsize=(13, 10))
-fig.patch.set_facecolor('#1f2937')
-
-# Population under each scenario
-ax1 = axes[0, 0]
-ax1.set_facecolor('#111827')
-
-colors = ['#22c55e', '#3b82f6', '#ef4444', '#f59e0b', '#a855f7']
-collapse_threshold = 10000
-
-for (name, stressors), color in zip(scenarios.items(), colors):
-    pop = [40000]
-    for d in range(1, 365):
-        base_growth = 0.002 * np.sin(d / 365 * 2 * np.pi - 1)  # seasonal
-
-        # Stressor effects
-        pest_effect = 1 - stressors['pesticide']      # reduces forager success
-        varroa_effect = 1 - stressors['varroa'] * (1 + d/365)  # varroa worsens over time
-        habitat_effect = 1 - stressors['habitat_loss'] # reduces food availability
-
-        combined = pest_effect * max(varroa_effect, 0.3) * habitat_effect
-
-        growth = base_growth * combined
-        new_pop = pop[-1] * (1 + growth)
-        new_pop = max(new_pop, 1000)  # minimum viable
-        pop.append(new_pop)
-
-    ax1.plot(days, pop, color=color, linewidth=2, label=name)
-
-ax1.axhline(collapse_threshold, color='white', linestyle=':', alpha=0.3, label='Collapse threshold')
-ax1.set_xlabel('Day of year', color='white')
-ax1.set_ylabel('Colony population', color='white')
-ax1.set_title('Colony Health Under Multiple Stressors', color='white', fontsize=12)
-ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=7)
-ax1.tick_params(colors='gray')
-
-# Pesticide dose-response
-ax2 = axes[0, 1]
-ax2.set_facecolor('#111827')
-doses = np.linspace(0, 50, 100)  # ppb neonicotinoid in pollen
-# Effects
-forager_return = 100 * np.exp(-0.05 * doses)  # % returning to hive
-learning_ability = 100 * np.exp(-0.08 * doses)
-queen_laying = 100 * np.exp(-0.03 * doses)
-
-ax2.plot(doses, forager_return, color='#ef4444', linewidth=2, label='Forager return rate')
-ax2.plot(doses, learning_ability, color='#3b82f6', linewidth=2, label='Learning ability')
-ax2.plot(doses, queen_laying, color='#22c55e', linewidth=2, label='Queen egg-laying')
-ax2.axvline(5, color='#f59e0b', linestyle='--', alpha=0.7, label='Typical field exposure (5 ppb)')
-ax2.set_xlabel('Neonicotinoid concentration (ppb)', color='white')
-ax2.set_ylabel('Performance (% of normal)', color='white')
-ax2.set_title('Pesticide Dose-Response', color='white', fontsize=12)
-ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
-ax2.tick_params(colors='gray')
-
-# Global decline data
-ax3 = axes[1, 0]
-ax3.set_facecolor('#111827')
-years = np.arange(1960, 2025)
-# Managed honeybee colonies (millions, global)
-colonies_global = 50 + 20 * np.sin((years - 1960) / 65 * np.pi * 0.5)
-colonies_global += np.random.normal(0, 2, len(years))
-# Add decline trend after 2006
-colonies_global[years > 2006] -= (years[years > 2006] - 2006) * 0.3
-
-# Wild bee species richness (index)
-wild_bee_index = 100 - (years - 1960) * 0.4 - np.maximum(0, (years - 1990) * 0.3)
-wild_bee_index += np.random.normal(0, 2, len(years))
-
-ax3.plot(years, colonies_global, color='#f59e0b', linewidth=2, label='Managed honeybees (millions)')
-ax3.set_xlabel('Year', color='white')
-ax3.set_ylabel('Colonies (millions)', color='#f59e0b')
-ax3_twin = ax3.twinx()
-ax3_twin.plot(years, wild_bee_index, color='#ef4444', linewidth=2, label='Wild bee diversity index')
-ax3_twin.set_ylabel('Wild bee index', color='#ef4444')
-ax3.set_title('Global Bee Population Trends', color='white', fontsize=12)
-lines1, labels1 = ax3.get_legend_handles_labels()
-lines2, labels2 = ax3_twin.get_legend_handles_labels()
-ax3.legend(lines1 + lines2, labels1 + labels2, facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
-ax3.tick_params(colors='gray')
-ax3_twin.tick_params(colors='gray')
-
-# Solutions
-ax4 = axes[1, 1]
-ax4.set_facecolor('#111827')
-ax4.axis('off')
-solutions = [
-    ('Ban neonicotinoids', 'EU banned 3 neonicotinoids in 2018', '#ef4444'),
-    ('Plant wildflower strips', 'Increase forage diversity by 40%', '#22c55e'),
-    ('Varroa management', 'Organic acids reduce mite loads 90%', '#3b82f6'),
-    ('Reduce monoculture', 'Crop diversification helps all pollinators', '#f59e0b'),
-    ('Urban beekeeping', 'Cities can support healthy colonies', '#a855f7'),
-    ('Citizen monitoring', 'Track wild bee populations over time', '#ec4899'),
-]
-
-ax4.text(0.05, 0.95, 'Solutions (each helps, all together transform)', color='white', fontsize=12,
-        transform=ax4.transAxes, fontweight='bold')
-for i, (sol, detail, color) in enumerate(solutions):
-    y = 0.82 - i * 0.13
-    ax4.text(0.05, y, f'  {sol}', color=color, fontsize=11, transform=ax4.transAxes)
-    ax4.text(0.08, y - 0.05, detail, color='gray', fontsize=9, transform=ax4.transAxes)
-
-plt.tight_layout()
-plt.show()
 
 print("Multiple stressor effect:")
 print("  Pesticide alone: colony weakened but survives")
@@ -840,7 +367,6 @@ Indigenous honey hunters across India, Africa, and Asia developed sustainable me
       checkAnswer: 'Technically yes, if the remaining 20% is enough for the colony to survive winter. But he\'s wrong in practice: (1) Bad years (drought, cold) reduce production, and 20% may not be enough. (2) He\'s also disrupting the brood, which kills developing bees. (3) Wild colonies already face stressors; removing most of their food reserve pushes them toward collapse. (4) If the colony dies, he loses future harvests. Sustainable harvesting means taking 50-60% and leaving a safety margin.',
       codeIntro: 'Model the Maximum Sustainable Yield for honey harvesting.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # Maximum Sustainable Yield model for honey harvesting
 # Colony growth follows logistic equation
@@ -873,101 +399,6 @@ for H in harvest_rates:
 msy = r * K / 4
 msy_pop = K / 2
 
-fig, axes = plt.subplots(2, 2, figsize=(13, 10))
-fig.patch.set_facecolor('#1f2937')
-
-# Yield curve
-ax1 = axes[0, 0]
-ax1.set_facecolor('#111827')
-pop_range = np.linspace(1, K, 200)
-yield_at_pop = r * pop_range * (1 - pop_range / K)
-
-ax1.plot(pop_range, yield_at_pop, color='#22c55e', linewidth=2)
-ax1.fill_between(pop_range, yield_at_pop, alpha=0.15, color='#22c55e')
-ax1.plot(msy_pop, msy, 'o', color='#ef4444', markersize=12)
-ax1.annotate(f'MSY = {msy:.1f} kg/year\\nat N = {msy_pop:.0f}', xy=(msy_pop, msy),
-            xytext=(msy_pop+10, msy+1), color='#ef4444', fontsize=10,
-            arrowprops=dict(arrowstyle='->', color='#ef4444'))
-ax1.set_xlabel('Colony strength (relative units)', color='white')
-ax1.set_ylabel('Sustainable harvest (kg/year)', color='white')
-ax1.set_title('Maximum Sustainable Yield', color='white', fontsize=12)
-ax1.tick_params(colors='gray')
-
-# Time simulation: sustainable vs overharvesting
-ax2 = axes[0, 1]
-ax2.set_facecolor('#111827')
-years = np.arange(0, 20)
-
-for harvest, label, color, style in [
-    (5, 'Conservative (5 kg)', '#22c55e', '-'),
-    (msy, f'MSY ({msy:.0f} kg)', '#f59e0b', '--'),
-    (12, 'Overharvest (12 kg)', '#ef4444', '-'),
-]:
-    N = 50  # start near carrying capacity
-    trajectory = [N]
-    for y in range(len(years) - 1):
-        dN = r * N * (1 - N/K) - harvest
-        N = max(N + dN, 0)
-        trajectory.append(N)
-    ax2.plot(years, trajectory, color=color, linewidth=2, linestyle=style, label=label)
-
-ax2.axhline(0, color='white', linestyle=':', alpha=0.3)
-ax2.set_xlabel('Year', color='white')
-ax2.set_ylabel('Colony strength', color='white')
-ax2.set_title('Colony Trajectory Under Different Harvest Rates', color='white', fontsize=12)
-ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax2.tick_params(colors='gray')
-
-# Traditional vs modern methods
-ax3 = axes[1, 0]
-ax3.set_facecolor('#111827')
-methods = {
-    'Destructive\\n(kill colony)': {'honey': 30, 'survival': 0, 'future': 0},
-    'Traditional\\n(partial harvest)': {'honey': 15, 'survival': 85, 'future': 15},
-    'Modern\\n(frame hive)': {'honey': 25, 'survival': 95, 'future': 25},
-}
-
-x = np.arange(len(methods))
-width = 0.25
-ax3.bar(x - width, [m['honey'] for m in methods.values()], width, color='#f59e0b', label='Honey this year (kg)')
-ax3.bar(x, [m['survival'] for m in methods.values()], width, color='#22c55e', label='Colony survival (%)')
-ax3.bar(x + width, [m['future'] for m in methods.values()], width, color='#3b82f6', label='Honey next year (kg)')
-ax3.set_xticks(x)
-ax3.set_xticklabels(list(methods.keys()), color='white', fontsize=9)
-ax3.set_title('Harvesting Methods Compared', color='white', fontsize=12)
-ax3.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
-ax3.tick_params(colors='gray')
-
-# 10-year cumulative harvest
-ax4 = axes[1, 1]
-ax4.set_facecolor('#111827')
-years_long = np.arange(0, 11)
-cumulative = {}
-for method, data in methods.items():
-    cum = [0]
-    colony_alive = True
-    for y in range(10):
-        if colony_alive:
-            cum.append(cum[-1] + data['honey'])
-            if data['survival'] == 0:
-                colony_alive = False
-        else:
-            cum.append(cum[-1])
-    cumulative[method] = cum
-
-method_colors = ['#ef4444', '#f59e0b', '#22c55e']
-for (method, cum), color in zip(cumulative.items(), method_colors):
-    ax4.plot(years_long, cum, 'o-', color=color, linewidth=2, markersize=5,
-            label=f'{method.replace(chr(10), " ")}: {cum[-1]} kg')
-
-ax4.set_xlabel('Year', color='white')
-ax4.set_ylabel('Cumulative honey (kg)', color='white')
-ax4.set_title('10-Year Cumulative Harvest', color='white', fontsize=12)
-ax4.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
-ax4.tick_params(colors='gray')
-
-plt.tight_layout()
-plt.show()
 
 print("10-year cumulative harvest:")
 for method, cum in cumulative.items():
@@ -1003,6 +434,7 @@ print(f"Patience is not just ethical — it's mathematically optimal.")`,
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
+            diagram={[BeeColonyDiagram, BeeWaggleDanceDiagram, BeePollinationDiagram, BeeHoneymakingDiagram, BeeHiveTempDiagram, BeeLifeCycleDiagram][i] ? createElement([BeeColonyDiagram, BeeWaggleDanceDiagram, BeePollinationDiagram, BeeHoneymakingDiagram, BeeHiveTempDiagram, BeeLifeCycleDiagram][i]) : undefined}
             pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
         ))}
       </div>

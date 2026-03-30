@@ -35,7 +35,7 @@ export default function IonicBondDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 560 220" className="w-full max-w-2xl mx-auto" role="img" aria-label="Ionic bond formation between sodium and chlorine">
+      <svg viewBox="0 0 620 260" className="w-full max-w-2xl mx-auto" role="img" aria-label="Ionic bond formation between sodium and chlorine">
         {/* Stage 1: Na and Cl atoms */}
         <text x={90} y={18} textAnchor="middle" className="fill-gray-600 dark:fill-gray-300" fontSize="11" fontWeight="bold">Na atom</text>
         {drawAtom(65, 105, 'Na', [2, 8, 1], true)}

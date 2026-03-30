@@ -15,7 +15,7 @@ export default function UnitCircleDiagram() {
   return (
     <div className="my-4">
       <svg
-        viewBox="0 0 400 400"
+        viewBox="0 0 420 420"
         className="w-full max-w-md mx-auto"
         role="img"
         aria-label={`Unit circle showing angle ${angle}°, sin=${sinVal.toFixed(3)}, cos=${cosVal.toFixed(3)}`}

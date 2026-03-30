@@ -181,7 +181,7 @@ export default function CorrelationDiagram() {
       </div>
 
       <svg
-        viewBox="0 0 540 220"
+        viewBox="0 0 567 231"
         width="100%"
         xmlns="http://www.w3.org/2000/svg"
         style={{ background: "#f8fafc", borderRadius: 8 }}

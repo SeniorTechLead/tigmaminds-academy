@@ -1,7 +1,7 @@
 export default function StaticElectricityDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 500 280" className="w-full max-w-xl mx-auto" role="img" aria-label="Static electricity: charge transfer and attraction">
+      <svg viewBox="0 0 530 306" className="w-full max-w-xl mx-auto" role="img" aria-label="Static electricity: charge transfer and attraction">
         {/* Title */}
         <text x={250} y={18} textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="700">Static Electricity</text>
 

@@ -1,12 +1,18 @@
 import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Sparkles } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
-import MapProjectionDiagram from '../diagrams/MapProjectionDiagram';
+import MapDatumDiagram from '../diagrams/MapDatumDiagram';
+import MapTopoProfileDiagram from '../diagrams/MapTopoProfileDiagram';
+import MapSurveyDiagram from '../diagrams/MapSurveyDiagram';
+import MapThematicDiagram from '../diagrams/MapThematicDiagram';
+import MapDigitalElevationDiagram from '../diagrams/MapDigitalElevationDiagram';
+import MapRemoteSensingDiagram from '../diagrams/MapRemoteSensingDiagram';
+import ContourMapDiagram from '../diagrams/ContourMapDiagram';
 import CoordinatePlaneDiagram from '../diagrams/CoordinatePlaneDiagram';
+import CorrelationDiagram from '../diagrams/CorrelationDiagram';
 import LatLongGridDiagram from '../diagrams/LatLongGridDiagram';
 import LinearGraphDiagram from '../diagrams/LinearGraphDiagram';
-import CorrelationDiagram from '../diagrams/CorrelationDiagram';
-import ContourMapDiagram from '../diagrams/ContourMapDiagram';
+import MapProjectionDiagram from '../diagrams/MapProjectionDiagram';
 
 export default function MapMakerLevel2() {
   const pyodideRef = useRef<any>(null);
@@ -48,61 +54,7 @@ How GPS works:
       checkAnswer: 'Survey-grade receivers use: 1) Carrier-phase measurement (tracking wave cycles, not just code). 2) Dual-frequency reception (L1+L2, cancels ionospheric delay). 3) Differential correction from a nearby base station. 4) Longer observation time (averaging). The physics is the same; the measurement precision is different.',
       codeIntro: 'Simulate GPS trilateration: find position from distances to three satellites.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 6))
-fig.patch.set_facecolor('#1f2937')
-
-true_x, true_y = 5, 4
-
-sats = [(1, 8), (8, 9), (9, 2)]
-sat_names = ['Sat 1', 'Sat 2', 'Sat 3']
-sat_colors = ['#ef4444', '#22c55e', '#3b82f6']
-
-true_dists = [np.sqrt((sx - true_x)**2 + (sy - true_y)**2) for sx, sy in sats]
-
-ax1.set_facecolor('#111827')
-for (sx, sy), dist, name, color in zip(sats, true_dists, sat_names, sat_colors):
-    theta = np.linspace(0, 2 * np.pi, 100)
-    ax1.plot(sx + dist * np.cos(theta), sy + dist * np.sin(theta),
-             color=color, linewidth=2, label=f'{name} (d={dist:.1f}km)')
-    ax1.scatter(sx, sy, c=color, s=100, marker='*', zorder=5, edgecolors='white', linewidths=1)
-
-ax1.scatter(true_x, true_y, c='white', s=200, marker='o', zorder=5, edgecolors='#f59e0b', linewidths=3)
-ax1.text(true_x + 0.3, true_y - 0.5, f'Position\\n({true_x}, {true_y})', color='white', fontsize=10)
-ax1.set_xlabel('East (km)', color='white')
-ax1.set_ylabel('North (km)', color='white')
-ax1.set_title('Perfect GPS Trilateration', color='white', fontsize=12)
-ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
-ax1.tick_params(colors='gray')
-ax1.set_xlim(-2, 14); ax1.set_ylim(-2, 14); ax1.set_aspect('equal')
-
-ax2.set_facecolor('#111827')
-n_fixes = 500
-error_std = 0.3
-
-np.random.seed(42)
-fix_x = true_x + np.random.normal(0, error_std, n_fixes)
-fix_y = true_y + np.random.normal(0, error_std, n_fixes)
-
-ax2.scatter(fix_x, fix_y, c='#3b82f6', s=5, alpha=0.3, label='Individual fixes')
-ax2.scatter(true_x, true_y, c='#ef4444', s=100, marker='+', linewidths=3, zorder=5, label='True position')
-ax2.scatter(np.mean(fix_x), np.mean(fix_y), c='#22c55e', s=100, marker='x', linewidths=3, zorder=5, label='Average fix')
-
-for r, label in [(0.3, '1σ'), (0.6, '2σ'), (0.9, '3σ')]:
-    circle = plt.Circle((true_x, true_y), r, fill=False, edgecolor='#f59e0b', linestyle='--', linewidth=1)
-    ax2.add_patch(circle)
-    ax2.text(true_x + r, true_y + 0.1, label, color='#f59e0b', fontsize=8)
-
-ax2.set_xlabel('East (km)', color='white')
-ax2.set_ylabel('North (km)', color='white')
-ax2.set_title(f'GPS Error Distribution (σ = {error_std*1000:.0f}m)', color='white', fontsize=12)
-ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
-ax2.tick_params(colors='gray')
-ax2.set_xlim(true_x - 1.5, true_x + 1.5); ax2.set_ylim(true_y - 1.5, true_y + 1.5); ax2.set_aspect('equal')
-
-plt.tight_layout()
-plt.show()
 
 errors = np.sqrt((fix_x - true_x)**2 + (fix_y - true_y)**2)
 print("GPS accuracy simulation:")
@@ -126,7 +78,6 @@ At 30m resolution, all of NE India (~262,000 km²) = ~290 million elevation valu
       checkAnswer: 'The DEM averages a 30m x 30m cell (a sharp peak averages lower). SRTM measures radar return surface (trees add 5-15m). Inherent accuracy is +/-5-10m. For a sharp forested peak, all three compound.',
       codeIntro: 'Generate a DEM and derive slope, aspect, hillshade, and drainage.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 np.random.seed(42)
 
@@ -142,57 +93,6 @@ dem = (500 + 200 * np.exp(-((X-2)**2 + (Y-4)**2) / 1.5)
       + 50 * np.sin(X) * np.cos(Y * 1.5)
       + 8 * np.random.rand(grid_size, grid_size))
 
-fig, axes = plt.subplots(2, 3, figsize=(15, 9))
-fig.patch.set_facecolor('#1f2937')
-
-ax = axes[0, 0]; ax.set_facecolor('#111827')
-im = ax.imshow(dem, origin='lower', extent=[0, x[-1], 0, y[-1]], cmap='terrain', aspect='equal')
-ax.set_title('DEM (elevation)', color='white', fontsize=11)
-plt.colorbar(im, ax=ax, label='Elevation (m)', fraction=0.046)
-ax.tick_params(colors='gray')
-
-ax = axes[0, 1]; ax.set_facecolor('#111827')
-dy, dx = np.gradient(dem, cell_size)
-slope = np.degrees(np.arctan(np.sqrt(dx**2 + dy**2)))
-im = ax.imshow(slope, origin='lower', extent=[0, x[-1], 0, y[-1]], cmap='YlOrRd', aspect='equal')
-ax.set_title('Slope (degrees)', color='white', fontsize=11)
-plt.colorbar(im, ax=ax, label='Slope (°)', fraction=0.046)
-ax.tick_params(colors='gray')
-
-ax = axes[0, 2]; ax.set_facecolor('#111827')
-aspect = np.degrees(np.arctan2(-dx, dy)) % 360
-im = ax.imshow(aspect, origin='lower', extent=[0, x[-1], 0, y[-1]], cmap='hsv', aspect='equal')
-ax.set_title('Aspect (direction)', color='white', fontsize=11)
-plt.colorbar(im, ax=ax, label='Aspect (°)', fraction=0.046)
-ax.tick_params(colors='gray')
-
-ax = axes[1, 0]; ax.set_facecolor('#111827')
-from matplotlib.colors import LightSource
-ls = LightSource(azdeg=315, altdeg=45)
-hillshade = ls.hillshade(dem, vert_exag=2, dx=cell_size, dy=cell_size)
-ax.imshow(hillshade, origin='lower', extent=[0, x[-1], 0, y[-1]], cmap='gray', aspect='equal')
-ax.set_title('Hillshade', color='white', fontsize=11)
-ax.tick_params(colors='gray')
-
-ax = axes[1, 1]; ax.set_facecolor('#111827')
-levels = np.arange(400, 750, 25)
-ax.imshow(hillshade, origin='lower', extent=[0, x[-1], 0, y[-1]], cmap='gray', alpha=0.5)
-cs = ax.contour(X, Y, dem, levels=levels, colors='#f59e0b', linewidths=0.5)
-ax.clabel(cs, inline=True, fontsize=6, fmt='%d')
-ax.set_title('Contours on hillshade', color='white', fontsize=11)
-ax.tick_params(colors='gray')
-
-ax = axes[1, 2]; ax.set_facecolor('#111827')
-ax.hist(dem.flatten(), bins=50, color='#22c55e', alpha=0.7, density=True)
-ax.axvline(dem.mean(), color='#f59e0b', linestyle='--', linewidth=2, label=f'Mean: {dem.mean():.0f}m')
-ax.set_xlabel('Elevation (m)', color='white')
-ax.set_ylabel('Density', color='white')
-ax.set_title('Elevation Distribution', color='white', fontsize=11)
-ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
-ax.tick_params(colors='gray')
-
-plt.tight_layout()
-plt.show()
 
 print("DEM Statistics:")
 print(f"  Grid: {grid_size}×{grid_size} cells ({grid_size*cell_size/1000:.1f}km × {grid_size*cell_size/1000:.1f}km)")
@@ -219,60 +119,9 @@ Data model: nodes (points), ways (lines/polygons), relations. Tags: key=value pa
       checkAnswer: 'Google relies on commercial data providers with less incentive for rural areas. OSM relies on local volunteers who know the village name, that the "road" is a footpath, that the river changed course. Local knowledge beats remote sensing for ground truth.',
       codeIntro: 'Simulate an OSM-style mapping exercise: building tracing and tagging.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 np.random.seed(42)
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 6))
-fig.patch.set_facecolor('#1f2937')
-
-n_buildings = 30
-building_data = []
-for _ in range(n_buildings):
-    bx = np.random.uniform(1, 9)
-    by = np.random.uniform(1, 9)
-    w = np.random.uniform(0.2, 0.6)
-    h = np.random.uniform(0.2, 0.5)
-    btype = np.random.choice(['residential', 'commercial', 'school', 'hospital'], p=[0.7, 0.15, 0.1, 0.05])
-    building_data.append((bx, by, w, h, btype))
-
-ax1.set_facecolor('#2d4a2d')
-for bx, by, w, h, btype in building_data:
-    rect = plt.Rectangle((bx - w/2, by - h/2), w, h, facecolor='#888888', edgecolor='none', alpha=0.8)
-    ax1.add_patch(rect)
-ax1.plot([0, 10], [5, 5], color='#555555', linewidth=4)
-ax1.plot([5, 5], [0, 10], color='#555555', linewidth=3)
-river_x = np.linspace(0, 10, 100)
-river_y = 2 + 0.5 * np.sin(river_x)
-ax1.plot(river_x, river_y, color='#2d5a8a', linewidth=4)
-ax1.set_xlim(0, 10); ax1.set_ylim(0, 10)
-ax1.set_title('"Satellite Imagery" (before mapping)', color='white', fontsize=11)
-ax1.tick_params(colors='gray'); ax1.set_aspect('equal')
-
-ax2.set_facecolor('#f5f0e1')
-type_colors = {'residential': '#d4a574', 'commercial': '#f59e0b', 'school': '#3b82f6', 'hospital': '#ef4444'}
-type_counts = {t: 0 for t in type_colors}
-
-for bx, by, w, h, btype in building_data:
-    rect = plt.Rectangle((bx - w/2, by - h/2), w, h, facecolor=type_colors[btype], edgecolor='black', linewidth=0.5, alpha=0.7)
-    ax2.add_patch(rect)
-    type_counts[btype] += 1
-
-ax2.plot([0, 10], [5, 5], color='#333333', linewidth=4, label='highway=primary')
-ax2.plot([5, 5], [0, 10], color='#666666', linewidth=2.5, label='highway=secondary')
-ax2.fill_between(river_x, river_y - 0.15, river_y + 0.15, color='#aadaff', alpha=0.8)
-ax2.plot(river_x, river_y, color='#3b82f6', linewidth=1, label='natural=water')
-
-for btype, color in type_colors.items():
-    ax2.scatter([], [], c=color, s=100, marker='s', label=f'building={btype} ({type_counts[btype]})')
-
-ax2.set_xlim(0, 10); ax2.set_ylim(0, 10)
-ax2.set_title('OpenStreetMap Version (after mapping)', color='white', fontsize=11)
-ax2.legend(facecolor='white', fontsize=7, loc='upper right')
-ax2.tick_params(colors='gray'); ax2.set_aspect('equal')
-
-plt.tight_layout()
-plt.show()
 
 print("OSM Mapping Statistics:")
 print(f"  Buildings traced: {n_buildings}")
@@ -299,65 +148,7 @@ A typical web map: Leaflet + OSM tiles + your GeoJSON data. Free, lightweight, w
       checkAnswer: 'Tile caching (reuse loaded tiles), pre-fetching (load adjacent tiles), progressive loading (show blurry low-zoom tile while loading sharp one), debouncing (skip intermediate requests), and CDN (serve from nearby servers).',
       codeIntro: 'Simulate a web map tile system and zoom levels.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
-fig, axes = plt.subplots(2, 3, figsize=(15, 9))
-fig.patch.set_facecolor('#1f2937')
-
-np.random.seed(42)
-full_res = 256
-terrain = np.random.rand(full_res, full_res) * 0.5 + 0.5
-for _ in range(5):
-    cx, cy = np.random.randint(0, full_res, 2)
-    r = np.random.randint(20, 60)
-    y_grid, x_grid = np.ogrid[-cx:full_res-cx, -cy:full_res-cy]
-    mask = x_grid**2 + y_grid**2 <= r**2
-    terrain[mask] += 0.2
-terrain = np.clip(terrain, 0, 1)
-
-zoom_configs = [
-    (0, 0, 256, 'Zoom 0: 1 tile (whole world)'),
-    (0, 0, 128, 'Zoom 1: 4 tiles (NW quarter)'),
-    (0, 0, 64, 'Zoom 2: 16 tiles'),
-    (0, 0, 32, 'Zoom 3: 64 tiles'),
-    (0, 0, 16, 'Zoom 4: 256 tiles'),
-]
-
-for i, (ax, (y0, x0, size, title)) in enumerate(zip(axes.flat[:5], zoom_configs)):
-    ax.set_facecolor('#111827')
-    tile = terrain[y0:y0+size, x0:x0+size]
-    ax.imshow(tile, origin='lower', cmap='terrain', interpolation='nearest', aspect='equal')
-    if i > 0:
-        tile_size = max(1, size // 2) if i < 4 else max(1, size // 4)
-        for g in range(0, size, max(1, tile_size)):
-            ax.axhline(g, color='white', linewidth=0.5, alpha=0.5)
-            ax.axvline(g, color='white', linewidth=0.5, alpha=0.5)
-    ax.set_title(title, color='white', fontsize=10)
-    ax.tick_params(colors='gray')
-
-ax = axes[1, 2]; ax.set_facecolor('#111827')
-zoom_levels = np.arange(0, 20)
-n_tiles = 4.0 ** zoom_levels
-tile_size_m = 40075000 / (2.0 ** zoom_levels)
-
-ax.semilogy(zoom_levels, n_tiles, 'o-', color='#ef4444', linewidth=2, label='Number of tiles')
-ax_twin = ax.twinx()
-ax_twin.semilogy(zoom_levels, tile_size_m / 1000, 's-', color='#22c55e', linewidth=2, label='Tile size (km)')
-
-ax.set_xlabel('Zoom level', color='white')
-ax.set_ylabel('Number of tiles', color='#ef4444')
-ax_twin.set_ylabel('Tile size (km)', color='#22c55e')
-ax.set_title('Web Map Tile System', color='white', fontsize=11)
-ax.tick_params(axis='y', colors='#ef4444')
-ax_twin.tick_params(axis='y', colors='#22c55e')
-ax.tick_params(axis='x', colors='gray')
-
-lines1, labels1 = ax.get_legend_handles_labels()
-lines2, labels2 = ax_twin.get_legend_handles_labels()
-ax.legend(lines1 + lines2, labels1 + labels2, facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=7)
-
-plt.tight_layout()
-plt.show()
 
 print("Web map tile system:")
 for z in [0, 5, 10, 15, 18]:
@@ -384,7 +175,6 @@ Core operations:
       checkAnswer: 'The facility location problem: load villages and populations, define constraints (5km max, 100 students min), optimize to minimize total student travel distance, then check feasibility (flat land, road access, water).',
       codeIntro: 'Solve a facility location problem: place 3 clinics to serve the most people.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 np.random.seed(42)
 
@@ -409,45 +199,6 @@ for trial in range(5000):
         best_score = total_weighted_dist
         best_clinics = list(zip(clinic_x.copy(), clinic_y.copy()))
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 6))
-fig.patch.set_facecolor('#1f2937')
-
-ax1.set_facecolor('#111827')
-ax1.scatter(village_x, village_y, s=village_pop / 30, c='#3b82f6', alpha=0.6,
-           edgecolors='white', linewidths=0.5, label='Villages (size=pop)')
-ax1.set_title('Villages Without Clinics', color='white', fontsize=12)
-ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
-ax1.tick_params(colors='gray')
-ax1.set_xlim(0, 20); ax1.set_ylim(0, 20); ax1.set_aspect('equal')
-
-ax2.set_facecolor('#111827')
-clinic_colors = ['#ef4444', '#22c55e', '#f59e0b']
-village_assignment = np.zeros(n_villages, dtype=int)
-village_dists = np.zeros(n_villages)
-
-for i in range(n_villages):
-    dists = [np.sqrt((village_x[i] - cx)**2 + (village_y[i] - cy)**2) for cx, cy in best_clinics]
-    village_assignment[i] = np.argmin(dists)
-    village_dists[i] = min(dists)
-
-for c in range(n_clinics):
-    mask = village_assignment == c
-    ax2.scatter(village_x[mask], village_y[mask], s=village_pop[mask] / 30,
-               c=clinic_colors[c], alpha=0.6, edgecolors='white', linewidths=0.5)
-    cx, cy = best_clinics[c]
-    ax2.scatter(cx, cy, c=clinic_colors[c], s=200, marker='P', edgecolors='white', linewidths=2, zorder=5, label=f'Clinic {c+1}')
-    theta = np.linspace(0, 2*np.pi, 100)
-    ax2.plot(cx + 5*np.cos(theta), cy + 5*np.sin(theta), '--', color=clinic_colors[c], linewidth=1, alpha=0.5)
-    for i in np.where(mask)[0]:
-        ax2.plot([cx, village_x[i]], [cy, village_y[i]], '-', color=clinic_colors[c], linewidth=0.3, alpha=0.3)
-
-ax2.set_title('Optimal Clinic Placement', color='white', fontsize=12)
-ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8, ncol=3)
-ax2.tick_params(colors='gray')
-ax2.set_xlim(0, 20); ax2.set_ylim(0, 20); ax2.set_aspect('equal')
-
-plt.tight_layout()
-plt.show()
 
 print("Facility Location Results:")
 for c in range(n_clinics):
@@ -477,103 +228,7 @@ Limitations: 20-40 min battery, no rain/wind, DGCA regulations (400ft max, visua
       checkAnswer: 'Depends on application. Building counting: 3cm sufficient. Individual plant health: 1.5cm needed. Archaeological carved detail: need even higher. Road cracks: 1.5cm shows individual cracks. Rule: only fly as low as your application demands.',
       codeIntro: 'Simulate a drone mapping mission: flight path, coverage, and resolution.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
-fig, axes = plt.subplots(2, 2, figsize=(14, 10))
-fig.patch.set_facecolor('#1f2937')
-
-area_width = 500
-area_height = 400
-altitude = 100
-sensor_width = 6.17e-3
-focal_length = 8.8e-3
-gsd = altitude * sensor_width / (focal_length * 5472)
-photo_width_m = gsd * 5472
-photo_height_m = gsd * 3648
-
-overlap_forward = 0.80
-overlap_side = 0.70
-strip_spacing = photo_width_m * (1 - overlap_side)
-photo_spacing = photo_height_m * (1 - overlap_forward)
-
-n_strips = int(np.ceil(area_width / strip_spacing)) + 1
-n_photos_per_strip = int(np.ceil(area_height / photo_spacing)) + 1
-total_photos = n_strips * n_photos_per_strip
-
-ax = axes[0, 0]; ax.set_facecolor('#111827')
-for i in range(n_strips):
-    x_pos = i * strip_spacing
-    if i % 2 == 0:
-        ax.plot([x_pos, x_pos], [0, area_height], '-', color='#22c55e', linewidth=1)
-        for j in range(n_photos_per_strip):
-            ax.plot(x_pos, j * photo_spacing, 'o', color='#f59e0b', markersize=3)
-    else:
-        ax.plot([x_pos, x_pos], [area_height, 0], '-', color='#22c55e', linewidth=1)
-        for j in range(n_photos_per_strip):
-            ax.plot(x_pos, area_height - j * photo_spacing, 'o', color='#f59e0b', markersize=3)
-ax.set_xlim(-20, area_width + 20); ax.set_ylim(-20, area_height + 20)
-ax.set_title('Flight Path & Photo Positions', color='white', fontsize=11)
-ax.tick_params(colors='gray'); ax.set_aspect('equal')
-
-ax = axes[0, 1]; ax.set_facecolor('#111827')
-overlap_grid = np.zeros((int(area_height), int(area_width)))
-for i in range(n_strips):
-    for j in range(n_photos_per_strip):
-        cx = i * strip_spacing
-        cy = j * photo_spacing
-        x0, x1 = int(max(0, cx - photo_width_m/2)), int(min(area_width, cx + photo_width_m/2))
-        y0, y1 = int(max(0, cy - photo_height_m/2)), int(min(area_height, cy + photo_height_m/2))
-        if x0 < x1 and y0 < y1:
-            overlap_grid[y0:y1, x0:x1] += 1
-im = ax.imshow(overlap_grid, origin='lower', extent=[0, area_width, 0, area_height], cmap='YlOrRd', aspect='equal')
-plt.colorbar(im, ax=ax, label='Overlapping photos')
-ax.set_title('Photo Overlap Coverage', color='white', fontsize=11)
-ax.tick_params(colors='gray')
-
-ax = axes[1, 0]; ax.set_facecolor('#111827')
-altitudes = np.linspace(20, 300, 100)
-gsds = altitudes * sensor_width / (focal_length * 5472) * 100
-ax.plot(altitudes, gsds, color='#3b82f6', linewidth=2)
-ax.fill_between(altitudes, gsds, alpha=0.1, color='#3b82f6')
-for alt, app, color in [(30, 'Archaeology', '#ef4444'), (50, 'Agriculture', '#22c55e'),
-                          (100, 'General mapping', '#f59e0b'), (200, 'Large area', '#a855f7')]:
-    gsd_val = alt * sensor_width / (focal_length * 5472) * 100
-    ax.plot(alt, gsd_val, 'o', color=color, markersize=10, zorder=5)
-    ax.annotate(f'{app}\\n({gsd_val:.1f} cm/px)', xy=(alt, gsd_val), xytext=(alt+15, gsd_val+0.5),
-               color=color, fontsize=8, arrowprops=dict(arrowstyle='->', color=color, lw=0.5))
-ax.set_xlabel('Altitude (m)', color='white')
-ax.set_ylabel('Resolution (cm/pixel)', color='white')
-ax.set_title('Resolution vs Altitude', color='white', fontsize=11)
-ax.tick_params(colors='gray')
-
-ax = axes[1, 1]; ax.set_facecolor('#111827')
-total_distance = n_strips * area_height + (n_strips - 1) * strip_spacing
-flight_time = total_distance / 8 / 60
-
-summary = f"""DRONE MAPPING MISSION
-
-Area: {area_width}×{area_height}m ({area_width*area_height/10000:.1f} ha)
-Altitude: {altitude}m
-Resolution: {gsd*100:.1f} cm/pixel
-
-Photo coverage: {photo_width_m:.0f}×{photo_height_m:.0f}m
-Overlap: {overlap_forward*100:.0f}% fwd, {overlap_side*100:.0f}% side
-
-Strips: {n_strips}
-Photos/strip: {n_photos_per_strip}
-Total photos: {total_photos}
-
-Flight distance: {total_distance:.0f}m
-Flight time: {flight_time:.0f} min
-Processing: ~{total_photos * 2} min (est.)"""
-
-ax.text(0.05, 0.95, summary, transform=ax.transAxes, fontsize=9, color='white',
-        verticalalignment='top', fontfamily='monospace')
-ax.set_title('Mission Summary', color='white', fontsize=11)
-ax.axis('off')
-
-plt.tight_layout()
-plt.show()
 
 print(summary)`,
       challenge: 'The drone battery lasts 25 minutes. Is this mission feasible? If not, split the area into multiple flights with overlap zones between them.',

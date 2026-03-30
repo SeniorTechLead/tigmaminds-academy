@@ -41,7 +41,7 @@ export default function SymmetryDiagram() {
   return (
     <div className="w-full max-w-xl mx-auto my-6">
       <svg
-        viewBox="0 0 560 260"
+        viewBox="0 0 588 273"
         className="w-full"
         role="img"
         aria-label="Types of symmetry in biology: bilateral, radial, and rotational"

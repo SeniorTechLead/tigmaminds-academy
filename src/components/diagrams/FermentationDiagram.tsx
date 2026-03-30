@@ -1,7 +1,7 @@
 export default function FermentationDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 500 250" className="w-full max-w-xl mx-auto" role="img" aria-label="Fermentation pathways diagram">
+      <svg viewBox="0 0 565 279" className="w-full max-w-xl mx-auto" role="img" aria-label="Fermentation pathways diagram">
         <defs>
           <marker id="fermArrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
             <polygon points="0 0, 8 3, 0 6" className="fill-gray-500 dark:fill-gray-400" />

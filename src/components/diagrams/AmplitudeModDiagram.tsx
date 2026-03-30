@@ -23,7 +23,7 @@ export default function AmplitudeModDiagram() {
   const envelopeLower = toPath(calm.map(d => ({ t: d.t, y: -d.pulse })), 210, 28);
 
   return (
-    <svg viewBox="0 0 600 280" className="w-full max-w-xl mx-auto my-6" role="img" aria-label="Three waves: rumble, pulse envelope, and combined amplitude-modulated signal">
+    <svg viewBox="0 0 695 325" className="w-full max-w-xl mx-auto my-6" role="img" aria-label="Three waves: rumble, pulse envelope, and combined amplitude-modulated signal">
 
       {/* Row 1: Rumble */}
       <line x1="40" y1="55" x2="560" y2="55" className="stroke-gray-300 dark:stroke-gray-700" strokeWidth="0.5" strokeDasharray="3,3" />

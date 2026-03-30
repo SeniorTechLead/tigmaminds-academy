@@ -13,7 +13,7 @@ export default function IsotopeDiagram() {
   return (
     <div className="my-4">
       <svg
-        viewBox="0 0 500 200"
+        viewBox="0 0 525 245"
         className="w-full max-w-xl mx-auto"
         role="img"
         aria-label="Three hydrogen isotopes: Protium, Deuterium, Tritium"

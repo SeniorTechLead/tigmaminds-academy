@@ -1,7 +1,7 @@
 export default function HeatTransferDiagram() {
   return (
     <div className="w-full max-w-xl mx-auto my-6">
-      <svg viewBox="0 0 540 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three modes of heat transfer: conduction, convection, and radiation">
+      <svg viewBox="0 0 567 234" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three modes of heat transfer: conduction, convection, and radiation">
         <defs>
           {/* Conduction: red-to-blue gradient along spoon */}
           <linearGradient id="ht-spoon-grad" x1="0" y1="0" x2="1" y2="0">

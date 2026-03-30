@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useCallback, useEffect, ReactNode } from 'react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from './AuthContext';
+import { getLessonBySlug } from '../data/lessons';
 
 interface LessonProgress {
   slug: string;
@@ -52,6 +53,29 @@ function saveLocal(progress: Record<string, LessonProgress>) {
   localStorage.setItem('tma_progress', JSON.stringify(progress));
 }
 
+async function saveToSupabase(userId: string, slug: string, levelsCompleted: number[], completedAt?: string) {
+  const lesson = getLessonBySlug(slug);
+  if (!lesson) {
+    console.error(`[Progress] Unknown lesson slug: ${slug}`);
+    return;
+  }
+  try {
+    const { error } = await supabase.from('user_progress').upsert({
+      user_id: userId,
+      lesson_id: lesson.id,
+      lesson_slug: slug,
+      levels_completed: levelsCompleted,
+      completed_at: completedAt,
+    }, { onConflict: 'user_id,lesson_id' });
+
+    if (error) {
+      console.error(`[Progress] Failed to save ${slug}:`, error.message);
+    }
+  } catch (err) {
+    console.error(`[Progress] Network error saving ${slug}:`, err);
+  }
+}
+
 export function ProgressProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth();
   const [progress, setProgress] = useState<Record<string, LessonProgress>>(loadLocal);
@@ -69,68 +93,66 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
 
     const loadFromSupabase = async () => {
       setSyncing(true);
-      const { data } = await supabase
-        .from('user_progress')
-        .select('*')
-        .eq('user_id', user.id);
+      try {
+        const { data, error } = await supabase
+          .from('user_progress')
+          .select('*')
+          .eq('user_id', user.id);
 
-      if (data && data.length > 0) {
-        const dbProgress: Record<string, LessonProgress> = {};
-        for (const row of data) {
-          dbProgress[row.lesson_slug] = {
-            slug: row.lesson_slug,
-            levelsCompleted: row.levels_completed || [],
-            completedAt: row.completed_at,
-          };
+        if (error) {
+          console.error('[Progress] Failed to load from Supabase:', error.message);
+          setSyncing(false);
+          return;
         }
-        // Merge: take the union of local and DB progress
-        const local = loadLocal();
-        const merged: Record<string, LessonProgress> = { ...dbProgress };
-        for (const [slug, localP] of Object.entries(local)) {
-          if (merged[slug]) {
-            // Union of completed levels
-            const combined = new Set([...merged[slug].levelsCompleted, ...localP.levelsCompleted]);
-            merged[slug].levelsCompleted = Array.from(combined).sort();
-          } else {
-            merged[slug] = localP;
+
+        if (data && data.length > 0) {
+          const dbProgress: Record<string, LessonProgress> = {};
+          for (const row of data) {
+            dbProgress[row.lesson_slug] = {
+              slug: row.lesson_slug,
+              levelsCompleted: row.levels_completed || [],
+              completedAt: row.completed_at,
+            };
+          }
+          // Merge: take the union of local and DB progress
+          const local = loadLocal();
+          const merged: Record<string, LessonProgress> = { ...dbProgress };
+          for (const [slug, localP] of Object.entries(local)) {
+            if (merged[slug]) {
+              const combined = new Set([...merged[slug].levelsCompleted, ...localP.levelsCompleted]);
+              merged[slug].levelsCompleted = Array.from(combined).sort();
+            } else {
+              merged[slug] = localP;
+            }
+          }
+          setProgress(merged);
+          saveLocal(merged);
+
+          // Push merged back to Supabase
+          for (const [slug, p] of Object.entries(merged)) {
+            await saveToSupabase(user.id, slug, p.levelsCompleted, p.completedAt);
+          }
+        } else {
+          // No DB data — push local to Supabase
+          const local = loadLocal();
+          for (const [slug, p] of Object.entries(local)) {
+            await saveToSupabase(user.id, slug, p.levelsCompleted, p.completedAt);
           }
         }
-        setProgress(merged);
-        saveLocal(merged);
 
-        // Push merged back to Supabase
-        for (const [slug, p] of Object.entries(merged)) {
-          await supabase.from('user_progress').upsert({
-            user_id: user.id,
-            lesson_slug: slug,
-            levels_completed: p.levelsCompleted,
-            completed_at: p.completedAt,
-          }, { onConflict: 'user_id,lesson_slug' });
+        // Sync student name from profile
+        const { data: profile } = await supabase
+          .from('user_profiles')
+          .select('display_name')
+          .eq('id', user.id)
+          .maybeSingle();
+        if (profile?.display_name) {
+          setStudentNameState(profile.display_name);
+          localStorage.setItem('tma_student_name', profile.display_name);
         }
-      } else {
-        // No DB data — push local to Supabase
-        const local = loadLocal();
-        for (const [slug, p] of Object.entries(local)) {
-          await supabase.from('user_progress').upsert({
-            user_id: user.id,
-            lesson_slug: slug,
-            levels_completed: p.levelsCompleted,
-            completed_at: p.completedAt,
-          }, { onConflict: 'user_id,lesson_slug' });
-        }
+      } catch (err) {
+        console.error('[Progress] Sync error:', err);
       }
-
-      // Sync student name from profile
-      const { data: profile } = await supabase
-        .from('user_profiles')
-        .select('display_name')
-        .eq('id', user.id)
-        .maybeSingle();
-      if (profile?.display_name) {
-        setStudentNameState(profile.display_name);
-        localStorage.setItem('tma_student_name', profile.display_name);
-      }
-
       setSyncing(false);
     };
 
@@ -153,12 +175,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
 
       // Sync to Supabase if authenticated
       if (user) {
-        supabase.from('user_progress').upsert({
-          user_id: user.id,
-          lesson_slug: slug,
-          levels_completed: levelsCompleted,
-          completed_at: completedAt,
-        }, { onConflict: 'user_id,lesson_slug' });
+        saveToSupabase(user.id, slug, levelsCompleted, completedAt);
       }
 
       return newProgress;
@@ -190,7 +207,12 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     setProgress({});
     saveLocal({});
     if (user) {
-      await supabase.from('user_progress').delete().eq('user_id', user.id);
+      try {
+        const { error } = await supabase.from('user_progress').delete().eq('user_id', user.id);
+        if (error) console.error('[Progress] Failed to reset:', error.message);
+      } catch (err) {
+        console.error('[Progress] Network error on reset:', err);
+      }
     }
   }, [user]);
 

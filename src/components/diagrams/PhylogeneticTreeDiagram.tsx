@@ -1,7 +1,7 @@
 export default function PhylogeneticTreeDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 500 350" className="w-full max-w-lg mx-auto" role="img" aria-label="Phylogenetic tree showing branching from common ancestor to bacteria, archaea, plants, fungi, and animals">
+      <svg viewBox="0 0 605 395" className="w-full max-w-lg mx-auto" role="img" aria-label="Phylogenetic tree showing branching from common ancestor to bacteria, archaea, plants, fungi, and animals">
         <text x="250" y="25" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="14" fontWeight="bold">Tree of Life (Simplified)</text>
 
         {/* Root / Common ancestor */}

@@ -161,7 +161,7 @@ export default function StdDevDiagram() {
           fontWeight="600"
           fill={labelColor}
         >
-          {'\u03C3'} = {Math.round(sd * 10) / 10}
+          {'σ'} = {Math.round(sd * 10) / 10}
         </text>
 
         {/* Band edge labels */}
@@ -196,7 +196,7 @@ export default function StdDevDiagram() {
           fontWeight="600"
           className="fill-gray-500 dark:fill-gray-400"
         >
-          {'\u00B1'}1{'\u03C3'} band
+          {'±'}1{'σ'} band
         </text>
       </g>
     );
@@ -233,7 +233,7 @@ export default function StdDevDiagram() {
           fontSize="10"
           className="fill-gray-400 dark:fill-gray-500"
         >
-          Tight cluster = low {'\u03C3'} &nbsp;&nbsp;|&nbsp;&nbsp; Wide scatter = high {'\u03C3'}
+          Tight cluster = low {'σ'} &nbsp;&nbsp;|&nbsp;&nbsp; Wide scatter = high {'σ'}
         </text>
       </svg>
     </div>

@@ -22,7 +22,7 @@ export default function ParticleModelDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 540 200" className="w-full max-w-xl mx-auto" role="img" aria-label="Particle model showing solid, liquid, and gas states">
+      <svg viewBox="0 0 575 247" className="w-full max-w-xl mx-auto" role="img" aria-label="Particle model showing solid, liquid, and gas states">
         {/* Solid container */}
         <rect x="15" y="40" width="140" height="130" rx="4" fill="none" className="stroke-gray-400 dark:stroke-gray-500" strokeWidth="1.5" />
         <text x="85" y="30" textAnchor="middle" className="fill-blue-600 dark:fill-blue-400" fontSize="12" fontWeight="bold">Solid</text>

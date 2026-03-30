@@ -1,15 +1,131 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Clock, BookOpen, CheckCircle, Plus, X, Download, ArrowRight } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { lessons, SUBJECTS, Subject } from '../data/lessons';
+import { lessons, SUBJECTS, Subject, getLessonBySlug } from '../data/lessons';
 import { useProgress } from '../contexts/ProgressContext';
+import { useAuth } from '../contexts/AuthContext';
+import { supabase } from '../lib/supabase';
+
+interface PlanEntry {
+  id: number;       // stable lesson ID
+  slug: string;     // for display/routing
+  addedAt: string;
+}
+
+// Runtime map: slug → { id, addedAt }
+type PlanMap = Map<string, { id: number; addedAt: string }>;
+
+function loadPlanLocal(): PlanMap {
+  try {
+    const saved = localStorage.getItem('tma_plan');
+    if (!saved) return new Map();
+    const raw = JSON.parse(saved);
+    // Handle old formats
+    if (Array.isArray(raw) && raw.length > 0) {
+      const now = new Date().toISOString();
+      if (typeof raw[0] === 'string') {
+        // v1: plain string array of slugs
+        const map: PlanMap = new Map();
+        for (const slug of raw as string[]) {
+          const lesson = getLessonBySlug(slug);
+          if (lesson) map.set(slug, { id: lesson.id, addedAt: now });
+        }
+        return map;
+      }
+      if (raw[0].slug && !raw[0].id) {
+        // v2: { slug, addedAt } without id
+        const map: PlanMap = new Map();
+        for (const entry of raw) {
+          const lesson = getLessonBySlug(entry.slug);
+          if (lesson) map.set(entry.slug, { id: lesson.id, addedAt: entry.addedAt || now });
+        }
+        return map;
+      }
+      // v3: current format { id, slug, addedAt }
+      return new Map((raw as PlanEntry[]).map(e => [e.slug, { id: e.id, addedAt: e.addedAt }]));
+    }
+    return new Map();
+  } catch { return new Map(); }
+}
+
+function entriesToJSON(plan: PlanMap): PlanEntry[] {
+  return [...plan.entries()].map(([slug, { id, addedAt }]) => ({ id, slug, addedAt }));
+}
+
+function savePlanLocal(plan: PlanMap) {
+  localStorage.setItem('tma_plan', JSON.stringify(entriesToJSON(plan)));
+}
+
+async function savePlanDB(userId: string, plan: PlanMap) {
+  try {
+    const { error } = await supabase.from('user_plans').upsert({
+      user_id: userId,
+      lesson_entries: entriesToJSON(plan),
+      updated_at: new Date().toISOString(),
+    }, { onConflict: 'user_id' });
+    if (error) console.error('[Plan] Failed to save:', error.message);
+  } catch (err) {
+    console.error('[Plan] Network error:', err);
+  }
+}
 
 export default function LessonPlanPage() {
-  const [selectedSlugs, setSelectedSlugs] = useState<Set<string>>(new Set());
+  const { user } = useAuth();
+  const [planMap, setPlanMap] = useState<PlanMap>(loadPlanLocal);
   const [filterSubject, setFilterSubject] = useState<Subject | null>(null);
   const { isStoryComplete, isLevelComplete } = useProgress();
+
+  // Load plan from Supabase when user signs in
+  useEffect(() => {
+    if (!user) return;
+    (async () => {
+      try {
+        const { data, error } = await supabase
+          .from('user_plans')
+          .select('lesson_entries')
+          .eq('user_id', user.id)
+          .maybeSingle();
+        if (error) {
+          console.error('[Plan] Failed to load:', error.message);
+          return;
+        }
+        if (data?.lesson_entries?.length) {
+          const dbEntries: PlanEntry[] = data.lesson_entries;
+          const dbMap: PlanMap = new Map(dbEntries.map(e => [e.slug, { id: e.id, addedAt: e.addedAt }]));
+          const local = loadPlanLocal();
+          // Merge: keep earliest addedAt for each slug
+          const merged: PlanMap = new Map(dbMap);
+          for (const [slug, val] of local) {
+            if (!merged.has(slug) || val.addedAt < merged.get(slug)!.addedAt) {
+              merged.set(slug, val);
+            }
+          }
+          setPlanMap(merged);
+          savePlanLocal(merged);
+          if (merged.size !== dbMap.size) {
+            await savePlanDB(user.id, merged);
+          }
+        } else {
+          // No DB data — push local to DB
+          const local = loadPlanLocal();
+          if (local.size > 0) {
+            await savePlanDB(user.id, local);
+          }
+        }
+      } catch (err) {
+        console.error('[Plan] Sync error:', err);
+      }
+    })();
+  }, [user]);
+
+  const savePlan = useCallback((plan: PlanMap) => {
+    savePlanLocal(plan);
+    if (user) savePlanDB(user.id, plan);
+  }, [user]);
+
+  const selectedSlugs = new Set(planMap.keys());
 
   const availableLessons = lessons.filter(l =>
     !filterSubject || l.subjects?.includes(filterSubject)
@@ -20,24 +136,35 @@ export default function LessonPlanPage() {
   const completedInPlan = selectedLessons.filter(l => isStoryComplete(l.slug)).length;
 
   const toggleLesson = (slug: string) => {
-    setSelectedSlugs(prev => {
-      const next = new Set(prev);
-      if (next.has(slug)) next.delete(slug);
-      else next.add(slug);
+    setPlanMap(prev => {
+      const next = new Map(prev);
+      if (next.has(slug)) {
+        next.delete(slug);
+      } else {
+        const lesson = getLessonBySlug(slug);
+        if (lesson) next.set(slug, { id: lesson.id, addedAt: new Date().toISOString() });
+      }
+      savePlan(next);
       return next;
     });
   };
 
   const selectAllInSubject = (subject: Subject) => {
-    const slugs = lessons.filter(l => l.subjects?.includes(subject)).map(l => l.slug);
-    setSelectedSlugs(prev => {
-      const next = new Set(prev);
-      slugs.forEach(s => next.add(s));
+    const inSubject = lessons.filter(l => l.subjects?.includes(subject));
+    setPlanMap(prev => {
+      const next = new Map(prev);
+      const now = new Date().toISOString();
+      inSubject.forEach(l => { if (!next.has(l.slug)) next.set(l.slug, { id: l.id, addedAt: now }); });
+      savePlan(next);
       return next;
     });
   };
 
-  const clearAll = () => setSelectedSlugs(new Set());
+  const clearAll = () => {
+    const empty: PlanMap = new Map();
+    setPlanMap(empty);
+    savePlan(empty);
+  };
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">

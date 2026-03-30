@@ -1,7 +1,7 @@
 export default function PhotosynthesisDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 500 320" className="w-full max-w-lg mx-auto" role="img" aria-label="Photosynthesis diagram">
+      <svg viewBox="0 0 570 365" className="w-full max-w-lg mx-auto" role="img" aria-label="Photosynthesis diagram">
         {/* Sun */}
         <circle cx="400" cy="50" r="30" className="fill-yellow-400" />
         {[0, 45, 90, 135, 180, 225, 270, 315].map(angle => {

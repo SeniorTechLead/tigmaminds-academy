@@ -1,0 +1,66 @@
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { supabase } from '../lib/supabase';
+
+interface LessonMeta {
+  id: number;
+  slug: string;
+  is_demo: boolean;
+  is_published: boolean;
+}
+
+interface LessonMetaContextType {
+  isDemoStory: (slug: string) => boolean;
+  isPublished: (slug: string) => boolean;
+  loading: boolean;
+}
+
+const LessonMetaContext = createContext<LessonMetaContextType>({
+  isDemoStory: () => false,
+  isPublished: () => true,
+  loading: true,
+});
+
+export function LessonMetaProvider({ children }: { children: ReactNode }) {
+  const [demoSlugs, setDemoSlugs] = useState<Set<string> | null>(new Set());
+  const [publishedSlugs, setPublishedSlugs] = useState<Set<string>>(new Set());
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data, error } = await supabase
+          .from('lessons')
+          .select('slug, is_demo, is_published');
+
+        if (error || !data || data.length === 0) {
+          if (error) console.error('[LessonMeta] Failed to load:', error.message);
+          // Fallback: treat all lessons as demos so nothing is locked
+          setDemoSlugs(null); // null signals "no DB data, allow all"
+          setLoading(false);
+          return;
+        }
+
+        setDemoSlugs(new Set(data.filter((l: LessonMeta) => l.is_demo).map((l: LessonMeta) => l.slug)));
+        setPublishedSlugs(new Set(data.filter((l: LessonMeta) => l.is_published).map((l: LessonMeta) => l.slug)));
+      } catch (err) {
+        console.error('[LessonMeta] Network error:', err);
+        setDemoSlugs(null);
+      }
+      setLoading(false);
+    })();
+  }, []);
+
+  return (
+    <LessonMetaContext.Provider value={{
+      isDemoStory: (slug: string) => demoSlugs === null || demoSlugs.has(slug),
+      isPublished: (slug: string) => publishedSlugs.has(slug),
+      loading,
+    }}>
+      {children}
+    </LessonMetaContext.Provider>
+  );
+}
+
+export function useLessonMeta() {
+  return useContext(LessonMetaContext);
+}
