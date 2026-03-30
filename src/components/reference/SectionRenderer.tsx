@@ -9,6 +9,8 @@ import TonePlayer from '../interactive/TonePlayer';
 import IntervalPlayer from '../interactive/IntervalPlayer';
 import BeatMachine from '../interactive/BeatMachine';
 import HarmonicsExplorer from '../interactive/HarmonicsExplorer';
+import GaussianExplorer from '../interactive/GaussianExplorer';
+import ContourExplainer from '../interactive/ContourExplainer';
 
 /**
  * Render inline markdown: **bold** and `code`.
@@ -166,6 +168,10 @@ function renderInteractive(config: NonNullable<ReferenceSection['interactive']>)
       return <BeatMachine />;
     case 'harmonics-explorer':
       return <HarmonicsExplorer />;
+    case 'gaussian-explorer':
+      return <GaussianExplorer />;
+    case 'contour-explainer':
+      return <ContourExplainer />;
     default:
       return null;
   }
