@@ -56,7 +56,7 @@ export default function FishJumpReasonsDiagram() {
       <path d="M341,190 L360,178 L360,202 Z" className="fill-gray-100 dark:fill-gray-800" stroke="#6b7280" strokeWidth="1" />
       <circle cx="265" cy="186" r="3" className="fill-gray-500 dark:fill-gray-400" />
       <text x="296" y="194" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-gray-600 dark:fill-gray-300">
-        \u{1F41F}
+        🐟
       </text>
 
       {/* Reason cards — 2x2 grid */}

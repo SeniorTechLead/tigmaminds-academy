@@ -43,7 +43,7 @@ export interface Lesson {
   estimatedHours?: number;
   playground?: string;
   level0?: {
-    concepts: { title: string; paragraphs: string[]; diagram?: string; keyIdea: string }[];
+    concepts: { title: string; paragraphs: string[]; diagram?: string; keyIdea: string; checkYourself?: string; checkAnswer?: string }[];
     vocabulary?: [string, string][];
     trueFalse?: { statement: string; isTrue: boolean; explanation: string }[];
     facts?: string[];

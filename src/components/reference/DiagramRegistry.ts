@@ -1060,6 +1060,12 @@ const registry: Record<string, ComponentType> = {
   HilsaPopulationDiagram,
   HilsaRiverHealthDiagram,
   ActivityFishCountDiagram,
+  // Why Fish Jump in the Barak River
+  FishOxygenDiagram,
+  FishJumpReasonsDiagram,
+  FishBiomechanicsDiagram,
+  FishRiverHealthDiagram,
+  ActivityFishObserveDiagram,
   // NE India: The Bridge That Grew
   BridgeRootGrowthDiagram,
   BridgeTensileStrengthDiagram,
