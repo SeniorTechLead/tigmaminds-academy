@@ -2098,6 +2098,43 @@ plt.show()`,
         diagram: 'DecisionTreeDiagram',
       },
       {
+        title: 'The Gaussian Distribution — The Shape of Uncertainty',
+        content:
+          'When you measure anything natural — heights of students, sensor readings from elephants, ' +
+          'temperatures across a week — and plot how often each value occurs, the shape almost always ' +
+          'looks like a bell. Most values cluster near the average, and extreme values are rare.\n\n' +
+          'This "bell curve" is the **Gaussian (normal) distribution**, and it is the single most ' +
+          'important shape in all of statistics and machine learning. Two numbers fully describe it: ' +
+          'the **mean** (μ, the center) and the **standard deviation** (σ, the spread).\n\n' +
+          'With two variables (say, frequency and amplitude of elephant rumbles), the Gaussian becomes ' +
+          'a 3D hill viewed from above as contour ellipses. If the variables are **correlated** (high ' +
+          'frequency tends to come with high amplitude), the ellipses tilt. Understanding this shape ' +
+          'is essential — almost every ML algorithm assumes or builds on Gaussian distributions.',
+        goDeeper:
+          'The univariate Gaussian PDF is f(x) = (1/σ√2π) × e^(-(x-μ)²/2σ²). The key insight: 68% of data falls within ±1σ of the mean, 95% within ±2σ, and 99.7% within ±3σ (the "68-95-99.7 rule"). For two variables, the bivariate Gaussian introduces a **correlation coefficient** ρ that controls how the ellipse tilts. When ρ=0, variables are independent and the contours are axis-aligned. The covariance matrix Σ encodes both the spread (σ values) and the correlation (ρ). Its eigenvectors are the principal axes of the ellipse — the "natural" directions of the data.',
+        advanced:
+          'The multivariate Gaussian in k dimensions: f(x) = (2π)^(-k/2) |Σ|^(-1/2) exp(-½(x-μ)ᵀΣ⁻¹(x-μ)). The quadratic form (x-μ)ᵀΣ⁻¹(x-μ) is the **Mahalanobis distance** squared — a distance metric that accounts for correlation and scale. Points at equal Mahalanobis distance form ellipsoids. The precision matrix Σ⁻¹ appears in Gaussian Naive Bayes, Gaussian Mixture Models, and the loss functions of many deep learning systems. PCA is equivalent to rotating coordinates to diagonalize Σ — the eigenvectors become the new axes and the eigenvalues the variance along each.',
+        interactive: { type: 'gaussian-explorer' as const, props: {} },
+      },
+      {
+        title: 'Contour Plots — Seeing Probability from Above',
+        content:
+          'A contour plot is what you get when you look straight down at a 3D surface. If you have ever ' +
+          'used a hiking trail map with elevation lines, you already understand contour plots.\n\n' +
+          'In ML, the "mountain" is a probability distribution. The peak is where data points are most ' +
+          'likely to appear. The contour lines mark equal-probability boundaries — like elevation rings ' +
+          'on a mountain. When a classifier says "95% confident," it means the data point falls inside ' +
+          'the innermost contour ring of its predicted class.\n\n' +
+          'The shape of the contour tells you about the data: circular contours mean two features are ' +
+          'independent. Tilted ellipses mean they are correlated. A narrow ellipse along one axis means ' +
+          'most of the variation is in that direction — which is exactly what PCA finds.',
+        goDeeper:
+          'Decision boundaries in Gaussian classifiers follow from equating the log-likelihoods of two classes: log p(x|class A) = log p(x|class B). For equal covariance matrices, this simplifies to a **linear boundary** (LDA). For unequal covariances, the boundary becomes **quadratic** (QDA) — a curve that follows the shape of the contours. Gaussian Mixture Models allow each class to have multiple Gaussian components, creating complex multi-modal decision regions.',
+        advanced:
+          'The information geometry viewpoint: the space of Gaussian distributions forms a Riemannian manifold where the Fisher information matrix defines the metric. The KL divergence between two Gaussians: KL(p||q) = \u00BD[tr(\u03A3q\u207B\u00B9\u03A3p) + (\u03BCq-\u03BCp)\u1D40\u03A3q\u207B\u00B9(\u03BCq-\u03BCp) - k + ln(|\u03A3q|/|\u03A3p|)]. Contour plot visualization is the primary diagnostic tool for variational inference, where the approximate posterior (often a Gaussian) is compared against the true posterior. In normalizing flows, a simple Gaussian is warped through invertible transformations — the contour plot evolves from circles to arbitrarily complex shapes.',
+        interactive: { type: 'contour-explainer' as const, props: {} },
+      },
+      {
         title: 'Linear Classifiers — Drawing a Line Between Classes',
         content:
           'The simplest classifier just draws a straight line (in 2D) or a flat plane (in higher ' +
@@ -3225,6 +3262,21 @@ void loop() {
             ],
           },
         },
+      },
+      {
+        title: 'Contour Plots — Reading 3D Data on a Flat Page',
+        content:
+          'A contour plot is a top-down view of a 3D surface — exactly like a topographic hiking map. ' +
+          'If you can read elevation lines on a trail map, you already know how to read a statistical ' +
+          'contour plot. Close-together lines mean a steep slope (values change rapidly). Far-apart ' +
+          'lines mean a gentle slope. In statistics, the "mountain" is a probability distribution: ' +
+          'the peak is where data is most likely, the edges are where data is rare. When two variables ' +
+          'are correlated, the contour circles stretch into tilted ellipses — the tilt IS the correlation.',
+        goDeeper:
+          'A contour line connects all points at the same value of a function f(x,y). For a bivariate Gaussian, contour lines are ellipses defined by (x-\u03BC)\u1D40\u03A3\u207B\u00B9(x-\u03BC) = c for constant c. The **eigenvalues** of the covariance matrix \u03A3 determine the lengths of the ellipse axes, and the **eigenvectors** determine the tilt angle. When \u03C1=0, the eigenvalues are \u03C3\u2093\u00B2 and \u03C3\u1D67\u00B2 and the axes are aligned with x and y. When \u03C1\u22600, the major axis tilts at angle \u03B8 = \u00BD arctan(2\u03C1\u03C3\u2093\u03C3\u1D67/(\u03C3\u2093\u00B2-\u03C3\u1D67\u00B2)). The Mahalanobis distance from the center to any contour line determines the probability enclosed within that contour.',
+        advanced:
+          'In higher dimensions, contour "lines" become contour **surfaces** (hyperellipsoids). Gaussian Mixture Models (GMMs) combine multiple Gaussians, each with its own mean, covariance, and weight — the resulting contour plot shows multiple overlapping elliptical regions. The EM algorithm iteratively refines these parameters. In Bayesian inference, posterior contour plots reveal parameter uncertainty: the 95% **credible region** (the contour enclosing 95% of the posterior mass) is the Bayesian analog of a confidence interval. Kernel Density Estimation produces non-parametric contour plots from raw data — useful when the true distribution is not Gaussian.',
+        interactive: { type: 'contour-explainer' as const, props: {} },
       },
     ],
 
