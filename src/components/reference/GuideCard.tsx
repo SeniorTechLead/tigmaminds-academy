@@ -19,6 +19,7 @@ interface Props {
   defaultTab?: 'understand' | 'build';
   expandedSlug?: string | null;
   searchQuery?: string;
+  level?: 0 | 1 | 2;
 }
 
 function getMatchingSnippets(guide: ReferenceGuide, query: string): { sectionTitle: string; snippet: string }[] {
@@ -45,7 +46,7 @@ function getMatchingSnippets(guide: ReferenceGuide, query: string): { sectionTit
   return results;
 }
 
-export default function GuideCard({ guide, defaultTab = 'understand', expandedSlug, searchQuery = '' }: Props) {
+export default function GuideCard({ guide, defaultTab = 'understand', expandedSlug, searchQuery = '', level = 0 }: Props) {
   const [isExpanded, setIsExpanded] = useState(expandedSlug === guide.slug);
   const category = REFERENCE_CATEGORIES.find((c) => c.key === guide.category);
   const allSections = [...guide.understand, ...(guide.build || [])];
@@ -139,7 +140,7 @@ export default function GuideCard({ guide, defaultTab = 'understand', expandedSl
           <div className="space-y-1">
             {allSections.map((section, i) => (
               <div key={i} id={`section-${guide.slug}-${i}`} className="scroll-mt-20">
-                <SectionRenderer section={section} />
+                <SectionRenderer section={section} level={level} />
               </div>
             ))}
           </div>

@@ -6,12 +6,24 @@ import Footer from '../components/Footer';
 import GuideCard from '../components/reference/GuideCard';
 import { references, REFERENCE_CATEGORIES, type ReferenceGuide, type CategoryGroup } from '../data/reference';
 
+export type ReferenceLevel = 0 | 1 | 2;  // 0=Listener, 1=Explorer/Builder, 2=Engineer/Creator
+
+const LEVEL_OPTIONS: { value: ReferenceLevel; label: string; desc: string }[] = [
+  { value: 0, label: 'Beginner', desc: 'Analogies & basics' },
+  { value: 1, label: 'Intermediate', desc: 'Formulas & calculations' },
+  { value: 2, label: 'Advanced', desc: 'Research-level depth' },
+];
+
 export default function ReferencePage() {
   const { slug } = useParams<{ slug?: string }>();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [showIndex, setShowIndex] = useState(false);
   const [jumpToSlug, setJumpToSlug] = useState<string | null>(null);
+  const [level, setLevel] = useState<ReferenceLevel>(() => {
+    const saved = localStorage.getItem('tma_ref_level');
+    return saved ? (parseInt(saved) as ReferenceLevel) : 0;
+  });
 
   // Scroll to target after filters clear and DOM re-renders
   useEffect(() => {
@@ -96,8 +108,9 @@ export default function ReferencePage() {
             <GuideCard
               key={guide.slug}
               guide={guide}
-                            expandedSlug={slug || null}
+              expandedSlug={slug || null}
               searchQuery={searchQuery}
+              level={level}
             />
           ))}
         </div>
@@ -144,6 +157,25 @@ export default function ReferencePage() {
               <CategoryPills cats={codingCats} />
             </div>
           </div>
+          {/* Level selector */}
+          <div className="mt-4 flex items-center justify-center gap-1">
+            <span className="text-xs text-gray-500 dark:text-gray-400 mr-2">Depth:</span>
+            {LEVEL_OPTIONS.map(opt => (
+              <button
+                key={opt.value}
+                onClick={() => { setLevel(opt.value); localStorage.setItem('tma_ref_level', String(opt.value)); }}
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                  level === opt.value
+                    ? 'bg-amber-500 text-white shadow-md'
+                    : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
+                }`}
+                title={opt.desc}
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
+
           {/* Index toggle */}
           <div className="mt-4">
             <button
