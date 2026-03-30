@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import type { ReferenceSection } from '../../data/reference';
 import diagramRegistry from './DiagramRegistry';
 import DiagramZoom from '../DiagramZoom';
@@ -174,32 +173,10 @@ function renderInteractive(config: NonNullable<ReferenceSection['interactive']>)
 
 interface Props {
   section: ReferenceSection;
+  level?: 0 | 1 | 2;
 }
 
-function DepthTier({ label, icon, color, children }: { label: string; icon: string; color: string; children: React.ReactNode }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <div className={`mt-3 rounded-lg border ${color} overflow-hidden`}>
-      <button
-        onClick={() => setOpen(!open)}
-        className={`w-full flex items-center gap-2 px-3 py-2 text-left text-sm font-semibold transition-colors ${color}`}
-      >
-        <span>{icon}</span>
-        <span>{label}</span>
-        <svg className={`w-4 h-4 ml-auto transition-transform ${open ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
-      {open && (
-        <div className="px-3 pb-3 pt-1">
-          {children}
-        </div>
-      )}
-    </div>
-  );
-}
-
-export default function SectionRenderer({ section }: Props) {
+export default function SectionRenderer({ section, level = 0 }: Props) {
   const DiagramComponent = section.diagram ? diagramRegistry[section.diagram] : null;
 
   return (
@@ -208,29 +185,27 @@ export default function SectionRenderer({ section }: Props) {
         {section.title}
       </h4>
 
-      {/* Level 0 content — everyone reads this */}
+      {/* Level 0: Beginner — everyone sees this */}
       {section.content && renderContent(section.content)}
 
-      {/* Level 1-2: Go Deeper — formulas, calculations */}
-      {section.goDeeper && (
-        <DepthTier
-          label="Go Deeper"
-          icon="🔬"
-          color="border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300"
-        >
+      {/* Level 1: Intermediate — formulas, calculations */}
+      {level >= 1 && section.goDeeper && (
+        <div className="mt-3 pl-3 border-l-2 border-blue-300 dark:border-blue-700">
+          <div className="flex items-center gap-1.5 mb-1">
+            <span className="text-xs font-semibold text-blue-600 dark:text-blue-400">🔬 Going deeper</span>
+          </div>
           {renderContent(section.goDeeper)}
-        </DepthTier>
+        </div>
       )}
 
-      {/* Level 3-4: Advanced — derivations, research */}
-      {section.advanced && (
-        <DepthTier
-          label="Advanced"
-          icon="🚀"
-          color="border-purple-200 dark:border-purple-800 bg-purple-50/50 dark:bg-purple-950/30 text-purple-700 dark:text-purple-300"
-        >
+      {/* Level 2: Advanced — derivations, research */}
+      {level >= 2 && section.advanced && (
+        <div className="mt-3 pl-3 border-l-2 border-purple-300 dark:border-purple-700">
+          <div className="flex items-center gap-1.5 mb-1">
+            <span className="text-xs font-semibold text-purple-600 dark:text-purple-400">🚀 Advanced</span>
+          </div>
           {renderContent(section.advanced)}
-        </DepthTier>
+        </div>
       )}
 
       {/* Code block */}
