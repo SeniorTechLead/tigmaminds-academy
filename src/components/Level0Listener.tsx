@@ -9,6 +9,8 @@ import TrueFalse from './interactive/TrueFalse';
 import DidYouKnow from './interactive/DidYouKnow';
 import diagramRegistry from './reference/DiagramRegistry';
 import DiagramZoom from './DiagramZoom';
+import { useAuth } from '../contexts/AuthContext';
+import SignUpGate from './SignUpGate';
 
 interface Props {
   lesson: Lesson;
@@ -53,6 +55,9 @@ export default function Level0Listener({ lesson }: Props) {
   const [showExplanation, setShowExplanation] = useState(false);
   const [score, setScore] = useState(0);
   const [completed, setCompleted] = useState(false);
+
+  const { user } = useAuth();
+  const isSignedIn = !!user;
 
   const concepts = lesson.level0?.concepts;
   const realWorldFacts: string[] = (lesson.stem as any)?.realWorld ?? [];
@@ -178,7 +183,7 @@ export default function Level0Listener({ lesson }: Props) {
       </ConceptCard>
 
       {/* ===== CONCEPT TEACHING SECTIONS ===== */}
-      {concepts && concepts.length > 0 && concepts.map((concept, ci) => {
+      {concepts && concepts.length > 0 && (isSignedIn ? concepts : concepts.slice(0, 2)).map((concept, ci) => {
         const DiagramComponent = concept.diagram ? diagramRegistry[concept.diagram] : null;
         return (
           <ConceptCard
@@ -239,6 +244,36 @@ export default function Level0Listener({ lesson }: Props) {
         );
       })}
 
+      {/* ===== SIGN-UP GATE (after first 2 concepts for non-signed-in users) ===== */}
+      {!isSignedIn && concepts && concepts.length > 2 && (
+        <div className="relative">
+          <SignUpGate message="Access all 130+ lessons, quizzes, interactive tools, and offline activities" />
+          {/* Blurred teaser of remaining content */}
+          <div className="mt-4 relative overflow-hidden" style={{ maxHeight: '100px' }}>
+            <div className="pointer-events-none select-none" style={{ filter: 'blur(6px)' }}>
+              {concepts.slice(2, 4).map((concept, ci) => (
+                <ConceptCard
+                  key={ci + 2}
+                  title={concept.title}
+                  icon={<Lightbulb className="w-6 h-6 text-amber-500" />}
+                >
+                  <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                    {concept.paragraphs[0]?.slice(0, 150)}...
+                  </p>
+                </ConceptCard>
+              ))}
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/60 to-white dark:via-gray-900/60 dark:to-gray-900" />
+          </div>
+        </div>
+      )}
+
+      {/* ===== Everything below is gated for non-signed-in users ===== */}
+      {!isSignedIn && (
+        <>{/* Gate reached — remaining sections hidden */}</>
+      )}
+
+      {isSignedIn && <>
       {/* ===== DID YOU KNOW FACTS ===== */}
       {(lesson.level0?.facts?.length || realWorldFacts.length > 0) && (
         <ConceptCard title="Did You Know?" icon={<Sparkles className="w-6 h-6 text-amber-500" />}>
@@ -473,6 +508,7 @@ export default function Level0Listener({ lesson }: Props) {
           )}
         </div>
       </div>
+      </>}
     </div>
   );
 }

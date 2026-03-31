@@ -12,6 +12,8 @@ import diagramRegistry from '../components/reference/DiagramRegistry';
 import DiagramZoom from '../components/DiagramZoom';
 import { useLessonMeta } from '../contexts/LessonMetaContext';
 import { Lock } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
+import SignUpGate from '../components/SignUpGate';
 
 type Level = 'listener' | 'explorer' | 'builder' | 'engineer' | 'creator';
 
@@ -21,11 +23,21 @@ export default function LessonPage() {
   const [activeLevel, setActiveLevelRaw] = useState<Level>('listener');
   const { markLevelComplete, isLevelComplete } = useProgress();
   const { isDemoStory } = useLessonMeta();
+  const { user } = useAuth();
+  const isSignedIn = !!user;
   const isDemo = lesson ? isDemoStory(lesson.slug) : false;
+
+  // Levels 1-4 require sign-in; non-demo stories also require enrollment
+  const isLevelLocked = (lvl: Level) => {
+    if (lvl === 'listener') return false;
+    if (!isSignedIn) return true;
+    if (!isDemo) return true;
+    return false;
+  };
 
   // Prevent setting a locked level
   const setActiveLevel = (lvl: Level) => {
-    if (lvl !== 'listener' && !isDemo) return;
+    if (isLevelLocked(lvl)) return;
     setActiveLevelRaw(lvl);
   };
 
@@ -205,7 +217,7 @@ export default function LessonPage() {
                 { key: 'engineer' as Level, label: 'Level 3: Engineer', desc: 'Advanced', color: 'rose' },
                 { key: 'creator' as Level, label: 'Level 4: Creator', desc: 'Capstone project', color: 'purple' },
               ]).map((lvl) => {
-                const locked = !isDemo && lvl.key !== 'listener';
+                const locked = isLevelLocked(lvl.key);
                 return (
                   <button
                     key={lvl.key}
@@ -227,7 +239,7 @@ export default function LessonPage() {
                       {lvl.label}
                     </span>
                     <span className={`block text-xs mt-0.5 ${locked ? 'text-gray-400 dark:text-gray-500' : activeLevel === lvl.key ? 'text-white/80' : 'text-gray-400'}`}>
-                      {locked ? 'Enroll to unlock' : lvl.desc}
+                      {locked ? (!isSignedIn ? 'Sign up to unlock' : 'Enroll to unlock') : lvl.desc}
                     </span>
                   </button>
                 );
@@ -236,8 +248,17 @@ export default function LessonPage() {
 
             {/* Level content — loaded dynamically per story */}
             {(() => {
-              const lockedLevel = !isDemo && activeLevel !== 'listener';
-              if (lockedLevel) {
+              const locked = isLevelLocked(activeLevel);
+              if (locked) {
+                // Non-signed-in users see sign-up gate
+                if (!isSignedIn) {
+                  return (
+                    <div className="max-w-lg mx-auto">
+                      <SignUpGate message="Sign up free to access Levels 1-4 with hands-on coding projects, mentorship, and real-world builds" />
+                    </div>
+                  );
+                }
+                // Signed-in but not enrolled (non-demo story)
                 return (
                   <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-12 text-center">
                     <Lock className="w-12 h-12 text-gray-400 dark:text-gray-500 mx-auto mb-4" />

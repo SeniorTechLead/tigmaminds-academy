@@ -3,6 +3,8 @@ import type { ReferenceGuide } from '../../data/reference';
 import { REFERENCE_CATEGORIES } from '../../data/reference';
 import SectionRenderer from './SectionRenderer';
 import StoryLinks from './StoryLinks';
+import { useAuth } from '../../contexts/AuthContext';
+import SignUpGate from '../SignUpGate';
 
 function highlightMatch(text: string, query: string): React.ReactNode {
   if (!query || query.length < 2) return text;
@@ -48,6 +50,8 @@ function getMatchingSnippets(guide: ReferenceGuide, query: string): { sectionTit
 
 export default function GuideCard({ guide, defaultTab = 'understand', expandedSlug, searchQuery = '', level = 0 }: Props) {
   const [isExpanded, setIsExpanded] = useState(expandedSlug === guide.slug);
+  const { user } = useAuth();
+  const isSignedIn = !!user;
   const category = REFERENCE_CATEGORIES.find((c) => c.key === guide.category);
   const allSections = [...guide.understand, ...(guide.build || [])];
   const matchingSnippets = getMatchingSnippets(guide, searchQuery);
@@ -138,11 +142,19 @@ export default function GuideCard({ guide, defaultTab = 'understand', expandedSl
 
           {/* All sections — understand + build combined */}
           <div className="space-y-1">
-            {allSections.map((section, i) => (
+            {(isSignedIn ? allSections : allSections.slice(0, 1)).map((section, i) => (
               <div key={i} id={`section-${guide.slug}-${i}`} className="scroll-mt-20">
                 <SectionRenderer section={section} level={level} />
               </div>
             ))}
+            {!isSignedIn && allSections.length > 1 && (
+              <div className="mt-3">
+                <SignUpGate
+                  message={`Sign up to read all ${allSections.length} sections`}
+                  compact
+                />
+              </div>
+            )}
           </div>
 
           {/* Related stories */}
