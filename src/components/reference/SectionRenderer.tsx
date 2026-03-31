@@ -11,6 +11,7 @@ import BeatMachine from '../interactive/BeatMachine';
 import HarmonicsExplorer from '../interactive/HarmonicsExplorer';
 import GaussianExplorer from '../interactive/GaussianExplorer';
 import ContourExplainer from '../interactive/ContourExplainer';
+import LogicGateSimulator from '../interactive/LogicGateSimulator';
 
 /**
  * Render inline markdown: **bold** and `code`.
@@ -172,6 +173,8 @@ function renderInteractive(config: NonNullable<ReferenceSection['interactive']>)
       return <GaussianExplorer />;
     case 'contour-explainer':
       return <ContourExplainer />;
+    case 'logic-gate-simulator':
+      return <LogicGateSimulator />;
     default:
       return null;
   }
