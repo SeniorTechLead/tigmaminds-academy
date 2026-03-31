@@ -5750,6 +5750,7 @@ To this very day, in the forests and fields of Assam and all across India, the p
       skills: ['Understand animal signaling theory: honest signals, costly displays, and sexual selection', 'Analyze barometric pressure changes as storm indicators', 'Model the relationship between weather variables and animal behavior', 'Design observational studies with controls and measurable outcomes'],
       project: {
         title: 'Correlate Animal Behavior with Weather Data',
+        outputDiagram: 'CorrelationDiagram',
         description: 'Collect local weather data and animal behavior observations to test whether animals really can predict rain.',
         steps: [
           'Set up a data collection sheet: date, temperature, humidity, barometric pressure, observed animal behavior',
@@ -5821,6 +5822,37 @@ To this very day, in the forests and fields of Assam and all across India, the p
         'The Indian peafowl is India\'s national bird. Peacocks have been symbols of beauty and royalty across cultures for thousands of years — they appear in ancient Greek mythology, Mughal art, and the royal courts of Southeast Asia.',
       ],
       offlineActivity: 'Investigate structural color vs. pigment color. Find a shiny object that shows different colors at different angles (a CD, a soap bubble, or an oil slick on water). Tilt it slowly and note how the colors change — this is structural color, the same principle as peacock feathers. Now compare with a painted object — its color stays the same from every angle because it uses pigments. Draw both and label which is structural and which is pigment-based. Can you find any other examples of structural color in nature?',
+      offlineActivityDiagram: 'ActivityIridescenceDiagram',
+      codeTeaser: `import matplotlib.pyplot as plt
+import numpy as np
+
+# Peacock tail eyespot count vs mating success
+eyespots = [120, 130, 140, 150, 155, 160, 165, 170]
+matings  = [0.5, 1.0, 1.8, 2.5, 3.1, 3.6, 4.0, 4.2]
+
+plt.figure(figsize=(8, 5))
+plt.scatter(eyespots, matings, color="purple", s=80)
+plt.xlabel("Number of Eyespots in Tail Fan")
+plt.ylabel("Average Matings per Season")
+plt.title("Do More Eyespots = More Mates?")
+plt.plot(eyespots, matings, "--", alpha=0.4, color="purple")
+plt.show()  # What shape is this relationship?`,
+      referenceLinks: [
+        { slug: 'evolution-and-natural-selection', reason: 'Sexual selection and the handicap principle — the evolutionary theory behind costly ornaments' },
+        { slug: 'light-and-color', reason: 'Thin-film interference and structural color — the physics behind iridescent feather colors' },
+      ],
+      nextLessons: [
+        { slug: 'kingfisher-blue', reason: 'Another story about structural color in feathers — nanostructures, not pigments, produce the blue' },
+        { slug: 'cuckoo-calls-dawn', reason: 'Bird behavior and circadian rhythms — another signal system in the avian world' },
+        { slug: 'frogs-sing-rain', reason: 'Animal communication through sound — vocal sacs as resonating chambers, like peacock infrasound' },
+      ],
+      quiz: [
+        { question: 'Why did Darwin say the peacock\'s tail "made him sick"?', options: ['He thought it was ugly', 'It contradicted natural selection — a costly trait that hinders survival', 'He was allergic to feathers', 'It was too colorful to study'], answer: 1 },
+        { question: 'How do peacock feathers produce their brilliant colors?', options: ['Blue and green pigments in the feather cells', 'Thin-film interference in nanostructured melanin layers', 'Reflected sunlight off oil on the feathers', 'Chemical dyes absorbed from food'], answer: 1 },
+        { question: 'What is the "handicap principle"?', options: ['Weaker animals survive longer', 'Costly traits honestly signal genetic quality because only fit males can afford them', 'All traits have hidden costs', 'Evolution produces useless features'], answer: 1 },
+        { question: 'Why does peacock feather color change with viewing angle?', options: ['The feather absorbs different colors', 'Thin-film interference changes which wavelength is reinforced at different angles', 'Your eyes adjust to different angles', 'Wind moves the feather barbules'], answer: 1 },
+        { question: 'What did Marion Petrie\'s research show?', options: ['Peahens choose randomly', 'Males with more eyespots fathered healthier chicks', 'Tail size has no effect on mating', 'Predators prefer larger tails'], answer: 1 },
+      ],
     },
   },
   {
@@ -6308,6 +6340,42 @@ And if you ever wonder why the cuckoo's call feels different from every other bi
         'Scientists discovered that birds can sense Earth\'s magnetic field using quantum mechanics — cryptochrome proteins in their eyes exploit quantum entanglement to detect magnetic field direction.',
       ],
       offlineActivity: 'Track your own circadian rhythm for five days. Record the exact times you feel sleepy, most alert, and hungry. Note when you wake naturally (without an alarm) on weekends versus school days. Plot your energy level (1-10) every two hours on a graph. Do you see a pattern? Compare your rhythm with a family member — are your peak alertness times the same or different?',
+      offlineActivityDiagram: 'ActivitySleepTrackDiagram',
+      codeTeaser: `import matplotlib.pyplot as plt
+import numpy as np
+
+# Sunrise time vs cuckoo first-call time across the year
+months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+          "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+sunrise_min = [395, 380, 360, 335, 315, 305,
+               310, 325, 340, 355, 375, 395]
+cuckoo_min  = [375, 360, 340, 315, 295, 285,
+               290, 305, 320, 335, 355, 375]
+
+plt.figure(figsize=(10, 5))
+plt.plot(months, sunrise_min, "o-", label="Sunrise", color="orange")
+plt.plot(months, cuckoo_min, "s-", label="Cuckoo first call", color="green")
+plt.ylabel("Time (minutes after midnight)")
+plt.title("Does the Cuckoo Call Before Sunrise?")
+plt.legend()
+plt.show()  # How many minutes before sunrise does it call?`,
+      referenceLinks: [
+        { slug: 'ecology-and-populations', reason: 'Brood parasitism and coevolutionary arms races between cuckoos and host species' },
+        { slug: 'genetics-and-dna', reason: 'How clock genes (CLOCK, BMAL1) create the molecular feedback loop driving circadian rhythms' },
+        { slug: 'magnetism-and-electromagnetism', reason: 'Magnetic navigation — cryptochrome proteins in bird eyes use quantum mechanics to detect Earth\'s field' },
+      ],
+      nextLessons: [
+        { slug: 'girl-who-spoke-to-elephants', reason: 'Animal communication through sound — elephants use infrasound, cuckoos use precisely timed calls' },
+        { slug: 'frogs-sing-rain', reason: 'Another species that times its calls to environmental cues — frogs sing when barometric pressure drops' },
+        { slug: 'peacocks-dance', reason: 'Bird signaling and display behavior — another layer of information encoded in avian communication' },
+      ],
+      quiz: [
+        { question: 'What is a circadian rhythm?', options: ['A type of music', 'A roughly 24-hour internal biological cycle', 'A seasonal migration pattern', 'A heartbeat rhythm'], answer: 1 },
+        { question: 'What is brood parasitism?', options: ['Birds building extra-large nests', 'Laying eggs in another species\' nest so the host raises your young', 'Two species sharing a nest cooperatively', 'Stealing food from other birds'], answer: 1 },
+        { question: 'How do cuckoo chicks ensure they get all the food?', options: ['They call louder', 'They push host eggs and chicks out of the nest', 'They grow camouflage', 'They hide from the parents'], answer: 1 },
+        { question: 'How do young cuckoos navigate during migration without parents?', options: ['They follow other bird species', 'They use innate magnetic, solar, and stellar compasses encoded in their genes', 'They memorize landmarks as eggs', 'They fly randomly until they find warm areas'], answer: 1 },
+        { question: 'Why does jet lag take days to recover from?', options: ['Airplanes damage your ears', 'Your circadian clock shifts by only about 1 hour per day', 'You forget what time zone you are in', 'Food is different in other countries'], answer: 1 },
+      ],
     },
   },
   {
@@ -6798,6 +6866,7 @@ Bamboo still grows faster than almost any plant on Earth. And teak still grows s
       skills: ['Understand cell elongation, turgor pressure, and the role of growth hormones (auxins, gibberellins)', 'Calculate growth rates and compare them across plant species', 'Model exponential vs linear growth phases in plants', 'Analyze how environmental factors (light, water, temperature) affect growth speed'],
       project: {
         title: 'Track and Model Plant Growth Rates',
+        outputDiagram: 'PopulationGrowthCurve',
         description: 'Measure the daily growth of a fast-growing plant and fit mathematical models to the data.',
         steps: [
           'Choose a fast-growing plant (bean sprout, bamboo shoot, or sunflower) and plant it',
@@ -6869,6 +6938,42 @@ Bamboo still grows faster than almost any plant on Earth. And teak still grows s
         'Tulsi (holy basil) contains eugenol, a natural antiseptic. Traditional medicine used it for centuries — modern science has confirmed its antimicrobial properties.',
       ],
       offlineActivity: 'Take a cutting from a plant (a small piece of stem with a few leaves). Place it in a glass of water on a windowsill. Check every day — within a week, you should see tiny roots forming. You\'re witnessing vegetative propagation — the same process that makes Tejimola\'s story biologically plausible.',
+      offlineActivityDiagram: 'ActivityBambooGrowthDiagram',
+      codeTeaser: `import matplotlib.pyplot as plt
+import numpy as np
+
+# Bamboo intercalary growth: 60 nodes growing at once!
+days = np.arange(0, 90)
+# Logistic growth curve: fast middle, slow start/end
+max_height = 30  # meters
+rate = 0.08
+midpoint = 40
+height = max_height / (1 + np.exp(-rate * (days - midpoint)))
+
+plt.figure(figsize=(10, 5))
+plt.plot(days, height, linewidth=2, color="green")
+plt.axhline(y=30, color="gray", linestyle="--", label="Max height (30m)")
+plt.xlabel("Days after shoot emerges")
+plt.ylabel("Height (meters)")
+plt.title("Bamboo Growth: 0 to 30m in 90 Days")
+plt.legend()
+plt.show()  # On which day is growth fastest?`,
+      referenceLinks: [
+        { slug: 'plant-biology', reason: 'Meristems, auxin, cell elongation, and turgor pressure — the biology behind bamboo\'s explosive growth' },
+        { slug: 'intro-to-calculus', reason: 'Exponential growth, logistic curves, and rates of change — the math that models bamboo\'s growth phases' },
+      ],
+      nextLessons: [
+        { slug: 'old-banyan-trees-stories', reason: 'A tree that grows for centuries vs bamboo that grows in months — two opposite strategies for survival' },
+        { slug: 'kaziranga-grass', reason: 'Another fast-growing plant using C4 photosynthesis — elephant grass in Kaziranga' },
+        { slug: 'bamboo-taught-wind', reason: 'The physics of bamboo — resonance, flexibility, and why bamboo bends without breaking' },
+      ],
+      quiz: [
+        { question: 'Why can bamboo grow so much faster than most trees?', options: ['It has deeper roots', 'It has meristems at every node, all growing simultaneously', 'It absorbs more sunlight', 'It has no leaves to slow it down'], answer: 1 },
+        { question: 'What drives cell elongation in bamboo?', options: ['Gravity pulling cells downward', 'Turgor pressure inflating cells while auxin loosens cell walls', 'Photosynthesis inside the stem', 'Wind stretching the cells'], answer: 1 },
+        { question: 'Why does bamboo eventually stop growing taller?', options: ['It runs out of auxin', 'Structural physics — taller culms would buckle under their own weight', 'The meristems die', 'It reaches the sunlight'], answer: 1 },
+        { question: 'What is intercalary growth?', options: ['Growth only at the tip', 'Growth from meristems at every node simultaneously', 'Growth at the roots only', 'Growth that happens at night'], answer: 1 },
+        { question: 'What gives mature bamboo its strength?', options: ['Thick bark', 'Lignin and silica deposited in cell walls over 3-5 years', 'Hollow center reduces weight', 'Deep root system'], answer: 1 },
+      ],
     },
   },
   {
@@ -8908,6 +9013,7 @@ Talo kept counting. He is still counting. His notebooks now fill an entire shelf
       skills: ['Design systematic data collection protocols: transect surveys, point counts', 'Apply basic statistical analysis: mean, median, standard deviation', 'Create data visualizations: bar charts, scatter plots, time series', 'Understand sampling bias and how to minimize it'],
       project: {
         title: 'Conduct a Butterfly Population Survey',
+        outputDiagram: 'MeanMedianModeDiagram',
         description: 'Design and carry out a citizen science survey counting butterflies in your area, then analyze the data for patterns.',
         steps: [
           'Choose a survey site and define a walking transect of 200-500 meters',
@@ -8979,6 +9085,37 @@ Talo kept counting. He is still counting. His notebooks now fill an entire shelf
         'India\'s "Big Butterfly Month" in September mobilizes thousands of volunteers across the country to count butterflies simultaneously — the resulting data helps scientists track population changes that would be impossible for any research team to monitor alone.',
       ],
       offlineActivity: 'Conduct your own butterfly (or insect) count. Choose a route you walk regularly — to school, to a shop, through a park. Walk it at the same time for five consecutive days and count every butterfly or insect you see. Record the date, time, weather, and number. At the end, make a simple bar chart of your daily counts. Did the numbers change with weather? This is exactly how real citizen science transect surveys work.',
+      offlineActivityDiagram: 'ActivityButterflyCountDiagram',
+      codeTeaser: `# Mark-recapture: estimate butterfly population!
+marked_first_visit = 40    # M: butterflies marked
+caught_second_visit = 50   # C: total caught in round 2
+recaptured_marked = 8      # R: marked ones recaptured
+
+# Lincoln-Petersen formula: N = (M * C) / R
+estimated_population = (marked_first_visit * caught_second_visit) / recaptured_marked
+print(f"Estimated population: {estimated_population:.0f} butterflies")
+
+# How confident are we? 95% confidence interval
+import math
+se = estimated_population * math.sqrt((1/recaptured_marked) - (1/caught_second_visit))
+print(f"95% CI: {estimated_population - 1.96*se:.0f} to {estimated_population + 1.96*se:.0f}")`,
+      referenceLinks: [
+        { slug: 'statistics-basics', reason: 'Mean, standard deviation, and sampling — the math behind population estimation from field data' },
+        { slug: 'ecology-and-populations', reason: 'Population dynamics, carrying capacity, and how species counts reveal ecosystem health' },
+        { slug: 'classification-of-life', reason: 'Taxonomy and species identification — the science of telling organisms apart' },
+      ],
+      nextLessons: [
+        { slug: 'kaziranga-grass', reason: 'Another NE India ecosystem — grasslands support megafauna, the opposite end of the biodiversity spectrum' },
+        { slug: 'girl-grew-forest', reason: 'Reforestation creates new habitat — and butterfly surveys can measure whether it is working' },
+        { slug: 'dancing-deer-of-loktak-lake', reason: 'The endangered Sangai deer of Loktak Lake — population monitoring uses the same census techniques' },
+      ],
+      quiz: [
+        { question: 'What is the Lincoln-Petersen formula used for?', options: ['Measuring butterfly wingspan', 'Estimating total population size from mark-recapture data', 'Calculating migration distance', 'Identifying butterfly species'], answer: 1 },
+        { question: 'What is a transect survey?', options: ['A laboratory experiment', 'Walking a fixed path and counting every organism you see', 'Photographing animals from a hide', 'Trapping and weighing animals'], answer: 1 },
+        { question: 'Why are butterflies good indicator species?', options: ['They are easy to catch', 'They respond quickly to habitat changes and depend on specific host plants', 'They live a long time', 'They are found only in healthy forests'], answer: 1 },
+        { question: 'What does species richness measure?', options: ['Total number of individual organisms', 'The total number of different species in an area', 'Average body size of species', 'How rare a species is'], answer: 1 },
+        { question: 'Why is citizen science valuable for ecology?', options: ['Volunteers work for free', 'Thousands of volunteers cover far more sites than professional scientists can', 'Amateurs make fewer mistakes', 'It replaces professional research'], answer: 1 },
+      ],
     },
   },
 
@@ -11634,6 +11771,7 @@ So the next time you see a kingfisher flash across the Brahmaputra — a streak 
       skills: ['Understand structural color: how nanostructures produce color without pigments', 'Analyze thin-film interference and coherent scattering at the nanoscale', 'Compare structural color with pigment-based color in terms of physics and durability', 'Model how feather barbule nanostructure dimensions determine reflected wavelength'],
       project: {
         title: 'Explore Structural Color in Nature and Technology',
+        outputDiagram: 'InterferenceDiagram',
         description: 'Investigate why some blues in nature (kingfisher feathers, morpho butterflies) are structural, not pigment-based, and find human-made examples.',
         steps: [
           'Research 4-5 examples of structural color in nature (kingfisher, morpho butterfly, peacock, beetle)',
@@ -11704,6 +11842,44 @@ So the next time you see a kingfisher flash across the Brahmaputra — a streak 
           ],
           keyIdea: 'The kingfisher inspired both the Shinkansen bullet train nose and ongoing structural color coating research. Biomimicry leverages 3.8 billion years of evolutionary R&D to solve engineering problems sustainably.',
         },
+      ],
+      offlineActivityDiagram: 'ActivityCDRainbowDiagram',
+      codeTeaser: `import matplotlib.pyplot as plt
+import numpy as np
+
+# Thin-film interference: which wavelength is reinforced?
+film_thickness_nm = np.arange(50, 400, 1)  # nanometers
+n_keratin = 1.56  # refractive index of keratin
+
+# Constructive interference when 2*n*d = m*wavelength
+# For first order (m=1):
+wavelength = 2 * n_keratin * film_thickness_nm
+
+colors = plt.cm.rainbow(np.linspace(0, 1, len(wavelength)))
+plt.figure(figsize=(10, 5))
+plt.scatter(film_thickness_nm, wavelength, c=colors, s=5)
+plt.axhspan(400, 500, alpha=0.15, color="blue", label="Blue light")
+plt.axhspan(500, 570, alpha=0.15, color="green", label="Green light")
+plt.xlabel("Film Thickness (nm)")
+plt.ylabel("Reinforced Wavelength (nm)")
+plt.title("What Color Does the Feather Reflect?")
+plt.legend()
+plt.show()  # At what thickness do you get blue?`,
+      referenceLinks: [
+        { slug: 'light-and-color', reason: 'Wavelengths, interference, and the electromagnetic spectrum — the physics behind structural color' },
+        { slug: 'materials-and-chemistry', reason: 'Keratin nanostructures and protein self-assembly — the chemistry of feather construction' },
+      ],
+      nextLessons: [
+        { slug: 'peacocks-dance', reason: 'Another bird with structural color — peacock feathers use photonic crystals instead of spongy keratin' },
+        { slug: 'rainbow-fish', reason: 'Iridescence in fish scales — thin-film interference in an aquatic context' },
+        { slug: 'orange-sunsets-assam', reason: 'More light physics — Rayleigh scattering explains red sunsets, a different mechanism from structural color' },
+      ],
+      quiz: [
+        { question: 'Why does a ground-up kingfisher feather appear brown, not blue?', options: ['The dye washes out', 'Structural color depends on intact nanostructure — destroy it and the color vanishes', 'Blue pigment degrades in air', 'The powder is too small to see'], answer: 1 },
+        { question: 'What is thin-film interference?', options: ['Light bending around objects', 'Light reflecting off closely spaced surfaces, reinforcing some wavelengths and canceling others', 'Light absorbed by thin films', 'Light passing through colored filters'], answer: 1 },
+        { question: 'How did the kingfisher inspire the Shinkansen bullet train?', options: ['Its blue color was used for the paint', 'Its beak shape reduces sonic boom when exiting tunnels', 'Its diving speed set the speed target', 'Its feathers inspired the seat fabric'], answer: 1 },
+        { question: 'Why don\'t structural colors fade over time?', options: ['They use permanent dyes', 'Color comes from physical shape, not chemistry — structure doesn\'t degrade like pigment molecules', 'They are protected by wax', 'They regenerate each year'], answer: 1 },
+        { question: 'What is biomimicry?', options: ['Making robots that look like animals', 'Solving engineering problems by copying solutions that nature evolved', 'Training animals to do human tasks', 'Painting buildings to look like nature'], answer: 1 },
       ],
     },
   },
@@ -12953,6 +13129,47 @@ And that is why, every monsoon, when the first rain fills the ponds of Assam, th
           ],
           keyIdea: 'Co-existing frog species avoid acoustic interference by dividing frequency, timing, and calling location — each occupying a unique acoustic niche, like radio stations on different channels.',
         },
+      ],
+      offlineActivityDiagram: 'ActivityFrogListenDiagram',
+      codeTeaser: `import matplotlib.pyplot as plt
+import numpy as np
+
+# Acoustic niche partitioning: 4 frog species, different frequencies
+t = np.linspace(0, 0.05, 1000)  # 50 ms window
+
+species = {
+    "Chorus frog (3.5 kHz)": 3500,
+    "Tree frog (2.0 kHz)": 2000,
+    "Bull frog (0.4 kHz)": 400,
+    "Cricket frog (5.0 kHz)": 5000,
+}
+
+fig, axes = plt.subplots(4, 1, figsize=(10, 8), sharex=True)
+for ax, (name, freq) in zip(axes, species.items()):
+    wave = np.sin(2 * np.pi * freq * t)
+    ax.plot(t * 1000, wave, linewidth=1)
+    ax.set_ylabel(name, fontsize=8)
+    ax.set_ylim(-1.5, 1.5)
+axes[-1].set_xlabel("Time (ms)")
+fig.suptitle("Acoustic Niche Partitioning: 4 Species, 4 Frequencies")
+plt.tight_layout()
+plt.show()  # Why don't these species drown each other out?`,
+      referenceLinks: [
+        { slug: 'sound-and-vibration', reason: 'Frequency, amplitude, resonance, and wave behavior — the physics behind every frog call' },
+        { slug: 'ecology-and-populations', reason: 'Niche partitioning and species coexistence — how dozens of frogs share one pond' },
+        { slug: 'weather-and-climate', reason: 'Barometric pressure, humidity, and monsoon patterns — the environmental cues that trigger frog choruses' },
+      ],
+      nextLessons: [
+        { slug: 'girl-who-spoke-to-elephants', reason: 'Infrasound communication in elephants — another animal using sound frequencies humans cannot hear' },
+        { slug: 'cuckoo-calls-dawn', reason: 'Bird vocalization and circadian timing — another species whose calling is driven by environmental cues' },
+        { slug: 'bamboo-flute-of-nagaland', reason: 'Resonance in bamboo tubes — the same physics that makes a frog vocal sac amplify specific frequencies' },
+      ],
+      quiz: [
+        { question: 'How does a frog\'s vocal sac amplify its call?', options: ['It vibrates like a drum', 'It acts as a resonating chamber, like a guitar body, amplifying specific frequencies', 'It stores extra air for louder bursts', 'It changes the pitch of the call'], answer: 1 },
+        { question: 'What environmental cue often triggers intense frog calling?', options: ['Bright sunlight', 'Dropping barometric pressure and rising humidity', 'Cold temperatures', 'Full moon'], answer: 1 },
+        { question: 'What is acoustic niche partitioning?', options: ['All frogs calling at the same pitch', 'Different species calling at different frequencies, times, and locations to avoid interference', 'Frogs taking turns calling one at a time', 'Louder frogs drowning out quieter ones'], answer: 1 },
+        { question: 'Why can some frogs produce calls as loud as 100 decibels?', options: ['They have very large lungs', 'Their vocal sac resonates at the call frequency, greatly amplifying the sound', 'They call in groups which adds volume', 'They vibrate their entire body'], answer: 1 },
+        { question: 'How can a female frog estimate a male\'s body size from his call?', options: ['She sees him while he calls', 'Larger frogs have larger vocal sacs producing lower-frequency calls', 'She counts how many times he calls', 'Larger frogs call more often'], answer: 1 },
       ],
     },
   },
@@ -15787,6 +16004,7 @@ The village discovered what Mrinmoyee had known all along: sharing space with el
 *The end.*` },
     stem: { title: 'Wildlife Corridors', description: 'Wildlife corridors and habitat connectivity.', icon: Leaf, color: 'from-green-500 to-emerald-500', skills: ['Understand habitat fragmentation and its impact on wildlife movement and genetic diversity', 'Analyze landscape connectivity using GIS corridor modeling', 'Model minimum viable population size and gene flow requirements', 'Interpret satellite imagery to map land use change over decades'], project: {
         title: 'Design a Wildlife Corridor Using Map Data',
+        outputDiagram: 'NEIndiaBiomesDiagram',
         description: 'Analyze a landscape map to identify the optimal path for a wildlife corridor connecting two forest patches.',
         steps: [
           'Create or obtain a simple land-use grid map showing forest, farmland, road, river, and village areas',
@@ -15851,6 +16069,42 @@ The village discovered what Mrinmoyee had known all along: sharing space with el
           keyIdea: "Human-wildlife conflict arises from overlapping land use — effective solutions combine early warning, barriers, economic compensation, and corridor restoration, always designed with local communities.",
           diagram: 'NEIndiaBiomesDiagram',
         },
+      ],
+      offlineActivityDiagram: 'ActivityCorridorMapDiagram',
+      codeTeaser: `# Model habitat connectivity: can elephants reach water?
+import numpy as np
+
+# Land-use grid: 0=forest, 1=farm, 2=road, 3=village
+landscape = np.array([
+    [0, 0, 1, 1, 3, 1, 0],
+    [0, 0, 1, 2, 2, 1, 0],
+    [1, 0, 0, 1, 1, 0, 0],
+    [1, 1, 0, 0, 1, 1, 1],
+    [3, 1, 1, 0, 0, 0, 0],
+])
+# Movement cost: forest=1, farm=3, road=10, village=99
+cost_map = {0: 1, 1: 3, 2: 10, 3: 99}
+costs = np.vectorize(cost_map.get)(landscape)
+print("Movement cost grid:")
+print(costs)
+print(f"Cheapest column path: {costs.min(axis=0).sum()}")
+# Can you find the least-cost corridor from top to bottom?`,
+      referenceLinks: [
+        { slug: 'conservation-biology', reason: 'Metapopulation theory, minimum viable populations, and why habitat connectivity is critical for species survival' },
+        { slug: 'ecosystems-and-biomes', reason: 'How energy flows through ecosystems and why large mammals need extensive connected habitats' },
+        { slug: 'maps-and-navigation', reason: 'GIS, satellite imagery, and spatial analysis — the tools used to design and monitor wildlife corridors' },
+      ],
+      nextLessons: [
+        { slug: 'girl-who-spoke-to-elephants', reason: 'Understanding elephant communication helps design corridors — rumbles reveal movement patterns and stress levels' },
+        { slug: 'kaziranga-grass', reason: 'Kaziranga grasslands are a key elephant habitat patch — corridors connect it to surrounding forest reserves' },
+        { slug: 'clouded-leopard', reason: 'Another species that depends on habitat connectivity — clouded leopards need forest corridors between fragmented patches' },
+      ],
+      quiz: [
+        { question: 'What is habitat fragmentation?', options: ['Habitats getting larger', 'Habitats being broken into isolated patches by roads, farms, and settlements', 'Animals choosing to live in smaller areas', 'Forest fires splitting habitats temporarily'], answer: 1 },
+        { question: 'Why do elephant populations need corridors between forest patches?', options: ['Elephants get bored in one place', 'Corridors allow access to seasonal resources and prevent genetic isolation from inbreeding', 'Corridors are easier to patrol for poachers', 'Elephants prefer to walk in straight lines'], answer: 1 },
+        { question: 'What is a metapopulation?', options: ['A very large population', 'A set of spatially separated populations linked by occasional migration', 'A population that is declining', 'A population of mixed species'], answer: 1 },
+        { question: 'How many elephant corridors has India identified?', options: ['About 10', 'About 50', 'About 101', 'About 500'], answer: 2 },
+        { question: 'What is an effective strategy to reduce human-elephant conflict?', options: ['Killing problem elephants', 'Combining early warning systems, barriers, compensation, and corridor restoration', 'Moving all villages away from forests', 'Feeding elephants so they don\'t raid crops'], answer: 1 },
       ],
     },
   },
