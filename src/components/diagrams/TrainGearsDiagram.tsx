@@ -66,7 +66,7 @@ const TrainGearsDiagram = () => {
               return (
                 <rect key={i} x="-3" y="-56" width="6" height="8" rx="1"
                   className="fill-blue-400 dark:fill-blue-500"
-                  transform={`rotate(\${i * 18})`} />
+                  transform={`rotate(${i * 18})`} />
               );
             })}
           </g>
@@ -86,7 +86,7 @@ const TrainGearsDiagram = () => {
             {Array.from({ length: 10 }).map((_, i) => (
               <rect key={i} x="-3" y="-32" width="6" height="8" rx="1"
                 className="fill-amber-400 dark:fill-amber-500"
-                transform={`rotate(\${i * 36})`} />
+                transform={`rotate(${i * 36})`} />
             ))}
           </g>
           <text x="40" y="-10" className="tg-small fill-amber-600 dark:fill-amber-400">
@@ -178,7 +178,7 @@ const TrainGearsDiagram = () => {
           return (
             <rect key={i} x={cx - 2} y={cy - 10} width="4" height="8" rx="1"
               className="fill-gray-500 dark:fill-gray-400"
-              transform={`rotate(-19, \${cx}, \${cy})`} />
+              transform={`rotate(-19, ${cx}, ${cy})`} />
           );
         })}
 
@@ -189,7 +189,7 @@ const TrainGearsDiagram = () => {
           {Array.from({ length: 8 }).map((_, i) => (
             <rect key={i} x="-2" y="-18" width="4" height="6" rx="1"
               className="fill-purple-400 dark:fill-purple-500"
-              transform={`rotate(\${i * 45})`} />
+              transform={`rotate(${i * 45})`} />
           ))}
         </g>
 

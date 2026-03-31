@@ -85,7 +85,7 @@ export default function DeeporBeelDiagram() {
 
         {/* Lotus flowers */}
         {[[220,420],[310,460],[400,435],[260,450]].map(([x,y], i) => (
-          <g key={i} transform={`translate(\${x},\${y})`}>
+          <g key={i} transform={`translate(${x},${y})`}>
             <ellipse cx="0" cy="2" rx="8" ry="3" fill="#166534" opacity="0.5" />
             <path d="M 0 0 Q -4 -6 0 -10 Q 4 -6 0 0" fill="#f9a8d4" opacity="0.7" />
             <path d="M 0 0 Q -6 -4 -3 -9 Q 0 -6 0 0" fill="#fda4af" opacity="0.5" />
@@ -105,7 +105,7 @@ export default function DeeporBeelDiagram() {
         {/* Bar-headed geese in V formation */}
         <g transform="translate(250, 200)" opacity="0.8">
           {[[-30,15],[-15,8],[0,0],[15,8],[30,15]].map(([x,y], i) => (
-            <path key={i} d={`M \${x-6} \${y+2} Q \${x} \${y-4} \${x+6} \${y+2}`} fill="none" stroke="#e0e7ff" strokeWidth="1.5" />
+            <path key={i} d={`M ${x-6} ${y+2} Q ${x} ${y-4} ${x+6} ${y+2}`} fill="none" stroke="#e0e7ff" strokeWidth="1.5" />
           ))}
         </g>
         <text x="280" y="228" textAnchor="middle" fontSize="10" fill="#c4b5fd">Bar-headed geese</text>
