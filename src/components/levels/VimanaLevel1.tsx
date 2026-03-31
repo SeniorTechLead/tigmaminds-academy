@@ -29,22 +29,22 @@ export default function VimanaLevel1() {
 
   const miniLessons = [
     {
-      title: 'The four forces \u2014 your first flight model',
+      title: 'The four forces — your first flight model',
       concept: `In Level 0 you learned that every aircraft balances four forces: **lift** (up), **weight** (down), **thrust** (forward), and **drag** (backward).
 
-Now let\u2019s put numbers on these forces. We\u2019ll use Python to model a simple aircraft and check whether it can fly. The key variables are:
-- **mass** (kg) \u2014 determines weight via W = m \u00D7 g
-- **thrust** (N) \u2014 what the engine provides
-- **lift** (N) \u2014 what the wings generate
-- **drag** (N) \u2014 what the air resists
+Now let’s put numbers on these forces. We’ll use Python to model a simple aircraft and check whether it can fly. The key variables are:
+- **mass** (kg) — determines weight via W = m × g
+- **thrust** (N) — what the engine provides
+- **lift** (N) — what the wings generate
+- **drag** (N) — what the air resists
 
 If lift > weight, the plane climbs. If thrust > drag, it accelerates. The code below defines an aircraft and prints its flight status.
 
-\ud83d\udcda *A Newton (N) is the SI unit of force. 1 N \u2248 the weight of a small apple.*`,
+\ud83d\udcda *A Newton (N) is the SI unit of force. 1 N ≈ the weight of a small apple.*`,
       analogy: 'Think of flying as a tug-of-war in two directions simultaneously. Vertically, lift and weight are pulling against each other. Horizontally, thrust and drag are pulling against each other. The plane goes wherever the winning side pulls it.',
-      storyConnection: 'The Pushpaka Vimana flew by divine will, effortlessly overcoming gravity. Real aircraft need careful engineering to balance these four forces. Rama\u2019s flight from Lanka to Ayodhya would have required continuous thrust to overcome drag over thousands of kilometres.',
+      storyConnection: 'The Pushpaka Vimana flew by divine will, effortlessly overcoming gravity. Real aircraft need careful engineering to balance these four forces. Rama’s flight from Lanka to Ayodhya would have required continuous thrust to overcome drag over thousands of kilometres.',
       checkQuestion: 'A 70,000 kg aircraft has engines producing 180,000 N of thrust and wings generating 700,000 N of lift. Drag is 180,000 N. What is its flight status?',
-      checkAnswer: 'Weight = 70,000 \u00D7 9.8 = 686,000 N. Lift (700,000) > Weight (686,000), so it CLIMBS. Thrust (180,000) = Drag (180,000), so it maintains constant speed. The aircraft is climbing at constant speed.',
+      checkAnswer: 'Weight = 70,000 × 9.8 = 686,000 N. Lift (700,000) > Weight (686,000), so it CLIMBS. Thrust (180,000) = Drag (180,000), so it maintains constant speed. The aircraft is climbing at constant speed.',
       codeIntro: 'Model the four forces on an aircraft and determine its flight status.',
       code: `# Four Forces Flight Model
 mass = 75000    # kg (like an A320)
@@ -57,7 +57,7 @@ weight = mass * g
 
 print("=== Pushpaka Flight Computer ===")
 print(f"Mass:    {mass:,} kg")
-print(f"Weight:  {weight:,.0f} N  (m \u00d7 g = {mass} \u00d7 {g})")
+print(f"Weight:  {weight:,.0f} N  (m × g = {mass} × {g})")
 print(f"Lift:    {lift:,.0f} N")
 print(f"Thrust:  {thrust:,.0f} N")
 print(f"Drag:    {drag:,.0f} N")
@@ -84,30 +84,30 @@ else:
 # Net acceleration (F = ma)
 a_vertical = net_vertical / mass
 a_horizontal = net_horizontal / mass
-print(f"\\nVertical acceleration: {a_vertical:.2f} m/s\u00b2")
-print(f"Horizontal acceleration: {a_horizontal:.2f} m/s\u00b2")`,
+print(f"\\nVertical acceleration: {a_vertical:.2f} m/s²")
+print(f"Horizontal acceleration: {a_horizontal:.2f} m/s²")`,
       challenge: 'Change the mass to 90,000 kg (a fully loaded aircraft). Does it still climb? How much extra lift or thrust would you need to maintain the same flight status?',
       successHint: 'You have built your first flight model. The four forces are just arithmetic: compare lift vs. weight and thrust vs. drag. Every flight simulator in the world starts with exactly this calculation.',
     },
     {
-      title: 'The lift equation \u2014 how speed creates lift',
-      concept: `Lift is not magic \u2014 it follows a precise formula:
+      title: 'The lift equation — how speed creates lift',
+      concept: `Lift is not magic — it follows a precise formula:
 
-**L = \u00BD \u00D7 \u03C1 \u00D7 v\u00B2 \u00D7 S \u00D7 C_L**
+**L = ½ × ρ × v² × S × C_L**
 
 Where:
-- **\u03C1** (rho) = air density (kg/m\u00B3) \u2014 about 1.225 at sea level
-- **v** = airspeed (m/s) \u2014 how fast the wing moves through the air
-- **S** = wing area (m\u00B2) \u2014 bigger wings = more lift
-- **C_L** = lift coefficient \u2014 a number (typically 0.2 to 2.0) that depends on wing shape and angle
+- **ρ** (rho) = air density (kg/m³) — about 1.225 at sea level
+- **v** = airspeed (m/s) — how fast the wing moves through the air
+- **S** = wing area (m²) — bigger wings = more lift
+- **C_L** = lift coefficient — a number (typically 0.2 to 2.0) that depends on wing shape and angle
 
-The **v\u00B2** is the key. Double your speed and lift quadruples. This is why takeoff requires reaching a specific speed: below that speed, the wings cannot generate enough lift to support the aircraft\u2019s weight.
+The **v²** is the key. Double your speed and lift quadruples. This is why takeoff requires reaching a specific speed: below that speed, the wings cannot generate enough lift to support the aircraft’s weight.
 
-The code below calculates lift at different speeds and finds the **takeoff speed** \u2014 the minimum speed where lift equals weight.`,
-      analogy: 'Think of the v\u00B2 term like this: if you stick your hand out a car window at 30 km/h, you feel a gentle push. At 60 km/h (double), the push is not double \u2014 it is FOUR times stronger. That is the v\u00B2 effect. Speed is the most powerful lever for generating lift.',
+The code below calculates lift at different speeds and finds the **takeoff speed** — the minimum speed where lift equals weight.`,
+      analogy: 'Think of the v² term like this: if you stick your hand out a car window at 30 km/h, you feel a gentle push. At 60 km/h (double), the push is not double — it is FOUR times stronger. That is the v² effect. Speed is the most powerful lever for generating lift.',
       storyConnection: 'The Pushpaka Vimana could reportedly hover motionless. For a real aircraft, no forward speed = no lift. Helicopters solve this with spinning blades (which create their own airspeed), but fixed-wing aircraft must always keep moving to stay airborne.',
-      checkQuestion: 'An aircraft with wing area 120 m\u00B2, C_L = 1.2, at sea level, needs to support 700,000 N. What is its minimum speed?',
-      checkAnswer: 'L = 0.5 \u00D7 1.225 \u00D7 v\u00B2 \u00D7 120 \u00D7 1.2 = 88.2 \u00D7 v\u00B2. Set L = 700,000: v\u00B2 = 700,000/88.2 = 7,936.5. v = \u221A7936.5 \u2248 89.1 m/s \u2248 321 km/h. That is a realistic takeoff speed for a large jet.',
+      checkQuestion: 'An aircraft with wing area 120 m², C_L = 1.2, at sea level, needs to support 700,000 N. What is its minimum speed?',
+      checkAnswer: 'L = 0.5 × 1.225 × v² × 120 × 1.2 = 88.2 × v². Set L = 700,000: v² = 700,000/88.2 = 7,936.5. v = √7936.5 ≈ 89.1 m/s ≈ 321 km/h. That is a realistic takeoff speed for a large jet.',
       codeIntro: 'Calculate lift at different speeds and find the takeoff speed.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -141,32 +141,32 @@ plt.annotate(f'Takeoff: {v_takeoff_kmh:.0f} km/h',
 
 plt.xlabel('Airspeed (km/h)', fontsize=12)
 plt.ylabel('Force (kN)', fontsize=12)
-plt.title('Lift vs. Speed \u2014 Finding Takeoff Speed', fontsize=14)
+plt.title('Lift vs. Speed — Finding Takeoff Speed', fontsize=14)
 plt.legend(fontsize=10)
 plt.grid(alpha=0.3)
 plt.show()
 
 print(f"Takeoff speed: {v_takeoff_ms:.1f} m/s = {v_takeoff_kmh:.0f} km/h")
 print(f"At this speed, lift ({weight/1000:.0f} kN) = weight ({weight/1000:.0f} kN)")
-print(f"\\nNotice the curve is a PARABOLA (v\u00b2 effect):")
+print(f"\\nNotice the curve is a PARABOLA (v² effect):")
 print(f"  At 50 km/h: lift = {0.5*rho*(50/3.6)**2*S*C_L/1000:.0f} kN")
 print(f"  At 100 km/h: lift = {0.5*rho*(100/3.6)**2*S*C_L/1000:.0f} kN (4x more!)")`,
-      challenge: 'Change rho to 0.4 (high altitude, thin air). What happens to the takeoff speed? This is why airports at high altitude need longer runways \u2014 aircraft need to go faster to get the same lift.',
-      successHint: 'The lift equation is one of the most important formulas in aerospace engineering. The v\u00B2 dependence means speed is everything \u2014 go fast enough and even a brick could fly (with the right wing shape).',
+      challenge: 'Change rho to 0.4 (high altitude, thin air). What happens to the takeoff speed? This is why airports at high altitude need longer runways — aircraft need to go faster to get the same lift.',
+      successHint: 'The lift equation is one of the most important formulas in aerospace engineering. The v² dependence means speed is everything — go fast enough and even a brick could fly (with the right wing shape).',
     },
     {
-      title: 'Drag equation \u2014 the cost of speed',
+      title: 'Drag equation — the cost of speed',
       concept: `Lift is free, right? Just go faster and you get more lift? Not quite. There is a cost: **drag** also increases with speed, and it follows a similar formula:
 
-**D = \u00BD \u00D7 \u03C1 \u00D7 v\u00B2 \u00D7 S \u00D7 C_D**
+**D = ½ × ρ × v² × S × C_D**
 
-The C_D (drag coefficient) depends on the aircraft\u2019s shape. A streamlined aircraft has C_D around 0.02-0.04. A brick has C_D around 1.0.
+The C_D (drag coefficient) depends on the aircraft’s shape. A streamlined aircraft has C_D around 0.02-0.04. A brick has C_D around 1.0.
 
-Here is the problem: as you go faster, drag increases as v\u00B2 too. To maintain constant speed, your engines must produce thrust equal to drag. So flying twice as fast requires **four times the thrust** (and roughly four times the fuel consumption).
+Here is the problem: as you go faster, drag increases as v² too. To maintain constant speed, your engines must produce thrust equal to drag. So flying twice as fast requires **four times the thrust** (and roughly four times the fuel consumption).
 
-This is why commercial aircraft cruise at specific speeds \u2014 fast enough for efficient lift, but not so fast that drag wastes fuel. The code computes the **lift-to-drag ratio** (L/D), which tells you how efficiently the aircraft converts speed into altitude.`,
-      analogy: 'Drag is like running through water. Walk slowly and you barely feel resistance. Run and the water pushes back hard. Sprint and it is like hitting a wall. The resistance grows as the square of your speed \u2014 doubling your speed means four times the resistance.',
-      storyConnection: 'The Pushpaka Vimana was described as moving effortlessly at the speed of thought. In reality, speed always has a cost. The vulture Jatayu, who tried to stop Ravana\u2019s Vimana, was a real bird that understood the trade-off between speed and energy expenditure. Large soaring birds like vultures maximise their lift-to-drag ratio to fly thousands of kilometres with minimal energy.',
+This is why commercial aircraft cruise at specific speeds — fast enough for efficient lift, but not so fast that drag wastes fuel. The code computes the **lift-to-drag ratio** (L/D), which tells you how efficiently the aircraft converts speed into altitude.`,
+      analogy: 'Drag is like running through water. Walk slowly and you barely feel resistance. Run and the water pushes back hard. Sprint and it is like hitting a wall. The resistance grows as the square of your speed — doubling your speed means four times the resistance.',
+      storyConnection: 'The Pushpaka Vimana was described as moving effortlessly at the speed of thought. In reality, speed always has a cost. The vulture Jatayu, who tried to stop Ravana’s Vimana, was a real bird that understood the trade-off between speed and energy expenditure. Large soaring birds like vultures maximise their lift-to-drag ratio to fly thousands of kilometres with minimal energy.',
       checkQuestion: 'If C_L = 1.0 and C_D = 0.05, what is the lift-to-drag ratio? What does this number mean physically?',
       checkAnswer: 'L/D = C_L / C_D = 1.0 / 0.05 = 20. This means for every 1 newton of drag the aircraft must overcome, it gets 20 newtons of lift. Modern gliders achieve L/D ratios of 50-70. A brick is about 0.5.',
       codeIntro: 'Plot lift, drag, and the lift-to-drag ratio across a range of speeds.',
@@ -210,29 +210,29 @@ plt.show()
 
 print(f"Lift-to-drag ratio (L/D): {ld_ratio:.1f}")
 print(f"  For every 1 N of drag, wings produce {ld_ratio:.1f} N of lift")
-print(f"\\nPower required (P = D \u00d7 v) grows as v\u00b3:")
+print(f"\\nPower required (P = D × v) grows as v³:")
 print(f"  At 200 km/h: {0.5*rho*(200/3.6)**2*S*C_D*(200/3.6)/1e6:.2f} MW")
 print(f"  At 400 km/h: {0.5*rho*(400/3.6)**2*S*C_D*(400/3.6)/1e6:.2f} MW")
 print(f"  At 800 km/h: {0.5*rho*(800/3.6)**2*S*C_D*(800/3.6)/1e6:.2f} MW")
 print("  Double the speed = 8x the power needed!")`,
-      challenge: 'Try C_D = 0.08 (a less streamlined shape). How much more power is needed at cruising speed? This is why aircraft designers obsess over reducing drag \u2014 even tiny improvements save millions of dollars in fuel.',
-      successHint: 'Drag is the tax of flight. The v\u00B2 relationship means that beyond a certain speed, drag costs more energy than the lift is worth. Finding the sweet spot is the art of aerodynamic design.',
+      challenge: 'Try C_D = 0.08 (a less streamlined shape). How much more power is needed at cruising speed? This is why aircraft designers obsess over reducing drag — even tiny improvements save millions of dollars in fuel.',
+      successHint: 'Drag is the tax of flight. The v² relationship means that beyond a certain speed, drag costs more energy than the lift is worth. Finding the sweet spot is the art of aerodynamic design.',
     },
     {
-      title: 'Simulating takeoff \u2014 a runway acceleration model',
+      title: 'Simulating takeoff — a runway acceleration model',
       concept: `Taking off is a race. The aircraft starts at rest, engines at full thrust, and accelerates down the runway. As speed increases, drag also increases (fighting the thrust) and lift builds up. The moment lift exceeds weight, the wheels leave the ground.
 
 The code below simulates this second-by-second. At each time step:
 1. Calculate current drag and lift based on current speed
 2. Compute net horizontal force = thrust - drag - friction
-3. Update speed using F = ma (\u0394v = F/m \u00D7 \u0394t)
-4. Check if lift \u2265 weight (liftoff!)
+3. Update speed using F = ma (Δv = F/m × Δt)
+4. Check if lift ≥ weight (liftoff!)
 
-This is a **physics simulation** \u2014 using equations to predict what happens over time. The same approach is used in real flight simulators, weather models, and rocket trajectory calculations.`,
-      analogy: 'Takeoff is like pushing a shopping cart on a slightly uphill, muddy road. At first you push hard and accelerate. As you go faster, the mud (drag) pushes back harder. Eventually you reach a speed where the cart starts to float above the mud (liftoff). If the road runs out before you reach that speed, you are in trouble \u2014 which is why runways need to be long enough.',
-      storyConnection: 'The Pushpaka Vimana reportedly rose vertically with no runway needed \u2014 like a helicopter or a modern VTOL aircraft. Conventional aircraft need hundreds of metres of runway because they must accelerate to generate enough lift. The V-22 Osprey can take off vertically using tilting rotors, but at a huge fuel cost compared to a normal takeoff run.',
+This is a **physics simulation** — using equations to predict what happens over time. The same approach is used in real flight simulators, weather models, and rocket trajectory calculations.`,
+      analogy: 'Takeoff is like pushing a shopping cart on a slightly uphill, muddy road. At first you push hard and accelerate. As you go faster, the mud (drag) pushes back harder. Eventually you reach a speed where the cart starts to float above the mud (liftoff). If the road runs out before you reach that speed, you are in trouble — which is why runways need to be long enough.',
+      storyConnection: 'The Pushpaka Vimana reportedly rose vertically with no runway needed — like a helicopter or a modern VTOL aircraft. Conventional aircraft need hundreds of metres of runway because they must accelerate to generate enough lift. The V-22 Osprey can take off vertically using tilting rotors, but at a huge fuel cost compared to a normal takeoff run.',
       checkQuestion: 'If you shortened the runway by 500 metres, what could the pilot do to still take off safely?',
-      checkAnswer: 'Several options: (1) reduce the aircraft\u2019s mass by carrying less fuel or cargo (less weight to overcome), (2) increase engine thrust (faster acceleration), (3) deploy flaps to increase C_L (higher lift at lower speed), or (4) wait for a headwind (airspeed is ground speed + wind speed, so wind gives free airspeed). Real pilots consider all of these.',
+      checkAnswer: 'Several options: (1) reduce the aircraft’s mass by carrying less fuel or cargo (less weight to overcome), (2) increase engine thrust (faster acceleration), (3) deploy flaps to increase C_L (higher lift at lower speed), or (4) wait for a headwind (airspeed is ground speed + wind speed, so wind gives free airspeed). Real pilots consider all of these.',
       codeIntro: 'Simulate a takeoff run from standstill to liftoff.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -309,26 +309,26 @@ if liftoff_t:
 else:
     print("WARNING: Did not achieve liftoff in simulation!")`,
       challenge: 'Try increasing the mass to 90,000 kg (heavier payload). How much longer runway does the aircraft need? Then try increasing thrust to 300,000 N. What changes?',
-      successHint: 'You have just built a takeoff simulator. The same numerical integration technique (\u0394v = a\u00D7\u0394t, \u0394x = v\u00D7\u0394t) is the foundation of every physics simulation, from weather forecasting to orbital mechanics.',
+      successHint: 'You have just built a takeoff simulator. The same numerical integration technique (Δv = a×Δt, Δx = v×Δt) is the foundation of every physics simulation, from weather forecasting to orbital mechanics.',
     },
     {
-      title: 'Jet engine thrust \u2014 Newton\u2019s third law in action',
-      concept: `A jet engine is a Newton\u2019s third law machine. It pushes air backward, and the reaction force pushes the aircraft forward. The thrust depends on how much air it processes and how fast it accelerates that air:
+      title: 'Jet engine thrust — Newton’s third law in action',
+      concept: `A jet engine is a Newton’s third law machine. It pushes air backward, and the reaction force pushes the aircraft forward. The thrust depends on how much air it processes and how fast it accelerates that air:
 
-**Thrust = mass_flow_rate \u00D7 (v_exhaust - v_intake)**
+**Thrust = mass_flow_rate × (v_exhaust - v_intake)**
 
 Where:
-- **mass_flow_rate** (\u1E41) = kg of air passing through per second
+- **mass_flow_rate** (ṁ) = kg of air passing through per second
 - **v_exhaust** = speed of exhaust gas leaving the engine
 - **v_intake** = speed of air entering the engine (= aircraft speed)
 
-A turbofan engine on a 777 processes about 1,500 kg of air per second and accelerates it from ~250 m/s (cruise speed) to ~350 m/s (exhaust speed). That \u0394v of 100 m/s, applied to 1,500 kg/s, gives 150,000 N of thrust.
+A turbofan engine on a 777 processes about 1,500 kg of air per second and accelerates it from ~250 m/s (cruise speed) to ~350 m/s (exhaust speed). That Δv of 100 m/s, applied to 1,500 kg/s, gives 150,000 N of thrust.
 
 The code models a simplified jet engine and shows how thrust changes with airspeed.`,
-      analogy: 'A jet engine works like standing on a skateboard and throwing bowling balls backward. Each ball you throw pushes you forward (Newton\u2019s third law). Throw more balls per second (higher mass flow rate) or throw them faster (higher exhaust velocity) and you accelerate faster. A jet engine does this continuously with air instead of bowling balls.',
-      storyConnection: 'The Ramayana describes the Pushpaka Vimana as self-propelled, needing no external force. A jet engine is self-sustaining too \u2014 its exhaust spins the turbine, which drives the compressor, which feeds the combustion. It is a beautifully circular machine that creates its own momentum.',
+      analogy: 'A jet engine works like standing on a skateboard and throwing bowling balls backward. Each ball you throw pushes you forward (Newton’s third law). Throw more balls per second (higher mass flow rate) or throw them faster (higher exhaust velocity) and you accelerate faster. A jet engine does this continuously with air instead of bowling balls.',
+      storyConnection: 'The Ramayana describes the Pushpaka Vimana as self-propelled, needing no external force. A jet engine is self-sustaining too — its exhaust spins the turbine, which drives the compressor, which feeds the combustion. It is a beautifully circular machine that creates its own momentum.',
       checkQuestion: 'A jet engine has a mass flow rate of 200 kg/s. Air enters at 250 m/s and exits at 500 m/s. What is the thrust?',
-      checkAnswer: 'Thrust = 200 \u00D7 (500 - 250) = 200 \u00D7 250 = 50,000 N. At higher aircraft speeds, v_intake increases, so the speed difference decreases, and thrust drops \u2014 unless exhaust speed also increases.',
+      checkAnswer: 'Thrust = 200 × (500 - 250) = 200 × 250 = 50,000 N. At higher aircraft speeds, v_intake increases, so the speed difference decreases, and thrust drops — unless exhaust speed also increases.',
       codeIntro: 'Model a jet engine and see how thrust varies with flight speed.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -372,20 +372,20 @@ print(f"of air a LITTLE bit faster, rather than a little air a lot faster.")`,
       successHint: 'The thrust equation shows why jet engines get less effective at higher speeds: the speed difference between exhaust and intake shrinks. This fundamental limit is why supersonic aircraft need afterburners or completely different engine designs.',
     },
     {
-      title: 'Escape velocity \u2014 how fast to leave a planet',
+      title: 'Escape velocity — how fast to leave a planet',
       concept: `The Pushpaka Vimana flew to the heavens. To actually leave Earth, you need to reach **escape velocity**: the speed at which your kinetic energy equals the gravitational potential energy binding you to the planet.
 
-**v_escape = \u221A(2GM/r)**
+**v_escape = √(2GM/r)**
 
-Where G is the gravitational constant, M is the planet\u2019s mass, and r is the distance from the planet\u2019s centre.
+Where G is the gravitational constant, M is the planet’s mass, and r is the distance from the planet’s centre.
 
 For Earth: v_escape = 11.2 km/s = 40,320 km/h.
 
 The code calculates escape velocity for every planet in the solar system and visualises the relationship between planet mass, radius, and escape velocity.`,
-      analogy: 'Imagine throwing a ball straight up. Throw gently and it comes back. Throw harder and it goes higher before returning. There is one special speed where the ball goes up forever and never comes back \u2014 that is escape velocity. For Earth, that speed is 11.2 km/s. The bigger or denser the planet, the harder you have to throw.',
-      storyConnection: 'Rama\u2019s flight from Lanka to Ayodhya stayed within the atmosphere. But the ancient texts describe vimanas travelling to other lokas (worlds). To reach another planet, the Vimana would need to exceed escape velocity \u2014 a feat that requires enormous energy, far beyond any mythological description.',
-      checkQuestion: 'The Moon has mass 7.34 \u00D7 10\u00B2\u00B2 kg and radius 1.74 \u00D7 10\u2076 m. What is its escape velocity? (G = 6.674 \u00D7 10\u207B\u00B9\u00B9)',
-      checkAnswer: 'v = \u221A(2 \u00D7 6.674\u00D710\u207B\u00B9\u00B9 \u00D7 7.34\u00D710\u00B2\u00B2 / 1.74\u00D710\u2076) = \u221A(5.626\u00D710\u2076) \u2248 2,372 m/s \u2248 2.4 km/s. About one-fifth of Earth\u2019s. This is why leaving the Moon requires much less fuel than leaving Earth.',
+      analogy: 'Imagine throwing a ball straight up. Throw gently and it comes back. Throw harder and it goes higher before returning. There is one special speed where the ball goes up forever and never comes back — that is escape velocity. For Earth, that speed is 11.2 km/s. The bigger or denser the planet, the harder you have to throw.',
+      storyConnection: 'Rama’s flight from Lanka to Ayodhya stayed within the atmosphere. But the ancient texts describe vimanas travelling to other lokas (worlds). To reach another planet, the Vimana would need to exceed escape velocity — a feat that requires enormous energy, far beyond any mythological description.',
+      checkQuestion: 'The Moon has mass 7.34 × 10²² kg and radius 1.74 × 10⁶ m. What is its escape velocity? (G = 6.674 × 10⁻¹¹)',
+      checkAnswer: 'v = √(2 × 6.674×10⁻¹¹ × 7.34×10²² / 1.74×10⁶) = √(5.626×10⁶) ≈ 2,372 m/s ≈ 2.4 km/s. About one-fifth of Earth’s. This is why leaving the Moon requires much less fuel than leaving Earth.',
       codeIntro: 'Calculate escape velocities for all planets in the solar system.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -428,11 +428,11 @@ plt.show()
 print("=== Escape Velocities ===")
 for name, v in zip(names, v_escapes):
     print(f"  {name:10s}: {v:5.1f} km/s  ({v*3600:.0f} km/h)")
-print(f"\\nJupiter\u2019s escape velocity is {v_escapes[4]/v_escapes[2]:.1f}x Earth\u2019s")
-print(f"Moon\u2019s escape velocity is {v_escapes[8]/v_escapes[2]:.2f}x Earth\u2019s")
+print(f"\\nJupiter’s escape velocity is {v_escapes[4]/v_escapes[2]:.1f}x Earth’s")
+print(f"Moon’s escape velocity is {v_escapes[8]/v_escapes[2]:.2f}x Earth’s")
 print(f"\\nThis is why leaving Earth requires massive rockets,")
 print(f"but leaving the Moon was done with a small engine.")`,
-      challenge: 'Add Pluto (mass 1.31\u00D710\u00B2\u00B2 kg, radius 1.19\u00D710\u2076 m) and the Sun (mass 1.99\u00D710\u00B3\u2070 kg, radius 6.96\u00D710\u2078 m) to the chart. The Sun\u2019s escape velocity is a surprise \u2014 how does it compare to the speed of light?',
+      challenge: 'Add Pluto (mass 1.31×10²² kg, radius 1.19×10⁶ m) and the Sun (mass 1.99×10³⁰ kg, radius 6.96×10⁸ m) to the chart. The Sun’s escape velocity is a surprise — how does it compare to the speed of light?',
       successHint: 'Escape velocity connects the ancient dream of flying to the heavens with modern rocket science. The formula is elegant: more massive or smaller planet = harder to escape. This single equation governs every space mission ever launched.',
     },
   ];

@@ -69,7 +69,7 @@ const MonsoonJetStreamDiagram = () => {
         {/* Title */}
         <text x="310" y="22" textAnchor="middle"
           className="title-text fill-slate-700 dark:fill-slate-200">
-          Jet Streams \u2014 Rivers of Air at 10 km Altitude
+          Jet Streams — Rivers of Air at 10 km Altitude
         </text>
 
         {/* ===== CROSS-SECTION VIEW ===== */}
@@ -106,7 +106,7 @@ const MonsoonJetStreamDiagram = () => {
         </text>
         <text x="335" y="228" textAnchor="middle"
           className="small-text fill-amber-800 dark:fill-amber-300">
-          \u201CElevated furnace\u201D in summer
+          “Elevated furnace” in summer
         </text>
 
         {/* Thermal rising from plateau */}
@@ -134,7 +134,7 @@ const MonsoonJetStreamDiagram = () => {
         </text>
         <text x="145" y="92" textAnchor="middle"
           className="small-text fill-cyan-300">
-          200\u2013300 km/h, 10\u201312 km up
+          200–300 km/h, 10–12 km up
         </text>
 
         {/* Himalayan barrier */}
@@ -159,7 +159,7 @@ const MonsoonJetStreamDiagram = () => {
 
         <text x="310" y="310" textAnchor="middle"
           className="section-title fill-slate-700 dark:fill-slate-200">
-          How Jet Streams Control the Monsoon\u2019s On/Off Switch
+          How Jet Streams Control the Monsoon’s On/Off Switch
         </text>
 
         {/* Winter box */}
@@ -203,7 +203,7 @@ const MonsoonJetStreamDiagram = () => {
         </text>
         <text x="457" y="358" textAnchor="middle"
           className="small-text fill-red-600 dark:fill-red-400">
-          Tibet heats up \u2192 disrupts jet.
+          Tibet heats up → disrupts jet.
         </text>
         <text x="457" y="372" textAnchor="middle"
           className="small-text fill-red-600 dark:fill-red-400">
@@ -211,7 +211,7 @@ const MonsoonJetStreamDiagram = () => {
         </text>
         <text x="457" y="386" textAnchor="middle"
           className="small-text fill-red-600 dark:fill-red-400">
-          Removes the \u201Cblock\u201D \u2192 moist air floods in.
+          Removes the “block” → moist air floods in.
         </text>
         <text x="457" y="400" textAnchor="middle"
           className="value-text fill-red-700 dark:fill-red-300" fontSize="10">
@@ -223,19 +223,19 @@ const MonsoonJetStreamDiagram = () => {
           className="fill-amber-50 dark:fill-amber-900/20 stroke-amber-300 dark:stroke-amber-700" strokeWidth="1" />
         <text x="310" y="432" textAnchor="middle"
           className="label-text fill-amber-800 dark:fill-amber-200" fontWeight="600">
-          Tibet\u2019s role: The Tibetan Plateau (4,500 m) acts as an \u201Celevated furnace.\u201D
+          Tibet’s role: The Tibetan Plateau (4,500 m) acts as an “elevated furnace.”
         </text>
         <text x="310" y="446" textAnchor="middle"
           className="small-text fill-amber-700 dark:fill-amber-300">
-          In summer, its surface absorbs solar energy and heats the air at 5 km altitude directly \u2014
+          In summer, its surface absorbs solar energy and heats the air at 5 km altitude directly —
         </text>
         <text x="310" y="458" textAnchor="middle"
           className="small-text fill-amber-700 dark:fill-amber-300">
-          strengthening the upper-level high-pressure system that pulls the jet stream northward and locks the monsoon \u201Con.\u201D
+          strengthening the upper-level high-pressure system that pulls the jet stream northward and locks the monsoon “on.”
         </text>
         <text x="310" y="470" textAnchor="middle"
           className="small-text fill-amber-700 dark:fill-amber-300">
-          Without Tibet, climate models show India\u2019s monsoon would be 40% weaker.
+          Without Tibet, climate models show India’s monsoon would be 40% weaker.
         </text>
       </svg>
     </div>

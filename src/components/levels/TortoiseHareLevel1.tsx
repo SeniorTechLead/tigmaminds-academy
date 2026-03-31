@@ -150,7 +150,7 @@ ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=9
 ax1.tick_params(colors='gray')
 
 ax2.set_xlabel('Time (s)', color='white')
-ax2.set_ylabel('Acceleration (m/s\\u00b2)', color='white')
+ax2.set_ylabel('Acceleration (m/s\²)', color='white')
 ax2.set_title('Acceleration (highest at start, then drops to zero)', color='white', fontsize=11)
 ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=9)
 ax2.tick_params(colors='gray')
@@ -161,10 +161,10 @@ plt.show()
 print("Peak accelerations:")
 for name, props in animals.items():
     peak_a = props['v_max'] * props['a']
-    print(f"  {name}: {peak_a:.1f} m/s\\u00b2 (reaches {props['v_max']} m/s)")
+    print(f"  {name}: {peak_a:.1f} m/s\² (reaches {props['v_max']} m/s)")
 print()
-print("Gravity = 9.8 m/s\\u00b2")
-print("A cheetah accelerates at ~36 m/s\\u00b2 peak — nearly 4x gravity!")`,
+print("Gravity = 9.8 m/s\²")
+print("A cheetah accelerates at ~36 m/s\² peak — nearly 4x gravity!")`,
       challenge: 'Add an elephant to the chart (v_max=11 m/s, a=0.3). How does its acceleration compare to the cheetah? Why might elephants have lower acceleration despite being stronger?',
       successHint: 'Acceleration requires force, and force = mass x acceleration (Newton\'s second law). Heavy animals need enormous force to accelerate quickly. That\'s why small animals often have better acceleration than large ones.',
     },
@@ -393,7 +393,7 @@ for speed in [0.5, 2, 5, 10, 20, 30]:
 
 ax.set_xlabel('Stride length (m)', color='white')
 ax.set_ylabel('Stride frequency (strides/s)', color='white')
-ax.set_title('Speed = Stride Length \\u00d7 Stride Frequency', color='white', fontsize=13)
+ax.set_title('Speed = Stride Length \× Stride Frequency', color='white', fontsize=13)
 ax.tick_params(colors='gray')
 ax.set_xlim(0, 8)
 ax.set_ylim(0, 6)

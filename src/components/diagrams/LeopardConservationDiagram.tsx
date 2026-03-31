@@ -44,7 +44,7 @@ export default function LeopardConservationDiagram() {
 
         {/* Isolated = danger */}
         <text x="300" y="210" textAnchor="middle" fontSize="10" className="fill-red-300">
-          Isolated small populations \u2192 inbreeding \u2192 disease vulnerability \u2192 extinction
+          Isolated small populations → inbreeding → disease vulnerability → extinction
         </text>
 
         {/* Divider */}
@@ -68,7 +68,7 @@ export default function LeopardConservationDiagram() {
             lines: ['ID individuals by spots', 'Count populations', 'Monitor activity times'],
           },
           {
-            x: 310, y: 265, icon: '\ud83d\uddfa\ufe0f',
+            x: 310, y: 265, icon: '\ud83d\uddfa️',
             title: 'GIS Mapping',
             lines: ['Map habitat patches', 'Identify barriers', 'Design corridors'],
           },

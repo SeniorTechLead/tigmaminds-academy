@@ -29,21 +29,21 @@ export default function AstrolabeLevel2() {
 
   const miniLessons = [
     {
-      title: 'Stereographic projection \u2014 the mathematics',
+      title: 'Stereographic projection — the mathematics',
       concept: `The astrolabe's genius is **stereographic projection**: mapping a sphere onto a flat plane from a single point. Place the projection point at the south celestial pole. Every point on the sphere casts a "shadow" onto the equatorial plane.
 
-The formula is elegant. A point on the sphere at co-latitude \u03B8 (measured from the north pole) and longitude \u03C6 projects to:
+The formula is elegant. A point on the sphere at co-latitude θ (measured from the north pole) and longitude φ projects to:
 
-**x = R \u00B7 tan(\u03B8/2) \u00B7 cos(\u03C6)**
-**y = R \u00B7 tan(\u03B8/2) \u00B7 sin(\u03C6)**
+**x = R · tan(θ/2) · cos(φ)**
+**y = R · tan(θ/2) · sin(φ)**
 
-where R is the radius of the disk. The co-latitude \u03B8 for a star at declination \u03B4 is \u03B8 = 90\u00B0 - \u03B4.
+where R is the radius of the disk. The co-latitude θ for a star at declination δ is θ = 90° - δ.
 
-The critical property: **circles on the sphere map to circles on the plane**. This is what makes the astrolabe work \u2014 altitude circles, the horizon, the ecliptic all remain circles after projection, so they can be engraved with a compass.`,
-      analogy: 'Imagine a transparent globe with a light bulb at the south pole. The shadows of the latitude lines fall on a flat table at the equator. Each latitude line (a circle on the globe) casts a circular shadow on the table \u2014 but the circles get larger as you move away from the equator toward the south pole.',
+The critical property: **circles on the sphere map to circles on the plane**. This is what makes the astrolabe work — altitude circles, the horizon, the ecliptic all remain circles after projection, so they can be engraved with a compass.`,
+      analogy: 'Imagine a transparent globe with a light bulb at the south pole. The shadows of the latitude lines fall on a flat table at the equator. Each latitude line (a circle on the globe) casts a circular shadow on the table — but the circles get larger as you move away from the equator toward the south pole.',
       storyConnection: 'Ibn al-Haytham demonstrated this to Zahra with a glass sphere and lamplight. The painted stars cast shadows on the table. "Circles become circles," he said. This is the mathematical miracle that makes the whole instrument possible.',
-      checkQuestion: 'A star at the north celestial pole has \u03B8 = 0\u00B0. What are its projected coordinates?',
-      checkAnswer: 'x = R\u00B7tan(0/2)\u00B7cos(\u03C6) = 0, y = R\u00B7tan(0/2)\u00B7sin(\u03C6) = 0. The north pole projects to the center of the disk. This makes sense \u2014 the pole is directly above, so it maps to the zenith of the projection.',
+      checkQuestion: 'A star at the north celestial pole has θ = 0°. What are its projected coordinates?',
+      checkAnswer: 'x = R·tan(0/2)·cos(φ) = 0, y = R·tan(0/2)·sin(φ) = 0. The north pole projects to the center of the disk. This makes sense — the pole is directly above, so it maps to the zenith of the projection.',
       codeIntro: 'Implement stereographic projection and plot the celestial grid on a flat disk.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -63,7 +63,7 @@ def stereo_project(dec, ra, R=1.0):
 fig, ax = plt.subplots(figsize=(7, 7))
 ax.set_facecolor('#0f172a')
 
-# Plot declination circles (every 15\u00B0)
+# Plot declination circles (every 15°)
 for dec in range(-60, 91, 15):
     theta = np.radians(90 - dec)
     r = np.tan(theta / 2)
@@ -72,9 +72,9 @@ for dec in range(-60, 91, 15):
                          linewidth=0.5 if dec != 0 else 1.5)
     ax.add_patch(circle)
     if r < 2.5:
-        ax.text(r + 0.03, 0, f'{dec}\u00B0', fontsize=6, color='#64748b')
+        ax.text(r + 0.03, 0, f'{dec}°', fontsize=6, color='#64748b')
 
-# Plot RA lines (every 30\u00B0 = 2 hours)
+# Plot RA lines (every 30° = 2 hours)
 for ra in range(0, 360, 30):
     phi = np.radians(ra)
     ax.plot([0, 2.5 * np.cos(phi)], [0, 2.5 * np.sin(phi)],
@@ -99,20 +99,20 @@ ax.set_xlim(-2.5, 2.5); ax.set_ylim(-2.5, 2.5)
 ax.set_aspect('equal'); ax.grid(False)
 ax.set_title('Stereographic Projection of the Sky', color='white')
 plt.show()`,
-      challenge: 'Notice that Sirius (dec = -16.7\u00B0) projects far from the center. What declination would project to infinity? (Hint: tan(90\u00B0) = \u221E.)',
-      successHint: 'You just built the mathematical core of the astrolabe. The rete is exactly this star map \u2014 bright stars positioned by stereographic projection on a brass disk.',
+      challenge: 'Notice that Sirius (dec = -16.7°) projects far from the center. What declination would project to infinity? (Hint: tan(90°) = ∞.)',
+      successHint: 'You just built the mathematical core of the astrolabe. The rete is exactly this star map — bright stars positioned by stereographic projection on a brass disk.',
     },
     {
-      title: 'Why circles stay circles \u2014 proof by construction',
+      title: 'Why circles stay circles — proof by construction',
       concept: `The circle-preserving property of stereographic projection is not obvious. Here is the geometric intuition.
 
-A circle on the sphere is the intersection of the sphere with a plane. Stereographic projection sends this circle to the intersection of a cone (from the projection point through the circle) with the equatorial plane. A cone intersected by a plane produces a **conic section** \u2014 an ellipse, parabola, or hyperbola.
+A circle on the sphere is the intersection of the sphere with a plane. Stereographic projection sends this circle to the intersection of a cone (from the projection point through the circle) with the equatorial plane. A cone intersected by a plane produces a **conic section** — an ellipse, parabola, or hyperbola.
 
 But stereographic projection is special: the cone from the south pole through a circle on the sphere **always** intersects the equatorial plane in a circle, never an ellipse. This is because the projection point is on the sphere itself, which creates a symmetry that eliminates the elliptical distortion.
 
-The proof requires showing that the cone's axis makes the same angle with the equatorial plane as the sphere's curvature compensates for. The math involves the tangent half-angle identity: tan(\u03B8/2) = sin(\u03B8) / (1 + cos(\u03B8)).`,
-      analogy: 'Imagine shining a flashlight (cone of light) at a tilted wall. Usually you get an ellipse of light. But if the flashlight is positioned on the surface of a sphere and the wall is at the equator, the sphere\u2019s curvature perfectly compensates for the tilt \u2014 you always get a circle.',
-      storyConnection: 'This property is why astrolabe makers could use a compass to engrave every line. If projection turned circles into ellipses, the instrument would be far harder to build \u2014 ellipses cannot be drawn with a simple compass.',
+The proof requires showing that the cone's axis makes the same angle with the equatorial plane as the sphere's curvature compensates for. The math involves the tangent half-angle identity: tan(θ/2) = sin(θ) / (1 + cos(θ)).`,
+      analogy: 'Imagine shining a flashlight (cone of light) at a tilted wall. Usually you get an ellipse of light. But if the flashlight is positioned on the surface of a sphere and the wall is at the equator, the sphere’s curvature perfectly compensates for the tilt — you always get a circle.',
+      storyConnection: 'This property is why astrolabe makers could use a compass to engrave every line. If projection turned circles into ellipses, the instrument would be far harder to build — ellipses cannot be drawn with a simple compass.',
       checkQuestion: 'Mercator map projection also maps a sphere to a plane. Does it preserve circles?',
       checkAnswer: 'No. Mercator projection preserves angles (it is conformal, like stereographic) but not circles. A circle near the poles on a Mercator map becomes a stretched ellipse. Only stereographic projection preserves both conformality and circles. This makes it uniquely suited for the astrolabe.',
       codeIntro: 'Verify the circle-preserving property by projecting circles at different latitudes.',
@@ -132,10 +132,10 @@ ax1 = axes[0]
 ax1.set_facecolor('#0f172a')
 u = np.linspace(0, 2*np.pi, 100)
 
-for dec, color, label in [(60, '#ef4444', '60\u00B0'),
-                           (30, '#fbbf24', '30\u00B0'),
+for dec, color, label in [(60, '#ef4444', '60°'),
+                           (30, '#fbbf24', '30°'),
                            (0, '#10b981', 'Equator'),
-                           (-30, '#38bdf8', '-30\u00B0')]:
+                           (-30, '#38bdf8', '-30°')]:
     # Circles on sphere (shown as projections)
     theta = np.radians(90 - dec)
     r_sphere = np.sin(theta)
@@ -152,10 +152,10 @@ ax1.legend(fontsize=7)
 ax2 = axes[1]
 ax2.set_facecolor('#0f172a')
 
-for dec, color, label in [(60, '#ef4444', '60\u00B0'),
-                           (30, '#fbbf24', '30\u00B0'),
+for dec, color, label in [(60, '#ef4444', '60°'),
+                           (30, '#fbbf24', '30°'),
                            (0, '#10b981', 'Equator'),
-                           (-30, '#38bdf8', '-30\u00B0')]:
+                           (-30, '#38bdf8', '-30°')]:
     ra = np.linspace(0, 360, 200)
     xs, ys = [], []
     for r in ra:
@@ -174,25 +174,25 @@ ax2.set_title('Stereographic projection (flat)', color='white', fontsize=10)
 ax2.legend(fontsize=7)
 plt.tight_layout()
 plt.show()`,
-      challenge: 'The standard deviation of radii should be nearly zero (machine precision). Try projecting a circle centered at dec=45\u00B0 with a 10\u00B0 radius \u2014 does it remain circular?',
+      challenge: 'The standard deviation of radii should be nearly zero (machine precision). Try projecting a circle centered at dec=45° with a 10° radius — does it remain circular?',
       successHint: 'The near-zero standard deviations prove it: circles on the sphere project to perfect circles on the plane. This is the mathematical foundation that made the astrolabe possible.',
     },
     {
-      title: 'Drawing the tympan \u2014 altitude and azimuth circles',
+      title: 'Drawing the tympan — altitude and azimuth circles',
       concept: `The **tympan** is the base plate of the astrolabe, engraved with altitude and azimuth circles for a specific latitude. Let's build one mathematically.
 
-For an observer at latitude \u03C6, the **zenith** (directly overhead) is at declination \u03B4 = \u03C6. The **horizon** is a great circle 90\u00B0 from the zenith. Under stereographic projection:
+For an observer at latitude φ, the **zenith** (directly overhead) is at declination δ = φ. The **horizon** is a great circle 90° from the zenith. Under stereographic projection:
 
 - The zenith projects to a point offset from the center
-- Altitude circles (10\u00B0, 20\u00B0, ... 80\u00B0) project to circles centered on the zenith point
+- Altitude circles (10°, 20°, ... 80°) project to circles centered on the zenith point
 - Azimuth lines (N, NE, E, ...) project to arcs passing through the zenith point and the nadir
 
-The key formula for the horizon circle: center at y = -R\u00B7cos(\u03C6)/sin(\u03C6), radius = R/sin(\u03C6), where R = tan(45\u00B0) = 1 for the equator circle.`,
-      analogy: 'Think of the tympan as a custom-made map of your personal sky. Just as a city map is only useful for that city, a tympan for Isfahan (32\u00B0N) is only accurate at that latitude. Medieval astrolabe makers often included multiple tympans \u2014 one for each major city.',
+The key formula for the horizon circle: center at y = -R·cos(φ)/sin(φ), radius = R/sin(φ), where R = tan(45°) = 1 for the equator circle.`,
+      analogy: 'Think of the tympan as a custom-made map of your personal sky. Just as a city map is only useful for that city, a tympan for Isfahan (32°N) is only accurate at that latitude. Medieval astrolabe makers often included multiple tympans — one for each major city.',
       storyConnection: 'Ibn al-Haytham told Zahra that the tympan "shows the sky coordinates for your latitude." A tympan for Isfahan looks different from one for Cairo or Baghdad. When travelers moved between cities, they swapped tympans.',
-      checkQuestion: 'At the equator (\u03C6 = 0\u00B0), where does the zenith project?',
-      checkAnswer: 'The zenith at the equator is the north celestial pole rotated by 90\u00B0 \u2014 actually, at \u03C6=0 the zenith is at dec=0 (the celestial equator). It projects to a point at radius tan(45\u00B0)=1 from center. The horizon becomes a straight line through the center.',
-      codeIntro: 'Draw a complete tympan for Isfahan (32\u00B0N) with altitude and azimuth lines.',
+      checkQuestion: 'At the equator (φ = 0°), where does the zenith project?',
+      checkAnswer: 'The zenith at the equator is the north celestial pole rotated by 90° — actually, at φ=0 the zenith is at dec=0 (the celestial equator). It projects to a point at radius tan(45°)=1 from center. The horizon becomes a straight line through the center.',
+      codeIntro: 'Draw a complete tympan for Isfahan (32°N) with altitude and azimuth lines.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
@@ -234,7 +234,7 @@ for alt in range(0, 90, 10):
     ax.plot(r_circle * np.cos(u), -r_z + r_circle * np.sin(u),
             color=color, linewidth=lw)
     if alt % 20 == 0:
-        ax.text(r_circle + 0.02, -r_z, f'{alt}\u00B0',
+        ax.text(r_circle + 0.02, -r_z, f'{alt}°',
                 fontsize=6, color='#64748b')
 
 # Horizon label
@@ -262,27 +262,27 @@ ax.annotate('NCP', (0, 0), fontsize=8, color='#ef4444',
 
 ax.set_xlim(-2.5, 2.5); ax.set_ylim(-2.5, 2.5)
 ax.set_aspect('equal')
-ax.set_title(f'Astrolabe Tympan \u2014 Isfahan ({lat}\u00B0N)', color='white')
+ax.set_title(f'Astrolabe Tympan — Isfahan ({lat}°N)', color='white')
 plt.show()
 print(f"Zenith offset from center: {r_z:.3f} units")`,
       challenge: 'Change lat to 51 (London). Notice how the zenith moves further from the center and the horizon circle shifts. This is why each latitude needs its own tympan.',
-      successHint: 'You just drew the base plate of an astrolabe. Every astrolabe tympan is computed from these same projection formulas \u2014 the only variable is your latitude.',
+      successHint: 'You just drew the base plate of an astrolabe. Every astrolabe tympan is computed from these same projection formulas — the only variable is your latitude.',
     },
     {
-      title: 'Drawing the rete \u2014 a rotating star map',
+      title: 'Drawing the rete — a rotating star map',
       concept: `The **rete** is the astrolabe's crowning achievement: a lacy brass overlay with pointers for the brightest stars and the path of the Sun (the **ecliptic**).
 
 Each star pointer is positioned using stereographic projection of the star's right ascension (RA) and declination (Dec):
-- x = tan((90\u00B0 - Dec)/2) \u00B7 cos(RA)
-- y = tan((90\u00B0 - Dec)/2) \u00B7 sin(RA)
+- x = tan((90° - Dec)/2) · cos(RA)
+- y = tan((90° - Dec)/2) · sin(RA)
 
-The ecliptic is the Sun's annual path through the sky \u2014 a great circle tilted 23.4\u00B0 from the celestial equator. Under stereographic projection, it becomes an **off-center circle** on the disk.
+The ecliptic is the Sun's annual path through the sky — a great circle tilted 23.4° from the celestial equator. Under stereographic projection, it becomes an **off-center circle** on the disk.
 
 When you rotate the rete, you simulate the sky's daily rotation. Stars rise above the horizon (the tympan's horizon circle) and set below it, just as they do in the real sky.`,
       analogy: 'The rete is like a transparent clock hand with stars painted on it. As you turn it over the tympan (the clock face), different stars come into view above the horizon line. One full rotation = one sidereal day.',
-      storyConnection: 'Zahra rotated the rete and watched "Vega rise above the horizon line. Sirius dipped below." She was turning the sky in brass \u2014 the rete spinning over the tympan exactly simulates the Earth\u2019s rotation.',
+      storyConnection: 'Zahra rotated the rete and watched "Vega rise above the horizon line. Sirius dipped below." She was turning the sky in brass — the rete spinning over the tympan exactly simulates the Earth’s rotation.',
       checkQuestion: 'If the rete makes one complete rotation per sidereal day (23h 56m), how many degrees does it rotate per hour?',
-      checkAnswer: '360\u00B0 / 23.933 hours = 15.04\u00B0 per hour. This is essentially the same 15\u00B0/hour as the Sun, but slightly faster because the sidereal day is 4 minutes shorter than the solar day.',
+      checkAnswer: '360° / 23.933 hours = 15.04° per hour. This is essentially the same 15°/hour as the Sun, but slightly faster because the sidereal day is 4 minutes shorter than the solar day.',
       codeIntro: 'Build the rete with star pointers and the ecliptic circle.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -343,29 +343,29 @@ ax.add_patch(plt.Circle((0, 0), outer, fill=False,
 
 ax.set_xlim(-2.5, 2.5); ax.set_ylim(-2.5, 2.5)
 ax.set_aspect('equal')
-ax.set_title('Astrolabe Rete \u2014 Star Pointers & Ecliptic', color='white')
+ax.set_title('Astrolabe Rete — Star Pointers & Ecliptic', color='white')
 ax.legend(fontsize=8, loc='lower right')
 plt.show()
 print(f"Stars plotted: {len(stars)}")
 print(f"Ecliptic offset from center: {np.mean(ey):.3f} units")`,
       challenge: 'Add the constellation lines for the Summer Triangle (Vega-Altair-Deneb). Just plot lines between the three stars.',
-      successHint: 'You have built the rete \u2014 the rotating star map of the astrolabe. In brass, these star pointers are cut as delicate lace to let the tympan show through. In code, they are (x,y) coordinates from stereographic projection.',
+      successHint: 'You have built the rete — the rotating star map of the astrolabe. In brass, these star pointers are cut as delicate lace to let the tympan show through. In code, they are (x,y) coordinates from stereographic projection.',
     },
     {
       title: 'The ecliptic and the zodiac calendar',
-      concept: `The **ecliptic** is the Sun's apparent path through the sky over a year. It is tilted 23.4\u00B0 from the celestial equator because the Earth's axis is tilted.
+      concept: `The **ecliptic** is the Sun's apparent path through the sky over a year. It is tilted 23.4° from the celestial equator because the Earth's axis is tilted.
 
-The ecliptic is divided into 12 segments of 30\u00B0 each, traditionally named after the zodiac constellations. On the astrolabe, these divisions serve as a **calendar**: by knowing the date, you find the Sun's position on the ecliptic, and from there you can compute sunrise, sunset, and time.
+The ecliptic is divided into 12 segments of 30° each, traditionally named after the zodiac constellations. On the astrolabe, these divisions serve as a **calendar**: by knowing the date, you find the Sun's position on the ecliptic, and from there you can compute sunrise, sunset, and time.
 
-The Sun's ecliptic longitude increases by about 1\u00B0 per day (360\u00B0 / 365.25 days). Its declination follows:
-**dec = 23.44\u00B0 \u00B7 sin(ecliptic_longitude)**
+The Sun's ecliptic longitude increases by about 1° per day (360° / 365.25 days). Its declination follows:
+**dec = 23.44° · sin(ecliptic_longitude)**
 
-At the vernal equinox (March 20), longitude = 0\u00B0, dec = 0\u00B0. At summer solstice (June 21), longitude = 90\u00B0, dec = +23.44\u00B0.`,
+At the vernal equinox (March 20), longitude = 0°, dec = 0°. At summer solstice (June 21), longitude = 90°, dec = +23.44°.`,
       analogy: 'The ecliptic is like a tilted racetrack around the sky. The Sun drives around it once a year. The zodiac signs are mile markers along the track. Knowing the date tells you which mile marker the Sun is near.',
-      storyConnection: 'Zahra set the rete to the Sun\u2019s current position on the ecliptic to tell time. The ecliptic ring on the rete has month/zodiac divisions \u2014 it is a built-in calendar that connects dates to star positions.',
-      checkQuestion: 'On December 21 (winter solstice), the Sun\u2019s ecliptic longitude is 270\u00B0. What is its declination?',
-      checkAnswer: 'dec = 23.44\u00B0 \u00D7 sin(270\u00B0) = 23.44\u00B0 \u00D7 (-1) = -23.44\u00B0. The Sun is at its most southerly point. For the Northern Hemisphere, this is the shortest day.',
-      codeIntro: 'Plot the Sun\u2019s path through the year: ecliptic longitude, declination, and projected position.',
+      storyConnection: 'Zahra set the rete to the Sun’s current position on the ecliptic to tell time. The ecliptic ring on the rete has month/zodiac divisions — it is a built-in calendar that connects dates to star positions.',
+      checkQuestion: 'On December 21 (winter solstice), the Sun’s ecliptic longitude is 270°. What is its declination?',
+      checkAnswer: 'dec = 23.44° × sin(270°) = 23.44° × (-1) = -23.44°. The Sun is at its most southerly point. For the Northern Hemisphere, this is the shortest day.',
+      codeIntro: 'Plot the Sun’s path through the year: ecliptic longitude, declination, and projected position.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
@@ -395,7 +395,7 @@ for d, label in [(80, 'Vernal Eq'), (172, 'Summer Sol'),
     ax1.text(d, 25, label, fontsize=7, color='#94a3b8',
              ha='center', rotation=0)
 
-ax1.set_ylabel('Declination (\u00B0)', color='#e2e8f0')
+ax1.set_ylabel('Declination (°)', color='#e2e8f0')
 ax1.set_title('Sun\\'s Declination Through the Year', color='white')
 
 # Zodiac markers
@@ -433,24 +433,24 @@ ax2.legend(fontsize=8)
 plt.tight_layout()
 plt.show()`,
       challenge: 'The ecliptic on the astrolabe is an off-center circle. Compute its center coordinates and radius from the projected points.',
-      successHint: 'The ecliptic ring on the rete is the astrolabe\u2019s calendar. Match the date to a point on the ecliptic, set the rete to the correct sidereal time, and you can read sunrise, sunset, and prayer times.',
+      successHint: 'The ecliptic ring on the rete is the astrolabe’s calendar. Match the date to a point on the ecliptic, set the rete to the correct sidereal time, and you can read sunrise, sunset, and prayer times.',
     },
     {
-      title: 'Assembling the astrolabe \u2014 tympan + rete overlay',
+      title: 'Assembling the astrolabe — tympan + rete overlay',
       concept: `Now we combine everything: overlay the rete (star map + ecliptic) on the tympan (altitude/azimuth grid) to create a working digital astrolabe.
 
-The key operation: **rotation**. When you rotate the rete by an angle \u03B1, every star pointer rotates by that angle. The rotation matrix is:
+The key operation: **rotation**. When you rotate the rete by an angle α, every star pointer rotates by that angle. The rotation matrix is:
 
-x' = x\u00B7cos(\u03B1) - y\u00B7sin(\u03B1)
-y' = x\u00B7sin(\u03B1) + y\u00B7cos(\u03B1)
+x' = x·cos(α) - y·sin(α)
+y' = x·sin(α) + y·cos(α)
 
-The rotation angle \u03B1 corresponds to the local sidereal time (LST). As LST increases, the rete rotates counterclockwise (matching the sky's apparent motion). Stars cross the horizon circle \u2014 they rise in the east and set in the west.
+The rotation angle α corresponds to the local sidereal time (LST). As LST increases, the rete rotates counterclockwise (matching the sky's apparent motion). Stars cross the horizon circle — they rise in the east and set in the west.
 
 This is the complete astrolabe: a static tympan with moving rete. Two layers of circles, one rotating over the other.`,
-      analogy: 'Think of two transparent sheets stacked together. The bottom (tympan) has altitude circles drawn in blue. The top (rete) has stars drawn in gold. Pin them together at the center and rotate the top sheet \u2014 you see stars moving through the altitude circles. That is the astrolabe.',
-      storyConnection: 'Zahra rotated the rete and "watched the star pointers sweep across the tympan." This is the moment the astrolabe comes alive \u2014 two static engravings, combined with rotation, simulate the living sky.',
-      checkQuestion: 'If you rotate the rete by 90\u00B0 (6 sidereal hours), what happens to a star that was on the eastern horizon?',
-      checkAnswer: 'It moves to the highest point in the sky (the meridian). 90\u00B0 of rotation = 6 hours. A star on the east horizon at time T is at its maximum altitude 6 hours later when it crosses the meridian. This is exactly what you see on the astrolabe \u2014 the star pointer moves from the horizon circle to near the zenith.',
+      analogy: 'Think of two transparent sheets stacked together. The bottom (tympan) has altitude circles drawn in blue. The top (rete) has stars drawn in gold. Pin them together at the center and rotate the top sheet — you see stars moving through the altitude circles. That is the astrolabe.',
+      storyConnection: 'Zahra rotated the rete and "watched the star pointers sweep across the tympan." This is the moment the astrolabe comes alive — two static engravings, combined with rotation, simulate the living sky.',
+      checkQuestion: 'If you rotate the rete by 90° (6 sidereal hours), what happens to a star that was on the eastern horizon?',
+      checkAnswer: 'It moves to the highest point in the sky (the meridian). 90° of rotation = 6 hours. A star on the east horizon at time T is at its maximum altitude 6 hours later when it crosses the meridian. This is exactly what you see on the astrolabe — the star pointer moves from the horizon circle to near the zenith.',
       codeIntro: 'Build the complete astrolabe: tympan + rotating rete, animated through one day.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -521,13 +521,13 @@ for deg in range(0, 360, 15):
 ax.plot(0, 0, '+', color='#10b981', markersize=10, markeredgewidth=2)
 ax.set_xlim(-2.5, 2.5); ax.set_ylim(-2.5, 2.5)
 ax.set_aspect('equal')
-ax.set_title(f'Astrolabe \u2014 Isfahan 32\u00B0N (rete rotated {rotation}\u00B0)',
+ax.set_title(f'Astrolabe — Isfahan 32°N (rete rotated {rotation}°)',
              color='white')
 plt.show()
-print(f"Rete rotation: {rotation}\u00B0 = {rotation/15:.1f} sidereal hours")
+print(f"Rete rotation: {rotation}° = {rotation/15:.1f} sidereal hours")
 print("Try changing 'rotation' to see the sky at different times!")`,
-      challenge: 'Animate the astrolabe: loop rotation from 0 to 360 in steps of 15\u00B0 and watch the stars sweep across the sky. Which stars never dip below the horizon? (Those are circumpolar stars.)',
-      successHint: 'You have built a working digital astrolabe. Two projected layers (tympan + rete), one rotating over the other, reproducing the sky\u2019s motion for any latitude at any time. This is exactly what Zahra held in her hands.',
+      challenge: 'Animate the astrolabe: loop rotation from 0 to 360 in steps of 15° and watch the stars sweep across the sky. Which stars never dip below the horizon? (Those are circumpolar stars.)',
+      successHint: 'You have built a working digital astrolabe. Two projected layers (tympan + rete), one rotating over the other, reproducing the sky’s motion for any latitude at any time. This is exactly what Zahra held in her hands.',
     },
   ];
 

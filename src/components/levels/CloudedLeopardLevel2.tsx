@@ -267,7 +267,7 @@ fig.patch.set_facecolor('#1f2937')
 walks = [
     ('Random Walk', random_walk(n_steps), '#ef4444'),
     ('Correlated Walk', correlated_walk(n_steps), '#f59e0b'),
-    ('L\\u00e9vy Walk', levy_walk(n_steps), '#22c55e'),
+    ('L\évy Walk', levy_walk(n_steps), '#22c55e'),
     ('Biased Walk', biased_walk(n_steps), '#3b82f6'),
 ]
 
@@ -326,10 +326,10 @@ plt.show()
 print("Movement model comparison:")
 print("  Random walk: MSD grows linearly (diffusive)")
 print("  Correlated walk: MSD grows faster (persistent direction)")
-print("  L\\u00e9vy walk: MSD grows super-linearly (long jumps)")
+print("  L\évy walk: MSD grows super-linearly (long jumps)")
 print("  Biased walk: MSD grows then plateaus (reaches target)")
 print()
-print("  Clouded leopards likely use correlated + L\\u00e9vy-like movement")
+print("  Clouded leopards likely use correlated + L\évy-like movement")
 print("  Short correlated steps for local foraging")
 print("  Occasional long steps to reach new forest patches")`,
       challenge: 'Generate 1000 Levy walks with different mu values (1.5, 2.0, 2.5, 3.0). For each, calculate the total area covered (convex hull). Which mu value gives the best area-to-distance ratio? This is the foraging efficiency question.',
@@ -450,8 +450,8 @@ for k in range(n_occasions - 1):
     else:
         phi_estimates.append(np.nan)
 
-ax.plot(range(len(phi_estimates)), phi_estimates, 'o-', color='#3b82f6', linewidth=2, label='Estimated \\u03c6')
-ax.axhline(phi, color='#ef4444', linestyle='--', label=f'True \\u03c6 = {phi}')
+ax.plot(range(len(phi_estimates)), phi_estimates, 'o-', color='#3b82f6', linewidth=2, label='Estimated \φ')
+ax.axhline(phi, color='#ef4444', linestyle='--', label=f'True \φ = {phi}')
 ax.set_xlabel('Interval', color='white')
 ax.set_ylabel('Survival probability', color='white')
 ax.set_title('Survival Estimation (simplified)', color='white', fontsize=11)
@@ -480,10 +480,10 @@ ax.tick_params(colors='gray')
 plt.tight_layout()
 plt.show()
 
-print(f"True parameters: N={n_animals}, \\u03c6={phi}, p={p}")
+print(f"True parameters: N={n_animals}, \φ={phi}, p={p}")
 print(f"Detected: {n_detected} individuals ({n_detected/n_animals*100:.0f}% of true population)")
 print(f"Simple N estimate: {np.mean(estimated_N):.0f} (true: {np.mean(true_N):.0f})")
-print(f"Mean \\u03c6 estimate: {np.nanmean(phi_estimates):.3f} (true: {phi})")`,
+print(f"Mean \φ estimate: {np.nanmean(phi_estimates):.3f} (true: {phi})")`,
       challenge: 'Make detection probability vary by occasion (wet season = low p, dry season = high p). How does this affect the population estimates? This is why model selection (testing p-constant vs p-time) matters.',
       successHint: 'Capture-recapture statistics are among the most powerful tools in ecology. The same framework is used for counting fish, birds, elephants, and even humans in hard-to-reach populations. Mastering this math means you can estimate any hidden population from incomplete data.',
     },
@@ -618,9 +618,9 @@ plt.show()
 total_area = 50 * 50  # km²
 suitable_area = np.sum(suitability > 0.5) / grid_size**2 * total_area
 high_suit = np.sum(suitability > 0.7) / grid_size**2 * total_area
-print(f"Landscape analysis (50x50 km = {total_area} km\\u00b2):")
-print(f"  Suitable habitat (>0.5): {suitable_area:.0f} km\\u00b2 ({suitable_area/total_area*100:.0f}%)")
-print(f"  High-quality habitat (>0.7): {high_suit:.0f} km\\u00b2 ({high_suit/total_area*100:.0f}%)")
+print(f"Landscape analysis (50x50 km = {total_area} km\²):")
+print(f"  Suitable habitat (>0.5): {suitable_area:.0f} km\² ({suitable_area/total_area*100:.0f}%)")
+print(f"  High-quality habitat (>0.7): {high_suit:.0f} km\² ({high_suit/total_area*100:.0f}%)")
 print(f"  Presence points: {len(presence_x)}")
 print(f"  Key predictors: forest cover > elevation > distance to road > slope")`,
       challenge: 'Add a "road building" scenario: create a new road at y=35. Recalculate suitability and measure the habitat loss. What is the total impact of one 50 km road?',
@@ -764,7 +764,7 @@ for i in range(1, n_patches + 1):
     area = np.sum(labeled == i) / grid_size**2 * landscape_size**2
     patch_areas.append(area)
     cy_p, cx_p = ndimage.center_of_mass(labeled == i)
-    ax.text(cx_p / grid_size * 50, cy_p / grid_size * 50, f'{area:.0f}km\\u00b2',
+    ax.text(cx_p / grid_size * 50, cy_p / grid_size * 50, f'{area:.0f}km\²',
             color='white', ha='center', fontsize=8, fontweight='bold')
 
 # 6. Summary statistics
@@ -786,24 +786,24 @@ stats = {
 
 bars = ax.barh(list(stats.keys()), list(stats.values()),
                color=['#6b7280', '#22c55e', '#3b82f6', '#8b5cf6', '#ef4444'])
-ax.set_xlabel('Area (km\\u00b2)', color='white')
+ax.set_xlabel('Area (km\²)', color='white')
 ax.set_title('Conservation Summary', color='white', fontsize=10)
 ax.tick_params(colors='gray')
 
 for bar, val in zip(bars, stats.values()):
     ax.text(bar.get_width() + 20, bar.get_y() + bar.get_height()/2,
-            f'{val:.0f} km\\u00b2', va='center', color='white', fontsize=9)
+            f'{val:.0f} km\²', va='center', color='white', fontsize=9)
 
 plt.tight_layout()
 plt.show()
 
 print("GIS Conservation Analysis:")
-print(f"  Total landscape: {total_area:.0f} km\\u00b2")
-print(f"  Suitable habitat: {suitable_area:.0f} km\\u00b2 ({suitable_area/total_area*100:.0f}%)")
-print(f"  Protected: {protected_area:.0f} km\\u00b2")
-print(f"  Protection gap: {gap_area:.0f} km\\u00b2 ({gap_area/suitable_area*100:.0f}% of suitable)")
+print(f"  Total landscape: {total_area:.0f} km\²")
+print(f"  Suitable habitat: {suitable_area:.0f} km\² ({suitable_area/total_area*100:.0f}%)")
+print(f"  Protected: {protected_area:.0f} km\²")
+print(f"  Protection gap: {gap_area:.0f} km\² ({gap_area/suitable_area*100:.0f}% of suitable)")
 print(f"  Forest fragments: {n_patches}")
-print(f"  Largest patch: {max(patch_areas):.0f} km\\u00b2")`,
+print(f"  Largest patch: {max(patch_areas):.0f} km\²")`,
       challenge: 'Design a wildlife corridor connecting the two largest forest patches. Calculate the corridor area needed (assume 1 km width minimum). What percentage of the landscape would the corridor system occupy?',
       successHint: 'GIS is the language of conservation planning. Every national park boundary, every wildlife corridor, every environmental impact assessment is built on spatial analysis. Learning GIS is like learning to read the conservation map of the world.',
     },
@@ -974,22 +974,22 @@ ax.set_facecolor('#111827')
 ax.axis('off')
 summary_text = f"""Conservation Plan Summary
 {'='*30}
-Landscape: {n_units * unit_area:,} km\\u00b2
-Planning units: {n_units} ({unit_area} km\\u00b2 each)
+Landscape: {n_units * unit_area:,} km\²
+Planning units: {n_units} ({unit_area} km\² each)
 Budget: Rs {budget/100:.0f} lakhs
 Units selected: {np.sum(selected)} ({np.sum(selected)/n_units*100:.0f}%)
-Area protected: {np.sum(selected) * unit_area:,} km\\u00b2
+Area protected: {np.sum(selected) * unit_area:,} km\²
 
 Species targets:"""
 
 for i, sp_name in enumerate(sp_names):
-    status = '\\u2713' if achieved[i] >= targets[i] else '\\u2717'
+    status = '\✓' if achieved[i] >= targets[i] else '\✗'
     summary_text += f"\n  {sp_name}: {achieved[i]:.0f}% ({status} target: {targets[i]:.0f}%)"
 
 summary_text += f"""
 
 Total cost: Rs {total_cost/100:.0f} lakhs
-Cost per km\\u00b2: Rs {total_cost/(np.sum(selected)*unit_area)*100:.0f} lakhs"""
+Cost per km\²: Rs {total_cost/(np.sum(selected)*unit_area)*100:.0f} lakhs"""
 
 ax.text(0.1, 0.9, summary_text, transform=ax.transAxes, color='white',
         fontsize=10, verticalalignment='top', fontfamily='monospace')

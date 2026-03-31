@@ -454,8 +454,8 @@ print("Elephant Rumble Classifier — Live Demo")
 print("=" * 45)
 for i in range(len(X_new)):
     mood, conf = clf.predict(X_new[i])
-    ok = "\u2713" if mood == y_new[i] else "\u2717"
-    alert = " \u26A0 ALERT" if mood in ['cry','roar'] and conf > 0.4 else ""
+    ok = "✓" if mood == y_new[i] else "✗"
+    alert = " ⚠ ALERT" if mood in ['cry','roar'] and conf > 0.4 else ""
     print(f"{ok} Predicted: {mood:8s} ({conf:.0%}) | Actual: {y_new[i]}{alert}")
 
 correct = sum(clf.predict(X_new[i])[0] == y_new[i] for i in range(len(X_new)))

@@ -4,7 +4,7 @@ export default function PandaMaskFunctionDiagram() {
       <svg viewBox="0 0 580 480" className="w-full max-w-xl mx-auto" role="img" aria-label="Red panda face mask functions: counter-shading, glare reduction, and bark camouflage">
         <rect width="580" height="480" rx="12" className="fill-slate-900" />
 
-        <text x="290" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#fb923c">The Red Panda\u2019s Mask \u2014 Three Functions</text>
+        <text x="290" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#fb923c">The Red Panda’s Mask — Three Functions</text>
 
         {/* ── Central red panda face ── */}
         <g transform="translate(200, 55)">
@@ -76,7 +76,7 @@ export default function PandaMaskFunctionDiagram() {
           <text x="85" y="160" textAnchor="middle" fontSize="10" fill="#fdba74">Dark on top absorbs</text>
           <text x="85" y="173" textAnchor="middle" fontSize="10" fill="#fdba74">sunlight from above</text>
           <text x="85" y="190" textAnchor="middle" fontSize="10" fill="#d1d5db">Light below reflects</text>
-          <text x="85" y="203" textAnchor="middle" fontSize="10" fill="#d1d5db">shadow \u2014 flattening</text>
+          <text x="85" y="203" textAnchor="middle" fontSize="10" fill="#d1d5db">shadow — flattening</text>
           <text x="85" y="216" textAnchor="middle" fontSize="10" fill="#d1d5db">the 3D shape</text>
         </g>
 
@@ -112,7 +112,7 @@ export default function PandaMaskFunctionDiagram() {
           <text x="85" y="153" textAnchor="middle" fontSize="10" fill="#fdba74">absorbs bright light</text>
           <text x="85" y="172" textAnchor="middle" fontSize="10" fill="#d1d5db">Same reason athletes</text>
           <text x="85" y="185" textAnchor="middle" fontSize="10" fill="#d1d5db">wear black eye paint</text>
-          <text x="85" y="198" textAnchor="middle" fontSize="10" fill="#d1d5db">\u2014 reduces snow glare</text>
+          <text x="85" y="198" textAnchor="middle" fontSize="10" fill="#d1d5db">— reduces snow glare</text>
           <text x="85" y="211" textAnchor="middle" fontSize="10" fill="#d1d5db">in bright mountain sun</text>
         </g>
 

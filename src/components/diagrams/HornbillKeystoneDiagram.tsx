@@ -61,7 +61,7 @@ export default function HornbillKeystoneDiagram() {
 
         {/* BOTTOM HALF: What happens without hornbills */}
         <line x1="20" y1="310" x2="500" y2="310" stroke="#475569" strokeWidth="1" strokeDasharray="4,3" />
-        <text x="260" y="330" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#ef4444">If Hornbills Disappear \u2193</text>
+        <text x="260" y="330" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#ef4444">If Hornbills Disappear ↓</text>
 
         {/* Cascade chain */}
         <g transform="translate(60, 355)">

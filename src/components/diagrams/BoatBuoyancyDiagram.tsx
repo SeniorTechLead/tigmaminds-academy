@@ -35,7 +35,7 @@ export default function BoatBuoyancyDiagram() {
 
         {/* === LEFT: Floating Boat === */}
         <text x="160" y="58" textAnchor="middle" className="label fill-green-400" fontWeight="700">
-          Floats \u2714
+          Floats ✔
         </text>
 
         {/* Water */}
@@ -81,15 +81,15 @@ export default function BoatBuoyancyDiagram() {
 
         {/* Equation */}
         <text x="160" y="330" textAnchor="middle" className="formula fill-green-300">
-          F_B = \u03C1_water \u00D7 g \u00D7 V_displaced
+          F_B = ρ_water × g × V_displaced
         </text>
         <text x="160" y="348" textAnchor="middle" className="small fill-slate-400">
-          When F_B \u2265 W \u2192 object floats
+          When F_B ≥ W → object floats
         </text>
 
         {/* === RIGHT: Sinking Block === */}
         <text x="460" y="58" textAnchor="middle" className="label fill-red-400" fontWeight="700">
-          Sinks \u2718
+          Sinks ✘
         </text>
 
         {/* Water */}
@@ -100,7 +100,7 @@ export default function BoatBuoyancyDiagram() {
         <g className="sinking">
           <rect x="430" y="240" width="60" height="50" rx="3" fill="#6b7280" stroke="#9ca3af" strokeWidth="1.5" />
           <text x="460" y="270" textAnchor="middle" className="small fill-slate-300">steel</text>
-          <text x="460" y="282" textAnchor="middle" className="small fill-slate-400">7800 kg/m\u00B3</text>
+          <text x="460" y="282" textAnchor="middle" className="small fill-slate-400">7800 kg/m³</text>
         </g>
 
         {/* Weight arrow (down, longer) */}
@@ -115,7 +115,7 @@ export default function BoatBuoyancyDiagram() {
 
         {/* Explanation */}
         <text x="460" y="348" textAnchor="middle" className="small fill-slate-400">
-          W &gt; F_B \u2192 sinks
+          W &gt; F_B → sinks
         </text>
         <text x="460" y="362" textAnchor="middle" className="small fill-slate-500">
           Solid steel: density &gt; water
@@ -127,7 +127,7 @@ export default function BoatBuoyancyDiagram() {
           Key: Same steel can float or sink. A hollow hull encloses air, lowering average density.
         </text>
         <text x="310" y="422" textAnchor="middle" className="small fill-blue-300">
-          Average density = total mass \u00F7 total volume (including air space)
+          Average density = total mass ÷ total volume (including air space)
         </text>
       </svg>
     </div>

@@ -54,7 +54,7 @@ export default function MeteorImpactDiagram() {
 
           {/* Labels */}
           <text x="130" y="196" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-slate-400">
-            Meteorite hits at 15\u201370 km/s.
+            Meteorite hits at 15–70 km/s.
           </text>
           <text x="130" y="210" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-slate-400">
             Shockwave compresses rock to
@@ -125,7 +125,7 @@ export default function MeteorImpactDiagram() {
           <text x="175" y="108" textAnchor="middle" fontSize="10" className="fill-amber-700 dark:fill-amber-400">Central peak</text>
 
           <text x="130" y="196" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-slate-400">
-            Crater is 10\u201320\u00D7 wider than
+            Crater is 10–20× wider than
           </text>
           <text x="130" y="210" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-slate-400">
             the meteorite. Rim rises from
@@ -138,13 +138,13 @@ export default function MeteorImpactDiagram() {
         {/* Kinetic energy formula */}
         <rect x="40" y="350" width="700" height="60" rx="8" className="fill-blue-50 dark:fill-blue-950/40" stroke="#3b82f6" strokeWidth="1" />
         <text x="390" y="372" textAnchor="middle" fontSize="13" fontWeight="700" className="fill-blue-700 dark:fill-blue-300">
-          Why impacts are so powerful: KE = \u00BD \u00D7 m \u00D7 v\u00B2
+          Why impacts are so powerful: KE = ½ × m × v²
         </text>
         <text x="390" y="392" textAnchor="middle" fontSize="11" className="fill-blue-600 dark:fill-blue-400">
-          A 10 m rock at 20 km/s carries energy equivalent to ~3 atomic bombs. Speed matters far more than size (v\u00B2).
+          A 10 m rock at 20 km/s carries energy equivalent to ~3 atomic bombs. Speed matters far more than size (v²).
         </text>
         <text x="390" y="404" textAnchor="middle" fontSize="10" className="fill-blue-500 dark:fill-blue-500">
-          Double the speed \u2192 4\u00D7 the energy. Double the mass \u2192 only 2\u00D7 the energy.
+          Double the speed → 4× the energy. Double the mass → only 2× the energy.
         </text>
 
         {/* Famous craters comparison */}

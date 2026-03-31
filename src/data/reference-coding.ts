@@ -2131,7 +2131,7 @@ plt.show()`,
         goDeeper:
           'Decision boundaries in Gaussian classifiers follow from equating the log-likelihoods of two classes: log p(x|class A) = log p(x|class B). For equal covariance matrices, this simplifies to a **linear boundary** (LDA). For unequal covariances, the boundary becomes **quadratic** (QDA) — a curve that follows the shape of the contours. Gaussian Mixture Models allow each class to have multiple Gaussian components, creating complex multi-modal decision regions.',
         advanced:
-          'The information geometry viewpoint: the space of Gaussian distributions forms a Riemannian manifold where the Fisher information matrix defines the metric. The KL divergence between two Gaussians: KL(p||q) = \u00BD[tr(\u03A3q\u207B\u00B9\u03A3p) + (\u03BCq-\u03BCp)\u1D40\u03A3q\u207B\u00B9(\u03BCq-\u03BCp) - k + ln(|\u03A3q|/|\u03A3p|)]. Contour plot visualization is the primary diagnostic tool for variational inference, where the approximate posterior (often a Gaussian) is compared against the true posterior. In normalizing flows, a simple Gaussian is warped through invertible transformations — the contour plot evolves from circles to arbitrarily complex shapes.',
+          'The information geometry viewpoint: the space of Gaussian distributions forms a Riemannian manifold where the Fisher information matrix defines the metric. The KL divergence between two Gaussians: KL(p||q) = ½[tr(Σq⁻¹Σp) + (μq-μp)ᵀΣq⁻¹(μq-μp) - k + ln(|Σq|/|Σp|)]. Contour plot visualization is the primary diagnostic tool for variational inference, where the approximate posterior (often a Gaussian) is compared against the true posterior. In normalizing flows, a simple Gaussian is warped through invertible transformations — the contour plot evolves from circles to arbitrarily complex shapes.',
         interactive: { type: 'contour-explainer' as const, props: {} },
       },
       {
@@ -3273,7 +3273,7 @@ void loop() {
           'the peak is where data is most likely, the edges are where data is rare. When two variables ' +
           'are correlated, the contour circles stretch into tilted ellipses — the tilt IS the correlation.',
         goDeeper:
-          'A contour line connects all points at the same value of a function f(x,y). For a bivariate Gaussian, contour lines are ellipses defined by (x-\u03BC)\u1D40\u03A3\u207B\u00B9(x-\u03BC) = c for constant c. The **eigenvalues** of the covariance matrix \u03A3 determine the lengths of the ellipse axes, and the **eigenvectors** determine the tilt angle. When \u03C1=0, the eigenvalues are \u03C3\u2093\u00B2 and \u03C3\u1D67\u00B2 and the axes are aligned with x and y. When \u03C1\u22600, the major axis tilts at angle \u03B8 = \u00BD arctan(2\u03C1\u03C3\u2093\u03C3\u1D67/(\u03C3\u2093\u00B2-\u03C3\u1D67\u00B2)). The Mahalanobis distance from the center to any contour line determines the probability enclosed within that contour.',
+          'A contour line connects all points at the same value of a function f(x,y). For a bivariate Gaussian, contour lines are ellipses defined by (x-μ)ᵀΣ⁻¹(x-μ) = c for constant c. The **eigenvalues** of the covariance matrix Σ determine the lengths of the ellipse axes, and the **eigenvectors** determine the tilt angle. When ρ=0, the eigenvalues are σₓ² and σᵧ² and the axes are aligned with x and y. When ρ≠0, the major axis tilts at angle θ = ½ arctan(2ρσₓσᵧ/(σₓ²-σᵧ²)). The Mahalanobis distance from the center to any contour line determines the probability enclosed within that contour.',
         advanced:
           'In higher dimensions, contour "lines" become contour **surfaces** (hyperellipsoids). Gaussian Mixture Models (GMMs) combine multiple Gaussians, each with its own mean, covariance, and weight — the resulting contour plot shows multiple overlapping elliptical regions. The EM algorithm iteratively refines these parameters. In Bayesian inference, posterior contour plots reveal parameter uncertainty: the 95% **credible region** (the contour enclosing 95% of the posterior mass) is the Bayesian analog of a confidence interval. Kernel Density Estimation produces non-parametric contour plots from raw data — useful when the true distribution is not Gaussian.',
         interactive: { type: 'contour-explainer' as const, props: {} },
@@ -4458,39 +4458,39 @@ plt.show()
     slug: 'logic-gates',
     title: 'Logic Gates & Boolean Algebra',
     category: 'electronics',
-    icon: '\u26A1',
-    tagline: 'The building blocks of every computer \u2014 from simple switches to complex circuits.',
+    icon: '⚡',
+    tagline: 'The building blocks of every computer — from simple switches to complex circuits.',
     relatedStories: ['girl-who-spoke-to-elephants'],
 
     understand: [
       {
-        title: 'Switches \u2014 Where It All Begins',
+        title: 'Switches — Where It All Begins',
         content:
-          'A light switch is the simplest computer you already own. Flip it up \u2014 the light is ON (1). ' +
-          'Flip it down \u2014 the light is OFF (0). That is one **bit** of information: a single yes-or-no, ' +
-          'on-or-off, true-or-false choice. Everything a computer does \u2014 playing music, sending messages, ' +
-          'running games \u2014 boils down to billions of these tiny on/off decisions happening incredibly fast.\n\n' +
+          'A light switch is the simplest computer you already own. Flip it up — the light is ON (1). ' +
+          'Flip it down — the light is OFF (0). That is one **bit** of information: a single yes-or-no, ' +
+          'on-or-off, true-or-false choice. Everything a computer does — playing music, sending messages, ' +
+          'running games — boils down to billions of these tiny on/off decisions happening incredibly fast.\n\n' +
           'Why only two states? Because it is far easier to build reliable electronic circuits that distinguish ' +
           'between "electricity flowing" and "no electricity flowing" than to recognize many different voltage levels. ' +
           'This two-state system is called **binary**, and the digits 0 and 1 are called **binary digits** (bits). ' +
           'Eight bits make a **byte**, enough to represent a single letter or a number up to 255.',
         goDeeper:
           'Binary (base-2) works exactly like decimal (base-10), but with only two digits. In decimal, 237 means ' +
-          '2\u00D7100 + 3\u00D710 + 7\u00D71. In binary, 1101 means 1\u00D78 + 1\u00D74 + 0\u00D72 + 1\u00D71 = 13. ' +
+          '2×100 + 3×10 + 7×1. In binary, 1101 means 1×8 + 1×4 + 0×2 + 1×1 = 13. ' +
           'To convert decimal to binary, repeatedly divide by 2 and read the remainders bottom-to-top. ' +
-          'Hexadecimal (base-16) is a shorthand: each hex digit (0\u20139, A\u2013F) represents exactly 4 bits. ' +
+          'Hexadecimal (base-16) is a shorthand: each hex digit (0–9, A–F) represents exactly 4 bits. ' +
           'So the binary number 1010 1111 becomes AF in hex. Programmers use hex because it is compact yet maps ' +
-          'directly to binary \u2014 every color code like #FF6600 is really 24 bits of red, green, and blue.',
+          'directly to binary — every color code like #FF6600 is really 24 bits of red, green, and blue.',
         advanced:
           'At the transistor level, a switch is a MOSFET (Metal-Oxide-Semiconductor Field-Effect Transistor). ' +
-          'When voltage is applied to the gate terminal, the channel between source and drain becomes conductive \u2014 ' +
+          'When voltage is applied to the gate terminal, the channel between source and drain becomes conductive — ' +
           'the switch is "on." Modern processors use complementary pairs (CMOS): an nMOS transistor pulls the ' +
           'output low (0) while a pMOS pulls it high (1). This complementary design means current only flows ' +
           'during switching, dramatically reducing power consumption. A single transistor in a modern chip is ' +
-          'about 5 nanometers wide \u2014 roughly 10 atoms across. A human hair is 80,000 nm wide.',
+          'about 5 nanometers wide — roughly 10 atoms across. A human hair is 80,000 nm wide.',
       },
       {
-        title: 'AND Gate \u2014 Both Must Be True',
+        title: 'AND Gate — Both Must Be True',
         content:
           'Imagine a bank vault that needs **two keys** turned at the same time to open. If only one person shows ' +
           'up, the vault stays locked. Both must be present. That is exactly how an AND gate works: the output is 1 ' +
@@ -4505,25 +4505,25 @@ plt.show()
           'In everyday life, AND logic appears everywhere: a car starts only if the key is in **and** the brake ' +
           'is pressed. A microwave runs only if the door is closed **and** the start button is pressed.',
         goDeeper:
-          'In Boolean algebra, AND is written as multiplication: A \u00B7 B or simply AB. This is because the ' +
-          'multiplication table for 0 and 1 matches the AND truth table: 0\u00D70=0, 0\u00D71=0, 1\u00D70=0, 1\u00D71=1. ' +
-          'AND has useful algebraic properties: **identity** (A \u00B7 1 = A), **null** (A \u00B7 0 = 0), ' +
-          '**idempotent** (A \u00B7 A = A), **commutative** (A \u00B7 B = B \u00B7 A), and **associative** ' +
-          '((A \u00B7 B) \u00B7 C = A \u00B7 (B \u00B7 C)). These let you simplify complex expressions.',
+          'In Boolean algebra, AND is written as multiplication: A · B or simply AB. This is because the ' +
+          'multiplication table for 0 and 1 matches the AND truth table: 0×0=0, 0×1=0, 1×0=0, 1×1=1. ' +
+          'AND has useful algebraic properties: **identity** (A · 1 = A), **null** (A · 0 = 0), ' +
+          '**idempotent** (A · A = A), **commutative** (A · B = B · A), and **associative** ' +
+          '((A · B) · C = A · (B · C)). These let you simplify complex expressions.',
         advanced:
           'A CMOS AND gate is built by cascading a NAND gate (2 pMOS in parallel + 2 nMOS in series) followed by ' +
           'an inverter. The NAND+NOT combination uses 6 transistors. In practice, NAND gates are the fundamental ' +
           'building block in CMOS logic because they are faster and use fewer transistors than direct AND implementations. ' +
-          'AND gates with more than 2 inputs exist: a 3-input AND (A \u00B7 B \u00B7 C) outputs 1 only when all three ' +
+          'AND gates with more than 2 inputs exist: a 3-input AND (A · B · C) outputs 1 only when all three ' +
           'inputs are 1. In Verilog: `assign out = a & b;`. In VHDL: `out <= a AND b;`.',
         diagram: 'LogicGateSymbolsDiagram',
       },
       {
-        title: 'OR Gate \u2014 At Least One Must Be True',
+        title: 'OR Gate — At Least One Must Be True',
         content:
-          'Picture a house with **two doorbells** \u2014 one at the front door, one at the back. If someone presses ' +
+          'Picture a house with **two doorbells** — one at the front door, one at the back. If someone presses ' +
           'either bell (or both), the chime rings. That is an OR gate: the output is 1 when input A **or** input B ' +
-          '(or both) is 1. The only time the output is 0 is when both inputs are 0 \u2014 nobody is ringing.\n\n' +
+          '(or both) is 1. The only time the output is 0 is when both inputs are 0 — nobody is ringing.\n\n' +
           'Truth table:\n\n' +
           '| A | B | Output |\n' +
           '| --- | --- | --- |\n' +
@@ -4535,20 +4535,20 @@ plt.show()
           '**or** face recognition is another OR example.',
         goDeeper:
           'In Boolean algebra, OR is written as addition: A + B. The "addition" table for bits: 0+0=0, 0+1=1, 1+0=1, 1+1=1 ' +
-          '(not 2 \u2014 there is no 2 in Boolean). Properties: **identity** (A + 0 = A), **null** (A + 1 = 1), ' +
+          '(not 2 — there is no 2 in Boolean). Properties: **identity** (A + 0 = A), **null** (A + 1 = 1), ' +
           '**idempotent** (A + A = A), **commutative**, and **associative**. The **distributive law** connects AND and OR: ' +
-          'A \u00B7 (B + C) = A\u00B7B + A\u00B7C (just like regular algebra). The **absorption law** simplifies: ' +
-          'A + A\u00B7B = A (if A is true, the whole thing is true regardless of B).',
+          'A · (B + C) = A·B + A·C (just like regular algebra). The **absorption law** simplifies: ' +
+          'A + A·B = A (if A is true, the whole thing is true regardless of B).',
         advanced:
           'A CMOS OR gate uses a NOR gate followed by an inverter (4+2 = 6 transistors). Like AND, OR gates in ' +
           'real chips are usually built from NOR + NOT. The **inclusive OR** (standard OR) differs from **exclusive OR** (XOR): ' +
           'inclusive OR includes the case where both inputs are 1. In natural language, "or" is often exclusive ' +
-          '("soup or salad" \u2014 you pick one), but in digital logic, OR is always inclusive unless explicitly XOR.',
+          '("soup or salad" — you pick one), but in digital logic, OR is always inclusive unless explicitly XOR.',
       },
       {
-        title: 'NOT Gate \u2014 The Inverter',
+        title: 'NOT Gate — The Inverter',
         content:
-          'The NOT gate is the simplest gate of all \u2014 it has just one input and flips it. Give it a 0, you get 1. ' +
+          'The NOT gate is the simplest gate of all — it has just one input and flips it. Give it a 0, you get 1. ' +
           'Give it a 1, you get 0. Think of it as **opposite day**: whatever you say, the NOT gate says the opposite.\n\n' +
           'Truth table:\n\n' +
           '| A | Output |\n' +
@@ -4558,22 +4558,22 @@ plt.show()
           'NOT is incredibly useful. A "door open" sensor outputs 1 when the door is open. But the alarm system needs ' +
           'to know when the door is **not** open (closed). A NOT gate converts the signal: NOT(open) = closed.',
         goDeeper:
-          'NOT is written with an overbar: \u00ACA or A\u0305 (A-bar). Key properties: **involution** (NOT NOT A = A \u2014 ' +
-          'flipping twice gets you back), **complement** (A \u00B7 \u00ACA = 0, A + \u00ACA = 1 \u2014 something ' +
+          'NOT is written with an overbar: ¬A or A̅ (A-bar). Key properties: **involution** (NOT NOT A = A — ' +
+          'flipping twice gets you back), **complement** (A · ¬A = 0, A + ¬A = 1 — something ' +
           'cannot be both true and false, and must be one or the other). In circuits, the NOT gate is drawn as a ' +
           'triangle pointing right with a small circle (bubble) at the output. That bubble is the universal symbol ' +
-          'for inversion \u2014 you will see it on NAND, NOR, and XNOR gates too.',
+          'for inversion — you will see it on NAND, NOR, and XNOR gates too.',
         advanced:
           'A CMOS inverter is the simplest CMOS circuit: one pMOS transistor connected to V_DD (power) and one nMOS ' +
           'connected to ground. When input is high, nMOS conducts (output pulled low). When input is low, pMOS conducts ' +
           '(output pulled high). The inverter is the basis of all CMOS logic. Its **voltage transfer characteristic** ' +
-          '(VTC) curve shows a sharp transition between high and low output \u2014 the steeper the curve, the better ' +
+          '(VTC) curve shows a sharp transition between high and low output — the steeper the curve, the better ' +
           'the noise margin. Fan-out (how many gates one inverter can drive) is limited by capacitive loading.',
       },
       {
-        title: 'NAND and NOR \u2014 The Universal Gates',
+        title: 'NAND and NOR — The Universal Gates',
         content:
-          'NAND means "NOT AND" \u2014 it does an AND, then flips the result. NOR means "NOT OR." These might seem ' +
+          'NAND means "NOT AND" — it does an AND, then flips the result. NOR means "NOT OR." These might seem ' +
           'like minor variations, but they have a superpower: **any logic circuit can be built using only NAND gates** ' +
           '(or only NOR gates). That is why they are called **universal gates**.\n\n' +
           'NAND truth table (opposite of AND):\n\n' +
@@ -4586,24 +4586,24 @@ plt.show()
           'Why is this useful? Chip manufacturers can mass-produce billions of identical NAND gates, then wire them ' +
           'differently to create any circuit they need. One building block, infinite possibilities.',
         goDeeper:
-          'To build NOT from NAND: connect both inputs to the same signal. NAND(A, A) = NOT(A \u00B7 A) = NOT(A). ' +
+          'To build NOT from NAND: connect both inputs to the same signal. NAND(A, A) = NOT(A · A) = NOT(A). ' +
           'To build AND from NAND: NAND then NOT, which is NAND followed by another NAND-as-NOT. To build OR from ' +
           'NAND: NOT each input first, then NAND the results. This follows from **De Morgan\'s theorem**: ' +
-          '\u00AC(A \u00B7 B) = \u00ACA + \u00ACB. Similarly, NOR is universal: NOT from NOR(A, A), OR from ' +
+          '¬(A · B) = ¬A + ¬B. Similarly, NOR is universal: NOT from NOR(A, A), OR from ' +
           'NOR-then-NOR-as-NOT, AND from NOT-each-then-NOR.',
         advanced:
-          'NAND-only design is not just theoretical \u2014 it is standard practice in VLSI. The 7400 series TTL ' +
+          'NAND-only design is not just theoretical — it is standard practice in VLSI. The 7400 series TTL ' +
           'chip (quad 2-input NAND) was the workhorse of early digital design. Modern FPGA look-up tables (LUTs) ' +
           'can implement any Boolean function of N inputs, effectively acting as programmable universal gates. ' +
           'In NAND flash memory (used in SSDs and USB drives), the name comes from the NAND gate structure used ' +
           'to connect floating-gate transistors in series, enabling high-density storage.',
       },
       {
-        title: 'XOR \u2014 The Odd One Out',
+        title: 'XOR — The Odd One Out',
         content:
           'Imagine a hallway light controlled by **two switches**, one at each end. If both switches are in the same ' +
           'position (both up or both down), the light is off. If they differ (one up, one down), the light is on. ' +
-          'That is XOR \u2014 **exclusive OR**. The output is 1 when the inputs are **different**.\n\n' +
+          'That is XOR — **exclusive OR**. The output is 1 when the inputs are **different**.\n\n' +
           'Truth table:\n\n' +
           '| A | B | Output |\n' +
           '| --- | --- | --- |\n' +
@@ -4614,26 +4614,26 @@ plt.show()
           'XOR is crucial in computers because it is the heart of binary addition (more on that next) and is also ' +
           'used in error detection, encryption, and graphics.',
         goDeeper:
-          'XOR is written as A \u2295 B. It can be expressed using basic gates: A \u2295 B = (A \u00B7 \u00ACB) + (\u00ACA \u00B7 B). ' +
-          'Useful XOR properties: **self-inverse** (A \u2295 A = 0), **identity** (A \u2295 0 = A), ' +
-          '**complementary** (A \u2295 1 = \u00ACA). The self-inverse property is why XOR is used in encryption: ' +
+          'XOR is written as A ⊕ B. It can be expressed using basic gates: A ⊕ B = (A · ¬B) + (¬A · B). ' +
+          'Useful XOR properties: **self-inverse** (A ⊕ A = 0), **identity** (A ⊕ 0 = A), ' +
+          '**complementary** (A ⊕ 1 = ¬A). The self-inverse property is why XOR is used in encryption: ' +
           'if you XOR a message with a key to encrypt, XOR-ing the ciphertext with the same key decrypts it. ' +
-          'XNOR (the complement of XOR) outputs 1 when inputs are the **same** \u2014 it is an equality detector.',
+          'XNOR (the complement of XOR) outputs 1 when inputs are the **same** — it is an equality detector.',
         advanced:
-          'XOR has deep connections to modular arithmetic: A \u2295 B is addition modulo 2. The parity of a binary ' +
+          'XOR has deep connections to modular arithmetic: A ⊕ B is addition modulo 2. The parity of a binary ' +
           'number (odd or even number of 1s) equals the XOR of all its bits. This is the basis of **parity check** ' +
           'error detection: append a bit so the total number of 1s is always even. If any single bit flips during ' +
           'transmission, the parity changes and the error is detected. **Hamming codes** extend this idea to not ' +
           'just detect but also correct single-bit errors using multiple parity bits at specific positions.',
       },
       {
-        title: 'Combining Gates \u2014 Building an Adder',
+        title: 'Combining Gates — Building an Adder',
         content:
           'Now the magic begins: by connecting gates together, we can build circuits that **do math**. The simplest ' +
           'is the **half adder**, which adds two single-bit numbers (0+0, 0+1, 1+0, or 1+1).\n\n' +
           'It uses just two gates:\n' +
-          '\u2022 An **XOR gate** produces the **sum** bit (because 0+0=0, 0+1=1, 1+0=1, 1+1=0 with a carry)\n' +
-          '\u2022 An **AND gate** produces the **carry** bit (because only 1+1 generates a carry of 1)\n\n' +
+          '• An **XOR gate** produces the **sum** bit (because 0+0=0, 0+1=1, 1+0=1, 1+1=0 with a carry)\n' +
+          '• An **AND gate** produces the **carry** bit (because only 1+1 generates a carry of 1)\n\n' +
           'Two half adders plus an OR gate make a **full adder** that also handles a carry-in from a previous ' +
           'column. Chain eight full adders together and you get an 8-bit adder that can add numbers up to 255. ' +
           'This is the core of the ALU (Arithmetic Logic Unit) inside every processor.',
@@ -4641,7 +4641,7 @@ plt.show()
           'A **ripple-carry adder** chains N full adders, with each carry-out feeding the next carry-in. It is ' +
           'simple but slow: the carry must "ripple" through all N stages. For a 64-bit add, the worst case requires ' +
           'the carry to propagate through all 64 stages. A **carry-lookahead adder** (CLA) computes carries in ' +
-          'parallel using **generate** (G = A \u00B7 B) and **propagate** (P = A \u2295 B) signals: C_i = G_i + P_i \u00B7 C_{i-1}. ' +
+          'parallel using **generate** (G = A · B) and **propagate** (P = A ⊕ B) signals: C_i = G_i + P_i · C_{i-1}. ' +
           'This reduces addition time from O(N) to O(log N) gate delays.',
         advanced:
           'Modern CPUs use a hierarchy of adder architectures. Carry-select adders compute both the carry=0 and carry=1 ' +
@@ -4661,9 +4661,9 @@ plt.show()
           'A modern smartphone processor contains **billions** of transistors, each acting as a tiny switch. ' +
           'Groups of transistors form gates. Groups of gates form adders, multiplexers, and memory cells. These ' +
           'combine into an ALU (does math), registers (tiny fast storage), and a control unit (directs traffic). ' +
-          'Together they make a CPU \u2014 the brain of the computer.\n\n' +
+          'Together they make a CPU — the brain of the computer.\n\n' +
           'In 1965, Gordon Moore observed that the number of transistors on a chip doubles roughly every two years ' +
-          '\u2014 **Moore\'s Law**. The first microprocessor (Intel 4004, 1971) had 2,300 transistors. A modern ' +
+          '— **Moore\'s Law**. The first microprocessor (Intel 4004, 1971) had 2,300 transistors. A modern ' +
           'Apple M3 chip has over 25 billion. Yet every one of those billions of transistors is still just a switch, ' +
           'and every circuit is still built from the same AND, OR, NOT gates you just learned.\n\n' +
           'Everything is binary. Everything is gates. That is the profound simplicity at the heart of all computing.',
@@ -4673,7 +4673,7 @@ plt.show()
           'perform the operation in the ALU. Modern CPUs use **pipelining** (overlapping stages of different ' +
           'instructions), **superscalar execution** (multiple ALUs working in parallel), and **branch prediction** ' +
           '(guessing which way an if-statement will go to avoid stalling the pipeline). Clock speeds are measured ' +
-          'in GHz \u2014 a 3 GHz CPU completes 3 billion cycles per second.',
+          'in GHz — a 3 GHz CPU completes 3 billion cycles per second.',
         advanced:
           'Moore\'s Law is approaching physical limits as transistors shrink to atomic scales. Below ~3 nm, ' +
           'quantum tunneling causes electrons to leak through barriers, increasing power consumption and errors. ' +

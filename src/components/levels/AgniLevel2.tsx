@@ -29,18 +29,18 @@ export default function AgniLevel2() {
 
   const miniLessons = [
     {
-      title: 'Activation energy \u2014 the energy barrier to start a fire',
-      concept: `In Level 1 you learned that combustion requires heat. But why? Wood at room temperature is surrounded by oxygen, yet it does not spontaneously burst into flame. The answer is **activation energy** \u2014 the minimum energy needed to start the reaction.
+      title: 'Activation energy — the energy barrier to start a fire',
+      concept: `In Level 1 you learned that combustion requires heat. But why? Wood at room temperature is surrounded by oxygen, yet it does not spontaneously burst into flame. The answer is **activation energy** — the minimum energy needed to start the reaction.
 
-Think of it as pushing a boulder over a hill. The boulder (fuel + O\u2082) sits in a valley (stable state). To reach the other valley (products: CO\u2082 + H\u2082O, which is lower energy), the boulder must first be pushed over the hill (activation energy barrier). The match provides just enough push.
+Think of it as pushing a boulder over a hill. The boulder (fuel + O₂) sits in a valley (stable state). To reach the other valley (products: CO₂ + H₂O, which is lower energy), the boulder must first be pushed over the hill (activation energy barrier). The match provides just enough push.
 
-Once the reaction starts, it releases enough energy to keep itself going \u2014 the flame sustains itself because the energy released exceeds the activation energy needed for the next layer of fuel.
+Once the reaction starts, it releases enough energy to keep itself going — the flame sustains itself because the energy released exceeds the activation energy needed for the next layer of fuel.
 
-In the code, you\u2019ll plot the energy profile of a combustion reaction, showing the activation barrier and the net energy released.`,
-      analogy: 'Starting a fire is like starting a car on a hill. You need to push it to the crest (activation energy), then it rolls downhill on its own (self-sustaining reaction). A catalyst is like making the hill smaller \u2014 less push needed to get started.',
-      storyConnection: 'The arani sticks (fire-starting friction sticks) in Vedic ritual are tools for overcoming activation energy. The friction converts mechanical energy into localised heat, raising the wood\u2019s temperature past its ignition point (~300\u00b0C for dry wood). Once Agni is "born" from the friction, the exothermic reaction sustains itself.',
+In the code, you’ll plot the energy profile of a combustion reaction, showing the activation barrier and the net energy released.`,
+      analogy: 'Starting a fire is like starting a car on a hill. You need to push it to the crest (activation energy), then it rolls downhill on its own (self-sustaining reaction). A catalyst is like making the hill smaller — less push needed to get started.',
+      storyConnection: 'The arani sticks (fire-starting friction sticks) in Vedic ritual are tools for overcoming activation energy. The friction converts mechanical energy into localised heat, raising the wood’s temperature past its ignition point (~300°C for dry wood). Once Agni is "born" from the friction, the exothermic reaction sustains itself.',
       checkQuestion: 'If the products of combustion have LESS energy than the reactants, where does the difference go?',
-      checkAnswer: 'The difference is released as heat and light \u2014 this is an exothermic reaction. The chemical bonds in CO\u2082 and H\u2082O are stronger (lower potential energy) than the bonds in CH\u2084 and O\u2082. The energy difference is the heat of combustion. For methane, this is 890 kJ/mol \u2014 enough to heat 2.5 litres of water from 20\u00b0C to boiling.',
+      checkAnswer: 'The difference is released as heat and light — this is an exothermic reaction. The chemical bonds in CO₂ and H₂O are stronger (lower potential energy) than the bonds in CH₄ and O₂. The energy difference is the heat of combustion. For methane, this is 890 kJ/mol — enough to heat 2.5 litres of water from 20°C to boiling.',
       codeIntro: 'Plot the energy profile of a combustion reaction showing activation energy.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -65,13 +65,13 @@ plt.plot(x, E, linewidth=2.5, color='#ef4444')
 plt.fill_between(x, 0, E, alpha=0.1, color='#ef4444')
 
 # Annotations
-plt.annotate('Reactants\\n(CH\u2084 + 2O\u2082)', xy=(1, E_reactants), fontsize=10,
+plt.annotate('Reactants\\n(CH₄ + 2O₂)', xy=(1, E_reactants), fontsize=10,
              color='#93c5fd', ha='center')
 plt.annotate('Activation\\nenergy barrier', xy=(3.5, E_activation), fontsize=10,
              color='#fbbf24', ha='center',
              xytext=(5.5, E_activation + 10),
              arrowprops=dict(arrowstyle='->', color='#fbbf24'))
-plt.annotate('Products\\n(CO\u2082 + 2H\u2082O)', xy=(8.5, E_products + 5), fontsize=10,
+plt.annotate('Products\\n(CO₂ + 2H₂O)', xy=(8.5, E_products + 5), fontsize=10,
              color='#86efac', ha='center')
 
 # Energy released arrow
@@ -89,24 +89,24 @@ plt.show()
 
 print("The match provides activation energy (the initial push).")
 print("Once started, the reaction releases more energy than it needs,")
-print("so it sustains itself \u2014 this is why fires keep burning.")`,
-      challenge: 'Add a second curve showing the same reaction WITH a catalyst (lower activation energy, same start and end points). Catalysts do not change the energy released \u2014 they just lower the barrier. How does this apply to catalytic converters in cars?',
-      successHint: 'Activation energy explains why combustion does not happen spontaneously at room temperature despite being energetically favourable. This concept \u2014 kinetic barrier vs thermodynamic favourability \u2014 appears throughout chemistry, biology, and engineering.',
+print("so it sustains itself — this is why fires keep burning.")`,
+      challenge: 'Add a second curve showing the same reaction WITH a catalyst (lower activation energy, same start and end points). Catalysts do not change the energy released — they just lower the barrier. How does this apply to catalytic converters in cars?',
+      successHint: 'Activation energy explains why combustion does not happen spontaneously at room temperature despite being energetically favourable. This concept — kinetic barrier vs thermodynamic favourability — appears throughout chemistry, biology, and engineering.',
     },
     {
-      title: 'Bond energies \u2014 calculating heat of combustion from scratch',
+      title: 'Bond energies — calculating heat of combustion from scratch',
       concept: `The energy released in combustion comes from the difference in bond strengths between reactants and products. Breaking bonds **costs** energy. Forming bonds **releases** energy. If the products have stronger bonds than the reactants, the net result is energy release.
 
 For methane combustion:
-- **Bonds broken**: 4 C\u2013H bonds (413 kJ each) + 2 O=O bonds (498 kJ each) = 2,648 kJ
-- **Bonds formed**: 2 C=O bonds (805 kJ each) + 4 O\u2013H bonds (463 kJ each) = 3,462 kJ
+- **Bonds broken**: 4 C–H bonds (413 kJ each) + 2 O=O bonds (498 kJ each) = 2,648 kJ
+- **Bonds formed**: 2 C=O bonds (805 kJ each) + 4 O–H bonds (463 kJ each) = 3,462 kJ
 - **Net**: 3,462 - 2,648 = **814 kJ released**
 
-The experimental value is 890 kJ/mol \u2014 our estimate is close. The difference comes from using average bond energies instead of exact values for specific molecules.`,
-      analogy: 'Imagine disassembling two LEGO models and building a new one. If the new model uses less total "snap energy" to hold together (stronger connections), the leftover energy is released. In combustion, the "snap energy" of CO\u2082 and H\u2082O bonds is greater than that of CH\u2084 and O\u2082 bonds, so the difference comes out as heat.',
-      storyConnection: 'Agni transforms matter \u2014 wood becomes ash, smoke, and heat. Bond energy calculations reveal exactly where Agni\u2019s power comes from: the rearrangement of atoms into configurations with stronger bonds. The "fire inside the wood" that the Vedic poets described is literally the chemical potential energy stored in carbon-hydrogen bonds.',
-      checkQuestion: 'Hydrogen gas (H\u2082) burning in oxygen is extremely exothermic. Using bond energies: H\u2013H = 436 kJ, O=O = 498 kJ, O\u2013H = 463 kJ, calculate the energy released for 2H\u2082 + O\u2082 \u2192 2H\u2082O.',
-      checkAnswer: 'Bonds broken: 2 H\u2013H (2 \u00d7 436 = 872) + 1 O=O (498) = 1,370 kJ. Bonds formed: 4 O\u2013H (4 \u00d7 463 = 1,852) = 1,852 kJ. Net = 1,852 - 1,370 = 482 kJ released. Experimental: 484 kJ \u2014 remarkably close! Hydrogen\u2019s high energy per mole makes it an attractive clean fuel (product is just water).',
+The experimental value is 890 kJ/mol — our estimate is close. The difference comes from using average bond energies instead of exact values for specific molecules.`,
+      analogy: 'Imagine disassembling two LEGO models and building a new one. If the new model uses less total "snap energy" to hold together (stronger connections), the leftover energy is released. In combustion, the "snap energy" of CO₂ and H₂O bonds is greater than that of CH₄ and O₂ bonds, so the difference comes out as heat.',
+      storyConnection: 'Agni transforms matter — wood becomes ash, smoke, and heat. Bond energy calculations reveal exactly where Agni’s power comes from: the rearrangement of atoms into configurations with stronger bonds. The "fire inside the wood" that the Vedic poets described is literally the chemical potential energy stored in carbon-hydrogen bonds.',
+      checkQuestion: 'Hydrogen gas (H₂) burning in oxygen is extremely exothermic. Using bond energies: H–H = 436 kJ, O=O = 498 kJ, O–H = 463 kJ, calculate the energy released for 2H₂ + O₂ → 2H₂O.',
+      checkAnswer: 'Bonds broken: 2 H–H (2 × 436 = 872) + 1 O=O (498) = 1,370 kJ. Bonds formed: 4 O–H (4 × 463 = 1,852) = 1,852 kJ. Net = 1,852 - 1,370 = 482 kJ released. Experimental: 484 kJ — remarkably close! Hydrogen’s high energy per mole makes it an attractive clean fuel (product is just water).',
       codeIntro: 'Calculate heats of combustion using bond energy data.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -121,17 +121,17 @@ bond_E = {
 # Combustion reactions: (bonds_broken, bonds_formed, name)
 reactions = [
     {
-        "name": "Methane (CH\u2084)",
+        "name": "Methane (CH₄)",
         "broken": [("C-H", 4), ("O=O", 2)],
         "formed": [("C=O", 2), ("O-H", 4)],
     },
     {
-        "name": "Ethane (C\u2082H\u2086)",
+        "name": "Ethane (C₂H₆)",
         "broken": [("C-H", 6), ("C-C", 1), ("O=O", 3.5)],
         "formed": [("C=O", 4), ("O-H", 6)],
     },
     {
-        "name": "Hydrogen (H\u2082)",
+        "name": "Hydrogen (H₂)",
         "broken": [("H-H", 2), ("O=O", 1)],
         "formed": [("O-H", 4)],
     },
@@ -165,20 +165,20 @@ plt.show()
 
 print("Bond energies explain exactly WHY combustion releases heat:")
 print("the products have STRONGER bonds than the reactants.")`,
-      challenge: 'Add propane (C\u2083H\u2088): bonds broken = 8 C\u2013H + 2 C\u2013C + 5 O=O; bonds formed = 6 C=O + 8 O\u2013H. Calculate its heat of combustion and compare to the experimental value of 2,220 kJ/mol. How close is your estimate?',
-      successHint: 'Bond energy calculations are how chemists predict reaction energies without doing experiments. This approach works for any reaction \u2014 not just combustion. It is the foundation of thermochemistry.',
+      challenge: 'Add propane (C₃H₈): bonds broken = 8 C–H + 2 C–C + 5 O=O; bonds formed = 6 C=O + 8 O–H. Calculate its heat of combustion and compare to the experimental value of 2,220 kJ/mol. How close is your estimate?',
+      successHint: 'Bond energy calculations are how chemists predict reaction energies without doing experiments. This approach works for any reaction — not just combustion. It is the foundation of thermochemistry.',
     },
     {
-      title: 'Convection simulation \u2014 modelling hot air rising',
-      concept: `In Level 1 you learned that convection makes flames rise. Now let\u2019s simulate the process computationally. We will model air parcels above a heat source: hot parcels rise, cool parcels sink, creating a circulation pattern.
+      title: 'Convection simulation — modelling hot air rising',
+      concept: `In Level 1 you learned that convection makes flames rise. Now let’s simulate the process computationally. We will model air parcels above a heat source: hot parcels rise, cool parcels sink, creating a circulation pattern.
 
-The key physics: a parcel of hot air is less dense than surrounding cool air, so it experiences a net upward **buoyant force**. This is Archimedes\u2019 principle applied to gases. The acceleration is proportional to the temperature difference:
+The key physics: a parcel of hot air is less dense than surrounding cool air, so it experiences a net upward **buoyant force**. This is Archimedes’ principle applied to gases. The acceleration is proportional to the temperature difference:
 
-**a = g \u00d7 (T_parcel - T_ambient) / T_ambient**
+**a = g × (T_parcel - T_ambient) / T_ambient**
 
-This is the **buoyancy equation** for gases. A parcel that is 10% hotter than its surroundings accelerates upward at about 1 m/s\u00b2 \u2014 gentle but steady. This creates the convection currents that shape every flame on Earth.`,
-      analogy: 'A hot air balloon works by convection. Heat the air inside the balloon \u2192 it becomes less dense \u2192 it rises. A flame is a tiny hot air balloon that runs continuously: combustion heats the air, the hot air rises (taking smoke and soot with it), and fresh cool air flows in from below to feed the reaction.',
-      storyConnection: 'The Vedic fire pit design used convection intentionally. The pit was dug into the ground with openings at the bottom for air intake. Hot gases rose through the fire, drawing in fresh cool air from below \u2014 a natural bellows effect. This "stack effect" (convection-driven airflow) is the same principle that makes chimneys work.',
+This is the **buoyancy equation** for gases. A parcel that is 10% hotter than its surroundings accelerates upward at about 1 m/s² — gentle but steady. This creates the convection currents that shape every flame on Earth.`,
+      analogy: 'A hot air balloon works by convection. Heat the air inside the balloon → it becomes less dense → it rises. A flame is a tiny hot air balloon that runs continuously: combustion heats the air, the hot air rises (taking smoke and soot with it), and fresh cool air flows in from below to feed the reaction.',
+      storyConnection: 'The Vedic fire pit design used convection intentionally. The pit was dug into the ground with openings at the bottom for air intake. Hot gases rose through the fire, drawing in fresh cool air from below — a natural bellows effect. This "stack effect" (convection-driven airflow) is the same principle that makes chimneys work.',
       checkQuestion: 'In a room with no wind, you light a candle. After a few minutes, the smoke detector on the ceiling goes off. Trace the path the smoke took using convection.',
       checkAnswer: 'The candle heats air above the flame. This hot air (carrying smoke particles) rises in a convection plume directly above the flame. When the plume hits the ceiling, it spreads horizontally in all directions along the ceiling surface (because it cannot rise further). The smoke particles in this hot ceiling layer eventually reach the smoke detector. The key: smoke travels UP first (convection), then ACROSS the ceiling (horizontal flow). This is why smoke detectors are on ceilings.',
       codeIntro: 'Simulate air parcels rising and sinking due to temperature-driven buoyancy.',
@@ -242,23 +242,23 @@ plt.show()
 print("Hot parcels (bright) rise fast. Cooled parcels (dark) sink.")
 print("This creates the convection current that shapes every flame.")`,
       challenge: 'Add horizontal wind by giving all parcels a constant horizontal velocity (vx = 0.5 m/s). How does wind distort the convection pattern? This is why candle flames lean in a breeze.',
-      successHint: 'You just simulated a fundamental atmospheric process. Convection drives weather patterns, ocean currents, and the interior dynamics of the Sun. The same code structure \u2014 updating positions based on forces each time step \u2014 is used in every physics simulation.',
+      successHint: 'You just simulated a fundamental atmospheric process. Convection drives weather patterns, ocean currents, and the interior dynamics of the Sun. The same code structure — updating positions based on forces each time step — is used in every physics simulation.',
     },
     {
-      title: 'Radiation \u2014 Stefan-Boltzmann law and blackbody emission',
+      title: 'Radiation — Stefan-Boltzmann law and blackbody emission',
       concept: `All hot objects radiate energy as electromagnetic waves. The hotter the object, the more energy it radiates. The relationship is described by the **Stefan-Boltzmann law**:
 
-**P = \u03c3 \u00d7 A \u00d7 T\u2074**
+**P = σ × A × T⁴**
 
-Where \u03c3 = 5.67 \u00d7 10\u207b\u2078 W/(m\u00b2\u00b7K\u2074), A = surface area, and T = temperature in Kelvin.
+Where σ = 5.67 × 10⁻⁸ W/(m²·K⁴), A = surface area, and T = temperature in Kelvin.
 
-The T\u2074 dependence is dramatic. Doubling the temperature increases radiation by 2\u2074 = **16 times**. This is why a campfire at 1,000 K radiates vastly more than your body at 310 K, even though both emit infrared radiation.
+The T⁴ dependence is dramatic. Doubling the temperature increases radiation by 2⁴ = **16 times**. This is why a campfire at 1,000 K radiates vastly more than your body at 310 K, even though both emit infrared radiation.
 
-The law also explains why flames change colour with temperature. Wien\u2019s displacement law says the peak emission wavelength shifts: \u03bb_max = 2,897,000 / T. At 1,000 K, the peak is in infrared (not visible), but the tail extends into red-orange. At 6,000 K (the Sun), the peak is at 483 nm \u2014 blue-green.`,
-      analogy: 'Imagine heating a metal rod. At 500\u00b0C it glows dull red. At 1,000\u00b0C it glows orange. At 1,500\u00b0C it glows white. The rod emits ALL wavelengths at every temperature, but the peak shifts to shorter (bluer) wavelengths as temperature increases. It is like a radio station: turning up the temperature shifts the "frequency dial" toward blue.',
-      storyConnection: 'Agni\u2019s three forms \u2014 fire on Earth, lightning, and the Sun \u2014 correspond to increasing temperature and radiation power. A campfire (~1,000 K) radiates thousands of watts. Lightning (~30,000 K) radiates millions of watts in a flash. The Sun (~5,778 K surface) radiates 3.8 \u00d7 10\u00b2\u2076 watts. All three are thermal radiation \u2014 Agni at different power levels.',
-      checkQuestion: 'Your body temperature is about 310 K (37\u00b0C). Do you emit electromagnetic radiation? If so, at what wavelength?',
-      checkAnswer: 'Yes! Using Wien\u2019s law: \u03bb_max = 2,897,000 / 310 \u2248 9,345 nm \u2248 9.3 \u03bcm. This is in the mid-infrared range \u2014 invisible to your eyes but easily detected by thermal cameras (which is exactly how they work). You radiate about 100 watts of infrared energy constantly. In a room full of people, the human bodies are significant heat sources.',
+The law also explains why flames change colour with temperature. Wien’s displacement law says the peak emission wavelength shifts: λ_max = 2,897,000 / T. At 1,000 K, the peak is in infrared (not visible), but the tail extends into red-orange. At 6,000 K (the Sun), the peak is at 483 nm — blue-green.`,
+      analogy: 'Imagine heating a metal rod. At 500°C it glows dull red. At 1,000°C it glows orange. At 1,500°C it glows white. The rod emits ALL wavelengths at every temperature, but the peak shifts to shorter (bluer) wavelengths as temperature increases. It is like a radio station: turning up the temperature shifts the "frequency dial" toward blue.',
+      storyConnection: 'Agni’s three forms — fire on Earth, lightning, and the Sun — correspond to increasing temperature and radiation power. A campfire (~1,000 K) radiates thousands of watts. Lightning (~30,000 K) radiates millions of watts in a flash. The Sun (~5,778 K surface) radiates 3.8 × 10²⁶ watts. All three are thermal radiation — Agni at different power levels.',
+      checkQuestion: 'Your body temperature is about 310 K (37°C). Do you emit electromagnetic radiation? If so, at what wavelength?',
+      checkAnswer: 'Yes! Using Wien’s law: λ_max = 2,897,000 / 310 ≈ 9,345 nm ≈ 9.3 μm. This is in the mid-infrared range — invisible to your eyes but easily detected by thermal cameras (which is exactly how they work). You radiate about 100 watts of infrared energy constantly. In a room full of people, the human bodies are significant heat sources.',
       codeIntro: 'Plot blackbody radiation curves for different temperatures.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -308,27 +308,27 @@ plt.grid(alpha=0.2)
 plt.tight_layout()
 plt.show()
 
-print("Hotter objects peak at shorter wavelengths (Wien\u2019s law).")
-print(f"Sun peak: {2897000/5778:.0f} nm (blue-green \u2014 but appears white")
+print("Hotter objects peak at shorter wavelengths (Wien’s law).")
+print(f"Sun peak: {2897000/5778:.0f} nm (blue-green — but appears white")
 print(f"because it emits strongly across the entire visible range)")`,
-      challenge: 'Calculate the total power radiated by a campfire (T=1000 K, surface area = 0.5 m\u00b2) and the Sun (T=5778 K, surface area = 6.08 \u00d7 10\u00b9\u2078 m\u00b2) using P = \u03c3AT\u2074. How many campfires would you need to equal the Sun?',
+      challenge: 'Calculate the total power radiated by a campfire (T=1000 K, surface area = 0.5 m²) and the Sun (T=5778 K, surface area = 6.08 × 10¹⁸ m²) using P = σAT⁴. How many campfires would you need to equal the Sun?',
       successHint: 'Blackbody radiation is one of the most important concepts in physics. It explains star colours, thermal cameras, incandescent light bulbs, and was the problem that led Max Planck to discover quantum mechanics in 1900.',
     },
     {
-      title: 'Complete vs incomplete combustion \u2014 efficiency and pollution',
+      title: 'Complete vs incomplete combustion — efficiency and pollution',
       concept: `Combustion can be **complete** or **incomplete**, depending on oxygen supply:
 
-**Complete**: CH\u2084 + 2O\u2082 \u2192 CO\u2082 + 2H\u2082O (plenty of O\u2082 \u2014 blue flame, maximum energy)
-**Incomplete**: 2CH\u2084 + 3O\u2082 \u2192 2CO + 4H\u2082O (limited O\u2082 \u2014 yellow flame, carbon monoxide)
-**Very incomplete**: CH\u2084 + O\u2082 \u2192 C + 2H\u2082O (very limited O\u2082 \u2014 soot/smoke)
+**Complete**: CH₄ + 2O₂ → CO₂ + 2H₂O (plenty of O₂ — blue flame, maximum energy)
+**Incomplete**: 2CH₄ + 3O₂ → 2CO + 4H₂O (limited O₂ — yellow flame, carbon monoxide)
+**Very incomplete**: CH₄ + O₂ → C + 2H₂O (very limited O₂ — soot/smoke)
 
 Incomplete combustion wastes fuel and produces dangerous carbon monoxide (CO) and soot. This is why gas stoves have blue flames (lots of air mixed in) while candles have yellow flames (limited air mixing).
 
-In the code, you\u2019ll calculate the energy output and pollutant production for different oxygen ratios, showing how combustion efficiency changes.`,
-      analogy: 'Complete combustion is like fully wringing out a wet towel \u2014 you extract all the water (energy). Incomplete combustion is like giving it a half-hearted squeeze \u2014 you get some water out but a lot remains (wasted fuel, CO, soot). The towel is the fuel; the squeezing is the oxygen supply.',
+In the code, you’ll calculate the energy output and pollutant production for different oxygen ratios, showing how combustion efficiency changes.`,
+      analogy: 'Complete combustion is like fully wringing out a wet towel — you extract all the water (energy). Incomplete combustion is like giving it a half-hearted squeeze — you get some water out but a lot remains (wasted fuel, CO, soot). The towel is the fuel; the squeezing is the oxygen supply.',
       storyConnection: 'The Vedic sages maintained three different fires at different combustion levels: the bright offering fire (complete combustion, blue-white), the cooking fire (moderate, yellow-orange), and the ember fire (smouldering, minimal flame). They were empirically managing the oxygen-to-fuel ratio thousands of years before Lavoisier identified oxygen.',
       checkQuestion: 'Carbon monoxide (CO) from incomplete combustion is dangerous even in small amounts. Why is it called "the silent killer"?',
-      checkAnswer: 'CO is colourless and odourless \u2014 you cannot see, smell, or taste it. It binds to haemoglobin in your blood 200\u00d7 more strongly than oxygen, blocking oxygen transport. Even 0.1% CO in air can be lethal within hours. This is why proper ventilation in gas heating systems is critical, and why CO detectors save lives. Incomplete combustion in enclosed spaces is one of the most common causes of accidental poisoning worldwide.',
+      checkAnswer: 'CO is colourless and odourless — you cannot see, smell, or taste it. It binds to haemoglobin in your blood 200× more strongly than oxygen, blocking oxygen transport. Even 0.1% CO in air can be lethal within hours. This is why proper ventilation in gas heating systems is critical, and why CO detectors save lives. Incomplete combustion in enclosed spaces is one of the most common causes of accidental poisoning worldwide.',
       codeIntro: 'Model combustion efficiency as a function of oxygen supply.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -380,27 +380,27 @@ ax2.grid(alpha=0.2)
 plt.tight_layout()
 plt.show()
 
-print("At O\u2082 ratio < 1.0: incomplete combustion \u2192 CO + soot + wasted energy")
-print("At O\u2082 ratio = 1.0: perfect combustion \u2192 max energy, min pollution")
-print("At O\u2082 ratio > 1.0: excess air cools the flame slightly")`,
-      challenge: 'Real engines run at an O\u2082 ratio of about 1.05-1.15 (slight excess). Plot a zoomed view of the 0.9-1.3 range and add a shaded region showing the "optimal operating zone." Why is slight excess better than exactly 1.0?',
+print("At O₂ ratio < 1.0: incomplete combustion → CO + soot + wasted energy")
+print("At O₂ ratio = 1.0: perfect combustion → max energy, min pollution")
+print("At O₂ ratio > 1.0: excess air cools the flame slightly")`,
+      challenge: 'Real engines run at an O₂ ratio of about 1.05-1.15 (slight excess). Plot a zoomed view of the 0.9-1.3 range and add a shaded region showing the "optimal operating zone." Why is slight excess better than exactly 1.0?',
       successHint: 'Combustion efficiency is the central problem of engine design, power generation, and pollution control. Every car, furnace, and power plant is optimised to run as close to stoichiometric as possible while avoiding CO production. You now understand the chemistry behind air quality regulations.',
     },
     {
-      title: 'Calorimetry \u2014 measuring the energy in food and fuel',
+      title: 'Calorimetry — measuring the energy in food and fuel',
       concept: `How do we actually measure the energy released by combustion? The answer is **calorimetry**: burn the fuel inside an insulated container (a calorimeter) and measure the temperature rise of surrounding water.
 
-**q = m \u00d7 c \u00d7 \u0394T**
+**q = m × c × ΔT**
 
-Where q = heat energy (J), m = mass of water (g), c = specific heat of water (4.186 J/g\u00b7\u00b0C), and \u0394T = temperature change.
+Where q = heat energy (J), m = mass of water (g), c = specific heat of water (4.186 J/g·°C), and ΔT = temperature change.
 
-This is how food calories are measured. A food "calorie" (kcal) is the energy needed to heat 1 kg of water by 1\u00b0C. When a nutrition label says a peanut has 6 kcal, it means burning that peanut releases enough heat to warm 6 kg of water by 1\u00b0C.
+This is how food calories are measured. A food "calorie" (kcal) is the energy needed to heat 1 kg of water by 1°C. When a nutrition label says a peanut has 6 kcal, it means burning that peanut releases enough heat to warm 6 kg of water by 1°C.
 
-In the code, you\u2019ll simulate a calorimetry experiment: burning different fuels and calculating the energy released from the water temperature rise.`,
+In the code, you’ll simulate a calorimetry experiment: burning different fuels and calculating the energy released from the water temperature rise.`,
       analogy: 'A calorimeter is like a thermometer for energy. Instead of measuring how hot something is, it measures how much heat something releases. You capture ALL the heat in a known amount of water, then calculate backward: if the water got X degrees hotter, the fuel must have released Y joules.',
       storyConnection: 'The Vedic priests noticed that ghee-fed fires heated their clay pots faster than wood fires of the same size. They were observing calorimetric differences: ghee releases more energy per gram (37 kJ/g) than wood (15 kJ/g). A modern calorimeter confirms what the priests knew empirically: not all fuels are equal.',
-      checkQuestion: 'A food calorimeter burns a 10-gram sample of cashew nuts in oxygen and the 2,000 g of surrounding water rises from 20\u00b0C to 35\u00b0C. What is the energy content of the cashews in kJ/g?',
-      checkAnswer: 'q = m \u00d7 c \u00d7 \u0394T = 2,000 g \u00d7 4.186 J/(g\u00b7\u00b0C) \u00d7 15\u00b0C = 125,580 J = 125.6 kJ. Per gram: 125.6 / 10 = 12.56 kJ/g. In food calories: 125.6 / 4.186 = 30 kcal, or 3 kcal per gram. This matches typical nut calorie values on nutrition labels. The calorimeter literally burns food to measure its energy \u2014 the same chemical process your body uses, just faster.',
+      checkQuestion: 'A food calorimeter burns a 10-gram sample of cashew nuts in oxygen and the 2,000 g of surrounding water rises from 20°C to 35°C. What is the energy content of the cashews in kJ/g?',
+      checkAnswer: 'q = m × c × ΔT = 2,000 g × 4.186 J/(g·°C) × 15°C = 125,580 J = 125.6 kJ. Per gram: 125.6 / 10 = 12.56 kJ/g. In food calories: 125.6 / 4.186 = 30 kcal, or 3 kcal per gram. This matches typical nut calorie values on nutrition labels. The calorimeter literally burns food to measure its energy — the same chemical process your body uses, just faster.',
       codeIntro: 'Simulate a calorimetry experiment for different fuels.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -409,8 +409,8 @@ import matplotlib.pyplot as plt
 # Burn fuel samples, measure water temperature rise
 
 water_mass = 500  # grams
-water_c = 4.186   # J/(g\u00b7\u00b0C)
-T_initial = 20.0  # \u00b0C
+water_c = 4.186   # J/(g·°C)
+T_initial = 20.0  # °C
 
 fuels = [
     {"name": "Wood",    "mass": 2.0, "energy_kJ_per_g": 15.0},
@@ -420,9 +420,9 @@ fuels = [
     {"name": "Peanut",  "mass": 2.0, "energy_kJ_per_g": 26.0},
 ]
 
-print(f"Calorimeter: {water_mass}g water at {T_initial}\u00b0C")
+print(f"Calorimeter: {water_mass}g water at {T_initial}°C")
 print(f"Burning 2.0g of each fuel\\n")
-print(f"{'Fuel':<12} {'Energy (kJ)':>12} {'\u0394T (\u00b0C)':>10} {'T_final':>10}")
+print(f"{'Fuel':<12} {'Energy (kJ)':>12} {'ΔT (°C)':>10} {'T_final':>10}")
 print("-" * 48)
 
 names = []
@@ -440,22 +440,22 @@ for fuel in fuels:
 plt.figure(figsize=(10, 5))
 colors = ['#92400e', '#a855f7', '#f59e0b', '#3b82f6', '#f97316']
 bars = plt.bar(names, delta_Ts, color=colors, width=0.5)
-plt.ylabel('Temperature rise (\u00b0C)', fontsize=11)
+plt.ylabel('Temperature rise (°C)', fontsize=11)
 plt.title('Calorimetry: Which Fuel Heats Water Most?', fontsize=14)
 plt.grid(axis='y', alpha=0.3)
 
 # Add value labels on bars
 for bar, dT in zip(bars, delta_Ts):
     plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.3,
-             f'{dT:.1f}\u00b0C', ha='center', fontsize=10, color='lightgray')
+             f'{dT:.1f}°C', ha='center', fontsize=10, color='lightgray')
 
 plt.tight_layout()
 plt.show()
 
-print("\\nThe formula q = mc\u0394T connects heat energy to temperature change.")
+print("\\nThe formula q = mcΔT connects heat energy to temperature change.")
 print("This is how food calories, fuel ratings, and heating systems are measured.")`,
-      challenge: 'Design a "reverse calorimeter": given a target water temperature of 60\u00b0C and 1,000 g of water, calculate how many grams of each fuel are needed. Which fuel requires the least mass?',
-      successHint: 'Calorimetry connects the abstract concept of "energy" to something you can measure with a thermometer. The q = mc\u0394T equation is one of the most useful in all of science and engineering. You will use it in every future thermodynamics problem.',
+      challenge: 'Design a "reverse calorimeter": given a target water temperature of 60°C and 1,000 g of water, calculate how many grams of each fuel are needed. Which fuel requires the least mass?',
+      successHint: 'Calorimetry connects the abstract concept of "energy" to something you can measure with a thermometer. The q = mcΔT equation is one of the most useful in all of science and engineering. You will use it in every future thermodynamics problem.',
     },
   ];
 

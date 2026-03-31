@@ -29,21 +29,21 @@ export default function BethlehemStarLevel3() {
 
   const miniLessons = [
     {
-      title: 'Solving Kepler\u2019s equation \u2014 from mean anomaly to true position',
-      concept: `Kepler\u2019s laws tell us the shape of orbits, but to predict WHERE a planet is at a specific time, we need to solve **Kepler\u2019s equation**:
+      title: 'Solving Kepler’s equation — from mean anomaly to true position',
+      concept: `Kepler’s laws tell us the shape of orbits, but to predict WHERE a planet is at a specific time, we need to solve **Kepler’s equation**:
 
-**M = E \u2212 e sin(E)**
+**M = E − e sin(E)**
 
 where M is the **mean anomaly** (proportional to time), E is the **eccentric anomaly** (the intermediate angle), and e is the eccentricity. From E, we calculate the **true anomaly** (the actual angle from perihelion).
 
 The problem: this equation cannot be solved algebraically for E. You must solve it **numerically**. The standard method is **Newton-Raphson iteration**: guess E, compute the error, adjust, repeat until the error is tiny.
 
-This is the exact calculation Kepler performed by hand. The code implements Newton-Raphson to solve Kepler\u2019s equation and plot a planet\u2019s position at any time.`,
-      analogy: 'Imagine you know a runner\u2019s average speed and how long they have been running, but the track is not circular \u2014 it\u2019s oval. You know how much TIME has passed (mean anomaly), but you want to know WHERE on the oval they are (true anomaly). The oval shape means you cannot use simple division \u2014 you need to iterate to find the answer.',
-      storyConnection: 'Kepler spent years solving this equation by hand for Mars using Tycho Brahe\u2019s observations. The numerical method he developed (essentially Newton-Raphson before Newton) is still used today in every orbital mechanics calculation \u2014 from GPS satellites to Mars rovers to the conjunction predictions that the Magi would have needed.',
-      checkQuestion: 'Why can\u2019t Kepler\u2019s equation be solved algebraically (in closed form)?',
-      checkAnswer: 'Because M = E \u2212 e sin(E) mixes E as both a linear term and inside a trigonometric function. There is no algebraic operation that can isolate E from sin(E). This is a transcendental equation \u2014 it requires numerical methods. For e = 0 (circular orbit), E = M trivially. But for any non-zero eccentricity, iteration is required.',
-      codeIntro: 'Solve Kepler\u2019s equation using Newton-Raphson iteration.',
+This is the exact calculation Kepler performed by hand. The code implements Newton-Raphson to solve Kepler’s equation and plot a planet’s position at any time.`,
+      analogy: 'Imagine you know a runner’s average speed and how long they have been running, but the track is not circular — it’s oval. You know how much TIME has passed (mean anomaly), but you want to know WHERE on the oval they are (true anomaly). The oval shape means you cannot use simple division — you need to iterate to find the answer.',
+      storyConnection: 'Kepler spent years solving this equation by hand for Mars using Tycho Brahe’s observations. The numerical method he developed (essentially Newton-Raphson before Newton) is still used today in every orbital mechanics calculation — from GPS satellites to Mars rovers to the conjunction predictions that the Magi would have needed.',
+      checkQuestion: 'Why can’t Kepler’s equation be solved algebraically (in closed form)?',
+      checkAnswer: 'Because M = E − e sin(E) mixes E as both a linear term and inside a trigonometric function. There is no algebraic operation that can isolate E from sin(E). This is a transcendental equation — it requires numerical methods. For e = 0 (circular orbit), E = M trivially. But for any non-zero eccentricity, iteration is required.',
+      codeIntro: 'Solve Kepler’s equation using Newton-Raphson iteration.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
@@ -80,8 +80,8 @@ for e in eccentricities:
     plt.plot(np.degrees(M_values), np.degrees(nu_arr), linewidth=2, label=f'e = {e}')
 
 plt.plot([0, 360], [0, 360], 'k--', linewidth=1, alpha=0.3, label='Circular (e=0)')
-plt.xlabel('Mean Anomaly M (\u00B0)', fontsize=12)
-plt.ylabel('True Anomaly \u03BD (\u00B0)', fontsize=12)
+plt.xlabel('Mean Anomaly M (°)', fontsize=12)
+plt.ylabel('True Anomaly ν (°)', fontsize=12)
 plt.title('Mean vs True Anomaly: How Eccentricity Distorts Time', fontsize=14)
 plt.legend(fontsize=9)
 plt.grid(alpha=0.3)
@@ -92,28 +92,28 @@ M_test = np.radians(120)
 for e in [0.1, 0.5, 0.9]:
     E, iters = solve_kepler(M_test, e)
     nu = true_anomaly(E, e)
-    print(f"e={e}: M=120\u00B0 \u2192 E={np.degrees(E):.4f}\u00B0 \u2192 \u03BD={np.degrees(nu):.4f}\u00B0 ({iters} iterations)")`,
-      challenge: 'For Halley\u2019s Comet (e = 0.967), how many iterations does Newton-Raphson need? High eccentricity makes convergence slower. Try implementing a better initial guess: E\u2080 = M + e\u00B7sin(M) (Bessel\u2019s starting value).',
-      successHint: 'You just implemented the core algorithm of orbital mechanics. Every satellite tracking system, every spacecraft trajectory, every ephemeris table runs Kepler\u2019s equation solver. Newton-Raphson is one of the most powerful numerical methods in all of science.',
+    print(f"e={e}: M=120° → E={np.degrees(E):.4f}° → ν={np.degrees(nu):.4f}° ({iters} iterations)")`,
+      challenge: 'For Halley’s Comet (e = 0.967), how many iterations does Newton-Raphson need? High eccentricity makes convergence slower. Try implementing a better initial guess: E₀ = M + e·sin(M) (Bessel’s starting value).',
+      successHint: 'You just implemented the core algorithm of orbital mechanics. Every satellite tracking system, every spacecraft trajectory, every ephemeris table runs Kepler’s equation solver. Newton-Raphson is one of the most powerful numerical methods in all of science.',
     },
     {
-      title: 'Celestial coordinate transforms \u2014 equatorial to horizontal',
-      concept: `Astronomers use **equatorial coordinates** (RA, Dec) to locate objects in the sky. But to actually point a telescope or navigate, you need **horizontal coordinates** (altitude, azimuth) \u2014 how high above the horizon and which compass direction.
+      title: 'Celestial coordinate transforms — equatorial to horizontal',
+      concept: `Astronomers use **equatorial coordinates** (RA, Dec) to locate objects in the sky. But to actually point a telescope or navigate, you need **horizontal coordinates** (altitude, azimuth) — how high above the horizon and which compass direction.
 
 The transformation depends on three things:
-1. Your **latitude** (\u03C6)
-2. The **local sidereal time** (LST) \u2014 which RA is currently on your meridian
-3. The object\u2019s RA and Dec
+1. Your **latitude** (φ)
+2. The **local sidereal time** (LST) — which RA is currently on your meridian
+3. The object’s RA and Dec
 
 The key formula uses **spherical trigonometry**:
-- sin(alt) = sin(\u03C6)\u00B7sin(Dec) + cos(\u03C6)\u00B7cos(Dec)\u00B7cos(HA)
-where HA = LST \u2212 RA is the **hour angle**.
+- sin(alt) = sin(φ)·sin(Dec) + cos(φ)·cos(Dec)·cos(HA)
+where HA = LST − RA is the **hour angle**.
 
 This is the exact calculation the Magi would have performed mentally or with an astrolabe to find objects in the sky.`,
-      analogy: 'RA and Dec are like longitude and latitude on a globe \u2014 fixed positions on the celestial sphere. But the sphere is rotating! Horizontal coordinates are like asking "where is that city relative to where I\u2019m standing right now?" You need to know your own position and the current rotation angle (sidereal time) to convert between the two.',
-      storyConnection: 'An astrolabe \u2014 the analog computer of the ancient world \u2014 performs exactly this coordinate transformation mechanically. The Magi almost certainly carried astrolabes. By setting the date, time, and latitude, they could read off the altitude and azimuth of any catalogued star or planet.',
+      analogy: 'RA and Dec are like longitude and latitude on a globe — fixed positions on the celestial sphere. But the sphere is rotating! Horizontal coordinates are like asking "where is that city relative to where I’m standing right now?" You need to know your own position and the current rotation angle (sidereal time) to convert between the two.',
+      storyConnection: 'An astrolabe — the analog computer of the ancient world — performs exactly this coordinate transformation mechanically. The Magi almost certainly carried astrolabes. By setting the date, time, and latitude, they could read off the altitude and azimuth of any catalogued star or planet.',
       checkQuestion: 'Why is local sidereal time different from clock time?',
-      checkAnswer: 'A sidereal day (one full rotation relative to the stars) is about 23 hours 56 minutes \u2014 4 minutes shorter than a solar day. This is because Earth moves along its orbit, so it needs to rotate an extra ~1\u00B0 each day to face the Sun again. Over a year, sidereal time gains a full day relative to solar time (366.25 sidereal days vs 365.25 solar days).',
+      checkAnswer: 'A sidereal day (one full rotation relative to the stars) is about 23 hours 56 minutes — 4 minutes shorter than a solar day. This is because Earth moves along its orbit, so it needs to rotate an extra ~1° each day to face the Sun again. Over a year, sidereal time gains a full day relative to solar time (366.25 sidereal days vs 365.25 solar days).',
       codeIntro: 'Transform equatorial coordinates to horizontal (altitude-azimuth).',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -141,10 +141,10 @@ def equatorial_to_horizontal(ra_hours, dec_deg, lat_deg, lst_hours):
         az = 360 - az
     return alt, az
 
-# Bethlehem: latitude 31.7\u00B0 N
+# Bethlehem: latitude 31.7° N
 lat = 31.7
 
-# Track Polaris (RA=2.53h, Dec=+89.26\u00B0) through the night
+# Track Polaris (RA=2.53h, Dec=+89.26°) through the night
 lst_range = np.linspace(0, 24, 200)
 polaris_alt = []
 polaris_az = []
@@ -153,7 +153,7 @@ for lst in lst_range:
     polaris_alt.append(a)
     polaris_az.append(az)
 
-# Track Jupiter (approximate position in Pisces, Dec ~ -4.5\u00B0)
+# Track Jupiter (approximate position in Pisces, Dec ~ -4.5°)
 jupiter_alt = []
 jupiter_az = []
 for lst in lst_range:
@@ -167,8 +167,8 @@ ax1.plot(lst_range, polaris_alt, linewidth=2, color='#fbbf24', label='Polaris')
 ax1.plot(lst_range, jupiter_alt, linewidth=2, color='#a78bfa', label='Jupiter (in Pisces)')
 ax1.axhline(0, color='#94a3b8', linewidth=1, linestyle='--', label='Horizon')
 ax1.fill_between(lst_range, -10, 0, alpha=0.1, color='#ef4444')
-ax1.set_ylabel('Altitude (\u00B0)', fontsize=12)
-ax1.set_title('Star Altitude from Bethlehem (31.7\u00B0N)', fontsize=13)
+ax1.set_ylabel('Altitude (°)', fontsize=12)
+ax1.set_title('Star Altitude from Bethlehem (31.7°N)', fontsize=13)
 ax1.legend(fontsize=9)
 ax1.set_xlim(0, 24)
 ax1.grid(alpha=0.3)
@@ -176,8 +176,8 @@ ax1.grid(alpha=0.3)
 ax2.plot(lst_range, polaris_az, linewidth=2, color='#fbbf24', label='Polaris')
 ax2.plot(lst_range, jupiter_az, linewidth=2, color='#a78bfa', label='Jupiter')
 ax2.set_xlabel('Local Sidereal Time (hours)', fontsize=12)
-ax2.set_ylabel('Azimuth (\u00B0)', fontsize=12)
-ax2.set_title('Star Azimuth (0\u00B0=N, 90\u00B0=E, 180\u00B0=S, 270\u00B0=W)', fontsize=13)
+ax2.set_ylabel('Azimuth (°)', fontsize=12)
+ax2.set_title('Star Azimuth (0°=N, 90°=E, 180°=S, 270°=W)', fontsize=13)
 ax2.legend(fontsize=9)
 ax2.set_xlim(0, 24)
 ax2.grid(alpha=0.3)
@@ -185,28 +185,28 @@ ax2.grid(alpha=0.3)
 plt.tight_layout()
 plt.show()
 
-print("Polaris stays at ~32\u00B0 altitude all night (circumpolar).")
-print("Jupiter rises, crosses the meridian, and sets \u2014 visible only part of the night.")`,
-      challenge: 'Add Saturn to the plot (RA = 23.9h, Dec = \u22124.0\u00B0 during the conjunction). At what sidereal time are both planets highest in the sky? That would be the best time for the Magi to observe them.',
+print("Polaris stays at ~32° altitude all night (circumpolar).")
+print("Jupiter rises, crosses the meridian, and sets — visible only part of the night.")`,
+      challenge: 'Add Saturn to the plot (RA = 23.9h, Dec = −4.0° during the conjunction). At what sidereal time are both planets highest in the sky? That would be the best time for the Magi to observe them.',
       successHint: 'Coordinate transformation is the bridge between the abstract celestial sphere and what you actually see when you look up. Every telescope mount, every planetarium app, every satellite tracker performs this calculation continuously.',
     },
     {
-      title: 'Gravitational two-body problem \u2014 deriving Kepler from Newton',
-      concept: `Kepler discovered his laws empirically (from data). Newton\u2019s law of gravity **explains** why they work.
+      title: 'Gravitational two-body problem — deriving Kepler from Newton',
+      concept: `Kepler discovered his laws empirically (from data). Newton’s law of gravity **explains** why they work.
 
-The gravitational force between two bodies: **F = GMm/r\u00B2**
+The gravitational force between two bodies: **F = GMm/r²**
 
-From F = ma and this force law, we can derive all three of Kepler\u2019s laws:
-- Law 1 (ellipses): comes from the r\u00B2 in the denominator
+From F = ma and this force law, we can derive all three of Kepler’s laws:
+- Law 1 (ellipses): comes from the r² in the denominator
 - Law 2 (equal areas): comes from conservation of angular momentum
-- Law 3 (T\u00B2 \u221D a\u00B3): comes from equating gravitational and centripetal force
+- Law 3 (T² ∝ a³): comes from equating gravitational and centripetal force
 
-The code numerically integrates the two-body problem (Sun + planet) and verifies that all three laws emerge naturally from Newton\u2019s gravity.`,
-      analogy: 'Kepler\u2019s laws are like saying "cars on this highway always take 2 hours to travel 100 miles." Newton\u2019s gravity is like understanding the engine, the fuel, the friction, and the road surface. Kepler told us WHAT planets do. Newton told us WHY. From Newton\u2019s one equation, all of Kepler\u2019s laws follow as mathematical consequences.',
+The code numerically integrates the two-body problem (Sun + planet) and verifies that all three laws emerge naturally from Newton’s gravity.`,
+      analogy: 'Kepler’s laws are like saying "cars on this highway always take 2 hours to travel 100 miles." Newton’s gravity is like understanding the engine, the fuel, the friction, and the road surface. Kepler told us WHAT planets do. Newton told us WHY. From Newton’s one equation, all of Kepler’s laws follow as mathematical consequences.',
       storyConnection: 'The progression from observation (Magi) to pattern (Kepler) to explanation (Newton) mirrors the scientific method itself. The Magi observed a bright object; Kepler showed it was a conjunction predicted by orbital laws; Newton showed those laws follow from universal gravity.',
-      checkQuestion: 'If gravity followed a 1/r\u00B3 law instead of 1/r\u00B2, would orbits still be ellipses?',
-      checkAnswer: 'No. The 1/r\u00B2 law is special: it is one of only two force laws that produce closed (repeating) orbits (the other is Hooke\u2019s law, F \u221D r). A 1/r\u00B3 law would produce spiraling orbits that never repeat. Bertrand\u2019s theorem proves this mathematically. The fact that planetary orbits are closed is direct evidence that gravity follows the inverse square law.',
-      codeIntro: 'Numerically integrate gravity to produce Kepler\u2019s elliptical orbits.',
+      checkQuestion: 'If gravity followed a 1/r³ law instead of 1/r², would orbits still be ellipses?',
+      checkAnswer: 'No. The 1/r² law is special: it is one of only two force laws that produce closed (repeating) orbits (the other is Hooke’s law, F ∝ r). A 1/r³ law would produce spiraling orbits that never repeat. Bertrand’s theorem proves this mathematically. The fact that planetary orbits are closed is direct evidence that gravity follows the inverse square law.',
+      codeIntro: 'Numerically integrate gravity to produce Kepler’s elliptical orbits.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
@@ -289,27 +289,27 @@ plt.show()
 print("Kepler\\'s 3rd Law verification:")
 for a in [0.5, 1.0, 2.0, 5.0, 10.0]:
     xs, ys, areas, T = simulate_orbit(a, 0.1, dt=0.0001)
-    print(f"  a = {a:5.1f} AU: T = {T:.4f} yr, T\u00B2 = {T**2:.3f}, a\u00B3 = {a**3:.3f}, ratio = {T**2/a**3:.6f}")`,
-      challenge: 'Add a third body (another planet) to the simulation. Does the orbit remain a perfect ellipse? The three-body problem has no general closed-form solution \u2014 this is one of the most famous unsolved problems in physics.',
-      successHint: 'You just derived Kepler\u2019s laws from first principles. Starting with F = GMm/r\u00B2 and numerically integrating, elliptical orbits, equal-area sweeps, and T\u00B2 = a\u00B3 all emerged naturally. This is the power of simulation: you can verify theoretical predictions by watching the physics play out.',
+    print(f"  a = {a:5.1f} AU: T = {T:.4f} yr, T² = {T**2:.3f}, a³ = {a**3:.3f}, ratio = {T**2/a**3:.6f}")`,
+      challenge: 'Add a third body (another planet) to the simulation. Does the orbit remain a perfect ellipse? The three-body problem has no general closed-form solution — this is one of the most famous unsolved problems in physics.',
+      successHint: 'You just derived Kepler’s laws from first principles. Starting with F = GMm/r² and numerically integrating, elliptical orbits, equal-area sweeps, and T² = a³ all emerged naturally. This is the power of simulation: you can verify theoretical predictions by watching the physics play out.',
     },
     {
-      title: 'Stellar photometry \u2014 measuring brightness precisely',
-      concept: `Modern astronomers measure star brightness with **photometry** \u2014 counting the exact number of photons collected by a sensor. This is far more precise than the naked-eye estimates of Hipparchus.
+      title: 'Stellar photometry — measuring brightness precisely',
+      concept: `Modern astronomers measure star brightness with **photometry** — counting the exact number of photons collected by a sensor. This is far more precise than the naked-eye estimates of Hipparchus.
 
 A CCD sensor (the same technology in your phone camera) converts photons to electrons. The key formula:
 
-**m = \u22122.5 \u00D7 log\u2081\u2080(F) + C**
+**m = −2.5 × log₁₀(F) + C**
 
 where F is the measured flux (photons per second per area) and C is a calibration constant.
 
-The challenge: **noise**. Sensors have read noise, dark current, and shot noise (from the quantum nature of photons). Signal-to-noise ratio (SNR) determines how precisely you can measure a star\u2019s magnitude.
+The challenge: **noise**. Sensors have read noise, dark current, and shot noise (from the quantum nature of photons). Signal-to-noise ratio (SNR) determines how precisely you can measure a star’s magnitude.
 
 The code simulates CCD photometry: generating star signals with realistic noise and measuring magnitudes.`,
-      analogy: 'Imagine counting raindrops falling on a bucket in 10 seconds. Some seconds you count 50, others 55, others 48 \u2014 random variation (shot noise). If the rain is heavy (bright star), the variation is a small percentage of the total. If the rain is light (faint star), a few extra or missing drops make a big percentage difference. That\u2019s why faint stars are harder to measure precisely.',
-      storyConnection: 'The Magi estimated magnitudes by eye \u2014 accurate to about 0.5 magnitudes. Modern CCD photometry achieves 0.001 magnitude precision. This million-fold improvement is what lets us detect exoplanet transits (a 0.01 magnitude dip when a planet crosses its star) and measure the cosmic distance ladder.',
-      checkQuestion: 'Why does doubling the exposure time improve SNR by only \u221A2, not 2\u00D7?',
-      checkAnswer: 'Signal grows linearly with time (2\u00D7 time = 2\u00D7 photons). But shot noise grows as \u221AN (square root of photon count). So SNR = signal/noise = N/\u221AN = \u221AN. Doubling N (time) gives SNR = \u221A(2N) = \u221A2 \u00D7 \u221AN. You need 4\u00D7 the exposure to double the SNR. This is a fundamental limit set by quantum physics.',
+      analogy: 'Imagine counting raindrops falling on a bucket in 10 seconds. Some seconds you count 50, others 55, others 48 — random variation (shot noise). If the rain is heavy (bright star), the variation is a small percentage of the total. If the rain is light (faint star), a few extra or missing drops make a big percentage difference. That’s why faint stars are harder to measure precisely.',
+      storyConnection: 'The Magi estimated magnitudes by eye — accurate to about 0.5 magnitudes. Modern CCD photometry achieves 0.001 magnitude precision. This million-fold improvement is what lets us detect exoplanet transits (a 0.01 magnitude dip when a planet crosses its star) and measure the cosmic distance ladder.',
+      checkQuestion: 'Why does doubling the exposure time improve SNR by only √2, not 2×?',
+      checkAnswer: 'Signal grows linearly with time (2× time = 2× photons). But shot noise grows as √N (square root of photon count). So SNR = signal/noise = N/√N = √N. Doubling N (time) gives SNR = √(2N) = √2 × √N. You need 4× the exposure to double the SNR. This is a fundamental limit set by quantum physics.',
       codeIntro: 'Simulate CCD photometry with realistic noise models.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -374,24 +374,24 @@ ax2.grid(alpha=0.3)
 plt.tight_layout()
 plt.show()
 
-print("Brighter stars (low mag) have high SNR \u2192 precise measurements.")
-print("Fainter stars (high mag) have low SNR \u2192 noisy measurements.")`,
+print("Brighter stars (low mag) have high SNR → precise measurements.")
+print("Fainter stars (high mag) have low SNR → noisy measurements.")`,
       challenge: 'Try different exposure times (10s, 30s, 120s, 300s). Plot how the SNR improves. At what exposure time can you reliably measure a magnitude 8 star (SNR > 10)?',
-      successHint: 'Photometry is the quantitative backbone of astronomy. Every discovery \u2014 from exoplanets to dark energy \u2014 relies on measuring brightness to extreme precision. The noise models you coded are the same ones used to design telescope surveys costing billions of dollars.',
+      successHint: 'Photometry is the quantitative backbone of astronomy. Every discovery — from exoplanets to dark energy — relies on measuring brightness to extreme precision. The noise models you coded are the same ones used to design telescope surveys costing billions of dollars.',
     },
     {
-      title: 'Orbital perturbations \u2014 why planets don\u2019t follow perfect ellipses',
-      concept: `Kepler\u2019s laws describe perfect two-body orbits (one planet, one Sun). In reality, every planet pulls on every other planet, causing **perturbations** \u2014 small deviations from the ideal ellipse.
+      title: 'Orbital perturbations — why planets don’t follow perfect ellipses',
+      concept: `Kepler’s laws describe perfect two-body orbits (one planet, one Sun). In reality, every planet pulls on every other planet, causing **perturbations** — small deviations from the ideal ellipse.
 
-Jupiter\u2019s gravity tugs on Saturn, causing Saturn\u2019s orbit to wobble. This wobble is predictable but complex. For the triple conjunction of 7 BCE, perturbations shifted the timing by several weeks compared to the unperturbed prediction.
+Jupiter’s gravity tugs on Saturn, causing Saturn’s orbit to wobble. This wobble is predictable but complex. For the triple conjunction of 7 BCE, perturbations shifted the timing by several weeks compared to the unperturbed prediction.
 
-Perturbation theory was one of the great triumphs of 18th-century mathematics. Lagrange, Laplace, and others developed methods to calculate these effects. The discovery of Neptune in 1846 was a direct result of perturbation analysis \u2014 Uranus\u2019s orbit deviated from predictions, and the perturbation pointed to an unseen planet.
+Perturbation theory was one of the great triumphs of 18th-century mathematics. Lagrange, Laplace, and others developed methods to calculate these effects. The discovery of Neptune in 1846 was a direct result of perturbation analysis — Uranus’s orbit deviated from predictions, and the perturbation pointed to an unseen planet.
 
-The code simulates a simplified three-body problem (Sun, Jupiter, Saturn) to see how perturbations affect Saturn\u2019s orbit.`,
-      analogy: 'Imagine you are walking in a straight line across a field. A strong magnet sits off to one side (Jupiter\u2019s gravity). As you pass the magnet, your iron belt buckle is tugged sideways \u2014 you deviate from your straight path. The pull is small but real, and if you are carrying a compass, you can measure exactly how much you were deflected. That deflection is a perturbation.',
+The code simulates a simplified three-body problem (Sun, Jupiter, Saturn) to see how perturbations affect Saturn’s orbit.`,
+      analogy: 'Imagine you are walking in a straight line across a field. A strong magnet sits off to one side (Jupiter’s gravity). As you pass the magnet, your iron belt buckle is tugged sideways — you deviate from your straight path. The pull is small but real, and if you are carrying a compass, you can measure exactly how much you were deflected. That deflection is a perturbation.',
       storyConnection: 'When Kepler calculated the 7 BCE conjunction, he used his laws assuming perfect ellipses. The actual conjunction timing was shifted by perturbations. Modern ephemeris calculations account for perturbations from all planets, relativistic corrections, and even the gravitational effects of large asteroids. The result: we can predict planetary positions thousands of years into the past or future to within arcseconds.',
-      checkQuestion: 'Jupiter\u2019s mass is about 1/1000 of the Sun\u2019s. Why does such a small fraction cause significant perturbations?',
-      checkAnswer: 'Because perturbations accumulate over many orbits. A tiny tug on each orbit adds up over decades and centuries. Saturn\u2019s orbital period is ~29.5 years. Over 100 years (3+ orbits), even a 0.1% force imbalance per orbit accumulates into a measurable position shift. Also, during close approaches (conjunctions), Jupiter\u2019s pull on Saturn can briefly exceed 1/100 of the Sun\u2019s pull \u2014 enough to shift Saturn\u2019s position by a noticeable amount.',
+      checkQuestion: 'Jupiter’s mass is about 1/1000 of the Sun’s. Why does such a small fraction cause significant perturbations?',
+      checkAnswer: 'Because perturbations accumulate over many orbits. A tiny tug on each orbit adds up over decades and centuries. Saturn’s orbital period is ~29.5 years. Over 100 years (3+ orbits), even a 0.1% force imbalance per orbit accumulates into a measurable position shift. Also, during close approaches (conjunctions), Jupiter’s pull on Saturn can briefly exceed 1/100 of the Sun’s pull — enough to shift Saturn’s position by a noticeable amount.',
       codeIntro: 'Simulate the Sun-Jupiter-Saturn three-body problem.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -481,26 +481,26 @@ plt.tight_layout()
 plt.show()
 
 print(f"Max perturbation over 60 years: {np.max(perturbation):.4f} AU")
-print(f"That\\'s {np.max(perturbation) * 1.496e8:.0f} km \u2014 measurable even in ancient times")`,
-      challenge: 'Add Earth to the simulation (a = 1.0 AU) and see how it is perturbed by Jupiter. Is Earth\u2019s perturbation larger or smaller than Saturn\u2019s? Why?',
-      successHint: 'Perturbation theory is where orbital mechanics meets real-world complexity. The three-body problem has no closed-form solution \u2014 numerical simulation is the only way to track the full gravitational dance. This is what modern ephemeris services (JPL Horizons) compute for every planet, asteroid, and spacecraft.',
+print(f"That\\'s {np.max(perturbation) * 1.496e8:.0f} km — measurable even in ancient times")`,
+      challenge: 'Add Earth to the simulation (a = 1.0 AU) and see how it is perturbed by Jupiter. Is Earth’s perturbation larger or smaller than Saturn’s? Why?',
+      successHint: 'Perturbation theory is where orbital mechanics meets real-world complexity. The three-body problem has no closed-form solution — numerical simulation is the only way to track the full gravitational dance. This is what modern ephemeris services (JPL Horizons) compute for every planet, asteroid, and spacecraft.',
     },
     {
-      title: 'Building an ephemeris \u2014 predicting planetary positions for any date',
+      title: 'Building an ephemeris — predicting planetary positions for any date',
       concept: `An **ephemeris** is a table of predicted positions for celestial objects at regular time intervals. For millennia, astronomers built ephemerides by hand. Today, they are computed numerically.
 
 Your task: build a simplified ephemeris that predicts the ecliptic longitude of Jupiter and Saturn for any date, including historical dates like 7 BCE. The algorithm:
 
 1. Start from known positions at a reference date (J2000.0 epoch)
-2. Integrate orbits forward or backward using Kepler\u2019s equation
+2. Integrate orbits forward or backward using Kepler’s equation
 3. Transform heliocentric positions to geocentric (as seen from Earth)
 4. Output ecliptic longitude at each time step
 
-This is a stripped-down version of what JPL\u2019s HORIZONS system does for the entire solar system.`,
+This is a stripped-down version of what JPL’s HORIZONS system does for the entire solar system.`,
       analogy: 'An ephemeris is like a train timetable for planets. The timetable tells you where each train (planet) will be at any time. But unlike trains, planets follow smooth mathematical curves, so you can calculate past and future positions with equal precision. Our code is the timetable calculator.',
-      storyConnection: 'Babylonian astronomers maintained ephemerides on clay tablets. The MUL.APIN tablets (around 1000 BCE) recorded planetary positions over centuries. The Magi inherited this tradition. When they computed the upcoming Jupiter-Saturn conjunction, they were reading their own ephemeris \u2014 built from generations of observations.',
+      storyConnection: 'Babylonian astronomers maintained ephemerides on clay tablets. The MUL.APIN tablets (around 1000 BCE) recorded planetary positions over centuries. The Magi inherited this tradition. When they computed the upcoming Jupiter-Saturn conjunction, they were reading their own ephemeris — built from generations of observations.',
       checkQuestion: 'Why do professional ephemerides include relativistic corrections?',
-      checkAnswer: 'Mercury\u2019s orbit precesses by 43 arcseconds per century more than Newtonian gravity predicts. Einstein\u2019s general relativity explains this: spacetime curvature near the Sun causes the orbit to precess. For high-precision predictions (needed for spacecraft navigation), relativistic corrections are essential. Even GPS satellites must account for both special and general relativity to maintain position accuracy.',
+      checkAnswer: 'Mercury’s orbit precesses by 43 arcseconds per century more than Newtonian gravity predicts. Einstein’s general relativity explains this: spacetime curvature near the Sun causes the orbit to precess. For high-precision predictions (needed for spacecraft navigation), relativistic corrections are essential. Even GPS satellites must account for both special and general relativity to maintain position accuracy.',
       codeIntro: 'Build a simplified ephemeris for Jupiter and Saturn.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -563,16 +563,16 @@ fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 8))
 
 ax1.plot(t_range + 2006, jup_lon, linewidth=2, color='#f59e0b', label='Jupiter')
 ax1.plot(t_range + 2006, sat_lon, linewidth=2, color='#a78bfa', label='Saturn')
-ax1.set_ylabel('Ecliptic Longitude (\u00B0)', fontsize=12)
+ax1.set_ylabel('Ecliptic Longitude (°)', fontsize=12)
 ax1.set_title('Ephemeris: Jupiter & Saturn in 7 BCE', fontsize=13)
 ax1.legend(fontsize=10)
 ax1.grid(alpha=0.3)
 
 ax2.plot(t_range + 2006, sep, linewidth=2, color='#67e8f9')
-ax2.axhline(5, color='#ef4444', linewidth=1, linestyle='--', label='5\u00B0 threshold')
+ax2.axhline(5, color='#ef4444', linewidth=1, linestyle='--', label='5° threshold')
 ax2.fill_between(t_range + 2006, 0, sep, where=sep < 5, alpha=0.2, color='#fbbf24')
 ax2.set_xlabel('Months (0 = start of year)', fontsize=12)
-ax2.set_ylabel('Angular Separation (\u00B0)', fontsize=12)
+ax2.set_ylabel('Angular Separation (°)', fontsize=12)
 ax2.set_title('Jupiter-Saturn Separation During 7 BCE', fontsize=13)
 ax2.legend(fontsize=10)
 ax2.grid(alpha=0.3)
@@ -582,11 +582,11 @@ plt.show()
 
 close_times = t_range[sep < 5] + 2006
 if len(close_times) > 0:
-    print(f"Close approaches (< 5\u00B0) span months {close_times[0]:.2f} to {close_times[-1]:.2f}")
+    print(f"Close approaches (< 5°) span months {close_times[0]:.2f} to {close_times[-1]:.2f}")
     min_sep_idx = np.argmin(sep)
-    print(f"Closest approach: {sep[min_sep_idx]:.2f}\u00B0 at month {t_range[min_sep_idx]+2006:.2f}")`,
-      challenge: 'Run the ephemeris for the year 2020 and find the December 2020 Great Conjunction (Jupiter-Saturn at 0.1\u00B0 separation). Compare with the 7 BCE conjunction. Which was closer?',
-      successHint: 'You have built the core of an ephemeris engine. Professional versions (JPL HORIZONS, IMCCE) use the same principles but with higher-precision orbital elements, perturbation corrections, and relativistic adjustments. The Magi\u2019s observations, Kepler\u2019s calculations, and your Python code all solve the same problem: where will the planets be?',
+    print(f"Closest approach: {sep[min_sep_idx]:.2f}° at month {t_range[min_sep_idx]+2006:.2f}")`,
+      challenge: 'Run the ephemeris for the year 2020 and find the December 2020 Great Conjunction (Jupiter-Saturn at 0.1° separation). Compare with the 7 BCE conjunction. Which was closer?',
+      successHint: 'You have built the core of an ephemeris engine. Professional versions (JPL HORIZONS, IMCCE) use the same principles but with higher-precision orbital elements, perturbation corrections, and relativistic adjustments. The Magi’s observations, Kepler’s calculations, and your Python code all solve the same problem: where will the planets be?',
     },
   ];
 

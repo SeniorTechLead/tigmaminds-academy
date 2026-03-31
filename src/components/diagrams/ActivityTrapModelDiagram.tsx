@@ -78,7 +78,7 @@ export default function ActivityTrapModelDiagram() {
         {/* Bottom prediction */}
         <g transform="translate(280, 365)">
           <rect x="-250" y="-8" width="500" height="30" rx="6" fill="#fbbf24" opacity="0.1" stroke="#fbbf24" strokeWidth="1" />
-          <text x="0" y="10" textAnchor="middle" fontSize="10" fill="#fbbf24">Prediction: the oily + wet coating on a medium cone should win \u2014 just like a real pitcher!</text>
+          <text x="0" y="10" textAnchor="middle" fontSize="10" fill="#fbbf24">Prediction: the oily + wet coating on a medium cone should win — just like a real pitcher!</text>
         </g>
       </svg>
     </div>

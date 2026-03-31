@@ -5,21 +5,21 @@ export default function FluteOvertonesDiagram() {
       color: '#22c55e',
       darkColor: '#4ade80',
       harmonics: [1.0, 0.3, 0.08, 0.02, 0.01, 0.005],
-      desc: 'Mostly fundamental \u2014 warm, pure tone',
+      desc: 'Mostly fundamental — warm, pure tone',
     },
     {
       name: 'Trumpet',
       color: '#f59e0b',
       darkColor: '#fbbf24',
       harmonics: [1.0, 0.9, 0.75, 0.55, 0.4, 0.25],
-      desc: 'Strong harmonics \u2014 bright, brassy tone',
+      desc: 'Strong harmonics — bright, brassy tone',
     },
     {
       name: 'Clarinet',
       color: '#8b5cf6',
       darkColor: '#a78bfa',
       harmonics: [1.0, 0.05, 0.6, 0.04, 0.35, 0.03],
-      desc: 'Odd harmonics only \u2014 hollow, woody tone',
+      desc: 'Odd harmonics only — hollow, woody tone',
     },
   ];
 
@@ -50,7 +50,7 @@ export default function FluteOvertonesDiagram() {
           Overtones: Why Instruments Sound Different
         </text>
         <text x="300" y="48" textAnchor="middle" className="small fill-gray-500 dark:fill-slate-400">
-          Same note (262 Hz, C\u2084) \u2014 different harmonic profiles create different timbres
+          Same note (262 Hz, C₄) — different harmonic profiles create different timbres
         </text>
 
         {instruments.map((inst, idx) => {
@@ -86,7 +86,7 @@ export default function FluteOvertonesDiagram() {
                     />
                     {/* Harmonic number */}
                     <text x={bx + barW / 2} y={baseY + 14} textAnchor="middle" className="harmLabel fill-gray-600 dark:fill-slate-400">
-                      {i === 0 ? 'f\u2081' : `${i + 1}f\u2081`}
+                      {i === 0 ? 'f₁' : `${i + 1}f₁`}
                     </text>
                     {/* Percentage */}
                     <text x={bx + barW / 2} y={baseY - bh - 4} textAnchor="middle" className="small fill-gray-500 dark:fill-slate-400">

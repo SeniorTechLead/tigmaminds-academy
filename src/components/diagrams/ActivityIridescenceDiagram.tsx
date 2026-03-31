@@ -51,13 +51,13 @@ export default function ActivityIridescenceDiagram() {
         <rect x="20" y="175" width="560" height="65" rx="8" className="fill-indigo-50 dark:fill-indigo-900/20" />
         <text x="300" y="195" textAnchor="middle" className="fill-indigo-700 dark:fill-indigo-300" fontSize="11" fontWeight="bold">What to observe</text>
         <text x="300" y="214" textAnchor="middle" className="fill-gray-600 dark:fill-gray-300" fontSize="10">1. Do the colors change when you change your viewing angle? (They should!)</text>
-        <text x="300" y="228" textAnchor="middle" className="fill-gray-600 dark:fill-gray-300" fontSize="10">2. In the soap film, do the color bands move as the film thins? (Yes \u2014 thinner = different colors.)</text>
+        <text x="300" y="228" textAnchor="middle" className="fill-gray-600 dark:fill-gray-300" fontSize="10">2. In the soap film, do the color bands move as the film thins? (Yes — thinner = different colors.)</text>
 
         {/* Why it works */}
         <rect x="20" y="252" width="560" height="55" rx="8" className="fill-green-50 dark:fill-green-900/20" />
-        <text x="300" y="272" textAnchor="middle" className="fill-green-700 dark:fill-green-300" fontSize="11" fontWeight="bold">Why it works \u2014 same physics as fish scales</text>
+        <text x="300" y="272" textAnchor="middle" className="fill-green-700 dark:fill-green-300" fontSize="11" fontWeight="bold">Why it works — same physics as fish scales</text>
         <text x="300" y="290" textAnchor="middle" className="fill-gray-600 dark:fill-gray-300" fontSize="10">Light reflects off the top and bottom of a thin layer. The two reflections interfere:</text>
-        <text x="300" y="304" textAnchor="middle" className="fill-gray-600 dark:fill-gray-300" fontSize="10">in phase \u2192 bright color | out of phase \u2192 cancelled. Different thickness = different color.</text>
+        <text x="300" y="304" textAnchor="middle" className="fill-gray-600 dark:fill-gray-300" fontSize="10">in phase → bright color | out of phase → cancelled. Different thickness = different color.</text>
       </svg>
     </div>
   );

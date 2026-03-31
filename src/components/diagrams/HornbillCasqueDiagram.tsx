@@ -3,7 +3,7 @@ export default function HornbillCasqueDiagram() {
     <div className="my-4">
       <svg viewBox="0 0 520 400" className="w-full max-w-lg mx-auto" role="img" aria-label="Cross-section of a hornbill casque showing hollow keratin structure with internal struts">
         <rect width="520" height="400" rx="12" className="fill-slate-900" />
-        <text x="260" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#fbbf24">Hornbill Casque — Nature\u2019s Hard Hat</text>
+        <text x="260" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#fbbf24">Hornbill Casque — Nature’s Hard Hat</text>
 
         {/* Hornbill head side view */}
         <g transform="translate(140, 200)">

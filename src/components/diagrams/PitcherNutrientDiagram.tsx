@@ -22,10 +22,10 @@ export default function PitcherNutrientDiagram() {
           {[{x: 60, y: 90}, {x: 140, y: 80}, {x: 100, y: 110}].map((p, i) => (
             <g key={i}>
               <ellipse cx={p.x} cy={p.y} rx="6" ry="3" fill="#a78bfa" opacity="0.7" />
-              <text x={p.x} y={p.y + 2} textAnchor="middle" fontSize="5" fill="white">N\u2082</text>
+              <text x={p.x} y={p.y + 2} textAnchor="middle" fontSize="5" fill="white">N₂</text>
             </g>
           ))}
-          <text x="110" y="155" textAnchor="middle" fontSize="9" className="fill-slate-400">Rich in bacteria that fix N\u2082</text>
+          <text x="110" y="155" textAnchor="middle" fontSize="9" className="fill-slate-400">Rich in bacteria that fix N₂</text>
 
           {/* Nutrient bars */}
           <text x="10" y="185" fontSize="9" fill="#86efac">Nitrogen</text>
@@ -66,7 +66,7 @@ export default function PitcherNutrientDiagram() {
           {[60, 100, 150].map((xp, i) => (
             <g key={i}>
               <line x1={xp} y1="125" x2={xp} y2="140" stroke="#f87171" strokeWidth="1" strokeDasharray="3,2" />
-              <text x={xp} y="150" textAnchor="middle" fontSize="6" fill="#f87171">N\u2193</text>
+              <text x={xp} y="150" textAnchor="middle" fontSize="6" fill="#f87171">N↓</text>
             </g>
           ))}
           <text x="120" y="165" textAnchor="middle" fontSize="9" className="fill-slate-400">Nutrients leached by heavy rain</text>

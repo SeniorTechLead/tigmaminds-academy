@@ -2,7 +2,7 @@ export default function PitcherSpeciesDiagram() {
   const species = [
     { name: 'Nepenthes khasiana', region: 'Khasi Hills, Meghalaya', status: 'Endangered', statusColor: '#f87171', pitcherH: 90, color: '#22c55e', detail: 'Only Nepenthes native to India' },
     { name: 'N. mirabilis', region: 'Southeast Asia (widespread)', status: 'Least Concern', statusColor: '#86efac', pitcherH: 65, color: '#16a34a', detail: 'Most widespread tropical pitcher' },
-    { name: 'N. rajah', region: 'Borneo (Mt. Kinabalu)', status: 'Endangered', statusColor: '#f87171', pitcherH: 120, color: '#15803d', detail: 'Largest pitcher \u2014 holds 3.5 L' },
+    { name: 'N. rajah', region: 'Borneo (Mt. Kinabalu)', status: 'Endangered', statusColor: '#f87171', pitcherH: 120, color: '#15803d', detail: 'Largest pitcher — holds 3.5 L' },
     { name: 'N. lowii', region: 'Borneo highlands', status: 'Least Concern', statusColor: '#86efac', pitcherH: 55, color: '#4ade80', detail: 'Catches tree shrew droppings!' },
   ];
 
@@ -11,7 +11,7 @@ export default function PitcherSpeciesDiagram() {
       <svg viewBox="0 0 560 480" className="w-full max-w-lg mx-auto" role="img" aria-label="Diagram showing Nepenthes species diversity with focus on Nepenthes khasiana of Meghalaya">
         <rect width="560" height="480" rx="12" className="fill-slate-900" />
         <text x="280" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#86efac">Nepenthes of Meghalaya and Beyond</text>
-        <text x="280" y="46" textAnchor="middle" fontSize="10" className="fill-slate-400">Pitcher plant species diversity \u2014 Meghalaya hosts India\u2019s only native Nepenthes</text>
+        <text x="280" y="46" textAnchor="middle" fontSize="10" className="fill-slate-400">Pitcher plant species diversity — Meghalaya hosts India’s only native Nepenthes</text>
 
         {/* Species comparison */}
         {species.map((sp, i) => {
@@ -50,15 +50,15 @@ export default function PitcherSpeciesDiagram() {
 
         {/* Highlight box for N. khasiana */}
         <rect x="15" y="55" width="145" height="290" rx="8" fill="none" stroke="#86efac" strokeWidth="2" strokeDasharray="4,3" />
-        <text x="87" y="350" textAnchor="middle" fontSize="8" fontWeight="bold" fill="#86efac">\u2605 India\u2019s only native species</text>
+        <text x="87" y="350" textAnchor="middle" fontSize="8" fontWeight="bold" fill="#86efac">★ India’s only native species</text>
 
         {/* Map inset of Meghalaya */}
         <g transform="translate(280, 380)">
           <rect x="-250" y="-10" width="500" height="90" rx="8" fill="#14532d" opacity="0.4" stroke="#22c55e" strokeWidth="1" />
           <text x="0" y="8" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#86efac">Why Meghalaya?</text>
-          <text x="0" y="24" textAnchor="middle" fontSize="9" className="fill-slate-300">Wettest place on Earth (Mawsynram: 11,871 mm/year) \u2192 extreme nutrient leaching</text>
-          <text x="0" y="38" textAnchor="middle" fontSize="9" className="fill-slate-300">Acidic, rocky laterite soils \u2192 very low nitrogen and phosphorus</text>
-          <text x="0" y="52" textAnchor="middle" fontSize="9" className="fill-slate-300">Subtropical climate (1,000\u20131,800 m altitude) \u2192 ideal for Nepenthes growth</text>
+          <text x="0" y="24" textAnchor="middle" fontSize="9" className="fill-slate-300">Wettest place on Earth (Mawsynram: 11,871 mm/year) → extreme nutrient leaching</text>
+          <text x="0" y="38" textAnchor="middle" fontSize="9" className="fill-slate-300">Acidic, rocky laterite soils → very low nitrogen and phosphorus</text>
+          <text x="0" y="52" textAnchor="middle" fontSize="9" className="fill-slate-300">Subtropical climate (1,000–1,800 m altitude) → ideal for Nepenthes growth</text>
           <text x="0" y="68" textAnchor="middle" fontSize="9" fill="#fbbf24">N. khasiana is listed under Indian Wildlife Protection Act, Schedule VI</text>
         </g>
       </svg>

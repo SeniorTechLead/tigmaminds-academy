@@ -69,16 +69,16 @@ const MonsoonReversalDiagram = () => {
         {/* Main title */}
         <text x="310" y="22" textAnchor="middle"
           className="title-text fill-slate-700 dark:fill-slate-200">
-          The Great Reversal \u2014 Summer vs Winter Monsoon
+          The Great Reversal — Summer vs Winter Monsoon
         </text>
 
-        {/* ===== TOP HALF: SUMMER MONSOON (June\u2013September) ===== */}
+        {/* ===== TOP HALF: SUMMER MONSOON (June–September) ===== */}
         <rect x="15" y="35" width="590" height="225" rx="6"
           className="fill-red-50/50 dark:fill-red-900/10 stroke-red-200 dark:stroke-red-800" strokeWidth="1" />
 
         <text x="310" y="52" textAnchor="middle"
           className="section-title fill-red-700 dark:fill-red-300">
-          SUMMER (June\u2013September): Southwest Monsoon \u2014 WET season
+          SUMMER (June–September): Southwest Monsoon — WET season
         </text>
 
         {/* Simplified map: India + ocean */}
@@ -91,7 +91,7 @@ const MonsoonReversalDiagram = () => {
         </text>
         <text x="290" y="155" textAnchor="middle"
           className="small-text fill-red-600 dark:fill-red-400">
-          HOT (45\u00B0C)
+          HOT (45°C)
         </text>
         <text x="290" y="167" textAnchor="middle"
           className="small-text fill-red-600 dark:fill-red-400">
@@ -142,20 +142,20 @@ const MonsoonReversalDiagram = () => {
         </text>
         <text x="507" y="193" textAnchor="middle"
           className="small-text fill-emerald-600 dark:fill-emerald-400">
-          hot land \u2192 HEAVY RAIN
+          hot land → HEAVY RAIN
         </text>
         <text x="507" y="205" textAnchor="middle"
           className="small-text fill-emerald-600 dark:fill-emerald-400">
-          (80% of India\u2019s annual rain)
+          (80% of India’s annual rain)
         </text>
 
-        {/* ===== BOTTOM HALF: WINTER MONSOON (October\u2013March) ===== */}
+        {/* ===== BOTTOM HALF: WINTER MONSOON (October–March) ===== */}
         <rect x="15" y="270" width="590" height="225" rx="6"
           className="fill-blue-50/50 dark:fill-blue-900/10 stroke-blue-200 dark:stroke-blue-800" strokeWidth="1" />
 
         <text x="310" y="287" textAnchor="middle"
           className="section-title fill-blue-700 dark:fill-blue-300">
-          WINTER (October\u2013March): Northeast Monsoon \u2014 DRY season (mostly)
+          WINTER (October–March): Northeast Monsoon — DRY season (mostly)
         </text>
 
         {/* India in winter */}
@@ -167,7 +167,7 @@ const MonsoonReversalDiagram = () => {
         </text>
         <text x="290" y="390" textAnchor="middle"
           className="small-text fill-blue-600 dark:fill-blue-400">
-          COLD (10\u00B0C)
+          COLD (10°C)
         </text>
         <text x="290" y="402" textAnchor="middle"
           className="small-text fill-blue-600 dark:fill-blue-400">
@@ -214,7 +214,7 @@ const MonsoonReversalDiagram = () => {
         </text>
         <text x="507" y="423" textAnchor="middle"
           className="small-text fill-amber-600 dark:fill-amber-400">
-          land to ocean \u2192 dry season
+          land to ocean → dry season
         </text>
         <text x="507" y="435" textAnchor="middle"
           className="small-text fill-amber-600 dark:fill-amber-400">
@@ -225,7 +225,7 @@ const MonsoonReversalDiagram = () => {
         <path d="M 30 258 L 30 272" stroke="#6366f1" strokeWidth="2"
           markerEnd="url(#mrev-arrow-blue)" />
         <text x="45" y="268" className="small-text fill-indigo-600 dark:fill-indigo-400" fontWeight="600">
-          WINDS REVERSE 180\u00B0
+          WINDS REVERSE 180°
         </text>
 
         {/* Bottom summary */}
@@ -237,7 +237,7 @@ const MonsoonReversalDiagram = () => {
         </text>
         <text x="310" y="526" textAnchor="middle"
           className="small-text fill-indigo-600 dark:fill-indigo-300">
-          dragging the wind belts with it. This is why the monsoon reverses \u2014 it follows the sun\u2019s seasonal migration.
+          dragging the wind belts with it. This is why the monsoon reverses — it follows the sun’s seasonal migration.
         </text>
       </svg>
     </div>

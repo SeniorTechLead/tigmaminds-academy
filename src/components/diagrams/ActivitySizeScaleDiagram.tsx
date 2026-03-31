@@ -11,7 +11,7 @@ const ActivitySizeScaleDiagram = () => {
     {
       num: 2,
       title: 'Calculate & Record',
-      desc: 'For each cube, calculate:\nSA = 6 \u00d7 side\u00b2\nVol = side\u00b3\nRatio = SA \u00f7 Vol',
+      desc: 'For each cube, calculate:\nSA = 6 × side²\nVol = side³\nRatio = SA ÷ Vol',
       color: '#3b82f6',
       bgClass: 'fill-blue-50 dark:fill-blue-900/10 stroke-blue-300 dark:stroke-blue-600',
       numBg: 'fill-blue-100 dark:fill-blue-900/30',
@@ -51,7 +51,7 @@ const ActivitySizeScaleDiagram = () => {
           Try It: The Size Scale Experiment
         </text>
         <text x="320" y="46" textAnchor="middle" className="small fill-slate-500 dark:fill-slate-400">
-          Explore the cube-square law with clay or potato \u2014 no lab required
+          Explore the cube-square law with clay or potato — no lab required
         </text>
 
         {/* Materials */}
@@ -91,16 +91,16 @@ const ActivitySizeScaleDiagram = () => {
         {/* Table header */}
         <rect x="80" y="295" width="480" height="25" rx="4"
           className="fill-slate-100 dark:fill-slate-800 stroke-slate-300 dark:stroke-slate-600" strokeWidth="1" />
-        {['Cube Side', 'Surface Area', 'Volume', 'SA \u00f7 Vol', 'Dries first?'].map((h, i) => (
+        {['Cube Side', 'Surface Area', 'Volume', 'SA ÷ Vol', 'Dries first?'].map((h, i) => (
           <text key={i} x={120 + i * 96} y="312" textAnchor="middle"
             className="small fill-slate-700 dark:fill-slate-200" fontWeight="600">{h}</text>
         ))}
 
         {/* Table rows */}
         {[
-          { side: '1 cm', sa: '6 cm\u00b2', vol: '1 cm\u00b3', ratio: '6.0', dry: '\u2b50 Fastest!', color: '#22c55e' },
-          { side: '2 cm', sa: '24 cm\u00b2', vol: '8 cm\u00b3', ratio: '3.0', dry: 'Medium', color: '#3b82f6' },
-          { side: '4 cm', sa: '96 cm\u00b2', vol: '64 cm\u00b3', ratio: '1.5', dry: 'Slowest', color: '#8b5cf6' },
+          { side: '1 cm', sa: '6 cm²', vol: '1 cm³', ratio: '6.0', dry: '⭐ Fastest!', color: '#22c55e' },
+          { side: '2 cm', sa: '24 cm²', vol: '8 cm³', ratio: '3.0', dry: 'Medium', color: '#3b82f6' },
+          { side: '4 cm', sa: '96 cm²', vol: '64 cm³', ratio: '1.5', dry: 'Slowest', color: '#8b5cf6' },
         ].map((row, i) => {
           const y = 330 + i * 28;
           return (
@@ -126,7 +126,7 @@ const ActivitySizeScaleDiagram = () => {
           What you discovered
         </text>
         <text x="175" y="452" textAnchor="middle" className="tiny fill-emerald-600 dark:fill-emerald-400">
-          The 1 cm cube has 6\u00d7 the SA:V ratio of the 4 cm cube.
+          The 1 cm cube has 6× the SA:V ratio of the 4 cm cube.
         </text>
         <text x="175" y="466" textAnchor="middle" className="tiny fill-emerald-600 dark:fill-emerald-400">
           It dries fastest because more surface is exposed
@@ -141,13 +141,13 @@ const ActivitySizeScaleDiagram = () => {
           The biology connection
         </text>
         <text x="465" y="452" textAnchor="middle" className="tiny fill-blue-600 dark:fill-blue-400">
-          A 7 mm frog is like the 1 cm cube \u2014 enormous surface
+          A 7 mm frog is like the 1 cm cube — enormous surface
         </text>
         <text x="465" y="466" textAnchor="middle" className="tiny fill-blue-600 dark:fill-blue-400">
           relative to volume. Great for breathing through skin.
         </text>
         <text x="465" y="480" textAnchor="middle" className="tiny fill-blue-600 dark:fill-blue-400">
-          Terrible for staying hydrated. That\u2019s why they live in wet leaf litter.
+          Terrible for staying hydrated. That’s why they live in wet leaf litter.
         </text>
       </svg>
     </div>

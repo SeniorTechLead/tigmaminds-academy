@@ -83,8 +83,8 @@ export default function ActivityErosionModelDiagram() {
         {[
           ['Where does the water carve channels?', 'Erosion happens where water flows fastest (steep slopes, narrow gaps)'],
           ['Where does sand pile up?', 'Deposition happens where water slows down (flat areas, behind obstacles)'],
-          ['Does water go around your mound?', 'This is exactly how Majuli formed \u2014 the river flowed around the land'],
-          ['What happens when you pour more water?', 'More water = more erosion \u2014 like monsoon floods attacking Majuli\u2019s banks'],
+          ['Does water go around your mound?', 'This is exactly how Majuli formed — the river flowed around the land'],
+          ['What happens when you pour more water?', 'More water = more erosion — like monsoon floods attacking Majuli’s banks'],
         ].map(([q, a], i) => (
           <g key={`obs-${i}`}>
             <circle cx="35" cy={248 + i * 28} r="3" className="fill-sky-400" />

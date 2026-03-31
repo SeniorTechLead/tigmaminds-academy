@@ -34,8 +34,8 @@ export default function MajuliProtectionDiagram() {
           </circle>
         ))}
 
-        <text x="150" y="182" textAnchor="middle" className="fill-slate-300" fontSize="10">Slows water \u2192 traps sediment \u2192 rebuilds bank</text>
-        <text x="150" y="197" textAnchor="middle" className="fill-emerald-500" fontSize="10" fontWeight="bold">Cost: Low | Lifespan: 5\u201310 years</text>
+        <text x="150" y="182" textAnchor="middle" className="fill-slate-300" fontSize="10">Slows water → traps sediment → rebuilds bank</text>
+        <text x="150" y="197" textAnchor="middle" className="fill-emerald-500" fontSize="10" fontWeight="bold">Cost: Low | Lifespan: 5–10 years</text>
 
         {/* 2. Vetiver Grass (top-right) */}
         <rect x="295" y="42" width="270" height="170" rx="8" className="fill-slate-800" />
@@ -92,7 +92,7 @@ export default function MajuliProtectionDiagram() {
         <text x="250" y="335" textAnchor="middle" className="fill-emerald-500" fontSize="9">Land</text>
 
         <text x="150" y="370" textAnchor="middle" className="fill-slate-300" fontSize="10">Sand-filled fabric bags absorb wave energy</text>
-        <text x="150" y="385" textAnchor="middle" className="fill-sky-400" fontSize="10" fontWeight="bold">Cost: Moderate | Lifespan: 10\u201320 years</text>
+        <text x="150" y="385" textAnchor="middle" className="fill-sky-400" fontSize="10" fontWeight="bold">Cost: Moderate | Lifespan: 10–20 years</text>
 
         {/* 4. Gabion Walls (bottom-right) */}
         <rect x="295" y="222" width="270" height="170" rx="8" className="fill-slate-800" />
@@ -119,7 +119,7 @@ export default function MajuliProtectionDiagram() {
         </path>
 
         <text x="430" y="376" textAnchor="middle" className="fill-slate-300" fontSize="10">Wire cages filled with rock resist wave force</text>
-        <text x="430" y="391" textAnchor="middle" className="fill-sky-400" fontSize="10" fontWeight="bold">Cost: High | Lifespan: 20\u201350 years</text>
+        <text x="430" y="391" textAnchor="middle" className="fill-sky-400" fontSize="10" fontWeight="bold">Cost: High | Lifespan: 20–50 years</text>
 
         {/* Bottom summary */}
         <rect x="30" y="398" width="520" height="18" rx="4" className="fill-amber-900" opacity="0.5" />

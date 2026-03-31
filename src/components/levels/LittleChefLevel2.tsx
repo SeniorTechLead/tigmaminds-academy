@@ -64,7 +64,7 @@ for conc, color in zip(alginate_concs, colors):
 
 ax1.axhspan(0.3, 0.8, alpha=0.1, color='#22c55e')
 ax1.text(100, 0.55, 'Optimal gel\\nthickness', color='#22c55e', fontsize=9, ha='center')
-ax1.set_xlabel('Time in CaCl\\u2082 bath (seconds)', color='white')
+ax1.set_xlabel('Time in CaCl\₂ bath (seconds)', color='white')
 ax1.set_ylabel('Gel membrane thickness (mm)', color='white')
 ax1.set_title('Spherification: Gel Growth Over Time', color='white', fontsize=12)
 ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=9)

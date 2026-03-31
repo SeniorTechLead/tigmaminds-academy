@@ -36,7 +36,7 @@ export default function FluteStandingWaveDiagram() {
           Fundamental (1st harmonic)
         </text>
         <text x="520" y="95" textAnchor="end" className="formula fill-purple-600 dark:fill-purple-400">
-          f\u2081 = v / 2L
+          f₁ = v / 2L
         </text>
 
         {/* Tube body */}
@@ -70,14 +70,14 @@ export default function FluteStandingWaveDiagram() {
 
         {/* Length annotation */}
         <line x1="60" y1="175" x2="540" y2="175" className="stroke-gray-400 dark:stroke-slate-500" strokeWidth="1" markerEnd="url(#arrow)" markerStart="url(#arrowR)" />
-        <text x="300" y="190" textAnchor="middle" className="small fill-gray-600 dark:fill-slate-400">L = \u00bd\u03bb   \u2192   \u03bb = 2L</text>
+        <text x="300" y="190" textAnchor="middle" className="small fill-gray-600 dark:fill-slate-400">L = ½λ   →   λ = 2L</text>
 
         {/* === 2nd Harmonic === */}
         <text x="20" y="220" className="label fill-gray-700 dark:fill-slate-300" fontWeight="600">
           2nd harmonic
         </text>
         <text x="520" y="220" textAnchor="end" className="formula fill-purple-600 dark:fill-purple-400">
-          f\u2082 = 2v / 2L = v / L
+          f₂ = 2v / 2L = v / L
         </text>
 
         <rect x="60" y="230" width="480" height="40" rx="4" className="fill-amber-100 dark:fill-amber-900/30" stroke="#b45309" strokeWidth="1.5" />
@@ -114,7 +114,7 @@ export default function FluteStandingWaveDiagram() {
           3rd harmonic
         </text>
         <text x="520" y="315" textAnchor="end" className="formula fill-purple-600 dark:fill-purple-400">
-          f\u2083 = 3v / 2L
+          f₃ = 3v / 2L
         </text>
 
         <rect x="60" y="325" width="480" height="40" rx="4" className="fill-amber-100 dark:fill-amber-900/30" stroke="#b45309" strokeWidth="1.5" />
@@ -148,13 +148,13 @@ export default function FluteStandingWaveDiagram() {
         {/* Summary formula */}
         <rect x="80" y="395" width="440" height="65" rx="8" className="fill-slate-100 dark:fill-slate-800/60" />
         <text x="300" y="418" textAnchor="middle" className="label fill-gray-800 dark:fill-slate-200" fontWeight="600">
-          Open tube: f\u2099 = nv / 2L   (n = 1, 2, 3, ...)
+          Open tube: fₙ = nv / 2L   (n = 1, 2, 3, ...)
         </text>
         <text x="300" y="438" textAnchor="middle" className="small fill-gray-600 dark:fill-slate-400">
           All harmonics present. Antinodes at both open ends.
         </text>
         <text x="300" y="454" textAnchor="middle" className="small fill-gray-600 dark:fill-slate-400">
-          Example: L = 30 cm \u2192 f\u2081 = 343 / (2 \u00d7 0.30) = 572 Hz \u2248 D\u2085
+          Example: L = 30 cm → f₁ = 343 / (2 × 0.30) = 572 Hz ≈ D₅
         </text>
 
         {/* Arrow markers */}

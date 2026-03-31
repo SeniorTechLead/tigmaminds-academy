@@ -34,13 +34,13 @@ export default function ActivityTrackingDiagram() {
         </text>
         {/* Data sheet */}
         <rect x="230" y="78" width="130" height="90" rx="3" className="fill-white/5" stroke="#6b7280" strokeWidth="0.5" />
-        {['Day | Species | Count | Marked?', '\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500', ' 1  | Mynah   |  3   |  \u2014', ' 2  | Mynah   |  4   |  1\u2605', ' 3  | Mynah   |  5   |  2\u2605'].map((row, i) => (
+        {['Day | Species | Count | Marked?', '────────────────────', ' 1  | Mynah   |  3   |  —', ' 2  | Mynah   |  4   |  1★', ' 3  | Mynah   |  5   |  2★'].map((row, i) => (
           <text key={i} x="240" y={94 + i * 14} fontSize="9" className="fill-gray-300" fontFamily="monospace">
             {row}
           </text>
         ))}
         <text x="297" y="185" textAnchor="middle" fontSize="9" className="fill-gray-500">Note any individually</text>
-        <text x="297" y="197" textAnchor="middle" fontSize="9" className="fill-gray-500">recognisable features (\u2605)</text>
+        <text x="297" y="197" textAnchor="middle" fontSize="9" className="fill-gray-500">recognisable features (★)</text>
 
         {/* Step 3 */}
         <rect x="405" y="44" width="180" height="170" rx="6" className="fill-slate-800/60" />
@@ -51,7 +51,7 @@ export default function ActivityTrackingDiagram() {
           Use your re-sightings:
         </text>
         <text x="495" y="115" textAnchor="middle" fontSize="13" className="fill-white" fontWeight="600">
-          N = (M \u00d7 C) / R
+          N = (M × C) / R
         </text>
         <text x="495" y="140" textAnchor="middle" fontSize="10" className="fill-amber-300">M = birds you recognised</text>
         <text x="495" y="155" textAnchor="middle" fontSize="10" className="fill-blue-300">C = total counted Day 2</text>
@@ -91,7 +91,7 @@ export default function ActivityTrackingDiagram() {
           animals hide, move unpredictably, and look alike. That is why they use GPS, camera traps,
         </text>
         <text x="300" y="383" textAnchor="middle" fontSize="10" className="fill-gray-400">
-          and statistical models together \u2014 no single method is enough.
+          and statistical models together — no single method is enough.
         </text>
       </svg>
     </div>

@@ -29,19 +29,19 @@ export default function AlKhwarizmiLevel4() {
 
   const miniLessons = [
     {
-      title: 'Gradient descent \u2014 the algorithm that trains AI',
+      title: 'Gradient descent — the algorithm that trains AI',
       concept: `Every modern AI model learns by **gradient descent**: an algorithm that minimises a function by repeatedly moving downhill.
 
 Imagine standing on a foggy hillside. You cannot see the valley floor, but you can feel the slope under your feet. Step downhill. Feel the slope again. Step downhill again. Eventually, you reach the bottom.
 
-Mathematically: given a function f(x), its derivative f\u2019(x) tells you the slope. If the slope is positive, x is too big \u2014 decrease it. If negative, x is too small \u2014 increase it. The update rule is:
+Mathematically: given a function f(x), its derivative f’(x) tells you the slope. If the slope is positive, x is too big — decrease it. If negative, x is too small — increase it. The update rule is:
 
-**x_new = x_old \u2212 learning_rate \u00D7 f\u2019(x_old)**
+**x_new = x_old − learning_rate × f’(x_old)**
 
-This is an algorithm in al-Khwarizmi\u2019s sense: a precise, iterative procedure that converges to the answer. It is also a direct descendant of Newton\u2019s method from Level 3.
+This is an algorithm in al-Khwarizmi’s sense: a precise, iterative procedure that converges to the answer. It is also a direct descendant of Newton’s method from Level 3.
 
 Gradient descent trains neural networks, fits statistical models, and optimises engineering systems. It is perhaps the most important algorithm of the 21st century.`,
-      analogy: 'A marble released on the inside of a bowl rolls to the bottom. It does not calculate the lowest point \u2014 it just follows gravity downhill at every instant. Gradient descent is the mathematical equivalent: follow the slope downhill at every step. The "gravity" is the derivative.',
+      analogy: 'A marble released on the inside of a bowl rolls to the bottom. It does not calculate the lowest point — it just follows gravity downhill at every instant. Gradient descent is the mathematical equivalent: follow the slope downhill at every step. The "gravity" is the derivative.',
       storyConnection: 'Al-Khwarizmi optimised his methods: fewer steps, less wasted effort. Gradient descent optimises a function: fewer iterations, less error. The House of Wisdom sought the most efficient solution to every problem. Modern AI does the same, using an algorithm that al-Khwarizmi would have understood immediately.',
       checkQuestion: 'What happens if the learning rate is too large?',
       checkAnswer: 'The algorithm overshoots the minimum. Instead of gently rolling to the bottom of the valley, it leaps across to the other side, then back, oscillating wildly. It may never converge. Too small a learning rate converges eventually but takes ages. Choosing the right learning rate is one of the key challenges in machine learning.',
@@ -68,7 +68,7 @@ def gradient_descent(start, lr, steps):
     return x, history
 
 # Run with different learning rates
-print("=== Gradient Descent: f(x) = (x-3)\u00B2 + 1 ===")
+print("=== Gradient Descent: f(x) = (x-3)² + 1 ===")
 print(f"Minimum should be at x = 3, f(x) = 1")
 print()
 
@@ -100,24 +100,24 @@ plt.show()
 x_best, hist = gradient_descent(-1, 0.3, 20)
 print(f"Best: x = {x_best:.6f}, f(x) = {f(x_best):.6f}")
 print(f"Converged in {len(hist)-1} steps.")`,
-      challenge: 'Modify the function to f(x) = x\u2074 \u2212 3x\u00B2 + 2 (has two local minima). Start from x = \u22122 and from x = 2. Do they converge to the same minimum? This illustrates a fundamental challenge of gradient descent.',
-      successHint: 'Gradient descent is how ChatGPT, image generators, self-driving cars, and every other AI system learns. The update rule \u2014 move opposite to the gradient, scaled by a learning rate \u2014 is beautifully simple. It is algorithmic thinking at its finest, a direct descendant of al-Khwarizmi\u2019s methods.',
+      challenge: 'Modify the function to f(x) = x⁴ − 3x² + 2 (has two local minima). Start from x = −2 and from x = 2. Do they converge to the same minimum? This illustrates a fundamental challenge of gradient descent.',
+      successHint: 'Gradient descent is how ChatGPT, image generators, self-driving cars, and every other AI system learns. The update rule — move opposite to the gradient, scaled by a learning rate — is beautifully simple. It is algorithmic thinking at its finest, a direct descendant of al-Khwarizmi’s methods.',
     },
     {
-      title: 'Linear regression \u2014 fitting a line to data',
+      title: 'Linear regression — fitting a line to data',
       concept: `You have data points: (1, 2.1), (2, 3.9), (3, 6.2), (4, 7.8). They roughly follow a line, but not perfectly. What is the **best** line through them?
 
-**Linear regression** finds the line y = mx + b that minimises the total squared error \u2014 the sum of (actual y \u2212 predicted y)\u00B2 for all points. This is the **least squares** method.
+**Linear regression** finds the line y = mx + b that minimises the total squared error — the sum of (actual y − predicted y)² for all points. This is the **least squares** method.
 
 The solution uses calculus (or linear algebra): take the derivative of the error function, set it to zero, solve for m and b. The result is a closed-form formula.
 
 Or you can use gradient descent to find m and b iteratively. Both approaches give the same answer.
 
-Linear regression connects al-Khwarizmi\u2019s algebra (solving equations), Newton\u2019s calculus (minimising functions), and modern machine learning (fitting models to data).`,
+Linear regression connects al-Khwarizmi’s algebra (solving equations), Newton’s calculus (minimising functions), and modern machine learning (fitting models to data).`,
       analogy: 'Imagine stretching a rubber band to pass as close as possible to a set of thumbtacks on a board. The rubber band naturally settles into the position that minimises the total stretching. Linear regression does the same: it finds the line that minimises the total "pull" from all data points.',
-      storyConnection: 'Baghdad\u2019s merchants collected data: sales by month, crop yields by rainfall, trade volumes by season. Finding trends in data is exactly what linear regression does. Al-Khwarizmi\u2019s algebra provides the foundation: the line y = mx + b, the method of solving for unknowns (m and b), and the algorithmic approach to finding the answer.',
+      storyConnection: 'Baghdad’s merchants collected data: sales by month, crop yields by rainfall, trade volumes by season. Finding trends in data is exactly what linear regression does. Al-Khwarizmi’s algebra provides the foundation: the line y = mx + b, the method of solving for unknowns (m and b), and the algorithmic approach to finding the answer.',
       checkQuestion: 'If your linear regression line has a slope of 0 (perfectly horizontal), what does that tell you about the relationship between x and y?',
-      checkAnswer: 'There is no linear relationship. Changes in x do not predict changes in y. The data points are scattered randomly around a horizontal line (the mean of y). This does not mean x and y are unrelated \u2014 they could have a curved (non-linear) relationship that a straight line misses.',
+      checkAnswer: 'There is no linear relationship. Changes in x do not predict changes in y. The data points are scattered randomly around a horizontal line (the mean of y). This does not mean x and y are unrelated — they could have a curved (non-linear) relationship that a straight line misses.',
       codeIntro: 'Fit a line to data using both the closed-form formula and gradient descent.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -179,23 +179,23 @@ plt.title('Linear Regression: Finding the Best Line', fontsize=13)
 plt.legend(fontsize=10)
 plt.grid(alpha=0.3)
 plt.show()`,
-      challenge: 'Try fitting a quadratic: y = ax\u00B2 + bx + c. Generate data from y = 0.5x\u00B2 \u2212 2x + 3 with noise. Use np.polyfit(x, y, 2) to find the coefficients. Plot the curve and the data.',
-      successHint: 'Linear regression is the foundational algorithm of data science. It combines al-Khwarizmi\u2019s algebra (y = mx + b), calculus (minimising errors), and computational thinking (gradient descent). When you see a trend line on any chart, you are seeing al-Khwarizmi\u2019s legacy in action.',
+      challenge: 'Try fitting a quadratic: y = ax² + bx + c. Generate data from y = 0.5x² − 2x + 3 with noise. Use np.polyfit(x, y, 2) to find the coefficients. Plot the curve and the data.',
+      successHint: 'Linear regression is the foundational algorithm of data science. It combines al-Khwarizmi’s algebra (y = mx + b), calculus (minimising errors), and computational thinking (gradient descent). When you see a trend line on any chart, you are seeing al-Khwarizmi’s legacy in action.',
     },
     {
-      title: 'Neural networks from scratch \u2014 algebra all the way down',
+      title: 'Neural networks from scratch — algebra all the way down',
       concept: `A neural network is just layers of linear algebra and simple functions stacked together.
 
-Each neuron computes: **output = activation(w\u2081x\u2081 + w\u2082x\u2082 + ... + b)**
+Each neuron computes: **output = activation(w₁x₁ + w₂x₂ + ... + b)**
 
-That is a linear equation (w\u00B7x + b) followed by a non-linear activation function. The weights w and bias b are learned by gradient descent.
+That is a linear equation (w·x + b) followed by a non-linear activation function. The weights w and bias b are learned by gradient descent.
 
-A network with many neurons and layers can approximate any function \u2014 this is the **universal approximation theorem**. But the building blocks are al-Khwarizmi\u2019s: variables, linear equations, and algorithms.
+A network with many neurons and layers can approximate any function — this is the **universal approximation theorem**. But the building blocks are al-Khwarizmi’s: variables, linear equations, and algorithms.
 
-The code below builds a neural network from scratch (no libraries like TensorFlow) to learn the XOR function \u2014 the simplest problem that a single neuron cannot solve.`,
+The code below builds a neural network from scratch (no libraries like TensorFlow) to learn the XOR function — the simplest problem that a single neuron cannot solve.`,
       analogy: 'A neural network is a factory assembly line. Raw materials (inputs) enter. Each worker (neuron) applies a simple operation (multiply, add, threshold). The product of one worker becomes the input for the next. The factory as a whole can build complex products, even though each worker does something simple.',
-      storyConnection: 'The House of Wisdom combined knowledge from many traditions: Greek geometry, Indian arithmetic, Persian astronomy. Each scholar contributed a piece, and the combination produced something greater than the sum. A neural network combines simple neurons into something intelligent \u2014 the same principle of emergent complexity.',
-      checkQuestion: 'Why does a neural network need non-linear activation functions? What happens if every layer is purely linear (just w\u00B7x + b)?',
+      storyConnection: 'The House of Wisdom combined knowledge from many traditions: Greek geometry, Indian arithmetic, Persian astronomy. Each scholar contributed a piece, and the combination produced something greater than the sum. A neural network combines simple neurons into something intelligent — the same principle of emergent complexity.',
+      checkQuestion: 'Why does a neural network need non-linear activation functions? What happens if every layer is purely linear (just w·x + b)?',
       checkAnswer: 'If every layer is linear, the entire network is equivalent to a single linear transformation (a composition of linear functions is linear). No matter how many layers you add, the network can only model linear relationships. The activation function (like ReLU or sigmoid) introduces non-linearity, enabling the network to learn curved, complex patterns.',
       codeIntro: 'Build a neural network from scratch to learn XOR.',
       code: `import numpy as np
@@ -270,24 +270,24 @@ plt.show()
 print("\\nEvery step is algebra: Wx + b, then gradient descent.")
 print("A neural network is al-Khwarizmi's equations, running millions of times.")`,
       challenge: 'Modify the network to have 8 hidden neurons instead of 4. Does it learn faster? Try learning a different function: AND (output 1 only when both inputs are 1). How does the loss curve change?',
-      successHint: 'You just built a neural network from scratch using nothing but linear algebra and gradient descent. No TensorFlow, no magic \u2014 just variables, equations, and an algorithm. Al-Khwarizmi\u2019s three contributions to mathematics (variables, equations, algorithms) are literally the three building blocks of modern AI.',
+      successHint: 'You just built a neural network from scratch using nothing but linear algebra and gradient descent. No TensorFlow, no magic — just variables, equations, and an algorithm. Al-Khwarizmi’s three contributions to mathematics (variables, equations, algorithms) are literally the three building blocks of modern AI.',
     },
     {
-      title: 'Optimisation under constraints \u2014 linear programming',
+      title: 'Optimisation under constraints — linear programming',
       concept: `Many real problems are not just "minimise f(x)" but "minimise f(x) subject to constraints." A factory wants to maximise profit, but has limited materials, workers, and machines. An airline wants to minimise fuel, but must visit all cities.
 
 **Linear programming** (LP) solves problems where both the objective and constraints are linear:
 
 Maximise: 5x + 4y (profit)
-Subject to: x + y \u2264 100, 2x + y \u2264 150, x \u2265 0, y \u2265 0
+Subject to: x + y ≤ 100, 2x + y ≤ 150, x ≥ 0, y ≥ 0
 
-The constraints define a **feasible region** \u2014 a polygon on the coordinate plane. The optimal solution is always at a vertex (corner) of this polygon. This is the **Simplex theorem**.
+The constraints define a **feasible region** — a polygon on the coordinate plane. The optimal solution is always at a vertex (corner) of this polygon. This is the **Simplex theorem**.
 
-LP was formalised in 1947 by Dantzig, but the underlying algebra \u2014 systems of linear equations and inequalities \u2014 is exactly al-Khwarizmi\u2019s domain.`,
+LP was formalised in 1947 by Dantzig, but the underlying algebra — systems of linear equations and inequalities — is exactly al-Khwarizmi’s domain.`,
       analogy: 'Imagine a farmer who can plant wheat or corn. Wheat earns more per acre but needs more water. Corn needs more labour. The farmer has limited water and labour. Linear programming finds the exact mix of wheat and corn that maximises income without exceeding any resource limit.',
-      storyConnection: 'The Abbasid Caliphate managed an empire\u2019s resources: allocating troops, distributing grain, planning trade routes. These are optimisation problems. Al-Khwarizmi\u2019s book on inheritance was essentially a constrained optimisation problem: divide property according to Islamic law (the constraints) while satisfying all heirs (the objective).',
+      storyConnection: 'The Abbasid Caliphate managed an empire’s resources: allocating troops, distributing grain, planning trade routes. These are optimisation problems. Al-Khwarizmi’s book on inheritance was essentially a constrained optimisation problem: divide property according to Islamic law (the constraints) while satisfying all heirs (the objective).',
       checkQuestion: 'Why is the optimal solution always at a vertex of the feasible region?',
-      checkAnswer: 'Because the objective function is linear, its value changes at a constant rate in any direction. On a flat surface (the feasible region), a linear function achieves its maximum/minimum at the boundary. On a polygon\u2019s boundary, a linear function achieves its extreme at a vertex. Moving along an edge either improves or worsens the objective, so the best point is at the end of the best edge.',
+      checkAnswer: 'Because the objective function is linear, its value changes at a constant rate in any direction. On a flat surface (the feasible region), a linear function achieves its maximum/minimum at the boundary. On a polygon’s boundary, a linear function achieves its extreme at a vertex. Moving along an edge either improves or worsens the objective, so the best point is at the end of the best edge.',
       codeIntro: 'Solve a linear programming problem by plotting the feasible region and checking vertices.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -351,11 +351,11 @@ plt.show()
 
 print("\\nThe optimal solution is always at a vertex of the feasible region.")
 print("This is the Simplex theorem — check corners, find the optimum.")`,
-      challenge: 'Add a third constraint: x + 2y \u2264 120. How does the feasible region change? Does the optimal solution move to a different vertex?',
-      successHint: 'Linear programming is used by every airline (scheduling), logistics company (routing), manufacturer (production planning), and financial institution (portfolio optimisation). The algebra is al-Khwarizmi\u2019s; the algorithmic thinking is his legacy; the applications are everywhere.',
+      challenge: 'Add a third constraint: x + 2y ≤ 120. How does the feasible region change? Does the optimal solution move to a different vertex?',
+      successHint: 'Linear programming is used by every airline (scheduling), logistics company (routing), manufacturer (production planning), and financial institution (portfolio optimisation). The algebra is al-Khwarizmi’s; the algorithmic thinking is his legacy; the applications are everywhere.',
     },
     {
-      title: 'The halting problem \u2014 what algorithms CANNOT do',
+      title: 'The halting problem — what algorithms CANNOT do',
       concept: `We have celebrated algorithms throughout this lesson. But there are fundamental limits to what they can do.
 
 In 1936, Alan Turing proved the **halting problem**: there is no algorithm that can look at any program and any input and correctly determine whether the program will eventually stop (halt) or run forever.
@@ -366,13 +366,13 @@ The proof is a beautiful use of contradiction (al-Khwarizmi would have appreciat
 2. Build a new program D that feeds itself to H
 3. If H says D will halt, make D loop forever
 4. If H says D will loop, make D halt
-5. Either way, H gives the wrong answer \u2192 contradiction
+5. Either way, H gives the wrong answer → contradiction
 
-This means there are questions that no computer can ever answer. It is not about speed or memory \u2014 it is a mathematical impossibility.`,
+This means there are questions that no computer can ever answer. It is not about speed or memory — it is a mathematical impossibility.`,
       analogy: 'Imagine a fortune teller who claims to predict whether any person will stop talking. You ask: "Will I stop talking?" If she says yes, you keep talking to prove her wrong. If she says no, you stop. She cannot win. The halting problem is this paradox applied to programs.',
-      storyConnection: 'Al-Khwarizmi believed in systematic methods that always work. The halting problem shows that this is not always possible \u2014 some problems are undecidable. But this limit makes algorithms MORE valuable, not less: knowing which problems CAN be solved algorithmically is itself a profound insight.',
+      storyConnection: 'Al-Khwarizmi believed in systematic methods that always work. The halting problem shows that this is not always possible — some problems are undecidable. But this limit makes algorithms MORE valuable, not less: knowing which problems CAN be solved algorithmically is itself a profound insight.',
       checkQuestion: 'If the halting problem is unsolvable, how do we know when our programs will terminate?',
-      checkAnswer: 'We prove termination for specific programs using mathematical reasoning (e.g., showing a loop counter always decreases). We cannot do it in general for ALL programs, but we can for many particular ones. Practical techniques include loop variants, termination metrics, and structural induction. The halting problem says no single tool works for EVERY program \u2014 but clever humans can prove termination for most useful ones.',
+      checkAnswer: 'We prove termination for specific programs using mathematical reasoning (e.g., showing a loop counter always decreases). We cannot do it in general for ALL programs, but we can for many particular ones. Practical techniques include loop variants, termination metrics, and structural induction. The halting problem says no single tool works for EVERY program — but clever humans can prove termination for most useful ones.',
       codeIntro: 'Explore the idea with programs that halt and programs that might not.',
       code: `# Programs that definitely halt
 def definitely_halts(n):
@@ -432,20 +432,20 @@ print("Both are equally important.")`,
       successHint: 'Al-Khwarizmi launched a 1,200-year journey. He gave us variables, equations, and algorithms. His successors extended them to calculus, matrices, and complexity theory. Turing defined the limits. And every programmer, data scientist, and AI researcher today works within the framework that began in the House of Wisdom in Baghdad.',
     },
     {
-      title: 'Capstone \u2014 build an equation solver with al-Khwarizmi\u2019s methods',
+      title: 'Capstone — build an equation solver with al-Khwarizmi’s methods',
       concept: `You now have all the tools. In this final exercise, you will build a **complete equation solver** that handles:
 
 1. **Linear equations** (ax + b = c) using al-Jabr
-2. **Quadratic equations** (ax\u00B2 + bx + c = 0) using completing the square
+2. **Quadratic equations** (ax² + bx + c = 0) using completing the square
 3. **Systems of equations** using matrices
-4. **Non-linear equations** using Newton\u2019s method
+4. **Non-linear equations** using Newton’s method
 
 Your solver will classify the equation type, choose the right algorithm, and display the solution with a visualisation. This is a capstone project that integrates everything you have learned across all four levels.
 
 Al-Khwarizmi wrote the first systematic equation solver 1,200 years ago. You are writing the latest one.`,
-      analogy: 'You are building a Swiss Army knife for equations. Each blade is an algorithm: one for linear, one for quadratic, one for systems, one for anything else. The handle is the classifier that decides which blade to deploy. Al-Khwarizmi\u2019s book was the original Swiss Army knife of mathematics.',
-      storyConnection: 'Al-Khwarizmi\u2019s Kitab al-Jabr was written so that merchants, lawyers, and surveyors could solve equations without being mathematicians. Your solver has the same goal: give it an equation, get an answer. The 1,200-year arc from Baghdad\u2019s House of Wisdom to your Python code is a single continuous thread of algorithmic thinking.',
-      checkQuestion: 'What makes your equation solver an "algorithm" in al-Khwarizmi\u2019s sense?',
+      analogy: 'You are building a Swiss Army knife for equations. Each blade is an algorithm: one for linear, one for quadratic, one for systems, one for anything else. The handle is the classifier that decides which blade to deploy. Al-Khwarizmi’s book was the original Swiss Army knife of mathematics.',
+      storyConnection: 'Al-Khwarizmi’s Kitab al-Jabr was written so that merchants, lawyers, and surveyors could solve equations without being mathematicians. Your solver has the same goal: give it an equation, get an answer. The 1,200-year arc from Baghdad’s House of Wisdom to your Python code is a single continuous thread of algorithmic thinking.',
+      checkQuestion: 'What makes your equation solver an "algorithm" in al-Khwarizmi’s sense?',
       checkAnswer: 'It is (1) a finite set of steps, (2) each step is precisely defined, (3) it works for every valid input (any equation of the supported types), (4) it always terminates with a result. These are the four properties al-Khwarizmi insisted on. Your solver is a direct descendant of his methods.',
       codeIntro: 'Build a multi-purpose equation solver that combines all methods from this lesson.',
       code: `import numpy as np
@@ -462,9 +462,9 @@ class AlKhwarizmiSolver:
         return x
 
     def solve_quadratic(self, a, b, c):
-        """Solve ax\u00B2 + bx + c = 0 by completing the square."""
+        """Solve ax² + bx + c = 0 by completing the square."""
         disc = b**2 - 4*a*c
-        print(f"  Quadratic: {a}x\u00B2 + {b}x + {c} = 0")
+        print(f"  Quadratic: {a}x² + {b}x + {c} = 0")
         print(f"  Discriminant: {disc}")
         if disc < 0:
             print(f"  No real solutions")
@@ -521,14 +521,14 @@ print()
 print("4. Non-linear equation (Newton):")
 solver.solve_newton(lambda x: x**3 - 2*x - 5,
                     lambda x: 3*x**2 - 2,
-                    2.0, "x\u00B3 - 2x - 5")
+                    2.0, "x³ - 2x - 5")
 print()
 
 print("=" * 50)
 print("Four types. Four algorithms. One tradition.")
 print("From the House of Wisdom to your screen.")`,
       challenge: 'Extend the solver to handle polynomial equations of any degree using np.roots(). Add a plot method that visualises the equation and its solutions. Make the solver accept equations as strings (e.g., "2x + 3 = 7") and parse them automatically.',
-      successHint: 'You have completed the full journey from al-Khwarizmi\u2019s House of Wisdom to modern computer science. Variables, equations, algorithms, complexity, limits \u2014 all traced back to one scholar in 9th-century Baghdad who wrote down his methods so clearly that we still use them 1,200 years later. His name became the word for the most important concept in computing: algorithm.',
+      successHint: 'You have completed the full journey from al-Khwarizmi’s House of Wisdom to modern computer science. Variables, equations, algorithms, complexity, limits — all traced back to one scholar in 9th-century Baghdad who wrote down his methods so clearly that we still use them 1,200 years later. His name became the word for the most important concept in computing: algorithm.',
     },
   ];
 

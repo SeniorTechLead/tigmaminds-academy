@@ -25,7 +25,7 @@ export default function BoatBrahmaputraDiagram() {
 
         {/* Title */}
         <text x="315" y="28" textAnchor="middle" className="title fill-amber-300">
-          The Brahmaputra \u2014 A River That Moves
+          The Brahmaputra — A River That Moves
         </text>
 
         {/* === TOP: Bird's eye view of braided channels === */}
@@ -103,7 +103,7 @@ export default function BoatBrahmaputraDiagram() {
 
         {/* Erosion/deposition arrows */}
         <path d="M 85 252 Q 95 260 105 252" fill="none" stroke="#ef4444" strokeWidth="1.5" />
-        <text x="95" y="248" textAnchor="middle" className="small fill-red-400">\u2193</text>
+        <text x="95" y="248" textAnchor="middle" className="small fill-red-400">↓</text>
 
         <path d="M 505 262 L 515 252" fill="none" stroke="#fbbf24" strokeWidth="1.5" />
         <text x="520" y="250" className="small fill-amber-300">+</text>
@@ -138,14 +138,14 @@ export default function BoatBrahmaputraDiagram() {
         <g>
           <rect x="465" y="372" width="135" height="55" rx="5" fill="#7f1d1d" opacity="0.3" stroke="#ef4444" strokeWidth="1" />
           <text x="532" y="390" textAnchor="middle" className="small fill-red-300" fontWeight="600">Monsoon Floods</text>
-          <text x="532" y="404" textAnchor="middle" className="small fill-slate-400">Water rises 5\u201310 m</text>
+          <text x="532" y="404" textAnchor="middle" className="small fill-slate-400">Water rises 5–10 m</text>
           <text x="532" y="416" textAnchor="middle" className="small fill-slate-400">in weeks</text>
         </g>
 
         {/* Key stat */}
         <rect x="60" y="438" width="510" height="32" rx="6" fill="#1e3a5f" stroke="#3b82f6" strokeWidth="1" />
         <text x="315" y="452" textAnchor="middle" className="small fill-blue-200">
-          The Brahmaputra carries 590 million tonnes of sediment per year \u2014 more than almost any river on Earth
+          The Brahmaputra carries 590 million tonnes of sediment per year — more than almost any river on Earth
         </text>
         <text x="315" y="465" textAnchor="middle" className="small fill-blue-300">
           It can shift its main channel by kilometres in a single monsoon season

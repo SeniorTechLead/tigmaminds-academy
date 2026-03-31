@@ -55,13 +55,13 @@ def _get_plot_as_base64():
       title: 'Electromagnetic spectrum deep dive — wavelength, frequency, and energy',
       concept: `Visible light is only a tiny sliver of the electromagnetic (EM) spectrum. The full spectrum stretches from radio waves with wavelengths of kilometers down to gamma rays with wavelengths smaller than an atom. Every type of EM radiation — radio, microwave, infrared, visible, ultraviolet, X-ray, gamma — is the same fundamental thing: oscillating electric and magnetic fields traveling at the speed of light. The only difference is wavelength.
 
-Three quantities are linked by two equations. Wavelength (\u03bb) and frequency (f) are inversely related through the speed of light: c = \u03bb \u00d7 f. Because c is constant (~3 \u00d7 10\u2078 m/s), shorter wavelengths mean higher frequencies. The energy of a single photon is given by Planck's equation: E = hf, where h is Planck's constant (6.626 \u00d7 10\u207b\u00b3\u2074 J\u00b7s). This means higher frequency = higher energy. A gamma ray photon carries billions of times more energy than a radio photon.
+Three quantities are linked by two equations. Wavelength (λ) and frequency (f) are inversely related through the speed of light: c = λ × f. Because c is constant (~3 × 10⁸ m/s), shorter wavelengths mean higher frequencies. The energy of a single photon is given by Planck's equation: E = hf, where h is Planck's constant (6.626 × 10⁻³⁴ J·s). This means higher frequency = higher energy. A gamma ray photon carries billions of times more energy than a radio photon.
 
 This relationship explains everything from why UV light causes sunburn (high-energy photons break DNA bonds) to why your microwave heats food (the frequency matches water molecule resonances). Understanding the spectrum is the foundation of all spectroscopy — the science of reading light to learn what things are made of.`,
       analogy: 'Think of the EM spectrum like a piano keyboard stretched across the universe. Radio waves are the deep bass notes on the far left — long wavelengths, low energy. Visible light is a single octave somewhere in the middle. Gamma rays are the highest notes on the far right — short wavelengths, enormous energy. Most of the keyboard is invisible to human eyes; we hear only one octave of a cosmic symphony.',
       storyConnection: 'The golden deer of Kamakhya glowed with a light that seemed otherworldly. That golden color corresponds to wavelengths around 570-590 nanometers — a specific slice of the visible spectrum. The temple at Kamakhya, lit by oil lamps and sunlight filtered through stone, would have produced a warm spectrum dominated by these golden frequencies. Every color in the story maps to a precise wavelength and energy.',
       checkQuestion: 'If you double the frequency of a photon, what happens to its wavelength and its energy?',
-      checkAnswer: 'The wavelength halves (since c = \u03bb\u00d7f, doubling f means \u03bb must halve to keep c constant). The energy doubles (since E = hf, doubling f doubles E). Frequency, wavelength, and energy are all locked together by these two equations.',
+      checkAnswer: 'The wavelength halves (since c = λ×f, doubling f means λ must halve to keep c constant). The energy doubles (since E = hf, doubling f doubles E). Frequency, wavelength, and energy are all locked together by these two equations.',
       codeIntro: 'Visualize the full electromagnetic spectrum and plot the wavelength-frequency-energy relationships using Planck\'s equation.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -95,7 +95,7 @@ for name, lam_max, lam_min, color in regions:
     mid = (np.log10(f_min) + np.log10(f_max)) / 2
     ax.text(mid, 0, name, ha='center', va='center', fontsize=7,
             color='white', fontweight='bold', rotation=45)
-ax.set_xlabel('log\u2081\u2080(Frequency / Hz)', color='white', fontsize=10)
+ax.set_xlabel('log₁₀(Frequency / Hz)', color='white', fontsize=10)
 ax.set_title('The Electromagnetic Spectrum', color='white', fontsize=13, fontweight='bold')
 ax.set_yticks([])
 ax.tick_params(colors='gray')
@@ -109,7 +109,7 @@ ax2.loglog(wavelengths * 1e9, frequencies, color='#f59e0b', linewidth=2)
 ax2.axvspan(400, 700, alpha=0.3, color='#f59e0b', label='Visible light')
 ax2.set_xlabel('Wavelength (nm)', color='white', fontsize=10)
 ax2.set_ylabel('Frequency (Hz)', color='white', fontsize=10)
-ax2.set_title('Wavelength vs Frequency: c = \u03bbf', color='white', fontsize=12)
+ax2.set_title('Wavelength vs Frequency: c = λf', color='white', fontsize=12)
 ax2.legend(fontsize=9, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax2.tick_params(colors='gray')
 
@@ -155,7 +155,7 @@ for name, lam, _ in examples:
     if lam >= 1e-3:
         lam_str = f"{lam*100:.1f} cm"
     elif lam >= 1e-6:
-        lam_str = f"{lam*1e6:.1f} \u03bcm"
+        lam_str = f"{lam*1e6:.1f} μm"
     else:
         lam_str = f"{lam*1e9:.1f} nm"
     print(f"{name:<14} {lam_str:>14} {f:>14.2e} Hz {E_eV:>10.4f} eV")
@@ -165,7 +165,7 @@ print("The golden deer's coat reflects 580nm photons, each carrying 2.14 eV.")
 print("That\'s enough energy to excite electrons but not enough to break bonds.")
 print("UV photons (>3.1 eV) start breaking molecular bonds -- that\'s why UV is dangerous.")`,
       challenge: 'Add a fourth subplot that shows the visible spectrum as a color bar (380-750nm). Map each wavelength to an approximate RGB color and display it. Hint: use a simple piecewise function to convert wavelength to RGB.',
-      successHint: 'The two equations c=\u03bbf and E=hf are the Rosetta Stone of the electromagnetic spectrum. With them you can convert between any representation — wavelength, frequency, or energy — and understand why different parts of the spectrum interact with matter so differently.',
+      successHint: 'The two equations c=λf and E=hf are the Rosetta Stone of the electromagnetic spectrum. With them you can convert between any representation — wavelength, frequency, or energy — and understand why different parts of the spectrum interact with matter so differently.',
     },
     {
       title: 'Spectroscopy and emission spectra — fingerprints of the elements',
@@ -301,18 +301,18 @@ continuous = planck_visible(wavelengths)
 fraunhofer = [
     ('Ca K',   393.4, 0.6),
     ('Ca H',   396.8, 0.5),
-    ('H\u03b4',    410.2, 0.3),
+    ('Hδ',    410.2, 0.3),
     ('Ca g',   422.7, 0.25),
-    ('H\u03b3',    434.0, 0.35),
+    ('Hγ',    434.0, 0.35),
     ('Fe',     438.4, 0.2),
-    ('H\u03b2',    486.1, 0.4),
+    ('Hβ',    486.1, 0.4),
     ('Mg b',   517.3, 0.3),
     ('Fe',     527.0, 0.2),
     ('Na D1',  589.0, 0.55),
     ('Na D2',  589.6, 0.55),
-    ('H\u03b1',    656.3, 0.5),
-    ('O\u2082',    687.0, 0.35),
-    ('O\u2082',    718.0, 0.2),
+    ('Hα',    656.3, 0.5),
+    ('O₂',    687.0, 0.35),
+    ('O₂',    718.0, 0.2),
 ]
 
 def wavelength_to_rgb(w):
@@ -492,9 +492,9 @@ time = np.linspace(0, 10, 500)  # seconds
 fluor_decay = np.exp(-time / 1e-8)  # ~0 immediately
 # Phosphorescence: second-scale lifetime
 phos_decays = {
-    'Fast phosphor (\u03c4=0.5s)': np.exp(-time / 0.5),
-    'Medium phosphor (\u03c4=2s)': np.exp(-time / 2.0),
-    'Glow-in-dark (\u03c4=5s)': np.exp(-time / 5.0),
+    'Fast phosphor (τ=0.5s)': np.exp(-time / 0.5),
+    'Medium phosphor (τ=2s)': np.exp(-time / 2.0),
+    'Glow-in-dark (τ=5s)': np.exp(-time / 5.0),
 }
 
 colors = ['#22c55e', '#f59e0b', '#ef4444']
@@ -514,8 +514,8 @@ plt.show()
 print("Fluorescence vs Phosphorescence:")
 print("-" * 50)
 print(f"{'Property':<25} {'Fluorescence':<15} {'Phosphorescence'}")
-print(f"{'Lifetime':<25} {'ns (10\u207b\u2079 s)':<15} {'ms to hours'}")
-print(f"{'Spin state':<25} {'Singlet\u2192Singlet':<15} {'Triplet\u2192Singlet'}")
+print(f"{'Lifetime':<25} {'ns (10⁻⁹ s)':<15} {'ms to hours'}")
+print(f"{'Spin state':<25} {'Singlet→Singlet':<15} {'Triplet→Singlet'}")
 print(f"{'After light off':<25} {'Stops instantly':<15} {'Continues glowing'}")
 print(f"{'Stokes shift':<25} {'Small (10-50nm)':<15} {'Large (50-200nm)'}")
 print()
@@ -525,7 +525,7 @@ for mat in materials:
     em_E = 1240 / mat['em_peak']
     loss = abs_E - em_E
     print(f"  {mat['name']}: absorb {mat['abs_peak']}nm ({abs_E:.2f}eV) "
-          f"\u2192 emit {mat['em_peak']}nm ({em_E:.2f}eV), "
+          f"→ emit {mat['em_peak']}nm ({em_E:.2f}eV), "
           f"energy lost to heat: {loss:.2f}eV")
 print()
 print("The golden glow in legends often matches fluorescent mineral emission.")
@@ -537,13 +537,13 @@ print("Calcite and willemite fluoresce golden-yellow under UV sunlight.")`,
       title: 'Polarization of light — waves vibrating in one direction',
       concept: `Light is a transverse wave — its electric field oscillates perpendicular to the direction of travel. Ordinary sunlight is unpolarized: the electric field vibrates in all directions perpendicular to the beam. A polarizer is a filter that transmits only the component vibrating in one specific direction, turning unpolarized light into polarized light.
 
-Malus's Law describes what happens when polarized light hits a second polarizer (analyzer) at angle \u03b8: I = I\u2080 cos\u00b2(\u03b8). At \u03b8=0\u00b0 (aligned), all light passes through. At \u03b8=90\u00b0 (crossed), no light passes — complete extinction. This is why rotating one lens of polarized sunglasses blocks or transmits glare. The cos\u00b2 dependence was a triumph of wave optics and is still used today in LCD screens, photography, and 3D cinema.
+Malus's Law describes what happens when polarized light hits a second polarizer (analyzer) at angle θ: I = I₀ cos²(θ). At θ=0° (aligned), all light passes through. At θ=90° (crossed), no light passes — complete extinction. This is why rotating one lens of polarized sunglasses blocks or transmits glare. The cos² dependence was a triumph of wave optics and is still used today in LCD screens, photography, and 3D cinema.
 
 Polarization has profound applications. LCD screens work by sandwiching liquid crystals between two crossed polarizers — applying voltage rotates the polarization, switching pixels on and off. 3D movies use circular polarization: the left-eye image is left-circularly polarized, the right-eye image is right-circularly polarized, and the glasses separate them. Polarimetry in astronomy reveals magnetic field structures in nebulae. Even some animals (bees, mantis shrimp) can see polarized light and use it for navigation.`,
       analogy: 'Imagine a rope threaded through a picket fence. If you shake the rope vertically, the wave passes through the vertical slots. If you shake it horizontally, the fence blocks it. The fence is a polarizer — it only transmits vibrations aligned with its slots. Two fences at right angles block everything. That is exactly what crossed polarizers do to light waves.',
       storyConnection: 'The golden light reflecting off the deer\'s coat would be partially polarized. When light reflects off a surface at a specific angle (Brewster\'s angle), the reflected beam becomes strongly polarized. A deer\'s fur has a layered structure that preferentially reflects certain polarizations. Photographers use polarizing filters to cut glare from animal fur and water surfaces — revealing the true golden color beneath surface reflections.',
-      checkQuestion: 'Two polarizers are crossed at 90\u00b0, blocking all light. You insert a third polarizer between them at 45\u00b0 to both. What happens and why?',
-      checkAnswer: 'Light comes through! The first polarizer creates vertically polarized light. The 45\u00b0 middle polarizer transmits the cos\u00b2(45\u00b0) = 50% component along its axis, now polarized at 45\u00b0. The final polarizer (horizontal) transmits cos\u00b2(45\u00b0) = 50% of that. So 25% of the post-first-polarizer light gets through. Adding a filter between two blockers actually increases transmission — a beautifully counterintuitive result.',
+      checkQuestion: 'Two polarizers are crossed at 90°, blocking all light. You insert a third polarizer between them at 45° to both. What happens and why?',
+      checkAnswer: 'Light comes through! The first polarizer creates vertically polarized light. The 45° middle polarizer transmits the cos²(45°) = 50% component along its axis, now polarized at 45°. The final polarizer (horizontal) transmits cos²(45°) = 50% of that. So 25% of the post-first-polarizer light gets through. Adding a filter between two blockers actually increases transmission — a beautifully counterintuitive result.',
       codeIntro: 'Simulate Malus\'s Law, crossed polarizers, and the three-polarizer paradox with visual plots.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -565,9 +565,9 @@ ax.axhline(0.5, color='gray', linestyle='--', linewidth=0.8)
 ax.axhline(0, color='gray', linewidth=0.5)
 for angle in [0, 90, 180, 270, 360]:
     ax.axvline(angle, color='gray', linestyle=':', linewidth=0.5, alpha=0.5)
-ax.set_xlabel('Analyzer angle \u03b8 (degrees)', color='white')
-ax.set_ylabel('Transmitted intensity I/I\u2080', color='white')
-ax.set_title("Malus's Law: I = I\u2080cos\u00b2\u03b8", color='white', fontsize=12, fontweight='bold')
+ax.set_xlabel('Analyzer angle θ (degrees)', color='white')
+ax.set_ylabel('Transmitted intensity I/I₀', color='white')
+ax.set_title("Malus's Law: I = I₀cos²θ", color='white', fontsize=12, fontweight='bold')
 ax.tick_params(colors='gray')
 
 # Plot 2: Polar plot of Malus's Law
@@ -599,7 +599,7 @@ ax3.plot(mid_angles, three_pol, color='#22c55e', linewidth=2.5,
 ax3.axhline(0, color='#ef4444', linewidth=2, linestyle='--',
             label='Without middle (zero)')
 ax3.axvline(45, color='#a855f7', linewidth=1, linestyle=':',
-            label='Optimum at 45\u00b0')
+            label='Optimum at 45°')
 # Mark maximum
 max_val = np.max(three_pol)
 ax3.plot(45, max_val, 'o', color='#fbbf24', markersize=10, zorder=5)
@@ -628,7 +628,7 @@ for n in n_polarizers:
 ax4.plot(n_polarizers, transmissions, color='#3b82f6', linewidth=2.5)
 ax4.fill_between(n_polarizers, 0, transmissions, color='#3b82f6', alpha=0.15)
 ax4.axhline(1.0, color='gray', linestyle='--', linewidth=0.8)
-ax4.set_xlabel('Number of polarizers (0\u00b0 to 90\u00b0)', color='white')
+ax4.set_xlabel('Number of polarizers (0° to 90°)', color='white')
 ax4.set_ylabel('Total transmission', color='white')
 ax4.set_title('N Polarizers: Approaching 100%', color='white', fontsize=12, fontweight='bold')
 ax4.tick_params(colors='gray')
@@ -642,23 +642,23 @@ ax4.annotate(f'N=50: {transmissions[-1]:.1%}', xy=(50, transmissions[-1]),
 plt.tight_layout()
 plt.show()
 
-print("Malus's Law: I = I\u2080 cos\u00b2(\u03b8)")
+print("Malus's Law: I = I₀ cos²(θ)")
 print("-" * 50)
 for angle in [0, 30, 45, 60, 90]:
     T = np.cos(np.radians(angle))**2
-    print(f"  \u03b8 = {angle:>3}\u00b0  \u2192  I/I\u2080 = {T:.4f} ({T:.1%})")
+    print(f"  θ = {angle:>3}°  →  I/I₀ = {T:.4f} ({T:.1%})")
 
 print(f"\\nThree-polarizer paradox:")
-print(f"  Two crossed polarizers (0\u00b0 + 90\u00b0): 0% transmission")
-print(f"  Add middle at 45\u00b0: {0.25:.1%} transmission!")
-print(f"  Adding a filter INCREASES total light \u2014 counterintuitive.")
+print(f"  Two crossed polarizers (0° + 90°): 0% transmission")
+print(f"  Add middle at 45°: {0.25:.1%} transmission!")
+print(f"  Adding a filter INCREASES total light — counterintuitive.")
 
-print(f"\\nN-polarizer limit (0\u00b0 to 90\u00b0 in N steps):")
+print(f"\\nN-polarizer limit (0° to 90° in N steps):")
 for n in [3, 5, 10, 20, 50]:
     step = 90 / (n-1)
     T = np.cos(np.radians(step))**(2*(n-1))
     print(f"  N={n:>2}: {T:.4f} ({T:.1%})")
-print("  N\u2192\u221e: 100% (each step is infinitesimal \u2192 cos\u00b2(\u03b5)\u22481)")
+print("  N→∞: 100% (each step is infinitesimal → cos²(ε)≈1)")
 print()
 print("This is the physics behind LCD screens:")
 print("Liquid crystals rotate polarization by controlled amounts.")
@@ -670,12 +670,12 @@ print("No voltage = twisted crystal = light passes. Voltage = aligned = light bl
       title: 'Quantum optics introduction — photons, the photoelectric effect, and wave-particle duality',
       concept: `Classical wave optics explains interference, diffraction, and polarization beautifully. But it fails catastrophically in certain situations. The photoelectric effect — discovered experimentally by Hertz and explained theoretically by Einstein in 1905 — was the first crack in the classical edifice. When you shine light on a metal surface, electrons are ejected. Classical wave theory predicts that brighter light should give electrons more energy. But experiments showed something different: the electron energy depends only on the light's frequency, not its brightness. Below a threshold frequency, no electrons are emitted no matter how bright the light.
 
-Einstein's explanation: light comes in discrete packets — photons — each carrying energy E = hf. A single photon either has enough energy to free an electron (hf > \u03c6, the work function) or it does not. More photons (brighter light) eject more electrons but do not give each one more energy. This was revolutionary: light behaves as particles when being absorbed or emitted, but as waves when propagating. This is wave-particle duality.
+Einstein's explanation: light comes in discrete packets — photons — each carrying energy E = hf. A single photon either has enough energy to free an electron (hf > φ, the work function) or it does not. More photons (brighter light) eject more electrons but do not give each one more energy. This was revolutionary: light behaves as particles when being absorbed or emitted, but as waves when propagating. This is wave-particle duality.
 
 The implications are staggering. Every quantum of light is both a wave (with wavelength and frequency) and a particle (with energy and momentum). The double-slit experiment makes this visceral: send photons one at a time through two slits, and each lands as a single dot (particle), but after thousands of dots, an interference pattern emerges (wave). No classical object does both. This duality is not a limitation of our understanding — it is a fundamental feature of nature.`,
       analogy: 'Imagine rain falling on a pond. Each raindrop is a discrete particle that makes a single splash (like a photon hitting a detector). But the ripples from many drops overlap and interfere, creating wave patterns on the surface. If you look at one splash, you see a particle. If you look at the pattern of many splashes, you see waves. Light does both — and that is not a metaphor, it is literal.',
       storyConnection: 'The golden deer of Kamakhya was said to shimmer and shift, sometimes appearing solid, sometimes dissolving into golden light. This mirrors the deepest truth of quantum optics: light is neither purely a wave nor purely a particle — it is something more fundamental that manifests as each depending on how you observe it. The deer\'s golden glow is made of individual photons, each carrying exactly 2.14 eV of energy, yet collectively they create the smooth, wave-like golden shimmer that enchanted all who saw it.',
-      checkQuestion: 'A UV lamp (\u03bb=250nm) and a red lamp (\u03bb=650nm) both shine on a metal with work function \u03c6=3.0 eV. Which one ejects electrons, and what is the maximum kinetic energy of the ejected electrons?',
+      checkQuestion: 'A UV lamp (λ=250nm) and a red lamp (λ=650nm) both shine on a metal with work function φ=3.0 eV. Which one ejects electrons, and what is the maximum kinetic energy of the ejected electrons?',
       checkAnswer: 'UV photon energy: E = 1240/250 = 4.96 eV. Since 4.96 > 3.0, electrons are ejected with max KE = 4.96 - 3.0 = 1.96 eV. Red photon energy: E = 1240/650 = 1.91 eV. Since 1.91 < 3.0, no electrons are ejected regardless of how bright the red lamp is. This is the key insight Einstein won the Nobel Prize for.',
       codeIntro: 'Simulate the photoelectric effect and the double-slit experiment with single photons building up an interference pattern.',
       code: `import numpy as np
@@ -689,9 +689,9 @@ ax = axes[0, 0]
 ax.set_facecolor('#111827')
 
 work_functions = {
-    'Cesium (\u03c6=2.1 eV)': 2.1,
-    'Sodium (\u03c6=2.3 eV)': 2.3,
-    'Copper (\u03c6=4.7 eV)': 4.7,
+    'Cesium (φ=2.1 eV)': 2.1,
+    'Sodium (φ=2.3 eV)': 2.3,
+    'Copper (φ=4.7 eV)': 4.7,
 }
 colors_pe = ['#22c55e', '#f59e0b', '#3b82f6']
 
@@ -708,9 +708,9 @@ for (name, phi), color in zip(work_functions.items(), colors_pe):
     ax.plot(frequencies / 1e14, KE, color=color, linewidth=2, label=name)
     ax.axvline(f_thresh / 1e14, color=color, linewidth=1, linestyle=':', alpha=0.5)
 
-ax.set_xlabel('Frequency (\u00d710\u00b9\u2074 Hz)', color='white')
+ax.set_xlabel('Frequency (×10¹⁴ Hz)', color='white')
 ax.set_ylabel('Max electron KE (eV)', color='white')
-ax.set_title('Photoelectric Effect: KE = hf - \u03c6', color='white', fontsize=12, fontweight='bold')
+ax.set_title('Photoelectric Effect: KE = hf - φ', color='white', fontsize=12, fontweight='bold')
 ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax.tick_params(colors='gray')
 ax.set_ylim(-0.5, 6)
@@ -811,7 +811,7 @@ for (name, phi) in work_functions.items():
     f_thresh = phi * eV / h
     lam_thresh = 3e8 / f_thresh * 1e9
     print(f"  {name}")
-    print(f"    Threshold: f = {f_thresh:.2e} Hz, \u03bb = {lam_thresh:.0f} nm")
+    print(f"    Threshold: f = {f_thresh:.2e} Hz, λ = {lam_thresh:.0f} nm")
 
 print(f"\\nGolden deer photon (580nm):")
 print(f"  Energy: {1240/580:.2f} eV")
@@ -823,7 +823,7 @@ print(f"\\nDouble-slit experiment:")
 print(f"  Each photon arrives as a single dot (PARTICLE)")
 print(f"  Pattern of many photons shows interference fringes (WAVE)")
 print(f"  This is wave-particle duality -- not a metaphor, but physics.")
-print(f"  The golden deer glows with ~10\u00b9\u2076 photons per second,")
+print(f"  The golden deer glows with ~10¹⁶ photons per second,")
 print(f"  each one a quantum, collectively a golden wave.")`,
       challenge: 'Simulate the single-slit diffraction pattern and compare it to the double-slit pattern. Then simulate what happens when you close one slit — the interference pattern disappears. This demonstrates that each photon must "know" about both slits.',
       successHint: 'Quantum optics is where the story of light reaches its deepest chapter. Light is not a wave. Light is not a particle. Light is a quantum field that manifests as each depending on the experiment. The golden deer\'s shimmer is 10^16 photons per second, each one a quantum of energy, collectively creating the wave-like golden glow.',

@@ -29,23 +29,23 @@ export default function VimanaLevel4() {
 
   const miniLessons = [
     {
-      title: 'Navier-Stokes fundamentals \u2014 the equations of fluid motion',
-      concept: `All of aerodynamics ultimately reduces to the **Navier-Stokes equations** \u2014 the governing equations for fluid motion. They express Newton\u2019s second law (F = ma) applied to every infinitesimal parcel of fluid:
+      title: 'Navier-Stokes fundamentals — the equations of fluid motion',
+      concept: `All of aerodynamics ultimately reduces to the **Navier-Stokes equations** — the governing equations for fluid motion. They express Newton’s second law (F = ma) applied to every infinitesimal parcel of fluid:
 
-**\u03C1(Du/Dt) = -\u2207P + \u03BC\u2207\u00B2u + \u03C1g**
+**ρ(Du/Dt) = -∇P + μ∇²u + ρg**
 
 Where:
-- Left side: mass \u00D7 acceleration of a fluid element
-- **-\u2207P**: pressure gradient force
-- **\u03BC\u2207\u00B2u**: viscous (friction) force
-- **\u03C1g**: gravitational body force
+- Left side: mass × acceleration of a fluid element
+- **-∇P**: pressure gradient force
+- **μ∇²u**: viscous (friction) force
+- **ρg**: gravitational body force
 
-These equations are so complex that no general analytical solution exists \u2014 proving whether smooth solutions always exist is one of the seven Millennium Prize Problems ($1 million bounty).
+These equations are so complex that no general analytical solution exists — proving whether smooth solutions always exist is one of the seven Millennium Prize Problems ($1 million bounty).
 
-We cannot solve them exactly, but we can solve them **numerically** \u2014 discretising space into a grid and computing forces at each point. This is the basis of **Computational Fluid Dynamics (CFD)**.
+We cannot solve them exactly, but we can solve them **numerically** — discretising space into a grid and computing forces at each point. This is the basis of **Computational Fluid Dynamics (CFD)**.
 
 The code implements a simple 2D flow solver using the stream function-vorticity formulation.`,
-      analogy: 'The Navier-Stokes equations are the "laws of physics" for every fluid on Earth. Pouring cream into coffee, wind blowing around a building, blood flowing through arteries, air over a wing \u2014 all governed by these same equations. They are to fluids what F = ma is to solid objects, but infinitely more complex because every tiny parcel of fluid is simultaneously pushed by pressure, slowed by friction, and pulled by gravity.',
+      analogy: 'The Navier-Stokes equations are the "laws of physics" for every fluid on Earth. Pouring cream into coffee, wind blowing around a building, blood flowing through arteries, air over a wing — all governed by these same equations. They are to fluids what F = ma is to solid objects, but infinitely more complex because every tiny parcel of fluid is simultaneously pushed by pressure, slowed by friction, and pulled by gravity.',
       storyConnection: 'Vishwakarma, the divine engineer, created the Vimana with perfect knowledge of how air behaves. Modern aerospace engineers use CFD to simulate millions of points around an aircraft, solving the Navier-Stokes equations at each one. A single high-fidelity simulation of airflow around a full aircraft can take weeks on a supercomputer.',
       checkQuestion: 'Why is the Navier-Stokes existence and smoothness problem worth $1 million?',
       checkAnswer: 'The equations perfectly describe real fluid motion, yet we cannot prove they always produce smooth, finite solutions from smooth initial conditions. There might be cases where velocity becomes infinite (a singularity) in finite time. Understanding this would have profound implications for turbulence theory and whether our mathematical models of reality are fundamentally consistent.',
@@ -99,7 +99,7 @@ circle = plt.Circle((0, 0), R, color='gray', fill=True)
 ax1.add_patch(circle)
 ax1.set_xlim(-3, 3); ax1.set_ylim(-2.5, 2.5)
 ax1.set_aspect('equal')
-ax1.set_title(f'Streamlines (\u0393 = {Gamma:.1f})', fontsize=13)
+ax1.set_title(f'Streamlines (Γ = {Gamma:.1f})', fontsize=13)
 ax1.set_xlabel('x/R'); ax1.set_ylabel('y/R')
 ax1.grid(alpha=0.2)
 
@@ -118,26 +118,26 @@ plt.show()
 
 # Kutta-Joukowski theorem: Lift = rho * U * Gamma
 L_per_unit = 1.225 * U_inf * Gamma
-print(f"Circulation \u0393 = {Gamma:.1f}")
-print(f"Kutta-Joukowski lift (per unit span): L = \u03c1U\u0393 = {L_per_unit:.2f} N/m")
+print(f"Circulation Γ = {Gamma:.1f}")
+print(f"Kutta-Joukowski lift (per unit span): L = ρUΓ = {L_per_unit:.2f} N/m")
 print(f"\\nNote: asymmetric streamlines = net upward force (LIFT)")
 print(f"The stagnation points have shifted due to circulation.")`,
-      challenge: 'Set Gamma = 0 (no circulation). The flow becomes symmetric and there is no lift \u2014 this is d\u2019Alembert\u2019s paradox. Then gradually increase Gamma and observe how asymmetry (and lift) develops.',
-      successHint: 'Potential flow theory gives exact solutions for idealised flows. The Kutta-Joukowski theorem \u2014 L = \u03C1U\u0393 \u2014 is one of the most elegant results in all of physics. Real wings generate circulation naturally through their shape and the Kutta condition at the trailing edge.',
+      challenge: 'Set Gamma = 0 (no circulation). The flow becomes symmetric and there is no lift — this is d’Alembert’s paradox. Then gradually increase Gamma and observe how asymmetry (and lift) develops.',
+      successHint: 'Potential flow theory gives exact solutions for idealised flows. The Kutta-Joukowski theorem — L = ρUΓ — is one of the most elegant results in all of physics. Real wings generate circulation naturally through their shape and the Kutta condition at the trailing edge.',
     },
     {
-      title: 'Gravity assist \u2014 stealing speed from planets',
-      concept: `The most ingenious trick in space mission design is the **gravity assist** (or gravitational slingshot). A spacecraft flies close to a planet, and the planet\u2019s gravity bends its trajectory and changes its speed \u2014 all without burning any fuel.
+      title: 'Gravity assist — stealing speed from planets',
+      concept: `The most ingenious trick in space mission design is the **gravity assist** (or gravitational slingshot). A spacecraft flies close to a planet, and the planet’s gravity bends its trajectory and changes its speed — all without burning any fuel.
 
-From the planet\u2019s reference frame, the spacecraft enters and exits at the same speed (elastic collision). But the planet is moving through space. In the Sun\u2019s reference frame, the spacecraft gains or loses speed depending on whether it passes behind or in front of the planet.
+From the planet’s reference frame, the spacecraft enters and exits at the same speed (elastic collision). But the planet is moving through space. In the Sun’s reference frame, the spacecraft gains or loses speed depending on whether it passes behind or in front of the planet.
 
-The maximum \u0394v from a gravity assist is **2 \u00D7 v_planet** (in the limiting case of a 180\u00B0 turn). For Jupiter, v_planet \u2248 13 km/s, so a gravity assist can provide up to ~26 km/s \u2014 more than twice Earth\u2019s escape velocity, for free.
+The maximum Δv from a gravity assist is **2 × v_planet** (in the limiting case of a 180° turn). For Jupiter, v_planet ≈ 13 km/s, so a gravity assist can provide up to ~26 km/s — more than twice Earth’s escape velocity, for free.
 
-Voyager 2 used gravity assists at Jupiter, Saturn, Uranus, and Neptune, reaching 17 km/s \u2014 fast enough to leave the solar system entirely.`,
+Voyager 2 used gravity assists at Jupiter, Saturn, Uranus, and Neptune, reaching 17 km/s — fast enough to leave the solar system entirely.`,
       analogy: 'Imagine throwing a tennis ball at a moving truck. If you throw it at the front of the truck (moving toward you), the ball bounces back much faster than you threw it. The ball "stole" kinetic energy from the truck. The truck barely noticed (it is so massive), but the ball gained enormous speed. A gravity assist works the same way: the spacecraft is the ball, the planet is the truck.',
-      storyConnection: 'The Pushpaka Vimana moved at the speed of thought. Real interplanetary spacecraft need every trick available to reach distant planets. ISRO\u2019s Mangalyaan mission to Mars used a clever series of orbit-raising manoeuvres from Earth orbit, saving fuel. Gravity assists at Mars were not used for Mangalyaan, but they are essential for missions to the outer solar system.',
+      storyConnection: 'The Pushpaka Vimana moved at the speed of thought. Real interplanetary spacecraft need every trick available to reach distant planets. ISRO’s Mangalyaan mission to Mars used a clever series of orbit-raising manoeuvres from Earth orbit, saving fuel. Gravity assists at Mars were not used for Mangalyaan, but they are essential for missions to the outer solar system.',
       checkQuestion: 'Could you use a gravity assist to slow down? When would you want to?',
-      checkAnswer: 'Yes. If you pass in front of a planet (relative to its orbital motion), you lose speed instead of gaining it. This is useful for missions to the inner solar system \u2014 you need to slow down to drop closer to the Sun. MESSENGER used gravity assists at Venus to slow down enough to enter Mercury orbit.',
+      checkAnswer: 'Yes. If you pass in front of a planet (relative to its orbital motion), you lose speed instead of gaining it. This is useful for missions to the inner solar system — you need to slow down to drop closer to the Sun. MESSENGER used gravity assists at Venus to slow down enough to enter Mercury orbit.',
       codeIntro: 'Simulate a gravity assist around Jupiter.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -169,13 +169,13 @@ fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
 
 ax1.plot(r_perijove / R_jupiter, np.degrees(delta), linewidth=2.5, color='royalblue')
 ax1.set_xlabel('Closest approach (Jupiter radii)', fontsize=11)
-ax1.set_ylabel('Deflection angle (\u00b0)', fontsize=11)
+ax1.set_ylabel('Deflection angle (°)', fontsize=11)
 ax1.set_title('Trajectory Bending', fontsize=13)
 ax1.grid(alpha=0.3)
 
 ax2.plot(r_perijove / R_jupiter, dv_gain / 1000, linewidth=2.5, color='green')
 ax2.set_xlabel('Closest approach (Jupiter radii)', fontsize=11)
-ax2.set_ylabel('\u0394v gain (km/s)', fontsize=11)
+ax2.set_ylabel('Δv gain (km/s)', fontsize=11)
 ax2.set_title('Speed Gain from Gravity Assist', fontsize=13)
 ax2.grid(alpha=0.3)
 
@@ -204,30 +204,30 @@ plt.text(-12, -6.5, f'Approach ({v_approach_inf/1000:.0f} km/s)', fontsize=10, c
 defl = 2 * np.arcsin(1 / e)
 print(f"\\n=== Jupiter Gravity Assist ===")
 print(f"Closest approach: {r_p/R_jupiter:.1f} Jupiter radii")
-print(f"Deflection angle: {np.degrees(defl):.1f}\u00b0")
+print(f"Deflection angle: {np.degrees(defl):.1f}°")
 print(f"Speed gain: {2*v_inf*np.sin(defl/2)/1000:.1f} km/s")
 print(f"\\nEntry speed (Sun frame): {v_approach_inf/1000:.0f} km/s")
 print(f"Exit speed (Sun frame): ~{(v_approach_inf + 2*v_inf*np.sin(defl/2))/1000:.0f} km/s")
-print(f"Free \u0394v = {2*v_inf*np.sin(defl/2)/1000:.1f} km/s (no fuel spent!)")
+print(f"Free Δv = {2*v_inf*np.sin(defl/2)/1000:.1f} km/s (no fuel spent!)")
 
 plt.xlim(-20, 20); plt.ylim(-15, 15)
 plt.gca().set_aspect('equal')
 plt.xlabel('x (Jupiter radii)'); plt.ylabel('y (Jupiter radii)')
-plt.title(f'Gravity Assist Trajectory (deflection = {np.degrees(defl):.0f}\u00b0)', fontsize=13)
+plt.title(f'Gravity Assist Trajectory (deflection = {np.degrees(defl):.0f}°)', fontsize=13)
 plt.legend(fontsize=9); plt.grid(alpha=0.2)
 plt.show()`,
-      challenge: 'Calculate the gravity assist for Venus (M = 4.87\u00D710\u00B2\u2074 kg, R = 6.05\u00D710\u2076 m, v_orbital = 35 km/s). How does it compare to Jupiter? Why is Venus useful for missions to Mercury?',
-      successHint: 'Gravity assists transform mission design. Without them, we could not have explored the outer solar system \u2014 the \u0394v requirements would be impossibly high. Voyager, Cassini, New Horizons, and JUICE all depend on this elegant hack of orbital mechanics.',
+      challenge: 'Calculate the gravity assist for Venus (M = 4.87×10²⁴ kg, R = 6.05×10⁶ m, v_orbital = 35 km/s). How does it compare to Jupiter? Why is Venus useful for missions to Mercury?',
+      successHint: 'Gravity assists transform mission design. Without them, we could not have explored the outer solar system — the Δv requirements would be impossibly high. Voyager, Cassini, New Horizons, and JUICE all depend on this elegant hack of orbital mechanics.',
     },
     {
       title: 'Multi-body trajectory optimisation',
-      concept: `Real interplanetary missions do not fly in straight lines. They use a sequence of gravity assists, each carefully timed to exploit planetary alignments. Finding the optimal sequence is a **combinatorial optimisation problem** \u2014 which planets, in which order, with what timing?
+      concept: `Real interplanetary missions do not fly in straight lines. They use a sequence of gravity assists, each carefully timed to exploit planetary alignments. Finding the optimal sequence is a **combinatorial optimisation problem** — which planets, in which order, with what timing?
 
-The **porkchop plot** is the aerospace engineer\u2019s primary tool. It shows the \u0394v cost of a mission for every possible combination of launch date and arrival date. The minimum-energy trajectories appear as "sweet spots" on the plot.
+The **porkchop plot** is the aerospace engineer’s primary tool. It shows the Δv cost of a mission for every possible combination of launch date and arrival date. The minimum-energy trajectories appear as "sweet spots" on the plot.
 
 The code generates a simplified porkchop plot for an Earth-to-Mars transfer, showing how launch windows are constrained by planetary alignment. Mars launch windows open approximately every **26 months** (synodic period).`,
-      analogy: 'Planning an interplanetary trajectory is like planning a road trip where all the cities are constantly moving. You cannot just drive to Mars \u2014 you have to predict where Mars will be when you arrive, aim for that point, and time your departure so that you arrive with minimum fuel. Miss the window and you wait 26 months for the next opportunity.',
-      storyConnection: 'The Pushpaka Vimana could go anywhere at any time. Real space missions are slaves to orbital mechanics and planetary alignment. ISRO\u2019s Mangalyaan launched in November 2013 during a narrow window \u2014 if they had missed it, the next opportunity would have been in 2016.',
+      analogy: 'Planning an interplanetary trajectory is like planning a road trip where all the cities are constantly moving. You cannot just drive to Mars — you have to predict where Mars will be when you arrive, aim for that point, and time your departure so that you arrive with minimum fuel. Miss the window and you wait 26 months for the next opportunity.',
+      storyConnection: 'The Pushpaka Vimana could go anywhere at any time. Real space missions are slaves to orbital mechanics and planetary alignment. ISRO’s Mangalyaan launched in November 2013 during a narrow window — if they had missed it, the next opportunity would have been in 2016.',
       checkQuestion: 'Why do Mars launch windows occur every 26 months instead of every 12 months?',
       checkAnswer: 'The 26-month period is the **synodic period** of Mars relative to Earth. Earth orbits the Sun in 365 days, Mars in 687 days. It takes 780 days (26 months) for Earth to "lap" Mars and return to the same relative position. The optimal Hohmann transfer geometry recurs at this interval.',
       codeIntro: 'Generate a porkchop plot for Earth-Mars transfer windows.',
@@ -285,7 +285,7 @@ for i, tof in enumerate(flight_days):
 plt.figure(figsize=(12, 7))
 levels = np.arange(3.5, 12, 0.5)
 cs = plt.contourf(launch_days, flight_days, dv_grid, levels=levels, cmap='RdYlGn_r')
-plt.colorbar(cs, label='Total \u0394v (km/s)')
+plt.colorbar(cs, label='Total Δv (km/s)')
 plt.contour(launch_days, flight_days, dv_grid, levels=[4.0, 5.0, 6.0], colors='black', linewidths=0.5)
 
 plt.xlabel('Launch date (days from epoch)', fontsize=12)
@@ -303,26 +303,26 @@ best_dv = dv_grid[min_idx]
 print(f"=== Optimal Earth-Mars Transfer ===")
 print(f"Best launch: day {best_launch}")
 print(f"Flight time: {best_tof} days ({best_tof/30:.1f} months)")
-print(f"Minimum \u0394v: {best_dv:.2f} km/s")
+print(f"Minimum Δv: {best_dv:.2f} km/s")
 print(f"\\nMars synodic period: {T_earth * T_mars / abs(T_mars - T_earth):.0f} days (~26 months)")
 print(f"Next launch windows appear as blue valleys on the plot")
 print(f"Missing a window means waiting ~780 days for the next one")`,
-      challenge: 'Modify the code to generate a porkchop plot for Earth-to-Venus. Venus is closer (r = 1.082\u00D710\u00B9\u00B9 m, T = 225 days). How does the synodic period and minimum \u0394v compare to Mars?',
-      successHint: 'Porkchop plots are the primary mission design tool at every space agency. They reveal the narrow windows when interplanetary travel is feasible. Every Mars mission \u2014 Mangalyaan, Perseverance, Tianwen-1 \u2014 launched within the same 2-3 week window dictated by orbital mechanics.',
+      challenge: 'Modify the code to generate a porkchop plot for Earth-to-Venus. Venus is closer (r = 1.082×10¹¹ m, T = 225 days). How does the synodic period and minimum Δv compare to Mars?',
+      successHint: 'Porkchop plots are the primary mission design tool at every space agency. They reveal the narrow windows when interplanetary travel is feasible. Every Mars mission — Mangalyaan, Perseverance, Tianwen-1 — launched within the same 2-3 week window dictated by orbital mechanics.',
     },
     {
-      title: 'Aerobraking \u2014 using atmosphere as a brake',
-      concept: `Entering orbit around a planet normally requires a large retro-burn: you fire engines to slow down. But if the planet has an atmosphere, you can use **aerobraking** instead \u2014 deliberately dipping into the upper atmosphere to use drag as a free brake.
+      title: 'Aerobraking — using atmosphere as a brake',
+      concept: `Entering orbit around a planet normally requires a large retro-burn: you fire engines to slow down. But if the planet has an atmosphere, you can use **aerobraking** instead — deliberately dipping into the upper atmosphere to use drag as a free brake.
 
-This saves enormous amounts of fuel. Mars Reconnaissance Orbiter reduced its orbital period from 35 hours to 2 hours using aerobraking over 6 months \u2014 saving hundreds of kilograms of fuel.
+This saves enormous amounts of fuel. Mars Reconnaissance Orbiter reduced its orbital period from 35 hours to 2 hours using aerobraking over 6 months — saving hundreds of kilograms of fuel.
 
 The challenge: dip too deep and the spacecraft burns up. Stay too high and there is not enough drag. The "corridor" is only about 10 km wide at Mars.
 
 The code simulates iterative aerobraking passes: each pass through the atmosphere shaves off a little orbital energy, gradually lowering the orbit.`,
       analogy: 'Imagine you are on a swing going very high. To slow down, instead of dragging your feet on the ground (which would stop you suddenly), you stick your hands out every time you pass through the lowest point, creating air resistance. Each pass slows you a little. After many passes, you are going at a comfortable speed. That is aerobraking: using friction at the lowest orbital point to gradually slow down.',
-      storyConnection: 'The Pushpaka Vimana descended to Ayodhya smoothly. Real spacecraft arriving at Mars face a brutal choice: carry enough fuel for a large braking burn (heavy and expensive) or use the thin Martian atmosphere as a free brake (risky but elegant). ISRO\u2019s Mangalyaan used a single large burn to enter Mars orbit, but future missions may use aerobraking to save mass.',
+      storyConnection: 'The Pushpaka Vimana descended to Ayodhya smoothly. Real spacecraft arriving at Mars face a brutal choice: carry enough fuel for a large braking burn (heavy and expensive) or use the thin Martian atmosphere as a free brake (risky but elegant). ISRO’s Mangalyaan used a single large burn to enter Mars orbit, but future missions may use aerobraking to save mass.',
       checkQuestion: 'Why is aerobraking at Mars riskier than at Earth?',
-      checkAnswer: 'Mars\u2019s atmosphere is 100 times thinner than Earth\u2019s and highly variable \u2014 density can change by 50% due to dust storms. The aerobraking corridor is extremely narrow. At Earth, the thick atmosphere provides a wider margin. Mars Odyssey had to abort several aerobraking passes when unexpected dust storms changed atmospheric density.',
+      checkAnswer: 'Mars’s atmosphere is 100 times thinner than Earth’s and highly variable — density can change by 50% due to dust storms. The aerobraking corridor is extremely narrow. At Earth, the thick atmosphere provides a wider margin. Mars Odyssey had to abort several aerobraking passes when unexpected dust storms changed atmospheric density.',
       codeIntro: 'Simulate iterative aerobraking to circularise a Mars orbit.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -390,7 +390,7 @@ ax2.set_xlabel('Aerobraking pass'); ax2.set_ylabel('Orbital period (hours)')
 ax2.set_title('Period Reduction'); ax2.grid(alpha=0.3)
 
 ax3.plot(range(1, len(passes)+1), [d*1000 for d in dv_history], linewidth=2, color='red')
-ax3.set_xlabel('Aerobraking pass'); ax3.set_ylabel('\u0394v per pass (mm/s)')
+ax3.set_xlabel('Aerobraking pass'); ax3.set_ylabel('Δv per pass (mm/s)')
 ax3.set_title('Drag Deceleration per Pass'); ax3.grid(alpha=0.3)
 
 # Final orbit visualisation
@@ -421,28 +421,28 @@ print(f"=== Mars Aerobraking Summary ===")
 print(f"Total passes: {len(passes)}")
 print(f"Initial apoapsis: {r_apoapsis/1000 - R_mars/1000:.0f} km")
 print(f"Final apoapsis: {r_apo/1000 - R_mars/1000:.0f} km")
-print(f"Total \u0394v from drag: {total_dv:.1f} m/s")
+print(f"Total Δv from drag: {total_dv:.1f} m/s")
 print(f"Equivalent fuel saved: ~{total_dv * mass / (350*9.8):.0f} kg (at I_sp=350s)")`,
       challenge: 'Change r_periapsis to 120 km (deeper dip). How many fewer passes are needed? What is the risk?',
-      successHint: 'Aerobraking is one of the cleverest techniques in space mission design. It trades time for fuel, using the planet\u2019s atmosphere as a free brake. Every kilogram of fuel saved is a kilogram of scientific instruments that can be carried instead.',
+      successHint: 'Aerobraking is one of the cleverest techniques in space mission design. It trades time for fuel, using the planet’s atmosphere as a free brake. Every kilogram of fuel saved is a kilogram of scientific instruments that can be carried instead.',
     },
     {
-      title: 'Interstellar travel \u2014 the physics of reaching the stars',
-      concept: `The nearest star system, **Alpha Centauri**, is 4.37 light-years away \u2014 about 41 trillion kilometres. At the speed of Voyager 1 (17 km/s), it would take **73,000 years** to get there. Even at 10% the speed of light, the trip takes 44 years.
+      title: 'Interstellar travel — the physics of reaching the stars',
+      concept: `The nearest star system, **Alpha Centauri**, is 4.37 light-years away — about 41 trillion kilometres. At the speed of Voyager 1 (17 km/s), it would take **73,000 years** to get there. Even at 10% the speed of light, the trip takes 44 years.
 
 The challenges are immense:
-- **Energy**: accelerating even 1 tonne to 0.1c requires 4.5 \u00D7 10\u00B9\u2074 J \u2014 the annual energy output of a small country
+- **Energy**: accelerating even 1 tonne to 0.1c requires 4.5 × 10¹⁴ J — the annual energy output of a small country
 - **Time**: at achievable speeds, the journey takes decades to centuries
 - **Communication**: at 4.37 light-years, a message takes 4.37 years each way
 - **Radiation**: interstellar hydrogen at 0.1c hits like cosmic rays
 
 Proposed solutions include **solar sails** (pushed by lasers), **nuclear pulse propulsion** (detonating bombs behind the ship), and **Bussard ramjets** (scooping interstellar hydrogen as fuel).
 
-The Breakthrough Starshot initiative proposes accelerating gram-scale probes to 0.2c using a ground-based laser array \u2014 reaching Alpha Centauri in 20 years.`,
-      analogy: 'If the Sun were a tennis ball in London, Alpha Centauri would be another tennis ball in Moscow. Everything in between is empty space. Now imagine trying to throw a grain of sand from London to Moscow with enough precision to hit the ball. That is the challenge of interstellar travel. The distances are not just big \u2014 they are fundamentally different from anything in our solar system.',
-      storyConnection: 'The Pushpaka Vimana was said to reach "other lokas" \u2014 other worlds. The ancient imagination had no concept of the true distances between stars. The gap between stars is so vast that it makes the distance from Lanka to Ayodhya seem infinitesimally small. Yet the dream persists, and physics offers a few narrow paths to the stars.',
-      checkQuestion: 'If you could somehow build a ship that accelerated at 1g (9.8 m/s\u00B2) continuously, how long would it take to reach Alpha Centauri?',
-      checkAnswer: 'About 3.6 years ship time (due to relativistic time dilation). You would accelerate at 1g for half the journey (reaching ~0.95c) and decelerate at 1g for the second half. Earth time would be about 6 years. The energy required is astronomical \u2014 but 1g acceleration provides comfortable "gravity" for the crew and dramatic time savings through relativity.',
+The Breakthrough Starshot initiative proposes accelerating gram-scale probes to 0.2c using a ground-based laser array — reaching Alpha Centauri in 20 years.`,
+      analogy: 'If the Sun were a tennis ball in London, Alpha Centauri would be another tennis ball in Moscow. Everything in between is empty space. Now imagine trying to throw a grain of sand from London to Moscow with enough precision to hit the ball. That is the challenge of interstellar travel. The distances are not just big — they are fundamentally different from anything in our solar system.',
+      storyConnection: 'The Pushpaka Vimana was said to reach "other lokas" — other worlds. The ancient imagination had no concept of the true distances between stars. The gap between stars is so vast that it makes the distance from Lanka to Ayodhya seem infinitesimally small. Yet the dream persists, and physics offers a few narrow paths to the stars.',
+      checkQuestion: 'If you could somehow build a ship that accelerated at 1g (9.8 m/s²) continuously, how long would it take to reach Alpha Centauri?',
+      checkAnswer: 'About 3.6 years ship time (due to relativistic time dilation). You would accelerate at 1g for half the journey (reaching ~0.95c) and decelerate at 1g for the second half. Earth time would be about 6 years. The energy required is astronomical — but 1g acceleration provides comfortable "gravity" for the crew and dramatic time savings through relativity.',
       codeIntro: 'Compare interstellar propulsion concepts and travel times to Alpha Centauri.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -472,7 +472,7 @@ plt.figure(figsize=(12, 5))
 bars = plt.barh(names[::-1], [np.log10(t) for t in travel_years[::-1]],
                 color=['#ef4444' if t > 1000 else '#f59e0b' if t > 100 else '#22c55e' for t in travel_years[::-1]],
                 height=0.6)
-plt.xlabel('log\u2081\u2080(Travel time in years)', fontsize=11)
+plt.xlabel('log₁₀(Travel time in years)', fontsize=11)
 plt.title('Travel Time to Alpha Centauri (4.37 light-years)', fontsize=14)
 plt.grid(axis='x', alpha=0.3)
 
@@ -505,9 +505,9 @@ for name, v_frac, mass_note in concepts:
 
 # Context
 print(f"\\nFor comparison:")
-print(f"  World annual energy use: ~5.8 \u00d7 10\u00b9\u00b2\u2070 J")
-print(f"  Sun output per second:   3.8 \u00d7 10\u00b2\u2076 J")
-print(f"  Tsar Bomba (largest nuke): 2.1 \u00d7 10\u00b9\u2077 J")
+print(f"  World annual energy use: ~5.8 × 10¹²⁰ J")
+print(f"  Sun output per second:   3.8 × 10²⁶ J")
+print(f"  Tsar Bomba (largest nuke): 2.1 × 10¹⁷ J")
 
 # Relativistic time dilation at constant 1g acceleration
 print(f"\\n=== 1g Continuous Acceleration ===")
@@ -522,24 +522,24 @@ print(f"  Earth time: {2*t_earth_half / (365.25*86400):.1f} years")
 v_max = c * np.tanh(tau_half * g_accel / c)
 print(f"  Peak speed: {v_max/c:.3f} c ({v_max/1000:.0f} km/s)")`,
       challenge: 'Calculate the travel time for a Breakthrough Starshot probe (1 gram, 0.2c) including a 10-minute laser acceleration phase. What is the laser power needed to accelerate 1 gram to 0.2c in 10 minutes?',
-      successHint: 'Interstellar travel is the ultimate engineering challenge. The distances are so vast that they require propulsion technologies we have not yet built. But the physics allows it \u2014 the Vimana\u2019s dream of travelling between worlds is not impossible, just extraordinarily difficult.',
+      successHint: 'Interstellar travel is the ultimate engineering challenge. The distances are so vast that they require propulsion technologies we have not yet built. But the physics allows it — the Vimana’s dream of travelling between worlds is not impossible, just extraordinarily difficult.',
     },
     {
       title: 'Capstone: Design your own Vimana mission',
       concept: `You now have the tools to design a complete aerospace mission from first principles. In this capstone, you will design a **multi-phase mission** that combines everything:
 
-1. **Phase 1: Atmospheric flight** \u2014 takeoff, climb, cruise (lift/drag/thrust)
-2. **Phase 2: Orbital insertion** \u2014 rocket equation, escape from atmosphere
-3. **Phase 3: Transfer orbit** \u2014 Hohmann transfer to destination
-4. **Phase 4: Arrival** \u2014 aerobraking or orbital insertion burn
+1. **Phase 1: Atmospheric flight** — takeoff, climb, cruise (lift/drag/thrust)
+2. **Phase 2: Orbital insertion** — rocket equation, escape from atmosphere
+3. **Phase 3: Transfer orbit** — Hohmann transfer to destination
+4. **Phase 4: Arrival** — aerobraking or orbital insertion burn
 
-The code provides a mission design framework. You choose the destination, vehicle parameters, and trajectory. The simulator computes \u0394v budgets, fuel requirements, and transit times.
+The code provides a mission design framework. You choose the destination, vehicle parameters, and trajectory. The simulator computes Δv budgets, fuel requirements, and transit times.
 
-This is how real mission design works at ISRO, NASA, and SpaceX \u2014 define the mission, calculate the physics, iterate until feasible.`,
+This is how real mission design works at ISRO, NASA, and SpaceX — define the mission, calculate the physics, iterate until feasible.`,
       analogy: 'Designing a space mission is like planning a multi-leg journey where each leg has completely different physics: driving to the airport (aerodynamics), flying to another continent (orbital mechanics), taking a boat to an island (different medium). You need different vehicles, different fuel, and different skills for each phase. The art is in connecting them seamlessly.',
-      storyConnection: 'The Pushpaka Vimana made the impossible look effortless \u2014 it flew through atmosphere, above the clouds, and supposedly to other lokas. Your mission design will achieve the same thing, but with real physics. Every parameter you choose has consequences: more payload means more fuel means a bigger rocket means more fuel. Vishwakarma did not need to worry about the rocket equation. You do.',
+      storyConnection: 'The Pushpaka Vimana made the impossible look effortless — it flew through atmosphere, above the clouds, and supposedly to other lokas. Your mission design will achieve the same thing, but with real physics. Every parameter you choose has consequences: more payload means more fuel means a bigger rocket means more fuel. Vishwakarma did not need to worry about the rocket equation. You do.',
       checkQuestion: 'What is the single biggest constraint on mission design?',
-      checkAnswer: 'Mass. Every kilogram of payload requires roughly 10-20 kg of fuel to reach orbit, and every kg of fuel for the orbital phase requires additional fuel to get that fuel off the ground. This exponential relationship (the rocket equation) is the fundamental constraint. Everything else \u2014 cost, schedule, risk \u2014 traces back to mass.',
+      checkAnswer: 'Mass. Every kilogram of payload requires roughly 10-20 kg of fuel to reach orbit, and every kg of fuel for the orbital phase requires additional fuel to get that fuel off the ground. This exponential relationship (the rocket equation) is the fundamental constraint. Everything else — cost, schedule, risk — traces back to mass.',
       codeIntro: 'Design a complete mission: Earth surface to Mars orbit.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -563,7 +563,7 @@ dv_drag_loss = 200      # m/s
 dv_to_leo = v_leo + dv_gravity_loss + dv_drag_loss
 print(f"  Orbital velocity at {alt_leo/1000:.0f} km: {v_leo:.0f} m/s")
 print(f"  Gravity + drag losses: {dv_gravity_loss + dv_drag_loss} m/s")
-print(f"  Total \u0394v to LEO: {dv_to_leo:.0f} m/s ({dv_to_leo/1000:.2f} km/s)")
+print(f"  Total Δv to LEO: {dv_to_leo:.0f} m/s ({dv_to_leo/1000:.2f} km/s)")
 
 # === PHASE 2: Trans-Mars Injection ===
 print("\\n--- Phase 2: Trans-Mars Injection (TMI) ---")
@@ -575,7 +575,7 @@ dv_tmi = v_transfer_earth - v_earth_orbit  # heliocentric
 v_inf = dv_tmi
 v_escape_from_leo = np.sqrt(v_inf**2 + 2 * G * M_earth / (R_earth + alt_leo))
 dv_tmi_actual = v_escape_from_leo - v_leo
-print(f"  Heliocentric \u0394v: {dv_tmi:.0f} m/s")
+print(f"  Heliocentric Δv: {dv_tmi:.0f} m/s")
 print(f"  From LEO (Oberth effect): {dv_tmi_actual:.0f} m/s")
 
 # === PHASE 3: Cruise ===
@@ -594,12 +594,12 @@ v_mars_orbit_local = np.sqrt(G * M_mars / (R_mars + alt_mars_orbit))
 v_arrival = np.sqrt(v_inf_mars**2 + 2 * G * M_mars / (R_mars + alt_mars_orbit))
 dv_moi = v_arrival - v_mars_orbit_local
 print(f"  Approach v_inf: {v_inf_mars:.0f} m/s")
-print(f"  MOI \u0394v: {dv_moi:.0f} m/s")
+print(f"  MOI Δv: {dv_moi:.0f} m/s")
 
 # === TOTAL BUDGET ===
 dv_total = dv_to_leo + dv_tmi_actual + dv_moi
 print(f"\\n{'='*60}")
-print(f"  TOTAL \u0394v BUDGET: {dv_total:.0f} m/s ({dv_total/1000:.2f} km/s)")
+print(f"  TOTAL Δv BUDGET: {dv_total:.0f} m/s ({dv_total/1000:.2f} km/s)")
 print(f"{'='*60}")
 
 # === VEHICLE SIZING ===
@@ -637,8 +637,8 @@ colors = ['red', 'orange', 'green', 'blue']
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
 ax1.bar(phases, dvs, color=colors)
-ax1.set_ylabel('\u0394v (km/s)', fontsize=11)
-ax1.set_title('Mission \u0394v Budget', fontsize=13)
+ax1.set_ylabel('Δv (km/s)', fontsize=11)
+ax1.set_title('Mission Δv Budget', fontsize=13)
 ax1.grid(axis='y', alpha=0.3)
 
 masses = [m1_initial, m2_initial, m3_initial, payload]
@@ -650,8 +650,8 @@ ax2.grid(axis='y', alpha=0.3)
 
 plt.tight_layout()
 plt.show()`,
-      challenge: 'Redesign the mission for a return trip (add \u0394v for Mars ascent, Earth return transfer, and Earth capture). What is the total \u0394v and how does the launch mass change?',
-      successHint: 'You have designed a complete interplanetary mission \u2014 the same process used by ISRO for Mangalyaan, by NASA for Perseverance, and by SpaceX for Starship. The Pushpaka Vimana\u2019s journey from Lanka to Ayodhya is just the beginning. The real voyage is from Earth to the stars.',
+      challenge: 'Redesign the mission for a return trip (add Δv for Mars ascent, Earth return transfer, and Earth capture). What is the total Δv and how does the launch mass change?',
+      successHint: 'You have designed a complete interplanetary mission — the same process used by ISRO for Mangalyaan, by NASA for Perseverance, and by SpaceX for Starship. The Pushpaka Vimana’s journey from Lanka to Ayodhya is just the beginning. The real voyage is from Earth to the stars.',
     },
   ];
 

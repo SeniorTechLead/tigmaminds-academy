@@ -81,7 +81,7 @@ const TrainFrictionDiagram = () => {
           Contact patch: only
         </text>
         <text x="160" y="256" textAnchor="middle" className="tf-small fill-amber-600 dark:fill-amber-400">
-          ~1 cm\u00B2 per wheel!
+          ~1 cm² per wheel!
         </text>
 
         {/* Weight arrow (down) */}
@@ -132,7 +132,7 @@ const TrainFrictionDiagram = () => {
               </text>
               <rect x="358" y={item.y - 2} width={barWidth} height="20" rx="3" fill={item.color} opacity="0.8" />
               <text x={362 + barWidth} y={item.y + 12} className="tf-small fill-gray-700 dark:fill-gray-300">
-                \u03BC = {item.value.toFixed(2)}
+                μ = {item.value.toFixed(2)}
               </text>
             </g>
           );
@@ -149,8 +149,8 @@ const TrainFrictionDiagram = () => {
         {/* Three boxes */}
         {[
           { x: 40, title: 'Low friction =', line2: 'high efficiency', desc: 'A 2,000-tonne freight train\nneeds only a small engine\nbecause rolling resistance is\nvery low on steel rails.', color: '#22c55e' },
-          { x: 220, title: 'Just enough grip', line2: 'to not slip', desc: 'The adhesion coefficient\n(\u03BC \u2248 0.30 dry) means each\ndriving wheel can push with\n30% of its weight as force.', color: '#f59e0b' },
-          { x: 400, title: 'Hard surface =', line2: 'no deformation', desc: 'Steel doesn\u2019t squash flat\nlike rubber, so the tiny\ncontact patch rolls with\nalmost zero energy loss.', color: '#60a5fa' },
+          { x: 220, title: 'Just enough grip', line2: 'to not slip', desc: 'The adhesion coefficient\n(μ ≈ 0.30 dry) means each\ndriving wheel can push with\n30% of its weight as force.', color: '#f59e0b' },
+          { x: 400, title: 'Hard surface =', line2: 'no deformation', desc: 'Steel doesn’t squash flat\nlike rubber, so the tiny\ncontact patch rolls with\nalmost zero energy loss.', color: '#60a5fa' },
         ].map((box, i) => (
           <g key={i}>
             <rect x={box.x} y="316" width="165" height="140" rx="6"

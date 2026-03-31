@@ -88,10 +88,10 @@ export default function HydroDesalinationDiagram() {
 
         {/* Salt crystals (Na+/Cl- jittering) */}
         {[
-          [70, 120, 'Na\u207A', 'ro-sj'], [120, 140, 'Cl\u207B', 'ro-sj2'], [170, 115, 'Na\u207A', 'ro-sj3'],
-          [85, 165, 'Cl\u207B', 'ro-sj4'], [155, 175, 'Na\u207A', 'ro-sj'], [100, 195, 'Cl\u207B', 'ro-sj2'],
-          [180, 150, 'Na\u207A', 'ro-sj3'], [60, 190, 'Cl\u207B', 'ro-sj4'], [140, 110, 'Na\u207A', 'ro-sj'],
-          [195, 185, 'Cl\u207B', 'ro-sj2'],
+          [70, 120, 'Na⁺', 'ro-sj'], [120, 140, 'Cl⁻', 'ro-sj2'], [170, 115, 'Na⁺', 'ro-sj3'],
+          [85, 165, 'Cl⁻', 'ro-sj4'], [155, 175, 'Na⁺', 'ro-sj'], [100, 195, 'Cl⁻', 'ro-sj2'],
+          [180, 150, 'Na⁺', 'ro-sj3'], [60, 190, 'Cl⁻', 'ro-sj4'], [140, 110, 'Na⁺', 'ro-sj'],
+          [195, 185, 'Cl⁻', 'ro-sj2'],
         ].map(([cx, cy, label, cls], i) => (
           <g key={`salt-${i}`} className={cls as string}>
             {/* White crystal speck behind */}
@@ -116,7 +116,7 @@ export default function HydroDesalinationDiagram() {
           ))}
         </g>
         <text x="48" y="218" className="fill-orange-600 dark:fill-orange-400" fontSize="10" fontWeight="bold">HIGH PRESSURE</text>
-        <text x="48" y="232" className="fill-orange-500 dark:fill-orange-300" fontSize="10">50-80 atm  \u2192</text>
+        <text x="48" y="232" className="fill-orange-500 dark:fill-orange-300" fontSize="10">50-80 atm  →</text>
 
         {/* CENTER: Semipermeable membrane */}
         <rect x="254" y="46" width="14" height="208" rx="3" className="fill-purple-400 dark:fill-purple-600" opacity="0.8" />
@@ -155,16 +155,16 @@ export default function HydroDesalinationDiagram() {
         </g>
 
         {/* Blocked symbols */}
-        <text x="244" y="95" fill="#ef4444" fontSize="12" fontWeight="bold">\u2717</text>
-        <text x="244" y="155" fill="#ef4444" fontSize="12" fontWeight="bold">\u2717</text>
-        <text x="244" y="125" fill="#ef4444" fontSize="12" fontWeight="bold">\u2717</text>
-        <text x="244" y="190" fill="#ef4444" fontSize="12" fontWeight="bold">\u2717</text>
+        <text x="244" y="95" fill="#ef4444" fontSize="12" fontWeight="bold">✗</text>
+        <text x="244" y="155" fill="#ef4444" fontSize="12" fontWeight="bold">✗</text>
+        <text x="244" y="125" fill="#ef4444" fontSize="12" fontWeight="bold">✗</text>
+        <text x="244" y="190" fill="#ef4444" fontSize="12" fontWeight="bold">✗</text>
 
         {/* Passed symbols */}
-        <text x="272" y="110" fill="#22c55e" fontSize="11" fontWeight="bold">\u2713</text>
-        <text x="272" y="140" fill="#22c55e" fontSize="11" fontWeight="bold">\u2713</text>
-        <text x="272" y="170" fill="#22c55e" fontSize="11" fontWeight="bold">\u2713</text>
-        <text x="272" y="200" fill="#22c55e" fontSize="11" fontWeight="bold">\u2713</text>
+        <text x="272" y="110" fill="#22c55e" fontSize="11" fontWeight="bold">✓</text>
+        <text x="272" y="140" fill="#22c55e" fontSize="11" fontWeight="bold">✓</text>
+        <text x="272" y="170" fill="#22c55e" fontSize="11" fontWeight="bold">✓</text>
+        <text x="272" y="200" fill="#22c55e" fontSize="11" fontWeight="bold">✓</text>
 
         {/* RIGHT: Fresh water chamber */}
         <rect x="272" y="50" width="248" height="200" rx="4" fill="url(#ro-fresh)" opacity="0.5" />
@@ -186,7 +186,7 @@ export default function HydroDesalinationDiagram() {
 
         <rect x="300" y="232" width="190" height="16" rx="3" className="fill-sky-200 dark:fill-sky-800" opacity="0.8" />
         <text x="395" y="244" textAnchor="middle" className="fill-sky-700 dark:fill-sky-300" fontSize="10" fontWeight="bold">
-          \u2714 Clean drinking water
+          ✔ Clean drinking water
         </text>
 
         {/* Brine waste output */}
@@ -211,9 +211,9 @@ export default function HydroDesalinationDiagram() {
         <rect x="20" y="352" width="520" height="42" rx="6" className="fill-amber-50 dark:fill-amber-900/30" stroke="#d97706" strokeWidth="1" />
         <text x="280" y="368" textAnchor="middle" className="fill-amber-800 dark:fill-amber-200" fontSize="11" fontWeight="bold">Energy Cost</text>
         <rect x="50" y="374" width="80" height="10" rx="2" className="fill-green-400 dark:fill-green-600" />
-        <text x="140" y="383" className="fill-gray-600 dark:fill-gray-300" fontSize="10">RO: 3-5 kWh/m\u00B3</text>
+        <text x="140" y="383" className="fill-gray-600 dark:fill-gray-300" fontSize="10">RO: 3-5 kWh/m³</text>
         <rect x="280" y="374" width="150" height="10" rx="2" className="fill-red-400 dark:fill-red-600" />
-        <text x="440" y="383" className="fill-gray-600 dark:fill-gray-300" fontSize="10">Distillation: 25+ (6\u00D7 more!)</text>
+        <text x="440" y="383" className="fill-gray-600 dark:fill-gray-300" fontSize="10">Distillation: 25+ (6× more!)</text>
       </svg>
     </div>
   );

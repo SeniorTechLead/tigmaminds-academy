@@ -11,9 +11,9 @@ export default function CloudsForecastDiagram() {
       title: "Cloud Reading (Traditional)",
       color: "#fbbf24",
       items: [
-        "Cirrus \u2192 rain in 1\u20132 days",
-        "Building cumulus \u2192 afternoon storm",
-        "Low stratus \u2192 drizzle",
+        "Cirrus → rain in 1–2 days",
+        "Building cumulus → afternoon storm",
+        "Low stratus → drizzle",
         'Dawan\'s method: learn "personalities"',
       ],
     },
@@ -25,9 +25,9 @@ export default function CloudsForecastDiagram() {
       title: "Barometric Pressure",
       color: "#60a5fa",
       items: [
-        "Falling pressure \u2192 storm coming",
-        "Rising pressure \u2192 clearing skies",
-        "Rapid drop \u2192 severe weather",
+        "Falling pressure → storm coming",
+        "Rising pressure → clearing skies",
+        "Rapid drop → severe weather",
         "Measured with barometer (hPa)",
       ],
     },
@@ -62,7 +62,7 @@ export default function CloudsForecastDiagram() {
           How We Predict Weather
         </text>
         <text x={w / 2} y="50" textAnchor="middle" fontSize="11" fill="#94a3b8">
-          Three approaches \u2014 from Dawan\u2019s cloud journal to supercomputers
+          Three approaches — from Dawan’s cloud journal to supercomputers
         </text>
 
         {/* Three method boxes */}
@@ -75,7 +75,7 @@ export default function CloudsForecastDiagram() {
             <line x1={m.x + 10} y1={m.y + 32} x2={m.x + m.w - 10} y2={m.y + 32} stroke={m.color} strokeWidth="0.5" strokeOpacity="0.4" />
             {m.items.map((item, i) => (
               <text key={i} x={m.x + 14} y={m.y + 50 + i * 18} fontSize="10" fill="#cbd5e1">
-                {"\u2022 " + item}
+                {"• " + item}
               </text>
             ))}
           </g>
@@ -108,7 +108,7 @@ export default function CloudsForecastDiagram() {
           </g>
         ))}
 
-        {/* Accuracy bar \u2014 gradient from green to red */}
+        {/* Accuracy bar — gradient from green to red */}
         <defs>
           <linearGradient id="cf-acc" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%" stopColor="#4ade80" />
@@ -124,16 +124,16 @@ export default function CloudsForecastDiagram() {
           Why Forecasts Go Wrong
         </text>
         <text x="55" y="425" fontSize="10" fill="#cbd5e1">
-          {"\u2022 The atmosphere is chaotic \u2014 tiny errors grow fast"}
+          {"• The atmosphere is chaotic — tiny errors grow fast"}
         </text>
         <text x="55" y="441" fontSize="10" fill="#cbd5e1">
-          {"\u2022 We can\u2019t measure every air molecule"}
+          {"• We can’t measure every air molecule"}
         </text>
         <text x="55" y="457" fontSize="10" fill="#cbd5e1">
-          {"\u2022 Oceans, mountains, cities all add complexity"}
+          {"• Oceans, mountains, cities all add complexity"}
         </text>
         <text x="55" y="473" fontSize="10" fill="#cbd5e1">
-          {"\u2022 After ~10 days, prediction \u2248 coin flip"}
+          {"• After ~10 days, prediction ≈ coin flip"}
         </text>
 
         {/* Ensemble models */}
@@ -142,16 +142,16 @@ export default function CloudsForecastDiagram() {
           Ensemble Models
         </text>
         <text x="385" y="425" fontSize="10" fill="#cbd5e1">
-          {"\u2022 Run the same model 50 times"}
+          {"• Run the same model 50 times"}
         </text>
         <text x="385" y="441" fontSize="10" fill="#cbd5e1">
-          {"\u2022 Each time with slightly different start"}
+          {"• Each time with slightly different start"}
         </text>
         <text x="385" y="457" fontSize="10" fill="#cbd5e1">
-          {"\u2022 If all 50 agree \u2192 high confidence"}
+          {"• If all 50 agree → high confidence"}
         </text>
         <text x="385" y="473" fontSize="10" fill="#cbd5e1">
-          {"\u2022 If they scatter \u2192 uncertain forecast"}
+          {"• If they scatter → uncertain forecast"}
         </text>
 
         {/* Ensemble fan illustration */}

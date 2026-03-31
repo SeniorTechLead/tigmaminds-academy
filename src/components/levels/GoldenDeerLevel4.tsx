@@ -199,7 +199,7 @@ print("  - Returns (wavelength, intensity) pairs")
 print()
 print("Module 4: Spectral Matcher")
 print("  - Compares detected peaks to reference lines")
-print("  - Tolerance-based matching (default: \u00b12nm)")
+print("  - Tolerance-based matching (default: ±2nm)")
 print("  - Returns ranked list of candidate elements")
 print()
 print("Full pipeline: identify(wavelengths, intensities)")
@@ -393,7 +393,7 @@ print("not just one, to resolve ambiguous cases.")`,
 
 Our approach uses three strategies layered together. First, smoothing: a moving average or Savitzky-Golay filter reduces high-frequency noise while preserving the broader spectral peaks. Second, thresholding: we only consider peaks above a minimum intensity, eliminating low-amplitude noise. Third, minimum distance: real emission lines from a single element are rarely closer than a few nanometers, so we reject peaks that are too close together (likely noise artifacts or detector glitches).
 
-More sophisticated peak detectors use the second derivative (peaks are where d\u00b2I/d\u03bb\u00b2 is most negative), wavelet transforms, or matched filtering (correlating with an expected peak shape). But the simple three-strategy approach works remarkably well for clean-to-moderate noise levels and teaches the core concepts. The key insight is that peak detection is always a tradeoff: lower thresholds catch weak real lines but also catch more noise (false positives); higher thresholds miss weak lines (false negatives) but have fewer false detections.`,
+More sophisticated peak detectors use the second derivative (peaks are where d²I/dλ² is most negative), wavelet transforms, or matched filtering (correlating with an expected peak shape). But the simple three-strategy approach works remarkably well for clean-to-moderate noise levels and teaches the core concepts. The key insight is that peak detection is always a tradeoff: lower thresholds catch weak real lines but also catch more noise (false positives); higher thresholds miss weak lines (false negatives) but have fewer false detections.`,
       analogy: 'Peak detection in a noisy spectrum is like spotting mountain peaks from a bumpy airplane. The big peaks (strong emission lines) are obvious even through turbulence. But are those small bumps real hills or just air pockets? You smooth out the turbulence first (filtering), ignore anything below the cloud layer (threshold), and require peaks to be separated by at least a few kilometers (minimum distance). The result is a reliable list of actual mountains.',
       storyConnection: 'Imagine trying to see the golden deer through thick monsoon fog. The deer\'s golden glow is the real signal; the fog scatter is noise. Your eyes naturally smooth the scene (averaging over time), ignore dim patches (threshold), and expect the deer to be a single coherent shape (spatial filtering). Peak detection applies the same strategies to spectral data — finding the golden signal through the noise.',
       checkQuestion: 'You lower the peak detection threshold and suddenly detect 50 peaks instead of 8. Are you now more or less confident in your results?',
@@ -558,7 +558,7 @@ print("(410.2nm, intensity=0.15) vanish into the noise floor.")
 print()
 print("This is why astronomers need dark skies and long exposures:")
 print("reducing noise reveals weaker spectral lines.")`,
-      challenge: 'Implement a second-derivative peak detector: compute d\u00b2I/d\u03bb\u00b2 using np.diff twice, and find where it is most negative (peak centers). Compare its performance to the local-maximum approach at high noise levels.',
+      challenge: 'Implement a second-derivative peak detector: compute d²I/dλ² using np.diff twice, and find where it is most negative (peak centers). Compare its performance to the local-maximum approach at high noise levels.',
       successHint: 'Peak detection is where signal processing meets the real world. Every detection system in science faces the same fundamental tradeoff between sensitivity (catching weak signals) and specificity (rejecting noise). Tuning the threshold is not a one-time decision — it depends on the noise level and the question you are asking.',
     },
     {
@@ -1213,7 +1213,7 @@ plt.show()
 print("SPECTRAL ANALYZER - PERFORMANCE REPORT")
 print("=" * 60)
 print(f"Database: {len(db)} elements, {sum(len(v) for v in db.values())} total lines")
-print(f"Test suite: {len(test_cases)} test cases \u00d7 {len(noise_levels)} noise levels")
+print(f"Test suite: {len(test_cases)} test cases × {len(noise_levels)} noise levels")
 print()
 
 for noise in noise_levels:

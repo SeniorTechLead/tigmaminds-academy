@@ -59,7 +59,7 @@ export default function RaceSpeedDiagram() {
 
         {/* Title */}
         <text x={w / 2} y={26} textAnchor="middle" className="fill-slate-100" style={{ fontSize: 16, fontWeight: 700 }}>
-          Speed vs Velocity \u2014 Position\u2013Time Graph
+          Speed vs Velocity — Position–Time Graph
         </text>
 
         {/* Grid */}

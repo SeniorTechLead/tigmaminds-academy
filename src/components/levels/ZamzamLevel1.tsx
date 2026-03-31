@@ -34,13 +34,13 @@ export default function ZamzamLevel1() {
 
 Rain falls on the surface, soaks into soil, trickles down through gaps between rock grains, and eventually fills every available pore space below the water table. This process is called **recharge**. It can take days, years, or even thousands of years for water to travel from the surface into a deep aquifer.
 
-In the code below, you will model the water table as a function of rainfall and depth. The key idea: the water table is not flat \u2014 it rises after rain and falls during dry periods.
+In the code below, you will model the water table as a function of rainfall and depth. The key idea: the water table is not flat — it rises after rain and falls during dry periods.
 
 \uD83D\uDCDA *An aquifer is not a cave full of water. It is solid rock with tiny pores filled with water, like a sponge.*`,
-      analogy: 'Think of a kitchen sponge sitting on a plate. Pour water onto the sponge. The water soaks in and fills the holes (pores). If you keep adding water, eventually the bottom half of the sponge is completely saturated \u2014 that is the aquifer. The boundary where dry sponge meets wet sponge is the water table. Squeeze the sponge (pump a well) and water flows out. Stop squeezing and it slowly refills from rain above.',
-      storyConnection: 'The Well of Zamzam has provided water in the middle of a desert for thousands of years. How? It taps a deep aquifer beneath Mecca \u2014 water that seeped into rock formations from rainfall in the surrounding Hejaz mountains, potentially thousands of years ago. The well is a window into an underground reservoir.',
+      analogy: 'Think of a kitchen sponge sitting on a plate. Pour water onto the sponge. The water soaks in and fills the holes (pores). If you keep adding water, eventually the bottom half of the sponge is completely saturated — that is the aquifer. The boundary where dry sponge meets wet sponge is the water table. Squeeze the sponge (pump a well) and water flows out. Stop squeezing and it slowly refills from rain above.',
+      storyConnection: 'The Well of Zamzam has provided water in the middle of a desert for thousands of years. How? It taps a deep aquifer beneath Mecca — water that seeped into rock formations from rainfall in the surrounding Hejaz mountains, potentially thousands of years ago. The well is a window into an underground reservoir.',
       checkQuestion: 'If you dig two wells 100 metres apart, will they have the same water level?',
-      checkAnswer: 'Not necessarily. The water table is not perfectly flat \u2014 it roughly follows the surface topography but is smoother. A well on a hilltop will have a deeper water table than a well in a valley. The water table slopes from high ground toward rivers and coasts, driven by gravity. Two wells 100m apart on a slope will have different water levels.',
+      checkAnswer: 'Not necessarily. The water table is not perfectly flat — it roughly follows the surface topography but is smoother. A well on a hilltop will have a deeper water table than a well in a valley. The water table slopes from high ground toward rivers and coasts, driven by gravity. Two wells 100m apart on a slope will have different water levels.',
       codeIntro: 'Model the water table depth based on rainfall over time.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -91,22 +91,22 @@ print(f"Deepest: {max(water_table):.1f}m in the dry season")`,
       successHint: 'You just modelled the water cycle underground. The water table is a dynamic surface that responds to rainfall and pumping. Every well on Earth depends on this balance between recharge and discharge.',
     },
     {
-      title: 'Porosity and permeability \u2014 can water flow through rock?',
+      title: 'Porosity and permeability — can water flow through rock?',
       concept: `Two words that sound similar but mean very different things:
 
-**Porosity** = how much empty space is inside a rock (percentage of total volume that is pore space). Clay has HIGH porosity (40-70%) \u2014 lots of tiny spaces.
+**Porosity** = how much empty space is inside a rock (percentage of total volume that is pore space). Clay has HIGH porosity (40-70%) — lots of tiny spaces.
 
-**Permeability** = how easily water can FLOW through the rock. Clay has VERY LOW permeability \u2014 the pores are so tiny and disconnected that water gets stuck.
+**Permeability** = how easily water can FLOW through the rock. Clay has VERY LOW permeability — the pores are so tiny and disconnected that water gets stuck.
 
-Gravel has lower porosity (25-40%) but HIGH permeability \u2014 the pores are large and connected, so water flows freely.
+Gravel has lower porosity (25-40%) but HIGH permeability — the pores are large and connected, so water flows freely.
 
-This distinction is critical for wells. You want to drill into a rock that is both porous (holds water) AND permeable (releases it). Sandstone and gravel are ideal. Clay holds water but will not release it \u2014 you could drill a well into clay and get almost nothing.
+This distinction is critical for wells. You want to drill into a rock that is both porous (holds water) AND permeable (releases it). Sandstone and gravel are ideal. Clay holds water but will not release it — you could drill a well into clay and get almost nothing.
 
 In the code, you will calculate how much water different rock types can hold and how fast they release it.`,
-      analogy: 'Imagine two rooms. Room A has 1000 tiny locked drawers (clay) \u2014 lots of storage space, but you cannot get anything out quickly. Room B has 50 large open shelves (gravel) \u2014 less total storage, but you can grab things instantly. Porosity is the total storage space; permeability is how fast you can retrieve items.',
-      storyConnection: 'Zamzam sits in fractured limestone and alluvial deposits \u2014 rock types with good porosity AND permeability. The fractures in the limestone act like highways for water, allowing the well to produce 11-18.5 litres per second despite being in a desert. Without permeable rock, there would be no well.',
+      analogy: 'Imagine two rooms. Room A has 1000 tiny locked drawers (clay) — lots of storage space, but you cannot get anything out quickly. Room B has 50 large open shelves (gravel) — less total storage, but you can grab things instantly. Porosity is the total storage space; permeability is how fast you can retrieve items.',
+      storyConnection: 'Zamzam sits in fractured limestone and alluvial deposits — rock types with good porosity AND permeability. The fractures in the limestone act like highways for water, allowing the well to produce 11-18.5 litres per second despite being in a desert. Without permeable rock, there would be no well.',
       checkQuestion: 'A farmer drills a well into a thick clay layer and gets almost no water, even though the clay is completely saturated. Why?',
-      checkAnswer: 'Clay has high porosity (40-70% pore space) so it holds plenty of water. But its permeability is extremely low \u2014 the pores are microscopic (nanometres) and poorly connected. Water cannot flow through the tiny passages fast enough to supply a well pump. The farmer needs to drill deeper into a sandstone or gravel layer where the pores are large and connected.',
+      checkAnswer: 'Clay has high porosity (40-70% pore space) so it holds plenty of water. But its permeability is extremely low — the pores are microscopic (nanometres) and poorly connected. Water cannot flow through the tiny passages fast enough to supply a well pump. The farmer needs to drill deeper into a sandstone or gravel layer where the pores are large and connected.',
       codeIntro: 'Compare storage capacity and flow rate for different rock types.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -155,26 +155,26 @@ print("= good storage AND good flow")`,
       successHint: 'The porosity-permeability distinction is one of the most important concepts in hydrogeology. A geologist searching for water needs both: storage (porosity) AND the ability to extract it (permeability).',
     },
     {
-      title: 'Darcy\u2019s law \u2014 the equation for groundwater flow',
+      title: 'Darcy’s law — the equation for groundwater flow',
       concept: `In 1856, a French engineer named Henry Darcy ran a simple experiment: he pushed water through a column of sand and measured how fast it flowed. He discovered that the flow rate depends on three things:
 
-**Q = K \u00D7 A \u00D7 (\u0394h / L)**
+**Q = K × A × (Δh / L)**
 
 Where:
-- **Q** = flow rate (m\u00B3/s) \u2014 how much water per second
-- **K** = hydraulic conductivity (m/s) \u2014 how easily water moves through the material
-- **A** = cross-sectional area (m\u00B2) \u2014 how wide the flow path is
-- **\u0394h** = head difference (m) \u2014 the height difference driving the flow
+- **Q** = flow rate (m³/s) — how much water per second
+- **K** = hydraulic conductivity (m/s) — how easily water moves through the material
+- **A** = cross-sectional area (m²) — how wide the flow path is
+- **Δh** = head difference (m) — the height difference driving the flow
 - **L** = length of flow path (m)
 
-The ratio \u0394h/L is called the **hydraulic gradient** \u2014 steeper gradient means faster flow. Think of it like a hill: a steeper slope makes a ball roll faster.
+The ratio Δh/L is called the **hydraulic gradient** — steeper gradient means faster flow. Think of it like a hill: a steeper slope makes a ball roll faster.
 
 This single equation governs almost all groundwater flow on Earth. In the code, you will use it to predict how much water a well can pump.`,
-      analogy: 'Imagine water flowing down a tilted pipe filled with marbles. The tilt (\u0394h/L) is the driving force \u2014 more tilt, faster flow. The size of gaps between marbles (K) determines resistance \u2014 big gaps (gravel) allow fast flow, tiny gaps (clay) resist. The pipe width (A) determines total volume. Darcy\u2019s law is just: flow = driving force \u00D7 ease \u00D7 width.',
-      storyConnection: 'The Zamzam well produces 11-18.5 litres per second. Using Darcy\u2019s law, hydrogeologists calculated that its aquifer has an unusually high hydraulic conductivity for the region, likely due to fractured limestone beneath the Haram. The law explains both why the well has never run dry and how fast it can replenish.',
-      checkQuestion: 'If you double the head difference (\u0394h), what happens to the flow rate?',
-      checkAnswer: 'The flow rate doubles. Darcy\u2019s law is linear \u2014 Q is directly proportional to \u0394h/L. Doubling the driving force doubles the flow. This is why wells at the bottom of hills often produce more water: the head difference between the recharge area (hilltop) and the well is greater.',
-      codeIntro: 'Calculate groundwater flow rates using Darcy\u2019s law.',
+      analogy: 'Imagine water flowing down a tilted pipe filled with marbles. The tilt (Δh/L) is the driving force — more tilt, faster flow. The size of gaps between marbles (K) determines resistance — big gaps (gravel) allow fast flow, tiny gaps (clay) resist. The pipe width (A) determines total volume. Darcy’s law is just: flow = driving force × ease × width.',
+      storyConnection: 'The Zamzam well produces 11-18.5 litres per second. Using Darcy’s law, hydrogeologists calculated that its aquifer has an unusually high hydraulic conductivity for the region, likely due to fractured limestone beneath the Haram. The law explains both why the well has never run dry and how fast it can replenish.',
+      checkQuestion: 'If you double the head difference (Δh), what happens to the flow rate?',
+      checkAnswer: 'The flow rate doubles. Darcy’s law is linear — Q is directly proportional to Δh/L. Doubling the driving force doubles the flow. This is why wells at the bottom of hills often produce more water: the head difference between the recharge area (hilltop) and the well is greater.',
+      codeIntro: 'Calculate groundwater flow rates using Darcy’s law.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
@@ -223,11 +223,11 @@ print(f"For Zamzam to produce 15 L/s with 30m head:")
 print(f"K needed = {K_zamzam:.2e} m/s")
 print("That's fractured limestone - highly permeable!")`,
       challenge: 'Try changing K to 1e-6 (clay). What happens to the flow rate? Now try K = 1e-2 (gravel). Plot all three K values on the same chart to see how material type dominates flow rate.',
-      successHint: 'Darcy\u2019s law is the foundation of hydrogeology. With just four measurements (K, A, \u0394h, L), you can predict how much water any aquifer will yield. Every water well on Earth obeys this equation.',
+      successHint: 'Darcy’s law is the foundation of hydrogeology. With just four measurements (K, A, Δh, L), you can predict how much water any aquifer will yield. Every water well on Earth obeys this equation.',
     },
     {
-      title: 'Water quality \u2014 what dissolves in groundwater?',
-      concept: `Groundwater is not pure H\u2082O. As it trickles through rock, it dissolves minerals. Limestone (CaCO\u2083) dissolves to give calcium and carbonate ions \u2014 this is what makes water "hard." Sandstone gives silica. Volcanic rock gives sodium, potassium, and sulfate.
+      title: 'Water quality — what dissolves in groundwater?',
+      concept: `Groundwater is not pure H₂O. As it trickles through rock, it dissolves minerals. Limestone (CaCO₃) dissolves to give calcium and carbonate ions — this is what makes water "hard." Sandstone gives silica. Volcanic rock gives sodium, potassium, and sulfate.
 
 The mineral content of groundwater tells a geologist exactly what rock the water has passed through. It is like a chemical fingerprint of the aquifer.
 
@@ -237,11 +237,11 @@ Zamzam water has been extensively analysed. Its mineral profile includes:
 - **Magnesium**: 38.9 mg/L (from dolomite rock)
 - **Total Dissolved Solids**: 1000 mg/L
 
-In the code, you will compare Zamzam\u2019s mineral content with other famous water sources and see how geology shapes water chemistry.`,
-      analogy: 'Imagine pouring water over a chocolate bar versus a glass marble. The chocolate dissolves into the water, changing its taste and colour. The marble does not. Groundwater passing through limestone is like water flowing over chocolate \u2014 it picks up dissolved minerals. The longer the contact time and the more soluble the rock, the more "flavour" the water acquires.',
-      storyConnection: 'Pilgrims have noted Zamzam\u2019s distinctive taste for centuries. That taste comes from its specific mineral profile, which in turn comes from the specific rock formations it passes through \u2014 Cretaceous limestone, alluvial sediments, and Precambrian basement rock beneath Mecca. The geology of the Hejaz region is written in every sip.',
+In the code, you will compare Zamzam’s mineral content with other famous water sources and see how geology shapes water chemistry.`,
+      analogy: 'Imagine pouring water over a chocolate bar versus a glass marble. The chocolate dissolves into the water, changing its taste and colour. The marble does not. Groundwater passing through limestone is like water flowing over chocolate — it picks up dissolved minerals. The longer the contact time and the more soluble the rock, the more "flavour" the water acquires.',
+      storyConnection: 'Pilgrims have noted Zamzam’s distinctive taste for centuries. That taste comes from its specific mineral profile, which in turn comes from the specific rock formations it passes through — Cretaceous limestone, alluvial sediments, and Precambrian basement rock beneath Mecca. The geology of the Hejaz region is written in every sip.',
       checkQuestion: 'If two wells are 1 km apart but tap different rock layers, will their water taste the same?',
-      checkAnswer: 'Almost certainly not. If one well taps limestone and the other taps sandstone, their mineral profiles will be completely different. The limestone well will have high calcium and carbonate. The sandstone well will have high silica. Water chemistry is a direct reflection of aquifer geology. This is why bottled water brands taste different \u2014 each comes from a different geological setting.',
+      checkAnswer: 'Almost certainly not. If one well taps limestone and the other taps sandstone, their mineral profiles will be completely different. The limestone well will have high calcium and carbonate. The sandstone well will have high silica. Water chemistry is a direct reflection of aquifer geology. This is why bottled water brands taste different — each comes from a different geological setting.',
       codeIntro: 'Compare mineral content of Zamzam with other water sources.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -285,25 +285,25 @@ print()
 print("Higher TDS = more dissolved minerals = stronger taste")
 print("Zamzam's unique taste IS its geological fingerprint")`,
       challenge: 'Add "Distilled" water (all minerals = 0, TDS = 0) and "Sea Water" (Na = 10,800, Ca = 412, Mg = 1,290, K = 380, TDS = 35,000). You will need to adjust the y-axis scale. How does Zamzam compare to seawater?',
-      successHint: 'Every water source has a unique mineral fingerprint determined by its geology. Hydrogeochemistry \u2014 the study of water chemistry \u2014 lets scientists trace where water came from, how old it is, and what rocks it passed through.',
+      successHint: 'Every water source has a unique mineral fingerprint determined by its geology. Hydrogeochemistry — the study of water chemistry — lets scientists trace where water came from, how old it is, and what rocks it passed through.',
     },
     {
-      title: 'Water pressure and depth \u2014 why deep wells flow',
-      concept: `Water pressure increases with depth. At the surface, pressure equals atmospheric pressure (about 101 kPa). For every metre of water depth, pressure increases by about **9.81 kPa** (the density of water \u00D7 gravity).
+      title: 'Water pressure and depth — why deep wells flow',
+      concept: `Water pressure increases with depth. At the surface, pressure equals atmospheric pressure (about 101 kPa). For every metre of water depth, pressure increases by about **9.81 kPa** (the density of water × gravity).
 
-This is why deep aquifers are under pressure. If you drill into a **confined aquifer** (one trapped between two impermeable layers), the water is under so much pressure that it may rise in the well above the aquifer level. If the pressure is high enough, water shoots out of the ground without pumping \u2014 this is called an **artesian well**.
+This is why deep aquifers are under pressure. If you drill into a **confined aquifer** (one trapped between two impermeable layers), the water is under so much pressure that it may rise in the well above the aquifer level. If the pressure is high enough, water shoots out of the ground without pumping — this is called an **artesian well**.
 
-The formula is: **P = \u03C1gh**
+The formula is: **P = ρgh**
 - P = pressure (Pa)
-- \u03C1 = water density (1000 kg/m\u00B3)
-- g = gravity (9.81 m/s\u00B2)
+- ρ = water density (1000 kg/m³)
+- g = gravity (9.81 m/s²)
 - h = depth (m)
 
 In the code, you will calculate pressure at different depths and determine whether a well would be artesian.`,
-      analogy: 'Imagine stacking books on your hand. Each book adds weight. At the bottom of the stack, your hand feels a lot of pressure. Water works the same way: each metre of water above you adds 9.81 kPa of pressure. At 100 metres depth, there is nearly 10 atmospheres of pressure \u2014 enough to push water up through a narrow pipe all by itself.',
-      storyConnection: 'Zamzam is traditionally described as "springing forth" when first discovered \u2014 water rising from the ground. This is consistent with artesian conditions: a confined aquifer under enough pressure to push water to the surface. The geological setting (a valley between hills with impermeable clay layers) is exactly the geometry that creates artesian flow.',
+      analogy: 'Imagine stacking books on your hand. Each book adds weight. At the bottom of the stack, your hand feels a lot of pressure. Water works the same way: each metre of water above you adds 9.81 kPa of pressure. At 100 metres depth, there is nearly 10 atmospheres of pressure — enough to push water up through a narrow pipe all by itself.',
+      storyConnection: 'Zamzam is traditionally described as "springing forth" when first discovered — water rising from the ground. This is consistent with artesian conditions: a confined aquifer under enough pressure to push water to the surface. The geological setting (a valley between hills with impermeable clay layers) is exactly the geometry that creates artesian flow.',
       checkQuestion: 'A well is drilled to 200m into a confined aquifer. The water rises to 5m below the surface. Is this an artesian well?',
-      checkAnswer: 'Almost. A "flowing artesian" well is one where water rises ABOVE the surface and flows without pumping. This well\u2019s water rises to 5m below the surface \u2014 it is an artesian well (water rises above the aquifer level) but not a "flowing" one. You still need a small pump to lift the last 5 metres. If the well were in a lower area (a valley), the same aquifer pressure might push water above the surface.',
+      checkAnswer: 'Almost. A "flowing artesian" well is one where water rises ABOVE the surface and flows without pumping. This well’s water rises to 5m below the surface — it is an artesian well (water rises above the aquifer level) but not a "flowing" one. You still need a small pump to lift the last 5 metres. If the well were in a lower area (a valley), the same aquifer pressure might push water above the surface.',
       codeIntro: 'Calculate water pressure at different depths and model artesian flow.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -358,11 +358,11 @@ print()
 print("An artesian well flows when the recharge area")
 print("is higher than the wellhead — pressure pushes water up!")`,
       challenge: 'Model a well at sea level that taps an aquifer recharged from mountains 500m above. How high does the water rise? In practice, friction losses reduce the rise. Add a friction factor that reduces the effective head by 30%. Does it still flow?',
-      successHint: 'Water pressure is what makes wells work. Understanding P = \u03C1gh lets you predict whether a well will flow, how much pumping it needs, and how deep you need to drill. Artesian wells are nature\u2019s free pumps, powered by gravity and geology.',
+      successHint: 'Water pressure is what makes wells work. Understanding P = ρgh lets you predict whether a well will flow, how much pumping it needs, and how deep you need to drill. Artesian wells are nature’s free pumps, powered by gravity and geology.',
     },
     {
-      title: 'Sustainable pumping \u2014 when wells run dry',
-      concept: `A well can only produce water as fast as the aquifer can supply it. If you pump faster than the aquifer recharges, the water table drops. This creates a **cone of depression** \u2014 a funnel-shaped dip in the water table centred on the well.
+      title: 'Sustainable pumping — when wells run dry',
+      concept: `A well can only produce water as fast as the aquifer can supply it. If you pump faster than the aquifer recharges, the water table drops. This creates a **cone of depression** — a funnel-shaped dip in the water table centred on the well.
 
 Pump even faster or for longer, and the cone deepens until the well runs dry. Worse, if many wells are pumping from the same aquifer, their cones of depression overlap, and the entire regional water table drops.
 
@@ -370,9 +370,9 @@ The rule for sustainability: **pumping rate must not exceed recharge rate**. In 
 
 In the code, you will simulate what happens when you pump at different rates and see how the water table responds over decades.`,
       analogy: 'Imagine a bathtub with the tap running slowly (recharge) and you pulling the plug halfway (pumping). If the drain is small, the tub stays full. If you open the drain wider than the tap flow, the tub empties. Groundwater is the tub, rain is the tap, and your well is the drain. Pump faster than it rains, and the tub eventually runs dry.',
-      storyConnection: 'The Saudi Geological Survey carefully manages Zamzam\u2019s pumping rate to ensure sustainability. During Hajj, when millions of pilgrims draw water, the well is pumped at 18.5 L/s for short periods, then allowed to recover. The management strategy is based on the same equations you are coding: balance pumping with recharge to ensure the well never runs dry.',
+      storyConnection: 'The Saudi Geological Survey carefully manages Zamzam’s pumping rate to ensure sustainability. During Hajj, when millions of pilgrims draw water, the well is pumped at 18.5 L/s for short periods, then allowed to recover. The management strategy is based on the same equations you are coding: balance pumping with recharge to ensure the well never runs dry.',
       checkQuestion: 'In the last 50 years, many wells in northern India have dried up. What went wrong?',
-      checkAnswer: 'Over-pumping. India\u2019s Green Revolution (1960s onward) encouraged farmers to drill millions of tube wells for irrigation. Each well pumps more water than monsoon rain can recharge. The water tables in Punjab, Haryana, and Rajasthan have dropped by 10-50 metres. Some aquifers that took 10,000 years to fill are being emptied in decades. This is the world\u2019s largest groundwater crisis, affecting 600 million people.',
+      checkAnswer: 'Over-pumping. India’s Green Revolution (1960s onward) encouraged farmers to drill millions of tube wells for irrigation. Each well pumps more water than monsoon rain can recharge. The water tables in Punjab, Haryana, and Rajasthan have dropped by 10-50 metres. Some aquifers that took 10,000 years to fill are being emptied in decades. This is the world’s largest groundwater crisis, affecting 600 million people.',
       codeIntro: 'Simulate long-term water table response to different pumping rates.',
       code: `import numpy as np
 import matplotlib.pyplot as plt

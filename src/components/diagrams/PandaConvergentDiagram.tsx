@@ -34,8 +34,8 @@ export default function PandaConvergentDiagram() {
       <svg viewBox="0 0 580 460" className="w-full max-w-xl mx-auto" role="img" aria-label="Convergent evolution: red panda, raccoon, and giant panda evolved similar facial masks independently">
         <rect width="580" height="460" rx="12" className="fill-slate-900" />
 
-        <text x="290" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#c084fc">Convergent Evolution \u2014 Three Masks, Three Families</text>
-        <text x="290" y="46" textAnchor="middle" fontSize="11" fill="#94a3b8">Similar problems \u2192 similar solutions, evolved independently</text>
+        <text x="290" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#c084fc">Convergent Evolution — Three Masks, Three Families</text>
+        <text x="290" y="46" textAnchor="middle" fontSize="11" fill="#94a3b8">Similar problems → similar solutions, evolved independently</text>
 
         {/* Phylogenetic tree at the top */}
         <g transform="translate(100, 65)">
@@ -56,9 +56,9 @@ export default function PandaConvergentDiagram() {
           <text x="330" y="70" textAnchor="middle" fontSize="10" fill="#c084fc">Ursidae</text>
 
           {/* X marks showing independent evolution */}
-          <text x="50" y="85" textAnchor="middle" fontSize="10" fill="#fbbf24">\u2717 Mask evolves</text>
-          <text x="190" y="85" textAnchor="middle" fontSize="10" fill="#fbbf24">\u2717 Mask evolves</text>
-          <text x="330" y="85" textAnchor="middle" fontSize="10" fill="#fbbf24">\u2717 Mask evolves</text>
+          <text x="50" y="85" textAnchor="middle" fontSize="10" fill="#fbbf24">✗ Mask evolves</text>
+          <text x="190" y="85" textAnchor="middle" fontSize="10" fill="#fbbf24">✗ Mask evolves</text>
+          <text x="330" y="85" textAnchor="middle" fontSize="10" fill="#fbbf24">✗ Mask evolves</text>
         </g>
 
         {/* Animal cards */}
@@ -99,15 +99,15 @@ export default function PandaConvergentDiagram() {
               {/* Not related indicator */}
               {i < animals.length - 1 && (
                 <g transform={`translate(175, 50)`}>
-                  <text x="8" y="0" fontSize="16" fill="#ef4444">\u2260</text>
+                  <text x="8" y="0" fontSize="16" fill="#ef4444">≠</text>
                 </g>
               )}
 
               {/* Shared traits */}
               <text x="88" y="200" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#86efac">Shared traits:</text>
-              <text x="88" y="214" textAnchor="middle" fontSize="10" fill="#d1d5db">\u2022 Dark eye patches</text>
-              <text x="88" y="228" textAnchor="middle" fontSize="10" fill="#d1d5db">\u2022 Eats plants/omnivore</text>
-              <text x="88" y="242" textAnchor="middle" fontSize="10" fill="#d1d5db">\u2022 Forest dweller</text>
+              <text x="88" y="214" textAnchor="middle" fontSize="10" fill="#d1d5db">• Dark eye patches</text>
+              <text x="88" y="228" textAnchor="middle" fontSize="10" fill="#d1d5db">• Eats plants/omnivore</text>
+              <text x="88" y="242" textAnchor="middle" fontSize="10" fill="#d1d5db">• Forest dweller</text>
             </g>
           );
         })}
@@ -115,7 +115,7 @@ export default function PandaConvergentDiagram() {
         {/* Bottom insight */}
         <rect x="30" y="425" width="520" height="26" rx="6" fill="#c084fc" opacity="0.12" />
         <text x="290" y="443" textAnchor="middle" fontSize="11" fill="#c084fc">
-          Same solution, different ancestors \u2014 proof that evolution finds similar answers to similar problems
+          Same solution, different ancestors — proof that evolution finds similar answers to similar problems
         </text>
       </svg>
     </div>

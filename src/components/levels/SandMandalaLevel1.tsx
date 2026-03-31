@@ -34,7 +34,7 @@ export default function SandMandalaLevel1() {
 
 In Python, we use **Matplotlib** to draw on an x-y coordinate plane. The centre of a mandala sits at (0, 0). A point 3 units to the right and 2 units up is (3, 2). To draw a line, you give Python a list of x-values and a list of y-values.
 
-The code below draws a simple cross and circle — the first marks a monk would make on the mandala table. \`plt.plot()\` connects points with lines, and \`np.cos()\` / \`np.sin()\` trace out a circle using angles from 0 to 2\u03c0.
+The code below draws a simple cross and circle — the first marks a monk would make on the mandala table. \`plt.plot()\` connects points with lines, and \`np.cos()\` / \`np.sin()\` trace out a circle using angles from 0 to 2π.
 
 **Key idea:** Every complex pattern is built from simple coordinates. The monks' chalk grid is a coordinate system.`,
       analogy: 'Coordinates are like a postal address for every point on the page. "3 units right, 2 units up" tells Python exactly where to place a dot, just as "House 3, Lane 2" tells a postman exactly where to deliver a letter. The grid is the map; coordinates are the addresses.',
@@ -85,8 +85,8 @@ print("Every mandala starts with these guide lines.")`,
 There are two basic symmetry operations:
 - **Reflection** (mirror): flip a point across a line. Reflecting (x, y) across the y-axis gives (-x, y). Across the x-axis gives (x, -y).
 - **Rotation**: spin a point around the centre by an angle. The formula is:
-  x' = x*cos(\u03b8) - y*sin(\u03b8)
-  y' = x*sin(\u03b8) + y*cos(\u03b8)
+  x' = x*cos(θ) - y*sin(θ)
+  y' = x*sin(θ) + y*cos(θ)
 
 A mandala with **4-fold rotational symmetry** means: draw one quarter, then rotate it by 90, 180, and 270 degrees to fill the rest. You only need to design 1/4 of the pattern — the math generates the other three.
 
@@ -269,9 +269,9 @@ print("\\nOnly 3 regular polygons tile alone: 3, 4, 6 sides.")`,
       title: 'Spiral patterns — golden angle and Fibonacci',
       concept: `Look at the centre of a sunflower, the arrangement of seeds in a pine cone, or the spiral of a nautilus shell. These all follow the **Fibonacci sequence**: 1, 1, 2, 3, 5, 8, 13, 21, ...
 
-Each number is the sum of the two before it. The ratio between consecutive Fibonacci numbers converges to the **golden ratio** \u03c6 = 1.618...
+Each number is the sum of the two before it. The ratio between consecutive Fibonacci numbers converges to the **golden ratio** φ = 1.618...
 
-The **golden angle** is 360 / \u03c6\u00b2 = 137.5 degrees. If you place each new point by rotating 137.5 degrees from the last one and moving slightly outward, you get the most efficient packing — no two points line up in a straight row, and the pattern fills space evenly.
+The **golden angle** is 360 / φ² = 137.5 degrees. If you place each new point by rotating 137.5 degrees from the last one and moving slightly outward, you get the most efficient packing — no two points line up in a straight row, and the pattern fills space evenly.
 
 This appears in the mandala too. The lotus petals spiral outward following similar angular spacing. Nature and sacred geometry converge on the same mathematics because both solve the same problem: how to fill circular space efficiently.
 

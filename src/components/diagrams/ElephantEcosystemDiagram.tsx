@@ -101,7 +101,7 @@ const ElephantEcosystemDiagram = () => {
           Sunlight reaches ground
         </text>
         <text x="507" y="300" textAnchor="middle" className="small fill-amber-600 dark:fill-amber-300">
-          Grasslands grow \u2192 grazer habitat
+          Grasslands grow → grazer habitat
         </text>
 
         {/* 5. Seed dispersal — bottom center */}

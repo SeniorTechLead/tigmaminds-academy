@@ -11,7 +11,7 @@ export default function LeopardCameraTrapDiagram() {
 
         {/* Title */}
         <text x="300" y="26" textAnchor="middle" fontSize="13" className="fill-gray-200" fontWeight="700">
-          Camera Trap \u2014 Photography Without a Photographer
+          Camera Trap — Photography Without a Photographer
         </text>
 
         {/* Forest background */}
@@ -101,7 +101,7 @@ export default function LeopardCameraTrapDiagram() {
             <text x={step.x} y="427" fontSize="10" className="fill-amber-300" fontWeight="600">{step.label}</text>
             <text x={step.x} y="440" fontSize="9" className="fill-gray-400">{step.sub}</text>
             {i < 3 && (
-              <text x={step.x + 120} y="432" fontSize="14" className="fill-gray-500">\u2192</text>
+              <text x={step.x + 120} y="432" fontSize="14" className="fill-gray-500">→</text>
             )}
           </g>
         ))}

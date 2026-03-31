@@ -15,7 +15,7 @@ export default function LogicGateSymbolsDiagram() {
   }[] = [
     {
       name: 'AND',
-      expr: 'A \u00B7 B',
+      expr: 'A · B',
       rows: [[0,0,0],[0,1,0],[1,0,0],[1,1,1]],
       body: (cx, cy) => (
         <g>
@@ -37,7 +37,7 @@ export default function LogicGateSymbolsDiagram() {
     },
     {
       name: 'NOT',
-      expr: '\u00ACA',
+      expr: '¬A',
       rows: [[0,-1,1],[1,-1,0]],
       body: (cx, cy) => (
         <g>
@@ -50,7 +50,7 @@ export default function LogicGateSymbolsDiagram() {
     },
     {
       name: 'NAND',
-      expr: '\u00AC(A \u00B7 B)',
+      expr: '¬(A · B)',
       rows: [[0,0,1],[0,1,1],[1,0,1],[1,1,0]],
       body: (cx, cy) => (
         <g>
@@ -63,7 +63,7 @@ export default function LogicGateSymbolsDiagram() {
     },
     {
       name: 'NOR',
-      expr: '\u00AC(A + B)',
+      expr: '¬(A + B)',
       rows: [[0,0,1],[0,1,0],[1,0,0],[1,1,0]],
       body: (cx, cy) => (
         <g>
@@ -76,7 +76,7 @@ export default function LogicGateSymbolsDiagram() {
     },
     {
       name: 'XOR',
-      expr: 'A \u2295 B',
+      expr: 'A ⊕ B',
       rows: [[0,0,0],[0,1,1],[1,0,1],[1,1,0]],
       body: (cx, cy) => (
         <g>
@@ -89,7 +89,7 @@ export default function LogicGateSymbolsDiagram() {
     },
     {
       name: 'XNOR',
-      expr: '\u00AC(A \u2295 B)',
+      expr: '¬(A ⊕ B)',
       rows: [[0,0,1],[0,1,0],[1,0,0],[1,1,1]],
       body: (cx, cy) => (
         <g>
@@ -169,7 +169,7 @@ export default function LogicGateSymbolsDiagram() {
                 const vals = isNot ? [r[0], r[2]] : r;
                 return vals.map((v, vi) => (
                   <text key={`${ri}-${vi}`} x={ox + 90 + vi * 20} y={oy + 78 + ri * 11} textAnchor="middle" className={tableCell} fontSize="10">
-                    {v === -1 ? '\u2013' : v}
+                    {v === -1 ? '–' : v}
                   </text>
                 ));
               })}

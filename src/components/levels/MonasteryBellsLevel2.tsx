@@ -29,23 +29,23 @@ export default function MonasteryBellsLevel2() {
 
   const miniLessons = [
     {
-      title: 'The wave equation \u2014 deriving v = f\u03BB from first principles',
-      concept: `In Level 1 you used the formula v = f \u00D7 \u03BB without proof. Now let\u2019s derive it.
+      title: 'The wave equation — deriving v = fλ from first principles',
+      concept: `In Level 1 you used the formula v = f × λ without proof. Now let’s derive it.
 
 Imagine watching one point in space as a sound wave passes. The pressure rises and falls in a repeating cycle. The time for one complete cycle is the **period** T (seconds). Frequency is the inverse: **f = 1/T**.
 
-Now imagine taking a snapshot of the wave at one instant. The distance from one peak to the next is the **wavelength** \u03BB (metres).
+Now imagine taking a snapshot of the wave at one instant. The distance from one peak to the next is the **wavelength** λ (metres).
 
-In one period T, the wave front advances by one wavelength \u03BB. Speed = distance/time:
+In one period T, the wave front advances by one wavelength λ. Speed = distance/time:
 
-**v = \u03BB / T = \u03BB \u00D7 (1/T) = \u03BB \u00D7 f**
+**v = λ / T = λ × (1/T) = λ × f**
 
-That\u2019s the derivation: v = f\u03BB falls directly from the definitions of speed, period, and wavelength. The code below verifies this numerically and explores what happens when you change each variable.`,
-      analogy: 'Picture waves at a beach. You count that 5 waves arrive in 10 seconds (frequency = 0.5 Hz, period = 2 seconds). You measure the distance between wave crests: 4 metres. Speed = 4 m \u00D7 0.5 Hz = 2 m/s. You can verify by timing how long one crest takes to travel a measured distance.',
-      storyConnection: 'The monastery bells send out sound waves that must obey v = f\u03BB. At Tawang\u2019s altitude, v \u2248 334 m/s. A 200 Hz bell therefore has \u03BB = 334/200 = 1.67 m. This wavelength determines how the sound diffracts around corners and through doorways.',
+That’s the derivation: v = fλ falls directly from the definitions of speed, period, and wavelength. The code below verifies this numerically and explores what happens when you change each variable.`,
+      analogy: 'Picture waves at a beach. You count that 5 waves arrive in 10 seconds (frequency = 0.5 Hz, period = 2 seconds). You measure the distance between wave crests: 4 metres. Speed = 4 m × 0.5 Hz = 2 m/s. You can verify by timing how long one crest takes to travel a measured distance.',
+      storyConnection: 'The monastery bells send out sound waves that must obey v = fλ. At Tawang’s altitude, v ≈ 334 m/s. A 200 Hz bell therefore has λ = 334/200 = 1.67 m. This wavelength determines how the sound diffracts around corners and through doorways.',
       checkQuestion: 'A sound wave has a wavelength of 0.5 m and a frequency of 686 Hz. What is the speed of sound in this medium?',
-      checkAnswer: 'v = f\u03BB = 686 \u00D7 0.5 = 343 m/s. This is the speed of sound in air at about 20\u00B0C. If you got a different speed, the medium must be different (water, steel, etc.).',
-      codeIntro: 'Verify v = f\u03BB numerically and explore parameter relationships.',
+      checkAnswer: 'v = fλ = 686 × 0.5 = 343 m/s. This is the speed of sound in air at about 20°C. If you got a different speed, the medium must be different (water, steel, etc.).',
+      codeIntro: 'Verify v = fλ numerically and explore parameter relationships.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
@@ -97,22 +97,22 @@ for f in [50, 200, 440, 1000, 4000]:
     wl = v_sound / f
     T = 1/f
     print(f"  f={f:>5} Hz → λ={wl:>6.2f} m, T={T*1000:>6.2f} ms, v=f×λ={f*wl:.0f} m/s ✓")`,
-      challenge: 'Calculate wavelengths for the same frequencies but in water (v = 1480 m/s). A whale singing at 50 Hz underwater \u2014 what is the wavelength? Could that wave fit inside a swimming pool?',
-      successHint: 'v = f\u03BB is not just a formula to memorise. It is a logical consequence of what speed, frequency, and wavelength mean. If you understand why it works, you can derive it yourself any time.',
+      challenge: 'Calculate wavelengths for the same frequencies but in water (v = 1480 m/s). A whale singing at 50 Hz underwater — what is the wavelength? Could that wave fit inside a swimming pool?',
+      successHint: 'v = fλ is not just a formula to memorise. It is a logical consequence of what speed, frequency, and wavelength mean. If you understand why it works, you can derive it yourself any time.',
     },
     {
-      title: 'Resonance \u2014 why the bell rings and the table does not',
+      title: 'Resonance — why the bell rings and the table does not',
       concept: `Strike a bell and it rings for seconds. Strike a table and you get a dull thud. Why?
 
-Every object has **natural frequencies** \u2014 the frequencies at which it prefers to vibrate. A bell is designed so that its natural frequencies produce clean, sustained tones. A table\u2019s natural frequencies are heavily **damped** \u2014 the energy is absorbed quickly by the wood.
+Every object has **natural frequencies** — the frequencies at which it prefers to vibrate. A bell is designed so that its natural frequencies produce clean, sustained tones. A table’s natural frequencies are heavily **damped** — the energy is absorbed quickly by the wood.
 
-**Resonance** occurs when you drive an object at one of its natural frequencies. The vibrations build up, growing larger and larger. This is how an opera singer can shatter a glass: they match the glass\u2019s natural frequency, and the amplitude builds until the glass cannot flex any more.
+**Resonance** occurs when you drive an object at one of its natural frequencies. The vibrations build up, growing larger and larger. This is how an opera singer can shatter a glass: they match the glass’s natural frequency, and the amplitude builds until the glass cannot flex any more.
 
 The code models a damped oscillator driven at different frequencies. At the natural frequency, the amplitude peaks dramatically.`,
-      analogy: 'Push a child on a swing. If you push at random times, nothing much happens. But if you push at exactly the right moment (matching the swing\u2019s natural frequency), the swing goes higher and higher. That is resonance: small, well-timed inputs building to large oscillations.',
+      analogy: 'Push a child on a swing. If you push at random times, nothing much happens. But if you push at exactly the right moment (matching the swing’s natural frequency), the swing goes higher and higher. That is resonance: small, well-timed inputs building to large oscillations.',
       storyConnection: 'Sangha was designed to resonate at specific frequencies. The bronze alloy, bell profile, and thickness were all chosen so that certain modes vibrate strongly and sustain long after being struck. The crack disrupted this design, damping some modes and detuning others.',
       checkQuestion: 'Soldiers are told to break step when crossing a bridge. Why?',
-      checkAnswer: 'If soldiers march in step, their footfalls are periodic and could match the bridge\u2019s natural frequency. This would drive the bridge into resonance, causing dangerously large oscillations. The Tacoma Narrows Bridge collapsed in 1940 partly due to wind-driven resonance. Breaking step ensures no single frequency is reinforced.',
+      checkAnswer: 'If soldiers march in step, their footfalls are periodic and could match the bridge’s natural frequency. This would drive the bridge into resonance, causing dangerously large oscillations. The Tacoma Narrows Bridge collapsed in 1940 partly due to wind-driven resonance. Breaking step ensures no single frequency is reinforced.',
       codeIntro: 'Model a driven oscillator and find the resonance peak.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -165,23 +165,23 @@ print("Q factor (quality) = f₀ / bandwidth of resonance peak")
 print(f"Bell Q ≈ {f0/5:.0f} (sharp, selective)")
 print(f"Drum Q ≈ {f0/20:.0f} (moderate)")
 print(f"Table Q ≈ {f0/80:.0f} (barely resonant)")`,
-      challenge: 'Find the Q factor (f\u2080 / damping) for each material. A crystal wine glass has Q \u2248 1000. What would its resonance curve look like? Add it to the plot.',
+      challenge: 'Find the Q factor (f₀ / damping) for each material. A crystal wine glass has Q ≈ 1000. What would its resonance curve look like? Add it to the plot.',
       successHint: 'Resonance is everywhere: musical instruments, radio tuning, microwave ovens, MRI machines, and bridges. Understanding it means understanding how energy builds up in any vibrating system.',
     },
     {
-      title: 'Superposition \u2014 when waves meet',
+      title: 'Superposition — when waves meet',
       concept: `When two sound waves arrive at the same point, they do not bounce off each other. They pass right through and simply **add**. This is the **principle of superposition**: at every point, the total displacement equals the sum of individual displacements.
 
-When peaks align with peaks: **constructive interference** \u2014 the result is louder.
-When peaks align with troughs: **destructive interference** \u2014 the result is quieter or silent.
+When peaks align with peaks: **constructive interference** — the result is louder.
+When peaks align with troughs: **destructive interference** — the result is quieter or silent.
 
 This is the physics behind noise-cancelling headphones: they detect incoming sound, generate a wave that is the exact inverse (flipped), and add it. Peak + trough = zero = silence.
 
 The code demonstrates superposition with two waves of different frequencies and shows how interference creates complex patterns.`,
-      analogy: 'Drop two stones in a pond. Where two ripple crests meet, the water humps up extra high (constructive). Where a crest meets a trough, the water stays flat (destructive). The stones do not \u201Cblock\u201D each other\u2019s ripples \u2014 the waves pass through and add.',
-      storyConnection: 'In the monastery prayer hall, eight bells ring simultaneously. Their sound waves overlap and superpose. At some spots in the room, certain frequencies are amplified (constructive interference). At others, they partially cancel. This is why the bell sounds different depending on where you stand \u2014 something Dorji would have noticed instinctively.',
+      analogy: 'Drop two stones in a pond. Where two ripple crests meet, the water humps up extra high (constructive). Where a crest meets a trough, the water stays flat (destructive). The stones do not “block” each other’s ripples — the waves pass through and add.',
+      storyConnection: 'In the monastery prayer hall, eight bells ring simultaneously. Their sound waves overlap and superpose. At some spots in the room, certain frequencies are amplified (constructive interference). At others, they partially cancel. This is why the bell sounds different depending on where you stand — something Dorji would have noticed instinctively.',
       checkQuestion: 'If two identical waves with amplitude A meet perfectly in phase (peaks aligned), what is the resulting amplitude?',
-      checkAnswer: '2A. Perfect constructive interference doubles the amplitude. Since loudness (intensity) is proportional to amplitude squared, the sound is 4\u00D7 as intense (about 6 dB louder). This is why choir sections are louder than solo singers \u2014 constructive interference of in-phase voices.',
+      checkAnswer: '2A. Perfect constructive interference doubles the amplitude. Since loudness (intensity) is proportional to amplitude squared, the sound is 4× as intense (about 6 dB louder). This is why choir sections are louder than solo singers — constructive interference of in-phase voices.',
       codeIntro: 'Visualize constructive and destructive interference.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -234,26 +234,26 @@ print("Where peak meets trough → destructive interference → softer")
 print()
 print("Noise-cancelling headphones use destructive interference:")
 print("  They generate the INVERSE of incoming noise → sum = silence")`,
-      challenge: 'Set f2 = f1 (same frequency). What happens? Now set f2 = f1 but shift it by half a period (add np.pi to the phase). That is perfect destructive interference \u2014 total silence from two sound sources.',
+      challenge: 'Set f2 = f1 (same frequency). What happens? Now set f2 = f1 but shift it by half a period (add np.pi to the phase). That is perfect destructive interference — total silence from two sound sources.',
       successHint: 'Superposition explains beat frequencies, noise cancellation, room acoustics, and even the bright and dark bands in diffraction patterns. Waves adding is one of the most fundamental concepts in physics.',
     },
     {
-      title: 'The decibel scale \u2014 measuring loudness',
-      concept: `Human hearing spans an enormous range. The quietest sound you can hear has an intensity of about 10\u207B\u00B9\u00B2 W/m\u00B2. A rock concert is about 1 W/m\u00B2. That is a ratio of **one trillion to one**.
+      title: 'The decibel scale — measuring loudness',
+      concept: `Human hearing spans an enormous range. The quietest sound you can hear has an intensity of about 10⁻¹² W/m². A rock concert is about 1 W/m². That is a ratio of **one trillion to one**.
 
 Working with such huge ranges requires a **logarithmic** scale. The **decibel (dB)** scale compresses this range:
 
-**dB = 10 \u00D7 log\u2081\u2080(I / I\u2080)**
+**dB = 10 × log₁₀(I / I₀)**
 
-where I\u2080 = 10\u207B\u00B9\u00B2 W/m\u00B2 (threshold of hearing).
+where I₀ = 10⁻¹² W/m² (threshold of hearing).
 
 Key landmarks: 0 dB = threshold of hearing. 60 dB = conversation. 85 dB = damage begins with prolonged exposure. 120 dB = pain threshold. 194 dB = loudest possible in air.
 
-Every increase of 10 dB means the sound is 10\u00D7 more intense. Every 3 dB is a doubling of intensity. The code explores this scale and places monastery bells in context.`,
-      analogy: 'The Richter scale for earthquakes works the same way. A magnitude 5 earthquake is not 25% stronger than magnitude 4 \u2014 it is **10 times** stronger. The decibel scale uses the same logic: each step of 10 dB means 10\u00D7 more energy. This logarithmic compression matches how our ears actually perceive loudness.',
-      storyConnection: 'A large bronze bell like Sangha, struck with a heavy mallet, produces about 90-100 dB at 1 metre. At 5 km distance, atmospheric absorption and distance reduce this to perhaps 30-40 dB \u2014 still audible in the mountain silence. The thin air at Tawang\u2019s altitude actually absorbs slightly less sound per kilometre than sea level air.',
+Every increase of 10 dB means the sound is 10× more intense. Every 3 dB is a doubling of intensity. The code explores this scale and places monastery bells in context.`,
+      analogy: 'The Richter scale for earthquakes works the same way. A magnitude 5 earthquake is not 25% stronger than magnitude 4 — it is **10 times** stronger. The decibel scale uses the same logic: each step of 10 dB means 10× more energy. This logarithmic compression matches how our ears actually perceive loudness.',
+      storyConnection: 'A large bronze bell like Sangha, struck with a heavy mallet, produces about 90-100 dB at 1 metre. At 5 km distance, atmospheric absorption and distance reduce this to perhaps 30-40 dB — still audible in the mountain silence. The thin air at Tawang’s altitude actually absorbs slightly less sound per kilometre than sea level air.',
       checkQuestion: 'A sound of 70 dB is how many times more intense than a sound of 40 dB?',
-      checkAnswer: '1,000 times. The difference is 30 dB. Each 10 dB = 10\u00D7. So 30 dB = 10 \u00D7 10 \u00D7 10 = 1,000\u00D7. Alternatively: 10^(30/10) = 10\u00B3 = 1,000. Despite being 1,000\u00D7 more intense, 70 dB only *sounds* about 8\u00D7 louder \u2014 our perception is logarithmic too.',
+      checkAnswer: '1,000 times. The difference is 30 dB. Each 10 dB = 10×. So 30 dB = 10 × 10 × 10 = 1,000×. Alternatively: 10^(30/10) = 10³ = 1,000. Despite being 1,000× more intense, 70 dB only *sounds* about 8× louder — our perception is logarithmic too.',
       codeIntro: 'Explore the decibel scale and place everyday sounds on it.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -318,22 +318,22 @@ print("  0 dB → 120 dB (pain): 1,000,000,000,000× (10¹² times)")
 print()
 print("Your ears compress this trillion-fold range into")
 print("a manageable perception. That is why we use dB.")`,
-      challenge: 'A bell produces 95 dB at 1 metre. Sound intensity drops as 1/r\u00B2 (inverse square law). Calculate the dB level at 10m, 100m, and 5000m. At what distance does it drop below 30 dB (library quiet)?',
+      challenge: 'A bell produces 95 dB at 1 metre. Sound intensity drops as 1/r² (inverse square law). Calculate the dB level at 10m, 100m, and 5000m. At what distance does it drop below 30 dB (library quiet)?',
       successHint: 'The decibel scale is used everywhere: audio engineering, acoustics, electronics, telecommunications. Understanding logarithmic scales is essential for any quantitative field.',
     },
     {
-      title: 'Diffraction \u2014 how sound bends around corners',
+      title: 'Diffraction — how sound bends around corners',
       concept: `You can hear someone talking around a corner even though you cannot see them. Light does not bend around corners (much), but sound does. Why?
 
 The answer is **diffraction**: waves bend around obstacles and spread through openings when the obstacle or opening is comparable in size to the wavelength.
 
-Sound at 200 Hz has \u03BB \u2248 1.7 m. Doorways are about 1 m wide. Since the opening is comparable to \u03BB, the sound wave bends dramatically through the doorway and spreads into the room beyond. Light has \u03BB \u2248 0.0005 mm \u2014 millions of times smaller than a doorway \u2014 so it barely diffracts at all.
+Sound at 200 Hz has λ ≈ 1.7 m. Doorways are about 1 m wide. Since the opening is comparable to λ, the sound wave bends dramatically through the doorway and spreads into the room beyond. Light has λ ≈ 0.0005 mm — millions of times smaller than a doorway — so it barely diffracts at all.
 
 This explains why you can hear the monastery bell from behind walls but need a window to see the bell tower.`,
-      analogy: 'Imagine water flowing through a gap in a wall. If the gap is much wider than the wavelength of the ripples, the water flows straight through as a beam. But if the gap is about the same size as the wavelength, the ripples spread out in a fan shape on the other side. Sound through a doorway is exactly this \u2014 the doorway acts as a new source of spreading waves.',
-      storyConnection: 'The monastery\u2019s prayer hall has thick walls and narrow doorways. Low-frequency bell sounds (long wavelength) diffract through doorways and around corners easily, filling the whole monastery. High-frequency sounds (short wavelength) are more directional. This is why the deep bells were heard throughout the complex while the small, bright bells were mainly heard in the prayer hall.',
+      analogy: 'Imagine water flowing through a gap in a wall. If the gap is much wider than the wavelength of the ripples, the water flows straight through as a beam. But if the gap is about the same size as the wavelength, the ripples spread out in a fan shape on the other side. Sound through a doorway is exactly this — the doorway acts as a new source of spreading waves.',
+      storyConnection: 'The monastery’s prayer hall has thick walls and narrow doorways. Low-frequency bell sounds (long wavelength) diffract through doorways and around corners easily, filling the whole monastery. High-frequency sounds (short wavelength) are more directional. This is why the deep bells were heard throughout the complex while the small, bright bells were mainly heard in the prayer hall.',
       checkQuestion: 'Bass notes from a subwoofer can be heard equally well in every corner of a room. Treble notes from a tweeter are loudest directly in front of it. Why?',
-      checkAnswer: 'Bass notes (low frequency, long wavelength ~2-17 m) diffract strongly around furniture and walls, filling the room evenly. Treble notes (high frequency, short wavelength ~2-17 cm) barely diffract \u2014 they travel in straight beams like light. This is why subwoofer placement barely matters, but tweeter placement and orientation are critical in audio design.',
+      checkAnswer: 'Bass notes (low frequency, long wavelength ~2-17 m) diffract strongly around furniture and walls, filling the room evenly. Treble notes (high frequency, short wavelength ~2-17 cm) barely diffract — they travel in straight beams like light. This is why subwoofer placement barely matters, but tweeter placement and orientation are critical in audio design.',
       codeIntro: 'Model diffraction through a monastery doorway for different frequencies.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -403,18 +403,18 @@ for f in frequencies:
       successHint: 'Diffraction explains why you can hear around corners, why concert halls have specific shapes, and why whale songs travel across oceans. The ratio of wavelength to obstacle size is the key parameter in all wave physics.',
     },
     {
-      title: 'Inverse square law \u2014 how bell sounds fade with distance',
-      concept: `As sound spreads outward from the bell, it covers an ever-larger area. At distance r from the source, the sound energy is spread over a sphere of area 4\u03C0r\u00B2. Double the distance \u2192 4\u00D7 the area \u2192 1/4 the intensity.
+      title: 'Inverse square law — how bell sounds fade with distance',
+      concept: `As sound spreads outward from the bell, it covers an ever-larger area. At distance r from the source, the sound energy is spread over a sphere of area 4πr². Double the distance → 4× the area → 1/4 the intensity.
 
-This is the **inverse square law**: **I \u221D 1/r\u00B2**.
+This is the **inverse square law**: **I ∝ 1/r²**.
 
 In decibels, doubling the distance reduces the level by about 6 dB.
 
-The code calculates how Sangha\u2019s sound fades as it travels from the tower to distant villages, accounting for both the inverse square law and atmospheric absorption.`,
-      analogy: 'Imagine painting a balloon. As you inflate it, the paint stretches thinner over a larger surface. Sound energy does the same: the same total energy is spread over a sphere that grows as r\u00B2, so the energy per unit area shrinks as 1/r\u00B2.',
+The code calculates how Sangha’s sound fades as it travels from the tower to distant villages, accounting for both the inverse square law and atmospheric absorption.`,
+      analogy: 'Imagine painting a balloon. As you inflate it, the paint stretches thinner over a larger surface. Sound energy does the same: the same total energy is spread over a sphere that grows as r², so the energy per unit area shrinks as 1/r².',
       storyConnection: 'Yak herders 5 km away could hear Sangha. At 5,000 m, the inverse square law alone would reduce a 95 dB bell to about 21 dB. But atmospheric absorption adds further loss. Mountain silence (ambient ~20 dB) means even 25 dB is audible. The monastery was positioned on a ridge where the sound could radiate freely into the valley.',
       checkQuestion: 'A speaker produces 100 dB at 1 metre. What is the level at 10 metres? At 100 metres?',
-      checkAnswer: 'At 10 m: 100 \u2212 20\u00D7log\u2081\u2080(10) = 100 \u2212 20 = 80 dB. At 100 m: 100 \u2212 20\u00D7log\u2081\u2080(100) = 100 \u2212 40 = 60 dB. Each factor of 10 in distance reduces level by 20 dB (because 10\u00B2 = 100, and 10\u00D7log\u2081\u2080(100) = 20).',
+      checkAnswer: 'At 10 m: 100 − 20×log₁₀(10) = 100 − 20 = 80 dB. At 100 m: 100 − 20×log₁₀(100) = 100 − 40 = 60 dB. Each factor of 10 in distance reduces level by 20 dB (because 10² = 100, and 10×log₁₀(100) = 20).',
       codeIntro: 'Model how bell sound fades with distance using the inverse square law.',
       code: `import numpy as np
 import matplotlib.pyplot as plt

@@ -5,15 +5,15 @@ const reasons = [
     title: 'Low Oxygen',
     color: '#3b82f6',
     bg: '#3b82f615',
-    icon: 'O\u2082\u2193',
-    detail: 'When dissolved O\u2082 drops below 4 mg/L, fish leap to gulp air directly',
+    icon: 'O₂↓',
+    detail: 'When dissolved O₂ drops below 4 mg/L, fish leap to gulp air directly',
     trigger: 'Warm water, algal blooms, stagnant conditions',
   },
   {
     title: 'Parasite Removal',
     color: '#22c55e',
     bg: '#22c55e15',
-    icon: '\u2716',
+    icon: '✖',
     detail: 'Landing hard on the surface dislodges leeches, sea lice, and gill flukes',
     trigger: 'Heavy parasite loads on gills, fins, or scales',
   },
@@ -29,7 +29,7 @@ const reasons = [
     title: 'Migration Barriers',
     color: '#a855f7',
     bg: '#a855f715',
-    icon: '\u2191',
+    icon: '↑',
     detail: 'Salmon and mahseer leap waterfalls to reach upstream spawning grounds',
     trigger: 'Spawning season, upstream obstacles, rapids',
   },
@@ -111,7 +111,7 @@ export default function FishJumpReasonsDiagram() {
       {/* Bottom insight */}
       <rect x="100" y="330" width="392" height="30" rx="5" className="fill-blue-50 dark:fill-blue-950" stroke="#3b82f6" strokeWidth="1" />
       <text x="296" y="350" textAnchor="middle" fontSize="9" fontWeight="600" className="fill-blue-700 dark:fill-blue-300">
-        A jump is never random \u2014 it is always a response to a specific environmental pressure
+        A jump is never random — it is always a response to a specific environmental pressure
       </text>
     </svg>
   );

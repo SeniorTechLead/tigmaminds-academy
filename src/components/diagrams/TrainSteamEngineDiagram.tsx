@@ -75,7 +75,7 @@ const TrainSteamEngineDiagram = () => {
           1. FIREBOX
         </text>
         <text x="80" y="232" textAnchor="middle" className="ts-tiny fill-red-600 dark:fill-red-400">
-          Coal burns at ~1200\u00B0C
+          Coal burns at ~1200°C
         </text>
 
         {/* Boiler */}
@@ -92,7 +92,7 @@ const TrainSteamEngineDiagram = () => {
           Water heated to steam
         </text>
         <text x="200" y="202" textAnchor="middle" className="ts-tiny fill-blue-600 dark:fill-blue-400">
-          at 200\u00B0C, 15 atm pressure
+          at 200°C, 15 atm pressure
         </text>
 
         {/* Steam puffs from chimney */}
@@ -140,7 +140,7 @@ const TrainSteamEngineDiagram = () => {
           Crankshaft converts
         </text>
         <text x="540" y="202" className="ts-tiny fill-amber-600 dark:fill-amber-400">
-          linear \u2192 rotary motion
+          linear → rotary motion
         </text>
 
         {/* Rail */}

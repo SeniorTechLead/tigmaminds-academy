@@ -103,7 +103,7 @@ capacity = bandwidth * np.log2(1 + snr_linear)
 ax.plot(snr_db, capacity, color='#3b82f6', linewidth=2)
 ax.set_xlabel('Signal-to-Noise Ratio (dB)', color='white')
 ax.set_ylabel('Channel Capacity (bits/s/Hz)', color='white')
-ax.set_title('Shannon Capacity: C = B \\u00d7 log\\u2082(1 + S/N)', color='white', fontsize=11)
+ax.set_title('Shannon Capacity: C = B \× log\₂(1 + S/N)', color='white', fontsize=11)
 ax.tick_params(colors='gray')
 
 # Mark animal scenarios
@@ -557,7 +557,7 @@ n_layers = 10
 
 for angle, color in [(0, '#3b82f6'), (20, '#22c55e'), (40, '#f59e0b'), (60, '#ef4444')]:
     R = multilayer_reflectance(wavelengths, d, n_film, n_air, n_layers, angle)
-    ax.plot(wavelengths, R, color=color, linewidth=2, label=f'{angle}\\u00b0')
+    ax.plot(wavelengths, R, color=color, linewidth=2, label=f'{angle}\°')
 
 ax.set_xlabel('Wavelength (nm)', color='white')
 ax.set_ylabel('Reflectance', color='white')
@@ -637,8 +637,8 @@ plt.show()
 
 print("Structural color physics:")
 print(f"  Melanin rod spacing: ~140nm for blue, ~160nm for green")
-print(f"  Constructive interference: 2*n*d*cos(\\u03b8) = m*\\u03bb")
-print(f"  Iridescence: color changes with angle because cos(\\u03b8) changes")
+print(f"  Constructive interference: 2*n*d*cos(\θ) = m*\λ")
+print(f"  Iridescence: color changes with angle because cos(\θ) changes")
 print()
 print("Applications: paint-free coloring saves billions in pigment costs")
 print("and eliminates toxic dye chemicals from manufacturing.")`,
@@ -880,7 +880,7 @@ color_map = {'resting': '#3b82f6', 'walking': '#22c55e', 'low_display': '#f59e0b
 for b in ['resting', 'walking', 'low_display', 'full_display']:
     mask = behaviors == b
     ax.scatter(data[mask, 0], data[mask, 1], s=20, color=color_map[b], alpha=0.5, label=b)
-ax.set_xlabel('Tail angle (\\u00b0)', color='white')
+ax.set_xlabel('Tail angle (\°)', color='white')
 ax.set_ylabel('Vibration speed (Hz)', color='white')
 ax.set_title('Behavior in Feature Space', color='white', fontsize=11)
 ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
@@ -944,7 +944,7 @@ ax.contourf(xx, yy, grid_predictions, levels=[-0.5, 0.5, 1.5, 2.5, 3.5],
 for b in behavior_list:
     mask = behaviors == b
     ax.scatter(data[mask, 0], data[mask, 1], s=10, color=color_map[b], alpha=0.5)
-ax.set_xlabel('Tail angle (\\u00b0)', color='white')
+ax.set_xlabel('Tail angle (\°)', color='white')
 ax.set_ylabel('Vibration speed (Hz)', color='white')
 ax.set_title('Decision Boundaries', color='white', fontsize=11)
 ax.tick_params(colors='gray')

@@ -22,7 +22,7 @@ export default function ActivityFluteBuildDiagram() {
           Build a Straw Pan Flute
         </text>
         <text x="300" y="48" textAnchor="middle" className="small fill-gray-500 dark:fill-slate-400">
-          5 straws, tape, scissors \u2014 discover the physics of pitch
+          5 straws, tape, scissors — discover the physics of pitch
         </text>
 
         {/* Step 1: Cut straws */}
@@ -137,9 +137,9 @@ export default function ActivityFluteBuildDiagram() {
 
           {[
             { l: '12 cm', f: '715 Hz', p: 'lowest' },
-            { l: '10 cm', f: '858 Hz', p: '\u2191' },
-            { l: '8 cm', f: '1072 Hz', p: '\u2191' },
-            { l: '6 cm', f: '1429 Hz', p: '\u2191' },
+            { l: '10 cm', f: '858 Hz', p: '↑' },
+            { l: '8 cm', f: '1072 Hz', p: '↑' },
+            { l: '6 cm', f: '1429 Hz', p: '↑' },
             { l: '4 cm', f: '2144 Hz', p: 'highest' },
           ].map((row, i) => (
             <g key={i}>
@@ -160,13 +160,13 @@ export default function ActivityFluteBuildDiagram() {
           What to observe
         </text>
         <text x="300" y="466" textAnchor="middle" className="small fill-gray-600 dark:fill-slate-400">
-          Blow gently across each straw\u2019s open top. Shorter straw = higher pitch.
+          Blow gently across each straw’s open top. Shorter straw = higher pitch.
         </text>
         <text x="300" y="482" textAnchor="middle" className="small fill-gray-600 dark:fill-slate-400">
-          The 4 cm straw should sound roughly 3\u00d7 higher than the 12 cm straw.
+          The 4 cm straw should sound roughly 3× higher than the 12 cm straw.
         </text>
         <text x="300" y="498" textAnchor="middle" className="small fill-gray-600 dark:fill-slate-400">
-          Halving the length doubles the frequency \u2014 that\u2019s one octave up.
+          Halving the length doubles the frequency — that’s one octave up.
         </text>
 
         <defs>

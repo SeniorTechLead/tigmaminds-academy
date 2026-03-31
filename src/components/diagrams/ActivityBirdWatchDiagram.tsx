@@ -34,7 +34,7 @@ export default function ActivityBirdWatchDiagram() {
           <line x1="180" y1="0" x2="180" y2="26" stroke="#334155" strokeWidth="1" />
           <line x1="300" y1="0" x2="300" y2="26" stroke="#334155" strokeWidth="1" />
           <line x1="410" y1="0" x2="410" y2="26" stroke="#334155" strokeWidth="1" />
-          <text x="492" y="17" fontSize="8" fill="#94a3b8">\u2190 example</text>
+          <text x="492" y="17" fontSize="8" fill="#94a3b8">← example</text>
         </g>
 
         {/* Empty rows */}
@@ -53,7 +53,7 @@ export default function ActivityBirdWatchDiagram() {
           <rect width="235" height="50" rx="8" className="fill-slate-800" />
           <text x="117" y="16" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#34d399">Tips</text>
           <text x="117" y="30" textAnchor="middle" fontSize="8" className="fill-slate-400">Stay still. Birds notice movement.</text>
-          <text x="117" y="42" textAnchor="middle" fontSize="8" className="fill-slate-400">Listen first \u2014 you\u2019ll hear more than you see.</text>
+          <text x="117" y="42" textAnchor="middle" fontSize="8" className="fill-slate-400">Listen first — you’ll hear more than you see.</text>
         </g>
 
         <g transform="translate(265, 295)">

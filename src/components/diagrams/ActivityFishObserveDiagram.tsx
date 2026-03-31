@@ -34,7 +34,7 @@ export default function ActivityFishObserveDiagram() {
       <line x1="225" y1="95" x2="365" y2="95" className="stroke-gray-300 dark:stroke-gray-600" strokeWidth="0.5" />
       <text x="260" y="91" textAnchor="middle" fontSize="7" fontWeight="600" className="fill-gray-600 dark:fill-gray-300">Time</text>
       <text x="330" y="91" textAnchor="middle" fontSize="7" fontWeight="600" className="fill-gray-600 dark:fill-gray-300">Jumps</text>
-      {['0\u20135 min', '5\u201310 min', '10\u201315 min', '15\u201320 min'].map((t, i) => (
+      {['0–5 min', '5–10 min', '10–15 min', '15–20 min'].map((t, i) => (
         <g key={i}>
           <text x="260" y={108 + i * 11} textAnchor="middle" fontSize="7" className="fill-gray-500 dark:fill-gray-400">{t}</text>
           <text x="330" y={108 + i * 11} textAnchor="middle" fontSize="7" className="fill-gray-500 dark:fill-gray-400">
@@ -46,32 +46,32 @@ export default function ActivityFishObserveDiagram() {
       {/* Step 3: Record conditions */}
       <rect x="401" y="52" width="175" height="115" rx="6" className="fill-amber-50 dark:fill-amber-950" stroke="#f59e0b" strokeWidth="1" />
       <text x="488" y="70" textAnchor="middle" fontSize="10" fontWeight="700" className="fill-amber-600 dark:fill-amber-400">Step 3: Conditions</text>
-      <text x="488" y="90" textAnchor="middle" fontSize="8" className="fill-gray-600 dark:fill-gray-300">\u2022 Time of day: ___</text>
-      <text x="488" y="104" textAnchor="middle" fontSize="8" className="fill-gray-600 dark:fill-gray-300">\u2022 Weather: sunny / cloudy / hot</text>
-      <text x="488" y="118" textAnchor="middle" fontSize="8" className="fill-gray-600 dark:fill-gray-300">\u2022 Water: clear / murky / foamy</text>
-      <text x="488" y="132" textAnchor="middle" fontSize="8" className="fill-gray-600 dark:fill-gray-300">\u2022 Flow: still / slow / fast</text>
-      <text x="488" y="148" textAnchor="middle" fontSize="8" className="fill-gray-600 dark:fill-gray-300">\u2022 Nearby: factory / farm / forest</text>
+      <text x="488" y="90" textAnchor="middle" fontSize="8" className="fill-gray-600 dark:fill-gray-300">• Time of day: ___</text>
+      <text x="488" y="104" textAnchor="middle" fontSize="8" className="fill-gray-600 dark:fill-gray-300">• Weather: sunny / cloudy / hot</text>
+      <text x="488" y="118" textAnchor="middle" fontSize="8" className="fill-gray-600 dark:fill-gray-300">• Water: clear / murky / foamy</text>
+      <text x="488" y="132" textAnchor="middle" fontSize="8" className="fill-gray-600 dark:fill-gray-300">• Flow: still / slow / fast</text>
+      <text x="488" y="148" textAnchor="middle" fontSize="8" className="fill-gray-600 dark:fill-gray-300">• Nearby: factory / farm / forest</text>
 
       {/* Step 4: Analyse */}
       <rect x="50" y="185" width="492" height="80" rx="6" className="fill-purple-50 dark:fill-purple-950" stroke="#a855f7" strokeWidth="1" />
       <text x="296" y="203" textAnchor="middle" fontSize="10" fontWeight="700" className="fill-purple-600 dark:fill-purple-400">Step 4: Think Like a Scientist</text>
       <text x="75" y="222" fontSize="8" className="fill-gray-600 dark:fill-gray-300">
-        \u2022 Did jump frequency change during your observation? Why?
+        • Did jump frequency change during your observation? Why?
       </text>
       <text x="75" y="236" fontSize="8" className="fill-gray-600 dark:fill-gray-300">
-        \u2022 Were jumps clustered in one area? (rapids? shallows? near pipes?)
+        • Were jumps clustered in one area? (rapids? shallows? near pipes?)
       </text>
       <text x="75" y="250" fontSize="8" className="fill-gray-600 dark:fill-gray-300">
-        \u2022 Predict: would you see more or fewer jumps on a hotter day? Why?
+        • Predict: would you see more or fewer jumps on a hotter day? Why?
       </text>
       <text x="75" y="264" fontSize="8" className="fill-gray-600 dark:fill-gray-300">
-        \u2022 Return at a different time of day. Compare your two counts.
+        • Return at a different time of day. Compare your two counts.
       </text>
 
       {/* Bottom insight */}
       <rect x="50" y="280" width="492" height="50" rx="6" className="fill-green-50 dark:fill-green-950" stroke="#22c55e" strokeWidth="1" />
       <text x="296" y="300" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-green-700 dark:fill-green-300">
-        You just did what fisheries scientists do \u2014 behavioural observation
+        You just did what fisheries scientists do — behavioural observation
       </text>
       <text x="296" y="316" textAnchor="middle" fontSize="8" className="fill-green-600 dark:fill-green-400">
         Real researchers repeat this weekly for months to spot trends. One session is a start. Keep going!

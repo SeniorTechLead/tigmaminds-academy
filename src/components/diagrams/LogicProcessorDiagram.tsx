@@ -18,14 +18,14 @@ export default function LogicProcessorDiagram() {
           {/* output wire */}
           <line x1={65} y1={90} x2={82} y2={90} stroke="currentColor" className="text-gray-400 dark:text-gray-500" strokeWidth="1.5" />
           <text x={50} y={42} textAnchor="middle" className={label} fontSize="11" fontWeight="700">1 Gate</text>
-          <text x={50} y={145} textAnchor="middle" className={sub} fontSize="10">AND, OR, NOT\u2026</text>
+          <text x={50} y={145} textAnchor="middle" className={sub} fontSize="10">AND, OR, NOT…</text>
         </g>
 
         {/* Arrow 1 */}
         <g>
           <line x1={100} y1={90} x2={140} y2={90} stroke="currentColor" className="text-gray-400 dark:text-gray-500" strokeWidth="1.5" />
           <polygon points="140,86 148,90 140,94" className="fill-gray-400 dark:fill-gray-500" />
-          <text x={124} y={82} textAnchor="middle" className={sub} fontSize="10">\u00D7100s</text>
+          <text x={124} y={82} textAnchor="middle" className={sub} fontSize="10">×100s</text>
         </g>
 
         {/* ─── Level 2: ALU ─── */}

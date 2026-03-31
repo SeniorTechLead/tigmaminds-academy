@@ -29,21 +29,21 @@ export default function RedSeaLevel4() {
 
   const miniLessons = [
     {
-      title: 'Turbulence modelling \u2014 the unsolved problem',
-      concept: `Direct simulation of every turbulent eddy (Direct Numerical Simulation, DNS) requires grids so fine that the cost is proportional to **Re\u00b3** \u2014 for Re = 10\u2076, that is 10\u00b9\u2078 grid cells. Impossible for ocean-scale problems.
+      title: 'Turbulence modelling — the unsolved problem',
+      concept: `Direct simulation of every turbulent eddy (Direct Numerical Simulation, DNS) requires grids so fine that the cost is proportional to **Re³** — for Re = 10⁶, that is 10¹⁸ grid cells. Impossible for ocean-scale problems.
 
 Instead, engineers use **turbulence models** that approximate the effect of small-scale eddies:
-- **k-\u03b5 model**: tracks turbulent kinetic energy (k) and dissipation rate (\u03b5). Two extra transport equations. Most popular in industry.
-- **k-\u03c9 model**: better near walls. Used in aerospace.
-- **Large Eddy Simulation (LES)**: resolves large eddies, models small ones. Middle ground between DNS and k-\u03b5.
+- **k-ε model**: tracks turbulent kinetic energy (k) and dissipation rate (ε). Two extra transport equations. Most popular in industry.
+- **k-ω model**: better near walls. Used in aerospace.
+- **Large Eddy Simulation (LES)**: resolves large eddies, models small ones. Middle ground between DNS and k-ε.
 
-For the Red Sea simulation, a simple eddy viscosity model sufficed because the large-scale flow (wind setdown) dominates. But modeling the turbulent return flow accurately would require at least k-\u03b5.
+For the Red Sea simulation, a simple eddy viscosity model sufficed because the large-scale flow (wind setdown) dominates. But modeling the turbulent return flow accurately would require at least k-ε.
 
 The code implements a simple mixing-length turbulence model and shows how it affects the velocity profile.`,
       analogy: 'Imagine tracking every raindrop in a thunderstorm (DNS) vs tracking the storm clouds and estimating how much rain each produces (turbulence modeling). The first is exact but impossible. The second captures the big picture accurately, trading micro-detail for tractability. Turbulence models are weather forecasts for fluid flow.',
-      storyConnection: 'The returning water after wind cessation would generate intense turbulence \u2014 standing waves, hydraulic jumps, and chaotic vortices. Modeling this accurately requires turbulence models. The NCAR study focused on the setdown phase (mostly laminar/steady), but a full simulation of the return event would need LES or similar.',
+      storyConnection: 'The returning water after wind cessation would generate intense turbulence — standing waves, hydraulic jumps, and chaotic vortices. Modeling this accurately requires turbulence models. The NCAR study focused on the setdown phase (mostly laminar/steady), but a full simulation of the return event would need LES or similar.',
       checkQuestion: 'Why is turbulence often called "the last great unsolved problem of classical physics"?',
-      checkAnswer: 'Because despite 180 years of study, we have no general analytical solution to turbulent flow. We know the equations (Navier-Stokes), but they are nonlinear and chaotic \u2014 tiny changes in initial conditions lead to completely different flow patterns. We can simulate turbulence numerically, but we cannot predict it analytically. Even defining what "turbulence" IS precisely remains debated.',
+      checkAnswer: 'Because despite 180 years of study, we have no general analytical solution to turbulent flow. We know the equations (Navier-Stokes), but they are nonlinear and chaotic — tiny changes in initial conditions lead to completely different flow patterns. We can simulate turbulence numerically, but we cannot predict it analytically. Even defining what "turbulence" IS precisely remains debated.',
       codeIntro: 'Implement a mixing-length turbulence model for channel flow.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -106,7 +106,7 @@ ax2.plot(nu_t * 1000, y, linewidth=2.5, color='#8b5cf6')
 ax2.fill_betweenx(y, nu_t * 1000, alpha=0.15, color='#8b5cf6')
 ax2.axvline(mu/rho * 1000, color='#3b82f6', linewidth=1.5, linestyle='--',
             label=f'Molecular viscosity')
-ax2.set_xlabel('Eddy viscosity (mm\u00b2/s)', fontsize=10)
+ax2.set_xlabel('Eddy viscosity (mm²/s)', fontsize=10)
 ax2.set_ylabel('Height (m)', fontsize=10)
 ax2.set_title('Eddy Viscosity Profile', fontsize=12)
 ax2.legend(fontsize=10)
@@ -119,14 +119,14 @@ print("Turbulent profile is much FLATTER than laminar:")
 print("  Turbulent mixing redistributes momentum across the channel")
 print("  Laminar profile is linear (all transport by molecular viscosity)")
 print()
-print(f"Eddy viscosity at mid-depth: {nu_t[ny//2]*1000:.1f} mm\u00b2/s")
-print(f"Molecular viscosity: {mu/rho*1000:.4f} mm\u00b2/s")
-print(f"Ratio: {nu_t[ny//2]/(mu/rho):.0f}x \u2014 turbulence dominates!")`,
-      challenge: 'Research the k-\u03b5 model. What are the two transport equations it solves? How does it improve on the mixing-length model? List one advantage and one disadvantage of each.',
-      successHint: 'Turbulence modeling is where CFD becomes an art as well as a science. The choice of turbulence model \u2014 k-\u03b5, k-\u03c9, LES, or DNS \u2014 depends on the problem, the required accuracy, and the available computing power. There is no one-size-fits-all solution.',
+print(f"Eddy viscosity at mid-depth: {nu_t[ny//2]*1000:.1f} mm²/s")
+print(f"Molecular viscosity: {mu/rho*1000:.4f} mm²/s")
+print(f"Ratio: {nu_t[ny//2]/(mu/rho):.0f}x — turbulence dominates!")`,
+      challenge: 'Research the k-ε model. What are the two transport equations it solves? How does it improve on the mixing-length model? List one advantage and one disadvantage of each.',
+      successHint: 'Turbulence modeling is where CFD becomes an art as well as a science. The choice of turbulence model — k-ε, k-ω, LES, or DNS — depends on the problem, the required accuracy, and the available computing power. There is no one-size-fits-all solution.',
     },
     {
-      title: 'Adaptive mesh refinement \u2014 resolution where it matters',
+      title: 'Adaptive mesh refinement — resolution where it matters',
       concept: `A uniform grid wastes cells in regions where nothing interesting happens (open sea) and lacks resolution where physics is complex (near the ridge, at the coast).
 
 **Adaptive Mesh Refinement (AMR)** solves this by using a coarse grid initially and automatically refining it wherever the solution has large gradients (rapid changes in velocity, pressure, or water level).
@@ -136,13 +136,13 @@ For the Red Sea problem:
 - Near ridge: 50 m cells (where exposure occurs)
 - At ridge edge: 10 m cells (sharp water-land boundary)
 
-This can reduce the total cell count by 10\u201350\u00d7 compared to a uniform fine grid, while maintaining accuracy where it matters.
+This can reduce the total cell count by 10–50× compared to a uniform fine grid, while maintaining accuracy where it matters.
 
 The code demonstrates AMR by detecting gradients and refining the grid.`,
-      analogy: 'A photographer uses auto-focus: the camera puts maximum resolution (sharpness) on the subject\u2019s face and lets the background blur. AMR does the same for simulations \u2014 maximum computational resolution on the interesting physics, coarse resolution on the boring parts.',
-      storyConnection: 'If you wanted to simulate the exact moment the ridge becomes exposed \u2014 the boundary between dry and wet \u2014 you need extremely fine resolution at that boundary. AMR would automatically place its finest cells right along the waterline, tracking it as it retreats and then rushes back.',
-      checkQuestion: 'If AMR reduces cell count by 20\u00d7, does the simulation run 20\u00d7 faster?',
-      checkAnswer: 'Not quite. AMR adds overhead: detecting where to refine, managing the multi-resolution grid, and interpolating between coarse and fine regions. Practical speedup is typically 5\u201315\u00d7 (not the full 20\u00d7). Also, the CFL condition is set by the finest cells, so the timestep is determined by the smallest cell size. Still, a 5\u201315\u00d7 speedup is enormous \u2014 turning a month-long simulation into a few days.',
+      analogy: 'A photographer uses auto-focus: the camera puts maximum resolution (sharpness) on the subject’s face and lets the background blur. AMR does the same for simulations — maximum computational resolution on the interesting physics, coarse resolution on the boring parts.',
+      storyConnection: 'If you wanted to simulate the exact moment the ridge becomes exposed — the boundary between dry and wet — you need extremely fine resolution at that boundary. AMR would automatically place its finest cells right along the waterline, tracking it as it retreats and then rushes back.',
+      checkQuestion: 'If AMR reduces cell count by 20×, does the simulation run 20× faster?',
+      checkAnswer: 'Not quite. AMR adds overhead: detecting where to refine, managing the multi-resolution grid, and interpolating between coarse and fine regions. Practical speedup is typically 5–15× (not the full 20×). Also, the CFL condition is set by the finest cells, so the timestep is determined by the smallest cell size. Still, a 5–15× speedup is enormous — turning a month-long simulation into a few days.',
       codeIntro: 'Demonstrate adaptive mesh refinement on a 1D water level problem.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -219,12 +219,12 @@ print(f"AMR equivalent: ~{total_amr:.0f} cells")
 print(f"Reduction: {total_uniform / total_amr:.1f}x fewer cells")
 print()
 print("Fine resolution ONLY where the physics demands it (near the ridge).")
-print("Open sea uses coarse cells \u2014 nothing interesting happening there.")`,
-      challenge: 'Implement AMR in the 2D simulation from Level 3. Start with a 20\u00d720 grid and refine cells where |gradient(h)| exceeds a threshold. Compare the result to a uniform 80\u00d780 grid.',
-      successHint: 'AMR is one of the most powerful tools in modern CFD. It enables simulations of problems that would be impossible with uniform grids \u2014 from galaxy formation to blood flow in arteries to, yes, wind setdown in the Gulf of Suez.',
+print("Open sea uses coarse cells — nothing interesting happening there.")`,
+      challenge: 'Implement AMR in the 2D simulation from Level 3. Start with a 20×20 grid and refine cells where |gradient(h)| exceeds a threshold. Compare the result to a uniform 80×80 grid.',
+      successHint: 'AMR is one of the most powerful tools in modern CFD. It enables simulations of problems that would be impossible with uniform grids — from galaxy formation to blood flow in arteries to, yes, wind setdown in the Gulf of Suez.',
     },
     {
-      title: 'Validation \u2014 how do we know the simulation is correct?',
+      title: 'Validation — how do we know the simulation is correct?',
       concept: `A simulation is only as good as its validation. The NCAR team validated their Red Sea model against:
 
 1. **Analytical solutions**: For simple test cases (uniform wind over flat bottom), the simulation must match the known exact solution.
@@ -236,9 +236,9 @@ Validation quantifies the **error**: if measured tide height is 1.05 m and the m
 
 The code demonstrates validation by comparing a numerical solution to an exact analytical solution.`,
       analogy: 'Before trusting a new scale (your simulation), you weigh something whose weight you already know (a reference mass). If the scale reads 1.02 kg for a 1.00 kg mass, you know its error is 2%. You then correct for this and trust it for unknown weights. Validation is weighing the known mass.',
-      storyConnection: 'The NCAR study validated against Lake Erie wind setdown events (where water drops 2+ metres at the western end during strong east winds \u2014 well-documented since the 1940s). The model reproduced Lake Erie accurately before being applied to the Gulf of Suez. This gives confidence in the Red Sea results.',
+      storyConnection: 'The NCAR study validated against Lake Erie wind setdown events (where water drops 2+ metres at the western end during strong east winds — well-documented since the 1940s). The model reproduced Lake Erie accurately before being applied to the Gulf of Suez. This gives confidence in the Red Sea results.',
       checkQuestion: 'Can a simulation ever be "proven correct"?',
-      checkAnswer: 'No. Validation can show a model matches observations within some error bound, but it cannot prove the model is correct for all conditions. A model might work perfectly for wind speeds 40\u201370 mph but fail at 80 mph due to physics it does not capture (wave breaking, spray generation). This is why scientists report "validated for conditions X" rather than "proven correct." All models are approximations.',
+      checkAnswer: 'No. Validation can show a model matches observations within some error bound, but it cannot prove the model is correct for all conditions. A model might work perfectly for wind speeds 40–70 mph but fail at 80 mph due to physics it does not capture (wave breaking, spray generation). This is why scientists report "validated for conditions X" rather than "proven correct." All models are approximations.',
       codeIntro: 'Validate a numerical shallow water solver against an exact analytical solution.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -327,16 +327,16 @@ print("Convergence:")
 for nx, err in zip(resolutions, errors):
     print(f"  nx = {nx:4d}: error = {err:.3f} cm")
 print()
-print("More grid cells \u2192 smaller error \u2192 closer to exact solution")
+print("More grid cells → smaller error → closer to exact solution")
 print("This is how we KNOW the simulation is working correctly.")`,
       challenge: 'Plot error vs 1/dx on a log-log scale. What is the convergence rate (slope)? For a second-order scheme, the slope should be ~2 (error halves when you double the resolution).',
-      successHint: 'Validation gives us quantified confidence. Without it, a simulation is just a pretty picture. With it, the simulation becomes a scientific tool. The NCAR team\u2019s validation is what makes their Red Sea result credible.',
+      successHint: 'Validation gives us quantified confidence. Without it, a simulation is just a pretty picture. With it, the simulation becomes a scientific tool. The NCAR team’s validation is what makes their Red Sea result credible.',
     },
     {
-      title: 'Monte Carlo uncertainty \u2014 probabilistic predictions',
+      title: 'Monte Carlo uncertainty — probabilistic predictions',
       concept: `Real-world inputs (wind speed, ridge depth, tidal phase) are never known exactly. They have **uncertainty**. Monte Carlo simulation handles this by running the model thousands of times, each with slightly different inputs drawn from probability distributions.
 
-Instead of asking "does the ridge get exposed at 63 mph?", we ask "what is the **probability** of the ridge being exposed, given that wind speed is 63 \u00b1 10 mph?"
+Instead of asking "does the ridge get exposed at 63 mph?", we ask "what is the **probability** of the ridge being exposed, given that wind speed is 63 ± 10 mph?"
 
 The procedure:
 1. Define probability distributions for each uncertain input
@@ -348,7 +348,7 @@ This transforms a deterministic "yes/no" answer into a probabilistic "85% likely
       analogy: 'Imagine predicting the outcome of 1000 cricket matches. Each match has random elements (toss, weather, player form). You cannot predict any single match, but you can predict that Team A wins ~60% of them. Monte Carlo works the same way: run the "match" (simulation) 1000 times with random variations and count how often you get the desired outcome.',
       storyConnection: 'How likely is the Red Sea crossing scenario? Monte Carlo gives us a number. If we know the statistical distributions of wind events and tidal conditions in the Gulf of Suez, we can estimate how often the combination needed for ridge exposure actually occurs. Is it once per century? Once per millennium? Monte Carlo can estimate this.',
       checkQuestion: 'If you run 10,000 Monte Carlo samples and 8,500 produce ridge exposure, what is the probability of exposure? What is the 95% confidence interval on this probability?',
-      checkAnswer: 'Probability = 8500/10000 = 85%. The 95% confidence interval for a binomial proportion is approximately p \u00b1 1.96\u221a(p(1-p)/n) = 0.85 \u00b1 1.96\u221a(0.85\u00d70.15/10000) = 0.85 \u00b1 0.007 = [84.3%, 85.7%]. With 10,000 samples, we know the probability to within \u00b10.7%.',
+      checkAnswer: 'Probability = 8500/10000 = 85%. The 95% confidence interval for a binomial proportion is approximately p ± 1.96√(p(1-p)/n) = 0.85 ± 1.96√(0.85×0.15/10000) = 0.85 ± 0.007 = [84.3%, 85.7%]. With 10,000 samples, we know the probability to within ±0.7%.',
       codeIntro: 'Run a Monte Carlo simulation of the Red Sea crossing scenario.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -448,21 +448,21 @@ print(f"At wind > 70 mph: exposure probability = {np.mean(exposed[wind_mph > 70]
       title: 'Dimensional analysis and scaling laws',
       concept: `Before running expensive simulations, physicists use **dimensional analysis** to understand which variables matter and how they scale.
 
-The **Buckingham \u03a0 theorem** states: if a physical problem involves n variables and k fundamental dimensions (mass, length, time), it can be described by n-k dimensionless groups.
+The **Buckingham Π theorem** states: if a physical problem involves n variables and k fundamental dimensions (mass, length, time), it can be described by n-k dimensionless groups.
 
 For wind setdown:
-- Variables: wind stress (\u03c4), depth (h), fetch (L), gravity (g), density (\u03c1)
+- Variables: wind stress (τ), depth (h), fetch (L), gravity (g), density (ρ)
 - That is 5 variables with 3 dimensions (M, L, T)
 - So we need 5-3 = 2 dimensionless groups
 
-\u03a0\u2081 = \u0394h/h (relative setdown)
-\u03a0\u2082 = \u03c4L/(\u03c1gh\u00b2) (wind forcing ratio)
+Π₁ = Δh/h (relative setdown)
+Π₂ = τL/(ρgh²) (wind forcing ratio)
 
-The universal scaling law: **\u0394h/h = f(\u03c4L/\u03c1gh\u00b2)**
+The universal scaling law: **Δh/h = f(τL/ρgh²)**
 
-This single relationship tells us everything about wind setdown WITHOUT solving any differential equations. If we know \u03a0\u2082, we know \u03a0\u2081.`,
+This single relationship tells us everything about wind setdown WITHOUT solving any differential equations. If we know Π₂, we know Π₁.`,
       analogy: 'Before building a full-size bridge, engineers test a 1/100 scale model. Dimensional analysis tells them which measurements on the small model translate exactly to the full bridge, and which need correction. It is the science of knowing what to scale and what stays the same.',
-      storyConnection: 'Dimensional analysis tells us that \u0394h/h depends on \u03c4L/(\u03c1gh\u00b2). For the Red Sea: \u03c4 = 1.44 Pa, L = 50 km, h = 2 m, \u03c1 = 1025 kg/m\u00b3. \u03a0\u2082 = 1.44 \u00d7 50000 / (1025 \u00d7 9.81 \u00d7 4) = 1.79. Since \u03a0\u2082 > 1, the setdown exceeds the depth \u2014 the ridge is exposed. One number answers the question.',
+      storyConnection: 'Dimensional analysis tells us that Δh/h depends on τL/(ρgh²). For the Red Sea: τ = 1.44 Pa, L = 50 km, h = 2 m, ρ = 1025 kg/m³. Π₂ = 1.44 × 50000 / (1025 × 9.81 × 4) = 1.79. Since Π₂ > 1, the setdown exceeds the depth — the ridge is exposed. One number answers the question.',
       codeIntro: 'Derive and plot the universal scaling law for wind setdown.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -475,10 +475,10 @@ Pi2 = np.linspace(0, 3, 200)
 Pi1 = Pi2  # from the simplified linear theory
 
 plt.figure(figsize=(10, 6))
-plt.plot(Pi2, Pi1, linewidth=3, color='#3b82f6', label='Linear theory: \u0394h/h = \u03c4L/\u03c1gh\u00b2')
+plt.plot(Pi2, Pi1, linewidth=3, color='#3b82f6', label='Linear theory: Δh/h = τL/ρgh²')
 plt.fill_between(Pi2, Pi1, alpha=0.1, color='#3b82f6')
 plt.axhline(1.0, color='#ef4444', linewidth=2, linestyle='--',
-            label='Full exposure (\u0394h = h)')
+            label='Full exposure (Δh = h)')
 plt.axvline(1.0, color='#ef4444', linewidth=1, linestyle=':', alpha=0.5)
 
 # Plot specific scenarios
@@ -492,13 +492,13 @@ colors = ['gold', '#10b981', '#f97316']
 for (label, pi2), color in zip(scenarios, colors):
     pi1 = pi2
     plt.plot(pi2, pi1, 'o', color=color, markersize=10, zorder=5)
-    plt.annotate(f'{label}\\n\u03a0\u2082 = {pi2:.2f}',
+    plt.annotate(f'{label}\\nΠ₂ = {pi2:.2f}',
                  xy=(pi2, pi1), xytext=(pi2 + 0.15, pi1 + 0.2),
                  fontsize=9, color=color,
                  arrowprops=dict(arrowstyle='->', color=color))
 
-plt.xlabel('\u03a0\u2082 = \u03c4L/(\u03c1gh\u00b2)  [Wind forcing ratio]', fontsize=12)
-plt.ylabel('\u03a0\u2081 = \u0394h/h  [Relative setdown]', fontsize=12)
+plt.xlabel('Π₂ = τL/(ρgh²)  [Wind forcing ratio]', fontsize=12)
+plt.ylabel('Π₁ = Δh/h  [Relative setdown]', fontsize=12)
 plt.title('Universal Scaling Law for Wind Setdown', fontsize=14)
 plt.legend(fontsize=10)
 plt.grid(alpha=0.3)
@@ -509,36 +509,36 @@ plt.show()
 
 print("The universal curve tells us EVERYTHING:")
 print()
-print("  If \u03a0\u2082 < 1: Partial setdown (ridge still submerged)")
-print("  If \u03a0\u2082 = 1: Full exposure (setdown equals depth)")
-print("  If \u03a0\u2082 > 1: Complete drainage (water removed entirely)")
+print("  If Π₂ < 1: Partial setdown (ridge still submerged)")
+print("  If Π₂ = 1: Full exposure (setdown equals depth)")
+print("  If Π₂ > 1: Complete drainage (water removed entirely)")
 print()
 for label, pi2 in scenarios:
     status = "EXPOSED" if pi2 >= 1 else "submerged"
-    print(f"  {label}: \u03a0\u2082 = {pi2:.2f} \u2192 {status}")`,
-      challenge: 'Use dimensional analysis to predict wind setdown on Mars (atmosphere: \u03c1 = 0.02 kg/m\u00b3, wind = 30 m/s, over a 1-metre-deep hypothetical lake). Would Martian winds create significant setdown? Why or why not?',
-      successHint: 'Dimensional analysis is the physicist\u2019s shortcut. Before running any simulation, a quick \u03a0 calculation can tell you whether the phenomenon is even possible. For the Red Sea, \u03a0\u2082 > 1 \u2014 wind setdown exceeds the depth. That single number encapsulates everything we learned across all four levels.',
+    print(f"  {label}: Π₂ = {pi2:.2f} → {status}")`,
+      challenge: 'Use dimensional analysis to predict wind setdown on Mars (atmosphere: ρ = 0.02 kg/m³, wind = 30 m/s, over a 1-metre-deep hypothetical lake). Would Martian winds create significant setdown? Why or why not?',
+      successHint: 'Dimensional analysis is the physicist’s shortcut. Before running any simulation, a quick Π calculation can tell you whether the phenomenon is even possible. For the Red Sea, Π₂ > 1 — wind setdown exceeds the depth. That single number encapsulates everything we learned across all four levels.',
     },
     {
-      title: 'Capstone \u2014 from ancient story to modern science',
+      title: 'Capstone — from ancient story to modern science',
       concept: `Let us step back and see the complete journey:
 
-**Level 1**: Tides, wind setdown, pressure, gravity waves \u2014 the basic physics of the Red Sea crossing.
+**Level 1**: Tides, wind setdown, pressure, gravity waves — the basic physics of the Red Sea crossing.
 
-**Level 2**: Conservation laws (mass, momentum, energy), Reynolds number, shear stress \u2014 the fundamental equations of fluid dynamics.
+**Level 2**: Conservation laws (mass, momentum, energy), Reynolds number, shear stress — the fundamental equations of fluid dynamics.
 
-**Level 3**: Navier-Stokes equations, finite differences, CFL condition, boundary conditions, 2D CFD \u2014 the tools of computational science.
+**Level 3**: Navier-Stokes equations, finite differences, CFL condition, boundary conditions, 2D CFD — the tools of computational science.
 
-**Level 4**: Turbulence, AMR, validation, Monte Carlo, dimensional analysis \u2014 the advanced methods that make real-world predictions possible.
+**Level 4**: Turbulence, AMR, validation, Monte Carlo, dimensional analysis — the advanced methods that make real-world predictions possible.
 
-From a 3,000-year-old story, you have learned the entire framework of computational fluid dynamics. Every concept \u2014 tidal forces, wind stress, the Navier-Stokes equations, turbulence models, mesh refinement, uncertainty quantification \u2014 is used daily by thousands of engineers and scientists worldwide.
+From a 3,000-year-old story, you have learned the entire framework of computational fluid dynamics. Every concept — tidal forces, wind stress, the Navier-Stokes equations, turbulence models, mesh refinement, uncertainty quantification — is used daily by thousands of engineers and scientists worldwide.
 
 The final code brings everything together in one comprehensive simulation.`,
       analogy: 'You started by watching a river and asking "why does the water move?" You now understand the equations governing that motion, can write code to simulate it, know how to check whether your simulation is trustworthy, and can quantify uncertainty. You have gone from observer to scientist.',
-      storyConnection: 'The parting of the Red Sea is not just a story. It is a problem in fluid dynamics that was solved using modern computational methods. Whether the event happened exactly as described, or approximately, or metaphorically \u2014 the physics is real, testable, and beautiful. Every great story contains science waiting to be discovered.',
+      storyConnection: 'The parting of the Red Sea is not just a story. It is a problem in fluid dynamics that was solved using modern computational methods. Whether the event happened exactly as described, or approximately, or metaphorically — the physics is real, testable, and beautiful. Every great story contains science waiting to be discovered.',
       checkQuestion: 'If you had to design the definitive simulation of the Red Sea crossing, what would your computational setup look like? Grid resolution, turbulence model, boundary conditions, validation strategy, uncertainty quantification?',
-      checkAnswer: 'Grid: AMR with base 1 km, refined to 10 m at the ridge, covering the northern Gulf of Suez (~100 km \u00d7 30 km). Turbulence: k-\u03b5 for the return flow, no explicit model for the setdown phase. BCs: real bathymetry, tidal forcing at open boundaries, wind stress from reanalysis data. Validation: against Lake Erie wind setdown records and Gulf of Suez tide gauges. Uncertainty: Monte Carlo with 10,000 samples varying wind speed, direction, duration, ridge depth, and tidal phase. Run on a GPU cluster.',
-      codeIntro: 'Build the complete model: wind setdown, exposure, and return \u2014 all in one simulation.',
+      checkAnswer: 'Grid: AMR with base 1 km, refined to 10 m at the ridge, covering the northern Gulf of Suez (~100 km × 30 km). Turbulence: k-ε for the return flow, no explicit model for the setdown phase. BCs: real bathymetry, tidal forcing at open boundaries, wind stress from reanalysis data. Validation: against Lake Erie wind setdown records and Gulf of Suez tide gauges. Uncertainty: Monte Carlo with 10,000 samples varying wind speed, direction, duration, ridge depth, and tidal phase. Run on a GPU cluster.',
+      codeIntro: 'Build the complete model: wind setdown, exposure, and return — all in one simulation.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
@@ -619,20 +619,20 @@ axes[1,2].set_xlabel('km', fontsize=9)
 axes[0,0].set_ylabel('Elevation (m)', fontsize=9)
 axes[1,0].set_ylabel('Elevation (m)', fontsize=9)
 
-plt.suptitle('The Parting of the Red Sea \u2014 Complete Fluid Dynamics Simulation', fontsize=14)
+plt.suptitle('The Parting of the Red Sea — Complete Fluid Dynamics Simulation', fontsize=14)
 plt.tight_layout()
 plt.show()
 
 print("=== Complete Timeline ===")
-print("  0-12h:  East wind builds \u2192 water pushed from ridge")
-print("  12-16h: Full setdown \u2192 ridge EXPOSED (crossing window)")
-print("  16h:    Wind stops \u2192 water returns in ~20 minutes")
+print("  0-12h:  East wind builds → water pushed from ridge")
+print("  12-16h: Full setdown → ridge EXPOSED (crossing window)")
+print("  16h:    Wind stops → water returns in ~20 minutes")
 print()
 print("From an ancient story to a peer-reviewed CFD simulation.")
-print("Physics does not prove or disprove faith \u2014")
+print("Physics does not prove or disprove faith —")
 print("but it does show that the natural world is extraordinary.")`,
       challenge: 'This is your capstone project. Add improvements of your choice: (a) 2D grid, (b) Monte Carlo uncertainty on wind, (c) AMR near the ridge, (d) turbulence model for the return phase. Present your results as a scientific poster.',
-      successHint: 'You have completed a full journey through computational fluid dynamics. From tides to Navier-Stokes to Monte Carlo, you now have the foundational knowledge used by climate scientists, aerospace engineers, and computational physicists worldwide. The Red Sea was your textbook \u2014 the equations are your tools for everything that flows.',
+      successHint: 'You have completed a full journey through computational fluid dynamics. From tides to Navier-Stokes to Monte Carlo, you now have the foundational knowledge used by climate scientists, aerospace engineers, and computational physicists worldwide. The Red Sea was your textbook — the equations are your tools for everything that flows.',
     },
   ];
 

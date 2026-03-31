@@ -88,7 +88,7 @@ const ActivityMonsoonModelDiagram = () => {
           className="fill-slate-400 dark:fill-slate-500" />
         <text x="167" y="135" textAnchor="middle"
           className="label-text fill-amber-600 dark:fill-amber-400" fontWeight="600">
-          Desk lamp (\u201Csun\u201D)
+          Desk lamp (“sun”)
         </text>
 
         {/* Two containers */}
@@ -101,7 +101,7 @@ const ActivityMonsoonModelDiagram = () => {
         </text>
         <text x="95" y="215" textAnchor="middle"
           className="small-text fill-amber-800 dark:fill-amber-300">
-          (\u201CLand\u201D)
+          (“Land”)
         </text>
 
         {/* Heat shimmer from sand */}
@@ -112,7 +112,7 @@ const ActivityMonsoonModelDiagram = () => {
         <rect x="115" y="190" width="4" height="35" rx="2" fill="#ef4444" />
         <circle cx="117" cy="228" r="5" fill="#ef4444" />
         <text x="130" y="225" className="small-text fill-red-600 dark:fill-red-400" fontWeight="600">
-          38\u00B0C
+          38°C
         </text>
         <text x="130" y="237" className="small-text fill-red-500 dark:fill-red-400">
           (after 10 min)
@@ -127,14 +127,14 @@ const ActivityMonsoonModelDiagram = () => {
         </text>
         <text x="230" y="215" textAnchor="middle"
           className="small-text fill-blue-800 dark:fill-blue-300">
-          (\u201COcean\u201D)
+          (“Ocean”)
         </text>
 
         {/* Thermometer in water */}
         <rect x="250" y="190" width="4" height="35" rx="2" fill="#3b82f6" />
         <circle cx="252" cy="228" r="5" fill="#3b82f6" />
         <text x="265" y="225" className="small-text fill-blue-600 dark:fill-blue-400" fontWeight="600">
-          24\u00B0C
+          24°C
         </text>
         <text x="265" y="237" className="small-text fill-blue-500 dark:fill-blue-400">
           (after 10 min)
@@ -157,7 +157,7 @@ const ActivityMonsoonModelDiagram = () => {
           markerEnd="url(#mact-arrow-red)" />
         <text x="160" y="168" textAnchor="middle"
           className="small-text fill-emerald-600 dark:fill-emerald-400" fontWeight="600">
-          \u201CMonsoon\u201D wind!
+          “Monsoon” wind!
         </text>
 
         {/* Temperature difference label */}
@@ -165,7 +165,7 @@ const ActivityMonsoonModelDiagram = () => {
           className="fill-red-100 dark:fill-red-900/30" />
         <text x="162" y="270" textAnchor="middle"
           className="small-text fill-red-700 dark:fill-red-300" fontWeight="600">
-          14\u00B0C difference = smoke drifts from water toward sand!
+          14°C difference = smoke drifts from water toward sand!
         </text>
 
         {/* ===== RIGHT: Steps ===== */}
@@ -182,19 +182,19 @@ const ActivityMonsoonModelDiagram = () => {
           Materials:
         </text>
         <text x="350" y="86" className="small-text fill-slate-600 dark:fill-slate-400">
-          \u2022 Two identical bowls or trays
+          • Two identical bowls or trays
         </text>
         <text x="350" y="98" className="small-text fill-slate-600 dark:fill-slate-400">
-          \u2022 Dry sand (or soil) + water
+          • Dry sand (or soil) + water
         </text>
         <text x="350" y="110" className="small-text fill-slate-600 dark:fill-slate-400">
-          \u2022 Desk lamp (60W or more)
+          • Desk lamp (60W or more)
         </text>
         <text x="350" y="122" className="small-text fill-slate-600 dark:fill-slate-400">
-          \u2022 Two thermometers (or phone sensor)
+          • Two thermometers (or phone sensor)
         </text>
         <text x="350" y="134" className="small-text fill-slate-600 dark:fill-slate-400">
-          \u2022 Incense stick or tissue paper strip
+          • Incense stick or tissue paper strip
         </text>
 
         {/* Steps */}
@@ -219,18 +219,18 @@ const ActivityMonsoonModelDiagram = () => {
         <circle cx="358" cy="221" r="8" className="fill-indigo-500 dark:fill-indigo-400" />
         <text x="358" y="225" textAnchor="middle" className="step-num fill-white">4</text>
         <text x="372" y="225" className="small-text fill-slate-700 dark:fill-slate-300">
-          Hold incense between bowls \u2014 watch smoke
+          Hold incense between bowls — watch smoke
         </text>
 
         <circle cx="358" cy="243" r="8" className="fill-indigo-500 dark:fill-indigo-400" />
         <text x="358" y="247" textAnchor="middle" className="step-num fill-white">5</text>
         <text x="372" y="247" className="small-text fill-slate-700 dark:fill-slate-300">
-          Turn off lamp = \u201Cwinter\u201D \u2014 watch reversal!
+          Turn off lamp = “winter” — watch reversal!
         </text>
 
         <text x="470" y="270" textAnchor="middle"
           className="small-text fill-slate-500 dark:fill-slate-400">
-          Sand cools faster too \u2014 wind reverses
+          Sand cools faster too — wind reverses
         </text>
 
         {/* Bottom: What to observe */}
@@ -239,12 +239,12 @@ const ActivityMonsoonModelDiagram = () => {
 
         <text x="310" y="312" textAnchor="middle"
           className="section-title fill-emerald-700 dark:fill-emerald-300">
-          What You\u2019re Seeing = The Monsoon Engine
+          What You’re Seeing = The Monsoon Engine
         </text>
 
         <text x="310" y="330" textAnchor="middle"
           className="label-text fill-emerald-700 dark:fill-emerald-300">
-          Sand (land) heats up fast \u2192 hot air rises \u2192 cooler air from above water (ocean) rushes in to fill the gap.
+          Sand (land) heats up fast → hot air rises → cooler air from above water (ocean) rushes in to fill the gap.
         </text>
         <text x="310" y="346" textAnchor="middle"
           className="label-text fill-emerald-700 dark:fill-emerald-300">
@@ -256,7 +256,7 @@ const ActivityMonsoonModelDiagram = () => {
         </text>
         <text x="310" y="378" textAnchor="middle"
           className="small-text fill-emerald-600 dark:fill-emerald-400">
-          When you turn off the lamp, sand cools faster than water \u2014 the wind reverses. That\u2019s the winter monsoon!
+          When you turn off the lamp, sand cools faster than water — the wind reverses. That’s the winter monsoon!
         </text>
       </svg>
     </div>

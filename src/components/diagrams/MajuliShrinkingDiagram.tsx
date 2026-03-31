@@ -53,7 +53,7 @@ export default function MajuliShrinkingDiagram() {
         ))}
 
         {/* Bar chart below */}
-        <text x="290" y="265" textAnchor="middle" className="fill-slate-400" fontSize="11">Area over time (km\u00B2)</text>
+        <text x="290" y="265" textAnchor="middle" className="fill-slate-400" fontSize="11">Area over time (km²)</text>
 
         {years.map((d, i) => {
           const barH = d.area / 880 * 100;
@@ -64,7 +64,7 @@ export default function MajuliShrinkingDiagram() {
                 fill={d.color} opacity="0.7" />
               <text x={x} y={395} textAnchor="middle" fill={d.color} fontSize="10" fontWeight="bold">{d.year}</text>
               <text x={x} y={375 - barH} textAnchor="middle" className="fill-white" fontSize="11" fontWeight="bold">{d.area}</text>
-              <text x={x} y={387 - barH} textAnchor="middle" className="fill-slate-400" fontSize="9">km\u00B2</text>
+              <text x={x} y={387 - barH} textAnchor="middle" className="fill-slate-400" fontSize="9">km²</text>
             </g>
           );
         })}

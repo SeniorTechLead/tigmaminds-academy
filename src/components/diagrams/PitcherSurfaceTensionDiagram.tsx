@@ -19,7 +19,7 @@ export default function PitcherSurfaceTensionDiagram() {
             <text x="0" y="-2" textAnchor="middle" fontSize="6" fill="white">foot</text>
             {/* Adhesive pad */}
             <rect x="-6" y="0" width="12" height="3" rx="1" fill="#22c55e" />
-            <text x="25" y="3" fontSize="7" fill="#86efac">\u2713 grip</text>
+            <text x="25" y="3" fontSize="7" fill="#86efac">✓ grip</text>
           </g>
 
           {/* Wet surface - aquaplaning */}
@@ -37,7 +37,7 @@ export default function PitcherSurfaceTensionDiagram() {
             <text x="0" y="-2" textAnchor="middle" fontSize="6" fill="white">foot</text>
             {/* Water layer under foot */}
             <rect x="-10" y="0" width="20" height="3" rx="1" fill="#38bdf8" opacity="0.6" />
-            <text x="25" y="3" fontSize="7" fill="#f87171">\u2717 slip!</text>
+            <text x="25" y="3" fontSize="7" fill="#f87171">✗ slip!</text>
             {/* Sliding arrow */}
             <line x1="15" y1="-4" x2="35" y2="-4" stroke="#f87171" strokeWidth="1.5" />
             <polygon points="35,-4 30,-7 30,-1" fill="#f87171" />
@@ -69,7 +69,7 @@ export default function PitcherSurfaceTensionDiagram() {
             <polygon points="-8,-6 -10,-3 -6,-3" fill="#86efac" />
             <line x1="8" y1="0" x2="8" y2="-5" stroke="#86efac" strokeWidth="1" />
             <polygon points="8,-6 6,-3 10,-3" fill="#86efac" />
-            <text x="40" y="-5" fontSize="7" fill="#86efac">\u2191 tension holds</text>
+            <text x="40" y="-5" fontSize="7" fill="#86efac">↑ tension holds</text>
           </g>
 
           {/* Low surface tension - insect sinks */}
@@ -85,7 +85,7 @@ export default function PitcherSurfaceTensionDiagram() {
             {/* Downward arrows */}
             <line x1="0" y1="3" x2="0" y2="10" stroke="#f87171" strokeWidth="1.5" />
             <polygon points="0,11 -3,7 3,7" fill="#f87171" />
-            <text x="40" y="12" fontSize="7" fill="#f87171">\u2193 wetting agents</text>
+            <text x="40" y="12" fontSize="7" fill="#f87171">↓ wetting agents</text>
             <text x="40" y="22" fontSize="7" fill="#f87171">  break tension</text>
             {/* Surfactant molecules */}
             {[-30, -15, 15, 30].map((xp, i) => (
@@ -111,7 +111,7 @@ export default function PitcherSurfaceTensionDiagram() {
             {/* Adhesive pad making contact */}
             <rect x="38" y="0" width="24" height="3" rx="1" fill="#a78bfa" />
             <text x="50" y="40" textAnchor="middle" fontSize="8" className="fill-slate-400">Adhesive pad grips surface</text>
-            <text x="50" y="52" textAnchor="middle" fontSize="8" fill="#86efac">\u2713 Stable</text>
+            <text x="50" y="52" textAnchor="middle" fontSize="8" fill="#86efac">✓ Stable</text>
           </g>
 
           {/* Fly foot on wax - crystals detaching */}
@@ -129,7 +129,7 @@ export default function PitcherSurfaceTensionDiagram() {
             <polygon points="58,-4 60,-7 62,-4" fill="#fbbf24" opacity="0.8" />
             <polygon points="68,-4 70,-7 72,-4" fill="#fbbf24" opacity="0.8" />
             <text x="70" y="40" textAnchor="middle" fontSize="8" className="fill-slate-400">Wax crystals clog adhesive pad</text>
-            <text x="70" y="52" textAnchor="middle" fontSize="8" fill="#f87171">\u2717 No grip \u2192 insect slides down</text>
+            <text x="70" y="52" textAnchor="middle" fontSize="8" fill="#f87171">✗ No grip → insect slides down</text>
           </g>
         </g>
       </svg>

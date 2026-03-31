@@ -2,7 +2,7 @@ export default function DeerRefractionDiagram() {
   return (
     <div className="bg-gray-900 rounded-xl p-4 my-4">
       <p className="text-center text-sm font-bold text-gray-300 uppercase tracking-wider mb-3">
-        Refraction \u2014 How Light Bends and Prisms Split White Light
+        Refraction — How Light Bends and Prisms Split White Light
       </p>
       <svg viewBox="0 0 640 340" className="w-full max-w-2xl mx-auto">
         {/* LEFT: Bending at interface */}
@@ -31,20 +31,20 @@ export default function DeerRefractionDiagram() {
         <line x1="90" y1="55" x2="160" y2="140" stroke="white" strokeWidth={2.5} opacity={0.85} />
         <polygon points="90,55 98,63 86,65" fill="white" opacity={0.85} />
 
-        {/* Refracted ray \u2014 bends toward normal (slower medium) */}
+        {/* Refracted ray — bends toward normal (slower medium) */}
         <line x1="160" y1="140" x2="210" y2="235" stroke="#38bdf8" strokeWidth={2.5} />
         <polygon points="210,235 202,227 214,227" fill="#38bdf8" />
 
         {/* Angle labels */}
         <path d="M160,115 Q148,120 140,128" fill="none" stroke="white" strokeWidth={1} opacity={0.5} />
-        <text x="130" y="118" fontSize="10" fill="white" opacity={0.7}>\u03b8\u2081</text>
+        <text x="130" y="118" fontSize="10" fill="white" opacity={0.7}>θ₁</text>
         <path d="M160,165 Q167,168 172,178" fill="none" stroke="#38bdf8" strokeWidth={1} opacity={0.5} />
-        <text x="175" y="172" fontSize="10" fill="#38bdf8" opacity={0.7}>\u03b8\u2082</text>
+        <text x="175" y="172" fontSize="10" fill="#38bdf8" opacity={0.7}>θ₂</text>
 
         {/* Snell's law */}
         <rect x="30" y="260" width="240" height="34" rx={6} fill="rgba(56,189,248,0.1)" stroke="#38bdf8" strokeWidth={1} />
         <text x="150" y="282" textAnchor="middle" fontSize="11" fontWeight="700" fill="#38bdf8">
-          Snell\u2019s law: n\u2081 sin\u03b8\u2081 = n\u2082 sin\u03b8\u2082
+          Snell’s law: n₁ sinθ₁ = n₂ sinθ₂
         </text>
 
         {/* RIGHT: Prism splitting white light */}
@@ -88,7 +88,7 @@ export default function DeerRefractionDiagram() {
           Different wavelengths bend by different amounts.
         </text>
         <text x="485" y="293" textAnchor="middle" fontSize="10" fill="#d1d5db">
-          Violet bends most (short \u03bb), red bends least (long \u03bb).
+          Violet bends most (short λ), red bends least (long λ).
         </text>
 
         {/* Divider */}

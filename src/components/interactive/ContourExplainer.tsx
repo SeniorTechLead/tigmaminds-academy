@@ -365,7 +365,7 @@ function Section2BellCurve() {
 
       <div className="mb-3">
         <Slider
-          label="Spread (\u03C3)"
+          label="Spread (σ)"
           value={sigma}
           min={0.2}
           max={1.0}
@@ -409,7 +409,7 @@ function Section2BellCurve() {
         {/* Center mark */}
         <circle cx={W / 2} cy={H / 2} r={3} fill="#fbbf24" />
         <text x={W / 2 + 8} y={H / 2 - 8} fontSize={12} fill="#fbbf24" fontWeight="bold">
-          {'\u03BC (mean)'}
+          {'μ (mean)'}
         </text>
 
         {/* Labels */}
@@ -483,8 +483,8 @@ function Section3Correlation() {
   };
 
   const rhoLabel = rho === 0 ? 'No correlation' :
-    rho > 0 ? `Positive (\u03C1 = ${rho.toFixed(2)})` :
-    `Negative (\u03C1 = ${rho.toFixed(2)})`;
+    rho > 0 ? `Positive (ρ = ${rho.toFixed(2)})` :
+    `Negative (ρ = ${rho.toFixed(2)})`;
 
   return (
     <div>
@@ -498,7 +498,7 @@ function Section3Correlation() {
 
       <div className="mb-3">
         <Slider
-          label={`\u03C1 (corr)`}
+          label={`ρ (corr)`}
           value={rho}
           min={-0.95}
           max={0.95}
@@ -558,7 +558,7 @@ function Section3Correlation() {
 
       <Annotation className="mt-2">
         <strong>Key insight:</strong> The tilt of the ellipse IS the correlation. The narrowness tells you how strong it is.
-        At {'\u03C1'} = 0 the ellipses are circular. Near {'\u03C1'} = {'\u00B1'}1 they collapse into a thin tilted line.
+        At {'ρ'} = 0 the ellipses are circular. Near {'ρ'} = {'±'}1 they collapse into a thin tilted line.
       </Annotation>
     </div>
   );

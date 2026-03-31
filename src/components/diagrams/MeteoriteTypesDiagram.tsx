@@ -39,14 +39,14 @@ export default function MeteoriteTypesDiagram() {
           From Space Rock to Treasure: Meteorite Types
         </text>
         <text x="390" y="56" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">
-          Each type reveals a different part of the solar system\u2019s history
+          Each type reveals a different part of the solar system’s history
         </text>
 
         {/* --- Iron Meteorite --- */}
         <g transform="translate(130, 130)">
           {/* Cross-section */}
           <ellipse cx="0" cy="0" rx="75" ry="70" fill="url(#mt-iron)" />
-          {/* Widmanst\u00E4tten pattern lines */}
+          {/* Widmanstätten pattern lines */}
           {[[-40,-30,20,35],[-55,10,40,-25],[15,-50,-30,40],[-20,-55,30,20],[35,-10,-40,30],[-50,-20,45,5]].map(([x1,y1,x2,y2], i) => (
             <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#d1d5db" strokeWidth="0.8" opacity="0.5" />
           ))}
@@ -59,9 +59,9 @@ export default function MeteoriteTypesDiagram() {
         <g transform="translate(130, 270)">
           <rect x="-110" y="0" width="220" height="115" rx="6" className="fill-gray-50 dark:fill-slate-900" stroke="#9ca3af" strokeWidth="0.8" />
           <text x="0" y="20" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-gray-700 dark:fill-slate-300">Composition</text>
-          <text x="0" y="36" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-slate-400">90\u201395% iron, 5\u201310% nickel</text>
+          <text x="0" y="36" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-slate-400">90–95% iron, 5–10% nickel</text>
           <text x="0" y="56" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-gray-700 dark:fill-slate-300">Signature</text>
-          <text x="0" y="72" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-slate-400">Widmanst\u00E4tten pattern (crystal</text>
+          <text x="0" y="72" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-slate-400">Widmanstätten pattern (crystal</text>
           <text x="0" y="85" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-slate-400">lattice that took millions of yrs)</text>
           <text x="0" y="105" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-indigo-600 dark:fill-indigo-400">Origin: core of a destroyed protoplanet</text>
         </g>
@@ -109,7 +109,7 @@ export default function MeteoriteTypesDiagram() {
           <text x="0" y="56" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-gray-700 dark:fill-slate-300">Signature</text>
           <text x="0" y="72" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-slate-400">Pallasites: green olivine crystals</text>
           <text x="0" y="85" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-slate-400">suspended in iron-nickel matrix</text>
-          <text x="0" y="105" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-indigo-600 dark:fill-indigo-400">Origin: core\u2013mantle boundary of protoplanet</text>
+          <text x="0" y="105" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-indigo-600 dark:fill-indigo-400">Origin: core–mantle boundary of protoplanet</text>
         </g>
 
         {/* Solar system connection */}
@@ -118,7 +118,7 @@ export default function MeteoriteTypesDiagram() {
           Why meteorites matter: They are time capsules from 4.6 billion years ago
         </text>
         <text x="390" y="450" textAnchor="middle" fontSize="11" className="fill-indigo-600 dark:fill-indigo-400">
-          Iron \u2192 tells us about planetary cores | Stony \u2192 pristine solar nebula material | Stony-iron \u2192 boundary layers
+          Iron → tells us about planetary cores | Stony → pristine solar nebula material | Stony-iron → boundary layers
         </text>
         <text x="390" y="464" textAnchor="middle" fontSize="11" className="fill-indigo-600 dark:fill-indigo-400">
           Together, they reveal how rocky planets like Earth formed and differentiated into layers.
@@ -136,7 +136,7 @@ export default function MeteoriteTypesDiagram() {
           what type of meteorite would it be? What part of a destroyed protoplanet did it come from?
         </text>
         <text x="390" y="566" textAnchor="middle" fontSize="10" className="fill-amber-600 dark:fill-amber-500">
-          Answer: Iron meteorite with Widmanst\u00E4tten pattern \u2014 from the metal core of a body that formed and broke apart billions of years ago.
+          Answer: Iron meteorite with Widmanstätten pattern — from the metal core of a body that formed and broke apart billions of years ago.
         </text>
       </svg>
     </div>

@@ -281,11 +281,11 @@ N0 = 1e4  # initial count (CFU/g)
 
 # Temperature scenarios
 temps = {
-    '30\\u00b0C (open table)': (30, '#ef4444'),
-    '20\\u00b0C (shade)': (20, '#f59e0b'),
-    '10\\u00b0C (ice box)': (10, '#3b82f6'),
-    '5\\u00b0C (refrigerator)': (5, '#22c55e'),
-    '0\\u00b0C (ice)': (0, '#a855f7'),
+    '30\°C (open table)': (30, '#ef4444'),
+    '20\°C (shade)': (20, '#f59e0b'),
+    '10\°C (ice box)': (10, '#3b82f6'),
+    '5\°C (refrigerator)': (5, '#22c55e'),
+    '0\°C (ice)': (0, '#a855f7'),
 }
 
 # Safety thresholds
@@ -314,8 +314,8 @@ for label, (temp, color) in temps.items():
     else:
         time_to_unsafe[label] = float('inf')
 
-ax.axhline(y=safety_limit, color='#f59e0b', linestyle='--', alpha=0.5, label='Safety limit (10\\u2077)')
-ax.axhline(y=danger_limit, color='#ef4444', linestyle='--', alpha=0.5, label='Danger (10\\u2078)')
+ax.axhline(y=safety_limit, color='#f59e0b', linestyle='--', alpha=0.5, label='Safety limit (10\⁷)')
+ax.axhline(y=danger_limit, color='#ef4444', linestyle='--', alpha=0.5, label='Danger (10\⁸)')
 ax.set_xlabel('Time (hours)', color='white', fontsize=11)
 ax.set_ylabel('Bacterial count (CFU/g)', color='white', fontsize=11)
 ax.set_title('Bacterial growth: temperature is everything', color='white', fontsize=12)
@@ -347,10 +347,10 @@ for label, (temp, color) in temps.items():
                     color=color, fontsize=9)
 
 # Ima Keithel operating window
-ax.axvspan(25, 35, alpha=0.1, color='#ef4444', label='Imphal daytime (25-35\\u00b0C)')
+ax.axvspan(25, 35, alpha=0.1, color='#ef4444', label='Imphal daytime (25-35\°C)')
 ax.axhline(y=6, color='#f59e0b', linestyle=':', alpha=0.5, label='Typical market day (6 hours)')
 
-ax.set_xlabel('Temperature (\\u00b0C)', color='white', fontsize=11)
+ax.set_xlabel('Temperature (\°C)', color='white', fontsize=11)
 ax.set_ylabel('Shelf life (hours)', color='white', fontsize=11)
 ax.set_title('Shelf life vs storage temperature', color='white', fontsize=12)
 ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
@@ -372,10 +372,10 @@ for name, (Ea, color) in Ea_values.items():
     rate_ratio = np.exp(-Ea/R * (1/T_range - 1/T_ref))
     ax.plot(T_range - 273.15, rate_ratio, color=color, linewidth=2, label=name)
 
-ax.axvline(x=5, color='#a855f7', linestyle=':', alpha=0.5, label='Refrigeration (5\\u00b0C)')
+ax.axvline(x=5, color='#a855f7', linestyle=':', alpha=0.5, label='Refrigeration (5\°C)')
 ax.axhline(y=1.0, color='white', linestyle=':', alpha=0.3)
-ax.set_xlabel('Temperature (\\u00b0C)', color='white', fontsize=11)
-ax.set_ylabel('Reaction rate (relative to 25\\u00b0C)', color='white', fontsize=11)
+ax.set_xlabel('Temperature (\°C)', color='white', fontsize=11)
+ax.set_ylabel('Reaction rate (relative to 25\°C)', color='white', fontsize=11)
 ax.set_title('Arrhenius kinetics: spoilage reaction rates', color='white', fontsize=12)
 ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
@@ -629,7 +629,7 @@ cheat_revenue = np.cumsum(cheat_revenue_daily)
 ax.plot(days, honest_revenue / 1000, color='#22c55e', linewidth=2, label='Honest vendor')
 ax.plot(days, cheat_revenue / 1000, color='#ef4444', linewidth=2, label='Cheating vendor')
 ax.set_xlabel('Market days', color='white', fontsize=11)
-ax.set_ylabel('Cumulative revenue (\\u00d71000 Rs)', color='white', fontsize=11)
+ax.set_ylabel('Cumulative revenue (\×1000 Rs)', color='white', fontsize=11)
 ax.set_title('Repeated game: honesty pays in the long run', color='white', fontsize=12)
 ax.legend(fontsize=9, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
@@ -771,11 +771,11 @@ for (name, box), color in zip(designs.items(), colors_design):
     times, temps, ice = box.simulate(duration_hours=14)
     ax.plot(times + 6, temps, color=color, linewidth=2, label=name)
 
-ax.axhline(y=5, color='white', linestyle=':', alpha=0.3, label='Safe zone (<5\\u00b0C)')
-ax.axhline(y=15, color='#f59e0b', linestyle=':', alpha=0.3, label='Caution zone (15\\u00b0C)')
+ax.axhline(y=5, color='white', linestyle=':', alpha=0.3, label='Safe zone (<5\°C)')
+ax.axhline(y=15, color='#f59e0b', linestyle=':', alpha=0.3, label='Caution zone (15\°C)')
 ax.fill_between([6, 20], 0, 5, alpha=0.05, color='#22c55e')
 ax.set_xlabel('Time of day (hours)', color='white', fontsize=11)
-ax.set_ylabel('Temperature (\\u00b0C)', color='white', fontsize=11)
+ax.set_ylabel('Temperature (\°C)', color='white', fontsize=11)
 ax.set_title('Internal temperature over market day', color='white', fontsize=12)
 ax.legend(fontsize=6, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax.set_xlim(6, 20)
@@ -809,7 +809,7 @@ ax.plot(T_internal_range, Q_conv, color='#3b82f6', linewidth=2, label='Convectio
 ax.plot(T_internal_range, Q_rad, color='#f59e0b', linewidth=2, label='Radiation')
 ax.plot(T_internal_range, Q_cond + Q_conv + Q_rad, color='white', linewidth=2.5,
         linestyle='--', label='Total')
-ax.set_xlabel('Internal temperature (\\u00b0C)', color='white', fontsize=11)
+ax.set_xlabel('Internal temperature (\°C)', color='white', fontsize=11)
 ax.set_ylabel('Heat inflow (W)', color='white', fontsize=11)
 ax.set_title('Heat flow mechanisms', color='white', fontsize=12)
 ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')

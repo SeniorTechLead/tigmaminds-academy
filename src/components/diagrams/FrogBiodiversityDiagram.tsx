@@ -9,10 +9,10 @@ const FrogBiodiversityDiagram = () => {
   ];
 
   const layers = [
-    { name: 'Canopy (30\u201340 m)', y: 280, h: 40, color: '#166534', species: 'Tree frogs, flying frogs' },
-    { name: 'Understory (5\u201330 m)', y: 320, h: 45, color: '#15803d', species: 'Epiphyte frogs, moss frogs' },
-    { name: 'Shrub layer (1\u20135 m)', y: 365, h: 35, color: '#22c55e', species: 'Reed frogs, bromeliad frogs' },
-    { name: 'Leaf litter (0\u20131 m)', y: 400, h: 35, color: '#86efac', species: 'Miniature frogs, poison frogs' },
+    { name: 'Canopy (30–40 m)', y: 280, h: 40, color: '#166534', species: 'Tree frogs, flying frogs' },
+    { name: 'Understory (5–30 m)', y: 320, h: 45, color: '#15803d', species: 'Epiphyte frogs, moss frogs' },
+    { name: 'Shrub layer (1–5 m)', y: 365, h: 35, color: '#22c55e', species: 'Reed frogs, bromeliad frogs' },
+    { name: 'Leaf litter (0–1 m)', y: 400, h: 35, color: '#86efac', species: 'Miniature frogs, poison frogs' },
     { name: 'Soil & roots', y: 435, h: 25, color: '#a16207', species: 'Burrowing frogs, caecilians' },
   ];
 
@@ -44,7 +44,7 @@ const FrogBiodiversityDiagram = () => {
         <rect x="40" y="42" width="560" height="48" rx="6"
           className="fill-emerald-50 dark:fill-emerald-900/15 stroke-emerald-300 dark:stroke-emerald-700" strokeWidth="1" />
         <text x="320" y="60" textAnchor="middle" className="small fill-emerald-700 dark:fill-emerald-300">
-          Rainforests cover 6% of Earth\u2019s land but hold over 50% of all species.
+          Rainforests cover 6% of Earth’s land but hold over 50% of all species.
         </text>
         <text x="320" y="74" textAnchor="middle" className="small fill-emerald-700 dark:fill-emerald-300">
           Three reasons: energy (sunlight + water), time (millions of years), and microhabitats (vertical layers).
@@ -121,7 +121,7 @@ const FrogBiodiversityDiagram = () => {
           that holds 1 frog, 3 insect species,
         </text>
         <text x="485" y="342" textAnchor="middle" className="tiny fill-amber-600 dark:fill-amber-400">
-          and algae. That\u2019s a complete ecosystem
+          and algae. That’s a complete ecosystem
         </text>
         <text x="485" y="356" textAnchor="middle" className="tiny fill-amber-600 dark:fill-amber-400">
           in a teacup of water.
@@ -150,13 +150,13 @@ const FrogBiodiversityDiagram = () => {
           Why so many species here?
         </text>
         <text x="320" y="510" textAnchor="middle" className="tiny fill-slate-600 dark:fill-slate-300">
-          \u2022 Energy: warm + wet = fast growth = more food = more animals supported
+          • Energy: warm + wet = fast growth = more food = more animals supported
         </text>
         <text x="320" y="524" textAnchor="middle" className="tiny fill-slate-600 dark:fill-slate-300">
-          \u2022 Time: tropical forests are ancient (100 M+ years) = more time for evolution to diversify
+          • Time: tropical forests are ancient (100 M+ years) = more time for evolution to diversify
         </text>
         <text x="320" y="538" textAnchor="middle" className="tiny fill-slate-600 dark:fill-slate-300">
-          \u2022 Structure: 5+ vertical layers = 5+ separate habitats stacked in one place
+          • Structure: 5+ vertical layers = 5+ separate habitats stacked in one place
         </text>
       </svg>
     </div>

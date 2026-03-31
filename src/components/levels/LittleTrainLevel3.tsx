@@ -36,21 +36,21 @@ export default function LittleTrainLevel3() {
   const miniLessons = [
     {
       title: 'Steam engine thermodynamic cycle',
-      concept: `A steam locomotive converts chemical energy (coal) to thermal energy (steam) to mechanical energy (piston motion) to kinetic energy (wheel rotation). The overall efficiency is only 8\u201310%.
+      concept: `A steam locomotive converts chemical energy (coal) to thermal energy (steam) to mechanical energy (piston motion) to kinetic energy (wheel rotation). The overall efficiency is only 8–10%.
 
-The **Carnot limit** sets the theoretical maximum: \u03B7_max = 1 \u2212 T_cold/T_hot. For a boiler at 200\u00B0C (473 K) exhausting at 100\u00B0C (373 K): \u03B7_max = 1 \u2212 373/473 = 21%. Real engines achieve less than half this due to incomplete combustion, heat radiation, and friction losses.
+The **Carnot limit** sets the theoretical maximum: η_max = 1 − T_cold/T_hot. For a boiler at 200°C (473 K) exhausting at 100°C (373 K): η_max = 1 − 373/473 = 21%. Real engines achieve less than half this due to incomplete combustion, heat radiation, and friction losses.
 
 Narrow-gauge hill trains face additional challenges: altitude reduces air density (less oxygen for combustion), steep grades demand maximum power continuously, and sharp curves add drag.`,
-      analogy: 'A steam locomotive is a teakettle on wheels \u2014 it boils water to make steam, but most of the heat escapes through the chimney, just like most of the steam from a kettle dissipates into the kitchen without doing useful work.',
-      storyConnection: 'Bogi\u2019s patched boiler in the story is not just charm \u2014 a real boiler must contain 15 atmospheres of pressure. Fourteen patches mean fourteen places where the pressure nearly won. Every hill train journey is a thermodynamic battle between the energy in coal and the losses along the way.',
+      analogy: 'A steam locomotive is a teakettle on wheels — it boils water to make steam, but most of the heat escapes through the chimney, just like most of the steam from a kettle dissipates into the kitchen without doing useful work.',
+      storyConnection: 'Bogi’s patched boiler in the story is not just charm — a real boiler must contain 15 atmospheres of pressure. Fourteen patches mean fourteen places where the pressure nearly won. Every hill train journey is a thermodynamic battle between the energy in coal and the losses along the way.',
       checkQuestion: 'Why are diesel and electric locomotives more efficient than steam?',
-      checkAnswer: 'Diesel engines operate at higher temperatures and pressures (30\u201340% efficiency). Electric motors have no thermal cycle at all \u2014 they convert electricity to motion at 85\u201395% efficiency. Steam engines waste most energy as heat in the exhaust and through the boiler walls.',
+      checkAnswer: 'Diesel engines operate at higher temperatures and pressures (30–40% efficiency). Electric motors have no thermal cycle at all — they convert electricity to motion at 85–95% efficiency. Steam engines waste most energy as heat in the exhaust and through the boiler walls.',
       codeIntro: 'Model the Carnot efficiency limit and compare it to real engine performance.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
 # Carnot efficiency vs hot-side temperature
-T_cold = 373  # K (100\u00B0C exhaust)
+T_cold = 373  # K (100°C exhaust)
 T_hot = np.linspace(400, 900, 200)  # K
 carnot_eff = (1 - T_cold / T_hot) * 100  # percent
 
@@ -69,8 +69,8 @@ ax1.fill_between(T_hot - 273, real_steam, carnot_eff, alpha=0.1, color='#ef4444'
 ax1.axhline(35, color='#3b82f6', linewidth=1.5, linestyle='--', label='Diesel engine')
 ax1.axhline(90, color='#22c55e', linewidth=1.5, linestyle='--', label='Electric motor')
 ax1.axvline(200, color='#f59e0b', linewidth=1, linestyle=':', alpha=0.5)
-ax1.text(205, 5, 'Typical boiler\\n200\u00B0C', color='#f59e0b', fontsize=8)
-ax1.set_xlabel('Hot-side temperature (\u00B0C)', color='white')
+ax1.text(205, 5, 'Typical boiler\\n200°C', color='#f59e0b', fontsize=8)
+ax1.set_xlabel('Hot-side temperature (°C)', color='white')
 ax1.set_ylabel('Efficiency (%)', color='white')
 ax1.set_title('Thermodynamic Efficiency Limits', color='white', fontsize=12)
 ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
@@ -101,21 +101,21 @@ print(f"  Coal input: 100% chemical energy")
 print(f"  After boiler: 85% (15% lost to flue gases, radiation)")
 print(f"  After cylinder: 25% (60% lost as exhaust steam)")
 print(f"  At wheels: 8% (17% lost to friction, auxiliary systems)")
-print(f"  Carnot limit at 200\u00B0C/100\u00B0C: {(1 - 373/473)*100:.1f}%")`,
-      challenge: 'Add a superheater that raises steam temperature to 350\u00B0C before entering the cylinder. Recalculate the Carnot limit and estimate the new real efficiency. How much improvement does superheating give? (Historical answer: it roughly doubled the efficiency of steam engines.)',
+print(f"  Carnot limit at 200°C/100°C: {(1 - 373/473)*100:.1f}%")`,
+      challenge: 'Add a superheater that raises steam temperature to 350°C before entering the cylinder. Recalculate the Carnot limit and estimate the new real efficiency. How much improvement does superheating give? (Historical answer: it roughly doubled the efficiency of steam engines.)',
       successHint: 'Understanding thermodynamic limits is why the world moved from steam to diesel to electric. Each step captured more of the available energy.',
     },
     {
       title: 'Grade resistance and adhesion limits',
-      concept: `The force needed to pull a train uphill is **F_grade = m \u00D7 g \u00D7 sin(\u03B8)**. For a small angle, sin(\u03B8) \u2248 gradient/100.
+      concept: `The force needed to pull a train uphill is **F_grade = m × g × sin(θ)**. For a small angle, sin(θ) ≈ gradient/100.
 
-At 3% grade, a 100-tonne train needs: 100,000 \u00D7 9.81 \u00D7 0.03 = 29,430 N \u2248 29.4 kN just to overcome gravity. Add rolling resistance (~1 kN) and curve resistance, and you approach the adhesion limit.
+At 3% grade, a 100-tonne train needs: 100,000 × 9.81 × 0.03 = 29,430 N ≈ 29.4 kN just to overcome gravity. Add rolling resistance (~1 kN) and curve resistance, and you approach the adhesion limit.
 
-**Adhesion limit**: TE_max = \u03BC \u00D7 weight on drivers. With \u03BC = 0.30 and 20 tonnes on driving wheels: TE_max = 58,860 N. The train can only climb until grade resistance equals this. Beyond that, wheels slip.`,
-      analogy: 'Grade resistance is like pushing a shopping cart up a car park ramp. A gentle ramp is easy; a steep ramp requires your full weight leaning into the handle. At some steepness, you simply cannot push hard enough \u2014 your shoes slip on the concrete.',
-      storyConnection: 'Bogi\u2019s small wheels and patched boiler make her power-limited, but her narrow gauge and light weight make her adhesion-efficient. Every tonne of Bogi is working \u2014 unlike a broad-gauge express where the heavy, non-driving coaches are dead weight on a climb.',
+**Adhesion limit**: TE_max = μ × weight on drivers. With μ = 0.30 and 20 tonnes on driving wheels: TE_max = 58,860 N. The train can only climb until grade resistance equals this. Beyond that, wheels slip.`,
+      analogy: 'Grade resistance is like pushing a shopping cart up a car park ramp. A gentle ramp is easy; a steep ramp requires your full weight leaning into the handle. At some steepness, you simply cannot push hard enough — your shoes slip on the concrete.',
+      storyConnection: 'Bogi’s small wheels and patched boiler make her power-limited, but her narrow gauge and light weight make her adhesion-efficient. Every tonne of Bogi is working — unlike a broad-gauge express where the heavy, non-driving coaches are dead weight on a climb.',
       checkQuestion: 'A 50-tonne train on a 3% grade with 20 tonnes on driving wheels. Can it climb? What is the maximum grade?',
-      checkAnswer: 'Grade force: 50,000 \u00D7 9.81 \u00D7 0.03 = 14,715 N. TE available: 0.30 \u00D7 20,000 \u00D7 9.81 = 58,860 N. Yes, with 4\u00D7 margin. Maximum grade: TE/(m\u00D7g) = 58,860/(50,000\u00D79.81) = 12%. Wheels slip at about 12% grade \u2014 well above what adhesion railways attempt.',
+      checkAnswer: 'Grade force: 50,000 × 9.81 × 0.03 = 14,715 N. TE available: 0.30 × 20,000 × 9.81 = 58,860 N. Yes, with 4× margin. Maximum grade: TE/(m×g) = 58,860/(50,000×9.81) = 12%. Wheels slip at about 12% grade — well above what adhesion railways attempt.',
       codeIntro: 'Calculate the adhesion-limited maximum gradient for different train configurations.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -166,7 +166,7 @@ for label, mu in mu_values.items():
     ax2.axvline(mu, color=colors_mu[label], linestyle=':', linewidth=1, alpha=0.5)
     ax2.text(mu + 0.005, 1, label, color=colors_mu[label], fontsize=7, rotation=90)
 
-ax2.set_xlabel('Friction coefficient (\u03BC)', color='white')
+ax2.set_xlabel('Friction coefficient (μ)', color='white')
 ax2.set_ylabel('Maximum gradient (%)', color='white')
 ax2.set_title('Adhesion-Limited Max Gradient', color='white', fontsize=12)
 ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=7)
@@ -179,21 +179,21 @@ print("Adhesion analysis for 50-tonne train:")
 for label, mu in mu_values.items():
     for frac in [0.4, 0.6, 1.0]:
         max_g = mu * frac * 100
-        print(f"  {label} (\u03BC={mu}), {frac*100:.0f}% on drivers: max grade = {max_g:.1f}%")`,
-      challenge: 'Add a sand dispenser that increases \u03BC by 0.10 when activated. Plot the improvement in maximum gradient. At what gradient does sand become essential (i.e., the train would stall on wet rails without it)?',
+        print(f"  {label} (μ={mu}), {frac*100:.0f}% on drivers: max grade = {max_g:.1f}%")`,
+      challenge: 'Add a sand dispenser that increases μ by 0.10 when activated. Plot the improvement in maximum gradient. At what gradient does sand become essential (i.e., the train would stall on wet rails without it)?',
       successHint: 'Adhesion is the fundamental constraint of all rail transport. Understanding this limit explains why mountain railways exist the way they do.',
     },
     {
       title: 'Curve resistance and superelevation',
-      concept: `On a curve, a train\u2019s inertia tries to push it outward (centrifugal effect). The required centripetal acceleration is **a = v\u00B2/R**.
+      concept: `On a curve, a train’s inertia tries to push it outward (centrifugal effect). The required centripetal acceleration is **a = v²/R**.
 
-Engineers tilt the outer rail higher (**superelevation**) to balance this force: **tan(\u03B8) = v\u00B2/(g \u00D7 R)**. There is a single \u201Cbalance speed\u201D where the tilt perfectly cancels the centrifugal effect.
+Engineers tilt the outer rail higher (**superelevation**) to balance this force: **tan(θ) = v²/(g × R)**. There is a single “balance speed” where the tilt perfectly cancels the centrifugal effect.
 
-Narrow-gauge hill railways face extreme curves (R < 100 m), requiring speed limits of 15\u201325 km/h. Curve resistance adds approximately **Fc = 700/R** Newtons per tonne, which is significant at small radii.`,
+Narrow-gauge hill railways face extreme curves (R < 100 m), requiring speed limits of 15–25 km/h. Curve resistance adds approximately **Fc = 700/R** Newtons per tonne, which is significant at small radii.`,
       analogy: 'Superelevation is a velodrome track for trains. Just as a cyclist banks into a turn on a tilted velodrome, the tilted rail lets gravity help the train around the curve instead of the wheel flanges grinding against the rail.',
-      storyConnection: 'Every curve on Bogi\u2019s route is a physics problem. The 18-metre radius curves on the Darjeeling railway demand extreme precision \u2014 too fast and the train derails outward; too slow on a superelevated curve and it leans inward dangerously.',
+      storyConnection: 'Every curve on Bogi’s route is a physics problem. The 18-metre radius curves on the Darjeeling railway demand extreme precision — too fast and the train derails outward; too slow on a superelevated curve and it leans inward dangerously.',
       checkQuestion: 'A curve has R = 50 m and 100 mm superelevation on 1,000 mm gauge. What is the maximum safe speed?',
-      checkAnswer: 'v = \u221A(g \u00D7 R \u00D7 superelevation/gauge) = \u221A(9.81 \u00D7 50 \u00D7 0.1) = 7.0 m/s = 25 km/h. Exceeding this risks the outer flange climbing the rail and causing derailment.',
+      checkAnswer: 'v = √(g × R × superelevation/gauge) = √(9.81 × 50 × 0.1) = 7.0 m/s = 25 km/h. Exceeding this risks the outer flange climbing the rail and causing derailment.',
       codeIntro: 'Calculate safe speeds on curves and visualise superelevation requirements.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -266,15 +266,15 @@ print("\\nAt R=18m (Darjeeling), curve resistance alone equals a 0.40% grade!")`
       concept: `Going downhill, gravity accelerates the train. Without braking, a train on a 3% grade would reach dangerous speeds within minutes.
 
 Mountain railways use **three braking systems**:
-1. **Friction brakes**: brake shoes press against wheels. Limited by heat buildup \u2014 on long descents, brakes can fade.
+1. **Friction brakes**: brake shoes press against wheels. Limited by heat buildup — on long descents, brakes can fade.
 2. **Dynamic (rheostatic) braking**: motors act as generators, converting kinetic energy to electrical energy dissipated as heat in resistors.
-3. **Regenerative braking**: same as dynamic, but feeds electricity back to the grid. Modern mountain railways recover 20\u201330% of energy.
+3. **Regenerative braking**: same as dynamic, but feeds electricity back to the grid. Modern mountain railways recover 20–30% of energy.
 
-The key equation: braking distance = v\u00B2 / (2 \u00D7 deceleration). On a downhill grade, effective deceleration is reduced by the grade component.`,
-      analogy: 'Mountain braking is like cycling down a hill while squeezing the brakes \u2014 you feel the rims heat up. If you ride the brakes too long on a very long hill, the pads overheat and lose grip. This is exactly what happens to train brakes on long descents, which is why multiple independent systems are essential.',
-      storyConnection: 'The express in the story flies through the hills on a broad-gauge line with tunnels and viaducts \u2014 but coming down, its enormous weight and speed make braking the critical challenge. Bogi\u2019s advantage is her low speed and light weight: she barely needs to brake at all.',
+The key equation: braking distance = v² / (2 × deceleration). On a downhill grade, effective deceleration is reduced by the grade component.`,
+      analogy: 'Mountain braking is like cycling down a hill while squeezing the brakes — you feel the rims heat up. If you ride the brakes too long on a very long hill, the pads overheat and lose grip. This is exactly what happens to train brakes on long descents, which is why multiple independent systems are essential.',
+      storyConnection: 'The express in the story flies through the hills on a broad-gauge line with tunnels and viaducts — but coming down, its enormous weight and speed make braking the critical challenge. Bogi’s advantage is her low speed and light weight: she barely needs to brake at all.',
       checkQuestion: 'A 100-tonne train at 30 km/h on a 3% downhill grade. What braking force is needed to stop in 200 m?',
-      checkAnswer: 'v = 30/3.6 = 8.33 m/s. KE = 0.5 \u00D7 100,000 \u00D7 8.33\u00B2 = 3,472,222 J. Grade force (accelerating) = 100,000 \u00D7 9.81 \u00D7 0.03 = 29,430 N over 200 m = 5,886,000 J. Total energy to absorb = 3,472,222 + 5,886,000 = 9,358,222 J. Brake force = 9,358,222 / 200 = 46,791 N = 46.8 kN.',
+      checkAnswer: 'v = 30/3.6 = 8.33 m/s. KE = 0.5 × 100,000 × 8.33² = 3,472,222 J. Grade force (accelerating) = 100,000 × 9.81 × 0.03 = 29,430 N over 200 m = 5,886,000 J. Total energy to absorb = 3,472,222 + 5,886,000 = 9,358,222 J. Brake force = 9,358,222 / 200 = 46,791 N = 46.8 kN.',
       codeIntro: 'Model braking distances and heat buildup on long mountain descents.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -301,10 +301,10 @@ for grade, color, ls in [(0, '#22c55e', '-'), (2, '#3b82f6', '-'),
     if safe:
         dist = v_ms**2 / (2 * eff_decel)
         ax1.plot(speeds, dist, color=color, linewidth=2, linestyle=ls,
-                 label=f'{grade}% downhill (a_eff={eff_decel:.2f} m/s\u00B2)')
+                 label=f'{grade}% downhill (a_eff={eff_decel:.2f} m/s²)')
     else:
         ax1.axhline(0, color=color, linewidth=2, linestyle='--',
-                     label=f'{grade}% \u2014 brakes insufficient!')
+                     label=f'{grade}% — brakes insufficient!')
 
 ax1.set_xlabel('Speed (km/h)', color='white')
 ax1.set_ylabel('Braking distance (m)', color='white')
@@ -323,12 +323,12 @@ grade_pct = 3  # percent
 grade_force = mass * g * grade_pct / 100  # N
 brake_force = grade_force * 0.95  # braking absorbs most
 brake_mass = 500  # kg of brake material
-specific_heat = 500  # J/(kg\u00B7K) for cast iron
+specific_heat = 500  # J/(kg·K) for cast iron
 
 # Temperature rise
 heat_per_metre = brake_force  # J/m
 temp_rise = heat_per_metre * descent_m / (brake_mass * specific_heat)
-base_temp = 20  # \u00B0C ambient
+base_temp = 20  # °C ambient
 brake_temp = base_temp + temp_rise
 
 # With regenerative braking (absorbs 30% of energy electrically)
@@ -336,12 +336,12 @@ brake_temp_regen = base_temp + temp_rise * 0.7
 
 ax2.plot(descent_km, brake_temp, color='#ef4444', linewidth=2, label='Friction brakes only')
 ax2.plot(descent_km, brake_temp_regen, color='#22c55e', linewidth=2, label='With regenerative (30%)')
-ax2.axhline(400, color='#f59e0b', linestyle='--', linewidth=1, label='Brake fade threshold (400\u00B0C)')
+ax2.axhline(400, color='#f59e0b', linestyle='--', linewidth=1, label='Brake fade threshold (400°C)')
 ax2.fill_between(descent_km, 400, brake_temp, where=brake_temp > 400,
                   alpha=0.2, color='#ef4444')
 
 ax2.set_xlabel('Distance descended (km)', color='white')
-ax2.set_ylabel('Brake temperature (\u00B0C)', color='white')
+ax2.set_ylabel('Brake temperature (°C)', color='white')
 ax2.set_title('Brake Heating on Long Descent', color='white', fontsize=12)
 ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
 ax2.tick_params(colors='gray')
@@ -365,7 +365,7 @@ print(f"  Regenerative braking extends safe descent by {regen_fade - fade_dist:.
 This is a **job-shop scheduling problem**: assign time slots to trains on shared track sections. Constraints include minimum headway, section running times, and dwell times at stations.
 
 A **greedy algorithm** (priority to the train closest to a passing loop) gives feasible solutions. **Integer programming** finds the optimal timetable by minimising total delay.`,
-      analogy: 'Scheduling on single track is like air traffic control for a narrow corridor \u2014 two planes cannot use the same runway at the same time, so a controller must sequence arrivals and departures with precise timing.',
+      analogy: 'Scheduling on single track is like air traffic control for a narrow corridor — two planes cannot use the same runway at the same time, so a controller must sequence arrivals and departures with precise timing.',
       storyConnection: 'Bogi shares her track with the occasional goods train. In the story, the express gets priority on the new broad-gauge line, but on the old narrow-gauge, Bogi must carefully time her journey to avoid conflicts at the limited passing loops.',
       checkQuestion: 'Two trains approach a single-track section from opposite sides. Who waits?',
       checkAnswer: 'The train nearest to a passing loop waits, minimising total delay. If both are equidistant, the faster or higher-priority train goes first.',
@@ -433,7 +433,7 @@ print(f"  Passing loops at: {', '.join(stations[i] for i in passing_loops)}")
 print(f"  Total journey time (up): ~{sum(section_times)} min = {sum(section_times)/60:.1f} hours")
 print("  Conflicts must be resolved by holding trains at passing loops")`,
       challenge: 'Detect conflicts (where an uphill and downhill train occupy the same section simultaneously) and resolve them by delaying one train at a passing loop. Minimise total delay across all trains.',
-      successHint: 'Railway scheduling is one of the oldest and most important combinatorial optimisation problems \u2014 and it is still an active area of research today.',
+      successHint: 'Railway scheduling is one of the oldest and most important combinatorial optimisation problems — and it is still an active area of research today.',
     },
     {
       title: 'Energy-optimal driving strategies',
@@ -441,9 +441,9 @@ print("  Conflicts must be resolved by holding trains at passing loops")`,
 
 On descents, gravitational potential energy converts to kinetic energy for free. On flat sections, the train can coast (engine off) and slowly decelerate due to rolling resistance.
 
-The optimal strategy uses **dynamic programming**: at each point, decide whether to power, coast, or brake to minimise total fuel while meeting the timetable. Good drivers save 15\u201320% fuel.`,
-      analogy: 'Efficient driving is like cycling \u2014 you pedal hard uphill, coast downhill, and time your effort to arrive without wasting energy on unnecessary braking.',
-      storyConnection: 'Bogi\u2019s driver knows every metre of the route \u2014 where to open the regulator, where to coast, where the descent begins. This accumulated knowledge is human-optimised driving, and it takes years to master.',
+The optimal strategy uses **dynamic programming**: at each point, decide whether to power, coast, or brake to minimise total fuel while meeting the timetable. Good drivers save 15–20% fuel.`,
+      analogy: 'Efficient driving is like cycling — you pedal hard uphill, coast downhill, and time your effort to arrive without wasting energy on unnecessary braking.',
+      storyConnection: 'Bogi’s driver knows every metre of the route — where to open the regulator, where to coast, where the descent begins. This accumulated knowledge is human-optimised driving, and it takes years to master.',
       checkQuestion: 'The train is running 5 minutes early approaching a descent. Should the driver slow down or coast?',
       checkAnswer: 'Coast. Convert the time surplus into fuel savings. Arrive closer to schedule while using zero fuel on the descent. Only brake if speed becomes unsafe.',
       codeIntro: 'Model the energy cost of a complete mountain railway journey.',

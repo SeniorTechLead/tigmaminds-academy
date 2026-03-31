@@ -111,7 +111,7 @@ bars = ax.bar(months, np.array(discharge)/1000, color='#3b82f6', alpha=0.7,
               label='Discharge', edgecolor='none')
 ax2.plot(months, np.array(specific_stream_power), color='#ef4444', linewidth=2.5,
          marker='o', markersize=6, label='Specific stream power')
-ax.set_ylabel('Discharge (\\u00d710\\u00b3 m\\u00b3/s)', color='#3b82f6', fontsize=10)
+ax.set_ylabel('Discharge (\×10\³ m\³/s)', color='#3b82f6', fontsize=10)
 ax2.set_ylabel('Stream power (W/m)', color='#ef4444', fontsize=10)
 ax.set_title('Monthly discharge & stream power', color='white', fontsize=12)
 ax.tick_params(axis='x', labelcolor='white', labelsize=8)
@@ -424,9 +424,9 @@ for i in range(1, len(t_proj)):
 ax.plot(years_proj, area_trend, '--', color='#f59e0b', linewidth=2, label='Trend (exponential decay)')
 ax.plot(years_proj, area_protected, '--', color='#22c55e', linewidth=2, label='With erosion protection')
 ax.plot(years_proj, area_dam, '--', color='#ef4444', linewidth=2, label='With upstream dam')
-ax.axhline(y=100, color='white', linestyle=':', alpha=0.3, label='Critical area (100 km\\u00b2)')
+ax.axhline(y=100, color='white', linestyle=':', alpha=0.3, label='Critical area (100 km\²)')
 ax.set_xlabel('Year', color='white', fontsize=11)
-ax.set_ylabel('Island area (km\\u00b2)', color='white', fontsize=11)
+ax.set_ylabel('Island area (km\²)', color='white', fontsize=11)
 ax.set_title('Majuli area: history & projections', color='white', fontsize=12)
 ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax.set_xlim(1945, 2125)
@@ -436,7 +436,7 @@ ax = axes[0, 1]
 mid_years = (years_hist[:-1] + years_hist[1:]) / 2
 ax.bar(mid_years, erosion_rates, width=8, color='#ef4444', edgecolor='none', alpha=0.8)
 ax.set_xlabel('Year', color='white', fontsize=11)
-ax.set_ylabel('Erosion rate (km\\u00b2/year)', color='white', fontsize=11)
+ax.set_ylabel('Erosion rate (km\²/year)', color='white', fontsize=11)
 ax.set_title('Decadal erosion rates', color='white', fontsize=12)
 for x, y in zip(mid_years, erosion_rates):
     ax.text(x, y + 0.3, f'{y:.1f}', ha='center', color='white', fontsize=8)
@@ -462,7 +462,7 @@ ax.plot(x_months, net, 'o-', color='#f59e0b', linewidth=2, label='Net change')
 ax.axhline(y=0, color='white', linewidth=0.5, alpha=0.5)
 ax.set_xticks(x_months)
 ax.set_xticklabels(month_names, color='white')
-ax.set_ylabel('Area change (km\\u00b2/month)', color='white', fontsize=10)
+ax.set_ylabel('Area change (km\²/month)', color='white', fontsize=10)
 ax.set_title('Monthly sediment budget (erosion vs deposition)', color='white', fontsize=12)
 ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
@@ -627,13 +627,13 @@ for idx, (ax, date, img, cls) in enumerate(zip(axes.flat, dates, images, classif
         ax.imshow(erosion_overlay, aspect='equal')
         n_eroded = np.sum(erosion_pixels & (prev_cls != -1) & (cls != -1))
         area_eroded = n_eroded * 0.09  # each pixel = 300m x 300m = 0.09 km^2 (scaled)
-        ax.text(5, 15, f'Eroded: {area_eroded:.1f} km\\u00b2', color='#ef4444', fontsize=9,
+        ax.text(5, 15, f'Eroded: {area_eroded:.1f} km\²', color='#ef4444', fontsize=9,
                 bbox=dict(boxstyle='round', facecolor='#1f2937', alpha=0.8, edgecolor='#ef4444'))
 
     # Calculate and show island area
     land_pixels = np.sum(cls == 0)
     area_km2 = land_pixels * 0.09  # scaled pixel area
-    ax.set_title(f'{date} — {area_km2:.0f} km\\u00b2', color='white', fontsize=11)
+    ax.set_title(f'{date} — {area_km2:.0f} km\²', color='white', fontsize=11)
     ax.text(5, 190, 'Land', color='#22c55e', fontsize=8,
             bbox=dict(boxstyle='round', facecolor='#111827', alpha=0.8))
     ax.text(5, 180, 'Water', color='#3b82f6', fontsize=8,
@@ -660,7 +660,7 @@ ax.set_facecolor('#111827')
 ax.tick_params(colors='gray')
 ax.plot([int(d) for d in dates], areas, 'o-', color='#3b82f6', linewidth=2.5, markersize=8)
 ax.set_xlabel('Year', color='white', fontsize=11)
-ax.set_ylabel('Island area (km\\u00b2, synthetic)', color='white', fontsize=11)
+ax.set_ylabel('Island area (km\², synthetic)', color='white', fontsize=11)
 ax.set_title('Area decline from change detection', color='white', fontsize=12)
 
 # Erosion rate per period
@@ -675,7 +675,7 @@ for i in range(1, len(dates)):
     ax.text(mid_year, rate + 0.05, f'{rate:.2f}', ha='center', color='white', fontsize=9)
 
 ax.set_xlabel('Year', color='white', fontsize=11)
-ax.set_ylabel('Erosion rate (km\\u00b2/year)', color='white', fontsize=11)
+ax.set_ylabel('Erosion rate (km\²/year)', color='white', fontsize=11)
 ax.set_title('Computed erosion rates', color='white', fontsize=12)
 
 plt.tight_layout()
@@ -764,7 +764,7 @@ ax.semilogx(return_periods_design, Q_2050/1000, '--', color='#ef4444',
             linewidth=2, label='2050 climate (+17%)')
 ax.axhline(y=72, color='#f59e0b', linestyle=':', alpha=0.5, label='Current 100-yr flood')
 ax.set_xlabel('Return period (years)', color='white', fontsize=11)
-ax.set_ylabel('Discharge (\\u00d710\\u00b3 m\\u00b3/s)', color='white', fontsize=11)
+ax.set_ylabel('Discharge (\×10\³ m\³/s)', color='white', fontsize=11)
 ax.set_title('Flood frequency analysis', color='white', fontsize=12)
 ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
@@ -783,19 +783,19 @@ erosion_rate = np.where(Q_range > Q_threshold,
 ax.plot(Q_range/1000, erosion_rate, color='#ef4444', linewidth=2.5, label='Erosion power law')
 ax.fill_between(Q_range/1000, 0, erosion_rate, alpha=0.1, color='#ef4444')
 ax.axvline(x=Q_threshold/1000, color='#22c55e', linestyle='--', alpha=0.5,
-           label=f'Threshold ({Q_threshold/1000:.0f}k m\\u00b3/s)')
+           label=f'Threshold ({Q_threshold/1000:.0f}k m\³/s)')
 
 # Mark key floods
 for Q_flood, label in [(55000, '2-yr'), (72000, '100-yr'), (84000, '100-yr 2050')]:
     if Q_flood > Q_threshold:
         E = a_power * (Q_flood - Q_threshold)**b_power / 1e6
         ax.plot(Q_flood/1000, E, 'o', markersize=8, color='#f59e0b', zorder=5)
-        ax.annotate(f'{label}\\n{E:.1f} km\\u00b2/yr', xy=(Q_flood/1000, E),
+        ax.annotate(f'{label}\\n{E:.1f} km\²/yr', xy=(Q_flood/1000, E),
                     xytext=(Q_flood/1000 + 5, E + 0.2), color='white', fontsize=8,
                     arrowprops=dict(arrowstyle='->', color='white', lw=1))
 
-ax.set_xlabel('Discharge (\\u00d710\\u00b3 m\\u00b3/s)', color='white', fontsize=11)
-ax.set_ylabel('Erosion rate (km\\u00b2/year)', color='white', fontsize=11)
+ax.set_xlabel('Discharge (\×10\³ m\³/s)', color='white', fontsize=11)
+ax.set_ylabel('Erosion rate (km\²/year)', color='white', fontsize=11)
 ax.set_title('Erosion increases nonlinearly with discharge', color='white', fontsize=12)
 ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 

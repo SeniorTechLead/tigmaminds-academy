@@ -30,26 +30,26 @@ export default function DharmaWheelLevel1() {
 
   const miniLessons = [
     {
-      title: 'Friction \u2014 the force that resists motion',
-      concept: `Before we can understand why the wheel was revolutionary, we need to understand **friction** \u2014 the force it defeats.
+      title: 'Friction — the force that resists motion',
+      concept: `Before we can understand why the wheel was revolutionary, we need to understand **friction** — the force it defeats.
 
-Put your hand flat on a table and push it sideways. You feel resistance. That resistance is friction \u2014 it acts whenever two surfaces slide against each other. It always opposes the direction of motion.
+Put your hand flat on a table and push it sideways. You feel resistance. That resistance is friction — it acts whenever two surfaces slide against each other. It always opposes the direction of motion.
 
 Two types matter here:
 - **Static friction**: the force you must overcome to START an object moving (higher)
 - **Kinetic (sliding) friction**: the force that resists an object ALREADY moving (lower)
 
-The friction force is calculated as: **F = \u03BC \u00D7 N**
-- \u03BC (mu) is the **coefficient of friction** \u2014 a number that depends on the two surfaces
+The friction force is calculated as: **F = μ × N**
+- μ (mu) is the **coefficient of friction** — a number that depends on the two surfaces
 - N is the **normal force** (usually the weight of the object: mg)
 
-Rubber on concrete: \u03BC \u2248 0.8 (high friction). Ice on ice: \u03BC \u2248 0.03 (low friction).
+Rubber on concrete: μ ≈ 0.8 (high friction). Ice on ice: μ ≈ 0.03 (low friction).
 
-The key insight: **rolling friction** has a much lower \u03BC than sliding friction \u2014 typically 0.01 compared to 0.3-0.8. The wheel exploits this difference.`,
-      analogy: 'Imagine dragging a heavy suitcase across an airport floor versus rolling it on wheels. The suitcase weighs the same either way. But dragging it feels ten times harder because sliding friction grips the entire bottom surface. Rolling converts that sliding into thousands of tiny "touch and lift" contacts \u2014 each one so brief that friction barely has time to grab hold.',
-      storyConnection: 'The Dharma Wheel\u2019s eight spokes represent the Noble Eightfold Path \u2014 a path of practice. But the wheel itself is a profound metaphor precisely because wheels MOVE. A wheel that cannot turn is just a circle. What makes it a wheel is its ability to overcome friction and carry weight forward. The physics of motion IS the metaphor.',
-      checkQuestion: 'A 20 kg box sits on a wooden floor (\u03BC = 0.4). How much horizontal force do you need to start it sliding?',
-      checkAnswer: 'F = \u03BC \u00D7 N = \u03BC \u00D7 mg = 0.4 \u00D7 20 \u00D7 9.8 = 78.4 N. That is about 8 kg of push force. Now put it on wheels (\u03BC = 0.01): F = 0.01 \u00D7 20 \u00D7 9.8 = 1.96 N \u2014 you could push it with one finger. The wheel reduces the force needed by 40\u00D7.',
+The key insight: **rolling friction** has a much lower μ than sliding friction — typically 0.01 compared to 0.3-0.8. The wheel exploits this difference.`,
+      analogy: 'Imagine dragging a heavy suitcase across an airport floor versus rolling it on wheels. The suitcase weighs the same either way. But dragging it feels ten times harder because sliding friction grips the entire bottom surface. Rolling converts that sliding into thousands of tiny "touch and lift" contacts — each one so brief that friction barely has time to grab hold.',
+      storyConnection: 'The Dharma Wheel’s eight spokes represent the Noble Eightfold Path — a path of practice. But the wheel itself is a profound metaphor precisely because wheels MOVE. A wheel that cannot turn is just a circle. What makes it a wheel is its ability to overcome friction and carry weight forward. The physics of motion IS the metaphor.',
+      checkQuestion: 'A 20 kg box sits on a wooden floor (μ = 0.4). How much horizontal force do you need to start it sliding?',
+      checkAnswer: 'F = μ × N = μ × mg = 0.4 × 20 × 9.8 = 78.4 N. That is about 8 kg of push force. Now put it on wheels (μ = 0.01): F = 0.01 × 20 × 9.8 = 1.96 N — you could push it with one finger. The wheel reduces the force needed by 40×.',
       codeIntro: 'Compare sliding vs rolling friction for different masses.',
       code: `import numpy as np
 
@@ -75,30 +75,30 @@ print()
 print("Key insight: the ratio stays CONSTANT (50x) regardless of mass.")
 print("A wheel helps just as much for a 5 kg load as a 1000 kg load.")
 print("This is why wheels changed civilization — they scale perfectly.")`,
-      challenge: 'Add a third column for ball bearings (\u03BC = 0.001). How much force does it take to move a 10,000 kg truck on ball bearings versus dragging it?',
-      successHint: 'The wheel is not just a convenience \u2014 it is a force multiplier. By converting sliding friction to rolling friction, it reduces resistance by 50\u00D7 or more. Every cart, chariot, bicycle, car, and train exploits this one principle.',
+      challenge: 'Add a third column for ball bearings (μ = 0.001). How much force does it take to move a 10,000 kg truck on ball bearings versus dragging it?',
+      successHint: 'The wheel is not just a convenience — it is a force multiplier. By converting sliding friction to rolling friction, it reduces resistance by 50× or more. Every cart, chariot, bicycle, car, and train exploits this one principle.',
     },
     {
-      title: 'Torque \u2014 the rotational force',
-      concept: `Linear force pushes things in straight lines. **Torque** is the rotational version \u2014 it makes things spin.
+      title: 'Torque — the rotational force',
+      concept: `Linear force pushes things in straight lines. **Torque** is the rotational version — it makes things spin.
 
-The formula is simple: **\u03C4 = F \u00D7 r**
-- \u03C4 (tau) is torque, measured in Newton-metres (N\u00B7m)
+The formula is simple: **τ = F × r**
+- τ (tau) is torque, measured in Newton-metres (N·m)
 - F is the force applied
-- r is the **lever arm** \u2014 the perpendicular distance from the pivot to where the force acts
+- r is the **lever arm** — the perpendicular distance from the pivot to where the force acts
 
 This explains why:
 - A long wrench loosens a bolt more easily than a short one (bigger r)
 - You push a door at the handle, not near the hinge (bigger r)
 - A bigger wheel requires less force to turn (bigger r)
 
-The angle matters too. Maximum torque comes when the force is perpendicular to the lever arm. If you push parallel to the lever, torque is zero \u2014 you cannot open a door by pushing along its surface.
+The angle matters too. Maximum torque comes when the force is perpendicular to the lever arm. If you push parallel to the lever, torque is zero — you cannot open a door by pushing along its surface.
 
-The full formula: **\u03C4 = F \u00D7 r \u00D7 sin(\u03B8)**, where \u03B8 is the angle between force and lever arm. At 90\u00B0, sin(\u03B8) = 1 (maximum). At 0\u00B0, sin(\u03B8) = 0 (no torque).`,
+The full formula: **τ = F × r × sin(θ)**, where θ is the angle between force and lever arm. At 90°, sin(θ) = 1 (maximum). At 0°, sin(θ) = 0 (no torque).`,
       analogy: 'Torque is like leverage. Imagine opening a stuck jar lid. If you grip near the centre, you strain and nothing happens. Grip the outer edge of the lid (bigger r) and it twists open easily. Same force, bigger lever arm, more torque. A wrench is just a tool for increasing r.',
-      storyConnection: 'The Dharma Wheel in the story is turned by the Teacher\u2019s words. In physics terms, the teaching applies a force at the rim of understanding, creating torque that sets the wheel in motion. The eight spokes extend to the rim \u2014 each spoke is a lever arm. The further from the centre the force acts, the greater the torque.',
+      storyConnection: 'The Dharma Wheel in the story is turned by the Teacher’s words. In physics terms, the teaching applies a force at the rim of understanding, creating torque that sets the wheel in motion. The eight spokes extend to the rim — each spoke is a lever arm. The further from the centre the force acts, the greater the torque.',
       checkQuestion: 'You apply 50 N of force at the end of a 0.3 m wrench. Your friend applies 30 N at the end of a 0.6 m wrench. Who generates more torque?',
-      checkAnswer: 'You: \u03C4 = 50 \u00D7 0.3 = 15 N\u00B7m. Friend: \u03C4 = 30 \u00D7 0.6 = 18 N\u00B7m. Your friend wins despite using less force, because the longer lever arm more than compensates. This is the fundamental principle of levers \u2014 and exactly why mechanics use long wrenches for tight bolts.',
+      checkAnswer: 'You: τ = 50 × 0.3 = 15 N·m. Friend: τ = 30 × 0.6 = 18 N·m. Your friend wins despite using less force, because the longer lever arm more than compensates. This is the fundamental principle of levers — and exactly why mechanics use long wrenches for tight bolts.',
       codeIntro: 'Calculate torque for different force and lever arm combinations, and find when a wheel starts to spin.',
       code: `import numpy as np
 
@@ -124,39 +124,39 @@ print("-" * 42)
 for deg in [0, 15, 30, 45, 60, 75, 90]:
     rad = np.radians(deg)
     tau = F * 0.5 * np.sin(rad)
-    print(f"{deg:>8}\u00B0 | {np.sin(rad):>12.3f} | {tau:>14.1f}")
+    print(f"{deg:>8}° | {np.sin(rad):>12.3f} | {tau:>14.1f}")
 
 print()
-print("At 0\u00B0: zero torque (pushing along the lever).")
-print("At 90\u00B0: maximum torque (pushing perpendicular).")
+print("At 0°: zero torque (pushing along the lever).")
+print("At 90°: maximum torque (pushing perpendicular).")
 print("This is why you push a door at right angles to its surface.")`,
-      challenge: 'A bicycle pedal crank is 0.17 m long. Plot the torque for one full revolution (0\u00B0 to 360\u00B0) if the rider pushes downward with 80 N. When is torque maximum? When is it zero?',
-      successHint: 'Torque is the bridge between linear and rotational physics. Every rotating machine \u2014 engines, turbines, wheels, gears \u2014 converts force into torque. Understanding \u03C4 = F \u00D7 r \u00D7 sin(\u03B8) unlocks how all of them work.',
+      challenge: 'A bicycle pedal crank is 0.17 m long. Plot the torque for one full revolution (0° to 360°) if the rider pushes downward with 80 N. When is torque maximum? When is it zero?',
+      successHint: 'Torque is the bridge between linear and rotational physics. Every rotating machine — engines, turbines, wheels, gears — converts force into torque. Understanding τ = F × r × sin(θ) unlocks how all of them work.',
     },
     {
-      title: 'Angular momentum \u2014 why spinning objects resist change',
-      concept: `A moving object has **momentum** (p = mv) and resists changes to its motion. A spinning object has **angular momentum** (L = I\u03C9) and resists changes to its rotation.
+      title: 'Angular momentum — why spinning objects resist change',
+      concept: `A moving object has **momentum** (p = mv) and resists changes to its motion. A spinning object has **angular momentum** (L = Iω) and resists changes to its rotation.
 
-The formula: **L = I \u00D7 \u03C9**
-- L is angular momentum (kg\u00B7m\u00B2/s)
-- I is the **moment of inertia** \u2014 how mass is distributed relative to the spin axis
-- \u03C9 (omega) is angular velocity (radians per second)
+The formula: **L = I × ω**
+- L is angular momentum (kg·m²/s)
+- I is the **moment of inertia** — how mass is distributed relative to the spin axis
+- ω (omega) is angular velocity (radians per second)
 
 Moment of inertia depends on WHERE the mass is:
-- Solid disc: I = \u00BD mr\u00B2
-- Thin ring (all mass at the rim): I = mr\u00B2
-- Solid sphere: I = 2/5 mr\u00B2
+- Solid disc: I = ½ mr²
+- Thin ring (all mass at the rim): I = mr²
+- Solid sphere: I = 2/5 mr²
 
 The key principle: **angular momentum is conserved** (unless an external torque acts). This means:
-- If I decreases, \u03C9 must increase to keep L constant
-- An ice skater pulls in her arms (I decreases) \u2192 she spins faster (\u03C9 increases)
-- She extends her arms (I increases) \u2192 she slows down (\u03C9 decreases)
+- If I decreases, ω must increase to keep L constant
+- An ice skater pulls in her arms (I decreases) → she spins faster (ω increases)
+- She extends her arms (I increases) → she slows down (ω decreases)
 
 This conservation law is one of the most fundamental in physics. It governs everything from atoms to galaxies.`,
-      analogy: 'Think of angular momentum like a reputation \u2014 once established, it resists change. A slowly spinning wheel is easy to stop (low L, like a new reputation). A fast, heavy wheel is extremely hard to stop or redirect (high L, like an established reputation). The only way to change angular momentum is to apply torque over time \u2014 there are no shortcuts.',
-      storyConnection: 'In Buddhism, the Dharma Wheel once set in motion continues to turn through the ages. Angular momentum conservation is the physics version: once the wheel spins, it maintains its rotation unless acted upon by an external torque. The metaphor is precise \u2014 teachings persist because they have momentum, and overcoming that momentum requires sustained opposing force.',
-      checkQuestion: 'A figure skater spins at 2 rev/s with arms out (I = 3.0 kg\u00B7m\u00B2). She pulls her arms in (I = 1.0 kg\u00B7m\u00B2). How fast does she spin now?',
-      checkAnswer: 'Conservation: L = I\u2081\u03C9\u2081 = I\u2082\u03C9\u2082. So \u03C9\u2082 = I\u2081\u03C9\u2081 / I\u2082 = 3.0 \u00D7 2 / 1.0 = 6 rev/s. She triples her speed by reducing her moment of inertia by a factor of 3. No extra energy input \u2014 just physics. This is angular momentum conservation in action.',
+      analogy: 'Think of angular momentum like a reputation — once established, it resists change. A slowly spinning wheel is easy to stop (low L, like a new reputation). A fast, heavy wheel is extremely hard to stop or redirect (high L, like an established reputation). The only way to change angular momentum is to apply torque over time — there are no shortcuts.',
+      storyConnection: 'In Buddhism, the Dharma Wheel once set in motion continues to turn through the ages. Angular momentum conservation is the physics version: once the wheel spins, it maintains its rotation unless acted upon by an external torque. The metaphor is precise — teachings persist because they have momentum, and overcoming that momentum requires sustained opposing force.',
+      checkQuestion: 'A figure skater spins at 2 rev/s with arms out (I = 3.0 kg·m²). She pulls her arms in (I = 1.0 kg·m²). How fast does she spin now?',
+      checkAnswer: 'Conservation: L = I₁ω₁ = I₂ω₂. So ω₂ = I₁ω₁ / I₂ = 3.0 × 2 / 1.0 = 6 rev/s. She triples her speed by reducing her moment of inertia by a factor of 3. No extra energy input — just physics. This is angular momentum conservation in action.',
       codeIntro: 'Simulate the ice skater spin-up effect and explore angular momentum conservation.',
       code: `import numpy as np
 
@@ -200,38 +200,38 @@ for name, I in designs:
 print()
 print("Key: mass at the RIM gives the highest moment of inertia.")
 print("This is why flywheels have heavy rims — maximum energy storage.")`,
-      challenge: 'A collapsing gas cloud (like a forming star) shrinks from radius 1000 to radius 1. If it starts spinning at 0.001 rad/s, how fast does it spin when collapsed? (Hint: model as I = mr\u00B2 and use conservation.)',
+      challenge: 'A collapsing gas cloud (like a forming star) shrinks from radius 1000 to radius 1. If it starts spinning at 0.001 rad/s, how fast does it spin when collapsed? (Hint: model as I = mr² and use conservation.)',
       successHint: 'Angular momentum conservation is why the universe spins. Every planet, star, galaxy, and hurricane rotates because angular momentum from the initial formation is conserved. The Dharma Wheel is a symbol of something the universe does naturally.',
     },
     {
-      title: 'Gyroscopic stability \u2014 why spinning resists tilting',
+      title: 'Gyroscopic stability — why spinning resists tilting',
       concept: `Here is something counterintuitive: a spinning wheel does not fall over, even when it should.
 
-Hold a bicycle wheel by its axle and try to tilt it while it is spinning. You feel a strange force pushing sideways \u2014 not the direction you expected. This is the **gyroscopic effect**.
+Hold a bicycle wheel by its axle and try to tilt it while it is spinning. You feel a strange force pushing sideways — not the direction you expected. This is the **gyroscopic effect**.
 
 The physics:
-1. Angular momentum (L) is a **vector** \u2014 it points along the spin axis
+1. Angular momentum (L) is a **vector** — it points along the spin axis
 2. To change the direction of L, you need a torque
 3. Gravity provides torque perpendicular to L
-4. This causes L to rotate slowly around the vertical \u2014 **precession** \u2014 rather than falling
+4. This causes L to rotate slowly around the vertical — **precession** — rather than falling
 
-The precession rate: **\u03A9 = mgr / L** (where r is the distance from pivot to centre of mass)
+The precession rate: **Ω = mgr / L** (where r is the distance from pivot to centre of mass)
 
 Key observations:
-- Faster spin \u2192 larger L \u2192 slower precession \u2192 more stable
+- Faster spin → larger L → slower precession → more stable
 - As the wheel slows down, precession speeds up until the wheel eventually falls
 - This is EXACTLY why bicycles are easier to balance at higher speeds
 
 Applications: gyroscopes in planes (artificial horizon), ships (stabilisers), satellites (attitude control), smartphones (orientation sensor).`,
-      analogy: 'Imagine you are carrying a full glass of water on a tray. Walking slowly, it is hard to keep steady \u2014 every bump tips the tray. Walking at a brisk pace, the tray feels more stable because your forward momentum smooths out the wobbles. A spinning gyroscope takes this to an extreme: its angular momentum is so large that gravity\u2019s attempt to tip it just causes a gentle sideways drift (precession) instead of a fall.',
-      storyConnection: 'The Dharma Wheel\u2019s stability is its most powerful metaphor. In Buddhism, the Wheel once set spinning by the Buddha\u2019s first sermon has continued turning for 2,500 years. Gyroscopic physics shows that a spinning wheel genuinely resists being knocked off axis \u2014 the faster it spins, the more stable it becomes. The metaphor is not poetic decoration; it is physically accurate.',
-      checkQuestion: 'A toy gyroscope weighs 0.2 kg, has its centre of mass 3 cm from the pivot, and has angular momentum L = 0.5 kg\u00B7m\u00B2/s. How fast does it precess?',
-      checkAnswer: '\u03A9 = mgr / L = 0.2 \u00D7 9.8 \u00D7 0.03 / 0.5 = 0.118 rad/s, which is about one full precession circle every 53 seconds. As the gyroscope slows (L decreases), the precession rate increases: \u03A9 goes up as L goes down. Eventually L is so small that precession becomes wild wobbling, and the gyroscope topples.',
+      analogy: 'Imagine you are carrying a full glass of water on a tray. Walking slowly, it is hard to keep steady — every bump tips the tray. Walking at a brisk pace, the tray feels more stable because your forward momentum smooths out the wobbles. A spinning gyroscope takes this to an extreme: its angular momentum is so large that gravity’s attempt to tip it just causes a gentle sideways drift (precession) instead of a fall.',
+      storyConnection: 'The Dharma Wheel’s stability is its most powerful metaphor. In Buddhism, the Wheel once set spinning by the Buddha’s first sermon has continued turning for 2,500 years. Gyroscopic physics shows that a spinning wheel genuinely resists being knocked off axis — the faster it spins, the more stable it becomes. The metaphor is not poetic decoration; it is physically accurate.',
+      checkQuestion: 'A toy gyroscope weighs 0.2 kg, has its centre of mass 3 cm from the pivot, and has angular momentum L = 0.5 kg·m²/s. How fast does it precess?',
+      checkAnswer: 'Ω = mgr / L = 0.2 × 9.8 × 0.03 / 0.5 = 0.118 rad/s, which is about one full precession circle every 53 seconds. As the gyroscope slows (L decreases), the precession rate increases: Ω goes up as L goes down. Eventually L is so small that precession becomes wild wobbling, and the gyroscope topples.',
       codeIntro: 'Simulate gyroscopic precession and show how spin speed affects stability.',
       code: `import numpy as np
 
 # Gyroscopic Precession Simulation
-print("Gyroscopic Precession: \u03A9 = mgr / L")
+print("Gyroscopic Precession: Ω = mgr / L")
 print("=" * 55)
 
 m = 0.5    # mass (kg)
@@ -274,26 +274,26 @@ for name, rpm, mass, r, Iv in examples:
         print(f"  {name:20s}: RPM={rpm:>6}, L={Lv:>10.3f}, Precession={prec:.4f} rad/s")
     else:
         print(f"  {name:20s}: RPM={rpm:>6}, L={Lv:>10.3f}, No gravity torque in space")`,
-      challenge: 'Plot precession rate vs spin speed on a log-log plot. What mathematical relationship do you see? (Hint: precession \u221D 1/\u03C9). At what RPM does precession become too fast for the gyroscope to stay upright?',
-      successHint: 'Gyroscopic stability is one of the most elegant phenomena in physics. A spinning wheel actively resists being tipped over \u2014 not through strength, but through the vector nature of angular momentum. This is why we can ride bicycles, why ships don\u2019t roll over, and why satellites maintain their orientation in space.',
+      challenge: 'Plot precession rate vs spin speed on a log-log plot. What mathematical relationship do you see? (Hint: precession ∝ 1/ω). At what RPM does precession become too fast for the gyroscope to stay upright?',
+      successHint: 'Gyroscopic stability is one of the most elegant phenomena in physics. A spinning wheel actively resists being tipped over — not through strength, but through the vector nature of angular momentum. This is why we can ride bicycles, why ships don’t roll over, and why satellites maintain their orientation in space.',
     },
     {
-      title: 'Flywheels \u2014 storing energy in a spinning wheel',
+      title: 'Flywheels — storing energy in a spinning wheel',
       concept: `A flywheel is a heavy wheel designed to store energy as rotational kinetic energy. The formula:
 
-**KE = \u00BD I\u03C9\u00B2**
+**KE = ½ Iω²**
 
-Since I = mr\u00B2 for a ring, and KE depends on \u03C9\u00B2 (omega squared), doubling the spin speed **quadruples** the stored energy. This makes speed more valuable than mass for energy storage.
+Since I = mr² for a ring, and KE depends on ω² (omega squared), doubling the spin speed **quadruples** the stored energy. This makes speed more valuable than mass for energy storage.
 
 Modern flywheel energy storage systems (FESS):
-- **Rotor**: carbon fibre composite, spinning at 20,000\u201360,000 RPM
+- **Rotor**: carbon fibre composite, spinning at 20,000–60,000 RPM
 - **Enclosure**: vacuum chamber to eliminate air resistance
 - **Bearings**: magnetic levitation (no contact, no friction)
 - **Motor/generator**: spins up to store energy, slows down to release it
 
 Advantages over batteries:
 - **Instant response** (milliseconds vs seconds)
-- **Long lifespan** (decades vs 5\u201310 years)
+- **Long lifespan** (decades vs 5–10 years)
 - **No toxic chemicals** (unlike lithium, cobalt)
 - **High power density** (lots of energy released quickly)
 
@@ -304,9 +304,9 @@ Disadvantages:
 
 Used in: Formula 1 cars (KERS), NASA satellites, power grid stabilisation, UPS systems for hospitals.`,
       analogy: 'A flywheel is like a savings account for energy. You deposit energy by spinning it up (like depositing money). You withdraw energy by letting it slow down (like withdrawing money). The heavier the wheel and the faster it spins, the more energy is "saved." Unlike a battery that slowly degrades, a flywheel in a vacuum can hold its "savings" for days with minimal loss.',
-      storyConnection: 'The Dharma Wheel is not just spinning \u2014 it is storing the energy of the Buddha\u2019s teaching and releasing it across millennia. A flywheel does the same with physical energy: store it during abundance, release it during need. The Dharma Wheel is, in a very precise sense, a flywheel of wisdom.',
-      checkQuestion: 'A flywheel has I = 5 kg\u00B7m\u00B2 and spins at 3000 RPM. How much energy does it store? How does this compare to a AA battery (~10,000 J)?',
-      checkAnswer: '\u03C9 = 3000 \u00D7 2\u03C0/60 = 314.2 rad/s. KE = \u00BD \u00D7 5 \u00D7 314.2\u00B2 = 246,740 J \u2248 247 kJ. That is about 25 AA batteries worth of energy, stored in a single spinning wheel. And it can release all of it in seconds if needed.',
+      storyConnection: 'The Dharma Wheel is not just spinning — it is storing the energy of the Buddha’s teaching and releasing it across millennia. A flywheel does the same with physical energy: store it during abundance, release it during need. The Dharma Wheel is, in a very precise sense, a flywheel of wisdom.',
+      checkQuestion: 'A flywheel has I = 5 kg·m² and spins at 3000 RPM. How much energy does it store? How does this compare to a AA battery (~10,000 J)?',
+      checkAnswer: 'ω = 3000 × 2π/60 = 314.2 rad/s. KE = ½ × 5 × 314.2² = 246,740 J ≈ 247 kJ. That is about 25 AA batteries worth of energy, stored in a single spinning wheel. And it can release all of it in seconds if needed.',
       codeIntro: 'Calculate flywheel energy storage and compare different wheel designs.',
       code: `import numpy as np
 
@@ -347,29 +347,29 @@ for rpm in [1000, 2000, 4000, 8000, 16000]:
 print()
 print("Double the speed = 4x the energy.")
 print("This is why modern flywheels prioritise speed over mass.")`,
-      challenge: 'Calculate the maximum RPM before a steel flywheel (tensile strength 500 MPa, density 7800 kg/m\u00B3, radius 0.3 m) tears itself apart. Hint: centripetal stress = \u03C1\u03C9\u00B2r\u00B2. Why does carbon fibre allow higher RPM?',
-      successHint: 'Flywheels are the oldest and newest energy storage technology. A potter\u2019s wheel stores energy from foot-kicks to smooth out the spinning. A modern grid-scale flywheel does exactly the same thing with megawatts of electricity. The principle has not changed in 5,000 years.',
+      challenge: 'Calculate the maximum RPM before a steel flywheel (tensile strength 500 MPa, density 7800 kg/m³, radius 0.3 m) tears itself apart. Hint: centripetal stress = ρω²r². Why does carbon fibre allow higher RPM?',
+      successHint: 'Flywheels are the oldest and newest energy storage technology. A potter’s wheel stores energy from foot-kicks to smooth out the spinning. A modern grid-scale flywheel does exactly the same thing with megawatts of electricity. The principle has not changed in 5,000 years.',
     },
     {
-      title: 'Putting it all together \u2014 the complete physics of the wheel',
+      title: 'Putting it all together — the complete physics of the wheel',
       concept: `You now understand four interconnected concepts:
 
-1. **Friction reduction**: Wheels convert sliding friction (\u03BC \u2248 0.5) to rolling friction (\u03BC \u2248 0.01) \u2014 a 50\u00D7 improvement
-2. **Torque**: Force applied at the rim creates rotational acceleration (\u03C4 = F \u00D7 r)
-3. **Angular momentum**: Spinning wheels resist changes to their orientation (L = I\u03C9), enabling stability
-4. **Energy storage**: Flywheels store kinetic energy as KE = \u00BDI\u03C9\u00B2, with speed mattering more than mass
+1. **Friction reduction**: Wheels convert sliding friction (μ ≈ 0.5) to rolling friction (μ ≈ 0.01) — a 50× improvement
+2. **Torque**: Force applied at the rim creates rotational acceleration (τ = F × r)
+3. **Angular momentum**: Spinning wheels resist changes to their orientation (L = Iω), enabling stability
+4. **Energy storage**: Flywheels store kinetic energy as KE = ½Iω², with speed mattering more than mass
 
-These are not separate ideas \u2014 they form a complete system. A bicycle demonstrates all four:
+These are not separate ideas — they form a complete system. A bicycle demonstrates all four:
 - **Rolling friction** allows it to glide efficiently
 - **Torque** from pedalling accelerates the wheels
 - **Gyroscopic stability** keeps it upright at speed
 - **Flywheel effect** means it keeps moving between pedal strokes
 
-Every rotating machine in human history uses some combination of these four principles. The wheel is not one invention \u2014 it is four physics principles packaged into a single device.`,
+Every rotating machine in human history uses some combination of these four principles. The wheel is not one invention — it is four physics principles packaged into a single device.`,
       analogy: 'The wheel is like a Swiss Army knife of physics. Open one blade (friction reduction) and you can move heavy loads. Open another (torque) and you can transmit power. A third (angular momentum) gives stability. A fourth (energy storage) lets you save energy for later. Each blade works alone, but together they are one of the most powerful tools humanity has ever created.',
-      storyConnection: 'The Dharma Wheel combines all four principles into a single symbol. It rolls forward (friction reduction), it is turned by teaching (torque), it maintains its course across centuries (angular momentum), and it stores the energy of wisdom to be released when needed (flywheel). The Buddha chose this symbol well \u2014 the physics of the wheel mirrors the mechanics of how ideas persist and spread through time.',
+      storyConnection: 'The Dharma Wheel combines all four principles into a single symbol. It rolls forward (friction reduction), it is turned by teaching (torque), it maintains its course across centuries (angular momentum), and it stores the energy of wisdom to be released when needed (flywheel). The Buddha chose this symbol well — the physics of the wheel mirrors the mechanics of how ideas persist and spread through time.',
       checkQuestion: 'Why is a bicycle much harder to balance when it is stationary compared to when it is moving at speed?',
-      checkAnswer: 'At speed, the bicycle wheels have significant angular momentum (L = I\u03C9). This angular momentum vector points along the axle direction. Tilting the bike requires changing the direction of L, which needs torque. The larger L is (faster speed), the more torque is needed to tilt it, so it resists falling. At zero speed, L = 0, and there is no gyroscopic stability \u2014 only your balance prevents falling. Additionally, at speed, small steering corrections create centripetal forces that move the contact point back under the centre of gravity.',
+      checkAnswer: 'At speed, the bicycle wheels have significant angular momentum (L = Iω). This angular momentum vector points along the axle direction. Tilting the bike requires changing the direction of L, which needs torque. The larger L is (faster speed), the more torque is needed to tilt it, so it resists falling. At zero speed, L = 0, and there is no gyroscopic stability — only your balance prevents falling. Additionally, at speed, small steering corrections create centripetal forces that move the contact point back under the centre of gravity.',
       codeIntro: 'Build a complete wheel physics simulator that combines all four concepts.',
       code: `import numpy as np
 
@@ -436,7 +436,7 @@ print(f"   has L = {L:.3f} kg.m^2/s of stabilising angular momentum,")
 print(f"   and stores {KE:.1f} J of energy as it spins.")
 print()
 print("Four physics principles. One device. 5,500 years of use.")`,
-      challenge: 'Add air resistance (F_drag = 0.5 \u00D7 \u03C1 \u00D7 C_d \u00D7 A \u00D7 v\u00B2) and compute the top speed where air drag equals the driving force. How does wheel size affect the maximum speed?',
+      challenge: 'Add air resistance (F_drag = 0.5 × ρ × C_d × A × v²) and compute the top speed where air drag equals the driving force. How does wheel size affect the maximum speed?',
       successHint: 'You have now mastered the four pillars of wheel physics. In Level 2, you will go deeper into each: rotational dynamics simulations, gyroscopic navigation systems, flywheel optimisation, and gear train design. The wheel never stops turning.',
     },
   ];

@@ -39,7 +39,7 @@ export default function HornbillCallDiagram() {
           <rect x="-55" y="-35" width="110" height="75" rx="10" className="fill-slate-800" stroke="#34d399" strokeWidth="1.5" />
           <text x="0" y="-18" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#34d399">3. Forest Reach</text>
           <text x="0" y="-4" textAnchor="middle" fontSize="8" className="fill-slate-400">Low-frequency calls</text>
-          <text x="0" y="8" textAnchor="middle" fontSize="8" className="fill-slate-400">carry 2\u20134 km through</text>
+          <text x="0" y="8" textAnchor="middle" fontSize="8" className="fill-slate-400">carry 2–4 km through</text>
           <text x="0" y="20" textAnchor="middle" fontSize="8" className="fill-slate-400">dense canopy</text>
           {/* Expanding arcs */}
           <path d="M 25,28 Q 30,25 25,35" fill="none" stroke="#34d399" strokeWidth="1.5" />
@@ -61,7 +61,7 @@ export default function HornbillCallDiagram() {
         <g transform="translate(30, 240)">
           <rect width="145" height="90" rx="8" className="fill-slate-800" stroke="#ef4444" strokeWidth="1" />
           <text x="72" y="18" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#ef4444">Territory Call</text>
-          <text x="72" y="32" textAnchor="middle" fontSize="8" className="fill-slate-400">\u201cThis forest is mine\u201d</text>
+          <text x="72" y="32" textAnchor="middle" fontSize="8" className="fill-slate-400">“This forest is mine”</text>
           {/* Waveform: loud, repeating */}
           <g transform="translate(15, 50)">
             <path d="M 0,15 L 10,-5 L 12,15 L 22,-8 L 24,15 L 34,-5 L 36,15 L 46,-8 L 48,15 L 58,-5 L 60,15 L 70,-8 L 72,15 L 82,-5 L 84,15 L 94,-8 L 96,15 L 106,-5 L 108,15" fill="none" stroke="#ef4444" strokeWidth="1.5" />
@@ -73,7 +73,7 @@ export default function HornbillCallDiagram() {
         <g transform="translate(188, 240)">
           <rect width="145" height="90" rx="8" className="fill-slate-800" stroke="#ec4899" strokeWidth="1" />
           <text x="72" y="18" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#ec4899">Mating Display</text>
-          <text x="72" y="32" textAnchor="middle" fontSize="8" className="fill-slate-400">\u201cI am strong and healthy\u201d</text>
+          <text x="72" y="32" textAnchor="middle" fontSize="8" className="fill-slate-400">“I am strong and healthy”</text>
           {/* Waveform: melodic, varied */}
           <g transform="translate(15, 50)">
             <path d="M 0,15 Q 15,-10 30,15 Q 45,35 60,10 Q 70,-5 80,15 Q 90,25 100,5 L 110,15" fill="none" stroke="#ec4899" strokeWidth="1.5" />
@@ -85,7 +85,7 @@ export default function HornbillCallDiagram() {
         <g transform="translate(346, 240)">
           <rect width="145" height="90" rx="8" className="fill-slate-800" stroke="#f97316" strokeWidth="1" />
           <text x="72" y="18" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#f97316">Alarm Call</text>
-          <text x="72" y="32" textAnchor="middle" fontSize="8" className="fill-slate-400">\u201cDanger! Predator!\u201d</text>
+          <text x="72" y="32" textAnchor="middle" fontSize="8" className="fill-slate-400">“Danger! Predator!”</text>
           {/* Waveform: sharp, staccato */}
           <g transform="translate(15, 50)">
             <path d="M 0,15 L 5,-10 L 10,15 M 20,15 L 25,-10 L 30,15 M 40,15 L 45,-10 L 50,15 M 60,15 L 65,-10 L 70,15 M 80,15 L 85,-10 L 90,15 M 100,15 L 105,-10 L 110,15" fill="none" stroke="#f97316" strokeWidth="1.5" />
@@ -97,7 +97,7 @@ export default function HornbillCallDiagram() {
         <g transform="translate(30, 350)">
           <rect width="460" height="35" rx="8" className="fill-slate-800" />
           <text x="230" y="14" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#60a5fa">Bonus: Wing Noise</text>
-          <text x="230" y="26" textAnchor="middle" fontSize="9" className="fill-slate-400">Hornbills lack flight-feather dampers. Their wingbeats produce a loud \u201cwhooshing\u201d audible 800 m away \u2014 an unintentional announcement.</text>
+          <text x="230" y="26" textAnchor="middle" fontSize="9" className="fill-slate-400">Hornbills lack flight-feather dampers. Their wingbeats produce a loud “whooshing” audible 800 m away — an unintentional announcement.</text>
         </g>
       </svg>
     </div>

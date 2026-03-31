@@ -39,10 +39,10 @@ export default function SeedBankDiagram() {
 
         {/* Temperature label */}
         <rect x="160" y="280" width="200" height="22" rx="4" className="fill-blue-900/50" />
-        <text x="260" y="295" textAnchor="middle" className="fill-blue-300" fontSize="11" fontWeight="bold">\u221218\u00B0C \u2014 Deep Freeze Storage</text>
+        <text x="260" y="295" textAnchor="middle" className="fill-blue-300" fontSize="11" fontWeight="bold">−18°C — Deep Freeze Storage</text>
 
         {/* Location label */}
-        <text x="260" y="320" textAnchor="middle" className="fill-slate-400" fontSize="10">Svalbard, Norway \u2014 78\u00B0N latitude, inside permafrost mountain</text>
+        <text x="260" y="320" textAnchor="middle" className="fill-slate-400" fontSize="10">Svalbard, Norway — 78°N latitude, inside permafrost mountain</text>
 
         {/* Storage process flow at bottom */}
         <text x="260" y="348" textAnchor="middle" className="fill-cyan-400" fontSize="12" fontWeight="bold">How Seeds Are Preserved</text>
@@ -60,7 +60,7 @@ export default function SeedBankDiagram() {
         <rect x="128" y="362" width="90" height="55" rx="6" className="fill-amber-900/40 stroke-amber-600" strokeWidth="1" />
         <text x="173" y="380" textAnchor="middle" className="fill-amber-400" fontSize="10" fontWeight="bold">2. Clean & Test</text>
         <text x="173" y="393" textAnchor="middle" className="fill-amber-300" fontSize="8">Germination</text>
-        <text x="173" y="404" textAnchor="middle" className="fill-amber-300" fontSize="8">test: \u226585%</text>
+        <text x="173" y="404" textAnchor="middle" className="fill-amber-300" fontSize="8">test: ≥85%</text>
 
         {/* Arrow */}
         <line x1="221" y1="389" x2="238" y2="389" className="stroke-cyan-500" strokeWidth="1.5" markerEnd="url(#seedArrow)" />
@@ -69,7 +69,7 @@ export default function SeedBankDiagram() {
         <rect x="241" y="362" width="90" height="55" rx="6" className="fill-orange-900/40 stroke-orange-600" strokeWidth="1" />
         <text x="286" y="380" textAnchor="middle" className="fill-orange-400" fontSize="10" fontWeight="bold">3. Dry</text>
         <text x="286" y="393" textAnchor="middle" className="fill-orange-300" fontSize="8">Reduce moisture</text>
-        <text x="286" y="404" textAnchor="middle" className="fill-orange-300" fontSize="8">to 3\u20137%</text>
+        <text x="286" y="404" textAnchor="middle" className="fill-orange-300" fontSize="8">to 3–7%</text>
 
         {/* Arrow */}
         <line x1="334" y1="389" x2="351" y2="389" className="stroke-cyan-500" strokeWidth="1.5" markerEnd="url(#seedArrow)" />
@@ -86,11 +86,11 @@ export default function SeedBankDiagram() {
         {/* Step 5: Store */}
         <rect x="460" y="362" width="50" height="55" rx="6" className="fill-cyan-900/40 stroke-cyan-600" strokeWidth="1" />
         <text x="485" y="380" textAnchor="middle" className="fill-cyan-400" fontSize="10" fontWeight="bold">5. Freeze</text>
-        <text x="485" y="395" textAnchor="middle" className="fill-cyan-300" fontSize="10">\u221218\u00B0C</text>
+        <text x="485" y="395" textAnchor="middle" className="fill-cyan-300" fontSize="10">−18°C</text>
 
         {/* Harrington's Rule */}
         <rect x="100" y="425" width="320" height="14" rx="3" className="fill-amber-900/30" />
-        <text x="260" y="435" textAnchor="middle" className="fill-amber-300" fontSize="10">Harrington\u2019s Rule: \u22125\u00B0C = 2\u00D7 lifespan; \u22121% moisture = 2\u00D7 lifespan</text>
+        <text x="260" y="435" textAnchor="middle" className="fill-amber-300" fontSize="10">Harrington’s Rule: −5°C = 2× lifespan; −1% moisture = 2× lifespan</text>
 
         <defs>
           <marker id="seedArrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">

@@ -104,7 +104,7 @@ const ElephantThermoregDiagram = () => {
           Huge body = massive heat
         </text>
         <text x="120" y="114" textAnchor="middle" className="small fill-red-600 dark:fill-red-300">
-          Hot climate (35-40 \u00b0C)
+          Hot climate (35-40 °C)
         </text>
 
         {/* Solution boxes */}
@@ -112,7 +112,7 @@ const ElephantThermoregDiagram = () => {
         <rect x="20" y="340" width="145" height="68" rx="6"
           className="fill-amber-50 dark:fill-amber-900/20 stroke-amber-400 dark:stroke-amber-700" strokeWidth="1" />
         <text x="92" y="358" textAnchor="middle" className="label fill-amber-700 dark:fill-amber-400" fontWeight="600">
-          \u2776 Mud Bath
+          ❶ Mud Bath
         </text>
         <text x="92" y="374" textAnchor="middle" className="small fill-amber-600 dark:fill-amber-300">
           Evaporative cooling
@@ -128,7 +128,7 @@ const ElephantThermoregDiagram = () => {
         <rect x="180" y="340" width="145" height="68" rx="6"
           className="fill-red-50 dark:fill-red-900/20 stroke-red-300 dark:stroke-red-700" strokeWidth="1" />
         <text x="252" y="358" textAnchor="middle" className="label fill-red-700 dark:fill-red-400" fontWeight="600">
-          \u2777 Ear Flapping
+          ❷ Ear Flapping
         </text>
         <text x="252" y="374" textAnchor="middle" className="small fill-red-600 dark:fill-red-300">
           Blood vessels radiate heat
@@ -137,20 +137,20 @@ const ElephantThermoregDiagram = () => {
           Wind = forced convection
         </text>
         <text x="252" y="402" textAnchor="middle" className="small fill-red-600 dark:fill-red-300">
-          Cools blood up to 5 \u00b0C
+          Cools blood up to 5 °C
         </text>
 
         {/* Skin wrinkles */}
         <rect x="340" y="340" width="145" height="68" rx="6"
           className="fill-emerald-50 dark:fill-emerald-900/20 stroke-emerald-400 dark:stroke-emerald-700" strokeWidth="1" />
         <text x="412" y="358" textAnchor="middle" className="label fill-emerald-700 dark:fill-emerald-400" fontWeight="600">
-          \u2778 Wrinkled Skin
+          ❸ Wrinkled Skin
         </text>
         <text x="412" y="374" textAnchor="middle" className="small fill-emerald-600 dark:fill-emerald-300">
           Cracks trap moisture
         </text>
         <text x="412" y="388" textAnchor="middle" className="small fill-emerald-600 dark:fill-emerald-300">
-          10\u00d7 more surface area
+          10× more surface area
         </text>
         <text x="412" y="402" textAnchor="middle" className="small fill-emerald-600 dark:fill-emerald-300">
           Hours of slow evaporation
@@ -160,7 +160,7 @@ const ElephantThermoregDiagram = () => {
         <rect x="500" y="340" width="125" height="68" rx="6"
           className="fill-blue-50 dark:fill-blue-900/20 stroke-blue-300 dark:stroke-blue-700" strokeWidth="1" />
         <text x="562" y="358" textAnchor="middle" className="label fill-blue-700 dark:fill-blue-400" fontWeight="600">
-          \u2779 Behavior
+          ❹ Behavior
         </text>
         <text x="562" y="374" textAnchor="middle" className="small fill-blue-600 dark:fill-blue-300">
           Seek shade at midday
@@ -174,7 +174,7 @@ const ElephantThermoregDiagram = () => {
 
         {/* Evaporation label */}
         <text x="370" y="240" textAnchor="start" className="small fill-blue-600 dark:fill-blue-400">
-          Water evaporates \u2192 absorbs
+          Water evaporates → absorbs
         </text>
         <text x="370" y="253" textAnchor="start" className="small fill-blue-600 dark:fill-blue-400">
           2,260 J per gram of heat
@@ -184,10 +184,10 @@ const ElephantThermoregDiagram = () => {
         <rect x="470" y="160" width="150" height="52" rx="6"
           className="fill-emerald-50 dark:fill-emerald-900/20 stroke-emerald-400 dark:stroke-emerald-700" strokeWidth="1" />
         <text x="545" y="180" textAnchor="middle" className="label fill-emerald-700 dark:fill-emerald-400" fontWeight="600">
-          Target: 35.5-36.5 \u00b0C
+          Target: 35.5-36.5 °C
         </text>
         <text x="545" y="196" textAnchor="middle" className="small fill-emerald-600 dark:fill-emerald-300">
-          Just 6 \u00b0C above = lethal
+          Just 6 °C above = lethal
         </text>
         <text x="545" y="208" textAnchor="middle" className="small fill-emerald-600 dark:fill-emerald-300">
           Narrow survival window

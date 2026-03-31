@@ -2,7 +2,7 @@ export default function DeerReflectionDiagram() {
   return (
     <div className="bg-gray-900 rounded-xl p-4 my-4">
       <p className="text-center text-sm font-bold text-gray-300 uppercase tracking-wider mb-3">
-        Specular vs Diffuse Reflection \u2014 Why Gold Shines
+        Specular vs Diffuse Reflection — Why Gold Shines
       </p>
       <svg viewBox="0 0 620 320" className="w-full max-w-2xl mx-auto">
         {/* LEFT SIDE: Specular reflection */}
@@ -10,7 +10,7 @@ export default function DeerReflectionDiagram() {
           Specular (Mirror)
         </text>
         <text x="155" y="40" textAnchor="middle" fontSize="10" fill="#9ca3af">
-          Smooth surface \u2014 one direction
+          Smooth surface — one direction
         </text>
 
         {/* Smooth surface */}
@@ -33,14 +33,14 @@ export default function DeerReflectionDiagram() {
 
         {/* Angle arcs */}
         <path d="M155,155 Q140,160 133,170" fill="none" stroke="white" strokeWidth={1} opacity={0.5} />
-        <text x="125" y="160" fontSize="10" fill="white" opacity={0.6}>\u03b8\u1d62</text>
+        <text x="125" y="160" fontSize="10" fill="white" opacity={0.6}>θᵢ</text>
         <path d="M155,155 Q170,160 177,170" fill="none" stroke="#fbbf24" strokeWidth={1} opacity={0.5} />
-        <text x="178" y="160" fontSize="10" fill="#fbbf24" opacity={0.6}>\u03b8\u1d63</text>
+        <text x="178" y="160" fontSize="10" fill="#fbbf24" opacity={0.6}>θᵣ</text>
 
         {/* Law label */}
         <rect x="70" y="200" width="170" height="28" rx={5} fill="rgba(251,191,36,0.1)" stroke="#fbbf24" strokeWidth={1} />
         <text x="155" y="219" textAnchor="middle" fontSize="11" fontWeight="700" fill="#fbbf24">
-          \u03b8\u1d62 = \u03b8\u1d63 always
+          θᵢ = θᵣ always
         </text>
 
         {/* RIGHT SIDE: Diffuse reflection */}
@@ -48,7 +48,7 @@ export default function DeerReflectionDiagram() {
           Diffuse (Matte)
         </text>
         <text x="465" y="40" textAnchor="middle" fontSize="10" fill="#9ca3af">
-          Rough surface \u2014 many directions
+          Rough surface — many directions
         </text>
 
         {/* Rough surface */}
@@ -83,7 +83,7 @@ export default function DeerReflectionDiagram() {
         <rect x="30" y="248" width="260" height="58" rx={8} fill="rgba(251,191,36,0.06)" stroke="#fbbf24" strokeWidth={1} strokeOpacity={0.3} />
         <text x="160" y="268" textAnchor="middle" fontSize="11" fontWeight="700" fill="#fbbf24">Metals (gold, silver, mirrors)</text>
         <text x="160" y="284" textAnchor="middle" fontSize="10" fill="#d4a017">Free electrons reflect light coherently.</text>
-        <text x="160" y="298" textAnchor="middle" fontSize="10" fill="#d4a017">Gold absorbs blue, reflects yellow-red \u2192 golden shine.</text>
+        <text x="160" y="298" textAnchor="middle" fontSize="10" fill="#d4a017">Gold absorbs blue, reflects yellow-red → golden shine.</text>
 
         <rect x="330" y="248" width="260" height="58" rx={8} fill="rgba(167,139,250,0.06)" stroke="#a78bfa" strokeWidth={1} strokeOpacity={0.3} />
         <text x="460" y="268" textAnchor="middle" fontSize="11" fontWeight="700" fill="#a78bfa">Rough surfaces (paper, cloth, fur)</text>

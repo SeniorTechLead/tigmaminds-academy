@@ -30,13 +30,13 @@ export default function ZamzamLevel2() {
   const miniLessons = [
     {
       title: 'Hydraulic head and the potentiometric surface',
-      concept: `In Level 1, you learned that water flows from high to low. In hydrogeology, we quantify this with **hydraulic head** \u2014 the total energy of water at a point, measured as an equivalent height in metres.
+      concept: `In Level 1, you learned that water flows from high to low. In hydrogeology, we quantify this with **hydraulic head** — the total energy of water at a point, measured as an equivalent height in metres.
 
 Hydraulic head = **elevation head** (height above a datum) + **pressure head** (pressure converted to metres of water).
 
-For an unconfined aquifer, the water table IS the potentiometric surface. For a confined aquifer, the potentiometric surface may be far above the actual water \u2014 it represents where water WOULD rise if you drilled a well.
+For an unconfined aquifer, the water table IS the potentiometric surface. For a confined aquifer, the potentiometric surface may be far above the actual water — it represents where water WOULD rise if you drilled a well.
 
-When you map the potentiometric surface across a region, you get a **flow net** \u2014 water always flows perpendicular to lines of equal head (equipotentials), from high head to low head.
+When you map the potentiometric surface across a region, you get a **flow net** — water always flows perpendicular to lines of equal head (equipotentials), from high head to low head.
 
 The code builds a 2D potentiometric surface map and calculates flow directions.`,
       analogy: 'A potentiometric surface is like a topographic map of water pressure. Just as a ball rolls downhill on a topographic map (from high elevation to low), water flows "downhill" on the potentiometric surface (from high head to low head). The steeper the slope, the faster the flow.',
@@ -94,25 +94,25 @@ print("The star marks where flow lines converge — ideal well location!")`,
       successHint: 'Potentiometric surface maps are the primary tool hydrogeologists use to predict groundwater flow. Where the arrows converge, you drill your well. Real surveys measure head in dozens of observation wells to build these maps.',
     },
     {
-      title: 'The Theis equation \u2014 modelling a pumping well',
+      title: 'The Theis equation — modelling a pumping well',
       concept: `When you turn on a pump, the water table does not drop instantly everywhere. The drawdown spreads outward like a ripple, creating the **cone of depression**. The Theis equation (1935) predicts how deep the drawdown is at any distance and time:
 
-**s(r,t) = Q/(4\u03C0T) \u00D7 W(u)**
+**s(r,t) = Q/(4πT) × W(u)**
 
 Where:
 - s = drawdown (m)
-- Q = pumping rate (m\u00B3/s)
-- T = transmissivity (K \u00D7 aquifer thickness, m\u00B2/s)
+- Q = pumping rate (m³/s)
+- T = transmissivity (K × aquifer thickness, m²/s)
 - W(u) = the "well function" (a special integral)
-- u = r\u00B2S/(4Tt) where r=distance, S=storativity, t=time
+- u = r²S/(4Tt) where r=distance, S=storativity, t=time
 
 This equation is complex but powerful. It tells you: how far the cone extends, how long until a nearby well is affected, and how fast the aquifer recovers when pumping stops.
 
 The code implements the Theis solution and plots the cone of depression at different times.`,
-      analogy: 'Drop a stone in a pond. The wave spreads outward in a ring, getting weaker with distance. A pumping well creates a similar "wave" \u2014 but instead of a water surface rising, the water table drops. The drawdown ripple spreads outward over time, reaching further wells gradually. Stop pumping, and the "ripple" slowly reverses as the cone refills.',
+      analogy: 'Drop a stone in a pond. The wave spreads outward in a ring, getting weaker with distance. A pumping well creates a similar "wave" — but instead of a water surface rising, the water table drops. The drawdown ripple spreads outward over time, reaching further wells gradually. Stop pumping, and the "ripple" slowly reverses as the cone refills.',
       storyConnection: 'When Zamzam is pumped at peak rate during Hajj, the cone of depression extends outward. Engineers use the Theis equation to predict how far the drawdown reaches and ensure it does not affect other water sources in the area. The equation tells them exactly how long the well needs to rest between heavy pumping cycles.',
       checkQuestion: 'If you double the pumping rate, does the cone of depression double in depth?',
-      checkAnswer: 'Yes \u2014 drawdown is directly proportional to Q in the Theis equation (s = Q/(4\u03C0T) \u00D7 W(u)). Doubling Q doubles s at every point. However, the cone does not double in radius at the same time \u2014 the relationship with distance is logarithmic. So doubling the pumping rate makes the cone twice as deep but only slightly wider.',
+      checkAnswer: 'Yes — drawdown is directly proportional to Q in the Theis equation (s = Q/(4πT) × W(u)). Doubling Q doubles s at every point. However, the cone does not double in radius at the same time — the relationship with distance is logarithmic. So doubling the pumping rate makes the cone twice as deep but only slightly wider.',
       codeIntro: 'Implement the Theis well function and plot the cone of depression.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -159,7 +159,7 @@ for t, label in zip(times, labels):
     },
     {
       title: 'Groundwater recharge estimation',
-      concept: `How do you know how much rain actually reaches the aquifer? Not all rainfall becomes recharge \u2014 most of it evaporates, runs off the surface, or is absorbed by plant roots. The fraction that reaches the water table is typically 1-30% of rainfall.
+      concept: `How do you know how much rain actually reaches the aquifer? Not all rainfall becomes recharge — most of it evaporates, runs off the surface, or is absorbed by plant roots. The fraction that reaches the water table is typically 1-30% of rainfall.
 
 We can estimate recharge using the **water balance** method:
 
@@ -169,9 +169,9 @@ Each term depends on climate, soil, slope, and vegetation. Desert regions like M
 
 In the code, you will calculate recharge for different climate zones and see how small changes in rainfall dramatically affect aquifer sustainability.`,
       analogy: 'Imagine pouring a glass of water onto a sloping table covered with a sponge sheet. Some water soaks into the sponge (infiltration). Some slides off the edges (runoff). Some evaporates from the hot surface (evapotranspiration). The tiny amount that seeps through the sponge and drips off the bottom is recharge. In a desert, that drip might be a single drop per glass.',
-      storyConnection: 'Mecca receives only about 100mm of rainfall per year. With perhaps 2% recharge, only 2mm/year reaches the aquifer. Over the 14 km\u00B2 Wadi Ibrahim catchment that feeds Zamzam, that is 28,000 m\u00B3/year. Zamzam pumps about 500,000 m\u00B3/year. The mismatch suggests the aquifer is drawing on water that recharged thousands of years ago during wetter climate periods.',
+      storyConnection: 'Mecca receives only about 100mm of rainfall per year. With perhaps 2% recharge, only 2mm/year reaches the aquifer. Over the 14 km² Wadi Ibrahim catchment that feeds Zamzam, that is 28,000 m³/year. Zamzam pumps about 500,000 m³/year. The mismatch suggests the aquifer is drawing on water that recharged thousands of years ago during wetter climate periods.',
       checkQuestion: 'If recharge is only 2mm/year but pumping removes the equivalent of 35mm/year, what is happening to the aquifer?',
-      checkAnswer: 'The aquifer is being mined \u2014 water is being extracted 17.5 times faster than it replenishes. The water level will drop over time. This is only sustainable if the aquifer has a large stored volume accumulated over millennia. Zamzam\u2019s continued flow suggests the stored volume is substantial, but it is not infinite. This is why careful management is essential.',
+      checkAnswer: 'The aquifer is being mined — water is being extracted 17.5 times faster than it replenishes. The water level will drop over time. This is only sustainable if the aquifer has a large stored volume accumulated over millennia. Zamzam’s continued flow suggests the stored volume is substantial, but it is not infinite. This is why careful management is essential.',
       codeIntro: 'Calculate groundwater recharge for different climate and soil scenarios.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -225,20 +225,20 @@ for name, r, rch in zip(names, rain, recharge):
       successHint: 'Recharge estimation is the first step in any groundwater management plan. If you do not know how fast the aquifer refills, you cannot know how fast you can safely pump. In arid regions, the answer is often: very slowly.',
     },
     {
-      title: 'Isotope hydrology \u2014 dating ancient water',
-      concept: `How old is the water in Zamzam? You cannot just look at it. But you CAN measure its **isotopes** \u2014 atoms of the same element with different numbers of neutrons.
+      title: 'Isotope hydrology — dating ancient water',
+      concept: `How old is the water in Zamzam? You cannot just look at it. But you CAN measure its **isotopes** — atoms of the same element with different numbers of neutrons.
 
-Water contains oxygen-18 (\u00B9\u2078O, heavier) and oxygen-16 (\u00B9\u2076O, lighter). The ratio \u00B9\u2078O/\u00B9\u2076O depends on temperature at the time of rainfall. During cold periods (ice ages), rain has less \u00B9\u2078O. During warm periods, more.
+Water contains oxygen-18 (¹⁸O, heavier) and oxygen-16 (¹⁶O, lighter). The ratio ¹⁸O/¹⁶O depends on temperature at the time of rainfall. During cold periods (ice ages), rain has less ¹⁸O. During warm periods, more.
 
-Even more powerful: **tritium** (\u00B3H, radioactive hydrogen with a half-life of 12.3 years) was injected into the atmosphere by nuclear bomb tests in the 1950s-60s. Any water containing tritium must have rained AFTER 1952. Water with NO tritium is older than ~60 years.
+Even more powerful: **tritium** (³H, radioactive hydrogen with a half-life of 12.3 years) was injected into the atmosphere by nuclear bomb tests in the 1950s-60s. Any water containing tritium must have rained AFTER 1952. Water with NO tritium is older than ~60 years.
 
-**Carbon-14** dating works for even older water (up to 50,000 years). Dissolved CO\u2082 in rainwater contains \u00B9\u2074C, which decays with a 5,730-year half-life. Less \u00B9\u2074C = older water.
+**Carbon-14** dating works for even older water (up to 50,000 years). Dissolved CO₂ in rainwater contains ¹⁴C, which decays with a 5,730-year half-life. Less ¹⁴C = older water.
 
-Studies of Zamzam water show a mix of ages \u2014 some modern recharge and some very old water.`,
+Studies of Zamzam water show a mix of ages — some modern recharge and some very old water.`,
       analogy: 'Isotope dating is like checking the expiry date on a carton of milk, except the "date" is written in atoms. Tritium is the short-term calendar (last 60 years). Carbon-14 is the long-term calendar (up to 50,000 years). Oxygen-18 is a thermometer that records the temperature when the rain fell. Together, they tell the complete biography of a water drop.',
       storyConnection: 'Isotope analysis of Zamzam water revealed a mix: some water recharged recently from nearby wadis, and some is thousands of years old, dating to wetter climate periods in the Arabian Peninsula. The story of Zamzam "springing forth" in ancient times aligns with the isotope data showing a deep, ancient groundwater component.',
-      checkQuestion: 'A groundwater sample has zero tritium and a \u00B9\u2074C age of 8,000 years. What does this tell you?',
-      checkAnswer: 'Zero tritium means the water rained down before 1952 (or more precisely, the tritium has decayed below detection limits, so the water is older than ~60 years). The \u00B9\u2074C age of 8,000 years narrows it further \u2014 this water fell as rain roughly 8,000 years ago, during the early Holocene when the climate was wetter (the "Green Sahara" period). This water has been sitting in the aquifer for 8 millennia.',
+      checkQuestion: 'A groundwater sample has zero tritium and a ¹⁴C age of 8,000 years. What does this tell you?',
+      checkAnswer: 'Zero tritium means the water rained down before 1952 (or more precisely, the tritium has decayed below detection limits, so the water is older than ~60 years). The ¹⁴C age of 8,000 years narrows it further — this water fell as rain roughly 8,000 years ago, during the early Holocene when the climate was wetter (the "Green Sahara" period). This water has been sitting in the aquifer for 8 millennia.',
       codeIntro: 'Calculate radioactive decay ages for groundwater samples.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -300,22 +300,22 @@ for name, pct, method in samples:
     else:
         age = -np.log(pct/100) / lambda_H3
         print(f"  {name}: {pct}% tritium -> recharged ~ {age:.0f} years ago")`,
-      challenge: 'A Zamzam sample shows 38% C-14 remaining. Calculate its age. If the aquifer volume is 10 million m\u00B3 and the average age is 6,000 years, how much has it recharged per year on average? (Volume / Age)',
+      challenge: 'A Zamzam sample shows 38% C-14 remaining. Calculate its age. If the aquifer volume is 10 million m³ and the average age is 6,000 years, how much has it recharged per year on average? (Volume / Age)',
       successHint: 'Isotope hydrology reveals the invisible history of groundwater. Every water molecule carries a timestamp in its atoms. This science has transformed our understanding of aquifer systems, from Zamzam to the Great Artesian Basin in Australia.',
     },
     {
-      title: 'Well design \u2014 screen, casing, and gravel pack',
+      title: 'Well design — screen, casing, and gravel pack',
       concept: `A well is not just a hole in the ground. A properly designed well has multiple components:
 
-1. **Casing** \u2014 a steel or PVC pipe lining the borehole, preventing collapse
-2. **Screen** \u2014 a slotted section at the aquifer depth, allowing water in while keeping sand out
-3. **Gravel pack** \u2014 carefully graded gravel between the screen and the borehole wall, acting as a filter
-4. **Seal** \u2014 cement or clay above the screen, preventing surface contamination
+1. **Casing** — a steel or PVC pipe lining the borehole, preventing collapse
+2. **Screen** — a slotted section at the aquifer depth, allowing water in while keeping sand out
+3. **Gravel pack** — carefully graded gravel between the screen and the borehole wall, acting as a filter
+4. **Seal** — cement or clay above the screen, preventing surface contamination
 
 The screen slot size must match the aquifer grain size. Too large: sand enters the well. Too small: water cannot flow in fast enough. The gravel pack bridges the gap between screen slots and aquifer grains.
 
-Zamzam\u2019s modern renovation includes a sophisticated multi-screen design that draws water from multiple aquifer zones.`,
-      analogy: 'A well screen is like a tea strainer. Too-coarse mesh lets tea leaves through into your cup. Too-fine mesh blocks water from flowing and your tea pours agonisingly slowly. The gravel pack is like wrapping the strainer in a cloth \u2014 it catches the medium-sized particles that are too small for the screen but too large for the aquifer pores.',
+Zamzam’s modern renovation includes a sophisticated multi-screen design that draws water from multiple aquifer zones.`,
+      analogy: 'A well screen is like a tea strainer. Too-coarse mesh lets tea leaves through into your cup. Too-fine mesh blocks water from flowing and your tea pours agonisingly slowly. The gravel pack is like wrapping the strainer in a cloth — it catches the medium-sized particles that are too small for the screen but too large for the aquifer pores.',
       storyConnection: 'The original Zamzam was an open hole in fractured rock. Over centuries, it was lined with stone blocks. Modern renovation in 1980 installed a concrete-lined well with multiple stainless steel screens at different depths, drawing from both the alluvial aquifer and the deeper fractured bedrock. This engineering ensures clean water at sustainable flow rates.',
       checkQuestion: 'A well screen has 0.5mm slots but the aquifer is fine sand (grain size 0.1mm). What happens?',
       checkAnswer: 'Sand enters the well. The screen slots (0.5mm) are 5 times larger than the sand grains (0.1mm), so fine sand passes straight through. Over time, sand fills the bottom of the well, reduces capacity, and damages the pump. Solution: install a gravel pack with grains 2-3mm in diameter between the screen and the aquifer. The gravel catches the fine sand while the screen catches the gravel.',
@@ -389,15 +389,15 @@ plt.show()`,
     },
     {
       title: 'Build a complete well field model',
-      concept: `Real water supply systems use multiple wells (\u201cwell fields\u201d) spread across an aquifer. The challenge: when multiple wells pump simultaneously, their cones of depression interact and overlap. Each well draws down the water table not just at its own location, but at every other well too.
+      concept: `Real water supply systems use multiple wells (“well fields”) spread across an aquifer. The challenge: when multiple wells pump simultaneously, their cones of depression interact and overlap. Each well draws down the water table not just at its own location, but at every other well too.
 
-The total drawdown at any point is the **sum** of drawdowns from all wells (superposition principle). This means wells must be spaced far enough apart that their combined drawdown does not exceed the aquifer\u2019s capacity.
+The total drawdown at any point is the **sum** of drawdowns from all wells (superposition principle). This means wells must be spaced far enough apart that their combined drawdown does not exceed the aquifer’s capacity.
 
 In this exercise, you will design a 3-well system for a town, calculating optimal spacing, individual pumping rates, and total sustainable yield.`,
-      analogy: 'Imagine three people drinking from the same large bowl of soup with straws. If they sit far apart, each gets a good flow. If they sit close together, they compete \u2014 the soup level drops faster between them and everyone\u2019s straw might start sucking air. Well field design is about spacing the straws (wells) far enough apart that everyone gets enough soup (water) without draining the bowl.',
-      storyConnection: 'The Saudi government does not rely on Zamzam alone for Mecca\u2019s water supply. A network of wells, desalination plants, and pipeline systems work together. Understanding well field interference was critical to ensuring Zamzam\u2019s continued flow while also meeting the city\u2019s growing demand.',
+      analogy: 'Imagine three people drinking from the same large bowl of soup with straws. If they sit far apart, each gets a good flow. If they sit close together, they compete — the soup level drops faster between them and everyone’s straw might start sucking air. Well field design is about spacing the straws (wells) far enough apart that everyone gets enough soup (water) without draining the bowl.',
+      storyConnection: 'The Saudi government does not rely on Zamzam alone for Mecca’s water supply. A network of wells, desalination plants, and pipeline systems work together. Understanding well field interference was critical to ensuring Zamzam’s continued flow while also meeting the city’s growing demand.',
       checkQuestion: 'Three wells are each pumped at 10 L/s. They are 50m apart. At the centre point between all three wells, is the drawdown equal to what one well would cause, or more?',
-      checkAnswer: 'Much more. By superposition, the drawdown at the centre is the SUM of what each well causes at that point. Since the centre is equidistant from all three wells, the drawdown is approximately 3 times what a single well would cause at that distance. This is why well spacing is so critical \u2014 too close and the combined drawdown can dewater the aquifer between them.',
+      checkAnswer: 'Much more. By superposition, the drawdown at the centre is the SUM of what each well causes at that point. Since the centre is equidistant from all three wells, the drawdown is approximately 3 times what a single well would cause at that distance. This is why well spacing is so critical — too close and the combined drawdown can dewater the aquifer between them.',
       codeIntro: 'Design and simulate a 3-well field with interference effects.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -461,7 +461,7 @@ for i, w in enumerate(wells):
 
 print(f"\\nTotal field yield: {sum(w['Q']*1000 for w in wells):.0f} L/s")`,
       challenge: 'Try increasing well spacing to 400m between each well. How does interference change? Then try 100m spacing. Find the minimum spacing where no well exceeds 10m total drawdown.',
-      successHint: 'Well field design is where hydrogeology meets engineering. The superposition principle \u2014 total drawdown equals the sum of individual contributions \u2014 is the key to designing systems that work. Every major city\u2019s water supply depends on these calculations.',
+      successHint: 'Well field design is where hydrogeology meets engineering. The superposition principle — total drawdown equals the sum of individual contributions — is the key to designing systems that work. Every major city’s water supply depends on these calculations.',
     },
   ];
 

@@ -46,7 +46,7 @@ export default function RaceEnergyDiagram() {
         <rect width={w} height={h} rx={10} className="fill-slate-900" />
 
         <text x={w / 2} y={26} textAnchor="middle" className="fill-slate-100" style={{ fontSize: 16, fontWeight: 700 }}>
-          Energy and Endurance \u2014 ATP Depletion
+          Energy and Endurance — ATP Depletion
         </text>
         <text x={w / 2} y={44} textAnchor="middle" className="fill-slate-400" style={{ fontSize: 12 }}>
           Anaerobic (fast, wasteful) vs Aerobic (slow, efficient)
@@ -105,7 +105,7 @@ export default function RaceEnergyDiagram() {
           Aerobic: 36 ATP / glucose
         </text>
         <text x={right - 101} y={top + 92} textAnchor="middle" className="fill-cyan-300" style={{ fontSize: 11, fontWeight: 600 }}>
-          18\u00d7 more efficient!
+          18× more efficient!
         </text>
 
         {/* Legend */}

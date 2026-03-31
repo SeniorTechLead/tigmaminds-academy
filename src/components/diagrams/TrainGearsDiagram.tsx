@@ -142,7 +142,7 @@ const TrainGearsDiagram = () => {
                 stroke={g.color} strokeWidth="1.5" strokeDasharray="5,3" opacity="0.7" />
               <circle cx="560" cy={endY} r="3" fill={g.color} />
               <text x="568" y={endY + 3} className="tg-tiny" fill={g.color}>
-                {g.pct} \u2014 {g.note}
+                {g.pct} — {g.note}
               </text>
             </g>
           );
@@ -152,7 +152,7 @@ const TrainGearsDiagram = () => {
         <rect x="330" y="226" width="240" height="36" rx="6"
           className="fill-blue-50 dark:fill-blue-900/20 stroke-blue-300 dark:stroke-blue-700" strokeWidth="1" />
         <text x="450" y="244" textAnchor="middle" className="tg-small fill-blue-700 dark:fill-blue-300" fontWeight="600">
-          Gradient (%) = (rise / run) \u00D7 100
+          Gradient (%) = (rise / run) × 100
         </text>
         <text x="450" y="257" textAnchor="middle" className="tg-tiny fill-blue-600 dark:fill-blue-400">
           A 5% grade rises 5 m for every 100 m of track
@@ -221,8 +221,8 @@ const TrainGearsDiagram = () => {
           'Tamil Nadu uses rack-and-pinion',
           'on its steepest section (8.33%).',
           '',
-          'Switzerland\u2019s Pilatus Railway:',
-          '48% gradient \u2014 the steepest rack',
+          'Switzerland’s Pilatus Railway:',
+          '48% gradient — the steepest rack',
           'railway in the world!',
           '',
           'The gear teeth lock into the rack,',

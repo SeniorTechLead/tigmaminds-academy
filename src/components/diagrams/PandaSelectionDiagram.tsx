@@ -16,7 +16,7 @@ export default function PandaSelectionDiagram() {
         <rect width="560" height="430" rx="12" className="fill-slate-900" />
 
         <text x="280" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#86efac">Natural Selection in Action</text>
-        <text x="280" y="46" textAnchor="middle" fontSize="11" fill="#94a3b8">Darwin\u2019s finches on volcanic islands \u2014 dark rock favours dark feathers</text>
+        <text x="280" y="46" textAnchor="middle" fontSize="11" fill="#94a3b8">Darwin’s finches on volcanic islands — dark rock favours dark feathers</text>
 
         {/* Environment indicator */}
         <rect x="400" y="65" width="140" height="55" rx="6" fill="#292524" opacity="0.6" />
@@ -94,7 +94,7 @@ export default function PandaSelectionDiagram() {
         {/* Bottom insight */}
         <rect x="30" y="395" width="500" height="26" rx="6" fill="#86efac" opacity="0.12" />
         <text x="280" y="413" textAnchor="middle" fontSize="11" fill="#86efac">
-          No bird \u201Cchooses\u201D to be dark \u2014 random mutations + selective survival = gradual population change
+          No bird “chooses” to be dark — random mutations + selective survival = gradual population change
         </text>
       </svg>
     </div>

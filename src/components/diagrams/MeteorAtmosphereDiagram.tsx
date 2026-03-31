@@ -52,14 +52,14 @@ export default function MeteorAtmosphereDiagram() {
         <text x="760" y="178" textAnchor="end" fontSize="11" fill="#818cf8" fontWeight="600">Thermosphere (80+ km)</text>
         <line x1="0" y1="160" x2="780" y2="160" stroke="#818cf8" strokeWidth="0.5" strokeDasharray="6 4" opacity="0.4" />
 
-        <text x="760" y="278" textAnchor="end" fontSize="11" fill="#60a5fa" fontWeight="600">Mesosphere (50\u201380 km)</text>
+        <text x="760" y="278" textAnchor="end" fontSize="11" fill="#60a5fa" fontWeight="600">Mesosphere (50–80 km)</text>
         <line x1="0" y1="270" x2="780" y2="270" stroke="#60a5fa" strokeWidth="0.5" strokeDasharray="6 4" opacity="0.4" />
-        <text x="760" y="290" textAnchor="end" fontSize="10" fill="#93c5fd" opacity="0.7">\u2190 Most meteors burn up here</text>
+        <text x="760" y="290" textAnchor="end" fontSize="10" fill="#93c5fd" opacity="0.7">← Most meteors burn up here</text>
 
-        <text x="760" y="368" textAnchor="end" fontSize="11" fill="#38bdf8" fontWeight="600">Stratosphere (12\u201350 km)</text>
+        <text x="760" y="368" textAnchor="end" fontSize="11" fill="#38bdf8" fontWeight="600">Stratosphere (12–50 km)</text>
         <line x1="0" y1="360" x2="780" y2="360" stroke="#38bdf8" strokeWidth="0.5" strokeDasharray="6 4" opacity="0.4" />
 
-        <text x="760" y="448" textAnchor="end" fontSize="11" fill="#22d3ee" fontWeight="600">Troposphere (0\u201312 km)</text>
+        <text x="760" y="448" textAnchor="end" fontSize="11" fill="#22d3ee" fontWeight="600">Troposphere (0–12 km)</text>
         <line x1="0" y1="440" x2="780" y2="440" stroke="#22d3ee" strokeWidth="0.5" strokeDasharray="6 4" opacity="0.4" />
 
         {/* Earth surface */}
@@ -87,7 +87,7 @@ export default function MeteorAtmosphereDiagram() {
           <line x1="100" y1="72" x2="50" y2="108" stroke="#fcd34d" strokeWidth="1" />
           <rect x="10" y="110" width="180" height="38" rx="4" fill="#1e1b4b" stroke="#fcd34d" strokeWidth="0.8" />
           <text x="100" y="126" textAnchor="middle" fontSize="11" fill="#fef3c7" fontWeight="600">Meteoroid in space</text>
-          <text x="100" y="140" textAnchor="middle" fontSize="10" fill="#c4b5fd">Speed: 11\u201372 km/s</text>
+          <text x="100" y="140" textAnchor="middle" fontSize="10" fill="#c4b5fd">Speed: 11–72 km/s</text>
         </g>
 
         {/* 2: Compression heating */}
@@ -96,7 +96,7 @@ export default function MeteorAtmosphereDiagram() {
           <rect x="570" y="290" width="195" height="50" rx="4" fill="#1e1b4b" stroke="#f59e0b" strokeWidth="0.8" />
           <text x="668" y="306" textAnchor="middle" fontSize="11" fill="#fef3c7" fontWeight="600">Compression heating</text>
           <text x="668" y="320" textAnchor="middle" fontSize="10" fill="#fde68a">Air ahead is compressed</text>
-          <text x="668" y="333" textAnchor="middle" fontSize="10" fill="#fde68a">to 20,000\u201340,000 \u00B0C</text>
+          <text x="668" y="333" textAnchor="middle" fontSize="10" fill="#fde68a">to 20,000–40,000 °C</text>
         </g>
 
         {/* 3: Glowing trail */}
@@ -116,7 +116,7 @@ export default function MeteorAtmosphereDiagram() {
           The meteoroid compresses the air ahead of it so violently that the air heats
         </text>
         <text x="390" y="526" textAnchor="middle" fontSize="11" fill="#e0e7ff">
-          to tens of thousands of degrees. This superheated air radiates light \u2014
+          to tens of thousands of degrees. This superheated air radiates light —
         </text>
         <text x="390" y="542" textAnchor="middle" fontSize="11" fill="#e0e7ff">
           exactly like a shockwave, not like rubbing your hands together.

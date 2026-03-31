@@ -54,9 +54,9 @@ const TrainMountainRouteDiagram = () => {
           fill="none" stroke="#ef4444" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
 
         {/* Direction arrows */}
-        <text x="100" y="205" textAnchor="middle" className="tm-tiny fill-red-500 dark:fill-red-400">\u2197 Forward</text>
-        <text x="90" y="155" textAnchor="middle" className="tm-tiny fill-red-500 dark:fill-red-400">\u2199 Reverse</text>
-        <text x="120" y="108" textAnchor="middle" className="tm-tiny fill-red-500 dark:fill-red-400">\u2197 Forward</text>
+        <text x="100" y="205" textAnchor="middle" className="tm-tiny fill-red-500 dark:fill-red-400">↗ Forward</text>
+        <text x="90" y="155" textAnchor="middle" className="tm-tiny fill-red-500 dark:fill-red-400">↙ Reverse</text>
+        <text x="120" y="108" textAnchor="middle" className="tm-tiny fill-red-500 dark:fill-red-400">↗ Forward</text>
 
         {/* Explanation */}
         <rect x="30" y="238" width="250" height="45" rx="4"
@@ -97,7 +97,7 @@ const TrainMountainRouteDiagram = () => {
           Track spirals upward in a continuous loop.
         </text>
         <text x="470" y="268" textAnchor="middle" className="tm-tiny fill-blue-600 dark:fill-blue-400">
-          Batasia Loop (Darjeeling): 360\u00B0 turn gains 42 m elevation in 1 km.
+          Batasia Loop (Darjeeling): 360° turn gains 42 m elevation in 1 km.
         </text>
 
         {/* Divider */}
@@ -160,7 +160,7 @@ const TrainMountainRouteDiagram = () => {
 
         {/* Stats */}
         <text x="460" y="456" textAnchor="middle" className="tm-tiny fill-gray-600 dark:fill-gray-400">
-          88 km \u2022 5 switchbacks \u2022 6 loops \u2022 102+ tunnels \u2022 UNESCO World Heritage
+          88 km • 5 switchbacks • 6 loops • 102+ tunnels • UNESCO World Heritage
         </text>
 
         {/* Divider */}
@@ -168,8 +168,8 @@ const TrainMountainRouteDiagram = () => {
 
         {/* === BOTTOM: Two Indian railways comparison === */}
         {[
-          { x: 30, name: 'Darjeeling Himalayan Railway', gauge: '610 mm (2 ft)', built: '1881', climb: '100 m \u2192 2,258 m', length: '88 km', method: 'Loops + switchbacks', color: '#22c55e' },
-          { x: 320, name: 'Nilgiri Mountain Railway', gauge: '1,000 mm (metre)', built: '1908', climb: '326 m \u2192 2,203 m', length: '46 km', method: 'Rack-and-pinion', color: '#a855f7' },
+          { x: 30, name: 'Darjeeling Himalayan Railway', gauge: '610 mm (2 ft)', built: '1881', climb: '100 m → 2,258 m', length: '88 km', method: 'Loops + switchbacks', color: '#22c55e' },
+          { x: 320, name: 'Nilgiri Mountain Railway', gauge: '1,000 mm (metre)', built: '1908', climb: '326 m → 2,203 m', length: '46 km', method: 'Rack-and-pinion', color: '#a855f7' },
         ].map((rly, i) => (
           <g key={i}>
             <rect x={rly.x} y="486" width="270" height="62" rx="6"
@@ -178,10 +178,10 @@ const TrainMountainRouteDiagram = () => {
               {rly.name}
             </text>
             <text x={rly.x + 10} y="518" className="tm-tiny fill-gray-600 dark:fill-gray-400">
-              Gauge: {rly.gauge} \u2022 Built: {rly.built}
+              Gauge: {rly.gauge} • Built: {rly.built}
             </text>
             <text x={rly.x + 10} y="530" className="tm-tiny fill-gray-600 dark:fill-gray-400">
-              Climb: {rly.climb} \u2022 {rly.length}
+              Climb: {rly.climb} • {rly.length}
             </text>
             <text x={rly.x + 10} y="542" className="tm-tiny" fill={rly.color}>
               Method: {rly.method}

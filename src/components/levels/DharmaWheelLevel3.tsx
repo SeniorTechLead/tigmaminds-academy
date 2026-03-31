@@ -23,30 +23,30 @@ export default function DharmaWheelLevel3() {
 
   const miniLessons = [
     {
-      title: 'Gyroscopic navigation \u2014 how planes know which way is up',
+      title: 'Gyroscopic navigation — how planes know which way is up',
       concept: `A spinning gyroscope maintains its orientation in space regardless of how the vehicle around it rotates. This makes it an ideal **reference frame** for navigation.
 
-**Mechanical gyroscopes** (used from 1900s\u20131990s):
+**Mechanical gyroscopes** (used from 1900s–1990s):
 1. A heavy disc spins at 20,000+ RPM inside a gimbal mount
 2. The gimbals allow the case to rotate freely around the spinning disc
 3. The disc maintains its orientation (angular momentum conservation)
 4. Sensors measure the angle between the case (which moves with the vehicle) and the disc (which stays fixed)
-5. This gives pitch, roll, and yaw \u2014 the vehicle\u2019s attitude
+5. This gives pitch, roll, and yaw — the vehicle’s attitude
 
 **Fibre-optic gyroscopes** (modern):
 - No spinning parts. Instead, two laser beams travel in opposite directions around a coil of fibre
 - If the coil rotates, one beam travels a slightly longer path than the other (Sagnac effect)
 - The path difference causes an interference pattern that reveals the rotation rate
-- Extremely precise: can detect Earth\u2019s rotation rate (15\u00B0/hour)
+- Extremely precise: can detect Earth’s rotation rate (15°/hour)
 
 **MEMS gyroscopes** (in your phone):
 - Tiny vibrating structures (micrometres) on a silicon chip
 - Rotation causes Coriolis forces that deflect the vibrating mass
 - Less precise but tiny, cheap, and low-power`,
       analogy: 'A gyroscope in a plane is like a compass that points not at magnetic north, but at whatever direction it was pointed when it was started. Imagine gluing a laser pointer to a spinning top and putting it on a turntable. No matter how you rotate the turntable, the laser pointer keeps pointing at the same spot on the wall. The spinning top "remembers" its original direction. That is a gyroscope.',
-      storyConnection: 'Buddhist monks navigating trade routes across Asia needed reliable direction. The spinning prayer wheel they carried was, in physics terms, a primitive gyroscope \u2014 maintaining its spin axis regardless of the terrain the monk traversed. Modern navigation gyroscopes formalise the same principle with engineering precision.',
+      storyConnection: 'Buddhist monks navigating trade routes across Asia needed reliable direction. The spinning prayer wheel they carried was, in physics terms, a primitive gyroscope — maintaining its spin axis regardless of the terrain the monk traversed. Modern navigation gyroscopes formalise the same principle with engineering precision.',
       checkQuestion: 'The Hubble Space Telescope uses gyroscopes for pointing accuracy. Why do gyroscopes work especially well in space?',
-      checkAnswer: 'In space, there is no air resistance or friction to slow the spinning disc, so the gyroscope maintains its orientation for much longer without needing re-spins. Also, there is no gravity torque to cause precession (in free-fall, gravity acts equally on all parts). The result is an extremely stable reference frame. Hubble\u2019s gyroscopes can detect rotations as small as 0.0003 arcseconds \u2014 equivalent to spotting a human hair from 1.6 km away.',
+      checkAnswer: 'In space, there is no air resistance or friction to slow the spinning disc, so the gyroscope maintains its orientation for much longer without needing re-spins. Also, there is no gravity torque to cause precession (in free-fall, gravity acts equally on all parts). The result is an extremely stable reference frame. Hubble’s gyroscopes can detect rotations as small as 0.0003 arcseconds — equivalent to spotting a human hair from 1.6 km away.',
       codeIntro: 'Simulate a 3D gyroscope tracking vehicle rotations in pitch, roll, and yaw.',
       code: `import numpy as np
 
@@ -83,11 +83,11 @@ print()
 
 # Flight manoeuvres
 manoeuvres = [
-    ("Takeoff (pitch up 15\u00B0)",     15,  0,   0),
-    ("Bank right (roll 30\u00B0)",       0,  30,   0),
-    ("Turn heading (yaw 90\u00B0)",      0,   0,  90),
+    ("Takeoff (pitch up 15°)",     15,  0,   0),
+    ("Bank right (roll 30°)",       0,  30,   0),
+    ("Turn heading (yaw 90°)",      0,   0,  90),
     ("Level out (roll back)",          0, -30,   0),
-    ("Descend (pitch down 10\u00B0)",  -10,   0,   0),
+    ("Descend (pitch down 10°)",  -10,   0,   0),
     ("Land (pitch level)",             -5,   0,   0),
 ]
 
@@ -97,7 +97,7 @@ print("-" * 60)
 for name, dp, dr, dy in manoeuvres:
     gyro.apply_rotation(dp, dr, dy)
     p, r, y = gyro.read()
-    print(f"{name:>30} | {p:>6.2f}\u00B0 | {r:>6.2f}\u00B0 | {y:>6.2f}\u00B0")
+    print(f"{name:>30} | {p:>6.2f}° | {r:>6.2f}° | {y:>6.2f}°")
 
 print()
 
@@ -111,22 +111,22 @@ for rpm, name in [(1000, "Cheap MEMS"), (10000, "Nav-grade"), (50000, "Strategic
         g.apply_rotation(0, 0, 0, dt=0.1)
     p, r, y = g.read()
     drift = np.sqrt(p**2 + r**2 + y**2)
-    print(f"  {name:>15} ({rpm:>5} RPM): Total drift = {drift:.4f}\u00B0")`,
+    print(f"  {name:>15} ({rpm:>5} RPM): Total drift = {drift:.4f}°")`,
       challenge: 'Simulate gyro failure: at a random time during flight, reduce L to near zero (gyro stops spinning). How quickly does navigation accuracy degrade? How long until the pilot would notice?',
-      successHint: 'Gyroscopic navigation is one of the most important applications of angular momentum conservation. Without it, aircraft, submarines, spacecraft, and missiles could not navigate. Your phone uses a MEMS gyroscope for screen rotation \u2014 a $0.50 chip applying the same physics.',
+      successHint: 'Gyroscopic navigation is one of the most important applications of angular momentum conservation. Without it, aircraft, submarines, spacecraft, and missiles could not navigate. Your phone uses a MEMS gyroscope for screen rotation — a $0.50 chip applying the same physics.',
     },
     {
-      title: 'Reaction wheels \u2014 steering spacecraft without fuel',
-      concept: `Satellites cannot use propellers or wings in the vacuum of space. Instead, they use **reaction wheels** \u2014 spinning flywheels inside the spacecraft.
+      title: 'Reaction wheels — steering spacecraft without fuel',
+      concept: `Satellites cannot use propellers or wings in the vacuum of space. Instead, they use **reaction wheels** — spinning flywheels inside the spacecraft.
 
 The principle: conservation of angular momentum. If the spacecraft + reaction wheel system has zero total angular momentum, spinning the wheel in one direction makes the spacecraft rotate in the other.
 
 **L_wheel + L_spacecraft = constant**
 
 If L_total = 0:
-- Spin wheel clockwise \u2192 spacecraft rotates counterclockwise
-- Speed up wheel \u2192 spacecraft rotates faster
-- Slow wheel to zero \u2192 spacecraft stops rotating
+- Spin wheel clockwise → spacecraft rotates counterclockwise
+- Speed up wheel → spacecraft rotates faster
+- Slow wheel to zero → spacecraft stops rotating
 
 Real satellites have **three reaction wheels** (one for each axis: pitch, roll, yaw). Some have four for redundancy.
 
@@ -135,11 +135,11 @@ Advantages:
 - Extremely precise pointing (arcsecond accuracy)
 - Reversible (can rotate back and forth indefinitely)
 
-Problem: **angular momentum buildup**. External torques (solar pressure, Earth\u2019s magnetic field) gradually add angular momentum. The wheels spin faster and faster until they **saturate**. To reset, the satellite uses small thrusters to dump the excess \u2014 the only time fuel is used.`,
-      analogy: 'Sit on a swivel chair holding a heavy book and spin the book in a circle above your head. You rotate in the opposite direction. Stop the book, and you stop. This is a reaction wheel \u2014 the book is the wheel, and you are the spacecraft. The total angular momentum of you + book stays zero.',
-      storyConnection: 'The Dharma Wheel teaches balance and response. Reaction wheels embody this: to turn right, spin a wheel left. Every action has an equal and opposite reaction. Newton\u2019s third law expressed through the medium of angular momentum. The spacecraft achieves grace through deliberate, balanced rotation.',
-      checkQuestion: 'The Hubble Space Telescope needs to rotate 90\u00B0 in 15 minutes to observe a new star. Its reaction wheel has I = 2 kg\u00B7m\u00B2 and the telescope has I = 75,000 kg\u00B7m\u00B2. How fast must the wheel spin?',
-      checkAnswer: '\u03C9_telescope = 90\u00B0 / 15 min = (\u03C0/2) / 900 = 0.00175 rad/s. By conservation: I_wheel \u00D7 \u03C9_wheel = I_telescope \u00D7 \u03C9_telescope. \u03C9_wheel = 75000 \u00D7 0.00175 / 2 = 65.6 rad/s = 627 RPM. That is modest because Hubble rotates so slowly. For faster manoeuvres, the wheel would need to spin at thousands of RPM.',
+Problem: **angular momentum buildup**. External torques (solar pressure, Earth’s magnetic field) gradually add angular momentum. The wheels spin faster and faster until they **saturate**. To reset, the satellite uses small thrusters to dump the excess — the only time fuel is used.`,
+      analogy: 'Sit on a swivel chair holding a heavy book and spin the book in a circle above your head. You rotate in the opposite direction. Stop the book, and you stop. This is a reaction wheel — the book is the wheel, and you are the spacecraft. The total angular momentum of you + book stays zero.',
+      storyConnection: 'The Dharma Wheel teaches balance and response. Reaction wheels embody this: to turn right, spin a wheel left. Every action has an equal and opposite reaction. Newton’s third law expressed through the medium of angular momentum. The spacecraft achieves grace through deliberate, balanced rotation.',
+      checkQuestion: 'The Hubble Space Telescope needs to rotate 90° in 15 minutes to observe a new star. Its reaction wheel has I = 2 kg·m² and the telescope has I = 75,000 kg·m². How fast must the wheel spin?',
+      checkAnswer: 'ω_telescope = 90° / 15 min = (π/2) / 900 = 0.00175 rad/s. By conservation: I_wheel × ω_wheel = I_telescope × ω_telescope. ω_wheel = 75000 × 0.00175 / 2 = 65.6 rad/s = 627 RPM. That is modest because Hubble rotates so slowly. For faster manoeuvres, the wheel would need to spin at thousands of RPM.',
       codeIntro: 'Simulate satellite attitude control using reaction wheels.',
       code: `import numpy as np
 
@@ -190,14 +190,14 @@ print()
 
 # Rotate to point at a star
 target = 45  # degrees
-print(f"Command: Rotate {target}\u00B0 to observe new target")
+print(f"Command: Rotate {target}° to observe new target")
 log = sat.command_rotation(target)
 print(f"{'Step':>6} | {'Sat Angle':>10} | {'Wheel RPM':>10}")
 print("-" * 32)
 for step, ang, rpm in log:
-    print(f"{step:>6} | {ang:>9.2f}\u00B0 | {rpm:>9.1f}")
+    print(f"{step:>6} | {ang:>9.2f}° | {rpm:>9.1f}")
 
-print(f"\\nFinal: Satellite at {sat.angle:.2f}\u00B0, Wheel at {sat.omega_wheel*60/(2*np.pi):.0f} RPM")
+print(f"\\nFinal: Satellite at {sat.angle:.2f}°, Wheel at {sat.omega_wheel*60/(2*np.pi):.0f} RPM")
 print()
 
 # Momentum budget
@@ -206,28 +206,28 @@ L_sat = sat.I_sat * np.radians(sat.omega_sat)
 print(f"Angular momentum check:")
 print(f"  Wheel: {L_wheel:.4f} kg.m^2/s")
 print(f"  Total should be ~0 (conservation)")`,
-      challenge: 'Add external torque (solar radiation pressure = 0.0001 N\u00B7m) that gradually adds angular momentum. After how many orbits (90 min each) does the wheel saturate at 6000 RPM?',
-      successHint: 'Reaction wheels demonstrate angular momentum conservation at the most practical level. Every satellite, space telescope, and space station uses them. The International Space Station has four CMGs (control moment gyroscopes) \u2014 massive 300 kg flywheels spinning at 6600 RPM.',
+      challenge: 'Add external torque (solar radiation pressure = 0.0001 N·m) that gradually adds angular momentum. After how many orbits (90 min each) does the wheel saturate at 6000 RPM?',
+      successHint: 'Reaction wheels demonstrate angular momentum conservation at the most practical level. Every satellite, space telescope, and space station uses them. The International Space Station has four CMGs (control moment gyroscopes) — massive 300 kg flywheels spinning at 6600 RPM.',
     },
     {
-      title: 'Nutation and precession \u2014 Earth as a giant gyroscope',
+      title: 'Nutation and precession — Earth as a giant gyroscope',
       concept: `Earth itself is a spinning gyroscope, and it shows all the gyroscopic effects:
 
-**Precession**: Earth\u2019s axis traces a cone in space with a period of **25,772 years** (the "Great Year"). This is caused by the Sun\u2019s and Moon\u2019s gravitational torque on Earth\u2019s equatorial bulge. In 13,000 years, the North Star will be Vega, not Polaris.
+**Precession**: Earth’s axis traces a cone in space with a period of **25,772 years** (the "Great Year"). This is caused by the Sun’s and Moon’s gravitational torque on Earth’s equatorial bulge. In 13,000 years, the North Star will be Vega, not Polaris.
 
-**Nutation**: A smaller wobble superimposed on precession, with a period of **18.6 years**, caused by the Moon\u2019s orbital plane precessing relative to the ecliptic.
+**Nutation**: A smaller wobble superimposed on precession, with a period of **18.6 years**, caused by the Moon’s orbital plane precessing relative to the ecliptic.
 
 **Chandler wobble**: The spin axis itself wobbles by about 9 metres at the pole, with a period of 433 days. Caused by mass redistributions (earthquakes, ocean currents, atmospheric pressure changes).
 
 The physics is identical to a spinning top:
-- Earth\u2019s angular momentum: L = I\u03C9 = (8.04\u00D710\u00B3\u2077 kg\u00B7m\u00B2)(7.27\u00D710\u207B\u2075 rad/s) = 5.86\u00D710\u00B3\u00B3 kg\u00B7m\u00B2/s
-- Gravitational torque from Sun: \u03C4 \u2248 4.4\u00D710\u00B2\u00B2 N\u00B7m
-- Precession rate: \u03A9 = \u03C4/L \u2248 7.7\u00D710\u207B\u00B9\u00B2 rad/s = one revolution per 25,772 years`,
+- Earth’s angular momentum: L = Iω = (8.04×10³⁷ kg·m²)(7.27×10⁻⁵ rad/s) = 5.86×10³³ kg·m²/s
+- Gravitational torque from Sun: τ ≈ 4.4×10²² N·m
+- Precession rate: Ω = τ/L ≈ 7.7×10⁻¹² rad/s = one revolution per 25,772 years`,
       analogy: 'Earth is a top that was spun 4.5 billion years ago and has been wobbling ever since. It is running down incredibly slowly (losing about 2.3 milliseconds per century due to tidal friction). The Sun and Moon are constantly poking it sideways (gravitational torque), causing the slow precession that shifts the pole star over millennia.',
-      storyConnection: 'The Wheel of Dharma turns on timescales far longer than a human life. Earth\u2019s precession operates on a similar timescale \u2014 25,772 years per cycle. The idea that a wheel can keep turning for thousands of years is not metaphor; it is what our planet does every day.',
-      checkQuestion: 'If Earth\u2019s rotation period decreased to 12 hours (twice as fast), what would happen to the precession period?',
-      checkAnswer: 'L would double (L = I\u03C9, and \u03C9 doubles). The precession rate \u03A9 = \u03C4/L would halve. So precession period would double to ~51,544 years. Faster spin = more angular momentum = more resistance to torque = slower precession. This is exactly the same physics as a spinning top that precesses more slowly when spun harder.',
-      codeIntro: 'Model Earth\u2019s precession, nutation, and Chandler wobble as gyroscopic phenomena.',
+      storyConnection: 'The Wheel of Dharma turns on timescales far longer than a human life. Earth’s precession operates on a similar timescale — 25,772 years per cycle. The idea that a wheel can keep turning for thousands of years is not metaphor; it is what our planet does every day.',
+      checkQuestion: 'If Earth’s rotation period decreased to 12 hours (twice as fast), what would happen to the precession period?',
+      checkAnswer: 'L would double (L = Iω, and ω doubles). The precession rate Ω = τ/L would halve. So precession period would double to ~51,544 years. Faster spin = more angular momentum = more resistance to torque = slower precession. This is exactly the same physics as a spinning top that precesses more slowly when spun harder.',
+      codeIntro: 'Model Earth’s precession, nutation, and Chandler wobble as gyroscopic phenomena.',
       code: `import numpy as np
 
 # Earth as a Gyroscope
@@ -268,7 +268,7 @@ pole_stars = [
 
 for year, star, distance in pole_stars:
     angle = 360 * year / T_prec_years
-    print(f"  AD {year:>6}: {star:>30} ({distance}\u00B0 from pole)")
+    print(f"  AD {year:>6}: {star:>30} ({distance}° from pole)")
 
 print()
 
@@ -289,30 +289,30 @@ for factor in [0.25, 0.5, 1.0, 2.0, 4.0]:
     T_new = 2 * np.pi / (tau_total / L_new)
     T_new_years = T_new / (365.25 * 24 * 3600)
     print(f"  {factor:.2f}x spin: precession = {T_new_years:,.0f} years")`,
-      challenge: 'Mars has I = 2.5\u00D710\u00B3\u2076, rotates in 24.6 hours, and has negligible gravitational torque (no large moon). Calculate its precession period. Why is Mars\u2019s axis more stable than Earth\u2019s in some ways but less in others?',
-      successHint: 'Earth\u2019s precession is gyroscopic physics on a planetary scale. The same L = I\u03C9 and \u03A9 = \u03C4/L that govern a toy top govern the planet\u2019s axis. Every ancient calendar that tracked the "Great Year" was observing angular momentum conservation.',
+      challenge: 'Mars has I = 2.5×10³⁶, rotates in 24.6 hours, and has negligible gravitational torque (no large moon). Calculate its precession period. Why is Mars’s axis more stable than Earth’s in some ways but less in others?',
+      successHint: 'Earth’s precession is gyroscopic physics on a planetary scale. The same L = Iω and Ω = τ/L that govern a toy top govern the planet’s axis. Every ancient calendar that tracked the "Great Year" was observing angular momentum conservation.',
     },
     {
-      title: 'Rotational dynamics simulation \u2014 numerical integration',
-      concept: `Real rotational systems rarely have constant torque or simple geometry. To solve them, we use **numerical integration** \u2014 breaking time into tiny steps and updating the state at each step.
+      title: 'Rotational dynamics simulation — numerical integration',
+      concept: `Real rotational systems rarely have constant torque or simple geometry. To solve them, we use **numerical integration** — breaking time into tiny steps and updating the state at each step.
 
 The Euler method for rotation:
-1. Calculate net torque: \u03C4_net = \u03C4_applied - \u03C4_friction
-2. Calculate angular acceleration: \u03B1 = \u03C4_net / I
-3. Update angular velocity: \u03C9(t + dt) = \u03C9(t) + \u03B1 \u00D7 dt
-4. Update angle: \u03B8(t + dt) = \u03B8(t) + \u03C9 \u00D7 dt
+1. Calculate net torque: τ_net = τ_applied - τ_friction
+2. Calculate angular acceleration: α = τ_net / I
+3. Update angular velocity: ω(t + dt) = ω(t) + α × dt
+4. Update angle: θ(t + dt) = θ(t) + ω × dt
 5. Repeat
 
 This is the same approach used in real engineering simulators. The key is choosing dt small enough for accuracy but large enough for speed.
 
 For coupled systems (two wheels connected by gears or belts), you solve the equations simultaneously:
-- \u03C4\u2081 = I\u2081\u03B1\u2081 + coupling forces
-- \u03C4\u2082 = I\u2082\u03B1\u2082 + coupling forces
-- Constraint: \u03C9\u2081r\u2081 = \u03C9\u2082r\u2082 (meshing gears)`,
+- τ₁ = I₁α₁ + coupling forces
+- τ₂ = I₂α₂ + coupling forces
+- Constraint: ω₁r₁ = ω₂r₂ (meshing gears)`,
       analogy: 'Numerical integration is like navigating by dead reckoning. At each moment, you know your current speed and direction. You take a tiny step in that direction, then recalculate. If your steps are small enough, you trace the true path with high accuracy. If your steps are too large, you overshoot corners and drift off course.',
-      storyConnection: 'The gradual turning of the Dharma Wheel \u2014 moment by moment, teaching by teaching \u2014 is a step-by-step process. Numerical integration models this: at each time step, the current state determines the next. No shortcuts, no jumps \u2014 just faithful, incremental progress.',
+      storyConnection: 'The gradual turning of the Dharma Wheel — moment by moment, teaching by teaching — is a step-by-step process. Numerical integration models this: at each time step, the current state determines the next. No shortcuts, no jumps — just faithful, incremental progress.',
       checkQuestion: 'You simulate a spinning disc with dt = 0.1 s and get the wrong answer. When you reduce dt to 0.01 s, the answer improves. What happens at dt = 0.001 s?',
-      checkAnswer: 'The answer improves further, getting closer to the true (analytical) solution. But computation time increases 10\u00D7 for each 10\u00D7 reduction in dt. The art of numerical simulation is finding the smallest dt that gives acceptable accuracy within acceptable compute time. Advanced methods (Runge-Kutta) achieve better accuracy with larger dt by using smarter stepping algorithms.',
+      checkAnswer: 'The answer improves further, getting closer to the true (analytical) solution. But computation time increases 10× for each 10× reduction in dt. The art of numerical simulation is finding the smallest dt that gives acceptable accuracy within acceptable compute time. Advanced methods (Runge-Kutta) achieve better accuracy with larger dt by using smarter stepping algorithms.',
       codeIntro: 'Build a numerical simulator for a wheel spinning down under friction.',
       code: `import numpy as np
 
@@ -373,29 +373,29 @@ print()
 print("Exponential decay: friction proportional to speed gives")
 print("omega(t) = omega_0 * exp(-friction*t/I)")
 print(f"Theory: time constant = I/friction = {0.5/0.1:.1f} s")`,
-      challenge: 'Add an applied torque pulse (10 N\u00B7m for the first 5 seconds, then 0). The wheel should spin up, then coast down. Plot omega vs time. How does the friction coefficient affect the peak speed?',
+      challenge: 'Add an applied torque pulse (10 N·m for the first 5 seconds, then 0). The wheel should spin up, then coast down. Plot omega vs time. How does the friction coefficient affect the peak speed?',
       successHint: 'Numerical integration is the tool that makes all of engineering possible. Every car crash simulation, every satellite orbit prediction, every weather forecast uses the same approach: break time into steps, calculate the physics at each step, update, repeat.',
     },
     {
-      title: 'Coupled rotational systems \u2014 drivetrain simulation',
-      concept: `Real machines have multiple rotating components connected together: engine \u2192 clutch \u2192 gearbox \u2192 driveshaft \u2192 differential \u2192 wheels.
+      title: 'Coupled rotational systems — drivetrain simulation',
+      concept: `Real machines have multiple rotating components connected together: engine → clutch → gearbox → driveshaft → differential → wheels.
 
 Each component has its own moment of inertia. They are connected by **constraints**:
-- Gears: \u03C9\u2081N\u2081 = \u03C9\u2082N\u2082 (N = number of teeth)
-- Belts: \u03C9\u2081r\u2081 = \u03C9\u2082r\u2082 (r = pulley radius)
-- Clutch: when engaged, \u03C9\u2081 = \u03C9\u2082; when slipping, a friction torque is transmitted
+- Gears: ω₁N₁ = ω₂N₂ (N = number of teeth)
+- Belts: ω₁r₁ = ω₂r₂ (r = pulley radius)
+- Clutch: when engaged, ω₁ = ω₂; when slipping, a friction torque is transmitted
 
 The total system equation:
-**\u03C4_engine - \u03C4_friction - \u03C4_road = I_total \u00D7 \u03B1**
+**τ_engine - τ_friction - τ_road = I_total × α**
 
 Where I_total is the **equivalent** moment of inertia, accounting for gear ratios:
-I_total = I_engine + I_gearbox + I_shaft + (I_wheel + m_car \u00D7 r_wheel\u00B2) / (gear_ratio\u00B2)
+I_total = I_engine + I_gearbox + I_shaft + (I_wheel + m_car × r_wheel²) / (gear_ratio²)
 
-The gear ratio\u00B2 term is crucial: it means high gear reduces the effective inertia of the car as seen by the engine (easier to accelerate at the engine), but reduces the engine torque at the wheels.`,
+The gear ratio² term is crucial: it means high gear reduces the effective inertia of the car as seen by the engine (easier to accelerate at the engine), but reduces the engine torque at the wheels.`,
       analogy: 'A drivetrain is like a relay team passing a baton. The engine is the first runner (fast, powerful start). The gearbox is the hand-off zone (adapting speed for the next leg). The driveshaft is the middle runner (steady transmission). The wheels are the final runner (delivering power to the ground). If any runner drops the baton (clutch slip, gear failure), the whole chain stalls.',
-      storyConnection: 'The Dharma Wheel\u2019s teaching was transmitted through a "drivetrain" of sorts: the Buddha (engine) \u2192 the sangha of monks (gearbox, adapting the teaching for different audiences) \u2192 written sutras (driveshaft, long-distance transmission) \u2192 monasteries and schools (wheels, delivering to students). Each stage has its own "moment of inertia" and its own coupling mechanism.',
+      storyConnection: 'The Dharma Wheel’s teaching was transmitted through a "drivetrain" of sorts: the Buddha (engine) → the sangha of monks (gearbox, adapting the teaching for different audiences) → written sutras (driveshaft, long-distance transmission) → monasteries and schools (wheels, delivering to students). Each stage has its own "moment of inertia" and its own coupling mechanism.',
       checkQuestion: 'A car in 1st gear (ratio 4:1) can accelerate faster from a stop than in 3rd gear (ratio 1.5:1), even though 3rd gear has a higher top speed. Why?',
-      checkAnswer: 'In 1st gear, the engine torque is multiplied by 4 at the wheels. The effective inertia seen by the engine is reduced by 4\u00B2 = 16. Both effects help: more torque pushing the car forward, and the car "feels" 16x lighter to the engine. In 3rd gear, torque multiplier is only 1.5 and effective inertia reduction is only 2.25. So the engine struggles more to accelerate the same car, even though higher \u03C9 at the wheels gives higher top speed.',
+      checkAnswer: 'In 1st gear, the engine torque is multiplied by 4 at the wheels. The effective inertia seen by the engine is reduced by 4² = 16. Both effects help: more torque pushing the car forward, and the car "feels" 16x lighter to the engine. In 3rd gear, torque multiplier is only 1.5 and effective inertia reduction is only 2.25. So the engine struggles more to accelerate the same car, even though higher ω at the wheels gives higher top speed.',
       codeIntro: 'Simulate a complete car drivetrain: engine, gearbox, driveshaft, and wheels.',
       code: `import numpy as np
 
@@ -492,12 +492,12 @@ print(f"\\n0-100 km/h: {time:.2f} seconds")`,
     },
     {
       title: 'Flywheel battery design project',
-      concept: `You now have all the physics to design a **flywheel battery** \u2014 a device that stores electricity as rotational kinetic energy.
+      concept: `You now have all the physics to design a **flywheel battery** — a device that stores electricity as rotational kinetic energy.
 
 Design requirements:
 1. Store at least 1 kWh (3.6 MJ) of energy
 2. Deliver 10 kW of power for at least 6 minutes
-3. Fit in a volume under 1 m\u00B3
+3. Fit in a volume under 1 m³
 4. Survive at least 100,000 charge/discharge cycles
 5. Maximum rotor speed limited by material tensile strength
 
@@ -511,9 +511,9 @@ Design variables:
 
 The optimisation challenge: maximise energy density (kWh/kg) while keeping stress below material limits and cost within budget.`,
       analogy: 'Designing a flywheel battery is like designing a water tower. You need to store enough water (energy) at sufficient height (speed) to supply a town (load) for a specified time. You choose the tank material (steel vs concrete vs fibreglass), the height (operating speed), and the pipe diameter (power delivery rate). Every choice involves tradeoffs.',
-      storyConnection: 'This capstone project brings the Wheel of Dharma full circle. You take the physics of the wheel \u2014 friction, torque, angular momentum, energy storage \u2014 and apply it to a real engineering problem. The result is a device that stores energy in spinning mass, releases it on demand, and can cycle for decades. The wheel, once set in motion, keeps turning.',
+      storyConnection: 'This capstone project brings the Wheel of Dharma full circle. You take the physics of the wheel — friction, torque, angular momentum, energy storage — and apply it to a real engineering problem. The result is a device that stores energy in spinning mass, releases it on demand, and can cycle for decades. The wheel, once set in motion, keeps turning.',
       checkQuestion: 'A flywheel operates between 60,000 and 30,000 RPM. What fraction of its maximum energy is usable?',
-      checkAnswer: 'KE \u221D \u03C9\u00B2. At max: KE_max \u221D 60000\u00B2. At min: KE_min \u221D 30000\u00B2 = (60000/2)\u00B2 = KE_max/4. Usable energy = KE_max - KE_min = KE_max - KE_max/4 = 75% of KE_max. By halving the speed, you extract 75% of the energy. This is why flywheels typically operate over a 2:1 speed range.',
+      checkAnswer: 'KE ∝ ω². At max: KE_max ∝ 60000². At min: KE_min ∝ 30000² = (60000/2)² = KE_max/4. Usable energy = KE_max - KE_min = KE_max - KE_max/4 = 75% of KE_max. By halving the speed, you extract 75% of the energy. This is why flywheels typically operate over a 2:1 speed range.',
       codeIntro: 'Design and optimise a flywheel battery to meet the specified requirements.',
       code: `import numpy as np
 
@@ -598,7 +598,7 @@ print(f"  Meets 1 kWh target? {'YES' if best['usable_kWh'] >= 1 else 'NO - need 
         <div className="flex items-center gap-2 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 px-4 py-2 rounded-full text-sm font-semibold">
           <Compass className="w-4 h-4" /> Level 3: Engineer
         </div>
-        <span className="text-sm text-gray-500 dark:text-gray-400">Gyroscopic navigation, reaction wheels, Earth\u2019s precession, and flywheel design</span>
+        <span className="text-sm text-gray-500 dark:text-gray-400">Gyroscopic navigation, reaction wheels, Earth’s precession, and flywheel design</span>
       </div>
       {!pyReady && (
         <div className="mb-8 bg-gray-50 dark:bg-gray-800 rounded-xl p-6 text-center">

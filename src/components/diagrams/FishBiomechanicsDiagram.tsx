@@ -67,7 +67,7 @@ export default function FishBiomechanicsDiagram() {
       {/* Newton's 3rd law note */}
       <rect x="15" y="166" width="215" height="28" rx="4" className="fill-purple-50 dark:fill-purple-950" stroke="#a855f7" strokeWidth="1" />
       <text x="122" y="183" textAnchor="middle" fontSize="8" className="fill-purple-700 dark:fill-purple-300">
-        Newton\u2019s 3rd law: tail pushes water back \u2192 water pushes fish up
+        Newton’s 3rd law: tail pushes water back → water pushes fish up
       </text>
 
       {/* RIGHT: Projectile trajectory */}
@@ -88,7 +88,7 @@ export default function FishBiomechanicsDiagram() {
       {/* Launch angle */}
       <line x1="240" y1="210" x2="280" y2="210" stroke="#6b7280" strokeWidth="1" />
       <path d="M255,210 A15,15 0 0,0 244,198" fill="none" stroke="#f59e0b" strokeWidth="1.5" />
-      <text x="260" y="202" fontSize="8" fontWeight="600" className="fill-amber-600 dark:fill-amber-400">70\u00B0</text>
+      <text x="260" y="202" fontSize="8" fontWeight="600" className="fill-amber-600 dark:fill-amber-400">70°</text>
 
       {/* Max height indicator */}
       {(() => {
@@ -108,26 +108,26 @@ export default function FishBiomechanicsDiagram() {
 
       {/* Velocity arrow at launch */}
       <line x1="240" y1="210" x2="255" y2="186" stroke="#ef4444" strokeWidth="2" markerEnd="url(#arrowRedFish)" />
-      <text x="230" y="193" fontSize="7" className="fill-red-500 dark:fill-red-400">v\u2080 = 6 m/s</text>
+      <text x="230" y="193" fontSize="7" className="fill-red-500 dark:fill-red-400">v₀ = 6 m/s</text>
 
       {/* Gravity arrow */}
-      <text x="420" y="130" textAnchor="middle" fontSize="8" className="fill-gray-500 dark:fill-gray-400">g = 9.81 m/s\u00B2</text>
+      <text x="420" y="130" textAnchor="middle" fontSize="8" className="fill-gray-500 dark:fill-gray-400">g = 9.81 m/s²</text>
       <line x1="420" y1="134" x2="420" y2="155" stroke="#6b7280" strokeWidth="1.5" markerEnd="url(#arrowGray)" />
 
       {/* Equations */}
       <rect x="240" y="268" width="338" height="55" rx="6" className="fill-gray-50 dark:fill-gray-800" stroke="#6b7280" strokeWidth="1" />
       <text x="260" y="286" fontSize="9" fontWeight="600" className="fill-gray-700 dark:fill-gray-200">Key equations:</text>
       <text x="260" y="302" fontSize="8" className="fill-gray-600 dark:fill-gray-300">
-        Max height: h = v\u00B2 sin\u00B2\u03B8 / 2g = 1.62 m
+        Max height: h = v² sin²θ / 2g = 1.62 m
       </text>
       <text x="260" y="314" fontSize="8" className="fill-gray-600 dark:fill-gray-300">
-        KE at surface \u2192 PE at peak: \u00BDmv\u00B2 = mgh
+        KE at surface → PE at peak: ½mv² = mgh
       </text>
 
       {/* Bottom summary */}
       <rect x="60" y="340" width="472" height="30" rx="5" className="fill-green-50 dark:fill-green-950" stroke="#22c55e" strokeWidth="1" />
       <text x="296" y="360" textAnchor="middle" fontSize="9" fontWeight="600" className="fill-green-700 dark:fill-green-300">
-        A 3 kg salmon at 6 m/s can clear a 1.6 m waterfall \u2014 the same energy trade-off as throwing a ball
+        A 3 kg salmon at 6 m/s can clear a 1.6 m waterfall — the same energy trade-off as throwing a ball
       </text>
 
       <defs>

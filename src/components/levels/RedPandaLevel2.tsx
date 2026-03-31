@@ -295,7 +295,7 @@ for name, time in divergence_times.items():
     print(f"  {name}: {time/1e6:.0f} Mya, ~{diffs:.0f} differences per 1000 bases")
 print()
 print("The clock is imperfect but powerful:")
-print("  \\u00b120-30% uncertainty is typical")
+print("  \±20-30% uncertainty is typical")
 print("  Better calibration = better estimates")
 print("  Whole-genome clocks are much more precise")`,
       challenge: 'The mutation rate for mitochondrial DNA is ~10x faster than nuclear DNA. Recalculate divergence times using mitochondrial rates. Why might faster-evolving genes be better for closely related species?',

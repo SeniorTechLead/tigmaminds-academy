@@ -29,18 +29,18 @@ export default function AngulimalaLevel3() {
 
   const miniLessons = [
     {
-      title: 'Q-learning with a grid world \u2014 navigating from violence to peace',
-      concept: `In Level 2 you learned TD learning for value estimation. Now we build a full **Q-learning** agent that learns to navigate a grid world. Q-learning maintains a table of Q(state, action) values \u2014 the expected reward for taking each action in each state.
+      title: 'Q-learning with a grid world — navigating from violence to peace',
+      concept: `In Level 2 you learned TD learning for value estimation. Now we build a full **Q-learning** agent that learns to navigate a grid world. Q-learning maintains a table of Q(state, action) values — the expected reward for taking each action in each state.
 
-The update: \`Q(s,a) += \u03b1 \u00d7 [r + \u03b3\u00b7max_a\u2019 Q(s\u2019,a\u2019) - Q(s,a)]\`
+The update: \`Q(s,a) += α × [r + γ·max_a’ Q(s’,a’) - Q(s,a)]\`
 
 The key difference from TD: Q-learning uses the **maximum** future Q-value, which means the agent always plans assuming it will act optimally in the future. This is called an **off-policy** method.
 
-We model Angulimala\u2019s journey as a 5\u00d75 grid. The top-left is the "violent" state, the bottom-right is the "peaceful" state. Obstacles (triggers, temptations) block some paths. The agent must learn the optimal path from violence to peace.`,
-      analogy: 'Q-learning is like a taxi driver learning the city. At each intersection, they estimate the value of going north, south, east, or west. After many trips, they know: "at 5th and Main, go east" because that route has historically led to the biggest tips. The Q-table is the driver\u2019s mental map of the best routes.',
-      storyConnection: 'Angulimala\u2019s journey from bandit to saint was not a straight line. He hit obstacles: old companions, familiar triggers, moments of doubt. Q-learning models this \u2014 the agent must navigate around obstacles, sometimes taking indirect paths, to reach the goal. The optimal path is rarely the obvious one.',
-      checkQuestion: 'What happens if you set the discount factor \u03b3 to 0? Does the agent still find the goal?',
-      checkAnswer: 'With \u03b3=0, the agent only values immediate reward and completely ignores future states. It would only learn to take actions that give immediate reward, making it unable to plan multi-step paths to distant goals. It would get stuck near any local reward even if the goal is far away. This models impulsive behaviour \u2014 unable to sacrifice immediate comfort for long-term gain.',
+We model Angulimala’s journey as a 5×5 grid. The top-left is the "violent" state, the bottom-right is the "peaceful" state. Obstacles (triggers, temptations) block some paths. The agent must learn the optimal path from violence to peace.`,
+      analogy: 'Q-learning is like a taxi driver learning the city. At each intersection, they estimate the value of going north, south, east, or west. After many trips, they know: "at 5th and Main, go east" because that route has historically led to the biggest tips. The Q-table is the driver’s mental map of the best routes.',
+      storyConnection: 'Angulimala’s journey from bandit to saint was not a straight line. He hit obstacles: old companions, familiar triggers, moments of doubt. Q-learning models this — the agent must navigate around obstacles, sometimes taking indirect paths, to reach the goal. The optimal path is rarely the obvious one.',
+      checkQuestion: 'What happens if you set the discount factor γ to 0? Does the agent still find the goal?',
+      checkAnswer: 'With γ=0, the agent only values immediate reward and completely ignores future states. It would only learn to take actions that give immediate reward, making it unable to plan multi-step paths to distant goals. It would get stuck near any local reward even if the goal is far away. This models impulsive behaviour — unable to sacrifice immediate comfort for long-term gain.',
       codeIntro: 'Build a Q-learning agent that navigates a grid from violence to peace.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -112,7 +112,7 @@ ax1.set_title('Q-Learning: Reward Over Time', fontsize=13)
 ax1.grid(alpha=0.3)
 
 # Optimal policy visualization
-policy_arrows = {0: '\u2191', 1: '\u2193', 2: '\u2190', 3: '\u2192'}
+policy_arrows = {0: '↑', 1: '↓', 2: '←', 3: '→'}
 ax2.set_xlim(-0.5, grid_size - 0.5)
 ax2.set_ylim(-0.5, grid_size - 0.5)
 ax2.invert_yaxis()
@@ -143,19 +143,19 @@ print("The agent learned to navigate from Violence (0,0) to Peace (4,4)")
 print("while avoiding triggers (red squares).")
 print(f"Average reward (last 50 episodes): {np.mean(episode_rewards[-50:]):.2f}")`,
       challenge: 'Add a "relapse" square at (2,2) with reward -5 that teleports the agent back to (0,0). Does the agent learn to avoid it? How does this change the optimal path?',
-      successHint: 'Q-learning is the algorithm behind many real-world AI systems. DeepMind used deep Q-networks (DQN) to play Atari games at superhuman level. The grid world you just built is a miniature version of the same problem \u2014 navigating a complex environment to maximise long-term reward.',
+      successHint: 'Q-learning is the algorithm behind many real-world AI systems. DeepMind used deep Q-networks (DQN) to play Atari games at superhuman level. The grid world you just built is a miniature version of the same problem — navigating a complex environment to maximise long-term reward.',
     },
     {
-      title: 'Policy gradient methods \u2014 learning probability distributions over actions',
-      concept: `Q-learning assigns a value to each action. **Policy gradient** methods directly learn a probability distribution over actions \u2014 a "soft" policy that says "in this state, choose action A with 70% probability and action B with 30%."
+      title: 'Policy gradient methods — learning probability distributions over actions',
+      concept: `Q-learning assigns a value to each action. **Policy gradient** methods directly learn a probability distribution over actions — a "soft" policy that says "in this state, choose action A with 70% probability and action B with 30%."
 
 Why is this better? Because many real situations require **stochastic** (probabilistic) behaviour. A poker player who always bets the same way is predictable. A person learning to manage anger needs flexibility, not rigid rules.
 
-The update: \`\u03b8 += \u03b1 \u00d7 R \u00d7 \u2207_\u03b8 log \u03c0(a|s)\`
+The update: \`θ += α × R × ∇_θ log π(a|s)\`
 
-Where \u03b8 are the policy parameters, R is the reward, and \u03c0(a|s) is the probability of choosing action a in state s. If an action led to high reward, increase its probability. If it led to low reward, decrease it.
+Where θ are the policy parameters, R is the reward, and π(a|s) is the probability of choosing action a in state s. If an action led to high reward, increase its probability. If it led to low reward, decrease it.
 
-This models Angulimala\u2019s gradual shift. He did not switch from 100% violence to 100% compassion overnight. His probability of choosing kindness gradually increased from 5% to 95% over months of practice.`,
+This models Angulimala’s gradual shift. He did not switch from 100% violence to 100% compassion overnight. His probability of choosing kindness gradually increased from 5% to 95% over months of practice.`,
       analogy: 'Q-learning is like having a rule book: "In situation X, always do Y." Policy gradient is like having intuition: "In situation X, I tend to do Y about 70% of the time, but sometimes Z feels right." The second approach is more flexible and more human. It allows for the messy, gradual process of real change.',
       storyConnection: 'In the early days of his practice, Angulimala probably chose compassion only 10% of the time. The rest was old habit. But each time compassion led to peace (positive reward), his policy gradient shifted: 10% became 20%, then 40%, then 80%. The probability changed continuously, not in a sudden switch.',
       checkQuestion: 'Why do policy gradient methods sometimes outperform Q-learning?',
@@ -233,23 +233,23 @@ print("The policy shifted gradually from mostly-aggressive to")
 print("mostly-kind — a smooth curve, not a sudden switch.")
 print("This matches how real behaviour change works.")`,
       challenge: 'Start with theta = +2.0 (already kind). Give aggressive actions a high reward of 1.5 (temptation). Can the policy gradient be pushed backward? This models relapse when rewards for bad behaviour are high.',
-      successHint: 'REINFORCE is the foundation of modern policy gradient methods like PPO (used in ChatGPT\u2019s RLHF training), A2C, and TRPO. You just implemented the core algorithm that powers the training of the most advanced AI systems in the world.',
+      successHint: 'REINFORCE is the foundation of modern policy gradient methods like PPO (used in ChatGPT’s RLHF training), A2C, and TRPO. You just implemented the core algorithm that powers the training of the most advanced AI systems in the world.',
     },
     {
-      title: 'Simulating fMRI data \u2014 the BOLD signal as a time series',
-      concept: `Real fMRI data is a 4D dataset: 3D brain volume \u00d7 time. Each volumetric "pixel" (called a **voxel**, typically 2mm\u00b3) has a time series showing BOLD signal fluctuations.
+      title: 'Simulating fMRI data — the BOLD signal as a time series',
+      concept: `Real fMRI data is a 4D dataset: 3D brain volume × time. Each volumetric "pixel" (called a **voxel**, typically 2mm³) has a time series showing BOLD signal fluctuations.
 
-The BOLD signal is not a direct readout of neural activity. It is a **haemodynamic response** \u2014 the blood flow change that follows neural firing with a 4-6 second delay. The shape of this response is well-characterised:
+The BOLD signal is not a direct readout of neural activity. It is a **haemodynamic response** — the blood flow change that follows neural firing with a 4-6 second delay. The shape of this response is well-characterised:
 
 1. Neural activity begins (t=0)
-2. Initial dip in oxygen (t\u22481 sec)
-3. Blood rushes in, overshooting need (peak at t\u22485 sec)
-4. Signal returns to baseline (t\u224812 sec)
-5. Brief undershoot before settling (t\u224815 sec)
+2. Initial dip in oxygen (t≈1 sec)
+3. Blood rushes in, overshooting need (peak at t≈5 sec)
+4. Signal returns to baseline (t≈12 sec)
+5. Brief undershoot before settling (t≈15 sec)
 
 This **haemodynamic response function (HRF)** is convolved with the neural activity to produce the measured signal. The code simulates this for a meditation study.`,
-      analogy: 'The BOLD signal is like a traffic report for the brain. When lots of cars (blood) rush to an intersection (active brain area), you know something is happening there (neural activity). But the traffic report is delayed \u2014 it takes a few seconds for the cars to arrive. You never see the event directly; you see the traffic jam it causes.',
-      storyConnection: 'If we scanned Angulimala\u2019s brain during meditation, we would see the HRF in his prefrontal cortex: a delayed rise in blood flow as he focused on compassion, peaking after 5 seconds, then settling. Over months, the resting level of prefrontal activity would increase \u2014 the "baseline" shifts upward with practice.',
+      analogy: 'The BOLD signal is like a traffic report for the brain. When lots of cars (blood) rush to an intersection (active brain area), you know something is happening there (neural activity). But the traffic report is delayed — it takes a few seconds for the cars to arrive. You never see the event directly; you see the traffic jam it causes.',
+      storyConnection: 'If we scanned Angulimala’s brain during meditation, we would see the HRF in his prefrontal cortex: a delayed rise in blood flow as he focused on compassion, peaking after 5 seconds, then settling. Over months, the resting level of prefrontal activity would increase — the "baseline" shifts upward with practice.',
       checkQuestion: 'Why is fMRI spatial resolution (~2mm) much better than EEG (~2cm) but temporal resolution (~2sec) much worse than EEG (~1ms)?',
       checkAnswer: 'fMRI measures blood flow changes, which are localised to specific brain areas (good spatial resolution) but sluggish (blood takes seconds to respond). EEG measures electrical fields at the scalp, which are fast (millisecond resolution) but spread out and overlap (poor spatial resolution because signals blur as they pass through skull and skin). They are complementary tools: EEG for "when" and fMRI for "where."',
       codeIntro: 'Simulate the BOLD signal from neural activity using the haemodynamic response function.',
@@ -316,14 +316,14 @@ print("fMRI never sees neurons fire directly — it sees the echo.")`,
       successHint: 'You just implemented the core signal processing pipeline used in real fMRI research. The convolution of neural activity with the HRF is how researchers model the BOLD signal. Tools like SPM and FSL use this exact approach to analyse brain imaging data from meditation, addiction, and neuroplasticity studies.',
     },
     {
-      title: 'Statistical analysis of brain regions \u2014 t-tests and effect sizes',
+      title: 'Statistical analysis of brain regions — t-tests and effect sizes',
       concept: `When a neuroscientist publishes "meditators have a thicker prefrontal cortex," they need statistical proof. The standard tool is a **t-test**: does the difference between two groups (meditators vs controls) exceed what random variation could produce?
 
-The t-statistic: \`t = (mean1 - mean2) / sqrt(s1\u00b2/n1 + s2\u00b2/n2)\`
+The t-statistic: \`t = (mean1 - mean2) / sqrt(s1²/n1 + s2²/n2)\`
 
-If |t| is large enough (typically > 2 for 95% confidence), the difference is **statistically significant** \u2014 unlikely to be due to chance.
+If |t| is large enough (typically > 2 for 95% confidence), the difference is **statistically significant** — unlikely to be due to chance.
 
-But significance alone is not enough. We also need **effect size** (Cohen\u2019s d):
+But significance alone is not enough. We also need **effect size** (Cohen’s d):
 \`d = (mean1 - mean2) / pooled_std\`
 
 Effect size tells you **how big** the difference is:
@@ -331,11 +331,11 @@ Effect size tells you **how big** the difference is:
 - d = 0.5: medium effect
 - d = 0.8: large effect
 
-Meditation studies typically find d = 0.3-0.6 for cortical thickness changes \u2014 real but moderate effects that require careful measurement.`,
+Meditation studies typically find d = 0.3-0.6 for cortical thickness changes — real but moderate effects that require careful measurement.`,
       analogy: 'The t-test is like a fair judge. You claim your fertiliser makes plants grow taller. The judge measures both groups and asks: "Could this difference have happened by chance, with no fertiliser at all?" If the answer is "very unlikely" (p < 0.05), the judge rules in your favour. Effect size is the follow-up question: "OK, the fertiliser works, but does it add 1mm or 1 metre?"',
-      storyConnection: 'If researchers studied Angulimala before and after transformation, they would run t-tests on his brain measurements. The question is not "did anything change?" (of course it did \u2014 he is a different person). The question is: "Is the change in prefrontal cortex thickness statistically significant, and is the effect size large enough to be meaningful?"',
+      storyConnection: 'If researchers studied Angulimala before and after transformation, they would run t-tests on his brain measurements. The question is not "did anything change?" (of course it did — he is a different person). The question is: "Is the change in prefrontal cortex thickness statistically significant, and is the effect size large enough to be meaningful?"',
       checkQuestion: 'A study finds p = 0.03 but d = 0.15. Should you be impressed?',
-      checkAnswer: 'Not really. The p-value (0.03) says the result is statistically significant \u2014 unlikely due to chance. But the effect size (d = 0.15) is tiny. This often happens in studies with very large sample sizes: even trivial differences become "significant" because the large n makes the denominator small. Always look at both p-value AND effect size. A significant but tiny effect may not be practically meaningful.',
+      checkAnswer: 'Not really. The p-value (0.03) says the result is statistically significant — unlikely due to chance. But the effect size (d = 0.15) is tiny. This often happens in studies with very large sample sizes: even trivial differences become "significant" because the large n makes the denominator small. Always look at both p-value AND effect size. A significant but tiny effect may not be practically meaningful.',
       codeIntro: 'Run a t-test comparing brain measurements between meditators and controls.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -398,11 +398,11 @@ print(f"Difference:  {mean_m - mean_c:.2f} mm")
 print(f"t-statistic: {t_stat:.2f} (df = {df:.0f})")
 print(f"Significant: {'Yes' if abs(t_stat) > 2.0 else 'No'} (|t| > 2.0)")
 print(f"Cohen's d:   {cohens_d:.2f} ({'small' if cohens_d < 0.5 else 'medium' if cohens_d < 0.8 else 'large'} effect)")`,
-      challenge: 'Reduce n_meditators to 5. Is the result still significant? What about n=100? This shows how sample size affects statistical power. Many early meditation studies had tiny samples \u2014 their results should be interpreted cautiously.',
+      challenge: 'Reduce n_meditators to 5. Is the result still significant? What about n=100? This shows how sample size affects statistical power. Many early meditation studies had tiny samples — their results should be interpreted cautiously.',
       successHint: 'You just performed a real statistical analysis of the kind published in neuroscience journals. The t-test and effect size are the bread and butter of research evaluation. Next time you read "meditation changes the brain," you can ask: what was the sample size, t-statistic, and effect size?',
     },
     {
-      title: 'Actor-critic methods \u2014 separating decisions from evaluation',
+      title: 'Actor-critic methods — separating decisions from evaluation',
       concept: `Q-learning has one network doing everything. **Actor-critic** methods split the job into two:
 - The **Actor** chooses actions (the policy)
 - The **Critic** evaluates how good the state is (the value function)
@@ -412,12 +412,12 @@ This is remarkably similar to how the brain works. The **prefrontal cortex** (ac
 The advantage: the critic provides a baseline for the reward signal. Instead of asking "was this action good?" (which depends on the baseline), the actor asks "was this action **better than average**?" This reduces variance and stabilises learning.
 
 The update:
-- Critic: \`V(s) += \u03b1_c \u00d7 [r + \u03b3V(s\u2019) - V(s)]\`
-- Actor: \`\u03b8 += \u03b1_a \u00d7 advantage \u00d7 \u2207log\u03c0(a|s)\`
-- Advantage = r + \u03b3V(s\u2019) - V(s) (the TD error from the critic)`,
-      analogy: 'Imagine a student (actor) and a teacher (critic). The student takes actions (answers questions). The teacher does not answer the questions herself \u2014 she just says "that was better than usual" or "that was worse than usual." Over time, the student learns to consistently give good answers. The separation of roles makes both more effective.',
-      storyConnection: 'The Buddha played the critic role in Angulimala\u2019s transformation. He did not make Angulimala\u2019s decisions for him (that would be supervised learning, not RL). He simply observed and provided evaluative feedback: "You are on the right path" or "Consider whether this action serves your goal." Angulimala\u2019s own prefrontal cortex was the actor, learning from the critic\u2019s signal.',
-      checkQuestion: 'Why is the "advantage" (r + \u03b3V(s\u2019) - V(s)) better than raw reward for training the actor?',
+- Critic: \`V(s) += α_c × [r + γV(s’) - V(s)]\`
+- Actor: \`θ += α_a × advantage × ∇logπ(a|s)\`
+- Advantage = r + γV(s’) - V(s) (the TD error from the critic)`,
+      analogy: 'Imagine a student (actor) and a teacher (critic). The student takes actions (answers questions). The teacher does not answer the questions herself — she just says "that was better than usual" or "that was worse than usual." Over time, the student learns to consistently give good answers. The separation of roles makes both more effective.',
+      storyConnection: 'The Buddha played the critic role in Angulimala’s transformation. He did not make Angulimala’s decisions for him (that would be supervised learning, not RL). He simply observed and provided evaluative feedback: "You are on the right path" or "Consider whether this action serves your goal." Angulimala’s own prefrontal cortex was the actor, learning from the critic’s signal.',
+      checkQuestion: 'Why is the "advantage" (r + γV(s’) - V(s)) better than raw reward for training the actor?',
       checkAnswer: 'Raw reward can be noisy and misleading. If all actions in a state give positive reward, the actor cannot distinguish good from great. The advantage subtracts the baseline V(s), measuring "how much better was this action than average?" This centres the signal: positive advantage = better than expected, negative = worse. The result is much more stable training, especially in environments with varying reward scales.',
       codeIntro: 'Build a simple actor-critic system for the kindness-learning problem.',
       code: `import numpy as np
@@ -515,7 +515,7 @@ print("  Basal ganglia = Critic (evaluates via dopamine)")`,
       successHint: 'Actor-critic is the backbone of state-of-the-art RL. PPO (Proximal Policy Optimization), used to train ChatGPT via RLHF, is an actor-critic algorithm. A2C and A3C (used in real-time strategy games) are also actor-critic. You just implemented the core architecture.',
     },
     {
-      title: 'Cortical thickness changes \u2014 real data analysis pipeline',
+      title: 'Cortical thickness changes — real data analysis pipeline',
       concept: `Let us build a complete analysis pipeline for a hypothetical neuroplasticity study. We will:
 
 1. Generate realistic brain measurement data for multiple regions
@@ -526,8 +526,8 @@ print("  Basal ganglia = Critic (evaluates via dopamine)")`,
 Multiple comparison correction is critical. If you test 20 brain regions at p < 0.05, you expect 1 false positive purely by chance. Bonferroni correction divides the threshold by the number of tests: p < 0.05/20 = 0.0025.
 
 This is a real concern in neuroimaging. Early meditation studies tested many brain regions without correction, leading to false positives. Modern studies use stricter thresholds.`,
-      analogy: 'Testing 20 brain regions without correction is like flipping 20 coins and being amazed that one lands on heads. Of course one did \u2014 with 20 tries, you expect roughly one "significant" result by chance. Bonferroni correction says: "I will only be impressed if you get 20 heads in a row" (roughly). It raises the bar to account for multiple attempts.',
-      storyConnection: 'If a researcher scanned Angulimala\u2019s brain and tested 50 regions, finding 3 "significant" changes, a skeptic would rightly ask: "Did you correct for multiple comparisons?" Without correction, 50 \u00d7 0.05 = 2.5 expected false positives. The 3 findings might be noise. Rigorous analysis protects against seeing change where none exists.',
+      analogy: 'Testing 20 brain regions without correction is like flipping 20 coins and being amazed that one lands on heads. Of course one did — with 20 tries, you expect roughly one "significant" result by chance. Bonferroni correction says: "I will only be impressed if you get 20 heads in a row" (roughly). It raises the bar to account for multiple attempts.',
+      storyConnection: 'If a researcher scanned Angulimala’s brain and tested 50 regions, finding 3 "significant" changes, a skeptic would rightly ask: "Did you correct for multiple comparisons?" Without correction, 50 × 0.05 = 2.5 expected false positives. The 3 findings might be noise. Rigorous analysis protects against seeing change where none exists.',
       checkQuestion: 'Is Bonferroni correction too conservative? Are there better alternatives?',
       checkAnswer: 'Yes, Bonferroni is often too strict because it assumes all tests are independent, which brain regions are not (nearby regions are correlated). Better alternatives include False Discovery Rate (FDR/Benjamini-Hochberg), which controls the proportion of false positives rather than the probability of ANY false positive. FDR is now standard in neuroimaging because it balances sensitivity and specificity better than Bonferroni.',
       codeIntro: 'Build a complete brain measurement analysis pipeline with multiple comparison correction.',
@@ -610,7 +610,7 @@ for r in results:
     sig = "***" if r['p'] < bonferroni_threshold else "* " if r['p'] < 0.05 else "  "
     print(f"  {sig} {r['region']:12s}: diff={r['diff']:+.3f}mm, t={r['t']:+.2f}, p={r['p']:.4f}, d={r['d']:.2f}")`,
       challenge: 'Increase n_per_group to 100 (larger study). Which "nominally significant" results become Bonferroni-significant? This shows the value of larger sample sizes in neuroimaging research.',
-      successHint: 'You just built a complete neuroimaging statistical pipeline. Real fMRI studies use this exact approach (with additional spatial corrections). Understanding these methods lets you critically evaluate claims about meditation, neuroplasticity, and brain training \u2014 distinguishing real effects from noise.',
+      successHint: 'You just built a complete neuroimaging statistical pipeline. Real fMRI studies use this exact approach (with additional spatial corrections). Understanding these methods lets you critically evaluate claims about meditation, neuroplasticity, and brain training — distinguishing real effects from noise.',
     },
   ];
 

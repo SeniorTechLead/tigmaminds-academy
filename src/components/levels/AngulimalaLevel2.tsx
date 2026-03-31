@@ -29,18 +29,18 @@ export default function AngulimalaLevel2() {
 
   const miniLessons = [
     {
-      title: 'A multi-layer neuron network \u2014 from single cells to circuits',
+      title: 'A multi-layer neuron network — from single cells to circuits',
       concept: `In Level 1, you built a single neuron. But real brains have 86 billion neurons connected in layers. A signal enters through sensory neurons, passes through **hidden layers** of processing neurons, and exits through motor neurons that control behaviour.
 
-The key advance: **hidden layers can detect patterns that single neurons cannot**. A single neuron can only draw a straight line between "fire" and "don\u2019t fire." Two layers can detect curves. Three layers can detect any shape.
+The key advance: **hidden layers can detect patterns that single neurons cannot**. A single neuron can only draw a straight line between "fire" and "don’t fire." Two layers can detect curves. Three layers can detect any shape.
 
-This is why Angulimala\u2019s transformation was possible. His brain did not just change one connection \u2014 entire networks of neurons reorganised, with hidden layers learning new patterns of association.
+This is why Angulimala’s transformation was possible. His brain did not just change one connection — entire networks of neurons reorganised, with hidden layers learning new patterns of association.
 
 The code builds a 3-layer network: input layer (stimuli), hidden layer (processing), output layer (behaviour). We use matrix multiplication to propagate signals through all layers at once.`,
       analogy: 'A single neuron is like a security guard who checks one thing: "Is this person on the guest list?" A network of neurons is like an entire security system: cameras, facial recognition, ID scanners, and human guards all working together. The system can make nuanced decisions that no single component could make alone.',
-      storyConnection: 'Angulimala\u2019s initial reaction to seeing a person was a single-layer response: stimulus \u2192 attack. The Buddha trained him to insert hidden layers of processing: stimulus \u2192 recognise their humanity \u2192 feel empathy \u2192 choose kindness. More layers means more nuanced, considered responses.',
+      storyConnection: 'Angulimala’s initial reaction to seeing a person was a single-layer response: stimulus → attack. The Buddha trained him to insert hidden layers of processing: stimulus → recognise their humanity → feel empathy → choose kindness. More layers means more nuanced, considered responses.',
       checkQuestion: 'Why do deeper networks (more hidden layers) learn more complex patterns?',
-      checkAnswer: 'Each layer builds on the previous one\u2019s output. Layer 1 might detect edges. Layer 2 combines edges into shapes. Layer 3 combines shapes into objects. Each additional layer adds a level of abstraction. This is called hierarchical feature learning and it mirrors how the brain\u2019s visual cortex works \u2014 from simple cells (detecting lines) to complex cells (detecting faces).',
+      checkAnswer: 'Each layer builds on the previous one’s output. Layer 1 might detect edges. Layer 2 combines edges into shapes. Layer 3 combines shapes into objects. Each additional layer adds a level of abstraction. This is called hierarchical feature learning and it mirrors how the brain’s visual cortex works — from simple cells (detecting lines) to complex cells (detecting faces).',
       codeIntro: 'Build a 3-layer neural network and propagate a signal through it.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -97,27 +97,27 @@ print("Hidden layer activations (after): ", np.round(hidden_a, 2))
 print()
 print("The hidden layer transforms the raw input into a richer")
 print("representation that the output layer can use for decisions.")`,
-      challenge: 'Add a third hidden layer with 3 neurons (so the architecture becomes 3\u21924\u21923\u21922). How does this change the outputs? Does the network become more or less sensitive to input changes?',
-      successHint: 'You just built a feedforward neural network \u2014 the same architecture used in real AI systems. The sigmoid function, matrix multiplication, and layered structure are the building blocks of deep learning. Your brain runs a biological version of this every millisecond.',
+      challenge: 'Add a third hidden layer with 3 neurons (so the architecture becomes 3→4→3→2). How does this change the outputs? Does the network become more or less sensitive to input changes?',
+      successHint: 'You just built a feedforward neural network — the same architecture used in real AI systems. The sigmoid function, matrix multiplication, and layered structure are the building blocks of deep learning. Your brain runs a biological version of this every millisecond.',
     },
     {
-      title: 'Backpropagation \u2014 how the network learns from mistakes',
-      concept: `In Level 1, we used Hebb\u2019s rule (fire together, wire together). But modern neural networks use a more powerful algorithm: **backpropagation**. The idea:
+      title: 'Backpropagation — how the network learns from mistakes',
+      concept: `In Level 1, we used Hebb’s rule (fire together, wire together). But modern neural networks use a more powerful algorithm: **backpropagation**. The idea:
 
 1. Run an input through the network (forward pass)
 2. Compare the output to the desired answer
 3. Calculate the **error** (how wrong was it?)
 4. Send the error backward through the network, adjusting weights to reduce the error
 
-The weight update rule: \`weight -= learning_rate \u00d7 gradient\`
+The weight update rule: \`weight -= learning_rate × gradient\`
 
 The **gradient** tells you which direction to adjust each weight to reduce error. It is calculated using calculus (the chain rule), but the intuition is simple: if a weight contributed to the error, reduce it; if it helped produce the right answer, increase it.
 
-This is a more targeted version of what happened in Angulimala\u2019s brain. When an action led to suffering (error), his brain weakened the pathways that produced it. When an action led to peace (correct output), those pathways strengthened.`,
+This is a more targeted version of what happened in Angulimala’s brain. When an action led to suffering (error), his brain weakened the pathways that produced it. When an action led to peace (correct output), those pathways strengthened.`,
       analogy: 'Imagine you are throwing darts blindfolded. After each throw, a friend tells you "too far left" or "a bit high." You adjust your aim based on that feedback. Backpropagation is the AI version: the error signal tells each weight in the network which direction to adjust. After many throws (training examples), you hit the bullseye consistently.',
-      storyConnection: 'The Buddha served as Angulimala\u2019s "error signal." When Angulimala fell back into old patterns, the Buddha gently pointed out the mismatch between his actions and his goal. When Angulimala acted with compassion, the resulting peace confirmed the correct path. Each correction refined his internal weights.',
-      checkQuestion: 'Why is backpropagation more efficient than Hebb\u2019s rule?',
-      checkAnswer: 'Hebb\u2019s rule only strengthens connections between co-active neurons \u2014 it does not know which connections actually caused the output. Backpropagation traces the error back through every layer, assigning blame precisely. This means it can adjust weights in hidden layers that are far from the output, fixing problems that Hebb\u2019s rule would never detect. It is the difference between "practice makes permanent" (Hebb) and "practice makes perfect" (backprop).',
+      storyConnection: 'The Buddha served as Angulimala’s "error signal." When Angulimala fell back into old patterns, the Buddha gently pointed out the mismatch between his actions and his goal. When Angulimala acted with compassion, the resulting peace confirmed the correct path. Each correction refined his internal weights.',
+      checkQuestion: 'Why is backpropagation more efficient than Hebb’s rule?',
+      checkAnswer: 'Hebb’s rule only strengthens connections between co-active neurons — it does not know which connections actually caused the output. Backpropagation traces the error back through every layer, assigning blame precisely. This means it can adjust weights in hidden layers that are far from the output, fixing problems that Hebb’s rule would never detect. It is the difference between "practice makes permanent" (Hebb) and "practice makes perfect" (backprop).',
       codeIntro: 'Train a network using backpropagation to learn compassion over violence.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -180,21 +180,21 @@ print(f"Final loss: {losses[-1]:.4f}")
 print("The network learned to map emotional states to kind behaviour")
 print("through 500 cycles of error correction — like 500 days of practice.")`,
       challenge: 'Add a new training example: [0.7, 0.3, 0.1] -> [0] (aggressive with low mindfulness). Does the network correctly predict violence for this case? How many epochs does it take to learn all 5 examples accurately?',
-      successHint: 'Backpropagation is the most important algorithm in modern AI. It powers everything from ChatGPT to self-driving cars. You just implemented it from scratch \u2014 the forward pass, the error calculation, the backward pass, and the weight update. This is what runs billions of times when training large language models.',
+      successHint: 'Backpropagation is the most important algorithm in modern AI. It powers everything from ChatGPT to self-driving cars. You just implemented it from scratch — the forward pass, the error calculation, the backward pass, and the weight update. This is what runs billions of times when training large language models.',
     },
     {
-      title: 'Synaptic plasticity types \u2014 LTP and LTD',
-      concept: `Hebb\u2019s rule and backpropagation are abstractions. In the real brain, the mechanisms are called **Long-Term Potentiation (LTP)** and **Long-Term Depression (LTD)**.
+      title: 'Synaptic plasticity types — LTP and LTD',
+      concept: `Hebb’s rule and backpropagation are abstractions. In the real brain, the mechanisms are called **Long-Term Potentiation (LTP)** and **Long-Term Depression (LTD)**.
 
 **LTP** = a synapse gets stronger when repeatedly stimulated. The post-synaptic neuron inserts more receptors, making it more sensitive to the neurotransmitter. This is the biological basis of learning.
 
 **LTD** = a synapse gets weaker when it is active but the post-synaptic neuron is not. The receptors are removed. This is the biological basis of forgetting or un-learning.
 
-LTP was discovered in 1973 by Tim Bliss and Terje L\u00f8mo. They stimulated a rabbit\u2019s hippocampus with high-frequency electrical pulses and found that the synapse\u2019s response was amplified for hours or days afterward.
+LTP was discovered in 1973 by Tim Bliss and Terje Lømo. They stimulated a rabbit’s hippocampus with high-frequency electrical pulses and found that the synapse’s response was amplified for hours or days afterward.
 
 The code models LTP and LTD mathematically, showing how synapse strength changes depending on the timing of pre-synaptic and post-synaptic activity.`,
       analogy: 'Think of a synapse like a road. LTP is like widening the road because traffic is heavy (more receptors = wider road = faster signal). LTD is like letting a road crumble from lack of use (fewer receptors = narrower road = weaker signal). The brain is constantly doing road construction based on traffic patterns.',
-      storyConnection: 'Angulimala\u2019s violent pathways underwent LTD: without daily activation, receptors were gradually removed and those synapses weakened. His new compassion pathways underwent LTP: daily practice triggered receptor insertion and the synapses grew stronger. The molecular mechanism took weeks to months \u2014 matching the story\u2019s timeline.',
+      storyConnection: 'Angulimala’s violent pathways underwent LTD: without daily activation, receptors were gradually removed and those synapses weakened. His new compassion pathways underwent LTP: daily practice triggered receptor insertion and the synapses grew stronger. The molecular mechanism took weeks to months — matching the story’s timeline.',
       checkQuestion: 'If LTP makes learning permanent, why do we forget things?',
       checkAnswer: 'LTP has phases. Early LTP (lasting minutes to hours) involves temporary changes like phosphorylation of existing receptors. Late LTP (lasting days to years) requires gene expression and synthesis of new proteins to build new receptors. If the stimulation is not repeated, late LTP never kicks in and the memory fades. This is why cramming before an exam produces temporary recall but spaced repetition produces lasting memory.',
       codeIntro: 'Model LTP and LTD: how synapse strength depends on stimulation patterns.',
@@ -261,26 +261,26 @@ print("LTD = disuse makes weaker (violence pathways)")
 print()
 print("Key: LTP requires repeated, high-frequency activation.")
 print("One-time effort is not enough — Angulimala practised daily.")`,
-      challenge: 'Model what happens with "spaced repetition" \u2014 multiple LTP stimulations at t=20, t=50, and t=80. Does the synapse reach a higher plateau than a single stimulation? This explains why distributed practice beats cramming.',
+      challenge: 'Model what happens with "spaced repetition" — multiple LTP stimulations at t=20, t=50, and t=80. Does the synapse reach a higher plateau than a single stimulation? This explains why distributed practice beats cramming.',
       successHint: 'LTP and LTD are the molecular mechanisms behind everything you have been modelling. Every weight change in an AI neural network is an abstraction of what LTP and LTD do with receptors and neurotransmitters. The gap between brain science and computer science is smaller than most people think.',
     },
     {
-      title: 'Spike-timing dependent plasticity \u2014 the order matters',
+      title: 'Spike-timing dependent plasticity — the order matters',
       concept: `Hebb said "fire together, wire together." But modern research added a crucial detail: **the order matters**.
 
 **STDP (Spike-Timing Dependent Plasticity)** says:
-- If neuron A fires **just before** neuron B, the connection A\u2192B gets stronger (LTP). A seems to cause B.
-- If neuron A fires **just after** neuron B, the connection A\u2192B gets weaker (LTD). A seems irrelevant to B.
+- If neuron A fires **just before** neuron B, the connection A→B gets stronger (LTP). A seems to cause B.
+- If neuron A fires **just after** neuron B, the connection A→B gets weaker (LTD). A seems irrelevant to B.
 
-The time window is tiny: about \u00b120 milliseconds. The closer the spikes, the stronger the effect.
+The time window is tiny: about ±20 milliseconds. The closer the spikes, the stronger the effect.
 
-This is how the brain learns **causation**, not just correlation. It is also the basis of Pavlov\u2019s conditioning: the bell rings (A fires) just before food arrives (B fires), so the brain strengthens bell\u2192salivation.
+This is how the brain learns **causation**, not just correlation. It is also the basis of Pavlov’s conditioning: the bell rings (A fires) just before food arrives (B fires), so the brain strengthens bell→salivation.
 
-For Angulimala: seeing a person (A) followed immediately by a kind thought (B) strengthened seeing\u2192kindness. The timing had to be right.`,
-      analogy: 'Imagine you touch a hot stove and feel pain 0.1 seconds later. Your brain connects touch\u2192pain because A (touch) came before B (pain). But if the pain came first and you touched the stove second, your brain would NOT connect them \u2014 the sequence is backwards. STDP is the brain\u2019s way of learning cause and effect from timing alone.',
-      storyConnection: 'The Buddha\u2019s instructions were precise: when you see a person, IMMEDIATELY wish them well. Not five minutes later \u2014 immediately. This timing constraint ensured that the "see person" spike and the "kindness" spike occurred within the STDP window, maximising the strengthening of the connection.',
+For Angulimala: seeing a person (A) followed immediately by a kind thought (B) strengthened seeing→kindness. The timing had to be right.`,
+      analogy: 'Imagine you touch a hot stove and feel pain 0.1 seconds later. Your brain connects touch→pain because A (touch) came before B (pain). But if the pain came first and you touched the stove second, your brain would NOT connect them — the sequence is backwards. STDP is the brain’s way of learning cause and effect from timing alone.',
+      storyConnection: 'The Buddha’s instructions were precise: when you see a person, IMMEDIATELY wish them well. Not five minutes later — immediately. This timing constraint ensured that the "see person" spike and the "kindness" spike occurred within the STDP window, maximising the strengthening of the connection.',
       checkQuestion: 'Why does the brain care about spike order and not just co-occurrence?',
-      checkAnswer: 'Because causation has a direction. "Thunder after lightning" means lightning warns of thunder. "Lightning after thunder" is meaningless. The brain needs to predict future events from current ones, so it only strengthens connections where the first neuron\u2019s firing predicts the second\u2019s. This is why correlation is not causation \u2014 the brain implicitly understands this through STDP.',
+      checkAnswer: 'Because causation has a direction. "Thunder after lightning" means lightning warns of thunder. "Lightning after thunder" is meaningless. The brain needs to predict future events from current ones, so it only strengthens connections where the first neuron’s firing predicts the second’s. This is why correlation is not causation — the brain implicitly understands this through STDP.',
       codeIntro: 'Plot the STDP learning window: how timing determines strengthening vs weakening.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -311,7 +311,7 @@ plt.annotate('LTD: Pre fires AFTER Post\\n(connection weakens)',
     xy=(-45, -0.4), fontsize=10, color='#ef4444', fontweight='bold')
 
 plt.xlabel('Time difference: t_post - t_pre (ms)', fontsize=12)
-plt.ylabel('Weight change (\u0394w)', fontsize=12)
+plt.ylabel('Weight change (Δw)', fontsize=12)
 plt.title('STDP: Spike-Timing Dependent Plasticity', fontsize=14)
 plt.grid(alpha=0.3)
 plt.show()
@@ -322,7 +322,7 @@ print("Examples:")
 for t in dt_examples:
     change = stdp(np.array([t]))[0]
     direction = "strengthens" if change > 0 else "weakens"
-    print(f"  dt = {t:+3d} ms: \u0394w = {change:+.3f} ({direction})")
+    print(f"  dt = {t:+3d} ms: Δw = {change:+.3f} ({direction})")
 print()
 print("The closer the timing, the stronger the effect.")
 print("This is why the Buddha said 'immediately' — timing matters.")`,
@@ -331,7 +331,7 @@ print("This is why the Buddha said 'immediately' — timing matters.")`,
     },
     {
       title: 'The exploration-exploitation tradeoff in RL',
-      concept: `In Level 1 you built an RL agent that used \u03b5-greedy exploration: sometimes it tried random actions (exploration), sometimes it picked the best-known action (exploitation). Now let\u2019s formalise this.
+      concept: `In Level 1 you built an RL agent that used ε-greedy exploration: sometimes it tried random actions (exploration), sometimes it picked the best-known action (exploitation). Now let’s formalise this.
 
 The **exploration-exploitation tradeoff** is one of the deepest problems in both AI and psychology:
 - **Exploit**: do what you know works (safe, predictable)
@@ -339,13 +339,13 @@ The **exploration-exploitation tradeoff** is one of the deepest problems in both
 
 Too much exploitation = you get stuck in suboptimal habits. Too much exploration = you never benefit from what you have learned.
 
-Angulimala\u2019s pre-transformation life was pure exploitation of a bad strategy. The Buddha forced him to explore: try a completely different approach. The initial exploration was painful (the new way felt wrong), but it led to discovering a much better strategy.
+Angulimala’s pre-transformation life was pure exploitation of a bad strategy. The Buddha forced him to explore: try a completely different approach. The initial exploration was painful (the new way felt wrong), but it led to discovering a much better strategy.
 
 The code compares different exploration strategies and shows which ones find the optimal behaviour fastest.`,
-      analogy: 'Imagine you eat at the same restaurant every day (exploitation). The food is decent. But there might be an amazing restaurant next door that you have never tried. Going there is exploration \u2014 risky (it might be terrible) but potentially rewarding (it might be the best meal of your life). The explore-exploit balance determines whether you find the best restaurant or eat mediocre food forever.',
-      storyConnection: 'Angulimala was stuck in exploitation: violence was the only strategy he knew, and it produced some reward (fear = power). The Buddha introduced forced exploration: "Try compassion for 30 days." This was deeply uncomfortable \u2014 Angulimala was leaving his "known restaurant" \u2014 but it led to discovering a far better reward.',
+      analogy: 'Imagine you eat at the same restaurant every day (exploitation). The food is decent. But there might be an amazing restaurant next door that you have never tried. Going there is exploration — risky (it might be terrible) but potentially rewarding (it might be the best meal of your life). The explore-exploit balance determines whether you find the best restaurant or eat mediocre food forever.',
+      storyConnection: 'Angulimala was stuck in exploitation: violence was the only strategy he knew, and it produced some reward (fear = power). The Buddha introduced forced exploration: "Try compassion for 30 days." This was deeply uncomfortable — Angulimala was leaving his "known restaurant" — but it led to discovering a far better reward.',
       checkQuestion: 'Should you always explore more? Why not set exploration to 100%?',
-      checkAnswer: 'Pure exploration means you never use what you learn \u2014 you try random actions every time and never settle into good behaviour. It is like changing restaurants every single meal: you would never enjoy the benefits of finding a great one. The optimal strategy decays exploration over time (high at first, low later), which is exactly what \u03b5-decay does in RL.',
+      checkAnswer: 'Pure exploration means you never use what you learn — you try random actions every time and never settle into good behaviour. It is like changing restaurants every single meal: you would never enjoy the benefits of finding a great one. The optimal strategy decays exploration over time (high at first, low later), which is exactly what ε-decay does in RL.',
       codeIntro: 'Compare exploration strategies: fixed, decaying, and no exploration.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -409,27 +409,27 @@ print("Decaying: explores early, then exploits — best long-term performance")
 print()
 print("Angulimala's strategy: intense exploration (new life) gradually")
 print("settling into exploitation of the best path (daily practice).")`,
-      challenge: 'Add a "Boltzmann exploration" strategy where the agent picks actions proportional to their Q-values (using softmax). Compare it to \u03b5-greedy. Which finds the optimal action faster?',
-      successHint: 'The explore-exploit tradeoff appears everywhere: in AI, in clinical trials (test new drugs vs use known ones), in business (innovate vs optimise), and in personal growth (try new things vs stick with what works). Angulimala\u2019s story is a case study in optimal exploration strategy.',
+      challenge: 'Add a "Boltzmann exploration" strategy where the agent picks actions proportional to their Q-values (using softmax). Compare it to ε-greedy. Which finds the optimal action faster?',
+      successHint: 'The explore-exploit tradeoff appears everywhere: in AI, in clinical trials (test new drugs vs use known ones), in business (innovate vs optimise), and in personal growth (try new things vs stick with what works). Angulimala’s story is a case study in optimal exploration strategy.',
     },
     {
-      title: 'Temporal difference learning \u2014 learning from predictions, not just outcomes',
+      title: 'Temporal difference learning — learning from predictions, not just outcomes',
       concept: `Basic RL waits for the final outcome to learn. But **temporal difference (TD) learning** learns at every step by comparing its prediction of future reward to the actual next-step reward.
 
-The update: \`V(state) += \u03b1 \u00d7 [reward + \u03b3\u00b7V(next_state) - V(state)]\`
+The update: \`V(state) += α × [reward + γ·V(next_state) - V(state)]\`
 
 Where:
-- \u03b1 = learning rate
-- \u03b3 = discount factor (how much future rewards matter)
-- The term in brackets is the **TD error** \u2014 the surprise signal
+- α = learning rate
+- γ = discount factor (how much future rewards matter)
+- The term in brackets is the **TD error** — the surprise signal
 
 TD learning is remarkably similar to how **dopamine** works in the brain. Neuroscientist Wolfram Schultz discovered that dopamine neurons fire when reward is **better than expected** and go silent when reward is **worse than expected**. The dopamine signal IS the TD error.
 
-This means the brain runs TD learning! And Angulimala\u2019s transformation was driven by dopamine signals updating his value estimates for different states and actions.`,
-      analogy: 'Imagine walking home from school. You know the route takes 20 minutes. One day, after 5 minutes, you see the road is blocked. You immediately update your estimate: "This is going to take 30 minutes." You did not wait to get home \u2014 you updated mid-journey based on new information. That is TD learning: update predictions using predictions, not just final outcomes.',
-      storyConnection: 'Each day of Angulimala\u2019s practice was a TD update. He did not need to wait years to see the final result. Each small act of kindness produced a small dopamine signal (better than expected!), which immediately updated his value estimates. The daily "surprises" of peace accumulated into a complete transformation.',
-      checkQuestion: 'Why does the discount factor \u03b3 matter? What happens if \u03b3 = 0?',
-      checkAnswer: 'If \u03b3 = 0, the agent only cares about immediate reward and ignores all future consequences. This models impulsive behaviour \u2014 choosing the candy bar now instead of health later. If \u03b3 = 1, the agent values future reward equally to present reward, leading to very long-term planning. Most agents work best with \u03b3 between 0.9 and 0.99. Angulimala\u2019s transformation required learning to increase his internal \u03b3 \u2014 valuing future peace over immediate impulses.',
+This means the brain runs TD learning! And Angulimala’s transformation was driven by dopamine signals updating his value estimates for different states and actions.`,
+      analogy: 'Imagine walking home from school. You know the route takes 20 minutes. One day, after 5 minutes, you see the road is blocked. You immediately update your estimate: "This is going to take 30 minutes." You did not wait to get home — you updated mid-journey based on new information. That is TD learning: update predictions using predictions, not just final outcomes.',
+      storyConnection: 'Each day of Angulimala’s practice was a TD update. He did not need to wait years to see the final result. Each small act of kindness produced a small dopamine signal (better than expected!), which immediately updated his value estimates. The daily "surprises" of peace accumulated into a complete transformation.',
+      checkQuestion: 'Why does the discount factor γ matter? What happens if γ = 0?',
+      checkAnswer: 'If γ = 0, the agent only cares about immediate reward and ignores all future consequences. This models impulsive behaviour — choosing the candy bar now instead of health later. If γ = 1, the agent values future reward equally to present reward, leading to very long-term planning. Most agents work best with γ between 0.9 and 0.99. Angulimala’s transformation required learning to increase his internal γ — valuing future peace over immediate impulses.',
       codeIntro: 'Implement TD learning and watch value estimates converge.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -492,7 +492,7 @@ print("Peaceful states have high value — the agent learns to")
 print("seek them. This is exactly what dopamine does in the brain:")
 print("it signals 'this state is better than expected.'")`,
       challenge: 'Change gamma to 0.1 (very short-sighted agent). How do the value estimates change? The "Violent" state should have less negative value because the agent does not look far enough ahead to see the consequences.',
-      successHint: 'TD learning is one of the great unifications in science: the same algorithm runs in silicon (AI agents) and carbon (your dopamine system). Schultz\u2019s discovery that dopamine encodes TD errors won the field of computational neuroscience and inspired modern RL systems.',
+      successHint: 'TD learning is one of the great unifications in science: the same algorithm runs in silicon (AI agents) and carbon (your dopamine system). Schultz’s discovery that dopamine encodes TD errors won the field of computational neuroscience and inspired modern RL systems.',
     },
   ];
 

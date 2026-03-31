@@ -124,7 +124,7 @@ export default function FluteDesignDiagram() {
           Bore shape determines which harmonics are amplified. Material determines which are absorbed.
         </text>
         <text x="300" y="532" textAnchor="middle" className="small fill-gray-600 dark:fill-slate-400">
-          Wall thickness, hole size, and hole placement complete the instrument\u2019s voice.
+          Wall thickness, hole size, and hole placement complete the instrument’s voice.
         </text>
       </svg>
     </div>
