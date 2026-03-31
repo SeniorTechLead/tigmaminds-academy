@@ -12,6 +12,8 @@ import HarmonicsExplorer from '../interactive/HarmonicsExplorer';
 import GaussianExplorer from '../interactive/GaussianExplorer';
 import ContourExplainer from '../interactive/ContourExplainer';
 import LogicGateSimulator from '../interactive/LogicGateSimulator';
+import { useAuth } from '../../contexts/AuthContext';
+import SignUpGate from '../SignUpGate';
 
 /**
  * Render inline markdown: **bold** and `code`.
@@ -185,7 +187,14 @@ interface Props {
   level?: 0 | 1 | 2;
 }
 
+const GATED_INTERACTIVE_TYPES = new Set([
+  'slider', 'tone-player', 'interval-player', 'beat-machine',
+  'harmonics-explorer', 'gaussian-explorer', 'contour-explainer', 'logic-gate-simulator',
+]);
+
 export default function SectionRenderer({ section, level = 0 }: Props) {
+  const { user } = useAuth();
+  const isSignedIn = !!user;
   const DiagramComponent = section.diagram ? diagramRegistry[section.diagram] : null;
 
   return (
@@ -235,10 +244,14 @@ export default function SectionRenderer({ section, level = 0 }: Props) {
         </div>
       )}
 
-      {/* Interactive widget */}
+      {/* Interactive widget — gate rich tools for non-signed-in users */}
       {section.interactive && (
         <div className="mt-3">
-          {renderInteractive(section.interactive)}
+          {!isSignedIn && GATED_INTERACTIVE_TYPES.has(section.interactive.type) ? (
+            <SignUpGate message="Sign up free to use interactive tools" compact />
+          ) : (
+            renderInteractive(section.interactive)
+          )}
         </div>
       )}
     </div>
