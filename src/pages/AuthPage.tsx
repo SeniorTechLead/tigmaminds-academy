@@ -15,6 +15,7 @@ export default function AuthPage() {
   const [success, setSuccess] = useState('');
   const { signIn, signUp, signInWithGoogle } = useAuth();
   const navigate = useNavigate();
+  const returnTo = new URLSearchParams(window.location.search).get('returnTo') || '/lessons';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,7 +28,7 @@ export default function AuthPage() {
       if (error) {
         setError(error);
       } else {
-        navigate('/lessons');
+        navigate(returnTo);
       }
     } else {
       const { error } = await signUp(email, password, displayName);
