@@ -34,7 +34,7 @@ export default function SignUpGate({
             Continue with Google
           </button>
           <Link
-            to="/auth"
+            to={`/auth?returnTo=${encodeURIComponent(window.location.pathname)}`}
             className="text-sm text-amber-600 dark:text-amber-400 hover:underline font-medium"
           >
             or sign up with email
@@ -71,7 +71,7 @@ export default function SignUpGate({
               Continue with Google
             </button>
             <Link
-              to="/auth"
+              to={`/auth?returnTo=${encodeURIComponent(window.location.pathname)}`}
               className="inline-flex items-center gap-1.5 text-sm text-amber-600 dark:text-amber-400 hover:underline font-medium"
             >
               <LogIn className="w-3.5 h-3.5" />
