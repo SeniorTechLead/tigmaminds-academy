@@ -304,92 +304,105 @@ In the fishing villages along the Brahmaputra, the people of Assam still tell th
     level0: {
       concepts: [
         {
-          title: 'Start Here — What Powers a Cyclone?',
+          title: 'How Pigments Work: Absorbing and Reflecting Light',
           paragraphs: [
-            'Boil a pot of water with the lid on. Steam builds up, lifts the lid, and escapes. The heat from the stove is turning liquid water into vapour, and the vapour rises because it is lighter than the surrounding air. Now imagine this happening over an entire ocean.',
-            'Over the Bay of Bengal, the sun heats the sea surface above 26.5°C. Warm water evaporates fast. This invisible water vapour rises, and as it climbs, it cools down. Cool air cannot hold as much moisture, so the vapour **condenses** back into tiny water droplets — forming clouds. Here is the crucial part: when water vapour condenses, it **releases heat**. This released heat warms the air around it, making it rise *faster*, pulling *more* moist air up from the ocean below.',
-            'This creates a loop:\n\n• Warm ocean → evaporation → moist air rises\n• Rising air cools → water condenses → releases heat\n• Released heat makes air rise faster → pulls in more moist air\n• Cycle strengthens itself',
-            'A cyclone is a **heat engine** — it converts the ocean’s warmth into wind energy. As long as it stays over warm water, it keeps getting stronger. The moment it hits land (no more warm water fuel) or cold ocean, it weakens and dies. This is why cyclone forecasters track sea surface temperatures so carefully.',
+            'Here is a question that sounds simple but is actually deep: why is a yellow flower yellow? Most people say "because it IS yellow." But that is not an answer \u2014 it is a tautology. The real answer involves physics, and it is beautiful.',
+            'White sunlight contains ALL visible colors mixed together \u2014 red, orange, yellow, green, blue, and violet. When light hits a yellow pigment particle, the particle absorbs (swallows) the blue and violet wavelengths and reflects everything else back at your eye. Your eye receives a mixture of red, orange, yellow, and green light, and your brain interprets that mixture as "yellow." The pigment is not producing yellow light. It is removing blue light and letting everything else bounce back.',
+            'This means color is not a property of objects \u2014 it is a property of light. A "red" rose is really a rose that absorbs green and blue light. A "green" leaf absorbs red and blue light. A "white" page reflects everything. A "black" cloth absorbs everything. What you see is always what is LEFT OVER after the pigment has done its filtering. Understanding this changes how you see the world.',
           ],
-          keyIdea: 'A cyclone is a self-strengthening loop: warm ocean evaporates water, rising vapour condenses and releases heat, the heat pulls up more vapour, and the cycle accelerates.',
-          diagram: 'CycloneCrossSectionDiagram',
+          keyIdea: 'Pigments create color by absorbing some wavelengths of light and reflecting the rest. You see what survives the filter, not what goes in.',
+          diagram: 'PigmentAbsorptionDiagram',
+          checkYourself: 'If you shine ONLY blue light on a yellow flower (no other colors), what color will the flower appear?',
+          checkAnswer: 'The flower will appear black (or very dark). Yellow pigment absorbs blue light. With only blue light available and all of it absorbed, no light reflects back to your eye. The flower needs red, yellow, or green light to appear colored.',
         },
         {
-          title: 'Why Does a Cyclone Spin?',
+          title: 'Mixing Colors: Why Paint Mixing and Light Mixing Give Opposite Results',
           paragraphs: [
-            'The rising air in a forming storm pulls in surface winds from all directions — air rushing inward to fill the low-pressure gap. But these winds do not travel in a straight line. Earth is rotating, and this rotation deflects moving objects slightly — to the **right** in the Northern Hemisphere, to the **left** in the Southern. This is called the **Coriolis effect**.',
-            'Imagine you are on a merry-go-round and you try to throw a ball to a friend on the other side. From your friend’s perspective, the ball curves to one side because the platform is rotating underneath it. Earth does the same thing to air currents.',
-            'As the inflowing winds get deflected, they start curving instead of going straight. This curve becomes a spiral, and the spiral becomes a rotation. In the Northern Hemisphere (including the Bay of Bengal), cyclones spin **counterclockwise**. In the Southern Hemisphere, they spin clockwise.',
-            '**Here is a key fact:** the Coriolis effect is zero at the equator. This means cyclones *cannot form directly on the equator* — there is no deflection to start the spin. They need to be at least 5–8 degrees of latitude away. The Bay of Bengal, at roughly 10–20°N, is in the perfect zone.',
-            '**Think about this:** If the Earth did not rotate, would cyclones exist? (Answer: No. Without rotation, there would be no Coriolis effect, no spin, and the rising air would just go straight up and spread out — you would get thunderstorms, not cyclones.)',
+            'Every child learns that yellow + blue = green. But here is something strange: if you mix yellow light and blue light on a screen, you get WHITE, not green. Why do paints and lights give completely different results?',
+            'The answer is that paints and lights use opposite systems. Light mixing is additive: you start with darkness and add light. More colors = brighter. Red light + green light + blue light = white. Screen pixels work this way \u2014 every color on your phone is made by mixing tiny red, green, and blue LEDs at different brightnesses.',
+            'Paint mixing is subtractive: you start with white (all colors present) and each pigment removes (subtracts) some wavelengths. More pigments = darker. Yellow paint absorbs blue. Blue paint absorbs red and yellow. Mix them and the only wavelength that survives BOTH filters is green. That is why yellow + blue = green in paint. Mix all pigment colors together and you get black (or dark brown), because every wavelength has been absorbed by one pigment or another. Bansara\u2019s watercolors work by subtractive mixing \u2014 each layer of paint removes more light.',
           ],
-          keyIdea: 'Earth’s rotation deflects the inflowing winds (Coriolis effect), turning them into a spiral. This is why cyclones spin, and why they cannot form at the equator where the effect is zero.',
-          diagram: 'CoriolisEffectDiagram',
+          keyIdea: 'Additive mixing (light/screens) adds brightness \u2014 all colors = white. Subtractive mixing (pigments/paint) removes light \u2014 all colors = black. Opposite systems!',
+          diagram: 'SubtractiveMixingDiagram',
+          checkYourself: 'If you mix cyan, magenta, and yellow paint together, what color do you get? What about mixing red, green, and blue light?',
+          checkAnswer: 'Cyan + magenta + yellow paint = black (each absorbs one-third of the spectrum; together they absorb everything). Red + green + blue light = white (together they provide all wavelengths). Perfectly opposite results.',
         },
         {
-          title: 'Storm Surge — The Part That Kills',
+          title: 'Watercolor Physics: Capillary Action and How Paint Spreads',
           paragraphs: [
-            'Most people think the wind is the deadliest part of a cyclone. It is not. **Storm surge** kills roughly 90% of all cyclone victims. Storm surge is a wall of ocean water pushed toward the coast by the cyclone’s winds — sometimes 5 to 10 metres above normal sea level. It is not a wave. It is a rising dome of water that floods entire coastlines in minutes.',
-            'Three things make a storm surge worse:\n\n• **Stronger winds** push more water (obvious)\n• **Shallow seabed** near the coast — the water has nowhere to go but *up* (the northern Bay of Bengal is very shallow)\n• **Funnel-shaped coastline** — the water gets squeezed into a smaller space, raising the height further (the Bay of Bengal is funnel-shaped)',
-            'The Bay of Bengal has all three: strong cyclones, a shallow seabed, and a funnel shape. This makes it one of the most dangerous coastlines on Earth for storm surge. The Brahmaputra delta sits right at the narrow end of the funnel.',
-            'In 1970, the Bhola cyclone sent a storm surge across the coast of what is now Bangladesh. Between 300,000 and 500,000 people died — most of them drowned by the surge, not killed by wind. After that disaster, Bangladesh built thousands of raised concrete cyclone shelters along the coast. In 2020, Cyclone Amphan (a similar-strength storm) hit the same region — fewer than 100 people died. Warning systems and shelters saved hundreds of thousands of lives.',
-            '**Question to think about:** Why is storm surge more dangerous at high tide than at low tide? (Answer: the surge height adds on top of the existing tide level, so a 5-metre surge at high tide floods much farther inland than the same surge at low tide.)',
+            'When Bansara touches her wet brush to paper, the paint does not just sit there \u2014 it spreads. Sometimes it spreads smoothly, sometimes unpredictably. This is not magic; it is physics, and the main force at work is capillary action.',
+            'Paper is made of cellulose fibers with microscopic gaps between them. Water molecules are attracted to cellulose (a force called adhesion \u2014 water likes to stick to things). At the same time, water molecules stick to each other (cohesion \u2014 water likes to stay together). These two forces working together pull water into the tiny gaps between fibers, like liquid climbing up a narrow tube. The narrower the gap, the stronger the pull. This is capillary action.',
+            'Pigment particles are carried along with the water as it travels through the paper fibers. Fine-fiber paper absorbs water slowly and evenly, giving the artist control. Coarse paper absorbs quickly and unevenly, creating the wild "bloom" effects that give watercolor its distinctive character. Skilled artists like Bansara learn to control capillary action by choosing the right paper, managing how wet it is, and timing each brushstroke. They are doing applied physics with every painting.',
           ],
-          keyIdea: 'Storm surge — a wall of ocean water, not just waves — causes 90% of cyclone deaths. Shallow seabeds and funnel-shaped coasts like the Bay of Bengal make it far worse.',
-          diagram: 'StormSurgeDiagram',
+          keyIdea: 'Watercolor paint spreads through paper by capillary action \u2014 adhesion pulls water into fiber gaps, cohesion drags more water along. Artists control this physics with every stroke.',
+          diagram: 'CapillaryActionDiagram',
+          checkYourself: 'Why does watercolor paint spread FASTER on paper that is already wet?',
+          checkAnswer: 'On wet paper, the gaps between fibers are already filled with water. New paint dropped onto this surface can flow along the existing water channels without having to overcome initial adhesion. The water-to-water cohesion carries the paint outward rapidly \u2014 creating the soft, feathered "bloom" effect.',
+        },
+        {
+          title: 'Why Rain Makes Colors More Vivid',
+          paragraphs: [
+            'Bansara noticed something that photographers and painters have known for centuries: colors look more vivid after rain. This is not imagination \u2014 it is measurable physics, and there are three reasons for it.',
+            'First, rain washes dust particles out of the air. Dust scatters light randomly, creating a whitish haze that washes out colors. After rain, the air is cleaner and light travels without being scattered off-course, so you see truer, more saturated colors. Second, wet surfaces absorb light more deeply. A dry leaf has a rough surface that scatters light in all directions (diffuse reflection). A wet leaf has a thin film of water that fills in the bumps, making the surface smoother. Smooth surfaces reflect light in one direction (specular reflection), and the light that enters the leaf goes deeper, interacting with more pigment before bouncing back \u2014 producing a richer, deeper green.',
+            'Third, overcast skies after rain provide soft, even lighting without harsh shadows. Direct sunlight creates bright spots and dark shadows on the same object, which reduces the perceived richness of color. Diffuse light from clouds illuminates everything evenly, letting you see the true color of every surface. Photographers call this the "golden hour of color" \u2014 the period right after rain stops when the world looks most vivid.',
+          ],
+          keyIdea: 'Rain makes colors vivid for three physics reasons: cleaner air (less scattering), wet surfaces (deeper light penetration), and diffuse lighting (no harsh shadows).',
+          diagram: 'RainColorVividDiagram',
+          checkYourself: 'Why does a wet stone look darker and more colorful than the same stone when dry?',
+          checkAnswer: 'The water film fills the stone\'s surface bumps, reducing random scattering. Light enters the stone more deeply and interacts with more pigment before reflecting back. More pigment interaction = more color absorption = deeper, richer color. The stone also appears darker because less light is scattered back.',
         },
       ],
       vocabulary: [
-        ['Coriolis Effect', 'A deflection of moving objects caused by Earth\'s rotation — it makes cyclones spin counterclockwise in the Northern Hemisphere and clockwise in the Southern Hemisphere'],
-        ['Barometric Pressure', 'The weight of the atmosphere pressing down on a surface, measured in millibars — falling pressure signals an approaching storm, and cyclone centers can drop below 900 mb'],
-        ['Storm Surge', 'An abnormal rise in sea level caused by a cyclone\'s winds pushing ocean water toward the coast — responsible for about 90% of cyclone deaths'],
-        ['Latent Heat', 'Energy released when water vapor condenses into liquid — this hidden heat is the fuel that powers cyclones, warming the air and driving it upward'],
-        ['Eyewall', 'The ring of the most violent thunderstorms surrounding a cyclone\'s calm eye — it contains the strongest winds and heaviest rainfall of the entire storm'],
+        ['Pigment', 'A substance that creates color by absorbing certain wavelengths of light and reflecting the rest \u2014 you see what bounces back'],
+        ['Subtractive mixing', 'Color mixing with pigments/paints: each added pigment removes wavelengths. More mixing = darker. All colors = black'],
+        ['Additive mixing', 'Color mixing with light: each added light contributes wavelengths. More mixing = brighter. All colors = white'],
+        ['Capillary action', 'The force that pulls water into narrow spaces, caused by adhesion (water sticks to surfaces) and cohesion (water sticks to itself)'],
+        ['Wavelength', 'The distance between peaks of a light wave \u2014 different wavelengths appear as different colors (short = violet, long = red)'],
       ],
       trueFalse: [
-        { statement: 'Cyclones can form directly on the equator where ocean water is warmest.', isTrue: false, explanation: 'Cyclones need the Coriolis effect to start rotating, and the Coriolis effect is zero at the equator. Cyclones typically form at least 5-8 degrees of latitude away from the equator, even though equatorial waters are warm enough.' },
-        { statement: 'A rapid drop in barometric pressure is a reliable warning sign of an approaching cyclone.', isTrue: true, explanation: 'Cyclones create extremely low pressure at their center — sometimes below 900 millibars versus the normal 1013 mb. As a cyclone approaches, barometers detect the falling pressure hours or days before the worst winds arrive.' },
-        { statement: 'The strongest winds in a cyclone are found in the eye at the center of the storm.', isTrue: false, explanation: 'The eye is actually calm and often clear, with light winds. The most violent winds are in the eyewall — the ring of intense thunderstorms immediately surrounding the eye, where wind speeds can exceed 250 km/h.' },
+        { statement: 'A yellow flower produces yellow light.', isTrue: false, explanation: 'A yellow flower absorbs blue and violet light from white sunlight and reflects the remaining wavelengths (red, orange, yellow, green). Your brain interprets this reflected mixture as yellow. The flower is a filter, not a light source.' },
+        { statement: 'Mixing red, green, and blue light produces white light.', isTrue: true, explanation: 'This is additive mixing. Red + green + blue light together provide all visible wavelengths, which your eye perceives as white. This is how every pixel on your screen works \u2014 tiny RGB LEDs at different intensities.' },
+        { statement: 'Colors look duller after rain because of the clouds.', isTrue: false, explanation: 'Colors actually look MORE vivid after rain. Clean air, wet surfaces that absorb light deeply, and diffuse cloud lighting all combine to produce richer, more saturated colors. Photographers actively seek the post-rain period for the most vivid shots.' },
       ],
       facts: [
-        'The Bay of Bengal is one of the most cyclone-prone bodies of water on Earth — its warm surface temperatures and funnel shape concentrate storm surge toward the coast, making it especially dangerous.',
-        'The 1970 Bhola cyclone in the Bay of Bengal killed an estimated 300,000-500,000 people, mostly from storm surge — it led to massive international investment in cyclone warning systems and coastal shelters.',
-        'A cyclone is essentially a heat engine: it converts thermal energy from warm ocean water (above 26.5°C) into the kinetic energy of wind, with latent heat released by condensation as the main power source.',
+        'Cherrapunji (now Sohra) in Meghalaya holds the record for most rainfall in a single year: 26,461 mm (about 26 meters!) recorded in 1861. Bansara\'s home is one of the wettest places on Earth.',
+        'Your phone screen creates every visible color by mixing just three colors of light \u2014 red, green, and blue \u2014 at different intensities. Each pixel contains three tiny LEDs. Turn all three to maximum and you get white.',
+        'Watercolor painters leave the paper white for white areas rather than adding white paint. The paper IS the light source \u2014 light passes through the transparent pigment layer, reflects off the white paper, and passes through the pigment again on the way back to your eye.',
       ],
-      offlineActivity: 'Fill a large bowl with water and let it settle completely. Stir the water rapidly in a circle, then slowly lift your finger out. Watch how a vortex (spinning funnel) forms in the center — this is the same physics that creates a cyclone\'s eye. The spinning water pulls away from the center, just as spinning air creates the low-pressure eye of a cyclone. Now try adding a few drops of food coloring at the edge and watch how the spiral bands form as the color gets pulled into the rotation.',
-      offlineActivityDiagram: 'ActivityVortexDiagram',
-      codeTeaser: `import numpy as np
+      offlineActivity: 'Test subtractive mixing with paints or food coloring on white paper. Mix yellow + blue (should give green). Mix red + blue (should give purple). Mix all three (should give dark brown or near-black). Then compare wet paint to dry paint \u2014 notice how the colors lighten as they dry? Watercolors dry 20\u201340% lighter because the water layer reflects extra light while still wet.',
+      offlineActivityDiagram: 'ActivityColorMixDiagram',
+      codeTeaser: `import matplotlib.pyplot as plt
+import numpy as np
 
-# Estimate cyclone intensity from sea temperature
-# Warmer ocean = lower eye pressure = stronger winds
+# Simulate subtractive color mixing
+# Each pigment absorbs some wavelengths (0 = absorb, 1 = reflect)
+wavelengths = np.linspace(380, 700, 100)
 
-sea_temp = 28.5       # °C — Bay of Bengal surface
-pressure = 1013       # millibars — normal
-wind_speed = 120      # km/h — severe cyclone
+yellow_reflect = np.where(wavelengths > 490, 1.0, 0.1)
+blue_reflect = np.where(wavelengths < 530, 1.0, 0.1)
+mixed = yellow_reflect * blue_reflect  # only green survives!
 
-# Cyclone pressure drop (simplified)
-eye_pressure = pressure - (wind_speed / 3.5) ** 2
-storm_surge = wind_speed * 0.04  # rough estimate in metres
-
-print(f"Sea surface temp: {sea_temp}°C (>{26.5} = cyclone fuel)")
-print(f"Eye pressure: {eye_pressure:.0f} mb (normal: 1013)")
-print(f"Estimated storm surge: {storm_surge:.1f} metres")
-print(f"Danger level: {'EXTREME' if storm_surge > 3 else 'HIGH'}")`,
+plt.fill_between(wavelengths, mixed, alpha=0.3, color='green')
+plt.plot(wavelengths, mixed, linewidth=2, color='green')
+plt.xlabel("Wavelength (nm)")
+plt.ylabel("Reflected light")
+plt.title("Yellow + Blue Paint = Green (subtractive)")
+plt.show()  # Only green wavelengths survive both filters!`,
       referenceLinks: [
-        { slug: 'weather-and-climate', reason: 'Full guide to atmospheric pressure, wind systems, and how weather patterns form and move' },
-        { slug: 'waves-and-properties', reason: 'How waves carry energy — the same physics applies to ocean waves, storm surge, and sound' },
+        { slug: 'light-and-color', reason: 'Deep dive into wavelengths, the electromagnetic spectrum, and how we perceive color' },
+        { slug: 'waves-and-properties', reason: 'Understand wave fundamentals \u2014 frequency, wavelength, amplitude \u2014 the physics behind light and color' },
       ],
       nextLessons: [
-        { slug: 'cloud-refused-rain', reason: 'Explores cloud seeding and rain formation — the water cycle that feeds cyclones' },
-        { slug: 'the-little-boat', reason: 'Fluid dynamics and buoyancy on the Brahmaputra — how boats survive river currents and floods' },
-        { slug: 'monsoon-home', reason: 'Architecture designed for monsoon climate — the human response to the storms you just learned about' },
+        { slug: 'orange-sunsets-assam', reason: 'Uses the same light physics to explain why sunsets are orange \u2014 scattering and wavelength filtering' },
+        { slug: 'kingfisher-blue', reason: 'Explores structural color \u2014 blue that comes from nanostructures, not pigments. A completely different way to make color' },
+        { slug: 'rainbow-fish', reason: 'Connects refraction and thin-film interference \u2014 another way light creates color without pigments' },
       ],
       quiz: [
-        { question: 'What powers a cyclone?', options: ['Cold ocean water freezing', 'Warm ocean water evaporating and condensing, releasing heat', 'Earthquakes under the ocean', 'Wind from nearby mountains'], answer: 1 },
-        { question: 'Why does a cyclone spin?', options: ['Ocean currents push it in circles', 'The Coriolis effect from Earth\'s rotation deflects the inflowing winds', 'Lightning inside the storm creates rotation', 'The eye of the storm acts like a drain'], answer: 1 },
-        { question: 'What causes the most deaths during a cyclone?', options: ['Lightning strikes', 'High winds', 'Storm surge — a wall of ocean water pushed inland', 'Tornadoes inside the cyclone'], answer: 2 },
-        { question: 'Why can\'t cyclones form at the equator?', options: ['The ocean is too cold at the equator', 'The Coriolis effect is zero at the equator, so winds cannot be deflected into a spin', 'There is too much rain at the equator', 'The atmosphere is too thin at the equator'], answer: 1 },
-        { question: 'What makes the Bay of Bengal especially dangerous for storm surge?', options: ['It has the deepest water in the world', 'Its shallow seabed and funnel shape amplify the surge', 'It has no islands to block storms', 'The water is warmer than any other ocean'], answer: 1 },
+        { question: 'Why does a yellow pigment appear yellow?', options: ['It produces yellow light', 'It absorbs yellow light and reflects the rest', 'It absorbs blue/violet light and reflects the rest', 'It reflects only one wavelength'], answer: 2 },
+        { question: 'What type of color mixing do paints use?', options: ['Additive (more paint = brighter)', 'Subtractive (more paint = darker)', 'Neutral (paint does not affect brightness)', 'Multiplicative'], answer: 1 },
+        { question: 'What force pulls watercolor paint into paper fibers?', options: ['Gravity', 'Magnetism', 'Capillary action (adhesion + cohesion)', 'Static electricity'], answer: 2 },
+        { question: 'Why do colors look more vivid right after rain?', options: ['Rain adds color to surfaces', 'Clean air, wet surfaces, and diffuse light all enhance color', 'Your eyes are more sensitive in cold weather', 'Rain reflects light like a mirror'], answer: 1 },
+        { question: 'What happens if you mix ALL pigment colors together?', options: ['You get white', 'You get black or very dark brown', 'You get grey', 'Nothing changes'], answer: 1 },
       ],
     },
   },
@@ -654,88 +667,106 @@ Anusha kept drawing maps. Maps of her school. Maps of her grandmother's kitchen.
     level0: {
       concepts: [
         {
-          title: 'Start Here — How Do You Describe Where Something Is?',
+          title: 'Warp and Weft: The Two Thread Systems',
           paragraphs: [
-            'If a friend asks "Where is your house?", you might say "Near the peepal tree, past the tea stall, turn left at the big puddle." That works — if your friend knows the peepal tree. But what if they are in Delhi? Or London? You need a system that works for *anyone, anywhere*.',
-            'The solution: imagine wrapping the Earth in a grid, like graph paper around a ball. Horizontal lines run east-west — these measure **latitude** (how far north or south of the equator you are, from 0° at the equator to 90° at the poles). Vertical lines run north-south — these measure **longitude** (how far east or west of a starting line through London, from 0° to 180°).',
-            'Every point on Earth gets a unique pair of numbers. Guwahati is at about 26.1°N, 91.7°E. This means: 26.1 degrees north of the equator, 91.7 degrees east of London. No other place on Earth has these exact numbers. With just two numbers, you can pinpoint any location on the planet.',
-            '**Try this:** Open any map app on a phone. Long-press on your school. It will show two numbers — those are your latitude and longitude. Now long-press on the Taj Mahal. Compare the numbers. Which changed more — latitude (north-south) or longitude (east-west)?',
+            'Every piece of woven fabric on Earth \u2014 from Dechen\'s shawls in Tawang to the shirt you are wearing right now \u2014 is made of exactly two sets of threads crossing each other at right angles. Understanding these two systems is the foundation of textile science.',
+            'The warp threads run vertically (lengthwise) and are set up first. They are stretched tight on the loom under tension, like guitar strings. Because they bear the weight of the entire fabric during weaving, warp threads must be strong \u2014 they endure thousands of back-and-forth passes of the shuttle without breaking. The weft threads run horizontally (widthwise) and are woven in second, one row at a time, passing over and under alternate warp threads.',
+            'The over-under pattern of how weft crosses warp determines everything about the fabric: its strength, its feel, its drape, and its pattern. The simplest arrangement \u2014 over one, under one, alternating each row \u2014 is called plain weave. It is the strongest and most stable weave structure, used in everything from canvas to bandages. Dechen\'s cloud-pattern shawls use variations of this basic over-under logic to create intricate designs.',
           ],
-          keyIdea: 'Latitude (north-south from the equator) and longitude (east-west from London) form a grid that gives every point on Earth a unique pair of numbers — a universal address system.',
-          diagram: 'LatLongGridDiagram',
+          keyIdea: 'All woven fabric consists of warp (vertical, under tension) and weft (horizontal, woven in) threads. Their crossing pattern determines the fabric\'s strength and appearance.',
+          diagram: 'WarpWeftDiagram',
+          checkYourself: 'If you pull on a piece of woven fabric diagonally (at 45 degrees to both warp and weft), will it stretch more or less than pulling along the warp?',
+          checkAnswer: 'It will stretch MORE. Along the warp, the taut threads resist stretching directly. At 45 degrees, you are pulling the grid into a diamond shape \u2014 the threads rotate rather than stretch, and the fabric deforms easily. This diagonal stretch is called "bias" and tailors use it deliberately for stretchy garments.',
         },
         {
-          title: 'The Orange Peel Problem — Why All Maps Lie',
+          title: 'How a Loom Works: Shed, Shuttle, Beat',
           paragraphs: [
-            'Try this at home: take an orange and draw the outline of India on its skin with a marker. Now peel the orange and try to flatten the peel on a table. What happens? The peel tears, stretches, and distorts. India’s shape gets warped. This is the **fundamental problem of cartography**: Earth is round, and paper is flat. You cannot make the peel lie flat without stretching or tearing something.',
-            'Every flat map is a compromise. Map makers call these compromises **projections**. Different projections sacrifice different things:\n\n• **Mercator** (1569): keeps shapes accurate but distorts sizes — Greenland looks as big as Africa, but Africa is actually 14 times bigger\n• **Peters**: keeps areas correct but stretches shapes — countries look elongated\n• **Robinson**: compromises on everything slightly, so nothing looks terribly wrong — the most common in school atlases',
-            'For a map of your neighbourhood or your district, this problem barely matters — over a few hundred kilometres, Earth’s curve is tiny. But for a world map, the choice of projection changes what you believe about the world. Students who only see Mercator maps grow up thinking Europe is bigger than South America (it is not — South America is nearly twice the size).',
-            '**Question to think about:** Anusha in the story drew a map with the peepal tree and the puddle. Is her map a projection? (Answer: Yes — she projected the 3D world onto a flat page. For a small area, the distortion is negligible, but she still made choices about what to include and what to leave out.)',
+            'A loom looks complicated, but it really does only three things, repeated thousands of times: open a gap (shed), pass thread through it (shuttle), and push the new thread tight (beat). Every loom ever built \u2014 from a stick loom in a Tawang village to a computer-controlled factory loom \u2014 performs these same three steps.',
+            'Opening the shed: the loom lifts every other warp thread, creating a V-shaped gap (called the "shed") between the upper and lower threads. This is done by a heddle \u2014 a bar with loops that grab alternate warp threads and pull them up. Passing the shuttle: a shuttle carrying the weft thread is passed through the shed from one side to the other. This lays one row of weft across the entire width. Beating: a beater bar pushes the new weft row tightly against the previous rows, creating a dense, strong fabric.',
+            'Then the heddle switches \u2014 the threads that were up go down, and the threads that were down go up \u2014 and the whole cycle repeats. Each cycle adds one row. A skilled Tawang weaver using a backstrap loom (where her own body provides the tension) can complete about 5,000 cycles to produce one shawl. That is 5,000 repetitions of open-pass-beat, each one precise, each one building the pattern thread by thread.',
           ],
-          keyIdea: 'Earth is round; maps are flat. Every flat map distorts something — shape, area, distance, or direction. Different projections make different trade-offs, and no map is perfectly accurate.',
-          diagram: 'MapProjectionDiagram',
+          keyIdea: 'Every loom in the world performs the same three-step cycle: open a shed (gap), pass the shuttle (weft thread), beat the new row tight. Repeat 5,000 times for one shawl.',
+          diagram: 'LoomMechanicsDiagram',
+          checkYourself: 'In a backstrap loom, the weaver\'s body provides the warp tension. What happens to the fabric if the weaver leans forward?',
+          checkAnswer: 'Leaning forward reduces tension on the warp threads, making the shed smaller and the weave looser. Leaning back increases tension, making a tighter weave. The weaver\'s posture directly controls the fabric density \u2014 her body is the tensioning device.',
         },
         {
-          title: 'Maps with Layers — How GIS Works',
+          title: 'Thread Tension and Fabric Strength',
           paragraphs: [
-            'A paper map shows you one picture. But what if you could stack transparent sheets on top of each other — one showing rivers, one showing roads, one showing elevation, one showing schools? Now you could ask questions like: "Show me villages within 5 km of a river that have no school." That is exactly what a **Geographic Information System (GIS)** does, but on a computer.',
-            'GIS stores data in **layers**. Each layer is a transparent map of one type of information. You can turn layers on and off, zoom in, and — most importantly — ask questions that combine layers. Real examples:\n\n• Brahmaputra flood prediction: overlay river level + elevation + rainfall data to find which villages will flood first\n• Wildlife corridors: overlay forest cover + elephant tracking data + village locations to plan safe routes\n• Disease tracking: overlay outbreak locations + water sources + population density to find patterns',
-            'GIS is no longer just for experts. Google Maps, which you may use every day, is a simplified GIS — it has layers for roads, satellite view, traffic, transit, and more. Free professional GIS software like QGIS lets students do the same analyses that government agencies use for disaster planning.',
-            '**Connection to the story:** Anusha’s grandfather made paper maps with a compass and notebook — one walk, one map. A GIS can combine hundreds of surveys into one layered, queryable system. The *skill* is the same (understanding land and location), but the *tool* is vastly more powerful.',
+            'The most important skill in weaving is not speed or pattern-making \u2014 it is controlling tension. Tension determines whether the fabric is strong or weak, even or lumpy, beautiful or ruined. Getting it right is the difference between a master weaver and a beginner.',
+            'If the warp tension is too loose, the threads wander and the weft rows do not pack evenly. The result is a floppy, uneven fabric with gaps where water and wind pass through. If the tension is too tight, the warp threads are over-stressed and the fabric puckers \u2014 it buckles and distorts because the rigid threads cannot accommodate the weft rows smoothly. The fabric may even tear during weaving.',
+            'The sweet spot is firm but not rigid \u2014 tight enough that every thread sits in its correct position, loose enough that the weft can slide into place without distorting. Tawang weavers using backstrap looms adjust this tension continuously by shifting their body weight. They can feel the right tension through their back and hips, making adjustments of fractions of a millimeter without looking. This tactile skill takes years to develop and cannot be fully replicated by machines \u2014 it is one reason handwoven textiles from Tawang command premium prices.',
           ],
-          keyIdea: 'GIS stores map data in transparent layers that can be combined to answer spatial questions — from flood prediction to wildlife conservation. Google Maps is a simplified GIS you already use.',
-          diagram: 'CoordinatePlaneDiagram',
+          keyIdea: 'Tension is the most critical variable in weaving. Too loose = weak fabric with gaps. Too tight = distorted fabric that may tear. The sweet spot requires years of tactile skill.',
+          diagram: 'ThreadTensionDiagram',
+          checkYourself: 'Why would a fabric with uneven tension be weaker than one with uniform tension, even if they use the same thread?',
+          checkAnswer: 'Uneven tension means some threads bear more load than others. Under stress, the tightest threads break first, transferring their load to neighboring threads (which are now overloaded) and causing a chain reaction of failures. Uniform tension distributes stress evenly, so all threads share the load and the fabric resists much more force before failing.',
+        },
+        {
+          title: 'Traditional Patterns Encode Information',
+          paragraphs: [
+            'Dechen\'s cloud patterns are beautiful, but traditional weaving patterns are not just decorative \u2014 they carry information. Among the Naga tribes, Mizo, and Monpa people of Northeast India, textile patterns function as a visual language that encodes identity, status, and history.',
+            'A Naga warrior\'s shawl tells you which tribe he belongs to, what village he is from, whether he has taken an enemy\'s head in battle, and what his social rank is \u2014 all encoded in the pattern. Specific motifs have specific meanings: a diamond might represent a mountain, a zigzag a river, a star a clan symbol. The rules for who can wear which pattern are strict \u2014 wearing a pattern you have not earned is a serious social offense.',
+            'Here is the fascinating connection to modern technology: a weaving pattern is essentially a binary grid. At each crossing point, the weft is either on top (1) or underneath (0). A complex pattern is just a matrix of 1s and 0s \u2014 exactly like a digital image or a binary file. Charles Babbage and Ada Lovelace\'s early computers borrowed directly from the Jacquard loom, which used punched cards (holes = 1, no hole = 0) to automate complex patterns. Weaving is arguably the world\'s oldest form of programming.',
+          ],
+          keyIdea: 'Traditional textile patterns encode tribal identity, status, and history as visual information. Weaving patterns are binary grids \u2014 the world\'s oldest form of programming.',
+          diagram: 'PatternEncodingDiagram',
+          checkYourself: 'How is a weaving pattern similar to a digital image stored on a computer?',
+          checkAnswer: 'Both are grids of binary values. In a weaving pattern, each crossing is either warp-on-top (1) or weft-on-top (0). In a digital image, each pixel has a brightness value (often stored as binary). Both encode complex visual information as structured matrices of simple on/off decisions.',
         },
       ],
       vocabulary: [
-        ['Latitude', 'How far north or south of the equator you are — measured in degrees from 0° (equator) to 90° (poles)'],
-        ['Longitude', 'How far east or west of the Prime Meridian (London) you are — measured in degrees from 0° to 180°'],
-        ['Map Projection', 'A method for flattening Earth’s curved surface onto a flat map — every projection distorts something'],
-        ['GIS', 'Geographic Information System — software that stores and analyses map data in layers'],
-        ['Scale', 'The ratio between a distance on a map and the real distance on the ground — e.g., 1 cm = 1 km'],
+        ['Warp', 'The vertical threads on a loom, set up first under tension \u2014 they run the length of the fabric and must be strong'],
+        ['Weft', 'The horizontal threads woven through the warp, one row at a time \u2014 they create the pattern and width of the fabric'],
+        ['Shed', 'The V-shaped gap created when alternate warp threads are raised, allowing the shuttle to pass through'],
+        ['Plain weave', 'The simplest weave: over one thread, under one thread, alternating each row. The strongest and most stable pattern.'],
+        ['Backstrap loom', 'A simple loom where one end is tied to a post and the other wraps around the weaver\'s back \u2014 body weight controls tension'],
       ],
       trueFalse: [
-        { statement: 'The Mercator map projection shows all countries at their correct size.', isTrue: false, explanation: 'Mercator preserves shapes and angles but massively distorts area near the poles. Greenland appears as large as Africa, when in reality Africa is 14 times bigger.' },
-        { statement: 'Latitude and longitude can identify any point on Earth with just two numbers.', isTrue: true, explanation: 'Latitude gives the north-south position, longitude gives the east-west position. Together they form a unique "address" for every point on the planet.' },
-        { statement: 'GPS needs signals from at least 4 satellites to determine your position.', isTrue: true, explanation: 'Three satellites give your position on the surface, and a fourth is needed to correct for timing errors in your receiver’s clock. More satellites improve accuracy.' },
+        { statement: 'Weft threads must be stronger than warp threads because they do more work.', isTrue: false, explanation: 'Warp threads must be stronger. They are stretched under tension on the loom and must endure thousands of back-and-forth passes of the shuttle without breaking. Weft threads are woven in gently and face much less stress during the weaving process.' },
+        { statement: 'Traditional Naga shawl patterns encode information about the wearer\'s tribe and status.', isTrue: true, explanation: 'Naga textile patterns function as a visual language. Specific motifs indicate tribal affiliation, village of origin, warrior achievements, and social rank. Wearing a pattern you have not earned is a serious social offense.' },
+        { statement: 'The Jacquard loom was one inspiration for early computer programming.', isTrue: true, explanation: 'The Jacquard loom (1804) used punched cards to automate complex weaving patterns \u2014 holes = thread up, no hole = thread down. Charles Babbage and Ada Lovelace adapted this binary logic for their Analytical Engine, making weaving a direct ancestor of computer programming.' },
       ],
       facts: [
-        'One degree of latitude is always about 111 km, but one degree of longitude varies — 111 km at the equator, shrinking to 0 km at the poles because the lines converge.',
-        'India’s Survey of India, founded in 1767, mapped the subcontinent using chains, compasses, and enormous baseline measurements — one of the greatest scientific projects of the 18th century.',
-        'The Great Trigonometrical Survey of India (1802–1871) was the project that first measured the height of Mount Everest — then called Peak XV.',
+        'Tawang, at 3,048 meters in Arunachal Pradesh, is home to the Monpa people, who weave intricate yak-wool textiles on backstrap looms. Their patterns include cloud motifs, dragons, and Buddhist symbols.',
+        'A single handwoven Naga shawl requires 20,000\u201340,000 individual shuttle passes. At one pass every 3 seconds, that is 17\u201333 hours of continuous weaving \u2014 spread over weeks of work.',
+        'The Jacquard loom, invented in 1804, used punched cards to control which warp threads were raised \u2014 the first programmable binary machine. Ada Lovelace saw the connection and wrote: "The Analytical Engine weaves algebraic patterns just as the Jacquard loom weaves flowers and leaves."',
       ],
-      offlineActivity: 'Draw a map of your route from home to school without looking at any existing map. Include landmarks (trees, shops, turns). Then walk the route and check: what did you get right? What did you miss? This is exactly how early surveyors worked — walk, observe, draw, verify.',
-      offlineActivityDiagram: 'ActivityMapDrawDiagram',
-      codeTeaser: `# Plot your school on a coordinate grid
-latitude = 26.14   # Guwahati (degrees North)
-longitude = 91.74  # Guwahati (degrees East)
+      offlineActivity: 'Make a simple weave from paper strips. Cut 10 strips from two colors of paper (about 1 cm wide, 20 cm long). Tape 5 strips of one color vertically to a table (these are your warp). Weave the other 5 strips horizontally, going over-under-over-under. Push each row tight against the previous one. Compare a tight weave to a loose one \u2014 which is stronger when you pull on it? Design a simple pattern using the two colors.',
+      offlineActivityDiagram: 'ActivityWeaveCardDiagram',
+      codeTeaser: `import numpy as np
+import matplotlib.pyplot as plt
 
-# How far is Delhi?
-delhi_lat, delhi_lon = 28.61, 77.21
+# Generate a weaving pattern as a binary grid
+rows, cols = 16, 16
+pattern = np.zeros((rows, cols), dtype=int)
 
-# Each degree of latitude ≈ 111 km
-dist_north = (delhi_lat - latitude) * 111  # km
-dist_east = (delhi_lon - longitude) * 111 * 0.89  # adjusted for latitude
-total = (dist_north**2 + dist_east**2)**0.5
+# Plain weave: checkerboard
+for r in range(rows):
+    for c in range(cols):
+        pattern[r][c] = (r + c) % 2
 
-print(f"Your location: {latitude}°N, {longitude}°E")
-print(f"Delhi: {delhi_lat}°N, {delhi_lon}°E")
-print(f"Straight-line distance: {total:.0f} km")`,
+plt.imshow(pattern, cmap='RdYlBu', interpolation='nearest')
+plt.title("Plain Weave Pattern (binary grid)")
+plt.xlabel("Warp thread")
+plt.ylabel("Weft row")
+plt.colorbar(label="0=weft on top, 1=warp on top")
+plt.show()  # Try making a twill pattern!`,
       referenceLinks: [
-        { slug: 'maps-and-navigation', reason: 'Full guide to latitude, longitude, map projections, GPS, and GIS' },
-        { slug: 'coordinate-geometry', reason: 'The mathematics behind coordinates — distance formula, midpoints, and plotting on a grid' },
+        { slug: 'materials-and-properties', reason: 'Explore material strength, elasticity, and how fiber alignment determines fabric properties' },
+        { slug: 'programming-fundamentals', reason: 'See how binary logic (0s and 1s) connects weaving patterns to computer programming' },
       ],
       nextLessons: [
-        { slug: 'seven-sisters', reason: 'Geography of all seven NE Indian states — maps, biodiversity, and why each state is unique' },
-        { slug: 'postman-hills', reason: 'Route optimisation through Meghalaya’s hills — graph theory applied to real geography' },
-        { slug: 'silk-route', reason: 'Trade routes as geographic networks — how maps shaped commerce across centuries' },
+        { slug: 'muga-silk-golden', reason: 'Muga silk weaving uses these same principles with a unique natural fiber \u2014 biology meets textile engineering' },
+        { slug: 'the-magic-japi-hat', reason: 'Explores bamboo weaving geometry \u2014 a different weaving tradition from the same region with mathematical patterns' },
+        { slug: 'the-girl-who-painted-rain', reason: 'Connects art and science in Meghalaya \u2014 another story about creating beauty from local materials' },
       ],
       quiz: [
-        { question: 'What do latitude and longitude measure?', options: ['Height above sea level and depth below it', 'North-south position from the equator and east-west position from London', 'Distance between two cities', 'The size of a country'], answer: 1 },
-        { question: 'Why do all flat maps distort the Earth?', options: ['Map makers are not accurate enough', 'Earth is round and maps are flat — you cannot flatten a sphere without distortion', 'Paper shrinks when printed', 'Compasses interfere with map accuracy'], answer: 1 },
-        { question: 'What is GIS?', options: ['A type of satellite', 'A system that stores map data in layers that can be combined to answer spatial questions', 'A method of hand-drawing maps', 'A tool for measuring elevation only'], answer: 1 },
-        { question: 'What trade-off do map projections make?', options: ['They all preserve area but distort colour', 'Different projections distort different things — shape, area, distance, or direction', 'They only work for small areas', 'They require GPS to be accurate'], answer: 1 },
-        { question: 'What is a common example of GIS that most people already use?', options: ['A printed atlas', 'Google Maps', 'A magnetic compass', 'A globe'], answer: 1 },
+        { question: 'What are the two thread systems in every woven fabric?', options: ['Top and bottom', 'Warp (vertical) and weft (horizontal)', 'Strong and weak', 'Cotton and silk'], answer: 1 },
+        { question: 'What is the "shed" in weaving?', options: ['A building where looms are kept', 'The gap created when alternate warp threads are lifted', 'The edge of the fabric', 'A type of thread'], answer: 1 },
+        { question: 'Why is tension control the most important weaving skill?', options: ['Higher tension always makes better fabric', 'Tension does not matter if the thread is strong', 'Too loose = gaps, too tight = distortion. Only the sweet spot produces strong, even fabric.', 'Tension only affects the color of the fabric'], answer: 2 },
+        { question: 'How are traditional weaving patterns similar to computer data?', options: ['Both use electricity', 'Both are made of binary grids (on/off, 1/0 at each crossing point)', 'Both require the internet', 'They are not similar at all'], answer: 1 },
+        { question: 'What did the Jacquard loom contribute to computing history?', options: ['It was the first electric computer', 'Its punched-card binary system inspired Babbage and Lovelace\'s early computer designs', 'It invented the internet', 'It had nothing to do with computing'], answer: 1 },
       ],
     },
   },
@@ -6107,6 +6138,7 @@ Doying lived to a great old age, wandering the hills freely, eating where he ple
       project: {
         title: 'Simulate Selective Breeding Over Generations',
         description: 'Model how selecting for specific traits (size, temperament, coat color) changes a population over 20 generations.',
+        outputDiagram: 'BreedingSimOutputDiagram',
         steps: [
           'Define a starting population with random values for 3 traits (size, strength, temperament)',
           'Implement a selection rule: only the top 30% breed each generation',
@@ -6131,52 +6163,107 @@ Doying lived to a great old age, wandering the hills freely, eating where he ple
     level0: {
       concepts: [
         {
-          title: 'Artificial Selection: How Humans Shape Species',
+          title: 'Wild vs Domestic: What Changes When Humans Choose?',
           paragraphs: [
-            'The mithun (Bos frontalis) is a semi-domesticated bovine found primarily in the hill regions of Northeast India, Myanmar, and Bangladesh. Unlike most livestock, mithun were not fully domesticated through confinement — they roam freely in forests and return to villages voluntarily. This partial domestication, spanning roughly 8,000 years, represents a fascinating middle ground between wild and fully domestic animals.',
-            'Artificial selection — the process by which humans breed animals for desired traits — works by the same mechanism as natural selection, but with human preference replacing environmental pressure. Over centuries, Naga and other hill tribes selected mithun for docile temperament, large body size, and specific coat colors (especially the prized pure black or white-stockinged forms). Each generation, the individuals that best matched human preferences were allowed to breed, gradually shifting the population\'s traits.',
-            'The genetic consequences of artificial selection are measurable. Compared to their wild ancestor (the gaur, Bos gaurus), mithun have smaller brains (about 25% reduction — common in all domestic animals), reduced flight-or-fight responses, earlier sexual maturity, and increased fat deposition. These "domestication syndrome" traits appear across unrelated domestic species — dogs, pigs, horses, chickens — suggesting that selecting for tameness inadvertently selects for a suite of linked developmental changes.',
+            'Imagine you have a herd of wild bison. They are fierce, fast, and afraid of humans. Now imagine that every year, a village keeps only the calmest animals and lets them have babies. The aggressive ones are driven away. What happens after a hundred years? After a thousand?',
+            'This is exactly what happened to the mithun. Its wild ancestor is the gaur \u2014 the largest wild bovine on Earth, standing nearly 2 meters tall at the shoulder, with massive horns and a temperament that says "do not approach." About 8,000 years ago, tribes in what is now Arunachal Pradesh began keeping the calmest gaur calves. Generation after generation, the calmer animals bred and the aggressive ones did not.',
+            'The result is striking. Compare a gaur to a mithun side by side: the mithun has a 25% smaller brain, stores more body fat, matures sexually earlier, and calmly approaches humans instead of charging them. These changes are called the "domestication syndrome" \u2014 and the weird thing is, the same package of changes appears in every domesticated animal: dogs, pigs, horses, chickens. Selecting for tameness seems to accidentally select for a whole bundle of other traits.',
           ],
-          keyIdea: 'Artificial selection works like natural selection but with human preference as the driving force — mithun were shaped by 8,000 years of tribal breeding choices.',
+          keyIdea: 'Domestication changes animals profoundly. Selecting for tameness over thousands of years reshapes brains, bodies, and behavior \u2014 the "domestication syndrome."',
+          diagram: 'MithunWildVsDomesticDiagram',
+          checkYourself: 'If you only bred the friendliest wolves for 50 generations, would you expect their ears to change shape? Why?',
+          checkAnswer: 'Yes \u2014 the domestication syndrome links tameness to other traits. Belyaev\'s fox experiment showed that selecting only for friendliness also produced floppy ears, curly tails, and spotted coats within 40 generations.',
         },
         {
-          title: 'Rumen Fermentation: A Biological Chemical Reactor',
+          title: 'Artificial Selection: Humans as the Choosing Force',
           paragraphs: [
-            'Mithun, like all cattle, are ruminants — animals with a specialized four-chambered stomach that can digest cellulose, the tough structural molecule in plant cell walls. The largest chamber, the rumen, functions as a biological fermentation vat holding up to 100 liters in a mithun. It maintains a stable temperature of 39°C, a pH between 6 and 7, and an anaerobic (oxygen-free) environment — perfect conditions for the trillions of microorganisms that do the actual work of digestion.',
-            'The rumen microbiome is extraordinarily complex: it contains over 200 species of bacteria, 100 species of protozoa, and numerous species of fungi and archaea. These organisms break down cellulose and hemicellulose into volatile fatty acids (primarily acetic, propionic, and butyric acid), which are absorbed through the rumen wall and serve as the animal\'s main energy source — providing 60-80% of its caloric needs. The mithun does not actually digest grass itself; its microbial partners do.',
-            'A byproduct of rumen fermentation is methane (CH₄), produced by methanogenic archaea. A single adult mithun produces roughly 60-80 kg of methane per year through belching. This is environmentally significant because methane is about 80 times more potent as a greenhouse gas than CO₂ over a 20-year period. Globally, ruminant livestock contribute approximately 14.5% of human-caused greenhouse gas emissions. Research is ongoing to modify rumen microbiomes using feed additives (like seaweed extracts) to reduce methane output without harming digestion.',
+            'In nature, the environment decides who survives: the fastest gazelle escapes the lion, the strongest tree survives the storm. This is natural selection. But in artificial selection, humans replace the environment as the deciding force. We choose which animals breed based on what WE want \u2014 more milk, bigger size, calmer temperament.',
+            'Here is the key idea: you do not need to understand genetics to do artificial selection. Farmers have been doing it for 10,000 years without knowing what DNA is. The logic is simple: pick the best, breed the best, repeat. If you want bigger mithun, you let only the biggest ones have calves. If you want mithun with white stockings on their legs (a highly prized pattern), you breed only the ones with that marking.',
+            'How fast does it work? Faster than you might think. If you select the top 30% of a herd each generation, the average trait value can double in just 10 generations. The Russian scientist Dmitri Belyaev proved this dramatically: he selected the friendliest wild foxes each generation, and within 40 generations \u2014 less than a human lifetime \u2014 he had foxes that wagged their tails, licked human hands, and looked nothing like their wild ancestors.',
           ],
-          keyIdea: 'The rumen is a living fermentation chamber where trillions of microbes break down cellulose into fatty acids — the mithun outsources its digestion.',
-          diagram: 'FermentationDiagram',
+          keyIdea: 'Artificial selection is simple but powerful: pick the individuals with the traits you want, breed them, repeat. In just a few generations, you can dramatically shift an entire population.',
+          diagram: 'MithunSelectionDiagram',
+          checkYourself: 'If a farmer selects the top 30% of mithun for body size each generation, will the BOTTOM of the size range also shift upward over time?',
+          checkAnswer: 'Yes! The entire distribution shifts. Even the smallest mithun in generation 10 will likely be larger than the average mithun in generation 0, because the genes for small size have been steadily removed from the breeding pool.',
         },
         {
-          title: 'Livestock Diversity and Genetic Conservation',
+          title: 'How Traits Change Over Generations',
           paragraphs: [
-            'The mithun is one of approximately 1,000 recognized livestock breeds worldwide, and it represents a category of particular conservation concern: locally adapted heritage breeds. Unlike commercial breeds (such as Holstein cattle, optimized for milk production), mithun are adapted to steep terrain, dense forest, and the specific diseases and parasites of tropical highland environments. This local adaptation is encoded in their DNA and cannot be recreated once lost.',
-            'The FAO estimates that roughly one livestock breed goes extinct every month. As commercial agriculture spreads globally, farmers replace diverse local breeds with a handful of high-production commercial breeds. The result is a dramatic narrowing of the genetic base. Over 90% of the world\'s dairy production now comes from just two breeds (Holstein and Jersey). This genetic monoculture is extremely vulnerable — a single disease could devastate the global herd because all animals share the same susceptibilities.',
-            'Conservation of breeds like the mithun is not just cultural preservation — it is a form of biological insurance. Mithun carry genes for heat tolerance, parasite resistance, foraging ability, and adaptation to nutrient-poor diets that commercial breeds have lost. If climate change, new diseases, or other challenges arise, these genes may prove invaluable. Gene banks (which store frozen semen and embryos) and community-based breeding programs in Northeast India are working to maintain mithun genetic diversity for future generations.',
+            'Let us think about what actually happens inside the population. Every mithun carries genes \u2014 instructions in its DNA \u2014 that influence traits like size, coat color, horn shape, and temperament. Each parent passes half its genes to its offspring. The offspring is a new combination of both parents\' genes, plus small random mutations (copying errors in the DNA).',
+            'When you select the top 30% for breeding, you are filtering the gene pool. Genes that contribute to the desired trait become more common each generation. Genes that work against it become rarer. This is not instant \u2014 it is like slowly turning a dial. After 5 generations, the shift is noticeable. After 20, it is dramatic. After 200, the animal may look like a completely different species.',
+            'But here is the trade-off: every time you select strongly for one trait, you risk losing genes for other things. If you breed only for size, you might accidentally lose genes for disease resistance, heat tolerance, or fertility. This is why the mithun is so valuable \u2014 unlike commercial cattle bred intensely for milk or meat, mithun have been selected gently over millennia, preserving a rich genetic diversity that includes adaptations to steep terrain, poor-quality forage, and tropical diseases.',
           ],
-          keyIdea: 'Heritage livestock breeds like the mithun carry irreplaceable genetic adaptations — losing breed diversity leaves global agriculture vulnerable to future threats.',
+          keyIdea: 'Selection filters the gene pool \u2014 desired genes become common, others become rare. Strong selection for one trait risks losing valuable genes for other traits.',
+          diagram: 'MithunTraitChangeDiagram',
+          checkYourself: 'Why might a breed of cattle selected intensely for milk production be MORE vulnerable to a new disease than a heritage breed like the mithun?',
+          checkAnswer: 'Intense selection narrows the gene pool. Genes for disease resistance may have been lost because they were never selected for. Heritage breeds like the mithun retain wider genetic diversity, including disease-resistance genes that commercial breeds have lost.',
+        },
+        {
+          title: 'The Mithun as Cultural Keystone',
+          paragraphs: [
+            'A keystone species in ecology is one whose removal would cause the whole ecosystem to change dramatically. The mithun is a cultural keystone \u2014 its removal would transform the social fabric of hill tribes across Northeast India. Among the Adi, Nishi, and Apatani peoples of Arunachal Pradesh, mithun serve as currency (bride price is measured in mithun), markers of social status (owning many mithun signals wealth and leadership), and the centerpiece of every important ceremony.',
+            'But the mithun is also a genetic keystone. It carries genes adapted to conditions that no commercial breed can handle: steep mountain slopes at 2,000+ meters, dense tropical forest with minimal open grazing, and resistance to diseases specific to the region. These genes cannot be recreated in a laboratory. If the mithun disappears, those adaptations are gone forever.',
+            'The threat is real. As young people migrate to cities and commercial cattle breeds are promoted for higher milk yield, mithun populations are declining. The FAO estimates that roughly one livestock breed goes extinct every month worldwide. Conservation programs in Northeast India are now working to maintain mithun genetic diversity through community breeding programs and gene banks \u2014 because protecting the mithun protects not just a culture, but a genetic library that may prove critical if climate change or new diseases challenge agriculture in the future.',
+          ],
+          keyIdea: 'The mithun is both a cultural and genetic keystone \u2014 its loss would transform tribal society AND erase irreplaceable adaptations to mountain environments.',
+          diagram: 'MithunKeystoneDiagram',
+          checkYourself: 'Why is a gene bank not a complete substitute for keeping live mithun populations in their natural environment?',
+          checkAnswer: 'A gene bank preserves frozen DNA, but living populations continue to evolve and adapt to changing conditions. New mutations, new disease resistances, and behavioral adaptations only happen in living herds. A gene bank is insurance, not a replacement.',
         },
       ],
       vocabulary: [
-        ['Domestication', 'The process of taming and breeding wild animals over generations for human use — the mithun was domesticated from the wild gaur thousands of years ago'],
-        ['Selective breeding', 'Choosing which animals reproduce based on desired traits — over generations, this changes the population\'s characteristics'],
-        ['Genetic diversity', 'The variety of genes within a population — high genetic diversity makes a species more resilient to disease and environmental change'],
-        ['Heritage breed', 'A traditional livestock breed developed over centuries in a specific region, carrying unique genetic adaptations to local conditions'],
-        ['Gene bank', 'A facility that stores frozen genetic material (semen, embryos, seeds) to preserve biodiversity for future generations'],
+        ['Domestication', 'The process of taming and breeding wild animals over generations for human use \u2014 the mithun was domesticated from the wild gaur about 8,000 years ago'],
+        ['Artificial selection', 'When humans choose which animals breed based on desired traits \u2014 over generations, this shifts the entire population toward those traits'],
+        ['Domestication syndrome', 'A bundle of changes that appear together when animals are selected for tameness: smaller brains, floppy ears, spotted coats, earlier maturity'],
+        ['Gene pool', 'The total collection of genes in a breeding population \u2014 narrow gene pools (few breeds) are vulnerable, diverse ones are resilient'],
+        ['Cultural keystone species', 'A species so central to a community\'s identity, economy, and rituals that its loss would transform the entire social system'],
       ],
       trueFalse: [
-        { statement: 'The mithun is a completely wild animal that has never been domesticated.', isTrue: false, explanation: 'The mithun (Bos frontalis) is a semi-domesticated bovine, domesticated from the wild gaur (Bos gaurus) thousands of years ago by the indigenous peoples of Northeast India and Southeast Asia. They roam freely in forests but return to villages and respond to human management — a unique form of free-range husbandry.' },
-        { statement: 'Selective breeding can change animal traits over just a few generations.', isTrue: true, explanation: 'By choosing which animals breed, humans can shift traits surprisingly fast. Russian scientist Dmitri Belyaev famously domesticated wild foxes in just 40 generations by selecting only the friendliest individuals. Each generation, the foxes became tamer, and their appearance changed too — floppy ears, curly tails, and spotted coats appeared.' },
-        { statement: 'Using only one or two livestock breeds worldwide is safer than maintaining many breeds.', isTrue: false, explanation: 'Genetic monoculture is extremely risky. If a single disease evolved to target Holstein cattle, over 90% of the world\'s dairy production could collapse. Heritage breeds like the mithun carry unique genes for disease resistance, heat tolerance, and adaptation to harsh terrain — genetic insurance that commercial breeds have lost.' },
+        { statement: 'The mithun is a completely wild animal that has never been domesticated.', isTrue: false, explanation: 'The mithun (Bos frontalis) is semi-domesticated, bred from the wild gaur over about 8,000 years by hill tribes of Northeast India. They roam freely in forests but return to villages voluntarily \u2014 a unique form of free-range husbandry.' },
+        { statement: 'Selecting only for tameness can accidentally change an animal\'s ear shape and coat color.', isTrue: true, explanation: 'This is the domestication syndrome. Belyaev\'s fox experiment proved it: selecting ONLY for friendliness also produced floppy ears, curly tails, spotted coats, and shorter snouts within 40 generations. The genes for these traits are linked.' },
+        { statement: 'Using only one or two livestock breeds worldwide is safer than maintaining many breeds.', isTrue: false, explanation: 'Genetic monoculture is extremely risky. If a disease targeted Holstein cattle, over 90% of global dairy could collapse. Heritage breeds like mithun carry unique genes for disease resistance and harsh-terrain survival \u2014 genetic insurance commercial breeds have lost.' },
       ],
       facts: [
-        'The mithun is considered sacred by many indigenous communities in Arunachal Pradesh, Nagaland, Manipur, and Mizoram. It serves as a form of currency, a marker of social status, and plays a central role in festivals, weddings, and rituals.',
-        'Dogs were the first domesticated animal, tamed from wolves roughly 15,000-40,000 years ago. Since then, humans have domesticated only about 40 animal species — out of roughly 50,000 mammal and bird species on Earth. Successful domestication requires specific behavioral traits including low aggression and tolerance of crowding.',
-        'The FAO estimates roughly one livestock breed goes extinct every month worldwide. Of approximately 1,000 recognized breeds, about 17% are at risk of extinction as commercial agriculture replaces diverse local breeds with a handful of high-production varieties.',
+        'The mithun is sacred to many indigenous communities across Arunachal Pradesh, Nagaland, Manipur, and Mizoram. It serves as currency for bride price, a marker of social status, and the centerpiece of festivals and ceremonies.',
+        'Dogs were the first domesticated animal, tamed from wolves roughly 15,000\u201340,000 years ago. Since then, humans have domesticated only about 40 animal species out of roughly 50,000 mammal and bird species on Earth.',
+        'The FAO estimates roughly one livestock breed goes extinct every month worldwide. Of about 1,000 recognized breeds, 17% are at risk of extinction as commercial agriculture replaces diverse local breeds.',
       ],
-      offlineActivity: 'Try a selective breeding simulation with paper. Draw 20 "creatures" — simple shapes with random traits (long/short legs, big/small ears, spotted/plain body, curly/straight tail). Now imagine you want tall creatures: select the 5 tallest, discard the rest, and draw 20 new offspring that look like the selected parents but with small random variations. Repeat for 3 "generations." Compare your final generation to the original 20 — you should see a clear shift toward tallness. This is exactly how selective breeding works in real livestock.',
+      offlineActivity: 'Try a selective breeding simulation with paper. Draw 20 "creatures" \u2014 simple shapes with random traits (long/short legs, big/small ears, spotted/plain body). Select the 5 tallest, discard the rest, and draw 20 new offspring that look like the selected parents but with small random variations. Repeat for 3 "generations." Compare your final generation to the original 20 \u2014 you should see a clear shift toward tallness.',
+      offlineActivityDiagram: 'ActivityBreedingSimDiagram',
+      codeTeaser: `import numpy as np
+import matplotlib.pyplot as plt
+
+# Simulate selective breeding: 20 animals, 10 generations
+population = np.random.normal(50, 15, 20)  # starting trait values
+
+averages = [population.mean()]
+for gen in range(10):
+    selected = population[population >= np.percentile(population, 70)]
+    offspring = np.random.normal(selected.mean(), 8, 20)
+    population = offspring
+    averages.append(population.mean())
+
+plt.plot(averages, marker='o', linewidth=2)
+plt.xlabel("Generation")
+plt.ylabel("Average trait value")
+plt.title("Selective Breeding Shifts the Population")
+plt.show()  # Watch the average climb!`,
+      referenceLinks: [
+        { slug: 'natural-selection-and-evolution', reason: 'Deep dive into how natural selection works \u2014 the wild version of artificial selection' },
+        { slug: 'genetics-and-heredity', reason: 'Understand DNA, genes, and how traits pass from parent to offspring \u2014 the mechanism behind selection' },
+      ],
+      nextLessons: [
+        { slug: 'seed-keeper-of-nagaland', reason: 'Applies the same selection principles to crops \u2014 seed keepers are plant breeders using the same logic' },
+        { slug: 'dancing-deer-loktak', reason: 'Explores another culturally important NE Indian animal and its conservation challenges' },
+        { slug: 'red-panda-mask', reason: 'Connects natural selection and evolution to camouflage \u2014 the wild version of what breeders do artificially' },
+      ],
+      quiz: [
+        { question: 'What is the wild ancestor of the mithun?', options: ['Yak', 'Gaur (Bos gaurus)', 'Water buffalo', 'Bison'], answer: 1 },
+        { question: 'What is the "domestication syndrome"?', options: ['A disease that affects domestic animals', 'A bundle of trait changes (smaller brains, floppy ears, etc.) that appear when selecting for tameness', 'The inability of domestic animals to survive in the wild', 'A genetic disorder caused by inbreeding'], answer: 1 },
+        { question: 'If you select the top 30% of a herd for size each generation, what happens to the average size?', options: ['It stays the same', 'It decreases because smaller animals are more fit', 'It increases steadily over generations', 'It fluctuates randomly'], answer: 2 },
+        { question: 'Why is genetic diversity in livestock important?', options: ['It makes animals look more interesting', 'It ensures all animals are identical', 'It provides resistance to diseases and adaptation to new challenges', 'It is not important'], answer: 2 },
+        { question: 'Why is the mithun called a "cultural keystone species"?', options: ['Because it is the largest animal in NE India', 'Because it is used in building construction', 'Because its removal would transform tribal society, economy, and rituals', 'Because it is the only domesticated animal in the region'], answer: 2 },
+      ],
     },
   },
   {
@@ -7045,6 +7132,7 @@ That is why, in the forests of Northeast India, you will always find the sal and
       project: {
         title: 'Compare Wood Strength Across Tree Species',
         description: 'Research and visualize the material properties of different wood types, explaining why some trees bend and others break.',
+        outputDiagram: 'WoodStrengthOutputDiagram',
         steps: [
           'Collect published data on density, tensile strength, and elasticity for 8-10 wood species',
           'Create a scatter plot of strength vs density and look for patterns',
@@ -7069,53 +7157,104 @@ That is why, in the forests of Northeast India, you will always find the sal and
     level0: {
       concepts: [
         {
-          title: 'Phenology: The Calendar of the Forest',
+          title: 'Heartwood vs Sapwood: The Two Lives of a Tree Trunk',
           paragraphs: [
-            'Phenology is the study of recurring biological events and their relationship to climate. In a deciduous forest, the most dramatic phenological event is the annual cycle of leaf production and leaf fall. Sal trees (Shorea robusta), the dominant species in the forests of Assam and much of South and Southeast Asia, are "dry-deciduous" — they drop their leaves not in cold winter (as temperate trees do) but in the hot, dry months of February to April, flushing new leaves just before the monsoon arrives.',
-            'This timing is not accidental. Leaves are the tree\'s photosynthetic factories, but they are also the main sites of water loss through transpiration. During the dry season, when soil moisture is low, maintaining a full canopy of transpiring leaves would create a fatal water deficit. By shedding leaves, the sal tree reduces water loss by up to 95%. The fallen leaves also form a thick litter layer on the forest floor that retains soil moisture, suppresses competing seedlings, and eventually decomposes to release nutrients.',
-            'Phenological timing is controlled by a combination of environmental cues (photoperiod, temperature, soil moisture) and internal hormones (primarily abscisic acid for leaf fall and gibberellins for new leaf production). Climate change is disrupting these cues — warmer winters and shifting monsoon patterns cause trees to leaf out earlier or later than their historical schedule, potentially creating mismatches with pollinators, seed dispersers, and herbivores that depend on the tree\'s seasonal rhythms.',
+            'Cut a tree trunk in half and you will see rings \u2014 everyone knows that. But look more carefully and you will notice something else: the outer rings are lighter in color and the inner rings are darker. These are two fundamentally different materials, and understanding why is the key to understanding wood strength.',
+            'The outer, lighter zone is sapwood. It is alive. Its cells are actively transporting water from the roots to the leaves \u2014 a sal tree can move over 500 liters per day through this zone. The inner, darker zone is heartwood. It is dead. But "dead" does not mean "useless." As sapwood cells age and stop transporting water, the tree fills them with resins, tannins, and oils that make them incredibly hard and resistant to rot, insects, and fungi.',
+            'This is why heartwood is the prized part of timber. Sal heartwood is so dense (specific gravity 0.88) that it actually sinks in water \u2014 most woods float. Builders in Assam and across South Asia have used sal heartwood for centuries in temples, bridges, and railway sleepers because it resists decay for decades without chemical treatment. The sapwood, by contrast, rots within a few years if exposed to moisture.',
           ],
-          keyIdea: 'Sal trees drop leaves in the dry season to conserve water — phenology is the science of how organisms time their life events to match seasonal conditions.',
+          keyIdea: 'Sapwood is alive and carries water; heartwood is dead but packed with resins that make it the strongest, most rot-resistant part of the trunk.',
+          diagram: 'SalHeartwoodDiagram',
+          checkYourself: 'If you cut a plank from the very center of a sal tree and another from just under the bark, which would last longer outdoors? Why?',
+          checkAnswer: 'The center plank (heartwood) would last far longer. It is packed with natural resins and tannins that resist rot and insects. The outer plank (sapwood) lacks these chemicals and would decay within a few years in wet conditions.',
         },
         {
-          title: 'Transpiration: The Invisible River',
+          title: 'Why Wood Is Strong: Cellulose + Lignin',
           paragraphs: [
-            'A large sal tree can transpire over 500 liters of water per day during the growing season — pulled from the soil, through the trunk, and out through microscopic pores in the leaves called stomata. This water movement is entirely passive (no pump needed) and is powered by the evaporation of water from leaf surfaces. As water molecules evaporate from the stomatal pore, they pull on the continuous chain of water molecules stretching all the way down to the roots. This is the cohesion-tension theory of water transport.',
-            'The physics behind this are remarkable. Water molecules stick to each other through hydrogen bonds (cohesion) and stick to the walls of the xylem vessels (adhesion). These forces create a continuous water column under tension — literally being pulled upward by evaporation at the top. The tension can be enormous: in a tall tree, the water column may be under negative pressure of -1 to -2 MPa (about 10-20 times atmospheric pressure). This is like sucking water through a 100-meter straw — possible only because the cohesive strength of water is sufficient to resist breaking.',
-            'Stomata are the regulators of this system. Each stoma is formed by two kidney-shaped guard cells that can swell (opening the pore) or shrink (closing it). When the plant has plenty of water and needs CO₂ for photosynthesis, stomata open. When water is scarce or the air is very dry, the hormone abscisic acid signals the guard cells to close, sacrificing photosynthesis to prevent lethal dehydration. A single sal leaf may have 10,000-30,000 stomata per square centimeter, each independently regulated.',
+            'What makes wood strong? The answer is a brilliant two-component system that nature invented long before humans invented reinforced concrete \u2014 and it works on the exact same principle.',
+            'About 45% of wood is cellulose \u2014 long chains of glucose sugar molecules twisted into fibers. These fibers are incredibly strong when you pull on them (high tensile strength), like tiny ropes running through the wood. But ropes by themselves would just bend and buckle. That is where lignin comes in.',
+            'Lignin makes up about 25% of wood. It is a complex 3D polymer that fills all the spaces between the cellulose fibers, acting like cement or glue. Lignin resists compression \u2014 it prevents the fibers from buckling when you push on them. Cellulose handles pulling forces. Lignin handles pushing forces. Together, they create a composite material that is strong in both directions. This is exactly the same principle as reinforced concrete: steel rebar handles tension, concrete handles compression. Nature got there 400 million years before human engineers did.',
           ],
-          keyIdea: 'Trees pull water from roots to leaves through passive tension in continuous water columns — no pumping required, powered entirely by evaporation.',
-          diagram: 'WaterCycleDiagram',
+          keyIdea: 'Wood is nature\'s reinforced concrete: cellulose fibers resist pulling (like steel rebar) and lignin resists crushing (like cement). Together, they are far stronger than either alone.',
+          diagram: 'SalCelluloseLigninDiagram',
+          checkYourself: 'Reinforced concrete uses steel rebar for tension and concrete for compression. What are the wood equivalents of rebar and concrete?',
+          checkAnswer: 'Cellulose fibers are the "rebar" (resisting tension/pulling forces) and lignin is the "concrete" (resisting compression/crushing forces). The parallel is nearly exact.',
         },
         {
-          title: 'Wood Anatomy and Carbon Storage',
+          title: 'Grain Direction: Why Splitting Wood Is Easy but Breaking It Is Hard',
           paragraphs: [
-            'Wood is one of the most sophisticated materials in nature. Sal wood is classified as "hardwood" — not because it is necessarily harder than other woods (though sal is indeed very hard, with a Janka hardness of 1,070 lbf), but because it comes from an angiosperm (flowering plant) rather than a gymnosperm (conifer). Hardwoods and softwoods differ fundamentally in their cellular anatomy.',
-            'Sal wood contains three main cell types: vessels (large tubes, 50-300 μm diameter, that transport water), fibers (narrow, thick-walled cells that provide structural support), and ray cells (horizontal chains that transport nutrients laterally and store starch). The arrangement of these cells creates the "grain" pattern visible when wood is cut. In sal, the vessels are arranged in a semi-ring-porous pattern — larger vessels form in the early growing season (when water is plentiful) and smaller vessels later, creating visible growth rings.',
-            'From a climate perspective, wood is a massive carbon store. Approximately 50% of the dry weight of wood is carbon, captured from atmospheric CO₂ through photosynthesis. A mature sal tree stores roughly 1,000-2,000 kg of carbon in its trunk, branches, and roots. Globally, forests contain about 860 billion tonnes of carbon — more than twice the amount in the atmosphere. When forests are cleared and burned, this stored carbon is released as CO₂, making deforestation responsible for approximately 10% of global greenhouse gas emissions.',
-            'Sal forests in Assam and across South Asia represent a significant carbon sink. Conservation and restoration of these forests is one of the most cost-effective strategies for mitigating climate change — far cheaper per tonne of CO₂ than most technological solutions. The sal tree\'s hard, durable wood also stores carbon for decades to centuries when used in construction, effectively extending the carbon storage beyond the tree\'s lifetime.',
+            'Try this thought experiment: take a wooden plank and push on it from the end (along the grain). Then try pushing from the side (across the grain). The difference is enormous \u2014 wood is 10 to 20 times stronger along the grain than across it. Why?',
+            'Because all those cellulose fibers run in one direction \u2014 along the trunk, from roots to leaves. When you push along the grain, you are trying to compress or stretch fibers that are aligned to resist exactly that force. When you push across the grain, you are trying to separate fibers from each other \u2014 and the sideways bonds between fibers are much weaker than the fibers themselves.',
+            'This is why you can split a log with a wedge (separating fibers) but you cannot snap a log in half by bending it (stretching fibers). Carpenters have known this for thousands of years: always load wood along the grain, never across it. A sal floor beam loaded correctly can support a car. Loaded the wrong way, a child could snap it. This property \u2014 being strong in one direction and weak in another \u2014 is called anisotropy, and it is one of the most important concepts in material science.',
           ],
-          keyIdea: 'About 50% of wood is carbon captured from the atmosphere — forests are the largest land-based carbon store, and their loss accelerates climate change.',
+          keyIdea: 'Wood is anisotropic: 10\u201320x stronger along the grain than across it, because cellulose fibers all run in one direction. Carpenters must always respect the grain.',
+          diagram: 'SalGrainDirectionDiagram',
+          checkYourself: 'Why can you tear a newspaper straight down the page easily, but tearing it sideways produces a ragged edge?',
+          checkAnswer: 'Newspaper is made of cellulose fibers that are mostly aligned in one direction (the machine direction). Tearing along the fibers is easy \u2014 you are just separating them. Tearing across them is hard because you are breaking the fibers themselves. Same principle as wood grain.',
+        },
+        {
+          title: 'Sustainable Forestry: Harvesting Without Destroying',
+          paragraphs: [
+            'Sal trees grow slowly. A sal takes 60 or more years to reach harvestable size. This means that if you cut down a sal forest today, the replacement forest will not be ready for your grandchildren. This is the fundamental challenge of forestry: how do you use wood without running out of trees?',
+            'The answer is sustainable forestry \u2014 a system where you never harvest faster than the forest can regrow. In practice, this means dividing a forest into sections, harvesting only one section at a time, replanting immediately, and not returning to that section for 60+ years. At any given moment, the forest contains trees of every age \u2014 from seedlings to mature giants \u2014 and the total amount of wood stays roughly constant over time.',
+            'Sal forests across India were devastated by colonial-era logging that ignored this principle. The British extracted millions of tonnes of sal timber for railway sleepers without replanting. Today, India\'s Forest Survey tracks every major forest by satellite, and community forestry programs in Assam and Meghalaya give local villagers responsibility for managing and protecting their own forest sections. The rule is simple but hard to follow: never take more than the forest gives back.',
+          ],
+          keyIdea: 'Sustainable forestry means never harvesting faster than the forest regrows \u2014 it requires planning decades ahead and treating the forest as a renewable resource, not a mine.',
+          diagram: 'SalForestryDiagram',
+          checkYourself: 'If a sal forest has 1,000 mature trees and each takes 60 years to grow, how many can you harvest per year without shrinking the forest?',
+          checkAnswer: 'About 16\u201317 trees per year (1,000 \u00F7 60). You must replant each harvested tree immediately. This ensures that after 60 years, the first replanted trees are mature and the cycle continues indefinitely.',
         },
       ],
       vocabulary: [
-        ['Photosynthesis', 'The process plants use to convert sunlight, water, and CO₂ into sugar and oxygen'],
-        ['Chlorophyll', 'The green pigment in plants that absorbs sunlight for photosynthesis'],
-        ['Vegetative propagation', 'Growing a new plant from a fragment of the parent — without seeds'],
-        ['Totipotent', 'A cell that can develop into any cell type — plant cells have this superpower'],
-        ['Cell wall', 'A rigid outer layer made of cellulose that gives plant cells their shape and strength'],
+        ['Heartwood', 'The dark, dead inner wood of a tree trunk \u2014 packed with resins that make it incredibly hard and rot-resistant'],
+        ['Sapwood', 'The light, living outer wood that actively transports water \u2014 weaker and more prone to decay than heartwood'],
+        ['Cellulose', 'Long chains of glucose molecules twisted into fibers \u2014 the main structural component of wood, providing tensile strength'],
+        ['Lignin', 'A complex 3D polymer that fills spaces between cellulose fibers \u2014 provides compression strength and waterproofing'],
+        ['Anisotropy', 'Being stronger in one direction than another \u2014 wood is anisotropic because its fibers all run along the grain'],
       ],
       trueFalse: [
-        { statement: 'Plants eat soil to get their food.', isTrue: false, explanation: 'Plants make their own food through photosynthesis using sunlight, water, and CO₂ from air. The soil provides minerals and water, but the actual "food" (sugar) is manufactured inside the leaves using solar energy.' },
-        { statement: 'A single plant cell can grow into an entire new plant.', isTrue: true, explanation: 'Unlike most animal cells, many plant cells are totipotent — they retain the ability to become any cell type. This is why you can grow a new plant from a cutting — the cut stem cells reorganize into roots, stems, and leaves.' },
-        { statement: 'All plants reproduce using seeds.', isTrue: false, explanation: 'Many plants can also reproduce vegetatively — through cuttings, runners, tubers, or bulbs. Every banana plant in your grocery store is a clone, grown from a cutting rather than a seed.' },
+        { statement: 'Heartwood is alive and actively transports water through the tree.', isTrue: false, explanation: 'Heartwood is dead. Its cells stopped transporting water years ago and were filled with resins and tannins. Sapwood (the outer ring) is the living, water-transporting part. Heartwood\'s strength comes from being "retired and preserved."' },
+        { statement: 'Wood is equally strong in all directions.', isTrue: false, explanation: 'Wood is anisotropic \u2014 10 to 20 times stronger along the grain than across it. This is because cellulose fibers all run in one direction. Carpenters must always load wood along the grain for maximum strength.' },
+        { statement: 'Sal heartwood is so dense that it sinks in water.', isTrue: true, explanation: 'Sal heartwood has a specific gravity of about 0.88 (water is 1.0). While it technically floats, barely, freshly cut sal with some moisture content often sinks. Most other common woods float easily at 0.4\u20130.6 specific gravity.' },
       ],
       facts: [
-        'Photosynthesis produces all the oxygen we breathe. Every other breath you take comes from algae and plants splitting water molecules apart.',
-        'The world\'s largest organism is a clonal colony of aspen trees in Utah called "Pando" — 47,000 tree stems all connected by a single root system, weighing 6,600 tonnes.',
-        'Tulsi (holy basil) contains eugenol, a natural antiseptic. Traditional medicine used it for centuries — modern science has confirmed its antimicrobial properties.',
+        'Sal (Shorea robusta) is one of the most important timber trees in South Asia. Its heartwood has been used for over 2,000 years in temples, bridges, and buildings \u2014 some ancient sal structures are still standing.',
+        'Wood is about 50% carbon by dry weight, captured from atmospheric CO\u2082 through photosynthesis. A mature sal tree stores 1,000\u20132,000 kg of carbon. Using sal in buildings effectively stores that carbon for decades or centuries.',
+        'The word "anisotropy" comes from Greek: "an" (not) + "iso" (equal) + "tropos" (direction). It describes any material that behaves differently depending on which direction you test it \u2014 wood, carbon fiber, and even your muscles are all anisotropic.',
       ],
-      offlineActivity: 'Take a cutting from a plant (a small piece of stem with a few leaves). Place it in a glass of water on a windowsill. Check every day — within a week, you should see tiny roots forming. You\'re witnessing vegetative propagation — the same process that makes Tejimola\'s story biologically plausible.',
+      offlineActivity: 'Test grain direction yourself. Take two thin wooden sticks (popsicle sticks or thin branches). Try to snap one by pulling along its length \u2014 very difficult. Now try to split another by pushing a knife or nail into the end grain \u2014 it splits easily along the fibers. This is anisotropy in action. For a bonus test, try tearing a newspaper top-to-bottom (smooth tear) vs side-to-side (ragged tear) \u2014 same principle, because paper is made of aligned cellulose fibers too.',
+      offlineActivityDiagram: 'ActivityWoodTestDiagram',
+      codeTeaser: `import matplotlib.pyplot as plt
+
+# Compare wood species: density vs strength
+species = ["Balsa", "Pine", "Oak", "Sal", "Teak"]
+density = [0.16, 0.50, 0.60, 0.88, 0.65]  # g/cm\u00B3
+strength = [12, 40, 55, 78, 62]            # MPa (along grain)
+
+plt.scatter(density, strength, s=100, c='sienna')
+for i, name in enumerate(species):
+    plt.annotate(name, (density[i], strength[i]),
+                 textcoords="offset points", xytext=(8, 5))
+plt.xlabel("Density (g/cm\u00B3)")
+plt.ylabel("Tensile Strength (MPa)")
+plt.title("Denser Wood = Stronger Wood?")
+plt.show()  # What pattern do you see?`,
+      referenceLinks: [
+        { slug: 'materials-and-properties', reason: 'Explore tensile strength, elasticity, and hardness across materials \u2014 the science behind why some things break and others bend' },
+        { slug: 'ecology-and-ecosystems', reason: 'Understand forest ecosystems and why sustainable management matters for climate and biodiversity' },
+      ],
+      nextLessons: [
+        { slug: 'bridge-that-grew', reason: 'Living root bridges in Meghalaya use tree roots as structural members \u2014 wood science meets bio-engineering' },
+        { slug: 'girl-who-grew-forest', reason: 'Explores forest ecology, succession, and carbon storage \u2014 the bigger picture of why forests like sal matter' },
+        { slug: 'bamboo-taught-wind', reason: 'Compares bamboo\'s flexibility with sal\'s rigidity \u2014 two completely different material strategies for the same forest' },
+      ],
+      quiz: [
+        { question: 'Which part of a tree trunk is strongest and most rot-resistant?', options: ['Bark', 'Sapwood', 'Heartwood', 'Pith (center)'], answer: 2 },
+        { question: 'What two substances make wood strong, like reinforced concrete?', options: ['Water and minerals', 'Cellulose (tension) and lignin (compression)', 'Chlorophyll and starch', 'Resin and bark'], answer: 1 },
+        { question: 'Why is wood much stronger along the grain than across it?', options: ['The grain direction does not affect strength', 'Cellulose fibers all run along the grain, resisting forces in that direction', 'Heartwood only forms along the grain', 'Lignin is concentrated along the grain'], answer: 1 },
+        { question: 'If a sal tree takes 60 years to mature, how should a forest be managed?', options: ['Cut everything and replant all at once', 'Never cut any trees', 'Harvest a small fraction each year and replant, so trees of all ages coexist', 'Only harvest sapwood and leave heartwood'], answer: 2 },
+        { question: 'What does "anisotropy" mean in material science?', options: ['A material that is equally strong in all directions', 'A material that is stronger in one direction than another', 'A material that changes color when heated', 'A material that dissolves in water'], answer: 1 },
+      ],
     },
   },
   {
@@ -7372,6 +7511,7 @@ If you ever visit Cherrapunji and it's raining — which it almost certainly wil
       project: {
         title: 'Build a Color Mixing Simulator',
         description: 'Create an interactive tool that demonstrates additive and subtractive color mixing, and simulates rainbow formation.',
+        outputDiagram: 'ColorMixerOutputDiagram',
         steps: [
           'Implement RGB additive mixing — overlapping colored lights on a dark background',
           'Implement CMYK subtractive mixing — overlapping pigments on a white background',
@@ -7509,6 +7649,7 @@ And on quiet mornings, when the clouds sit below Tawang like a white ocean, you 
       project: {
         title: 'Analyze Fabric Structure Under Magnification',
         description: 'Examine different fabrics to measure thread count, identify weave patterns, and test fabric strength.',
+        outputDiagram: 'FabricAnalysisOutputDiagram',
         steps: [
           'Collect 5-6 fabric samples: cotton, silk, polyester, denim, muslin',
           'Photograph each under magnification and count threads per centimeter (warp and weft)',
@@ -8569,6 +8710,7 @@ And when the rest of the world asks, "Why do you call them the Seven Sisters?" t
       project: {
         title: 'Build a Comparative Atlas of the Seven Sister States',
         description: 'Create thematic maps comparing the eight northeastern states across area, population, elevation, rainfall, and biodiversity.',
+        outputDiagram: 'NEIndiaAtlasOutputDiagram',
         steps: [
           'Collect data for each state: area, population, highest peak, annual rainfall, number of endemic species',
           'Create a choropleth map color-coded by population density',
@@ -8593,52 +8735,107 @@ And when the rest of the world asks, "Why do you call them the Seven Sisters?" t
     level0: {
       concepts: [
         {
-          title: 'Species Richness and the Concept of Biodiversity',
+          title: 'Political vs Physical Maps: Two Ways to See the Same Land',
           paragraphs: [
-            'The seven states of Northeast India — Arunachal Pradesh, Assam, Manipur, Meghalaya, Mizoram, Nagaland, and Tripura — contain one of the highest concentrations of biological diversity on Earth. This region lies within the Indo-Burma biodiversity hotspot (one of 36 globally recognized hotspots) and contains an estimated 7,500 plant species, 500 bird species, 300 mammal species, and countless invertebrates. Species richness — the simple count of species in a given area — is the most basic measure of biodiversity.',
-            'But species richness alone does not capture the full picture. Biodiversity also includes genetic diversity (the variation in DNA within a species), ecosystem diversity (the variety of habitats and ecological processes), and functional diversity (the range of ecological roles played by different species). Northeast India scores exceptionally high on all four measures: it has many species (richness), many of which are found nowhere else (endemism), across a wide range of habitats from tropical rainforest to alpine meadow (ecosystem diversity), performing the full spectrum of ecological functions from pollination to predation (functional diversity).',
-            'Measuring biodiversity requires systematic sampling. Ecologists use standardized methods including quadrat surveys (counting all species in a fixed area), transect walks (recording species along a defined path), and camera traps (photographing wildlife with motion-triggered cameras). The relationship between sampling effort and species count follows a characteristic "species accumulation curve" that rises steeply at first (common species are found quickly) and then levels off (rare species require much more effort to detect). This curve can be extrapolated to estimate the total number of species in an area, including those not yet discovered.',
+            'Look at a political map of Northeast India and you see borders, state names, capitals \u2014 human-made divisions drawn on paper. Look at a physical map of the same region and you see mountains, rivers, valleys \u2014 natural features that existed millions of years before humans arrived. These are two completely different ways of understanding the same land, and they answer different questions.',
+            'A political map answers: "Who governs this territory?" It shows state boundaries (Assam, Nagaland, Meghalaya...), capital cities (Dispur, Kohima, Shillong...), and administrative districts. But it completely ignores terrain \u2014 on a political map, the 6,000-meter Himalayas and the flat Brahmaputra valley look the same. A physical map answers: "What does this land actually look like?" It shows elevation, rivers, mountain ranges, and vegetation zones. But it ignores human-made boundaries entirely.',
+            'Here is the deep connection: political boundaries often follow physical features. The Brahmaputra valley defines Assam. The Patkai Range separates Nagaland from Myanmar. The Shillong Plateau sets Meghalaya apart from the plains below. Rivers and mountain ridges naturally divide communities \u2014 different sides develop different languages, cultures, and identities \u2014 and these natural divisions eventually become state borders. Geography creates culture, and culture creates politics.',
           ],
-          keyIdea: 'Biodiversity is measured across four dimensions — species richness, genetic diversity, ecosystem diversity, and functional diversity — Northeast India excels in all four.',
-          diagram: 'NEIndiaBiomesDiagram',
+          keyIdea: 'Political maps show human divisions (borders, capitals). Physical maps show natural features (mountains, rivers). Often, the physical features CAUSED the political divisions.',
+          diagram: 'PoliticalVsPhysicalMapDiagram',
+          checkYourself: 'Why do most of Northeast India\'s state borders run along mountain ridges rather than through flat valleys?',
+          checkAnswer: 'Mountain ridges are natural barriers that separate communities. People on opposite sides of a ridge develop different languages, cultures, and trade networks over centuries. When political boundaries are drawn, they follow these existing cultural divisions \u2014 which trace the physical geography.',
         },
         {
-          title: 'Endemism: Species Found Nowhere Else',
+          title: 'Scale and Distance: Shrinking the World to Fit on Paper',
           paragraphs: [
-            'An endemic species is one that exists naturally in only one specific geographic area and nowhere else on Earth. Northeast India has an exceptionally high rate of endemism: over 30% of its plant species and about 15% of its vertebrate species are endemic. The hoolock gibbon (India\'s only ape), the golden langur, the pygmy hog, and hundreds of orchid and rhododendron species exist only in this region.',
-            'Endemism arises from a combination of isolation and time. Northeast India\'s unique biogeography — wedged between the Himalayas to the north, the Indo-Gangetic plain to the west, and the hills of Myanmar to the east — has created partial geographic isolation. Species that colonized this region millions of years ago have been evolving in relative isolation ever since, accumulating genetic differences that eventually make them distinct species. The steep altitudinal gradients (from sea level in the Brahmaputra valley to 7,000+ meters in Arunachal) create many distinct climate zones in a small area, promoting speciation.',
-            'Endemic species are disproportionately vulnerable to extinction. Because they exist in only one area, any threat to that area threatens the entire species. A widespread species like the house sparrow can lose habitat in one region and survive in others. An endemic species like the Manipur bush quail has no backup population — if its single habitat is destroyed, the species is gone forever. This is why conservation biologists prioritize regions of high endemism: protecting a small area of Northeast India\'s forest can save species that cannot be saved anywhere else.',
+            'Every map is a lie \u2014 a useful, necessary lie, but a lie nonetheless. The real world is enormous. A piece of paper is small. To fit the world onto paper, you must shrink it. The amount of shrinking is called the scale, and understanding scale is the most fundamental map-reading skill.',
+            'Scale is expressed as a ratio. A scale of 1:100,000 means that 1 centimeter on the map equals 100,000 centimeters (1 kilometer) in reality. A scale of 1:10,000,000 means 1 cm = 100 km. The first is called a large scale map (it shows a small area in great detail \u2014 you can see individual buildings). The second is a small scale map (it shows a huge area with no detail \u2014 you can see whole countries but not cities).',
+            'No single map can show everything. A map detailed enough to show every house in Guwahati would need to be 10 kilometers wide to cover all of Assam at the same detail level \u2014 impossible to print or use. So cartographers choose the right scale for the right purpose: 1:5,000 for a city street map, 1:250,000 for a road atlas, 1:10,000,000 for a wall map of India. Each scale is a trade-off between area covered and detail shown.',
           ],
-          keyIdea: 'Endemic species exist in only one geographic area — Northeast India\'s isolation and altitudinal diversity have created exceptional endemism that is irreplaceable.',
+          keyIdea: 'Scale = how much the real world is shrunk to fit on paper. Large scale = small area, lots of detail. Small scale = large area, no detail. No single scale works for everything.',
+          diagram: 'MapScaleDistanceDiagram',
+          checkYourself: 'On a 1:50,000 map, you measure 3.5 cm between your school and a river. How far is the actual distance?',
+          checkAnswer: '3.5 cm \u00D7 50,000 = 175,000 cm = 1,750 meters = 1.75 km. Every centimeter on the map represents 500 meters (half a kilometer) in reality.',
         },
         {
-          title: 'Hotspot Theory: Protecting the Most With the Least',
+          title: 'Topographic Contour Lines: Making 3D Terrain Flat',
           paragraphs: [
-            'The biodiversity hotspot concept was formalized by ecologist Norman Myers in 1988, later refined by Conservation International. A hotspot must meet two criteria: it must contain at least 1,500 endemic plant species (0.5% of the global total), and it must have lost at least 70% of its original habitat. The 36 recognized hotspots cover just 2.5% of Earth\'s land surface but contain over 50% of all plant species and 42% of all terrestrial vertebrate species as endemics. Protecting hotspots is the most efficient possible conservation strategy.',
-            'The Indo-Burma hotspot, which includes Northeast India, originally covered 2.37 million km² of tropical and subtropical forest. Today, only about 5% of the original habitat remains intact. This massive habitat loss, combined with extraordinary species richness and endemism, makes it one of the highest-priority conservation regions on the planet. The primary drivers of habitat loss are shifting cultivation (jhum), expansion of tea and rubber plantations, logging, infrastructure development, and increasingly, climate change.',
-            'The hotspot approach is a triage strategy — it acknowledges that resources for conservation are limited and must be allocated where they will save the most species per dollar spent. Mathematical analyses show that protecting all 36 hotspots would cost approximately $500 million per year and would safeguard more than half of all terrestrial species. By contrast, spreading the same funding evenly across the globe would protect far fewer species. This utilitarian calculation is controversial — it means some regions receive less conservation attention — but it has proven highly effective at directing funding to where it matters most.',
+            'Northeast India is one of the most mountainous regions on Earth. How do you show a 3D landscape on a flat piece of paper? The answer is contour lines \u2014 one of the most ingenious inventions in the history of cartography.',
+            'A contour line connects all points that are at the same elevation above sea level. Imagine flooding a hill slowly and tracing the waterline at every 100-meter rise. At 100 meters, the waterline forms one loop. At 200 meters, a smaller loop inside the first. At 300 meters, an even smaller loop. These nested loops, printed on a flat map, tell you the shape of the hill without any 3D illusion needed.',
+            'Three rules make contour maps readable: (1) Lines close together mean steep slope \u2014 the elevation changes rapidly over a short horizontal distance. (2) Lines far apart mean gentle slope \u2014 the elevation changes slowly. (3) Lines never cross each other \u2014 because a single point on the ground can only be at one elevation. With these three rules, you can "see" mountains, valleys, cliffs, and plains on a flat piece of paper. NE India\'s contour maps are dramatic: the lines are packed tight along the Himalayan front where elevation rockets from 100 meters to 5,000 meters in just 30 km.',
           ],
-          keyIdea: 'The 36 biodiversity hotspots cover just 2.5% of land but harbor over 50% of endemic plant species — protecting them is the most efficient conservation strategy.',
+          keyIdea: 'Contour lines connect points of equal elevation. Close lines = steep, far-apart lines = gentle, lines never cross. Three simple rules let you read 3D terrain from a flat map.',
+          diagram: 'ContourLinesDiagram',
+          checkYourself: 'On a contour map with 100-meter intervals, you see 8 contour lines packed into a 2 cm space (at 1:50,000 scale). How steep is the slope?',
+          checkAnswer: '8 lines at 100m intervals = 800 meters of elevation change. At 1:50,000, 2 cm = 1,000 meters horizontal distance. So the slope rises 800m over 1,000m horizontal \u2014 that is an 80% grade, extremely steep (like a cliff face). For context, most roads top out at 10\u201315% grade.',
+        },
+        {
+          title: 'Why Northeast India Has 8 States: Geography Shapes History',
+          paragraphs: [
+            'When India became independent in 1947, almost all of what is now the seven sister states plus Sikkim was part of a single state: Assam. Over the next 40 years, six new states were carved out \u2014 Nagaland (1963), Meghalaya, Manipur, and Tripura (1972), and Arunachal Pradesh and Mizoram (1987). Sikkim joined India in 1975. Why did one state become eight?',
+            'The answer is geography. Northeast India is cut through by mountain ranges, deep valleys, and fast-flowing rivers that isolate communities from each other. The Patkai Range separates the Naga hills from Myanmar. The Barail Range divides Assam from Manipur. The Shillong Plateau elevates Meghalaya above the surrounding plains. Each isolated valley or plateau developed its own language, culture, and identity over thousands of years \u2014 the region has over 200 distinct ethnic groups and more than 400 languages.',
+            'These distinct communities were lumped together administratively under British colonial rule and then under a single state of Assam after independence. But cultural identity does not obey administrative convenience. One by one, each community demanded and won self-governance. The "Seven Sisters" nickname (coined by journalist Jyoti Prasad Saikia in 1972) captures this: seven siblings, born of the same mountains and rivers, but each with a distinct personality shaped by the particular valley or plateau they call home.',
+          ],
+          keyIdea: 'Mountains and rivers isolated NE India\'s communities for millennia, creating 200+ ethnic groups with distinct languages and cultures \u2014 geography made one state into eight.',
+          diagram: 'NEIndiaStatesDiagram',
+          checkYourself: 'If the Brahmaputra valley were surrounded by flat plains instead of mountains, do you think Northeast India would have as many distinct ethnic groups? Why or why not?',
+          checkAnswer: 'Probably not. Mountains and rivers act as barriers that isolate communities. Without these barriers, people would mix, trade, and intermarry more freely, and languages and cultures would blend rather than diversifying. Flat terrain encourages uniformity; rugged terrain encourages diversity.',
         },
       ],
       vocabulary: [
-        ['Topography', 'The shape and features of the land surface — mountains, valleys, rivers, and plains shown on a map'],
-        ['Contour line', 'A line on a map connecting points of equal elevation — closely spaced lines mean steep terrain'],
-        ['Biodiversity hotspot', 'A region with exceptionally high numbers of unique species that has lost most of its original habitat'],
-        ['Endemic species', 'A species found naturally in only one geographic area and nowhere else on Earth'],
-        ['Tectonic plate', 'A massive slab of Earth\'s crust that slowly moves — the collision of the Indian and Eurasian plates created the Himalayas'],
+        ['Political map', 'A map showing human-made divisions: state borders, capitals, districts \u2014 answers "who governs this land?"'],
+        ['Physical map', 'A map showing natural features: mountains, rivers, elevation, vegetation \u2014 answers "what does this land look like?"'],
+        ['Scale', 'The ratio between map distance and real-world distance (e.g., 1:50,000 means 1 cm on map = 500 m in reality)'],
+        ['Contour line', 'A line on a map connecting all points at the same elevation \u2014 close lines = steep slope, far-apart lines = gentle slope'],
+        ['Cartography', 'The science and art of making maps \u2014 involves projecting the 3D Earth onto 2D paper with controlled distortions'],
       ],
       trueFalse: [
-        { statement: 'Northeast India was originally a single administrative region before being divided into seven states.', isTrue: true, explanation: 'After Indian independence, most of the northeast was part of Assam. Over time, separate states were carved out: Nagaland (1963), Meghalaya (1972), Manipur and Tripura (1972), Mizoram (1987), and Arunachal Pradesh (1987). Sikkim joined as the eighth northeastern state in 2002.' },
-        { statement: 'Maps always show the true shape and size of countries accurately.', isTrue: false, explanation: 'All flat maps distort the 3D Earth in some way. The common Mercator projection makes countries near the poles look much larger than they really are — Greenland appears the same size as Africa, when Africa is actually 14 times bigger.' },
-        { statement: 'The Brahmaputra River flows through all seven sister states of Northeast India.', isTrue: false, explanation: 'The Brahmaputra primarily flows through Arunachal Pradesh (where it is called the Siang) and Assam. The other northeastern states have their own major rivers — the Barak in southern Assam and Mizoram, the Imphal in Manipur, and others.' },
+        { statement: 'Political borders in NE India were drawn randomly without considering geography.', isTrue: false, explanation: 'Most NE Indian state borders follow physical features \u2014 mountain ridges, river valleys, and plateaus. These natural barriers created cultural separations over millennia, and political borders were drawn to reflect these existing community divisions.' },
+        { statement: 'On a contour map, lines that are very close together indicate a steep slope.', isTrue: true, explanation: 'Close contour lines mean elevation changes rapidly over a short horizontal distance \u2014 that is a steep slope. If you see 5 lines packed in 1 cm on a 1:50,000 map, the ground rises 500 meters in just 500 horizontal meters \u2014 very steep.' },
+        { statement: 'A map with scale 1:1,000,000 shows MORE detail than a map with scale 1:50,000.', isTrue: false, explanation: 'The opposite! 1:50,000 is a larger scale (less shrinking) so it shows more detail in a smaller area. 1:1,000,000 is a smaller scale (more shrinking) showing a bigger area but with far less detail. Larger number in the denominator = smaller scale = less detail.' },
       ],
       facts: [
-        'Northeast India sits at the junction of the Indian, Eurasian, and Burmese tectonic plates — this geological collision zone created the region\'s dramatic hills and valleys and makes it one of the most earthquake-prone areas in the world.',
-        'Meghalaya\'s Mawsynram village receives an average of 11,871 mm of rainfall per year, making it one of the wettest places on Earth — the hills force moisture-laden winds upward, causing massive condensation and rainfall.',
-        'The "Seven Sisters" nickname for the northeastern states was coined by journalist Jyoti Prasad Saikia in 1972 — though today the region includes eight states with the addition of Sikkim.',
+        'Northeast India sits at the junction of the Indian, Eurasian, and Burmese tectonic plates \u2014 this collision zone created the region\'s dramatic mountains and makes it one of the most earthquake-prone areas in the world.',
+        'Meghalaya\'s Mawsynram village receives an average of 11,871 mm of rainfall per year (nearly 12 meters), making it one of the wettest places on Earth. The Khasi Hills force moisture-laden winds upward, causing massive condensation.',
+        'The "Seven Sisters" nickname was coined by journalist Jyoti Prasad Saikia in 1972. Today the region includes eight states with Sikkim \u2014 sometimes called "Seven Sisters and One Brother."',
       ],
-      offlineActivity: 'Draw a map of your neighborhood entirely from memory. Include roads, landmarks, rivers or ponds, and important buildings. Then walk the area and check your map against reality — what did you get right, and what did you miss or distort? This exercise shows why cartography (map-making) requires careful measurement. Compare your hand-drawn map with a satellite view online and note the differences.',
+      offlineActivity: 'Draw a map of your neighborhood entirely from memory. Include roads, landmarks, rivers or ponds, and important buildings. Add a scale bar based on one distance you know (e.g., "my house to school = 500m"). Then walk the area and check: what did you get right? What did you distort? Compare with a satellite view \u2014 you will discover that memory maps are biased toward places we visit often and shrink places we rarely go.',
+      offlineActivityDiagram: 'ActivityNeighborhoodMapDiagram',
+      codeTeaser: `import matplotlib.pyplot as plt
+
+# Compare NE India states: area vs population
+states = ["AR", "AS", "MN", "ML", "MZ", "NL", "TR", "SK"]
+area = [83743, 78438, 22327, 22429, 21081, 16579, 10486, 7096]
+pop = [1.4, 35.6, 3.1, 3.3, 1.2, 2.3, 4.1, 0.7]  # millions
+
+fig, ax1 = plt.subplots(figsize=(10, 5))
+x = range(len(states))
+ax1.bar([i - 0.2 for i in x], area, 0.35, label="Area (km\u00B2)", alpha=0.6)
+ax2 = ax1.twinx()
+ax2.bar([i + 0.2 for i in x], pop, 0.35, color='orange', label="Pop (M)", alpha=0.6)
+ax1.set_xticks(x)
+ax1.set_xticklabels(states)
+ax1.set_ylabel("Area (km\u00B2)")
+ax2.set_ylabel("Population (millions)")
+plt.title("NE India: Area vs Population")
+plt.show()  # Which state is most densely populated?`,
+      referenceLinks: [
+        { slug: 'maps-and-cartography', reason: 'Deep dive into map projections, coordinate systems, and how cartographers handle the 3D-to-2D problem' },
+        { slug: 'geology-and-earth-science', reason: 'Understand the tectonic forces that created NE India\'s mountains \u2014 the physical geography behind the politics' },
+      ],
+      nextLessons: [
+        { slug: 'snow-leopard-mystery', reason: 'Uses GPS tracking and maps to study wildlife \u2014 applies the map-reading skills you learned here' },
+        { slug: 'map-maker-and-compass', reason: 'Goes deeper into cartography, projections, and how maps are made from raw data' },
+        { slug: 'turtle-who-carried-mountain', reason: 'Explores the plate tectonics that created NE India\'s mountains \u2014 the geological story behind the geography' },
+      ],
+      quiz: [
+        { question: 'What is the main difference between a political map and a physical map?', options: ['Political maps are in color, physical maps are black and white', 'Political maps show borders and capitals, physical maps show terrain and elevation', 'Physical maps are more accurate', 'There is no real difference'], answer: 1 },
+        { question: 'On a 1:50,000 map, 1 centimeter equals how much real distance?', options: ['50 meters', '500 meters', '5 kilometers', '50 kilometers'], answer: 1 },
+        { question: 'What do contour lines close together indicate?', options: ['A flat plain', 'A steep slope', 'A river', 'A political border'], answer: 1 },
+        { question: 'Why did Northeast India go from one state to eight states?', options: ['Random political decisions', 'Mountain and river barriers created isolated communities with distinct cultures that each demanded self-governance', 'The British created all eight states', 'Population growth forced the split'], answer: 1 },
+        { question: 'Which scale map shows MORE detail?', options: ['1:10,000,000', '1:1,000,000', '1:50,000', '1:100,000'], answer: 2 },
+      ],
     },
   },
   {
@@ -8714,6 +8911,7 @@ The next year, and every year after, Juri made Diwali lamps. They were never per
       project: {
         title: 'Test How Firing Temperature Changes Clay Properties',
         description: 'Investigate how different drying and baking conditions affect the hardness, porosity, and color of clay samples.',
+        outputDiagram: 'PotteryOutputDiagram',
         steps: [
           'Prepare 6 identical clay samples of the same size and shape',
           'Dry two at room temperature, bake two at low oven temperature, bake two at high temperature',
@@ -8730,7 +8928,7 @@ The next year, and every year after, Juri made Diwali lamps. They were never per
     },
     illustration: '/content/illustrations/little-potter-dhubri.webp',
     track: 'school',
-    subjects: ['Biology'] as Subject[],
+    subjects: ['Chemistry', 'Engineering'] as Subject[],
     toolSkills: ['Python' as Skill, 'NumPy' as Skill, 'Matplotlib' as Skill, 'Data Analysis' as Skill],
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
@@ -8738,52 +8936,98 @@ The next year, and every year after, Juri made Diwali lamps. They were never per
     level0: {
       concepts: [
         {
-          title: 'Clay Chemistry: From Mud to Material',
+          title: 'Clay Is Tiny Particles With Water In Between',
           paragraphs: [
-            'Clay is not just "dirt" — it is a specific class of minerals with a unique crystal structure that gives it the plasticity (ability to be shaped) that makes pottery possible. Clay minerals are hydrous aluminum phyllosilicates — layered sheets of silicon-oxygen tetrahedra bonded to aluminum-oxygen octahedra. The most common clay mineral in pottery is kaolinite, with the formula Al₂Si₂O₅(OH)₄.',
-            'The key to clay\'s workability is water. Water molecules insert themselves between the flat mineral layers (a process called intercalation), allowing the layers to slide over each other like a deck of wet cards. This is why wet clay can be shaped — you are sliding mineral layers past each other on a lubricating film of water. Add too much water and the layers slide too freely (the clay becomes soup). Add too little and they lock together (the clay cracks). The potter\'s skill lies in maintaining exactly the right water content.',
-            'Different clays have different properties because of their mineral composition. Kaolin (china clay) is pure white, fires at high temperature (1,200-1,400°C), and produces fine, translucent porcelain. Stoneware clays contain iron and other impurities that lower the firing temperature (1,100-1,300°C) and produce strong, dense, gray or brown ware. Earthenware clays (the type most traditional Indian potters use) fire at the lowest temperatures (900-1,100°C) and produce the familiar reddish terracotta. The red color comes from iron oxide (Fe₂O₃) — the same compound that makes rust red.',
+            'Pick up a handful of mud and squeeze it. It squishes. Now pick up a handful of sand and squeeze. It crumbles. What makes clay different from sand? The answer is **particle size and shape**. Clay particles are incredibly tiny \u2014 less than 2 micrometres across, about 50 times thinner than a human hair. And they are **flat**, like microscopic playing cards, not round like sand grains.',
+            'Imagine a deck of cards with a thin film of water between each card. You can slide the cards past each other easily, right? That is exactly what happens in wet clay. The flat mineral particles slide over each other on a lubricating layer of water, which is why you can shape it. Add too much water and the cards float apart (clay becomes soup). Too little and they lock together (clay cracks when you bend it). The potter\'s first skill is getting the water content *just right*.',
+            '**Prediction check:** if clay\'s plasticity comes from water between layers, what should happen if you leave a shaped clay pot in the sun for two days? The water evaporates, the layers lock in place, and the shape becomes rigid. Try it! A sun-dried pot holds its shape but is still fragile \u2014 you need heat to make it truly hard.',
           ],
-          keyIdea: 'Clay minerals are layered sheets that slide on water films — the potter\'s art is controlling water content to balance plasticity against structural integrity.',
+          keyIdea: 'Clay is made of flat mineral particles with water between them. The water lets the layers slide, making clay shapeable. The potter controls water content to balance plasticity and strength.',
+          diagram: 'ClayParticlesDiagram',
         },
         {
-          title: 'Kiln Thermodynamics: The Science of Firing',
+          title: 'Firing Transforms Clay: The Magic of Sintering',
           paragraphs: [
-            'A potter\'s kiln is a controlled combustion chamber that transforms soft, fragile clay into hard, permanent ceramic. The process requires precise temperature control over many hours. In a traditional Indian kiln (bhatti), the potter builds a fire beneath or around the stacked pottery and gradually raises the temperature from ambient to 900-1,100°C over 8-12 hours, holds it at peak temperature for several hours, and then allows slow cooling over another 12-24 hours.',
-            'The temperature ramp rate matters because clay contains both free water (in pores and between particles) and chemically bound water (hydroxyl groups in the crystal structure). Free water evaporates below 200°C — if the temperature rises too fast, the steam generated inside the clay wall can build up pressure and crack or explode the piece (called "blowout"). Chemically bound water is released between 450-600°C as the crystal structure begins to break down. This stage must also be slow and steady.',
-            'Above 573°C, a critical phase transition occurs: quartz (SiO₂, present in most clays) undergoes a sudden volume expansion of about 2% as it changes from alpha-quartz to beta-quartz. This expansion creates stress in the clay body and is responsible for many kiln failures. Experienced potters slow the temperature ramp through this "quartz inversion" zone, and they slow down again during cooling (when the reverse contraction occurs). Understanding these phase transitions is the difference between a successful firing and a kiln full of cracked pots.',
+            'Sun-dried clay is hard-ish, but crumble it between your fingers and it falls apart. Drop it in water and it dissolves back to mud. To make clay *permanently* hard, you need serious heat \u2014 900\u00b0C or more, the temperature of glowing red-hot metal. This is what happens inside a potter\'s kiln.',
+            'At high temperatures, something remarkable occurs at the contact points between clay particles: **atoms start migrating** from one particle to the next, building tiny bridges between them. This is called **sintering**. The particles are not melting \u2014 the temperature is too low for that \u2014 but atoms at the surface have enough energy to drift across the gap. Slowly, these bridges thicken and the particles fuse into a solid mass. It is like welding, but at the atomic scale.',
+            'As sintering progresses, the air gaps (pores) between particles shrink and the pot becomes denser, harder, and smaller \u2014 typical shrinkage is 8\u201315%. Earthenware fired at 1,000\u00b0C is partially sintered and still porous (which is why clay water pots "sweat" and keep water cool). Porcelain fired at 1,400\u00b0C is almost fully sintered \u2014 dense, glassy, and waterproof. **The transformation is irreversible**: once fired, the clay can never become soft again.',
           ],
-          keyIdea: 'Kiln firing must navigate water evaporation, crystal dehydration, and the quartz phase transition at 573°C — each stage requires precise temperature control.',
-          diagram: 'HeatTransferDiagram',
+          keyIdea: 'Sintering uses heat to build atomic bridges between clay particles, fusing them into a permanent solid. Higher temperatures mean denser, harder ceramic with less porosity.',
+          diagram: 'SinteringProcessDiagram',
         },
         {
-          title: 'Sintering: How Heat Turns Powder Into Stone',
+          title: 'Glaze Chemistry: Painting With Melted Glass',
           paragraphs: [
-            'The transformation of soft clay into hard ceramic is achieved through sintering — a process where heat causes particles to fuse together without fully melting. At firing temperatures (900-1,400°C, depending on clay type), the thermal energy is sufficient to allow atoms at the surface of adjacent particles to migrate across the contact points (a process called solid-state diffusion). Atoms move from high-energy convex surfaces to low-energy concave surfaces at the neck between particles, gradually building solid bridges between them.',
-            'As sintering progresses, the pores (air gaps) between particles shrink and the material becomes denser and stronger. The piece also physically shrinks — typical firing shrinkage is 8-15% from the unfired (greenware) size. The degree of sintering depends on temperature, time, and clay composition. Earthenware fired at 1,000°C is partially sintered — still porous enough to absorb water (which is why terracotta flower pots "sweat"). Stoneware fired at 1,250°C is more fully sintered — dense and waterproof. Porcelain fired at 1,400°C approaches full density with near-zero porosity.',
-            'At the highest temperatures, a glassy phase forms from the flux minerals (feldspar, calcium carbonate) present in the clay. This liquid glass fills the remaining pores and, upon cooling, solidifies into an amorphous (non-crystalline) matrix that binds the remaining crystal grains. The final ceramic is therefore a composite material: crystalline grains (mostly mullite, Al₆Si₂O₁₃) embedded in a glassy matrix — similar in structure to concrete (aggregate particles in a cement matrix) or fiberglass (glass fibers in a polymer matrix). The potter has created a engineered composite through empirical knowledge accumulated over 10,000 years of ceramic tradition.',
+            'Unglazed pottery is porous \u2014 water can seep through the walls. To make a pot waterproof (and beautiful), potters apply **glaze**: a thin layer of powdered minerals that melts into glass during firing. A glaze has three key ingredients working together.',
+            '**Glass former** (usually silica, SiO\u2082) creates the glass network \u2014 a tangle of silicon-oxygen bonds that solidifies into a transparent, hard coating. But pure silica melts at 1,700\u00b0C, which is too hot for most kilns. So potters add a **flux** (like sodium oxide or calcium oxide) that breaks some silicon-oxygen bonds and lowers the melting point to 900\u20131,200\u00b0C. Finally, **metal oxide colorants** provide colour: copper oxide makes green or blue, iron oxide makes brown or red, cobalt oxide makes deep blue.',
+            '**Check yourself:** Why do you think the same glaze recipe can produce different colours in different kilns? Because the *atmosphere* inside the kiln matters. With plenty of oxygen (oxidation firing), copper gives green. Starve the kiln of oxygen (reduction firing), and the same copper gives red. Ancient Chinese potters discovered this by accident and spent centuries perfecting it \u2014 it is chemistry in action.',
           ],
-          keyIdea: 'Sintering fuses clay particles through atomic diffusion at contact points — creating a composite of crystalline grains in a glassy matrix, all without fully melting.',
+          keyIdea: 'Glaze is melted glass (silica + flux + colorant) painted onto pottery. The flux lowers the melting point, and metal oxides create colour. Kiln atmosphere affects the final result.',
+          diagram: 'GlazeChemistryDiagram',
+        },
+        {
+          title: 'Thermal Shock: Why Pots Crack',
+          paragraphs: [
+            'Every potter knows the heartbreak of opening a kiln to find cracked pots. The culprit is **thermal shock** \u2014 stress caused by different parts of the pot expanding or contracting at different rates. When you heat one side of a pot faster than the other, the hot side expands while the cool side stays the same size. The mismatch creates internal stress, and if the stress exceeds the material\'s strength, *crack*.',
+            'There is one especially dangerous temperature: **573\u00b0C**. At this point, quartz crystals in the clay undergo a sudden **phase transition** from alpha-quartz to beta-quartz, expanding by 2% in an instant. If the kiln temperature passes through this zone too quickly, the sudden expansion creates enough stress to shatter the pot. Experienced potters slow the temperature ramp through this "quartz inversion" zone, both on the way up and on the way down.',
+            '**Analogy:** pour boiling water into a cold glass \u2014 the inside expands suddenly while the outside stays cold, and the glass cracks. Same physics, same principle. This is why Pyrex (borosilicate glass) was invented: it has a very low thermal expansion coefficient, so it resists thermal shock. Ceramic engineers design materials with the same goal \u2014 low expansion equals fewer cracks.',
+          ],
+          keyIdea: 'Thermal shock cracks pots when parts expand unevenly. The quartz inversion at 573\u00b0C is the most dangerous moment. Slow heating and cooling are the potter\'s best defence.',
+          diagram: 'ThermalShockDiagram',
         },
       ],
       vocabulary: [
-        ['Clay', 'A fine-grained natural material made of tiny mineral particles — when wet it can be shaped, and when fired it becomes hard ceramic'],
-        ['Sintering', 'The process where heat fuses particles together without fully melting them — this is how soft clay becomes hard pottery'],
-        ['Kiln', 'A specialized oven that reaches very high temperatures (900-1400°C) for firing pottery and ceramics'],
-        ['Glaze', 'A glass-like coating applied to pottery before firing — it makes the surface waterproof, smooth, and often colorful'],
-        ['Ceramic', 'A hard, heat-resistant material made by firing clay or other minerals — includes everything from flower pots to spacecraft tiles'],
+        ['Clay', 'A fine-grained natural material made of tiny flat mineral particles \u2014 when wet it can be shaped, and when fired it becomes hard ceramic'],
+        ['Sintering', 'The process where heat fuses particles together without fully melting them \u2014 this is how soft clay becomes hard pottery'],
+        ['Kiln', 'A specialized oven that reaches very high temperatures (900\u20131400\u00b0C) for firing pottery and ceramics'],
+        ['Glaze', 'A glass-like coating applied to pottery before firing \u2014 it makes the surface waterproof, smooth, and often colourful'],
+        ['Thermal shock', 'Stress and cracking caused by rapid or uneven temperature changes in a material'],
       ],
       trueFalse: [
-        { statement: 'Pottery is one of the oldest human technologies, dating back over 20,000 years.', isTrue: true, explanation: 'The oldest known pottery fragments, found in China, date to about 20,000 years ago. Pottery-making predates agriculture, metalworking, and the wheel — it is one of the earliest examples of humans transforming raw materials through chemistry.' },
-        { statement: 'Fired clay can be softened back into workable clay by adding water.', isTrue: false, explanation: 'Firing permanently changes clay\'s chemical structure through sintering — the particles fuse together and water is driven out of the crystal structure. This transformation is irreversible. Once fired, clay can never become soft and workable again.' },
-        { statement: 'The potter\'s wheel works because of centrifugal force pushing the clay outward.', isTrue: false, explanation: 'The potter\'s wheel works by providing a stable axis of rotation so the potter\'s hands can shape the clay symmetrically. The "centrifugal force" felt is actually inertia — the clay\'s tendency to travel in a straight line, which the potter\'s hands redirect into a circular shape.' },
+        { statement: 'Pottery is one of the oldest human technologies, dating back over 20,000 years.', isTrue: true, explanation: 'The oldest known pottery fragments, found in China, date to about 20,000 years ago. Pottery-making predates agriculture, metalworking, and the wheel \u2014 it is one of the earliest examples of humans transforming raw materials through chemistry.' },
+        { statement: 'Fired clay can be softened back into workable clay by adding water.', isTrue: false, explanation: 'Firing permanently changes clay\'s chemical structure through sintering \u2014 the particles fuse together and water is driven out of the crystal structure. This transformation is irreversible. Once fired, clay can never become soft and workable again.' },
+        { statement: 'The potter\'s wheel works because of centrifugal force pushing the clay outward.', isTrue: false, explanation: 'The potter\'s wheel provides a stable axis of rotation so the potter\'s hands can shape the clay symmetrically. The "centrifugal force" felt is actually inertia \u2014 the clay\'s tendency to travel in a straight line, which the potter\'s hands redirect into a circular shape.' },
       ],
       facts: [
-        'When clay is fired at about 573°C, the quartz crystals inside undergo a sudden phase transition — they expand by 2% in an instant, which can crack the pot if the temperature rises too quickly.',
-        'Terracotta (earthenware fired at around 1,000°C) remains porous enough to let water seep through slowly — this is why traditional clay water pots keep water cool through evaporation, the same principle as sweating.',
-        'The ceramic tiles on NASA\'s Space Shuttle could withstand re-entry temperatures of 1,650°C — they used the same fundamental material science (sintering of silica particles) as a village potter\'s kiln, just with more precise control.',
+        'When clay is fired at about 573\u00b0C, the quartz crystals inside undergo a sudden phase transition \u2014 they expand by 2% in an instant, which can crack the pot if the temperature rises too quickly.',
+        'Terracotta (earthenware fired at around 1,000\u00b0C) remains porous enough to let water seep through slowly \u2014 this is why traditional clay water pots keep water cool through evaporation, the same principle as sweating.',
+        'The ceramic tiles on NASA\'s Space Shuttle could withstand re-entry temperatures of 1,650\u00b0C \u2014 they used the same fundamental material science (sintering of silica particles) as a village potter\'s kiln, just with more precise control.',
       ],
-      offlineActivity: 'Make a simple clay diya (lamp) using locally available clay or modelling clay. Shape it by hand into a small bowl with a pinched spout for the wick. Let it dry completely in the sun for 2-3 days. Compare its hardness before and after drying. If you can access a kiln or even a charcoal fire, try firing one — notice how the color changes and the material becomes much harder. Measure the size before and after firing to observe shrinkage.',
+      offlineActivity: 'Make 3 identical clay balls from locally available clay or modelling clay. Leave one to air-dry for 2 days. Bake the second in a home oven at 200\u00b0C for 2 hours. If possible, fire the third in a charcoal fire or kiln. Compare all three: scratch each with a nail (hardness), weigh before and after soaking in water for 1 hour (porosity), and note colour changes. You are testing the same sintering process potters have used for 20,000 years.',
+      offlineActivityDiagram: 'ActivityClayTestDiagram',
+      codeTeaser: `import numpy as np
+import matplotlib.pyplot as plt
+
+# How does firing temperature affect porosity?
+temps = np.array([25, 200, 500, 800, 1000, 1200])   # \u00b0C
+porosity = np.array([38, 32, 25, 15, 5, 1])           # %
+
+plt.figure(figsize=(10, 5))
+plt.plot(temps, porosity, "o-", color="sienna", linewidth=2)
+plt.axvline(573, color="red", linestyle="--", label="Quartz inversion (573\u00b0C)")
+plt.fill_between(temps, porosity, alpha=0.15, color="sienna")
+plt.xlabel("Firing Temperature (\u00b0C)")
+plt.ylabel("Water Absorption (%)")
+plt.title("How Heat Changes Clay: Porosity vs Temperature")
+plt.legend()
+plt.grid(alpha=0.3)
+plt.show()  # What happens at the quartz inversion line?`,
+      referenceLinks: [
+        { slug: 'chemistry-of-materials', reason: 'Deep dive into atomic structure, crystal lattices, and how molecular architecture determines material properties' },
+        { slug: 'energy-and-work', reason: 'Understand heat energy, thermal expansion, and how energy transforms matter during firing' },
+      ],
+      nextLessons: [
+        { slug: 'golden-muga-silk', reason: 'Another material science story \u2014 how silk proteins create golden fibres through molecular self-assembly' },
+        { slug: 'festival-lights', reason: 'Energy and heat science continues \u2014 how different light sources convert energy at different efficiencies' },
+        { slug: 'grandmother-remembered', reason: 'A different kind of preservation \u2014 how the brain stores memories with neural "firing" of its own' },
+      ],
+      quiz: [
+        { question: 'Why can wet clay be shaped?', options: ['Because it is a liquid', 'Because water between flat particles lets them slide over each other', 'Because clay is made of rubber-like molecules', 'Because the potter\'s wheel spins it into shape'], answer: 1 },
+        { question: 'What is sintering?', options: ['Melting clay into liquid', 'Mixing clay with water', 'Heat causing particles to fuse at contact points without fully melting', 'Adding glaze to a pot'], answer: 2 },
+        { question: 'Why is 573\u00b0C a dangerous temperature during firing?', options: ['Clay melts at this temperature', 'Water boils inside the clay', 'Quartz crystals suddenly expand by 2%, which can crack the pot', 'The glaze starts to bubble'], answer: 2 },
+        { question: 'What does the flux ingredient do in a glaze?', options: ['Adds colour to the glaze', 'Creates the glass network', 'Lowers the melting point so the glaze melts at kiln temperatures', 'Prevents the pot from cracking'], answer: 2 },
+        { question: 'Why does a terracotta pot keep water cool?', options: ['The clay absorbs heat from the water', 'It is partially sintered and porous, so water seeps through and evaporates, cooling the pot', 'The red colour reflects sunlight', 'Terracotta is a natural insulator'], answer: 1 },
+      ],
     },
   },
 
@@ -9393,6 +9637,7 @@ Yaruini smiled. "Good. Paper is useful. But remember, child — paper burns and 
       project: {
         title: 'Test Your Own Forgetting Curve',
         description: 'Run a self-experiment to measure how quickly you forget a list of words, and compare your results with Ebbinghaus\'s original data.',
+        outputDiagram: 'MemoryOutputDiagram',
         steps: [
           'Memorize a list of 20 random words and test recall immediately (record the score)',
           'Re-test at intervals: 1 hour, 1 day, 3 days, 1 week (without re-studying)',
@@ -9416,51 +9661,98 @@ Yaruini smiled. "Good. Paper is useful. But remember, child — paper burns and 
     playground: 'grandmother-remembered' as const,
     level0: {
       vocabulary: [
-        ['Neuron', 'A nerve cell that carries electrical signals — your brain has about 86 billion of them'],
+        ['Neuron', 'A nerve cell that carries electrical signals \u2014 your brain has about 86 billion of them'],
         ['Synapse', 'The tiny gap between two neurons where chemical messages pass from one cell to the next'],
         ['Hippocampus', 'A seahorse-shaped brain structure that converts short-term experiences into long-term memories'],
-        ['Long-term potentiation', 'The process where synapses get stronger each time they fire — the basis of learning and memory'],
+        ['Long-term potentiation', 'The process where synapses get stronger each time they fire \u2014 the basis of learning and memory'],
         ['Spaced repetition', 'A study technique where you review information at increasing intervals to move it into permanent memory'],
       ],
       trueFalse: [
-        { statement: 'Your brain stops making new connections after childhood.', isTrue: false, explanation: 'The brain continues forming new synaptic connections throughout your entire life — a property called neuroplasticity. Adults can learn new languages, instruments, and skills because the brain keeps rewiring itself in response to experience.' },
-        { statement: 'Sleeping helps you remember things you learned during the day.', isTrue: true, explanation: 'During sleep, your hippocampus replays the day\'s experiences and transfers important memories to the neocortex for long-term storage. Studies show that students who sleep after studying remember significantly more than those who stay awake.' },
-        { statement: 'People only use 10% of their brain.', isTrue: false, explanation: 'Brain scans show that virtually all parts of the brain are active at some point during the day. Even during sleep, areas like the hippocampus are busy consolidating memories. The "10% myth" has no basis in neuroscience.' },
+        { statement: 'Your brain stops making new connections after childhood.', isTrue: false, explanation: 'The brain continues forming new synaptic connections throughout your entire life \u2014 a property called neuroplasticity.' },
+        { statement: 'Sleeping helps you remember things you learned during the day.', isTrue: true, explanation: 'During sleep, your hippocampus replays the day\'s experiences and transfers important memories to the neocortex for long-term storage.' },
+        { statement: 'People only use 10% of their brain.', isTrue: false, explanation: 'Brain scans show that virtually all parts of the brain are active at some point during the day. The "10% myth" has no basis in neuroscience.' },
       ],
       facts: [
-        'Your brain has roughly 100 trillion synapses — that\'s more connections than there are stars in the Milky Way galaxy.',
+        'Your brain has roughly 100 trillion synapses \u2014 more connections than there are stars in the Milky Way galaxy.',
         'The hippocampus is named after the Greek word for seahorse because of its curved shape. London taxi drivers, who memorize thousands of streets, have measurably larger hippocampi than average.',
-        'Oral storytelling traditions, like those of Assam\'s grandmothers, physically strengthen neural pathways through repeated recall — each retelling reinforces the synaptic connections that store the memory.',
+        'Oral storytelling traditions physically strengthen neural pathways through repeated recall \u2014 each retelling reinforces the synaptic connections that store the memory.',
       ],
-      offlineActivity: 'Try a spaced repetition experiment. Write 10 facts on index cards. Study all 10 today, then quiz yourself tomorrow, then 3 days later, then 1 week later. Track how many you remember at each interval. Compare this with a friend who crams all 10 facts the night before the final quiz. Who remembers more?',
+      offlineActivity: 'Memorize 20 random words. Test yourself immediately, then at 1 hour, 1 day, 3 days, and 1 week \u2014 without re-studying between tests. Record your score each time and plot a graph. Ask a friend to review daily. Compare your graphs to see the forgetting curve vs spaced repetition.',
+      offlineActivityDiagram: 'ActivityMemoryTestDiagram',
+      codeTeaser: `import numpy as np
+import matplotlib.pyplot as plt
+
+# Ebbinghaus forgetting curve simulation
+hours = np.array([0, 1, 24, 72, 168, 720])
+labels = ["Learn", "1 hr", "1 day", "3 days", "1 week", "1 month"]
+no_review = 100 * np.exp(-0.005 * hours)
+spaced = np.array([100, 95, 90, 88, 85, 82])
+
+plt.figure(figsize=(10, 5))
+plt.plot(hours, no_review, "o--", color="red", label="No review")
+plt.plot(hours, spaced, "o-", color="green", label="Spaced repetition")
+plt.xticks(hours, labels)
+plt.ylabel("Recall (%)")
+plt.title("Your Forgetting Curve: With vs Without Review")
+plt.legend()
+plt.grid(alpha=0.3)
+plt.show()  # Which line would Yaruini's storytelling follow?`,
+      referenceLinks: [
+        { slug: 'human-body-systems', reason: 'Deep dive into the nervous system, brain anatomy, and how neurons transmit signals' },
+        { slug: 'data-and-statistics', reason: 'Learn to plot data, fit curves, and analyze your own memory experiment results' },
+      ],
+      nextLessons: [
+        { slug: 'little-potter', reason: 'Another transformation story \u2014 potters transform clay with heat, brains transform experiences into memories' },
+        { slug: 'angulimala-monk', reason: 'Directly explores neuroplasticity \u2014 how the brain rewires itself through changed behaviour' },
+        { slug: 'music-dimasa', reason: 'Music and rhythm engage the brain\'s memory circuits deeply \u2014 learn why songs are easier to remember than lists' },
+      ],
+      quiz: [
+        { question: 'What is the hippocampus?', options: ['A type of sea creature', 'A brain structure that converts short-term experiences into long-term memories', 'The part of the brain that controls movement', 'A chemical messenger between neurons'], answer: 1 },
+        { question: 'What happens to memory without review, according to Ebbinghaus?', options: ['It stays stable forever', 'It slowly improves over time', 'About 70% is forgotten within 24 hours', 'It transfers automatically to long-term storage'], answer: 2 },
+        { question: 'What is long-term potentiation (LTP)?', options: ['A type of brain surgery', 'When neurons die from overuse', 'Synapses getting stronger with repeated use, making memories more durable', 'The process of forgetting information'], answer: 2 },
+        { question: 'Why is Yaruini\'s storytelling an effective memory system?', options: ['Because she writes everything down', 'Because oral stories combine emotion, narrative, and spaced repetition', 'Because she has a photographic memory', 'Because the village has no electricity'], answer: 1 },
+        { question: 'Why do emotional memories tend to be stronger?', options: ['Emotions damage brain cells', 'The amygdala flags emotional experiences as important, telling the hippocampus to consolidate them firmly', 'Emotional memories are stored in a different brain region', 'They are not actually stronger'], answer: 1 },
+      ],
       concepts: [
         {
-          title: 'How Memories Form: The Hippocampus',
+          title: 'Short-term vs Long-term Memory: Two Different Systems',
           paragraphs: [
-          'Deep inside your brain, roughly behind each ear, sit two curved structures shaped like seahorses. These are your **hippocampi** (singular: hippocampus), and they are the gateway to long-term memory. Every new experience you want to remember must pass through this gateway first.',
-          'When Yaruini recalls who married whom in 1962, the memory was originally encoded by her hippocampus decades ago. During encoding, sensory information — sights, sounds, smells, emotions — gets converted into patterns of electrical signals between neurons. The hippocampus acts as a temporary holding area, replaying these patterns during sleep until the neocortex (the brain\'s outer surface) absorbs them as permanent long-term memories.',
-          'Damage to the hippocampus is devastating. The famous patient Henry Molaison (known as "H.M.") had both hippocampi surgically removed in 1953 to treat epilepsy. He could remember his childhood perfectly but could not form a single new memory for the remaining 55 years of his life. Every person he met, every meal he ate, was forgotten within minutes.',
+          'Your brain does not store all memories the same way. It has two distinct systems: **short-term memory** (also called working memory) and **long-term memory**. Think of short-term memory as a small whiteboard \u2014 it holds about 7 items for roughly 30 seconds. Long-term memory is an enormous library that can store information for a lifetime.',
+          'When someone tells you a phone number, it enters short-term memory. If you repeat it a few times, it may transfer to long-term memory. But if someone distracts you immediately, the number vanishes \u2014 it never left the whiteboard. **This is why cramming the night before an exam often fails**: the information enters short-term memory but never makes the journey to long-term storage.',
+          '**Prediction check:** if short-term memory holds only about 7 items, how did Yaruini remember thousands of facts? She did not hold them all in short-term memory simultaneously. Over decades, through repeated storytelling, each fact was individually transferred to long-term memory by the hippocampus, one memory at a time, night after night during sleep.',
           ],
-          keyIdea: 'The hippocampus converts short-term experiences into long-term memories. Without it, new memories cannot form, even though old memories remain intact.',
+          keyIdea: 'Short-term memory is small and temporary (7 items, 30 seconds). Long-term memory is vast and permanent. The hippocampus transfers memories from one to the other during sleep.',
+          diagram: 'MemoryFormationDiagram',
+        },
+        {
+          title: 'How Memories Form: The Hippocampus Gateway',
+          paragraphs: [
+          'Deep inside your brain, roughly behind each ear, sit two curved structures shaped like seahorses. These are your **hippocampi** (singular: hippocampus), and they are the gateway to long-term memory.',
+          'During the day, the hippocampus encodes experiences by converting sensory information \u2014 sights, sounds, smells, emotions \u2014 into patterns of electrical signals between neurons. During sleep, it **replays** these patterns, strengthening the neural connections until the neocortex absorbs them as permanent memories.',
+          'The famous patient Henry Molaison had both hippocampi surgically removed in 1953. He could remember his childhood perfectly but could not form a single new memory for the remaining 55 years of his life. This tragic case proved the hippocampus is essential for *creating* new memories, even though old memories are stored elsewhere.',
+          ],
+          keyIdea: 'The hippocampus encodes new experiences during the day and replays them during sleep to build permanent memories. Without it, no new long-term memories can form.',
           diagram: 'NeuronDiagram',
         },
         {
-          title: 'Synapses and the Strength of Connections',
+          title: 'The Forgetting Curve: Memory Fades Without Review',
           paragraphs: [
-          'Your brain contains roughly 86 billion neurons, but what matters even more are the **synapses** — the tiny gaps between neurons where chemical messengers (neurotransmitters) carry signals from one cell to the next. You have approximately 100 trillion synapses, and their strength determines what you remember.',
-          'When Yaruini tells a story repeatedly, the synapses involved in that memory get stronger each time. This is called **long-term potentiation (LTP)**: the more often a neural pathway fires, the easier it becomes to fire again. It is the cellular basis of the saying "neurons that fire together wire together." A memory recalled a thousand times is physically different from one recalled once — the synaptic connections are thicker and more efficient.',
-          'This is why oral traditions are so effective at preserving information. The act of storytelling — recalling, narrating, and emotionally engaging with the material — repeatedly activates the same neural pathways, strengthening them with each retelling. Yaruini\'s memories are not just thoughts; they are physical structures in her brain, built up over decades of repetition.',
+          'In 1885, German psychologist Hermann Ebbinghaus memorized lists of nonsense syllables and tested himself at intervals. He discovered the **forgetting curve** \u2014 a mathematical relationship showing that memory decays **exponentially** after learning. Within 1 hour you forget about 50%. Within 24 hours, roughly 70% is gone.',
+          'The curve is steep at first and then flattens. What you still remember after a month, you will probably remember for years. The critical window for saving a memory is the first few hours and days. Review during this window, and you reset the curve \u2014 the memory becomes more durable each time.',
+          '**Check yourself:** think about something you learned last week that you did *not* review. Can you still recall it? Now think about your home address, which you have recalled thousands of times. The difference is not intelligence \u2014 it is repetition.',
           ],
-          keyIdea: 'Synapses strengthen with repeated use through long-term potentiation. Telling and retelling stories physically reinforces the neural pathways that store those memories.',
+          keyIdea: 'Memory decays exponentially: 70% gone within 24 hours. But each review resets the curve and makes the memory more durable. The first day is the critical window.',
+          diagram: 'ForgettingCurveDiagram',
         },
         {
-          title: 'Spaced Repetition: Why Timing Matters',
+          title: 'Memory Techniques: Mnemonics and Spaced Repetition',
           paragraphs: [
-          'In 1885, German psychologist Hermann Ebbinghaus discovered the **forgetting curve** — a mathematical relationship showing that memory decays exponentially after learning. Within 24 hours, you forget roughly 70% of newly learned material. Within a week, up to 90% is gone — unless you review it.',
-          'The antidote is **spaced repetition**: reviewing information at gradually increasing intervals. Study something today, review it tomorrow, then in 3 days, then in a week, then in a month. Each review resets the forgetting curve and makes the memory more durable. Modern flashcard apps like Anki use algorithms based on this principle to schedule reviews at optimal intervals.',
-          'Yaruini\'s weekly storytelling sessions with the village children are, unknowingly, a perfect spaced repetition system. Each retelling refreshes the memories, and the emotional engagement of narrative (characters, drama, suspense) activates the amygdala, which flags the memory as important and tells the hippocampus to consolidate it more firmly. Emotion plus repetition plus spacing — the three pillars of durable memory.',
+          'If memory fades so quickly, how do some people remember vast amounts of information? The answer is **memory techniques** \u2014 strategies that work *with* the brain\'s natural architecture rather than against it.',
+          '**Chunking** groups items into meaningful clusters (9-7-1-1-2-0-0-1 becomes 9/11/2001). **Method of loci** places items along a familiar route. **Narrative linking** weaves facts into stories with characters and drama. **Spaced repetition** reviews at growing intervals: 1 day, 3 days, 1 week, 1 month.',
+          'Yaruini used narrative linking and spaced repetition instinctively. Her weekly storytelling sessions reviewed village history at regular intervals, and embedding facts inside dramatic stories activated emotional circuits that told her hippocampus: "This is important. Save it."',
           ],
-          keyIdea: 'Memory fades exponentially, but reviewing at spaced intervals dramatically improves retention. Emotional engagement during learning further strengthens the memory trace.',
+          keyIdea: 'Chunking, method of loci, narrative linking, and spaced repetition all work by aligning with the brain\'s natural memory architecture. Yaruini used two of them instinctively.',
+          diagram: 'MnemonicTechniquesDiagram',
         },
       ],
     },
@@ -9673,6 +9965,7 @@ The people of Assam say that during Kati Bihu, the Brahmaputra isn't just a rive
       project: {
         title: 'Compare Light Source Efficiency',
         description: 'Measure and compare the brightness, energy use, and color of different light sources to determine which is most efficient.',
+        outputDiagram: 'LightEfficiencyOutputDiagram',
         steps: [
           'Gather light sources: candle, oil lamp (or simulation), incandescent bulb, LED bulb',
           'Measure brightness at a fixed distance using a phone light meter app',
@@ -9689,59 +9982,103 @@ The people of Assam say that during Kati Bihu, the Brahmaputra isn't just a rive
     },
     illustration: '/content/illustrations/festival-lights-river.webp',
     track: 'school',
-    subjects: ['Biology'] as Subject[],
+    subjects: ['Physics', 'Engineering'] as Subject[],
     toolSkills: ['Python' as Skill, 'NumPy' as Skill, 'Matplotlib' as Skill, 'Data Analysis' as Skill],
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'festival-lights' as const,
     level0: {
       vocabulary: [
-        ['Artificial Intelligence', 'Computer systems that can learn from data and make decisions'],
-        ['Sensor', 'A device that detects physical changes like sound, light, or vibration'],
-        ['Classification', 'Sorting data into categories based on patterns'],
-        ['Signal processing', 'Analyzing and extracting information from recorded data'],
-        ['Neural network', 'A computer model inspired by how brain cells connect'],
+        ['Luminous flux', 'The total amount of visible light emitted by a source, measured in lumens'],
+        ['Electroluminescence', 'Light produced when electrons cross a semiconductor junction \u2014 how LEDs work'],
+        ['Color temperature', 'A number in Kelvin that describes the warmth (orange) or coolness (blue) of white light'],
+        ['Photovoltaic cell', 'A device (solar cell) that converts sunlight directly into electricity using the photoelectric effect'],
+        ['Energy efficiency', 'The percentage of input energy that becomes useful output \u2014 LEDs are far more efficient than incandescent bulbs'],
       ],
       trueFalse: [
-        { statement: 'AI can help scientists study animals without disturbing them.', isTrue: true, explanation: 'AI-powered cameras, microphones, and sensors can monitor wildlife 24/7 from a distance, collecting data that would take humans years to gather manually.' },
-        { statement: 'Computers can learn to identify animal species from their sounds.', isTrue: true, explanation: 'Machine learning models trained on audio recordings can distinguish between species, individual animals, and even emotional states from their calls.' },
-        { statement: 'AI will replace all wildlife scientists.', isTrue: false, explanation: 'AI is a tool that helps scientists work faster, but it cannot replace human understanding, creativity, and ethical judgment in conservation decisions.' },
+        { statement: 'An LED produces light by heating a wire until it glows.', isTrue: false, explanation: 'That is how an incandescent bulb works. An LED produces light through electroluminescence \u2014 electrons emit photons directly as they cross a semiconductor junction, with very little wasted heat.' },
+        { statement: 'A 10-watt LED can produce the same brightness as a 100-watt incandescent bulb.', isTrue: true, explanation: 'LEDs convert about 50% of electrical energy to light, while incandescent bulbs waste 90% as heat. So a 10W LED produces roughly the same 1,600 lumens as a 100W incandescent.' },
+        { statement: 'Solar cells work by heating water to make steam.', isTrue: false, explanation: 'Solar thermal plants heat water, but photovoltaic solar cells convert sunlight directly into electricity. Photons knock electrons free in silicon, creating an electric current \u2014 no heat or steam involved.' },
       ],
       facts: [
-        'AI-powered camera traps can identify individual animals by their unique markings — like facial recognition, but for tigers and leopards.',
-        'Acoustic monitoring stations in rainforests can detect illegal logging by recognizing the sound of chainsaws, even from kilometers away.',
-        'Conservation drones equipped with thermal cameras can count animal populations at night without disturbing them.',
+        'A traditional oil diya produces about 12 lumens of light \u2014 one small LED can replace eight diyas while using a tiny fraction of the energy.',
+        'The global switch from incandescent to LED lighting saves an estimated 570 million tonnes of CO\u2082 emissions per year \u2014 equivalent to shutting down 150 coal power plants.',
+        'The "warm" glow of a candle (1,800 Kelvin) actually corresponds to a lower colour temperature than the "cool" white of daylight (5,500 K) \u2014 confusingly, "warm" light means lower temperature.',
       ],
-      offlineActivity: 'Go outside and spend 10 minutes just listening. Close your eyes. How many different sounds can you identify? Birds, insects, wind, traffic? Scientists do exactly this — but with AI helping them identify what they hear.',
+      offlineActivity: 'Gather a candle, an incandescent bulb (if available), and an LED bulb. Place each on a table. Hold your hand 5 cm from each for 10 seconds and rate the warmth on a scale of 1\u20135. Use a phone light meter app to measure brightness (lux) at 30 cm distance. Record results in a table: source, warmth rating, lux reading. Calculate which gives the most light for the least heat \u2014 you will discover why LEDs are replacing every other light technology.',
+      offlineActivityDiagram: 'ActivityLightCompareDiagram',
+      codeTeaser: `import numpy as np
+import matplotlib.pyplot as plt
+
+# Energy efficiency of light sources (lumens per watt)
+sources = ["Oil lamp", "Incandescent", "CFL", "LED"]
+efficiency = [0.3, 15, 65, 120]  # lumens per watt
+
+plt.figure(figsize=(10, 5))
+bars = plt.bar(sources, efficiency, color=["#f59e0b", "#ef4444", "#a855f7", "#22c55e"])
+plt.ylabel("Lumens per Watt")
+plt.title("Light Source Efficiency: From Oil Lamps to LEDs")
+for bar, val in zip(bars, efficiency):
+    plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 2,
+             f'{val}', ha='center', fontweight='bold')
+plt.grid(axis='y', alpha=0.3)
+plt.show()  # How many times more efficient is an LED than an oil lamp?`,
+      referenceLinks: [
+        { slug: 'light-and-color', reason: 'Deep dive into wavelengths, the electromagnetic spectrum, and how different light sources produce different colours' },
+        { slug: 'electricity-and-current', reason: 'Understand voltage, current, resistance, and how LED circuits work \u2014 the foundation for building light displays' },
+      ],
+      nextLessons: [
+        { slug: 'firefly-festival-majuli', reason: 'Fireflies are nature\'s LEDs \u2014 bioluminescence achieves near-100% light efficiency, better than any human technology' },
+        { slug: 'little-potter', reason: 'The clay diyas in this story are made using material science \u2014 learn the ceramics behind the lamp' },
+        { slug: 'orange-sunsets-assam', reason: 'Why the oil lamp\'s orange glow looks like a sunset \u2014 the same physics of light wavelengths and colour temperature' },
+      ],
+      quiz: [
+        { question: 'How does an LED produce light?', options: ['By heating a filament until it glows', 'By burning a chemical fuel', 'Through electroluminescence \u2014 electrons emit photons at a semiconductor junction', 'By reflecting sunlight'], answer: 2 },
+        { question: 'Why do incandescent bulbs waste so much energy?', options: ['They are poorly designed', 'They convert 90% of electrical energy to heat instead of light', 'They use too much voltage', 'They only work at certain temperatures'], answer: 1 },
+        { question: 'What does a solar cell do?', options: ['Stores sunlight in a battery', 'Heats water using mirrors', 'Converts sunlight directly into electricity using the photoelectric effect', 'Reflects light to brighten a room'], answer: 2 },
+        { question: 'What is colour temperature?', options: ['The actual heat of a light bulb', 'How hot a colour feels when you touch it', 'A Kelvin number describing how warm (orange) or cool (blue) white light appears', 'The temperature at which paint changes colour'], answer: 2 },
+        { question: 'About how many lumens does a traditional oil diya produce?', options: ['About 12 lumens', 'About 100 lumens', 'About 1,000 lumens', 'About 10,000 lumens'], answer: 0 },
+      ],
       concepts: [
         {
-          title: 'Luminous Flux: Measuring Brightness',
+          title: 'Incandescent vs LED: Heat vs Direct Light',
           paragraphs: [
-          'Brightness is not as simple as it seems. Physicists distinguish between **radiant flux** (total energy emitted, measured in watts) and **luminous flux** (the portion of that energy visible to the human eye, measured in **lumens**). A 100-watt incandescent bulb produces about 1,600 lumens; a 10-watt LED can produce the same luminous flux, because LEDs convert electricity to visible light far more efficiently.',
-          'The human eye is not equally sensitive to all wavelengths. We are most sensitive to green-yellow light (around 555 nanometers) and far less sensitive to deep red or violet. The **luminous efficacy** function, V(λ), quantifies this sensitivity curve. When engineers design festival lighting, they must account for V(λ) — a green LED appears brighter than a blue LED of the same wattage because our eyes are more sensitive to green.',
-          'Traditional oil lamps (diyas) used during Diwali produce about 12 lumens — roughly the brightness of a single birthday candle. A modern white LED produces about 100 lumens per watt. This means one small LED can replace eight oil lamps while using a tiny fraction of the energy and producing no soot or fire risk.',
+          'For thousands of years, humans made light the same way: **heat something until it glows**. A campfire, an oil lamp, a candle, an incandescent light bulb \u2014 all work by making a material so hot that it emits visible photons. The problem? Most of the energy becomes heat, not light. An incandescent bulb converts only about 10% of electrical energy into light; the other 90% is wasted as heat.',
+          'LEDs (Light Emitting Diodes) work completely differently. Instead of heating a filament, they use **electroluminescence**: electrons flow across a semiconductor junction, and as they do, they release energy as photons \u2014 directly, without the heating step. This is why LEDs are cool to the touch while producing the same brightness as a scorching incandescent bulb.',
+          '**Check yourself:** hold your hand near a lit incandescent bulb (careful!) and then near an LED of similar brightness. The incandescent bulb radiates heat you can feel from 30 cm away. The LED barely warms. That temperature difference *is* the efficiency difference \u2014 energy going to heat is energy not going to light.',
           ],
-          keyIdea: 'Luminous flux (measured in lumens) quantifies how bright a light source appears to the human eye, accounting for our wavelength-dependent sensitivity. LEDs produce far more lumens per watt than traditional light sources.',
+          keyIdea: 'Incandescent bulbs heat a wire until it glows (90% wasted as heat). LEDs emit photons directly through electroluminescence, achieving 5\u201310 times better efficiency.',
+          diagram: 'IncandescentVsLEDDiagram',
         },
         {
-          title: 'Color Temperature: Warm and Cool Light',
+          title: 'Energy Efficiency: Lumens per Watt',
           paragraphs: [
-          'The "warmth" or "coolness" of white light is described by **color temperature**, measured in Kelvin (K). A candle flame has a color temperature of about 1,800 K — warm, orange-yellow. Daylight at noon is about 5,500 K — neutral white. A clear blue sky can reach 10,000 K — cool, bluish.',
-          'The name "color temperature" comes from black-body radiation: heat a theoretical perfect emitter and it glows red at low temperatures, orange, yellow, white, and eventually blue as temperature increases. The color of the glow corresponds to the temperature. Ironically, what we call "warm" light (orange) corresponds to a *lower* color temperature, while "cool" light (blue) corresponds to a *higher* temperature.',
-          'Festival lighting designers choose color temperature carefully. For Diwali or Bihu celebrations, warm white LEDs (2,700-3,000 K) mimic the traditional look of oil lamps and create an inviting atmosphere. Cooler whites (4,000-6,500 K) are used where alertness and clarity are needed, such as hospitals and offices. The wrong color temperature can make a festival feel sterile or a hospital feel drowsy.',
+          'How do we compare light sources fairly? Not by watts (that measures energy *consumed*), but by **lumens per watt** \u2014 how much visible light you get for each unit of energy. An oil diya manages about 0.3 lumens per watt. An incandescent bulb does about 15. A modern LED achieves 120 or more.',
+          'This means one 10-watt LED produces the same brightness (about 1,600 lumens) as a 100-watt incandescent bulb. Switch every bulb in a house from incandescent to LED and you cut the lighting electricity bill by 85\u201390%. Scale that to an entire country and the savings are enormous \u2014 the global switch to LEDs saves roughly 570 million tonnes of CO\u2082 per year.',
+          '**Prediction:** if LEDs are so much better, why were they not invented first? Because electroluminescence requires semiconductor physics that was not understood until the 20th century. The incandescent bulb (1879) came from a simpler principle \u2014 heat something and it glows. Science had to advance before the more efficient path became possible.',
           ],
-          keyIdea: 'Color temperature (in Kelvin) describes the warmth or coolness of white light. Lower values produce warm orange tones; higher values produce cool blue tones. Festival ambiance depends heavily on choosing the right color temperature.',
+          keyIdea: 'Lumens per watt measures light output per unit of energy. LEDs achieve 120+ lm/W vs 15 for incandescent \u2014 an 8\u00d7 improvement that saves billions of tonnes of CO\u2082.',
+          diagram: 'EnergyEfficiencyDiagram',
+        },
+        {
+          title: 'Solar Cells: Turning Sunlight Into Electricity',
+          paragraphs: [
+          'A solar (photovoltaic) cell does the reverse of an LED: instead of converting electricity into light, it converts light into electricity. When a photon from the sun hits a silicon solar cell, it knocks an electron free \u2014 this is the **photoelectric effect**, first explained by Einstein in 1905.',
+          'Inside the cell, two layers of silicon \u2014 one with extra electrons (N-type) and one with "holes" (P-type) \u2014 create an electric field at their junction. This field pushes freed electrons one way and holes the other, creating a current that flows through an external circuit. Connect an LED to a solar cell and you have a self-powered light \u2014 sunlight in, photons out, no grid required.',
+          'Modern solar cells convert about 20\u201325% of sunlight into electricity (research cells exceed 47%). Combined with LED efficiency, a small solar panel can power enough LEDs to light a home all night. This is why solar-powered LED lanterns are transforming rural communities across India \u2014 replacing kerosene lamps that are costly, dangerous, and polluting.',
+          ],
+          keyIdea: 'Solar cells use the photoelectric effect to convert sunlight into electricity. Paired with efficient LEDs, a small solar panel can replace kerosene lamps entirely.',
+          diagram: 'SolarCellBasicsDiagram',
+        },
+        {
+          title: 'Why LEDs Changed the World',
+          paragraphs: [
+          'Before LEDs, artificial lighting consumed about 20% of global electricity. Today, that fraction is dropping fast as LEDs replace older technologies worldwide. The impact goes far beyond electricity bills.',
+          '**Safety:** LED lanterns replace open-flame kerosene lamps that cause thousands of fires and respiratory illnesses each year. **Access:** solar-powered LED systems bring light to the 700 million people worldwide who lack electricity, enabling children to study after dark. **Environment:** less electricity demand means fewer coal plants and lower CO\u2082 emissions. The 2014 Nobel Prize in Physics was awarded for the invention of blue LEDs \u2014 the missing piece that made white LED lighting possible.',
+          '**Analogy to the story:** Hriday\'s clay diya is beautiful but produces only about 12 lumens and lasts one evening. A single solar-powered LED produces 100+ lumens, lasts decades, costs almost nothing to run, and creates no smoke. The poetry of the floating lamp and the physics of the LED are not in conflict \u2014 understanding the science makes the tradition even more remarkable.',
+          ],
+          keyIdea: 'LEDs transformed global lighting: safer than flames, accessible without a grid, and responsible for massive CO\u2082 reductions. The 2014 Nobel Prize honoured the blue LED that made white light possible.',
           diagram: 'WavelengthSpectrum',
-        },
-        {
-          title: 'LED Circuit Design: From Electrons to Light',
-          paragraphs: [
-          'An LED (Light Emitting Diode) produces light through **electroluminescence** — when electrons cross a semiconductor junction, they release energy as photons. Unlike incandescent bulbs that heat a filament until it glows (wasting 90% of energy as heat), LEDs convert electrical energy directly into light, achieving efficiencies above 50%.',
-          'Every LED circuit requires a **current-limiting resistor**. LEDs have a characteristic called forward voltage (typically 1.8-3.3V depending on color), and they draw as much current as the circuit can supply. Without a resistor, the current surges, the LED overheats, and it burns out in seconds. The resistor value is calculated using Ohm\'s law: R = (V_supply - V_forward) / I_desired.',
-          'Stringing multiple LEDs together requires choosing between **series** and **parallel** configurations. In series, the same current flows through all LEDs but the voltages add up — ten 3V LEDs in series need a 30V supply. In parallel, each LED gets the full supply voltage but needs its own resistor, and the currents add up. Festival light strings typically use series-parallel combinations to balance voltage requirements with reliability — if one LED fails in a series string, the whole string goes dark.',
-          ],
-          keyIdea: 'LEDs produce light by electroluminescence, far more efficiently than incandescent bulbs. Every LED circuit needs a current-limiting resistor, and choosing series vs parallel configuration determines voltage and reliability tradeoffs.',
-          diagram: 'CircuitDiagram',
         },
       ],
     },
@@ -12437,6 +12774,7 @@ Dijou's gift was not invention. It was *translation*. She took the language of t
       project: {
         title: 'Build a Digital Rhythm Analyzer',
         description: 'Create a program that analyzes rhythmic patterns in traditional Dimasa music and visualizes the frequency spectrum.',
+        outputDiagram: 'RhythmAnalyzerOutputDiagram',
         steps: [
           'Record or find samples of traditional Dimasa drumming',
           'Use Python to compute the frequency spectrum using FFT',
@@ -12453,59 +12791,109 @@ Dijou's gift was not invention. It was *translation*. She took the language of t
     },
     illustration: '/content/illustrations/music-dimasa-kingdom.webp',
     track: 'school',
-    subjects: ['Biology'] as Subject[],
+    subjects: ['Physics', 'Music & Arts'] as Subject[],
     toolSkills: ['Python' as Skill, 'NumPy' as Skill, 'Matplotlib' as Skill, 'Data Analysis' as Skill],
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'music-dimasa' as const,
     level0: {
       vocabulary: [
-        ['Frequency', 'The number of sound wave cycles per second, measured in Hertz (Hz) — higher frequency means higher pitch'],
-        ['Octave', 'The interval between one musical pitch and another with double its frequency — the most fundamental interval in music'],
-        ['Timbre', 'The unique tone color of an instrument — what makes a flute sound different from a drum playing the same note'],
-        ['Pentatonic scale', 'A five-note musical scale found independently in cultures worldwide — built from the simplest frequency ratios'],
-        ['Harmonics', 'Higher frequencies produced simultaneously when a string or air column vibrates — whole-number multiples of the fundamental'],
+        ['Frequency', 'The number of sound wave cycles per second, measured in Hertz (Hz) \u2014 higher frequency means higher pitch'],
+        ['Octave', 'The interval between one musical pitch and another with double its frequency \u2014 the most fundamental interval in music'],
+        ['Timbre', 'The unique tone colour of an instrument \u2014 what makes a flute sound different from a drum playing the same note'],
+        ['Pentatonic scale', 'A five-note musical scale found independently in cultures worldwide \u2014 built from the simplest frequency ratios'],
+        ['Harmonics', 'Higher frequencies produced simultaneously when a string or air column vibrates \u2014 whole-number multiples of the fundamental'],
       ],
       trueFalse: [
-        { statement: 'A guitar string vibrates at only one frequency when plucked.', isTrue: false, explanation: 'A vibrating string produces its fundamental frequency plus many harmonics (2x, 3x, 4x the fundamental, and so on) simultaneously. This mixture of harmonics is what gives the guitar its characteristic timbre — a pure single frequency would sound flat and electronic.' },
-        { statement: 'Doubling the frequency of a note raises it by exactly one octave.', isTrue: true, explanation: 'The octave relationship is a 2:1 frequency ratio. Middle C is 261.6 Hz; the C one octave higher is 523.2 Hz (exactly double). This logarithmic relationship is universal — every musical tradition in the world recognizes the octave as a fundamental interval.' },
-        { statement: 'The pentatonic scale is unique to Asian music.', isTrue: false, explanation: 'Pentatonic scales appear independently in musical traditions on every continent — from Scottish folk music to West African drumming to Appalachian ballads to Chinese classical music. They arise naturally from the simplest frequency ratios (2:1, 3:2, 4:3), which produce the most naturally pleasing sounds.' },
+        { statement: 'A guitar string vibrates at only one frequency when plucked.', isTrue: false, explanation: 'A vibrating string produces its fundamental frequency plus many harmonics (2x, 3x, 4x the fundamental) simultaneously. This mixture of harmonics is what gives the guitar its characteristic timbre.' },
+        { statement: 'Doubling the frequency of a note raises it by exactly one octave.', isTrue: true, explanation: 'The octave relationship is a 2:1 frequency ratio. Middle C is 261.6 Hz; the C one octave higher is 523.2 Hz (exactly double).' },
+        { statement: 'The pentatonic scale is unique to Asian music.', isTrue: false, explanation: 'Pentatonic scales appear independently in musical traditions on every continent \u2014 from Scottish folk music to West African drumming to Appalachian ballads. They arise from the simplest frequency ratios.' },
       ],
       facts: [
-        'The human ear can detect frequencies from roughly 20 Hz (a deep rumble) to 20,000 Hz (a high whine). Musical instruments typically produce fundamentals between 27 Hz (lowest piano note) and about 4,000 Hz (highest piccolo note).',
-        'The pentatonic scale uses just 5 notes per octave instead of the Western 12. It arises from the simplest frequency ratios and sounds naturally harmonious, which is why it appears independently in musical traditions across every continent.',
-        'Traditional Dimasa instruments like the khram (drum) and muri (flute) have characteristic harmonic profiles shaped by their materials and geometry. A bamboo flute\'s bore diameter, wall thickness, and finger hole placement all affect which harmonics are emphasized.',
+        'The human ear can detect frequencies from roughly 20 Hz (a deep rumble) to 20,000 Hz (a high whine). Musical instruments typically produce fundamentals between 27 Hz and about 4,000 Hz.',
+        'The pentatonic scale uses just 5 notes per octave. It arises from the simplest frequency ratios and sounds naturally harmonious, which is why it appears independently in traditions across every continent.',
+        'Traditional Dimasa instruments like the khram (drum) and muri (flute) have characteristic harmonic profiles shaped by their materials and geometry.',
       ],
-      offlineActivity: 'Make a one-string instrument from a rubber band stretched over an open box or between two pencils taped to a table. Pluck it and listen to the pitch. Now press the band at the halfway point and pluck one side — the pitch should jump up one octave (double the frequency). Try pressing at one-third, one-quarter, and other fractions. You are discovering the harmonic series — the same physics behind every stringed instrument in the world.',
+      offlineActivity: 'Make a one-string instrument from a rubber band stretched tightly over an open box or between two pencils taped to a table. Pluck it and listen to the pitch. Now press the band at the halfway point and pluck one side \u2014 the pitch should jump up one octave (double the frequency). Try pressing at one-third, one-quarter, and other fractions. You are discovering the harmonic series.',
+      offlineActivityDiagram: 'ActivityStringPitchDiagram',
+      codeTeaser: `import numpy as np
+import matplotlib.pyplot as plt
+
+# Generate and plot musical intervals
+t = np.linspace(0, 0.02, 1000)  # 20 ms
+
+fundamental = 261.6  # Middle C (Hz)
+octave = fundamental * 2
+fifth = fundamental * 3/2
+
+fig, axes = plt.subplots(3, 1, figsize=(10, 6), sharex=True)
+for ax, freq, name in zip(axes,
+    [fundamental, fifth, octave],
+    ["Fundamental (C4: 261.6 Hz)", "Perfect Fifth (G4: 392.4 Hz)", "Octave (C5: 523.2 Hz)"]):
+    wave = np.sin(2 * np.pi * freq * t)
+    ax.plot(t * 1000, wave, linewidth=2)
+    ax.set_ylabel(name, fontsize=9)
+    ax.grid(alpha=0.3)
+axes[-1].set_xlabel("Time (ms)")
+fig.suptitle("Musical Intervals: Simple Frequency Ratios")
+plt.tight_layout()
+plt.show()  # Can you see how the octave fits exactly 2 cycles where the fundamental fits 1?`,
+      referenceLinks: [
+        { slug: 'waves-and-properties', reason: 'Deep dive into wave behaviour \u2014 frequency, wavelength, amplitude, and how waves interact to form standing wave patterns' },
+        { slug: 'music-and-arts', reason: 'Full reference on harmonics, decibels, rhythm, and how sound becomes music' },
+      ],
+      nextLessons: [
+        { slug: 'singing-bamboo', reason: 'Bamboo groves that sing \u2014 resonance in natural tubes uses the same standing wave physics as Dijou\'s flute' },
+        { slug: 'bamboo-flute-nagaland', reason: 'Build a real bamboo flute and learn how finger hole placement determines pitch through standing waves' },
+        { slug: 'grandmother-remembered', reason: 'Why songs are easier to remember than lists \u2014 rhythm and melody engage the brain\'s memory circuits' },
+      ],
+      quiz: [
+        { question: 'What determines the pitch of a sound?', options: ['Its volume', 'Its frequency (cycles per second)', 'Its duration', 'The material it passes through'], answer: 1 },
+        { question: 'What happens when you double the frequency of a note?', options: ['The note gets louder', 'The note goes up by one octave', 'The note changes timbre', 'The note goes down by one octave'], answer: 1 },
+        { question: 'Why do a flute and a drum sound different even when playing the same note?', options: ['They are at different volumes', 'They have different harmonic profiles (timbre)', 'One is higher pitched than the other', 'They use different musical scales'], answer: 1 },
+        { question: 'What is polyrhythm?', options: ['Playing very fast', 'Two or more different rhythmic patterns played simultaneously', 'A rhythm that never repeats', 'Playing only one beat per measure'], answer: 1 },
+        { question: 'Why do pentatonic scales sound harmonious?', options: ['Because they were invented by professional musicians', 'Because they use 12 notes', 'Because they are built from the simplest frequency ratios (2:1, 3:2, 4:3)', 'Because they use only drums'], answer: 2 },
+      ],
       concepts: [
         {
-          title: 'Frequency and Pitch',
+          title: 'Pitch and Frequency: What Makes High and Low',
           paragraphs: [
-          'Sound is a pressure wave traveling through air (or any medium). **Frequency** — the number of wave cycles per second, measured in Hertz (Hz) — determines what we perceive as **pitch**. Low frequencies (around 80-250 Hz) sound deep (like a drum or bass voice); high frequencies (2,000-4,000 Hz) sound shrill (like a whistle or cymbal). The human hearing range spans roughly 20 Hz to 20,000 Hz.',
-          'Musical pitch follows a **logarithmic** scale, not a linear one. Doubling the frequency raises the pitch by one **octave** — the most fundamental interval in music. Middle C on a piano vibrates at 261.6 Hz; the C one octave higher vibrates at 523.2 Hz (exactly double). This logarithmic relationship means each successive octave requires doubling the frequency: 261 → 523 → 1046 → 2093 Hz for four octaves of C.',
-          'Dimasa music uses a pentatonic scale — five notes per octave rather than the Western twelve. Pentatonic scales are found independently in musical traditions across every continent because they are derived from the simplest frequency ratios (2:1 for octave, 3:2 for fifth, 4:3 for fourth). These simple ratios produce the most consonant (pleasant-sounding) intervals, which is why pentatonic melodies sound naturally harmonious.',
+          'Sound is a pressure wave travelling through air. **Frequency** \u2014 the number of wave cycles per second, measured in Hertz (Hz) \u2014 determines what we perceive as **pitch**. Low frequencies (around 80\u2013250 Hz) sound deep, like a drum or bass voice. High frequencies (2,000\u20134,000 Hz) sound shrill, like a whistle.',
+          'Musical pitch follows a **logarithmic** scale, not a linear one. Doubling the frequency raises the pitch by one **octave** \u2014 the most fundamental interval in music. Middle C vibrates at 261.6 Hz; the C one octave higher vibrates at 523.2 Hz (exactly double).',
+          '**Prediction check:** if you press a guitar string at its exact midpoint and pluck one half, what should happen to the pitch? The vibrating length is halved, so the frequency doubles \u2014 the note jumps up exactly one octave. Try it!',
           ],
-          keyIdea: 'Frequency determines pitch on a logarithmic scale — doubling the frequency raises pitch by one octave. Pentatonic scales, used in Dimasa music, arise from the simplest frequency ratios and appear in musical traditions worldwide.',
+          keyIdea: 'Frequency determines pitch on a logarithmic scale \u2014 doubling the frequency raises pitch by one octave. This is why pressing a string at its midpoint produces a note one octave higher.',
+          diagram: 'PitchFrequencyDiagram',
+        },
+        {
+          title: 'Scales as Mathematical Ratios',
+          paragraphs: [
+          'A musical scale is a set of notes chosen from the infinite range of possible pitches. Why do certain notes sound good together? Because the most pleasing intervals correspond to the **simplest frequency ratios**: octave = 2:1, perfect fifth = 3:2, perfect fourth = 4:3.',
+          'Dimasa music uses a **pentatonic scale** \u2014 five notes per octave rather than the Western twelve. Pentatonic scales are found independently on every continent because they are built from these simplest ratios. Play only the black keys on a piano and you hear a pentatonic scale \u2014 it sounds naturally harmonious because every interval is a simple ratio.',
+          '**Analogy:** imagine two pendulums swinging side by side. If their frequencies are in a simple ratio (like 2:1 or 3:2), they periodically sync up, creating a regular, predictable pattern. If the ratio is complex (like 7:5), the pattern seems random and dissonant. Our brains interpret simple-ratio sound patterns as consonant (pleasant) and complex ratios as dissonant.',
+          ],
+          keyIdea: 'The most harmonious musical intervals correspond to simple frequency ratios. Pentatonic scales use the simplest ratios and appear independently in every musical culture.',
           diagram: 'MusicalWavesDiagram',
         },
         {
-          title: 'Harmonics: The Color of Sound',
+          title: 'Rhythm as Time Division',
           paragraphs: [
-          'When a string or air column vibrates, it does not produce a single frequency. It vibrates simultaneously at its **fundamental frequency** (the lowest) and at integer multiples of that frequency called **harmonics** or **overtones**. If the fundamental is 100 Hz, the harmonics are 200, 300, 400, 500 Hz, and so on, each progressively weaker.',
-          'The specific mixture of harmonics — which ones are present and how strong each is — determines the **timbre** (tone color) of an instrument. This is why a flute and a violin playing the same note at the same loudness sound completely different. The flute produces mostly the fundamental with weak harmonics (pure, clear tone). The violin produces strong odd and even harmonics (rich, complex tone). A clarinet suppresses even harmonics, giving it a distinctive hollow quality.',
-          'Traditional Dimasa instruments like the **khram** (drum) and **muri** (flute) have characteristic harmonic profiles shaped by their construction materials and geometry. A bamboo flute\'s bore diameter, wall thickness, and finger hole placement all affect which harmonics are emphasized. Master craftsmen tune these parameters by ear — but the underlying physics is the harmonic series, discoverable by anyone with a vibrating string and patience.',
+          'Rhythm is the temporal structure of music \u2014 patterns of sound and silence organized in time. All rhythms can be described as **ratios of time intervals**. A 4/4 time signature divides music into groups of four beats; subdivide each beat into two and you get eighth notes, into three for triplets.',
+          'Dimasa music features **polyrhythm** \u2014 two different rhythmic patterns played simultaneously. One drummer plays 3 beats per measure while another plays 4 in the same time. The patterns align every 12 beats (the least common multiple of 3 and 4), creating a cycle of tension and resolution.',
+          '**Check yourself:** clap a steady beat with your right hand (4 beats). Now try clapping 3 evenly-spaced beats with your left hand in the same time span. It is surprisingly hard! Your brain\'s basal ganglia and cerebellum \u2014 the same regions that control movement \u2014 must process both patterns at once. This is why rhythm and dance are so deeply linked across all human cultures.',
           ],
-          keyIdea: 'Every musical instrument produces a unique mixture of harmonics (integer multiples of the fundamental frequency). This harmonic profile — not the fundamental pitch — is what gives each instrument its distinctive sound.',
-          diagram: 'WaveEquationDiagram',
+          keyIdea: 'Rhythms are mathematical ratios of time intervals. Polyrhythm layers different ratios simultaneously, creating complex patterns that resolve at the least common multiple.',
+          diagram: 'RhythmDivisionDiagram',
         },
         {
-          title: 'Rhythm Mathematics: Patterns in Time',
+          title: 'How Instruments Produce Different Timbres',
           paragraphs: [
-          'Rhythm is the temporal structure of music — patterns of sound and silence organized in time. All rhythms can be described mathematically as ratios of time intervals. A **4/4 time signature** divides music into groups of four beats; each beat is a quarter note. Subdividing each beat into two gives eighth notes; into three gives triplets. Complex rhythms layer multiple subdivisions simultaneously.',
-          'Dimasa music features **polyrhythm** — two or more different rhythmic patterns played simultaneously. For example, one drummer might play 3 beats per measure while another plays 4 beats in the same time span. The two patterns align every 12 beats (the least common multiple of 3 and 4), creating a cycle of tension and resolution. West African and Indian classical music use similar polyrhythmic structures, reflecting deep mathematical patterns in human perception.',
-          'The brain processes rhythm in the **basal ganglia** and **cerebellum** — the same regions involved in movement and timing. When you tap your foot to music, your motor cortex is synchronizing with the rhythmic pattern. Studies show that rhythmic entrainment (the tendency to synchronize movement with a beat) is almost universal in humans but rare in other animals. This neurological connection between rhythm and movement is why music and dance are so deeply linked across all human cultures.',
+          'When Dijou plays her flute, drum, and string, each sounds completely different even at the same pitch. The difference is **timbre** (pronounced "TAM-ber") \u2014 the unique tone colour of each instrument, determined by its **harmonic profile**.',
+          'When a string vibrates, it does not produce just one frequency. It vibrates simultaneously at its fundamental frequency and at integer multiples called **harmonics**: 2\u00d7, 3\u00d7, 4\u00d7, and so on, each progressively weaker. A flute produces mostly the fundamental with weak harmonics (pure, clear tone). A drum produces non-harmonic overtones (rich, complex thud). A bowed string produces strong odd and even harmonics (warm, full tone).',
+          '**Analogy:** think of harmonics like ingredients in a recipe. The fundamental is the base (flour), and the harmonics are the spices. Same base ingredient, different spice mixtures = completely different dishes. Same fundamental pitch, different harmonic mixtures = completely different instrument sounds. Master instrument makers tune these "recipes" by adjusting shape, size, and material.',
           ],
-          keyIdea: 'Rhythms are mathematical ratios of time intervals. Polyrhythm layers different ratios simultaneously, creating complex patterns that resolve at the least common multiple. The brain processes rhythm in the same regions that control movement.',
+          keyIdea: 'Timbre is the unique mixture of harmonics that gives each instrument its distinctive sound. Flutes have weak harmonics (pure), drums have non-harmonic overtones (complex), and strings have strong harmonics (rich).',
+          diagram: 'TimbreDiagram',
         },
       ],
     },
@@ -13234,6 +13622,7 @@ Among the people of Assam, they say that eri silk is the warmest silk in the wor
       project: {
         title: 'Compare Silk Fiber Properties Across Types',
         description: 'Research and compare the properties of muga, eri, mulberry, and synthetic silk to understand what makes each unique.',
+        outputDiagram: 'EriSilkOutputDiagram',
         steps: [
           'Gather fiber samples or published data for muga, eri, mulberry silk, and nylon/polyester',
           'Compare tensile strength, elasticity, moisture absorption, and luster for each fiber',
@@ -13257,51 +13646,101 @@ Among the people of Assam, they say that eri silk is the warmest silk in the wor
     playground: 'eri-silk' as const,
     level0: {
       vocabulary: [
-        ['Echolocation', 'Finding objects by sending out a sound and listening for the echo — the time delay reveals distance, and the echo’s character reveals the object’s size, shape, and material'],
-        ['Ultrasonic', 'Sound waves above 20,000 Hz, too high-pitched for human ears — dolphins click at 20–130 kHz, and the HC-SR04 sensor operates at 40 kHz'],
-        ['Time-of-flight', 'The time it takes for a signal (sound, light, or radio) to travel to a target and return — divide by 2 and multiply by speed to get distance'],
-        ['Transducer', 'A device that converts one form of energy to another — the HC-SR04’s speaker converts electricity to sound, and its microphone converts sound back to electricity'],
-        ['Biomimicry', 'Designing technology by copying solutions that nature evolved — the dolphin’s melon inspired acoustic lenses, and bat sonar inspired ultrasonic cane sensors for the visually impaired'],
+        ['Metamorphosis', 'A dramatic transformation in body form during an organism\u2019s life cycle \u2014 eri silkworms undergo complete metamorphosis with four stages: egg, larva, pupa, adult'],
+        ['Fibroin', 'The structural protein that forms the core of silk thread \u2014 a chain of amino acids folded into crystalline beta-sheets that give silk its strength'],
+        ['Ahimsa', 'A Sanskrit word meaning "non-violence" \u2014 ahimsa silk is produced without killing the silkworm, by letting the moth emerge before harvesting the cocoon'],
+        ['Sericin', 'A sticky glue protein coating each silk filament that bonds adjacent threads in the cocoon \u2014 removed during processing to reveal the smooth fibroin core'],
+        ['Sericulture', 'The practice of raising silkworms and harvesting their silk \u2014 eri sericulture in Assam dates back centuries among Bodo, Mishing, and other indigenous communities'],
       ],
       trueFalse: [
-        { statement: 'The Ganges river dolphin is completely blind and cannot detect even light.', isTrue: false, explanation: 'Its eyes can detect light and dark (it knows if it’s day or night), but they lack lenses and cannot form images. It is functionally blind for navigation but not totally without light perception.' },
-        { statement: 'Sound travels faster in water than in air because water molecules are closer together.', isTrue: true, explanation: 'Water molecules are packed tightly, so vibrations pass from one to the next much faster — 1,480 m/s in water vs 343 m/s in air. This is why sonar is the dominant sensing technology underwater.' },
-        { statement: 'An ultrasonic sensor measures distance by measuring how loud the echo is.', isTrue: false, explanation: 'It measures the time the echo takes to return, not its loudness. Distance = speed × time / 2. Loudness tells you about the object’s material and size, but not its distance.' },
+        { statement: 'Eri silk is produced by boiling the cocoon with the pupa inside.', isTrue: false, explanation: 'That is how conventional mulberry silk is made. Eri silk is different \u2014 the moth is allowed to emerge alive from the open-ended cocoon, and only the empty shell is collected. This is why it is called ahimsa (non-violent) silk.' },
+        { statement: 'Eri silk is warmer than mulberry silk.', isTrue: true, explanation: 'Because eri silk is spun from short fibers (not reeled from continuous thread), the yarn has air pockets trapped between fibers \u2014 like wool. These air pockets provide insulation, making eri silk warmer than smooth mulberry silk.' },
+        { statement: 'A silkworm caterpillar produces silk from its legs.', isTrue: false, explanation: 'Silk is produced from modified salivary glands called spinnerets, located near the mouth. The caterpillar moves its head in a figure-8 pattern to lay down a continuous silk thread, building the cocoon layer by layer.' },
       ],
       facts: [
-        'The Gangetic river dolphin is nearly blind — its eyes can only tell light from dark. It navigates entirely by sonar, clicking up to 200 times per second.',
-        'Medical ultrasound uses the same principle as dolphin sonar — high-frequency sound waves bounce off organs and create an image. This is how doctors image babies before they’re born.',
-        'Submarines use sonar arrays that can detect objects hundreds of kilometres away. The same technology helps map the ocean floor, discovering new species and underwater mountains.',
+        'A single eri silkworm cocoon contains 300\u2013900 metres of continuous silk thread \u2014 but because the moth chews through it on exit, the thread must be spun from short pieces rather than reeled.',
+        'Eri silk is thermally stable up to 300\u00B0C (mulberry silk decomposes at 250\u00B0C), making it suitable for heat-resistant biocomposites and medical applications.',
+        'The eri silkworm feeds on castor leaves \u2014 castor plants grow on marginal land unsuitable for food crops, so eri silk production does not compete with food production.',
       ],
-      offlineActivity: 'Stand in a large room or hallway and clap once. Listen for the echo. Now try it in a smaller room — is the echo faster or slower? Try clapping near a wall vs in the middle of a room. You\'re doing exactly what a dolphin does: using sound to understand the shape of your environment.',
+      offlineActivity: 'Find two different fabrics at home \u2014 one smooth (like a polyester shirt) and one textured (like a wool sweater or rough cotton). Hold each up to your cheek. Which feels warmer? The textured one traps more air between its fibers, and still air is an excellent insulator. This is the same principle that makes eri silk (spun, textured) warmer than mulberry silk (smooth, reeled).',
+      offlineActivityDiagram: 'ActivitySilkStretchDiagram',
+      codeTeaser: `# Compare silk fiber properties
+fibers = ["Eri Silk", "Mulberry Silk", "Polyester"]
+warmth = [95, 40, 30]    # relative warmth score
+strength = [60, 85, 90]  # tensile strength score
+biodeg = [95, 90, 10]    # biodegradability score
+
+import matplotlib.pyplot as plt
+x = range(len(fibers))
+plt.bar(x, warmth, label="Warmth")
+plt.xticks(x, fibers)
+plt.ylabel("Score")
+plt.title("Which fiber is warmest?")
+plt.show()  # Try adding strength and biodeg!`,
+      referenceLinks: [
+        { slug: 'silk-science', reason: 'Deep dive into silk protein chemistry, beta-sheet structure, and how fiber properties emerge from molecular architecture' },
+        { slug: 'biology-foundations', reason: 'Understand cell biology and metamorphosis \u2014 the foundation for how a caterpillar transforms into a moth' },
+      ],
+      nextLessons: [
+        { slug: 'muga-silk-golden', reason: 'Explores muga silk \u2014 the other famous Assam silk with its golden color from a different protein structure' },
+        { slug: 'wild-orchids-trees', reason: 'Another story of organisms living in harmony with their environment \u2014 epiphytes that grow without harming their host' },
+        { slug: 'seed-keeper-nagaland', reason: 'Connects to biodiversity preservation \u2014 seed saving and genetic diversity parallel the ethics of sustainable silk' },
+      ],
+      quiz: [
+        { question: 'What makes eri silk "ahimsa" (non-violent)?', options: ['The silkworm is anaesthetised before processing', 'The moth is allowed to emerge alive before the cocoon is harvested', 'The silk is synthetic and no worms are used', 'The cocoon is dissolved in acid instead of boiled'], answer: 1 },
+        { question: 'Why is eri silk warmer than mulberry silk?', options: ['It is thicker', 'It is dyed with heat-retaining pigments', 'Its spun short fibers trap insulating air pockets', 'It absorbs more sunlight'], answer: 2 },
+        { question: 'What are the two main proteins in silk?', options: ['Keratin and collagen', 'Fibroin (structural core) and sericin (glue coat)', 'Actin and myosin', 'Hemoglobin and albumin'], answer: 1 },
+        { question: 'How many stages are in complete metamorphosis?', options: ['Two: larva and adult', 'Three: egg, larva, adult', 'Four: egg, larva, pupa, adult', 'Five: egg, larva, pupa, chrysalis, adult'], answer: 2 },
+        { question: 'What plant does the eri silkworm feed on?', options: ['Mulberry', 'Castor', 'Tea', 'Bamboo'], answer: 1 },
+      ],
       concepts: [
         {
-          title: 'Ahimsa Silk: Non-Violent Production',
+          title: 'The Eri Silkworm Life Cycle',
           paragraphs: [
-          'Conventional silk production (sericulture) kills the silkworm pupa inside the cocoon before it emerges, because the moth\'s exit hole breaks the continuous silk thread. Cocoons are typically boiled or steamed with the living pupa inside. A single kilogram of raw silk requires killing approximately 5,000-6,000 silkworms.',
-          '**Eri silk** (from *Samia ricini*, the eri silkworm) is fundamentally different. The moth is allowed to emerge naturally from the cocoon, and the silk is harvested afterward. Because the emerging moth ruptures the continuous filament, eri silk cannot be reeled like mulberry silk — instead, it is spun from short fibers, like cotton or wool. This produces a slightly rougher, warmer fabric with a distinctive texture.',
-          'This non-lethal production method is called **ahimsa silk** (ahimsa meaning "non-violence" in Sanskrit). Eri sericulture has been practiced in Assam for centuries, deeply embedded in the Bodo, Mishing, and other indigenous communities of Northeast India. The process aligns with traditional values of coexistence with nature. Today, ahimsa silk commands a premium in global ethical fashion markets, providing income to rural communities while preserving both traditional knowledge and insect welfare.',
+          'Imagine you could completely dissolve your body and rebuild it as a totally different creature. That is exactly what the eri silkworm does. This process is called **complete metamorphosis**, and it has four stages: **egg \u2192 larva (caterpillar) \u2192 pupa (inside cocoon) \u2192 adult (moth)**.',
+          'The caterpillar stage is all about eating. For 25\u201330 days, the larva munches through castor leaves, growing through five stages called **instars** (it sheds its skin each time it outgrows it). When fully grown, it begins spinning a cocoon from silk thread produced by glands near its mouth. The caterpillar moves its head in a figure-8 pattern, laying down a single continuous thread up to 900 metres long.',
+          'Inside the cocoon, something extraordinary happens: the caterpillar\u2019s body almost completely dissolves into a cellular soup. New adult structures \u2014 wings, compound eyes, antennae, legs \u2014 grow from dormant cell clusters called **imaginal discs** that were hidden inside the caterpillar all along. After 2\u20133 weeks, the moth emerges through the open end of the eri cocoon, ready to mate and lay eggs.',
           ],
-          keyIdea: 'Eri silk is harvested after the moth emerges naturally, making it "ahimsa" (non-violent) silk. The broken filaments are spun rather than reeled, producing a unique warm, textured fabric traditional to Assam\'s indigenous communities.',
-          diagram: 'SilkStructureDiagram',
+          keyIdea: 'Eri silkworms undergo complete metamorphosis: the caterpillar\u2019s body dissolves inside the cocoon and rebuilds into a moth from imaginal discs. The silk cocoon \u2014 up to 900 m of thread \u2014 protects the pupa during this radical transformation.',
+          diagram: 'EriLifeCycleDiagram',
+          checkYourself: 'Why does the eri cocoon have an open end, while the mulberry cocoon is sealed shut?',
+          checkAnswer: 'The eri moth needs to exit without human help. The open end lets it push out naturally. Mulberry cocoons are sealed because those moths would also exit, but silk producers boil them first to preserve the unbroken thread.',
         },
         {
-          title: 'Complete Metamorphosis: Egg to Moth',
+          title: 'Ahimsa Silk: Ethics Meets Engineering',
           paragraphs: [
-          'Eri silkworms undergo **complete metamorphosis** (holometabolism) — a four-stage life cycle radically different from gradual metamorphosis. The stages are: **egg** → **larva** (caterpillar) → **pupa** (cocoon) → **adult** (moth). During pupation, the caterpillar\'s body is almost completely dissolved and reorganized — the majority of larval tissues break down into a cellular soup, and adult structures (wings, legs, compound eyes, reproductive organs) develop from clusters of cells called **imaginal discs** that were dormant throughout the larval stage.',
-          'The silk cocoon itself is a feat of biological engineering. The fifth-instar (final stage) larva produces silk from modified salivary glands called **spinnerets**. The silk is a dual-protein system: **fibroin** (the structural core) coated with **sericin** (a sticky adhesive that bonds adjacent threads). The caterpillar moves its head in a figure-8 pattern, laying down a single continuous thread that can be 300-900 meters long, building up the cocoon layer by layer over 3-4 days.',
-          'The cocoon serves as a protective chamber during the vulnerable pupal stage, shielding the developing moth from predators, UV radiation, temperature extremes, and desiccation. Eri silk cocoons are open at one end (unlike the completely sealed cocoons of mulberry silkworms), which is one reason the moth can emerge without assistance and why eri production does not require killing the pupa.',
+          'Here is the central tension of silk production: a continuous, unbroken silk thread makes the smoothest, strongest fabric. But getting that unbroken thread means killing the pupa before it chews its way out. Conventional silk production boils or steams cocoons with the living pupa inside \u2014 about 5,000 silkworms die per kilogram of raw silk.',
+          '**Eri silk** solves this problem with a trade-off. The moth emerges alive, but it ruptures the continuous filament. The resulting short fibers must be **spun** (twisted together like cotton or wool) rather than **reeled** (unwound as a continuous strand). The fabric is rougher, more textured, and cannot match the smooth sheen of mulberry silk. But it is warm, durable, biodegradable, and \u2014 crucially \u2014 no animal is killed.',
+          'This approach, called **ahimsa silk**, has been practiced by indigenous communities in Assam (Bodo, Mishing, and others) for centuries. Today, it is gaining global recognition in ethical fashion markets. The price premium that ahimsa silk commands provides income for rural artisans while preserving traditional knowledge and insect welfare. It proves that innovation sometimes means accepting a different kind of quality rather than maximizing a single metric.',
           ],
-          keyIdea: 'Complete metamorphosis involves near-total dissolution of larval tissues and rebuilding from imaginal discs. The silk cocoon — up to 900 meters of continuous fibroin/sericin thread — protects the pupa during this radical transformation.',
+          keyIdea: 'Ahimsa silk trades smoothness for ethics: the moth lives, the thread breaks, and the fabric is spun rather than reeled. It is warmer and more textured than conventional silk, and no silkworms are killed.',
+          diagram: 'EriAhimsaDiagram',
+          checkYourself: 'If you were designing a new silk fabric for winter clothing, would you choose eri silk or mulberry silk? Why?',
+          checkAnswer: 'Eri silk \u2014 its spun structure traps air pockets that insulate against cold, similar to wool. Mulberry silk is smooth and cool to the touch, better suited for summer garments.',
         },
         {
-          title: 'Fiber Properties: What Makes Eri Silk Special',
+          title: 'Protein Fibers: What Makes Silk Strong',
           paragraphs: [
-          'Eri silk has distinct properties that set it apart from mulberry silk. Its **thermal conductivity** is lower than mulberry silk, making it warmer — earning it the local name "the fabric of the cold" in Assam. The short-staple spun yarn traps air pockets (like wool), providing insulation that smooth, reeled mulberry silk cannot match.',
-          'Eri fibroin has a different amino acid composition than mulberry silk fibroin. It contains more **alanine** and less **glycine**, resulting in a more crystalline structure with higher thermal stability. Eri silk does not decompose until about 300°C, compared to 250°C for mulberry silk. This makes it suitable for applications requiring heat resistance, including as a reinforcement fiber in biocomposites.',
-          'Modern textile science is exploring eri silk for biomedical applications. Its low immunogenicity (it does not trigger strong immune reactions) makes it suitable for surgical sutures, wound dressings, and tissue engineering scaffolds. The spun-fiber structure creates a porous fabric that allows cell growth and gas exchange — properties that reeled silk fabrics lack. Eri silk bridges traditional textile craft and cutting-edge biomaterials research.',
+          'Silk is a **protein** \u2014 a long chain of amino acids folded into a specific 3D shape. The key structural protein is **fibroin**, which arranges itself into flat, orderly sheets called **beta-sheets**. These sheets stack on top of each other and are held together by hydrogen bonds, forming **crystalline regions** that give silk its tensile strength.',
+          'But silk is not entirely crystalline. Between the ordered beta-sheet zones are **amorphous regions** \u2014 tangled, random coils of protein chain. These amorphous zones give silk its elasticity and flexibility. The combination of rigid crystalline zones (strength) and flexible amorphous zones (stretch) is what makes silk one of the toughest natural fibers \u2014 stronger per unit weight than steel.',
+          'Eri silk fibroin has more of the amino acid **alanine** and less **glycine** compared to mulberry silk. This changes the crystalline structure, raising eri silk\u2019s thermal decomposition temperature to about 300\u00B0C (vs 250\u00B0C for mulberry). The higher thermal stability makes eri silk promising for biomedical uses: surgical sutures, wound dressings, and tissue scaffolds. Its low immunogenicity (it doesn\u2019t trigger immune reactions) is a bonus that synthetic fibers cannot match.',
           ],
-          keyIdea: 'Eri silk is warmer than mulberry silk due to its spun structure trapping air. Its higher thermal stability and low immunogenicity make it promising for biomedical applications from sutures to tissue engineering.',
+          keyIdea: 'Silk\u2019s strength comes from crystalline beta-sheet regions of fibroin protein. Amorphous regions between the crystals provide elasticity. Eri silk\u2019s higher alanine content raises its thermal stability, making it useful for biomedical applications.',
+          diagram: 'EriFibroinDiagram',
+          checkYourself: 'Spider silk is famously strong. Based on what you learned, what would you predict about its ratio of crystalline to amorphous regions?',
+          checkAnswer: 'Spider silk has a high proportion of crystalline beta-sheet regions (for strength) connected by very elastic amorphous regions (for stretch). This combination makes it tougher than kevlar per unit weight.',
+        },
+        {
+          title: 'Sustainable Fashion: Eri Silk vs Fast Fashion',
+          paragraphs: [
+          'The fashion industry is one of the world\u2019s largest polluters. **Fast fashion** relies on petroleum-based synthetic fibers (polyester, nylon) that take 200+ years to decompose and shed microplastics into waterways with every wash. Manufacturing these fibers is energy-intensive and chemically polluting.',
+          'Eri silk offers an alternative: it is **100% protein**, fully biodegradable, produced from castor plants that grow on marginal land (not competing with food crops), processed by hand (low energy), and the animals are not killed. The entire supply chain is local \u2014 castor cultivation, silkworm rearing, cocoon collection, hand spinning, and weaving all happen within rural communities in Northeast India.',
+          'The challenge for eri silk is **scale**. Hand spinning is slow, and the rough texture does not appeal to consumers accustomed to smooth, cheap polyester. But as awareness of fashion\u2019s environmental cost grows, and as designers learn to work with eri silk\u2019s unique character, demand is increasing. The future may not be choosing between sustainability and quality, but redefining what quality means.',
+          ],
+          keyIdea: 'Eri silk is biodegradable, locally produced, animal-friendly, and low-energy \u2014 the opposite of fast fashion. The challenge is scaling handcraft production to compete with industrial synthetics.',
+          diagram: 'EriSustainableFashionDiagram',
+          checkYourself: 'Name two environmental problems caused by polyester clothing that eri silk does NOT cause.',
+          checkAnswer: 'Microplastic pollution (polyester sheds tiny plastic fibers during washing that enter waterways) and non-biodegradability (polyester takes 200+ years to decompose in landfills). Eri silk is a protein that composts naturally and sheds no microplastics.',
         },
       ],
     },
@@ -13654,6 +14093,7 @@ Every grain of rice on your plate began with a girl on a hillside, watching bird
       project: {
         title: 'Grow Rice and Measure Growth Variables',
         description: 'Germinate rice seeds under different conditions and measure how water depth, fertilizer, and light affect seedling growth.',
+        outputDiagram: 'RiceGrowthOutputDiagram',
         steps: [
           'Obtain rice seeds (unpolished/brown rice that can germinate) and soak overnight',
           'Set up 4 groups: normal water, deep water, fertilized water, and low light',
@@ -13677,51 +14117,102 @@ Every grain of rice on your plate began with a girl on a hillside, watching bird
     playground: 'first-rice' as const,
     level0: {
       vocabulary: [
-        ['Photosynthesis', 'The process plants use to convert sunlight, water, and CO₂ into sugar and oxygen'],
-        ['Chlorophyll', 'The green pigment in plants that absorbs sunlight for photosynthesis'],
-        ['Vegetative propagation', 'Growing a new plant from a fragment of the parent — without seeds'],
-        ['Totipotent', 'A cell that can develop into any cell type — plant cells have this superpower'],
-        ['Cell wall', 'A rigid outer layer made of cellulose that gives plant cells their shape and strength'],
+        ['Domestication', 'The process of selectively breeding wild organisms over generations until they become dependent on humans \u2014 wild rice was domesticated into cultivated rice about 10,000 years ago'],
+        ['Landrace', 'A traditional crop variety adapted to local conditions through centuries of farmer selection \u2014 Assam has hundreds of rice landraces (ahu, sali, bao, boro)'],
+        ['Selective breeding', 'Choosing organisms with desired traits to be parents of the next generation \u2014 farmers selected rice with larger grains and non-shattering seeds'],
+        ['Hybrid vigor', 'The increased health and yield that often results from crossing two genetically different parent lines \u2014 hybrid rice yields 15\u201320% more than either parent'],
+        ['Aerenchyma', 'Air-channel tissue inside rice stems and roots that delivers oxygen to flooded roots \u2014 this adaptation is why rice can grow in standing water while most crops cannot'],
       ],
       trueFalse: [
-        { statement: 'Plants eat soil to get their food.', isTrue: false, explanation: 'Plants make their own food through photosynthesis using sunlight, water, and CO₂ from air. The soil provides minerals and water, but the actual "food" (sugar) is manufactured inside the leaves using solar energy.' },
-        { statement: 'A single plant cell can grow into an entire new plant.', isTrue: true, explanation: 'Unlike most animal cells, many plant cells are totipotent — they retain the ability to become any cell type. This is why you can grow a new plant from a cutting — the cut stem cells reorganize into roots, stems, and leaves.' },
-        { statement: 'All plants reproduce using seeds.', isTrue: false, explanation: 'Many plants can also reproduce vegetatively — through cuttings, runners, tubers, or bulbs. Every banana plant in your grocery store is a clone, grown from a cutting rather than a seed.' },
+        { statement: 'Rice can only grow in flooded paddy fields.', isTrue: false, explanation: 'While most rice is grown in flooded paddies, upland rice varieties (like Assam\u2019s ahu rice) grow on dry hillsides without standing water. Flooding is an advantage, not a requirement \u2014 it suppresses weeds and stabilizes temperature.' },
+        { statement: 'The Green Revolution doubled rice yields but reduced genetic diversity.', isTrue: true, explanation: 'High-yield varieties (HYVs) replaced thousands of traditional landraces with a few uniform varieties. Yields doubled, but the genetic library shrank dangerously. Traditional varieties contain genes for drought, flood, and pest resistance that modern breeding desperately needs.' },
+        { statement: 'Hybrid seeds produce identical crops generation after generation.', isTrue: false, explanation: 'Hybrid seeds give excellent yields in the first generation (F1), but their offspring segregate unpredictably (Mendel\u2019s laws). Farmers must buy fresh hybrid seeds every season, unlike traditional varieties where they can save and replant.' },
       ],
       facts: [
-        'Photosynthesis produces all the oxygen we breathe. Every other breath you take comes from algae and plants splitting water molecules apart.',
-        'The world\'s largest organism is a clonal colony of aspen trees in Utah called "Pando" — 47,000 tree stems all connected by a single root system, weighing 6,600 tonnes.',
-        'Tulsi (holy basil) contains eugenol, a natural antiseptic. Traditional medicine used it for centuries — modern science has confirmed its antimicrobial properties.',
+        'Rice feeds more than 3.5 billion people \u2014 over half of humanity depends on it as their primary calorie source.',
+        'Some deepwater rice varieties in Assam can elongate their stems by 20\u201325 cm per day to keep leaves above rising floodwaters \u2014 driven by the hormone ethylene.',
+        'Rice paddies produce about 1.5% of global greenhouse gas emissions because anaerobic bacteria in flooded soil generate methane (CH\u2084), a gas 80\u00D7 more potent than CO\u2082 over 20 years.',
       ],
-      offlineActivity: 'Take a cutting from a plant (a small piece of stem with a few leaves). Place it in a glass of water on a windowsill. Check every day — within a week, you should see tiny roots forming. You\'re witnessing vegetative propagation — the same process that makes Tejimola\'s story biologically plausible.',
+      offlineActivity: 'Get unpolished (brown) rice from a grocery store. Soak a handful in water overnight, then spread the seeds on a wet paper towel on a plate. Keep it moist and warm. Within 3\u20135 days, tiny white roots and green shoots will appear. Measure shoot height every 2 days and plot a growth curve. You are doing exactly what Lakhi did in the story \u2014 observing how seeds become plants.',
+      offlineActivityDiagram: 'ActivityRiceSproutDiagram',
+      codeTeaser: `# Simulate rice growth under different conditions
+import matplotlib.pyplot as plt
+
+days = list(range(0, 22, 3))
+normal = [0, 2, 8, 18, 32, 50, 68, 85]
+fertilized = [0, 3, 12, 28, 48, 72, 92, 105]
+low_light = [0, 1, 4, 8, 14, 20, 26, 30]
+
+plt.plot(days, normal, "b-o", label="Normal")
+plt.plot(days, fertilized, "g-o", label="Fertilized")
+plt.plot(days, low_light, "y--o", label="Low light")
+plt.xlabel("Days"); plt.ylabel("Height (mm)")
+plt.title("Rice Seedling Growth Curves")
+plt.legend(); plt.show()`,
+      referenceLinks: [
+        { slug: 'biology-foundations', reason: 'Understand plant cell biology, photosynthesis, and growth \u2014 the foundation for why rice grows the way it does' },
+        { slug: 'ecology-ecosystems', reason: 'Learn about nutrient cycles, especially nitrogen \u2014 critical to understanding rice paddy ecology' },
+      ],
+      nextLessons: [
+        { slug: 'seed-keeper-nagaland', reason: 'Directly continues the theme of seed saving and genetic diversity \u2014 how Nagaland\u2019s seed keepers preserve what the Green Revolution lost' },
+        { slug: 'kaziranga-grass', reason: 'Explores grassland ecology \u2014 rice is a grass, and understanding grass biology deepens your rice knowledge' },
+        { slug: 'grandmother-pitha', reason: 'What happens to rice after harvest \u2014 the chemistry of cooking rice into pitha (Assamese rice cakes)' },
+      ],
+      quiz: [
+        { question: 'What key trait did early farmers select for when domesticating wild rice?', options: ['Taller stems', 'Non-shattering seeds (grains stay on the stalk)', 'Colorful flowers', 'Thorns for defense'], answer: 1 },
+        { question: 'Why can rice grow in flooded fields while most crops cannot?', options: ['Rice roots do not need oxygen', 'Rice has aerenchyma tissue that delivers air to submerged roots', 'Rice is actually an aquatic plant', 'Flooding has no effect on rice'], answer: 1 },
+        { question: 'What was the main achievement of the Green Revolution?', options: ['Eliminating all crop diseases', 'Doubling rice yields with high-yield varieties and fertilizers', 'Making all farming organic', 'Replacing rice with wheat globally'], answer: 1 },
+        { question: 'Why must farmers buy new hybrid seeds every season?', options: ['The seeds expire after one year', 'Hybrid offspring do not breed true \u2014 they segregate unpredictably', 'Governments require it by law', 'The seeds are genetically modified to be sterile'], answer: 1 },
+        { question: 'Why are Assam\u2019s traditional rice landraces valuable for modern agriculture?', options: ['They taste better than modern varieties', 'They contain genes for drought, flood, and pest resistance needed for climate adaptation', 'They are more expensive', 'They grow faster than any modern variety'], answer: 1 },
+      ],
       concepts: [
         {
-          title: 'Rice Cultivation: Paddy Science',
+          title: 'From Wild Grass to Cultivated Rice',
           paragraphs: [
-          'Rice (*Oryza sativa*) feeds more people than any other crop — over 3.5 billion people depend on it as their primary calorie source. It is one of only a few crops that can grow in **flooded conditions** (paddy cultivation). The standing water suppresses weed competition (most weeds cannot survive flooded soil), reduces certain soil-borne diseases, and stabilizes soil temperature.',
-          'Rice plants have adaptations for flooded growth that most cereals lack. Their stems and roots contain extensive **aerenchyma** (air-channel tissue) that delivers atmospheric oxygen to submerged roots. Some deepwater rice varieties can elongate their stems by 20-25 centimeters per day to keep leaves above rising floodwaters — an extraordinary growth rate driven by the hormone ethylene, which accumulates in submerged tissues.',
-          'Assam is a center of rice genetic diversity, with indigenous communities cultivating hundreds of traditional varieties (landraces) adapted to specific conditions: **ahu** (autumn upland rice), **sali** (winter lowland rice), **bao** (deepwater rice), and **boro** (spring irrigated rice). Each variety represents centuries of selective breeding for local soil, water, and climate conditions — a living library of agricultural genetics.',
+          'About 10,000 years ago, the ancestors of today\u2019s rice were wild grasses growing in marshy areas of Asia. Wild rice (*Oryza rufipogon*) looked nothing like the plump grains we eat today. Its seeds were tiny, its stalks were tall and floppy, and \u2014 most importantly \u2014 its seeds **shattered** (fell off the stalk as soon as they ripened). This is great for the plant (seeds scatter and grow) but terrible for humans trying to harvest them.',
+          'The key moment in domestication was when early farmers noticed that some rare plants had seeds that stayed on the stalk. They collected and replanted these \u201cnon-shattering\u201d seeds. Generation after generation, this **selective breeding** shifted the population. Over thousands of years, humans also selected for larger grains, shorter stems (less falling over in wind), and uniform ripening (all grains ready at once).',
+          'Assam is one of the world\u2019s centers of rice genetic diversity. Indigenous communities cultivate hundreds of **landraces** adapted to specific conditions: **ahu** (autumn upland rice), **sali** (winter lowland rice), **bao** (deepwater rice for flood plains), and **boro** (spring irrigated rice). Each represents centuries of local breeding \u2014 a living library of agricultural genetics.',
           ],
-          keyIdea: 'Rice is uniquely adapted to flooded cultivation through aerenchyma and rapid stem elongation. Assam\'s hundreds of traditional rice varieties represent centuries of selective breeding for diverse growing conditions.',
+          keyIdea: 'Rice was domesticated from wild grass over 10,000 years by selecting for non-shattering seeds, larger grains, and shorter stems. Assam\u2019s hundreds of traditional landraces are a living genetic library.',
+          diagram: 'RiceDomesticationDiagram',
+          checkYourself: 'Why would non-shattering seeds be a disadvantage for a wild plant but an advantage for a farmer?',
+          checkAnswer: 'Wild plants need seeds to fall and scatter to reproduce. But for farmers, seeds falling off means lost harvest. Non-shattering seeds stay on the stalk until the farmer cuts it \u2014 much easier to collect.',
         },
         {
-          title: 'The Nitrogen Cycle in Rice Paddies',
+          title: 'Mendelian Genetics in Crop Breeding',
           paragraphs: [
-          '**Nitrogen** is the nutrient most often limiting crop growth. Plants need nitrogen to build proteins, nucleic acids (DNA/RNA), and chlorophyll. Air is 78% nitrogen gas (N₂), but plants cannot use it directly — the triple bond between the two nitrogen atoms is extremely strong. Nitrogen must first be "fixed" into reactive forms (ammonium NH₄⁺ or nitrate NO₃⁻) before plants can absorb it.',
-          'Rice paddies have a unique nitrogen cycle because the flooded soil creates **anaerobic** (oxygen-free) conditions. **Nitrogen-fixing cyanobacteria** (blue-green algae) thrive in the shallow water above the soil, converting N₂ to NH₄⁺ and contributing 20-40 kg of nitrogen per hectare per year — a natural fertilizer. The aquatic fern *Azolla*, which hosts nitrogen-fixing cyanobacteria (*Anabaena*) in its leaves, has been used as a green manure in rice paddies for over 1,000 years in Asia.',
-          'However, flooded soils also lose nitrogen through **denitrification** — anaerobic bacteria convert nitrate to N₂ gas, which escapes to the atmosphere. Rice paddies are significant sources of another nitrogen gas: **nitrous oxide (N₂O)**, a greenhouse gas 300 times more potent than CO₂. Managing nitrogen in rice systems is a balancing act: applying enough for high yields while minimizing losses that damage the atmosphere.',
+          'When you cross a tall rice plant (TT) with a dwarf rice plant (tt), the first generation (F1) offspring are all tall (Tt) \u2014 because tall (T) is **dominant** over dwarf (t). But cross two F1 plants (Tt \u00D7 Tt), and the second generation (F2) separates into 3 tall : 1 dwarf. This 3:1 ratio is **Mendel\u2019s law of segregation** in action.',
+          'The Green Revolution exploited this principle. Scientists crossed high-yielding tall varieties with a naturally occurring dwarf mutant from Taiwan (a rice plant with a broken gene for the growth hormone gibberellin). The dwarf gene (**sd1**) was recessive, so breeders had to carefully select tt offspring from the F2 generation. The result was **semi-dwarf** rice: short, sturdy stems that could support heavy grain heads without falling over (**lodging**), combined with the ability to absorb large amounts of fertilizer.',
+          'Understanding Mendelian genetics lets breeders predict outcomes. Want to combine flood tolerance (from a Bao rice landrace) with high yield (from a modern variety)? Cross them, grow the F2 generation, and look for the 1-in-16 plants that inherited both recessive traits. It is slow, but it works \u2014 and it is exactly how breeders developed flood-tolerant rice varieties like **Swarna-Sub1** that can survive 2 weeks of complete submersion.',
           ],
-          keyIdea: 'Rice paddies host cyanobacteria that fix 20-40 kg of atmospheric nitrogen per hectare per year. But anaerobic conditions also cause nitrogen losses through denitrification, releasing the potent greenhouse gas nitrous oxide.',
+          keyIdea: 'Mendel\u2019s laws predict how traits segregate in crop crosses. The Green Revolution used this to combine dwarf stems with high yield. Modern breeders use the same principles to stack flood tolerance, pest resistance, and nutritional traits.',
+          diagram: 'RiceMendelDiagram',
+          checkYourself: 'If you cross two Tt rice plants, what fraction of the F2 offspring will be true-breeding dwarf (tt)?',
+          checkAnswer: 'One quarter (25%). The Punnett square gives TT, Tt, Tt, tt \u2014 only 1 out of 4 is tt. These are the plants breeders select to establish the new dwarf variety.',
+        },
+        {
+          title: 'The Green Revolution: Triumph and Trade-offs',
+          paragraphs: [
+          'In the 1960s, India faced severe food shortages. The **Green Revolution** introduced high-yielding variety (HYV) seeds, synthetic fertilizers, pesticides, and irrigation. Results were dramatic: rice yields doubled from ~1 tonne per hectare (1960) to over 2 tonnes (1980). Norman Borlaug received the Nobel Peace Prize for saving an estimated billion people from famine.',
+          'But the success came with costs. HYV crops require expensive inputs: fertilizer (made from natural gas), pesticides (which contaminate water), and irrigation (which depletes groundwater). Over decades, these inputs degraded soil health, polluted waterways, and \u2014 most critically \u2014 **replaced thousands of traditional varieties with a few uniform HYVs**. When a single variety dominates, one new disease or pest can wipe out entire harvests.',
+          'Today, scientists seek a "Second Green Revolution" using **precision agriculture** (sensor-guided fertilizer and water), **integrated pest management** (biological controls instead of chemicals), and **genomic tools** to develop varieties needing fewer inputs. Northeast India\u2019s traditional landraces contain the genetic raw material \u2014 drought tolerance, flood survival, pest resistance \u2014 that these new varieties desperately need.',
+          ],
+          keyIdea: 'The Green Revolution doubled yields but at the cost of genetic diversity, soil health, and farmer independence. The next revolution must combine high yields with sustainability, using traditional landraces as genetic resources.',
           diagram: 'NitrogenCycleDiagram',
+          checkYourself: 'Why is it dangerous when millions of farmers all grow the same rice variety?',
+          checkAnswer: 'If a new disease or pest evolves that can attack that variety, it can destroy harvests everywhere simultaneously. Genetic diversity is insurance \u2014 different varieties have different resistances, so at least some survive any given threat.',
         },
         {
-          title: 'The Green Revolution: Triumph and Tradeoffs',
+          title: 'Seed Saving vs Hybrid Seeds',
           paragraphs: [
-          'In the 1960s-70s, the **Green Revolution** introduced high-yielding variety (HYV) seeds, synthetic fertilizers, pesticides, and irrigation to developing countries. In India, rice yields doubled from about 1 tonne per hectare (1960) to over 2 tonnes per hectare (1980). Norman Borlaug, who led the effort, received the Nobel Peace Prize in 1970 for saving an estimated billion people from famine.',
-          'The Green Revolution\'s success came with significant tradeoffs. HYV crops require high inputs of synthetic fertilizer (produced from natural gas using the energy-intensive Haber-Bosch process), pesticides (which contaminate water and harm biodiversity), and irrigation (which depletes groundwater). Over decades, these inputs degraded soil health, polluted waterways, reduced genetic diversity (as thousands of traditional varieties were replaced by a few HYVs), and increased farmer debt.',
-          'Today, agricultural scientists seek a "Second Green Revolution" that achieves high yields sustainably. Approaches include **precision agriculture** (applying fertilizer and water only where and when needed, guided by sensor data), **integrated pest management** (using biological controls alongside minimal chemicals), **conservation agriculture** (reducing tillage to protect soil structure), and **crop genetic improvement** using genomic tools to develop varieties that need less water, fertilizer, and pesticide. Northeast India\'s traditional rice varieties contain genetic resources — drought tolerance, flood tolerance, pest resistance — that modern breeding programs actively seek.',
+          'For 10,000 years, farmers saved seeds from their best plants and replanted them the next season. This **seed saving** is free, adapts varieties to local conditions over time, and maintains genetic diversity. Each village\u2019s seeds are slightly different, tuned to local soil, rainfall, and pests.',
+          '**Hybrid seeds** (F1 crosses of two different parent lines) produce spectacularly high yields in the first generation due to **hybrid vigor** \u2014 the offspring is healthier than either parent. But there is a catch: hybrid offspring (F2) do not \u201cbreed true.\u201d Their seeds segregate unpredictably (Mendel\u2019s law again), so farmers must buy fresh F1 seeds every season. This creates dependency on seed companies.',
+          'The debate is not simply old vs new. The ideal approach combines both: use modern genetics to improve traditional landraces (adding disease resistance or nutritional traits) while preserving farmers\u2019 ability to save and replant. Organizations like the **Northeast India seed banks** collect and preserve traditional varieties so their genetic information is never lost \u2014 even as modern varieties dominate fields.',
           ],
-          keyIdea: 'The Green Revolution doubled rice yields but at the cost of environmental degradation, genetic diversity loss, and farmer dependency on purchased inputs. Sustainable intensification seeks high yields through precision, biology, and genetic diversity rather than brute-force chemical inputs.',
+          keyIdea: 'Seed saving is free and preserves diversity; hybrid seeds give higher yields but must be repurchased yearly. The best strategy combines modern genetics with traditional diversity preservation.',
+          diagram: 'RiceSeedSavingDiagram',
+          checkYourself: 'A farmer plants hybrid rice seeds and gets an excellent harvest. She saves seeds from this harvest and plants them next year. What happens?',
+          checkAnswer: 'The next generation (F2) will be a mixed bag \u2014 some plants tall, some short, some high-yield, some low. Mendel\u2019s law of segregation means the uniform high-yield trait breaks apart. This is why hybrid seed companies have a guaranteed repeat customer.',
         },
       ],
     },
@@ -14088,6 +14579,7 @@ Biren nodded. He knew he would come back. The daytime forest was wonderful, but 
       project: {
         title: 'Test Paper Glider Designs for Maximum Distance',
         description: 'Build paper gliders with different wing shapes and sizes, measure their glide ratio, and find the optimal design.',
+        outputDiagram: 'GlideRatioOutputDiagram',
         steps: [
           'Build 4 paper gliders with different wing area and aspect ratio (wide vs narrow wings)',
           'Launch each from the same height and measure horizontal distance traveled',
@@ -14104,60 +14596,106 @@ Biren nodded. He knew he would come back. The daytime forest was wonderful, but 
     },
     illustration: '/content/illustrations/flying-squirrel-hollongapar.webp',
     track: 'school',
-    subjects: ['Biology'] as Subject[],
+    subjects: ['Physics', 'Biology'] as Subject[],
     toolSkills: ['Python' as Skill, 'NumPy' as Skill, 'Matplotlib' as Skill, 'Data Analysis' as Skill],
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'flying-squirrel' as const,
     level0: {
       vocabulary: [
-        ['Patagium', 'The thin membrane of skin stretching from wrist to ankle on a flying squirrel — it acts as a wing for gliding'],
-        ['Lift', 'The upward force generated when air flows over a curved surface like a wing or patagium — it opposes gravity during a glide'],
-        ['Drag', 'The air resistance force that slows a gliding animal down — every glider must overcome drag to travel far'],
-        ['Glide Ratio', 'How far forward a glider travels for every metre it drops — a flying squirrel achieves about 2-3 metres forward per metre of descent'],
-        ['Angle of Attack', 'The tilt of a wing or gliding surface relative to the oncoming air — too steep causes a stall, too shallow gives little lift'],
+        ['Patagium', 'The thin membrane of skin stretching from wrist to ankle on a flying squirrel \u2014 it acts as a wing for gliding'],
+        ['Lift', 'The upward force generated when air flows over a curved surface like a wing or patagium \u2014 it opposes gravity during a glide'],
+        ['Drag', 'The air resistance force that slows a gliding animal down \u2014 every glider must overcome drag to travel far'],
+        ['Glide ratio', 'How far forward a glider travels for every metre it drops \u2014 a flying squirrel achieves about 2\u20133:1'],
+        ['Square-cube law', 'A scaling principle: as size doubles, surface area quadruples but volume (mass) increases eightfold \u2014 this is why small animals glide more easily'],
       ],
       trueFalse: [
-        { statement: 'Flying squirrels actually fly by flapping their skin membrane.', isTrue: false, explanation: 'Flying squirrels glide, not fly. They leap from a high point and spread their patagium to create a wing-like surface that generates lift. They cannot gain altitude — they always descend during a glide, but they control the descent precisely.' },
-        { statement: 'A flying squirrel can steer and turn during a glide.', isTrue: true, explanation: 'The patagium contains muscle fibers that let the squirrel change its shape mid-glide. By pulling one arm in or extending the other, the squirrel can bank, turn, and even make sharp 90-degree corrections. The tail acts as a stabilizer and brake.' },
-        { statement: 'A wider, flatter gliding surface always makes a better glider.', isTrue: false, explanation: 'A wider surface creates more lift but also more drag and less maneuverability. Flying squirrels balance these trade-offs — enough surface area to cross canopy gaps (up to 100 metres), but enough control to dodge branches and land precisely on a target trunk.' },
+        { statement: 'Flying squirrels actually fly by flapping their skin membrane.', isTrue: false, explanation: 'Flying squirrels glide, not fly. They leap from a high point and spread their patagium to create lift. They cannot gain altitude \u2014 they always descend during a glide.' },
+        { statement: 'A flying squirrel can steer and turn during a glide.', isTrue: true, explanation: 'The patagium contains muscle fibres that let the squirrel change its shape mid-glide. By pulling one arm in or extending the other, the squirrel can bank, turn, and even make sharp corrections. The tail acts as a stabilizer and brake.' },
+        { statement: 'Larger animals would be better at gliding because they have bigger wings.', isTrue: false, explanation: 'The square-cube law means larger animals have relatively less surface area per unit of mass. Their wing loading (mass per wing area) is too high for effective gliding, which is why all gliding animals are small.' },
       ],
       facts: [
-        'Giant flying squirrels can glide over 100 metres in a single launch, achieving a lift-to-drag ratio of about 2:1 to 3:1 — meaning they travel 2-3 metres forward for every metre they drop.',
-        'Patagium-like gliding membranes evolved independently in at least six animal groups — flying squirrels, colugos, sugar gliders, flying lizards, flying frogs, and some extinct reptiles — a striking example of convergent evolution.',
-        'Flying squirrels deliberately stall before landing by pitching steeply upward, which dumps their speed — the same technique airplane pilots use when flaring just before touchdown.',
+        'Giant flying squirrels can glide over 100 metres in a single launch, achieving a lift-to-drag ratio of about 2:1 to 3:1.',
+        'Patagium-like gliding membranes evolved independently in at least six animal groups \u2014 flying squirrels, colugos, sugar gliders, flying lizards, flying frogs, and some extinct reptiles.',
+        'Flying squirrels deliberately stall before landing by pitching steeply upward, which dumps their speed \u2014 the same technique airplane pilots use when flaring just before touchdown.',
       ],
-      offlineActivity: 'Build two paper gliders: one with wide, short wings and one with narrow, long wings. Launch both from the same height (like the top of a staircase) and measure how far each travels horizontally before landing. Which has a better glide ratio? Try adding a small paper clip to the nose and see how it changes the flight. Record your results and think about why wing shape matters — you are exploring the same physics that governs flying squirrels.',
-    
+      offlineActivity: 'Build two paper gliders: one with wide, short wings and one with narrow, long wings. Launch both from the same height (like the top of a staircase) and measure how far each travels horizontally before landing. Calculate the glide ratio (horizontal distance divided by launch height). Add a small paper clip to the nose and see how it changes the flight. Record your results in a table \u2014 you are exploring the same physics that governs flying squirrels.',
+      offlineActivityDiagram: 'ActivityGliderTestDiagram',
+      codeTeaser: `import numpy as np
+import matplotlib.pyplot as plt
+
+# Glide ratio comparison across species and designs
+names = ["Paper glider A", "Paper glider B", "Flying squirrel",
+         "Sugar glider", "Hang glider", "Sailplane"]
+ratios = [3, 5, 2.5, 4, 15, 40]
+
+plt.figure(figsize=(10, 5))
+colors = ["#0ea5e9", "#06b6d4", "#22c55e", "#84cc16", "#f59e0b", "#ef4444"]
+bars = plt.barh(names, ratios, color=colors)
+plt.xlabel("Glide Ratio (horizontal distance / vertical drop)")
+plt.title("Glide Ratio Comparison: Your Gliders vs Nature vs Engineering")
+for bar, val in zip(bars, ratios):
+    plt.text(bar.get_width() + 0.5, bar.get_y() + bar.get_height()/2,
+             f'{val}:1', va='center', fontweight='bold')
+plt.grid(axis='x', alpha=0.3)
+plt.tight_layout()
+plt.show()  # Why is the flying squirrel's ratio lower than a hang glider?`,
+      referenceLinks: [
+        { slug: 'aerodynamics-and-flight', reason: 'Full reference on lift, drag, Bernoulli\'s principle, and the four forces of flight' },
+        { slug: 'evolution-and-adaptation', reason: 'How gliding evolved independently six times \u2014 convergent evolution driven by the same physics' },
+      ],
+      nextLessons: [
+        { slug: 'kite-festival', reason: 'Kites use the same aerodynamic forces as flying squirrels \u2014 lift, drag, and angle of attack' },
+        { slug: 'vimana-flying-chariot', reason: 'From gliding to powered flight \u2014 the physics of thrust, lift, and how airplanes stay up' },
+        { slug: 'monkey-bridge', reason: 'Another story about animals solving physics problems \u2014 monkeys creating a living bridge across a ravine' },
+      ],
+      quiz: [
+        { question: 'What is the difference between gliding and flying?', options: ['There is no difference', 'Gliding always descends with no energy input; flying adds thrust to gain altitude', 'Gliding is faster than flying', 'Flying uses membranes while gliding uses feathers'], answer: 1 },
+        { question: 'What is the glide ratio?', options: ['The speed of a glider', 'The weight of the animal', 'Horizontal distance travelled divided by vertical drop', 'The angle of the wings'], answer: 2 },
+        { question: 'Why can small animals glide but large ones cannot?', options: ['Large animals are afraid of heights', 'The square-cube law: larger animals have relatively less surface area per unit mass, making wing loading too high', 'Large animals have no patagium', 'Small animals weigh nothing'], answer: 1 },
+        { question: 'How does a flying squirrel slow down before landing?', options: ['It flaps its patagium', 'It grabs branches with its claws mid-flight', 'It pitches steeply upward to stall, dumping speed', 'It opens a parachute-like tail'], answer: 2 },
+        { question: 'What is the patagium?', options: ['A type of tree', 'A muscle-controlled skin membrane from wrist to ankle that acts as a gliding surface', 'A bone in the wing', 'The squirrel\'s tail'], answer: 1 },
+      ],
       concepts: [
         {
-          title: "The Patagium — A Biological Wing",
+          title: 'Gliding vs Powered Flight: What Is the Difference?',
           paragraphs: [
-            "A flying squirrel does not fly — it **glides**. The key adaptation is the **patagium**, a thin membrane of skin that stretches from wrist to ankle on each side of the body. When the squirrel leaps from a tree and extends its limbs, the patagium spreads into a roughly rectangular surface that acts as an airfoil.",
-            "The patagium is not just loose skin. It contains **muscle fibers** that allow the squirrel to adjust its tension and curvature during a glide, effectively changing the wing shape in real time. By pulling one arm in or extending the other, the squirrel can bank, turn, and even make sharp 90-degree corrections mid-flight. The bushy tail acts as a **stabilizer and brake**, flaring out to slow descent before landing.",
-            "This is convergent evolution in action: patagium-like membranes evolved independently in at least six groups — flying squirrels, colugos (flying lemurs), sugar gliders, flying lizards (genus *Draco*), flying frogs, and even some extinct reptiles. Each lineage solved the same problem (moving between trees without touching the ground) with a remarkably similar solution.",
+          'A bird flaps its wings and can climb higher into the sky. A flying squirrel leaps from a tree and always comes down \u2014 it cannot gain altitude. This is the fundamental difference between **powered flight** and **gliding**.',
+          'In powered flight, an animal (or aircraft) generates **thrust** by flapping wings or spinning a propeller. Thrust pushes it forward, and the forward motion over the wing creates lift that can exceed the animal\'s weight, allowing it to climb. In gliding, there is no thrust \u2014 **gravity is the only engine**. The glider trades altitude for forward distance, always descending.',
+          '**Prediction check:** if gravity is the flying squirrel\'s only engine, what determines how far it can glide? Two things: the height it starts from (more height = more gravitational potential energy to trade) and how efficiently it converts that altitude into forward distance (its glide ratio). A squirrel launching from a 30-metre tree with a 3:1 glide ratio can travel about 90 metres \u2014 the length of a football field.',
           ],
-          keyIdea: "The patagium is a muscle-controlled skin membrane that turns a falling squirrel into a precision glider — it is an airfoil that the animal can reshape in real time.",
+          keyIdea: 'Powered flight uses thrust to gain altitude. Gliding uses only gravity \u2014 the animal trades height for horizontal distance. No energy input means the glider always descends.',
+          diagram: 'GlidingVsFlyingDiagram',
         },
         {
-          title: "Lift-to-Drag Ratio — The Glide Number",
+          title: 'Lift-to-Drag Ratio: The Glide Number',
           paragraphs: [
-            "Every glider — biological or mechanical — is governed by the **lift-to-drag ratio** (L/D). Lift is the upward force generated by air flowing over the gliding surface; drag is the resistance that slows it down. A higher L/D means you travel farther horizontally for every metre you drop vertically.",
-            "Giant flying squirrels achieve an L/D ratio of about **2:1 to 3:1**, meaning they glide 2–3 metres forward for every metre they descend. This is modest compared to an albatross (roughly 20:1) or a modern sailplane (40:1), but it is efficient enough to cross 100-metre gaps between trees in a single launch. The squirrel compensates for its lower L/D by launching from great heights.",
-            "Engineers measure L/D when designing wingsuits, hang gliders, and drones. The same physics applies: a wider, flatter surface produces more lift relative to drag, but adds weight and reduces maneuverability. The flying squirrel sits at an optimal point — enough L/D to bridge canopy gaps, enough control to dodge branches and land precisely on a target trunk.",
+          'Every glider \u2014 biological or mechanical \u2014 is governed by the **lift-to-drag ratio** (L/D). Lift is the upward force from air flowing over the gliding surface; drag is the resistance that slows it down. A higher L/D means you travel farther horizontally for every metre you drop.',
+          'Giant flying squirrels achieve an L/D of about **2:1 to 3:1** \u2014 modest compared to an albatross (20:1) or a modern sailplane (40:1). But the squirrel compensates by launching from great heights and by needing only short, precise crossings between trees, not long-distance travel.',
+          '**Check yourself:** if a squirrel has a glide ratio of 3:1 and launches from 20 metres up, how far can it glide? Answer: about 60 metres. What if it could achieve a 10:1 ratio? It would reach 200 metres \u2014 but it would need much larger wings, which would make it too clumsy to run on branches.',
           ],
-          keyIdea: "The lift-to-drag ratio determines how far a glider travels horizontally for each metre it drops — flying squirrels optimize this ratio for short, precise canopy crossings.",
+          keyIdea: 'The lift-to-drag ratio determines how far a glider travels per metre of drop. Flying squirrels optimize for short, precise canopy crossings rather than maximum distance.',
           diagram: 'BernoulliDiagram',
         },
         {
-          title: "Angle of Attack — Controlling the Descent",
+          title: 'The Patagium as Airfoil: A Muscle-Controlled Wing',
           paragraphs: [
-            "The **angle of attack** is the angle between the gliding surface and the oncoming airflow. For a flying squirrel, this means the tilt of its body relative to the direction it is moving through the air. Small changes in this angle have dramatic effects on flight performance.",
-            "At a low angle of attack, air flows smoothly over the patagium, generating steady lift with minimal drag — the squirrel moves fast and far. As the angle increases, lift increases too, up to a critical point (roughly 15–20 degrees for most airfoils). Beyond this **critical angle**, the airflow separates from the upper surface, lift collapses, and drag spikes — this is called a **stall**.",
-            "Flying squirrels instinctively manage their angle of attack throughout a glide. At launch, they keep a moderate angle for maximum distance. As they approach a tree trunk, they pitch steeply upward, deliberately stalling to dump speed — like an airplane flaring before touchdown. This is why squirrels land gently rather than slamming into bark at full speed. The same principle governs how pilots land aircraft.",
+          'The flying squirrel\'s secret weapon is the **patagium** \u2014 a thin membrane of skin stretching from wrist to ankle on each side. When the squirrel leaps and extends its limbs, the patagium spreads into a roughly rectangular surface that acts as an airfoil.',
+          'Crucially, the patagium is not just passive skin. It contains **muscle fibres** that allow the squirrel to adjust tension and curvature in real time, effectively changing the wing shape during a glide. By pulling one arm in, the squirrel can bank and turn. By extending both arms fully, it maximizes surface area for distance. Before landing, it pitches steeply upward to **stall deliberately**, dumping speed so it lands gently rather than crashing.',
+          'This is **convergent evolution** in action: similar gliding membranes evolved independently in at least six groups \u2014 flying squirrels, colugos, sugar gliders, flying lizards, flying frogs, and some extinct reptiles. Each lineage solved the same physics problem with a remarkably similar solution.',
           ],
-          keyIdea: "Angle of attack controls the trade-off between lift and drag — too shallow gives speed without enough lift, too steep causes a stall, and flying squirrels adjust this angle continuously during every glide.",
+          keyIdea: 'The patagium is a muscle-controlled skin membrane that acts as a real-time adjustable airfoil. The squirrel can steer, brake, and stall deliberately \u2014 like a pilot controlling an aircraft.',
           diagram: 'AngleTypesDiagram',
+        },
+        {
+          title: 'Why Small Animals Glide Better: The Square-Cube Law',
+          paragraphs: [
+          'Why do flying squirrels, sugar gliders, and flying frogs exist, but there are no gliding elephants? The answer is the **square-cube law** \u2014 one of the most important scaling principles in biology and engineering.',
+          'When you double an animal\'s length, its surface area (including wing area) increases by the square \u2014 it quadruples (2\u00b2 = 4). But its volume (and mass) increases by the cube \u2014 it goes up eightfold (2\u00b3 = 8). So a bigger animal has **relatively less wing area per kilogram of body weight**. This ratio, called **wing loading** (mass per unit wing area), determines whether gliding is viable.',
+          '**Analogy:** drop a sheet of paper and a book from the same height. The paper floats down slowly because it has a huge surface area relative to its tiny weight. The book plummets because its mass overwhelms its surface area. A flying squirrel is like the paper \u2014 small enough that its patagium provides sufficient area relative to its weight. An elephant-sized animal would be like the book.',
+          ],
+          keyIdea: 'The square-cube law means larger animals have relatively less surface area per unit of mass. Wing loading increases with size, which is why only small animals can glide effectively.',
+          diagram: 'SquareCubeLawDiagram',
         },
       ],
     },
@@ -14380,6 +14918,7 @@ The people of the valley called the tree **Meihou-thing** — the "traveler tree
       project: {
         title: 'Test Seed Dispersal Distances by Mechanism',
         description: 'Collect seeds with different dispersal strategies and measure how far each travels under controlled conditions.',
+        outputDiagram: 'SeedDispersalOutputDiagram',
         steps: [
           'Collect or create models of 4 seed types: winged (maple), fluffy (dandelion), hooked (burdock), and heavy (coconut)',
           'Drop winged and fluffy seeds from a fixed height with a fan simulating wind and measure distance',
@@ -14419,36 +14958,82 @@ The people of the valley called the tree **Meihou-thing** — the "traveler tree
         'Orchid seeds are so tiny (about 0.05 mg) that they have almost no terminal velocity and float like dust particles — a single orchid pod can contain over a million seeds.',
         'In Assam, the Indian rhinoceros is a critical seed disperser — rhino dung contains viable seeds from dozens of plant species, making each dung pile a potential garden.',
       ],
-      offlineActivity: 'Go on a seed hunt: collect 5 different seeds from your garden or neighbourhood. For each seed, examine it closely and guess how it travels — does it have wings (wind), hooks (animal fur), fleshy fruit (eaten by birds), or a hard shell (water)? Drop each seed from the same height and time how long it takes to reach the ground. Seeds that fall slowly are designed for wind dispersal. Draw each seed and label its dispersal strategy.',
-    
+      offlineActivity: 'Go on a seed hunt: collect 5 different seeds from your garden or neighbourhood. For each seed, examine it closely and guess how it travels \u2014 does it have wings (wind), hooks (animal fur), fleshy fruit (eaten by birds), or a hard shell (water)? Drop each seed from the same height and time how long it takes to reach the ground. Seeds that fall slowly are designed for wind dispersal. Draw each seed and label its dispersal strategy.',
+      offlineActivityDiagram: 'ActivitySeedDropDiagram',
+      codeTeaser: `import numpy as np
+import matplotlib.pyplot as plt
+
+# Simulate seed dispersal distances
+# Wind-dispersed seeds follow an exponential decay
+np.random.seed(42)
+distances = np.random.exponential(scale=50, size=500)
+
+plt.figure(figsize=(10, 5))
+plt.hist(distances, bins=40, color='#22c55e', alpha=0.7,
+         edgecolor='#166534')
+plt.xlabel('Distance from parent tree (m)')
+plt.ylabel('Number of seeds')
+plt.title('Dispersal Kernel: Most seeds land close')
+plt.axvline(x=np.median(distances), color='red',
+            linestyle='--', label=f'Median: {np.median(distances):.0f}m')
+plt.legend()
+plt.show()  # What shape is this curve?`,
+      referenceLinks: [
+        { slug: 'ecology-and-ecosystems', reason: 'Dispersal is a key ecological process \u2014 this reference covers ecosystems and species interactions' },
+        { slug: 'adaptation-and-evolution', reason: 'Seed dispersal structures are adaptations shaped by natural selection over millions of years' },
+      ],
+      nextLessons: [
+        { slug: 'wild-orchids-trees', reason: 'Orchids produce the tiniest seeds of any plant \u2014 their dust-like seeds are the ultimate wind dispersal strategy' },
+        { slug: 'seed-keeper-nagaland', reason: 'From dispersal to conservation \u2014 how communities protect seed diversity through traditional seed banks' },
+        { slug: 'girl-grew-forest', reason: 'After seeds disperse, forests grow \u2014 this story covers succession from seed to mature ecosystem' },
+      ],
+      quiz: [
+        { question: 'Why do plants need to disperse their seeds away from the parent?', options: ['Seeds need sunlight to germinate', 'To avoid competition with the parent for light, water, and nutrients', 'Because wind always blows seeds away', 'Seeds cannot grow near adult trees'], answer: 1 },
+        { question: 'What is a samara?', options: ['A seed with hooks for attaching to animal fur', 'A winged seed that autorotates like a helicopter', 'A seed inside a fleshy fruit', 'A seed that floats on water'], answer: 1 },
+        { question: 'How does the Velcro fastener relate to seed dispersal?', options: ['Velcro was made from plant material', 'Its inventor studied how burr seeds hook onto animal fur', 'Velcro seeds travel the farthest of any species', 'Velcro is used to catch seeds in experiments'], answer: 1 },
+        { question: 'What does a dispersal kernel show?', options: ['The anatomy of a seed', 'The probability of a seed landing at different distances from its parent', 'How fast a seed falls through air', 'The number of seeds a tree produces per year'], answer: 1 },
+        { question: 'Why does a dandelion seed fall so slowly?', options: ['It has a very heavy seed coat', 'Its pappus creates drag that slows descent, giving wind time to carry it sideways', 'Dandelion seeds are magnetic', 'Dandelion seeds bounce off the ground'], answer: 1 },
+      ],
       concepts: [
         {
-          title: "Anemochory — Wind Dispersal",
+          title: 'Five Ways Seeds Travel',
           paragraphs: [
-            "Plants cannot walk, so they evolved remarkable strategies to send their seeds away from the parent. **Anemochory** is dispersal by wind. The challenge: seeds are heavy relative to air, so they fall fast. Evolution solved this with structures that increase **air resistance** relative to mass.",
-            "Dandelion seeds carry a **pappus** — a parachute-like tuft of filaments that creates a separated vortex ring above the seed, generating drag that slows descent to about 0.3 m/s. Maple seeds spin as **autorotating samaras**, using the same aerodynamic principle as a helicopter rotor to slow their fall and drift horizontally. Orchid seeds took the opposite approach: they are so tiny (0.05 mg) that they have almost no terminal velocity and float like dust.",
-            "The physics is captured by **Stokes' law** for small particles: drag force = 6 * pi * viscosity * radius * velocity. A seed with larger effective radius (via wings or pappus) and lower mass reaches terminal velocity sooner and at a slower speed, giving wind more time to carry it horizontally. This is why dandelion seeds can travel over 100 km in strong updrafts.",
+            'Imagine you are a seed. You have just fallen from your parent tree \u2014 but landing right below it is a death sentence. Your parent\u2019s branches block the sunlight. Its roots have already claimed all the water and nutrients in the soil. If you germinate here, you will be a stunted shadow of what you could be. You need to **get away**.',
+            'Plants solved this problem with five dispersal strategies, each evolved independently in hundreds of plant families. **Wind** (anemochory) uses parachutes, wings, or extreme smallness. **Animals** (zoochory) use hooks or tasty fruit. **Water** (hydrochory) uses waterproof coats and air pockets. **Explosive pods** (ballistic dispersal) use mechanical tension to launch seeds. And **gravity** (barochory) simply drops heavy seeds that roll downhill.',
+            '**Check yourself:** Look at a dandelion puff. What strategy is it using? Now look at a mango. Different strategy, same goal \u2014 getting the seed away from the parent. Can you name which of the five methods each one uses before reading on?',
           ],
-          keyIdea: "Wind-dispersed seeds increase their effective size relative to mass — via parachutes, wings, or extreme smallness — so air resistance slows their fall and wind carries them farther.",
-          diagram: 'TransverseLongitudinalDiagram',
+          keyIdea: 'Plants cannot walk, so they evolved five strategies to move their seeds: wind, animal, water, explosive, and gravity. Every seed shape is an engineering solution to the problem of escaping the parent\u2019s shadow.',
+          diagram: 'SeedExplosiveGravityDiagram',
         },
         {
-          title: "Zoochory — Hitchhiking on Animals",
+          title: 'Wind Dispersal: Parachutes, Helicopters, and Dust',
           paragraphs: [
-            "**Zoochory** is seed dispersal by animals, and it comes in two forms. **Epizoochory** means the seed attaches to the outside of an animal — think of burrs stuck to a dog's fur. These seeds have hooks, barbs, or sticky coatings that grip fur, feathers, or clothing. Velcro was invented after Swiss engineer George de Mestral studied burr hooks under a microscope in 1941.",
-            "**Endozoochory** means the seed passes through an animal's digestive tract. Fleshy fruits evolved specifically for this: the fruit attracts an animal with sugars and nutrients, the animal eats the fruit, and the seed — protected by a tough coat resistant to stomach acid — is deposited far from the parent tree, conveniently packaged in a pile of fertilizer. Many tropical trees depend entirely on specific animals for dispersal; if the animal goes extinct, the tree cannot reproduce effectively.",
-            "Some plants combine strategies. The durian of Southeast Asia has a pungent smell that attracts elephants and orangutans (endozoochory at long range) but also has spiny fruit that can hook onto animal hides if dropped (epizoochory). In Assam, the Indian rhinoceros is a critical seed disperser for many grassland plants — rhino dung contains viable seeds from dozens of species, making each dung pile a potential garden.",
+            'Wind-dispersed seeds face a physics problem: they need to fall slowly enough for wind to carry them sideways. The solution is to increase **air resistance** relative to mass. Three strategies evolved independently. Dandelions carry a **pappus** \u2014 a parachute of fine filaments that creates a separated vortex ring above the seed, slowing descent to just 0.3 m/s. In strong updrafts, they can travel over 100 km.',
+            'Maple seeds spin as **autorotating samaras**. The wing is heavier on one side (where the seed sits), which makes the whole structure spin like a helicopter rotor. This spinning generates lift that slows descent and allows horizontal drift. Engineers have studied samara aerodynamics to design micro-drones for passive aerial delivery.',
+            '**Predict before you read:** If you drop a flat piece of paper and a crumpled ball of paper from the same height, which falls slower? The flat one, because it has more surface area per unit of mass. That is exactly the principle behind every wind-dispersed seed. Orchid seeds took this to the extreme \u2014 they are so tiny (0.05 mg) that they float like dust, with essentially zero terminal velocity.',
           ],
-          keyIdea: "Zoochory uses animals as seed taxis — either by sticking to fur (epizoochory) or by being eaten and excreted intact (endozoochory), with fruits evolving specifically as payment for the transport service.",
+          keyIdea: 'Wind-dispersed seeds increase their size-to-mass ratio \u2014 via parachutes (dandelion), spinning wings (maple), or extreme smallness (orchid) \u2014 so they fall slowly and wind carries them farther.',
+          diagram: 'SeedWindDispersalDiagram',
         },
         {
-          title: "Dispersal Kernels — How Far Do Seeds Actually Go?",
+          title: 'Animal Dispersal: Hooks, Fruit, and Fertilizer Packages',
           paragraphs: [
-            "A **dispersal kernel** is a mathematical function that describes the probability of a seed landing at a given distance from the parent plant. Most seeds land very close — the kernel typically has a sharp peak near zero and a long, thin tail stretching to large distances. This shape is called **leptokurtic**: most seeds go nowhere, but a rare few travel extraordinary distances.",
-            "Ecologists measure dispersal kernels by marking parent trees and mapping where seedlings appear, or by tracking tagged seeds. The shape of the kernel has enormous consequences for species survival. A narrow kernel means all offspring compete with each other and the parent. A wider kernel with a fat tail means some seeds colonize new areas, helping the species survive habitat loss or climate shifts.",
-            "Modeling dispersal kernels is now crucial for predicting how forests will respond to climate change. If a tree species needs to shift its range northward by 100 km per century to track suitable temperatures, its dispersal kernel must have enough probability in that 100 km tail. Many tree species have kernels that are too narrow — they literally cannot move fast enough to keep up with the changing climate, which is why assisted migration programs are being developed.",
+            'If wind is unreliable, why not hitch a ride on something that walks? **Epizoochory** means the seed attaches to the outside of an animal. Burdock burrs have tiny hooks that grip fur, feathers, or clothing. In 1941, Swiss engineer George de Mestral examined these hooks under a microscope and invented Velcro \u2014 one of the most famous examples of biomimicry.',
+            '**Endozoochory** is even cleverer: the plant wraps the seed in a tasty, nutritious fruit. An animal eats the fruit, walks away, and deposits the seed \u2014 still viable, protected by a tough coat that survived stomach acid \u2014 in a pile of fertilizer far from the parent. The fruit is literally **payment** for the transport service. In Assam, Indian rhinoceroses are critical seed dispersers: each dung pile contains viable seeds from dozens of plant species.',
+            '**Think about this:** If the rhino goes extinct, what happens to all those plants that depend on it for dispersal? This is not hypothetical \u2014 when the dodo went extinct on Mauritius, the tambalacoque tree nearly followed because its seeds needed dodo digestion to germinate. Conservation of one species protects the dispersal network of many.',
           ],
-          keyIdea: "A dispersal kernel maps the probability of a seed reaching any given distance — its shape determines whether a species can spread, colonize new areas, or keep pace with environmental change.",
+          keyIdea: 'Animals act as seed taxis: hooks stick to fur (epizoochory) and fruits get eaten (endozoochory). Fruits evolved as payment for transport \u2014 losing a dispersal partner can doom the plant species too.',
+          diagram: 'SeedAnimalDispersalDiagram',
+        },
+        {
+          title: 'The Maple Seed as Helicopter: Autorotation Physics',
+          paragraphs: [
+            'The maple samara is a single-bladed helicopter. When it falls, the heavy seed at one end creates an asymmetry that makes the whole structure spin. The spinning wing generates **lift** \u2014 the same force that keeps a helicopter airborne. This lift opposes gravity and slows the seed\u2019s descent, giving wind more time to carry it sideways.',
+            'The key physics is the **angle of attack** \u2014 the angle between the wing and the oncoming air. As the samara spins, each point on the wing moves through the air at an angle. Air flowing over the wing creates a pressure difference (lower pressure above, higher below), generating upward lift. Too steep an angle causes turbulence and the wing stalls; too shallow and there is no lift. Evolution has tuned maple wings to spin at exactly the right angle of attack for maximum hang time.',
+            '**Try this in your mind:** If you cut the wing shorter, what happens? The seed spins faster (less rotational inertia) but generates less lift (smaller wing area). It falls faster and travels less far. If you make the wing heavier at the tip instead of the base, what happens? It might not spin at all \u2014 the mass asymmetry is what initiates rotation. Real samaras are precision instruments shaped by millions of years of natural selection.',
+          ],
+          keyIdea: 'A maple samara autorotates because its asymmetric mass distribution causes it to spin, and the spinning wing generates lift at a specific angle of attack \u2014 the same physics as a helicopter rotor, evolved independently.',
+          diagram: 'SeedAutorotationDiagram',
         },
       ],
     },
@@ -17083,53 +17668,94 @@ Next time you see a wild orchid clinging to a tree branch in the forests of Nort
     illustration: '/content/illustrations/wild-orchids-trees.webp', track: 'school', subjects: ['Biology' as Subject, 'Ecology' as Subject], estimatedHours: 12, playground: 'wild-orchids-trees' as const,
     level0: {
       vocabulary: [
-        ['Observation', 'Noticing and recording something carefully'],
-        ['Pattern', 'A repeated arrangement in nature or data'],
-        ['Variable', 'Something that can change or be measured'],
-        ['Evidence', 'Data supporting or disproving a claim'],
-        ['Model', 'A simplified version of something complex'],
+        ['Epiphyte', 'A plant that grows on another plant for physical support without parasitizing it \u2014 orchids, ferns, mosses, and lichens are common examples'],
+        ['Velamen', 'The spongy outer layer of orchid roots that absorbs water instantly on contact \u2014 like a biological sponge wrapping each root'],
+        ['Mycorrhizae', 'Symbiotic associations between fungal threads and plant roots that exchange minerals for sugar \u2014 over 90% of plants use these'],
+        ['Commensalism', 'A relationship where one species benefits and the other is unaffected \u2014 an orchid on a tree branch is the classic example'],
+        ['Wood Wide Web', 'The common mycorrhizal network connecting trees and plants underground through fungal threads \u2014 allows nutrient and signal sharing'],
       ],
       trueFalse: [
-        { statement: 'Science only happens in laboratories.', isTrue: false, explanation: 'Science happens everywhere — forests, kitchens, rivers, playgrounds.' },
-        { statement: 'Making mistakes helps you learn.', isTrue: true, explanation: 'Errors lead to discoveries. Penicillin was found from a contaminated experiment.' },
-        { statement: 'You need expensive equipment for science.', isTrue: false, explanation: 'Curiosity and observation are the most important scientific tools.' },
+        { statement: 'Orchids growing on trees steal nutrients from the tree.', isTrue: false, explanation: 'Orchids are epiphytes, not parasites. Their roots grip the bark for support but do not penetrate the vascular tissue. They get water from rain and mist, and nutrients from trapped debris and air.' },
+        { statement: 'Orchid seeds cannot germinate without a fungal partner.', isTrue: true, explanation: 'Orchid seeds are dust-like with virtually no stored nutrients. They require a compatible mycorrhizal fungus to provide carbon and minerals for the initial stages of growth.' },
+        { statement: 'A single tree in NE India can host over 50 species of epiphytes.', isTrue: true, explanation: 'In cloud forests of Northeast India, large trees serve as platforms for orchids, ferns, mosses, lichens, and other epiphytes \u2014 creating a vertical ecosystem from ground to canopy.' },
       ],
       facts: [
-        'NE India is one of 36 global biodiversity hotspots.',
-        'The scientific method has been used for over 1,000 years.',
-        'Teaching someone else is the best way to check understanding.',
+        'Orchids are the most species-rich family of flowering plants with approximately 28,000 described species \u2014 about 10% of all flowering plant species on Earth.',
+        'The velamen layer on orchid roots can absorb water in less than one second \u2014 critical for capturing brief rain events in the canopy where there is no soil to hold moisture.',
+        'All orchid species are protected under CITES (Convention on International Trade in Endangered Species) \u2014 making them the largest group of organisms under international trade protection.',
       ],
-      offlineActivity: 'Keep a nature journal for one week. Each day, draw and describe one observation. At the end, research your most interesting one.',
-    
+      offlineActivity: 'Take a walk and look for plants growing on other plants. Check tree trunks and branches for moss, lichen, ferns, or any other plant growing on the bark. For each one you find, record: which tree is the host, how high up is the epiphyte, is the bark rough or smooth, and how much light reaches that spot. Compare trees with many epiphytes to trees with none \u2014 what patterns do you see?',
+      offlineActivityDiagram: 'ActivityEpiphyteSurveyDiagram',
+      codeTeaser: `# Map epiphyte distribution on a tree
+import matplotlib.pyplot as plt
+
+# Data from a tree survey
+heights = [0.5, 1.0, 1.5, 2.0, 3.0, 4.0, 5.0, 6.0, 8.0]
+species_count = [2, 3, 5, 8, 12, 15, 11, 7, 3]
+
+plt.figure(figsize=(8, 6))
+plt.barh(heights, species_count, height=0.4,
+         color='#d946ef', alpha=0.7)
+plt.ylabel('Height on tree (m)')
+plt.xlabel('Number of epiphyte species')
+plt.title('Vertical Distribution of Epiphytes')
+plt.show()  # Where is the sweet spot?`,
+      referenceLinks: [
+        { slug: 'ecology-and-ecosystems', reason: 'Symbiosis, commensalism, and mutualism are core ecological concepts explored in depth here' },
+        { slug: 'adaptation-and-evolution', reason: 'Epiphytic life is an adaptation \u2014 velamen roots and aerial moisture capture evolved under canopy selection pressures' },
+      ],
+      nextLessons: [
+        { slug: 'seed-travel', reason: 'Orchid seeds are the ultimate wind-dispersed seeds \u2014 dust-like particles that float on air currents to find new host trees' },
+        { slug: 'orchid-colors', reason: 'From how orchids grow to why they are colorful \u2014 pigments, pollination, and co-evolution with insects' },
+        { slug: 'pitcher-plant', reason: 'Another extreme plant adaptation from NE India \u2014 carnivorous plants that evolved to trap insects for nutrients' },
+      ],
+      quiz: [
+        { question: 'What is the difference between an epiphyte and a parasite?', options: ['Epiphytes are smaller than parasites', 'Epiphytes use the host only for physical support; parasites steal nutrients', 'Epiphytes live on the ground; parasites live on trees', 'There is no difference'], answer: 1 },
+        { question: 'What is velamen?', options: ['A type of orchid flower', 'The spongy root layer that absorbs water instantly from humid air', 'A parasite that attacks orchids', 'The bark of the host tree'], answer: 1 },
+        { question: 'Why can\u2019t orchid seeds germinate without a fungal partner?', options: ['They are too heavy to reach the soil', 'They contain virtually no stored nutrients and need the fungus to feed them', 'Fungi protect seeds from insects', 'Orchid seeds need darkness to germinate'], answer: 1 },
+        { question: 'What is the Wood Wide Web?', options: ['A network of tree branches', 'Underground mycorrhizal networks connecting trees through fungal threads', 'A website about forests', 'The pattern of roots visible above ground'], answer: 1 },
+        { question: 'Can a commensalism relationship shift toward parasitism?', options: ['No, relationships between species are always fixed', 'Yes, if too many orchids overload a branch, the host can be harmed', 'Only in laboratories', 'Only if the temperature changes'], answer: 1 },
+      ],
       concepts: [
         {
-          title: "Epiphytic Ecology — Living on Trees Without Harming Them",
+          title: 'Epiphyte vs Parasite: The Orchid\u2019s Honest Deal',
           paragraphs: [
-            "An **epiphyte** is a plant that grows on another plant for physical support without parasitizing it. Orchids are the most species-rich group of epiphytes, with over 20,000 species growing on tree branches and trunks in tropical forests. Unlike parasites, epiphytes do not penetrate the host's vascular tissue or steal nutrients — they use the tree only as a platform to access sunlight in the dark forest understory.",
-            "Epiphytes face a unique challenge: they have **no connection to soil**. They must obtain water from rain, humidity, and mist; nutrients from dust, decaying leaf litter trapped in bark crevices, and dissolved minerals in rainwater running down the trunk. Their roots serve primarily for **attachment** (gripping the bark) and **absorption** (capturing moisture from humid air). Many orchid roots have a spongy outer layer called **velamen** — dead cells that absorb water instantly on contact, like a biological sponge.",
-            "The relationship between epiphyte and host tree is usually **commensalism** (one benefits, the other is unaffected), but in extreme cases heavy epiphyte loading can break branches, and dense epiphyte mats can intercept so much rainwater that little reaches the host's roots. In Northeast India's cloud forests, a single large tree can support over 50 species of epiphytes — orchids, ferns, mosses, lichens, and bromeliads — creating a vertical ecosystem from ground to canopy.",
+            'The story tells us the orchid is "not a thief but a guest." Let\u2019s test that claim with biology. An **epiphyte** is a plant that grows on another plant purely for physical support \u2014 like sitting on a chair. The chair holds your weight but you do not eat the chair. A **parasite**, by contrast, actively steals nutrients from the host \u2014 like a tick feeding on blood.',
+            'Orchid roots look alarming \u2014 silvery tendrils gripping the bark. But look closely: they do NOT penetrate the bark. They wrap around it for grip, and their outer layer \u2014 the **velamen** \u2014 is a sponge made of dead cells that absorbs water from rain, mist, and humid air in less than one second. The orchid makes its own food via photosynthesis, just like any green plant. It takes nothing from the tree.',
+            '**Check yourself:** Mistletoe also grows on trees. But mistletoe sends root-like structures called haustoria INTO the tree\u2019s vascular tissue to steal water and sugar. Is mistletoe an epiphyte or a parasite? (Answer: parasite.) Can you explain the difference in one sentence before reading on?',
           ],
-          keyIdea: "Epiphytes like orchids grow on trees for access to sunlight without parasitizing them — they obtain water and nutrients entirely from the atmosphere, rain, and trapped organic debris.",
+          keyIdea: 'Epiphytes like orchids use trees only as platforms \u2014 their roots grip without penetrating, and velamen absorbs water from the air. Parasites like mistletoe penetrate the host and steal nutrients. The key test: does it tap the sap?',
+          diagram: 'OrchidEpiphyteAnatomyDiagram',
         },
         {
-          title: "Mycorrhizal Networks — The Underground Internet",
+          title: 'The Wood Wide Web: Fungal Networks Underground',
           paragraphs: [
-            "**Mycorrhizae** are symbiotic associations between fungal hyphae (threadlike filaments) and plant roots. Over 90% of plant species form mycorrhizal relationships. The fungus extends far into the soil, vastly increasing the plant's effective root surface area. The fungus delivers water and minerals (especially phosphorus) to the plant; the plant delivers sugars (from photosynthesis) to the fungus. Both benefit — this is **mutualism**.",
-            "Orchids have an extraordinarily intimate mycorrhizal dependency. Most orchid seeds are tiny (dust-like) and contain virtually no stored nutrients — they **cannot germinate without** a compatible fungus providing the initial carbon and nutrients. This is called **mycoheterotrophy** in the early stages: the seedling is essentially parasitizing the fungus until it grows leaves and can photosynthesize. Some orchid species remain mycoheterotrophic their entire lives, never producing chlorophyll.",
-            "Recent research has revealed that mycorrhizal fungi connect multiple trees and plants into **common mycorrhizal networks** (CMNs) — sometimes called the \"Wood Wide Web.\" Through these networks, mature trees can transfer sugars to shaded seedlings, and stressed trees can send chemical alarm signals to neighbors. Orchids tap into these networks both as seedlings (receiving nutrients from the fungus and indirectly from connected trees) and as adults (sharing in the network's nutrient cycling). The forest is far more interconnected below ground than it appears above.",
+            'Below the forest floor, a hidden internet runs through the soil. **Mycorrhizal fungi** form threadlike networks called hyphae that connect tree roots to each other and to surrounding plants. The deal is simple mutualism: the fungus delivers water and minerals (especially phosphorus) that its fine threads can reach far better than roots; the tree delivers sugar from photosynthesis. Both partners benefit.',
+            'Orchids are the most extreme users of this network. Their seeds are dust-like specks weighing as little as 0.05 mg \u2014 they contain almost zero stored food. When an orchid seed lands on bark or soil, it **cannot germinate without** a compatible fungal partner. The fungus feeds the tiny seedling until it grows leaves and can photosynthesize. Some orchid species never develop chlorophyll at all \u2014 they parasitize the fungal network their entire lives.',
+            '**Predict before you read:** If you cut down the largest tree in a forest, what happens to the seedlings growing in its shade? Through the mycorrhizal network, that big tree was actually feeding sugar to those shaded seedlings. Remove the tree and you may kill the seedlings too \u2014 not by blocking light, but by cutting the underground food supply.',
           ],
-          keyIdea: "Mycorrhizal networks connect trees and plants underground through fungal threads — orchids depend entirely on these fungal partners for germination and nutrient access throughout their lives.",
-          diagram: 'FoodWebDiagram',
+          keyIdea: 'Mycorrhizal fungi connect trees underground into a "Wood Wide Web" that shares nutrients and signals. Orchid seeds cannot germinate without these fungal partners \u2014 the forest is far more interconnected below ground than above.',
+          diagram: 'OrchidMycorrhizalNetworkDiagram',
         },
         {
-          title: "Symbiosis Spectrum — From Mutualism to Parasitism",
+          title: 'The Symbiosis Spectrum: It\u2019s Not Black and White',
           paragraphs: [
-            "**Symbiosis** simply means \"living together\" — two species in a close, long-term association. It exists on a spectrum. **Mutualism** benefits both partners (mycorrhizae: fungus gets sugar, plant gets minerals). **Commensalism** benefits one without affecting the other (an orchid growing on a tree branch). **Parasitism** benefits one at the other's expense (a mistletoe penetrating a tree's vascular tissue to steal water and sugars).",
-            "The boundaries between these categories are often blurry and context-dependent. An orchid is commensal under normal conditions, but if too many orchids grow on one branch, they may become mildly parasitic by shading the host's leaves or weighing down branches. A mycorrhizal fungus is mutualistic when the plant has surplus sugar to share, but if the plant is stressed and cannot produce enough sugar, the fungus may extract more than it gives — temporarily shifting toward parasitism.",
-            "This spectrum model is important because it shows that ecological relationships are not fixed — they shift with environmental conditions. Climate change, nutrient availability, and community composition all influence where on the mutualism-parasitism spectrum a relationship falls. Understanding this helps predict how ecosystems will respond to disturbance: if conditions push a key mutualism toward parasitism, the entire network of dependent species can unravel.",
+            '**Symbiosis** means "living together," and it exists on a spectrum. At one end: **mutualism** (both benefit \u2014 fungus gets sugar, plant gets minerals). In the middle: **commensalism** (one benefits, the other is unaffected \u2014 orchid sits on tree). At the other end: **parasitism** (one benefits at the other\u2019s expense \u2014 mistletoe steals sap).',
+            'Here is the surprising part: the same relationship can **slide along the spectrum** depending on conditions. One orchid on a branch is commensalism. But if fifty orchids grow on the same branch, their weight may snap it \u2014 now the relationship has shifted toward parasitism. A mycorrhizal fungus is mutualistic when the tree has surplus sugar. But if drought stresses the tree and it cannot produce enough sugar, the fungus may extract more than it gives \u2014 shifting toward parasitism.',
+            '**Think about this:** Climate change, pollution, and habitat loss don\u2019t just kill individual species \u2014 they shift where relationships sit on this spectrum. If warming pushes a key mutualism toward parasitism, the entire network of species that depended on that mutualism can collapse. Conservation is not just about saving species; it is about protecting the relationships between them.',
           ],
-          keyIdea: "Symbiosis exists on a spectrum from mutualism to parasitism — and the same relationship can shift along this spectrum as environmental conditions change, making ecological predictions complex.",
-          diagram: 'AdaptationDiagram',
+          keyIdea: 'Symbiosis is a spectrum from mutualism to parasitism, and the same relationship can slide along it as conditions change. Protecting ecosystems means protecting the relationships between species, not just individual species.',
+          diagram: 'OrchidSymbiosisSpectrumDiagram',
+        },
+        {
+          title: 'Orchid Conservation: Why the Most Beautiful Plants Are Fragile',
+          paragraphs: [
+            'Orchids are the most species-rich family of flowering plants \u2014 approximately 28,000 species, about 10% of all flowering plants on Earth. Yet they are among the most threatened. Why? Because orchid survival depends on a chain of fragile partnerships: host trees for physical support, mycorrhizal fungi for germination, specific pollinators for reproduction, and stable climate for all three.',
+            'Break any link and the orchid population collapses. Deforestation removes host trees. Soil disturbance kills mycorrhizal fungi. Pesticides eliminate pollinators. Over-collection for the ornamental trade removes the most beautiful specimens from the wild. And orchids are slow \u2014 many species take 5-10 years to flower from seed, so populations recover very slowly from any disturbance.',
+            '**What can be done?** Conservation biologists now propagate endangered orchids using **symbiotic propagation** \u2014 growing seeds with their specific fungal partners in laboratories. All orchids are protected under CITES (international trade law). But the most effective strategy is protecting entire forests, because saving the host trees saves the fungi, the pollinators, and the orchids all at once. In NE India, community-managed forests are proving to be among the most effective orchid conservation areas.',
+          ],
+          keyIdea: 'Orchids depend on a chain of partnerships (host trees + fungi + pollinators). Breaking any link threatens the species. Conservation means protecting entire ecosystems, not just individual orchids.',
+          diagram: 'OrchidConservationDiagram',
         },
       ],
     },
@@ -17684,6 +18310,7 @@ And on full-moon nights, when the Brahmaputra shines like hammered silver, you c
             'Form drag depends on the **shape** of the hull. A blunt, wide front (bow) pushes a lot of water aside and creates large waves, wasting energy. A narrow, pointed bow slices through water with minimal displacement. The concept is captured by the **drag coefficient** — a number that describes how streamlined an object is. A sphere has a drag coefficient of about 0.47; a well-designed boat hull can achieve 0.04 or less, meaning it experiences roughly 10 times less drag than a sphere of the same cross-section. Jonaki\'s team also benefited from rowing at a steady pace rather than sprinting — at lower speeds, drag is proportionally lower (drag increases with the square of velocity), so consistent moderate speed is more energy-efficient than bursts of high speed.',
           ],
           keyIdea: 'Boats are slowed by friction drag (water clinging to the hull) and form drag (energy lost pushing water aside). Streamlined hulls, smooth surfaces, and steady speeds all reduce drag, which is why Jonaki\'s efficient strategy beat the sprinting brute-force teams.',
+          diagram: 'BoatDragTypesDiagram',
         },
         {
           title: 'Buoyancy and Displacement: Why Boats Float',
@@ -17695,10 +18322,20 @@ And on full-moon nights, when the Brahmaputra shines like hammered silver, you c
           keyIdea: 'Boats float because their hull shape displaces enough water to generate buoyancy equal to the boat\'s weight. Lighter boats sit higher, have less wetted surface, and experience less friction drag — giving lighter crews a hidden speed advantage.',
           diagram: 'BuoyancyDiagram',
         },
+        {
+          title: 'Hull Speed and Rowing Biomechanics',
+          paragraphs: [
+            'There is a speed limit built into every displacement boat, and it is set by physics, not by rowing strength. As a boat moves, it creates a **bow wave** whose wavelength equals the boat\u2019s waterline length. At **hull speed**, the boat is trapped between its own bow wave and stern wave, sitting in a trough it cannot climb out of. The formula: hull speed (knots) = 1.34 \u00D7 \u221A(waterline length in feet). A 10-meter boat maxes out at about 7.7 knots; a 3-meter boat is stuck at 4.2 knots.',
+            'This is why Majuli\u2019s racing boats are long and narrow rather than short and wide. Length is speed. The trade-off is stability \u2014 long narrow boats tip easily \u2014 but skilled rowers like Jonaki\u2019s team can manage that with practiced balance.',
+            '**Rowing biomechanics** also matter. The oar is a lever with the oarlock as fulcrum. The stroke has four phases: catch (blade enters water), drive (legs push, back swings, arms pull), finish (blade exits), and recovery (slide forward). Jonaki\u2019s team maintained a steady 28 strokes per minute \u2014 since drag grows with speed\u00B2, their consistent moderate pace used far less total energy than the men\u2019s frantic 40-stroke sprints.',
+          ],
+          keyIdea: 'Hull speed is set by waterline length (longer = faster). Rowing is a lever system where steady, efficient strokes beat sprinting because drag grows with the square of speed.',
+          diagram: 'BoatHullSpeedDiagram',
+        },
       ],
       vocabulary: [
         ['Drag', 'The resistance force water exerts on a moving object, opposing its direction of motion'],
-        ['Thalweg', 'The line of deepest and fastest flow in a river channel — the "highway" of the river'],
+        ['Thalweg', 'The line of deepest and fastest flow in a river channel \u2014 the "highway" of the river'],
         ['Buoyancy', 'The upward force a fluid exerts on an immersed object, equal to the weight of the displaced fluid'],
         ['Displacement', 'The volume (or weight) of water pushed aside by a floating object — determines how deep a boat sits'],
         ['Laminar flow', 'Smooth, orderly fluid flow in parallel layers, as opposed to turbulent flow which is chaotic and swirling'],
@@ -17713,7 +18350,40 @@ And on full-moon nights, when the Brahmaputra shines like hammered silver, you c
         'Olympic rowing shells are so narrow and light (about 14 kg for an eight-person shell) that they can exceed 20 km/h — faster than most people can sprint on land.',
         'The drag force on a boat increases with the square of its speed — doubling your speed requires four times the rowing effort, which is why steady pacing beats sprinting in long races.',
       ],
-      offlineActivity: 'Fill a bathtub or large basin with water. Make three small boats from aluminum foil: one wide and flat, one narrow with a pointed front, and one round like a bowl. Place a small coin in each for equal weight. Now blow on each boat from behind (same distance, same effort) and see which travels farthest. The pointed boat should win — it has the lowest form drag. Try making the surface of one boat rough (crumple the foil) and one smooth to see friction drag in action too.',
+      offlineActivity: 'Fill a bathtub or large basin with water. Make three small boats from aluminum foil: one wide and flat, one narrow with a pointed front, and one round like a bowl. Place a small coin in each for equal weight. Now blow on each boat from behind (same distance, same effort) and see which travels farthest. The pointed boat should win \u2014 it has the lowest form drag. Try making the surface of one boat rough (crumple the foil) and one smooth to see friction drag in action too.',
+      offlineActivityDiagram: 'ActivityBoatShapeDiagram',
+      codeTeaser: `import numpy as np
+import matplotlib.pyplot as plt
+
+# Hull speed formula: V = 1.34 * sqrt(L)
+# V in knots, L in feet
+lengths_ft = np.linspace(5, 40, 100)
+hull_speeds = 1.34 * np.sqrt(lengths_ft)
+
+plt.figure(figsize=(10, 5))
+plt.plot(lengths_ft, hull_speeds, linewidth=2, color='#0891b2')
+plt.fill_between(lengths_ft, hull_speeds, alpha=0.1, color='#0891b2')
+plt.xlabel('Waterline Length (feet)')
+plt.ylabel('Hull Speed (knots)')
+plt.title('Longer Boats Have Higher Maximum Speeds')
+plt.grid(alpha=0.3)
+plt.show()  # Why does the curve flatten?`,
+      referenceLinks: [
+        { slug: 'forces-and-motion', reason: 'Drag, buoyancy, and propulsion are all force concepts \u2014 this reference covers Newton\u2019s laws applied to real systems' },
+        { slug: 'waves-and-properties', reason: 'Wave drag is created by the boat\u2019s bow wave \u2014 understanding wave speed and wavelength explains the hull speed limit' },
+      ],
+      nextLessons: [
+        { slug: 'little-boat-brahmaputra', reason: 'Another Brahmaputra boat story \u2014 explores buoyancy, displacement, and building boats from local materials' },
+        { slug: 'siang-river', reason: 'From the river\u2019s surface to its geology \u2014 how the Siang carved one of the world\u2019s deepest gorges' },
+        { slug: 'fishermans-daughter-storm', reason: 'From calm boat racing to storm survival \u2014 the same fluid dynamics in extreme conditions' },
+      ],
+      quiz: [
+        { question: 'What is the thalweg?', options: ['The side of a boat', 'The line of deepest and fastest flow in a river channel', 'A type of rowing stroke', 'The wake behind a boat'], answer: 1 },
+        { question: 'Why does drag increase with the square of speed?', options: ['Because water is twice as dense at high speeds', 'Because faster movement pushes more water aside and creates more friction per unit time', 'Because gravity increases with speed', 'Because boats get heavier at high speed'], answer: 1 },
+        { question: 'What determines hull speed?', options: ['The weight of the crew', 'The waterline length of the boat', 'The colour of the hull', 'The depth of the water'], answer: 1 },
+        { question: 'Why did Jonaki\u2019s steady pace beat the men\u2019s sprinting?', options: ['She was stronger than them', 'Drag grows with speed squared, so sprinting wastes four times more energy per unit distance', 'The current helped only her', 'Her boat was made of lighter wood'], answer: 1 },
+        { question: 'Why are racing boats oiled before a race?', options: ['To make them waterproof', 'To reduce friction drag by making the hull surface smoother', 'To make them heavier', 'To protect the wood from sunlight'], answer: 1 },
+      ],
     },
   },
   {
@@ -17989,6 +18659,7 @@ And that is why, if you visit Haflong and stand on a hilltop at sunset, you will
             'The net effect is that a veil of scattered blue light is added between you and the distant mountain. The farther away the mountain, the thicker this blue veil, and the bluer the mountain appears. This is called **atmospheric perspective** or **aerial perspective**, and painters have used it for centuries to create the illusion of depth — distant objects are painted bluer and lighter than nearby objects. Leonardo da Vinci described this effect in the 1400s, long before the physics was understood.',
           ],
           keyIdea: 'Distant mountains appear blue because scattered blue light from the atmosphere accumulates between you and the mountain, creating a blue veil that grows thicker with distance. The mountains themselves are green — the blue is an atmospheric illusion.',
+          diagram: 'BlueMountainScatteringDiagram',
         },
         {
           title: 'Rayleigh Scattering: The Physics of Blue',
@@ -18008,6 +18679,17 @@ And that is why, if you visit Haflong and stand on a hilltop at sunset, you will
             '**Haze** and **humidity** significantly affect visibility and mountain color. Water vapor and aerosol particles (dust, pollen, smoke) cause additional scattering called **Mie scattering**, which scatters all wavelengths more equally and produces a whitish haze. On very humid days, Haflong\'s mountains may appear pale blue-white; on clear, dry days after rain has washed particles from the air, the mountains appear a deeper, more saturated blue. Air pollution increases haze and reduces visibility — this is why the blue mountains of many regions have become less vivid as industrial pollution has increased, and why air-quality improvements can literally restore the blue to mountain views.',
           ],
           keyIdea: 'Mountain color changes with time of day, humidity, and air quality. Dawn and dusk produce deep blues, midday produces lighter blues, haze whitens the view, and clean air after rain reveals the deepest, most vivid blues.',
+          diagram: 'HazeFogComparisonDiagram',
+        },
+        {
+          title: 'Aerial Perspective: From Physics to Art',
+          paragraphs: [
+            'Leonardo da Vinci was the first to write down the rules of **aerial perspective** in the 1490s, centuries before anyone understood the physics. He noticed three things happen to distant objects: their colour shifts toward blue, their contrast decreases (darks become lighter, lights become darker), and their edges blur. Every landscape painter since has used these rules to create depth on a flat canvas.',
+            'Now you know the physics behind each rule. The blue shift comes from Rayleigh scattering adding scattered blue light to your line of sight. The contrast loss happens because scattered light fills in the shadows — dark areas receive extra blue skylight, so they look lighter. The edge blur happens because light from the object scatters in all directions, mixing with light from the background, smearing sharp boundaries.',
+            '**Test this yourself:** Next time you see a range of hills, notice how the nearest hill shows green trees with visible trunks and branches (true color, high contrast, sharp edges). A hill 10 km away looks blue-green with no individual trees visible. A hill 50 km away is a pale blue silhouette — you cannot tell if it is forested or bare. That gradient from sharp green to hazy blue IS aerial perspective, and it is the same physics operating at every distance.',
+          ],
+          keyIdea: 'Aerial perspective is the artistic application of Rayleigh scattering: distant objects appear bluer, lower contrast, and less sharp. Leonardo da Vinci documented this 400 years before the physics was understood.',
+          diagram: 'AerialPerspectiveDiagram',
         },
       ],
       vocabulary: [
@@ -18027,7 +18709,43 @@ And that is why, if you visit Haflong and stand on a hilltop at sunset, you will
         'The Blue Ridge Mountains of the eastern United States get their name from the same scattering phenomenon — volatile organic compounds released by trees create additional aerosols that enhance the blue appearance.',
         'On the Moon, which has no atmosphere, there is no scattering at all. Distant mountains appear just as sharp and colorful as nearby rocks — astronauts reported that judging distance on the Moon was extremely difficult because atmospheric perspective was absent.',
       ],
-      offlineActivity: 'You can see atmospheric perspective from any elevated viewpoint. On a clear day, look at a series of hills or buildings at increasing distances. Notice how the nearest objects show their true colors (green trees, brown buildings) while progressively distant objects appear increasingly blue and faded. Sketch what you see, labeling approximate distances. If you can observe the same view on both a clear day and a hazy day, sketch both and compare — you will see how air quality changes the depth of the blue effect.',
+      offlineActivity: 'You can see atmospheric perspective from any elevated viewpoint. On a clear day, look at a series of hills or buildings at increasing distances. Notice how the nearest objects show their true colors (green trees, brown buildings) while progressively distant objects appear increasingly blue and faded. Sketch what you see, labeling approximate distances. If you can observe the same view on both a clear day and a hazy day, sketch both and compare \u2014 you will see how air quality changes the depth of the blue effect.',
+      offlineActivityDiagram: 'ActivityHillColorDiagram',
+      codeTeaser: `import numpy as np
+import matplotlib.pyplot as plt
+
+# Rayleigh scattering: intensity proportional to 1/wavelength^4
+wavelengths = np.linspace(380, 700, 200)  # nm
+scattering = 1 / wavelengths**4
+scattering = scattering / scattering.max()
+
+# Map wavelength to approximate visible color
+colors = plt.cm.rainbow(1 - (wavelengths - 380) / 320)
+
+plt.figure(figsize=(10, 5))
+for i in range(len(wavelengths) - 1):
+    plt.fill_between(wavelengths[i:i+2], scattering[i:i+2],
+                     color=colors[i], alpha=0.8)
+plt.xlabel('Wavelength (nm)')
+plt.ylabel('Relative Scattering Intensity')
+plt.title('Rayleigh Scattering: Why Blue Dominates')
+plt.show()  # How steep is this curve?`,
+      referenceLinks: [
+        { slug: 'light-and-color', reason: 'Deep dive into the electromagnetic spectrum, wavelengths, and all types of scattering that produce sky and mountain colors' },
+        { slug: 'waves-and-properties', reason: 'Scattering depends on wavelength \u2014 this reference covers wave fundamentals including frequency, wavelength, and energy' },
+      ],
+      nextLessons: [
+        { slug: 'orange-sunsets-assam', reason: 'The same Rayleigh scattering that makes mountains blue makes sunsets orange \u2014 two sides of the same physics' },
+        { slug: 'kingfisher-blue', reason: 'Not all blue comes from scattering \u2014 kingfisher feathers use nanostructures to create structural color without pigment' },
+        { slug: 'rainbow-fish', reason: 'From atmospheric optics to thin-film optics \u2014 how light splits into colors in water and on surfaces' },
+      ],
+      quiz: [
+        { question: 'Why do the mountains of Haflong appear blue?', options: ['They are covered in blue flowers', 'Blue minerals in the rock reflect blue light', 'Rayleigh scattering adds a blue veil of scattered light between you and the distant mountains', 'The sky reflects off the mountainside'], answer: 2 },
+        { question: 'What does the 1/\u03BB\u2074 law mean for light scattering?', options: ['Longer wavelengths scatter more', 'All wavelengths scatter equally', 'Shorter wavelengths (blue) scatter much more strongly than longer ones (red)', 'Only blue light exists in the atmosphere'], answer: 2 },
+        { question: 'Why do mountains look bluer on clear days than on hazy days?', options: ['Clear air has more blue particles', 'Haze adds white Mie scattering that dilutes the blue Rayleigh scattering', 'Rain washes away the blue color', 'Mountains change color with the weather'], answer: 1 },
+        { question: 'What is aerial perspective?', options: ['A satellite view of the ground', 'The artistic technique of painting distant objects bluer and less distinct to show depth', 'A type of camera lens', 'The view from an airplane'], answer: 1 },
+        { question: 'On the Moon, why is it hard to judge distance?', options: ['The Moon is too bright', 'There is no atmosphere, so there is no scattering and no aerial perspective', 'The Moon has no mountains', 'Astronaut helmets block the view'], answer: 1 },
+      ],
     },
   },
   {
@@ -18154,6 +18872,7 @@ In Kaziranga, where rhinos and elephants and tigers share the land with farmers 
             'This natural balance is far more sustainable than using rat poison, which has cascading negative effects. Poison kills not only rats but also the animals that eat poisoned rats — owls, hawks, snakes, and even domestic cats. This phenomenon is called **secondary poisoning** or **bioaccumulation**. By contrast, a python controlling rats has zero environmental side effects. Studies in Southeast Asia have shown that rice fields with healthy snake populations lose significantly less grain to rodents than fields where snakes have been killed. Bornali was providing a free, chemical-free, perpetual pest control service — worth potentially thousands of rupees in saved rice every year.',
           ],
           keyIdea: 'Pythons act as natural pest controllers, eating rats that damage stored grain. This biological control is more sustainable than poison, which causes secondary poisoning in the food chain. A single python can save significant quantities of rice annually.',
+          diagram: 'PythonPitOrganDiagram',
         },
         {
           title: 'Coexistence: Living Alongside Wildlife',
@@ -18163,6 +18882,16 @@ In Kaziranga, where rhinos and elephants and tigers share the land with farmers 
             'Successful coexistence strategies around Kaziranga include: maintaining buffer zones of grassland between farms and core forest, using trenches and fences to guide elephants away from crops, training community members to identify dangerous vs. harmless species, and operating snake rescue hotlines that relocate venomous snakes rather than killing them. Mrin\'s family practiced the most fundamental form of coexistence — **tolerance based on understanding**. By learning that Bornali was harmless and helpful, they transformed fear into a mutually beneficial arrangement. This individual-level tolerance, scaled across communities, is what makes conservation possible in human-dominated landscapes.',
           ],
           keyIdea: 'Human-wildlife coexistence requires distinguishing genuinely dangerous species from harmless or beneficial ones. Most snakes are non-venomous and beneficial; tolerance based on knowledge transforms fear into mutually beneficial arrangements that support both people and wildlife.',
+        },
+        {
+          title: 'Constriction Mechanics: Precision, Not Brute Force',
+          paragraphs: [
+            'Movies show pythons crushing prey to pulp. The reality is far more elegant. A python strikes, grabs with backward-curving teeth (for grip, not damage), and wraps 2\u20133 coils around the prey in under one second. Then it does something remarkable: it **senses the prey\u2019s heartbeat** through its coils.',
+            'With each exhale by the prey, the python tightens just enough so the prey cannot inhale again. This is not about crushing bones \u2014 the pressure is only about 1.5 PSI, less than a firm handshake. But applied continuously around the entire torso, this modest pressure prevents the heart from pumping blood. Circulatory arrest \u2014 not suffocation \u2014 is the actual cause of death, and it happens in about 20 seconds.',
+            '**Think about this:** The python knows when to stop squeezing because it detects when the heartbeat stops. It never wastes energy applying more force than needed. This precision has inspired biomedical engineers designing blood pressure monitors and wearable health sensors \u2014 devices that wrap around a limb and detect pulse pressure, exactly as a python\u2019s coils do.',
+          ],
+          keyIdea: 'Constriction stops blood flow, not breathing. Pythons sense the prey\u2019s heartbeat through their coils and apply just enough pressure (about 1.5 PSI) to prevent circulation \u2014 precision, not brute force.',
+          diagram: 'PythonConstrictionDiagram',
         },
       ],
       vocabulary: [
@@ -18183,6 +18912,38 @@ In Kaziranga, where rhinos and elephants and tigers share the land with farmers 
         'Kaziranga National Park has the highest density of tigers anywhere in the world (about 1 tiger per 5 square kilometers), yet the surrounding communities coexist with these predators through a combination of awareness, buffer zones, and traditional ecological knowledge.',
       ],
       offlineActivity: 'Survey the area around your home for signs of wildlife you might not normally notice: spider webs in corners, lizards on walls, bird nests under eaves, ant trails, or beetle burrows. For each creature, research what it eats and what eats it. You will likely discover that most of these animals are beneficial — spiders eat mosquitoes, lizards eat cockroaches, birds eat caterpillars. Create a "Wildlife Neighbors" chart showing each species and its ecological role. How many of your neighbors are actually helping you?',
+      offlineActivityDiagram: 'ActivityWildlifeSurveyDiagram',
+      codeTeaser: `# How much grain does a python save?
+rats_per_year = 25        # rats eaten by one python
+grain_per_rat = 12        # kg of grain one rat eats/year
+saved_kg = rats_per_year * grain_per_rat
+
+rice_price_per_kg = 40    # rupees
+saved_rupees = saved_kg * rice_price_per_kg
+
+family_daily_rice = 1.5   # kg per day
+days_fed = saved_kg / family_daily_rice
+
+print(f"One python saves {saved_kg} kg of rice/year")
+print(f"Worth \u20B9{saved_rupees} at market price")
+print(f"That feeds a family for {days_fed:.0f} days")
+# Is killing the python worth it?`,
+      referenceLinks: [
+        { slug: 'ecology-and-ecosystems', reason: 'Predator-prey dynamics and biological pest control are core ecological concepts covered in this reference' },
+        { slug: 'adaptation-and-evolution', reason: 'Ectothermy, pit organs, and constriction are all evolved adaptations — this reference covers natural selection in depth' },
+      ],
+      nextLessons: [
+        { slug: 'dancing-deer-loktak', reason: 'Another story of wildlife living alongside humans — the Sangai deer of Loktak Lake and wetland conservation' },
+        { slug: 'elephant-corridor', reason: 'From python coexistence to elephant corridors — how communities create safe passages for wildlife through human landscapes' },
+        { slug: 'wild-orchids-trees', reason: 'From animal symbiosis to plant symbiosis — orchids living on trees without harming them, another form of peaceful coexistence' },
+      ],
+      quiz: [
+        { question: 'What does ectotherm mean?', options: ['An animal that generates its own body heat', 'An animal that relies on external heat sources to regulate body temperature', 'A cold animal that cannot survive in warm climates', 'An animal that lives underground'], answer: 1 },
+        { question: 'Why do pythons need only 10% of the food a same-sized mammal needs?', options: ['They have smaller stomachs', 'They do not burn calories to generate body heat', 'They only eat once a year', 'They are more efficient at digestion'], answer: 1 },
+        { question: 'What are pit organs?', options: ['Organs that produce venom', 'Infrared heat sensors on the snake\u2019s face that detect warm-blooded prey', 'Breathing holes along the body', 'Organs that produce silk'], answer: 1 },
+        { question: 'How does a constrictor kill its prey?', options: ['By crushing its bones', 'By injecting venom', 'By squeezing to stop blood circulation, not by crushing', 'By suffocating it with its body weight'], answer: 2 },
+        { question: 'Why is killing all snakes near farms a bad idea?', options: ['Snakes are beautiful', 'Removing snakes allows rat populations to explode, causing far more crop damage', 'Snakes are protected by law everywhere', 'Snakes bring good luck'], answer: 1 },
+      ],
     },
   },
   {

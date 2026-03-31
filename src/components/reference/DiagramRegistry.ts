@@ -622,6 +622,36 @@ import BoatHullShapesDiagram from '../diagrams/BoatHullShapesDiagram';
 import BoatCurrentDiagram from '../diagrams/BoatCurrentDiagram';
 import BoatBrahmaputraDiagram from '../diagrams/BoatBrahmaputraDiagram';
 import ActivityFloatBoatDiagram from '../diagrams/ActivityFloatBoatDiagram';
+// Little Potter — Ceramics & Material Science
+import ClayParticlesDiagram from '../diagrams/ClayParticlesDiagram';
+import SinteringProcessDiagram from '../diagrams/SinteringProcessDiagram';
+import GlazeChemistryDiagram from '../diagrams/GlazeChemistryDiagram';
+import ThermalShockDiagram from '../diagrams/ThermalShockDiagram';
+import ActivityClayTestDiagram from '../diagrams/ActivityClayTestDiagram';
+import PotteryOutputDiagram from '../diagrams/PotteryOutputDiagram';
+// Grandmother Remembered — Memory & Neuroscience
+import MemoryFormationDiagram from '../diagrams/MemoryFormationDiagram';
+import ForgettingCurveDiagram from '../diagrams/ForgettingCurveDiagram';
+import MnemonicTechniquesDiagram from '../diagrams/MnemonicTechniquesDiagram';
+import ActivityMemoryTestDiagram from '../diagrams/ActivityMemoryTestDiagram';
+import MemoryOutputDiagram from '../diagrams/MemoryOutputDiagram';
+// Festival Lights — Energy & Light Technology
+import IncandescentVsLEDDiagram from '../diagrams/IncandescentVsLEDDiagram';
+import SolarCellBasicsDiagram from '../diagrams/SolarCellBasicsDiagram';
+import EnergyEfficiencyDiagram from '../diagrams/EnergyEfficiencyDiagram';
+import ActivityLightCompareDiagram from '../diagrams/ActivityLightCompareDiagram';
+import LightEfficiencyOutputDiagram from '../diagrams/LightEfficiencyOutputDiagram';
+// Music of Dimasa — Music Theory & Vibrations
+import PitchFrequencyDiagram from '../diagrams/PitchFrequencyDiagram';
+import RhythmDivisionDiagram from '../diagrams/RhythmDivisionDiagram';
+import TimbreDiagram from '../diagrams/TimbreDiagram';
+import ActivityStringPitchDiagram from '../diagrams/ActivityStringPitchDiagram';
+import RhythmAnalyzerOutputDiagram from '../diagrams/RhythmAnalyzerOutputDiagram';
+// Flying Squirrel — Gliding & Aerodynamics
+import GlidingVsFlyingDiagram from '../diagrams/GlidingVsFlyingDiagram';
+import SquareCubeLawDiagram from '../diagrams/SquareCubeLawDiagram';
+import ActivityGliderTestDiagram from '../diagrams/ActivityGliderTestDiagram';
+import GlideRatioOutputDiagram from '../diagrams/GlideRatioOutputDiagram';
 
 // Hornbill's Crown — Ornithology & Animal Behavior
 import HornbillCasqueDiagram from '../diagrams/HornbillCasqueDiagram';
@@ -786,6 +816,100 @@ import HoliPHIndicatorDiagram from '../diagrams/HoliPHIndicatorDiagram';
 import HoliMordantDiagram from '../diagrams/HoliMordantDiagram';
 import HoliTeaConnectionDiagram from '../diagrams/HoliTeaConnectionDiagram';
 import ActivityDyeExtractDiagram from '../diagrams/ActivityDyeExtractDiagram';
+// Seed Dispersal
+import SeedWindDispersalDiagram from '../diagrams/SeedWindDispersalDiagram';
+import SeedAnimalDispersalDiagram from '../diagrams/SeedAnimalDispersalDiagram';
+import SeedExplosiveGravityDiagram from '../diagrams/SeedExplosiveGravityDiagram';
+import SeedAutorotationDiagram from '../diagrams/SeedAutorotationDiagram';
+import ActivitySeedDropDiagram from '../diagrams/ActivitySeedDropDiagram';
+import SeedDispersalOutputDiagram from '../diagrams/SeedDispersalOutputDiagram';
+// Wild Orchids — Epiphytes & Symbiosis
+import OrchidEpiphyteAnatomyDiagram from '../diagrams/OrchidEpiphyteAnatomyDiagram';
+import OrchidMycorrhizalNetworkDiagram from '../diagrams/OrchidMycorrhizalNetworkDiagram';
+import OrchidSymbiosisSpectrumDiagram from '../diagrams/OrchidSymbiosisSpectrumDiagram';
+import OrchidConservationDiagram from '../diagrams/OrchidConservationDiagram';
+import ActivityEpiphyteSurveyDiagram from '../diagrams/ActivityEpiphyteSurveyDiagram';
+// Moonlit Boat Race — Fluid Dynamics
+import BoatHullSpeedDiagram from '../diagrams/BoatHullSpeedDiagram';
+import BoatDragTypesDiagram from '../diagrams/BoatDragTypesDiagram';
+import BoatRowingBiomechanicsDiagram from '../diagrams/BoatRowingBiomechanicsDiagram';
+import ActivityBoatShapeDiagram from '../diagrams/ActivityBoatShapeDiagram';
+// Haflong Blue Mountains — Atmospheric Optics
+import BlueMountainScatteringDiagram from '../diagrams/BlueMountainScatteringDiagram';
+import HazeFogComparisonDiagram from '../diagrams/HazeFogComparisonDiagram';
+import AerialPerspectiveDiagram from '../diagrams/AerialPerspectiveDiagram';
+import ActivityHillColorDiagram from '../diagrams/ActivityHillColorDiagram';
+// Girl and Python — Reptile Biology
+import PythonEctothermyDiagram from '../diagrams/PythonEctothermyDiagram';
+import PythonPitOrganDiagram from '../diagrams/PythonPitOrganDiagram';
+import PythonConstrictionDiagram from '../diagrams/PythonConstrictionDiagram';
+import ActivityWildlifeSurveyDiagram from '../diagrams/ActivityWildlifeSurveyDiagram';
+// Brave Mithun — Domestication & Selective Breeding
+import MithunWildVsDomesticDiagram from '../diagrams/MithunWildVsDomesticDiagram';
+import MithunSelectionDiagram from '../diagrams/MithunSelectionDiagram';
+import MithunTraitChangeDiagram from '../diagrams/MithunTraitChangeDiagram';
+import MithunKeystoneDiagram from '../diagrams/MithunKeystoneDiagram';
+import ActivityBreedingSimDiagram from '../diagrams/ActivityBreedingSimDiagram';
+import BreedingSimOutputDiagram from '../diagrams/BreedingSimOutputDiagram';
+// Sal Tree — Wood Science & Material Strength
+import SalHeartwoodDiagram from '../diagrams/SalHeartwoodDiagram';
+import SalCelluloseLigninDiagram from '../diagrams/SalCelluloseLigninDiagram';
+import SalGrainDirectionDiagram from '../diagrams/SalGrainDirectionDiagram';
+import SalForestryDiagram from '../diagrams/SalForestryDiagram';
+import ActivityWoodTestDiagram from '../diagrams/ActivityWoodTestDiagram';
+import WoodStrengthOutputDiagram from '../diagrams/WoodStrengthOutputDiagram';
+// Girl Who Painted Rain — Color Science & Pigments
+import PigmentAbsorptionDiagram from '../diagrams/PigmentAbsorptionDiagram';
+import SubtractiveMixingDiagram from '../diagrams/SubtractiveMixingDiagram';
+import CapillaryActionDiagram from '../diagrams/CapillaryActionDiagram';
+import RainColorVividDiagram from '../diagrams/RainColorVividDiagram';
+import ActivityColorMixDiagram from '../diagrams/ActivityColorMixDiagram';
+import ColorMixerOutputDiagram from '../diagrams/ColorMixerOutputDiagram';
+// Cloud Weaver of Tawang — Textiles & Weaving Technology
+import WarpWeftDiagram from '../diagrams/WarpWeftDiagram';
+import LoomMechanicsDiagram from '../diagrams/LoomMechanicsDiagram';
+import ThreadTensionDiagram from '../diagrams/ThreadTensionDiagram';
+import PatternEncodingDiagram from '../diagrams/PatternEncodingDiagram';
+import ActivityWeaveCardDiagram from '../diagrams/ActivityWeaveCardDiagram';
+import FabricAnalysisOutputDiagram from '../diagrams/FabricAnalysisOutputDiagram';
+// Seven Sisters — Geography & Maps
+import PoliticalVsPhysicalMapDiagram from '../diagrams/PoliticalVsPhysicalMapDiagram';
+import MapScaleDistanceDiagram from '../diagrams/MapScaleDistanceDiagram';
+import ContourLinesDiagram from '../diagrams/ContourLinesDiagram';
+import NEIndiaStatesDiagram from '../diagrams/NEIndiaStatesDiagram';
+import ActivityNeighborhoodMapDiagram from '../diagrams/ActivityNeighborhoodMapDiagram';
+import NEIndiaAtlasOutputDiagram from '../diagrams/NEIndiaAtlasOutputDiagram';
+// Eri Silk — Silk Biology & Ethics
+import EriLifeCycleDiagram from '../diagrams/EriLifeCycleDiagram';
+import EriFibroinDiagram from '../diagrams/EriFibroinDiagram';
+import EriAhimsaDiagram from '../diagrams/EriAhimsaDiagram';
+import EriSustainableFashionDiagram from '../diagrams/EriSustainableFashionDiagram';
+import ActivitySilkStretchDiagram from '../diagrams/ActivitySilkStretchDiagram';
+import EriSilkOutputDiagram from '../diagrams/EriSilkOutputDiagram';
+// First Rice — Agriculture & Crop Origins
+import RiceDomesticationDiagram from '../diagrams/RiceDomesticationDiagram';
+import RiceMendelDiagram from '../diagrams/RiceMendelDiagram';
+import RiceSeedSavingDiagram from '../diagrams/RiceSeedSavingDiagram';
+import ActivityRiceSproutDiagram from '../diagrams/ActivityRiceSproutDiagram';
+import RiceGrowthOutputDiagram from '../diagrams/RiceGrowthOutputDiagram';
+// Dhol Drum — Percussion Physics & Vibration
+import DholChladniDiagram from '../diagrams/DholChladniDiagram';
+import DholSizePitchDiagram from '../diagrams/DholSizePitchDiagram';
+import DholStrikeDiagram from '../diagrams/DholStrikeDiagram';
+import DholResonanceDiagram from '../diagrams/DholResonanceDiagram';
+import ActivityDrumBuildDiagram from '../diagrams/ActivityDrumBuildDiagram';
+// Mountain Echoes — Sound Reflection
+import EchoDistanceDiagram from '../diagrams/EchoDistanceDiagram';
+import ReverberationDiagram from '../diagrams/ReverberationDiagram';
+import ValleyAcousticsDiagram from '../diagrams/ValleyAcousticsDiagram';
+import ActivityEchoTimeDiagram from '../diagrams/ActivityEchoTimeDiagram';
+import EchoSpeedOutputDiagram from '../diagrams/EchoSpeedOutputDiagram';
+// Ferryman's Riddle — Fluid Mechanics
+import LaminarTurbulentDiagram from '../diagrams/LaminarTurbulentDiagram';
+import FerryVectorDiagram from '../diagrams/FerryVectorDiagram';
+import WhirlpoolEddyDiagram from '../diagrams/WhirlpoolEddyDiagram';
+import ActivityFloatPathDiagram from '../diagrams/ActivityFloatPathDiagram';
+import FerryCrossingOutputDiagram from '../diagrams/FerryCrossingOutputDiagram';
 
 const registry: Record<string, ComponentType> = {
   SineWaveDiagram,
@@ -1572,6 +1696,130 @@ const registry: Record<string, ComponentType> = {
   OwlSilentFlightDiagram,
   OwlTapetumDiagram,
   ActivitySoundLocateDiagram,
+  // Seed Dispersal
+  SeedWindDispersalDiagram,
+  SeedAnimalDispersalDiagram,
+  SeedExplosiveGravityDiagram,
+  SeedAutorotationDiagram,
+  ActivitySeedDropDiagram,
+  SeedDispersalOutputDiagram,
+  // Wild Orchids — Epiphytes & Symbiosis
+  OrchidEpiphyteAnatomyDiagram,
+  OrchidMycorrhizalNetworkDiagram,
+  OrchidSymbiosisSpectrumDiagram,
+  OrchidConservationDiagram,
+  ActivityEpiphyteSurveyDiagram,
+  // Moonlit Boat Race — Fluid Dynamics
+  BoatHullSpeedDiagram,
+  BoatDragTypesDiagram,
+  BoatRowingBiomechanicsDiagram,
+  ActivityBoatShapeDiagram,
+  // Haflong Blue Mountains — Atmospheric Optics
+  BlueMountainScatteringDiagram,
+  HazeFogComparisonDiagram,
+  AerialPerspectiveDiagram,
+  ActivityHillColorDiagram,
+  // Girl and Python — Reptile Biology
+  PythonEctothermyDiagram,
+  PythonPitOrganDiagram,
+  PythonConstrictionDiagram,
+  ActivityWildlifeSurveyDiagram,
+  // Brave Mithun — Domestication & Selective Breeding
+  MithunWildVsDomesticDiagram,
+  MithunSelectionDiagram,
+  MithunTraitChangeDiagram,
+  MithunKeystoneDiagram,
+  ActivityBreedingSimDiagram,
+  BreedingSimOutputDiagram,
+  // Sal Tree — Wood Science & Material Strength
+  SalHeartwoodDiagram,
+  SalCelluloseLigninDiagram,
+  SalGrainDirectionDiagram,
+  SalForestryDiagram,
+  ActivityWoodTestDiagram,
+  WoodStrengthOutputDiagram,
+  // Girl Who Painted Rain — Color Science & Pigments
+  PigmentAbsorptionDiagram,
+  SubtractiveMixingDiagram,
+  CapillaryActionDiagram,
+  RainColorVividDiagram,
+  ActivityColorMixDiagram,
+  ColorMixerOutputDiagram,
+  // Cloud Weaver of Tawang — Textiles & Weaving Technology
+  WarpWeftDiagram,
+  LoomMechanicsDiagram,
+  ThreadTensionDiagram,
+  PatternEncodingDiagram,
+  ActivityWeaveCardDiagram,
+  FabricAnalysisOutputDiagram,
+  // Seven Sisters — Geography & Maps
+  PoliticalVsPhysicalMapDiagram,
+  MapScaleDistanceDiagram,
+  ContourLinesDiagram,
+  NEIndiaStatesDiagram,
+  ActivityNeighborhoodMapDiagram,
+  NEIndiaAtlasOutputDiagram,
+  // Eri Silk — Silk Biology & Ethics
+  EriLifeCycleDiagram,
+  EriFibroinDiagram,
+  EriAhimsaDiagram,
+  EriSustainableFashionDiagram,
+  ActivitySilkStretchDiagram,
+  EriSilkOutputDiagram,
+  // First Rice — Agriculture & Crop Origins
+  RiceDomesticationDiagram,
+  RiceMendelDiagram,
+  RiceSeedSavingDiagram,
+  ActivityRiceSproutDiagram,
+  RiceGrowthOutputDiagram,
+  // Dhol Drum — Percussion Physics & Vibration
+  DholChladniDiagram,
+  DholSizePitchDiagram,
+  DholStrikeDiagram,
+  DholResonanceDiagram,
+  ActivityDrumBuildDiagram,
+  // Mountain Echoes — Sound Reflection
+  EchoDistanceDiagram,
+  ReverberationDiagram,
+  ValleyAcousticsDiagram,
+  ActivityEchoTimeDiagram,
+  EchoSpeedOutputDiagram,
+  // Ferryman's Riddle — Fluid Mechanics
+  LaminarTurbulentDiagram,
+  FerryVectorDiagram,
+  WhirlpoolEddyDiagram,
+  ActivityFloatPathDiagram,
+  FerryCrossingOutputDiagram,
+  // Little Potter — Ceramics & Material Science
+  ClayParticlesDiagram,
+  SinteringProcessDiagram,
+  GlazeChemistryDiagram,
+  ThermalShockDiagram,
+  ActivityClayTestDiagram,
+  PotteryOutputDiagram,
+  // Grandmother Remembered — Memory & Neuroscience
+  MemoryFormationDiagram,
+  ForgettingCurveDiagram,
+  MnemonicTechniquesDiagram,
+  ActivityMemoryTestDiagram,
+  MemoryOutputDiagram,
+  // Festival Lights — Energy & Light Technology
+  IncandescentVsLEDDiagram,
+  SolarCellBasicsDiagram,
+  EnergyEfficiencyDiagram,
+  ActivityLightCompareDiagram,
+  LightEfficiencyOutputDiagram,
+  // Music of Dimasa — Music Theory & Vibrations
+  PitchFrequencyDiagram,
+  RhythmDivisionDiagram,
+  TimbreDiagram,
+  ActivityStringPitchDiagram,
+  RhythmAnalyzerOutputDiagram,
+  // Flying Squirrel — Gliding & Aerodynamics
+  GlidingVsFlyingDiagram,
+  SquareCubeLawDiagram,
+  ActivityGliderTestDiagram,
+  GlideRatioOutputDiagram,
 };
 
 export default registry;
