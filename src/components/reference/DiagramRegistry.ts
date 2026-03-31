@@ -664,6 +664,10 @@ import TrainGearsDiagram from '../diagrams/TrainGearsDiagram';
 import TrainSteamEngineDiagram from '../diagrams/TrainSteamEngineDiagram';
 import TrainMountainRouteDiagram from '../diagrams/TrainMountainRouteDiagram';
 import ActivityGearModelDiagram from '../diagrams/ActivityGearModelDiagram';
+// Reference: Logic Gates & Boolean Algebra
+import LogicGateSymbolsDiagram from '../diagrams/LogicGateSymbolsDiagram';
+import LogicHalfAdderDiagram from '../diagrams/LogicHalfAdderDiagram';
+import LogicProcessorDiagram from '../diagrams/LogicProcessorDiagram';
 
 const registry: Record<string, ComponentType> = {
   SineWaveDiagram,
@@ -1325,6 +1329,10 @@ const registry: Record<string, ComponentType> = {
   TrainSteamEngineDiagram,
   TrainMountainRouteDiagram,
   ActivityGearModelDiagram,
+  // Reference: Logic Gates & Boolean Algebra
+  LogicGateSymbolsDiagram,
+  LogicHalfAdderDiagram,
+  LogicProcessorDiagram,
 };
 
 export default registry;
