@@ -3,8 +3,8 @@ export default function OrchidEpiphyteDiagram() {
     <div className="my-4">
       <svg viewBox="0 0 560 440" className="w-full max-w-lg mx-auto" role="img" aria-label="Diagram showing how epiphytic orchids grow on trees without parasitizing them, using aerial roots and velamen to capture water">
         <rect width="560" height="440" rx="12" className="fill-slate-900" />
-        <text x="280" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#86efac">Epiphytes \u2014 Growing Without Soil</text>
-        <text x="280" y="46" textAnchor="middle" fontSize="10" className="fill-slate-400">Orchids live on trees but are NOT parasites \u2014 they make their own food</text>
+        <text x="280" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#86efac">Epiphytes — Growing Without Soil</text>
+        <text x="280" y="46" textAnchor="middle" fontSize="10" className="fill-slate-400">Orchids live on trees but are NOT parasites — they make their own food</text>
 
         {/* Tree trunk */}
         <g transform="translate(60, 60)">
@@ -47,7 +47,7 @@ export default function OrchidEpiphyteDiagram() {
         {/* Velamen cross-section detail */}
         <g transform="translate(300, 70)">
           <rect x="0" y="0" width="230" height="130" rx="8" fill="#1e293b" stroke="#86efac" strokeWidth="1" />
-          <text x="115" y="20" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#86efac">Velamen \u2014 Sponge Root Coating</text>
+          <text x="115" y="20" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#86efac">Velamen — Sponge Root Coating</text>
 
           {/* Root cross-section */}
           <circle cx="70" cy="75" r="35" fill="#3b2f1e" stroke="#86efac" strokeWidth="1" />
@@ -76,7 +76,7 @@ export default function OrchidEpiphyteDiagram() {
         {/* Parasite vs Epiphyte comparison */}
         <g transform="translate(300, 215)">
           <rect x="0" y="0" width="230" height="90" rx="8" fill="#1e293b" stroke="#ef4444" strokeWidth="1" strokeDasharray="4 3" />
-          <text x="115" y="18" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#ef4444">\u2718 Parasite (e.g. mistletoe)</text>
+          <text x="115" y="18" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#ef4444">✘ Parasite (e.g. mistletoe)</text>
           <text x="115" y="34" textAnchor="middle" fontSize="9" fill="#e2e8f0">Pushes roots INTO host tree</text>
           <text x="115" y="48" textAnchor="middle" fontSize="9" fill="#e2e8f0">Steals water and sugar</text>
           <text x="115" y="62" textAnchor="middle" fontSize="9" fill="#e2e8f0">Harms the host</text>
@@ -85,7 +85,7 @@ export default function OrchidEpiphyteDiagram() {
 
         <g transform="translate(300, 315)">
           <rect x="0" y="0" width="230" height="90" rx="8" fill="#1e293b" stroke="#22c55e" strokeWidth="1" />
-          <text x="115" y="18" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#22c55e">\u2714 Epiphyte (e.g. orchid)</text>
+          <text x="115" y="18" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#22c55e">✔ Epiphyte (e.g. orchid)</text>
           <text x="115" y="34" textAnchor="middle" fontSize="9" fill="#e2e8f0">Roots grip the SURFACE only</text>
           <text x="115" y="48" textAnchor="middle" fontSize="9" fill="#e2e8f0">Gets water from rain + humid air</text>
           <text x="115" y="62" textAnchor="middle" fontSize="9" fill="#e2e8f0">Makes own food (photosynthesis)</text>
@@ -96,7 +96,7 @@ export default function OrchidEpiphyteDiagram() {
         <g transform="translate(140, 310)">
           <rect x="0" y="0" width="140" height="110" rx="8" fill="#1e293b" stroke="#fbbf24" strokeWidth="1" />
           <text x="70" y="18" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#fbbf24">Why live up high?</text>
-          <text x="70" y="36" textAnchor="middle" fontSize="9" fill="#e2e8f0">\u2600 More sunlight</text>
+          <text x="70" y="36" textAnchor="middle" fontSize="9" fill="#e2e8f0">☀ More sunlight</text>
           <text x="70" y="52" textAnchor="middle" fontSize="9" fill="#e2e8f0">\ud83d\udca8 More airflow</text>
           <text x="70" y="68" textAnchor="middle" fontSize="9" fill="#e2e8f0">\ud83d\udc1b Away from ground pests</text>
           <text x="70" y="84" textAnchor="middle" fontSize="9" fill="#e2e8f0">\ud83d\udc1d Closer to pollinators</text>

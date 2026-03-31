@@ -45,7 +45,7 @@ export default function RaceAccelerationDiagram() {
         <rect width={w} height={h} rx={10} className="fill-slate-900" />
 
         <text x={w / 2} y={28} textAnchor="middle" className="fill-slate-100" style={{ fontSize: 16, fontWeight: 700 }}>
-          Acceleration \u2014 Velocity\u2013Time Graph
+          Acceleration — Velocity–Time Graph
         </text>
 
         {/* Grid */}
@@ -107,19 +107,19 @@ export default function RaceAccelerationDiagram() {
         {/* Formula box */}
         <rect x={right - 200} y={top + 2} width={192} height={50} rx={6} className="fill-slate-800/90" />
         <text x={right - 104} y={top + 22} textAnchor="middle" className="fill-cyan-300" style={{ fontSize: 13, fontWeight: 600 }}>
-          a = \u0394v / \u0394t
+          a = Δv / Δt
         </text>
         <text x={right - 104} y={top + 40} textAnchor="middle" className="fill-slate-300" style={{ fontSize: 11 }}>
-          change in velocity \u00f7 change in time
+          change in velocity ÷ change in time
         </text>
 
         {/* Legend */}
         <g>
           <rect x={left + 6} y={bottom - 58} width={155} height={50} rx={6} className="fill-slate-800/80" />
           <circle cx={left + 20} cy={bottom - 40} r={5} fill="#f97316" />
-          <text x={left + 30} y={bottom - 36} className="fill-slate-200" style={{ fontSize: 12 }}>Cheetah (a \u2248 9 m/s\u00b2)</text>
+          <text x={left + 30} y={bottom - 36} className="fill-slate-200" style={{ fontSize: 12 }}>Cheetah (a ≈ 9 m/s²)</text>
           <circle cx={left + 20} cy={bottom - 20} r={5} fill="#22c55e" />
-          <text x={left + 30} y={bottom - 16} className="fill-slate-200" style={{ fontSize: 12 }}>Tortoise (a \u2248 1 m/s\u00b2)</text>
+          <text x={left + 30} y={bottom - 16} className="fill-slate-200" style={{ fontSize: 12 }}>Tortoise (a ≈ 1 m/s²)</text>
         </g>
       </svg>
     </div>

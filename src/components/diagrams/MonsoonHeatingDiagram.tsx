@@ -136,7 +136,7 @@ const MonsoonHeatingDiagram = () => {
         </text>
         <text x="160" y="222" textAnchor="middle"
           className="value-text fill-red-400">
-          ~800 J/kg\u00B7K (rock/soil)
+          ~800 J/kg·K (rock/soil)
         </text>
         <text x="160" y="237" textAnchor="middle"
           className="small-text fill-amber-300">
@@ -146,7 +146,7 @@ const MonsoonHeatingDiagram = () => {
         {/* Temperature indicator */}
         <rect x="70" y="252" width="24" height="12" rx="2" fill="#ef4444" />
         <text x="100" y="262" className="value-text fill-amber-100">
-          Summer: 45\u201350\u00B0C surface
+          Summer: 45–50°C surface
         </text>
 
         {/* ===== RIGHT SIDE: OCEAN ===== */}
@@ -167,7 +167,7 @@ const MonsoonHeatingDiagram = () => {
         <path d="M 500 195 Q 510 220, 520 195" stroke="#93c5fd" strokeWidth="1" fill="none" opacity="0.5" />
         <text x="460" y="220" textAnchor="middle"
           className="small-text fill-blue-300">
-          Water mixes \u2014 heat spreads deep
+          Water mixes — heat spreads deep
         </text>
 
         {/* Specific heat box */}
@@ -179,7 +179,7 @@ const MonsoonHeatingDiagram = () => {
         </text>
         <text x="460" y="260" textAnchor="middle"
           className="value-text fill-blue-300">
-          4,186 J/kg\u00B7K (water) \u2014 5\u00D7 more!
+          4,186 J/kg·K (water) — 5× more!
         </text>
 
         {/* ===== BOTTOM: THE MONSOON ENGINE ===== */}
@@ -188,7 +188,7 @@ const MonsoonHeatingDiagram = () => {
 
         <text x="310" y="310" textAnchor="middle"
           className="section-title fill-slate-700 dark:fill-slate-200">
-          The Monsoon Engine: Differential Heating \u2192 Pressure Difference \u2192 Wind
+          The Monsoon Engine: Differential Heating → Pressure Difference → Wind
         </text>
 
         {/* Step 1: Hot land = low pressure */}
@@ -252,15 +252,15 @@ const MonsoonHeatingDiagram = () => {
           className="fill-amber-50 dark:fill-amber-900/20 stroke-amber-300 dark:stroke-amber-700" strokeWidth="1" />
         <text x="310" y="402" textAnchor="middle"
           className="label-text fill-amber-800 dark:fill-amber-200" fontWeight="600">
-          Key insight: Water needs 5\u00D7 more energy than rock to heat up 1\u00B0C.
+          Key insight: Water needs 5× more energy than rock to heat up 1°C.
         </text>
         <text x="310" y="416" textAnchor="middle"
           className="small-text fill-amber-700 dark:fill-amber-300">
-          So in summer, India heats to 45\u00B0C while the ocean stays at 28\u00B0C. This 17\u00B0C gap creates the pressure
+          So in summer, India heats to 45°C while the ocean stays at 28°C. This 17°C gap creates the pressure
         </text>
         <text x="310" y="428" textAnchor="middle"
           className="small-text fill-amber-700 dark:fill-amber-300">
-          difference that pulls moist ocean air inland \u2014 the southwest monsoon.
+          difference that pulls moist ocean air inland — the southwest monsoon.
         </text>
       </svg>
     </div>

@@ -29,18 +29,18 @@ export default function MonasteryBellsLevel3() {
 
   const miniLessons = [
     {
-      title: 'Modal analysis \u2014 how a bell vibrates in 2D',
+      title: 'Modal analysis — how a bell vibrates in 2D',
       concept: `In Levels 1 and 2 you treated standing waves as one-dimensional (a vibrating string). But a bell is a **two-dimensional** vibrating surface. Its rim can vibrate in patterns called **modes**, described by two numbers: (m, n) where m counts nodal lines around the circumference and n counts nodal circles from rim to crown.
 
-The simplest mode (2,0) has 4 nodal points around the rim \u2014 the bell flexes into an ellipse. Mode (3,0) has 6 nodal points \u2014 a triangular shape. Mode (4,0) has 8 nodal points. Each mode has its own frequency.
+The simplest mode (2,0) has 4 nodal points around the rim — the bell flexes into an ellipse. Mode (3,0) has 6 nodal points — a triangular shape. Mode (4,0) has 8 nodal points. Each mode has its own frequency.
 
-A bell\u2019s sound is the superposition of all excited modes. The specific ratios between mode frequencies determine whether the bell sounds harmonious or dissonant. Bell-makers manipulate these ratios by adjusting the bell\u2019s profile (wall thickness at different heights).
+A bell’s sound is the superposition of all excited modes. The specific ratios between mode frequencies determine whether the bell sounds harmonious or dissonant. Bell-makers manipulate these ratios by adjusting the bell’s profile (wall thickness at different heights).
 
 The code computes and visualises these 2D vibration patterns.`,
       analogy: 'Sprinkle sand on a metal plate and bow the edge with a violin bow. The sand collects at the nodal lines (where the plate does not vibrate) and bounces away from the antinodes (where it vibrates most). These patterns, called Chladni figures, are the 2D equivalent of the nodes on a vibrating string.',
-      storyConnection: 'A master bell-maker would recognise each mode by ear. Tapping the bell at different points excites different mode combinations. Dr. Lhamo\u2019s analysis of Sangha would have shown that the crack disrupted specific modes \u2014 those whose nodal lines pass near the crack location.',
+      storyConnection: 'A master bell-maker would recognise each mode by ear. Tapping the bell at different points excites different mode combinations. Dr. Lhamo’s analysis of Sangha would have shown that the crack disrupted specific modes — those whose nodal lines pass near the crack location.',
       checkQuestion: 'If you touch a vibrating bell at a nodal point, what happens to the sound?',
-      checkAnswer: 'The modes that have a node at that point are unaffected (they are already not vibrating there). But modes that have an antinode at that point are damped \u2014 you remove energy from those modes. The timbre changes because the balance of harmonics shifts. This is how bell-makers test which modes are active.',
+      checkAnswer: 'The modes that have a node at that point are unaffected (they are already not vibrating there). But modes that have an antinode at that point are damped — you remove energy from those modes. The timbre changes because the balance of harmonics shifts. This is how bell-makers test which modes are active.',
       codeIntro: 'Visualise 2D vibration modes of a circular bell rim.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -98,22 +98,22 @@ for (m, n, title), fr in zip(modes, freq_ratios):
 print()
 print("A well-tuned bell has specific ratios between these modes.")
 print("A crack disrupts modes whose nodal lines pass near it.")`,
-      challenge: 'For a tuned carillon bell, the ideal ratio for mode (3,0) is exactly 2\u00D7 the fundamental (an octave). Real bells deviate from this. Calculate the detuning in Hz if mode (3,0) is at 1.56\u00D7 instead of 2.0\u00D7. How many cents off is that? (1 cent = one hundredth of a semitone.)',
+      challenge: 'For a tuned carillon bell, the ideal ratio for mode (3,0) is exactly 2× the fundamental (an octave). Real bells deviate from this. Calculate the detuning in Hz if mode (3,0) is at 1.56× instead of 2.0×. How many cents off is that? (1 cent = one hundredth of a semitone.)',
       successHint: 'Modal analysis is used to design everything from bells to guitar bodies to airplane wings. Understanding how a 2D surface vibrates is the bridge between simple wave theory and real engineering.',
     },
     {
-      title: 'Windowed FFT \u2014 how bell sound evolves over time',
-      concept: `A bell\u2019s sound is not static. In the first millisecond, the strike excites all modes with a burst of broadband noise. Over the next second, high harmonics decay faster than low ones (higher frequency = more energy lost per cycle). The fundamental lingers longest.
+      title: 'Windowed FFT — how bell sound evolves over time',
+      concept: `A bell’s sound is not static. In the first millisecond, the strike excites all modes with a burst of broadband noise. Over the next second, high harmonics decay faster than low ones (higher frequency = more energy lost per cycle). The fundamental lingers longest.
 
-A standard FFT gives you the frequency content of the **entire** signal. But to see how the spectrum changes over time, you need a **Short-Time Fourier Transform (STFT)** \u2014 also called a spectrogram. It slices the signal into short windows and applies FFT to each one.
+A standard FFT gives you the frequency content of the **entire** signal. But to see how the spectrum changes over time, you need a **Short-Time Fourier Transform (STFT)** — also called a spectrogram. It slices the signal into short windows and applies FFT to each one.
 
 The result is a 2D plot: time on x-axis, frequency on y-axis, colour representing amplitude. You can literally see harmonics fading from top to bottom as the bell decays.
 
 The code generates a realistic bell signal with decaying harmonics and computes its spectrogram.`,
-      analogy: 'A photograph captures a scene at one instant. A video captures how it changes over time. An FFT is a photograph of the frequency content. A spectrogram is a video \u2014 it shows you the frequency content frame by frame as the sound evolves.',
-      storyConnection: 'Dr. Lhamo\u2019s laptop showed the frequency spectrum as a series of bars. A more advanced view would be the spectrogram, where she could watch Sangha\u2019s cracked harmonics wobble and split over time \u2014 each beat frequency visible as a pulsing band in the spectrogram.',
+      analogy: 'A photograph captures a scene at one instant. A video captures how it changes over time. An FFT is a photograph of the frequency content. A spectrogram is a video — it shows you the frequency content frame by frame as the sound evolves.',
+      storyConnection: 'Dr. Lhamo’s laptop showed the frequency spectrum as a series of bars. A more advanced view would be the spectrogram, where she could watch Sangha’s cracked harmonics wobble and split over time — each beat frequency visible as a pulsing band in the spectrogram.',
       checkQuestion: 'Why do high harmonics in a bell decay faster than the fundamental?',
-      checkAnswer: 'Higher frequency vibrations involve more rapid flexing of the metal. Each flex cycle dissipates energy through internal friction (hysteresis) in the bronze. More cycles per second = more energy lost per second. Additionally, higher frequencies radiate sound more efficiently (radiation resistance increases with f\u00B2), which means they transfer energy to the air faster. Both effects cause high harmonics to decay more quickly.',
+      checkAnswer: 'Higher frequency vibrations involve more rapid flexing of the metal. Each flex cycle dissipates energy through internal friction (hysteresis) in the bronze. More cycles per second = more energy lost per second. Additionally, higher frequencies radiate sound more efficiently (radiation resistance increases with f²), which means they transfer energy to the air faster. Both effects cause high harmonics to decay more quickly.',
       codeIntro: 'Generate a decaying bell sound and visualise its spectrogram.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -148,7 +148,7 @@ fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(10, 10))
 ax1.plot(t, bell, color='#a855f7', linewidth=0.3)
 ax1.set_xlabel('Time (s)', fontsize=10)
 ax1.set_ylabel('Amplitude', fontsize=10)
-ax1.set_title('Bell Waveform \u2014 Notice the Decay', fontsize=12)
+ax1.set_title('Bell Waveform — Notice the Decay', fontsize=12)
 ax1.grid(alpha=0.2)
 
 # Spectrogram (STFT)
@@ -179,7 +179,7 @@ for n in range(1, 9):
             fontsize=7, color='white', alpha=0.7)
 ax2.set_xlabel('Time (s)', fontsize=10)
 ax2.set_ylabel('Frequency (Hz)', fontsize=10)
-ax2.set_title('Spectrogram \u2014 High Harmonics Fade First', fontsize=12)
+ax2.set_title('Spectrogram — High Harmonics Fade First', fontsize=12)
 
 # Decay rates
 for n, freq, amp, decay in harmonics_info:
@@ -203,16 +203,16 @@ for n, freq, amp, decay in harmonics_info:
       successHint: 'Spectrograms are the standard tool for analysing any time-varying signal: speech recognition, music analysis, earthquake detection, medical monitoring. The ability to see frequency content evolve over time is indispensable.',
     },
     {
-      title: 'Impedance matching \u2014 why bell shape matters',
-      concept: `A bell is not just a piece of metal that vibrates. It is a precision-engineered **transducer** that converts mechanical vibration into acoustic radiation. The bell\u2019s shape determines how efficiently it transfers energy from the vibrating metal to the surrounding air.
+      title: 'Impedance matching — why bell shape matters',
+      concept: `A bell is not just a piece of metal that vibrates. It is a precision-engineered **transducer** that converts mechanical vibration into acoustic radiation. The bell’s shape determines how efficiently it transfers energy from the vibrating metal to the surrounding air.
 
-**Acoustic impedance** is the resistance a medium presents to a sound wave. Metal has very high impedance; air has very low impedance. When there is a mismatch, most energy bounces back instead of transmitting. This is why you can barely hear a vibrating tuning fork held in the air \u2014 but press it against a table, and the room fills with sound.
+**Acoustic impedance** is the resistance a medium presents to a sound wave. Metal has very high impedance; air has very low impedance. When there is a mismatch, most energy bounces back instead of transmitting. This is why you can barely hear a vibrating tuning fork held in the air — but press it against a table, and the room fills with sound.
 
-A bell\u2019s flared shape acts as an **impedance transformer**. The vibrating rim couples to the air through a large surface area, gradually transitioning from the high impedance of bronze to the low impedance of air. The flare is not decorative \u2014 it is acoustic engineering.`,
-      analogy: 'Think of a funnel. Pouring water from a wide bucket into a narrow pipe is inefficient \u2014 most water splashes back. But a funnel smoothly transitions from wide to narrow, directing nearly all the water into the pipe. A bell\u2019s shape is an acoustic funnel, matching the \u201Cwide\u201D impedance of metal to the \u201Cnarrow\u201D impedance of air.',
-      storyConnection: 'Tawang\u2019s bell-makers spent generations perfecting bell profiles. They did not know the word \u201Cimpedance,\u201D but they knew that certain shapes projected sound further. The monastery\u2019s bells have a specific flare and wall thickness profile that maximises acoustic output \u2014 empirical impedance matching.',
+A bell’s flared shape acts as an **impedance transformer**. The vibrating rim couples to the air through a large surface area, gradually transitioning from the high impedance of bronze to the low impedance of air. The flare is not decorative — it is acoustic engineering.`,
+      analogy: 'Think of a funnel. Pouring water from a wide bucket into a narrow pipe is inefficient — most water splashes back. But a funnel smoothly transitions from wide to narrow, directing nearly all the water into the pipe. A bell’s shape is an acoustic funnel, matching the “wide” impedance of metal to the “narrow” impedance of air.',
+      storyConnection: 'Tawang’s bell-makers spent generations perfecting bell profiles. They did not know the word “impedance,” but they knew that certain shapes projected sound further. The monastery’s bells have a specific flare and wall thickness profile that maximises acoustic output — empirical impedance matching.',
       checkQuestion: 'Why does pressing a tuning fork against a table make it louder?',
-      checkAnswer: 'The fork alone has a tiny surface area and cannot push much air. The table has a large, flat surface. When the fork vibrates the table, the table\u2019s large surface pushes a much bigger volume of air. The table acts as an impedance-matching surface, converting the fork\u2019s high-impedance vibration into a low-impedance acoustic wave efficiently. The sound dies faster though, because energy transfers to air more quickly.',
+      checkAnswer: 'The fork alone has a tiny surface area and cannot push much air. The table has a large, flat surface. When the fork vibrates the table, the table’s large surface pushes a much bigger volume of air. The table acts as an impedance-matching surface, converting the fork’s high-impedance vibration into a low-impedance acoustic wave efficiently. The sound dies faster though, because energy transfers to air more quickly.',
       codeIntro: 'Model how bell shape affects acoustic radiation efficiency.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -291,22 +291,22 @@ for name, a, _ in sources:
     eff = ka**2 / (1 + ka**2)
     print(f"  {name}: {eff*100:.1f}%")`,
       challenge: 'Church bells have a different profile from Tibetan singing bowls. Research the two shapes and hypothesise how the profile difference affects which modes are emphasised. Can you modify the profile to simulate a singing bowl?',
-      successHint: 'Impedance matching is a universal engineering concept. It appears in audio speaker design, antenna engineering, optical coatings, and even in how your ear\u2019s middle ear bones match the impedance of air to the fluid-filled cochlea.',
+      successHint: 'Impedance matching is a universal engineering concept. It appears in audio speaker design, antenna engineering, optical coatings, and even in how your ear’s middle ear bones match the impedance of air to the fluid-filled cochlea.',
     },
     {
-      title: 'Psychoacoustics \u2014 how your brain hears a bell',
+      title: 'Psychoacoustics — how your brain hears a bell',
       concept: `Your ear does not hear frequencies directly. The cochlea (inner ear) performs a mechanical Fourier transform: different positions along the basilar membrane respond to different frequencies. High frequencies excite the base; low frequencies excite the tip.
 
 But **perception** is more complex than detection. Your brain performs additional processing:
-- **Missing fundamental**: if a bell produces harmonics at 400, 600, 800 Hz but the 200 Hz fundamental is removed, you still \u201Chear\u201D 200 Hz. Your brain infers the fundamental from the pattern of harmonics.
-- **Loudness perception**: 3 dB increase doubles intensity, but you need about 10 dB to perceive \u201Ctwice as loud.\u201D
+- **Missing fundamental**: if a bell produces harmonics at 400, 600, 800 Hz but the 200 Hz fundamental is removed, you still “hear” 200 Hz. Your brain infers the fundamental from the pattern of harmonics.
+- **Loudness perception**: 3 dB increase doubles intensity, but you need about 10 dB to perceive “twice as loud.”
 - **Masking**: a loud tone at 200 Hz makes nearby frequencies (180-220 Hz) inaudible.
 
 The code demonstrates the missing fundamental phenomenon and equal-loudness contours.`,
-      analogy: 'Your brain is like a detective solving a puzzle. It does not need to see every clue \u2014 it can infer the missing piece from the pattern. If someone hums harmonics at 400, 600, and 800 Hz, your brain \u201Csees\u201D the pattern (all multiples of 200) and fills in the missing fundamental. You hear a note at 200 Hz even though no energy exists at that frequency.',
-      storyConnection: 'When Dorji heard the bells, his auditory cortex was performing millions of computations per second: separating the bell from wind noise, tracking the decay envelope, identifying which bell it was by its harmonic signature. The \u201Cbeauty\u201D of the bell\u2019s tone is not in the physics alone \u2014 it is in how the brain processes the physics.',
+      analogy: 'Your brain is like a detective solving a puzzle. It does not need to see every clue — it can infer the missing piece from the pattern. If someone hums harmonics at 400, 600, and 800 Hz, your brain “sees” the pattern (all multiples of 200) and fills in the missing fundamental. You hear a note at 200 Hz even though no energy exists at that frequency.',
+      storyConnection: 'When Dorji heard the bells, his auditory cortex was performing millions of computations per second: separating the bell from wind noise, tracking the decay envelope, identifying which bell it was by its harmonic signature. The “beauty” of the bell’s tone is not in the physics alone — it is in how the brain processes the physics.',
       checkQuestion: 'Small speakers (like phone speakers) cannot reproduce low bass notes. Yet you can still hear the bass line of a song on your phone. How?',
-      checkAnswer: 'The phone speaker cannot produce 80 Hz, but it CAN produce the harmonics: 160, 240, 320 Hz. Your brain detects these harmonics, recognises the pattern (multiples of 80), and infers the missing 80 Hz fundamental. You \u201Chear\u201D bass that the speaker never actually produced. This is the missing fundamental effect, and audio engineers exploit it to give small speakers perceived bass.',
+      checkAnswer: 'The phone speaker cannot produce 80 Hz, but it CAN produce the harmonics: 160, 240, 320 Hz. Your brain detects these harmonics, recognises the pattern (multiples of 80), and infers the missing 80 Hz fundamental. You “hear” bass that the speaker never actually produced. This is the missing fundamental effect, and audio engineers exploit it to give small speakers perceived bass.',
       codeIntro: 'Explore psychoacoustic phenomena: missing fundamental and masking.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -369,22 +369,22 @@ print("no acoustic energy exists at that frequency.")
 print()
 print("This is why phone speakers can produce 'bass' —")
 print("they play the harmonics, and your brain fills in the rest.")`,
-      challenge: 'Create a signal with harmonics at 500, 750, 1000, 1250 Hz. What fundamental does your brain infer? (Hint: find the greatest common divisor.) Now try 400, 600, 1000 Hz \u2014 is the inferred fundamental unambiguous?',
-      successHint: 'Psychoacoustics reveals that hearing is not passive recording \u2014 it is active construction by the brain. Audio engineers exploit these perceptual shortcuts in MP3 compression, speaker design, and virtual surround sound.',
+      challenge: 'Create a signal with harmonics at 500, 750, 1000, 1250 Hz. What fundamental does your brain infer? (Hint: find the greatest common divisor.) Now try 400, 600, 1000 Hz — is the inferred fundamental unambiguous?',
+      successHint: 'Psychoacoustics reveals that hearing is not passive recording — it is active construction by the brain. Audio engineers exploit these perceptual shortcuts in MP3 compression, speaker design, and virtual surround sound.',
     },
     {
-      title: 'The bell as a filter \u2014 transfer functions',
+      title: 'The bell as a filter — transfer functions',
       concept: `When you strike a bell, the mallet delivers a brief impulse of force. That impulse contains ALL frequencies simultaneously (a perfect impulse has infinite bandwidth). The bell then selects which frequencies to amplify (its resonant modes) and which to suppress. The bell is acting as a **filter**.
 
-The bell\u2019s **transfer function** H(f) describes how it transforms any input into output. If H(f) is large at 200 Hz, the bell amplifies that frequency. If H(f) is zero at 350 Hz, the bell suppresses it.
+The bell’s **transfer function** H(f) describes how it transforms any input into output. If H(f) is large at 200 Hz, the bell amplifies that frequency. If H(f) is zero at 350 Hz, the bell suppresses it.
 
-The output spectrum = input spectrum \u00D7 H(f).
+The output spectrum = input spectrum × H(f).
 
 This is the same mathematics used in audio equalisers, radio receivers, and digital signal processing. A bell is a mechanical band-pass filter.`,
       analogy: 'Think of a coffee filter. You pour in a mixture (water + coffee grounds). The filter lets water through but blocks grounds. A bell is a frequency filter: you pour in noise (the strike impulse contains all frequencies) and the bell lets through only its resonant frequencies while blocking everything else.',
-      storyConnection: 'Every bell in the monastery is a different filter. The smallest lets through high frequencies; the largest lets through low ones. When all eight ring together, the combined sound is the sum of eight different filters applied to eight impulses \u2014 a rich acoustic tapestry.',
+      storyConnection: 'Every bell in the monastery is a different filter. The smallest lets through high frequencies; the largest lets through low ones. When all eight ring together, the combined sound is the sum of eight different filters applied to eight impulses — a rich acoustic tapestry.',
       checkQuestion: 'If you could strike a bell with a pure 200 Hz tone (instead of an impulse), what would happen?',
-      checkAnswer: 'If 200 Hz is one of the bell\u2019s resonant frequencies, the bell would build up a strong vibration at 200 Hz (resonance). The output would be much louder than the input \u2014 the transfer function H(200) is large. If 200 Hz is NOT a resonant frequency, the bell would barely respond. This is selective amplification \u2014 the essence of filtering.',
+      checkAnswer: 'If 200 Hz is one of the bell’s resonant frequencies, the bell would build up a strong vibration at 200 Hz (resonance). The output would be much louder than the input — the transfer function H(200) is large. If 200 Hz is NOT a resonant frequency, the bell would barely respond. This is selective amplification — the essence of filtering.',
       codeIntro: 'Model the bell as a filter and compute its transfer function.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -470,22 +470,22 @@ print()
 print("A hard mallet excites all modes equally.")
 print("A soft mallet excites mainly low modes.")
 print("Rubbing (singing bowl) drives one specific mode.")`,
-      challenge: 'Create a \u201Ccracked bell\u201D transfer function by splitting each peak into two close peaks (e.g., 200 Hz becomes 198 + 202 Hz). Plot the new H(f) and compute the output. Can you see the beat-producing pairs?',
-      successHint: 'Transfer functions are the backbone of signal processing. Every audio equaliser, radio receiver, and digital filter is described by H(f). A bell taught you the same maths that powers your phone\u2019s voice codec.',
+      challenge: 'Create a “cracked bell” transfer function by splitting each peak into two close peaks (e.g., 200 Hz becomes 198 + 202 Hz). Plot the new H(f) and compute the output. Can you see the beat-producing pairs?',
+      successHint: 'Transfer functions are the backbone of signal processing. Every audio equaliser, radio receiver, and digital filter is described by H(f). A bell taught you the same maths that powers your phone’s voice codec.',
     },
     {
-      title: 'Digital audio \u2014 sampling the bell',
-      concept: `To store a bell\u2019s sound on a computer, you must convert the continuous pressure wave into discrete numbers. This is **sampling**: measuring the wave\u2019s amplitude at regular intervals.
+      title: 'Digital audio — sampling the bell',
+      concept: `To store a bell’s sound on a computer, you must convert the continuous pressure wave into discrete numbers. This is **sampling**: measuring the wave’s amplitude at regular intervals.
 
-The **Nyquist-Shannon theorem** says: to perfectly reconstruct a signal, you must sample at least **twice** the highest frequency present. Human hearing goes to 20 kHz, so CD audio samples at 44,100 Hz (44.1 kHz) \u2014 just over twice 20 kHz.
+The **Nyquist-Shannon theorem** says: to perfectly reconstruct a signal, you must sample at least **twice** the highest frequency present. Human hearing goes to 20 kHz, so CD audio samples at 44,100 Hz (44.1 kHz) — just over twice 20 kHz.
 
-If you sample too slowly (**undersampling**), high frequencies masquerade as low ones \u2014 a phenomenon called **aliasing**. A 10 kHz tone sampled at 8 kHz appears as a phantom 2 kHz tone.
+If you sample too slowly (**undersampling**), high frequencies masquerade as low ones — a phenomenon called **aliasing**. A 10 kHz tone sampled at 8 kHz appears as a phantom 2 kHz tone.
 
 The code demonstrates sampling, reconstruction, and aliasing using the bell signal.`,
-      analogy: 'Imagine filming a spinning wheel. If the camera captures 24 frames per second and the wheel spins at exactly 12 revolutions per second (twice per frame), the wheel appears to stand still. If it spins faster \u2014 say 13 revolutions per second \u2014 it appears to spin slowly backward. That \u201Cbackward spin\u201D is aliasing: the sample rate is too low to capture the true motion.',
-      storyConnection: 'Dr. Lhamo recorded the bells digitally. Her equipment sampled at 44,100 Hz \u2014 capturing frequencies up to 22,050 Hz, well above the bells\u2019 highest harmonics. If she had used a cheap recorder sampling at only 8,000 Hz (phone quality), harmonics above 4,000 Hz would alias, corrupting her frequency analysis.',
+      analogy: 'Imagine filming a spinning wheel. If the camera captures 24 frames per second and the wheel spins at exactly 12 revolutions per second (twice per frame), the wheel appears to stand still. If it spins faster — say 13 revolutions per second — it appears to spin slowly backward. That “backward spin” is aliasing: the sample rate is too low to capture the true motion.',
+      storyConnection: 'Dr. Lhamo recorded the bells digitally. Her equipment sampled at 44,100 Hz — capturing frequencies up to 22,050 Hz, well above the bells’ highest harmonics. If she had used a cheap recorder sampling at only 8,000 Hz (phone quality), harmonics above 4,000 Hz would alias, corrupting her frequency analysis.',
       checkQuestion: 'A bell produces harmonics up to 5,000 Hz. What is the minimum sample rate needed to record it without aliasing?',
-      checkAnswer: '10,000 Hz (2 \u00D7 5,000). In practice, you would use a higher rate (e.g., 16,000 or 44,100 Hz) because the Nyquist theorem assumes perfect reconstruction, which requires an ideal anti-aliasing filter. Real filters need headroom. CD quality (44,100 Hz) provides comfortable margin for all audible frequencies.',
+      checkAnswer: '10,000 Hz (2 × 5,000). In practice, you would use a higher rate (e.g., 16,000 or 44,100 Hz) because the Nyquist theorem assumes perfect reconstruction, which requires an ideal anti-aliasing filter. Real filters need headroom. CD quality (44,100 Hz) provides comfortable margin for all audible frequencies.',
       codeIntro: 'Demonstrate sampling, reconstruction, and aliasing.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -573,7 +573,7 @@ print(f"To capture up to f_max, sample at ≥ 2 × f_max")
 print()
 for sr, name in [(8000, 'Phone'), (22050, 'FM radio'), (44100, 'CD'), (96000, 'Studio')]:
     print(f"  {name}: {sr} Hz → captures up to {sr//2} Hz")`,
-      challenge: 'The bell\u2019s 5th harmonic is at 1000 Hz. What is the minimum sample rate to capture it? Record the bell at that rate and at half that rate. Compare the FFTs \u2014 can you spot the alias?',
+      challenge: 'The bell’s 5th harmonic is at 1000 Hz. What is the minimum sample rate to capture it? Record the bell at that rate and at half that rate. Compare the FFTs — can you spot the alias?',
       successHint: 'Sampling theory is the foundation of all digital audio, digital photography, and digital communications. Every time you record sound, take a photo, or stream video, the Nyquist theorem determines what quality you get.',
     },
   ];

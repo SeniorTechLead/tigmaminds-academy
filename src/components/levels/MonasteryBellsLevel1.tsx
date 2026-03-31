@@ -29,25 +29,25 @@ export default function MonasteryBellsLevel1() {
 
   const miniLessons = [
     {
-      title: 'Your first sound wave \u2014 plotting a sine wave',
-      concept: `In Level 0 you learned that sound is a pressure wave \u2014 air molecules being pushed together (compression) and pulled apart (rarefaction), over and over. The simplest possible sound wave is a **sine wave**: a perfectly smooth, repeating curve.
+      title: 'Your first sound wave — plotting a sine wave',
+      concept: `In Level 0 you learned that sound is a pressure wave — air molecules being pushed together (compression) and pulled apart (rarefaction), over and over. The simplest possible sound wave is a **sine wave**: a perfectly smooth, repeating curve.
 
 We will use two Python libraries:
-- **NumPy** (\`np\`) \u2014 creates arrays of numbers
-- **Matplotlib** (\`plt\`) \u2014 draws charts
+- **NumPy** (\`np\`) — creates arrays of numbers
+- **Matplotlib** (\`plt\`) — draws charts
 
 The code below creates a pure 440 Hz sine wave (the musical note A4, used to tune orchestras worldwide). The key line is:
 
 \`y = np.sin(2 * np.pi * frequency * t)\`
 
-This says: at every point in time \`t\`, calculate the sine of (2\u03C0 \u00D7 frequency \u00D7 t). The result is a wave that oscillates between +1 and \u22121, exactly \`frequency\` times per second.
+This says: at every point in time \`t\`, calculate the sine of (2π × frequency × t). The result is a wave that oscillates between +1 and −1, exactly \`frequency\` times per second.
 
 \ud83d\udcda *New to NumPy? Open the Reference Library for a full guide.*`,
-      analogy: 'Think of a swing in a playground. Push it once and it swings back and forth at a steady rate \u2014 that rate is its natural frequency. A sine wave is the mathematical description of that back-and-forth motion. The height of the swing at any moment traces out a sine curve over time.',
-      storyConnection: 'Dr. Lhamo\u2019s software displayed the bell\u2019s sound as a waveform on screen. That wiggly line is exactly what you are about to plot \u2014 pressure variations over time. The pure sine wave is the simplest building block; real bell sounds are made by adding many of these together.',
+      analogy: 'Think of a swing in a playground. Push it once and it swings back and forth at a steady rate — that rate is its natural frequency. A sine wave is the mathematical description of that back-and-forth motion. The height of the swing at any moment traces out a sine curve over time.',
+      storyConnection: 'Dr. Lhamo’s software displayed the bell’s sound as a waveform on screen. That wiggly line is exactly what you are about to plot — pressure variations over time. The pure sine wave is the simplest building block; real bell sounds are made by adding many of these together.',
       checkQuestion: 'If you change the frequency from 440 to 880, what happens to the wave on the plot?',
-      checkAnswer: 'The wave oscillates twice as fast \u2014 you see twice as many peaks in the same time window. 880 Hz is exactly one octave above 440 Hz. Doubling the frequency always raises the pitch by one octave.',
-      codeIntro: 'Generate and plot a pure 440 Hz sine wave \u2014 the simplest possible sound.',
+      checkAnswer: 'The wave oscillates twice as fast — you see twice as many peaks in the same time window. 880 Hz is exactly one octave above 440 Hz. Doubling the frequency always raises the pitch by one octave.',
+      codeIntro: 'Generate and plot a pure 440 Hz sine wave — the simplest possible sound.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
@@ -79,18 +79,18 @@ print(f"Wavelength: {343/frequency:.2f} m (speed of sound / frequency)")`,
       successHint: 'You just created the building block of ALL sound. Every bell ring, every voice, every piece of music can be constructed by adding sine waves of different frequencies together. That is the core insight of Fourier analysis.',
     },
     {
-      title: 'Frequency and pitch \u2014 why big bells sound low',
-      concept: `The story tells us that Dr. Lhamo tapped eight bells, from smallest to largest, and each produced a lower pitch. Let\u2019s see why with numbers.
+      title: 'Frequency and pitch — why big bells sound low',
+      concept: `The story tells us that Dr. Lhamo tapped eight bells, from smallest to largest, and each produced a lower pitch. Let’s see why with numbers.
 
-A bell\u2019s fundamental frequency depends on its **size**, **thickness**, and **material**. For a simple vibrating object, frequency is roughly inversely proportional to size: **double the diameter, halve the frequency**.
+A bell’s fundamental frequency depends on its **size**, **thickness**, and **material**. For a simple vibrating object, frequency is roughly inversely proportional to size: **double the diameter, halve the frequency**.
 
 The code below simulates the eight monastery bells. Each is a different size, and we calculate and plot its fundamental frequency. You will see the inverse relationship clearly: as diameter increases, frequency decreases.
 
-The key formula: \`f \u221D 1/D\` (frequency is proportional to 1 divided by diameter). This is why a double bass sounds lower than a violin, why a tuba sounds lower than a trumpet, and why the largest monastery bell has the deepest voice.`,
-      analogy: 'Imagine swinging a short rope versus a long rope. The short rope whips back and forth quickly (high frequency). The long rope lumbers slowly (low frequency). A bell\u2019s rim is like a curved rope \u2014 a larger rim takes longer to complete one vibration cycle, so it vibrates at a lower frequency.',
-      storyConnection: 'The eight bells in the prayer hall form a scale from high to low. Ancient bell-makers tuned them by adjusting diameter and thickness \u2014 empirically discovering the same inverse relationship that the formula f \u221D 1/D describes. The monks did not know the equation, but they knew the physics in their ears.',
-      checkQuestion: 'Bell A has a diameter of 30 cm and rings at 800 Hz. Bell B has a diameter of 60 cm (double). What is Bell B\u2019s approximate frequency?',
-      checkAnswer: 'About 400 Hz. Doubling the diameter roughly halves the frequency (f \u221D 1/D). This is an approximation \u2014 thickness and material also matter \u2014 but it captures the dominant relationship.',
+The key formula: \`f ∝ 1/D\` (frequency is proportional to 1 divided by diameter). This is why a double bass sounds lower than a violin, why a tuba sounds lower than a trumpet, and why the largest monastery bell has the deepest voice.`,
+      analogy: 'Imagine swinging a short rope versus a long rope. The short rope whips back and forth quickly (high frequency). The long rope lumbers slowly (low frequency). A bell’s rim is like a curved rope — a larger rim takes longer to complete one vibration cycle, so it vibrates at a lower frequency.',
+      storyConnection: 'The eight bells in the prayer hall form a scale from high to low. Ancient bell-makers tuned them by adjusting diameter and thickness — empirically discovering the same inverse relationship that the formula f ∝ 1/D describes. The monks did not know the equation, but they knew the physics in their ears.',
+      checkQuestion: 'Bell A has a diameter of 30 cm and rings at 800 Hz. Bell B has a diameter of 60 cm (double). What is Bell B’s approximate frequency?',
+      checkAnswer: 'About 400 Hz. Doubling the diameter roughly halves the frequency (f ∝ 1/D). This is an approximation — thickness and material also matter — but it captures the dominant relationship.',
       codeIntro: 'Calculate and plot how frequency changes with bell size.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -137,8 +137,8 @@ for name, d, f in zip(bell_names, diameters, frequencies):
       successHint: 'The inverse relationship between size and frequency is universal. It applies to bells, strings, pipes, drums, and even atoms. Understanding it lets you predict the pitch of any vibrating object from its physical dimensions.',
     },
     {
-      title: 'Building a bell tone \u2014 adding harmonics',
-      concept: `A real bell does not produce a pure sine wave. It produces the fundamental frequency **plus** harmonics (2\u00D7, 3\u00D7, 4\u00D7, etc.). Each harmonic has a lower amplitude than the one before.
+      title: 'Building a bell tone — adding harmonics',
+      concept: `A real bell does not produce a pure sine wave. It produces the fundamental frequency **plus** harmonics (2×, 3×, 4×, etc.). Each harmonic has a lower amplitude than the one before.
 
 The code below builds a bell-like sound step by step:
 1. Start with the fundamental (200 Hz)
@@ -148,11 +148,11 @@ The code below builds a bell-like sound step by step:
 
 Watch how the waveform changes from a smooth sine wave to a complex, rich shape. This is why a bell sounds warm and full instead of like a thin electronic beep.
 
-The key idea: \`bell = sin(2\u03C0\u00D7200\u00D7t) + 0.5\u00D7sin(2\u03C0\u00D7400\u00D7t) + 0.33\u00D7sin(2\u03C0\u00D7600\u00D7t) + ...\``,
-      analogy: 'Think of a choir. One person singing a note is a pure sine wave. Add a second person singing the same note an octave higher (2\u00D7 frequency) at half volume. Add a third singing two octaves up at one-third volume. Each voice blends in, creating a richer, fuller sound. A bell is a one-object choir \u2014 its metal vibrates at multiple frequencies simultaneously.',
-      storyConnection: 'Dr. Lhamo showed Dorji the frequency bars on her screen \u2014 the fundamental at 440 Hz with shorter bars at 880, 1320, 1760 Hz. Each bar is a harmonic, and together they create the bell\u2019s distinctive voice. The code below recreates exactly what her software displayed.',
+The key idea: \`bell = sin(2π×200×t) + 0.5×sin(2π×400×t) + 0.33×sin(2π×600×t) + ...\``,
+      analogy: 'Think of a choir. One person singing a note is a pure sine wave. Add a second person singing the same note an octave higher (2× frequency) at half volume. Add a third singing two octaves up at one-third volume. Each voice blends in, creating a richer, fuller sound. A bell is a one-object choir — its metal vibrates at multiple frequencies simultaneously.',
+      storyConnection: 'Dr. Lhamo showed Dorji the frequency bars on her screen — the fundamental at 440 Hz with shorter bars at 880, 1320, 1760 Hz. Each bar is a harmonic, and together they create the bell’s distinctive voice. The code below recreates exactly what her software displayed.',
       checkQuestion: 'If you remove all harmonics and keep only the fundamental, what would the bell sound like?',
-      checkAnswer: 'It would sound like a thin, pure electronic tone \u2014 like a tuning fork or a phone\u2019s dial tone. All the warmth, richness, and character come from the harmonics. A pure fundamental has no personality; harmonics are what make a bell sound like a bell.',
+      checkAnswer: 'It would sound like a thin, pure electronic tone — like a tuning fork or a phone’s dial tone. All the warmth, richness, and character come from the harmonics. A pure fundamental has no personality; harmonics are what make a bell sound like a bell.',
       codeIntro: 'Build a bell tone by adding harmonics one at a time.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -203,22 +203,22 @@ print()
 print("Harmonics present:")
 for n in range(1, 7):
     print(f"  {n}× fundamental = {n*fundamental} Hz (amplitude = 1/{n} = {1/n:.2f})")`,
-      challenge: 'Try using amplitude = 1/n\u00B2 instead of 1/n for each harmonic. How does the waveform change? This approximates a different instrument. Then try equal amplitudes for all harmonics \u2014 what does that create?',
+      challenge: 'Try using amplitude = 1/n² instead of 1/n for each harmonic. How does the waveform change? This approximates a different instrument. Then try equal amplitudes for all harmonics — what does that create?',
       successHint: 'You just synthesized a bell tone from pure mathematics! This is exactly how electronic music and digital audio work: every sound in your phone, computer, and headphones is built from sine waves added together.',
     },
     {
-      title: 'Fourier transform \u2014 breaking sound back into frequencies',
+      title: 'Fourier transform — breaking sound back into frequencies',
       concept: `In the previous exercise you built a complex wave by adding harmonics. Now you will do the reverse: take a complex wave and break it apart to find which frequencies are inside.
 
-This reverse process is the **Fast Fourier Transform (FFT)** \u2014 one of the most important algorithms in computing. NumPy provides it as \`np.fft.fft()\`.
+This reverse process is the **Fast Fourier Transform (FFT)** — one of the most important algorithms in computing. NumPy provides it as \`np.fft.fft()\`.
 
-The code generates a bell-like wave (same as before), then applies FFT to produce a **frequency spectrum**: a plot showing a peak at every frequency present in the signal. You will see clear peaks at 200, 400, 600, 800, 1000, 1200 Hz \u2014 the exact harmonics you put in.
+The code generates a bell-like wave (same as before), then applies FFT to produce a **frequency spectrum**: a plot showing a peak at every frequency present in the signal. You will see clear peaks at 200, 400, 600, 800, 1000, 1200 Hz — the exact harmonics you put in.
 
-This is what Dr. Lhamo\u2019s software did when she tapped the Tawang bells. It listened to the complex sound and decomposed it into its component frequencies.`,
-      analogy: 'Imagine someone bakes a cake and serves you a slice. The FFT is like un-baking the cake \u2014 figuring out from the finished product that it contains flour, sugar, eggs, butter, and vanilla, and exactly how much of each. You taste the composite; the FFT reveals the recipe.',
+This is what Dr. Lhamo’s software did when she tapped the Tawang bells. It listened to the complex sound and decomposed it into its component frequencies.`,
+      analogy: 'Imagine someone bakes a cake and serves you a slice. The FFT is like un-baking the cake — figuring out from the finished product that it contains flour, sugar, eggs, butter, and vanilla, and exactly how much of each. You taste the composite; the FFT reveals the recipe.',
       storyConnection: 'When Dr. Lhamo pressed the button and the wiggly waveform transformed into vertical bars, she was running a Fourier transform. Each bar represents one harmonic frequency. The code below does exactly what her software did.',
       checkQuestion: 'If the FFT of a sound shows peaks at 300, 600, 900, and 1200 Hz, what is the fundamental frequency?',
-      checkAnswer: '300 Hz. The fundamental is the lowest frequency, and the others are its harmonics (2\u00D7, 3\u00D7, 4\u00D7). The fundamental is always the greatest common divisor of all the peak frequencies.',
+      checkAnswer: '300 Hz. The fundamental is the lowest frequency, and the others are its harmonics (2×, 3×, 4×). The fundamental is always the greatest common divisor of all the peak frequencies.',
       codeIntro: 'Apply the Fast Fourier Transform to decompose a bell sound.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -273,23 +273,23 @@ for n in range(1, 7):
     print(f"  Harmonic {n}: {n*fundamental} Hz (amplitude ≈ 1/{n})")
 print()
 print("This is Fourier analysis: complex wave → simple sine components")`,
-      challenge: 'Add a mystery frequency \u2014 say 550 Hz (not a harmonic of 200) \u2014 to the bell signal. Run FFT again. Can you spot the intruder in the spectrum? This simulates how an acoustician might detect a manufacturing defect.',
-      successHint: 'You just performed Fourier analysis \u2014 the same technique used in MRI scanners, earthquake detection, voice recognition, and music production. Any signal, anywhere, can be decomposed into sine waves.',
+      challenge: 'Add a mystery frequency — say 550 Hz (not a harmonic of 200) — to the bell signal. Run FFT again. Can you spot the intruder in the spectrum? This simulates how an acoustician might detect a manufacturing defect.',
+      successHint: 'You just performed Fourier analysis — the same technique used in MRI scanners, earthquake detection, voice recognition, and music production. Any signal, anywhere, can be decomposed into sine waves.',
     },
     {
-      title: 'The cracked bell \u2014 beat frequencies',
-      concept: `The story\u2019s central mystery: why does Sangha sound terrible? The crack makes one side of the bell slightly stiffer than the other. Instead of both sides vibrating at 200 Hz, one vibrates at 200 Hz and the other at 203 Hz.
+      title: 'The cracked bell — beat frequencies',
+      concept: `The story’s central mystery: why does Sangha sound terrible? The crack makes one side of the bell slightly stiffer than the other. Instead of both sides vibrating at 200 Hz, one vibrates at 200 Hz and the other at 203 Hz.
 
-When two frequencies are close but not identical, they produce **beats** \u2014 a rhythmic pulsing of loudness. The beat frequency equals the difference: 203 \u2212 200 = 3 Hz. You hear a \u201Cwah-wah-wah\u201D wobble three times per second.
+When two frequencies are close but not identical, they produce **beats** — a rhythmic pulsing of loudness. The beat frequency equals the difference: 203 − 200 = 3 Hz. You hear a “wah-wah-wah” wobble three times per second.
 
 This is why the cracked bell sounds harsh. Instead of a clean tone, every harmonic is split into two close frequencies, each pair creating its own beat pattern. The result is a clashing, jarring mess.
 
 The code simulates this by adding two slightly detuned sine waves and plotting the resulting beat pattern.`,
-      analogy: 'Imagine two people trying to clap in unison but one is slightly faster. Sometimes their claps align (loud \u2014 constructive interference) and sometimes they oppose (quiet \u2014 destructive interference). The regular alternation between loud and quiet IS the beat. With bells, it is pressure waves instead of clapping hands.',
-      storyConnection: 'Sangha\u2019s crack made one side vibrate at a slightly different frequency than the other. Dr. Lhamo\u2019s screen would have shown split peaks \u2014 two bars close together instead of one clean bar. The wobble Dorji heard is exactly the beat frequency you are about to simulate.',
+      analogy: 'Imagine two people trying to clap in unison but one is slightly faster. Sometimes their claps align (loud — constructive interference) and sometimes they oppose (quiet — destructive interference). The regular alternation between loud and quiet IS the beat. With bells, it is pressure waves instead of clapping hands.',
+      storyConnection: 'Sangha’s crack made one side vibrate at a slightly different frequency than the other. Dr. Lhamo’s screen would have shown split peaks — two bars close together instead of one clean bar. The wobble Dorji heard is exactly the beat frequency you are about to simulate.',
       checkQuestion: 'A piano tuner plays a 440 Hz tuning fork alongside a piano string. She hears 2 beats per second. What are the two possible frequencies of the piano string?',
-      checkAnswer: 'Either 438 Hz or 442 Hz. The beat frequency equals the difference between the two frequencies. Since beats = |f\u2081 \u2212 f\u2082|, the piano string is either 2 Hz above or 2 Hz below the tuning fork. The tuner adjusts until the beats disappear (0 Hz difference = perfect tune).',
-      codeIntro: 'Simulate the cracked bell\u2019s beat pattern.',
+      checkAnswer: 'Either 438 Hz or 442 Hz. The beat frequency equals the difference between the two frequencies. Since beats = |f₁ − f₂|, the piano string is either 2 Hz above or 2 Hz below the tuning fork. The tuner adjusts until the beats disappear (0 Hz difference = perfect tune).',
+      codeIntro: 'Simulate the cracked bell’s beat pattern.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
@@ -347,21 +347,21 @@ print("creating multiple overlapping beat patterns.")`,
       successHint: 'Beat frequencies are how musicians tune instruments: play two notes together and listen for wobbles. When the wobbles disappear, the notes match. Every piano tuner, every orchestra warm-up, every guitar tuning session relies on this physics.',
     },
     {
-      title: 'The speed of sound \u2014 how altitude changes everything',
+      title: 'The speed of sound — how altitude changes everything',
       concept: `Tawang Monastery sits at 3,048 metres. At that altitude, air is thinner (less dense) and the speed of sound is different. The formula is:
 
-**v = 331.4 + 0.6 \u00D7 T** (metres per second, where T is temperature in \u00B0C)
+**v = 331.4 + 0.6 × T** (metres per second, where T is temperature in °C)
 
-At sea level on a 20\u00B0C day: v = 331.4 + 12 = 343.4 m/s
-At Tawang in autumn (5\u00B0C): v = 331.4 + 3 = 334.4 m/s
+At sea level on a 20°C day: v = 331.4 + 12 = 343.4 m/s
+At Tawang in autumn (5°C): v = 331.4 + 3 = 334.4 m/s
 
-The speed of sound depends mainly on **temperature** (which correlates with altitude). Colder air = slower sound. This affects how far the bell\u2019s sound carries and how long it takes to reach distant villages.
+The speed of sound depends mainly on **temperature** (which correlates with altitude). Colder air = slower sound. This affects how far the bell’s sound carries and how long it takes to reach distant villages.
 
 The code below calculates the speed of sound at different altitudes and plots how sound would travel from the monastery to a village 5 km away.`,
       analogy: 'Think of a line of people passing a bucket of water hand to hand. If everyone is standing close together (dense air, warm), the bucket moves fast. If they are spread far apart (thin air, cold), it takes longer for each pass. Temperature determines how energetically the air molecules collide and pass along the pressure wave.',
-      storyConnection: 'The story says yak herders on mountain passes heard Sangha five kilometres away. Sound at altitude travels slightly slower, but the thin air has less absorption \u2014 fewer molecules to steal energy from the wave. Mountain environments can actually carry sound farther than sea level, which is why the monks\u2019 bell reached such distances.',
-      checkQuestion: 'At \u221210\u00B0C (a Tawang winter morning), what is the speed of sound?',
-      checkAnswer: 'v = 331.4 + 0.6 \u00D7 (\u221210) = 331.4 \u2212 6 = 325.4 m/s. That is about 18 m/s slower than at sea level on a warm day. Sound from the bell would take about 15.4 seconds to reach a village 5 km away, versus 14.6 seconds at sea level.',
+      storyConnection: 'The story says yak herders on mountain passes heard Sangha five kilometres away. Sound at altitude travels slightly slower, but the thin air has less absorption — fewer molecules to steal energy from the wave. Mountain environments can actually carry sound farther than sea level, which is why the monks’ bell reached such distances.',
+      checkQuestion: 'At −10°C (a Tawang winter morning), what is the speed of sound?',
+      checkAnswer: 'v = 331.4 + 0.6 × (−10) = 331.4 − 6 = 325.4 m/s. That is about 18 m/s slower than at sea level on a warm day. Sound from the bell would take about 15.4 seconds to reach a village 5 km away, versus 14.6 seconds at sea level.',
       codeIntro: 'Calculate how temperature and altitude affect the speed of sound.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -416,7 +416,7 @@ for name, temp in locations.items():
     wl = v / 200  # wavelength of 200 Hz bell
     print(f"  {name}: {v:.1f} m/s, reaches 5 km in {t:.1f}s, λ = {wl:.2f}m")`,
       challenge: 'Sound in water travels at about 1,480 m/s. If the monastery were underwater (hypothetically), how long would the bell take to reach 5 km? What about in steel (5,960 m/s)?',
-      successHint: 'The speed of sound is not a constant \u2014 it depends on the medium and temperature. Understanding this helps explain why sound carries differently at altitude, why thunder arrives after lightning, and why sonar works so well in the ocean.',
+      successHint: 'The speed of sound is not a constant — it depends on the medium and temperature. Understanding this helps explain why sound carries differently at altitude, why thunder arrives after lightning, and why sonar works so well in the ocean.',
     },
   ];
 

@@ -29,18 +29,18 @@ export default function MuezzinLevel3() {
 
   const miniLessons = [
     {
-      title: 'Ray tracing acoustics \u2014 tracing thousands of sound paths',
+      title: 'Ray tracing acoustics — tracing thousands of sound paths',
       concept: `The image source method from Level 2 works for simple rooms, but a mosque with domes, arches, columns, and niches needs a more flexible approach: **acoustic ray tracing**.
 
 The idea: launch thousands of rays from the sound source in random directions. Each ray travels in a straight line until it hits a surface, where it reflects (angle of incidence = angle of reflection) with some energy absorbed. Track each ray until its energy drops below a threshold.
 
-At each receiver position, collect all rays that pass within a small radius. The arrival time and energy of each ray builds an **impulse response** \u2014 the acoustic fingerprint of the room.
+At each receiver position, collect all rays that pass within a small radius. The arrival time and energy of each ray builds an **impulse response** — the acoustic fingerprint of the room.
 
 Advantages over image sources: handles any room geometry (curved surfaces, columns, irregular shapes). The cost is proportional to the number of rays, not the room complexity.`,
       analogy: 'Imagine releasing thousands of bouncing balls in a room, each carrying a tiny paint capsule. When a ball hits a surface, it bounces and leaves a paint mark (losing some paint). After many bounces, the paint pattern on the floor shows you where sound is concentrated. Areas with lots of paint marks get lots of sound. Areas with few marks are acoustic "dead spots."',
-      storyConnection: 'Modern acoustic studies of the S\u00FCleymaniye Mosque use ray tracing with 100,000+ rays to model its complex geometry. The dome, pendentives, semi-domes, columns, and wall niches create a reflection pattern that no simple formula can capture. Ray tracing revealed that Sinan\u2019s design distributes early reflections remarkably evenly across the prayer area.',
+      storyConnection: 'Modern acoustic studies of the Süleymaniye Mosque use ray tracing with 100,000+ rays to model its complex geometry. The dome, pendentives, semi-domes, columns, and wall niches create a reflection pattern that no simple formula can capture. Ray tracing revealed that Sinan’s design distributes early reflections remarkably evenly across the prayer area.',
       checkQuestion: 'Why does ray tracing become less accurate for low frequencies (below ~200 Hz)?',
-      checkAnswer: 'Ray tracing assumes sound travels in straight lines and reflects like a billiard ball. This is only valid when the wavelength is much smaller than the room features (the "geometric acoustics" regime). At 100 Hz, \u03BB \u2248 3.4 m, comparable to columns and arches. At these scales, **diffraction** (bending around obstacles) dominates and ray tracing misses it. For low frequencies, wave-based methods (FEM, BEM) are needed.',
+      checkAnswer: 'Ray tracing assumes sound travels in straight lines and reflects like a billiard ball. This is only valid when the wavelength is much smaller than the room features (the "geometric acoustics" regime). At 100 Hz, λ ≈ 3.4 m, comparable to columns and arches. At these scales, **diffraction** (bending around obstacles) dominates and ray tracing misses it. For low frequencies, wave-based methods (FEM, BEM) are needed.',
       codeIntro: 'Build a 2D acoustic ray tracer for a simplified mosque floor plan.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -176,22 +176,22 @@ print(f"Max bounces: {max_bounces}")
 print(f"Energy range: {energy_map.min():.1f} to {energy_map.max():.1f}")
 print(f"Uniformity (std/mean): {energy_map.std()/energy_map.mean():.2f}")
 print("Lower uniformity ratio = more even sound distribution")`,
-      challenge: 'Add a semicircular apse (dome niche) at the imam\u2019s end and trace how it focuses reflections. Compare the energy distribution with and without the apse. Does it improve coverage at the back of the mosque?',
+      challenge: 'Add a semicircular apse (dome niche) at the imam’s end and trace how it focuses reflections. Compare the energy distribution with and without the apse. Does it improve coverage at the back of the mosque?',
       successHint: 'Acoustic ray tracing is the standard method in professional room acoustics software. ODEON, EASE, and CATT-Acoustic all use variations of this technique to design concert halls, mosques, and stadiums worldwide.',
     },
     {
-      title: 'Impulse response \u2014 the acoustic DNA of a room',
-      concept: `If you clap your hands once in a room, the sound that reaches a microphone is called the **impulse response** (IR). It contains ALL information about the room\u2019s acoustics: every reflection, every echo, every resonance.
+      title: 'Impulse response — the acoustic DNA of a room',
+      concept: `If you clap your hands once in a room, the sound that reaches a microphone is called the **impulse response** (IR). It contains ALL information about the room’s acoustics: every reflection, every echo, every resonance.
 
 An IR starts with the **direct sound** (the first arrival), followed by **early reflections** (0-80 ms), then a gradually decaying tail of **late reverberation**. From the IR, you can calculate every acoustic metric: RT60, C80, D50, STI (speech intelligibility).
 
-The revolutionary insight: if you **convolve** any dry recording with a room\u2019s impulse response, the result sounds exactly as if the original sound had been produced in that room. This is how movie sound designers place dialogue in virtual spaces and how musicians add "reverb" from famous concert halls.
+The revolutionary insight: if you **convolve** any dry recording with a room’s impulse response, the result sounds exactly as if the original sound had been produced in that room. This is how movie sound designers place dialogue in virtual spaces and how musicians add "reverb" from famous concert halls.
 
 The code generates a synthetic impulse response and calculates acoustic metrics.`,
-      analogy: 'An impulse response is like a room\u2019s fingerprint. Just as a fingerprint uniquely identifies a person, the IR uniquely identifies how a room shapes sound. Record the fingerprint (clap and measure), and you can predict how any sound will behave in that room, forever, without being there.',
-      storyConnection: 'Acoustic researchers have recorded impulse responses inside the S\u00FCleymaniye, the Blue Mosque, and dozens of other Ottoman mosques. These IRs are preserved in databases. By convolving a recording of a Muezzin\u2019s voice with the mosque\u2019s IR, researchers can hear exactly what the congregation would have heard 500 years ago \u2014 even from a laboratory.',
-      checkQuestion: 'If a room\u2019s impulse response is 3 seconds long and the direct sound is 10 dB stronger than the strongest early reflection, what does this tell you about the room?',
-      checkAnswer: 'A 3-second IR indicates significant reverberation (RT60 around 3s). The 10 dB difference between direct and first reflection means the nearest reflective surface is relatively far away (sound has spread and weakened before the first bounce). This suggests a large room with distant walls \u2014 consistent with a cathedral or large mosque. Good for music, but speech intelligibility may suffer.',
+      analogy: 'An impulse response is like a room’s fingerprint. Just as a fingerprint uniquely identifies a person, the IR uniquely identifies how a room shapes sound. Record the fingerprint (clap and measure), and you can predict how any sound will behave in that room, forever, without being there.',
+      storyConnection: 'Acoustic researchers have recorded impulse responses inside the Süleymaniye, the Blue Mosque, and dozens of other Ottoman mosques. These IRs are preserved in databases. By convolving a recording of a Muezzin’s voice with the mosque’s IR, researchers can hear exactly what the congregation would have heard 500 years ago — even from a laboratory.',
+      checkQuestion: 'If a room’s impulse response is 3 seconds long and the direct sound is 10 dB stronger than the strongest early reflection, what does this tell you about the room?',
+      checkAnswer: 'A 3-second IR indicates significant reverberation (RT60 around 3s). The 10 dB difference between direct and first reflection means the nearest reflective surface is relatively far away (sound has spread and weakened before the first bounce). This suggests a large room with distant walls — consistent with a cathedral or large mosque. Good for music, but speech intelligibility may suffer.',
       codeIntro: 'Generate a synthetic impulse response and extract acoustic metrics.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -291,29 +291,29 @@ print(f"RT60 = {measured_rt60:.2f} s (target for mosque: 1.0-2.0 s)")
 print(f"C80  = {C80:.1f} dB (speech clarity: > 0 dB is good)")
 print(f"D50  = {D50:.2f} (definition: > 0.50 is good for speech)")`,
       challenge: 'Modify the impulse response to simulate a smaller room (RT60 = 0.8s) with stronger early reflections. How do C80 and D50 change? Now simulate a cathedral (RT60 = 6s) and compare.',
-      successHint: 'Impulse responses are the bridge between acoustic measurement and audio engineering. With a room\u2019s IR, you can simulate, analyse, and auralize any acoustic scenario \u2014 the same technique used by architects, sound designers, and musicians worldwide.',
+      successHint: 'Impulse responses are the bridge between acoustic measurement and audio engineering. With a room’s IR, you can simulate, analyse, and auralize any acoustic scenario — the same technique used by architects, sound designers, and musicians worldwide.',
     },
     {
-      title: 'Reverberation time \u2014 Eyring\u2019s equation for non-uniform absorption',
-      concept: `Sabine\u2019s equation (RT60 = 0.161V/A) assumes low absorption. In rooms with significant absorption (like a studio with acoustic treatment), it overestimates reverb time.
+      title: 'Reverberation time — Eyring’s equation for non-uniform absorption',
+      concept: `Sabine’s equation (RT60 = 0.161V/A) assumes low absorption. In rooms with significant absorption (like a studio with acoustic treatment), it overestimates reverb time.
 
-**Eyring\u2019s equation** corrects this:
+**Eyring’s equation** corrects this:
 
-**RT60 = 0.161 \u00D7 V / (-S \u00D7 ln(1 - \u03B1_avg))**
+**RT60 = 0.161 × V / (-S × ln(1 - α_avg))**
 
-Where S is total surface area and \u03B1_avg is the average absorption coefficient.
+Where S is total surface area and α_avg is the average absorption coefficient.
 
-When \u03B1_avg is small, ln(1 - \u03B1) \u2248 -\u03B1, and Eyring reduces to Sabine. But for \u03B1_avg > 0.3, Sabine significantly overestimates RT60.
+When α_avg is small, ln(1 - α) ≈ -α, and Eyring reduces to Sabine. But for α_avg > 0.3, Sabine significantly overestimates RT60.
 
 Additionally, **air absorption** at high frequencies matters in large rooms:
 
-**RT60 = 0.161 \u00D7 V / (-S \u00D7 ln(1 - \u03B1_avg) + 4mV)**
+**RT60 = 0.161 × V / (-S × ln(1 - α_avg) + 4mV)**
 
 Where m is the air absorption coefficient (depends on humidity and temperature). At 4 kHz in a large mosque, air absorption can reduce RT60 by 20-30%.`,
       analogy: 'Sabine assumed each sound reflection only loses a little energy (like a ball barely losing speed on each bounce). Eyring realised that if the walls are very absorptive (like a ball hitting a soft mattress), the loss per bounce is much larger and the ball stops sooner than Sabine predicted. The correction matters when the room is heavily treated.',
-      storyConnection: 'The S\u00FCleymaniye Mosque has a measured RT60 of about 5.5 seconds at 125 Hz but only 2.5 seconds at 2 kHz. This frequency-dependent reverb is partly due to air absorption (significant at 2 kHz in a 29,000 m\u00B3 space) and partly because the thick carpets absorb high frequencies much more than low frequencies. Eyring\u2019s equation with air absorption matches the measured data much better than Sabine\u2019s.',
-      checkQuestion: 'A recording studio has \u03B1_avg = 0.6 (heavily treated). What does Sabine predict vs Eyring? Which is more accurate?',
-      checkAnswer: 'For a 200 m\u00B3 room with S = 250 m\u00B2: Sabine: RT60 = 0.161 \u00D7 200 / (250 \u00D7 0.6) = 0.21 s. Eyring: RT60 = 0.161 \u00D7 200 / (-250 \u00D7 ln(0.4)) = 0.161 \u00D7 200 / (250 \u00D7 0.916) = 0.14 s. Sabine overestimates by 50%. Eyring is correct for this heavily absorptive room.',
+      storyConnection: 'The Süleymaniye Mosque has a measured RT60 of about 5.5 seconds at 125 Hz but only 2.5 seconds at 2 kHz. This frequency-dependent reverb is partly due to air absorption (significant at 2 kHz in a 29,000 m³ space) and partly because the thick carpets absorb high frequencies much more than low frequencies. Eyring’s equation with air absorption matches the measured data much better than Sabine’s.',
+      checkQuestion: 'A recording studio has α_avg = 0.6 (heavily treated). What does Sabine predict vs Eyring? Which is more accurate?',
+      checkAnswer: 'For a 200 m³ room with S = 250 m²: Sabine: RT60 = 0.161 × 200 / (250 × 0.6) = 0.21 s. Eyring: RT60 = 0.161 × 200 / (-250 × ln(0.4)) = 0.161 × 200 / (250 × 0.916) = 0.14 s. Sabine overestimates by 50%. Eyring is correct for this heavily absorptive room.',
       codeIntro: 'Compare Sabine and Eyring predictions across absorption levels.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -362,7 +362,7 @@ ax2.plot(freqs, rt_eyring_f, 's-', color='#3b82f6', linewidth=2.5, label='Eyring
 ax2.plot(freqs, rt_measured, 'D-', color='#10b981', linewidth=2.5, label='Measured')
 ax2.set_xlabel('Frequency (Hz)', fontsize=11)
 ax2.set_ylabel('RT60 (seconds)', fontsize=11)
-ax2.set_title('Frequency-Dependent RT60: S\u00FCleymaniye Mosque', fontsize=12)
+ax2.set_title('Frequency-Dependent RT60: Süleymaniye Mosque', fontsize=12)
 ax2.set_xscale('log')
 ax2.legend(fontsize=10)
 ax2.grid(alpha=0.3)
@@ -375,23 +375,23 @@ for f, rs, re, rm in zip(freqs, rt_sabine_f, rt_eyring_f, rt_measured):
     err_s = abs(rs - rm) / rm * 100
     err_e = abs(re - rm) / rm * 100
     print(f"  {f:>5} Hz: Sabine={rs:.1f}s (err {err_s:.0f}%), Eyring+air={re:.1f}s (err {err_e:.0f}%), Measured={rm:.1f}s")`,
-      challenge: 'The mosque is getting new carpet that has \u03B1 = 0.7 at 2 kHz instead of 0.5. Recalculate the frequency-dependent RT60 and plot the change. Does the new carpet bring the mosque closer to the ideal speech range?',
-      successHint: 'Eyring\u2019s correction is standard practice for any room with significant absorption. Understanding when Sabine fails and Eyring succeeds is essential for accurate acoustic design. Air absorption becomes critical in large spaces like mosques, cathedrals, and concert halls.',
+      challenge: 'The mosque is getting new carpet that has α = 0.7 at 2 kHz instead of 0.5. Recalculate the frequency-dependent RT60 and plot the change. Does the new carpet bring the mosque closer to the ideal speech range?',
+      successHint: 'Eyring’s correction is standard practice for any room with significant absorption. Understanding when Sabine fails and Eyring succeeds is essential for accurate acoustic design. Air absorption becomes critical in large spaces like mosques, cathedrals, and concert halls.',
     },
     {
-      title: 'Noise cancellation \u2014 active control using anti-phase signals',
+      title: 'Noise cancellation — active control using anti-phase signals',
       concept: `Active noise cancellation (ANC) uses **destructive interference** to silence unwanted sound. A microphone detects the noise, a processor computes the exact anti-phase signal (same amplitude, opposite polarity), and a speaker outputs it. When the noise and anti-noise meet: cancellation.
 
-For a simple sine wave at frequency f, the anti-noise is phase-shifted by 180\u00B0:
-**anti_noise(t) = -noise(t) = A sin(2\u03C0ft + \u03C0)**
+For a simple sine wave at frequency f, the anti-noise is phase-shifted by 180°:
+**anti_noise(t) = -noise(t) = A sin(2πft + π)**
 
-For complex noise, the system must compute the anti-signal in real time using digital signal processing (DSP). The challenge is **latency** \u2014 the anti-signal must arrive at the ear within microseconds of the noise, or the cancellation is incomplete.
+For complex noise, the system must compute the anti-signal in real time using digital signal processing (DSP). The challenge is **latency** — the anti-signal must arrive at the ear within microseconds of the noise, or the cancellation is incomplete.
 
-ANC works best for low frequencies (\u03BB > head size) where the sound field is relatively uniform. For high frequencies, the wavefield varies rapidly across small distances and cancellation is impractical.`,
-      analogy: 'Imagine someone pushing you forward. If an equally strong person pushes you backward at exactly the same moment, you stay still. Active noise cancellation is the same: the speaker pushes air molecules in the exact opposite direction of the noise. The two pushes cancel, and you hear silence. But if the anti-push is even slightly late, you feel a jolt \u2014 imperfect cancellation.',
-      storyConnection: 'Some modern mosques in dense urban areas use active noise control to address two problems: (1) reducing traffic noise inside the mosque during prayers, and (2) reducing the Adhan\u2019s level in nearby apartments without reducing it for the intended audience. Directional ANC arrays on the minaret can create "zones of silence" in specific directions.',
-      checkQuestion: 'Why can\u2019t noise-cancelling headphones eliminate all sounds perfectly?',
-      checkAnswer: 'Three reasons: (1) High frequencies have short wavelengths, so the noise field varies rapidly across the headphone\u2019s microphone-to-ear distance \u2014 the anti-signal cannot match everywhere. (2) Processing latency means the anti-signal is always slightly late. (3) Sudden, impulsive sounds (claps, speech) change too fast for the system to track. ANC is best for steady, low-frequency noise (engine hum, air conditioning, traffic drone).',
+ANC works best for low frequencies (λ > head size) where the sound field is relatively uniform. For high frequencies, the wavefield varies rapidly across small distances and cancellation is impractical.`,
+      analogy: 'Imagine someone pushing you forward. If an equally strong person pushes you backward at exactly the same moment, you stay still. Active noise cancellation is the same: the speaker pushes air molecules in the exact opposite direction of the noise. The two pushes cancel, and you hear silence. But if the anti-push is even slightly late, you feel a jolt — imperfect cancellation.',
+      storyConnection: 'Some modern mosques in dense urban areas use active noise control to address two problems: (1) reducing traffic noise inside the mosque during prayers, and (2) reducing the Adhan’s level in nearby apartments without reducing it for the intended audience. Directional ANC arrays on the minaret can create "zones of silence" in specific directions.',
+      checkQuestion: 'Why can’t noise-cancelling headphones eliminate all sounds perfectly?',
+      checkAnswer: 'Three reasons: (1) High frequencies have short wavelengths, so the noise field varies rapidly across the headphone’s microphone-to-ear distance — the anti-signal cannot match everywhere. (2) Processing latency means the anti-signal is always slightly late. (3) Sudden, impulsive sounds (claps, speech) change too fast for the system to track. ANC is best for steady, low-frequency noise (engine hum, air conditioning, traffic drone).',
       codeIntro: 'Simulate active noise cancellation for steady and variable noise.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -463,18 +463,18 @@ print("Above 1 kHz, passive isolation (ear cushion) does better")`,
       successHint: 'Active noise cancellation is one of the most elegant applications of superposition. It is used in headphones, car cabins, MRI machines, and increasingly in urban noise management. The same DSP principles apply to vibration control, radar jamming, and echo cancellation in phone calls.',
     },
     {
-      title: 'Acoustic metamaterials \u2014 engineering materials to control sound',
+      title: 'Acoustic metamaterials — engineering materials to control sound',
       concept: `**Acoustic metamaterials** are engineered structures with properties not found in nature. They can bend sound around obstacles (acoustic cloaking), focus sound to a point smaller than a wavelength (super-resolution), and block specific frequencies while passing others (acoustic band gaps).
 
 The key idea: arrange small resonant structures (tubes, cavities, membranes) in a periodic pattern. When the spacing is smaller than the wavelength, the array behaves as a bulk material with custom-designed effective density and bulk modulus.
 
-**Helmholtz resonators** \u2014 the clay jars Sinan may have used \u2014 are a simple example. Each jar resonates at a specific frequency, absorbing that frequency while passing others. An array of jars tuned to different frequencies creates a broadband absorber.
+**Helmholtz resonators** — the clay jars Sinan may have used — are a simple example. Each jar resonates at a specific frequency, absorbing that frequency while passing others. An array of jars tuned to different frequencies creates a broadband absorber.
 
-Modern metamaterials use 3D-printed structures with labyrinthine channels that force sound waves through long, winding paths \u2014 achieving strong absorption in panels only centimetres thick.`,
-      analogy: 'A prism bends light because glass has different optical properties from air. An acoustic metamaterial bends sound because its engineered microstructure creates effective properties (density, stiffness) that don\u2019t exist in any natural material. Imagine creating a material so light that sound speeds up inside it, or so dense that sound slows to a crawl \u2014 metamaterials make both possible.',
-      storyConnection: 'Sinan\u2019s alleged use of embedded clay jars is remarkably prescient. Each jar acts as a Helmholtz resonator: air vibrates in the jar\u2019s neck at a frequency determined by the neck dimensions and cavity volume. The resonating air absorbs energy from the room\u2019s sound field at that frequency. Modern acoustic metamaterials extend this idea from individual jars to engineered arrays that can control sound in ways Sinan could not have imagined.',
-      checkQuestion: 'A Helmholtz resonator has a cavity volume of 500 cm\u00B3 and a neck of radius 1 cm and length 3 cm. What is its resonant frequency?',
-      checkAnswer: 'f = (v/2\u03C0) \u00D7 \u221A(A/(V\u00D7L_eff)) where A = \u03C0r\u00B2, L_eff = L + 1.7r. A = \u03C0(0.01)\u00B2 = 3.14\u00D710\u207B\u2074 m\u00B2, V = 5\u00D710\u207B\u2074 m\u00B3, L_eff = 0.03 + 0.017 = 0.047 m. f = (343/2\u03C0) \u00D7 \u221A(3.14\u00D710\u207B\u2074 / (5\u00D710\u207B\u2074 \u00D7 0.047)) = 54.6 \u00D7 \u221A(13.36) = 54.6 \u00D7 3.66 \u2248 200 Hz. This is in the speech fundamental range.',
+Modern metamaterials use 3D-printed structures with labyrinthine channels that force sound waves through long, winding paths — achieving strong absorption in panels only centimetres thick.`,
+      analogy: 'A prism bends light because glass has different optical properties from air. An acoustic metamaterial bends sound because its engineered microstructure creates effective properties (density, stiffness) that don’t exist in any natural material. Imagine creating a material so light that sound speeds up inside it, or so dense that sound slows to a crawl — metamaterials make both possible.',
+      storyConnection: 'Sinan’s alleged use of embedded clay jars is remarkably prescient. Each jar acts as a Helmholtz resonator: air vibrates in the jar’s neck at a frequency determined by the neck dimensions and cavity volume. The resonating air absorbs energy from the room’s sound field at that frequency. Modern acoustic metamaterials extend this idea from individual jars to engineered arrays that can control sound in ways Sinan could not have imagined.',
+      checkQuestion: 'A Helmholtz resonator has a cavity volume of 500 cm³ and a neck of radius 1 cm and length 3 cm. What is its resonant frequency?',
+      checkAnswer: 'f = (v/2π) × √(A/(V×L_eff)) where A = πr², L_eff = L + 1.7r. A = π(0.01)² = 3.14×10⁻⁴ m², V = 5×10⁻⁴ m³, L_eff = 0.03 + 0.017 = 0.047 m. f = (343/2π) × √(3.14×10⁻⁴ / (5×10⁻⁴ × 0.047)) = 54.6 × √(13.36) = 54.6 × 3.66 ≈ 200 Hz. This is in the speech fundamental range.',
       codeIntro: 'Model Helmholtz resonator arrays and acoustic metamaterial absorption.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -512,7 +512,7 @@ for (V, r, L, name), col in zip(resonators, colors):
     absorption = 1 / (1 + Q**2 * (freqs/f0 - f0/freqs)**2)
     total_absorption += absorption * 0.3  # weighted
 
-    ax1.plot(freqs, absorption, color=col, linewidth=2, label=f'{name} (f\u2080={f0:.0f} Hz)')
+    ax1.plot(freqs, absorption, color=col, linewidth=2, label=f'{name} (f₀={f0:.0f} Hz)')
     ax1.axvline(f0, color=col, linewidth=0.5, linestyle=':', alpha=0.3)
 
 ax1.set_xlabel('Frequency (Hz)', fontsize=11)
@@ -542,12 +542,12 @@ plt.show()
 print("=== Helmholtz Resonator Frequencies ===")
 for V, r, L, name in resonators:
     f0 = helmholtz_freq(V, r, L)
-    print(f"  {name:12s}: V={V}cm\u00B3, r={r}cm, L={L}cm \u2192 f\u2080 = {f0:.0f} Hz")
+    print(f"  {name:12s}: V={V}cm³, r={r}cm, L={L}cm → f₀ = {f0:.0f} Hz")
 print()
 print("Array of 4 resonators provides broadband absorption from 100-600 Hz")
-print("This is the principle behind Sinan\u2019s embedded clay jars")`,
-      challenge: 'Design a labyrinthine metamaterial panel that achieves \u03B1 > 0.8 at 500 Hz in a panel only 5 cm thick (normally you need \u03BB/4 = 17 cm). Model the sound path through a folded channel inside the panel.',
-      successHint: 'Acoustic metamaterials are an active research frontier. They promise ultra-thin sound barriers, acoustic cloaking (making objects invisible to sonar), and perfect absorbers for specific frequencies. Sinan\u2019s clay jars were 500 years ahead of their time.',
+print("This is the principle behind Sinan’s embedded clay jars")`,
+      challenge: 'Design a labyrinthine metamaterial panel that achieves α > 0.8 at 500 Hz in a panel only 5 cm thick (normally you need λ/4 = 17 cm). Model the sound path through a folded channel inside the panel.',
+      successHint: 'Acoustic metamaterials are an active research frontier. They promise ultra-thin sound barriers, acoustic cloaking (making objects invisible to sonar), and perfect absorbers for specific frequencies. Sinan’s clay jars were 500 years ahead of their time.',
     },
   ];
 

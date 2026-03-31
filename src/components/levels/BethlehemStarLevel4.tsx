@@ -29,10 +29,10 @@ export default function BethlehemStarLevel4() {
 
   const miniLessons = [
     {
-      title: 'Capstone Part 1 \u2014 Design a complete planetarium engine',
+      title: 'Capstone Part 1 — Design a complete planetarium engine',
       concept: `Time to build a full **planetarium engine** that combines every concept from Levels 1-3 into a single interactive system. The engine will:
 
-1. Solve Kepler\u2019s equation for any planet at any date
+1. Solve Kepler’s equation for any planet at any date
 2. Transform heliocentric to geocentric coordinates
 3. Convert to horizontal coordinates for any observer location
 4. Compute apparent magnitude including distance correction
@@ -40,9 +40,9 @@ export default function BethlehemStarLevel4() {
 
 This is a substantial Python program organized as a class with clean methods. The architecture mirrors professional planetarium software.`,
       analogy: 'You are building a flight simulator for the night sky. Instead of modeling aerodynamics and engines, you model gravity and light. The inputs are date, time, and location. The output is a complete picture of the sky. Every calculation you have learned feeds into this one system.',
-      storyConnection: 'This planetarium engine can answer the Magi\u2019s question directly: "What did the sky look like from Babylon on the evening of May 29, 7 BCE?" By running the engine for that date and location, you see the Jupiter-Saturn conjunction exactly as they saw it \u2014 two bright planets near each other in Pisces, rising in the east after sunset.',
+      storyConnection: 'This planetarium engine can answer the Magi’s question directly: "What did the sky look like from Babylon on the evening of May 29, 7 BCE?" By running the engine for that date and location, you see the Jupiter-Saturn conjunction exactly as they saw it — two bright planets near each other in Pisces, rising in the east after sunset.',
       checkQuestion: 'What is the minimum set of data needed to render a complete sky view?',
-      checkAnswer: 'You need: (1) a star catalogue with RA, Dec, and magnitude for each star; (2) orbital elements for each planet; (3) the observer\u2019s latitude and longitude; (4) the date and time. From these four inputs, you can compute every object\u2019s position and brightness on the observer\u2019s sky. Professional planetariums add atmospheric refraction, extinction, and precession corrections.',
+      checkAnswer: 'You need: (1) a star catalogue with RA, Dec, and magnitude for each star; (2) orbital elements for each planet; (3) the observer’s latitude and longitude; (4) the date and time. From these four inputs, you can compute every object’s position and brightness on the observer’s sky. Professional planetariums add atmospheric refraction, extinction, and precession corrections.',
       codeIntro: 'Build the core planetarium engine class.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -123,7 +123,7 @@ class PlanetariumEngine:
 
         ax.set_xlim(0, 360)
         ax.set_ylim(-0.3, 0.3)
-        ax.set_xlabel('Ecliptic Longitude (\u00B0)', fontsize=11, color='white')
+        ax.set_xlabel('Ecliptic Longitude (°)', fontsize=11, color='white')
         ax.tick_params(colors='white')
         return ax
 
@@ -154,12 +154,12 @@ for label, t in dates:
     sep = abs(j_lon - s_lon)
     if sep > 180: sep = 360 - sep
     print(f"{label}:")
-    print(f"  Jupiter: {j_lon:.1f}\u00B0  Saturn: {s_lon:.1f}\u00B0  Sep: {sep:.1f}\u00B0")`,
+    print(f"  Jupiter: {j_lon:.1f}°  Saturn: {s_lon:.1f}°  Sep: {sep:.1f}°")`,
       challenge: 'Add the Moon to the planetarium. The Moon orbits Earth at ~0.00257 AU with a period of 27.32 days. When was the Moon near the conjunction in 7 BCE? A crescent Moon near the conjunction would have made the sight even more spectacular.',
       successHint: 'You have built a working planetarium engine. From here, you could add a star catalogue, atmospheric refraction, twilight calculations, and a graphical user interface. This is genuinely how planetarium software is structured.',
     },
     {
-      title: 'Capstone Part 2 \u2014 Historical conjunction analyzer',
+      title: 'Capstone Part 2 — Historical conjunction analyzer',
       concept: `Extend the planetarium engine into a **historical conjunction analyzer** that searches for significant planetary alignments over thousands of years.
 
 The analyzer will:
@@ -171,9 +171,9 @@ The analyzer will:
 
 This tool can evaluate the various "Star of Bethlehem" hypotheses quantitatively.`,
       analogy: 'You are building a detective tool that searches through centuries of planetary positions like a forensic investigator searching through databases. Instead of fingerprints and DNA, your evidence is angular separations and conjunction timings.',
-      storyConnection: 'Multiple hypotheses exist for the Star of Bethlehem: the 7 BCE Jupiter-Saturn triple conjunction, a 6 BCE nova in Aquila, a 5 BCE conjunction of Jupiter and Venus, Halley\u2019s Comet in 12 BCE, and others. Your analyzer can evaluate each hypothesis by checking whether the astronomical event actually occurred when and where the texts describe.',
+      storyConnection: 'Multiple hypotheses exist for the Star of Bethlehem: the 7 BCE Jupiter-Saturn triple conjunction, a 6 BCE nova in Aquila, a 5 BCE conjunction of Jupiter and Venus, Halley’s Comet in 12 BCE, and others. Your analyzer can evaluate each hypothesis by checking whether the astronomical event actually occurred when and where the texts describe.',
       checkQuestion: 'Why is a triple conjunction more significant than a single conjunction?',
-      checkAnswer: 'Single conjunctions of Jupiter and Saturn happen every ~20 years \u2014 they are notable but not extraordinary. A triple conjunction (caused by retrograde motion) happens every ~900 years. The repeated appearance of the two planets close together over several months would command attention from any astronomer. The 7 BCE event had conjunctions in May, September, and December \u2014 spanning eight months.',
+      checkAnswer: 'Single conjunctions of Jupiter and Saturn happen every ~20 years — they are notable but not extraordinary. A triple conjunction (caused by retrograde motion) happens every ~900 years. The repeated appearance of the two planets close together over several months would command attention from any astronomer. The 7 BCE event had conjunctions in May, September, and December — spanning eight months.',
       codeIntro: 'Build a conjunction analyzer that searches through millennia.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -217,7 +217,7 @@ s_lon = np.array([geocentric_lon(ti, *S) for ti in t])
 sep = np.abs(j_lon - s_lon)
 sep = np.minimum(sep, 360 - sep)
 
-# Find conjunction events (sep < 3\u00B0)
+# Find conjunction events (sep < 3°)
 threshold = 3.0
 conj_mask = sep < threshold
 events = []
@@ -256,7 +256,7 @@ for e in events:
                    marker='*', zorder=10, label=f"7 BCE ({e['type']})")
 
 plt.xlabel('Year (negative = BCE)', fontsize=12)
-plt.ylabel('Minimum separation (\u00B0)', fontsize=12)
+plt.ylabel('Minimum separation (°)', fontsize=12)
 plt.title('Jupiter-Saturn Conjunctions: 1000 BCE to 1000 CE', fontsize=14)
 plt.legend(fontsize=10)
 plt.grid(alpha=0.3)
@@ -270,13 +270,13 @@ print(f"\\nTriple conjunctions (rare!):")
 for e in triples:
     yr = e['year']
     era = 'BCE' if yr < 0 else 'CE'
-    print(f"  Year {abs(yr):.0f} {era}: min sep {e['min_sep']:.2f}\u00B0, duration {e['duration_days']:.0f} days")`,
-      challenge: 'Add Venus conjunctions with Jupiter. The "Venus hypothesis" suggests a 3-2 BCE Jupiter-Venus conjunction was the Star of Bethlehem. Which event was more astronomically spectacular \u2014 the 7 BCE triple conjunction or the 3-2 BCE Venus-Jupiter conjunction?',
+    print(f"  Year {abs(yr):.0f} {era}: min sep {e['min_sep']:.2f}°, duration {e['duration_days']:.0f} days")`,
+      challenge: 'Add Venus conjunctions with Jupiter. The "Venus hypothesis" suggests a 3-2 BCE Jupiter-Venus conjunction was the Star of Bethlehem. Which event was more astronomically spectacular — the 7 BCE triple conjunction or the 3-2 BCE Venus-Jupiter conjunction?',
       successHint: 'Your conjunction analyzer is a research tool. Historians and astronomers use exactly this approach to evaluate biblical and historical astronomical references. By quantifying rarity, duration, and brightness, you can objectively compare competing hypotheses.',
     },
     {
-      title: 'Capstone Part 3 \u2014 Navigation route optimizer',
-      concept: `The Magi traveled from Persia to Bethlehem \u2014 a journey of roughly 1,500 km across desert and mountains. Build a **navigation route optimizer** that plans the journey using celestial navigation.
+      title: 'Capstone Part 3 — Navigation route optimizer',
+      concept: `The Magi traveled from Persia to Bethlehem — a journey of roughly 1,500 km across desert and mountains. Build a **navigation route optimizer** that plans the journey using celestial navigation.
 
 The optimizer:
 1. Computes Polaris altitude for latitude checks at each waypoint
@@ -287,9 +287,9 @@ The optimizer:
 
 This combines astronomy, geography, and optimization into a single system.`,
       analogy: 'You are building an ancient GPS. Instead of satellites, you use stars. Instead of radio signals, you use sextant angles. The precision is lower (degrees instead of metres), but the principles are identical: triangulate your position using known reference points at known locations.',
-      storyConnection: 'The Magi\u2019s route likely followed established trade roads: from Babylon or Ctesiphon northwest to cross the Euphrates, through Palmyra, down to Damascus, and south through Galilee to Jerusalem and Bethlehem. At each stop, they could verify their position using Polaris for latitude and star transit timings for longitude.',
+      storyConnection: 'The Magi’s route likely followed established trade roads: from Babylon or Ctesiphon northwest to cross the Euphrates, through Palmyra, down to Damascus, and south through Galilee to Jerusalem and Bethlehem. At each stop, they could verify their position using Polaris for latitude and star transit timings for longitude.',
       checkQuestion: 'Why is longitude harder to determine from stars than latitude?',
-      checkAnswer: 'Latitude comes directly from Polaris altitude \u2014 one simple measurement. Longitude requires knowing the EXACT TIME a star crosses your meridian, then comparing with tables that give the transit time at a reference location. The time difference tells you the longitude difference (1 hour = 15\u00B0). But without an accurate clock, you cannot measure that time difference precisely. This is the famous "longitude problem" that was not fully solved until John Harrison\u2019s chronometer in 1761.',
+      checkAnswer: 'Latitude comes directly from Polaris altitude — one simple measurement. Longitude requires knowing the EXACT TIME a star crosses your meridian, then comparing with tables that give the transit time at a reference location. The time difference tells you the longitude difference (1 hour = 15°). But without an accurate clock, you cannot measure that time difference precisely. This is the famous "longitude problem" that was not fully solved until John Harrison’s chronometer in 1761.',
       codeIntro: 'Build a celestial navigation route planner.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -364,8 +364,8 @@ for w in nav.waypoints:
     ax1.annotate(w['name'], (w['lon'], w['lat']), textcoords="offset points",
                 xytext=(5, 5), fontsize=8, color='white')
 
-ax1.set_xlabel('Longitude (\u00B0E)', fontsize=12)
-ax1.set_ylabel('Latitude (\u00B0N)', fontsize=12)
+ax1.set_xlabel('Longitude (°E)', fontsize=12)
+ax1.set_ylabel('Latitude (°N)', fontsize=12)
 ax1.set_title('The Magi\\'s Route', fontsize=13)
 ax1.grid(alpha=0.3)
 ax1.set_facecolor('#1a2332')
@@ -383,7 +383,7 @@ ax2_twin.plot(range(len(segments)), polaris_alts, 'o-', color='#fbbf24', linewid
 ax2.set_xticks(range(len(segments)))
 ax2.set_xticklabels(names, rotation=45, ha='right', fontsize=8)
 ax2.set_ylabel('Segment distance (km)', fontsize=11)
-ax2_twin.set_ylabel('Polaris altitude (\u00B0)', fontsize=11, color='#fbbf24')
+ax2_twin.set_ylabel('Polaris altitude (°)', fontsize=11, color='#fbbf24')
 ax2.set_title('Route Segments', fontsize=13)
 ax2.legend(loc='upper left', fontsize=9)
 ax2_twin.legend(loc='upper right', fontsize=9)
@@ -399,22 +399,22 @@ print(f"Route Summary:")
 print(f"{'Segment':<30s} {'Dist (km)':>10s} {'Days':>8s} {'Polaris':>8s}")
 print("-" * 60)
 for s in segments:
-    print(f"  {s['from']} \u2192 {s['to']:<18s} {s['distance_km']:8.1f}  {s['days']:7.1f}  {s['polaris_end']:6.1f}\u00B0")
+    print(f"  {s['from']} → {s['to']:<18s} {s['distance_km']:8.1f}  {s['days']:7.1f}  {s['polaris_end']:6.1f}°")
 print("-" * 60)
 print(f"  {'TOTAL':<28s} {total_dist:8.1f}  {total_days:7.1f}")
 print(f"\\nEstimated journey: {total_days:.0f} days ({total_days/7:.1f} weeks)")`,
       challenge: 'Add a "night visibility" calculation: for each waypoint, compute how many hours Jupiter-Saturn is above the horizon during the night. The Magi would time their journey to arrive when the conjunction was best visible.',
-      successHint: 'You have combined celestial navigation, geography, and route planning into a single tool. This is computational geography \u2014 the same principles used in modern GPS routing, but using the sky as the reference frame.',
+      successHint: 'You have combined celestial navigation, geography, and route planning into a single tool. This is computational geography — the same principles used in modern GPS routing, but using the sky as the reference frame.',
     },
     {
-      title: 'Capstone Part 4 \u2014 Hypothesis evaluator and report generator',
+      title: 'Capstone Part 4 — Hypothesis evaluator and report generator',
       concept: `The final piece: build a **hypothesis evaluator** that systematically compares the leading candidates for the Star of Bethlehem and generates a scientific report.
 
 Hypotheses to evaluate:
 1. **Jupiter-Saturn triple conjunction** (7 BCE)
 2. **Jupiter-Venus conjunction** (3-2 BCE)
 3. **Nova in Aquila** (5 BCE, recorded in Chinese records)
-4. **Halley\u2019s Comet** (12 BCE)
+4. **Halley’s Comet** (12 BCE)
 5. **Jupiter occultation by Moon** (6 BCE)
 
 For each hypothesis, the evaluator scores:
@@ -424,9 +424,9 @@ For each hypothesis, the evaluator scores:
 - **Duration**: did it last long enough for a months-long journey?
 - **Significance**: would Babylonian astronomers recognize its meaning?`,
       analogy: 'You are a scientific jury evaluating evidence for competing theories. Each theory (hypothesis) is scored on multiple criteria. No single piece of evidence is conclusive, but the weight of evidence across all criteria points toward the most likely explanation. This is how science works: systematic comparison of hypotheses against data.',
-      storyConnection: 'For 2,000 years, people have wondered what the Star of Bethlehem was. Theologians, historians, and astronomers have proposed dozens of explanations. Your evaluator does what a good scientist does: lay out the criteria, score each hypothesis objectively, and present the evidence without bias. The answer is not certain \u2014 but some hypotheses are far stronger than others.',
-      checkQuestion: 'Why is the year of Jesus\u2019s birth uncertain, and how does this affect the Star of Bethlehem analysis?',
-      checkAnswer: 'King Herod died in 4 BCE (established from Josephus\u2019s histories and an eclipse record). Since the Gospels say Jesus was born during Herod\u2019s reign, the birth must have been 4 BCE or earlier \u2014 not 1 CE as the calendar assumes (Dionysius Exiguus made an error in the 6th century). This pushes the "Star" to 7-4 BCE, which is why the 7 BCE conjunction and 5 BCE nova are leading candidates.',
+      storyConnection: 'For 2,000 years, people have wondered what the Star of Bethlehem was. Theologians, historians, and astronomers have proposed dozens of explanations. Your evaluator does what a good scientist does: lay out the criteria, score each hypothesis objectively, and present the evidence without bias. The answer is not certain — but some hypotheses are far stronger than others.',
+      checkQuestion: 'Why is the year of Jesus’s birth uncertain, and how does this affect the Star of Bethlehem analysis?',
+      checkAnswer: 'King Herod died in 4 BCE (established from Josephus’s histories and an eclipse record). Since the Gospels say Jesus was born during Herod’s reign, the birth must have been 4 BCE or earlier — not 1 CE as the calendar assumes (Dionysius Exiguus made an error in the 6th century). This pushes the "Star" to 7-4 BCE, which is why the 7 BCE conjunction and 5 BCE nova are leading candidates.',
       codeIntro: 'Build a systematic hypothesis evaluator with scoring and visualization.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -546,17 +546,17 @@ for rank, (name, h) in enumerate(sorted_hyp, 1):
     print(f"    Year: {h['year']} BCE")
     print(f"    {h['description']}")
     for criterion, score in zip(ev.criteria, h['scores']):
-        bar = '\u2588' * score + '\u2591' * (10 - score)
+        bar = '█' * score + '░' * (10 - score)
         print(f"    {criterion.replace(chr(10), ' '):20s} [{bar}] {score}/10")`,
-      challenge: 'Add your own hypothesis \u2014 a supernova, a bolide (bright meteor), or a combination of events. Score it honestly against the criteria. Can any single natural event explain ALL features of the Gospel account?',
+      challenge: 'Add your own hypothesis — a supernova, a bolide (bright meteor), or a combination of events. Score it honestly against the criteria. Can any single natural event explain ALL features of the Gospel account?',
       successHint: 'You have completed the capstone project. Starting from a story about wise men following a star, you built: a magnitude calculator, a conjunction simulator, a celestial navigator, a Kepler equation solver, an ephemeris engine, a perturbation simulator, a planetarium renderer, and a hypothesis evaluator. That is a complete journey from ancient wonder to modern computational astronomy.',
     },
     {
-      title: 'Capstone Part 5 \u2014 Interactive sky simulator',
+      title: 'Capstone Part 5 — Interactive sky simulator',
       concept: `The final exercise: build an **interactive sky simulator** that renders the night sky for any date, time, and location. This combines every skill from all four levels.
 
 The simulator:
-1. Computes planetary positions using Kepler\u2019s equation
+1. Computes planetary positions using Kepler’s equation
 2. Transforms to horizontal coordinates (altitude-azimuth)
 3. Adds a background star field
 4. Labels constellations and planets
@@ -567,7 +567,7 @@ Run it for Bethlehem, May 7 BCE, and see the sky the Magi saw.`,
       analogy: 'You are building a time machine for the night sky. Set the dial to any date in history, any place on Earth, and see the sky exactly as it appeared. Every planetarium show, every historical astronomical reconstruction, every "what did the sky look like when..." question is answered by this kind of simulation.',
       storyConnection: 'This is the culmination: you can now reconstruct the sky the Magi saw. Jupiter and Saturn blazing together in the east after sunset. Polaris marking their latitude. The crescent Moon perhaps nearby. Orion rising in the southeast. The entire dome of stars that guided three travelers on a 1,500 km journey to find a child in a manger.',
       checkQuestion: 'What aspects of the ancient sky would be different from today, beyond precession?',
-      checkAnswer: 'Atmospheric conditions: less light pollution meant far more visible stars (magnitude 6+ everywhere). Proper motion: some fast-moving stars (like Barnard\u2019s Star at 10 arcsec/year) have moved noticeably in 2,000 years, but most bright stars have barely shifted. Supernovae: there may have been nebulae visible then that have since faded. The Milky Way would have been a stunning band across the entire sky every clear night.',
+      checkAnswer: 'Atmospheric conditions: less light pollution meant far more visible stars (magnitude 6+ everywhere). Proper motion: some fast-moving stars (like Barnard’s Star at 10 arcsec/year) have moved noticeably in 2,000 years, but most bright stars have barely shifted. Supernovae: there may have been nebulae visible then that have since faded. The Milky Way would have been a stunning band across the entire sky every clear night.',
       codeIntro: 'Build an all-sky dome view for any date and location.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -608,7 +608,7 @@ stars_cat = [
 
 # Settings
 lat, lon = 31.7, 35.2  # Bethlehem
-lst = 22.0  # Local sidereal time (hours) \u2014 evening view
+lst = 22.0  # Local sidereal time (hours) — evening view
 
 fig, ax = plt.subplots(figsize=(10, 10), subplot_kw={'projection': 'polar'}, facecolor='#0a0e1a')
 ax.set_facecolor('#0a0e1a')
@@ -657,7 +657,7 @@ for name, a, e, P, L0, w, color, size in planets_data:
 # Horizon and labels
 ax.set_ylim(0, 90)
 ax.set_yticks([0, 30, 60, 90])
-ax.set_yticklabels(['90\u00B0', '60\u00B0', '30\u00B0', 'Horizon'], fontsize=8, color='#64748b')
+ax.set_yticklabels(['90°', '60°', '30°', 'Horizon'], fontsize=8, color='#64748b')
 ax.set_theta_zero_location('N')
 ax.set_theta_direction(-1)
 ax.set_xticks(np.radians([0, 90, 180, 270]))
@@ -670,14 +670,14 @@ plt.show()
 
 print("This is approximately what the Magi saw:")
 print("  Jupiter and Saturn close together in the east")
-print("  Polaris at 32\u00B0 above the northern horizon")
+print("  Polaris at 32° above the northern horizon")
 print("  The Milky Way arcing overhead")
-print("  No light pollution \u2014 thousands of stars visible")
+print("  No light pollution — thousands of stars visible")
 print()
-print("From ancient observation to modern simulation \u2014")
+print("From ancient observation to modern simulation —")
 print("the science of the stars bridges 2,000 years.")`,
       challenge: 'Run the simulation for your own location tonight. Compare the number of visible stars (magnitude < 6) with and without light pollution (magnitude limit 3). How much of the sky have modern city dwellers lost?',
-      successHint: 'You have built a complete sky simulator from scratch. This capstone project combined every concept: magnitude scales, Kepler\u2019s laws, coordinate transforms, orbital mechanics, celestial navigation, and data visualization. From a single story about wise men following a star, you learned the foundations of observational and computational astronomy.',
+      successHint: 'You have built a complete sky simulator from scratch. This capstone project combined every concept: magnitude scales, Kepler’s laws, coordinate transforms, orbital mechanics, celestial navigation, and data visualization. From a single story about wise men following a star, you learned the foundations of observational and computational astronomy.',
     },
   ];
 
@@ -685,7 +685,7 @@ print("the science of the stars bridges 2,000 years.")`,
     <div>
       <div className="flex items-center gap-3 mb-6">
         <div className="flex items-center gap-2 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 px-4 py-2 rounded-full text-sm font-semibold">
-          <Cpu className="w-4 h-4" /> Level 4: Capstone \u2014 Planetarium Engine
+          <Cpu className="w-4 h-4" /> Level 4: Capstone — Planetarium Engine
         </div>
         <span className="text-sm text-gray-500 dark:text-gray-400">Build a complete astronomical simulation system</span>
       </div>

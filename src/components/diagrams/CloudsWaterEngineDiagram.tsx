@@ -79,14 +79,14 @@ export default function CloudsWaterEngineDiagram() {
         <path d="M630,320 Q600,350 560,370 Q520,385 480,395" fill="none" stroke="#38bdf8" strokeWidth="3" strokeLinecap="round" />
         <text x="550" y="365" fontSize="10" fill="#7dd3fc" fontWeight="600">River</text>
 
-        {/* Step 1: Evaporation \u2014 rising arrows from ocean */}
+        {/* Step 1: Evaporation — rising arrows from ocean */}
         <path d="M200,390 Q190,330 180,260" fill="none" stroke="#fbbf24" strokeWidth="2.5" strokeDasharray="6 4" markerEnd="url(#cwe-arrow-y)" />
         <path d="M280,390 Q270,320 260,260" fill="none" stroke="#fbbf24" strokeWidth="2" strokeDasharray="6 4" markerEnd="url(#cwe-arrow-y)" />
 
         {/* Label 1 */}
         <rect x="130" y="310" width="110" height="34" rx="4" fill="#0f172a" fillOpacity="0.8" />
         <text x="185" y="326" textAnchor="middle" fontSize="12" fontWeight="700" fill="#fbbf24">
-          {"\u2460 Evaporation"}
+          {"① Evaporation"}
         </text>
         <text x="185" y="340" textAnchor="middle" fontSize="10" fill="#fde68a" fillOpacity="0.8">
           Sun heats water
@@ -103,10 +103,10 @@ export default function CloudsWaterEngineDiagram() {
         {/* Label 2: Condensation */}
         <rect x="260" y="75" width="180" height="34" rx="4" fill="#0f172a" fillOpacity="0.8" />
         <text x="350" y="91" textAnchor="middle" fontSize="12" fontWeight="700" fill="#c4b5fd">
-          {"\u2461 Condensation"}
+          {"② Condensation"}
         </text>
         <text x="350" y="105" textAnchor="middle" fontSize="10" fill="#ddd6fe" fillOpacity="0.8">
-          Vapour \u2192 cloud droplets
+          Vapour → cloud droplets
         </text>
 
         {/* Wind arrow pushing cloud toward mountain */}
@@ -123,7 +123,7 @@ export default function CloudsWaterEngineDiagram() {
 
         <rect x="410" y="185" width="120" height="34" rx="4" fill="#0f172a" fillOpacity="0.8" />
         <text x="470" y="201" textAnchor="middle" fontSize="12" fontWeight="700" fill="#60a5fa">
-          {"\u2462 Precipitation"}
+          {"③ Precipitation"}
         </text>
         <text x="470" y="215" textAnchor="middle" fontSize="10" fill="#93c5fd" fillOpacity="0.8">
           Rain, snow, hail
@@ -134,10 +134,10 @@ export default function CloudsWaterEngineDiagram() {
 
         <rect x="425" y="290" width="130" height="34" rx="4" fill="#0f172a" fillOpacity="0.8" />
         <text x="490" y="306" textAnchor="middle" fontSize="12" fontWeight="700" fill="#4ade80">
-          {"\u2463 Collection"}
+          {"④ Collection"}
         </text>
         <text x="490" y="320" textAnchor="middle" fontSize="10" fill="#86efac" fillOpacity="0.8">
-          Rivers \u2192 back to ocean
+          Rivers → back to ocean
         </text>
 
         {/* Cycle arrow connecting ocean back to evaporation */}
@@ -157,7 +157,7 @@ export default function CloudsWaterEngineDiagram() {
 
         {/* Bottom: repeat label */}
         <text x={w / 2} y={h - 10} textAnchor="middle" fontSize="11" fill="#94a3b8" fontWeight="600">
-          The cycle never stops \u2014 the same water has been cycling for billions of years
+          The cycle never stops — the same water has been cycling for billions of years
         </text>
       </svg>
     </div>

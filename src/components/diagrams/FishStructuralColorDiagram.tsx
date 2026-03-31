@@ -28,7 +28,7 @@ export default function FishStructuralColorDiagram() {
         <text x="130" y="134" textAnchor="middle" className="fill-white" fontSize="10" fontWeight="bold">pigment</text>
 
         {/* Absorbed (X marks) */}
-        <text x="80" y="148" className="fill-gray-400" fontSize="12">\u2717</text>
+        <text x="80" y="148" className="fill-gray-400" fontSize="12">✗</text>
         <text x="100" y="142" className="fill-gray-400" fontSize="10">absorbed</text>
 
         {/* Reflected red */}
@@ -37,14 +37,14 @@ export default function FishStructuralColorDiagram() {
 
         {/* Fading section */}
         <rect x="40" y="175" width="220" height="70" rx="6" className="fill-amber-50 dark:fill-amber-900/20" />
-        <text x="150" y="195" textAnchor="middle" className="fill-amber-700 dark:fill-amber-400" fontSize="10" fontWeight="bold">\u2600 UV light breaks chemical bonds</text>
+        <text x="150" y="195" textAnchor="middle" className="fill-amber-700 dark:fill-amber-400" fontSize="10" fontWeight="bold">☀ UV light breaks chemical bonds</text>
         <text x="150" y="212" textAnchor="middle" className="fill-gray-600 dark:fill-gray-300" fontSize="10">Pigment molecules degrade over time</text>
 
         {/* Fading illustration */}
         <rect x="60" y="222" width="30" height="15" rx="2" className="fill-red-500" />
-        <text x="95" y="233" className="fill-gray-500 dark:fill-gray-400" fontSize="10">\u2192</text>
+        <text x="95" y="233" className="fill-gray-500 dark:fill-gray-400" fontSize="10">→</text>
         <rect x="105" y="222" width="30" height="15" rx="2" className="fill-red-300" />
-        <text x="140" y="233" className="fill-gray-500 dark:fill-gray-400" fontSize="10">\u2192</text>
+        <text x="140" y="233" className="fill-gray-500 dark:fill-gray-400" fontSize="10">→</text>
         <rect x="150" y="222" width="30" height="15" rx="2" className="fill-red-100 dark:fill-red-900/30" />
         <text x="195" y="233" className="fill-gray-500 dark:fill-gray-400" fontSize="10">fades!</text>
 
@@ -70,14 +70,14 @@ export default function FishStructuralColorDiagram() {
 
         {/* No fading section */}
         <rect x="340" y="175" width="220" height="70" rx="6" className="fill-green-50 dark:fill-green-900/20" />
-        <text x="450" y="195" textAnchor="middle" className="fill-green-700 dark:fill-green-400" fontSize="10" fontWeight="bold">\u2600 UV cannot break structure</text>
+        <text x="450" y="195" textAnchor="middle" className="fill-green-700 dark:fill-green-400" fontSize="10" fontWeight="bold">☀ UV cannot break structure</text>
         <text x="450" y="212" textAnchor="middle" className="fill-gray-600 dark:fill-gray-300" fontSize="10">Physical layers stay intact</text>
 
         {/* No fading */}
         <rect x="370" y="222" width="30" height="15" rx="2" className="fill-blue-500" />
-        <text x="405" y="233" className="fill-gray-500 dark:fill-gray-400" fontSize="10">\u2192</text>
+        <text x="405" y="233" className="fill-gray-500 dark:fill-gray-400" fontSize="10">→</text>
         <rect x="415" y="222" width="30" height="15" rx="2" className="fill-blue-500" />
-        <text x="450" y="233" className="fill-gray-500 dark:fill-gray-400" fontSize="10">\u2192</text>
+        <text x="450" y="233" className="fill-gray-500 dark:fill-gray-400" fontSize="10">→</text>
         <rect x="460" y="222" width="30" height="15" rx="2" className="fill-blue-500" />
         <text x="505" y="233" className="fill-green-600 dark:fill-green-400" fontSize="10" fontWeight="bold">never fades!</text>
 

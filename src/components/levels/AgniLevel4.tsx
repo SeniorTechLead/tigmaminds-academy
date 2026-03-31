@@ -29,20 +29,20 @@ export default function AgniLevel4() {
 
   const miniLessons = [
     {
-      title: 'Chemical kinetics \u2014 Arrhenius equation and reaction rates',
+      title: 'Chemical kinetics — Arrhenius equation and reaction rates',
       concept: `The rate of a combustion reaction depends exponentially on temperature. The **Arrhenius equation** quantifies this:
 
-**k = A \u00d7 e^(-E_a / RT)**
+**k = A × e^(-E_a / RT)**
 
-Where k = rate constant, A = pre-exponential factor, E_a = activation energy, R = gas constant (8.314 J/mol\u00b7K), and T = temperature in Kelvin.
+Where k = rate constant, A = pre-exponential factor, E_a = activation energy, R = gas constant (8.314 J/mol·K), and T = temperature in Kelvin.
 
-The exponential term e^(-E_a/RT) is key. At low T, E_a/RT is large, so e^(-large) \u2248 0 (slow reaction). At high T, E_a/RT is small, so e^(-small) \u2248 1 (fast reaction). A typical combustion reaction with E_a = 150 kJ/mol speeds up by a factor of ~10 for every 100\u00b0C increase.
+The exponential term e^(-E_a/RT) is key. At low T, E_a/RT is large, so e^(-large) ≈ 0 (slow reaction). At high T, E_a/RT is small, so e^(-small) ≈ 1 (fast reaction). A typical combustion reaction with E_a = 150 kJ/mol speeds up by a factor of ~10 for every 100°C increase.
 
-This explains why a campfire builds slowly but once fully burning is hard to extinguish \u2014 the heat of the flame accelerates the reaction, which produces more heat, which accelerates it further. This positive feedback loop is called **thermal runaway**.`,
-      analogy: 'The Arrhenius equation describes a gatekeeper with a variable barrier. At low temperature, few molecules have enough energy to jump the barrier \u2014 the gatekeeper blocks almost everyone. At high temperature, most molecules fly over easily. The exponential dependence means the transition from "nearly blocked" to "wide open" is sharp.',
-      storyConnection: 'The arani sticks of Vedic fire-starting concentrate mechanical energy into a tiny contact point, raising the local temperature past the Arrhenius threshold. Once one spot ignites (thermal runaway begins), the reaction spreads exponentially. The mythological image of Agni "erupting" from the wood is kinetically accurate \u2014 the transition from no reaction to vigorous combustion is abrupt.',
+This explains why a campfire builds slowly but once fully burning is hard to extinguish — the heat of the flame accelerates the reaction, which produces more heat, which accelerates it further. This positive feedback loop is called **thermal runaway**.`,
+      analogy: 'The Arrhenius equation describes a gatekeeper with a variable barrier. At low temperature, few molecules have enough energy to jump the barrier — the gatekeeper blocks almost everyone. At high temperature, most molecules fly over easily. The exponential dependence means the transition from "nearly blocked" to "wide open" is sharp.',
+      storyConnection: 'The arani sticks of Vedic fire-starting concentrate mechanical energy into a tiny contact point, raising the local temperature past the Arrhenius threshold. Once one spot ignites (thermal runaway begins), the reaction spreads exponentially. The mythological image of Agni "erupting" from the wood is kinetically accurate — the transition from no reaction to vigorous combustion is abrupt.',
       checkQuestion: 'Why does blowing on a campfire make it burn faster, even though the air is cool?',
-      checkAnswer: 'Blowing increases the oxygen concentration at the flame surface. The Arrhenius equation shows rate depends on both temperature AND concentration. The rate law for combustion is: rate = k[fuel][O\u2082]. Blowing increases [O\u2082], directly increasing the reaction rate. It also removes the layer of CO\u2082/H\u2082O products that blanket the fuel surface, allowing fresh oxygen to reach the fuel. The slight cooling from the breeze is overwhelmed by the concentration effect.',
+      checkAnswer: 'Blowing increases the oxygen concentration at the flame surface. The Arrhenius equation shows rate depends on both temperature AND concentration. The rate law for combustion is: rate = k[fuel][O₂]. Blowing increases [O₂], directly increasing the reaction rate. It also removes the layer of CO₂/H₂O products that blanket the fuel surface, allowing fresh oxygen to reach the fuel. The slight cooling from the breeze is overwhelmed by the concentration effect.',
       codeIntro: 'Plot the Arrhenius equation and show how reaction rate depends on temperature.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -52,10 +52,10 @@ R = 8.314  # J/(mol*K)
 
 # Different activation energies
 reactions = [
-    {"name": "H\u2082 + O\u2082 (explosive)", "Ea": 75000, "A": 1e11},
-    {"name": "CH\u2084 + O\u2082 (methane)", "Ea": 150000, "A": 1e13},
-    {"name": "Wood + O\u2082 (slow burn)", "Ea": 200000, "A": 1e14},
-    {"name": "Fe + O\u2082 (rusting)", "Ea": 270000, "A": 1e15},
+    {"name": "H₂ + O₂ (explosive)", "Ea": 75000, "A": 1e11},
+    {"name": "CH₄ + O₂ (methane)", "Ea": 150000, "A": 1e13},
+    {"name": "Wood + O₂ (slow burn)", "Ea": 200000, "A": 1e14},
+    {"name": "Fe + O₂ (rusting)", "Ea": 270000, "A": 1e15},
 ]
 
 T = np.linspace(300, 1500, 500)  # Kelvin
@@ -66,7 +66,7 @@ for rxn in reactions:
     k_norm = k / k.max()  # normalise for comparison
     plt.plot(T - 273.15, k_norm, linewidth=2.5, label=f"{rxn['name']} (Ea={rxn['Ea']/1000:.0f} kJ)")
 
-plt.xlabel('Temperature (\u00b0C)', fontsize=12)
+plt.xlabel('Temperature (°C)', fontsize=12)
 plt.ylabel('Relative reaction rate', fontsize=12)
 plt.title('Arrhenius Equation: Reaction Rate vs Temperature', fontsize=14)
 plt.legend(fontsize=9)
@@ -80,7 +80,7 @@ for rxn in reactions:
     k = rxn["A"] * np.exp(-rxn["Ea"] / (R * T))
     plt.plot(1000/T, np.log(k), linewidth=2, label=rxn["name"])
 
-plt.xlabel('1000/T (K\u207b\u00b9)', fontsize=12)
+plt.xlabel('1000/T (K⁻¹)', fontsize=12)
 plt.ylabel('ln(k)', fontsize=12)
 plt.title('Arrhenius Plot: ln(k) vs 1/T (linear = Arrhenius behaviour)', fontsize=14)
 plt.legend(fontsize=9)
@@ -91,24 +91,24 @@ plt.show()
 print("Lower Ea = reaction starts at lower temperature")
 print("The Arrhenius plot is linear: slope = -Ea/R")
 print("This is how chemists measure activation energies experimentally")`,
-      challenge: 'A reaction\u2019s rate doubles when temperature increases from 300 K to 310 K. Use the Arrhenius equation to find the activation energy. Hint: k\u2082/k\u2081 = exp((E_a/R)(1/T\u2081 - 1/T\u2082)) = 2.',
-      successHint: 'The Arrhenius equation is one of the most important in chemistry. It connects molecular energy distributions to macroscopic reaction rates. Every chemical process \u2014 from drug metabolism to steel corrosion to rocket propulsion \u2014 obeys this law.',
+      challenge: 'A reaction’s rate doubles when temperature increases from 300 K to 310 K. Use the Arrhenius equation to find the activation energy. Hint: k₂/k₁ = exp((E_a/R)(1/T₁ - 1/T₂)) = 2.',
+      successHint: 'The Arrhenius equation is one of the most important in chemistry. It connects molecular energy distributions to macroscopic reaction rates. Every chemical process — from drug metabolism to steel corrosion to rocket propulsion — obeys this law.',
     },
     {
-      title: 'Computational flame simulation \u2014 1D reaction-diffusion',
+      title: 'Computational flame simulation — 1D reaction-diffusion',
       concept: `Real flames involve the interplay of chemical reaction and heat diffusion. A simplified model uses the **reaction-diffusion equation**:
 
-**\u2202T/\u2202t = \u03b1 \u2202\u00b2T/\u2202x\u00b2 + Q \u00d7 R(T)**
+**∂T/∂t = α ∂²T/∂x² + Q × R(T)**
 
 Where the first term is heat diffusion (thermal conductivity spreading heat) and the second term is heat production from combustion (which depends on temperature through the Arrhenius equation).
 
 This creates a fascinating dynamic: the reaction produces heat, which diffuses ahead of the flame front, pre-heating fresh fuel, which then ignites. The flame propagates as a self-sustaining wave.
 
-In the code, you\u2019ll implement a simple 1D flame propagation simulation using finite differences. You will see the flame front advance through fuel as a travelling wave.`,
+In the code, you’ll implement a simple 1D flame propagation simulation using finite differences. You will see the flame front advance through fuel as a travelling wave.`,
       analogy: 'A flame front is like a line of dominoes falling. Each domino (fuel element) is knocked over by its neighbour (heat diffusion), and as it falls, it pushes the next one (reaction heat production). The "wave" of falling dominoes is the flame front. The speed depends on how fast each domino falls (reaction rate) and how far ahead it can push (thermal diffusion).',
       storyConnection: 'The spread of fire through the arranged wood in a yajna pit is a reaction-diffusion process. The priests arranged fuel in geometric patterns (agni kund designs) that controlled flame propagation. Tighter patterns with more surface area burned faster; looser patterns with air gaps burned slower. They were empirically tuning the diffusion term.',
       checkQuestion: 'Forest fires can "jump" across gaps (roads, rivers). How is this possible if fire needs direct contact?',
-      checkAnswer: 'Radiation. Intense fires radiate so much infrared energy that they can ignite fuel metres away without direct contact. At ~1,000\u00b0C, a forest fire radiates enough energy to ignite dry vegetation 20-50 metres ahead. Additionally, burning embers (firebrands) can be lofted by convection currents and carried by wind kilometres ahead of the main fire front, starting "spot fires." This is why firebreaks must be very wide to be effective against intense fires.',
+      checkAnswer: 'Radiation. Intense fires radiate so much infrared energy that they can ignite fuel metres away without direct contact. At ~1,000°C, a forest fire radiates enough energy to ignite dry vegetation 20-50 metres ahead. Additionally, burning embers (firebrands) can be lofted by convection currents and carried by wind kilometres ahead of the main fire front, starting "spot fires." This is why firebreaks must be very wide to be effective against intense fires.',
       codeIntro: 'Simulate 1D flame propagation as a reaction-diffusion wave.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -120,7 +120,7 @@ N = 200          # spatial grid points
 L = 1.0          # domain length (m)
 dx = L / N
 dt = 0.00001     # time step (s)
-alpha = 0.0002   # thermal diffusivity (m\u00b2/s)
+alpha = 0.0002   # thermal diffusivity (m²/s)
 
 T_ambient = 300  # K
 T_ignition = 600 # K (ignition threshold)
@@ -170,7 +170,7 @@ plt.text(80, T_ignition + 30, 'Ignition threshold', fontsize=9, color='lightgray
 
 plt.xlabel('Position (cm)', fontsize=12)
 plt.ylabel('Temperature (K)', fontsize=12)
-plt.title('1D Flame Propagation \u2014 Reaction-Diffusion Wave', fontsize=14)
+plt.title('1D Flame Propagation — Reaction-Diffusion Wave', fontsize=14)
 plt.legend(fontsize=10)
 plt.grid(alpha=0.2)
 plt.tight_layout()
@@ -183,19 +183,19 @@ print("The reaction then releases more heat, sustaining the wave.")`,
       successHint: 'Reaction-diffusion equations model phenomena from flame propagation to nerve impulses to animal coat patterns. The interplay between local reaction and spatial diffusion creates travelling waves, patterns, and instabilities. This is computational physics at its most elegant.',
     },
     {
-      title: 'Emission spectroscopy analysis \u2014 stellar composition',
+      title: 'Emission spectroscopy analysis — stellar composition',
       concept: `Astronomers determine what stars are made of using the same principle as flame tests: each element absorbs or emits light at specific wavelengths. In a star, the hot interior emits a continuous blackbody spectrum, but cooler outer gases absorb specific wavelengths, creating dark **absorption lines** (Fraunhofer lines).
 
-The Sun\u2019s spectrum shows absorption lines for hydrogen, helium, sodium, calcium, iron, magnesium, and dozens of other elements. By measuring the depth and width of each line, astronomers can determine:
+The Sun’s spectrum shows absorption lines for hydrogen, helium, sodium, calcium, iron, magnesium, and dozens of other elements. By measuring the depth and width of each line, astronomers can determine:
 - **Which** elements are present (wavelength position)
 - **How much** of each element (line depth/area)
 - **How hot** the gas is (line width from thermal Doppler broadening)
 
-In the code, you\u2019ll simulate a stellar spectrum with absorption lines and build an analysis pipeline.`,
-      analogy: 'A stellar spectrum is like a barcode on a product. The continuous blackbody radiation is the "white background," and the absorption lines are the "dark bars." Each element contributes bars at specific positions. Reading the barcode tells you the star\u2019s chemical recipe.',
-      storyConnection: 'Agni\u2019s celestial form \u2014 the Sun \u2014 reveals its composition through spectroscopy. When Joseph Fraunhofer observed dark lines in sunlight in 1814, he was reading Agni\u2019s chemical fingerprint. Helium was discovered in the Sun\u2019s spectrum (1868) before it was found on Earth \u2014 named after Helios, the Greek sun god. Light from the cosmic Agni revealed an element unknown on Earth.',
+In the code, you’ll simulate a stellar spectrum with absorption lines and build an analysis pipeline.`,
+      analogy: 'A stellar spectrum is like a barcode on a product. The continuous blackbody radiation is the "white background," and the absorption lines are the "dark bars." Each element contributes bars at specific positions. Reading the barcode tells you the star’s chemical recipe.',
+      storyConnection: 'Agni’s celestial form — the Sun — reveals its composition through spectroscopy. When Joseph Fraunhofer observed dark lines in sunlight in 1814, he was reading Agni’s chemical fingerprint. Helium was discovered in the Sun’s spectrum (1868) before it was found on Earth — named after Helios, the Greek sun god. Light from the cosmic Agni revealed an element unknown on Earth.',
       checkQuestion: 'The Doppler effect shifts spectral lines. If a star is moving toward us, are its lines blue-shifted or red-shifted? How do astronomers use this?',
-      checkAnswer: 'Moving toward us = blue-shifted (shorter wavelengths). Moving away = red-shifted (longer wavelengths). Astronomers measure the shift of known spectral lines (e.g., hydrogen\u2019s Balmer series at known wavelengths) and calculate the star\u2019s radial velocity using v/c = \u0394\u03bb/\u03bb. This is how we discovered that the universe is expanding (Edwin Hubble, 1929): distant galaxies show redshifted spectra, meaning they are moving away from us.',
+      checkAnswer: 'Moving toward us = blue-shifted (shorter wavelengths). Moving away = red-shifted (longer wavelengths). Astronomers measure the shift of known spectral lines (e.g., hydrogen’s Balmer series at known wavelengths) and calculate the star’s radial velocity using v/c = Δλ/λ. This is how we discovered that the universe is expanding (Edwin Hubble, 1929): distant galaxies show redshifted spectra, meaning they are moving away from us.',
       codeIntro: 'Simulate a stellar spectrum with absorption lines and analyse its composition.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -217,9 +217,9 @@ spectrum = spectrum / spectrum.max()  # normalise
 
 # Absorption lines (element, wavelength, depth, width)
 absorption_lines = [
-    ("H\u03b1", 656.3, 0.4, 0.8),
-    ("H\u03b2", 486.1, 0.3, 0.6),
-    ("H\u03b3", 434.0, 0.2, 0.5),
+    ("Hα", 656.3, 0.4, 0.8),
+    ("Hβ", 486.1, 0.3, 0.6),
+    ("Hγ", 434.0, 0.2, 0.5),
     ("Na D1", 589.0, 0.5, 0.4),
     ("Na D2", 589.6, 0.45, 0.4),
     ("Ca K", 393.4, 0.6, 1.0),
@@ -253,7 +253,7 @@ ax1.grid(alpha=0.1)
 # Element abundance estimation (based on line depths)
 elements = {}
 for name, center, depth, width in absorption_lines:
-    elem = name.split()[0] if ' ' in name else name.rstrip('0123456789\u03b1\u03b2\u03b3')
+    elem = name.split()[0] if ' ' in name else name.rstrip('0123456789αβγ')
     if elem not in elements:
         elements[elem] = 0
     elements[elem] += depth  # crude abundance proxy
@@ -269,24 +269,24 @@ ax2.grid(alpha=0.2)
 plt.tight_layout()
 plt.show()
 
-print("Calcium and Hydrogen show the strongest absorption \u2192 most abundant")
+print("Calcium and Hydrogen show the strongest absorption → most abundant")
 print("This is how we know the Sun is ~73% hydrogen, ~25% helium,")
-print("and ~2% heavier elements \u2014 all from reading its light.")`,
-      challenge: 'Add a Doppler shift to simulate a star moving away at 100 km/s. Shift all absorption line centres by \u0394\u03bb = \u03bb \u00d7 v/c. How much do the lines shift? Can you build a velocity-measuring function?',
+print("and ~2% heavier elements — all from reading its light.")`,
+      challenge: 'Add a Doppler shift to simulate a star moving away at 100 km/s. Shift all absorption line centres by Δλ = λ × v/c. How much do the lines shift? Can you build a velocity-measuring function?',
       successHint: 'Spectral analysis is how we know the composition and motion of every star, galaxy, and nebula in the universe. The same electron transitions that colour a campfire flame reveal the chemistry of objects billions of light-years away.',
     },
     {
-      title: 'Detonation vs deflagration \u2014 flame speed regimes',
+      title: 'Detonation vs deflagration — flame speed regimes',
       concept: `There are two fundamentally different modes of combustion propagation:
 
 **Deflagration** (normal burning): The flame front travels at subsonic speeds (0.01-10 m/s). Heat diffuses ahead of the front, pre-heating fuel. This is what happens in candles, campfires, and car engines.
 
 **Detonation**: The flame front travels at supersonic speeds (1,500-3,000 m/s). A shock wave compresses and heats the fuel ahead of the reaction zone, creating an extremely fast, self-sustaining wave. This is what happens in explosives and certain engine knock events.
 
-The transition from deflagration to detonation (DDT) is a critical phenomenon in safety engineering. It explains why grain dust explosions in silos, gas leaks in mines, and vapour cloud explosions can be so devastating \u2014 they start as normal burns but can transition to detonation.
+The transition from deflagration to detonation (DDT) is a critical phenomenon in safety engineering. It explains why grain dust explosions in silos, gas leaks in mines, and vapour cloud explosions can be so devastating — they start as normal burns but can transition to detonation.
 
-In the code, you\u2019ll compare deflagration and detonation propagation speeds and pressures.`,
-      analogy: 'Deflagration is like whispering a message down a line of people \u2014 each person turns to the next and speaks quietly (diffusion-driven). Detonation is like shouting so loud that the sound wave itself knocks each person over before they hear the message (shock-driven). Both transmit information, but the mechanism and speed are completely different.',
+In the code, you’ll compare deflagration and detonation propagation speeds and pressures.`,
+      analogy: 'Deflagration is like whispering a message down a line of people — each person turns to the next and speaks quietly (diffusion-driven). Detonation is like shouting so loud that the sound wave itself knocks each person over before they hear the message (shock-driven). Both transmit information, but the mechanism and speed are completely different.',
       storyConnection: 'The Vedic distinction between the steady sacrificial fire (controlled deflagration) and lightning (natural detonation) maps directly to this physics. Lightning is a detonation-like process: the electrical discharge superheats a narrow air channel to ~30,000 K in microseconds, creating a shock wave (thunder). The slow yajna and the instant lightning are both Agni, but in different propagation regimes.',
       checkQuestion: 'Why is a bullet fired from a gun a deflagration (not detonation), but dynamite is a detonation?',
       checkAnswer: 'Gunpowder in a cartridge burns as a deflagration (subsonic flame front, ~400 m/s). The expanding gas pushes the bullet, but the reaction front does not outrun sound. Dynamite contains nitroglycerin, which detonates (supersonic reaction front, ~7,700 m/s). The shock wave shatters rather than pushes. The key difference is whether the reaction front is subsonic (deflagration, pressure builds gradually) or supersonic (detonation, instantaneous pressure spike). This is why dynamite is shattering and gunpowder is propelling.',
@@ -300,7 +300,7 @@ substances = [
     {"name": "Methane-air", "speed": 0.4, "peak_P": 8, "mode": "Deflagration"},
     {"name": "Hydrogen-air", "speed": 3.5, "peak_P": 8, "mode": "Deflagration"},
     {"name": "Grain dust", "speed": 10, "peak_P": 10, "mode": "Deflagration/DDT"},
-    {"name": "H\u2082 detonation", "speed": 1980, "peak_P": 20, "mode": "Detonation"},
+    {"name": "H₂ detonation", "speed": 1980, "peak_P": 20, "mode": "Detonation"},
     {"name": "TNT", "speed": 6900, "peak_P": 210, "mode": "Detonation"},
     {"name": "C-4 explosive", "speed": 8050, "peak_P": 340, "mode": "Detonation"},
 ]
@@ -319,13 +319,13 @@ ax1.barh(names, speeds, color=colors)
 ax1.set_xscale('log')
 ax1.axvline(343, color='white', linewidth=1.5, linestyle='--', alpha=0.5)
 ax1.text(343, -0.5, 'Speed of\\nsound', fontsize=9, color='lightgray', ha='center')
-ax1.set_xlabel('Flame speed (m/s) \u2014 log scale', fontsize=11)
+ax1.set_xlabel('Flame speed (m/s) — log scale', fontsize=11)
 ax1.set_title('Flame Propagation Speed', fontsize=13)
 ax1.grid(alpha=0.2)
 
 ax2.barh(names, pressures, color=colors)
 ax2.set_xscale('log')
-ax2.set_xlabel('Peak pressure (atm) \u2014 log scale', fontsize=11)
+ax2.set_xlabel('Peak pressure (atm) — log scale', fontsize=11)
 ax2.set_title('Peak Pressure', fontsize=13)
 ax2.grid(alpha=0.2)
 
@@ -367,28 +367,28 @@ plt.show()
 print("Deflagration: subsonic, gradual pressure rise, heat-diffusion driven")
 print("Detonation: supersonic, sharp shock front, compression-driven")
 print("DDT (deflagration-to-detonation transition) is the critical safety concern")`,
-      challenge: 'Research the Chapman-Jouguet detonation velocity for hydrogen-air mixtures. Calculate it from: D_CJ = sqrt(\u03b3 \u00d7 R \u00d7 T_CJ / M), where \u03b3=1.2, T_CJ=2,800 K, M=0.018 kg/mol. Does your answer match the table value?',
-      successHint: 'Understanding the difference between deflagration and detonation is critical for safety engineering, mining, chemical processing, and military science. The same Agni can be a gentle cooking flame or a devastating explosion \u2014 the difference is propagation speed.',
+      challenge: 'Research the Chapman-Jouguet detonation velocity for hydrogen-air mixtures. Calculate it from: D_CJ = sqrt(γ × R × T_CJ / M), where γ=1.2, T_CJ=2,800 K, M=0.018 kg/mol. Does your answer match the table value?',
+      successHint: 'Understanding the difference between deflagration and detonation is critical for safety engineering, mining, chemical processing, and military science. The same Agni can be a gentle cooking flame or a devastating explosion — the difference is propagation speed.',
     },
     {
-      title: 'Radiative transfer \u2014 how fire heats distant objects',
+      title: 'Radiative transfer — how fire heats distant objects',
       concept: `When a fire radiates heat, not all of it reaches you. The radiation must travel through the atmosphere, where it is partially absorbed and scattered. The **Beer-Lambert law** describes this attenuation:
 
-**I(x) = I\u2080 \u00d7 e^(-\u03b1x)**
+**I(x) = I₀ × e^(-αx)**
 
-Where I\u2080 = initial intensity, \u03b1 = absorption coefficient, and x = distance.
+Where I₀ = initial intensity, α = absorption coefficient, and x = distance.
 
-Additionally, the radiation received depends on geometry: intensity falls off as **1/r\u00b2** (inverse square law). Combined with atmospheric absorption:
+Additionally, the radiation received depends on geometry: intensity falls off as **1/r²** (inverse square law). Combined with atmospheric absorption:
 
-**I(r) = I\u2080 / (4\u03c0r\u00b2) \u00d7 e^(-\u03b1r)**
+**I(r) = I₀ / (4πr²) × e^(-αr)**
 
-This explains why you feel a campfire\u2019s heat at 2 metres but not at 20. And why a forest fire can still radiate enough to ignite objects 30 metres away \u2014 the inverse square law drops intensity, but the initial power is enormous.
+This explains why you feel a campfire’s heat at 2 metres but not at 20. And why a forest fire can still radiate enough to ignite objects 30 metres away — the inverse square law drops intensity, but the initial power is enormous.
 
-In the code, you\u2019ll model radiative heat transfer from fires of different sizes and calculate safe distances.`,
-      analogy: 'Radiation from a fire is like the sound from a speaker. Close up, it is overwhelming. Walk away and it drops rapidly (inverse square law). If there are walls or trees in between, they absorb some of the sound (Beer-Lambert attenuation). The "safe distance" from a fire is where the received intensity drops below a threshold \u2014 just like finding the distance where music becomes inaudible.',
-      storyConnection: 'The Vedic fire pit\u2019s design included a surrounding wall of clay bricks. These served dual purposes: reflecting radiation back into the pit (increasing internal temperature) and shielding observers from excessive radiative heat. The priests stood close enough to feel warmth but far enough to be safe \u2014 they were empirically finding the inverse-square sweet spot.',
+In the code, you’ll model radiative heat transfer from fires of different sizes and calculate safe distances.`,
+      analogy: 'Radiation from a fire is like the sound from a speaker. Close up, it is overwhelming. Walk away and it drops rapidly (inverse square law). If there are walls or trees in between, they absorb some of the sound (Beer-Lambert attenuation). The "safe distance" from a fire is where the received intensity drops below a threshold — just like finding the distance where music becomes inaudible.',
+      storyConnection: 'The Vedic fire pit’s design included a surrounding wall of clay bricks. These served dual purposes: reflecting radiation back into the pit (increasing internal temperature) and shielding observers from excessive radiative heat. The priests stood close enough to feel warmth but far enough to be safe — they were empirically finding the inverse-square sweet spot.',
       checkQuestion: 'Firefighters sometimes deploy reflective "fire shelters" as a last resort. Why does a reflective surface help against radiative heat?',
-      checkAnswer: 'Reflective surfaces have low emissivity (\u03b5), meaning they absorb less radiation and reflect most of it away. A polished aluminium surface reflects ~95% of infrared radiation, so a fire shelter absorbs only ~5% of the incoming radiant heat. This buys critical time (minutes, not hours) in an overrun situation. The shelter also provides an insulating air gap (convection barrier). Note: it only helps against radiation; direct flame contact (convection + conduction) overwhelms the shelter quickly.',
+      checkAnswer: 'Reflective surfaces have low emissivity (ε), meaning they absorb less radiation and reflect most of it away. A polished aluminium surface reflects ~95% of infrared radiation, so a fire shelter absorbs only ~5% of the incoming radiant heat. This buys critical time (minutes, not hours) in an overrun situation. The shelter also provides an insulating air gap (convection barrier). Note: it only helps against radiation; direct flame contact (convection + conduction) overwhelms the shelter quickly.',
       codeIntro: 'Model radiative heat transfer from fires and calculate safe distances.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -408,23 +408,23 @@ fires = [
 
 r = np.linspace(0.5, 100, 1000)  # distance (m)
 
-# Pain threshold for skin: ~2 kW/m\u00b2 (can\u2019t stand more than a few seconds)
-# Ignition threshold for wood: ~12 kW/m\u00b2
+# Pain threshold for skin: ~2 kW/m² (can’t stand more than a few seconds)
+# Ignition threshold for wood: ~12 kW/m²
 
 plt.figure(figsize=(12, 6))
 for fire in fires:
     P = sigma * fire["area"] * fire["T"]**4  # total power (W)
-    I = P / (4 * np.pi * r**2) * np.exp(-alpha_air * r)  # W/m\u00b2
+    I = P / (4 * np.pi * r**2) * np.exp(-alpha_air * r)  # W/m²
     I_kW = I / 1000
     plt.plot(r, I_kW, linewidth=2.5, label=f"{fire['name']} ({P/1000:.0f} kW)")
 
 plt.axhline(2, color='#fbbf24', linewidth=1.5, linestyle='--', alpha=0.5)
-plt.text(80, 2.3, 'Pain threshold (2 kW/m\u00b2)', fontsize=9, color='#fbbf24')
+plt.text(80, 2.3, 'Pain threshold (2 kW/m²)', fontsize=9, color='#fbbf24')
 plt.axhline(12, color='#ef4444', linewidth=1.5, linestyle='--', alpha=0.5)
-plt.text(80, 12.5, 'Wood ignition (12 kW/m\u00b2)', fontsize=9, color='#ef4444')
+plt.text(80, 12.5, 'Wood ignition (12 kW/m²)', fontsize=9, color='#ef4444')
 
 plt.xlabel('Distance from fire (m)', fontsize=12)
-plt.ylabel('Received intensity (kW/m\u00b2)', fontsize=12)
+plt.ylabel('Received intensity (kW/m²)', fontsize=12)
 plt.title('Radiative Heat Flux vs Distance', fontsize=14)
 plt.yscale('log')
 plt.legend(fontsize=9)
@@ -442,12 +442,12 @@ for fire in fires:
     r_pain = np.sqrt(P / (4 * np.pi * 2000))
     r_ignite = np.sqrt(P / (4 * np.pi * 12000))
     print(f"{fire['name']:<22} {P/1000:>12.1f} {r_pain:>14.1f} {r_ignite:>18.1f}")`,
-      challenge: 'Add a "Wildfire" with T=1300 K and area=5,000 m\u00b2. At what distance would you feel pain? At what distance could it ignite a wooden building? Compare your answer to actual wildfire evacuation guidelines (typically 100-200 m minimum).',
+      challenge: 'Add a "Wildfire" with T=1300 K and area=5,000 m². At what distance would you feel pain? At what distance could it ignite a wooden building? Compare your answer to actual wildfire evacuation guidelines (typically 100-200 m minimum).',
       successHint: 'Radiative transfer calculations are essential for firefighting, building codes (how far from a fire can a wall ignite?), spacecraft thermal design, and industrial furnace engineering. The inverse-square law and Beer-Lambert attenuation govern how energy propagates through space.',
     },
     {
-      title: 'Capstone \u2014 build a complete combustion analysis tool',
-      concept: `In this final mini-lesson, you\u2019ll combine everything from all four levels into a single comprehensive combustion analysis tool:
+      title: 'Capstone — build a complete combustion analysis tool',
+      concept: `In this final mini-lesson, you’ll combine everything from all four levels into a single comprehensive combustion analysis tool:
 
 1. **Input**: A hydrocarbon formula (CxHy)
 2. **Balance** the combustion equation automatically
@@ -458,9 +458,9 @@ for fire in fires:
 
 This is a simplified version of what combustion engineers use to design engines, furnaces, and safety systems. Each step uses concepts from different levels: stoichiometry (L1), bond energies (L2), thermodynamics (L3), and radiation (L4).`,
       analogy: 'This capstone tool is like a flight simulator for combustion. A flight simulator combines aerodynamics, engine physics, weather, and control systems into one interactive model. Your combustion tool combines chemistry, thermodynamics, spectroscopy, and radiation into one analysis pipeline.',
-      storyConnection: 'Agni, in the Vedic tradition, embodies the complete cycle of fire: chemical energy in fuel (dormant Agni) \u2192 activation by friction (birth of Agni) \u2192 combustion releasing heat and light (Agni the transformer) \u2192 radiation warming distant observers (Agni the messenger). Your capstone tool models this entire journey computationally.',
+      storyConnection: 'Agni, in the Vedic tradition, embodies the complete cycle of fire: chemical energy in fuel (dormant Agni) → activation by friction (birth of Agni) → combustion releasing heat and light (Agni the transformer) → radiation warming distant observers (Agni the messenger). Your capstone tool models this entire journey computationally.',
       checkQuestion: 'If you had to add one more feature to this tool, what would be the most useful for real-world application?',
-      checkAnswer: 'Exhaust gas composition analysis. Real combustion engineers need to know not just energy output but exactly what comes out: CO\u2082, H\u2082O, CO (from incomplete combustion), NOx (from high-temperature nitrogen oxidation), and unburned hydrocarbons. This information is critical for emissions compliance, air quality regulation, and engine tuning. Adding a variable oxygen ratio (lean/rich mixture) would make the tool production-ready.',
+      checkAnswer: 'Exhaust gas composition analysis. Real combustion engineers need to know not just energy output but exactly what comes out: CO₂, H₂O, CO (from incomplete combustion), NOx (from high-temperature nitrogen oxidation), and unburned hydrocarbons. This information is critical for emissions compliance, air quality regulation, and engine tuning. Adding a variable oxygen ratio (lean/rich mixture) would make the tool production-ready.',
       codeIntro: 'Build a complete combustion analysis pipeline for any hydrocarbon fuel.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -479,7 +479,7 @@ def analyse_combustion(C, H, fuel_name="Unknown"):
     h2o_coeff = H / 2
 
     print(f"1. BALANCED EQUATION:")
-    print(f"   C{C}H{H} + {o2_coeff}O\u2082 \u2192 {co2_coeff}CO\u2082 + {h2o_coeff}H\u2082O\\n")
+    print(f"   C{C}H{H} + {o2_coeff}O₂ → {co2_coeff}CO₂ + {h2o_coeff}H₂O\\n")
 
     # 2. Bond energies (kJ/mol)
     E_CH = 413
@@ -498,7 +498,7 @@ def analyse_combustion(C, H, fuel_name="Unknown"):
     print(f"2. ENERGY (Bond Energy Estimate):")
     print(f"   Bonds broken: {broken:.0f} kJ")
     print(f"   Bonds formed: {formed:.0f} kJ")
-    print(f"   \u0394H = {dH:.0f} kJ/mol (negative = exothermic)\\n")
+    print(f"   ΔH = {dH:.0f} kJ/mol (negative = exothermic)\\n")
 
     # 3. Adiabatic flame temperature estimate
     # T_ad = T_initial + |dH| / (n_products * Cp)
@@ -507,15 +507,15 @@ def analyse_combustion(C, H, fuel_name="Unknown"):
     T_ad = 298 + abs(dH) * 1000 / (n_products * Cp_avg)
 
     print(f"3. FLAME TEMPERATURE (Adiabatic):")
-    print(f"   T_ad \u2248 {T_ad:.0f} K ({T_ad - 273:.0f}\u00b0C)\\n")
+    print(f"   T_ad ≈ {T_ad:.0f} K ({T_ad - 273:.0f}°C)\\n")
 
     # 4. Radiation
     sigma = 5.67e-8
-    A_flame = 0.1  # m\u00b2 (small burner)
+    A_flame = 0.1  # m² (small burner)
     P_rad = sigma * A_flame * T_ad**4
     r_safe = np.sqrt(P_rad / (4 * np.pi * 2000))
 
-    print(f"4. RADIATION (for {A_flame} m\u00b2 flame):")
+    print(f"4. RADIATION (for {A_flame} m² flame):")
     print(f"   Radiated power: {P_rad:.1f} W")
     print(f"   Safe distance (pain): {r_safe:.2f} m\\n")
 
@@ -541,7 +541,7 @@ names = [r["name"] for r in results]
 colors = ['#3b82f6', '#8b5cf6', '#f97316', '#ef4444']
 
 axes[0].bar(names, [abs(r["dH"]) for r in results], color=colors)
-axes[0].set_ylabel('|\u0394H| (kJ/mol)', fontsize=11)
+axes[0].set_ylabel('|ΔH| (kJ/mol)', fontsize=11)
 axes[0].set_title('Heat of Combustion', fontsize=13)
 axes[0].grid(alpha=0.2)
 
@@ -561,9 +561,9 @@ plt.show()
 
 print("\\nFrom methane to octane: larger molecules release more total energy")
 print("but flame temperatures are similar (limited by product heat capacity).")
-print("\\nYou have built a combustion engineer\u2019s toolkit \u2014 Agni, quantified.")`,
-      challenge: 'Extend the tool to handle oxygenated fuels (CxHyOz) like ethanol (C\u2082H\u2086O). The balanced equation becomes: CxHyOz + (x + y/4 - z/2)O\u2082 \u2192 xCO\u2082 + (y/2)H\u2082O. Add ethanol and methanol to the comparison.',
-      successHint: 'You have built a complete combustion analysis pipeline from first principles. This integrates stoichiometry, bond energies, thermodynamics, and radiation physics into a single tool. Real combustion engineering software (CHEMKIN, Cantera) does exactly this at much higher fidelity. The Vedic Agni \u2014 fire as transformer \u2014 is now fully quantified.',
+print("\\nYou have built a combustion engineer’s toolkit — Agni, quantified.")`,
+      challenge: 'Extend the tool to handle oxygenated fuels (CxHyOz) like ethanol (C₂H₆O). The balanced equation becomes: CxHyOz + (x + y/4 - z/2)O₂ → xCO₂ + (y/2)H₂O. Add ethanol and methanol to the comparison.',
+      successHint: 'You have built a complete combustion analysis pipeline from first principles. This integrates stoichiometry, bond energies, thermodynamics, and radiation physics into a single tool. Real combustion engineering software (CHEMKIN, Cantera) does exactly this at much higher fidelity. The Vedic Agni — fire as transformer — is now fully quantified.',
     },
   ];
 

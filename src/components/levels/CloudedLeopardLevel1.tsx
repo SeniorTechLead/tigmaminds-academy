@@ -294,7 +294,7 @@ y_range = np.max(y[core_mask]) - np.min(y[core_mask])
 area_est = np.pi * (x_range/2) * (y_range/2)  # ellipse approximation
 ax.set_xlabel('Easting (km)', color='white')
 ax.set_ylabel('Northing (km)', color='white')
-ax.set_title(f'Home Range Estimate (~{area_est:.1f} km\\u00b2)', color='white', fontsize=11)
+ax.set_title(f'Home Range Estimate (~{area_est:.1f} km\²)', color='white', fontsize=11)
 ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
 ax.set_aspect('equal')
 ax.tick_params(colors='gray')
@@ -307,7 +307,7 @@ print(f"  Total fixes: {n_fixes}")
 print(f"  Total distance: {np.sum(step_lengths):.1f} km")
 print(f"  Night movement: {np.sum(night_steps):.1f} km ({np.sum(night_steps)/np.sum(step_lengths)*100:.0f}%)")
 print(f"  Day movement: {np.sum(day_steps):.1f} km")
-print(f"  Estimated home range: ~{area_est:.1f} km\\u00b2")`,
+print(f"  Estimated home range: ~{area_est:.1f} km\²")`,
       challenge: 'Change the fix interval from 4 hours to 1 hour. How does the total tracked distance change? This demonstrates the "path length depends on measurement scale" problem in movement ecology.',
       successHint: 'GPS tracking has revolutionized wildlife biology. Before GPS, scientists relied on rare visual sightings. Now a single collar generates thousands of data points, revealing behaviors no human could observe directly.',
     },
@@ -424,7 +424,7 @@ for name, (m, hr) in cats_hr.items():
 m_line = np.linspace(1, 250, 100)
 ax.plot(m_line, 1.5 * m_line**0.9, '--', color='gray', alpha=0.5, label='Expected scaling')
 ax.set_xlabel('Body mass (kg)', color='white')
-ax.set_ylabel('Home range (km\\u00b2)', color='white')
+ax.set_ylabel('Home range (km\²)', color='white')
 ax.set_title('Home Range Scales with Body Size', color='white', fontsize=11)
 ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax.tick_params(colors='gray')
@@ -441,25 +441,25 @@ forest_needed = [n * effective_area_per_cat for n in target_pops]
 
 bars = ax.bar([str(n) for n in target_pops], forest_needed, color='#22c55e', alpha=0.7)
 ax.set_xlabel('Target population', color='white')
-ax.set_ylabel('Forest needed (km\\u00b2)', color='white')
+ax.set_ylabel('Forest needed (km\²)', color='white')
 ax.set_title('How Much Forest Do We Need?', color='white', fontsize=11)
 ax.tick_params(colors='gray')
 for bar, area in zip(bars, forest_needed):
     ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 200,
-            f'{area:,.0f} km\\u00b2', ha='center', color='white', fontsize=9)
+            f'{area:,.0f} km\²', ha='center', color='white', fontsize=9)
 
 # Reference: Manas NP = 950 km²
-ax.axhline(950, color='#ef4444', linestyle='--', label='Manas NP area (950 km\\u00b2)')
+ax.axhline(950, color='#ef4444', linestyle='--', label='Manas NP area (950 km\²)')
 ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
 plt.tight_layout()
 plt.show()
 
 print("Conservation math:")
-print(f"  Home range: ~{home_range} km\\u00b2 per clouded leopard")
+print(f"  Home range: ~{home_range} km\² per clouded leopard")
 print(f"  Viable population: 500+ individuals")
-print(f"  Forest needed: ~{500 * effective_area_per_cat:,.0f} km\\u00b2")
-print(f"  Manas NP: 950 km\\u00b2 (enough for ~{950/effective_area_per_cat:.0f} leopards)")
+print(f"  Forest needed: ~{500 * effective_area_per_cat:,.0f} km\²")
+print(f"  Manas NP: 950 km\² (enough for ~{950/effective_area_per_cat:.0f} leopards)")
 print(f"  Need multiple connected parks for a viable population")`,
       challenge: 'If deforestation reduces home range quality by 30% (animals need 30% more area), recalculate the forest needed for 500 clouded leopards. How does habitat degradation compare to habitat loss?',
       successHint: 'Home range analysis translates biology into conservation action: how much land to protect, where to place corridors, how many animals a park can support. It is the bridge between animal behavior and land use planning.',
@@ -850,7 +850,7 @@ ax.set_title('Value of a Clouded Leopard: Dead vs Alive', color='white', fontsiz
 ax.tick_params(colors='gray')
 
 for i, val in enumerate([pelt_value, annual_tourism*5, annual_tourism*10, annual_tourism*20]):
-    ax.text(i, val + 10000, f'\\u20b9{val:,}', ha='center', color='white', fontsize=9)
+    ax.text(i, val + 10000, f'\₹{val:,}', ha='center', color='white', fontsize=9)
 
 # 2. Community income sources with/without conservation
 ax = axes[1, 0]
@@ -918,8 +918,8 @@ plt.tight_layout()
 plt.show()
 
 print("Community conservation economics:")
-print(f"  Poaching value: \\u20b9{pelt_value:,} (one-time)")
-print(f"  Tourism value: \\u20b9{annual_tourism*20:,} (over 20 years)")
+print(f"  Poaching value: \₹{pelt_value:,} (one-time)")
+print(f"  Tourism value: \₹{annual_tourism*20:,} (over 20 years)")
 print(f"  Ratio: tourism is {annual_tourism*20/pelt_value:.0f}x more valuable")
 print()
 print("  Full conservation program (compensation + enclosures + tourism):")

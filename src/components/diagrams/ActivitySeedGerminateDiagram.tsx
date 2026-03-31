@@ -7,7 +7,7 @@ export default function ActivitySeedGerminateDiagram() {
         <text x="260" y="28" textAnchor="middle" className="fill-lime-400" fontSize="14" fontWeight="bold">Activity: Seed Germination Experiment</text>
 
         {/* Materials section */}
-        <text x="260" y="52" textAnchor="middle" className="fill-slate-400" fontSize="10">You need: 30 seeds (mustard, bean, or chilli) \u2022 cotton wool \u2022 3 containers \u2022 water</text>
+        <text x="260" y="52" textAnchor="middle" className="fill-slate-400" fontSize="10">You need: 30 seeds (mustard, bean, or chilli) • cotton wool • 3 containers • water</text>
 
         {/* Three experimental conditions */}
         {/* Condition A: Room temp, damp */}
@@ -26,7 +26,7 @@ export default function ActivitySeedGerminateDiagram() {
           <circle cx="55" cy="50" r="2" className="fill-blue-400" opacity="0.5" />
           <circle cx="85" cy="48" r="1.5" className="fill-blue-400" opacity="0.5" />
           <text x="75" y="100" textAnchor="middle" className="fill-emerald-300" fontSize="9">Room temp, keep moist</text>
-          <text x="75" y="112" textAnchor="middle" className="fill-emerald-400" fontSize="10" fontWeight="bold">\u2248 25\u00B0C</text>
+          <text x="75" y="112" textAnchor="middle" className="fill-emerald-400" fontSize="10" fontWeight="bold">≈ 25°C</text>
         </g>
 
         {/* Condition B: Fridge, damp */}
@@ -44,7 +44,7 @@ export default function ActivitySeedGerminateDiagram() {
           {/* Snowflake */}
           <text x="105" y="48" className="fill-blue-300" fontSize="12">❄</text>
           <text x="75" y="100" textAnchor="middle" className="fill-blue-300" fontSize="9">Refrigerator, keep moist</text>
-          <text x="75" y="112" textAnchor="middle" className="fill-blue-400" fontSize="10" fontWeight="bold">\u2248 4\u00B0C</text>
+          <text x="75" y="112" textAnchor="middle" className="fill-blue-400" fontSize="10" fontWeight="bold">≈ 4°C</text>
         </g>
 
         {/* Condition C: Room temp, dry */}
@@ -60,7 +60,7 @@ export default function ActivitySeedGerminateDiagram() {
             <circle key={i} cx={48 + (i % 5) * 14} cy={60 + Math.floor(i / 5) * 6} r="2.5" className="fill-amber-600" />
           ))}
           <text x="75" y="100" textAnchor="middle" className="fill-orange-300" fontSize="9">Room temp, no water</text>
-          <text x="75" y="112" textAnchor="middle" className="fill-orange-400" fontSize="10" fontWeight="bold">\u2248 25\u00B0C</text>
+          <text x="75" y="112" textAnchor="middle" className="fill-orange-400" fontSize="10" fontWeight="bold">≈ 25°C</text>
         </g>
 
         {/* Results table */}
@@ -93,7 +93,7 @@ export default function ActivitySeedGerminateDiagram() {
         {/* Expected pattern hint */}
         <rect x="40" y="328" width="440" height="28" rx="6" className="fill-amber-900/30" />
         <text x="260" y="340" textAnchor="middle" className="fill-amber-300" fontSize="10">Prediction: A should sprout most (water + warmth), C should sprout least (no water).</text>
-        <text x="260" y="352" textAnchor="middle" className="fill-amber-300" fontSize="10">This is why seed banks store seeds cold AND dry \u2014 to PREVENT germination.</text>
+        <text x="260" y="352" textAnchor="middle" className="fill-amber-300" fontSize="10">This is why seed banks store seeds cold AND dry — to PREVENT germination.</text>
       </svg>
     </div>
   );

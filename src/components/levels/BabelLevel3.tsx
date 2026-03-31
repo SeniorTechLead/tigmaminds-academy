@@ -25,15 +25,15 @@ export default function BabelLevel3() {
 
   const miniLessons = [
     {
-      title: 'Finite element analysis \u2014 breaking a tower into pieces',
+      title: 'Finite element analysis — breaking a tower into pieces',
       concept: `Real structural engineers do not calculate forces for an entire building at once. They divide the structure into thousands of small **elements** (triangles, rectangles, tetrahedra) and solve the force equations for each one. This is **Finite Element Analysis (FEA)**.
 
-Each element has nodes (corner points). The stiffness of each element is encoded in a **stiffness matrix**. When you assemble all element matrices into one giant system, you get: **K \u00D7 u = F** \u2014 where K is the global stiffness matrix, u is the displacement vector, and F is the force vector.
+Each element has nodes (corner points). The stiffness of each element is encoded in a **stiffness matrix**. When you assemble all element matrices into one giant system, you get: **K × u = F** — where K is the global stiffness matrix, u is the displacement vector, and F is the force vector.
 
 Solving this matrix equation gives you the displacement of every node, from which you calculate stress and strain everywhere in the structure.
 
 The code implements a simple 1D FEA for a column under load.`,
-      analogy: 'Imagine predicting traffic flow for a whole city. Impossible as one problem. But divide the city into blocks, model each intersection, and connect them \u2014 suddenly it is solvable. FEA does the same for structures: divide, solve locally, assemble globally.',
+      analogy: 'Imagine predicting traffic flow for a whole city. Impossible as one problem. But divide the city into blocks, model each intersection, and connect them — suddenly it is solvable. FEA does the same for structures: divide, solve locally, assemble globally.',
       storyConnection: 'If the Babel builders had FEA, they could have predicted exactly which bricks would crack first, where the tower would buckle, and how wind would stress the upper sections. They would have known their design was doomed before laying a single brick.',
       checkQuestion: 'Why do FEA models use triangles rather than squares for meshing?',
       checkAnswer: 'Triangles can approximate any shape (curved surfaces, corners, holes) because three points always define a plane. Squares require four coplanar points, which is harder to guarantee on complex geometry. Triangles also handle stress concentrations better because they can be made very small near critical areas (adaptive meshing).',
@@ -102,22 +102,22 @@ if max(stresses) > 2.0:
     print("TOWER FAILS — base bricks are crushed!")
 else:
     print(f"Safety margin: {(2.0 - max(stresses))/2.0*100:.1f}%")`,
-      challenge: 'Increase n_elements to 50 for a finer mesh. Does the maximum stress change? Try height = 200 and see which elements fail first. This is the power of FEA \u2014 precise failure prediction.',
-      successHint: 'FEA is the foundation of all modern structural design. Every skyscraper, bridge, aircraft, and car is simulated with FEA before a single piece is manufactured. The K\u00D7u=F equation governs all of it.',
+      challenge: 'Increase n_elements to 50 for a finer mesh. Does the maximum stress change? Try height = 200 and see which elements fail first. This is the power of FEA — precise failure prediction.',
+      successHint: 'FEA is the foundation of all modern structural design. Every skyscraper, bridge, aircraft, and car is simulated with FEA before a single piece is manufactured. The K×u=F equation governs all of it.',
     },
     {
-      title: 'Truss analysis \u2014 the triangle as structural unit',
-      concept: `A **truss** is a structure made entirely of triangles connected at joints (called nodes). Trusses are extraordinarily efficient because every member is in either pure tension or pure compression \u2014 no bending.
+      title: 'Truss analysis — the triangle as structural unit',
+      concept: `A **truss** is a structure made entirely of triangles connected at joints (called nodes). Trusses are extraordinarily efficient because every member is in either pure tension or pure compression — no bending.
 
-Why triangles? Because a triangle is the only polygon that **cannot deform** without changing the length of its sides. A square frame can be squashed into a parallelogram. A pentagon can be deformed in multiple ways. But push on a triangle and nothing moves \u2014 it is inherently rigid.
+Why triangles? Because a triangle is the only polygon that **cannot deform** without changing the length of its sides. A square frame can be squashed into a parallelogram. A pentagon can be deformed in multiple ways. But push on a triangle and nothing moves — it is inherently rigid.
 
-The method of joints uses equilibrium at each node: \u03A3Fx = 0, \u03A3Fy = 0. Every node has two equations, so a truss with N nodes gives 2N equations for the unknown member forces.
+The method of joints uses equilibrium at each node: ΣFx = 0, ΣFy = 0. Every node has two equations, so a truss with N nodes gives 2N equations for the unknown member forces.
 
 The code solves a simple truss and identifies which members are in tension and which are in compression.`,
       analogy: 'A chain-link fence is flexible because each quadrilateral can deform. But a geodesic dome (made of triangles) is rigid. The difference is geometry, not material. Triangles lock forces into pure push-pull along their members, eliminating the weak bending mode.',
-      storyConnection: 'Ancient builders used post-and-lintel construction (vertical columns + horizontal beams) \u2014 which wastes material because beams must resist bending. If the Babel builders had discovered the truss (Rome did, later), they could have built lighter, taller, and more efficiently.',
-      checkQuestion: 'The Eiffel Tower is essentially a giant truss \u2014 99.3% air, 0.7% iron. How can something so empty be so strong?',
-      checkAnswer: 'Because every iron member is in either pure tension or pure compression \u2014 no bending. The triangulated lattice distributes loads so efficiently that very little material is needed. If you melted the entire Eiffel Tower (7,300 tonnes of iron) into a flat plate the size of its 125m \u00D7 125m base, it would be only 6 cm thick.',
+      storyConnection: 'Ancient builders used post-and-lintel construction (vertical columns + horizontal beams) — which wastes material because beams must resist bending. If the Babel builders had discovered the truss (Rome did, later), they could have built lighter, taller, and more efficiently.',
+      checkQuestion: 'The Eiffel Tower is essentially a giant truss — 99.3% air, 0.7% iron. How can something so empty be so strong?',
+      checkAnswer: 'Because every iron member is in either pure tension or pure compression — no bending. The triangulated lattice distributes loads so efficiently that very little material is needed. If you melted the entire Eiffel Tower (7,300 tonnes of iron) into a flat plate the size of its 125m × 125m base, it would be only 6 cm thick.',
       codeIntro: 'Solve forces in a simple truss structure.',
       code: `import numpy as np
 
@@ -189,23 +189,23 @@ print()
 print("Key insight: EVERY member is in pure tension or compression.")
 print("No bending anywhere — this is why trusses are so efficient.")
 print("The diagonals carry the largest forces (longest load path).")`,
-      challenge: 'What happens if you remove the diagonals (members 0-3 and 1-2)? The structure becomes a rectangle and collapses \u2014 it has zero stiffness against lateral loads. Try calculating: 4 nodes \u00D7 2 equations = 8 unknowns, but only 4 members + 4 reactions = 8. Exactly determinate with diagonals; indeterminate without them.',
-      successHint: 'Truss analysis is elegant: pure geometry + equilibrium = every force in the structure. No calculus, no differential equations \u2014 just F=0 at every joint. This is why engineers love trusses.',
+      challenge: 'What happens if you remove the diagonals (members 0-3 and 1-2)? The structure becomes a rectangle and collapses — it has zero stiffness against lateral loads. Try calculating: 4 nodes × 2 equations = 8 unknowns, but only 4 members + 4 reactions = 8. Exactly determinate with diagonals; indeterminate without them.',
+      successHint: 'Truss analysis is elegant: pure geometry + equilibrium = every force in the structure. No calculus, no differential equations — just F=0 at every joint. This is why engineers love trusses.',
     },
     {
-      title: 'Earthquake resistance \u2014 dynamic structural analysis',
+      title: 'Earthquake resistance — dynamic structural analysis',
       concept: `A building is not just loaded by static forces (gravity, wind). **Earthquakes** shake the ground beneath the foundation, sending waves of acceleration through the structure. The building must absorb this energy without collapsing.
 
-The key concept is **natural frequency**. Every structure vibrates at specific frequencies when disturbed \u2014 like a tuning fork. If an earthquake\u2019s frequency matches the building\u2019s natural frequency, **resonance** occurs and motion is amplified enormously.
+The key concept is **natural frequency**. Every structure vibrates at specific frequencies when disturbed — like a tuning fork. If an earthquake’s frequency matches the building’s natural frequency, **resonance** occurs and motion is amplified enormously.
 
 Taller buildings have lower natural frequencies (they sway slowly). Short buildings have higher frequencies (they vibrate quickly). An earthquake with period ~1 second resonates with 10-storey buildings. Period ~3 seconds resonates with 30-storey buildings.
 
 The code models a building as a mass-spring system and simulates its response to earthquake ground motion.`,
-      analogy: 'Push a child on a swing at the right rhythm (matching its natural frequency) and the swing goes higher and higher. Push at the wrong rhythm and nothing happens. Earthquakes "push" buildings \u2014 and if the push matches the building\u2019s swing frequency, disaster follows.',
-      storyConnection: 'The Tower of Babel sat in Mesopotamia \u2014 an active seismic zone near the boundary of the Arabian and Eurasian tectonic plates. A mud brick tower with no earthquake resistance would not survive even a moderate tremor. The 2003 Bam earthquake in Iran (magnitude 6.6) destroyed nearly every mud brick building in the city.',
-      checkQuestion: 'The 2011 T\u014Dhoku earthquake produced waves that shook Tokyo skyscrapers for over 5 minutes \u2014 some swayed 3 metres at the top. Why did they not collapse?',
-      checkAnswer: 'Japanese skyscrapers are specifically designed for earthquake flexibility. They have steel frames that can deform elastically (bend without breaking), base isolation systems (rubber bearings that decouple the building from ground motion), and tuned mass dampers. The 3-metre sway was within design limits \u2014 the buildings absorbed the energy by moving, rather than resisting and cracking.',
-      codeIntro: 'Simulate a building\u2019s response to earthquake ground acceleration.',
+      analogy: 'Push a child on a swing at the right rhythm (matching its natural frequency) and the swing goes higher and higher. Push at the wrong rhythm and nothing happens. Earthquakes "push" buildings — and if the push matches the building’s swing frequency, disaster follows.',
+      storyConnection: 'The Tower of Babel sat in Mesopotamia — an active seismic zone near the boundary of the Arabian and Eurasian tectonic plates. A mud brick tower with no earthquake resistance would not survive even a moderate tremor. The 2003 Bam earthquake in Iran (magnitude 6.6) destroyed nearly every mud brick building in the city.',
+      checkQuestion: 'The 2011 Tōhoku earthquake produced waves that shook Tokyo skyscrapers for over 5 minutes — some swayed 3 metres at the top. Why did they not collapse?',
+      checkAnswer: 'Japanese skyscrapers are specifically designed for earthquake flexibility. They have steel frames that can deform elastically (bend without breaking), base isolation systems (rubber bearings that decouple the building from ground motion), and tuned mass dampers. The 3-metre sway was within design limits — the buildings absorbed the energy by moving, rather than resisting and cracking.',
+      codeIntro: 'Simulate a building’s response to earthquake ground acceleration.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
@@ -269,22 +269,22 @@ plt.show()
 print(f"Max displacement: {max(abs(x))*100:.1f} cm")
 print(f"Max velocity: {max(abs(v)):.2f} m/s")
 print(f"Max floor acceleration: {max(abs(a))/9.8:.2f} g")`,
-      challenge: 'Remove the resonant component from the earthquake signal (delete the line with f_n). How much does the max displacement decrease? This shows how dangerous resonance is \u2014 even a small resonant component causes massive amplification.',
-      successHint: 'Dynamic analysis is essential for any structure in a seismic zone. The natural frequency determines which earthquakes are dangerous. Tuning your building\u2019s frequency away from common earthquake frequencies is the first line of defence.',
+      challenge: 'Remove the resonant component from the earthquake signal (delete the line with f_n). How much does the max displacement decrease? This shows how dangerous resonance is — even a small resonant component causes massive amplification.',
+      successHint: 'Dynamic analysis is essential for any structure in a seismic zone. The natural frequency determines which earthquakes are dangerous. Tuning your building’s frequency away from common earthquake frequencies is the first line of defence.',
     },
     {
-      title: 'Reinforced concrete \u2014 the material that changed everything',
+      title: 'Reinforced concrete — the material that changed everything',
       concept: `The single most important structural invention since the wheel: **reinforced concrete**. Take concrete (strong in compression, weak in tension) and embed steel bars (strong in tension). The result is a composite material that handles ALL three force types.
 
 When a beam bends, the top is compressed and the bottom is stretched (tension). Plain concrete cracks on the bottom. But if steel rebar runs through the tension zone, the steel catches the tensile force and the beam holds.
 
-The placement of rebar is critical. It must go where tension occurs \u2014 the bottom of beams, the outer face of columns under wind load, and in diagonal patterns to resist shear. Getting this wrong is catastrophic.
+The placement of rebar is critical. It must go where tension occurs — the bottom of beams, the outer face of columns under wind load, and in diagonal patterns to resist shear. Getting this wrong is catastrophic.
 
 The code calculates the required rebar for a concrete beam under load.`,
-      analogy: 'Concrete is like a strong but brittle person who can push but cannot pull. Steel rebar is like a flexible friend who can pull but tends to buckle. Together they are an unbeatable team \u2014 concrete provides the compression strength and prevents the steel from buckling, while steel provides the tension strength that concrete lacks.',
-      storyConnection: 'If the Babel builders had reinforced concrete (invented in 1849 by Joseph Monier), they could have built far taller with far less material. The Burj Khalifa uses 330,000 m\u00B3 of reinforced concrete \u2014 the concrete resists the enormous compressive load of 828 metres, while the embedded steel handles the wind-induced tension.',
+      analogy: 'Concrete is like a strong but brittle person who can push but cannot pull. Steel rebar is like a flexible friend who can pull but tends to buckle. Together they are an unbeatable team — concrete provides the compression strength and prevents the steel from buckling, while steel provides the tension strength that concrete lacks.',
+      storyConnection: 'If the Babel builders had reinforced concrete (invented in 1849 by Joseph Monier), they could have built far taller with far less material. The Burj Khalifa uses 330,000 m³ of reinforced concrete — the concrete resists the enormous compressive load of 828 metres, while the embedded steel handles the wind-induced tension.',
       checkQuestion: 'Why does rebar have a ridged surface instead of being smooth?',
-      checkAnswer: 'The ridges create mechanical interlocking (bond) between the steel and concrete. A smooth bar would slip through the concrete under load, defeating the purpose. The ridges ensure that when the concrete tries to stretch, it drags the rebar along with it, and vice versa. This bond is essential \u2014 reinforced concrete only works if the two materials deform together.',
+      checkAnswer: 'The ridges create mechanical interlocking (bond) between the steel and concrete. A smooth bar would slip through the concrete under load, defeating the purpose. The ridges ensure that when the concrete tries to stretch, it drags the rebar along with it, and vice versa. This bond is essential — reinforced concrete only works if the two materials deform together.',
       codeIntro: 'Design rebar placement for a concrete beam under load.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -351,22 +351,22 @@ plt.show()
 print("\\nTop of beam: COMPRESSION (concrete handles this)")
 print("Bottom of beam: TENSION (steel rebar handles this)")
 print("Neutral axis: zero stress (middle of beam)")`,
-      challenge: 'Double the load to 40,000 N/m. How much more steel is needed? What if you also increase beam depth to 0.6 m? Deeper beams need less steel \u2014 this is the depth-vs-reinforcement trade-off that engineers optimise.',
+      challenge: 'Double the load to 40,000 N/m. How much more steel is needed? What if you also increase beam depth to 0.6 m? Deeper beams need less steel — this is the depth-vs-reinforcement trade-off that engineers optimise.',
       successHint: 'Reinforced concrete is the most widely used construction material on Earth. Over 10 billion tonnes are poured annually. Understanding how concrete and steel work together is the single most important skill in structural engineering.',
     },
     {
-      title: 'Syntax trees \u2014 the hidden structure of language',
-      concept: `Every sentence has a **tree structure** that determines its meaning. "The dog bit the man" and "The man bit the dog" use the same words but have different trees \u2014 the subject and object swap positions.
+      title: 'Syntax trees — the hidden structure of language',
+      concept: `Every sentence has a **tree structure** that determines its meaning. "The dog bit the man" and "The man bit the dog" use the same words but have different trees — the subject and object swap positions.
 
-Linguists represent this with **syntax trees** (parse trees). A sentence (S) divides into a Noun Phrase (NP) and a Verb Phrase (VP). The VP may contain a verb and another NP. This is **recursive** \u2014 phrases contain other phrases, just like fractals.
+Linguists represent this with **syntax trees** (parse trees). A sentence (S) divides into a Noun Phrase (NP) and a Verb Phrase (VP). The VP may contain a verb and another NP. This is **recursive** — phrases contain other phrases, just like fractals.
 
 The revolutionary insight of **Noam Chomsky** (1957): all human languages share a common deep structure (Universal Grammar), even though surface forms vary enormously. English puts verbs before objects (SVO): "I eat rice." Hindi puts verbs last (SOV): "Main chawal khata hun."
 
 The code parses sentences into tree structures and detects the word order type.`,
-      analogy: 'A sentence is like a Russian nesting doll. The outermost doll is the sentence. Open it and you find two dolls: a noun phrase and a verb phrase. Open the verb phrase and you find a verb and another noun phrase. Open that noun phrase and you find a determiner and a noun. Every language uses the same nesting pattern \u2014 only the order of dolls changes.',
+      analogy: 'A sentence is like a Russian nesting doll. The outermost doll is the sentence. Open it and you find two dolls: a noun phrase and a verb phrase. Open the verb phrase and you find a verb and another noun phrase. Open that noun phrase and you find a determiner and a noun. Every language uses the same nesting pattern — only the order of dolls changes.',
       storyConnection: 'The "confusion of tongues" at Babel might represent the divergence of word order systems. Proto-languages may have had one dominant word order (possibly SOV, the most common type today). As groups separated, different communities settled on different orders: SVO in Europe, SOV in South Asia, VSO in Celtic and Polynesian languages.',
       checkQuestion: 'The sentence "I saw the man with the telescope" is ambiguous. Why?',
-      checkAnswer: 'It has two valid parse trees. Tree 1: [I] [saw [the man] [with the telescope]] \u2014 I used a telescope to see him. Tree 2: [I] [saw [the man [with the telescope]]] \u2014 I saw a man who had a telescope. The words are identical; only the tree structure differs. This is called structural ambiguity, and it is a major challenge for NLP systems.',
+      checkAnswer: 'It has two valid parse trees. Tree 1: [I] [saw [the man] [with the telescope]] — I used a telescope to see him. Tree 2: [I] [saw [the man [with the telescope]]] — I saw a man who had a telescope. The words are identical; only the tree structure differs. This is called structural ambiguity, and it is a major challenge for NLP systems.',
       codeIntro: 'Parse sentences into syntax trees and classify word order types.',
       code: `# Simple recursive-descent parser for English sentences
 
@@ -455,21 +455,21 @@ print()
 print(f"SOV is most common (~45% of languages)")
 print(f"SVO is second (~42%). These two cover 87%.")`,
       challenge: 'Modify the parser to handle prepositional phrases: "the cat sat on the mat." You need a PP node containing a preposition + NP. This is the first step toward handling real English complexity.',
-      successHint: 'Syntax trees reveal that language is not flat sequences of words \u2014 it is hierarchical structure. This insight powers every modern NLP system: parse the tree, understand the meaning.',
+      successHint: 'Syntax trees reveal that language is not flat sequences of words — it is hierarchical structure. This insight powers every modern NLP system: parse the tree, understand the meaning.',
     },
     {
-      title: 'Transformer attention \u2014 how modern translation works',
-      concept: `The **transformer architecture** (Vaswani et al., 2017) revolutionised NLP. Its key innovation: **self-attention** \u2014 a mechanism that lets every word in a sentence look at every other word and decide how much to "attend" to it.
+      title: 'Transformer attention — how modern translation works',
+      concept: `The **transformer architecture** (Vaswani et al., 2017) revolutionised NLP. Its key innovation: **self-attention** — a mechanism that lets every word in a sentence look at every other word and decide how much to "attend" to it.
 
 In the sentence "The cat sat on the mat because it was tired", what does "it" refer to? The cat or the mat? Attention computes a score between "it" and every other word. The score with "cat" is high (they are related). The score with "mat" is low. This is how the model resolves ambiguity.
 
-Mathematically: Attention(Q, K, V) = softmax(QK\u1D40/\u221Ad) \u00D7 V. Each word generates three vectors: Query (what am I looking for?), Key (what do I contain?), and Value (what information do I carry?). The dot product QK\u1D40 measures relevance. Softmax normalises to probabilities. The result is a weighted combination of Value vectors.
+Mathematically: Attention(Q, K, V) = softmax(QKᵀ/√d) × V. Each word generates three vectors: Query (what am I looking for?), Key (what do I contain?), and Value (what information do I carry?). The dot product QKᵀ measures relevance. Softmax normalises to probabilities. The result is a weighted combination of Value vectors.
 
 The code implements a simplified attention mechanism.`,
-      analogy: 'Imagine you are at a party and someone says "it." You automatically scan the recent conversation: "Who or what were we talking about?" Your brain assigns attention weights \u2014 high weight to the most recently mentioned noun, low weight to irrelevant words. Transformer attention does the same thing, but with matrix multiplication instead of neurons.',
-      storyConnection: 'The Tower of Babel scattered language into 7,000 fragments. The transformer model is the first technology capable of learning the deep structure that all languages share \u2014 attention discovers cross-lingual patterns automatically from data. A single model trained on 100 languages develops internal representations where equivalent phrases in different languages cluster together.',
+      analogy: 'Imagine you are at a party and someone says "it." You automatically scan the recent conversation: "Who or what were we talking about?" Your brain assigns attention weights — high weight to the most recently mentioned noun, low weight to irrelevant words. Transformer attention does the same thing, but with matrix multiplication instead of neurons.',
+      storyConnection: 'The Tower of Babel scattered language into 7,000 fragments. The transformer model is the first technology capable of learning the deep structure that all languages share — attention discovers cross-lingual patterns automatically from data. A single model trained on 100 languages develops internal representations where equivalent phrases in different languages cluster together.',
       checkQuestion: 'GPT-4 was trained on text, not parallel translations. How can it translate between languages it never explicitly learned to translate?',
-      checkAnswer: 'Because its training data contains text in many languages, the model develops shared internal representations for equivalent concepts. "The cat is sleeping" (English), "Le chat dort" (French), and "Der Kater schl\u00E4ft" (German) all activate similar internal patterns. The model does not need explicit translation pairs \u2014 it discovers the mapping between languages implicitly through shared semantic space. This is called emergent multilingual capability.',
+      checkAnswer: 'Because its training data contains text in many languages, the model develops shared internal representations for equivalent concepts. "The cat is sleeping" (English), "Le chat dort" (French), and "Der Kater schläft" (German) all activate similar internal patterns. The model does not need explicit translation pairs — it discovers the mapping between languages implicitly through shared semantic space. This is called emergent multilingual capability.',
       codeIntro: 'Implement simplified self-attention on a sentence.',
       code: `import numpy as np
 
@@ -524,8 +524,8 @@ print()
 print("This mechanism is the core of GPT, BERT, and all modern LLMs.")
 print("It processes ALL words in parallel (not sequentially),")
 print("which is why transformers are so fast on GPUs.")`,
-      challenge: 'Change the sentence to "The dog chased the cat because it was fast." Now "it" could refer to "dog" (the chaser was fast) or "cat" (the chasee was fast). Run the attention \u2014 which does the model attend to? In real transformers, multiple attention heads resolve this ambiguity.',
-      successHint: 'Attention is arguably the most important idea in modern AI. It lets models learn contextual relationships between any pair of elements in a sequence \u2014 and this applies not just to language but to images, music, and protein structures.',
+      challenge: 'Change the sentence to "The dog chased the cat because it was fast." Now "it" could refer to "dog" (the chaser was fast) or "cat" (the chasee was fast). Run the attention — which does the model attend to? In real transformers, multiple attention heads resolve this ambiguity.',
+      successHint: 'Attention is arguably the most important idea in modern AI. It lets models learn contextual relationships between any pair of elements in a sequence — and this applies not just to language but to images, music, and protein structures.',
     },
   ];
 

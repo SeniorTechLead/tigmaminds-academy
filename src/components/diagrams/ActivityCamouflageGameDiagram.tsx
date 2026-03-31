@@ -21,10 +21,10 @@ export default function ActivityCamouflageGameDiagram() {
 
           {/* Coloured squares */}
           {[
-            { x: 20, y: 75, fill: '#ef4444', label: 'Red \u00D75' },
-            { x: 60, y: 75, fill: '#22c55e', label: 'Green \u00D75' },
-            { x: 100, y: 75, fill: '#fbbf24', label: 'Yellow \u00D75' },
-            { x: 20, y: 110, fill: '#78350f', label: 'Brown \u00D75' },
+            { x: 20, y: 75, fill: '#ef4444', label: 'Red ×5' },
+            { x: 60, y: 75, fill: '#22c55e', label: 'Green ×5' },
+            { x: 100, y: 75, fill: '#fbbf24', label: 'Yellow ×5' },
+            { x: 20, y: 110, fill: '#78350f', label: 'Brown ×5' },
           ].map((sq, i) => (
             <g key={`sq-${i}`}>
               <rect x={sq.x} y={sq.y} width="20" height="20" rx="2" fill={sq.fill} />
@@ -104,8 +104,8 @@ export default function ActivityCamouflageGameDiagram() {
           {/* Insight arrow */}
           <text x="380" y="55" fontSize="10" fill="#86efac" fontWeight="bold">Best camouflaged:</text>
           <text x="380" y="70" fontSize="10" fill="#d1d5db">Fewest found = most</text>
-          <text x="380" y="83" fontSize="10" fill="#d1d5db">\u201Cfit\u201D for that habitat</text>
-          <text x="380" y="100" fontSize="10" fill="#fbbf24">\u2192 This IS natural selection!</text>
+          <text x="380" y="83" fontSize="10" fill="#d1d5db">“fit” for that habitat</text>
+          <text x="380" y="100" fontSize="10" fill="#fbbf24">→ This IS natural selection!</text>
         </g>
       </svg>
     </div>

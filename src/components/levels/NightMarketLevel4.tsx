@@ -375,7 +375,7 @@ lower = ma - 2 * std_rolling
 anomalies = (fish_price > upper) | (fish_price < lower)
 
 ax.plot(fish_price, color='#3b82f6', linewidth=0.8, alpha=0.6)
-ax.fill_between(range(730), lower, upper, alpha=0.15, color='#f59e0b', label='Normal range (2\\u03c3)')
+ax.fill_between(range(730), lower, upper, alpha=0.15, color='#f59e0b', label='Normal range (2\σ)')
 ax.scatter(np.where(anomalies)[0], fish_price[anomalies], color='#ef4444', s=20,
            zorder=5, label=f'Anomalies ({np.sum(anomalies)})')
 ax.set_xlabel('Day', color='white', fontsize=11)
@@ -616,7 +616,7 @@ ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
 # Plot 2: Error metrics comparison
 ax = axes[0, 1]
-metric_names = ['RMSE (Rs)', 'MAPE (%)', 'R\\u00b2']
+metric_names = ['RMSE (Rs)', 'MAPE (%)', 'R\²']
 model_names = list(models.keys())
 metrics_data = []
 for name, pred in models.items():
@@ -637,7 +637,7 @@ for i, (name, metrics, color) in enumerate(zip(model_names, metrics_data, colors
 
 ax.set_xticks(x_pos)
 ax.set_xticklabels(metric_names, color='white')
-ax.set_title('Model comparison (lower RMSE/MAPE = better, higher R\\u00b2 = better)',
+ax.set_title('Model comparison (lower RMSE/MAPE = better, higher R\² = better)',
              color='white', fontsize=10)
 ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 

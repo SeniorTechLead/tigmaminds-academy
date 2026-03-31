@@ -36,10 +36,10 @@ const FrogSizeLimitsDiagram = () => {
         <rect x="40" y="42" width="560" height="48" rx="6"
           className="fill-emerald-50 dark:fill-emerald-900/15 stroke-emerald-300 dark:stroke-emerald-700" strokeWidth="1" />
         <text x="320" y="60" textAnchor="middle" className="small fill-emerald-700 dark:fill-emerald-300">
-          Vertebrates hit a size floor around 7\u20138 mm. Below that, eyes can\u2019t form images,
+          Vertebrates hit a size floor around 7–8 mm. Below that, eyes can’t form images,
         </text>
         <text x="320" y="74" textAnchor="middle" className="small fill-emerald-700 dark:fill-emerald-300">
-          brains can\u2019t hold enough neurons, and water loss through skin becomes unmanageable.
+          brains can’t hold enough neurons, and water loss through skin becomes unmanageable.
         </text>
 
         {/* Size scale */}
@@ -80,18 +80,18 @@ const FrogSizeLimitsDiagram = () => {
         {/* Minimum vertebrate line */}
         <line x1="175" y1="120" x2="175" y2="295" stroke="#ef4444" strokeWidth="1.5" strokeDasharray="5,3" />
         <text x="177" y="135" className="tiny fill-red-500 dark:fill-red-400">
-          \u2190 Vertebrate size limit (~7 mm)
+          ← Vertebrate size limit (~7 mm)
         </text>
 
         {/* One-rupee coin reference */}
         <circle cx="320" cy="340" r="30" className="fill-amber-100 dark:fill-amber-900/20 stroke-amber-400 dark:stroke-amber-600" strokeWidth="1.5" />
-        <text x="320" y="336" textAnchor="middle" className="tiny fill-amber-600 dark:fill-amber-400">\u20b91</text>
+        <text x="320" y="336" textAnchor="middle" className="tiny fill-amber-600 dark:fill-amber-400">₹1</text>
         <text x="320" y="348" textAnchor="middle" className="tiny fill-amber-600 dark:fill-amber-400">25 mm</text>
 
         {/* Show frog on coin */}
         <ellipse cx="310" cy="332" rx="7" ry="5" fill="#22c55e" opacity="0.7" stroke="#22c55e" strokeWidth="1" />
         <text x="320" y="388" textAnchor="middle" className="small fill-slate-600 dark:fill-slate-300">
-          The smallest frog fits on a \u20b91 coin with room to spare
+          The smallest frog fits on a ₹1 coin with room to spare
         </text>
 
         {/* Three limit factors */}
@@ -135,7 +135,7 @@ const FrogSizeLimitsDiagram = () => {
         <rect x="100" y="472" width="440" height="36" rx="6"
           className="fill-slate-50 dark:fill-slate-800 stroke-slate-300 dark:stroke-slate-600" strokeWidth="1" />
         <text x="320" y="487" textAnchor="middle" className="small fill-slate-600 dark:fill-slate-300">
-          At tiny scales, surface tension becomes a major force \u2014 a raindrop hitting
+          At tiny scales, surface tension becomes a major force — a raindrop hitting
         </text>
         <text x="320" y="500" textAnchor="middle" className="small fill-slate-600 dark:fill-slate-300">
           a 7 mm frog is like a water balloon hitting you. Gravity matters less; stickiness matters more.

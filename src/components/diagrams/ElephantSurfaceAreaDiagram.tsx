@@ -33,7 +33,7 @@ const ElephantSurfaceAreaDiagram = () => {
         <rect x="40" y="42" width="520" height="50" rx="6"
           className="fill-amber-50 dark:fill-amber-900/15 stroke-amber-300 dark:stroke-amber-700" strokeWidth="1" />
         <text x="300" y="60" textAnchor="middle" className="small fill-amber-700 dark:fill-amber-300">
-          Double an animal's size \u2192 surface area grows 4\u00d7 but volume grows 8\u00d7
+          Double an animal's size → surface area grows 4× but volume grows 8×
         </text>
         <text x="300" y="74" textAnchor="middle" className="small fill-amber-700 dark:fill-amber-300">
           Heat is made in the volume. Heat escapes through the surface. Bigger = harder to cool.
@@ -44,7 +44,7 @@ const ElephantSurfaceAreaDiagram = () => {
 
         {/* Bar chart area */}
         <text x="300" y="115" textAnchor="middle" className="heading fill-slate-700 dark:fill-slate-300">
-          Surface Area \u00f7 Volume Ratio (higher = cools easier)
+          Surface Area ÷ Volume Ratio (higher = cools easier)
         </text>
 
         {/* Y axis */}

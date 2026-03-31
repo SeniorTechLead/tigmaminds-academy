@@ -2,7 +2,7 @@ export default function ActivityPrismDiagram() {
   return (
     <div className="bg-gray-900 rounded-xl p-4 my-4">
       <p className="text-center text-sm font-bold text-gray-300 uppercase tracking-wider mb-3">
-        Activity \u2014 Split Sunlight with a Glass of Water
+        Activity — Split Sunlight with a Glass of Water
       </p>
       <svg viewBox="0 0 580 320" className="w-full max-w-xl mx-auto">
         {/* Sun icon */}

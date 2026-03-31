@@ -29,10 +29,10 @@ export default function ZamzamLevel4() {
 
   const miniLessons = [
     {
-      title: 'Aquifer modelling \u2014 multi-layer confined systems',
+      title: 'Aquifer modelling — multi-layer confined systems',
       concept: `Real aquifers are not single uniform layers. The Zamzam aquifer has at least three distinct zones: a shallow alluvial layer, a fractured metamorphic zone, and deeper crystalline basement rock. Each has different transmissivity and storativity.
 
-A **multi-layer model** treats each geological unit as a separate layer connected by vertical leakage through **aquitards** (semi-permeable layers between aquifers). The leakage rate depends on the head difference between layers and the aquitard\u2019s vertical conductivity:
+A **multi-layer model** treats each geological unit as a separate layer connected by vertical leakage through **aquitards** (semi-permeable layers between aquifers). The leakage rate depends on the head difference between layers and the aquitard’s vertical conductivity:
 
 **Q_leak = K_v / b * (h_upper - h_lower) * A**
 
@@ -40,9 +40,9 @@ Where K_v is vertical conductivity, b is aquitard thickness, and A is the cell a
 
 The code builds a two-layer aquifer model with leakage, simulating how pumping from the lower layer draws water down from the upper layer through the confining bed.`,
       analogy: 'Imagine a two-storey car park. Each floor has its own entrance (recharge), and water can drip from the upper floor to the lower floor through small cracks in the concrete (leakage). Pumping from the lower floor lowers the water there, increasing the drip rate from above. The system is connected but each floor has its own dynamics.',
-      storyConnection: 'The Saudi Geological Survey\u2019s MODFLOW model of the Zamzam aquifer uses at least three layers to represent the different geological formations. Pumping from the deep fractured zone induces leakage from the shallower alluvium, which is where most of the flash-flood recharge enters. This vertical connection is why the well recovers so quickly.',
-      checkQuestion: 'If the aquitard between two layers is made of dense clay (very low K_v), what happens to leakage and the lower aquifer\u2019s recovery time?',
-      checkAnswer: 'Leakage drops dramatically because Q_leak is proportional to K_v. The lower aquifer recovers slowly because it cannot draw water from above. In practice, this means wells in confined aquifers with thick clay aquitards show larger drawdowns and longer recovery times. The Zamzam aquifer\u2019s fractured confining layers have relatively high K_v, enabling rapid recovery.',
+      storyConnection: 'The Saudi Geological Survey’s MODFLOW model of the Zamzam aquifer uses at least three layers to represent the different geological formations. Pumping from the deep fractured zone induces leakage from the shallower alluvium, which is where most of the flash-flood recharge enters. This vertical connection is why the well recovers so quickly.',
+      checkQuestion: 'If the aquitard between two layers is made of dense clay (very low K_v), what happens to leakage and the lower aquifer’s recovery time?',
+      checkAnswer: 'Leakage drops dramatically because Q_leak is proportional to K_v. The lower aquifer recovers slowly because it cannot draw water from above. In practice, this means wells in confined aquifers with thick clay aquitards show larger drawdowns and longer recovery times. The Zamzam aquifer’s fractured confining layers have relatively high K_v, enabling rapid recovery.',
       codeIntro: 'Build a two-layer aquifer model with vertical leakage between layers.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -129,17 +129,17 @@ print(f"Recovery after pump-off: head = {well_head_lower[-1]:.2f} m")`,
       successHint: 'Multi-layer models are the standard tool for real aquifer management. The MODFLOW software used by the Saudi Geological Survey for Zamzam implements exactly this kind of layer-by-layer calculation, just on much finer grids.',
     },
     {
-      title: 'Contamination transport \u2014 advection-dispersion simulation',
-      concept: `Groundwater contamination is one of the world\u2019s most serious environmental threats. Once a pollutant enters an aquifer, it moves with the water (**advection**) and spreads by molecular mixing and tortuous flow paths (**dispersion**).
+      title: 'Contamination transport — advection-dispersion simulation',
+      concept: `Groundwater contamination is one of the world’s most serious environmental threats. Once a pollutant enters an aquifer, it moves with the water (**advection**) and spreads by molecular mixing and tortuous flow paths (**dispersion**).
 
 The **advection-dispersion equation (ADE)** governs this:
 
-**\u2202C/\u2202t = D \u2202\u00B2C/\u2202x\u00B2 - v \u2202C/\u2202x - \u03BBc**
+**∂C/∂t = D ∂²C/∂x² - v ∂C/∂x - λc**
 
-Where C is concentration, D is the dispersion coefficient, v is groundwater velocity (from Darcy\u2019s law), and \u03BB is a decay rate for biodegradable contaminants.
+Where C is concentration, D is the dispersion coefficient, v is groundwater velocity (from Darcy’s law), and λ is a decay rate for biodegradable contaminants.
 
 The code simulates a contaminant plume spreading through a 1D aquifer, showing how advection carries the plume downstream while dispersion spreads it out. It then evaluates whether the plume reaches a well before natural attenuation reduces it to safe levels.`,
-      analogy: 'Drop food colouring into a slow-flowing stream. The dye moves downstream with the water (advection) while simultaneously spreading sideways and mixing with clean water (dispersion). Given enough distance and time, the dye becomes undetectable. Groundwater contamination follows the same physics, just much slower \u2014 plumes can take decades to travel a few kilometres.',
+      analogy: 'Drop food colouring into a slow-flowing stream. The dye moves downstream with the water (advection) while simultaneously spreading sideways and mixing with clean water (dispersion). Given enough distance and time, the dye becomes undetectable. Groundwater contamination follows the same physics, just much slower — plumes can take decades to travel a few kilometres.',
       storyConnection: 'Protecting the Zamzam well from contamination is a constant concern. The Saudi authorities maintain a strict exclusion zone around the recharge area. The ADE tells them how fast a potential spill would travel toward the well and how much natural dilution and attenuation would occur along the way. This is critical for setting buffer zone distances.',
       checkQuestion: 'If groundwater velocity doubles, does the contaminant reach the well in half the time? What about the concentration when it arrives?',
       checkAnswer: 'The arrival time is approximately halved (advection is proportional to velocity). However, the concentration may be HIGHER because there is less time for dispersion to dilute the plume and less time for biodegradation to break it down. Faster flow = faster arrival with less attenuation. This is why high-permeability aquifers require larger protection zones.',
@@ -226,21 +226,21 @@ print(f"Exceeds safe limit? {'YES - well contaminated!' if not safe else 'No - n
       successHint: 'Contamination transport modelling is used worldwide to design wellhead protection zones, assess pollution risks, and plan remediation. The same ADE governs river pollution, ocean oil spills, and atmospheric dispersion of emissions.',
     },
     {
-      title: 'Desalination physics \u2014 reverse osmosis from first principles',
-      concept: `Saudi Arabia is the world\u2019s largest producer of desalinated water. When natural groundwater is insufficient, seawater is turned into drinking water using **reverse osmosis (RO)**.
+      title: 'Desalination physics — reverse osmosis from first principles',
+      concept: `Saudi Arabia is the world’s largest producer of desalinated water. When natural groundwater is insufficient, seawater is turned into drinking water using **reverse osmosis (RO)**.
 
-Normal osmosis: water moves through a semi-permeable membrane from low salt concentration to high (diluting the salty side). **Reverse osmosis** applies pressure exceeding the **osmotic pressure** to force water the other way \u2014 from salty to fresh.
+Normal osmosis: water moves through a semi-permeable membrane from low salt concentration to high (diluting the salty side). **Reverse osmosis** applies pressure exceeding the **osmotic pressure** to force water the other way — from salty to fresh.
 
-Osmotic pressure: **\u03C0 = iMRT**
-Where i = van\u2019t Hoff factor, M = molarity, R = gas constant, T = temperature.
+Osmotic pressure: **π = iMRT**
+Where i = van’t Hoff factor, M = molarity, R = gas constant, T = temperature.
 
-For seawater (35 g/L NaCl, ~0.6 M, i\u22482): \u03C0 \u2248 2 \u00D7 0.6 \u00D7 8.314 \u00D7 298 / 1000 \u2248 **27 atm**
+For seawater (35 g/L NaCl, ~0.6 M, i≈2): π ≈ 2 × 0.6 × 8.314 × 298 / 1000 ≈ **27 atm**
 
 To desalinate, you need to apply > 27 atm (typically 55-80 atm in practice).
 
 The code calculates energy requirements and compares RO to other methods.`,
-      analogy: 'Imagine a room divided by a screen door. On one side: a huge crowd (salty water). On the other: an empty room (fresh water). People naturally move toward the empty room (osmosis). To reverse the flow, you would need to physically push people back through the screen from the crowded side \u2014 that requires force (pressure). The more crowded the room, the harder you push.',
-      storyConnection: 'Saudi Arabia desalinates over 7 million cubic metres of seawater daily, supplementing groundwater from sources like Zamzam. Understanding the energy cost of desalination helps appreciate why protecting natural aquifers is so critical \u2014 groundwater is essentially free water, while desalination costs $0.50-1.50 per cubic metre.',
+      analogy: 'Imagine a room divided by a screen door. On one side: a huge crowd (salty water). On the other: an empty room (fresh water). People naturally move toward the empty room (osmosis). To reverse the flow, you would need to physically push people back through the screen from the crowded side — that requires force (pressure). The more crowded the room, the harder you push.',
+      storyConnection: 'Saudi Arabia desalinates over 7 million cubic metres of seawater daily, supplementing groundwater from sources like Zamzam. Understanding the energy cost of desalination helps appreciate why protecting natural aquifers is so critical — groundwater is essentially free water, while desalination costs $0.50-1.50 per cubic metre.',
       checkQuestion: 'Why is the minimum practical pressure for RO (55-80 atm) so much higher than the theoretical osmotic pressure (27 atm)?',
       checkAnswer: 'Several factors: (1) You need a pressure differential above osmotic pressure, not just equal to it, to drive water at a useful rate. (2) As water is removed, the remaining brine becomes more concentrated, increasing osmotic pressure. (3) Membrane fouling and concentration polarisation create additional resistance. (4) Energy recovery devices are imperfect. Practical systems operate at 2-3x theoretical minimum pressure.',
       codeIntro: 'Calculate desalination energy requirements and compare water sources.',
@@ -280,29 +280,29 @@ cost = [0.05, 0.30, 0.50, 1.00, 2.50]  # $/m^3
 
 bars = ax2.bar(sources, energy, color=['#10b981', '#3b82f6', '#f59e0b', '#ef4444', '#a855f7'],
                width=0.6, edgecolor='none')
-ax2.set_ylabel('Energy (kWh/m\u00B3)', fontsize=11)
+ax2.set_ylabel('Energy (kWh/m³)', fontsize=11)
 ax2.set_title('Energy Cost of Water Production Methods', fontsize=12)
 ax2.grid(axis='y', alpha=0.3)
 ax2.tick_params(labelsize=10)
 
 for bar, c in zip(bars, cost):
     ax2.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.3,
-             f'\${c:.2f}/m\u00B3', ha='center', fontsize=10, color='lightgray')
+             f'\${c:.2f}/m³', ha='center', fontsize=10, color='lightgray')
 
 plt.tight_layout()
 plt.show()
 
 print("=== Water Source Comparison ===")
 for s, e, c in zip(sources, energy, cost):
-    print(f"  {s.replace(chr(10),' '):20s}: {e:>5.1f} kWh/m\u00B3, \${c:.2f}/m\u00B3")
+    print(f"  {s.replace(chr(10),' '):20s}: {e:>5.1f} kWh/m³, \${c:.2f}/m³")
 print()
 print("Zamzam: naturally filtered, mineral-rich, near-zero energy")
 print("Protecting aquifers is 35x cheaper than desalination!")`,
-      challenge: 'Calculate how many solar panels (each producing 400W for 6 hours/day) Saudi Arabia would need to desalinate its daily 7 million m\u00B3 at 3.5 kWh/m\u00B3. Is 100% solar-powered desalination feasible?',
+      challenge: 'Calculate how many solar panels (each producing 400W for 6 hours/day) Saudi Arabia would need to desalinate its daily 7 million m³ at 3.5 kWh/m³. Is 100% solar-powered desalination feasible?',
       successHint: 'Desalination is a triumph of applied physics and engineering, but it is energy-intensive. Understanding the thermodynamic minimum energy helps evaluate the true cost of water and why aquifer conservation is always the first priority.',
     },
     {
-      title: 'Water budget analysis \u2014 balancing inputs and outputs',
+      title: 'Water budget analysis — balancing inputs and outputs',
       concept: `A **water budget** is the fundamental accounting tool in hydrology: water in = water out + change in storage.
 
 For the Zamzam aquifer:
@@ -314,9 +314,9 @@ If inputs > outputs, storage increases (water table rises). If outputs > inputs,
 
 The code builds a complete annual water budget for the Zamzam catchment and projects sustainability over 50 years under different management scenarios.`,
       analogy: 'A water budget is like a bank account. Your salary is the input (rain). Your expenses are the output (pumping, evaporation). Your bank balance is storage (aquifer level). If you spend more than you earn each month, your balance drops. You can survive on savings for a while, but eventually you go bankrupt. Sustainable water management means never spending more than you earn, averaged over years.',
-      storyConnection: 'The Saudi Geological Survey publishes an annual water budget for the Zamzam aquifer. Average annual recharge is estimated at 2.5-4 million m\u00B3. Current pumping extracts about 2.9 million m\u00B3 per year. This is within the sustainable yield, but barely \u2014 any increase in pumping or decrease in rainfall (due to climate change) could tip the balance.',
+      storyConnection: 'The Saudi Geological Survey publishes an annual water budget for the Zamzam aquifer. Average annual recharge is estimated at 2.5-4 million m³. Current pumping extracts about 2.9 million m³ per year. This is within the sustainable yield, but barely — any increase in pumping or decrease in rainfall (due to climate change) could tip the balance.',
       checkQuestion: 'If climate change reduces annual rainfall by 20%, and demand increases by 15% due to population growth, what happens to the aquifer?',
-      checkAnswer: 'Recharge drops by 20% (fewer flood events, less infiltration) while pumping increases by 15%. The deficit grows from both sides. Without intervention (demand reduction, artificial recharge, or supplemental desalinated water), the aquifer depletes. This is the scenario facing many aquifers worldwide, including parts of India\u2019s Indo-Gangetic plain.',
+      checkAnswer: 'Recharge drops by 20% (fewer flood events, less infiltration) while pumping increases by 15%. The deficit grows from both sides. Without intervention (demand reduction, artificial recharge, or supplemental desalinated water), the aquifer depletes. This is the scenario facing many aquifers worldwide, including parts of India’s Indo-Gangetic plain.',
       codeIntro: 'Build a 50-year water budget projection for the Zamzam aquifer.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -360,7 +360,7 @@ ax1.plot(years, s3, color='#10b981', linewidth=2.5, label='Managed (MAR + cap)')
 ax1.axhline(10, color='#f59e0b', linewidth=1, linestyle='--', alpha=0.5)
 ax1.text(2, 12, 'Critical minimum', color='#f59e0b', fontsize=10)
 ax1.set_xlabel('Year', fontsize=11)
-ax1.set_ylabel('Aquifer storage (million m\u00B3)', fontsize=11)
+ax1.set_ylabel('Aquifer storage (million m³)', fontsize=11)
 ax1.set_title('Zamzam Aquifer: 50-Year Projections', fontsize=12)
 ax1.legend(fontsize=9)
 ax1.grid(alpha=0.3)
@@ -389,17 +389,17 @@ for name, stor in [('Status quo', s1), ('Climate+growth', s2), ('Managed', s3)]:
     if len(depletion_year) > 0:
         print(f"  {name:20s}: critical by year {depletion_year[0]+1}")
     else:
-        print(f"  {name:20s}: sustainable for 50+ years (final = {stor[-1]:.1f} M m\u00B3)")`,
-      challenge: 'Add a fourth scenario: desalination supplementing 1 million m\u00B3/year starting from year 10, combined with MAR and demand caps. What is the optimal combination that keeps storage above 20 million m\u00B3 for 100 years?',
-      successHint: 'Water budgets are the foundation of all water resource management. Every country, every city, every farm needs one. The maths is simple \u2014 it is just addition and subtraction \u2014 but the consequences of getting it wrong are devastating.',
+        print(f"  {name:20s}: sustainable for 50+ years (final = {stor[-1]:.1f} M m³)")`,
+      challenge: 'Add a fourth scenario: desalination supplementing 1 million m³/year starting from year 10, combined with MAR and demand caps. What is the optimal combination that keeps storage above 20 million m³ for 100 years?',
+      successHint: 'Water budgets are the foundation of all water resource management. Every country, every city, every farm needs one. The maths is simple — it is just addition and subtraction — but the consequences of getting it wrong are devastating.',
     },
     {
-      title: 'Well placement optimisation \u2014 maximising yield while protecting the resource',
-      concept: `Where you place a well matters enormously. Too close to the aquifer boundary and yield is limited. Too close to a contaminant source and the water is unsafe. Too close to another well and they interfere, each reducing the other\u2019s yield.
+      title: 'Well placement optimisation — maximising yield while protecting the resource',
+      concept: `Where you place a well matters enormously. Too close to the aquifer boundary and yield is limited. Too close to a contaminant source and the water is unsafe. Too close to another well and they interfere, each reducing the other’s yield.
 
-**Well interference** occurs when the cones of depression of two wells overlap. Each well lowers the water table around it, and if the cones overlap, the effective drawdown at each well is the sum of both cones \u2014 more than either would experience alone.
+**Well interference** occurs when the cones of depression of two wells overlap. Each well lowers the water table around it, and if the cones overlap, the effective drawdown at each well is the sum of both cones — more than either would experience alone.
 
-Optimal placement maximises total yield while keeping the drawdown at every well below a critical threshold (often the top of the aquifer\u2019s screened interval).
+Optimal placement maximises total yield while keeping the drawdown at every well below a critical threshold (often the top of the aquifer’s screened interval).
 
 The code optimises the placement of multiple wells across an aquifer using the Theis equation for superposed drawdowns.`,
       analogy: 'Imagine drawing water from a lake with straws. One straw works fine. But if you cluster ten straws in the same spot, each straw gets less water because they are all competing for the same local supply. Spread the straws across the lake and each one draws efficiently. Well placement is the same problem at an aquifer scale.',
@@ -475,12 +475,12 @@ max_b = max(drawdown(wx, wy, wells_b, T, R) for wx, wy, _ in wells_b)
 print(f"Clustered: max drawdown at well = {max_a:.2f} m")
 print(f"Spread:    max drawdown at well = {max_b:.2f} m")
 print(f"Spreading wells reduces drawdown by {(1 - max_b/max_a)*100:.0f}%")`,
-      challenge: 'Add a contamination source at (1800, 1000). Calculate the capture zone of each well layout \u2014 does either layout draw contaminated water toward the wells? Adjust placements to avoid contamination while maintaining yield.',
+      challenge: 'Add a contamination source at (1800, 1000). Calculate the capture zone of each well layout — does either layout draw contaminated water toward the wells? Adjust placements to avoid contamination while maintaining yield.',
       successHint: 'Well placement optimisation is a real engineering problem solved using numerical models and optimisation algorithms. The same mathematics applies to placing oil wells, geothermal boreholes, and groundwater monitoring stations.',
     },
     {
-      title: 'Capstone \u2014 integrated water management system for an arid city',
-      concept: `This capstone integrates everything from Levels 1 through 4: Darcy\u2019s law, aquifer modelling, contamination transport, desalination, water budgets, and well optimisation into a single comprehensive water management dashboard.
+      title: 'Capstone — integrated water management system for an arid city',
+      concept: `This capstone integrates everything from Levels 1 through 4: Darcy’s law, aquifer modelling, contamination transport, desalination, water budgets, and well optimisation into a single comprehensive water management dashboard.
 
 You will design a water system for a hypothetical arid city of 500,000 people with:
 - A groundwater aquifer (limited recharge)
@@ -491,15 +491,15 @@ You will design a water system for a hypothetical arid city of 500,000 people wi
 The goal: keep the city supplied for 50 years without depleting the aquifer or exceeding the energy budget.
 
 **Level 1**: You learned what groundwater is and how it moves.
-**Level 2**: You applied Darcy\u2019s law and calculated pumping tests.
+**Level 2**: You applied Darcy’s law and calculated pumping tests.
 **Level 3**: You built numerical models and analysed contamination.
 **Level 4**: You combined everything into a management system.
 
-This progression \u2014 from qualitative understanding to quantitative modelling to integrated system design \u2014 is how real hydrogeologists work.`,
-      analogy: 'A water management system is like running a small country\u2019s economy. You have income (recharge, desalination), expenses (demand), savings (aquifer storage), risks (contamination, drought), and infrastructure costs (wells, pipelines, plants). The goal is long-term prosperity \u2014 meeting everyone\u2019s needs today without bankrupting the future.',
-      storyConnection: 'The Saudi government manages exactly this kind of integrated system for Makkah and its 2 million permanent residents (plus up to 4 million during Hajj). They balance Zamzam groundwater, regional aquifers, desalinated water piped from Jeddah, and recycled wastewater \u2014 all coordinated to meet one of the world\u2019s most challenging water demands in one of the driest environments on Earth.',
+This progression — from qualitative understanding to quantitative modelling to integrated system design — is how real hydrogeologists work.`,
+      analogy: 'A water management system is like running a small country’s economy. You have income (recharge, desalination), expenses (demand), savings (aquifer storage), risks (contamination, drought), and infrastructure costs (wells, pipelines, plants). The goal is long-term prosperity — meeting everyone’s needs today without bankrupting the future.',
+      storyConnection: 'The Saudi government manages exactly this kind of integrated system for Makkah and its 2 million permanent residents (plus up to 4 million during Hajj). They balance Zamzam groundwater, regional aquifers, desalinated water piped from Jeddah, and recycled wastewater — all coordinated to meet one of the world’s most challenging water demands in one of the driest environments on Earth.',
       checkQuestion: 'What would happen to the system if both a severe drought (50% recharge reduction) and a desalination plant failure occurred simultaneously?',
-      checkAnswer: 'This is the worst-case scenario. Groundwater becomes the sole supply, but with 50% less recharge, the aquifer is pumped far beyond sustainable yield. Water rationing would be necessary within weeks. This is why redundancy is critical \u2014 real water systems always have backup supplies, emergency reserves, and inter-city connections. Saudi Arabia maintains a strategic water reserve for exactly this scenario.',
+      checkAnswer: 'This is the worst-case scenario. Groundwater becomes the sole supply, but with 50% less recharge, the aquifer is pumped far beyond sustainable yield. Water rationing would be necessary within weeks. This is why redundancy is critical — real water systems always have backup supplies, emergency reserves, and inter-city connections. Saudi Arabia maintains a strategic water reserve for exactly this scenario.',
       codeIntro: 'Build an integrated water management dashboard for an arid city.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -554,7 +554,7 @@ axes[0,0].stackplot(yrs, gw_used, desal_used, deficit,
                     colors=['#3b82f6', '#10b981', '#ef4444'],
                     labels=['Groundwater', 'Desalination', 'Deficit'], alpha=0.8)
 axes[0,0].plot(yrs, demand, 'w--', linewidth=2, label='Total demand')
-axes[0,0].set_ylabel('Million m\u00B3/year', fontsize=10)
+axes[0,0].set_ylabel('Million m³/year', fontsize=10)
 axes[0,0].set_title('Water Supply vs Demand', fontsize=12)
 axes[0,0].legend(fontsize=9, loc='upper left')
 axes[0,0].grid(alpha=0.2)
@@ -564,7 +564,7 @@ axes[0,1].fill_between(yrs, storage, color='#3b82f6', alpha=0.3)
 axes[0,1].plot(yrs, storage, color='#3b82f6', linewidth=2.5)
 axes[0,1].axhline(20, color='#ef4444', linewidth=1.5, linestyle='--')
 axes[0,1].text(2, 22, 'Emergency minimum', color='#ef4444', fontsize=10)
-axes[0,1].set_ylabel('Storage (million m\u00B3)', fontsize=10)
+axes[0,1].set_ylabel('Storage (million m³)', fontsize=10)
 axes[0,1].set_title('Aquifer Storage Level', fontsize=12)
 axes[0,1].grid(alpha=0.2)
 
@@ -593,15 +593,15 @@ plt.show()
 # Summary
 crisis_yr = np.where(np.array(deficit) > 0)[0]
 print("=== 50-Year Water Management Summary ===")
-print(f"  Population: {population_init:,} \u2192 {int(pop[-1]):,}")
-print(f"  Demand: {demand[0]:.1f} \u2192 {demand[-1]:.1f} M m\u00B3/yr")
-print(f"  Final aquifer: {storage[-1]:.1f} M m\u00B3")
+print(f"  Population: {population_init:,} → {int(pop[-1]):,}")
+print(f"  Demand: {demand[0]:.1f} → {demand[-1]:.1f} M m³/yr")
+print(f"  Final aquifer: {storage[-1]:.1f} M m³")
 if len(crisis_yr) > 0:
     print(f"  DEFICIT starts year {crisis_yr[0]+1}")
 else:
-    print("  No deficit \u2014 system is sustainable!")`,
+    print("  No deficit — system is sustainable!")`,
       challenge: 'Modify the system to include: (1) a drought in years 15-20 (50% less recharge), (2) a desalination plant expansion in year 10 (double capacity), (3) water conservation measures reducing per-capita demand by 1% per year. Find the configuration that avoids any deficit for 100 years.',
-      successHint: 'You have built a complete water management system \u2014 the same type of analysis used by governments and engineering firms worldwide. From Hajar\u2019s desperate search for water to a 50-year computational model, the Zamzam story bridges four thousand years of water science. The equations are your tools. The aquifer is your responsibility.',
+      successHint: 'You have built a complete water management system — the same type of analysis used by governments and engineering firms worldwide. From Hajar’s desperate search for water to a 50-year computational model, the Zamzam story bridges four thousand years of water science. The equations are your tools. The aquifer is your responsibility.',
     },
   ];
 

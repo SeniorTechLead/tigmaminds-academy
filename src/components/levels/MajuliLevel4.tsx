@@ -209,7 +209,7 @@ for idx, (ax, year) in enumerate(zip(axes.flat, display_years)):
     ax.contour(boundary, levels=[0.5], colors=['white'], linewidths=1, alpha=0.7)
 
     area = data['true_area_km2']
-    ax.set_title(f'{year} — {area:.0f} km\\u00b2', color='white', fontsize=11)
+    ax.set_title(f'{year} — {area:.0f} km\²', color='white', fontsize=11)
 
     # Cloud pixel count
     n_cloud = np.sum(np.isnan(ndwi))
@@ -224,7 +224,7 @@ plt.show()
 print("Data Ingestion Module — Dataset Summary")
 print("=" * 55)
 print(f"Grid size: {generator.grid_size} x {generator.grid_size} pixels")
-print(f"Pixel size: {generator.pixel_size}m ({generator.pixel_area_km2*1e6:.0f} m\\u00b2)")
+print(f"Pixel size: {generator.pixel_size}m ({generator.pixel_area_km2*1e6:.0f} m\²)")
 print(f"Time span: {years[0]} - {years[-1]} ({len(years)} images)")
 print()
 print(f"{'Year':<8} {'Area (km2)':>12} {'Cloud %':>10}")
@@ -234,8 +234,8 @@ for year in years:
     cloud_pct = np.sum(np.isnan(d['ndwi'])) / d['ndwi'].size * 100
     print(f"{year:<8} {d['true_area_km2']:>12.1f} {cloud_pct:>10.1f}")
 print()
-print(f"Total area change: {dataset[years[0]]['true_area_km2']:.0f} -> {dataset[years[-1]]['true_area_km2']:.0f} km\\u00b2")
-print(f"Loss: {dataset[years[0]]['true_area_km2'] - dataset[years[-1]]['true_area_km2']:.0f} km\\u00b2 "
+print(f"Total area change: {dataset[years[0]]['true_area_km2']:.0f} -> {dataset[years[-1]]['true_area_km2']:.0f} km\²")
+print(f"Loss: {dataset[years[0]]['true_area_km2'] - dataset[years[-1]]['true_area_km2']:.0f} km\² "
       f"({(1 - dataset[years[-1]]['true_area_km2']/dataset[years[0]]['true_area_km2'])*100:.0f}%)")`,
       challenge: 'Add seasonal variation: generate two images per year (January dry season and August monsoon). The monsoon image should show 10-15% more water area due to flooding of low-lying island margins, even without actual erosion. How does this seasonal effect complicate change detection?',
       successHint: 'Module 1 delivers a realistic synthetic dataset that mimics the challenges of real satellite data: cloud contamination, mixed pixels at boundaries, and progressive erosion concentrated on specific bank segments.',
@@ -470,7 +470,7 @@ ax.axvline(x=result['hard_area'], color='#ef4444', linewidth=2, label='Hard clas
 ax.axvline(x=result['subpixel_area'], color='#3b82f6', linewidth=2, label='Sub-pixel')
 ci = result['mc_ci_95']
 ax.axvspan(ci[0], ci[1], alpha=0.2, color='#f59e0b', label='95% CI')
-ax.set_xlabel('Island area (km\\u00b2)', color='white', fontsize=11)
+ax.set_xlabel('Island area (km\²)', color='white', fontsize=11)
 ax.set_ylabel('Density', color='white', fontsize=11)
 ax.set_title('Area uncertainty (Monte Carlo)', color='white', fontsize=11)
 ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
@@ -481,10 +481,10 @@ plt.show()
 print("Classification Engine Results")
 print("=" * 55)
 print(f"Otsu threshold: {threshold:.4f} (vs fixed 0.0)")
-print(f"Hard classification area: {result['hard_area']:.1f} km\\u00b2")
-print(f"Sub-pixel area: {result['subpixel_area']:.1f} km\\u00b2")
-print(f"Monte Carlo mean: {result['mc_mean']:.1f} +/- {result['mc_std']:.1f} km\\u00b2")
-print(f"95% CI: [{ci[0]:.1f}, {ci[1]:.1f}] km\\u00b2")
+print(f"Hard classification area: {result['hard_area']:.1f} km\²")
+print(f"Sub-pixel area: {result['subpixel_area']:.1f} km\²")
+print(f"Monte Carlo mean: {result['mc_mean']:.1f} +/- {result['mc_std']:.1f} km\²")
+print(f"95% CI: [{ci[0]:.1f}, {ci[1]:.1f}] km\²")
 print()
 print(f"Accuracy: {accuracy:.4f}")
 print(f"Precision: {precision:.4f}")
@@ -654,7 +654,7 @@ for idx, (i1, i2) in enumerate(periods):
     colors_custom = ['#22c55e', '#78350f', '#4b5563', '#ef4444', '#3b82f6']
     cmap = LinearSegmentedColormap.from_list('change', colors_custom, N=256)
     ax.imshow(change_map, cmap=cmap, vmin=0, vmax=1)
-    ax.set_title(f'{dates[i1]}-{dates[i2]}: erosion={change["erosion_km2"]:.2f} km\\u00b2',
+    ax.set_title(f'{dates[i1]}-{dates[i2]}: erosion={change["erosion_km2"]:.2f} km\²',
                  color='white', fontsize=10)
 
 # Plot 4: Erosion by bank segment (polar plot)
@@ -672,7 +672,7 @@ colors_seg = ['#ef4444' if v > np.mean(segment_values) else '#f59e0b' for v in s
 ax.bar(x_pos, segment_values, color=colors_seg, edgecolor='none')
 ax.set_xticks(x_pos)
 ax.set_xticklabels(segment_names, color='white', fontsize=10)
-ax.set_ylabel('Erosion area (km\\u00b2)', color='white', fontsize=10)
+ax.set_ylabel('Erosion area (km\²)', color='white', fontsize=10)
 ax.set_title(f'Erosion by bank segment ({dates[0]}-{dates[-1]})', color='white', fontsize=11)
 
 # Plot 5: Erosion & deposition time series
@@ -691,7 +691,7 @@ ax.bar(np.array(mid_dates) - 0.8, erosion_series, 1.5, color='#ef4444',
 ax.bar(np.array(mid_dates) + 0.8, deposition_series, 1.5, color='#22c55e',
        label='Deposition rate', edgecolor='none')
 ax.set_xlabel('Year', color='white', fontsize=11)
-ax.set_ylabel('Rate (km\\u00b2/year)', color='white', fontsize=11)
+ax.set_ylabel('Rate (km\²/year)', color='white', fontsize=11)
 ax.set_title('Erosion vs deposition rates', color='white', fontsize=11)
 ax.legend(fontsize=9, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
@@ -721,17 +721,17 @@ plt.show()
 
 print("Change Analysis Summary ({}-{})".format(dates[0], dates[-1]))
 print("=" * 55)
-print(f"Total erosion: {full_change['erosion_km2']:.2f} km\\u00b2")
-print(f"Total deposition: {full_change['deposition_km2']:.2f} km\\u00b2")
-print(f"Net change: {full_change['net_change_km2']:+.2f} km\\u00b2")
+print(f"Total erosion: {full_change['erosion_km2']:.2f} km\²")
+print(f"Total deposition: {full_change['deposition_km2']:.2f} km\²")
+print(f"Net change: {full_change['net_change_km2']:+.2f} km\²")
 print()
 print("Erosion by bank segment:")
 for name, area in sorted(segments.items(), key=lambda x: -x[1]):
-    print(f"  {name:4s}: {area:.3f} km\\u00b2 {'*** HOTSPOT' if area > np.mean(segment_values)*1.5 else ''}")
+    print(f"  {name:4s}: {area:.3f} km\² {'*** HOTSPOT' if area > np.mean(segment_values)*1.5 else ''}")
 print()
 print("Erosion rate trend:")
 for d, e, dep in zip(mid_dates, erosion_series, deposition_series):
-    print(f"  {d:.0f}: erosion={e:.3f}, deposition={dep:.3f}, net={dep-e:+.3f} km\\u00b2/yr")`,
+    print(f"  {d:.0f}: erosion={e:.3f}, deposition={dep:.3f}, net={dep-e:+.3f} km\²/yr")`,
       challenge: 'Add a persistence filter: only count a pixel as eroded if it remains water in at least 3 consecutive images (to filter out temporary flooding). How does this change the erosion estimates?',
       successHint: 'Module 3 delivers the quantitative change analysis that conservation agencies need. The bank segment breakdown reveals where protection money should be spent, and the erosion rate trend shows whether the situation is improving or worsening.',
     },
@@ -896,7 +896,7 @@ for name, color, ls in [('linear', '#ef4444', '-'),
 
 ax.axvline(x=2024, color='white', linestyle=':', alpha=0.3)
 ax.set_xlabel('Year', color='white', fontsize=11)
-ax.set_ylabel('Island area (km\\u00b2)', color='white', fontsize=11)
+ax.set_ylabel('Island area (km\²)', color='white', fontsize=11)
 ax.set_title('Model comparison', color='white', fontsize=12)
 ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax.set_ylim(0, 800)
@@ -919,7 +919,7 @@ for label, factor, color in scenarios:
 ax.axvline(x=2024, color='white', linestyle=':', alpha=0.3)
 ax.axhline(y=200, color='white', linestyle='--', alpha=0.3, label='Critical area')
 ax.set_xlabel('Year', color='white', fontsize=11)
-ax.set_ylabel('Island area (km\\u00b2)', color='white', fontsize=11)
+ax.set_ylabel('Island area (km\²)', color='white', fontsize=11)
 ax.set_title('Climate scenarios (logistic model)', color='white', fontsize=12)
 ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
@@ -934,7 +934,7 @@ ax.fill_between(future, forecast['p25'], forecast['p75'], alpha=0.3, color='#3b8
 ax.plot(future, forecast['median'], color='#3b82f6', linewidth=2.5, label='Median forecast')
 ax.plot(hist_years, hist_areas, 'o', color='white', markersize=6, zorder=5, label='Observed')
 ax.set_xlabel('Year', color='white', fontsize=11)
-ax.set_ylabel('Island area (km\\u00b2)', color='white', fontsize=11)
+ax.set_ylabel('Island area (km\²)', color='white', fontsize=11)
 ax.set_title('Probabilistic forecast (logistic, current climate)', color='white', fontsize=12)
 ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
@@ -951,7 +951,7 @@ for thresh in thresholds:
 
     prob_below = np.mean(all_forecasts < thresh, axis=0)
     ax.plot(future, prob_below * 100, linewidth=2,
-            label=f'P(A < {thresh} km\\u00b2)')
+            label=f'P(A < {thresh} km\²)')
 
 ax.set_xlabel('Year', color='white', fontsize=11)
 ax.set_ylabel('Probability (%)', color='white', fontsize=11)
@@ -969,19 +969,19 @@ print()
 print("Model fits:")
 for name in ['linear', 'exponential', 'logistic']:
     m = engine.models[name]
-    print(f"  {name.title():15s}: RMSE = {m['rmse']:.1f} km\\u00b2")
+    print(f"  {name.title():15s}: RMSE = {m['rmse']:.1f} km\²")
 
 print()
 print("Predicted area at 2050 (logistic model):")
 for label, factor, _ in scenarios:
     pred = engine.predict([2050], 'logistic', factor)[0]
-    print(f"  {label:30s}: {pred:.0f} km\\u00b2")
+    print(f"  {label:30s}: {pred:.0f} km\²")
 
 print()
 print("Probabilistic forecast at 2050 (current climate):")
-print(f"  Median: {forecast['median'][2050-2025]:.0f} km\\u00b2")
-print(f"  50% CI: [{forecast['p25'][2050-2025]:.0f}, {forecast['p75'][2050-2025]:.0f}] km\\u00b2")
-print(f"  90% CI: [{forecast['p5'][2050-2025]:.0f}, {forecast['p95'][2050-2025]:.0f}] km\\u00b2")`,
+print(f"  Median: {forecast['median'][2050-2025]:.0f} km\²")
+print(f"  50% CI: [{forecast['p25'][2050-2025]:.0f}, {forecast['p75'][2050-2025]:.0f}] km\²")
+print(f"  90% CI: [{forecast['p5'][2050-2025]:.0f}, {forecast['p95'][2050-2025]:.0f}] km\²")`,
       challenge: 'Implement model selection using the Akaike Information Criterion (AIC): AIC = n*ln(RSS/n) + 2k, where n is the number of data points, RSS is the residual sum of squares, and k is the number of parameters. Which model does AIC select, and why?',
       successHint: 'Module 4 delivers probabilistic forecasts that honestly represent uncertainty. The ensemble approach shows that while we cannot predict exact future area, we can quantify the probability of crossing critical thresholds.',
     },
@@ -1116,7 +1116,7 @@ class IslandChangeDetector:
                  '--', color='#3b82f6', linewidth=1, alpha=0.5)
         ax2.axvline(x=2024, color='white', linestyle=':', alpha=0.3)
         ax2.set_xlabel('Year', color='white')
-        ax2.set_ylabel('Area (km\\u00b2)', color='white')
+        ax2.set_ylabel('Area (km\²)', color='white')
         ax2.set_title('Area projection with uncertainty', color='white', fontsize=11)
         ax2.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
@@ -1134,7 +1134,7 @@ class IslandChangeDetector:
         bars = ax3.bar(theta_seg, erosion_by_segment, width=2*np.pi/len(segments)*0.8,
                        color=colors_seg, alpha=0.8, edgecolor='none')
         ax3.set_thetagrids(np.degrees(theta_seg), segments)
-        ax3.set_title('Erosion by bank segment\\n(km\\u00b2/year)', color='white', fontsize=10, pad=15)
+        ax3.set_title('Erosion by bank segment\\n(km\²/year)', color='white', fontsize=10, pad=15)
 
         # PANEL 4: Monthly risk calendar
         ax4 = fig.add_subplot(2, 3, 4)
@@ -1150,7 +1150,7 @@ class IslandChangeDetector:
         bars = ax4.bar(month_names, monthly_erosion, color=colors_month, edgecolor='none')
         for i, (m, e, r) in enumerate(zip(month_names, monthly_erosion, risk_level)):
             ax4.text(i, e + 0.005, r, ha='center', color='white', fontsize=7, fontweight='bold')
-        ax4.set_ylabel('Erosion (km\\u00b2/month)', color='white')
+        ax4.set_ylabel('Erosion (km\²/month)', color='white')
         ax4.set_title('Monthly erosion risk calendar', color='white', fontsize=11)
         ax4.tick_params(axis='x', labelcolor='white')
 
@@ -1173,7 +1173,7 @@ class IslandChangeDetector:
         ax5.axhline(y=200, color='white', linestyle=':', alpha=0.3)
         ax5.text(2070, 205, 'Critical threshold', color='white', fontsize=8)
         ax5.set_xlabel('Year', color='white')
-        ax5.set_ylabel('Area (km\\u00b2)', color='white')
+        ax5.set_ylabel('Area (km\²)', color='white')
         ax5.set_title('Scenario comparison', color='white', fontsize=11)
         ax5.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
@@ -1223,35 +1223,35 @@ print("ANALYSIS: 1975-2024 (49 years of satellite data)")
 print()
 print("KEY FINDINGS")
 print("-" * 70)
-print(f"  Area in 1975: ~720 km\\u00b2")
-print(f"  Area in 2024: ~345 km\\u00b2")
-print(f"  Total loss: ~375 km\\u00b2 (52%)")
-print(f"  Mean erosion rate: 7.7 km\\u00b2/year")
-print(f"  Current erosion rate: ~0.8 km\\u00b2/year (declining)")
+print(f"  Area in 1975: ~720 km\²")
+print(f"  Area in 2024: ~345 km\²")
+print(f"  Total loss: ~375 km\² (52%)")
+print(f"  Mean erosion rate: 7.7 km\²/year")
+print(f"  Current erosion rate: ~0.8 km\²/year (declining)")
 print()
 print("PREDICTIONS (logistic model, current climate)")
-print(f"  2030: {predict_fn([2030])[0]:.0f} km\\u00b2")
-print(f"  2040: {predict_fn([2040])[0]:.0f} km\\u00b2")
-print(f"  2050: {predict_fn([2050])[0]:.0f} km\\u00b2")
-print(f"  2075: {predict_fn([2075])[0]:.0f} km\\u00b2")
-print(f"  Stabilization area: ~{predict_fn([2200])[0]:.0f} km\\u00b2")
+print(f"  2030: {predict_fn([2030])[0]:.0f} km\²")
+print(f"  2040: {predict_fn([2040])[0]:.0f} km\²")
+print(f"  2050: {predict_fn([2050])[0]:.0f} km\²")
+print(f"  2075: {predict_fn([2075])[0]:.0f} km\²")
+print(f"  Stabilization area: ~{predict_fn([2200])[0]:.0f} km\²")
 print()
 print("CRITICAL BANKS (prioritize for protection)")
-print("  1. South bank: 0.25 km\\u00b2/year — CRITICAL")
-print("  2. Southwest bank: 0.18 km\\u00b2/year — CRITICAL")
-print("  3. West bank: 0.12 km\\u00b2/year — HIGH")
+print("  1. South bank: 0.25 km\²/year — CRITICAL")
+print("  2. Southwest bank: 0.18 km\²/year — CRITICAL")
+print("  3. West bank: 0.12 km\²/year — HIGH")
 print()
 print("SEASONAL RISK: 80% of annual erosion occurs June-September")
-print("  Peak risk: July (0.20 km\\u00b2 in one month)")
+print("  Peak risk: July (0.20 km\² in one month)")
 print()
 print("CLIMATE CHANGE IMPACT")
-print(f"  +15% floods: area at 2050 = {predict_fn([2050], 1.15)[0]:.0f} km\\u00b2 vs {predict_fn([2050])[0]:.0f} baseline")
-print(f"  +30% floods: area at 2050 = {predict_fn([2050], 1.30)[0]:.0f} km\\u00b2")
-print(f"  With protection: area at 2050 = {predict_fn([2050], 0.70)[0]:.0f} km\\u00b2")
+print(f"  +15% floods: area at 2050 = {predict_fn([2050], 1.15)[0]:.0f} km\² vs {predict_fn([2050])[0]:.0f} baseline")
+print(f"  +30% floods: area at 2050 = {predict_fn([2050], 1.30)[0]:.0f} km\²")
+print(f"  With protection: area at 2050 = {predict_fn([2050], 0.70)[0]:.0f} km\²")
 print()
 print("RECOMMENDATION: Implement protection on S/SW banks immediately.")
 print("Cost estimate: $5-10M for porcupine + vegetation hybrid approach.")
-print("Expected benefit: stabilize area at 310+ km\\u00b2 instead of 270.")
+print("Expected benefit: stabilize area at 310+ km\² instead of 270.")
 print()
 print("Report generated by River Island Change Detector v1.0")
 print("Based on satellite remote sensing, geomorphic modeling, and flood analysis")`,

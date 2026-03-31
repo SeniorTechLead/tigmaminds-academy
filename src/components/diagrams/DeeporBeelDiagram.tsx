@@ -44,10 +44,10 @@ export default function DeeporBeelDiagram() {
 
         {/* Title */}
         <text x="390" y="130" textAnchor="middle" fontSize="16" fontWeight="700" fill="#fcd34d">
-          Deepor Beel \u2014 A Wetland Under the Stars
+          Deepor Beel — A Wetland Under the Stars
         </text>
         <text x="390" y="150" textAnchor="middle" fontSize="11" fill="#c4b5fd">
-          Ramsar Site \u00B7 Guwahati, Assam \u00B7 One of India\u2019s most important urban wetlands
+          Ramsar Site · Guwahati, Assam · One of India’s most important urban wetlands
         </text>
 
         {/* City glow on right side */}
@@ -123,14 +123,14 @@ export default function DeeporBeelDiagram() {
         <text x="200" y="530" textAnchor="middle" fontSize="11" fill="#c4b5fd">Milky Way visible</text>
         <text x="200" y="546" textAnchor="middle" fontSize="11" fill="#c4b5fd">Migratory birds navigate by stars</text>
         <text x="200" y="562" textAnchor="middle" fontSize="11" fill="#c4b5fd">Natural circadian rhythm maintained</text>
-        <text x="200" y="580" textAnchor="middle" fontSize="11" fill="#22c55e">Bortle Class 3\u20134</text>
+        <text x="200" y="580" textAnchor="middle" fontSize="11" fill="#22c55e">Bortle Class 3–4</text>
 
         <rect x="410" y="490" width="340" height="100" rx="8" fill="#1c1917" stroke="#fbbf24" strokeWidth="1" />
         <text x="580" y="512" textAnchor="middle" fontSize="12" fontWeight="700" fill="#fbbf24">Light Pollution (City side)</text>
         <text x="580" y="530" textAnchor="middle" fontSize="11" fill="#fde68a">Only brightest stars visible</text>
         <text x="580" y="546" textAnchor="middle" fontSize="11" fill="#fde68a">Confuses nocturnal wildlife &amp; birds</text>
         <text x="580" y="562" textAnchor="middle" fontSize="11" fill="#fde68a">Wastes energy, disrupts ecosystems</text>
-        <text x="580" y="580" textAnchor="middle" fontSize="11" fill="#ef4444">Bortle Class 7\u20138</text>
+        <text x="580" y="580" textAnchor="middle" fontSize="11" fill="#ef4444">Bortle Class 7–8</text>
       </svg>
     </div>
   );

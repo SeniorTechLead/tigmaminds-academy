@@ -28,34 +28,34 @@ export default function CloudRefusedLevel1() {
 
   const miniLessons = [
     {
-      title: 'How clouds form \u2014 evaporation, lapse rate, and dew point',
+      title: 'How clouds form — evaporation, lapse rate, and dew point',
       concept: `In the story, Meghi the cloud gathered water from the Bay of Bengal and carried it to the Khasi Hills. But what does "gathering water" actually mean physically?
 
-The sun heats water surfaces. Water molecules at the surface gain enough kinetic energy to escape as **vapor** (invisible gas). This vapor rises because warm air is less dense. As it rises, atmospheric pressure drops, so the air expands and cools at a steady rate: roughly **6.5\u00B0C per 1,000 metres** \u2014 the **environmental lapse rate**.
+The sun heats water surfaces. Water molecules at the surface gain enough kinetic energy to escape as **vapor** (invisible gas). This vapor rises because warm air is less dense. As it rises, atmospheric pressure drops, so the air expands and cools at a steady rate: roughly **6.5°C per 1,000 metres** — the **environmental lapse rate**.
 
-At some altitude, the air cools to its **dew point**: the temperature where it holds maximum vapor. Below the dew point, vapor must condense. But it needs a surface to condense onto \u2014 a **condensation nucleus** (dust, salt, pollen, soot). Water molecules stick to these tiny particles, forming droplets ~10 micrometres across. Billions of these droplets = a visible cloud.
+At some altitude, the air cools to its **dew point**: the temperature where it holds maximum vapor. Below the dew point, vapor must condense. But it needs a surface to condense onto — a **condensation nucleus** (dust, salt, pollen, soot). Water molecules stick to these tiny particles, forming droplets ~10 micrometres across. Billions of these droplets = a visible cloud.
 
-**Key calculation:** If ground temperature is 30\u00B0C and dew point is 18\u00B0C:
-- Cloud base = (30 \u2013 18) / 6.5 \u00D7 1000 = **1,846 metres**
-- This is why Meghalaya\u2019s clouds hug the hills at a predictable altitude.`,
-      analogy: 'Cloud formation is like breathing on a cold window. Your breath (warm, moist air) hits the cold glass (like high altitude). The moisture condenses into visible droplets on the surface (the glass acts as a giant condensation nucleus). The colder the glass, the faster the condensation \u2014 just as higher altitude means colder air and more cloud formation.',
+**Key calculation:** If ground temperature is 30°C and dew point is 18°C:
+- Cloud base = (30 – 18) / 6.5 × 1000 = **1,846 metres**
+- This is why Meghalaya’s clouds hug the hills at a predictable altitude.`,
+      analogy: 'Cloud formation is like breathing on a cold window. Your breath (warm, moist air) hits the cold glass (like high altitude). The moisture condenses into visible droplets on the surface (the glass acts as a giant condensation nucleus). The colder the glass, the faster the condensation — just as higher altitude means colder air and more cloud formation.',
       storyConnection: 'Meghi gathered water "all the way from the Bay of Bengal." This is real: monsoon winds carry water vapor thousands of kilometres from the ocean. When this moisture-laden air hits the Khasi Hills and is forced upward (orographic lift), it cools below its dew point and forms the massive clouds that make Meghalaya the wettest region on Earth.',
-      checkQuestion: 'On a 35\u00B0C day with dew point 20\u00B0C, at what altitude will clouds form? And why does Cherrapunji get more rain than Shillong, even though they are only 50 km apart?',
-      checkAnswer: 'Cloud base: (35 \u2013 20) / 6.5 \u00D7 1000 = 2,308 metres. Cherrapunji gets more rain because it sits at the edge of the Khasi plateau where moist air is forced up most steeply (strongest orographic lift). Shillong is on the plateau top \u2014 the air has already released much of its moisture before reaching there.',
+      checkQuestion: 'On a 35°C day with dew point 20°C, at what altitude will clouds form? And why does Cherrapunji get more rain than Shillong, even though they are only 50 km apart?',
+      checkAnswer: 'Cloud base: (35 – 20) / 6.5 × 1000 = 2,308 metres. Cherrapunji gets more rain because it sits at the edge of the Khasi plateau where moist air is forced up most steeply (strongest orographic lift). Shillong is on the plateau top — the air has already released much of its moisture before reaching there.',
       codeIntro: 'Model how temperature drops with altitude and predict where clouds form.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
 # Atmospheric lapse rate model
 altitude = np.linspace(0, 5000, 500)  # metres
-ground_temp = 30  # \u00B0C in Shillong valley
-lapse_rate = 6.5  # \u00B0C per 1000m
+ground_temp = 30  # °C in Shillong valley
+lapse_rate = 6.5  # °C per 1000m
 
 # Temperature decreases with altitude
 temp = ground_temp - (lapse_rate / 1000) * altitude
 
 # Dew point (roughly constant in lower atmosphere)
-dew_point = 18  # \u00B0C
+dew_point = 18  # °C
 
 # Cloud forms where temperature = dew point
 cloud_base = (ground_temp - dew_point) / lapse_rate * 1000
@@ -67,14 +67,14 @@ fig.patch.set_facecolor('#1f2937')
 ax1.set_facecolor('#111827')
 ax1.plot(temp, altitude, color='#ef4444', linewidth=2, label='Air temperature')
 ax1.axhline(cloud_base, color='#60a5fa', linestyle='--', linewidth=1.5, alpha=0.7)
-ax1.axvline(dew_point, color='#22c55e', linestyle='--', linewidth=1.5, label=f'Dew point ({dew_point}\u00B0C)')
+ax1.axvline(dew_point, color='#22c55e', linestyle='--', linewidth=1.5, label=f'Dew point ({dew_point}°C)')
 ax1.fill_betweenx(altitude, temp, dew_point, where=temp < dew_point,
                   alpha=0.15, color='#60a5fa', label='Cloud zone')
 ax1.plot(dew_point, cloud_base, 'o', color='#f59e0b', markersize=10, zorder=5)
 ax1.annotate(f'Cloud base: {cloud_base:.0f}m', xy=(dew_point, cloud_base),
             xytext=(dew_point + 3, cloud_base + 300), color='#f59e0b', fontsize=10,
             arrowprops=dict(arrowstyle='->', color='#f59e0b'))
-ax1.set_xlabel('Temperature (\u00B0C)', color='white')
+ax1.set_xlabel('Temperature (°C)', color='white')
 ax1.set_ylabel('Altitude (m)', color='white')
 ax1.set_title('Where Clouds Form Over Shillong', color='white', fontsize=12)
 ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
@@ -85,11 +85,11 @@ ax2.set_facecolor('#111827')
 for gt in [25, 28, 30, 33, 36]:
     t = gt - (lapse_rate / 1000) * altitude
     cb = (gt - dew_point) / lapse_rate * 1000
-    ax2.plot(t, altitude, linewidth=1.5, label=f'{gt}\u00B0C \u2192 cloud at {cb:.0f}m')
+    ax2.plot(t, altitude, linewidth=1.5, label=f'{gt}°C → cloud at {cb:.0f}m')
     ax2.plot(dew_point, cb, 'o', markersize=6)
 
 ax2.axvline(dew_point, color='#22c55e', linestyle='--', linewidth=1, alpha=0.5)
-ax2.set_xlabel('Temperature (\u00B0C)', color='white')
+ax2.set_xlabel('Temperature (°C)', color='white')
 ax2.set_ylabel('Altitude (m)', color='white')
 ax2.set_title('Hotter Ground = Higher Cloud Base', color='white', fontsize=12)
 ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
@@ -99,12 +99,12 @@ plt.tight_layout()
 plt.show()
 
 print("Cloud formation physics:")
-print(f"  Ground temp: {ground_temp}\u00B0C, Dew point: {dew_point}\u00B0C")
+print(f"  Ground temp: {ground_temp}°C, Dew point: {dew_point}°C")
 print(f"  Cloud base: {cloud_base:.0f} metres")
-print(f"  Lapse rate: {lapse_rate}\u00B0C per 1000m")
+print(f"  Lapse rate: {lapse_rate}°C per 1000m")
 print(f"  Hotter days push cloud base HIGHER (more cooling needed)")`,
-      challenge: 'During monsoon season, the dew point in Meghalaya rises to 24\u00B0C and ground temperature drops to 26\u00B0C. Recalculate the cloud base. Why does this explain Meghalaya\u2019s persistent low cloud cover during monsoon?',
-      successHint: 'You just derived the lifting condensation level (LCL) formula \u2014 the same equation meteorologists use worldwide. Every weather balloon launched carries instruments to measure exactly these numbers.',
+      challenge: 'During monsoon season, the dew point in Meghalaya rises to 24°C and ground temperature drops to 26°C. Recalculate the cloud base. Why does this explain Meghalaya’s persistent low cloud cover during monsoon?',
+      successHint: 'You just derived the lifting condensation level (LCL) formula — the same equation meteorologists use worldwide. Every weather balloon launched carries instruments to measure exactly these numbers.',
       diagram: CloudFormationDiagram,
     },
     {
@@ -113,15 +113,15 @@ print(f"  Hotter days push cloud base HIGHER (more cooling needed)")`,
 
 A cloud droplet is about **10 micrometres** across. A raindrop is about **2,000 micrometres** (2 mm). That is a 200x difference in diameter, or about **one million times** the volume. A raindrop needs ~1 million cloud droplets to merge together.
 
-**Collision-coalescence (warm rain process):** Larger droplets fall faster than small ones. As they fall through the cloud, they collide with and absorb smaller droplets. Each collision makes the drop bigger and faster, triggering more collisions \u2014 a chain reaction. This works best in thick clouds with a wide range of droplet sizes.
+**Collision-coalescence (warm rain process):** Larger droplets fall faster than small ones. As they fall through the cloud, they collide with and absorb smaller droplets. Each collision makes the drop bigger and faster, triggering more collisions — a chain reaction. This works best in thick clouds with a wide range of droplet sizes.
 
-**Bergeron process (ice-crystal process):** In tall clouds, the top is below 0\u00B0C but many droplets remain liquid (**supercooled**). Ice crystals in this zone "steal" water vapor from liquid droplets (because vapor pressure over ice < vapor pressure over liquid). Ice crystals grow rapidly, fall, and melt into rain.
+**Bergeron process (ice-crystal process):** In tall clouds, the top is below 0°C but many droplets remain liquid (**supercooled**). Ice crystals in this zone "steal" water vapor from liquid droplets (because vapor pressure over ice < vapor pressure over liquid). Ice crystals grow rapidly, fall, and melt into rain.
 
-**Why Meghi didn\u2019t rain:** Without enough collisions or ice nuclei, droplets stay tiny. The cloud is full of water but none of it can fall. Cloud seeding solves exactly this problem.`,
+**Why Meghi didn’t rain:** Without enough collisions or ice nuclei, droplets stay tiny. The cloud is full of water but none of it can fall. Cloud seeding solves exactly this problem.`,
       analogy: 'Imagine a room full of thousands of tiny soap bubbles floating in the air. None of them is heavy enough to fall to the floor. But if you start gently pushing bubbles together, they merge into bigger bubbles, and eventually they are heavy enough to sink. That merging process is collision-coalescence, and it is why rain needs TIME and THICKNESS to happen.',
-      storyConnection: 'The story says Meghi "grew heavier and heavier" but still did not rain. This is physically accurate: a cloud can contain hundreds of thousands of tonnes of water as microscopic droplets, each too small to overcome air resistance. Meghi was waterlogged but her droplets were too small to fall \u2014 she needed the coalescence process or ice nuclei to start the chain reaction.',
+      storyConnection: 'The story says Meghi "grew heavier and heavier" but still did not rain. This is physically accurate: a cloud can contain hundreds of thousands of tonnes of water as microscopic droplets, each too small to overcome air resistance. Meghi was waterlogged but her droplets were too small to fall — she needed the coalescence process or ice nuclei to start the chain reaction.',
       checkQuestion: 'A thin stratus cloud (500 m thick) rarely produces heavy rain, while a cumulonimbus (10 km tall) produces downpours. Explain why using what you know about droplet growth.',
-      checkAnswer: 'Three reasons: (1) The cumulonimbus has far more water content \u2014 more droplets to collide and merge. (2) The 10 km height means droplets have a much longer fall path through the cloud, giving them more time and distance to collide. (3) The top of the cumulonimbus is well below 0\u00B0C, so the Bergeron process activates \u2014 ice crystals grow rapidly from supercooled droplets. The thin stratus has none of these advantages.',
+      checkAnswer: 'Three reasons: (1) The cumulonimbus has far more water content — more droplets to collide and merge. (2) The 10 km height means droplets have a much longer fall path through the cloud, giving them more time and distance to collide. (3) The top of the cumulonimbus is well below 0°C, so the Bergeron process activates — ice crystals grow rapidly from supercooled droplets. The thin stratus has none of these advantages.',
       codeIntro: 'Simulate droplet growth through collision-coalescence.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -170,18 +170,18 @@ fig.patch.set_facecolor('#1f2937')
 
 # Different starting sizes
 ax1.set_facecolor('#111827')
-for r0, color, label in [(10, '#ef4444', '10 \u00B5m (typical cloud)'),
-                          (30, '#f59e0b', '30 \u00B5m (large cloud drop)'),
-                          (50, '#22c55e', '50 \u00B5m (drizzle seed)')]:
+for r0, color, label in [(10, '#ef4444', '10 µm (typical cloud)'),
+                          (30, '#f59e0b', '30 µm (large cloud drop)'),
+                          (50, '#22c55e', '50 µm (drizzle seed)')]:
     t, r, h = simulate_droplet_growth(r0, 3000, 0.3)
     ax1.plot(t, r, color=color, linewidth=2, label=label)
 
 ax1.axhline(100, color='gray', linestyle=':', alpha=0.5)
-ax1.text(5, 120, 'Drizzle threshold (100 \u00B5m)', color='gray', fontsize=8)
+ax1.text(5, 120, 'Drizzle threshold (100 µm)', color='gray', fontsize=8)
 ax1.axhline(1000, color='gray', linestyle=':', alpha=0.5)
-ax1.text(5, 1100, 'Raindrop (1000 \u00B5m)', color='gray', fontsize=8)
+ax1.text(5, 1100, 'Raindrop (1000 µm)', color='gray', fontsize=8)
 ax1.set_xlabel('Time (seconds)', color='white')
-ax1.set_ylabel('Droplet radius (\u00B5m)', color='white')
+ax1.set_ylabel('Droplet radius (µm)', color='white')
 ax1.set_title('Droplet Growth by Collision-Coalescence', color='white', fontsize=12)
 ax1.set_yscale('log')
 ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
@@ -193,11 +193,11 @@ for thickness, color in [(500, '#ef4444'), (1000, '#f59e0b'),
                          (3000, '#22c55e'), (5000, '#3b82f6')]:
     t, r, h = simulate_droplet_growth(20, thickness, 0.3)
     final_r = r[-1]
-    ax2.plot(t, r, color=color, linewidth=2, label=f'{thickness}m cloud \u2192 {final_r:.0f} \u00B5m')
+    ax2.plot(t, r, color=color, linewidth=2, label=f'{thickness}m cloud → {final_r:.0f} µm')
 
 ax2.axhline(1000, color='gray', linestyle=':', alpha=0.5)
 ax2.set_xlabel('Time (seconds)', color='white')
-ax2.set_ylabel('Droplet radius (\u00B5m)', color='white')
+ax2.set_ylabel('Droplet radius (µm)', color='white')
 ax2.set_title('Thicker Cloud = Bigger Drops', color='white', fontsize=12)
 ax2.set_yscale('log')
 ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
@@ -207,32 +207,32 @@ plt.tight_layout()
 plt.show()
 
 print("Key insight:")
-print("  Thin clouds (500m): droplets barely grow \u2192 no rain")
+print("  Thin clouds (500m): droplets barely grow → no rain")
 print("  Thick clouds (3000m+): droplets reach raindrop size")
 print("  This is why cumulus humilis (small) = fair weather")
 print("  and cumulonimbus (tall) = heavy rain")`,
       challenge: 'Modify the cloud liquid water content (cloud_lwc_g_m3) from 0.1 to 1.0 and see how it affects growth rate. At what thickness does a cloud with low water content (0.1) finally produce rain?',
-      successHint: 'The collision-coalescence process is why warm tropical clouds can rain without any ice at all. Understanding droplet growth is the foundation of weather modification \u2014 if you can make droplets grow faster, you can make clouds rain sooner.',
+      successHint: 'The collision-coalescence process is why warm tropical clouds can rain without any ice at all. Understanding droplet growth is the foundation of weather modification — if you can make droplets grow faster, you can make clouds rain sooner.',
       diagram: CloudRainProcessDiagram,
     },
     {
-      title: 'Cloud seeding \u2014 silver iodide and making rain on demand',
-      concept: `If Meghi\u2019s droplets were too small to rain, could someone give them a push? That is exactly what **cloud seeding** does.
+      title: 'Cloud seeding — silver iodide and making rain on demand',
+      concept: `If Meghi’s droplets were too small to rain, could someone give them a push? That is exactly what **cloud seeding** does.
 
 Invented in 1946 by Vincent Schaefer, cloud seeding introduces particles into clouds to trigger precipitation. The main agent is **silver iodide (AgI)**, whose crystal structure mimics ice. Supercooled droplets freeze onto AgI particles, triggering the Bergeron process: ice crystals grow at the expense of liquid droplets, become heavy, and fall.
 
 **Methods:**
 - Aircraft fly through clouds burning AgI flares (most common)
 - Ground generators burn AgI solution; wind carries particles up
-- Dry ice (solid CO\u2082) dropped from planes supercools air instantly
+- Dry ice (solid CO₂) dropped from planes supercools air instantly
 
-**Effectiveness:** 5\u201315% rainfall increase under favorable conditions. It ONLY works on clouds that already have moisture and supercooled water \u2014 you cannot make rain from clear sky.
+**Effectiveness:** 5–15% rainfall increase under favorable conditions. It ONLY works on clouds that already have moisture and supercooled water — you cannot make rain from clear sky.
 
 **The debate:** Does seeding one region "steal" rain from downwind areas? No one has proven it conclusively, but the concern is real. Who gets to decide where it rains?`,
-      analogy: 'Cloud seeding is like adding a catalyst to a chemical reaction. The reactants (water vapor, cold air) are already there, but the reaction (rain) needs a kick-start. Silver iodide is that catalyst \u2014 it does not create water; it helps existing water do what it was going to do eventually, just faster and in a specific location.',
-      storyConnection: 'The East Wind tells Meghi she has become "a prisoner of what you refuse to release." In meteorological terms, Meghi had supercooled water but lacked ice nuclei to start the Bergeron process. A cloud seeding plane flying through Meghi would release AgI particles, which would act as ice nuclei, causing her water to freeze, grow into crystals, and fall as rain. The East Wind was essentially suggesting natural cloud seeding \u2014 the conversation that triggered Meghi\u2019s decision to let go.',
+      analogy: 'Cloud seeding is like adding a catalyst to a chemical reaction. The reactants (water vapor, cold air) are already there, but the reaction (rain) needs a kick-start. Silver iodide is that catalyst — it does not create water; it helps existing water do what it was going to do eventually, just faster and in a specific location.',
+      storyConnection: 'The East Wind tells Meghi she has become "a prisoner of what you refuse to release." In meteorological terms, Meghi had supercooled water but lacked ice nuclei to start the Bergeron process. A cloud seeding plane flying through Meghi would release AgI particles, which would act as ice nuclei, causing her water to freeze, grow into crystals, and fall as rain. The East Wind was essentially suggesting natural cloud seeding — the conversation that triggered Meghi’s decision to let go.',
       checkQuestion: 'China deployed 35,000 cloud-seeding rockets before the 2008 Beijing Olympics opening ceremony. Were they trying to MAKE rain or PREVENT rain? Think carefully.',
-      checkAnswer: 'They were trying to MAKE rain fall BEFORE the ceremony \u2014 by seeding clouds approaching Beijing hours in advance, they hoped to drain the clouds before they reached the stadium. The strategy was: make the clouds rain early (over areas outside the city), so they arrive over the stadium already emptied. This is "rain avoidance" through premature precipitation, not rain prevention.',
+      checkAnswer: 'They were trying to MAKE rain fall BEFORE the ceremony — by seeding clouds approaching Beijing hours in advance, they hoped to drain the clouds before they reached the stadium. The strategy was: make the clouds rain early (over areas outside the city), so they arrive over the stadium already emptied. This is "rain avoidance" through premature precipitation, not rain prevention.',
       codeIntro: 'Model the Bergeron process: how ice crystals grow at the expense of liquid droplets.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -260,7 +260,7 @@ ax1.set_facecolor('#111827')
 ax1.plot(temps, e_liquid, color='#3b82f6', linewidth=2, label='Over liquid water')
 ax1.plot(temps, e_ice, color='#06b6d4', linewidth=2, label='Over ice')
 ax1.fill_between(temps, e_ice, e_liquid, alpha=0.15, color='#22c55e', label='Difference (drives Bergeron)')
-ax1.set_xlabel('Temperature (\u00B0C)', color='white')
+ax1.set_xlabel('Temperature (°C)', color='white')
 ax1.set_ylabel('Saturation vapor pressure (hPa)', color='white')
 ax1.set_title('Why Ice Crystals Steal Water from Droplets', color='white', fontsize=12)
 ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
@@ -272,13 +272,13 @@ ax2.plot(temps, supersaturation, color='#22c55e', linewidth=2)
 ax2.fill_between(temps, 0, supersaturation, alpha=0.15, color='#22c55e')
 peak_idx = np.argmax(supersaturation)
 ax2.plot(temps[peak_idx], supersaturation[peak_idx], 'o', color='#f59e0b', markersize=10, zorder=5)
-ax2.annotate(f'Peak: {supersaturation[peak_idx]:.1f}% at {temps[peak_idx]:.0f}\u00B0C',
+ax2.annotate(f'Peak: {supersaturation[peak_idx]:.1f}% at {temps[peak_idx]:.0f}°C',
             xy=(temps[peak_idx], supersaturation[peak_idx]),
             xytext=(temps[peak_idx] + 8, supersaturation[peak_idx] - 3),
             color='#f59e0b', fontsize=10, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 ax2.axvline(-12, color='#ef4444', linestyle='--', alpha=0.5)
-ax2.text(-11.5, 2, 'AgI activates\\nhere (-5 to -15\u00B0C)', color='#ef4444', fontsize=8)
-ax2.set_xlabel('Temperature (\u00B0C)', color='white')
+ax2.text(-11.5, 2, 'AgI activates\\nhere (-5 to -15°C)', color='#ef4444', fontsize=8)
+ax2.set_xlabel('Temperature (°C)', color='white')
 ax2.set_ylabel('Supersaturation over ice (%)', color='white')
 ax2.set_title('Ice Crystal Growth Rate (higher = faster)', color='white', fontsize=12)
 ax2.tick_params(colors='gray')
@@ -287,31 +287,31 @@ plt.tight_layout()
 plt.show()
 
 print("Bergeron process physics:")
-print(f"  Maximum supersaturation: {supersaturation[peak_idx]:.1f}% at {temps[peak_idx]:.0f}\u00B0C")
-print(f"  This means ice crystals grow FASTEST around {temps[peak_idx]:.0f}\u00B0C")
-print(f"  Silver iodide works best when cloud temp is -5 to -15\u00B0C")
-print(f"  Below -40\u00B0C: water freezes on its own (no seeding needed)")`,
-      challenge: 'At what altitude in a cloud would AgI seeding be most effective? Use the lapse rate (6.5\u00B0C/km) to calculate the altitude where cloud temperature is at the peak supersaturation temperature.',
+print(f"  Maximum supersaturation: {supersaturation[peak_idx]:.1f}% at {temps[peak_idx]:.0f}°C")
+print(f"  This means ice crystals grow FASTEST around {temps[peak_idx]:.0f}°C")
+print(f"  Silver iodide works best when cloud temp is -5 to -15°C")
+print(f"  Below -40°C: water freezes on its own (no seeding needed)")`,
+      challenge: 'At what altitude in a cloud would AgI seeding be most effective? Use the lapse rate (6.5°C/km) to calculate the altitude where cloud temperature is at the peak supersaturation temperature.',
       successHint: 'The gap between the two vapor pressure curves IS the Bergeron process. This single chart explains why clouds rain, why cloud seeding works, and why meteorologists care so much about cloud-top temperature.',
       diagram: CloudSeedingDiagram,
     },
     {
-      title: 'Cloud classification \u2014 reading weather from the sky',
+      title: 'Cloud classification — reading weather from the sky',
       concept: `Before satellites and apps, people in Meghalaya predicted weather by reading clouds. Modern meteorology classifies clouds by altitude and shape, and each type tells a different weather story.
 
-**Cirrus** (6\u201312 km): Thin, wispy ice crystals. Fair now, but if thickening, rain may come in 24\u201348 hours. Khasi elders call spreading cirrus "the sky combing its hair before rain."
+**Cirrus** (6–12 km): Thin, wispy ice crystals. Fair now, but if thickening, rain may come in 24–48 hours. Khasi elders call spreading cirrus "the sky combing its hair before rain."
 
-**Cumulus** (1\u20136 km): Puffy cotton-balls on sunny days. Small ones = fair weather. Growing tall = approaching storms. The flat base marks the altitude where temperature = dew point (the LCL you calculated earlier!).
+**Cumulus** (1–6 km): Puffy cotton-balls on sunny days. Small ones = fair weather. Growing tall = approaching storms. The flat base marks the altitude where temperature = dew point (the LCL you calculated earlier!).
 
 **Stratus** (below 2 km): Flat grey blankets. Drizzle and gloom, rarely heavy rain. Fog = stratus at ground level.
 
 **Cumulonimbus** (ground to 12+ km): The king of clouds. Produces heavy rain, thunder, lightning, hail. Its anvil-shaped top (where rising air hits the tropopause and spreads sideways) is visible from 100 km away.
 
-**Meghi was a cumulonimbus** \u2014 dark, heavy, towering, packed with water, refusing to let go.`,
+**Meghi was a cumulonimbus** — dark, heavy, towering, packed with water, refusing to let go.`,
       analogy: 'Cloud types are like different languages of the sky. Cirrus whispers "something is coming." Cumulus speaks cheerfully of sunny thermals. Stratus drones on monotonously. Cumulonimbus shouts "take shelter NOW." Learning to read these languages is the oldest weather forecasting skill in human history.',
-      storyConnection: 'The story describes Meghi as "big, dark, and swollen" with a belly that "sagged until she scraped the tops of the pine trees." Her color turned "from grey to black to a deep, bruised purple." This is a textbook description of a cumulonimbus cloud loaded with water. The progression from grey to dark purple indicates increasing thickness and water content \u2014 sunlight can no longer penetrate.',
+      storyConnection: 'The story describes Meghi as "big, dark, and swollen" with a belly that "sagged until she scraped the tops of the pine trees." Her color turned "from grey to black to a deep, bruised purple." This is a textbook description of a cumulonimbus cloud loaded with water. The progression from grey to dark purple indicates increasing thickness and water content — sunlight can no longer penetrate.',
       checkQuestion: 'You are hiking in the Khasi Hills. In the morning, you see thin cirrus high up. By noon, cumulus clouds have flat bases at 2 km and are growing taller. By 3 PM, one has developed a dark base and an anvil top. What happened and what should you do?',
-      checkAnswer: 'The cirrus indicated an approaching weather system. Morning sun heated the ground, creating thermals that formed cumulus. As the atmosphere became more unstable (warm surface + cold upper air from the approaching system), cumulus grew into cumulonimbus. The dark base means heavy water content; the anvil top means it has reached the tropopause. You should seek shelter immediately \u2014 heavy rain, lightning, and possibly hail within 15\u201330 minutes.',
+      checkAnswer: 'The cirrus indicated an approaching weather system. Morning sun heated the ground, creating thermals that formed cumulus. As the atmosphere became more unstable (warm surface + cold upper air from the approaching system), cumulus grew into cumulonimbus. The dark base means heavy water content; the anvil top means it has reached the tropopause. You should seek shelter immediately — heavy rain, lightning, and possibly hail within 15–30 minutes.',
       codeIntro: 'Classify cloud types by altitude and temperature, and predict weather.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -344,14 +344,14 @@ ax1.tick_params(colors='gray')
 
 # Temperature at each level
 altitude = np.linspace(0, 12000, 100)
-lapse_rate = 6.5  # \u00B0C per km
+lapse_rate = 6.5  # °C per km
 ground_temp = 28
 temp = ground_temp - (lapse_rate / 1000) * altitude
 
 ax1_twin = ax1.twiny()
 ax1_twin.plot(temp, np.interp(altitude, [0, 12000], [-0.5, 5.5]), color='#ef4444',
              linewidth=1.5, linestyle='--', alpha=0.5)
-ax1_twin.set_xlabel('Temperature (\u00B0C)', color='#ef4444', fontsize=9)
+ax1_twin.set_xlabel('Temperature (°C)', color='#ef4444', fontsize=9)
 ax1_twin.tick_params(colors='#ef4444', labelsize=8)
 
 # Meghalaya annual cloud patterns
@@ -382,26 +382,26 @@ print(f"Cherrapunji annual rainfall: {total:,} mm")
 print(f"Monsoon months (Jun-Sep): {sum(rainfall_mm[5:9]):,} mm ({sum(rainfall_mm[5:9])/total*100:.0f}% of total)")
 print(f"Dry months (Nov-Feb): {sum(rainfall_mm[10:12]) + sum(rainfall_mm[0:2]):,} mm")
 print(f"Cumulonimbus dominates Apr-Sep = the rain season")`,
-      challenge: 'Add nimbostratus (rain-bearing flat cloud, 2000\u20135000m) and altocumulus (patchy mid-level, 2000\u20137000m) to the classification chart. What weather does each predict?',
-      successHint: 'Cloud reading is not just history \u2014 pilots, sailors, farmers, and outdoor guides still use it daily. Satellite images are just overhead views of the same cloud types you learned to identify from the ground.',
+      challenge: 'Add nimbostratus (rain-bearing flat cloud, 2000–5000m) and altocumulus (patchy mid-level, 2000–7000m) to the classification chart. What weather does each predict?',
+      successHint: 'Cloud reading is not just history — pilots, sailors, farmers, and outdoor guides still use it daily. Satellite images are just overhead views of the same cloud types you learned to identify from the ground.',
       diagram: CloudTypesDiagram,
     },
     {
-      title: 'Meghalaya\u2019s rain \u2014 why the wettest place on Earth is right here',
+      title: 'Meghalaya’s rain — why the wettest place on Earth is right here',
       concept: `Meghalaya receives more rain than almost anywhere on Earth. Mawsynram: 11,871 mm/year. Cherrapunji: 11,430 mm/year. That is about 10x more than London. Why HERE?
 
-**Orographic precipitation:** The Bay of Bengal heats up during summer. Moist air flows north toward the Himalayas. The Khasi Hills of Meghalaya (1,000\u20131,500m) sit directly in this airflow\u2019s path. The air is FORCED upward, cools rapidly, and dumps its moisture.
+**Orographic precipitation:** The Bay of Bengal heats up during summer. Moist air flows north toward the Himalayas. The Khasi Hills of Meghalaya (1,000–1,500m) sit directly in this airflow’s path. The air is FORCED upward, cools rapidly, and dumps its moisture.
 
 Three factors combine:
 1. **Funnel geography:** The Himalayan foothills funnel moist air directly at Meghalaya
 2. **Steep terrain:** The southern edge of the Khasi plateau rises abruptly, forcing air up fast
 3. **Persistent moisture:** The Bay of Bengal provides unlimited water vapor for months
 
-The result: a natural cloud-making machine that runs from April to October. Meghi\u2019s journey from the Bay of Bengal to the Khasi Hills is the actual monsoon pathway.`,
-      analogy: 'Meghalaya\u2019s rainfall works like squeezing a sponge against a wall. The Bay of Bengal soaks the air (sponge) with moisture. The monsoon wind pushes it toward the Khasi Hills (wall). When the sponge hits the wall and is forced upward, the moisture gets squeezed out. The steeper the wall and the wetter the sponge, the more water comes out.',
-      storyConnection: 'Meghi carried water "all the way from the Bay of Bengal" and drifted over the Khasi Hills \u2014 this is the exact path of the Indian monsoon. The story is set in Meghalaya, which literally means "abode of clouds" in Sanskrit. The pine-covered hills, the village with its garden, and the cloud that refuses to rain are all part of the wettest landscape in the world.',
+The result: a natural cloud-making machine that runs from April to October. Meghi’s journey from the Bay of Bengal to the Khasi Hills is the actual monsoon pathway.`,
+      analogy: 'Meghalaya’s rainfall works like squeezing a sponge against a wall. The Bay of Bengal soaks the air (sponge) with moisture. The monsoon wind pushes it toward the Khasi Hills (wall). When the sponge hits the wall and is forced upward, the moisture gets squeezed out. The steeper the wall and the wetter the sponge, the more water comes out.',
+      storyConnection: 'Meghi carried water "all the way from the Bay of Bengal" and drifted over the Khasi Hills — this is the exact path of the Indian monsoon. The story is set in Meghalaya, which literally means "abode of clouds" in Sanskrit. The pine-covered hills, the village with its garden, and the cloud that refuses to rain are all part of the wettest landscape in the world.',
       checkQuestion: 'If the Khasi Hills were only 200 metres tall instead of 1,500 metres, would Cherrapunji still be the wettest place? And what happens to the air AFTER it passes over the hills?',
-      checkAnswer: 'No \u2014 200m hills would not force air high enough to cool below the dew point efficiently. Much less condensation, much less rain. After passing over the hills, the air descends on the other side. Descending air warms (by compression) and becomes drier \u2014 this creates a "rain shadow." The area north of the Khasi Hills is indeed much drier. This is why Assam\u2019s Brahmaputra valley, just north of Meghalaya, gets significantly less rainfall than the southern slopes.',
+      checkAnswer: 'No — 200m hills would not force air high enough to cool below the dew point efficiently. Much less condensation, much less rain. After passing over the hills, the air descends on the other side. Descending air warms (by compression) and becomes drier — this creates a "rain shadow." The area north of the Khasi Hills is indeed much drier. This is why Assam’s Brahmaputra valley, just north of Meghalaya, gets significantly less rainfall than the southern slopes.',
       codeIntro: 'Model orographic precipitation: how terrain forces air up and squeezes out rain.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -496,7 +496,7 @@ print(f"  This matches Cherrapunji's position on the southern Khasi slope")
 print(f"  The 'rain shadow' north of the hills gets much less rain")
 print(f"  Same process happens worldwide: Seattle (Cascades), Bergen (Norway), Darjeeling")`,
       challenge: 'What would happen if the Khasi Hills were twice as high (3,000m)? Would rainfall increase or decrease, and why? Consider: more lift means more cooling, but also means less moisture left for the top.',
-      successHint: 'Orographic precipitation explains not just Meghalaya but every mountain city\u2019s rainfall pattern. Once you understand "air goes up, rain comes out," you can predict wet and dry sides of mountains worldwide.',
+      successHint: 'Orographic precipitation explains not just Meghalaya but every mountain city’s rainfall pattern. Once you understand "air goes up, rain comes out," you can predict wet and dry sides of mountains worldwide.',
       diagram: ActivityCloudJarDiagram,
     },
   ];

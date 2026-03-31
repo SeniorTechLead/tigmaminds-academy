@@ -99,7 +99,7 @@ print("The Brahmaputra in monsoon: velocity ~3 m/s (300 cm/s)")
 print("  -> Can erode and transport everything up to cobbles")
 print("The Brahmaputra in dry season: velocity ~0.5 m/s (50 cm/s)")
 print("  -> Drops gravel and coarse sand -> builds islands")`,
-      challenge: 'The Brahmaputra carries about 735 million tonnes of sediment per year. If Majuli is 880 km\u00B2 and the average sediment density is 1600 kg/m\u00B3, how thick a layer would that sediment make if it were all deposited on the island? (Hint: convert units carefully.)',
+      challenge: 'The Brahmaputra carries about 735 million tonnes of sediment per year. If Majuli is 880 km² and the average sediment density is 1600 kg/m³, how thick a layer would that sediment make if it were all deposited on the island? (Hint: convert units carefully.)',
       successHint: 'The Hjulstrom curve is one of the most important tools in geomorphology. It explains why river deltas form, why floods rearrange landscapes, and why Majuli keeps changing shape every monsoon season.',
     },
     {
@@ -279,7 +279,7 @@ ax1.axvline(50, color='#22c55e', linestyle=':', alpha=0.5)
 ax1.annotate('Vegetation colonizes', xy=(50, area_veg[50]), xytext=(100, 200),
              color='#22c55e', fontsize=9, arrowprops=dict(arrowstyle='->', color='#22c55e'))
 ax1.set_xlabel('Years', color='white')
-ax1.set_ylabel('Island area (km\u00B2)', color='white')
+ax1.set_ylabel('Island area (km²)', color='white')
 ax1.set_title('River Island Formation Over Time', color='white', fontsize=13)
 ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax1.tick_params(colors='gray')
@@ -291,7 +291,7 @@ ax2.fill_between(years[1:], growth, alpha=0.2, color='#f59e0b')
 ax2.plot(years[1:], growth, color='#f59e0b', linewidth=2)
 ax2.axhline(0, color='gray', linestyle='-', alpha=0.3)
 ax2.set_xlabel('Years', color='white')
-ax2.set_ylabel('Area change (km\u00B2/year)', color='white')
+ax2.set_ylabel('Area change (km²/year)', color='white')
 ax2.set_title('Growth Rate of Island', color='white', fontsize=12)
 ax2.tick_params(colors='gray')
 
@@ -299,14 +299,14 @@ plt.tight_layout()
 plt.show()
 
 print("Island formation stages:")
-print(f"  Year 0:   {area_veg[0]:.0f} km\u00B2 (initial sediment bar)")
-print(f"  Year 50:  {area_veg[50]:.0f} km\u00B2 (vegetation begins)")
-print(f"  Year 100: {area_veg[100]:.0f} km\u00B2 (rapid growth phase)")
-print(f"  Year 200: {area_veg[200]:.0f} km\u00B2 (growth slowing)")
-print(f"  Year 500: {area_veg[499]:.0f} km\u00B2 (near equilibrium)")
+print(f"  Year 0:   {area_veg[0]:.0f} km² (initial sediment bar)")
+print(f"  Year 50:  {area_veg[50]:.0f} km² (vegetation begins)")
+print(f"  Year 100: {area_veg[100]:.0f} km² (rapid growth phase)")
+print(f"  Year 200: {area_veg[200]:.0f} km² (growth slowing)")
+print(f"  Year 500: {area_veg[499]:.0f} km² (near equilibrium)")
 print()
-print(f"Equilibrium area without vegetation: {area[-1]:.0f} km\u00B2")
-print(f"Equilibrium area with vegetation:    {area_veg[-1]:.0f} km\u00B2")
+print(f"Equilibrium area without vegetation: {area[-1]:.0f} km²")
+print(f"Equilibrium area with vegetation:    {area_veg[-1]:.0f} km²")
 print("Vegetation nearly DOUBLES the stable island size!")`,
       challenge: 'What happens if you increase erosion_base to 0.015 (simulating stronger monsoon floods)? At what erosion rate does the island fail to form at all? (Hint: the island grows only when deposition > erosion.)',
       successHint: 'Majuli formed through exactly this kind of process — sediment deposition, vegetation stabilization, and a dynamic balance between growth and erosion. The fact that Majuli is now shrinking tells us the balance has tipped toward erosion.',
@@ -316,7 +316,7 @@ print("Vegetation nearly DOUBLES the stable island size!")`,
       concept: `The Brahmaputra is extraordinary by any measure. Here are the numbers:
 
 - **Length**: 2,900 km (from Tibet through India to Bangladesh)
-- **Discharge**: 19,800 m\u00B3/s average (4th largest in the world)
+- **Discharge**: 19,800 m³/s average (4th largest in the world)
 - **Sediment load**: 735 million tonnes/year (one of the highest on Earth)
 - **Width**: up to 10 km in places during monsoon
 - **Monsoon surge**: discharge increases 5-10x from dry season to monsoon peak
@@ -328,7 +328,7 @@ This happens because the river carries far more sediment than it can transport a
 Majuli sits in this constantly shifting maze of channels. The island's fate depends entirely on which channels the Brahmaputra decides to favor each year.`,
       analogy: 'A braided river is like a crowd leaving a stadium through a wide plaza. People (water) naturally split around obstacles (sediment bars), creating multiple shifting paths. No two people take the same route, and the popular paths change from moment to moment. A meandering river is more like a single-file line — orderly but slow to change.',
       storyConnection: 'The Brahmaputra does not simply flow past Majuli — it surrounds, reshapes, and constantly renegotiates the island\'s boundaries. Majuli exists because of the Brahmaputra\'s immense sediment load, but it is also threatened by the river\'s tendency to shift channels unpredictably. The creator and destroyer are one and the same.',
-      checkQuestion: 'The Brahmaputra\'s discharge is about 5,000 m\u00B3/s in the dry season and 50,000 m\u00B3/s in monsoon peak. That\'s a 10x increase. If the river width doubles during monsoon, how much must the depth and velocity change to accommodate the extra water?',
+      checkQuestion: 'The Brahmaputra\'s discharge is about 5,000 m³/s in the dry season and 50,000 m³/s in monsoon peak. That\'s a 10x increase. If the river width doubles during monsoon, how much must the depth and velocity change to accommodate the extra water?',
       checkAnswer: 'Discharge = Width x Depth x Velocity. If width doubles (2x), and discharge increases 10x, then Depth x Velocity must increase 5x. Typically both increase: depth might triple and velocity might increase 1.7x, for example. This massive velocity increase is why monsoon floods are so erosive — the same river that gently deposits sediment in winter tears away riverbanks in summer.',
       codeIntro: 'Visualize the Brahmaputra\'s seasonal discharge cycle and compare it to other major rivers.',
       code: `import numpy as np
@@ -362,7 +362,7 @@ ax1.plot(months, ganges, 's-', color='#3b82f6', linewidth=2, markersize=5, label
 ax1.plot(months, mississippi, '^-', color='#22c55e', linewidth=2, markersize=5, label='Mississippi')
 ax1.plot(months, nile, 'D-', color='#f59e0b', linewidth=2, markersize=5, label='Nile')
 ax1.fill_between(range(12), brahmaputra, alpha=0.1, color='#ef4444')
-ax1.set_ylabel('Discharge (m\u00B3/s)', color='white')
+ax1.set_ylabel('Discharge (m³/s)', color='white')
 ax1.set_title('Seasonal Discharge: The Brahmaputra vs Major Rivers', color='white', fontsize=13)
 ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax1.tick_params(colors='gray')
@@ -389,26 +389,26 @@ plt.tight_layout()
 plt.show()
 
 print("The Brahmaputra's seasonal swing:")
-print(f"  Minimum (Feb): {min(brahmaputra):,} m\u00B3/s")
-print(f"  Maximum (Aug): {max(brahmaputra):,} m\u00B3/s")
+print(f"  Minimum (Feb): {min(brahmaputra):,} m³/s")
+print(f"  Maximum (Aug): {max(brahmaputra):,} m³/s")
 print(f"  Ratio: {max(brahmaputra)/min(brahmaputra):.1f}x")
 print()
 print("Compare to the Mississippi (2.0x) - a 'steady' river.")
 print("The Brahmaputra's extreme variability is WHY it reshapes")
 print("the landscape so aggressively - and why Majuli is at risk.")`,
-      challenge: 'Calculate the total volume of water the Brahmaputra discharges in one year using the monthly data above. Convert to km\u00B3. How does it compare to the volume of a lake? (Lake Baikal = 23,600 km\u00B3 for reference.)',
+      challenge: 'Calculate the total volume of water the Brahmaputra discharges in one year using the monthly data above. Convert to km³. How does it compare to the volume of a lake? (Lake Baikal = 23,600 km³ for reference.)',
       successHint: 'The Brahmaputra\'s extreme seasonality is the key to understanding Majuli. The gentle dry-season flow builds and maintains the island; the violent monsoon floods reshape and erode it. This annual cycle of creation and destruction defines life on the island.',
     },
     {
       title: 'Erosion threatens Majuli — the island is shrinking',
       concept: `Majuli has been losing land at an alarming rate. The numbers tell a stark story:
 
-- **1901**: area estimated at ~1,255 km\u00B2
-- **1950**: ~1,090 km\u00B2
-- **1972**: ~880 km\u00B2
-- **2001**: ~640 km\u00B2
-- **2014**: ~524 km\u00B2
-- **2016**: ~502 km\u00B2
+- **1901**: area estimated at ~1,255 km²
+- **1950**: ~1,090 km²
+- **1972**: ~880 km²
+- **2001**: ~640 km²
+- **2014**: ~524 km²
+- **2016**: ~502 km²
 
 That is a loss of more than **60%** of the island's area in just over a century. At this rate, some researchers warned that Majuli could be fully submerged within 15-20 years — though the rate has slowed somewhat due to conservation efforts.
 
@@ -422,7 +422,7 @@ Why is erosion accelerating?
 The island is not just shrinking in area — it is sinking. As erosion removes land from the edges, flood frequency increases, and agricultural land becomes waterlogged.`,
       analogy: 'Imagine an ice cube in a warm drink. It melts from all edges simultaneously, getting smaller and smaller. But unlike an ice cube (which melts at a steady rate), Majuli\'s erosion accelerates — because as the island gets smaller, the river channels around it get proportionally larger and more erosive. It is a vicious cycle.',
       storyConnection: 'The same Brahmaputra that built Majuli grain by grain is now taking it back. The island\'s origin story — born from sediment deposition — has an epilogue: the river giveth, and the river taketh away. Understanding the data behind this loss is the first step toward saving the island.',
-      checkQuestion: 'Between 1901 and 2016, Majuli lost about 753 km\u00B2 in 115 years. But the loss was not linear — it accelerated. What factors could cause erosion to speed up over time, creating a positive feedback loop?',
+      checkQuestion: 'Between 1901 and 2016, Majuli lost about 753 km² in 115 years. But the loss was not linear — it accelerated. What factors could cause erosion to speed up over time, creating a positive feedback loop?',
       checkAnswer: 'Several feedback loops: (1) Less area means less vegetation to stabilize banks, increasing erosion. (2) Eroded sediment makes the river shallower, spreading flow and increasing bank attack. (3) Smaller island means proportionally more edge exposed to the current. (4) Loss of wetlands removes natural flood buffers. (5) Displacement of farmers leads to deforestation of remaining land for agriculture, weakening soil further. Each effect amplifies the others.',
       codeIntro: 'Plot Majuli\'s area decline and project future scenarios.',
       code: `import numpy as np
@@ -472,9 +472,9 @@ ax1.plot(years_future, area_accelerating, '-', color='#ef4444', linewidth=2, alp
 ax1.axvline(2025, color='white', linestyle=':', alpha=0.3)
 ax1.text(2026, 1100, 'Today', color='white', fontsize=9)
 ax1.axhline(100, color='gray', linestyle=':', alpha=0.3)
-ax1.text(1905, 110, 'Critical threshold (100 km\u00B2)', color='gray', fontsize=8)
+ax1.text(1905, 110, 'Critical threshold (100 km²)', color='gray', fontsize=8)
 ax1.set_xlabel('Year', color='white')
-ax1.set_ylabel('Area (km\u00B2)', color='white')
+ax1.set_ylabel('Area (km²)', color='white')
 ax1.set_title('Majuli Island: Measured Decline & Projections', color='white', fontsize=12)
 ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
 ax1.tick_params(colors='gray')
@@ -495,7 +495,7 @@ for i in range(1, len(years_data)):
 bars = ax2.bar(range(len(decades)), losses, color='#ef4444', alpha=0.8)
 ax2.set_xticks(range(len(decades)))
 ax2.set_xticklabels([f'{int(d)}' for d in decades], color='gray', fontsize=8, rotation=45)
-ax2.set_ylabel('Land loss rate (km\u00B2/year)', color='white')
+ax2.set_ylabel('Land loss rate (km²/year)', color='white')
 ax2.set_title('Erosion Rate Over Time', color='white', fontsize=12)
 ax2.tick_params(colors='gray')
 for bar, loss in zip(bars, losses):
@@ -506,16 +506,16 @@ plt.tight_layout()
 plt.show()
 
 print("Majuli's decline by the numbers:")
-print(f"  1901 area: {area_data[0]:,} km\u00B2")
-print(f"  2016 area: {area_data[-1]:,} km\u00B2")
-print(f"  Total loss: {area_data[0] - area_data[-1]:,} km\u00B2 ({100*(1 - area_data[-1]/area_data[0]):.1f}%)")
+print(f"  1901 area: {area_data[0]:,} km²")
+print(f"  2016 area: {area_data[-1]:,} km²")
+print(f"  Total loss: {area_data[0] - area_data[-1]:,} km² ({100*(1 - area_data[-1]/area_data[0]):.1f}%)")
 print(f"  Decay rate: {k_decay*100:.2f}% per year")
 print()
-print("At current rate, area reaches 100 km\u00B2 around:", end=" ")
+print("At current rate, area reaches 100 km² around:", end=" ")
 for i, a in enumerate(area_exponential):
     if a < 100:
         print(f"{years_future[i]}"); break
-print("With conservation, area reaches 100 km\u00B2 around:", end=" ")
+print("With conservation, area reaches 100 km² around:", end=" ")
 for i, a in enumerate(area_conservation):
     if a < 100:
         print(f"{years_future[i]}"); break`,
@@ -586,7 +586,7 @@ ax.set_xlabel('Cost per km (lakhs INR)', color='white')
 ax.set_title('Cost', color='white', fontsize=11)
 ax.tick_params(colors='gray')
 for i, c in enumerate(cost):
-    ax.text(c + 5, i, f'\u20B9{c}L', va='center', color='white', fontsize=9)
+    ax.text(c + 5, i, f'₹{c}L', va='center', color='white', fontsize=9)
 
 # Effectiveness
 ax = axes[0, 1]
@@ -614,7 +614,7 @@ ce_ratio = [(e * d / c) for e, d, c in zip(effectiveness, durability, cost)]
 colors_ce = ['#22c55e' if r >= 2 else '#f59e0b' if r >= 0.5 else '#ef4444' for r in ce_ratio]
 ax.barh(strategies, ce_ratio, color=colors_ce)
 ax.set_xlabel('Cost-effectiveness score', color='white')
-ax.set_title('Value for Money (effectiveness \u00D7 durability / cost)', color='white', fontsize=11)
+ax.set_title('Value for Money (effectiveness × durability / cost)', color='white', fontsize=11)
 ax.tick_params(colors='gray')
 for i, r in enumerate(ce_ratio):
     ax.text(r + 0.1, i, f'{r:.1f}', va='center', color='white', fontsize=9)
@@ -626,7 +626,7 @@ print("Cost-effectiveness ranking:")
 ranked = sorted(zip(strategies, ce_ratio, cost, eco_score), key=lambda x: -x[1])
 for i, (name, score, c, eco) in enumerate(ranked, 1):
     name_clean = name.replace('\\n', ' ')
-    print(f"  {i}. {name_clean}: score={score:.1f}, cost=\u20B9{c}L/km, eco={eco}/10")
+    print(f"  {i}. {name_clean}: score={score:.1f}, cost=₹{c}L/km, eco={eco}/10")
 print()
 print("Key insight: The cheapest, most eco-friendly solutions")
 print("(vetiver grass, bamboo porcupines) are often the most")

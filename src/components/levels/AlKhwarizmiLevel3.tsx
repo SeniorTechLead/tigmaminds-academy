@@ -29,23 +29,23 @@ export default function AlKhwarizmiLevel3() {
 
   const miniLessons = [
     {
-      title: 'Polynomial equations \u2014 beyond quadratics',
+      title: 'Polynomial equations — beyond quadratics',
       concept: `Al-Khwarizmi solved linear (degree 1) and quadratic (degree 2) equations. What about higher degrees?
 
-A **polynomial** of degree n is: a\u2099x\u207F + a\u2099\u208B\u2081x\u207F\u207B\u00B9 + ... + a\u2081x + a\u2080
+A **polynomial** of degree n is: aₙxⁿ + aₙ₋₁xⁿ⁻¹ + ... + a₁x + a₀
 
-- Degree 3 (**cubic**): x\u00B3 \u2212 6x\u00B2 + 11x \u2212 6 = 0
+- Degree 3 (**cubic**): x³ − 6x² + 11x − 6 = 0
 - Degree 4 (**quartic**): formulas exist but are extremely complex
-- Degree 5+ (**quintic**): Galois proved in 1832 that NO general formula exists \u2014 one of the most profound results in mathematics
+- Degree 5+ (**quintic**): Galois proved in 1832 that NO general formula exists — one of the most profound results in mathematics
 
-For cubics and beyond, we use **numerical methods** \u2014 algorithms that find approximate solutions by iteration. The most famous is **Newton\u2019s method**: start with a guess, then repeatedly improve it using the derivative.
+For cubics and beyond, we use **numerical methods** — algorithms that find approximate solutions by iteration. The most famous is **Newton’s method**: start with a guess, then repeatedly improve it using the derivative.
 
-The code below uses NumPy\u2019s polynomial root finder and also implements Newton\u2019s method from scratch.`,
+The code below uses NumPy’s polynomial root finder and also implements Newton’s method from scratch.`,
       analogy: 'Imagine finding where a roller coaster crosses ground level. A linear function is a straight slide (one crossing). A quadratic is a bump (up to two crossings). A cubic is an S-curve (up to three crossings). Higher-degree polynomials are wilder roller coasters with more humps and crossings.',
-      storyConnection: 'Al-Khwarizmi solved degrees 1 and 2. Omar Khayyam (another Islamic mathematician, 1048\u20131131) solved degree 3 using the intersections of conic sections \u2014 a geometric approach in al-Khwarizmi\u2019s tradition. The quest to solve higher-degree equations drove mathematics forward for centuries.',
-      checkQuestion: 'Why can\u2019t there be a general formula for degree 5+ polynomials?',
-      checkAnswer: '\u00C9variste Galois proved (using group theory) that the roots of a general quintic cannot be expressed using only addition, subtraction, multiplication, division, and nth roots. The proof is deep and connects to the symmetry structure of the polynomial\u2019s roots. This does NOT mean they have no solutions \u2014 just that no formula using basic operations can express them.',
-      codeIntro: 'Find roots of cubic polynomials using NumPy and Newton\u2019s method.',
+      storyConnection: 'Al-Khwarizmi solved degrees 1 and 2. Omar Khayyam (another Islamic mathematician, 1048–1131) solved degree 3 using the intersections of conic sections — a geometric approach in al-Khwarizmi’s tradition. The quest to solve higher-degree equations drove mathematics forward for centuries.',
+      checkQuestion: 'Why can’t there be a general formula for degree 5+ polynomials?',
+      checkAnswer: 'Évariste Galois proved (using group theory) that the roots of a general quintic cannot be expressed using only addition, subtraction, multiplication, division, and nth roots. The proof is deep and connects to the symmetry structure of the polynomial’s roots. This does NOT mean they have no solutions — just that no formula using basic operations can express them.',
+      codeIntro: 'Find roots of cubic polynomials using NumPy and Newton’s method.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
@@ -54,7 +54,7 @@ import matplotlib.pyplot as plt
 
 coefficients = [1, -6, 11, -6]  # highest power first
 roots = np.roots(coefficients)
-print("=== Cubic: x\u00B3 - 6x\u00B2 + 11x - 6 = 0 ===")
+print("=== Cubic: x³ - 6x² + 11x - 6 = 0 ===")
 print(f"Roots (NumPy): {roots}")
 print()
 
@@ -94,30 +94,30 @@ for r in [1, 2, 3]:
 
 plt.xlabel('x', fontsize=12)
 plt.ylabel('f(x)', fontsize=12)
-plt.title('Cubic: x\u00B3 - 6x\u00B2 + 11x - 6', fontsize=13)
+plt.title('Cubic: x³ - 6x² + 11x - 6', fontsize=13)
 plt.grid(alpha=0.3)
 plt.show()
 
 print("Al-Khwarizmi's methods scale up: same idea (isolate, simplify, solve),")
 print("but for higher degrees we need iteration instead of exact formulas.")`,
-      challenge: 'Try f(x) = x\u2075 \u2212 x \u2212 1 (a quintic). NumPy can find its roots numerically. Use Newton\u2019s method with different starting guesses to find the real root near x = 1.17.',
-      successHint: 'When exact formulas run out, algorithms take over. Newton\u2019s method is an algorithm that converges to a root by iterating: guess, improve, repeat. This is al-Khwarizmi\u2019s legacy applied to problems he could not have imagined.',
+      challenge: 'Try f(x) = x⁵ − x − 1 (a quintic). NumPy can find its roots numerically. Use Newton’s method with different starting guesses to find the real root near x = 1.17.',
+      successHint: 'When exact formulas run out, algorithms take over. Newton’s method is an algorithm that converges to a root by iterating: guess, improve, repeat. This is al-Khwarizmi’s legacy applied to problems he could not have imagined.',
     },
     {
-      title: 'Matrices \u2014 systems of equations at scale',
+      title: 'Matrices — systems of equations at scale',
       concept: `In Level 1 you solved systems of 2 equations with 2 unknowns. Real problems have hundreds or thousands of variables: circuit analysis, structural engineering, machine learning. The tool for this is **matrices**.
 
 A matrix is a rectangular grid of numbers. A system of equations becomes:
-- **A** \u00D7 **x** = **b**, where A is the coefficient matrix, x is the variable vector, b is the constants.
+- **A** × **x** = **b**, where A is the coefficient matrix, x is the variable vector, b is the constants.
 
-For example: 2x + 3y = 8 and x \u2212 y = 1 becomes:
+For example: 2x + 3y = 8 and x − y = 1 becomes:
 \`[[2,3],[1,-1]] @ [x,y] = [8,1]\`
 
 NumPy solves this in one line: \`np.linalg.solve(A, b)\`.
 
-Behind the scenes, it uses **Gaussian elimination** \u2014 an algorithm that methodically reduces the matrix to find the solution. This is al-Khwarizmi\u2019s balance method (do the same operation to both sides) applied to many equations simultaneously.`,
+Behind the scenes, it uses **Gaussian elimination** — an algorithm that methodically reduces the matrix to find the solution. This is al-Khwarizmi’s balance method (do the same operation to both sides) applied to many equations simultaneously.`,
       analogy: 'A matrix is a spreadsheet. Each row is an equation, each column is a variable. Gaussian elimination is like using the spreadsheet to cancel out variables row by row until you can read the answers directly.',
-      storyConnection: 'Chinese mathematicians developed matrix methods in the Nine Chapters on the Mathematical Art (c. 200 BCE). Islamic mathematicians, including those at the House of Wisdom, built on this. The connection between al-Khwarizmi\u2019s algebraic methods and matrix algebra is a direct line in mathematical history.',
+      storyConnection: 'Chinese mathematicians developed matrix methods in the Nine Chapters on the Mathematical Art (c. 200 BCE). Islamic mathematicians, including those at the House of Wisdom, built on this. The connection between al-Khwarizmi’s algebraic methods and matrix algebra is a direct line in mathematical history.',
       checkQuestion: 'A system of 3 equations in 3 unknowns has its equations represented as three planes in 3D space. What does the solution represent geometrically?',
       checkAnswer: 'The solution is the point where all three planes intersect. If the three planes meet at a single point, there is one unique solution. If they intersect in a line, there are infinitely many solutions. If they do not all share a common intersection point, there is no solution.',
       codeIntro: 'Solve systems of equations with matrices using NumPy.',
@@ -165,29 +165,29 @@ print()
 print("NumPy solves 1000 equations in a fraction of a second.")
 print("This is al-Khwarizmi's balance method running on modern hardware.")`,
       challenge: 'Create a 4x4 system that represents a real-world problem (e.g., traffic flow through 4 intersections, or mixing 4 chemicals to get desired concentrations). Solve it with NumPy.',
-      successHint: 'Matrices are the bridge between algebra and computation. Every modern application \u2014 from search engines to self-driving cars \u2014 uses matrix equations solved by algorithms descended from al-Khwarizmi\u2019s methods.',
+      successHint: 'Matrices are the bridge between algebra and computation. Every modern application — from search engines to self-driving cars — uses matrix equations solved by algorithms descended from al-Khwarizmi’s methods.',
     },
     {
-      title: 'Algorithm complexity \u2014 Big-O notation',
-      concept: `Not all algorithms are equal. Some take longer as the input grows. **Big-O notation** describes how an algorithm\u2019s running time scales with input size n.
+      title: 'Algorithm complexity — Big-O notation',
+      concept: `Not all algorithms are equal. Some take longer as the input grows. **Big-O notation** describes how an algorithm’s running time scales with input size n.
 
-- **O(1)** \u2014 constant: looking up an array element by index
-- **O(log n)** \u2014 logarithmic: binary search
-- **O(n)** \u2014 linear: scanning every element once
-- **O(n log n)** \u2014 merge sort, the best possible comparison sort
-- **O(n\u00B2)** \u2014 quadratic: bubble sort, naive matrix multiplication
-- **O(2\u207F)** \u2014 exponential: brute-force trying every combination
+- **O(1)** — constant: looking up an array element by index
+- **O(log n)** — logarithmic: binary search
+- **O(n)** — linear: scanning every element once
+- **O(n log n)** — merge sort, the best possible comparison sort
+- **O(n²)** — quadratic: bubble sort, naive matrix multiplication
+- **O(2ⁿ)** — exponential: brute-force trying every combination
 
 The difference matters enormously. For n = 1,000,000:
 - O(n) = 1,000,000 operations
-- O(n\u00B2) = 1,000,000,000,000 operations (a million times slower)
-- O(2\u207F) = more operations than atoms in the universe
+- O(n²) = 1,000,000,000,000 operations (a million times slower)
+- O(2ⁿ) = more operations than atoms in the universe
 
-Al-Khwarizmi\u2019s genius was finding efficient algorithms \u2014 methods that do not waste steps. Big-O formalises that intuition.`,
-      analogy: 'Big-O is like fuel efficiency for cars. A car that gets O(n) miles per gallon uses fuel proportional to distance. An O(n\u00B2) car uses fuel proportional to the SQUARE of the distance \u2014 fine for short trips, ruinous for long ones. Choosing the right algorithm is like choosing the right car for the journey.',
-      storyConnection: 'Al-Khwarizmi chose efficient methods. His completing-the-square for quadratics is O(1) \u2014 a fixed number of steps regardless of how large the coefficients are. Newton\u2019s method converges in O(log n) iterations. The House of Wisdom valued practical, efficient methods because merchants needed answers quickly.',
-      checkQuestion: 'An algorithm takes 0.001 seconds for n = 100. If it is O(n\u00B2), how long for n = 10,000?',
-      checkAnswer: '10,000/100 = 100 times larger input. O(n\u00B2) means 100\u00B2 = 10,000 times slower. So 0.001 \u00D7 10,000 = 10 seconds. If it were O(n\u00B3), it would be 100\u00B3 = 1,000,000 times slower = 1,000 seconds \u2248 17 minutes.',
+Al-Khwarizmi’s genius was finding efficient algorithms — methods that do not waste steps. Big-O formalises that intuition.`,
+      analogy: 'Big-O is like fuel efficiency for cars. A car that gets O(n) miles per gallon uses fuel proportional to distance. An O(n²) car uses fuel proportional to the SQUARE of the distance — fine for short trips, ruinous for long ones. Choosing the right algorithm is like choosing the right car for the journey.',
+      storyConnection: 'Al-Khwarizmi chose efficient methods. His completing-the-square for quadratics is O(1) — a fixed number of steps regardless of how large the coefficients are. Newton’s method converges in O(log n) iterations. The House of Wisdom valued practical, efficient methods because merchants needed answers quickly.',
+      checkQuestion: 'An algorithm takes 0.001 seconds for n = 100. If it is O(n²), how long for n = 10,000?',
+      checkAnswer: '10,000/100 = 100 times larger input. O(n²) means 100² = 10,000 times slower. So 0.001 × 10,000 = 10 seconds. If it were O(n³), it would be 100³ = 1,000,000 times slower = 1,000 seconds ≈ 17 minutes.',
       codeIntro: 'Measure and compare algorithm complexities empirically.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -234,7 +234,7 @@ t_quad = time_function(quadratic_scan, n_vals[:4])  # limit quadratic
 plt.figure(figsize=(8, 5))
 plt.plot(n_vals, t_linear, 'o-', linewidth=2, color='#10b981', label='O(n) - linear scan')
 plt.plot(n_vals, t_nlogn, 's-', linewidth=2, color='#3b82f6', label='O(n log n) - sort')
-plt.plot(n_vals[:4], t_quad, '^-', linewidth=2, color='#ef4444', label='O(n\u00B2) - nested loop')
+plt.plot(n_vals[:4], t_quad, '^-', linewidth=2, color='#ef4444', label='O(n²) - nested loop')
 plt.xlabel('Input size (n)', fontsize=12)
 plt.ylabel('Time (seconds)', fontsize=12)
 plt.title('Algorithm Complexity: How Running Time Scales', fontsize=13)
@@ -243,29 +243,29 @@ plt.grid(alpha=0.3)
 plt.show()
 
 print("Key insight: as n grows, the GAP between complexities widens.")
-print("For large n, choosing O(n log n) over O(n\u00B2) saves hours or days.")`,
-      challenge: 'Add an O(log n) algorithm (binary search on sorted data) to the comparison. Plot all four on the same chart. For n = 5000, calculate the ratio of O(n\u00B2) to O(log n).',
-      successHint: 'Big-O analysis is how computer scientists choose algorithms. It is not about making code fast on one computer \u2014 it is about understanding how algorithms fundamentally scale. Al-Khwarizmi\u2019s methods were efficient because he minimised unnecessary steps. Big-O quantifies that intuition.',
+print("For large n, choosing O(n log n) over O(n²) saves hours or days.")`,
+      challenge: 'Add an O(log n) algorithm (binary search on sorted data) to the comparison. Plot all four on the same chart. For n = 5000, calculate the ratio of O(n²) to O(log n).',
+      successHint: 'Big-O analysis is how computer scientists choose algorithms. It is not about making code fast on one computer — it is about understanding how algorithms fundamentally scale. Al-Khwarizmi’s methods were efficient because he minimised unnecessary steps. Big-O quantifies that intuition.',
     },
     {
-      title: 'Graph algorithms \u2014 finding the shortest path',
-      concept: `A **graph** is a set of nodes connected by edges. Cities on a map, pages on the web, friends on social media \u2014 all are graphs.
+      title: 'Graph algorithms — finding the shortest path',
+      concept: `A **graph** is a set of nodes connected by edges. Cities on a map, pages on the web, friends on social media — all are graphs.
 
-One of the most important graph algorithms is **Dijkstra\u2019s shortest path**: given a weighted graph (edges have costs), find the cheapest route from a source to every other node.
+One of the most important graph algorithms is **Dijkstra’s shortest path**: given a weighted graph (edges have costs), find the cheapest route from a source to every other node.
 
 The algorithm:
-1. Set distance to source = 0, all others = \u221E
+1. Set distance to source = 0, all others = ∞
 2. Pick the unvisited node with smallest distance
 3. For each neighbour, update distance if going through current node is shorter
 4. Mark current as visited
 5. Repeat until all nodes visited
 
-This is an algorithm in al-Khwarizmi\u2019s sense: a precise, step-by-step procedure that always gives the correct answer. Modern GPS navigation runs Dijkstra\u2019s algorithm (or its variant A*) every time you ask for directions.`,
-      analogy: 'Imagine you are in a city and want to find the fastest route to the airport. You check all roads from where you stand, pick the fastest, go there, check all roads from THERE, and keep going. At each step you pick the best option available. This greedy, systematic approach is Dijkstra\u2019s algorithm.',
-      storyConnection: 'Baghdad was at the centre of trade routes connecting the entire known world. Finding the shortest route between cities was a real, practical problem. Al-Khwarizmi\u2019s emphasis on systematic, algorithmic thinking laid the groundwork for the graph algorithms that would eventually solve exactly this kind of problem.',
-      checkQuestion: 'Can Dijkstra\u2019s algorithm handle negative edge weights?',
-      checkAnswer: 'No. Dijkstra\u2019s assumes all edge weights are non-negative. With negative weights, a visited node could later be reached via a shorter path through a negative edge, violating the algorithm\u2019s assumption. For negative weights, use the Bellman-Ford algorithm (slower but handles negatives).',
-      codeIntro: 'Implement Dijkstra\u2019s shortest path algorithm on a small graph.',
+This is an algorithm in al-Khwarizmi’s sense: a precise, step-by-step procedure that always gives the correct answer. Modern GPS navigation runs Dijkstra’s algorithm (or its variant A*) every time you ask for directions.`,
+      analogy: 'Imagine you are in a city and want to find the fastest route to the airport. You check all roads from where you stand, pick the fastest, go there, check all roads from THERE, and keep going. At each step you pick the best option available. This greedy, systematic approach is Dijkstra’s algorithm.',
+      storyConnection: 'Baghdad was at the centre of trade routes connecting the entire known world. Finding the shortest route between cities was a real, practical problem. Al-Khwarizmi’s emphasis on systematic, algorithmic thinking laid the groundwork for the graph algorithms that would eventually solve exactly this kind of problem.',
+      checkQuestion: 'Can Dijkstra’s algorithm handle negative edge weights?',
+      checkAnswer: 'No. Dijkstra’s assumes all edge weights are non-negative. With negative weights, a visited node could later be reached via a shorter path through a negative edge, violating the algorithm’s assumption. For negative weights, use the Bellman-Ford algorithm (slower but handles negatives).',
+      codeIntro: 'Implement Dijkstra’s shortest path algorithm on a small graph.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
@@ -321,26 +321,26 @@ print()
 print("Dijkstra's algorithm: systematic, optimal, guaranteed correct.")
 print("Your GPS uses this every time you ask for directions.")`,
       challenge: 'Add a new city "Cordoba" connected to Istanbul (cost 12) and Cairo (cost 8). Find the shortest path from Baghdad to Cordoba. Does it go through Damascus or through Basra?',
-      successHint: 'Graph algorithms are among the most important in computer science. They power social networks, logistics, internet routing, and navigation. Every one is a descendant of al-Khwarizmi\u2019s core idea: solve complex problems with precise, repeatable steps.',
+      successHint: 'Graph algorithms are among the most important in computer science. They power social networks, logistics, internet routing, and navigation. Every one is a descendant of al-Khwarizmi’s core idea: solve complex problems with precise, repeatable steps.',
     },
     {
-      title: 'Cryptography \u2014 algebra protects your data',
+      title: 'Cryptography — algebra protects your data',
       concept: `Modern encryption is built on algebra. The RSA algorithm, which secures most internet communication, relies on a simple algebraic fact: multiplying two large prime numbers is easy, but factoring the result back into primes is extremely hard.
 
 The mathematical foundation:
 1. Choose two large primes p and q
-2. Compute n = p \u00D7 q (easy)
+2. Compute n = p × q (easy)
 3. The public key is based on n (everyone can see it)
 4. The private key requires knowing p and q separately
 5. Breaking the encryption means factoring n (extremely hard for large n)
 
-This connects directly to al-Khwarizmi\u2019s work: modular arithmetic (clock arithmetic), exponentiation, and the study of prime numbers were all part of Islamic mathematical tradition.
+This connects directly to al-Khwarizmi’s work: modular arithmetic (clock arithmetic), exponentiation, and the study of prime numbers were all part of Islamic mathematical tradition.
 
 The code below demonstrates the core concepts: prime checking, modular arithmetic, and a simplified RSA-like encryption.`,
-      analogy: 'Encryption is like a lock on a box. The public key is the open lock (anyone can snap it shut). The private key is the only key that opens it. Making a lock is easy. Making a key from scratch that fits the lock? Nearly impossible \u2014 you would have to try billions of combinations.',
-      storyConnection: 'The House of Wisdom was not just a library \u2014 it was the intelligence hub of the Abbasid Caliphate. Secure communication between Baghdad and provincial governors required codes and ciphers. Islamic mathematicians\u2019 work on number theory laid the groundwork for the encryption that protects your passwords today.',
+      analogy: 'Encryption is like a lock on a box. The public key is the open lock (anyone can snap it shut). The private key is the only key that opens it. Making a lock is easy. Making a key from scratch that fits the lock? Nearly impossible — you would have to try billions of combinations.',
+      storyConnection: 'The House of Wisdom was not just a library — it was the intelligence hub of the Abbasid Caliphate. Secure communication between Baghdad and provincial governors required codes and ciphers. Islamic mathematicians’ work on number theory laid the groundwork for the encryption that protects your passwords today.',
       checkQuestion: 'Why does RSA use PRIME numbers specifically? Why not just any large numbers?',
-      checkAnswer: 'If n = p \u00D7 q and both p and q are prime, then the ONLY way to factor n is to find p and q. If p or q were composite (non-prime), they would have additional factors, potentially making n easier to break down. Primes are the "atoms" of multiplication \u2014 they cannot be broken down further, making the factoring problem maximally difficult.',
+      checkAnswer: 'If n = p × q and both p and q are prime, then the ONLY way to factor n is to find p and q. If p or q were composite (non-prime), they would have additional factors, potentially making n easier to break down. Primes are the "atoms" of multiplication — they cannot be broken down further, making the factoring problem maximally difficult.',
       codeIntro: 'Explore primes, modular arithmetic, and simplified RSA encryption.',
       code: `import random
 
@@ -398,24 +398,24 @@ print(f"For small numbers this is trivial. But real RSA uses")
 print(f"primes with 300+ digits. Factoring their product would")
 print(f"take all the world's computers billions of years.")`,
       challenge: 'Try factoring n = 3233 by brute force (check all primes up to sqrt(3233)). How many divisions does it take? Now imagine n has 600 digits instead of 4. That is real RSA.',
-      successHint: 'The algebra you learned in this lesson \u2014 variables, equations, modular arithmetic, algorithms \u2014 is the foundation of internet security. Al-Khwarizmi\u2019s work on systematic mathematical methods, transmitted through centuries of Islamic scholarship, ultimately protects every online transaction you make.',
+      successHint: 'The algebra you learned in this lesson — variables, equations, modular arithmetic, algorithms — is the foundation of internet security. Al-Khwarizmi’s work on systematic mathematical methods, transmitted through centuries of Islamic scholarship, ultimately protects every online transaction you make.',
     },
     {
-      title: 'Dynamic programming \u2014 remembering subproblems',
+      title: 'Dynamic programming — remembering subproblems',
       concept: `In Level 2 you wrote a recursive Fibonacci function. It was elegant but slow. Why? Because it recalculates the same values over and over. fib(5) calls fib(4) and fib(3). But fib(4) also calls fib(3). The same subproblem is solved multiple times.
 
 **Dynamic programming** (DP) fixes this: solve each subproblem once and **store** the result. The next time you need it, look it up instead of recalculating. This is called **memoisation**.
 
-DP turns the exponential O(2\u207F) Fibonacci into linear O(n). The same technique solves:
+DP turns the exponential O(2ⁿ) Fibonacci into linear O(n). The same technique solves:
 - Shortest paths in graphs (Dijkstra is a form of DP)
 - Optimal text alignment (how spell-checkers suggest corrections)
 - Resource allocation (knapsack problem)
 
 The key insight: if a problem can be broken into overlapping subproblems that are solved independently, DP applies.`,
-      analogy: 'Imagine being asked "What is 37 \u00D7 18?" many times. The first time, you calculate it (666). After that, you just remember the answer. Dynamic programming is this "calculate once, remember forever" approach applied to every step of an algorithm.',
-      storyConnection: 'Al-Khwarizmi\u2019s methods were practical because they did not waste effort. He would never recalculate something already known. Dynamic programming formalises this: store partial results, build on them. It is the principle of scholarly accumulation \u2014 the House of Wisdom\u2019s entire operating model.',
-      checkQuestion: 'The naive recursive Fibonacci makes approximately 2\u207F function calls for fib(n). The DP version makes n calls. For n = 50, how many times faster is DP?',
-      checkAnswer: '2\u2075\u2070 \u2248 1.13 quadrillion calls vs 50. The DP version is roughly 22 trillion times faster. This is the difference between "finishes instantly" and "the heat death of the universe arrives first."',
+      analogy: 'Imagine being asked "What is 37 × 18?" many times. The first time, you calculate it (666). After that, you just remember the answer. Dynamic programming is this "calculate once, remember forever" approach applied to every step of an algorithm.',
+      storyConnection: 'Al-Khwarizmi’s methods were practical because they did not waste effort. He would never recalculate something already known. Dynamic programming formalises this: store partial results, build on them. It is the principle of scholarly accumulation — the House of Wisdom’s entire operating model.',
+      checkQuestion: 'The naive recursive Fibonacci makes approximately 2ⁿ function calls for fib(n). The DP version makes n calls. For n = 50, how many times faster is DP?',
+      checkAnswer: '2⁵⁰ ≈ 1.13 quadrillion calls vs 50. The DP version is roughly 22 trillion times faster. This is the difference between "finishes instantly" and "the heat death of the universe arrives first."',
       codeIntro: 'Compare naive recursion with dynamic programming on Fibonacci.',
       code: `import time
 import matplotlib.pyplot as plt
@@ -486,7 +486,7 @@ print("DP is not just faster — it makes the IMPOSSIBLE possible.")
 print("Naive recursion cannot compute fib(50) in your lifetime.")
 print("DP computes fib(1000) in microseconds.")`,
       challenge: 'Implement a DP solution for the coin change problem: given coins of denominations [1, 5, 10, 25], find the minimum number of coins needed to make 67 cents. How many coins do you need?',
-      successHint: 'Dynamic programming is one of the most powerful algorithmic techniques in computer science. It transforms exponential problems into polynomial ones by storing and reusing partial results. Al-Khwarizmi\u2019s emphasis on not repeating work is the philosophical ancestor of DP.',
+      successHint: 'Dynamic programming is one of the most powerful algorithmic techniques in computer science. It transforms exponential problems into polynomial ones by storing and reusing partial results. Al-Khwarizmi’s emphasis on not repeating work is the philosophical ancestor of DP.',
     },
   ];
 

@@ -34,11 +34,11 @@ export default function ActivityCloudWatchDiagram() {
           How To Do It
         </text>
         {[
-          "\u2460 Look at the sky every morning and evening",
-          "\u2461 Draw what you see \u2014 shape, height, colour",
-          "\u2462 Write one word: puffy, flat, wispy, towering",
-          "\u2463 Record the weather that follows",
-          "\u2464 After 5 days, look for patterns!",
+          "① Look at the sky every morning and evening",
+          "② Draw what you see — shape, height, colour",
+          "③ Write one word: puffy, flat, wispy, towering",
+          "④ Record the weather that follows",
+          "⑤ After 5 days, look for patterns!",
         ].map((step, i) => (
           <text key={i} x="45" y={112 + i * 18} fontSize="11" className="fill-gray-700 dark:fill-slate-300">
             {step}
@@ -58,7 +58,7 @@ export default function ActivityCloudWatchDiagram() {
           "Could you name clouds like Dawan did?",
         ].map((q, i) => (
           <text key={i} x="385" y={112 + i * 18} fontSize="11" className="fill-gray-700 dark:fill-slate-300">
-            {"\u2022 " + q}
+            {"• " + q}
           </text>
         ))}
 
@@ -85,12 +85,12 @@ export default function ActivityCloudWatchDiagram() {
               </text>
               {/* Weather */}
               <text x="260" y={y + 22} fontSize="11" className="fill-gray-600 dark:fill-slate-400">
-                {"\u2192 " + d.weather}
+                {"→ " + d.weather}
               </text>
               {/* Prediction */}
               <text x="430" y={y + 22} fontSize="10" className="fill-gray-500 dark:fill-slate-500">
                 {i === 0
-                  ? "Cirrus = rain in 1\u20132 days?"
+                  ? "Cirrus = rain in 1–2 days?"
                   : i === 1
                     ? "Fair cumulus = staying sunny"
                     : i === 2
@@ -101,7 +101,7 @@ export default function ActivityCloudWatchDiagram() {
               </text>
               {/* Checkmark */}
               <text x="650" y={y + 22} fontSize="14" fill={d.correct ? "#4ade80" : "#f87171"}>
-                {d.correct ? "\u2713" : "\u2717"}
+                {d.correct ? "✓" : "✗"}
               </text>
             </g>
           );
@@ -110,7 +110,7 @@ export default function ActivityCloudWatchDiagram() {
         {/* Bottom tip */}
         <rect x="30" y={h - 28} width="660" height="22" rx="4" className="fill-emerald-50 dark:fill-emerald-950/30" />
         <text x={w / 2} y={h - 12} textAnchor="middle" fontSize="11" className="fill-emerald-700 dark:fill-emerald-400" fontWeight="600">
-          Science tip: Dawan became accurate because he observed every day \u2014 pattern recognition takes practice, not equipment
+          Science tip: Dawan became accurate because he observed every day — pattern recognition takes practice, not equipment
         </text>
       </svg>
     </div>

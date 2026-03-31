@@ -29,17 +29,17 @@ export default function MuezzinLevel4() {
 
   const miniLessons = [
     {
-      title: 'Minaret design optimiser \u2014 height, shape, and acoustic performance',
-      concept: `A minaret\u2019s acoustic performance depends on its **height** (range), **shape** (directionality), and **balcony design** (projection angle). Taller minarets reach further but cost more and face structural limits. Cylindrical shapes radiate omnidirectionally; octagonal shapes have slight directional preferences.
+      title: 'Minaret design optimiser — height, shape, and acoustic performance',
+      concept: `A minaret’s acoustic performance depends on its **height** (range), **shape** (directionality), and **balcony design** (projection angle). Taller minarets reach further but cost more and face structural limits. Cylindrical shapes radiate omnidirectionally; octagonal shapes have slight directional preferences.
 
-The balcony (serefe) is critical. If the Muezzin stands at the outer edge with the balcony floor below, the floor acts as a ground plane reflector. Sound waves travelling downward reflect off the floor and combine with the direct upward-radiating waves. For frequencies where the floor-to-mouth height is \u03BB/4, the reflected and direct waves are in phase \u2014 **constructive interference** doubles the sound pressure in the horizontal direction.
+The balcony (serefe) is critical. If the Muezzin stands at the outer edge with the balcony floor below, the floor acts as a ground plane reflector. Sound waves travelling downward reflect off the floor and combine with the direct upward-radiating waves. For frequencies where the floor-to-mouth height is λ/4, the reflected and direct waves are in phase — **constructive interference** doubles the sound pressure in the horizontal direction.
 
-The code models a minaret\u2019s acoustic radiation pattern as a function of height, balcony dimensions, and frequency.`,
-      analogy: 'A lighthouse needs to be tall to shine its beam far. But height alone is not enough \u2014 the shape of the lens, the angle of the reflector, and the power of the lamp all matter. A minaret is an acoustic lighthouse: height gives range, the balcony shapes the beam, and the Muezzin\u2019s voice is the source.',
+The code models a minaret’s acoustic radiation pattern as a function of height, balcony dimensions, and frequency.`,
+      analogy: 'A lighthouse needs to be tall to shine its beam far. But height alone is not enough — the shape of the lens, the angle of the reflector, and the power of the lamp all matter. A minaret is an acoustic lighthouse: height gives range, the balcony shapes the beam, and the Muezzin’s voice is the source.',
       storyConnection: 'The minarets of the Blue Mosque in Istanbul are 64 metres tall with three balconies each. The multiple balconies served different functions: the highest for the pre-dawn call (when sound carries furthest in still air), the middle for the noon call (when thermal updrafts could lift sound), and the lowest for evening (when the temperature inversion bends sound downward).',
       checkQuestion: 'Why might a hexagonal minaret have slightly better acoustic performance than a circular one?',
       checkAnswer: 'A circular minaret scatters sound equally in all directions, but some energy is wasted on the side facing the mosque building itself. A hexagonal minaret has flat faces that can be oriented to direct more energy toward the city and less toward the building. Each flat face acts as a small reflector. The effect is subtle (1-2 dB) but was potentially noticed by empirical testing over centuries.',
-      codeIntro: 'Model a minaret\u2019s acoustic radiation pattern with balcony reflections.',
+      codeIntro: 'Model a minaret’s acoustic radiation pattern with balcony reflections.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
@@ -75,7 +75,7 @@ for h, col, ls in zip(heights, ['#ef4444', '#3b82f6', '#10b981'], ['-', '--', '-
     ax1.plot(np.degrees(theta) - 90, amplitude, color=col, linewidth=2,
              label=f'h={h}m')
 
-ax1.set_xlabel('Angle from horizontal (\u00B0)', fontsize=10)
+ax1.set_xlabel('Angle from horizontal (°)', fontsize=10)
 ax1.set_ylabel('Relative amplitude', fontsize=10)
 ax1.set_title('Minaret Radiation Pattern (500 Hz)', fontsize=12)
 ax1.legend(fontsize=10)
@@ -121,25 +121,25 @@ print("=== Minaret Design Summary ===")
 for h in [30, 50, 70]:
     idx = int((h - 10) / 90 * 99)
     area = np.pi * coverage[idx]**2 / 1e6
-    print(f"  h={h}m: range={coverage[idx]:.0f}m, area={area:.1f} km\u00B2")`,
-      challenge: 'Add wind effects: a 20 km/h wind shifts the Adhan\u2019s coverage pattern downwind. Model the asymmetric coverage and calculate how much of the city loses audibility in windy conditions.',
+    print(f"  h={h}m: range={coverage[idx]:.0f}m, area={area:.1f} km²")`,
+      challenge: 'Add wind effects: a 20 km/h wind shifts the Adhan’s coverage pattern downwind. Model the asymmetric coverage and calculate how much of the city loses audibility in windy conditions.',
       successHint: 'Minaret design is a centuries-old optimisation problem that blends structural engineering, acoustics, and aesthetics. Modern mosque designers use computational tools to solve what Ottoman architects solved by iterative testing over generations.',
     },
     {
-      title: 'Acoustic simulation engine \u2014 FDTD wave propagation',
+      title: 'Acoustic simulation engine — FDTD wave propagation',
       concept: `The gold standard for room acoustics simulation is the **Finite-Difference Time-Domain (FDTD)** method. Unlike ray tracing (which approximates sound as rays), FDTD solves the actual **wave equation** directly on a grid:
 
-**\u2202\u00B2p/\u2202t\u00B2 = c\u00B2 (\u2202\u00B2p/\u2202x\u00B2 + \u2202\u00B2p/\u2202y\u00B2)**
+**∂²p/∂t² = c² (∂²p/∂x² + ∂²p/∂y²)**
 
 Where p is sound pressure and c is the speed of sound.
 
-FDTD captures everything: diffraction, interference, resonance, and all wave phenomena that ray tracing misses. The cost: you need a grid with cell size \u2264 \u03BB/10 (at least 10 cells per wavelength). For 1 kHz (\u03BB = 0.34 m), cells must be \u2264 3.4 cm. A 30m room needs 900 cells per side \u2014 810,000 cells in 2D. Each time step advances by dt = dx/(c\u221A2) for stability.
+FDTD captures everything: diffraction, interference, resonance, and all wave phenomena that ray tracing misses. The cost: you need a grid with cell size ≤ λ/10 (at least 10 cells per wavelength). For 1 kHz (λ = 0.34 m), cells must be ≤ 3.4 cm. A 30m room needs 900 cells per side — 810,000 cells in 2D. Each time step advances by dt = dx/(c√2) for stability.
 
 The code implements a 2D FDTD acoustic simulation of a simplified mosque.`,
       analogy: 'Ray tracing is like tracking individual billiard balls. FDTD is like watching the entire pool of water ripple. When you drop a stone in a pond, you see wavefronts spread, diffract around obstacles, and interfere. FDTD literally simulates this ripple-by-ripple, capturing every wave phenomenon. It is slower but fundamentally more accurate.',
-      storyConnection: 'Recent PhD research at Istanbul Technical University used FDTD to study the acoustics of the S\u00FCleymaniye Mosque below 500 Hz, where ray tracing fails. The FDTD simulation revealed that the mosque\u2019s dome creates a strong resonance at 43 Hz \u2014 a frequency felt more than heard, contributing to the sense of awe and grandeur that visitors report.',
+      storyConnection: 'Recent PhD research at Istanbul Technical University used FDTD to study the acoustics of the Süleymaniye Mosque below 500 Hz, where ray tracing fails. The FDTD simulation revealed that the mosque’s dome creates a strong resonance at 43 Hz — a frequency felt more than heard, contributing to the sense of awe and grandeur that visitors report.',
       checkQuestion: 'Why is FDTD computationally expensive for high frequencies?',
-      checkAnswer: 'At 10 kHz, \u03BB = 3.4 cm. The grid needs cells \u2264 3.4 mm. A 30m room would need ~9000 cells per side = 81 million cells in 2D (or 729 billion in 3D). Each cell must be updated at every time step. This is why FDTD is practical for low frequencies (< 1 kHz) in room-sized spaces, while ray tracing handles high frequencies. Hybrid methods combine both.',
+      checkAnswer: 'At 10 kHz, λ = 3.4 cm. The grid needs cells ≤ 3.4 mm. A 30m room would need ~9000 cells per side = 81 million cells in 2D (or 729 billion in 3D). Each cell must be updated at every time step. This is why FDTD is practical for low frequencies (< 1 kHz) in room-sized spaces, while ray tracing handles high frequencies. Hybrid methods combine both.',
       codeIntro: 'Implement a 2D FDTD acoustic wave simulation in a room.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -240,23 +240,23 @@ plt.tight_layout()
 plt.show()
 
 print(f"Grid: {nx} x {ny} = {nx*ny:,} cells")
-print(f"dx = {dx}m, dt = {dt*1e6:.1f} \u00B5s")
+print(f"dx = {dx}m, dt = {dt*1e6:.1f} µs")
 print(f"Max valid frequency: {c/(10*dx):.0f} Hz")
 print(f"Simulation time: {n_steps*dt*1000:.1f} ms")`,
       challenge: 'Add a semicircular dome at the top of the room (reflecting boundary) and compare the pressure distribution with and without the dome. Does the dome create a focal region?',
       successHint: 'FDTD is the most accurate acoustic simulation method available. It captures all wave phenomena from first principles. The trade-off is computational cost, which is why real-world simulations often combine FDTD (low frequencies) with ray tracing (high frequencies) for full-bandwidth prediction.',
     },
     {
-      title: 'Speaker array beamforming \u2014 steering sound electronically',
+      title: 'Speaker array beamforming — steering sound electronically',
       concept: `A **phased array** of speakers can steer a beam of sound in any direction without physically moving. The trick: add a small **time delay** to each speaker so that the wavefronts from all speakers arrive in phase at the desired angle.
 
-For a linear array of N speakers spaced d apart, the delay for speaker n to steer to angle \u03B8 is:
+For a linear array of N speakers spaced d apart, the delay for speaker n to steer to angle θ is:
 
-**\u0394t_n = n \u00D7 d \u00D7 sin(\u03B8) / c**
+**Δt_n = n × d × sin(θ) / c**
 
-When all speakers emit with these delays, constructive interference creates a beam at angle \u03B8 and destructive interference suppresses sound in other directions. The beam width is approximately:
+When all speakers emit with these delays, constructive interference creates a beam at angle θ and destructive interference suppresses sound in other directions. The beam width is approximately:
 
-**\u0394\u03B8 \u2248 \u03BB / (N \u00D7 d)**
+**Δθ ≈ λ / (N × d)**
 
 More speakers or wider spacing = narrower beam. Higher frequency = narrower beam.
 
@@ -264,7 +264,7 @@ Modern mosque speaker arrays use this to direct the Adhan toward the city while 
       analogy: 'Imagine a line of people on a beach, each throwing a stone into the water. If they all throw at exactly the same time, the ripples spread in all directions. But if each person throws slightly later than the one before them (a "Mexican wave" of throws), the resulting wave pattern has a strong beam in one direction. This is beamforming: coordinated timing creates directional waves.',
       storyConnection: 'In modern Istanbul, noise complaints from residents near mosques have led to regulated sound levels. Beamforming speaker arrays allow mosques to direct the Adhan outward and downward (toward the neighbourhood) while creating a "null" (silence zone) directly at the nearest apartment building. This is acoustic engineering solving a social problem.',
       checkQuestion: 'An 8-speaker array with d = 0.2m spacing operates at 1 kHz. What is the beam width?',
-      checkAnswer: '\u03BB = 343/1000 = 0.343 m. \u0394\u03B8 \u2248 0.343 / (8 \u00D7 0.2) = 0.214 radians = 12.3\u00B0. This is a reasonably tight beam. At 4 kHz, the beam narrows to 3.1\u00B0. At 250 Hz, it widens to 49\u00B0 \u2014 too broad for directional control. This is why beamforming works best at higher frequencies.',
+      checkAnswer: 'λ = 343/1000 = 0.343 m. Δθ ≈ 0.343 / (8 × 0.2) = 0.214 radians = 12.3°. This is a reasonably tight beam. At 4 kHz, the beam narrows to 3.1°. At 250 Hz, it widens to 49° — too broad for directional control. This is why beamforming works best at higher frequencies.',
       codeIntro: 'Simulate a phased speaker array and visualise beamforming.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -295,9 +295,9 @@ for steer, col in zip(steer_angles, colors):
     AF_mag = np.abs(AF) / N_speakers
 
     ax1.plot(theta, 20*np.log10(AF_mag + 1e-10), color=col, linewidth=2,
-             label=f'Steer: {steer}\u00B0')
+             label=f'Steer: {steer}°')
 
-ax1.set_xlabel('Angle (\u00B0)', fontsize=11)
+ax1.set_xlabel('Angle (°)', fontsize=11)
 ax1.set_ylabel('Array gain (dB)', fontsize=11)
 ax1.set_title(f'{N_speakers}-Speaker Array at {freq} Hz', fontsize=12)
 ax1.set_ylim(-30, 3)
@@ -310,13 +310,13 @@ beamwidths = np.degrees(v / (freqs * N_speakers * d))
 
 ax2.plot(freqs, beamwidths, color='#a855f7', linewidth=2.5)
 ax2.axhline(15, color='#f59e0b', linewidth=1.5, linestyle='--')
-ax2.text(500, 17, 'Target beamwidth (15\u00B0)', color='#f59e0b', fontsize=10)
+ax2.text(500, 17, 'Target beamwidth (15°)', color='#f59e0b', fontsize=10)
 ax2.fill_between(freqs, 0, beamwidths, where=beamwidths < 15,
                  color='#10b981', alpha=0.1)
 ax2.fill_between(freqs, 0, beamwidths, where=beamwidths >= 15,
                  color='#ef4444', alpha=0.1)
 ax2.set_xlabel('Frequency (Hz)', fontsize=11)
-ax2.set_ylabel('Beamwidth (\u00B0)', fontsize=11)
+ax2.set_ylabel('Beamwidth (°)', fontsize=11)
 ax2.set_title('Beamwidth vs Frequency', fontsize=12)
 ax2.grid(alpha=0.3)
 
@@ -328,12 +328,12 @@ print(f"Total aperture: {(N_speakers-1)*d:.2f}m")
 print()
 for f in [250, 500, 1000, 2000, 4000]:
     bw = np.degrees(v / (f * N_speakers * d))
-    print(f"  {f:>5} Hz: beamwidth = {bw:>5.1f}\u00B0 {'(too wide)' if bw > 30 else '(good)' if bw > 10 else '(very tight)'}")`,
+    print(f"  {f:>5} Hz: beamwidth = {bw:>5.1f}° {'(too wide)' if bw > 30 else '(good)' if bw > 10 else '(very tight)'}")`,
       challenge: 'Design a circular array (speakers on a ring) that steers the Adhan in all horizontal directions while creating a null directly downward (to protect ground-floor residents). Calculate the required number of speakers and ring diameter.',
-      successHint: 'Beamforming is used everywhere: 5G cellular antennas, medical ultrasound imaging, sonar, radar, and concert sound systems. The mathematics is identical \u2014 delay and sum \u2014 whether the waves are sound, radio, or light.',
+      successHint: 'Beamforming is used everywhere: 5G cellular antennas, medical ultrasound imaging, sonar, radar, and concert sound systems. The mathematics is identical — delay and sum — whether the waves are sound, radio, or light.',
     },
     {
-      title: 'Urban sound propagation \u2014 modelling the Adhan across a city',
+      title: 'Urban sound propagation — modelling the Adhan across a city',
       concept: `Sound propagation in a city is far more complex than the simple inverse square law. Buildings create **shadow zones** (diffraction), **reflections** create multiple paths, **ground absorption** varies (asphalt vs. gardens), and **atmospheric conditions** (wind, temperature gradients) bend the sound path.
 
 Professional urban acoustics uses the **ISO 9613** standard, which adds corrections to the basic inverse square law:
@@ -343,14 +343,14 @@ Professional urban acoustics uses the **ISO 9613** standard, which adds correcti
 Where A_div = geometric divergence (inverse square), A_atm = air absorption, A_ground = ground effect, A_barrier = building shielding, and A_misc = other factors.
 
 Building shielding (diffraction around buildings) uses the Maekawa formula:
-**A_barrier \u2248 10 \u00D7 log\u2081\u2080(3 + 20N)**
-where N is the Fresnel number = 2\u03B4/\u03BB (\u03B4 = path difference).
+**A_barrier ≈ 10 × log₁₀(3 + 20N)**
+where N is the Fresnel number = 2δ/λ (δ = path difference).
 
 The code creates a simplified urban sound propagation model for the Adhan.`,
       analogy: 'Imagine shining a flashlight across a miniature city model. Some buildings block the light (shadow zones). Some surfaces reflect it (creating bright spots). The ground colour (dark pavement vs. light grass) affects how much light bounces upward. And heat shimmer from the model bends the light beam. Sound in a city follows all the same patterns, just with longer wavelengths.',
-      storyConnection: 'In Ottoman-era Istanbul, minarets were spaced so that the entire city was within earshot of at least one Muezzin. The spacing was determined empirically over centuries. Modern acoustic modelling can replicate this: given a city\u2019s building layout, wind patterns, and ambient noise map, we can calculate the optimal minaret (or loudspeaker) placement for full coverage with minimum noise pollution.',
+      storyConnection: 'In Ottoman-era Istanbul, minarets were spaced so that the entire city was within earshot of at least one Muezzin. The spacing was determined empirically over centuries. Modern acoustic modelling can replicate this: given a city’s building layout, wind patterns, and ambient noise map, we can calculate the optimal minaret (or loudspeaker) placement for full coverage with minimum noise pollution.',
       checkQuestion: 'A 4-storey building (12m tall) sits between a minaret and a listener. The minaret top is 50m high and the listener is 200m behind the building. Does the building significantly block the sound?',
-      checkAnswer: 'The sound from a 50m minaret travels downward at a steep angle to clear a 12m building 200m away. The direct path clears the building easily (the angle from minaret top to building top to listener has \u03B4 near zero, so N \u2248 0 and A_barrier \u2248 5 dB). If the minaret were only 15m tall, the building would be a significant barrier (N >> 1, A_barrier > 15 dB). This confirms why height matters.',
+      checkAnswer: 'The sound from a 50m minaret travels downward at a steep angle to clear a 12m building 200m away. The direct path clears the building easily (the angle from minaret top to building top to listener has δ near zero, so N ≈ 0 and A_barrier ≈ 5 dB). If the minaret were only 15m tall, the building would be a significant barrier (N >> 1, A_barrier > 15 dB). This confirms why height matters.',
       codeIntro: 'Model Adhan propagation across a simplified city grid.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -481,7 +481,7 @@ print(f"White contour = audibility boundary ({ambient} dB)")`,
       successHint: 'Urban sound propagation modelling is used for airport noise zoning, highway noise barriers, industrial noise assessment, and city planning. The ISO 9613 standard is the foundation, but modern software adds building-specific ray tracing and meteorological effects.',
     },
     {
-      title: 'Noise ordinance checker \u2014 compliance at property boundaries',
+      title: 'Noise ordinance checker — compliance at property boundaries',
       concept: `Most cities regulate noise levels at property boundaries. A typical ordinance specifies:
 - **Daytime limit** (7AM-10PM): 55-65 dB(A)
 - **Nighttime limit** (10PM-7AM): 45-55 dB(A)
@@ -492,10 +492,10 @@ The Adhan occurs at times that span both day and night (Fajr at ~4:30 AM, Isha a
 **A-weighting** adjusts for human hearing sensitivity: we hear mid-frequencies (1-4 kHz) best, so these are weighted more heavily. Low frequencies below 200 Hz are weighted down by 10-20 dB.
 
 The code builds a noise compliance checker that calculates dB(A) at multiple receiver positions for a given speaker configuration and checks against ordinance limits.`,
-      analogy: 'Speed limits vary by zone: 30 km/h near schools, 50 km/h in town, 100 km/h on highways. Similarly, noise limits vary by time of day and location. A noise ordinance checker is like a speed camera for sound: it measures the level at the boundary and flags violations. The engineer\u2019s job is to design the system so it never trips the alarm.',
+      analogy: 'Speed limits vary by zone: 30 km/h near schools, 50 km/h in town, 100 km/h on highways. Similarly, noise limits vary by time of day and location. A noise ordinance checker is like a speed camera for sound: it measures the level at the boundary and flags violations. The engineer’s job is to design the system so it never trips the alarm.',
       storyConnection: 'In modern Cairo, Istanbul, and Kuala Lumpur, noise complaints about the Adhan have led to regulated speaker systems. Some mosques now use "smart" systems that automatically adjust volume based on ambient noise level and time of day. Fajr (pre-dawn) uses lower volume than Dhuhr (noon, when traffic is loudest). This is noise engineering meeting religious practice.',
       checkQuestion: 'The Adhan produces 80 dB(A) at 50m from the minaret. The nearest apartment is 100m away. The nighttime limit is 50 dB(A). Does the Fajr Adhan comply?',
-      checkAnswer: 'At 100m (double the 50m reference distance), the level drops by 6 dB to 74 dB(A). This is 24 dB above the 50 dB(A) nighttime limit \u2014 a significant violation. The mosque needs to either: (1) reduce speaker power by 24 dB for Fajr, (2) use beamforming to create a null at the apartment, or (3) rely on a religious exemption in local law.',
+      checkAnswer: 'At 100m (double the 50m reference distance), the level drops by 6 dB to 74 dB(A). This is 24 dB above the 50 dB(A) nighttime limit — a significant violation. The mosque needs to either: (1) reduce speaker power by 24 dB for Fajr, (2) use beamforming to create a null at the apartment, or (3) rely on a religious exemption in local law.',
       codeIntro: 'Build a noise compliance checker for a mosque speaker system.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -609,7 +609,7 @@ for limit, name in [(day_limit, 'Daytime'), (night_limit, 'Nighttime'), (fajr_li
       successHint: 'Noise compliance is a critical skill for acoustic engineers. Every construction project, industrial facility, and entertainment venue requires a noise assessment. The same methods apply to airport noise contours, highway noise barriers, and wind turbine noise.',
     },
     {
-      title: 'Capstone \u2014 designing a complete city acoustic plan',
+      title: 'Capstone — designing a complete city acoustic plan',
       concept: `This capstone integrates everything: the inverse square law (Level 1), dome acoustics and crossover design (Level 2), ray tracing and impulse response (Level 3), and beamforming, urban propagation, and noise compliance (Level 4) into a single city acoustic design.
 
 You will design the sound system for a new mosque in a dense urban neighbourhood:
@@ -623,7 +623,7 @@ You will design the sound system for a new mosque in a dense urban neighbourhood
 **Level 3**: You learned to SIMULATE acoustics with ray tracing and impulse responses.
 **Level 4**: You learned to DESIGN complete systems with beamforming and compliance.
 
-This is the journey from understanding to engineering \u2014 from the Muezzin\u2019s voice to a city-scale acoustic design.`,
+This is the journey from understanding to engineering — from the Muezzin’s voice to a city-scale acoustic design.`,
       analogy: 'An architect designs a building by integrating structural engineering, plumbing, electrical, and aesthetics into one coherent plan. An acoustic engineer does the same for sound: interior treatment, speaker design, noise control, and coverage planning must all work together. This capstone is your architectural plan for sound.',
       storyConnection: 'When Saudi Arabia builds new mosques (hundreds per year), each requires a complete acoustic design package: interior analysis (Sabine/Eyring), speaker selection, minaret height recommendation, noise impact assessment, and a smart volume control scheme. The process you have learned across four levels mirrors the actual professional workflow.',
       checkQuestion: 'If budget allows only ONE of these improvements, which gives the most benefit: (a) increasing minaret height from 30m to 50m, (b) adding beamforming to the speaker array, or (c) adding acoustic treatment to the dome interior?',
@@ -668,7 +668,7 @@ axes[0,0].axhline(target_rt60, color='#10b981', linewidth=2, linestyle='--')
 # Find required alpha
 required_alpha = 1 - np.exp(-0.161 * dome_volume / (dome_surface * target_rt60))
 axes[0,0].scatter([required_alpha], [target_rt60], color='#ef4444', s=100, zorder=5)
-axes[0,0].annotate(f'\u03B1 = {required_alpha:.2f}', xy=(required_alpha, target_rt60),
+axes[0,0].annotate(f'α = {required_alpha:.2f}', xy=(required_alpha, target_rt60),
                   xytext=(required_alpha + 0.05, target_rt60 + 0.5),
                   fontsize=11, color='#ef4444',
                   arrowprops=dict(arrowstyle='->', color='#ef4444'))
@@ -691,7 +691,7 @@ for n in range(n_speakers):
 AF_dB = 20 * np.log10(np.abs(AF) / n_speakers + 1e-10)
 
 axes[0,1].plot(theta, AF_dB, color='#a855f7', linewidth=2)
-axes[0,1].set_xlabel('Angle (\u00B0)', fontsize=10)
+axes[0,1].set_xlabel('Angle (°)', fontsize=10)
 axes[0,1].set_ylabel('Gain (dB)', fontsize=10)
 axes[0,1].set_title(f'Speaker Array ({n_speakers} elements)', fontsize=12)
 axes[0,1].set_ylim(-25, 3)
@@ -787,14 +787,14 @@ plt.tight_layout()
 plt.show()
 
 print("=== MOSQUE ACOUSTIC DESIGN REPORT ===")
-print(f"Interior: \u03B1_avg = {required_alpha:.2f} for RT60 = {target_rt60}s")
+print(f"Interior: α_avg = {required_alpha:.2f} for RT60 = {target_rt60}s")
 print(f"Array: {n_speakers} speakers, {total_source:.0f} dBA combined at 1m")
 print(f"At boundary ({nearest_building}m): {level_at_boundary:.1f} dBA")
 print(f"Day compliance: {'PASS' if level_at_boundary < day_limit else 'FAIL'}")
 print(f"Night compliance: {'PASS' if level_at_boundary < night_limit else 'FAIL - reduce by ' + str(int(level_at_boundary - night_limit)) + ' dB'}")
 print(f"Overall score: {np.mean(scores):.0f}/100")`,
       challenge: 'Modify the design to achieve 100% on all five scorecard metrics. You can adjust: minaret height, number of speakers, absorption coefficient, and add beamforming null directions. What is the minimum-cost design that passes everything?',
-      successHint: 'You have completed a full journey through architectural acoustics. From the Muezzin\u2019s voice to a city-scale acoustic plan, you now have the foundational knowledge used by acoustic consultants, speaker engineers, and architects worldwide. The minaret was your classroom \u2014 the equations are your tools for any space where sound matters.',
+      successHint: 'You have completed a full journey through architectural acoustics. From the Muezzin’s voice to a city-scale acoustic plan, you now have the foundational knowledge used by acoustic consultants, speaker engineers, and architects worldwide. The minaret was your classroom — the equations are your tools for any space where sound matters.',
     },
   ];
 

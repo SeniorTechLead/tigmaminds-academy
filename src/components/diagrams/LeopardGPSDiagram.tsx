@@ -11,7 +11,7 @@ export default function LeopardGPSDiagram() {
 
         {/* Title */}
         <text x="300" y="26" textAnchor="middle" fontSize="13" className="fill-gray-200" fontWeight="700">
-          GPS Trilateration \u2014 Finding an Animal from Space
+          GPS Trilateration — Finding an Animal from Space
         </text>
 
         {/* Space region */}
@@ -48,7 +48,7 @@ export default function LeopardGPSDiagram() {
 
         {/* Ground region */}
         <rect x="10" y="168" width="580" height="262" rx="6" className="fill-emerald-950/30" />
-        <text x="20" y="186" fontSize="10" className="fill-gray-500">GROUND \u2014 Nagaland forest</text>
+        <text x="20" y="186" fontSize="10" className="fill-gray-500">GROUND — Nagaland forest</text>
 
         {/* Trilateration circles */}
         <circle cx="200" cy="290" r="130" fill="none" stroke="#f59e0b" strokeWidth="1.5" strokeDasharray="6,3" opacity="0.4" />
@@ -71,9 +71,9 @@ export default function LeopardGPSDiagram() {
         <text x="430" y="276" textAnchor="middle" fontSize="9" className="fill-gray-400">records lat/long</text>
 
         {/* Distance labels */}
-        <text x="230" y="230" fontSize="10" className="fill-amber-400/80">d\u2081 = 21,400 km</text>
-        <text x="370" y="225" fontSize="10" className="fill-blue-400/80">d\u2082 = 20,800 km</text>
-        <text x="220" y="380" fontSize="10" className="fill-emerald-400/80">d\u2083 = 21,100 km</text>
+        <text x="230" y="230" fontSize="10" className="fill-amber-400/80">d₁ = 21,400 km</text>
+        <text x="370" y="225" fontSize="10" className="fill-blue-400/80">d₂ = 20,800 km</text>
+        <text x="220" y="380" fontSize="10" className="fill-emerald-400/80">d₃ = 21,100 km</text>
 
         {/* How it works callout */}
         <rect x="20" y="395" width="560" height="35" rx="4" className="fill-slate-800/80" />
@@ -81,7 +81,7 @@ export default function LeopardGPSDiagram() {
           Each satellite measures distance by timing how long its signal takes to arrive.
         </text>
         <text x="300" y="423" textAnchor="middle" fontSize="10" className="fill-amber-300">
-          3 distances = 3 circles. The one point where all 3 overlap = the animal\u2019s exact location.
+          3 distances = 3 circles. The one point where all 3 overlap = the animal’s exact location.
         </text>
       </svg>
     </div>

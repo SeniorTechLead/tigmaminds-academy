@@ -29,8 +29,8 @@ export default function VimanaLevel3() {
 
   const miniLessons = [
     {
-      title: 'Panel method \u2014 computing lift from airfoil geometry',
-      concept: `Real aerodynamic analysis does not use simplified equations \u2014 it solves for the flow around the actual airfoil shape. The **panel method** divides the airfoil surface into small flat panels, places sources and vortices on each, and solves a system of equations to find the velocity (and hence pressure) at each point.
+      title: 'Panel method — computing lift from airfoil geometry',
+      concept: `Real aerodynamic analysis does not use simplified equations — it solves for the flow around the actual airfoil shape. The **panel method** divides the airfoil surface into small flat panels, places sources and vortices on each, and solves a system of equations to find the velocity (and hence pressure) at each point.
 
 We will implement a simplified panel method for a NACA 4-digit airfoil. Given a thickness and camber specification, the code:
 1. Generates the airfoil coordinates
@@ -39,10 +39,10 @@ We will implement a simplified panel method for a NACA 4-digit airfoil. Given a 
 4. Computes C_p and integrates to find C_L
 
 This is the same approach used in the first generation of computational aerodynamics codes. Modern CFD uses finite elements and Navier-Stokes equations, but the panel method is where it all started.`,
-      analogy: 'The panel method treats the wing surface as a mosaic of tiny flat tiles. Each tile influences the airflow around every other tile. By solving for all tiles simultaneously (a system of linear equations), you get the full picture of how air flows around the entire wing. It is like figuring out how each person in a crowd affects everyone else\u2019s movement.',
+      analogy: 'The panel method treats the wing surface as a mosaic of tiny flat tiles. Each tile influences the airflow around every other tile. By solving for all tiles simultaneously (a system of linear equations), you get the full picture of how air flows around the entire wing. It is like figuring out how each person in a crowd affects everyone else’s movement.',
       storyConnection: 'Vishwakarma, the divine architect, designed the Vimana with precise geometry. Modern aircraft designers use computational methods to optimise every curve of the wing surface. A 1mm change in airfoil shape can measurably change fuel efficiency over a 10,000 km flight.',
       checkQuestion: 'Why do we need more panels near the leading edge than the trailing edge?',
-      checkAnswer: 'The leading edge has the strongest pressure gradients \u2014 air accelerates rapidly as it flows around the sharp curve. More panels are needed to capture this rapid change accurately. The trailing edge has gentler gradients, so fewer panels suffice. This is called mesh refinement.',
+      checkAnswer: 'The leading edge has the strongest pressure gradients — air accelerates rapidly as it flows around the sharp curve. More panels are needed to capture this rapid change accurately. The trailing edge has gentler gradients, so fewer panels suffice. This is called mesh refinement.',
       codeIntro: 'Generate a NACA airfoil and compute its pressure distribution using a simplified panel method.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -70,7 +70,7 @@ def naca_4digit(m, p, t, n=100):
 xu, yu, xl, yl, xc, yc = naca_4digit(0.02, 0.4, 0.12, 80)
 
 # Simplified pressure estimation using thin airfoil theory
-# C_p \u2248 1 - (v/V_inf)^2, velocity proportional to surface curvature
+# C_p ≈ 1 - (v/V_inf)^2, velocity proportional to surface curvature
 dy_upper = np.gradient(yu, xu)
 dy_lower = np.gradient(yl, xl)
 v_upper = np.sqrt(1 + dy_upper**2)  # local speed (simplified)
@@ -108,7 +108,7 @@ plt.show()
 # Estimate C_L by integrating pressure difference
 Cp_diff = np.interp(xu, xl, Cp_lower) - Cp_upper
 C_L = np.trapz(Cp_diff, xu)
-print(f"NACA 2412 at \u03b1 = 0\u00b0:")
+print(f"NACA 2412 at α = 0°:")
 print(f"  Estimated C_L = {C_L:.3f}")
 print(f"  Peak suction (upper): C_p = {min(Cp_upper):.2f}")
 print(f"  Peak pressure (lower): C_p = {max(Cp_lower):.2f}")`,
@@ -119,15 +119,15 @@ print(f"  Peak pressure (lower): C_p = {max(Cp_lower):.2f}")`,
       title: 'Reynolds number and flow regimes',
       concept: `Whether airflow over a wing is smooth (laminar) or chaotic (turbulent) depends on a single dimensionless number: the **Reynolds number**.
 
-**Re = \u03C1 \u00D7 v \u00D7 L / \u03BC**
+**Re = ρ × v × L / μ**
 
-Where \u03BC is the dynamic viscosity of air (~1.8\u00D710\u207B\u2075 Pa\u00B7s). At low Re (< 500,000), flow tends to be laminar. At high Re (> 1,000,000), it is turbulent.
+Where μ is the dynamic viscosity of air (~1.8×10⁻⁵ Pa·s). At low Re (< 500,000), flow tends to be laminar. At high Re (> 1,000,000), it is turbulent.
 
-This matters enormously for drag. Laminar flow has less skin friction drag but is fragile \u2014 even a tiny bump can trip it into turbulence. Turbulent flow has more friction but resists **separation** better (it stays attached to the surface longer).
+This matters enormously for drag. Laminar flow has less skin friction drag but is fragile — even a tiny bump can trip it into turbulence. Turbulent flow has more friction but resists **separation** better (it stays attached to the surface longer).
 
-Aircraft wings deliberately trip the boundary layer into turbulence at specific points using **vortex generators** \u2014 small fins on the wing surface. The increased friction is worth it to prevent catastrophic flow separation (stall).`,
+Aircraft wings deliberately trip the boundary layer into turbulence at specific points using **vortex generators** — small fins on the wing surface. The increased friction is worth it to prevent catastrophic flow separation (stall).`,
       analogy: 'Think of a river. In a slow, shallow section, water flows smoothly in parallel layers (laminar). In a fast, deep section with rocks, water churns chaotically (turbulent). The Reynolds number is like a speedometer for the flow: below a threshold, things are calm; above it, chaos reigns.',
-      storyConnection: 'The Pushpaka Vimana was described as moving smoothly, without turbulence. Real aircraft experience complex flow transitions. The boundary layer \u2014 the thin layer of air right next to the surface \u2014 determines whether the aircraft flies efficiently or wastes fuel fighting turbulent drag.',
+      storyConnection: 'The Pushpaka Vimana was described as moving smoothly, without turbulence. Real aircraft experience complex flow transitions. The boundary layer — the thin layer of air right next to the surface — determines whether the aircraft flies efficiently or wastes fuel fighting turbulent drag.',
       checkQuestion: 'A model airplane in a wind tunnel has Re = 200,000. A full-size version flying at the same speed has Re = 20,000,000. Why do they behave differently?',
       checkAnswer: 'The full-size aircraft has a much larger characteristic length (L), giving a higher Re. At higher Re, the boundary layer transitions to turbulence much earlier on the wing. This means the full-size aircraft has different stall characteristics, different drag, and different lift than the model. Wind tunnel testing must carefully account for Reynolds number effects.',
       codeIntro: 'Calculate Reynolds numbers for different flight conditions and visualise flow regimes.',
@@ -166,22 +166,22 @@ for name, v, L in aircraft:
 plt.figure(figsize=(10, 5))
 colors = ['green' if r < 5e5 else 'orange' if r < 1e6 else 'red' for r in res]
 plt.barh(names[::-1], [np.log10(r) for r in res[::-1]], color=colors[::-1], height=0.6)
-plt.axvline(np.log10(5e5), color='orange', linestyle='--', alpha=0.7, label='Laminar \u2192 Transition')
-plt.axvline(np.log10(1e6), color='red', linestyle='--', alpha=0.7, label='Transition \u2192 Turbulent')
-plt.xlabel('log\u2081\u2080(Reynolds number)', fontsize=11)
+plt.axvline(np.log10(5e5), color='orange', linestyle='--', alpha=0.7, label='Laminar → Transition')
+plt.axvline(np.log10(1e6), color='red', linestyle='--', alpha=0.7, label='Transition → Turbulent')
+plt.xlabel('log₁₀(Reynolds number)', fontsize=11)
 plt.title('Reynolds Number by Aircraft Type', fontsize=13)
 plt.legend(fontsize=9)
 plt.grid(axis='x', alpha=0.3)
 plt.show()
 
-print(f"\\nA 747\u2019s Re is {res[4]/res[0]:,.0f}x a paper airplane\u2019s!")
+print(f"\\nA 747’s Re is {res[4]/res[0]:,.0f}x a paper airplane’s!")
 print(f"This is why model testing must account for scale effects.")`,
-      challenge: 'At 12 km altitude, \u03C1 drops to 0.36 kg/m\u00B3 and \u03BC to 1.42\u00D710\u207B\u2075. Recalculate Re for the 747 at cruise altitude. How does it compare to sea level?',
-      successHint: 'Reynolds number is the single most important dimensionless number in fluid mechanics. It tells you whether flow is laminar or turbulent, determines drag characteristics, and governs scale effects. Every aerodynamicist\u2019s first question about a flow: "What is the Reynolds number?"',
+      challenge: 'At 12 km altitude, ρ drops to 0.36 kg/m³ and μ to 1.42×10⁻⁵. Recalculate Re for the 747 at cruise altitude. How does it compare to sea level?',
+      successHint: 'Reynolds number is the single most important dimensionless number in fluid mechanics. It tells you whether flow is laminar or turbulent, determines drag characteristics, and governs scale effects. Every aerodynamicist’s first question about a flow: "What is the Reynolds number?"',
     },
     {
-      title: 'Compressibility and Mach number \u2014 when air becomes elastic',
-      concept: `At low speeds, air behaves like an incompressible fluid \u2014 it simply flows around objects. But as you approach the **speed of sound** (Mach 1 \u2248 340 m/s at sea level), air cannot move out of the way fast enough. It compresses, forming **shock waves**.
+      title: 'Compressibility and Mach number — when air becomes elastic',
+      concept: `At low speeds, air behaves like an incompressible fluid — it simply flows around objects. But as you approach the **speed of sound** (Mach 1 ≈ 340 m/s at sea level), air cannot move out of the way fast enough. It compresses, forming **shock waves**.
 
 The **Mach number** (M = v/a, where a is the speed of sound) defines four flight regimes:
 - **Subsonic** (M < 0.8): normal flight, no compressibility effects
@@ -190,10 +190,10 @@ The **Mach number** (M = v/a, where a is the speed of sound) defines four flight
 - **Hypersonic** (M > 5): extreme heating, air molecules dissociate
 
 The code models how drag increases dramatically near Mach 1 (the **sound barrier**), and how swept wings help delay this effect.`,
-      analogy: 'Imagine a speedboat on a lake. At low speeds, water smoothly parts around the bow. But go fast enough and the boat creates a V-shaped wake \u2014 a surface shock wave. The boat literally outruns the waves it creates. An aircraft at Mach 1 does the same thing with pressure waves in air, creating a cone-shaped shock wave that you hear as a sonic boom.',
-      storyConnection: 'The Vimana was said to travel at the speed of thought. The speed of sound was once thought to be an unbreakable barrier \u2014 the "sound barrier." Chuck Yeager broke it in 1947 in the Bell X-1. Today, military jets routinely fly at Mach 2+. Concorde cruised at Mach 2.04.',
+      analogy: 'Imagine a speedboat on a lake. At low speeds, water smoothly parts around the bow. But go fast enough and the boat creates a V-shaped wake — a surface shock wave. The boat literally outruns the waves it creates. An aircraft at Mach 1 does the same thing with pressure waves in air, creating a cone-shaped shock wave that you hear as a sonic boom.',
+      storyConnection: 'The Vimana was said to travel at the speed of thought. The speed of sound was once thought to be an unbreakable barrier — the "sound barrier." Chuck Yeager broke it in 1947 in the Bell X-1. Today, military jets routinely fly at Mach 2+. Concorde cruised at Mach 2.04.',
       checkQuestion: 'Why are supersonic aircraft wings swept back at an angle?',
-      checkAnswer: 'Swept wings present an effective chord that is longer relative to the airflow (the flow "sees" the component of velocity perpendicular to the leading edge). This lowers the effective Mach number over the wing, delaying the formation of shock waves. A 45\u00B0 sweep effectively reduces the Mach number the wing experiences by a factor of cos(45\u00B0) \u2248 0.71.',
+      checkAnswer: 'Swept wings present an effective chord that is longer relative to the airflow (the flow "sees" the component of velocity perpendicular to the leading edge). This lowers the effective Mach number over the wing, delaying the formation of shock waves. A 45° sweep effectively reduces the Mach number the wing experiences by a factor of cos(45°) ≈ 0.71.',
       codeIntro: 'Model the wave drag rise near Mach 1 and compare wing sweep angles.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -230,9 +230,9 @@ Cd_sweep45 = Cd_base + np.where(mach_eff_45 < 0.85, 0,
              0.10 / mach_eff_45**2)))
 
 plt.figure(figsize=(10, 6))
-plt.plot(mach, Cd_total, linewidth=2.5, color='red', label='Straight wing (0\u00b0)')
-plt.plot(mach, Cd_sweep30, linewidth=2, color='orange', linestyle='--', label='30\u00b0 sweep')
-plt.plot(mach, Cd_sweep45, linewidth=2, color='green', linestyle='--', label='45\u00b0 sweep')
+plt.plot(mach, Cd_total, linewidth=2.5, color='red', label='Straight wing (0°)')
+plt.plot(mach, Cd_sweep30, linewidth=2, color='orange', linestyle='--', label='30° sweep')
+plt.plot(mach, Cd_sweep45, linewidth=2, color='green', linestyle='--', label='45° sweep')
 plt.axvline(1.0, color='gray', linestyle=':', alpha=0.5, label='Mach 1')
 plt.fill_between(mach, 0, 0.005, where=(mach > 0.8) & (mach < 1.2), alpha=0.1, color='red', label='Transonic region')
 
@@ -249,16 +249,16 @@ for m, name in [(0.3, 'Low subsonic'), (0.85, 'High subsonic'), (1.0, 'Sonic'), 
     v = m * 340
     print(f"  Mach {m:.1f} ({name:20s}): {v:.0f} m/s = {v*3.6:.0f} km/h")
 print(f"\\nSweep delays drag divergence by factor cos(sweep):")
-print(f"  30\u00b0 sweep: effective Mach reduced by {(1-np.cos(np.radians(30)))*100:.0f}%")
-print(f"  45\u00b0 sweep: effective Mach reduced by {(1-np.cos(np.radians(45)))*100:.0f}%")`,
-      challenge: 'At what altitude does the speed of sound change? (a = 20.05\u221AT where T is temperature in Kelvin). Plot the speed of sound from sea level to 20 km using the ISA temperature model.',
-      successHint: 'The transonic region is where aerodynamics gets really interesting (and difficult). The drag rise near Mach 1 kept aircraft subsonic for decades until clever engineering \u2014 swept wings, area ruling, and supercritical airfoils \u2014 tamed the sound barrier.',
+print(f"  30° sweep: effective Mach reduced by {(1-np.cos(np.radians(30)))*100:.0f}%")
+print(f"  45° sweep: effective Mach reduced by {(1-np.cos(np.radians(45)))*100:.0f}%")`,
+      challenge: 'At what altitude does the speed of sound change? (a = 20.05√T where T is temperature in Kelvin). Plot the speed of sound from sea level to 20 km using the ISA temperature model.',
+      successHint: 'The transonic region is where aerodynamics gets really interesting (and difficult). The drag rise near Mach 1 kept aircraft subsonic for decades until clever engineering — swept wings, area ruling, and supercritical airfoils — tamed the sound barrier.',
     },
     {
-      title: 'Specific impulse \u2014 comparing propulsion efficiency',
+      title: 'Specific impulse — comparing propulsion efficiency',
       concept: `Not all propulsion systems are equal. **Specific impulse** (I_sp) measures how efficiently an engine uses its propellant:
 
-**I_sp = Thrust / (mass_flow_rate \u00D7 g)**
+**I_sp = Thrust / (mass_flow_rate × g)**
 
 Units: seconds. A higher I_sp means the engine extracts more thrust per kilogram of fuel burned.
 
@@ -266,11 +266,11 @@ Units: seconds. A higher I_sp means the engine extracts more thrust per kilogram
 - Turbofan engines: 3,000-6,000 s (using atmosphere as oxidiser)
 - Ion engines: 1,000-10,000 s (tiny thrust but incredible efficiency)
 
-The trade-off: high I_sp usually means low thrust. Ion engines have amazing I_sp but produce thrust measured in millinewtons \u2014 useless for takeoff but perfect for deep-space missions where you can accelerate for months.`,
+The trade-off: high I_sp usually means low thrust. Ion engines have amazing I_sp but produce thrust measured in millinewtons — useless for takeoff but perfect for deep-space missions where you can accelerate for months.`,
       analogy: 'I_sp is like fuel economy for engines. A car that gets 20 km/litre is more fuel-efficient than one that gets 8 km/litre. Similarly, an engine with I_sp = 450 s extracts more velocity change per kilogram of fuel than one with I_sp = 250 s. But just as a fuel-efficient car might be slow, a high-I_sp engine might produce little thrust.',
-      storyConnection: 'The Vimana needed no fuel \u2014 infinite specific impulse! ISRO\u2019s PSLV uses a solid rocket first stage (I_sp \u2248 269 s) and a liquid engine upper stage (I_sp \u2248 316 s). The higher I_sp of the upper stage means it can achieve more \u0394v with less fuel \u2014 critical for the final push into orbit.',
+      storyConnection: 'The Vimana needed no fuel — infinite specific impulse! ISRO’s PSLV uses a solid rocket first stage (I_sp ≈ 269 s) and a liquid engine upper stage (I_sp ≈ 316 s). The higher I_sp of the upper stage means it can achieve more Δv with less fuel — critical for the final push into orbit.',
       checkQuestion: 'An ion engine has I_sp = 3,000 s but produces only 0.1 N of thrust. A chemical rocket has I_sp = 300 s and produces 1,000,000 N. Which is better for reaching Mars?',
-      checkAnswer: 'Both have their role. The chemical rocket provides the initial high-thrust escape from Earth\u2019s gravity (you need millions of newtons to overcome weight). The ion engine is better for the cruise phase \u2014 its tiny thrust, applied continuously for months, adds up to a large \u0394v using very little fuel. NASA\u2019s Dawn mission used ion engines to visit two asteroids.',
+      checkAnswer: 'Both have their role. The chemical rocket provides the initial high-thrust escape from Earth’s gravity (you need millions of newtons to overcome weight). The ion engine is better for the cruise phase — its tiny thrust, applied continuously for months, adds up to a large Δv using very little fuel. NASA’s Dawn mission used ion engines to visit two asteroids.',
       codeIntro: 'Compare specific impulse across propulsion technologies.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -303,7 +303,7 @@ ax1.grid(axis='x', alpha=0.3)
 # Thrust comparison (log scale)
 ax2.barh(names[::-1], [np.log10(t) for t in thrusts[::-1]],
          color=['#22c55e' if t > 1000 else '#f59e0b' if t > 1 else '#ef4444' for t in thrusts[::-1]], height=0.6)
-ax2.set_xlabel('log\u2081\u2080(Thrust in N)', fontsize=11)
+ax2.set_xlabel('log₁₀(Thrust in N)', fontsize=11)
 ax2.set_title('Raw Thrust (log scale)', fontsize=13)
 ax2.grid(axis='x', alpha=0.3)
 
@@ -318,30 +318,30 @@ m0 = payload + fuel
 mf = payload
 g0 = 9.8
 
-print("=== \u0394v for 10:1 mass ratio (9000 kg fuel, 1000 kg payload) ===")
+print("=== Δv for 10:1 mass ratio (9000 kg fuel, 1000 kg payload) ===")
 for name, isp, thrust, fuel_type in systems:
     ve = isp * g0
     dv = ve * np.log(m0 / mf)
     burn_time = fuel * g0 / (thrust if thrust > 0 else 0.001)
-    print(f"  {name:18s}: I_sp={isp:5d}s, v_e={ve:7.0f} m/s, \u0394v={dv/1000:6.1f} km/s, burn={burn_time/3600:.1f}h")`,
-      challenge: 'Design a two-stage rocket using LH2-LOX for both stages. Stage 1 has mass_ratio 5, Stage 2 has mass_ratio 4. What total \u0394v can it achieve? Is it enough for Mars transit?',
-      successHint: 'Specific impulse reveals the fundamental trade-off in propulsion: high thrust for escaping gravity vs. high efficiency for deep space. The future of space travel depends on finding engines that break this trade-off \u2014 nuclear thermal, fusion, or even solar sails.',
+    print(f"  {name:18s}: I_sp={isp:5d}s, v_e={ve:7.0f} m/s, Δv={dv/1000:6.1f} km/s, burn={burn_time/3600:.1f}h")`,
+      challenge: 'Design a two-stage rocket using LH2-LOX for both stages. Stage 1 has mass_ratio 5, Stage 2 has mass_ratio 4. What total Δv can it achieve? Is it enough for Mars transit?',
+      successHint: 'Specific impulse reveals the fundamental trade-off in propulsion: high thrust for escaping gravity vs. high efficiency for deep space. The future of space travel depends on finding engines that break this trade-off — nuclear thermal, fusion, or even solar sails.',
     },
     {
-      title: 'Atmospheric re-entry \u2014 surviving 27,000 km/h',
-      concept: `Getting to space is hard. Coming back is arguably harder. A spacecraft returning from orbit hits the atmosphere at **7.8 km/s** (28,000 km/h). The air cannot move out of the way fast enough and forms a **bow shock wave** \u2014 a wall of superheated plasma reaching 1,600\u00B0C or more.
+      title: 'Atmospheric re-entry — surviving 27,000 km/h',
+      concept: `Getting to space is hard. Coming back is arguably harder. A spacecraft returning from orbit hits the atmosphere at **7.8 km/s** (28,000 km/h). The air cannot move out of the way fast enough and forms a **bow shock wave** — a wall of superheated plasma reaching 1,600°C or more.
 
-The energy that must be dissipated is enormous: **KE = \u00BDmv\u00B2**. For a 5,000 kg capsule at 7,800 m/s, that is 152 billion joules \u2014 equivalent to 36 tons of TNT.
+The energy that must be dissipated is enormous: **KE = ½mv²**. For a 5,000 kg capsule at 7,800 m/s, that is 152 billion joules — equivalent to 36 tons of TNT.
 
 Two approaches to surviving re-entry:
 1. **Ablative heat shields**: material deliberately vaporises, carrying heat away
 2. **Thermal tiles**: insulating ceramic tiles (like the Space Shuttle)
 
 The **re-entry corridor** is narrow: too steep and the capsule burns up (too much heating); too shallow and it bounces off the atmosphere like a stone skipping on water.`,
-      analogy: 'Stick your hand in a campfire for a split second \u2014 it gets warm but does not burn. Hold it there for 10 seconds and you get burned badly. Re-entry is the same principle: the heat shield must absorb or deflect the total energy over the duration of re-entry (about 8 minutes). Ablative shields work like sweating \u2014 they sacrifice material to carry heat away.',
-      storyConnection: 'When the Pushpaka Vimana descended to Ayodhya, the people lit lamps to guide it down. Real spacecraft must descend through a precise corridor. ISRO\u2019s Gaganyaan capsule will face temperatures of 1,600\u00B0C during re-entry \u2014 its carbon-phenolic heat shield is designed to ablate away, protecting the crew inside.',
-      checkQuestion: 'Apollo capsules re-entering from the Moon hit the atmosphere at 11 km/s \u2014 faster than orbital re-entry (7.8 km/s). How much more kinetic energy must their heat shields handle?',
-      checkAnswer: 'KE \u221D v\u00B2. (11/7.8)\u00B2 = 1.99. Almost exactly TWICE the kinetic energy. This is why lunar return capsules need much more robust heat shields than orbital re-entry vehicles.',
+      analogy: 'Stick your hand in a campfire for a split second — it gets warm but does not burn. Hold it there for 10 seconds and you get burned badly. Re-entry is the same principle: the heat shield must absorb or deflect the total energy over the duration of re-entry (about 8 minutes). Ablative shields work like sweating — they sacrifice material to carry heat away.',
+      storyConnection: 'When the Pushpaka Vimana descended to Ayodhya, the people lit lamps to guide it down. Real spacecraft must descend through a precise corridor. ISRO’s Gaganyaan capsule will face temperatures of 1,600°C during re-entry — its carbon-phenolic heat shield is designed to ablate away, protecting the crew inside.',
+      checkQuestion: 'Apollo capsules re-entering from the Moon hit the atmosphere at 11 km/s — faster than orbital re-entry (7.8 km/s). How much more kinetic energy must their heat shields handle?',
+      checkAnswer: 'KE ∝ v². (11/7.8)² = 1.99. Almost exactly TWICE the kinetic energy. This is why lunar return capsules need much more robust heat shields than orbital re-entry vehicles.',
       codeIntro: 'Simulate atmospheric re-entry: deceleration, heating, and trajectory.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -398,7 +398,7 @@ ax3.set_xlabel('Time (s)'); ax3.set_ylabel('G-force')
 ax3.set_title('G-Loading'); ax3.legend(fontsize=9); ax3.grid(alpha=0.3)
 
 ax4.plot(times, heats, linewidth=2, color='orange')
-ax4.set_xlabel('Time (s)'); ax4.set_ylabel('Heat flux (MW/m\u00b2)')
+ax4.set_xlabel('Time (s)'); ax4.set_ylabel('Heat flux (MW/m²)')
 ax4.set_title('Heat Shield Loading'); ax4.grid(alpha=0.3)
 
 plt.tight_layout()
@@ -406,26 +406,26 @@ plt.show()
 
 print(f"Entry speed: {7800/1000:.1f} km/s ({7800*3.6:.0f} km/h)")
 print(f"Peak g-load: {max(gs):.1f} g at t = {times[gs.index(max(gs))]:.0f} s")
-print(f"Peak heat flux: {max(heats):.2f} MW/m\u00b2 at t = {times[heats.index(max(heats))]:.0f} s")
+print(f"Peak heat flux: {max(heats):.2f} MW/m² at t = {times[heats.index(max(heats))]:.0f} s")
 print(f"Total kinetic energy: {0.5*mass*7800**2/1e9:.1f} GJ = {0.5*mass*7800**2/4.184e9:.1f} tons TNT equivalent")`,
-      challenge: 'Change the entry angle to -5\u00B0 (steeper). How does the peak g-load change? At what angle does it exceed 10g (the human tolerance limit)?',
-      successHint: 'Re-entry is where orbital mechanics meets thermal engineering. The narrow re-entry corridor, the extreme heating, and the g-forces are the final challenges of any space mission. Every returning spacecraft \u2014 from Apollo to Gaganyaan \u2014 must thread this needle.',
+      challenge: 'Change the entry angle to -5° (steeper). How does the peak g-load change? At what angle does it exceed 10g (the human tolerance limit)?',
+      successHint: 'Re-entry is where orbital mechanics meets thermal engineering. The narrow re-entry corridor, the extreme heating, and the g-forces are the final challenges of any space mission. Every returning spacecraft — from Apollo to Gaganyaan — must thread this needle.',
     },
     {
-      title: 'Mission design \u2014 Lanka to Ayodhya by rocket',
-      concept: `Let\u2019s bring everything together. Imagine redesigning the Pushpaka Vimana\u2019s journey from Lanka (Sri Lanka) to Ayodhya using real physics. We will design a suborbital flight path \u2014 a ballistic trajectory that goes to space and comes back down \u2014 covering the ~2,200 km distance in about 30 minutes.
+      title: 'Mission design — Lanka to Ayodhya by rocket',
+      concept: `Let’s bring everything together. Imagine redesigning the Pushpaka Vimana’s journey from Lanka (Sri Lanka) to Ayodhya using real physics. We will design a suborbital flight path — a ballistic trajectory that goes to space and comes back down — covering the ~2,200 km distance in about 30 minutes.
 
-This is essentially what SpaceX\u2019s Starship is designed to do for point-to-point Earth travel. The code will:
+This is essentially what SpaceX’s Starship is designed to do for point-to-point Earth travel. The code will:
 1. Calculate the required launch velocity and angle
 2. Simulate the ballistic trajectory (no air, just gravity)
 3. Add atmospheric effects for launch and re-entry
-4. Compute the total \u0394v budget and fuel requirements
+4. Compute the total Δv budget and fuel requirements
 
 This is a capstone problem that integrates lift, drag, orbital mechanics, and the rocket equation.`,
       analogy: 'A suborbital hop is like throwing a ball from one end of a football field to the other. The ball goes up in an arc, reaches a peak height, and comes back down at the far end. The "ball" is the spacecraft, the "throw" is the rocket burn, and gravity pulls it back down. The challenge is calculating exactly how hard and at what angle to throw.',
-      storyConnection: 'Lanka to Ayodhya is approximately 2,200 km. The Ramayana says Rama described landmarks from the sky \u2014 the bridge to Lanka, the forests, the rivers. A suborbital trajectory peaking at ~400 km altitude would provide exactly this kind of panoramic view, with the curvature of the Earth visible and the entire subcontinent spread below.',
-      checkQuestion: 'Would a suborbital hop from Lanka to Ayodhya require less or more \u0394v than reaching orbit?',
-      checkAnswer: 'Less. Orbit requires ~9.4 km/s (including atmospheric and gravity losses). A 2,200 km suborbital hop needs about 3-4 km/s. However, you also need \u0394v for landing (deceleration), which partially offsets the savings. Still, suborbital is significantly cheaper in \u0394v than full orbital flight.',
+      storyConnection: 'Lanka to Ayodhya is approximately 2,200 km. The Ramayana says Rama described landmarks from the sky — the bridge to Lanka, the forests, the rivers. A suborbital trajectory peaking at ~400 km altitude would provide exactly this kind of panoramic view, with the curvature of the Earth visible and the entire subcontinent spread below.',
+      checkQuestion: 'Would a suborbital hop from Lanka to Ayodhya require less or more Δv than reaching orbit?',
+      checkAnswer: 'Less. Orbit requires ~9.4 km/s (including atmospheric and gravity losses). A 2,200 km suborbital hop needs about 3-4 km/s. However, you also need Δv for landing (deceleration), which partially offsets the savings. Still, suborbital is significantly cheaper in Δv than full orbital flight.',
       codeIntro: 'Design a suborbital trajectory from Lanka to Ayodhya.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -436,7 +436,7 @@ M = 5.972e24
 R = 6.371e6
 g = 9.8
 
-# Mission: Lanka (6.9\u00b0N, 79.9\u00b0E) to Ayodhya (26.8\u00b0N, 82.2\u00b0E)
+# Mission: Lanka (6.9°N, 79.9°E) to Ayodhya (26.8°N, 82.2°E)
 distance = 2200e3  # metres (great circle)
 range_angle = distance / R  # radians
 
@@ -450,9 +450,9 @@ theta_opt = 45  # degrees (optimal for max range)
 v_launch = np.sqrt(distance * g / np.sin(2 * np.radians(theta_opt)))
 
 print(f"=== Pushpaka Vimana Mission Plan ===")
-print(f"Route: Lanka \u2192 Ayodhya ({distance/1000:.0f} km)")
+print(f"Route: Lanka → Ayodhya ({distance/1000:.0f} km)")
 print(f"Launch velocity: {v_launch:.0f} m/s ({v_launch*3.6:.0f} km/h, Mach {v_launch/340:.1f})")
-print(f"Launch angle: {theta_opt}\u00b0")
+print(f"Launch angle: {theta_opt}°")
 
 # Simulate trajectory
 dt = 1
@@ -506,12 +506,12 @@ fuel_mass = payload * (mass_ratio - 1)
 print(f"\\nPeak altitude: {peak_alt:.0f} km")
 print(f"Flight time: {flight_time/60:.1f} minutes")
 print(f"\\n=== Fuel Budget ===")
-print(f"\u0394v (launch + landing + losses): {dv_total:.0f} m/s")
+print(f"Δv (launch + landing + losses): {dv_total:.0f} m/s")
 print(f"Mass ratio needed: {mass_ratio:.1f}")
 print(f"For {payload/1000:.0f}t payload: {fuel_mass/1000:.0f}t fuel needed")
 print(f"Total vehicle mass: {(payload+fuel_mass)/1000:.0f}t")`,
-      challenge: 'Redesign the mission as an orbital flight instead (go to orbit, fly half an orbit, de-orbit). Compare the \u0394v budget. Which is more fuel-efficient for a 2,200 km hop?',
-      successHint: 'You have designed a space mission from myth to physics. The Pushpaka Vimana\u2019s journey from Lanka to Ayodhya, reimagined with real engineering, requires about 3.3 km/s of \u0394v and would take 30 minutes at an altitude offering the same panoramic view the Ramayana describes. The dream is the same; only the method has changed.',
+      challenge: 'Redesign the mission as an orbital flight instead (go to orbit, fly half an orbit, de-orbit). Compare the Δv budget. Which is more fuel-efficient for a 2,200 km hop?',
+      successHint: 'You have designed a space mission from myth to physics. The Pushpaka Vimana’s journey from Lanka to Ayodhya, reimagined with real engineering, requires about 3.3 km/s of Δv and would take 30 minutes at an altitude offering the same panoramic view the Ramayana describes. The dream is the same; only the method has changed.',
     },
   ];
 

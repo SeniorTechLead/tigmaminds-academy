@@ -26,28 +26,28 @@ export default function ElephantMudLevel2() {
       title: 'Stefan-Boltzmann law — the physics of radiative cooling',
       concept: `Every object above absolute zero radiates electromagnetic energy. The **Stefan-Boltzmann law** quantifies this:
 
-**P = epsilon * sigma * A * T\u2074**
+**P = epsilon * sigma * A * T⁴**
 
 Where:
 - P = radiated power (Watts)
-- epsilon = emissivity (0-1; skin \u2248 0.95, polished metal \u2248 0.05)
-- sigma = 5.67 \u00d7 10\u207b\u2078 W/m\u00b2/K\u2074 (Stefan-Boltzmann constant)
-- A = surface area (m\u00b2)
+- epsilon = emissivity (0-1; skin ≈ 0.95, polished metal ≈ 0.05)
+- sigma = 5.67 × 10⁻⁸ W/m²/K⁴ (Stefan-Boltzmann constant)
+- A = surface area (m²)
 - T = surface temperature (Kelvin!)
 
-**Key insight: T\u2074 dependence**
-A small temperature increase causes a LARGE increase in radiation. Going from 35\u00b0C to 37\u00b0C (308K to 310K) increases radiation by 2.6% \u2014 that is a significant jump for a 20 m\u00b2 elephant.
+**Key insight: T⁴ dependence**
+A small temperature increase causes a LARGE increase in radiation. Going from 35°C to 37°C (308K to 310K) increases radiation by 2.6% — that is a significant jump for a 20 m² elephant.
 
 **For elephants:**
-- Skin temperature: ~35\u00b0C (308 K)
-- Surface area: ~20 m\u00b2
-- Radiated power: 0.95 \u00d7 5.67e-8 \u00d7 20 \u00d7 308\u2074 = ~9,700 W
+- Skin temperature: ~35°C (308 K)
+- Surface area: ~20 m²
+- Radiated power: 0.95 × 5.67e-8 × 20 × 308⁴ = ~9,700 W
 
-But the elephant also ABSORBS radiation from the environment (ground, sky, other objects). **Net radiation** = emitted - absorbed. At night, the sky is cold (~-20\u00b0C effective temperature), so net radiation is large. During the day, the ground is hot, so net radiation can be negative (elephant absorbs more than it emits).`,
-      analogy: 'The Stefan-Boltzmann law is like the brightness knob on a light. Turn it slightly (small temperature increase) and the brightness (radiated power) changes a LOT \u2014 because brightness scales with the FOURTH power of the knob position. This is why a warm elephant ear is such an effective radiator: a few degrees of warming dramatically increases heat emission.',
-      storyConnection: 'At night in Kaziranga, the baby elephant\'s skin radiates infrared into the cold sky. This is when elephants lose the heat stored during the day. The clear monsoon nights (when clouds break) are the most effective for radiative cooling \u2014 the elephant literally glows in the infrared, invisible to our eyes but powerful enough to dump thousands of watts into space.',
-      checkQuestion: 'An elephant\'s ear at 38\u00b0C radiates to a night sky at an effective temperature of -20\u00b0C (253K). Calculate the net radiative power from one ear (1.5 m\u00b2, emissivity 0.95).',
-      checkAnswer: 'Emitted: 0.95 \u00d7 5.67e-8 \u00d7 1.5 \u00d7 (311)\u2074 = 752 W. Absorbed from sky: 0.95 \u00d7 5.67e-8 \u00d7 1.5 \u00d7 (253)\u2074 = 331 W. Net from one ear: 752 - 331 = 421 W. Two ears: ~842 W. That is like having two 400W heaters running \u2014 except they are cooling the elephant. The ears are remarkably effective nighttime radiators.',
+But the elephant also ABSORBS radiation from the environment (ground, sky, other objects). **Net radiation** = emitted - absorbed. At night, the sky is cold (~-20°C effective temperature), so net radiation is large. During the day, the ground is hot, so net radiation can be negative (elephant absorbs more than it emits).`,
+      analogy: 'The Stefan-Boltzmann law is like the brightness knob on a light. Turn it slightly (small temperature increase) and the brightness (radiated power) changes a LOT — because brightness scales with the FOURTH power of the knob position. This is why a warm elephant ear is such an effective radiator: a few degrees of warming dramatically increases heat emission.',
+      storyConnection: 'At night in Kaziranga, the baby elephant\'s skin radiates infrared into the cold sky. This is when elephants lose the heat stored during the day. The clear monsoon nights (when clouds break) are the most effective for radiative cooling — the elephant literally glows in the infrared, invisible to our eyes but powerful enough to dump thousands of watts into space.',
+      checkQuestion: 'An elephant\'s ear at 38°C radiates to a night sky at an effective temperature of -20°C (253K). Calculate the net radiative power from one ear (1.5 m², emissivity 0.95).',
+      checkAnswer: 'Emitted: 0.95 × 5.67e-8 × 1.5 × (311)⁴ = 752 W. Absorbed from sky: 0.95 × 5.67e-8 × 1.5 × (253)⁴ = 331 W. Net from one ear: 752 - 331 = 421 W. Two ears: ~842 W. That is like having two 400W heaters running — except they are cooling the elephant. The ears are remarkably effective nighttime radiators.',
       codeIntro: 'Implement the Stefan-Boltzmann law for elephant thermal radiation.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -66,15 +66,15 @@ power_per_m2 = epsilon * sigma * temps_K**4
 
 ax1.plot(temps_C, power_per_m2, color='#ef4444', linewidth=2)
 ax1.fill_between(temps_C, power_per_m2, alpha=0.1, color='#ef4444')
-ax1.set_xlabel('Surface temperature (\u00b0C)', color='white')
-ax1.set_ylabel('Radiated power (W/m\u00b2)', color='white')
-ax1.set_title('Stefan-Boltzmann: P \u221d T\u2074', color='white', fontsize=12)
+ax1.set_xlabel('Surface temperature (°C)', color='white')
+ax1.set_ylabel('Radiated power (W/m²)', color='white')
+ax1.set_title('Stefan-Boltzmann: P ∝ T⁴', color='white', fontsize=12)
 ax1.tick_params(colors='gray')
 
 for T, label in [(35, 'Cool skin'), (37, 'Normal'), (40, 'Hot ears')]:
     P = epsilon * sigma * (T + 273.15)**4
     ax1.scatter(T, P, s=80, color='#f59e0b', zorder=5, edgecolors='white')
-    ax1.annotate(f'{label}\\n{P:.0f} W/m\u00b2', xy=(T, P), xytext=(T+1, P+10),
+    ax1.annotate(f'{label}\\n{P:.0f} W/m²', xy=(T, P), xytext=(T+1, P+10),
                 color='#f59e0b', fontsize=9)
 
 # 2. Net radiation: day vs night
@@ -111,22 +111,22 @@ total_day_heating = np.abs(np.sum(net[net < 0])) * dt / 3600
 net_daily = (total_night_cooling - total_day_heating) / 1000
 
 print("Stefan-Boltzmann analysis for a 4000 kg elephant:")
-print(f"  Skin area: 20 m\u00b2, emissivity: {epsilon}")
-print(f"  At 36\u00b0C (309K): emits {epsilon*sigma*20*309**4:.0f} W total")
+print(f"  Skin area: 20 m², emissivity: {epsilon}")
+print(f"  At 36°C (309K): emits {epsilon*sigma*20*309**4:.0f} W total")
 print(f"  Net nighttime cooling: {total_night_cooling/1000:.1f} kWh")
 print(f"  Net daytime heating: {total_day_heating/1000:.1f} kWh")
 print(f"  24-hour net: {net_daily:.1f} kWh")`,
-      challenge: 'Calculate how much the net radiation budget changes on a cloudy night (sky effective temperature rises from -20\u00b0C to 0\u00b0C). Clouds act as a thermal blanket \u2014 trapping the elephant\'s radiated heat.',
-      successHint: 'The Stefan-Boltzmann law governs all thermal radiation \u2014 from elephant ears to stars to industrial furnaces. The T^4 scaling makes it one of the most powerful equations in physics.',
+      challenge: 'Calculate how much the net radiation budget changes on a cloudy night (sky effective temperature rises from -20°C to 0°C). Clouds act as a thermal blanket — trapping the elephant\'s radiated heat.',
+      successHint: 'The Stefan-Boltzmann law governs all thermal radiation — from elephant ears to stars to industrial furnaces. The T^4 scaling makes it one of the most powerful equations in physics.',
     },
     {
-      title: 'Thermal imaging \u2014 seeing heat with technology',
+      title: 'Thermal imaging — seeing heat with technology',
       concept: `**Thermal cameras** detect infrared radiation and convert it into visible images. They literally make the invisible visible.
 
 **How thermal cameras work:**
 1. Infrared radiation from objects hits a microbolometer array (detector)
 2. Each pixel heats slightly proportional to incident radiation
-3. Temperature change \u2192 resistance change \u2192 electrical signal
+3. Temperature change → resistance change → electrical signal
 4. Signal is mapped to a color scale (hot = white/red, cold = blue/black)
 
 **Thermal imaging in elephant research:**
@@ -135,7 +135,7 @@ print(f"  24-hour net: {net_daily:.1f} kWh")`,
 - **Nighttime observation**: elephants visible in complete darkness
 - **Population surveys**: count animals in tall grass from aircraft
 
-**Key insight:** Thermal images show SURFACE temperature, not core temperature. An elephant's skin at 35\u00b0C may have a core of 36.5\u00b0C. The difference reveals blood flow and insulation patterns.`,
+**Key insight:** Thermal images show SURFACE temperature, not core temperature. An elephant's skin at 35°C may have a core of 36.5°C. The difference reveals blood flow and insulation patterns.`,
       analogy: 'A thermal camera is like X-ray vision for heat. Where your eyes see a gray elephant against a green forest, the thermal camera sees a bright-white warm body against a cool-blue background. The elephant\'s ears glow hot (blood-filled radiators), the trunk tip is cool (exposed to air), and the mud on its back is colder than the skin beneath.',
       storyConnection: 'If you pointed a thermal camera at the baby elephant during its first mud bath, you would see the elephant glowing bright white (hot) before the bath, then gradually dimming as the cool mud covers its body. The ears would remain hot (blood still flowing to dump heat). The whole thermoregulation drama, visible in infrared.',
       checkQuestion: 'A thermal image shows one elephant with bright hot ears and another with cool ears. What might this indicate?',
@@ -186,39 +186,39 @@ for idx, (ax, title, (bt, et, mc)) in enumerate(zip(axes, titles, params)):
     im = ax.imshow(thermal, cmap='inferno', vmin=22, vmax=40, origin='lower')
     ax.set_title(title, color='white', fontsize=11)
     ax.axis('off')
-    plt.colorbar(im, ax=ax, label='\u00b0C', shrink=0.7)
+    plt.colorbar(im, ax=ax, label='°C', shrink=0.7)
 
 plt.tight_layout()
 plt.show()
 
 print("Thermal imaging reveals what eyes cannot:")
-print("  Normal elephant: ears 38\u00b0C, body 35.5\u00b0C, trunk tip 32\u00b0C")
-print("  Post mud bath: body drops 2-5\u00b0C, ears remain hot")
+print("  Normal elephant: ears 38°C, body 35.5°C, trunk tip 32°C")
+print("  Post mud bath: body drops 2-5°C, ears remain hot")
 print("  Heat stressed: uniformly hot, no cool zones")
 print()
 print("  Mud bathing literally makes elephants harder to detect in infrared!")`,
-      challenge: 'Design a thermal monitoring system for Kaziranga: how many thermal cameras, at what spacing, to detect every elephant in a 500 km\u00b2 area? Account for detection range and canopy obstruction.',
-      successHint: 'Thermal imaging connects the Stefan-Boltzmann law to real-world conservation technology. Every pixel in a thermal image is a measurement of T\u2074 \u2014 the physics you just learned, turned into a practical tool.',
+      challenge: 'Design a thermal monitoring system for Kaziranga: how many thermal cameras, at what spacing, to detect every elephant in a 500 km² area? Account for detection range and canopy obstruction.',
+      successHint: 'Thermal imaging connects the Stefan-Boltzmann law to real-world conservation technology. Every pixel in a thermal image is a measurement of T⁴ — the physics you just learned, turned into a practical tool.',
     },
     {
-      title: 'Metabolic rate scaling \u2014 Kleiber\'s law',
+      title: 'Metabolic rate scaling — Kleiber\'s law',
       concept: `**Kleiber's law** (1932) is one of biology's most remarkable patterns: metabolic rate scales with body mass to the 3/4 power.
 
-**B = B\u2080 \u00d7 M^0.75**
+**B = B₀ × M^0.75**
 
-Where B = metabolic rate (W), B\u2080 \u2248 3.5 W/kg^0.75, M = body mass (kg).
+Where B = metabolic rate (W), B₀ ≈ 3.5 W/kg^0.75, M = body mass (kg).
 
 **What this means:**
-- A 4000 kg elephant produces: 3.5 \u00d7 4000^0.75 \u2248 3100 W of metabolic heat
-- A 0.02 kg mouse produces: 3.5 \u00d7 0.02^0.75 \u2248 0.12 W
+- A 4000 kg elephant produces: 3.5 × 4000^0.75 ≈ 3100 W of metabolic heat
+- A 0.02 kg mouse produces: 3.5 × 0.02^0.75 ≈ 0.12 W
 - Per kg: elephant = 0.78 W/kg, mouse = 6.0 W/kg
 
 **The elephant generates 8x LESS heat per kg than a mouse.** If the elephant had the mouse's per-kg rate, it would produce 24,000 W and cook itself.
 
 **Why 3/4 and not 2/3?**
-The naive prediction (based on SA/V) is 2/3. The actual exponent is 3/4 \u2014 slightly higher. This relates to fractal-like branching of blood vessels (West-Brown-Enquist theory, 1997). The circulatory system's fractal geometry sets the 3/4 scaling.`,
+The naive prediction (based on SA/V) is 2/3. The actual exponent is 3/4 — slightly higher. This relates to fractal-like branching of blood vessels (West-Brown-Enquist theory, 1997). The circulatory system's fractal geometry sets the 3/4 scaling.`,
       analogy: 'Kleiber\'s law is like fuel efficiency in vehicles. A motorcycle (small) burns more fuel per kg than a freight train (huge), but the train burns more TOTAL fuel. Nature\'s "engines" (metabolisms) follow the same law: bigger animals are more fuel-efficient per unit mass.',
-      storyConnection: 'The baby elephant eats constantly \u2014 calves nurse up to 12 hours a day. But as it grows, its metabolic rate per kg drops. An adult in Kaziranga eats ~150 kg daily \u2014 only 3-4% of body weight. A mouse-sized elephant would need 1000 kg per day! Kleiber\'s law makes being an elephant metabolically feasible.',
+      storyConnection: 'The baby elephant eats constantly — calves nurse up to 12 hours a day. But as it grows, its metabolic rate per kg drops. An adult in Kaziranga eats ~150 kg daily — only 3-4% of body weight. A mouse-sized elephant would need 1000 kg per day! Kleiber\'s law makes being an elephant metabolically feasible.',
       checkQuestion: 'If metabolic rate scales as M^0.75 and surface area scales as M^0.67, which grows faster with body size?',
       checkAnswer: 'Heat production (M^0.75) grows faster than heat loss capacity (M^0.67). This gap represents the "thermal debt" large animals must manage with special adaptations. This is the quantitative basis of the elephant thermoregulation challenge.',
       codeIntro: 'Explore Kleiber\'s law across the animal kingdom.',
@@ -242,7 +242,7 @@ m_range = np.logspace(-2, 5, 200)
 
 # 1. Kleiber's law
 ax1.set_facecolor('#111827')
-ax1.plot(m_range, 3.5 * m_range**0.75, '--', color='gray', linewidth=1, label='B = 3.5 \u00d7 M\u2070\u00b7\u2077\u2075')
+ax1.plot(m_range, 3.5 * m_range**0.75, '--', color='gray', linewidth=1, label='B = 3.5 × M⁰·⁷⁵')
 for name, props in animals.items():
     ax1.scatter(props['mass'], props['bmr'], s=80, color=props['color'], edgecolors='white', zorder=5)
     ax1.annotate(name, xy=(props['mass'], props['bmr']), xytext=(5, 5),
@@ -250,7 +250,7 @@ for name, props in animals.items():
 ax1.set_xscale('log'); ax1.set_yscale('log')
 ax1.set_xlabel('Body mass (kg)', color='white')
 ax1.set_ylabel('Basal metabolic rate (W)', color='white')
-ax1.set_title("Kleiber's Law: B \u221d M\u2070\u00b7\u2077\u2075", color='white', fontsize=12)
+ax1.set_title("Kleiber's Law: B ∝ M⁰·⁷⁵", color='white', fontsize=12)
 ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax1.tick_params(colors='gray')
 
@@ -259,8 +259,8 @@ ax2.set_facecolor('#111827')
 heat_prod = 3.5 * m_range**0.75
 heat_loss = 10 * m_range**0.67
 
-ax2.plot(m_range, heat_prod, color='#ef4444', linewidth=2, label='Heat production (M\u2070\u00b7\u2077\u2075)')
-ax2.plot(m_range, heat_loss, color='#3b82f6', linewidth=2, label='Heat loss capacity (M\u2070\u00b7\u2076\u2077)')
+ax2.plot(m_range, heat_prod, color='#ef4444', linewidth=2, label='Heat production (M⁰·⁷⁵)')
+ax2.plot(m_range, heat_loss, color='#3b82f6', linewidth=2, label='Heat loss capacity (M⁰·⁶⁷)')
 ax2.fill_between(m_range, heat_loss, heat_prod, where=heat_prod > heat_loss,
                 alpha=0.2, color='#ef4444', label='Thermal gap')
 ax2.set_xscale('log'); ax2.set_yscale('log')
@@ -278,26 +278,26 @@ for name, props in animals.items():
     per_kg = props['bmr'] / props['mass']
     print(f"  {name:12s}: {props['mass']:>8.1f}kg, BMR={props['bmr']:>6.0f}W, per kg={per_kg:.2f}W/kg")`,
       challenge: 'Calculate the metabolic rate of a 70-ton Argentinosaurus using Kleiber\'s law. How much food would it need daily? Is this feasible?',
-      successHint: 'Kleiber\'s law connects a mouse\'s heartbeat to a whale\'s migration to an elephant\'s mud bath \u2014 all through the elegance of M^0.75. Understanding metabolic scaling is understanding the fundamental constraints of life.',
+      successHint: 'Kleiber\'s law connects a mouse\'s heartbeat to a whale\'s migration to an elephant\'s mud bath — all through the elegance of M^0.75. Understanding metabolic scaling is understanding the fundamental constraints of life.',
     },
     {
-      title: 'Allometry \u2014 how body proportions scale with size',
+      title: 'Allometry — how body proportions scale with size',
       concept: `**Allometry** studies how body proportions change with overall body size. It explains why elephants don't look like scaled-up mice.
 
-**Isometric scaling** (maintaining proportions): doubling a mouse's linear dimensions increases mass 8x (2\u00b3), but leg cross-section only 4x (2\u00b2). The legs would break.
+**Isometric scaling** (maintaining proportions): doubling a mouse's linear dimensions increases mass 8x (2³), but leg cross-section only 4x (2²). The legs would break.
 
 **Allometric solution:** large animals have proportionally THICKER legs. Leg diameter scales as M^0.375 (not M^0.33 for isometric).
 
 **Key allometric relationships:**
-- Heart rate \u221d M^(-0.25) \u2014 elephant: 25 bpm, mouse: 600 bpm
-- Lifespan \u221d M^(0.25) \u2014 elephant: 60-70 years, mouse: 2 years
-- Brain size \u221d M^(0.75) \u2014 elephants have larger brains than predicted
+- Heart rate ∝ M^(-0.25) — elephant: 25 bpm, mouse: 600 bpm
+- Lifespan ∝ M^(0.25) — elephant: 60-70 years, mouse: 2 years
+- Brain size ∝ M^(0.75) — elephants have larger brains than predicted
 
-**Amazing consequence:** total heartbeats in a lifetime is roughly CONSTANT across mammals \u2014 about 1 billion. Mice use theirs fast (600/min \u00d7 2 years). Elephants use theirs slowly (25/min \u00d7 70 years).`,
+**Amazing consequence:** total heartbeats in a lifetime is roughly CONSTANT across mammals — about 1 billion. Mice use theirs fast (600/min × 2 years). Elephants use theirs slowly (25/min × 70 years).`,
       analogy: 'Allometry is like why skyscrapers don\'t look like scaled-up houses. A house has thin walls because the weight is small. Double the height and you need 8x the weight on 4x the foundation. So skyscrapers have proportionally thicker columns. Nature faces the same engineering challenge.',
       storyConnection: 'The baby elephant has big ears relative to its body, stubby thick legs, and a round belly. As it grows, its proportions will shift allometrically. Its ears will grow faster than its body (for thermoregulation), its legs will thicken disproportionately (to support weight). Growing up is a journey through allometric space.',
       checkQuestion: 'An elephant\'s femur is 10 cm in diameter. If you scaled a mouse\'s femur isometrically to elephant mass, what diameter would it be?',
-      checkAnswer: 'A mouse femur is ~1mm at ~20g. Isometrically to 4000 kg (200,000x heavier): linear scale = 200000^(1/3) \u2248 58.5x, diameter = 5.9 cm. Actual elephant femur: 10 cm \u2014 70% thicker. The extra thickness compensates for stress scaling: weight grows as M but bone cross-section only as M^(2/3).',
+      checkAnswer: 'A mouse femur is ~1mm at ~20g. Isometrically to 4000 kg (200,000x heavier): linear scale = 200000^(1/3) ≈ 58.5x, diameter = 5.9 cm. Actual elephant femur: 10 cm — 70% thicker. The extra thickness compensates for stress scaling: weight grows as M but bone cross-section only as M^(2/3).',
       codeIntro: 'Explore allometric scaling relationships across mammals.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -321,7 +321,7 @@ for name, m, hr in zip(names, masses, heart_rates):
 ax1.set_xscale('log'); ax1.set_yscale('log')
 ax1.set_xlabel('Body mass (kg)', color='white')
 ax1.set_ylabel('Heart rate (bpm)', color='white')
-ax1.set_title('Heart Rate \u221d M\u207b\u00b0\u00b7\u00b2\u2075', color='white', fontsize=11)
+ax1.set_title('Heart Rate ∝ M⁻°·²⁵', color='white', fontsize=11)
 ax1.tick_params(colors='gray')
 
 # 2. Total heartbeats in lifetime (approximately constant!)
@@ -350,32 +350,32 @@ print(f"  Total heartbeats: roughly 1 billion for ALL mammals")
 print()
 print("The 3/4 power law connects metabolism, heart rate, lifespan,")
 print("and bone structure into a unified theory of body size in biology.")`,
-      challenge: 'Plot the relationship between brain mass and body mass (brain \u221d M^0.75). Calculate the encephalization quotient (EQ = actual brain / predicted) for each animal. Which have the highest EQ?',
+      challenge: 'Plot the relationship between brain mass and body mass (brain ∝ M^0.75). Calculate the encephalization quotient (EQ = actual brain / predicted) for each animal. Which have the highest EQ?',
       successHint: 'Allometry reveals that biology is constrained by physics and geometry into predictable patterns. These scaling laws are among the most robust in all of biology.',
     },
     {
-      title: 'Heat stress modeling \u2014 predicting when elephants are in danger',
+      title: 'Heat stress modeling — predicting when elephants are in danger',
       concept: `**Heat stress** occurs when cooling mechanisms can't keep up with heat gain. For elephants, this is an urgent conservation concern.
 
 **Heat stress indices:**
 - **Heat Index (HI)**: combines temperature and humidity
 - **Wet Bulb Globe Temperature (WBGT)**: the gold standard, includes radiation
-- At high humidity, evaporative cooling fails \u2014 the most dangerous condition
+- At high humidity, evaporative cooling fails — the most dangerous condition
 
 **For elephants, critical thresholds:**
-- Temperature > 35\u00b0C + humidity > 60% \u2192 mild stress
-- Temperature > 38\u00b0C + humidity > 70% \u2192 moderate stress
-- Temperature > 40\u00b0C + humidity > 80% \u2192 severe stress
-- Wet bulb temperature > 35\u00b0C \u2192 potentially lethal
+- Temperature > 35°C + humidity > 60% → mild stress
+- Temperature > 38°C + humidity > 70% → moderate stress
+- Temperature > 40°C + humidity > 80% → severe stress
+- Wet bulb temperature > 35°C → potentially lethal
 
 **Heat balance equation:**
-dT/dt = (Q_metabolism + Q_solar + Q_environment - Q_radiation - Q_convection - Q_evaporation) / (m \u00d7 c)
+dT/dt = (Q_metabolism + Q_solar + Q_environment - Q_radiation - Q_convection - Q_evaporation) / (m × c)
 
-When the right side stays positive too long \u2192 body temperature rises \u2192 heat stroke \u2192 organ failure.`,
+When the right side stays positive too long → body temperature rises → heat stroke → organ failure.`,
       analogy: 'Heat stress is like a bank account running a deficit. Income (cooling) must match expenses (heat gain). When expenses consistently exceed income, the balance (thermal margin) drops. Once it hits zero (lethal temperature), the account closes. Heat stress modeling is financial forecasting for thermal budgets.',
-      storyConnection: 'In the Brahmaputra valley, Assam\'s high humidity and rising temperatures create perfect conditions for elephant heat stress. The baby elephant\'s first mud bath is not just a childhood memory \u2014 it is the first lesson in a lifelong practice that determines whether Kaziranga\'s elephants can survive summers that are getting hotter year by year.',
-      checkQuestion: 'A wet bulb temperature of 35\u00b0C is lethal for humans. What is the elephant\'s threshold, and why?',
-      checkAnswer: 'Elephants\' threshold is lower \u2014 probably around 33-34\u00b0C \u2014 because they can\'t sweat efficiently and rely on convective/radiative cooling, which also fails at high humidity. But their large thermal mass gives them a buffer: a 4000 kg elephant takes longer to heat up than a 70 kg human. This buys time but doesn\'t change the outcome if exposure is prolonged.',
+      storyConnection: 'In the Brahmaputra valley, Assam\'s high humidity and rising temperatures create perfect conditions for elephant heat stress. The baby elephant\'s first mud bath is not just a childhood memory — it is the first lesson in a lifelong practice that determines whether Kaziranga\'s elephants can survive summers that are getting hotter year by year.',
+      checkQuestion: 'A wet bulb temperature of 35°C is lethal for humans. What is the elephant\'s threshold, and why?',
+      checkAnswer: 'Elephants\' threshold is lower — probably around 33-34°C — because they can\'t sweat efficiently and rely on convective/radiative cooling, which also fails at high humidity. But their large thermal mass gives them a buffer: a 4000 kg elephant takes longer to heat up than a 70 kg human. This buys time but doesn\'t change the outcome if exposure is prolonged.',
       codeIntro: 'Build a heat stress model for elephants.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -395,7 +395,7 @@ stress = np.clip(stress, 0, 30)
 
 im = ax1.contourf(T, H, stress, levels=20, cmap='RdYlGn_r')
 ax1.contour(T, H, stress, levels=[5, 10, 15, 20], colors='white', linewidths=[1, 1, 2, 2])
-ax1.set_xlabel('Temperature (\u00b0C)', color='white')
+ax1.set_xlabel('Temperature (°C)', color='white')
 ax1.set_ylabel('Humidity (%)', color='white')
 ax1.set_title('Elephant Heat Stress Index', color='white', fontsize=11)
 ax1.tick_params(colors='gray')
@@ -409,10 +409,10 @@ ax2.set_facecolor('#111827')
 hours = np.linspace(0, 12, 720)
 
 scenarios = {
-    '35\u00b0C, low humidity': {'T_env': 35, 'RH': 40, 'color': '#22c55e'},
-    '38\u00b0C, moderate': {'T_env': 38, 'RH': 60, 'color': '#f59e0b'},
-    '40\u00b0C, high humidity': {'T_env': 40, 'RH': 80, 'color': '#ef4444'},
-    '42\u00b0C, extreme': {'T_env': 42, 'RH': 85, 'color': '#dc2626'},
+    '35°C, low humidity': {'T_env': 35, 'RH': 40, 'color': '#22c55e'},
+    '38°C, moderate': {'T_env': 38, 'RH': 60, 'color': '#f59e0b'},
+    '40°C, high humidity': {'T_env': 40, 'RH': 80, 'color': '#ef4444'},
+    '42°C, extreme': {'T_env': 42, 'RH': 85, 'color': '#dc2626'},
 }
 
 for name, params in scenarios.items():
@@ -430,7 +430,7 @@ for name, params in scenarios.items():
 ax2.axhline(37.5, color='#f59e0b', linestyle=':', alpha=0.5, label='Stress onset')
 ax2.axhline(42, color='#ef4444', linestyle='--', linewidth=2, label='LETHAL')
 ax2.set_xlabel('Hours of exposure', color='white')
-ax2.set_ylabel('Body temperature (\u00b0C)', color='white')
+ax2.set_ylabel('Body temperature (°C)', color='white')
 ax2.set_title('Body Temperature Under Heat Stress', color='white', fontsize=11)
 ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=7)
 ax2.tick_params(colors='gray')
@@ -439,14 +439,14 @@ plt.tight_layout()
 plt.show()
 
 print("Heat stress zones:")
-print("  Comfortable: T < 33\u00b0C or low humidity")
-print("  Mild stress: T > 35\u00b0C + RH > 60%")
-print("  Severe: T > 40\u00b0C + RH > 80% (lethal risk)")`,
-      challenge: 'Add a "wet bulb temperature" calculation and map the lethal zone onto the heat stress chart. At what T and RH combinations does wet bulb exceed 35\u00b0C?',
+print("  Comfortable: T < 33°C or low humidity")
+print("  Mild stress: T > 35°C + RH > 60%")
+print("  Severe: T > 40°C + RH > 80% (lethal risk)")`,
+      challenge: 'Add a "wet bulb temperature" calculation and map the lethal zone onto the heat stress chart. At what T and RH combinations does wet bulb exceed 35°C?',
       successHint: 'Heat stress modeling is where biophysics meets conservation planning. The models combine Stefan-Boltzmann radiation, metabolic scaling, evaporative cooling, and climate projections into a single predictive framework.',
     },
     {
-      title: 'Climate change and large mammals \u2014 the future of giants',
+      title: 'Climate change and large mammals — the future of giants',
       concept: `Large mammals face a perfect storm of climate threats. Everything we have learned converges on one question: can the giants survive a warming world?
 
 **Why large mammals are most vulnerable:**
@@ -457,7 +457,7 @@ print("  Severe: T > 40\u00b0C + RH > 80% (lethal risk)")`,
 5. **Slow adaptation**: long generation time = slow evolutionary response
 
 **The extinction risk cascade:**
-Higher temperatures \u2192 more heat stress \u2192 less feeding time \u2192 reduced reproduction \u2192 smaller populations \u2192 inbreeding \u2192 disease vulnerability \u2192 local extinction
+Higher temperatures → more heat stress → less feeding time → reduced reproduction → smaller populations → inbreeding → disease vulnerability → local extinction
 
 **What science says we need:**
 - Maintain connected habitat (corridors between parks)
@@ -465,11 +465,11 @@ Higher temperatures \u2192 more heat stress \u2192 less feeding time \u2192 redu
 - Reduce emissions (the only permanent solution)
 - Monitor heat stress in real time
 
-**Hope:** Elephants survived previous warm periods (Eocene was 8\u00b0C warmer). But current warming is 10-100x faster than any previous natural event. Conservation action now can buy time for adaptation.`,
-      analogy: 'Climate change for large mammals is like slowly draining water from a fish tank. The fish can survive at lower levels for a while \u2014 they adapt, find the deepest spots. But if the water keeps draining and no one refills it, eventually there isn\'t enough. The tank doesn\'t have to go dry for the fish to die \u2014 just below the minimum viable level.',
-      storyConnection: 'The baby elephant\'s story ends with a return to the mud wallow \u2014 a daily ritual that has sustained herds in Kaziranga for millennia. Whether that wallow still holds water fifty years from now depends on the choices we make today. The biophysics is clear: without intervention, the mud will dry. With intervention, the baby elephant\'s grandchildren will take their own first mud baths.',
-      checkQuestion: 'If warming is limited to 1.5\u00b0C instead of 3\u00b0C, what is the difference for Assam\'s elephants?',
-      checkAnswer: 'At 1.5\u00b0C: ~25 heat stress days/year, manageable with habitat protection. Population stable. At 3\u00b0C: ~60+ heat stress days, calf survival drops significantly, water sources dry up seasonally. Population declines 30-50% by 2100. The 1.5\u00b0C difference is the difference between a manageable conservation challenge and potential regional extinction.',
+**Hope:** Elephants survived previous warm periods (Eocene was 8°C warmer). But current warming is 10-100x faster than any previous natural event. Conservation action now can buy time for adaptation.`,
+      analogy: 'Climate change for large mammals is like slowly draining water from a fish tank. The fish can survive at lower levels for a while — they adapt, find the deepest spots. But if the water keeps draining and no one refills it, eventually there isn\'t enough. The tank doesn\'t have to go dry for the fish to die — just below the minimum viable level.',
+      storyConnection: 'The baby elephant\'s story ends with a return to the mud wallow — a daily ritual that has sustained herds in Kaziranga for millennia. Whether that wallow still holds water fifty years from now depends on the choices we make today. The biophysics is clear: without intervention, the mud will dry. With intervention, the baby elephant\'s grandchildren will take their own first mud baths.',
+      checkQuestion: 'If warming is limited to 1.5°C instead of 3°C, what is the difference for Assam\'s elephants?',
+      checkAnswer: 'At 1.5°C: ~25 heat stress days/year, manageable with habitat protection. Population stable. At 3°C: ~60+ heat stress days, calf survival drops significantly, water sources dry up seasonally. Population declines 30-50% by 2100. The 1.5°C difference is the difference between a manageable conservation challenge and potential regional extinction.',
       codeIntro: 'Synthesize everything into a comprehensive climate impact model.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -483,10 +483,10 @@ years = np.arange(2025, 2101)
 n_years = len(years)
 
 scenarios = {
-    'Paris 1.5\u00b0C': {'rate': 0.01, 'conserv': True, 'color': '#22c55e'},
-    '2\u00b0C pathway': {'rate': 0.02, 'conserv': True, 'color': '#3b82f6'},
-    '3\u00b0C (current)': {'rate': 0.035, 'conserv': False, 'color': '#f59e0b'},
-    '4\u00b0C+ (worst)': {'rate': 0.05, 'conserv': False, 'color': '#ef4444'},
+    'Paris 1.5°C': {'rate': 0.01, 'conserv': True, 'color': '#22c55e'},
+    '2°C pathway': {'rate': 0.02, 'conserv': True, 'color': '#3b82f6'},
+    '3°C (current)': {'rate': 0.035, 'conserv': False, 'color': '#f59e0b'},
+    '4°C+ (worst)': {'rate': 0.05, 'conserv': False, 'color': '#ef4444'},
 }
 
 # 1. Temperature
@@ -494,7 +494,7 @@ ax = axes[0, 0]; ax.set_facecolor('#111827')
 for name, p in scenarios.items():
     temp = 27 + p['rate'] * (years - 2025) + np.random.normal(0, 0.3, n_years)
     ax.plot(years, temp, color=p['color'], linewidth=2, label=name)
-ax.set_xlabel('Year', color='white'); ax.set_ylabel('Mean temp (\u00b0C)', color='white')
+ax.set_xlabel('Year', color='white'); ax.set_ylabel('Mean temp (°C)', color='white')
 ax.set_title('Assam Temperature Projections', color='white', fontsize=11)
 ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
 ax.tick_params(colors='gray')
@@ -543,7 +543,7 @@ ax.plot(years, eco_value, color='#22c55e', linewidth=2, label='Ecosystem value')
 ax.plot(years, loss_no_act, color='#f59e0b', linewidth=2, label='Cost of inaction')
 ax.fill_between(years, conserv_cost, eco_value, alpha=0.1, color='#22c55e')
 ax.set_xlabel('Year', color='white')
-ax.set_ylabel('Cumulative (\u20b9 hundreds crore)', color='white')
+ax.set_ylabel('Cumulative (₹ hundreds crore)', color='white')
 ax.set_title('Economics: Conservation Pays for Itself', color='white', fontsize=11)
 ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
 ax.tick_params(colors='gray')
@@ -558,7 +558,7 @@ for name, p in scenarios.items():
     stress_2100 = 20 + 5 * (temp_2100 - 27)**1.5
     if p['conserv']: stress_2100 *= 0.6
     status = "Stable" if stress_2100 < 40 else "Declining" if stress_2100 < 80 else "Critical"
-    print(f"  {name}: {temp_2100:.1f}\u00b0C, {stress_2100:.0f} stress days, {status}")
+    print(f"  {name}: {temp_2100:.1f}°C, {stress_2100:.0f} stress days, {status}")
 print()
 print("Every fraction of a degree matters.")
 print("Conservation + emissions reduction = the only viable path.")`,

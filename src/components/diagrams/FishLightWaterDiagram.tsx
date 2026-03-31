@@ -53,13 +53,13 @@ export default function FishLightWaterDiagram() {
 
         {/* Angle labels */}
         <path d="M 155 118 A 12 12 0 0 0 143 130" fill="none" className="stroke-amber-500" strokeWidth="1" />
-        <text x="135" y="120" className="fill-amber-600 dark:fill-amber-400" fontSize="10">\u03B8\u2081</text>
+        <text x="135" y="120" className="fill-amber-600 dark:fill-amber-400" fontSize="10">θ₁</text>
         <path d="M 155 142 A 12 12 0 0 1 165 130" fill="none" className="stroke-amber-500" strokeWidth="1" />
-        <text x="167" y="145" className="fill-amber-600 dark:fill-amber-400" fontSize="10">\u03B8\u2082</text>
+        <text x="167" y="145" className="fill-amber-600 dark:fill-amber-400" fontSize="10">θ₂</text>
 
         {/* Snell's law */}
-        <text x="45" y="275" className="fill-gray-600 dark:fill-gray-300" fontSize="10" fontWeight="bold">Snell\u2019s Law:</text>
-        <text x="45" y="292" className="fill-gray-600 dark:fill-gray-300" fontSize="10">n\u2081 sin \u03B8\u2081 = n\u2082 sin \u03B8\u2082</text>
+        <text x="45" y="275" className="fill-gray-600 dark:fill-gray-300" fontSize="10" fontWeight="bold">Snell’s Law:</text>
+        <text x="45" y="292" className="fill-gray-600 dark:fill-gray-300" fontSize="10">n₁ sin θ₁ = n₂ sin θ₂</text>
         <text x="45" y="310" className="fill-gray-500 dark:fill-gray-400" fontSize="10">Light bends toward normal</text>
         <text x="45" y="324" className="fill-gray-500 dark:fill-gray-400" fontSize="10">entering denser medium.</text>
 
@@ -85,7 +85,7 @@ export default function FishLightWaterDiagram() {
         {/* Ray 2: at critical angle - skims */}
         <line x1="420" y1="180" x2="470" y2="100" className="stroke-amber-500 dark:stroke-amber-400" strokeWidth="1.5" />
         <line x1="470" y1="100" x2="530" y2="100" className="stroke-green-500 dark:stroke-green-400" strokeWidth="1.5" />
-        <text x="510" y="92" className="fill-green-600 dark:fill-green-400" fontSize="10">\u03B8c = 48.6\u00b0</text>
+        <text x="510" y="92" className="fill-green-600 dark:fill-green-400" fontSize="10">θc = 48.6°</text>
 
         {/* Ray 3: above critical angle - TIR */}
         <line x1="470" y1="180" x2="520" y2="100" className="stroke-amber-500 dark:stroke-amber-400" strokeWidth="1.5" />
@@ -100,11 +100,11 @@ export default function FishLightWaterDiagram() {
         <text x="450" y="235" textAnchor="middle" className="fill-indigo-700 dark:fill-indigo-300" fontSize="10" fontWeight="bold">Why this matters for fish:</text>
         <text x="450" y="252" textAnchor="middle" className="fill-gray-600 dark:fill-gray-300" fontSize="10">Light hitting the surface at a</text>
         <text x="450" y="266" textAnchor="middle" className="fill-gray-600 dark:fill-gray-300" fontSize="10">shallow angle bounces back down</text>
-        <text x="450" y="280" textAnchor="middle" className="fill-gray-600 dark:fill-gray-300" fontSize="10">into the water \u2014 trapping light.</text>
+        <text x="450" y="280" textAnchor="middle" className="fill-gray-600 dark:fill-gray-300" fontSize="10">into the water — trapping light.</text>
 
         {/* Bottom summary */}
-        <text x="300" y="350" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">In Umiam Lake\u2019s clear water, these effects create the shimmering play of light on fish scales.</text>
-        <text x="300" y="370" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">Water\u2019s refractive index (1.33) causes light to slow by 25% and bend at every surface it crosses.</text>
+        <text x="300" y="350" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">In Umiam Lake’s clear water, these effects create the shimmering play of light on fish scales.</text>
+        <text x="300" y="370" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">Water’s refractive index (1.33) causes light to slow by 25% and bend at every surface it crosses.</text>
       </svg>
     </div>
   );

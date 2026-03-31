@@ -4,7 +4,7 @@ export default function SeedGerminationDiagram() {
       <svg viewBox="0 0 520 440" className="w-full max-w-lg mx-auto" role="img" aria-label="Seed germination stages: from dormant seed to seedling, showing internal anatomy and requirements">
         <rect width="520" height="440" rx="12" className="fill-slate-900" />
 
-        <text x="260" y="28" textAnchor="middle" className="fill-lime-400" fontSize="14" fontWeight="bold">Germination \u2014 Waking Up a Seed</text>
+        <text x="260" y="28" textAnchor="middle" className="fill-lime-400" fontSize="14" fontWeight="bold">Germination — Waking Up a Seed</text>
 
         {/* SEED ANATOMY — top section */}
         <text x="100" y="55" textAnchor="middle" className="fill-amber-400" fontSize="12" fontWeight="bold">Inside a Seed</text>
@@ -46,12 +46,12 @@ export default function SeedGerminationDiagram() {
 
         {/* Warmth */}
         <rect x="350" y="68" width="60" height="45" rx="6" className="fill-orange-900/50 stroke-orange-500" strokeWidth="1" />
-        <text x="380" y="86" textAnchor="middle" className="fill-orange-400" fontSize="18">\u2600</text>
+        <text x="380" y="86" textAnchor="middle" className="fill-orange-400" fontSize="18">☀</text>
         <text x="380" y="105" textAnchor="middle" className="fill-orange-300" fontSize="10">Warmth</text>
 
         {/* Oxygen */}
         <rect x="420" y="68" width="60" height="45" rx="6" className="fill-teal-900/50 stroke-teal-500" strokeWidth="1" />
-        <text x="450" y="86" textAnchor="middle" className="fill-teal-400" fontSize="16">O\u2082</text>
+        <text x="450" y="86" textAnchor="middle" className="fill-teal-400" fontSize="16">O₂</text>
         <text x="450" y="105" textAnchor="middle" className="fill-teal-300" fontSize="10">Oxygen</text>
 
         {/* Descriptions */}
@@ -84,7 +84,7 @@ export default function SeedGerminationDiagram() {
           <circle cx="35" cy="32" r="2" className="fill-blue-400" opacity="0.6" />
           <circle cx="15" cy="20" r="1.5" className="fill-blue-400" opacity="0.6" />
           <text x="20" y="57" textAnchor="middle" className="fill-blue-300" fontSize="9">Imbibition</text>
-          <text x="20" y="68" textAnchor="middle" className="fill-slate-500" fontSize="8">Day 1\u20132</text>
+          <text x="20" y="68" textAnchor="middle" className="fill-slate-500" fontSize="8">Day 1–2</text>
         </g>
 
         {/* Stage 3: Radicle emerges */}
@@ -93,7 +93,7 @@ export default function SeedGerminationDiagram() {
           {/* Root going down */}
           <path d="M 20,46 Q 18,60 20,75 Q 22,85 18,95" className="stroke-amber-100" strokeWidth="2" fill="none" />
           <text x="20" y="45" textAnchor="middle" className="fill-slate-400" fontSize="9">Radicle</text>
-          <text x="20" y="77" textAnchor="middle" className="fill-slate-500" fontSize="8">Day 2\u20134</text>
+          <text x="20" y="77" textAnchor="middle" className="fill-slate-500" fontSize="8">Day 2–4</text>
         </g>
 
         {/* Stage 4: Shoot emerges */}
@@ -105,7 +105,7 @@ export default function SeedGerminationDiagram() {
           <path d="M 20,45 Q 20,30 22,18" className="stroke-green-500" strokeWidth="2.5" fill="none" />
           <circle cx="22" cy="15" r="4" className="fill-green-500" />
           <text x="20" y="75" textAnchor="middle" className="fill-green-300" fontSize="9">Shoot</text>
-          <text x="20" y="97" textAnchor="middle" className="fill-slate-500" fontSize="8">Day 4\u20137</text>
+          <text x="20" y="97" textAnchor="middle" className="fill-slate-500" fontSize="8">Day 4–7</text>
         </g>
 
         {/* Stage 5: Seedling */}
@@ -122,16 +122,16 @@ export default function SeedGerminationDiagram() {
           <ellipse cx="14" cy="15" rx="10" ry="4" className="fill-green-400" transform="rotate(-20, 14, 15)" />
           <ellipse cx="26" cy="12" rx="10" ry="4" className="fill-green-400" transform="rotate(20, 26, 12)" />
           <text x="20" y="110" textAnchor="middle" className="fill-lime-300" fontSize="9">Seedling</text>
-          <text x="20" y="123" textAnchor="middle" className="fill-slate-500" fontSize="8">Day 7\u201314</text>
+          <text x="20" y="123" textAnchor="middle" className="fill-slate-500" fontSize="8">Day 7–14</text>
         </g>
 
         {/* Timeline arrow */}
         <line x1="40" y1="395" x2="480" y2="395" className="stroke-lime-500" strokeWidth="1.5" markerEnd="url(#germArrow)" />
-        <text x="260" y="415" textAnchor="middle" className="fill-lime-400" fontSize="10">Time \u2192</text>
+        <text x="260" y="415" textAnchor="middle" className="fill-lime-400" fontSize="10">Time →</text>
 
         {/* Dormancy note */}
         <rect x="20" y="425" width="480" height="14" rx="3" className="fill-amber-900/30" />
-        <text x="260" y="436" textAnchor="middle" className="fill-amber-300" fontSize="10">Some seeds stay dormant for years \u2014 a 2,000-year-old date palm seed germinated in 2005</text>
+        <text x="260" y="436" textAnchor="middle" className="fill-amber-300" fontSize="10">Some seeds stay dormant for years — a 2,000-year-old date palm seed germinated in 2005</text>
 
         <defs>
           <marker id="germArrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">

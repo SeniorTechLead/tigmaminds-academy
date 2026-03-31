@@ -241,7 +241,7 @@ for sp_key in BridgeSpecies.list_species():
             label=f"{sp['common_name']}")
 
 ax.set_xlabel('Age (years)', color='white', fontsize=11)
-ax.set_ylabel('Wood density (kg/m\\u00b3)', color='white', fontsize=11)
+ax.set_ylabel('Wood density (kg/m\³)', color='white', fontsize=11)
 ax.set_title('Wood density maturation', color='white', fontsize=12)
 ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
@@ -422,7 +422,7 @@ ax = axes[1, 0]
 mfas = [engine.microfibril_angle(a) for a in ages]
 ax.plot(ages, mfas, color='#a855f7', linewidth=2.5)
 ax.fill_between(ages, 0, mfas, alpha=0.15, color='#a855f7')
-ax.axhline(y=15, color='#22c55e', linestyle='--', alpha=0.5, label='Optimal for tension (<15\\u00b0)')
+ax.axhline(y=15, color='#22c55e', linestyle='--', alpha=0.5, label='Optimal for tension (<15\°)')
 ax.set_xlabel('Root age (years)', color='white', fontsize=11)
 ax.set_ylabel('Microfibril angle (degrees)', color='white', fontsize=11)
 ax.set_title('MFA decreases with maturity', color='white', fontsize=12)
@@ -454,7 +454,7 @@ print("=" * 60)
 for age in [10, 30, 50, 100, 200]:
     r_dry = engine.full_report(age, moisture_pct=12)
     r_wet = engine.full_report(age, moisture_pct=50)
-    print(f"  Age {age:3d}yr: MFA={r_dry['mfa_deg']:.1f}\\u00b0 | "
+    print(f"  Age {age:3d}yr: MFA={r_dry['mfa_deg']:.1f}\° | "
           f"Dry: {r_dry['tensile_MPa']:.1f} MPa, E={r_dry['youngs_GPa']:.1f} GPa | "
           f"Wet: {r_wet['tensile_MPa']:.1f} MPa, E={r_wet['youngs_GPa']:.1f} GPa")
 
@@ -1091,7 +1091,7 @@ class BioBridgeModeler:
             (self.tensile_strength(self.age, self.moisture) /
              self.tensile_strength(self.age, 0)) * 100,
         ]
-        actual_vals = [f'{current_tensile:.1f} MPa', f'{mfa:.1f}\\u00b0',
+        actual_vals = [f'{current_tensile:.1f} MPa', f'{mfa:.1f}\°',
                        f'{maturity*100:.0f}%', f'{vals_pct[3]:.0f}%']
         colors_gauge = ['#22c55e' if v > 70 else '#f59e0b' if v > 40 else '#ef4444' for v in vals_pct]
 
@@ -1193,7 +1193,7 @@ class BioBridgeModeler:
         bars1 = ax.bar(x_pos - width/2, costs, width, color=colors_comp, alpha=0.8,
                         label='200yr cost ($k)')
         bars2 = ax.bar(x_pos + width/2, carbons, width, color=colors_comp, alpha=0.4,
-                        label='200yr CO\\u2082 (tonnes)', edgecolor=colors_comp, linewidth=2)
+                        label='200yr CO\₂ (tonnes)', edgecolor=colors_comp, linewidth=2)
 
         ax.set_xticks(x_pos)
         ax.set_xticklabels(names_comp, color='white', fontsize=8)

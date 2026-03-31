@@ -23,7 +23,7 @@ export default function RaceScalingDiagram() {
         <rect width={w} height={h} rx={10} className="fill-slate-900" />
 
         <text x={w / 2} y={28} textAnchor="middle" className="fill-slate-100" style={{ fontSize: 16, fontWeight: 700 }}>
-          Relative Speed \u2014 Body Lengths per Second
+          Relative Speed — Body Lengths per Second
         </text>
         <text x={w / 2} y={46} textAnchor="middle" className="fill-slate-400" style={{ fontSize: 12 }}>
           Smaller animals are faster relative to their size
@@ -70,7 +70,7 @@ export default function RaceScalingDiagram() {
           Froude Number
         </text>
         <text x={105} y={92} textAnchor="middle" className="fill-slate-300" style={{ fontSize: 11 }}>
-          Fr = v\u00b2 / (g \u00d7 leg length)
+          Fr = v² / (g × leg length)
         </text>
         <text x={105} y={108} textAnchor="middle" className="fill-slate-400" style={{ fontSize: 10 }}>
           Animals with similar Fr

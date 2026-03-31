@@ -33,12 +33,12 @@ const ActivityGearModelDiagram = () => {
           Materials Needed
         </text>
         {[
-          '\u2022 Thick cardboard (cereal box)',
-          '\u2022 Scissors',
-          '\u2022 2 pushpins or nails',
-          '\u2022 A pencil or marker',
-          '\u2022 A ruler',
-          '\u2022 Corrugated cardboard strip',
+          '• Thick cardboard (cereal box)',
+          '• Scissors',
+          '• 2 pushpins or nails',
+          '• A pencil or marker',
+          '• A ruler',
+          '• Corrugated cardboard strip',
         ].map((item, i) => (
           <text key={i} x="30" y={78 + i * 14} className="ag-small fill-amber-700 dark:fill-amber-400">
             {item}
@@ -138,10 +138,10 @@ const ActivityGearModelDiagram = () => {
         {[
           '1. Spin the small gear one full turn.',
           '   How far does the large gear turn?',
-          '   (Answer: half a turn \u2014 gear ratio 2:1)',
+          '   (Answer: half a turn — gear ratio 2:1)',
           '',
           '2. Which gear is harder to turn by hand?',
-          '   (Answer: the large gear \u2014 more torque)',
+          '   (Answer: the large gear — more torque)',
           '',
           '3. Try turning the large gear instead.',
           '   The small gear spins faster but with less force.',
@@ -163,8 +163,8 @@ const ActivityGearModelDiagram = () => {
 
         {/* Three columns */}
         {[
-          { x: 35, icon: '\u2699\uFE0F', title: 'Speed \u2194 Force', text: 'Gears trade speed for\nforce (or vice versa).\nTotal work stays the same.' },
-          { x: 215, icon: '\u26F0\uFE0F', title: 'Hill trains use this', text: 'Low gear = slow speed,\nhigh pulling force.\nEssential for steep hills.' },
+          { x: 35, icon: '⚙️', title: 'Speed ↔ Force', text: 'Gears trade speed for\nforce (or vice versa).\nTotal work stays the same.' },
+          { x: 215, icon: '⛰️', title: 'Hill trains use this', text: 'Low gear = slow speed,\nhigh pulling force.\nEssential for steep hills.' },
           { x: 395, icon: '\uD83D\uDD27', title: 'Rack railways', text: 'A gear (pinion) meshes\nwith a toothed track (rack)\nfor grades above 8%.' },
         ].map((col, i) => (
           <g key={i}>

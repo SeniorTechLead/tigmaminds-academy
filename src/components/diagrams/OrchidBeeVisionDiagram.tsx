@@ -4,13 +4,13 @@ export default function OrchidBeeVisionDiagram() {
       <svg viewBox="0 0 560 420" className="w-full max-w-lg mx-auto" role="img" aria-label="Diagram comparing human vision and bee vision of flowers, showing UV nectar guide patterns invisible to humans">
         <rect width="560" height="420" rx="12" className="fill-slate-900" />
         <text x="280" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#fbbf24">Flowers Talk to Insects</text>
-        <text x="280" y="46" textAnchor="middle" fontSize="10" className="fill-slate-400">Bees see UV patterns invisible to human eyes \u2014 hidden nectar guides</text>
+        <text x="280" y="46" textAnchor="middle" fontSize="10" className="fill-slate-400">Bees see UV patterns invisible to human eyes — hidden nectar guides</text>
 
         {/* Human vision section */}
         <g transform="translate(140, 80)">
           <text x="0" y="0" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#60a5fa">Human Vision</text>
           <text x="0" y="15" textAnchor="middle" fontSize="9" className="fill-slate-400">3 cone types: red, green, blue</text>
-          <text x="0" y="27" textAnchor="middle" fontSize="9" className="fill-slate-400">Range: 380\u2013750 nm</text>
+          <text x="0" y="27" textAnchor="middle" fontSize="9" className="fill-slate-400">Range: 380–750 nm</text>
 
           {/* Human view of flower - uniform yellow */}
           <g transform="translate(0, 55)">
@@ -41,7 +41,7 @@ export default function OrchidBeeVisionDiagram() {
         <g transform="translate(420, 80)">
           <text x="0" y="0" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#a855f7">Bee Vision</text>
           <text x="0" y="15" textAnchor="middle" fontSize="9" className="fill-slate-400">3 receptor types: UV, blue, green</text>
-          <text x="0" y="27" textAnchor="middle" fontSize="9" className="fill-slate-400">Range: 300\u2013650 nm (sees UV!)</text>
+          <text x="0" y="27" textAnchor="middle" fontSize="9" className="fill-slate-400">Range: 300–650 nm (sees UV!)</text>
 
           {/* Bee view of flower - UV bullseye pattern */}
           <g transform="translate(0, 55)">

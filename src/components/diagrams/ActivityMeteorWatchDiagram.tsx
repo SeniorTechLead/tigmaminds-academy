@@ -57,19 +57,19 @@ export default function ActivityMeteorWatchDiagram() {
         <rect x="278" y="195" width="225" height="140" rx="8" fill="#1e1b4b" stroke="#818cf8" strokeWidth="1" />
         <text x="390" y="218" textAnchor="middle" fontSize="12" fontWeight="700" fill="#818cf8">Step 2: Observe</text>
         <text x="390" y="238" textAnchor="middle" fontSize="10" fill="#c4b5fd">Lie back and look straight up.</text>
-        <text x="390" y="252" textAnchor="middle" fontSize="10" fill="#c4b5fd">Watch for 30\u201360 minutes. Count</text>
+        <text x="390" y="252" textAnchor="middle" fontSize="10" fill="#c4b5fd">Watch for 30–60 minutes. Count</text>
         <text x="390" y="266" textAnchor="middle" fontSize="10" fill="#c4b5fd">every streak of light you see.</text>
         <text x="390" y="286" textAnchor="middle" fontSize="10" fill="#fde68a">For each meteor, note:</text>
-        <text x="390" y="300" textAnchor="middle" fontSize="10" fill="#fde68a">\u2022 Direction (N/S/E/W)</text>
-        <text x="390" y="314" textAnchor="middle" fontSize="10" fill="#fde68a">\u2022 Brightness (faint/medium/bright)</text>
-        <text x="390" y="328" textAnchor="middle" fontSize="10" fill="#fde68a">\u2022 Color (white/yellow/green)</text>
+        <text x="390" y="300" textAnchor="middle" fontSize="10" fill="#fde68a">• Direction (N/S/E/W)</text>
+        <text x="390" y="314" textAnchor="middle" fontSize="10" fill="#fde68a">• Brightness (faint/medium/bright)</text>
+        <text x="390" y="328" textAnchor="middle" fontSize="10" fill="#fde68a">• Color (white/yellow/green)</text>
 
         {/* Step 3 */}
         <rect x="526" y="195" width="225" height="140" rx="8" fill="#1e1b4b" stroke="#818cf8" strokeWidth="1" />
         <text x="638" y="218" textAnchor="middle" fontSize="12" fontWeight="700" fill="#818cf8">Step 3: Record &amp; Think</text>
         <text x="638" y="238" textAnchor="middle" fontSize="10" fill="#c4b5fd">Calculate your rate: meteors</text>
         <text x="638" y="252" textAnchor="middle" fontSize="10" fill="#c4b5fd">per hour. During a shower, you</text>
-        <text x="638" y="266" textAnchor="middle" fontSize="10" fill="#c4b5fd">might see 50\u2013120 per hour!</text>
+        <text x="638" y="266" textAnchor="middle" fontSize="10" fill="#c4b5fd">might see 50–120 per hour!</text>
         <text x="638" y="286" textAnchor="middle" fontSize="10" fill="#fde68a">Think about what you saw:</text>
         <text x="638" y="300" textAnchor="middle" fontSize="10" fill="#fde68a">Were they random directions,</text>
         <text x="638" y="314" textAnchor="middle" fontSize="10" fill="#fde68a">or from one area? (That area</text>
@@ -91,11 +91,11 @@ export default function ActivityMeteorWatchDiagram() {
 
           {/* Rows */}
           {[
-            ['Quadrantids', 'Jan 3\u20134', '80\u2013120', 'Asteroid 2003 EH1', 0],
-            ['Lyrids', 'Apr 21\u201322', '15\u201320', 'Comet Thatcher', 1],
-            ['Perseids', 'Aug 11\u201313', '80\u2013100', 'Comet Swift-Tuttle', 2],
-            ['Orionids', 'Oct 20\u201321', '20\u201325', 'Comet Halley', 3],
-            ['Geminids', 'Dec 13\u201314', '120\u2013150', 'Asteroid Phaethon', 4],
+            ['Quadrantids', 'Jan 3–4', '80–120', 'Asteroid 2003 EH1', 0],
+            ['Lyrids', 'Apr 21–22', '15–20', 'Comet Thatcher', 1],
+            ['Perseids', 'Aug 11–13', '80–100', 'Comet Swift-Tuttle', 2],
+            ['Orionids', 'Oct 20–21', '20–25', 'Comet Halley', 3],
+            ['Geminids', 'Dec 13–14', '120–150', 'Asteroid Phaethon', 4],
           ].map(([name, when, rate, parent, idx]) => {
             const y = 34 + Number(idx) * 28;
             const bg = Number(idx) % 2 === 0 ? '#1e1b4b' : '#0f0b2e';

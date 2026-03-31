@@ -1,9 +1,9 @@
 export default function FluteFingerHoleDiagram() {
   const holes = [
-    { x: 210, open: false, note: '\u2014', freq: '572 Hz', label: 'All closed' },
-    { x: 250, open: true, note: 'E\u2085', freq: '659 Hz', label: 'Hole 1 open' },
-    { x: 300, open: true, note: 'G\u2085', freq: '784 Hz', label: 'Holes 1\u20132 open' },
-    { x: 350, open: true, note: 'A\u2085', freq: '880 Hz', label: 'Holes 1\u20133 open' },
+    { x: 210, open: false, note: '—', freq: '572 Hz', label: 'All closed' },
+    { x: 250, open: true, note: 'E₅', freq: '659 Hz', label: 'Hole 1 open' },
+    { x: 300, open: true, note: 'G₅', freq: '784 Hz', label: 'Holes 1–2 open' },
+    { x: 350, open: true, note: 'A₅', freq: '880 Hz', label: 'Holes 1–3 open' },
   ];
 
   return (
@@ -29,13 +29,13 @@ export default function FluteFingerHoleDiagram() {
           Finger Holes Change the Note
         </text>
         <text x="300" y="48" textAnchor="middle" className="small fill-gray-500 dark:fill-slate-400">
-          Opening a hole shortens the vibrating air column \u2192 higher frequency \u2192 higher pitch
+          Opening a hole shortens the vibrating air column → higher frequency → higher pitch
         </text>
 
         {/* Row 1: All holes closed */}
         <g transform="translate(0, 70)">
           <text x="20" y="15" className="label fill-gray-700 dark:fill-slate-300" fontWeight="600">All closed</text>
-          <text x="530" y="15" textAnchor="end" className="note fill-blue-600 dark:fill-blue-400">D\u2085 (572 Hz)</text>
+          <text x="530" y="15" textAnchor="end" className="note fill-blue-600 dark:fill-blue-400">D₅ (572 Hz)</text>
 
           {/* Tube */}
           <rect x="60" y="25" width="480" height="30" rx="4" className="fill-amber-100 dark:fill-amber-900/30" stroke="#b45309" strokeWidth="1.5" />
@@ -61,7 +61,7 @@ export default function FluteFingerHoleDiagram() {
         {/* Row 2: First hole open */}
         <g transform="translate(0, 180)">
           <text x="20" y="15" className="label fill-gray-700 dark:fill-slate-300" fontWeight="600">1st hole open</text>
-          <text x="530" y="15" textAnchor="end" className="note fill-emerald-600 dark:fill-emerald-400">E\u2085 (659 Hz)</text>
+          <text x="530" y="15" textAnchor="end" className="note fill-emerald-600 dark:fill-emerald-400">E₅ (659 Hz)</text>
 
           <rect x="60" y="25" width="480" height="30" rx="4" className="fill-amber-100 dark:fill-amber-900/30" stroke="#b45309" strokeWidth="1.5" />
           <circle cx="100" cy="40" r="8" className="fill-amber-300 dark:fill-amber-700" stroke="#b45309" strokeWidth="1" />
@@ -80,7 +80,7 @@ export default function FluteFingerHoleDiagram() {
           {/* Shorter air column */}
           <rect x="62" y="27" width="346" height="26" rx="3" className="fill-emerald-400/20 dark:fill-emerald-500/15" />
           <line x1="62" y1="60" x2="408" y2="60" className="stroke-emerald-500 dark:stroke-emerald-400" strokeWidth="2" markerEnd="url(#fhArrow)" markerStart="url(#fhArrowR)" />
-          <text x="235" y="58" textAnchor="middle" className="small fill-emerald-600 dark:fill-emerald-400" fontWeight="600">L\u2032 = 26 cm</text>
+          <text x="235" y="58" textAnchor="middle" className="small fill-emerald-600 dark:fill-emerald-400" fontWeight="600">L′ = 26 cm</text>
 
           {/* Escaped air */}
           <path d="M410,25 Q415,15 420,10 M410,25 Q405,15 400,12" fill="none" className="stroke-emerald-400/60 dark:stroke-emerald-400/40" strokeWidth="1.5" />
@@ -89,7 +89,7 @@ export default function FluteFingerHoleDiagram() {
         {/* Row 3: Two holes open */}
         <g transform="translate(0, 290)">
           <text x="20" y="15" className="label fill-gray-700 dark:fill-slate-300" fontWeight="600">2 holes open</text>
-          <text x="530" y="15" textAnchor="end" className="note fill-violet-600 dark:fill-violet-400">G\u2085 (784 Hz)</text>
+          <text x="530" y="15" textAnchor="end" className="note fill-violet-600 dark:fill-violet-400">G₅ (784 Hz)</text>
 
           <rect x="60" y="25" width="480" height="30" rx="4" className="fill-amber-100 dark:fill-amber-900/30" stroke="#b45309" strokeWidth="1.5" />
           <circle cx="100" cy="40" r="8" className="fill-amber-300 dark:fill-amber-700" stroke="#b45309" strokeWidth="1" />
@@ -106,23 +106,23 @@ export default function FluteFingerHoleDiagram() {
 
           <rect x="62" y="27" width="296" height="26" rx="3" className="fill-violet-400/20 dark:fill-violet-500/15" />
           <line x1="62" y1="60" x2="358" y2="60" className="stroke-violet-500 dark:stroke-violet-400" strokeWidth="2" markerEnd="url(#fhArrow)" markerStart="url(#fhArrowR)" />
-          <text x="210" y="58" textAnchor="middle" className="small fill-violet-600 dark:fill-violet-400" fontWeight="600">L\u2033 = 22 cm</text>
+          <text x="210" y="58" textAnchor="middle" className="small fill-violet-600 dark:fill-violet-400" fontWeight="600">L″ = 22 cm</text>
         </g>
 
         {/* Summary box */}
         <rect x="40" y="400" width="520" height="100" rx="8" className="fill-slate-100 dark:fill-slate-800/60" />
 
         <text x="300" y="422" textAnchor="middle" className="label fill-gray-800 dark:fill-slate-200" fontWeight="600">
-          The Rule: f = v / 2L\u2032
+          The Rule: f = v / 2L′
         </text>
         <text x="300" y="442" textAnchor="middle" className="small fill-gray-600 dark:fill-slate-400">
-          L\u2032 = effective length from embouchure to the first open hole
+          L′ = effective length from embouchure to the first open hole
         </text>
         <text x="300" y="460" textAnchor="middle" className="small fill-gray-600 dark:fill-slate-400">
-          Shorter air column \u2192 shorter wavelength \u2192 higher frequency \u2192 higher pitch
+          Shorter air column → shorter wavelength → higher frequency → higher pitch
         </text>
         <text x="300" y="480" textAnchor="middle" className="small fill-gray-600 dark:fill-slate-400">
-          Each open hole acts as a new \u201Cend\u201D of the tube for the standing wave
+          Each open hole acts as a new “end” of the tube for the standing wave
         </text>
 
         <defs>

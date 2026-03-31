@@ -29,12 +29,12 @@ export default function RedSeaLevel2() {
 
   const miniLessons = [
     {
-      title: 'Continuity equation \u2014 what goes in must come out',
+      title: 'Continuity equation — what goes in must come out',
       concept: `In Level 1 you learned that wind pushes water sideways. But where exactly does the water go? The **continuity equation** answers this.
 
 The principle is simple: water is incompressible. If you squeeze it out of one place, it must appear somewhere else. Mathematically:
 
-**A\u2081 \u00d7 v\u2081 = A\u2082 \u00d7 v\u2082**
+**A₁ × v₁ = A₂ × v₂**
 
 where A is the cross-sectional area and v is the flow velocity. If a wide channel narrows, the water must speed up. If it widens, the water slows.
 
@@ -44,7 +44,7 @@ The continuity equation is the **first** of three conservation laws that form th
       analogy: 'Put your thumb over a garden hose. The opening gets smaller (A decreases), so the water speeds up (v increases) to maintain the same flow rate. This is the continuity equation in action. Every river, every pipe, every blood vessel follows this rule.',
       storyConnection: 'When wind pushes water off the ridge, the continuity equation tells us where it goes: into the deeper channels on either side. The channels are the "larger hose" that absorbs the displaced volume. The wider and deeper the surrounding sea, the less the water level rises there.',
       checkQuestion: 'A river is 20 m wide and 2 m deep, flowing at 1 m/s. It enters a gorge that is 5 m wide and 4 m deep. What is the flow speed in the gorge?',
-      checkAnswer: 'A\u2081v\u2081 = A\u2082v\u2082. A\u2081 = 20\u00d72 = 40 m\u00b2. A\u2082 = 5\u00d74 = 20 m\u00b2. v\u2082 = A\u2081v\u2081/A\u2082 = 40\u00d71/20 = 2 m/s. The water doubles in speed. This is why rivers flow faster through narrow gorges \u2014 the same volume of water per second must pass through a smaller opening.',
+      checkAnswer: 'A₁v₁ = A₂v₂. A₁ = 20×2 = 40 m². A₂ = 5×4 = 20 m². v₂ = A₁v₁/A₂ = 40×1/20 = 2 m/s. The water doubles in speed. This is why rivers flow faster through narrow gorges — the same volume of water per second must pass through a smaller opening.',
       codeIntro: 'Visualize how flow speed changes with channel width.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -70,7 +70,7 @@ fig, axes = plt.subplots(3, 1, figsize=(10, 8), sharex=True)
 axes[0].plot(x, width, linewidth=2, color='#06b6d4')
 axes[0].fill_between(x, width, alpha=0.1, color='#06b6d4')
 axes[0].set_ylabel('Channel width (km)', fontsize=10)
-axes[0].set_title('Continuity Equation: A\u2081v\u2081 = A\u2082v\u2082', fontsize=13)
+axes[0].set_title('Continuity Equation: A₁v₁ = A₂v₂', fontsize=13)
 axes[0].axvline(5, color='#fbbf24', linewidth=1, linestyle='--', alpha=0.5)
 axes[0].grid(alpha=0.3)
 
@@ -93,27 +93,27 @@ plt.show()
 
 print("At the narrow, shallow ridge: water SPEEDS UP")
 print("At the wide, deep channels: water SLOWS DOWN")
-print("Same volume per second everywhere \u2014 that is continuity.")`,
+print("Same volume per second everywhere — that is continuity.")`,
       challenge: 'If the ridge narrowed to just 0.5 km wide, what would happen to the flow speed? Calculate and discuss whether this creates a safety hazard for anyone crossing.',
       successHint: 'The continuity equation is the simplest conservation law: conservation of mass. Every CFD simulation starts here. Combined with momentum and energy conservation, it forms the Navier-Stokes equations.',
     },
     {
-      title: 'Bernoulli\u2019s principle \u2014 fast flow means low pressure',
-      concept: `The continuity equation told us that narrow channels have faster flow. Bernoulli\u2019s principle adds the next piece: **where fluid moves faster, pressure drops**.
+      title: 'Bernoulli’s principle — fast flow means low pressure',
+      concept: `The continuity equation told us that narrow channels have faster flow. Bernoulli’s principle adds the next piece: **where fluid moves faster, pressure drops**.
 
 The equation is:
 
-**P + \u00bd\u03C1v\u00b2 + \u03C1gh = constant**
+**P + ½ρv² + ρgh = constant**
 
 This says that pressure energy + kinetic energy + potential energy stays constant along a streamline. If velocity (v) increases, pressure (P) must decrease to compensate.
 
-For the Red Sea crossing, Bernoulli explains why the returning water is so dangerous. As it funnels back over the ridge, it speeds up (continuity), and the pressure drops. This creates a **venturi effect** \u2014 the same principle that makes airplane wings generate lift.
+For the Red Sea crossing, Bernoulli explains why the returning water is so dangerous. As it funnels back over the ridge, it speeds up (continuity), and the pressure drops. This creates a **venturi effect** — the same principle that makes airplane wings generate lift.
 
 The fast, low-pressure return flow would be difficult to stand in, even at moderate depths. A person standing in 50 cm of fast-moving water experiences far more force than they would expect.`,
-      analogy: 'Hold a strip of paper below your lower lip and blow across the top. The paper rises! Your breath creates fast-moving air above the paper (low pressure), while still air below pushes up (higher pressure). The pressure difference lifts the paper. This is Bernoulli in action \u2014 and the same principle explains airplane flight.',
-      storyConnection: 'The returning water would not merely rise gently around anyone on the ridge. Bernoulli tells us it would rush back as a fast, low-pressure flow \u2014 essentially a horizontal waterfall. This explains the Exodus description of waters "overwhelming" the pursuers rather than simply rising around them.',
+      analogy: 'Hold a strip of paper below your lower lip and blow across the top. The paper rises! Your breath creates fast-moving air above the paper (low pressure), while still air below pushes up (higher pressure). The pressure difference lifts the paper. This is Bernoulli in action — and the same principle explains airplane flight.',
+      storyConnection: 'The returning water would not merely rise gently around anyone on the ridge. Bernoulli tells us it would rush back as a fast, low-pressure flow — essentially a horizontal waterfall. This explains the Exodus description of waters "overwhelming" the pursuers rather than simply rising around them.',
       checkQuestion: 'An airplane wing works because air moves faster over the curved top than the flat bottom. If air over the top moves at 70 m/s and under the bottom at 60 m/s, which surface has lower pressure?',
-      checkAnswer: 'The top surface has lower pressure. Bernoulli: P + \u00bd\u03C1v\u00b2 = constant. Higher v means lower P. The pressure difference (higher below, lower above) creates an upward force \u2014 lift. A Boeing 747\u2019s wings create enough pressure difference to support 400 tonnes.',
+      checkAnswer: 'The top surface has lower pressure. Bernoulli: P + ½ρv² = constant. Higher v means lower P. The pressure difference (higher below, lower above) creates an upward force — lift. A Boeing 747’s wings create enough pressure difference to support 400 tonnes.',
       codeIntro: 'Calculate and plot pressure along a narrowing channel.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -167,28 +167,28 @@ print(f"Pressure drop: {dP:.0f} Pa ({dP/1000:.1f} kPa)")
 print()
 print("Where the channel narrows: speed UP, pressure DOWN")
 print("This is why fast-returning water creates suction.")`,
-      challenge: 'A firehose nozzle narrows from 10 cm diameter to 2 cm. If water enters at 2 m/s, what is the exit speed? What is the pressure drop? (Use \u03C1=1000 for freshwater.)',
-      successHint: 'Bernoulli\u2019s equation is the second conservation law: conservation of energy along a streamline. It explains everything from carburetors to blood flow to the curve on a cricket ball.',
+      challenge: 'A firehose nozzle narrows from 10 cm diameter to 2 cm. If water enters at 2 m/s, what is the exit speed? What is the pressure drop? (Use ρ=1000 for freshwater.)',
+      successHint: 'Bernoulli’s equation is the second conservation law: conservation of energy along a streamline. It explains everything from carburetors to blood flow to the curve on a cricket ball.',
     },
     {
-      title: 'Viscosity and Reynolds number \u2014 smooth or turbulent?',
-      concept: `When water flows slowly, it moves in smooth, parallel layers \u2014 **laminar flow**. When it moves fast, the layers break into chaotic swirls \u2014 **turbulent flow**. The transition depends on the **Reynolds number**:
+      title: 'Viscosity and Reynolds number — smooth or turbulent?',
+      concept: `When water flows slowly, it moves in smooth, parallel layers — **laminar flow**. When it moves fast, the layers break into chaotic swirls — **turbulent flow**. The transition depends on the **Reynolds number**:
 
-**Re = (\u03C1 \u00d7 v \u00d7 L) / \u03BC**
+**Re = (ρ × v × L) / μ**
 
-where \u03C1 is density, v is velocity, L is a characteristic length (like channel depth), and \u03BC is viscosity (the "thickness" of the fluid).
+where ρ is density, v is velocity, L is a characteristic length (like channel depth), and μ is viscosity (the "thickness" of the fluid).
 
 When Re < ~2000: laminar (smooth)
 When Re > ~4000: turbulent (chaotic)
 Between: transitional
 
-For the Red Sea return flow (v \u2248 4 m/s, L \u2248 2 m, seawater): Re \u2248 8 million. That is **extremely turbulent**. The returning water would be a churning, violent flow \u2014 not a gentle rise.
+For the Red Sea return flow (v ≈ 4 m/s, L ≈ 2 m, seawater): Re ≈ 8 million. That is **extremely turbulent**. The returning water would be a churning, violent flow — not a gentle rise.
 
 Understanding Reynolds number is crucial in CFD: turbulent flow requires much finer computational grids and more complex equations than laminar flow.`,
-      analogy: 'Turn on a tap very slightly \u2014 the water comes out as a smooth, clear stream (laminar). Turn it on full blast \u2014 the stream breaks into a noisy, opaque splash (turbulent). The Reynolds number tells you where the transition happens. Higher speed, larger scale, or thinner fluid all push toward turbulence.',
-      storyConnection: 'The returning Red Sea water would be at Reynolds number ~8 million \u2014 violently turbulent. This means standing waves, vortices, and unpredictable surges. A person caught in this flow would face not just rising water but chaotic, swirling forces pulling in multiple directions. This matches the biblical description of total devastation.',
-      checkQuestion: 'Honey flows slowly down a spoon in a smooth stream. Water splashes turbulently. Both are fluids \u2014 why the difference?',
-      checkAnswer: 'Honey has viscosity about 10,000 times greater than water. Since Re = \u03C1vL/\u03BC, and \u03BC is 10,000\u00d7 larger for honey, its Reynolds number is 10,000\u00d7 smaller. Even at reasonable speeds, honey\u2019s Re stays well below 2000 (laminar). Water\u2019s low viscosity means almost any real-world flow has Re >> 4000 (turbulent).',
+      analogy: 'Turn on a tap very slightly — the water comes out as a smooth, clear stream (laminar). Turn it on full blast — the stream breaks into a noisy, opaque splash (turbulent). The Reynolds number tells you where the transition happens. Higher speed, larger scale, or thinner fluid all push toward turbulence.',
+      storyConnection: 'The returning Red Sea water would be at Reynolds number ~8 million — violently turbulent. This means standing waves, vortices, and unpredictable surges. A person caught in this flow would face not just rising water but chaotic, swirling forces pulling in multiple directions. This matches the biblical description of total devastation.',
+      checkQuestion: 'Honey flows slowly down a spoon in a smooth stream. Water splashes turbulently. Both are fluids — why the difference?',
+      checkAnswer: 'Honey has viscosity about 10,000 times greater than water. Since Re = ρvL/μ, and μ is 10,000× larger for honey, its Reynolds number is 10,000× smaller. Even at reasonable speeds, honey’s Re stays well below 2000 (laminar). Water’s low viscosity means almost any real-world flow has Re >> 4000 (turbulent).',
       codeIntro: 'Calculate Reynolds number for different flow conditions.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -235,28 +235,28 @@ print()
 print("Laminar: smooth, predictable, gentle")
 print("Turbulent: chaotic, violent, dangerous")
 print("The returning Red Sea water would be EXTREMELY turbulent.")`,
-      challenge: 'Calculate Re for blood flowing through an artery (v=0.3 m/s, L=0.01 m, \u03C1=1060 kg/m\u00b3, \u03BC=3.5\u00d710\u207b\u00b3 Pa.s). Is blood flow laminar or turbulent? Why does this matter for cardiovascular health?',
-      successHint: 'Reynolds number is how engineers decide what type of simulation to run. Laminar CFD is straightforward. Turbulent CFD requires additional models (like k-\u03b5 or Large Eddy Simulation) and far more computing power. The Red Sea flow is firmly in the turbulent regime.',
+      challenge: 'Calculate Re for blood flowing through an artery (v=0.3 m/s, L=0.01 m, ρ=1060 kg/m³, μ=3.5×10⁻³ Pa.s). Is blood flow laminar or turbulent? Why does this matter for cardiovascular health?',
+      successHint: 'Reynolds number is how engineers decide what type of simulation to run. Laminar CFD is straightforward. Turbulent CFD requires additional models (like k-ε or Large Eddy Simulation) and far more computing power. The Red Sea flow is firmly in the turbulent regime.',
     },
     {
-      title: 'Shear stress \u2014 how wind grips water',
-      concept: `Wind does not just push on the ocean surface like a hand pushing a box. It creates **shear stress** \u2014 a friction force between the moving air and the water surface.
+      title: 'Shear stress — how wind grips water',
+      concept: `Wind does not just push on the ocean surface like a hand pushing a box. It creates **shear stress** — a friction force between the moving air and the water surface.
 
 The wind shear stress formula is:
 
-**\u03C4 = \u03C1_air \u00d7 C_d \u00d7 V\u00b2**
+**τ = ρ_air × C_d × V²**
 
-where \u03C1_air is air density (~1.225 kg/m\u00b3), C_d is the drag coefficient (~1.5\u00d710\u207b\u00b3), and V is wind speed.
+where ρ_air is air density (~1.225 kg/m³), C_d is the drag coefficient (~1.5×10⁻³), and V is wind speed.
 
-Notice V\u00b2: doubling the wind speed quadruples the stress. This is why hurricane-force winds can push entire seas.
+Notice V²: doubling the wind speed quadruples the stress. This is why hurricane-force winds can push entire seas.
 
-At 63 mph (28 m/s): \u03C4 = 1.225 \u00d7 0.0015 \u00d7 28\u00b2 = **1.44 Pa**.
+At 63 mph (28 m/s): τ = 1.225 × 0.0015 × 28² = **1.44 Pa**.
 
-That seems small, but applied over 50 km of fetch (the distance the wind blows over water) for 12 hours, it moves enormous volumes. The total force on the water surface is \u03C4 \u00d7 area = 1.44 \u00d7 (50,000 \u00d7 3,500) = **252 million Newtons**. That is the weight of about 25,000 cars \u2014 pressing on the water surface.`,
+That seems small, but applied over 50 km of fetch (the distance the wind blows over water) for 12 hours, it moves enormous volumes. The total force on the water surface is τ × area = 1.44 × (50,000 × 3,500) = **252 million Newtons**. That is the weight of about 25,000 cars — pressing on the water surface.`,
       analogy: 'Rub your palm across a tabletop. The friction between your skin and the table is shear stress. Rub faster and the friction is stronger (proportional to speed squared for fluids). Now imagine your palm is 50 km long and you are rubbing across an ocean surface. That is wind shear.',
-      storyConnection: 'The "strong east wind all that night" in Exodus created a sustained shear stress on the Gulf of Suez\u2019s surface. The V\u00b2 dependence means a 63 mph wind creates 4x the force of a 32 mph wind. The specific wind speed matters enormously, and the biblical description of an unusually strong wind aligns with the physics requirement.',
-      checkQuestion: 'Why does the formula use V\u00b2 instead of just V? What physical principle causes this?',
-      checkAnswer: 'The drag force on a surface in a fluid depends on the dynamic pressure of the flow, which is \u00bd\u03C1V\u00b2. This comes from the kinetic energy of the air molecules hitting the surface. Kinetic energy = \u00bdmv\u00b2, so the energy (and thus force) delivered per impact goes as v\u00b2. More speed means both more impacts per second AND more energy per impact \u2014 a double whammy.',
+      storyConnection: 'The "strong east wind all that night" in Exodus created a sustained shear stress on the Gulf of Suez’s surface. The V² dependence means a 63 mph wind creates 4x the force of a 32 mph wind. The specific wind speed matters enormously, and the biblical description of an unusually strong wind aligns with the physics requirement.',
+      checkQuestion: 'Why does the formula use V² instead of just V? What physical principle causes this?',
+      checkAnswer: 'The drag force on a surface in a fluid depends on the dynamic pressure of the flow, which is ½ρV². This comes from the kinetic energy of the air molecules hitting the surface. Kinetic energy = ½mv², so the energy (and thus force) delivered per impact goes as v². More speed means both more impacts per second AND more energy per impact — a double whammy.',
       codeIntro: 'Calculate wind shear stress and total force for different wind speeds.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -283,13 +283,13 @@ fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
 ax1.plot(v_mph, tau, linewidth=2.5, color='#f97316')
 ax1.fill_between(v_mph, tau, alpha=0.1, color='#f97316')
 ax1.axvline(63, color='silver', linewidth=1, linestyle='--')
-ax1.annotate(f'63 mph: \u03c4 = {rho_air*C_d*28.2**2:.2f} Pa',
+ax1.annotate(f'63 mph: τ = {rho_air*C_d*28.2**2:.2f} Pa',
              xy=(63, rho_air*C_d*28.2**2), xytext=(30, 2.5),
              fontsize=10, color='#f97316',
              arrowprops=dict(arrowstyle='->', color='#f97316'))
 ax1.set_xlabel('Wind speed (mph)', fontsize=10)
 ax1.set_ylabel('Shear stress (Pa)', fontsize=10)
-ax1.set_title('Wind Shear Stress: \u03c4 = \u03c1C\u2091V\u00b2', fontsize=12)
+ax1.set_title('Wind Shear Stress: τ = ρCₑV²', fontsize=12)
 ax1.grid(alpha=0.3)
 
 ax2.plot(v_mph, total_force_cars, linewidth=2.5, color='#ef4444')
@@ -297,7 +297,7 @@ ax2.fill_between(v_mph, total_force_cars, alpha=0.1, color='#ef4444')
 ax2.axvline(63, color='silver', linewidth=1, linestyle='--')
 ax2.set_xlabel('Wind speed (mph)', fontsize=10)
 ax2.set_ylabel('Force (equivalent car-weights)', fontsize=10)
-ax2.set_title(f'Total Force over {fetch/1000:.0f} km \u00d7 {channel_width/1000:.1f} km', fontsize=12)
+ax2.set_title(f'Total Force over {fetch/1000:.0f} km × {channel_width/1000:.1f} km', fontsize=12)
 ax2.grid(alpha=0.3)
 
 plt.tight_layout()
@@ -312,27 +312,27 @@ print(f"  Total force: {F_target:.0f} N ({F_target/1e6:.0f} MN)")
 print(f"  Equivalent to: {F_target/10000:.0f} car-weights")
 print()
 print("V-squared makes all the difference:")
-print(f"  At 30 mph: \u03c4 = {rho_air*C_d*(30/2.237)**2:.2f} Pa")
-print(f"  At 63 mph: \u03c4 = {tau_target:.2f} Pa")
-print(f"  Ratio: {(63/30)**2:.1f}x (speed doubled \u2192 force quadrupled)")`,
+print(f"  At 30 mph: τ = {rho_air*C_d*(30/2.237)**2:.2f} Pa")
+print(f"  At 63 mph: τ = {tau_target:.2f} Pa")
+print(f"  Ratio: {(63/30)**2:.1f}x (speed doubled → force quadrupled)")`,
       challenge: 'A Category 5 hurricane has winds of 157 mph. Calculate its wind shear stress. How many times greater is it than the 63 mph wind? This is why hurricanes create such devastating storm surges.',
       successHint: 'Wind shear stress is the input that drives the entire wind setdown phenomenon. It enters the Navier-Stokes equations as a boundary condition at the water surface. In Level 3, you will see how CFD solvers use this to compute the full flow field.',
     },
     {
-      title: 'Shallow water equations \u2014 the simplified model',
+      title: 'Shallow water equations — the simplified model',
       concept: `The full Navier-Stokes equations are complex. But for shallow water (where the depth is much less than the horizontal extent), we can simplify them into the **shallow water equations**:
 
-**\u2202h/\u2202t + \u2202(hu)/\u2202x = 0** (mass conservation)
-**\u2202u/\u2202t + u \u00d7 \u2202u/\u2202x + g \u00d7 \u2202h/\u2202x = \u03C4/(\u03C1h)** (momentum)
+**∂h/∂t + ∂(hu)/∂x = 0** (mass conservation)
+**∂u/∂t + u × ∂u/∂x + g × ∂h/∂x = τ/(ρh)** (momentum)
 
 The first equation says: the rate of change of water height equals the rate of inflow minus outflow. The second says: the water accelerates due to pressure gradients (gravity pulling water from high to low) and wind stress.
 
 These equations are what the NCAR team actually solved in their 2010 study. They discretized the Gulf of Suez into a grid of cells, applied the wind stress as a boundary condition, and marched the solution forward in time.
 
 The code implements a simplified 1D version of these equations.`,
-      analogy: 'Imagine a row of connected bathtubs. When one has more water, it spills into its neighbors. Each bathtub\u2019s water level depends on how much flows in from the left and out to the right. The shallow water equations describe exactly this \u2014 but with millions of tiny "bathtubs" (grid cells) and the addition of wind pushing the water.',
-      storyConnection: 'The NCAR simulation used the shallow water equations on a grid covering the northern Gulf of Suez. Each cell was about 500 m \u00d7 500 m. The simulation ran for 24 hours of simulated time. The result: a 3\u20134 km dry corridor lasting ~4 hours, with water returning in ~30 minutes when wind stopped.',
-      checkQuestion: 'Why can\u2019t we just use the full 3D Navier-Stokes equations instead of the shallow water approximation?',
+      analogy: 'Imagine a row of connected bathtubs. When one has more water, it spills into its neighbors. Each bathtub’s water level depends on how much flows in from the left and out to the right. The shallow water equations describe exactly this — but with millions of tiny "bathtubs" (grid cells) and the addition of wind pushing the water.',
+      storyConnection: 'The NCAR simulation used the shallow water equations on a grid covering the northern Gulf of Suez. Each cell was about 500 m × 500 m. The simulation ran for 24 hours of simulated time. The result: a 3–4 km dry corridor lasting ~4 hours, with water returning in ~30 minutes when wind stopped.',
+      checkQuestion: 'Why can’t we just use the full 3D Navier-Stokes equations instead of the shallow water approximation?',
       checkAnswer: 'We can, but it is far more expensive. The Gulf of Suez at 500 m horizontal resolution and 0.5 m vertical resolution would need ~2 million 3D cells (vs ~40,000 for 2D shallow water). Each cell requires solving 5+ equations per timestep, and turbulence modelling adds more. The shallow water equations capture the essential physics (water level changes and horizontal flow) at a fraction of the cost.',
       codeIntro: 'Implement a simplified 1D shallow water solver and watch wind push water off a ridge.',
       code: `import numpy as np
@@ -410,24 +410,24 @@ print("Watch the water level drop over the ridge (center) as wind blows!")
 print("Water piles up on the downwind side (right).")
 print("The ridge becomes exposed when the blue surface drops below 0.")`,
       challenge: 'Set wind_stress to 0 and watch what happens (no wind = no setdown). Then try doubling it to 2.88 Pa. How does the exposure time change?',
-      successHint: 'You just ran a computational fluid dynamics simulation! This is fundamentally what the NCAR team did \u2014 just in 2D with much finer resolution and more sophisticated numerics. The principle is identical: discretize space, apply physics laws, march forward in time.',
+      successHint: 'You just ran a computational fluid dynamics simulation! This is fundamentally what the NCAR team did — just in 2D with much finer resolution and more sophisticated numerics. The principle is identical: discretize space, apply physics laws, march forward in time.',
     },
     {
-      title: 'Energy budget \u2014 where does the wind\u2019s energy go?',
+      title: 'Energy budget — where does the wind’s energy go?',
       concept: `The wind delivers kinetic energy to the water. Where does it all go?
 
-1. **Kinetic energy of flow**: Water moves sideways (\u00bd\u03C1v\u00b2 per unit volume)
-2. **Potential energy**: Water piles up on the downwind side (\u03C1gh per unit volume)
+1. **Kinetic energy of flow**: Water moves sideways (½ρv² per unit volume)
+2. **Potential energy**: Water piles up on the downwind side (ρgh per unit volume)
 3. **Turbulent dissipation**: Chaotic motion converts kinetic energy to heat
 4. **Surface waves**: Energy goes into generating waves
 
-For the Red Sea wind setdown, the energy balance is dominated by **potential energy** \u2014 lifting water from the ridge area and piling it up in the deeper channels. The wind must do enough work to raise the water level on the downwind side by the same volume that was removed from the ridge area.
+For the Red Sea wind setdown, the energy balance is dominated by **potential energy** — lifting water from the ridge area and piling it up in the deeper channels. The wind must do enough work to raise the water level on the downwind side by the same volume that was removed from the ridge area.
 
 This energy approach gives us an independent check on the simulation: is the wind energy input sufficient to create the observed setdown?`,
-      analogy: 'Pushing water uphill in a bathtub takes energy. The wind is doing exactly this \u2014 lifting water from the shallow middle and pushing it into a pile on one side. The energy cost is gravity \u00d7 mass \u00d7 height lifted, just like lifting any object.',
-      storyConnection: 'The sustained east wind "all night" represents a massive energy input. 63 mph wind over 50 km of water surface for 12 hours delivers approximately 10\u00b9\u00b2 joules \u2014 equivalent to a small nuclear power plant running for an hour. Nature is enormously powerful when concentrated.',
+      analogy: 'Pushing water uphill in a bathtub takes energy. The wind is doing exactly this — lifting water from the shallow middle and pushing it into a pile on one side. The energy cost is gravity × mass × height lifted, just like lifting any object.',
+      storyConnection: 'The sustained east wind "all night" represents a massive energy input. 63 mph wind over 50 km of water surface for 12 hours delivers approximately 10¹² joules — equivalent to a small nuclear power plant running for an hour. Nature is enormously powerful when concentrated.',
       checkQuestion: 'After the wind stops and water returns, where does the potential energy go?',
-      checkAnswer: 'The potential energy stored in the piled-up water converts back to kinetic energy as the water rushes back (gravity accelerates it). Some becomes turbulent kinetic energy (chaotic swirling), which ultimately dissipates as heat. A tiny fraction generates sound (the roar of rushing water). Energy is never destroyed \u2014 only transformed.',
+      checkAnswer: 'The potential energy stored in the piled-up water converts back to kinetic energy as the water rushes back (gravity accelerates it). Some becomes turbulent kinetic energy (chaotic swirling), which ultimately dissipates as heat. A tiny fraction generates sound (the roar of rushing water). Energy is never destroyed — only transformed.',
       codeIntro: 'Calculate the energy budget for the wind setdown scenario.',
       code: `import numpy as np
 import matplotlib.pyplot as plt

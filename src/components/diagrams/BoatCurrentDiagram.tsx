@@ -30,7 +30,7 @@ export default function BoatCurrentDiagram() {
 
         {/* Title */}
         <text x="310" y="28" textAnchor="middle" className="title fill-amber-300">
-          Fighting the Current \u2014 Forces on a River Boat
+          Fighting the Current — Forces on a River Boat
         </text>
 
         {/* === TOP: Force diagram === */}
@@ -84,7 +84,7 @@ export default function BoatCurrentDiagram() {
           Speed over ground =
         </text>
         <text x="500" y="155" textAnchor="middle" className="small fill-cyan-300">
-          Boat speed \u2212 Current speed
+          Boat speed − Current speed
         </text>
 
         {/* === BOTTOM: Navigation strategies === */}
@@ -187,7 +187,7 @@ export default function BoatCurrentDiagram() {
         {/* Key insight */}
         <rect x="60" y="400" width="500" height="20" rx="4" fill="#1e3a5f" opacity="0.6" />
         <text x="310" y="414" textAnchor="middle" className="small fill-blue-200">
-          Brahmaputra current: 2\u20135 m/s in monsoon \u2014 skilled boatmen read the water to find slow paths
+          Brahmaputra current: 2–5 m/s in monsoon — skilled boatmen read the water to find slow paths
         </text>
       </svg>
     </div>

@@ -4,7 +4,7 @@ export default function ActivityFlowerDissectDiagram() {
       <svg viewBox="0 0 560 380" className="w-full max-w-lg mx-auto" role="img" aria-label="Diagram showing how to dissect a flower and identify its parts: petals, sepals, stamens, pistil, and ovary">
         <rect width="560" height="380" rx="12" className="fill-slate-900" />
         <text x="280" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#f59e0b">Activity: Dissect a Flower</text>
-        <text x="280" y="46" textAnchor="middle" fontSize="10" className="fill-slate-400">Open up any flower to find these parts \u2014 use tweezers or your fingers</text>
+        <text x="280" y="46" textAnchor="middle" fontSize="10" className="fill-slate-400">Open up any flower to find these parts — use tweezers or your fingers</text>
 
         {/* Whole flower */}
         <g transform="translate(140, 80)">
@@ -81,7 +81,7 @@ export default function ActivityFlowerDissectDiagram() {
             {[
               { q: 'How many petals?', note: 'Monocots have 3s (orchids, lilies). Dicots have 4s or 5s (roses, hibiscus).', color: '#e879f9' },
               { q: 'What color are the petals?', note: 'Predict: purple/blue = bees, red = birds, white = moths, yellow = many insects.', color: '#60a5fa' },
-              { q: 'Can you find pollen?', note: 'Tap the anthers over dark paper \u2014 you should see yellow or white dust.', color: '#f59e0b' },
+              { q: 'Can you find pollen?', note: 'Tap the anthers over dark paper — you should see yellow or white dust.', color: '#f59e0b' },
               { q: 'Is there a scent?', note: 'Strong sweet = butterfly/moth. None = bird-pollinated. Foul = fly-pollinated.', color: '#22c55e' },
             ].map((item, i) => (
               <g key={i} transform={`translate(0, ${i * 27})`}>

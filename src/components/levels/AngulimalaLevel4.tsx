@@ -29,18 +29,18 @@ export default function AngulimalaLevel4() {
 
   const miniLessons = [
     {
-      title: 'Deep Q-Network \u2014 neural networks as function approximators for RL',
-      concept: `In Level 3 you used Q-tables. But tables do not scale: a 100\u00d7100 grid with 4 actions needs 40,000 entries. A video game with pixel inputs has millions of possible states. **Deep Q-Networks (DQN)** replace the table with a neural network that generalises across states.
+      title: 'Deep Q-Network — neural networks as function approximators for RL',
+      concept: `In Level 3 you used Q-tables. But tables do not scale: a 100×100 grid with 4 actions needs 40,000 entries. A video game with pixel inputs has millions of possible states. **Deep Q-Networks (DQN)** replace the table with a neural network that generalises across states.
 
 Instead of Q[state, action] as a table lookup, a neural network takes the state as input and outputs Q-values for all actions. The network learns to interpolate between seen states, predicting Q-values for states it has never encountered.
 
-DeepMind\u2019s 2015 DQN was the breakthrough: it learned to play 49 Atari games from raw pixels, achieving superhuman performance on 29 of them. The same algorithm \u2014 just a neural network approximating Q-values.
+DeepMind’s 2015 DQN was the breakthrough: it learned to play 49 Atari games from raw pixels, achieving superhuman performance on 29 of them. The same algorithm — just a neural network approximating Q-values.
 
 Key innovations:
 - **Experience replay**: store transitions in a buffer and sample randomly for training (breaks temporal correlations)
 - **Target network**: a slowly-updated copy of the Q-network for stable training targets`,
       analogy: 'A Q-table is like a phonebook: to look up a name, it must be exactly in the book. A DQN is like a search engine: you can type approximate queries ("John Sm...") and it generalises to find the best match. The neural network learns the underlying patterns rather than memorising individual entries.',
-      storyConnection: 'Angulimala\u2019s brain did not store a separate "how to respond" rule for every possible situation. His neural networks generalised: compassion training in one context transferred to novel situations. When he encountered a person he had never met, in a place he had never been, his brain generalised from training and still chose kindness. That is exactly what DQN does.',
+      storyConnection: 'Angulimala’s brain did not store a separate "how to respond" rule for every possible situation. His neural networks generalised: compassion training in one context transferred to novel situations. When he encountered a person he had never met, in a place he had never been, his brain generalised from training and still chose kindness. That is exactly what DQN does.',
       checkQuestion: 'Why is experience replay important? What goes wrong without it?',
       checkAnswer: 'Without experience replay, the network trains on consecutive experiences that are highly correlated (state_1 is similar to state_2). This causes the network to overfit to recent experiences and "forget" earlier lessons. Experience replay breaks these correlations by randomly sampling from a large buffer of past experiences, creating a more diverse training set. It is like reviewing old notes mixed with new ones instead of only studying the most recent lecture.',
       codeIntro: 'Build a DQN with experience replay for a simple environment.',
@@ -166,24 +166,24 @@ for pos in [-3, 0, 3, 5, 7]:
     best = "RIGHT (toward goal)" if np.argmax(qv) == 1 else "LEFT"
     print(f"  Position {pos:+d}: Q(left)={qv[0]:.1f}, Q(right)={qv[1]:.1f} -> {best}")`,
       challenge: 'Add a "temptation" zone at position 2 that gives +3 immediate reward but blocks progress to the goal. Does the DQN learn to avoid it? How does gamma affect this?',
-      successHint: 'You just built the core algorithm behind DeepMind\u2019s Atari breakthroughs. DQN with experience replay and target networks was the first demonstration that deep RL could learn complex behaviours from raw observations. Your version is simplified but contains all the essential ideas.',
+      successHint: 'You just built the core algorithm behind DeepMind’s Atari breakthroughs. DQN with experience replay and target networks was the first demonstration that deep RL could learn complex behaviours from raw observations. Your version is simplified but contains all the essential ideas.',
     },
     {
-      title: 'Reward shaping and intrinsic motivation \u2014 curiosity-driven learning',
+      title: 'Reward shaping and intrinsic motivation — curiosity-driven learning',
       concept: `One problem with RL: what if the reward is sparse? Angulimala might go weeks without a clear positive signal. How does the brain keep learning?
 
-The answer is **intrinsic motivation** \u2014 the brain generates its own reward signal. Curiosity, surprise, and the satisfaction of understanding something new all produce dopamine, independent of external rewards.
+The answer is **intrinsic motivation** — the brain generates its own reward signal. Curiosity, surprise, and the satisfaction of understanding something new all produce dopamine, independent of external rewards.
 
 In AI, this is modelled through **reward shaping**: adding an intrinsic bonus to the external reward:
-\`total_reward = external_reward + \u03b2 \u00d7 intrinsic_reward\`
+\`total_reward = external_reward + β × intrinsic_reward\`
 
-One popular intrinsic reward is **prediction error**: if the agent\u2019s model of the world is surprised by what happens, that surprise is rewarding. This drives exploration toward novel, informative states.
+One popular intrinsic reward is **prediction error**: if the agent’s model of the world is surprised by what happens, that surprise is rewarding. This drives exploration toward novel, informative states.
 
 This models curiosity: you explore not because someone rewards you, but because uncertainty is inherently motivating.`,
-      analogy: 'A child does not need a treat to explore a new room. The novelty itself is rewarding \u2014 what is behind that door? what does this button do? Curiosity is the brain\u2019s intrinsic reward system. When AI researchers add prediction-error bonuses, they are giving machines the same drive that makes children learn without instruction.',
-      storyConnection: 'Angulimala\u2019s early meditation practice probably had little external reward. The internal reward came from curiosity: "What happens if I sit still for an hour? What changes when I wish someone well?" Each new observation about his own mind was intrinsically rewarding, keeping him engaged during the long plateau before external rewards (acceptance, peace) became clear.',
+      analogy: 'A child does not need a treat to explore a new room. The novelty itself is rewarding — what is behind that door? what does this button do? Curiosity is the brain’s intrinsic reward system. When AI researchers add prediction-error bonuses, they are giving machines the same drive that makes children learn without instruction.',
+      storyConnection: 'Angulimala’s early meditation practice probably had little external reward. The internal reward came from curiosity: "What happens if I sit still for an hour? What changes when I wish someone well?" Each new observation about his own mind was intrinsically rewarding, keeping him engaged during the long plateau before external rewards (acceptance, peace) became clear.',
       checkQuestion: 'Can intrinsic motivation lead to bad outcomes? When does curiosity become harmful?',
-      checkAnswer: 'Yes \u2014 intrinsic motivation can drive dangerous exploration if not balanced with external consequences. A curious agent might explore a "cliff" state because it is novel, even though falling is catastrophic. In humans, curiosity without safety constraints leads to risk-taking. This is why intrinsic rewards are usually combined with safety constraints or penalty terms. The \u03b2 parameter controls how much intrinsic motivation influences decisions relative to external consequences.',
+      checkAnswer: 'Yes — intrinsic motivation can drive dangerous exploration if not balanced with external consequences. A curious agent might explore a "cliff" state because it is novel, even though falling is catastrophic. In humans, curiosity without safety constraints leads to risk-taking. This is why intrinsic rewards are usually combined with safety constraints or penalty terms. The β parameter controls how much intrinsic motivation influences decisions relative to external consequences.',
       codeIntro: 'Add curiosity-driven intrinsic reward to an RL agent.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -274,24 +274,24 @@ print()
 print("Curiosity drives exploration to rooms the agent hasn't visited,")
 print("helping it discover all treasures faster.")`,
       challenge: 'What happens when beta = 0.1 (weak curiosity) vs beta = 10.0 (overwhelming curiosity)? Find the optimal beta. Too much curiosity means the agent keeps exploring even after finding the best rooms.',
-      successHint: 'Curiosity-driven learning is an active research area. OpenAI\u2019s Random Network Distillation (RND) and DeepMind\u2019s Go-Explore use intrinsic motivation to solve hard exploration problems. The insight that the brain generates its own reward signals has been one of the most productive bridges between neuroscience and AI.',
+      successHint: 'Curiosity-driven learning is an active research area. OpenAI’s Random Network Distillation (RND) and DeepMind’s Go-Explore use intrinsic motivation to solve hard exploration problems. The insight that the brain generates its own reward signals has been one of the most productive bridges between neuroscience and AI.',
     },
     {
-      title: 'Multi-agent RL \u2014 learning cooperation and social behaviour',
+      title: 'Multi-agent RL — learning cooperation and social behaviour',
       concept: `Angulimala did not transform in isolation. He lived in a community. His behaviour affected others, and their responses affected him. This is **multi-agent reinforcement learning** (MARL).
 
-In MARL, multiple agents share an environment. Each agent\u2019s reward depends not just on its own actions but on what others do. This creates complex dynamics:
+In MARL, multiple agents share an environment. Each agent’s reward depends not just on its own actions but on what others do. This creates complex dynamics:
 - **Cooperation**: agents can achieve more together than alone
-- **Competition**: agents\u2019 goals may conflict
+- **Competition**: agents’ goals may conflict
 - **Social norms**: behaviours that emerge to coordinate without explicit communication
 
-The challenge: from each agent\u2019s perspective, the environment is **non-stationary** \u2014 it changes as other agents learn. This makes learning much harder than single-agent RL.
+The challenge: from each agent’s perspective, the environment is **non-stationary** — it changes as other agents learn. This makes learning much harder than single-agent RL.
 
 We model a simple community where agents choose between selfish and cooperative actions. Cooperation gives lower individual reward but higher total reward.`,
       analogy: 'Think of a traffic intersection. If everyone drives selfishly (never yielding), there are crashes (low total reward). If everyone cooperates (taking turns), traffic flows smoothly (high total reward). But yielding has a cost (you wait longer), so each individual is tempted to be selfish. MARL studies how cooperation emerges despite individual incentives to defect.',
-      storyConnection: 'Angulimala\u2019s community was a multi-agent environment. When he acted violently, others feared him (negative reward for everyone). When he acted kindly, others responded with acceptance (positive reward for everyone). His transformation changed not just his own reward but the entire community\u2019s dynamics. MARL captures this interdependence.',
-      checkQuestion: 'In the Prisoner\u2019s Dilemma, mutual cooperation is better than mutual defection, yet rational agents defect. How do real communities achieve cooperation?',
-      checkAnswer: 'Through repeated interactions (iterated Prisoner\u2019s Dilemma), reputation systems, reciprocity ("I cooperate because you cooperated last time"), and punishment of defectors. Robert Axelrod\u2019s tournaments showed that "Tit-for-Tat" (cooperate first, then mirror the other\u2019s last action) is remarkably effective. In human societies, social norms, gossip, and legal systems serve the same function as Tit-for-Tat: rewarding cooperation and punishing defection.',
+      storyConnection: 'Angulimala’s community was a multi-agent environment. When he acted violently, others feared him (negative reward for everyone). When he acted kindly, others responded with acceptance (positive reward for everyone). His transformation changed not just his own reward but the entire community’s dynamics. MARL captures this interdependence.',
+      checkQuestion: 'In the Prisoner’s Dilemma, mutual cooperation is better than mutual defection, yet rational agents defect. How do real communities achieve cooperation?',
+      checkAnswer: 'Through repeated interactions (iterated Prisoner’s Dilemma), reputation systems, reciprocity ("I cooperate because you cooperated last time"), and punishment of defectors. Robert Axelrod’s tournaments showed that "Tit-for-Tat" (cooperate first, then mirror the other’s last action) is remarkably effective. In human societies, social norms, gossip, and legal systems serve the same function as Tit-for-Tat: rewarding cooperation and punishing defection.',
       codeIntro: 'Simulate a community of RL agents learning cooperation.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -371,25 +371,25 @@ if np.mean(coop_rate_history[-30:]) > 0.5:
 else:
     print("Defection dominated — the social dilemma was not resolved.")
 print("Try changing the payoff structure to see what enables cooperation.")`,
-      challenge: 'Add a "punishment" mechanism: if a defector is surrounded by cooperators, it gets -0.5 penalty. Does this change the outcome? This models social enforcement \u2014 the mechanism most human communities use to maintain cooperation.',
-      successHint: 'Multi-agent RL is at the frontier of AI research. OpenAI\u2019s hide-and-seek agents, DeepMind\u2019s StarCraft II AI, and traffic optimisation systems all use MARL. The social dilemma \u2014 individual vs collective reward \u2014 is one of the deepest problems in both AI and human civilisation.',
+      challenge: 'Add a "punishment" mechanism: if a defector is surrounded by cooperators, it gets -0.5 penalty. Does this change the outcome? This models social enforcement — the mechanism most human communities use to maintain cooperation.',
+      successHint: 'Multi-agent RL is at the frontier of AI research. OpenAI’s hide-and-seek agents, DeepMind’s StarCraft II AI, and traffic optimisation systems all use MARL. The social dilemma — individual vs collective reward — is one of the deepest problems in both AI and human civilisation.',
     },
     {
-      title: 'Network connectivity analysis \u2014 graph theory meets neuroscience',
-      concept: `The brain is not just a collection of regions \u2014 it is a **network**. Regions are connected by white matter tracts, and the pattern of connections (the **connectome**) determines function.
+      title: 'Network connectivity analysis — graph theory meets neuroscience',
+      concept: `The brain is not just a collection of regions — it is a **network**. Regions are connected by white matter tracts, and the pattern of connections (the **connectome**) determines function.
 
 Graph theory provides the tools to analyse brain networks:
 - **Nodes** = brain regions
 - **Edges** = connections between regions
 - **Degree** = how many connections a node has (hub regions have high degree)
 - **Path length** = shortest route between two nodes
-- **Clustering coefficient** = how interconnected a node\u2019s neighbours are
+- **Clustering coefficient** = how interconnected a node’s neighbours are
 
-Meditation studies have found that long-term practice increases **functional connectivity** between the prefrontal cortex and other regions, creating more integrated brain networks. The brain becomes more "small-world" \u2014 well-connected with short path lengths.`,
+Meditation studies have found that long-term practice increases **functional connectivity** between the prefrontal cortex and other regions, creating more integrated brain networks. The brain becomes more "small-world" — well-connected with short path lengths.`,
       analogy: 'Think of the brain as an airline network. Major airports (hub regions like the prefrontal cortex) have many connections. Small airports (specialised regions) have few. The network is efficient when you can fly between any two cities in a few hops (short path length) while nearby cities are well-connected (high clustering). Meditation seems to add new "routes" to the network, making it more efficient.',
-      storyConnection: 'Angulimala\u2019s transformation changed his brain\u2019s network structure. Before: the amygdala was a hub (fear drove many connections). After: the prefrontal cortex became more central (self-control coordinated more regions). The graph-theoretic properties of his connectome shifted from a fear-dominated network to an integration-dominated one.',
+      storyConnection: 'Angulimala’s transformation changed his brain’s network structure. Before: the amygdala was a hub (fear drove many connections). After: the prefrontal cortex became more central (self-control coordinated more regions). The graph-theoretic properties of his connectome shifted from a fear-dominated network to an integration-dominated one.',
       checkQuestion: 'What is the "small-world" property and why is it beneficial for brains?',
-      checkAnswer: 'A small-world network has high clustering (like a regular lattice \u2014 neighbours are well-connected) and short path lengths (like a random network \u2014 you can reach any node in a few hops). This combines local specialisation (clustered processing) with global integration (fast communication between distant regions). Real brains are small-world: nearby neurons form dense local circuits, while long-range white matter tracts connect distant regions. This architecture maximises computational power while minimising wiring cost.',
+      checkAnswer: 'A small-world network has high clustering (like a regular lattice — neighbours are well-connected) and short path lengths (like a random network — you can reach any node in a few hops). This combines local specialisation (clustered processing) with global integration (fast communication between distant regions). Real brains are small-world: nearby neurons form dense local circuits, while long-range white matter tracts connect distant regions. This architecture maximises computational power while minimising wiring cost.',
       codeIntro: 'Analyse brain network properties before and after meditation practice.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -486,19 +486,19 @@ print()
 print("The network shifted from amygdala-dominated (fear)")
 print("to PFC-dominated (self-regulation) — with greater overall integration.")`,
       challenge: 'Compute the "small-world index" for both networks: S = (C/C_random) / (L/L_random) where C is clustering and L is path length. A small-world network has S >> 1. Does meditation increase the small-world property?',
-      successHint: 'Connectome analysis is a major area of neuroscience. The Human Connectome Project has mapped the wiring of hundreds of brains. Graph theory provides the mathematical tools to compare healthy, diseased, and transformed brains. You just applied these tools to a meditation study \u2014 the same approach used in published research.',
+      successHint: 'Connectome analysis is a major area of neuroscience. The Human Connectome Project has mapped the wiring of hundreds of brains. Graph theory provides the mathematical tools to compare healthy, diseased, and transformed brains. You just applied these tools to a meditation study — the same approach used in published research.',
     },
     {
-      title: 'Meta-learning \u2014 learning to learn (the ultimate neuroplasticity)',
-      concept: `The deepest form of neuroplasticity is not learning a specific skill \u2014 it is **learning to learn better**. After years of meditation, Angulimala did not just master compassion; he became better at acquiring ANY new skill. His brain had optimised its own learning machinery.
+      title: 'Meta-learning — learning to learn (the ultimate neuroplasticity)',
+      concept: `The deepest form of neuroplasticity is not learning a specific skill — it is **learning to learn better**. After years of meditation, Angulimala did not just master compassion; he became better at acquiring ANY new skill. His brain had optimised its own learning machinery.
 
 In AI, this is called **meta-learning** or "learning to learn." The idea: train a model on many different tasks, so it learns not just any single task but HOW to learn tasks quickly.
 
 The simplest version: **MAML (Model-Agnostic Meta-Learning)** trains a neural network to find initial weights that can be quickly fine-tuned for any new task. After meta-training, the model can learn a brand new task from just a few examples.
 
 This mirrors how experienced meditators can rapidly adapt to new practices: their brains have meta-learned efficient learning strategies.`,
-      analogy: 'Learning a specific skill is like learning one language. Meta-learning is like becoming a skilled linguist who can learn ANY new language quickly. The linguist has not memorised every language \u2014 they have learned the patterns that underlie all languages: grammar structures, phoneme categories, word order rules. Meta-learning gives AI the same "linguist ability" for any type of task.',
-      storyConnection: 'At the start, Angulimala struggled with every aspect of his new life. By the end, he could adapt quickly to new challenges because his brain had learned HOW to learn. This is the meta-level of neuroplasticity: not just changing specific pathways, but improving the brain\u2019s general capacity for change. The Buddha\u2019s training was, in effect, a meta-learning curriculum.',
+      analogy: 'Learning a specific skill is like learning one language. Meta-learning is like becoming a skilled linguist who can learn ANY new language quickly. The linguist has not memorised every language — they have learned the patterns that underlie all languages: grammar structures, phoneme categories, word order rules. Meta-learning gives AI the same "linguist ability" for any type of task.',
+      storyConnection: 'At the start, Angulimala struggled with every aspect of his new life. By the end, he could adapt quickly to new challenges because his brain had learned HOW to learn. This is the meta-level of neuroplasticity: not just changing specific pathways, but improving the brain’s general capacity for change. The Buddha’s training was, in effect, a meta-learning curriculum.',
       checkQuestion: 'How is meta-learning different from transfer learning?',
       checkAnswer: 'Transfer learning takes a model trained on task A and fine-tunes it for task B. It works because tasks A and B share some features. Meta-learning goes further: it trains on many tasks (A, B, C, D...) specifically to optimise the ability to learn NEW tasks quickly. The meta-learned model does not just transfer knowledge; it transfers the learning PROCESS itself. Transfer learning is like using your French to help learn Spanish. Meta-learning is like becoming good at language learning itself.',
       codeIntro: 'Implement a simplified meta-learning loop that learns to learn new tasks.',
@@ -619,12 +619,12 @@ print()
 print("Meta-learning finds initial weights that ADAPT quickly —")
 print("just as a practiced meditator's brain can learn any new")
 print("skill faster because it has meta-learned HOW to learn.")`,
-      challenge: 'Increase the range of task parameters (a from -10 to 10). Does meta-learning still help? What about tasks that are completely different (e.g., quadratic instead of linear)? Meta-learning struggles when the task distribution is too diverse \u2014 just as a person cannot meta-learn equally well across all possible domains.',
-      successHint: 'You just implemented the core idea behind MAML, one of the most influential papers in modern AI (Finn et al., 2017). Meta-learning bridges neuroscience (the brain\u2019s ability to learn to learn) and AI (systems that adapt from few examples). It is the computational formulation of the deepest kind of neuroplasticity \u2014 the kind that made Angulimala not just compassionate, but fundamentally adaptable.',
+      challenge: 'Increase the range of task parameters (a from -10 to 10). Does meta-learning still help? What about tasks that are completely different (e.g., quadratic instead of linear)? Meta-learning struggles when the task distribution is too diverse — just as a person cannot meta-learn equally well across all possible domains.',
+      successHint: 'You just implemented the core idea behind MAML, one of the most influential papers in modern AI (Finn et al., 2017). Meta-learning bridges neuroscience (the brain’s ability to learn to learn) and AI (systems that adapt from few examples). It is the computational formulation of the deepest kind of neuroplasticity — the kind that made Angulimala not just compassionate, but fundamentally adaptable.',
     },
     {
-      title: 'Capstone \u2014 the complete transformation model',
-      concept: `Let us build a complete computational model of Angulimala\u2019s transformation, integrating everything from all four levels:
+      title: 'Capstone — the complete transformation model',
+      concept: `Let us build a complete computational model of Angulimala’s transformation, integrating everything from all four levels:
 
 1. **Neural pathway dynamics** (Level 1): exponential growth/decay of pathways
 2. **Habit loop model** (Level 1): cue-routine-reward with dopamine
@@ -635,10 +635,10 @@ print("skill faster because it has meta-learned HOW to learn.")`,
 The model tracks Angulimala through 365 days, simulating daily episodes of practice, relapse risk, community interaction, and brain network changes. It outputs a comprehensive dashboard showing the transformation from all perspectives simultaneously.
 
 This is a synthesis project: no new concepts, but the challenge of integrating everything into a coherent whole.`,
-      analogy: 'Each level gave you one lens to view the same phenomenon. Level 1 was a magnifying glass (individual neurons). Level 2 was a microscope (network learning). Level 3 was an MRI scanner (brain regions). Level 4 was a satellite view (whole-brain networks). The capstone combines all lenses into a single coherent picture \u2014 like a medical imaging suite that fuses CT, MRI, PET, and EEG into one patient model.',
-      storyConnection: 'Angulimala\u2019s story is ultimately about a single question: can a person fundamentally change? The answer from neuroscience is unequivocal: yes. The brain is plastic. Pathways rewire. Habits replace. Networks reorganise. The Buddha knew this 2,500 years ago. Computational neuroscience has now given us the mathematical tools to model it, measure it, and build AI systems inspired by it.',
-      checkQuestion: 'If we could build a perfect computational model of neuroplasticity, could we predict exactly how long a person\u2019s transformation would take?',
-      checkAnswer: 'No, because the model would need to account for genetics, epigenetics, life experiences, social environment, nutrition, sleep, and countless other factors. Brain plasticity is deterministic at the molecular level but effectively stochastic at the behavioural level due to its complexity. We can model averages and trends, but individual trajectories are inherently unpredictable. This is the boundary between science (understanding mechanisms) and wisdom (knowing that each person\u2019s path is unique).',
+      analogy: 'Each level gave you one lens to view the same phenomenon. Level 1 was a magnifying glass (individual neurons). Level 2 was a microscope (network learning). Level 3 was an MRI scanner (brain regions). Level 4 was a satellite view (whole-brain networks). The capstone combines all lenses into a single coherent picture — like a medical imaging suite that fuses CT, MRI, PET, and EEG into one patient model.',
+      storyConnection: 'Angulimala’s story is ultimately about a single question: can a person fundamentally change? The answer from neuroscience is unequivocal: yes. The brain is plastic. Pathways rewire. Habits replace. Networks reorganise. The Buddha knew this 2,500 years ago. Computational neuroscience has now given us the mathematical tools to model it, measure it, and build AI systems inspired by it.',
+      checkQuestion: 'If we could build a perfect computational model of neuroplasticity, could we predict exactly how long a person’s transformation would take?',
+      checkAnswer: 'No, because the model would need to account for genetics, epigenetics, life experiences, social environment, nutrition, sleep, and countless other factors. Brain plasticity is deterministic at the molecular level but effectively stochastic at the behavioural level due to its complexity. We can model averages and trends, but individual trajectories are inherently unpredictable. This is the boundary between science (understanding mechanisms) and wisdom (knowing that each person’s path is unique).',
       codeIntro: 'Build the complete transformation dashboard: 365 days, 5 metrics, 1 story.',
       code: `import numpy as np
 import matplotlib.pyplot as plt

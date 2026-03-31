@@ -31,7 +31,7 @@ export default function OrchidPigmentDiagram() {
           <text x="80" y="38" textAnchor="middle" fontSize="9" fill="#94a3b8">Absorb: green light</text>
           <rect x="20" y="44" width="120" height="10" rx="3" fill="#22c55e" opacity="0.3" />
           <line x1="20" y1="49" x2="140" y2="49" stroke="#22c55e" strokeWidth="2" strokeDasharray="4 3" />
-          <text x="80" y="65" textAnchor="middle" fontSize="8" fill="#6b7280">\u2190 absorbed \u2192</text>
+          <text x="80" y="65" textAnchor="middle" fontSize="8" fill="#6b7280">← absorbed →</text>
 
           {/* Reflected colors */}
           <text x="80" y="82" textAnchor="middle" fontSize="9" fill="#e2e8f0">Reflect:</text>
@@ -51,7 +51,7 @@ export default function OrchidPigmentDiagram() {
           <text x="80" y="38" textAnchor="middle" fontSize="9" fill="#94a3b8">Absorb: blue-violet light</text>
           <rect x="20" y="44" width="120" height="10" rx="3" fill="#6366f1" opacity="0.3" />
           <line x1="20" y1="49" x2="140" y2="49" stroke="#6366f1" strokeWidth="2" strokeDasharray="4 3" />
-          <text x="80" y="65" textAnchor="middle" fontSize="8" fill="#6b7280">\u2190 absorbed \u2192</text>
+          <text x="80" y="65" textAnchor="middle" fontSize="8" fill="#6b7280">← absorbed →</text>
 
           <text x="80" y="82" textAnchor="middle" fontSize="9" fill="#e2e8f0">Reflect:</text>
           <circle cx="40" cy="100" r="12" fill="#eab308" opacity="0.8" />
@@ -70,7 +70,7 @@ export default function OrchidPigmentDiagram() {
           <text x="80" y="38" textAnchor="middle" fontSize="9" fill="#94a3b8">Absorb: green-yellow light</text>
           <rect x="20" y="44" width="120" height="10" rx="3" fill="#84cc16" opacity="0.3" />
           <line x1="20" y1="49" x2="140" y2="49" stroke="#84cc16" strokeWidth="2" strokeDasharray="4 3" />
-          <text x="80" y="65" textAnchor="middle" fontSize="8" fill="#6b7280">\u2190 absorbed \u2192</text>
+          <text x="80" y="65" textAnchor="middle" fontSize="8" fill="#6b7280">← absorbed →</text>
 
           <text x="80" y="82" textAnchor="middle" fontSize="9" fill="#e2e8f0">Reflect:</text>
           <circle cx="40" cy="100" r="12" fill="#dc2626" opacity="0.8" />
@@ -105,7 +105,7 @@ export default function OrchidPigmentDiagram() {
           {/* Reflected (purple) - bounces back */}
           <line x1="80" y1="45" x2="140" y2="25" stroke="#a855f7" strokeWidth="2" markerEnd="url(#arrowP)" />
           <text x="145" y="20" textAnchor="start" fontSize="10" fill="#a855f7">Purple reflected</text>
-          <text x="145" y="32" textAnchor="start" fontSize="8" fill="#94a3b8">\u2192 what your eye sees</text>
+          <text x="145" y="32" textAnchor="start" fontSize="8" fill="#94a3b8">→ what your eye sees</text>
         </g>
 
         <defs>

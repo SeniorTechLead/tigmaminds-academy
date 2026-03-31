@@ -11,7 +11,7 @@ export default function LeopardMarkRecaptureDiagram() {
 
         {/* Title */}
         <text x="300" y="26" textAnchor="middle" fontSize="13" className="fill-gray-200" fontWeight="700">
-          Mark-Recapture \u2014 Counting Without Seeing Every Animal
+          Mark-Recapture — Counting Without Seeing Every Animal
         </text>
 
         {/* Round 1 - Capture */}
@@ -83,23 +83,23 @@ export default function LeopardMarkRecaptureDiagram() {
         ))}
 
         <text x="450" y="210" textAnchor="middle" fontSize="10" className="fill-gray-300">
-          Recaptured 6 \u2014 found 2 with marks
+          Recaptured 6 — found 2 with marks
         </text>
 
         {/* Arrow between rounds */}
-        <text x="295" y="130" textAnchor="middle" fontSize="18" className="fill-gray-500">\u2192</text>
+        <text x="295" y="130" textAnchor="middle" fontSize="18" className="fill-gray-500">→</text>
         <text x="295" y="148" textAnchor="middle" fontSize="9" className="fill-gray-500">Wait</text>
         <text x="295" y="158" textAnchor="middle" fontSize="9" className="fill-gray-500">days</text>
 
         {/* Formula section */}
         <rect x="15" y="226" width="570" height="120" rx="6" className="fill-indigo-950/40" />
         <text x="300" y="248" textAnchor="middle" fontSize="12" className="fill-indigo-300" fontWeight="700">
-          Lincoln\u2013Petersen Formula
+          Lincoln–Petersen Formula
         </text>
 
         {/* Formula */}
         <text x="300" y="280" textAnchor="middle" fontSize="16" className="fill-white" fontWeight="700">
-          N = (M \u00d7 C) / R
+          N = (M × C) / R
         </text>
 
         {/* Variable explanations */}
@@ -115,10 +115,10 @@ export default function LeopardMarkRecaptureDiagram() {
         {/* Calculation */}
         <rect x="15" y="356" width="570" height="50" rx="6" className="fill-slate-800/60" />
         <text x="300" y="376" textAnchor="middle" fontSize="13" className="fill-white" fontWeight="600">
-          N = (4 \u00d7 6) / 2 = 24 / 2 = 12 estimated leopards
+          N = (4 × 6) / 2 = 24 / 2 = 12 estimated leopards
         </text>
         <text x="300" y="394" textAnchor="middle" fontSize="10" className="fill-green-400">
-          \u2713 Matches the actual 12 animals in the forest above!
+          ✓ Matches the actual 12 animals in the forest above!
         </text>
 
         {/* Key insight */}

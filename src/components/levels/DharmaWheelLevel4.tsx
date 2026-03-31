@@ -23,11 +23,11 @@ export default function DharmaWheelLevel4() {
 
   const miniLessons = [
     {
-      title: 'Capstone: Flywheel grid storage simulator \u2014 system architecture',
-      concept: `In Levels 1\u20133 you mastered friction, torque, angular momentum, gyroscopic effects, gear trains, materials limits, and numerical simulation. Now you build the **Flywheel Grid Storage Simulator** \u2014 a complete model of a flywheel energy storage system connected to a power grid.
+      title: 'Capstone: Flywheel grid storage simulator — system architecture',
+      concept: `In Levels 1–3 you mastered friction, torque, angular momentum, gyroscopic effects, gear trains, materials limits, and numerical simulation. Now you build the **Flywheel Grid Storage Simulator** — a complete model of a flywheel energy storage system connected to a power grid.
 
 The system has five subsystems:
-1. **Rotor**: carbon fibre flywheel, stores energy as KE = \u00BDI\u03C9\u00B2
+1. **Rotor**: carbon fibre flywheel, stores energy as KE = ½Iω²
 2. **Motor/Generator**: converts between electrical power and mechanical torque
 3. **Bearing system**: magnetic levitation with minimal friction losses
 4. **Power electronics**: controls charge/discharge rate, frequency matching
@@ -36,12 +36,12 @@ The system has five subsystems:
 The simulation pipeline:
 - Grid sends power demand signal (positive = deliver, negative = absorb)
 - Power electronics convert demand to motor/generator torque command
-- Motor/generator applies torque: \u03C4 = I\u03B1 changes \u03C9
-- Rotor energy state updates: KE = \u00BDI\u03C9\u00B2
+- Motor/generator applies torque: τ = Iα changes ω
+- Rotor energy state updates: KE = ½Iω²
 - Losses calculated: bearing friction, windage, electrical conversion
 - State of charge reported: SOC = (KE - KE_min) / (KE_max - KE_min)`,
-      analogy: 'The flywheel grid system is like a reservoir dam for electricity. Solar panels are the rain (energy in during sunny hours). The grid is the city downstream (constant demand). The flywheel is the reservoir (storing excess, releasing during shortage). Your simulator models the dam\u2019s water level (KE), inflow (charging), outflow (discharging), and evaporation (losses).',
-      storyConnection: 'The capstone project embodies the Dharma Wheel\u2019s deepest teaching: energy, like wisdom, must be stored, transmitted, and released at the right time. The flywheel stores excess solar energy during the day and releases it at night \u2014 the physics of impermanence put to practical use.',
+      analogy: 'The flywheel grid system is like a reservoir dam for electricity. Solar panels are the rain (energy in during sunny hours). The grid is the city downstream (constant demand). The flywheel is the reservoir (storing excess, releasing during shortage). Your simulator models the dam’s water level (KE), inflow (charging), outflow (discharging), and evaporation (losses).',
+      storyConnection: 'The capstone project embodies the Dharma Wheel’s deepest teaching: energy, like wisdom, must be stored, transmitted, and released at the right time. The flywheel stores excess solar energy during the day and releases it at night — the physics of impermanence put to practical use.',
       checkQuestion: 'Why are flywheels better than batteries for rapid grid stabilisation (seconds), while batteries are better for long-duration storage (hours)?',
       checkAnswer: 'Flywheels respond in milliseconds (mechanical inertia is instant), have unlimited charge/discharge cycles, and deliver high power for short bursts. But they self-discharge (bearing friction) and are expensive per kWh. Batteries respond in seconds (electrochemistry is slower), degrade with cycling, but self-discharge slowly and are cheaper per kWh for large capacities. The ideal grid uses both: flywheels for seconds-to-minutes stabilisation, batteries for hours-to-days storage.',
       codeIntro: 'Build the rotor and motor/generator subsystems.',
@@ -136,28 +136,28 @@ for t in range(0, 301, 30):
     for _ in range(29):
         motor.charge(rotor, 50000, dt)`,
       challenge: 'Add bearing friction (0.1% of KE per second) and windage losses. How do these affect the charge time and round-trip efficiency?',
-      successHint: 'The rotor and motor/generator are the core of any flywheel system. Understanding their physics \u2014 KE = \u00BDI\u03C9\u00B2, P = \u03C4\u03C9, and material stress limits \u2014 is the foundation for the complete grid storage simulator.',
+      successHint: 'The rotor and motor/generator are the core of any flywheel system. Understanding their physics — KE = ½Iω², P = τω, and material stress limits — is the foundation for the complete grid storage simulator.',
     },
     {
-      title: 'Grid demand response \u2014 matching supply to demand in real time',
+      title: 'Grid demand response — matching supply to demand in real time',
       concept: `A power grid must balance supply and demand at every instant. If demand exceeds supply, frequency drops below 50 Hz (or 60 Hz in the US). If supply exceeds demand, frequency rises.
 
 Flywheels are ideal for **frequency regulation** because they respond in milliseconds:
-- Grid frequency drops \u2192 flywheel discharges, injecting power
-- Grid frequency rises \u2192 flywheel charges, absorbing power
+- Grid frequency drops → flywheel discharges, injecting power
+- Grid frequency rises → flywheel charges, absorbing power
 
 The control algorithm:
 1. Measure grid frequency: f_grid
-2. Calculate error: \u0394f = f_grid - f_target
-3. Calculate power response: P = K_p \u00D7 \u0394f (proportional control)
+2. Calculate error: Δf = f_grid - f_target
+3. Calculate power response: P = K_p × Δf (proportional control)
 4. Command motor/generator: positive P = discharge, negative P = charge
 5. Respect limits: SOC_min < SOC < SOC_max
 
-Real grid frequency deviations are small (typically \u00B10.1 Hz), but they happen constantly. A flywheel\u2019s instant response keeps the grid stable during the seconds before slower generators (gas turbines) can ramp up.`,
+Real grid frequency deviations are small (typically ±0.1 Hz), but they happen constantly. A flywheel’s instant response keeps the grid stable during the seconds before slower generators (gas turbines) can ramp up.`,
       analogy: 'Grid frequency regulation is like balancing on a tightrope. Every moment, the wind (demand changes) pushes you. Your balance pole (flywheel) shifts weight instantly to keep you centred. If you had to wait for a helper to bring you a new pole (gas turbine ramping up), you would fall long before it arrived.',
-      storyConnection: 'The Middle Way in Buddhism teaches balance \u2014 neither excess nor deficiency. Grid frequency regulation is the engineering embodiment: the system must maintain perfect balance between generation and consumption, moment by moment. The flywheel is the physical manifestation of the Middle Way, absorbing excess and supplying deficiency.',
-      checkQuestion: 'Grid frequency drops from 50.00 Hz to 49.95 Hz. If the flywheel\u2019s proportional gain is K_p = 1 MW/Hz, how much power does it inject?',
-      checkAnswer: 'P = K_p \u00D7 \u0394f = 1,000,000 \u00D7 (50.00 - 49.95) = 1,000,000 \u00D7 0.05 = 50,000 W = 50 kW. This happens within milliseconds of detecting the frequency drop. A gas turbine would take 30\u201360 seconds to deliver the same response. The flywheel bridges that gap.',
+      storyConnection: 'The Middle Way in Buddhism teaches balance — neither excess nor deficiency. Grid frequency regulation is the engineering embodiment: the system must maintain perfect balance between generation and consumption, moment by moment. The flywheel is the physical manifestation of the Middle Way, absorbing excess and supplying deficiency.',
+      checkQuestion: 'Grid frequency drops from 50.00 Hz to 49.95 Hz. If the flywheel’s proportional gain is K_p = 1 MW/Hz, how much power does it inject?',
+      checkAnswer: 'P = K_p × Δf = 1,000,000 × (50.00 - 49.95) = 1,000,000 × 0.05 = 50,000 W = 50 kW. This happens within milliseconds of detecting the frequency drop. A gas turbine would take 30–60 seconds to deliver the same response. The flywheel bridges that gap.',
       codeIntro: 'Simulate 24 hours of grid demand with solar generation and flywheel stabilisation.',
       code: `import numpy as np
 
@@ -231,8 +231,8 @@ print(f"  Cycles:        ~{sum(1 for i in range(1,len(soc_log)) if (soc_log[i]-s
       successHint: 'Grid stabilisation is where flywheel physics meets energy policy. Every country transitioning to renewable energy needs storage solutions that can handle both the millisecond-to-second fluctuations (flywheels) and the hour-to-day imbalances (batteries).',
     },
     {
-      title: 'Safety engineering \u2014 when flywheels fail',
-      concept: `A flywheel spinning at 50,000 RPM stores enormous energy. If the rotor fails (crack, manufacturing defect, bearing seizure), that energy is released in milliseconds \u2014 an explosion.
+      title: 'Safety engineering — when flywheels fail',
+      concept: `A flywheel spinning at 50,000 RPM stores enormous energy. If the rotor fails (crack, manufacturing defect, bearing seizure), that energy is released in milliseconds — an explosion.
 
 **Failure modes**:
 1. **Rim burst**: centripetal stress exceeds tensile strength. Fragments fly outward at rim speed (can exceed Mach 1)
@@ -256,10 +256,10 @@ print(f"  Cycles:        ~{sum(1 for i in range(1,len(soc_log)) if (soc_log[i]-s
 - Temperature sensors detect bearing degradation
 - Crack detection using acoustic emission sensors
 - Automated shutdown if any parameter exceeds threshold`,
-      analogy: 'A spinning flywheel is a loaded spring \u2014 energy is stored and can be released violently. A bullet stores about 1800 J. A 500 kWh flywheel stores 1.8 billion joules \u2014 a million bullets worth of energy in a single spinning disc. The containment vessel is the equivalent of the gun barrel: it must direct the energy safely if things go wrong.',
-      storyConnection: 'The Dharma Wheel is depicted as indestructible, but engineering teaches humility: every real wheel has a failure mode. Understanding failure \u2014 predicting it, containing it, preventing it \u2014 is what separates a working flywheel from a bomb. The Buddhist teaching of impermanence applies even to the machines we build.',
+      analogy: 'A spinning flywheel is a loaded spring — energy is stored and can be released violently. A bullet stores about 1800 J. A 500 kWh flywheel stores 1.8 billion joules — a million bullets worth of energy in a single spinning disc. The containment vessel is the equivalent of the gun barrel: it must direct the energy safely if things go wrong.',
+      storyConnection: 'The Dharma Wheel is depicted as indestructible, but engineering teaches humility: every real wheel has a failure mode. Understanding failure — predicting it, containing it, preventing it — is what separates a working flywheel from a bomb. The Buddhist teaching of impermanence applies even to the machines we build.',
       checkQuestion: 'A 50 kg carbon fibre rotor (radius 0.3 m) at 50,000 RPM bursts. What is the kinetic energy of the fragments? What thickness of steel containment vessel is needed?',
-      checkAnswer: 'I = \u00BDmr\u00B2 = \u00BD(50)(0.09) = 2.25 kg\u00B7m\u00B2. \u03C9 = 50000 \u00D7 2\u03C0/60 = 5236 rad/s. KE = \u00BD(2.25)(5236\u00B2) = 30.8 MJ = 7.4 kg TNT equivalent. For containment, empirical rules suggest ~2 cm of high-strength steel per 10 MJ for carbon fibre fragments (which are less penetrating than steel fragments). So ~6 cm minimum, plus safety factor = ~10 cm of steel. This adds significant mass and cost to the system.',
+      checkAnswer: 'I = ½mr² = ½(50)(0.09) = 2.25 kg·m². ω = 50000 × 2π/60 = 5236 rad/s. KE = ½(2.25)(5236²) = 30.8 MJ = 7.4 kg TNT equivalent. For containment, empirical rules suggest ~2 cm of high-strength steel per 10 MJ for carbon fibre fragments (which are less penetrating than steel fragments). So ~6 cm minimum, plus safety factor = ~10 cm of steel. This adds significant mass and cost to the system.',
       codeIntro: 'Model flywheel failure and containment requirements.',
       code: `import numpy as np
 
@@ -332,16 +332,16 @@ print(f"  Shutdown threshold: 0.1 mm")
 print(f"  Healthy: {'PASS' if vib_h < 0.05 else 'ALARM'}")
 print(f"  Cracked: {'PASS' if vib_c < 0.05 else ('ALARM' if vib_c < 0.1 else 'SHUTDOWN')}")`,
       challenge: 'Model a cascading failure: bearing starts heating, friction increases exponentially, rotor vibration grows. At what point should the emergency brake engage to prevent burst? Plot the timeline from first warning to potential failure.',
-      successHint: 'Safety engineering is not optional \u2014 it is the difference between a useful machine and a disaster. Every high-energy rotating system requires failure analysis, containment design, and real-time monitoring. Engineers who ignore failure modes endanger lives.',
+      successHint: 'Safety engineering is not optional — it is the difference between a useful machine and a disaster. Every high-energy rotating system requires failure analysis, containment design, and real-time monitoring. Engineers who ignore failure modes endanger lives.',
     },
     {
-      title: 'Renewable energy integration \u2014 solar + flywheel hybrid',
+      title: 'Renewable energy integration — solar + flywheel hybrid',
       concept: `Solar power is intermittent: it varies with clouds, time of day, and season. Flywheels smooth this intermittency:
 
 **Short-term smoothing** (seconds to minutes):
-- Cloud passes over solar farm \u2192 output drops 50% in 10 seconds
+- Cloud passes over solar farm → output drops 50% in 10 seconds
 - Flywheel delivers stored energy during the dip
-- Cloud passes \u2192 solar output recovers \u2192 flywheel recharges
+- Cloud passes → solar output recovers → flywheel recharges
 - Grid sees smooth, steady power
 
 **Ramp rate control**:
@@ -351,17 +351,17 @@ print(f"  Cracked: {'PASS' if vib_c < 0.05 else ('ALARM' if vib_c < 0.1 else 'SH
 
 **Peak shifting** (minutes to hours):
 - Store excess solar at noon
-- Release during evening demand peak (4\u20138 PM)
+- Release during evening demand peak (4–8 PM)
 - Reduces need for gas "peaker" plants
 
 **System sizing**:
-- For cloud smoothing: 5\u201310 minutes of storage at rated power
-- For peak shifting: 2\u20134 hours (better suited to batteries)
+- For cloud smoothing: 5–10 minutes of storage at rated power
+- For peak shifting: 2–4 hours (better suited to batteries)
 - Hybrid: flywheel for fast response + battery for long duration`,
-      analogy: 'A flywheel paired with solar panels is like a shock absorber on a car. The road (solar output) is bumpy (clouds). Without the shock absorber, every bump jolts the passengers (grid). With it, the ride is smooth. The shock absorber doesn\u2019t change the road \u2014 it just filters out the bumps.',
-      storyConnection: 'The Dharma Wheel\u2019s eightfold path is a system \u2014 no single spoke works alone. Similarly, a renewable energy system needs generation (solar), storage (flywheel), distribution (grid), and control (power electronics) working together. The capstone integrates all four.',
+      analogy: 'A flywheel paired with solar panels is like a shock absorber on a car. The road (solar output) is bumpy (clouds). Without the shock absorber, every bump jolts the passengers (grid). With it, the ride is smooth. The shock absorber doesn’t change the road — it just filters out the bumps.',
+      storyConnection: 'The Dharma Wheel’s eightfold path is a system — no single spoke works alone. Similarly, a renewable energy system needs generation (solar), storage (flywheel), distribution (grid), and control (power electronics) working together. The capstone integrates all four.',
       checkQuestion: 'A 100 MW solar farm experiences a 30-second cloud event where output drops to 40 MW. If the flywheel has 50 MWh capacity and 20 MW maximum power, can it fully compensate?',
-      checkAnswer: 'The deficit is 100 - 40 = 60 MW for 30 seconds. Energy needed: 60 MW \u00D7 30s = 1800 MJ = 0.5 MWh. The flywheel has 50 MWh capacity (plenty). But the max power is 20 MW, not 60 MW. So the flywheel can only compensate 20/60 = 33% of the deficit. The grid would still see a 40 MW dip. Solution: size the flywheel for 60 MW peak power, even though the energy requirement is small.',
+      checkAnswer: 'The deficit is 100 - 40 = 60 MW for 30 seconds. Energy needed: 60 MW × 30s = 1800 MJ = 0.5 MWh. The flywheel has 50 MWh capacity (plenty). But the max power is 20 MW, not 60 MW. So the flywheel can only compensate 20/60 = 33% of the deficit. The grid would still see a 40 MW dip. Solution: size the flywheel for 60 MW peak power, even though the energy requirement is small.',
       codeIntro: 'Simulate a solar farm + flywheel system handling real cloud events.',
       code: `import numpy as np
 
@@ -457,22 +457,22 @@ print(f"The flywheel smooths {smoothing:.0f}% of solar variability.")`,
       successHint: 'Solar + flywheel integration is one of the most active areas of energy engineering. Every large solar farm needs some form of fast energy storage to smooth output. Flywheels are increasingly being deployed for this role.',
     },
     {
-      title: 'Control systems \u2014 PID controller for flywheel speed',
-      concept: `Maintaining precise flywheel speed requires a **PID controller** \u2014 the most widely used control algorithm in engineering.
+      title: 'Control systems — PID controller for flywheel speed',
+      concept: `Maintaining precise flywheel speed requires a **PID controller** — the most widely used control algorithm in engineering.
 
 **P** (Proportional): response proportional to error
-- correction = K_p \u00D7 error
-- Big error \u2192 big correction. But P alone overshoots.
+- correction = K_p × error
+- Big error → big correction. But P alone overshoots.
 
 **I** (Integral): response proportional to accumulated error
-- correction = K_i \u00D7 \u222B(error) dt
+- correction = K_i × ∫(error) dt
 - Eliminates steady-state error. But I alone is slow and oscillatory.
 
 **D** (Derivative): response proportional to rate of change of error
-- correction = K_d \u00D7 d(error)/dt
+- correction = K_d × d(error)/dt
 - Damps oscillations. Anticipates where the error is going.
 
-Combined: **u(t) = K_p \u00D7 e(t) + K_i \u00D7 \u222Be dt + K_d \u00D7 de/dt**
+Combined: **u(t) = K_p × e(t) + K_i × ∫e dt + K_d × de/dt**
 
 Tuning K_p, K_i, K_d is both art and science:
 - Start with P only, increase until oscillation begins
@@ -483,8 +483,8 @@ Tuning K_p, K_i, K_d is both art and science:
 PID controllers run in everything: thermostats, cruise control, quadcopters, satellite pointing, industrial processes.`,
       analogy: 'Driving a car is PID control. **P**: you are drifting right, so you steer left (proportional to how far off you are). **D**: you are drifting right AND the drift is getting worse, so you steer left harder (proportional to the rate of drift). **I**: you have been slightly right of centre for the last minute, so you add a small constant left correction (proportional to the accumulated error). Good drivers use all three intuitively.',
       storyConnection: 'The Middle Way is a control system: the Buddha taught neither extreme asceticism (undershoot) nor extreme indulgence (overshoot), but a balanced path that self-corrects. The PID controller formalises this: P responds to the current deviation, I corrects for past drift, D anticipates future change. Balance through feedback.',
-      checkQuestion: 'A flywheel PID controller has K_p = 100, K_i = 10, K_d = 50. The target speed is 5000 RPM. Current speed is 4900 RPM. The speed was 4850 RPM one second ago. Accumulated error over the last 10 seconds = 500 RPM\u00B7s. What torque does the controller command?',
-      checkAnswer: 'Error = 5000 - 4900 = 100 RPM. Rate of change = (4900 - 4850)/1 = 50 RPM/s (improving). \u222Be = 500 RPM\u00B7s. u = K_p(100) + K_i(500) + K_d(50) = 10000 + 5000 + 2500 = 17,500 (arbitrary torque units). The P term dominates (large error), I corrects for sustained offset, and D adds extra push because the error is still decreasing (positive rate = good, adds to correction).',
+      checkQuestion: 'A flywheel PID controller has K_p = 100, K_i = 10, K_d = 50. The target speed is 5000 RPM. Current speed is 4900 RPM. The speed was 4850 RPM one second ago. Accumulated error over the last 10 seconds = 500 RPM·s. What torque does the controller command?',
+      checkAnswer: 'Error = 5000 - 4900 = 100 RPM. Rate of change = (4900 - 4850)/1 = 50 RPM/s (improving). ∫e = 500 RPM·s. u = K_p(100) + K_i(500) + K_d(50) = 10000 + 5000 + 2500 = 17,500 (arbitrary torque units). The P term dominates (large error), I corrects for sustained offset, and D adds extra push because the error is still decreasing (positive rate = good, adds to correction).',
       codeIntro: 'Implement a PID controller for flywheel speed regulation and tune the gains.',
       code: `import numpy as np
 
@@ -565,12 +565,12 @@ print(f"Steady-state error: {abs(rpms[-1] - target_rpm):.1f} RPM")`,
       successHint: 'PID control is the workhorse of engineering. Once you understand it, you can regulate temperature, speed, position, pressure, flow, pH, or any other measurable quantity. This one algorithm runs in billions of devices worldwide.',
     },
     {
-      title: 'Complete integration \u2014 the Wheel of Dharma as engineering system',
+      title: 'Complete integration — the Wheel of Dharma as engineering system',
       concept: `You have now built every component of a flywheel energy storage system:
 
-1. **Rotor physics** (Level 1): KE = \u00BDI\u03C9\u00B2, angular momentum, gyroscopic stability
-2. **Rotational dynamics** (Level 2): \u03C4 = I\u03B1, gear trains, rolling physics, engine power
-3. **System design** (Level 3): navigation gyroscopes, reaction wheels, Earth\u2019s precession, numerical simulation, flywheel battery design
+1. **Rotor physics** (Level 1): KE = ½Iω², angular momentum, gyroscopic stability
+2. **Rotational dynamics** (Level 2): τ = Iα, gear trains, rolling physics, engine power
+3. **System design** (Level 3): navigation gyroscopes, reaction wheels, Earth’s precession, numerical simulation, flywheel battery design
 4. **Control and integration** (Level 4): grid demand response, safety engineering, solar integration, PID control
 
 The complete system:
@@ -581,13 +581,13 @@ The complete system:
 - Safety system monitors vibration, temperature, and SOC
 - Grid interface ensures smooth, ramp-rate-limited power output
 
-This is not a toy model \u2014 it is the architecture of real commercial flywheel installations (Beacon Power, Amber Kinetics, OXTO Energy).
+This is not a toy model — it is the architecture of real commercial flywheel installations (Beacon Power, Amber Kinetics, OXTO Energy).
 
-The Dharma Wheel\u2019s eight spokes map to eight engineering disciplines that make this work: mechanics, materials science, electrical engineering, control theory, power electronics, safety engineering, systems integration, and software.`,
-      analogy: 'Building the complete flywheel system is like building a clock. Each gear (concept) must mesh perfectly with the next. The escapement (PID controller) regulates the speed. The mainspring (motor) provides energy. The display (grid interface) shows the output. No single part works alone \u2014 the system is the product.',
+The Dharma Wheel’s eight spokes map to eight engineering disciplines that make this work: mechanics, materials science, electrical engineering, control theory, power electronics, safety engineering, systems integration, and software.`,
+      analogy: 'Building the complete flywheel system is like building a clock. Each gear (concept) must mesh perfectly with the next. The escapement (PID controller) regulates the speed. The mainspring (motor) provides energy. The display (grid interface) shows the output. No single part works alone — the system is the product.',
       storyConnection: 'The Wheel of Dharma turns because all eight spokes work together. Remove one spoke and the wheel collapses. The flywheel grid system is the same: remove the controller and it oscillates wildly. Remove the safety system and it risks explosion. Remove the power electronics and it cannot connect to the grid. The lesson of the Dharma Wheel is the lesson of systems engineering: every part matters.',
       checkQuestion: 'You are designing a flywheel system for a remote village with a 50 kW solar array. What capacity, power rating, and control strategy would you choose?',
-      checkAnswer: 'For a 50 kW solar array serving a village: Capacity \u2248 25 kWh (30 min of peak solar, covers typical cloud events). Power rating \u2248 50 kW (match solar peak to handle full dropout). Control: PID on bus voltage (maintain 48V DC bus) with SOC management (keep between 20-80% for longevity). Safety: underground installation, vibration monitoring, remote shutdown. Cost: ~$50-100k for the flywheel, competitive with lithium batteries at this cycling rate.',
+      checkAnswer: 'For a 50 kW solar array serving a village: Capacity ≈ 25 kWh (30 min of peak solar, covers typical cloud events). Power rating ≈ 50 kW (match solar peak to handle full dropout). Control: PID on bus voltage (maintain 48V DC bus) with SOC management (keep between 20-80% for longevity). Safety: underground installation, vibration monitoring, remote shutdown. Cost: ~$50-100k for the flywheel, competitive with lithium batteries at this cycling rate.',
       codeIntro: 'Assemble the complete flywheel grid system with all subsystems working together.',
       code: `import numpy as np
 
@@ -702,17 +702,17 @@ for i in range(len(t)):
 print(f"{'Min':>4} | {'Solar kW':>9} | {'Demand kW':>10} | {'Gap kW':>7} | {'FW kW':>6} | {'SOC%':>5} | {'Temp':>5}")
 print("-" * 60)
 for m, s, d, g, f, soc, temp in log:
-    print(f"{m:>4.0f} | {s:>9.1f} | {d:>10.1f} | {g:>7.1f} | {f:>+5.1f} | {soc:>5.1f} | {temp:>4.1f}\u00B0")
+    print(f"{m:>4.0f} | {s:>9.1f} | {d:>10.1f} | {g:>7.1f} | {f:>+5.1f} | {soc:>5.1f} | {temp:>4.1f}°")
 
 print()
 print(f"System status: {'SHUTDOWN' if fw.shutdown else 'RUNNING'}")
 print(f"Final SOC: {fw.soc()*100:.1f}%")
-print(f"Temperature: {fw.temp:.1f}\u00B0C")
+print(f"Temperature: {fw.temp:.1f}°C")
 print()
 print("The Wheel of Dharma turns: energy stored, energy released,")
 print("balance maintained. Physics and philosophy, unified.")`,
       challenge: 'Add a 24-hour simulation with realistic solar + demand patterns, weather events (clouds), and equipment degradation (bearing friction increases 0.1% per day). How long before the system needs maintenance?',
-      successHint: 'You have built a complete flywheel energy storage system from first principles. Every equation, every concept, every simulation traces back to the physics of the wheel \u2014 friction, torque, angular momentum, and energy. The Dharma Wheel turns, and the physics endures.',
+      successHint: 'You have built a complete flywheel energy storage system from first principles. Every equation, every concept, every simulation traces back to the physics of the wheel — friction, torque, angular momentum, and energy. The Dharma Wheel turns, and the physics endures.',
     },
   ];
 

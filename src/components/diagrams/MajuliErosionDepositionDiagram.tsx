@@ -88,7 +88,7 @@ export default function MajuliErosionDepositionDiagram() {
         <text x="300" y="201" textAnchor="middle" className="fill-emerald-400" fontSize="10">DEPOSITION</text>
 
         {/* Velocity labels */}
-        <text x="340" y="305" textAnchor="middle" className="fill-sky-300" fontSize="10" fontWeight="bold">Fast flow \u2192</text>
+        <text x="340" y="305" textAnchor="middle" className="fill-sky-300" fontSize="10" fontWeight="bold">Fast flow →</text>
         <text x="250" y="210" textAnchor="middle" className="fill-sky-500" fontSize="10">Slow flow</text>
 
         {/* Explanation box */}

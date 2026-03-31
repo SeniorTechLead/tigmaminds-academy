@@ -30,18 +30,18 @@ export default function AstrolabeLevel4() {
   const miniLessons = [
     {
       title: 'Capstone: build the star catalog class',
-      concept: `Time to build a complete digital astrolabe from the ground up. We start with the **star catalog** \u2014 a Python class that stores star data and computes their positions for any time and location.
+      concept: `Time to build a complete digital astrolabe from the ground up. We start with the **star catalog** — a Python class that stores star data and computes their positions for any time and location.
 
 The class needs:
 - Star name, right ascension (RA), declination (Dec), and magnitude
 - A method to compute altitude and azimuth for any (latitude, LST) pair
 - A method to determine which stars are above the horizon
 
-This is the data layer \u2014 the same information that was engraved on the rete as star pointers. Our digital version will handle 20+ stars with full positional computation.`,
-      analogy: 'The star catalog is the database behind the astrolabe. Medieval astronomers maintained these catalogs on parchment \u2014 tables of star positions painstakingly measured and corrected over centuries. Your Python class is the modern equivalent.',
-      storyConnection: 'Islamic astronomers created some of the most accurate star catalogs in history. Al-Sufi\u2019s "Book of Fixed Stars" (964 CE) cataloged over 1,000 stars with positions accurate to about 0.5\u00B0. This data powered every astrolabe.',
+This is the data layer — the same information that was engraved on the rete as star pointers. Our digital version will handle 20+ stars with full positional computation.`,
+      analogy: 'The star catalog is the database behind the astrolabe. Medieval astronomers maintained these catalogs on parchment — tables of star positions painstakingly measured and corrected over centuries. Your Python class is the modern equivalent.',
+      storyConnection: 'Islamic astronomers created some of the most accurate star catalogs in history. Al-Sufi’s "Book of Fixed Stars" (964 CE) cataloged over 1,000 stars with positions accurate to about 0.5°. This data powered every astrolabe.',
       checkQuestion: 'Why do we need both RA/Dec (fixed) and alt/az (changing) coordinates?',
-      checkAnswer: 'RA and Dec are fixed to the celestial sphere \u2014 a star\u2019s RA/Dec stays the same regardless of time or observer location. Alt/az depend on where you are and when you observe. The catalog stores RA/Dec; the compute method converts to alt/az for a specific observer.',
+      checkAnswer: 'RA and Dec are fixed to the celestial sphere — a star’s RA/Dec stays the same regardless of time or observer location. Alt/az depend on where you are and when you observe. The catalog stores RA/Dec; the compute method converts to alt/az for a specific observer.',
       codeIntro: 'Build the StarCatalog class with position computation.',
       code: `import numpy as np
 
@@ -100,13 +100,13 @@ lst = 22 + (172 * 24 / 365.25) + (51.7 / 15)  # approximate LST
 lst = lst % 24
 
 print(f"Local Sidereal Time: {lst:.2f}h")
-print(f"\\nVisible stars from Isfahan (32\u00B0N):")
+print(f"\\nVisible stars from Isfahan (32°N):")
 print(f"{'Star':12s} {'Alt':>6s} {'Az':>6s} {'Mag':>5s}")
 print("-" * 32)
 for name, alt, az, mag in catalog.visible_stars(32, lst):
     compass = ['N','NE','E','SE','S','SW','W','NW'][int((az+22.5)//45)%8]
-    print(f"  {name:10s} {alt:5.1f}\u00B0 {az:5.1f}\u00B0 {mag:+5.2f}  {compass}")`,
-      challenge: 'Add a method find_by_altitude(lat, lst, target_alt, tolerance) that finds all stars within \u00B1tolerance degrees of a target altitude. This is how you "solve" an astrolabe reading.',
+    print(f"  {name:10s} {alt:5.1f}° {az:5.1f}° {mag:+5.2f}  {compass}")`,
+      challenge: 'Add a method find_by_altitude(lat, lst, target_alt, tolerance) that finds all stars within ±tolerance degrees of a target altitude. This is how you "solve" an astrolabe reading.',
       successHint: 'Your star catalog is the digital equivalent of the rete. Each star has a known position (RA, Dec) and can be computed for any time and place. Next: the tympan.',
     },
     {
@@ -115,16 +115,16 @@ for name, alt, az, mag in catalog.visible_stars(32, lst):
 
 We need to:
 1. Project the zenith point for the observer's latitude
-2. Draw altitude circles (0\u00B0 to 80\u00B0 in 10\u00B0 steps) centered on the zenith
-3. Draw the horizon (altitude = 0\u00B0) prominently
+2. Draw altitude circles (0° to 80° in 10° steps) centered on the zenith
+3. Draw the horizon (altitude = 0°) prominently
 4. Add azimuth arcs (N, NE, E, SE, S, SW, W, NW)
 5. Add the celestial equator and tropics
 
-Each circle is computed from stereographic projection. The horizon circle has center at y = -1/tan(\u03C6) and radius = 1/sin(\u03C6) in normalized coordinates.`,
-      analogy: 'The tympan is like the face of a clock \u2014 the numbers and hour marks that stay still. The rete (coming next) is like the clock hands that rotate over it. Together they tell you the state of the sky.',
-      storyConnection: 'Ibn al-Haytham told Zahra that the tympan "shows the sky coordinates for your latitude." Each city had its own tympan \u2014 Isfahan\u2019s grid is different from Cairo\u2019s or Baghdad\u2019s. Your renderer generates any of them.',
+Each circle is computed from stereographic projection. The horizon circle has center at y = -1/tan(φ) and radius = 1/sin(φ) in normalized coordinates.`,
+      analogy: 'The tympan is like the face of a clock — the numbers and hour marks that stay still. The rete (coming next) is like the clock hands that rotate over it. Together they tell you the state of the sky.',
+      storyConnection: 'Ibn al-Haytham told Zahra that the tympan "shows the sky coordinates for your latitude." Each city had its own tympan — Isfahan’s grid is different from Cairo’s or Baghdad’s. Your renderer generates any of them.',
       checkQuestion: 'Why does the tympan depend on latitude but not on time?',
-      checkAnswer: 'The tympan shows the coordinate grid as seen from a fixed location: where is the zenith, where is the horizon, what direction is north. These depend on your latitude but not on when you observe. Time only affects which stars are where \u2014 that is the rete\u2019s job.',
+      checkAnswer: 'The tympan shows the coordinate grid as seen from a fixed location: where is the zenith, where is the horizon, what direction is north. These depend on your latitude but not on when you observe. Time only affects which stars are where — that is the rete’s job.',
       codeIntro: 'Build a complete tympan renderer with altitude circles, horizon, and outer boundary.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -167,7 +167,7 @@ class Tympan:
             ax.add_patch(plt.Circle((0, -self.z_r), r_alt, fill=False,
                          color=color, linewidth=lw))
             if alt % 30 == 0 and alt > 0:
-                ax.text(r_alt + 0.02, -self.z_r, f'{alt}\u00B0',
+                ax.text(r_alt + 0.02, -self.z_r, f'{alt}°',
                         fontsize=5, color='#64748b')
 
         # Zenith point
@@ -199,7 +199,7 @@ class Tympan:
 # Draw tympans for 3 latitudes
 fig, axes = plt.subplots(1, 3, figsize=(12, 4.2))
 for ax, lat, city in zip(axes, [20, 32, 51],
-                          ['Mecca 20\u00B0N', 'Isfahan 32\u00B0N', 'London 51\u00B0N']):
+                          ['Mecca 20°N', 'Isfahan 32°N', 'London 51°N']):
     ax.set_facecolor('#0f172a')
     t = Tympan(lat)
     t.draw(ax)
@@ -210,7 +210,7 @@ plt.tight_layout()
 plt.show()
 print("Notice how the zenith (yellow dot) shifts with latitude.")
 print("At higher latitudes, the visible sky area is offset more from center.")`,
-      challenge: 'Add twilight zones: draw circles at altitude -6\u00B0 (civil twilight), -12\u00B0 (nautical), and -18\u00B0 (astronomical). These are below the horizon but astronomically important.',
+      challenge: 'Add twilight zones: draw circles at altitude -6° (civil twilight), -12° (nautical), and -18° (astronomical). These are below the horizon but astronomically important.',
       successHint: 'Your Tympan class generates the base plate for any latitude. Medieval brass-engravers computed these same circles, then inscribed them with compass and straightedge. Your code does in milliseconds what took them hours.',
     },
     {
@@ -222,14 +222,14 @@ print("At higher latitudes, the visible sky area is offset more from center.")`,
 3. A rotation transformation applied to all elements
 
 The rotation matrix transforms each point:
-**x' = x\u00B7cos(\u03B1) - y\u00B7sin(\u03B1)**
-**y' = x\u00B7sin(\u03B1) + y\u00B7cos(\u03B1)**
+**x' = x·cos(α) - y·sin(α)**
+**y' = x·sin(α) + y·cos(α)**
 
-where \u03B1 is the rotation angle = LST \u00D7 15\u00B0.`,
+where α is the rotation angle = LST × 15°.`,
       analogy: 'The rete is a transparent overlay that spins. In brass, it is a delicate lattice with small points marking each star. In code, it is a list of projected coordinates that we rotate before drawing.',
       storyConnection: 'When Zahra "rotated the rete and watched the star pointers sweep across the tympan," she was performing exactly the rotation matrix operation you are about to code.',
-      checkQuestion: 'If you rotate the rete by 180\u00B0, what happens to a star that was at the zenith?',
-      checkAnswer: 'It moves to the nadir (directly below the horizon). A 180\u00B0 rotation corresponds to 12 sidereal hours \u2014 half a day. A star at its highest point will be at its lowest point 12 hours later.',
+      checkQuestion: 'If you rotate the rete by 180°, what happens to a star that was at the zenith?',
+      checkAnswer: 'It moves to the nadir (directly below the horizon). A 180° rotation corresponds to 12 sidereal hours — half a day. A star at its highest point will be at its lowest point 12 hours later.',
       codeIntro: 'Build the Rete class with star pointers, ecliptic, and rotation.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -316,15 +316,15 @@ print("Stars sweep across the field, rising and setting.")`,
 
 Given a measured star altitude, the astrolabe determines the time:
 1. Look up the star's RA and Dec in the catalog
-2. From the altitude formula, solve for the hour angle: cos(HA) = (sin(alt) - sin(lat)\u00B7sin(dec)) / (cos(lat)\u00B7cos(dec))
+2. From the altitude formula, solve for the hour angle: cos(HA) = (sin(alt) - sin(lat)·sin(dec)) / (cos(lat)·cos(dec))
 3. Convert HA to local sidereal time: LST = RA + HA
 4. Convert LST to local solar time
 
 This is exactly what Zahra did when she sighted a star, found it on the rete, and rotated until the altitude matched. Our code does the same calculation digitally.`,
       analogy: 'The complete astrolabe is like a flight simulator for the sky. Input your latitude and a star measurement, and it computes the time, shows the sky, and tells you which stars are visible. The simulator runs the same math as the brass instrument, just faster.',
-      storyConnection: 'This is the capstone \u2014 the digital version of the instrument Ibn al-Haytham gave Zahra. One Python program that does what one brass disc did: tell time from stars, find direction, predict sunrise.',
-      checkQuestion: 'If you measure Vega at altitude 45\u00B0 from Isfahan, what information do you need to determine the time?',
-      checkAnswer: 'You need: (1) Isfahan\u2019s latitude (32\u00B0N), (2) Vega\u2019s RA (18.62h) and Dec (38.78\u00B0), (3) the date (to convert sidereal time to solar time). With these, the altitude formula gives HA, then LST = RA + HA, then clock time follows from the date.',
+      storyConnection: 'This is the capstone — the digital version of the instrument Ibn al-Haytham gave Zahra. One Python program that does what one brass disc did: tell time from stars, find direction, predict sunrise.',
+      checkQuestion: 'If you measure Vega at altitude 45° from Isfahan, what information do you need to determine the time?',
+      checkAnswer: 'You need: (1) Isfahan’s latitude (32°N), (2) Vega’s RA (18.62h) and Dec (38.78°), (3) the date (to convert sidereal time to solar time). With these, the altitude formula gives HA, then LST = RA + HA, then clock time follows from the date.',
       codeIntro: 'Build the complete digital astrolabe with time-solving capability.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -387,9 +387,9 @@ class DigitalAstrolabe:
 # === DEMO: Isfahan astrolabe ===
 astrolabe = DigitalAstrolabe(32)
 
-# 1. Solve time from Vega at altitude 45\u00B0
+# 1. Solve time from Vega at altitude 45°
 print("=== Time from Star Observation ===")
-print("Star: Vega, Measured altitude: 45\u00B0, Day: 172 (June 21)")
+print("Star: Vega, Measured altitude: 45°, Day: 172 (June 21)")
 t_rise, t_set = astrolabe.solve_time("Vega", 45, 172)
 print(f"  Rising solution: {int(t_rise)}:{int((t_rise%1)*60):02d}")
 print(f"  Setting solution: {int(t_set)}:{int((t_set%1)*60):02d}")
@@ -409,8 +409,8 @@ print("\\n=== Sky at LST = 20h ===")
 for star in astrolabe.stars:
     alt, az = astrolabe.star_alt_az(star, 20)
     if alt > 0:
-        print(f"  {star:12s}  alt={alt:5.1f}\u00B0  az={az:5.1f}\u00B0")`,
-      challenge: 'Add a method qibla_direction() that computes the bearing to Mecca (21.42\u00B0N, 39.83\u00B0E) from the astrolabe\u2019s latitude. Assume a default longitude of 51.7\u00B0E (Isfahan).',
+        print(f"  {star:12s}  alt={alt:5.1f}°  az={az:5.1f}°")`,
+      challenge: 'Add a method qibla_direction() that computes the bearing to Mecca (21.42°N, 39.83°E) from the astrolabe’s latitude. Assume a default longitude of 51.7°E (Isfahan).',
       successHint: 'You have built a working digital astrolabe. It tells time from star observations, predicts sunrise and sunset, and shows the visible sky. The same instrument Zahra held in brass, you now hold in code.',
     },
     {
@@ -423,11 +423,11 @@ The display shows:
 - A time readout showing the computed hour
 - Star labels for visible objects
 
-This is the digital equivalent of looking at a physical astrolabe \u2014 two engraved brass layers, one turning over the other, with the cosmos compressed into a handheld circle.`,
+This is the digital equivalent of looking at a physical astrolabe — two engraved brass layers, one turning over the other, with the cosmos compressed into a handheld circle.`,
       analogy: 'The final display is like a planetarium on your screen. The dome (tympan) stays still. The stars (rete) rotate. The result is a real-time simulation of the sky that matches what you would see if you stepped outside.',
-      storyConnection: 'Zahra "held the astrolabe up to the sky and sighted Polaris. Thirty-two degrees." Your digital astrolabe does the same: it shows the sky from Isfahan at any time you choose, with Polaris at 32\u00B0 altitude.',
+      storyConnection: 'Zahra "held the astrolabe up to the sky and sighted Polaris. Thirty-two degrees." Your digital astrolabe does the same: it shows the sky from Isfahan at any time you choose, with Polaris at 32° altitude.',
       checkQuestion: 'What rotation angle should you set the rete to for 10 PM local time on June 21 from Isfahan?',
-      checkAnswer: 'First compute LST: approximately 22h + (172/365.25 \u00D7 24) + (51.7/15) \u2248 22 + 11.3 + 3.4 = 36.7 \u2248 12.7h (mod 24). Rotation = 12.7 \u00D7 15 = 190.5\u00B0. The rete turns by 15\u00B0 per sidereal hour.',
+      checkAnswer: 'First compute LST: approximately 22h + (172/365.25 × 24) + (51.7/15) ≈ 22 + 11.3 + 3.4 = 36.7 ≈ 12.7h (mod 24). Rotation = 12.7 × 15 = 190.5°. The rete turns by 15° per sidereal hour.',
       codeIntro: 'Render the complete digital astrolabe with tympan, rete, and time display.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -508,7 +508,7 @@ for deg in range(0, 360, 5):
             color='#475569', linewidth=0.3)
     if deg % 30 == 0:
         ax.text((outer+0.08)*np.cos(a), (outer+0.08)*np.sin(a),
-                f'{deg}\u00B0', fontsize=5, color='#64748b',
+                f'{deg}°', fontsize=5, color='#64748b',
                 ha='center', va='center')
 
 # Center pin
@@ -516,10 +516,10 @@ ax.plot(0, 0, 'o', color='#94a3b8', markersize=4)
 
 # Title and info
 ax.text(0, outer + 0.25,
-        f'Digital Astrolabe \u2014 Isfahan {lat}\u00B0N',
+        f'Digital Astrolabe — Isfahan {lat}°N',
         ha='center', fontsize=12, color='white', fontweight='bold')
 ax.text(0, -outer - 0.18,
-        f'June 21, 10:00 PM  |  LST = {lst:.1f}h  |  Rete \u2192 {rot:.0f}\u00B0',
+        f'June 21, 10:00 PM  |  LST = {lst:.1f}h  |  Rete → {rot:.0f}°',
         ha='center', fontsize=8, color='#94a3b8')
 
 ax.set_xlim(-outer*1.2, outer*1.2)
@@ -533,7 +533,7 @@ visible = sum(1 for n, ra, dec in stars
                          (rotate(*stereo_xy(dec, ra*15), rot)[1] + z_r)**2)
               < horizon_r)
 print(f"\\nVisible stars: {visible} of {len(stars)}")
-print(f"Polaris altitude: {lat}\u00B0 (matches Isfahan's latitude)")`,
+print(f"Polaris altitude: {lat}° (matches Isfahan's latitude)")`,
       challenge: 'Add an interactive feature: change the hour from 18 to 6 (evening to morning) and watch the stars sweep across the sky. Count how many stars are visible at each hour.',
       successHint: 'You have built a complete digital astrolabe. Two projected layers, one rotating over the other, with time-solving and sky rendering. A thousand years of Islamic astronomical heritage, encoded in 100 lines of Python.',
     },
@@ -541,17 +541,17 @@ print(f"Polaris altitude: {lat}\u00B0 (matches Isfahan's latitude)")`,
       title: 'Capstone: comparing your astrolabe to real sky data',
       concept: `The final test: validate your digital astrolabe against known astronomical data. We will compare computed sunrise/sunset times, star altitudes, and day lengths against published values.
 
-A simulation is only as good as its validation. Medieval astronomers validated their astrolabes by measuring known star positions and comparing to their catalogs. We do the same by comparing our code\u2019s output to modern astronomical data.
+A simulation is only as good as its validation. Medieval astronomers validated their astrolabes by measuring known star positions and comparing to their catalogs. We do the same by comparing our code’s output to modern astronomical data.
 
 Sources of error to check:
-1. **Refraction** \u2014 does our model account for atmospheric bending?
-2. **Precession** \u2014 star positions shift by about 1\u00B0 per 72 years
-3. **Nutation and aberration** \u2014 small periodic corrections we ignore
-4. **Simplified formulas** \u2014 our solar declination approximation vs reality`,
+1. **Refraction** — does our model account for atmospheric bending?
+2. **Precession** — star positions shift by about 1° per 72 years
+3. **Nutation and aberration** — small periodic corrections we ignore
+4. **Simplified formulas** — our solar declination approximation vs reality`,
       analogy: 'Validation is like checking your watch against an atomic clock. Your watch might be very good, but only by comparing to a known standard can you quantify how good. Our digital astrolabe is the watch; published astronomical data is the atomic clock.',
       storyConnection: 'This is what Ibn al-Haytham taught Zahra above all else: measure, compare, correct. Islamic astronomy advanced by systematically comparing new observations to old catalogs and quantifying the differences. The scientific method, applied to the stars.',
       checkQuestion: 'If your computed sunrise differs from the published value by 3 minutes, is that good or bad for a basic model?',
-      checkAnswer: 'Good! Our model ignores refraction (which adds ~2 minutes), the equation of time (\u00B116 minutes seasonally), and other corrections. A 3-minute error for a simplified model is excellent. A full model should achieve \u00B11 minute.',
+      checkAnswer: 'Good! Our model ignores refraction (which adds ~2 minutes), the equation of time (±16 minutes seasonally), and other corrections. A 3-minute error for a simplified model is excellent. A full model should achieve ±1 minute.',
       codeIntro: 'Validate the digital astrolabe by computing and comparing astronomical values.',
       code: `import numpy as np
 
@@ -578,10 +578,10 @@ class AstrolabeValidator:
         return 90 - abs(self.lat - dec)
 
 # === Validate against known values ===
-# Isfahan: 32.65\u00B0N, 51.68\u00B0E
+# Isfahan: 32.65°N, 51.68°E
 av = AstrolabeValidator(32.65, 51.68)
 
-print("=== Isfahan (32.65\u00B0N) Validation ===")
+print("=== Isfahan (32.65°N) Validation ===")
 print()
 
 # Known data (approximate for comparison)
@@ -607,7 +607,7 @@ for label, data in known.items():
     errors_dl.append(abs(err_dl))
     errors_na.append(abs(err_na))
     print(f"  {label:20s} {dl:6.1f}h  {data['daylen']:5.1f}h {err_dl:+.1f}h"
-          f"  {na:6.1f}\u00B0  {data['noon_alt']:5.1f}\u00B0 {err_na:+.1f}\u00B0")
+          f"  {na:6.1f}°  {data['noon_alt']:5.1f}° {err_na:+.1f}°")
 
 print(f"\\nMean absolute error:")
 print(f"  Day length: {np.mean(errors_dl):.2f} hours ({np.mean(errors_dl)*60:.0f} minutes)")
@@ -615,8 +615,8 @@ print(f"  Noon altitude: {np.mean(errors_na):.2f} degrees")
 
 # Polaris test
 polaris_alt = 90 - abs(32.65 - 89.26)
-print(f"\\nPolaris altitude: {polaris_alt:.1f}\u00B0 (expected: ~32.7\u00B0)")
-print(f"  Error: {abs(polaris_alt - 32.65):.2f}\u00B0")
+print(f"\\nPolaris altitude: {polaris_alt:.1f}° (expected: ~32.7°)")
+print(f"  Error: {abs(polaris_alt - 32.65):.2f}°")
 
 # Year-round day length
 print("\\n=== Day Length Through the Year ===")
@@ -624,13 +624,13 @@ for month, d in zip(['Jan','Feb','Mar','Apr','May','Jun',
                      'Jul','Aug','Sep','Oct','Nov','Dec'],
                     [15,46,75,106,136,167,197,228,258,289,319,350]):
     dl = av.day_length(d)
-    bar = '\u2588' * int(dl * 2)
+    bar = '█' * int(dl * 2)
     print(f"  {month}: {dl:5.1f}h {bar}")
 
-print("\\n\u2714 Validation complete. Errors are within expected range")
+print("\\n✔ Validation complete. Errors are within expected range")
 print("  for a simplified model (no refraction, equation of time,")
 print("  or precession corrections).")`,
-      challenge: 'Add refraction correction to the sunrise/sunset calculation (hint: sunrise occurs when the Sun\u2019s center is at altitude -0.83\u00B0 including refraction and solar semi-diameter). How much does this improve accuracy?',
+      challenge: 'Add refraction correction to the sunrise/sunset calculation (hint: sunrise occurs when the Sun’s center is at altitude -0.83° including refraction and solar semi-diameter). How much does this improve accuracy?',
       successHint: 'Your digital astrolabe is validated. The errors are small and explainable. You have built, from first principles, the same instrument that Islamic scholars perfected over a millennium: a portable model of the sky that tells time, finds direction, and reveals the beautiful mathematics connecting Earth and stars.',
     },
   ];

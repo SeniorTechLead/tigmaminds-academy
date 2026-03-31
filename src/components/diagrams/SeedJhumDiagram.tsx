@@ -4,14 +4,14 @@ export default function SeedJhumDiagram() {
       <svg viewBox="0 0 520 440" className="w-full max-w-lg mx-auto" role="img" aria-label="Jhum shifting cultivation cycle in Nagaland showing how it preserves seed diversity">
         <rect width="520" height="440" rx="12" className="fill-slate-900" />
 
-        <text x="260" y="28" textAnchor="middle" className="fill-emerald-400" fontSize="14" fontWeight="bold">Jhum (Shifting Cultivation) \u2014 Nagaland</text>
+        <text x="260" y="28" textAnchor="middle" className="fill-emerald-400" fontSize="14" fontWeight="bold">Jhum (Shifting Cultivation) — Nagaland</text>
 
         {/* Circular cycle layout */}
         {/* Center circle */}
         <circle cx="260" cy="215" r="35" className="fill-emerald-900/30 stroke-emerald-500" strokeWidth="1.5" />
         <text x="260" y="210" textAnchor="middle" className="fill-emerald-400" fontSize="10" fontWeight="bold">Jhum</text>
         <text x="260" y="222" textAnchor="middle" className="fill-emerald-400" fontSize="10" fontWeight="bold">Cycle</text>
-        <text x="260" y="237" textAnchor="middle" className="fill-emerald-300" fontSize="8">8\u201315 years</text>
+        <text x="260" y="237" textAnchor="middle" className="fill-emerald-300" fontSize="8">8–15 years</text>
 
         {/* Stage 1: Select hillside (top) */}
         <g transform="translate(210, 45)">
@@ -43,7 +43,7 @@ export default function SeedJhumDiagram() {
           <circle cx="55" cy="33" r="5" className="fill-green-500" />
           <circle cx="70" cy="38" r="3.5" className="fill-yellow-500" />
           <circle cx="85" cy="35" r="4" className="fill-purple-400" />
-          <text x="57" y="58" textAnchor="middle" className="fill-amber-300" fontSize="8">10\u201320 crops</text>
+          <text x="57" y="58" textAnchor="middle" className="fill-amber-300" fontSize="8">10–20 crops</text>
           <text x="57" y="68" textAnchor="middle" className="fill-amber-300" fontSize="8">together</text>
         </g>
         <line x1="297" y1="230" x2="383" y2="260" className="stroke-amber-500" strokeWidth="1" markerEnd="url(#jhumArrow)" />
@@ -89,7 +89,7 @@ export default function SeedJhumDiagram() {
 
         {/* Key insight box */}
         <rect x="25" y="405" width="470" height="30" rx="6" className="fill-emerald-900/30 stroke-emerald-600" strokeWidth="1" />
-        <text x="260" y="418" textAnchor="middle" className="fill-emerald-300" fontSize="10">Mixed planting + seed saving = each village maintains 50\u2013100 crop varieties</text>
+        <text x="260" y="418" textAnchor="middle" className="fill-emerald-300" fontSize="10">Mixed planting + seed saving = each village maintains 50–100 crop varieties</text>
         <text x="260" y="430" textAnchor="middle" className="fill-emerald-300" fontSize="10">Every variety carries unique genes for pests, drought, soil, and season</text>
 
         <defs>

@@ -31,15 +31,15 @@ const ElephantHeatTransferDiagram = () => {
         <rect x="16" y="42" width="300" height="200" rx="8"
           className="fill-orange-50 dark:fill-orange-900/10 stroke-orange-300 dark:stroke-orange-700" strokeWidth="1" />
         <text x="166" y="62" textAnchor="middle" className="heading fill-orange-700 dark:fill-orange-400">
-          \u2776 Conduction — Direct Contact
+          ❶ Conduction — Direct Contact
         </text>
 
         {/* Elephant foot in mud */}
         <rect x="60" y="160" width="160" height="40" rx="4" fill="#92400e" opacity="0.4" />
-        <text x="140" y="183" textAnchor="middle" className="small fill-amber-700 dark:fill-amber-400">Cool mud (25 \u00b0C)</text>
+        <text x="140" y="183" textAnchor="middle" className="small fill-amber-700 dark:fill-amber-400">Cool mud (25 °C)</text>
         <rect x="105" y="110" width="30" height="52" rx="3"
           className="fill-slate-400 dark:fill-slate-500 stroke-slate-500 dark:stroke-slate-400" strokeWidth="1.5" />
-        <text x="120" y="105" textAnchor="middle" className="small fill-slate-600 dark:fill-slate-300">Foot (36 \u00b0C)</text>
+        <text x="120" y="105" textAnchor="middle" className="small fill-slate-600 dark:fill-slate-300">Foot (36 °C)</text>
 
         {/* Heat arrow: foot to mud */}
         <line x1="145" y1="140" x2="175" y2="170" stroke="#ef4444" strokeWidth="2" markerEnd="url(#heat-arr)" />
@@ -47,17 +47,17 @@ const ElephantHeatTransferDiagram = () => {
         <text x="186" y="164" className="small fill-red-600 dark:fill-red-400">into mud</text>
 
         <text x="166" y="218" textAnchor="middle" className="small fill-orange-600 dark:fill-orange-300">
-          Hot touches cold \u2192 heat conducts through contact
+          Hot touches cold → heat conducts through contact
         </text>
         <text x="166" y="232" textAnchor="middle" className="small fill-orange-600 dark:fill-orange-300">
-          Water conducts 24\u00d7 better than air
+          Water conducts 24× better than air
         </text>
 
         {/* 2. CONVECTION — top right */}
         <rect x="324" y="42" width="300" height="200" rx="8"
           className="fill-blue-50 dark:fill-blue-900/10 stroke-blue-300 dark:stroke-blue-700" strokeWidth="1" />
         <text x="474" y="62" textAnchor="middle" className="heading fill-blue-700 dark:fill-blue-400">
-          \u2777 Convection — Moving Fluid
+          ❷ Convection — Moving Fluid
         </text>
 
         {/* Elephant ear shape */}
@@ -90,7 +90,7 @@ const ElephantHeatTransferDiagram = () => {
         <rect x="16" y="250" width="300" height="210" rx="8"
           className="fill-purple-50 dark:fill-purple-900/10 stroke-purple-300 dark:stroke-purple-700" strokeWidth="1" />
         <text x="166" y="270" textAnchor="middle" className="heading fill-purple-700 dark:fill-purple-400">
-          \u2778 Radiation — Infrared Waves
+          ❸ Radiation — Infrared Waves
         </text>
 
         {/* Elephant silhouette */}
@@ -98,7 +98,7 @@ const ElephantHeatTransferDiagram = () => {
           className="fill-slate-300 dark:fill-slate-600" />
         <ellipse cx="80" cy="340" rx="20" ry="25"
           className="fill-slate-300 dark:fill-slate-600" />
-        <text x="120" y="353" textAnchor="middle" className="small fill-slate-700 dark:fill-slate-200">36 \u00b0C</text>
+        <text x="120" y="353" textAnchor="middle" className="small fill-slate-700 dark:fill-slate-200">36 °C</text>
 
         {/* Wavy IR lines outward */}
         {[0, 30, 60, 90, 120, 150, 180].map((angle, i) => {
@@ -120,20 +120,20 @@ const ElephantHeatTransferDiagram = () => {
         <text x="250" y="330" textAnchor="middle" className="small" fill="#e2e8f0">~3 K (cold!)</text>
 
         <text x="166" y="425" textAnchor="middle" className="small fill-purple-600 dark:fill-purple-300">
-          All objects emit infrared \u2014 hotter = more radiation
+          All objects emit infrared — hotter = more radiation
         </text>
         <text x="166" y="439" textAnchor="middle" className="small fill-purple-600 dark:fill-purple-300">
           At night, elephants radiate heat to cold sky efficiently
         </text>
         <text x="166" y="453" textAnchor="middle" className="small fill-purple-600 dark:fill-purple-300">
-          Power \u221d T\u2074 (Stefan-Boltzmann law)
+          Power ∝ T⁴ (Stefan-Boltzmann law)
         </text>
 
         {/* 4. EVAPORATION — bottom right */}
         <rect x="324" y="250" width="300" height="210" rx="8"
           className="fill-cyan-50 dark:fill-cyan-900/10 stroke-cyan-300 dark:stroke-cyan-700" strokeWidth="1" />
         <text x="474" y="270" textAnchor="middle" className="heading fill-cyan-700 dark:fill-cyan-400">
-          \u2779 Evaporation — Phase Change
+          ❹ Evaporation — Phase Change
         </text>
 
         {/* Mud on skin cross-section */}
@@ -148,12 +148,12 @@ const ElephantHeatTransferDiagram = () => {
         {[410, 440, 470, 500, 530].map((x, i) => (
           <g key={i} className="rise" style={{ animationDelay: `\${i * 0.4}s` }}>
             <text x={x} y={330} textAnchor="middle" className="small fill-cyan-500">
-              \u2191
+              ↑
             </text>
           </g>
         ))}
         <text x="470" y="316" textAnchor="middle" className="small fill-cyan-600 dark:fill-cyan-400">
-          H\u2082O molecules escape
+          H₂O molecules escape
         </text>
 
         {/* Energy box */}
@@ -167,7 +167,7 @@ const ElephantHeatTransferDiagram = () => {
         </text>
 
         <text x="474" y="453" textAnchor="middle" className="small fill-cyan-600 dark:fill-cyan-300">
-          Mud holds water longer \u2192 hours of slow cooling
+          Mud holds water longer → hours of slow cooling
         </text>
 
         {/* Arrow markers */}

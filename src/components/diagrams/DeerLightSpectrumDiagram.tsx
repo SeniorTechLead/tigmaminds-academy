@@ -1,10 +1,10 @@
 export default function DeerLightSpectrumDiagram() {
   const bands = [
     { label: 'Radio', range: '> 1 m', color: '#6b7280', x: 10, w: 70 },
-    { label: 'Micro\u00ADwave', range: '1 m\u20131 mm', color: '#9ca3af', x: 82, w: 60 },
-    { label: 'Infrared', range: '1 mm\u2013700 nm', color: '#ef4444', x: 144, w: 60 },
-    { label: 'UV', range: '400\u201310 nm', color: '#a855f7', x: 388, w: 55 },
-    { label: 'X-ray', range: '10\u20130.01 nm', color: '#3b82f6', x: 445, w: 55 },
+    { label: 'Micro­wave', range: '1 m–1 mm', color: '#9ca3af', x: 82, w: 60 },
+    { label: 'Infrared', range: '1 mm–700 nm', color: '#ef4444', x: 144, w: 60 },
+    { label: 'UV', range: '400–10 nm', color: '#a855f7', x: 388, w: 55 },
+    { label: 'X-ray', range: '10–0.01 nm', color: '#3b82f6', x: 445, w: 55 },
     { label: 'Gamma', range: '< 0.01 nm', color: '#14b8a6', x: 502, w: 58 },
   ];
 
@@ -28,15 +28,15 @@ export default function DeerLightSpectrumDiagram() {
   return (
     <div className="bg-gray-900 rounded-xl p-4 my-4">
       <p className="text-center text-sm font-bold text-gray-300 uppercase tracking-wider mb-3">
-        The Electromagnetic Spectrum \u2014 Where Visible Light Lives
+        The Electromagnetic Spectrum — Where Visible Light Lives
       </p>
       <svg viewBox="0 0 570 260" className="w-full max-w-2xl mx-auto">
         {/* Long wavelength label */}
-        <text x="40" y="22" textAnchor="middle" fontSize="10" fill="#9ca3af">Long \u03bb</text>
+        <text x="40" y="22" textAnchor="middle" fontSize="10" fill="#9ca3af">Long λ</text>
         <text x="40" y="33" textAnchor="middle" fontSize="10" fill="#9ca3af">Low energy</text>
 
         {/* Short wavelength label */}
-        <text x="530" y="22" textAnchor="middle" fontSize="10" fill="#9ca3af">Short \u03bb</text>
+        <text x="530" y="22" textAnchor="middle" fontSize="10" fill="#9ca3af">Short λ</text>
         <text x="530" y="33" textAnchor="middle" fontSize="10" fill="#9ca3af">High energy</text>
 
         {/* Arrow across top */}
@@ -69,7 +69,7 @@ export default function DeerLightSpectrumDiagram() {
           Visible Light
         </text>
         <text x={visX + visW / 2} y={80} textAnchor="middle" fontSize="9" fill="white" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.8)' }}>
-          380\u2013700 nm
+          380–700 nm
         </text>
 
         {/* Expansion of visible band below */}
@@ -108,10 +108,10 @@ export default function DeerLightSpectrumDiagram() {
               <line x1={(goldStart + goldEnd) / 2} y1={125} x2={(goldStart + goldEnd) / 2} y2={215} stroke="#fbbf24" strokeWidth={1} strokeDasharray="3,2" />
               <rect x={(goldStart + goldEnd) / 2 - 75} y={215} width={150} height={36} rx={6} fill="rgba(251,191,36,0.12)" stroke="#fbbf24" strokeWidth={1} />
               <text x={(goldStart + goldEnd) / 2} y={230} textAnchor="middle" fontSize="11" fontWeight="700" fill="#fbbf24">
-                Gold: 570\u2013600 nm
+                Gold: 570–600 nm
               </text>
               <text x={(goldStart + goldEnd) / 2} y={244} textAnchor="middle" fontSize="10" fill="#d4a017">
-                The golden deer\u2019s colour
+                The golden deer’s colour
               </text>
             </g>
           );

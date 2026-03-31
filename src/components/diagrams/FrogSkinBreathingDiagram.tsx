@@ -22,7 +22,7 @@ const FrogSkinBreathingDiagram = () => {
           className="fill-white dark:fill-slate-900 stroke-slate-200 dark:stroke-slate-700" strokeWidth="1" />
 
         <text x="320" y="28" textAnchor="middle" className="title fill-slate-800 dark:fill-slate-100">
-          Breathing Through Skin \u2014 Cutaneous Respiration
+          Breathing Through Skin — Cutaneous Respiration
         </text>
 
         {/* Main skin cross-section */}
@@ -34,7 +34,7 @@ const FrogSkinBreathingDiagram = () => {
         <rect x="60" y="68" width="520" height="50" rx="4"
           className="fill-sky-50 dark:fill-sky-900/10" />
         <text x="320" y="88" textAnchor="middle" className="small fill-sky-600 dark:fill-sky-400">
-          AIR (21% O\u2082, 0.04% CO\u2082)
+          AIR (21% O₂, 0.04% CO₂)
         </text>
         <text x="320" y="102" textAnchor="middle" className="tiny fill-sky-500 dark:fill-sky-500">
           or thin film of water on skin surface
@@ -44,7 +44,7 @@ const FrogSkinBreathingDiagram = () => {
         <rect x="60" y="118" width="520" height="28" rx="0"
           fill="#60a5fa" opacity="0.2" stroke="#60a5fa" strokeWidth="1" />
         <text x="320" y="136" textAnchor="middle" className="small fill-blue-600 dark:fill-blue-300">
-          Mucus layer (keeps skin moist \u2014 gases dissolve here first)
+          Mucus layer (keeps skin moist — gases dissolve here first)
         </text>
 
         {/* Epidermis */}
@@ -54,7 +54,7 @@ const FrogSkinBreathingDiagram = () => {
           Epidermis
         </text>
         <text x="250" y="168" className="tiny fill-emerald-600 dark:fill-emerald-400">
-          Thin in frogs (1\u20132 cells thick) \u2014 unlike human skin (15\u201320 cells)
+          Thin in frogs (1–2 cells thick) — unlike human skin (15–20 cells)
         </text>
 
         {/* Dermis with capillaries */}
@@ -81,7 +81,7 @@ const FrogSkinBreathingDiagram = () => {
         <rect x="60" y="261" width="520" height="30" rx="0"
           fill="#ef4444" opacity="0.1" stroke="#ef4444" strokeWidth="0.8" />
         <text x="320" y="280" textAnchor="middle" className="small fill-red-600 dark:fill-red-300">
-          Bloodstream (carries O\u2082 to organs, brings CO\u2082 back)
+          Bloodstream (carries O₂ to organs, brings CO₂ back)
         </text>
 
         {/* Gas exchange arrows */}
@@ -91,7 +91,7 @@ const FrogSkinBreathingDiagram = () => {
             <line x1={x} y1={80} x2={x} y2={260} stroke="#3b82f6" strokeWidth="2.5"
               markerEnd="url(#blueArrow)" className="pulse" style={{ animationDelay: `\${i * 1.5}s` }} />
             <text x={x + 6} y={170} className="label fill-blue-600 dark:fill-blue-400" fontWeight="600">
-              O\u2082 \u2193
+              O₂ ↓
             </text>
           </g>
         ))}
@@ -102,7 +102,7 @@ const FrogSkinBreathingDiagram = () => {
             <line x1={x} y1={260} x2={x} y2={80} stroke="#f59e0b" strokeWidth="2.5"
               markerEnd="url(#amberArrow)" className="pulse" style={{ animationDelay: `\${i * 1.5 + 0.7}s` }} />
             <text x={x + 6} y={170} className="label fill-amber-600 dark:fill-amber-400" fontWeight="600">
-              CO\u2082 \u2191
+              CO₂ ↑
             </text>
           </g>
         ))}
@@ -123,7 +123,7 @@ const FrogSkinBreathingDiagram = () => {
           Critical requirement: skin must stay MOIST
         </text>
         <text x="320" y="332" textAnchor="middle" className="tiny fill-blue-600 dark:fill-blue-400">
-          O\u2082 and CO\u2082 can only cross the skin when dissolved in water. Dry skin = no breathing = death.
+          O₂ and CO₂ can only cross the skin when dissolved in water. Dry skin = no breathing = death.
         </text>
 
         {/* Comparison: how much oxygen from skin vs lungs */}

@@ -25,18 +25,18 @@ export default function BabelLevel4() {
 
   const miniLessons = [
     {
-      title: 'Structural optimisation \u2014 minimum material, maximum strength',
-      concept: `Real engineering is not just about making things strong enough \u2014 it is about using the **minimum material** to achieve the required strength. Every extra kilogram of steel costs money, adds weight (which demands a stronger foundation), and consumes resources.
+      title: 'Structural optimisation — minimum material, maximum strength',
+      concept: `Real engineering is not just about making things strong enough — it is about using the **minimum material** to achieve the required strength. Every extra kilogram of steel costs money, adds weight (which demands a stronger foundation), and consumes resources.
 
-**Topology optimisation** uses algorithms to find the most efficient shape. You start with a solid block, define where loads are applied and where supports exist, and the algorithm removes material from areas with low stress. The result is often organic-looking \u2014 resembling bones, trees, or coral.
+**Topology optimisation** uses algorithms to find the most efficient shape. You start with a solid block, define where loads are applied and where supports exist, and the algorithm removes material from areas with low stress. The result is often organic-looking — resembling bones, trees, or coral.
 
 This is precisely what evolution does: bones are strongest along load paths and hollow where forces are low. The femur (thigh bone) has a spongy internal structure that looks exactly like the stress field of an optimised beam.
 
 The code implements a simplified topology optimisation using stress-based material removal.`,
-      analogy: 'Imagine sculpting a statue from a block of marble. But instead of creating a face, you are creating a structure. You chisel away everywhere the material is not working hard \u2014 wherever stress is low, material is wasted. What remains is the most efficient possible shape.',
-      storyConnection: 'The Babel tower was a solid mass of brick \u2014 most of the material was not carrying significant load. A topology-optimised tower would look nothing like a solid block. It would have arches, voids, and lattices \u2014 resembling the Eiffel Tower more than a ziggurat. Nature figured this out long before algorithms did.',
+      analogy: 'Imagine sculpting a statue from a block of marble. But instead of creating a face, you are creating a structure. You chisel away everywhere the material is not working hard — wherever stress is low, material is wasted. What remains is the most efficient possible shape.',
+      storyConnection: 'The Babel tower was a solid mass of brick — most of the material was not carrying significant load. A topology-optimised tower would look nothing like a solid block. It would have arches, voids, and lattices — resembling the Eiffel Tower more than a ziggurat. Nature figured this out long before algorithms did.',
       checkQuestion: 'Why do bird bones have a honeycomb-like internal structure instead of being solid?',
-      checkAnswer: 'Flight demands minimum weight with maximum strength. A hollow bone with internal struts (trabeculae) has nearly the same bending strength as a solid bone but at a fraction of the weight. The struts align along load paths \u2014 exactly where stress is highest. This is biological topology optimisation, refined over 150 million years of evolution.',
+      checkAnswer: 'Flight demands minimum weight with maximum strength. A hollow bone with internal struts (trabeculae) has nearly the same bending strength as a solid bone but at a fraction of the weight. The struts align along load paths — exactly where stress is highest. This is biological topology optimisation, refined over 150 million years of evolution.',
       codeIntro: 'Simulate stress-based material removal to optimise a beam.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -117,21 +117,21 @@ print("The result resembles an I-beam — thick flanges at")
 print("top and bottom (high stress) with a thin web in")
 print("the middle (low stress). Nature already knows this.")`,
       challenge: 'Add a second load point at the centre of the beam (not just the tip). How does the optimised shape change? In real engineering, every load case produces a different optimal shape, and the final design must handle all of them.',
-      successHint: 'Topology optimisation is how modern engineers design everything from aircraft brackets to building columns. 3D printing has made it practical \u2014 you can now manufacture the organic shapes that optimisation produces.',
+      successHint: 'Topology optimisation is how modern engineers design everything from aircraft brackets to building columns. 3D printing has made it practical — you can now manufacture the organic shapes that optimisation produces.',
     },
     {
-      title: 'Tuned mass dampers \u2014 controlling building sway',
+      title: 'Tuned mass dampers — controlling building sway',
       concept: `Supertall buildings sway in the wind. The Burj Khalifa sways up to 1.5 metres at the top. The Shanghai Tower sways 0.5 metres. For occupants, this motion causes nausea and anxiety.
 
-The solution: a **Tuned Mass Damper (TMD)**. A heavy mass (100\u2013730 tonnes) is suspended near the top of the building on springs and oil dampers. When the building sways right, the mass swings left \u2014 absorbing the building\u2019s kinetic energy and converting it to heat through friction in the dampers.
+The solution: a **Tuned Mass Damper (TMD)**. A heavy mass (100–730 tonnes) is suspended near the top of the building on springs and oil dampers. When the building sways right, the mass swings left — absorbing the building’s kinetic energy and converting it to heat through friction in the dampers.
 
-The TMD must be **tuned** to the building\u2019s natural frequency. If f_building = 0.15 Hz, the TMD\u2019s frequency must be set to approximately the same value using: f = (1/2\u03C0)\u221A(k/m).
+The TMD must be **tuned** to the building’s natural frequency. If f_building = 0.15 Hz, the TMD’s frequency must be set to approximately the same value using: f = (1/2π)√(k/m).
 
 The code simulates a building with and without a TMD under wind excitation.`,
-      analogy: 'Hold a ruler clamped to the edge of a table and flick it \u2014 it vibrates wildly. Now attach a small weight on a rubber band to the ruler\u2019s tip. Flick again \u2014 the ruler barely moves because the dangling weight absorbs the vibration energy. A TMD is that dangling weight, scaled to 730 tonnes.',
+      analogy: 'Hold a ruler clamped to the edge of a table and flick it — it vibrates wildly. Now attach a small weight on a rubber band to the ruler’s tip. Flick again — the ruler barely moves because the dangling weight absorbs the vibration energy. A TMD is that dangling weight, scaled to 730 tonnes.',
       storyConnection: 'The Tower of Babel had no damping system. Wind-induced oscillation would have built up over time, causing occupants to feel seasick and eventually cracking the mud brick structure. Modern damping technology is what separates an 828-metre success (Burj Khalifa) from a 91-metre failure (Babel).',
-      checkQuestion: 'Taipei 101\u2019s TMD is a 730-tonne gold-painted steel ball. Why is it displayed publicly as a tourist attraction instead of hidden?',
-      checkAnswer: 'It serves both engineering and symbolic purposes. During Typhoon Soudelor (2015), visitors watched the ball swing 100 cm \u2014 visible proof that the building was safe because the damper was working. It is one of the few pieces of structural engineering that people can directly observe in action. It also demonstrates Taiwan\u2019s engineering prowess.',
+      checkQuestion: 'Taipei 101’s TMD is a 730-tonne gold-painted steel ball. Why is it displayed publicly as a tourist attraction instead of hidden?',
+      checkAnswer: 'It serves both engineering and symbolic purposes. During Typhoon Soudelor (2015), visitors watched the ball swing 100 cm — visible proof that the building was safe because the damper was working. It is one of the few pieces of structural engineering that people can directly observe in action. It also demonstrates Taiwan’s engineering prowess.',
       codeIntro: 'Simulate building response with and without a tuned mass damper.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -212,11 +212,11 @@ print(f"TMD mass: {m/1000:.0f} tonnes ({m/M*100:.0f}% of building)")
 print(f"\\nWithout TMD: max sway = {max(abs(x_no))*100:.1f} cm")
 print(f"With TMD:    max sway = {max(abs(x_b))*100:.1f} cm")
 print(f"Reduction:   {reduction:.0f}%")`,
-      challenge: 'Try changing the TMD mass ratio from 5% to 1% and 10%. Plot the reduction percentage for each. There is a sweet spot \u2014 too small and the TMD has no effect; too large and it adds too much weight to the building.',
-      successHint: 'Tuned mass dampers are elegant engineering: a simple pendulum concept scaled to hundreds of tonnes, precisely tuned to counteract the building\u2019s worst nightmare \u2014 resonant wind-induced oscillation.',
+      challenge: 'Try changing the TMD mass ratio from 5% to 1% and 10%. Plot the reduction percentage for each. There is a sweet spot — too small and the TMD has no effect; too large and it adds too much weight to the building.',
+      successHint: 'Tuned mass dampers are elegant engineering: a simple pendulum concept scaled to hundreds of tonnes, precisely tuned to counteract the building’s worst nightmare — resonant wind-induced oscillation.',
     },
     {
-      title: 'Structural failure analysis \u2014 why buildings collapse',
+      title: 'Structural failure analysis — why buildings collapse',
       concept: `When buildings collapse, structural engineers investigate the failure to prevent it from happening again. The analysis follows a forensic process: examine the rubble, reconstruct the load history, identify the failure mode, and determine whether the cause was design error, material defect, construction error, or overloading.
 
 Common failure modes:
@@ -224,11 +224,11 @@ Common failure modes:
 2. **Progressive collapse**: one element fails, overloading adjacent elements, triggering a cascade
 3. **Foundation failure**: soil bearing capacity exceeded, building tilts or sinks
 4. **Fatigue**: repeated small loads weaken a member until it snaps (metal fatigue)
-5. **Resonance**: wind or earthquake frequency matches the building\u2019s natural frequency
+5. **Resonance**: wind or earthquake frequency matches the building’s natural frequency
 
-The code simulates progressive collapse \u2014 removing one column and watching the load redistribute.`,
-      analogy: 'Think of a team of people carrying a heavy banner in a parade. If one person drops out, the others must carry their share. If the extra load makes another person drop out, the cascade continues until the banner falls. This is progressive collapse \u2014 and it is how the World Trade Centre towers failed after the aircraft impact.',
-      storyConnection: 'The Tower of Babel would have been vulnerable to progressive collapse. Mud brick has no ductility \u2014 it cracks suddenly rather than bending. Once one section cracked, the load would have shifted to adjacent sections, which would also crack, triggering a cascade. This may be the realistic engineering explanation for the tower\u2019s failure.',
+The code simulates progressive collapse — removing one column and watching the load redistribute.`,
+      analogy: 'Think of a team of people carrying a heavy banner in a parade. If one person drops out, the others must carry their share. If the extra load makes another person drop out, the cascade continues until the banner falls. This is progressive collapse — and it is how the World Trade Centre towers failed after the aircraft impact.',
+      storyConnection: 'The Tower of Babel would have been vulnerable to progressive collapse. Mud brick has no ductility — it cracks suddenly rather than bending. Once one section cracked, the load would have shifted to adjacent sections, which would also crack, triggering a cascade. This may be the realistic engineering explanation for the tower’s failure.',
       checkQuestion: 'Modern building codes require "alternate load path" design. What does this mean?',
       checkAnswer: 'It means the building must be designed so that if any single structural element (column, beam, or wall) is suddenly removed, the remaining structure can redistribute the loads and survive. This prevents progressive collapse. The building must have enough redundancy that no single point of failure brings down the whole structure.',
       codeIntro: 'Simulate progressive collapse by removing columns and tracking load redistribution.',
@@ -318,21 +318,21 @@ print(f"If < 1.0, cascade continues to total collapse.")`,
       successHint: 'Progressive collapse analysis is mandatory for all important structures. The lesson of Babel, the lesson of the Twin Towers, the lesson of every building failure: redundancy saves lives. No single point of failure should bring down the whole.',
     },
     {
-      title: 'Language endangerment \u2014 modern Babel in reverse',
-      concept: `At Babel, languages multiplied. Today, the opposite is happening: languages are **dying**. Of the world\u2019s ~7,000 languages, linguists estimate that **one dies every two weeks**. By 2100, between 50\u201390% of current languages may be extinct.
+      title: 'Language endangerment — modern Babel in reverse',
+      concept: `At Babel, languages multiplied. Today, the opposite is happening: languages are **dying**. Of the world’s ~7,000 languages, linguists estimate that **one dies every two weeks**. By 2100, between 50–90% of current languages may be extinct.
 
 A language dies when its last fluent speaker dies without passing it to children. The causes: urbanisation, globalisation, education policies that suppress minority languages, and the dominance of a few "big" languages (English, Mandarin, Spanish, Hindi, Arabic).
 
-Why does this matter? Each language encodes unique knowledge \u2014 about local plants, weather patterns, social structures, and ways of thinking \u2014 that is lost when the language dies. It is like burning a library.
+Why does this matter? Each language encodes unique knowledge — about local plants, weather patterns, social structures, and ways of thinking — that is lost when the language dies. It is like burning a library.
 
 NLP can help: record and analyse endangered languages, build dictionaries and grammars, and create tools for communities to teach their languages digitally.
 
-The code analyses the distribution and endangerment of the world\u2019s languages.`,
-      analogy: 'Imagine a forest with 7,000 species of trees. Each species has unique fruit, unique wood, unique ecology. Now a few invasive species (the big languages) are spreading and crowding out the native trees. By 2100, the forest has only 1,000 species. The diversity that made the forest resilient is gone. Language diversity is cognitive diversity \u2014 losing it makes human thinking less flexible.',
-      storyConnection: 'The Babel story presents language diversity as punishment. Linguists see it as treasure. The "confusion" at Babel gave humanity 7,000 different ways to describe reality, encode knowledge, and think about the world. The real tragedy is not the scattering of languages \u2014 it is the convergence toward a handful of dominant ones.',
+The code analyses the distribution and endangerment of the world’s languages.`,
+      analogy: 'Imagine a forest with 7,000 species of trees. Each species has unique fruit, unique wood, unique ecology. Now a few invasive species (the big languages) are spreading and crowding out the native trees. By 2100, the forest has only 1,000 species. The diversity that made the forest resilient is gone. Language diversity is cognitive diversity — losing it makes human thinking less flexible.',
+      storyConnection: 'The Babel story presents language diversity as punishment. Linguists see it as treasure. The "confusion" at Babel gave humanity 7,000 different ways to describe reality, encode knowledge, and think about the world. The real tragedy is not the scattering of languages — it is the convergence toward a handful of dominant ones.',
       checkQuestion: 'Northeast India has over 220 languages in a small geographic area. Why such extreme diversity?',
-      checkAnswer: 'Geography: mountainous terrain with deep valleys creates natural isolation, preventing language contact and merger. Each valley develops its own language independently. Time: human settlement in NE India is very old, allowing millennia of divergence. Cultural factors: strong tribal identities maintain linguistic boundaries. This is similar to Papua New Guinea (800+ languages) \u2014 same pattern of geographic isolation creating linguistic diversity.',
-      codeIntro: 'Analyse the distribution and endangerment of the world\u2019s languages.',
+      checkAnswer: 'Geography: mountainous terrain with deep valleys creates natural isolation, preventing language contact and merger. Each valley develops its own language independently. Time: human settlement in NE India is very old, allowing millennia of divergence. Cultural factors: strong tribal identities maintain linguistic boundaries. This is similar to Papua New Guinea (800+ languages) — same pattern of geographic isolation creating linguistic diversity.',
+      codeIntro: 'Analyse the distribution and endangerment of the world’s languages.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
@@ -402,18 +402,18 @@ print("Every language lost is a unique window on reality — closed forever.")`,
       successHint: 'Language endangerment is a crisis of the same magnitude as biodiversity loss. Each language represents thousands of years of human observation, categorisation, and expression. NLP tools can help document and preserve these languages before they disappear.',
     },
     {
-      title: 'Multilingual embeddings \u2014 one vector space for all languages',
-      concept: `The most powerful idea in modern NLP: a single vector space where words from **all languages** live together. "Dog" (English), "chien" (French), "Hund" (German), and "\u72D7" (Chinese) all map to nearly the same point.
+      title: 'Multilingual embeddings — one vector space for all languages',
+      concept: `The most powerful idea in modern NLP: a single vector space where words from **all languages** live together. "Dog" (English), "chien" (French), "Hund" (German), and "狗" (Chinese) all map to nearly the same point.
 
 How is this possible? During training, the model sees parallel texts (like the Bible, which exists in 3,000+ languages, or Wikipedia in 300+ languages). It learns that sentences with the same meaning should have similar vector representations, regardless of language.
 
 The technique is called **cross-lingual alignment**. Train separate embeddings for each language, then learn a **rotation matrix** that aligns them: if English "cat" = [0.5, 0.3] and French "chat" = [0.8, -0.1], find the rotation that maps one to the other. Once aligned, translation becomes nearest-neighbour lookup.
 
 The code implements cross-lingual alignment using a small bilingual dictionary as the anchor.`,
-      analogy: 'Imagine two maps of the same city made by different cartographers. One uses metric coordinates, the other uses imperial. The streets and buildings are the same \u2014 just measured differently. Cross-lingual alignment finds the conversion formula between the two coordinate systems so you can look up any location in either map.',
-      storyConnection: 'This technology is the ultimate reversal of Babel. Instead of confusing language, we are mathematically proving that all languages share a common semantic structure \u2014 they are different coordinate systems for the same reality. The "tower" that reaches the heavens is not made of brick. It is made of mathematics.',
+      analogy: 'Imagine two maps of the same city made by different cartographers. One uses metric coordinates, the other uses imperial. The streets and buildings are the same — just measured differently. Cross-lingual alignment finds the conversion formula between the two coordinate systems so you can look up any location in either map.',
+      storyConnection: 'This technology is the ultimate reversal of Babel. Instead of confusing language, we are mathematically proving that all languages share a common semantic structure — they are different coordinate systems for the same reality. The "tower" that reaches the heavens is not made of brick. It is made of mathematics.',
       checkQuestion: 'Can multilingual models translate between two languages they have never seen paired together (e.g., Swahili to Finnish)?',
-      checkAnswer: 'Yes, through **zero-shot translation**. If the model has aligned Swahili to English and Finnish to English, the Swahili\u2192English\u2192Finnish path exists implicitly through the shared vector space. The model does not need to see any Swahili-Finnish parallel text. This was first demonstrated by Google\u2019s multilingual neural machine translation system in 2016 and was considered a breakthrough.',
+      checkAnswer: 'Yes, through **zero-shot translation**. If the model has aligned Swahili to English and Finnish to English, the Swahili→English→Finnish path exists implicitly through the shared vector space. The model does not need to see any Swahili-Finnish parallel text. This was first demonstrated by Google’s multilingual neural machine translation system in 2016 and was considered a breakthrough.',
       codeIntro: 'Align word embeddings from two languages using a bilingual dictionary.',
       code: `import numpy as np
 
@@ -476,18 +476,18 @@ print("a shared space, and every word pair becomes translatable.")`,
       successHint: 'Cross-lingual alignment is how Google Translate handles 133 languages with a single model. The mathematical insight is profound: all human languages describe the same reality, so their vector spaces must be related by a simple rotation. Babel is reversed by linear algebra.',
     },
     {
-      title: 'Capstone \u2014 design a structure that withstands all forces',
+      title: 'Capstone — design a structure that withstands all forces',
       concept: `You now have the complete engineering toolkit: compression, tension, shear, buckling, wind loads, earthquake response, foundations, material selection, FEA, and optimisation. Let us put it all together.
 
 Your task: design a **1,000-metre tower** that withstands its own weight, Category 5 wind, and a magnitude 7 earthquake. You must choose the structural system, materials, cross-section shape, and foundation type.
 
 The code provides a complete structural feasibility check that evaluates your design against all criteria. This is what real structural engineers do before a single foundation pile is driven.
 
-This is also where the two halves of this lesson meet: the **engineering** of building tall and the **linguistics** of communicating across barriers. Both are about structure \u2014 physical structure and linguistic structure \u2014 and both require understanding the fundamental forces at work.`,
+This is also where the two halves of this lesson meet: the **engineering** of building tall and the **linguistics** of communicating across barriers. Both are about structure — physical structure and linguistic structure — and both require understanding the fundamental forces at work.`,
       analogy: 'You are the chief engineer of a modern Babel. But this time, you have 5,000 years of accumulated knowledge: material science, structural analysis, wind engineering, foundation design, and computational simulation. The question is not whether you CAN build to the sky. The question is: what is the optimal design?',
-      storyConnection: 'The Tower of Babel failed for two reasons: the builders lacked the engineering knowledge to build tall, and they lost the ability to communicate. You now have both \u2014 the structural engineering to design a kilometre-high tower and the NLP to translate your plans into any language on Earth. Babel is solved.',
+      storyConnection: 'The Tower of Babel failed for two reasons: the builders lacked the engineering knowledge to build tall, and they lost the ability to communicate. You now have both — the structural engineering to design a kilometre-high tower and the NLP to translate your plans into any language on Earth. Babel is solved.',
       checkQuestion: 'If you could build a 1-km tower, should you? What are the ethical and environmental considerations?',
-      checkAnswer: 'Major concerns: (1) Embodied carbon \u2014 concrete production accounts for 8% of global CO\u2082 emissions; a 1-km tower requires enormous quantities. (2) Resource concentration \u2014 massive investment in one structure vs. distributed infrastructure. (3) Wind shadow \u2014 supertall buildings alter local wind patterns, affecting surrounding areas. (4) Emergency evacuation \u2014 getting 50,000 people out of a 1-km building during a fire is an unsolved problem. Engineering can does not mean engineering should.',
+      checkAnswer: 'Major concerns: (1) Embodied carbon — concrete production accounts for 8% of global CO₂ emissions; a 1-km tower requires enormous quantities. (2) Resource concentration — massive investment in one structure vs. distributed infrastructure. (3) Wind shadow — supertall buildings alter local wind patterns, affecting surrounding areas. (4) Emergency evacuation — getting 50,000 people out of a 1-km building during a fire is an unsolved problem. Engineering can does not mean engineering should.',
       codeIntro: 'Run a complete structural feasibility check for a 1,000 m tower design.',
       code: `import numpy as np
 
@@ -583,8 +583,8 @@ all_pass = comp_ok and wind_ok and seismic_ok and buckling_ok and found_ok
 print(f"\\n{'='*55}")
 print(f"OVERALL: {'ALL CHECKS PASS — FEASIBLE' if all_pass else 'DESIGN NEEDS REVISION'}")
 print(f"{'='*55}")`,
-      challenge: 'The design above may fail some checks. Modify the parameters to make ALL checks pass: try widening the base, increasing core diameter, or reducing height. What trade-offs do you face? This is the core of engineering design \u2014 optimising within constraints.',
-      successHint: 'You have completed the full journey from mud bricks to kilometre-high towers, from confused tongues to transformer attention. The Tower of Babel story is about the limits of human ambition. This lesson proves that the limits are not fixed \u2014 they are pushed outward by knowledge, one equation at a time.',
+      challenge: 'The design above may fail some checks. Modify the parameters to make ALL checks pass: try widening the base, increasing core diameter, or reducing height. What trade-offs do you face? This is the core of engineering design — optimising within constraints.',
+      successHint: 'You have completed the full journey from mud bricks to kilometre-high towers, from confused tongues to transformer attention. The Tower of Babel story is about the limits of human ambition. This lesson proves that the limits are not fixed — they are pushed outward by knowledge, one equation at a time.',
     },
   ];
 

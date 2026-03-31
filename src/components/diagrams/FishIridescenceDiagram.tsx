@@ -92,7 +92,7 @@ export default function FishIridescenceDiagram() {
         <text x="450" y="334" textAnchor="middle" className="fill-purple-600 dark:fill-purple-400" fontSize="10">the rainbow shimmer.</text>
 
         {/* Platelet thickness note */}
-        <text x="300" y="352" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">Guanine platelets: 5\u201320 nm thick \u2014 about 5,000\u00d7 thinner than a hair</text>
+        <text x="300" y="352" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">Guanine platelets: 5–20 nm thick — about 5,000× thinner than a hair</text>
       </svg>
     </div>
   );

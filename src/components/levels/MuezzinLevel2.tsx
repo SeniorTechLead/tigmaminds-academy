@@ -29,18 +29,18 @@ export default function MuezzinLevel2() {
 
   const miniLessons = [
     {
-      title: 'Acoustic reflection \u2014 the law of reflection for sound waves',
+      title: 'Acoustic reflection — the law of reflection for sound waves',
       concept: `When a sound wave hits a hard, flat surface, it bounces back according to the **law of reflection**: the angle of incidence equals the angle of reflection (measured from the normal to the surface). This is identical to the law governing light reflection in a mirror.
 
-The reflected wave is called an **echo** if the reflecting surface is far enough away (at least 17 metres) for the brain to perceive the original and reflected sounds as separate events. At closer distances, reflections blend with the direct sound, creating **reverberation** \u2014 a lingering quality that makes music sound richer and speech harder to understand.
+The reflected wave is called an **echo** if the reflecting surface is far enough away (at least 17 metres) for the brain to perceive the original and reflected sounds as separate events. At closer distances, reflections blend with the direct sound, creating **reverberation** — a lingering quality that makes music sound richer and speech harder to understand.
 
-In a mosque, every wall, floor, column, and dome is a reflecting surface. The architect\u2019s challenge is to control these reflections \u2014 directing useful reflections toward the congregation while absorbing harmful ones that create muddy echoes.
+In a mosque, every wall, floor, column, and dome is a reflecting surface. The architect’s challenge is to control these reflections — directing useful reflections toward the congregation while absorbing harmful ones that create muddy echoes.
 
 The code traces reflection paths from a speaker to listeners via walls and ceiling.`,
-      analogy: 'Bounce a ball off a wall. If you throw it straight at the wall, it comes straight back. If you throw at an angle, it bounces off at the same angle on the other side of the normal. Sound waves follow the same geometry. Throwing the ball in a squash court is like speaking in a mosque \u2014 the ball (sound) bounces off every surface before reaching the other player (listener).',
-      storyConnection: 'In Ottoman mosques, the walls are not bare stone. They are covered in ceramic tiles, plaster, and carved stone \u2014 materials chosen not just for beauty but for their acoustic properties. Smooth tiles reflect sound efficiently (useful near the imam), while carved and textured surfaces scatter sound (reducing focused echoes that would muddy speech).',
+      analogy: 'Bounce a ball off a wall. If you throw it straight at the wall, it comes straight back. If you throw at an angle, it bounces off at the same angle on the other side of the normal. Sound waves follow the same geometry. Throwing the ball in a squash court is like speaking in a mosque — the ball (sound) bounces off every surface before reaching the other player (listener).',
+      storyConnection: 'In Ottoman mosques, the walls are not bare stone. They are covered in ceramic tiles, plaster, and carved stone — materials chosen not just for beauty but for their acoustic properties. Smooth tiles reflect sound efficiently (useful near the imam), while carved and textured surfaces scatter sound (reducing focused echoes that would muddy speech).',
       checkQuestion: 'A speaker faces a flat wall 10 metres away. A listener stands 5 metres behind the speaker. The direct sound travels 5 m; the reflected sound travels 10 + 10 + 5 = 25 m. What is the time delay of the echo?',
-      checkAnswer: 'Extra path = 25 \u2212 5 = 20 m. At 343 m/s: delay = 20/343 = 0.058 seconds = 58 ms. This is longer than the ~50 ms threshold where the brain hears a distinct echo. The wall creates a noticeable echo. Architects add absorption material or angle the wall to prevent this.',
+      checkAnswer: 'Extra path = 25 − 5 = 20 m. At 343 m/s: delay = 20/343 = 0.058 seconds = 58 ms. This is longer than the ~50 ms threshold where the brain hears a distinct echo. The wall creates a noticeable echo. Architects add absorption material or angle the wall to prevent this.',
       codeIntro: 'Trace sound reflection paths in a rectangular room.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -115,21 +115,21 @@ for lx, ly in listeners:
       successHint: 'Acoustic reflection analysis is the foundation of room acoustics. Every concert hall, recording studio, and mosque is designed by tracing reflections and controlling their timing. The same physics governs radar, sonar, and ultrasound imaging.',
     },
     {
-      title: 'Parabolic surfaces \u2014 focusing sound with geometry',
+      title: 'Parabolic surfaces — focusing sound with geometry',
       concept: `A **parabola** has a remarkable property: any ray arriving parallel to the axis reflects to a single point called the **focus**. Conversely, any ray from the focus reflects off the parabola as a parallel beam.
 
 The equation of a parabola with focus at distance f from the vertex is:
-**y = x\u00B2 / (4f)**
+**y = x² / (4f)**
 
 This geometry is used in satellite dishes (focusing radio waves), car headlights (projecting parallel light), and acoustic mirrors (focusing sound).
 
-In mosque architecture, the mihrab (prayer niche) is often designed with a slightly parabolic curve to collect the imam\u2019s voice and project it toward the congregation. The dome is a 3D version \u2014 a **paraboloid** that collects diverging sound waves and redirects them as a focused beam.
+In mosque architecture, the mihrab (prayer niche) is often designed with a slightly parabolic curve to collect the imam’s voice and project it toward the congregation. The dome is a 3D version — a **paraboloid** that collects diverging sound waves and redirects them as a focused beam.
 
 The code traces rays from a source at the focus of a parabolic reflector and compares parabolic, spherical, and flat surfaces.`,
-      analogy: 'A magnifying glass focuses parallel sunlight to a single burning point. A parabolic reflector does the same thing with sound. Place a speaker at the focus and the reflected sound emerges as a tight, parallel beam \u2014 louder and more directional than an un-reflected source. This is why shouting into a megaphone (a truncated parabola) works so well.',
-      storyConnection: 'The mihrab niche in the S\u00FCleymaniye Mosque has a concave surface that acts as a partial parabolic reflector. When the imam speaks into the mihrab, his voice is reflected outward toward the congregation. Sinan reportedly tested different curvatures by having assistants listen from various positions while he spoke from the niche.',
+      analogy: 'A magnifying glass focuses parallel sunlight to a single burning point. A parabolic reflector does the same thing with sound. Place a speaker at the focus and the reflected sound emerges as a tight, parallel beam — louder and more directional than an un-reflected source. This is why shouting into a megaphone (a truncated parabola) works so well.',
+      storyConnection: 'The mihrab niche in the Süleymaniye Mosque has a concave surface that acts as a partial parabolic reflector. When the imam speaks into the mihrab, his voice is reflected outward toward the congregation. Sinan reportedly tested different curvatures by having assistants listen from various positions while he spoke from the niche.',
       checkQuestion: 'If a parabolic dish has a focal length of 2 metres, what is the depth of the dish at 3 metres from the centre?',
-      checkAnswer: 'Using y = x\u00B2/(4f) = 3\u00B2/(4\u00D72) = 9/8 = 1.125 m. The dish is 1.125 metres deep at 3 metres from the centre. In practice, mosque domes are much larger and less deeply curved, with focal lengths of 10-20 metres.',
+      checkAnswer: 'Using y = x²/(4f) = 3²/(4×2) = 9/8 = 1.125 m. The dish is 1.125 metres deep at 3 metres from the centre. In practice, mosque domes are much larger and less deeply curved, with focal lengths of 10-20 metres.',
       codeIntro: 'Compare parabolic, spherical, and flat reflectors for sound focusing.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -209,20 +209,20 @@ print("Flat: rays reflect straight back (no focusing)")
 print()
 print(f"Parabolic focal length: {f} m")
 print(f"Spherical approximate focal length: {R/2} m")`,
-      challenge: 'Design a parabolic mihrab niche that focuses the imam\u2019s voice (placed at the focus) into a beam 20 degrees wide. Calculate the required focal length and dish diameter.',
+      challenge: 'Design a parabolic mihrab niche that focuses the imam’s voice (placed at the focus) into a beam 20 degrees wide. Calculate the required focal length and dish diameter.',
       successHint: 'Parabolic geometry appears everywhere: satellite dishes, radio telescopes, car headlights, solar concentrators, and acoustic mirrors. Understanding the relationship between curvature and focal length is fundamental to optics and acoustics alike.',
     },
     {
-      title: 'Whispering galleries \u2014 sound travelling along curved surfaces',
-      concept: `Stand at one end of a circular or elliptical dome. Whisper. Someone at the other end, 30+ metres away, hears you clearly \u2014 while people in between hear nothing. This is the **whispering gallery effect**, and it defies the inverse square law.
+      title: 'Whispering galleries — sound travelling along curved surfaces',
+      concept: `Stand at one end of a circular or elliptical dome. Whisper. Someone at the other end, 30+ metres away, hears you clearly — while people in between hear nothing. This is the **whispering gallery effect**, and it defies the inverse square law.
 
 The explanation: sound waves travelling along a curved surface experience **total internal reflection**. Just as light in a fibre optic cable bounces along the inside of the glass, sound skims along the concave surface, losing very little energy because each reflection angle is shallow.
 
-The mathematical condition: the sound wavelength must be small compared to the dome radius. For a 15 m radius dome and speech at 1000 Hz (\u03BB \u2248 0.34 m), the ratio is about 44:1 \u2014 well within the whispering gallery regime.
+The mathematical condition: the sound wavelength must be small compared to the dome radius. For a 15 m radius dome and speech at 1000 Hz (λ ≈ 0.34 m), the ratio is about 44:1 — well within the whispering gallery regime.
 
-Lord Rayleigh first explained this in 1910 by studying St Paul\u2019s Cathedral in London, where whispers travel 34 m around the dome gallery.`,
-      analogy: 'Roll a marble along the inside rim of a large bowl. The marble follows the curve, staying on the rim, rather than shooting across the middle. Sound waves in a dome do the same \u2014 they hug the curved surface, skimming along the inside rather than spreading across the open space. This is why the sound stays strong over long distances along the wall.',
-      storyConnection: 'Some Ottoman mosques exhibit whispering gallery effects, though this was sometimes unintentional and problematic. If the imam\u2019s voice travelled around the dome rather than down to the congregation, it arrived delayed and muddied. Sinan\u2019s genius was in breaking the whispering gallery effect using pendentives (triangular transitions between dome and walls) and surface textures that scatter the skimming waves downward.',
+Lord Rayleigh first explained this in 1910 by studying St Paul’s Cathedral in London, where whispers travel 34 m around the dome gallery.`,
+      analogy: 'Roll a marble along the inside rim of a large bowl. The marble follows the curve, staying on the rim, rather than shooting across the middle. Sound waves in a dome do the same — they hug the curved surface, skimming along the inside rather than spreading across the open space. This is why the sound stays strong over long distances along the wall.',
+      storyConnection: 'Some Ottoman mosques exhibit whispering gallery effects, though this was sometimes unintentional and problematic. If the imam’s voice travelled around the dome rather than down to the congregation, it arrived delayed and muddied. Sinan’s genius was in breaking the whispering gallery effect using pendentives (triangular transitions between dome and walls) and surface textures that scatter the skimming waves downward.',
       checkQuestion: 'Why does the whispering gallery effect work better at higher frequencies?',
       checkAnswer: 'Higher frequencies have shorter wavelengths. For the effect to work, the wavelength must be much smaller than the dome radius (so the wave "sees" the surface as locally flat and reflects cleanly). Low frequencies have long wavelengths and diffract too much to stay on the surface. This is why whispers (rich in high frequencies) work better than shouts (more low-frequency content) in whispering galleries.',
       codeIntro: 'Simulate sound propagation along a circular dome wall.',
@@ -294,20 +294,20 @@ print(f"  Gallery advantage: {-10*np.log10(1/30**2) - 0.02*30:.0f} dB stronger!"
       successHint: 'Whispering galleries demonstrate that geometry can override the inverse square law for sound along surfaces. This principle is used in optical fibres (total internal reflection of light), ring lasers, and microwave waveguides.',
     },
     {
-      title: 'Dome acoustics \u2014 Sabine\u2019s equation and reverberation time',
-      concept: `In 1898, Wallace Clement Sabine measured how long it took sound to decay in Harvard\u2019s Fogg Lecture Hall. He discovered that **reverberation time** (RT60 \u2014 the time for sound to drop by 60 dB) depends on room volume and total absorption:
+      title: 'Dome acoustics — Sabine’s equation and reverberation time',
+      concept: `In 1898, Wallace Clement Sabine measured how long it took sound to decay in Harvard’s Fogg Lecture Hall. He discovered that **reverberation time** (RT60 — the time for sound to drop by 60 dB) depends on room volume and total absorption:
 
-**RT60 = 0.161 \u00D7 V / A**
+**RT60 = 0.161 × V / A**
 
-Where V is room volume (m\u00B3) and A is total absorption (m\u00B2 sabins). Absorption A = sum of (surface area \u00D7 absorption coefficient) for each material.
+Where V is room volume (m³) and A is total absorption (m² sabins). Absorption A = sum of (surface area × absorption coefficient) for each material.
 
-Absorption coefficients range from 0.01 (marble, highly reflective) to 0.99 (acoustic foam, highly absorptive). A large marble dome has very low absorption \u2192 long RT60 \u2192 too much echo. Adding carpets, curtains, and textured surfaces increases absorption and reduces RT60.
+Absorption coefficients range from 0.01 (marble, highly reflective) to 0.99 (acoustic foam, highly absorptive). A large marble dome has very low absorption → long RT60 → too much echo. Adding carpets, curtains, and textured surfaces increases absorption and reduces RT60.
 
-For speech clarity, RT60 should be 0.5-1.0 seconds. For music, 1.5-2.5 seconds. For a mosque (both speech and Qur\u2019anic recitation), 1.0-1.5 seconds is ideal.`,
-      analogy: 'Clap your hands in an empty bathroom. The sound rings for seconds because the hard tiles reflect nearly all the sound energy. Now clap in a closet full of clothes. The sound dies instantly because the fabric absorbs the energy. Sabine\u2019s equation quantifies this: more volume and harder surfaces = longer reverb; more absorption = shorter reverb.',
-      storyConnection: 'The S\u00FCleymaniye Mosque has a volume of approximately 29,000 m\u00B3. With marble floors and smooth dome surfaces, the natural RT60 would exceed 8 seconds \u2014 terrible for speech. Sinan addressed this with thick carpets (absorption coefficient ~0.5), perforated wall panels, and reportedly Helmholtz resonators embedded in the walls. The measured RT60 is about 5.5 seconds at low frequencies and 2.5 seconds at speech frequencies \u2014 remarkable for a 460-year-old building.',
-      checkQuestion: 'A mosque has volume 5000 m\u00B3. The total absorption is 400 sabins. What is RT60? Is it good for speech?',
-      checkAnswer: 'RT60 = 0.161 \u00D7 5000 / 400 = 2.01 seconds. This is acceptable for music but slightly long for speech clarity (ideal: 0.5-1.0s). Adding 200 m\u00B2 of carpet (\u03B1 = 0.5, contributing 100 sabins) would reduce RT60 to 0.161 \u00D7 5000 / 500 = 1.61 s. Adding acoustic panels on the walls could bring it to the ideal range.',
+For speech clarity, RT60 should be 0.5-1.0 seconds. For music, 1.5-2.5 seconds. For a mosque (both speech and Qur’anic recitation), 1.0-1.5 seconds is ideal.`,
+      analogy: 'Clap your hands in an empty bathroom. The sound rings for seconds because the hard tiles reflect nearly all the sound energy. Now clap in a closet full of clothes. The sound dies instantly because the fabric absorbs the energy. Sabine’s equation quantifies this: more volume and harder surfaces = longer reverb; more absorption = shorter reverb.',
+      storyConnection: 'The Süleymaniye Mosque has a volume of approximately 29,000 m³. With marble floors and smooth dome surfaces, the natural RT60 would exceed 8 seconds — terrible for speech. Sinan addressed this with thick carpets (absorption coefficient ~0.5), perforated wall panels, and reportedly Helmholtz resonators embedded in the walls. The measured RT60 is about 5.5 seconds at low frequencies and 2.5 seconds at speech frequencies — remarkable for a 460-year-old building.',
+      checkQuestion: 'A mosque has volume 5000 m³. The total absorption is 400 sabins. What is RT60? Is it good for speech?',
+      checkAnswer: 'RT60 = 0.161 × 5000 / 400 = 2.01 seconds. This is acceptable for music but slightly long for speech clarity (ideal: 0.5-1.0s). Adding 200 m² of carpet (α = 0.5, contributing 100 sabins) would reduce RT60 to 0.161 × 5000 / 500 = 1.61 s. Adding acoustic panels on the walls could bring it to the ideal range.',
       codeIntro: 'Calculate reverberation time for a mosque and optimise surface materials.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -402,12 +402,12 @@ print("=== Reverberation Analysis ===")
 for name, rt in zip(scenarios, rts):
     quality = 'Excellent' if 0.5 < rt < 1.5 else 'Good' if rt < 2.5 else 'Too reverberant'
     print(f"  {name.replace(chr(10),' '):25s}: RT60 = {rt:.1f}s [{quality}]")`,
-      challenge: 'Design a mosque with volume 8000 m\u00B3 that achieves RT60 = 1.2 seconds at 1000 Hz. What combination of floor, wall, and ceiling materials do you need? Budget: total surface treatment must cost less than $50,000 (carpet: $20/m\u00B2, acoustic panels: $80/m\u00B2, ceiling treatment: $60/m\u00B2).',
-      successHint: 'Sabine\u2019s equation is the starting point for all architectural acoustics. Every concert hall, recording studio, classroom, and place of worship is designed using this formula. Modern software extends it with ray tracing and wave simulation, but the fundamental insight \u2014 that reverb depends on volume and absorption \u2014 remains Sabine\u2019s gift.',
+      challenge: 'Design a mosque with volume 8000 m³ that achieves RT60 = 1.2 seconds at 1000 Hz. What combination of floor, wall, and ceiling materials do you need? Budget: total surface treatment must cost less than $50,000 (carpet: $20/m², acoustic panels: $80/m², ceiling treatment: $60/m²).',
+      successHint: 'Sabine’s equation is the starting point for all architectural acoustics. Every concert hall, recording studio, classroom, and place of worship is designed using this formula. Modern software extends it with ray tracing and wave simulation, but the fundamental insight — that reverb depends on volume and absorption — remains Sabine’s gift.',
     },
     {
-      title: 'Speaker crossover design \u2014 splitting frequencies for clarity',
-      concept: `No single speaker can reproduce all audible frequencies (20 Hz to 20,000 Hz) well. Large speakers (woofers) have heavy cones that respond slowly \u2014 great for bass but terrible for treble. Small speakers (tweeters) have light cones that vibrate fast \u2014 great for treble but cannot move enough air for bass.
+      title: 'Speaker crossover design — splitting frequencies for clarity',
+      concept: `No single speaker can reproduce all audible frequencies (20 Hz to 20,000 Hz) well. Large speakers (woofers) have heavy cones that respond slowly — great for bass but terrible for treble. Small speakers (tweeters) have light cones that vibrate fast — great for treble but cannot move enough air for bass.
 
 A **crossover network** splits the signal:
 - **Low-pass filter** sends frequencies below the crossover point to the woofer
@@ -415,13 +415,13 @@ A **crossover network** splits the signal:
 
 A simple first-order crossover uses a capacitor (blocks bass, passes treble) and an inductor (blocks treble, passes bass). The crossover frequency is:
 
-**f_c = 1 / (2\u03C0\u221A(LC))**
+**f_c = 1 / (2π√(LC))**
 
 Higher-order crossovers (2nd, 4th) have steeper rolloff slopes (12 dB/octave, 24 dB/octave) for cleaner separation.
 
-For mosque speakers, the crossover typically sits at 2-3 kHz, splitting the Muezzin\u2019s voice between a horn (mid/treble) and a larger cone (bass).`,
+For mosque speakers, the crossover typically sits at 2-3 kHz, splitting the Muezzin’s voice between a horn (mid/treble) and a larger cone (bass).`,
       analogy: 'A mail sorting centre splits parcels by size: small envelopes go one way, large boxes another. Neither conveyor belt handles both efficiently. A crossover does the same with frequency: low notes go to the big speaker, high notes to the small one. The result is cleaner, louder, and less distorted than forcing one speaker to do everything.',
-      storyConnection: 'Modern mosque speaker systems typically use two-way or three-way designs. The Muezzin\u2019s voice spans roughly 100 Hz to 4000 Hz. A crossover at 2 kHz sends the fundamental frequencies and warmth of the voice to a horn, while the upper harmonics and sibilance go to a tweeter. This ensures the Adhan is both powerful (carrying across the city) and clear (every word intelligible).',
+      storyConnection: 'Modern mosque speaker systems typically use two-way or three-way designs. The Muezzin’s voice spans roughly 100 Hz to 4000 Hz. A crossover at 2 kHz sends the fundamental frequencies and warmth of the voice to a horn, while the upper harmonics and sibilance go to a tweeter. This ensures the Adhan is both powerful (carrying across the city) and clear (every word intelligible).',
       checkQuestion: 'A 2-way crossover splits at 2 kHz. The Muezzin sings a note at 300 Hz with harmonics at 600, 900, 1200, 1500, 1800, 2100, 2400, 3000 Hz. Which harmonics go to the woofer and which to the tweeter?',
       checkAnswer: 'Below 2 kHz (woofer): 300, 600, 900, 1200, 1500, 1800 Hz. Above 2 kHz (tweeter): 2100, 2400, 3000 Hz. The crossover region near 2 kHz has overlap where both speakers contribute. A steep rolloff (4th order, 24 dB/octave) minimises this overlap for cleaner sound.',
       codeIntro: 'Design and visualise a speaker crossover network.',
@@ -487,27 +487,27 @@ print("2nd order: moderate slope, some dip at crossover")
 print("4th order: steep slope, clean separation, flat sum")
 print()
 print("For mosque: 4th order Linkwitz-Riley is preferred")
-print("  \u2192 clean frequency separation")
-print("  \u2192 flat combined response")
-print("  \u2192 no phase cancellation at crossover")`,
+print("  → clean frequency separation")
+print("  → flat combined response")
+print("  → no phase cancellation at crossover")`,
       challenge: 'Design a 3-way crossover with cuts at 500 Hz and 3000 Hz (woofer, mid, tweeter). Plot the three response curves and verify the combined sum is flat. What happens if the crossover frequencies are too close together?',
-      successHint: 'Crossover design is fundamental to audio engineering. Every speaker system \u2014 from headphones to stadium PA systems to mosque minarets \u2014 uses crossovers to divide the frequency spectrum among specialised drivers.',
+      successHint: 'Crossover design is fundamental to audio engineering. Every speaker system — from headphones to stadium PA systems to mosque minarets — uses crossovers to divide the frequency spectrum among specialised drivers.',
     },
     {
-      title: 'Concert hall modelling \u2014 early reflections and acoustic quality',
-      concept: `Acoustic quality in a room depends on the pattern of **early reflections** \u2014 the first sounds arriving within 80 ms of the direct sound. These early reflections determine:
+      title: 'Concert hall modelling — early reflections and acoustic quality',
+      concept: `Acoustic quality in a room depends on the pattern of **early reflections** — the first sounds arriving within 80 ms of the direct sound. These early reflections determine:
 
 - **Clarity (C80)**: ratio of energy in the first 80 ms to energy after 80 ms. Higher C80 = clearer speech.
 - **Definition (D50)**: fraction of total energy arriving in the first 50 ms. D50 > 0.5 is good for speech.
 - **Lateral Energy Fraction (LEF)**: fraction of early energy arriving from the sides. Higher LEF = greater sense of spaciousness.
 
-Professional acoustic modelling uses **image source methods**: for every reflecting surface, calculate a "virtual source" (the speaker\u2019s mirror image) and trace paths from each virtual source to each listener. The arrival time, amplitude, and direction of each reflection build a complete acoustic fingerprint.
+Professional acoustic modelling uses **image source methods**: for every reflecting surface, calculate a "virtual source" (the speaker’s mirror image) and trace paths from each virtual source to each listener. The arrival time, amplitude, and direction of each reflection build a complete acoustic fingerprint.
 
 The code models a simplified rectangular hall and calculates C80, D50, and LEF for different listener positions.`,
       analogy: 'Imagine throwing many balls at once in a squash court. Each ball bounces off a different wall at a different time, eventually reaching a target on the floor. The pattern of arrivals (how many, how fast, from which direction) determines whether the target "hears" a clean signal or a muddled mess. Acoustic modelling traces each "ball" (sound ray) through the room.',
-      storyConnection: 'The S\u00FCleymaniye Mosque was essentially a concert hall before concert halls existed. Sinan needed speech clarity (high C80) and a sense of spacious grandeur (high LEF). He achieved this with a large central dome providing early ceiling reflections (boosting C80) and angled walls providing lateral reflections (boosting LEF). Modern acoustic measurements confirm his design achieves remarkable metrics for a 16th-century building.',
+      storyConnection: 'The Süleymaniye Mosque was essentially a concert hall before concert halls existed. Sinan needed speech clarity (high C80) and a sense of spacious grandeur (high LEF). He achieved this with a large central dome providing early ceiling reflections (boosting C80) and angled walls providing lateral reflections (boosting LEF). Modern acoustic measurements confirm his design achieves remarkable metrics for a 16th-century building.',
       checkQuestion: 'If a listener receives 80% of total sound energy within the first 50 ms, is D50 good for speech? What about music?',
-      checkAnswer: 'D50 = 0.80, which is excellent for speech clarity (threshold: D50 > 0.50). For music, however, this level of clarity can sound "dry" \u2014 music benefits from more late energy (reverb) that creates warmth and fullness. A concert hall for orchestral music might target D50 around 0.40-0.50. This is the fundamental tension in mosque design: speech requires clarity, Qur\u2019anic recitation benefits from some reverb.',
+      checkAnswer: 'D50 = 0.80, which is excellent for speech clarity (threshold: D50 > 0.50). For music, however, this level of clarity can sound "dry" — music benefits from more late energy (reverb) that creates warmth and fullness. A concert hall for orchestral music might target D50 around 0.40-0.50. This is the fundamental tension in mosque design: speech requires clarity, Qur’anic recitation benefits from some reverb.',
       codeIntro: 'Model early reflections and calculate acoustic quality metrics.',
       code: `import numpy as np
 import matplotlib.pyplot as plt

@@ -4,7 +4,7 @@ export default function OrchidCoevolutionDiagram() {
       <svg viewBox="0 0 560 440" className="w-full max-w-lg mx-auto" role="img" aria-label="Diagram showing co-evolution between Darwin orchid and hawk moth, illustrating the arms race of spur length and tongue length">
         <rect width="560" height="440" rx="12" className="fill-slate-900" />
         <text x="280" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#22c55e">Co-evolution Arms Race</text>
-        <text x="280" y="46" textAnchor="middle" fontSize="10" className="fill-slate-400">When two species push each other to evolve \u2014 Darwin{"'"}s orchid and hawk moth</text>
+        <text x="280" y="46" textAnchor="middle" fontSize="10" className="fill-slate-400">When two species push each other to evolve — Darwin{"'"}s orchid and hawk moth</text>
 
         {/* Timeline of escalation */}
         <g transform="translate(50, 75)">
@@ -74,7 +74,7 @@ export default function OrchidCoevolutionDiagram() {
         {/* Why it matters */}
         <g transform="translate(280, 395)">
           <text x="0" y="0" textAnchor="middle" fontSize="10" fill="#94a3b8">Co-evolution = each species drives the other to evolve.</text>
-          <text x="0" y="14" textAnchor="middle" fontSize="10" fill="#94a3b8">Beautiful precision \u2014 but dangerous fragility if one partner disappears.</text>
+          <text x="0" y="14" textAnchor="middle" fontSize="10" fill="#94a3b8">Beautiful precision — but dangerous fragility if one partner disappears.</text>
         </g>
 
         <defs>

@@ -114,7 +114,7 @@ export default function GeoMountainGrowthDiagram() {
         </g>
 
         {/* Erosion label */}
-        <text x="450" y="100" className="fill-amber-600 dark:fill-amber-400" fontSize="10">\u2193 Erosion wears</text>
+        <text x="450" y="100" className="fill-amber-600 dark:fill-amber-400" fontSize="10">↓ Erosion wears</text>
         <text x="450" y="112" className="fill-amber-600 dark:fill-amber-400" fontSize="10">  peak down</text>
         <text x="450" y="124" className="fill-amber-500 dark:fill-amber-300" fontSize="10">  ~0.5 cm/yr</text>
 
@@ -169,7 +169,7 @@ export default function GeoMountainGrowthDiagram() {
         <g className="mg-indArrow">
           <line x1="380" y1="222" x2="295" y2="222" stroke="#f97316" strokeWidth="3" markerEnd="url(#mg-arwO)" />
         </g>
-        <text x="330" y="218" textAnchor="middle" className="fill-orange-600 dark:fill-orange-400" fontSize="10" fontWeight="bold">5 cm/yr \u2190</text>
+        <text x="330" y="218" textAnchor="middle" className="fill-orange-600 dark:fill-orange-400" fontSize="10" fontWeight="bold">5 cm/yr ←</text>
 
         {/* Collision zone indicator */}
         <path d="M 245,198 L 265,252 L 285,198 Z" fill="#dc2626" opacity="0.3" />

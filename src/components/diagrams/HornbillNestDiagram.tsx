@@ -80,13 +80,13 @@ export default function HornbillNestDiagram() {
         {/* Labels */}
         {/* Female label */}
         <line x1="230" y1="170" x2="100" y2="100" stroke="#fbbf24" strokeWidth="1" strokeDasharray="3,2" opacity="0.6" />
-        <text x="30" y="85" fontSize="10" fontWeight="bold" fill="#fbbf24">\u2640 Female</text>
+        <text x="30" y="85" fontSize="10" fontWeight="bold" fill="#fbbf24">♀ Female</text>
         <text x="30" y="97" fontSize="8" className="fill-slate-400">Sealed inside for</text>
-        <text x="30" y="108" fontSize="8" className="fill-slate-400">2\u20134 months</text>
+        <text x="30" y="108" fontSize="8" className="fill-slate-400">2–4 months</text>
 
         {/* Male label */}
         <line x1="445" y1="160" x2="470" y2="100" stroke="#fbbf24" strokeWidth="1" strokeDasharray="3,2" opacity="0.6" />
-        <text x="420" y="85" fontSize="10" fontWeight="bold" fill="#fbbf24">\u2642 Male</text>
+        <text x="420" y="85" fontSize="10" fontWeight="bold" fill="#fbbf24">♂ Male</text>
         <text x="410" y="97" fontSize="8" className="fill-slate-400">Feeds family</text>
         <text x="410" y="108" fontSize="8" className="fill-slate-400">through slit</text>
 
@@ -100,7 +100,7 @@ export default function HornbillNestDiagram() {
           <text x="0" y="0" fontSize="10" fill="#34d399" fontWeight="bold">Why seal?</text>
           <text x="65" y="0" fontSize="10" className="fill-slate-400">Protects eggs from snakes, monitor lizards, and other predators.</text>
           <text x="0" y="14" fontSize="10" fill="#34d399" fontWeight="bold">Who feeds?</text>
-          <text x="80" y="14" fontSize="10" className="fill-slate-400">The male delivers fruit 50\u201370 times per day through the slit.</text>
+          <text x="80" y="14" fontSize="10" className="fill-slate-400">The male delivers fruit 50–70 times per day through the slit.</text>
         </g>
       </svg>
     </div>

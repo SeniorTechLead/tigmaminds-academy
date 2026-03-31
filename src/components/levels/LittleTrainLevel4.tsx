@@ -36,11 +36,11 @@ export default function LittleTrainLevel4() {
   const miniLessons = [
     {
       title: 'Capstone: Complete mountain railway simulator',
-      concept: `This capstone integrates everything from Levels 1\u20133: friction and adhesion, grade/curve resistance, thermodynamics, braking, and scheduling into a single simulation of a mountain railway journey.
+      concept: `This capstone integrates everything from Levels 1–3: friction and adhesion, grade/curve resistance, thermodynamics, braking, and scheduling into a single simulation of a mountain railway journey.
 
-You will model the **Darjeeling Himalayan Railway** from New Jalpaiguri (100 m) to Darjeeling (2,076 m), simulating the train\u2019s speed, fuel consumption, brake temperature, and schedule adherence at every point along the 88 km route.`,
-      analogy: 'Building a complete railway simulator is like building a flight simulator \u2014 every physical system must work together: engine, brakes, track, weather, schedule.',
-      storyConnection: 'This is Bogi\u2019s full journey, modelled in code. Every hill, every curve, every tunnel, every switchback from the story becomes a data point in your simulation.',
+You will model the **Darjeeling Himalayan Railway** from New Jalpaiguri (100 m) to Darjeeling (2,076 m), simulating the train’s speed, fuel consumption, brake temperature, and schedule adherence at every point along the 88 km route.`,
+      analogy: 'Building a complete railway simulator is like building a flight simulator — every physical system must work together: engine, brakes, track, weather, schedule.',
+      storyConnection: 'This is Bogi’s full journey, modelled in code. Every hill, every curve, every tunnel, every switchback from the story becomes a data point in your simulation.',
       checkQuestion: 'Why is a full-route simulator harder than modelling individual physics problems?',
       checkAnswer: 'Because systems interact: braking heats the brakes (reducing their effectiveness), climbing consumes fuel (reducing weight, which changes adhesion), and speed on one section affects arrival time at the next (changing scheduling constraints). The challenge is capturing all these interactions simultaneously.',
       codeIntro: 'Build a route simulator that tracks speed, fuel, and brake temperature over the full journey.',
@@ -63,8 +63,8 @@ max_te = mu_adhesion * driver_weight * g  # N
 coal_energy_mj_per_kg = 29
 boiler_efficiency = 0.08
 brake_mass = 400       # kg brake material
-brake_cp = 500         # J/(kg\u00B7K)
-ambient_temp = 15      # \u00B0C
+brake_cp = 500         # J/(kg·K)
+ambient_temp = 15      # °C
 brake_cooling_rate = 0.005  # per second
 
 # Simulate at 100m resolution
@@ -81,7 +81,7 @@ gradient_pct = np.append(gradient_pct, gradient_pct[-1])
 # Simulation arrays
 speed = np.zeros(n)      # m/s
 fuel_used = np.zeros(n)  # kg cumulative
-brake_temp = np.full(n, ambient_temp)  # \u00B0C
+brake_temp = np.full(n, ambient_temp)  # °C
 time_elapsed = np.zeros(n)  # seconds
 
 speed[0] = 0
@@ -182,7 +182,7 @@ ax = axes[1, 1]; ax.set_facecolor('#111827')
 ax.plot(x_points/1000, brake_temp, color='#ef4444', linewidth=2)
 ax.axhline(400, color='#f59e0b', linestyle='--', linewidth=1, label='Fade threshold')
 ax.fill_between(x_points/1000, brake_temp, ambient_temp, alpha=0.15, color='#ef4444')
-ax.set_xlabel('Distance (km)', color='white'); ax.set_ylabel('Brake temperature (\u00B0C)', color='white')
+ax.set_xlabel('Distance (km)', color='white'); ax.set_ylabel('Brake temperature (°C)', color='white')
 ax.set_title('Brake Temperature', color='white')
 ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
 ax.tick_params(colors='gray')
@@ -197,20 +197,20 @@ print(f"  Elevation gain: {max(elev_interp) - elev_interp[0]:.0f} m")
 print(f"  Journey time: {hours:.1f} hours ({time_elapsed[-1]/60:.0f} minutes)")
 print(f"  Average speed: {total_dist/1000/hours:.1f} km/h")
 print(f"  Coal consumed: {fuel_used[-1]:.0f} kg")
-print(f"  Peak brake temp: {max(brake_temp):.0f}\u00B0C")
+print(f"  Peak brake temp: {max(brake_temp):.0f}°C")
 print(f"  Brake fade: {'YES' if max(brake_temp) > 400 else 'No'}")`,
-      challenge: 'Add weather effects: rain reduces \u03BC from 0.28 to 0.15 (affecting both adhesion and braking), and fog reduces the safe target speed to 10 km/h. Simulate a monsoon journey and compare fuel consumption, journey time, and brake temperatures to dry conditions.',
+      challenge: 'Add weather effects: rain reduces μ from 0.28 to 0.15 (affecting both adhesion and braking), and fog reduces the safe target speed to 10 km/h. Simulate a monsoon journey and compare fuel consumption, journey time, and brake temperatures to dry conditions.',
       successHint: 'You have just built a simplified version of the simulation tools that real railway engineers use to design mountain railways and train their drivers.',
     },
     {
       title: 'Rack-and-pinion section modelling',
       concept: `The Nilgiri Mountain Railway uses rack-and-pinion on its steepest section (8.33% gradient). In this section, a toothed pinion gear on the locomotive meshes with a toothed rack rail.
 
-The rack eliminates the adhesion constraint entirely \u2014 the maximum force is now limited only by the gear and engine strength. But rack sections are slow (typically 8\u201312 km/h) because the gear teeth must mesh precisely.`,
+The rack eliminates the adhesion constraint entirely — the maximum force is now limited only by the gear and engine strength. But rack sections are slow (typically 8–12 km/h) because the gear teeth must mesh precisely.`,
       analogy: 'A rack railway is like climbing a ladder bolted to the cliff face instead of trying to walk up a smooth slope. You trade speed for absolute certainty of grip.',
       storyConnection: 'Bogi runs on adhesion only, but the Nilgiri railway that serves the same mountain tourism market chose rack-and-pinion for its steeper route. Two different engineering solutions to the same fundamental problem.',
       checkQuestion: 'Why not use rack-and-pinion everywhere on a mountain railway?',
-      checkAnswer: 'Rack sections are expensive (the toothed rail costs 3\u20135\u00D7 more per km than plain rail), slow (8\u201312 km/h maximum), noisy, and require specialised locomotives. Use rack only where adhesion genuinely fails \u2014 above about 8% gradient.',
+      checkAnswer: 'Rack sections are expensive (the toothed rail costs 3–5× more per km than plain rail), slow (8–12 km/h maximum), noisy, and require specialised locomotives. Use rack only where adhesion genuinely fails — above about 8% gradient.',
       codeIntro: 'Compare adhesion and rack-and-pinion performance on steep gradients.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -307,10 +307,10 @@ print(f"  Rack speed limit: 8-12 km/h (gear meshing constraint)")`,
 Key metrics: **MTBF** (Mean Time Between Failures) and **MTTR** (Mean Time To Repair). System availability = MTBF / (MTBF + MTTR).
 
 Safety-critical systems (brakes, couplings) need redundancy. If one brake system has a failure probability of 1/1000 per journey, two independent systems give 1/1,000,000.`,
-      analogy: 'Reliability analysis is a medical check-up for machines \u2014 you measure vital signs (wear, temperature, vibration), predict when things might fail, and fix them before they do.',
-      storyConnection: 'Bogi\u2019s boiler was patched fourteen times. Each patch is a repair after a near-failure. A reliability engineer would ask: what is the MTBF for Bogi\u2019s boiler, and should we replace it entirely rather than patch it again?',
+      analogy: 'Reliability analysis is a medical check-up for machines — you measure vital signs (wear, temperature, vibration), predict when things might fail, and fix them before they do.',
+      storyConnection: 'Bogi’s boiler was patched fourteen times. Each patch is a repair after a near-failure. A reliability engineer would ask: what is the MTBF for Bogi’s boiler, and should we replace it entirely rather than patch it again?',
       checkQuestion: 'Main brake MTBF = 1,000 hours, backup brake MTBF = 500 hours. What is the probability both fail simultaneously?',
-      checkAnswer: 'P(both fail in 1 hour) = (1/1000) \u00D7 (1/500) = 1/500,000. At 2,000 operating hours/year: P(both fail at least once) \u2248 2000/500,000 = 0.4% annual risk. Still needs a third mechanical backup for safety-critical operations.',
+      checkAnswer: 'P(both fail in 1 hour) = (1/1000) × (1/500) = 1/500,000. At 2,000 operating hours/year: P(both fail at least once) ≈ 2000/500,000 = 0.4% annual risk. Still needs a third mechanical backup for safety-critical operations.',
       codeIntro: 'Model system reliability and the benefit of redundancy.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -405,12 +405,12 @@ ax.plot(T_intervals, total_cost_per_hour, color='#a855f7', linewidth=2.5)
 optimal_T = T_intervals[np.argmin(total_cost_per_hour)]
 min_cost = min(total_cost_per_hour)
 ax.plot(optimal_T, min_cost, 'o', color='#f59e0b', markersize=10)
-ax.annotate(f'Optimal: every {optimal_T:.0f}h\\nCost: \u20B9{min_cost:.2f}/h',
+ax.annotate(f'Optimal: every {optimal_T:.0f}h\\nCost: ₹{min_cost:.2f}/h',
             xy=(optimal_T, min_cost), xytext=(optimal_T + 400, min_cost + 0.3),
             color='#f59e0b', fontsize=9, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
 ax.set_xlabel('Maintenance interval (hours)', color='white')
-ax.set_ylabel('Cost per operating hour (\u20B9)', color='white')
+ax.set_ylabel('Cost per operating hour (₹)', color='white')
 ax.set_title('Optimal Maintenance Schedule', color='white', fontsize=12)
 ax.tick_params(colors='gray')
 
@@ -422,16 +422,16 @@ print(f"  Single brake at 2000h: {np.exp(-2000/2000)*100:.1f}% reliability")
 print(f"  Dual redundancy at 2000h: {(1-(1-np.exp(-2000/2000))*(1-np.exp(-2000/1500)))*100:.1f}%")
 print(f"  Triple redundancy at 2000h: {(1-(1-np.exp(-2000/2000))*(1-np.exp(-2000/1500))*(1-np.exp(-2000/5000)))*100:.1f}%")
 print(f"  Optimal maintenance interval: every {optimal_T:.0f} hours")`,
-      challenge: 'Add a wear model where MTBF decreases with age (e.g., MTBF(age) = MTBF_0 \u00D7 exp(-age/lifetime)). Recalculate the optimal maintenance interval. Should Bogi\u2019s boiler be replaced or patched for the fifteenth time?',
-      successHint: 'Reliability engineering is the difference between a railway that runs safely for decades and one that has catastrophic failures. Every patch on Bogi\u2019s boiler is a data point in this analysis.',
+      challenge: 'Add a wear model where MTBF decreases with age (e.g., MTBF(age) = MTBF_0 × exp(-age/lifetime)). Recalculate the optimal maintenance interval. Should Bogi’s boiler be replaced or patched for the fifteenth time?',
+      successHint: 'Reliability engineering is the difference between a railway that runs safely for decades and one that has catastrophic failures. Every patch on Bogi’s boiler is a data point in this analysis.',
     },
     {
       title: 'Heritage railway preservation and economics',
-      concept: `India\u2019s three UNESCO mountain railways survive as both working transport and heritage sites. Preservation requires balancing authenticity (steam engines, original infrastructure) with modern safety and economics.
+      concept: `India’s three UNESCO mountain railways survive as both working transport and heritage sites. Preservation requires balancing authenticity (steam engines, original infrastructure) with modern safety and economics.
 
-Key economic factors: **operating cost per passenger-km**, **tourism revenue**, **government subsidy**, and **heritage maintenance costs**. Steam operation costs 3\u20135\u00D7 more than diesel, but draws tourists willing to pay premium fares.`,
-      analogy: 'Preserving a heritage railway is like running a working museum \u2014 the exhibits must function, not just look pretty. Every journey is both a transport service and a living history demonstration.',
-      storyConnection: 'The story\u2019s central tension \u2014 the express vs the little train \u2014 is the real debate in Indian railway policy: should heritage lines be modernised (faster, cheaper) or preserved (authentic, cultural)?',
+Key economic factors: **operating cost per passenger-km**, **tourism revenue**, **government subsidy**, and **heritage maintenance costs**. Steam operation costs 3–5× more than diesel, but draws tourists willing to pay premium fares.`,
+      analogy: 'Preserving a heritage railway is like running a working museum — the exhibits must function, not just look pretty. Every journey is both a transport service and a living history demonstration.',
+      storyConnection: 'The story’s central tension — the express vs the little train — is the real debate in Indian railway policy: should heritage lines be modernised (faster, cheaper) or preserved (authentic, cultural)?',
       checkQuestion: 'The railway is UNESCO heritage. How do you optimise operations without changing the passenger experience?',
       checkAnswer: 'Optimise behind the scenes: better maintenance scheduling (fewer breakdowns), driver training (fuel efficiency), digital monitoring (predict failures), and dynamic pricing (fill seats). The heritage charm is preserved; only the operations become modern.',
       codeIntro: 'Build an economic model of a heritage mountain railway.',
@@ -521,7 +521,7 @@ ax.axhline(0, color='gray', linewidth=0.5)
 # Highlight winner
 winner = 'Steam' if npv_steam[-1] > npv_diesel[-1] else 'Diesel'
 ax.text(2035, max(npv_steam[-1], npv_diesel[-1]) * 0.7,
-        f'{winner} wins by\\n\\u20B9{abs(npv_steam[-1] - npv_diesel[-1]):.0f} crore',
+        f'{winner} wins by\\n\₹{abs(npv_steam[-1] - npv_diesel[-1]):.0f} crore',
         color='#22c55e', fontsize=11, fontweight='bold')
 
 ax.set_xlabel('Year', color='white'); ax.set_ylabel('Cumulative NPV (crore INR)', color='white')
@@ -533,11 +533,11 @@ plt.tight_layout()
 plt.show()
 
 print("20-year economic analysis:")
-print(f"  Steam heritage NPV: \\u20B9{npv_steam[-1]:.0f} crore")
-print(f"  Diesel conversion NPV: \\u20B9{npv_diesel[-1]:.0f} crore")
-print(f"  Winner: {winner} by \\u20B9{abs(npv_steam[-1] - npv_diesel[-1]):.0f} crore")
+print(f"  Steam heritage NPV: \₹{npv_steam[-1]:.0f} crore")
+print(f"  Diesel conversion NPV: \₹{npv_diesel[-1]:.0f} crore")
+print(f"  Winner: {winner} by \₹{abs(npv_steam[-1] - npv_diesel[-1]):.0f} crore")
 print(f"  Heritage tourism growth makes steam viable long-term")`,
-      challenge: 'Add a climate change scenario: carbon pricing at INR 2,000 per tonne CO\u2082 (increasing 5% annually). Steam emits ~2 kg CO\u2082 per passenger-km, diesel ~0.5 kg. Does carbon pricing change the winner? At what carbon price does diesel become clearly better?',
+      challenge: 'Add a climate change scenario: carbon pricing at INR 2,000 per tonne CO₂ (increasing 5% annually). Steam emits ~2 kg CO₂ per passenger-km, diesel ~0.5 kg. Does carbon pricing change the winner? At what carbon price does diesel become clearly better?',
       successHint: 'The economics of heritage railways show that cultural and tourism value can outweigh pure efficiency. This is a model for sustainable heritage preservation worldwide.',
     },
   ];

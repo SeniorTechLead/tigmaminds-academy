@@ -29,20 +29,20 @@ export default function AstrolabeLevel1() {
 
   const miniLessons = [
     {
-      title: 'Celestial coordinates \u2014 altitude and azimuth',
-      concept: `To locate a star in the sky, you need two numbers \u2014 just like you need latitude and longitude to locate a city on Earth.
+      title: 'Celestial coordinates — altitude and azimuth',
+      concept: `To locate a star in the sky, you need two numbers — just like you need latitude and longitude to locate a city on Earth.
 
-**Altitude** is how far above the horizon the star is: 0\u00B0 means it is on the horizon, 90\u00B0 means it is directly overhead (the zenith).
+**Altitude** is how far above the horizon the star is: 0° means it is on the horizon, 90° means it is directly overhead (the zenith).
 
-**Azimuth** is the compass direction: 0\u00B0 = north, 90\u00B0 = east, 180\u00B0 = south, 270\u00B0 = west.
+**Azimuth** is the compass direction: 0° = north, 90° = east, 180° = south, 270° = west.
 
-Together, altitude and azimuth form the **horizontal coordinate system**. Every object in the sky has a unique (alt, az) pair at any given moment. But these coordinates change as the Earth rotates \u2014 a star that is at altitude 30\u00B0 now will be at a different altitude an hour later.
+Together, altitude and azimuth form the **horizontal coordinate system**. Every object in the sky has a unique (alt, az) pair at any given moment. But these coordinates change as the Earth rotates — a star that is at altitude 30° now will be at a different altitude an hour later.
 
-In Python, we use **trigonometric functions** (sin, cos) to convert between angles and positions. The key relationship: if a star is at altitude \u03B1 and azimuth \u03B8, its position on a flat sky map is x = cos(\u03B1)\u00B7sin(\u03B8) and y = cos(\u03B1)\u00B7cos(\u03B8).`,
-      analogy: 'Think of a clock face flat on a table. The hour hand points in a direction (azimuth). Now tilt the hand upward off the table \u2014 the tilt angle is the altitude. Together they point to any spot in the dome above you.',
-      storyConnection: 'Zahra sighted Polaris with the alidade and read 32 degrees altitude. That single measurement told her the latitude of Isfahan. Every astrolabe reading starts with measuring altitude \u2014 the angle from horizon to star.',
-      checkQuestion: 'A star is at altitude 45\u00B0, azimuth 90\u00B0 (due east). If you face east and look halfway up from the horizon to directly overhead, where is the star?',
-      checkAnswer: 'Exactly where you are looking. 45\u00B0 is halfway between the horizon (0\u00B0) and the zenith (90\u00B0), and azimuth 90\u00B0 is due east. The horizontal coordinate system is intuitive \u2014 it describes the sky exactly as you see it from where you stand.',
+In Python, we use **trigonometric functions** (sin, cos) to convert between angles and positions. The key relationship: if a star is at altitude α and azimuth θ, its position on a flat sky map is x = cos(α)·sin(θ) and y = cos(α)·cos(θ).`,
+      analogy: 'Think of a clock face flat on a table. The hour hand points in a direction (azimuth). Now tilt the hand upward off the table — the tilt angle is the altitude. Together they point to any spot in the dome above you.',
+      storyConnection: 'Zahra sighted Polaris with the alidade and read 32 degrees altitude. That single measurement told her the latitude of Isfahan. Every astrolabe reading starts with measuring altitude — the angle from horizon to star.',
+      checkQuestion: 'A star is at altitude 45°, azimuth 90° (due east). If you face east and look halfway up from the horizon to directly overhead, where is the star?',
+      checkAnswer: 'Exactly where you are looking. 45° is halfway between the horizon (0°) and the zenith (90°), and azimuth 90° is due east. The horizontal coordinate system is intuitive — it describes the sky exactly as you see it from where you stand.',
       codeIntro: 'Convert altitude and azimuth to x,y positions and plot a sky map of bright stars.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -70,33 +70,33 @@ ax.set_theta_zero_location('N')
 ax.set_theta_direction(-1)
 ax.set_rlim(0, 90)
 ax.set_rticks([0, 30, 60, 90])
-ax.set_yticklabels(['90\u00B0', '60\u00B0', '30\u00B0', '0\u00B0 (horizon)'],
+ax.set_yticklabels(['90°', '60°', '30°', '0° (horizon)'],
                     fontsize=7, color='#94a3b8')
 ax.set_title('Sky Map (Altitude-Azimuth)', color='white', pad=15)
 ax.grid(True, alpha=0.3)
 plt.show()
-print("Center = directly overhead (zenith, 90\u00B0)")
-print("Edge = horizon (0\u00B0)")`,
-      challenge: 'Add 3 more stars with made-up coordinates. What happens to a star at altitude 0\u00B0? It should appear at the edge of the plot \u2014 right on the horizon.',
+print("Center = directly overhead (zenith, 90°)")
+print("Edge = horizon (0°)")`,
+      challenge: 'Add 3 more stars with made-up coordinates. What happens to a star at altitude 0°? It should appear at the edge of the plot — right on the horizon.',
       successHint: 'You just built a sky chart. The astrolabe does the same thing in brass: center = zenith, edge = horizon, and stars are positioned by altitude and azimuth.',
     },
     {
-      title: 'The Sun\u2019s daily path \u2014 computing solar altitude',
+      title: 'The Sun’s daily path — computing solar altitude',
       concept: `The Sun does not stay at a fixed altitude. It rises, climbs to a maximum height at solar noon, and sets. The altitude of the Sun at any time depends on three things:
 
 1. Your **latitude** (how far north or south you are)
-2. The **solar declination** (how far north or south the Sun appears, which changes with the seasons: +23.4\u00B0 at summer solstice, -23.4\u00B0 at winter solstice)
-3. The **hour angle** (how far the Sun has moved from its noon position, at 15\u00B0 per hour)
+2. The **solar declination** (how far north or south the Sun appears, which changes with the seasons: +23.4° at summer solstice, -23.4° at winter solstice)
+3. The **hour angle** (how far the Sun has moved from its noon position, at 15° per hour)
 
 The formula for solar altitude is:
-**sin(alt) = sin(lat)\u00B7sin(dec) + cos(lat)\u00B7cos(dec)\u00B7cos(HA)**
+**sin(alt) = sin(lat)·sin(dec) + cos(lat)·cos(dec)·cos(HA)**
 
 This single equation is the heart of the astrolabe. Every time Zahra measured the Sun's altitude and read the time, she was solving this equation mechanically with brass circles.`,
       analogy: 'Imagine the Sun riding a tilted circular track across the sky. Your latitude sets how tilted the track is. The declination shifts the track north or south with the seasons. The hour angle is how far along the track the Sun has traveled since noon.',
-      storyConnection: 'Zahra learned to tell time by measuring the Sun\u2019s altitude with the alidade, then matching it on the astrolabe. The brass instrument solves the solar altitude equation mechanically \u2014 no calculator needed.',
-      checkQuestion: 'At the equator (lat = 0\u00B0) on the equinox (dec = 0\u00B0) at solar noon (HA = 0\u00B0), what is the Sun\u2019s altitude?',
-      checkAnswer: 'sin(alt) = sin(0)\u00B7sin(0) + cos(0)\u00B7cos(0)\u00B7cos(0) = 0 + 1\u00B71\u00B71 = 1. So alt = arcsin(1) = 90\u00B0. The Sun is directly overhead! This is why equinoxes are special \u2014 the Sun passes through the zenith at the equator.',
-      codeIntro: 'Plot the Sun\u2019s altitude throughout the day for different latitudes.',
+      storyConnection: 'Zahra learned to tell time by measuring the Sun’s altitude with the alidade, then matching it on the astrolabe. The brass instrument solves the solar altitude equation mechanically — no calculator needed.',
+      checkQuestion: 'At the equator (lat = 0°) on the equinox (dec = 0°) at solar noon (HA = 0°), what is the Sun’s altitude?',
+      checkAnswer: 'sin(alt) = sin(0)·sin(0) + cos(0)·cos(0)·cos(0) = 0 + 1·1·1 = 1. So alt = arcsin(1) = 90°. The Sun is directly overhead! This is why equinoxes are special — the Sun passes through the zenith at the equator.',
+      codeIntro: 'Plot the Sun’s altitude throughout the day for different latitudes.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
@@ -114,41 +114,41 @@ hours = np.linspace(4, 20, 200)
 dec = 23.4  # summer solstice
 
 fig, ax = plt.subplots(figsize=(9, 5))
-for lat, color, city in [(28, '#ef4444', 'Delhi 28\u00B0N'),
-                          (32, '#fbbf24', 'Isfahan 32\u00B0N'),
-                          (51, '#38bdf8', 'London 51\u00B0N'),
-                          (64, '#a78bfa', 'Reykjavik 64\u00B0N')]:
+for lat, color, city in [(28, '#ef4444', 'Delhi 28°N'),
+                          (32, '#fbbf24', 'Isfahan 32°N'),
+                          (51, '#38bdf8', 'London 51°N'),
+                          (64, '#a78bfa', 'Reykjavik 64°N')]:
     alts = [solar_altitude(lat, dec, h) for h in hours]
     ax.plot(hours, alts, color=color, linewidth=2, label=city)
 
 ax.axhline(0, color='#475569', linewidth=1, linestyle='--')
 ax.fill_between(hours, 0, -10, color='#1e293b', alpha=0.5)
 ax.set_xlabel('Hour of day', color='#e2e8f0')
-ax.set_ylabel('Sun altitude (\u00B0)', color='#e2e8f0')
-ax.set_title('Sun\\'s Daily Arc \u2014 Summer Solstice', color='white')
+ax.set_ylabel('Sun altitude (°)', color='#e2e8f0')
+ax.set_title('Sun\\'s Daily Arc — Summer Solstice', color='white')
 ax.legend(fontsize=8)
 ax.set_xlim(4, 20); ax.set_ylim(-10, 90)
 ax.grid(True, alpha=0.2)
 plt.show()
 
 noon_isfahan = solar_altitude(32, 23.4, 12)
-print(f"Isfahan noon altitude on summer solstice: {noon_isfahan:.1f}\u00B0")`,
-      challenge: 'Change dec to 0 (equinox) and -23.4 (winter solstice). How does the Sun\u2019s path change? Which city has the lowest noon Sun in winter?',
-      successHint: 'The solar altitude equation is what the astrolabe computes mechanically. By rotating the rete to match the date, the tympan\u2019s altitude circles give you the Sun\u2019s height at any hour.',
+print(f"Isfahan noon altitude on summer solstice: {noon_isfahan:.1f}°")`,
+      challenge: 'Change dec to 0 (equinox) and -23.4 (winter solstice). How does the Sun’s path change? Which city has the lowest noon Sun in winter?',
+      successHint: 'The solar altitude equation is what the astrolabe computes mechanically. By rotating the rete to match the date, the tympan’s altitude circles give you the Sun’s height at any hour.',
     },
     {
-      title: 'Time from the stars \u2014 sidereal vs solar time',
+      title: 'Time from the stars — sidereal vs solar time',
       concept: `There are two kinds of time: **solar time** (based on the Sun) and **sidereal time** (based on the stars).
 
-A solar day is 24 hours \u2014 noon to noon. But a sidereal day is only **23 hours, 56 minutes, and 4 seconds**. Why the difference? Because the Earth is orbiting the Sun while it rotates. After one full rotation relative to the stars (sidereal day), the Earth has moved a bit along its orbit, so it needs to rotate about 1\u00B0 more to bring the Sun back to the same position. That extra 1\u00B0 takes about 4 minutes.
+A solar day is 24 hours — noon to noon. But a sidereal day is only **23 hours, 56 minutes, and 4 seconds**. Why the difference? Because the Earth is orbiting the Sun while it rotates. After one full rotation relative to the stars (sidereal day), the Earth has moved a bit along its orbit, so it needs to rotate about 1° more to bring the Sun back to the same position. That extra 1° takes about 4 minutes.
 
 This means the stars rise 4 minutes earlier each night. Over a year, they cycle through a full 24-hour shift. The astrolabe accounts for this: the rete rotates slightly faster than once per day, matching sidereal time.
 
 **Local Sidereal Time (LST)** tells you which stars are currently overhead. If you know the LST, you know the sky.`,
       analogy: 'Imagine running laps around a track while a friend stands in the centre. Each time you complete a lap (one rotation), your friend has turned slightly. You have to run a tiny bit more to face them again. That extra bit is the 4-minute difference between sidereal and solar time.',
-      storyConnection: 'Zahra learned to tell time at night by sighting a star, finding it on the rete, and rotating the rete until star and altitude matched. She was using sidereal time \u2014 the astrolabe\u2019s rete is a sidereal clock.',
+      storyConnection: 'Zahra learned to tell time at night by sighting a star, finding it on the rete, and rotating the rete until star and altitude matched. She was using sidereal time — the astrolabe’s rete is a sidereal clock.',
       checkQuestion: 'If Vega rises at 9:00 PM tonight, what time will it rise tomorrow night?',
-      checkAnswer: '8:56 PM \u2014 four minutes earlier. Stars rise 4 minutes earlier each night because the sidereal day is 4 minutes shorter than the solar day. Over a month, that\u2019s about 2 hours earlier. Over a year, the full 24 hours cycle back around.',
+      checkAnswer: '8:56 PM — four minutes earlier. Stars rise 4 minutes earlier each night because the sidereal day is 4 minutes shorter than the solar day. Over a month, that’s about 2 hours earlier. Over a year, the full 24 hours cycle back around.',
       codeIntro: 'Compute local sidereal time and show which stars are above the horizon right now.',
       code: `import numpy as np
 
@@ -189,23 +189,23 @@ for name, ra, dec in stars:
                np.cos(lat_r) * np.cos(dec_r) * np.cos(ha_r))
     alt = np.degrees(np.arcsin(np.clip(sin_alt, -1, 1)))
     status = "ABOVE" if alt > 0 else "below"
-    print(f"  {name:12s}  alt = {alt:+6.1f}\u00B0  [{status}]")`,
+    print(f"  {name:12s}  alt = {alt:+6.1f}°  [{status}]")`,
       challenge: 'Change the hour to 4 AM (hour=4) and see which stars have set and which new ones have risen. The sky rotates!',
-      successHint: 'Sidereal time is the key to star positions. The astrolabe\u2019s rete encodes the same star catalog you just built in Python \u2014 but in brass pointers instead of code.',
+      successHint: 'Sidereal time is the key to star positions. The astrolabe’s rete encodes the same star catalog you just built in Python — but in brass pointers instead of code.',
     },
     {
-      title: 'The 15\u00B0-per-hour rule and time zones',
-      concept: `The Earth rotates 360\u00B0 in 24 hours, which means **15\u00B0 per hour**. This single number connects geography to timekeeping.
+      title: 'The 15°-per-hour rule and time zones',
+      concept: `The Earth rotates 360° in 24 hours, which means **15° per hour**. This single number connects geography to timekeeping.
 
-If you know the Sun's position and your longitude, you can compute the exact local solar time. But "local solar time" varies continuously \u2014 every kilometer east or west shifts the time by a few seconds. That was fine when the fastest travel was by horse.
+If you know the Sun's position and your longitude, you can compute the exact local solar time. But "local solar time" varies continuously — every kilometer east or west shifts the time by a few seconds. That was fine when the fastest travel was by horse.
 
-When railroads arrived in the 19th century, the chaos of thousands of local times became dangerous (trains collided because stations didn't agree on the time). In 1884, the world adopted **standard time zones**: 24 strips, each 15\u00B0 wide, centered on multiples of 15\u00B0 longitude. Greenwich (0\u00B0) is the reference \u2014 UTC+0.
+When railroads arrived in the 19th century, the chaos of thousands of local times became dangerous (trains collided because stations didn't agree on the time). In 1884, the world adopted **standard time zones**: 24 strips, each 15° wide, centered on multiples of 15° longitude. Greenwich (0°) is the reference — UTC+0.
 
 The astrolabe predates time zones by centuries, but it computes local solar time naturally. The difference between solar time at two locations is simply their longitude difference divided by 15.`,
-      analogy: 'Time zones are like drawing 24 vertical stripes on a spinning globe. Each stripe agrees on one time. Without stripes, every point has its own slightly different time \u2014 a nightmare for scheduling.',
-      storyConnection: 'Zahra could compute the time at any longitude using her astrolabe and a star catalog. Islamic astronomers maintained tables of city longitudes specifically for this purpose \u2014 so travellers could adjust their prayer times.',
-      checkQuestion: 'Isfahan is at 51.7\u00B0E longitude. Delhi is at 77.1\u00B0E. What is the solar time difference?',
-      checkAnswer: 'Longitude difference = 77.1 - 51.7 = 25.4\u00B0. Time difference = 25.4 / 15 = 1.69 hours, or about 1 hour 41 minutes. Delhi\u2019s solar noon arrives 1h41m before Isfahan\u2019s because Delhi is further east.',
+      analogy: 'Time zones are like drawing 24 vertical stripes on a spinning globe. Each stripe agrees on one time. Without stripes, every point has its own slightly different time — a nightmare for scheduling.',
+      storyConnection: 'Zahra could compute the time at any longitude using her astrolabe and a star catalog. Islamic astronomers maintained tables of city longitudes specifically for this purpose — so travellers could adjust their prayer times.',
+      checkQuestion: 'Isfahan is at 51.7°E longitude. Delhi is at 77.1°E. What is the solar time difference?',
+      checkAnswer: 'Longitude difference = 77.1 - 51.7 = 25.4°. Time difference = 25.4 / 15 = 1.69 hours, or about 1 hour 41 minutes. Delhi’s solar noon arrives 1h41m before Isfahan’s because Delhi is further east.',
       codeIntro: 'Calculate solar time differences between cities and visualise time zones.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -229,7 +229,7 @@ for city, (lat, lon) in sorted(cities.items(), key=lambda x: x[1][1]):
     diff_hrs = (lon - isfahan_lon) / 15
     sign = "+" if diff_hrs >= 0 else ""
     mins = abs(diff_hrs * 60)
-    print(f"  {city:12s}  lon={lon:+7.1f}\u00B0  {sign}{diff_hrs:.2f}h  ({int(mins)}min)")
+    print(f"  {city:12s}  lon={lon:+7.1f}°  {sign}{diff_hrs:.2f}h  ({int(mins)}min)")
 
 # Plot cities on a longitude strip
 fig, ax = plt.subplots(figsize=(10, 3))
@@ -247,31 +247,31 @@ for tz in range(-12, 13):
 
 ax.set_xlim(-180, 180); ax.set_ylim(-0.6, 0.6)
 ax.set_xlabel('Longitude', color='#e2e8f0')
-ax.set_title('Cities & Time Zones (15\u00B0 per hour)', color='white')
+ax.set_title('Cities & Time Zones (15° per hour)', color='white')
 ax.set_yticks([])
 plt.show()`,
       challenge: 'The qibla direction (towards Mecca) was crucial for Islamic astronomers. Add code to calculate the longitude difference between each city and Mecca.',
-      successHint: 'The 15\u00B0/hour rule is simple but powerful. The astrolabe uses it implicitly \u2014 the 360\u00B0 limb scale divided by 24 gives 15\u00B0 per hour division.',
+      successHint: 'The 15°/hour rule is simple but powerful. The astrolabe uses it implicitly — the 360° limb scale divided by 24 gives 15° per hour division.',
     },
     {
       title: 'Degrees, radians, and trigonometry',
-      concept: `Every astrolabe calculation uses **trigonometry** \u2014 the mathematics of angles and triangles. Before going further, let's make sure the foundations are solid.
+      concept: `Every astrolabe calculation uses **trigonometry** — the mathematics of angles and triangles. Before going further, let's make sure the foundations are solid.
 
-**Degrees** divide a full circle into 360 parts. **Radians** divide it into 2\u03C0 parts (about 6.283). Python's math functions use radians, so you often need to convert: radians = degrees \u00D7 \u03C0/180.
+**Degrees** divide a full circle into 360 parts. **Radians** divide it into 2π parts (about 6.283). Python's math functions use radians, so you often need to convert: radians = degrees × π/180.
 
 The three key functions:
-- **sin(\u03B8)** = opposite / hypotenuse
-- **cos(\u03B8)** = adjacent / hypotenuse
-- **tan(\u03B8)** = opposite / adjacent = sin(\u03B8) / cos(\u03B8)
+- **sin(θ)** = opposite / hypotenuse
+- **cos(θ)** = adjacent / hypotenuse
+- **tan(θ)** = opposite / adjacent = sin(θ) / cos(θ)
 
 For the astrolabe, the most important identity is:
-**sin(alt) = sin(lat)\u00B7sin(dec) + cos(lat)\u00B7cos(dec)\u00B7cos(HA)**
+**sin(alt) = sin(lat)·sin(dec) + cos(lat)·cos(dec)·cos(HA)**
 
 This is the spherical law of cosines, and it connects every measurable angle on the astrolabe.`,
       analogy: 'Trigonometry is the language of circles. Just as you need words to describe a story, you need sin, cos, and tan to describe the positions and paths of stars on the celestial sphere.',
       storyConnection: 'When Ibn al-Haytham said "the geometry of circles and the trigonometry of spheres," he meant exactly these functions. Islamic mathematicians refined trigonometry far beyond the Greek originals, developing the sine, cosine, and tangent tables that astrolabe makers depended on.',
-      checkQuestion: 'What is sin(90\u00B0)? And why does this matter for the astrolabe?',
-      checkAnswer: 'sin(90\u00B0) = 1. It matters because when a star is at 90\u00B0 altitude (directly overhead), sin(alt) = 1. The solar altitude formula then requires sin(lat)\u00B7sin(dec) + cos(lat)\u00B7cos(dec) = 1, which only happens when lat = dec. This tells you exactly which latitude the Sun passes directly overhead on a given day.',
+      checkQuestion: 'What is sin(90°)? And why does this matter for the astrolabe?',
+      checkAnswer: 'sin(90°) = 1. It matters because when a star is at 90° altitude (directly overhead), sin(alt) = 1. The solar altitude formula then requires sin(lat)·sin(dec) + cos(lat)·cos(dec) = 1, which only happens when lat = dec. This tells you exactly which latitude the Sun passes directly overhead on a given day.',
       codeIntro: 'Build a visual unit circle with sin and cos, then apply it to altitude calculations.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -286,51 +286,51 @@ angle = np.radians(32)  # Isfahan latitude
 ax1.plot([0, np.cos(angle)], [0, np.sin(angle)], 'o-',
          color='#fbbf24', linewidth=2, markersize=6)
 ax1.plot([np.cos(angle), np.cos(angle)], [0, np.sin(angle)],
-         '--', color='#ef4444', linewidth=1.5, label=f'sin(32\u00B0) = {np.sin(angle):.3f}')
+         '--', color='#ef4444', linewidth=1.5, label=f'sin(32°) = {np.sin(angle):.3f}')
 ax1.plot([0, np.cos(angle)], [0, 0],
-         '--', color='#38bdf8', linewidth=1.5, label=f'cos(32\u00B0) = {np.cos(angle):.3f}')
+         '--', color='#38bdf8', linewidth=1.5, label=f'cos(32°) = {np.cos(angle):.3f}')
 ax1.set_xlim(-1.3, 1.3); ax1.set_ylim(-1.3, 1.3)
 ax1.set_aspect('equal'); ax1.grid(True, alpha=0.2)
 ax1.legend(fontsize=8)
-ax1.set_title('Unit Circle at 32\u00B0 (Isfahan)', color='white', fontsize=10)
+ax1.set_title('Unit Circle at 32° (Isfahan)', color='white', fontsize=10)
 
 # Right: sin and cos waves
 angles = np.linspace(0, 90, 100)
 ax2.plot(angles, np.sin(np.radians(angles)), color='#ef4444',
-         linewidth=2, label='sin(\u03B8)')
+         linewidth=2, label='sin(θ)')
 ax2.plot(angles, np.cos(np.radians(angles)), color='#38bdf8',
-         linewidth=2, label='cos(\u03B8)')
+         linewidth=2, label='cos(θ)')
 ax2.axvline(32, color='#fbbf24', linestyle='--', alpha=0.5,
-            label='32\u00B0 (Isfahan)')
-ax2.set_xlabel('Angle (\u00B0)', color='#e2e8f0')
-ax2.set_title('Trig Functions 0\u00B0\u201390\u00B0', color='white', fontsize=10)
+            label='32° (Isfahan)')
+ax2.set_xlabel('Angle (°)', color='#e2e8f0')
+ax2.set_title('Trig Functions 0°–90°', color='white', fontsize=10)
 ax2.legend(fontsize=8); ax2.grid(True, alpha=0.2)
 plt.tight_layout()
 plt.show()
 
-print(f"sin(32\u00B0) = {np.sin(np.radians(32)):.4f}")
-print(f"cos(32\u00B0) = {np.cos(np.radians(32)):.4f}")
-print(f"tan(32\u00B0) = {np.tan(np.radians(32)):.4f}")`,
-      challenge: 'The alidade measures the altitude of a minaret as 38\u00B0 from 50 meters away. Height = 50 \u00D7 tan(38\u00B0). Compute this \u2014 it is exactly how Zahra surveyed the mosque.',
-      successHint: 'Trig is the language of the astrolabe. Every circle on the tympan, every star pointer on the rete, every time reading \u2014 all computed through sin, cos, and tan.',
+print(f"sin(32°) = {np.sin(np.radians(32)):.4f}")
+print(f"cos(32°) = {np.cos(np.radians(32)):.4f}")
+print(f"tan(32°) = {np.tan(np.radians(32)):.4f}")`,
+      challenge: 'The alidade measures the altitude of a minaret as 38° from 50 meters away. Height = 50 × tan(38°). Compute this — it is exactly how Zahra surveyed the mosque.',
+      successHint: 'Trig is the language of the astrolabe. Every circle on the tympan, every star pointer on the rete, every time reading — all computed through sin, cos, and tan.',
     },
     {
-      title: 'Sunrise and sunset \u2014 predicting daylight hours',
+      title: 'Sunrise and sunset — predicting daylight hours',
       concept: `One of the astrolabe's most practical functions: predicting when the Sun rises and sets on any day of the year.
 
-Sunrise and sunset happen when the Sun's altitude equals 0\u00B0. Setting sin(alt) = 0 in the solar altitude formula:
-0 = sin(lat)\u00B7sin(dec) + cos(lat)\u00B7cos(dec)\u00B7cos(HA)
+Sunrise and sunset happen when the Sun's altitude equals 0°. Setting sin(alt) = 0 in the solar altitude formula:
+0 = sin(lat)·sin(dec) + cos(lat)·cos(dec)·cos(HA)
 
 Solving for the hour angle:
-**cos(HA_sunrise) = -tan(lat)\u00B7tan(dec)**
+**cos(HA_sunrise) = -tan(lat)·tan(dec)**
 
-The sunrise hour angle gives the time before noon; sunset is the same angle after noon. Day length = 2 \u00D7 HA_sunrise / 15 hours.
+The sunrise hour angle gives the time before noon; sunset is the same angle after noon. Day length = 2 × HA_sunrise / 15 hours.
 
-When tan(lat)\u00B7tan(dec) > 1 or < -1, the formula has no solution \u2014 meaning the Sun never sets (midnight sun) or never rises (polar night). This happens inside the Arctic and Antarctic circles.`,
-      analogy: 'Imagine tilting a hula hoop (the Sun\u2019s path) over a table (the horizon). When the hoop is steeply tilted, a big chunk is above the table (long day). When it\u2019s barely tilted, most is below (short day). Tilt it enough and the whole hoop is above \u2014 the Sun never sets.',
-      storyConnection: 'Zahra learned to predict sunrise and sunset by setting the rete to the date and reading where the ecliptic crosses the horizon line. The astrolabe gives the answer visually \u2014 no formula needed. But the formula is what makes the brass circles work.',
-      checkQuestion: 'At the equator (lat=0\u00B0), what is the day length on any day? Hint: tan(0) = 0.',
-      checkAnswer: 'cos(HA) = -tan(0)\u00B7tan(dec) = 0. So HA = 90\u00B0. Day length = 2 \u00D7 90/15 = 12 hours. At the equator, every day is exactly 12 hours long regardless of season. This is why "equator" comes from the same root as "equal."',
+When tan(lat)·tan(dec) > 1 or < -1, the formula has no solution — meaning the Sun never sets (midnight sun) or never rises (polar night). This happens inside the Arctic and Antarctic circles.`,
+      analogy: 'Imagine tilting a hula hoop (the Sun’s path) over a table (the horizon). When the hoop is steeply tilted, a big chunk is above the table (long day). When it’s barely tilted, most is below (short day). Tilt it enough and the whole hoop is above — the Sun never sets.',
+      storyConnection: 'Zahra learned to predict sunrise and sunset by setting the rete to the date and reading where the ecliptic crosses the horizon line. The astrolabe gives the answer visually — no formula needed. But the formula is what makes the brass circles work.',
+      checkQuestion: 'At the equator (lat=0°), what is the day length on any day? Hint: tan(0) = 0.',
+      checkAnswer: 'cos(HA) = -tan(0)·tan(dec) = 0. So HA = 90°. Day length = 2 × 90/15 = 12 hours. At the equator, every day is exactly 12 hours long regardless of season. This is why "equator" comes from the same root as "equal."',
       codeIntro: 'Calculate and plot day length throughout the year for different latitudes.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -351,9 +351,9 @@ dec = 23.44 * np.sin(np.radians((days - 81) * 360 / 365))
 
 fig, ax = plt.subplots(figsize=(9, 5))
 for lat, color, city in [(0, '#10b981', 'Equator'),
-                          (28, '#ef4444', 'Delhi 28\u00B0N'),
-                          (32, '#fbbf24', 'Isfahan 32\u00B0N'),
-                          (51, '#38bdf8', 'London 51\u00B0N'),
+                          (28, '#ef4444', 'Delhi 28°N'),
+                          (32, '#fbbf24', 'Isfahan 32°N'),
+                          (51, '#38bdf8', 'London 51°N'),
                           (66.5, '#a78bfa', 'Arctic Circle')]:
     lengths = [day_length(lat, d) for d in dec]
     ax.plot(days, lengths, color=color, linewidth=2, label=city)
@@ -373,8 +373,8 @@ plt.show()
 # Isfahan summer solstice
 print(f"Isfahan, June 21: {day_length(32, 23.44):.1f} hours of daylight")
 print(f"Isfahan, Dec 21:  {day_length(32, -23.44):.1f} hours of daylight")`,
-      challenge: 'Find the latitude where the longest day is exactly 18 hours. Try different latitudes until day_length(lat, 23.44) returns 18.0. (Hint: it\u2019s around 58\u00B0N \u2014 close to Stockholm.)',
-      successHint: 'You\u2019ve built a day-length calculator that works for any latitude and any date. The astrolabe does the same thing: set the rete to the date, and the horizon line on the tympan shows you sunrise, sunset, and everything in between.',
+      challenge: 'Find the latitude where the longest day is exactly 18 hours. Try different latitudes until day_length(lat, 23.44) returns 18.0. (Hint: it’s around 58°N — close to Stockholm.)',
+      successHint: 'You’ve built a day-length calculator that works for any latitude and any date. The astrolabe does the same thing: set the rete to the date, and the horizon line on the tympan shows you sunrise, sunset, and everything in between.',
     },
   ];
 

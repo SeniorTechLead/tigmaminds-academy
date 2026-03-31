@@ -64,8 +64,8 @@ def _get_plot_as_base64():
 A **group** is a set of elements with an operation (like composition) that satisfies four axioms:
 
 1. **Closure**: composing any two symmetries gives another symmetry in the set
-2. **Associativity**: (A \u2218 B) \u2218 C = A \u2218 (B \u2218 C)
-3. **Identity**: there exists an element (the "do nothing" transformation) such that I \u2218 A = A \u2218 I = A
+2. **Associativity**: (A ∘ B) ∘ C = A ∘ (B ∘ C)
+3. **Identity**: there exists an element (the "do nothing" transformation) such that I ∘ A = A ∘ I = A
 4. **Inverse**: every element has an inverse (an "undo" transformation)
 
 For D_n (the dihedral group of a regular n-gon), the group has 2n elements: n rotations and n reflections. The rotation subgroup is **cyclic** — applying the smallest rotation repeatedly generates all rotations.
@@ -245,7 +245,7 @@ Penrose tilings use just two tile shapes (kites and darts, or thick and thin rho
 - Never repeats — no finite patch appears at regular intervals
 - Contains every finite patch infinitely often, but at irregular intervals
 
-The ratio of kites to darts converges to the **golden ratio** \u03c6 = 1.618...
+The ratio of kites to darts converges to the **golden ratio** φ = 1.618...
 
 Penrose tilings connect to quasicrystals — real materials discovered in 1984 that have 5-fold symmetry in their diffraction patterns. Dan Shechtman won the 2011 Nobel Prize for this discovery, which was initially rejected as impossible.
 
@@ -322,15 +322,15 @@ print(f"Golden ratio: {phi:.4f}")`,
 An L-system has:
 - An **alphabet** of symbols (e.g., F, +, -)
 - A **starting string** (axiom), e.g., "F"
-- **Production rules**, e.g., F \u2192 F+F-F-F+F
+- **Production rules**, e.g., F → F+F-F-F+F
 - **Interpretation**: F = draw forward, + = turn left, - = turn right
 
 At each iteration, every symbol in the string is replaced according to the rules. After n iterations, the string is interpreted as drawing instructions.
 
 Examples:
-- **Koch curve**: F \u2192 F+F--F+F (angle = 60)
-- **Sierpinski triangle**: A \u2192 B-A-B, B \u2192 A+B+A (angle = 60)
-- **Dragon curve**: X \u2192 X+YF+, Y \u2192 -FX-Y (angle = 90)
+- **Koch curve**: F → F+F--F+F (angle = 60)
+- **Sierpinski triangle**: A → B-A-B, B → A+B+A (angle = 60)
+- **Dragon curve**: X → X+YF+, Y → -FX-Y (angle = 90)
 
 L-systems are powerful because a simple grammar generates enormous complexity. The Koch snowflake rule has 9 characters but produces a curve with fractal dimension 1.26 after just a few iterations.`,
       analogy: 'An L-system is like a recipe that refers to itself. "To make bread: make dough, fold it, make bread again with the folded dough." Each iteration produces a more complex result from the same instruction. After 5 iterations of "fold and repeat," you have 2^5 = 32 layers — a croissant. L-systems create fractal geometry the same way: simple rules, iterated, produce unbounded complexity.',

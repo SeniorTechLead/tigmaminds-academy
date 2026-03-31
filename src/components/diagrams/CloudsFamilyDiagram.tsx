@@ -8,7 +8,7 @@ export default function CloudsFamilyDiagram() {
       alt: 55,
       altLabel: "Above 6 000 m",
       desc: "Thin, wispy, ice crystals",
-      weather: "Fair now \u2014 rain in 24\u201348 h",
+      weather: "Fair now — rain in 24–48 h",
       fill: "#e0e7ff",
       opacity: 0.5,
       shape: "wispy",
@@ -16,7 +16,7 @@ export default function CloudsFamilyDiagram() {
     {
       name: "Cumulus",
       alt: 190,
-      altLabel: "1 000\u20136 000 m",
+      altLabel: "1 000–6 000 m",
       desc: "Puffy, flat base, cotton-ball",
       weather: "Fair weather (small ones)",
       fill: "#f1f5f9",
@@ -36,7 +36,7 @@ export default function CloudsFamilyDiagram() {
     {
       name: "Cumulonimbus",
       alt: 130,
-      altLabel: "All levels \u2014 up to 15 000 m",
+      altLabel: "All levels — up to 15 000 m",
       desc: "Massive tower, anvil top",
       weather: "Thunder, heavy rain, hail",
       fill: "#475569",
@@ -86,7 +86,7 @@ export default function CloudsFamilyDiagram() {
         {/* Ground */}
         <rect x="0" y="445" width={w} height="75" rx="0" fill="#166534" fillOpacity="0.3" />
 
-        {/* CIRRUS \u2014 wispy lines */}
+        {/* CIRRUS — wispy lines */}
         <g>
           <path d="M120,60 Q160,50 200,62 Q240,55 260,65" fill="none" stroke={clouds[0].fill} strokeWidth="2" strokeOpacity="0.7" />
           <path d="M150,72 Q190,60 230,74 Q250,68 280,76" fill="none" stroke={clouds[0].fill} strokeWidth="1.5" strokeOpacity="0.5" />
@@ -95,11 +95,11 @@ export default function CloudsFamilyDiagram() {
           <text x="300" y="66" fontSize="13" fontWeight="700" fill="#e0e7ff">Cirrus</text>
           <text x="300" y="80" fontSize="10" fill="#cbd5e1">{clouds[0].desc}</text>
           <rect x="500" y="50" width="190" height="42" rx="4" fill="#1e3a5f" fillOpacity="0.7" />
-          <text x="510" y="66" fontSize="10" fill="#86efac" fontWeight="600">{"\u2601 Weather signal:"}</text>
+          <text x="510" y="66" fontSize="10" fill="#86efac" fontWeight="600">{"☁ Weather signal:"}</text>
           <text x="510" y="80" fontSize="10" fill="#fde68a">{clouds[0].weather}</text>
         </g>
 
-        {/* CUMULUS \u2014 puffy */}
+        {/* CUMULUS — puffy */}
         <g>
           <ellipse cx="160" cy="200" rx="45" ry="22" fill={clouds[1].fill} fillOpacity={clouds[1].opacity} />
           <ellipse cx="140" cy="190" rx="30" ry="18" fill="#f8fafc" fillOpacity="0.85" />
@@ -109,11 +109,11 @@ export default function CloudsFamilyDiagram() {
           <text x="300" y="191" fontSize="13" fontWeight="700" fill="#f1f5f9">Cumulus</text>
           <text x="300" y="205" fontSize="10" fill="#cbd5e1">{clouds[1].desc}</text>
           <rect x="500" y="175" width="190" height="42" rx="4" fill="#1e3a5f" fillOpacity="0.7" />
-          <text x="510" y="191" fontSize="10" fill="#86efac" fontWeight="600">{"\u2601 Weather signal:"}</text>
+          <text x="510" y="191" fontSize="10" fill="#86efac" fontWeight="600">{"☁ Weather signal:"}</text>
           <text x="510" y="205" fontSize="10" fill="#fde68a">{clouds[1].weather}</text>
         </g>
 
-        {/* STRATUS \u2014 flat sheet */}
+        {/* STRATUS — flat sheet */}
         <g>
           <rect x="90" y="310" width="180" height="22" rx="10" fill={clouds[2].fill} fillOpacity={clouds[2].opacity} />
           <rect x="100" y="316" width="160" height="12" rx="6" fill="#64748b" fillOpacity="0.5" />
@@ -121,11 +121,11 @@ export default function CloudsFamilyDiagram() {
           <text x="300" y="319" fontSize="13" fontWeight="700" fill="#94a3b8">Stratus</text>
           <text x="300" y="333" fontSize="10" fill="#cbd5e1">{clouds[2].desc}</text>
           <rect x="500" y="303" width="190" height="42" rx="4" fill="#1e3a5f" fillOpacity="0.7" />
-          <text x="510" y="319" fontSize="10" fill="#86efac" fontWeight="600">{"\u2601 Weather signal:"}</text>
+          <text x="510" y="319" fontSize="10" fill="#86efac" fontWeight="600">{"☁ Weather signal:"}</text>
           <text x="510" y="333" fontSize="10" fill="#fde68a">{clouds[2].weather}</text>
         </g>
 
-        {/* CUMULONIMBUS \u2014 tower */}
+        {/* CUMULONIMBUS — tower */}
         <g>
           <rect x="90" y="105" width="100" height="330" rx="6" fill="none" stroke="#64748b" strokeWidth="1" strokeDasharray="3 3" />
           {/* Dark base */}
@@ -146,13 +146,13 @@ export default function CloudsFamilyDiagram() {
           <text x="300" y="406" fontSize="13" fontWeight="700" fill="#64748b">Cumulonimbus</text>
           <text x="300" y="420" fontSize="10" fill="#cbd5e1">{clouds[3].desc}</text>
           <rect x="500" y="390" width="190" height="42" rx="4" fill="#1e3a5f" fillOpacity="0.7" />
-          <text x="510" y="406" fontSize="10" fill="#86efac" fontWeight="600">{"\u2601 Weather signal:"}</text>
+          <text x="510" y="406" fontSize="10" fill="#86efac" fontWeight="600">{"☁ Weather signal:"}</text>
           <text x="510" y="420" fontSize="10" fill="#ef4444">{clouds[3].weather}</text>
         </g>
 
         {/* Bottom note */}
         <text x={w / 2} y={h - 10} textAnchor="middle" fontSize="10" fill="#94a3b8">
-          Dawan\u2019s "grumpy Bah Rum" = cumulonimbus \u00b7 "shy scout Ka Lum" = early cumulus \u00b7 "steady Kong Lynshing" = stratus
+          Dawan’s "grumpy Bah Rum" = cumulonimbus · "shy scout Ka Lum" = early cumulus · "steady Kong Lynshing" = stratus
         </text>
       </svg>
     </div>

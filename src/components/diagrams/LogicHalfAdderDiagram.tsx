@@ -67,13 +67,13 @@ export default function LogicHalfAdderDiagram() {
         <circle cx={350} cy={75} r={12} className="fill-yellow-100 dark:fill-yellow-900/40 stroke-yellow-500" strokeWidth="2" />
         <text x={350} y={79} textAnchor="middle" className={hi} fontSize="11" fontWeight="700">S</text>
         <text x={380} y={79} className={label} fontSize="12" fontWeight="600">Sum</text>
-        <text x={380} y={93} className={sub} fontSize="10">A \u2295 B</text>
+        <text x={380} y={93} className={sub} fontSize="10">A ⊕ B</text>
 
         {/* Carry */}
         <circle cx={350} cy={155} r={12} className="fill-yellow-100 dark:fill-yellow-900/40 stroke-yellow-500" strokeWidth="2" />
         <text x={350} y={159} textAnchor="middle" className={hi} fontSize="11" fontWeight="700">C</text>
         <text x={380} y={159} className={label} fontSize="12" fontWeight="600">Carry</text>
-        <text x={380} y={173} className={sub} fontSize="10">A \u00B7 B</text>
+        <text x={380} y={173} className={sub} fontSize="10">A · B</text>
 
         {/* ─── Truth table ─── */}
         <text x={220} y={200} textAnchor="middle" className={label} fontSize="11" fontWeight="600">Truth Table</text>

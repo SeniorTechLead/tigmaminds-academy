@@ -78,7 +78,7 @@ export default function PitcherAnatomyDiagram() {
         <line x1="200" y1="135" x2="55" y2="135" stroke="#fbbf24" strokeWidth="1" strokeDasharray="3,2" opacity="0.6" />
         <g transform="translate(10, 120)">
           <text x="0" y="0" fontSize="10" fontWeight="bold" fill="#fbbf24">Waxy Zone</text>
-          <text x="0" y="14" fontSize="8" className="fill-slate-400">Loose wax crystals (~1 \u00b5m)</text>
+          <text x="0" y="14" fontSize="8" className="fill-slate-400">Loose wax crystals (~1 µm)</text>
           <text x="0" y="26" fontSize="8" className="fill-slate-400">clog insect foot-pads</text>
         </g>
 
@@ -94,7 +94,7 @@ export default function PitcherAnatomyDiagram() {
         <line x1="340" y1="310" x2="420" y2="310" stroke="#84cc16" strokeWidth="1" strokeDasharray="3,2" opacity="0.6" />
         <g transform="translate(425, 295)">
           <text x="0" y="0" fontSize="10" fontWeight="bold" fill="#84cc16">Digestive Fluid</text>
-          <text x="0" y="14" fontSize="8" className="fill-slate-400">pH 2\u20133 (like stomach acid)</text>
+          <text x="0" y="14" fontSize="8" className="fill-slate-400">pH 2–3 (like stomach acid)</text>
           <text x="0" y="26" fontSize="8" className="fill-slate-400">Nepenthesin enzyme + wetting</text>
           <text x="0" y="38" fontSize="8" className="fill-slate-400">agents reduce surface tension</text>
         </g>
@@ -107,7 +107,7 @@ export default function PitcherAnatomyDiagram() {
         <g transform="translate(280, 420)">
           <rect x="-250" y="-15" width="500" height="50" rx="8" fill="#14532d" opacity="0.4" stroke="#22c55e" strokeWidth="1" />
           <text x="0" y="2" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#86efac">Trap Sequence</text>
-          <text x="0" y="18" textAnchor="middle" fontSize="9" className="fill-slate-300">Nectar lure \u2192 Land on rim \u2192 Hydroplane \u2192 Slide on wax \u2192 Fall into acid pool \u2192 Digested</text>
+          <text x="0" y="18" textAnchor="middle" fontSize="9" className="fill-slate-300">Nectar lure → Land on rim → Hydroplane → Slide on wax → Fall into acid pool → Digested</text>
         </g>
       </svg>
     </div>

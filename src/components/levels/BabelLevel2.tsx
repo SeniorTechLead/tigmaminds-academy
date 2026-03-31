@@ -27,21 +27,21 @@ export default function BabelLevel2() {
 
   const miniLessons = [
     {
-      title: 'Stress and strain \u2014 quantifying deformation',
+      title: 'Stress and strain — quantifying deformation',
       concept: `In Level 1, we met compression, tension, and shear as concepts. Now we need precise numbers. Engineers use two quantities:
 
-**Stress (\u03C3)** = Force / Area (measured in Pascals, Pa)
-**Strain (\u03B5)** = Change in length / Original length (dimensionless ratio)
+**Stress (σ)** = Force / Area (measured in Pascals, Pa)
+**Strain (ε)** = Change in length / Original length (dimensionless ratio)
 
-These are related by **Young\u2019s modulus (E)**: \u03C3 = E \u00D7 \u03B5. This is Hooke\u2019s law for materials \u2014 just like a spring, a material stretches proportionally to the force applied, up to a limit.
+These are related by **Young’s modulus (E)**: σ = E × ε. This is Hooke’s law for materials — just like a spring, a material stretches proportionally to the force applied, up to a limit.
 
-Young\u2019s modulus is the material\u2019s stiffness: steel E = 200 GPa, concrete E = 30 GPa, wood E = 12 GPa, rubber E = 0.01 GPa. Higher E = stiffer = less deformation under load.
+Young’s modulus is the material’s stiffness: steel E = 200 GPa, concrete E = 30 GPa, wood E = 12 GPa, rubber E = 0.01 GPa. Higher E = stiffer = less deformation under load.
 
 The code generates stress-strain curves for different materials and finds their yield points.`,
-      analogy: 'Stress is like blood pressure \u2014 the intensity of force per unit area. Strain is how much the material actually deforms. Young\u2019s modulus is the material\u2019s personality: a stiff person (steel, high E) barely budges under pressure; a flexible person (rubber, low E) stretches dramatically.',
-      storyConnection: 'The mud bricks of Babel had a low Young\u2019s modulus (~2 GPa) and a low yield stress (~2 MPa). This means they would visibly deform and crack long before a stone or steel structure showed any distress. The builders would have seen their tower slowly sagging and cracking \u2014 a clear sign the materials were failing.',
-      checkQuestion: 'A steel rod (E = 200 GPa, area = 0.001 m\u00B2) supports 100 kN. How much does it stretch per metre of length?',
-      checkAnswer: 'Stress = 100,000 / 0.001 = 100 MPa. Strain = stress / E = 100\u00D710\u2076 / 200\u00D710\u2079 = 0.0005 = 0.05%. Per metre: 0.5 mm. Steel barely stretches under enormous loads \u2014 this is why we trust it with our tallest buildings.',
+      analogy: 'Stress is like blood pressure — the intensity of force per unit area. Strain is how much the material actually deforms. Young’s modulus is the material’s personality: a stiff person (steel, high E) barely budges under pressure; a flexible person (rubber, low E) stretches dramatically.',
+      storyConnection: 'The mud bricks of Babel had a low Young’s modulus (~2 GPa) and a low yield stress (~2 MPa). This means they would visibly deform and crack long before a stone or steel structure showed any distress. The builders would have seen their tower slowly sagging and cracking — a clear sign the materials were failing.',
+      checkQuestion: 'A steel rod (E = 200 GPa, area = 0.001 m²) supports 100 kN. How much does it stretch per metre of length?',
+      checkAnswer: 'Stress = 100,000 / 0.001 = 100 MPa. Strain = stress / E = 100×10⁶ / 200×10⁹ = 0.0005 = 0.05%. Per metre: 0.5 mm. Steel barely stretches under enormous loads — this is why we trust it with our tallest buildings.',
       codeIntro: 'Plot stress-strain curves for structural materials.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -81,20 +81,20 @@ print("Steeper curve = stiffer material (higher Young's modulus)")
 print("Higher plateau = stronger material (higher yield stress)")
 print("Mud brick fails at 2 MPa. Steel survives 250 MPa.")
 print("That is a 125x difference — the gap between Babel and Burj Khalifa.")`,
-      challenge: 'Add carbon fibre (E=230 GPa, yield=3500 MPa, ultimate=3500 MPa). It has a higher Young\u2019s modulus than steel AND much higher yield stress. Why is it not used for buildings? (Hint: cost and brittleness.)',
+      challenge: 'Add carbon fibre (E=230 GPa, yield=3500 MPa, ultimate=3500 MPa). It has a higher Young’s modulus than steel AND much higher yield stress. Why is it not used for buildings? (Hint: cost and brittleness.)',
       successHint: 'Stress-strain curves are the fingerprint of every material. One chart tells you stiffness (slope), strength (height), and ductility (width). Every structural engineer reads these before designing anything.',
     },
     {
-      title: 'Moment of inertia \u2014 shape matters more than mass',
+      title: 'Moment of inertia — shape matters more than mass',
       concept: `Here is a surprising fact: a hollow steel tube can be **stronger** than a solid steel bar of the same weight. How? Because in bending and buckling, what matters is not just how much material you have, but **where** you put it.
 
-The **moment of inertia (I)** measures how spread out the cross-section is. For a solid circle: I = \u03C0d\u2074/64. For a hollow tube: I = \u03C0(d_outer\u2074 \u2212 d_inner\u2074)/64. Moving material away from the centre increases I dramatically.
+The **moment of inertia (I)** measures how spread out the cross-section is. For a solid circle: I = πd⁴/64. For a hollow tube: I = π(d_outer⁴ − d_inner⁴)/64. Moving material away from the centre increases I dramatically.
 
-This is why I-beams (the classic \u2018H\u2019 shape) are used in construction. The wide flanges at top and bottom place material far from the neutral axis, maximising I. The thin web in the middle uses minimal material.
+This is why I-beams (the classic ‘H’ shape) are used in construction. The wide flanges at top and bottom place material far from the neutral axis, maximising I. The thin web in the middle uses minimal material.
 
 The code compares different cross-section shapes to find the most efficient.`,
-      analogy: 'Hold a piece of paper flat and it flops. Now fold it into a V-shape (like a paper airplane wing) and it becomes rigid. You used the exact same amount of paper \u2014 but by moving material away from the centre, you increased the moment of inertia and made it resist bending.',
-      storyConnection: 'The Babel builders used solid rectangular bricks \u2014 the least efficient shape for resisting bending. If they had used hollow tubes or T-shaped beams (impossible with mud brick, but possible with cut stone), the same amount of material could have supported a much taller tower.',
+      analogy: 'Hold a piece of paper flat and it flops. Now fold it into a V-shape (like a paper airplane wing) and it becomes rigid. You used the exact same amount of paper — but by moving material away from the centre, you increased the moment of inertia and made it resist bending.',
+      storyConnection: 'The Babel builders used solid rectangular bricks — the least efficient shape for resisting bending. If they had used hollow tubes or T-shaped beams (impossible with mud brick, but possible with cut stone), the same amount of material could have supported a much taller tower.',
       checkQuestion: 'Why are bicycle frames made of hollow tubes, not solid rods?',
       checkAnswer: 'A solid rod and a hollow tube of the same weight: the tube has a larger diameter (material is further from centre), so it has a much higher moment of inertia. It resists bending better. The hollow core also saves weight without sacrificing stiffness. This is pure moment-of-inertia efficiency.',
       codeIntro: 'Compare the bending strength of different cross-section shapes.',
@@ -158,18 +158,18 @@ print("This is why modern buildings use I-beams, not solid blocks.")`,
       successHint: 'Moment of inertia is arguably the single most important concept in structural engineering. It is why birds have hollow bones, why bamboo is hollow, and why steel I-beams revolutionised construction.',
     },
     {
-      title: 'Wind load analysis \u2014 the invisible enemy',
-      concept: `The tallest buildings are not defeated by their own weight \u2014 they are defeated by **wind**. At 300+ metres, wind speed increases dramatically (no ground friction to slow it), and wind pressure grows with the **square** of velocity: P = \u00BD\u03C1v\u00B2.
+      title: 'Wind load analysis — the invisible enemy',
+      concept: `The tallest buildings are not defeated by their own weight — they are defeated by **wind**. At 300+ metres, wind speed increases dramatically (no ground friction to slow it), and wind pressure grows with the **square** of velocity: P = ½ρv².
 
-At ground level, wind might be 10 m/s. At 500 m, it can reach 50 m/s. The pressure at 500 m is 25 times higher than at ground level (50\u00B2/10\u00B2 = 25).
+At ground level, wind might be 10 m/s. At 500 m, it can reach 50 m/s. The pressure at 500 m is 25 times higher than at ground level (50²/10² = 25).
 
-Wind does not just push a building sideways \u2014 it creates **vortex shedding**: alternating low-pressure zones on each side that cause rhythmic swaying. If the sway frequency matches the building\u2019s natural frequency, **resonance** amplifies the motion until the structure fails.
+Wind does not just push a building sideways — it creates **vortex shedding**: alternating low-pressure zones on each side that cause rhythmic swaying. If the sway frequency matches the building’s natural frequency, **resonance** amplifies the motion until the structure fails.
 
 The code models wind pressure at different heights and calculates the bending moment at the base.`,
-      analogy: 'Stand in a strong wind and lean into it. Your feet stay planted but your upper body pushes forward. Now imagine being 800 metres tall \u2014 your head experiences wind 25 times stronger than your feet. That enormous difference in force between top and bottom is what tries to snap a skyscraper at its base.',
-      storyConnection: 'Ancient Mesopotamia, where Babel was built, is a flat plain with no windbreaks. A 90-metre mud brick tower would face significant wind loading with no way to resist it \u2014 mud brick has almost zero tensile strength, and wind creates tension on the leeward side. The tower would crack and peel apart in a storm.',
+      analogy: 'Stand in a strong wind and lean into it. Your feet stay planted but your upper body pushes forward. Now imagine being 800 metres tall — your head experiences wind 25 times stronger than your feet. That enormous difference in force between top and bottom is what tries to snap a skyscraper at its base.',
+      storyConnection: 'Ancient Mesopotamia, where Babel was built, is a flat plain with no windbreaks. A 90-metre mud brick tower would face significant wind loading with no way to resist it — mud brick has almost zero tensile strength, and wind creates tension on the leeward side. The tower would crack and peel apart in a storm.',
       checkQuestion: 'The Taipei 101 tower has a 730-tonne steel ball hanging near the top (a tuned mass damper). Why?',
-      checkAnswer: 'The ball swings in the opposite direction to wind-induced sway, cancelling out the motion. When wind pushes the building right, the ball swings left, absorbing the energy. This is tuned to the building\u2019s natural frequency so it specifically counteracts resonance. Without it, occupants on upper floors would feel nauseating sway during typhoons.',
+      checkAnswer: 'The ball swings in the opposite direction to wind-induced sway, cancelling out the motion. When wind pushes the building right, the ball swings left, absorbing the energy. This is tuned to the building’s natural frequency so it specifically counteracts resonance. Without it, occupants on upper floors would feel nauseating sway during typhoons.',
       codeIntro: 'Calculate wind pressure and bending moment on a tower at every height.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -212,7 +212,7 @@ axes[0].grid(alpha=0.3)
 axes[1].plot(pressure, heights, linewidth=2.5, color='#ef4444')
 axes[1].fill_betweenx(heights, 0, pressure, alpha=0.15, color='#ef4444')
 axes[1].set_xlabel('Pressure (Pa)', fontsize=11)
-axes[1].set_title('Wind Pressure (= \u00BDρv²)', fontsize=12)
+axes[1].set_title('Wind Pressure (= ½ρv²)', fontsize=12)
 axes[1].grid(alpha=0.3)
 
 # Bending moment
@@ -230,23 +230,23 @@ print(f"Wind at {H}m: {v[-1]:.1f} m/s ({v[-1]*3.6:.0f} km/h)")
 print(f"Pressure ratio (top/bottom): {pressure[-1]/pressure[0]:.1f}x")
 print(f"Total overturning moment: {moment_cumulative[-1]/1e6:.0f} MN·m")`,
       challenge: 'Change alpha to 0.14 (open terrain like Mesopotamia). How does wind pressure change? Then try H = 828 (Burj Khalifa height). What overturning moment must its foundation resist?',
-      successHint: 'Wind engineering is the primary challenge of supertall construction. Everything above 200 m is essentially a wind-resistance problem. The Burj Khalifa\u2019s Y-shape, tapered profile, and setbacks all exist to manage wind loads.',
+      successHint: 'Wind engineering is the primary challenge of supertall construction. Everything above 200 m is essentially a wind-resistance problem. The Burj Khalifa’s Y-shape, tapered profile, and setbacks all exist to manage wind loads.',
     },
     {
-      title: 'Foundation engineering \u2014 transferring load to earth',
+      title: 'Foundation engineering — transferring load to earth',
       concept: `A skyscraper is only as strong as its **foundation**. The Burj Khalifa weighs 500,000 tonnes. All that weight must pass through the foundation into bedrock without the ground sinking or shifting.
 
 Two main foundation types:
 - **Shallow foundations** (spread footings): spread the load over a wide area of soil. Used for lighter buildings.
 - **Deep foundations** (piles): long columns driven or drilled into bedrock. Used for heavy buildings or soft soil.
 
-The Burj Khalifa uses 194 piles, each 1.5 m in diameter and 43 m long, driven through sand into a layer of rock. The total pile area distributes the 500,000-tonne load so that no point experiences more than the soil\u2019s bearing capacity.
+The Burj Khalifa uses 194 piles, each 1.5 m in diameter and 43 m long, driven through sand into a layer of rock. The total pile area distributes the 500,000-tonne load so that no point experiences more than the soil’s bearing capacity.
 
 The code calculates required foundation sizes for different building weights and soil types.`,
-      analogy: 'Stand on soft sand in regular shoes \u2014 you sink. Put on snowshoes (wide base) \u2014 you stay on top. A shallow foundation is a snowshoe for a building. Piles are like stilts that reach down through soft layers to stand on hard ground underneath.',
-      storyConnection: 'Ancient Mesopotamia sits on alluvial clay from the Tigris and Euphrates rivers. Clay has a low bearing capacity (75\u2013150 kPa). A massive tower on this soil without deep foundations would slowly sink, tilt, and collapse \u2014 exactly what happened to many ziggurats over the centuries.',
+      analogy: 'Stand on soft sand in regular shoes — you sink. Put on snowshoes (wide base) — you stay on top. A shallow foundation is a snowshoe for a building. Piles are like stilts that reach down through soft layers to stand on hard ground underneath.',
+      storyConnection: 'Ancient Mesopotamia sits on alluvial clay from the Tigris and Euphrates rivers. Clay has a low bearing capacity (75–150 kPa). A massive tower on this soil without deep foundations would slowly sink, tilt, and collapse — exactly what happened to many ziggurats over the centuries.',
       checkQuestion: 'The Leaning Tower of Pisa tilts because one side of its foundation sits on softer soil. Why was it not simply rebuilt on better ground?',
-      checkAnswer: 'By the time the tilt was noticed (during construction of the third floor in 1178), the lower floors had already settled into the soil. Rebuilding was impossible. Instead, engineers spent 800 years trying to stabilise it \u2014 most recently by removing soil from under the high side (1990\u20132001), reducing the tilt from 5.5\u00B0 to 3.97\u00B0. The lean is now stable for at least 200 more years.',
+      checkAnswer: 'By the time the tilt was noticed (during construction of the third floor in 1178), the lower floors had already settled into the soil. Rebuilding was impossible. Instead, engineers spent 800 years trying to stabilise it — most recently by removing soil from under the high side (1990–2001), reducing the tilt from 5.5° to 3.97°. The lean is now stable for at least 200 more years.',
       codeIntro: 'Calculate foundation requirements for buildings of different sizes.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -301,23 +301,23 @@ print(f"  {n_piles} piles × {capacity_per_pile:.0f} tonnes each")
 print(f"  Total capacity: {n_piles * capacity_per_pile:,.0f} tonnes")
 print(f"  Building weight: 500,000 tonnes")
 print(f"  Safety factor: {n_piles * capacity_per_pile / 500000:.1f}x")`,
-      challenge: 'The Tower of Babel site is soft Mesopotamian clay (75 kPa). Calculate the minimum foundation area needed. If the tower base is 91 m \u00D7 91 m = 8,281 m\u00B2, is that enough? What does this tell you about the feasibility of the biblical structure?',
+      challenge: 'The Tower of Babel site is soft Mesopotamian clay (75 kPa). Calculate the minimum foundation area needed. If the tower base is 91 m × 91 m = 8,281 m², is that enough? What does this tell you about the feasibility of the biblical structure?',
       successHint: 'Foundations are the hidden half of engineering. We admire the tower, but it is the foundation that makes it possible. Every record-breaking skyscraper starts with record-breaking foundations.',
     },
     {
-      title: 'Phonology \u2014 the physics of speech sounds',
-      concept: `When God confused the languages at Babel, what actually changed? Linguists would say: the **phonemes** \u2014 the basic sound units of language.
+      title: 'Phonology — the physics of speech sounds',
+      concept: `When God confused the languages at Babel, what actually changed? Linguists would say: the **phonemes** — the basic sound units of language.
 
-Every language uses a small set of sounds (phonemes) from a much larger set of possible human sounds. English uses about 44 phonemes. Hawaiian uses 13. !X\u00F3\u00F5 (a Khoisan language) uses over 140, including click consonants.
+Every language uses a small set of sounds (phonemes) from a much larger set of possible human sounds. English uses about 44 phonemes. Hawaiian uses 13. !Xóõ (a Khoisan language) uses over 140, including click consonants.
 
-Phonemes are produced by precise control of the **vocal tract**: the tongue, lips, teeth, palate, and larynx. A tiny change in tongue position can flip one phoneme into another ("bat" vs "bet" \u2014 tongue height changes by millimetres).
+Phonemes are produced by precise control of the **vocal tract**: the tongue, lips, teeth, palate, and larynx. A tiny change in tongue position can flip one phoneme into another ("bat" vs "bet" — tongue height changes by millimetres).
 
 The code analyses the phonemic inventories of languages and plots their distribution.`,
-      analogy: 'Think of phonemes as the alphabet of sound. English has 26 letters but 44 phonemes (some letters make multiple sounds: "c" in "cat" vs "city"). Each language picks a different subset of sounds from the full human repertoire \u2014 like different card games using different subsets from the same deck.',
-      storyConnection: 'At Babel, the sudden inability to communicate would feel like everyone switching to different phoneme sets overnight. In reality, sound changes happen gradually \u2014 the Great Vowel Shift in English took 300 years (1400\u20131700) and completely changed how vowels sounded, turning Middle English into something unrecognisable.',
+      analogy: 'Think of phonemes as the alphabet of sound. English has 26 letters but 44 phonemes (some letters make multiple sounds: "c" in "cat" vs "city"). Each language picks a different subset of sounds from the full human repertoire — like different card games using different subsets from the same deck.',
+      storyConnection: 'At Babel, the sudden inability to communicate would feel like everyone switching to different phoneme sets overnight. In reality, sound changes happen gradually — the Great Vowel Shift in English took 300 years (1400–1700) and completely changed how vowels sounded, turning Middle English into something unrecognisable.',
       checkQuestion: 'Japanese has no "L" phoneme, and English speakers struggle with the Hindi retroflex "T". Why is it hard for adults to learn foreign phonemes?',
-      checkAnswer: 'During the first year of life, babies can distinguish all human phonemes. But by age 12 months, the brain prunes unused phoneme categories, strengthening the ones heard in the native language. Adult learners must reactivate these pruned categories, which requires extensive practice. This is called perceptual narrowing \u2014 the brain optimises for its environment at the cost of flexibility.',
-      codeIntro: 'Analyse phoneme inventories across the world\u2019s languages.',
+      checkAnswer: 'During the first year of life, babies can distinguish all human phonemes. But by age 12 months, the brain prunes unused phoneme categories, strengthening the ones heard in the native language. Adult learners must reactivate these pruned categories, which requires extensive practice. This is called perceptual narrowing — the brain optimises for its environment at the cost of flexibility.',
+      codeIntro: 'Analyse phoneme inventories across the world’s languages.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
@@ -365,20 +365,20 @@ print()
 print("Most languages cluster around 20-45 phonemes.")
 print("!Xoo is an outlier with click consonants.")
 print("Hawaiian is minimalist — just 13 sounds build every word.")`,
-      challenge: 'If English has 44 phonemes, how many possible 3-phoneme syllables exist? (44\u00B3 = 85,184). How many does English actually use? Research this and add a print statement with the answer.',
+      challenge: 'If English has 44 phonemes, how many possible 3-phoneme syllables exist? (44³ = 85,184). How many does English actually use? Research this and add a print statement with the answer.',
       successHint: 'Phonology is the bridge between the physics of sound and the structure of language. Every word you speak is a precise sequence of articulatory gestures, each producing a specific phoneme. Babel scattered these gestures into thousands of different systems.',
     },
     {
       title: 'Building a simple translator with Python dictionaries',
       concept: `Let us now build the simplest possible translation system: a **dictionary-based translator**. It maps words one-to-one from one language to another.
 
-This approach is extremely limited \u2014 it cannot handle word order changes, grammar differences, or words with multiple meanings. But it demonstrates the core challenge: translation is not just swapping words, it is mapping **meaning** between systems with different structures.
+This approach is extremely limited — it cannot handle word order changes, grammar differences, or words with multiple meanings. But it demonstrates the core challenge: translation is not just swapping words, it is mapping **meaning** between systems with different structures.
 
-The code builds an English\u2192French dictionary translator and shows exactly where it breaks down. This motivates the need for statistical and neural translation systems that understand context.`,
+The code builds an English→French dictionary translator and shows exactly where it breaks down. This motivates the need for statistical and neural translation systems that understand context.`,
       analogy: 'A dictionary translator is like a tourist with a phrasebook. It works for simple sentences ("Where is the bathroom?") but fails hilariously for anything complex ("Time flies like an arrow; fruit flies like a banana"). Real understanding requires knowing how words relate to each other in context.',
-      storyConnection: 'If the Babel workers suddenly spoke different languages, the first instinct would be to point at things and build a word list \u2014 exactly what a dictionary translator does. But word lists cannot capture grammar, idioms, or nuance. The confusion would persist long after basic vocabulary was shared.',
+      storyConnection: 'If the Babel workers suddenly spoke different languages, the first instinct would be to point at things and build a word list — exactly what a dictionary translator does. But word lists cannot capture grammar, idioms, or nuance. The confusion would persist long after basic vocabulary was shared.',
       checkQuestion: 'Why can "bank" mean a financial institution OR the side of a river? How would a translator handle this?',
-      checkAnswer: 'These are called homonyms \u2014 words spelled and pronounced the same but with different meanings. A dictionary translator picks one meaning and uses it everywhere, producing errors. A context-aware system (like a transformer) looks at surrounding words: "money in the bank" vs "sitting on the river bank" and picks the correct translation. This is why context is everything in NLP.',
+      checkAnswer: 'These are called homonyms — words spelled and pronounced the same but with different meanings. A dictionary translator picks one meaning and uses it everywhere, producing errors. A context-aware system (like a transformer) looks at surrounding words: "money in the bank" vs "sitting on the river bank" and picks the correct translation. This is why context is everything in NLP.',
       codeIntro: 'Build a dictionary-based translator and see where it fails.',
       code: `# Simple English -> French dictionary translator
 dictionary = {
@@ -434,8 +434,8 @@ print("   even when it means riverbank ('berge')")
 print("3. No grammar: French adjectives go AFTER nouns")
 print("   'big red dog' should be 'chien grand rouge'")
 print("4. Unknown words are simply skipped")`,
-      challenge: 'Add 10 more words to the dictionary. Then try translating "the bird flies under the big table" \u2014 does the word order need to change for correct French? Add a rule that swaps adjective-noun order.',
-      successHint: 'Dictionary translation shows exactly why NLP is hard. Language is not just vocabulary \u2014 it is structure, context, culture, and ambiguity. Every improvement in machine translation has come from finding better ways to capture these layers of meaning.',
+      challenge: 'Add 10 more words to the dictionary. Then try translating "the bird flies under the big table" — does the word order need to change for correct French? Add a rule that swaps adjective-noun order.',
+      successHint: 'Dictionary translation shows exactly why NLP is hard. Language is not just vocabulary — it is structure, context, culture, and ambiguity. Every improvement in machine translation has come from finding better ways to capture these layers of meaning.',
     },
   ];
 

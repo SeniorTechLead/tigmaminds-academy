@@ -49,7 +49,7 @@ export default function MajuliFormationDiagram() {
 
         {/* Brahmaputra moving south */}
         <path d="M 40,250 Q 150,265 280,260 Q 400,255 560,260" fill="none" stroke="url(#majFwater)" strokeWidth="12" opacity="0.8" />
-        <text x="280" y="275" textAnchor="middle" className="fill-sky-200" fontSize="10" fontWeight="bold">Brahmaputra captures Subansiri\u2019s channel</text>
+        <text x="280" y="275" textAnchor="middle" className="fill-sky-200" fontSize="10" fontWeight="bold">Brahmaputra captures Subansiri’s channel</text>
         <path d="M 440,258 L 460,258" fill="none" className="stroke-sky-400" strokeWidth="1.5" markerEnd="url(#majFarrow)" />
 
         {/* Curved arrow showing shift */}
@@ -78,14 +78,14 @@ export default function MajuliFormationDiagram() {
           </g>
         ))}
         <text x="300" y="370" textAnchor="middle" className="fill-white" fontSize="12" fontWeight="bold">MAJULI ISLAND</text>
-        <text x="300" y="384" textAnchor="middle" className="fill-emerald-300" fontSize="10">~1,200 km\u00B2 at its peak</text>
+        <text x="300" y="384" textAnchor="middle" className="fill-emerald-300" fontSize="10">~1,200 km² at its peak</text>
 
         {/* South channel */}
         <path d="M 40,400 Q 200,410 350,405 Q 450,400 560,408" fill="none" stroke="url(#majFwater)" strokeWidth="12" opacity="0.8" />
         <text x="480" y="420" className="fill-sky-200" fontSize="9">Main Brahmaputra</text>
 
         {/* Key insight */}
-        <text x="290" y="435" textAnchor="middle" className="fill-slate-400" fontSize="10">The river flowed around the land instead of through it \u2014 creating an island by indecision.</text>
+        <text x="290" y="435" textAnchor="middle" className="fill-slate-400" fontSize="10">The river flowed around the land instead of through it — creating an island by indecision.</text>
       </svg>
     </div>
   );

@@ -91,7 +91,7 @@ braking_distances = -initial_speeds**2 / (2 * a_brake)  # from v^2=u^2+2as, v=0
 axes[1,0].bar(initial_speeds * 3.6, braking_distances, width=4, color='#ef4444', alpha=0.7)
 axes[1,0].set_xlabel('Initial speed (km/h)', color='white')
 axes[1,0].set_ylabel('Braking distance (m)', color='white')
-axes[1,0].set_title('Braking Distance (v\\u00b2 = u\\u00b2 + 2as)', color='white', fontsize=11)
+axes[1,0].set_title('Braking Distance (v\² = u\² + 2as)', color='white', fontsize=11)
 axes[1,0].tick_params(colors='gray')
 
 # Comparison: same distance, different accelerations
@@ -100,7 +100,7 @@ accels = [1, 2, 3, 5, 8, 10]
 for a in accels:
     t = np.linspace(0, 6, 100)
     s = 0.5 * a * t**2
-    axes[1,1].plot(t, s, linewidth=2, label=f'a = {a} m/s\\u00b2')
+    axes[1,1].plot(t, s, linewidth=2, label=f'a = {a} m/s\²')
 axes[1,1].set_xlabel('Time (s)', color='white')
 axes[1,1].set_ylabel('Distance (m)', color='white')
 axes[1,1].set_title('Same start, different accelerations', color='white', fontsize=11)
@@ -113,7 +113,7 @@ plt.show()
 print("SUVAT in action:")
 print(f"  Hare: 0 to {5*4:.0f} m/s in 4s, covering {0.5*5*16:.0f}m")
 print(f"  Rhino: 0 to {3*6:.0f} m/s in 6s, covering {0.5*3*36:.0f}m")
-print(f"  Doubling speed quadruples braking distance (v\\u00b2 relationship)")`,
+print(f"  Doubling speed quadruples braking distance (v\² relationship)")`,
       challenge: 'A hare and tortoise start 100m apart, moving toward each other. Hare: u=5 m/s, a=0. Tortoise: u=0.3 m/s, a=0. When and where do they meet? Solve with SUVAT.',
       successHint: 'SUVAT equations are the foundation of all classical mechanics. Every rocket launch, every car crash investigation, every sports analysis starts here. Master these three equations and you can predict any motion.',
     },
@@ -165,7 +165,7 @@ ax1.set_facecolor('#111827')
 v0 = 5  # m/s
 for angle in [15, 30, 45, 60, 75]:
     x, y = projectile(v0, angle)
-    ax1.plot(x, y, linewidth=2, label=f'{angle}\\u00b0')
+    ax1.plot(x, y, linewidth=2, label=f'{angle}\°')
 
 ax1.set_xlabel('Horizontal distance (m)', color='white')
 ax1.set_ylabel('Height (m)', color='white')
@@ -199,8 +199,8 @@ ax2.set_ylim(-0.1, None)
 plt.tight_layout()
 plt.show()
 
-print("Range = v\\u00b2 sin(2\\u03b8) / g")
-print(f"At 45\\u00b0, sin(90\\u00b0) = 1, giving maximum range.")
+print("Range = v\² sin(2\θ) / g")
+print(f"At 45\°, sin(90\°) = 1, giving maximum range.")
 print()
 for name, props in jumpers.items():
     R = props['v0']**2 * np.sin(2*np.radians(props['angle'])) / g
@@ -258,12 +258,12 @@ a_maxs = [mu * g for mu in mus]
 colors = plt.cm.RdYlGn(np.linspace(0.2, 0.9, len(names)))
 
 bars = ax1.barh(names, a_maxs, color=colors)
-ax1.set_xlabel('Max acceleration (m/s\\u00b2)', color='white')
+ax1.set_xlabel('Max acceleration (m/s\²)', color='white')
 ax1.set_title('Maximum Acceleration by Surface', color='white', fontsize=12)
 ax1.tick_params(colors='gray')
 for bar, a in zip(bars, a_maxs):
     ax1.text(bar.get_width() + 0.1, bar.get_y() + bar.get_height()/2,
-             f'{a:.1f} m/s\\u00b2', va='center', color='white', fontsize=9)
+             f'{a:.1f} m/s\²', va='center', color='white', fontsize=9)
 
 # Simulate a race on different surfaces
 ax2.set_facecolor('#111827')
@@ -278,7 +278,7 @@ for name, mu in [('Dry grass', 0.35), ('Wet mud', 0.15), ('Rocky ground', 0.55)]
     s = np.where(t < t_to_vmax,
                  0.5 * a_max * t**2,
                  0.5 * a_max * t_to_vmax**2 + v_max_hare * (t - t_to_vmax))
-    ax2.plot(t, s, linewidth=2, label=f'{name} (\\u03bc={mu})')
+    ax2.plot(t, s, linewidth=2, label=f'{name} (\μ={mu})')
 
 ax2.set_xlabel('Time (s)', color='white')
 ax2.set_ylabel('Distance (m)', color='white')
@@ -293,7 +293,7 @@ print("Surface matters enormously:")
 for name, mu in surfaces.items():
     a = mu * g
     t_100 = np.sqrt(2 * 100 / a) if a > 0 else float('inf')
-    print(f"  {name}: \\u03bc={mu}, max accel={a:.1f} m/s\\u00b2, 100m from rest in {t_100:.1f}s")`,
+    print(f"  {name}: \μ={mu}, max accel={a:.1f} m/s\², 100m from rest in {t_100:.1f}s")`,
       challenge: 'Model what happens when the hare hits a patch of wet mud mid-sprint. It enters at 15 m/s with mu=0.15. How far does it slide before stopping? Use v^2 = u^2 + 2as with a = -mu*g.',
       successHint: 'Friction engineering is everywhere: brake pads, tire design, shoe soles, even phone screen protectors. Understanding friction coefficients lets you predict and control motion on any surface.',
     },
@@ -341,7 +341,7 @@ colors = ['#22c55e', '#ef4444', '#3b82f6', '#8b5cf6', '#6b7280']
 
 bars = ax1.bar(names, KEs, color=colors)
 ax1.set_ylabel('Kinetic energy (J)', color='white')
-ax1.set_title('Kinetic Energy at Top Speed (KE = \\u00bdmv\\u00b2)', color='white', fontsize=11)
+ax1.set_title('Kinetic Energy at Top Speed (KE = \½mv\²)', color='white', fontsize=11)
 ax1.tick_params(colors='gray')
 ax1.tick_params(axis='x', rotation=20)
 for bar, ke in zip(bars, KEs):
@@ -484,7 +484,7 @@ plt.tight_layout()
 plt.show()
 
 print("Gait transitions are predicted by Froude number:")
-print("  Fr = v\\u00b2 / (g \\u00d7 leg_length)")
+print("  Fr = v\² / (g \× leg_length)")
 print("  Walk: Fr < 0.5 | Trot: 0.5-2.5 | Gallop: > 2.5")
 print("  Horses and humans naturally switch gaits at these thresholds!")`,
       challenge: 'Calculate the Froude number at which YOU transition from walking to running. Measure your leg length, measure your fastest comfortable walking speed. Fr should be close to 0.5.',

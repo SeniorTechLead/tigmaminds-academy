@@ -148,8 +148,8 @@ print("  This is why Majuli's flatness is so dangerous.")`,
 **Q = A x V**
 
 Where:
-- **Q** = discharge (volume of water per second, m\u00B3/s)
-- **A** = cross-sectional area of the channel (m\u00B2)
+- **Q** = discharge (volume of water per second, m³/s)
+- **A** = cross-sectional area of the channel (m²)
 - **V** = average flow velocity (m/s)
 
 This equation — the **continuity equation** — tells us that the same volume of water must pass through every cross-section of the river per unit time. If the channel narrows, velocity must increase (and vice versa). This has profound consequences:
@@ -159,14 +159,14 @@ This equation — the **continuity equation** — tells us that the same volume 
 **At a wide section**: A increases, so V decreases. Slower water = more deposition. This is why river islands and bars form where channels widen.
 
 For the Brahmaputra near Majuli:
-- Dry season: width ~3 km, depth ~5 m, velocity ~1 m/s, Q = 15,000 m\u00B3/s
-- Monsoon: width ~8 km, depth ~12 m, velocity ~2.5 m/s, Q = 240,000 m\u00B3/s
+- Dry season: width ~3 km, depth ~5 m, velocity ~1 m/s, Q = 15,000 m³/s
+- Monsoon: width ~8 km, depth ~12 m, velocity ~2.5 m/s, Q = 240,000 m³/s
 
 The monsoon discharge is **16 times** the dry season — and the velocity increase means exponentially more erosive power.`,
       analogy: 'Put your thumb over the end of a garden hose. The opening (A) gets smaller, so the water (V) shoots out faster — but the total flow (Q) doesn\'t change. Rivers work the same way: squeeze a river through a narrow gorge and it accelerates. Let it spread across a wide floodplain and it slows down.',
       storyConnection: 'Majuli exists at a point where the Brahmaputra widens and slows, dropping sediment. But during monsoon, the discharge surges so dramatically that even the wide channel cannot prevent high velocities. The continuity equation explains both Majuli\'s creation (low velocity = deposition) and its erosion (high velocity = bank collapse).',
       checkQuestion: 'A river has a rectangular cross-section 50m wide and 3m deep, flowing at 1.5 m/s. It enters a gorge that is only 20m wide. If the depth stays at 3m, what is the new velocity? What if the depth also increases to 5m in the gorge?',
-      checkAnswer: 'Using Q = A x V: Original Q = 50 x 3 x 1.5 = 225 m\u00B3/s. In the gorge at 3m depth: 225 = 20 x 3 x V, so V = 3.75 m/s (2.5x faster). If depth increases to 5m: 225 = 20 x 5 x V, so V = 2.25 m/s. Deeper gorges partially offset the velocity increase by providing more cross-sectional area. This is why natural gorges are often deep — the river scours the bottom until the area is large enough to bring velocity to a sustainable level.',
+      checkAnswer: 'Using Q = A x V: Original Q = 50 x 3 x 1.5 = 225 m³/s. In the gorge at 3m depth: 225 = 20 x 3 x V, so V = 3.75 m/s (2.5x faster). If depth increases to 5m: 225 = 20 x 5 x V, so V = 2.25 m/s. Deeper gorges partially offset the velocity increase by providing more cross-sectional area. This is why natural gorges are often deep — the river scours the bottom until the area is large enough to bring velocity to a sustainable level.',
       codeIntro: 'Simulate river flow through varying channel widths and calculate velocity and erosive power.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -218,7 +218,7 @@ ax.fill_between(distance, velocity, alpha=0.15, color='#f59e0b')
 ax.axhline(2.0, color='#ef4444', linestyle=':', alpha=0.5)
 ax.text(2, 2.05, 'Bank erosion threshold (~2 m/s)', color='#ef4444', fontsize=8)
 ax.set_ylabel('Velocity (m/s)', color='white')
-ax.set_title(f'Flow Velocity (Q = {Q_monsoon:,} m\u00B3/s, depth = {depth}m)', color='white', fontsize=12)
+ax.set_title(f'Flow Velocity (Q = {Q_monsoon:,} m³/s, depth = {depth}m)', color='white', fontsize=12)
 ax.tick_params(colors='gray')
 
 # Erosive power
@@ -228,7 +228,7 @@ ax.fill_between(distance, erosive_power_normalized, color='#ef4444', alpha=0.3)
 ax.plot(distance, erosive_power_normalized, color='#ef4444', linewidth=2)
 ax.set_ylabel('Relative erosive power (%)', color='white')
 ax.set_xlabel('Distance along river (km)', color='white')
-ax.set_title('Erosive Power (\u221D velocity\u00B3)', color='white', fontsize=12)
+ax.set_title('Erosive Power (∝ velocity³)', color='white', fontsize=12)
 ax.tick_params(colors='gray')
 
 # Mark the island zone
@@ -249,7 +249,7 @@ print()
 print("Erosive power scales with velocity CUBED.")
 print("A 2x velocity increase means 8x more erosion.")
 print("This is why island edges erode so aggressively during floods.")`,
-      challenge: 'Change the discharge from monsoon (50,000 m\u00B3/s) to dry season (5,000 m\u00B3/s). How does the velocity profile change? At what discharge does velocity at the island constriction drop below the erosion threshold of 2 m/s?',
+      challenge: 'Change the discharge from monsoon (50,000 m³/s) to dry season (5,000 m³/s). How does the velocity profile change? At what discharge does velocity at the island constriction drop below the erosion threshold of 2 m/s?',
       successHint: 'The continuity equation is the most fundamental tool in hydrology. It connects river geometry to flow behavior, and flow behavior to erosion. Every engineer working on Majuli\'s protection uses this equation daily.',
     },
     {
@@ -268,8 +268,8 @@ print("This is why island edges erode so aggressively during floods.")`,
 
 **Calculating erosion rates:**
 - **Linear erosion rate**: meters of bank retreat per year (m/yr)
-- **Area loss rate**: km\u00B2 of land lost per year
-- **Volume loss rate**: m\u00B3 of material removed per year (area x depth)
+- **Area loss rate**: km² of land lost per year
+- **Volume loss rate**: m³ of material removed per year (area x depth)
 
 For Majuli, measured rates vary dramatically by location:
 - Southern bank (facing main channel): 30-100 m/yr retreat
@@ -353,8 +353,8 @@ p = np.poly1d(z)
 x_fit = np.linspace(monsoon_discharge.min(), monsoon_discharge.max(), 50)
 ax.plot(x_fit, p(x_fit), '--', color='white', linewidth=1.5, label=f'Trend (Village B)')
 r_squared = np.corrcoef(monsoon_discharge, retreat_data['South bank (village B)']['annual'])[0,1]**2
-ax.text(32000, 130, f'R\u00B2 = {r_squared:.2f}', color='white', fontsize=10)
-ax.set_xlabel('Peak monsoon discharge (m\u00B3/s)', color='white')
+ax.text(32000, 130, f'R² = {r_squared:.2f}', color='white', fontsize=10)
+ax.set_xlabel('Peak monsoon discharge (m³/s)', color='white')
 ax.set_ylabel('Annual retreat (m)', color='white')
 ax.set_title('Erosion vs Monsoon Severity', color='white', fontsize=11)
 ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
@@ -384,8 +384,8 @@ for name, data in retreat_data.items():
     bank_length = 5  # km (approximate segment length)
     area_lost = data['cumulative'][-1] * bank_length * 1000 / 1e6  # km^2
     total_area_loss += area_lost
-    print(f"  {name}: {data['cumulative'][-1]:.0f}m retreat, ~{area_lost:.1f} km\u00B2 lost")
-print(f"\\nEstimated total area lost: ~{total_area_loss:.0f} km\u00B2 in 20 years")`,
+    print(f"  {name}: {data['cumulative'][-1]:.0f}m retreat, ~{area_lost:.1f} km² lost")
+print(f"\\nEstimated total area lost: ~{total_area_loss:.0f} km² in 20 years")`,
       challenge: 'Calculate the correlation coefficient between monsoon discharge and erosion rate for each location. Which location is most sensitive to flood intensity? Which is least? What might explain the difference?',
       successHint: 'Erosion measurement is where field work meets data science. The ability to quantify erosion rates, correlate them with environmental variables, and project future trends is what transforms concern into actionable policy. This is exactly the kind of analysis that informs Majuli\'s conservation planning.',
     },
@@ -413,7 +413,7 @@ print(f"\\nEstimated total area lost: ~{total_area_loss:.0f} km\u00B2 in 20 year
 These indices allow automated detection of land-water boundaries with high precision, enabling scientists to map Majuli's changing shoreline with each new satellite pass.`,
       analogy: 'Satellite monitoring is like a time-lapse camera pointed at the island from space. Each image is a snapshot. String them together over decades and you get a movie of Majuli shrinking. Spectral indices are like putting on special glasses that make water glow blue and plants glow green — they let the computer "see" the boundary automatically.',
       storyConnection: 'Before satellites, Majuli\'s erosion was a local story — villagers watched their land disappear, but the outside world couldn\'t see it at scale. Satellite imagery made the crisis visible to the entire world. The same technology that tracks deforestation in the Amazon and ice loss in Antarctica now monitors every meter of Majuli\'s shoreline.',
-      checkQuestion: 'A satellite image from October 2015 shows Majuli with an area of 524 km\u00B2. An image from October 2016 shows 502 km\u00B2. Can you trust this 22 km\u00B2 difference as real erosion? What could cause false changes?',
+      checkQuestion: 'A satellite image from October 2015 shows Majuli with an area of 524 km². An image from October 2016 shows 502 km². Can you trust this 22 km² difference as real erosion? What could cause false changes?',
       checkAnswer: 'You should be cautious. Possible sources of false change: (1) Different water levels at time of imaging — a slightly higher river would make the island look smaller. (2) Cloud shadows misclassified as water. (3) Seasonal flooding not yet receded. (4) Different satellite sensors with different resolutions. To confirm real erosion, you need: same-season imagery, water level records, multiple images per year, and ideally ground-truth verification at selected sites.',
       codeIntro: 'Simulate NDVI-based land classification and shoreline change detection from satellite data.',
       code: `import numpy as np
@@ -474,7 +474,7 @@ for idx, (year, rx, ry) in enumerate(scenarios):
         ax.contour(X, Y, prev_island.astype(float), levels=[0.5],
                    colors='#ef4444', linewidths=1, linestyles='dashed')
 
-    ax.set_title(f'{year}  |  Area: {area:.0f} km\u00B2', color='white', fontsize=11)
+    ax.set_title(f'{year}  |  Area: {area:.0f} km²', color='white', fontsize=11)
     ax.set_xlabel('km', color='white')
     ax.set_ylabel('km', color='white')
     ax.tick_params(colors='gray')
@@ -493,11 +493,11 @@ ars = [a[1] for a in areas]
 ax1.plot(yrs, ars, 'o-', color='#ef4444', linewidth=2, markersize=8)
 ax1.fill_between(yrs, ars, alpha=0.15, color='#ef4444')
 ax1.set_xlabel('Year', color='white')
-ax1.set_ylabel('Area (km\u00B2)', color='white')
+ax1.set_ylabel('Area (km²)', color='white')
 ax1.set_title('Island Area from Satellite Classification', color='white', fontsize=11)
 ax1.tick_params(colors='gray')
 for yr, ar in areas:
-    ax1.annotate(f'{ar:.0f} km\u00B2', xy=(yr, ar), xytext=(yr, ar+5),
+    ax1.annotate(f'{ar:.0f} km²', xy=(yr, ar), xytext=(yr, ar+5),
                  color='white', fontsize=9, ha='center')
 
 # Decadal loss
@@ -505,21 +505,21 @@ ax2.set_facecolor('#111827')
 decade_loss = [ars[i] - ars[i+1] for i in range(len(ars)-1)]
 decade_labels = [f'{yrs[i]}-{yrs[i+1]}' for i in range(len(yrs)-1)]
 bars = ax2.bar(decade_labels, decade_loss, color='#f59e0b')
-ax2.set_ylabel('Area lost (km\u00B2)', color='white')
+ax2.set_ylabel('Area lost (km²)', color='white')
 ax2.set_title('Land Loss by Decade', color='white', fontsize=11)
 ax2.tick_params(colors='gray')
 for bar, loss in zip(bars, decade_loss):
     ax2.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.5,
-             f'{loss:.0f} km\u00B2', ha='center', color='white', fontsize=10)
+             f'{loss:.0f} km²', ha='center', color='white', fontsize=10)
 
 plt.tight_layout()
 plt.show()
 
 print("Satellite-derived area measurements:")
 for year, area in areas:
-    print(f"  {year}: {area:.0f} km\u00B2")
-print(f"\\nTotal loss ({areas[0][0]}-{areas[-1][0]}): {areas[0][1]-areas[-1][1]:.0f} km\u00B2")
-print(f"Average rate: {(areas[0][1]-areas[-1][1])/(areas[-1][0]-areas[0][0]):.1f} km\u00B2/year")
+    print(f"  {year}: {area:.0f} km²")
+print(f"\\nTotal loss ({areas[0][0]}-{areas[-1][0]}): {areas[0][1]-areas[-1][1]:.0f} km²")
+print(f"Average rate: {(areas[0][1]-areas[-1][1])/(areas[-1][0]-areas[0][0]):.1f} km²/year")
 print()
 print("NDVI classification accuracy depends on:")
 print("  - Cloud-free imagery (a challenge in monsoon season)")
@@ -544,10 +544,10 @@ The key tool is the **flood frequency curve**: plot historical peak discharges, 
 - **Log-Pearson Type III**: the US standard for flood frequency analysis
 
 **For Majuli, key flood levels:**
-- Annual flood (50% probability): ~45,000 m\u00B3/s — normal monsoon, some low-lying areas flooded
-- 10-year flood: ~65,000 m\u00B3/s — significant flooding, bank erosion accelerates
-- 50-year flood: ~80,000 m\u00B3/s — catastrophic, large areas submerged for weeks
-- 100-year flood: ~90,000 m\u00B3/s — island-wide devastation
+- Annual flood (50% probability): ~45,000 m³/s — normal monsoon, some low-lying areas flooded
+- 10-year flood: ~65,000 m³/s — significant flooding, bank erosion accelerates
+- 50-year flood: ~80,000 m³/s — catastrophic, large areas submerged for weeks
+- 100-year flood: ~90,000 m³/s — island-wide devastation
 
 A crucial caveat: climate change is shifting the distribution. What was a "100-year flood" in 1950 may be a "50-year flood" in 2025 — the historical data underestimates future risk.`,
       analogy: 'Flood prediction is like predicting the highest wave that will hit a seawall. You can watch waves for a year and record the highest one. But the wave that hits next year might be bigger. Statistical analysis lets you estimate how high a wave COULD be, even if you have never seen one that big. The longer your records, the better your estimate — but surprises are always possible.',
@@ -605,12 +605,12 @@ for rp in key_rps:
     p = 1 - 1/rp
     q = mu_fit + beta_fit * (-np.log(-np.log(p)))
     ax1.plot(rp, q/1000, 's', color='#ef4444', markersize=8, zorder=5)
-    ax1.annotate(f'{rp}-yr: {q/1000:.0f}k m\u00B3/s', xy=(rp, q/1000),
+    ax1.annotate(f'{rp}-yr: {q/1000:.0f}k m³/s', xy=(rp, q/1000),
                  xytext=(rp*1.3, q/1000 + 2), color='#ef4444', fontsize=8,
                  arrowprops=dict(arrowstyle='->', color='#ef4444'))
 
 ax1.set_xlabel('Return period (years)', color='white')
-ax1.set_ylabel('Peak discharge (thousand m\u00B3/s)', color='white')
+ax1.set_ylabel('Peak discharge (thousand m³/s)', color='white')
 ax1.set_title('Flood Frequency Curve (Gumbel Distribution)', color='white', fontsize=12)
 ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax1.tick_params(colors='gray')
@@ -640,13 +640,13 @@ plt.tight_layout()
 plt.show()
 
 print("Flood frequency analysis results:")
-print(f"  Mean annual peak: {mean_peaks/1000:.0f}k m\u00B3/s")
+print(f"  Mean annual peak: {mean_peaks/1000:.0f}k m³/s")
 print(f"  Gumbel parameters: location={mu_fit/1000:.1f}k, scale={beta_fit/1000:.1f}k")
 print()
 for rp in [2, 10, 25, 50, 100, 200]:
     p = 1 - 1/rp
     q = mu_fit + beta_fit * (-np.log(-np.log(p)))
-    print(f"  {rp:4d}-year flood: {q/1000:6.0f}k m\u00B3/s ({100/rp:.1f}% annual probability)")
+    print(f"  {rp:4d}-year flood: {q/1000:6.0f}k m³/s ({100/rp:.1f}% annual probability)")
 print()
 print("Probability of a 100-year flood in the next 30 years:")
 print(f"  {(1 - (1-0.01)**30)*100:.1f}%")
@@ -660,7 +660,7 @@ print("That's nearly 1 in 4! 'Rare' events are not as rare as they sound.")`,
 
 **1. Embankments (levees)**
 Earthen walls 3-5m high, built along threatened riverbanks. They work by physically blocking floodwater.
-- Design equation: the embankment must withstand hydrostatic pressure P = \u03C1gh, where h is the flood height
+- Design equation: the embankment must withstand hydrostatic pressure P = ρgh, where h is the flood height
 - Failure modes: overtopping (flood exceeds design height), piping (water seeps through), scour (river undermines the base)
 - Majuli has ~100 km of embankments; many are poorly maintained and breach during major floods
 
@@ -681,7 +681,7 @@ Planting deep-rooted species (vetiver grass, bamboo, native trees) along riverba
 The most effective approach combines all three: embankments for immediate protection, porcupines for medium-term sediment trapping, and vegetation for long-term stabilization.`,
       analogy: 'Protecting a riverbank is like treating a patient with a severe wound. Embankments are emergency surgery — fast, effective, but the wound can reopen. Porcupines are like a cast — they hold things in place while healing happens. Vegetation is the body\'s own healing process — slow but permanent. The best outcome uses all three in sequence.',
       storyConnection: 'Majuli\'s story does not have to end in disappearance. The same scientific understanding of river dynamics, sediment transport, and erosion that explains the island\'s decline also provides the tools to fight back. Engineering solutions are how science translates understanding into action — and for Majuli, action is urgent.',
-      checkQuestion: 'An embankment is designed to protect against a 25-year flood (80,000 m\u00B3/s). A 50-year flood (90,000 m\u00B3/s) strikes. The embankment is overtopped by 0.5 m. Why is the damage from overtopping often WORSE than if there were no embankment at all?',
+      checkQuestion: 'An embankment is designed to protect against a 25-year flood (80,000 m³/s). A 50-year flood (90,000 m³/s) strikes. The embankment is overtopped by 0.5 m. Why is the damage from overtopping often WORSE than if there were no embankment at all?',
       checkAnswer: 'When water overtops an embankment, it falls from the crest to the land side, creating enormous erosive force (like a waterfall). This scours the back of the embankment, causing rapid structural failure — the wall collapses in a sudden breach. Without the embankment, the flood would rise gradually, allowing time for evacuation. The embankment gives a false sense of security, then fails catastrophically. This is called the "levee effect" — protection infrastructure can paradoxically increase damage from extreme events.',
       codeIntro: 'Model the effectiveness of bamboo porcupines in reducing flow velocity and trapping sediment over time.',
       code: `import numpy as np
@@ -785,10 +785,10 @@ total_multi = np.trapz(dep_multi[distance >= 0], distance[distance >= 0])
 print("Porcupine effectiveness analysis:")
 print(f"  Single porcupine:")
 print(f"    Velocity reduction: {(1 - v_single[distance >= 0].min() / v_baseline) * 100:.0f}%")
-print(f"    Deposition per monsoon: {total_single:.0f} cm\u00B7m (integrated)")
+print(f"    Deposition per monsoon: {total_single:.0f} cm·m (integrated)")
 print(f"  Three porcupines (spaced 60m):")
 print(f"    Velocity reduction: {(1 - v_multi[distance >= 0].min() / v_baseline) * 100:.0f}%")
-print(f"    Deposition per monsoon: {total_multi:.0f} cm\u00B7m (integrated)")
+print(f"    Deposition per monsoon: {total_multi:.0f} cm·m (integrated)")
 print(f"    Improvement over single: {total_multi/total_single:.1f}x")
 print()
 print("After 5 monsoons with three porcupines:")

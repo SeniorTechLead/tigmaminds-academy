@@ -319,7 +319,7 @@ sa_v = sa / vol
 
 ax.plot(radii * 100, sa_v, color='#22c55e', linewidth=2)
 ax.set_xlabel('Radius (cm)', color='white')
-ax.set_ylabel('SA/V ratio (cm\\u207b\\u00b9)', color='white')
+ax.set_ylabel('SA/V ratio (cm\⁻\¹)', color='white')
 ax.set_title('Surface Area to Volume Ratio', color='white', fontsize=11)
 ax.tick_params(colors='gray')
 
@@ -346,8 +346,8 @@ heat_generation = 70 * masses**0.75  # kcal/day
 # Heat loss capacity scales with surface area ∝ M^0.67
 heat_loss_capacity = 50 * masses**0.67  # relative units
 
-ax.plot(masses, heat_generation, color='#ef4444', linewidth=2, label='Heat generation (\\u221d M\\u2070\\u00b7\\u2075)')
-ax.plot(masses, heat_loss_capacity, color='#3b82f6', linewidth=2, label='Heat loss capacity (\\u221d M\\u2070\\u00b7\\u2076\\u2077)')
+ax.plot(masses, heat_generation, color='#ef4444', linewidth=2, label='Heat generation (\∝ M\⁰\·\⁵)')
+ax.plot(masses, heat_loss_capacity, color='#3b82f6', linewidth=2, label='Heat loss capacity (\∝ M\⁰\·\⁶\⁷)')
 ax.fill_between(masses, heat_loss_capacity, heat_generation,
                 where=heat_generation > heat_loss_capacity, alpha=0.2, color='#ef4444',
                 label='Overheating risk zone')
@@ -375,7 +375,7 @@ relative_ear = [v['ear_area'] / v['body_mass']**0.67 for v in animals_ears.value
 colors_ear = [v['color'] for v in animals_ears.values()]
 
 bars = ax.bar(names, relative_ear, color=colors_ear, alpha=0.7)
-ax.set_ylabel('Relative ear size (area/mass\\u2070\\u00b7\\u2076\\u2077)', color='white')
+ax.set_ylabel('Relative ear size (area/mass\⁰\·\⁶\⁷)', color='white')
 ax.set_title("Allen's Rule: Hot = Big Ears, Cold = Small Ears", color='white', fontsize=11)
 ax.tick_params(colors='gray')
 ax.tick_params(axis='x', rotation=20)
@@ -393,7 +393,7 @@ effective_sa = smooth_sa * wrinkle_multiplier
 ax.plot(wrinkle_depths * 100, effective_sa, color='#22c55e', linewidth=2)
 ax.axhline(smooth_sa, color='gray', linestyle=':', alpha=0.3, label='Smooth skin')
 ax.set_xlabel('Wrinkle depth (cm)', color='white')
-ax.set_ylabel('Effective surface area (m\\u00b2)', color='white')
+ax.set_ylabel('Effective surface area (m\²)', color='white')
 ax.set_title('Elephant Skin Wrinkles Increase SA', color='white', fontsize=11)
 ax.tick_params(colors='gray')
 ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
@@ -406,9 +406,9 @@ plt.tight_layout()
 plt.show()
 
 print("Surface area to volume scaling:")
-print("  Mouse (20g): SA/V \\u2248 100 | loses heat fast, eats 25% body weight/day")
-print("  Human (70kg): SA/V \\u2248 1.8 | balanced thermoregulation")
-print("  Elephant (4000kg): SA/V \\u2248 0.5 | overheating risk, needs active cooling")
+print("  Mouse (20g): SA/V \≈ 100 | loses heat fast, eats 25% body weight/day")
+print("  Human (70kg): SA/V \≈ 1.8 | balanced thermoregulation")
+print("  Elephant (4000kg): SA/V \≈ 0.5 | overheating risk, needs active cooling")
 print()
 print("Elephant adaptations to low SA/V:")
 print("  Large ears: +20% surface area")

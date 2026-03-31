@@ -41,7 +41,7 @@ export default function PandaCamouflageDiagram() {
           {/* Arrow pointing to hard-to-see moth */}
           <line x1="85" y1="240" x2="85" y2="138" stroke="#fde68a" strokeWidth="1" strokeDasharray="3,2" markerEnd="url(#camoArrow)" />
 
-          <text x="85" y="290" textAnchor="middle" fontSize="10" fill="#d1d5db">The animal\u2019s colour</text>
+          <text x="85" y="290" textAnchor="middle" fontSize="10" fill="#d1d5db">The animal’s colour</text>
           <text x="85" y="303" textAnchor="middle" fontSize="10" fill="#d1d5db">matches its habitat</text>
         </g>
 
@@ -113,11 +113,11 @@ export default function PandaCamouflageDiagram() {
           </g>
 
           {/* Equals sign / similarity arrow */}
-          <text x="90" y="120" textAnchor="middle" fontSize="18" fill="#fde68a">\u2248</text>
+          <text x="90" y="120" textAnchor="middle" fontSize="18" fill="#fde68a">≈</text>
 
           <text x="90" y="210" textAnchor="middle" fontSize="10" fill="#fde68a">Harmless species</text>
           <text x="90" y="223" textAnchor="middle" fontSize="10" fill="#fde68a">copies a dangerous</text>
-          <text x="90" y="236" textAnchor="middle" fontSize="10" fill="#fde68a">one\u2019s warning colours</text>
+          <text x="90" y="236" textAnchor="middle" fontSize="10" fill="#fde68a">one’s warning colours</text>
 
           <text x="90" y="263" textAnchor="middle" fontSize="10" fill="#d1d5db">Predators avoid both,</text>
           <text x="90" y="276" textAnchor="middle" fontSize="10" fill="#d1d5db">protecting the mimic</text>
@@ -133,7 +133,7 @@ export default function PandaCamouflageDiagram() {
         {/* Bottom summary */}
         <rect x="30" y="385" width="520" height="24" rx="6" fill="#86efac" opacity="0.12" />
         <text x="290" y="402" textAnchor="middle" fontSize="11" fill="#86efac">
-          All three types evolved through natural selection \u2014 better-hidden animals survive and reproduce more
+          All three types evolved through natural selection — better-hidden animals survive and reproduce more
         </text>
       </svg>
     </div>

@@ -126,7 +126,7 @@ export default function ActivityRaceTimerDiagram() {
           </div>
 
           <div className="text-center text-sm text-slate-300 mb-2">
-            speed = distance \u00f7 time = {dist.toFixed(1)} \u00f7 {elapsed.toFixed(2)} = <span className="text-cyan-400 font-semibold">{speed.toFixed(2)} m/s</span>
+            speed = distance ÷ time = {dist.toFixed(1)} ÷ {elapsed.toFixed(2)} = <span className="text-cyan-400 font-semibold">{speed.toFixed(2)} m/s</span>
           </div>
 
           {closest && (

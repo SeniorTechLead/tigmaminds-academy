@@ -52,21 +52,21 @@ def _get_plot_as_base64():
 
   const miniLessons = [
     {
-      title: 'Capstone Project \u2014 Kite Performance Simulator',
-      concept: `In Levels 1\u20133 you learned the physics of kite flight: lift and drag forces, angle of attack, stall, kite shapes, wind measurement, and stability. Now you will integrate everything into a single project \u2014 a **Kite Performance Simulator** that models how different kite designs perform across wind conditions.
+      title: 'Capstone Project — Kite Performance Simulator',
+      concept: `In Levels 1–3 you learned the physics of kite flight: lift and drag forces, angle of attack, stall, kite shapes, wind measurement, and stability. Now you will integrate everything into a single project — a **Kite Performance Simulator** that models how different kite designs perform across wind conditions.
 
 The simulator will have four components:
 
 1. **Kite model**: Define kite parameters (area, shape, weight, drag coefficient, lift coefficient curve) for diamond, delta, and box designs.
 2. **Wind model**: Generate realistic wind profiles with steady component, gusts, and thermals.
 3. **Force solver**: Calculate lift, drag, tension, and equilibrium string angle at each time step.
-4. **Performance dashboard**: Visualize how each kite design responds to the same wind conditions \u2014 altitude over time, string angle, and stability metrics.
+4. **Performance dashboard**: Visualize how each kite design responds to the same wind conditions — altitude over time, string angle, and stability metrics.
 
-Each of the remaining five mini-lessons builds one component. By the end, you will have a complete tool that predicts which kite wins in any wind condition \u2014 and you will understand why Biren\u2019s newspaper diamond outlasted Ronit\u2019s imported delta.`,
-      analogy: 'Building a kite simulator is like assembling a wind tunnel on your computer. Real aerospace engineers test wing shapes in wind tunnels before building aircraft. Your simulator does the same thing \u2014 it lets you test any kite design in any wind condition without cutting a single piece of bamboo.',
+Each of the remaining five mini-lessons builds one component. By the end, you will have a complete tool that predicts which kite wins in any wind condition — and you will understand why Biren’s newspaper diamond outlasted Ronit’s imported delta.`,
+      analogy: 'Building a kite simulator is like assembling a wind tunnel on your computer. Real aerospace engineers test wing shapes in wind tunnels before building aircraft. Your simulator does the same thing — it lets you test any kite design in any wind condition without cutting a single piece of bamboo.',
       storyConnection: 'Biren tested his kite by watching the wind for three weeks. Your simulator encodes that same knowledge computationally: which designs work in which conditions, why flexible frames survive gusts, and how tail length affects stability. If Biren had this tool, he could have optimized his design in minutes instead of weeks.',
       checkQuestion: 'Why is it important to model wind as variable (with gusts and thermals) rather than constant? How would constant-wind results mislead a kite designer?',
-      checkAnswer: 'Constant wind favours the most aerodynamically efficient design (highest lift-to-drag ratio) \u2014 which is the delta kite. But real wind is gusty. Gusts create sudden force spikes that scale with v\u00b2, so a gust 50% above average produces 2.25x the force. A stiff, optimized delta kite can be overpowered or break. A flexible diamond kite absorbs gusts by flexing and letting air through its porous skin. Constant-wind testing would incorrectly rank the delta first \u2014 exactly the mistake Ronit made by buying an expensive kite without studying the local wind conditions.',
+      checkAnswer: 'Constant wind favours the most aerodynamically efficient design (highest lift-to-drag ratio) — which is the delta kite. But real wind is gusty. Gusts create sudden force spikes that scale with v², so a gust 50% above average produces 2.25x the force. A stiff, optimized delta kite can be overpowered or break. A flexible diamond kite absorbs gusts by flexing and letting air through its porous skin. Constant-wind testing would incorrectly rank the delta first — exactly the mistake Ronit made by buying an expensive kite without studying the local wind conditions.',
       codeIntro: 'Define the kite data structures and aerodynamic models for three kite designs.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -133,7 +133,7 @@ for i, kite in enumerate([diamond, delta, box]):
     ax.axvline(kite.stall_angle, color='#f59e0b', linestyle='--',
                linewidth=1, alpha=0.7)
     ax.set_title(kite.name, color='white', fontsize=10)
-    ax.set_xlabel('Angle of attack (\u00b0)', color='white', fontsize=9)
+    ax.set_xlabel('Angle of attack (°)', color='white', fontsize=9)
     ax.legend(fontsize=8, facecolor='#111827', edgecolor='gray',
               labelcolor='white')
     ax.grid(True, alpha=0.2)
@@ -150,31 +150,31 @@ for kite in [diamond, delta, box]:
     opt_alpha = alpha[np.argmax([kite.Cl(a)/max(kite.Cd(a),0.01) for a in alpha])]
     best_LD = kite.Cl(opt_alpha) / kite.Cd(opt_alpha)
     print(f"{kite.name}:")
-    print(f"  Area: {kite.area} m\u00b2, Mass: {kite.mass} kg")
-    print(f"  Best L/D ratio: {best_LD:.1f} at {opt_alpha:.0f}\u00b0")
-    print(f"  Stall angle: {kite.stall_angle}\u00b0, Flexibility: {kite.flexibility}")
+    print(f"  Area: {kite.area} m², Mass: {kite.mass} kg")
+    print(f"  Best L/D ratio: {best_LD:.1f} at {opt_alpha:.0f}°")
+    print(f"  Stall angle: {kite.stall_angle}°, Flexibility: {kite.flexibility}")
     print()
 `,
     },
     {
-      title: 'Wind Model \u2014 Gusts, Thermals, and the Brahmaputra Breeze',
+      title: 'Wind Model — Gusts, Thermals, and the Brahmaputra Breeze',
       concept: `Real wind is never steady. It has three components:
 
 1. **Mean wind**: the average speed and direction over minutes. This determines whether a kite can fly at all.
-2. **Gusts**: sudden increases in speed lasting seconds. Gusts create force spikes because drag scales with v\u00b2 \u2014 a 50% gust means 2.25x the force.
-3. **Thermals**: columns of rising warm air that add a vertical component to the wind. Thermals can suddenly increase a kite\u2019s effective angle of attack and lift.
+2. **Gusts**: sudden increases in speed lasting seconds. Gusts create force spikes because drag scales with v² — a 50% gust means 2.25x the force.
+3. **Thermals**: columns of rising warm air that add a vertical component to the wind. Thermals can suddenly increase a kite’s effective angle of attack and lift.
 
 We model wind as: v(t) = v_mean + gust(t) + thermal(t)
 
-Gusts follow a statistical distribution \u2014 in meteorology, the Weibull distribution models wind speed probability. The gust factor (ratio of peak gust to mean wind) is typically 1.3\u20131.6 for open terrain like the Brahmaputra riverbank.
+Gusts follow a statistical distribution — in meteorology, the Weibull distribution models wind speed probability. The gust factor (ratio of peak gust to mean wind) is typically 1.3–1.6 for open terrain like the Brahmaputra riverbank.
 
-Thermals are modeled as periodic vertical wind pulses. On a sunny January day in Guwahati, thermals form as the sun heats the sandy riverbank, creating upward air movement of 1\u20133 m/s that lasts 30\u201360 seconds.
+Thermals are modeled as periodic vertical wind pulses. On a sunny January day in Guwahati, thermals form as the sun heats the sandy riverbank, creating upward air movement of 1–3 m/s that lasts 30–60 seconds.
 
 The wind model is crucial because it determines which kite design wins. A delta kite optimized for steady wind can be destroyed by gusts, while a flexible diamond kite absorbs gust energy through frame deflection.`,
-      analogy: 'Think of wind like a river. The mean wind is the steady current. Gusts are like waves on the surface \u2014 they come and go but can capsize a small boat. Thermals are like underwater springs pushing water upward. A good boat (or kite) is designed to handle all three, not just the steady current.',
-      storyConnection: 'Biren watched the wind for three weeks. He noticed the morning breeze was steady but the afternoon brought gusts from the river. He built his kite for the afternoon conditions \u2014 gusty, with thermals from the sun-warmed bank. Ronit\u2019s delta was designed for steady wind. Our wind model captures exactly this difference.',
+      analogy: 'Think of wind like a river. The mean wind is the steady current. Gusts are like waves on the surface — they come and go but can capsize a small boat. Thermals are like underwater springs pushing water upward. A good boat (or kite) is designed to handle all three, not just the steady current.',
+      storyConnection: 'Biren watched the wind for three weeks. He noticed the morning breeze was steady but the afternoon brought gusts from the river. He built his kite for the afternoon conditions — gusty, with thermals from the sun-warmed bank. Ronit’s delta was designed for steady wind. Our wind model captures exactly this difference.',
       checkQuestion: 'If the mean wind speed is 20 km/h and the gust factor is 1.5, what is the peak gust speed? How much more force does the kite experience during the gust compared to the mean wind?',
-      checkAnswer: 'Peak gust = 20 \u00d7 1.5 = 30 km/h. Force ratio = (30/20)\u00b2 = 2.25. The kite experiences 2.25 times the force during the gust \u2014 more than double. If the kite string is rated for the mean wind force, it might snap in the gust. If the kite frame is rigid (like Ronit\u2019s fibreglass delta), the extra force is transmitted directly to the weakest point. If the frame is flexible (like Biren\u2019s bamboo), it bends and sheds some of the excess force.',
+      checkAnswer: 'Peak gust = 20 × 1.5 = 30 km/h. Force ratio = (30/20)² = 2.25. The kite experiences 2.25 times the force during the gust — more than double. If the kite string is rated for the mean wind force, it might snap in the gust. If the kite frame is rigid (like Ronit’s fibreglass delta), the extra force is transmitted directly to the weakest point. If the frame is flexible (like Biren’s bamboo), it bends and sheds some of the excess force.',
       codeIntro: 'Build a realistic wind model with gusts and thermals calibrated to Guwahati January conditions.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -290,24 +290,24 @@ print(f"Force ratio at peak gust: {(vh.max()/vh.mean())**2:.2f}x mean")
 `,
     },
     {
-      title: 'Force Solver \u2014 Equilibrium at Every Time Step',
+      title: 'Force Solver — Equilibrium at Every Time Step',
       concept: `At each moment in time, four forces act on the kite:
 
-1. **Lift** (L): perpendicular to the wind, upward. L = 0.5 * rho * v\u00b2 * A * C_L(alpha)
-2. **Drag** (D): parallel to the wind, downwind. D = 0.5 * rho * v\u00b2 * A * C_D(alpha)
+1. **Lift** (L): perpendicular to the wind, upward. L = 0.5 * rho * v² * A * C_L(alpha)
+2. **Drag** (D): parallel to the wind, downwind. D = 0.5 * rho * v² * A * C_D(alpha)
 3. **Weight** (W): downward. W = m * g
 4. **Tension** (T): along the string, from kite to flyer
 
-For the kite to fly stably, these forces must balance. The string angle from vertical (\u03b8) is determined by:
-tan(\u03b8) = D / (L - W)
+For the kite to fly stably, these forces must balance. The string angle from vertical (θ) is determined by:
+tan(θ) = D / (L - W)
 
-When L > W (kite has enough lift), the kite flies. The string angle tells us the lift-to-drag ratio. When a gust hits, L and D both increase (proportional to v\u00b2), but D increases faster because the effective angle of attack changes. A flexible kite responds by bending its frame, which reduces the effective area and spills excess force \u2014 we model this with a flexibility parameter.
+When L > W (kite has enough lift), the kite flies. The string angle tells us the lift-to-drag ratio. When a gust hits, L and D both increase (proportional to v²), but D increases faster because the effective angle of attack changes. A flexible kite responds by bending its frame, which reduces the effective area and spills excess force — we model this with a flexibility parameter.
 
-The force solver also tracks whether the kite is in stall. If a sudden gust pushes the effective angle of attack past the stall angle, lift drops and drag surges \u2014 the kite dives or spins. Stability is measured by how quickly the kite recovers from stall.`,
-      analogy: 'The force solver is like a balance sheet for the kite. Income (lift) must exceed expenses (weight). The surplus goes to string tension (profit). When a gust hits, both income and expenses change \u2014 a well-designed kite maintains a positive balance even in volatile conditions, like a business with good cash reserves.',
-      storyConnection: 'When the afternoon gusts hit at the Guwahati festival, the force balance on each kite changed dramatically. Ronit\u2019s delta had the best lift-to-drag ratio in steady wind, but the gust pushed it past stall. Biren\u2019s diamond flexed, reducing its effective area, and never stalled. The force solver captures exactly this difference.',
-      checkQuestion: 'A kite weighing 0.1 kg (W = 0.98 N) generates 3 N of lift and 2 N of drag in steady wind. What is the string angle from vertical? Now a gust doubles the wind speed \u2014 what happens?',
-      checkAnswer: 'String angle = arctan(D / (L - W)) = arctan(2 / (3 - 0.98)) = arctan(0.99) = 44.7\u00b0. When wind doubles, both L and D quadruple: L = 12 N, D = 8 N. New angle = arctan(8 / (12 - 0.98)) = arctan(0.73) = 36\u00b0. The kite actually flies MORE steeply (closer to overhead) in the gust because lift increases faster than weight. But the string tension jumps from sqrt(2\u00b2 + 2.02\u00b2) = 2.84 N to sqrt(8\u00b2 + 11.02\u00b2) = 13.6 N \u2014 nearly 5x. The string or frame might break.',
+The force solver also tracks whether the kite is in stall. If a sudden gust pushes the effective angle of attack past the stall angle, lift drops and drag surges — the kite dives or spins. Stability is measured by how quickly the kite recovers from stall.`,
+      analogy: 'The force solver is like a balance sheet for the kite. Income (lift) must exceed expenses (weight). The surplus goes to string tension (profit). When a gust hits, both income and expenses change — a well-designed kite maintains a positive balance even in volatile conditions, like a business with good cash reserves.',
+      storyConnection: 'When the afternoon gusts hit at the Guwahati festival, the force balance on each kite changed dramatically. Ronit’s delta had the best lift-to-drag ratio in steady wind, but the gust pushed it past stall. Biren’s diamond flexed, reducing its effective area, and never stalled. The force solver captures exactly this difference.',
+      checkQuestion: 'A kite weighing 0.1 kg (W = 0.98 N) generates 3 N of lift and 2 N of drag in steady wind. What is the string angle from vertical? Now a gust doubles the wind speed — what happens?',
+      checkAnswer: 'String angle = arctan(D / (L - W)) = arctan(2 / (3 - 0.98)) = arctan(0.99) = 44.7°. When wind doubles, both L and D quadruple: L = 12 N, D = 8 N. New angle = arctan(8 / (12 - 0.98)) = arctan(0.73) = 36°. The kite actually flies MORE steeply (closer to overhead) in the gust because lift increases faster than weight. But the string tension jumps from sqrt(2² + 2.02²) = 2.84 N to sqrt(8² + 11.02²) = 13.6 N — nearly 5x. The string or frame might break.',
       codeIntro: 'Build the force solver that computes kite equilibrium at each time step, accounting for gusts and flexibility.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -425,7 +425,7 @@ for kite in [diamond, delta, box]:
                         alpha=0.5, zorder=5)
 
 for i, (ax, ylabel) in enumerate(zip(axes,
-    ['Tension (N)', 'String angle (\u00b0)', 'Lift/Drag ratio'])):
+    ['Tension (N)', 'String angle (°)', 'Lift/Drag ratio'])):
     ax.set_facecolor('#111827')
     ax.tick_params(colors='gray')
     ax.set_ylabel(ylabel, color='white', fontsize=9)
@@ -449,13 +449,13 @@ for kite in [diamond, delta, box]:
     print(f"\\n{kite.name}:")
     print(f"  Time flying: {flying.sum()/len(flying)*100:.0f}%")
     print(f"  Stall events: {stall.sum()}")
-    print(f"  Mean string angle: {sa[flying].mean():.1f}\u00b0" if flying.any() else "  Never flew")
+    print(f"  Mean string angle: {sa[flying].mean():.1f}°" if flying.any() else "  Never flew")
     print(f"  Peak tension: {T.max():.1f} N ({T.max()/G:.1f} kg)")
     print(f"  Mean L/D: {(L[flying]/np.maximum(D[flying],0.01)).mean():.1f}" if flying.any() else "")
 `,
     },
     {
-      title: 'Stability Analysis \u2014 Why Biren\u2019s Kite Survived',
+      title: 'Stability Analysis — Why Biren’s Kite Survived',
       concept: `Stability is the ability of a kite to return to its equilibrium position after a disturbance. We measure it with two metrics:
 
 1. **Recovery time**: how many seconds after a gust before the kite returns to within 10% of its equilibrium string angle.
@@ -468,11 +468,11 @@ The key factors affecting stability:
 - **Tail length**: a longer tail adds more restoring torque but also more drag and weight.
 - **Weight**: heavier kites are more resistant to perturbation (more inertia) but need more lift to fly.
 
-We can now run systematic comparisons: sweep across wind speeds and measure each kite\u2019s stability metrics. The result is a **stability map** showing which kite wins at each wind speed.`,
-      analogy: 'Stability is like balance. A heavy, wide-based vase is hard to knock over (stable but heavy). A tall, narrow vase tips easily but looks elegant (efficient but unstable). The best design depends on where you put the vase \u2014 a shelf in a calm room or a table on a moving train. Same with kites: the best design depends on the wind conditions.',
-      storyConnection: 'The Guwahati festival was a perfect stability test. Morning wind was steady (any kite flies), but afternoon gusts separated the good designs from the bad. By 4 PM, only Biren\u2019s diamond and Ronit\u2019s delta remained. The delta finally stalled in a sudden gust and the line snapped under the tension spike. The diamond\u2019s flexibility kept it flying.',
-      checkQuestion: 'If you increase a kite\u2019s flexibility from 0.2 to 0.8, what happens to its performance in steady wind versus gusty wind?',
-      checkAnswer: 'In steady wind, the flexible kite performs slightly worse because the flexing frame doesn\u2019t maintain the optimal airfoil shape \u2014 it spills some air even in normal conditions, reducing lift. In gusty wind, the flexible kite performs much better because it absorbs gust energy by bending, preventing stall and tension spikes. There is a trade-off: flexibility costs efficiency in steady wind but buys survival in gusty wind. Biren\u2019s kite was designed for gusty conditions \u2014 he accepted lower steady-wind performance in exchange for gust resilience.',
+We can now run systematic comparisons: sweep across wind speeds and measure each kite’s stability metrics. The result is a **stability map** showing which kite wins at each wind speed.`,
+      analogy: 'Stability is like balance. A heavy, wide-based vase is hard to knock over (stable but heavy). A tall, narrow vase tips easily but looks elegant (efficient but unstable). The best design depends on where you put the vase — a shelf in a calm room or a table on a moving train. Same with kites: the best design depends on the wind conditions.',
+      storyConnection: 'The Guwahati festival was a perfect stability test. Morning wind was steady (any kite flies), but afternoon gusts separated the good designs from the bad. By 4 PM, only Biren’s diamond and Ronit’s delta remained. The delta finally stalled in a sudden gust and the line snapped under the tension spike. The diamond’s flexibility kept it flying.',
+      checkQuestion: 'If you increase a kite’s flexibility from 0.2 to 0.8, what happens to its performance in steady wind versus gusty wind?',
+      checkAnswer: 'In steady wind, the flexible kite performs slightly worse because the flexing frame doesn’t maintain the optimal airfoil shape — it spills some air even in normal conditions, reducing lift. In gusty wind, the flexible kite performs much better because it absorbs gust energy by bending, preventing stall and tension spikes. There is a trade-off: flexibility costs efficiency in steady wind but buys survival in gusty wind. Biren’s kite was designed for gusty conditions — he accepted lower steady-wind performance in exchange for gust resilience.',
       codeIntro: 'Run stability analysis across wind speeds and create a performance comparison map for all three kite designs.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -552,7 +552,7 @@ colors={'Diamond':'#f59e0b','Delta':'#3b82f6','Box':'#4ade80'}
 ws_kmh=wind_speeds*3.6
 
 panels=[('fly','Time Flying (%)'),('stall','Time in Stall (%)'),
-        ('angle','Mean String Angle (\u00b0)'),('tension','Peak Tension (N)')]
+        ('angle','Mean String Angle (°)'),('tension','Peak Tension (N)')]
 
 for idx,(key,title) in enumerate(panels):
     ax=axes[idx//2][idx%2]; ax.set_facecolor('#111827')
@@ -586,13 +586,13 @@ print("Javed's box wins in strong wind (10+ m/s)")
 `,
     },
     {
-      title: 'Performance Dashboard \u2014 The Complete Kite Tester',
-      concept: `The final component brings everything together into a dashboard that answers the key question: **given today\u2019s wind conditions, which kite should you fly?**
+      title: 'Performance Dashboard — The Complete Kite Tester',
+      concept: `The final component brings everything together into a dashboard that answers the key question: **given today’s wind conditions, which kite should you fly?**
 
 The dashboard shows:
 - Real-time force vectors on each kite (lift, drag, weight, tension)
 - String angle over time as wind varies
-- Stability score: percentage of time the kite stays within 10\u00b0 of its equilibrium angle
+- Stability score: percentage of time the kite stays within 10° of its equilibrium angle
 - Overall ranking based on flying time, stability, and efficiency
 
 This is the engineering design process in miniature:
@@ -603,10 +603,10 @@ This is the engineering design process in miniature:
 5. Decide (pick the best design for the conditions)
 
 The same process is used by aerospace engineers designing aircraft, by wind energy companies designing turbines, and by architects designing buildings to withstand wind loads.`,
-      analogy: 'The dashboard is like a cockpit instrument panel. Each gauge shows one aspect of the kite\u2019s performance. Individually, each gauge tells you something useful. Together, they give you the complete picture \u2014 just as a pilot needs airspeed, altitude, heading, and engine status to fly safely.',
-      storyConnection: 'If the children of Guwahati had this dashboard at the kite festival, they would have known before launching that Biren\u2019s diamond was the best choice for the afternoon\u2019s gusty conditions. But Biren figured it out the old-fashioned way \u2014 by watching the wind for three weeks and understanding the physics intuitively. The dashboard automates his wisdom.',
+      analogy: 'The dashboard is like a cockpit instrument panel. Each gauge shows one aspect of the kite’s performance. Individually, each gauge tells you something useful. Together, they give you the complete picture — just as a pilot needs airspeed, altitude, heading, and engine status to fly safely.',
+      storyConnection: 'If the children of Guwahati had this dashboard at the kite festival, they would have known before launching that Biren’s diamond was the best choice for the afternoon’s gusty conditions. But Biren figured it out the old-fashioned way — by watching the wind for three weeks and understanding the physics intuitively. The dashboard automates his wisdom.',
       checkQuestion: 'A new kite festival is held in Shillong, where the wind is steady at 25 km/h with very few gusts. Which kite design from our simulator would you recommend, and why?',
-      checkAnswer: 'The delta kite. Steady wind means gusts are not a threat, so the delta\u2019s weakness (fragility in gusts) does not matter. Its strength \u2014 the best lift-to-drag ratio \u2014 gives it the steepest string angle (closest to overhead), meaning it flies highest and most efficiently. The diamond\u2019s flexibility would actually be a disadvantage here: it would flex unnecessarily, spilling lift even in steady conditions. In Shillong\u2019s steady wind, Ronit\u2019s imported delta would beat Biren\u2019s newspaper diamond. Design follows conditions.',
+      checkAnswer: 'The delta kite. Steady wind means gusts are not a threat, so the delta’s weakness (fragility in gusts) does not matter. Its strength — the best lift-to-drag ratio — gives it the steepest string angle (closest to overhead), meaning it flies highest and most efficiently. The diamond’s flexibility would actually be a disadvantage here: it would flex unnecessarily, spilling lift even in steady conditions. In Shillong’s steady wind, Ronit’s imported delta would beat Biren’s newspaper diamond. Design follows conditions.',
       codeIntro: 'Build the final dashboard combining all components into a single performance comparison tool.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -672,7 +672,7 @@ for kite in kites:
     ax1.plot(t,sa,color=kite.color,linewidth=1,alpha=0.8,label=kite.name)
     st=t[stall]
     if len(st)>0:ax1.scatter(st,sa[stall],color='#ef4444',s=5,alpha=0.3)
-ax1.set_ylabel('String angle (\u00b0)',color='white',fontsize=9)
+ax1.set_ylabel('String angle (°)',color='white',fontsize=9)
 ax1.set_xlabel('Time (s)',color='white',fontsize=9)
 ax1.set_title('String Angle Over Time (lower = better)',color='#9ca3af',fontsize=10)
 ax1.legend(fontsize=8,facecolor='#111827',edgecolor='gray',labelcolor='white')
@@ -756,14 +756,14 @@ print(f"\\n  WINNER: {winner.name}")
 print(f"\\n  The diamond kite wins in gusty conditions because:")
 print(f"  - High flexibility ({diamond.flex}) absorbs gust energy")
 print(f"  - Light weight ({diamond.mass} kg) needs less lift to fly")
-print(f"  - High stall angle ({diamond.stall_angle}\u00b0) resists stall")
+print(f"  - High stall angle ({diamond.stall_angle}°) resists stall")
 print(f"  - Low tension means the string never snaps")
 print(f"\\n  Biren understood this intuitively. You now")
 print(f"  understand it mathematically.")
 `,
     },
     {
-      title: 'Extension \u2014 Design Your Own Kite',
+      title: 'Extension — Design Your Own Kite',
       concept: `Now that you have the complete simulator, you can design your own kite. Modify the KiteDesign parameters and see how your creation performs:
 
 - **area**: larger = more lift, but also more drag and weight
@@ -773,13 +773,13 @@ print(f"  understand it mathematically.")
 - **stall_angle**: higher = more forgiving, but lower maximum efficiency
 - **flexibility**: higher = better gust survival, but less efficient in steady wind
 
-Try to beat Biren\u2019s diamond in the Guwahati festival conditions. Then change the wind to steady (gust_factor=1.0) and see if your design still wins. The best design is one that performs well across a range of conditions \u2014 not one that is optimal for a single scenario.
+Try to beat Biren’s diamond in the Guwahati festival conditions. Then change the wind to steady (gust_factor=1.0) and see if your design still wins. The best design is one that performs well across a range of conditions — not one that is optimal for a single scenario.
 
 This is the core lesson of engineering: **design is about trade-offs**. There is no universally best kite, just as there is no universally best aircraft, bridge, or building. The best solution depends on the constraints. Biren won because he understood his constraints (gusty wind, cheap materials, light weight) better than anyone else.`,
-      analogy: 'Designing a kite is like cooking. You can follow a recipe (build a standard diamond), but the best cooks adjust the recipe based on their ingredients and their diners. Biren had newspaper and bamboo \u2014 cheap ingredients. But he cooked them perfectly for the conditions.',
-      storyConnection: 'The story ends with Ronit asking Biren to teach him to build a kite. The real lesson was not how to cut bamboo or paste newspaper \u2014 it was how to think about design. Observe the conditions. Understand the physics. Choose your trade-offs deliberately. Build. Test. Improve. That process is engineering, whether you are building a newspaper kite or a spacecraft.',
+      analogy: 'Designing a kite is like cooking. You can follow a recipe (build a standard diamond), but the best cooks adjust the recipe based on their ingredients and their diners. Biren had newspaper and bamboo — cheap ingredients. But he cooked them perfectly for the conditions.',
+      storyConnection: 'The story ends with Ronit asking Biren to teach him to build a kite. The real lesson was not how to cut bamboo or paste newspaper — it was how to think about design. Observe the conditions. Understand the physics. Choose your trade-offs deliberately. Build. Test. Improve. That process is engineering, whether you are building a newspaper kite or a spacecraft.',
       checkQuestion: 'Design a kite with area=0.4, mass=0.06, Cd0=0.05, Cl_max=1.1, stall_angle=16, flexibility=0.9. In what wind conditions would this kite excel? Where would it struggle?',
-      checkAnswer: 'This is a very light (60g), highly flexible kite with moderate efficiency. It would excel in light gusty wind (Beaufort 2-3) because its low weight means it needs very little lift to fly, and its high flexibility absorbs gusts well. It would struggle in strong steady wind (Beaufort 5+) because the high flexibility means it spills too much air, and the low mass means strong tension could pull the bridle loose. It is essentially an ultra-light version of Biren\u2019s design \u2014 optimized for the gentlest conditions.',
+      checkAnswer: 'This is a very light (60g), highly flexible kite with moderate efficiency. It would excel in light gusty wind (Beaufort 2-3) because its low weight means it needs very little lift to fly, and its high flexibility absorbs gusts well. It would struggle in strong steady wind (Beaufort 5+) because the high flexibility means it spills too much air, and the low mass means strong tension could pull the bridle loose. It is essentially an ultra-light version of Biren’s design — optimized for the gentlest conditions.',
       codeIntro: 'Create your own kite design and test it against the three classics in various wind conditions.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -874,7 +874,7 @@ for idx, (cond_name, mean_v, gf) in enumerate(conditions):
     winner_idx = np.argmax(scores)
     for i, (b, v) in enumerate(zip(bars, scores)):
         weight = 'bold' if i == winner_idx else 'normal'
-        marker = ' \u2605' if i == winner_idx else ''
+        marker = ' ★' if i == winner_idx else ''
         ax.text(max(v + 1, 2), b.get_y() + b.get_height()/2,
                 f'{v:.0f}{marker}', va='center', color='white',
                 fontsize=10, fontweight=weight)
@@ -892,8 +892,8 @@ print("\\n" + "="*50)
 print("  DESIGN CHALLENGE RESULTS")
 print("="*50)
 print(f"\\nYour kite: {my_kite.name}")
-print(f"  Area: {my_kite.area} m\u00b2 | Mass: {my_kite.mass} kg")
-print(f"  Stall: {my_kite.stall_angle}\u00b0 | Flex: {my_kite.flex}")
+print(f"  Area: {my_kite.area} m² | Mass: {my_kite.mass} kg")
+print(f"  Stall: {my_kite.stall_angle}° | Flex: {my_kite.flex}")
 print()
 
 for cond_name, mean_v, gf in conditions:
@@ -905,7 +905,7 @@ for cond_name, mean_v, gf in conditions:
 print("\\n  Modify 'my_kite' parameters above and re-run")
 print("  to test your own designs!")
 print("\\n  Remember Biren's lesson: the best kite is not")
-print("  the most expensive \u2014 it is the one built by someone")
+print("  the most expensive — it is the one built by someone")
 print("  who bothered to understand the wind.")
 `,
     },
@@ -920,7 +920,7 @@ print("  who bothered to understand the wind.")
         <p className="text-gray-300 text-sm">
           Build a complete kite performance simulator that models aerodynamics, wind conditions,
           and stability for different kite designs. Determine which kite wins at the Guwahati
-          festival \u2014 and why.
+          festival — and why.
         </p>
         {!pyReady && (
           <button
@@ -931,7 +931,7 @@ print("  who bothered to understand the wind.")
             {loading ? <><Loader2 size={14} className="animate-spin" />{loadProgress}</> : 'Load Python Environment'}
           </button>
         )}
-        {pyReady && <p className="mt-3 text-green-400 text-sm font-medium">Python ready \u2014 run the code blocks below.</p>}
+        {pyReady && <p className="mt-3 text-green-400 text-sm font-medium">Python ready — run the code blocks below.</p>}
       </div>
 
       <div className="space-y-6">

@@ -162,7 +162,7 @@ densities = {
 }
 specific_strength = [v / densities[k.split('(')[0].strip()] for k, v in materials.items()]
 ax.barh(names, specific_strength, color=colors_bar, edgecolor='none', height=0.6)
-ax.set_xlabel('Specific strength (MPa / (kg/m\\u00b3) \\u00d7 10\\u00b3)', color='white', fontsize=10)
+ax.set_xlabel('Specific strength (MPa / (kg/m\³) \× 10\³)', color='white', fontsize=10)
 ax.set_title('Strength-to-weight ratio', color='white', fontsize=13)
 for i, (bar_val, name) in enumerate(zip(specific_strength, names)):
     ax.text(bar_val + 0.005, i, f'{bar_val:.3f}', va='center', color='white', fontsize=9)
@@ -457,7 +457,7 @@ ax = axes[0, 1]
 ax.plot(mfa_degrees, sigma_real, color='#ef4444', linewidth=2.5, label='Predicted real strength')
 ax.axhline(y=45, color='#22c55e', linestyle='--', alpha=0.6, label='Measured Ficus root (~45 MPa)')
 ax.axvline(x=15, color='#3b82f6', linestyle=':', alpha=0.5)
-ax.text(17, 35, 'Root wood MFA\\n(10-20\\u00b0)', color='#3b82f6', fontsize=9)
+ax.text(17, 35, 'Root wood MFA\\n(10-20\°)', color='#3b82f6', fontsize=9)
 ax.fill_between(mfa_degrees, 0, sigma_real, alpha=0.1, color='#ef4444')
 ax.set_xlabel('Microfibril angle (degrees)', color='white', fontsize=11)
 ax.set_ylabel('Tensile strength (MPa)', color='white', fontsize=11)
@@ -467,9 +467,9 @@ ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 # Plot 3: Stress-strain curves for different MFAs
 ax = axes[1, 0]
 strains = np.linspace(0, 0.05, 100)
-for mfa, color, label in [(10, '#22c55e', 'MFA=10\\u00b0 (root wood)'),
-                            (30, '#3b82f6', 'MFA=30\\u00b0 (branch wood)'),
-                            (50, '#f59e0b', 'MFA=50\\u00b0 (compression wood)')]:
+for mfa, color, label in [(10, '#22c55e', 'MFA=10\° (root wood)'),
+                            (30, '#3b82f6', 'MFA=30\° (branch wood)'),
+                            (50, '#f59e0b', 'MFA=50\° (compression wood)')]:
     mfa_rad = np.deg2rad(mfa)
     E_mfa = E_parallel * np.cos(mfa_rad)**4 + E_perp * np.sin(mfa_rad)**4
     E_mfa_real = E_mfa * realism_factor * 2  # adjust for stress-strain demo
@@ -848,7 +848,7 @@ for name, b in bridges.items():
 
 ax.axhline(y=0, color='gray', linestyle='-', alpha=0.3)
 ax.set_xlabel('Years', color='white', fontsize=11)
-ax.set_ylabel('Cumulative CO\\u2082 (tonnes)', color='white', fontsize=11)
+ax.set_ylabel('Cumulative CO\₂ (tonnes)', color='white', fontsize=11)
 ax.set_title('Carbon footprint over time', color='white', fontsize=12)
 ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
@@ -989,7 +989,7 @@ for name, s in scenarios.items():
     ax.plot(years, annual_emissions, color=s['color'], linewidth=2, label=name)
 
 ax.set_xlabel('Year', color='white', fontsize=11)
-ax.set_ylabel('Annual embodied emissions (Gt CO\\u2082)', color='white', fontsize=11)
+ax.set_ylabel('Annual embodied emissions (Gt CO\₂)', color='white', fontsize=11)
 ax.set_title('Construction sector emissions', color='white', fontsize=12)
 ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
@@ -1011,7 +1011,7 @@ for name, s in scenarios.items():
     ax.plot(years, savings, color=s['color'], linewidth=2, label=name)
 
 ax.set_xlabel('Year', color='white', fontsize=11)
-ax.set_ylabel('Cumulative CO\\u2082 saved (Gt)', color='white', fontsize=11)
+ax.set_ylabel('Cumulative CO\₂ saved (Gt)', color='white', fontsize=11)
 ax.set_title('Cumulative emissions reduction vs baseline', color='white', fontsize=12)
 ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
@@ -1032,7 +1032,7 @@ values = list(materials.values())
 colors_mat = ['#ef4444' if v > 0 else '#22c55e' for v in values]
 bars = ax.barh(names, values, color=colors_mat, edgecolor='none', height=0.6)
 ax.axvline(x=0, color='white', linewidth=1, alpha=0.5)
-ax.set_xlabel('Embodied carbon (kg CO\\u2082 per tonne)', color='white', fontsize=10)
+ax.set_xlabel('Embodied carbon (kg CO\₂ per tonne)', color='white', fontsize=10)
 ax.set_title('Material carbon intensity', color='white', fontsize=12)
 ax.tick_params(axis='y', labelcolor='white', labelsize=8)
 for bar, v in zip(bars, values):

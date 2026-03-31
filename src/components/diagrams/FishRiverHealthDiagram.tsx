@@ -1,8 +1,8 @@
 /* FishRiverHealthDiagram – River health indicators: fish behavior as signals, pollution, citizen science */
 
 const indicators = [
-  { label: 'Healthy', color: '#22c55e', bg: '#22c55e12', do2: '8\u201312', behavior: 'Normal swimming, occasional jumps', species: 'Mahseer, hilsa, mayfly larvae', signal: 'High biodiversity, clear water' },
-  { label: 'Stressed', color: '#f59e0b', bg: '#f59e0b12', do2: '4\u20136', behavior: 'Frequent surface gasping, clustering at rapids', species: 'Catfish, snails, some algae', signal: 'Fewer sensitive species, mild odour' },
+  { label: 'Healthy', color: '#22c55e', bg: '#22c55e12', do2: '8–12', behavior: 'Normal swimming, occasional jumps', species: 'Mahseer, hilsa, mayfly larvae', signal: 'High biodiversity, clear water' },
+  { label: 'Stressed', color: '#f59e0b', bg: '#f59e0b12', do2: '4–6', behavior: 'Frequent surface gasping, clustering at rapids', species: 'Catfish, snails, some algae', signal: 'Fewer sensitive species, mild odour' },
   { label: 'Degraded', color: '#ef4444', bg: '#ef444412', do2: '<2', behavior: 'Mass jumping, fish kills, surface gulping', species: 'Tubifex worms, rat-tail maggots', signal: 'Foul smell, foam, only tolerant species' },
 ];
 
@@ -37,10 +37,10 @@ export default function FishRiverHealthDiagram() {
             <rect x="20" y={y} width="350" height="65" rx="6" fill={ind.bg} stroke={ind.color} strokeWidth="1" />
             <circle cx="36" cy={y + 14} r="6" fill={ind.color} opacity="0.3" />
             <text x="36" y={y + 18} textAnchor="middle" fontSize="10" fontWeight="700" fill={ind.color}>
-              {i === 0 ? '\u2714' : i === 1 ? '\u26A0' : '\u2716'}
+              {i === 0 ? '✔' : i === 1 ? '⚠' : '✖'}
             </text>
             <text x="52" y={y + 18} fontSize="11" fontWeight="700" fill={ind.color}>{ind.label}</text>
-            <text x="160" y={y + 18} fontSize="8" className="fill-gray-500 dark:fill-gray-400">DO\u2082: {ind.do2} mg/L</text>
+            <text x="160" y={y + 18} fontSize="8" className="fill-gray-500 dark:fill-gray-400">DO₂: {ind.do2} mg/L</text>
 
             <text x="34" y={y + 33} fontSize="8" className="fill-gray-600 dark:fill-gray-300">
               Behaviour: {ind.behavior}
@@ -97,13 +97,13 @@ export default function FishRiverHealthDiagram() {
       {/* Bottom summary */}
       <rect x="40" y="345" width="512" height="60" rx="6" className="fill-green-50 dark:fill-green-950" stroke="#22c55e" strokeWidth="1" />
       <text x="296" y="365" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-green-700 dark:fill-green-300">
-        Fish are living sensors \u2014 their behaviour responds to changes before instruments detect them
+        Fish are living sensors — their behaviour responds to changes before instruments detect them
       </text>
       <text x="296" y="382" textAnchor="middle" fontSize="9" className="fill-green-600 dark:fill-green-400">
         If fish jump more than usual, something in the river has changed. Investigate.
       </text>
       <text x="296" y="397" textAnchor="middle" fontSize="8" fontStyle="italic" className="fill-gray-500 dark:fill-gray-400">
-        Indigenous fishermen have tracked these patterns for generations \u2014 modern ecology confirms their knowledge
+        Indigenous fishermen have tracked these patterns for generations — modern ecology confirms their knowledge
       </text>
     </svg>
   );

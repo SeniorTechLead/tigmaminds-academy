@@ -113,7 +113,7 @@ for i in range(len(wavelengths) - 1):
 ax.plot(wavelengths, relative_intensity, color='white', linewidth=1.5, alpha=0.8)
 ax.set_xlabel('Wavelength (nm)', color='white', fontsize=12)
 ax.set_ylabel('Relative scattering intensity', color='white', fontsize=12)
-ax.set_title('Rayleigh scattering: I ~ 1/\\u03bb\\u2074', color='white', fontsize=14)
+ax.set_title('Rayleigh scattering: I ~ 1/\λ\⁴', color='white', fontsize=14)
 ax.tick_params(colors='gray')
 
 # Annotate key wavelengths
@@ -145,7 +145,7 @@ plt.tight_layout()
 plt.show()
 
 print("Rayleigh Scattering Intensity Ratios (relative to red at 700 nm):")
-print(f"{'Color':<12} {'Wavelength':>10} {'Ratio (700/\\u03bb)\\u2074':>16}")
+print(f"{'Color':<12} {'Wavelength':>10} {'Ratio (700/\λ)\⁴':>16}")
 print("-" * 40)
 for name, wl, ratio in zip(['Violet', 'Blue', 'Cyan', 'Green', 'Yellow', 'Orange', 'Red'],
                             wls, ratios):
@@ -206,7 +206,7 @@ fig.patch.set_facecolor('#1f2937')
 ax = axes[0]
 ax.set_facecolor('#111827')
 ax.loglog(x_values, Q_rayleigh, color='#60a5fa', linewidth=2, linestyle='--',
-          label='Rayleigh (Q ~ x\\u2074)', alpha=0.8)
+          label='Rayleigh (Q ~ x\⁴)', alpha=0.8)
 ax.loglog(x_values, Q_mie, color='#f97316', linewidth=2.5,
           label='Mie (exact approx.)')
 ax.axvline(x=1, color='#a855f7', linestyle=':', linewidth=1.5, alpha=0.7,
@@ -218,10 +218,10 @@ ax.text(0.03, 1e-6, 'Rayleigh\\nregime', color='#60a5fa', fontsize=11,
         fontweight='bold', ha='center')
 ax.text(3, 0.3, 'Mie\\nregime', color='#f97316', fontsize=11,
         fontweight='bold', ha='center')
-ax.text(100, 2.5, 'Geometric\\nlimit (Q\\u21922)', color='gray', fontsize=10,
+ax.text(100, 2.5, 'Geometric\\nlimit (Q\→2)', color='gray', fontsize=10,
         ha='center')
 
-ax.set_xlabel('Size parameter x = \\u03c0d/\\u03bb', color='white', fontsize=12)
+ax.set_xlabel('Size parameter x = \πd/\λ', color='white', fontsize=12)
 ax.set_ylabel('Scattering efficiency Q', color='white', fontsize=12)
 ax.set_title('Scattering regimes: from molecules to cloud droplets', color='white', fontsize=13)
 ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=10)
@@ -237,8 +237,8 @@ wavelengths = np.linspace(380, 750, 200)
 particle_sizes = [0.001, 0.01, 0.1, 1.0, 10.0]  # micrometers
 particle_colors = ['#60a5fa', '#8b5cf6', '#f59e0b', '#f97316', '#ef4444']
 particle_labels = ['1 nm (air molecules)', '10 nm (nanoparticle)',
-                   '100 nm (fine aerosol)', '1 \\u03bcm (coarse aerosol)',
-                   '10 \\u03bcm (cloud droplet)']
+                   '100 nm (fine aerosol)', '1 \μm (coarse aerosol)',
+                   '10 \μm (cloud droplet)']
 
 for d_um, color, label in zip(particle_sizes, particle_colors, particle_labels):
     d_nm = d_um * 1000  # convert to nm
@@ -266,8 +266,8 @@ print("-" * 62)
 examples = [
     ('N2 molecule', '0.3 nm', np.pi * 0.3 / 500, 'Rayleigh'),
     ('Smoke particle', '100 nm', np.pi * 100 / 500, 'Transition'),
-    ('Fog droplet', '5 \\u03bcm', np.pi * 5000 / 500, 'Mie'),
-    ('Cloud droplet', '10 \\u03bcm', np.pi * 10000 / 500, 'Geometric'),
+    ('Fog droplet', '5 \μm', np.pi * 5000 / 500, 'Mie'),
+    ('Cloud droplet', '10 \μm', np.pi * 10000 / 500, 'Geometric'),
     ('Raindrop', '1 mm', np.pi * 1e6 / 500, 'Geometric'),
 ]
 for name, size, x_val, regime in examples:
@@ -322,7 +322,7 @@ def air_mass(zenith_deg):
 
 # Sun positions to simulate
 sun_angles = [0, 30, 60, 75, 85, 90]  # zenith angles in degrees
-angle_labels = ['Noon (0\\u00b0)', '30\\u00b0', '60\\u00b0', '75\\u00b0', '85\\u00b0', 'Horizon (90\\u00b0)']
+angle_labels = ['Noon (0\°)', '30\°', '60\°', '75\°', '85\°', 'Horizon (90\°)']
 
 fig, axes = plt.subplots(2, 3, figsize=(15, 9))
 fig.patch.set_facecolor('#1f2937')
@@ -428,23 +428,23 @@ solar = solar / solar.max()
 fraunhofer_lines = [
     (393.4, 'Ca II K', 0.60),
     (396.8, 'Ca II H', 0.55),
-    (410.2, 'H\\u03b4', 0.25),
-    (434.0, 'H\\u03b3', 0.30),
-    (486.1, 'H\\u03b2', 0.35),
+    (410.2, 'H\δ', 0.25),
+    (434.0, 'H\γ', 0.30),
+    (486.1, 'H\β', 0.35),
     (516.7, 'Mg I', 0.20),
     (518.4, 'Mg I', 0.18),
     (527.0, 'Fe I', 0.15),
     (589.0, 'Na D1', 0.40),
     (589.6, 'Na D2', 0.38),
-    (656.3, 'H\\u03b1', 0.45),
+    (656.3, 'H\α', 0.45),
 ]
 
 # Telluric (Earth atmosphere) absorption bands
 telluric_bands = [
-    (687, 10, 'O\\u2082 A-band', 0.30),   # center, width, name, depth at zenith
-    (719, 8, 'H\\u2082O', 0.20),
-    (760, 12, 'O\\u2082 B-band', 0.50),
-    (720, 15, 'H\\u2082O', 0.15),
+    (687, 10, 'O\₂ A-band', 0.30),   # center, width, name, depth at zenith
+    (719, 8, 'H\₂O', 0.20),
+    (760, 12, 'O\₂ B-band', 0.50),
+    (720, 15, 'H\₂O', 0.15),
 ]
 
 def apply_fraunhofer(spectrum, wl):
@@ -551,7 +551,7 @@ for wl_check, name in [(400, 'Violet'), (450, 'Blue'), (500, 'Cyan'),
     idx = np.argmin(np.abs(wavelengths - wl_check))
     print(f"{wl_check} nm    {name:<10} {noon[idx]:>8.4f} {sunset[idx]:>8.6f} {survival_ratio[idx]:>9.6f}")
 print()
-print("The O\\u2082 A-band at 687 nm and B-band at 760 nm are")
+print("The O\₂ A-band at 687 nm and B-band at 760 nm are")
 print("dramatically deeper at sunset — 38x more oxygen in the light path.")`,
       challenge: 'Add a methane (CH4) absorption band at 890 nm and a CO2 band at 730 nm with modest zenith optical depths (0.05). Extend the wavelength range to 900 nm and show how these greenhouse gas signatures become detectable at sunset when the long path length amplifies weak absorption features.',
       successHint: 'Spectroscopy is how we know what the sun is made of, how we detect exoplanet atmospheres, and how satellites monitor greenhouse gases. The same physics that makes Assam\'s sunsets orange also lets us measure CO2 concentrations from space. Every absorption line is a message encoded in light.',
@@ -741,7 +741,7 @@ plt.tight_layout()
 plt.show()
 
 print("Radiative transfer comparison at sunset (AM=20):")
-print(f"{'Scenario':<22} {'Peak \\u03bb (nm)':>12} {'Red/Blue':>10} {'Total power':>12}")
+print(f"{'Scenario':<22} {'Peak \λ (nm)':>12} {'Red/Blue':>10} {'Total power':>12}")
 print("-" * 58)
 for name, params in scenarios.items():
     tau_total = (rayleigh_tau(wavelengths, am_sunset) +
@@ -914,7 +914,7 @@ for i in range(len(xy_trajectory) - 1):
 
 # Mark key points
 key_angles = [0, 30, 60, 75, 85, 90]
-key_labels = ['Noon', '30\\u00b0', '60\\u00b0', '75\\u00b0', '85\\u00b0', 'Sunset']
+key_labels = ['Noon', '30\°', '60\°', '75\°', '85\°', 'Sunset']
 for za, label in zip(key_angles, key_labels):
     idx = np.argmin(np.abs(zenith_angles - za))
     ax1.plot(xy_trajectory[idx, 0], xy_trajectory[idx, 1], 'o',

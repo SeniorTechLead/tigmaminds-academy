@@ -25,7 +25,7 @@ const ActivityCoolingExperimentDiagram = () => {
           Try It: The Elephant Cooling Experiment
         </text>
         <text x="300" y="45" textAnchor="middle" className="small fill-slate-500 dark:fill-slate-400">
-          Test evaporative cooling on your own hands \u2014 no lab required
+          Test evaporative cooling on your own hands — no lab required
         </text>
 
         {/* Step 1: Dry hand */}
@@ -43,7 +43,7 @@ const ActivityCoolingExperimentDiagram = () => {
         <text x="97" y="148" textAnchor="middle" className="small fill-amber-600 dark:fill-amber-400">DRY</text>
 
         {/* Wind arrows */}
-        <text x="145" y="140" className="small fill-slate-500 dark:fill-slate-400">\u2190 wave</text>
+        <text x="145" y="140" className="small fill-slate-500 dark:fill-slate-400">← wave</text>
         <text x="145" y="155" className="small fill-slate-500 dark:fill-slate-400">30 sec</text>
 
         <text x="107" y="210" textAnchor="middle" className="small fill-slate-600 dark:fill-slate-300">
@@ -76,11 +76,11 @@ const ActivityCoolingExperimentDiagram = () => {
         {/* Evaporation drops */}
         {[270, 285, 300].map((x, i) => (
           <g key={i} className="evap" style={{ animationDelay: `\${i * 0.5}s` }}>
-            <text x={x} y={106} textAnchor="middle" className="small fill-blue-400">\u2191</text>
+            <text x={x} y={106} textAnchor="middle" className="small fill-blue-400">↑</text>
           </g>
         ))}
 
-        <text x="337" y="140" className="small fill-blue-500 dark:fill-blue-400">\u2190 wave</text>
+        <text x="337" y="140" className="small fill-blue-500 dark:fill-blue-400">← wave</text>
         <text x="337" y="155" className="small fill-blue-500 dark:fill-blue-400">30 sec</text>
 
         <text x="299" y="210" textAnchor="middle" className="small fill-blue-600 dark:fill-blue-300">
@@ -113,11 +113,11 @@ const ActivityCoolingExperimentDiagram = () => {
         {/* Slow evaporation */}
         {[462, 477, 492].map((x, i) => (
           <g key={i} className="evap" style={{ animationDelay: `\${i * 0.8}s` }}>
-            <text x={x} y={106} textAnchor="middle" className="small fill-amber-500">\u2191</text>
+            <text x={x} y={106} textAnchor="middle" className="small fill-amber-500">↑</text>
           </g>
         ))}
 
-        <text x="529" y="140" className="small fill-amber-600 dark:fill-amber-400">\u2190 wait</text>
+        <text x="529" y="140" className="small fill-amber-600 dark:fill-amber-400">← wait</text>
         <text x="529" y="155" className="small fill-amber-600 dark:fill-amber-400">5 min</text>
 
         <text x="491" y="210" textAnchor="middle" className="small fill-amber-700 dark:fill-amber-300">
@@ -141,16 +141,16 @@ const ActivityCoolingExperimentDiagram = () => {
         </text>
 
         <text x="300" y="316" textAnchor="middle" className="label fill-emerald-600 dark:fill-emerald-300">
-          Evaporation absorbs heat \u2014 2,260 joules per gram of water that evaporates.
+          Evaporation absorbs heat — 2,260 joules per gram of water that evaporates.
         </text>
         <text x="300" y="332" textAnchor="middle" className="label fill-emerald-600 dark:fill-emerald-300">
-          Plain water evaporates fast \u2192 intense but short cooling.
+          Plain water evaporates fast → intense but short cooling.
         </text>
         <text x="300" y="348" textAnchor="middle" className="label fill-emerald-600 dark:fill-emerald-300">
-          Mud holds water in its particles \u2192 slow, steady evaporation for hours.
+          Mud holds water in its particles → slow, steady evaporation for hours.
         </text>
         <text x="300" y="368" textAnchor="middle" className="label fill-emerald-700 dark:fill-emerald-200" fontWeight="600">
-          This is why elephants choose mud over plain water \u2014 longer-lasting cooling.
+          This is why elephants choose mud over plain water — longer-lasting cooling.
         </text>
       </svg>
     </div>

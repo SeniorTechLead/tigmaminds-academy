@@ -25,7 +25,7 @@ export default function BoatHullShapesDiagram() {
 
         {/* Title */}
         <text x="315" y="28" textAnchor="middle" className="title fill-amber-300">
-          Hull Shape Matters \u2014 Stability vs Speed
+          Hull Shape Matters — Stability vs Speed
         </text>
 
         {/* === FLAT BOTTOM === */}
@@ -50,10 +50,10 @@ export default function BoatHullShapesDiagram() {
         <text x="108" y="195" textAnchor="middle" className="small fill-green-400">wide contact = stable</text>
 
         {/* Pros/Cons */}
-        <text x="108" y="248" textAnchor="middle" className="small fill-green-300">\u2713 Very stable</text>
-        <text x="108" y="262" textAnchor="middle" className="small fill-green-300">\u2713 Carries heavy cargo</text>
-        <text x="108" y="278" textAnchor="middle" className="small fill-red-300">\u2717 Slow (high drag)</text>
-        <text x="108" y="292" textAnchor="middle" className="small fill-red-300">\u2717 Rough ride in waves</text>
+        <text x="108" y="248" textAnchor="middle" className="small fill-green-300">✓ Very stable</text>
+        <text x="108" y="262" textAnchor="middle" className="small fill-green-300">✓ Carries heavy cargo</text>
+        <text x="108" y="278" textAnchor="middle" className="small fill-red-300">✗ Slow (high drag)</text>
+        <text x="108" y="292" textAnchor="middle" className="small fill-red-300">✗ Rough ride in waves</text>
 
         <text x="108" y="315" textAnchor="middle" className="small fill-slate-400">
           Brahmaputra cargo boats
@@ -83,10 +83,10 @@ export default function BoatHullShapesDiagram() {
         <text x="315" y="220" textAnchor="middle" className="small fill-blue-400">cuts through waves</text>
 
         {/* Pros/Cons */}
-        <text x="315" y="248" textAnchor="middle" className="small fill-green-300">\u2713 Smooth in rough water</text>
-        <text x="315" y="262" textAnchor="middle" className="small fill-green-300">\u2713 Good speed</text>
-        <text x="315" y="278" textAnchor="middle" className="small fill-red-300">\u2717 Less cargo space</text>
-        <text x="315" y="292" textAnchor="middle" className="small fill-red-300">\u2717 Rolls more at rest</text>
+        <text x="315" y="248" textAnchor="middle" className="small fill-green-300">✓ Smooth in rough water</text>
+        <text x="315" y="262" textAnchor="middle" className="small fill-green-300">✓ Good speed</text>
+        <text x="315" y="278" textAnchor="middle" className="small fill-red-300">✗ Less cargo space</text>
+        <text x="315" y="292" textAnchor="middle" className="small fill-red-300">✗ Rolls more at rest</text>
 
         <text x="315" y="315" textAnchor="middle" className="small fill-slate-400">
           Speedboats, patrol boats
@@ -112,10 +112,10 @@ export default function BoatHullShapesDiagram() {
         <text x="520" y="208" textAnchor="middle" className="small fill-blue-400">water flows smoothly</text>
 
         {/* Pros/Cons */}
-        <text x="520" y="248" textAnchor="middle" className="small fill-green-300">\u2713 Least drag</text>
-        <text x="520" y="262" textAnchor="middle" className="small fill-green-300">\u2713 Best for long voyages</text>
-        <text x="520" y="278" textAnchor="middle" className="small fill-red-300">\u2717 Needs keel to stop rolling</text>
-        <text x="520" y="292" textAnchor="middle" className="small fill-red-300">\u2717 Can capsize without ballast</text>
+        <text x="520" y="248" textAnchor="middle" className="small fill-green-300">✓ Least drag</text>
+        <text x="520" y="262" textAnchor="middle" className="small fill-green-300">✓ Best for long voyages</text>
+        <text x="520" y="278" textAnchor="middle" className="small fill-red-300">✗ Needs keel to stop rolling</text>
+        <text x="520" y="292" textAnchor="middle" className="small fill-red-300">✗ Can capsize without ballast</text>
 
         <text x="520" y="315" textAnchor="middle" className="small fill-slate-400">
           Sailing boats, trawlers

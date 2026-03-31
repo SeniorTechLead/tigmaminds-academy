@@ -30,19 +30,19 @@ export default function ZamzamLevel3() {
   const miniLessons = [
     {
       title: 'Finite difference groundwater model',
-      concept: `The groundwater flow equation combines Darcy\u2019s law with conservation of mass. In 2D, for a confined aquifer:
+      concept: `The groundwater flow equation combines Darcy’s law with conservation of mass. In 2D, for a confined aquifer:
 
-**S \u2202h/\u2202t = T (\u2202\u00B2h/\u2202x\u00B2 + \u2202\u00B2h/\u2202y\u00B2) + W**
+**S ∂h/∂t = T (∂²h/∂x² + ∂²h/∂y²) + W**
 
 Where S = storativity, T = transmissivity, h = hydraulic head, W = recharge/pumping.
 
 We solve this numerically using **finite differences**: divide the aquifer into a grid, and at each time step, update the head at each cell based on its neighbours:
 
-h_new[i,j] = h[i,j] + (T*dt/(S*dx\u00B2)) * (h[i+1,j] + h[i-1,j] + h[i,j+1] + h[i,j-1] - 4*h[i,j]) + W*dt/S
+h_new[i,j] = h[i,j] + (T*dt/(S*dx²)) * (h[i+1,j] + h[i-1,j] + h[i,j+1] + h[i,j-1] - 4*h[i,j]) + W*dt/S
 
 This is the same approach used in professional groundwater modelling software like MODFLOW.`,
       analogy: 'Imagine a grid of connected water tanks. Each tank shares water with its four neighbours through pipes. If one tank is pumped low, water flows in from its neighbours, which then draw from their neighbours, creating a ripple effect. The finite difference method simply calculates, step by step, how much water flows between each pair of tanks.',
-      storyConnection: 'The Saudi Geological Survey uses MODFLOW (a finite difference model) to manage Zamzam\u2019s aquifer. The model grid covers the entire Wadi Ibrahim catchment, with cells as small as 10m near the well. It predicts water levels decades into the future under different pumping scenarios.',
+      storyConnection: 'The Saudi Geological Survey uses MODFLOW (a finite difference model) to manage Zamzam’s aquifer. The model grid covers the entire Wadi Ibrahim catchment, with cells as small as 10m near the well. It predicts water levels decades into the future under different pumping scenarios.',
       checkQuestion: 'Why do we need a numerical model instead of just using the Theis equation?',
       checkAnswer: 'The Theis equation assumes a perfectly uniform, infinite aquifer with one well. Real aquifers have irregular boundaries, varying thickness, different rock types, multiple wells, rivers that recharge or drain the aquifer, and complex recharge patterns. Numerical models can handle all of these complexities by solving the equations on a grid where each cell can have different properties.',
       codeIntro: 'Build a 2D finite difference groundwater model from scratch.',
@@ -106,22 +106,22 @@ print(f"Drawdown at well: {drawdown_at_well:.2f} m")`,
       successHint: 'You just built a groundwater model from scratch. Professional tools like MODFLOW use the same finite difference method but with millions of cells, multiple layers, and dozens of boundary conditions. The principle is identical.',
     },
     {
-      title: 'Contaminant transport \u2014 protecting water quality',
-      concept: `Groundwater does not just carry water \u2014 it carries dissolved chemicals. If a pollutant enters an aquifer (leaked fuel, agricultural chemicals, industrial waste), it travels with the groundwater flow and spreads through **advection** (carried by flow) and **dispersion** (spreading due to mixing).
+      title: 'Contaminant transport — protecting water quality',
+      concept: `Groundwater does not just carry water — it carries dissolved chemicals. If a pollutant enters an aquifer (leaked fuel, agricultural chemicals, industrial waste), it travels with the groundwater flow and spreads through **advection** (carried by flow) and **dispersion** (spreading due to mixing).
 
 The advection-dispersion equation:
 
-**\u2202C/\u2202t = D \u2202\u00B2C/\u2202x\u00B2 - v \u2202C/\u2202x**
+**∂C/∂t = D ∂²C/∂x² - v ∂C/∂x**
 
 Where C = concentration, D = dispersion coefficient, v = groundwater velocity.
 
 This equation predicts how a contamination plume grows over time. The plume stretches in the flow direction (advection) and spreads sideways (dispersion). Wells downstream of a pollution source are at risk.
 
 Understanding this is crucial for protecting water sources like Zamzam from modern urban contamination.`,
-      analogy: 'Drop a blob of food colouring into a slowly flowing stream. The blob stretches downstream (advection) and spreads sideways (dispersion). Over time, it becomes a long, fading streak. Groundwater contamination does exactly the same thing, but much slower \u2014 a pollution event might take decades to reach a well 1 km away.',
+      analogy: 'Drop a blob of food colouring into a slowly flowing stream. The blob stretches downstream (advection) and spreads sideways (dispersion). Over time, it becomes a long, fading streak. Groundwater contamination does exactly the same thing, but much slower — a pollution event might take decades to reach a well 1 km away.',
       storyConnection: 'As Mecca has urbanised, protecting Zamzam from contamination has become critical. The Saudi authorities established a protection zone around the well and carefully manage surface activities in the recharge area. The transport models you are building are exactly what environmental engineers use to define these protection zones.',
       checkQuestion: 'A factory leaks fuel into the ground 500m upstream of a drinking water well. Groundwater velocity is 1m/day. How long before the contamination reaches the well?',
-      checkAnswer: 'At 1m/day, the centre of the plume reaches the well in 500 days (about 1.4 years). BUT dispersion means the leading edge arrives earlier \u2014 perhaps in 300 days. And the contamination will continue to pass through for months after the centre arrives. This is why early detection through monitoring wells is critical. By the time you taste contamination in the drinking well, the plume has been underground for over a year.',
+      checkAnswer: 'At 1m/day, the centre of the plume reaches the well in 500 days (about 1.4 years). BUT dispersion means the leading edge arrives earlier — perhaps in 300 days. And the contamination will continue to pass through for months after the centre arrives. This is why early detection through monitoring wells is critical. By the time you taste contamination in the drinking well, the plume has been underground for over a year.',
       codeIntro: 'Simulate a contamination plume spreading through an aquifer.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -184,22 +184,22 @@ print("Leading edge reaches further due to dispersion")`,
       successHint: 'Contaminant transport modelling is what saves drinking water supplies. By predicting where a plume will go and when it will arrive, engineers can install monitoring wells, activate remediation, or move water intakes before contamination reaches them.',
     },
     {
-      title: 'Geochemical modelling \u2014 mineral dissolution and precipitation',
-      concept: `As groundwater flows through rock, it dissolves some minerals and precipitates others. This depends on the water\u2019s **saturation index** (SI):
+      title: 'Geochemical modelling — mineral dissolution and precipitation',
+      concept: `As groundwater flows through rock, it dissolves some minerals and precipitates others. This depends on the water’s **saturation index** (SI):
 
-- SI < 0: undersaturated \u2014 mineral dissolves
-- SI = 0: equilibrium \u2014 no change
-- SI > 0: supersaturated \u2014 mineral precipitates
+- SI < 0: undersaturated — mineral dissolves
+- SI = 0: equilibrium — no change
+- SI > 0: supersaturated — mineral precipitates
 
-For calcite (CaCO\u2083) in limestone: **CaCO\u2083 + CO\u2082 + H\u2082O \u2194 Ca\u00B2\u207A + 2HCO\u2083\u207B**
+For calcite (CaCO₃) in limestone: **CaCO₃ + CO₂ + H₂O ↔ Ca²⁺ + 2HCO₃⁻**
 
 This reaction controls karst landscape formation (caves, sinkholes), water hardness, and the mineral content of springs.
 
-Zamzam\u2019s high calcium content (96 mg/L) tells us its water has dissolved substantial limestone along its flow path. The CO\u2082 in the soil zone drives the dissolution.`,
-      analogy: 'Think of dissolving sugar in tea. Cold tea dissolves less sugar (undersaturated). Hot tea dissolves more. If you make very sweet hot tea and then cool it down, sugar crystals form on the spoon (precipitation). The water temperature changed the saturation point. For groundwater, the "temperature" analog is CO\u2082 concentration \u2014 more CO\u2082 means more limestone dissolves.',
-      storyConnection: 'The rock around Zamzam is Cretaceous limestone \u2014 the same type that creates dramatic karst landscapes worldwide. As rainwater absorbs CO\u2082 in the soil, it becomes slightly acidic and dissolves the limestone, creating fractures and cavities that enhance permeability. This process has been shaping Zamzam\u2019s aquifer for millions of years.',
+Zamzam’s high calcium content (96 mg/L) tells us its water has dissolved substantial limestone along its flow path. The CO₂ in the soil zone drives the dissolution.`,
+      analogy: 'Think of dissolving sugar in tea. Cold tea dissolves less sugar (undersaturated). Hot tea dissolves more. If you make very sweet hot tea and then cool it down, sugar crystals form on the spoon (precipitation). The water temperature changed the saturation point. For groundwater, the "temperature" analog is CO₂ concentration — more CO₂ means more limestone dissolves.',
+      storyConnection: 'The rock around Zamzam is Cretaceous limestone — the same type that creates dramatic karst landscapes worldwide. As rainwater absorbs CO₂ in the soil, it becomes slightly acidic and dissolves the limestone, creating fractures and cavities that enhance permeability. This process has been shaping Zamzam’s aquifer for millions of years.',
       checkQuestion: 'Why does groundwater in limestone regions often leave white deposits on taps and kettles?',
-      checkAnswer: 'Limestone groundwater is saturated with calcium carbonate (CaCO\u2083). When the water is heated (kettle) or loses CO\u2082 (tap aerator), it becomes supersaturated \u2014 the saturation index goes above zero. The excess CaCO\u2083 precipitates out as white "limescale." This is the reverse of the dissolution reaction that created the water\u2019s hardness in the first place. Heating drives off CO\u2082, shifting the equilibrium toward precipitation.',
+      checkAnswer: 'Limestone groundwater is saturated with calcium carbonate (CaCO₃). When the water is heated (kettle) or loses CO₂ (tap aerator), it becomes supersaturated — the saturation index goes above zero. The excess CaCO₃ precipitates out as white "limescale." This is the reverse of the dissolution reaction that created the water’s hardness in the first place. Heating drives off CO₂, shifting the equilibrium toward precipitation.',
       codeIntro: 'Model calcite dissolution along a groundwater flow path.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -242,14 +242,14 @@ fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(10, 8), sharex=True)
 
 ax1.plot(flow_distance/1000, Ca, linewidth=2.5, color='#f59e0b')
 ax1.axhline(y=96, color='red', linestyle='--', label='Zamzam Ca: 96 mg/L')
-ax1.set_ylabel('Ca\u00B2\u207A (mg/L)', fontsize=11, color='lightgray')
+ax1.set_ylabel('Ca²⁺ (mg/L)', fontsize=11, color='lightgray')
 ax1.set_title('Calcite Dissolution Along Flow Path', fontsize=13, color='white')
 ax1.legend(fontsize=9, labelcolor='lightgray')
 ax1.tick_params(colors='lightgray')
 ax1.grid(alpha=0.2)
 
 ax2.plot(flow_distance/1000, CO2_remaining, linewidth=2.5, color='#10b981')
-ax2.set_ylabel('CO\u2082 remaining (%)', fontsize=11, color='lightgray')
+ax2.set_ylabel('CO₂ remaining (%)', fontsize=11, color='lightgray')
 ax2.tick_params(colors='lightgray')
 ax2.grid(alpha=0.2)
 
@@ -267,24 +267,24 @@ print("  1. Ca concentration rises (dissolution)")
 print("  2. CO2 is consumed (drives the reaction)")
 print("  3. pH increases (less CO2 = less acidic)")
 print(f"  4. Zamzam's 96 mg/L Ca = ~2.5 km flow path in limestone")`,
-      challenge: 'Add a temperature gradient (cooler at depth). Higher temperature increases reaction rates but decreases CO\u2082 solubility. How does temperature affect the dissolution profile?',
-      successHint: 'Geochemical modelling reveals the invisible chemistry happening underground. Every mineral in Zamzam\u2019s water was dissolved from rock along its flow path. The water\u2019s chemistry is a record of its journey through the Earth.',
+      challenge: 'Add a temperature gradient (cooler at depth). Higher temperature increases reaction rates but decreases CO₂ solubility. How does temperature affect the dissolution profile?',
+      successHint: 'Geochemical modelling reveals the invisible chemistry happening underground. Every mineral in Zamzam’s water was dissolved from rock along its flow path. The water’s chemistry is a record of its journey through the Earth.',
     },
     {
-      title: 'Managed aquifer recharge \u2014 refilling depleted aquifers',
+      title: 'Managed aquifer recharge — refilling depleted aquifers',
       concept: `When pumping exceeds natural recharge, engineers can artificially augment recharge through **Managed Aquifer Recharge (MAR)**. Common methods:
 
 1. **Spreading basins**: large shallow ponds where treated water infiltrates
 2. **Injection wells**: pumping treated water directly into the aquifer
 3. **Percolation trenches**: gravel-filled trenches that capture runoff
 
-The key challenge is water quality \u2014 you cannot inject contaminated water into an aquifer. Treatment must remove pathogens, nutrients, and suspended solids before recharge.
+The key challenge is water quality — you cannot inject contaminated water into an aquifer. Treatment must remove pathogens, nutrients, and suspended solids before recharge.
 
 Saudi Arabia is actively developing MAR systems to supplement natural recharge in the Mecca region. This is critical for long-term sustainability of water sources including Zamzam.`,
-      analogy: 'Natural recharge is like a tap slowly filling a bathtub. MAR is like using a garden hose \u2014 same bathtub, much faster filling rate. But you have to make sure the hose water is clean (treated), or you contaminate the entire bath.',
+      analogy: 'Natural recharge is like a tap slowly filling a bathtub. MAR is like using a garden hose — same bathtub, much faster filling rate. But you have to make sure the hose water is clean (treated), or you contaminate the entire bath.',
       storyConnection: 'The Saudi government has invested in MAR infrastructure around Mecca, including infiltration basins in Wadi Ibrahim (the catchment that feeds Zamzam). By capturing flash flood waters that would otherwise run off to the Red Sea and directing them into the aquifer, they supplement the meagre natural recharge in this arid region.',
       checkQuestion: 'Why not just inject seawater into the aquifer? Saudi Arabia has plenty of coastline.',
-      checkAnswer: 'Seawater has 35,000 mg/L total dissolved solids, while fresh groundwater typically has <1,000 mg/L. Injecting seawater would contaminate the entire aquifer with salt, making it permanently unusable for drinking. Even desalinated seawater needs careful treatment to match the aquifer\u2019s geochemistry \u2014 if the chemistry is wrong, injected water can dissolve or precipitate minerals, clogging the aquifer pores.',
+      checkAnswer: 'Seawater has 35,000 mg/L total dissolved solids, while fresh groundwater typically has <1,000 mg/L. Injecting seawater would contaminate the entire aquifer with salt, making it permanently unusable for drinking. Even desalinated seawater needs careful treatment to match the aquifer’s geochemistry — if the chemistry is wrong, injected water can dissolve or precipitate minerals, clogging the aquifer pores.',
       codeIntro: 'Model the impact of managed aquifer recharge on water table recovery.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -342,11 +342,11 @@ print("With MAR + reduced pumping: water table RECOVERS!")
 print()
 print("Key insight: MAR alone is not enough if pumping is excessive")
 print("Sustainability requires BOTH increased recharge AND managed extraction")`,
-      challenge: 'Add cost to the model: MAR costs $0.50/m\u00B3 of recharged water. Calculate the annual cost of MAR for a 10 km\u00B2 area at 30mm/year. Then compare with the cost of desalination ($1.00/m\u00B3) as an alternative water source.',
+      challenge: 'Add cost to the model: MAR costs $0.50/m³ of recharged water. Calculate the annual cost of MAR for a 10 km² area at 30mm/year. Then compare with the cost of desalination ($1.00/m³) as an alternative water source.',
       successHint: 'MAR is one of the most promising solutions to the global groundwater crisis. By working WITH natural processes (infiltration, aquifer storage) rather than against them, engineers can restore depleted aquifers and create sustainable water supplies for future generations.',
     },
     {
-      title: 'Climate change and groundwater \u2014 modelling future scenarios',
+      title: 'Climate change and groundwater — modelling future scenarios',
       concept: `Climate change affects groundwater in multiple ways:
 
 1. **Changed rainfall patterns**: more intense storms but longer dry periods
@@ -354,13 +354,13 @@ print("Sustainability requires BOTH increased recharge AND managed extraction")`
 3. **Sea level rise**: saltwater intrusion into coastal aquifers
 4. **Glacier melt**: loss of glacial recharge in mountain regions
 
-For arid regions like Mecca, climate models project even less rainfall and higher temperatures \u2014 a double blow to groundwater recharge. Understanding these projections is essential for long-term water planning.
+For arid regions like Mecca, climate models project even less rainfall and higher temperatures — a double blow to groundwater recharge. Understanding these projections is essential for long-term water planning.
 
 In this exercise, you will model how different climate scenarios affect aquifer sustainability over the next century.`,
       analogy: 'Imagine your bathtub tap is slowly closing (less rainfall) while someone turns up the heated floor (more evaporation). Less water goes in, more is lost before it reaches the drain. The bath level drops faster than ever. Climate change is doing exactly this to aquifers worldwide.',
-      storyConnection: 'Will Zamzam flow in 2100? The answer depends on how climate change affects recharge in the Hejaz region. Paleoclimate data shows the Arabian Peninsula was much wetter 6,000-10,000 years ago (the "Green Arabia" period). Zamzam\u2019s deep aquifer likely stores water from that era. As modern climate becomes even drier, the ancient stored water becomes even more precious.',
-      checkQuestion: 'If annual rainfall decreases by 20% and temperature rises by 2\u00B0C, roughly how much does aquifer recharge change?',
-      checkAnswer: 'Much more than 20%. Temperature rise increases evapotranspiration by roughly 5-7% per degree. A 2\u00B0C rise increases ET by ~12%. Combined with 20% less rainfall, recharge could drop by 40-60%. This nonlinear amplification is why groundwater is more vulnerable to climate change than surface water \u2014 small changes in rainfall and temperature cause disproportionately large changes in recharge.',
+      storyConnection: 'Will Zamzam flow in 2100? The answer depends on how climate change affects recharge in the Hejaz region. Paleoclimate data shows the Arabian Peninsula was much wetter 6,000-10,000 years ago (the "Green Arabia" period). Zamzam’s deep aquifer likely stores water from that era. As modern climate becomes even drier, the ancient stored water becomes even more precious.',
+      checkQuestion: 'If annual rainfall decreases by 20% and temperature rises by 2°C, roughly how much does aquifer recharge change?',
+      checkAnswer: 'Much more than 20%. Temperature rise increases evapotranspiration by roughly 5-7% per degree. A 2°C rise increases ET by ~12%. Combined with 20% less rainfall, recharge could drop by 40-60%. This nonlinear amplification is why groundwater is more vulnerable to climate change than surface water — small changes in rainfall and temperature cause disproportionately large changes in recharge.',
       codeIntro: 'Model aquifer response to different climate change scenarios over 100 years.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -422,7 +422,7 @@ print()
 print("Solutions: MAR, desalination, demand management, water recycling")
 print("The question is not IF we need these — but how FAST")`,
       challenge: 'Add a "With MAR" variant to the pessimistic scenario that adds 15mm/year of managed recharge starting in 2040. Does it save the aquifer? What MAR rate would be needed to maintain current water levels under the worst-case scenario?',
-      successHint: 'Climate change is the biggest threat to global groundwater. The models you have built show that arid regions face a double blow: less rain AND more evaporation. Only proactive management \u2014 combining MAR, conservation, and alternative supplies \u2014 can sustain groundwater for future generations.',
+      successHint: 'Climate change is the biggest threat to global groundwater. The models you have built show that arid regions face a double blow: less rain AND more evaporation. Only proactive management — combining MAR, conservation, and alternative supplies — can sustain groundwater for future generations.',
     },
     {
       title: 'Capstone: design a sustainable water management plan',
@@ -438,9 +438,9 @@ Your code will produce a dashboard showing supply vs demand projections, recomme
 
 This is exactly what real hydrogeologists do for water utilities worldwide.`,
       analogy: 'You are the financial planner for a water bank. Income = recharge. Expenses = pumping. Savings = stored groundwater. You need to balance the budget over 50 years, accounting for inflation (climate change), unexpected withdrawals (drought), and investments (MAR). A good plan keeps the balance positive no matter what.',
-      storyConnection: 'The Saudi Geological Survey\u2019s management plan for Zamzam is a model of sustainable water management in an arid environment. It combines continuous monitoring, adaptive pumping schedules, protection zones, water quality testing, and infrastructure investment. Your capstone project mirrors their approach, scaled to the tools and data available to you.',
+      storyConnection: 'The Saudi Geological Survey’s management plan for Zamzam is a model of sustainable water management in an arid environment. It combines continuous monitoring, adaptive pumping schedules, protection zones, water quality testing, and infrastructure investment. Your capstone project mirrors their approach, scaled to the tools and data available to you.',
       checkQuestion: 'What is the single most important number in your water management plan?',
-      checkAnswer: 'The ratio of extraction to recharge. If this ratio is consistently above 1.0, the aquifer is being depleted no matter what else you do. If it is below 1.0, the aquifer is sustainable. Everything else \u2014 MAR, well design, contamination protection \u2014 supports keeping this ratio below 1.0 over the long term. Simple, but fundamental.',
+      checkAnswer: 'The ratio of extraction to recharge. If this ratio is consistently above 1.0, the aquifer is being depleted no matter what else you do. If it is below 1.0, the aquifer is sustainable. Everything else — MAR, well design, contamination protection — supports keeping this ratio below 1.0 over the long term. Simple, but fundamental.',
       codeIntro: 'Build a 50-year water management dashboard integrating all concepts.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -492,7 +492,7 @@ ax = axes[0, 0]
 ax.plot(years, demand/1e6, linewidth=2, color='#ef4444', label='Demand')
 ax.plot(years, supply/1e6, linewidth=2, color='#10b981', label='Supply (recharge)')
 ax.axvline(x=mar_start, color='white', linewidth=1, linestyle=':', alpha=0.3)
-ax.set_ylabel('Million m\u00B3/year', fontsize=10, color='lightgray')
+ax.set_ylabel('Million m³/year', fontsize=10, color='lightgray')
 ax.set_title('Supply vs Demand', fontsize=12, color='white')
 ax.legend(fontsize=9, labelcolor='lightgray')
 ax.tick_params(colors='lightgray'); ax.grid(alpha=0.2)
@@ -501,7 +501,7 @@ ax.tick_params(colors='lightgray'); ax.grid(alpha=0.2)
 ax = axes[0, 1]
 ax.bar(years, balance/1e6, color=['#10b981' if b >= 0 else '#ef4444' for b in balance], alpha=0.7)
 ax.axhline(y=0, color='white', linewidth=0.5)
-ax.set_ylabel('Million m\u00B3/year', fontsize=10, color='lightgray')
+ax.set_ylabel('Million m³/year', fontsize=10, color='lightgray')
 ax.set_title('Annual Water Balance', fontsize=12, color='white')
 ax.tick_params(colors='lightgray'); ax.grid(alpha=0.2)
 
@@ -510,7 +510,7 @@ ax = axes[1, 0]
 ax.plot(years, stored/1e6, linewidth=2.5, color='#3b82f6')
 ax.fill_between(years, stored/1e6, alpha=0.1, color='#3b82f6')
 ax.set_xlabel('Years from now', fontsize=10, color='lightgray')
-ax.set_ylabel('Million m\u00B3', fontsize=10, color='lightgray')
+ax.set_ylabel('Million m³', fontsize=10, color='lightgray')
 ax.set_title('Stored Groundwater', fontsize=12, color='white')
 ax.tick_params(colors='lightgray'); ax.grid(alpha=0.2)
 
@@ -535,10 +535,10 @@ if depletion_year > 0:
     print(f"WARNING: Aquifer depleted by year {depletion_year}")
 else:
     print("Aquifer survives 50 years — but barely")
-print(f"Year 50 stored volume: {stored[-1]/1e6:.1f} million m\u00B3")
+print(f"Year 50 stored volume: {stored[-1]/1e6:.1f} million m³")
 print(f"Year 50 sustainability ratio: {ratio[-1]:.2f}")`,
       challenge: 'Modify the plan: (1) reduce demand growth to 1% (conservation), (2) increase MAR rate to 25mm/year, (3) start MAR at year 5. Can you make the sustainability ratio stay below 1.0 for all 50 years? Find the optimal combination.',
-      successHint: 'You have built a complete water management dashboard \u2014 the same type of analysis that professional hydrogeologists present to governments and water utilities. The key lesson: sustainability is not about any single intervention. It is about balancing supply, demand, and storage over decades.',
+      successHint: 'You have built a complete water management dashboard — the same type of analysis that professional hydrogeologists present to governments and water utilities. The key lesson: sustainability is not about any single intervention. It is about balancing supply, demand, and storage over decades.',
     },
   ];
 

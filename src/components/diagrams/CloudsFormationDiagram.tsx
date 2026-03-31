@@ -97,7 +97,7 @@ export default function CloudsFormationDiagram() {
           {"2. Warm air rises"}
         </text>
         <text x="420" y="312" textAnchor="middle" fontSize="10" fill="#fde68a" fillOpacity="0.8">
-          Cools 6.5\u00b0C per 1 000 m
+          Cools 6.5°C per 1 000 m
         </text>
 
         {/* Step 3: Dew point line */}
@@ -145,17 +145,17 @@ export default function CloudsFormationDiagram() {
           Key fact
         </text>
         <text x="530" y="455" textAnchor="middle" fontSize="10" fill="#cbd5e1">
-          Each cloud droplet is only 10\u201320 \u00b5m wide
+          Each cloud droplet is only 10–20 µm wide
         </text>
         <text x="530" y="468" textAnchor="middle" fontSize="10" fill="#cbd5e1">
-          \u2014 one-tenth the thickness of a hair
+          — one-tenth the thickness of a hair
         </text>
 
         {/* Temperature scale on left */}
-        <text x="16" y="405" fontSize="10" fill="#86efac">30\u00b0C</text>
-        <text x="16" y="320" fontSize="10" fill="#86efac">24\u00b0C</text>
-        <text x="16" y="205" fontSize="10" fill="#93c5fd">11\u00b0C</text>
-        <text x="16" y="80" fontSize="10" fill="#c4b5fd">3\u00b0C</text>
+        <text x="16" y="405" fontSize="10" fill="#86efac">30°C</text>
+        <text x="16" y="320" fontSize="10" fill="#86efac">24°C</text>
+        <text x="16" y="205" fontSize="10" fill="#93c5fd">11°C</text>
+        <text x="16" y="80" fontSize="10" fill="#c4b5fd">3°C</text>
         <line x1="48" y1="75" x2="48" y2="400" stroke="#475569" strokeWidth="1" />
       </svg>
     </div>

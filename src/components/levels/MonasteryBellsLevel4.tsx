@@ -29,16 +29,16 @@ export default function MonasteryBellsLevel4() {
 
   const miniLessons = [
     {
-      title: 'Finite element modelling \u2014 simulating bell vibration',
-      concept: `Real bell design uses **Finite Element Analysis (FEA)**: the bell\u2019s surface is divided into thousands of small elements, and the equations of motion are solved for each one. This reveals the exact mode shapes, frequencies, and stress distributions.
+      title: 'Finite element modelling — simulating bell vibration',
+      concept: `Real bell design uses **Finite Element Analysis (FEA)**: the bell’s surface is divided into thousands of small elements, and the equations of motion are solved for each one. This reveals the exact mode shapes, frequencies, and stress distributions.
 
-We will build a simplified 1D FEA model: a chain of masses connected by springs. This is the simplest discretisation of a vibrating object. Each mass moves according to Newton\u2019s second law: F = ma. The springs provide restoring force: F = -k\u00D7displacement.
+We will build a simplified 1D FEA model: a chain of masses connected by springs. This is the simplest discretisation of a vibrating object. Each mass moves according to Newton’s second law: F = ma. The springs provide restoring force: F = -k×displacement.
 
 The code sets up a chain of 50 masses, applies an impulse to one end, and simulates the wave propagation. You will see standing waves emerge naturally from the boundary conditions.
 
 This is exactly how commercial FEA software works, just with 2D/3D elements instead of a 1D chain.`,
-      analogy: 'Imagine 50 people standing in a line, each holding hands with their neighbours. Push the first person. They bump into the second, who bumps into the third, and a wave ripples down the line. If the last person is fixed (held by a wall), the wave reflects back. The standing patterns that emerge are the modes \u2014 exactly what happens in a vibrating bell.',
-      storyConnection: 'To fix Sangha, a modern bell-maker would create an FEA model of the bell, simulate the crack, and determine which modes are disrupted. Then they would calculate exactly where to add or remove metal to restore the harmonic balance \u2014 digital restoration before touching the physical bell.',
+      analogy: 'Imagine 50 people standing in a line, each holding hands with their neighbours. Push the first person. They bump into the second, who bumps into the third, and a wave ripples down the line. If the last person is fixed (held by a wall), the wave reflects back. The standing patterns that emerge are the modes — exactly what happens in a vibrating bell.',
+      storyConnection: 'To fix Sangha, a modern bell-maker would create an FEA model of the bell, simulate the crack, and determine which modes are disrupted. Then they would calculate exactly where to add or remove metal to restore the harmonic balance — digital restoration before touching the physical bell.',
       checkQuestion: 'Why do engineers divide a bell into thousands of elements instead of solving the equation for the whole bell at once?',
       checkAnswer: 'The wave equation for a complex 3D shape like a bell has no exact analytical solution. By dividing it into small, simple elements (triangles, tetrahedra), the equation for each element IS solvable. The computer then assembles all the element solutions to approximate the full solution. More elements = better approximation, at the cost of more computation.',
       codeIntro: 'Build a 1D finite element model and watch standing waves emerge.',
@@ -110,22 +110,22 @@ for mode in range(1, 6):
 print()
 print("The simulation naturally produces these modes — no explicit")
 print("formula needed. The physics emerges from F=ma + springs.")`,
-      challenge: 'Introduce a \u201Ccrack\u201D by setting one spring constant to half its normal value (k/2 at element 25). Run the simulation and compare the standing wave patterns to the uncracked chain. Which modes are most affected?',
-      successHint: 'FEA is one of the most important computational techniques in engineering. It is used to design bridges, aircraft, prosthetics, and yes \u2014 musical instruments. You just built the simplest possible FEA from scratch.',
+      challenge: 'Introduce a “crack” by setting one spring constant to half its normal value (k/2 at element 25). Run the simulation and compare the standing wave patterns to the uncracked chain. Which modes are most affected?',
+      successHint: 'FEA is one of the most important computational techniques in engineering. It is used to design bridges, aircraft, prosthetics, and yes — musical instruments. You just built the simplest possible FEA from scratch.',
     },
     {
-      title: 'Wavelet analysis \u2014 beyond Fourier',
-      concept: `Fourier analysis assumes the signal is stationary \u2014 the same frequency content throughout. But a bell strike is NOT stationary: it starts with a burst of broadband noise, transitions to a mix of harmonics, and ends with the fundamental alone.
+      title: 'Wavelet analysis — beyond Fourier',
+      concept: `Fourier analysis assumes the signal is stationary — the same frequency content throughout. But a bell strike is NOT stationary: it starts with a burst of broadband noise, transitions to a mix of harmonics, and ends with the fundamental alone.
 
-**Wavelet analysis** addresses this by using localised basis functions (wavelets) instead of infinite sine waves. A wavelet has both a frequency AND a position in time, letting you ask: \u201CWhat frequency was present at what moment?\u201D
+**Wavelet analysis** addresses this by using localised basis functions (wavelets) instead of infinite sine waves. A wavelet has both a frequency AND a position in time, letting you ask: “What frequency was present at what moment?”
 
 The **wavelet transform** computes a scalogram: a 2D map of time vs. frequency vs. amplitude with much better time resolution than a spectrogram for transient events.
 
 The code implements a simple Morlet wavelet transform on the bell signal.`,
-      analogy: 'Fourier analysis is like describing a painting by listing which colours are used and how much of each \u2014 but not where each colour appears. Wavelet analysis describes both the colour AND its position on the canvas. For a bell strike that changes character over time, wavelets capture the full story.',
+      analogy: 'Fourier analysis is like describing a painting by listing which colours are used and how much of each — but not where each colour appears. Wavelet analysis describes both the colour AND its position on the canvas. For a bell strike that changes character over time, wavelets capture the full story.',
       storyConnection: 'If Dr. Lhamo used wavelet analysis on Sangha, she could pinpoint the exact moment when beat frequencies appeared after the strike, and how quickly each harmonic decayed. This temporal precision would help diagnose exactly how the crack affects each mode over time.',
-      checkQuestion: 'Why can\u2019t a standard FFT tell you when a frequency starts and stops?',
-      checkAnswer: 'An FFT projects the entire signal onto infinite sine waves. A sine wave has no beginning or end \u2014 it extends forever. So the FFT tells you which frequencies are present overall, but not when they appear. The uncertainty principle applies: better frequency resolution requires a longer analysis window, which sacrifices time resolution. Wavelets balance this trade-off adaptively.',
+      checkQuestion: 'Why can’t a standard FFT tell you when a frequency starts and stops?',
+      checkAnswer: 'An FFT projects the entire signal onto infinite sine waves. A sine wave has no beginning or end — it extends forever. So the FFT tells you which frequencies are present overall, but not when they appear. The uncertainty principle applies: better frequency resolution requires a longer analysis window, which sacrifices time resolution. Wavelets balance this trade-off adaptively.',
       codeIntro: 'Implement a wavelet transform for the bell signal.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -192,7 +192,7 @@ for n in range(1, 7):
             fontsize=7, color='white', alpha=0.7, ha='right')
 ax2.set_xlabel('Time (s)', fontsize=10)
 ax2.set_ylabel('Frequency (Hz)', fontsize=10)
-ax2.set_title('Wavelet Scalogram \u2014 Frequency Content Over Time', fontsize=12)
+ax2.set_title('Wavelet Scalogram — Frequency Content Over Time', fontsize=12)
 
 plt.tight_layout()
 plt.show()
@@ -210,18 +210,18 @@ print("  - Each harmonic's decay rate is visible as its band fading")`,
       successHint: 'Wavelet analysis is used in earthquake seismology, speech recognition, medical imaging (EEG/ECG), image compression (JPEG 2000), and gravitational wave detection. You just implemented a technique that helped detect black hole mergers.',
     },
     {
-      title: 'Room acoustics \u2014 reverberation in the prayer hall',
-      concept: `When a bell rings in the prayer hall, the sound does not simply travel to your ear. It bounces off walls, ceiling, floor, pillars, and statues. Each reflection arrives at a slightly different time, creating a \u201Ctail\u201D of echoes called **reverberation**.
+      title: 'Room acoustics — reverberation in the prayer hall',
+      concept: `When a bell rings in the prayer hall, the sound does not simply travel to your ear. It bounces off walls, ceiling, floor, pillars, and statues. Each reflection arrives at a slightly different time, creating a “tail” of echoes called **reverberation**.
 
-The **reverberation time** (RT60) is the time for the sound to decay by 60 dB. Concert halls aim for RT60 \u2248 2 seconds. A bathroom has RT60 \u2248 0.5 s. The Tawang prayer hall, with its stone walls and high ceiling, might have RT60 \u2248 3-4 seconds.
+The **reverberation time** (RT60) is the time for the sound to decay by 60 dB. Concert halls aim for RT60 ≈ 2 seconds. A bathroom has RT60 ≈ 0.5 s. The Tawang prayer hall, with its stone walls and high ceiling, might have RT60 ≈ 3-4 seconds.
 
-The Sabine equation predicts RT60: **RT60 = 0.161 \u00D7 V / A**, where V is room volume (m\u00B3) and A is total absorption (m\u00B2 \u00D7 absorption coefficient).
+The Sabine equation predicts RT60: **RT60 = 0.161 × V / A**, where V is room volume (m³) and A is total absorption (m² × absorption coefficient).
 
 The code simulates reverberation using a simple ray-tracing model.`,
-      analogy: 'Throw a bouncy ball in a tiled bathroom. It bounces off walls for a long time. Throw it in a room full of pillows \u2014 it stops almost immediately. Sound in a room behaves the same way: hard surfaces reflect it (long reverberation), soft surfaces absorb it (short reverberation). The prayer hall\u2019s stone walls make bell sounds linger, which the monks consider part of the bell\u2019s spiritual resonance.',
+      analogy: 'Throw a bouncy ball in a tiled bathroom. It bounces off walls for a long time. Throw it in a room full of pillows — it stops almost immediately. Sound in a room behaves the same way: hard surfaces reflect it (long reverberation), soft surfaces absorb it (short reverberation). The prayer hall’s stone walls make bell sounds linger, which the monks consider part of the bell’s spiritual resonance.',
       storyConnection: 'The prayer hall was designed for this effect. The high stone walls and ceiling create long reverberation that makes the bells sound fuller and more immersive. Buddhist architects understood intuitively what acousticians now quantify: the room is part of the instrument.',
       checkQuestion: 'Why do singers sound better in a shower than in a living room?',
-      checkAnswer: 'The shower has hard tile surfaces (high reflection, low absorption) creating RT60 \u2248 1-2 seconds. This reverberation fills in gaps between notes, smooths imperfections, and adds warmth. The living room has carpet, curtains, and furniture (high absorption) creating RT60 \u2248 0.3 s \u2014 \u201Cdry\u201D sound with no reverberant support. Professional recording studios add artificial reverb to replicate the shower effect.',
+      checkAnswer: 'The shower has hard tile surfaces (high reflection, low absorption) creating RT60 ≈ 1-2 seconds. This reverberation fills in gaps between notes, smooths imperfections, and adds warmth. The living room has carpet, curtains, and furniture (high absorption) creating RT60 ≈ 0.3 s — “dry” sound with no reverberant support. Professional recording studios add artificial reverb to replicate the shower effect.',
       codeIntro: 'Model reverberation in the Tawang prayer hall.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -253,7 +253,7 @@ absorption_units = [a * alpha for a, alpha in zip(areas, alphas)]
 
 colors = ['#6b7280', '#9ca3af', '#f59e0b', '#92400e', '#ef4444', '#3b82f6']
 axes[0, 0].barh(names, absorption_units, color=colors, height=0.5)
-axes[0, 0].set_xlabel('Absorption (m\u00B2 Sabins)', fontsize=10)
+axes[0, 0].set_xlabel('Absorption (m² Sabins)', fontsize=10)
 axes[0, 0].set_title('Where Sound Gets Absorbed', fontsize=11)
 axes[0, 0].grid(axis='x', alpha=0.3)
 axes[0, 0].tick_params(labelsize=9)
@@ -327,7 +327,7 @@ plt.tight_layout()
 plt.show()
 
 print(f"=== Tawang Prayer Hall Acoustics ===")
-print(f"Volume: {volume} m\u00B3")
+print(f"Volume: {volume} m³")
 print(f"Total absorption: {total_A:.1f} Sabins")
 print(f"RT60: {rt60:.1f} seconds")
 print()
@@ -337,8 +337,8 @@ print("The room IS part of the instrument.")`,
       successHint: 'Room acoustics is a major field of engineering. Concert hall designers use exactly these calculations to create spaces where music sounds its best. The Sabine equation is the starting point for every acoustic design project.',
     },
     {
-      title: 'Machine learning \u2014 classifying bell sounds',
-      concept: `Dr. Lhamo recorded bells from monasteries across the Himalayas. She wants to automatically identify which bell is ringing from its sound. This is a **classification** problem \u2014 the same type of problem that speech recognition and music identification solve.
+      title: 'Machine learning — classifying bell sounds',
+      concept: `Dr. Lhamo recorded bells from monasteries across the Himalayas. She wants to automatically identify which bell is ringing from its sound. This is a **classification** problem — the same type of problem that speech recognition and music identification solve.
 
 The approach:
 1. **Feature extraction**: compute the FFT of each bell recording and extract the peak frequencies and their amplitudes
@@ -346,10 +346,10 @@ The approach:
 3. **Classification**: train a simple classifier (k-nearest neighbours) that identifies the bell from its feature vector
 
 The code generates synthetic recordings of 5 different bells, extracts features, and trains a classifier.`,
-      analogy: 'You can recognise your friends by their voices without seeing them. Your brain extracts features (pitch, timbre, speaking rhythm) and matches them against a stored database. A bell classifier does the same thing: extract acoustic features and match them against known bell \u201Cfingerprints.\u201D',
-      storyConnection: 'Dr. Lhamo\u2019s research project was to catalogue and classify Himalayan bells. A trained classifier could automatically monitor the monastery\u2019s bells, detect when a bell\u2019s harmonics shift (indicating a developing crack), and alert the monks before the damage becomes severe \u2014 predictive maintenance for 350-year-old bells.',
+      analogy: 'You can recognise your friends by their voices without seeing them. Your brain extracts features (pitch, timbre, speaking rhythm) and matches them against a stored database. A bell classifier does the same thing: extract acoustic features and match them against known bell “fingerprints.”',
+      storyConnection: 'Dr. Lhamo’s research project was to catalogue and classify Himalayan bells. A trained classifier could automatically monitor the monastery’s bells, detect when a bell’s harmonics shift (indicating a developing crack), and alert the monks before the damage becomes severe — predictive maintenance for 350-year-old bells.',
       checkQuestion: 'Why use FFT features rather than the raw waveform for classification?',
-      checkAnswer: 'The raw waveform depends on the exact moment of the recording (phase), the recording level (amplitude scaling), and the exact timing of the strike. Two recordings of the same bell can look very different in the time domain. But their FFT spectra will show the same frequency peaks at the same ratios. FFT features are **invariant** to timing and phase \u2014 they capture the bell\u2019s identity regardless of when you recorded it.',
+      checkAnswer: 'The raw waveform depends on the exact moment of the recording (phase), the recording level (amplitude scaling), and the exact timing of the strike. Two recordings of the same bell can look very different in the time domain. But their FFT spectra will show the same frequency peaks at the same ratios. FFT features are **invariant** to timing and phase — they capture the bell’s identity regardless of when you recorded it.',
       codeIntro: 'Build a bell sound classifier using FFT features and KNN.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -462,12 +462,12 @@ print(f"Test accuracy: {correct}/{n_test} = {correct/n_test*100:.0f}%")
 print()
 print("Each bell has a unique 'fingerprint' in frequency space.")
 print("The classifier identifies bells by matching fingerprints.")`,
-      challenge: 'Add a 6th bell that is very similar to the \u201CLarge bell\u201D but with slightly different harmonics. How does the classifier perform? Can you improve accuracy by using more features or adjusting k?',
-      successHint: 'You just built an acoustic classifier \u2014 the same approach used in Shazam (music identification), voice assistants, and industrial monitoring. Feature extraction + classification is the universal pattern in applied machine learning.',
+      challenge: 'Add a 6th bell that is very similar to the “Large bell” but with slightly different harmonics. How does the classifier perform? Can you improve accuracy by using more features or adjusting k?',
+      successHint: 'You just built an acoustic classifier — the same approach used in Shazam (music identification), voice assistants, and industrial monitoring. Feature extraction + classification is the universal pattern in applied machine learning.',
     },
     {
-      title: 'Restoring Sangha \u2014 the capstone project',
-      concept: `Now you have all the tools. Let\u2019s design a computational pipeline to diagnose Sangha\u2019s crack and plan its restoration.
+      title: 'Restoring Sangha — the capstone project',
+      concept: `Now you have all the tools. Let’s design a computational pipeline to diagnose Sangha’s crack and plan its restoration.
 
 The pipeline:
 1. **Record** the cracked bell
@@ -479,9 +479,9 @@ The pipeline:
 
 This is a real engineering workflow. Bell restorers at the Whitechapel Bell Foundry and the Royal Eijsbouts foundry use exactly this approach.`,
       analogy: 'Restoring a cracked bell is like tuning a piano with one broken string. First you identify which notes are wrong (Fourier analysis). Then you figure out which string is broken and how (modal analysis). Then you replace or repair the string and verify it matches the correct frequency. The bell version uses metal grinding instead of string tightening, but the logic is identical.',
-      storyConnection: 'This is the culmination of Dorji\u2019s story. With the tools of acoustics, signal processing, and computational modelling, Sangha\u2019s forty years of silence could end. The physics says the bell is not dead \u2014 just out of tune. The mathematics tells you exactly how to bring it back.',
+      storyConnection: 'This is the culmination of Dorji’s story. With the tools of acoustics, signal processing, and computational modelling, Sangha’s forty years of silence could end. The physics says the bell is not dead — just out of tune. The mathematics tells you exactly how to bring it back.',
       checkQuestion: 'Why is it easier to diagnose a bell computationally than by ear alone?',
-      checkAnswer: 'The human ear perceives the composite sound \u2014 it hears \u201Cbad\u201D but cannot easily distinguish a 3 Hz beat at the 3rd harmonic from a 5 Hz beat at the 5th. Computational analysis separates each harmonic individually, measures the exact detuning in Hz, and identifies which physical mode corresponds to each harmonic. This precision is necessary because removing metal from the wrong location would make the bell worse, not better.',
+      checkAnswer: 'The human ear perceives the composite sound — it hears “bad” but cannot easily distinguish a 3 Hz beat at the 3rd harmonic from a 5 Hz beat at the 5th. Computational analysis separates each harmonic individually, measures the exact detuning in Hz, and identifies which physical mode corresponds to each harmonic. This precision is necessary because removing metal from the wrong location would make the bell worse, not better.',
       codeIntro: 'Build the complete bell restoration pipeline.',
       code: `import numpy as np
 import matplotlib.pyplot as plt
@@ -517,7 +517,7 @@ mask = (freqs > 100) & (freqs < 1400)
 
 axes[0, 0].plot(freqs[mask], fft_cracked[mask] / fft_cracked[mask].max(),
                color='#ef4444', linewidth=1)
-axes[0, 0].set_title('Step 2: FFT \u2014 Split Peaks Detected', fontsize=10, color='white')
+axes[0, 0].set_title('Step 2: FFT — Split Peaks Detected', fontsize=10, color='white')
 axes[0, 0].set_xlabel('Frequency (Hz)', fontsize=9)
 axes[0, 0].set_ylabel('Amplitude', fontsize=9)
 axes[0, 0].grid(alpha=0.3)
@@ -527,7 +527,7 @@ for n in range(1, 7):
     f_a, f_b = crack_effect[n]
     axes[0, 0].axvline(f_a, color='white', linewidth=0.3, alpha=0.3)
     beat = abs(f_b - f_a)
-    axes[0, 0].text(f_a, 0.95/n, f'\u0394f={beat:.1f}Hz', fontsize=7, color='#f59e0b')
+    axes[0, 0].text(f_a, 0.95/n, f'Δf={beat:.1f}Hz', fontsize=7, color='#f59e0b')
 
 # === STEP 3: Beat frequency diagnosis ===
 beat_freqs = [abs(crack_effect[n][1] - crack_effect[n][0]) for n in range(1, 7)]
@@ -575,7 +575,7 @@ for n_idx in range(6):
                    linewidth=2, label=f'Harmonic {n_idx+1}')
 axes[1, 0].set_xlabel('Grinding steps', fontsize=9)
 axes[1, 0].set_ylabel('Beat frequency (Hz)', fontsize=9)
-axes[1, 0].set_title('Step 5: Beat Freq \u2192 0 During Restoration', fontsize=10, color='white')
+axes[1, 0].set_title('Step 5: Beat Freq → 0 During Restoration', fontsize=10, color='white')
 axes[1, 0].legend(fontsize=7, ncol=2)
 axes[1, 0].grid(alpha=0.3)
 
@@ -605,7 +605,7 @@ axes[1, 2].text(0.5, 0.8, 'RESTORATION REPORT', fontsize=14, color='white',
                ha='center', va='center', fontweight='bold', transform=axes[1, 2].transAxes)
 axes[1, 2].text(0.5, 0.55, f'Harmonics repaired: 6/6',
                fontsize=11, color='#10b981', ha='center', transform=axes[1, 2].transAxes)
-axes[1, 2].text(0.5, 0.40, f'Max beat freq: {max(beat_freqs):.1f} Hz \u2192 0.0 Hz',
+axes[1, 2].text(0.5, 0.40, f'Max beat freq: {max(beat_freqs):.1f} Hz → 0.0 Hz',
                fontsize=11, color='#10b981', ha='center', transform=axes[1, 2].transAxes)
 axes[1, 2].text(0.5, 0.25, f'Status: SANGHA RESTORED',
                fontsize=12, color='#f59e0b', ha='center', fontweight='bold',
@@ -622,16 +622,16 @@ plt.show()
 
 print("=== SANGHA RESTORATION PIPELINE ===")
 print("1. Record cracked bell")
-print("2. FFT \u2192 identify split harmonics")
+print("2. FFT → identify split harmonics")
 print("3. Measure beat frequencies")
 print("4. Compare to target (perfect bell) frequencies")
 print("5. Simulate grinding to restore harmonics")
 print("6. Verify: clean peaks, zero beats")
 print()
-print("Dorji's bell can ring again. The physics was always there \u2014")
+print("Dorji's bell can ring again. The physics was always there —")
 print("it just needed someone who could read it.")`,
-      challenge: 'Extend the pipeline: add a cost function that measures how far the cracked bell\u2019s spectrum deviates from the target (e.g., sum of squared frequency errors). Optimise the grinding simulation to minimise this cost. Can you find the minimum grinding needed to make the bell \u201Cacceptable\u201D (beat frequencies below 1 Hz)?',
-      successHint: 'You just built a complete engineering pipeline: measurement, diagnosis, modelling, optimisation, and verification. This is how real engineering works \u2014 in aerospace, medicine, manufacturing, and yes, bell restoration. The story of Sangha is the story of applied physics.',
+      challenge: 'Extend the pipeline: add a cost function that measures how far the cracked bell’s spectrum deviates from the target (e.g., sum of squared frequency errors). Optimise the grinding simulation to minimise this cost. Can you find the minimum grinding needed to make the bell “acceptable” (beat frequencies below 1 Hz)?',
+      successHint: 'You just built a complete engineering pipeline: measurement, diagnosis, modelling, optimisation, and verification. This is how real engineering works — in aerospace, medicine, manufacturing, and yes, bell restoration. The story of Sangha is the story of applied physics.',
     },
   ];
 

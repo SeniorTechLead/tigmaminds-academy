@@ -1,13 +1,13 @@
 /* FishOxygenDiagram – Dissolved oxygen: how fish breathe, gills, warm vs cold water O₂ */
 
 const tempData = [
-  { temp: 5, do2: 12.8, color: '#3b82f6', label: '5\u00B0C' },
-  { temp: 10, do2: 11.3, color: '#06b6d4', label: '10\u00B0C' },
-  { temp: 15, do2: 10.1, color: '#22c55e', label: '15\u00B0C' },
-  { temp: 20, do2: 9.1, color: '#f59e0b', label: '20\u00B0C' },
-  { temp: 25, do2: 8.2, color: '#f97316', label: '25\u00B0C' },
-  { temp: 30, do2: 7.5, color: '#ef4444', label: '30\u00B0C' },
-  { temp: 35, do2: 6.9, color: '#dc2626', label: '35\u00B0C' },
+  { temp: 5, do2: 12.8, color: '#3b82f6', label: '5°C' },
+  { temp: 10, do2: 11.3, color: '#06b6d4', label: '10°C' },
+  { temp: 15, do2: 10.1, color: '#22c55e', label: '15°C' },
+  { temp: 20, do2: 9.1, color: '#f59e0b', label: '20°C' },
+  { temp: 25, do2: 8.2, color: '#f97316', label: '25°C' },
+  { temp: 30, do2: 7.5, color: '#ef4444', label: '30°C' },
+  { temp: 35, do2: 6.9, color: '#dc2626', label: '35°C' },
 ];
 
 const barMaxH = 100;
@@ -26,10 +26,10 @@ export default function FishOxygenDiagram() {
     >
       {/* Title */}
       <text x="296" y="20" textAnchor="middle" fontSize="14" fontWeight="700" className="fill-gray-700 dark:fill-gray-200">
-        Dissolved Oxygen \u2014 Fish Need to Breathe Too
+        Dissolved Oxygen — Fish Need to Breathe Too
       </text>
       <text x="296" y="36" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-gray-400">
-        Gills extract O\u2082 dissolved in water \u2014 but warmer water holds less
+        Gills extract O₂ dissolved in water — but warmer water holds less
       </text>
 
       {/* LEFT: Gill cross-section */}
@@ -40,7 +40,7 @@ export default function FishOxygenDiagram() {
       {/* Water flow arrow */}
       <path d="M30,110 L230,110" stroke="#3b82f6" strokeWidth="1.5" markerEnd="url(#arrowBlue)" opacity="0.6" />
       <text x="130" y="104" textAnchor="middle" fontSize="8" className="fill-blue-500 dark:fill-blue-400">
-        Water flow (O\u2082 rich) \u2192
+        Water flow (O₂ rich) →
       </text>
 
       {/* Gill arch */}
@@ -61,7 +61,7 @@ export default function FishOxygenDiagram() {
         );
       })}
       <text x="130" y="205" textAnchor="middle" fontSize="8" className="fill-red-500 dark:fill-red-400">
-        \u2190 Blood flow (countercurrent)
+        ← Blood flow (countercurrent)
       </text>
 
       {/* O₂ diffusion arrows */}
@@ -69,9 +69,9 @@ export default function FishOxygenDiagram() {
         const x = 81 + i * 44;
         return (
           <g key={`o2-${i}`}>
-            <text x={x} y="158" textAnchor="middle" fontSize="7" fontWeight="700" className="fill-green-600 dark:fill-green-400">O\u2082</text>
+            <text x={x} y="158" textAnchor="middle" fontSize="7" fontWeight="700" className="fill-green-600 dark:fill-green-400">O₂</text>
             <line x1={x} y1="160" x2={x} y2="170" stroke="#22c55e" strokeWidth="1" strokeDasharray="2,2" />
-            <text x={x} y="178" textAnchor="middle" fontSize="6" className="fill-green-500 dark:fill-green-400">\u2193</text>
+            <text x={x} y="178" textAnchor="middle" fontSize="6" className="fill-green-500 dark:fill-green-400">↓</text>
           </g>
         );
       })}
@@ -79,10 +79,10 @@ export default function FishOxygenDiagram() {
       {/* Key insight */}
       <rect x="20" y="218" width="225" height="35" rx="5" className="fill-green-50 dark:fill-green-950" stroke="#22c55e" strokeWidth="1" />
       <text x="132" y="234" textAnchor="middle" fontSize="8" className="fill-green-700 dark:fill-green-300">
-        Countercurrent flow extracts up to 80\u201390%
+        Countercurrent flow extracts up to 80–90%
       </text>
       <text x="132" y="246" textAnchor="middle" fontSize="8" className="fill-green-700 dark:fill-green-300">
-        of dissolved O\u2082 \u2014 far better than lungs (~25%)
+        of dissolved O₂ — far better than lungs (~25%)
       </text>
 
       {/* RIGHT: Temperature vs DO bar chart */}
@@ -139,7 +139,7 @@ export default function FishOxygenDiagram() {
       {/* Bottom summary */}
       <rect x="80" y="300" width="432" height="45" rx="6" className="fill-amber-50 dark:fill-amber-950" stroke="#f59e0b" strokeWidth="1" />
       <text x="296" y="318" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-amber-700 dark:fill-amber-300">
-        When dissolved O\u2082 drops below ~4 mg/L, fish gasp at the surface or jump
+        When dissolved O₂ drops below ~4 mg/L, fish gasp at the surface or jump
       </text>
       <text x="296" y="334" textAnchor="middle" fontSize="9" className="fill-amber-600 dark:fill-amber-400">
         Hot summers + pollution + algal blooms = less oxygen = stressed fish

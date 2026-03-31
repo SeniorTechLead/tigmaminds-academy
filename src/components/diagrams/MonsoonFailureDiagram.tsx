@@ -70,7 +70,7 @@ const MonsoonFailureDiagram = () => {
         {/* Title */}
         <text x="310" y="22" textAnchor="middle"
           className="title-text fill-slate-700 dark:fill-slate-200">
-          When the Monsoon Fails \u2014 El Ni\u00F1o and Its Consequences
+          When the Monsoon Fails — El Niño and Its Consequences
         </text>
 
         {/* ===== TOP: EL NINO MECHANISM ===== */}
@@ -79,7 +79,7 @@ const MonsoonFailureDiagram = () => {
 
         <text x="310" y="52" textAnchor="middle"
           className="section-title fill-red-700 dark:fill-red-300">
-          El Ni\u00F1o: The Pacific Ocean\u2019s Disruption
+          El Niño: The Pacific Ocean’s Disruption
         </text>
 
         {/* Pacific Ocean simplified */}
@@ -111,11 +111,11 @@ const MonsoonFailureDiagram = () => {
           className="fill-red-300 dark:fill-red-700 warm-pulse" opacity="0.7" />
         <text x="295" y="83" textAnchor="middle"
           className="small-text fill-red-900 dark:fill-red-200" fontWeight="600">
-          EL NI\u00D1O: Water warms
+          EL NIÑO: Water warms
         </text>
         <text x="295" y="95" textAnchor="middle"
           className="small-text fill-red-900 dark:fill-red-200">
-          +2\u20133\u00B0C above normal
+          +2–3°C above normal
         </text>
         <text x="295" y="107" textAnchor="middle"
           className="small-text fill-red-800 dark:fill-red-300">
@@ -135,7 +135,7 @@ const MonsoonFailureDiagram = () => {
         </text>
         <text x="487" y="107" textAnchor="middle"
           className="small-text fill-amber-700 dark:fill-amber-300">
-          El Ni\u00F1o: rising air shifts to E. Pacific
+          El Niño: rising air shifts to E. Pacific
         </text>
 
         {/* Chain of effects */}
@@ -179,7 +179,7 @@ const MonsoonFailureDiagram = () => {
           WEAK monsoon
         </text>
 
-        {/* Bottom left: Monsoon fails \u2014 Drought */}
+        {/* Bottom left: Monsoon fails — Drought */}
         <text x="177" y="228" textAnchor="middle"
           className="section-title fill-slate-700 dark:fill-slate-200">
           Too Little Rain: Drought
@@ -201,35 +201,35 @@ const MonsoonFailureDiagram = () => {
 
         <text x="180" y="258" textAnchor="middle"
           className="label-text fill-amber-800 dark:fill-amber-200" fontWeight="600">
-          El Ni\u00F1o years:
+          El Niño years:
         </text>
         <text x="240" y="275" textAnchor="end"
           className="small-text fill-amber-700 dark:fill-amber-300">
-          \u2022 1877\u201378: Great Famine (5.5M+ died)
+          • 1877–78: Great Famine (5.5M+ died)
         </text>
         <text x="240" y="289" textAnchor="end"
           className="small-text fill-amber-700 dark:fill-amber-300">
-          \u2022 2002: monsoon 19% below normal
+          • 2002: monsoon 19% below normal
         </text>
         <text x="240" y="303" textAnchor="end"
           className="small-text fill-amber-700 dark:fill-amber-300">
-          \u2022 2009: worst drought in 37 years
+          • 2009: worst drought in 37 years
         </text>
         <text x="240" y="317" textAnchor="end"
           className="small-text fill-amber-700 dark:fill-amber-300">
-          \u2022 2015: another El Ni\u00F1o drought
+          • 2015: another El Niño drought
         </text>
 
         <text x="177" y="345" textAnchor="middle"
           className="small-text fill-amber-700 dark:fill-amber-300">
-          India\u2019s GDP drops ~2% in drought years.
+          India’s GDP drops ~2% in drought years.
         </text>
         <text x="177" y="358" textAnchor="middle"
           className="small-text fill-amber-700 dark:fill-amber-300">
           600M+ farmers depend on monsoon rain.
         </text>
 
-        {/* Bottom right: Too much rain \u2014 Floods */}
+        {/* Bottom right: Too much rain — Floods */}
         <text x="462" y="228" textAnchor="middle"
           className="section-title fill-slate-700 dark:fill-slate-200">
           Too Much Rain: Floods
@@ -251,28 +251,28 @@ const MonsoonFailureDiagram = () => {
 
         <text x="480" y="258" textAnchor="middle"
           className="label-text fill-blue-800 dark:fill-blue-200" fontWeight="600">
-          La Ni\u00F1a / active years:
+          La Niña / active years:
         </text>
         <text x="540" y="275" textAnchor="end"
           className="small-text fill-blue-700 dark:fill-blue-300">
-          \u2022 2022: Assam floods, 5.5M affected
+          • 2022: Assam floods, 5.5M affected
         </text>
         <text x="540" y="289" textAnchor="end"
           className="small-text fill-blue-700 dark:fill-blue-300">
-          \u2022 2020: Brahmaputra highest in 18yr
+          • 2020: Brahmaputra highest in 18yr
         </text>
         <text x="540" y="303" textAnchor="end"
           className="small-text fill-blue-700 dark:fill-blue-300">
-          \u2022 2017: 1/3 of Bangladesh flooded
+          • 2017: 1/3 of Bangladesh flooded
         </text>
         <text x="540" y="317" textAnchor="end"
           className="small-text fill-blue-700 dark:fill-blue-300">
-          \u2022 Climate change \u2192 more extremes
+          • Climate change → more extremes
         </text>
 
         <text x="462" y="345" textAnchor="middle"
           className="small-text fill-blue-700 dark:fill-blue-300">
-          Extreme rain events increasing 3\u00D7 since 1950.
+          Extreme rain events increasing 3× since 1950.
         </text>
         <text x="462" y="358" textAnchor="middle"
           className="small-text fill-blue-700 dark:fill-blue-300">
@@ -285,7 +285,7 @@ const MonsoonFailureDiagram = () => {
 
         <text x="310" y="398" textAnchor="middle"
           className="section-title fill-indigo-700 dark:fill-indigo-200">
-          Forecasting the Monsoon \u2014 The Hardest Weather Problem
+          Forecasting the Monsoon — The Hardest Weather Problem
         </text>
 
         <rect x="42" y="410" width="165" height="44" rx="3"
@@ -296,11 +296,11 @@ const MonsoonFailureDiagram = () => {
         </text>
         <text x="124" y="439" textAnchor="middle"
           className="small-text fill-indigo-600 dark:fill-indigo-300">
-          April: predict Jun\u2013Sep rain
+          April: predict Jun–Sep rain
         </text>
         <text x="124" y="449" textAnchor="middle"
           className="small-text fill-indigo-600 dark:fill-indigo-300">
-          Accuracy: \u00B15% of actual
+          Accuracy: ±5% of actual
         </text>
 
         <rect x="225" y="410" width="165" height="44" rx="3"
@@ -311,7 +311,7 @@ const MonsoonFailureDiagram = () => {
         </text>
         <text x="307" y="439" textAnchor="middle"
           className="small-text fill-indigo-600 dark:fill-indigo-300">
-          Pacific SST (El Ni\u00F1o/La Ni\u00F1a)
+          Pacific SST (El Niño/La Niña)
         </text>
         <text x="307" y="449" textAnchor="middle"
           className="small-text fill-indigo-600 dark:fill-indigo-300">
@@ -322,7 +322,7 @@ const MonsoonFailureDiagram = () => {
           className="fill-indigo-100 dark:fill-indigo-800/30" />
         <text x="493" y="425" textAnchor="middle"
           className="label-text fill-indigo-700 dark:fill-indigo-200" fontWeight="600">
-          Why It\u2019s Hard
+          Why It’s Hard
         </text>
         <text x="493" y="439" textAnchor="middle"
           className="small-text fill-indigo-600 dark:fill-indigo-300">
@@ -340,7 +340,7 @@ const MonsoonFailureDiagram = () => {
 
         <text x="310" y="496" textAnchor="middle"
           className="small-text fill-indigo-600 dark:fill-indigo-300">
-          Getting the forecast right \u2014 even by a few percent \u2014 can save millions of tonnes of crops and thousands of lives.
+          Getting the forecast right — even by a few percent — can save millions of tonnes of crops and thousands of lives.
         </text>
       </svg>
     </div>
