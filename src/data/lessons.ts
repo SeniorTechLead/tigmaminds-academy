@@ -199,6 +199,13 @@ plt.show()  # What does this plot tell you?`,
         { slug: 'rainbow-fish', reason: 'Explores how water and thin films split light into colours — the same spectrum you learned about here' },
         { slug: 'the-girl-who-painted-rain', reason: 'Connects light, colour, and pigment mixing — what happens when you go from physics to art' },
       ],
+      quiz: [
+        { question: 'What is white light made of?', options: ['A single wavelength of light', 'A mixture of all visible colours', 'Only red and blue light', 'Invisible electromagnetic waves'], answer: 1 },
+        { question: 'Why does the sky appear blue rather than violet?', options: ['Blue light has the longest wavelength', 'The atmosphere filters out violet light completely', 'The sun produces less violet light and our eyes are less sensitive to it', 'Blue is the only colour that scatters'], answer: 2 },
+        { question: 'What is Rayleigh scattering?', options: ['Light bending through a prism', 'Short-wavelength light bouncing off air molecules in random directions', 'Light reflecting off water surfaces', 'Sound waves bouncing off mountains'], answer: 1 },
+        { question: 'Why do sunsets appear orange and red?', options: ['The sun changes colour in the evening', 'The atmosphere adds orange pigment to the light', 'Sunlight travels through much more atmosphere at sunset, scattering away blue and green', 'Orange light travels faster than blue light'], answer: 2 },
+        { question: 'How much more does blue light scatter compared to red light?', options: ['About the same amount', 'About 2 times more', 'About 5-6 times more', 'About 100 times more'], answer: 2 },
+      ],
     },
   },
   {
@@ -377,6 +384,13 @@ print(f"Danger level: {'EXTREME' if storm_surge > 3 else 'HIGH'}")`,
         { slug: 'the-little-boat', reason: 'Fluid dynamics and buoyancy on the Brahmaputra — how boats survive river currents and floods' },
         { slug: 'monsoon-home', reason: 'Architecture designed for monsoon climate — the human response to the storms you just learned about' },
       ],
+      quiz: [
+        { question: 'What powers a cyclone?', options: ['Cold ocean water freezing', 'Warm ocean water evaporating and condensing, releasing heat', 'Earthquakes under the ocean', 'Wind from nearby mountains'], answer: 1 },
+        { question: 'Why does a cyclone spin?', options: ['Ocean currents push it in circles', 'The Coriolis effect from Earth\'s rotation deflects the inflowing winds', 'Lightning inside the storm creates rotation', 'The eye of the storm acts like a drain'], answer: 1 },
+        { question: 'What causes the most deaths during a cyclone?', options: ['Lightning strikes', 'High winds', 'Storm surge — a wall of ocean water pushed inland', 'Tornadoes inside the cyclone'], answer: 2 },
+        { question: 'Why can\'t cyclones form at the equator?', options: ['The ocean is too cold at the equator', 'The Coriolis effect is zero at the equator, so winds cannot be deflected into a spin', 'There is too much rain at the equator', 'The atmosphere is too thin at the equator'], answer: 1 },
+        { question: 'What makes the Bay of Bengal especially dangerous for storm surge?', options: ['It has the deepest water in the world', 'Its shallow seabed and funnel shape amplify the surge', 'It has no islands to block storms', 'The water is warmer than any other ocean'], answer: 1 },
+      ],
     },
   },
   {
@@ -551,6 +565,13 @@ print(f"A snow leopard thrives here. You would gasp.")`,
         { slug: 'red-panda-mask', reason: 'Another high-altitude animal with cold-weather adaptations — fur, coloration, and thermoregulation' },
         { slug: 'turtle-mountain', reason: 'A different approach to mountains — slow, steady, and ectothermic vs the snow leopard’s speed' },
       ],
+      quiz: [
+        { question: 'Why is it hard to breathe at high altitude?', options: ['There is less oxygen in the air', 'Air pressure is lower so there are fewer oxygen molecules per breath', 'The air is too cold to breathe', 'Wind blows the oxygen away'], answer: 1 },
+        { question: 'What percentage of oxygen is in the air at the top of Mount Everest?', options: ['About 5%', 'About 10%', 'About 20.9% — the same as sea level', 'About 50%'], answer: 2 },
+        { question: 'Why are mountains cold?', options: ['They are closer to space', 'Rising air expands and cools — temperature drops about 6.5°C per 1,000 m', 'Snow on the peaks makes the air cold', 'The sun does not reach mountain tops'], answer: 1 },
+        { question: 'How does the body adapt to thin air over days?', options: ['Lungs grow larger', 'The body produces more red blood cells and breathes faster', 'Bones become lighter', 'The heart slows down to save energy'], answer: 1 },
+        { question: 'At 5,500 m altitude, roughly how much oxygen do you get compared to sea level?', options: ['About 90%', 'About 75%', 'About 50%', 'About 25%'], answer: 2 },
+      ],
     },
   },
   {
@@ -708,6 +729,13 @@ print(f"Straight-line distance: {total:.0f} km")`,
         { slug: 'seven-sisters', reason: 'Geography of all seven NE Indian states — maps, biodiversity, and why each state is unique' },
         { slug: 'postman-hills', reason: 'Route optimisation through Meghalaya’s hills — graph theory applied to real geography' },
         { slug: 'silk-route', reason: 'Trade routes as geographic networks — how maps shaped commerce across centuries' },
+      ],
+      quiz: [
+        { question: 'What do latitude and longitude measure?', options: ['Height above sea level and depth below it', 'North-south position from the equator and east-west position from London', 'Distance between two cities', 'The size of a country'], answer: 1 },
+        { question: 'Why do all flat maps distort the Earth?', options: ['Map makers are not accurate enough', 'Earth is round and maps are flat — you cannot flatten a sphere without distortion', 'Paper shrinks when printed', 'Compasses interfere with map accuracy'], answer: 1 },
+        { question: 'What is GIS?', options: ['A type of satellite', 'A system that stores map data in layers that can be combined to answer spatial questions', 'A method of hand-drawing maps', 'A tool for measuring elevation only'], answer: 1 },
+        { question: 'What trade-off do map projections make?', options: ['They all preserve area but distort colour', 'Different projections distort different things — shape, area, distance, or direction', 'They only work for small areas', 'They require GPS to be accurate'], answer: 1 },
+        { question: 'What is a common example of GIS that most people already use?', options: ['A printed atlas', 'Google Maps', 'A magnetic compass', 'A globe'], answer: 1 },
       ],
     },
   },
@@ -875,6 +903,13 @@ print(f"That is {carbon * 3.67:.0f} kg of CO2 pulled from the air!")`,
         { slug: 'girl-grew-forest', reason: 'One person planted a forest on a Brahmaputra sandbar — reforestation and carbon sequestration in action' },
         { slug: 'bridge-that-grew', reason: 'Living root bridges of Meghalaya — another story of trees as engineering solutions' },
         { slug: 'wild-orchids-trees', reason: 'Orchids that grow on banyan branches — epiphytic ecology and symbiosis' },
+      ],
+      quiz: [
+        { question: 'Where does a tree get most of its mass?', options: ['From the soil through its roots', 'From water absorbed by the roots', 'From carbon dioxide in the air, converted by photosynthesis', 'From sunlight energy stored in leaves'], answer: 2 },
+        { question: 'How does a banyan tree expand into a forest-sized canopy?', options: ['Its trunk grows wider and wider', 'It drops seeds that grow into new trees nearby', 'Aerial roots grow down from branches to become new trunks', 'Branches fuse together underground'], answer: 2 },
+        { question: 'Why do ancient banyan trees matter for climate?', options: ['They produce more oxygen than young trees', 'They store huge amounts of carbon and absorb more per year than young trees', 'They block wind and reduce storms', 'They attract rain clouds'], answer: 1 },
+        { question: 'What is photosynthesis?', options: ['Trees absorbing water from the ground', 'The process of capturing CO₂ from air and converting it into solid wood using sunlight', 'Trees releasing oxygen at night', 'Roots breaking down rocks into soil'], answer: 1 },
+        { question: 'What are aerial roots?', options: ['Roots that grow underground and spread very far', 'Roots that grow from branches downward and become new supporting trunks', 'Roots that absorb moisture from the air', 'Dead branches that touch the ground'], answer: 1 },
       ],
     },
   },
@@ -1084,6 +1119,7 @@ In Manipur, they still say that the best weavers are the ones who sing while the
     stem: { title: 'Mathematics of Weaving & Patterns', description: 'The mathematics of weaving patterns.', icon: Sparkles, color: 'from-amber-400 to-orange-500', skills: ['Identify mathematical patterns in traditional weaving: symmetry, tessellation, and repetition', 'Calculate pattern ratios and geometric proportions in woven designs', 'Analyze the relationship between weave structure and material strength', 'Use modular arithmetic to model repeating pattern cycles'], project: {
         title: 'Generate Weaving Patterns Algorithmically',
         description: 'Write a program that generates traditional Northeast Indian weaving patterns using mathematical rules for symmetry and repetition.',
+        outputDiagram: 'WeavePatternDiagram',
         steps: [
           'Study 5-6 traditional Assamese weaving patterns and identify their mathematical structure',
           'Define a grid system where each cell is either warp-up or weft-up',
@@ -1142,6 +1178,32 @@ In Manipur, they still say that the best weavers are the ones who sing while the
           keyIdea: "Weaving and music share the same mathematics — repeating counting patterns. The Jacquard loom's punched cards for weaving patterns directly inspired the design of the first computers.",
           diagram: 'RhythmPlayerDiagram',
         },
+        {
+          title: "Binary in Bamboo — Every Crossing Is a 1 or a 0",
+          paragraphs: [
+            "Look at any woven surface — a basket, a mat, a piece of cloth. At every single crossing point, a strip is either **over** or **under**. There is no third option. No 'halfway.' No 'sort of over.' It is always one or the other. That is exactly two choices per crossing.",
+            "Now think about how a computer stores information. Every piece of data — every photo, every song, every message you have ever sent — is stored as a long sequence of **1s and 0s**. Each digit is called a **bit**, and it can only be one of two values: 1 or 0. On or off. Yes or no. Over or under.",
+            "See the connection? A woven basket is a physical sequence of binary choices. If you label every 'over' crossing as **1** and every 'under' crossing as **0**, the entire pattern of a basket can be written as a grid of 1s and 0s — a **binary code**. A basket with 20 strips each way has 400 crossing points, which means 400 bits of information. That is enough to store a short text message.",
+            "This is not just a metaphor. The Jacquard loom (from the previous concept) used punched cards where each hole meant 'thread up' (1) and no hole meant 'thread down' (0). Charles Babbage saw these cards and realised: if you can encode a weaving pattern in binary, you can encode *any* calculation in binary. The first computers used the same binary logic — and every computer today still does.",
+            "**Try this:** Write the first row of a plain weave as binary: over-under-over-under becomes 1-0-1-0. Now write a twill row: over-over-under becomes 1-1-0-1-1-0. You have just written two lines of binary code — and you did it by describing bamboo strips.",
+            "**Check yourself:** A basket with 30 strips in each direction has how many crossing points (bits)? (Answer: 30 x 30 = 900 bits. That is more than enough binary data to encode the entire English alphabet twice over.)",
+          ],
+          keyIdea: "Every crossing in a weave is a binary choice — over (1) or under (0). A woven basket is literally a binary code written in bamboo, and this same binary logic is the foundation of all modern computing.",
+          diagram: 'WeavePatternDiagram',
+        },
+        {
+          title: "Strength from Pattern — Why Woven Is Stronger Than Solid",
+          paragraphs: [
+            "Here is a puzzle. Take a single bamboo strip — thin, flexible, easy to snap. Now weave 20 of these flimsy strips together into a basket. The basket can hold 5 kg of rice without bending. How did weak pieces become a strong container?",
+            "The secret is **load distribution**. When you place a heavy object on a woven surface, the weight does not fall on one strip alone. It spreads across every strip that touches the object, and each of those strips passes its share of the load to the strips crossing underneath them, which pass it to the next set, and so on. By the time the force reaches the bottom of the basket, it has been divided among dozens of strips. No single strip carries enough weight to break.",
+            "**Try this right now:** Hold a single sheet of paper flat between your hands and place a small book on it. The paper sags and the book falls through. Now weave 10 paper strips into a simple over-under grid and try again. The woven grid holds the book — even though the total amount of paper is the same. The difference is not the material. It is the **structure**.",
+            "This is why a woven bamboo basket is stronger than a solid bamboo sheet of the same thickness. A solid sheet has a single weak point: if one spot cracks, the crack spreads across the whole sheet like a tear in cloth. But in a woven structure, each strip is independent. If one strip breaks, the others hold. The crack cannot spread because there is nothing connecting the strips except friction at the crossing points. Engineers call this **damage tolerance** — the ability to keep working even when part of the structure fails.",
+            "The same principle appears everywhere in modern engineering. **Carbon fibre** — the ultra-strong material used in racing cars, aircraft, and spacecraft — is not a solid sheet of carbon. It is **woven carbon threads**, interlaced just like Thoibi's bamboo strips. Kevlar body armour is woven. Rope bridges are woven. Even steel cable is made of thin wires twisted together. In every case, weak individual threads become strong when woven — because the pattern distributes the load and stops cracks from spreading.",
+            "**Check yourself:** Why can you tear a sheet of paper easily but not rip apart a woven paper mat made from strips of the same paper? (Answer: in the sheet, a tear only has to cross one layer of material. In the woven mat, every strip runs in a different direction and must be broken individually — and the interlocking friction at each crossing point resists pulling.)",
+          ],
+          keyIdea: "Weaving makes weak strips strong by distributing load across many crossing points and preventing cracks from spreading. The same principle makes carbon fibre, Kevlar, and steel cable far stronger than solid sheets of the same material.",
+          diagram: 'SquareVsTriangleDiagram',
+        },
       ],
       vocabulary: [
         ['Plain weave', 'The simplest weaving pattern — over one, under one, repeating. Creates a grid of tiny squares, like a chessboard'],
@@ -1185,6 +1247,13 @@ for row in range(rows):
       nextLessons: [
         { slug: 'the-magic-japi-hat', reason: 'The japi hat uses a triaxial weave at 60° — a more advanced version of the same interlacing you learned about here' },
         { slug: 'honey-hunters-lesson', reason: 'Bees build hexagonal honeycomb — nature\'s own tessellation, using the same geometry that appears in woven baskets' },
+      ],
+      quiz: [
+        { question: 'What is an algorithm?', options: ['A type of computer chip', 'A list of steps followed in order to complete a task', 'A mathematical equation', 'A programming language'], answer: 1 },
+        { question: 'Why does weaving turn weak strips into a strong structure?', options: ['The strips are glued together', 'Each crossing point locks the strips in place, creating rigidity', 'The pattern makes the material heavier', 'Weaving compresses the fibres permanently'], answer: 1 },
+        { question: 'What shape in weaving creates the strongest structures?', options: ['Circles', 'Squares', 'Triangles', 'Hexagons'], answer: 2 },
+        { question: 'What connection exists between weaving and early computers?', options: ['Computers were first built to design weaving patterns', 'The Jacquard loom\'s punched cards for weaving patterns inspired computer design', 'Weaving looms used electricity before computers did', 'There is no connection between weaving and computers'], answer: 1 },
+        { question: 'What three numbers define a basic weaving pattern?', options: ['Width, height, and depth', 'Over how many, under how many, and shift by how many', 'Number of threads, number of colours, and number of rows', 'Length, tension, and angle'], answer: 1 },
       ],
     },
   },
@@ -1378,6 +1447,13 @@ print(f"         for about {flower_distance}m")
         { slug: 'firefly-festival-of-majuli', reason: 'Another insect story — fireflies communicate with light flashes, just as bees communicate with dances' },
         { slug: 'girl-grew-forest', reason: 'Explores what happens to ecosystems when habitats grow — and why pollinators are the first to benefit' },
       ],
+      quiz: [
+        { question: 'Why do hexagons tessellate but pentagons do not?', options: ['Hexagons are bigger', 'Hexagon angles (120°) divide evenly into 360°', 'Pentagons have too many sides', 'Hexagons are stronger'], answer: 1 },
+        { question: 'How many lines of symmetry does a regular hexagon have?', options: ['3', '4', '6', '8'], answer: 2 },
+        { question: 'What geometric shape is the japi hat?', options: ['A sphere', 'A cone', 'A cube', 'A cylinder'], answer: 1 },
+        { question: 'What is the formula for a cone\'s lateral surface area?', options: ['πr²', 'πr × slant height', '2πrh', 'πr²h'], answer: 1 },
+        { question: 'Why are triangles used in structures like bridges and weaving?', options: ['They are the prettiest shape', 'They are the simplest polygon that cannot be deformed without changing side lengths', 'They use the least material', 'They tessellate better than squares'], answer: 1 },
+      ],
     },
   },
   {
@@ -1451,6 +1527,7 @@ And somewhere in the music of bamboo and wind, you can hear the echo of two lone
     stem: { title: 'Resonance & Harmonics', description: 'Bamboo groves that sing — resonance and Aeolian sound.', icon: Music, color: 'from-emerald-400 to-teal-500', skills: ['Understand resonance, natural frequency, and harmonic overtones', 'Analyze standing wave patterns in tubes and strings', 'Calculate resonant frequencies from tube length and diameter', 'Model how damping affects vibration amplitude over time'], project: {
         title: 'Build a Resonant Frequency Calculator for Bamboo Tubes',
         description: 'Calculate and visualize the fundamental and harmonic frequencies of bamboo tubes of different lengths, and compare predictions with actual flute notes.',
+        outputDiagram: 'BambooResonanceDiagram',
         steps: [
           'Research the physics of open and closed tube resonance',
           'Measure or research the inner diameter and length of various bamboo flutes',
@@ -1564,6 +1641,13 @@ print(f"Thinner object = higher pitch (same wind)")`,
         { slug: 'woodpeckers-drum', reason: 'Another story about how animals handle mechanical forces — the woodpecker absorbs impact that would destroy a human skull' },
         { slug: 'girl-who-spoke-to-elephants', reason: 'Elephants communicate through ground vibrations at infrasonic frequencies — the same wave physics, applied to seismic communication' },
         { slug: 'bamboo-flute-of-nagaland', reason: 'From the physics of bamboo sound to actually building and playing a bamboo flute — hands-on acoustics' },
+      ],
+      quiz: [
+        { question: 'Why does bamboo sing in the wind?', options: ['Wind vibrates the leaves like guitar strings', 'Alternating vortices create pressure pulses at a specific frequency', 'Air gets trapped inside the hollow bamboo', 'The bamboo bends and snaps back, creating sound'], answer: 1 },
+        { question: 'What is resonance?', options: ['Sound echoing off walls', 'When a forcing frequency matches an object\'s natural frequency, causing vibration to grow dramatically', 'The speed of sound in different materials', 'A type of musical instrument'], answer: 1 },
+        { question: 'What determines the fundamental frequency of a bamboo tube?', options: ['The thickness of the bamboo wall', 'The formula f = v / 2L — speed of sound divided by twice the tube length', 'The colour of the bamboo', 'The number of nodes on the bamboo'], answer: 1 },
+        { question: 'What gives each instrument its unique sound (timbre)?', options: ['The material it is made of alone', 'The unique mixture of harmonics produced on top of the fundamental frequency', 'The volume at which it is played', 'The size of the room it is played in'], answer: 1 },
+        { question: 'How does bamboo\'s strength-to-weight ratio compare to steel?', options: ['About the same', 'About 3 times better', 'About 11 times better', 'About 100 times better'], answer: 2 },
       ],
     },
   },
@@ -1740,6 +1824,13 @@ print(f"more g-force but feels {hu_force/wp_force:.0f}x less force!")`,
         { slug: 'honey-hunters-lesson', reason: 'Another animal with remarkable biology — bees build structures and communicate in ways that inspire human engineering' },
         { slug: 'bamboo-taught-wind', reason: 'Bamboo bends without breaking in the wind — a different strategy for handling force, but the same physics principle' },
         { slug: 'girl-who-spoke-to-elephants', reason: 'Elephants communicate through ground vibrations — another example of animals using physics in ways humans are just beginning to understand' },
+      ],
+      quiz: [
+        { question: 'How many g-forces does a woodpecker experience when pecking?', options: ['About 10 g', 'About 100 g', 'About 1,200 g', 'About 10,000 g'], answer: 2 },
+        { question: 'Why does a woodpecker\'s small brain help it survive impacts?', options: ['Small brains are harder than large brains', 'Force = mass × acceleration, so a 2-gram brain produces far less force than a 1,400-gram human brain at the same deceleration', 'Small brains don\'t feel pain', 'Small brains have more protective fluid around them'], answer: 1 },
+        { question: 'What does the hyoid bone do in a woodpecker?', options: ['It helps the bird sing', 'It wraps around the skull like a seatbelt, distributing impact force', 'It strengthens the beak for pecking', 'It protects the eyes during impact'], answer: 1 },
+        { question: 'Why do woodpeckers always strike straight on?', options: ['Their necks can only move in one direction', 'Straight strikes eliminate dangerous rotational forces that cause brain injury', 'They need to hit the same spot repeatedly', 'It makes the loudest sound for communication'], answer: 1 },
+        { question: 'What lesson do engineers take from woodpecker skull design?', options: ['Use one very thick layer of cushioning', 'Use multiple layers of different materials — which absorbs impact better than one thick cushion', 'Make helmets as light as possible', 'Copy the beak shape for better aerodynamics'], answer: 1 },
       ],
     },
   },
@@ -1940,6 +2031,13 @@ print(f"Signal length: {len(signal)} samples")
         { slug: 'frogs-sing-rain', reason: 'Another animal that communicates with sound — frogs use frequency and timing to find mates after rain' },
         { slug: 'river-dolphins-secret', reason: 'Dolphins use sonar (echolocation) to navigate murky river water — sound as a sensor, not just communication' },
         { slug: 'cuckoo-calls-dawn', reason: 'Bird calls follow circadian rhythms — another layer of information encoded in animal sound' },
+      ],
+      quiz: [
+        { question: 'What is infrasound?', options: ['Very loud sound', 'Sound below 20 Hz — too low for humans to hear', 'Sound that only travels underground', 'Sound produced by electronic devices'], answer: 1 },
+        { question: 'Why can elephant calls travel up to 10 km?', options: ['Elephants have very loud voices', 'Long wavelengths (low frequency) lose less energy and bend around obstacles', 'The calls bounce off trees like echoes', 'Elephants only call when the wind is blowing in the right direction'], answer: 1 },
+        { question: 'How do elephants detect calls that travel through the ground?', options: ['Through their ears pressed to the ground', 'Through pressure sensors in their feet, using triangulation', 'By feeling vibrations in their tusks', 'They cannot detect ground vibrations'], answer: 1 },
+        { question: 'What is a spectrogram?', options: ['A photograph of an elephant', 'A picture showing frequency over time — used to classify sounds', 'A device that measures wind speed', 'A type of satellite image'], answer: 1 },
+        { question: 'How do computers learn to classify elephant calls?', options: ['A human programs every rule by hand', 'By training on thousands of labelled spectrogram examples', 'By recording and playing back sounds', 'Computers cannot classify animal sounds'], answer: 1 },
       ],
     },
   },
@@ -2161,6 +2259,13 @@ for step in range(20):
         { slug: 'fireflies-dont-burn', reason: 'A deeper dive into bioluminescence — explores other glowing organisms beyond fireflies' },
         { slug: 'stars-ziro-valley', reason: 'Another story about light and darkness — how light pollution steals the stars, just as it threatens firefly habitats' },
       ],
+      quiz: [
+        { question: 'How do fireflies produce light?', options: ['They have tiny light bulbs in their bodies', 'Through a chemical reaction: luciferin + oxygen produces light', 'By reflecting moonlight with special scales', 'By generating electricity like an electric eel'], answer: 1 },
+        { question: 'How efficient is a firefly\'s light production compared to a light bulb?', options: ['About the same efficiency', 'The firefly is about 2 times more efficient', 'The firefly is about 98% efficient vs 5% for a light bulb', 'Light bulbs are more efficient'], answer: 2 },
+        { question: 'Why do fireflies flash in specific patterns?', options: ['To scare away predators', 'Each species has a unique flash pattern to communicate with its own kind', 'They flash randomly without any pattern', 'To attract moths for food'], answer: 1 },
+        { question: 'How do thousands of fireflies synchronize their flashing?', options: ['A leader firefly coordinates the group', 'Each firefly nudges its timing toward its neighbours until all align', 'They follow the rhythm of the wind', 'They use sound to coordinate'], answer: 1 },
+        { question: 'What determines the colour of light from an LED?', options: ['The size of the LED', 'The voltage applied to it', 'The size of the energy drop when electrons move from high to low energy', 'The material of the wire connecting it'], answer: 2 },
+      ],
     },
   },
   {
@@ -2232,6 +2337,7 @@ The river dolphin had taught him her secret: the world speaks to those who close
       project: {
         title: 'Build a Sonar Range Finder',
         description: 'Wire an ultrasonic sensor to an Arduino with a servo motor to build a scanning sonar that maps objects in a room — displayed as a radar sweep on screen.',
+        outputDiagram: 'DolphinArduinoSensorDiagram',
         steps: [
           'Learn how dolphins use echolocation (send click, time the echo)',
           'Wire an HC-SR04 ultrasonic sensor to Arduino',
@@ -2350,6 +2456,13 @@ plt.show()  # What shape is the room?`,
         { slug: 'the-little-boat', reason: 'Explores water physics and navigation — the environment where dolphin sonar operates' },
         { slug: 'bamboo-flute-of-nagaland', reason: 'Dives deeper into sound waves, frequency, and resonance — the physics behind the dolphin’s clicks' },
         { slug: 'girl-who-spoke-to-elephants', reason: 'Uses sound analysis (infrasound) for wildlife tracking — the same sensor-to-data pipeline but for elephants' },
+      ],
+      quiz: [
+        { question: 'What is echolocation?', options: ['Seeing objects using reflected light', 'Navigating by sending sound clicks and listening for the echo', 'Feeling vibrations through water currents', 'Using Earth\'s magnetic field to navigate'], answer: 1 },
+        { question: 'How fast does sound travel in water compared to air?', options: ['About the same speed', 'About 2 times faster in water', 'About 4.3 times faster in water', 'About 10 times faster in water'], answer: 2 },
+        { question: 'How does the HC-SR04 sensor calculate distance?', options: ['It measures the brightness of reflected light', 'It sends a 40 kHz ping, times the echo, and uses distance = speed × time / 2', 'It uses a camera to estimate distance', 'It measures the weight of the object'], answer: 1 },
+        { question: 'Why is the distance formula divided by 2?', options: ['To account for measurement error', 'Because the sound travels to the object AND back — the total distance is twice the actual distance', 'Because sound slows down as it returns', 'To convert centimetres to metres'], answer: 1 },
+        { question: 'What happened to the Ganges river dolphin\'s eyesight?', options: ['It has excellent vision for hunting', 'It lost its eyesight but evolved a superior sonar system', 'It can only see in infrared', 'It can see but only above water'], answer: 1 },
       ],
     },
   },
@@ -2729,6 +2842,7 @@ To this day, **muga silk** is found only in Assam — the only golden silk in th
       project: {
         title: 'Materials Science Investigation',
         description: 'Compare the properties of different fibres (silk, cotton, nylon, spider silk) through hands-on experiments and microscopy.',
+        outputDiagram: 'MugaSilkProcessDiagram',
         steps: [
           'Session 1: Silk biology deep dive — trace the journey from som leaf → silkworm gut → spinneret → cocoon. Draw the molecular structure of fibroin (β-sheet crystals). Understand why muga silk is golden: xanthurenic acid pigment bound into the protein, not a surface dye.',
           'Session 1: Collect samples — cotton thread, nylon fishing line, raw muga silk (or eri/pat silk), and polyester. Prepare slides and examine each under a microscope (40x–100x). Sketch the fibre cross-sections and surface textures.',
@@ -2869,6 +2983,13 @@ plt.show()  # Muga is strong AND golden AND biodegradable`,
         { slug: 'honey-hunters-lesson', reason: 'Bees and silkworms both produce remarkable materials (honey and silk) through biological processes that humans cannot fully replicate' },
         { slug: 'tejimola-the-girl-who-became-a-plant', reason: 'Explores plant biology in depth — including the som tree that feeds the muga silkworm' },
       ],
+      quiz: [
+        { question: 'What type of material is silk?', options: ['A plant fibre like cotton', 'A protein fibre produced by caterpillars', 'A synthetic material', 'A mineral fibre'], answer: 1 },
+        { question: 'Why is muga silk golden in colour?', options: ['The silk is dyed after spinning', 'Xanthurenic acid from the caterpillar\'s diet bonds directly into the fibroin protein', 'Sunlight bleaches the silk to a golden colour', 'Gold dust is mixed into the silk during weaving'], answer: 1 },
+        { question: 'What makes silk strong and smooth?', options: ['It is coated in wax', 'Protein chains align into beta-sheet crystals during extrusion through the spinneret', 'It is made of the same material as hair', 'Multiple threads are always woven together'], answer: 1 },
+        { question: 'Why is muga silk only produced in Assam?', options: ['The weaving technique is secret', 'The moth needs specific host trees, warm humid climate, and semi-wild rearing found only there', 'Assam law prohibits export of muga moths', 'Other places have not tried to produce it'], answer: 1 },
+        { question: 'What happens to the colour of muga silk over time?', options: ['It fades like other dyed fabrics', 'It never fades — the colour is structural, not a dye — and actually improves with washing', 'It turns white after several years', 'It darkens to brown'], answer: 1 },
+      ],
     },
   },
   {
@@ -2980,6 +3101,7 @@ Tejimola's story tells us that kindness cannot be killed. You can bury it. You c
       project: {
         title: 'Plant Growth Experiment',
         description: 'Grow plants from seeds and cuttings, measure growth daily, plot sigmoid curves, and compare clone vs. seed-grown variation.',
+        outputDiagram: 'TejimolaDNADiagram',
         steps: [
           'Plant tulsi seeds and tulsi stem cuttings side by side',
           'Measure height daily for 4 weeks',
@@ -3288,6 +3410,13 @@ The spring still flows. If you climb Nilachal Hill past the Kamakhya temple and 
       ],
       offlineActivity: 'Fill a clear glass with water and hold it in a beam of sunlight near a white wall or sheet of paper. Tilt the glass slowly until you see a rainbow projected on the white surface. The water acts as a prism, bending different wavelengths by different amounts. Which colour band is widest? Which is narrowest? (Hint: red usually appears widest, violet narrowest.) Now try the same experiment with a torch instead of sunlight — does the rainbow change? Why?',
       offlineActivityDiagram: 'ActivityPrismDiagram',
+      quiz: [
+        { question: 'What determines the colour of light?', options: ['How bright it is', 'Its wavelength', 'How fast it travels', 'The material it passes through'], answer: 1 },
+        { question: 'Why does gold appear golden?', options: ['It generates golden light from within', 'It absorbs blue light and reflects yellow-red wavelengths', 'All metals are golden when polished', 'Gold reflects all wavelengths equally'], answer: 1 },
+        { question: 'What happens when light passes from air into water?', options: ['It speeds up', 'It changes colour', 'It bends (refracts) because it changes speed', 'Nothing — light is not affected by water'], answer: 2 },
+        { question: 'Why do movies appear as smooth motion?', options: ['Cameras record continuous movement', 'Persistence of vision — your retina holds each image for about 1/25th of a second', 'The screen refreshes faster than light', 'Your brain ignores the gaps between frames'], answer: 1 },
+        { question: 'What is the visible spectrum?', options: ['All electromagnetic radiation', 'The narrow band of wavelengths (380-700 nm) that human eyes can detect', 'Light that is visible only in daylight', 'X-rays and ultraviolet combined'], answer: 1 },
+      ],
     },
   },
   {
@@ -3373,7 +3502,7 @@ The clouds, of course, don't answer. But Dawan is certain they appreciate being 
         'Weather data analysis — Level 2 — L2-1',
         'Climate change — CO2 and temperature trends — Level 2 — L2-5',
       ],
-      project: { title: 'Build a Weather Station', description: 'Log temperature, humidity, and pressure data using sensors, analyze patterns, and make forecasts.', steps: ['Set up temperature + humidity sensors', 'Log readings every hour for a week', 'Plot temperature vs time — find the daily pattern', 'Correlate humidity with rainfall', 'Make a 24-hour forecast based on trends', 'Compare your forecast to the actual weather'] },
+      project: { title: 'Build a Weather Station', description: 'Log temperature, humidity, and pressure data using sensors, analyze patterns, and make forecasts.', outputDiagram: 'CloudsForecastDiagram', steps: ['Set up temperature + humidity sensors', 'Log readings every hour for a week', 'Plot temperature vs time — find the daily pattern', 'Correlate humidity with rainfall', 'Make a 24-hour forecast based on trends', 'Compare your forecast to the actual weather'] },
       realWorld: ['Mawsynram (near Cherrapunji) holds the record for wettest place on Earth', 'Weather satellites use infrared cameras to track cloud formation from space', 'Climate models use millions of equations running on supercomputers'],
     },
     illustration: '/content/illustrations/boy-clouds.webp',
@@ -3471,6 +3600,13 @@ print(f"Or about      {water_mass_kg / 2500:.0f} Olympic pools")
         { slug: 'monsoon-home', reason: 'The monsoon that drenches Meghalaya starts with clouds exactly like the ones you just learned about' },
         { slug: 'how-majuli-island-was-born', reason: 'All that rain from Mawsynram’s clouds feeds the Brahmaputra — the river that created and is eroding Majuli' },
       ],
+      quiz: [
+        { question: 'What must be present for a cloud to form?', options: ['Cold wind and high altitude only', 'Water vapour cooling to the dew point and condensation nuclei (tiny particles)', 'Rain falling from a higher cloud', 'Direct sunlight hitting the ocean'], answer: 1 },
+        { question: 'What does a cumulonimbus cloud predict?', options: ['Fair weather for the next week', 'Light drizzle', 'Heavy rain and storms', 'A clear night sky'], answer: 2 },
+        { question: 'What powers the water cycle?', options: ['The moon\'s gravity', 'The sun — it drives evaporation that starts the whole cycle', 'Wind currents', 'Underground geothermal heat'], answer: 1 },
+        { question: 'Why does weather forecasting become unreliable beyond about 10 days?', options: ['Weather satellites lose signal after 10 days', 'The atmosphere is chaotic — tiny measurement errors grow over time', 'Computers are not fast enough', 'Weather patterns only last 10 days'], answer: 1 },
+        { question: 'What type of cloud is high, wispy, and warns of rain in 1-2 days?', options: ['Stratus', 'Cumulus', 'Cirrus', 'Cumulonimbus'], answer: 2 },
+      ],
     },
   },
   {
@@ -3551,7 +3687,7 @@ Majuli is not just an island. It is a reminder that everything borrowed is worth
         'Satellite imagery analysis — Level 2 — L2-4',
         'Engineering solutions for erosion — Level 2 — L2-6',
       ],
-      project: { title: 'Map Erosion Over Time', description: 'Analyze satellite images of Majuli from different years to measure how much land has been lost.', steps: ['Find satellite images of Majuli (1990, 2000, 2010, 2020)', 'Trace the island boundary in each image', 'Calculate area change per decade', 'Identify the most eroded sections', 'Research what protection measures exist', 'Propose a conservation plan based on data'] },
+      project: { title: 'Map Erosion Over Time', description: 'Analyze satellite images of Majuli from different years to measure how much land has been lost.', outputDiagram: 'MajuliProtectionDiagram', steps: ['Find satellite images of Majuli (1990, 2000, 2010, 2020)', 'Trace the island boundary in each image', 'Calculate area change per decade', 'Identify the most eroded sections', 'Research what protection measures exist', 'Propose a conservation plan based on data'] },
       realWorld: ['Majuli has lost over 50% of its area since 1950 — documented by satellite', 'The Brahmaputra carries 600 million tonnes of sediment annually — one of the highest in the world', 'Bangladesh faces similar challenges — riverbank erosion displaces 100,000+ people per year'],
     },
     illustration: '/content/illustrations/majuli-born.webp',
@@ -3655,6 +3791,13 @@ plt.show()  # Can you fit a trendline and predict when area = 0?`,
         { slug: 'fishermans-storm-lesson', reason: 'Cyclones and monsoons drive the extreme floods that erode Majuli — learn the atmospheric physics behind them' },
         { slug: 'girl-grew-forest', reason: 'Jadav Payeng grew a forest near Majuli — explore how trees stabilize ecosystems and fight erosion' },
       ],
+      quiz: [
+        { question: 'Where does a river deposit sediment?', options: ['Where it flows the fastest', 'Where it slows down', 'Only at the ocean', 'Only on steep slopes'], answer: 1 },
+        { question: 'How did Majuli island form?', options: ['Volcanic eruption created it', 'The Brahmaputra shifted its channel, leaving a body of river-deposited sediment surrounded by water', 'Humans built it from sandbags', 'An earthquake pushed land above water'], answer: 1 },
+        { question: 'How much of its area has Majuli lost since 1901?', options: ['About 10%', 'About 30%', 'About 60%', 'About 90%'], answer: 2 },
+        { question: 'When does most landscape change happen along the Brahmaputra?', options: ['During the dry season', 'During the monsoon when floods carry enormous sediment', 'Equally throughout the year', 'Only during earthquakes'], answer: 1 },
+        { question: 'What combination works best to protect Majuli from erosion?', options: ['Only concrete walls', 'Only planting trees', 'Combining natural solutions (vetiver grass, bamboo) with engineered barriers (geotextile bags)', 'Draining the river channels'], answer: 2 },
+      ],
     },
   },
   {
@@ -3734,7 +3877,7 @@ Vini held a bamboo tube of black rice to her ear, as if listening for the story 
         'Digital audio — generating sound in code — Level 2 — L2-1',
         'FFT — decomposing complex sounds — Level 2 — L2-3',
       ],
-      project: { title: 'Build a Digital Flute', description: 'Create a program that generates flute-like tones at different frequencies — a virtual bamboo flute.', steps: ['Generate pure sine tones at musical note frequencies', 'Add harmonics to make it sound like a flute (not a beep)', 'Map keyboard keys to notes (a simple synthesizer)', 'Add a reverb effect using delay lines', 'Play a simple melody programmatically', 'Compare your digital flute to a recording of a real bamboo flute'] },
+      project: { title: 'Build a Digital Flute', description: 'Create a program that generates flute-like tones at different frequencies — a virtual bamboo flute.', outputDiagram: 'FluteStandingWaveDiagram', steps: ['Generate pure sine tones at musical note frequencies', 'Add harmonics to make it sound like a flute (not a beep)', 'Map keyboard keys to notes (a simple synthesizer)', 'Add a reverb effect using delay lines', 'Play a simple melody programmatically', 'Compare your digital flute to a recording of a real bamboo flute'] },
       realWorld: ['Auto-Tune uses FFT to detect and correct vocal pitch in real time', 'Noise-cancelling headphones generate inverse sound waves to cancel noise', 'Musical instrument digital interface (MIDI) standardized electronic music in 1983'],
     },
     illustration: '/content/illustrations/bamboo-flute.webp',
@@ -3834,6 +3977,13 @@ plt.show()  # What pattern do you see?`,
         { slug: 'woodpeckers-drum', reason: 'Another story about sound and vibration — the woodpecker creates drumming rhythms through controlled impacts' },
         { slug: 'girl-who-spoke-to-elephants', reason: 'Elephants communicate using infrasound (below 20 Hz) — the same wave physics, applied to frequencies too low for humans to hear' },
       ],
+      quiz: [
+        { question: 'How does a tube produce a musical note?', options: ['By vibrating its walls', 'Air bouncing back and forth inside creates a standing wave', 'Wind blowing over the top creates a vacuum', 'The material of the tube determines the note'], answer: 1 },
+        { question: 'What is the formula for the fundamental frequency of an open tube?', options: ['f = v times 2L', 'f = v / 2L', 'f = 2v / L', 'f = L / 2v'], answer: 1 },
+        { question: 'How does opening a finger hole change the note?', options: ['It makes the note lower', 'It shortens the effective air column, raising the frequency', 'It changes the material vibration', 'It has no effect on the note'], answer: 1 },
+        { question: 'What is timbre?', options: ['How loud a note is', 'How long a note lasts', 'The unique mixture of harmonics that makes each instrument sound different', 'The pitch of a musical note'], answer: 2 },
+        { question: 'Why does a bamboo flute sound different from a trumpet playing the same note?', options: ['They produce different fundamental frequencies', 'They have different volumes', 'Each produces a different mixture of harmonics (overtones)', 'The listener imagines the difference'], answer: 2 },
+      ],
     },
   },
   {
@@ -3925,7 +4075,7 @@ Tomba grew up to become a healer himself — one who always asked before he pick
         'Population dynamics — growth and decline — Level 2 — L2-1',
         'Conservation strategies — protected areas and community — Level 2 — L2-6',
       ],
-      project: { title: 'Species Conservation Plan', description: 'Analyze population data, model growth scenarios, and propose a conservation strategy for an endangered species.', steps: ['Research current sangai population data', 'Model population growth with and without protection', 'Identify threats: habitat loss, poaching, climate', 'Calculate minimum viable population size', 'Design a conservation plan with measurable goals', 'Present findings as a scientific poster'] },
+      project: { title: 'Species Conservation Plan', description: 'Analyze population data, model growth scenarios, and propose a conservation strategy for an endangered species.', outputDiagram: 'LoktakConservationDiagram', steps: ['Research current sangai population data', 'Model population growth with and without protection', 'Identify threats: habitat loss, poaching, climate', 'Calculate minimum viable population size', 'Design a conservation plan with measurable goals', 'Present findings as a scientific poster'] },
       realWorld: ['The sangai population dropped to ~14 in the 1970s — conservation brought it back to ~300', 'Wetlands cover 6% of Earth\'s surface but contain 40% of all species', 'India has 75 Ramsar wetland sites — Loktak Lake is one of them'],
     },
     illustration: '/content/illustrations/dancing-deer.webp',
@@ -4032,6 +4182,13 @@ print(f"Capacity lost: {carrying_capacity - new_capacity}")`,
         { slug: 'girl-grew-forest', reason: 'If Loktak shows what happens when habitat is destroyed, this story shows what happens when someone grows it back' },
         { slug: 'boy-counted-butterflies', reason: 'Population monitoring in action — the same census techniques used for the Sangai apply to butterfly surveys' },
       ],
+      quiz: [
+        { question: 'What is a phumdi?', options: ['A type of deer found only in Manipur', 'A floating island of tangled vegetation and trapped gas', 'A fishing boat used on Loktak Lake', 'A dam built to control water levels'], answer: 1 },
+        { question: 'How many Sangai deer are estimated to remain?', options: ['About 50', 'About 260', 'About 1,000', 'About 5,000'], answer: 1 },
+        { question: 'How does the Sangai walk on floating islands?', options: ['It is very lightweight', 'Broad hooves (snowshoe principle), short legs (low centre of gravity), and a high-stepping gait', 'It only walks on the thickest parts', 'It actually swims between the islands'], answer: 1 },
+        { question: 'What caused the phumdis to thin from 2 m to under 0.5 m?', options: ['Climate change dried them out', 'The Ithai Barrage raised water levels by 2-3 m, waterlogging them', 'Overfishing destroyed the vegetation', 'Pollution killed the plants'], answer: 1 },
+        { question: 'Why can\'t the Sangai be saved by fixing just one thing?', options: ['The deer are too few to recover', 'Water levels, phumdi health, invasive species, and community livelihoods all connect — the whole system must be managed', 'The technology does not exist yet', 'The Indian government has banned all intervention'], answer: 1 },
+      ],
     },
   },
   {
@@ -4116,7 +4273,7 @@ Ka Thaïng's grandchildren walked to school dry-footed. Five hundred years later
         'Structural analysis — free body diagrams — Level 2 — L2-1',
         'Designing for safety — factors of safety — Level 2 — L2-4',
       ],
-      project: { title: 'Design a Bridge', description: 'Design, model, and test a bridge structure — compare materials, calculate loads, and optimize for strength.', steps: ['Calculate forces on a simple beam bridge', 'Build a model bridge from craft sticks or spaghetti', 'Test to failure — measure the maximum load', 'Compare beam vs. arch vs. truss designs', 'Calculate the safety factor of your best design', 'Research how living root bridges compare to engineered ones'] },
+      project: { title: 'Design a Bridge', description: 'Design, model, and test a bridge structure — compare materials, calculate loads, and optimize for strength.', outputDiagram: 'BridgeLoadDistributionDiagram', steps: ['Calculate forces on a simple beam bridge', 'Build a model bridge from craft sticks or spaghetti', 'Test to failure — measure the maximum load', 'Compare beam vs. arch vs. truss designs', 'Calculate the safety factor of your best design', 'Research how living root bridges compare to engineered ones'] },
       realWorld: ['Living root bridges self-repair and strengthen over time — no maintenance needed', 'The Golden Gate Bridge requires 40 full-time painters working year-round', 'Biomimetic architecture is growing structures using mycelium (mushroom roots)'],
     },
     illustration: '/content/illustrations/bridge-grew.webp',
@@ -4290,6 +4447,7 @@ And somewhere in Dibrugarh, Pari folded another boat. Because that's the thing a
       project: {
         title: 'Simulate Paper Boat Buoyancy and Degradation',
         description: 'Model how a paper boat floats on water, and simulate how water absorption gradually reduces buoyancy until the boat sinks.',
+        outputDiagram: 'BoatBuoyancyDiagram',
         steps: [
           'Calculate the buoyant force on a folded paper boat given its dimensions and paper density',
           'Model water absorption rate as a function of time and paper type',
@@ -4471,6 +4629,7 @@ To this day, the great hornbill wears its golden crown through the forests of Na
       project: {
         title: 'Analyze Hornbill Nesting and Seed Dispersal Data',
         description: 'Use field data on hornbill nesting sites and fruit consumption to map their role as seed dispersers in Nagaland forests.',
+        outputDiagram: 'HornbillKeystoneDiagram',
         steps: [
           'Compile data on hornbill diet — which fruits they eat and seed sizes they disperse',
           'Map nesting locations and foraging ranges from published field studies',
@@ -4653,6 +4812,7 @@ And that is why, to this very day, if you sit by the Barak River and wait quietl
       project: {
         title: 'Model Fish Jump Trajectories and Oxygen Triggers',
         description: 'Calculate the physics of a fish leap and correlate jumping frequency with dissolved oxygen and temperature data.',
+        outputDiagram: 'FishBiomechanicsDiagram',
         steps: [
           'Research why fish jump: parasite removal, oxygen intake, predator escape, and obstacle clearing',
           'Model a fish jump as projectile motion given body mass, thrust force, and launch angle',
@@ -4776,6 +4936,13 @@ plt.show()  # At what temperature do fish start struggling?`,
         { slug: 'golden-hilsa', reason: 'The hilsa fish’s epic migration and the science of sustainable fishing in the Brahmaputra' },
         { slug: 'cloud-refused-rain', reason: 'Weather and rainfall patterns — the monsoon that controls river levels and dissolved oxygen' },
       ],
+      quiz: [
+        { question: 'How do fish breathe?', options: ['They surface to gulp air', 'Through dissolved oxygen in water, extracted by their gills', 'Through their skin only', 'They hold their breath between surfaces'], answer: 1 },
+        { question: 'Why does warm water stress fish?', options: ['Fish prefer cold environments', 'Warm water holds less dissolved oxygen', 'Warm water is more acidic', 'Warm water flows too fast for fish'], answer: 1 },
+        { question: 'Which is NOT a reason fish jump?', options: ['To gulp oxygen from the air', 'To shake off parasites', 'To attract a mate with an aerial display', 'To escape predators'], answer: 2 },
+        { question: 'What physics formula describes the energy of a fish jump?', options: ['E = mc squared', 'F = ma', 'Half mv squared = mgh — kinetic energy converts to potential energy', 'PV = nRT'], answer: 2 },
+        { question: 'Why are fish considered living sensors of river health?', options: ['Fish can communicate water quality to humans', 'Changes in fish behaviour (like jumping frequency) signal water quality changes before instruments detect them', 'Fish change colour when the water is polluted', 'Fish only live in perfectly clean water'], answer: 1 },
+      ],
     },
   },
   {
@@ -4843,6 +5010,7 @@ Khargosh never bragged about speed again. And Kaaso? She went back to sitting in
       project: {
         title: 'Simulate a Race Between Animals of Different Speeds',
         description: 'Build a physics-based race simulator that models speed, acceleration, stamina, and rest periods for different animals.',
+        outputDiagram: 'RaceEnergyDiagram',
         steps: [
           'Research top speed, acceleration, and endurance data for 6-8 animals (tortoise, hare, rhino, etc.)',
           'Define a race course with distance and terrain factors',
@@ -4971,6 +5139,13 @@ plt.show()  # Who wins at 300 seconds?`,
         { slug: 'red-panda-mask', reason: 'Evolution and adaptation — why animals develop the traits (speed, endurance, camouflage) they do' },
         { slug: 'woodpecker-headache', reason: 'Biomechanics of impact — uses F = ma and deceleration, the same physics from this lesson' },
       ],
+      quiz: [
+        { question: 'What is the difference between speed and velocity?', options: ['There is no difference', 'Speed has direction, velocity does not', 'Speed is distance over time (no direction); velocity is displacement over time (with direction)', 'Velocity is always faster than speed'], answer: 2 },
+        { question: 'What is acceleration?', options: ['How fast something is moving', 'How quickly velocity changes over time', 'The total distance covered', 'The force applied to an object'], answer: 1 },
+        { question: 'Why are small animals often faster relative to their size?', options: ['They have longer legs proportionally', 'Muscle force grows with area (squared) but mass with volume (cubed), giving smaller animals more power per gram', 'They are lighter so gravity affects them less', 'They have faster reflexes'], answer: 1 },
+        { question: 'How much more ATP does aerobic respiration produce per glucose than anaerobic?', options: ['2 times more', 'About 5 times more', 'About 18 times more (36 vs 2)', 'About 100 times more'], answer: 2 },
+        { question: 'Why does the tortoise outlast the hare in terms of energy?', options: ['Tortoises eat more food', 'Aerobic respiration is far more efficient than anaerobic — the tortoise burns energy steadily while the hare wastes it sprinting', 'Tortoises store more fat', 'Hares lose energy through their ears'], answer: 1 },
+      ],
     },
   },
   {
@@ -5038,6 +5213,7 @@ If you ever see a red panda in the wild — curled on a branch, peering at you w
       project: {
         title: 'Test How Well Camouflage Works Against a Background',
         description: 'Build an image analysis tool that measures how well an animal blends into its background by comparing color histograms.',
+        outputDiagram: 'PandaSelectionDiagram',
         steps: [
           'Collect images of red pandas in different forest backgrounds',
           'Extract color histograms from the animal region and the background region',
@@ -5167,6 +5343,13 @@ print(f"The population evolved toward the background!")`,
         { slug: 'clouded-leopard', reason: 'Cloud-shaped spots as disruptive coloration in a forest canopy — a different camouflage solution in a different habitat' },
         { slug: 'takin-face', reason: 'The takin’s bizarre body plan as a case study in how morphology evolves from accumulated adaptations' },
       ],
+      quiz: [
+        { question: 'What are the three main camouflage strategies?', options: ['Running, hiding, and fighting', 'Crypsis (matching background), disruptive coloration (breaking outline), and mimicry (copying a dangerous species)', 'Color change, shape change, and size change', 'Day camouflage, night camouflage, and water camouflage'], answer: 1 },
+        { question: 'What four ingredients does natural selection require?', options: ['Food, water, shelter, and space', 'Variation, selective pressure, inheritance, and time', 'Mutation, migration, drift, and selection', 'Predators, prey, plants, and climate'], answer: 1 },
+        { question: 'What does the red panda\'s dark eye mask do?', options: ['It helps the panda see better at night', 'It absorbs snow glare, breaks up the face outline, and provides camouflage', 'It warns predators that the panda is dangerous', 'It attracts mates during breeding season'], answer: 1 },
+        { question: 'What is convergent evolution?', options: ['When the same species evolves differently in different locations', 'When unrelated species independently evolve similar traits because they face similar challenges', 'When two species merge into one', 'When evolution reverses direction'], answer: 1 },
+        { question: 'Why do the red panda, raccoon, and giant panda all have dark eye masks?', options: ['They share a recent common ancestor', 'Convergent evolution — they independently evolved the same solution to similar survival challenges', 'Humans selectively bred them', 'It is a coincidence with no evolutionary explanation'], answer: 1 },
+      ],
     },
   },
   {
@@ -5242,6 +5425,7 @@ And every now and then, on the mossy log at the edge of the forest, Akum would f
       project: {
         title: 'Map Wildlife Movement from GPS Tracking Data',
         description: 'Use simulated GPS collar data to estimate a clouded leopard\'s home range, identify core areas, and detect habitat barriers.',
+        outputDiagram: 'LeopardGPSDiagram',
         steps: [
           'Generate or find GPS coordinate data simulating a clouded leopard\'s weekly movements',
           'Plot all coordinates on a map and identify clusters (resting sites, hunting grounds)',
@@ -5367,6 +5551,13 @@ y_est = (d_A**2 - d_C**2 + 25 + 75.0) / (2 * 8.66)
         { slug: 'elephant-corridor', reason: 'Explores wildlife corridors for elephants — the same conservation strategy needed for clouded leopards' },
         { slug: 'snow-leopard', reason: 'Another endangered cat tracked with GPS and camera traps in high-altitude terrain' },
         { slug: 'red-panda-mask', reason: 'Camouflage and conservation of another elusive Himalayan species using modern tracking technology' },
+      ],
+      quiz: [
+        { question: 'How does GPS determine location?', options: ['By connecting to cell phone towers', 'By trilateration — measuring distances from three satellites to find where three spheres intersect', 'By using a compass and map', 'By bouncing signals off the ground'], answer: 1 },
+        { question: 'How do camera traps detect animals?', options: ['They use motion-sensing video', 'Passive infrared sensors detect the heat signature of moving animals', 'Sound microphones trigger when an animal calls', 'They take photos at random intervals'], answer: 1 },
+        { question: 'What is the Lincoln-Petersen method used for?', options: ['Tracking animal migration routes', 'Estimating total population size by marking some individuals and checking recapture ratios', 'Measuring animal speed', 'Identifying animal species from photographs'], answer: 1 },
+        { question: 'What is the biggest threat to clouded leopards?', options: ['Hunting by humans', 'Disease', 'Habitat fragmentation', 'Climate change'], answer: 2 },
+        { question: 'Why is technology important for conservation?', options: ['It replaces the need for field researchers', 'GPS, camera traps, and data analysis turn fragmented observations into evidence that drives conservation action', 'Technology can clone endangered species', 'It is not — traditional methods are always better'], answer: 1 },
       ],
     },
   },
@@ -5574,6 +5765,7 @@ And sometimes, Gaja thought, the things you're most afraid of turn out to be the
       project: {
         title: 'Model Elephant Thermoregulation',
         description: 'Build a simulation that calculates an elephant\'s body temperature based on ambient conditions, activity level, and cooling behaviors.',
+        outputDiagram: 'ElephantThermoregDiagram',
         steps: [
           'Research elephant thermoregulation: ear flapping, mud bathing, shade seeking, and water spraying',
           'Model heat gain from metabolism and solar radiation as a function of body mass',
@@ -5684,6 +5876,13 @@ print("Level 1 builds the full simulation with mud bathing.")`,
       nextLessons: [
         { slug: 'girl-who-spoke-to-elephants', reason: 'Uses AI and data science to track elephant herds in the wild' },
         { slug: 'elephant-corridor', reason: 'Explores elephant migration corridors and conservation challenges' },
+      ],
+      quiz: [
+        { question: 'Why do elephants take mud baths?', options: ['For fun and play', 'Mud serves as a cooling system, sunscreen, and parasite shield', 'To clean their skin', 'To mark their territory'], answer: 1 },
+        { question: 'What are the four ways heat moves?', options: ['Burning, melting, freezing, and boiling', 'Conduction, convection, radiation, and evaporation', 'Fast, slow, medium, and stopped', 'Up, down, sideways, and through'], answer: 1 },
+        { question: 'Why do bigger animals trap more heat?', options: ['They eat more food', 'They have less surface area relative to their volume', 'Their skin is thicker', 'They move more slowly'], answer: 1 },
+        { question: 'How have elephants adapted to compensate for their size and heat retention?', options: ['They sleep during the day', 'Big ears, wrinkled skin, and mud bathing', 'They live only near water', 'They have a special cooling organ'], answer: 1 },
+        { question: 'How do elephants act as ecosystem engineers?', options: ['They build dams across rivers', 'They dig water holes, create trails, and build wallows that become habitats for other species', 'They plant trees by spreading seeds', 'They protect smaller animals from predators'], answer: 1 },
       ],
     },  },
   {
@@ -6046,6 +6245,7 @@ The people of Assam and Arunachal Pradesh still call the orchid **Kopou Phool**.
       project: {
         title: 'Map the Color Spectrum of Local Flowers',
         description: 'Photograph and analyze the color distribution of flowers in your area, linking pigment types to the pollinators they attract.',
+        outputDiagram: 'OrchidCoevolutionDiagram',
         steps: [
           'Photograph 10-15 different flowers in consistent lighting conditions',
           'Extract dominant colors from each image using Python and k-means clustering',
@@ -6257,6 +6457,7 @@ And if that's not a lesson worth learning, what is?
       project: {
         title: 'Measure Pitcher Plant Trap Efficiency',
         description: 'Design and analyze an experiment testing how pitcher shape, fluid viscosity, and rim angle affect prey capture rates.',
+        outputDiagram: 'PitcherAnatomyDiagram',
         steps: [
           'Research the mechanical trapping mechanism: the peristome, wax crystals, and digestive fluid',
           'Build simple pitcher models from paper or plastic with different rim angles and depths',
@@ -6371,6 +6572,13 @@ plt.show()  # Why is carnivory worth the cost?`,
       nextLessons: [
         { slug: 'tejimola-lives-again', reason: 'Explores plant biology from a different angle — vegetative propagation and how plant cells rebuild entire organisms' },
         { slug: 'wild-orchids-clouds', reason: 'Another Meghalaya story about plants with remarkable adaptations — orchids that grow on trees without soil' },
+      ],
+      quiz: [
+        { question: 'Why do pitcher plants eat insects?', options: ['For energy from photosynthesis', 'For nitrogen — a mineral nutrient scarce in their waterlogged soils', 'To prevent insects from eating their leaves', 'For water stored inside the insects'], answer: 1 },
+        { question: 'What are the four zones of a pitcher trap?', options: ['Root, stem, leaf, flower', 'Nectar-baited lid, hydroplaning rim, wax-crystal wall, acidic enzyme pool', 'Outer wall, inner wall, water pool, lid', 'Colour zone, scent zone, grip zone, digestion zone'], answer: 1 },
+        { question: 'How does the pitcher rim cause insects to slip?', options: ['It is coated in sticky glue', 'Wet microridges create aquaplaning — the insect hydroplanes into the trap', 'It is covered in sharp spines', 'It vibrates when an insect lands'], answer: 1 },
+        { question: 'What does the pitcher use surfactants for?', options: ['To attract insects with a shiny surface', 'To break surface tension so insects sink instead of floating', 'To preserve the digestive fluid', 'To keep the pitcher clean'], answer: 1 },
+        { question: 'What is special about Nepenthes khasiana?', options: ['It is the largest pitcher plant in the world', 'It is India\'s only native pitcher plant, found exclusively in Meghalaya', 'It can catch birds as well as insects', 'It grows in desert conditions'], answer: 1 },
       ],
     },
   },
@@ -6728,6 +6936,7 @@ Because size, as the people of Northeast India have always known, has nothing to
       project: {
         title: 'Explore How Body Size Affects Biology',
         description: 'Plot metabolic rate, lifespan, heart rate, and other biological variables against body mass across species to discover scaling laws.',
+        outputDiagram: 'FrogCubeSquareDiagram',
         steps: [
           'Compile body mass and metabolic rate data for 15-20 animals from insects to elephants',
           'Plot metabolic rate vs body mass on a log-log scale',
@@ -6843,6 +7052,13 @@ plt.show()  # What happens to the ratio as size shrinks?`,
         { slug: 'kaziranga-grass', reason: 'Another NE India ecosystem story — explores how grasslands support megafauna, the opposite end of the size spectrum' },
         { slug: 'boy-counted-butterflies', reason: 'Uses biodiversity surveys and species counting — the same field skills used to discover new tiny frogs' },
         { slug: 'pitcher-plant', reason: 'Another NE India rainforest organism that exploits a specialized niche — carnivorous plants vs miniature frogs' },
+      ],
+      quiz: [
+        { question: 'What happens to surface tension at very small scales?', options: ['It becomes weaker', 'It becomes the dominant force — raindrops become cannonballs and water films become traps', 'It disappears completely', 'It works the same as at large scales'], answer: 1 },
+        { question: 'What does the cube-square law explain?', options: ['Why cubes are stronger than spheres', 'Why small animals are relatively strong and large animals are relatively weak — weight grows faster than strength', 'Why squares have more area than circles', 'Why temperature increases with altitude'], answer: 1 },
+        { question: 'How do tiny frogs get most of their oxygen?', options: ['Through their lungs only', 'Through their moist, permeable skin — up to 80%', 'Through their mouth by gulping air', 'Through their blood directly from water'], answer: 1 },
+        { question: 'Why are tiny frogs trapped in wet habitats?', options: ['They cannot swim', 'The same permeable skin that lets them breathe also loses water rapidly', 'They need wet surfaces to climb', 'Their food only exists in wet areas'], answer: 1 },
+        { question: 'Why do rainforests have the most species?', options: ['They have the best soil', 'Abundant energy, deep evolutionary time, and stacked micro-environments create many niches', 'They are the largest biome by area', 'Humans have introduced species there'], answer: 1 },
       ],
     },
   },
@@ -7183,6 +7399,7 @@ Rituraj spent that summer building a bicycle from scrap parts. It wasn't as shin
       project: {
         title: 'Design an Optimal Sun Hat Using Geometry',
         description: 'Use geometric calculations to design a hat that maximizes shade coverage while minimizing material and weight.',
+        outputDiagram: 'JapiHexagonDiagram',
         steps: [
           'Measure the japi hat dimensions: base radius, cone height, brim width',
           'Calculate the surface area and the shadow it casts at different sun angles',
@@ -7362,6 +7579,7 @@ Sometimes, the place you land isn't the place you planned. But that doesn't mean
       project: {
         title: 'Simulate Meteorite Entry and Impact',
         description: 'Model a meteoroid entering Earth\'s atmosphere, calculate its deceleration, heating, and final impact energy.',
+        outputDiagram: 'MeteorImpactDiagram',
         steps: [
           'Research typical meteoroid entry speeds (11-72 km/s) and compositions',
           'Model atmospheric drag and ablation as the meteoroid descends',
@@ -7488,6 +7706,13 @@ print(f"  {0.5 * 1 * 40000**2:.2e} J — that is 4x more energy!")`,
         { slug: 'orange-sunsets-assam', reason: 'The same atmospheric physics that makes meteors glow also explains why Assam’s sunsets are orange — Rayleigh scattering' },
         { slug: 'fishermans-daughter-storm', reason: 'Atmospheric forces at a larger scale — the energy in storms compared to the energy in impacts' },
       ],
+      quiz: [
+        { question: 'What makes a meteor glow as it enters the atmosphere?', options: ['Friction with air molecules', 'Compression heating — the meteor compresses air ahead of it to extreme temperatures', 'Chemical reactions with oxygen', 'Reflected sunlight'], answer: 1 },
+        { question: 'What are the three types of meteorites?', options: ['Small, medium, and large', 'Iron (from planetary cores), stony (from solar nebula), and stony-iron (from core-mantle boundaries)', 'Rock, ice, and metal', 'Fast, slow, and stationary'], answer: 1 },
+        { question: 'Why does impact energy depend so much on speed?', options: ['Faster objects are always bigger', 'Energy depends on speed squared — doubling speed quadruples the energy', 'Speed creates more friction', 'Faster objects have more mass'], answer: 1 },
+        { question: 'What ended the age of the dinosaurs 66 million years ago?', options: ['A massive volcanic eruption', 'The Chicxulub meteorite impact', 'A global ice age', 'A disease pandemic'], answer: 1 },
+        { question: 'What threatens both meteor viewing and ecosystems at Deepor Beel?', options: ['Air pollution', 'Deforestation', 'Light pollution', 'Water contamination'], answer: 2 },
+      ],
     },
   },
 
@@ -7572,6 +7797,7 @@ And the next January, at the kite festival, there were fewer store-bought kites 
       project: {
         title: 'Design and Test Kites for Maximum Lift',
         description: 'Build kites of different shapes and measure their flight performance to discover which design generates the most lift.',
+        outputDiagram: 'KiteLiftDiagram',
         steps: [
           'Research the four forces on a kite: weight, tension, lift, and drag',
           'Build 3 kites of different shapes: diamond, delta, and box, using identical materials',
@@ -7693,6 +7919,13 @@ plt.show()  # What happens at high wind speeds?`,
         { slug: 'the-little-boat', reason: 'Fluid dynamics on the Brahmaputra — the same forces (lift and drag) that fly a kite also move a boat through water' },
         { slug: 'flying-squirrel', reason: 'How a flying squirrel uses a skin membrane as an airfoil — nature’s kite, with angle of attack and glide ratio' },
         { slug: 'fishermans-daughter-storm', reason: 'Wind at its most powerful — cyclone physics, the Beaufort scale pushed to its limits' },
+      ],
+      quiz: [
+        { question: 'What makes a kite fly?', options: ['Hot air inside the kite lifts it up', 'The kite is tilted into the wind (angle of attack), deflecting air downward and creating lift', 'The string pulls the kite up', 'Wind pushes the kite from behind'], answer: 1 },
+        { question: 'What happens if the angle of attack is too steep?', options: ['The kite flies higher', 'The kite stalls — it loses lift', 'The kite spins in circles', 'Nothing changes'], answer: 1 },
+        { question: 'What is the purpose of a kite\'s tail?', options: ['Decoration only', 'It creates drag behind the kite to keep it stable', 'It helps the kite fly higher', 'It makes the kite lighter'], answer: 1 },
+        { question: 'How does drag change with wind speed?', options: ['Drag increases linearly with wind speed', 'Drag increases with the square of wind speed', 'Drag stays constant regardless of wind speed', 'Drag decreases as wind speed increases'], answer: 1 },
+        { question: 'What Beaufort scale range is ideal for kite flying?', options: ['Force 0-1 (calm)', 'Force 3-5 (gentle to fresh breeze)', 'Force 7-9 (strong to gale)', 'Force 10-12 (storm to hurricane)'], answer: 1 },
       ],
     },
   },
@@ -8608,6 +8841,7 @@ Some places are just easy to love. And even the clouds know it.
       project: {
         title: 'Analyze Monsoon Rainfall Patterns Over Decades',
         description: 'Download historical rainfall data for Assam and analyze how monsoon timing and intensity have changed over 30+ years.',
+        outputDiagram: 'MonsoonReversalDiagram',
         steps: [
           'Download monthly rainfall data for an Assam weather station from IMD or open data sources',
           'Plot monthly rainfall for several years and identify the monsoon months (June-September)',
@@ -9242,6 +9476,7 @@ In the hills of Northeast India, they say that every train has a soul, and the s
       project: {
         title: 'Calculate the Physics of a Mountain Railway',
         description: 'Model the forces on a train climbing a hill: gravity, friction, engine force, and determine the maximum gradient it can handle.',
+        outputDiagram: 'TrainSteamEngineDiagram',
         steps: [
           'Research the specifications of a narrow-gauge hill train (weight, engine power, wheel friction)',
           'Calculate the gravitational component along slopes of 1%, 3%, 5%, and 8% gradient',
@@ -9361,6 +9596,13 @@ plt.show()  # What happens at 8%?`,
           checkYourself: 'The Darjeeling railway climbs 2,158 metres over 88 km. What is its average gradient? Why does it still need switchbacks and loops if this average seems gentle?',
           checkAnswer: 'Average gradient = 2,158 / 88,000 = 2.45%. This seems gentle, but the average is misleading — some sections are nearly flat (in valleys) while others are extremely steep. Switchbacks and loops are needed on the steep sections to keep the local gradient below 3.5%, even though the average over the whole route is only 2.45%.',
         },
+      ],
+      quiz: [
+        { question: 'How does a train grip the rail?', options: ['Magnets under the train', 'Adhesion — static friction at the wheel-rail contact point', 'Rubber tyres on the wheels', 'The weight of the train alone'], answer: 1 },
+        { question: 'What do gears trade when climbing a hill?', options: ['Fuel for speed', 'Speed for force', 'Weight for height', 'Noise for power'], answer: 1 },
+        { question: 'What happens on gradients steeper than 8%?', options: ['Trains use more fuel', 'Rack-and-pinion systems are needed because adhesion alone fails', 'Trains must go backwards', 'The rails are heated to increase friction'], answer: 1 },
+        { question: 'How efficient is a steam engine?', options: ['About 8-10%', 'About 30%', 'About 50%', 'About 80%'], answer: 0 },
+        { question: 'What are switchbacks and loops used for in mountain railways?', options: ['To allow trains to pass each other', 'To gain elevation at manageable gradients', 'To slow down on descents', 'To provide scenic views for passengers'], answer: 1 },
       ],
     },
   },
@@ -9866,6 +10108,7 @@ And somewhere below the surface, Ka Ri Bneng would drift past — her scales shi
       project: {
         title: 'Investigate Iridescence in Everyday Objects',
         description: 'Find and photograph iridescent surfaces (soap bubbles, CDs, oil films) and explain the physics behind each color pattern.',
+        outputDiagram: 'FishIridescenceDiagram',
         steps: [
           'Collect 4-5 iridescent objects: soap bubble, CD, oil on water, beetle wing (or photo), fish scale (or photo)',
           'Photograph each from multiple angles and note how colors change with viewing angle',
@@ -10002,6 +10245,13 @@ plt.show()  # Which color is brightest? What happens if the platelet is thicker?
           checkYourself: 'Two identical fish with the same iridophores swim in two different lakes — one crystal clear, one murky with algae. Which fish appears more colorful to a viewer above?',
           checkAnswer: 'The fish in clear water appears far more colorful. In murky water, suspended particles scatter and absorb sunlight before it reaches the fish, and the reflected iridescent light is scattered again on the way back up. The fish’s iridophores produce the same interference patterns, but the signal is lost in the murk.',
         },
+      ],
+      quiz: [
+        { question: 'Why do fish shimmer and change colour when you tilt your head?', options: ['They have pigments that shift in light', 'Stacked crystal platelets reflect light waves that interfere constructively for different colours at different angles', 'Their scales are transparent and reflect the water colour', 'They actively change their colour like chameleons'], answer: 1 },
+        { question: 'What is the difference between structural colour and pigment colour?', options: ['Structural colour is brighter', 'Pigment comes from molecules that absorb light and fade; structural colour comes from nanostructures that never fade', 'Structural colour only works underwater', 'There is no meaningful difference'], answer: 1 },
+        { question: 'By how much does light slow down when entering water?', options: ['It does not slow down', 'About 10%', 'About 25%', 'About 50%'], answer: 2 },
+        { question: 'What is total internal reflection?', options: ['Light bouncing off a mirror', 'Light inside water being completely reflected back at steep angles instead of passing through the surface', 'Light reflecting off the bottom of a pool', 'A rainbow forming inside a raindrop'], answer: 1 },
+        { question: 'Why does Umiam Lake show vivid fish iridescence?', options: ['The lake has special minerals', 'Clear water (maintained by surrounding forests) allows sunlight to reach fish scales', 'The fish species there are uniquely colourful', 'The altitude makes colours appear brighter'], answer: 1 },
       ],
     },
   },
@@ -10643,6 +10893,7 @@ Vini held a bamboo tube of black rice to her ear, as if listening for the story 
       project: {
         title: 'Test Seed Germination Under Different Conditions',
         description: 'Design an experiment to test how storage conditions (temperature, moisture, light) affect seed viability over time.',
+        outputDiagram: 'SeedBankDiagram',
         steps: [
           'Obtain seeds of one variety (e.g., mustard or bean) and divide into 5 equal groups of 20',
           'Store each group under different conditions: room temp dry, room temp moist, refrigerated, frozen, and sunlit',
@@ -10758,6 +11009,13 @@ plt.show()  # What happened around 1960?`,
           keyIdea: 'Jhum (shifting cultivation) preserves diversity through mixed planting and family seed saving. Each landrace is adapted to specific local conditions. When traditional farming is replaced by monoculture, centuries of irreplaceable genetic information is lost.',
           diagram: 'SeedJhumDiagram',
         },
+      ],
+      quiz: [
+        { question: 'Why is genetic diversity important for crops?', options: ['It makes food taste better', 'Many varieties with different genes provide insurance — one disease cannot destroy everything', 'It increases crop yield', 'Farmers prefer colourful fields'], answer: 1 },
+        { question: 'How do seed banks preserve seeds for decades?', options: ['By planting them in greenhouses', 'By drying seeds to low moisture and freezing at minus 18 degrees C', 'By coating them in preservative chemicals', 'By storing them in vacuum-sealed bags at room temperature'], answer: 1 },
+        { question: 'What does Harrington\'s Rule state?', options: ['Seeds need light to germinate', 'Every 5 degrees C cooler or 1% drier roughly doubles seed lifespan', 'Larger seeds last longer than smaller seeds', 'Seeds from tropical plants last longer'], answer: 1 },
+        { question: 'What three things does a seed need to germinate?', options: ['Light, soil, and fertilizer', 'Water, warmth, and oxygen', 'Wind, rain, and sunlight', 'Darkness, cold, and pressure'], answer: 1 },
+        { question: 'How does jhum (shifting cultivation) preserve genetic diversity?', options: ['By planting only one crop at a time', 'Through mixed planting and family seed saving, maintaining many locally adapted varieties', 'By burning fields to create new soil', 'By importing seeds from other regions each year'], answer: 1 },
       ],
     },
   },
@@ -11806,6 +12064,7 @@ And every morning, Junali still paddles out to her forest and plants one more tr
       project: {
         title: 'Calculate How Much Carbon a New Forest Stores',
         description: 'Model a reforestation project: choose tree species, estimate growth rates, and calculate the total carbon captured over 30 years.',
+        outputDiagram: 'ForestCarbonCycleDiagram',
         steps: [
           'Select 3-4 tree species native to Assam and research their growth rates and wood density',
           'Define a 1-hectare plot and calculate how many trees can be planted at recommended spacing',
@@ -14214,6 +14473,13 @@ print(f"That's roughly {total_stars:,} visible stars!")
         { slug: 'orange-sunsets-assam', reason: 'Uses the same Rayleigh scattering that makes stars twinkle to explain why Assam sunsets glow orange' },
         { slug: 'kingfisher-blue', reason: 'Another story where light physics creates beauty — structural colour in feathers instead of pigment' },
       ],
+      quiz: [
+        { question: 'In the magnitude scale, which star is brighter — magnitude 1 or magnitude 5?', options: ['Magnitude 5 is brighter', 'Magnitude 1 is brighter — smaller numbers mean brighter stars', 'They are equally bright', 'It depends on the star\'s colour'], answer: 1 },
+        { question: 'How much brighter is a star that is 5 magnitudes brighter than another?', options: ['5 times brighter', '25 times brighter', '100 times brighter', '1,000 times brighter'], answer: 2 },
+        { question: 'Why do stars twinkle?', options: ['Stars pulse with energy', 'Moving pockets of warm and cool air bend their light rapidly', 'Stars are too far away to see clearly', 'The atmosphere absorbs starlight intermittently'], answer: 1 },
+        { question: 'Why do planets twinkle less than stars?', options: ['Planets are dimmer than stars', 'Planets appear as discs (not points), so air turbulence averages out across the disc', 'Planets are closer so their light is stronger', 'Planets reflect light instead of emitting it'], answer: 1 },
+        { question: 'What does the Bortle scale measure?', options: ['Star brightness', 'Telescope power', 'Sky darkness — from 1 (pristine) to 9 (inner city)', 'The number of visible stars'], answer: 2 },
+      ],
     },
   },
   {
@@ -15144,6 +15410,7 @@ Boren kept fishing with his old net and his creaky boat. He never caught another
     stem: { title: 'Sustainable Fishing', description: 'Sustainable fishing and marine biology.', icon: Leaf, color: 'from-blue-400 to-cyan-500', skills: ['Understand fish population dynamics: birth rates, death rates, and carrying capacity', 'Analyze the economics of fishing: effort, catch, and revenue curves', 'Model the tragedy of the commons and how shared resources get overexploited', 'Calculate maximum sustainable yield from biological parameters'], project: {
         title: 'Simulate the Tragedy of the Commons',
         description: 'Build a game where multiple fishers share a lake, and demonstrate how individual incentives lead to collective overfishing.',
+        outputDiagram: 'HilsaPopulationDiagram',
         steps: [
           'Set up a shared "lake" with 100 fish that grow by 20% each round (capped at 100)',
           'Create 4 "fishers" who each decide how many fish to catch per round',
@@ -15249,6 +15516,13 @@ for year in range(1, 21):
         { slug: 'river-that-ran-away', reason: 'River erosion and the Brahmaputra’s shifting course — the geology that shapes hilsa habitat' },
         { slug: 'cloud-refused-rain', reason: 'Weather and rainfall patterns — the monsoon that triggers hilsa migration upstream' },
       ],
+      quiz: [
+        { question: 'Why does the hilsa migrate from sea to river?', options: ['To escape ocean predators', 'To spawn — it migrates upstream burning stored fat as fuel', 'To find warmer water', 'To follow food sources'], answer: 1 },
+        { question: 'How do fish navigate back to their birth river?', options: ['By following ocean currents', 'By smelling their birth river\'s unique chemical signature at parts-per-billion concentrations', 'By using magnetic fields', 'By following other fish'], answer: 1 },
+        { question: 'What is maximum sustainable yield (MSY)?', options: ['The most fish a river can hold', 'The most fish a population can lose and still replace itself', 'The maximum weight of a single catch', 'The highest price fish can sell for'], answer: 1 },
+        { question: 'What happens when fishing exceeds MSY?', options: ['Fish grow larger to compensate', 'A collapse spiral where declining catches drive even harder fishing', 'The population recovers within one season', 'Nothing — fish populations are resilient'], answer: 1 },
+        { question: 'What is the single most important measure of river health for fish?', options: ['Water temperature', 'Water clarity', 'Dissolved oxygen', 'Current speed'], answer: 2 },
+      ],
     },
   },
   {
@@ -15317,6 +15591,7 @@ Meghi never hoarded again. She learned what every cloud eventually learns: that 
     stem: { title: 'Cloud Seeding & Weather', description: 'Cloud seeding and weather modification.', icon: Cloud, color: 'from-sky-400 to-blue-500', skills: ['Understand cloud formation: condensation nuclei, saturation, and droplet growth', 'Analyze cloud seeding chemistry: silver iodide, dry ice, and hygroscopic salts', 'Model the conditions required for precipitation: droplet coalescence and ice crystal growth', 'Evaluate the evidence for and against the effectiveness of cloud seeding'], project: {
         title: 'Investigate the Conditions for Condensation',
         description: 'Test how temperature, humidity, and nucleation particles affect when and where water vapor condenses.',
+        outputDiagram: 'CloudSeedingDiagram',
         steps: [
           'Create a cloud in a jar: add warm water, place ice on top, and introduce smoke (condensation nuclei)',
           'Test with and without smoke to demonstrate the role of condensation nuclei',
@@ -15430,6 +15705,13 @@ print(f"That is why Meghi could hold rain for so long!")`,
           keyIdea: 'Clouds are weather forecasts written in the sky. Cirrus warns of distant change, cumulus shows thermal activity, stratus means stable drizzle, and cumulonimbus means heavy rain and storms. Learning to read clouds is practical, free, and works anywhere.',
           diagram: 'CloudTypesDiagram',
         },
+      ],
+      quiz: [
+        { question: 'What are condensation nuclei?', options: ['Tiny water droplets in clouds', 'Tiny particles that water vapour condenses onto to form cloud droplets', 'Atoms inside water molecules', 'Ice crystals at high altitude'], answer: 1 },
+        { question: 'What two processes cause cloud droplets to grow large enough to fall as rain?', options: ['Evaporation and condensation', 'Collision-coalescence and the Bergeron process (ice crystals stealing water from liquid droplets)', 'Heating and cooling', 'Wind shear and gravity'], answer: 1 },
+        { question: 'What does cloud seeding add to clouds?', options: ['Water', 'Artificial ice nuclei (usually silver iodide) to trigger the Bergeron process', 'Heat to cause evaporation', 'Chemicals that attract rain'], answer: 1 },
+        { question: 'By how much can cloud seeding boost rainfall?', options: ['It can double rainfall', '5-15%, and only in clouds that already have moisture', 'Up to 50%', 'It has no measurable effect'], answer: 1 },
+        { question: 'What type of cloud means heavy rain and storms?', options: ['Cirrus', 'Stratus', 'Cumulus', 'Cumulonimbus'], answer: 3 },
       ],
     },
   },
