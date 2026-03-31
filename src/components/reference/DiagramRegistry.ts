@@ -568,6 +568,12 @@ import PitcherAnatomyDiagram from '../diagrams/PitcherAnatomyDiagram';
 import PitcherSurfaceTensionDiagram from '../diagrams/PitcherSurfaceTensionDiagram';
 import PitcherSpeciesDiagram from '../diagrams/PitcherSpeciesDiagram';
 import ActivityTrapModelDiagram from '../diagrams/ActivityTrapModelDiagram';
+// Orchid Colors — Plant Pigments & Pollination
+import OrchidPigmentDiagram from '../diagrams/OrchidPigmentDiagram';
+import OrchidBeeVisionDiagram from '../diagrams/OrchidBeeVisionDiagram';
+import OrchidCoevolutionDiagram from '../diagrams/OrchidCoevolutionDiagram';
+import OrchidEpiphyteDiagram from '../diagrams/OrchidEpiphyteDiagram';
+import ActivityFlowerDissectDiagram from '../diagrams/ActivityFlowerDissectDiagram';
 // Tejimola — Plant Biology & Genetics
 import TejimolaPlantReproDiagram from '../diagrams/TejimolaPlantReproDiagram';
 import TejimolaDNADiagram from '../diagrams/TejimolaDNADiagram';
@@ -605,6 +611,24 @@ import HornbillNestDiagram from '../diagrams/HornbillNestDiagram';
 import HornbillKeystoneDiagram from '../diagrams/HornbillKeystoneDiagram';
 import HornbillCallDiagram from '../diagrams/HornbillCallDiagram';
 import ActivityBirdWatchDiagram from '../diagrams/ActivityBirdWatchDiagram';
+// Tortoise and Hare — Speed, Acceleration & Biomechanics
+import RaceSpeedDiagram from '../diagrams/RaceSpeedDiagram';
+import RaceAccelerationDiagram from '../diagrams/RaceAccelerationDiagram';
+import RaceScalingDiagram from '../diagrams/RaceScalingDiagram';
+import RaceEnergyDiagram from '../diagrams/RaceEnergyDiagram';
+import ActivityRaceTimerDiagram from '../diagrams/ActivityRaceTimerDiagram';
+// Seed Keeper of Nagaland — Seed Banks & Genetic Diversity
+import SeedDiversityDiagram from '../diagrams/SeedDiversityDiagram';
+import SeedBankDiagram from '../diagrams/SeedBankDiagram';
+import SeedGerminationDiagram from '../diagrams/SeedGerminationDiagram';
+import SeedJhumDiagram from '../diagrams/SeedJhumDiagram';
+import ActivitySeedGerminateDiagram from '../diagrams/ActivitySeedGerminateDiagram';
+// Star Fell Deepor — Meteorites & Astronomy
+import MeteorAtmosphereDiagram from '../diagrams/MeteorAtmosphereDiagram';
+import MeteoriteTypesDiagram from '../diagrams/MeteoriteTypesDiagram';
+import MeteorImpactDiagram from '../diagrams/MeteorImpactDiagram';
+import DeeporBeelDiagram from '../diagrams/DeeporBeelDiagram';
+import ActivityMeteorWatchDiagram from '../diagrams/ActivityMeteorWatchDiagram';
 
 const registry: Record<string, ComponentType> = {
   SineWaveDiagram,
@@ -1207,12 +1231,36 @@ const registry: Record<string, ComponentType> = {
   HornbillKeystoneDiagram,
   HornbillCallDiagram,
   ActivityBirdWatchDiagram,
+  // Tortoise and Hare — Speed, Acceleration & Biomechanics
+  RaceSpeedDiagram,
+  RaceAccelerationDiagram,
+  RaceScalingDiagram,
+  RaceEnergyDiagram,
+  ActivityRaceTimerDiagram,
   // Pitcher Plant — Carnivorous Plants & Adaptation
   PitcherNutrientDiagram,
   PitcherAnatomyDiagram,
   PitcherSurfaceTensionDiagram,
   PitcherSpeciesDiagram,
   ActivityTrapModelDiagram,
+  // Orchid Colors — Plant Pigments & Pollination
+  OrchidPigmentDiagram,
+  OrchidBeeVisionDiagram,
+  OrchidCoevolutionDiagram,
+  OrchidEpiphyteDiagram,
+  ActivityFlowerDissectDiagram,
+  // Star Fell Deepor — Meteorites & Astronomy
+  MeteorAtmosphereDiagram,
+  MeteoriteTypesDiagram,
+  MeteorImpactDiagram,
+  DeeporBeelDiagram,
+  ActivityMeteorWatchDiagram,
+  // Seed Keeper of Nagaland — Seed Banks & Genetic Diversity
+  SeedDiversityDiagram,
+  SeedBankDiagram,
+  SeedGerminationDiagram,
+  SeedJhumDiagram,
+  ActivitySeedGerminateDiagram,
 };
 
 export default registry;
