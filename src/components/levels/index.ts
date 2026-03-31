@@ -42,7 +42,7 @@ const registry: Record<string, LevelComponents> = {
   'lost-temple': {Level1: lazy(() => import('./LostTempleLevel1')), Level2: lazy(() => import('./LostTempleLevel2')), Level3: lazy(() => import('./LostTempleLevel3')), Level4: lazy(() => import('./LostTempleLevel4')) },
   'peacocks-dance': {Level1: lazy(() => import('./PeacockLevel1')), Level2: lazy(() => import('./PeacockLevel2')), Level3: lazy(() => import('./PeacockLevel3')), Level4: lazy(() => import('./PeacockLevel4')) },
   'elephant-mud-bath': {Level1: lazy(() => import('./ElephantMudLevel1')), Level2: lazy(() => import('./ElephantMudLevel2')), Level3: lazy(() => import('./ElephantMudLevel3')), Level4: lazy(() => import('./ElephantMudLevel4')) },
-  'star-fell-deepor': { Level1: lazy(() => import('./StarDeepoorLevel1')), Level2: lazy(() => import('./StarDeepoorLevel2')) },
+  'star-fell-deepor': {Level1: lazy(() => import('./StarDeepoorLevel1')), Level2: lazy(() => import('./StarDeepoorLevel2')), Level3: lazy(() => import('./StarDeepoorLevel3')), Level4: lazy(() => import('./StarDeepoorLevel4')) },
   'brave-mithun': {Level1: lazy(() => import('./MithunLevel1')), Level2: lazy(() => import('./MithunLevel2')), Level3: lazy(() => import('./MithunLevel3')), Level4: lazy(() => import('./MithunLevel4')) },
   'seven-sisters': {Level1: lazy(() => import('./SevenSistersLevel1')), Level2: lazy(() => import('./SevenSistersLevel2')), Level3: lazy(() => import('./SevenSistersLevel3')), Level4: lazy(() => import('./SevenSistersLevel4')) },
   'monkey-bridge': {Level1: lazy(() => import('./MonkeyBridgeLevel1')), Level2: lazy(() => import('./MonkeyBridgeLevel2')), Level3: lazy(() => import('./MonkeyBridgeLevel3')), Level4: lazy(() => import('./MonkeyBridgeLevel4')) },
