@@ -15,7 +15,7 @@ export default function OceanDepthZonesDiagram() {
         <rect x="120" y="165" width="260" height="65" rx="0" fill="#1d4ed8" opacity="0.3" />
         <rect x="120" y="230" width="260" height="65" rx="0" fill="#1e3a8a" opacity="0.35" />
         <rect x="120" y="295" width="260" height="65" rx="0" fill="#172554" opacity="0.4" />
-        <rect x="120" y="360" width="260" height="45" rx="0 0 4 4" fill="#0f172a" opacity="0.5" />
+        <rect x="120" y="360" width="260" height="45" rx="4" fill="#0f172a" opacity="0.5" />
 
         {/* Zone labels */}
         <text x="250" y="65" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#93c5fd">Epipelagic (Sunlight Zone)</text>
@@ -42,7 +42,7 @@ export default function OceanDepthZonesDiagram() {
         <text x="370" y="338" fontSize="10" fill="#f87171">Hydrothermal vents</text>
 
         {/* Seabed */}
-        <rect x="120" y="395" width="260" height="10" rx="0 0 4 4" fill="#713f12" opacity="0.5" />
+        <rect x="120" y="395" width="260" height="10" rx="4" fill="#713f12" opacity="0.5" />
         <text x="250" y="404" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#ca8a04">Challenger Deep: 10,935 m</text>
 
         {/* Light penetration arrow */}

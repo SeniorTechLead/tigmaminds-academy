@@ -429,10 +429,11 @@ export default function LessonPage() {
             </div>
 
             {/* Real World */}
+            {((lesson.stem as any).realWorld || []).length > 0 && (
             <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8">
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">Real-World Applications</h3>
               <ul className="space-y-4">
-                {lesson.stem.realWorld.map((item) => (
+                {((lesson.stem as any).realWorld || []).map((item: string) => (
                   <li key={item} className="flex items-start gap-3">
                     <ExternalLink className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
                     <span className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">{item}</span>
@@ -440,6 +441,7 @@ export default function LessonPage() {
                 ))}
               </ul>
             </div>
+            )}
           </div>
         </div>
       </section>

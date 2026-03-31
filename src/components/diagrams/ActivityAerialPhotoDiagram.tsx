@@ -11,7 +11,7 @@ export default function ActivityAerialPhotoDiagram() {
           <rect width="330" height="200" rx="8" stroke="#64748b" strokeWidth="1.5" fill="none" />
           <text x="165" y="-8" textAnchor="middle" fontSize="13" fontWeight="600" className="fill-gray-600 dark:fill-slate-300">Ground-Level View</text>
           {/* Simple ground scene */}
-          <rect width="330" height="120" y="80" fill="#4ade80" opacity="0.3" rx="0 0 8 8" />
+          <rect width="330" height="120" y="80" fill="#4ade80" opacity="0.3" rx="8" />
           <rect width="330" height="80" fill="#7dd3fc" opacity="0.3" />
           {/* Plants blocking view */}
           <rect x="20" y="60" width="40" height="140" rx="4" fill="#16a34a" opacity="0.5" />
