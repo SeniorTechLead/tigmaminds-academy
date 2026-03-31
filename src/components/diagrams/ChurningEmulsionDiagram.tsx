@@ -103,7 +103,7 @@ export default function ChurningEmulsionDiagram() {
           className="stroke-gray-400 dark:stroke-gray-500" strokeWidth="1" strokeDasharray="4,3" />
 
         {/* Water layer (bottom) */}
-        <rect x="346" y="137" width="148" height="107" rx="0 0 5 5"
+        <rect x="346" y="137" width="148" height="107" rx="5"
           className="fill-blue-200 dark:fill-blue-700/50" />
         <text x="420" y="180" textAnchor="middle" className="ce-bold fill-blue-700 dark:fill-blue-300">
           Water Layer
