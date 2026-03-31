@@ -2,7 +2,7 @@ export default function PandaCamouflageDiagram() {
   return (
     <div className="my-4">
       <svg viewBox="0 0 580 420" className="w-full max-w-xl mx-auto" role="img" aria-label="Three types of animal camouflage: crypsis, disruptive coloration, and mimicry">
-        <rect width="580" height="420" rx="12" className="fill-slate-900" />
+        <rect width="580" height="420" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}
         <text x="290" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#86efac">Three Types of Camouflage</text>
@@ -41,8 +41,8 @@ export default function PandaCamouflageDiagram() {
           {/* Arrow pointing to hard-to-see moth */}
           <line x1="85" y1="240" x2="85" y2="138" stroke="#fde68a" strokeWidth="1" strokeDasharray="3,2" markerEnd="url(#camoArrow)" />
 
-          <text x="85" y="290" textAnchor="middle" fontSize="10" fill="#d1d5db">The animal’s colour</text>
-          <text x="85" y="303" textAnchor="middle" fontSize="10" fill="#d1d5db">matches its habitat</text>
+          <text x="85" y="290" textAnchor="middle" fontSize="10" className="fill-gray-400 dark:fill-gray-400">The animal’s colour</text>
+          <text x="85" y="303" textAnchor="middle" fontSize="10" className="fill-gray-400 dark:fill-gray-400">matches its habitat</text>
         </g>
 
         {/* ── 2. Disruptive Coloration ── */}
@@ -80,9 +80,9 @@ export default function PandaCamouflageDiagram() {
           <text x="85" y="238" textAnchor="middle" fontSize="10" fill="#fde68a">stripes break the</text>
           <text x="85" y="251" textAnchor="middle" fontSize="10" fill="#fde68a">body outline</text>
 
-          <text x="85" y="278" textAnchor="middle" fontSize="10" fill="#d1d5db">Predators struggle to</text>
-          <text x="85" y="291" textAnchor="middle" fontSize="10" fill="#d1d5db">see where one animal</text>
-          <text x="85" y="304" textAnchor="middle" fontSize="10" fill="#d1d5db">ends and another begins</text>
+          <text x="85" y="278" textAnchor="middle" fontSize="10" className="fill-gray-400 dark:fill-gray-400">Predators struggle to</text>
+          <text x="85" y="291" textAnchor="middle" fontSize="10" className="fill-gray-400 dark:fill-gray-400">see where one animal</text>
+          <text x="85" y="304" textAnchor="middle" fontSize="10" className="fill-gray-400 dark:fill-gray-400">ends and another begins</text>
         </g>
 
         {/* ── 3. Mimicry ── */}
@@ -119,8 +119,8 @@ export default function PandaCamouflageDiagram() {
           <text x="90" y="223" textAnchor="middle" fontSize="10" fill="#fde68a">copies a dangerous</text>
           <text x="90" y="236" textAnchor="middle" fontSize="10" fill="#fde68a">one’s warning colours</text>
 
-          <text x="90" y="263" textAnchor="middle" fontSize="10" fill="#d1d5db">Predators avoid both,</text>
-          <text x="90" y="276" textAnchor="middle" fontSize="10" fill="#d1d5db">protecting the mimic</text>
+          <text x="90" y="263" textAnchor="middle" fontSize="10" className="fill-gray-400 dark:fill-gray-400">Predators avoid both,</text>
+          <text x="90" y="276" textAnchor="middle" fontSize="10" className="fill-gray-400 dark:fill-gray-400">protecting the mimic</text>
         </g>
 
         {/* Arrow marker */}

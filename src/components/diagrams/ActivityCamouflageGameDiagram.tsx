@@ -5,7 +5,7 @@ export default function ActivityCamouflageGameDiagram() {
         <rect width="560" height="380" rx="12" className="fill-slate-900" />
 
         <text x="280" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#86efac">Try It: Camouflage Test</text>
-        <text x="280" y="46" textAnchor="middle" fontSize="11" fill="#94a3b8">Which colour survives longest against your garden background?</text>
+        <text x="280" y="46" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Which colour survives longest against your garden background?</text>
 
         {/* Step 1: Cut paper squares */}
         <g transform="translate(20, 65)">
@@ -31,7 +31,7 @@ export default function ActivityCamouflageGameDiagram() {
               <text x={sq.x + 30} y={sq.y + 14} fontSize="9" fill="#d1d5db">{sq.label}</text>
             </g>
           ))}
-          <text x="80" y="135" textAnchor="middle" fontSize="10" fill="#94a3b8">20 squares total</text>
+          <text x="80" y="135" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">20 squares total</text>
         </g>
 
         {/* Step 2: Scatter */}
@@ -57,7 +57,7 @@ export default function ActivityCamouflageGameDiagram() {
           <rect x="120" y="80" width="8" height="8" fill="#ef4444" />
           <rect x="85" y="55" width="8" height="8" fill="#22c55e" opacity="0.4" />
 
-          <text x="80" y="133" textAnchor="middle" fontSize="10" fill="#94a3b8">Toss on grass/soil</text>
+          <text x="80" y="133" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Toss on grass/soil</text>
         </g>
 
         {/* Step 3: Hunt */}
@@ -74,8 +74,8 @@ export default function ActivityCamouflageGameDiagram() {
           <ellipse cx="85" cy="100" rx="18" ry="10" fill="none" stroke="#86efac" strokeWidth="1.5" />
           <circle cx="85" cy="100" r="5" fill="#86efac" />
 
-          <text x="85" y="128" textAnchor="middle" fontSize="10" fill="#94a3b8">Friend picks up all</text>
-          <text x="85" y="140" textAnchor="middle" fontSize="10" fill="#94a3b8">they can find</text>
+          <text x="85" y="128" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Friend picks up all</text>
+          <text x="85" y="140" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">they can find</text>
         </g>
 
         {/* Results section */}
@@ -96,7 +96,7 @@ export default function ActivityCamouflageGameDiagram() {
               <g key={bar.label}>
                 <rect x={bx} y={120 - bh} width="40" height={bh} rx="3" fill={bar.color} opacity="0.8" />
                 <text x={bx + 20} y={130} textAnchor="middle" fontSize="10" fill="#d1d5db">{bar.label}</text>
-                <text x={bx + 20} y={115 - bh} textAnchor="middle" fontSize="10" fontWeight="bold" fill="#e2e8f0">{bar.found}/5</text>
+                <text x={bx + 20} y={115 - bh} textAnchor="middle" fontSize="10" fontWeight="bold" className="fill-gray-700 dark:fill-slate-200">{bar.found}/5</text>
               </g>
             );
           })}

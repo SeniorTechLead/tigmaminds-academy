@@ -28,13 +28,13 @@ export default function OrchidPigmentDiagram() {
           <rect x="0" y="0" width="160" height="130" rx="8" fill="#1e1b3a" stroke="#a855f7" strokeWidth="1" />
           <text x="80" y="20" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#a855f7">Anthocyanins</text>
           {/* Absorption: green light */}
-          <text x="80" y="38" textAnchor="middle" fontSize="9" fill="#94a3b8">Absorb: green light</text>
+          <text x="80" y="38" textAnchor="middle" fontSize="9" className="fill-gray-500 dark:fill-slate-400">Absorb: green light</text>
           <rect x="20" y="44" width="120" height="10" rx="3" fill="#22c55e" opacity="0.3" />
           <line x1="20" y1="49" x2="140" y2="49" stroke="#22c55e" strokeWidth="2" strokeDasharray="4 3" />
           <text x="80" y="65" textAnchor="middle" fontSize="8" fill="#6b7280">← absorbed →</text>
 
           {/* Reflected colors */}
-          <text x="80" y="82" textAnchor="middle" fontSize="9" fill="#e2e8f0">Reflect:</text>
+          <text x="80" y="82" textAnchor="middle" fontSize="9" className="fill-gray-700 dark:fill-slate-200">Reflect:</text>
           <circle cx="40" cy="100" r="12" fill="#ef4444" opacity="0.8" />
           <text x="40" y="104" textAnchor="middle" fontSize="8" fill="white">Red</text>
           <circle cx="80" cy="100" r="12" fill="#8b5cf6" opacity="0.8" />
@@ -48,12 +48,12 @@ export default function OrchidPigmentDiagram() {
         <g transform="translate(200, 110)">
           <rect x="0" y="0" width="160" height="130" rx="8" fill="#1a1a0e" stroke="#f59e0b" strokeWidth="1" />
           <text x="80" y="20" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#f59e0b">Carotenoids</text>
-          <text x="80" y="38" textAnchor="middle" fontSize="9" fill="#94a3b8">Absorb: blue-violet light</text>
+          <text x="80" y="38" textAnchor="middle" fontSize="9" className="fill-gray-500 dark:fill-slate-400">Absorb: blue-violet light</text>
           <rect x="20" y="44" width="120" height="10" rx="3" fill="#6366f1" opacity="0.3" />
           <line x1="20" y1="49" x2="140" y2="49" stroke="#6366f1" strokeWidth="2" strokeDasharray="4 3" />
           <text x="80" y="65" textAnchor="middle" fontSize="8" fill="#6b7280">← absorbed →</text>
 
-          <text x="80" y="82" textAnchor="middle" fontSize="9" fill="#e2e8f0">Reflect:</text>
+          <text x="80" y="82" textAnchor="middle" fontSize="9" className="fill-gray-700 dark:fill-slate-200">Reflect:</text>
           <circle cx="40" cy="100" r="12" fill="#eab308" opacity="0.8" />
           <text x="40" y="104" textAnchor="middle" fontSize="8" fill="white">Yellow</text>
           <circle cx="80" cy="100" r="12" fill="#f97316" opacity="0.8" />
@@ -67,12 +67,12 @@ export default function OrchidPigmentDiagram() {
         <g transform="translate(370, 110)">
           <rect x="0" y="0" width="160" height="130" rx="8" fill="#1a0e16" stroke="#ec4899" strokeWidth="1" />
           <text x="80" y="20" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#ec4899">Betalains</text>
-          <text x="80" y="38" textAnchor="middle" fontSize="9" fill="#94a3b8">Absorb: green-yellow light</text>
+          <text x="80" y="38" textAnchor="middle" fontSize="9" className="fill-gray-500 dark:fill-slate-400">Absorb: green-yellow light</text>
           <rect x="20" y="44" width="120" height="10" rx="3" fill="#84cc16" opacity="0.3" />
           <line x1="20" y1="49" x2="140" y2="49" stroke="#84cc16" strokeWidth="2" strokeDasharray="4 3" />
           <text x="80" y="65" textAnchor="middle" fontSize="8" fill="#6b7280">← absorbed →</text>
 
-          <text x="80" y="82" textAnchor="middle" fontSize="9" fill="#e2e8f0">Reflect:</text>
+          <text x="80" y="82" textAnchor="middle" fontSize="9" className="fill-gray-700 dark:fill-slate-200">Reflect:</text>
           <circle cx="40" cy="100" r="12" fill="#dc2626" opacity="0.8" />
           <text x="40" y="104" textAnchor="middle" fontSize="8" fill="white">Red</text>
           <circle cx="80" cy="100" r="12" fill="#f472b6" opacity="0.8" />
@@ -84,12 +84,12 @@ export default function OrchidPigmentDiagram() {
 
         {/* How it works: sunlight hits petal */}
         <g transform="translate(280, 265)">
-          <text x="0" y="0" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#e2e8f0">How Pigments Make Color</text>
+          <text x="0" y="0" textAnchor="middle" fontSize="12" fontWeight="bold" className="fill-gray-700 dark:fill-slate-200">How Pigments Make Color</text>
 
           {/* Sunlight arrow */}
           <line x1="-180" y1="25" x2="-120" y2="45" stroke="#fbbf24" strokeWidth="2" markerEnd="url(#arrowY)" />
           <text x="-180" y="20" textAnchor="start" fontSize="10" fill="#fbbf24">White sunlight</text>
-          <text x="-180" y="32" textAnchor="start" fontSize="8" fill="#94a3b8">(all wavelengths)</text>
+          <text x="-180" y="32" textAnchor="start" fontSize="8" className="fill-gray-500 dark:fill-slate-400">(all wavelengths)</text>
 
           {/* Petal */}
           <ellipse cx="0" cy="60" rx="80" ry="30" fill="#a855f7" opacity="0.3" stroke="#a855f7" strokeWidth="1.5" />
@@ -105,7 +105,7 @@ export default function OrchidPigmentDiagram() {
           {/* Reflected (purple) - bounces back */}
           <line x1="80" y1="45" x2="140" y2="25" stroke="#a855f7" strokeWidth="2" markerEnd="url(#arrowP)" />
           <text x="145" y="20" textAnchor="start" fontSize="10" fill="#a855f7">Purple reflected</text>
-          <text x="145" y="32" textAnchor="start" fontSize="8" fill="#94a3b8">→ what your eye sees</text>
+          <text x="145" y="32" textAnchor="start" fontSize="8" className="fill-gray-500 dark:fill-slate-400">→ what your eye sees</text>
         </g>
 
         <defs>

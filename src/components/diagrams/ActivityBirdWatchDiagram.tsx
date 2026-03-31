@@ -16,10 +16,10 @@ export default function ActivityBirdWatchDiagram() {
           <text x="450" y="18" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#93c5fd">Call?</text>
 
           {/* Divider lines */}
-          <line x1="80" y1="0" x2="80" y2="28" stroke="#475569" strokeWidth="1" />
-          <line x1="180" y1="0" x2="180" y2="28" stroke="#475569" strokeWidth="1" />
-          <line x1="300" y1="0" x2="300" y2="28" stroke="#475569" strokeWidth="1" />
-          <line x1="410" y1="0" x2="410" y2="28" stroke="#475569" strokeWidth="1" />
+          <line x1="80" y1="0" x2="80" y2="28" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1" />
+          <line x1="180" y1="0" x2="180" y2="28" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1" />
+          <line x1="300" y1="0" x2="300" y2="28" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1" />
+          <line x1="410" y1="0" x2="410" y2="28" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1" />
         </g>
 
         {/* Example row */}
@@ -34,7 +34,7 @@ export default function ActivityBirdWatchDiagram() {
           <line x1="180" y1="0" x2="180" y2="26" stroke="#334155" strokeWidth="1" />
           <line x1="300" y1="0" x2="300" y2="26" stroke="#334155" strokeWidth="1" />
           <line x1="410" y1="0" x2="410" y2="26" stroke="#334155" strokeWidth="1" />
-          <text x="492" y="17" fontSize="8" fill="#94a3b8">← example</text>
+          <text x="492" y="17" fontSize="8" className="fill-gray-500 dark:fill-slate-400">← example</text>
         </g>
 
         {/* Empty rows */}

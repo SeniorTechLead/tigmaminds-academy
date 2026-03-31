@@ -19,7 +19,7 @@ export default function ActivityTowerBuildDiagram() {
         <text x="100" y="75" textAnchor="middle" fill="#f59e0b" fontSize="10">Marshmallow</text>
         {/* X mark */}
         <text x="100" y="315" textAnchor="middle" fill="#ef4444" fontSize="12" fontWeight="bold">WEAK</text>
-        <text x="100" y="330" textAnchor="middle" fill="#9ca3af" fontSize="10">No triangles</text>
+        <text x="100" y="330" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">No triangles</text>
         {/* Wobble arrows */}
         <path d="M 70 180 Q 60 170 70 160" fill="none" stroke="#ef4444" strokeWidth="1.5" strokeDasharray="3" />
         <text x="50" y="175" fill="#ef4444" fontSize="10">wobble</text>
@@ -43,12 +43,12 @@ export default function ActivityTowerBuildDiagram() {
         <circle cx="260" cy="88" r="12" fill="#fde68a" stroke="#f59e0b" strokeWidth="1.5" />
         {/* Checkmark */}
         <text x="260" y="315" textAnchor="middle" fill="#22c55e" fontSize="12" fontWeight="bold">STRONG</text>
-        <text x="260" y="330" textAnchor="middle" fill="#9ca3af" fontSize="10">Triangle = rigid</text>
+        <text x="260" y="330" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">Triangle = rigid</text>
       </g>
 
       {/* RIGHT: Why triangles work */}
       <g>
-        <text x="420" y="75" textAnchor="middle" fill="#d1d5db" fontSize="11" fontWeight="bold">Why Triangles?</text>
+        <text x="420" y="75" textAnchor="middle" className="fill-gray-400 dark:fill-gray-400" fontSize="11" fontWeight="bold">Why Triangles?</text>
 
         {/* Square — deforms */}
         <rect x="380" y="100" width="40" height="40" fill="none" stroke="#ef4444" strokeWidth="2" rx="1" />
@@ -70,8 +70,8 @@ export default function ActivityTowerBuildDiagram() {
 
       {/* Materials list */}
       <text x="420" y="280" textAnchor="middle" fill="#fbbf24" fontSize="10" fontWeight="bold">You need:</text>
-      <text x="420" y="295" textAnchor="middle" fill="#d1d5db" fontSize="10">20 spaghetti + tape</text>
-      <text x="420" y="308" textAnchor="middle" fill="#d1d5db" fontSize="10">+ 1 marshmallow on top</text>
+      <text x="420" y="295" textAnchor="middle" className="fill-gray-400 dark:fill-gray-400" fontSize="10">20 spaghetti + tape</text>
+      <text x="420" y="308" textAnchor="middle" className="fill-gray-400 dark:fill-gray-400" fontSize="10">+ 1 marshmallow on top</text>
 
       <defs>
         <marker id="atArrowRed" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto">

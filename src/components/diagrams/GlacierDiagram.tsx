@@ -7,7 +7,7 @@ export default function GlacierDiagram() {
         role="img"
         aria-label="Glacier anatomy showing accumulation zone where snow falls, equilibrium line, and ablation zone where ice melts, with moraines labeled"
       >
-        <rect x="0" y="0" width="600" height="400" className="fill-slate-900" rx="8" />
+        <rect x="0" y="0" width="600" height="400" className="fill-white dark:fill-slate-900" rx="8" />
 
         {/* Title */}
         <text x="300" y="26" textAnchor="middle" fontSize="12" className="fill-gray-200" fontWeight="700">
@@ -77,7 +77,7 @@ export default function GlacierDiagram() {
         <text x="357" y="213" textAnchor="middle" fontSize="9" className="fill-amber-300" fontWeight="800">
           Equilibrium line
         </text>
-        <text x="357" y="226" textAnchor="middle" fontSize="7" className="fill-gray-400">
+        <text x="357" y="226" textAnchor="middle" fontSize="7" className="fill-gray-500 dark:fill-gray-400">
           gain = loss here
         </text>
 
@@ -86,7 +86,7 @@ export default function GlacierDiagram() {
         <text x="430" y="281" textAnchor="middle" fontSize="9" className="fill-blue-300" fontWeight="700">
           Ablation zone
         </text>
-        <text x="430" y="294" textAnchor="middle" fontSize="7" className="fill-gray-400">
+        <text x="430" y="294" textAnchor="middle" fontSize="7" className="fill-gray-500 dark:fill-gray-400">
           Ice melts here
         </text>
 
@@ -130,11 +130,11 @@ export default function GlacierDiagram() {
         {[435, 445, 455, 450, 440].map((x, i) => (
           <circle key={`term-${i}`} cx={x} cy={332 + (i % 2) * 4} r="3.5" className="fill-gray-500/60 stroke-gray-400" strokeWidth="0.5" />
         ))}
-        <text x="432" y="350" fontSize="7" className="fill-gray-300" fontWeight="600">
+        <text x="432" y="350" fontSize="7" className="fill-gray-600 dark:fill-gray-300" fontWeight="600">
           Terminal moraine
         </text>
 
-        <text x="130" y="150" fontSize="7" className="fill-gray-300" fontWeight="600">
+        <text x="130" y="150" fontSize="7" className="fill-gray-600 dark:fill-gray-300" fontWeight="600">
           Lateral moraine
         </text>
 
@@ -144,8 +144,8 @@ export default function GlacierDiagram() {
         </text>
 
         {/* Insight */}
-        <rect x="40" y="372" width="520" height="22" rx="4" className="fill-slate-800" />
-        <text x="300" y="387" textAnchor="middle" fontSize="9" className="fill-gray-300" fontWeight="600">
+        <rect x="40" y="372" width="520" height="22" rx="4" className="fill-gray-100 dark:fill-slate-800" />
+        <text x="300" y="387" textAnchor="middle" fontSize="9" className="fill-gray-600 dark:fill-gray-300" fontWeight="600">
           Glaciers are rivers of ice — snow piles up at the top, melts at the bottom
         </text>
       </svg>

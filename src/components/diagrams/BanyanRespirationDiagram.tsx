@@ -37,20 +37,20 @@ export default function BanyanRespirationDiagram() {
   return (
     <div className="my-4">
       <svg viewBox="0 0 525 435" className="w-full max-w-lg mx-auto" role="img" aria-label="24-hour carbon balance showing photosynthesis during day and respiration at all times">
-        <rect width="500" height="400" rx="12" className="fill-slate-900" />
+        <rect width="500" height="400" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}
         <text x="250" y="28" textAnchor="middle" className="fill-amber-400" fontSize="14" fontWeight="bold">Photosynthesis vs Respiration</text>
-        <text x="250" y="44" textAnchor="middle" className="fill-slate-400" fontSize="10">24-hour carbon balance of a tree</text>
+        <text x="250" y="44" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="10">24-hour carbon balance of a tree</text>
 
         {/* Day/night background */}
-        <rect x={xPos(0)} y={chartTop} width={xPos(6) - xPos(0)} height={chartH} className="fill-slate-800" opacity="0.5" />
+        <rect x={xPos(0)} y={chartTop} width={xPos(6) - xPos(0)} height={chartH} className="fill-gray-100 dark:fill-slate-800" opacity="0.5" />
         <rect x={xPos(6)} y={chartTop} width={xPos(18) - xPos(6)} height={chartH} className="fill-yellow-900" opacity="0.15" />
-        <rect x={xPos(18)} y={chartTop} width={xPos(24) - xPos(18)} height={chartH} className="fill-slate-800" opacity="0.5" />
+        <rect x={xPos(18)} y={chartTop} width={xPos(24) - xPos(18)} height={chartH} className="fill-gray-100 dark:fill-slate-800" opacity="0.5" />
 
-        <text x={xPos(3)} y={chartTop + 15} textAnchor="middle" className="fill-slate-500" fontSize="8">Night</text>
+        <text x={xPos(3)} y={chartTop + 15} textAnchor="middle" className="fill-gray-400 dark:fill-slate-500" fontSize="8">Night</text>
         <text x={xPos(12)} y={chartTop + 15} textAnchor="middle" className="fill-yellow-600" fontSize="8">Day</text>
-        <text x={xPos(21)} y={chartTop + 15} textAnchor="middle" className="fill-slate-500" fontSize="8">Night</text>
+        <text x={xPos(21)} y={chartTop + 15} textAnchor="middle" className="fill-gray-400 dark:fill-slate-500" fontSize="8">Night</text>
 
         {/* Axes */}
         <line x1={chartLeft} y1={chartBottom} x2={chartRight} y2={chartBottom} className="stroke-slate-500" strokeWidth="1.5" />
@@ -63,13 +63,13 @@ export default function BanyanRespirationDiagram() {
         {[0, 6, 12, 18, 24].map(h => (
           <g key={h}>
             <line x1={xPos(h)} y1={chartBottom} x2={xPos(h)} y2={chartBottom + 5} className="stroke-slate-500" strokeWidth="1" />
-            <text x={xPos(h)} y={chartBottom + 16} textAnchor="middle" className="fill-slate-400" fontSize="8">{h}:00</text>
+            <text x={xPos(h)} y={chartBottom + 16} textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="8">{h}:00</text>
           </g>
         ))}
-        <text x={250} y={chartBottom + 30} textAnchor="middle" className="fill-slate-400" fontSize="9">Time of day</text>
+        <text x={250} y={chartBottom + 30} textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="9">Time of day</text>
 
         {/* Y axis label */}
-        <text x="25" y={(chartTop + chartBottom) / 2} textAnchor="middle" className="fill-slate-400" fontSize="9" transform={`rotate(-90, 25, ${(chartTop + chartBottom) / 2})`}>Carbon flux</text>
+        <text x="25" y={(chartTop + chartBottom) / 2} textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="9" transform={`rotate(-90, 25, ${(chartTop + chartBottom) / 2})`}>Carbon flux</text>
 
         {/* Photosynthesis curve (green) */}
         <polyline points={photoPoints} className="stroke-green-400" strokeWidth="2.5" fill="none" />
@@ -86,7 +86,7 @@ export default function BanyanRespirationDiagram() {
         <polyline points={netPoints} className="stroke-sky-400" strokeWidth="1.5" fill="none" />
 
         {/* Legend */}
-        <rect x="340" y="55" width="145" height="70" rx="6" className="fill-slate-800" />
+        <rect x="340" y="55" width="145" height="70" rx="6" className="fill-gray-100 dark:fill-slate-800" />
         <line x1="350" y1="72" x2="375" y2="72" className="stroke-green-400" strokeWidth="2.5" />
         <text x="382" y="76" className="fill-green-400" fontSize="8">Photosynthesis</text>
 

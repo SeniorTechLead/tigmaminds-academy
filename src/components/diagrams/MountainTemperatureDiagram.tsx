@@ -52,7 +52,7 @@ export default function MountainTemperatureDiagram() {
         role="img"
         aria-label="Mountain cross-section showing temperature decreasing from 30°C at the base to minus 5°C at the summit"
       >
-        <rect x="0" y="0" width="600" height="410" className="fill-slate-900" rx="8" />
+        <rect x="0" y="0" width="600" height="410" className="fill-white dark:fill-slate-900" rx="8" />
 
         {/* Mountain fill — green base fading to white top */}
         <defs>
@@ -112,7 +112,7 @@ export default function MountainTemperatureDiagram() {
           y={(top + bottom) / 2}
           textAnchor="middle"
           fontSize="10"
-          className="fill-gray-300"
+          className="fill-gray-600 dark:fill-gray-300"
           fontWeight="600"
           transform={`rotate(-90,14,${(top + bottom) / 2})`}
         >
@@ -135,7 +135,7 @@ export default function MountainTemperatureDiagram() {
               y={altY(lv.alt) + 3}
               textAnchor="end"
               fontSize="8"
-              className="fill-gray-300"
+              className="fill-gray-600 dark:fill-gray-300"
             >
               {lv.label}
             </text>
@@ -183,8 +183,8 @@ export default function MountainTemperatureDiagram() {
         </text>
 
         {/* Bottom insight label */}
-        <rect x={left - 10} y={bottom + 8} width="480" height="22" rx="4" className="fill-slate-800" />
-        <text x={left} y={bottom + 23} fontSize="9" className="fill-gray-300" fontWeight="600">
+        <rect x={left - 10} y={bottom + 8} width="480" height="22" rx="4" className="fill-gray-100 dark:fill-slate-800" />
+        <text x={left} y={bottom + 23} fontSize="9" className="fill-gray-600 dark:fill-gray-300" fontWeight="600">
           Higher = thinner air = less heat trapped → mountains are cold at the top
         </text>
       </svg>

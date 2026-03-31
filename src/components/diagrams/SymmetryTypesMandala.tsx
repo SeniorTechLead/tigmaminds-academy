@@ -35,7 +35,7 @@ export default function SymmetryTypesMandala() {
           .title { font-family: system-ui, sans-serif; font-size: 14px; font-weight: 700; }
         `}</style>
 
-        <rect width="670" height="370" rx="8" className="fill-slate-900" />
+        <rect width="670" height="370" rx="8" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}
         <text x="335" y="30" textAnchor="middle" className="title fill-amber-300">

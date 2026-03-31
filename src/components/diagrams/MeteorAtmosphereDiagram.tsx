@@ -1,6 +1,6 @@
 export default function MeteorAtmosphereDiagram() {
   return (
-    <div className="w-full max-w-xl mx-auto my-4">
+    <div className="dark:text-inherit w-full max-w-xl mx-auto my-4">
       <svg
         viewBox="0 0 780 580"
         xmlns="http://www.w3.org/2000/svg"

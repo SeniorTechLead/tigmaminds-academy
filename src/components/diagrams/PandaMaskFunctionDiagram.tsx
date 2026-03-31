@@ -2,7 +2,7 @@ export default function PandaMaskFunctionDiagram() {
   return (
     <div className="my-4">
       <svg viewBox="0 0 580 480" className="w-full max-w-xl mx-auto" role="img" aria-label="Red panda face mask functions: counter-shading, glare reduction, and bark camouflage">
-        <rect width="580" height="480" rx="12" className="fill-slate-900" />
+        <rect width="580" height="480" rx="12" className="fill-white dark:fill-slate-900" />
 
         <text x="290" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#fb923c">The Red Panda’s Mask — Three Functions</text>
 
@@ -75,9 +75,9 @@ export default function PandaMaskFunctionDiagram() {
 
           <text x="85" y="160" textAnchor="middle" fontSize="10" fill="#fdba74">Dark on top absorbs</text>
           <text x="85" y="173" textAnchor="middle" fontSize="10" fill="#fdba74">sunlight from above</text>
-          <text x="85" y="190" textAnchor="middle" fontSize="10" fill="#d1d5db">Light below reflects</text>
-          <text x="85" y="203" textAnchor="middle" fontSize="10" fill="#d1d5db">shadow — flattening</text>
-          <text x="85" y="216" textAnchor="middle" fontSize="10" fill="#d1d5db">the 3D shape</text>
+          <text x="85" y="190" textAnchor="middle" fontSize="10" className="fill-gray-400 dark:fill-gray-400">Light below reflects</text>
+          <text x="85" y="203" textAnchor="middle" fontSize="10" className="fill-gray-400 dark:fill-gray-400">shadow — flattening</text>
+          <text x="85" y="216" textAnchor="middle" fontSize="10" className="fill-gray-400 dark:fill-gray-400">the 3D shape</text>
         </g>
 
         {/* ── Function 2: Glare Reduction ── */}
@@ -110,10 +110,10 @@ export default function PandaMaskFunctionDiagram() {
 
           <text x="85" y="140" textAnchor="middle" fontSize="10" fill="#fdba74">Dark fur around eyes</text>
           <text x="85" y="153" textAnchor="middle" fontSize="10" fill="#fdba74">absorbs bright light</text>
-          <text x="85" y="172" textAnchor="middle" fontSize="10" fill="#d1d5db">Same reason athletes</text>
-          <text x="85" y="185" textAnchor="middle" fontSize="10" fill="#d1d5db">wear black eye paint</text>
-          <text x="85" y="198" textAnchor="middle" fontSize="10" fill="#d1d5db">— reduces snow glare</text>
-          <text x="85" y="211" textAnchor="middle" fontSize="10" fill="#d1d5db">in bright mountain sun</text>
+          <text x="85" y="172" textAnchor="middle" fontSize="10" className="fill-gray-400 dark:fill-gray-400">Same reason athletes</text>
+          <text x="85" y="185" textAnchor="middle" fontSize="10" className="fill-gray-400 dark:fill-gray-400">wear black eye paint</text>
+          <text x="85" y="198" textAnchor="middle" fontSize="10" className="fill-gray-400 dark:fill-gray-400">— reduces snow glare</text>
+          <text x="85" y="211" textAnchor="middle" fontSize="10" className="fill-gray-400 dark:fill-gray-400">in bright mountain sun</text>
         </g>
 
         {/* ── Function 3: Bark Camouflage ── */}
@@ -146,8 +146,8 @@ export default function PandaMaskFunctionDiagram() {
 
           <text x="90" y="182" textAnchor="middle" fontSize="10" fill="#fdba74">Reddish-brown fur</text>
           <text x="90" y="195" textAnchor="middle" fontSize="10" fill="#fdba74">matches mossy bark</text>
-          <text x="90" y="213" textAnchor="middle" fontSize="10" fill="#d1d5db">From above, a curled</text>
-          <text x="90" y="226" textAnchor="middle" fontSize="10" fill="#d1d5db">red panda is invisible</text>
+          <text x="90" y="213" textAnchor="middle" fontSize="10" className="fill-gray-400 dark:fill-gray-400">From above, a curled</text>
+          <text x="90" y="226" textAnchor="middle" fontSize="10" className="fill-gray-400 dark:fill-gray-400">red panda is invisible</text>
         </g>
       </svg>
     </div>

@@ -118,7 +118,7 @@ export default function DeeporBeelDiagram() {
         </g>
 
         {/* Dark sky vs light sky comparison */}
-        <rect x="30" y="490" width="340" height="100" rx="8" fill="#0f172a" stroke="#818cf8" strokeWidth="1" />
+        <rect x="30" y="490" width="340" height="100" rx="8" className="fill-white dark:fill-slate-950" stroke="#818cf8" strokeWidth="1" />
         <text x="200" y="512" textAnchor="middle" fontSize="12" fontWeight="700" fill="#818cf8">Dark Sky (Deepor Beel side)</text>
         <text x="200" y="530" textAnchor="middle" fontSize="11" fill="#c4b5fd">Milky Way visible</text>
         <text x="200" y="546" textAnchor="middle" fontSize="11" fill="#c4b5fd">Migratory birds navigate by stars</text>

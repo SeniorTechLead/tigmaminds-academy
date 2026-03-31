@@ -49,11 +49,11 @@ export default function ActivityRaceTimerDiagram() {
     : null;
 
   return (
-    <div className="w-full max-w-md mx-auto my-4 rounded-xl bg-slate-900 p-5 border border-slate-700">
-      <h3 className="text-center text-slate-100 font-bold text-lg mb-1">
+    <div className="w-full max-w-md mx-auto my-4 rounded-xl bg-white dark:bg-slate-900 p-5 border border-gray-200 dark:border-slate-700">
+      <h3 className="text-center text-gray-900 dark:text-slate-100 font-bold text-lg mb-1">
         Activity: Measure Your Speed
       </h3>
-      <p className="text-center text-slate-400 text-sm mb-4">
+      <p className="text-center text-gray-500 dark:text-slate-400 text-sm mb-4">
         Mark a distance outside, time yourself, then calculate your speed.
       </p>
 
@@ -65,7 +65,7 @@ export default function ActivityRaceTimerDiagram() {
           value={distance}
           onChange={e => setDistance(e.target.value)}
           placeholder="e.g. 20"
-          className="flex-1 bg-slate-800 text-slate-100 border border-slate-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-cyan-500"
+          className="flex-1 bg-slate-800 text-gray-900 dark:text-slate-100 border border-slate-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-cyan-500"
           min={0}
           step={0.1}
         />
@@ -75,7 +75,7 @@ export default function ActivityRaceTimerDiagram() {
       <div className="text-center mb-4">
         <div className="text-5xl font-mono text-cyan-400 tabular-nums">
           {elapsed.toFixed(2)}
-          <span className="text-lg text-slate-400 ml-1">s</span>
+          <span className="text-lg text-gray-500 dark:text-slate-400 ml-1">s</span>
         </div>
       </div>
 
@@ -109,18 +109,18 @@ export default function ActivityRaceTimerDiagram() {
 
       {/* Results */}
       {phase === 'done' && dist > 0 && (
-        <div className="bg-slate-800 rounded-lg p-4 border border-slate-700">
+        <div className="bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
           <div className="grid grid-cols-3 gap-2 text-center mb-3">
             <div>
-              <div className="text-slate-400 text-xs">Distance</div>
-              <div className="text-slate-100 font-bold">{dist.toFixed(1)} m</div>
+              <div className="text-gray-500 dark:text-slate-400 text-xs">Distance</div>
+              <div className="text-gray-900 dark:text-slate-100 font-bold">{dist.toFixed(1)} m</div>
             </div>
             <div>
-              <div className="text-slate-400 text-xs">Time</div>
-              <div className="text-slate-100 font-bold">{elapsed.toFixed(2)} s</div>
+              <div className="text-gray-500 dark:text-slate-400 text-xs">Time</div>
+              <div className="text-gray-900 dark:text-slate-100 font-bold">{elapsed.toFixed(2)} s</div>
             </div>
             <div>
-              <div className="text-slate-400 text-xs">Speed</div>
+              <div className="text-gray-500 dark:text-slate-400 text-xs">Speed</div>
               <div className="text-cyan-400 font-bold">{speed.toFixed(2)} m/s</div>
             </div>
           </div>
@@ -131,11 +131,11 @@ export default function ActivityRaceTimerDiagram() {
 
           {closest && (
             <div className="text-center mt-3 p-2 bg-slate-700/50 rounded-lg">
-              <div className="text-slate-400 text-xs mb-1">Closest animal match:</div>
+              <div className="text-gray-500 dark:text-slate-400 text-xs mb-1">Closest animal match:</div>
               <div className="text-lg">
                 <span className="mr-2">{closest.emoji}</span>
-                <span className="text-slate-100 font-semibold">{closest.name}</span>
-                <span className="text-slate-400 text-sm ml-2">({closest.speed} m/s)</span>
+                <span className="text-gray-900 dark:text-slate-100 font-semibold">{closest.name}</span>
+                <span className="text-gray-500 dark:text-slate-400 text-sm ml-2">({closest.speed} m/s)</span>
               </div>
             </div>
           )}
@@ -148,7 +148,7 @@ export default function ActivityRaceTimerDiagram() {
               const youPct = Math.min((speed / maxSpd) * 100, 100);
               return (
                 <div key={c.name} className="flex items-center gap-2">
-                  <span className="text-xs text-slate-400 w-24 text-right truncate">{c.emoji} {c.name}</span>
+                  <span className="text-xs text-gray-500 dark:text-slate-400 w-24 text-right truncate">{c.emoji} {c.name}</span>
                   <div className="flex-1 h-3 bg-slate-700 rounded-full relative overflow-hidden">
                     <div
                       className="h-full rounded-full bg-slate-500"

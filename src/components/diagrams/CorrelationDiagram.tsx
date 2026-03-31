@@ -87,7 +87,7 @@ function ScatterPlot({
         y={originY + 14}
         textAnchor="middle"
         fontSize={10}
-        fill="#64748b"
+        className="fill-gray-400 dark:fill-slate-500"
       >
         {xLabel}
       </text>
@@ -96,7 +96,7 @@ function ScatterPlot({
         y={originY - plotH / 2}
         textAnchor="middle"
         fontSize={10}
-        fill="#64748b"
+        className="fill-gray-400 dark:fill-slate-500"
         transform={`rotate(-90, ${originX - 10}, ${originY - plotH / 2})`}
       >
         {yLabel}
@@ -187,7 +187,7 @@ export default function CorrelationDiagram() {
         style={{ background: "#f8fafc", borderRadius: 8 }}
       >
         {/* Title */}
-        <text x={270} y={20} textAnchor="middle" fontSize={13} fontWeight={700} fill="#1e293b">
+        <text x={270} y={20} textAnchor="middle" fontSize={13} fontWeight={700} className="fill-gray-100 dark:fill-slate-800">
           Types of Correlation
         </text>
 

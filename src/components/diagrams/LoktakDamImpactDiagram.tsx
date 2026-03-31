@@ -8,7 +8,7 @@ export default function LoktakDamImpactDiagram() {
         <text x="280" y="26" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#f87171">Ithai Barrage: How a Dam Changed Everything</text>
 
         {/* Dividing line */}
-        <line x1="280" y1="45" x2="280" y2="400" stroke="#475569" strokeWidth="1.5" strokeDasharray="4,4" />
+        <line x1="280" y1="45" x2="280" y2="400" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1.5" strokeDasharray="4,4" />
 
         {/* BEFORE section */}
         <text x="140" y="55" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#34d399">Before 1983</text>
@@ -105,7 +105,7 @@ export default function LoktakDamImpactDiagram() {
 
         {/* Dam icon at bottom center */}
         <rect x="262" y="400" width="36" height="20" rx="3" fill="#475569" opacity="0.5" />
-        <text x="280" y="414" textAnchor="middle" fontSize="7" fill="#94a3b8">DAM</text>
+        <text x="280" y="414" textAnchor="middle" fontSize="7" className="fill-gray-500 dark:fill-slate-400">DAM</text>
       </svg>
     </div>
   );

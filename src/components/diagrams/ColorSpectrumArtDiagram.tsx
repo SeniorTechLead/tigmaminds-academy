@@ -54,7 +54,7 @@ export default function ColorSpectrumArtDiagram() {
       <rect width="580" height="390" rx="12" className="fill-gray-900" />
 
       {/* Title */}
-      <text x="290" y="24" textAnchor="middle" className="fill-gray-300" fontSize="14" fontWeight="700">
+      <text x="290" y="24" textAnchor="middle" className="fill-gray-600 dark:fill-gray-300" fontSize="14" fontWeight="700">
         The Visible Spectrum and Color Mixing
       </text>
       <text x="290" y="40" textAnchor="middle" className="fill-gray-500" fontSize="11">
@@ -80,7 +80,7 @@ export default function ColorSpectrumArtDiagram() {
       <text x={barX + barWidth + 5} y={barY + 20} className="fill-gray-600" fontSize="9">IR</text>
 
       {/* ---- RGB ADDITIVE MIXING ---- */}
-      <text x="155" y="125" textAnchor="middle" className="fill-gray-400" fontSize="12" fontWeight="600">
+      <text x="155" y="125" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="12" fontWeight="600">
         Additive Mixing (Light)
       </text>
       <text x="155" y="140" textAnchor="middle" className="fill-gray-500" fontSize="10">
@@ -116,7 +116,7 @@ export default function ColorSpectrumArtDiagram() {
       <line x1="290" y1="120" x2="290" y2="380" stroke="#374151" strokeWidth="1" strokeDasharray="4,4" />
 
       {/* ---- COLOR WHEEL ---- */}
-      <text x="440" y="125" textAnchor="middle" className="fill-gray-400" fontSize="12" fontWeight="600">
+      <text x="440" y="125" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="12" fontWeight="600">
         Color Wheel
       </text>
       <text x="440" y="140" textAnchor="middle" className="fill-gray-500" fontSize="10">

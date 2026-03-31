@@ -39,7 +39,7 @@ export default function MountainZonationDiagram() {
         role="img"
         aria-label="Mountain showing five altitudinal zones from tropical forest at the base to rock and snow above 4000 metres"
       >
-        <rect x="0" y="0" width="600" height="420" className="fill-slate-900" rx="8" />
+        <rect x="0" y="0" width="600" height="420" className="fill-white dark:fill-slate-900" rx="8" />
 
         {/* Title */}
         <text x="300" y="26" textAnchor="middle" fontSize="12" className="fill-gray-200" fontWeight="700">
@@ -82,7 +82,7 @@ export default function MountainZonationDiagram() {
         {[0, 1000, 2000, 3000, 4000, 5000].map((a, i) => (
           <g key={i}>
             <line x1={left - 4} y1={altY(a)} x2={left} y2={altY(a)} className="stroke-gray-400" strokeWidth="1" />
-            <text x={left - 8} y={altY(a) + 3} textAnchor="end" fontSize="8" className="fill-gray-400">
+            <text x={left - 8} y={altY(a) + 3} textAnchor="end" fontSize="8" className="fill-gray-500 dark:fill-gray-400">
               {a === 0 ? "0 m" : `${a / 1000}k m`}
             </text>
           </g>
@@ -109,7 +109,7 @@ export default function MountainZonationDiagram() {
                 {z.label}
               </text>
               {/* Species */}
-              <text x={right + 30} y={midY + 10} fontSize="7" className="fill-gray-400">
+              <text x={right + 30} y={midY + 10} fontSize="7" className="fill-gray-500 dark:fill-gray-400">
                 {z.species}
               </text>
               {/* Altitude range */}
@@ -138,8 +138,8 @@ export default function MountainZonationDiagram() {
         ))}
 
         {/* Insight */}
-        <rect x="40" y="390" width="520" height="22" rx="4" className="fill-slate-800" />
-        <text x="300" y="405" textAnchor="middle" fontSize="9" className="fill-gray-300" fontWeight="600">
+        <rect x="40" y="390" width="520" height="22" rx="4" className="fill-gray-100 dark:fill-slate-800" />
+        <text x="300" y="405" textAnchor="middle" fontSize="9" className="fill-gray-600 dark:fill-gray-300" fontWeight="600">
           As altitude rises, temperature drops — each zone has unique life adapted to it
         </text>
       </svg>

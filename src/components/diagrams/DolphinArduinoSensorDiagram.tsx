@@ -34,25 +34,25 @@ export default function DolphinArduinoSensorDiagram() {
       </text>
 
       {/* === HC-SR04 sensor === */}
-      <rect x="40" y="55" width="140" height="80" rx="6" fill="#1e293b" stroke="#475569" strokeWidth="1.5" />
-      <text x="110" y="50" textAnchor="middle" fill="#94a3b8" fontSize="9" fontWeight="600">HC-SR04 SENSOR</text>
+      <rect x="40" y="55" width="140" height="80" rx="6" className="fill-gray-100 dark:fill-slate-800 stroke-gray-300 dark:stroke-slate-600"  strokeWidth="1.5" />
+      <text x="110" y="50" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="9" fontWeight="600">HC-SR04 SENSOR</text>
 
       {/* Two transducers (cylinders) */}
       <circle cx="75" cy="85" r="18" fill="#334155" stroke="#64748b" strokeWidth="1.5" />
       <circle cx="75" cy="85" r="12" fill="#475569" />
-      <text x="75" y="118" textAnchor="middle" fill="#94a3b8" fontSize="7">TRIG</text>
-      <text x="75" y="127" textAnchor="middle" fill="#94a3b8" fontSize="6">(speaker)</text>
+      <text x="75" y="118" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="7">TRIG</text>
+      <text x="75" y="127" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="6">(speaker)</text>
 
       <circle cx="145" cy="85" r="18" fill="#334155" stroke="#64748b" strokeWidth="1.5" />
       <circle cx="145" cy="85" r="12" fill="#475569" />
-      <text x="145" y="118" textAnchor="middle" fill="#94a3b8" fontSize="7">ECHO</text>
-      <text x="145" y="127" textAnchor="middle" fill="#94a3b8" fontSize="6">(microphone)</text>
+      <text x="145" y="118" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="7">ECHO</text>
+      <text x="145" y="127" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="6">(microphone)</text>
 
       {/* 4 pins */}
       {['VCC', 'TRIG', 'ECHO', 'GND'].map((pin, i) => (
         <g key={pin}>
-          <rect x={55 + i * 28} y="135" width="22" height="14" rx="2" fill="#0f172a" stroke="#475569" strokeWidth="1" />
-          <text x={66 + i * 28} y="146" textAnchor="middle" fill="#cbd5e1" fontSize="7" fontWeight="600">{pin}</text>
+          <rect x={55 + i * 28} y="135" width="22" height="14" rx="2" className="fill-white dark:fill-slate-950 stroke-gray-300 dark:stroke-slate-600"  strokeWidth="1" />
+          <text x={66 + i * 28} y="146" textAnchor="middle" className="fill-gray-600 dark:fill-slate-300" fontSize="7" fontWeight="600">{pin}</text>
         </g>
       ))}
 
@@ -111,8 +111,8 @@ export default function DolphinArduinoSensorDiagram() {
       <text x="60" y="288" fill="#fbbf24" fontSize="8" fontFamily="monospace" opacity="0.8">dist = dur * 0.0343 / 2;</text>
 
       {/* === Timing diagram (right) === */}
-      <rect x="280" y="190" width="340" height="155" rx="8" fill="#1e293b" stroke="#374151" strokeWidth="1" />
-      <text x="450" y="210" textAnchor="middle" fill="#94a3b8" fontSize="10" fontWeight="600">Timing Diagram</text>
+      <rect x="280" y="190" width="340" height="155" rx="8" className="fill-gray-100 dark:fill-slate-800" stroke="#374151" strokeWidth="1" />
+      <text x="450" y="210" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="10" fontWeight="600">Timing Diagram</text>
 
       {/* Trigger pulse */}
       <text x="295" y="232" fill="#3b82f6" fontSize="8">TRIG</text>
@@ -133,7 +133,7 @@ export default function DolphinArduinoSensorDiagram() {
       <text x="465" y="300" textAnchor="middle" fill="#fbbf24" fontSize="9" fontWeight="600">duration (&#181;s)</text>
 
       {/* Formula box */}
-      <rect x="310" y="310" width="280" height="26" rx="4" fill="#0f172a" stroke="#374151" strokeWidth="1" />
+      <rect x="310" y="310" width="280" height="26" rx="4" className="fill-white dark:fill-slate-950" stroke="#374151" strokeWidth="1" />
       <text x="450" y="328" textAnchor="middle" fill="#34d399" fontSize="11" fontWeight="700" fontFamily="monospace">
         distance_cm = duration &#215; 0.0343 / 2
       </text>

@@ -72,7 +72,7 @@ export default function MusicHarmonicsDiagram() {
       <rect width="600" height="380" rx="12" className="fill-gray-900" />
 
       {/* Title */}
-      <text x="300" y="24" textAnchor="middle" className="fill-gray-300" fontSize="14" fontWeight="700">
+      <text x="300" y="24" textAnchor="middle" className="fill-gray-600 dark:fill-gray-300" fontSize="14" fontWeight="700">
         Why Guitar and Flute Sound Different
       </text>
       <text x="300" y="40" textAnchor="middle" className="fill-gray-500" fontSize="11">

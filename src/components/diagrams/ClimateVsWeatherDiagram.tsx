@@ -70,7 +70,7 @@ export default function ClimateVsWeatherDiagram() {
 
         <rect width="540" height="360" rx="8" className="fill-slate-950" />
 
-        <text x="270" y="26" textAnchor="middle" fontSize="14" fontWeight="600" fill="#e2e8f0">
+        <text x="270" y="26" textAnchor="middle" fontSize="14" fontWeight="600" className="fill-gray-700 dark:fill-slate-200">
           Climate vs Weather
         </text>
 
@@ -87,9 +87,9 @@ export default function ClimateVsWeatherDiagram() {
 
         {/* Drifting cloud that sometimes covers sun */}
         <g className="cloud-move">
-          <ellipse cx="80" cy="108" rx="24" ry="11" fill="#94a3b8" opacity="0.85" />
-          <ellipse cx="65" cy="112" rx="16" ry="9" fill="#94a3b8" opacity="0.85" />
-          <ellipse cx="95" cy="112" rx="16" ry="9" fill="#94a3b8" opacity="0.85" />
+          <ellipse cx="80" cy="108" rx="24" ry="11" className="fill-gray-500 dark:fill-slate-400" opacity="0.85" />
+          <ellipse cx="65" cy="112" rx="16" ry="9" className="fill-gray-500 dark:fill-slate-400" opacity="0.85" />
+          <ellipse cx="95" cy="112" rx="16" ry="9" className="fill-gray-500 dark:fill-slate-400" opacity="0.85" />
           {/* Rain falling from cloud */}
           <line x1="72" y1="120" x2="72" y2="126" stroke="#38bdf8" strokeWidth="1.5" strokeLinecap="round" className="rain1" />
           <line x1="82" y1="120" x2="82" y2="126" stroke="#38bdf8" strokeWidth="1.5" strokeLinecap="round" className="rain2" />
@@ -100,27 +100,27 @@ export default function ClimateVsWeatherDiagram() {
 
         {/* Storm cloud with lightning */}
         <g transform="translate(150, 98)">
-          <ellipse cx="30" cy="0" rx="26" ry="12" fill="#64748b" />
-          <ellipse cx="12" cy="4" rx="17" ry="10" fill="#64748b" />
-          <ellipse cx="48" cy="4" rx="17" ry="10" fill="#64748b" />
+          <ellipse cx="30" cy="0" rx="26" ry="12" className="fill-gray-400 dark:fill-slate-500" />
+          <ellipse cx="12" cy="4" rx="17" ry="10" className="fill-gray-400 dark:fill-slate-500" />
+          <ellipse cx="48" cy="4" rx="17" ry="10" className="fill-gray-400 dark:fill-slate-500" />
           {/* Lightning bolt */}
           <polyline points="30,14 26,22 32,22 27,32" fill="none" stroke="#fbbf24" strokeWidth="2" className="lightning" />
         </g>
 
-        <text x="139" y="150" textAnchor="middle" fontSize="10" fill="#94a3b8">Changes hour by hour, day by day</text>
-        <text x="139" y="164" textAnchor="middle" fontSize="10" fill="#94a3b8">Specific place and time</text>
+        <text x="139" y="150" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Changes hour by hour, day by day</text>
+        <text x="139" y="164" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Specific place and time</text>
 
         {/* Flickering temperature bar */}
         <rect x="30" y="235" width="12" height="30" rx="2" fill="#60a5fa" className="temp-flicker" />
-        <text x="36" y="280" textAnchor="middle" fontSize="9" fill="#64748b">T</text>
+        <text x="36" y="280" textAnchor="middle" fontSize="9" className="fill-gray-400 dark:fill-slate-500">T</text>
 
         {/* Weather graph — jagged self-drawing line */}
-        <line x1="52" y1="180" x2="52" y2="275" stroke="#475569" strokeWidth="1" />
-        <line x1="52" y1="275" x2="240" y2="275" stroke="#475569" strokeWidth="1" />
+        <line x1="52" y1="180" x2="52" y2="275" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1" />
+        <line x1="52" y1="275" x2="240" y2="275" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1" />
         <polyline
           points="58,255 72,235 82,262 94,228 106,260 116,242 128,222 140,265 152,240 166,255 178,232 192,258 206,245 220,260 235,238"
           fill="none" stroke="#60a5fa" strokeWidth="2" className="jagged-line" />
-        <text x="146" y="292" textAnchor="middle" fontSize="10" fill="#64748b">Days →</text>
+        <text x="146" y="292" textAnchor="middle" fontSize="10" className="fill-gray-400 dark:fill-slate-500">Days →</text>
 
         {/* ===== CLIMATE SIDE (Right) ===== */}
         <rect x="277" y="42" width="248" height="270" rx="8" fill="none" stroke="#f87171" strokeWidth="1.5" />
@@ -138,16 +138,16 @@ export default function ClimateVsWeatherDiagram() {
         {/* Graph icon */}
         <text x="410" y="128" fontSize="22">📊</text>
 
-        <text x="401" y="155" textAnchor="middle" fontSize="10" fill="#94a3b8">Average of 30+ years of weather</text>
-        <text x="401" y="169" textAnchor="middle" fontSize="10" fill="#94a3b8">Long-term pattern for a region</text>
+        <text x="401" y="155" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Average of 30+ years of weather</text>
+        <text x="401" y="169" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Long-term pattern for a region</text>
 
         {/* Steady temperature bar rising gradually */}
         <rect x="292" y="215" width="12" height="50" rx="2" fill="#f87171" className="temp-steady" opacity="0.7" />
-        <text x="298" y="280" textAnchor="middle" fontSize="9" fill="#64748b">T</text>
+        <text x="298" y="280" textAnchor="middle" fontSize="9" className="fill-gray-400 dark:fill-slate-500">T</text>
 
         {/* Climate graph — smooth slowly-drawing trend */}
-        <line x1="314" y1="180" x2="314" y2="275" stroke="#475569" strokeWidth="1" />
-        <line x1="314" y1="275" x2="500" y2="275" stroke="#475569" strokeWidth="1" />
+        <line x1="314" y1="180" x2="314" y2="275" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1" />
+        <line x1="314" y1="275" x2="500" y2="275" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1" />
         <path
           d="M 320 262 Q 355 258, 380 252 Q 415 244, 440 235 Q 460 228, 475 220 Q 490 214, 496 208"
           fill="none" stroke="#f87171" strokeWidth="2.5" className="smooth-line" />
@@ -155,7 +155,7 @@ export default function ClimateVsWeatherDiagram() {
         <path
           d="M 320 262 Q 355 258, 380 252 Q 415 244, 440 235 Q 460 228, 475 220 Q 490 214, 496 208 L 496 275 L 320 275 Z"
           fill="#f87171" opacity="0.08" />
-        <text x="408" y="292" textAnchor="middle" fontSize="10" fill="#64748b">Decades →</text>
+        <text x="408" y="292" textAnchor="middle" fontSize="10" className="fill-gray-400 dark:fill-slate-500">Decades →</text>
 
         {/* Decade markers */}
         <text x="330" y="275" fontSize="8" fill="#475569" className="decade-fade" style={{ animationDelay: '0.5s' }}>1990</text>

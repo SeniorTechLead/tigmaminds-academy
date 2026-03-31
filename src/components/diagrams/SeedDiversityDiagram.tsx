@@ -2,7 +2,7 @@ export default function SeedDiversityDiagram() {
   return (
     <div className="my-4">
       <svg viewBox="0 0 520 420" className="w-full max-w-lg mx-auto" role="img" aria-label="Seed diversity comparison: monoculture versus diverse traditional farming">
-        <rect width="520" height="420" rx="12" className="fill-slate-900" />
+        <rect width="520" height="420" rx="12" className="fill-white dark:fill-slate-900" />
 
         <text x="260" y="28" textAnchor="middle" className="fill-emerald-400" fontSize="14" fontWeight="bold">Genetic Diversity in Crops</text>
 
@@ -54,7 +54,7 @@ export default function SeedDiversityDiagram() {
         <g transform="translate(325, 72)">
           <line x1="10" y1="35" x2="10" y2="15" className="stroke-green-700" strokeWidth="2.5" />
           <ellipse cx="10" cy="11" rx="7" ry="7" className="fill-green-700" />
-          <circle cx="10" cy="38" r="3.5" className="fill-slate-800" />
+          <circle cx="10" cy="38" r="3.5" className="fill-gray-100 dark:fill-slate-800" />
         </g>
         <g transform="translate(365, 72)">
           <line x1="10" y1="30" x2="10" y2="14" className="stroke-lime-500" strokeWidth="1.5" />

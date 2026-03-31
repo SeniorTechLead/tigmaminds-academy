@@ -2,7 +2,7 @@ export default function MajuliProtectionDiagram() {
   return (
     <div className="my-4">
       <svg viewBox="0 0 580 420" className="w-full max-w-lg mx-auto" role="img" aria-label="Diagram showing four erosion protection methods: bamboo porcupines, vetiver grass, geotextile bags, and gabion walls">
-        <rect width="580" height="420" rx="12" className="fill-slate-900" />
+        <rect width="580" height="420" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}
         <text x="290" y="26" textAnchor="middle" className="fill-amber-400" fontSize="14" fontWeight="bold">Protecting Majuli: Engineering vs Nature</text>
@@ -10,7 +10,7 @@ export default function MajuliProtectionDiagram() {
         {/* Grid of 4 methods */}
 
         {/* 1. Bamboo Porcupines (top-left) */}
-        <rect x="15" y="42" width="270" height="170" rx="8" className="fill-slate-800" />
+        <rect x="15" y="42" width="270" height="170" rx="8" className="fill-gray-100 dark:fill-slate-800" />
         <text x="150" y="62" textAnchor="middle" className="fill-emerald-400" fontSize="12" fontWeight="bold">Bamboo Porcupines</text>
 
         {/* Water */}
@@ -34,11 +34,11 @@ export default function MajuliProtectionDiagram() {
           </circle>
         ))}
 
-        <text x="150" y="182" textAnchor="middle" className="fill-slate-300" fontSize="10">Slows water → traps sediment → rebuilds bank</text>
+        <text x="150" y="182" textAnchor="middle" className="fill-gray-600 dark:fill-slate-300" fontSize="10">Slows water → traps sediment → rebuilds bank</text>
         <text x="150" y="197" textAnchor="middle" className="fill-emerald-500" fontSize="10" fontWeight="bold">Cost: Low | Lifespan: 5–10 years</text>
 
         {/* 2. Vetiver Grass (top-right) */}
-        <rect x="295" y="42" width="270" height="170" rx="8" className="fill-slate-800" />
+        <rect x="295" y="42" width="270" height="170" rx="8" className="fill-gray-100 dark:fill-slate-800" />
         <text x="430" y="62" textAnchor="middle" className="fill-emerald-400" fontSize="12" fontWeight="bold">Vetiver Grass Barriers</text>
 
         {/* Riverbank cross-section */}
@@ -64,11 +64,11 @@ export default function MajuliProtectionDiagram() {
         {/* Root zone label */}
         <text x="430" y="155" textAnchor="middle" className="fill-amber-400" fontSize="10">Deep roots bind soil</text>
 
-        <text x="430" y="182" textAnchor="middle" className="fill-slate-300" fontSize="10">Living roots hold bank together permanently</text>
+        <text x="430" y="182" textAnchor="middle" className="fill-gray-600 dark:fill-slate-300" fontSize="10">Living roots hold bank together permanently</text>
         <text x="430" y="197" textAnchor="middle" className="fill-emerald-500" fontSize="10" fontWeight="bold">Cost: Very low | Lifespan: Permanent</text>
 
         {/* 3. Geotextile Bags (bottom-left) */}
-        <rect x="15" y="222" width="270" height="170" rx="8" className="fill-slate-800" />
+        <rect x="15" y="222" width="270" height="170" rx="8" className="fill-gray-100 dark:fill-slate-800" />
         <text x="150" y="242" textAnchor="middle" className="fill-sky-400" fontSize="12" fontWeight="bold">Geotextile Bags</text>
 
         {/* Stacked bags */}
@@ -91,11 +91,11 @@ export default function MajuliProtectionDiagram() {
         <rect x="225" y="290" width="50" height="80" rx="4" className="fill-emerald-900" opacity="0.3" />
         <text x="250" y="335" textAnchor="middle" className="fill-emerald-500" fontSize="9">Land</text>
 
-        <text x="150" y="370" textAnchor="middle" className="fill-slate-300" fontSize="10">Sand-filled fabric bags absorb wave energy</text>
+        <text x="150" y="370" textAnchor="middle" className="fill-gray-600 dark:fill-slate-300" fontSize="10">Sand-filled fabric bags absorb wave energy</text>
         <text x="150" y="385" textAnchor="middle" className="fill-sky-400" fontSize="10" fontWeight="bold">Cost: Moderate | Lifespan: 10–20 years</text>
 
         {/* 4. Gabion Walls (bottom-right) */}
-        <rect x="295" y="222" width="270" height="170" rx="8" className="fill-slate-800" />
+        <rect x="295" y="222" width="270" height="170" rx="8" className="fill-gray-100 dark:fill-slate-800" />
         <text x="430" y="242" textAnchor="middle" className="fill-sky-400" fontSize="12" fontWeight="bold">Gabion Rock Walls</text>
 
         {/* Wire mesh boxes with rocks */}
@@ -108,7 +108,7 @@ export default function MajuliProtectionDiagram() {
             {/* Rocks inside */}
             {Array.from({ length: 8 }, (_, j) => (
               <circle key={j} cx={x + 8 + (j % 4) * 16} cy={y + 10 + Math.floor(j / 4) * 15}
-                r={4 + (j % 3)} className="fill-slate-500" opacity="0.6" />
+                r={4 + (j % 3)} className="fill-gray-400 dark:fill-slate-500" opacity="0.6" />
             ))}
           </g>
         ))}
@@ -118,7 +118,7 @@ export default function MajuliProtectionDiagram() {
           <animate attributeName="stroke-dashoffset" from="10" to="0" dur="1s" repeatCount="indefinite" />
         </path>
 
-        <text x="430" y="376" textAnchor="middle" className="fill-slate-300" fontSize="10">Wire cages filled with rock resist wave force</text>
+        <text x="430" y="376" textAnchor="middle" className="fill-gray-600 dark:fill-slate-300" fontSize="10">Wire cages filled with rock resist wave force</text>
         <text x="430" y="391" textAnchor="middle" className="fill-sky-400" fontSize="10" fontWeight="bold">Cost: High | Lifespan: 20–50 years</text>
 
         {/* Bottom summary */}

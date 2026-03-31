@@ -3,7 +3,7 @@ export default function ElephantVariablesDiagram() {
     <div className="w-full max-w-lg mx-auto my-4">
       <svg viewBox="0 0 546 441" className="w-full" role="img" aria-label="An elephant sending vibrations into the ground, with three variable boxes capturing the measured values: frequency, pulse_rate, and mood">
         {/* Dark background */}
-        <rect width="520" height="420" rx="12" className="fill-slate-900" />
+        <rect width="520" height="420" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* === Elephant silhouette === */}
         <g transform="translate(260, 60)">

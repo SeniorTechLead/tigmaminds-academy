@@ -23,11 +23,11 @@ export default function ActivitySonarDiagram() {
       </text>
 
       {/* === Scene 1: Large room === */}
-      <rect x="30" y="45" width="270" height="150" rx="6" fill="#1e293b" stroke="#374151" strokeWidth="1" />
-      <text x="165" y="65" textAnchor="middle" fill="#94a3b8" fontSize="10" fontWeight="600">Large Hall</text>
+      <rect x="30" y="45" width="270" height="150" rx="6" className="fill-gray-100 dark:fill-slate-800" stroke="#374151" strokeWidth="1" />
+      <text x="165" y="65" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="10" fontWeight="600">Large Hall</text>
 
       {/* Walls */}
-      <rect x="50" y="75" width="230" height="100" rx="4" fill="none" stroke="#475569" strokeWidth="2" strokeDasharray="6,3" />
+      <rect x="50" y="75" width="230" height="100" rx="4" fill="none" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="2" strokeDasharray="6,3" />
 
       {/* Person in center */}
       <circle cx="100" cy="125" r="6" fill="#f59e0b" />
@@ -46,11 +46,11 @@ export default function ActivitySonarDiagram() {
       <text x="165" y="182" textAnchor="middle" fill="#6ee7b7" fontSize="9" fontWeight="600">Echo: ~0.06 sec (noticeable)</text>
 
       {/* === Scene 2: Small room === */}
-      <rect x="340" y="45" width="270" height="150" rx="6" fill="#1e293b" stroke="#374151" strokeWidth="1" />
-      <text x="475" y="65" textAnchor="middle" fill="#94a3b8" fontSize="10" fontWeight="600">Small Bathroom</text>
+      <rect x="340" y="45" width="270" height="150" rx="6" className="fill-gray-100 dark:fill-slate-800" stroke="#374151" strokeWidth="1" />
+      <text x="475" y="65" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="10" fontWeight="600">Small Bathroom</text>
 
       {/* Walls (close) */}
-      <rect x="410" y="80" width="80" height="80" rx="4" fill="none" stroke="#475569" strokeWidth="2" strokeDasharray="6,3" />
+      <rect x="410" y="80" width="80" height="80" rx="4" fill="none" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="2" strokeDasharray="6,3" />
 
       {/* Person */}
       <circle cx="450" cy="120" r="6" fill="#f59e0b" />
@@ -63,7 +63,7 @@ export default function ActivitySonarDiagram() {
       <text x="475" y="182" textAnchor="middle" fill="#fbbf24" fontSize="9" fontWeight="600">Echo: ~0.009 sec (instant)</text>
 
       {/* === Instructions === */}
-      <rect x="30" y="210" width="580" height="100" rx="8" fill="#1e293b" stroke="#374151" strokeWidth="1" />
+      <rect x="30" y="210" width="580" height="100" rx="8" className="fill-gray-100 dark:fill-slate-800" stroke="#374151" strokeWidth="1" />
       <text x="50" y="232" fill="#f59e0b" fontSize="10" fontWeight="700">What to do:</text>
 
       {[
@@ -72,7 +72,7 @@ export default function ActivitySonarDiagram() {
         '3. Stand near a wall vs the center. Does the echo change?',
         '4. You are doing exactly what a dolphin does: using sound to map the space.',
       ].map((step, i) => (
-        <text key={i} x="50" y={248 + i * 14} fill="#cbd5e1" fontSize="9">{step}</text>
+        <text key={i} x="50" y={248 + i * 14} className="fill-gray-600 dark:fill-slate-300" fontSize="9">{step}</text>
       ))}
 
       {/* Formula reminder */}

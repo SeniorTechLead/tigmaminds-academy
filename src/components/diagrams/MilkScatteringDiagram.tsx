@@ -49,9 +49,9 @@ export default function MilkScatteringDiagram() {
         <line x1="320" y1="115" x2="350" y2="115" stroke="#DC143C" strokeWidth={2.5} opacity={0.5} />
 
         {/* Eye looking from the right */}
-        <ellipse cx="370" cy="115" rx="12" ry="8" fill="white" stroke="#666" strokeWidth={1} />
+        <ellipse cx="370" cy="115" rx="12" ry="8" className="fill-gray-900 dark:fill-white" stroke="#666" strokeWidth={1} />
         <circle cx="370" cy="115" r="4" fill="#4a3728" />
-        <circle cx="371" cy="114" r="1.5" fill="white" />
+        <circle cx="371" cy="114" r="1.5" className="fill-gray-900 dark:fill-white" />
         <text x="370" y="140" textAnchor="middle" className="text-[8px]" fill="#aaa">Your eye</text>
 
         {/* Orange label */}
@@ -59,9 +59,9 @@ export default function MilkScatteringDiagram() {
         <text x="310" y="95" textAnchor="middle" className="text-[7px]" fill="#cc8855">(view from end)</text>
 
         {/* Eye looking from the side (top) */}
-        <ellipse cx="175" cy="30" rx="8" ry="6" fill="white" stroke="#666" strokeWidth={1} />
+        <ellipse cx="175" cy="30" rx="8" ry="6" className="fill-gray-900 dark:fill-white" stroke="#666" strokeWidth={1} />
         <circle cx="175" cy="30" r="3" fill="#4a3728" />
-        <circle cx="175.5" cy="29.5" r="1" fill="white" />
+        <circle cx="175.5" cy="29.5" r="1" className="fill-gray-900 dark:fill-white" />
 
         {/* Explanation at bottom */}
         <text x="220" y="193" textAnchor="middle" className="text-[8px]" fill="#888">

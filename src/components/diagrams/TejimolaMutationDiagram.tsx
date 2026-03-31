@@ -13,7 +13,7 @@ export default function TejimolaMutationDiagram() {
         <text x="300" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#f472b6">When Genes Go Wrong: Mutations</text>
 
         {/* Original sequence */}
-        <text x="300" y="55" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#e2e8f0">Original DNA sequence:</text>
+        <text x="300" y="55" textAnchor="middle" fontSize="11" fontWeight="bold" className="fill-gray-700 dark:fill-slate-200">Original DNA sequence:</text>
         <g transform="translate(130, 65)">
           {['A', 'T', 'G', 'C', 'A', 'T', 'G', 'C', 'A', 'T'].map((base, i) => {
             const colors: Record<string, string> = { A: '#ef4444', T: '#3b82f6', G: '#f59e0b', C: '#22c55e' };
@@ -100,8 +100,8 @@ export default function TejimolaMutationDiagram() {
         <text x="490" y="383" fontSize="10" fill="#86efac">harmful</text>
 
         {/* Bottom summary */}
-        <rect x="100" y="408" width="400" height="24" rx="6" fill="#1e293b" stroke="#475569" strokeWidth="1" />
-        <text x="300" y="424" textAnchor="middle" fontSize="10" fill="#e2e8f0">Most mutations are neutral. Rare beneficial ones drive evolution.</text>
+        <rect x="100" y="408" width="400" height="24" rx="6" className="fill-gray-100 dark:fill-slate-800 stroke-gray-300 dark:stroke-slate-600"  strokeWidth="1" />
+        <text x="300" y="424" textAnchor="middle" fontSize="10" className="fill-gray-700 dark:fill-slate-200">Most mutations are neutral. Rare beneficial ones drive evolution.</text>
       </svg>
     </div>
   );

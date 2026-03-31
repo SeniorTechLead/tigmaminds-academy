@@ -2,7 +2,7 @@ export default function HornbillNestDiagram() {
   return (
     <div className="my-4">
       <svg viewBox="0 0 520 420" className="w-full max-w-lg mx-auto" role="img" aria-label="Hornbill sealed nesting cavity showing female inside, mud wall, and feeding slit">
-        <rect width="520" height="420" rx="12" className="fill-slate-900" />
+        <rect width="520" height="420" rx="12" className="fill-white dark:fill-slate-900" />
         <text x="260" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#fbbf24">Why Hornbills Seal Themselves In</text>
 
         {/* Tree trunk */}
@@ -81,26 +81,26 @@ export default function HornbillNestDiagram() {
         {/* Female label */}
         <line x1="230" y1="170" x2="100" y2="100" stroke="#fbbf24" strokeWidth="1" strokeDasharray="3,2" opacity="0.6" />
         <text x="30" y="85" fontSize="10" fontWeight="bold" fill="#fbbf24">♀ Female</text>
-        <text x="30" y="97" fontSize="8" className="fill-slate-400">Sealed inside for</text>
-        <text x="30" y="108" fontSize="8" className="fill-slate-400">2–4 months</text>
+        <text x="30" y="97" fontSize="8" className="fill-gray-500 dark:fill-slate-400">Sealed inside for</text>
+        <text x="30" y="108" fontSize="8" className="fill-gray-500 dark:fill-slate-400">2–4 months</text>
 
         {/* Male label */}
         <line x1="445" y1="160" x2="470" y2="100" stroke="#fbbf24" strokeWidth="1" strokeDasharray="3,2" opacity="0.6" />
         <text x="420" y="85" fontSize="10" fontWeight="bold" fill="#fbbf24">♂ Male</text>
-        <text x="410" y="97" fontSize="8" className="fill-slate-400">Feeds family</text>
-        <text x="410" y="108" fontSize="8" className="fill-slate-400">through slit</text>
+        <text x="410" y="97" fontSize="8" className="fill-gray-500 dark:fill-slate-400">Feeds family</text>
+        <text x="410" y="108" fontSize="8" className="fill-gray-500 dark:fill-slate-400">through slit</text>
 
         {/* Mud wall label */}
         <line x1="358" y1="150" x2="390" y2="70" stroke="#d97706" strokeWidth="1" strokeDasharray="3,2" opacity="0.6" />
         <text x="370" y="60" fontSize="10" fontWeight="bold" fill="#d97706">Mud + Droppings Wall</text>
-        <text x="370" y="72" fontSize="8" className="fill-slate-400">Sealed by the female</text>
+        <text x="370" y="72" fontSize="8" className="fill-gray-500 dark:fill-slate-400">Sealed by the female</text>
 
         {/* Bottom: why they seal */}
         <g transform="translate(20, 386)">
           <text x="0" y="0" fontSize="10" fill="#34d399" fontWeight="bold">Why seal?</text>
-          <text x="65" y="0" fontSize="10" className="fill-slate-400">Protects eggs from snakes, monitor lizards, and other predators.</text>
+          <text x="65" y="0" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Protects eggs from snakes, monitor lizards, and other predators.</text>
           <text x="0" y="14" fontSize="10" fill="#34d399" fontWeight="bold">Who feeds?</text>
-          <text x="80" y="14" fontSize="10" className="fill-slate-400">The male delivers fruit 50–70 times per day through the slit.</text>
+          <text x="80" y="14" fontSize="10" className="fill-gray-500 dark:fill-slate-400">The male delivers fruit 50–70 times per day through the slit.</text>
         </g>
       </svg>
     </div>

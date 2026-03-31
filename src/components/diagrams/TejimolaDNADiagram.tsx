@@ -27,7 +27,7 @@ export default function TejimolaDNADiagram() {
         <text x="300" y="30" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#a78bfa">The Instruction Manual Inside Every Cell</text>
 
         {/* DNA ladder (left side) */}
-        <text x="140" y="60" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#e2e8f0">DNA Double Helix</text>
+        <text x="140" y="60" textAnchor="middle" fontSize="12" fontWeight="bold" className="fill-gray-700 dark:fill-slate-200">DNA Double Helix</text>
 
         {/* Sugar-phosphate backbone — left strand */}
         <line x1="80" y1="80" x2="80" y2="380" stroke="#6366f1" strokeWidth="4" opacity="0.6" />
@@ -62,7 +62,7 @@ export default function TejimolaDNADiagram() {
         <text x="140" y="437" textAnchor="middle" fontSize="10" fill="#c4b5fd">C always pairs with G</text>
 
         {/* RIGHT: Gene to Protein flow */}
-        <text x="430" y="60" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#e2e8f0">From Gene to Organism</text>
+        <text x="430" y="60" textAnchor="middle" fontSize="12" fontWeight="bold" className="fill-gray-700 dark:fill-slate-200">From Gene to Organism</text>
 
         {/* DNA → Gene → Protein → Trait flow */}
         {[
@@ -85,14 +85,14 @@ export default function TejimolaDNADiagram() {
         ))}
 
         {/* Key insight box */}
-        <rect x="330" y="395" width="200" height="48" rx="6" fill="#1e293b" stroke="#475569" strokeWidth="1" />
-        <text x="430" y="413" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#e2e8f0">Same DNA in every cell</text>
-        <text x="430" y="428" textAnchor="middle" fontSize="10" fill="#94a3b8">Different genes switched on</text>
-        <text x="430" y="440" textAnchor="middle" fontSize="10" fill="#94a3b8">= different cell types</text>
+        <rect x="330" y="395" width="200" height="48" rx="6" className="fill-gray-100 dark:fill-slate-800 stroke-gray-300 dark:stroke-slate-600"  strokeWidth="1" />
+        <text x="430" y="413" textAnchor="middle" fontSize="10" fontWeight="bold" className="fill-gray-700 dark:fill-slate-200">Same DNA in every cell</text>
+        <text x="430" y="428" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Different genes switched on</text>
+        <text x="430" y="440" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">= different cell types</text>
 
         <defs>
           <marker id="arrowDna" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-            <path d="M0,0 L8,3 L0,6" fill="#94a3b8" />
+            <path d="M0,0 L8,3 L0,6" className="fill-gray-500 dark:fill-slate-400" />
           </marker>
         </defs>
       </svg>

@@ -32,39 +32,39 @@ export default function DolphinAdaptationDiagram() {
       <line x1="370" y1="115" x2="440" y2="60" stroke="#22d3ee" strokeWidth="1" strokeDasharray="3,2" />
       <rect x="440" y="45" width="175" height="40" rx="4" fill="#164e63" stroke="#22d3ee" strokeWidth="1" />
       <text x="450" y="60" fill="#67e8f9" fontSize="9" fontWeight="600">Melon (acoustic lens)</text>
-      <text x="450" y="74" fill="#94a3b8" fontSize="8">Fatty organ focuses clicks</text>
-      <text x="450" y="84" fill="#94a3b8" fontSize="8">into a narrow beam (~10&#176;)</text>
+      <text x="450" y="74" className="fill-gray-500 dark:fill-slate-400" fontSize="8">Fatty organ focuses clicks</text>
+      <text x="450" y="84" className="fill-gray-500 dark:fill-slate-400" fontSize="8">into a narrow beam (~10&#176;)</text>
 
       {/* 2. Long snout */}
       <line x1="370" y1="133" x2="440" y2="110" stroke="#f59e0b" strokeWidth="1" strokeDasharray="3,2" />
       <rect x="440" y="95" width="175" height="34" rx="4" fill="#451a03" stroke="#f59e0b" strokeWidth="1" />
       <text x="450" y="110" fill="#fbbf24" fontSize="9" fontWeight="600">Long snout</text>
-      <text x="450" y="122" fill="#94a3b8" fontSize="8">Probes riverbed sediment for prey</text>
+      <text x="450" y="122" className="fill-gray-500 dark:fill-slate-400" fontSize="8">Probes riverbed sediment for prey</text>
 
       {/* 3. Vestigial eyes */}
       <line x1="345" y1="118" x2="440" y2="148" stroke="#ef4444" strokeWidth="1" strokeDasharray="3,2" />
       <rect x="440" y="138" width="175" height="40" rx="4" fill="#450a0a" stroke="#ef4444" strokeWidth="1" />
       <text x="450" y="153" fill="#fca5a5" fontSize="9" fontWeight="600">Vestigial eyes (no lens)</text>
-      <text x="450" y="165" fill="#94a3b8" fontSize="8">Detect light/dark only &mdash;</text>
-      <text x="450" y="175" fill="#94a3b8" fontSize="8">cannot form images</text>
+      <text x="450" y="165" className="fill-gray-500 dark:fill-slate-400" fontSize="8">Detect light/dark only &mdash;</text>
+      <text x="450" y="175" className="fill-gray-500 dark:fill-slate-400" fontSize="8">cannot form images</text>
 
       {/* 4. Lower jaw */}
       <line x1="320" y1="145" x2="100" y2="180" stroke="#a855f7" strokeWidth="1" strokeDasharray="3,2" />
       <rect x="20" y="170" width="175" height="40" rx="4" fill="#2e1065" stroke="#a855f7" strokeWidth="1" />
       <text x="30" y="185" fill="#d8b4fe" fontSize="9" fontWeight="600">Oil-filled lower jaw</text>
-      <text x="30" y="197" fill="#94a3b8" fontSize="8">Conducts echoes to inner</text>
-      <text x="30" y="207" fill="#94a3b8" fontSize="8">ear &mdash; works like an antenna</text>
+      <text x="30" y="197" className="fill-gray-500 dark:fill-slate-400" fontSize="8">Conducts echoes to inner</text>
+      <text x="30" y="207" className="fill-gray-500 dark:fill-slate-400" fontSize="8">ear &mdash; works like an antenna</text>
 
       {/* 5. Side-swimming */}
       <line x1="270" y1="155" x2="100" y2="130" stroke="#10b981" strokeWidth="1" strokeDasharray="3,2" />
       <rect x="20" y="55" width="175" height="40" rx="4" fill="#064e3b" stroke="#10b981" strokeWidth="1" />
       <text x="30" y="70" fill="#6ee7b7" fontSize="9" fontWeight="600">Swims on its side</text>
-      <text x="30" y="82" fill="#94a3b8" fontSize="8">One flipper trails the</text>
-      <text x="30" y="92" fill="#94a3b8" fontSize="8">riverbed &mdash; tactile sensing</text>
+      <text x="30" y="82" className="fill-gray-500 dark:fill-slate-400" fontSize="8">One flipper trails the</text>
+      <text x="30" y="92" className="fill-gray-500 dark:fill-slate-400" fontSize="8">riverbed &mdash; tactile sensing</text>
 
       {/* === Comparison table === */}
-      <rect x="30" y="248" width="580" height="120" rx="8" fill="#1e293b" stroke="#374151" strokeWidth="1" />
-      <text x="320" y="268" textAnchor="middle" fill="#94a3b8" fontSize="10" fontWeight="600">Dolphin vs Human-Built Sonar</text>
+      <rect x="30" y="248" width="580" height="120" rx="8" className="fill-gray-100 dark:fill-slate-800" stroke="#374151" strokeWidth="1" />
+      <text x="320" y="268" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="10" fontWeight="600">Dolphin vs Human-Built Sonar</text>
 
       {/* Headers */}
       <text x="120" y="290" textAnchor="middle" fill="#67e8f9" fontSize="9" fontWeight="600">Feature</text>
@@ -80,7 +80,7 @@ export default function DolphinAdaptationDiagram() {
         ['Power', '~30 W (brain)', '15 mA (5V)'],
       ].map(([feature, dolphin, sensor], i) => (
         <g key={i}>
-          <text x="120" y={312 + i * 16} textAnchor="middle" fill="#cbd5e1" fontSize="8">{feature}</text>
+          <text x="120" y={312 + i * 16} textAnchor="middle" className="fill-gray-600 dark:fill-slate-300" fontSize="8">{feature}</text>
           <text x="300" y={312 + i * 16} textAnchor="middle" fill="#7dd3fc" fontSize="8">{dolphin}</text>
           <text x="490" y={312 + i * 16} textAnchor="middle" fill="#fcd34d" fontSize="8" dangerouslySetInnerHTML={{ __html: sensor }} />
         </g>

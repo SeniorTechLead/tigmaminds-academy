@@ -48,7 +48,7 @@ export default function AltitudeAdaptationDiagram() {
         role="img"
         aria-label="Three altitude panels showing how bodies adapt to thin air from sea level to 5500 metres"
       >
-        <rect x="0" y="0" width="580" height={totalH} className="fill-slate-900" rx="8" />
+        <rect x="0" y="0" width="580" height={totalH} className="fill-white dark:fill-slate-900" rx="8" />
 
         {/* Title */}
         <text x="290" y="22" textAnchor="middle" fontSize="12" className="fill-gray-200" fontWeight="700">
@@ -115,12 +115,12 @@ export default function AltitudeAdaptationDiagram() {
             <text x={leftPad + 110} y={p.y + 35} fontSize="18" className={p.color} fontWeight="800">
               {p.o2}
             </text>
-            <text x={leftPad + 110} y={p.y + 48} fontSize="8" className="fill-gray-400">
+            <text x={leftPad + 110} y={p.y + 48} fontSize="8" className="fill-gray-500 dark:fill-gray-400">
               oxygen available
             </text>
 
             {/* Description */}
-            <text x={leftPad + 175} y={p.y + 42} fontSize="9" className="fill-gray-300" fontWeight="500">
+            <text x={leftPad + 175} y={p.y + 42} fontSize="9" className="fill-gray-600 dark:fill-gray-300" fontWeight="500">
               {p.label}
             </text>
           </g>
@@ -129,11 +129,11 @@ export default function AltitudeAdaptationDiagram() {
         {/* Snow leopard paw + note at 5000m */}
         <g transform={`translate(${leftPad + panelW - 120}, ${panels[2].y + panelH - 14})`}>
           {/* Paw print */}
-          <circle cx="0" cy="0" r="3" className="fill-gray-400" />
-          <circle cx="-5" cy="-5" r="2" className="fill-gray-400" />
-          <circle cx="0" cy="-7" r="2" className="fill-gray-400" />
-          <circle cx="5" cy="-5" r="2" className="fill-gray-400" />
-          <text x="10" y="3" fontSize="7.5" className="fill-gray-300" fontStyle="italic">
+          <circle cx="0" cy="0" r="3" className="fill-gray-500 dark:fill-gray-400" />
+          <circle cx="-5" cy="-5" r="2" className="fill-gray-500 dark:fill-gray-400" />
+          <circle cx="0" cy="-7" r="2" className="fill-gray-500 dark:fill-gray-400" />
+          <circle cx="5" cy="-5" r="2" className="fill-gray-500 dark:fill-gray-400" />
+          <text x="10" y="3" fontSize="7.5" className="fill-gray-600 dark:fill-gray-300" fontStyle="italic">
             Snow leopards adapted over millions of years
           </text>
         </g>

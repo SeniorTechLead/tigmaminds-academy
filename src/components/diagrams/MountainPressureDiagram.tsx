@@ -38,7 +38,7 @@ export default function MountainPressureDiagram() {
         role="img"
         aria-label="Diagram showing atmospheric pressure decreasing with altitude from 1013 hPa at sea level to 335 hPa at Everest"
       >
-        <rect x="0" y="0" width="580" height="410" className="fill-slate-900" rx="8" />
+        <rect x="0" y="0" width="580" height="410" className="fill-white dark:fill-slate-900" rx="8" />
 
         {/* Title */}
         <text x="290" y="24" textAnchor="middle" fontSize="12" className="fill-gray-200" fontWeight="700">
@@ -52,7 +52,7 @@ export default function MountainPressureDiagram() {
           y={(top + bottom) / 2}
           textAnchor="middle"
           fontSize="10"
-          className="fill-gray-300"
+          className="fill-gray-600 dark:fill-gray-300"
           fontWeight="600"
           transform={`rotate(-90,16,${(top + bottom) / 2})`}
         >
@@ -105,7 +105,7 @@ export default function MountainPressureDiagram() {
               y={altY(m.alt) + 3}
               textAnchor="end"
               fontSize="8"
-              className="fill-gray-300"
+              className="fill-gray-600 dark:fill-gray-300"
             >
               {m.label}
             </text>
@@ -141,7 +141,7 @@ export default function MountainPressureDiagram() {
           <text x="-16" y="24" textAnchor="start" fontSize="7.5" className="fill-amber-300" fontWeight="600">
             Ears pop!
           </text>
-          <text x="-16" y="34" fontSize="7" className="fill-gray-400">
+          <text x="-16" y="34" fontSize="7" className="fill-gray-500 dark:fill-gray-400">
             Pressure changes quickly
           </text>
         </g>
@@ -149,7 +149,7 @@ export default function MountainPressureDiagram() {
         {/* Down arrow showing weight */}
         <defs>
           <marker id="arrowDown" markerWidth="8" markerHeight="6" refX="4" refY="0" orient="auto">
-            <path d="M0,0 L4,6 L8,0" className="fill-gray-400" />
+            <path d="M0,0 L4,6 L8,0" className="fill-gray-500 dark:fill-gray-400" />
           </marker>
         </defs>
         <line
@@ -167,14 +167,14 @@ export default function MountainPressureDiagram() {
           y={top + 20}
           textAnchor="middle"
           fontSize="7"
-          className="fill-gray-400"
+          className="fill-gray-500 dark:fill-gray-400"
         >
           Weight of air
         </text>
 
         {/* Insight bar */}
-        <rect x={left - 10} y={bottom + 14} width="490" height="24" rx="4" className="fill-slate-800" />
-        <text x={left} y={bottom + 30} fontSize="9" className="fill-gray-300" fontWeight="600">
+        <rect x={left - 10} y={bottom + 14} width="490" height="24" rx="4" className="fill-gray-100 dark:fill-slate-800" />
+        <text x={left} y={bottom + 30} fontSize="9" className="fill-gray-600 dark:fill-gray-300" fontWeight="600">
           Less air above you = less weight pushing down = lower pressure
         </text>
       </svg>

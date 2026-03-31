@@ -2,7 +2,7 @@ export default function SeedGerminationDiagram() {
   return (
     <div className="my-4">
       <svg viewBox="0 0 520 440" className="w-full max-w-lg mx-auto" role="img" aria-label="Seed germination stages: from dormant seed to seedling, showing internal anatomy and requirements">
-        <rect width="520" height="440" rx="12" className="fill-slate-900" />
+        <rect width="520" height="440" rx="12" className="fill-white dark:fill-slate-900" />
 
         <text x="260" y="28" textAnchor="middle" className="fill-lime-400" fontSize="14" fontWeight="bold">Germination — Waking Up a Seed</text>
 
@@ -72,8 +72,8 @@ export default function SeedGerminationDiagram() {
         {/* Stage 1: Dormant seed */}
         <g transform="translate(45, 280)">
           <ellipse cx="20" cy="25" rx="14" ry="10" className="fill-amber-700 stroke-amber-500" strokeWidth="1" />
-          <text x="20" y="52" textAnchor="middle" className="fill-slate-400" fontSize="9">Dormant</text>
-          <text x="20" y="63" textAnchor="middle" className="fill-slate-500" fontSize="8">Day 0</text>
+          <text x="20" y="52" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="9">Dormant</text>
+          <text x="20" y="63" textAnchor="middle" className="fill-gray-400 dark:fill-slate-500" fontSize="8">Day 0</text>
         </g>
 
         {/* Stage 2: Water absorbed (imbibition) */}
@@ -84,7 +84,7 @@ export default function SeedGerminationDiagram() {
           <circle cx="35" cy="32" r="2" className="fill-blue-400" opacity="0.6" />
           <circle cx="15" cy="20" r="1.5" className="fill-blue-400" opacity="0.6" />
           <text x="20" y="57" textAnchor="middle" className="fill-blue-300" fontSize="9">Imbibition</text>
-          <text x="20" y="68" textAnchor="middle" className="fill-slate-500" fontSize="8">Day 1–2</text>
+          <text x="20" y="68" textAnchor="middle" className="fill-gray-400 dark:fill-slate-500" fontSize="8">Day 1–2</text>
         </g>
 
         {/* Stage 3: Radicle emerges */}
@@ -92,8 +92,8 @@ export default function SeedGerminationDiagram() {
           <ellipse cx="20" cy="35" rx="15" ry="11" className="fill-amber-600" />
           {/* Root going down */}
           <path d="M 20,46 Q 18,60 20,75 Q 22,85 18,95" className="stroke-amber-100" strokeWidth="2" fill="none" />
-          <text x="20" y="45" textAnchor="middle" className="fill-slate-400" fontSize="9">Radicle</text>
-          <text x="20" y="77" textAnchor="middle" className="fill-slate-500" fontSize="8">Day 2–4</text>
+          <text x="20" y="45" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="9">Radicle</text>
+          <text x="20" y="77" textAnchor="middle" className="fill-gray-400 dark:fill-slate-500" fontSize="8">Day 2–4</text>
         </g>
 
         {/* Stage 4: Shoot emerges */}
@@ -105,7 +105,7 @@ export default function SeedGerminationDiagram() {
           <path d="M 20,45 Q 20,30 22,18" className="stroke-green-500" strokeWidth="2.5" fill="none" />
           <circle cx="22" cy="15" r="4" className="fill-green-500" />
           <text x="20" y="75" textAnchor="middle" className="fill-green-300" fontSize="9">Shoot</text>
-          <text x="20" y="97" textAnchor="middle" className="fill-slate-500" fontSize="8">Day 4–7</text>
+          <text x="20" y="97" textAnchor="middle" className="fill-gray-400 dark:fill-slate-500" fontSize="8">Day 4–7</text>
         </g>
 
         {/* Stage 5: Seedling */}
@@ -122,7 +122,7 @@ export default function SeedGerminationDiagram() {
           <ellipse cx="14" cy="15" rx="10" ry="4" className="fill-green-400" transform="rotate(-20, 14, 15)" />
           <ellipse cx="26" cy="12" rx="10" ry="4" className="fill-green-400" transform="rotate(20, 26, 12)" />
           <text x="20" y="110" textAnchor="middle" className="fill-lime-300" fontSize="9">Seedling</text>
-          <text x="20" y="123" textAnchor="middle" className="fill-slate-500" fontSize="8">Day 7–14</text>
+          <text x="20" y="123" textAnchor="middle" className="fill-gray-400 dark:fill-slate-500" fontSize="8">Day 7–14</text>
         </g>
 
         {/* Timeline arrow */}

@@ -7,7 +7,7 @@ export default function LeopardMarkRecaptureDiagram() {
         role="img"
         aria-label="Mark-recapture method diagram showing two sampling rounds and the Lincoln-Petersen formula for population estimation"
       >
-        <rect x="0" y="0" width="600" height="480" className="fill-slate-900" rx="8" />
+        <rect x="0" y="0" width="600" height="480" className="fill-white dark:fill-slate-900" rx="8" />
 
         {/* Title */}
         <text x="300" y="26" textAnchor="middle" fontSize="13" className="fill-gray-200" fontWeight="700">
@@ -35,12 +35,12 @@ export default function LeopardMarkRecaptureDiagram() {
           <g key={i}>
             <circle cx={a.x} cy={a.y} r="10" fill={a.marked ? '#f59e0b' : '#6b7280'} opacity="0.8" />
             {a.marked && (
-              <text x={a.x} y={a.y + 4} textAnchor="middle" fontSize="8" className="fill-slate-900" fontWeight="700">M</text>
+              <text x={a.x} y={a.y + 4} textAnchor="middle" fontSize="8" className="fill-white dark:fill-slate-900" fontWeight="700">M</text>
             )}
           </g>
         ))}
 
-        <text x="150" y="210" textAnchor="middle" fontSize="10" className="fill-gray-300">
+        <text x="150" y="210" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-300">
           Captured 4, marked them (M), released back
         </text>
 
@@ -74,7 +74,7 @@ export default function LeopardMarkRecaptureDiagram() {
               opacity={a.captured ? 0.9 : 0.3}
             />
             {a.marked && (
-              <text x={a.x} y={a.y + 4} textAnchor="middle" fontSize="8" className="fill-slate-900" fontWeight="700">M</text>
+              <text x={a.x} y={a.y + 4} textAnchor="middle" fontSize="8" className="fill-white dark:fill-slate-900" fontWeight="700">M</text>
             )}
             {a.captured && (
               <circle cx={a.x} cy={a.y} r="12" fill="none" stroke="#3b82f6" strokeWidth="1.5" />
@@ -82,7 +82,7 @@ export default function LeopardMarkRecaptureDiagram() {
           </g>
         ))}
 
-        <text x="450" y="210" textAnchor="middle" fontSize="10" className="fill-gray-300">
+        <text x="450" y="210" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-300">
           Recaptured 6 — found 2 with marks
         </text>
 
@@ -104,13 +104,13 @@ export default function LeopardMarkRecaptureDiagram() {
 
         {/* Variable explanations */}
         <text x="120" y="310" textAnchor="middle" fontSize="11" className="fill-amber-300">M = 4</text>
-        <text x="120" y="324" textAnchor="middle" fontSize="10" className="fill-gray-400">marked in Round 1</text>
+        <text x="120" y="324" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-gray-400">marked in Round 1</text>
 
         <text x="300" y="310" textAnchor="middle" fontSize="11" className="fill-blue-300">C = 6</text>
-        <text x="300" y="324" textAnchor="middle" fontSize="10" className="fill-gray-400">captured in Round 2</text>
+        <text x="300" y="324" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-gray-400">captured in Round 2</text>
 
         <text x="480" y="310" textAnchor="middle" fontSize="11" className="fill-green-300">R = 2</text>
-        <text x="480" y="324" textAnchor="middle" fontSize="10" className="fill-gray-400">recaptured with marks</text>
+        <text x="480" y="324" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-gray-400">recaptured with marks</text>
 
         {/* Calculation */}
         <rect x="15" y="356" width="570" height="50" rx="6" className="fill-slate-800/60" />
@@ -126,10 +126,10 @@ export default function LeopardMarkRecaptureDiagram() {
         <text x="300" y="436" textAnchor="middle" fontSize="10" className="fill-amber-300" fontWeight="600">
           The Core Idea
         </text>
-        <text x="300" y="452" textAnchor="middle" fontSize="10" className="fill-gray-300">
+        <text x="300" y="452" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-300">
           If marked animals mix evenly, the fraction of marked in your second sample equals
         </text>
-        <text x="300" y="465" textAnchor="middle" fontSize="10" className="fill-gray-300">
+        <text x="300" y="465" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-300">
           the fraction of marked in the whole population. Same logic as mixing coloured beads in a jar.
         </text>
       </svg>

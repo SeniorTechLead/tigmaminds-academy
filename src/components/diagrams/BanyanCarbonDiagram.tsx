@@ -2,7 +2,7 @@ export default function BanyanCarbonDiagram() {
   return (
     <div className="my-4">
       <svg viewBox="0 0 575 411" className="w-full max-w-lg mx-auto" role="img" aria-label="Carbon cycle through a banyan tree showing CO2 absorption, carbon storage in wood, and O2 release">
-        <rect width="500" height="380" rx="12" className="fill-slate-900" />
+        <rect width="500" height="380" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}
         <text x="250" y="28" textAnchor="middle" className="fill-amber-400" fontSize="14" fontWeight="bold">Carbon Cycle Through a Banyan Tree</text>
@@ -25,8 +25,8 @@ export default function BanyanCarbonDiagram() {
         {/* CO2 IN - left side */}
         <g>
           <rect x="20" y="55" width="70" height="30" rx="15" className="fill-slate-700" />
-          <text x="55" y="74" textAnchor="middle" className="fill-slate-200" fontSize="11" fontWeight="600">CO₂</text>
-          <text x="55" y="50" textAnchor="middle" className="fill-slate-400" fontSize="9">from atmosphere</text>
+          <text x="55" y="74" textAnchor="middle" className="fill-gray-700 dark:fill-slate-200" fontSize="11" fontWeight="600">CO₂</text>
+          <text x="55" y="50" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="9">from atmosphere</text>
           <path d="M 90,70 Q 120,70 150,85" className="stroke-green-400" strokeWidth="2" fill="none" markerEnd="url(#carbonArrowGreen)">
             <animate attributeName="stroke-dashoffset" from="15" to="0" dur="2s" repeatCount="indefinite" />
           </path>

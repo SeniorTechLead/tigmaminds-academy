@@ -148,7 +148,7 @@ export default function MusicDecibelDiagram() {
       })}
 
       {/* Logarithmic note */}
-      <rect x="370" y="280" width="190" height="75" rx="8" fill="#1e293b" stroke="#334155" strokeWidth="1" />
+      <rect x="370" y="280" width="190" height="75" rx="8" className="fill-gray-100 dark:fill-slate-800" stroke="#334155" strokeWidth="1" />
       <text x="465" y="298" textAnchor="middle" className="fill-gray-400" fontSize="10" fontWeight="600">
         Logarithmic scale
       </text>

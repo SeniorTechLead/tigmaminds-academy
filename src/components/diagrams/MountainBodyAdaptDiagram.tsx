@@ -24,20 +24,20 @@ export default function MountainBodyAdaptDiagram() {
         role="img"
         aria-label="Acclimatization timeline showing body adaptations from day 1 to day 14 at high altitude"
       >
-        <rect x="0" y="0" width="600" height="370" className="fill-slate-900" rx="8" />
+        <rect x="0" y="0" width="600" height="370" className="fill-white dark:fill-slate-900" rx="8" />
 
         {/* Title */}
         <text x="300" y="28" textAnchor="middle" fontSize="12" className="fill-gray-200" fontWeight="700">
           Acclimatization Timeline
         </text>
-        <text x="300" y="44" textAnchor="middle" fontSize="9" className="fill-gray-400">
+        <text x="300" y="44" textAnchor="middle" fontSize="9" className="fill-gray-500 dark:fill-gray-400">
           How your body adapts to high altitude over 14 days
         </text>
 
         {/* Timeline axis */}
         <defs>
           <marker id="timeArr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-            <path d="M0,0 L8,3 L0,6" className="fill-gray-400" />
+            <path d="M0,0 L8,3 L0,6" className="fill-gray-500 dark:fill-gray-400" />
           </marker>
         </defs>
         <line
@@ -66,7 +66,7 @@ export default function MountainBodyAdaptDiagram() {
               y={timelineY + 16}
               textAnchor="middle"
               fontSize="8"
-              className="fill-gray-400"
+              className="fill-gray-500 dark:fill-gray-400"
             >
               Day {d}
             </text>
@@ -106,7 +106,7 @@ export default function MountainBodyAdaptDiagram() {
                 y={timelineY + 3}
                 textAnchor="middle"
                 fontSize="7"
-                className="fill-slate-900"
+                className="fill-white dark:fill-slate-900"
                 fontWeight="800"
               >
                 {m.day}
@@ -162,23 +162,23 @@ export default function MountainBodyAdaptDiagram() {
 
         {/* Snow leopard silhouette */}
         <g transform="translate(85, 315)">
-          <ellipse cx="0" cy="0" rx="16" ry="8" className="fill-gray-400" />
-          <circle cx="18" cy="-5" r="7" className="fill-gray-400" />
+          <ellipse cx="0" cy="0" rx="16" ry="8" className="fill-gray-500 dark:fill-gray-400" />
+          <circle cx="18" cy="-5" r="7" className="fill-gray-500 dark:fill-gray-400" />
           <path d="M-16,0 Q-30,10 -34,-3" className="stroke-gray-400" strokeWidth="3.5" fill="none" strokeLinecap="round" />
-          <circle cx="15" cy="-12" r="2.5" className="fill-gray-400" />
-          <circle cx="22" cy="-10" r="2.5" className="fill-gray-400" />
+          <circle cx="15" cy="-12" r="2.5" className="fill-gray-500 dark:fill-gray-400" />
+          <circle cx="22" cy="-10" r="2.5" className="fill-gray-500 dark:fill-gray-400" />
         </g>
 
         <text x="125" y="300" fontSize="10" className="fill-gray-200" fontWeight="700">
           Snow Leopard — Already Adapted
         </text>
-        <text x="125" y="314" fontSize="8" className="fill-gray-400">
+        <text x="125" y="314" fontSize="8" className="fill-gray-500 dark:fill-gray-400">
           Larger lungs for more air per breath
         </text>
-        <text x="125" y="326" fontSize="8" className="fill-gray-400">
+        <text x="125" y="326" fontSize="8" className="fill-gray-500 dark:fill-gray-400">
           Higher hemoglobin for efficient O₂ transport
         </text>
-        <text x="125" y="338" fontSize="8" className="fill-gray-400">
+        <text x="125" y="338" fontSize="8" className="fill-gray-500 dark:fill-gray-400">
           Evolved over millions of years — no acclimatization needed
         </text>
       </svg>

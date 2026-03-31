@@ -8,7 +8,7 @@ export default function ActivityFlowerDissectDiagram() {
 
         {/* Whole flower */}
         <g transform="translate(140, 80)">
-          <text x="0" y="0" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#e2e8f0">Step 1: Pick a flower</text>
+          <text x="0" y="0" textAnchor="middle" fontSize="11" fontWeight="bold" className="fill-gray-700 dark:fill-slate-200">Step 1: Pick a flower</text>
 
           {/* Sepals (green, outer) */}
           {[0, 72, 144, 216, 288].map((a) => (
@@ -39,7 +39,7 @@ export default function ActivityFlowerDissectDiagram() {
 
         {/* Dissected parts */}
         <g transform="translate(350, 70)">
-          <text x="80" y="0" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#e2e8f0">Step 2: Separate the parts</text>
+          <text x="80" y="0" textAnchor="middle" fontSize="11" fontWeight="bold" className="fill-gray-700 dark:fill-slate-200">Step 2: Separate the parts</text>
 
           {/* Petals */}
           <g transform="translate(0, 20)">
@@ -86,7 +86,7 @@ export default function ActivityFlowerDissectDiagram() {
             ].map((item, i) => (
               <g key={i} transform={`translate(0, ${i * 27})`}>
                 <circle cx="8" cy="6" r="4" fill={item.color} opacity="0.6" />
-                <text x="18" y="10" fontSize="10" fill="#e2e8f0">{item.q}</text>
+                <text x="18" y="10" fontSize="10" className="fill-gray-700 dark:fill-slate-200">{item.q}</text>
                 <text x="240" y="10" fontSize="8" className="fill-slate-400">{item.note}</text>
               </g>
             ))}

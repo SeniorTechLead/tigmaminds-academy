@@ -7,7 +7,7 @@ export default function LeopardGPSDiagram() {
         role="img"
         aria-label="GPS trilateration diagram showing three satellites sending signals to a GPS collar on a clouded leopard, with overlapping circles pinpointing location"
       >
-        <rect x="0" y="0" width="600" height="440" className="fill-slate-900" rx="8" />
+        <rect x="0" y="0" width="600" height="440" className="fill-white dark:fill-slate-900" rx="8" />
 
         {/* Title */}
         <text x="300" y="26" textAnchor="middle" fontSize="13" className="fill-gray-200" fontWeight="700">
@@ -39,10 +39,10 @@ export default function LeopardGPSDiagram() {
         ))}
 
         {/* Signal annotation */}
-        <text x="535" y="145" textAnchor="middle" fontSize="10" className="fill-gray-400">
+        <text x="535" y="145" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-gray-400">
           Radio signals
         </text>
-        <text x="535" y="155" textAnchor="middle" fontSize="10" className="fill-gray-400">
+        <text x="535" y="155" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-gray-400">
           at speed of light
         </text>
 
@@ -66,9 +66,9 @@ export default function LeopardGPSDiagram() {
 
         {/* GPS collar label */}
         <line x1="314" y1="305" x2="380" y2="265" stroke="#fbbf24" strokeWidth="1" />
-        <rect x="380" y="252" width="100" height="28" rx="4" className="fill-slate-800" stroke="#fbbf24" strokeWidth="1" />
+        <rect x="380" y="252" width="100" height="28" rx="4" className="fill-gray-100 dark:fill-slate-800" stroke="#fbbf24" strokeWidth="1" />
         <text x="430" y="265" textAnchor="middle" fontSize="10" className="fill-yellow-300" fontWeight="600">GPS Collar</text>
-        <text x="430" y="276" textAnchor="middle" fontSize="9" className="fill-gray-400">records lat/long</text>
+        <text x="430" y="276" textAnchor="middle" fontSize="9" className="fill-gray-500 dark:fill-gray-400">records lat/long</text>
 
         {/* Distance labels */}
         <text x="230" y="230" fontSize="10" className="fill-amber-400/80">d₁ = 21,400 km</text>
@@ -77,7 +77,7 @@ export default function LeopardGPSDiagram() {
 
         {/* How it works callout */}
         <rect x="20" y="395" width="560" height="35" rx="4" className="fill-slate-800/80" />
-        <text x="300" y="410" textAnchor="middle" fontSize="10" className="fill-gray-300">
+        <text x="300" y="410" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-300">
           Each satellite measures distance by timing how long its signal takes to arrive.
         </text>
         <text x="300" y="423" textAnchor="middle" fontSize="10" className="fill-amber-300">

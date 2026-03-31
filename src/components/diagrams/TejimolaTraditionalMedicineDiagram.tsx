@@ -13,9 +13,9 @@ export default function TejimolaTraditionalMedicineDiagram() {
         <text x="300" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#fbbf24">From Myth to Medicine: Plants to Genes</text>
 
         {/* Timeline arrow across top */}
-        <line x1="50" y1="52" x2="550" y2="52" stroke="#475569" strokeWidth="2" markerEnd="url(#arrowMed)" />
-        <text x="120" y="48" textAnchor="middle" fontSize="10" fill="#94a3b8">Traditional knowledge</text>
-        <text x="480" y="48" textAnchor="middle" fontSize="10" fill="#94a3b8">Modern genetics</text>
+        <line x1="50" y1="52" x2="550" y2="52" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="2" markerEnd="url(#arrowMed)" />
+        <text x="120" y="48" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Traditional knowledge</text>
+        <text x="480" y="48" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Modern genetics</text>
 
         {/* Three plant examples */}
         {[
@@ -60,7 +60,7 @@ export default function TejimolaTraditionalMedicineDiagram() {
             <ellipse cx="55" cy={p.y + 25} rx="8" ry="12" fill={p.plantColor} opacity="0.6" transform={`rotate(-30,55,${p.y + 25})`} />
             <text x="55" y={p.y + 32} textAnchor="middle" fontSize="10" fill={p.plantColor}>{i + 1}</text>
             <text x="85" y={p.y + 20} fontSize="12" fontWeight="bold" fill={p.plantColor}>{p.plant}</text>
-            <text x="85" y={p.y + 35} fontSize="9" fill="#94a3b8">{p.trad}</text>
+            <text x="85" y={p.y + 35} fontSize="9" className="fill-gray-500 dark:fill-slate-400">{p.trad}</text>
 
             {/* Four-step pipeline */}
             {[
@@ -74,7 +74,7 @@ export default function TejimolaTraditionalMedicineDiagram() {
                 <text x={step.x + 65} y={p.y + 62} textAnchor="middle" fontSize="9" fontWeight="bold" fill={step.color}>{step.label}</text>
                 <text x={step.x + 65} y={p.y + 78} textAnchor="middle" fontSize="9" fill="#d1d5db">{step.value}</text>
                 {j < 3 && (
-                  <line x1={step.x + 130} y1={p.y + 70} x2={step.x + 140} y2={p.y + 70} stroke="#475569" strokeWidth="1.5" markerEnd="url(#arrowMed)" />
+                  <line x1={step.x + 130} y1={p.y + 70} x2={step.x + 140} y2={p.y + 70} className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1.5" markerEnd="url(#arrowMed)" />
                 )}
               </g>
             ))}

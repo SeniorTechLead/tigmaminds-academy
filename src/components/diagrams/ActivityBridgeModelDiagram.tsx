@@ -42,7 +42,7 @@ export default function ActivityBridgeModelDiagram() {
         <text x="195" y="150" textAnchor="middle" className="small fill-amber-300">coins for loading</text>
 
         {/* Small card */}
-        <rect x="240" y="75" width="45" height="30" rx="2" fill="#e2e8f0" opacity="0.3" stroke="#94a3b8" strokeWidth="1" />
+        <rect x="240" y="75" width="45" height="30" rx="2" className="fill-gray-700 dark:fill-slate-200" opacity="0.3" stroke="#94a3b8" strokeWidth="1" />
         <text x="262" y="93" textAnchor="middle" className="small fill-slate-300">card</text>
         <text x="262" y="118" textAnchor="middle" className="small fill-slate-400">(deck surface)</text>
 
@@ -58,7 +58,7 @@ export default function ActivityBridgeModelDiagram() {
           fill="none" stroke="#fbbf24" strokeWidth="2" />
 
         {/* Card on string */}
-        <rect x="135" y="230" width="35" height="4" rx="1" fill="#e2e8f0" opacity="0.4" />
+        <rect x="135" y="230" width="35" height="4" rx="1" className="fill-gray-700 dark:fill-slate-200" opacity="0.4" />
 
         {/* Coin on card */}
         <circle cx="152" cy="226" r="5" fill="#a78b00" stroke="#d4a000" strokeWidth="0.8" />
@@ -85,7 +85,7 @@ export default function ActivityBridgeModelDiagram() {
         ))}
 
         {/* Card + more coins */}
-        <rect x="462" y="98" width="35" height="4" rx="1" fill="#e2e8f0" opacity="0.4" />
+        <rect x="462" y="98" width="35" height="4" rx="1" className="fill-gray-700 dark:fill-slate-200" opacity="0.4" />
         {[470, 480, 490].map((x, i) => (
           <circle key={i} cx={x} cy={93} r="5" fill="#a78b00" stroke="#d4a000" strokeWidth="0.8" />
         ))}
@@ -94,15 +94,15 @@ export default function ActivityBridgeModelDiagram() {
         <text x="480" y="145" textAnchor="middle" className="small fill-slate-400">Count the coins — compare!</text>
 
         {/* --- Step 4: Compare --- */}
-        <rect x="340" y="170" width="280" height="120" rx="5" fill="#1e293b" stroke="#475569" strokeWidth="1" />
+        <rect x="340" y="170" width="280" height="120" rx="5" className="fill-gray-100 dark:fill-slate-800 stroke-gray-300 dark:stroke-slate-600"  strokeWidth="1" />
         <text x="480" y="190" textAnchor="middle" className="step fill-amber-300">Step 4: Record</text>
 
         {/* Table */}
-        <line x1="360" y1="200" x2="600" y2="200" stroke="#475569" strokeWidth="0.8" />
+        <line x1="360" y1="200" x2="600" y2="200" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="0.8" />
         <text x="420" y="215" textAnchor="middle" className="small fill-slate-400">Design</text>
         <text x="520" y="215" textAnchor="middle" className="small fill-slate-400">Max Coins</text>
         <text x="580" y="215" textAnchor="middle" className="small fill-slate-400">Sag</text>
-        <line x1="360" y1="220" x2="600" y2="220" stroke="#475569" strokeWidth="0.5" />
+        <line x1="360" y1="220" x2="600" y2="220" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="0.5" />
 
         <text x="420" y="238" textAnchor="middle" className="small fill-amber-300">1 string</text>
         <text x="520" y="238" textAnchor="middle" className="small fill-slate-300">___</text>

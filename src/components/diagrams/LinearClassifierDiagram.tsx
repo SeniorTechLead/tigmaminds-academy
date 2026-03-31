@@ -105,23 +105,23 @@ export default function LinearClassifierDiagram() {
         {/* ════════════ TOP PANEL: linearly separable ════════════ */}
         <g>
           {/* Panel background */}
-          <rect x={20} y={5} width={420} height={200} rx={8} fill="#1e293b" opacity={0.5} />
+          <rect x={20} y={5} width={420} height={200} rx={8} className="fill-gray-100 dark:fill-slate-800" opacity={0.5} />
 
           {/* Title */}
-          <text x={230} y={22} textAnchor="middle" fill="#e2e8f0" fontSize={12} fontWeight={700}>
+          <text x={230} y={22} textAnchor="middle" className="fill-gray-700 dark:fill-slate-200" fontSize={12} fontWeight={700}>
             Linearly Separable
           </text>
 
           {/* Axes */}
-          <line x1={35} y1={165} x2={420} y2={165} stroke="#475569" strokeWidth={1} />
-          <line x1={35} y1={165} x2={35} y2={15} stroke="#475569" strokeWidth={1} />
-          <text x={230} y={180} textAnchor="middle" fill="#64748b" fontSize={9}>
+          <line x1={35} y1={165} x2={420} y2={165} className="stroke-gray-300 dark:stroke-slate-600" strokeWidth={1} />
+          <line x1={35} y1={165} x2={35} y2={15} className="stroke-gray-300 dark:stroke-slate-600" strokeWidth={1} />
+          <text x={230} y={180} textAnchor="middle" className="fill-gray-400 dark:fill-slate-500" fontSize={9}>
             Frequency (Hz)
           </text>
           <text
             x={14} y={90}
             textAnchor="middle"
-            fill="#64748b"
+            className="fill-gray-400 dark:fill-slate-500"
             fontSize={9}
             transform="rotate(-90, 14, 90)"
           >
@@ -156,31 +156,31 @@ export default function LinearClassifierDiagram() {
 
           {/* Legend */}
           <circle cx={330} cy={30} r={4} fill="#4ade80" />
-          <text x={338} y={34} fill="#94a3b8" fontSize={9}>Calm</text>
+          <text x={338} y={34} className="fill-gray-500 dark:fill-slate-400" fontSize={9}>Calm</text>
           <circle cx={375} cy={30} r={4} fill="#f87171" />
-          <text x={383} y={34} fill="#94a3b8" fontSize={9}>Nervous</text>
+          <text x={383} y={34} className="fill-gray-500 dark:fill-slate-400" fontSize={9}>Nervous</text>
         </g>
 
         {/* ════════════ BOTTOM PANEL: not linearly separable ════════════ */}
         <g>
           {/* Panel background */}
-          <rect x={20} y={220} width={420} height={210} rx={8} fill="#1e293b" opacity={0.5} />
+          <rect x={20} y={220} width={420} height={210} rx={8} className="fill-gray-100 dark:fill-slate-800" opacity={0.5} />
 
           {/* Title */}
-          <text x={230} y={238} textAnchor="middle" fill="#e2e8f0" fontSize={12} fontWeight={700}>
+          <text x={230} y={238} textAnchor="middle" className="fill-gray-700 dark:fill-slate-200" fontSize={12} fontWeight={700}>
             Not Linearly Separable
           </text>
 
           {/* Axes */}
-          <line x1={35} y1={410} x2={420} y2={410} stroke="#475569" strokeWidth={1} />
-          <line x1={35} y1={410} x2={35} y2={235} stroke="#475569" strokeWidth={1} />
-          <text x={230} y={425} textAnchor="middle" fill="#64748b" fontSize={9}>
+          <line x1={35} y1={410} x2={420} y2={410} className="stroke-gray-300 dark:stroke-slate-600" strokeWidth={1} />
+          <line x1={35} y1={410} x2={35} y2={235} className="stroke-gray-300 dark:stroke-slate-600" strokeWidth={1} />
+          <text x={230} y={425} textAnchor="middle" className="fill-gray-400 dark:fill-slate-500" fontSize={9}>
             Frequency (Hz)
           </text>
           <text
             x={14} y={320}
             textAnchor="middle"
-            fill="#64748b"
+            className="fill-gray-400 dark:fill-slate-500"
             fontSize={9}
             transform="rotate(-90, 14, 320)"
           >
@@ -244,9 +244,9 @@ export default function LinearClassifierDiagram() {
 
           {/* Legend */}
           <circle cx={330} cy={247} r={4} fill="#4ade80" />
-          <text x={338} y={251} fill="#94a3b8" fontSize={9}>Inner class</text>
+          <text x={338} y={251} className="fill-gray-500 dark:fill-slate-400" fontSize={9}>Inner class</text>
           <circle cx={395} cy={247} r={4} fill="#f87171" />
-          <text x={403} y={251} fill="#94a3b8" fontSize={9}>Outer</text>
+          <text x={403} y={251} className="fill-gray-500 dark:fill-slate-400" fontSize={9}>Outer</text>
         </g>
       </svg>
     </div>

@@ -52,13 +52,13 @@ export default function MountainUVDiagram() {
         role="img"
         aria-label="Graph showing UV radiation index increasing with altitude from UV 6 at sea level to UV 11 at 5000 metres, with atmosphere thickness illustration"
       >
-        <rect x="0" y="0" width="600" height="410" className="fill-slate-900" rx="8" />
+        <rect x="0" y="0" width="600" height="410" className="fill-white dark:fill-slate-900" rx="8" />
 
         {/* Title */}
         <text x="300" y="22" textAnchor="middle" fontSize="12" className="fill-gray-200" fontWeight="700">
           UV Radiation Increases with Altitude
         </text>
-        <text x="300" y="38" textAnchor="middle" fontSize="9" className="fill-gray-400">
+        <text x="300" y="38" textAnchor="middle" fontSize="9" className="fill-gray-500 dark:fill-gray-400">
           ~10-12% more UV per 1 000 m elevation gain
         </text>
 
@@ -99,7 +99,7 @@ export default function MountainUVDiagram() {
           y={(top + bottom) / 2}
           textAnchor="middle"
           fontSize="10"
-          className="fill-gray-300"
+          className="fill-gray-600 dark:fill-gray-300"
           fontWeight="600"
           transform={`rotate(-90,20,${(top + bottom) / 2})`}
         >
@@ -107,7 +107,7 @@ export default function MountainUVDiagram() {
         </text>
 
         {/* X-axis label */}
-        <text x={(left + right) / 2} y={bottom + 28} textAnchor="middle" fontSize="10" className="fill-gray-300" fontWeight="600">
+        <text x={(left + right) / 2} y={bottom + 28} textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-300" fontWeight="600">
           Altitude (m)
         </text>
 
@@ -115,7 +115,7 @@ export default function MountainUVDiagram() {
         {[0, 2, 4, 6, 8, 10, 12, 14, 16].map((uv) => (
           <g key={uv}>
             <line x1={left - 4} y1={uvY(uv)} x2={left} y2={uvY(uv)} className="stroke-gray-500" strokeWidth="1" />
-            <text x={left - 8} y={uvY(uv) + 3} textAnchor="end" fontSize="8" className="fill-gray-400">
+            <text x={left - 8} y={uvY(uv) + 3} textAnchor="end" fontSize="8" className="fill-gray-500 dark:fill-gray-400">
               {uv}
             </text>
             {uv > 0 && (
@@ -128,7 +128,7 @@ export default function MountainUVDiagram() {
         {[0, 1000, 2000, 3000, 4000, 5000, 6000].map((m) => (
           <g key={m}>
             <line x1={altX(m)} y1={bottom} x2={altX(m)} y2={bottom + 5} className="stroke-gray-500" strokeWidth="1" />
-            <text x={altX(m)} y={bottom + 16} textAnchor="middle" fontSize="7" className="fill-gray-400">
+            <text x={altX(m)} y={bottom + 16} textAnchor="middle" fontSize="7" className="fill-gray-500 dark:fill-gray-400">
               {m.toLocaleString()}
             </text>
           </g>
@@ -168,14 +168,14 @@ export default function MountainUVDiagram() {
               width="56"
               height="20"
               rx="3"
-              className="fill-slate-800"
+              className="fill-gray-100 dark:fill-slate-800"
               stroke="#f59e0b"
               strokeWidth="0.5"
             />
             <text x={altX(mk.alt)} y={uvY(mk.uv) - 14} textAnchor="middle" fontSize="7" className="fill-amber-300" fontWeight="600">
               {mk.label}
             </text>
-            <text x={altX(mk.alt)} y={uvY(mk.uv) - 6} textAnchor="middle" fontSize="7" className="fill-gray-300">
+            <text x={altX(mk.alt)} y={uvY(mk.uv) - 6} textAnchor="middle" fontSize="7" className="fill-gray-600 dark:fill-gray-300">
               UV {mk.uv}
             </text>
           </g>
@@ -183,7 +183,7 @@ export default function MountainUVDiagram() {
 
         {/* Atmosphere thickness mini-diagram */}
         <g transform="translate(40, 340)">
-          <text x="0" y="10" fontSize="9" className="fill-gray-300" fontWeight="700">
+          <text x="0" y="10" fontSize="9" className="fill-gray-600 dark:fill-gray-300" fontWeight="700">
             Why? Thinner air = less UV filtering:
           </text>
           {atmLayers.map((layer, i) => (
@@ -208,7 +208,7 @@ export default function MountainUVDiagram() {
               {/* Atmosphere block */}
               <rect x={10} y={16} width={30} height={layer.thickness} rx="2" className="fill-blue-400" fillOpacity={0.15 + (layer.thickness / 50) * 0.2} />
 
-              <text x={25} y={16 + layer.thickness + 14} textAnchor="middle" fontSize="6" className="fill-gray-400">
+              <text x={25} y={16 + layer.thickness + 14} textAnchor="middle" fontSize="6" className="fill-gray-500 dark:fill-gray-400">
                 {layer.label}
               </text>
             </g>

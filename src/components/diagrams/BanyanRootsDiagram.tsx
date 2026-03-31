@@ -2,7 +2,7 @@ export default function BanyanRootsDiagram() {
   return (
     <div className="my-4">
       <svg viewBox="0 0 605 440" className="w-full max-w-lg mx-auto" role="img" aria-label="Banyan tree root system showing aerial roots, strangler roots, and ground roots">
-        <rect width="500" height="400" rx="12" className="fill-slate-900" />
+        <rect width="500" height="400" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}
         <text x="250" y="28" textAnchor="middle" className="fill-amber-400" fontSize="14" fontWeight="bold">Banyan Root System</text>
@@ -32,7 +32,7 @@ export default function BanyanRootsDiagram() {
 
         {/* Host tree (ghosted) */}
         <rect x="90" y="150" width="20" height="130" rx="3" className="fill-slate-600" opacity="0.4" />
-        <text x="100" y="145" textAnchor="middle" className="fill-slate-500" fontSize="8">host tree</text>
+        <text x="100" y="145" textAnchor="middle" className="fill-gray-400 dark:fill-slate-500" fontSize="8">host tree</text>
 
         {/* Strangler roots wrapping host */}
         <path d="M 95,160 Q 80,180 105,200 Q 85,220 100,240 Q 88,260 100,280" className="stroke-amber-500" strokeWidth="2.5" fill="none" />
@@ -74,7 +74,7 @@ export default function BanyanRootsDiagram() {
 
         {/* Growing tip label */}
         <line x1="310" y1="250" x2="370" y2="240" className="stroke-slate-500" strokeWidth="1" strokeDasharray="2,2" />
-        <text x="375" y="244" className="fill-slate-400" fontSize="8">still growing ↓</text>
+        <text x="375" y="244" className="fill-gray-500 dark:fill-slate-400" fontSize="8">still growing ↓</text>
 
         {/* Fact */}
         <text x="250" y="390" textAnchor="middle" className="fill-green-300" fontSize="9">One banyan can have 3,000+ aerial roots — each becoming a new trunk</text>

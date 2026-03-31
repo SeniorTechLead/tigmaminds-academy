@@ -35,14 +35,14 @@ export default function PandaConvergentDiagram() {
         <rect width="580" height="460" rx="12" className="fill-slate-900" />
 
         <text x="290" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#c084fc">Convergent Evolution — Three Masks, Three Families</text>
-        <text x="290" y="46" textAnchor="middle" fontSize="11" fill="#94a3b8">Similar problems → similar solutions, evolved independently</text>
+        <text x="290" y="46" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Similar problems → similar solutions, evolved independently</text>
 
         {/* Phylogenetic tree at the top */}
         <g transform="translate(100, 65)">
           {/* Common ancestor */}
-          <circle cx="190" cy="10" r="6" fill="#94a3b8" />
-          <text x="190" y="5" textAnchor="middle" fontSize="9" fill="#94a3b8">Common ancestor</text>
-          <text x="190" y="-5" textAnchor="middle" fontSize="9" fill="#64748b">(~55 million years ago)</text>
+          <circle cx="190" cy="10" r="6" className="fill-gray-500 dark:fill-slate-400" />
+          <text x="190" y="5" textAnchor="middle" fontSize="9" className="fill-gray-500 dark:fill-slate-400">Common ancestor</text>
+          <text x="190" y="-5" textAnchor="middle" fontSize="9" className="fill-gray-400 dark:fill-slate-500">(~55 million years ago)</text>
 
           {/* Branches diverging */}
           <line x1="190" y1="16" x2="190" y2="35" stroke="#64748b" strokeWidth="1.5" />
@@ -88,9 +88,9 @@ export default function PandaConvergentDiagram() {
               </g>
 
               {/* Labels */}
-              <text x="88" y="105" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#e2e8f0">{animal.name}</text>
+              <text x="88" y="105" textAnchor="middle" fontSize="13" fontWeight="bold" className="fill-gray-700 dark:fill-slate-200">{animal.name}</text>
               <text x="88" y="120" textAnchor="middle" fontSize="10" fill="#c084fc">{animal.family}</text>
-              <text x="88" y="137" textAnchor="middle" fontSize="10" fill="#94a3b8">{animal.habitat}</text>
+              <text x="88" y="137" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">{animal.habitat}</text>
 
               {/* Mask function */}
               <rect x="10" y="148" width="155" height="30" rx="5" fill="#c084fc" opacity="0.1" />

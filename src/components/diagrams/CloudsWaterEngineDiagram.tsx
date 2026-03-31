@@ -71,7 +71,7 @@ export default function CloudsWaterEngineDiagram() {
         {/* Mountain */}
         <polygon points="520,395 580,270 620,310 660,250 700,395" fill="#334155" fillOpacity="0.7" />
         <polygon points="660,250 700,395 720,395 720,250" fill="#334155" fillOpacity="0.5" />
-        <text x="620" y="350" textAnchor="middle" fontSize="11" fill="#94a3b8" fontWeight="600">
+        <text x="620" y="350" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400" fontWeight="600">
           Mountains
         </text>
 
@@ -84,7 +84,7 @@ export default function CloudsWaterEngineDiagram() {
         <path d="M280,390 Q270,320 260,260" fill="none" stroke="#fbbf24" strokeWidth="2" strokeDasharray="6 4" markerEnd="url(#cwe-arrow-y)" />
 
         {/* Label 1 */}
-        <rect x="130" y="310" width="110" height="34" rx="4" fill="#0f172a" fillOpacity="0.8" />
+        <rect x="130" y="310" width="110" height="34" rx="4" className="fill-white dark:fill-slate-950" fillOpacity="0.8" />
         <text x="185" y="326" textAnchor="middle" fontSize="12" fontWeight="700" fill="#fbbf24">
           {"① Evaporation"}
         </text>
@@ -94,14 +94,14 @@ export default function CloudsWaterEngineDiagram() {
 
         {/* Cloud cluster */}
         <g>
-          <ellipse cx="350" cy="140" rx="90" ry="35" fill="#e2e8f0" fillOpacity="0.8" />
+          <ellipse cx="350" cy="140" rx="90" ry="35" className="fill-gray-700 dark:fill-slate-200" fillOpacity="0.8" />
           <ellipse cx="310" cy="130" rx="55" ry="30" fill="#f1f5f9" fillOpacity="0.85" />
-          <ellipse cx="390" cy="130" rx="50" ry="25" fill="#f8fafc" fillOpacity="0.8" />
+          <ellipse cx="390" cy="130" rx="50" ry="25" className="fill-gray-900 dark:fill-slate-50" fillOpacity="0.8" />
           <ellipse cx="350" cy="118" rx="45" ry="22" fill="#ffffff" fillOpacity="0.9" />
         </g>
 
         {/* Label 2: Condensation */}
-        <rect x="260" y="75" width="180" height="34" rx="4" fill="#0f172a" fillOpacity="0.8" />
+        <rect x="260" y="75" width="180" height="34" rx="4" className="fill-white dark:fill-slate-950" fillOpacity="0.8" />
         <text x="350" y="91" textAnchor="middle" fontSize="12" fontWeight="700" fill="#c4b5fd">
           {"② Condensation"}
         </text>
@@ -111,7 +111,7 @@ export default function CloudsWaterEngineDiagram() {
 
         {/* Wind arrow pushing cloud toward mountain */}
         <path d="M440,135 Q480,130 520,140" fill="none" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#cwe-arrow)" />
-        <text x="480" y="125" textAnchor="middle" fontSize="10" fill="#94a3b8">Wind</text>
+        <text x="480" y="125" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Wind</text>
 
         {/* Step 3: Precipitation (rain) */}
         {[320, 340, 360, 380].map((x, i) => (
@@ -121,7 +121,7 @@ export default function CloudsWaterEngineDiagram() {
           </g>
         ))}
 
-        <rect x="410" y="185" width="120" height="34" rx="4" fill="#0f172a" fillOpacity="0.8" />
+        <rect x="410" y="185" width="120" height="34" rx="4" className="fill-white dark:fill-slate-950" fillOpacity="0.8" />
         <text x="470" y="201" textAnchor="middle" fontSize="12" fontWeight="700" fill="#60a5fa">
           {"③ Precipitation"}
         </text>
@@ -132,7 +132,7 @@ export default function CloudsWaterEngineDiagram() {
         {/* Step 4: Collection / runoff */}
         <path d="M400,240 Q430,300 470,370 Q490,390 500,395" fill="none" stroke="#4ade80" strokeWidth="2.5" strokeDasharray="5 3" markerEnd="url(#cwe-arrow-g)" />
 
-        <rect x="425" y="290" width="130" height="34" rx="4" fill="#0f172a" fillOpacity="0.8" />
+        <rect x="425" y="290" width="130" height="34" rx="4" className="fill-white dark:fill-slate-950" fillOpacity="0.8" />
         <text x="490" y="306" textAnchor="middle" fontSize="12" fontWeight="700" fill="#4ade80">
           {"④ Collection"}
         </text>
@@ -144,19 +144,19 @@ export default function CloudsWaterEngineDiagram() {
         <path d="M140,420 Q80,420 60,400 Q40,370 60,340 Q80,310 130,310" fill="none" stroke="#fbbf24" strokeWidth="1.5" strokeDasharray="4 3" markerEnd="url(#cwe-arrow-y)" />
 
         {/* Mawsynram callout */}
-        <rect x="8" y="140" width="200" height="50" rx="6" fill="#0f172a" fillOpacity="0.85" />
+        <rect x="8" y="140" width="200" height="50" rx="6" className="fill-white dark:fill-slate-950" fillOpacity="0.85" />
         <text x="16" y="158" fontSize="11" fontWeight="700" fill="#7dd3fc">
           Mawsynram, Meghalaya
         </text>
-        <text x="16" y="172" fontSize="10" fill="#cbd5e1">
+        <text x="16" y="172" fontSize="10" className="fill-gray-600 dark:fill-slate-300">
           Receives ~12 000 mm rain/year
         </text>
-        <text x="16" y="184" fontSize="10" fill="#cbd5e1">
+        <text x="16" y="184" fontSize="10" className="fill-gray-600 dark:fill-slate-300">
           because moist winds hit the Khasi Hills
         </text>
 
         {/* Bottom: repeat label */}
-        <text x={w / 2} y={h - 10} textAnchor="middle" fontSize="11" fill="#94a3b8" fontWeight="600">
+        <text x={w / 2} y={h - 10} textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400" fontWeight="600">
           The cycle never stops — the same water has been cycling for billions of years
         </text>
       </svg>

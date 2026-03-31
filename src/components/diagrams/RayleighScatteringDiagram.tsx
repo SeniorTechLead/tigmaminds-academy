@@ -86,7 +86,7 @@ export default function RayleighScatteringDiagram() {
         </defs>
 
         {/* ===== Background ===== */}
-        <rect width="680" height="380" fill="#1E1B2E" rx="8" />
+        <rect width="680" height="380" className="fill-white dark:fill-[#1E1B2E]" rx="8" />
 
         {/* Dividing line */}
         <line x1="0" y1="155" x2="680" y2="155" stroke="#334155" strokeWidth="0.5" strokeDasharray="4 3" />

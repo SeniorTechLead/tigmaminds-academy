@@ -61,7 +61,7 @@ export default function MountainO2PartialDiagram() {
         role="img"
         aria-label="Graph showing oxygen partial pressure dropping from 212 hPa at sea level to about 70 hPa at Everest summit, with a danger zone below 100 hPa and hemoglobin saturation curve overlay"
       >
-        <rect x="0" y="0" width="600" height="410" className="fill-slate-900" rx="8" />
+        <rect x="0" y="0" width="600" height="410" className="fill-white dark:fill-slate-900" rx="8" />
 
         {/* Title */}
         <text x="300" y="22" textAnchor="middle" fontSize="12" className="fill-gray-200" fontWeight="700">
@@ -69,7 +69,7 @@ export default function MountainO2PartialDiagram() {
         </text>
 
         {/* Dalton's law label */}
-        <rect x="170" y="30" width="260" height="16" rx="3" className="fill-slate-800" />
+        <rect x="170" y="30" width="260" height="16" rx="3" className="fill-gray-100 dark:fill-slate-800" />
         <text x="300" y="42" textAnchor="middle" fontSize="9" className="fill-sky-300" fontWeight="600" fontFamily="serif">
           {"Dalton’s Law: P₂ = 0.209 × P"}
           <tspan fontSize="9" dy="2">total</tspan>
@@ -124,7 +124,7 @@ export default function MountainO2PartialDiagram() {
         </text>
 
         {/* X-axis label */}
-        <text x={(left + right) / 2} y={bottom + 28} textAnchor="middle" fontSize="10" className="fill-gray-300" fontWeight="600">
+        <text x={(left + right) / 2} y={bottom + 28} textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-300" fontWeight="600">
           Altitude (m)
         </text>
 
@@ -132,7 +132,7 @@ export default function MountainO2PartialDiagram() {
         {[75, 100, 125, 150, 175, 200].map((p) => (
           <g key={p}>
             <line x1={left - 4} y1={pY(p)} x2={left} y2={pY(p)} className="stroke-gray-500" strokeWidth="1" />
-            <text x={left - 8} y={pY(p) + 3} textAnchor="end" fontSize="9" className="fill-gray-400">
+            <text x={left - 8} y={pY(p) + 3} textAnchor="end" fontSize="9" className="fill-gray-500 dark:fill-gray-400">
               {p}
             </text>
             <line x1={left} y1={pY(p)} x2={right} y2={pY(p)} className="stroke-gray-700" strokeWidth="0.5" strokeDasharray="3 3" />
@@ -154,7 +154,7 @@ export default function MountainO2PartialDiagram() {
         {[0, 2000, 4000, 6000, 8000].map((m) => (
           <g key={m}>
             <line x1={altX(m)} y1={bottom} x2={altX(m)} y2={bottom + 5} className="stroke-gray-500" strokeWidth="1" />
-            <text x={altX(m)} y={bottom + 16} textAnchor="middle" fontSize="8" className="fill-gray-400">
+            <text x={altX(m)} y={bottom + 16} textAnchor="middle" fontSize="8" className="fill-gray-500 dark:fill-gray-400">
               {m.toLocaleString()}
             </text>
           </g>
@@ -203,7 +203,7 @@ export default function MountainO2PartialDiagram() {
               y={pY(mk.po2) + (i % 2 === 0 ? -2 : 23)}
               textAnchor="middle"
               fontSize="9"
-              className="fill-gray-300"
+              className="fill-gray-600 dark:fill-gray-300"
             >
               {mk.po2} hPa
             </text>
@@ -217,11 +217,11 @@ export default function MountainO2PartialDiagram() {
         <text x={275} y={343} fontSize="8" className="fill-emerald-300">Hemoglobin saturation (SpO2)</text>
 
         {/* Insight */}
-        <rect x="60" y="355" width="480" height="36" rx="4" className="fill-slate-800" />
-        <text x="80" y="370" fontSize="9" className="fill-gray-300" fontWeight="600">
+        <rect x="60" y="355" width="480" height="36" rx="4" className="fill-gray-100 dark:fill-slate-800" />
+        <text x="80" y="370" fontSize="9" className="fill-gray-600 dark:fill-gray-300" fontWeight="600">
           At Everest summit, each breath delivers only ~33% of sea-level oxygen.
         </text>
-        <text x="80" y="383" fontSize="9" className="fill-gray-300" fontWeight="600">
+        <text x="80" y="383" fontSize="9" className="fill-gray-600 dark:fill-gray-300" fontWeight="600">
           Blood oxygen saturation can drop below 50% without supplemental O2.
         </text>
       </svg>

@@ -2,7 +2,7 @@ export default function BanyanReproductionDiagram() {
   return (
     <div className="my-4">
       <svg viewBox="0 0 530 428" className="w-full max-w-lg mx-auto" role="img" aria-label="Banyan reproduction cycle: fig fruit to bird dispersal to epiphyte growth to strangler takeover">
-        <rect width="500" height="400" rx="12" className="fill-slate-900" />
+        <rect width="500" height="400" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}
         <text x="250" y="28" textAnchor="middle" className="fill-amber-400" fontSize="14" fontWeight="bold">Banyan Reproduction: The Strangler Cycle</text>
@@ -15,8 +15,8 @@ export default function BanyanReproductionDiagram() {
           <circle cx="75" cy="85" r="8" className="fill-green-400" />
           <path d="M 75,73 L 75,68" className="stroke-green-700" strokeWidth="1.5" />
           <text x="75" y="115" textAnchor="middle" className="fill-green-300" fontSize="9" fontWeight="bold">1. Fig ripens</text>
-          <text x="75" y="128" textAnchor="middle" className="fill-slate-400" fontSize="7">~750 tiny seeds</text>
-          <text x="75" y="138" textAnchor="middle" className="fill-slate-400" fontSize="7">inside each fig</text>
+          <text x="75" y="128" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="7">~750 tiny seeds</text>
+          <text x="75" y="138" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="7">inside each fig</text>
         </g>
 
         {/* Arrow 1→2 */}
@@ -32,8 +32,8 @@ export default function BanyanReproductionDiagram() {
           {/* Fig in beak */}
           <circle cx="212" cy="78" r="3" className="fill-green-500" />
           <text x="230" y="115" textAnchor="middle" className="fill-green-300" fontSize="9" fontWeight="bold">2. Bird eats fig</text>
-          <text x="230" y="128" textAnchor="middle" className="fill-slate-400" fontSize="7">Seeds survive</text>
-          <text x="230" y="138" textAnchor="middle" className="fill-slate-400" fontSize="7">digestion</text>
+          <text x="230" y="128" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="7">Seeds survive</text>
+          <text x="230" y="138" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="7">digestion</text>
         </g>
 
         {/* Arrow 2→3 */}
@@ -45,11 +45,11 @@ export default function BanyanReproductionDiagram() {
           {/* Host tree branch */}
           <line x1="350" y1="90" x2="450" y2="85" className="stroke-amber-700" strokeWidth="4" />
           {/* Bird droppings with seed */}
-          <circle cx="400" cy="82" r="3" className="fill-slate-400" />
+          <circle cx="400" cy="82" r="3" className="fill-gray-500 dark:fill-slate-400" />
           <circle cx="400" cy="82" r="1.5" className="fill-green-400" />
           <text x="400" y="115" textAnchor="middle" className="fill-green-300" fontSize="9" fontWeight="bold">3. Seed lands</text>
-          <text x="400" y="128" textAnchor="middle" className="fill-slate-400" fontSize="7">on host tree branch</text>
-          <text x="400" y="138" textAnchor="middle" className="fill-slate-400" fontSize="7">via bird droppings</text>
+          <text x="400" y="128" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="7">on host tree branch</text>
+          <text x="400" y="138" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="7">via bird droppings</text>
         </g>
 
         {/* Arrow 3→4 */}
@@ -65,7 +65,7 @@ export default function BanyanReproductionDiagram() {
           {/* Small root starting down */}
           <line x1="395" y1="205" x2="395" y2="245" className="stroke-amber-500" strokeWidth="1" strokeDasharray="2,2" />
           <text x="400" y="275" textAnchor="middle" className="fill-amber-300" fontSize="9" fontWeight="bold">4. Grows as epiphyte</text>
-          <text x="400" y="288" textAnchor="middle" className="fill-slate-400" fontSize="7">sends roots downward</text>
+          <text x="400" y="288" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="7">sends roots downward</text>
         </g>
 
         {/* Arrow 4→5 */}
@@ -82,7 +82,7 @@ export default function BanyanReproductionDiagram() {
           {/* Banyan canopy growing */}
           <ellipse cx="222" cy="195" rx="30" ry="15" className="fill-green-600" opacity="0.6" />
           <text x="222" y="298" textAnchor="middle" className="fill-amber-300" fontSize="9" fontWeight="bold">5. Roots wrap host</text>
-          <text x="222" y="311" textAnchor="middle" className="fill-slate-400" fontSize="7">roots thicken, encircle</text>
+          <text x="222" y="311" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="7">roots thicken, encircle</text>
         </g>
 
         {/* Arrow 5→6 */}
@@ -94,7 +94,7 @@ export default function BanyanReproductionDiagram() {
           {/* Large banyan (hollow center where host was) */}
           <rect x="60" y="210" width="25" height="70" rx="3" className="fill-amber-700" />
           {/* Hollow center */}
-          <rect x="67" y="220" width="11" height="50" rx="2" className="fill-slate-800" />
+          <rect x="67" y="220" width="11" height="50" rx="2" className="fill-gray-100 dark:fill-slate-800" />
           {/* Wide canopy */}
           <ellipse cx="72" cy="200" rx="45" ry="25" className="fill-green-600" opacity="0.7" />
           {/* Aerial roots */}
@@ -102,13 +102,13 @@ export default function BanyanReproductionDiagram() {
           <line x1="105" y1="210" x2="110" y2="280" className="stroke-amber-600" strokeWidth="2" />
           <text x="80" y="298" textAnchor="middle" className="fill-amber-300" fontSize="9" fontWeight="bold">6. Host dies</text>
           <text x="80" y="311" textAnchor="middle" className="fill-green-300" fontSize="7">Banyan stands alone</text>
-          <text x="80" y="323" textAnchor="middle" className="fill-slate-400" fontSize="7">hollow trunk remains</text>
+          <text x="80" y="323" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="7">hollow trunk remains</text>
         </g>
 
         {/* Bottom summary */}
         <rect x="50" y="345" width="400" height="45" rx="8" className="fill-green-900" opacity="0.5" />
         <text x="250" y="362" textAnchor="middle" className="fill-green-300" fontSize="9" fontWeight="bold">This process takes 50-100 years from seed to independent tree</text>
-        <text x="250" y="378" textAnchor="middle" className="fill-slate-400" fontSize="8">The &quot;strangler fig&quot; strategy is why banyans can grow in forests with no gap in the canopy</text>
+        <text x="250" y="378" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="8">The &quot;strangler fig&quot; strategy is why banyans can grow in forests with no gap in the canopy</text>
 
         <defs>
           <marker id="reproArrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">

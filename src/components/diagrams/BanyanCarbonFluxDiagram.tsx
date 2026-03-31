@@ -2,11 +2,11 @@ export default function BanyanCarbonFluxDiagram() {
   return (
     <div className="my-4">
       <svg viewBox="0 0 560 428" className="w-full max-w-lg mx-auto" role="img" aria-label="Carbon flux diagram showing GPP, autotrophic respiration, NPP, heterotrophic respiration, and NEP">
-        <rect width="500" height="400" rx="12" className="fill-slate-900" />
+        <rect width="500" height="400" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}
         <text x="250" y="28" textAnchor="middle" className="fill-amber-400" fontSize="14" fontWeight="bold">Carbon Flux: From Sunlight to Storage</text>
-        <text x="250" y="44" textAnchor="middle" className="fill-slate-400" fontSize="10">How carbon flows through an ecosystem</text>
+        <text x="250" y="44" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="10">How carbon flows through an ecosystem</text>
 
         {/* === GPP (top, large bar) === */}
         <rect x="50" y="65" width="400" height="45" rx="8" className="fill-green-800" />
@@ -56,7 +56,7 @@ export default function BanyanCarbonFluxDiagram() {
         <text x="430" y="324" textAnchor="middle" className="fill-green-400" fontSize="8">in wood &amp; soil</text>
 
         {/* Waterfall summary */}
-        <rect x="30" y="345" width="440" height="45" rx="8" className="fill-slate-800" />
+        <rect x="30" y="345" width="440" height="45" rx="8" className="fill-gray-100 dark:fill-slate-800" />
         <text x="250" y="363" textAnchor="middle" className="fill-green-300" fontSize="9" fontWeight="bold">
           GPP (100%) − Autotrophic Resp (50%) = NPP (50%)
         </text>

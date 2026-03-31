@@ -24,15 +24,15 @@ export default function BanyanPopulationDiagram() {
   return (
     <div className="my-4">
       <svg viewBox="0 0 525 436" className="w-full max-w-lg mx-auto" role="img" aria-label="Tree population dynamics showing age structure and exponential mortality explaining why old trees are rare">
-        <rect width="500" height="400" rx="12" className="fill-slate-900" />
+        <rect width="500" height="400" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}
         <text x="250" y="28" textAnchor="middle" className="fill-amber-400" fontSize="14" fontWeight="bold">Why Old Trees Are Rare</text>
-        <text x="250" y="44" textAnchor="middle" className="fill-slate-400" fontSize="10">Age structure &amp; exponential mortality</text>
+        <text x="250" y="44" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="10">Age structure &amp; exponential mortality</text>
 
         {/* Y axis */}
         <line x1={chartLeft} y1={chartBottom} x2={chartLeft} y2={chartTop - 10} className="stroke-slate-500" strokeWidth="1.5" markerEnd="url(#popArrow)" />
-        <text x="30" y={(chartTop + chartBottom) / 2} textAnchor="middle" className="fill-slate-400" fontSize="9" transform={`rotate(-90, 30, ${(chartTop + chartBottom) / 2})`}>Number of trees (log scale)</text>
+        <text x="30" y={(chartTop + chartBottom) / 2} textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="9" transform={`rotate(-90, 30, ${(chartTop + chartBottom) / 2})`}>Number of trees (log scale)</text>
 
         {/* Y ticks */}
         {[1, 10, 100, 1000].map((v, i) => {
@@ -40,7 +40,7 @@ export default function BanyanPopulationDiagram() {
           return (
             <g key={i}>
               <line x1={chartLeft - 5} y1={y} x2={chartLeft} y2={y} className="stroke-slate-500" strokeWidth="1" />
-              <text x={chartLeft - 8} y={y + 3} textAnchor="end" className="fill-slate-400" fontSize="8">{v}</text>
+              <text x={chartLeft - 8} y={y + 3} textAnchor="end" className="fill-gray-500 dark:fill-slate-400" fontSize="8">{v}</text>
               <line x1={chartLeft} y1={y} x2={chartLeft + 340} y2={y} className="stroke-slate-800" strokeWidth="0.5" />
             </g>
           );
@@ -65,8 +65,8 @@ export default function BanyanPopulationDiagram() {
                 {cls.count >= 1 ? cls.count : "<1"}
               </text>
               {/* Age label */}
-              <text x={x + barWidth / 2} y={chartBottom + 14} textAnchor="middle" className="fill-slate-400" fontSize="7">{cls.age}</text>
-              <text x={x + barWidth / 2} y={chartBottom + 24} textAnchor="middle" className="fill-slate-500" fontSize="7">yrs</text>
+              <text x={x + barWidth / 2} y={chartBottom + 14} textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="7">{cls.age}</text>
+              <text x={x + barWidth / 2} y={chartBottom + 24} textAnchor="middle" className="fill-gray-400 dark:fill-slate-500" fontSize="7">yrs</text>
               {/* Category */}
               <text x={x + barWidth / 2} y={chartBottom + 36} textAnchor="middle"
                 className={i < 3 ? "fill-green-400" : "fill-amber-400"} fontSize="7">{cls.label}</text>
@@ -79,16 +79,16 @@ export default function BanyanPopulationDiagram() {
           className="stroke-amber-400" strokeWidth="2" fill="none" strokeDasharray="6,3" />
 
         {/* Mortality causes */}
-        <rect x="30" y="340" width="440" height="50" rx="8" className="fill-slate-800" />
+        <rect x="30" y="340" width="440" height="50" rx="8" className="fill-gray-100 dark:fill-slate-800" />
         <text x="250" y="358" textAnchor="middle" className="fill-amber-300" fontSize="9" fontWeight="bold">Causes of mortality at each stage:</text>
-        <text x="250" y="373" textAnchor="middle" className="fill-slate-400" fontSize="8">
+        <text x="250" y="373" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="8">
           Seedling: drought, shade, browsing | Sapling: competition | Mature: storms, disease | Old: lightning, rot
         </text>
         <text x="250" y="386" textAnchor="middle" className="fill-green-300" fontSize="8">Of 1,000 seedlings, only ~1 may survive to 500 years</text>
 
         <defs>
           <marker id="popArrow" markerWidth="6" markerHeight="5" refX="3" refY="0" orient="auto">
-            <polygon points="0 5, 3 0, 6 5" className="fill-slate-500" />
+            <polygon points="0 5, 3 0, 6 5" className="fill-gray-400 dark:fill-slate-500" />
           </marker>
         </defs>
       </svg>

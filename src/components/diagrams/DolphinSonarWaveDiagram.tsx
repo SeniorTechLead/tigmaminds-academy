@@ -69,7 +69,7 @@ export default function DolphinSonarWaveDiagram() {
       <text x="320" y="250" fill="#a8a29e" fontSize="9">Sound fades faster &mdash; more energy absorbed</text>
 
       {/* === Comparison === */}
-      <rect x="120" y="300" width="400" height="30" rx="6" fill="#1e293b" stroke="#374151" strokeWidth="1" />
+      <rect x="120" y="300" width="400" height="30" rx="6" className="fill-gray-100 dark:fill-slate-800" stroke="#374151" strokeWidth="1" />
       <text x="320" y="320" textAnchor="middle" fill="#34d399" fontSize="12" fontWeight="700" fontFamily="monospace">
         Water: 4.3x faster &#8594; sonar works best underwater
       </text>

@@ -46,15 +46,15 @@ export default function LoktakConservationDiagram() {
 
         {/* Cross-connections (lighter, showing interconnection) */}
         {/* Water -> Phumdi */}
-        <path d="M245,90 Q180,100 140,115" fill="none" stroke="#475569" strokeWidth="1" strokeDasharray="3,3" />
+        <path d="M245,90 Q180,100 140,115" fill="none" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1" strokeDasharray="3,3" />
         {/* Water -> Invasive */}
-        <path d="M315,90 Q380,100 420,115" fill="none" stroke="#475569" strokeWidth="1" strokeDasharray="3,3" />
+        <path d="M315,90 Q380,100 420,115" fill="none" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1" strokeDasharray="3,3" />
         {/* Phumdi -> Community */}
-        <path d="M120,190 Q120,260 130,290" fill="none" stroke="#475569" strokeWidth="1" strokeDasharray="3,3" />
+        <path d="M120,190 Q120,260 130,290" fill="none" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1" strokeDasharray="3,3" />
         {/* Invasive -> Monitoring */}
-        <path d="M440,190 Q440,260 430,290" fill="none" stroke="#475569" strokeWidth="1" strokeDasharray="3,3" />
+        <path d="M440,190 Q440,260 430,290" fill="none" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1" strokeDasharray="3,3" />
         {/* Community -> Monitoring */}
-        <path d="M180,340 Q280,360 380,340" fill="none" stroke="#475569" strokeWidth="1" strokeDasharray="3,3" />
+        <path d="M180,340 Q280,360 380,340" fill="none" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1" strokeDasharray="3,3" />
 
         {/* Arrow markers */}
         <defs>

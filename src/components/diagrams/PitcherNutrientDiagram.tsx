@@ -2,9 +2,9 @@ export default function PitcherNutrientDiagram() {
   return (
     <div className="my-4">
       <svg viewBox="0 0 560 400" className="w-full max-w-lg mx-auto" role="img" aria-label="Diagram comparing nutrient availability in normal soil versus pitcher plant bog soil">
-        <rect width="560" height="400" rx="12" className="fill-slate-900" />
+        <rect width="560" height="400" rx="12" className="fill-white dark:fill-slate-900" />
         <text x="280" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#86efac">Why Would a Plant Eat Insects?</text>
-        <text x="280" y="46" textAnchor="middle" fontSize="10" className="fill-slate-400">Nutrient availability: normal soil vs pitcher plant habitat</text>
+        <text x="280" y="46" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Nutrient availability: normal soil vs pitcher plant habitat</text>
 
         {/* Normal soil side */}
         <g transform="translate(30, 70)">
@@ -22,27 +22,27 @@ export default function PitcherNutrientDiagram() {
           {[{x: 60, y: 90}, {x: 140, y: 80}, {x: 100, y: 110}].map((p, i) => (
             <g key={i}>
               <ellipse cx={p.x} cy={p.y} rx="6" ry="3" fill="#a78bfa" opacity="0.7" />
-              <text x={p.x} y={p.y + 2} textAnchor="middle" fontSize="5" fill="white">N₂</text>
+              <text x={p.x} y={p.y + 2} textAnchor="middle" fontSize="5" className="fill-gray-900 dark:fill-white">N₂</text>
             </g>
           ))}
-          <text x="110" y="155" textAnchor="middle" fontSize="9" className="fill-slate-400">Rich in bacteria that fix N₂</text>
+          <text x="110" y="155" textAnchor="middle" fontSize="9" className="fill-gray-500 dark:fill-slate-400">Rich in bacteria that fix N₂</text>
 
           {/* Nutrient bars */}
           <text x="10" y="185" fontSize="9" fill="#86efac">Nitrogen</text>
           <rect x="70" y="176" width="130" height="12" rx="3" fill="#22c55e" opacity="0.7" />
-          <text x="140" y="186" textAnchor="middle" fontSize="8" fill="white" fontWeight="bold">200 mg/kg</text>
+          <text x="140" y="186" textAnchor="middle" fontSize="8" className="fill-gray-900 dark:fill-white" fontWeight="bold">200 mg/kg</text>
 
           <text x="10" y="207" fontSize="9" fill="#60a5fa">Phosphorus</text>
           <rect x="70" y="198" width="90" height="12" rx="3" fill="#3b82f6" opacity="0.7" />
-          <text x="120" y="208" textAnchor="middle" fontSize="8" fill="white" fontWeight="bold">50 mg/kg</text>
+          <text x="120" y="208" textAnchor="middle" fontSize="8" className="fill-gray-900 dark:fill-white" fontWeight="bold">50 mg/kg</text>
 
           <text x="10" y="229" fontSize="9" fill="#fbbf24">Potassium</text>
           <rect x="70" y="220" width="120" height="12" rx="3" fill="#eab308" opacity="0.7" />
-          <text x="135" y="230" textAnchor="middle" fontSize="8" fill="white" fontWeight="bold">180 mg/kg</text>
+          <text x="135" y="230" textAnchor="middle" fontSize="8" className="fill-gray-900 dark:fill-white" fontWeight="bold">180 mg/kg</text>
         </g>
 
         {/* VS divider */}
-        <text x="280" y="200" textAnchor="middle" fontSize="16" fontWeight="bold" className="fill-slate-500">vs</text>
+        <text x="280" y="200" textAnchor="middle" fontSize="16" fontWeight="bold" className="fill-gray-400 dark:fill-slate-500">vs</text>
 
         {/* Bog soil side */}
         <g transform="translate(300, 70)">
@@ -69,7 +69,7 @@ export default function PitcherNutrientDiagram() {
               <text x={xp} y="150" textAnchor="middle" fontSize="6" fill="#f87171">N↓</text>
             </g>
           ))}
-          <text x="120" y="165" textAnchor="middle" fontSize="9" className="fill-slate-400">Nutrients leached by heavy rain</text>
+          <text x="120" y="165" textAnchor="middle" fontSize="9" className="fill-gray-500 dark:fill-slate-400">Nutrients leached by heavy rain</text>
 
           {/* Nutrient bars - tiny */}
           <text x="10" y="185" fontSize="9" fill="#86efac">Nitrogen</text>
@@ -89,8 +89,8 @@ export default function PitcherNutrientDiagram() {
         <g transform="translate(280, 330)">
           <rect x="-250" y="-10" width="500" height="60" rx="8" fill="#14532d" opacity="0.4" stroke="#22c55e" strokeWidth="1" />
           <text x="0" y="8" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#86efac">The Evolutionary Solution</text>
-          <text x="0" y="24" textAnchor="middle" fontSize="10" className="fill-slate-300">Insects are 16% nitrogen by mass. One ant provides more nitrogen</text>
-          <text x="0" y="38" textAnchor="middle" fontSize="10" className="fill-slate-300">than the plant could absorb from the soil in weeks.</text>
+          <text x="0" y="24" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-slate-300">Insects are 16% nitrogen by mass. One ant provides more nitrogen</text>
+          <text x="0" y="38" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-slate-300">than the plant could absorb from the soil in weeks.</text>
         </g>
       </svg>
     </div>

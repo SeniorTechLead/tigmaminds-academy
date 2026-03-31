@@ -47,7 +47,7 @@ export default function RiverErosionDiagram() {
         </defs>
 
         {/* Background */}
-        <rect width="600" height="250" fill="#1E1B2E" rx="8" />
+        <rect width="600" height="250" className="fill-white dark:fill-[#1E1B2E]" rx="8" />
 
         {/* Title */}
         <text x="300" y="18" textAnchor="middle" fill="#D6D3D1" fontSize="12" fontWeight="700">

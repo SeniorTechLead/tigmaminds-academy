@@ -2,7 +2,7 @@ export default function BanyanStomataCloseupDiagram() {
   return (
     <div className="my-4">
       <svg viewBox="0 0 545 420" className="w-full max-w-lg mx-auto" role="img" aria-label="Leaf stomata showing guard cells opening and closing to control gas exchange and water loss">
-        <rect width="500" height="380" rx="12" className="fill-slate-900" />
+        <rect width="500" height="380" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}
         <text x="250" y="28" textAnchor="middle" className="fill-amber-400" fontSize="14" fontWeight="bold">Stomata: The Leaf&apos;s Trade-Off</text>
@@ -20,20 +20,20 @@ export default function BanyanStomataCloseupDiagram() {
         <path d="M 140,170 Q 160,130 180,170" className="stroke-green-400" strokeWidth="4" fill="none" />
 
         {/* Pore opening */}
-        <ellipse cx="140" cy="170" rx="15" ry="25" className="fill-slate-800" />
+        <ellipse cx="140" cy="170" rx="15" ry="25" className="fill-gray-100 dark:fill-slate-800" />
 
         {/* Guard cell labels */}
         <text x="95" y="150" textAnchor="middle" className="fill-green-300" fontSize="7">Guard</text>
         <text x="95" y="160" textAnchor="middle" className="fill-green-300" fontSize="7">cell</text>
         <text x="185" y="150" textAnchor="middle" className="fill-green-300" fontSize="7">Guard</text>
         <text x="185" y="160" textAnchor="middle" className="fill-green-300" fontSize="7">cell</text>
-        <text x="140" y="173" textAnchor="middle" className="fill-slate-300" fontSize="7">Pore</text>
+        <text x="140" y="173" textAnchor="middle" className="fill-gray-600 dark:fill-slate-300" fontSize="7">Pore</text>
 
         {/* CO2 in arrow */}
         <line x1="140" y1="100" x2="140" y2="140" className="stroke-slate-300" strokeWidth="1.5" markerEnd="url(#stomataArrowIn)">
           <animate attributeName="stroke-dashoffset" from="8" to="0" dur="1.5s" repeatCount="indefinite" />
         </line>
-        <text x="140" y="93" textAnchor="middle" className="fill-slate-300" fontSize="8" fontWeight="bold">CO₂ in</text>
+        <text x="140" y="93" textAnchor="middle" className="fill-gray-600 dark:fill-slate-300" fontSize="8" fontWeight="bold">CO₂ in</text>
 
         {/* H2O out arrow */}
         <line x1="115" y1="200" x2="95" y2="240" className="stroke-blue-400" strokeWidth="1.5" markerEnd="url(#stomataArrowBlue)">
@@ -69,8 +69,8 @@ export default function BanyanStomataCloseupDiagram() {
         <text x="415" y="165" textAnchor="middle" className="fill-amber-400" fontSize="7">cell</text>
 
         {/* X marks for blocked */}
-        <text x="370" y="110" textAnchor="middle" className="fill-slate-500" fontSize="9">CO₂ blocked ✕</text>
-        <text x="370" y="245" textAnchor="middle" className="fill-slate-500" fontSize="9">Water saved ✓</text>
+        <text x="370" y="110" textAnchor="middle" className="fill-gray-400 dark:fill-slate-500" fontSize="9">CO₂ blocked ✕</text>
+        <text x="370" y="245" textAnchor="middle" className="fill-gray-400 dark:fill-slate-500" fontSize="9">Water saved ✓</text>
 
         {/* Trade-off box at bottom */}
         <rect x="40" y="280" width="200" height="45" rx="6" className="fill-green-900" opacity="0.6" />
@@ -81,15 +81,15 @@ export default function BanyanStomataCloseupDiagram() {
         <rect x="260" y="280" width="200" height="45" rx="6" className="fill-amber-900" opacity="0.6" />
         <text x="360" y="298" textAnchor="middle" className="fill-amber-300" fontSize="9" fontWeight="bold">Closed stomata:</text>
         <text x="360" y="312" textAnchor="middle" className="fill-amber-400" fontSize="8">✓ Saves water in drought</text>
-        <text x="360" y="323" textAnchor="middle" className="fill-slate-400" fontSize="8">✕ No photosynthesis</text>
+        <text x="360" y="323" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="8">✕ No photosynthesis</text>
 
         {/* Bottom insight */}
         <text x="250" y="355" textAnchor="middle" className="fill-green-300" fontSize="9" fontWeight="bold">A banyan leaf has ~200 stomata per mm²</text>
-        <text x="250" y="370" textAnchor="middle" className="fill-slate-400" fontSize="8">Each one opens and closes in response to light, humidity, and CO₂ levels</text>
+        <text x="250" y="370" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="8">Each one opens and closes in response to light, humidity, and CO₂ levels</text>
 
         <defs>
           <marker id="stomataArrowIn" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
-            <polygon points="0 0, 7 2.5, 0 5" className="fill-slate-300" />
+            <polygon points="0 0, 7 2.5, 0 5" className="fill-gray-600 dark:fill-slate-300" />
           </marker>
           <marker id="stomataArrowBlue" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
             <polygon points="0 0, 7 2.5, 0 5" className="fill-blue-400" />

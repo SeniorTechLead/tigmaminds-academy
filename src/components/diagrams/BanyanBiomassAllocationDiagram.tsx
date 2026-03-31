@@ -31,11 +31,11 @@ export default function BanyanBiomassAllocationDiagram() {
   return (
     <div className="my-4">
       <svg viewBox="0 0 535 440" className="w-full max-w-lg mx-auto" role="img" aria-label="Biomass allocation in a banyan tree: trunk 60%, branches 20%, roots 15%, leaves 5%">
-        <rect width="500" height="400" rx="12" className="fill-slate-900" />
+        <rect width="500" height="400" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}
         <text x="250" y="28" textAnchor="middle" className="fill-amber-400" fontSize="14" fontWeight="bold">Biomass Allocation</text>
-        <text x="250" y="44" textAnchor="middle" className="fill-slate-400" fontSize="10">Where does a tree put its weight?</text>
+        <text x="250" y="44" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="10">Where does a tree put its weight?</text>
 
         {/* Donut chart */}
         {segments.map((seg, i) => (
@@ -43,7 +43,7 @@ export default function BanyanBiomassAllocationDiagram() {
         ))}
 
         {/* Center label */}
-        <circle cx={cx} cy={cy} r={innerR - 2} className="fill-slate-900" />
+        <circle cx={cx} cy={cy} r={innerR - 2} className="fill-white dark:fill-slate-900" />
         <text x={cx} y={cy - 5} textAnchor="middle" className="fill-amber-400" fontSize="11" fontWeight="bold">Total</text>
         <text x={cx} y={cy + 10} textAnchor="middle" className="fill-amber-300" fontSize="9">Biomass</text>
 
@@ -52,29 +52,29 @@ export default function BanyanBiomassAllocationDiagram() {
         <line x1={cx + 85 * Math.cos(((108 - 90) * Math.PI) / 180)} y1={cy + 85 * Math.sin(((108 - 90) * Math.PI) / 180)} x2="340" y2="165" className="stroke-amber-400" strokeWidth="1" />
         <rect x="340" y="150" width="130" height="40" rx="6" className="fill-amber-900" opacity="0.7" />
         <text x="405" y="168" textAnchor="middle" className="fill-amber-300" fontSize="11" fontWeight="bold">Trunk — 60%</text>
-        <text x="405" y="183" textAnchor="middle" className="fill-slate-400" fontSize="8">Dense heartwood, most carbon</text>
+        <text x="405" y="183" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="8">Dense heartwood, most carbon</text>
 
         {/* Branches - 20% */}
         <line x1={cx + 85 * Math.cos(((252 - 90) * Math.PI) / 180)} y1={cy + 85 * Math.sin(((252 - 90) * Math.PI) / 180)} x2="340" y2="240" className="stroke-amber-300" strokeWidth="1" />
         <rect x="340" y="225" width="130" height="40" rx="6" className="fill-amber-900" opacity="0.7" />
         <text x="405" y="243" textAnchor="middle" className="fill-amber-200" fontSize="11" fontWeight="bold">Branches — 20%</text>
-        <text x="405" y="258" textAnchor="middle" className="fill-slate-400" fontSize="8">Structural support for canopy</text>
+        <text x="405" y="258" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="8">Structural support for canopy</text>
 
         {/* Roots - 15% */}
         <line x1={cx + 85 * Math.cos(((315 - 90) * Math.PI) / 180)} y1={cy + 85 * Math.sin(((315 - 90) * Math.PI) / 180)} x2="100" y2="320" className="stroke-amber-500" strokeWidth="1" />
         <rect x="40" y="310" width="130" height="40" rx="6" className="fill-amber-900" opacity="0.7" />
         <text x="105" y="328" textAnchor="middle" className="fill-amber-400" fontSize="11" fontWeight="bold">Roots — 15%</text>
-        <text x="105" y="343" textAnchor="middle" className="fill-slate-400" fontSize="8">Anchoring + absorption</text>
+        <text x="105" y="343" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="8">Anchoring + absorption</text>
 
         {/* Leaves - 5% */}
         <line x1={cx + 85 * Math.cos(((351 - 90) * Math.PI) / 180)} y1={cy + 85 * Math.sin(((351 - 90) * Math.PI) / 180)} x2="100" y2="120" className="stroke-green-400" strokeWidth="1" />
         <rect x="40" y="107" width="130" height="40" rx="6" className="fill-green-900" opacity="0.7" />
         <text x="105" y="125" textAnchor="middle" className="fill-green-300" fontSize="11" fontWeight="bold">Leaves — 5%</text>
-        <text x="105" y="140" textAnchor="middle" className="fill-slate-400" fontSize="8">Tiny mass, all the energy</text>
+        <text x="105" y="140" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="8">Tiny mass, all the energy</text>
 
         {/* Bar comparison at bottom */}
         <text x="250" y="375" textAnchor="middle" className="fill-green-300" fontSize="9" fontWeight="bold">Leaves are only 5% of mass but produce 100% of the tree&apos;s food</text>
-        <text x="250" y="390" textAnchor="middle" className="fill-slate-400" fontSize="8">A large banyan: ~50 tonnes total — trunk alone weighs ~30 tonnes</text>
+        <text x="250" y="390" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="8">A large banyan: ~50 tonnes total — trunk alone weighs ~30 tonnes</text>
       </svg>
     </div>
   );

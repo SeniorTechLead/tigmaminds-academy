@@ -75,7 +75,7 @@ export default function ActivityWetlandModelDiagram() {
         </g>
 
         {/* Questions to investigate */}
-        <rect x="30" y="270" width="500" height="100" rx="8" fill="#1e293b" opacity="0.5" />
+        <rect x="30" y="270" width="500" height="100" rx="8" className="fill-gray-100 dark:fill-slate-800" opacity="0.5" />
         <text x="280" y="292" textAnchor="middle" fontSize="11" fontWeight="bold" fill="white">Investigate:</text>
         <text x="50" y="310" fontSize="9" fill="#d1d5db">1. How many coins (= deer weight) can your phumdi hold before sinking?</text>
         <text x="50" y="326" fontSize="9" fill="#d1d5db">2. Add more water (= dam raising level). Does the phumdi still float the same?</text>

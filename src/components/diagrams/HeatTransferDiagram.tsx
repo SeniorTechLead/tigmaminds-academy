@@ -1,6 +1,6 @@
 export default function HeatTransferDiagram() {
   return (
-    <div className="w-full max-w-xl mx-auto my-6">
+    <div className="dark:text-inherit w-full max-w-xl mx-auto my-6">
       <svg viewBox="0 0 567 234" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three modes of heat transfer: conduction, convection, and radiation">
         <defs>
           {/* Conduction: red-to-blue gradient along spoon */}

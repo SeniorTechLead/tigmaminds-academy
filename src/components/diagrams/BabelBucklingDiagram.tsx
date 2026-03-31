@@ -18,9 +18,9 @@ export default function BabelBucklingDiagram() {
         <text x="130" y="65" fill="#ef4444" fontSize="10">Topples!</text>
         {/* Dimensions */}
         <line x1="60" y1="80" x2="60" y2="310" stroke="#9ca3af" strokeWidth="0.5" />
-        <text x="50" y="200" textAnchor="middle" fill="#9ca3af" fontSize="10" transform="rotate(-90 50 200)">230 m</text>
+        <text x="50" y="200" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10" transform="rotate(-90 50 200)">230 m</text>
         <line x1="75" y1="318" x2="105" y2="318" stroke="#9ca3af" strokeWidth="0.5" />
-        <text x="90" y="336" textAnchor="middle" fill="#9ca3af" fontSize="10">30 m</text>
+        <text x="90" y="336" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">30 m</text>
         {/* Ratio */}
         <text x="90" y="50" textAnchor="middle" fill="#ef4444" fontSize="11" fontWeight="bold">Ratio 7.7:1</text>
         <text x="90" y="345" textAnchor="middle" fill="#ef4444" fontSize="10">UNSTABLE</text>
@@ -32,12 +32,12 @@ export default function BabelBucklingDiagram() {
         {/* Compression arrows down the sides */}
         <line x1="235" y1="195" x2="225" y2="250" stroke="#22c55e" strokeWidth="2" markerEnd="url(#bbArrowGreen)" />
         <line x1="285" y1="195" x2="295" y2="250" stroke="#22c55e" strokeWidth="2" markerEnd="url(#bbArrowGreen)" />
-        <text x="260" y="220" textAnchor="middle" fill="white" fontSize="10">Forces spread</text>
-        <text x="260" y="233" textAnchor="middle" fill="white" fontSize="10">outward</text>
+        <text x="260" y="220" textAnchor="middle" className="fill-gray-900 dark:fill-white" fontSize="10">Forces spread</text>
+        <text x="260" y="233" textAnchor="middle" className="fill-gray-900 dark:fill-white" fontSize="10">outward</text>
         {/* Dimensions */}
         <text x="260" y="50" textAnchor="middle" fill="#22c55e" fontSize="11" fontWeight="bold">Ratio 1.1:1</text>
         <line x1="210" y1="318" x2="310" y2="318" stroke="#9ca3af" strokeWidth="0.5" />
-        <text x="260" y="336" textAnchor="middle" fill="#9ca3af" fontSize="10">100 m base</text>
+        <text x="260" y="336" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">100 m base</text>
         <text x="260" y="345" textAnchor="middle" fill="#22c55e" fontSize="10">EXTREMELY STABLE</text>
       </g>
 
@@ -54,12 +54,12 @@ export default function BabelBucklingDiagram() {
         <line x1="418" y1="200" x2="442" y2="250" stroke="#60a5fa" strokeWidth="0.8" opacity="0.5" />
         <line x1="442" y1="200" x2="418" y2="250" stroke="#60a5fa" strokeWidth="0.8" opacity="0.5" />
         <text x="430" y="50" textAnchor="middle" fill="#60a5fa" fontSize="11" fontWeight="bold">Ratio 3.8:1</text>
-        <text x="430" y="65" textAnchor="middle" fill="#d1d5db" fontSize="10">Tapered + braced</text>
+        <text x="430" y="65" textAnchor="middle" className="fill-gray-400 dark:fill-gray-400" fontSize="10">Tapered + braced</text>
         <text x="430" y="345" textAnchor="middle" fill="#60a5fa" fontSize="10">MODERN SOLUTION</text>
       </g>
 
       {/* Formula */}
-      <text x="260" y="285" textAnchor="middle" fill="#d1d5db" fontSize="11">Euler buckling: P = π²EI / L² — halve length, 4× the strength</text>
+      <text x="260" y="285" textAnchor="middle" className="fill-gray-400 dark:fill-gray-400" fontSize="11">Euler buckling: P = π²EI / L² — halve length, 4× the strength</text>
 
       <defs>
         <marker id="bbArrowRed" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto">

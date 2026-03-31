@@ -28,7 +28,7 @@ export default function MagnitudeStaircaseDiagram() {
             cx={Math.random() * w}
             cy={Math.random() * (h - 60)}
             r={Math.random() * 1.2 + 0.3}
-            fill="white"
+            className="fill-gray-900 dark:fill-white"
             opacity={Math.random() * 0.4 + 0.1}
           />
         ))}
@@ -62,7 +62,7 @@ export default function MagnitudeStaircaseDiagram() {
                 y={y - 8}
                 textAnchor="middle"
                 className="text-xs font-bold"
-                fill="white"
+                className="fill-gray-900 dark:fill-white"
               >
                 Mag {step.mag}
               </text>
@@ -98,7 +98,7 @@ export default function MagnitudeStaircaseDiagram() {
                   y={baseY + 30}
                   textAnchor="middle"
                   className="text-[9px]"
-                  fill="#9ca3af"
+                  className="fill-gray-500 dark:fill-gray-400"
                 >
                   {step.label}
                 </text>
@@ -139,7 +139,7 @@ export default function MagnitudeStaircaseDiagram() {
           y={h - 4}
           textAnchor="middle"
           className="text-[10px]"
-          fill="#6b7280"
+          className="fill-gray-500 dark:fill-gray-500"
         >
           5 steps × 2.5 each = 100× total brightness difference
         </text>

@@ -32,18 +32,18 @@ export default function DeerLightSpectrumDiagram() {
       </p>
       <svg viewBox="0 0 570 260" className="w-full max-w-2xl mx-auto">
         {/* Long wavelength label */}
-        <text x="40" y="22" textAnchor="middle" fontSize="10" fill="#9ca3af">Long λ</text>
-        <text x="40" y="33" textAnchor="middle" fontSize="10" fill="#9ca3af">Low energy</text>
+        <text x="40" y="22" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-gray-400">Long λ</text>
+        <text x="40" y="33" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-gray-400">Low energy</text>
 
         {/* Short wavelength label */}
-        <text x="530" y="22" textAnchor="middle" fontSize="10" fill="#9ca3af">Short λ</text>
-        <text x="530" y="33" textAnchor="middle" fontSize="10" fill="#9ca3af">High energy</text>
+        <text x="530" y="22" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-gray-400">Short λ</text>
+        <text x="530" y="33" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-gray-400">High energy</text>
 
         {/* Arrow across top */}
         <line x1="80" y1="27" x2="490" y2="27" stroke="#6b7280" strokeWidth={1} markerEnd="url(#arrowGray)" />
         <defs>
           <marker id="arrowGray" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-            <path d="M0,0 L8,3 L0,6" fill="#6b7280" />
+            <path d="M0,0 L8,3 L0,6" className="fill-gray-500 dark:fill-gray-500" />
           </marker>
         </defs>
 
@@ -52,7 +52,7 @@ export default function DeerLightSpectrumDiagram() {
           <g key={i}>
             <rect x={b.x} y={50} width={b.w} height={40} rx={4} fill={b.color} opacity={0.18} stroke={b.color} strokeWidth={1} strokeOpacity={0.4} />
             <text x={b.x + b.w / 2} y={66} textAnchor="middle" fontSize="10" fontWeight="700" fill={b.color}>{b.label}</text>
-            <text x={b.x + b.w / 2} y={80} textAnchor="middle" fontSize="9" fill="#9ca3af">{b.range}</text>
+            <text x={b.x + b.w / 2} y={80} textAnchor="middle" fontSize="9" className="fill-gray-500 dark:fill-gray-400">{b.range}</text>
           </g>
         ))}
 
@@ -65,10 +65,10 @@ export default function DeerLightSpectrumDiagram() {
           </linearGradient>
         </defs>
         <rect x={visX} y={50} width={visW} height={40} rx={4} fill="url(#visGrad)" stroke="white" strokeWidth={1.5} strokeOpacity={0.6} />
-        <text x={visX + visW / 2} y={66} textAnchor="middle" fontSize="11" fontWeight="700" fill="white" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.8)' }}>
+        <text x={visX + visW / 2} y={66} textAnchor="middle" fontSize="11" fontWeight="700" className="fill-gray-900 dark:fill-white" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.8)' }}>
           Visible Light
         </text>
-        <text x={visX + visW / 2} y={80} textAnchor="middle" fontSize="9" fill="white" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.8)' }}>
+        <text x={visX + visW / 2} y={80} textAnchor="middle" fontSize="9" className="fill-gray-900 dark:fill-white" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.8)' }}>
           380–700 nm
         </text>
 
@@ -92,11 +92,11 @@ export default function DeerLightSpectrumDiagram() {
           return (
             <g key={i}>
               <line x1={x} y1={160} x2={x} y2={170} stroke="white" strokeWidth={1} opacity={0.6} />
-              <text x={x} y={182} textAnchor="middle" fontSize="10" fill="#d1d5db">{c.nm}</text>
+              <text x={x} y={182} textAnchor="middle" fontSize="10" className="fill-gray-400 dark:fill-gray-400">{c.nm}</text>
             </g>
           );
         })}
-        <text x={285} y={198} textAnchor="middle" fontSize="10" fill="#9ca3af">Wavelength (nm)</text>
+        <text x={285} y={198} textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-gray-400">Wavelength (nm)</text>
 
         {/* Golden deer highlight */}
         {(() => {

@@ -7,7 +7,7 @@ export default function BabelSkyscraperDiagram() {
       <rect x="0" y="330" width="520" height="50" fill="#374151" />
 
       {/* Building outer shell */}
-      <rect x="180" y="40" width="160" height="290" fill="#1e293b" stroke="#475569" strokeWidth="2" rx="4" />
+      <rect x="180" y="40" width="160" height="290" className="fill-gray-100 dark:fill-slate-800 stroke-gray-300 dark:stroke-slate-600"  strokeWidth="2" rx="4" />
 
       {/* Core (inner rectangle) */}
       <rect x="240" y="50" width="40" height="280" fill="#334155" stroke="#60a5fa" strokeWidth="1.5" rx="2" />

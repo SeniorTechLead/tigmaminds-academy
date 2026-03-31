@@ -2,7 +2,7 @@ export default function BanyanWaterTransportDiagram() {
   return (
     <div className="my-4">
       <svg viewBox="0 0 555 455" className="w-full max-w-lg mx-auto" role="img" aria-label="Water transport in a tree showing xylem carrying water up and phloem carrying sugars down">
-        <rect width="500" height="420" rx="12" className="fill-slate-900" />
+        <rect width="500" height="420" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}
         <text x="250" y="28" textAnchor="middle" className="fill-amber-400" fontSize="14" fontWeight="bold">Water &amp; Sugar Transport</text>

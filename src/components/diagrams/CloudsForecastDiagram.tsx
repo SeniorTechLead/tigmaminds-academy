@@ -61,20 +61,20 @@ export default function CloudsForecastDiagram() {
         <text x={w / 2} y="32" textAnchor="middle" fontSize="16" fontWeight="700" fill="#f0f9ff">
           How We Predict Weather
         </text>
-        <text x={w / 2} y="50" textAnchor="middle" fontSize="11" fill="#94a3b8">
+        <text x={w / 2} y="50" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">
           Three approaches — from Dawan’s cloud journal to supercomputers
         </text>
 
         {/* Three method boxes */}
         {methods.map((m) => (
           <g key={m.title}>
-            <rect x={m.x} y={m.y} width={m.w} height={m.h} rx="8" fill="#1e293b" stroke={m.color} strokeWidth="1.5" />
+            <rect x={m.x} y={m.y} width={m.w} height={m.h} rx="8" className="fill-gray-100 dark:fill-slate-800" stroke={m.color} strokeWidth="1.5" />
             <text x={m.x + m.w / 2} y={m.y + 22} textAnchor="middle" fontSize="12" fontWeight="700" fill={m.color}>
               {m.title}
             </text>
             <line x1={m.x + 10} y1={m.y + 32} x2={m.x + m.w - 10} y2={m.y + 32} stroke={m.color} strokeWidth="0.5" strokeOpacity="0.4" />
             {m.items.map((item, i) => (
-              <text key={i} x={m.x + 14} y={m.y + 50 + i * 18} fontSize="10" fill="#cbd5e1">
+              <text key={i} x={m.x + 14} y={m.y + 50 + i * 18} fontSize="10" className="fill-gray-600 dark:fill-slate-300">
                 {"• " + item}
               </text>
             ))}
@@ -82,13 +82,13 @@ export default function CloudsForecastDiagram() {
         ))}
 
         {/* Accuracy timeline */}
-        <rect x="40" y="270" width="650" height="100" rx="8" fill="#0f172a" fillOpacity="0.8" />
-        <text x={w / 2} y="290" textAnchor="middle" fontSize="13" fontWeight="700" fill="#e2e8f0">
+        <rect x="40" y="270" width="650" height="100" rx="8" className="fill-white dark:fill-slate-950" fillOpacity="0.8" />
+        <text x={w / 2} y="290" textAnchor="middle" fontSize="13" fontWeight="700" className="fill-gray-700 dark:fill-slate-200">
           Forecast Accuracy Over Time
         </text>
 
         {/* Timeline axis */}
-        <line x1="80" y1="340" x2="660" y2="340" stroke="#475569" strokeWidth="1.5" />
+        <line x1="80" y1="340" x2="660" y2="340" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1.5" />
         {[
           { label: "Now", x: 80, acc: "99%" },
           { label: "1 day", x: 195, acc: "95%" },
@@ -99,7 +99,7 @@ export default function CloudsForecastDiagram() {
         ].map((t) => (
           <g key={t.label}>
             <line x1={t.x} y1={335} x2={t.x} y2={345} stroke="#94a3b8" strokeWidth="1.5" />
-            <text x={t.x} y="358" textAnchor="middle" fontSize="10" fill="#94a3b8">
+            <text x={t.x} y="358" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">
               {t.label}
             </text>
             <text x={t.x} y="322" textAnchor="middle" fontSize="11" fontWeight="600" fill="#4ade80">
@@ -119,38 +119,38 @@ export default function CloudsForecastDiagram() {
         <rect x="80" y="308" width="575" height="6" rx="3" fill="url(#cf-acc)" fillOpacity="0.5" />
 
         {/* Why forecasts go wrong */}
-        <rect x="40" y="385" width="310" height="100" rx="8" fill="#1e293b" />
+        <rect x="40" y="385" width="310" height="100" rx="8" className="fill-gray-100 dark:fill-slate-800" />
         <text x="195" y="405" textAnchor="middle" fontSize="12" fontWeight="700" fill="#f87171">
           Why Forecasts Go Wrong
         </text>
-        <text x="55" y="425" fontSize="10" fill="#cbd5e1">
+        <text x="55" y="425" fontSize="10" className="fill-gray-600 dark:fill-slate-300">
           {"• The atmosphere is chaotic — tiny errors grow fast"}
         </text>
-        <text x="55" y="441" fontSize="10" fill="#cbd5e1">
+        <text x="55" y="441" fontSize="10" className="fill-gray-600 dark:fill-slate-300">
           {"• We can’t measure every air molecule"}
         </text>
-        <text x="55" y="457" fontSize="10" fill="#cbd5e1">
+        <text x="55" y="457" fontSize="10" className="fill-gray-600 dark:fill-slate-300">
           {"• Oceans, mountains, cities all add complexity"}
         </text>
-        <text x="55" y="473" fontSize="10" fill="#cbd5e1">
+        <text x="55" y="473" fontSize="10" className="fill-gray-600 dark:fill-slate-300">
           {"• After ~10 days, prediction ≈ coin flip"}
         </text>
 
         {/* Ensemble models */}
-        <rect x="370" y="385" width="320" height="100" rx="8" fill="#1e293b" />
+        <rect x="370" y="385" width="320" height="100" rx="8" className="fill-gray-100 dark:fill-slate-800" />
         <text x="530" y="405" textAnchor="middle" fontSize="12" fontWeight="700" fill="#a78bfa">
           Ensemble Models
         </text>
-        <text x="385" y="425" fontSize="10" fill="#cbd5e1">
+        <text x="385" y="425" fontSize="10" className="fill-gray-600 dark:fill-slate-300">
           {"• Run the same model 50 times"}
         </text>
-        <text x="385" y="441" fontSize="10" fill="#cbd5e1">
+        <text x="385" y="441" fontSize="10" className="fill-gray-600 dark:fill-slate-300">
           {"• Each time with slightly different start"}
         </text>
-        <text x="385" y="457" fontSize="10" fill="#cbd5e1">
+        <text x="385" y="457" fontSize="10" className="fill-gray-600 dark:fill-slate-300">
           {"• If all 50 agree → high confidence"}
         </text>
-        <text x="385" y="473" fontSize="10" fill="#cbd5e1">
+        <text x="385" y="473" fontSize="10" className="fill-gray-600 dark:fill-slate-300">
           {"• If they scatter → uncertain forecast"}
         </text>
 

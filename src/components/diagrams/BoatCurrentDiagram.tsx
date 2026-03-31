@@ -99,7 +99,7 @@ export default function BoatCurrentDiagram() {
         </text>
 
         {/* River cross-section showing speed profile */}
-        <rect x="50" y="265" width="130" height="50" rx="3" fill="#0f172a" />
+        <rect x="50" y="265" width="130" height="50" rx="3" className="fill-white dark:fill-slate-950" />
         {/* Speed arrows - faster in center, slower at edges */}
         <line x1="60" y1="290" x2="72" y2="290" stroke="#60a5fa" strokeWidth="1.5" />
         <polygon points="75,290 70,287 70,293" fill="#60a5fa" />
@@ -136,7 +136,7 @@ export default function BoatCurrentDiagram() {
         </text>
 
         {/* Eddy behind obstacle */}
-        <rect x="245" y="268" width="130" height="55" rx="3" fill="#0f172a" />
+        <rect x="245" y="268" width="130" height="55" rx="3" className="fill-white dark:fill-slate-950" />
         {/* Rock/obstacle */}
         <circle cx="290" cy="290" r="10" fill="#6b7280" stroke="#9ca3af" strokeWidth="1" />
         <text x="290" y="294" textAnchor="middle" className="small fill-slate-300">rock</text>
@@ -164,7 +164,7 @@ export default function BoatCurrentDiagram() {
         </text>
 
         {/* River with zigzag path */}
-        <rect x="440" y="268" width="130" height="55" rx="3" fill="#0f172a" />
+        <rect x="440" y="268" width="130" height="55" rx="3" className="fill-white dark:fill-slate-950" />
         {/* Current */}
         <line x1="445" y1="290" x2="565" y2="290" stroke="#60a5fa" strokeWidth="1" strokeDasharray="4,2" opacity="0.4" />
         {/* Zigzag path */}

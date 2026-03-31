@@ -30,7 +30,7 @@ export default function ElephantGroundWaveDiagram() {
       aria-label="Diagram showing how elephant calls travel through the ground as seismic waves up to 10 kilometres"
     >
       {/* Dark background */}
-      <rect width="560" height="440" rx="8" className="fill-slate-900" />
+      <rect width="560" height="440" rx="8" className="fill-white dark:fill-slate-900" />
 
       {/* Title */}
       <text x="280" y="24" textAnchor="middle" className="fill-amber-400" fontSize="12" fontWeight="700">
@@ -80,7 +80,7 @@ export default function ElephantGroundWaveDiagram() {
       <rect x="96" y="155" width="8" height="25" rx="3" className="fill-emerald-700" />
       <rect x="110" y="155" width="8" height="25" rx="3" className="fill-emerald-700" />
       {/* Eye */}
-      <circle cx="41" cy="120" r="2" className="fill-slate-900" />
+      <circle cx="41" cy="120" r="2" className="fill-white dark:fill-slate-900" />
       {/* Tusk hint */}
       <path d="M36,128 L30,136" className="stroke-gray-300" strokeWidth="1.5" strokeLinecap="round" />
 
@@ -127,7 +127,7 @@ export default function ElephantGroundWaveDiagram() {
       <rect x="496" y="152" width="8" height="28" rx="3" className="fill-emerald-700" />
       <rect x="508" y="152" width="8" height="28" rx="3" className="fill-emerald-700" />
       {/* Eye */}
-      <circle cx="443" cy="124" r="2" className="fill-slate-900" />
+      <circle cx="443" cy="124" r="2" className="fill-white dark:fill-slate-900" />
       {/* Tusk hint */}
       <path d="M438,132 L432,140" className="stroke-gray-300" strokeWidth="1.5" strokeLinecap="round" />
 
@@ -208,7 +208,7 @@ export default function ElephantGroundWaveDiagram() {
       {/* BOTTOM: Frequency explanation                */}
       {/* ============================================ */}
 
-      <text x="280" y="415" textAnchor="middle" className="fill-gray-400" fontSize="9">
+      <text x="280" y="415" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="9">
         Low frequencies (8–25 Hz) travel farther because long wavelengths lose less energy
       </text>
       <text x="280" y="432" textAnchor="middle" className="fill-gray-500" fontSize="8">

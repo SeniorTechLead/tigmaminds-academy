@@ -2,7 +2,7 @@ export default function SeedBankDiagram() {
   return (
     <div className="my-4">
       <svg viewBox="0 0 520 440" className="w-full max-w-lg mx-auto" role="img" aria-label="Seed bank storage: from collection to cryogenic preservation at Svalbard">
-        <rect width="520" height="440" rx="12" className="fill-slate-900" />
+        <rect width="520" height="440" rx="12" className="fill-white dark:fill-slate-900" />
 
         <text x="260" y="28" textAnchor="middle" className="fill-cyan-400" fontSize="14" fontWeight="bold">Inside a Seed Bank</text>
 
@@ -42,7 +42,7 @@ export default function SeedBankDiagram() {
         <text x="260" y="295" textAnchor="middle" className="fill-blue-300" fontSize="11" fontWeight="bold">−18°C — Deep Freeze Storage</text>
 
         {/* Location label */}
-        <text x="260" y="320" textAnchor="middle" className="fill-slate-400" fontSize="10">Svalbard, Norway — 78°N latitude, inside permafrost mountain</text>
+        <text x="260" y="320" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="10">Svalbard, Norway — 78°N latitude, inside permafrost mountain</text>
 
         {/* Storage process flow at bottom */}
         <text x="260" y="348" textAnchor="middle" className="fill-cyan-400" fontSize="12" fontWeight="bold">How Seeds Are Preserved</text>

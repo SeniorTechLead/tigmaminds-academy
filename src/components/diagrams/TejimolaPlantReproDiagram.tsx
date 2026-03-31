@@ -13,7 +13,7 @@ export default function TejimolaPlantReproDiagram() {
         <text x="300" y="30" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#34d399">Seeds of Survival: How Plants Reproduce</text>
 
         {/* Divider */}
-        <line x1="300" y1="50" x2="300" y2="430" stroke="#475569" strokeWidth="1" strokeDasharray="6,4" />
+        <line x1="300" y1="50" x2="300" y2="430" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1" strokeDasharray="6,4" />
 
         {/* LEFT: Sexual reproduction (seeds) */}
         <text x="150" y="65" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#60a5fa">Sexual — Seeds</text>

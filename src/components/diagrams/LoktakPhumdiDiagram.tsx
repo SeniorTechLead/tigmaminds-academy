@@ -2,7 +2,7 @@ export default function LoktakPhumdiDiagram() {
   return (
     <div className="my-4">
       <svg viewBox="0 0 560 400" className="w-full max-w-lg mx-auto" role="img" aria-label="Cross-section of a phumdi floating island showing layers of vegetation, organic matter, and trapped gas">
-        <rect width="560" height="400" rx="12" className="fill-slate-900" />
+        <rect width="560" height="400" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}
         <text x="280" y="26" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#34d399">Phumdi Cross-Section: A Floating Island</text>
@@ -71,7 +71,7 @@ export default function LoktakPhumdiDiagram() {
         <line x1="42" y1="155" x2="42" y2="260" stroke="white" strokeWidth="1" />
         <line x1="36" y1="155" x2="48" y2="155" stroke="white" strokeWidth="1" />
         <line x1="36" y1="260" x2="48" y2="260" stroke="white" strokeWidth="1" />
-        <text x="46" y="212" fontSize="9" fill="white" transform="rotate(-90, 46, 212)" textAnchor="middle">~1-2 m thick</text>
+        <text x="46" y="212" fontSize="9" className="fill-gray-900 dark:fill-white" transform="rotate(-90, 46, 212)" textAnchor="middle">~1-2 m thick</text>
 
         {/* Key insight */}
         <rect x="60" y="360" width="440" height="28" rx="6" fill="#065f46" opacity="0.3" />

@@ -46,7 +46,7 @@ export default function OrchidEpiphyteDiagram() {
 
         {/* Velamen cross-section detail */}
         <g transform="translate(300, 70)">
-          <rect x="0" y="0" width="230" height="130" rx="8" fill="#1e293b" stroke="#86efac" strokeWidth="1" />
+          <rect x="0" y="0" width="230" height="130" rx="8" className="fill-gray-100 dark:fill-slate-800" stroke="#86efac" strokeWidth="1" />
           <text x="115" y="20" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#86efac">Velamen — Sponge Root Coating</text>
 
           {/* Root cross-section */}
@@ -62,7 +62,7 @@ export default function OrchidEpiphyteDiagram() {
 
           {/* Labels */}
           <line x1="105" y1="55" x2="140" y2="45" stroke="#e2e8f0" strokeWidth="0.8" />
-          <text x="142" y="42" fontSize="8" fill="#e2e8f0">Velamen (spongy)</text>
+          <text x="142" y="42" fontSize="8" className="fill-gray-700 dark:fill-slate-200">Velamen (spongy)</text>
           <text x="142" y="52" fontSize="7" className="fill-slate-400">Absorbs rain + humidity</text>
 
           <line x1="85" y1="75" x2="140" y2="72" stroke="#22c55e" strokeWidth="0.8" />
@@ -75,31 +75,31 @@ export default function OrchidEpiphyteDiagram() {
 
         {/* Parasite vs Epiphyte comparison */}
         <g transform="translate(300, 215)">
-          <rect x="0" y="0" width="230" height="90" rx="8" fill="#1e293b" stroke="#ef4444" strokeWidth="1" strokeDasharray="4 3" />
+          <rect x="0" y="0" width="230" height="90" rx="8" className="fill-gray-100 dark:fill-slate-800" stroke="#ef4444" strokeWidth="1" strokeDasharray="4 3" />
           <text x="115" y="18" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#ef4444">✘ Parasite (e.g. mistletoe)</text>
-          <text x="115" y="34" textAnchor="middle" fontSize="9" fill="#e2e8f0">Pushes roots INTO host tree</text>
-          <text x="115" y="48" textAnchor="middle" fontSize="9" fill="#e2e8f0">Steals water and sugar</text>
-          <text x="115" y="62" textAnchor="middle" fontSize="9" fill="#e2e8f0">Harms the host</text>
+          <text x="115" y="34" textAnchor="middle" fontSize="9" className="fill-gray-700 dark:fill-slate-200">Pushes roots INTO host tree</text>
+          <text x="115" y="48" textAnchor="middle" fontSize="9" className="fill-gray-700 dark:fill-slate-200">Steals water and sugar</text>
+          <text x="115" y="62" textAnchor="middle" fontSize="9" className="fill-gray-700 dark:fill-slate-200">Harms the host</text>
           <text x="115" y="82" textAnchor="middle" fontSize="9" fill="#ef4444">Takes food from host</text>
         </g>
 
         <g transform="translate(300, 315)">
-          <rect x="0" y="0" width="230" height="90" rx="8" fill="#1e293b" stroke="#22c55e" strokeWidth="1" />
+          <rect x="0" y="0" width="230" height="90" rx="8" className="fill-gray-100 dark:fill-slate-800" stroke="#22c55e" strokeWidth="1" />
           <text x="115" y="18" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#22c55e">✔ Epiphyte (e.g. orchid)</text>
-          <text x="115" y="34" textAnchor="middle" fontSize="9" fill="#e2e8f0">Roots grip the SURFACE only</text>
-          <text x="115" y="48" textAnchor="middle" fontSize="9" fill="#e2e8f0">Gets water from rain + humid air</text>
-          <text x="115" y="62" textAnchor="middle" fontSize="9" fill="#e2e8f0">Makes own food (photosynthesis)</text>
+          <text x="115" y="34" textAnchor="middle" fontSize="9" className="fill-gray-700 dark:fill-slate-200">Roots grip the SURFACE only</text>
+          <text x="115" y="48" textAnchor="middle" fontSize="9" className="fill-gray-700 dark:fill-slate-200">Gets water from rain + humid air</text>
+          <text x="115" y="62" textAnchor="middle" fontSize="9" className="fill-gray-700 dark:fill-slate-200">Makes own food (photosynthesis)</text>
           <text x="115" y="82" textAnchor="middle" fontSize="9" fill="#22c55e">Tree is just a perch, not a food source</text>
         </g>
 
         {/* Why live on trees? */}
         <g transform="translate(140, 310)">
-          <rect x="0" y="0" width="140" height="110" rx="8" fill="#1e293b" stroke="#fbbf24" strokeWidth="1" />
+          <rect x="0" y="0" width="140" height="110" rx="8" className="fill-gray-100 dark:fill-slate-800" stroke="#fbbf24" strokeWidth="1" />
           <text x="70" y="18" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#fbbf24">Why live up high?</text>
-          <text x="70" y="36" textAnchor="middle" fontSize="9" fill="#e2e8f0">☀ More sunlight</text>
-          <text x="70" y="52" textAnchor="middle" fontSize="9" fill="#e2e8f0">💨 More airflow</text>
-          <text x="70" y="68" textAnchor="middle" fontSize="9" fill="#e2e8f0">🐛 Away from ground pests</text>
-          <text x="70" y="84" textAnchor="middle" fontSize="9" fill="#e2e8f0">🐝 Closer to pollinators</text>
+          <text x="70" y="36" textAnchor="middle" fontSize="9" className="fill-gray-700 dark:fill-slate-200">☀ More sunlight</text>
+          <text x="70" y="52" textAnchor="middle" fontSize="9" className="fill-gray-700 dark:fill-slate-200">💨 More airflow</text>
+          <text x="70" y="68" textAnchor="middle" fontSize="9" className="fill-gray-700 dark:fill-slate-200">🐛 Away from ground pests</text>
+          <text x="70" y="84" textAnchor="middle" fontSize="9" className="fill-gray-700 dark:fill-slate-200">🐝 Closer to pollinators</text>
           <text x="70" y="102" textAnchor="middle" fontSize="8" className="fill-slate-400">Trade-off: no soil nutrients</text>
         </g>
       </svg>

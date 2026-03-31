@@ -26,7 +26,7 @@ export default function BoatBuoyancyDiagram() {
         `}</style>
 
         {/* Background */}
-        <rect width="620" height="440" rx="8" className="fill-slate-900" />
+        <rect width="620" height="440" rx="8" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}
         <text x="310" y="28" textAnchor="middle" className="title fill-amber-300">
@@ -98,7 +98,7 @@ export default function BoatBuoyancyDiagram() {
 
         {/* Solid steel block */}
         <g className="sinking">
-          <rect x="430" y="240" width="60" height="50" rx="3" fill="#6b7280" stroke="#9ca3af" strokeWidth="1.5" />
+          <rect x="430" y="240" width="60" height="50" rx="3" className="fill-gray-500 dark:fill-gray-500" stroke="#9ca3af" strokeWidth="1.5" />
           <text x="460" y="270" textAnchor="middle" className="small fill-slate-300">steel</text>
           <text x="460" y="282" textAnchor="middle" className="small fill-slate-400">7800 kg/m³</text>
         </g>

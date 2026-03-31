@@ -2,11 +2,11 @@ export default function BanyanCompetitionDiagram() {
   return (
     <div className="my-4">
       <svg viewBox="0 0 560 443" className="w-full max-w-lg mx-auto" role="img" aria-label="Forest canopy layers showing competition for light: emergent, canopy, understory, forest floor, and the banyan's spreading strategy">
-        <rect width="500" height="420" rx="12" className="fill-slate-900" />
+        <rect width="500" height="420" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}
         <text x="250" y="28" textAnchor="middle" className="fill-amber-400" fontSize="14" fontWeight="bold">Competition for Light</text>
-        <text x="250" y="44" textAnchor="middle" className="fill-slate-400" fontSize="10">Forest canopy layers &amp; the banyan&apos;s strategy</text>
+        <text x="250" y="44" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="10">Forest canopy layers &amp; the banyan&apos;s strategy</text>
 
         {/* Sun and light rays */}
         <circle cx="250" cy="65" r="15" className="fill-yellow-400" />
@@ -32,7 +32,7 @@ export default function BanyanCompetitionDiagram() {
         <rect x="340" y="98" width="8" height="60" className="fill-amber-700" />
         <ellipse cx="344" cy="95" rx="25" ry="18" className="fill-green-500" opacity="0.7" />
         <text x="40" y="128" className="fill-green-300" fontSize="10" fontWeight="bold">Emergent</text>
-        <text x="40" y="142" className="fill-slate-400" fontSize="8">40-50 m — tallest trees</text>
+        <text x="40" y="142" className="fill-gray-500 dark:fill-slate-400" fontSize="8">40-50 m — tallest trees</text>
 
         {/* Light reaching canopy */}
         <line x1="150" y1="110" x2="150" y2="160" className="stroke-yellow-400" strokeWidth="1.5" opacity="0.6" />
@@ -48,7 +48,7 @@ export default function BanyanCompetitionDiagram() {
         <ellipse cx="380" cy="180" rx="35" ry="20" className="fill-green-700" opacity="0.6" />
         <rect x="378" y="180" width="5" height="60" className="fill-amber-800" />
         <text x="40" y="182" className="fill-green-300" fontSize="10" fontWeight="bold">Canopy</text>
-        <text x="40" y="196" className="fill-slate-400" fontSize="8">25-35 m — most light captured</text>
+        <text x="40" y="196" className="fill-gray-500 dark:fill-slate-400" fontSize="8">25-35 m — most light captured</text>
 
         {/* Banyan strategy callout */}
         <line x1="250" y1="168" x2="320" y2="152" className="stroke-amber-400" strokeWidth="1" />
@@ -69,7 +69,7 @@ export default function BanyanCompetitionDiagram() {
         <line x1="140" y1="190" x2="135" y2="270" className="stroke-amber-600" strokeWidth="2" />
         <line x1="260" y1="190" x2="265" y2="270" className="stroke-amber-600" strokeWidth="2" />
         <text x="40" y="242" className="fill-green-300" fontSize="10" fontWeight="bold">Understory</text>
-        <text x="40" y="256" className="fill-slate-400" fontSize="8">5-25 m — shade-tolerant</text>
+        <text x="40" y="256" className="fill-gray-500 dark:fill-slate-400" fontSize="8">5-25 m — shade-tolerant</text>
 
         {/* Light reaching floor */}
         <text x="430" y="262" className="fill-yellow-200" fontSize="8" opacity="0.3">1% light</text>
@@ -81,7 +81,7 @@ export default function BanyanCompetitionDiagram() {
           <path key={i} d={`M ${x},325 Q ${x - 5},315 ${x - 10},325 M ${x},325 Q ${x + 5},315 ${x + 10},325`} className="stroke-green-600" strokeWidth="1" fill="none" />
         ))}
         <text x="40" y="295" className="fill-green-300" fontSize="10" fontWeight="bold">Forest Floor</text>
-        <text x="40" y="309" className="fill-slate-400" fontSize="8">0-5 m — very little light</text>
+        <text x="40" y="309" className="fill-gray-500 dark:fill-slate-400" fontSize="8">0-5 m — very little light</text>
 
         {/* Ground */}
         <line x1="30" y1="328" x2="470" y2="328" className="stroke-amber-800" strokeWidth="1.5" />
@@ -90,7 +90,7 @@ export default function BanyanCompetitionDiagram() {
         <rect x="50" y="345" width="400" height="60" rx="8" className="fill-green-900" opacity="0.5" />
         <text x="250" y="363" textAnchor="middle" className="fill-amber-300" fontSize="10" fontWeight="bold">The Banyan&apos;s Strategy</text>
         <text x="250" y="378" textAnchor="middle" className="fill-green-300" fontSize="9">Instead of growing taller, the banyan spreads horizontally</text>
-        <text x="250" y="393" textAnchor="middle" className="fill-slate-400" fontSize="8">Aerial roots become new trunks, letting the canopy expand outward indefinitely</text>
+        <text x="250" y="393" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="8">Aerial roots become new trunks, letting the canopy expand outward indefinitely</text>
       </svg>
     </div>
   );
