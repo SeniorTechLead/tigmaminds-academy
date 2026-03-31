@@ -304,105 +304,92 @@ In the fishing villages along the Brahmaputra, the people of Assam still tell th
     level0: {
       concepts: [
         {
-          title: 'How Pigments Work: Absorbing and Reflecting Light',
+          title: 'Start Here — What Powers a Cyclone?',
           paragraphs: [
-            'Here is a question that sounds simple but is actually deep: why is a yellow flower yellow? Most people say "because it IS yellow." But that is not an answer \u2014 it is a tautology. The real answer involves physics, and it is beautiful.',
-            'White sunlight contains ALL visible colors mixed together \u2014 red, orange, yellow, green, blue, and violet. When light hits a yellow pigment particle, the particle absorbs (swallows) the blue and violet wavelengths and reflects everything else back at your eye. Your eye receives a mixture of red, orange, yellow, and green light, and your brain interprets that mixture as "yellow." The pigment is not producing yellow light. It is removing blue light and letting everything else bounce back.',
-            'This means color is not a property of objects \u2014 it is a property of light. A "red" rose is really a rose that absorbs green and blue light. A "green" leaf absorbs red and blue light. A "white" page reflects everything. A "black" cloth absorbs everything. What you see is always what is LEFT OVER after the pigment has done its filtering. Understanding this changes how you see the world.',
+            'Boil a pot of water with the lid on. Steam builds up, lifts the lid, and escapes. The heat from the stove is turning liquid water into vapour, and the vapour rises because it is lighter than the surrounding air. Now imagine this happening over an entire ocean.',
+            'Over the Bay of Bengal, the sun heats the sea surface above 26.5°C. Warm water evaporates fast. This invisible water vapour rises, and as it climbs, it cools down. Cool air cannot hold as much moisture, so the vapour **condenses** back into tiny water droplets — forming clouds. Here is the crucial part: when water vapour condenses, it **releases heat**. This released heat warms the air around it, making it rise *faster*, pulling *more* moist air up from the ocean below.',
+            'This creates a loop:\n\n• Warm ocean → evaporation → moist air rises\n• Rising air cools → water condenses → releases heat\n• Released heat makes air rise faster → pulls in more moist air\n• Cycle strengthens itself',
+            'A cyclone is a **heat engine** — it converts the ocean’s warmth into wind energy. As long as it stays over warm water, it keeps getting stronger. The moment it hits land (no more warm water fuel) or cold ocean, it weakens and dies. This is why cyclone forecasters track sea surface temperatures so carefully.',
           ],
-          keyIdea: 'Pigments create color by absorbing some wavelengths of light and reflecting the rest. You see what survives the filter, not what goes in.',
-          diagram: 'PigmentAbsorptionDiagram',
-          checkYourself: 'If you shine ONLY blue light on a yellow flower (no other colors), what color will the flower appear?',
-          checkAnswer: 'The flower will appear black (or very dark). Yellow pigment absorbs blue light. With only blue light available and all of it absorbed, no light reflects back to your eye. The flower needs red, yellow, or green light to appear colored.',
+          keyIdea: 'A cyclone is a self-strengthening loop: warm ocean evaporates water, rising vapour condenses and releases heat, the heat pulls up more vapour, and the cycle accelerates.',
+          diagram: 'CycloneCrossSectionDiagram',
         },
         {
-          title: 'Mixing Colors: Why Paint Mixing and Light Mixing Give Opposite Results',
+          title: 'Why Does a Cyclone Spin?',
           paragraphs: [
-            'Every child learns that yellow + blue = green. But here is something strange: if you mix yellow light and blue light on a screen, you get WHITE, not green. Why do paints and lights give completely different results?',
-            'The answer is that paints and lights use opposite systems. Light mixing is additive: you start with darkness and add light. More colors = brighter. Red light + green light + blue light = white. Screen pixels work this way \u2014 every color on your phone is made by mixing tiny red, green, and blue LEDs at different brightnesses.',
-            'Paint mixing is subtractive: you start with white (all colors present) and each pigment removes (subtracts) some wavelengths. More pigments = darker. Yellow paint absorbs blue. Blue paint absorbs red and yellow. Mix them and the only wavelength that survives BOTH filters is green. That is why yellow + blue = green in paint. Mix all pigment colors together and you get black (or dark brown), because every wavelength has been absorbed by one pigment or another. Bansara\u2019s watercolors work by subtractive mixing \u2014 each layer of paint removes more light.',
+            'The rising air in a forming storm pulls in surface winds from all directions — air rushing inward to fill the low-pressure gap. But these winds do not travel in a straight line. Earth is rotating, and this rotation deflects moving objects slightly — to the **right** in the Northern Hemisphere, to the **left** in the Southern. This is called the **Coriolis effect**.',
+            'Imagine you are on a merry-go-round and you try to throw a ball to a friend on the other side. From your friend’s perspective, the ball curves to one side because the platform is rotating underneath it. Earth does the same thing to air currents.',
+            'As the inflowing winds get deflected, they start curving instead of going straight. This curve becomes a spiral, and the spiral becomes a rotation. In the Northern Hemisphere (including the Bay of Bengal), cyclones spin **counterclockwise**. In the Southern Hemisphere, they spin clockwise.',
+            '**Here is a key fact:** the Coriolis effect is zero at the equator. This means cyclones *cannot form directly on the equator* — there is no deflection to start the spin. They need to be at least 5–8 degrees of latitude away. The Bay of Bengal, at roughly 10–20°N, is in the perfect zone.',
+            '**Think about this:** If the Earth did not rotate, would cyclones exist? (Answer: No. Without rotation, there would be no Coriolis effect, no spin, and the rising air would just go straight up and spread out — you would get thunderstorms, not cyclones.)',
           ],
-          keyIdea: 'Additive mixing (light/screens) adds brightness \u2014 all colors = white. Subtractive mixing (pigments/paint) removes light \u2014 all colors = black. Opposite systems!',
-          diagram: 'SubtractiveMixingDiagram',
-          checkYourself: 'If you mix cyan, magenta, and yellow paint together, what color do you get? What about mixing red, green, and blue light?',
-          checkAnswer: 'Cyan + magenta + yellow paint = black (each absorbs one-third of the spectrum; together they absorb everything). Red + green + blue light = white (together they provide all wavelengths). Perfectly opposite results.',
+          keyIdea: 'Earth’s rotation deflects the inflowing winds (Coriolis effect), turning them into a spiral. This is why cyclones spin, and why they cannot form at the equator where the effect is zero.',
+          diagram: 'CoriolisEffectDiagram',
         },
         {
-          title: 'Watercolor Physics: Capillary Action and How Paint Spreads',
+          title: 'Storm Surge — The Part That Kills',
           paragraphs: [
-            'When Bansara touches her wet brush to paper, the paint does not just sit there \u2014 it spreads. Sometimes it spreads smoothly, sometimes unpredictably. This is not magic; it is physics, and the main force at work is capillary action.',
-            'Paper is made of cellulose fibers with microscopic gaps between them. Water molecules are attracted to cellulose (a force called adhesion \u2014 water likes to stick to things). At the same time, water molecules stick to each other (cohesion \u2014 water likes to stay together). These two forces working together pull water into the tiny gaps between fibers, like liquid climbing up a narrow tube. The narrower the gap, the stronger the pull. This is capillary action.',
-            'Pigment particles are carried along with the water as it travels through the paper fibers. Fine-fiber paper absorbs water slowly and evenly, giving the artist control. Coarse paper absorbs quickly and unevenly, creating the wild "bloom" effects that give watercolor its distinctive character. Skilled artists like Bansara learn to control capillary action by choosing the right paper, managing how wet it is, and timing each brushstroke. They are doing applied physics with every painting.',
+            'Most people think the wind is the deadliest part of a cyclone. It is not. **Storm surge** kills roughly 90% of all cyclone victims. Storm surge is a wall of ocean water pushed toward the coast by the cyclone’s winds — sometimes 5 to 10 metres above normal sea level. It is not a wave. It is a rising dome of water that floods entire coastlines in minutes.',
+            'Three things make a storm surge worse:\n\n• **Stronger winds** push more water (obvious)\n• **Shallow seabed** near the coast — the water has nowhere to go but *up* (the northern Bay of Bengal is very shallow)\n• **Funnel-shaped coastline** — the water gets squeezed into a smaller space, raising the height further (the Bay of Bengal is funnel-shaped)',
+            'The Bay of Bengal has all three: strong cyclones, a shallow seabed, and a funnel shape. This makes it one of the most dangerous coastlines on Earth for storm surge. The Brahmaputra delta sits right at the narrow end of the funnel.',
+            'In 1970, the Bhola cyclone sent a storm surge across the coast of what is now Bangladesh. Between 300,000 and 500,000 people died — most of them drowned by the surge, not killed by wind. After that disaster, Bangladesh built thousands of raised concrete cyclone shelters along the coast. In 2020, Cyclone Amphan (a similar-strength storm) hit the same region — fewer than 100 people died. Warning systems and shelters saved hundreds of thousands of lives.',
+            '**Question to think about:** Why is storm surge more dangerous at high tide than at low tide? (Answer: the surge height adds on top of the existing tide level, so a 5-metre surge at high tide floods much farther inland than the same surge at low tide.)',
           ],
-          keyIdea: 'Watercolor paint spreads through paper by capillary action \u2014 adhesion pulls water into fiber gaps, cohesion drags more water along. Artists control this physics with every stroke.',
-          diagram: 'CapillaryActionDiagram',
-          checkYourself: 'Why does watercolor paint spread FASTER on paper that is already wet?',
-          checkAnswer: 'On wet paper, the gaps between fibers are already filled with water. New paint dropped onto this surface can flow along the existing water channels without having to overcome initial adhesion. The water-to-water cohesion carries the paint outward rapidly \u2014 creating the soft, feathered "bloom" effect.',
-        },
-        {
-          title: 'Why Rain Makes Colors More Vivid',
-          paragraphs: [
-            'Bansara noticed something that photographers and painters have known for centuries: colors look more vivid after rain. This is not imagination \u2014 it is measurable physics, and there are three reasons for it.',
-            'First, rain washes dust particles out of the air. Dust scatters light randomly, creating a whitish haze that washes out colors. After rain, the air is cleaner and light travels without being scattered off-course, so you see truer, more saturated colors. Second, wet surfaces absorb light more deeply. A dry leaf has a rough surface that scatters light in all directions (diffuse reflection). A wet leaf has a thin film of water that fills in the bumps, making the surface smoother. Smooth surfaces reflect light in one direction (specular reflection), and the light that enters the leaf goes deeper, interacting with more pigment before bouncing back \u2014 producing a richer, deeper green.',
-            'Third, overcast skies after rain provide soft, even lighting without harsh shadows. Direct sunlight creates bright spots and dark shadows on the same object, which reduces the perceived richness of color. Diffuse light from clouds illuminates everything evenly, letting you see the true color of every surface. Photographers call this the "golden hour of color" \u2014 the period right after rain stops when the world looks most vivid.',
-          ],
-          keyIdea: 'Rain makes colors vivid for three physics reasons: cleaner air (less scattering), wet surfaces (deeper light penetration), and diffuse lighting (no harsh shadows).',
-          diagram: 'RainColorVividDiagram',
-          checkYourself: 'Why does a wet stone look darker and more colorful than the same stone when dry?',
-          checkAnswer: 'The water film fills the stone\'s surface bumps, reducing random scattering. Light enters the stone more deeply and interacts with more pigment before reflecting back. More pigment interaction = more color absorption = deeper, richer color. The stone also appears darker because less light is scattered back.',
+          keyIdea: 'Storm surge — a wall of ocean water, not just waves — causes 90% of cyclone deaths. Shallow seabeds and funnel-shaped coasts like the Bay of Bengal make it far worse.',
+          diagram: 'StormSurgeDiagram',
         },
       ],
       vocabulary: [
-        ['Pigment', 'A substance that creates color by absorbing certain wavelengths of light and reflecting the rest \u2014 you see what bounces back'],
-        ['Subtractive mixing', 'Color mixing with pigments/paints: each added pigment removes wavelengths. More mixing = darker. All colors = black'],
-        ['Additive mixing', 'Color mixing with light: each added light contributes wavelengths. More mixing = brighter. All colors = white'],
-        ['Capillary action', 'The force that pulls water into narrow spaces, caused by adhesion (water sticks to surfaces) and cohesion (water sticks to itself)'],
-        ['Wavelength', 'The distance between peaks of a light wave \u2014 different wavelengths appear as different colors (short = violet, long = red)'],
+        ['Coriolis Effect', 'A deflection of moving objects caused by Earth\'s rotation — it makes cyclones spin counterclockwise in the Northern Hemisphere and clockwise in the Southern Hemisphere'],
+        ['Barometric Pressure', 'The weight of the atmosphere pressing down on a surface, measured in millibars — falling pressure signals an approaching storm, and cyclone centers can drop below 900 mb'],
+        ['Storm Surge', 'An abnormal rise in sea level caused by a cyclone\'s winds pushing ocean water toward the coast — responsible for about 90% of cyclone deaths'],
+        ['Latent Heat', 'Energy released when water vapor condenses into liquid — this hidden heat is the fuel that powers cyclones, warming the air and driving it upward'],
+        ['Eyewall', 'The ring of the most violent thunderstorms surrounding a cyclone\'s calm eye — it contains the strongest winds and heaviest rainfall of the entire storm'],
       ],
       trueFalse: [
-        { statement: 'A yellow flower produces yellow light.', isTrue: false, explanation: 'A yellow flower absorbs blue and violet light from white sunlight and reflects the remaining wavelengths (red, orange, yellow, green). Your brain interprets this reflected mixture as yellow. The flower is a filter, not a light source.' },
-        { statement: 'Mixing red, green, and blue light produces white light.', isTrue: true, explanation: 'This is additive mixing. Red + green + blue light together provide all visible wavelengths, which your eye perceives as white. This is how every pixel on your screen works \u2014 tiny RGB LEDs at different intensities.' },
-        { statement: 'Colors look duller after rain because of the clouds.', isTrue: false, explanation: 'Colors actually look MORE vivid after rain. Clean air, wet surfaces that absorb light deeply, and diffuse cloud lighting all combine to produce richer, more saturated colors. Photographers actively seek the post-rain period for the most vivid shots.' },
+        { statement: 'Cyclones can form directly on the equator where ocean water is warmest.', isTrue: false, explanation: 'Cyclones need the Coriolis effect to start rotating, and the Coriolis effect is zero at the equator. Cyclones typically form at least 5-8 degrees of latitude away from the equator, even though equatorial waters are warm enough.' },
+        { statement: 'A rapid drop in barometric pressure is a reliable warning sign of an approaching cyclone.', isTrue: true, explanation: 'Cyclones create extremely low pressure at their center — sometimes below 900 millibars versus the normal 1013 mb. As a cyclone approaches, barometers detect the falling pressure hours or days before the worst winds arrive.' },
+        { statement: 'The strongest winds in a cyclone are found in the eye at the center of the storm.', isTrue: false, explanation: 'The eye is actually calm and often clear, with light winds. The most violent winds are in the eyewall — the ring of intense thunderstorms immediately surrounding the eye, where wind speeds can exceed 250 km/h.' },
       ],
       facts: [
-        'Cherrapunji (now Sohra) in Meghalaya holds the record for most rainfall in a single year: 26,461 mm (about 26 meters!) recorded in 1861. Bansara\'s home is one of the wettest places on Earth.',
-        'Your phone screen creates every visible color by mixing just three colors of light \u2014 red, green, and blue \u2014 at different intensities. Each pixel contains three tiny LEDs. Turn all three to maximum and you get white.',
-        'Watercolor painters leave the paper white for white areas rather than adding white paint. The paper IS the light source \u2014 light passes through the transparent pigment layer, reflects off the white paper, and passes through the pigment again on the way back to your eye.',
+        'The Bay of Bengal is one of the most cyclone-prone bodies of water on Earth — its warm surface temperatures and funnel shape concentrate storm surge toward the coast, making it especially dangerous.',
+        'The 1970 Bhola cyclone in the Bay of Bengal killed an estimated 300,000-500,000 people, mostly from storm surge — it led to massive international investment in cyclone warning systems and coastal shelters.',
+        'A cyclone is essentially a heat engine: it converts thermal energy from warm ocean water (above 26.5°C) into the kinetic energy of wind, with latent heat released by condensation as the main power source.',
       ],
-      offlineActivity: 'Test subtractive mixing with paints or food coloring on white paper. Mix yellow + blue (should give green). Mix red + blue (should give purple). Mix all three (should give dark brown or near-black). Then compare wet paint to dry paint \u2014 notice how the colors lighten as they dry? Watercolors dry 20\u201340% lighter because the water layer reflects extra light while still wet.',
-      offlineActivityDiagram: 'ActivityColorMixDiagram',
-      codeTeaser: `import matplotlib.pyplot as plt
-import numpy as np
+      offlineActivity: 'Fill a large bowl with water and let it settle completely. Stir the water rapidly in a circle, then slowly lift your finger out. Watch how a vortex (spinning funnel) forms in the center — this is the same physics that creates a cyclone\'s eye. The spinning water pulls away from the center, just as spinning air creates the low-pressure eye of a cyclone. Now try adding a few drops of food coloring at the edge and watch how the spiral bands form as the color gets pulled into the rotation.',
+      offlineActivityDiagram: 'ActivityVortexDiagram',
+      codeTeaser: `import numpy as np
 
-# Simulate subtractive color mixing
-# Each pigment absorbs some wavelengths (0 = absorb, 1 = reflect)
-wavelengths = np.linspace(380, 700, 100)
+# Estimate cyclone intensity from sea temperature
+# Warmer ocean = lower eye pressure = stronger winds
 
-yellow_reflect = np.where(wavelengths > 490, 1.0, 0.1)
-blue_reflect = np.where(wavelengths < 530, 1.0, 0.1)
-mixed = yellow_reflect * blue_reflect  # only green survives!
+sea_temp = 28.5       # °C — Bay of Bengal surface
+pressure = 1013       # millibars — normal
+wind_speed = 120      # km/h — severe cyclone
 
-plt.fill_between(wavelengths, mixed, alpha=0.3, color='green')
-plt.plot(wavelengths, mixed, linewidth=2, color='green')
-plt.xlabel("Wavelength (nm)")
-plt.ylabel("Reflected light")
-plt.title("Yellow + Blue Paint = Green (subtractive)")
-plt.show()  # Only green wavelengths survive both filters!`,
+# Cyclone pressure drop (simplified)
+eye_pressure = pressure - (wind_speed / 3.5) ** 2
+storm_surge = wind_speed * 0.04  # rough estimate in metres
+
+print(f"Sea surface temp: {sea_temp}°C (>{26.5} = cyclone fuel)")
+print(f"Eye pressure: {eye_pressure:.0f} mb (normal: 1013)")
+print(f"Estimated storm surge: {storm_surge:.1f} metres")
+print(f"Danger level: {'EXTREME' if storm_surge > 3 else 'HIGH'}")`,
       referenceLinks: [
-        { slug: 'light-and-color', reason: 'Deep dive into wavelengths, the electromagnetic spectrum, and how we perceive color' },
-        { slug: 'waves-and-properties', reason: 'Understand wave fundamentals \u2014 frequency, wavelength, amplitude \u2014 the physics behind light and color' },
+        { slug: 'weather-and-climate', reason: 'Full guide to atmospheric pressure, wind systems, and how weather patterns form and move' },
+        { slug: 'waves-and-properties', reason: 'How waves carry energy — the same physics applies to ocean waves, storm surge, and sound' },
       ],
       nextLessons: [
-        { slug: 'orange-sunsets-assam', reason: 'Uses the same light physics to explain why sunsets are orange \u2014 scattering and wavelength filtering' },
-        { slug: 'kingfisher-blue', reason: 'Explores structural color \u2014 blue that comes from nanostructures, not pigments. A completely different way to make color' },
-        { slug: 'rainbow-fish', reason: 'Connects refraction and thin-film interference \u2014 another way light creates color without pigments' },
+        { slug: 'cloud-refused-rain', reason: 'Explores cloud seeding and rain formation — the water cycle that feeds cyclones' },
+        { slug: 'the-little-boat', reason: 'Fluid dynamics and buoyancy on the Brahmaputra — how boats survive river currents and floods' },
+        { slug: 'monsoon-home', reason: 'Architecture designed for monsoon climate — the human response to the storms you just learned about' },
       ],
       quiz: [
-        { question: 'Why does a yellow pigment appear yellow?', options: ['It produces yellow light', 'It absorbs yellow light and reflects the rest', 'It absorbs blue/violet light and reflects the rest', 'It reflects only one wavelength'], answer: 2 },
-        { question: 'What type of color mixing do paints use?', options: ['Additive (more paint = brighter)', 'Subtractive (more paint = darker)', 'Neutral (paint does not affect brightness)', 'Multiplicative'], answer: 1 },
-        { question: 'What force pulls watercolor paint into paper fibers?', options: ['Gravity', 'Magnetism', 'Capillary action (adhesion + cohesion)', 'Static electricity'], answer: 2 },
-        { question: 'Why do colors look more vivid right after rain?', options: ['Rain adds color to surfaces', 'Clean air, wet surfaces, and diffuse light all enhance color', 'Your eyes are more sensitive in cold weather', 'Rain reflects light like a mirror'], answer: 1 },
-        { question: 'What happens if you mix ALL pigment colors together?', options: ['You get white', 'You get black or very dark brown', 'You get grey', 'Nothing changes'], answer: 1 },
+        { question: 'What powers a cyclone?', options: ['Cold ocean water freezing', 'Warm ocean water evaporating and condensing, releasing heat', 'Earthquakes under the ocean', 'Wind from nearby mountains'], answer: 1 },
+        { question: 'Why does a cyclone spin?', options: ['Ocean currents push it in circles', 'The Coriolis effect from Earth\'s rotation deflects the inflowing winds', 'Lightning inside the storm creates rotation', 'The eye of the storm acts like a drain'], answer: 1 },
+        { question: 'What causes the most deaths during a cyclone?', options: ['Lightning strikes', 'High winds', 'Storm surge — a wall of ocean water pushed inland', 'Tornadoes inside the cyclone'], answer: 2 },
+        { question: 'Why can\'t cyclones form at the equator?', options: ['The ocean is too cold at the equator', 'The Coriolis effect is zero at the equator, so winds cannot be deflected into a spin', 'There is too much rain at the equator', 'The atmosphere is too thin at the equator'], answer: 1 },
+        { question: 'What makes the Bay of Bengal especially dangerous for storm surge?', options: ['It has the deepest water in the world', 'Its shallow seabed and funnel shape amplify the surge', 'It has no islands to block storms', 'The water is warmer than any other ocean'], answer: 1 },
       ],
     },
   },
@@ -667,106 +654,88 @@ Anusha kept drawing maps. Maps of her school. Maps of her grandmother's kitchen.
     level0: {
       concepts: [
         {
-          title: 'Warp and Weft: The Two Thread Systems',
+          title: 'Start Here — How Do You Describe Where Something Is?',
           paragraphs: [
-            'Every piece of woven fabric on Earth \u2014 from Dechen\'s shawls in Tawang to the shirt you are wearing right now \u2014 is made of exactly two sets of threads crossing each other at right angles. Understanding these two systems is the foundation of textile science.',
-            'The warp threads run vertically (lengthwise) and are set up first. They are stretched tight on the loom under tension, like guitar strings. Because they bear the weight of the entire fabric during weaving, warp threads must be strong \u2014 they endure thousands of back-and-forth passes of the shuttle without breaking. The weft threads run horizontally (widthwise) and are woven in second, one row at a time, passing over and under alternate warp threads.',
-            'The over-under pattern of how weft crosses warp determines everything about the fabric: its strength, its feel, its drape, and its pattern. The simplest arrangement \u2014 over one, under one, alternating each row \u2014 is called plain weave. It is the strongest and most stable weave structure, used in everything from canvas to bandages. Dechen\'s cloud-pattern shawls use variations of this basic over-under logic to create intricate designs.',
+            'If a friend asks "Where is your house?", you might say "Near the peepal tree, past the tea stall, turn left at the big puddle." That works — if your friend knows the peepal tree. But what if they are in Delhi? Or London? You need a system that works for *anyone, anywhere*.',
+            'The solution: imagine wrapping the Earth in a grid, like graph paper around a ball. Horizontal lines run east-west — these measure **latitude** (how far north or south of the equator you are, from 0° at the equator to 90° at the poles). Vertical lines run north-south — these measure **longitude** (how far east or west of a starting line through London, from 0° to 180°).',
+            'Every point on Earth gets a unique pair of numbers. Guwahati is at about 26.1°N, 91.7°E. This means: 26.1 degrees north of the equator, 91.7 degrees east of London. No other place on Earth has these exact numbers. With just two numbers, you can pinpoint any location on the planet.',
+            '**Try this:** Open any map app on a phone. Long-press on your school. It will show two numbers — those are your latitude and longitude. Now long-press on the Taj Mahal. Compare the numbers. Which changed more — latitude (north-south) or longitude (east-west)?',
           ],
-          keyIdea: 'All woven fabric consists of warp (vertical, under tension) and weft (horizontal, woven in) threads. Their crossing pattern determines the fabric\'s strength and appearance.',
-          diagram: 'WarpWeftDiagram',
-          checkYourself: 'If you pull on a piece of woven fabric diagonally (at 45 degrees to both warp and weft), will it stretch more or less than pulling along the warp?',
-          checkAnswer: 'It will stretch MORE. Along the warp, the taut threads resist stretching directly. At 45 degrees, you are pulling the grid into a diamond shape \u2014 the threads rotate rather than stretch, and the fabric deforms easily. This diagonal stretch is called "bias" and tailors use it deliberately for stretchy garments.',
+          keyIdea: 'Latitude (north-south from the equator) and longitude (east-west from London) form a grid that gives every point on Earth a unique pair of numbers — a universal address system.',
+          diagram: 'LatLongGridDiagram',
         },
         {
-          title: 'How a Loom Works: Shed, Shuttle, Beat',
+          title: 'The Orange Peel Problem — Why All Maps Lie',
           paragraphs: [
-            'A loom looks complicated, but it really does only three things, repeated thousands of times: open a gap (shed), pass thread through it (shuttle), and push the new thread tight (beat). Every loom ever built \u2014 from a stick loom in a Tawang village to a computer-controlled factory loom \u2014 performs these same three steps.',
-            'Opening the shed: the loom lifts every other warp thread, creating a V-shaped gap (called the "shed") between the upper and lower threads. This is done by a heddle \u2014 a bar with loops that grab alternate warp threads and pull them up. Passing the shuttle: a shuttle carrying the weft thread is passed through the shed from one side to the other. This lays one row of weft across the entire width. Beating: a beater bar pushes the new weft row tightly against the previous rows, creating a dense, strong fabric.',
-            'Then the heddle switches \u2014 the threads that were up go down, and the threads that were down go up \u2014 and the whole cycle repeats. Each cycle adds one row. A skilled Tawang weaver using a backstrap loom (where her own body provides the tension) can complete about 5,000 cycles to produce one shawl. That is 5,000 repetitions of open-pass-beat, each one precise, each one building the pattern thread by thread.',
+            'Try this at home: take an orange and draw the outline of India on its skin with a marker. Now peel the orange and try to flatten the peel on a table. What happens? The peel tears, stretches, and distorts. India’s shape gets warped. This is the **fundamental problem of cartography**: Earth is round, and paper is flat. You cannot make the peel lie flat without stretching or tearing something.',
+            'Every flat map is a compromise. Map makers call these compromises **projections**. Different projections sacrifice different things:\n\n• **Mercator** (1569): keeps shapes accurate but distorts sizes — Greenland looks as big as Africa, but Africa is actually 14 times bigger\n• **Peters**: keeps areas correct but stretches shapes — countries look elongated\n• **Robinson**: compromises on everything slightly, so nothing looks terribly wrong — the most common in school atlases',
+            'For a map of your neighbourhood or your district, this problem barely matters — over a few hundred kilometres, Earth’s curve is tiny. But for a world map, the choice of projection changes what you believe about the world. Students who only see Mercator maps grow up thinking Europe is bigger than South America (it is not — South America is nearly twice the size).',
+            '**Question to think about:** Anusha in the story drew a map with the peepal tree and the puddle. Is her map a projection? (Answer: Yes — she projected the 3D world onto a flat page. For a small area, the distortion is negligible, but she still made choices about what to include and what to leave out.)',
           ],
-          keyIdea: 'Every loom in the world performs the same three-step cycle: open a shed (gap), pass the shuttle (weft thread), beat the new row tight. Repeat 5,000 times for one shawl.',
-          diagram: 'LoomMechanicsDiagram',
-          checkYourself: 'In a backstrap loom, the weaver\'s body provides the warp tension. What happens to the fabric if the weaver leans forward?',
-          checkAnswer: 'Leaning forward reduces tension on the warp threads, making the shed smaller and the weave looser. Leaning back increases tension, making a tighter weave. The weaver\'s posture directly controls the fabric density \u2014 her body is the tensioning device.',
+          keyIdea: 'Earth is round; maps are flat. Every flat map distorts something — shape, area, distance, or direction. Different projections make different trade-offs, and no map is perfectly accurate.',
+          diagram: 'MapProjectionDiagram',
         },
         {
-          title: 'Thread Tension and Fabric Strength',
+          title: 'Maps with Layers — How GIS Works',
           paragraphs: [
-            'The most important skill in weaving is not speed or pattern-making \u2014 it is controlling tension. Tension determines whether the fabric is strong or weak, even or lumpy, beautiful or ruined. Getting it right is the difference between a master weaver and a beginner.',
-            'If the warp tension is too loose, the threads wander and the weft rows do not pack evenly. The result is a floppy, uneven fabric with gaps where water and wind pass through. If the tension is too tight, the warp threads are over-stressed and the fabric puckers \u2014 it buckles and distorts because the rigid threads cannot accommodate the weft rows smoothly. The fabric may even tear during weaving.',
-            'The sweet spot is firm but not rigid \u2014 tight enough that every thread sits in its correct position, loose enough that the weft can slide into place without distorting. Tawang weavers using backstrap looms adjust this tension continuously by shifting their body weight. They can feel the right tension through their back and hips, making adjustments of fractions of a millimeter without looking. This tactile skill takes years to develop and cannot be fully replicated by machines \u2014 it is one reason handwoven textiles from Tawang command premium prices.',
+            'A paper map shows you one picture. But what if you could stack transparent sheets on top of each other — one showing rivers, one showing roads, one showing elevation, one showing schools? Now you could ask questions like: "Show me villages within 5 km of a river that have no school." That is exactly what a **Geographic Information System (GIS)** does, but on a computer.',
+            'GIS stores data in **layers**. Each layer is a transparent map of one type of information. You can turn layers on and off, zoom in, and — most importantly — ask questions that combine layers. Real examples:\n\n• Brahmaputra flood prediction: overlay river level + elevation + rainfall data to find which villages will flood first\n• Wildlife corridors: overlay forest cover + elephant tracking data + village locations to plan safe routes\n• Disease tracking: overlay outbreak locations + water sources + population density to find patterns',
+            'GIS is no longer just for experts. Google Maps, which you may use every day, is a simplified GIS — it has layers for roads, satellite view, traffic, transit, and more. Free professional GIS software like QGIS lets students do the same analyses that government agencies use for disaster planning.',
+            '**Connection to the story:** Anusha’s grandfather made paper maps with a compass and notebook — one walk, one map. A GIS can combine hundreds of surveys into one layered, queryable system. The *skill* is the same (understanding land and location), but the *tool* is vastly more powerful.',
           ],
-          keyIdea: 'Tension is the most critical variable in weaving. Too loose = weak fabric with gaps. Too tight = distorted fabric that may tear. The sweet spot requires years of tactile skill.',
-          diagram: 'ThreadTensionDiagram',
-          checkYourself: 'Why would a fabric with uneven tension be weaker than one with uniform tension, even if they use the same thread?',
-          checkAnswer: 'Uneven tension means some threads bear more load than others. Under stress, the tightest threads break first, transferring their load to neighboring threads (which are now overloaded) and causing a chain reaction of failures. Uniform tension distributes stress evenly, so all threads share the load and the fabric resists much more force before failing.',
-        },
-        {
-          title: 'Traditional Patterns Encode Information',
-          paragraphs: [
-            'Dechen\'s cloud patterns are beautiful, but traditional weaving patterns are not just decorative \u2014 they carry information. Among the Naga tribes, Mizo, and Monpa people of Northeast India, textile patterns function as a visual language that encodes identity, status, and history.',
-            'A Naga warrior\'s shawl tells you which tribe he belongs to, what village he is from, whether he has taken an enemy\'s head in battle, and what his social rank is \u2014 all encoded in the pattern. Specific motifs have specific meanings: a diamond might represent a mountain, a zigzag a river, a star a clan symbol. The rules for who can wear which pattern are strict \u2014 wearing a pattern you have not earned is a serious social offense.',
-            'Here is the fascinating connection to modern technology: a weaving pattern is essentially a binary grid. At each crossing point, the weft is either on top (1) or underneath (0). A complex pattern is just a matrix of 1s and 0s \u2014 exactly like a digital image or a binary file. Charles Babbage and Ada Lovelace\'s early computers borrowed directly from the Jacquard loom, which used punched cards (holes = 1, no hole = 0) to automate complex patterns. Weaving is arguably the world\'s oldest form of programming.',
-          ],
-          keyIdea: 'Traditional textile patterns encode tribal identity, status, and history as visual information. Weaving patterns are binary grids \u2014 the world\'s oldest form of programming.',
-          diagram: 'PatternEncodingDiagram',
-          checkYourself: 'How is a weaving pattern similar to a digital image stored on a computer?',
-          checkAnswer: 'Both are grids of binary values. In a weaving pattern, each crossing is either warp-on-top (1) or weft-on-top (0). In a digital image, each pixel has a brightness value (often stored as binary). Both encode complex visual information as structured matrices of simple on/off decisions.',
+          keyIdea: 'GIS stores map data in transparent layers that can be combined to answer spatial questions — from flood prediction to wildlife conservation. Google Maps is a simplified GIS you already use.',
+          diagram: 'CoordinatePlaneDiagram',
         },
       ],
       vocabulary: [
-        ['Warp', 'The vertical threads on a loom, set up first under tension \u2014 they run the length of the fabric and must be strong'],
-        ['Weft', 'The horizontal threads woven through the warp, one row at a time \u2014 they create the pattern and width of the fabric'],
-        ['Shed', 'The V-shaped gap created when alternate warp threads are raised, allowing the shuttle to pass through'],
-        ['Plain weave', 'The simplest weave: over one thread, under one thread, alternating each row. The strongest and most stable pattern.'],
-        ['Backstrap loom', 'A simple loom where one end is tied to a post and the other wraps around the weaver\'s back \u2014 body weight controls tension'],
+        ['Latitude', 'How far north or south of the equator you are — measured in degrees from 0° (equator) to 90° (poles)'],
+        ['Longitude', 'How far east or west of the Prime Meridian (London) you are — measured in degrees from 0° to 180°'],
+        ['Map Projection', 'A method for flattening Earth’s curved surface onto a flat map — every projection distorts something'],
+        ['GIS', 'Geographic Information System — software that stores and analyses map data in layers'],
+        ['Scale', 'The ratio between a distance on a map and the real distance on the ground — e.g., 1 cm = 1 km'],
       ],
       trueFalse: [
-        { statement: 'Weft threads must be stronger than warp threads because they do more work.', isTrue: false, explanation: 'Warp threads must be stronger. They are stretched under tension on the loom and must endure thousands of back-and-forth passes of the shuttle without breaking. Weft threads are woven in gently and face much less stress during the weaving process.' },
-        { statement: 'Traditional Naga shawl patterns encode information about the wearer\'s tribe and status.', isTrue: true, explanation: 'Naga textile patterns function as a visual language. Specific motifs indicate tribal affiliation, village of origin, warrior achievements, and social rank. Wearing a pattern you have not earned is a serious social offense.' },
-        { statement: 'The Jacquard loom was one inspiration for early computer programming.', isTrue: true, explanation: 'The Jacquard loom (1804) used punched cards to automate complex weaving patterns \u2014 holes = thread up, no hole = thread down. Charles Babbage and Ada Lovelace adapted this binary logic for their Analytical Engine, making weaving a direct ancestor of computer programming.' },
+        { statement: 'The Mercator map projection shows all countries at their correct size.', isTrue: false, explanation: 'Mercator preserves shapes and angles but massively distorts area near the poles. Greenland appears as large as Africa, when in reality Africa is 14 times bigger.' },
+        { statement: 'Latitude and longitude can identify any point on Earth with just two numbers.', isTrue: true, explanation: 'Latitude gives the north-south position, longitude gives the east-west position. Together they form a unique "address" for every point on the planet.' },
+        { statement: 'GPS needs signals from at least 4 satellites to determine your position.', isTrue: true, explanation: 'Three satellites give your position on the surface, and a fourth is needed to correct for timing errors in your receiver’s clock. More satellites improve accuracy.' },
       ],
       facts: [
-        'Tawang, at 3,048 meters in Arunachal Pradesh, is home to the Monpa people, who weave intricate yak-wool textiles on backstrap looms. Their patterns include cloud motifs, dragons, and Buddhist symbols.',
-        'A single handwoven Naga shawl requires 20,000\u201340,000 individual shuttle passes. At one pass every 3 seconds, that is 17\u201333 hours of continuous weaving \u2014 spread over weeks of work.',
-        'The Jacquard loom, invented in 1804, used punched cards to control which warp threads were raised \u2014 the first programmable binary machine. Ada Lovelace saw the connection and wrote: "The Analytical Engine weaves algebraic patterns just as the Jacquard loom weaves flowers and leaves."',
+        'One degree of latitude is always about 111 km, but one degree of longitude varies — 111 km at the equator, shrinking to 0 km at the poles because the lines converge.',
+        'India’s Survey of India, founded in 1767, mapped the subcontinent using chains, compasses, and enormous baseline measurements — one of the greatest scientific projects of the 18th century.',
+        'The Great Trigonometrical Survey of India (1802–1871) was the project that first measured the height of Mount Everest — then called Peak XV.',
       ],
-      offlineActivity: 'Make a simple weave from paper strips. Cut 10 strips from two colors of paper (about 1 cm wide, 20 cm long). Tape 5 strips of one color vertically to a table (these are your warp). Weave the other 5 strips horizontally, going over-under-over-under. Push each row tight against the previous one. Compare a tight weave to a loose one \u2014 which is stronger when you pull on it? Design a simple pattern using the two colors.',
-      offlineActivityDiagram: 'ActivityWeaveCardDiagram',
-      codeTeaser: `import numpy as np
-import matplotlib.pyplot as plt
+      offlineActivity: 'Draw a map of your route from home to school without looking at any existing map. Include landmarks (trees, shops, turns). Then walk the route and check: what did you get right? What did you miss? This is exactly how early surveyors worked — walk, observe, draw, verify.',
+      offlineActivityDiagram: 'ActivityMapDrawDiagram',
+      codeTeaser: `# Plot your school on a coordinate grid
+latitude = 26.14   # Guwahati (degrees North)
+longitude = 91.74  # Guwahati (degrees East)
 
-# Generate a weaving pattern as a binary grid
-rows, cols = 16, 16
-pattern = np.zeros((rows, cols), dtype=int)
+# How far is Delhi?
+delhi_lat, delhi_lon = 28.61, 77.21
 
-# Plain weave: checkerboard
-for r in range(rows):
-    for c in range(cols):
-        pattern[r][c] = (r + c) % 2
+# Each degree of latitude ≈ 111 km
+dist_north = (delhi_lat - latitude) * 111  # km
+dist_east = (delhi_lon - longitude) * 111 * 0.89  # adjusted for latitude
+total = (dist_north**2 + dist_east**2)**0.5
 
-plt.imshow(pattern, cmap='RdYlBu', interpolation='nearest')
-plt.title("Plain Weave Pattern (binary grid)")
-plt.xlabel("Warp thread")
-plt.ylabel("Weft row")
-plt.colorbar(label="0=weft on top, 1=warp on top")
-plt.show()  # Try making a twill pattern!`,
+print(f"Your location: {latitude}°N, {longitude}°E")
+print(f"Delhi: {delhi_lat}°N, {delhi_lon}°E")
+print(f"Straight-line distance: {total:.0f} km")`,
       referenceLinks: [
-        { slug: 'materials-and-properties', reason: 'Explore material strength, elasticity, and how fiber alignment determines fabric properties' },
-        { slug: 'programming-fundamentals', reason: 'See how binary logic (0s and 1s) connects weaving patterns to computer programming' },
+        { slug: 'maps-and-navigation', reason: 'Full guide to latitude, longitude, map projections, GPS, and GIS' },
+        { slug: 'coordinate-geometry', reason: 'The mathematics behind coordinates — distance formula, midpoints, and plotting on a grid' },
       ],
       nextLessons: [
-        { slug: 'muga-silk-golden', reason: 'Muga silk weaving uses these same principles with a unique natural fiber \u2014 biology meets textile engineering' },
-        { slug: 'the-magic-japi-hat', reason: 'Explores bamboo weaving geometry \u2014 a different weaving tradition from the same region with mathematical patterns' },
-        { slug: 'the-girl-who-painted-rain', reason: 'Connects art and science in Meghalaya \u2014 another story about creating beauty from local materials' },
+        { slug: 'seven-sisters', reason: 'Geography of all seven NE Indian states — maps, biodiversity, and why each state is unique' },
+        { slug: 'postman-hills', reason: 'Route optimisation through Meghalaya’s hills — graph theory applied to real geography' },
+        { slug: 'silk-route', reason: 'Trade routes as geographic networks — how maps shaped commerce across centuries' },
       ],
       quiz: [
-        { question: 'What are the two thread systems in every woven fabric?', options: ['Top and bottom', 'Warp (vertical) and weft (horizontal)', 'Strong and weak', 'Cotton and silk'], answer: 1 },
-        { question: 'What is the "shed" in weaving?', options: ['A building where looms are kept', 'The gap created when alternate warp threads are lifted', 'The edge of the fabric', 'A type of thread'], answer: 1 },
-        { question: 'Why is tension control the most important weaving skill?', options: ['Higher tension always makes better fabric', 'Tension does not matter if the thread is strong', 'Too loose = gaps, too tight = distortion. Only the sweet spot produces strong, even fabric.', 'Tension only affects the color of the fabric'], answer: 2 },
-        { question: 'How are traditional weaving patterns similar to computer data?', options: ['Both use electricity', 'Both are made of binary grids (on/off, 1/0 at each crossing point)', 'Both require the internet', 'They are not similar at all'], answer: 1 },
-        { question: 'What did the Jacquard loom contribute to computing history?', options: ['It was the first electric computer', 'Its punched-card binary system inspired Babbage and Lovelace\'s early computer designs', 'It invented the internet', 'It had nothing to do with computing'], answer: 1 },
+        { question: 'What do latitude and longitude measure?', options: ['Height above sea level and depth below it', 'North-south position from the equator and east-west position from London', 'Distance between two cities', 'The size of a country'], answer: 1 },
+        { question: 'Why do all flat maps distort the Earth?', options: ['Map makers are not accurate enough', 'Earth is round and maps are flat — you cannot flatten a sphere without distortion', 'Paper shrinks when printed', 'Compasses interfere with map accuracy'], answer: 1 },
+        { question: 'What is GIS?', options: ['A type of satellite', 'A system that stores map data in layers that can be combined to answer spatial questions', 'A method of hand-drawing maps', 'A tool for measuring elevation only'], answer: 1 },
+        { question: 'What trade-off do map projections make?', options: ['They all preserve area but distort colour', 'Different projections distort different things — shape, area, distance, or direction', 'They only work for small areas', 'They require GPS to be accurate'], answer: 1 },
+        { question: 'What is a common example of GIS that most people already use?', options: ['A printed atlas', 'Google Maps', 'A magnetic compass', 'A globe'], answer: 1 },
       ],
     },
   },
@@ -7674,52 +7643,107 @@ And on quiet mornings, when the clouds sit below Tawang like a white ocean, you 
     level0: {
       concepts: [
         {
-          title: 'Orographic Precipitation: Mountains That Make Rain',
+          title: 'Warp and Weft: The Two Thread Systems',
           paragraphs: [
-            'When moist air flows toward a mountain range, it has nowhere to go but up. As the air rises, it expands (because atmospheric pressure decreases with altitude) and cools at a rate of about 6.5°C per kilometer — the environmental lapse rate. Cooler air holds less moisture, so the water vapor begins condensing into cloud droplets. If the air is forced high enough, the droplets grow large enough to fall as rain or snow. This entire process — mountain-forced lifting producing precipitation — is called orographic precipitation.',
-            'Tawang, perched at 3,048 meters in western Arunachal Pradesh, experiences this process dramatically. Moisture-laden winds from the Bay of Bengal travel northward across the Brahmaputra valley and slam into the eastern Himalayan wall. The air is forced upward thousands of meters in a relatively short horizontal distance. The result is extremely heavy rainfall on the windward (southern) slopes — some stations in Arunachal Pradesh receive over 5,000 mm of rain annually, among the highest on Earth.',
-            'The leeward (northern) side tells a different story. After losing most of its moisture on the windward ascent, the air descends the northern slopes and warms as it compresses — a process called adiabatic heating. This creates a "rain shadow" — a dry zone on the sheltered side of the mountain. The Tibetan Plateau, directly north of the Himalayan crest, is one of the driest places in Asia despite being surrounded by some of the wettest. Tawang sits right at the transition between extreme wet and extreme dry, making its climate particularly sensitive to shifts in wind patterns.',
+            'Every piece of woven fabric on Earth \u2014 from Dechen\'s shawls in Tawang to the shirt you are wearing right now \u2014 is made of exactly two sets of threads crossing each other at right angles. Understanding these two systems is the foundation of textile science.',
+            'The warp threads run vertically (lengthwise) and are set up first. They are stretched tight on the loom under tension, like guitar strings. Because they bear the weight of the entire fabric during weaving, warp threads must be strong \u2014 they endure thousands of back-and-forth passes of the shuttle without breaking. The weft threads run horizontally (widthwise) and are woven in second, one row at a time, passing over and under alternate warp threads.',
+            'The over-under pattern of how weft crosses warp determines everything about the fabric: its strength, its feel, its drape, and its pattern. The simplest arrangement \u2014 over one, under one, alternating each row \u2014 is called plain weave. It is the strongest and most stable weave structure, used in everything from canvas to bandages. Dechen\'s cloud-pattern shawls use variations of this basic over-under logic to create intricate designs.',
           ],
-          keyIdea: 'Mountains force moist air upward, cooling it until water condenses and falls as rain — the leeward side stays dry in a "rain shadow" effect.',
+          keyIdea: 'All woven fabric consists of warp (vertical, under tension) and weft (horizontal, woven in) threads. Their crossing pattern determines the fabric\'s strength and appearance.',
+          diagram: 'WarpWeftDiagram',
+          checkYourself: 'If you pull on a piece of woven fabric diagonally (at 45 degrees to both warp and weft), will it stretch more or less than pulling along the warp?',
+          checkAnswer: 'It will stretch MORE. Along the warp, the taut threads resist stretching directly. At 45 degrees, you are pulling the grid into a diamond shape \u2014 the threads rotate rather than stretch, and the fabric deforms easily. This diagonal stretch is called "bias" and tailors use it deliberately for stretchy garments.',
         },
         {
-          title: 'Cloud Forests: Ecosystems Made of Mist',
+          title: 'How a Loom Works: Shed, Shuttle, Beat',
           paragraphs: [
-            'Between about 1,500 and 3,500 meters elevation in tropical mountains, there exists a unique ecosystem called the cloud forest (or montane mossy forest). Here, the forest is literally inside a cloud for much of the day. Temperatures are cool (8-20°C), humidity is near 100%, and the trees are draped in thick layers of moss, lichen, ferns, and orchids — epiphytes that grow on other plants and extract moisture directly from the air.',
-            'Cloud forests receive water in two ways: conventional rainfall from above, and "horizontal precipitation" — fog droplets that deposit directly on leaf surfaces as mist blows through the canopy. Studies have shown that horizontal precipitation can contribute 5-60% of the total water input to a cloud forest, depending on the site. The trees themselves act as fog collectors: their leaves and the epiphyte mats intercept fog droplets, which coalesce, drip to the ground, and feed streams and springs. Without the forest, much of this fog water would simply blow past.',
-            'This fog-collecting function makes cloud forests critical for downstream water supply. The cloud forests of the eastern Himalayas (including those near Tawang) feed the tributaries that become the Brahmaputra — the lifeline of Assam. When cloud forests are cleared for agriculture or settlement, fog interception drops dramatically, springs dry up, and downstream river flows decrease, especially during the dry season. Protecting cloud forests is therefore not just an ecological issue but a water security issue for millions of people in the valleys below.',
+            'A loom looks complicated, but it really does only three things, repeated thousands of times: open a gap (shed), pass thread through it (shuttle), and push the new thread tight (beat). Every loom ever built \u2014 from a stick loom in a Tawang village to a computer-controlled factory loom \u2014 performs these same three steps.',
+            'Opening the shed: the loom lifts every other warp thread, creating a V-shaped gap (called the "shed") between the upper and lower threads. This is done by a heddle \u2014 a bar with loops that grab alternate warp threads and pull them up. Passing the shuttle: a shuttle carrying the weft thread is passed through the shed from one side to the other. This lays one row of weft across the entire width. Beating: a beater bar pushes the new weft row tightly against the previous rows, creating a dense, strong fabric.',
+            'Then the heddle switches \u2014 the threads that were up go down, and the threads that were down go up \u2014 and the whole cycle repeats. Each cycle adds one row. A skilled Tawang weaver using a backstrap loom (where her own body provides the tension) can complete about 5,000 cycles to produce one shawl. That is 5,000 repetitions of open-pass-beat, each one precise, each one building the pattern thread by thread.',
           ],
-          keyIdea: 'Cloud forests collect water from fog as well as rain — their trees act as natural fog harvesters, feeding springs and rivers for millions of people downstream.',
-          diagram: 'WaterCycleDiagram',
+          keyIdea: 'Every loom in the world performs the same three-step cycle: open a shed (gap), pass the shuttle (weft thread), beat the new row tight. Repeat 5,000 times for one shawl.',
+          diagram: 'LoomMechanicsDiagram',
+          checkYourself: 'In a backstrap loom, the weaver\'s body provides the warp tension. What happens to the fabric if the weaver leans forward?',
+          checkAnswer: 'Leaning forward reduces tension on the warp threads, making the shed smaller and the weave looser. Leaning back increases tension, making a tighter weave. The weaver\'s posture directly controls the fabric density \u2014 her body is the tensioning device.',
         },
         {
-          title: 'Atmospheric Moisture Transport: Rivers in the Sky',
+          title: 'Thread Tension and Fabric Strength',
           paragraphs: [
-            'The water that falls as rain in Tawang did not originate locally — it traveled thousands of kilometers through the atmosphere in structures called atmospheric rivers. These are narrow corridors of concentrated water vapor, typically 300-500 km wide and 2,000-3,000 km long, that transport moisture from tropical oceans to higher latitudes. The moisture feeding Tawang\'s rainfall originates primarily in the Bay of Bengal and the Arabian Sea.',
-            'Atmospheric rivers carry an astonishing amount of water. A single atmospheric river can transport water vapor at a rate equivalent to 7.5-15 times the average flow of the Mississippi River. When such a flow hits the Himalayas and is forced upward, the resulting precipitation can be catastrophic — this is the mechanism behind many of the extreme rainfall events and flooding that affect Northeast India during the monsoon season.',
-            'The physics of moisture transport involves the Clausius-Clapeyron relation, which states that the atmosphere\'s capacity to hold water vapor increases by about 7% for every 1°C of warming. This means that as global temperatures rise, atmospheric rivers are becoming wetter — they carry more moisture per event. Climate models project that extreme precipitation events in the Himalayan region will increase in both intensity and frequency, making understanding atmospheric moisture transport not just academic knowledge but essential for disaster preparedness in Tawang and across Arunachal Pradesh.',
+            'The most important skill in weaving is not speed or pattern-making \u2014 it is controlling tension. Tension determines whether the fabric is strong or weak, even or lumpy, beautiful or ruined. Getting it right is the difference between a master weaver and a beginner.',
+            'If the warp tension is too loose, the threads wander and the weft rows do not pack evenly. The result is a floppy, uneven fabric with gaps where water and wind pass through. If the tension is too tight, the warp threads are over-stressed and the fabric puckers \u2014 it buckles and distorts because the rigid threads cannot accommodate the weft rows smoothly. The fabric may even tear during weaving.',
+            'The sweet spot is firm but not rigid \u2014 tight enough that every thread sits in its correct position, loose enough that the weft can slide into place without distorting. Tawang weavers using backstrap looms adjust this tension continuously by shifting their body weight. They can feel the right tension through their back and hips, making adjustments of fractions of a millimeter without looking. This tactile skill takes years to develop and cannot be fully replicated by machines \u2014 it is one reason handwoven textiles from Tawang command premium prices.',
           ],
-          keyIdea: 'Atmospheric rivers transport vast corridors of water vapor from tropical oceans to mountains — a 1°C warming increases their moisture capacity by 7%.',
+          keyIdea: 'Tension is the most critical variable in weaving. Too loose = weak fabric with gaps. Too tight = distorted fabric that may tear. The sweet spot requires years of tactile skill.',
+          diagram: 'ThreadTensionDiagram',
+          checkYourself: 'Why would a fabric with uneven tension be weaker than one with uniform tension, even if they use the same thread?',
+          checkAnswer: 'Uneven tension means some threads bear more load than others. Under stress, the tightest threads break first, transferring their load to neighboring threads (which are now overloaded) and causing a chain reaction of failures. Uniform tension distributes stress evenly, so all threads share the load and the fabric resists much more force before failing.',
+        },
+        {
+          title: 'Traditional Patterns Encode Information',
+          paragraphs: [
+            'Dechen\'s cloud patterns are beautiful, but traditional weaving patterns are not just decorative \u2014 they carry information. Among the Naga tribes, Mizo, and Monpa people of Northeast India, textile patterns function as a visual language that encodes identity, status, and history.',
+            'A Naga warrior\'s shawl tells you which tribe he belongs to, what village he is from, whether he has taken an enemy\'s head in battle, and what his social rank is \u2014 all encoded in the pattern. Specific motifs have specific meanings: a diamond might represent a mountain, a zigzag a river, a star a clan symbol. The rules for who can wear which pattern are strict \u2014 wearing a pattern you have not earned is a serious social offense.',
+            'Here is the fascinating connection to modern technology: a weaving pattern is essentially a binary grid. At each crossing point, the weft is either on top (1) or underneath (0). A complex pattern is just a matrix of 1s and 0s \u2014 exactly like a digital image or a binary file. Charles Babbage and Ada Lovelace\'s early computers borrowed directly from the Jacquard loom, which used punched cards (holes = 1, no hole = 0) to automate complex patterns. Weaving is arguably the world\'s oldest form of programming.',
+          ],
+          keyIdea: 'Traditional textile patterns encode tribal identity, status, and history as visual information. Weaving patterns are binary grids \u2014 the world\'s oldest form of programming.',
+          diagram: 'PatternEncodingDiagram',
+          checkYourself: 'How is a weaving pattern similar to a digital image stored on a computer?',
+          checkAnswer: 'Both are grids of binary values. In a weaving pattern, each crossing is either warp-on-top (1) or weft-on-top (0). In a digital image, each pixel has a brightness value (often stored as binary). Both encode complex visual information as structured matrices of simple on/off decisions.',
         },
       ],
       vocabulary: [
-        ['Orographic Precipitation', 'Rainfall caused when moist air is forced upward by a mountain — the air cools as it rises, water vapor condenses, and rain or snow falls on the windward slope'],
-        ['Rain Shadow', 'A dry area on the leeward (sheltered) side of a mountain — after air loses its moisture on the windward ascent, it descends warm and dry on the other side'],
-        ['Lapse Rate', 'The rate at which air temperature decreases with altitude — approximately 6.5°C per kilometer in the atmosphere, which is why mountaintops are cold'],
-        ['Atmospheric River', 'A narrow corridor of concentrated water vapor in the atmosphere, 300-500 km wide and thousands of km long, that transports moisture from tropical oceans to higher latitudes'],
-        ['Epiphyte', 'A plant that grows on another plant and absorbs moisture directly from the air — orchids, ferns, and mosses in cloud forests are common examples'],
+        ['Warp', 'The vertical threads on a loom, set up first under tension \u2014 they run the length of the fabric and must be strong'],
+        ['Weft', 'The horizontal threads woven through the warp, one row at a time \u2014 they create the pattern and width of the fabric'],
+        ['Shed', 'The V-shaped gap created when alternate warp threads are raised, allowing the shuttle to pass through'],
+        ['Plain weave', 'The simplest weave: over one thread, under one thread, alternating each row. The strongest and most stable pattern.'],
+        ['Backstrap loom', 'A simple loom where one end is tied to a post and the other wraps around the weaver\'s back \u2014 body weight controls tension'],
       ],
       trueFalse: [
-        { statement: 'The leeward side of a mountain receives more rainfall than the windward side.', isTrue: false, explanation: 'The windward side receives far more rain because moist air is forced upward there, cools, and releases its moisture. By the time air descends the leeward side, it has lost most of its water and actually warms as it compresses — creating a dry "rain shadow."' },
-        { statement: 'Cloud forests collect water from fog as well as from conventional rainfall.', isTrue: true, explanation: 'Cloud forest trees and their epiphytes intercept fog droplets directly from mist blowing through the canopy. This "horizontal precipitation" can contribute 5-60% of the total water input — without the forest, this fog water would simply blow past.' },
-        { statement: 'A single atmospheric river can carry more water vapor than the Mississippi River carries as liquid water.', isTrue: true, explanation: 'A single atmospheric river transports water vapor at a rate equivalent to 7.5-15 times the average flow of the Mississippi River. When this moisture hits a mountain range and is forced upward, the resulting rainfall can be extreme.' },
+        { statement: 'Weft threads must be stronger than warp threads because they do more work.', isTrue: false, explanation: 'Warp threads must be stronger. They are stretched under tension on the loom and must endure thousands of back-and-forth passes of the shuttle without breaking. Weft threads are woven in gently and face much less stress during the weaving process.' },
+        { statement: 'Traditional Naga shawl patterns encode information about the wearer\'s tribe and status.', isTrue: true, explanation: 'Naga textile patterns function as a visual language. Specific motifs indicate tribal affiliation, village of origin, warrior achievements, and social rank. Wearing a pattern you have not earned is a serious social offense.' },
+        { statement: 'The Jacquard loom was one inspiration for early computer programming.', isTrue: true, explanation: 'The Jacquard loom (1804) used punched cards to automate complex weaving patterns \u2014 holes = thread up, no hole = thread down. Charles Babbage and Ada Lovelace adapted this binary logic for their Analytical Engine, making weaving a direct ancestor of computer programming.' },
       ],
       facts: [
-        'Tawang sits at 3,048 meters in western Arunachal Pradesh, right where moisture-laden Bay of Bengal winds slam into the eastern Himalayas — some nearby stations receive over 5,000 mm of rain per year, among the highest on Earth.',
-        'The Clausius-Clapeyron relation tells us the atmosphere can hold about 7% more water vapor for every 1°C of warming — meaning climate change is making atmospheric rivers wetter and extreme rainfall events more intense.',
-        'Cloud forests cover less than 2.5% of tropical forests worldwide but are critical for water supply — their fog-collecting trees feed springs and rivers that millions of downstream people depend on for drinking water.',
+        'Tawang, at 3,048 meters in Arunachal Pradesh, is home to the Monpa people, who weave intricate yak-wool textiles on backstrap looms. Their patterns include cloud motifs, dragons, and Buddhist symbols.',
+        'A single handwoven Naga shawl requires 20,000\u201340,000 individual shuttle passes. At one pass every 3 seconds, that is 17\u201333 hours of continuous weaving \u2014 spread over weeks of work.',
+        'The Jacquard loom, invented in 1804, used punched cards to control which warp threads were raised \u2014 the first programmable binary machine. Ada Lovelace saw the connection and wrote: "The Analytical Engine weaves algebraic patterns just as the Jacquard loom weaves flowers and leaves."',
       ],
-      offlineActivity: 'Hold a metal spoon in the steam rising from a kettle or pot of boiling water (be careful not to burn yourself — hold it above the steam, not in it). Watch droplets form on the cold spoon surface. This is condensation — the same process that creates clouds on mountain slopes. The warm, moist air rises, hits the cold surface, and its water vapor turns to liquid. Now breathe onto a cold window — you will see the same effect. Mountains do exactly this to moist air: they force it upward into colder altitudes where the vapor condenses into clouds and rain.',
+      offlineActivity: 'Make a simple weave from paper strips. Cut 10 strips from two colors of paper (about 1 cm wide, 20 cm long). Tape 5 strips of one color vertically to a table (these are your warp). Weave the other 5 strips horizontally, going over-under-over-under. Push each row tight against the previous one. Compare a tight weave to a loose one \u2014 which is stronger when you pull on it? Design a simple pattern using the two colors.',
+      offlineActivityDiagram: 'ActivityWeaveCardDiagram',
+      codeTeaser: `import numpy as np
+import matplotlib.pyplot as plt
+
+# Generate a weaving pattern as a binary grid
+rows, cols = 16, 16
+pattern = np.zeros((rows, cols), dtype=int)
+
+# Plain weave: checkerboard
+for r in range(rows):
+    for c in range(cols):
+        pattern[r][c] = (r + c) % 2
+
+plt.imshow(pattern, cmap='RdYlBu', interpolation='nearest')
+plt.title("Plain Weave Pattern (binary grid)")
+plt.xlabel("Warp thread")
+plt.ylabel("Weft row")
+plt.colorbar(label="0=weft on top, 1=warp on top")
+plt.show()  # Try making a twill pattern!`,
+      referenceLinks: [
+        { slug: 'materials-and-properties', reason: 'Explore material strength, elasticity, and how fiber alignment determines fabric properties' },
+        { slug: 'programming-fundamentals', reason: 'See how binary logic (0s and 1s) connects weaving patterns to computer programming' },
+      ],
+      nextLessons: [
+        { slug: 'muga-silk-golden', reason: 'Muga silk weaving uses these same principles with a unique natural fiber \u2014 biology meets textile engineering' },
+        { slug: 'the-magic-japi-hat', reason: 'Explores bamboo weaving geometry \u2014 a different weaving tradition from the same region with mathematical patterns' },
+        { slug: 'the-girl-who-painted-rain', reason: 'Connects art and science in Meghalaya \u2014 another story about creating beauty from local materials' },
+      ],
+      quiz: [
+        { question: 'What are the two thread systems in every woven fabric?', options: ['Top and bottom', 'Warp (vertical) and weft (horizontal)', 'Strong and weak', 'Cotton and silk'], answer: 1 },
+        { question: 'What is the "shed" in weaving?', options: ['A building where looms are kept', 'The gap created when alternate warp threads are lifted', 'The edge of the fabric', 'A type of thread'], answer: 1 },
+        { question: 'Why is tension control the most important weaving skill?', options: ['Higher tension always makes better fabric', 'Tension does not matter if the thread is strong', 'Too loose = gaps, too tight = distortion. Only the sweet spot produces strong, even fabric.', 'Tension only affects the color of the fabric'], answer: 2 },
+        { question: 'How are traditional weaving patterns similar to computer data?', options: ['Both use electricity', 'Both are made of binary grids (on/off, 1/0 at each crossing point)', 'Both require the internet', 'They are not similar at all'], answer: 1 },
+        { question: 'What did the Jacquard loom contribute to computing history?', options: ['It was the first electric computer', 'Its punched-card binary system inspired Babbage and Lovelace\'s early computer designs', 'It invented the internet', 'It had nothing to do with computing'], answer: 1 },
+      ],
     },
   },
   {
@@ -14290,6 +14314,7 @@ And from that Bihu onward, the dhol has carried the thunder’s voice. If you li
       project: {
         title: 'Visualize Vibration Patterns on a Drum',
         description: 'Demonstrate how a drum membrane vibrates in complex patterns and how changing tension changes the sound.',
+        outputDiagram: 'DholChladniDiagram',
         steps: [
           'Stretch a balloon or plastic wrap tightly over a bowl to create a simple drum',
           'Sprinkle fine salt or sand on the surface and tap the edge to see vibration patterns',
@@ -14306,60 +14331,65 @@ And from that Bihu onward, the dhol has carried the thunder’s voice. If you li
     },
     illustration: '/content/illustrations/dhol-drum-thunder.webp',
     track: 'school',
-    subjects: ['Biology'] as Subject[],
+    subjects: ['Physics' as Subject, 'Music & Arts' as Subject],
     toolSkills: ['Python' as Skill, 'NumPy' as Skill, 'Matplotlib' as Skill, 'Data Analysis' as Skill],
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'dhol-drum' as const,
     level0: {
       vocabulary: [
-        ['Vibration', 'A rapid back-and-forth movement — when a drum membrane vibrates, it pushes air molecules to create sound waves'],
-        ['Membrane', 'A thin, flexible sheet stretched over a frame — the drum head that vibrates when struck'],
-        ['Pitch', 'How high or low a sound is — determined by the frequency of vibration (faster vibration = higher pitch)'],
-        ['Tension', 'How tightly the drum head is stretched — higher tension means faster vibrations and higher pitch'],
-        ['Overtone', 'Higher frequencies that vibrate along with the main note, giving each instrument its unique sound character'],
+        ['Vibration mode', 'A specific pattern in which a drum membrane oscillates \u2014 the simplest has the whole surface moving together; higher modes divide it into zones'],
+        ['Nodal line', 'A line on a vibrating surface that stays perfectly still while regions on either side oscillate in opposite directions'],
+        ['Fundamental frequency', 'The lowest pitch a drum can produce \u2014 determined by diameter, tension, and mass per unit area'],
+        ['Overtone', 'A higher-frequency vibration sounding with the fundamental, giving each drum its unique character \u2014 drum overtones are non-harmonic'],
+        ['Resonance', 'When the drum body\u2019s air cavity vibrates at the same frequency as the membrane, amplifying the sound'],
       ],
       trueFalse: [
-        { statement: 'A drum produces a single pure frequency when struck.', isTrue: false, explanation: 'A drum membrane vibrates in many modes at once, producing a complex mix of frequencies. Unlike a guitar string, drum overtones are non-harmonic — they are not neat multiples of the fundamental — which is why drums sound more like a "boom" than a clear musical note.' },
-        { statement: 'Tightening a drum head raises its pitch.', isTrue: true, explanation: 'Higher tension makes the membrane vibrate faster. The fundamental frequency of a drum is proportional to the square root of the tension — so doubling the tension raises the pitch by about 41%, roughly a musical fifth.' },
-        { statement: 'Hitting the center and the edge of a drum produces the same sound.', isTrue: false, explanation: 'Striking the center emphasizes the fundamental mode (the whole membrane moving together), producing a deeper tone. Striking near the edge excites higher modes with complex patterns, producing a brighter, more textured sound. Expert players use this to get many sounds from one drum.' },
+        { statement: 'A drum produces a single pure frequency when struck.', isTrue: false, explanation: 'A drum vibrates in many modes at once. Unlike guitar strings, drum overtones are non-harmonic, producing a "boom" rather than a clear note.' },
+        { statement: 'Tightening a drum head raises its pitch.', isTrue: true, explanation: 'Higher tension = faster vibration. Frequency is proportional to sqrt(tension) \u2014 doubling tension raises pitch by ~41%.' },
+        { statement: 'Hitting the center and edge produces the same sound.', isTrue: false, explanation: 'Center excites the fundamental (deeper). Edge excites higher modes (brighter). Expert players use this for different sounds.' },
       ],
       facts: [
-        'Indian tabla makers apply a special paste called syahi to the drum head, which adds mass in a precise pattern that shifts the overtones into harmonic alignment — a 500-year-old acoustical engineering achievement that gives tabla their clear, pitched sound.',
-        'The dhol has two heads of different sizes: the larger bass head (dhol) and the smaller treble head (chati), each producing different timbres because diameter and thickness affect which vibration modes dominate.',
-        'Humidity affects drum pitch because natural animal-skin heads absorb moisture, increasing their mass and lowering the frequency — which is why drummers warm their drums before performing in damp weather.',
+        'Indian tabla makers apply syahi paste to shift overtones into harmonic alignment \u2014 a 500-year-old acoustical engineering achievement.',
+        'The dhol has two heads: larger bass head and smaller treble head, each producing different timbres.',
+        'Humidity lowers drum pitch because animal-skin heads absorb moisture, increasing mass.',
       ],
-      offlineActivity: 'Make a drum at home: stretch a piece of plastic wrap or a balloon tightly over the mouth of a bowl or tin can, securing it with a rubber band. Tap the center and listen to the pitch. Now tap near the edge — does it sound different? Try tightening the membrane by pulling it tighter and tapping again. Sprinkle a pinch of salt on top and tap — watch the salt jump and form patterns that show you the vibration modes!',
+      offlineActivity: 'Stretch plastic wrap over a bowl, secure with a rubber band. Sprinkle fine salt on top. Tap the center \u2014 salt jumps. Now tap near the edge \u2014 different pattern! The salt collects on nodal lines where the surface is still. Try tightening the wrap: pitch goes up!',
+      offlineActivityDiagram: 'ActivityDrumBuildDiagram',
+      codeTeaser: `# Drum pitch depends on diameter, tension, mass
+import numpy as np
+import matplotlib.pyplot as plt
+
+diameters = np.linspace(0.15, 0.60, 50)  # metres
+tension = 2000; sigma = 0.5  # N/m, kg/m^2
+freq = (0.766 / diameters) * np.sqrt(tension / sigma)
+
+plt.plot(diameters * 100, freq)
+plt.xlabel("Diameter (cm)")
+plt.ylabel("Frequency (Hz)")
+plt.title("Bigger drum = lower pitch")
+plt.show()`,
+      referenceLinks: [
+        { slug: 'waves-and-properties', reason: 'Wave physics \u2014 frequency, wavelength, standing waves' },
+        { slug: 'music-and-acoustics', reason: 'Harmonics, overtones, and why instruments sound different' },
+      ],
+      nextLessons: [
+        { slug: 'bamboo-flute-nagaland', reason: 'Standing waves in air columns \u2014 complements membrane vibrations' },
+        { slug: 'mountain-echoes', reason: 'What happens after the drumbeat leaves the drum and bounces' },
+        { slug: 'monastery-bells-tawang', reason: 'Bell vibrations \u2014 similar physics in 3D shells' },
+      ],
+      quiz: [
+        { question: 'Why do drums produce indefinite pitch (unlike guitars)?', options: ['Too loud to detect pitch', 'Overtones are non-harmonic', 'Only one frequency', 'Shell absorbs harmonics'], answer: 1 },
+        { question: 'What happens when salt is sprinkled on a vibrating drum?', options: ['Melts', 'Bounces off entirely', 'Collects on nodal lines', 'Spreads evenly'], answer: 2 },
+        { question: 'How do tabla makers achieve pitched drum sound?', options: ['Electronic amplifiers', 'Syahi paste shifts overtones to harmonic alignment', 'Guitar string tuning', 'Synthetic membranes only'], answer: 1 },
+        { question: 'Fundamental frequency depends on?', options: ['Diameter only', 'Membrane material only', 'Diameter, tension, and mass per area', 'Wood type in shell'], answer: 2 },
+        { question: 'Why is a dhol louder than a bare membrane?', options: ['Wood adds sound', 'Enclosed shell creates resonance', 'Players hit harder', 'Ropes vibrate too'], answer: 1 },
+      ],
       concepts: [
-        {
-          title: 'Membrane Vibration: How Drums Produce Sound',
-          paragraphs: [
-          'When you strike a drum, the membrane (head) vibrates in complex patterns. Unlike a vibrating string (which oscillates in one dimension), a drum membrane vibrates in **two dimensions**, producing a far richer set of vibration patterns called **modes**. The simplest mode (the fundamental) has the entire membrane moving up and down together. Higher modes divide the membrane into zones vibrating in opposite directions, separated by stationary lines called **nodal lines**.',
-          'The mathematics of drum membrane vibration was solved by the French physicist Jean-Baptiste Fourier and refined by others using **Bessel functions** — a special class of mathematical functions that describe circular wave patterns. Each vibration mode has a specific frequency, but unlike string harmonics (which are simple integer multiples of the fundamental), drum overtones are **non-harmonic** — they are not integer multiples. This is why drums produce sounds of indefinite pitch compared to the clear notes of string instruments.',
-          'The dhol\'s two heads (treble and bass) produce different timbres because they have different diameters, thicknesses, and tensions. Striking the center emphasizes the fundamental mode; striking near the edge excites higher modes with more complex nodal patterns. Expert dhol players exploit this by varying strike position to produce a rich vocabulary of sounds from a single instrument.',
-          ],
-          keyIdea: 'Drum membranes vibrate in 2D modes described by Bessel functions. Unlike strings, drum overtones are non-harmonic, producing sounds of indefinite pitch. Strike position controls which modes are excited.',
-          diagram: 'MusicalWavesDiagram',
-        },
-        {
-          title: 'Pitch and Tension: Tuning the Dhol',
-          paragraphs: [
-          'The fundamental frequency of a circular membrane is given by f = (0.766/D) × √(T/σ), where D is diameter, T is tension (force per unit length of edge), and σ is surface density (mass per unit area). This equation reveals the three ways to change a drum\'s pitch: change the diameter, change the tension, or change the membrane mass.',
-          'Dhol players tune their drums by adjusting **tension** — tightening the ropes or turnbuckles that press the membrane against the shell. Doubling the tension raises the pitch by a factor of √2 (about 41%), or roughly a musical fifth. Over-tightening risks tearing the membrane; under-tightening produces a dull, unfocused tone. The optimal tension balances pitch, volume, and membrane longevity.',
-          'Temperature and humidity affect pitch because they change the membrane\'s properties. Animal skin heads (traditionally used in dhols) absorb moisture, increasing surface density σ and lowering pitch. Heat dries the skin, increasing tension T and raising pitch. This is why drums go out of tune in changing weather and why performers keep drums warm before playing. Synthetic (Mylar) heads are far more stable but lack the complex overtone structure of natural skin.',
-          ],
-          keyIdea: 'Drum pitch depends on membrane diameter, tension, and mass per unit area. The relationship f ∝ √(T/σ)/D allows tuning by adjusting tension, but temperature and humidity continuously affect natural skin membranes.',
-        },
-        {
-          title: 'Standing Waves on a Drum Membrane',
-          paragraphs: [
-          'When a drum membrane vibrates, waves travel outward from the strike point, reflect off the fixed edge, and return. The incoming and reflected waves interfere, creating **standing waves** — patterns where certain points (nodes) remain stationary while others (antinodes) vibrate with maximum amplitude. The fixed edge is always a node (it cannot move); the vibration patterns within are determined by the membrane\'s size and shape.',
-          'A circular drum membrane supports two types of nodal patterns: **circular nodes** (concentric circles of zero motion) and **diametric nodes** (straight lines through the center). The fundamental mode (0,1) has no interior nodes — the entire surface moves together. Mode (1,1) has one diametric node — half the membrane moves up while the other half moves down. Mode (0,2) has one circular node — the center and edge move in opposite directions.',
-          'Physicists designate each mode as (m,n), where m counts diametric nodes and n counts circular nodes (including the fixed edge). The frequencies of these modes determine the drum\'s sound character. Indian tabla makers exploit this by loading the center of the membrane with a paste (*syahi*) that adds mass selectively, shifting certain mode frequencies to become harmonic (integer multiples of the fundamental). This is why tabla produce a clearer pitch than Western drums — a 500-year-old acoustical engineering achievement.',
-          ],
-          keyIdea: 'Standing waves on drum membranes create patterns of nodes and antinodes. Each mode (m,n) has a specific frequency. Indian tabla achieve pitched drum sound by adding mass paste that shifts overtones into harmonic alignment.',
-          diagram: 'WaveEquationDiagram',
-        },
+        { title: 'Membrane Vibration Modes', paragraphs: ['When you strike a drum, the membrane vibrates in complex 2D patterns. The simplest \u2014 the **fundamental** \u2014 has the entire surface moving together. Higher modes divide the membrane into zones moving in opposite directions, separated by **nodal lines** that stay still.', 'If you sprinkle salt on a vibrating drum, salt bounces away from vibrating areas and collects on nodal lines \u2014 making them visible. These are **Chladni patterns**, named after physicist Ernst Chladni (1780s).', 'Each mode is labeled (m,n): m = diametric nodes, n = circular nodes. Fundamental (0,1) has no interior nodes. Mode (1,1) has one diameter. Mode (0,2) has one circular node. Higher modes = higher pitch.'], keyIdea: 'Drum membranes vibrate in 2D modes with nodal lines where the surface is still. Salt collects on these lines, making Chladni patterns visible.', diagram: 'DholChladniDiagram', checkYourself: 'Striking dead center mainly excites which mode \u2014 (0,1) or (1,1)?', checkAnswer: '(0,1) fundamental. Center strikes push the whole surface uniformly, matching (0,1). Mode (1,1) needs opposite halves.' },
+        { title: 'How Drum Size Affects Pitch', paragraphs: ['Pitch depends on **diameter** (D), **tension** (T), and **surface density** (\u03C3). The formula: f = (0.766/D) x sqrt(T/\u03C3). Bigger drum = lower pitch. Tighter = higher. Heavier membrane = lower.', 'The dhol has two different-sized heads. The larger **bass head** produces deep "DHOOM" (low f from large D). The smaller **treble head** produces bright "tak" (high f from small D).', 'Players can bend pitch by pressing the membrane with their palm \u2014 effectively reducing D and increasing T simultaneously.'], keyIdea: 'f = (0.766/D) x sqrt(T/\u03C3): bigger = lower pitch, tighter = higher, heavier = lower. The dhol\u2019s two heads exploit this.', diagram: 'DholSizePitchDiagram', checkYourself: 'Doubling tension changes pitch by what factor?', checkAnswer: 'sqrt(2) \u2248 1.41 (about 41% higher \u2014 roughly a musical fifth).' },
+        { title: 'The Physics of a Drumstick Strike', paragraphs: ['A stick hitting a drum is an **impulse**: large force for a very short time. Force x time = change in membrane momentum. Harder strike = louder sound.', '**Contact area** matters. Narrow stick tip = high pressure = sharp attack exciting high-frequency modes. Open palm = low pressure = warm tone emphasizing the fundamental. Dhol players use stick for sharp patterns and hand for deep bass.', 'After the strike, the membrane vibrates freely, losing energy through air resistance and damping. Tighter membranes ring longer; loose heavy ones die quickly.'], keyIdea: 'A drumstick strike is an impulse transferring energy. Stick tip = sharp high modes; palm = warm fundamental. The membrane then decays through air resistance and damping.', diagram: 'DholStrikeDiagram', checkYourself: 'Why does putting your hand on a drum stop the sound?', checkAnswer: 'Your hand adds massive damping, absorbing kinetic energy and preventing oscillation. No vibration = no sound. Drummers use this (muting) to control sustain.' },
+        { title: 'Resonance and the Drum Body', paragraphs: ['A membrane over an open frame makes weak sound. Enclose it in a wooden shell and \u2014 boom. The shell creates **resonance**: the air cavity vibrates at matching frequencies, amplifying them.', 'At resonant frequencies, the air pushes back on the membrane in sync, reinforcing vibration = louder. Non-matching frequencies get weaker. The shell is a **frequency filter**.', 'The story says the dhol got "thunder." Physically, the thunder IS resonance \u2014 the shell turns a soft "thup" into "DHOOM." Different shell shapes produce different resonance patterns.'], keyIdea: 'The drum shell creates resonance: an enclosed air cavity amplifies matching frequencies. This is why a dhol booms while a bare membrane whispers.', diagram: 'DholResonanceDiagram', checkYourself: 'Would a larger shell amplify lower or higher frequencies?', checkAnswer: 'Lower. Larger air cavity = lower natural frequencies, like a longer organ pipe producing a deeper note.' },
       ],
     },
   },
@@ -17277,6 +17307,7 @@ To this day, if you visit the Naga Hills and call out across a valley, the mount
     stem: { title: 'Sound Reflection', description: 'Sound reflection and wave physics.', icon: Music, color: 'from-purple-400 to-indigo-500', skills: ['Understand sound reflection, absorption, and the conditions for hearing an echo', 'Calculate echo return time from distance and speed of sound', 'Analyze how surface material and shape affect sound reflection quality', 'Model reverberation time in enclosed and open spaces'], project: {
         title: 'Measure the Speed of Sound Using Echoes',
         description: 'Use a large wall or building and a stopwatch to measure echo return time and calculate the speed of sound.',
+        outputDiagram: 'EchoSpeedOutputDiagram',
         steps: [
           'Find a large flat wall with open space in front (at least 50 meters of clear distance)',
           'Stand at a measured distance from the wall and clap sharply, timing the echo return',
@@ -17531,6 +17562,7 @@ Among the people of Assam, they say that riddles are not puzzles to be solved bu
     stem: { title: 'Fluid Mechanics', description: 'Fluid mechanics and river transport.', icon: Rocket, color: 'from-cyan-400 to-blue-500', skills: ['Understand fluid dynamics: pressure, flow velocity, and Bernoulli\'s principle', 'Analyze how hull shape and propulsion method affect boat speed and fuel efficiency', 'Model river current effects on ferry crossing angle and time', 'Calculate the optimal crossing angle to minimize travel time in a current'], project: {
         title: 'Solve the River Crossing Problem',
         description: 'Calculate the optimal angle for a ferry to cross a river with a current, minimizing travel time or distance downstream.',
+        outputDiagram: 'FerryCrossingOutputDiagram',
         steps: [
           'Set up the problem: a ferry crosses a 200m wide river flowing at 3 m/s, ferry speed 5 m/s',
           'Calculate crossing time and downstream drift if the ferry points straight across',
