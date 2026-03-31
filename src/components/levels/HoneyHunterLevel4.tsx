@@ -6,6 +6,7 @@ import BeePathOptimizationDiagram from '../diagrams/BeePathOptimizationDiagram';
 import BeeDiseaseDetectionDiagram from '../diagrams/BeeDiseaseDetectionDiagram';
 import BeePollinationNetworkDiagram from '../diagrams/BeePollinationNetworkDiagram';
 import BeeConservationPlanDiagram from '../diagrams/BeeConservationPlanDiagram';
+import BeeDataDashboardDiagram from '../diagrams/BeeDataDashboardDiagram';
 
 export default function HoneyHunterLevel4() {
   const pyodideRef = useRef<any>(null);
@@ -448,6 +449,91 @@ print("\n[Full visualization in playground]")`,
       challenge: 'Run the dashboard on a degraded network (remove 30% of interactions randomly to simulate habitat loss). Compare the health scores. How many wildflower strips would you need to add to restore the original health score?',
       successHint: 'You have built a complete, end-to-end Pollination Network Analyzer. From bipartite network construction through keystone identification, CCD modeling, resilience engineering, and management recommendations — this is a publication-quality tool that could serve real conservation and agriculture.',
     },
+    {
+      title: 'Capstone Part 6 — Complete Foraging Dashboard',
+      concept: `The final synthesis combines every piece into one unified foraging dashboard. You have built:
+
+1. **Flower patch placement** (random coordinates on the landscape)
+2. **Scout bee discovery** (waggle dance encoding of patch locations)
+3. **Follower interpretation** (decoding dances with realistic noise)
+4. **Nectar collection tracking** (cumulative yield over time)
+5. **Efficiency comparison** (random vs waggle-dance-guided foraging)
+
+Now you bring them together into a **single four-panel visualization**:
+- **Top-left**: landscape map showing flower patches, hive, and bee flight paths
+- **Top-right**: nectar collection over time (both strategies overlaid)
+- **Bottom-left**: foraging efficiency bar chart (random vs guided, with error bars from multiple runs)
+- **Bottom-right**: cumulative path length comparison (energy cost of each strategy)
+
+This is how real dashboards work in precision apiculture: multiple data streams displayed simultaneously so a beekeeper can make decisions at a glance. The dashboard answers: "Are my bees foraging efficiently? Which patches are underexploited? Is the waggle dance communication working well?"`,
+      analogy: 'A foraging dashboard is like an air traffic control screen. The controller sees the map (where planes are), the schedule (arrivals over time), the fuel status (efficiency), and the path history (distance traveled). No single panel tells the full story — the controller needs all four to make safe decisions. Your dashboard gives the beekeeper the same situational awareness over foraging operations.',
+      storyConnection: 'The honey hunter reads the landscape the way this dashboard reads data: watching where bees fly, estimating which patches yield the most nectar, deciding when to harvest. The dashboard is a digital version of the hunter\'s lifetime of observation — compressed into a single screen that any beekeeper can use on day one.',
+      checkQuestion: 'Your dashboard shows that guided foraging collects 40% more nectar but travels 20% farther than random foraging. Is guided foraging more efficient?',
+      checkAnswer: 'Yes, but you need to define efficiency carefully. Nectar per trip: guided wins (more nectar per visit because bees target rich patches). Nectar per meter traveled: guided collects 40% more nectar for only 20% more distance, so nectar-per-meter is still ~17% higher. Energy efficiency (nectar minus flight cost): depends on the energy cost of flying, but guided still wins because the extra nectar far outweighs the extra flight cost. The dashboard should display all three metrics so the beekeeper can choose the right optimization target.',
+      codeIntro: 'Build a four-panel foraging dashboard that combines the landscape map, nectar collection graph, efficiency comparison, and path-length analysis into a single unified visualization.',
+      code: `import numpy as np
+
+np.random.seed(42)
+
+# --- Landscape setup ---
+n_patches = 8
+patch_x = np.random.uniform(0, 100, n_patches)
+patch_y = np.random.uniform(0, 100, n_patches)
+patch_nectar = np.random.uniform(5, 30, n_patches)
+hive_x, hive_y = 50.0, 50.0
+
+# --- Simulate foraging: random vs waggle-guided ---
+n_bees = 20
+n_steps = 50
+n_runs = 10
+
+def forage(guided=False, noise_std=5.0):
+    nectar_over_time = np.zeros(n_steps)
+    total_dist = 0.0
+    paths_x, paths_y = [], []
+    for step in range(n_steps):
+        if guided:
+            # Pick richest patch with noisy direction
+            target = np.argmax(patch_nectar)
+            tx = patch_x[target] + np.random.normal(0, noise_std)
+            ty = patch_y[target] + np.random.normal(0, noise_std)
+        else:
+            tx = np.random.uniform(0, 100)
+            ty = np.random.uniform(0, 100)
+        dist_to_target = np.sqrt((tx - hive_x)**2 + (ty - hive_y)**2)
+        total_dist += dist_to_target * 2
+        # Nectar collected = nearby patch yield (if within 10 units)
+        for j in range(n_patches):
+            d = np.sqrt((tx - patch_x[j])**2 + (ty - patch_y[j])**2)
+            if d < 10:
+                nectar_over_time[step] += patch_nectar[j] * (1 - d/10)
+        paths_x.append(tx)
+        paths_y.append(ty)
+    return np.cumsum(nectar_over_time), total_dist, paths_x, paths_y
+
+# Multiple runs for error bars
+random_totals, guided_totals = [], []
+random_dists, guided_dists = [], []
+for _ in range(n_runs):
+    rn, rd, _, _ = forage(guided=False)
+    gn, gd, _, _ = forage(guided=True)
+    random_totals.append(rn[-1])
+    guided_totals.append(gn[-1])
+    random_dists.append(rd)
+    guided_dists.append(gd)
+
+# Single run for path visualization
+r_nectar, r_dist, r_px, r_py = forage(guided=False)
+g_nectar, g_dist, g_px, g_py = forage(guided=True)
+
+print(f"Random  — nectar: {np.mean(random_totals):.0f} +/- {np.std(random_totals):.0f}")
+print(f"Guided  — nectar: {np.mean(guided_totals):.0f} +/- {np.std(guided_totals):.0f}")
+print(f"Guided advantage: {np.mean(guided_totals)/np.mean(random_totals):.1%}")
+
+print("\\n[Full visualization in playground]")`,
+      challenge: 'Add a fifth panel that shows a heatmap of patch visit frequency across all runs. Which patches are over-visited by guided bees and which are neglected? Propose a multi-target waggle dance strategy that balances exploitation of rich patches with exploration of undervisited ones.',
+      successHint: 'Your four-panel foraging dashboard is a complete decision-support tool. Real precision apiculture systems use similar dashboards — combining GPS-tracked flight data, nectar flow sensors, and hive weight data — to optimize colony placement and foraging efficiency across landscapes.',
+    },
   ];
 
   return (
@@ -473,7 +559,7 @@ print("\n[Full visualization in playground]")`,
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
-            diagram={[BeeMonitoringDiagram, BeePathOptimizationDiagram, BeeDiseaseDetectionDiagram, BeePollinationNetworkDiagram, BeeConservationPlanDiagram][i] ? createElement([BeeMonitoringDiagram, BeePathOptimizationDiagram, BeeDiseaseDetectionDiagram, BeePollinationNetworkDiagram, BeeConservationPlanDiagram][i]) : undefined}
+            diagram={[BeeMonitoringDiagram, BeePathOptimizationDiagram, BeeDiseaseDetectionDiagram, BeePollinationNetworkDiagram, BeeConservationPlanDiagram, BeeDataDashboardDiagram][i] ? createElement([BeeMonitoringDiagram, BeePathOptimizationDiagram, BeeDiseaseDetectionDiagram, BeePollinationNetworkDiagram, BeeConservationPlanDiagram, BeeDataDashboardDiagram][i]) : undefined}
             pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
         ))}
       </div>
