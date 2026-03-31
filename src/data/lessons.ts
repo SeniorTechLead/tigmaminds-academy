@@ -17292,54 +17292,54 @@ To this day, if you visit the Naga Hills and call out across a valley, the mount
     illustration: '/content/illustrations/mountain-echoes.webp', track: 'school', subjects: ['Physics' as Subject], estimatedHours: 12, playground: 'mountain-echoes' as const,
     level0: {
       vocabulary: [
-        ['Observation', 'Noticing and recording something carefully'],
-        ['Pattern', 'A repeated arrangement in nature or data'],
-        ['Variable', 'Something that can change or be measured'],
-        ['Evidence', 'Data supporting or disproving a claim'],
-        ['Model', 'A simplified version of something complex'],
+        ['Echo', 'A distinct repetition of a sound caused by reflection off a surface far enough away (>=17 m) that the returning sound arrives after the original has stopped'],
+        ['Reverberation', 'Multiple overlapping sound reflections in an enclosed space that blend together, making sound persist after the source stops'],
+        ['Speed of sound', 'How fast sound travels through a medium \u2014 approximately 343 m/s in air at 20\u00B0C, about 1,480 m/s in water, and about 5,960 m/s in steel'],
+        ['Absorption', 'When a surface converts sound energy into heat instead of reflecting it \u2014 soft materials absorb sound; hard materials reflect it'],
+        ['Sonar', 'Sound Navigation And Ranging \u2014 technology that measures distance by timing echoes, used in submarines, fishing boats, and medical ultrasound'],
       ],
       trueFalse: [
-        { statement: 'Science only happens in laboratories.', isTrue: false, explanation: 'Science happens everywhere — forests, kitchens, rivers, playgrounds.' },
-        { statement: 'Making mistakes helps you learn.', isTrue: true, explanation: 'Errors lead to discoveries. Penicillin was found from a contaminated experiment.' },
-        { statement: 'You need expensive equipment for science.', isTrue: false, explanation: 'Curiosity and observation are the most important scientific tools.' },
+        { statement: 'You need to be at least 17 metres from a surface to hear a distinct echo.', isTrue: true, explanation: 'The human ear needs at least 100 ms delay. At 343 m/s, sound needs 34 m round trip, so the surface must be at least 17 m away.' },
+        { statement: 'Sound travels faster on a cold day than on a warm day.', isTrue: false, explanation: 'Sound speed in air increases with temperature: v = 331 + 0.6T (m/s). Warmer air molecules move faster.' },
+        { statement: 'Echoes only happen in mountains and canyons.', isTrue: false, explanation: 'Any hard, flat surface at sufficient distance produces echoes \u2014 buildings, walls, cliffs, even large trucks.' },
       ],
       facts: [
-        'NE India is one of 36 global biodiversity hotspots.',
-        'The scientific method has been used for over 1,000 years.',
-        'Teaching someone else is the best way to check understanding.',
+        'Bats emit up to 200 ultrasonic calls per second and detect objects as thin as a human hair from the echoes.',
+        'Concert hall architects aim for 1.5\u20132 s reverberation for orchestral music but only 0.5\u20131 s for speech.',
+        'Sounds carry farther at night because cool ground air bends sound waves downward toward listeners.',
       ],
-      offlineActivity: 'Keep a nature journal for one week. Each day, draw and describe one observation. At the end, research your most interesting one.',
-    
+      offlineActivity: 'Find a large flat wall with at least 50 metres of open space. Clap sharply and sync with the echo: clap-echo-clap-echo. Time 20 cycles, divide by 20, then calculate: speed = (2 x distance) / time. How close to 343 m/s did you get?',
+      offlineActivityDiagram: 'ActivityEchoTimeDiagram',
+      codeTeaser: `# Calculate echo distance from timing
+speed_of_sound = 343  # m/s at 20C
+echo_times = [0.31, 0.295, 0.288, 0.30, 0.292]
+distances = [(speed_of_sound * t) / 2 for t in echo_times]
+avg_dist = sum(distances) / len(distances)
+print(f"Average distance: {avg_dist:.1f} m")
+speeds = [2 * 50 / t for t in echo_times]
+avg_speed = sum(speeds) / len(speeds)
+print(f"Measured speed: {avg_speed:.0f} m/s (vs 343)")`,
+      referenceLinks: [
+        { slug: 'waves-and-properties', reason: 'Deep dive into wave physics \u2014 frequency, wavelength, speed' },
+        { slug: 'sonar-echolocation', reason: 'How echoes power sonar, ultrasound, and biological echolocation' },
+      ],
+      nextLessons: [
+        { slug: 'dhol-drum', reason: 'How sound is produced by vibrating membranes' },
+        { slug: 'bamboo-flute-nagaland', reason: 'Standing waves in tubes \u2014 sound reflection inside an instrument' },
+        { slug: 'river-dolphins-secret', reason: 'Echolocation in action \u2014 dolphins use echoes to navigate' },
+      ],
+      quiz: [
+        { question: 'What minimum distance is needed for a distinct echo?', options: ['About 5 m', 'About 17 m', 'About 100 m', 'About 1 km'], answer: 1 },
+        { question: 'How do you calculate distance from an echo?', options: ['d = speed x time', 'd = speed / time', 'd = (speed x time) / 2', 'd = 2 x speed x time'], answer: 2 },
+        { question: 'Why do sounds carry farther at night?', options: ['Less noise', 'Cool ground air bends sound downward', 'Sound is stronger at night', 'Moon amplifies sound'], answer: 1 },
+        { question: 'Echo vs reverberation?', options: ['Echo is louder', 'Echo is single distinct reflection; reverb is many overlapping', 'Reverb only outdoors', 'No difference'], answer: 1 },
+        { question: 'Speed of sound in air at 20\u00B0C?', options: ['~100 m/s', '~343 m/s', '~1,480 m/s', '~300,000 km/s'], answer: 1 },
+      ],
       concepts: [
-        {
-          title: "Sound Reflection — How Echoes Form",
-          paragraphs: [
-            "An **echo** is a sound wave that has bounced off a surface and returned to the listener. Sound travels through air as a **longitudinal pressure wave** — alternating regions of compressed and rarefied air molecules. When this wave hits a large, hard surface (a cliff, a building wall, a canyon face), the surface is too rigid to absorb the energy, so the wave reflects back, just as light reflects off a mirror.",
-            "For a distinct echo to be heard, the reflecting surface must be far enough away that the reflected sound arrives after the original sound has stopped. The human auditory system needs a delay of at least **50–100 milliseconds** to perceive the reflection as a separate sound rather than a continuation of the original. Since sound travels at about 343 m/s in air at 20°C, a round-trip delay of 100 ms requires the surface to be at least 17 metres away (sound travels 34 metres total, there and back).",
-            "Mountain valleys create spectacular echoes because the canyon walls are large (reflecting broad-spectrum sound efficiently), hard (rock reflects much better than soil or vegetation), and distant (creating long, clear delays). Some valleys produce **multiple echoes** as sound bounces between parallel cliff faces, each reflection slightly quieter than the last as energy is lost to absorption and scattering.",
-          ],
-          keyIdea: "An echo forms when sound reflects off a hard surface far enough away (at least 17 metres) for the reflected wave to arrive as a distinct, separate sound after the original.",
-          diagram: 'TransverseLongitudinalDiagram',
-        },
-        {
-          title: "The Speed of Sound — What Controls It",
-          paragraphs: [
-            "Sound speed depends on the **medium** it travels through and the medium's **temperature**. In air at 20°C, sound travels at approximately **343 m/s** (about 1,235 km/h). In water, it is roughly 1,480 m/s — over four times faster. In steel, about 5,960 m/s. The pattern: sound travels faster in denser, more elastic media because molecules are closer together and transmit the pressure wave more efficiently.",
-            "In air specifically, sound speed depends primarily on **temperature** because temperature determines how fast air molecules move. The formula is approximately v = 331 + 0.6T (m/s), where T is temperature in Celsius. At 0°C, sound travels at 331 m/s; at 30°C, at 349 m/s. Humidity also has a small effect: moist air is slightly less dense than dry air (water molecules are lighter than nitrogen and oxygen), so sound travels slightly faster in humid conditions.",
-            "Temperature gradients in the atmosphere can **bend** (refract) sound waves. On a warm day, air near the ground is hotter (faster sound speed) and air above is cooler (slower). Sound waves curve upward, away from listeners — making distant sounds harder to hear. At night, the ground cools and the gradient reverses, bending sound downward — which is why you can hear trains, church bells, and traffic from much farther away on still nights. Mountain valleys, with their complex temperature layers, create fascinating acoustic effects.",
-          ],
-          keyIdea: "Sound speed in air is roughly 343 m/s at 20°C and increases with temperature — temperature gradients bend sound waves, which is why sounds carry farther at night than during the day.",
-          diagram: 'MusicalWavesDiagram',
-        },
-        {
-          title: "Echo Applications — From Sonar to Ultrasound",
-          paragraphs: [
-            "Humans have turned the echo principle into powerful technologies. **Sonar** (Sound Navigation And Ranging) works by emitting a sound pulse, measuring the time until the echo returns, and calculating distance: distance = (speed of sound x time) / 2. Submarines, fishing boats, and marine biologists all use sonar. A fishing sonar can detect individual fish by the echoes from their swim bladders.",
-            "**Medical ultrasound** uses the same principle at much higher frequencies (2–18 MHz, far above the human hearing range of 20 Hz – 20 kHz). A transducer sends sound pulses into the body; different tissues (muscle, bone, fluid, organs) reflect different amounts of sound energy. By mapping thousands of echoes, a computer constructs an image. Ultrasound is safe (no ionizing radiation), portable, and inexpensive — making it the most widely used medical imaging technology in the world.",
-            "**Echolocation** in bats and dolphins is the biological version: the animal emits calls (up to 200 calls per second in some bats), listens for echoes, and constructs a \"sound image\" of its surroundings. Bats can detect objects as thin as a human hair using echolocation. The processing required to extract 3D spatial information from echo timing, frequency shifts, and intensity differences in real time is so complex that it remains a challenge for artificial intelligence to replicate. Nature invented sonar roughly 50 million years before humans did.",
-          ],
-          keyIdea: "Echoes are the basis of sonar, medical ultrasound, and biological echolocation — all work by emitting sound, timing the reflection, and calculating distance or building an image from the returning echoes.",
-        },
+        { title: 'How Echoes Form', paragraphs: ['An echo is your own voice coming back. When you shout toward a cliff, the sound wave travels at about 343 m/s. When it hits hard rock, the wave **reflects** back, just as light reflects off a mirror.', 'Your brain needs at least **100 milliseconds** of silence between original and reflection to hear them as separate. At 343 m/s, that requires at least **17 metres** to the surface (34 m round trip).', 'Mountain valleys create spectacular echoes because cliff walls are **large** (reflecting broad-spectrum sound), **hard** (rock reflects better than soil), and **distant** (creating long delays). Some valleys produce multiple echoes between parallel faces.'], keyIdea: 'An echo forms when sound reflects off a hard surface at least 17 m away, creating a 100+ ms delay. Mountain valleys produce multiple echoes from parallel rock faces.', diagram: 'ValleyAcousticsDiagram', checkYourself: 'You shout and hear the echo 0.8 s later. How far is the cliff?', checkAnswer: 'Distance = (343 x 0.8) / 2 = 137 m. Divide by 2 because sound travels there AND back.' },
+        { title: 'The Speed of Sound', paragraphs: ['Sound speed depends on the medium and **temperature**. In air at 20\u00B0C: ~343 m/s. In water: ~1,480 m/s. In steel: ~5,960 m/s. Denser, more elastic media transmit sound faster.', 'In air: **v = 331 + 0.6T** (m/s). At 0\u00B0C: 331 m/s. At 30\u00B0C: 349 m/s. Warmer molecules transmit pressure waves faster.', 'Temperature differences **bend** sound. Hot ground air on warm days bends sound upward (away from listeners). Cool ground air at night bends sound downward \u2014 this is why distant sounds carry farther at night.'], keyIdea: 'Sound travels at ~343 m/s at 20\u00B0C, increasing 0.6 m/s per degree. Temperature gradients bend sound: upward on hot days, downward on cool nights.', diagram: 'EchoDistanceDiagram', checkYourself: 'At 0\u00B0C, you hear an echo 1.0 s later. How far is the surface?', checkAnswer: 'Distance = (331 x 1.0) / 2 = 165.5 m. Temperature matters!' },
+        { title: 'Echo vs Reverberation', paragraphs: ['An **echo** is a single, distinct reflection with a clear silence gap. You need the surface >=17 m away for the 100+ ms delay.', '**Reverberation** is many rapid reflections blending together. In a bathroom or stairwell, reflections arrive < 100 ms apart and your brain merges them. The decay time (RT60) is how long reverb takes to fade 60 dB.', 'Acoustic designers control RT60: 1.5\u20132 s for orchestral halls (rich sound), 0.5\u20131 s for lecture halls (clear speech). Hard surfaces increase reflection; soft surfaces (carpet, curtains) increase absorption.'], keyIdea: 'Echo = single distinct reflection (>=100 ms delay). Reverberation = many overlapping reflections. Designers control reverb with hard vs soft surfaces.', diagram: 'ReverberationDiagram', checkYourself: 'Why does singing in the shower sound better than in a carpeted room?', checkAnswer: 'Hard tile reflects sound efficiently, creating rich reverb. Carpet absorbs sound, making your voice sound dry.' },
+        { title: 'Echo Technology: Sonar and Ultrasound', paragraphs: ['**Sonar** emits a pulse, times the echo, calculates distance: d = (speed x time) / 2. Used by submarines, fishing boats, and marine biologists.', '**Medical ultrasound** uses 2\u201318 MHz frequencies. Different tissues reflect differently. A computer maps thousands of echoes into an image \u2014 this is how doctors see babies before birth.', '**Biological echolocation**: bats emit 200 calls/second; dolphins click at 20\u2013130 kHz. The processing to extract 3D spatial info from echoes in real time remains a challenge for AI. Nature invented sonar ~50 million years before humans.'], keyIdea: 'Sonar, ultrasound, and echolocation all use the echo principle: emit sound, time the reflection, calculate distance.', diagram: 'EcholocationDiagram', checkYourself: 'Submarine sonar echo returns after 4 s. Sound speed in water: 1,480 m/s. Distance?', checkAnswer: '(1,480 x 4) / 2 = 2,960 m (~3 km).' },
       ],
     },
   },
@@ -17546,54 +17546,57 @@ Among the people of Assam, they say that riddles are not puzzles to be solved bu
     illustration: '/content/illustrations/ferrymans-riddle.webp', track: 'school', subjects: ['Physics' as Subject, 'Engineering' as Subject], estimatedHours: 12, playground: 'ferrymans-riddle' as const,
     level0: {
       vocabulary: [
-        ['Observation', 'Noticing and recording something carefully'],
-        ['Pattern', 'A repeated arrangement in nature or data'],
-        ['Variable', 'Something that can change or be measured'],
-        ['Evidence', 'Data supporting or disproving a claim'],
-        ['Model', 'A simplified version of something complex'],
+        ['Laminar flow', 'Smooth, orderly fluid motion where layers slide without mixing \u2014 occurs when Reynolds number < 2,000'],
+        ['Turbulent flow', 'Chaotic, swirling motion with eddies and mixing \u2014 occurs when Reynolds number > 4,000'],
+        ['Reynolds number', 'Re = (density x velocity x size) / viscosity \u2014 predicts laminar vs turbulent flow'],
+        ['Vector addition', 'Combining two velocities tip-to-tail \u2014 the diagonal is the actual path of a ferry in a current'],
+        ['Eddy', 'A circular current behind an obstacle or at a river bend \u2014 creates unpredictable local currents'],
       ],
       trueFalse: [
-        { statement: 'Science only happens in laboratories.', isTrue: false, explanation: 'Science happens everywhere — forests, kitchens, rivers, playgrounds.' },
-        { statement: 'Making mistakes helps you learn.', isTrue: true, explanation: 'Errors lead to discoveries. Penicillin was found from a contaminated experiment.' },
-        { statement: 'You need expensive equipment for science.', isTrue: false, explanation: 'Curiosity and observation are the most important scientific tools.' },
+        { statement: 'A ferry pointing straight across a river with a current arrives directly opposite.', isTrue: false, explanation: 'The current pushes it downstream. The actual path is the vector sum. To arrive straight across, angle upstream.' },
+        { statement: 'The Brahmaputra at Nimatighat has laminar flow.', isTrue: false, explanation: 'Its Reynolds number is ~10 million \u2014 wildly turbulent, full of eddies and shifting currents.' },
+        { statement: 'Faster-flowing water has lower pressure (Bernoulli).', isTrue: true, explanation: 'Where fluid speeds up, pressure drops. This is why boats get sucked toward bridge pillars.' },
       ],
       facts: [
-        'NE India is one of 36 global biodiversity hotspots.',
-        'The scientific method has been used for over 1,000 years.',
-        'Teaching someone else is the best way to check understanding.',
+        'The Brahmaputra\u2019s Reynolds number is ~10,000,000+ \u2014 about 5,000x above the turbulence threshold.',
+        'Nimatighat ferrymen adjust crossing angle continuously as current varies across the river width.',
+        'The Brahmaputra\u2019s sandbars shift every monsoon, creating new eddies that ferrymen must relearn annually.',
       ],
-      offlineActivity: 'Keep a nature journal for one week. Each day, draw and describe one observation. At the end, research your most interesting one.',
-    
+      offlineActivity: 'Find a slow stream or run water through a tray. Drop leaves at different positions: center, edge, upstream of a rock. Watch: center leaves go fast and straight; edge leaves drift slowly; leaves near obstacles may spin in circles (eddies). You are mapping the velocity field!',
+      offlineActivityDiagram: 'ActivityFloatPathDiagram',
+      codeTeaser: `# Ferry river crossing: vector addition
+import numpy as np
+river_width = 200  # metres
+current = 3; ferry_speed = 5  # m/s
+
+for angle in [0, 15, 37, 50, 90]:
+    rad = np.radians(angle)
+    vx = ferry_speed * np.cos(rad)
+    vy = ferry_speed * np.sin(rad) - current
+    t = river_width / vx if vx > 0 else float('inf')
+    drift = -vy * t
+    print(f"{angle:3d} deg: drift={drift:.0f}m, time={t:.0f}s")`,
+      referenceLinks: [
+        { slug: 'forces-and-motion', reason: 'Vectors, force addition, Newton\u2019s laws \u2014 foundation for ferry motion' },
+        { slug: 'fluid-dynamics', reason: 'Bernoulli\u2019s principle, viscosity, and the Reynolds number' },
+      ],
+      nextLessons: [
+        { slug: 'little-boat-brahmaputra', reason: 'Buoyancy and hull design \u2014 complements current-crossing physics' },
+        { slug: 'fishermans-daughter-storm', reason: 'Storm physics on the Brahmaputra' },
+        { slug: 'river-braid', reason: 'Why the Brahmaputra braids \u2014 sediment dynamics creating shifting channels' },
+      ],
+      quiz: [
+        { question: 'What determines laminar vs turbulent flow?', options: ['Fluid color', 'The Reynolds number', 'Temperature only', 'Whether water or air'], answer: 1 },
+        { question: 'Upstream angle for straight crossing? (Current 3, ferry 5 m/s)', options: ['0\u00B0', '37\u00B0', '45\u00B0', '90\u00B0'], answer: 1 },
+        { question: 'Bernoulli\u2019s principle?', options: ['Heavy objects sink', 'Faster flow = lower pressure', 'Rivers flow south', 'Turbulence increases with depth'], answer: 1 },
+        { question: 'What causes eddies?', options: ['The moon', 'Flow separating around obstacles or bends', 'Fish swimming in circles', 'Surface wind'], answer: 1 },
+        { question: 'If current >= ferry speed?', options: ['Cannot cross at all', 'Crosses straight with enough fuel', 'Always drifts downstream regardless of angle', 'Current stops'], answer: 2 },
+      ],
       concepts: [
-        {
-          title: "Buoyancy — Why Things Float or Sink",
-          paragraphs: [
-            "**Archimedes' principle** states that an object immersed in a fluid experiences an upward force (buoyancy) equal to the **weight of the fluid it displaces**. If the buoyant force equals the object's weight, it floats. If the buoyant force is less than the weight, it sinks. This is why a steel ship floats: the hull displaces a volume of water whose weight exceeds the weight of the steel (because the hull contains air, making its average density less than water).",
-            "The critical quantity is **average density**. A solid steel cube (density ~7,800 kg/m3) sinks because it is denser than water (1,000 kg/m3). But if you shape that same steel into a hollow hull that encloses a large volume of air, the average density of the steel-plus-air system can be less than 1,000 kg/m3, and the hull floats. A ferry boat is engineered so that the weight of water displaced by the submerged portion of the hull exactly equals the total weight of the boat plus passengers plus cargo.",
-            "Loading additional cargo onto a ferry pushes it deeper into the water, displacing more water and increasing buoyancy until a new equilibrium is reached. But there is a limit: if the boat sinks so deep that water reaches the deck (the **freeboard** drops to zero), water floods in, average density surges above 1,000 kg/m3, and the boat sinks rapidly. This is why ferry operators must respect maximum load limits — the physics gives no warnings, only a binary outcome: float or sink.",
-          ],
-          keyIdea: "A boat floats because its hull-plus-air average density is less than water — the buoyant force equals the weight of displaced water, and exceeding the load limit means the math tips from float to sink.",
-          diagram: 'BuoyancyDiagram',
-        },
-        {
-          title: "River Currents — Forces on a Crossing Ferry",
-          paragraphs: [
-            "A ferry crossing a river must contend with the **vector addition** of two velocities: its own engine power pushing it across (perpendicular to the current) and the river current pushing it downstream (parallel to the bank). The ferry's actual path through the water is the diagonal — it arrives at the opposite bank downstream of its starting point unless the pilot compensates by **angling upstream**.",
-            "The amount of upstream angle needed depends on the ratio of current speed to ferry speed. If the current is 3 m/s and the ferry can make 5 m/s, the ferry must angle upstream by arcsin(3/5) = 37 degrees from the perpendicular to arrive directly across. If the current exceeds the ferry's speed, the ferry *cannot* go straight across — it will always be swept downstream, no matter what angle it takes.",
-            "River currents are not uniform: they are faster in the center (deepest channel) and slower near the banks (friction with the bed and banks). A skilled ferryman adjusts course continuously — angling more steeply when crossing the fast center and straightening as the current weakens near the far bank. This real-time vector calculation, done intuitively by experience, is exactly what autopilot systems on modern ferries do with GPS and current sensors.",
-          ],
-          keyIdea: "A ferry's actual path is the vector sum of its engine velocity and the river current — crossing straight requires angling upstream, and the needed angle depends on the ratio of current speed to boat speed.",
-        },
-        {
-          title: "Boat Design — Hull Shape and Hydrodynamics",
-          paragraphs: [
-            "A boat's hull shape determines how much **resistance** (drag) the water exerts as the boat moves. There are two main types of hull resistance: **friction drag** (water rubbing against the hull surface, proportional to wetted area and speed) and **wave-making drag** (energy lost to creating waves, proportional to speed squared or more at higher speeds). At low speeds, friction dominates; at high speeds, wave-making dominates.",
-            "Traditional Brahmaputra ferries use **displacement hulls** — they push water aside and sit deep, moving at relatively low speeds where friction drag is manageable. The rounded bottom shape distributes pressure evenly. Modern speedboats use **planing hulls** — flat-bottomed shapes that, at high speed, rise up and skim across the surface, dramatically reducing the wetted area and therefore friction drag. The transition from displacement to planing is called \"getting on plane\" and requires a burst of power.",
-            "The **Froude number** for hull design (Fr = v / sqrt(g * L), where L is waterline length) determines which drag regime dominates. Below Fr = 0.4, the boat is in pure displacement mode. Above Fr = 1.0, it is planing. Between is a transitional zone where wave-making drag peaks — the \"hull speed\" barrier. Traditional wooden ferries on the Brahmaputra operate well below hull speed, where their simple, sturdy shapes are perfectly adequate and fuel-efficient.",
-          ],
-          keyIdea: "Hull drag has two components — friction (proportional to wetted area) and wave-making (proportional to speed squared) — and traditional displacement hulls are optimized for low-speed efficiency on rivers like the Brahmaputra.",
-          diagram: 'BernoulliDiagram',
-        },
+        { title: 'Laminar vs Turbulent Flow', paragraphs: ['Pour honey slowly \u2014 smooth, parallel layers with no mixing: **laminar flow**. Turn a tap on full \u2014 chaotic churning: **turbulent flow**. Laminar is predictable; turbulent is not.', 'The **Reynolds number** Re = (density x velocity x size) / viscosity predicts which type. Re < 2,000: laminar. Re > 4,000: turbulent. Between is transitional.', 'The Brahmaputra at Nimatighat: Re \u2248 **10 million** \u2014 wildly turbulent. Current varies unpredictably. Ferrymen read ripple patterns and foam to navigate.'], keyIdea: 'Reynolds number predicts flow type: < 2,000 laminar, > 4,000 turbulent. The Brahmaputra\u2019s Re ~10 million is extremely turbulent.', diagram: 'LaminarTurbulentDiagram', checkYourself: 'Honey vs water at same speed in same pipe \u2014 which has higher Re?', checkAnswer: 'Water. Re is inversely proportional to viscosity. Higher viscosity = lower Re = more laminar.' },
+        { title: 'How Ferries Cross Currents', paragraphs: ['A ferry faces two velocities: engine (across) and current (downstream). The actual path is the **vector sum** \u2014 a diagonal.', 'Pointing straight across with 3 m/s current, 5 m/s ferry: crossing 200 m takes 40 s, drifting 120 m downstream. For zero drift, angle upstream by arcsin(3/5) = **37\u00B0** (takes 50 s).', 'If current >= ferry speed, straight crossing is impossible. Real ferrymen also handle non-uniform current: slow near banks (friction), fast in center.'], keyIdea: 'Actual path = vector sum of engine + current. Straight crossing requires upstream angle = arcsin(current/ferry speed). Impossible if current >= ferry speed.', diagram: 'FerryVectorDiagram', checkYourself: 'Ferry speed 4 m/s, current 4 m/s. Can it cross straight?', checkAnswer: 'No. arcsin(4/4) = 90\u00B0 \u2014 pointing directly upstream, zero progress across.' },
+        { title: 'Bernoulli\u2019s Principle in Rivers', paragraphs: ['Bernoulli: **where fluid speeds up, pressure decreases**. Water through a narrow gap (bridge pillars) speeds up, pressure drops. This sucks boats toward the constriction.', 'Two boats close together: water between them flows faster (lower pressure) than water outside. The pressure difference pushes them together.', 'Bernoulli drives erosion patterns: where water speeds up (bends, narrows), erosion increases. Where it slows (wide stretches), sediment deposits. This creates the shifting sandbars of the Brahmaputra.'], keyIdea: 'Faster flow = lower pressure. This pulls boats toward constrictions and drives erosion/deposition reshaping the Brahmaputra every monsoon.', diagram: 'BernoulliDiagram', checkYourself: 'Why is it dangerous to swim between two large moving boats?', checkAnswer: 'Water between them flows faster = lower pressure. The pressure difference pushes you toward the boats.' },
+        { title: 'Whirlpools and Eddies', paragraphs: ['Water flowing past an obstacle separates around it. Behind the obstacle: **low pressure**. Water rushes in from the sides, creating circular **eddies**.', 'Eddies also form at bends: outside water is faster, inside slower. Speed difference = rotation. The Brahmaputra\u2019s shifting sandbars create new eddies each monsoon.', 'For ferrymen, eddies create unpredictable currents that can spin boats. Experienced pilots read the surface: circular ripples, spiraling foam, orbiting debris. They adjust course in real time.'], keyIdea: 'Eddies form behind obstacles and at bends. They produce unpredictable currents that shift annually as sandbars move.', diagram: 'WhirlpoolEddyDiagram', checkYourself: 'Describe the path of a leaf dropped upstream of a rock.', checkAnswer: 'Drifts toward rock, splits to one side, accelerates around it, may get caught in the eddy behind \u2014 spinning before escaping downstream.' },
       ],
     },
   },
