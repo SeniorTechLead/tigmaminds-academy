@@ -1,12 +1,11 @@
 export default function LogicGateSymbolsDiagram() {
-  const gateColor = 'text-gray-700 dark:text-gray-200';
-  const wireColor = 'text-gray-400 dark:text-gray-500';
-  const labelColor = 'fill-gray-700 dark:fill-gray-200';
-  const subColor = 'fill-gray-500 dark:fill-gray-400';
+  const labelColor = 'fill-gray-900 dark:fill-slate-50';
+  const subColor = 'fill-gray-500 dark:fill-slate-400';
   const tableHead = 'fill-blue-600 dark:fill-blue-400';
   const tableCell = 'fill-gray-600 dark:fill-gray-300';
+  const gateStroke = 'stroke-gray-700 dark:stroke-gray-200';
+  const wireStroke = 'stroke-gray-400 dark:stroke-gray-500';
 
-  /* Each gate: x offset, name, symbol body, truth-table rows [A, B, Out] */
   const gates: {
     name: string;
     expr: string;
@@ -14,121 +13,112 @@ export default function LogicGateSymbolsDiagram() {
     body: (cx: number, cy: number) => JSX.Element;
   }[] = [
     {
-      name: 'AND',
-      expr: 'A · B',
+      name: 'AND', expr: 'A · B',
       rows: [[0,0,0],[0,1,0],[1,0,0],[1,1,1]],
       body: (cx, cy) => (
-        <g>
-          <path d={`M${cx-16} ${cy-14} L${cx} ${cy-14} A14 14 0 0 1 ${cx} ${cy+14} L${cx-16} ${cy+14} Z`}
-            fill="none" stroke="currentColor" className={gateColor} strokeWidth="2" />
-        </g>
+        <path d={`M${cx-18} ${cy-16} L${cx+2} ${cy-16} A16 16 0 0 1 ${cx+2} ${cy+16} L${cx-18} ${cy+16} Z`}
+          fill="none" className={gateStroke} strokeWidth="2" />
       ),
     },
     {
-      name: 'OR',
-      expr: 'A + B',
+      name: 'OR', expr: 'A + B',
       rows: [[0,0,0],[0,1,1],[1,0,1],[1,1,1]],
       body: (cx, cy) => (
-        <g>
-          <path d={`M${cx-18} ${cy-14} Q${cx-6} ${cy} ${cx-18} ${cy+14} Q${cx+4} ${cy+14} ${cx+16} ${cy} Q${cx+4} ${cy-14} ${cx-18} ${cy-14} Z`}
-            fill="none" stroke="currentColor" className={gateColor} strokeWidth="2" />
-        </g>
+        <path d={`M${cx-20} ${cy-16} Q${cx-6} ${cy} ${cx-20} ${cy+16} Q${cx+4} ${cy+16} ${cx+18} ${cy} Q${cx+4} ${cy-16} ${cx-20} ${cy-16} Z`}
+          fill="none" className={gateStroke} strokeWidth="2" />
       ),
     },
     {
-      name: 'NOT',
-      expr: '¬A',
+      name: 'NOT', expr: '¬A',
       rows: [[0,-1,1],[1,-1,0]],
       body: (cx, cy) => (
         <g>
-          <polygon points={`${cx-14},${cy-12} ${cx+10},${cy} ${cx-14},${cy+12}`}
-            fill="none" stroke="currentColor" className={gateColor} strokeWidth="2" />
-          <circle cx={cx+14} cy={cy} r={3}
-            fill="none" stroke="currentColor" className={gateColor} strokeWidth="2" />
+          <polygon points={`${cx-16},${cy-14} ${cx+12},${cy} ${cx-16},${cy+14}`}
+            fill="none" className={gateStroke} strokeWidth="2" />
+          <circle cx={cx+16} cy={cy} r={3.5} fill="none" className={gateStroke} strokeWidth="2" />
         </g>
       ),
     },
     {
-      name: 'NAND',
-      expr: '¬(A · B)',
+      name: 'NAND', expr: '¬(A · B)',
       rows: [[0,0,1],[0,1,1],[1,0,1],[1,1,0]],
       body: (cx, cy) => (
         <g>
-          <path d={`M${cx-16} ${cy-14} L${cx} ${cy-14} A14 14 0 0 1 ${cx} ${cy+14} L${cx-16} ${cy+14} Z`}
-            fill="none" stroke="currentColor" className={gateColor} strokeWidth="2" />
-          <circle cx={cx+15} cy={cy} r={3}
-            fill="none" stroke="currentColor" className={gateColor} strokeWidth="2" />
+          <path d={`M${cx-18} ${cy-16} L${cx+2} ${cy-16} A16 16 0 0 1 ${cx+2} ${cy+16} L${cx-18} ${cy+16} Z`}
+            fill="none" className={gateStroke} strokeWidth="2" />
+          <circle cx={cx+19} cy={cy} r={3.5} fill="none" className={gateStroke} strokeWidth="2" />
         </g>
       ),
     },
     {
-      name: 'NOR',
-      expr: '¬(A + B)',
+      name: 'NOR', expr: '¬(A + B)',
       rows: [[0,0,1],[0,1,0],[1,0,0],[1,1,0]],
       body: (cx, cy) => (
         <g>
-          <path d={`M${cx-18} ${cy-14} Q${cx-6} ${cy} ${cx-18} ${cy+14} Q${cx+4} ${cy+14} ${cx+16} ${cy} Q${cx+4} ${cy-14} ${cx-18} ${cy-14} Z`}
-            fill="none" stroke="currentColor" className={gateColor} strokeWidth="2" />
-          <circle cx={cx+19} cy={cy} r={3}
-            fill="none" stroke="currentColor" className={gateColor} strokeWidth="2" />
+          <path d={`M${cx-20} ${cy-16} Q${cx-6} ${cy} ${cx-20} ${cy+16} Q${cx+4} ${cy+16} ${cx+18} ${cy} Q${cx+4} ${cy-16} ${cx-20} ${cy-16} Z`}
+            fill="none" className={gateStroke} strokeWidth="2" />
+          <circle cx={cx+22} cy={cy} r={3.5} fill="none" className={gateStroke} strokeWidth="2" />
         </g>
       ),
     },
     {
-      name: 'XOR',
-      expr: 'A ⊕ B',
+      name: 'XOR', expr: 'A ⊕ B',
       rows: [[0,0,0],[0,1,1],[1,0,1],[1,1,0]],
       body: (cx, cy) => (
         <g>
-          <path d={`M${cx-18} ${cy-14} Q${cx-6} ${cy} ${cx-18} ${cy+14} Q${cx+4} ${cy+14} ${cx+16} ${cy} Q${cx+4} ${cy-14} ${cx-18} ${cy-14} Z`}
-            fill="none" stroke="currentColor" className={gateColor} strokeWidth="2" />
-          <path d={`M${cx-22} ${cy-14} Q${cx-10} ${cy} ${cx-22} ${cy+14}`}
-            fill="none" stroke="currentColor" className={gateColor} strokeWidth="2" />
+          <path d={`M${cx-20} ${cy-16} Q${cx-6} ${cy} ${cx-20} ${cy+16} Q${cx+4} ${cy+16} ${cx+18} ${cy} Q${cx+4} ${cy-16} ${cx-20} ${cy-16} Z`}
+            fill="none" className={gateStroke} strokeWidth="2" />
+          <path d={`M${cx-25} ${cy-16} Q${cx-11} ${cy} ${cx-25} ${cy+16}`}
+            fill="none" className={gateStroke} strokeWidth="2" />
         </g>
       ),
     },
     {
-      name: 'XNOR',
-      expr: '¬(A ⊕ B)',
+      name: 'XNOR', expr: '¬(A ⊕ B)',
       rows: [[0,0,1],[0,1,0],[1,0,0],[1,1,1]],
       body: (cx, cy) => (
         <g>
-          <path d={`M${cx-18} ${cy-14} Q${cx-6} ${cy} ${cx-18} ${cy+14} Q${cx+4} ${cy+14} ${cx+16} ${cy} Q${cx+4} ${cy-14} ${cx-18} ${cy-14} Z`}
-            fill="none" stroke="currentColor" className={gateColor} strokeWidth="2" />
-          <path d={`M${cx-22} ${cy-14} Q${cx-10} ${cy} ${cx-22} ${cy+14}`}
-            fill="none" stroke="currentColor" className={gateColor} strokeWidth="2" />
-          <circle cx={cx+19} cy={cy} r={3}
-            fill="none" stroke="currentColor" className={gateColor} strokeWidth="2" />
+          <path d={`M${cx-20} ${cy-16} Q${cx-6} ${cy} ${cx-20} ${cy+16} Q${cx+4} ${cy+16} ${cx+18} ${cy} Q${cx+4} ${cy-16} ${cx-20} ${cy-16} Z`}
+            fill="none" className={gateStroke} strokeWidth="2" />
+          <path d={`M${cx-25} ${cy-16} Q${cx-11} ${cy} ${cx-25} ${cy+16}`}
+            fill="none" className={gateStroke} strokeWidth="2" />
+          <circle cx={cx+22} cy={cy} r={3.5} fill="none" className={gateStroke} strokeWidth="2" />
         </g>
       ),
     },
   ];
 
-  const colW = 162;
-  const rowH = 100;
+  // Layout: 4 columns, gate on top, truth table below — stacked vertically
+  const colW = 170;
+  const gateH = 60;    // gate symbol area
+  const tableH = 72;   // truth table area
+  const cellH = gateH + tableH;
+  const cols = 4;
+  const rows = 2;
 
   return (
     <div className="my-4">
       <svg
-        viewBox={`0 0 ${colW * 4} ${rowH * 2 + 10}`}
+        viewBox={`0 0 ${colW * cols} ${cellH * rows}`}
         className="w-full max-w-3xl mx-auto"
         role="img"
         aria-label="All seven logic gate symbols with truth tables"
       >
         {gates.map((g, idx) => {
-          const col = idx % 4;
-          const row = Math.floor(idx / 4);
+          const col = idx % cols;
+          const row = Math.floor(idx / cols);
           const ox = col * colW;
-          const oy = row * rowH;
-          const cx = ox + 50;
-          const cy = oy + 30;
+          const oy = row * cellH;
+          const cx = ox + colW / 2;
+          const cy = oy + 32;
           const isNot = g.name === 'NOT';
-          const cols = isNot ? ['A', 'Q'] : ['A', 'B', 'Q'];
+          const colNames = isNot ? ['A', 'Q'] : ['A', 'B', 'Q'];
+          const outX = ['NAND','NOR','XNOR'].includes(g.name) ? cx + 26 : g.name === 'NOT' ? cx + 20 : cx + 18;
 
           return (
             <g key={g.name}>
               {/* Gate name */}
-              <text x={ox + colW / 2} y={oy + 12} textAnchor="middle" className={labelColor} fontSize="12" fontWeight="700">
+              <text x={cx} y={oy + 14} textAnchor="middle" className={labelColor} fontSize="13" fontWeight="700">
                 {g.name}
               </text>
 
@@ -137,38 +127,39 @@ export default function LogicGateSymbolsDiagram() {
 
               {/* Input wires */}
               {isNot ? (
-                <line x1={cx - 28} y1={cy} x2={cx - 14} y2={cy} stroke="currentColor" className={wireColor} strokeWidth="1.5" />
+                <line x1={cx - 36} y1={cy} x2={cx - 16} y2={cy} className={wireStroke} strokeWidth="1.5" />
               ) : (
                 <>
-                  <line x1={cx - 30} y1={cy - 7} x2={cx - 16} y2={cy - 7} stroke="currentColor" className={wireColor} strokeWidth="1.5" />
-                  <line x1={cx - 30} y1={cy + 7} x2={cx - 16} y2={cy + 7} stroke="currentColor" className={wireColor} strokeWidth="1.5" />
+                  <line x1={cx - 36} y1={cy - 8} x2={cx - 18} y2={cy - 8} className={wireStroke} strokeWidth="1.5" />
+                  <line x1={cx - 36} y1={cy + 8} x2={cx - 18} y2={cy + 8} className={wireStroke} strokeWidth="1.5" />
                 </>
               )}
+
               {/* Output wire */}
-              <line x1={cx + (g.name === 'NAND' || g.name === 'NOR' || g.name === 'XNOR' ? 22 : g.name === 'NOT' ? 17 : 14)} y1={cy} x2={cx + 30} y2={cy} stroke="currentColor" className={wireColor} strokeWidth="1.5" />
+              <line x1={outX} y1={cy} x2={cx + 38} y2={cy} className={wireStroke} strokeWidth="1.5" />
 
-              {/* Wire labels */}
+              {/* Wire labels — well outside the gate */}
               {isNot ? (
-                <text x={cx - 32} y={cy + 4} textAnchor="end" className={subColor} fontSize="10">A</text>
+                <text x={cx - 40} y={cy + 4} textAnchor="end" className={subColor} fontSize="11">A</text>
               ) : (
                 <>
-                  <text x={cx - 32} y={cy - 4} textAnchor="end" className={subColor} fontSize="10">A</text>
-                  <text x={cx - 32} y={cy + 11} textAnchor="end" className={subColor} fontSize="10">B</text>
+                  <text x={cx - 40} y={cy - 4} textAnchor="end" className={subColor} fontSize="11">A</text>
+                  <text x={cx - 40} y={cy + 12} textAnchor="end" className={subColor} fontSize="11">B</text>
                 </>
               )}
-              <text x={cx + 33} y={cy + 4} className={subColor} fontSize="10">Q</text>
+              <text x={cx + 42} y={cy + 4} className={subColor} fontSize="11">Q</text>
 
-              {/* Expression */}
-              <text x={ox + colW / 2} y={oy + 52} textAnchor="middle" className={subColor} fontSize="10">{g.expr}</text>
+              {/* Expression — below the gate */}
+              <text x={cx} y={oy + gateH - 2} textAnchor="middle" className={subColor} fontSize="11">{g.expr}</text>
 
-              {/* Mini truth table */}
-              {cols.map((c, ci) => (
-                <text key={c} x={ox + 90 + ci * 20} y={oy + 66} textAnchor="middle" className={tableHead} fontSize="10" fontWeight="600">{c}</text>
+              {/* Truth table — stacked below the gate */}
+              {colNames.map((c, ci) => (
+                <text key={c} x={cx - 16 + ci * 18} y={oy + gateH + 14} textAnchor="middle" className={tableHead} fontSize="11" fontWeight="600">{c}</text>
               ))}
               {g.rows.map((r, ri) => {
                 const vals = isNot ? [r[0], r[2]] : r;
                 return vals.map((v, vi) => (
-                  <text key={`${ri}-${vi}`} x={ox + 90 + vi * 20} y={oy + 78 + ri * 11} textAnchor="middle" className={tableCell} fontSize="10">
+                  <text key={`${ri}-${vi}`} x={cx - 16 + vi * 18} y={oy + gateH + 27 + ri * 13} textAnchor="middle" className={tableCell} fontSize="11">
                     {v === -1 ? '–' : v}
                   </text>
                 ));
