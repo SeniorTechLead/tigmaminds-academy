@@ -699,6 +699,36 @@ import TransectMethodDiagram from '../diagrams/TransectMethodDiagram';
 import DataQualityTargetDiagram from '../diagrams/DataQualityTargetDiagram';
 import CitizenScienceScaleDiagram from '../diagrams/CitizenScienceScaleDiagram';
 import ActivityButterflyCountDiagram from '../diagrams/ActivityButterflyCountDiagram';
+// Kaziranga Grass — Grassland Ecology & Fire Cycles
+import GrassFireCycleDiagram from '../diagrams/GrassFireCycleDiagram';
+import GrassC4PathwayDiagram from '../diagrams/GrassC4PathwayDiagram';
+import GrassNDVIDiagram from '../diagrams/GrassNDVIDiagram';
+import GrassRhinoHabitatDiagram from '../diagrams/GrassRhinoHabitatDiagram';
+import ActivityGrassGrowDiagram from '../diagrams/ActivityGrassGrowDiagram';
+// Night Jasmine — Circadian Rhythms in Plants
+import JasminePhotoperiodDiagram from '../diagrams/JasminePhotoperiodDiagram';
+import JasminePhytochromeDiagram from '../diagrams/JasminePhytochromeDiagram';
+import JasmineScentClockDiagram from '../diagrams/JasmineScentClockDiagram';
+import JasmineStomataClockDiagram from '../diagrams/JasmineStomataClockDiagram';
+import ActivityPlantRhythmDiagram from '../diagrams/ActivityPlantRhythmDiagram';
+// Postman of the Hills — Logistics & Optimization
+import PostmanGraphTheoryDiagram from '../diagrams/PostmanGraphTheoryDiagram';
+import PostmanShortestPathDiagram from '../diagrams/PostmanShortestPathDiagram';
+import PostmanTSPDiagram from '../diagrams/PostmanTSPDiagram';
+import PostmanTerrainCostDiagram from '../diagrams/PostmanTerrainCostDiagram';
+import ActivityRouteMapDiagram from '../diagrams/ActivityRouteMapDiagram';
+// Turtle Who Carried a Mountain — Geology & Plate Tectonics
+import TurtleEarthLayersDiagram from '../diagrams/TurtleEarthLayersDiagram';
+import TurtleConvectionDiagram from '../diagrams/TurtleConvectionDiagram';
+import TurtleMountainCollisionDiagram from '../diagrams/TurtleMountainCollisionDiagram';
+import TurtleEarthquakeDiagram from '../diagrams/TurtleEarthquakeDiagram';
+import ActivityEarthShakeDiagram from '../diagrams/ActivityEarthShakeDiagram';
+// Owl Wisest — Owl Adaptations & Night Vision
+import OwlRodConeDiagram from '../diagrams/OwlRodConeDiagram';
+import OwlAsymmetricEarsDiagram from '../diagrams/OwlAsymmetricEarsDiagram';
+import OwlSilentFlightDiagram from '../diagrams/OwlSilentFlightDiagram';
+import OwlTapetumDiagram from '../diagrams/OwlTapetumDiagram';
+import ActivitySoundLocateDiagram from '../diagrams/ActivitySoundLocateDiagram';
 
 // Boy Who Built a Library — Web Development & Databases
 import LibraryHTMLStructureDiagram from '../diagrams/LibraryHTMLStructureDiagram';
@@ -1487,6 +1517,36 @@ const registry: Record<string, ComponentType> = {
   HeatTransferCookingDiagram,
   ActivityToastTestDiagram,
   PithaScienceOutputDiagram,
+  // Kaziranga Grass
+  GrassFireCycleDiagram,
+  GrassC4PathwayDiagram,
+  GrassNDVIDiagram,
+  GrassRhinoHabitatDiagram,
+  ActivityGrassGrowDiagram,
+  // Night Jasmine
+  JasminePhotoperiodDiagram,
+  JasminePhytochromeDiagram,
+  JasmineScentClockDiagram,
+  JasmineStomataClockDiagram,
+  ActivityPlantRhythmDiagram,
+  // Postman Hills
+  PostmanGraphTheoryDiagram,
+  PostmanShortestPathDiagram,
+  PostmanTSPDiagram,
+  PostmanTerrainCostDiagram,
+  ActivityRouteMapDiagram,
+  // Turtle Mountain
+  TurtleEarthLayersDiagram,
+  TurtleConvectionDiagram,
+  TurtleMountainCollisionDiagram,
+  TurtleEarthquakeDiagram,
+  ActivityEarthShakeDiagram,
+  // Owl Wisest
+  OwlRodConeDiagram,
+  OwlAsymmetricEarsDiagram,
+  OwlSilentFlightDiagram,
+  OwlTapetumDiagram,
+  ActivitySoundLocateDiagram,
 };
 
 export default registry;

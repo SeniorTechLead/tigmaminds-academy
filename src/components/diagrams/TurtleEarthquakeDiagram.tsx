@@ -25,7 +25,7 @@ export default function TurtleEarthquakeDiagram() {
           <rect x="105" y="80" width="85" height="60" rx="4" fill="#6b7280" opacity="0.3" stroke="#6b7280" strokeWidth="1.5" />
 
           {/* Friction lock symbol */}
-          <text x="100" y="115" textAnchor="middle" fontSize="16">\u{1F512}</text>
+          <text x="100" y="115" textAnchor="middle" fontSize="16">{'\uD83D\uDD12'}</text>
 
           {/* Arrows pushing */}
           <line x1="25" y1="110" x2="70" y2="110" stroke="#f59e0b" strokeWidth="2" markerEnd="url(#arr-eq-y)" />
