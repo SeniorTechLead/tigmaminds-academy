@@ -50,7 +50,7 @@ export default function MuezzinSpeakerDiagram() {
           { x: 40, label: '1. Signal', desc: 'AC current flows', icon: '⚡' },
           { x: 140, label: '2. Force', desc: 'Coil moves in field', icon: '↔' },
           { x: 250, label: '3. Vibration', desc: 'Cone pushes air', icon: '∿' },
-          { x: 350, label: '4. Sound', desc: 'Pressure waves', icon: '\uD83D\uDD0A' },
+          { x: 350, label: '4. Sound', desc: 'Pressure waves', icon: '🔊' },
         ].map((step, i) => (
           <g key={i}>
             <rect x={step.x - 30} y="242" width="65" height="32" rx="4" className="fill-gray-50 dark:fill-slate-800" stroke="#94a3b8" strokeWidth="0.5" />

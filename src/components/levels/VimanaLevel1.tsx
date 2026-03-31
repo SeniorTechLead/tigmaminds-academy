@@ -40,7 +40,7 @@ Now let’s put numbers on these forces. We’ll use Python to model a simple ai
 
 If lift > weight, the plane climbs. If thrust > drag, it accelerates. The code below defines an aircraft and prints its flight status.
 
-\ud83d\udcda *A Newton (N) is the SI unit of force. 1 N ≈ the weight of a small apple.*`,
+📚 *A Newton (N) is the SI unit of force. 1 N ≈ the weight of a small apple.*`,
       analogy: 'Think of flying as a tug-of-war in two directions simultaneously. Vertically, lift and weight are pulling against each other. Horizontally, thrust and drag are pulling against each other. The plane goes wherever the winning side pulls it.',
       storyConnection: 'The Pushpaka Vimana flew by divine will, effortlessly overcoming gravity. Real aircraft need careful engineering to balance these four forces. Rama’s flight from Lanka to Ayodhya would have required continuous thrust to overcome drag over thousands of kilometres.',
       checkQuestion: 'A 70,000 kg aircraft has engines producing 180,000 N of thrust and wings generating 700,000 N of lift. Drag is 180,000 N. What is its flight status?',

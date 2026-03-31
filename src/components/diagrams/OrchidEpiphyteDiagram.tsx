@@ -97,9 +97,9 @@ export default function OrchidEpiphyteDiagram() {
           <rect x="0" y="0" width="140" height="110" rx="8" fill="#1e293b" stroke="#fbbf24" strokeWidth="1" />
           <text x="70" y="18" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#fbbf24">Why live up high?</text>
           <text x="70" y="36" textAnchor="middle" fontSize="9" fill="#e2e8f0">☀ More sunlight</text>
-          <text x="70" y="52" textAnchor="middle" fontSize="9" fill="#e2e8f0">\ud83d\udca8 More airflow</text>
-          <text x="70" y="68" textAnchor="middle" fontSize="9" fill="#e2e8f0">\ud83d\udc1b Away from ground pests</text>
-          <text x="70" y="84" textAnchor="middle" fontSize="9" fill="#e2e8f0">\ud83d\udc1d Closer to pollinators</text>
+          <text x="70" y="52" textAnchor="middle" fontSize="9" fill="#e2e8f0">💨 More airflow</text>
+          <text x="70" y="68" textAnchor="middle" fontSize="9" fill="#e2e8f0">🐛 Away from ground pests</text>
+          <text x="70" y="84" textAnchor="middle" fontSize="9" fill="#e2e8f0">🐝 Closer to pollinators</text>
           <text x="70" y="102" textAnchor="middle" fontSize="8" className="fill-slate-400">Trade-off: no soil nutrients</text>
         </g>
       </svg>

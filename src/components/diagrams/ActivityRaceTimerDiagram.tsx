@@ -34,12 +34,12 @@ export default function ActivityRaceTimerDiagram() {
 
   /* Compare to animals */
   const comparisons = [
-    { name: 'Garden snail', speed: 0.013, emoji: '\uD83D\uDC0C' },
-    { name: 'Tortoise',     speed: 0.08,  emoji: '\uD83D\uDC22' },
-    { name: 'Human walk',   speed: 1.4,   emoji: '\uD83D\uDEB6' },
-    { name: 'Human sprint', speed: 10,    emoji: '\uD83C\uDFC3' },
-    { name: 'Hare',         speed: 19.4,  emoji: '\uD83D\uDC07' },
-    { name: 'Cheetah',      speed: 30,    emoji: '\uD83D\uDC06' },
+    { name: 'Garden snail', speed: 0.013, emoji: '🐌' },
+    { name: 'Tortoise',     speed: 0.08,  emoji: '🐢' },
+    { name: 'Human walk',   speed: 1.4,   emoji: '🚶' },
+    { name: 'Human sprint', speed: 10,    emoji: '🏃' },
+    { name: 'Hare',         speed: 19.4,  emoji: '🐇' },
+    { name: 'Cheetah',      speed: 30,    emoji: '🐆' },
   ];
 
   const closest = speed > 0

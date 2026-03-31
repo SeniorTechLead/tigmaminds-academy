@@ -36,7 +36,7 @@ Rain falls on the surface, soaks into soil, trickles down through gaps between r
 
 In the code below, you will model the water table as a function of rainfall and depth. The key idea: the water table is not flat — it rises after rain and falls during dry periods.
 
-\uD83D\uDCDA *An aquifer is not a cave full of water. It is solid rock with tiny pores filled with water, like a sponge.*`,
+📚 *An aquifer is not a cave full of water. It is solid rock with tiny pores filled with water, like a sponge.*`,
       analogy: 'Think of a kitchen sponge sitting on a plate. Pour water onto the sponge. The water soaks in and fills the holes (pores). If you keep adding water, eventually the bottom half of the sponge is completely saturated — that is the aquifer. The boundary where dry sponge meets wet sponge is the water table. Squeeze the sponge (pump a well) and water flows out. Stop squeezing and it slowly refills from rain above.',
       storyConnection: 'The Well of Zamzam has provided water in the middle of a desert for thousands of years. How? It taps a deep aquifer beneath Mecca — water that seeped into rock formations from rainfall in the surrounding Hejaz mountains, potentially thousands of years ago. The well is a window into an underground reservoir.',
       checkQuestion: 'If you dig two wells 100 metres apart, will they have the same water level?',

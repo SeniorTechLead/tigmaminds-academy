@@ -41,7 +41,7 @@ export default function SeedGerminationDiagram() {
 
         {/* Water */}
         <rect x="280" y="68" width="60" height="45" rx="6" className="fill-blue-900/50 stroke-blue-500" strokeWidth="1" />
-        <text x="310" y="86" textAnchor="middle" className="fill-blue-400" fontSize="18">\uD83D\uDCA7</text>
+        <text x="310" y="86" textAnchor="middle" className="fill-blue-400" fontSize="18">💧</text>
         <text x="310" y="105" textAnchor="middle" className="fill-blue-300" fontSize="10">Water</text>
 
         {/* Warmth */}

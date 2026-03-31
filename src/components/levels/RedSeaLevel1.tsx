@@ -98,7 +98,7 @@ Spring tides are about **20% higher** than average, and neap tides about 20% low
 
 The code simulates a full month of tides by combining the Moon’s and Sun’s tidal cycles. You will see the classic pattern: big swings at new/full moon, small swings at quarter moons.
 
-\ud83d\udcda *This is real tidal prediction — harbors use exactly this kind of model to plan ship movements.*`,
+📚 *This is real tidal prediction — harbors use exactly this kind of model to plan ship movements.*`,
       analogy: 'Imagine two people pushing a swing. When they push at the same time (aligned — spring tide), the swing goes extra high. When one pushes forward while the other pushes backward (90° apart — neap tide), the swing barely moves. The Moon and Sun are the two people pushing Earth’s ocean "swing."',
       storyConnection: 'If the Exodus crossing happened during a spring tide at low water, the already-shallow ridge would have been even closer to the surface. Combined with wind effects, the water level drop could have been enough to expose the ridge completely — creating "dry ground" as the text describes.',
       checkQuestion: 'There are approximately 2 spring tides per month. Why not just 1?',

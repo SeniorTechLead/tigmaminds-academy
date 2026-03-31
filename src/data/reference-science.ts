@@ -3008,7 +3008,7 @@ export const scienceReferences: ReferenceGuide[] = [
     slug: 'coordinate-geometry',
     title: 'Coordinate Geometry',
     category: 'math',
-    icon: '\uD83D\uDCD0',
+    icon: '📐',
     tagline: 'Where algebra meets geometry — equations become shapes on a plane.',
     relatedStories: ['map-makers-granddaughter', 'dragonfly-and-the-paddy-field'],
     understand: [
@@ -3061,7 +3061,7 @@ export const scienceReferences: ReferenceGuide[] = [
     slug: 'number-theory-and-sequences',
     title: 'Number Theory & Sequences',
     category: 'math',
-    icon: '\uD83D\uDCD0',
+    icon: '📐',
     tagline: 'Primes, factors, and the hidden patterns inside numbers themselves.',
     relatedStories: ['boy-counted-butterflies', 'bamboo-grows-fast'],
     understand: [
@@ -3134,7 +3134,7 @@ export const scienceReferences: ReferenceGuide[] = [
     slug: 'intro-to-calculus',
     title: 'Intro to Calculus',
     category: 'math',
-    icon: '\uD83D\uDCD0',
+    icon: '📐',
     tagline: 'The mathematics of change — how slopes and areas reveal the rules behind motion.',
     relatedStories: ['siang-river', 'bamboo-grows-fast'],
     understand: [
@@ -3196,7 +3196,7 @@ export const scienceReferences: ReferenceGuide[] = [
     slug: 'matrices-and-vectors',
     title: 'Matrices & Vectors',
     category: 'math',
-    icon: '\uD83D\uDCD0',
+    icon: '📐',
     tagline: 'Arrays of numbers that transform images, solve systems, and power machine learning.',
     relatedStories: ['dragonfly-and-the-paddy-field', 'girl-who-spoke-to-elephants'],
     understand: [

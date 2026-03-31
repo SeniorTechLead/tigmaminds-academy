@@ -1,9 +1,9 @@
 export default function BambooMaterialDiagram() {
   const materials = [
-    { name: 'Bamboo', str: 350, density: 0.6, ratio: 583, color: '#22c55e', icon: '\uD83C\uDF3F' },
+    { name: 'Bamboo', str: 350, density: 0.6, ratio: 583, color: '#22c55e', icon: '🌿' },
     { name: 'Steel', str: 400, density: 7.8, ratio: 51, color: '#94a3b8', icon: '⚙️' },
-    { name: 'Concrete', str: 40, density: 2.4, ratio: 17, color: '#78716c', icon: '\uD83E\uDDF1' },
-    { name: 'Wood (Oak)', str: 100, density: 0.7, ratio: 143, color: '#a16207', icon: '\uD83C\uDF33' },
+    { name: 'Concrete', str: 40, density: 2.4, ratio: 17, color: '#78716c', icon: '🧱' },
+    { name: 'Wood (Oak)', str: 100, density: 0.7, ratio: 143, color: '#a16207', icon: '🌳' },
     { name: 'Aluminium', str: 270, density: 2.7, ratio: 100, color: '#60a5fa', icon: '✨' },
   ];
 
