@@ -761,6 +761,31 @@ import GlutenNetworkDiagram from '../diagrams/GlutenNetworkDiagram';
 import HeatTransferCookingDiagram from '../diagrams/HeatTransferCookingDiagram';
 import ActivityToastTestDiagram from '../diagrams/ActivityToastTestDiagram';
 import PithaScienceOutputDiagram from '../diagrams/PithaScienceOutputDiagram';
+// Batch D missing imports
+import FrogVocalSacDiagram from '../diagrams/FrogVocalSacDiagram';
+import FrogFrequencyDiagram from '../diagrams/FrogFrequencyDiagram';
+import FrogChorusDiagram from '../diagrams/FrogChorusDiagram';
+import FrogHumidityDiagram from '../diagrams/FrogHumidityDiagram';
+import ActivityFrogListenDiagram from '../diagrams/ActivityFrogListenDiagram';
+import PeacockSexualSelectionDiagram from '../diagrams/PeacockSexualSelectionDiagram';
+import PeacockHonestSignalDiagram from '../diagrams/PeacockHonestSignalDiagram';
+import PeacockIridescenceDiagram from '../diagrams/PeacockIridescenceDiagram';
+import PeacockInfrasoundDiagram from '../diagrams/PeacockInfrasoundDiagram';
+import ActivityIridescenceTestDiagram from '../diagrams/ActivityIridescenceTestDiagram';
+import BambooMeristemDiagram from '../diagrams/BambooMeristemDiagram';
+import BambooAuxinDiagram from '../diagrams/BambooAuxinDiagram';
+import BambooCellElongationDiagram from '../diagrams/BambooCellElongationDiagram';
+import ActivityBambooGrowthDiagram from '../diagrams/ActivityBambooGrowthDiagram';
+import CorridorFragmentDiagram from '../diagrams/CorridorFragmentDiagram';
+import CorridorGeneFlowDiagram from '../diagrams/CorridorGeneFlowDiagram';
+import CorridorCameraTrapDiagram from '../diagrams/CorridorCameraTrapDiagram';
+import CorridorConflictSolutionDiagram from '../diagrams/CorridorConflictSolutionDiagram';
+import ActivityCorridorMapDiagram from '../diagrams/ActivityCorridorMapDiagram';
+import HoliNaturalDyeDiagram from '../diagrams/HoliNaturalDyeDiagram';
+import HoliPHIndicatorDiagram from '../diagrams/HoliPHIndicatorDiagram';
+import HoliMordantDiagram from '../diagrams/HoliMordantDiagram';
+import HoliTeaConnectionDiagram from '../diagrams/HoliTeaConnectionDiagram';
+import ActivityDyeExtractDiagram from '../diagrams/ActivityDyeExtractDiagram';
 
 const registry: Record<string, ComponentType> = {
   SineWaveDiagram,
