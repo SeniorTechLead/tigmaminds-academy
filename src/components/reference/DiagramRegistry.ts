@@ -669,6 +669,68 @@ import ActivityGearModelDiagram from '../diagrams/ActivityGearModelDiagram';
 import LogicGateSymbolsDiagram from '../diagrams/LogicGateSymbolsDiagram';
 import LogicHalfAdderDiagram from '../diagrams/LogicHalfAdderDiagram';
 import LogicProcessorDiagram from '../diagrams/LogicProcessorDiagram';
+// Lost Temple — Archaeology & Dating Methods
+import StratigraphyLayersDiagram from '../diagrams/StratigraphyLayersDiagram';
+import Carbon14DecayDiagram from '../diagrams/Carbon14DecayDiagram';
+import RuinsTimelineDiagram from '../diagrams/RuinsTimelineDiagram';
+import ExcavationGridDiagram from '../diagrams/ExcavationGridDiagram';
+import ActivityDigBoxDiagram from '../diagrams/ActivityDigBoxDiagram';
+// Kingfisher Blue — Structural Color & Nanostructures
+import StructuralColorDiagram from '../diagrams/StructuralColorDiagram';
+import ThinFilmWavesDiagram from '../diagrams/ThinFilmWavesDiagram';
+import ColorFadeTestDiagram from '../diagrams/ColorFadeTestDiagram';
+import ShinkansenBeakDiagram from '../diagrams/ShinkansenBeakDiagram';
+import ActivityCDRainbowDiagram from '../diagrams/ActivityCDRainbowDiagram';
+// Firewalker — Heat Transfer & Thermal Physics
+import ConductionBarsDiagram from '../diagrams/ConductionBarsDiagram';
+import LeidenfrostDropDiagram from '../diagrams/LeidenfrostDropDiagram';
+import SpecificHeatBarsDiagram from '../diagrams/SpecificHeatBarsDiagram';
+import FirewalkPhysicsDiagram from '../diagrams/FirewalkPhysicsDiagram';
+import ActivitySpoonTestDiagram from '../diagrams/ActivitySpoonTestDiagram';
+// Lotus Float — Buoyancy & Plant Adaptations
+import LotusNanobumpsDiagram from '../diagrams/LotusNanobumpsDiagram';
+import SurfaceTensionWalkDiagram from '../diagrams/SurfaceTensionWalkDiagram';
+import LotusEngineeringDiagram from '../diagrams/LotusEngineeringDiagram';
+import AerenchymaCrossDiagram from '../diagrams/AerenchymaCrossDiagram';
+import ActivityDropletTestDiagram from '../diagrams/ActivityDropletTestDiagram';
+// Boy Who Counted Butterflies — Data Collection & Citizen Science
+import SamplingVsCensusDiagram from '../diagrams/SamplingVsCensusDiagram';
+import TransectMethodDiagram from '../diagrams/TransectMethodDiagram';
+import DataQualityTargetDiagram from '../diagrams/DataQualityTargetDiagram';
+import CitizenScienceScaleDiagram from '../diagrams/CitizenScienceScaleDiagram';
+import ActivityButterflyCountDiagram from '../diagrams/ActivityButterflyCountDiagram';
+
+// Boy Who Built a Library — Web Development & Databases
+import LibraryHTMLStructureDiagram from '../diagrams/LibraryHTMLStructureDiagram';
+import LibraryDatabaseDiagram from '../diagrams/LibraryDatabaseDiagram';
+import LibraryAPIDiagram from '../diagrams/LibraryAPIDiagram';
+import LibraryCommunityDiagram from '../diagrams/LibraryCommunityDiagram';
+import ActivityCatalogDiagram from '../diagrams/ActivityCatalogDiagram';
+import LibraryAppOutputDiagram from '../diagrams/LibraryAppOutputDiagram';
+// Dragonfly and the Paddy Field — Drones & Computer Vision
+import DroneRotorDiagram from '../diagrams/DroneRotorDiagram';
+import PixelGridDiagram from '../diagrams/PixelGridDiagram';
+import NDVIFieldDiagram from '../diagrams/NDVIFieldDiagram';
+import ActivityAerialPhotoDiagram from '../diagrams/ActivityAerialPhotoDiagram';
+import CropHealthOutputDiagram from '../diagrams/CropHealthOutputDiagram';
+// Tiger's Whisker — Animal Anatomy & Sensory Systems
+import WhiskerSensorDiagram from '../diagrams/WhiskerSensorDiagram';
+import WhiskerSpatialMapDiagram from '../diagrams/WhiskerSpatialMapDiagram';
+import WhiskerRobotDiagram from '../diagrams/WhiskerRobotDiagram';
+import ActivityWhiskerTestDiagram from '../diagrams/ActivityWhiskerTestDiagram';
+import SensoryRangeOutputDiagram from '../diagrams/SensoryRangeOutputDiagram';
+// Cuckoo Calls at Dawn — Circadian Rhythms & Biological Clocks
+import CircadianClockDiagram from '../diagrams/CircadianClockDiagram';
+import LightResetDiagram from '../diagrams/LightResetDiagram';
+import CuckooTimingDiagram from '../diagrams/CuckooTimingDiagram';
+import ActivitySleepTrackDiagram from '../diagrams/ActivitySleepTrackDiagram';
+import DawnChorusOutputDiagram from '../diagrams/DawnChorusOutputDiagram';
+// Grandmother's Pitha — Food Science & Chemistry
+import MaillardReactionDiagram from '../diagrams/MaillardReactionDiagram';
+import GlutenNetworkDiagram from '../diagrams/GlutenNetworkDiagram';
+import HeatTransferCookingDiagram from '../diagrams/HeatTransferCookingDiagram';
+import ActivityToastTestDiagram from '../diagrams/ActivityToastTestDiagram';
+import PithaScienceOutputDiagram from '../diagrams/PithaScienceOutputDiagram';
 
 const registry: Record<string, ComponentType> = {
   SineWaveDiagram,
@@ -1335,6 +1397,36 @@ const registry: Record<string, ComponentType> = {
   LogicGateSymbolsDiagram,
   LogicHalfAdderDiagram,
   LogicProcessorDiagram,
+  // Lost Temple — Archaeology & Dating Methods
+  StratigraphyLayersDiagram,
+  Carbon14DecayDiagram,
+  RuinsTimelineDiagram,
+  ExcavationGridDiagram,
+  ActivityDigBoxDiagram,
+  // Kingfisher Blue — Structural Color & Nanostructures
+  StructuralColorDiagram,
+  ThinFilmWavesDiagram,
+  ColorFadeTestDiagram,
+  ShinkansenBeakDiagram,
+  ActivityCDRainbowDiagram,
+  // Firewalker — Heat Transfer & Thermal Physics
+  ConductionBarsDiagram,
+  LeidenfrostDropDiagram,
+  SpecificHeatBarsDiagram,
+  FirewalkPhysicsDiagram,
+  ActivitySpoonTestDiagram,
+  // Lotus Float — Buoyancy & Plant Adaptations
+  LotusNanobumpsDiagram,
+  SurfaceTensionWalkDiagram,
+  LotusEngineeringDiagram,
+  AerenchymaCrossDiagram,
+  ActivityDropletTestDiagram,
+  // Boy Who Counted Butterflies — Data Collection & Citizen Science
+  SamplingVsCensusDiagram,
+  TransectMethodDiagram,
+  DataQualityTargetDiagram,
+  CitizenScienceScaleDiagram,
+  ActivityButterflyCountDiagram,
   // Frogs Sing Rain — Acoustics & Animal Communication
   FrogVocalSacDiagram,
   FrogFrequencyDiagram,
@@ -1364,6 +1456,37 @@ const registry: Record<string, ComponentType> = {
   HoliMordantDiagram,
   HoliTeaConnectionDiagram,
   ActivityDyeExtractDiagram,
+  // Boy Who Built a Library
+  LibraryHTMLStructureDiagram,
+  LibraryDatabaseDiagram,
+  LibraryAPIDiagram,
+  LibraryCommunityDiagram,
+  ActivityCatalogDiagram,
+  LibraryAppOutputDiagram,
+  // Dragonfly — Drones & Computer Vision
+  DroneRotorDiagram,
+  PixelGridDiagram,
+  NDVIFieldDiagram,
+  ActivityAerialPhotoDiagram,
+  CropHealthOutputDiagram,
+  // Tiger's Whisker — Sensory Systems
+  WhiskerSensorDiagram,
+  WhiskerSpatialMapDiagram,
+  WhiskerRobotDiagram,
+  ActivityWhiskerTestDiagram,
+  SensoryRangeOutputDiagram,
+  // Cuckoo — Circadian Rhythms
+  CircadianClockDiagram,
+  LightResetDiagram,
+  CuckooTimingDiagram,
+  ActivitySleepTrackDiagram,
+  DawnChorusOutputDiagram,
+  // Grandmother's Pitha — Food Science
+  MaillardReactionDiagram,
+  GlutenNetworkDiagram,
+  HeatTransferCookingDiagram,
+  ActivityToastTestDiagram,
+  PithaScienceOutputDiagram,
 };
 
 export default registry;

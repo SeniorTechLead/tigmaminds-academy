@@ -983,6 +983,7 @@ And somewhere in the green hills, a tiger still comes to a certain rock at dawn,
 *The end.*` },
     stem: { title: 'Animal Anatomy & Sensory Systems', description: 'What whiskers can feel — sensory systems and haptic technology.', icon: Cpu, color: 'from-amber-500 to-orange-500', skills: ['Understand how mechanoreceptors convert physical stimuli into nerve signals', 'Analyze sensory range and sensitivity across different animal species', 'Model signal propagation in nerve fibers', 'Compare human and animal sensory capabilities quantitatively'], project: {
         title: 'Map Animal Sensory Ranges',
+        outputDiagram: 'SensoryRangeOutputDiagram',
         description: 'Build a comparative visualization of sensory capabilities across species — hearing ranges, vision spectra, and tactile sensitivity.',
         steps: [
           'Research sensory data for 8-10 animals: hearing range, vision spectrum, whisker sensitivity',
@@ -1013,7 +1014,7 @@ And somewhere in the green hills, a tiger still comes to a certain rock at dawn,
             'A tiger\'s whiskers (vibrissae) are surrounded by a dense cluster of mechanoreceptors at their base — up to 200 nerve endings per whisker, compared to about 20 for a human hair follicle. This makes each whisker an extraordinarily sensitive instrument, capable of detecting air currents, vibrations from nearby movement, and the precise dimensions of openings in the dark. The whisker itself is not alive — it is made of keratin, like your hair — but it acts as a lever that amplifies tiny forces and transmits them to the receptors at the base.',
           ],
           keyIdea: 'Mechanoreceptors convert physical touch and vibration into electrical nerve signals by opening ion channels in cell membranes — a tiger\'s whisker base contains 10 times more of these sensors than a human hair.',
-          diagram: 'NeuronDiagram',
+          diagram: 'WhiskerSensorDiagram',
         },
         {
           title: 'Nerve Signals: How Information Travels to the Brain',
@@ -1032,26 +1033,72 @@ And somewhere in the green hills, a tiger still comes to a certain rock at dawn,
             'Scientists have been inspired by this biological system to create artificial whisker sensors for robots. These sensors use flexible beam structures with strain gauges at the base, mimicking the lever-and-receptor design of real whiskers. Robotic whisker arrays have been used in underwater exploration (where visibility is zero), in pipe inspection robots (which must navigate in complete darkness), and in search-and-rescue robots designed to operate in smoke-filled buildings. The biological design is so effective that engineers have struggled to improve upon it.',
           ],
           keyIdea: 'Tiger whiskers create a 3D tactile map in total darkness by detecting both physical contact and airflow patterns — a system so effective that robotics engineers copy its design.',
+          diagram: 'WhiskerSpatialMapDiagram',
+        },
+        {
+          title: 'From Whiskers to Robots: Biomimicry in Action',
+          paragraphs: [
+            'Engineers looked at the tiger\'s whisker system and asked: can we build this? The answer is **robotic whisker sensors** — flexible rods with strain gauges at their base, mimicking the keratin shaft and mechanoreceptor cluster of a real vibrissa.',
+            'These sensors work in situations where cameras are useless: **underwater robots** in murky rivers (zero visibility), **pipe inspection robots** crawling in total darkness, and **search-and-rescue robots** navigating smoke-filled buildings.',
+            'The biological design is so effective that engineers have struggled to match it. A tiger\'s whisker can detect vibrations as small as a few micrometres. Current robotic whiskers achieve roughly 60% of that sensitivity — because 200 different nerve endings outperform a single strain gauge.',
+            'This is **biomimicry** — copying nature\'s solutions for human technology. Other examples: Velcro (inspired by burrs), bullet train noses (kingfisher beaks), and turbine blades with bumps (humpback whale flippers).',
+          ],
+          keyIdea: 'Robotic whisker sensors copy the tiger\'s design for use in total darkness — but current technology achieves only about 60% of biological sensitivity.',
+          diagram: 'WhiskerRobotDiagram',
         },
       ],
       vocabulary: [
-        ['Photosynthesis', 'The process plants use to convert sunlight, water, and CO₂ into sugar and oxygen'],
-        ['Chlorophyll', 'The green pigment in plants that absorbs sunlight for photosynthesis'],
-        ['Vegetative propagation', 'Growing a new plant from a fragment of the parent — without seeds'],
-        ['Totipotent', 'A cell that can develop into any cell type — plant cells have this superpower'],
-        ['Cell wall', 'A rigid outer layer made of cellulose that gives plant cells their shape and strength'],
+        ['Vibrissa', 'A whisker — a thick, stiff hair with dense nerve endings at its base, used as a touch sensor'],
+        ['Mechanoreceptor', 'A sensory cell that converts physical pressure into electrical nerve signals'],
+        ['Action potential', 'A brief electrical pulse (~0.1 volts) that travels along a nerve fibre'],
+        ['Somatosensory cortex', 'The brain region that processes touch — in tigers, each whisker has its own dedicated neuron cluster'],
+        ['Biomimicry', 'Designing technology by copying solutions from nature — robotic whisker sensors copy tiger vibrissae'],
       ],
       trueFalse: [
-        { statement: 'Plants eat soil to get their food.', isTrue: false, explanation: 'Plants make their own food through photosynthesis using sunlight, water, and CO₂ from air. The soil provides minerals and water, but the actual "food" (sugar) is manufactured inside the leaves using solar energy.' },
-        { statement: 'A single plant cell can grow into an entire new plant.', isTrue: true, explanation: 'Unlike most animal cells, many plant cells are totipotent — they retain the ability to become any cell type. This is why you can grow a new plant from a cutting — the cut stem cells reorganize into roots, stems, and leaves.' },
-        { statement: 'All plants reproduce using seeds.', isTrue: false, explanation: 'Many plants can also reproduce vegetatively — through cuttings, runners, tubers, or bulbs. Every banana plant in your grocery store is a clone, grown from a cutting rather than a seed.' },
+        { statement: 'A tiger\'s whisker is alive and can feel things directly.', isTrue: false, explanation: 'The whisker is dead keratin, like your hair. It acts as a lever: touch amplifies force and transmits it to the mechanoreceptors at the base, which generate nerve signals.' },
+        { statement: 'Tigers can navigate in total darkness using only their whiskers.', isTrue: true, explanation: 'Whiskers spread to body width and detect both physical contact and air currents, creating a 3D map of surroundings without any light.' },
+        { statement: 'Human hair follicles have the same number of nerve endings as tiger whiskers.', isTrue: false, explanation: 'A tiger\'s whisker base has about 200 nerve endings — roughly 10 times more than a human hair follicle (~20).' },
       ],
       facts: [
-        'Photosynthesis produces all the oxygen we breathe. Every other breath you take comes from algae and plants splitting water molecules apart.',
-        'The world\'s largest organism is a clonal colony of aspen trees in Utah called "Pando" — 47,000 tree stems all connected by a single root system, weighing 6,600 tonnes.',
-        'Tulsi (holy basil) contains eugenol, a natural antiseptic. Traditional medicine used it for centuries — modern science has confirmed its antimicrobial properties.',
+        'A tiger has about 30 whiskers (vibrissae), each surrounded by up to 200 nerve endings — 10 times more sensitive than a human hair follicle.',
+        'Tiger whiskers spread to approximately body width. If they fit through a gap, the tiger knows its body will too — an instant "will I fit?" calculator.',
+        'Engineers have built robotic whisker sensors for pipe inspection and underwater robots — but they achieve only about 60% of biological sensitivity.',
       ],
-      offlineActivity: 'Take a cutting from a plant (a small piece of stem with a few leaves). Place it in a glass of water on a windowsill. Check every day — within a week, you should see tiny roots forming. You\'re witnessing vegetative propagation — the same process that makes Tejimola\'s story biologically plausible.',
+      offlineActivity: 'Blindfold yourself and try to walk across a room with obstacles. Time it and count bumps. Now do it again holding two long sticks as "whiskers." Compare times and collision counts — the sticks give spatial awareness in darkness, like tiger vibrissae, but with only 2 sensors instead of 30!',
+      offlineActivityDiagram: 'ActivityWhiskerTestDiagram',
+      codeTeaser: `import numpy as np
+import matplotlib.pyplot as plt
+
+animals = ["Tiger", "Human", "Bat", "Dolphin"]
+touch = [90, 10, 5, 0]
+hearing = [65, 40, 95, 98]
+vision = [80, 90, 15, 30]
+
+x = np.arange(len(animals))
+w = 0.25
+plt.bar(x - w, touch, w, label="Touch")
+plt.bar(x, hearing, w, label="Hearing")
+plt.bar(x + w, vision, w, label="Vision")
+plt.xticks(x, animals)
+plt.ylabel("Relative sensitivity (%)")
+plt.title("Which Sense Does Each Animal Rely On?")
+plt.legend()
+plt.show()`,
+      referenceLinks: [
+        { slug: 'animal-senses-and-behavior', reason: 'How other animals sense the world — echolocation, infrared, electroreception' },
+      ],
+      nextLessons: [
+        { slug: 'girl-who-spoke-to-elephants', reason: 'Elephants detect ground vibrations through their feet — another animal sensory system' },
+        { slug: 'river-dolphins-secret', reason: 'Dolphins use sonar instead of whiskers — a different solution to sensing in darkness' },
+        { slug: 'woodpeckers-drum', reason: 'Impact absorption in the woodpecker skull — another biomimicry story' },
+      ],
+      quiz: [
+        { question: 'What are vibrissae?', options: ['A type of muscle', 'The scientific name for whiskers', 'A fur pattern', 'Tiny jaw bones'], answer: 1 },
+        { question: 'Why are whiskers so sensitive?', options: ['They are very long', 'They have ~200 mechanoreceptors at the base', 'They are made of special metal-like material', 'They see infrared'], answer: 1 },
+        { question: 'How does a tiger know if it will fit through a gap?', options: ['Echolocation', 'Whiskers span body width — if they touch both sides, too narrow', 'It measures with paws', 'Night vision'], answer: 1 },
+        { question: 'What is biomimicry?', options: ['Teaching animals tools', 'Copying nature to design technology', 'Replacing animal parts', 'Studying fossils'], answer: 1 },
+        { question: 'How do nerves encode touch intensity?', options: ['Higher voltage', 'More pulses per second and more active fibres', 'Different colour signals', 'All touches produce the same signal'], answer: 1 },
+      ],
     },
   },
   {
@@ -2538,6 +2585,7 @@ His mother smiled. "You didn't build it from nothing, Dipankar. You built it fro
       ],
       project: {
         title: 'Build a Community Library App',
+        outputDiagram: 'LibraryAppOutputDiagram',
         description: 'Create a full-stack web application where users can browse books, borrow them, leave reviews, and track their reading history.',
         steps: [
           'Design the database schema: books, users, loans, reviews',
@@ -2742,6 +2790,7 @@ And if her wings catch the light just right, and you see that flash of impossibl
       ],
       project: {
         title: 'Build a Crop Health Detector',
+        outputDiagram: 'CropHealthOutputDiagram',
         description: 'Train a computer vision model that can identify healthy vs. diseased rice plants from photographs — the same tech used in agricultural drones.',
         steps: [
           'Collect and label images of healthy and diseased rice leaves',
@@ -2775,7 +2824,7 @@ And if her wings catch the light just right, and you see that flash of impossibl
             'Agricultural drones used for crop monitoring in paddy fields typically carry cameras, multispectral sensors, and sometimes spray systems. They fly at altitudes of 10-50 meters, covering 10-20 hectares per battery charge. The flight controller uses GPS for positioning, barometric pressure for altitude, and inertial measurement units (IMUs) for orientation. Modern agricultural drones can fly pre-programmed routes automatically, capturing images with centimeter-level resolution — enough to spot individual plants showing signs of disease or pest damage.',
           ],
           keyIdea: 'Quadcopter drones fly by varying the speed of four rotors — no moving control surfaces needed — and a flight controller with gyroscopes adjusts motor speeds hundreds of times per second for stability.',
-          diagram: 'BernoulliDiagram',
+          diagram: 'DroneRotorDiagram',
         },
         {
           title: 'Computer Vision: Teaching Machines to See',
@@ -2785,7 +2834,7 @@ And if her wings catch the light just right, and you see that flash of impossibl
             'For crop monitoring, drones often carry multispectral cameras that capture light beyond what human eyes can see — particularly near-infrared (NIR). Healthy plants absorb red light for photosynthesis but strongly reflect NIR light. Stressed or diseased plants reflect less NIR. The Normalized Difference Vegetation Index (NDVI), calculated as (NIR - Red)/(NIR + Red), produces a map where healthy vegetation appears bright and stressed vegetation appears dark. By flying a drone over a paddy field and computing NDVI for every pixel, a farmer can identify problem areas before they are visible to the naked eye — catching pest infestations or nutrient deficiencies weeks earlier.',
           ],
           keyIdea: 'Computer vision uses convolutional neural networks to extract meaning from images, and multispectral cameras measure plant health through NDVI — catching crop problems weeks before they are visible to the human eye.',
-          diagram: 'FeatureExtractionDiagram',
+          diagram: 'PixelGridDiagram',
         },
         {
           title: 'Precision Agriculture: Drones in the Paddy Field',
@@ -2795,6 +2844,17 @@ And if her wings catch the light just right, and you see that flash of impossibl
             'In rice paddy farming across South and Southeast Asia, drone technology is addressing specific challenges: detecting rice blast fungus before it spreads (using hyperspectral imaging that identifies the fungal infection\'s unique spectral signature), mapping water levels in paddies (critical because rice needs specific water depths at different growth stages), counting plant density to identify areas that need reseeding, and monitoring the growth of weeds that compete with rice for nutrients. Indian startups like CropIn and Tartansense are already deploying these systems for farmers across Assam and other rice-growing states.',
           ],
           keyIdea: 'Precision agriculture uses drones to measure crop conditions at every point in a field, creating prescription maps that reduce pesticide and fertilizer use by 30-50% while maintaining yields.',
+          diagram: 'NDVIFieldDiagram',
+        },
+        {
+          title: 'From Dragonfly Eyes to Camera Sensors',
+          paragraphs: [
+            'Nila the dragonfly could spot a leafhopper from metres away using **compound eyes** with nearly 30,000 tiny lenses (ommatidia). Dragonflies catch prey mid-air with a 95% success rate — the highest of any predator on Earth.',
+            'A drone camera uses one lens focusing light onto a **sensor** — a grid of millions of light-detecting cells. Each cell records red, green, and blue intensity, producing one pixel. A 12-megapixel camera has 12 million cells, each measuring three colours.',
+            'But the dragonfly has a brain that **instantly recognises** a leafhopper and triggers a catch response. The drone camera captures numbers. To make those numbers useful, you need **software** — algorithms that detect patterns. "Is this green healthy or stressed?" This is computer vision: teaching machines to understand what they see.',
+            '**Think about it:** A dragonfly has 30,000 ommatidia. A camera has 12,000,000 pixels. Does more pixels mean better "seeing"? Not necessarily — the dragonfly processes and reacts in real time, while the camera needs AI to understand its image.',
+          ],
+          keyIdea: 'Cameras capture millions of pixels but do not understand them — computer vision software turns raw numbers into meaning, just as a dragonfly\'s brain turns light into "catch that leafhopper."',
         },
       ],
       vocabulary: [
@@ -2814,7 +2874,33 @@ And if her wings catch the light just right, and you see that flash of impossibl
         'Precision agriculture using drones can reduce pesticide and fertilizer use by 30-50% while maintaining or improving crop yields.',
         'Dragonflies can fly in all six directions (up, down, forward, backward, left, right) and hover in place — capabilities that drone engineers are still trying to match.',
       ],
-      offlineActivity: 'Stand on a chair or climb to a high point and photograph a patch of garden or field from directly above. Then photograph the same area from ground level. Compare: what can you see from above that you cannot see from the ground? This is why drones are valuable — the aerial perspective reveals patterns invisible at ground level.',
+      offlineActivity: 'Stand on a chair or climb to a high point and photograph a patch of garden or field from directly above. Then photograph the same area from ground level. Compare: what can you see from above that you cannot see from the ground?',
+      offlineActivityDiagram: 'ActivityAerialPhotoDiagram',
+      codeTeaser: `import numpy as np
+# How computers "see" — an image is just numbers!
+pixel_healthy = [34, 197, 94]   # low red, HIGH green
+pixel_sick    = [146, 64, 3]    # HIGH red, low green
+
+def is_plant(pixel):
+    r, g, b = pixel
+    return g > r  # Green dominates = plant!
+
+print(is_plant(pixel_healthy))  # True
+print(is_plant(pixel_sick))     # False`,
+      referenceLinks: [
+        { slug: 'machine-learning', reason: 'How neural networks learn to classify images — the AI behind crop health detection' },
+      ],
+      nextLessons: [
+        { slug: 'girl-who-spoke-to-elephants', reason: 'Another story where AI meets wildlife — classifying elephant rumbles from sensor data' },
+        { slug: 'boy-who-built-a-library', reason: 'Web development and databases — building tech for communities' },
+      ],
+      quiz: [
+        { question: 'How does a quadcopter drone steer?', options: ['It tilts its wings', 'It changes the speed of individual rotors', 'It uses a rudder', 'It shifts its weight'], answer: 1 },
+        { question: 'What is a pixel?', options: ['A camera lens type', 'The smallest unit of a digital image — a tiny square of one colour', 'A measurement of quality', 'A filter for photos'], answer: 1 },
+        { question: 'What does NDVI measure?', options: ['Wind speed', 'Soil moisture', 'Plant health based on infrared vs red light reflection', 'Pest count'], answer: 2 },
+        { question: 'Why do healthy plants have high NDVI?', options: ['They reflect more red', 'They absorb infrared', 'They absorb red for photosynthesis and reflect infrared', 'They produce visible green pigment'], answer: 2 },
+        { question: 'How can drones reduce pesticide use?', options: ['By spraying more evenly', 'By mapping exactly where pests are so farmers only treat those spots', 'By scaring pests with noise', 'By replacing chemicals with drones'], answer: 1 },
+      ],
     },
   },
   {
@@ -6135,6 +6221,7 @@ And if you ever wonder why the cuckoo's call feels different from every other bi
       skills: ['Understand circadian rhythms and the molecular clock in organisms', 'Analyze sunrise timing data across seasons and latitudes', 'Model how light intensity triggers behavioral responses in birds', 'Interpret time-series data on animal vocalizations'],
       project: {
         title: 'Track Dawn Chorus Timing Across Seasons',
+        outputDiagram: 'DawnChorusOutputDiagram',
         description: 'Collect or research data on when birds start singing relative to sunrise, and model how day length drives the dawn chorus.',
         steps: [
           'Research sunrise times for your location across all 12 months',
@@ -6152,7 +6239,7 @@ And if you ever wonder why the cuckoo's call feels different from every other bi
     },
     illustration: '/content/illustrations/cuckoo-calls-dawn.webp',
     track: 'school',
-    subjects: ['Biology'] as Subject[],
+    subjects: ['Biology' as Subject, 'Physics' as Subject],
     toolSkills: ['Python' as Skill, 'NumPy' as Skill, 'Matplotlib' as Skill, 'Data Analysis' as Skill],
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
@@ -6176,6 +6263,7 @@ And if you ever wonder why the cuckoo's call feels different from every other bi
             'For the cuckoo, circadian timing is critical to its parasitic strategy. Female cuckoos typically lay their eggs in host nests during a narrow window in the early morning, when host parents are away foraging. They can lay an egg in as few as 10 seconds — faster than almost any other bird. This speed, combined with precise timing, minimizes the chance of being caught by the host. Studies with nest cameras have shown that cuckoos monitor host nests for days before laying, timing their intrusion to the host\'s predictable daily departure pattern.',
           ],
           keyIdea: 'Circadian rhythms are self-sustaining 24-hour molecular clocks that regulate behavior in all animals — cuckoos exploit the predictable daily patterns of their hosts.',
+          diagram: 'CircadianClockDiagram',
         },
         {
           title: 'Bird Migration and the Magnetic Compass',
@@ -6187,6 +6275,19 @@ And if you ever wonder why the cuckoo's call feels different from every other bi
           ],
           keyIdea: 'Young cuckoos navigate thousands of kilometers alone using an innate toolkit of magnetic, stellar, and solar compasses encoded entirely in their genes.',
           diagram: 'EarthMagnetismDiagram',
+        },
+        {
+          title: 'Jet Lag and Why Timing Matters',
+          paragraphs: [
+            'Your circadian clock drifts by about 11 minutes per day without light cues. Morning light **resets** it daily, keeping your body synchronized with the real world. This is why the cuckoo calls at the same time each morning — its clock is reset by the same dawn light.',
+            'When you fly across time zones, you break this synchronization. Your clock says "2 AM, sleep deeply" but the local sun says "10 AM, wake up." This mismatch is **jet lag**: fatigue, confusion, and poor concentration. Your organs are running on the old schedule.',
+            'Recovery follows a predictable rule: your clock shifts by about **1 hour per day**. Fly from India to London (4.5-hour difference) and you need 4-5 days to adjust. Fly to New York (9.5 hours) and it takes over a week.',
+            '**Shift workers** (nurses, factory workers, pilots) with regularly disrupted circadian rhythms have increased risk of heart disease and diabetes. Understanding circadian biology is a public health issue affecting millions worldwide.',
+          ],
+          keyIdea: 'Jet lag happens because your internal clock shifts by only ~1 hour per day — fly across 9 time zones and your body needs over a week to catch up.',
+          diagram: 'CuckooTimingDiagram',
+          checkYourself: 'If you fly from Guwahati to London (4.5-hour difference), how many days of jet lag?',
+          checkAnswer: 'About 4-5 days, since your clock shifts ~1 hour per day. Each morning, London\'s dawn light nudges your SCN closer to the local schedule.',
         },
       ],
       vocabulary: [
@@ -8042,6 +8143,7 @@ Mrinmoyee bit into the sunga pitha. It was warm and sweet and smoky, and it tast
       skills: ['Understand the Maillard reaction, caramelization, and how heat transforms food chemistry', 'Analyze the role of gluten, starch, and fat in dough texture', 'Model fermentation as a biological and chemical process', 'Calculate nutritional content from ingredient proportions'],
       project: {
         title: 'Experiment With the Science of Baking',
+        outputDiagram: 'PithaScienceOutputDiagram',
         description: 'Test how changing ingredients (flour type, sugar amount, cooking temperature) affects the texture, color, and taste of pitha.',
         steps: [
           'Choose a simple pitha recipe and identify the key variables: flour ratio, sugar, cooking time',
@@ -8059,7 +8161,7 @@ Mrinmoyee bit into the sunga pitha. It was warm and sweet and smoky, and it tast
     },
     illustration: '/content/illustrations/grandmothers-pitha.webp',
     track: 'school',
-    subjects: ['Biology'] as Subject[],
+    subjects: ['Chemistry' as Subject, 'Biology' as Subject],
     toolSkills: ['Python' as Skill, 'NumPy' as Skill, 'Matplotlib' as Skill, 'Data Analysis' as Skill],
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
@@ -8074,6 +8176,7 @@ Mrinmoyee bit into the sunga pitha. It was warm and sweet and smoky, and it tast
             'The Maillard reaction is not the same as caramelization, though both produce browning. Caramelization involves the breakdown of sugars alone at high temperatures (above 160°C), while the Maillard reaction requires both sugars and amino acids and begins at lower temperatures. In pitha making, both reactions contribute to the final flavor and color: the Maillard reaction creates savory, nutty, toasted notes from the rice flour proteins, while caramelization of the jaggery (gur) filling adds sweet, butterscotch-like flavors.',
           ],
           keyIdea: 'The Maillard reaction between amino acids and sugars above 140°C creates over 1,000 flavor compounds — the science behind golden-brown, delicious food.',
+          diagram: 'MaillardReactionDiagram',
         },
         {
           title: 'Fermentation: Microbes as Chefs',
@@ -8093,6 +8196,20 @@ Mrinmoyee bit into the sunga pitha. It was warm and sweet and smoky, and it tast
             'For pitha making, starch gelatinization is carefully controlled. The rice flour is mixed with water at specific ratios and heated to specific temperatures to achieve the right consistency — too little gelatinization leaves the pitha gritty and hard, too much makes it gummy and sticky. The amylose-to-amylopectin ratio of the rice variety matters enormously: glutinous (sticky) rice has almost no amylose and produces soft, chewy pithas. Non-glutinous rice has 20-30% amylose and produces firmer pithas that hold their shape. Traditional pitha recipes, passed down through generations, encode precise control of starch chemistry through cooking times, temperatures, and rice variety selection.',
           ],
           keyIdea: 'Starch gelatinization occurs when heat and water break the crystalline structure of raw starch granules — the fundamental chemistry that makes rice edible.',
+          diagram: 'GlutenNetworkDiagram',
+        },
+        {
+          title: 'Heat Transfer: Three Ways to Cook a Pitha',
+          paragraphs: [
+            'Aita makes four types of pitha, each using a different method of **heat transfer** — the movement of thermal energy from hot to cool. Understanding these three methods explains why each pitha has a completely different texture.',
+            '**Conduction** is heat through direct contact. When Aita spreads batter on a hot pan for til pitha, the metal touches the batter and heat flows molecule by molecule. Conduction creates high surface temperatures — exactly what you need for Maillard browning. The bottom turns golden while the top stays pale.',
+            '**Convection** is heat through a moving fluid. For narikol pitha, Aita steams over boiling water. Hot steam surrounds the pitha from all sides. Because steam is "only" 100°C (below the Maillard threshold), the pitha stays white and soft. Steaming is gentle and keeps moisture in.',
+            '**Radiation** is heat through electromagnetic waves. For sunga pitha, Aita roasts the bamboo tube over an open fire. Infrared energy travels through air, heats the bamboo, which then heats the rice inside by conduction. This is the slowest method but the bamboo adds a unique smoky flavour.',
+          ],
+          keyIdea: 'Til pitha uses conduction (fast browning), narikol pitha uses convection (gentle steaming), sunga pitha uses radiation (slow roasting) — each method creates a different texture and flavour.',
+          diagram: 'HeatTransferCookingDiagram',
+          checkYourself: 'Why does steamed pitha stay white while pan-fried pitha turns golden-brown?',
+          checkAnswer: 'Steam maxes out at 100°C, below the 140°C Maillard threshold. The pan surface exceeds 140°C easily, triggering browning. Same batter, different heat, different result.',
         },
       ],
       vocabulary: [
@@ -8112,7 +8229,39 @@ Mrinmoyee bit into the sunga pitha. It was warm and sweet and smoky, and it tast
         'Fermentation of rice batter is powered by wild yeasts and Lactobacillus bacteria that are naturally present in the environment — traditional cooks unknowingly harness these microorganisms by leaving batter to sit overnight.',
         'Starch gelatinization is irreversible: once heated above 60-70°C with water, the crystalline structure of raw starch is permanently destroyed and the granules swell to many times their original volume, which is why you cannot "un-cook" rice.',
       ],
-      offlineActivity: 'Compare two pieces of bread: one untoasted and one toasted. Look at the color difference (Maillard browning), smell both (the toasted one has far more aroma compounds), and taste both (the toasted one has richer, more complex flavor). Now try the same experiment with raw vs. toasted sesame seeds — just heat a small spoonful in a dry pan for 2 minutes. The transformation from bland to intensely nutty and aromatic is the Maillard reaction at work, the same chemistry that makes til pitha golden and fragrant.',
+      offlineActivity: 'Compare untoasted bread with toasted bread: look at the colour change (Maillard browning), smell both (the toasted one has far more aroma compounds), and taste both (richer, more complex flavour). Then toast sesame seeds in a dry pan for 2 minutes — the transformation from bland to intensely nutty is the Maillard reaction, the same chemistry in til pitha.',
+      offlineActivityDiagram: 'ActivityToastTestDiagram',
+      codeTeaser: `import numpy as np
+import matplotlib.pyplot as plt
+
+# How temperature affects the Maillard reaction
+temps = np.arange(100, 220, 5)
+rate = np.where(temps >= 140,
+    2 ** ((temps - 140) / 10), 0.1)
+
+plt.fill_between(temps, rate, alpha=0.2, color="#d97706")
+plt.plot(temps, rate, color="#d97706", linewidth=2)
+plt.axvline(x=140, color="red", linestyle="--",
+            label="140C: Maillard starts")
+plt.xlabel("Temperature (C)")
+plt.ylabel("Browning rate (relative)")
+plt.title("Why Hot Pans Brown Food")
+plt.legend()
+plt.show()`,
+      referenceLinks: [
+        { slug: 'chemistry-reactions', reason: 'Chemical reactions — reactants, products, energy, and reaction rates' },
+      ],
+      nextLessons: [
+        { slug: 'golden-hilsa', reason: 'Another food story — fish migration and why hilsa tastes different in different seasons' },
+        { slug: 'honey-hunters-lesson', reason: 'Honey is a product of bee chemistry — the same biology that makes pitha batter rise' },
+      ],
+      quiz: [
+        { question: 'What is the Maillard reaction?', options: ['Sugar melting', 'A reaction between amino acids and sugars above 140C producing browning and flavour', 'Fermentation by yeast', 'Starch absorbing water'], answer: 1 },
+        { question: 'How is Maillard different from caramelization?', options: ['They are the same', 'Maillard needs sugars AND amino acids; caramelization uses only sugars', 'Caramelization is at lower temperature', 'Maillard produces no browning'], answer: 1 },
+        { question: 'What does fermentation do to pitha batter?', options: ['Makes it harder', 'Microbes produce CO2 (fluffy) and lactic acid (tangy)', 'Removes nutrients', 'Kills bacteria'], answer: 1 },
+        { question: 'Why does rice become soft when cooked?', options: ['Absorbs flavour', 'Heat and water break crystalline starch structure (gelatinization)', 'Removes outer shell', 'Cells die'], answer: 1 },
+        { question: 'Why is sticky rice stickier?', options: ['More water', 'Almost no amylose, nearly all amylopectin', 'Cooked longer', 'Added proteins'], answer: 1 },
+      ],
     },
   },
   {
@@ -8184,6 +8333,7 @@ They walked back down the hill as the sun set behind Guwahati, leaving the old s
       project: {
         title: 'Date an Archaeological Site Using Multiple Methods',
         description: 'Simulate the process of dating a lost temple by analyzing pottery styles, stone weathering, and simulated radiocarbon data.',
+        outputDiagram: 'Carbon14DecayDiagram',
         steps: [
           'Research common dating methods and their applicable time ranges',
           'Create a simulated excavation grid with artifacts at different depths',
@@ -12347,12 +12497,14 @@ Anusha kept drawing maps. Maps of her school. Maps of her grandmother's kitchen.
     stem: {
       title: 'Heat Transfer & Thermal Physics',
       description: 'Walking on coals — heat transfer physics.',
+        outputDiagram: 'FirewalkPhysicsDiagram',
       icon: Sun,
       color: 'from-red-400 to-orange-500',
       skills: ['Understand heat conduction, convection, and radiation as energy transfer mechanisms', 'Calculate thermal conductivity and the Leidenfrost effect on brief contact surfaces', 'Model heat transfer from a hot surface to a moving foot using contact time and conductivity', 'Analyze insulation properties of different materials'],
       project: {
         title: 'Investigate How Materials Conduct Heat',
         description: 'Measure how quickly different materials transfer heat and explain why firewalking is possible on embers but not metal.',
+        outputDiagram: 'FirewalkPhysicsDiagram',
         steps: [
           'Gather test materials: metal spoon, wooden stick, plastic rod, ceramic tile, thick cloth',
           'Place one end of each in hot (not boiling) water and time how long until the other end feels warm',
@@ -12375,53 +12527,61 @@ Anusha kept drawing maps. Maps of her school. Maps of her grandmother's kitchen.
     estimatedHours: 12,
     playground: 'firewalker' as const,
     level0: {
+      concepts: [
+        { title: 'Conduction: Why Metal Burns But Wood Doesn’t', paragraphs: ['Put a metal spoon and a wooden spoon in hot water. After two minutes, the metal handle is hot — the wooden one is cool. Same water, same temperature. The difference: **thermal conductivity**.', 'Copper: 385 W/m·K. Wood: 0.15. Charcoal: just 0.05 — 7,700 times slower than copper. When a firewalker steps on hot coals, the charcoal cannot deliver heat fast enough to burn during brief contact.', 'Your nerves sense **heat flux** (rate of heat transfer), not temperature. A 500°C coal and 500°C metal are the same temperature, but the metal burns instantly because its high conductivity delivers heat thousands of times faster.'], keyIdea: 'Thermal conductivity determines how fast heat flows. Charcoal’s extremely low conductivity (0.05 W/m·K) means it cannot burn skin during brief contact.', diagram: 'ConductionBarsDiagram', checkYourself: 'A tile floor and carpet are both at 20°C. Why does tile feel colder?', checkAnswer: 'Tile has higher thermal conductivity — it pulls heat from your foot faster.' },
+        { title: 'The Leidenfrost Effect', paragraphs: ['Drop water on a 150°C pan — it boils and vanishes in a second. Now try at 300°C. The droplet **floats** and skitters, surviving 30+ seconds. This is the **Leidenfrost effect**.', 'The bottom of the droplet instantly vaporizes, creating a steam cushion. Steam conducts heat ~25× worse than water, so this vapor layer **insulates** the rest of the droplet.', 'Firewalkers may benefit similarly: foot moisture creates a brief vapor barrier. But the Leidenfrost effect alone doesn’t explain firewalking — charcoal’s low conductivity and brief contact are equally important.'], keyIdea: 'Above ~200°C, water drops float on their own steam cushion. This may partially protect firewalkers alongside low conductivity.', diagram: 'LeidenfrostDropDiagram', checkYourself: 'Why does a water droplet on a very hot pan last LONGER than on a moderately hot pan?', checkAnswer: 'The steam cushion from the Leidenfrost effect insulates the droplet on very hot surfaces. On moderately hot surfaces, water touches metal directly and boils away faster.' },
+        { title: 'Specific Heat Capacity', paragraphs: ['**Specific heat capacity** measures energy needed to raise 1 kg by 1°C. Water: 4,186 J/kg·K (enormous). Charcoal: about 1,000 J/kg·K.', 'The real trick is **density**. Charcoal is light (~250 kg/m³) while iron is heavy (~7,874 kg/m³). Each cm³ of charcoal stores far less thermal energy than iron at the same temperature. The thin surface layer cools almost instantly on contact.', 'Three factors for safe firewalking: (1) low conductivity limits heat flow rate, (2) low energy density means the surface cools fast, (3) brief contact (<1 second) limits total energy transfer.'], keyIdea: 'Charcoal stores little thermal energy per cm³ due to low density. The surface cools rapidly on contact.', diagram: 'SpecificHeatBarsDiagram', checkYourself: 'Why does a swimming pool take all day to warm up while a metal slide gets hot in an hour?', checkAnswer: 'Water has very high specific heat capacity AND mass — it absorbs enormous energy before temperature rises noticeably.' },
+        { title: 'Fire Walking: Three Factors Together', paragraphs: ['No single factor explains firewalking. All three align: **low conductivity** (heat flows slowly), **low stored energy** (surface cools fast), and **brief contact** (under 1 second limits total transfer).', 'Remove any one and it fails. Hot **metal** (high conductivity) burns instantly. Standing **still** (long contact) burns. **Dense** coals (high stored energy) don’t cool fast enough.', '**Warning:** firewalking on metal at the same temperature would cause instant severe burns. Never attempt without expert supervision.'], keyIdea: 'Three protective factors must align: low conductivity, low energy density, and brief contact. Remove any one and the physics fails.', diagram: 'FirewalkPhysicsDiagram', checkYourself: 'Why can you walk on 500°C charcoal but not 500°C iron?', checkAnswer: 'Iron has ~7,700× higher conductivity and ~30× higher energy density per volume, delivering heat thousands of times faster.' },
+      ],
       vocabulary: [
-        ['Thermal Conductivity', 'How quickly heat flows through a material — metals conduct heat fast, wood and charcoal conduct it slowly'],
-        ['Leidenfrost Effect', 'When water lands on a very hot surface and floats on a cushion of its own steam instead of boiling away instantly'],
+        ['Thermal Conductivity', 'How quickly heat flows through a material — metals conduct fast, charcoal conducts very slowly'],
+        ['Leidenfrost Effect', 'When water lands on a very hot surface and floats on a cushion of its own steam'],
         ['Heat Flux', 'The rate at which heat energy transfers through a surface — measured in watts per square metre'],
-        ['Specific Heat Capacity', 'How much energy a material must absorb to raise its temperature by one degree — water\'s is very high'],
+        ['Specific Heat Capacity', 'How much energy a material must absorb to raise its temperature by one degree'],
         ['Insulator', 'A material that slows down the flow of heat — like wood, charcoal, or trapped air'],
       ],
       trueFalse: [
-        { statement: 'A material at 500°C will always burn you instantly on contact.', isTrue: false, explanation: 'Burn risk depends on heat flux, not just temperature. Charcoal at 500°C has such low thermal conductivity that it cannot deliver heat to your skin fast enough to cause a burn during brief contact — unlike metal at the same temperature, which would burn instantly.' },
-        { statement: 'Water droplets can float above a very hot pan without boiling.', isTrue: true, explanation: 'This is the Leidenfrost effect. When a surface is well above water\'s boiling point (above about 200°C), the bottom of the droplet instantly vaporizes and creates a thin steam cushion that insulates the rest of the droplet, letting it skitter across the surface.' },
-        { statement: 'Metal and wood at the same temperature feel equally hot to the touch.', isTrue: false, explanation: 'Metal feels hotter because it has much higher thermal conductivity — it transfers heat to your skin much faster than wood. Both objects are the same temperature, but the rate of heat transfer (heat flux) is what your nerves actually sense.' },
+        { statement: 'A material at 500°C will always burn you instantly on contact.', isTrue: false, explanation: 'Burn risk depends on heat flux, not just temperature. Charcoal at 500°C has such low thermal conductivity that brief contact doesn’t burn.' },
+        { statement: 'Water droplets can float above a very hot pan without boiling.', isTrue: true, explanation: 'This is the Leidenfrost effect. Above ~200°C, the droplet’s bottom vaporizes, creating a steam cushion that insulates the rest.' },
+        { statement: 'Metal and wood at the same temperature feel equally hot to the touch.', isTrue: false, explanation: 'Metal feels hotter because higher thermal conductivity transfers heat to your skin faster. Same temperature, different heat flux.' },
       ],
       facts: [
-        'The Leidenfrost effect was first described by Johann Gottlob Leidenfrost in 1751 when he noticed water droplets on a red-hot iron spoon lasted much longer than on a merely hot one.',
-        'Charcoal\'s thermal conductivity is about 0.05 W/m·K — roughly 7,700 times lower than copper\'s 385 W/m·K — which is why firewalkers can step on hot coals without being burned.',
-        'Water has one of the highest specific heat capacities of any common substance (4,186 J/kg·K), which is why oceans moderate coastal climates and why it takes so long to boil a pot of water.',
+        'The Leidenfrost effect was first described in 1751 — water droplets on a red-hot spoon lasted much longer than on a merely hot one.',
+        'Charcoal’s thermal conductivity is 0.05 W/m·K — about 7,700 times lower than copper’s 385 W/m·K.',
+        'Water has one of the highest specific heat capacities of any common substance (4,186 J/kg·K), which is why oceans moderate coastal climates.',
       ],
-      offlineActivity: 'Test thermal conductivity at home: gather a metal spoon, a wooden spoon, and a plastic spoon. Place all three in a mug of hot water for two minutes. Carefully touch each handle and rank them from hottest to coolest. The hottest handle belongs to the best conductor. Write down your rankings and explain why the metal spoon\'s handle feels hottest even though all three were in the same water.',
-      concepts: [
-        {
-          title: 'The Leidenfrost Effect',
-          paragraphs: [
-          'When a water droplet lands on a surface much hotter than its boiling point (above about 200°C), something counterintuitive happens: instead of boiling away instantly, the droplet hovers on a cushion of its own steam and evaporates slowly. This is the **Leidenfrost effect**, named after Johann Leidenfrost who described it in 1751.',
-          'The physics: the bottom of the droplet vaporizes immediately, creating a thin layer of steam between the droplet and the hot surface. Steam is a poor heat conductor (about 25 times worse than water), so this vapor layer acts as thermal insulation. The droplet floats on steam, surviving far longer than it would on a merely hot (but not Leidenfrost-hot) surface. This is why water skitters across a very hot pan but boils violently on a moderately hot one.',
-          'Firewalking works partly through a similar principle. When a foot briefly contacts hot coals, moisture on the foot\'s surface may create a thin vapor layer that reduces heat transfer. However, the Leidenfrost effect alone does not explain firewalking — the low thermal conductivity of charcoal and the brevity of contact are equally important. A firewalk is not magic, but it does require understanding (or intuition about) real thermal physics.',
-          ],
-          keyIdea: 'The Leidenfrost effect creates a protective steam layer when water contacts surfaces well above boiling point. This principle partially protects firewalkers, along with charcoal\'s low thermal conductivity and brief contact time.',
-          diagram: 'HeatTransferDiagram',
-        },
-        {
-          title: 'Thermal Conductivity: Why Materials Feel Different',
-          paragraphs: [
-          '**Thermal conductivity** measures how quickly heat flows through a material, measured in watts per meter per kelvin (W/m·K). Copper has a thermal conductivity of 385 W/m·K — heat flows through it extremely quickly. Wood is about 0.15 W/m·K — heat flows through it 2,500 times more slowly. This is why a metal spoon in hot soup burns your fingers but a wooden spoon does not, even though both are the same temperature.',
-          'Charcoal (burned wood) has a thermal conductivity of only about 0.05 W/m·K — even lower than intact wood. When a firewalker steps on hot coals, the charcoal cannot deliver its heat energy to the foot fast enough to cause a burn, provided the contact is brief (under 1-2 seconds). The *temperature* of the coals may be 500°C, but the *rate of heat transfer* to the foot is low because charcoal is such a poor conductor.',
-          'Contrast this with walking on hot metal at the same temperature — metal\'s high thermal conductivity would deliver heat to the foot thousands of times faster, causing severe burns instantly. The critical quantity is not temperature alone but the **heat flux** (energy transferred per unit area per unit time), which depends on both temperature difference and thermal conductivity.',
-          ],
-          keyIdea: 'Charcoal\'s extremely low thermal conductivity (0.05 W/m·K) limits how fast heat transfers to skin. Temperature alone does not determine burn risk — the rate of heat transfer (heat flux) matters equally.',
-        },
-        {
-          title: 'Heat Capacity: Storing Thermal Energy',
-          paragraphs: [
-          '**Specific heat capacity** measures how much energy a material must absorb to raise its temperature by one degree, measured in joules per kilogram per kelvin (J/kg·K). Water has a remarkably high specific heat capacity of 4,186 J/kg·K — it takes a lot of energy to heat water up, and water releases that energy slowly as it cools. This is why coastal climates are milder than inland climates.',
-          'Charcoal has a specific heat capacity of about 1,000 J/kg·K combined with very low density (roughly 250 kg/m³). This means each cubic centimeter of charcoal contains relatively little stored thermal energy despite being at high temperature. Compare this with the same volume of iron at the same temperature: iron\'s density is 7,874 kg/m³ and its specific heat capacity is 450 J/kg·K — it stores about 7 times more thermal energy per unit volume.',
-          'For firewalking, the low thermal energy density of charcoal means the thin surface layer that contacts the foot cools rapidly — it simply doesn\'t contain enough energy to cause a burn during brief contact. This is the third protective factor alongside low thermal conductivity and the Leidenfrost effect. All three must be understood together: low conductivity limits heat flow rate, low heat capacity limits total available energy, and the Leidenfrost effect provides an additional insulating vapor layer.',
-          ],
-          keyIdea: 'Charcoal stores relatively little thermal energy per unit volume due to low density. The thin contact layer cools rapidly during a brief step, contributing to safe firewalking alongside low conductivity and the Leidenfrost effect.',
-        },
+      offlineActivity: 'Test thermal conductivity: place a metal spoon, wooden spoon, and plastic spoon in hot water for two minutes. Touch each handle and rank hottest to coolest. The hottest handle belongs to the best conductor. Write down your rankings and explain why.',
+      offlineActivityDiagram: 'ActivitySpoonTestDiagram',
+      codeTeaser: `import numpy as np
+import matplotlib.pyplot as plt
+
+# Compare heat transfer from different materials at 500°C
+materials = ["Copper", "Iron", "Glass", "Wood", "Charcoal"]
+conductivity = [385, 80, 1.0, 0.15, 0.05]  # W/m\u00b7K
+
+plt.figure(figsize=(10, 5))
+bars = plt.barh(materials, conductivity,
+    color=["#f59e0b","#ef4444","#8b5cf6","#22c55e","#6b7280"])
+plt.xlabel("Thermal Conductivity (W/m\u00b7K)")
+plt.title("Why Charcoal Doesn't Burn: Conductivity Comparison")
+plt.xscale("log")
+plt.tight_layout()
+plt.show()  # Charcoal is 7,700x slower than copper!`,
+      referenceLinks: [
+        { slug: 'heat-and-energy', reason: 'Deep dive into conduction, convection, and radiation' },
+        { slug: 'states-of-matter', reason: 'How molecules move in solids, liquids, and gases — the basis of thermal energy' },
+      ],
+      nextLessons: [
+        { slug: 'lotus-float', reason: 'Another surface physics story — how lotus leaves repel water using nanostructure' },
+        { slug: 'orange-sunsets-assam', reason: 'Light and energy physics — electromagnetic energy interacting with matter' },
+        { slug: 'kingfisher-blue', reason: 'More material science — nanostructures in feathers interact with light' },
+      ],
+      quiz: [
+        { question: 'Why does a metal spoon in hot water feel hotter than a wooden spoon?', options: ['Metal is at a higher temperature', 'Metal has higher thermal conductivity — transfers heat to your hand faster', 'Metal absorbs more heat', 'Wood keeps water cooler'], answer: 1 },
+        { question: 'What is the Leidenfrost effect?', options: ['Metal expanding when heated', 'A water droplet floating on a steam cushion above a very hot surface', 'Heat traveling through a vacuum', 'Ice melting faster on metal'], answer: 1 },
+        { question: 'Charcoal conductivity is 0.05, copper is 385. How many times faster does copper conduct?', options: ['About 100×', 'About 770×', 'About 7,700×', 'About 77,000×'], answer: 2 },
+        { question: 'Why can firewalkers step on 500°C coals but not 500°C metal?', options: ['Coals aren’t really that hot', 'Feet are heat-resistant', 'Charcoal has extremely low conductivity and energy density', 'Metal looks hotter'], answer: 2 },
+        { question: 'What three factors make firewalking possible?', options: ['Speed, courage, practice', 'Low conductivity, low energy density, brief contact', 'Wet feet, thick skin, cold coals', 'Wind, ash, adrenaline'], answer: 1 },
       ],
     },
   },
@@ -12492,6 +12652,7 @@ And that is why, every monsoon, when the first rain fills the ponds of Assam, th
       project: {
         title: 'Record and Analyze Frog Call Patterns',
         description: 'Record amphibian calls after rain and analyze the audio to identify frequency ranges and calling patterns.',
+        outputDiagram: 'LotusNanobumpsDiagram',
         steps: [
           'Record 5-10 minutes of frog chorus after a rainstorm using a phone or field recorder',
           'Load the audio into a free spectrogram tool (like Audacity) and visualize the frequency content',
@@ -12917,53 +13078,62 @@ And Poddo, petals open to the sun, thought: *He’s right. My fear wasn’t a wa
     estimatedHours: 12,
     playground: 'lotus-float' as const,
     level0: {
+      concepts: [
+        { title: 'Why Lotus Leaves Repel Water (Superhydrophobicity)', paragraphs: ['Drop water on a lotus leaf: the droplet beads into a near-perfect sphere and rolls off, collecting dirt. This is the **lotus effect** — self-cleaning through **superhydrophobicity**.', 'The secret: **dual-scale roughness**. Microscopic bumps (papillae, 10–20 µm tall) are coated with waxy nanotubes (~100 nm). Water sits on the **tips** of bumps, touching less than 3% of the surface. Air fills the valleys below.', '**Prediction:** rub the wax off a lotus leaf — would it still repel water? No. You need both microscale bumps AND nanoscale wax. This dual design creates a contact angle >150° (flat surface: ~70°).'], keyIdea: 'The lotus effect: microscale bumps + nanoscale wax = water contacts less than 3% of the surface. Self-cleaning through superhydrophobicity.', diagram: 'LotusNanobumpsDiagram', checkYourself: 'Why does a droplet on a lotus leaf look almost perfectly round, while on glass it flattens?', checkAnswer: 'On the lotus, water touches only bump tips with air below, minimizing adhesion. On smooth glass, water contacts the entire surface and spreads.' },
+        { title: 'Surface Tension: Water’s Invisible Skin', paragraphs: ['Water molecules pull on neighbors through **hydrogen bonds**. Inside the liquid, forces balance. At the **surface**, molecules are only pulled sideways and down — creating an elastic-like **surface tension**.', 'Water’s surface tension (72.8 mN/m at 25°C) is unusually high due to strong hydrogen bonding. This lets insects walk on water, causes capillary action, and helps lotus leaves trap air underneath for buoyancy.', 'On a superhydrophobic surface, high tension causes water to bead up. Combined with waxy nano-bumps, drops barely touch and roll off carrying dirt — nature’s self-cleaning system.'], keyIdea: 'Water’s high surface tension (from hydrogen bonding) creates an elastic surface film that causes droplets to bead up on superhydrophobic surfaces.', diagram: 'SurfaceTensionWalkDiagram', checkYourself: 'Why can a needle float on water even though steel is much denser?', checkAnswer: 'The needle rests on the surface tension film. The surface bends but doesn’t break if placed gently — it’s not true buoyancy.' },
+        { title: 'The Lotus Effect in Engineering', paragraphs: ['Scientists copy the lotus leaf’s dual-scale design: microscale bumps + hydrophobic nano-coating = self-cleaning surface.', 'Applications: **self-cleaning glass** (rain cleans windows), **stain-proof fabric** (coffee rolls off), **anti-icing coatings** for aircraft, and **anti-corrosion** metal treatments.', 'The field is **biomimetic surface engineering**. The lotus has been a purity symbol for millennia. Science discovered in 1997 what cultures intuited for thousands of years.'], keyIdea: 'Engineers copy lotus leaf geometry to create self-cleaning glass, stain-proof fabric, anti-icing wings, and anti-corrosion coatings.', diagram: 'LotusEngineeringDiagram', checkYourself: 'Why would self-cleaning glass save money on skyscrapers?', checkAnswer: 'Rain naturally cleans the surface, eliminating expensive window-washing on tall buildings.' },
+        { title: 'Aerenchyma: How Lotus Stems Float and Breathe', paragraphs: ['Lotus roots sit in waterlogged mud where oxygen is scarce. Solution: **aerenchyma** — air-channel tissue that pipes atmospheric oxygen from leaves down to roots.', 'Cut a lotus stem and you see the channels — they occupy up to **70%** of stem volume. Dual purpose: (1) oxygen delivery to roots in anoxic mud, and (2) **buoyancy** — air-filled tissue makes stems lighter than water so leaves can reach the surface for photosynthesis.', 'If 70% of stem volume is air and air is ~800× lighter than water, the buoyancy is enormous — built-in life jackets throughout the stem.'], keyIdea: 'Aerenchyma channels deliver oxygen to submerged roots AND provide buoyancy, occupying up to 70% of stem volume.', diagram: 'AerenchymaCrossDiagram', checkYourself: 'Why can’t most land plants survive in flooded soil?', checkAnswer: 'Their roots need oxygen from soil air spaces. In waterlogged soil, water fills those spaces and roots suffocate. Lotus aerenchyma pipes oxygen directly from leaves.' },
+      ],
       vocabulary: [
-        ['Buoyancy', 'The upward push a liquid exerts on an object — if this force equals the object\'s weight, it floats'],
-        ['Surface Tension', 'The elastic-like force at a liquid\'s surface caused by molecules pulling on each other — it lets small insects walk on water'],
+        ['Buoyancy', 'The upward push a liquid exerts on an object — if this force equals the object’s weight, it floats'],
+        ['Surface Tension', 'The elastic-like force at a liquid’s surface caused by molecules pulling on each other'],
         ['Superhydrophobic', 'A surface so water-repellent that droplets bead up into near-perfect spheres and roll off instantly'],
-        ['Aerenchyma', 'Air-filled tissue inside aquatic plants that acts as an internal pipeline for oxygen and helps the plant float'],
-        ['Lotus Effect', 'The self-cleaning property of lotus leaves — tiny bumps and waxy coating cause water to roll off, carrying dirt with it'],
+        ['Aerenchyma', 'Air-filled tissue inside aquatic plants that transports oxygen and helps the plant float'],
+        ['Lotus Effect', 'Self-cleaning property of lotus leaves — tiny bumps and wax cause water to roll off carrying dirt'],
       ],
       trueFalse: [
-        { statement: 'Lotus leaves stay clean because they are smooth.', isTrue: false, explanation: 'Lotus leaves are actually covered in microscopic bumps coated with waxy nanotubes. Water droplets sit on the tips of these bumps, touching less than 3% of the surface, and roll off easily — carrying dirt and bacteria with them.' },
-        { statement: 'Air channels inside lotus stems help the plant float.', isTrue: true, explanation: 'Aerenchyma tissue can occupy up to 70% of a lotus stem\'s volume. These air-filled channels make the stems much less dense than water, providing buoyancy so leaves can reach the surface for photosynthesis.' },
-        { statement: 'Water has stronger surface tension than most other liquids.', isTrue: true, explanation: 'Water\'s surface tension (72.8 mN/m at 25°C) is unusually high because of hydrogen bonding between water molecules. This strong surface tension lets small insects walk on water and helps lotus leaves trap air underneath for extra buoyancy.' },
+        { statement: 'Lotus leaves stay clean because they are smooth.', isTrue: false, explanation: 'Lotus leaves are covered in microscopic bumps with waxy nanotubes. Water sits on bump tips, touching less than 3% of the surface, and rolls off carrying dirt.' },
+        { statement: 'Air channels inside lotus stems help the plant float.', isTrue: true, explanation: 'Aerenchyma can occupy 70% of stem volume, making stems much less dense than water and providing buoyancy.' },
+        { statement: 'Water has stronger surface tension than most liquids.', isTrue: true, explanation: 'Water’s surface tension (72.8 mN/m) is unusually high because of hydrogen bonding between molecules.' },
       ],
       facts: [
-        'The lotus effect was first scientifically described by botanists Wilhelm Barthlott and Christoph Neinhuis in 1997, though the lotus has been a symbol of purity in Asian cultures for thousands of years.',
-        'A water droplet on a lotus leaf has a contact angle greater than 150 degrees — on a flat surface, the same water spreads to a contact angle of only about 70 degrees.',
-        'Engineers have copied the lotus effect to create self-cleaning glass, stain-proof fabrics, and anti-icing coatings for aircraft — a field called biomimetic surface engineering.',
+        'The lotus effect was first described scientifically by Barthlott and Neinhuis in 1997, though the lotus has symbolized purity in Asian cultures for millennia.',
+        'A water droplet on a lotus leaf has a contact angle >150° — on a flat surface, the same water spreads to only ~70°.',
+        'Engineers have copied the lotus effect for self-cleaning glass, stain-proof fabrics, and anti-icing aircraft coatings.',
       ],
-      offlineActivity: 'Explore the lotus effect at home: drip water onto different leaves and surfaces — a waxy leaf (like nasturtium or taro), a fuzzy leaf, a smooth plastic sheet, and paper. Observe how the water behaves on each. Which surfaces make the water bead up into round drops? Which make it spread flat? Tilt each surface and see which drops roll off fastest. Draw your observations and rank the surfaces from most to least water-repellent.',
-      concepts: [
-        {
-          title: 'Superhydrophobicity: The Lotus Effect',
-          paragraphs: [
-          'A lotus leaf repels water so effectively that droplets bead up into nearly perfect spheres and roll off, collecting dirt as they go. This **self-cleaning** property is called the **lotus effect**, and it results from the leaf\'s surface structure at two scales: microscopic bumps (papillae) about 10-20 micrometers tall, covered with nanoscale waxy tubules about 100 nanometers in diameter.',
-          'This dual-scale roughness creates **superhydrophobicity** — a water contact angle greater than 150 degrees (a flat waxy surface achieves only about 110 degrees). Water droplets sit on the tips of the papillae, with air trapped in the valleys below. The droplet touches less than 3% of the actual surface area, minimizing adhesion and allowing it to roll off at the slightest tilt, carrying away dust, spores, and bacteria.',
-          'The lotus effect was first scientifically described by botanists Wilhelm Barthlott and Christoph Neinhuis in 1997, though the lotus\'s purity has been celebrated in Asian cultures for millennia. Their discovery launched a field of **biomimetic surface engineering** — artificial superhydrophobic coatings have been developed for self-cleaning glass, stain-proof textiles, anti-icing surfaces for aircraft, and anti-corrosion treatments for metals.',
-          ],
-          keyIdea: 'The lotus effect arises from microscale bumps covered with nanoscale wax tubules, creating a surface where water contacts less than 3% of the area. This superhydrophobicity enables self-cleaning and has inspired numerous engineering applications.',
-        },
-        {
-          title: 'Surface Tension: The Invisible Skin of Water',
-          paragraphs: [
-          '**Surface tension** is the force that makes the surface of a liquid behave like a stretched elastic membrane. It arises because molecules at the surface experience a net inward pull from neighboring molecules below and to the sides, but no pull from above (there is only air). This imbalance creates a surface that resists being stretched or penetrated.',
-          'Water has unusually high surface tension (72.8 millinewtons per meter at 25°C) because of **hydrogen bonding** — each water molecule forms up to four hydrogen bonds with its neighbors, creating strong intermolecular attraction. This high surface tension allows small insects to walk on water, enables a needle to float if placed gently on the surface, and causes water to rise against gravity in narrow tubes (capillary action).',
-          'Surface tension is crucial for lotus leaves floating. The combination of superhydrophobic surface coating and the upward curvature of the leaf edge creates a "bowl" that traps air beneath the leaf, increasing buoyancy. Even when submerged, lotus leaves retain a thin air film (plastron) that keeps the surface dry and aids gas exchange. This trapped air layer is one reason lotus plants can thrive in stagnant, oxygen-poor ponds.',
-          ],
-          keyIdea: 'Water\'s high surface tension (due to hydrogen bonding) creates an elastic-like surface film. On superhydrophobic lotus leaves, this tension causes water to bead up and roll off while trapped air beneath the leaf enhances buoyancy.',
-        },
-        {
-          title: 'Aerenchyma: How Lotus Stems Breathe Underwater',
-          paragraphs: [
-          'Lotus plants root in waterlogged mud where oxygen is scarce or absent. They solve this problem with **aerenchyma** — specialized tissue containing large interconnected air channels that function as an internal pipeline, transporting atmospheric oxygen from the leaves down through the petioles (leaf stalks) to the submerged roots.',
-          'Aerenchyma channels in lotus petioles are remarkably large — visible to the naked eye as holes in a cross-section, occupying up to 70% of the tissue volume. This creates an efficient low-resistance airway. In some aquatic plants, air flow through aerenchyma is driven by **pressurized ventilation**: the sun warms the leaf surface, heating the air inside and creating a pressure differential that drives airflow downward to the roots and back up through older leaves — a thermally driven circulation system.',
-          'Aerenchyma also provides buoyancy. The air-filled tissue makes lotus petioles and leaves significantly less dense than water, helping leaves float at the surface where they can photosynthesize. Cut a lotus stem and you can see (and blow through) the aerenchyma channels — a simple demonstration of how plants solve the engineering challenge of delivering gas through a liquid environment.',
-          ],
-          keyIdea: 'Aerenchyma are air-channel tissues that transport oxygen from leaves to submerged roots, occupying up to 70% of stem volume. They also provide buoyancy, helping lotus leaves reach the water surface for photosynthesis.',
-          diagram: 'BuoyancyDiagram',
-        },
+      offlineActivity: 'Drip water onto different surfaces: a waxy leaf (taro/nasturtium), a fuzzy leaf, smooth plastic, and paper. Which makes droplets bead up? Tilt each — which drops roll off fastest? Sprinkle dirt on the waxy leaf, add water — does it self-clean?',
+      offlineActivityDiagram: 'ActivityDropletTestDiagram',
+      codeTeaser: `import matplotlib.pyplot as plt
+
+# Contact angle determines droplet shape
+surfaces = ["Glass", "Plastic", "Wax", "Lotus leaf"]
+contact_angles = [30, 75, 110, 155]  # degrees
+
+colors = ["#ef4444", "#f59e0b", "#22c55e", "#3b82f6"]
+plt.figure(figsize=(10, 5))
+plt.bar(surfaces, contact_angles, color=colors, alpha=0.6,
+        edgecolor=colors, linewidth=2)
+plt.axhline(y=150, color="blue", linestyle="--",
+            label="Superhydrophobic threshold (150\u00b0)")
+plt.ylabel("Contact Angle (degrees)")
+plt.title("Water Droplet Contact Angles on Different Surfaces")
+plt.legend()
+plt.show()  # Why is the lotus bar so much higher?`,
+      referenceLinks: [
+        { slug: 'buoyancy-and-density', reason: 'Archimedes\' principle and how objects float — the physics behind lotus stems' },
+        { slug: 'surface-phenomena', reason: 'Surface tension, wetting, and capillary action in depth' },
+      ],
+      nextLessons: [
+        { slug: 'kingfisher-blue', reason: 'Nanostructures in nature — feather geometry produces color' },
+        { slug: 'firewalker', reason: 'More surface physics — material properties determine what happens at contact' },
+        { slug: 'boat-brahmaputra', reason: 'Buoyancy in boats — the same Archimedes principle that helps lotus float' },
+      ],
+      quiz: [
+        { question: 'What makes lotus leaves superhydrophobic?', options: ['Oil coating', 'Dual-scale roughness: microscale bumps + nanoscale wax', 'Perfect smoothness', 'Electric charge that repels water'], answer: 1 },
+        { question: 'What percentage of a lotus leaf does water actually touch?', options: ['About 50%', 'About 25%', 'Less than 3%', 'About 75%'], answer: 2 },
+        { question: 'Why does water have unusually high surface tension?', options: ['It’s denser than most liquids', 'Strong hydrogen bonds between molecules', 'Dissolved minerals', 'Transparency to light'], answer: 1 },
+        { question: 'What is aerenchyma?', options: ['A type of algae', 'Air-filled tissue providing oxygen transport and buoyancy', 'Waxy coating on lotus leaves', 'A root disease'], answer: 1 },
+        { question: 'Why copy the lotus leaf design?', options: ['To make surfaces slippery', 'To create self-cleaning surfaces', 'For swimming materials', 'To absorb water faster'], answer: 1 },
       ],
     },
   },
