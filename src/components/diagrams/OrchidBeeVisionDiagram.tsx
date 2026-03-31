@@ -20,7 +20,7 @@ export default function OrchidBeeVisionDiagram() {
                 cx={Math.cos((a * Math.PI) / 180) * 28}
                 cy={Math.sin((a * Math.PI) / 180) * 28}
                 rx="18" ry="10" fill="#eab308" opacity="0.7"
-                transform={`rotate(\${a}, \${Math.cos((a * Math.PI) / 180) * 28}, \${Math.sin((a * Math.PI) / 180) * 28})`}
+                transform={`rotate(${a}, ${Math.cos((a * Math.PI) / 180) * 28}, ${Math.sin((a * Math.PI) / 180) * 28})`}
               />
             ))}
             <circle cx="0" cy="0" r="10" fill="#a16207" />
@@ -51,7 +51,7 @@ export default function OrchidBeeVisionDiagram() {
                 cx={Math.cos((a * Math.PI) / 180) * 28}
                 cy={Math.sin((a * Math.PI) / 180) * 28}
                 rx="18" ry="10" fill="#eab308" opacity="0.5"
-                transform={`rotate(\${a}, \${Math.cos((a * Math.PI) / 180) * 28}, \${Math.sin((a * Math.PI) / 180) * 28})`}
+                transform={`rotate(${a}, ${Math.cos((a * Math.PI) / 180) * 28}, ${Math.sin((a * Math.PI) / 180) * 28})`}
               />
             ))}
             {/* UV bullseye */}

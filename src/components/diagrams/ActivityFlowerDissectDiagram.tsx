@@ -17,7 +17,7 @@ export default function ActivityFlowerDissectDiagram() {
               cx={Math.cos(((a + 36) * Math.PI) / 180) * 32}
               cy={50 + Math.sin(((a + 36) * Math.PI) / 180) * 32}
               rx="14" ry="7" fill="#22c55e" opacity="0.5"
-              transform={`rotate(\${a + 36}, \${Math.cos(((a + 36) * Math.PI) / 180) * 32}, \${50 + Math.sin(((a + 36) * Math.PI) / 180) * 32})`}
+              transform={`rotate(${a + 36}, ${Math.cos(((a + 36) * Math.PI) / 180) * 32}, ${50 + Math.sin(((a + 36) * Math.PI) / 180) * 32})`}
             />
           ))}
           {/* Petals */}
@@ -27,7 +27,7 @@ export default function ActivityFlowerDissectDiagram() {
               cx={Math.cos((a * Math.PI) / 180) * 24}
               cy={50 + Math.sin((a * Math.PI) / 180) * 24}
               rx="16" ry="9" fill="#e879f9" opacity="0.6"
-              transform={`rotate(\${a}, \${Math.cos((a * Math.PI) / 180) * 24}, \${50 + Math.sin((a * Math.PI) / 180) * 24})`}
+              transform={`rotate(${a}, ${Math.cos((a * Math.PI) / 180) * 24}, ${50 + Math.sin((a * Math.PI) / 180) * 24})`}
             />
           ))}
           {/* Center */}
@@ -84,7 +84,7 @@ export default function ActivityFlowerDissectDiagram() {
               { q: 'Can you find pollen?', note: 'Tap the anthers over dark paper \u2014 you should see yellow or white dust.', color: '#f59e0b' },
               { q: 'Is there a scent?', note: 'Strong sweet = butterfly/moth. None = bird-pollinated. Foul = fly-pollinated.', color: '#22c55e' },
             ].map((item, i) => (
-              <g key={i} transform={`translate(0, \${i * 27})`}>
+              <g key={i} transform={`translate(0, ${i * 27})`}>
                 <circle cx="8" cy="6" r="4" fill={item.color} opacity="0.6" />
                 <text x="18" y="10" fontSize="10" fill="#e2e8f0">{item.q}</text>
                 <text x="240" y="10" fontSize="8" className="fill-slate-400">{item.note}</text>
