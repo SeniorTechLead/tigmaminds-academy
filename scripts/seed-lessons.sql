@@ -138,3 +138,48 @@ INSERT INTO public.lessons (id, slug, title, stem_title, is_demo) VALUES
   (129, 'well-of-zamzam', 'The Well of Zamzam', 'Hydrology & Groundwater', true),
   (130, 'muezzins-call', 'The Muezzin\u2019s Call', 'Architectural Acoustics', true)
 ON CONFLICT (id) DO UPDATE SET slug = EXCLUDED.slug, title = EXCLUDED.title, stem_title = EXCLUDED.stem_title, is_demo = EXCLUDED.is_demo;
+
+
+-- All complete NE India stories (batch update)
+INSERT INTO public.lessons (id, slug, title, stem_title, is_demo) VALUES
+  (1, 'orange-sunsets-assam', 'Why Assam''s Sunsets Are Orange', 'Atmospheric Optics & Scattering', true),
+  (2, 'fishermans-daughter-storm', 'The Fisherman''s Daughter and the Storm', 'Ocean Science & Storm Formation', true),
+  (3, 'snow-leopards-promise', 'The Snow Leopard''s Promise', 'Altitude & Mountain Physics', true),
+  (4, 'map-makers-granddaughter', 'The Map Maker''s Granddaughter', 'Cartography & GIS', true),
+  (5, 'old-banyan-trees-stories', 'The Old Banyan Tree''s Stories', 'Tree Biology & Longevity', true),
+  (7, 'basket-weavers-song', 'The Basket Weaver''s Song', 'Mathematics of Weaving & Patterns', true),
+  (8, 'honey-hunters-lesson', 'The Honey Hunter''s Lesson', 'Entomology & Bee Biology', true),
+  (9, 'bamboo-taught-wind', 'How the Bamboo Taught the Wind to Dance', 'Resonance & Harmonics', true),
+  (10, 'woodpeckers-drum', 'The Woodpecker''s Drum', 'Biomechanics & Skull Design', true),
+  (11, 'girl-who-spoke-to-elephants', 'The Girl Who Spoke to Elephants', 'AI & Wildlife Tracking', true),
+  (12, 'firefly-festival-of-majuli', 'The Firefly Festival of Majuli', 'LEDs, Circuits & Bioluminescence', true),
+  (13, 'river-dolphins-secret', 'The River Dolphin''s Secret', 'Sonar Sensors & Arduino', true),
+  (16, 'why-the-muga-silk-is-golden', 'Why the Muga Silk Is Golden', 'Biology & Materials Science', true),
+  (17, 'tejimola-the-girl-who-became-a-plant', 'Tejimola — The Girl Who Became a Plant', 'Plant Biology & Genetics', true),
+  (19, 'boy-who-talked-to-clouds', 'The Boy Who Talked to Clouds', 'Meteorology & Climate', true),
+  (20, 'how-majuli-island-was-born', 'How Majuli Island Was Born', 'Geography & River Dynamics', true),
+  (21, 'bamboo-flute-of-nagaland', 'The Bamboo Flute of Nagaland', 'Acoustics & Sound', true),
+  (22, 'dancing-deer-of-loktak-lake', 'The Dancing Deer of Loktak Lake', 'Ecology & Conservation', true),
+  (23, 'bridge-that-grew', 'The Bridge That Grew', 'Bio-engineering & Structures', true),
+  (24, 'the-little-boat', 'The Little Boat on the Brahmaputra', 'Fluid Dynamics & Buoyancy', true),
+  (25, 'the-hornbills-crown', 'The Hornbill''s Crown', 'Ornithology & Animal Behavior', true),
+  (26, 'why-fish-jump', 'Why Fish Jump in the Barak River', 'Fish Biology & Aquatic Ecosystems', true),
+  (27, 'tortoise-and-hare', 'The Tortoise and the Hare of Pobitora', 'Speed, Acceleration & Biomechanics', true),
+  (28, 'red-panda-mask', 'How the Red Panda Got Its Mask', 'Evolution & Camouflage', true),
+  (29, 'clouded-leopard', 'The Boy Who Befriended a Clouded Leopard', 'Animal Conservation & Tracking', true),
+  (31, 'elephant-mud-bath', 'The Little Elephant''s First Mud Bath', 'Thermoregulation & Animal Behavior', true),
+  (34, 'orchid-colors', 'How the Orchid Got Its Colors', 'Plant Pigments & Pollination', true),
+  (35, 'pitcher-plant', 'How the Pitcher Plant Learned to Catch', 'Carnivorous Plants & Adaptation', true),
+  (38, 'tiny-frog', 'The Tiny Frog of the Rainforest', 'Amphibian Biology & Size Extremes', true),
+  (41, 'the-magic-japi-hat', 'The Magic Japi Hat', 'Geometry & Traditional Design', true),
+  (42, 'star-fell-deepor', 'The Star That Fell Into Deepor Beel', 'Astronomy & Meteorites', true),
+  (43, 'kite-festival', 'The Kite Festival of Guwahati', 'Aerodynamics & Flight', true),
+  (50, 'monsoon-home', 'How the Monsoon Found Its Way Home', 'Climate Patterns & Jet Streams', true),
+  (54, 'little-train', 'The Little Train of the Hills', 'Mechanical Engineering & Railways', true),
+  (58, 'rainbow-fish', 'The Rainbow Fish of Umiam Lake', 'Optics of Water & Iridescence', true),
+  (63, 'seed-keeper', 'The Seed Keeper of Nagaland', 'Seed Banks & Genetic Preservation', true),
+  (71, 'girl-grew-forest', 'The Girl Who Grew a Forest', 'Reforestation & Carbon Sequestration', true),
+  (87, 'stars-ziro-valley', 'Why Stars Are Brighter in Ziro Valley', 'Light Pollution & Astronomy', true),
+  (95, 'golden-hilsa', 'The Old Fisherman and the Golden Hilsa', 'Sustainable Fishing', true),
+  (96, 'cloud-refused-rain', 'The Cloud That Refused to Rain', 'Cloud Seeding & Weather', true)
+ON CONFLICT (id) DO UPDATE SET slug = EXCLUDED.slug, title = EXCLUDED.title, stem_title = EXCLUDED.stem_title, is_demo = EXCLUDED.is_demo;
