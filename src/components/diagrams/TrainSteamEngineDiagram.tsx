@@ -178,7 +178,7 @@ const TrainSteamEngineDiagram = () => {
               {step.pct}
             </text>
             {i < 3 && (
-              <path d={`M \${step.x + 114} 325 L \${step.x + 146} 325`}
+              <path d={`M ${step.x + 114} 325 L ${step.x + 146} 325`}
                 stroke="#94a3b8" strokeWidth="2" markerEnd="url(#ts-arr-green)" />
             )}
           </g>

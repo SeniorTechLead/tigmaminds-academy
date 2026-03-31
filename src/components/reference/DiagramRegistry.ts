@@ -198,6 +198,11 @@ import ContourMapDiagram from '../diagrams/ContourMapDiagram';
 import DemographicTransitionDiagram from '../diagrams/DemographicTransitionDiagram';
 import MapProjectionDiagram from '../diagrams/MapProjectionDiagram';
 import MonsoonDiagram from '../diagrams/MonsoonDiagram';
+import MonsoonHeatingDiagram from '../diagrams/MonsoonHeatingDiagram';
+import MonsoonReversalDiagram from '../diagrams/MonsoonReversalDiagram';
+import MonsoonJetStreamDiagram from '../diagrams/MonsoonJetStreamDiagram';
+import MonsoonFailureDiagram from '../diagrams/MonsoonFailureDiagram';
+import ActivityMonsoonModelDiagram from '../diagrams/ActivityMonsoonModelDiagram';
 import MagnitudeStaircaseDiagram from '../diagrams/MagnitudeStaircaseDiagram';
 import SunsetPathDiagram from '../diagrams/SunsetPathDiagram';
 import MilkScatteringDiagram from '../diagrams/MilkScatteringDiagram';
@@ -844,6 +849,11 @@ const registry: Record<string, ComponentType> = {
   DemographicTransitionDiagram,
   MapProjectionDiagram,
   MonsoonDiagram,
+  MonsoonHeatingDiagram,
+  MonsoonReversalDiagram,
+  MonsoonJetStreamDiagram,
+  MonsoonFailureDiagram,
+  ActivityMonsoonModelDiagram,
   MagnitudeStaircaseDiagram,
   SunsetPathDiagram,
   MilkScatteringDiagram,
