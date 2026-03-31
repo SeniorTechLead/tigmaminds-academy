@@ -61,6 +61,7 @@ And for a science student, the story is a goldmine. An ocean of milk being separ
     stem: { title: 'Chemistry & Fluid Dynamics', description: 'The real-world science behind the Samudra Manthan — density, emulsions, chemical reactions, and industrial separation.', icon: Sparkles, color: 'from-purple-400 to-indigo-500', skills: ['Understand density, buoyancy, and why liquids separate into layers', 'Explain emulsions — how churning mixes things that normally don\'t mix', 'Read the pH scale and distinguish acids from bases', 'Describe fractional distillation and how we separate crude oil'], project: {
         title: 'Build a Density Layer Simulator',
         description: 'Create a Python program that simulates a density column — input any set of liquids and watch them sort themselves into layers, just like the churning ocean.',
+        outputDiagram: 'DensityColumnDiagram',
         steps: [
           'Research the densities of common household liquids (honey, dish soap, water, oil, rubbing alcohol)',
           'Build a Python data structure to store liquid names, densities, and colors',
@@ -243,6 +244,7 @@ That, he realised, was the part that lasted.
     stem: { title: 'Geometry, Symmetry & Fractals', description: 'The mathematics of pattern, balance, and self-similarity — from sand mandalas to snowflakes.', icon: Sparkles, color: 'from-violet-400 to-purple-500', skills: ['Identify and classify types of symmetry — bilateral, rotational, and reflective', 'Understand tessellations and why only certain shapes tile a plane', 'Recognise fractal self-similarity in nature and mathematics', 'Apply the golden ratio to understand proportions in art and nature'], project: {
         title: 'Build a Mandala Generator',
         description: 'Create a Python program that generates geometric mandala patterns using rotational symmetry, tessellating shapes, and fractal repetition.',
+        outputDiagram: 'FractalZoomDiagram',
         steps: [
           'Draw basic symmetric shapes using Python turtle graphics',
           'Implement rotational symmetry to create mandala rings from a single motif',
@@ -414,6 +416,7 @@ He knew the physics. He just knew it in his hands.
     stem: { title: 'Projectile Motion & Biomechanics', description: 'The physics of the sling — circular motion, projectiles, kinetic energy, and impact.', icon: Rocket, color: 'from-amber-500 to-red-600', skills: ['Understand circular motion and centripetal force', 'Calculate projectile trajectories using launch angle and velocity', 'Apply the kinetic energy formula to compare fast vs heavy objects', 'Analyze impulse and pressure to explain why small impacts can be devastating'], project: {
         title: 'Build a Projectile Range Calculator',
         description: 'Create a Python program that predicts how far a sling stone travels based on release speed and angle, then visualizes the parabolic trajectory.',
+        outputDiagram: 'ProjectileArcDiagram',
         steps: [
           'Define variables: launch speed, launch angle, gravitational acceleration',
           'Implement the range equation: R = v² sin(2θ) / g',
@@ -604,6 +607,7 @@ Zahra looked at her tiles, then at the crystal drawings. The same geometry — o
     stem: { title: 'Symmetry, Tessellations & Group Theory', description: 'The mathematical rules that govern repeating patterns — from palace walls to crystal lattices.', icon: Construction, color: 'from-amber-400 to-rose-500', skills: ['Identify tessellations and explain why only certain polygons tile the plane', 'Classify the four symmetry operations: translation, rotation, reflection, glide reflection', 'Recognize wallpaper groups and understand why there are exactly 17', 'Connect planar symmetry to crystallography and X-ray diffraction'], project: {
         title: 'Build a Tessellation Pattern Generator',
         description: 'Create a Python program that generates repeating tile patterns using symmetry operations from different wallpaper groups.',
+        outputDiagram: 'WallpaperGroupsDiagram',
         steps: [
           'Design a base tile motif using polygon coordinates',
           'Implement translation, rotation, reflection, and glide reflection as matrix transformations',
@@ -775,6 +779,7 @@ The most powerful systems combine both: serial reasoning for complex decisions, 
     stem: { title: 'Neuroscience & Parallel Computing', description: 'How the brain processes information, why true multitasking is a myth, and how computers achieve what Ravana\'s ten heads symbolised.', icon: Brain, color: 'from-purple-500 to-pink-500', skills: ['Understand how neurons transmit electrical and chemical signals', 'Explain why human multitasking is actually rapid task-switching', 'Compare CPU (serial) and GPU (parallel) processing architectures', 'Describe the basic structure of neural networks used in AI'], project: {
         title: 'Build a Multi-Threaded Task Scheduler',
         description: 'Create a Python program that simulates parallel vs serial task execution — measuring how splitting work across multiple threads speeds up computation, just like Ravana\'s ten heads working simultaneously.',
+        outputDiagram: 'RavanaNeuralNetDiagram',
         steps: [
           'Measure your own reaction time with a Python timer',
           'Build a serial task processor that handles jobs one at a time',
@@ -962,6 +967,7 @@ And the first thing Noah did on dry land was plant a vineyard. After a year on a
     stem: { title: 'Naval Architecture & Biodiversity', description: 'The real-world engineering of ship design and the biology of sustaining thousands of species in a closed system.', icon: Ship, color: 'from-sky-400 to-blue-500', skills: ['Understand buoyancy, displacement, and why ships float', 'Estimate volume, carrying capacity, and cargo logistics', 'Explain closed-system ecology — food chains, oxygen cycles, waste management', 'Classify biodiversity using taxonomy and understand keystone species'], project: {
         title: 'Build an Ark Capacity Calculator',
         description: 'Create a Python program that estimates how many species an ark-sized vessel could carry, accounting for animal sizes, food requirements, water needs, and space constraints.',
+        outputDiagram: 'ArkCapacityDiagram',
         steps: [
           'Research the biblical dimensions and convert cubits to metres — calculate total internal volume',
           'Build a database of animal size categories (tiny, small, medium, large, megafauna) with average mass and space needs',
@@ -1135,6 +1141,7 @@ The Bodhi Tree offers no easy answers. But it has been asking the right question
     stem: { title: 'Plant Biology & Cloning', description: 'The real-world science of plant reproduction, DNA, cloning, grafting, tissue culture, and gene editing — from ancient cuttings to CRISPR.', icon: Sparkles, color: 'from-emerald-400 to-teal-500', skills: ['Distinguish sexual from asexual reproduction and explain why cuttings are clones', 'Explain what DNA is and why clones are genetically identical', 'Describe grafting, tissue culture, and the role of plant hormones (auxin, cytokinin)', 'Discuss the ethics and science of cloning — from Dolly the sheep to CRISPR gene editing'], project: {
         title: 'Build a Plant Growth Simulator',
         description: 'Create a Python program that simulates plant growth under different hormone concentrations, modeling how auxin and cytokinin ratios determine root vs shoot development.',
+        outputDiagram: 'BodhiGraftingDiagram',
         steps: [
           'Model basic cell division (mitosis) and growth over time',
           'Add hormone parameters (auxin, cytokinin) that steer cell differentiation',
@@ -1341,6 +1348,7 @@ Zahra held the astrolabe up to the sky and sighted Polaris. Thirty-two degrees. 
     stem: { title: 'Astronomy & Instrument Design', description: 'Celestial coordinates, stereographic projection, navigation by stars, and the engineering of precision instruments.', icon: Compass, color: 'from-amber-400 to-orange-500', skills: ['Understand celestial coordinate systems — altitude, azimuth, right ascension, declination', 'Explain stereographic projection and why it preserves circles', 'Use star positions to determine latitude, time, and direction', 'Design and calibrate a precision measuring instrument'], project: {
         title: 'Build a Digital Astrolabe Simulator',
         description: 'Create a Python program that simulates a working astrolabe — input your latitude, date, and time, and see the sky projected onto a flat disk with altitude circles, the ecliptic, and labeled stars.',
+        outputDiagram: 'AstrolabeProjectionDiagram',
         steps: [
           'Build a stereographic projection function that maps celestial coordinates (RA, Dec) to flat (x, y) positions',
           'Draw the tympan: altitude and azimuth circles for a given latitude',
@@ -1538,6 +1546,7 @@ Hanuman's strength was divine. But the real miracle is knowledge — and that is
     stem: { title: 'Geology & Botany', description: 'The real-world science behind the Sanjeevani quest — tectonic plates, altitude zones, plant identification, and how plant compounds become medicines.', icon: Sparkles, color: 'from-emerald-400 to-teal-500', skills: ['Explain how tectonic plates create mountain ranges through convergent boundaries', 'Describe altitude zones and why specific plants grow only at certain heights', 'Use a dichotomous key to identify plant species from observable features', 'Trace the pipeline from plant compound to approved medicine'], project: {
         title: 'Build a Himalayan Plant Identification System',
         description: 'Create a Python program that identifies medicinal plants from their features (leaf shape, altitude, flower structure) using a decision tree classifier, then reports their medicinal properties and conservation status.',
+        outputDiagram: 'HanumanDichotomousKeyDiagram',
         steps: [
           'Build a botanical database of 20+ Himalayan medicinal plants with morphological features',
           'Implement a dichotomous key as a binary tree data structure',
@@ -1735,6 +1744,7 @@ Dorji reached up and placed his palm on Sangha’s cold surface. Somewhere insid
     stem: { title: 'Acoustics & Wave Physics', description: 'The science of sound — vibration, frequency, harmonics, and Fourier analysis — all hidden in monastery bells.', icon: Volume2, color: 'from-amber-400 to-orange-500', skills: ['Understand sound as a mechanical pressure wave created by vibration', 'Relate frequency, wavelength, and amplitude to pitch, color, and loudness', 'Explain standing waves and harmonics in vibrating objects', 'Apply Fourier analysis to decompose complex sounds into component frequencies'], project: {
         title: 'Build a Bell Tone Analyzer',
         description: 'Create a Python program that generates bell-like tones by summing harmonics, visualizes their waveforms, and performs Fourier analysis to identify frequency components.',
+        outputDiagram: 'BellFourierDiagram',
         steps: [
           'Generate a pure sine wave at a given frequency using NumPy',
           'Add harmonics (2×, 3×, 4× the fundamental) with decreasing amplitude',
@@ -1899,6 +1909,7 @@ The Pushpaka Vimana flew by divine will. Real aircraft fly by engineering. But t
     stem: { title: 'Aerodynamics & Flight', description: 'The real-world science of flight — lift, drag, thrust, weight, wing design, jet engines, and rocket propulsion.', icon: Plane, color: 'from-sky-400 to-blue-500', skills: ['Identify the four forces of flight: lift, drag, thrust, and weight', 'Explain how wing shape creates lift using Bernoulli’s principle', 'Describe how jet engines and rockets generate thrust', 'Calculate basic aerodynamic quantities: pressure, velocity, force'], project: {
         title: 'Build a Flight Simulator',
         description: 'Create a Python program that models the four forces of flight and simulates an aircraft climbing, cruising, and descending.',
+        outputDiagram: 'VimanaLiftDragDiagram',
         steps: [
           'Define variables for aircraft mass, wing area, air density, and engine thrust',
           'Implement the lift equation: L = 0.5 * rho * v^2 * S * C_L',
@@ -2095,6 +2106,7 @@ They did not call it chemistry. They called it Agni.
     stem: { title: 'Combustion Chemistry & Thermodynamics', description: 'The real-world science behind Agni — combustion reactions, flame physics, heat transfer, and spectroscopy.', icon: Sparkles, color: 'from-orange-400 to-red-500', skills: ['Explain the combustion triangle and why fire needs fuel, oxygen, and heat', 'Describe why flames point upward using convection and buoyancy', 'Connect flame colours to temperature and chemical composition via spectroscopy', 'Distinguish conduction, convection, and radiation as three modes of heat transfer'], project: {
         title: 'Build a Combustion Energy Calculator',
         description: 'Create a Python program that calculates the energy released by burning different fuels, compares their efficiency, and visualises the results.',
+        outputDiagram: 'AgniSpectroscopyDiagram',
         steps: [
           'Research heats of combustion for common fuels (wood, methane, propane, hydrogen, ghee)',
           'Build a data structure mapping fuel names to chemical formulas and energy values (kJ/mol)',
@@ -2269,6 +2281,7 @@ The Dharma Wheel encodes these principles in its very design. It turns. It persi
     stem: { title: 'Rotational Physics & Engineering', description: 'The science of spinning — friction, torque, angular momentum, gyroscopes, and flywheel energy storage.', icon: Cog, color: 'from-amber-400 to-orange-500', skills: ['Explain why wheels reduce friction and calculate the force advantage', 'Apply torque and angular momentum to rotational problems', 'Describe gyroscopic stability and precession', 'Design a flywheel energy storage system using KE = ½Iω²'], project: {
         title: 'Build a Flywheel Grid Storage Simulator',
         description: 'Create a Python simulation of a flywheel energy storage system that smooths solar power output and stabilises grid frequency.',
+        outputDiagram: 'DharmaFlywheelDiagram',
         steps: [
           'Model the flywheel rotor: moment of inertia, speed limits, and energy storage capacity',
           'Implement the motor/generator: charge and discharge with efficiency losses',
@@ -2452,6 +2465,7 @@ The murderer became a saint. Not through magic. Through practice.
     stem: { title: 'Neuroplasticity & Psychology', description: 'The science of brain change — how neural pathways rewire, habits form and break, fMRI reveals the thinking brain, and AI copies the process.', icon: Brain, color: 'from-violet-400 to-purple-500', skills: ['Understand neuroplasticity — how the brain physically rewires with practice', 'Explain the habit loop (cue-routine-reward) and how to change habits', 'Read and interpret fMRI brain imaging data', 'Build reinforcement learning agents that learn from reward signals'], project: {
         title: 'Build a Neuroplasticity Simulator',
         description: 'Create a Python program that simulates brain rewiring — model neural pathways strengthening with practice and weakening with disuse, visualise the transformation over time.',
+        outputDiagram: 'AngulimalaReinforcementDiagram',
         steps: [
           'Model a single neuron with weighted inputs and a threshold',
           'Implement Hebb’s rule to update weights based on co-activation',
@@ -2615,6 +2629,7 @@ Today, we have both. The Burj Khalifa stands 828 metres tall. Machine translatio
     stem: { title: 'Structural Engineering & Linguistics', description: 'The physics of building tall — compression, tension, buckling, and wind loads — plus the science of language diversity and machine translation.', icon: Building2, color: 'from-amber-400 to-red-500', skills: ['Analyse compression, tension, and shear forces in structures', 'Apply Euler’s buckling formula to predict column failure', 'Compare ancient and modern structural systems for tall buildings', 'Understand language families, phonology, and NLP translation'], project: {
         title: 'Build a Tower Strength Simulator',
         description: 'Create a Python program that simulates the structural forces in a tower — compression at the base, wind loads at the top, and buckling limits — then translates the engineering report into multiple languages.',
+        outputDiagram: 'BabelSkyscraperDiagram',
         steps: [
           'Model a tower as a stack of elements with mass, cross-section area, and material properties',
           'Calculate compressive stress at each level and compare to material strength limits',
@@ -2781,6 +2796,7 @@ That idea changed everything.
     stem: { title: 'Algebra & Algorithm Design', description: 'The mathematics al-Khwarizmi invented — variables, equations, completing the square — and the algorithmic thinking that bears his name.', icon: Brain, color: 'from-teal-400 to-cyan-500', skills: ['Use variables to represent unknowns and solve linear equations', 'Plot and interpret linear equations on a coordinate plane', 'Solve quadratic equations by completing the square', 'Design and analyse algorithms for efficiency'], project: {
         title: 'Build an Al-Khwarizmi Equation Solver',
         description: 'Create a Python program that classifies any equation by type, selects the right algorithm (al-Jabr for linear, completing the square for quadratic, matrices for systems), and returns the solution with a visualisation.',
+        outputDiagram: 'AlgebraQuadraticDiagram',
         steps: [
           'Build a linear equation solver using al-Jabr (move terms, isolate x)',
           'Add a quadratic solver using completing the square and the quadratic formula',
@@ -2947,6 +2963,7 @@ For a science student, this story opens a universe of questions. How do we measu
     stem: { title: 'Astronomy & Celestial Navigation', description: 'The real-world science behind the Star of Bethlehem — stellar magnitude, planetary conjunctions, Kepler’s laws, and finding your way by the stars.', icon: Compass, color: 'from-indigo-400 to-blue-500', skills: ['Understand the stellar magnitude scale and the inverse square law of light', 'Explain planetary conjunctions using orbital mechanics and Kepler’s laws', 'Use celestial navigation to determine latitude from Polaris', 'Apply Kepler’s three laws to predict planetary positions'], project: {
         title: 'Build a Planetarium Engine',
         description: 'Create a Python program that computes planetary positions for any date in history, renders the night sky for any location, and identifies conjunctions — a computational reconstruction of what the Magi saw.',
+        outputDiagram: 'BethlehemConjunctionDiagram',
         steps: [
           'Implement Kepler’s equation solver to find planet positions from orbital elements',
           'Transform heliocentric coordinates to geocentric (as seen from Earth)',
@@ -3102,6 +3119,7 @@ The sea did not need to break the laws of physics to part. It needed the right w
     stem: { title: 'Tidal Physics & Fluid Dynamics', description: 'The real science behind water parting — tides, wind setdown, shallow-water equations, and computational fluid dynamics.', icon: Ship, color: 'from-cyan-400 to-blue-500', skills: ['Explain how the Moon’s gravity creates tides through differential pull', 'Describe wind setdown and how sustained winds displace shallow water', 'Read and interpret a basic CFD simulation of fluid flow', 'Simplify the Navier-Stokes equations for shallow-water scenarios'], project: {
         title: 'Build a Wind Setdown Simulator',
         description: 'Create a Python simulation that models how wind pushes water across a shallow basin, exposing the bottom under the right conditions.',
+        outputDiagram: 'RedSeaWindSetdownDiagram',
         steps: [
           'Research the NCAR 2010 study and understand the reconstructed geography of the ancient crossing site',
           'Model a 2D cross-section of a shallow basin with wind stress applied at the surface',
@@ -3268,6 +3286,7 @@ This is the story of all groundwater. It is the story of a hidden, patient cycle
     stem: { title: 'Hydrology & Groundwater', description: 'The science of underground water — aquifers, porosity, Darcy’s law, and sustainable water management.', icon: Sparkles, color: 'from-teal-400 to-cyan-500', skills: ['Explain how groundwater forms, moves, and is stored in aquifers', 'Distinguish porosity from permeability and measure both', 'Apply Darcy’s law to calculate groundwater flow rates', 'Evaluate water management strategies for arid regions'], project: {
         title: 'Build a Groundwater Flow Simulator',
         description: 'Create a Python simulation that models how water moves through an aquifer, responds to pumping, and recovers when pumping stops.',
+        outputDiagram: 'ZamzamAquiferDiagram',
         steps: [
           'Research the Zamzam aquifer geology and the Saudi Geological Survey data',
           'Model a 2D cross-section of an aquifer with varying porosity and permeability zones',
@@ -3432,6 +3451,7 @@ The Muezzin’s call connects acoustic physics, architectural engineering, and s
     stem: { title: 'Architectural Acoustics', description: 'The science of sound in buildings — inverse square law, dome acoustics, resonance, and loudspeaker design.', icon: Volume2, color: 'from-indigo-400 to-violet-500', skills: ['Explain why height amplifies sound reach using the inverse square law', 'Describe how domes focus and distribute sound through reflection', 'Analyse resonance and reverberation in enclosed spaces', 'Understand the basics of loudspeaker design and directional sound'], project: {
         title: 'Build a Mosque Acoustics Simulator',
         description: 'Create a Python simulation that models how sound propagates inside a domed mosque and from a minaret across a city.',
+        outputDiagram: 'MuezzinDomeAcousticsDiagram',
         steps: [
           'Research the acoustic properties of famous mosques like the Süleymaniye',
           'Model the inverse square law to calculate how minaret height affects sound reach',

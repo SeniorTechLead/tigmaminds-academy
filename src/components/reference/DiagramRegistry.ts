@@ -348,6 +348,7 @@ import AltitudeAdaptationDiagram from '../diagrams/AltitudeAdaptationDiagram';
 import BanyanRootsDiagram from '../diagrams/BanyanRootsDiagram';
 import StarBrightnessStepDiagram from '../diagrams/StarBrightnessStepDiagram';
 import StarBortleScaleDiagram from '../diagrams/StarBortleScaleDiagram';
+import StarSkyQualityDiagram from '../diagrams/StarSkyQualityDiagram';
 // Mythology: Churning of the Ocean
 import ChurningEmulsionDiagram from '../diagrams/ChurningEmulsionDiagram';
 import DensityColumnDiagram from '../diagrams/DensityColumnDiagram';
@@ -974,6 +975,7 @@ const registry: Record<string, ComponentType> = {
   BanyanRootsDiagram,
   StarBrightnessStepDiagram,
   StarBortleScaleDiagram,
+  StarSkyQualityDiagram,
   // Mythology: Churning of the Ocean
   ChurningEmulsionDiagram,
   DensityColumnDiagram,
