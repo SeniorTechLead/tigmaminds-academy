@@ -5791,7 +5791,7 @@ To this very day, in the forests and fields of Assam and all across India, the p
             'This is why peacock feathers are iridescent — the color changes as you tilt the feather. At one angle, the film thickness produces constructive interference for blue light (wavelength ~470 nm). Tilt slightly, and the effective path length changes, shifting the constructive interference to green (~520 nm) or even yellow. The same physics creates the rainbow sheen on soap bubbles, oil slicks on water, and the anti-reflective coatings on camera lenses. Engineers study peacock feathers to design better optical coatings, color-shifting inks for currency security, and structural color for textiles that never fade.',
           ],
           keyIdea: 'Peacock feather colors come from thin-film interference in nanostructured melanin layers, not from pigments — the same physics as soap bubble rainbows.',
-          diagram: 'InterferenceDiagram',
+          diagram: 'StructuralColorDiagram',
         },
         {
           title: 'Mate Choice and the Evolution of Preferences',
@@ -8940,7 +8940,7 @@ Talo kept counting. He is still counting. His notebooks now fill an entire shelf
             'The method rests on several assumptions: marks do not fall off or affect survival, marked and unmarked animals mix randomly between sampling sessions, the population is "closed" (no births, deaths, immigration, or emigration between sessions), and all individuals have an equal probability of capture. In practice, these assumptions are often violated, and ecologists use more sophisticated models (like the Jolly-Seber method for open populations) that relax these assumptions using multiple recapture sessions and maximum likelihood estimation.',
           ],
           keyIdea: 'Mark-recapture estimates population size using the ratio of marked to unmarked animals in a second sample: N = (M x C) / R.',
-          diagram: 'HistogramDiagram',
+          diagram: 'SamplingVsCensusDiagram',
         },
         {
           title: 'Species Identification: The Science of Telling Things Apart',
@@ -8949,7 +8949,7 @@ Talo kept counting. He is still counting. His notebooks now fill an entire shelf
             'Butterfly classification uses the same binomial nomenclature system developed by Carl Linnaeus in 1753. Each species has a two-part Latin name: the genus name (capitalized) and the species epithet (lowercase), both italicized. For example, Papilio memnon (the Great Mormon butterfly) belongs to the genus Papilio (swallowtails). Related genera are grouped into families (Papilionidae = swallowtails), families into orders (Lepidoptera = butterflies and moths), and so on up to kingdoms and domains. This hierarchical system reflects evolutionary relationships — species in the same genus share a more recent common ancestor than species in different genera.',
             'Modern taxonomy increasingly uses DNA barcoding — sequencing a standard gene region (typically a 658-base-pair segment of the mitochondrial cytochrome oxidase I gene, or COI) and comparing it to a reference database. Species typically differ by at least 2-3% in this gene, allowing identification even from a fragment of wing or a single leg. DNA barcoding has revealed that many "species" previously identified by appearance alone are actually complexes of multiple cryptic species — visually identical but genetically distinct. In Northeast India, DNA barcoding has increased the known butterfly species count by an estimated 10-15%.',
           ],
-          keyIdea: 'Species identification combines visual pattern recognition with DNA barcoding — which has revealed that many apparent single species are actually multiple cryptic species.',
+          diagram: 'TransectMethodDiagram', keyIdea: 'Species identification combines visual pattern recognition with DNA barcoding — which has revealed that many apparent single species are actually multiple cryptic species.',
         },
         {
           title: 'Citizen Science: Everyone Can Contribute to Knowledge',
@@ -9899,58 +9899,108 @@ Today, the villages have mobile phone towers and internet connections. But the o
     },
     illustration: '/content/illustrations/postman-hills.webp',
     track: 'school',
-    subjects: ['Biology'] as Subject[],
+    subjects: ['Mathematics', 'Computer Science'] as Subject[],
     toolSkills: ['Python' as Skill, 'NumPy' as Skill, 'Matplotlib' as Skill, 'Data Analysis' as Skill],
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'postman-hills' as const,
     level0: {
       vocabulary: [
-        ['Tensile strength', 'How much pulling force a material can withstand before it breaks'],
-        ['Fibre', 'A thin, thread-like strand — natural (silk, cotton) or synthetic (nylon, polyester)'],
-        ['Protein', 'A large molecule made of amino acids — the building material of muscles, hair, and silk'],
-        ['UV resistance', 'The ability to withstand ultraviolet light from the sun without degrading'],
-        ['Biodegradable', 'Able to be broken down naturally by bacteria and other living organisms'],
+        ['Graph', 'A mathematical network of nodes (points) connected by edges (lines) \u2014 any map can be represented as a graph'],
+        ['Shortest path', 'The route through a graph with the smallest total weight from start to destination'],
+        ['Heuristic', 'A clever shortcut that finds a good solution quickly when checking every possibility would take too long'],
+        ['Travelling Salesman Problem', 'Finding the shortest route that visits every node exactly once \u2014 one of the hardest problems in computer science'],
+        ['Edge weight', 'A number assigned to a graph edge representing cost (distance, time, elevation) of travelling that connection'],
       ],
       trueFalse: [
-        { statement: 'Muga silk is the only naturally golden silk in the world.', isTrue: true, explanation: 'Muga silk from Assam gets its golden color from xanthurenic acid, a pigment chemically bonded into the fibroin protein. Unlike dyes that sit on the surface, this color is part of the molecule and never fades.' },
-        { statement: 'Synthetic materials like nylon are always better than natural materials.', isTrue: false, explanation: 'Each material has trade-offs. Nylon is stronger and cheaper but made from petroleum and takes centuries to decompose. Silk is biodegradable and renewable but expensive and limited in supply. The "best" material depends on the application.' },
-        { statement: 'Spider silk is stronger than steel.', isTrue: true, explanation: 'By weight, spider silk is about 5 times stronger than steel. Scientists are trying to mass-produce synthetic spider silk for bulletproof vests, surgical sutures, and aerospace applications.' },
+        { statement: 'The shortest route between two places is always the fastest.', isTrue: false, explanation: 'In hilly terrain, a longer route around a mountain can be much faster. Uphill walking costs 4x more energy than flat ground.' },
+        { statement: 'For 20 villages, there are more possible routes than atoms in a grain of sand.', isTrue: true, explanation: 'The number of routes through 20 stops is 19 factorial = over 60 quintillion. This is why computers use heuristics.' },
+        { statement: 'GPS navigation apps find routes using graph theory algorithms.', isTrue: true, explanation: 'Google Maps represents road networks as graphs and uses variants of Dijkstra\u2019s algorithm to find fastest paths in milliseconds.' },
       ],
       facts: [
-        'Muga silk gets more lustrous with each wash — the opposite of most fabrics. This is because washing removes surface sericin, exposing more of the naturally golden fibroin underneath.',
-        'A single silkworm cocoon contains up to 1 kilometer of continuous silk thread. It takes about 5,000 cocoons to make 1 kilogram of raw silk.',
-        'Biomimetic scientists study natural materials to design better synthetic ones. Gecko-inspired adhesives, lotus-inspired self-cleaning surfaces, and abalone-inspired armor are all based on nature\'s engineering.',
+        'The TSP is one of the most famous unsolved problems in computer science \u2014 no fast algorithm guarantees the best route for large numbers of stops.',
+        'Dijkstra\u2019s algorithm (1956) finds the shortest path by always visiting the nearest unvisited node first. It guarantees the optimal solution.',
+        'Tobler\u2019s hiking function: maximum walking speed occurs on a gentle -5% downhill, not on flat ground.',
       ],
-      offlineActivity: 'Find three different fabrics at home (e.g., cotton t-shirt, polyester bag, wool sweater). Hold each up to the light — which lets more light through? Pull gently — which stretches more? Drop water on each — which absorbs fastest? You\'re doing basic materials testing, just like a scientist.',
+      offlineActivity: 'Draw a map of your neighborhood with 6\u20138 landmarks as dots. Walk and time each connection. Then find the route that visits ALL landmarks in the shortest total time. Is nearest-neighbor the fastest?',
+      offlineActivityDiagram: 'ActivityRouteMapDiagram',
+      codeTeaser: `# Nearest-neighbor heuristic for a delivery route
+villages = {
+    "Laitlyngkot": (0, 0), "Cherrapunji": (8, 3),
+    "Nongstoin": (4, 6), "Sohra": (9, 7),
+    "Mawsynram": (2, 10), "Nongriat": (6, 4),
+}
+
+def distance(a, b):
+    return ((a[0]-b[0])**2 + (a[1]-b[1])**2) ** 0.5
+
+current = "Laitlyngkot"
+route, total = [current], 0
+unvisited = set(villages) - {current}
+while unvisited:
+    nearest = min(unvisited, key=lambda v: distance(villages[current], villages[v]))
+    total += distance(villages[current], villages[nearest])
+    route.append(nearest)
+    current = nearest
+    unvisited.remove(nearest)
+print(f"Route: {' -> '.join(route)}")
+print(f"Total distance: {total:.1f} units")  # Can you beat this?`,
+      referenceLinks: [
+        { slug: 'coordinate-geometry', reason: 'The math behind coordinates and distance formula \u2014 essential for graph theory' },
+        { slug: 'maps-and-navigation', reason: 'How GPS, map projections, and GIS use these algorithms' },
+      ],
+      nextLessons: [
+        { slug: 'map-makers-granddaughter', reason: 'Mapping Meghalaya\u2019s terrain \u2014 the geographic foundation for route optimization' },
+        { slug: 'the-little-train', reason: 'Hill railways solve the same terrain problem with gears and switchbacks' },
+        { slug: 'seven-sisters', reason: 'Geography of NE India \u2014 the terrain that makes delivery challenging' },
+      ],
+      quiz: [
+        { question: 'What is a graph in graph theory?', options: ['A bar chart', 'A network of nodes connected by edges', 'An equation', 'A photograph'], answer: 1 },
+        { question: 'What does Dijkstra\u2019s algorithm guarantee?', options: ['Fastest computation', 'Shortest path from start to all nodes', 'Every node visited once', 'Cheapest cost'], answer: 1 },
+        { question: 'Why can\u2019t computers check every route for 20 villages?', options: ['Computers can\u2019t do math', 'Over 60 quintillion routes \u2014 too many', 'Routes are all the same', 'Villages move'], answer: 1 },
+        { question: 'What determines edge cost in hilly terrain?', options: ['Only distance', 'Distance plus elevation change', 'Number of villages', 'Weather'], answer: 1 },
+        { question: 'What is a heuristic?', options: ['A perfect solution', 'A clever shortcut for a good solution quickly', 'A computer virus', 'A math proof'], answer: 1 },
+      ],
       concepts: [
         {
-          title: 'Graph Theory: Maps as Mathematics',
+          title: 'The Shortest Path Problem',
           paragraphs: [
-          'In 1736, mathematician Leonhard Euler solved the **Konigsberg Bridge Problem** — can you walk through a city crossing each bridge exactly once? His solution invented **graph theory**, the mathematical study of networks. A graph consists of **nodes** (points, like villages) connected by **edges** (lines, like paths between villages). Every map can be represented as a graph.',
-          'When a postman plans a delivery route through hill villages, the problem becomes: find the shortest path through a graph that visits every node at least once. This is closely related to the **Travelling Salesman Problem (TSP)**, one of the most famous problems in computer science. For just 20 villages, there are over 60 quintillion (6 x 10^16) possible routes — too many to check even with the fastest computers.',
-          'Real-world routing algorithms don\'t check every possible path. Instead, they use **heuristics** — clever shortcuts that find near-optimal solutions quickly. Google Maps, for example, uses a variant of **Dijkstra\'s algorithm** combined with hierarchical graph decomposition to find routes in milliseconds across road networks with millions of nodes.',
+          'Always going to the closest next stop often isn\u2019t the best strategy \u2014 it might force a long backtrack. This is a **shortest path problem**, studied since 1736 when Euler invented **graph theory**.',
+          'Any map becomes a **graph**: villages are **nodes**, paths are **edges**, distances are **weights**. Finding the optimal route is a classic problem that gets explosively harder with more stops.',
+          '**Check yourself:** For 4 villages, there are 3 possible routes. For 10 villages: 181,440. For 20: over 60 quintillion!',
           ],
-          keyIdea: 'Graph theory converts maps into mathematical networks of nodes and edges. Finding the optimal route through a network is computationally difficult, requiring heuristic algorithms rather than brute-force checking of every possibility.',
+          keyIdea: 'Any map can be represented as a mathematical graph. Finding the optimal route gets explosively harder as stops increase.',
+          diagram: 'PostmanGraphTheoryDiagram',
         },
         {
-          title: 'Shortest Path Algorithms',
+          title: 'The Travelling Salesman Problem',
           paragraphs: [
-          '**Dijkstra\'s algorithm** (1956) finds the shortest path from one node to all other nodes in a graph with non-negative edge weights. It works by exploring outward from the start node, always expanding the nearest unvisited node first, and updating distances as shorter paths are discovered. It guarantees the optimal solution and runs efficiently on sparse graphs.',
-          'For hill terrain, edge weights are not just distance — they include **elevation change**, path condition, and estimated travel time. A 2-kilometer trail with a 500-meter climb may take longer than a 5-kilometer trail on flat ground. The postman\'s "shortest" path is really the **fastest** path, requiring a weighted graph where edges encode time rather than just distance.',
-          'The **A* (A-star) algorithm** improves on Dijkstra by adding a heuristic estimate of the remaining distance to the destination. This focuses the search toward the goal rather than exploring in all directions, dramatically reducing computation time. A* is used in GPS navigation, video game pathfinding, and robotic motion planning. The quality of the heuristic determines how much faster A* is than Dijkstra — a perfect heuristic would find the shortest path without exploring any unnecessary nodes.',
+          'The **TSP** asks: visit every node once and return home \u2014 what\u2019s the shortest route? For 20 villages, there are more possible routes than the fastest computer could ever check.',
+          'So we use **heuristics**: nearest-neighbor (simple, 20\u201325% longer than optimal) and 2-opt (swap edges to improve). Amazon, FedEx, and GPS apps all use these.',
+          '**Predict:** A heuristic finds a 420 km route vs 500 km from nearest-neighbor. Is 420 km guaranteed optimal? (No \u2014 but it\u2019s much better and found in seconds.)',
           ],
-          keyIdea: 'Dijkstra\'s algorithm guarantees the shortest path by exploring outward from the start. A* improves efficiency by using a heuristic to focus the search toward the goal. Both are foundational to GPS navigation.',
-          diagram: 'FlowchartDiagram',
+          keyIdea: 'The TSP is computationally unsolvable for large inputs. Heuristic algorithms find near-optimal solutions quickly for real-world routing.',
+          diagram: 'PostmanTSPDiagram',
         },
         {
-          title: 'Terrain Analysis: Elevation and Energy Cost',
+          title: 'Why Optimization Matters',
           paragraphs: [
-          'Walking uphill costs energy proportional to the elevation gained — roughly **4 times more energy per meter of ascent** than walking on flat ground. Walking downhill is easier but not free: steep descents stress joints and require braking effort. The most energy-efficient path through hilly terrain is not always the shortest in distance.',
-          'Geographers quantify terrain difficulty using **Tobler\'s hiking function**, which estimates walking speed as a function of slope. Maximum speed occurs at a gentle downhill slope of about -5% (roughly 3 degrees). Speed drops dramatically on steep uphills: at a 30% grade, walking speed is roughly one-third of flat-ground speed. This function allows conversion of distance-based maps into time-based maps.',
-          'Modern GIS (Geographic Information Systems) combine **digital elevation models** (DEMs) with Tobler\'s function and path-finding algorithms to compute optimal hiking routes. The postman\'s intuitive knowledge of which paths are fastest in different weather conditions represents the same calculation, performed through years of experience rather than computation.',
+          'Every GPS direction uses **Dijkstra\u2019s algorithm**: explore outward from start, always expand the nearest unvisited node, update distances when shorter paths are found.',
+          '**A* algorithm** improves this by estimating remaining distance to the goal, focusing search in the right direction \u2014 like using a compass while navigating.',
+          '**Think about it:** Ambulance positioning is optimization too. Where should 5 ambulances park to minimize maximum response time across 50 neighborhoods?',
           ],
-          keyIdea: 'Terrain slope dramatically affects travel speed and energy cost. Tobler\'s hiking function mathematically relates slope to walking speed, enabling computers to find the truly fastest route through hilly terrain.',
+          keyIdea: 'Dijkstra\u2019s finds guaranteed shortest paths. A* adds directional focus. Together they power GPS navigation and emergency response.',
+          diagram: 'PostmanShortestPathDiagram',
+        },
+        {
+          title: 'Terrain Cost: Hills Change Everything',
+          paragraphs: [
+          'A 5 km trail with a 500m climb might take 3 hours, while an 8 km flat trail takes 1.5 hours. **Uphill walking costs 4x more energy** than flat ground.',
+          '**Tobler\u2019s hiking function** predicts walking speed from slope. Maximum speed occurs on a gentle -5% downhill, not flat ground. 30% uphill: one-third normal speed.',
+          '**Check yourself:** Route A: 5 km, steep 500m climb (speed ~1.7 km/h = ~3h). Route B: 9 km flat (speed ~5 km/h = ~1.8h). Which is faster? (Route B, despite being nearly twice as long!)',
+          ],
+          keyIdea: 'Uphill walking costs 4x more energy than flat ground. Tobler\u2019s function relates slope to speed, letting algorithms find the truly fastest route.',
+          diagram: 'PostmanTerrainCostDiagram',
         },
       ],
     },
@@ -10189,58 +10239,106 @@ To this day, the Bodo people of Assam tell the story of Oma when a task seems to
     },
     illustration: '/content/illustrations/turtle-carried-mountain.webp',
     track: 'school',
-    subjects: ['Biology'] as Subject[],
+    subjects: ['Geography', 'Physics'] as Subject[],
     toolSkills: ['Python' as Skill, 'NumPy' as Skill, 'Matplotlib' as Skill, 'Data Analysis' as Skill],
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'turtle-mountain' as const,
     level0: {
       vocabulary: [
-        ['Artificial Intelligence', 'Computer systems that can learn from data and make decisions'],
-        ['Sensor', 'A device that detects physical changes like sound, light, or vibration'],
-        ['Classification', 'Sorting data into categories based on patterns'],
-        ['Signal processing', 'Analyzing and extracting information from recorded data'],
-        ['Neural network', 'A computer model inspired by how brain cells connect'],
+        ['Tectonic plate', 'A massive slab of Earth\u2019s crust and upper mantle that floats on the semi-liquid mantle below, moving 2\u201315 cm per year'],
+        ['Convection current', 'A circular flow where hot material rises, spreads sideways, cools, and sinks \u2014 the engine that drives plate movement'],
+        ['Seismic wave', 'Energy waves released by an earthquake that travel through and around Earth'],
+        ['Convergent boundary', 'Where two tectonic plates push together, creating mountains or volcanoes'],
+        ['Epicenter', 'The point on Earth\u2019s surface directly above an earthquake\u2019s underground origin (focus)'],
       ],
       trueFalse: [
-        { statement: 'AI can help scientists study animals without disturbing them.', isTrue: true, explanation: 'AI-powered cameras, microphones, and sensors can monitor wildlife 24/7 from a distance, collecting data that would take humans years to gather manually.' },
-        { statement: 'Computers can learn to identify animal species from their sounds.', isTrue: true, explanation: 'Machine learning models trained on audio recordings can distinguish between species, individual animals, and even emotional states from their calls.' },
-        { statement: 'AI will replace all wildlife scientists.', isTrue: false, explanation: 'AI is a tool that helps scientists work faster, but it cannot replace human understanding, creativity, and ethical judgment in conservation decisions.' },
+        { statement: 'The ground beneath your feet is constantly moving, just very slowly.', isTrue: true, explanation: 'Tectonic plates move 2\u201315 cm per year \u2014 about as fast as your fingernails grow. Over millions of years, this builds mountains.' },
+        { statement: 'Mountains never change once formed.', isTrue: false, explanation: 'The Himalayas grow about 5 mm per year because India keeps pushing into Asia. Erosion simultaneously wears them down.' },
+        { statement: 'Earth\u2019s inner core is hotter than the Sun\u2019s surface.', isTrue: true, explanation: 'The inner core reaches about 5,200\u00b0C vs the Sun\u2019s surface at about 5,500\u00b0C. It stays solid due to enormous pressure.' },
       ],
       facts: [
-        'AI-powered camera traps can identify individual animals by their unique markings — like facial recognition, but for tigers and leopards.',
-        'Acoustic monitoring stations in rainforests can detect illegal logging by recognizing the sound of chainsaws, even from kilometers away.',
-        'Conservation drones equipped with thermal cameras can count animal populations at night without disturbing them.',
+        'India crashed into Asia ~50 million years ago and still pushes north at ~4 cm/year \u2014 this is why the Himalayas keep growing.',
+        'The 1950 Assam earthquake (magnitude 8.6) was one of the strongest ever recorded, changing the Brahmaputra\u2019s course.',
+        'Earth has about 15 major tectonic plates. Their boundaries are where almost all earthquakes and volcanoes occur.',
       ],
-      offlineActivity: 'Go outside and spend 10 minutes just listening. Close your eyes. How many different sounds can you identify? Birds, insects, wind, traffic? Scientists do exactly this — but with AI helping them identify what they hear.',
+      offlineActivity: 'Demonstrate plate tectonics with two heavy books and paper. Push books together: feel them resist then SLIP (earthquake). Push from both sides of paper: it crumples upward (mountain building).',
+      offlineActivityDiagram: 'ActivityEarthShakeDiagram',
+      codeTeaser: `import matplotlib.pyplot as plt
+
+million_years_ago = [120, 100, 80, 60, 50, 40, 20, 0]
+speed_cm_yr = [2, 5, 10, 15, 18, 10, 5, 4]
+latitude = [-40, -30, -15, 0, 10, 18, 25, 28]
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+ax1.plot(million_years_ago, speed_cm_yr, "o-", color="red")
+ax1.set_xlabel("Million years ago")
+ax1.set_ylabel("Speed (cm/year)")
+ax1.set_title("India Plate Speed")
+ax1.invert_xaxis()
+ax2.plot(million_years_ago, latitude, "s-", color="blue")
+ax2.set_xlabel("Million years ago")
+ax2.set_ylabel("Latitude (N)")
+ax2.set_title("India Position")
+ax2.invert_xaxis()
+plt.tight_layout()
+plt.show()  # When did the collision happen?`,
+      referenceLinks: [
+        { slug: 'geology-earth-science', reason: 'Full guide to Earth\u2019s layers, rock types, and landscape-shaping forces' },
+        { slug: 'forces-and-motion', reason: 'Physics of friction, pressure, and elastic energy release \u2014 the principles behind earthquakes' },
+      ],
+      nextLessons: [
+        { slug: 'snow-leopards-promise', reason: 'Snow leopards live in the mountains that plate tectonics created' },
+        { slug: 'cloud-weaver-of-tawang', reason: 'Mountain weather shaped by tectonically built terrain' },
+        { slug: 'why-rivers-bend', reason: 'Rivers erode the mountains that tectonics push up \u2014 the cycle of uplift and erosion' },
+      ],
+      quiz: [
+        { question: 'What are Earth\u2019s four main layers?', options: ['Crust, mantle, outer core, inner core', 'Soil, rock, magma, iron', 'Surface, middle, deep, center', 'Atmosphere, crust, mantle, core'], answer: 0 },
+        { question: 'What drives tectonic plate movement?', options: ['The Moon\u2019s gravity', 'Convection currents in the mantle', 'Wind on the surface', 'Earth\u2019s rotation'], answer: 1 },
+        { question: 'How were the Himalayas formed?', options: ['A volcano erupted', 'Indian plate collided with Eurasian plate', 'Asteroid impact', 'River sediment piled up'], answer: 1 },
+        { question: 'What causes earthquakes?', options: ['Underground explosions', 'Friction locks plates, stress builds, then sudden slip', 'Heavy rain loosening ground', 'Animal tunnels'], answer: 1 },
+        { question: 'How fast do tectonic plates move?', options: ['Meters per day', '2\u201315 centimeters per year', 'Kilometers per year', 'They don\u2019t move'], answer: 1 },
+      ],
       concepts: [
         {
-          title: 'Shell Biomechanics: A Living Fortress',
+          title: 'Earth\u2019s Layers',
           paragraphs: [
-          'A turtle\'s shell is not a separate structure it hides inside — it is **part of its skeleton**. The top shell (**carapace**) is formed from roughly 60 fused bones, including modified ribs and vertebrae, covered by keratinous plates called **scutes**. The bottom shell (**plastron**) is formed from fused clavicles and rib expansions. Together, they create one of the most effective defensive structures in the animal kingdom.',
-          'Structurally, the turtle shell is a **sandwich composite** — hard outer scutes, a middle layer of dense bone, and an inner layer of cancellous (spongy) bone. This design distributes impact forces across a wide area, similar to a motorcycle helmet. A turtle shell can withstand compressive forces several hundred times the animal\'s body weight, which is why turtles survive being stepped on by large animals.',
-          'The shell\'s dome shape is mechanically optimal. Like an architectural dome or an eggshell, it converts downward forces into compressive stresses distributed through the curved walls, rather than bending stresses that would crack a flat plate. Engineers study turtle shell geometry for inspiration in designing lightweight, impact-resistant protective equipment.',
+          'The **crust** is only 5\u201370 km thick \u2014 thinner than an apple\u2019s skin relative to the apple. Below it: the **mantle** (2,800 km of slowly flowing hot rock), **outer core** (liquid iron making the magnetic field), and **inner core** (solid iron ball hotter than the Sun\u2019s surface).',
+          'The mantle makes up 84% of Earth\u2019s volume. Though solid, it flows very slowly \u2014 like honey over geological time.',
+          '**Check yourself:** If the crust is like an apple\u2019s skin, what would the mantle be? (The flesh. The core is the seed pocket at the center.)',
           ],
-          keyIdea: 'A turtle\'s shell is a fused part of its skeleton, not a separate house. Its sandwich-composite structure and dome geometry distribute impact forces, creating one of nature\'s most effective protective designs.',
+          keyIdea: 'Earth has four layers: thin crust, thick flowing mantle, liquid outer core (creates magnetic field), and solid inner core (hotter than the Sun).',
+          diagram: 'TurtleEarthLayersDiagram',
         },
         {
-          title: 'Ectothermy: Living on Borrowed Heat',
+          title: 'Convection Currents: The Engine Below',
           paragraphs: [
-          'Turtles are **ectotherms** — their body temperature is determined primarily by their environment, not by internal metabolism. Unlike mammals and birds (endotherms), which burn food to maintain a constant 37°C body temperature, turtles rely on behavioral thermoregulation: basking in sun to warm up, retreating to shade or water to cool down.',
-          'Ectothermy is not inferior to endothermy — it is a fundamentally different energy strategy. An ectotherm of the same body size as an endotherm needs roughly **one-tenth the food**. This means turtles can survive in environments with scarce food resources where a similarly-sized mammal would starve. Some turtles can go months without eating.',
-          'The tradeoff is performance: ectotherms are sluggish when cold. Muscle contraction speed, nerve conduction velocity, and digestive enzyme activity all decrease with temperature. A turtle at 15°C moves at roughly half the speed of one at 30°C. This is why turtles are most active during warm parts of the day and enter **brumation** (the reptilian equivalent of hibernation) during cold winters.',
+          'Hot water rises from the bottom of a pot, spreads, cools, and sinks. The same happens in Earth\u2019s mantle \u2014 but with rock, moving centimeters per year.',
+          'These **convection currents** drag tectonic plates. Where hot rock rises, plates are pushed apart. Where cool rock sinks, plates are pulled together.',
+          '**Predict:** If Earth\u2019s core cooled completely, would tectonics continue? (No \u2014 Mars lost its heat and its tectonics stopped billions of years ago.)',
           ],
-          keyIdea: 'Ectotherms like turtles rely on environmental heat rather than metabolic heat, requiring only one-tenth the food of a similar-sized mammal. The tradeoff is reduced performance at low temperatures.',
-          diagram: 'HeatTransferDiagram',
+          keyIdea: 'Core heat drives mantle convection: hot rock rises, pushes plates sideways, cools, sinks. This slow circulation moves continents.',
+          diagram: 'TurtleConvectionDiagram',
         },
         {
-          title: 'Nesting Ecology and Temperature-Dependent Sex',
+          title: 'Mountains from Collision',
           paragraphs: [
-          'Most turtle species lay eggs in terrestrial nests — holes dug in sand or soil, covered over, and abandoned. The mother provides no further care; the eggs develop using heat from the environment. Incubation periods range from 45 to 90 days depending on species and temperature.',
-          'One of the most remarkable features of turtle biology is **temperature-dependent sex determination (TSD)**. In many turtle species, the sex of the embryo is determined not by chromosomes (as in mammals) but by the incubation temperature. In most species, cooler nests (below about 27.5°C) produce males, while warmer nests (above about 31°C) produce females. Intermediate temperatures produce mixed ratios.',
-          'Climate change poses a direct threat through TSD. As global temperatures rise, turtle nests are increasingly producing all-female clutches. Sea turtle populations in some regions are already 90%+ female. Without males, reproduction rates will eventually collapse. Conservation biologists are experimenting with shading nest sites and relocating eggs to cooler beaches to maintain balanced sex ratios.',
+          'When two continental plates collide, the crust **crumples upward** like a rug pushed against a wall. The Himalayas formed when India hit Eurasia ~50 million years ago.',
+          'India still pushes north at ~4 cm/year. The Himalayas grow ~5 mm/year, balanced by erosion. Mount Everest is still rising.',
+          '**Check yourself:** If Himalayas grow 5 mm/year and erosion removes 3 mm/year, what\u2019s the net? (2 mm/year. Over 1 million years: 2 km of growth.)',
           ],
-          keyIdea: 'Many turtles\' sex is determined by nest temperature rather than genetics. Rising global temperatures are skewing populations heavily female, threatening long-term reproductive viability.',
+          keyIdea: 'Continental collision crumples crust into mountains. India\u2019s ongoing collision with Asia makes the Himalayas grow 5 mm/year.',
+          diagram: 'TurtleMountainCollisionDiagram',
+        },
+        {
+          title: 'Earthquakes: Friction and Sudden Slip',
+          paragraphs: [
+          '**Friction locks plates together** at boundaries. Stress builds as convection keeps pushing. Eventually stress exceeds friction and plates suddenly **slip**, releasing seismic waves.',
+          'The underground slip point is the **focus**; the surface point above is the **epicenter**. P-waves (fast compression) arrive first, then S-waves (slower shearing).',
+          '**Think about it:** Each Richter number = 32x more energy. How much more energy in magnitude 8 vs 6? (32 x 32 = ~1,000 times more.)',
+          ],
+          keyIdea: 'Friction locks plates while convection pushes. When stress exceeds friction, sudden slip releases stored energy as seismic waves.',
+          diagram: 'TurtleEarthquakeDiagram',
         },
       ],
     },
@@ -10733,58 +10831,101 @@ And if you visit Kaziranga and stand at the edge of the elephant grass, listenin
     },
     illustration: '/content/illustrations/kaziranga-grass.webp',
     track: 'school',
-    subjects: ['Biology'] as Subject[],
+    subjects: ['Ecology', 'Biology'] as Subject[],
     toolSkills: ['Python' as Skill, 'NumPy' as Skill, 'Matplotlib' as Skill, 'Data Analysis' as Skill],
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'kaziranga-grass' as const,
     level0: {
       vocabulary: [
-        ['Fire Ecology', 'The study of how fire shapes plant and animal communities — grasslands evolved with periodic fire and depend on it for nutrient cycling, seed germination, and preventing conversion to forest'],
-        ['C4 Photosynthesis', 'An advanced photosynthetic pathway used by tropical grasses that concentrates CO₂ around the enzyme RuBisCO, eliminating wasteful photorespiration and boosting productivity 50-100% in hot conditions'],
-        ['NDVI', 'Normalized Difference Vegetation Index — a satellite measurement calculated from reflected red and near-infrared light that maps vegetation health globally, with values from -1 to +1 (healthy plants score 0.3-0.8)'],
-        ['Photorespiration', 'A wasteful process where the enzyme RuBisCO mistakenly grabs O₂ instead of CO₂ at high temperatures — C4 plants evolved to avoid this by concentrating CO₂ around the enzyme'],
-        ['Controlled Burn', 'A deliberate fire set by park managers to remove dead thatch, return nutrients to soil, and stimulate fresh grass growth — without it, grasslands become overgrown and eventually convert to forest'],
+        ['Controlled burn', 'A deliberate fire set by park managers to remove dead grass, return nutrients to soil as ash, and stimulate fresh growth from underground roots'],
+        ['C4 photosynthesis', 'An upgraded photosynthesis pathway that concentrates CO\u2082 around the key enzyme, letting tropical grasses grow 50\u2013100% faster in hot conditions'],
+        ['NDVI', 'Normalized Difference Vegetation Index \u2014 a satellite measurement that maps how green and healthy vegetation is, using reflected red and near-infrared light'],
+        ['Symbiosis', 'A close, long-term relationship between two species that benefits at least one of them \u2014 rhinos and elephant grass benefit each other (mutualism)'],
+        ['Thatch', 'A layer of dead, dry plant material that accumulates on top of the soil \u2014 it blocks sunlight and must be removed by fire or decomposition'],
       ],
       trueFalse: [
-        { statement: 'Fire is always destructive to grassland ecosystems and should be prevented whenever possible.', isTrue: false, explanation: 'Grasslands evolved with periodic fire and depend on it. Controlled burns remove dead thatch, return nutrients (phosphorus, potassium, calcium) to the soil as ash, and stimulate fresh growth from underground roots. Suppressing fire actually leads to worse outcomes: the grassland converts to scrubland and eventually forest.' },
-        { statement: 'C4 grasses like elephant grass are more productive than most plants in hot, sunny conditions.', isTrue: true, explanation: 'C4 photosynthesis concentrates CO₂ around RuBisCO, eliminating wasteful photorespiration. This makes C4 plants 50-100% more productive than C3 plants in hot, bright conditions — Kaziranga\'s C4 grasses grow 5-6 meters tall in a single season.' },
-        { statement: 'NDVI can distinguish healthy green vegetation from bare soil using only visible light measurements.', isTrue: false, explanation: 'NDVI requires both visible red and near-infrared (NIR) light measurements. The formula is (NIR - Red) / (NIR + Red). Healthy vegetation absorbs red light for photosynthesis but strongly reflects near-infrared light — it is this contrast that makes NDVI work, not visible light alone.' },
+        { statement: 'Fire is always destructive to grassland ecosystems and should be prevented.', isTrue: false, explanation: 'Grasslands evolved with periodic fire and depend on it. Controlled burns remove dead thatch, return nutrients to the soil as ash, and stimulate fresh growth from underground roots.' },
+        { statement: 'Elephant grass can grow taller than a one-story house in a single season.', isTrue: true, explanation: 'Elephant grass uses C4 photosynthesis and can grow 5\u20136 meters tall in one growing season \u2014 tall enough to completely hide a one-ton rhinoceros.' },
+        { statement: 'Some grass seeds actually need fire to germinate.', isTrue: true, explanation: 'Certain grassland species have seeds with hard coatings that only crack open when exposed to fire\u2019s heat. The ash also provides nutrients for the seedling\u2019s first growth spurt.' },
       ],
       facts: [
-        'Kaziranga National Park deliberately burns large areas of grassland every year — the ash returns nutrients to the soil immediately, and green shoots emerge from underground root systems within days, providing nutritious food for rhinos and elephants.',
-        'Elephant grass (Saccharum spontaneum) uses C4 photosynthesis and can grow 5-6 meters tall in a single growing season — this extraordinary productivity supports the world\'s largest population of Indian one-horned rhinos.',
-        'A single Landsat satellite image covers 185 x 185 km at 30-meter resolution, providing NDVI values for every 30 x 30 meter patch — park managers use this data to plan controlled burns and monitor grassland recovery without setting foot in the field.',
+        'Kaziranga burns large grassland areas every year on purpose \u2014 green shoots emerge from underground roots within days, providing nutritious food for over 2,600 rhinos.',
+        'Elephant grass uses C4 photosynthesis, which is 50\u2013100% more productive than ordinary (C3) photosynthesis in hot conditions \u2014 the same upgrade found in maize and sugarcane.',
+        'Scientists monitor Kaziranga\u2019s grass recovery from space using NDVI satellite data, tracking how quickly burned areas turn green again.',
       ],
-      offlineActivity: 'Observe photosynthesis and growth rate differences yourself. Plant two small pots of grass seeds (or use grass clippings in water). Keep one in bright direct sunlight and one in shade. Measure and record the growth each day for a week. The sunlit grass will grow faster, just as Kaziranga\'s C4 grasses thrive in intense tropical sunlight. Now try a "controlled burn" experiment: trim one pot of established grass down to the soil (simulating fire removing above-ground growth) and leave the other untouched. Watch how the trimmed grass sends up fresh, green shoots from the roots within days — the same regrowth mechanism that makes controlled burns beneficial in Kaziranga.',
+      offlineActivity: 'Plant grass in two pots \u2014 one in sun, one in shade. Measure growth daily for a week. Then trim one pot to the soil to simulate a controlled burn. Watch how new shoots emerge from the roots within days.',
+      offlineActivityDiagram: 'ActivityGrassGrowDiagram',
+      codeTeaser: `import matplotlib.pyplot as plt
+
+# Kaziranga NDVI recovery after controlled burn
+days = list(range(0, 60))
+ndvi = [0.05 + 0.75 * (1 - 2.718 ** (-d / 15)) for d in days]
+
+plt.figure(figsize=(10, 5))
+plt.plot(days, ndvi, linewidth=2, color="green")
+plt.axhline(y=0.6, color="gray", linestyle="--", label="Healthy grass threshold")
+plt.fill_between(days, ndvi, alpha=0.2, color="green")
+plt.xlabel("Days after controlled burn")
+plt.ylabel("NDVI (greenness index)")
+plt.title("Grassland Recovery in Kaziranga")
+plt.legend()
+plt.show()  # How many days until the grass recovers?`,
+      referenceLinks: [
+        { slug: 'ecosystems-and-biomes', reason: 'Understand how energy flows through grassland ecosystems and why fire is a natural part of the cycle' },
+        { slug: 'plant-biology', reason: 'How photosynthesis, roots, and growth work \u2014 the biology behind why grass survives fire' },
+      ],
+      nextLessons: [
+        { slug: 'girl-grew-forest', reason: 'One person planted a forest on a Brahmaputra sandbar \u2014 reforestation vs grassland, two ecosystem strategies' },
+        { slug: 'old-banyan-trees-stories', reason: 'From grassland to ancient trees \u2014 how carbon storage works in very different plant lifespans' },
+        { slug: 'honey-hunters-lesson', reason: 'Bees depend on flowering grasslands \u2014 explore how pollinators and plants co-depend' },
+      ],
+      quiz: [
+        { question: 'Why do Kaziranga park managers deliberately set fire to grasslands?', options: ['To kill invasive animals', 'To remove dead thatch and return nutrients to the soil', 'To clear land for farming', 'To create firebreaks around villages'], answer: 1 },
+        { question: 'What happens to grass roots during a controlled burn?', options: ['They burn completely', 'They survive underground and send up new shoots within days', 'They turn into charcoal', 'They absorb the heat energy'], answer: 1 },
+        { question: 'What advantage does C4 photosynthesis give elephant grass?', options: ['It can photosynthesize at night', 'It eliminates wasteful O\u2082 grabs, boosting productivity 50\u2013100%', 'It does not need water', 'It grows underground'], answer: 1 },
+        { question: 'What does NDVI measure from space?', options: ['Temperature of the ground', 'Height of the grass', 'Vegetation health using reflected red and near-infrared light', 'Amount of rainfall'], answer: 2 },
+        { question: 'What would happen if fire were completely suppressed in Kaziranga?', options: ['Grass would grow even taller', 'Grassland would convert to scrubland and then forest', 'Rhinos would benefit', 'Nothing would change'], answer: 1 },
+      ],
       concepts: [
         {
-          title: 'Fire Ecology: Why Burning Helps Grasslands',
+          title: 'Why Grasslands Need Fire',
           paragraphs: [
-          'Every year, Kaziranga National Park deliberately sets fire to large areas of its grasslands. This seems destructive, but it is essential ecosystem management. **Fire ecology** studies how fire shapes plant communities. Grasslands evolved with fire — lightning and human burning have maintained grasslands for millions of years — and without periodic fire, they convert to scrubland and eventually forest.',
-          'Fire removes accumulated dead plant material (thatch) that blocks sunlight from reaching the soil surface. Within days of burning, green shoots emerge from underground root systems and dormant seeds. The ash returns nutrients (phosphorus, potassium, calcium) to the soil in a form immediately available to plants. Fresh post-burn growth is nutritious and palatable, attracting herbivores like rhinos, elephants, and wild buffalo.',
-          'If fire is suppressed, tall grasses like **Saccharum** and **Arundo** grow so dense that ground-level visibility drops to near zero, making the habitat unsuitable for rhinos (which need to see approaching predators and each other). Dense unburned grassland also increases wildfire risk — when fire eventually occurs in fuel-loaded grassland, it burns so hot that it destroys root systems and seeds, causing lasting damage rather than the healthy regeneration of controlled burns.',
+          'Imagine you never cleaned your room for a whole year. Dead grass from previous seasons piles up as **thatch** \u2014 a thick, dry layer that blocks sunlight from reaching the soil. New shoots can\u2019t grow through it. The grassland slowly chokes on its own dead material.',
+          'Now imagine setting a controlled fire. The thatch burns away in minutes. The ash falls to the ground, instantly returning nutrients like phosphorus, potassium, and calcium to the soil. Within *days*, bright green shoots push up from underground root systems that were safely insulated beneath the soil.',
+          '**Check yourself:** If a grassland has not been burned for 5 years, would you expect *more* or *fewer* plant species compared to one burned annually? (Fewer \u2014 thick thatch blocks smaller plants.)',
           ],
-          keyIdea: 'Grasslands evolved with periodic fire and depend on it. Controlled burning removes dead thatch, returns nutrients to soil, stimulates fresh growth, and prevents the grassland from converting to forest.',
+          keyIdea: 'Grasslands evolved with periodic fire. Controlled burns remove dead thatch, return nutrients to soil as ash, and stimulate fresh growth from underground roots.',
+          diagram: 'GrassFireCycleDiagram',
         },
         {
-          title: 'C3 vs C4 Photosynthesis',
+          title: 'Elephant Grass Grows 5 Meters Tall',
           paragraphs: [
-          'All plants photosynthesize — converting CO₂, water, and sunlight into sugar — but they use different biochemical pathways. **C3 photosynthesis** (used by about 85% of plant species, including rice and most trees) fixes CO₂ directly using the enzyme RuBisCO. **C4 photosynthesis** (used by many tropical grasses, maize, and sugarcane) first concentrates CO₂ in specialized cells before feeding it to RuBisCO.',
-          'The C4 pathway is an evolutionary upgrade for hot, sunny, dry conditions. RuBisCO has a flaw: at high temperatures, it sometimes grabs O₂ instead of CO₂ (a wasteful process called photorespiration). C4 plants avoid this by pumping CO₂ to high concentrations around RuBisCO, ensuring it always grabs the right molecule. The result: C4 plants are 50-100% more productive than C3 plants under hot, bright conditions.',
-          'Kaziranga\'s dominant grasses — including elephant grass (*Saccharum spontaneum*) and wild sugarcane — are C4 species. They can grow 5-6 meters tall in a single growing season, producing the dense grassland habitat that supports the world\'s largest population of Indian one-horned rhinos. Without C4 photosynthesis, Kaziranga\'s grasslands would be far less productive and could not support such high densities of large herbivores.',
+          'Kaziranga\u2019s elephant grass grows so tall that a one-ton rhinoceros can vanish inside it. The secret is **C4 photosynthesis**, a turbocharged version of the process all plants use to turn sunlight into sugar.',
+          'Ordinary C3 plants have a problem: their key enzyme, RuBisCO, sometimes grabs O\u2082 instead of CO\u2082 when hot. **C4 plants** solved this by concentrating CO\u2082 in special cells around RuBisCO, so it *always* grabs the right molecule. Result: 50\u2013100% more sugar in hot conditions.',
+          '**Predict:** If you grew elephant grass (C4) and rice (C3) side by side in Kaziranga\u2019s hot climate, which would grow taller after one month? (Elephant grass, by a huge margin.)',
           ],
-          keyIdea: 'C4 photosynthesis concentrates CO₂ around RuBisCO, eliminating wasteful photorespiration and boosting productivity 50-100% in hot conditions. Kaziranga\'s C4 grasses grow fast enough to support the world\'s densest rhino population.',
-          diagram: 'PhotosynthesisDiagram',
+          keyIdea: 'C4 photosynthesis concentrates CO\u2082 around the enzyme RuBisCO, eliminating wasteful oxygen grabs and boosting growth 50\u2013100% in hot conditions.',
+          diagram: 'GrassC4PathwayDiagram',
         },
         {
-          title: 'NDVI: Seeing Greenness from Space',
+          title: 'Fire Seeds: Germination by Heat',
           paragraphs: [
-          'How do scientists monitor millions of hectares of grassland from space? They use the **Normalized Difference Vegetation Index (NDVI)**, calculated from satellite imagery. NDVI exploits a simple fact: healthy green vegetation strongly absorbs red light (for photosynthesis) but strongly reflects near-infrared (NIR) light. NDVI = (NIR - Red) / (NIR + Red). Values range from -1 to +1, with healthy vegetation scoring 0.3-0.8.',
-          'NDVI is measured by satellites like Landsat and Sentinel-2, which carry sensors detecting both visible and near-infrared wavelengths. A single Landsat image covers 185 × 185 km at 30-meter resolution — providing NDVI values for every 30 × 30 meter patch of ground. Time series of NDVI images reveal seasonal cycles, drought stress, fire recovery, and long-term changes in vegetation health.',
-          'In Kaziranga, park managers use NDVI to plan controlled burns and monitor recovery. Post-burn areas initially show very low NDVI (bare soil, ash). Within 2-3 weeks, NDVI rises rapidly as fresh shoots emerge. By comparing NDVI recovery rates across different areas and years, ecologists can assess grassland health, detect invasive species encroachment, and evaluate the effectiveness of management strategies — all from satellite data, without setting foot in the park.',
+          'Some grassland plants have seeds that *refuse to grow* unless they\u2019ve been through a fire. The seed coat is so hard that water cannot penetrate it. Only fire\u2019s heat cracks the coating open.',
+          'This ensures the seed sprouts *after* a burn, when competition is low and the soil is rich with ash nutrients. It\u2019s like arriving at a restaurant right when it opens versus joining a long queue.',
+          '**Think about it:** If all seeds germinated immediately, what would happen during the next fire? (Many young plants would be killed before reproducing \u2014 fire-triggered germination is a survival strategy.)',
           ],
-          keyIdea: 'NDVI uses satellite measurements of reflected red and near-infrared light to map vegetation health globally. It allows ecologists to monitor grassland fire recovery, drought stress, and ecosystem health from space.',
+          keyIdea: 'Some grassland seeds have hard coats that only crack in fire\u2019s heat, ensuring germination happens after burns when conditions are ideal.',
+        },
+        {
+          title: 'Kaziranga: Grass and Rhino Together',
+          paragraphs: [
+          'The relationship between elephant grass and Indian rhinos is **mutualism** \u2014 both species benefit. Rhinos eat the grass, spreading seeds in their dung. Their heavy hooves churn the soil. In return, tall grass hides rhinos from poachers.',
+          'Kaziranga is home to over 2,600 Indian one-horned rhinos. This concentration is possible *because* of C4 grasslands maintained by annual controlled burns. Remove any piece \u2014 fire, grass, or rhinos \u2014 and the ecosystem collapses.',
+          '**Check yourself:** Why is dung dispersal better than seeds just falling near the parent? (It spreads seeds over a wide area, preventing overcrowding and colonizing new ground after floods.)',
+          ],
+          keyIdea: 'Rhinos and elephant grass depend on each other: rhinos spread seeds and churn soil; grass provides food and cover. This mutualism supports the world\u2019s largest rhino population.',
+          diagram: 'GrassRhinoHabitatDiagram',
         },
       ],
     },
@@ -11542,7 +11683,7 @@ So the next time you see a kingfisher flash across the Brahmaputra — a streak 
           '**Thin-film interference** occurs when light reflects off two surfaces separated by a distance comparable to the wavelength of light. Some wavelengths constructively interfere (their reflected waves add up) while others destructively interfere (their waves cancel out). The spongy nanostructure in kingfisher feathers selectively reinforces blue wavelengths and cancels others, producing an intense blue that changes slightly with viewing angle.',
           'Structural colors are fundamentally different from pigment colors. Pigments absorb certain wavelengths and reflect others — they fade as the pigment molecules degrade. Structural colors result from physical geometry, not chemistry — they never fade as long as the structure is intact. Museum specimens of kingfisher feathers remain brilliantly blue after centuries, while pigment-based colors in adjacent specimens have faded completely.',
           ],
-          keyIdea: 'Kingfisher blue is not a pigment but a structural color produced by light interference in nanoscale keratin-air structures. Structural colors never fade because they depend on geometry, not chemistry.',
+          checkYourself: 'If you grind blue paint to powder, does it stay blue?', checkAnswer: 'Yes — pigment survives. Structural color does not.', keyIdea: 'Kingfisher blue is not a pigment but a structural color produced by light interference in nanoscale keratin-air structures. Structural colors never fade because they depend on geometry, not chemistry.',
           diagram: 'InterferenceDiagram',
         },
         {
@@ -11552,7 +11693,7 @@ So the next time you see a kingfisher flash across the Brahmaputra — a streak 
           'These biological nanostructures are **self-assembled** — they form through developmental processes encoded in DNA, not through nanoscale manufacturing. A kingfisher embryo\'s feathers develop their light-manipulating spongy structure through a process called **spinodal decomposition**, where a uniform protein mixture spontaneously separates into two phases with the right dimensions to interact with visible light.',
           'The precision is remarkable. The spongy keratin structures in kingfisher feathers have a periodicity of 100-200 nanometers (billionths of a meter) — smaller than the wavelength of visible light. For comparison, the best semiconductor fabrication plants produce features of about 3-7 nanometers. Nature achieves comparable nanoscale precision using protein self-assembly at room temperature in an egg, while engineers require billion-dollar clean rooms, toxic chemicals, and extreme conditions.',
           ],
-          keyIdea: 'Nature produces nanostructures with 100-200 nm precision through protein self-assembly — no clean rooms or toxic chemicals required. These biological photonic structures rival or exceed the precision of human nanofabrication.',
+          diagram: 'ThinFilmWavesDiagram', keyIdea: 'Nature produces nanostructures with 100-200 nm precision through protein self-assembly — no clean rooms or toxic chemicals required. These biological photonic structures rival or exceed the precision of human nanofabrication.',
         },
         {
           title: 'Biomimicry: Engineering Inspired by Kingfishers',
@@ -11645,59 +11786,104 @@ And that is why, among the people of Assam and across the forests of the Northea
     },
     illustration: '/content/illustrations/owl-wisest-bird.webp',
     track: 'school',
-    subjects: ['Biology'] as Subject[],
+    subjects: ['Biology', 'Physics'] as Subject[],
     toolSkills: ['Python' as Skill, 'NumPy' as Skill, 'Matplotlib' as Skill, 'Data Analysis' as Skill],
     learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
     estimatedHours: 12,
     playground: 'owl-wisest' as const,
     level0: {
       vocabulary: [
-        ['Rod Cell', 'A photoreceptor in the retina specialized for low-light vision — 100 times more sensitive than cone cells, but unable to detect color. Owls pack about 1 million rods per square millimeter'],
-        ['Rhodopsin', 'A light-sensitive protein in rod cells that amplifies a single photon\'s signal about 1 million times — the molecular basis of night vision in owls and humans alike'],
-        ['Asymmetric Ears', 'Ear openings positioned at different heights on an owl\'s skull — this offset allows 3D sound localization by comparing both the timing and intensity of sound arriving at each ear'],
-        ['Facial Disc', 'The heart-shaped arrangement of stiff feathers around an owl\'s face that acts as a parabolic sound collector, funneling sound waves into the ear openings with remarkable precision'],
-        ['Leading-Edge Serration', 'A comb-like structure on the front edge of owl flight feathers that breaks airflow into tiny turbulences, reducing overall noise by about 18 decibels — the secret to silent flight'],
+        ['Rod cell', 'A photoreceptor specialized for low-light vision \u2014 100x more sensitive than cone cells but cannot detect color'],
+        ['Rhodopsin', 'A light-sensitive protein in rod cells that amplifies a single photon\u2019s signal about 1 million times'],
+        ['Tapetum lucidum', 'A reflective layer behind the retina that bounces light back for a second detection pass \u2014 causes eye shine'],
+        ['Asymmetric ears', 'Ear openings at different heights on an owl\u2019s skull, allowing 3D sound localization'],
+        ['Leading-edge serration', 'Comb-like teeth on owl flight feathers that break airflow into micro-turbulences, reducing noise by ~18 dB'],
       ],
       trueFalse: [
-        { statement: 'Owls can see in complete darkness with no light at all.', isTrue: false, explanation: 'Owls have extraordinary low-light vision but still need some light — even if extremely faint, like starlight. Their rod cells can detect single photons, but in absolute zero-light conditions, they rely entirely on their incredible hearing to locate and strike prey.' },
-        { statement: 'Barn owls can catch prey in total darkness using sound alone.', isTrue: true, explanation: 'Barn owls can strike prey in complete darkness with 1-2 degree accuracy using only sound. Their asymmetric ears create a 3D sound map: time differences indicate horizontal direction, intensity differences indicate vertical direction. The entire calculation from sound to strike takes about 100 milliseconds.' },
-        { statement: 'Owl feathers are structured to reduce flight noise to levels inaudible to their prey.', isTrue: true, explanation: 'Three feather adaptations — leading-edge serrations, trailing-edge fringes, and velvety surface pile — reduce owl flight noise by about 18 decibels (1/60th the perceived loudness of a pigeon). At frequencies above 2 kHz, owl flight falls below the hearing threshold of mice and voles.' },
+        { statement: 'Owls can see in complete darkness with no light at all.', isTrue: false, explanation: 'Owls need some light, even faint starlight. In absolute darkness, they rely entirely on hearing to locate prey.' },
+        { statement: 'Barn owls can catch prey in total darkness using sound alone.', isTrue: true, explanation: 'Barn owls strike with 1\u20132 degree accuracy using only sound. Asymmetric ears create a 3D sound map in ~100 milliseconds.' },
+        { statement: 'Owl feathers reduce flight noise to levels inaudible to prey.', isTrue: true, explanation: 'Three adaptations reduce noise by ~18 dB. At frequencies above 2 kHz, owl flight is below the hearing threshold of mice.' },
       ],
       facts: [
-        'An owl\'s eyes can account for up to 5% of its body weight (compared to 0.0003% in humans) — these enormous eyes provide a larger retinal image, compensating for the poor spatial resolution of rod-dominated night vision.',
-        'Owl feather noise-reduction principles have inspired quieter wind turbines — serrated leading edges modeled on owl feathers reduce aerodynamic noise by 5-10 decibels while maintaining power output, helping turbines gain acceptance near residential areas.',
-        'A barn owl can detect a mouse moving under 30 centimeters of snow by hearing its footsteps, compute the 3D position from interaural time and intensity differences, and strike through the snow barrier — all in about 100 milliseconds.',
+        'Owl eyes account for up to 5% of body weight (vs 0.0003% in humans) \u2014 packed with light-detecting rod cells.',
+        'Owl feather serrations have inspired quieter wind turbines, reducing noise by 5\u201310 dB.',
+        'A barn owl can detect a mouse under 30 cm of snow by hearing its footsteps and strike in ~100 ms.',
       ],
-      offlineActivity: 'Test your own sound localization. Have a friend blindfold you, then snap their fingers from 8 different directions (front, back, left, right, and the four diagonals) at the same distance. Point to where you think the sound comes from each time. Record your accuracy. Now cover one ear completely and repeat the test — your accuracy will drop dramatically, especially for front-back distinction. This demonstrates why two ears (and especially asymmetric ears like an owl\'s) are essential for 3D sound localization. The time and intensity differences between your two ears are the same cues owls use, but their asymmetric ear placement adds vertical precision that human ears lack.',
+      offlineActivity: 'Blindfold test: have a friend snap fingers from 8 directions. Point to the source. Record accuracy. Then block one ear and repeat \u2014 accuracy drops dramatically, proving why two ears (and asymmetric ears) matter.',
+      offlineActivityDiagram: 'ActivitySoundLocateDiagram',
+      codeTeaser: `import numpy as np
+import matplotlib.pyplot as plt
+
+light_levels = np.logspace(-4, 4, 100)
+rod_response = light_levels / (light_levels + 0.01)
+cone_response = np.where(light_levels > 1,
+    (light_levels - 1) / (light_levels + 100), 0)
+
+plt.figure(figsize=(10, 5))
+plt.semilogx(light_levels, rod_response, label="Rod cells (night)", linewidth=2)
+plt.semilogx(light_levels, cone_response, label="Cone cells (day)", linewidth=2)
+plt.axvline(x=0.1, color="gray", linestyle="--", label="Starlight level")
+plt.xlabel("Light intensity (relative)")
+plt.ylabel("Response strength")
+plt.title("Rod vs Cone: Why Owls See at Night")
+plt.legend()
+plt.show()  # Which works in starlight?`,
+      referenceLinks: [
+        { slug: 'animal-senses-and-behavior', reason: 'How other animals evolved extraordinary sensory adaptations' },
+        { slug: 'light-and-color', reason: 'How light works and the physics of vision that owl eyes exploit' },
+      ],
+      nextLessons: [
+        { slug: 'bamboo-taught-wind', reason: 'Sound physics \u2014 bamboo vibration vs the frequencies owls detect' },
+        { slug: 'woodpeckers-drum', reason: 'Woodpecker biomechanics \u2014 a different adaptation story' },
+        { slug: 'girl-who-spoke-to-elephants', reason: 'Elephants use infrasound \u2014 compare with owl\u2019s high-frequency specialization' },
+      ],
+      quiz: [
+        { question: 'What photoreceptor enables owl night vision?', options: ['Cone cells', 'Rod cells at extreme density', 'UV cells', 'Infrared cells'], answer: 1 },
+        { question: 'What is the tapetum lucidum?', options: ['Pupil muscle', 'Reflective layer behind retina that bounces light back', 'A feather type', 'The iris color'], answer: 1 },
+        { question: 'Why are owl ears at different heights?', options: ['Birth defect', 'Allows vertical sound localization via intensity differences', 'Different frequency ranges', 'Room for larger eyes'], answer: 1 },
+        { question: 'How much quieter is owl flight vs a pigeon?', options: ['Same', '3 dB quieter', '~18 dB quieter (1/60th loudness)', 'Completely silent'], answer: 2 },
+        { question: 'Which feather feature breaks airflow to reduce noise?', options: ['Trailing fringes', 'Leading-edge serrations (comb teeth)', 'Velvety pile', 'Waterproof coating'], answer: 1 },
+      ],
       concepts: [
         {
-          title: 'Rod Cells: Seeing in Near-Darkness',
+          title: 'Rod Cells: Seeing by Starlight',
           paragraphs: [
-          'An owl\'s retina is packed with **rod cells** — photoreceptor cells specialized for low-light vision. Rod cells are 100 times more sensitive to light than **cone cells** (which detect color in bright light). An owl\'s eye may contain 1 million rods per square millimeter, compared to about 150,000 in a human eye. This extreme rod density allows owls to detect prey in light conditions equivalent to a single candle seen from 500 meters away.',
-          'Rod cells achieve their sensitivity through a molecule called **rhodopsin** — a protein bonded to retinal (a form of vitamin A). When a single photon strikes rhodopsin, it triggers a biochemical cascade that amplifies the signal about 1 million times before it reaches the brain. This amplification is why you can see stars on a clear night — each star sends just a handful of photons per second to your retina.',
-          'The tradeoff for extreme rod density is poor spatial resolution and no color vision in dim light. Rods cannot distinguish fine details or colors because they pool signals from many cells to maximize sensitivity. This is why owls (and humans at night) see in "grainy" black-and-white. Owls compensate with enormous eyes — an owl\'s eyes account for up to 5% of its body weight (compared to 0.0003% in humans), providing a larger image on the retina.',
+          'Owls have **7x more rod cells per mm\u00b2** than humans. Rod cells use **rhodopsin** to amplify a single photon 1 million times. This is why you can see stars \u2014 each sends just a handful of photons per second.',
+          'The tradeoff: rods can\u2019t detect color. In dim light, only rods are active, so you see in grayscale. Owls compensate with enormous eyes (5% of body weight) for a larger retinal image.',
+          '**Check yourself:** Why do you see \u201cblack and white\u201d in dim light? (Cones need lots of light; only rods work in darkness. Rods detect intensity but not wavelength.)',
           ],
-          keyIdea: 'Owl retinas contain extremely dense rod cells that amplify single photons a million-fold. This enables vision in near-total darkness at the cost of color perception and spatial resolution.',
+          keyIdea: 'Owl retinas pack rod cells that amplify single photons a million-fold. This enables near-darkness vision at the cost of color and sharp detail.',
+          diagram: 'OwlRodConeDiagram',
         },
         {
-          title: 'Asymmetric Ears: 3D Sound Mapping',
+          title: 'Tapetum Lucidum: Double-Pass Vision',
           paragraphs: [
-          'Many owl species have **asymmetric ears** — one ear opening is positioned higher on the skull than the other. This asymmetry allows the owl to locate prey in three dimensions using sound alone. The time difference between a sound reaching the left ear versus the right ear indicates horizontal direction. The intensity difference between the higher and lower ear indicates vertical direction (elevation).',
-          'The barn owl is the gold standard of auditory hunting. Its heart-shaped facial disc acts as a parabolic sound collector, funneling sound waves into the ear openings. In laboratory tests, barn owls can strike prey in complete darkness with accuracy within 1-2 degrees in both horizontal and vertical planes. The sound processing occurs in the **inferior colliculus**, a brain region that contains a topographic "map" of auditory space — specific neurons fire only for sounds coming from specific directions.',
-          'This biological sonar system is so precise that owls can detect a mouse moving under 30 centimeters of snow. The owl hears the mouse\'s footsteps and rustle, computes the 3D position from interaural time and intensity differences, and strikes through the snow barrier with talons extended. The entire calculation — from sound to strike — happens in about 100 milliseconds.',
+          'The **tapetum lucidum** is a mirror behind the retina. Light passes through photoreceptors once, bounces off the tapetum, and passes through *again* \u2014 doubling detection chance. The \u201ceye shine\u201d is light escaping back out.',
+          'Cats, dogs, deer, and owls all have it. Humans don\u2019t \u2014 a tapetum slightly reduces sharpness, which matters more for daytime hunters than the night-vision benefit.',
+          '**Think about it:** Why don\u2019t humans need a tapetum? (We\u2019re diurnal. Sharp color vision matters more to us than night sensitivity.)',
           ],
-          keyIdea: 'Asymmetric ear placement allows owls to locate sounds in 3D space using both timing and intensity differences between ears. Barn owls can strike prey in total darkness with 1-2 degree accuracy.',
-          diagram: 'EcholocationDiagram',
+          keyIdea: 'The tapetum bounces light back through photoreceptors for a second detection pass, doubling light sensitivity at slight cost to image sharpness.',
+          diagram: 'OwlTapetumDiagram',
         },
         {
-          title: 'Silent Flight: Acoustic Stealth',
+          title: 'Asymmetric Ears: Hearing in 3D',
           paragraphs: [
-          'Owls are the only birds that can fly in near-silence. Three feather adaptations make this possible. First, the leading edge of each primary flight feather has a **comb-like serration** that breaks incoming airflow into tiny turbulences, reducing the large-scale turbulence that generates noise. Second, the trailing edges of the feathers are **fringed** with soft, flexible barbs that suppress trailing-edge noise. Third, the upper surface of the feathers is covered with a **velvety pile** that absorbs high-frequency sound.',
-          'These adaptations collectively reduce flight noise by about 18 decibels compared to a pigeon of similar size — that is equivalent to reducing the sound to about 1/60th of the perceived loudness. At frequencies above 2 kHz (the range most relevant for prey detection), owl flight noise falls below the hearing threshold of mice and voles.',
-          'Aerospace engineers study owl feather adaptations to design quieter aircraft and wind turbines. Serrated leading edges inspired by owl feathers have been tested on wind turbine blades, reducing aerodynamic noise by 5-10 decibels while maintaining power generation efficiency. Quieter turbines face less community opposition to placement near residential areas, directly increasing the feasibility of wind energy.',
+          'Human ears are at the same height: we locate left/right (timing difference) but struggle with up/down. Owl ears are at **different heights**, adding vertical localization via intensity differences.',
+          'The heart-shaped facial disc acts as a parabolic dish. Barn owls strike prey in total darkness with 1\u20132\u00b0 accuracy. Sound to strike: ~100 ms.',
+          '**Predict:** If you snap fingers above a blindfolded person\u2019s head, could they point up accurately? (No \u2014 symmetric ears can\u2019t do vertical. An owl would pinpoint it instantly.)',
           ],
-          keyIdea: 'Three feather modifications — leading-edge serrations, trailing-edge fringes, and velvety surface pile — reduce owl flight noise by 18 decibels, making their approach inaudible to prey.',
-          diagram: 'BernoulliDiagram',
+          keyIdea: 'Asymmetric ears give owls vertical sound localization: timing = horizontal, intensity = vertical. Accuracy: 1\u20132 degrees in total darkness.',
+          diagram: 'OwlAsymmetricEarsDiagram',
+        },
+        {
+          title: 'Silent Flight: The Comb-Edge Secret',
+          paragraphs: [
+          'Three feather features: **leading-edge serrations** (comb teeth breaking airflow into micro-turbulences), **trailing-edge fringes** (soft barbs suppressing exit noise), and **velvety pile** (absorbing remaining high-frequency sound).',
+          'Together: -18 dB = 1/60th the loudness of a pigeon. At frequencies mice hear (>2 kHz), owl flight is undetectable.',
+          '**Check yourself:** Why do quieter wind turbines matter commercially? (Noise opposition is the main barrier to building turbines near homes. Owl-inspired serrations reduce noise 5\u201310 dB.)',
+          ],
+          keyIdea: 'Three feather modifications reduce owl flight noise by 18 dB, making their approach inaudible to prey. Inspired: quieter wind turbines.',
+          diagram: 'OwlSilentFlightDiagram',
         },
       ],
     },
@@ -11786,51 +11972,96 @@ And yet she is the most beloved flower in the gardens of Assam — proof that yo
     playground: 'night-jasmine' as const,
     level0: {
       vocabulary: [
-        ['Circadian rhythm', 'A roughly 24-hour internal clock that controls sleeping, waking, and many other biological processes'],
-        ['Photoperiodism', 'A plant\'s ability to measure the length of day and night to decide when to flower, grow, or become dormant'],
-        ['Phytochrome', 'A light-sensing protein molecule in plants that switches between two forms to measure how long it has been dark'],
-        ['Pollinator', 'An animal (bee, moth, bat, bird) that carries pollen from flower to flower, enabling plants to reproduce'],
-        ['Volatile organic compound', 'A chemical that easily evaporates into the air — responsible for the scents flowers release to attract pollinators'],
+        ['Circadian rhythm', 'A roughly 24-hour internal clock that controls biological processes like flower opening, leaf movement, and scent release'],
+        ['Photoperiodism', 'A plant\u2019s ability to measure the length of day and night to decide when to flower or become dormant'],
+        ['Phytochrome', 'A light-sensing protein that switches between two forms to measure how long it has been dark \u2014 the plant\u2019s molecular timer'],
+        ['Stomata', 'Tiny pores on leaf surfaces that open for gas exchange during the day and close at night to conserve water'],
+        ['Volatile organic compound', 'A chemical that easily evaporates into the air \u2014 responsible for the scents flowers release to attract pollinators'],
       ],
       trueFalse: [
-        { statement: 'Night-blooming flowers open because the temperature drops after sunset.', isTrue: false, explanation: 'Night jasmine\'s blooming is controlled by measuring the duration of uninterrupted darkness, not temperature. Experiments show that even a brief flash of light during the night can reset the cycle and prevent blooming, proving that light duration — not temperature — is the trigger.' },
-        { statement: 'Plants have internal clocks similar to the ones animals use for sleep cycles.', isTrue: true, explanation: 'Plants have circadian rhythms driven by molecular feedback loops, just like animals. These clocks control leaf movement, flower opening, scent release, and photosynthesis timing. A plant kept in constant darkness will continue its daily rhythms for several days before they fade.' },
-        { statement: 'Flowers release the same amount of scent during the day and night.', isTrue: false, explanation: 'Night-blooming flowers like jasmine dramatically increase scent production after dark to attract nocturnal pollinators like moths and bats. The timing is controlled by circadian genes that ramp up production of volatile organic compounds at dusk.' },
+        { statement: 'Night-blooming flowers open because the temperature drops after sunset.', isTrue: false, explanation: 'Night jasmine\u2019s blooming is controlled by measuring uninterrupted darkness duration, not temperature. A brief light flash at midnight resets the timer.' },
+        { statement: 'Plants have internal clocks similar to animal sleep cycles.', isTrue: true, explanation: 'Plants have circadian rhythms driven by molecular feedback loops. A plant in constant darkness continues its daily rhythm for several days.' },
+        { statement: 'Night-blooming flowers release the same amount of scent day and night.', isTrue: false, explanation: 'Night-blooming flowers dramatically increase scent production after dark to attract moths. Circadian genes ramp up VOC production at dusk.' },
       ],
       facts: [
-        'Night jasmine (Nyctanthes arbor-tristis) opens its flowers at dusk and drops them at dawn. The timing is so precise that it was historically used as a natural clock in parts of South and Southeast Asia.',
-        'The molecule phytochrome acts as a biological timer: it converts from one form (Pfr) to another (Pr) during darkness. When the Pfr level drops below a critical threshold — meaning the night has been long enough — flowering genes are activated.',
-        'Night-blooming flowers tend to be white or pale-colored because they need to be visible to nocturnal pollinators like moths. They invest heavily in scent rather than bright color, since fragrance travels farther than visual signals in the dark.',
+        'Night jasmine opens at dusk and drops its flowers at dawn \u2014 timing so precise it was used as a natural clock in South Asia.',
+        'Phytochrome slowly converts from active (Pfr) to inactive (Pr) form in darkness. When Pfr drops below a threshold, flowering genes activate.',
+        'Night-blooming flowers are usually white because they need to be visible to moths. They invest in scent rather than bright color.',
       ],
-      offlineActivity: 'Observe a plant\'s daily rhythm. Pick a houseplant or garden plant and check it at 4 different times each day (morning, noon, evening, night) for 3 days. Note whether leaves droop or perk up, whether flowers open or close, and whether you can detect any scent changes. Record your observations in a table with time and date. You are documenting the plant\'s circadian rhythm — its internal clock responding to the cycle of light and dark.',
+      offlineActivity: 'Check a houseplant at 4 times daily (7 AM, noon, 6 PM, 10 PM) for 3 days. Note leaf position, flower state, and scent changes. You\u2019re documenting the plant\u2019s circadian rhythm.',
+      offlineActivityDiagram: 'ActivityPlantRhythmDiagram',
+      codeTeaser: `import numpy as np
+import matplotlib.pyplot as plt
+
+hours = np.linspace(0, 48, 200)
+pfr = np.where(hours % 24 < 14,
+    0.9, 0.9 * np.exp(-0.2 * (hours % 24 - 14)))
+
+plt.figure(figsize=(10, 5))
+plt.plot(hours, pfr, linewidth=2, color="purple")
+plt.axhline(y=0.3, color="red", linestyle="--", label="Flowering threshold")
+plt.fill_between(hours, 0, 1, where=(hours % 24 >= 14), alpha=0.1, color="navy", label="Night")
+plt.xlabel("Hours")
+plt.ylabel("Pfr level")
+plt.title("Phytochrome Timer: When Does Night Jasmine Bloom?")
+plt.legend()
+plt.show()  # When does Pfr cross the threshold?`,
+      referenceLinks: [
+        { slug: 'plant-biology', reason: 'How plants sense and respond to their environment \u2014 photoreceptors, hormones, and growth' },
+        { slug: 'ecology-and-populations', reason: 'How pollinator-plant relationships shape ecosystems and why timing matters' },
+      ],
+      nextLessons: [
+        { slug: 'honey-hunters-lesson', reason: 'Bees are daytime pollinators \u2014 compare with the moths that pollinate night jasmine' },
+        { slug: 'firefly-festival-of-majuli', reason: 'Fireflies also use timing to communicate \u2014 another story of biological clocks' },
+        { slug: 'cuckoo-calls-dawn', reason: 'Bird calls follow circadian rhythms too \u2014 the same clock genes control dawn chorus timing' },
+      ],
+      quiz: [
+        { question: 'What does night jasmine measure to decide when to bloom?', options: ['Temperature drop', 'Humidity increase', 'Duration of uninterrupted darkness', 'Wind speed'], answer: 2 },
+        { question: 'What happens if you flash light on night jasmine at midnight?', options: ['Nothing', 'The dark timer resets and blooming is prevented', 'Flowers bloom immediately', 'The plant dies'], answer: 1 },
+        { question: 'What is phytochrome\u2019s role in plants?', options: ['It produces flower color', 'It converts between two forms to measure darkness duration', 'It absorbs water', 'It protects against UV'], answer: 1 },
+        { question: 'Why are night-blooming flowers usually white?', options: ['Cheaper to produce', 'Visible to nocturnal moth pollinators in dim light', 'Reflects moonlight', 'No particular reason'], answer: 1 },
+        { question: 'A plant in constant darkness continues its leaf rhythm for days. What does this prove?', options: ['Temperature response', 'It has an internal circadian clock independent of light', 'It is dying', 'Nothing useful'], answer: 1 },
+      ],
       concepts: [
         {
-          title: 'Photoperiodism: How Plants Measure Night',
+          title: 'Why Some Flowers Open at Night',
           paragraphs: [
-          'Plants track the length of day and night through a process called **photoperiodism**. Night-blooming jasmine (*Nyctanthes arbor-tristis*) opens its flowers at dusk and drops them at dawn — a behavior timed not by temperature or humidity but by the duration of darkness. Experiments show that even a brief flash of light during the night can disrupt this cycle, proving the plant is measuring the length of uninterrupted darkness.',
-          '**Short-day plants** (like chrysanthemums and night jasmine) flower when nights exceed a critical length. **Long-day plants** (like spinach and wheat) flower when nights are shorter than a critical length. **Day-neutral plants** (like tomatoes) flower regardless of day length. Despite the names, it is actually **night length** that the plants measure — a discovery made in the 1930s by interrupting dark periods with brief light flashes.',
-          'Photoperiodism allows plants to synchronize reproduction with seasons. By measuring night length, plants can distinguish spring from autumn (even though temperatures may be similar) because night lengths are uniquely associated with specific calendar dates at any given latitude. This ensures flowers open when pollinators are active and seeds mature when conditions favor germination.',
+          'Night jasmine opens at dusk because its \u201ccustomers\u201d (moth pollinators) only fly at night. But how does the plant know it\u2019s dusk? It **measures the length of uninterrupted darkness**.',
+          'Scientists proved this by flashing a brief light in the middle of the night. The flash *reset the plant\u2019s dark timer*, preventing blooming \u2014 even though the total dark hours were the same.',
+          '**Predict:** If you moved night jasmine to Norway in summer (3-hour nights), would it bloom? (No \u2014 the night would be too short to reach the critical threshold.)',
           ],
-          keyIdea: 'Plants measure the length of uninterrupted darkness (not daylight) to determine when to flower. Night-blooming jasmine opens only when night exceeds a critical duration, synchronizing reproduction with pollinator activity.',
+          keyIdea: 'Night jasmine blooms after dark because its moth pollinators are nocturnal. The plant measures uninterrupted darkness duration, not temperature.',
+          diagram: 'JasminePhotoperiodDiagram',
         },
         {
-          title: 'Phytochrome: The Molecular Light Switch',
+          title: 'The Molecular Timer: Phytochrome',
           paragraphs: [
-          'The molecule responsible for photoperiodism is **phytochrome**, a photoreceptor protein found in all plants. Phytochrome exists in two interconvertible forms: **Pr** (absorbs red light, wavelength 660 nm) and **Pfr** (absorbs far-red light, wavelength 730 nm). In sunlight, Pr converts to Pfr. In darkness, Pfr slowly converts back to Pr. The ratio of Pfr to Pr tells the plant how long it has been dark.',
-          'Here is how the timing works: at sunset, the plant has high Pfr levels (accumulated during the day). During the night, Pfr gradually reverts to Pr. If the night is long enough, Pfr drops below a critical threshold that triggers flowering genes. If dawn arrives before this threshold is reached (short night), flowering is not triggered. The Pfr→Pr reversion rate acts as a biochemical clock, measuring darkness duration.',
-          'Phytochrome also controls seed germination, stem elongation, leaf expansion, and chloroplast development. Seeds buried under leaf litter receive light filtered through leaves, which is depleted of red light (absorbed by chlorophyll above) but enriched in far-red light. This shifts the Pr/Pfr ratio and tells the seed "you are under canopy cover — do not germinate until conditions improve." A tiny molecule makes a sophisticated ecological decision.',
+          '**Phytochrome** exists in two forms: **Pfr** (active) and **Pr** (inactive). Sunlight converts Pr to Pfr. In darkness, Pfr slowly converts back to Pr \u2014 like sand flowing down an hourglass.',
+          'If the night is long enough, Pfr drops below a **critical threshold** and flowering genes switch on. The conversion rate *is* the timer \u2014 no brain needed, just one molecule changing shape.',
+          '**Check yourself:** Red light converts Pr\u2192Pfr. Far-red light converts Pfr\u2192Pr. What happens if you shine far-red light at night? (It speeds up conversion to Pr, making the plant \u201cthink\u201d the night is longer.)',
           ],
-          keyIdea: 'Phytochrome is a molecular switch that converts between two forms (Pr and Pfr) depending on light exposure. The rate of Pfr reversion in darkness acts as a timer, measuring night length and controlling flowering, germination, and growth.',
-          diagram: 'WavelengthSpectrum',
+          keyIdea: 'Phytochrome switches between active Pfr and inactive Pr forms. The slow Pfr\u2192Pr conversion in darkness acts as a timer that triggers flowering when night is long enough.',
+          diagram: 'JasminePhytochromeDiagram',
         },
         {
-          title: 'Volatile Organic Compounds: Scent as Communication',
+          title: 'Stomata: The Plant\u2019s Breathing Rhythm',
           paragraphs: [
-          'Night-blooming jasmine releases an intense fragrance specifically after dark. This is not accidental — the plant synthesizes and emits **volatile organic compounds (VOCs)** including **methyl benzoate**, **linalool**, and various terpenes, all timed to coincide with the activity periods of nocturnal pollinators like moths and bats.',
-          'The timing of VOC emission is controlled by the plant\'s **circadian clock** — an internal oscillator that runs on an approximately 24-hour cycle even in constant conditions. The clock regulates expression of genes encoding enzymes in the terpenoid biosynthesis pathway, ramping up production in the evening and shutting it down at dawn. This ensures maximum fragrance when pollinators are flying and minimal energy waste during the day when pollinators are inactive.',
-          'Plants use VOCs for more than pollinator attraction. Damaged leaves release specific VOCs that attract predatory insects which eat the herbivores causing the damage — a chemical "cry for help." Some VOCs warn neighboring plants of herbivore attack, triggering preemptive defense responses. The "smell of cut grass" is actually a distress signal — a cocktail of VOCs released by damaged grass cells that triggers defensive chemistry in nearby undamaged plants.',
+          'Plants breathe through tiny **stomata** pores. **Guard cells** swell to open them by day (letting CO\u2082 in) and shrink to close them at night (conserving water). This follows a circadian rhythm.',
+          'Even in constant darkness, stomata continue their rhythm for several days \u2014 proving it\u2019s controlled by an **internal clock** (genes TOC1 and CCA1), not just light response.',
+          '**Think about it:** Why is it wasteful to keep stomata open at night? (No photosynthesis without light, so no need for CO\u2082. But open stomata lose water through evaporation.)',
           ],
-          keyIdea: 'Plants release specific volatile organic compounds on a circadian schedule to attract pollinators at the right time. VOCs also serve as chemical signals for defense, warning neighbors, and summoning predators of herbivores.',
+          keyIdea: 'Stomata open/close on a circadian rhythm controlled by clock genes \u2014 they open for gas exchange by day and close to conserve water at night.',
+          diagram: 'JasmineStomataClockDiagram',
+        },
+        {
+          title: 'Scent on a Schedule',
+          paragraphs: [
+          'Night jasmine\u2019s fragrance is produced on a strict schedule. Circadian genes ramp up **volatile organic compound** production at dusk and shut it down at dawn.',
+          'This saves energy. Releasing scent when moth pollinators are sleeping would be like broadcasting ads when no one is listening.',
+          '**Check yourself:** Roses are colorful but weakly scented; jasmine is pale but intensely fragrant. Why? (Day pollinators use sight; night pollinators use smell. Each flower invests in the signal its pollinators can detect.)',
+          ],
+          keyIdea: 'Plants release scent on a circadian schedule, concentrating production when pollinators are active. This saves energy while maximizing pollination.',
+          diagram: 'JasmineScentClockDiagram',
         },
       ],
     },
