@@ -17,13 +17,13 @@ function evalGate(type: GateType, a: number, b: number): number {
 
 function gateExpr(type: GateType): string {
   switch (type) {
-    case 'AND':  return 'A \u00B7 B';
+    case 'AND':  return 'A · B';
     case 'OR':   return 'A + B';
-    case 'NOT':  return '\u00ACA';
-    case 'NAND': return '\u00AC(A \u00B7 B)';
-    case 'NOR':  return '\u00AC(A + B)';
-    case 'XOR':  return 'A \u2295 B';
-    case 'XNOR': return '\u00AC(A \u2295 B)';
+    case 'NOT':  return '¬A';
+    case 'NAND': return '¬(A · B)';
+    case 'NOR':  return '¬(A + B)';
+    case 'XOR':  return 'A ⊕ B';
+    case 'XNOR': return '¬(A ⊕ B)';
   }
 }
 
@@ -172,20 +172,20 @@ const CIRCUITS: Record<CircuitId, CircuitDef> = {
   'sr-latch': {
     name: 'SR Latch (NOR)',
     inputs: ['S', 'R'],
-    outputs: ['Q', 'Q\u0305'],
+    outputs: ['Q', 'Q̅'],
     desc: 'Set-Reset memory. S=1 sets Q=1, R=1 resets Q=0. Both 1 is invalid.',
     evaluate: (ins) => {
-      if (ins.S && ins.R) return { Q: 0, 'Q\u0305': 0 }; // invalid
-      if (ins.S) return { Q: 1, 'Q\u0305': 0 };
-      if (ins.R) return { Q: 0, 'Q\u0305': 1 };
-      return { Q: 0, 'Q\u0305': 1 }; // hold (simplified)
+      if (ins.S && ins.R) return { Q: 0, 'Q̅': 0 }; // invalid
+      if (ins.S) return { Q: 1, 'Q̅': 0 };
+      if (ins.R) return { Q: 0, 'Q̅': 1 };
+      return { Q: 0, 'Q̅': 1 }; // hold (simplified)
     },
   },
   'mux-2to1': {
     name: '2-to-1 MUX',
     inputs: ['D0', 'D1', 'Sel'],
     outputs: ['Y'],
-    desc: 'Selector picks which input passes through. Sel=0 \u2192 Y=D0, Sel=1 \u2192 Y=D1.',
+    desc: 'Selector picks which input passes through. Sel=0 → Y=D0, Sel=1 → Y=D1.',
     evaluate: (ins) => ({
       Y: ins.Sel ? ins.D1 : ins.D0,
     }),
@@ -412,8 +412,8 @@ function SingleGateExplorer() {
       </div>
 
       {/* Gate SVG */}
-      <svg viewBox="0 0 200 80" className="w-full max-w-xs">
-        <GateSVG type={gate} a={a} b={b} out={out} cx={80} cy={40} />
+      <svg viewBox="0 0 240 100" className="w-full max-w-sm">
+        <GateSVG type={gate} a={a} b={b} out={out} cx={100} cy={50} />
       </svg>
 
       {/* Expression */}
