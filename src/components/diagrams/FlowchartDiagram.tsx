@@ -45,7 +45,7 @@ function isActive(path: string[], ...ids: string[]) {
 }
 
 function opacity(path: string[], ...ids: string[]) {
-  return isActive(path, ...ids) ? 1 : 0.3;
+  return isActive(path, ...ids) ? 1 : 0.5;
 }
 
 function strokeColor(path: string[], ex: Example, ...ids: string[]) {
@@ -175,8 +175,8 @@ export default function FlowchartDiagram() {
           x="118"
           y="105"
           textAnchor="middle"
-          className="fill-gray-600 dark:fill-gray-400"
-          fontSize="11"
+          className="fill-gray-800 dark:fill-gray-200"
+          fontSize="13"
           fontWeight="700"
           fontFamily="monospace"
           opacity={opacity(p, "d1-yes")}
@@ -225,8 +225,8 @@ export default function FlowchartDiagram() {
         <text
           x="264"
           y="168"
-          className="fill-gray-600 dark:fill-gray-400"
-          fontSize="11"
+          className="fill-gray-800 dark:fill-gray-200"
+          fontSize="13"
           fontWeight="700"
           fontFamily="monospace"
           opacity={opacity(p, "d1-no")}
@@ -281,8 +281,8 @@ export default function FlowchartDiagram() {
           x="378"
           y="222"
           textAnchor="middle"
-          className="fill-gray-600 dark:fill-gray-400"
-          fontSize="11"
+          className="fill-gray-800 dark:fill-gray-200"
+          fontSize="13"
           fontWeight="700"
           fontFamily="monospace"
           opacity={opacity(p, "d2-no")}
@@ -332,8 +332,8 @@ export default function FlowchartDiagram() {
           x="232"
           y="288"
           textAnchor="end"
-          className="fill-gray-600 dark:fill-gray-400"
-          fontSize="11"
+          className="fill-gray-800 dark:fill-gray-200"
+          fontSize="13"
           fontWeight="700"
           fontFamily="monospace"
           opacity={opacity(p, "d2-yes")}
@@ -388,8 +388,8 @@ export default function FlowchartDiagram() {
           x="118"
           y="337"
           textAnchor="middle"
-          className="fill-gray-600 dark:fill-gray-400"
-          fontSize="11"
+          className="fill-gray-800 dark:fill-gray-200"
+          fontSize="13"
           fontWeight="700"
           fontFamily="monospace"
           opacity={opacity(p, "d3-yes")}
@@ -448,8 +448,8 @@ export default function FlowchartDiagram() {
           x="378"
           y="337"
           textAnchor="middle"
-          className="fill-gray-600 dark:fill-gray-400"
-          fontSize="11"
+          className="fill-gray-800 dark:fill-gray-200"
+          fontSize="13"
           fontWeight="700"
           fontFamily="monospace"
           opacity={opacity(p, "d3-no")}
