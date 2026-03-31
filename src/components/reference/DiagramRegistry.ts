@@ -1335,6 +1335,35 @@ const registry: Record<string, ComponentType> = {
   LogicGateSymbolsDiagram,
   LogicHalfAdderDiagram,
   LogicProcessorDiagram,
+  // Frogs Sing Rain — Acoustics & Animal Communication
+  FrogVocalSacDiagram,
+  FrogFrequencyDiagram,
+  FrogChorusDiagram,
+  FrogHumidityDiagram,
+  ActivityFrogListenDiagram,
+  // Peacocks Dance — Animal Communication & Signaling
+  PeacockSexualSelectionDiagram,
+  PeacockIridescenceDiagram,
+  PeacockInfrasoundDiagram,
+  PeacockHonestSignalDiagram,
+  ActivityIridescenceTestDiagram,
+  // Bamboo Grows Fast — Plant Growth Hormones & Cell Biology
+  BambooMeristemDiagram,
+  BambooAuxinDiagram,
+  BambooCellElongationDiagram,
+  ActivityBambooGrowthDiagram,
+  // Elephant Corridor — Wildlife Corridors
+  CorridorFragmentDiagram,
+  CorridorGeneFlowDiagram,
+  CorridorCameraTrapDiagram,
+  CorridorConflictSolutionDiagram,
+  ActivityCorridorMapDiagram,
+  // Holi Tea Gardens — Chemistry of Colors & Dyes
+  HoliNaturalDyeDiagram,
+  HoliPHIndicatorDiagram,
+  HoliMordantDiagram,
+  HoliTeaConnectionDiagram,
+  ActivityDyeExtractDiagram,
 };
 
 export default registry;

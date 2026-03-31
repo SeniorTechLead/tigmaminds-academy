@@ -2556,62 +2556,105 @@ His mother smiled. "You didn't build it from nothing, Dipankar. You built it fro
     },
     illustration: '/content/illustrations/boy-built-library.webp',
     track: 'bootcamp',
-    subjects: ['Biology'] as Subject[],
-    toolSkills: ['Python' as Skill, 'NumPy' as Skill, 'Matplotlib' as Skill, 'Data Analysis' as Skill],
-    learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
+    subjects: ['Computer Science' as Subject, 'Engineering' as Subject],
+    toolSkills: ['HTML/CSS' as Skill, 'JavaScript' as Skill],
+    learningTracks: ['Web Development' as Track, 'Programming' as Track],
     estimatedHours: 12,
     playground: 'library' as const,
-    level0: {
+        level0: {
       concepts: [
         {
-          title: 'What Is a Database? Organizing Information for Retrieval',
+          title: 'How Websites Work: Three Languages, One Page',
           paragraphs: [
-            'A database is a structured collection of data organized so that it can be easily accessed, managed, and updated. The concept is ancient — clay tablet archives in Mesopotamia 5,000 years ago were databases, organized by topic and cross-referenced. A library card catalog is a database. What makes modern electronic databases powerful is speed: a computer can search through millions of records in milliseconds, while a human searching a card catalog might take hours.',
-            'The most common type of database is a relational database, organized into tables with rows and columns — like a spreadsheet but with strict rules. Each table represents a category of data (Books, Authors, Borrowers), each row is a record (one specific book), and each column is a field (title, author, year, genre). The "relational" part comes from the connections between tables: the Books table references the Authors table through an author_id field, so one author can be linked to many books without duplicating information. This design is called normalization.',
-            'You interact with databases constantly without realizing it. When you search Google, your query hits massive databases of indexed web pages. When you use a school library, the catalog is a database. When you shop online, product information, prices, inventory, and your account details all live in interconnected databases. Even your phone contacts app is a small database. The language used to query relational databases — SQL (Structured Query Language) — is one of the most widely used programming languages in the world, running everything from small apps to systems that handle millions of transactions per second.',
+            'When Dipankar built his bamboo library, he needed three things: a **structure** (the bamboo shelves), a **style** (the cloth curtains and hand-painted sign), and **behaviour** (the rules — take a book, bring it back, tell a friend). Websites work exactly the same way, except the three things are three languages that every browser on Earth understands.',
+            '**HTML** (HyperText Markup Language) is the structure. It tells the browser *what* is on the page: headings, paragraphs, images, buttons, lists. You write it using "tags" — little labels wrapped in angle brackets. For example, `<h1>Bhalukpara Library</h1>` creates a big heading, and `<p>Take a book, bring it back.</p>` creates a paragraph.',
+            '**CSS** (Cascading Style Sheets) is the style. It tells the browser *how things look*: what colour the heading is, how much space there is between the shelves, what font the sign uses. CSS does not change the content — it changes the appearance.',
+            '**JavaScript** is the behaviour. It makes things *happen*: when you click the "Search" button, JavaScript filters the book list. When you type in the search bar, JavaScript updates results as you type. Without JavaScript, websites would be static posters.',
           ],
-          keyIdea: 'A database organizes data in structured tables connected by relationships — relational databases use SQL to search millions of records in milliseconds, powering everything from library catalogs to search engines.',
-          diagram: 'FlowchartDiagram',
+          keyIdea: 'Every website uses three languages: HTML for structure (what is on the page), CSS for style (how it looks), and JavaScript for behaviour (what happens when you click).',
+          diagram: 'LibraryHTMLStructureDiagram',
+          checkYourself: 'If you removed all the CSS from a website, would the text and images still be there?',
+          checkAnswer: 'Yes! HTML provides the content. CSS only controls appearance. Without CSS, the page would look plain and unstyled, but all the text, images, and links would still work.',
         },
         {
-          title: 'Search Algorithms: Finding What You Need',
+          title: 'Databases: Tables, Rows, and Columns',
           paragraphs: [
-            'Searching — finding a specific item in a collection — is one of the most fundamental problems in computer science. The simplest approach is linear search: start at the beginning and check every item one by one until you find what you are looking for. For a library of 10,000 books, this could mean checking up to 10,000 records. Linear search has O(n) time complexity — the time required grows proportionally with the number of items.',
-            'A vastly faster approach is binary search, which works on sorted data. Imagine the 10,000 books are sorted alphabetically. You check the middle book (#5,000). If your target comes before it alphabetically, you discard the second half and check the middle of the remaining 5,000. Each step eliminates half the remaining options. After just 14 steps (since 2¹⁴ = 16,384 > 10,000), you are guaranteed to find any book — or confirm it does not exist. Binary search has O(log n) time complexity, meaning the time grows only with the logarithm of the collection size.',
-            'Modern search engines use even more sophisticated structures. An inverted index maps every word to the list of documents containing it — like a book index but for the entire internet. When you search for "river dolphin Brahmaputra," the engine looks up each word in the inverted index, finds which pages contain all three words, then ranks them by relevance using algorithms like PageRank (which measures how many other pages link to each result). Google\'s index contains hundreds of billions of pages, yet returns results in under a second — a testament to decades of optimization in search algorithm design.',
+            'Dipankar kept a notebook tracking who borrowed which book and when. That notebook was a **database** — organized information you can search and update. A digital database works the same way, but a computer can search millions of entries in milliseconds.',
+            'Think of a database as a collection of **tables**, where each table is dedicated to one type of thing. A "Books" table has one row per book, with columns for title, author, genre, and availability. A "Borrowers" table has one row per reader. A "Loans" table connects them: book_id, borrower_id, borrow date, return date.',
+            'The power is in the **connections**. If Rina borrows "Folktales of Assam," the Loans table stores her borrower_id and the book\'s book_id. Now the system can answer any question: "Which books has Rina borrowed?" "Who currently has the science textbook?" "Which genre is most popular?"',
+            '**Prediction:** If Dipankar had 500 books and 47 readers, roughly how many rows would the Loans table have after one year? The Loans table grows much faster than the other two — it records every single transaction.',
           ],
-          keyIdea: 'Binary search finds any item in a sorted list of 10,000 in just 14 steps by halving the search space each time — modern search engines use inverted indexes to search billions of pages in milliseconds.',
-          diagram: 'PostmanSortingDiagram',
+          keyIdea: 'A database organizes data into connected tables — one per "thing" (books, readers, loans). Connections between tables let you answer complex questions without duplicating information.',
+          diagram: 'LibraryDatabaseDiagram',
         },
         {
-          title: 'Information Architecture: Organizing Knowledge',
+          title: 'APIs: The Waiter Between You and the Kitchen',
           paragraphs: [
-            'Information architecture is the art and science of organizing and labeling information so that people can find what they need. A well-organized library is a physical example: books are grouped by subject (Dewey Decimal System or Library of Congress Classification), arranged on labeled shelves, with a catalog that provides multiple access points — by title, author, subject, and keyword. Each of these access points is like a different door into the same building.',
-            'The Dewey Decimal System, created by Melvil Dewey in 1876, divides all knowledge into 10 main classes (000-999), each subdivided into 10 divisions, each further divided into 10 sections. For example, 500 is Natural Sciences, 530 is Physics, 535 is Light and Optics. This hierarchical classification has a crucial property: it allows browsing — related books are physically near each other on the shelf, so a student looking for a book on optics will discover related books on waves, color, and astronomy simply by scanning the neighboring shelves. Digital systems often lose this browsing advantage.',
-            'Modern digital information architecture must handle challenges that physical libraries never faced: vast scale (billions of items), multiple valid ways to categorize the same item (a book on bioluminescence could be in Biology, Chemistry, or Physics), rapid growth, and diverse users with different mental models. Good information architecture uses multiple overlapping systems: hierarchical categories (like folders), tags and keywords (like labels), full-text search, and recommendation algorithms that suggest "if you liked this, you might also like..." The best designs make information findable through whatever path the user naturally thinks of — a principle called information scent.',
+            'When you visit a website, your browser never talks to the database directly. That would be like letting restaurant customers walk into the kitchen. Instead, there is a middleman: the **API** (Application Programming Interface). The API is the waiter.',
+            'You click "Search for folklore books." Your browser sends a **request** to the API: "GET /api/books?genre=folklore." The API walks to the database, translates your request into a database query, gets the results, and carries them back as a **response** — a neatly packaged list of folklore books.',
+            'Why not let the browser talk directly to the database? **Security**. The API controls what users can do. A regular visitor can read book listings but cannot delete the entire database. The API is the bouncer, the waiter, and the translator all in one.',
+            'Every app you use talks to APIs. When you open Instagram, the app sends API requests to fetch your feed. When you search Google, your browser sends a request to Google\'s API. The internet runs on millions of APIs.',
           ],
-          keyIdea: 'Good information architecture provides multiple paths to the same content — categories, tags, search, and recommendations — because different people think about the same information in different ways.',
+          keyIdea: 'An API is the middleman between your browser and the database — it carries requests and responses, controls who can access what, and keeps the system secure.',
+          diagram: 'LibraryAPIDiagram',
+        },
+        {
+          title: 'Building for Your Community: From Bamboo Shelf to Web App',
+          paragraphs: [
+            'Dipankar did not just collect books — he built a **system**. A sign, a notebook for tracking loans, a physical layout sorted by colour. Every one of these is a design decision that a web developer also makes, just with code instead of bamboo.',
+            'A community library app needs four features that map directly to Dipankar\'s physical library: **Search & Browse** (find any book by title, author, or genre), **Borrow & Return** (track who has which book and when it is due), **Reviews & Ratings** (readers share opinions), and **Recommendations** ("if you liked this, try that").',
+            'The magic of going digital is **scale**. Dipankar\'s bamboo library serves Bhalukpara and two neighbouring villages. A web app can serve anyone with internet access. Open Library (archive.org) catalogs every book ever published using the same principles — HTML pages, a database, and APIs — just at planetary scale.',
+            'Every feature you build solves a real problem. The search bar saves someone from scanning 500 spines. The due-date tracker prevents lost books. Technology is not the point — **solving problems for people** is the point.',
+          ],
+          keyIdea: 'A web app is a digital version of Dipankar\'s system: structure (HTML), style (CSS), behaviour (JavaScript), and a database to remember everything.',
+          diagram: 'LibraryCommunityDiagram',
         },
       ],
       vocabulary: [
-        ['HTML', 'HyperText Markup Language — the code that defines the structure and content of every web page, using tags like <h1> and <p>'],
-        ['Database', 'An organized collection of data stored on a computer — a digital library catalog that can be searched, sorted, and filtered instantly'],
-        ['URL', 'Uniform Resource Locator — the address of a web page, like a book\'s call number in a library but for the internet'],
-        ['Server', 'A computer that stores website files and sends them to your browser when you visit a URL — like a librarian who fetches the book you requested'],
-        ['CSS', 'Cascading Style Sheets — the code that controls how a web page looks: colors, fonts, spacing, and layout'],
+        ['HTML', 'HyperText Markup Language — the code that defines what is on a web page using tags like <h1> and <p>'],
+        ['CSS', 'Cascading Style Sheets — the code that controls how a web page looks: colours, fonts, spacing, and layout'],
+        ['JavaScript', 'The programming language that makes web pages interactive — it handles clicks, searches, and sends data to the server'],
+        ['Database', 'An organized collection of data in connected tables — like Dipankar\'s notebook but searchable in milliseconds'],
+        ['API', 'Application Programming Interface — the waiter between your browser and the database that carries requests and responses securely'],
       ],
       trueFalse: [
         { statement: 'Every website you visit is actually files stored on someone else\'s computer (a server).', isTrue: true, explanation: 'When you type a URL, your browser sends a request to a server — another computer running 24/7 somewhere in the world. That server sends back HTML, CSS, and JavaScript files, which your browser assembles into the page you see.' },
-        { statement: 'You need to learn programming before you can create any kind of website.', isTrue: false, explanation: 'Simple websites can be built with just HTML (structure) and CSS (style), which are markup languages, not programming languages. Many people build their first web page in under an hour by learning just a few HTML tags.' },
-        { statement: 'A database stores information in one long list, like a text file.', isTrue: false, explanation: 'Databases organize information into tables with rows and columns, with relationships between tables. A library database might have a books table, an authors table, and a borrowers table, all linked together so you can find any book by title, author, subject, or who has it checked out.' },
+        { statement: 'You need to learn programming before you can create any kind of website.', isTrue: false, explanation: 'Simple websites can be built with just HTML (structure) and CSS (style), which are markup languages, not programming languages. Many people build their first web page in under an hour.' },
+        { statement: 'A database stores information in one long list, like a text file.', isTrue: false, explanation: 'Databases organize information into tables with rows and columns, with relationships between tables. A library database might have a Books table, a Borrowers table, and a Loans table, all linked together.' },
       ],
       facts: [
         'The first website ever created (by Tim Berners-Lee in 1991) is still online at info.cern.ch — it was about the World Wide Web project itself.',
         'Google processes over 8.5 billion searches per day, querying a database index of hundreds of billions of web pages in under half a second.',
         'The Dewey Decimal System, used in libraries worldwide since 1876, inspired how websites organize information — both use hierarchical classification to make content findable.',
       ],
-      offlineActivity: 'Organize a small collection (books, spices, toys — at least 15 items) into a system where anyone could find any item quickly. Create categories, labels, and an index card catalog. Test it: ask a friend to find a specific item using only your system. How long did it take? What would you improve?',
-    },
+      offlineActivity: 'Organize a small collection (books, spices, toys — at least 15 items) into a system where anyone could find any item quickly. Create categories, labels, and an index card catalog. Test it: ask a friend to find a specific item using only your system.',
+      offlineActivityDiagram: 'ActivityCatalogDiagram',
+      codeTeaser: `<!-- Your first web page! Save as index.html and open in a browser -->
+<html>
+<body>
+  <h1>Bhalukpara Pustok Ghor</h1>
+  <p>Take a book, bring it back, tell a friend.</p>
+  <ul>
+    <li>Folktales of Assam</li>
+    <li>Science Class 8</li>
+  </ul>
+  <button>Search Books</button>
+</body>
+</html>`,
+      referenceLinks: [
+        { slug: 'web-development', reason: 'Full guide to HTML, CSS, and JavaScript — the three languages behind every website' },
+      ],
+      nextLessons: [
+        { slug: 'postman-hills', reason: 'Route optimisation through Meghalaya — algorithms and sorting, the same logic behind search' },
+        { slug: 'dragonfly-and-the-paddy-field', reason: 'Computer vision and data processing — another way technology serves farming communities' },
+      ],
+      quiz: [
+        { question: 'What are the three languages every website uses?', options: ['Python, Java, C++', 'HTML, CSS, JavaScript', 'SQL, PHP, Ruby', 'React, Angular, Vue'], answer: 1 },
+        { question: 'What does HTML do?', options: ['Controls colours and fonts', 'Makes buttons clickable', 'Defines the structure and content of a page', 'Stores data in a database'], answer: 2 },
+        { question: 'Why do databases use separate tables for books and borrowers?', options: ['To make it slower', 'To avoid duplicating information', 'Because computers cannot handle large tables', 'To make it harder to search'], answer: 1 },
+        { question: 'What is an API?', options: ['A type of database', 'A programming language', 'A middleman that carries requests between browser and database', 'A tool for designing web pages'], answer: 2 },
+        { question: 'What happens when you visit a website?', options: ['The website is generated on your computer', 'Your browser sends a request to a server, which sends back files', 'The internet creates the page from scratch', 'Your browser reads from your hard drive'], answer: 1 },
+      ],    },
   },
   {
     id: 15,
@@ -8164,53 +8207,64 @@ They walked back down the hill as the sun set behind Guwahati, leaving the old s
     playground: 'lost-temple' as const,
     level0: {
       concepts: [
-        {
-          title: 'Remote Sensing: Seeing the Invisible',
-          paragraphs: [
-            'Archaeological remote sensing uses technology to detect buried or overgrown structures without digging. The simplest form is aerial photography — structures invisible at ground level often become clear from above because buried walls affect soil drainage and plant growth differently. A buried stone wall impedes root growth and retains less moisture, so grass above it is shorter and yellower during dry spells. These "crop marks" can reveal entire floor plans of buildings that have been underground for centuries.',
-            'Satellite remote sensing extends this principle using electromagnetic wavelengths beyond visible light. Near-infrared (NIR) imagery is particularly useful because healthy vegetation reflects NIR strongly while stressed vegetation (growing over buried structures) reflects it weakly. The Normalized Difference Vegetation Index (NDVI) quantifies this: NDVI = (NIR - Red)/(NIR + Red). Values near 1 indicate dense healthy vegetation; values near 0 indicate bare soil or stressed plants. An archaeological site buried under forest may show subtle NDVI anomalies that reveal its layout.',
-            'Thermal infrared imaging exploits another physical principle: buried stone structures have different thermal properties than surrounding soil. Stone has higher thermal conductivity and heat capacity, so areas above buried walls warm more slowly during the day and cool more slowly at night. Pre-dawn thermal images (taken when temperature differences are greatest) can reveal buried architecture as warm spots against the cooler surrounding soil. This technique has discovered previously unknown pyramids in Egypt and temple complexes in Cambodia.',
-          ],
-          keyIdea: 'Buried structures alter soil drainage, plant growth, and heat patterns — remote sensing detects these invisible signatures from aircraft and satellites.',
-        },
-        {
-          title: 'LiDAR: Mapping Through the Canopy',
-          paragraphs: [
-            'LiDAR (Light Detection and Ranging) has revolutionized archaeology in forested regions. An aircraft-mounted LiDAR system fires up to 500,000 laser pulses per second toward the ground. Some pulses hit the forest canopy and bounce back immediately. Others penetrate through gaps in the leaves and reflect off the ground surface below. By recording the time of flight for each pulse (light travels at 3 × 10⁸ m/s, so a return time of 1 microsecond = 150 m distance), the system builds a 3D point cloud of both the canopy and the ground.',
-            'The breakthrough is in the processing: by filtering out all points that reflected from vegetation and keeping only ground-level returns, archaeologists can generate a "bare earth" digital terrain model (DTM) that shows the ground surface as if the forest had been removed. Subtle topographic features — low mounds, shallow depressions, linear embankments, foundation outlines — that are completely invisible under dense canopy become strikingly clear. The resolution can be as fine as 10-20 cm vertically.',
-            'In 2012, LiDAR surveys in Cambodia revealed that Angkor Wat was surrounded by an urban grid extending over 1,000 km² — one of the largest pre-industrial cities in history, completely hidden under tropical forest. Similar surveys in Guatemala discovered over 60,000 previously unknown Maya structures. In Northeast India, LiDAR could potentially reveal lost Ahom and Kamarupa-era sites buried under the dense forests of Assam and Arunachal Pradesh. The technology transforms archaeological discovery from slow, ground-based surveying to rapid, landscape-scale mapping.',
-          ],
-          keyIdea: 'LiDAR fires laser pulses through forest canopy to map the ground below — revealing entire ancient cities that are invisible from the ground or from satellites.',
-        },
-        {
-          title: 'Dating Methods: How We Know How Old Things Are',
-          paragraphs: [
-            'Determining the age of archaeological finds requires dating methods that exploit the physics of radioactive decay. The most famous is radiocarbon dating (¹⁴C dating). Carbon-14 is a radioactive isotope produced in the upper atmosphere when cosmic rays hit nitrogen atoms. Living organisms continuously incorporate ¹⁴C (through photosynthesis in plants, and through the food chain in animals), maintaining a constant ratio of ¹⁴C to ¹²C. When the organism dies, it stops taking in new ¹⁴C, and the existing ¹⁴C decays with a half-life of 5,730 years.',
-            'By measuring the remaining ¹⁴C in organic material (wood, charcoal, bone, seeds), scientists can calculate how long ago the organism died — and therefore approximately when the archaeological layer was deposited. The method is reliable to about 50,000 years before present. For older sites, potassium-argon dating (K-Ar, half-life 1.25 billion years) dates volcanic rocks by measuring the accumulation of argon-40 from potassium-40 decay. This method dated the oldest known stone tools (from Lomekwi, Kenya) to 3.3 million years.',
-            'For stone temples and monuments, thermoluminescence (TL) dating is often used. Minerals like quartz and feldspar accumulate trapped electrons from natural background radiation over time. When the mineral is heated (as when bricks are fired or pottery is kilned), the trapped electrons are released as light (luminescence) and the "clock" resets to zero. By measuring the accumulated luminescence in a sample and knowing the local radiation dose rate, scientists can determine when the object was last heated — which typically corresponds to when it was manufactured. This technique has dated fired bricks from Harappan sites in the Indus Valley to over 4,500 years old.',
-          ],
-          keyIdea: 'Radiocarbon dating measures the decay of ¹⁴C (half-life 5,730 years) in organic material — the ratio of ¹⁴C to ¹²C reveals when an organism died.',
-          diagram: 'HalfLifeDiagram',
-        },
+        { title: 'Stratigraphy: Deeper = Older', paragraphs: ['Imagine your bedroom floor. Today’s shoes on top, last week’s socks below, last month’s wrapping paper deeper still. You’ve created **layers** — and deeper means older. That’s **stratigraphy**.', 'Archaeologists use this logic at sites like Madan Kamdev. The **law of superposition** says newer material sits on top of older material in undisturbed ground. Modern soil with plastic sits above medieval pottery, which sits above ancient stone carvings and thousand-year-old charcoal.', '**Check yourself:** if you buried a toy car under sand, then piled pebbles on top, which would an archaeologist find first? The pebbles — they’re newer. The toy is deeper, therefore “older” in the record.'], keyIdea: 'Deeper layers are older — the law of superposition lets archaeologists read time by digging down, layer by layer.', diagram: 'StratigraphyLayersDiagram', checkYourself: 'A 1950 coin and a Roman coin are both buried. If the ground is undisturbed, which is deeper?', checkAnswer: 'The Roman coin — it was deposited centuries earlier, so more soil has accumulated on top.' },
+        { title: 'Carbon-14 Dating: The Atomic Clock in Dead Things', paragraphs: ['Every living thing absorbs a tiny amount of **carbon-14** (¹⁴C), a radioactive form of carbon. While alive, the amount stays constant. The moment you die, the clock starts: ¹⁴C decays, and nothing replaces it.', '**Half-life** is the key. Carbon-14’s half-life is 5,730 years — after 5,730 years, half the ¹⁴C is gone. After two half-lives, 25% remains. Scientists measure what’s left and calculate backwards: “25% remaining = about 11,460 years old.”', '**Prediction:** if a wooden beam from Madan Kamdev has 88% of its original ¹⁴C, is it very old or relatively young? 88% is close to 100%, so not much has decayed — about 1,000 years old, matching the Pala dynasty period.'], keyIdea: 'Carbon-14 decays with a half-life of 5,730 years. Measuring how much remains in organic material reveals when the organism died.', diagram: 'Carbon14DecayDiagram', checkYourself: 'A charcoal sample has 50% of its original ¹⁴C. How old is it?', checkAnswer: 'About 5,730 years — exactly one half-life has passed.' },
+        { title: 'How Ruins Tell Stories', paragraphs: ['A ruined temple is a book written in stone. Archaeologists read it by noting **what** they find, **where** (which layer), and **how** it’s broken. Sharp-edged carvings were buried quickly (protected). Rounded carvings sat exposed for centuries.', 'The sequence matters: fallen pillars on top of carved panels means the roof collapsed onto floors. Charcoal layers suggest fires. Tree roots through foundations reveal when the forest took over. Each observation is a sentence in the ruin’s story.', 'Art styles also date buildings. Carved hairstyles and clothing changed over centuries. By comparing Madan Kamdev carvings to dated examples elsewhere, art historians narrow construction dates without lab equipment.'], keyIdea: 'Ruins tell stories through position, condition, and style of finds. Every detail — sharp vs worn carvings, collapse patterns, art styles — is a clue.', diagram: 'RuinsTimelineDiagram', checkYourself: 'You find two carved stones. One has sharp details; the other is smooth. Which was exposed longer?', checkAnswer: 'The smooth one — weather erodes details over centuries. The sharp one was protected (buried quickly by collapse).' },
+        { title: 'Preservation vs Excavation: The Dilemma', paragraphs: ['**Digging destroys.** When you excavate, you remove the very layers that date the finds. You can only dig once — there’s no undo. This is why archaeologists record everything obsessively on a **grid system**.', 'The site is divided into numbered squares. Every find is recorded with grid reference and depth, creating a 3D map that survives after the layers are gone. If a future scientist has questions, they consult records instead of re-digging.', 'This is also why archaeologists often leave parts **unexcavated**. Future technology may reveal things current tools cannot. At Madan Kamdev, large areas remain untouched — a gift to future scientists.'], keyIdea: 'Excavation is destructive — you can only dig once. Archaeologists record everything on a grid and leave sections for future scientists with better tools.', diagram: 'ExcavationGridDiagram', checkYourself: 'Why not dig up the entire site to find everything?', checkAnswer: 'Digging destroys context and dating layers. Leaving sections intact preserves them for future technology.' },
       ],
       vocabulary: [
-        ['Radiocarbon dating', 'A method that measures the decay of carbon-14 in organic material to determine how old it is — works up to about 50,000 years'],
-        ['Half-life', 'The time it takes for half of a radioactive substance to decay — carbon-14\'s half-life is 5,730 years'],
-        ['Stratigraphy', 'The study of rock and soil layers — deeper layers are generally older, helping archaeologists date their finds'],
-        ['Artifact', 'Any object made or modified by humans — from stone tools to pottery to temple carvings'],
-        ['Excavation', 'The careful, systematic digging and recording of an archaeological site — every layer and object is documented'],
+        ['Stratigraphy', 'The study of soil and rock layers — deeper layers are generally older'],
+        ['Half-life', 'The time for half of a radioactive substance to decay — carbon-14’s is 5,730 years'],
+        ['Radiocarbon dating', 'Measuring remaining ¹⁴C in organic material to calculate when it died'],
+        ['Artifact', 'Any object made or modified by humans — from stone tools to pottery'],
+        ['Excavation', 'Careful, systematic digging and recording of an archaeological site'],
       ],
       trueFalse: [
-        { statement: 'Archaeologists can determine the exact year an ancient temple was built using radiocarbon dating.', isTrue: false, explanation: 'Radiocarbon dating gives a range of dates (e.g., 900-1100 CE), not an exact year. The method has a margin of error of several decades. For more precise dating, archaeologists combine multiple methods and historical records.' },
-        { statement: 'Deeper layers of soil at an archaeological site are generally older than layers closer to the surface.', isTrue: true, explanation: 'This is the principle of superposition — in undisturbed deposits, newer material accumulates on top of older material. Archaeologists use this layering (stratigraphy) as one of their primary tools for establishing the relative age of finds.' },
-        { statement: 'LiDAR technology can reveal hidden ruins beneath dense forest without cutting a single tree.', isTrue: true, explanation: 'LiDAR fires millions of laser pulses from aircraft. Some pulses pass through gaps in the forest canopy and reflect off the ground. By filtering out vegetation returns, scientists can create detailed ground maps that reveal walls, platforms, and roads invisible from the surface.' },
+        { statement: 'Radiocarbon dating gives an exact year for when a temple was built.', isTrue: false, explanation: 'It gives a range (e.g., 900–1100 CE) with decades of margin. Multiple methods and historical records narrow it further.' },
+        { statement: 'Deeper soil layers at an archaeological site are generally older.', isTrue: true, explanation: 'The law of superposition: in undisturbed deposits, newer material accumulates on top of older material.' },
+        { statement: 'Archaeologists always dig up the entire site.', isTrue: false, explanation: 'Digging destroys layers. They leave sections unexcavated for future scientists with better technology.' },
       ],
       facts: [
-        'Carbon-14 dating works because living things constantly absorb carbon-14 from the atmosphere, but when they die, the carbon-14 slowly decays with a half-life of 5,730 years — measuring how much remains reveals the age.',
-        'LiDAR surveys in Central America revealed that ancient Maya cities were up to 10 times larger than previously thought — entire neighborhoods and road networks lay hidden under jungle for over a thousand years.',
-        'The Madan Kamdev temple complex near Guwahati dates to the 9th-10th century CE and features intricate stone carvings that rival those of Khajuraho — yet it remains one of Assam\'s least-studied archaeological sites.',
+        'Carbon-14 decays with a half-life of 5,730 years — measuring how much remains reveals the age of organic material.',
+        'LiDAR surveys revealed that ancient Maya cities were 10x larger than thought — entire neighborhoods hidden under jungle.',
+        'Madan Kamdev near Guwahati dates to the 9th–10th century CE with carvings rivaling Khajuraho — yet remains one of Assam’s least-studied sites.',
       ],
-      offlineActivity: 'Create a mini archaeological dig in a shoebox. Layer different materials (sand, soil, pebbles, leaves) and bury small objects (coins, buttons, toy pieces) at different depths. Label each layer with a "date." Then have a friend carefully excavate using a spoon and paintbrush, recording which layer each object came from. Did the deeper objects end up being the "oldest"? This demonstrates the principle of stratigraphy.',
+      offlineActivity: 'Create a mini dig in a shoebox. Layer sand, soil, and pebbles, burying small objects at different depths. Have a friend excavate with a spoon, recording which layer each object came from. Did deeper objects match your “oldest” labels? That’s stratigraphy!',
+      offlineActivityDiagram: 'ActivityDigBoxDiagram',
+      codeTeaser: `import numpy as np
+import matplotlib.pyplot as plt
+
+# Carbon-14 decay simulator
+half_life = 5730  # years
+time = np.linspace(0, 30000, 200)
+remaining = 100 * (0.5 ** (time / half_life))
+
+plt.figure(figsize=(10, 5))
+plt.fill_between(time, remaining, alpha=0.2)
+plt.plot(time, remaining, linewidth=2, color="royalblue")
+plt.axhline(y=50, color="orange", linestyle="--", label="50% = 1 half-life")
+plt.axhline(y=25, color="red", linestyle="--", label="25% = 2 half-lives")
+plt.xlabel("Years before present")
+plt.ylabel("% of original \u00b9\u2074C remaining")
+plt.title("How Carbon-14 Decays Over Time")
+plt.legend()
+plt.show()  # Where does Madan Kamdev fall on this curve?`,
+      referenceLinks: [
+        { slug: 'radioactive-decay', reason: 'Deep dive into half-life, decay curves, and nuclear physics behind dating methods' },
+        { slug: 'earth-layers', reason: 'How geological layers form — the same principle archaeologists use in stratigraphy' },
+      ],
+      nextLessons: [
+        { slug: 'seven-sisters', reason: 'Explore the geography of Northeast India — the land where Madan Kamdev was built' },
+        { slug: 'girl-grew-forest', reason: 'How forests reclaim land — the process that hid Madan Kamdev for centuries' },
+        { slug: 'boy-counted-butterflies', reason: 'Systematic data collection — the same careful recording archaeologists use' },
+      ],
+      quiz: [
+        { question: 'What does the law of superposition tell us?', options: ['Bigger objects are older', 'Deeper layers are generally older', 'All rocks are the same age', 'Fossils are always at the surface'], answer: 1 },
+        { question: 'A sample has 25% of its original \u00b9\u2074C. How old is it?', options: ['5,730 years', '11,460 years', '17,190 years', '2,865 years'], answer: 1 },
+        { question: 'Why do archaeologists record every find on a grid?', options: ['To look organized', 'Because digging destroys layers, so records are the only permanent version', 'Grid references are required by law', 'To count objects'], answer: 1 },
+        { question: 'A carved stone has sharp, crisp details. What does this suggest?', options: ['It was carved recently', 'It was buried quickly and protected from weathering', 'It was made of harder stone', 'It was repaired by modern restorers'], answer: 1 },
+        { question: 'Why leave parts of a site unexcavated?', options: ['Running out of time', 'Future scientists may have better technology', 'Government prohibits it', 'Nothing interesting remains'], answer: 1 },
+      ],
     },
   },
   {
@@ -10359,36 +10413,83 @@ Sunita smiled. The colours on her skin were fading in the evening light, but the
         'Tea plants are aluminum hyperaccumulators that concentrate aluminum at levels up to 30,000 ppm in old leaves — levels that would kill most plants. Remarkably, very little of this aluminum leaches into brewed tea.',
         'The pH scale is logarithmic: soil at pH 4 has 10 times more hydrogen ions than soil at pH 5 and 100 times more than pH 6. This makes the difference between acidic tea-growing soil and neutral farmland enormous in chemical terms.',
       ],
-      offlineActivity: 'Make a pH indicator at home: chop a few leaves of red cabbage, boil them in water for 10 minutes, and strain out the liquid (it should be purple-blue). Now test different household liquids: add a splash of vinegar (acid) to one cup of cabbage water — it turns pink/red. Add a pinch of baking soda (base) to another cup — it turns green/yellow. Try lemon juice, soap water, and milk. You have created a natural pH indicator that changes color based on acidity, just like the polyphenols in tea change color depending on chemical conditions.',
+      offlineActivity: 'Make a pH indicator at home: boil chopped red cabbage in water for 10 minutes and strain. Add vinegar to one cup (it turns pink/red). Add baking soda to another (it turns green/yellow). Try lemon juice, soap water, and milk. Then dissolve turmeric in warm water and add baking soda \u2014 watch it turn red! You have created two natural pH indicators using the same chemistry as Holi colors.',
+      offlineActivityDiagram: 'ActivityDyeExtractDiagram',
+      codeTeaser: `import numpy as np
+import matplotlib.pyplot as plt
+
+# Red cabbage pH indicator: color vs pH
+ph_values = np.array([2, 4, 6, 7, 8, 10, 12, 14])
+colors = ["#ef4444", "#f472b6", "#a855f7", "#8b5cf6",
+          "#3b82f6", "#06b6d4", "#22c55e", "#eab308"]
+
+fig, ax = plt.subplots(figsize=(10, 3))
+for i, (ph, color) in enumerate(zip(ph_values, colors)):
+    ax.bar(ph, 1, width=1.5, color=color, edgecolor="white")
+    ax.text(ph, 0.5, f"pH {ph}", ha="center", fontsize=9)
+
+ax.set_xlim(0.5, 15.5)
+ax.set_title("Red Cabbage Juice: 8 Colors from 1 Plant!")
+ax.set_xlabel("pH")
+ax.set_yticks([])
+plt.tight_layout()
+plt.show()  # Which pH range is neutral?`,
+      referenceLinks: [
+        { slug: 'acids-bases-and-ph', reason: 'Deep dive into pH, hydrogen ions, and acid-base chemistry \u2014 the foundation of dye color changes' },
+        { slug: 'organic-chemistry', reason: 'Understand molecular structure and conjugated bonds \u2014 why different molecules absorb different wavelengths' },
+      ],
+      nextLessons: [
+        { slug: 'peacocks-dance', reason: 'Another way nature creates color \u2014 structural color vs the chemical pigments you learned about here' },
+        { slug: 'muga-silk-golden', reason: 'Muga silk\u2019s golden color comes from pigments in the silk protein \u2014 same dye chemistry, different application' },
+        { slug: 'kaziranga-grass', reason: 'Tea garden ecology connects to Holi celebrations \u2014 the same workers, the same land, the same chemistry' },
+      ],
+      quiz: [
+        { question: 'What is the difference between natural and synthetic dyes?', options: ['Natural dyes are always brighter', 'Natural dyes come from plants/insects/minerals; synthetic dyes are made from petroleum chemicals', 'Synthetic dyes are always safer', 'There is no difference'], answer: 1 },
+        { question: 'Why does turmeric turn red when you add baking soda?', options: ['Baking soda is a pigment', 'The base changes curcumin\u2019s molecular structure, shifting which wavelengths it absorbs', 'It gets hotter', 'The yellow pigment evaporates'], answer: 1 },
+        { question: 'What is a mordant?', options: ['A type of dye', 'A metal ion that bridges dye molecules to fabric fibres, making color permanent', 'A bleaching agent', 'A type of fabric'], answer: 1 },
+        { question: 'Why does red cabbage juice change to so many different colors?', options: ['It contains many different dyes', 'Its anthocyanin molecules have 8 different structural states depending on pH', 'Each color comes from a different vegetable', 'It reacts with oxygen'], answer: 1 },
+        { question: 'How do tea chemistry and Holi color chemistry connect?', options: ['They don\u2019t connect at all', 'Both involve plant polyphenols, pH-dependent color changes, and metal ion binding', 'Both use the same plant', 'Both are synthetic'], answer: 1 },
+      ],
       concepts: [
         {
-          title: 'Catechins and Polyphenols: Tea\'s Chemical Arsenal',
+          title: 'Natural vs Synthetic Dyes',
           paragraphs: [
-          'Tea leaves are chemical factories. Fresh leaves contain up to 30% **polyphenols** by dry weight — a class of molecules that includes **catechins**, the primary compounds responsible for tea\'s astringent taste, health properties, and color. The most abundant catechin in green tea is **epigallocatechin gallate (EGCG)**, which has been studied extensively for its antioxidant properties.',
-          'Catechins are the plant\'s defense system. They deter herbivorous insects (the bitter taste is a "keep away" signal), protect against UV radiation, and have antimicrobial properties. When you brew a cup of green tea, you are extracting molecules that evolved over millions of years as chemical weapons — and repurposing them as a pleasant, mildly stimulating beverage.',
-          'The catechin content varies dramatically with growing conditions. Assam\'s tea bushes (*Camellia sinensis* var. *assamica*) produce leaves with higher polyphenol content than Chinese varieties, partly because intense tropical sunlight triggers greater catechin production as a UV defense. This is one reason Assam tea has its characteristically bold, malty flavor — more polyphenols means more complexity in the cup.',
+            'For thousands of years, all dyes came from nature: **turmeric** (yellow, from curcumin), **indigo** (blue, from the Indigofera plant), **hibiscus** (red, from anthocyanins), **henna** (orange-brown, from lawsone). These natural dyes are plant molecules that absorb certain wavelengths of light and reflect the rest \u2014 turmeric absorbs blue/violet light and reflects yellow/orange, so it looks yellow.',
+            'In 1856, an 18-year-old chemistry student named William Perkin accidentally created **mauveine** \u2014 the first synthetic dye, made from coal tar. This launched an entire industry. Synthetic dyes are cheaper to produce, far more vivid, and extremely consistent in color. They also tend to be more **color-fast** (they resist fading from washing and sunlight).',
+            'But synthetic dyes come with costs: some cause skin irritation, many pollute waterways when factory waste is dumped, and they are not biodegradable. Natural dyes are skin-safe and biodegradable but fade faster and require **mordants** to stick to fabric. Sunita\u2019s grandmother in the story chose natural dyes for Holi \u2014 safer for skin, gentler on the earth.',
           ],
-          keyIdea: 'Tea leaves contain up to 30% polyphenols (including catechins) by dry weight — chemical defense compounds that produce tea\'s flavor, color, and health-promoting properties. Assam\'s intense sunlight drives higher polyphenol production.',
+          keyIdea: 'Natural dyes are plant molecules that absorb specific wavelengths of light. Synthetic dyes are cheaper and more vivid but can harm skin and waterways.',
+          diagram: 'HoliNaturalDyeDiagram',
         },
         {
-          title: 'Oxidation: From Green to Black',
+          title: 'pH Indicators: Colors That Reveal Chemistry',
           paragraphs: [
-          'Green tea, oolong tea, and black tea all come from the same plant (*Camellia sinensis*). The difference is **oxidation** — an enzyme-driven chemical transformation that occurs when tea leaf cells are damaged (by rolling, crushing, or cutting) and internal catechins are exposed to oxygen in the air.',
-          'The enzyme **polyphenol oxidase** catalyzes the reaction: catechins + oxygen → **theaflavins** and **thearubigins**, larger molecules that are brown-red in color and less astringent than catechins. Green tea is rapidly heated after picking to deactivate this enzyme (0% oxidation). Oolong is partially oxidized (15-85%). Black tea is fully oxidized (95-100%). Each level produces a distinct flavor profile, color, and chemical composition.',
-          'Assam\'s famous **CTC (Crush-Tear-Curl)** process was invented in the 1930s to accelerate oxidation. The leaves pass through counter-rotating rollers with sharp teeth that shred the cell structure, exposing maximum surface area to air. Oxidation that would take hours with traditional rolling happens in minutes. The result is a strong, dark, quick-brewing tea — perfect for the chai consumed by hundreds of millions daily across India.',
+            'Dissolve turmeric in water and you get a yellow liquid. Now add baking soda (a base) \u2014 it turns **red**. Why? The curcumin molecule\u2019s structure **changes when it gains or loses a hydrogen ion (H\u207a)**. In basic conditions, curcumin loses an H\u207a, which extends its conjugated double bond system, shifting the wavelengths it absorbs from blue/violet to green \u2014 so it reflects red instead of yellow.',
+            'This makes turmeric a **pH indicator** \u2014 a substance that changes color depending on acidity or alkalinity. Red cabbage juice is an even better one: its anthocyanin molecules have **8 different structural states** depending on pH, producing colors from red (pH 2) through purple (pH 7) to green (pH 12) and yellow (pH 14).',
+            'The underlying principle is always the same: **pH changes the molecular structure, which changes which wavelengths are absorbed, which changes the color you see.** This is why a single plant extract can produce a rainbow of colors \u2014 each color represents a different molecular configuration.',
           ],
-          keyIdea: 'Green, oolong, and black tea come from the same plant; the difference is the degree of enzymatic oxidation. Oxidation transforms green catechins into brown-red theaflavins and thearubigins, changing flavor, color, and chemical properties.',
-          diagram: 'RedoxDiagram',
+          keyIdea: 'pH indicators change color because hydrogen ion concentration alters molecular structure, shifting which wavelengths are absorbed. Turmeric turns red in base; red cabbage shows 8 colors across the pH scale.',
+          diagram: 'HoliPHIndicatorDiagram',
         },
         {
-          title: 'Soil pH and Tea Cultivation',
+          title: 'Mordants: Fixing Color to Fabric',
           paragraphs: [
-          'Tea plants are **acidophiles** — they thrive in acidic soil with pH between 4.5 and 5.5, roughly the acidity of black coffee. Most crops prefer near-neutral soil (pH 6-7), so tea thrives on land that would be marginal for other agriculture. This is one reason tea plantations are viable on Assam\'s naturally acidic, laterite soils.',
-          '**Soil pH** measures the concentration of hydrogen ions (H+) in soil water. The scale is logarithmic: pH 4 soil has 10 times more H+ ions than pH 5 soil. Acidic conditions affect nutrient availability — at low pH, aluminum and manganese become more soluble (potentially toxic to most plants but tolerated by tea), while calcium, magnesium, and phosphorus become less available.',
-          'Tea\'s preference for acidic soil is linked to aluminum metabolism. Tea plants are **aluminum hyperaccumulators** — they actively absorb aluminum from acidic soil and concentrate it in old leaves at levels (up to 30,000 ppm) that would kill most plants. The aluminum may help tea plants defend against pathogens and herbivores. Interestingly, the aluminum content of brewed tea is safe for human consumption because very little leaches into the hot water during steeping.',
+            'If you dip a cotton strip into turmeric water, it turns yellow. But wash it once and the color fades dramatically. The dye molecules sit loosely on the surface \u2014 water washes them right off. This is the fundamental problem with natural dyes: **they don\u2019t stick.**',
+            'The solution, known for over 4,000 years, is a **mordant** \u2014 a metal salt (like alum, iron sulfate, or copper sulfate) that acts as a chemical bridge. The metal ion (Al\u00b3\u207a, Fe\u00b2\u207a, Cu\u00b2\u207a) bonds to BOTH the dye molecule and the fabric fibre simultaneously, locking the color in place. A mordanted fabric can survive 50+ washes; an unmordanted one fades after 1\u20132.',
+            'Different mordants also change the color: alum brightens, iron darkens (\u201csaddens\u201d), copper shifts toward green. This means a single dye plant can produce multiple colors depending on which mordant is used. The same chemistry appears in traditional ink-making: tea tannins + iron = black ink. The mordant bridges tannin to paper, just as it bridges Holi dye to fabric.',
           ],
-          keyIdea: 'Tea plants thrive in acidic soil (pH 4.5-5.5) and are aluminum hyperaccumulators — they absorb and tolerate aluminum concentrations that would kill most plants. Assam\'s naturally acidic laterite soils are ideal for tea cultivation.',
-          diagram: 'SoilHorizonDiagram',
+          keyIdea: 'Mordants are metal ions that bridge dye molecules to fabric fibres, making color permanent. Different mordants produce different colors from the same dye.',
+          diagram: 'HoliMordantDiagram',
+        },
+        {
+          title: 'Tea Gardens and Holi Colors: Same Chemistry',
+          paragraphs: [
+            'The story takes place in Assam\u2019s tea gardens \u2014 and the chemistry of tea and the chemistry of Holi colors are remarkably similar. Both are based on **plant polyphenols**: catechins in tea, anthocyanins and curcumin in Holi dyes. Both change color depending on chemical conditions: tea turns darker with oxidation, turmeric turns red with base.',
+            'Both involve **metal ion binding**: tea tannins bind to iron to create black ink (and the dark stains in your teapot). Holi dyes bind to metal mordants to fix color to fabric. Both involve **pH sensitivity**: tea\u2019s astringency changes with water pH, and Holi dye colors change with acid or base.',
+            'The tea worker celebrating Holi uses the same chemistry at work and at play. Curcumin, anthocyanins, catechins \u2014 all are plant polyphenols, all are color molecules, all are pH-sensitive, and all interact with metal ions. Understanding one helps you understand them all.',
+          ],
+          keyIdea: 'Tea polyphenols and Holi dye molecules are chemically related: both are plant polyphenols that change color with pH and bind to metal ions.',
+          diagram: 'HoliTeaConnectionDiagram',
         },
       ],
     },
