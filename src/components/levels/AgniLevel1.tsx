@@ -36,7 +36,7 @@ We’ll model the combustion triangle as a simple Python program. For each combi
 
 This is a **boolean logic** problem. In Python, \`True and True and True\` gives \`True\`. \`True and True and False\` gives \`False\`. The \`and\` operator requires ALL conditions to be true — just like fire requires ALL three ingredients.
 
-\ud83d\udcda *A boolean is a value that is either True or False. Named after mathematician George Boole.*`,
+📚 *A boolean is a value that is either True or False. Named after mathematician George Boole.*`,
       analogy: 'Think of a three-legged stool. Remove any one leg and the stool falls over. The combustion triangle works the same way — each side supports the fire. Boolean AND logic captures this perfectly: all conditions must be True for the result to be True.',
       storyConnection: 'The Vedic yajna fire pit was engineered around the combustion triangle: dry wood arranged with gaps (fuel + airflow for oxygen), started with friction from arani sticks (heat). The priests understood that blocking any one ingredient killed the fire — they used this knowledge to control sacred flames for hours.',
       checkQuestion: 'In the code, what happens if you set oxygen = False but fuel and heat are both True?',
@@ -81,7 +81,7 @@ For water: E = 1 kg × 4.186 kJ/(kg·°C) × 80°C = 334.9 kJ
 
 Then: mass of fuel needed = E / fuel’s energy per kg
 
-\ud83d\udcda *A dictionary maps keys to values: \`fuels["Methane"]\` returns all data about methane.*`,
+📚 *A dictionary maps keys to values: \`fuels["Methane"]\` returns all data about methane.*`,
       analogy: 'Fuel energy density is like battery capacity. A phone battery (small energy per gram) runs out fast. A car battery (more energy per gram) lasts longer. Hydrogen is like a super-battery — the most energy per gram of any fuel. But it is also a gas that is hard to store, which is why we do not put it in campfires.',
       storyConnection: 'When Vedic priests poured ghee into the sacred fire, the flames surged because ghee has 2.5× the energy density of wood. They were empirically selecting the most energetic readily available fuel — thousands of years before anyone measured kilojoules.',
       checkQuestion: 'If hydrogen has the most energy per kg, why don’t we use it for everything?',
@@ -140,7 +140,7 @@ print("\\nHydrogen wins per kg — but try carrying hydrogen gas to a campfire!"
 
 In the code, you’ll represent chemical formulas as dictionaries of atom counts and verify that a reaction is balanced by checking that every element adds up on both sides.
 
-\ud83d\udcda *The law of conservation of mass: matter is neither created nor destroyed in a chemical reaction. Lavoisier proved this in 1789.*`,
+📚 *The law of conservation of mass: matter is neither created nor destroyed in a chemical reaction. Lavoisier proved this in 1789.*`,
       analogy: 'Balancing a chemical equation is like balancing a recipe. If a recipe calls for 2 eggs and you crack 2 eggs, you have 2 eggshells and the contents of 2 eggs. Nothing new was created; nothing was lost. The ingredients just rearranged. In combustion: carbon and hydrogen from fuel + oxygen from air → CO₂ and H₂O. Same atoms, new molecules.',
       storyConnection: 'Agni’s mythological role as the "transformer" maps directly to chemical equations. The Vedic sages observed that when wood burns, the wood disappears but smoke, ash, and heat appear. They recognised transformation, not destruction. Modern chemistry confirms: the atoms in wood are still there — they have just rearranged into CO₂, H₂O, and ash (minerals).',
       checkQuestion: 'If atoms are never created or destroyed in combustion, where does the light and heat come from?',
@@ -198,7 +198,7 @@ In the code, you’ll model the temperature profile of a candle flame along its 
 
 We will use NumPy arrays to represent height and temperature, and Matplotlib to plot the profile.
 
-\ud83d\udcda *Temperature profiles appear everywhere in science: from ocean depths to atmospheric layers to CPU heat maps.*`,
+📚 *Temperature profiles appear everywhere in science: from ocean depths to atmospheric layers to CPU heat maps.*`,
       analogy: 'A flame’s temperature profile is like a mountain with a peak in the middle, not at the top. The base camp (wick) is moderate, the summit (outer zone) is hottest, and the air above gets cooler as you climb past the peak. If you only look at the tip, you miss where the real action is.',
       storyConnection: 'The Vedic sages identified three types of sacred fire by temperature and appearance: the steady household fire (low, orange), the offering fire (high, bright), and the ember fire (glowing coals). They were empirically mapping flame zones — what we now plot as a temperature profile.',
       checkQuestion: 'Why is the dark zone near the wick cooler than the zones above it?',
@@ -328,7 +328,7 @@ In the code, you’ll create a simulated emission spectrum for several elements.
 
 This is how astronomers identify elements in stars: they capture starlight, split it with a prism, and match the spectral lines to known elements. The same science that explains firework colours reveals the composition of the Sun.
 
-\ud83d\udcda *A spectrometer splits light into its component wavelengths. Every element produces a unique barcode of spectral lines.*`,
+📚 *A spectrometer splits light into its component wavelengths. Every element produces a unique barcode of spectral lines.*`,
       analogy: 'Each element’s emission spectrum is like a fingerprint or a musical chord. Sodium always plays the same "note" (589 nm). Copper always plays its note (510 nm). When you see a flame or a star, you hear the "chord" of all elements present, and a spectrometer teases apart the individual notes.',
       storyConnection: 'Fireworks are modern spectroscopy in action. Strontium chloride for red, barium chloride for green, copper compounds for blue — each metal salt is chosen for the specific wavelength its electrons emit. The Diwali sky is a spectroscopy demonstration, and Agni is the energy source that excites those electrons.',
       checkQuestion: 'If you burn a mixture of sodium and copper salts together, what colour would you see?',

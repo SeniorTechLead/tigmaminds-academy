@@ -60,7 +60,7 @@ export default function FishUmiamLakeDiagram() {
         <text x="450" y="234" className="fill-blue-200 dark:fill-blue-300" fontSize="10">~8–12°C year-round</text>
 
         {/* Fish with shimmer */}
-        <text x="220" y="155" className="fill-white" fontSize="22">\uD83D\uDC1F</text>
+        <text x="220" y="155" className="fill-white" fontSize="22">🐟</text>
         <text x="260" y="148" className="fill-cyan-200 dark:fill-cyan-300" fontSize="10">Iridescent fish!</text>
         <text x="260" y="162" className="fill-cyan-100 dark:fill-cyan-300" fontSize="10">Clear water lets</text>
         <text x="260" y="176" className="fill-cyan-100 dark:fill-cyan-300" fontSize="10">sunlight reach scales</text>

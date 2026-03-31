@@ -128,7 +128,7 @@ const RedSeaWindSetdownDiagram = () => {
 
         {/* Walking figures hint */}
         <text x="395" y="170" textAnchor="middle" style={{ fontSize: '14px' }}>
-          \ud83d\udeb6
+          🚶
         </text>
 
         {/* Water flow arrows */}

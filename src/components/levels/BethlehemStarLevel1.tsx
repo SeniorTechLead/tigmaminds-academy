@@ -38,7 +38,7 @@ Each step of 1 magnitude = a brightness change of exactly **2.512 times**. This 
 
 In the code below, you’ll use NumPy to create an array of magnitudes and calculate the corresponding brightness ratios. Then you’ll plot them with Matplotlib to see how the logarithmic scale works.
 
-\uD83D\uDCDA *New to NumPy? \`np.array()\` creates a list of numbers you can do math on all at once.*`,
+📚 *New to NumPy? \`np.array()\` creates a list of numbers you can do math on all at once.*`,
       analogy: 'Think of the magnitude scale like a volume knob that runs backwards — turning it DOWN makes the sound (brightness) LOUDER. And each click is not a simple addition but a multiplication by 2.512. Going from magnitude 1 to magnitude 6 does not make a star "5 units dimmer" — it makes it 100 times dimmer.',
       storyConnection: 'The Magi were trained astronomers who had catalogued thousands of stars by brightness. When something new appeared in the sky — brighter than usual, in an unexpected position — they noticed immediately. Their knowledge of the magnitude scale told them this was no ordinary star.',
       checkQuestion: 'Sirius (magnitude −1.5) and Polaris (magnitude 2.0) differ by 3.5 magnitudes. How many times brighter is Sirius?',

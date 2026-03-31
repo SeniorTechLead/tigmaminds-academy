@@ -42,7 +42,7 @@ The code below creates a pure 440 Hz sine wave (the musical note A4, used to tun
 
 This says: at every point in time \`t\`, calculate the sine of (2π × frequency × t). The result is a wave that oscillates between +1 and −1, exactly \`frequency\` times per second.
 
-\ud83d\udcda *New to NumPy? Open the Reference Library for a full guide.*`,
+📚 *New to NumPy? Open the Reference Library for a full guide.*`,
       analogy: 'Think of a swing in a playground. Push it once and it swings back and forth at a steady rate — that rate is its natural frequency. A sine wave is the mathematical description of that back-and-forth motion. The height of the swing at any moment traces out a sine curve over time.',
       storyConnection: 'Dr. Lhamo’s software displayed the bell’s sound as a waveform on screen. That wiggly line is exactly what you are about to plot — pressure variations over time. The pure sine wave is the simplest building block; real bell sounds are made by adding many of these together.',
       checkQuestion: 'If you change the frequency from 440 to 880, what happens to the wave on the plot?',

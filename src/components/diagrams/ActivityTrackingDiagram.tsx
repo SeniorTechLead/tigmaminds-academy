@@ -21,7 +21,7 @@ export default function ActivityTrackingDiagram() {
         </text>
         {/* Garden icon */}
         <rect x="40" y="78" width="125" height="80" rx="4" className="fill-emerald-950/40" />
-        <text x="102" y="105" textAnchor="middle" fontSize="24">\ud83c\udf33</text>
+        <text x="102" y="105" textAnchor="middle" fontSize="24">🌳</text>
         <text x="102" y="128" textAnchor="middle" fontSize="10" className="fill-gray-400">Garden, park,</text>
         <text x="102" y="140" textAnchor="middle" fontSize="10" className="fill-gray-400">pond, or balcony</text>
         <text x="102" y="168" textAnchor="middle" fontSize="9" className="fill-gray-500">Visit same spot, same time</text>
@@ -66,10 +66,10 @@ export default function ActivityTrackingDiagram() {
           Tips for Identifying Individuals
         </text>
         {[
-          { x: 80, icon: '\ud83d\udc26', tip: 'Missing feathers\nor leg bands' },
-          { x: 210, icon: '\ud83d\udc1b', tip: 'Unique colour\npatterns' },
-          { x: 340, icon: '\ud83d\udc08', tip: 'Scars, ear nicks,\ntail shape' },
-          { x: 470, icon: '\ud83e\udd8e', tip: 'Size differences\nor behaviour' },
+          { x: 80, icon: '🐦', tip: 'Missing feathers\nor leg bands' },
+          { x: 210, icon: '🐛', tip: 'Unique colour\npatterns' },
+          { x: 340, icon: '🐈', tip: 'Scars, ear nicks,\ntail shape' },
+          { x: 470, icon: '🦎', tip: 'Size differences\nor behaviour' },
         ].map((t, i) => (
           <g key={i}>
             <text x={t.x} y={t.tip.split('\n').length > 0 ? 268 : 272} textAnchor="middle" fontSize="16">{t.icon}</text>

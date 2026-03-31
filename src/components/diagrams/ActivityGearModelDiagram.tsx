@@ -165,7 +165,7 @@ const ActivityGearModelDiagram = () => {
         {[
           { x: 35, icon: '⚙️', title: 'Speed ↔ Force', text: 'Gears trade speed for\nforce (or vice versa).\nTotal work stays the same.' },
           { x: 215, icon: '⛰️', title: 'Hill trains use this', text: 'Low gear = slow speed,\nhigh pulling force.\nEssential for steep hills.' },
-          { x: 395, icon: '\uD83D\uDD27', title: 'Rack railways', text: 'A gear (pinion) meshes\nwith a toothed track (rack)\nfor grades above 8%.' },
+          { x: 395, icon: '🔧', title: 'Rack railways', text: 'A gear (pinion) meshes\nwith a toothed track (rack)\nfor grades above 8%.' },
         ].map((col, i) => (
           <g key={i}>
             <text x={col.x + 80} y={374} textAnchor="middle" className="ag-small fill-emerald-700 dark:fill-emerald-300" fontWeight="600">

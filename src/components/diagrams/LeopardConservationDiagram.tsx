@@ -58,22 +58,22 @@ export default function LeopardConservationDiagram() {
         {/* Four solution panels */}
         {[
           {
-            x: 20, y: 265, icon: '\ud83d\udce1',
+            x: 20, y: 265, icon: '📡',
             title: 'GPS Collars',
             lines: ['Track movement 24/7', 'Map home ranges', 'Find corridor routes'],
           },
           {
-            x: 165, y: 265, icon: '\ud83d\udcf7',
+            x: 165, y: 265, icon: '📷',
             title: 'Camera Traps',
             lines: ['ID individuals by spots', 'Count populations', 'Monitor activity times'],
           },
           {
-            x: 310, y: 265, icon: '\ud83d\uddfa️',
+            x: 310, y: 265, icon: '🗺️',
             title: 'GIS Mapping',
             lines: ['Map habitat patches', 'Identify barriers', 'Design corridors'],
           },
           {
-            x: 455, y: 265, icon: '\ud83d\udcca',
+            x: 455, y: 265, icon: '📊',
             title: 'Data Analysis',
             lines: ['Population models', 'Viability forecasts', 'Prioritize actions'],
           },

@@ -31,7 +31,7 @@ export default function FishLightWaterDiagram() {
         <text x="45" y="150" className="fill-cyan-600 dark:fill-cyan-400" fontSize="10">Water (n = 1.33)</text>
 
         {/* Real fish position */}
-        <text x="200" y="240" textAnchor="middle" className="fill-gray-600 dark:fill-gray-300" fontSize="16">\uD83D\uDC1F</text>
+        <text x="200" y="240" textAnchor="middle" className="fill-gray-600 dark:fill-gray-300" fontSize="16">🐟</text>
         <text x="200" y="256" textAnchor="middle" className="fill-green-600 dark:fill-green-400" fontSize="10" fontWeight="bold">real fish</text>
 
         {/* Light ray from fish bending at surface */}
@@ -44,7 +44,7 @@ export default function FishLightWaterDiagram() {
 
         {/* Dashed line showing where brain THINKS fish is */}
         <line x1="120" y1="70" x2="185" y2="190" className="stroke-red-400 dark:stroke-red-500" strokeWidth="1.5" strokeDasharray="5,3" />
-        <text x="175" y="188" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="16">\uD83D\uDC1F</text>
+        <text x="175" y="188" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="16">🐟</text>
         <text x="172" y="204" className="fill-red-500 dark:fill-red-400" fontSize="10" fontWeight="bold">apparent fish</text>
 
         {/* Normal line */}
