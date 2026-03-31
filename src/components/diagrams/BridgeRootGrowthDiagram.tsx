@@ -102,7 +102,7 @@ export default function BridgeRootGrowthDiagram() {
         <text x="575" y="430" className="small fill-slate-400">Self-strengthening</text>
 
         {/* Inosculation callout */}
-        <rect x="360" y="50" width="280" height="55" rx="6" fill="#1e293b" stroke="#475569" strokeWidth="1" />
+        <rect x="360" y="50" width="280" height="55" rx="6" className="fill-gray-100 dark:fill-slate-800 stroke-gray-300 dark:stroke-slate-600"  strokeWidth="1" />
         <text x="370" y="68" className="label fill-emerald-300" fontWeight="600">Inosculation</text>
         <text x="370" y="82" className="small fill-slate-300">Roots pressed together long enough</text>
         <text x="370" y="94" className="small fill-slate-300">fuse into one living tissue — the bridge</text>

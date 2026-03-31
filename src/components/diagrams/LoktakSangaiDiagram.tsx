@@ -2,7 +2,7 @@ export default function LoktakSangaiDiagram() {
   return (
     <div className="my-4">
       <svg viewBox="0 0 560 420" className="w-full max-w-lg mx-auto" role="img" aria-label="Sangai deer adaptations for life on floating phumdis">
-        <rect width="560" height="420" rx="12" className="fill-slate-900" />
+        <rect width="560" height="420" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}
         <text x="280" y="26" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#fbbf24">Sangai: Built for a Floating World</text>

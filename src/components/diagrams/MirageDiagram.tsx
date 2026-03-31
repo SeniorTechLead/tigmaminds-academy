@@ -53,9 +53,9 @@ export default function MirageDiagram() {
         <text x="270" y="215" textAnchor="middle" fontSize="11" fill="#ef4444">from hot air layer</text>
 
         {/* Observer's eye */}
-        <ellipse cx="510" cy="158" rx="10" ry="7" fill="white" stroke="#333" strokeWidth={1.5} />
+        <ellipse cx="510" cy="158" rx="10" ry="7" className="fill-gray-900 dark:fill-white" stroke="#333" strokeWidth={1.5} />
         <circle cx="510" cy="158" r="4" fill="#4a3728" />
-        <circle cx="511" cy="157" r="1.5" fill="white" />
+        <circle cx="511" cy="157" r="1.5" className="fill-gray-900 dark:fill-white" />
         <text x="510" y="145" textAnchor="middle" fontSize="11" fontWeight="600" fill="#333">Your eye</text>
 
         {/* Brain's projected line (below ground) */}

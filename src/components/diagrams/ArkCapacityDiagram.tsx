@@ -10,7 +10,7 @@ export default function ArkCapacityDiagram() {
   return (
     <svg viewBox="0 0 500 340" className="w-full max-w-lg mx-auto">
       <text x="250" y="25" textAnchor="middle" fill="#fbbf24" fontSize="13" fontWeight="bold">Ark Capacity Breakdown</text>
-      <text x="250" y="45" textAnchor="middle" fill="#9ca3af" fontSize="10">135 m x 22.5 m x 13.5 m = ~41,000 m³ | 3 decks</text>
+      <text x="250" y="45" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">135 m x 22.5 m x 13.5 m = ~41,000 m³ | 3 decks</text>
 
       {/* Ark cross-section */}
       <g transform="translate(20, 60)">
@@ -23,7 +23,7 @@ export default function ArkCapacityDiagram() {
         <path d="M 30 200 L 120 180 L 210 200" fill="none" stroke="#b45309" strokeWidth="1.5" />
         {/* Labels */}
         <text x="120" y="196" textAnchor="middle" fill="#fbbf24" fontSize="9">Upper deck — birds, small</text>
-        <text x="120" y="218" textAnchor="middle" fill="#d1d5db" fontSize="9">Middle deck — supplies</text>
+        <text x="120" y="218" textAnchor="middle" className="fill-gray-400 dark:fill-gray-400" fontSize="9">Middle deck — supplies</text>
         <text x="120" y="248" textAnchor="middle" fill="#93c5fd" fontSize="9">Lower deck — large animals</text>
       </g>
 
@@ -32,18 +32,18 @@ export default function ArkCapacityDiagram() {
         const row = y + i * 38;
         return (
           <g key={i}>
-            <text x="290" y={row} fill="#d1d5db" fontSize="10">{cat.label}</text>
+            <text x="290" y={row} className="fill-gray-400 dark:fill-gray-400" fontSize="10">{cat.label}</text>
             <rect x="290" y={row + 5} width={cat.pct * 1.8} height="12" fill={cat.color} rx="2" opacity="0.8" />
             <text x={295 + cat.pct * 1.8} y={row + 15} fill={cat.color} fontSize="9">{cat.pct}%</text>
-            <text x="290" y={row + 28} fill="#6b7280" fontSize="8">{cat.ex}</text>
+            <text x="290" y={row + 28} className="fill-gray-500 dark:fill-gray-500" fontSize="8">{cat.ex}</text>
           </g>
         );
       })}
 
-      <text x="380" y="80" textAnchor="middle" fill="#9ca3af" fontSize="10" fontWeight="bold">Species by body size</text>
+      <text x="380" y="80" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10" fontWeight="bold">Species by body size</text>
 
       {/* Key stat */}
-      <text x="250" y="330" textAnchor="middle" fill="#d1d5db" fontSize="10">~35,000 land vertebrate species x 2 = 70,000 animals to house</text>
+      <text x="250" y="330" textAnchor="middle" className="fill-gray-400 dark:fill-gray-400" fontSize="10">~35,000 land vertebrate species x 2 = 70,000 animals to house</text>
     </svg>
   );
 }

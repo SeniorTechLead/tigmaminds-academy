@@ -54,7 +54,7 @@ export default function HornbillCallDiagram() {
         </defs>
 
         {/* Call types section */}
-        <text x="260" y="220" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#e2e8f0">What Hornbills Say</text>
+        <text x="260" y="220" textAnchor="middle" fontSize="13" fontWeight="bold" className="fill-gray-700 dark:fill-slate-200">What Hornbills Say</text>
 
         {/* Call type cards */}
         {/* Territory */}

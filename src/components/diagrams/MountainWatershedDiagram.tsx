@@ -7,7 +7,7 @@ export default function MountainWatershedDiagram() {
         role="img"
         aria-label="Mountain water cycle showing snow and glacier at the top flowing as meltwater through streams to a river at the bottom, with seasonal flow chart"
       >
-        <rect x="0" y="0" width="600" height="420" className="fill-slate-900" rx="8" />
+        <rect x="0" y="0" width="600" height="420" className="fill-white dark:fill-slate-900" rx="8" />
 
         {/* Title */}
         <text x="300" y="26" textAnchor="middle" fontSize="12" className="fill-gray-200" fontWeight="700">
@@ -100,7 +100,7 @@ export default function MountainWatershedDiagram() {
               <text x={barX} y="335" fontSize="8" className={s.textColor} fontWeight="700">
                 {s.season}
               </text>
-              <text x={barX} y="363" fontSize="7" className="fill-gray-400">
+              <text x={barX} y="363" fontSize="7" className="fill-gray-500 dark:fill-gray-400">
                 {s.months}
               </text>
               <text x={barX} y="375" fontSize="6.5" className="fill-gray-500">
@@ -116,8 +116,8 @@ export default function MountainWatershedDiagram() {
         </text>
 
         {/* Insight */}
-        <rect x="40" y="398" width="520" height="18" rx="3" className="fill-slate-800" />
-        <text x="300" y="410" textAnchor="middle" fontSize="8" className="fill-gray-300" fontWeight="600">
+        <rect x="40" y="398" width="520" height="18" rx="3" className="fill-gray-100 dark:fill-slate-800" />
+        <text x="300" y="410" textAnchor="middle" fontSize="8" className="fill-gray-600 dark:fill-gray-300" fontWeight="600">
           Mountains are water towers — billions of people depend on glacier-fed rivers
         </text>
       </svg>

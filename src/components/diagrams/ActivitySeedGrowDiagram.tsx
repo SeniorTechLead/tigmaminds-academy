@@ -11,7 +11,7 @@ export default function ActivitySeedGrowDiagram() {
 
         {/* Title */}
         <text x="300" y="28" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#34d399">Try This: Seed vs. Cutting Experiment</text>
-        <text x="300" y="45" textAnchor="middle" fontSize="10" fill="#94a3b8">Grow tulsi two ways and compare. Takes 2-3 weeks.</text>
+        <text x="300" y="45" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Grow tulsi two ways and compare. Takes 2-3 weeks.</text>
 
         {/* LEFT: Seed method */}
         <rect x="20" y="60" width="270" height="200" rx="8" fill="#3b82f6" opacity="0.06" />
@@ -65,8 +65,8 @@ export default function ActivitySeedGrowDiagram() {
         <text x="445" y="252" textAnchor="middle" fontSize="10" fill="#86efac">Place in clean water</text>
 
         {/* Steps at bottom */}
-        <rect x="20" y="270" width="560" height="120" rx="8" fill="#1e293b" />
-        <text x="300" y="292" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#e2e8f0">What to record daily:</text>
+        <rect x="20" y="270" width="560" height="120" rx="8" className="fill-gray-100 dark:fill-slate-800" />
+        <text x="300" y="292" textAnchor="middle" fontSize="11" fontWeight="bold" className="fill-gray-700 dark:fill-slate-200">What to record daily:</text>
 
         {[
           { x: 60, icon: '1', label: 'Measure height', desc: '(cm from soil to tip)', color: '#60a5fa' },
@@ -79,7 +79,7 @@ export default function ActivitySeedGrowDiagram() {
             <circle cx={s.x} cy={s.x === 540 ? 325 : 325} r="12" fill={s.color} opacity="0.2" />
             <text x={s.x} y={s.x === 540 ? 329 : 329} textAnchor="middle" fontSize="11" fontWeight="bold" fill={s.color}>{s.icon}</text>
             <text x={s.x} y={345} textAnchor="middle" fontSize="10" fontWeight="bold" fill={s.color}>{s.label}</text>
-            <text x={s.x} y={358} textAnchor="middle" fontSize="8" fill="#94a3b8">{s.desc}</text>
+            <text x={s.x} y={358} textAnchor="middle" fontSize="8" className="fill-gray-500 dark:fill-slate-400">{s.desc}</text>
           </g>
         ))}
 

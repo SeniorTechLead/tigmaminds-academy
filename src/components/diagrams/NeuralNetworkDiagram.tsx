@@ -234,7 +234,7 @@ export default function NeuralNetworkDiagram() {
               cx={HIDDEN_X}
               cy={node.y}
               r={NODE_R}
-              fill="#1e293b"
+              className="fill-gray-100 dark:fill-slate-800"
               stroke="#64748b"
               strokeWidth={2}
             />
@@ -243,7 +243,7 @@ export default function NeuralNetworkDiagram() {
               y={node.y + 1}
               textAnchor="middle"
               dominantBaseline="middle"
-              fill="#94a3b8"
+              className="fill-gray-500 dark:fill-slate-400"
               fontSize={12}
               fontWeight={600}
             >
@@ -302,13 +302,13 @@ export default function NeuralNetworkDiagram() {
         })}
 
         {/* Layer labels */}
-        <text x={INPUT_X} y={365} textAnchor="middle" fill="#94a3b8" fontSize={10} fontWeight={600}>
+        <text x={INPUT_X} y={365} textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize={10} fontWeight={600}>
           Input Layer
         </text>
-        <text x={HIDDEN_X} y={365} textAnchor="middle" fill="#94a3b8" fontSize={10} fontWeight={600}>
+        <text x={HIDDEN_X} y={365} textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize={10} fontWeight={600}>
           Hidden Layer
         </text>
-        <text x={OUTPUT_X} y={365} textAnchor="middle" fill="#94a3b8" fontSize={10} fontWeight={600}>
+        <text x={OUTPUT_X} y={365} textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize={10} fontWeight={600}>
           Output Layer
         </text>
 

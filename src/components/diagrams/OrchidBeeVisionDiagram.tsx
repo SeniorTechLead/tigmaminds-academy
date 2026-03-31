@@ -32,7 +32,7 @@ export default function OrchidBeeVisionDiagram() {
           <g transform="translate(0, 150)">
             <ellipse cx="0" cy="0" rx="18" ry="12" fill="none" stroke="#60a5fa" strokeWidth="1.5" />
             <circle cx="0" cy="0" r="6" fill="#60a5fa" />
-            <circle cx="0" cy="0" r="3" fill="#1e293b" />
+            <circle cx="0" cy="0" r="3" className="fill-gray-100 dark:fill-slate-800" />
             <text x="0" y="20" textAnchor="middle" fontSize="8" fill="#60a5fa">Human eye</text>
           </g>
         </g>
@@ -87,24 +87,24 @@ export default function OrchidBeeVisionDiagram() {
 
         {/* Middle: the key difference */}
         <g transform="translate(280, 140)">
-          <line x1="0" y1="-30" x2="0" y2="100" stroke="#475569" strokeWidth="1" strokeDasharray="4 4" />
-          <text x="0" y="115" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#e2e8f0">Same flower,</text>
-          <text x="0" y="128" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#e2e8f0">different eyes</text>
+          <line x1="0" y1="-30" x2="0" y2="100" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1" strokeDasharray="4 4" />
+          <text x="0" y="115" textAnchor="middle" fontSize="10" fontWeight="bold" className="fill-gray-700 dark:fill-slate-200">Same flower,</text>
+          <text x="0" y="128" textAnchor="middle" fontSize="10" fontWeight="bold" className="fill-gray-700 dark:fill-slate-200">different eyes</text>
         </g>
 
         {/* Color matching table */}
         <g transform="translate(280, 290)">
-          <text x="0" y="0" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#e2e8f0">Which Pollinator Sees What?</text>
+          <text x="0" y="0" textAnchor="middle" fontSize="12" fontWeight="bold" className="fill-gray-700 dark:fill-slate-200">Which Pollinator Sees What?</text>
 
           {/* Table */}
           <g transform="translate(-200, 15)">
             {/* Headers */}
             <rect x="0" y="0" width="100" height="22" rx="3" fill="#334155" />
-            <text x="50" y="15" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#e2e8f0">Flower Color</text>
+            <text x="50" y="15" textAnchor="middle" fontSize="9" fontWeight="bold" className="fill-gray-700 dark:fill-slate-200">Flower Color</text>
             <rect x="105" y="0" width="100" height="22" rx="3" fill="#334155" />
-            <text x="155" y="15" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#e2e8f0">Targets</text>
+            <text x="155" y="15" textAnchor="middle" fontSize="9" fontWeight="bold" className="fill-gray-700 dark:fill-slate-200">Targets</text>
             <rect x="210" y="0" width="190" height="22" rx="3" fill="#334155" />
-            <text x="305" y="15" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#e2e8f0">Why?</text>
+            <text x="305" y="15" textAnchor="middle" fontSize="9" fontWeight="bold" className="fill-gray-700 dark:fill-slate-200">Why?</text>
 
             {/* Rows */}
             {[
@@ -116,7 +116,7 @@ export default function OrchidBeeVisionDiagram() {
               <g key={row.name}>
                 <circle cx="12" cy={row.y + 9} r="6" fill={row.color} opacity="0.8" />
                 <text x="24" y={row.y + 13} fontSize="9" fill={row.color}>{row.name}</text>
-                <text x="155" y={row.y + 13} textAnchor="middle" fontSize="9" fill="#e2e8f0">{row.target}</text>
+                <text x="155" y={row.y + 13} textAnchor="middle" fontSize="9" className="fill-gray-700 dark:fill-slate-200">{row.target}</text>
                 <text x="210" y={row.y + 13} fontSize="8" className="fill-slate-400">{row.reason}</text>
               </g>
             ))}

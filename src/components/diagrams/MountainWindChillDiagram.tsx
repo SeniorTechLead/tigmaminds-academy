@@ -26,7 +26,7 @@ export default function MountainWindChillDiagram() {
         role="img"
         aria-label="Wind chill diagram showing how wind speed makes temperatures feel colder, with a comparison to snow leopard fur insulation"
       >
-        <rect x="0" y="0" width="600" height="410" className="fill-slate-900" rx="8" />
+        <rect x="0" y="0" width="600" height="410" className="fill-white dark:fill-slate-900" rx="8" />
 
         {/* Title */}
         <text x="300" y="22" textAnchor="middle" fontSize="12" className="fill-gray-200" fontWeight="700">
@@ -54,7 +54,7 @@ export default function MountainWindChillDiagram() {
           <line x1="15" y1="55" x2="28" y2="72" className="stroke-gray-300" strokeWidth="1.5" />
 
           {/* Labels */}
-          <text x="15" y="90" textAnchor="middle" fontSize="9" className="fill-gray-300" fontWeight="600">
+          <text x="15" y="90" textAnchor="middle" fontSize="9" className="fill-gray-600 dark:fill-gray-300" fontWeight="600">
             Actual: -10 °C
           </text>
           <text x="15" y="103" textAnchor="middle" fontSize="9" className="fill-sky-300" fontWeight="700">
@@ -67,19 +67,19 @@ export default function MountainWindChillDiagram() {
 
         {/* Wind chill table */}
         <g transform="translate(195, 55)">
-          <text x="175" y="0" textAnchor="middle" fontSize="10" className="fill-gray-300" fontWeight="700">
+          <text x="175" y="0" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-300" fontWeight="700">
             Wind Chill Table (°C)
           </text>
 
           {/* Column headers */}
           <rect x="0" y="10" width="70" height="20" rx="2" className="fill-slate-700" />
-          <text x="35" y="24" textAnchor="middle" fontSize="8" className="fill-gray-300" fontWeight="600">
+          <text x="35" y="24" textAnchor="middle" fontSize="8" className="fill-gray-600 dark:fill-gray-300" fontWeight="600">
             Wind (km/h)
           </text>
           {actTemps.map((t, i) => (
             <g key={i}>
               <rect x={80 + i * 90} y="10" width="80" height="20" rx="2" className="fill-slate-700" />
-              <text x={120 + i * 90} y="24" textAnchor="middle" fontSize="8" className="fill-gray-300" fontWeight="600">
+              <text x={120 + i * 90} y="24" textAnchor="middle" fontSize="8" className="fill-gray-600 dark:fill-gray-300" fontWeight="600">
                 Actual {t} °C
               </text>
             </g>
@@ -88,7 +88,7 @@ export default function MountainWindChillDiagram() {
           {/* Data rows */}
           {tableData.map((row, ri) => (
             <g key={ri}>
-              <rect x="0" y={36 + ri * 26} width="70" height="22" rx="2" className="fill-slate-800" />
+              <rect x="0" y={36 + ri * 26} width="70" height="22" rx="2" className="fill-gray-100 dark:fill-slate-800" />
               <text x="35" y={51 + ri * 26} textAnchor="middle" fontSize="9" className="fill-sky-300" fontWeight="600">
                 {row.wind} km/h
               </text>
@@ -112,7 +112,7 @@ export default function MountainWindChillDiagram() {
         </g>
 
         {/* Snow leopard comparison */}
-        <rect x="40" y="220" width="520" height="90" rx="6" className="fill-slate-800" stroke="#64748b" strokeWidth="0.5" />
+        <rect x="40" y="220" width="520" height="90" rx="6" className="fill-gray-100 dark:fill-slate-800" stroke="#64748b" strokeWidth="0.5" />
         <text x="300" y="240" textAnchor="middle" fontSize="10" className="fill-amber-300" fontWeight="700">
           Snow Leopard Fur: Nature&apos;s Wind Shield
         </text>
@@ -125,7 +125,7 @@ export default function MountainWindChillDiagram() {
 
           {/* Underfur */}
           <rect x="0" y="8" width="200" height="12" rx="2" className="fill-gray-500/40" />
-          <text x="100" y="16" textAnchor="middle" fontSize="6" className="fill-gray-300">Dense underfur (5 cm thick)</text>
+          <text x="100" y="16" textAnchor="middle" fontSize="6" className="fill-gray-600 dark:fill-gray-300">Dense underfur (5 cm thick)</text>
 
           {/* Guard hairs */}
           {Array.from({ length: 25 }).map((_, i) => (
@@ -139,29 +139,29 @@ export default function MountainWindChillDiagram() {
               strokeWidth="1"
             />
           ))}
-          <text x="100" y="-10" textAnchor="middle" fontSize="6" className="fill-gray-300">Guard hairs</text>
+          <text x="100" y="-10" textAnchor="middle" fontSize="6" className="fill-gray-600 dark:fill-gray-300">Guard hairs</text>
         </g>
 
         {/* Comparison values */}
         <g transform="translate(320, 250)">
-          <text x="0" y="8" fontSize="8" className="fill-gray-300" fontWeight="600">Human at -10 °C, 30 km/h wind:</text>
+          <text x="0" y="8" fontSize="8" className="fill-gray-600 dark:fill-gray-300" fontWeight="600">Human at -10 °C, 30 km/h wind:</text>
           <text x="0" y="22" fontSize="9" className="fill-red-400" fontWeight="700">Feels like -20 °C (exposed skin)</text>
-          <text x="0" y="38" fontSize="8" className="fill-gray-300" fontWeight="600">Snow leopard at same conditions:</text>
+          <text x="0" y="38" fontSize="8" className="fill-gray-600 dark:fill-gray-300" fontWeight="600">Snow leopard at same conditions:</text>
           <text x="0" y="52" fontSize="9" className="fill-green-400" fontWeight="700">Body stays at 37 °C (fur traps air)</text>
         </g>
 
         {/* Explanation */}
-        <rect x="40" y="322" width="520" height="22" rx="4" className="fill-slate-800" />
+        <rect x="40" y="322" width="520" height="22" rx="4" className="fill-gray-100 dark:fill-slate-800" />
         <text x="60" y="337" fontSize="9" className="fill-gray-200" fontWeight="600">
           Wind chill = 13.12 + 0.6215T - 11.37V^0.16 + 0.3965TV^0.16 (T in °C, V in km/h)
         </text>
 
         {/* Insight */}
-        <rect x="40" y="352" width="520" height="36" rx="4" className="fill-slate-800" />
-        <text x="60" y="367" fontSize="9" className="fill-gray-300" fontWeight="600">
+        <rect x="40" y="352" width="520" height="36" rx="4" className="fill-gray-100 dark:fill-slate-800" />
+        <text x="60" y="367" fontSize="9" className="fill-gray-600 dark:fill-gray-300" fontWeight="600">
           Wind strips heat from exposed surfaces. Snow leopard fur creates 5 cm of still air
         </text>
-        <text x="60" y="381" fontSize="9" className="fill-gray-300" fontWeight="600">
+        <text x="60" y="381" fontSize="9" className="fill-gray-600 dark:fill-gray-300" fontWeight="600">
           insulation -- wind cannot penetrate the dense underfur layer.
         </text>
       </svg>

@@ -2,11 +2,11 @@ export default function BanyanNutrientCycleDiagram() {
   return (
     <div className="my-4">
       <svg viewBox="0 0 535 458" className="w-full max-w-lg mx-auto" role="img" aria-label="Nutrient cycling in a banyan tree: leaves fall, decompose, nutrients enter soil, roots absorb, tree grows, leaves fall again">
-        <rect width="500" height="420" rx="12" className="fill-slate-900" />
+        <rect width="500" height="420" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}
         <text x="250" y="28" textAnchor="middle" className="fill-amber-400" fontSize="14" fontWeight="bold">Nutrient Cycle</text>
-        <text x="250" y="44" textAnchor="middle" className="fill-slate-400" fontSize="10">Nothing is wasted — every leaf feeds the next</text>
+        <text x="250" y="44" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="10">Nothing is wasted — every leaf feeds the next</text>
 
         {/* Central circle path (invisible guide) */}
         {/* Nodes arranged in a circle: top=tree grows, right=leaves fall, bottom=decompose, left=roots absorb */}
@@ -46,7 +46,7 @@ export default function BanyanNutrientCycleDiagram() {
           ))}
           <rect x="185" y="325" width="116" height="36" rx="6" className="fill-amber-900" />
           <text x="243" y="341" textAnchor="middle" className="fill-amber-300" fontSize="9" fontWeight="bold">Decomposition</text>
-          <text x="243" y="354" textAnchor="middle" className="fill-slate-400" fontSize="8">bacteria &amp; fungi</text>
+          <text x="243" y="354" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="8">bacteria &amp; fungi</text>
         </g>
 
         {/* === Arrow 3→4 (bottom-left) === */}
@@ -60,7 +60,7 @@ export default function BanyanNutrientCycleDiagram() {
           ))}
           <rect x="40" y="230" width="110" height="36" rx="6" className="fill-green-900" />
           <text x="95" y="246" textAnchor="middle" className="fill-green-300" fontSize="9" fontWeight="bold">Nutrients in soil</text>
-          <text x="95" y="259" textAnchor="middle" className="fill-slate-400" fontSize="8">N, P, K, Ca, Mg</text>
+          <text x="95" y="259" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="8">N, P, K, Ca, Mg</text>
         </g>
 
         {/* === Arrow 4→5 (top-left) === */}
@@ -79,13 +79,13 @@ export default function BanyanNutrientCycleDiagram() {
         <path d="M 210,125 Q 225,108 237,105" className="stroke-green-400" strokeWidth="2" fill="none" markerEnd="url(#nutrientArrow)" />
 
         {/* Central label */}
-        <text x="243" y="215" textAnchor="middle" className="fill-slate-500" fontSize="10" fontWeight="bold">CYCLE</text>
+        <text x="243" y="215" textAnchor="middle" className="fill-gray-400 dark:fill-slate-500" fontSize="10" fontWeight="bold">CYCLE</text>
         <circle cx="243" cy="210" r="35" className="stroke-slate-600" strokeWidth="1" fill="none" strokeDasharray="4,4" />
 
         {/* Key nutrients box */}
         <rect x="60" y="380" width="380" height="28" rx="8" className="fill-green-900" opacity="0.6" />
         <text x="250" y="395" textAnchor="middle" className="fill-green-300" fontSize="9" fontWeight="bold">A banyan drops ~2 tonnes of leaves per year — all recycled into new growth</text>
-        <text x="250" y="408" textAnchor="middle" className="fill-slate-400" fontSize="8">This self-fertilizing loop lets banyans thrive for centuries in poor soils</text>
+        <text x="250" y="408" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="8">This self-fertilizing loop lets banyans thrive for centuries in poor soils</text>
 
         <defs>
           <marker id="nutrientArrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">

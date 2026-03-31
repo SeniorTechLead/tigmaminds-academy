@@ -20,12 +20,12 @@ export default function RaceScalingDiagram() {
   return (
     <div className="w-full max-w-lg mx-auto my-4">
       <svg viewBox={`0 0 ${w} ${h}`} className="w-full" role="img" aria-label="Bar chart comparing how many body lengths per second different animals move, showing that small animals are faster relative to their size">
-        <rect width={w} height={h} rx={10} className="fill-slate-900" />
+        <rect width={w} height={h} rx={10} className="fill-white dark:fill-slate-900" />
 
-        <text x={w / 2} y={28} textAnchor="middle" className="fill-slate-100" style={{ fontSize: 16, fontWeight: 700 }}>
+        <text x={w / 2} y={28} textAnchor="middle" className="fill-gray-800 dark:fill-slate-100" style={{ fontSize: 16, fontWeight: 700 }}>
           Relative Speed — Body Lengths per Second
         </text>
-        <text x={w / 2} y={46} textAnchor="middle" className="fill-slate-400" style={{ fontSize: 12 }}>
+        <text x={w / 2} y={46} textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" style={{ fontSize: 12 }}>
           Smaller animals are faster relative to their size
         </text>
 
@@ -36,11 +36,11 @@ export default function RaceScalingDiagram() {
           return (
             <g key={v}>
               <line x1={x} y1={55} x2={x} y2={395} className="stroke-slate-700" strokeWidth={0.5} />
-              <text x={x} y={410} textAnchor="middle" className="fill-slate-400" style={{ fontSize: 11 }}>{v}</text>
+              <text x={x} y={410} textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" style={{ fontSize: 11 }}>{v}</text>
             </g>
           );
         })}
-        <text x={(barLeft + barRight) / 2} y={432} textAnchor="middle" className="fill-slate-300" style={{ fontSize: 12 }}>
+        <text x={(barLeft + barRight) / 2} y={432} textAnchor="middle" className="fill-gray-600 dark:fill-slate-300" style={{ fontSize: 12 }}>
           body lengths / second
         </text>
 
@@ -49,15 +49,15 @@ export default function RaceScalingDiagram() {
           const bw = (a.relSpeed / maxRel) * barW;
           return (
             <g key={a.name}>
-              <text x={barLeft - 10} y={a.y + 4} textAnchor="end" className="fill-slate-200" style={{ fontSize: 13, fontWeight: 600 }}>
+              <text x={barLeft - 10} y={a.y + 4} textAnchor="end" className="fill-gray-700 dark:fill-slate-200" style={{ fontSize: 13, fontWeight: 600 }}>
                 {a.name}
               </text>
               <rect x={barLeft} y={a.y - 12} width={Math.max(bw, 2)} height={24} rx={4} fill={a.color} fillOpacity={0.7} />
               <rect x={barLeft} y={a.y - 12} width={Math.max(bw, 2)} height={24} rx={4} fill="none" stroke={a.color} strokeWidth={1.5} />
-              <text x={barLeft + bw + 6} y={a.y + 5} className="fill-slate-300" style={{ fontSize: 11 }}>
+              <text x={barLeft + bw + 6} y={a.y + 5} className="fill-gray-600 dark:fill-slate-300" style={{ fontSize: 11 }}>
                 {a.relSpeed.toFixed(1)} BL/s
               </text>
-              <text x={barLeft - 10} y={a.y + 18} textAnchor="end" className="fill-slate-500" style={{ fontSize: 10 }}>
+              <text x={barLeft - 10} y={a.y + 18} textAnchor="end" className="fill-gray-400 dark:fill-slate-500" style={{ fontSize: 10 }}>
                 ({a.topSpeed.toFixed(1)} m/s actual)
               </text>
             </g>
@@ -69,13 +69,13 @@ export default function RaceScalingDiagram() {
         <text x={105} y={74} textAnchor="middle" className="fill-amber-300" style={{ fontSize: 12, fontWeight: 700 }}>
           Froude Number
         </text>
-        <text x={105} y={92} textAnchor="middle" className="fill-slate-300" style={{ fontSize: 11 }}>
+        <text x={105} y={92} textAnchor="middle" className="fill-gray-600 dark:fill-slate-300" style={{ fontSize: 11 }}>
           Fr = v² / (g × leg length)
         </text>
-        <text x={105} y={108} textAnchor="middle" className="fill-slate-400" style={{ fontSize: 10 }}>
+        <text x={105} y={108} textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" style={{ fontSize: 10 }}>
           Animals with similar Fr
         </text>
-        <text x={105} y={120} textAnchor="middle" className="fill-slate-400" style={{ fontSize: 10 }}>
+        <text x={105} y={120} textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" style={{ fontSize: 10 }}>
           move in similar gaits
         </text>
       </svg>

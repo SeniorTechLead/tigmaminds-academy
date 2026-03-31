@@ -80,7 +80,7 @@ export default function RhythmBeatDiagram() {
       <rect width="580" height="340" rx="12" className="fill-gray-900" />
 
       {/* Title */}
-      <text x="290" y="24" textAnchor="middle" className="fill-gray-300" fontSize="14" fontWeight="700">
+      <text x="290" y="24" textAnchor="middle" className="fill-gray-600 dark:fill-gray-300" fontSize="14" fontWeight="700">
         Rhythm and Time Signatures
       </text>
       <text x="290" y="40" textAnchor="middle" className="fill-gray-500" fontSize="11">
@@ -185,7 +185,7 @@ export default function RhythmBeatDiagram() {
       {/* Comparison section */}
       <line x1="30" y1="220" x2="550" y2="220" stroke="#374151" strokeWidth="1" strokeDasharray="4,4" />
 
-      <text x="290" y="245" textAnchor="middle" className="fill-gray-400" fontSize="12" fontWeight="600">
+      <text x="290" y="245" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="12" fontWeight="600">
         Feel the Difference
       </text>
 

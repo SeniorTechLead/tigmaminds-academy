@@ -37,7 +37,7 @@ export default function MountainLapseRateDiagram() {
         role="img"
         aria-label="Graph showing temperature lapse rate: 6.5 degrees Celsius per 1000 metres from 30°C at sea level to minus 5°C at 5500 metres"
       >
-        <rect x="0" y="0" width="580" height="400" className="fill-slate-900" rx="8" />
+        <rect x="0" y="0" width="580" height="400" className="fill-white dark:fill-slate-900" rx="8" />
 
         {/* Title */}
         <text x="290" y="24" textAnchor="middle" fontSize="12" className="fill-gray-200" fontWeight="700">
@@ -71,7 +71,7 @@ export default function MountainLapseRateDiagram() {
         {gridTemps.map((t, i) => (
           <g key={`t-${i}`}>
             <line x1={tempX(t)} y1={top} x2={tempX(t)} y2={bottom} className="stroke-gray-700" strokeWidth="0.5" />
-            <text x={tempX(t)} y={bottom + 14} textAnchor="middle" fontSize="8" className="fill-gray-400">
+            <text x={tempX(t)} y={bottom + 14} textAnchor="middle" fontSize="8" className="fill-gray-500 dark:fill-gray-400">
               {t}°C
             </text>
           </g>
@@ -79,7 +79,7 @@ export default function MountainLapseRateDiagram() {
         {gridAlts.map((a, i) => (
           <g key={`a-${i}`}>
             <line x1={left} y1={altY(a)} x2={right} y2={altY(a)} className="stroke-gray-700" strokeWidth="0.5" />
-            <text x={left - 6} y={altY(a) + 3} textAnchor="end" fontSize="8" className="fill-gray-400">
+            <text x={left - 6} y={altY(a) + 3} textAnchor="end" fontSize="8" className="fill-gray-500 dark:fill-gray-400">
               {a === 0 ? "0 m" : `${(a / 1000).toFixed(0)}k m`}
             </text>
           </g>
@@ -95,13 +95,13 @@ export default function MountainLapseRateDiagram() {
           y={(top + bottom) / 2}
           textAnchor="middle"
           fontSize="10"
-          className="fill-gray-300"
+          className="fill-gray-600 dark:fill-gray-300"
           fontWeight="600"
           transform={`rotate(-90,18,${(top + bottom) / 2})`}
         >
           Altitude (m)
         </text>
-        <text x={(left + right) / 2} y={bottom + 30} textAnchor="middle" fontSize="10" className="fill-gray-300" fontWeight="600">
+        <text x={(left + right) / 2} y={bottom + 30} textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-300" fontWeight="600">
           Temperature (°C)
         </text>
 

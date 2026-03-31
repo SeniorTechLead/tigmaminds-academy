@@ -37,7 +37,7 @@ export default function ActivityFloatBoatDiagram() {
 
         {/* Arrow */}
         <line x1="110" y1="90" x2="130" y2="90" stroke="#94a3b8" strokeWidth="1.5" />
-        <polygon points="135,90 128,86 128,94" fill="#94a3b8" />
+        <polygon points="135,90 128,86 128,94" className="fill-gray-500 dark:fill-slate-400" />
 
         {/* Boat A: wide flat */}
         <g className="floating">
@@ -52,7 +52,7 @@ export default function ActivityFloatBoatDiagram() {
 
         {/* Arrow */}
         <line x1="110" y1="135" x2="130" y2="135" stroke="#94a3b8" strokeWidth="1.5" />
-        <polygon points="135,135 128,131 128,139" fill="#94a3b8" />
+        <polygon points="135,135 128,131 128,139" className="fill-gray-500 dark:fill-slate-400" />
 
         {/* Boat B: narrow pointed */}
         <g className="floating" style={{ animationDelay: '0.5s' }}>
@@ -132,7 +132,7 @@ export default function ActivityFloatBoatDiagram() {
         <text x="470" y="220" textAnchor="middle" className="step fill-amber-400">Step 4: Record</text>
 
         {/* Table */}
-        <rect x="360" y="232" width="240" height="100" rx="4" fill="#0f172a" stroke="#334155" strokeWidth="1" />
+        <rect x="360" y="232" width="240" height="100" rx="4" className="fill-white dark:fill-slate-950" stroke="#334155" strokeWidth="1" />
 
         {/* Headers */}
         <line x1="360" y1="252" x2="600" y2="252" stroke="#334155" strokeWidth="1" />

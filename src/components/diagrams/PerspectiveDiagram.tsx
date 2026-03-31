@@ -148,7 +148,7 @@ export default function PerspectiveDiagram() {
       {/* Walking figure (animated) */}
       <g className="pd-walker">
         {/* Simple stick figure */}
-        <circle cx="200" cy="290" r="5" fill="#e2e8f0" />
+        <circle cx="200" cy="290" r="5" className="fill-gray-700 dark:fill-slate-200" />
         <line x1="200" y1="295" x2="200" y2="310" stroke="#e2e8f0" strokeWidth="1.5" />
         <line x1="200" y1="310" x2="194" y2="320" stroke="#e2e8f0" strokeWidth="1.5" />
         <line x1="200" y1="310" x2="206" y2="320" stroke="#e2e8f0" strokeWidth="1.5" />
@@ -166,20 +166,20 @@ export default function PerspectiveDiagram() {
         const bodyH = 15 * scale;
         return (
           <g key={`fig${i}`} opacity={0.5}>
-            <circle cx={x} cy={baseY - bodyH - headR} r={headR} fill="#94a3b8" />
+            <circle cx={x} cy={baseY - bodyH - headR} r={headR} className="fill-gray-500 dark:fill-slate-400" />
             <line x1={x} y1={baseY - bodyH} x2={x} y2={baseY} stroke="#94a3b8" strokeWidth={1.5 * scale} />
           </g>
         );
       })}
 
       {/* Annotation: foreshortening */}
-      <rect x="20" y="335" width="250" height="28" rx="6" fill="#1e293b" stroke="#334155" strokeWidth="1" />
+      <rect x="20" y="335" width="250" height="28" rx="6" className="fill-gray-100 dark:fill-slate-800" stroke="#334155" strokeWidth="1" />
       <text x="145" y="353" textAnchor="middle" className="fill-gray-400" fontSize="10">
         Objects shrink and converge with distance
       </text>
 
       {/* Annotation: key principle */}
-      <rect x="310" y="335" width="250" height="28" rx="6" fill="#1e293b" stroke="#334155" strokeWidth="1" />
+      <rect x="310" y="335" width="250" height="28" rx="6" className="fill-gray-100 dark:fill-slate-800" stroke="#334155" strokeWidth="1" />
       <text x="435" y="353" textAnchor="middle" className="fill-gray-400" fontSize="10">
         Parallel lines meet at the vanishing point
       </text>

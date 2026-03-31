@@ -7,7 +7,7 @@ export default function LeopardCameraTrapDiagram() {
         role="img"
         aria-label="Camera trap diagram showing PIR sensor detecting infrared radiation from a moving animal, triggering the camera shutter"
       >
-        <rect x="0" y="0" width="600" height="460" className="fill-slate-900" rx="8" />
+        <rect x="0" y="0" width="600" height="460" className="fill-white dark:fill-slate-900" rx="8" />
 
         {/* Title */}
         <text x="300" y="26" textAnchor="middle" fontSize="13" className="fill-gray-200" fontWeight="700">
@@ -40,7 +40,7 @@ export default function LeopardCameraTrapDiagram() {
           <circle cx="14" cy="-14" r="2.5" className="fill-red-600/60" />
           {/* Strap */}
           <path d="M-20,-5 Q-30,-5 -30,10 L-30,30 Q-30,40 -20,40 L20,40 Q30,40 30,30 L30,10 Q30,-5 20,-5" fill="none" stroke="#78716c" strokeWidth="2" />
-          <text x="0" y="-26" textAnchor="middle" fontSize="10" className="fill-gray-300" fontWeight="600">Camera Trap</text>
+          <text x="0" y="-26" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-300" fontWeight="600">Camera Trap</text>
         </g>
 
         {/* PIR detection zone - cone */}
@@ -99,7 +99,7 @@ export default function LeopardCameraTrapDiagram() {
         ].map((step, i) => (
           <g key={i}>
             <text x={step.x} y="427" fontSize="10" className="fill-amber-300" fontWeight="600">{step.label}</text>
-            <text x={step.x} y="440" fontSize="9" className="fill-gray-400">{step.sub}</text>
+            <text x={step.x} y="440" fontSize="9" className="fill-gray-500 dark:fill-gray-400">{step.sub}</text>
             {i < 3 && (
               <text x={step.x + 120} y="432" fontSize="14" className="fill-gray-500">→</text>
             )}

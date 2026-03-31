@@ -16,12 +16,12 @@ export default function SunsetPathDiagram() {
       <svg viewBox="0 0 800 520" className="w-full max-w-2xl mx-auto">
         {/* Stars */}
         {Array.from({ length: 20 }, (_, i) => (
-          <circle key={i} cx={30 + Math.random() * 740} cy={10 + Math.random() * 50} r={0.8} fill="white" opacity={0.3} />
+          <circle key={i} cx={30 + Math.random() * 740} cy={10 + Math.random() * 50} r={0.8} className="fill-gray-900 dark:fill-white" opacity={0.3} />
         ))}
 
         {/* --- Summary boxes --- */}
         <rect x="30" y="70" width="230" height="46" rx="8" fill="rgba(255,255,255,0.07)" />
-        <text x="145" y="90" textAnchor="middle" fontSize="12" fill="white">
+        <text x="145" y="90" textAnchor="middle" fontSize="12" className="fill-gray-900 dark:fill-white">
           <tspan fontWeight="bold">Noon:</tspan> white-yellow sun
         </text>
         <text x="145" y="106" textAnchor="middle" fontSize="11" fill="rgba(255,255,255,0.5)">All colours arrive ✓</text>
@@ -77,7 +77,7 @@ export default function SunsetPathDiagram() {
           <line x1="0" y1="20" x2="-4" y2="28" stroke="#e5c07b" strokeWidth={1.2} />
           <line x1="0" y1="20" x2="4" y2="28" stroke="#e5c07b" strokeWidth={1.2} />
         </g>
-        <text x="170" y="410" textAnchor="middle" fontSize="13" fontWeight="bold" fill="white">NOON</text>
+        <text x="170" y="410" textAnchor="middle" fontSize="13" fontWeight="bold" className="fill-gray-900 dark:fill-white">NOON</text>
 
         {/* ════════ SUNSET (right side) ════════ */}
         {/* Sun at horizon — far right */}

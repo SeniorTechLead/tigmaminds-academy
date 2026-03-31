@@ -2,9 +2,9 @@ export default function PitcherSurfaceTensionDiagram() {
   return (
     <div className="my-4">
       <svg viewBox="0 0 560 440" className="w-full max-w-lg mx-auto" role="img" aria-label="Diagram explaining surface tension and fluid dynamics in pitcher plant traps">
-        <rect width="560" height="440" rx="12" className="fill-slate-900" />
+        <rect width="560" height="440" rx="12" className="fill-white dark:fill-slate-900" />
         <text x="280" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#38bdf8">Surface Tension and Fluid Dynamics</text>
-        <text x="280" y="46" textAnchor="middle" fontSize="10" className="fill-slate-400">Why insects cannot escape the pitcher</text>
+        <text x="280" y="46" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Why insects cannot escape the pitcher</text>
 
         {/* Left panel: Normal surface vs wettable surface */}
         <g transform="translate(20, 70)">
@@ -16,7 +16,7 @@ export default function PitcherSurfaceTensionDiagram() {
           {/* Insect foot gripping */}
           <g transform="translate(120, 40)">
             <rect x="-8" y="-8" width="16" height="8" rx="2" fill="#78716c" />
-            <text x="0" y="-2" textAnchor="middle" fontSize="6" fill="white">foot</text>
+            <text x="0" y="-2" textAnchor="middle" fontSize="6" className="fill-gray-900 dark:fill-white">foot</text>
             {/* Adhesive pad */}
             <rect x="-6" y="0" width="12" height="3" rx="1" fill="#22c55e" />
             <text x="25" y="3" fontSize="7" fill="#86efac">✓ grip</text>
@@ -34,7 +34,7 @@ export default function PitcherSurfaceTensionDiagram() {
           {/* Insect foot sliding */}
           <g transform="translate(120, 103)">
             <rect x="-8" y="-8" width="16" height="8" rx="2" fill="#78716c" />
-            <text x="0" y="-2" textAnchor="middle" fontSize="6" fill="white">foot</text>
+            <text x="0" y="-2" textAnchor="middle" fontSize="6" className="fill-gray-900 dark:fill-white">foot</text>
             {/* Water layer under foot */}
             <rect x="-10" y="0" width="20" height="3" rx="1" fill="#38bdf8" opacity="0.6" />
             <text x="25" y="3" fontSize="7" fill="#f87171">✗ slip!</text>
@@ -44,9 +44,9 @@ export default function PitcherSurfaceTensionDiagram() {
           </g>
 
           {/* Explanation */}
-          <text x="120" y="155" textAnchor="middle" fontSize="8" className="fill-slate-400">Nectar or rain fills microscopic ridges</text>
-          <text x="120" y="167" textAnchor="middle" fontSize="8" className="fill-slate-400">creating a continuous water film.</text>
-          <text x="120" y="179" textAnchor="middle" fontSize="8" className="fill-slate-400">Insect feet hydroplane like tires on wet road.</text>
+          <text x="120" y="155" textAnchor="middle" fontSize="8" className="fill-gray-500 dark:fill-slate-400">Nectar or rain fills microscopic ridges</text>
+          <text x="120" y="167" textAnchor="middle" fontSize="8" className="fill-gray-500 dark:fill-slate-400">creating a continuous water film.</text>
+          <text x="120" y="179" textAnchor="middle" fontSize="8" className="fill-gray-500 dark:fill-slate-400">Insect feet hydroplane like tires on wet road.</text>
         </g>
 
         {/* Right panel: Surface tension comparison */}
@@ -99,7 +99,7 @@ export default function PitcherSurfaceTensionDiagram() {
 
         {/* Bottom: Wax crystal mechanism */}
         <g transform="translate(280, 290)">
-          <rect x="-250" y="-10" width="500" height="130" rx="8" className="fill-slate-800" stroke="#fbbf24" strokeWidth="1" />
+          <rect x="-250" y="-10" width="500" height="130" rx="8" className="fill-gray-100 dark:fill-slate-800" stroke="#fbbf24" strokeWidth="1" />
           <text x="0" y="10" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#fbbf24">Wax Crystal Defence</text>
 
           {/* Fly foot with adhesive pad */}
@@ -110,7 +110,7 @@ export default function PitcherSurfaceTensionDiagram() {
             <rect x="35" y="-10" width="30" height="10" rx="2" fill="#78716c" />
             {/* Adhesive pad making contact */}
             <rect x="38" y="0" width="24" height="3" rx="1" fill="#a78bfa" />
-            <text x="50" y="40" textAnchor="middle" fontSize="8" className="fill-slate-400">Adhesive pad grips surface</text>
+            <text x="50" y="40" textAnchor="middle" fontSize="8" className="fill-gray-500 dark:fill-slate-400">Adhesive pad grips surface</text>
             <text x="50" y="52" textAnchor="middle" fontSize="8" fill="#86efac">✓ Stable</text>
           </g>
 
@@ -128,7 +128,7 @@ export default function PitcherSurfaceTensionDiagram() {
             {/* Detached crystals on pad */}
             <polygon points="58,-4 60,-7 62,-4" fill="#fbbf24" opacity="0.8" />
             <polygon points="68,-4 70,-7 72,-4" fill="#fbbf24" opacity="0.8" />
-            <text x="70" y="40" textAnchor="middle" fontSize="8" className="fill-slate-400">Wax crystals clog adhesive pad</text>
+            <text x="70" y="40" textAnchor="middle" fontSize="8" className="fill-gray-500 dark:fill-slate-400">Wax crystals clog adhesive pad</text>
             <text x="70" y="52" textAnchor="middle" fontSize="8" fill="#f87171">✗ No grip → insect slides down</text>
           </g>
         </g>

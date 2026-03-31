@@ -196,7 +196,7 @@ export default function DrumVibrationDiagram() {
       </g>
 
       {/* Bottom note */}
-      <rect x="100" y="265" width="380" height="55" rx="8" fill="#1e293b" stroke="#334155" strokeWidth="1" />
+      <rect x="100" y="265" width="380" height="55" rx="8" className="fill-gray-100 dark:fill-slate-800" stroke="#334155" strokeWidth="1" />
       <text x="290" y="283" textAnchor="middle" className="fill-gray-400" fontSize="10" fontWeight="600">
         Why drums sound "noisy" compared to strings
       </text>

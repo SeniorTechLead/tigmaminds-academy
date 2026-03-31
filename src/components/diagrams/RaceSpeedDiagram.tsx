@@ -46,7 +46,7 @@ export default function RaceSpeedDiagram() {
     <g key={animal}>
       <rect x={right - 170} y={y} width={160} height={34} rx={6} className="fill-slate-800/80" />
       <circle cx={right - 152} cy={y + 17} r={6} fill={color} />
-      <text x={right - 140} y={y + 22} className="fill-slate-200" style={{ fontSize: 13 }}>
+      <text x={right - 140} y={y + 22} className="fill-gray-700 dark:fill-slate-200" style={{ fontSize: 13 }}>
         {animal}: {speed} {unit}
       </text>
     </g>
@@ -55,10 +55,10 @@ export default function RaceSpeedDiagram() {
   return (
     <div className="w-full max-w-lg mx-auto my-4">
       <svg viewBox={`0 0 ${w} ${h}`} className="w-full" role="img" aria-label="Position versus time graph comparing a hare that sprints and rests against a tortoise that moves at constant speed">
-        <rect width={w} height={h} rx={10} className="fill-slate-900" />
+        <rect width={w} height={h} rx={10} className="fill-white dark:fill-slate-900" />
 
         {/* Title */}
-        <text x={w / 2} y={26} textAnchor="middle" className="fill-slate-100" style={{ fontSize: 16, fontWeight: 700 }}>
+        <text x={w / 2} y={26} textAnchor="middle" className="fill-gray-800 dark:fill-slate-100" style={{ fontSize: 16, fontWeight: 700 }}>
           Speed vs Velocity — Position–Time Graph
         </text>
 
@@ -66,21 +66,21 @@ export default function RaceSpeedDiagram() {
         {[0, 10, 20, 30, 40, 50, 60].map(t => (
           <g key={`t${t}`}>
             <line x1={tX(t)} y1={top} x2={tX(t)} y2={bottom} className="stroke-slate-700" strokeWidth={0.5} />
-            <text x={tX(t)} y={bottom + 18} textAnchor="middle" className="fill-slate-400" style={{ fontSize: 11 }}>{t}s</text>
+            <text x={tX(t)} y={bottom + 18} textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" style={{ fontSize: 11 }}>{t}s</text>
           </g>
         ))}
         {[0, 100, 200, 300, 400, 500].map(d => (
           <g key={`d${d}`}>
             <line x1={left} y1={dY(d)} x2={right} y2={dY(d)} className="stroke-slate-700" strokeWidth={0.5} />
-            <text x={left - 8} y={dY(d) + 4} textAnchor="end" className="fill-slate-400" style={{ fontSize: 11 }}>{d} m</text>
+            <text x={left - 8} y={dY(d) + 4} textAnchor="end" className="fill-gray-500 dark:fill-slate-400" style={{ fontSize: 11 }}>{d} m</text>
           </g>
         ))}
 
         {/* Axes */}
         <line x1={left} y1={top} x2={left} y2={bottom} className="stroke-slate-400" strokeWidth={1.5} />
         <line x1={left} y1={bottom} x2={right} y2={bottom} className="stroke-slate-400" strokeWidth={1.5} />
-        <text x={w / 2} y={bottom + 36} textAnchor="middle" className="fill-slate-300" style={{ fontSize: 12 }}>Time (seconds)</text>
-        <text x={18} y={h / 2} textAnchor="middle" className="fill-slate-300" style={{ fontSize: 12 }} transform={`rotate(-90 18 ${h / 2})`}>Distance (m)</text>
+        <text x={w / 2} y={bottom + 36} textAnchor="middle" className="fill-gray-600 dark:fill-slate-300" style={{ fontSize: 12 }}>Time (seconds)</text>
+        <text x={18} y={h / 2} textAnchor="middle" className="fill-gray-600 dark:fill-slate-300" style={{ fontSize: 12 }} transform={`rotate(-90 18 ${h / 2})`}>Distance (m)</text>
 
         {/* Hare path */}
         <path d={harePath} fill="none" stroke="#f97316" strokeWidth={2.5} strokeLinejoin="round" />

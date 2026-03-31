@@ -27,8 +27,8 @@ export default function BridgeLoadDistributionDiagram() {
         </text>
 
         {/* Supports */}
-        <polygon points="50,175 65,195 35,195" fill="#64748b" />
-        <polygon points="300,175 315,195 285,195" fill="#64748b" />
+        <polygon points="50,175 65,195 35,195" className="fill-gray-400 dark:fill-slate-500" />
+        <polygon points="300,175 315,195 285,195" className="fill-gray-400 dark:fill-slate-500" />
 
         {/* Beam */}
         <rect x="50" y="165" width="250" height="10" rx="2" fill="#78716c" />
@@ -91,7 +91,7 @@ export default function BridgeLoadDistributionDiagram() {
         <text x="525" y="227" textAnchor="middle" className="small fill-green-400">No single point of failure</text>
 
         {/* --- BOTTOM: Force diagram --- */}
-        <rect x="30" y="245" width="640" height="175" rx="6" fill="#1e293b" stroke="#475569" strokeWidth="1" />
+        <rect x="30" y="245" width="640" height="175" rx="6" className="fill-gray-100 dark:fill-slate-800 stroke-gray-300 dark:stroke-slate-600"  strokeWidth="1" />
 
         <text x="350" y="268" textAnchor="middle" className="label fill-amber-300" fontWeight="600">
           Why Networks Beat Single Members

@@ -37,7 +37,7 @@ export default function ElephantSineWaveDiagram() {
       aria-label="Elephant sine wave diagram showing vibrations through ground, a sine wave with labels, and frequency comparison"
     >
       {/* Dark background */}
-      <rect width="560" height="620" rx="8" className="fill-slate-900" />
+      <rect width="560" height="620" rx="8" className="fill-white dark:fill-slate-900" />
 
       {/* ============================================ */}
       {/* TOP: Cross-section — elephant, soil, girl    */}
@@ -56,21 +56,21 @@ export default function ElephantSineWaveDiagram() {
 
       {/* Elephant silhouette (simple) — left side */}
       {/* Body */}
-      <ellipse cx="90" cy="100" rx="40" ry="28" className="fill-gray-400" />
+      <ellipse cx="90" cy="100" rx="40" ry="28" className="fill-gray-500 dark:fill-gray-400" />
       {/* Head */}
-      <ellipse cx="55" cy="88" rx="20" ry="18" className="fill-gray-400" />
+      <ellipse cx="55" cy="88" rx="20" ry="18" className="fill-gray-500 dark:fill-gray-400" />
       {/* Trunk */}
       <path d="M38,95 Q25,110 30,125" fill="none" className="stroke-gray-400" strokeWidth="4" strokeLinecap="round" />
       {/* Ear */}
       <ellipse cx="62" cy="82" rx="10" ry="14" className="fill-gray-500" />
       {/* Front legs */}
-      <rect x="68" y="120" width="8" height="20" rx="3" className="fill-gray-400" />
-      <rect x="82" y="120" width="8" height="20" rx="3" className="fill-gray-400" />
+      <rect x="68" y="120" width="8" height="20" rx="3" className="fill-gray-500 dark:fill-gray-400" />
+      <rect x="82" y="120" width="8" height="20" rx="3" className="fill-gray-500 dark:fill-gray-400" />
       {/* Back legs */}
-      <rect x="104" y="120" width="8" height="20" rx="3" className="fill-gray-400" />
-      <rect x="118" y="120" width="8" height="20" rx="3" className="fill-gray-400" />
+      <rect x="104" y="120" width="8" height="20" rx="3" className="fill-gray-500 dark:fill-gray-400" />
+      <rect x="118" y="120" width="8" height="20" rx="3" className="fill-gray-500 dark:fill-gray-400" />
       {/* Eye */}
-      <circle cx="48" cy="84" r="2" className="fill-slate-900" />
+      <circle cx="48" cy="84" r="2" className="fill-white dark:fill-slate-900" />
 
       {/* Foot pressing ground — impact lines */}
       <line x1="72" y1="138" x2="72" y2="145" className="stroke-emerald-400" strokeWidth="1.5" />
@@ -91,9 +91,9 @@ export default function ElephantSineWaveDiagram() {
 
       {/* Girl (Rongpharpi) silhouette — lying on ground, ear pressed down, right side */}
       {/* Body lying horizontal */}
-      <ellipse cx="420" cy="132" rx="28" ry="7" className="fill-gray-400" />
+      <ellipse cx="420" cy="132" rx="28" ry="7" className="fill-gray-500 dark:fill-gray-400" />
       {/* Head — ear on ground */}
-      <circle cx="450" cy="132" r="9" className="fill-gray-400" />
+      <circle cx="450" cy="132" r="9" className="fill-gray-500 dark:fill-gray-400" />
       {/* Hair */}
       <path d="M453,124 Q462,118 458,128" className="fill-gray-500" />
       {/* Legs */}
@@ -114,7 +114,7 @@ export default function ElephantSineWaveDiagram() {
       </text>
 
       {/* Vibration note */}
-      <text x="260" y="210" textAnchor="middle" className="fill-gray-400" fontSize="9">
+      <text x="260" y="210" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="9">
         Vibrations travel through soil as seismic waves
       </text>
 
@@ -218,7 +218,7 @@ export default function ElephantSineWaveDiagram() {
       <text x="138" y="490" textAnchor="middle" className="fill-emerald-400" fontSize="10" fontWeight="700">
         20 Hz
       </text>
-      <text x="138" y="502" textAnchor="middle" className="fill-gray-400" fontSize="8">
+      <text x="138" y="502" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="8">
         you can feel each pulse
       </text>
 
@@ -234,12 +234,12 @@ export default function ElephantSineWaveDiagram() {
       <text x="418" y="490" textAnchor="middle" className="fill-emerald-400" fontSize="10" fontWeight="700">
         80 Hz
       </text>
-      <text x="418" y="502" textAnchor="middle" className="fill-gray-400" fontSize="8">
+      <text x="418" y="502" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="8">
         feels like a continuous hum
       </text>
 
       {/* Bottom summary */}
-      <text x="280" y="600" textAnchor="middle" className="fill-gray-400" fontSize="9">
+      <text x="280" y="600" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="9">
         Same time window — higher frequency packs more cycles in
       </text>
 

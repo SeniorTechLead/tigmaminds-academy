@@ -11,11 +11,11 @@ export default function BanyanWaterPotentialDiagram() {
   return (
     <div className="my-4">
       <svg viewBox="0 0 525 455" className="w-full max-w-lg mx-auto" role="img" aria-label="Water potential gradient from soil to atmosphere showing how decreasing water potential drives transpiration">
-        <rect width="500" height="420" rx="12" className="fill-slate-900" />
+        <rect width="500" height="420" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}
         <text x="250" y="28" textAnchor="middle" className="fill-amber-400" fontSize="14" fontWeight="bold">Water Potential Gradient</text>
-        <text x="250" y="44" textAnchor="middle" className="fill-slate-400" fontSize="10">Water moves from high to low potential (less negative → more negative)</text>
+        <text x="250" y="44" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="10">Water moves from high to low potential (less negative → more negative)</text>
 
         {/* Tree silhouette on right */}
         <g opacity="0.3">
@@ -32,7 +32,7 @@ export default function BanyanWaterPotentialDiagram() {
             <rect x={80} y={level.y} width={level.barW} height={28} rx="4" className={level.color} />
             {/* Label */}
             <text x={80 + level.barW + 10} y={level.y + 14} className={level.textColor} fontSize="10" fontWeight="bold">{level.label}</text>
-            <text x={80 + level.barW + 10} y={level.y + 26} className="fill-slate-400" fontSize="9">ψ = {level.value}</text>
+            <text x={80 + level.barW + 10} y={level.y + 26} className="fill-gray-500 dark:fill-slate-400" fontSize="9">ψ = {level.value}</text>
 
             {/* Arrow to next level */}
             {i < levels.length - 1 && (
@@ -46,20 +46,20 @@ export default function BanyanWaterPotentialDiagram() {
 
         {/* More negative arrow on left */}
         <line x1="55" y1="320" x2="55" y2="55" className="stroke-slate-500" strokeWidth="1" markerEnd="url(#wpArrowSlate)" />
-        <text x="55" y="345" textAnchor="middle" className="fill-slate-500" fontSize="7">Less negative</text>
-        <text x="55" y="48" textAnchor="middle" className="fill-slate-500" fontSize="7">More negative</text>
+        <text x="55" y="345" textAnchor="middle" className="fill-gray-400 dark:fill-slate-500" fontSize="7">Less negative</text>
+        <text x="55" y="48" textAnchor="middle" className="fill-gray-400 dark:fill-slate-500" fontSize="7">More negative</text>
 
         {/* Key insight box */}
         <rect x="290" y="240" width="185" height="65" rx="8" className="fill-blue-900" opacity="0.5" />
         <text x="382" y="258" textAnchor="middle" className="fill-blue-300" fontSize="9" fontWeight="bold">Why does water go up?</text>
-        <text x="382" y="273" textAnchor="middle" className="fill-slate-300" fontSize="8">Water moves from less negative</text>
-        <text x="382" y="285" textAnchor="middle" className="fill-slate-300" fontSize="8">(soil: -0.3) to more negative</text>
-        <text x="382" y="297" textAnchor="middle" className="fill-slate-300" fontSize="8">(air: -100) — down the gradient</text>
+        <text x="382" y="273" textAnchor="middle" className="fill-gray-600 dark:fill-slate-300" fontSize="8">Water moves from less negative</text>
+        <text x="382" y="285" textAnchor="middle" className="fill-gray-600 dark:fill-slate-300" fontSize="8">(soil: -0.3) to more negative</text>
+        <text x="382" y="297" textAnchor="middle" className="fill-gray-600 dark:fill-slate-300" fontSize="8">(air: -100) — down the gradient</text>
 
         {/* The enormous gap */}
         <rect x="290" y="320" width="185" height="40" rx="8" className="fill-amber-900" opacity="0.5" />
         <text x="382" y="338" textAnchor="middle" className="fill-amber-300" fontSize="9" fontWeight="bold">The atmosphere is incredibly dry</text>
-        <text x="382" y="352" textAnchor="middle" className="fill-slate-400" fontSize="8">-100 MPa = enormous suction force</text>
+        <text x="382" y="352" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="8">-100 MPa = enormous suction force</text>
 
         {/* Evaporation arrows at top */}
         {[350, 380, 410, 440].map((x, i) => (
@@ -70,14 +70,14 @@ export default function BanyanWaterPotentialDiagram() {
 
         {/* Bottom summary */}
         <text x="250" y="390" textAnchor="middle" className="fill-green-300" fontSize="9" fontWeight="bold">Transpiration: the engine that pulls water from soil to sky</text>
-        <text x="250" y="405" textAnchor="middle" className="fill-slate-400" fontSize="8">A large banyan can transpire 1,000+ litres of water per day</text>
+        <text x="250" y="405" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="8">A large banyan can transpire 1,000+ litres of water per day</text>
 
         <defs>
           <marker id="wpArrowUp" markerWidth="6" markerHeight="5" refX="3" refY="5" orient="auto">
             <polygon points="0 5, 3 0, 6 5" className="fill-blue-400" />
           </marker>
           <marker id="wpArrowSlate" markerWidth="6" markerHeight="5" refX="3" refY="0" orient="auto">
-            <polygon points="0 5, 3 0, 6 5" className="fill-slate-500" />
+            <polygon points="0 5, 3 0, 6 5" className="fill-gray-400 dark:fill-slate-500" />
           </marker>
         </defs>
       </svg>

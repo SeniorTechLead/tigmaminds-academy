@@ -8,7 +8,7 @@ export default function OrchidCoevolutionDiagram() {
 
         {/* Timeline of escalation */}
         <g transform="translate(50, 75)">
-          <text x="230" y="0" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#e2e8f0">The Escalation</text>
+          <text x="230" y="0" textAnchor="middle" fontSize="11" fontWeight="bold" className="fill-gray-700 dark:fill-slate-200">The Escalation</text>
 
           {/* Steps */}
           {[
@@ -41,40 +41,40 @@ export default function OrchidCoevolutionDiagram() {
           {/* Arrows between steps */}
           {[0, 1, 2].map((i) => (
             <g key={`arrow${i}`}>
-              <line x1={i * 115 + 95} y1="50" x2={i * 115 + 110} y2="50" stroke="#475569" strokeWidth="1.5" markerEnd="url(#arrowGray)" />
+              <line x1={i * 115 + 95} y1="50" x2={i * 115 + 110} y2="50" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1.5" markerEnd="url(#arrowGray)" />
             </g>
           ))}
         </g>
 
         {/* Darwin's prediction */}
         <g transform="translate(30, 270)">
-          <rect x="0" y="0" width="240" height="100" rx="8" fill="#1e293b" stroke="#22c55e" strokeWidth="1" />
+          <rect x="0" y="0" width="240" height="100" rx="8" className="fill-gray-100 dark:fill-slate-800" stroke="#22c55e" strokeWidth="1" />
           <text x="120" y="20" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#22c55e">Darwin (1862)</text>
-          <text x="120" y="38" textAnchor="middle" fontSize="9" fill="#e2e8f0">&quot;There must exist a moth</text>
-          <text x="120" y="50" textAnchor="middle" fontSize="9" fill="#e2e8f0">with a 30 cm tongue.&quot;</text>
-          <text x="120" y="68" textAnchor="middle" fontSize="9" fill="#94a3b8">Predicted from the orchid{"'"}s</text>
-          <text x="120" y="80" textAnchor="middle" fontSize="9" fill="#94a3b8">30 cm nectar spur alone.</text>
+          <text x="120" y="38" textAnchor="middle" fontSize="9" className="fill-gray-700 dark:fill-slate-200">&quot;There must exist a moth</text>
+          <text x="120" y="50" textAnchor="middle" fontSize="9" className="fill-gray-700 dark:fill-slate-200">with a 30 cm tongue.&quot;</text>
+          <text x="120" y="68" textAnchor="middle" fontSize="9" className="fill-gray-500 dark:fill-slate-400">Predicted from the orchid{"'"}s</text>
+          <text x="120" y="80" textAnchor="middle" fontSize="9" className="fill-gray-500 dark:fill-slate-400">30 cm nectar spur alone.</text>
           <text x="120" y="96" textAnchor="middle" fontSize="8" fill="#fbbf24">He was ridiculed.</text>
         </g>
 
         {/* Arrow connecting */}
-        <line x1="275" y1="320" x2="295" y2="320" stroke="#475569" strokeWidth="1.5" markerEnd="url(#arrowGray)" />
+        <line x1="275" y1="320" x2="295" y2="320" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1.5" markerEnd="url(#arrowGray)" />
 
         {/* Discovery */}
         <g transform="translate(300, 270)">
-          <rect x="0" y="0" width="230" height="100" rx="8" fill="#1e293b" stroke="#fbbf24" strokeWidth="1" />
+          <rect x="0" y="0" width="230" height="100" rx="8" className="fill-gray-100 dark:fill-slate-800" stroke="#fbbf24" strokeWidth="1" />
           <text x="115" y="20" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#fbbf24">Discovered (1903)</text>
-          <text x="115" y="38" textAnchor="middle" fontSize="9" fill="#e2e8f0">Xanthopan morganii praedicta</text>
-          <text x="115" y="54" textAnchor="middle" fontSize="9" fill="#e2e8f0">Hawk moth with 30 cm proboscis</text>
-          <text x="115" y="72" textAnchor="middle" fontSize="9" fill="#94a3b8">Found 41 years after</text>
-          <text x="115" y="84" textAnchor="middle" fontSize="9" fill="#94a3b8">Darwin{"'"}s prediction.</text>
+          <text x="115" y="38" textAnchor="middle" fontSize="9" className="fill-gray-700 dark:fill-slate-200">Xanthopan morganii praedicta</text>
+          <text x="115" y="54" textAnchor="middle" fontSize="9" className="fill-gray-700 dark:fill-slate-200">Hawk moth with 30 cm proboscis</text>
+          <text x="115" y="72" textAnchor="middle" fontSize="9" className="fill-gray-500 dark:fill-slate-400">Found 41 years after</text>
+          <text x="115" y="84" textAnchor="middle" fontSize="9" className="fill-gray-500 dark:fill-slate-400">Darwin{"'"}s prediction.</text>
           <text x="115" y="96" textAnchor="middle" fontSize="8" fill="#22c55e">He was right.</text>
         </g>
 
         {/* Why it matters */}
         <g transform="translate(280, 395)">
-          <text x="0" y="0" textAnchor="middle" fontSize="10" fill="#94a3b8">Co-evolution = each species drives the other to evolve.</text>
-          <text x="0" y="14" textAnchor="middle" fontSize="10" fill="#94a3b8">Beautiful precision — but dangerous fragility if one partner disappears.</text>
+          <text x="0" y="0" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Co-evolution = each species drives the other to evolve.</text>
+          <text x="0" y="14" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Beautiful precision — but dangerous fragility if one partner disappears.</text>
         </g>
 
         <defs>

@@ -1,6 +1,6 @@
 export default function ActivityMeteorWatchDiagram() {
   return (
-    <div className="w-full max-w-xl mx-auto my-4">
+    <div className="dark:text-inherit w-full max-w-xl mx-auto my-4">
       <svg
         viewBox="0 0 780 560"
         xmlns="http://www.w3.org/2000/svg"

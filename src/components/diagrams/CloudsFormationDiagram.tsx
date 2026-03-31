@@ -102,7 +102,7 @@ export default function CloudsFormationDiagram() {
 
         {/* Step 3: Dew point line */}
         <line x1="30" y1="200" x2={w - 30} y2="200" stroke="#e2e8f0" strokeWidth="1" strokeDasharray="8 4" />
-        <text x={w - 35} y="196" textAnchor="end" fontSize="11" fill="#e2e8f0" fontWeight="600">
+        <text x={w - 35} y="196" textAnchor="end" fontSize="11" className="fill-gray-700 dark:fill-slate-200" fontWeight="600">
           Dew point level
         </text>
 
@@ -118,20 +118,20 @@ export default function CloudsFormationDiagram() {
         {/* Condensation nuclei close-up */}
         {[220, 260, 300].map((x, i) => (
           <g key={`nucleus-${i}`}>
-            <circle cx={x} cy={130} r="3" fill="#94a3b8" />
+            <circle cx={x} cy={130} r="3" className="fill-gray-500 dark:fill-slate-400" />
             <circle cx={x} cy={130} r="7" fill="#93c5fd" fillOpacity="0.4" />
           </g>
         ))}
-        <text x="260" y="120" textAnchor="middle" fontSize="10" fill="#cbd5e1">
+        <text x="260" y="120" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-slate-300">
           Dust particles + water droplets
         </text>
 
         {/* Step 4: Cloud */}
         <g>
           <ellipse cx="440" cy="90" rx="100" ry="40" fill="#f1f5f9" fillOpacity="0.85" />
-          <ellipse cx="400" cy="80" rx="60" ry="35" fill="#e2e8f0" fillOpacity="0.9" />
-          <ellipse cx="480" cy="80" rx="55" ry="30" fill="#f8fafc" fillOpacity="0.85" />
-          <ellipse cx="440" cy="65" rx="50" ry="28" fill="#f8fafc" fillOpacity="0.9" />
+          <ellipse cx="400" cy="80" rx="60" ry="35" className="fill-gray-700 dark:fill-slate-200" fillOpacity="0.9" />
+          <ellipse cx="480" cy="80" rx="55" ry="30" className="fill-gray-900 dark:fill-slate-50" fillOpacity="0.85" />
+          <ellipse cx="440" cy="65" rx="50" ry="28" className="fill-gray-900 dark:fill-slate-50" fillOpacity="0.9" />
         </g>
 
         <rect x="385" y="42" width="110" height="22" rx="4" fill="#0c4a6e" fillOpacity="0.8" />
@@ -140,14 +140,14 @@ export default function CloudsFormationDiagram() {
         </text>
 
         {/* Bottom info */}
-        <rect x="380" y="420" width="300" height="60" rx="6" fill="#0f172a" fillOpacity="0.7" />
+        <rect x="380" y="420" width="300" height="60" rx="6" className="fill-white dark:fill-slate-950" fillOpacity="0.7" />
         <text x="530" y="440" textAnchor="middle" fontSize="11" fontWeight="600" fill="#7dd3fc">
           Key fact
         </text>
-        <text x="530" y="455" textAnchor="middle" fontSize="10" fill="#cbd5e1">
+        <text x="530" y="455" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-slate-300">
           Each cloud droplet is only 10–20 µm wide
         </text>
-        <text x="530" y="468" textAnchor="middle" fontSize="10" fill="#cbd5e1">
+        <text x="530" y="468" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-slate-300">
           — one-tenth the thickness of a hair
         </text>
 
@@ -156,7 +156,7 @@ export default function CloudsFormationDiagram() {
         <text x="16" y="320" fontSize="10" fill="#86efac">24°C</text>
         <text x="16" y="205" fontSize="10" fill="#93c5fd">11°C</text>
         <text x="16" y="80" fontSize="10" fill="#c4b5fd">3°C</text>
-        <line x1="48" y1="75" x2="48" y2="400" stroke="#475569" strokeWidth="1" />
+        <line x1="48" y1="75" x2="48" y2="400" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1" />
       </svg>
     </div>
   );

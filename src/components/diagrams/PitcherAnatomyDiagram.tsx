@@ -2,15 +2,15 @@ export default function PitcherAnatomyDiagram() {
   return (
     <div className="my-4">
       <svg viewBox="0 0 560 480" className="w-full max-w-lg mx-auto" role="img" aria-label="Cross-section diagram of a pitcher plant showing peristome, waxy zone, digestive fluid, and trapping mechanism">
-        <rect width="560" height="480" rx="12" className="fill-slate-900" />
+        <rect width="560" height="480" rx="12" className="fill-white dark:fill-slate-900" />
         <text x="280" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#86efac">The Perfect Trap: Pitcher Anatomy</text>
-        <text x="280" y="46" textAnchor="middle" fontSize="10" className="fill-slate-400">Cross-section of a Nepenthes pitcher</text>
+        <text x="280" y="46" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Cross-section of a Nepenthes pitcher</text>
 
         {/* Main pitcher shape - cross section */}
         <g transform="translate(220, 60)">
           {/* Lid (operculum) */}
           <ellipse cx="60" cy="10" rx="70" ry="20" fill="#15803d" stroke="#22c55e" strokeWidth="1.5" />
-          <text x="60" y="14" textAnchor="middle" fontSize="8" fill="white" fontWeight="bold">Lid (Operculum)</text>
+          <text x="60" y="14" textAnchor="middle" fontSize="8" className="fill-gray-900 dark:fill-white" fontWeight="bold">Lid (Operculum)</text>
 
           {/* Tendril connecting to vine */}
           <path d="M 60,-5 Q 60,-30 40,-50 Q 20,-70 -10,-60" stroke="#22c55e" strokeWidth="3" fill="none" />
@@ -70,33 +70,33 @@ export default function PitcherAnatomyDiagram() {
         <line x1="280" y1="88" x2="420" y2="75" stroke="#f87171" strokeWidth="1" strokeDasharray="3,2" opacity="0.6" />
         <g transform="translate(425, 65)">
           <text x="0" y="0" fontSize="10" fontWeight="bold" fill="#f87171">Peristome (Slippery Rim)</text>
-          <text x="0" y="14" fontSize="8" className="fill-slate-400">Microscopic ridges + nectar film</text>
-          <text x="0" y="26" fontSize="8" className="fill-slate-400">= aquaplaning effect for insects</text>
+          <text x="0" y="14" fontSize="8" className="fill-gray-500 dark:fill-slate-400">Microscopic ridges + nectar film</text>
+          <text x="0" y="26" fontSize="8" className="fill-gray-500 dark:fill-slate-400">= aquaplaning effect for insects</text>
         </g>
 
         {/* Waxy zone */}
         <line x1="200" y1="135" x2="55" y2="135" stroke="#fbbf24" strokeWidth="1" strokeDasharray="3,2" opacity="0.6" />
         <g transform="translate(10, 120)">
           <text x="0" y="0" fontSize="10" fontWeight="bold" fill="#fbbf24">Waxy Zone</text>
-          <text x="0" y="14" fontSize="8" className="fill-slate-400">Loose wax crystals (~1 µm)</text>
-          <text x="0" y="26" fontSize="8" className="fill-slate-400">clog insect foot-pads</text>
+          <text x="0" y="14" fontSize="8" className="fill-gray-500 dark:fill-slate-400">Loose wax crystals (~1 µm)</text>
+          <text x="0" y="26" fontSize="8" className="fill-gray-500 dark:fill-slate-400">clog insect foot-pads</text>
         </g>
 
         {/* Downward hairs */}
         <line x1="200" y1="210" x2="55" y2="210" stroke="#a78bfa" strokeWidth="1" strokeDasharray="3,2" opacity="0.6" />
         <g transform="translate(10, 195)">
           <text x="0" y="0" fontSize="10" fontWeight="bold" fill="#a78bfa">Downward Hairs</text>
-          <text x="0" y="14" fontSize="8" className="fill-slate-400">One-way passage: easy down,</text>
-          <text x="0" y="26" fontSize="8" className="fill-slate-400">impossible to climb up</text>
+          <text x="0" y="14" fontSize="8" className="fill-gray-500 dark:fill-slate-400">One-way passage: easy down,</text>
+          <text x="0" y="26" fontSize="8" className="fill-gray-500 dark:fill-slate-400">impossible to climb up</text>
         </g>
 
         {/* Digestive fluid */}
         <line x1="340" y1="310" x2="420" y2="310" stroke="#84cc16" strokeWidth="1" strokeDasharray="3,2" opacity="0.6" />
         <g transform="translate(425, 295)">
           <text x="0" y="0" fontSize="10" fontWeight="bold" fill="#84cc16">Digestive Fluid</text>
-          <text x="0" y="14" fontSize="8" className="fill-slate-400">pH 2–3 (like stomach acid)</text>
-          <text x="0" y="26" fontSize="8" className="fill-slate-400">Nepenthesin enzyme + wetting</text>
-          <text x="0" y="38" fontSize="8" className="fill-slate-400">agents reduce surface tension</text>
+          <text x="0" y="14" fontSize="8" className="fill-gray-500 dark:fill-slate-400">pH 2–3 (like stomach acid)</text>
+          <text x="0" y="26" fontSize="8" className="fill-gray-500 dark:fill-slate-400">Nepenthesin enzyme + wetting</text>
+          <text x="0" y="38" fontSize="8" className="fill-gray-500 dark:fill-slate-400">agents reduce surface tension</text>
         </g>
 
         {/* Lid label */}
@@ -107,7 +107,7 @@ export default function PitcherAnatomyDiagram() {
         <g transform="translate(280, 420)">
           <rect x="-250" y="-15" width="500" height="50" rx="8" fill="#14532d" opacity="0.4" stroke="#22c55e" strokeWidth="1" />
           <text x="0" y="2" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#86efac">Trap Sequence</text>
-          <text x="0" y="18" textAnchor="middle" fontSize="9" className="fill-slate-300">Nectar lure → Land on rim → Hydroplane → Slide on wax → Fall into acid pool → Digested</text>
+          <text x="0" y="18" textAnchor="middle" fontSize="9" className="fill-gray-600 dark:fill-slate-300">Nectar lure → Land on rim → Hydroplane → Slide on wax → Fall into acid pool → Digested</text>
         </g>
       </svg>
     </div>

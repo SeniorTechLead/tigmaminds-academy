@@ -128,7 +128,7 @@ export default function MeanMedianModeDiagram() {
               y={lineY + 18}
               textAnchor="middle"
               fontSize={10}
-              fill="#94a3b8"
+              className="fill-gray-500 dark:fill-slate-400"
             >
               {v}
             </text>
@@ -184,7 +184,7 @@ export default function MeanMedianModeDiagram() {
           y={210}
           textAnchor="middle"
           fontSize={11}
-          fill="#cbd5e1"
+          className="fill-gray-600 dark:fill-slate-300"
         >
           {withOutlier
             ? 'The outlier (5) drags the mean left — median barely moves!'

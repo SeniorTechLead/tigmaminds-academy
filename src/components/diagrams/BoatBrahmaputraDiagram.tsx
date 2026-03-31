@@ -21,7 +21,7 @@ export default function BoatBrahmaputraDiagram() {
         `}</style>
 
         {/* Background */}
-        <rect width="630" height="480" rx="8" className="fill-slate-900" />
+        <rect width="630" height="480" rx="8" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}
         <text x="315" y="28" textAnchor="middle" className="title fill-amber-300">

@@ -7,7 +7,7 @@ export default function LeopardConservationDiagram() {
         role="img"
         aria-label="Conservation technology diagram showing habitat fragmentation and how wildlife corridors, GPS tracking, and camera traps help protect clouded leopards"
       >
-        <rect x="0" y="0" width="600" height="460" className="fill-slate-900" rx="8" />
+        <rect x="0" y="0" width="600" height="460" className="fill-white dark:fill-slate-900" rx="8" />
 
         {/* Title */}
         <text x="300" y="26" textAnchor="middle" fontSize="13" className="fill-gray-200" fontWeight="700">
@@ -28,7 +28,7 @@ export default function LeopardConservationDiagram() {
           <g key={i}>
             <rect x={f.x} y={f.y} width={f.w} height={f.h} rx="8" className="fill-emerald-800/50" stroke="#059669" strokeWidth="1.5" />
             <text x={f.x + f.w / 2} y={f.y + 18} textAnchor="middle" fontSize="10" className="fill-emerald-300" fontWeight="600">{f.label}</text>
-            <text x={f.x + f.w / 2} y={f.y + 32} textAnchor="middle" fontSize="9" className="fill-gray-400">{f.pop}</text>
+            <text x={f.x + f.w / 2} y={f.y + 32} textAnchor="middle" fontSize="9" className="fill-gray-500 dark:fill-gray-400">{f.pop}</text>
             {/* Leopard dots */}
             {Array.from({ length: parseInt(f.pop) }).map((_, j) => (
               <circle key={j} cx={f.x + 25 + j * 22} cy={f.y + f.h - 22} r="6" className="fill-amber-500/70" />
@@ -83,7 +83,7 @@ export default function LeopardConservationDiagram() {
             <text x={panel.x + 65} y={panel.y + 20} textAnchor="middle" fontSize="16">{panel.icon}</text>
             <text x={panel.x + 65} y={panel.y + 38} textAnchor="middle" fontSize="10" className="fill-sky-300" fontWeight="600">{panel.title}</text>
             {panel.lines.map((line, j) => (
-              <text key={j} x={panel.x + 65} y={panel.y + 54 + j * 14} textAnchor="middle" fontSize="9" className="fill-gray-400">
+              <text key={j} x={panel.x + 65} y={panel.y + 54 + j * 14} textAnchor="middle" fontSize="9" className="fill-gray-500 dark:fill-gray-400">
                 {line}
               </text>
             ))}

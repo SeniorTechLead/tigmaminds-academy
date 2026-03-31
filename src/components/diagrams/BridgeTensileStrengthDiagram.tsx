@@ -63,7 +63,7 @@ export default function BridgeTensileStrengthDiagram() {
         <text x="255" y="220" className="small fill-amber-400">Phloem (sugar transport)</text>
 
         {/* Lignin callout */}
-        <rect x="40" y="268" width="260" height="38" rx="4" fill="#1e293b" stroke="#475569" strokeWidth="1" />
+        <rect x="40" y="268" width="260" height="38" rx="4" className="fill-gray-100 dark:fill-slate-800 stroke-gray-300 dark:stroke-slate-600"  strokeWidth="1" />
         <text x="50" y="284" className="small fill-emerald-300" fontWeight="600">Lignin</text>
         <text x="95" y="284" className="small fill-slate-300">= rigid polymer reinforcing xylem walls</text>
         <text x="50" y="298" className="small fill-slate-400">Same molecule that makes wood hard and strong</text>
@@ -74,15 +74,15 @@ export default function BridgeTensileStrengthDiagram() {
         </text>
 
         {/* Chart area */}
-        <line x1="420" y1="75" x2="420" y2="260" stroke="#475569" strokeWidth="1" />
-        <line x1="420" y1="260" x2="650" y2="260" stroke="#475569" strokeWidth="1" />
+        <line x1="420" y1="75" x2="420" y2="260" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1" />
+        <line x1="420" y1="260" x2="650" y2="260" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1" />
 
         {/* Scale marks */}
         {[0, 100, 200, 300, 400, 500].map((v, i) => {
           const y = 260 - (v / 500) * 180;
           return (
             <g key={i}>
-              <line x1="415" y1={y} x2="420" y2={y} stroke="#475569" strokeWidth="1" />
+              <line x1="415" y1={y} x2="420" y2={y} className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1" />
               <text x="410" y={y + 4} textAnchor="end" className="small fill-slate-500">{v}</text>
             </g>
           );
@@ -101,7 +101,7 @@ export default function BridgeTensileStrengthDiagram() {
         <text x="510" y="290" textAnchor="middle" className="small fill-amber-400">~100</text>
 
         {/* Steel: 400 MPa */}
-        <rect x="545" y={260 - (400 / 500) * 180} width="40" height={(400 / 500) * 180} rx="3" fill="#64748b" opacity="0.7" />
+        <rect x="545" y={260 - (400 / 500) * 180} width="40" height={(400 / 500) * 180} rx="3" className="fill-gray-400 dark:fill-slate-500" opacity="0.7" />
         <text x="565" y="278" textAnchor="middle" className="small fill-slate-300">Steel</text>
         <text x="565" y="290" textAnchor="middle" className="small fill-slate-400">~400</text>
 
@@ -111,7 +111,7 @@ export default function BridgeTensileStrengthDiagram() {
         <text x="620" y="290" textAnchor="middle" className="small fill-purple-400">~500</text>
 
         {/* --- BOTTOM: The key insight --- */}
-        <rect x="30" y="320" width="640" height="140" rx="6" fill="#1e293b" stroke="#475569" strokeWidth="1" />
+        <rect x="30" y="320" width="640" height="140" rx="6" className="fill-gray-100 dark:fill-slate-800 stroke-gray-300 dark:stroke-slate-600"  strokeWidth="1" />
 
         <text x="350" y="342" textAnchor="middle" className="label fill-emerald-300" fontWeight="600">
           The Root Bridge Advantage: Self-Reinforcement
@@ -119,7 +119,7 @@ export default function BridgeTensileStrengthDiagram() {
 
         {/* Steel cable - static */}
         <g transform="translate(80, 365)">
-          <rect x="0" y="0" width="220" height="8" rx="2" fill="#64748b" />
+          <rect x="0" y="0" width="220" height="8" rx="2" className="fill-gray-400 dark:fill-slate-500" />
           {/* Force arrows */}
           <polygon points="-15,4 0,0 0,8" fill="#ef4444" />
           <polygon points="235,4 220,0 220,8" fill="#ef4444" />

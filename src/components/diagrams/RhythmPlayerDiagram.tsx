@@ -223,7 +223,7 @@ export default function RhythmPlayerDiagram() {
           x={w / 2}
           y={beatY + 52}
           textAnchor="middle"
-          fill="#d1d5db"
+          className="fill-gray-400 dark:fill-gray-400"
           fontSize="13"
           fontWeight="600"
           fontFamily="monospace"
@@ -291,10 +291,10 @@ export default function RhythmPlayerDiagram() {
             </g>
           );
         })}
-        <text x={w / 2 - 110} y={beatY + 127} textAnchor="end" fill="#6b7280" fontSize="9">Speed:</text>
+        <text x={w / 2 - 110} y={beatY + 127} textAnchor="end" className="fill-gray-500 dark:fill-gray-500" fontSize="9">Speed:</text>
 
         {/* Bottom note */}
-        <text x={w / 2} y={h - 2} textAnchor="middle" fill="#6b7280" fontSize="10">
+        <text x={w / 2} y={h - 2} textAnchor="middle" className="fill-gray-500 dark:fill-gray-500" fontSize="10">
           Same counting rule, two materials: bamboo strips become sound beats
         </text>
       </svg>

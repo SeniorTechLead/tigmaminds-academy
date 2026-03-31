@@ -48,7 +48,7 @@ export default function TessellationMandala() {
           .big { font-family: system-ui, sans-serif; font-size: 13px; font-weight: 600; }
         `}</style>
 
-        <rect width="670" height="430" rx="8" className="fill-slate-900" />
+        <rect width="670" height="430" rx="8" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}
         <text x="335" y="30" textAnchor="middle" className="title fill-amber-300">

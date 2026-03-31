@@ -7,7 +7,7 @@ export default function HornbillKeystoneDiagram() {
 
         {/* Central hornbill icon */}
         <g transform="translate(260, 120)">
-          <circle cx="0" cy="0" r="40" fill="#1e293b" stroke="#f59e0b" strokeWidth="2.5" />
+          <circle cx="0" cy="0" r="40" className="fill-gray-100 dark:fill-slate-800" stroke="#f59e0b" strokeWidth="2.5" />
           {/* Simplified hornbill */}
           <ellipse cx="0" cy="5" rx="15" ry="20" fill="#1c1917" />
           <circle cx="-3" cy="-10" r="8" fill="#4a3728" />
@@ -60,7 +60,7 @@ export default function HornbillKeystoneDiagram() {
         </g>
 
         {/* BOTTOM HALF: What happens without hornbills */}
-        <line x1="20" y1="310" x2="500" y2="310" stroke="#475569" strokeWidth="1" strokeDasharray="4,3" />
+        <line x1="20" y1="310" x2="500" y2="310" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1" strokeDasharray="4,3" />
         <text x="260" y="330" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#ef4444">If Hornbills Disappear ↓</text>
 
         {/* Cascade chain */}

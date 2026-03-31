@@ -52,7 +52,7 @@ export default function HornbillCasqueDiagram() {
 
         {/* Zoom-in: cross-section detail */}
         <g transform="translate(370, 120)">
-          <rect x="-55" y="-25" width="110" height="130" rx="8" fill="#1e293b" stroke="#475569" strokeWidth="1" />
+          <rect x="-55" y="-25" width="110" height="130" rx="8" className="fill-gray-100 dark:fill-slate-800 stroke-gray-300 dark:stroke-slate-600"  strokeWidth="1" />
           <text x="0" y="-10" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#fbbf24">Cross-Section</text>
 
           {/* Outer keratin shell */}
@@ -75,8 +75,8 @@ export default function HornbillCasqueDiagram() {
           ))}
 
           {/* Labels */}
-          <text x="0" y="88" textAnchor="middle" fontSize="7" fill="#94a3b8">Thin outer shell</text>
-          <text x="0" y="97" textAnchor="middle" fontSize="7" fill="#94a3b8">+ hollow honeycomb core</text>
+          <text x="0" y="88" textAnchor="middle" fontSize="7" className="fill-gray-500 dark:fill-slate-400">Thin outer shell</text>
+          <text x="0" y="97" textAnchor="middle" fontSize="7" className="fill-gray-500 dark:fill-slate-400">+ hollow honeycomb core</text>
         </g>
 
         {/* Leader lines and labels */}

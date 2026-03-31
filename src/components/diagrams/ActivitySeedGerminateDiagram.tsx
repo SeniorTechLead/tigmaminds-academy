@@ -2,12 +2,12 @@ export default function ActivitySeedGerminateDiagram() {
   return (
     <div className="my-4">
       <svg viewBox="0 0 520 360" className="w-full max-w-lg mx-auto" role="img" aria-label="Home seed germination experiment: compare storage conditions">
-        <rect width="520" height="360" rx="12" className="fill-slate-900" />
+        <rect width="520" height="360" rx="12" className="fill-white dark:fill-slate-900" />
 
         <text x="260" y="28" textAnchor="middle" className="fill-lime-400" fontSize="14" fontWeight="bold">Activity: Seed Germination Experiment</text>
 
         {/* Materials section */}
-        <text x="260" y="52" textAnchor="middle" className="fill-slate-400" fontSize="10">You need: 30 seeds (mustard, bean, or chilli) • cotton wool • 3 containers • water</text>
+        <text x="260" y="52" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="10">You need: 30 seeds (mustard, bean, or chilli) • cotton wool • 3 containers • water</text>
 
         {/* Three experimental conditions */}
         {/* Condition A: Room temp, damp */}
@@ -68,9 +68,9 @@ export default function ActivitySeedGerminateDiagram() {
 
         {/* Table */}
         <rect x="40" y="225" width="440" height="22" rx="4" className="fill-slate-700" />
-        <text x="145" y="240" textAnchor="middle" className="fill-slate-300" fontSize="10" fontWeight="bold">Condition</text>
-        <text x="295" y="240" textAnchor="middle" className="fill-slate-300" fontSize="10" fontWeight="bold">Sprouted / 10</text>
-        <text x="420" y="240" textAnchor="middle" className="fill-slate-300" fontSize="10" fontWeight="bold">Rate (%)</text>
+        <text x="145" y="240" textAnchor="middle" className="fill-gray-600 dark:fill-slate-300" fontSize="10" fontWeight="bold">Condition</text>
+        <text x="295" y="240" textAnchor="middle" className="fill-gray-600 dark:fill-slate-300" fontSize="10" fontWeight="bold">Sprouted / 10</text>
+        <text x="420" y="240" textAnchor="middle" className="fill-gray-600 dark:fill-slate-300" fontSize="10" fontWeight="bold">Rate (%)</text>
 
         {/* Row A */}
         <rect x="40" y="249" width="440" height="22" rx="0" className="fill-emerald-900/20" />

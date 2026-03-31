@@ -29,7 +29,7 @@ export default function ActivityPrismDiagram() {
         {/* Water level */}
         <rect x="202" y="130" width="56" height="68" rx={2} fill="rgba(56,189,248,0.15)" />
         <text x="230" y="178" textAnchor="middle" fontSize="10" fill="#38bdf8">Water</text>
-        <text x="230" y="215" textAnchor="middle" fontSize="10" fill="#9ca3af">Glass</text>
+        <text x="230" y="215" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-gray-400">Glass</text>
 
         {/* Refracted rainbow exiting */}
         {[
@@ -51,8 +51,8 @@ export default function ActivityPrismDiagram() {
 
         {/* White wall/paper */}
         <rect x="440" y="70" width="12" height="150" rx={3} fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" strokeWidth={1} />
-        <text x="470" y="145" fontSize="10" fill="#d1d5db" textAnchor="start">White</text>
-        <text x="470" y="158" fontSize="10" fill="#d1d5db" textAnchor="start">paper</text>
+        <text x="470" y="145" fontSize="10" className="fill-gray-400 dark:fill-gray-400" textAnchor="start">White</text>
+        <text x="470" y="158" fontSize="10" className="fill-gray-400 dark:fill-gray-400" textAnchor="start">paper</text>
 
         {/* Rainbow on paper */}
         {[
@@ -76,7 +76,7 @@ export default function ActivityPrismDiagram() {
           <g key={i}>
             <circle cx="45" cy={step.y} r="10" fill="rgba(251,191,36,0.15)" stroke="#fbbf24" strokeWidth={1} />
             <text x="45" y={step.y + 4} textAnchor="middle" fontSize="10" fontWeight="700" fill="#fbbf24">{step.n}</text>
-            <text x="65" y={step.y + 4} fontSize="11" fill="#d1d5db">{step.text}</text>
+            <text x="65" y={step.y + 4} fontSize="11" className="fill-gray-400 dark:fill-gray-400">{step.text}</text>
           </g>
         ))}
 

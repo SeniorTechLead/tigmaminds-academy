@@ -12,7 +12,7 @@ export default function MountainWeatherDiagram() {
         role="img"
         aria-label="Orographic lifting diagram showing wind hitting a mountain, forming clouds and rain on the windward side, and dry air descending on the leeward side"
       >
-        <rect x="0" y="0" width="600" height="400" className="fill-slate-900" rx="8" />
+        <rect x="0" y="0" width="600" height="400" className="fill-white dark:fill-slate-900" rx="8" />
 
         {/* Title */}
         <text x="300" y="24" textAnchor="middle" fontSize="12" className="fill-gray-200" fontWeight="700">
@@ -82,7 +82,7 @@ export default function MountainWeatherDiagram() {
         ].map((c, i) => (
           <ellipse key={i} cx={c.cx} cy={c.cy} rx={c.rx} ry={c.ry} className="fill-gray-300/40" />
         ))}
-        <text x="190" y="68" textAnchor="middle" fontSize="8" className="fill-gray-300" fontWeight="600">
+        <text x="190" y="68" textAnchor="middle" fontSize="8" className="fill-gray-600 dark:fill-gray-300" fontWeight="600">
           Clouds form
         </text>
 
@@ -157,8 +157,8 @@ export default function MountainWeatherDiagram() {
         </text>
 
         {/* Insight bar */}
-        <rect x="40" y="372" width="520" height="22" rx="4" className="fill-slate-800" />
-        <text x="300" y="387" textAnchor="middle" fontSize="9" className="fill-gray-300" fontWeight="600">
+        <rect x="40" y="372" width="520" height="22" rx="4" className="fill-gray-100 dark:fill-slate-800" />
+        <text x="300" y="387" textAnchor="middle" fontSize="9" className="fill-gray-600 dark:fill-gray-300" fontWeight="600">
           Mountains force air up → cooling → clouds + rain on one side, dry on the other
         </text>
       </svg>

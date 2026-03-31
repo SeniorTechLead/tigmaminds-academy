@@ -44,7 +44,7 @@ export default function TransformerAttentionDiagram() {
   const maxWeight = Math.max(...weights);
 
   return (
-    <div className="w-full max-w-xl mx-auto">
+    <div className="dark:text-inherit w-full max-w-xl mx-auto">
       <svg
         viewBox="0 0 588 441"
         className="w-full h-auto"

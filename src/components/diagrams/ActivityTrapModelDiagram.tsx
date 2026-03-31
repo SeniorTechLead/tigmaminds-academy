@@ -48,13 +48,13 @@ export default function ActivityTrapModelDiagram() {
 
           {/* Data table */}
           <g transform="translate(180, -5)">
-            <rect x="0" y="0" width="300" height="70" rx="4" className="fill-slate-800" stroke="#475569" strokeWidth="1" />
+            <rect x="0" y="0" width="300" height="70" rx="4" className="fill-slate-800 stroke-gray-300 dark:stroke-slate-600"  strokeWidth="1" />
             {/* Headers */}
             <text x="10" y="18" fontSize="9" fontWeight="bold" fill="#fbbf24">Cone</text>
             <text x="80" y="18" fontSize="9" fontWeight="bold" fill="#fbbf24">Dry</text>
             <text x="150" y="18" fontSize="9" fontWeight="bold" fill="#fbbf24">Oily</text>
             <text x="220" y="18" fontSize="9" fontWeight="bold" fill="#fbbf24">Oily+Wet</text>
-            <line x1="0" y1="24" x2="300" y2="24" stroke="#475569" strokeWidth="0.5" />
+            <line x1="0" y1="24" x2="300" y2="24" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="0.5" />
             {/* Rows */}
             {['Narrow', 'Medium', 'Wide'].map((label, r) => (
               <g key={r}>

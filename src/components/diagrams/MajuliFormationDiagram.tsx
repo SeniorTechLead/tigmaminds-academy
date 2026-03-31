@@ -12,13 +12,13 @@ export default function MajuliFormationDiagram() {
           </marker>
         </defs>
 
-        <rect width="580" height="440" rx="12" className="fill-slate-900" />
+        <rect width="580" height="440" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}
         <text x="290" y="26" textAnchor="middle" className="fill-amber-400" fontSize="14" fontWeight="bold">How Majuli Was Born: River Avulsion</text>
 
         {/* Stage 1: Original channels */}
-        <rect x="20" y="42" width="540" height="110" rx="8" className="fill-slate-800" />
+        <rect x="20" y="42" width="540" height="110" rx="8" className="fill-gray-100 dark:fill-slate-800" />
         <text x="40" y="62" className="fill-sky-300" fontSize="12" fontWeight="bold">Stage 1: Two Separate Channels</text>
 
         {/* Land between rivers */}
@@ -36,12 +36,12 @@ export default function MajuliFormationDiagram() {
         <path d="M 440,141 L 460,141" fill="none" className="stroke-sky-400" strokeWidth="1.5" markerEnd="url(#majFarrow)" />
 
         {/* Stage 2: Brahmaputra shifts south */}
-        <rect x="20" y="162" width="540" height="120" rx="8" className="fill-slate-800" />
+        <rect x="20" y="162" width="540" height="120" rx="8" className="fill-gray-100 dark:fill-slate-800" />
         <text x="40" y="182" className="fill-sky-300" fontSize="12" fontWeight="bold">Stage 2: Brahmaputra Shifts South (Avulsion)</text>
 
         {/* Old channel fading */}
         <path d="M 40,195 Q 200,188 350,192 Q 450,196 560,190" fill="none" className="stroke-blue-800" strokeWidth="6" strokeDasharray="8,6" opacity="0.4" />
-        <text x="430" y="205" className="fill-slate-500" fontSize="9">Old channel (drying up)</text>
+        <text x="430" y="205" className="fill-gray-400 dark:fill-slate-500" fontSize="9">Old channel (drying up)</text>
 
         {/* Land becoming island */}
         <rect x="60" y="200" width="480" height="40" rx="4" className="fill-emerald-800" opacity="0.6" />
@@ -59,7 +59,7 @@ export default function MajuliFormationDiagram() {
         <text x="325" y="222" className="fill-amber-400" fontSize="9">River shifts</text>
 
         {/* Stage 3: Island formed */}
-        <rect x="20" y="292" width="540" height="140" rx="8" className="fill-slate-800" />
+        <rect x="20" y="292" width="540" height="140" rx="8" className="fill-gray-100 dark:fill-slate-800" />
         <text x="40" y="312" className="fill-sky-300" fontSize="12" fontWeight="bold">Stage 3: Majuli Island Formed</text>
 
         {/* North channel */}
@@ -85,7 +85,7 @@ export default function MajuliFormationDiagram() {
         <text x="480" y="420" className="fill-sky-200" fontSize="9">Main Brahmaputra</text>
 
         {/* Key insight */}
-        <text x="290" y="435" textAnchor="middle" className="fill-slate-400" fontSize="10">The river flowed around the land instead of through it — creating an island by indecision.</text>
+        <text x="290" y="435" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="10">The river flowed around the land instead of through it — creating an island by indecision.</text>
       </svg>
     </div>
   );

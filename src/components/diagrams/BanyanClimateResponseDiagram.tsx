@@ -47,14 +47,14 @@ export default function BanyanClimateResponseDiagram() {
   return (
     <div className="my-4">
       <svg viewBox="0 0 590 450" className="w-full max-w-lg mx-auto" role="img" aria-label="Climate reconstruction from tree rings showing ring width correlations with temperature and rainfall">
-        <rect width="500" height="420" rx="12" className="fill-slate-900" />
+        <rect width="500" height="420" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}
         <text x="250" y="28" textAnchor="middle" className="fill-amber-400" fontSize="14" fontWeight="bold">Climate Reconstruction from Tree Rings</text>
-        <text x="250" y="44" textAnchor="middle" className="fill-slate-400" fontSize="10">Ring width tracks temperature &amp; rainfall — a record of past climate</text>
+        <text x="250" y="44" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="10">Ring width tracks temperature &amp; rainfall — a record of past climate</text>
 
         {/* === TOP CHART: Ring width vs Temperature === */}
-        <text x={chartL} y={topY - 5} className="fill-slate-400" fontSize="9" fontWeight="bold">Ring Width vs Temperature</text>
+        <text x={chartL} y={topY - 5} className="fill-gray-500 dark:fill-slate-400" fontSize="9" fontWeight="bold">Ring Width vs Temperature</text>
 
         {/* Axes */}
         <line x1={chartL} y1={topY + topH} x2={chartR} y2={topY + topH} className="stroke-slate-600" strokeWidth="1" />
@@ -83,7 +83,7 @@ export default function BanyanClimateResponseDiagram() {
         <text x="460" y={topY + 53} textAnchor="middle" className="fill-green-300" fontSize="7" fontWeight="bold">r = 0.82</text>
 
         {/* === BOTTOM CHART: Ring width vs Rainfall === */}
-        <text x={chartL} y={botY - 5} className="fill-slate-400" fontSize="9" fontWeight="bold">Ring Width vs Rainfall</text>
+        <text x={chartL} y={botY - 5} className="fill-gray-500 dark:fill-slate-400" fontSize="9" fontWeight="bold">Ring Width vs Rainfall</text>
 
         {/* Axes */}
         <line x1={chartL} y1={botY + botH} x2={chartR} y2={botY + botH} className="stroke-slate-600" strokeWidth="1" />
@@ -113,7 +113,7 @@ export default function BanyanClimateResponseDiagram() {
 
         {/* X axis labels (shared) */}
         {[0, 4, 9, 14].map(i => (
-          <text key={i} x={xPos(i)} y={botY + botH + 14} textAnchor="middle" className="fill-slate-400" fontSize="8">{years[i]}</text>
+          <text key={i} x={xPos(i)} y={botY + botH + 14} textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="8">{years[i]}</text>
         ))}
 
         {/* Drought highlight */}
@@ -124,7 +124,7 @@ export default function BanyanClimateResponseDiagram() {
         {/* Bottom summary */}
         <rect x="50" y="370" width="400" height="38" rx="8" className="fill-green-900" opacity="0.5" />
         <text x="250" y="386" textAnchor="middle" className="fill-green-300" fontSize="9" fontWeight="bold">Trees are living climate recorders</text>
-        <text x="250" y="400" textAnchor="middle" className="fill-slate-400" fontSize="8">Ring patterns from ancient banyans reveal centuries of monsoon, drought, and temperature history</text>
+        <text x="250" y="400" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="8">Ring patterns from ancient banyans reveal centuries of monsoon, drought, and temperature history</text>
       </svg>
     </div>
   );

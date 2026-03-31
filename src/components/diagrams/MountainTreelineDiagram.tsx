@@ -9,7 +9,7 @@ export default function MountainTreelineDiagram() {
         role="img"
         aria-label="Diagram showing why trees stop growing at the treeline due to temperature, wind, and a short growing season"
       >
-        <rect x="0" y="0" width="600" height="400" className="fill-slate-900" rx="8" />
+        <rect x="0" y="0" width="600" height="400" className="fill-white dark:fill-slate-900" rx="8" />
 
         {/* Title */}
         <text x="300" y="26" textAnchor="middle" fontSize="12" className="fill-gray-200" fontWeight="700">
@@ -84,12 +84,12 @@ export default function MountainTreelineDiagram() {
         <text x="475" y="232" fontSize="7" className="fill-green-400/80" fontStyle="italic">
           Krummholz
         </text>
-        <text x="475" y="242" fontSize="7" className="fill-gray-400">
+        <text x="475" y="242" fontSize="7" className="fill-gray-500 dark:fill-gray-400">
           (stunted, wind-bent)
         </text>
 
         {/* ABOVE TREELINE — bare */}
-        <text x="380" y="165" fontSize="8" className="fill-gray-400" fontWeight="600">
+        <text x="380" y="165" fontSize="8" className="fill-gray-500 dark:fill-gray-400" fontWeight="600">
           No trees above
         </text>
 
@@ -122,7 +122,7 @@ export default function MountainTreelineDiagram() {
             { icon: "📅", text: "Growing season too short (<3 months)", color: "fill-amber-300" },
           ].map((r, i) => (
             <g key={i} transform={`translate(${i * 180}, 0)`}>
-              <rect x="0" y="0" width="165" height="18" rx="3" className="fill-slate-800" />
+              <rect x="0" y="0" width="165" height="18" rx="3" className="fill-gray-100 dark:fill-slate-800" />
               <text x="8" y="13" fontSize="8" className={r.color} fontWeight="600">
                 {r.text}
               </text>

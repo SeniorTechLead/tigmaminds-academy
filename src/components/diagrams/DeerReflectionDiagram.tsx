@@ -9,7 +9,7 @@ export default function DeerReflectionDiagram() {
         <text x="155" y="24" textAnchor="middle" fontSize="13" fontWeight="700" fill="#fbbf24">
           Specular (Mirror)
         </text>
-        <text x="155" y="40" textAnchor="middle" fontSize="10" fill="#9ca3af">
+        <text x="155" y="40" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-gray-400">
           Smooth surface — one direction
         </text>
 
@@ -19,12 +19,12 @@ export default function DeerReflectionDiagram() {
 
         {/* Normal line */}
         <line x1="155" y1="110" x2="155" y2="180" stroke="rgba(255,255,255,0.25)" strokeWidth={1} strokeDasharray="4,3" />
-        <text x="162" y="120" fontSize="10" fill="#6b7280">normal</text>
+        <text x="162" y="120" fontSize="10" className="fill-gray-500 dark:fill-gray-500">normal</text>
 
         {/* Incident ray */}
         <line x1="80" y1="70" x2="155" y2="180" stroke="white" strokeWidth={2.5} opacity={0.8} />
-        <polygon points="80,70 88,78 76,80" fill="white" opacity={0.8} />
-        <text x="86" y="115" fontSize="10" fill="white" transform="rotate(-45,86,115)">incoming</text>
+        <polygon points="80,70 88,78 76,80" className="fill-gray-900 dark:fill-white" opacity={0.8} />
+        <text x="86" y="115" fontSize="10" className="fill-gray-900 dark:fill-white" transform="rotate(-45,86,115)">incoming</text>
 
         {/* Reflected ray */}
         <line x1="155" y1="180" x2="230" y2="70" stroke="#fbbf24" strokeWidth={2.5} />
@@ -33,7 +33,7 @@ export default function DeerReflectionDiagram() {
 
         {/* Angle arcs */}
         <path d="M155,155 Q140,160 133,170" fill="none" stroke="white" strokeWidth={1} opacity={0.5} />
-        <text x="125" y="160" fontSize="10" fill="white" opacity={0.6}>θᵢ</text>
+        <text x="125" y="160" fontSize="10" className="fill-gray-900 dark:fill-white" opacity={0.6}>θᵢ</text>
         <path d="M155,155 Q170,160 177,170" fill="none" stroke="#fbbf24" strokeWidth={1} opacity={0.5} />
         <text x="178" y="160" fontSize="10" fill="#fbbf24" opacity={0.6}>θᵣ</text>
 
@@ -47,7 +47,7 @@ export default function DeerReflectionDiagram() {
         <text x="465" y="24" textAnchor="middle" fontSize="13" fontWeight="700" fill="#a78bfa">
           Diffuse (Matte)
         </text>
-        <text x="465" y="40" textAnchor="middle" fontSize="10" fill="#9ca3af">
+        <text x="465" y="40" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-gray-400">
           Rough surface — many directions
         </text>
 
@@ -58,7 +58,7 @@ export default function DeerReflectionDiagram() {
 
         {/* Incoming ray */}
         <line x1="390" y1="70" x2="465" y2="180" stroke="white" strokeWidth={2.5} opacity={0.8} />
-        <polygon points="390,70 398,78 386,80" fill="white" opacity={0.8} />
+        <polygon points="390,70 398,78 386,80" className="fill-gray-900 dark:fill-white" opacity={0.8} />
 
         {/* Scattered reflected rays */}
         {[

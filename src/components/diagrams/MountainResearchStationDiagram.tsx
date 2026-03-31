@@ -7,7 +7,7 @@ export default function MountainResearchStationDiagram() {
         role="img"
         aria-label="High-altitude research station at 4000 metres with solar panels, weather instruments, and satellite dish sending data to a laptop"
       >
-        <rect x="0" y="0" width="600" height="400" className="fill-slate-900" rx="8" />
+        <rect x="0" y="0" width="600" height="400" className="fill-white dark:fill-slate-900" rx="8" />
 
         {/* Title */}
         <text x="300" y="26" textAnchor="middle" fontSize="12" className="fill-gray-200" fontWeight="700">
@@ -79,19 +79,19 @@ export default function MountainResearchStationDiagram() {
           <g transform="translate(0, -28)">
             <line x1="-10" y1="0" x2="10" y2="0" className="stroke-gray-300" strokeWidth="1.5" />
             <line x1="0" y1="-10" x2="0" y2="10" className="stroke-gray-300" strokeWidth="1.5" />
-            <circle cx="-10" cy="0" r="3" className="fill-gray-400" />
-            <circle cx="10" cy="0" r="3" className="fill-gray-400" />
-            <circle cx="0" cy="-10" r="3" className="fill-gray-400" />
-            <circle cx="0" cy="10" r="3" className="fill-gray-400" />
+            <circle cx="-10" cy="0" r="3" className="fill-gray-500 dark:fill-gray-400" />
+            <circle cx="10" cy="0" r="3" className="fill-gray-500 dark:fill-gray-400" />
+            <circle cx="0" cy="-10" r="3" className="fill-gray-500 dark:fill-gray-400" />
+            <circle cx="0" cy="10" r="3" className="fill-gray-500 dark:fill-gray-400" />
           </g>
           {/* Wind vane */}
           <polygon points="8,-12 15,-15 8,-18" className="fill-amber-400/60" />
           {/* Temperature sensor */}
           <rect x="4" y="-5" width="6" height="14" rx="2" className="fill-white/30 stroke-gray-300" strokeWidth="0.5" />
-          <text x="20" y="-20" fontSize="7" className="fill-gray-300">
+          <text x="20" y="-20" fontSize="7" className="fill-gray-600 dark:fill-gray-300">
             Anemometer
           </text>
-          <text x="20" y="-10" fontSize="7" className="fill-gray-300">
+          <text x="20" y="-10" fontSize="7" className="fill-gray-600 dark:fill-gray-300">
             Temp sensor
           </text>
         </g>
@@ -102,7 +102,7 @@ export default function MountainResearchStationDiagram() {
           <line x1="0" y1="15" x2="0" y2="-5" className="stroke-gray-400" strokeWidth="2" />
           {/* Dish */}
           <path d="M-12,-5 Q0,-18 12,-5" fill="none" className="stroke-gray-300" strokeWidth="2" />
-          <circle cx="0" cy="-8" r="2" className="fill-gray-300" />
+          <circle cx="0" cy="-8" r="2" className="fill-gray-600 dark:fill-gray-300" />
         </g>
 
         {/* ── Signal waves to satellite ── */}
@@ -125,10 +125,10 @@ export default function MountainResearchStationDiagram() {
 
         {/* Satellite icon */}
         <g transform="translate(440, 45)">
-          <rect x="-4" y="-3" width="8" height="6" rx="1" className="fill-gray-400" />
+          <rect x="-4" y="-3" width="8" height="6" rx="1" className="fill-gray-500 dark:fill-gray-400" />
           <rect x="-16" y="-2" width="12" height="4" rx="0.5" className="fill-blue-400/50" />
           <rect x="4" y="-2" width="12" height="4" rx="0.5" className="fill-blue-400/50" />
-          <text x="0" y="14" textAnchor="middle" fontSize="7" className="fill-gray-400">
+          <text x="0" y="14" textAnchor="middle" fontSize="7" className="fill-gray-500 dark:fill-gray-400">
             Satellite
           </text>
         </g>
@@ -146,7 +146,7 @@ export default function MountainResearchStationDiagram() {
           <line x1="-14" y1="2" x2="12" y2="2" className="stroke-amber-400/50" strokeWidth="1" />
           {/* Base */}
           <path d="M-24,10 L24,10 L20,14 L-20,14 Z" className="fill-gray-600" />
-          <text x="0" y="28" textAnchor="middle" fontSize="7" className="fill-gray-300" fontWeight="600">
+          <text x="0" y="28" textAnchor="middle" fontSize="7" className="fill-gray-600 dark:fill-gray-300" fontWeight="600">
             Data analysis
           </text>
         </g>
@@ -160,7 +160,7 @@ export default function MountainResearchStationDiagram() {
           ].map((d, i) => (
             <g key={i} transform={`translate(0, ${i * 14})`}>
               <circle cx="-20" cy="0" r="2.5" className={d.color} />
-              <text x="-12" y="3" fontSize="7" className="fill-gray-400">
+              <text x="-12" y="3" fontSize="7" className="fill-gray-500 dark:fill-gray-400">
                 {d.label}
               </text>
             </g>
@@ -190,7 +190,7 @@ export default function MountainResearchStationDiagram() {
         ].map((item, i) => (
           <g key={i}>
             <circle cx={65 + i * 108} cy="379" r="2" className="fill-blue-400" />
-            <text x={72 + i * 108} y="382" fontSize="7.5" className="fill-gray-300">
+            <text x={72 + i * 108} y="382" fontSize="7.5" className="fill-gray-600 dark:fill-gray-300">
               {item}
             </text>
           </g>

@@ -65,10 +65,10 @@ export default function MusicalWavesDiagram() {
       <rect width="600" height="300" rx="12" className="fill-gray-900" />
 
       {/* Title */}
-      <text x="210" y="22" textAnchor="middle" className="fill-gray-400" fontSize="11" fontWeight="600">
+      <text x="210" y="22" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="11" fontWeight="600">
         Tube Length and Pitch
       </text>
-      <text x="470" y="22" textAnchor="middle" className="fill-gray-400" fontSize="11" fontWeight="600">
+      <text x="470" y="22" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="11" fontWeight="600">
         Harmonics
       </text>
 
@@ -127,7 +127,7 @@ export default function MusicalWavesDiagram() {
       <text x={140} y={tubeBottom + 58} textAnchor="middle" className="fill-gray-500" fontSize="9">
         shorter tube = higher pitch
       </text>
-      <path d="M90,{tubeBottom + 44} L80,{tubeBottom + 41} L80,{tubeBottom + 47}Z" fill="#6b7280" />
+      <path d="M90,{tubeBottom + 44} L80,{tubeBottom + 41} L80,{tubeBottom + 47}Z" className="fill-gray-500 dark:fill-gray-500" />
 
       {/* Divider */}
       <line x1="390" y1="30" x2="390" y2="280" stroke="#374151" strokeWidth="1" strokeDasharray="4,4" />
@@ -201,7 +201,7 @@ export default function MusicalWavesDiagram() {
             stroke={h.color}
             strokeWidth="3"
           />
-          <text x="436" y={tubeBottom + 18 + i * 18} className="fill-gray-300" fontSize="10">
+          <text x="436" y={tubeBottom + 18 + i * 18} className="fill-gray-600 dark:fill-gray-300" fontSize="10">
             {h.label}
           </text>
         </g>

@@ -2,7 +2,7 @@ export default function BanyanEcosystemDiagram() {
   return (
     <div className="my-4">
       <svg viewBox="0 0 582 475" className="w-full max-w-lg mx-auto" role="img" aria-label="Banyan tree as an ecosystem showing birds, insects, epiphytes, animals, and mycorrhizal fungi">
-        <rect width="500" height="440" rx="12" className="fill-slate-900" />
+        <rect width="500" height="440" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}
         <text x="250" y="28" textAnchor="middle" className="fill-amber-400" fontSize="14" fontWeight="bold">One Tree = One Ecosystem</text>
@@ -37,7 +37,7 @@ export default function BanyanEcosystemDiagram() {
           <line x1="160" y1="77" x2="155" y2="78" className="stroke-amber-500" strokeWidth="1.5" />
           {/* Nest */}
           <path d="M 180,90 Q 190,100 200,90" className="stroke-amber-600" strokeWidth="2" fill="none" />
-          <circle cx="190" cy="88" r="3" className="fill-slate-300" />
+          <circle cx="190" cy="88" r="3" className="fill-gray-600 dark:fill-slate-300" />
         </g>
         <line x1="175" y1="95" x2="50" y2="60" className="stroke-slate-600" strokeWidth="0.5" />
         <rect x="10" y="48" width="80" height="20" rx="4" className="fill-green-900" />
@@ -100,7 +100,7 @@ export default function BanyanEcosystemDiagram() {
         </g>
         <rect x="175" y="355" width="150" height="22" rx="4" className="fill-amber-900" />
         <text x="250" y="370" textAnchor="middle" className="fill-amber-300" fontSize="8" fontWeight="bold">Mycorrhizal fungi network</text>
-        <text x="250" y="385" textAnchor="middle" className="fill-slate-400" fontSize="8">Fungi trade soil nutrients for tree sugars</text>
+        <text x="250" y="385" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="8">Fungi trade soil nutrients for tree sugars</text>
 
         {/* Species count */}
         <rect x="130" y="400" width="240" height="28" rx="8" className="fill-green-900" opacity="0.7" />

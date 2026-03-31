@@ -26,7 +26,7 @@ export default function BridgeTimelineDiagram() {
 
         {/* --- Timeline phases --- */}
         {/* Main timeline line */}
-        <line x1="50" y1="80" x2="650" y2="80" stroke="#475569" strokeWidth="2" />
+        <line x1="50" y1="80" x2="650" y2="80" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="2" />
 
         {/* Phase markers */}
         {/* Year 0 */}
@@ -50,7 +50,7 @@ export default function BridgeTimelineDiagram() {
         <text x="630" y="70" textAnchor="middle" className="year fill-green-400">500+</text>
 
         {/* Phase 1: Planting (Year 0-5) */}
-        <rect x="55" y="95" width="170" height="95" rx="5" fill="#1e293b" stroke="#f59e0b" strokeWidth="1" opacity="0.8" />
+        <rect x="55" y="95" width="170" height="95" rx="5" className="fill-gray-100 dark:fill-slate-800" stroke="#f59e0b" strokeWidth="1" opacity="0.8" />
         <text x="140" y="112" textAnchor="middle" className="label fill-amber-300" fontWeight="600">Phase 1: Guiding</text>
 
         {/* Simple root sketch */}
@@ -62,7 +62,7 @@ export default function BridgeTimelineDiagram() {
         <text x="140" y="184" textAnchor="middle" className="small fill-amber-400">~1 m/year growth</text>
 
         {/* Phase 2: Crossing (Year 5-15) */}
-        <rect x="205" y="95" width="170" height="95" rx="5" fill="#1e293b" stroke="#84cc16" strokeWidth="1" opacity="0.8" />
+        <rect x="205" y="95" width="170" height="95" rx="5" className="fill-gray-100 dark:fill-slate-800" stroke="#84cc16" strokeWidth="1" opacity="0.8" />
         <text x="290" y="112" textAnchor="middle" className="label fill-lime-300" fontWeight="600">Phase 2: Crossing</text>
 
         {/* Roots reaching far bank */}
@@ -76,7 +76,7 @@ export default function BridgeTimelineDiagram() {
         <text x="290" y="189" textAnchor="middle" className="small fill-lime-400">Inosculation begins</text>
 
         {/* Phase 3: Walkable (Year 15-30) */}
-        <rect x="355" y="95" width="170" height="95" rx="5" fill="#1e293b" stroke="#22c55e" strokeWidth="1" opacity="0.8" />
+        <rect x="355" y="95" width="170" height="95" rx="5" className="fill-gray-100 dark:fill-slate-800" stroke="#22c55e" strokeWidth="1" opacity="0.8" />
         <text x="440" y="112" textAnchor="middle" className="label fill-green-300" fontWeight="600">Phase 3: Walkable</text>
 
         {/* Thicker intertwined roots */}
@@ -94,7 +94,7 @@ export default function BridgeTimelineDiagram() {
         <text x="440" y="189" textAnchor="middle" className="small fill-green-400">Self-repairing begins</text>
 
         {/* Phase 4: Ancient (500+) */}
-        <rect x="530" y="95" width="145" height="95" rx="5" fill="#1e293b" stroke="#16a34a" strokeWidth="1" opacity="0.8" />
+        <rect x="530" y="95" width="145" height="95" rx="5" className="fill-gray-100 dark:fill-slate-800" stroke="#16a34a" strokeWidth="1" opacity="0.8" />
         <text x="602" y="112" textAnchor="middle" className="label fill-green-400" fontWeight="600">Phase 4: Ancient</text>
 
         {/* Dense root mass */}
@@ -107,15 +107,15 @@ export default function BridgeTimelineDiagram() {
         <text x="602" y="189" textAnchor="middle" className="small fill-green-500">Ecosystem on the bridge</text>
 
         {/* --- BOTTOM: Strength over time graph --- */}
-        <rect x="30" y="210" width="640" height="230" rx="6" fill="#1e293b" stroke="#475569" strokeWidth="1" />
+        <rect x="30" y="210" width="640" height="230" rx="6" className="fill-gray-100 dark:fill-slate-800 stroke-gray-300 dark:stroke-slate-600"  strokeWidth="1" />
 
         <text x="350" y="232" textAnchor="middle" className="label fill-amber-300" fontWeight="600">
           Strength Over Time: Root Bridge vs Steel Bridge
         </text>
 
         {/* Axes */}
-        <line x1="90" y1="250" x2="90" y2="410" stroke="#475569" strokeWidth="1" />
-        <line x1="90" y1="410" x2="620" y2="410" stroke="#475569" strokeWidth="1" />
+        <line x1="90" y1="250" x2="90" y2="410" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1" />
+        <line x1="90" y1="410" x2="620" y2="410" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1" />
 
         {/* Y-axis label */}
         <text x="55" y="330" textAnchor="middle" className="small fill-slate-400" transform="rotate(-90 55 330)">Structural Strength</text>
@@ -128,7 +128,7 @@ export default function BridgeTimelineDiagram() {
           [90, '0'], [195, '50'], [300, '100'], [405, '200'], [510, '500'],
         ].map(([x, label], i) => (
           <g key={i}>
-            <line x1={Number(x)} y1={410} x2={Number(x)} y2={415} stroke="#475569" strokeWidth="1" />
+            <line x1={Number(x)} y1={410} x2={Number(x)} y2={415} className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1" />
             <text x={Number(x)} y={425} textAnchor="middle" className="small fill-slate-500">{label}</text>
           </g>
         ))}

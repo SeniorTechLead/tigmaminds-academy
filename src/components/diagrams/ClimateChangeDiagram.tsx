@@ -81,7 +81,7 @@ export default function ClimateChangeDiagram() {
 
         <rect width="540" height="420" rx="8" className="fill-slate-950" />
 
-        <text x="270" y="24" textAnchor="middle" fontSize="14" fontWeight="600" fill="#e2e8f0">
+        <text x="270" y="24" textAnchor="middle" fontSize="14" fontWeight="600" className="fill-gray-700 dark:fill-slate-200">
           Climate Change: The Enhanced Greenhouse Effect
         </text>
 
@@ -156,23 +156,23 @@ export default function ClimateChangeDiagram() {
         <text x="160" y="127" fontSize="10" fill="#c4b5fd">thicker blanket</text>
 
         {/* ===== TEMPERATURE TREND GRAPH ===== */}
-        <rect x="30" y="230" width="480" height="175" rx="6" fill="none" stroke="#475569" strokeWidth="1" />
-        <text x="270" y="250" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#e2e8f0">
+        <rect x="30" y="230" width="480" height="175" rx="6" fill="none" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1" />
+        <text x="270" y="250" textAnchor="middle" fontSize="12" fontWeight="bold" className="fill-gray-700 dark:fill-slate-200">
           Global Temperature Anomaly (1880-2024)
         </text>
 
         {/* Axes */}
-        <line x1="80" y1="265" x2="80" y2="385" stroke="#475569" strokeWidth="1" />
-        <line x1="80" y1="345" x2="480" y2="345" stroke="#475569" strokeWidth="1" strokeDasharray="4,4" />
+        <line x1="80" y1="265" x2="80" y2="385" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1" />
+        <line x1="80" y1="345" x2="480" y2="345" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1" strokeDasharray="4,4" />
         <text x="75" y="280" textAnchor="end" fontSize="10" fill="#fca5a5">+1.2 °C</text>
-        <text x="75" y="348" textAnchor="end" fontSize="10" fill="#64748b">0 °C</text>
+        <text x="75" y="348" textAnchor="end" fontSize="10" className="fill-gray-400 dark:fill-slate-500">0 °C</text>
         <text x="75" y="385" textAnchor="end" fontSize="10" fill="#93c5fd">-0.4 °C</text>
 
         {/* Year labels */}
-        <text x="90" y="398" fontSize="10" fill="#64748b">1880</text>
-        <text x="210" y="398" fontSize="10" fill="#64748b">1940</text>
-        <text x="340" y="398" fontSize="10" fill="#64748b">1980</text>
-        <text x="450" y="398" fontSize="10" fill="#64748b">2024</text>
+        <text x="90" y="398" fontSize="10" className="fill-gray-400 dark:fill-slate-500">1880</text>
+        <text x="210" y="398" fontSize="10" className="fill-gray-400 dark:fill-slate-500">1940</text>
+        <text x="340" y="398" fontSize="10" className="fill-gray-400 dark:fill-slate-500">1980</text>
+        <text x="450" y="398" fontSize="10" className="fill-gray-400 dark:fill-slate-500">2024</text>
 
         {/* Temperature line — self-drawing */}
         <polyline

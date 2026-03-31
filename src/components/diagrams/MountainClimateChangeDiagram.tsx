@@ -9,7 +9,7 @@ export default function MountainClimateChangeDiagram() {
         role="img"
         aria-label="Comparison of glacier retreat between 1980 and 2020, showing smaller glaciers and a rising snowline"
       >
-        <rect x="0" y="0" width="600" height="400" className="fill-slate-900" rx="8" />
+        <rect x="0" y="0" width="600" height="400" className="fill-white dark:fill-slate-900" rx="8" />
 
         {/* Title */}
         <text x="300" y="26" textAnchor="middle" fontSize="12" className="fill-gray-200" fontWeight="700">
@@ -93,7 +93,7 @@ export default function MountainClimateChangeDiagram() {
         {[440, 455, 465, 430, 450, 475, 485, 495].map((x, i) => (
           <circle key={`rock-${i}`} cx={x} cy={170 + (i * 9) % 30} r="2" className="fill-gray-500/40" />
         ))}
-        <text x="470" y="210" textAnchor="middle" fontSize="7" className="fill-gray-400">
+        <text x="470" y="210" textAnchor="middle" fontSize="7" className="fill-gray-500 dark:fill-gray-400">
           Exposed rock
         </text>
 
@@ -132,7 +132,7 @@ export default function MountainClimateChangeDiagram() {
         <text x="55" y={bottom + 38} fontSize="9" className="fill-blue-300" fontWeight="700">
           1980: Large glaciers, lower snowline
         </text>
-        <text x="55" y={bottom + 52} fontSize="8" className="fill-gray-400">
+        <text x="55" y={bottom + 52} fontSize="8" className="fill-gray-500 dark:fill-gray-400">
           Stable ice cover built over centuries
         </text>
 
@@ -140,12 +140,12 @@ export default function MountainClimateChangeDiagram() {
         <text x="325" y={bottom + 38} fontSize="9" className="fill-red-300" fontWeight="700">
           2020: Glaciers shrunk 30-50%
         </text>
-        <text x="325" y={bottom + 52} fontSize="8" className="fill-gray-400">
+        <text x="325" y={bottom + 52} fontSize="8" className="fill-gray-500 dark:fill-gray-400">
           Snowline moved up hundreds of metres
         </text>
 
         {/* Insight */}
-        <rect x="40" y="378" width="520" height="18" rx="3" className="fill-slate-800" />
+        <rect x="40" y="378" width="520" height="18" rx="3" className="fill-gray-100 dark:fill-slate-800" />
         <text x="300" y="390" textAnchor="middle" fontSize="9" className="fill-amber-300" fontWeight="700">
           Mountains warm 2x faster than lowlands — glaciers are disappearing
         </text>

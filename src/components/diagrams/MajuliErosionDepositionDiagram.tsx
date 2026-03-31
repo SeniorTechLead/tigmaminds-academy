@@ -18,7 +18,7 @@ export default function MajuliErosionDepositionDiagram() {
           </marker>
         </defs>
 
-        <rect width="580" height="400" rx="12" className="fill-slate-900" />
+        <rect width="580" height="400" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}
         <text x="290" y="28" textAnchor="middle" className="fill-amber-400" fontSize="14" fontWeight="bold">Erosion and Deposition at a River Bend</text>
@@ -92,9 +92,9 @@ export default function MajuliErosionDepositionDiagram() {
         <text x="250" y="210" textAnchor="middle" className="fill-sky-500" fontSize="10">Slow flow</text>
 
         {/* Explanation box */}
-        <rect x="30" y="350" width="520" height="40" rx="8" className="fill-slate-800" />
-        <text x="290" y="368" textAnchor="middle" className="fill-slate-300" fontSize="11">Fast water on the <tspan className="fill-red-400" fontWeight="bold">outer bank</tspan> erodes the land. Slow water on the</text>
-        <text x="290" y="383" textAnchor="middle" className="fill-slate-300" fontSize="11"><tspan className="fill-emerald-400" fontWeight="bold">inner bank</tspan> drops sediment, building new land. This is how rivers reshape the landscape.</text>
+        <rect x="30" y="350" width="520" height="40" rx="8" className="fill-gray-100 dark:fill-slate-800" />
+        <text x="290" y="368" textAnchor="middle" className="fill-gray-600 dark:fill-slate-300" fontSize="11">Fast water on the <tspan className="fill-red-400" fontWeight="bold">outer bank</tspan> erodes the land. Slow water on the</text>
+        <text x="290" y="383" textAnchor="middle" className="fill-gray-600 dark:fill-slate-300" fontSize="11"><tspan className="fill-emerald-400" fontWeight="bold">inner bank</tspan> drops sediment, building new land. This is how rivers reshape the landscape.</text>
       </svg>
     </div>
   );

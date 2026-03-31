@@ -19,15 +19,15 @@ export default function BanyanCarbonPoolDiagram() {
   return (
     <div className="my-4">
       <svg viewBox="0 0 525 435" className="w-full max-w-lg mx-auto" role="img" aria-label="Forest carbon pools showing above-ground biomass, below-ground biomass, dead wood, litter, and soil organic carbon as a stacked bar chart">
-        <rect width="500" height="400" rx="12" className="fill-slate-900" />
+        <rect width="500" height="400" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}
         <text x="250" y="28" textAnchor="middle" className="fill-amber-400" fontSize="14" fontWeight="bold">Forest Carbon Pools</text>
-        <text x="250" y="44" textAnchor="middle" className="fill-slate-400" fontSize="10">Where carbon is stored in a tropical forest ecosystem</text>
+        <text x="250" y="44" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="10">Where carbon is stored in a tropical forest ecosystem</text>
 
         {/* Y axis */}
         <line x1={chartLeft - 10} y1={chartBottom} x2={chartLeft - 10} y2={chartBottom - maxH - 20} className="stroke-slate-500" strokeWidth="1.5" markerEnd="url(#poolArrow)" />
-        <text x="40" y={(chartBottom + chartBottom - maxH) / 2} textAnchor="middle" className="fill-slate-400" fontSize="9" transform={`rotate(-90, 40, ${(chartBottom + chartBottom - maxH) / 2})`}>tonnes C / hectare</text>
+        <text x="40" y={(chartBottom + chartBottom - maxH) / 2} textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="9" transform={`rotate(-90, 40, ${(chartBottom + chartBottom - maxH) / 2})`}>tonnes C / hectare</text>
 
         {/* Y ticks */}
         {[0, 100, 200, 300, 380].map((v, i) => {
@@ -35,7 +35,7 @@ export default function BanyanCarbonPoolDiagram() {
           return (
             <g key={i}>
               <line x1={chartLeft - 15} y1={y} x2={chartLeft - 10} y2={y} className="stroke-slate-500" strokeWidth="1" />
-              <text x={chartLeft - 18} y={y + 3} textAnchor="end" className="fill-slate-500" fontSize="7">{v}</text>
+              <text x={chartLeft - 18} y={y + 3} textAnchor="end" className="fill-gray-400 dark:fill-slate-500" fontSize="7">{v}</text>
             </g>
           );
         })}
@@ -62,7 +62,7 @@ export default function BanyanCarbonPoolDiagram() {
                   {pool.label.split("\n")[1]}
                 </text>
               )}
-              <text x={chartLeft + barWidth + 30} y={segY + h / 2 + (pool.label.includes("\n") ? 21 : 9)} className="fill-slate-400" fontSize="8">{pool.value} {pool.unit} ({Math.round(pool.value / total * 100)}%)</text>
+              <text x={chartLeft + barWidth + 30} y={segY + h / 2 + (pool.label.includes("\n") ? 21 : 9)} className="fill-gray-500 dark:fill-slate-400" fontSize="8">{pool.value} {pool.unit} ({Math.round(pool.value / total * 100)}%)</text>
             </g>
           );
         })}
@@ -74,7 +74,7 @@ export default function BanyanCarbonPoolDiagram() {
         {/* Visual diagram on right — cross-section */}
         <g transform="translate(310, 70)">
           {/* Air */}
-          <text x="70" y="10" textAnchor="middle" className="fill-slate-500" fontSize="8">atmosphere</text>
+          <text x="70" y="10" textAnchor="middle" className="fill-gray-400 dark:fill-slate-500" fontSize="8">atmosphere</text>
 
           {/* Tree canopy */}
           <ellipse cx="70" cy="50" rx="50" ry="30" className="fill-green-600" opacity="0.5" />
@@ -102,17 +102,17 @@ export default function BanyanCarbonPoolDiagram() {
           {/* Soil */}
           <rect x="10" y="160" width="120" height="50" rx="4" className="fill-amber-950" opacity="0.5" />
           <text x="70" y="185" textAnchor="middle" className="fill-amber-300" fontSize="7" fontWeight="bold">Soil organic C</text>
-          <text x="70" y="198" textAnchor="middle" className="fill-slate-400" fontSize="6">largest hidden pool</text>
+          <text x="70" y="198" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="6">largest hidden pool</text>
         </g>
 
         {/* Key insight */}
         <rect x="60" y="355" width="380" height="35" rx="8" className="fill-green-900" opacity="0.5" />
         <text x="250" y="372" textAnchor="middle" className="fill-green-300" fontSize="9" fontWeight="bold">Soil holds ~32% of forest carbon — often overlooked</text>
-        <text x="250" y="385" textAnchor="middle" className="fill-slate-400" fontSize="8">Protecting old forests means protecting both trees AND soil carbon</text>
+        <text x="250" y="385" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="8">Protecting old forests means protecting both trees AND soil carbon</text>
 
         <defs>
           <marker id="poolArrow" markerWidth="6" markerHeight="5" refX="3" refY="0" orient="auto">
-            <polygon points="0 5, 3 0, 6 5" className="fill-slate-500" />
+            <polygon points="0 5, 3 0, 6 5" className="fill-gray-400 dark:fill-slate-500" />
           </marker>
         </defs>
       </svg>

@@ -17,7 +17,7 @@ export default function BabelNLPDiagram() {
         {['The', 'cat', 'sat', 'on', 'the', 'mat'].map((word, i) => (
           <g key={i}>
             <rect x={20 + i * 40} y="110" width="36" height="22" fill="#334155" stroke="#a78bfa" strokeWidth="1" rx="3" />
-            <text x={38 + i * 40} y="125" textAnchor="middle" fill="#e2e8f0" fontSize="10">{word}</text>
+            <text x={38 + i * 40} y="125" textAnchor="middle" className="fill-gray-700 dark:fill-slate-200" fontSize="10">{word}</text>
           </g>
         ))}
       </g>
@@ -82,13 +82,13 @@ export default function BabelNLPDiagram() {
       <text x="390" y="275" textAnchor="middle" fill="#d1d5db" fontSize="10">scattered at Babel?</text>
 
       {/* Key insight */}
-      <rect x="290" y="300" width="210" height="45" fill="#1a2332" stroke="#475569" strokeWidth="1" rx="6" />
+      <rect x="290" y="300" width="210" height="45" fill="#1a2332" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1" rx="6" />
       <text x="395" y="318" textAnchor="middle" fill="#d1d5db" fontSize="10">Modern NLP reverses Babel:</text>
       <text x="395" y="333" textAnchor="middle" fill="#fbbf24" fontSize="11" fontWeight="bold">one model, any language pair</text>
 
       <defs>
         <marker id="bnArrow" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto">
-          <polygon points="0 0, 8 3, 0 6" fill="#94a3b8" />
+          <polygon points="0 0, 8 3, 0 6" className="fill-gray-500 dark:fill-slate-400" />
         </marker>
       </defs>
     </svg>

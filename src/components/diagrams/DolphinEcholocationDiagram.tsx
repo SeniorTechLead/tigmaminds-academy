@@ -65,8 +65,8 @@ export default function DolphinEcholocationDiagram() {
         <path d="M0,40 Q12,10 60,18 Q95,5 125,22 L120,40 Q95,58 60,52 Q25,58 0,40Z" fill="#0891b2" />
         <path d="M65,18 L72,0 L82,18" fill="#0e7490" />
         <path d="M0,40 Q-8,28 -18,22 M0,40 Q-8,50 -18,55" stroke="#0891b2" strokeWidth="3" fill="none" />
-        <circle cx="102" cy="26" r="2.5" fill="#1e293b" />
-        <line cx="102" cy="26" x1="100" y1="25" x2="104" y2="27" stroke="#475569" strokeWidth="0.5" />
+        <circle cx="102" cy="26" r="2.5" className="fill-gray-100 dark:fill-slate-800" />
+        <line cx="102" cy="26" x1="100" y1="25" x2="104" y2="27" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="0.5" />
         <ellipse cx="122" cy="33" rx="8" ry="5" fill="#06b6d4" opacity="0.35" />
         <text x="122" y="22" textAnchor="middle" fill="#67e8f9" fontSize="7">melon</text>
       </g>
@@ -91,7 +91,7 @@ export default function DolphinEcholocationDiagram() {
       <g transform="translate(385, 97)">
         <ellipse cx="30" cy="22" rx="28" ry="14" fill="#f59e0b" />
         <path d="M2,22 L-14,10 L-14,34Z" fill="#d97706" />
-        <circle cx="48" cy="18" r="3" fill="#1e293b" />
+        <circle cx="48" cy="18" r="3" className="fill-gray-100 dark:fill-slate-800" />
         <path d="M25,10 L30,2 L37,10" fill="#fbbf24" opacity="0.6" />
       </g>
       <text x="415" y="148" textAnchor="middle" className="fill-amber-400" fontSize="10" fontWeight="500">
@@ -121,36 +121,36 @@ export default function DolphinEcholocationDiagram() {
       <circle cx="100" cy="240" r="18" fill="#164e63" stroke="#22d3ee" strokeWidth="1.5" />
       <text x="100" y="237" textAnchor="middle" fill="#22d3ee" fontSize="18" fontWeight="700">1</text>
       <text x="100" y="250" textAnchor="middle" fill="#67e8f9" fontSize="7">CLICK</text>
-      <text x="100" y="272" textAnchor="middle" fill="#94a3b8" fontSize="8">Phonic lips</text>
-      <text x="100" y="282" textAnchor="middle" fill="#94a3b8" fontSize="8">produce click</text>
+      <text x="100" y="272" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="8">Phonic lips</text>
+      <text x="100" y="282" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="8">produce click</text>
 
       <line x1="130" y1="240" x2="230" y2="240" stroke="#374151" strokeWidth="1.5" markerEnd="url(#dTimeArr)" />
 
       <circle cx="270" cy="240" r="18" fill="#3b0764" stroke="#c084fc" strokeWidth="1.5" />
       <text x="270" y="237" textAnchor="middle" fill="#c084fc" fontSize="18" fontWeight="700">2</text>
       <text x="270" y="250" textAnchor="middle" fill="#d8b4fe" fontSize="7">ECHO</text>
-      <text x="270" y="272" textAnchor="middle" fill="#94a3b8" fontSize="8">Lower jaw</text>
-      <text x="270" y="282" textAnchor="middle" fill="#94a3b8" fontSize="8">receives echo</text>
+      <text x="270" y="272" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="8">Lower jaw</text>
+      <text x="270" y="282" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="8">receives echo</text>
 
       <line x1="300" y1="240" x2="400" y2="240" stroke="#374151" strokeWidth="1.5" markerEnd="url(#dTimeArr)" />
 
       <circle cx="440" cy="240" r="18" fill="#064e3b" stroke="#34d399" strokeWidth="1.5" />
       <text x="440" y="237" textAnchor="middle" fill="#34d399" fontSize="18" fontWeight="700">3</text>
       <text x="440" y="250" textAnchor="middle" fill="#6ee7b7" fontSize="7">MAP</text>
-      <text x="440" y="272" textAnchor="middle" fill="#94a3b8" fontSize="8">Brain builds</text>
-      <text x="440" y="282" textAnchor="middle" fill="#94a3b8" fontSize="8">sound picture</text>
+      <text x="440" y="272" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="8">Brain builds</text>
+      <text x="440" y="282" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="8">sound picture</text>
 
       {/* Formula */}
-      <rect x="140" y="300" width="360" height="28" rx="6" fill="#1e293b" stroke="#374151" strokeWidth="1" />
+      <rect x="140" y="300" width="360" height="28" rx="6" className="fill-gray-100 dark:fill-slate-800" stroke="#374151" strokeWidth="1" />
       <text x="320" y="319" textAnchor="middle" fill="#34d399" fontSize="12" fontWeight="700" fontFamily="monospace">
         distance = (speed &#215; time) / 2
       </text>
 
       {/* Speed callout */}
       <text x="560" y="242" textAnchor="middle" fill="#67e8f9" fontSize="9" fontWeight="600">1,480 m/s</text>
-      <text x="560" y="255" textAnchor="middle" fill="#94a3b8" fontSize="8">in water</text>
-      <text x="560" y="272" textAnchor="middle" fill="#94a3b8" fontSize="8">vs 343 m/s</text>
-      <text x="560" y="282" textAnchor="middle" fill="#94a3b8" fontSize="8">in air (4.3x)</text>
+      <text x="560" y="255" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="8">in water</text>
+      <text x="560" y="272" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="8">vs 343 m/s</text>
+      <text x="560" y="282" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="8">in air (4.3x)</text>
     </svg>
   );
 }

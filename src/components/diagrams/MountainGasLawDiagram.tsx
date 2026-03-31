@@ -7,7 +7,7 @@ export default function MountainGasLawDiagram() {
         role="img"
         aria-label="Ideal gas law diagram comparing a small dense gas container at sea level with a larger less dense container at 5000 metres"
       >
-        <rect x="0" y="0" width="600" height="410" className="fill-slate-900" rx="8" />
+        <rect x="0" y="0" width="600" height="410" className="fill-white dark:fill-slate-900" rx="8" />
 
         {/* Title */}
         <text x="300" y="22" textAnchor="middle" fontSize="12" className="fill-gray-200" fontWeight="700">
@@ -15,11 +15,11 @@ export default function MountainGasLawDiagram() {
         </text>
 
         {/* Formula banner */}
-        <rect x="180" y="32" width="240" height="24" rx="4" className="fill-slate-800" stroke="#64748b" strokeWidth="1" />
+        <rect x="180" y="32" width="240" height="24" rx="4" className="fill-gray-100 dark:fill-slate-800" stroke="#64748b" strokeWidth="1" />
         <text x="300" y="48" textAnchor="middle" fontSize="11" className="fill-sky-300" fontWeight="700" fontFamily="serif">
           P V = n R T
         </text>
-        <text x="300" y="72" textAnchor="middle" fontSize="8" className="fill-gray-400">
+        <text x="300" y="72" textAnchor="middle" fontSize="8" className="fill-gray-500 dark:fill-gray-400">
           P = pressure &middot; V = volume &middot; n = amount &middot; R = gas constant &middot; T = temperature
         </text>
 
@@ -47,10 +47,10 @@ export default function MountainGasLawDiagram() {
           ))}
 
           {/* Labels */}
-          <text x="150" y="260" textAnchor="middle" fontSize="9" className="fill-gray-300" fontWeight="600">
+          <text x="150" y="260" textAnchor="middle" fontSize="9" className="fill-gray-600 dark:fill-gray-300" fontWeight="600">
             P = 1013 hPa
           </text>
-          <text x="150" y="274" textAnchor="middle" fontSize="9" className="fill-gray-300" fontWeight="600">
+          <text x="150" y="274" textAnchor="middle" fontSize="9" className="fill-gray-600 dark:fill-gray-300" fontWeight="600">
             T = 15 °C (288 K)
           </text>
           <text x="150" y="288" textAnchor="middle" fontSize="9" className="fill-green-300" fontWeight="600">
@@ -109,10 +109,10 @@ export default function MountainGasLawDiagram() {
           ))}
 
           {/* Labels */}
-          <text x="440" y="270" textAnchor="middle" fontSize="9" className="fill-gray-300" fontWeight="600">
+          <text x="440" y="270" textAnchor="middle" fontSize="9" className="fill-gray-600 dark:fill-gray-300" fontWeight="600">
             P = 540 hPa (about half)
           </text>
-          <text x="440" y="284" textAnchor="middle" fontSize="9" className="fill-gray-300" fontWeight="600">
+          <text x="440" y="284" textAnchor="middle" fontSize="9" className="fill-gray-600 dark:fill-gray-300" fontWeight="600">
             T = -17.5 °C (255 K)
           </text>
           <text x="440" y="298" textAnchor="middle" fontSize="9" className="fill-blue-300" fontWeight="600">
@@ -121,7 +121,7 @@ export default function MountainGasLawDiagram() {
         </g>
 
         {/* Key relationship box */}
-        <rect x="60" y="310" width="480" height="48" rx="6" className="fill-slate-800" stroke="#64748b" strokeWidth="0.5" />
+        <rect x="60" y="310" width="480" height="48" rx="6" className="fill-gray-100 dark:fill-slate-800" stroke="#64748b" strokeWidth="0.5" />
         <text x="300" y="328" textAnchor="middle" fontSize="9" className="fill-gray-200" fontWeight="600">
           When P drops (lower pressure at altitude), V increases (gas expands).
         </text>
@@ -130,7 +130,7 @@ export default function MountainGasLawDiagram() {
         </text>
 
         {/* Insight */}
-        <rect x="60" y="368" width="480" height="22" rx="4" className="fill-slate-800" />
+        <rect x="60" y="368" width="480" height="22" rx="4" className="fill-gray-100 dark:fill-slate-800" />
         <text x="80" y="383" fontSize="9" className="fill-amber-300" fontWeight="600">
           This is why every breath at 5 000 m delivers ~half the oxygen of sea level.
         </text>
