@@ -89,9 +89,9 @@ export default function LogicGateSymbolsDiagram() {
   ];
 
   // Layout: 4 columns, gate on top, truth table below — stacked vertically
-  const colW = 170;
-  const gateH = 60;    // gate symbol area
-  const tableH = 72;   // truth table area
+  const colW = 180;
+  const gateH = 80;    // gate symbol area — more breathing room
+  const tableH = 80;   // truth table area
   const cellH = gateH + tableH;
   const cols = 4;
   const rows = 2;
@@ -110,7 +110,7 @@ export default function LogicGateSymbolsDiagram() {
           const ox = col * colW;
           const oy = row * cellH;
           const cx = ox + colW / 2;
-          const cy = oy + 32;
+          const cy = oy + 40;
           const isNot = g.name === 'NOT';
           const colNames = isNot ? ['A', 'Q'] : ['A', 'B', 'Q'];
           const outX = ['NAND','NOR','XNOR'].includes(g.name) ? cx + 26 : g.name === 'NOT' ? cx + 20 : cx + 18;
@@ -149,17 +149,17 @@ export default function LogicGateSymbolsDiagram() {
               )}
               <text x={cx + 42} y={cy + 4} className={subColor} fontSize="11">Q</text>
 
-              {/* Expression — below the gate */}
-              <text x={cx} y={oy + gateH - 2} textAnchor="middle" className={subColor} fontSize="11">{g.expr}</text>
+              {/* Expression — below the gate with breathing room */}
+              <text x={cx} y={oy + gateH - 6} textAnchor="middle" className={subColor} fontSize="11">{g.expr}</text>
 
-              {/* Truth table — stacked below the gate */}
+              {/* Truth table — stacked below */}
               {colNames.map((c, ci) => (
-                <text key={c} x={cx - 16 + ci * 18} y={oy + gateH + 14} textAnchor="middle" className={tableHead} fontSize="11" fontWeight="600">{c}</text>
+                <text key={c} x={cx - 16 + ci * 20} y={oy + gateH + 16} textAnchor="middle" className={tableHead} fontSize="11" fontWeight="600">{c}</text>
               ))}
               {g.rows.map((r, ri) => {
                 const vals = isNot ? [r[0], r[2]] : r;
                 return vals.map((v, vi) => (
-                  <text key={`${ri}-${vi}`} x={cx - 16 + vi * 18} y={oy + gateH + 27 + ri * 13} textAnchor="middle" className={tableCell} fontSize="11">
+                  <text key={`${ri}-${vi}`} x={cx - 16 + vi * 20} y={oy + gateH + 32 + ri * 14} textAnchor="middle" className={tableCell} fontSize="11">
                     {v === -1 ? '–' : v}
                   </text>
                 ));
