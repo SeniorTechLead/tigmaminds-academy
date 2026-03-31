@@ -89,7 +89,7 @@ const FrogSkinBreathingDiagram = () => {
         {[160, 360].map((x, i) => (
           <g key={`o2-${i}`}>
             <line x1={x} y1={80} x2={x} y2={260} stroke="#3b82f6" strokeWidth="2.5"
-              markerEnd="url(#blueArrow)" className="pulse" style={{ animationDelay: `${i * 1.5}s` }} />
+              markerEnd="url(#blueArrow)" className="pulse" style={{ animationDelay: `\${i * 1.5}s` }} />
             <text x={x + 6} y={170} className="label fill-blue-600 dark:fill-blue-400" fontWeight="600">
               O\u2082 \u2193
             </text>
@@ -100,7 +100,7 @@ const FrogSkinBreathingDiagram = () => {
         {[260, 460].map((x, i) => (
           <g key={`co2-${i}`}>
             <line x1={x} y1={260} x2={x} y2={80} stroke="#f59e0b" strokeWidth="2.5"
-              markerEnd="url(#amberArrow)" className="pulse" style={{ animationDelay: `${i * 1.5 + 0.7}s` }} />
+              markerEnd="url(#amberArrow)" className="pulse" style={{ animationDelay: `\${i * 1.5 + 0.7}s` }} />
             <text x={x + 6} y={170} className="label fill-amber-600 dark:fill-amber-400" fontWeight="600">
               CO\u2082 \u2191
             </text>

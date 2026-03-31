@@ -38,7 +38,7 @@ export default function OrchidEpiphyteDiagram() {
               cx={50 + Math.cos((a * Math.PI) / 180) * 14}
               cy={-15 + Math.sin((a * Math.PI) / 180) * 14}
               rx="10" ry="6" fill="#e879f9" opacity="0.6"
-              transform={`rotate(\${a}, \${50 + Math.cos((a * Math.PI) / 180) * 14}, \${-15 + Math.sin((a * Math.PI) / 180) * 14})`}
+              transform={`rotate(${a}, ${50 + Math.cos((a * Math.PI) / 180) * 14}, ${-15 + Math.sin((a * Math.PI) / 180) * 14})`}
             />
           ))}
           <circle cx="50" cy="-15" r="5" fill="#c026d3" />

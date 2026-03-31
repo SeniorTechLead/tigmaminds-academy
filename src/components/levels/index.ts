@@ -28,7 +28,7 @@ const registry: Record<string, LevelComponents> = {
   'bridge-that-grew': {Level1: lazy(() => import('./BridgeLevel1')), Level2: lazy(() => import('./BridgeLevel2')), Level3: lazy(() => import('./BridgeLevel3')), Level4: lazy(() => import('./BridgeLevel4')) },
 
   // 100 stories collection — mapped by story number/slug
-  'the-little-boat': { Level1: lazy(() => import('./LittleBoatLevel1')), Level2: lazy(() => import('./LittleBoatLevel2')) },
+  'the-little-boat': { Level1: lazy(() => import('./LittleBoatLevel1')), Level2: lazy(() => import('./LittleBoatLevel2')), Level3: lazy(() => import('./LittleBoatLevel3')), Level4: lazy(() => import('./LittleBoatLevel4')) },
   'the-hornbills-crown': {Level1: lazy(() => import('./HornbillLevel1')), Level2: lazy(() => import('./HornbillLevel2')), Level3: lazy(() => import('./HornbillLevel3')), Level4: lazy(() => import('./HornbillLevel4')) },
   'the-girl-who-painted-rain': {Level1: lazy(() => import('./PaintedRainLevel1')), Level2: lazy(() => import('./PaintedRainLevel2')), Level3: lazy(() => import('./PaintedRainLevel3')), Level4: lazy(() => import('./PaintedRainLevel4')) },
   'why-fish-jump': {Level1: lazy(() => import('./FishJumpLevel1')), Level2: lazy(() => import('./FishJumpLevel2')), Level3: lazy(() => import('./FishJumpLevel3')), Level4: lazy(() => import('./FishJumpLevel4')) },

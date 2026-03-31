@@ -17,7 +17,7 @@ export default function OrchidCoevolutionDiagram() {
             { label: 'Step 3', orchid: 'Very deep spur (20 cm)', moth: 'Very long tongue (20 cm)', spurLen: 90, tongueLen: 90, color: '#22c55e' },
             { label: 'Step 4', orchid: '30 cm spur!', moth: '30 cm tongue!', spurLen: 120, tongueLen: 120, color: '#15803d' },
           ].map((step, i) => (
-            <g key={i} transform={`translate(\${i * 115}, 20)`}>
+            <g key={i} transform={`translate(${i * 115}, 20)`}>
               <text x="50" y="0" textAnchor="middle" fontSize="10" fontWeight="bold" fill={step.color}>{step.label}</text>
 
               {/* Orchid flower */}

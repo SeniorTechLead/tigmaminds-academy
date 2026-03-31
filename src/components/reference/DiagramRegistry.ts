@@ -1,5 +1,10 @@
 import type { ComponentType } from 'react';
 
+import LeopardGPSDiagram from '../diagrams/LeopardGPSDiagram';
+import LeopardCameraTrapDiagram from '../diagrams/LeopardCameraTrapDiagram';
+import LeopardMarkRecaptureDiagram from '../diagrams/LeopardMarkRecaptureDiagram';
+import LeopardConservationDiagram from '../diagrams/LeopardConservationDiagram';
+import ActivityTrackingDiagram from '../diagrams/ActivityTrackingDiagram';
 import SineWaveDiagram from '../diagrams/SineWaveDiagram';
 import SpectrogramDiagram from '../diagrams/SpectrogramDiagram';
 import NumPyRulerDiagram from '../diagrams/NumPyRulerDiagram';
@@ -605,6 +610,13 @@ import CloudsWaterEngineDiagram from '../diagrams/CloudsWaterEngineDiagram';
 import CloudsForecastDiagram from '../diagrams/CloudsForecastDiagram';
 import ActivityCloudWatchDiagram from '../diagrams/ActivityCloudWatchDiagram';
 
+// Little Boat on the Brahmaputra — Fluid Dynamics & Buoyancy
+import BoatBuoyancyDiagram from '../diagrams/BoatBuoyancyDiagram';
+import BoatHullShapesDiagram from '../diagrams/BoatHullShapesDiagram';
+import BoatCurrentDiagram from '../diagrams/BoatCurrentDiagram';
+import BoatBrahmaputraDiagram from '../diagrams/BoatBrahmaputraDiagram';
+import ActivityFloatBoatDiagram from '../diagrams/ActivityFloatBoatDiagram';
+
 // Hornbill's Crown — Ornithology & Animal Behavior
 import HornbillCasqueDiagram from '../diagrams/HornbillCasqueDiagram';
 import HornbillNestDiagram from '../diagrams/HornbillNestDiagram';
@@ -629,6 +641,24 @@ import MeteoriteTypesDiagram from '../diagrams/MeteoriteTypesDiagram';
 import MeteorImpactDiagram from '../diagrams/MeteorImpactDiagram';
 import DeeporBeelDiagram from '../diagrams/DeeporBeelDiagram';
 import ActivityMeteorWatchDiagram from '../diagrams/ActivityMeteorWatchDiagram';
+// Tiny Frog — Size Limits, Scaling & Biodiversity
+import FrogSizeLimitsDiagram from '../diagrams/FrogSizeLimitsDiagram';
+import FrogCubeSquareDiagram from '../diagrams/FrogCubeSquareDiagram';
+import FrogSkinBreathingDiagram from '../diagrams/FrogSkinBreathingDiagram';
+import FrogBiodiversityDiagram from '../diagrams/FrogBiodiversityDiagram';
+import ActivitySizeScaleDiagram from '../diagrams/ActivitySizeScaleDiagram';
+
+import FishIridescenceDiagram from '../diagrams/FishIridescenceDiagram';
+import FishStructuralColorDiagram from '../diagrams/FishStructuralColorDiagram';
+import FishLightWaterDiagram from '../diagrams/FishLightWaterDiagram';
+import FishUmiamLakeDiagram from '../diagrams/FishUmiamLakeDiagram';
+import ActivityIridescenceDiagram from '../diagrams/ActivityIridescenceDiagram';
+// Little Train of the Hills — Mechanical Engineering & Railways
+import TrainFrictionDiagram from '../diagrams/TrainFrictionDiagram';
+import TrainGearsDiagram from '../diagrams/TrainGearsDiagram';
+import TrainSteamEngineDiagram from '../diagrams/TrainSteamEngineDiagram';
+import TrainMountainRouteDiagram from '../diagrams/TrainMountainRouteDiagram';
+import ActivityGearModelDiagram from '../diagrams/ActivityGearModelDiagram';
 
 const registry: Record<string, ComponentType> = {
   SineWaveDiagram,
@@ -1261,6 +1291,30 @@ const registry: Record<string, ComponentType> = {
   SeedGerminationDiagram,
   SeedJhumDiagram,
   ActivitySeedGerminateDiagram,
+  // Tiny Frog — Size Limits, Scaling & Biodiversity
+  FrogSizeLimitsDiagram,
+  FrogCubeSquareDiagram,
+  FrogSkinBreathingDiagram,
+  FrogBiodiversityDiagram,
+  ActivitySizeScaleDiagram,
+  // Clouded Leopard — Conservation & Tracking
+  LeopardGPSDiagram,
+  LeopardCameraTrapDiagram,
+  LeopardMarkRecaptureDiagram,
+  LeopardConservationDiagram,
+  ActivityTrackingDiagram,
+  // Little Boat on the Brahmaputra — Fluid Dynamics & Buoyancy
+  BoatBuoyancyDiagram,
+  BoatHullShapesDiagram,
+  BoatCurrentDiagram,
+  BoatBrahmaputraDiagram,
+  ActivityFloatBoatDiagram,
+  // Little Train of the Hills — Mechanical Engineering & Railways
+  TrainFrictionDiagram,
+  TrainGearsDiagram,
+  TrainSteamEngineDiagram,
+  TrainMountainRouteDiagram,
+  ActivityGearModelDiagram,
 };
 
 export default registry;
