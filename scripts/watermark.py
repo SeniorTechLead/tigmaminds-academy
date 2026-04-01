@@ -133,6 +133,28 @@ MAPPING = {
     "b2afa93c": "first-rice",                          # Tiwa girl watching birds drop seeds
     "edaab891": "night-jasmine",                       # white night jasmine blooming moonlit
 
+    # Mythology stories
+    "c3a99f39": "ravanas-ten-heads",
+    "766cedd0": "churning-of-the-ocean",
+    "ea1be9e2": "sand-mandala",
+    "32ef6cd4": "angulimala-change",
+    "50054dbd": "monastery-bells",
+    "2025c81f": "wheel-of-dharma",
+    "49996d04": "bodhi-tree",
+    "89289df8": "agni-science-of-fire",
+    "6f728edb": "pushpaka-vimana",
+    "843a3e4c": "hanuman-lifted-mountain",
+    "37819aeb": "well-of-zamzam",
+    "15ba5a48": "al-khwarizmi-algebra",
+    "57caf638": "the-astrolabe",
+    "10f01b0f": "noahs-ark",
+    "766c300f": "david-and-goliath",
+    "2e95cfa9": "star-of-bethlehem",
+    "4797cee6": "parting-red-sea",
+    "4bc733f5": "muezzins-call",
+    "1b288cec": "geometry-of-alhambra",
+    "4ed639eb": "tower-of-babel",
+
     # Batch 5 — re-runs and new stories
     "2a2cd096": "silk-route-caterpillars",              # three silk caterpillars (re-run)
     "abf86f0c": "bamboo-taught-wind",                  # bamboo and wind dance (re-run)
