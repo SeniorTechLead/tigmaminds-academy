@@ -79,10 +79,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const signInWithGoogle = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: { redirectTo: window.location.href },
-    });
+    const returnTo = window.location.pathname + window.location.search;
+    window.location.href = `/api/auth/google/login?returnTo=${encodeURIComponent(returnTo)}`;
   };
 
   const signOut = async () => {
