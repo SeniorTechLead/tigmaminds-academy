@@ -6,6 +6,7 @@ export const mythologyLessons: Lesson[] = [
     id: 111,
     slug: 'churning-of-the-ocean',
     tradition: 'Hindu',
+    illustration: '/content/illustrations/churning-of-the-ocean.webp',
     story: { title: 'The Churning of the Ocean', tagline: 'Chemistry and fluid dynamics hidden in one of the oldest stories ever told.', content: `
 **The Problem**
 
@@ -187,6 +188,7 @@ for i, (name, info) in enumerate(layers):
     id: 112,
     slug: 'sand-mandala',
     tradition: 'Buddhist',
+    illustration: '/content/illustrations/sand-mandala.webp',
     story: { title: 'The Sand Mandala', tagline: 'A sacred pattern made to be destroyed — the geometry of impermanence.', content: `
 **The Monks Arrive**
 
@@ -369,6 +371,7 @@ turtle.done()`,
     id: 113,
     slug: 'david-and-goliath',
     tradition: 'Christian',
+    illustration: '/content/illustrations/david-and-goliath.webp',
     story: { title: 'David and Goliath — The Physics of the Sling', tagline: 'A shepherd boy, a giant, and the science hidden inside a spinning stone.', content: `
 **The Valley of Elah**
 
@@ -730,6 +733,7 @@ plt.show()  # Try changing the color rule!`,
     id: 116,
     slug: 'ravanas-ten-heads',
     tradition: 'Hindu',
+    illustration: '/content/illustrations/ravanas-ten-heads.webp',
     story: { title: 'Ravana\'s Ten Heads', tagline: 'The demon king who could think ten thoughts at once — and the science of parallel processing.', content: `
 **The King of Lanka**
 
@@ -914,6 +918,7 @@ print(f"Speedup: {serial_time/parallel_time:.1f}x")`,
     id: 118,
     slug: 'noahs-ark',
     tradition: 'Christian',
+    illustration: '/content/illustrations/noahs-ark.webp',
     story: { title: 'Noah\'s Ark — Floating a Zoo', tagline: 'The engineering and biology behind history\'s most ambitious vessel.', content: `
 **The Warning**
 
@@ -1094,6 +1099,7 @@ print(f"That's about {buoyant_force_tonnes / 0.5:,.0f} average animals")
     id: 117,
     slug: 'bodhi-tree',
     tradition: 'Buddhist',
+    illustration: '/content/illustrations/bodhi-tree.webp',
     story: { title: 'The Bodhi Tree That Never Dies', tagline: 'A sacred fig tree, a branch carried across the sea, and the science of making life identical.', content: `
 **The Tree of Awakening**
 
@@ -1268,6 +1274,7 @@ print(f"Seed matches parent:  {sum(s == p for s, p in zip(seed_dna, parent_dna))
     id: 119,
     slug: 'the-astrolabe',
     tradition: 'Islamic',
+    illustration: '/content/illustrations/the-astrolabe.webp',
     story: { title: 'The Astrolabe — Mapping the Sky in Your Hand', tagline: 'A young scholar, a brass instrument, and a thousand years of Islamic astronomy.', content: `**The Scholar\'s Courtyard**
 
 In the year 1024, in the city of **Isfahan**, the morning call to prayer had just faded when twelve-year-old **Zahra** slipped into the courtyard of the **House of Wisdom** — the great library and observatory where scholars from across the Islamic world gathered to study the heavens.
@@ -1477,6 +1484,7 @@ for name, (alt, az) in stars.items():
     id: 115,
     slug: 'hanuman-lifted-mountain',
     tradition: 'Hindu',
+    illustration: '/content/illustrations/hanuman-lifted-mountain.webp',
     story: { title: 'Why Hanuman Lifted a Mountain', tagline: 'A divine quest for a healing herb — and the geology and botany hidden inside the Himalayas.', content: `
 **The Battle of Lanka**
 
@@ -1669,6 +1677,7 @@ for p in plants:
     id: 123,
     slug: 'monastery-bells',
     tradition: 'Buddhist',
+    illustration: '/content/illustrations/monastery-bells.webp',
     story: { title: 'The Monastery Bells of Tawang', tagline: 'A boy learns to listen — and discovers the physics of sound hidden in monastery bells.', content: `
 **The Bell That Would Not Sing**
 
@@ -1864,6 +1873,7 @@ print(f"You hear {beat} wobbles per second — unpleasant!")`,
     id: 120,
     slug: 'pushpaka-vimana',
     tradition: 'Hindu',
+    illustration: '/content/illustrations/pushpaka-vimana.webp',
     story: { title: 'The Pushpaka Vimana', tagline: 'The ancient flying chariot that anticipated the science of aerodynamics and flight.', content: `
 **The Chariot That Flew**
 
@@ -2047,6 +2057,7 @@ else:
     id: 121,
     slug: 'agni-science-of-fire',
     tradition: 'Hindu',
+    illustration: '/content/illustrations/agni-science-of-fire.webp',
     story: { title: 'Agni — The Science of Fire', tagline: 'The Vedic god of fire reveals the chemistry of combustion, the physics of flames, and the science of heat.', content: `
 **The First Fire**
 
@@ -2232,6 +2243,7 @@ for name, data in fuels.items():
     id: 122,
     slug: 'wheel-of-dharma',
     tradition: 'Buddhist',
+    illustration: '/content/illustrations/wheel-of-dharma.webp',
     story: { title: 'The Wheel of Dharma', tagline: 'A sacred wheel that never stops turning — the physics of rotation, stability, and stored energy.', content: `
 **The Deer Park**
 
@@ -2406,6 +2418,7 @@ print(f"Energy stored: {KE:.0f} J = {KE/3600:.1f} Wh")
     id: 124,
     slug: 'angulimala-change',
     tradition: 'Buddhist',
+    illustration: '/content/illustrations/angulimala-change.webp',
     story: { title: 'Angulimala and the Power of Change', tagline: 'A murderer becomes a saint — the neuroscience of transformation hidden in an ancient Buddhist parable.', content: `
 **The Finger Necklace**
 
@@ -2753,6 +2766,7 @@ else:
     id: 128,
     slug: 'al-khwarizmi-algebra',
     tradition: 'Islamic',
+    illustration: '/content/illustrations/al-khwarizmi-algebra.webp',
     story: { title: 'Al-Khwarizmi and the Language of Algebra', tagline: 'A 9th-century scholar in Baghdad invented the methods behind every equation you solve and every algorithm your computer runs.', content: `
 **The House of Wisdom**
 
@@ -2916,6 +2930,7 @@ solve_linear(3, 7, 22)
     id: 125,
     slug: 'star-of-bethlehem',
     tradition: 'Christian',
+    illustration: '/content/illustrations/star-of-bethlehem.webp',
     story: { title: 'The Star of Bethlehem', tagline: 'Astronomy and celestial navigation hidden in the story of wise men following a star.', content: `
 **The Journey Begins**
 
@@ -3086,6 +3101,7 @@ for name, a, T in planets:
     id: 126,
     slug: 'parting-red-sea',
     tradition: 'Christian',
+    illustration: '/content/illustrations/parting-red-sea.webp',
     story: { title: 'The Parting of the Red Sea', tagline: 'Tidal physics and fluid dynamics hidden in one of the most dramatic escapes ever told.', content: `
 **The Pursuit**
 
