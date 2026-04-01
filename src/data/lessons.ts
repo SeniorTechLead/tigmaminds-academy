@@ -17088,7 +17088,6 @@ print(f"That is why Meghi could hold rain for so long!")`,
   },
   {
     id: 97,
-    id: 97,
     slug: 'friendship-bridge',
     tradition: 'Northeast India', story: { title: 'The Friendship Bridge', tagline: 'Bridge engineering between two villages.', content: `
 **The Two Sides**
