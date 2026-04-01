@@ -94,6 +94,14 @@ function FAQ({ q, a }: { q: string; a: string }) {
 }
 
 export default function ProgramsPage() {
+  // Detect India via timezone
+  const isIndia = (() => {
+    try {
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      return tz.startsWith('Asia/Kolkata') || tz.startsWith('Asia/Calcutta');
+    } catch { return false; }
+  })();
+
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
       <Header />
@@ -174,9 +182,54 @@ export default function ProgramsPage() {
               );
             })}
           </div>
-          <div className="text-center">
-            <div className="inline-block bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 px-6 py-3 rounded-full text-sm font-semibold">
-              Pricing coming soon — sign up free to be notified
+          {/* Pricing */}
+          <div className="grid md:grid-cols-3 gap-6 mt-12">
+            {/* Free */}
+            <div className="rounded-2xl border-2 border-gray-200 dark:border-gray-700 p-6 bg-white dark:bg-gray-800 text-center">
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">Free</h3>
+              <p className="text-3xl font-bold text-gray-900 dark:text-white mb-1">{isIndia ? '₹0' : '$0'}</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">forever</p>
+              <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-2 text-left mb-6">
+                <li className="flex items-start gap-2"><span className="text-emerald-500">✓</span> All 130 stories</li>
+                <li className="flex items-start gap-2"><span className="text-emerald-500">✓</span> Level 0 — first 2 concepts</li>
+                <li className="flex items-start gap-2"><span className="text-emerald-500">✓</span> Reference library previews</li>
+              </ul>
+              <Link to="/lessons" className="block w-full py-2.5 rounded-xl bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 text-sm font-semibold hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                Browse Lessons
+              </Link>
+            </div>
+            {/* Online */}
+            <div className="rounded-2xl border-2 border-amber-400 dark:border-amber-600 p-6 bg-amber-50/50 dark:bg-amber-900/10 text-center relative">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full">Most Popular</div>
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">Online</h3>
+              <p className="text-3xl font-bold text-gray-900 dark:text-white mb-1">{isIndia ? '₹749' : '$9'}<span className="text-base font-normal text-gray-500">/mo</span></p>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">or {isIndia ? '₹6,499/year' : '$79/year'} (2 months free)</p>
+              <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-2 text-left mb-6">
+                <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> Everything in Free, plus:</li>
+                <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> All 5 levels per story</li>
+                <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> Python coding projects</li>
+                <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> Interactive tools</li>
+                <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> Progress tracking</li>
+              </ul>
+              <Link to="/auth" className="block w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm font-semibold hover:shadow-lg transition-all">
+                Start Free Trial
+              </Link>
+            </div>
+            {/* In-Person */}
+            <div className="rounded-2xl border-2 border-purple-200 dark:border-purple-800 p-6 bg-white dark:bg-gray-800 text-center">
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">In-Person</h3>
+              <p className="text-3xl font-bold text-gray-900 dark:text-white mb-1">{isIndia ? '₹12,499' : '$149'}<span className="text-base font-normal text-gray-500">/mo</span></p>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">weekly mentor-led workshops</p>
+              <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-2 text-left mb-6">
+                <li className="flex items-start gap-2"><span className="text-purple-500">✓</span> Everything in Online, plus:</li>
+                <li className="flex items-start gap-2"><span className="text-purple-500">✓</span> Weekly 2-hour sessions</li>
+                <li className="flex items-start gap-2"><span className="text-purple-500">✓</span> Max 12 students per group</li>
+                <li className="flex items-start gap-2"><span className="text-purple-500">✓</span> Mentor feedback on projects</li>
+                <li className="flex items-start gap-2"><span className="text-purple-500">✓</span> Hands-on experiments</li>
+              </ul>
+              <Link to="/contact" className="block w-full py-2.5 rounded-xl bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-sm font-semibold hover:bg-purple-200 dark:hover:bg-purple-800/30 transition-colors">
+                Join Waitlist
+              </Link>
             </div>
           </div>
         </div>
@@ -202,7 +255,7 @@ export default function ProgramsPage() {
                 <li className="flex items-start gap-2"><span className="text-blue-500 mt-0.5">✓</span> Progress tracking and certificates</li>
                 <li className="flex items-start gap-2"><span className="text-blue-500 mt-0.5">✓</span> Learn at your own pace</li>
               </ul>
-              <p className="mt-6 text-sm font-semibold text-blue-600 dark:text-blue-400">Free to start — sign up to unlock all levels</p>
+              <p className="mt-6 text-sm font-semibold text-blue-600 dark:text-blue-400">Free to start — {isIndia ? '₹749' : '$9'}/mo to unlock all levels</p>
             </div>
             {/* In-Person */}
             <div className="rounded-2xl border-2 border-amber-300 dark:border-amber-700 p-8 bg-amber-50/50 dark:bg-amber-900/10">
@@ -218,7 +271,7 @@ export default function ProgramsPage() {
                 <li className="flex items-start gap-2"><span className="text-amber-500 mt-0.5">✓</span> Peer collaboration and presentations</li>
                 <li className="flex items-start gap-2"><span className="text-amber-500 mt-0.5">✓</span> Offline experiments with real materials</li>
               </ul>
-              <p className="mt-6 text-sm font-semibold text-amber-600 dark:text-amber-400">Coming to select cities — join the waitlist</p>
+              <p className="mt-6 text-sm font-semibold text-amber-600 dark:text-amber-400">{isIndia ? '₹12,499' : '$149'}/mo — coming to select cities</p>
               <Link to="/contact" className="inline-flex items-center gap-1.5 mt-2 text-sm text-amber-600 dark:text-amber-400 hover:underline font-medium">
                 Express interest <ArrowRight className="w-3.5 h-3.5" />
               </Link>
