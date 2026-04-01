@@ -188,50 +188,119 @@ pi_approx = int(3.14)  # 3 (truncates)`,
       },
       {
         title: 'Strings',
+        diagram: 'StringSlicingDiagram',
         content:
-          'Strings are sequences of characters. You can slice them, join them, search them, and format them.',
-        code: `greeting = "Hello, Assam!"
+          'Strings are sequences of characters. Every character has a position number (index), starting from 0. ' +
+          'Negative indices count from the end: -1 is the last character, -2 is second-to-last.\n\n' +
+          '**Slicing** extracts a portion of a string using `s[start:stop:step]`:\n' +
+          '- `start` — where to begin (included). Default: 0.\n' +
+          '- `stop` — where to end (excluded). Default: end of string.\n' +
+          '- `step` — how many positions to skip. Default: 1. Use -1 to reverse.\n\n' +
+          'Strings are **immutable** — you cannot change individual characters. Every operation returns a new string.',
+        code: `name = "KAZIRANGA"
 
-# Length
-print(len(greeting))        # 13
+# ── Indexing ──
+print(name[0])       # K  (first character)
+print(name[-1])      # A  (last character)
+print(name[-3])      # N  (third from end)
 
-# Indexing and slicing
-print(greeting[0])           # H
-print(greeting[7:12])        # Assam
+# ── Slicing: s[start:stop] ──
+print(name[0:5])     # KAZIR  (chars 0,1,2,3,4)
+print(name[5:])      # ANGA   (from 5 to end)
+print(name[:4])      # KAZI   (from start to 3)
 
-# Useful methods
-print(greeting.upper())      # HELLO, ASSAM!
-print(greeting.replace("Assam", "World"))
+# ── Step parameter: s[start:stop:step] ──
+print(name[::2])     # KZRNA  (every 2nd character)
+print(name[::-1])    # AGNARIZAK  (reversed!)
+print(name[1::2])    # AIAG   (odd-indexed characters)
 
-# f-strings (formatted strings) — the modern way
+# ── Common string methods ──
+greeting = "Hello, Assam!"
+print(greeting.upper())          # HELLO, ASSAM!
+print(greeting.lower())          # hello, assam!
+print(greeting.replace("Assam", "World"))  # Hello, World!
+
+# Checking content
+print("Assam" in greeting)       # True
+print(greeting.startswith("He")) # True
+print("hello".isalpha())         # True (only letters)
+print("abc123".isalnum())        # True (letters or digits)
+
+# Splitting and joining
+words = "elephant dolphin rhino".split(" ")
+print(words)                     # ['elephant', 'dolphin', 'rhino']
+print(" + ".join(words))         # elephant + dolphin + rhino
+
+# Stripping whitespace
+messy = "  data  "
+print(messy.strip())             # "data"
+
+# f-strings — the modern way to format
 animal = "elephant"
 count = 3
-print(f"We spotted {count} {animal}s today!")`,
+print(f"We spotted {count} {animal}s today!")
+print(f"Name reversed: {name[::-1]}")`,
       },
       {
         title: 'Lists',
         content:
-          'Lists hold ordered collections. They can contain any type and you can add, remove, or change items.',
-        code: `# Create a list
-animals = ["elephant", "dolphin", "tiger"]
+          'Lists hold ordered collections enclosed in square brackets `[]`. They can contain any type — numbers, strings, ' +
+          'even other lists. Lists are **mutable**: you can add, remove, and change items after creation.\n\n' +
+          '**Key operations:** indexing (`[0]`, `[-1]`), slicing (`[1:3]`), membership (`in`), length (`len()`), ' +
+          'sorting (`sort()` mutates, `sorted()` returns new list), and filtering.\n\n' +
+          'Lists support the same slice syntax as strings: `list[start:stop:step]`.',
+        code: `# ── Creating and accessing ──
+animals = ["elephant", "dolphin", "tiger", "rhino"]
 
-# Access by index (0-based)
-print(animals[0])    # elephant
-print(animals[-1])   # tiger (last item)
+print(animals[0])      # elephant (first)
+print(animals[-1])     # rhino (last)
+print(animals[1:3])    # ['dolphin', 'tiger'] (slice)
 
-# Add and remove
-animals.append("rhino")
-animals.remove("tiger")
-print(animals)       # ['elephant', 'dolphin', 'rhino']
+# ── Adding items ──
+animals.append("leopard")       # add to end
+animals.insert(1, "pangolin")   # insert at position 1
+print(animals)
 
-# Useful operations
-print(len(animals))          # 3
-print("dolphin" in animals)  # True
-animals.sort()               # alphabetical order
+# ── Removing items ──
+animals.remove("tiger")         # remove by value
+last = animals.pop()            # remove and return last item
+print(last)                     # leopard
+del animals[0]                  # remove by index
 
-# List comprehension — build a new list in one line
-lengths = [len(a) for a in animals]
-print(lengths)  # [7, 8, 5]`,
+# ── Sorting ──
+numbers = [42, 7, 23, 1, 99]
+numbers.sort()                  # mutates the original list
+print(numbers)                  # [1, 7, 23, 42, 99]
+
+# sorted() returns a NEW list (original unchanged)
+original = [42, 7, 23]
+ordered = sorted(original)
+print(original)                 # [42, 7, 23] (unchanged!)
+print(ordered)                  # [7, 23, 42]
+
+# Sort descending
+print(sorted(numbers, reverse=True))  # [99, 42, 23, 7, 1]
+
+# ── Useful patterns ──
+print(len(animals))             # length
+print("dolphin" in animals)     # membership test: True/False
+print(animals.count("dolphin")) # how many times it appears
+print(animals.index("dolphin")) # position of first occurrence
+
+# ── Filtering with list comprehension ──
+weights = [4500, 280, 3200, 60, 5100]
+heavy = [w for w in weights if w > 1000]
+print(heavy)  # [4500, 3200, 5100]
+
+# ── Reversing ──
+print(animals[::-1])            # reversed (new list)
+animals.reverse()               # reverse in-place
+
+# ── Min, Max, Sum ──
+scores = [85, 92, 78, 95, 88]
+print(min(scores))   # 78
+print(max(scores))   # 95
+print(sum(scores))   # 438`,
       },
       {
         title: 'If / Elif / Else',
@@ -257,79 +326,268 @@ if age >= 12 and has_ticket:
       {
         title: 'Loops',
         content:
-          '`for` loops iterate over sequences. `while` loops repeat until a condition is false.',
-        code: `# For loop over a list
+          '`for` loops iterate over any sequence (list, string, range). `while` loops repeat until a condition is false.\n\n' +
+          '**Key patterns:**\n' +
+          '- `enumerate()` — loop with both index and value\n' +
+          '- `zip()` — loop over two lists in parallel\n' +
+          '- `break` — exit the loop early\n' +
+          '- `continue` — skip to the next iteration\n' +
+          '- Accumulator pattern — build up a result across iterations (sum, max, count)\n' +
+          '- Tracking state — keep a running variable (current streak, best-so-far)',
+        code: `# ── For loop basics ──
 colors = ["red", "green", "blue"]
 for color in colors:
     print(f"I like {color}")
 
-# range() generates numbers
-for i in range(5):       # 0, 1, 2, 3, 4
+# range(start, stop, step)
+for i in range(0, 10, 2):    # 0, 2, 4, 6, 8
     print(i, end=" ")
+print()
 
-# While loop
+# ── enumerate() — get index AND value ──
+animals = ["elephant", "dolphin", "rhino"]
+for i, animal in enumerate(animals):
+    print(f"{i}: {animal}")
+# 0: elephant
+# 1: dolphin
+# 2: rhino
+
+# ── zip() — loop over two lists together ──
+names = ["Ranga", "Mohini", "Kavi"]
+ages = [25, 18, 30]
+for name, age in zip(names, ages):
+    print(f"{name} is {age} years old")
+
+# ── While loop ──
 count = 10
 while count > 0:
     print(count, end=" ")
     count -= 1
 print("Launch!")
 
-# break and continue
+# ── break and continue ──
+# break: exit the loop entirely
 for n in range(100):
-    if n % 7 == 0 and n > 0:
-        print(f"First multiple of 7 above 0: {n}")
-        break`,
+    if n > 0 and n % 7 == 0:
+        print(f"First multiple of 7: {n}")  # 7
+        break
+
+# continue: skip this iteration, go to next
+for n in range(10):
+    if n % 2 == 0:
+        continue  # skip even numbers
+    print(n, end=" ")  # 1 3 5 7 9
+print()
+
+# ── Accumulator pattern — track a running total ──
+readings = [23.5, 24.1, 22.8, 25.0, 23.2]
+total = 0
+for r in readings:
+    total += r
+average = total / len(readings)
+print(f"Average: {average:.1f}")  # 23.7
+
+# ── Find max in one pass ──
+speeds = [120, 85, 200, 95, 180]
+max_speed = speeds[0]
+max_index = 0
+for i, s in enumerate(speeds):
+    if s > max_speed:
+        max_speed = s
+        max_index = i
+print(f"Max: {max_speed} at index {max_index}")  # 200 at 2
+
+# ── Streak tracking ──
+growth = [2, 3, 0, 1, 4, 5, 0, 1]
+current_streak = 0
+longest_streak = 0
+for g in growth:
+    if g > 0:
+        current_streak += 1
+        longest_streak = max(longest_streak, current_streak)
+    else:
+        current_streak = 0
+print(f"Longest growth streak: {longest_streak}")  # 3`,
       },
       {
         title: 'Functions',
         content:
-          'Functions group reusable logic. They take parameters and return results.',
-        code: `def greet(name):
+          'Functions group reusable logic. They take parameters and return results. Use `def` to define, and `return` to send back a value.\n\n' +
+          '**Key concepts:**\n' +
+          '- **Default parameters** — provide fallback values: `def f(x, y=10)`\n' +
+          '- **Multiple return values** — return a tuple: `return a, b`\n' +
+          '- **Type hints** — document expected types: `def f(x: int) -> str`\n' +
+          '- **Docstrings** — explain what the function does, right after `def`\n' +
+          '- **isinstance()** — check if a value is the right type before using it\n' +
+          '- **Generators** — functions that `yield` values one at a time instead of returning a list',
+        code: `# ── Basic function ──
+def greet(name):
     """Return a friendly greeting."""
     return f"Namaste, {name}!"
 
 print(greet("Priya"))   # Namaste, Priya!
 
-# Default parameters
+# ── Default parameters ──
 def power(base, exp=2):
     return base ** exp
 
-print(power(5))      # 25
+print(power(5))      # 25 (uses default exp=2)
 print(power(2, 10))  # 1024
 
-# Multiple return values
+# ── Multiple return values (returns a tuple) ──
 def min_max(numbers):
     return min(numbers), max(numbers)
 
 lo, hi = min_max([3, 1, 8, 2])
-print(lo, hi)  # 1 8`,
+print(lo, hi)  # 1 8
+
+# ── Type hints — document expected types ──
+def distance(p1: tuple, p2: tuple) -> float:
+    """Euclidean distance between two 2D points."""
+    dx = p2[0] - p1[0]
+    dy = p2[1] - p1[1]
+    return (dx**2 + dy**2) ** 0.5
+
+print(distance((0, 0), (3, 4)))  # 5.0
+
+# ── Input validation with isinstance() ──
+def reverse_name(name):
+    """Reverse a string safely. Returns '' for non-strings."""
+    if not isinstance(name, str):
+        return ""
+    return name[::-1]
+
+print(reverse_name("Ranga"))  # agnaR
+print(reverse_name(123))      # "" (not a string)
+print(reverse_name(None))     # "" (not a string)
+
+# ── Guard clauses — handle edge cases first ──
+def safe_average(numbers):
+    """Average of a list, or None if empty."""
+    if not numbers:
+        return None
+    return sum(numbers) / len(numbers)
+
+print(safe_average([10, 20, 30]))  # 20.0
+print(safe_average([]))             # None
+
+# ── Generators — yield values one at a time ──
+def fibonacci(n):
+    """Yield the first n Fibonacci numbers."""
+    a, b = 0, 1
+    for _ in range(n):
+        yield a
+        a, b = b, a + b
+
+# Generators are lazy — they produce values on demand
+for num in fibonacci(8):
+    print(num, end=" ")  # 0 1 1 2 3 5 8 13
+print()
+
+# Convert generator to list
+fib_list = list(fibonacci(5))
+print(fib_list)  # [0, 1, 1, 2, 3]
+
+# ── Lambda — small one-line functions ──
+double = lambda x: x * 2
+print(double(7))  # 14
+
+# Useful with sorted()
+animals = [("elephant", 4500), ("dolphin", 150), ("rhino", 2200)]
+by_weight = sorted(animals, key=lambda a: a[1])
+print(by_weight[0])  # ('dolphin', 150)`,
       },
       {
         title: 'Dictionaries',
         content:
-          'Dictionaries map keys to values — like a real dictionary maps words to definitions.',
-        code: `# Create a dictionary
+          'Dictionaries map **keys** to **values**. Keys must be immutable (strings, numbers, tuples). Values can be anything.\n\n' +
+          '**Key methods:**\n' +
+          '- `d[key]` — get value (raises KeyError if missing)\n' +
+          '- `d.get(key, default)` — get value safely (returns default if missing)\n' +
+          '- `d.items()` — loop through key-value pairs\n' +
+          '- `d.keys()`, `d.values()` — get all keys or values\n\n' +
+          '**collections module** provides specialized dict types:\n' +
+          '- `Counter` — count occurrences automatically\n' +
+          '- `defaultdict` — auto-create missing keys with a default value',
+        code: `# ── Creating and accessing ──
 elephant = {
     "name": "Ranga",
     "age": 25,
     "location": "Kaziranga"
 }
 
-# Access values
-print(elephant["name"])        # Ranga
-print(elephant.get("weight", "unknown"))  # unknown (safe access)
+print(elephant["name"])         # Ranga
 
-# Add / update
-elephant["weight"] = 4500
-elephant["age"] = 26
+# .get() is safe — returns default if key missing
+print(elephant.get("weight", "unknown"))  # unknown
+# vs elephant["weight"] would crash with KeyError
 
-# Loop through
+# ── Adding, updating, deleting ──
+elephant["weight"] = 4500       # add new key
+elephant["age"] = 26            # update existing
+del elephant["location"]        # delete a key
+
+# ── Looping ──
 for key, value in elephant.items():
     print(f"{key}: {value}")
 
-# Dictionary comprehension
+# Just keys or just values
+print(list(elephant.keys()))    # ['name', 'age', 'weight']
+
+# ── Counting with a dict ──
+sky = "RROOYYRP"
+counts = {}
+for char in sky:
+    counts[char] = counts.get(char, 0) + 1
+print(counts)  # {'R': 2, 'O': 2, 'Y': 2, 'P': 1}
+
+# ── collections.Counter — does counting for you ──
+from collections import Counter
+sky_counts = Counter("RROOYYRP")
+print(sky_counts)               # Counter({'R': 2, 'O': 2, 'Y': 2, 'P': 1})
+print(sky_counts.most_common(2))  # [('R', 2), ('O', 2)]
+
+# ── collections.defaultdict — auto-create missing keys ──
+from collections import defaultdict
+grouped = defaultdict(list)     # missing keys get empty list
+sightings = [("Dendrobium", "Kaziranga"), ("Vanda", "Manas"), ("Dendrobium", "Majuli")]
+for species, location in sightings:
+    grouped[species].append(location)
+print(dict(grouped))
+# {'Dendrobium': ['Kaziranga', 'Majuli'], 'Vanda': ['Manas']}
+
+# ── Dictionary comprehension ──
 squares = {n: n**2 for n in range(1, 6)}
-print(squares)  # {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}`,
+print(squares)  # {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
+
+# Filter a dict
+big_squares = {k: v for k, v in squares.items() if v > 10}
+print(big_squares)  # {4: 16, 5: 25}
+
+# ── Sets — unordered collection of unique values ──
+animals = {"elephant", "dolphin", "elephant", "rhino"}
+print(animals)  # {'elephant', 'dolphin', 'rhino'} (no duplicates)
+
+# Set operations
+set_a = {1, 2, 3, 4}
+set_b = {3, 4, 5, 6}
+print(set_a & set_b)   # {3, 4}  intersection
+print(set_a | set_b)   # {1, 2, 3, 4, 5, 6}  union
+print(set_a - set_b)   # {1, 2}  difference
+
+# Deduplicate a list
+names = ["Ranga", "Mohini", "Ranga", "Kavi", "Mohini"]
+unique = sorted(set(names))
+print(unique)  # ['Kavi', 'Mohini', 'Ranga']
+
+# ── Tuples — immutable sequences ──
+point = (3, 4)
+x, y = point          # unpacking
+print(f"x={x}, y={y}")
+
+# Tuples as dict keys (lists can't be keys)
+grid = {(0, 0): "start", (3, 4): "end"}
+print(grid[(3, 4)])    # end`,
       },
       {
         title: 'List Comprehensions — One-Line Loops',
@@ -4297,6 +4555,376 @@ plt.show()
           'Big O describes how time grows with input size n: O(1) constant (array access, hash lookup), O(log n) logarithmic (binary search), O(n) linear (scan entire list), O(n log n) linearithmic (merge sort, Python sorted()), O(n²) quadratic (nested loops, bubble sort), O(2ⁿ) exponential (brute force subset enumeration). To find Big O: count nested loops. One loop over n → O(n). Two nested loops each over n → O(n²). A loop that halves n each iteration → O(log n). Drop constants and lower terms: O(3n² + 5n + 7) = O(n²).',
         advanced:
           'Space complexity measures memory usage: merge sort uses O(n) extra space; quicksort uses O(log n) stack space. In-place algorithms (heapsort) use O(1) extra space. Amortized analysis: Python list.append() is O(1) amortized — occasional O(n) resize is spread across n operations. The Master Theorem solves divide-and-conquer recurrences: T(n) = aT(n/b) + O(n^d). If d < log_b(a): T = O(n^(log_b(a))); if d = log_b(a): T = O(n^d log n); if d > log_b(a): T = O(n^d). For merge sort: a=2, b=2, d=1, log₂2 = 1 = d → T = O(n log n). This theorem covers most recursive algorithm analyses.',
+      },
+    ],
+
+    build: [
+      {
+        title: 'Linear and Binary Search',
+        content:
+          'Linear search checks every element one by one — O(n). Binary search halves the search space each step — O(log n), but the data must be sorted.\n\n' +
+          'Binary search is the reason looking up a word in a dictionary is fast: you open to the middle, check if your word comes before or after, and repeat on the correct half.',
+        code: `# ── Linear search — check every element ──
+def linear_search(items, target):
+    """Return index of target, or -1 if not found."""
+    for i, item in enumerate(items):
+        if item == target:
+            return i
+    return -1
+
+names = ["Ranga", "Mohini", "Kavi", "Priya"]
+print(linear_search(names, "Kavi"))    # 2
+print(linear_search(names, "Arjun"))   # -1
+
+# ── Binary search — halve the search space each step ──
+def binary_search(sorted_list, target):
+    """Return index of target in a sorted list, or -1."""
+    left, right = 0, len(sorted_list) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if sorted_list[mid] == target:
+            return mid
+        elif sorted_list[mid] < target:
+            left = mid + 1   # target is in right half
+        else:
+            right = mid - 1  # target is in left half
+    return -1
+
+numbers = [2, 5, 8, 12, 16, 23, 38, 56, 72, 91]
+print(binary_search(numbers, 23))   # 5
+print(binary_search(numbers, 50))   # -1
+
+# ── Find closest value (not exact match) ──
+def find_closest(sorted_list, target):
+    """Find the value closest to target in a sorted list."""
+    if not sorted_list:
+        return None
+    left, right = 0, len(sorted_list) - 1
+    while left < right:
+        mid = (left + right) // 2
+        if sorted_list[mid] < target:
+            left = mid + 1
+        else:
+            right = mid
+    # Check neighbors
+    best = left
+    if left > 0 and abs(sorted_list[left-1] - target) < abs(sorted_list[left] - target):
+        best = left - 1
+    return sorted_list[best]
+
+temps = [0, 1000, 2000, 3000, 4000]
+print(find_closest(temps, 1500))  # 1000 or 2000`,
+      },
+      {
+        title: 'Sorting Algorithms',
+        content:
+          'Sorting puts elements in order. Python\'s built-in `sorted()` uses Timsort (O(n log n)), but understanding simpler algorithms teaches you how sorting works.\n\n' +
+          '**Bubble sort** — repeatedly swap adjacent out-of-order pairs. Simple but slow: O(n\u00B2).\n' +
+          '**Insertion sort** — build the sorted portion one element at a time. Fast on nearly-sorted data.\n' +
+          '**When to use what:** For small lists or educational purposes, write your own. For real code, use `sorted()` or `.sort()`.',
+        code: `# ── Bubble sort — swap adjacent elements ──
+def bubble_sort(items):
+    """Sort a list using bubble sort. Returns new sorted list."""
+    arr = items[:]  # don't mutate the input
+    n = len(arr)
+    for i in range(n):
+        swapped = False
+        for j in range(n - 1 - i):
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+                swapped = True
+        if not swapped:
+            break  # already sorted — stop early
+    return arr
+
+print(bubble_sort([64, 34, 25, 12, 22, 11, 90]))
+# [11, 12, 22, 25, 34, 64, 90]
+
+# ── Insertion sort — insert each element into its place ──
+def insertion_sort(items):
+    """Sort using insertion sort. Returns new sorted list."""
+    arr = items[:]
+    for i in range(1, len(arr)):
+        key = arr[i]
+        j = i - 1
+        while j >= 0 and arr[j] > key:
+            arr[j + 1] = arr[j]
+            j -= 1
+        arr[j + 1] = key
+    return arr
+
+print(insertion_sort([5, 2, 8, 1, 9]))
+# [1, 2, 5, 8, 9]
+
+# ── Python's built-in sort — use this in real code ──
+animals = [("elephant", 4500), ("dolphin", 150), ("rhino", 2200)]
+
+# Sort by weight (second element)
+by_weight = sorted(animals, key=lambda a: a[1])
+print(by_weight)
+# [('dolphin', 150), ('rhino', 2200), ('elephant', 4500)]
+
+# Sort descending
+by_weight_desc = sorted(animals, key=lambda a: a[1], reverse=True)
+print(by_weight_desc[0])  # ('elephant', 4500)`,
+      },
+      {
+        title: 'Two-Pointer Technique',
+        content:
+          'The two-pointer technique uses two indices that move through a list from opposite ends (or at different speeds). ' +
+          'It solves many problems in O(n) that would otherwise need O(n\u00B2).\n\n' +
+          '**Common uses:**\n' +
+          '- Palindrome checking (compare from both ends)\n' +
+          '- Reversing a list in-place\n' +
+          '- Finding pairs that sum to a target\n' +
+          '- Checking symmetry',
+        code: `# ── Palindrome check with two pointers ──
+def is_palindrome(text):
+    """Check if text reads the same forwards and backwards.
+    Case-insensitive, ignoring non-alphanumeric characters."""
+    left, right = 0, len(text) - 1
+    while left < right:
+        # Skip non-alphanumeric from left
+        while left < right and not text[left].isalnum():
+            left += 1
+        # Skip non-alphanumeric from right
+        while left < right and not text[right].isalnum():
+            right -= 1
+        if text[left].lower() != text[right].lower():
+            return False
+        left += 1
+        right -= 1
+    return True
+
+print(is_palindrome("Race Car"))              # True
+print(is_palindrome("A man a plan a canal Panama"))  # True
+print(is_palindrome("hello"))                  # False
+
+# ── Reverse a list in-place ──
+def reverse_in_place(items):
+    """Reverse a list using two pointers — O(1) extra space."""
+    left, right = 0, len(items) - 1
+    while left < right:
+        items[left], items[right] = items[right], items[left]
+        left += 1
+        right -= 1
+    return items
+
+data = [1, 2, 3, 4, 5]
+print(reverse_in_place(data))  # [5, 4, 3, 2, 1]
+
+# ── Check symmetry with tolerance ──
+def is_symmetric(profile, tolerance=0):
+    """Check if a list is symmetric (palindrome) within tolerance."""
+    left, right = 0, len(profile) - 1
+    while left < right:
+        if abs(profile[left] - profile[right]) > tolerance:
+            return False
+        left += 1
+        right -= 1
+    return True
+
+print(is_symmetric([5, 8, 10, 8, 5]))       # True
+print(is_symmetric([5, 8, 10, 8.1, 4.9], 0.2))  # True`,
+      },
+      {
+        title: 'Sliding Window',
+        content:
+          'The sliding window technique processes a fixed-size window that moves across a list. Instead of recalculating everything ' +
+          'for each position, you update the result by subtracting what left the window and adding what entered.\n\n' +
+          'This reduces O(n \u00D7 k) brute force to O(n), where k is the window size.',
+        code: `# ── Moving average with sliding window ──
+def moving_average(data, window):
+    """Calculate moving average in O(n) — not O(n*k)."""
+    if not data or window <= 0 or window > len(data):
+        return []
+
+    # Calculate sum of first window
+    window_sum = sum(data[:window])
+    result = [round(window_sum / window, 1)]
+
+    # Slide: subtract left, add right
+    for i in range(window, len(data)):
+        window_sum += data[i] - data[i - window]
+        result.append(round(window_sum / window, 1))
+
+    return result
+
+rainfall = [10, 20, 30, 40, 50]
+print(moving_average(rainfall, 3))  # [20.0, 30.0, 40.0]
+
+# ── Maximum sum subarray of size k ──
+def max_sum_subarray(nums, k):
+    """Find the maximum sum of any k consecutive elements."""
+    if len(nums) < k:
+        return None
+    window_sum = sum(nums[:k])
+    max_sum = window_sum
+    for i in range(k, len(nums)):
+        window_sum += nums[i] - nums[i - k]
+        max_sum = max(max_sum, window_sum)
+    return max_sum
+
+print(max_sum_subarray([2, 1, 5, 1, 3, 2], 3))  # 9 (5+1+3)
+
+# ── Longest streak of positive values ──
+def longest_positive_streak(data):
+    """Find the longest consecutive streak of positive numbers."""
+    current = 0
+    longest = 0
+    for value in data:
+        if value > 0:
+            current += 1
+            longest = max(longest, current)
+        else:
+            current = 0
+    return longest
+
+growth = [2, 3, 0, 1, 4, 5, 0, 1]
+print(longest_positive_streak(growth))  # 3`,
+      },
+      {
+        title: 'BFS and DFS — Graph Traversal',
+        content:
+          'Graphs model connections: villages connected by bridges, cells in a grid, nodes in a network. ' +
+          'Two fundamental ways to explore a graph:\n\n' +
+          '**BFS (Breadth-First Search)** — explore all neighbors first, then their neighbors. Uses a queue. ' +
+          'Finds the shortest path in unweighted graphs.\n\n' +
+          '**DFS (Depth-First Search)** — go as deep as possible before backtracking. Uses a stack (or recursion). ' +
+          'Good for exploring all paths, counting connected components.',
+        code: `from collections import deque
+
+# ── BFS — explore layer by layer ──
+def bfs(graph, start):
+    """Visit all reachable nodes using BFS."""
+    visited = set()
+    queue = deque([start])
+    visited.add(start)
+    order = []
+    while queue:
+        node = queue.popleft()
+        order.append(node)
+        for neighbor in graph.get(node, []):
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.append(neighbor)
+    return order
+
+village_graph = {
+    "A": ["B", "C"],
+    "B": ["A", "D"],
+    "C": ["A", "D"],
+    "D": ["B", "C"],
+}
+print(bfs(village_graph, "A"))  # ['A', 'B', 'C', 'D']
+
+# ── Count islands in a grid (DFS) ──
+def count_islands(grid):
+    """Count connected components of 1s in a 2D grid."""
+    if not grid or not grid[0]:
+        return 0
+    rows, cols = len(grid), len(grid[0])
+    visited = set()
+    count = 0
+
+    def dfs(r, c):
+        if (r, c) in visited or r < 0 or r >= rows or c < 0 or c >= cols:
+            return
+        if grid[r][c] != 1:
+            return
+        visited.add((r, c))
+        dfs(r+1, c)  # down
+        dfs(r-1, c)  # up
+        dfs(r, c+1)  # right
+        dfs(r, c-1)  # left
+
+    for r in range(rows):
+        for c in range(cols):
+            if grid[r][c] == 1 and (r, c) not in visited:
+                dfs(r, c)
+                count += 1
+    return count
+
+river = [
+    [1, 1, 0, 0],
+    [0, 0, 1, 0],
+    [0, 0, 0, 1],
+]
+print(count_islands(river))  # 3
+
+# ── Shortest path with BFS (unweighted) ──
+def shortest_path(graph, start, end):
+    """BFS shortest path — returns distance or -1."""
+    if start == end:
+        return 0
+    visited = {start}
+    queue = deque([(start, 0)])
+    while queue:
+        node, dist = queue.popleft()
+        for neighbor in graph.get(node, []):
+            if neighbor == end:
+                return dist + 1
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.append((neighbor, dist + 1))
+    return -1
+
+print(shortest_path(village_graph, "A", "D"))  # 2`,
+      },
+      {
+        title: 'Recursion',
+        content:
+          'A recursive function calls itself with a smaller version of the problem. Every recursive function needs:\n\n' +
+          '1. **Base case** — the simplest version that returns directly (stops the recursion)\n' +
+          '2. **Recursive case** — breaks the problem down and calls itself\n\n' +
+          'Think of it like Russian nesting dolls: each doll contains a smaller doll, until you reach the tiniest one.',
+        code: `# ── Tree depth — classic recursion ──
+def tree_depth(tree):
+    """Find the maximum depth of a nested dictionary.
+    {} has depth 0. {"a": {"b": {}}} has depth 2."""
+    if not isinstance(tree, dict) or not tree:
+        return 0
+    return 1 + max(tree_depth(v) for v in tree.values())
+
+print(tree_depth({}))                             # 0
+print(tree_depth({"a": {"b": {"c": {}}}}))        # 3
+print(tree_depth({"left": {}, "right": {"x": {}}}))  # 2
+
+# ── Factorial ──
+def factorial(n):
+    """n! = n * (n-1) * ... * 1. Base case: 0! = 1."""
+    if n <= 1:
+        return 1
+    return n * factorial(n - 1)
+
+print(factorial(5))  # 120 (5 * 4 * 3 * 2 * 1)
+
+# ── Flatten nested lists ──
+def flatten(nested):
+    """Flatten a list that may contain other lists."""
+    result = []
+    for item in nested:
+        if isinstance(item, list):
+            result.extend(flatten(item))  # recurse
+        else:
+            result.append(item)
+    return result
+
+print(flatten([1, [2, 3], [4, [5, 6]]]))
+# [1, 2, 3, 4, 5, 6]
+
+# ── When NOT to recurse ──
+# Fibonacci is the classic example of BAD recursion
+# (exponential time without memoization)
+
+# GOOD: iterative Fibonacci
+def fibonacci(n):
+    a, b = 0, 1
+    for _ in range(n):
+        a, b = b, a + b
+    return a
+
+print(fibonacci(10))  # 55`,
       },
     ],
   },

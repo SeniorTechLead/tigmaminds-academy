@@ -1,8 +1,91 @@
 import { useState } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle, Clock, Loader2 } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { supabase } from '../lib/supabase';
+
+function CallbackForm() {
+  const [cb, setCb] = useState({ name: '', phone: '', preferredTime: '' });
+  const [cbSubmitting, setCbSubmitting] = useState(false);
+  const [cbStatus, setCbStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleCbChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    setCb({ ...cb, [e.target.name]: e.target.value });
+  };
+
+  const handleCbSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setCbSubmitting(true);
+    setCbStatus('idle');
+
+    const { error } = await supabase
+      .from('contact_submissions')
+      .insert([{
+        name: cb.name,
+        email: '',
+        phone: cb.phone,
+        subject: 'Callback Request',
+        message: `Preferred time: ${cb.preferredTime}`,
+      }]);
+
+    setCbSubmitting(false);
+    if (error) {
+      setCbStatus('error');
+    } else {
+      setCbStatus('success');
+      setCb({ name: '', phone: '', preferredTime: '' });
+    }
+  };
+
+  if (cbStatus === 'success') {
+    return (
+      <div className="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-xl p-5 flex items-start gap-3">
+        <CheckCircle className="w-5 h-5 text-emerald-600 dark:text-emerald-400 flex-shrink-0 mt-0.5" />
+        <div>
+          <p className="font-semibold text-emerald-900 dark:text-emerald-300">Callback scheduled!</p>
+          <p className="text-sm text-emerald-700 dark:text-emerald-400">A mentor will call you during your preferred time.</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Request a Callback</h3>
+      <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">A real mentor — not a sales team — will call you back.</p>
+
+      {cbStatus === 'error' && (
+        <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl text-sm text-red-700 dark:text-red-300">
+          Something went wrong. Please try again.
+        </div>
+      )}
+
+      <form onSubmit={handleCbSubmit} className="space-y-4">
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Your Name *</label>
+          <input type="text" name="name" value={cb.name} onChange={handleCbChange} required className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Your name" />
+        </div>
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Phone Number *</label>
+          <input type="tel" name="phone" value={cb.phone} onChange={handleCbChange} required className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="+91 98765 43210" />
+        </div>
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Preferred Time *</label>
+          <select name="preferredTime" value={cb.preferredTime} onChange={handleCbChange} required className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+            <option value="">Select a time slot</option>
+            <option value="Weekday morning (9 AM – 12 PM)">Weekday morning (9 AM – 12 PM)</option>
+            <option value="Weekday afternoon (12 PM – 3 PM)">Weekday afternoon (12 PM – 3 PM)</option>
+            <option value="Weekday evening (3 PM – 6 PM)">Weekday evening (3 PM – 6 PM)</option>
+            <option value="Saturday (10 AM – 4 PM)">Saturday (10 AM – 4 PM)</option>
+          </select>
+        </div>
+        <button type="submit" disabled={cbSubmitting} className="w-full bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-3 rounded-lg font-semibold flex items-center justify-center gap-2 hover:shadow-lg transition-all disabled:opacity-50">
+          {cbSubmitting ? <><Loader2 className="w-4 h-4 animate-spin" /> Requesting...</> : <><Phone className="w-4 h-4" /> Request Callback</>}
+        </button>
+      </form>
+    </div>
+  );
+}
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -107,9 +190,12 @@ export default function ContactPage() {
                     <Phone className="h-7 w-7 text-green-600 dark:text-green-400" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">Call Us</h3>
-                    <p className="text-gray-600 dark:text-gray-300">+91 96000 07705</p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Mon-Fri, 9:00 AM - 6:00 PM IST</p>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">Talk to a Mentor</h3>
+                    <p className="text-gray-600 dark:text-gray-300">Request a callback from one of our mentors</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Not a sales team — real mentors who teach on the platform</p>
+                    <a href="#callback" className="inline-flex items-center gap-1.5 mt-2 text-sm text-green-600 dark:text-green-400 hover:underline font-semibold">
+                      <Clock className="w-3.5 h-3.5" /> Schedule a callback
+                    </a>
                   </div>
                 </div>
 
@@ -128,7 +214,7 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="bg-white dark:bg-gray-800 p-6 rounded-xl border-2 border-gray-200 dark:border-gray-700 shadow-lg">
+              <div className="bg-white dark:bg-gray-800 p-6 rounded-xl border-2 border-gray-200 dark:border-gray-700 shadow-lg mb-8">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Office Hours</h3>
                 <div className="space-y-2 text-gray-600 dark:text-gray-300">
                   <div className="flex justify-between">
@@ -144,6 +230,10 @@ export default function ContactPage() {
                     <span>Closed</span>
                   </div>
                 </div>
+              </div>
+
+              <div id="callback" className="bg-white dark:bg-gray-800 p-6 rounded-xl border-2 border-green-200 dark:border-green-800 shadow-lg scroll-mt-32">
+                <CallbackForm />
               </div>
             </div>
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { BookOpen, Search, List, ChevronDown, ChevronUp } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -16,6 +16,7 @@ const LEVEL_OPTIONS: { value: ReferenceLevel; label: string; desc: string }[] = 
 
 export default function ReferencePage() {
   const { slug } = useParams<{ slug?: string }>();
+  const location = useLocation();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [showIndex, setShowIndex] = useState(false);
@@ -24,6 +25,34 @@ export default function ReferencePage() {
     const saved = localStorage.getItem('tma_ref_level');
     return saved ? (parseInt(saved) as ReferenceLevel) : 0;
   });
+
+  // Deep-link to a section within a guide via URL hash (e.g. #section-python-10)
+  useEffect(() => {
+    const hash = location.hash?.slice(1);
+    if (!hash || !hash.startsWith('section-')) return;
+    // Extract guide slug from section ID: "section-python-10" -> "python"
+    const parts = hash.replace('section-', '').split('-');
+    parts.pop(); // remove index
+    const guideSlug = parts.join('-');
+
+    const attempt = (tries: number) => {
+      const el = document.getElementById(hash);
+      if (el && el.offsetHeight > 0) {
+        const top = el.getBoundingClientRect().top + window.scrollY - 120;
+        window.scrollTo({ top, behavior: 'smooth' });
+      } else if (tries >= 8) {
+        // Section not found (likely gated) — scroll to the guide card instead
+        const guideEl = document.getElementById(`ref-${guideSlug}`);
+        if (guideEl) {
+          const top = guideEl.getBoundingClientRect().top + window.scrollY - 120;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      } else {
+        setTimeout(() => attempt(tries + 1), 250);
+      }
+    };
+    setTimeout(() => attempt(0), 800);
+  }, [location.hash, slug]);
 
   // Scroll to target after filters clear and DOM re-renders
   useEffect(() => {

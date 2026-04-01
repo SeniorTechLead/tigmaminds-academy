@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import {
   ArrowRight, BookOpen, Code2, Sparkles, Lock, Unlock,
   ChevronDown, GraduationCap, Lightbulb, Wrench, Rocket,
-  Users, FlaskConical, BarChart3, Award,
+  Users, FlaskConical, BarChart3, Award, Loader2, CheckCircle, MapPin,
 } from 'lucide-react';
+import { supabase } from '../lib/supabase';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
@@ -77,6 +78,102 @@ const faqs = [
   { q: 'How is this different from free YouTube tutorials?', a: 'Every concept starts with a story, so you understand WHY before HOW. You build real projects, not toy exercises. And the five-level progression means you go as deep as you want — not just surface-level.' },
   { q: 'Do I need to know how to code?', a: 'No. Level 0 (Listener) and Level 1 (Explorer) require zero coding. Levels 2-4 introduce Python gradually, with every line of code explained in context.' },
 ];
+
+function WaitlistForm({ isIndia }: { isIndia: boolean }) {
+  const [form, setForm] = useState({ parentName: '', email: '', childAge: '', city: '' });
+  const [submitting, setSubmitting] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+    setStatus('idle');
+
+    const { error } = await supabase
+      .from('contact_submissions')
+      .insert([{
+        name: form.parentName,
+        email: form.email,
+        subject: `In-Person Waitlist \u2014 ${form.city}`,
+        message: `City: ${form.city}\nChild\u2019s age: ${form.childAge}`,
+      }]);
+
+    setSubmitting(false);
+    if (error) {
+      setStatus('error');
+    } else {
+      setStatus('success');
+      setForm({ parentName: '', email: '', childAge: '', city: '' });
+    }
+  };
+
+  if (status === 'success') {
+    return (
+      <div className="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-2xl p-6 sm:p-8 text-center">
+        <CheckCircle className="w-10 h-10 text-emerald-500 mx-auto mb-3" />
+        <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">You're on the list!</h3>
+        <p className="text-sm text-gray-600 dark:text-gray-400">We'll email you when workshops open in your city.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-white dark:bg-gray-800 rounded-2xl border-2 border-purple-200 dark:border-purple-800 p-6 sm:p-8">
+      <div className="flex items-center gap-3 mb-4">
+        <MapPin className="w-6 h-6 text-purple-500" />
+        <h3 className="text-xl font-bold text-gray-900 dark:text-white">Join the In-Person Waitlist</h3>
+      </div>
+      <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
+        We're launching mentor-led workshops in Guwahati and Thiruvananthapuram. {isIndia ? '₹9,999' : '$59'}/mo — 8 hours of live instruction, small groups of 12, real experiments, monthly parent reports.
+      </p>
+
+      {status === 'error' && (
+        <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl text-sm text-red-700 dark:text-red-300">
+          Something went wrong. Please try again.
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Your Name *</label>
+            <input type="text" name="parentName" value={form.parentName} onChange={handleChange} required className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Parent or guardian name" />
+          </div>
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Email *</label>
+            <input type="email" name="email" value={form.email} onChange={handleChange} required className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="you@example.com" />
+          </div>
+        </div>
+        <div className="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Child's Age *</label>
+            <select name="childAge" value={form.childAge} onChange={handleChange} required className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+              <option value="">Select age</option>
+              {Array.from({ length: 7 }, (_, i) => i + 10).map((age) => (
+                <option key={age} value={age}>{age} years</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">City *</label>
+            <select name="city" value={form.city} onChange={handleChange} required className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+              <option value="">Select city</option>
+              <option value="Guwahati">Guwahati</option>
+              <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" disabled={submitting} className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-purple-500 to-indigo-500 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all disabled:opacity-50">
+          {submitting ? <><Loader2 className="w-4 h-4 animate-spin" /> Joining...</> : 'Join Waitlist'}
+        </button>
+      </form>
+    </div>
+  );
+}
 
 function FAQ({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
@@ -229,9 +326,9 @@ export default function ProgramsPage() {
                 <li className="flex items-start gap-2"><span className="text-purple-500">✓</span> Monthly parent progress reports</li>
               </ul>
               <p className="text-xs text-gray-400 dark:text-gray-500 mb-4">That's {isIndia ? '₹1,250' : '$7.40'}/hour — less than private tutoring</p>
-              <Link to="/contact" className="block w-full py-2.5 rounded-xl bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-sm font-semibold hover:bg-purple-200 dark:hover:bg-purple-800/30 transition-colors">
+              <a href="#waitlist" className="block w-full py-2.5 rounded-xl bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-sm font-semibold hover:bg-purple-200 dark:hover:bg-purple-800/30 transition-colors">
                 Join Waitlist
-              </Link>
+              </a>
             </div>
           </div>
         </div>
@@ -274,9 +371,9 @@ export default function ProgramsPage() {
                 <li className="flex items-start gap-2"><span className="text-amber-500 mt-0.5">✓</span> Offline experiments with real materials</li>
               </ul>
               <p className="mt-6 text-sm font-semibold text-amber-600 dark:text-amber-400">{isIndia ? '₹9,999' : '$59'}/mo — coming to select cities</p>
-              <Link to="/contact" className="inline-flex items-center gap-1.5 mt-2 text-sm text-amber-600 dark:text-amber-400 hover:underline font-medium">
-                Express interest <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
+              <a href="#waitlist" className="inline-flex items-center gap-1.5 mt-2 text-sm text-amber-600 dark:text-amber-400 hover:underline font-medium">
+                Join the waitlist <ArrowRight className="w-3.5 h-3.5" />
+              </a>
             </div>
           </div>
         </div>
@@ -360,6 +457,13 @@ export default function ProgramsPage() {
         </div>
       </section>
 
+      {/* ── Waitlist ── */}
+      <section id="waitlist" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900 scroll-mt-24">
+        <div className="max-w-2xl mx-auto">
+          <WaitlistForm isIndia={isIndia} />
+        </div>
+      </section>
+
       {/* ── FAQ ── */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-amber-50/30 dark:from-gray-900 dark:to-gray-800/30">
         <div className="max-w-3xl mx-auto">
@@ -383,7 +487,7 @@ export default function ProgramsPage() {
             <Link to="/lessons" className="inline-flex items-center bg-white text-amber-600 px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl hover:scale-105 transition-all">
               Browse Lessons <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
-            <Link to="/students" className="inline-flex items-center bg-white/20 text-white border-2 border-white/40 px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/30 transition-all">
+            <Link to="/auth" className="inline-flex items-center bg-white/20 text-white border-2 border-white/40 px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/30 transition-all">
               Sign Up Free <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
           </div>

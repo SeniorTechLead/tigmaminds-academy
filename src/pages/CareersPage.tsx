@@ -1,32 +1,81 @@
-import { Award, Heart, Users, TrendingUp, CheckCircle, ArrowRight } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import {
+  Shield, BookOpen, Users, MapPin, CheckCircle,
+  GraduationCap, ClipboardCheck, Award, Loader2, Send,
+} from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { supabase } from '../lib/supabase';
 
+const processSteps = [
+  {
+    num: '1',
+    title: 'Apply',
+    desc: 'Tell us about your background, your city, and why you want to teach STEM to children.',
+  },
+  {
+    num: '2',
+    title: 'Training',
+    desc: 'Complete our 2-week training program. Learn our pedagogy: stories first, then science, then code. Practice delivering lessons from our platform.',
+  },
+  {
+    num: '3',
+    title: 'Assessment',
+    desc: 'Deliver a mock workshop to our team. We evaluate your ability to engage young learners, explain concepts clearly, and maintain the quality bar parents expect.',
+  },
+  {
+    num: '4',
+    title: 'Certification',
+    desc: 'Pass the assessment and become a TigmaMinds Certified Mentor. You receive access to our full curriculum, workshop materials, and ongoing support.',
+  },
+];
+
+const expectations = [
+  'Deliver weekly 2-hour workshops using TigmaMinds curriculum (no freelancing the content)',
+  'Small groups of up to 12 students, ages 10–16',
+  'Facilitate hands-on experiments, coding projects, and peer presentations',
+  'Submit monthly progress reports for each student\u2019s parents',
+  'Attend monthly mentor calibration sessions to maintain quality',
+  'Represent TigmaMinds Academy\u2019s values: curiosity, rigor, and kindness',
+];
+
+const idealCandidate = [
+  { icon: GraduationCap, text: 'STEM background — engineering, science, or computer science degree or equivalent experience' },
+  { icon: BookOpen, text: 'Genuine enthusiasm for teaching — you light up when explaining how things work' },
+  { icon: Users, text: 'Comfort working with children and teenagers in a classroom setting' },
+  { icon: MapPin, text: 'Based in Guwahati or Thiruvananthapuram (or willing to relocate)' },
+];
+
 export default function CareersPage() {
-  const [categories, setCategories] = useState<string[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [form, setForm] = useState({ name: '', email: '', phone: '', city: '', background: '', motivation: '' });
+  const [submitting, setSubmitting] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  useEffect(() => {
-    fetchCategories();
-  }, []);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
-  const fetchCategories = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('courses')
-        .select('category');
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+    setStatus('idle');
 
-      if (error) throw error;
+    const { error } = await supabase
+      .from('contact_submissions')
+      .insert([{
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        subject: `Mentor Application — ${form.city}`,
+        message: `City: ${form.city}\nBackground: ${form.background}\nMotivation: ${form.motivation}`,
+      }]);
 
-      const uniqueCategories = [...new Set((data || []).map(course => course.category))];
-      setCategories(uniqueCategories);
-    } catch (error) {
-      console.error('Error fetching categories:', error);
-    } finally {
-      setLoading(false);
+    setSubmitting(false);
+    if (error) {
+      setStatus('error');
+    } else {
+      setStatus('success');
+      setForm({ name: '', email: '', phone: '', city: '', background: '', motivation: '' });
     }
   };
 
@@ -34,179 +83,198 @@ export default function CareersPage() {
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
       <Header />
 
-      <section className="pt-32 pb-20 bg-gradient-to-br from-blue-50 to-white dark:from-gray-800 dark:to-gray-900 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 bg-amber-50 dark:bg-amber-900/40 text-amber-600 dark:text-amber-300 px-4 py-2 rounded-full mb-6">
-              <Award className="w-5 h-5" />
-              <span className="text-sm font-semibold">Join Our Team</span>
-            </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-white mb-6 leading-tight">
-              Become a Mentor at TigmaMinds
-            </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              Share your expertise and passion. Help shape the next generation of tech professionals.
+      {/* ── Hero ── */}
+      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-amber-50 via-white to-orange-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 px-4 py-2 rounded-full mb-6 text-sm font-semibold">
+            <GraduationCap className="w-4 h-4" />
+            Now hiring in Guwahati &amp; Thiruvananthapuram
+          </div>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
+            Teach With Us
+          </h1>
+          <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Become a TigmaMinds Certified Mentor. Lead in-person STEM workshops for children aged 10–16 using our story-driven curriculum, training, and materials.
+          </p>
+        </div>
+      </section>
+
+      {/* ── How We Maintain Quality ── */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
+        <div className="max-w-5xl mx-auto">
+          <div className="flex items-center gap-3 justify-center mb-4">
+            <Shield className="w-6 h-6 text-amber-500" />
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white">How We Maintain Quality</h2>
+          </div>
+          <p className="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+            We control curriculum centrally. Mentors don't create content — they bring it to life. This means every child gets the same rigorous, story-driven experience, no matter who teaches or where.
+          </p>
+
+          {/* Trust signal for parents */}
+          <div className="bg-amber-50 dark:bg-amber-900/15 border border-amber-200 dark:border-amber-800 rounded-2xl p-6 sm:p-8 mb-16">
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+              <ClipboardCheck className="w-5 h-5 text-amber-600 dark:text-amber-400" />
+              A note for parents
+            </h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+              Every mentor teaching your child has completed our training program, passed a live assessment observed by our team, and earned TigmaMinds certification. They teach exclusively from our platform curriculum — the same lessons, experiments, and projects you can preview online. We run monthly calibration sessions to ensure consistent quality across all workshops and cities.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 mb-16">
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
-              <div className="w-16 h-16 bg-amber-100 dark:bg-amber-900/40 rounded-full flex items-center justify-center mb-6">
-                <Heart className="w-8 h-8 text-amber-600 dark:text-amber-400" />
+          {/* Process steps */}
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">The Mentor Journey</h3>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {processSteps.map((step) => (
+              <div key={step.num} className="relative bg-gray-50 dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white font-bold text-lg mb-4">
+                  {step.num}
+                </div>
+                <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{step.title}</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{step.desc}</p>
               </div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                Why Become a Mentor?
-              </h2>
-              <ul className="space-y-4 text-gray-600 dark:text-gray-300">
-                <li className="flex items-start gap-3">
-                  <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span>Make a meaningful impact on students' careers and lives</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span>Share your real-world industry experience and knowledge</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span>Flexible schedule and competitive compensation</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span>Join a community of passionate educators and experts</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span>Enhance your teaching and communication skills</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
-              <div className="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mb-6">
-                <Users className="w-8 h-8 text-green-600 dark:text-green-400" />
-              </div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                Who We're Looking For
-              </h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
-                We're seeking experienced professionals who are passionate about helping students learn and succeed. The ideal mentor candidate has:
-              </p>
-              <ul className="space-y-4 text-gray-600 dark:text-gray-300">
-                <li className="flex items-start gap-3">
-                  <TrendingUp className="w-6 h-6 text-amber-500 flex-shrink-0 mt-0.5" />
-                  <span>3+ years of professional experience in your field</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Heart className="w-6 h-6 text-amber-500 flex-shrink-0 mt-0.5" />
-                  <span>A genuine passion for teaching and student success</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Award className="w-6 h-6 text-amber-500 flex-shrink-0 mt-0.5" />
-                  <span>Strong communication and presentation skills</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle className="w-6 h-6 text-amber-500 flex-shrink-0 mt-0.5" />
-                  <span>Commitment to delivering high-quality instruction</span>
-                </li>
-              </ul>
-            </div>
+            ))}
           </div>
+        </div>
+      </section>
 
-          <div className="bg-gradient-to-br from-amber-600 to-orange-700 rounded-2xl shadow-2xl p-8 md:p-12 mb-16">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                Program Tracks We're Hiring For
-              </h2>
-              <p className="text-amber-100 text-lg">
-                We're looking for experts in the following areas:
-              </p>
-            </div>
-
-            {loading ? (
-              <div className="text-center text-white">Loading program tracks...</div>
-            ) : (
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {categories.map((category, index) => (
-                  <div
-                    key={index}
-                    className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-colors"
-                  >
-                    <CheckCircle className="w-8 h-8 text-white mx-auto mb-3" />
-                    <h3 className="text-xl font-bold text-white">{category}</h3>
+      {/* ── Who We're Looking For ── */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-amber-50/30 dark:from-gray-900 dark:to-gray-800/30">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-10 text-center">Who We're Looking For</h2>
+          <div className="grid sm:grid-cols-2 gap-6 mb-12">
+            {idealCandidate.map((item) => {
+              const Icon = item.icon;
+              return (
+                <div key={item.text} className="flex items-start gap-4 bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-100 dark:border-gray-700">
+                  <div className="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-900/40 flex items-center justify-center flex-shrink-0">
+                    <Icon className="w-5 h-5 text-amber-600 dark:text-amber-400" />
                   </div>
-                ))}
-              </div>
-            )}
+                  <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">{item.text}</p>
+                </div>
+              );
+            })}
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 md:p-12">
-            <div className="max-w-3xl mx-auto">
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center">
-                Eligibility Requirements
-              </h2>
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">What You'll Do</h3>
+          <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 sm:p-8 border border-gray-100 dark:border-gray-700">
+            <ul className="space-y-3">
+              {expectations.map((item) => (
+                <li key={item} className="flex items-start gap-3 text-gray-700 dark:text-gray-300">
+                  <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
+                  <span className="text-sm leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
 
-              <div className="space-y-6 mb-8">
-                <div className="border-l-4 border-amber-500 pl-6 py-2">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                    1. Expertise in Our Program Tracks
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300">
-                    You must have demonstrated expertise in at least one of our six program tracks listed above. This includes hands-on experience building real-world projects, solving complex problems, and staying current with industry best practices and emerging technologies.
-                  </p>
-                </div>
-
-                <div className="border-l-4 border-green-600 pl-6 py-2">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                    2. Passion for Teaching and Student Success
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300">
-                    Beyond technical skills, we value mentors who genuinely care about student growth and success. You should be excited about breaking down complex concepts, providing constructive feedback, and celebrating your students' achievements. Your enthusiasm for helping others learn is just as important as your technical expertise.
-                  </p>
-                </div>
-              </div>
-
-              <div className="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-6 mb-8">
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">
-                  What You'll Do as a Mentor:
-                </h3>
-                <ul className="space-y-2 text-gray-700 dark:text-gray-300">
-                  <li className="flex items-start gap-2">
-                    <span className="text-amber-600 dark:text-amber-400 font-bold">•</span>
-                    <span>Design and deliver engaging course content</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-amber-600 dark:text-amber-400 font-bold">•</span>
-                    <span>Provide personalized guidance and feedback to students</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-amber-600 dark:text-amber-400 font-bold">•</span>
-                    <span>Host live Q&A sessions and code reviews</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-amber-600 dark:text-amber-400 font-bold">•</span>
-                    <span>Create practical projects and assessments</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-amber-600 dark:text-amber-400 font-bold">•</span>
-                    <span>Contribute to our curriculum development</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="text-center">
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center gap-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-10 py-4 rounded-lg hover:from-amber-600 hover:to-orange-600 transition-all transform hover:scale-105 shadow-lg font-bold text-lg group"
-                >
-                  <span>Apply to Become a Mentor</span>
-                  <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
-                </Link>
-                <p className="mt-4 text-gray-600 dark:text-gray-400">
-                  Questions? <Link to="/contact" className="text-amber-600 dark:text-amber-400 hover:underline">Contact us</Link> to learn more
-                </p>
-              </div>
+      {/* ── Workshop Cities ── */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-10 text-center">Workshop Cities</h2>
+          <div className="grid sm:grid-cols-2 gap-6">
+            <div className="rounded-2xl bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 border border-emerald-200 dark:border-emerald-800 p-8 text-center">
+              <MapPin className="w-8 h-8 text-emerald-600 dark:text-emerald-400 mx-auto mb-3" />
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Guwahati, Assam</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Where our stories come from. We're building our first workshops here.</p>
+            </div>
+            <div className="rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border border-blue-200 dark:border-blue-800 p-8 text-center">
+              <MapPin className="w-8 h-8 text-blue-600 dark:text-blue-400 mx-auto mb-3" />
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Thiruvananthapuram, Kerala</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Expanding to Kerala's capital. Strong STEM ecosystem, growing demand.</p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ── Compensation ── */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-amber-50/30 dark:from-gray-900 dark:to-gray-800/30">
+        <div className="max-w-3xl mx-auto text-center">
+          <Award className="w-8 h-8 text-amber-500 mx-auto mb-4" />
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">What You Get</h2>
+          <div className="grid sm:grid-cols-3 gap-6 mt-8">
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-100 dark:border-gray-700">
+              <p className="text-2xl font-bold text-gray-900 dark:text-white mb-1">₹500–800</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">per hour, based on experience</p>
+            </div>
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-100 dark:border-gray-700">
+              <p className="text-2xl font-bold text-gray-900 dark:text-white mb-1">Flexible</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">weekday evenings or weekends</p>
+            </div>
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-100 dark:border-gray-700">
+              <p className="text-2xl font-bold text-gray-900 dark:text-white mb-1">All materials</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">curriculum, kits, and ongoing support</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Application Form ── */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 text-center">Apply Now</h2>
+          <p className="text-center text-gray-600 dark:text-gray-400 mb-8">
+            Tell us a bit about yourself. We'll get back to you within a week.
+          </p>
+
+          {status === 'success' && (
+            <div className="mb-6 p-5 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-xl flex items-start gap-3">
+              <CheckCircle className="w-5 h-5 text-emerald-600 dark:text-emerald-400 flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="font-semibold text-emerald-900 dark:text-emerald-300">Application received!</p>
+                <p className="text-sm text-emerald-700 dark:text-emerald-400">We'll review your application and reach out within a week.</p>
+              </div>
+            </div>
+          )}
+
+          {status === 'error' && (
+            <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl text-sm text-red-700 dark:text-red-300">
+              Something went wrong. Please try again or email us at hello@tigmaminds.academy.
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-6 sm:p-8 border border-gray-100 dark:border-gray-700 space-y-5">
+            <div className="grid sm:grid-cols-2 gap-5">
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Full Name *</label>
+                <input type="text" name="name" value={form.name} onChange={handleChange} required className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent" placeholder="Your name" />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Email *</label>
+                <input type="email" name="email" value={form.email} onChange={handleChange} required className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent" placeholder="you@example.com" />
+              </div>
+            </div>
+            <div className="grid sm:grid-cols-2 gap-5">
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Phone</label>
+                <input type="tel" name="phone" value={form.phone} onChange={handleChange} className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent" placeholder="+91 98765 43210" />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">City *</label>
+                <select name="city" value={form.city} onChange={handleChange} required className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent">
+                  <option value="">Select city</option>
+                  <option value="Guwahati">Guwahati</option>
+                  <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Your Background *</label>
+              <textarea name="background" value={form.background} onChange={handleChange} required rows={3} className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent resize-none" placeholder="Education, work experience, any teaching or tutoring experience..." />
+            </div>
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Why do you want to teach with us? *</label>
+              <textarea name="motivation" value={form.motivation} onChange={handleChange} required rows={3} className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent resize-none" placeholder="What excites you about teaching STEM through stories?" />
+            </div>
+            <button type="submit" disabled={submitting} className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white py-3.5 rounded-xl font-semibold text-lg hover:shadow-lg transition-all disabled:opacity-50">
+              {submitting ? (
+                <><Loader2 className="w-5 h-5 animate-spin" /> Submitting...</>
+              ) : (
+                <><Send className="w-5 h-5" /> Submit Application</>
+              )}
+            </button>
+          </form>
         </div>
       </section>
 
