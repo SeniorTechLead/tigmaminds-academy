@@ -8,7 +8,6 @@ const ContactPage = lazy(() => import('./pages/ContactPage'));
 const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
 const TermsPage = lazy(() => import('./pages/TermsPage'));
 const StudentsPage = lazy(() => import('./pages/StudentsPage'));
-const MentorsPage = lazy(() => import('./pages/MentorsPage'));
 const InstructorsPage = lazy(() => import('./pages/InstructorsPage'));
 const CareersPage = lazy(() => import('./pages/CareersPage'));
 const LessonsIndexPage = lazy(() => import('./pages/LessonsIndexPage'));
@@ -30,7 +29,7 @@ function App() {
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/terms" element={<TermsPage />} />
           <Route path="/students" element={<StudentsPage />} />
-          <Route path="/mentors" element={<MentorsPage />} />
+          {/* Mentors page removed for launch — will restore with real mentor profiles */}
           <Route path="/instructors" element={<InstructorsPage />} />
           <Route path="/careers" element={<CareersPage />} />
           <Route path="/lessons" element={<LessonsIndexPage />} />
