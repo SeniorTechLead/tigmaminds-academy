@@ -1,63 +1,81 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  ArrowRight, Code2, Bot, Clock, Users, CheckCircle, Sparkles,
-  GraduationCap, Briefcase, Trophy, Star, ChevronDown, Zap,
-  Brain, Cpu, Palette, Rocket, Target, BookOpen, MessageSquare,
+  ArrowRight, BookOpen, Code2, Sparkles, Lock, Unlock,
+  ChevronDown, GraduationCap, Lightbulb, Wrench, Rocket,
+  Users, FlaskConical, BarChart3, Award,
 } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-const bootcampModules = [
-  { icon: Code2, title: 'Full-Stack Web Development', desc: 'React, Node.js, PostgreSQL — build real applications from day one', weeks: '6 weeks' },
-  { icon: Brain, title: 'Python & Data Engineering', desc: 'Data pipelines, pandas, SQL — the backbone of every tech company', weeks: '4 weeks' },
-  { icon: Cpu, title: 'AI & Machine Learning', desc: 'Neural networks, NLP, computer vision — not just theory, real models', weeks: '4 weeks' },
-  { icon: Rocket, title: 'Cloud & DevOps', desc: 'Docker, CI/CD, AWS — deploy like a professional engineer', weeks: '3 weeks' },
-  { icon: Trophy, title: 'Capstone Project', desc: 'Build a production-grade product with an industry mentor', weeks: '5 weeks' },
-  { icon: Briefcase, title: 'Career Launch', desc: 'Portfolio, resume, mock interviews, and employer introductions', weeks: '2 weeks' },
-];
-
-const schoolModules = [
-  { icon: Palette, title: 'Creative Coding', desc: 'Python & Scratch — make art, music, and games with code', term: 'Term 1' },
-  { icon: Bot, title: 'Robotics & Arduino', desc: 'Build a real robot that moves, senses, and responds', term: 'Term 1' },
-  { icon: Brain, title: 'AI for Young Minds', desc: 'Train image classifiers, build chatbots, understand how AI thinks', term: 'Term 2' },
-  { icon: Zap, title: 'Electronics & Circuits', desc: 'LEDs, sensors, motors — from breadboard to working prototype', term: 'Term 2' },
-  { icon: BookOpen, title: 'Science Through Stories', desc: '100 illustrated stories that teach real STEM — our signature approach', term: 'Term 3' },
-  { icon: Trophy, title: 'Team Projects & Showcase', desc: 'Present your work to parents, peers, and industry guests', term: 'Term 3' },
-];
-
-const outcomes = [
-  { number: '100%', label: 'Project completion rate', desc: 'Every student ships a real project' },
-  { number: '110', label: 'Illustrated STEM stories', desc: 'Rooted in Northeast India' },
-  { number: '5', label: 'Learning levels per story', desc: 'From listener to creator' },
-  { number: '177', label: 'Interactive diagrams', desc: 'Visual science, not textbooks' },
-];
-
-const testimonials = [
+/* ── "What Students Will Build" — real capstone projects from real lessons ── */
+const capstoneProjects = [
   {
-    quote: "My daughter went from being scared of math to building her own weather prediction model. The stories made the difference — she wasn't learning physics, she was saving elephants.",
-    name: 'Anjali Bora',
-    role: 'Parent, Guwahati',
+    story: 'The Girl Who Spoke to Elephants',
+    slug: 'girl-who-spoke-to-elephants',
+    project: 'Elephant Rumble Classifier',
+    description: 'Train a machine-learning model to classify elephant infrasound rumbles by type — contact calls, warnings, and greetings — using real acoustic data.',
+    skills: ['Python', 'NumPy', 'Matplotlib', 'Data Analysis'],
+    color: 'from-emerald-400 to-teal-500',
   },
   {
-    quote: "I left my tea garden job and joined the bootcamp with zero coding experience. Six months later, I'm a junior developer at a Bangalore startup. TigmaMinds didn't just teach me to code — they showed me I could.",
-    name: 'Ranjit Mishing',
-    role: 'Bootcamp Graduate, Batch 1',
+    story: 'Why Assam\'s Sunsets Are Orange',
+    slug: 'orange-sunsets-assam',
+    project: 'Sunset Color Simulator',
+    description: 'Build a program that predicts tonight\'s sunset color from atmospheric conditions — humidity, aerosols, and sun angle — using spectral physics and ML.',
+    skills: ['Python', 'Physics', 'Machine Learning', 'Data Viz'],
+    color: 'from-orange-400 to-red-500',
   },
   {
-    quote: "The reference library alone is worth it. My students use it as their primary resource for physics and biology. The diagrams are better than any textbook I've seen.",
-    name: 'Dr. Pallavi Sharma',
-    role: 'Science Teacher, Shillong',
+    story: 'The Fisherman\'s Daughter and the Storm',
+    slug: 'fishermans-daughter-storm',
+    project: 'Cyclone Track Visualizer',
+    description: 'Plot historical cyclone paths across the Bay of Bengal, color-coded by intensity, with landfall annotations and decade-over-decade trend analysis.',
+    skills: ['Python', 'Matplotlib', 'CSV Parsing', 'Geography'],
+    color: 'from-slate-400 to-blue-500',
+  },
+  {
+    story: 'The Map Maker\'s Granddaughter',
+    slug: 'map-makers-granddaughter',
+    project: 'Interactive Neighborhood Map',
+    description: 'Create a digital map with GPS coordinates, landmarks, and proper geographic projections — your own mini-GIS system built in Python.',
+    skills: ['Python', 'GIS', 'Coordinate Systems', 'Data Viz'],
+    color: 'from-emerald-400 to-cyan-500',
+  },
+  {
+    story: 'The Firefly Festival of Majuli',
+    slug: 'firefly-festival-of-majuli',
+    project: 'LED Sync Circuit',
+    description: 'Build an Arduino circuit where LEDs synchronize their blinking — mimicking how fireflies on Majuli coordinate their flashes across the dark.',
+    skills: ['Arduino', 'Electronics', 'Circuits', 'Biology'],
+    color: 'from-yellow-400 to-green-500',
   },
 ];
 
+/* ── How It Works steps ── */
+const steps = [
+  { num: '1', title: 'Pick any story', desc: 'Browse 130 illustrated tales from Northeast India and world traditions.' },
+  { num: '2', title: 'Read the story', desc: 'It\'s a real children\'s tale — elephants, fireflies, silk, storms.' },
+  { num: '3', title: 'Discover the science', desc: 'Each story hides real STEM — physics, biology, data science.' },
+  { num: '4', title: 'Code a project', desc: 'Build something inspired by the science: simulators, classifiers, circuits.' },
+  { num: '5', title: 'Grow your portfolio', desc: 'One story at a time, one project at a time.' },
+];
+
+/* ── Who Is This For ── */
+const audiences = [
+  { icon: GraduationCap, title: 'Students aged 10-16', desc: 'Curious about science and coding but bored by textbooks.' },
+  { icon: Users, title: 'Homeschooling families', desc: 'Looking for engaging, story-based STEM curriculum.' },
+  { icon: Lightbulb, title: 'Teachers', desc: 'Wanting lesson plans that start with wonder, not worksheets.' },
+  { icon: Rocket, title: 'Parents', desc: 'Who want their children to love learning, not dread it.' },
+];
+
+/* ── FAQ ── */
 const faqs = [
-  { q: 'Do I need a degree to join the bootcamp?', a: 'No. We welcome learners from all backgrounds — tea garden workers, college dropouts, homemakers returning to work. We test for curiosity and commitment, not credentials. Our entrance assessment is a 2-hour problem-solving exercise, not a degree check.' },
-  { q: 'What age group is the school program for?', a: 'Grades 6–12 (ages 11–17). We group students by skill level, not strictly by age. A sharp 12-year-old can be in the same robotics cohort as a 15-year-old beginner. What matters is where you are, not how old you are.' },
-  { q: 'Is the curriculum only for students in India?', a: 'The stories draw from Northeast India — elephants in Kaziranga, living root bridges in Meghalaya, fireflies on Majuli. But the STEM content is universal. Rayleigh scattering works the same everywhere. Students from 12 countries have used our reference library.' },
-  { q: 'What do I need to get started?', a: 'A computer with internet access. That\'s it. Our Python environment runs in the browser (no installation). Arduino simulations work without hardware. When you\'re ready for real electronics, we provide kits at cost.' },
-  { q: 'What makes this different from free online courses?', a: 'Three things: (1) Every concept starts with a story, so you understand WHY before HOW. (2) You build real things — not toy exercises, but projects that solve real problems. (3) You\'re never alone — small cohorts, live mentors, and a community that doesn\'t let you quit.' },
-  { q: 'Is there financial aid?', a: 'Yes. We offer need-based scholarships covering up to 100% of fees. We believe no student in Northeast India should miss out on STEM education because of money. Apply and let us worry about the rest.' },
+  { q: 'What do I need to get started?', a: 'A computer or tablet with internet access. Our Python environment runs in the browser — no installation needed. Arduino simulations work without hardware.' },
+  { q: 'Is this only for students in India?', a: 'The stories draw from Northeast India — elephants in Kaziranga, fireflies on Majuli, living root bridges in Meghalaya. But the STEM content is universal. Rayleigh scattering works the same everywhere.' },
+  { q: 'What age range is this for?', a: 'Designed for ages 10-16, but anyone curious can benefit. The five levels scale from no prior knowledge to advanced Python projects.' },
+  { q: 'How is this different from free YouTube tutorials?', a: 'Every concept starts with a story, so you understand WHY before HOW. You build real projects, not toy exercises. And the five-level progression means you go as deep as you want — not just surface-level.' },
+  { q: 'Do I need to know how to code?', a: 'No. Level 0 (Listener) and Level 1 (Explorer) require zero coding. Levels 2-4 introduce Python gradually, with every line of code explained in context.' },
 ];
 
 function FAQ({ q, a }: { q: string; a: string }) {
@@ -80,198 +98,48 @@ export default function ProgramsPage() {
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
       <Header />
 
-      {/* Hero */}
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-amber-50 via-white to-orange-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 overflow-hidden">
-        <div className="max-w-7xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 px-4 py-2 rounded-full mb-6 text-sm font-semibold">
-            <Sparkles className="w-4 h-4" /> Now enrolling for 2026
-          </div>
-          <h1 className="text-5xl sm:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
+      {/* ── Hero ── */}
+      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-amber-50 via-white to-orange-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
             Learn STEM through<br />
             <span className="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">stories that stay with you</span>
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-10">
-            Two programs. One mission. Make science, coding, and engineering feel like an adventure — not a chore. Every concept starts with a story from Northeast India.
+          <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 mb-8">
+            Ages 10-16 &middot; No experience needed &middot; Start free
           </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <a href="#bootcamp" className="inline-flex items-center bg-gradient-to-r from-sky-500 to-cyan-400 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl hover:scale-105 transition-all">
-              24-Week Bootcamp <ArrowRight className="ml-2 w-5 h-5" />
-            </a>
-            <a href="#school" className="inline-flex items-center bg-gradient-to-r from-emerald-500 to-green-400 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl hover:scale-105 transition-all">
-              School Program <ArrowRight className="ml-2 w-5 h-5" />
-            </a>
-          </div>
+          <Link
+            to="/lessons"
+            className="inline-flex items-center bg-gradient-to-r from-amber-500 to-orange-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl hover:scale-105 transition-all"
+          >
+            Browse Free Lessons <ArrowRight className="ml-2 w-5 h-5" />
+          </Link>
         </div>
       </section>
 
-      {/* Numbers */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900 border-y border-gray-100 dark:border-gray-800">
-        <div className="max-w-6xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-8">
-          {outcomes.map((o) => (
-            <div key={o.label} className="text-center">
-              <p className="text-4xl font-black text-amber-500 mb-1">{o.number}</p>
-              <p className="text-sm font-bold text-gray-900 dark:text-white">{o.label}</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{o.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Bootcamp */}
-      <section id="bootcamp" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-sky-50/30 dark:from-gray-900 dark:to-gray-800/30">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 bg-sky-100 dark:bg-sky-900/40 text-sky-700 dark:text-sky-300 px-4 py-2 rounded-full mb-4 text-sm font-semibold">
-              <Briefcase className="w-4 h-4" /> Career Track
-            </div>
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">24-Week Bootcamp</h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              For career changers, graduates, and self-taught developers. Go from zero to job-ready in 6 months. Full-time, cohort-based, with industry mentors.
-            </p>
-            <div className="flex items-center gap-6 justify-center mt-4 text-sm text-gray-500 dark:text-gray-400">
-              <span className="flex items-center gap-1"><Clock className="w-4 h-4" /> 24 weeks, full-time</span>
-              <span className="flex items-center gap-1"><Users className="w-4 h-4" /> 20 students per cohort</span>
-              <span className="flex items-center gap-1"><Target className="w-4 h-4" /> Job placement support</span>
-            </div>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {bootcampModules.map((mod) => {
-              const Icon = mod.icon;
-              return (
-                <div key={mod.title} className="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700 hover:shadow-lg hover:border-sky-200 dark:hover:border-sky-800 transition-all group">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-400 to-cyan-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <Icon className="w-5 h-5 text-white" />
-                    </div>
-                    <span className="text-xs font-semibold text-sky-500 uppercase tracking-wide">{mod.weeks}</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{mod.title}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{mod.desc}</p>
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="text-center">
-            <Link to="/students" className="inline-flex items-center bg-gradient-to-r from-sky-500 to-cyan-400 text-white px-10 py-4 rounded-full font-semibold text-lg hover:shadow-xl hover:scale-105 transition-all">
-              Apply for the Bootcamp <ArrowRight className="ml-2 w-5 h-5" />
-            </Link>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-3">Next cohort starts July 2026. Scholarships available.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* School Program */}
-      <section id="school" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-sky-50/30 to-emerald-50/30 dark:from-gray-800/30 dark:to-gray-900">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 px-4 py-2 rounded-full mb-4 text-sm font-semibold">
-              <GraduationCap className="w-4 h-4" /> Young Learners
-            </div>
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">12-Month School Program</h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              For grades 6–12. Every weekend, a new adventure — robotics, AI, creative coding, and real science experiments. All taught through illustrated stories from Northeast India.
-            </p>
-            <div className="flex items-center gap-6 justify-center mt-4 text-sm text-gray-500 dark:text-gray-400">
-              <span className="flex items-center gap-1"><Clock className="w-4 h-4" /> 12 months, weekends</span>
-              <span className="flex items-center gap-1"><Users className="w-4 h-4" /> 12 students per group</span>
-              <span className="flex items-center gap-1"><Star className="w-4 h-4" /> Certificate on completion</span>
-            </div>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {schoolModules.map((mod) => {
-              const Icon = mod.icon;
-              return (
-                <div key={mod.title} className="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700 hover:shadow-lg hover:border-emerald-200 dark:hover:border-emerald-800 transition-all group">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-green-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <Icon className="w-5 h-5 text-white" />
-                    </div>
-                    <span className="text-xs font-semibold text-emerald-500 uppercase tracking-wide">{mod.term}</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{mod.title}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{mod.desc}</p>
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="text-center">
-            <Link to="/contact" className="inline-flex items-center bg-gradient-to-r from-emerald-500 to-green-400 text-white px-10 py-4 rounded-full font-semibold text-lg hover:shadow-xl hover:scale-105 transition-all">
-              Enquire About the School Program <ArrowRight className="ml-2 w-5 h-5" />
-            </Link>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-3">Rolling admissions. Join anytime.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Comparison */}
+      {/* ── What You Get (Free) ── */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-10 text-center">Which program is right for you?</h2>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-gray-200 dark:border-gray-700">
-                  <th className="text-left py-4 px-4 text-gray-500 dark:text-gray-400 font-medium"></th>
-                  <th className="text-center py-4 px-4">
-                    <span className="inline-flex items-center gap-1 text-sky-600 dark:text-sky-400 font-bold"><Code2 className="w-4 h-4" /> Bootcamp</span>
-                  </th>
-                  <th className="text-center py-4 px-4">
-                    <span className="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-bold"><GraduationCap className="w-4 h-4" /> School</span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
-                {[
-                  ['Duration', '24 weeks (full-time)', '12 months (weekends)'],
-                  ['Age / Stage', '18+ / Career changers', 'Grades 6–12 (ages 11–17)'],
-                  ['Group size', '20 per cohort', '12 per group'],
-                  ['Coding languages', 'Python, JavaScript, SQL, TypeScript', 'Python, Scratch, Arduino C'],
-                  ['Hardware', 'Cloud & DevOps focus', 'Arduino, sensors, robotics kits'],
-                  ['AI / ML', 'Production ML pipelines', 'Intro AI — classifiers, chatbots'],
-                  ['Capstone', 'Industry-grade product', 'Showcase Day presentation'],
-                  ['Outcome', 'Job placement support', 'Certificate + portfolio'],
-                  ['Story-based learning', 'Reference library access', 'Core methodology — every lesson starts with a story'],
-                  ['Financial aid', 'Need-based scholarships', 'Need-based scholarships'],
-                ].map(([feature, bootcamp, school]) => (
-                  <tr key={feature} className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
-                    <td className="py-3 px-4 font-medium text-gray-900 dark:text-white">{feature}</td>
-                    <td className="py-3 px-4 text-center text-gray-600 dark:text-gray-300">{bootcamp}</td>
-                    <td className="py-3 px-4 text-center text-gray-600 dark:text-gray-300">{school}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        <div className="max-w-5xl mx-auto">
+          <div className="flex items-center gap-3 justify-center mb-10">
+            <Unlock className="w-6 h-6 text-emerald-500" />
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white">What You Get — Free</h2>
           </div>
-        </div>
-      </section>
-
-      {/* The TigmaMinds Difference */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-amber-50/50 dark:from-gray-900 dark:to-gray-800/50">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 text-center">Why TigmaMinds?</h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 text-center mb-12 max-w-2xl mx-auto">
-            We don't just teach STEM. We make it unforgettable.
-          </p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { icon: BookOpen, title: 'Stories First', desc: 'Every concept starts with an illustrated story from Northeast India. You understand WHY before you learn HOW. A firefly festival teaches bioluminescence. An elephant teaches AI.' },
-              { icon: Zap, title: '5 Levels Deep', desc: 'Every story has 5 learning levels — from no-code understanding to a capstone project. Start where you are. Go as deep as you want. No ceiling.' },
-              { icon: MessageSquare, title: 'Never Alone', desc: 'Small cohorts. Live mentors. A community that doesn\'t let you quit. When you get stuck at 2am, someone is there.' },
-              { icon: Rocket, title: 'Build Real Things', desc: 'Not toy exercises. Real robots, real websites, real ML models, real research. Your portfolio is your proof.' },
-              { icon: Target, title: 'Northeast India Roots', desc: '100 stories rooted in Assam, Meghalaya, Nagaland, and beyond. The science is universal. The soul is local. That\'s what makes it stick.' },
-              { icon: Star, title: 'Open Reference Library', desc: '40+ reference guides, 177 interactive diagrams, covering physics, biology, chemistry, math, and coding. Free for everyone. Always.' },
+              { icon: BookOpen, title: '130 illustrated stories', desc: 'From Northeast India, Hindu, Buddhist, Christian, and Islamic traditions — each one a doorway into real science.' },
+              { icon: FlaskConical, title: 'Level 0 for every story', desc: 'The science explained through the story, with diagrams. No code required — just curiosity.' },
+              { icon: Sparkles, title: 'First 2 concepts free', desc: 'Try the first two concepts of each lesson. Sign up to continue — no credit card needed.' },
+              { icon: BarChart3, title: '90+ reference topics', desc: 'An interactive library covering physics, biology, chemistry, math, and coding.' },
+              { icon: Code2, title: 'In-browser Python', desc: 'Run code right in the browser. No installation, no setup, no barriers.' },
+              { icon: Award, title: 'No credit card needed', desc: 'Create a free account and start learning immediately.' },
             ].map((item) => {
               const Icon = item.icon;
               return (
-                <div key={item.title} className="text-center">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center mx-auto mb-4">
-                    <Icon className="w-7 h-7 text-white" />
+                <div key={item.title} className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-green-500 flex items-center justify-center mb-4">
+                    <Icon className="w-5 h-5 text-white" />
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{item.title}</h3>
+                  <h3 className="text-base font-bold text-gray-900 dark:text-white mb-2">{item.title}</h3>
                   <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{item.desc}</p>
                 </div>
               );
@@ -280,22 +148,98 @@ export default function ProgramsPage() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-12 text-center">What people say</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((t) => (
-              <div key={t.name} className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700">
-                <div className="flex gap-1 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 text-amber-400 fill-amber-400" />
-                  ))}
+      {/* ── What You Get (Enrolled) ── */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-amber-50/40 dark:from-gray-900 dark:to-gray-800/40">
+        <div className="max-w-5xl mx-auto">
+          <div className="flex items-center gap-3 justify-center mb-10">
+            <Lock className="w-6 h-6 text-amber-500" />
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white">What You Get — Enrolled</h2>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-6 mb-10">
+            {[
+              { icon: Rocket, title: 'All 5 levels per story', desc: 'Listener, Explorer, Builder, Engineer, Creator — go from zero knowledge to a finished project.' },
+              { icon: Code2, title: 'Hands-on Python projects', desc: 'Build real programs: simulators, classifiers, data visualizers, and interactive tools.' },
+              { icon: Wrench, title: 'Interactive tools', desc: 'Beat machine, logic gate simulator, Gaussian explorer, and more — learn by doing.' },
+              { icon: Award, title: 'Progress tracking', desc: 'See where you are, what you\'ve completed, and what comes next.' },
+            ].map((item) => {
+              const Icon = item.icon;
+              return (
+                <div key={item.title} className="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center mb-4">
+                    <Icon className="w-5 h-5 text-white" />
+                  </div>
+                  <h3 className="text-base font-bold text-gray-900 dark:text-white mb-2">{item.title}</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{item.desc}</p>
                 </div>
-                <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed mb-6 italic">"{t.quote}"</p>
+              );
+            })}
+          </div>
+          <div className="text-center">
+            <div className="inline-block bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 px-6 py-3 rounded-full text-sm font-semibold">
+              Pricing coming soon — sign up free to be notified
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Two Ways to Learn ── */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-amber-50/30 dark:from-gray-900 dark:to-gray-800/30">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 text-center">Two Ways to Learn</h2>
+          <p className="text-gray-600 dark:text-gray-400 text-center mb-12 max-w-2xl mx-auto">Choose what works for your family. Both use the same platform and curriculum.</p>
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Online */}
+            <div className="rounded-2xl border-2 border-gray-200 dark:border-gray-700 p-8 bg-white dark:bg-gray-800">
+              <div className="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center mb-4">
+                <Code2 className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Online — Self-Paced</h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">Learn anywhere, anytime. Read stories, explore concepts, code projects in your browser.</p>
+              <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                <li className="flex items-start gap-2"><span className="text-blue-500 mt-0.5">✓</span> All 130 stories with 5 levels each</li>
+                <li className="flex items-start gap-2"><span className="text-blue-500 mt-0.5">✓</span> In-browser Python coding — no setup</li>
+                <li className="flex items-start gap-2"><span className="text-blue-500 mt-0.5">✓</span> Interactive reference library</li>
+                <li className="flex items-start gap-2"><span className="text-blue-500 mt-0.5">✓</span> Progress tracking and certificates</li>
+                <li className="flex items-start gap-2"><span className="text-blue-500 mt-0.5">✓</span> Learn at your own pace</li>
+              </ul>
+              <p className="mt-6 text-sm font-semibold text-blue-600 dark:text-blue-400">Free to start — sign up to unlock all levels</p>
+            </div>
+            {/* In-Person */}
+            <div className="rounded-2xl border-2 border-amber-300 dark:border-amber-700 p-8 bg-amber-50/50 dark:bg-amber-900/10">
+              <div className="w-12 h-12 rounded-xl bg-amber-100 dark:bg-amber-900/40 flex items-center justify-center mb-4">
+                <Users className="w-6 h-6 text-amber-600 dark:text-amber-400" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">In-Person — Mentor-Led Workshops</h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">Weekly sessions with a mentor. Hands-on projects, peer collaboration, immediate feedback.</p>
+              <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                <li className="flex items-start gap-2"><span className="text-amber-500 mt-0.5">✓</span> Everything in Online, plus:</li>
+                <li className="flex items-start gap-2"><span className="text-amber-500 mt-0.5">✓</span> Small group workshops (max 12 students)</li>
+                <li className="flex items-start gap-2"><span className="text-amber-500 mt-0.5">✓</span> Mentor guidance on projects</li>
+                <li className="flex items-start gap-2"><span className="text-amber-500 mt-0.5">✓</span> Peer collaboration and presentations</li>
+                <li className="flex items-start gap-2"><span className="text-amber-500 mt-0.5">✓</span> Offline experiments with real materials</li>
+              </ul>
+              <p className="mt-6 text-sm font-semibold text-amber-600 dark:text-amber-400">Coming to select cities — join the waitlist</p>
+              <Link to="/contact" className="inline-flex items-center gap-1.5 mt-2 text-sm text-amber-600 dark:text-amber-400 hover:underline font-medium">
+                Express interest <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── How It Works ── */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-12 text-center">How It Works</h2>
+          <div className="space-y-8">
+            {steps.map((step) => (
+              <div key={step.num} className="flex gap-5 items-start">
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white font-bold text-lg">
+                  {step.num}
+                </div>
                 <div>
-                  <p className="font-bold text-gray-900 dark:text-white text-sm">{t.name}</p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">{t.role}</p>
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">{step.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-300">{step.desc}</p>
                 </div>
               </div>
             ))}
@@ -303,7 +247,65 @@ export default function ProgramsPage() {
         </div>
       </section>
 
-      {/* FAQ */}
+      {/* ── What Students Will Build ── */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800/50">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 text-center">What Students Will Build</h2>
+          <p className="text-gray-600 dark:text-gray-300 text-center mb-12 max-w-2xl mx-auto">
+            Real capstone projects from real lessons. Each one starts with a story and ends with working code.
+          </p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {capstoneProjects.map((proj) => (
+              <Link
+                key={proj.slug}
+                to={`/lessons/${proj.slug}`}
+                className="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700 hover:shadow-lg hover:border-amber-200 dark:hover:border-amber-800 transition-all group block"
+              >
+                <div className={`h-2 w-16 rounded-full bg-gradient-to-r ${proj.color} mb-4`} />
+                <p className="text-xs font-semibold text-amber-600 dark:text-amber-400 uppercase tracking-wide mb-2">
+                  {proj.story}
+                </p>
+                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+                  {proj.project}
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+                  {proj.description}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {proj.skills.map((skill) => (
+                    <span key={skill} className="text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-1 rounded-full">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Who Is This For ── */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-12 text-center">Who Is This For</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {audiences.map((aud) => {
+              const Icon = aud.icon;
+              return (
+                <div key={aud.title} className="text-center">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center mx-auto mb-4">
+                    <Icon className="w-7 h-7 text-white" />
+                  </div>
+                  <h3 className="text-base font-bold text-gray-900 dark:text-white mb-2">{aud.title}</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{aud.desc}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ── */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-amber-50/30 dark:from-gray-900 dark:to-gray-800/30">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-10 text-center">Common Questions</h2>
@@ -315,19 +317,19 @@ export default function ProgramsPage() {
         </div>
       </section>
 
-      {/* Final CTA */}
+      {/* ── Footer CTA ── */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-amber-500 to-orange-500">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold text-white mb-4">Ready to start?</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Start with any story — it's free</h2>
           <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-            Whether you're 12 or 32 — if you're curious about how the world works and want to build things that matter, there's a place for you here.
+            130 stories. Real science. No credit card. Pick one that interests you and see where it leads.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link to="/students" className="inline-flex items-center bg-white text-amber-600 px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl hover:scale-105 transition-all">
-              Apply for Bootcamp <ArrowRight className="ml-2 w-5 h-5" />
+            <Link to="/lessons" className="inline-flex items-center bg-white text-amber-600 px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl hover:scale-105 transition-all">
+              Browse Lessons <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
-            <Link to="/contact" className="inline-flex items-center bg-white/20 text-white border-2 border-white/40 px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/30 transition-all">
-              Enquire About School Program <ArrowRight className="ml-2 w-5 h-5" />
+            <Link to="/students" className="inline-flex items-center bg-white/20 text-white border-2 border-white/40 px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/30 transition-all">
+              Sign Up Free <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
           </div>
         </div>
