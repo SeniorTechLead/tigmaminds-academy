@@ -23,11 +23,10 @@ export default function Header() {
 
   const navigation = [
     { name: 'Home', href: '/' },
-    { name: 'About', href: '/about' },
     { name: 'Programs', href: '/programs' },
     { name: 'Lessons', href: '/lessons' },
-    { name: 'Reference', href: '/reference' },
-    { name: 'Contact', href: '/contact' },
+    { name: 'Library', href: '/reference' },
+    { name: 'Playground', href: '/playground' },
   ];
 
   return (
@@ -94,10 +93,10 @@ export default function Header() {
                   Log In
                 </Link>
                 <Link
-                  to="/students"
+                  to="/auth"
                   className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-2.5 rounded-full font-semibold hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200"
                 >
-                  Apply Now
+                  Sign Up Free
                 </Link>
               </div>
             )}
@@ -134,8 +133,8 @@ export default function Header() {
               </>
             ) : (
               <>
-                <Link to="/auth" className="block px-4 py-2 text-amber-600 font-medium" onClick={() => setIsMenuOpen(false)}>Log In / Sign Up</Link>
-                <Link to="/students" className="block bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-3 rounded-full font-semibold text-center" onClick={() => setIsMenuOpen(false)}>Apply Now</Link>
+                <Link to="/auth" className="block px-4 py-2 text-amber-600 font-medium" onClick={() => setIsMenuOpen(false)}>Log In</Link>
+                <Link to="/auth" className="block bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-3 rounded-full font-semibold text-center" onClick={() => setIsMenuOpen(false)}>Sign Up Free</Link>
               </>
             )}
           </div>

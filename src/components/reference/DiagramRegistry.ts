@@ -652,6 +652,8 @@ import GlidingVsFlyingDiagram from '../diagrams/GlidingVsFlyingDiagram';
 import SquareCubeLawDiagram from '../diagrams/SquareCubeLawDiagram';
 import ActivityGliderTestDiagram from '../diagrams/ActivityGliderTestDiagram';
 import GlideRatioOutputDiagram from '../diagrams/GlideRatioOutputDiagram';
+// Library — Python & Algorithms visual diagrams
+import StringSlicingDiagram from '../diagrams/StringSlicingDiagram';
 
 // Hornbill's Crown — Ornithology & Animal Behavior
 import HornbillCasqueDiagram from '../diagrams/HornbillCasqueDiagram';
@@ -1820,6 +1822,8 @@ const registry: Record<string, ComponentType> = {
   SquareCubeLawDiagram,
   ActivityGliderTestDiagram,
   GlideRatioOutputDiagram,
+  // Library — Python & Algorithms
+  StringSlicingDiagram,
 };
 
 export default registry;

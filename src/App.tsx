@@ -7,7 +7,6 @@ const ProgramsPage = lazy(() => import('./pages/ProgramsPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
 const TermsPage = lazy(() => import('./pages/TermsPage'));
-const StudentsPage = lazy(() => import('./pages/StudentsPage'));
 const InstructorsPage = lazy(() => import('./pages/InstructorsPage'));
 const CareersPage = lazy(() => import('./pages/CareersPage'));
 const LessonsIndexPage = lazy(() => import('./pages/LessonsIndexPage'));
@@ -16,6 +15,7 @@ const LessonPlanPage = lazy(() => import('./pages/LessonPlanPage'));
 const AuthPage = lazy(() => import('./pages/AuthPage'));
 const ReferencePage = lazy(() => import('./pages/ReferencePage'));
 const LessonPage = lazy(() => import('./pages/LessonPage'));
+const PlaygroundPage = lazy(() => import('./pages/PlaygroundPage'));
 
 function App() {
   return (
@@ -28,7 +28,6 @@ function App() {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/terms" element={<TermsPage />} />
-          <Route path="/students" element={<StudentsPage />} />
           {/* Mentors page removed for launch — will restore with real mentor profiles */}
           <Route path="/instructors" element={<InstructorsPage />} />
           <Route path="/careers" element={<CareersPage />} />
@@ -39,6 +38,7 @@ function App() {
           <Route path="/reference" element={<ReferencePage />} />
           <Route path="/reference/:slug" element={<ReferencePage />} />
           <Route path="/lessons/:slug" element={<LessonPage />} />
+          <Route path="/playground" element={<PlaygroundPage />} />
         </Routes>
       </Suspense>
     </Router>
