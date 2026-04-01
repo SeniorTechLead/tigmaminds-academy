@@ -172,19 +172,50 @@ print("Age:", 14)    # you can mix types with commas`,
       {
         title: 'Variables and Types',
         content:
-          'Variables store values. Python figures out the type automatically. ' +
-          'The main types are `int` (whole numbers), `float` (decimals), `str` (text), and `bool` (True/False).',
-        code: `name = "Priya"          # str
-age = 14                # int
-height = 1.62           # float
-loves_coding = True     # bool
+          'Variables store values. Python figures out the type automatically — you never declare types like in Java or C.\n\n' +
+          '**Core types:** `int` (whole numbers), `float` (decimals), `str` (text), `bool` (True/False), `None` (nothing).\n\n' +
+          '**Type conversion:** `int()` truncates decimals, `float()` adds .0, `str()` turns anything to text, `bool()` checks truthiness.\n\n' +
+          '**The `math` module** provides mathematical functions beyond basic arithmetic.',
+        code: `name = "Priya"          # str (text)
+age = 14                # int (whole number)
+height = 1.62           # float (decimal)
+loves_coding = True     # bool (True or False)
+nothing = None          # NoneType (absence of value)
 
-# Check a type
+# Check types
 print(type(name))       # <class 'str'>
+print(type(age))        # <class 'int'>
 
-# Convert between types
+# ── Type conversion ──
 age_text = str(age)     # "14"
-pi_approx = int(3.14)  # 3 (truncates)`,
+pi_approx = int(3.14)  # 3 (truncates, doesn't round!)
+whole = float(5)        # 5.0
+is_valid = bool(42)     # True (any non-zero = True)
+is_empty = bool(0)      # False (0, "", [], None = False)
+
+# ── Rounding and abs ──
+print(round(3.14159, 2))  # 3.14 (round to 2 decimals)
+print(round(2.5))          # 2 (banker's rounding!)
+print(abs(-42))            # 42 (absolute value)
+
+# ── The math module ──
+import math
+print(math.pi)             # 3.141592653589793
+print(math.sqrt(16))       # 4.0
+print(math.ceil(3.1))      # 4 (round up)
+print(math.floor(3.9))     # 3 (round down)
+print(math.hypot(3, 4))    # 5.0 (distance formula)
+
+# ── Integer division and modulo ──
+print(17 // 5)   # 3 (integer division — drops remainder)
+print(17 % 5)    # 2 (modulo — the remainder itself)
+print(2 ** 10)   # 1024 (power/exponent)
+
+# ── Checking types safely ──
+x = 42
+print(isinstance(x, int))        # True
+print(isinstance(x, (int, float)))  # True (either type)
+print(isinstance("hi", str))     # True`,
       },
       {
         title: 'Strings',
@@ -305,9 +336,13 @@ print(sum(scores))   # 438`,
       {
         title: 'If / Elif / Else',
         content:
-          'Branching lets your program make decisions. Indentation (4 spaces) defines the blocks.',
+          'Branching lets your program make decisions based on conditions. Python uses indentation (4 spaces) to define code blocks.\n\n' +
+          '**Operators:** `==` equals, `!=` not equal, `<` `>` `<=` `>=` comparisons, `in` membership, `not` negation.\n' +
+          '**Combine:** `and` (both true), `or` (either true), `not` (flip).\n' +
+          '**Chained:** Python allows `10 <= age <= 18` — no need for `age >= 10 and age <= 18`.',
         code: `temperature = 38
 
+# ── Basic if/elif/else ──
 if temperature > 40:
     print("Dangerous heat — stay indoors")
 elif temperature > 30:
@@ -317,11 +352,42 @@ elif temperature > 20:
 else:
     print("Bring a jacket")
 
-# Combine conditions with and / or
+# ── Combine conditions ──
 age = 14
 has_ticket = True
 if age >= 12 and has_ticket:
-    print("Welcome to the show!")`,
+    print("Welcome to the show!")
+
+# ── Chained comparisons ──
+score = 85
+if 80 <= score <= 100:
+    print("Excellent!")   # cleaner than: score >= 80 and score <= 100
+
+# ── Membership testing with 'in' ──
+animal = "dolphin"
+endangered = ["tiger", "rhino", "pangolin"]
+if animal in endangered:
+    print(f"{animal} is endangered!")
+else:
+    print(f"{animal} is not on the list")
+
+# ── Ternary expression (one-line if) ──
+status = "adult" if age >= 18 else "minor"
+print(status)  # "minor"
+
+# ── Guard clause pattern ──
+def classify(magnitude):
+    if magnitude < 0:
+        return "invalid"    # guard: handle bad input first
+    if magnitude < 2:
+        return "micro"
+    if magnitude < 4:
+        return "minor"
+    if magnitude < 6:
+        return "moderate"
+    return "major"          # no need for else — earlier returns handle it
+
+print(classify(5.5))  # "moderate"`,
       },
       {
         title: 'Loops',
@@ -499,6 +565,7 @@ print(by_weight[0])  # ('dolphin', 150)`,
       },
       {
         title: 'Dictionaries',
+        diagram: 'DictCounterDiagram',
         content:
           'Dictionaries map **keys** to **values**. Keys must be immutable (strings, numbers, tuples). Values can be anything.\n\n' +
           '**Key methods:**\n' +
@@ -592,27 +659,60 @@ print(grid[(3, 4)])    # end`,
       {
         title: 'List Comprehensions — One-Line Loops',
         content:
-          'A list comprehension builds a new list by applying an expression to every item in a sequence, ' +
-          'all in one line. The syntax is `[expression for item in iterable]`. You can add a condition ' +
-          'to filter items with `[expression for item in iterable if condition]`.',
-        code: `# Double every number from 0 to 9
+          'A list comprehension builds a new list in one line: `[expression for item in iterable]`.\n\n' +
+          '**Add a filter:** `[x for x in items if condition]`\n' +
+          '**Generator expression:** Same syntax with `()` instead of `[]` — produces values lazily (one at a time, saving memory).\n' +
+          '**Dict/set comprehensions:** `{k: v for ...}` and `{x for ...}`.',
+        code: `# ── List comprehension basics ──
 doubled = [x * 2 for x in range(10)]
 print(doubled)  # [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
 
-# Filter: keep only calm moods from a list
-moods = ["calm", "agitated", "calm", "playful", "agitated"]
-calm_only = [m for m in moods if m == "calm"]
-print(calm_only)  # ['calm', 'calm']
+# Filter: keep only heavy animals
+weights = [4500, 280, 3200, 60, 5100]
+heavy = [w for w in weights if w > 1000]
+print(heavy)  # [4500, 3200, 5100]
 
-# Transform and filter in one go
-weights = [4500, 3200, 280, 4800, 60, 5100]
-heavy = [w for w in weights if w > 3000]
-print(f"Heavy animals: {heavy}")  # [4500, 3200, 4800, 5100]
+# Transform + filter in one go
+names = ["Ranga", "Mo", "Kaziranga", "Kavi"]
+long_upper = [n.upper() for n in names if len(n) > 3]
+print(long_upper)  # ['RANGA', 'KAZIRANGA', 'KAVI']
 
-# Nested: flatten a list of lists
+# ── Nested: flatten a list of lists ──
 sightings = [[1, 3], [0, 2], [5, 1]]
 flat = [count for day in sightings for count in day]
-print(flat)  # [1, 3, 0, 2, 5, 1]`,
+print(flat)  # [1, 3, 0, 2, 5, 1]
+
+# ── Generator expressions — lazy, memory efficient ──
+# Use () instead of [] — values computed one at a time
+total = sum(w for w in weights if w > 1000)
+print(total)  # 12900
+
+# Count items matching a condition
+count = sum(1 for w in weights if w > 1000)
+print(count)  # 3
+
+# Check if any/all match
+print(any(w > 5000 for w in weights))  # True
+print(all(w > 0 for w in weights))     # True
+
+# ── Dict comprehension ──
+squares = {n: n**2 for n in range(1, 6)}
+print(squares)  # {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
+
+# Invert a dictionary
+inverted = {v: k for k, v in squares.items()}
+print(inverted)  # {1: 1, 4: 2, 9: 3, 16: 4, 25: 5}
+
+# ── Set comprehension (unique values) ──
+words = ["hello", "world", "hello", "python"]
+lengths = {len(w) for w in words}
+print(lengths)  # {5, 6}
+
+# ── zip() in comprehensions ──
+names = ["Ranga", "Mohini", "Kavi"]
+ages = [25, 18, 30]
+profiles = {name: age for name, age in zip(names, ages)}
+print(profiles)  # {'Ranga': 25, 'Mohini': 18, 'Kavi': 30}`,
       },
       {
         title: 'Working with Files',
@@ -4561,6 +4661,7 @@ plt.show()
     build: [
       {
         title: 'Linear and Binary Search',
+        diagram: 'BinarySearchDiagram',
         content:
           'Linear search checks every element one by one — O(n). Binary search halves the search space each step — O(log n), but the data must be sorted.\n\n' +
           'Binary search is the reason looking up a word in a dictionary is fast: you open to the middle, check if your word comes before or after, and repeat on the correct half.',
@@ -4617,6 +4718,7 @@ print(find_closest(temps, 1500))  # 1000 or 2000`,
       },
       {
         title: 'Sorting Algorithms',
+        diagram: 'BubbleSortDiagram',
         content:
           'Sorting puts elements in order. Python\'s built-in `sorted()` uses Timsort (O(n log n)), but understanding simpler algorithms teaches you how sorting works.\n\n' +
           '**Bubble sort** — repeatedly swap adjacent out-of-order pairs. Simple but slow: O(n\u00B2).\n' +
@@ -4670,6 +4772,7 @@ print(by_weight_desc[0])  # ('elephant', 4500)`,
       },
       {
         title: 'Two-Pointer Technique',
+        diagram: 'TwoPointerDiagram',
         content:
           'The two-pointer technique uses two indices that move through a list from opposite ends (or at different speeds). ' +
           'It solves many problems in O(n) that would otherwise need O(n\u00B2).\n\n' +
@@ -4729,6 +4832,7 @@ print(is_symmetric([5, 8, 10, 8.1, 4.9], 0.2))  # True`,
       },
       {
         title: 'Sliding Window',
+        diagram: 'SlidingWindowDiagram',
         content:
           'The sliding window technique processes a fixed-size window that moves across a list. Instead of recalculating everything ' +
           'for each position, you update the result by subtracting what left the window and adding what entered.\n\n' +
@@ -4785,6 +4889,7 @@ print(longest_positive_streak(growth))  # 3`,
       },
       {
         title: 'BFS and DFS — Graph Traversal',
+        diagram: 'BFSDFSDiagram',
         content:
           'Graphs model connections: villages connected by bridges, cells in a grid, nodes in a network. ' +
           'Two fundamental ways to explore a graph:\n\n' +
@@ -4873,6 +4978,7 @@ print(shortest_path(village_graph, "A", "D"))  # 2`,
       },
       {
         title: 'Recursion',
+        diagram: 'RecursionTreeDiagram',
         content:
           'A recursive function calls itself with a smaller version of the problem. Every recursive function needs:\n\n' +
           '1. **Base case** — the simplest version that returns directly (stops the recursion)\n' +

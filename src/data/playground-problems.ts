@@ -714,7 +714,7 @@ export const problems: Problem[] = [
         tier: 2, tierName: 'Clean It',
         goal: 'Use percentage change. Growing if >10% total increase, declining if >10% decrease, else stable.',
         hint: '(last - first) / first * 100',
-        hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-1', label: 'Mean & percentages in the Library' },
+        hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-9', label: 'Mean & percentages in the Library' },
         starterCode: `def population_trend(counts):\n    """Classify trend based on percentage change.\n    \n    >10% increase = growing, >10% decrease = declining, else stable.\n    """\n    # Your code here\n    pass\n`,
         testCases: [
           { input: '[100, 105, 112]', expected: '"growing"', label: '12% increase' },
@@ -727,7 +727,7 @@ export const problems: Problem[] = [
         tier: 3, tierName: 'Optimize It',
         goal: 'Return trend + slope (average year-over-year change).',
         hint: 'Slope = sum of consecutive differences / (n-1).',
-        hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-6', label: 'Correlation in the Library' },
+        hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-13', label: 'Correlation in the Library' },
         starterCode: `def population_trend(counts):\n    """Return (trend, avg_yearly_change) tuple."""\n    # Your code here\n    pass\n`,
         testCases: [
           { input: '[100, 110, 120, 130]', expected: '("growing", 10.0)', label: '+10/yr' },
@@ -931,7 +931,7 @@ export const problems: Problem[] = [
         tier: 3, tierName: 'Optimize It',
         goal: 'Detect both arithmetic AND geometric sequences.',
         hint: 'Check if differences are constant (arithmetic) or ratios are constant (geometric).',
-        hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-1', label: 'Mean & sequences in the Library' },
+        hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-9', label: 'Mean & sequences in the Library' },
         starterCode: `def next_in_sequence(seq, n):\n    """Detect arithmetic or geometric sequence and predict next n values.\n    \n    Returns (type, predictions) where type is "arithmetic" or "geometric".\n    """\n    # Your code here\n    pass\n`,
         testCases: [
           { input: '[2, 4, 6, 8], 2', expected: '("arithmetic", [10, 12])', label: 'Arithmetic' },
@@ -1006,7 +1006,7 @@ export const problems: Problem[] = [
         tier: 1, tierName: 'Solve It',
         goal: 'Calculate the moving average.',
         hint: 'For each position, average the `window` elements ending there.',
-        hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-1', label: 'Mean & averages in the Library' },
+        hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-9', label: 'Mean & averages in the Library' },
         starterCode: `def moving_average(data, window):\n    # Return list of averages, rounded to 1 decimal\n    # Your code here\n    pass\n`,
         testCases: [
           { input: '[10, 20, 30, 40, 50], 3', expected: '[20.0, 30.0, 40.0]', label: 'Window of 3' },
@@ -1343,7 +1343,7 @@ export const problems: Problem[] = [
     description: 'Write `trim_mean(values, trim_percent)` that calculates the mean after trimming the top and bottom percentages.',
     difficulty: 'medium', topic: 'data',
     tiers: [
-      { tier: 1, tierName: 'Solve It', goal: 'Calculate trimmed mean.', hint: 'Sort, remove top/bottom trim_percent, average the rest.', hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-1', label: 'Mean & averages in the Library' },
+      { tier: 1, tierName: 'Solve It', goal: 'Calculate trimmed mean.', hint: 'Sort, remove top/bottom trim_percent, average the rest.', hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-9', label: 'Mean & averages in the Library' },
         starterCode: 'def trim_mean(values, trim_percent):\n    # trim_percent is 0-50 (percentage to remove from each end)\n    # Your code here\n    pass\n',
         testCases: [
           { input: '[1, 2, 3, 4, 5, 6, 7, 8, 9, 100], 10', expected: '5.0', label: 'Trim outlier 100' },
@@ -1357,7 +1357,7 @@ export const problems: Problem[] = [
           { input: '[1, 2, 3], 60', expected: 'None', label: 'Trim too high' },
           { input: '[1, 2, 3, 4, 5], 20', expected: '3.0', label: 'Normal' },
         ] },
-      { tier: 3, tierName: 'Optimize It', goal: 'Compare regular mean, median, and trimmed mean.', hint: 'Return a dict with all three.', hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-1', label: 'Mean & averages in the Library' },
+      { tier: 3, tierName: 'Optimize It', goal: 'Compare regular mean, median, and trimmed mean.', hint: 'Return a dict with all three.', hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-9', label: 'Mean & averages in the Library' },
         starterCode: 'def compare_averages(values, trim_percent):\n    """Return {mean, median, trimmed_mean} rounded to 1 decimal."""\n    # Your code here\n    pass\n',
         testCases: [
           { input: '[1, 2, 3, 4, 100], 20', expected: "{'mean': 22.0, 'median': 3, 'trimmed_mean': 3.0}", label: 'Outlier impact' },
@@ -1510,20 +1510,20 @@ export const problems: Problem[] = [
     description: 'Write `percentile(data, p)` that returns the p-th percentile of a dataset.',
     difficulty: 'medium', topic: 'data',
     tiers: [
-      { tier: 1, tierName: 'Solve It', goal: 'Calculate the p-th percentile.', hint: 'Sort data, find the index at p/100 * (n-1).', hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-1', label: 'Mean & averages in the Library' },
+      { tier: 1, tierName: 'Solve It', goal: 'Calculate the p-th percentile.', hint: 'Sort data, find the index at p/100 * (n-1).', hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-9', label: 'Mean & averages in the Library' },
         starterCode: 'def percentile(data, p):\n    # p is 0-100\n    # Your code here\n    pass\n',
         testCases: [
           { input: '[15, 20, 35, 40, 50], 50', expected: '35', label: 'Median (50th)' },
           { input: '[15, 20, 35, 40, 50], 0', expected: '15', label: '0th = min' },
           { input: '[15, 20, 35, 40, 50], 100', expected: '50', label: '100th = max' },
         ] },
-      { tier: 2, tierName: 'Clean It', goal: 'Interpolate between values for non-integer indices.', hint: 'If index is 2.5, average values at index 2 and 3.', hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-1', label: 'Mean & averages in the Library' },
+      { tier: 2, tierName: 'Clean It', goal: 'Interpolate between values for non-integer indices.', hint: 'If index is 2.5, average values at index 2 and 3.', hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-9', label: 'Mean & averages in the Library' },
         starterCode: 'def percentile(data, p):\n    """Percentile with linear interpolation."""\n    # Your code here\n    pass\n',
         testCases: [
           { input: '[10, 20, 30, 40], 25', expected: '15.0', label: 'Interpolated' },
           { input: '[10, 20, 30, 40], 50', expected: '25.0', label: 'Midpoint' },
         ] },
-      { tier: 3, tierName: 'Optimize It', goal: 'Calculate Q1, Q3, and IQR in one function.', hint: 'Q1 = 25th percentile, Q3 = 75th, IQR = Q3 - Q1.', hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-1', label: 'Mean & averages in the Library' },
+      { tier: 3, tierName: 'Optimize It', goal: 'Calculate Q1, Q3, and IQR in one function.', hint: 'Q1 = 25th percentile, Q3 = 75th, IQR = Q3 - Q1.', hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-9', label: 'Mean & averages in the Library' },
         starterCode: 'def quartiles(data):\n    """Return (Q1, median, Q3, IQR)."""\n    # Your code here\n    pass\n',
         testCases: [
           { input: '[1, 2, 3, 4, 5, 6, 7, 8]', expected: '(2.5, 4.5, 6.5, 4.0)', label: 'Even count' },
@@ -1891,7 +1891,7 @@ export const problems: Problem[] = [
     description: 'Write `moving_median(data, window)` that calculates the median over a sliding window.',
     difficulty: 'medium', topic: 'data',
     tiers: [
-      { tier: 1, tierName: 'Solve It', goal: 'Calculate moving median.', hint: 'For each window, sort and find the middle value.', hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-1', label: 'Mean & averages in the Library' },
+      { tier: 1, tierName: 'Solve It', goal: 'Calculate moving median.', hint: 'For each window, sort and find the middle value.', hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-9', label: 'Mean & averages in the Library' },
         starterCode: 'def moving_median(data, window):\n    # Your code here\n    pass\n',
         testCases: [
           { input: '[1, 3, 5, 7, 9], 3', expected: '[3, 5, 7]', label: 'Odd window' },
@@ -1904,7 +1904,7 @@ export const problems: Problem[] = [
           { input: '[], 3', expected: '[]', label: 'Empty' },
           { input: '[1, 2], 5', expected: '[]', label: 'Window too large' },
         ] },
-      { tier: 3, tierName: 'Optimize It', goal: 'Compare moving mean vs moving median on data with outliers.', hint: 'Return both and show which is more robust.', hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-1', label: 'Mean & averages in the Library' },
+      { tier: 3, tierName: 'Optimize It', goal: 'Compare moving mean vs moving median on data with outliers.', hint: 'Return both and show which is more robust.', hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-9', label: 'Mean & averages in the Library' },
         starterCode: 'def compare_moving(data, window):\n    """Return {means: [...], medians: [...]} for comparison."""\n    # Your code here\n    pass\n',
         testCases: [
           { input: '[1, 2, 100, 3, 4], 3', expected: "{'means': [34.33, 35.0, 35.67], 'medians': [2, 3, 4]}", label: 'Outlier at 100' },
@@ -2289,7 +2289,7 @@ export const problems: Problem[] = [
     description: 'Write `histogram(data, bins)` that groups values into equal-width bins and counts them.',
     difficulty: 'medium', topic: 'data',
     tiers: [
-      { tier: 1, tierName: 'Solve It', goal: 'Create a histogram with n bins.', hint: 'Calculate bin width = (max - min) / bins. Assign each value to a bin.', hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-1', label: 'Mean & averages in the Library' },
+      { tier: 1, tierName: 'Solve It', goal: 'Create a histogram with n bins.', hint: 'Calculate bin width = (max - min) / bins. Assign each value to a bin.', hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-9', label: 'Mean & averages in the Library' },
         starterCode: 'def histogram(data, bins):\n    # Return list of counts, one per bin\n    # Your code here\n    pass\n',
         testCases: [
           { input: '[1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 5', expected: '[2, 2, 2, 2, 2]', label: 'Even distribution' },
@@ -2351,7 +2351,7 @@ export const problems: Problem[] = [
         testCases: [
           { input: '[0, 5, 3, 0, 2, 1]', expected: '[(1, 2, 8), (4, 2, 3)]', label: 'With totals' },
         ] },
-      { tier: 3, tierName: 'Optimize It', goal: 'Find the streak with highest average daily rainfall.', hint: 'total_rain / length for each streak.', hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-1', label: 'Mean & averages in the Library' },
+      { tier: 3, tierName: 'Optimize It', goal: 'Find the streak with highest average daily rainfall.', hint: 'total_rain / length for each streak.', hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-9', label: 'Mean & averages in the Library' },
         starterCode: 'def heaviest_streak(daily_rain):\n    """Return (start, length, avg_rain) of the heaviest streak."""\n    # Your code here\n    pass\n',
         testCases: [
           { input: '[0, 10, 20, 0, 1, 1, 1, 0]', expected: '(1, 2, 15.0)', label: 'First streak heavier' },
@@ -2423,7 +2423,7 @@ export const problems: Problem[] = [
     description: 'Write `normalize(data)` that scales values to 0-1 range using min-max normalization.',
     difficulty: 'easy', topic: 'data',
     tiers: [
-      { tier: 1, tierName: 'Solve It', goal: 'Min-max normalize.', hint: '(x - min) / (max - min)', hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-1', label: 'Mean & averages in the Library' },
+      { tier: 1, tierName: 'Solve It', goal: 'Min-max normalize.', hint: '(x - min) / (max - min)', hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-9', label: 'Mean & averages in the Library' },
         starterCode: 'def normalize(data):\n    # Return list of normalized values (0-1)\n    # Your code here\n    pass\n',
         testCases: [
           { input: '[10, 20, 30, 40, 50]', expected: '[0.0, 0.25, 0.5, 0.75, 1.0]', label: 'Linear' },
@@ -2436,7 +2436,7 @@ export const problems: Problem[] = [
           { input: '[100, 100]', expected: '[0.0, 0.0]', label: 'All same' },
           { input: '[0, 100]', expected: '[0.0, 1.0]', label: 'Min to max' },
         ] },
-      { tier: 3, tierName: 'Optimize It', goal: 'Also support z-score normalization.', hint: 'z = (x - mean) / std_dev', hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-1', label: 'Mean & averages in the Library' },
+      { tier: 3, tierName: 'Optimize It', goal: 'Also support z-score normalization.', hint: 'z = (x - mean) / std_dev', hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-9', label: 'Mean & averages in the Library' },
         starterCode: 'def normalize(data, method="minmax"):\n    """method=\\"minmax\\" or \\"zscore\\". Returns rounded to 2 decimals."""\n    # Your code here\n    pass\n',
         testCases: [
           { input: '[10, 20, 30], "minmax"', expected: '[0.0, 0.5, 1.0]', label: 'Min-max' },
@@ -2814,7 +2814,7 @@ export const problems: Problem[] = [
     id: 91, slug: 'dolphin-signal-smooth', title: 'Signal Smoother', story: "The River Dolphin's Secret", storySlug: 'river-dolphins-secret',
     description: 'Write `smooth(signal, window)` that smooths a noisy signal using a simple moving average.', difficulty: 'easy', topic: 'data',
     tiers: [
-      { tier: 1, tierName: 'Solve It', goal: 'Smooth using moving average.', hint: 'Average each window of values.', hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-1', label: 'Mean & averages in the Library' },
+      { tier: 1, tierName: 'Solve It', goal: 'Smooth using moving average.', hint: 'Average each window of values.', hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-9', label: 'Mean & averages in the Library' },
         starterCode: 'def smooth(signal, window):\n    pass\n', testCases: [{ input: '[1, 5, 2, 8, 3, 7], 3', expected: '[2.67, 5.0, 4.33, 6.0]', label: 'Smoothed' }] },
       { tier: 2, tierName: 'Clean It', goal: 'Pad edges to keep same length.', hint: 'Use smaller windows at the edges.', hintRef: { slug: 'python', section: 'section-python-14', label: 'Functions in the Library' },
         starterCode: 'def smooth(signal, window):\n    """Edge-padded smoothing — same length output."""\n    pass\n', testCases: [{ input: '[1, 5, 2, 8, 3], 3', expected: '[3.0, 2.67, 5.0, 4.33, 5.5]', label: 'Same length' }] },
@@ -2854,7 +2854,7 @@ export const problems: Problem[] = [
         starterCode: 'def species_stats(trees):\n    # Return (total, most_common, least_common)\n    pass\n', testCases: [{ input: '["oak", "pine", "oak", "oak", "pine", "birch"]', expected: '(6, "oak", "birch")', label: 'Stats' }] },
       { tier: 2, tierName: 'Clean It', goal: 'Return a full report dict.', hint: '{total, unique_count, most_common, least_common, counts}', hintRef: { slug: 'python', section: 'section-python-15', label: 'Dictionaries in the Library' },
         starterCode: 'from collections import Counter\n\ndef species_stats(trees):\n    """Full species report."""\n    pass\n', testCases: [{ input: '["oak", "oak", "pine"]', expected: "{'total': 3, 'unique': 2, 'most_common': ('oak', 2), 'least_common': ('pine', 1)}", label: 'Report' }] },
-      { tier: 3, tierName: 'Optimize It', goal: 'Calculate biodiversity index (Shannon entropy).', hint: 'H = -sum(p * log2(p)) where p = count/total.', hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-0', label: 'Statistics in the Library' },
+      { tier: 3, tierName: 'Optimize It', goal: 'Calculate biodiversity index (Shannon entropy).', hint: 'H = -sum(p * log2(p)) where p = count/total.', hintRef: { slug: 'statistics-basics', section: 'section-statistics-basics-9', label: 'Statistics in the Library' },
         starterCode: 'import math\nfrom collections import Counter\n\ndef biodiversity_index(trees):\n    """Shannon diversity index, rounded to 2 decimals."""\n    pass\n', testCases: [{ input: '["a", "b", "c", "d"]', expected: '2.0', label: 'Max diversity for 4 species' }, { input: '["a", "a", "a"]', expected: '0.0', label: 'No diversity' }] },
     ],
   },
