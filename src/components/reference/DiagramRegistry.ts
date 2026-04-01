@@ -654,6 +654,13 @@ import ActivityGliderTestDiagram from '../diagrams/ActivityGliderTestDiagram';
 import GlideRatioOutputDiagram from '../diagrams/GlideRatioOutputDiagram';
 // Library — Python & Algorithms visual diagrams
 import StringSlicingDiagram from '../diagrams/StringSlicingDiagram';
+import TwoPointerDiagram from '../diagrams/TwoPointerDiagram';
+import BinarySearchDiagram from '../diagrams/BinarySearchDiagram';
+import SlidingWindowDiagram from '../diagrams/SlidingWindowDiagram';
+import BFSDFSDiagram from '../diagrams/BFSDFSDiagram';
+import BubbleSortDiagram from '../diagrams/BubbleSortDiagram';
+import RecursionTreeDiagram from '../diagrams/RecursionTreeDiagram';
+import DictCounterDiagram from '../diagrams/DictCounterDiagram';
 
 // Hornbill's Crown — Ornithology & Animal Behavior
 import HornbillCasqueDiagram from '../diagrams/HornbillCasqueDiagram';
@@ -1824,6 +1831,13 @@ const registry: Record<string, ComponentType> = {
   GlideRatioOutputDiagram,
   // Library — Python & Algorithms
   StringSlicingDiagram,
+  TwoPointerDiagram,
+  BinarySearchDiagram,
+  SlidingWindowDiagram,
+  BFSDFSDiagram,
+  BubbleSortDiagram,
+  RecursionTreeDiagram,
+  DictCounterDiagram,
 };
 
 export default registry;
