@@ -78,8 +78,8 @@ export default function HomePage() {
             <div className="relative animate-slide-up">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img
-                  src="/content/illustrations/bridge-grew.png"
-                  alt="Illustrated children building and learning together"
+                  src="/content/illustrations/bridge-grew.webp"
+                  alt="Children learning through stories at TigmaMinds Academy"
                   className="w-full object-cover h-[480px]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
@@ -198,7 +198,7 @@ export default function HomePage() {
       <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="/content/illustrations/dancing-deer.png"
+            src="/content/illustrations/dancing-deer.webp"
             alt=""
             className="w-full h-full object-cover"
           />
