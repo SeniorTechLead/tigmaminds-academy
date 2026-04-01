@@ -539,6 +539,7 @@ plt.show()  # Which angle wins?`,
     id: 114,
     slug: 'geometry-of-alhambra',
     tradition: 'Islamic',
+    illustration: '/content/illustrations/geometry-of-alhambra.webp',
     story: { title: 'The Geometry of the Alhambra', tagline: 'An apprentice tile-maker discovers that there are exactly 17 ways to repeat a pattern.', content: `
 **The Apprentice**
 
@@ -2601,6 +2602,7 @@ print(f"After:  signal={total:.1f}, fires={fires}")
     id: 127,
     slug: 'tower-of-babel',
     tradition: 'Christian',
+    illustration: '/content/illustrations/tower-of-babel.webp',
     story: { title: 'The Tower of Babel', tagline: 'A tower that reached for heaven and a language that shattered — the engineering of tall structures and the science of human communication.', content: `
 **One Language, One Purpose**
 
