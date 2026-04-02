@@ -3267,6 +3267,7 @@ print(f"Exposed? {'YES' if delta_h >= depth else 'No'}") `,
     id: 129,
     slug: 'well-of-zamzam',
     tradition: 'Islamic',
+    illustration: '/content/illustrations/well-of-zamzam.webp',
     story: { title: 'The Well of Zamzam', tagline: 'Hydrology and groundwater science hidden in a well that has flowed for four thousand years.', content: `
 **The Desert**
 
@@ -3428,6 +3429,7 @@ print(f"Our aquifer: {Q_litres:.1f} L/s")`,
     id: 130,
     slug: 'muezzins-call',
     tradition: 'Islamic',
+    illustration: '/content/illustrations/muezzins-call.webp',
     story: { title: 'The Muezzin’s Call', tagline: 'Architectural acoustics and sound science hidden in the cry that echoes across ancient cities.', content: `
 **Before Dawn**
 
