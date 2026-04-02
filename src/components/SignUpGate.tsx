@@ -6,18 +6,22 @@ import { useAuth } from '../contexts/AuthContext';
 interface Props {
   message?: string;
   compact?: boolean;
+  returnTo?: string; // override the return URL after sign-in
 }
 
 export default function SignUpGate({
   message = 'Access all 130+ lessons, quizzes, and interactive tools',
   compact = false,
+  returnTo,
 }: Props) {
   const { signInWithGoogle } = useAuth();
   const [redirecting, setRedirecting] = useState(false);
 
+  const effectiveReturnTo = returnTo || window.location.pathname + window.location.search;
+
   const handleGoogle = () => {
     setRedirecting(true);
-    signInWithGoogle();
+    signInWithGoogle(effectiveReturnTo);
   };
 
   if (compact) {
@@ -41,7 +45,7 @@ export default function SignUpGate({
             {redirecting ? <><Loader2 className="w-4 h-4 animate-spin" /> Redirecting to Google...</> : 'Continue with Google'}
           </button>
           <Link
-            to={`/auth?returnTo=${encodeURIComponent(window.location.pathname)}`}
+            to={`/auth?returnTo=${encodeURIComponent(effectiveReturnTo)}`}
             className="text-sm text-amber-600 dark:text-amber-400 hover:underline font-medium"
           >
             or sign up with email
@@ -78,7 +82,7 @@ export default function SignUpGate({
               {redirecting ? <><Loader2 className="w-4 h-4 animate-spin" /> Redirecting to Google...</> : 'Continue with Google'}
             </button>
             <Link
-              to={`/auth?returnTo=${encodeURIComponent(window.location.pathname)}`}
+              to={`/auth?returnTo=${encodeURIComponent(effectiveReturnTo)}`}
               className="inline-flex items-center gap-1.5 text-sm text-amber-600 dark:text-amber-400 hover:underline font-medium"
             >
               <LogIn className="w-3.5 h-3.5" />

@@ -16,7 +16,7 @@ interface AuthContextType {
   loading: boolean;
   signUp: (email: string, password: string, displayName?: string) => Promise<{ error: string | null }>;
   signIn: (email: string, password: string) => Promise<{ error: string | null }>;
-  signInWithGoogle: () => Promise<void>;
+  signInWithGoogle: (returnTo?: string) => Promise<void>;
   signOut: () => Promise<void>;
   updateProfile: (updates: Partial<UserProfile>) => Promise<void>;
 }
@@ -100,15 +100,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { error: error?.message || null };
   };
 
-  const signInWithGoogle = async () => {
-    // If on /auth page, use its returnTo query param (the page the user actually came from)
-    // Otherwise use the current page
-    let returnTo = window.location.pathname + window.location.search;
-    if (window.location.pathname === '/auth') {
+  const signInWithGoogle = async (overrideReturnTo?: string) => {
+    let dest = overrideReturnTo || window.location.pathname + window.location.search;
+    // If on /auth page with no override, read its returnTo query param
+    if (!overrideReturnTo && window.location.pathname === '/auth') {
       const params = new URLSearchParams(window.location.search);
-      returnTo = params.get('returnTo') || '/lessons';
+      dest = params.get('returnTo') || '/lessons';
     }
-    window.location.href = `/api/auth/google/login?returnTo=${encodeURIComponent(returnTo)}`;
+    window.location.href = `/api/auth/google/login?returnTo=${encodeURIComponent(dest)}`;
   };
 
   const signOut = async () => {

@@ -152,6 +152,7 @@ export default function GuideCard({ guide, defaultTab = 'understand', expandedSl
                 <SignUpGate
                   message={`Sign up to read all ${allSections.length} sections`}
                   compact
+                  returnTo={`/reference/${guide.slug}`}
                 />
               </div>
             )}
