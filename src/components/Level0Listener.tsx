@@ -10,6 +10,7 @@ import DidYouKnow from './interactive/DidYouKnow';
 import diagramRegistry from './reference/DiagramRegistry';
 import DiagramZoom from './DiagramZoom';
 import { useAuth } from '../contexts/AuthContext';
+import { useProgress } from '../contexts/ProgressContext';
 import SignUpGate from './SignUpGate';
 
 interface Props {
@@ -58,6 +59,10 @@ export default function Level0Listener({ lesson }: Props) {
 
   const { user } = useAuth();
   const isSignedIn = !!user;
+  const { recordQuizScore, recordLevelViewed } = useProgress();
+
+  // Record that Level 0 was viewed
+  useState(() => { recordLevelViewed(lesson.slug, 0); });
 
   const concepts = lesson.level0?.concepts;
   const realWorldFacts: string[] = (lesson.stem as any)?.realWorld ?? [];
@@ -156,7 +161,10 @@ export default function Level0Listener({ lesson }: Props) {
   };
 
   const nextQuestion = () => {
-    if (currentQ + 1 >= questions.length) setCompleted(true);
+    if (currentQ + 1 >= questions.length) {
+      setCompleted(true);
+      recordQuizScore(lesson.slug, score, questions.length);
+    }
     else { setCurrentQ(c => c + 1); setSelectedAnswer(null); setShowExplanation(false); }
   };
 

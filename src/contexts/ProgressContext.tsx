@@ -3,9 +3,20 @@ import { supabase } from '../lib/supabase';
 import { useAuth } from './AuthContext';
 import { getLessonBySlug } from '../data/lessons';
 
+interface LevelDetail {
+  viewed?: boolean;         // opened the level tab
+  quizScore?: number;       // quiz score (Level 0)
+  quizTotal?: number;       // total quiz questions
+  miniLessonsSeen?: number; // how many mini-lessons opened (Levels 1-4)
+  miniLessonsTotal?: number;
+  codeRun?: boolean;        // ran at least one code block
+  completedAt?: string;     // when explicitly marked complete
+}
+
 interface LessonProgress {
   slug: string;
-  levelsCompleted: number[];
+  levelsCompleted: number[];  // kept for backwards compat
+  levels: Record<number, LevelDetail>;  // granular per-level data
   completedAt?: string;
 }
 
@@ -16,6 +27,14 @@ interface ProgressContextType {
   isStoryComplete: (slug: string) => boolean;
   getCompletedCount: () => number;
   getTotalHoursCompleted: () => number;
+  // Granular tracking
+  recordQuizScore: (slug: string, score: number, total: number) => void;
+  recordLevelViewed: (slug: string, level: number) => void;
+  recordMiniLessonSeen: (slug: string, level: number, seen: number, total: number) => void;
+  recordCodeRun: (slug: string, level: number) => void;
+  getLevelDetail: (slug: string, level: number) => LevelDetail | undefined;
+  getStoryProgress: (slug: string) => number; // 0-100 percentage
+  canMarkComplete: (slug: string, level: number) => boolean;
   studentName: string;
   setStudentName: (name: string) => void;
   resetProgress: () => void;
@@ -35,14 +54,15 @@ function loadLocal(): Record<string, LessonProgress> {
     for (const [slug, data] of Object.entries(parsed)) {
       const d = data as any;
       if (d.levelsCompleted) {
-        migrated[slug] = d;
+        // Ensure levels field exists (migration from pre-granular format)
+        migrated[slug] = { slug, levelsCompleted: d.levelsCompleted, levels: d.levels || {}, completedAt: d.completedAt };
       } else {
-        // Old format: level1Complete, level2Complete, level3Complete
-        const levels: number[] = [];
-        if (d.level1Complete) levels.push(1);
-        if (d.level2Complete) levels.push(2);
-        if (d.level3Complete) levels.push(3);
-        migrated[slug] = { slug, levelsCompleted: levels, completedAt: d.completedAt };
+        // Very old format: level1Complete, level2Complete, level3Complete
+        const levelsArr: number[] = [];
+        if (d.level1Complete) levelsArr.push(1);
+        if (d.level2Complete) levelsArr.push(2);
+        if (d.level3Complete) levelsArr.push(3);
+        migrated[slug] = { slug, levelsCompleted: levelsArr, levels: {}, completedAt: d.completedAt };
       }
     }
     return migrated;
@@ -159,28 +179,119 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     loadFromSupabase();
   }, [user]);
 
-  const markLevelComplete = useCallback((slug: string, level: number) => {
+  // Helper to update a lesson's progress and persist
+  const updateLesson = useCallback((slug: string, updater: (p: LessonProgress) => LessonProgress) => {
     setProgress((prev) => {
-      const existing = prev[slug] || { slug, levelsCompleted: [] };
-      const levels = new Set(existing.levelsCompleted);
-      levels.add(level);
-      const levelsCompleted = Array.from(levels).sort();
-      const completedAt = (levels.has(1) && levels.has(2))
-        ? existing.completedAt || new Date().toISOString()
-        : existing.completedAt;
-
-      const updated = { slug, levelsCompleted, completedAt };
+      const existing = prev[slug] || { slug, levelsCompleted: [], levels: {} };
+      const updated = updater(existing);
       const newProgress = { ...prev, [slug]: updated };
       saveLocal(newProgress);
-
-      // Sync to Supabase if authenticated
       if (user) {
-        saveToSupabase(user.id, slug, levelsCompleted, completedAt);
+        saveToSupabase(user.id, slug, updated.levelsCompleted, updated.completedAt);
       }
-
       return newProgress;
     });
   }, [user]);
+
+  const markLevelComplete = useCallback((slug: string, level: number) => {
+    updateLesson(slug, (p) => {
+      const levelsSet = new Set(p.levelsCompleted);
+      levelsSet.add(level);
+      const levelsCompleted = Array.from(levelsSet).sort();
+      const levelDetail = { ...p.levels[level], completedAt: new Date().toISOString() };
+      const completedAt = (levelsSet.has(0) && levelsSet.has(1))
+        ? p.completedAt || new Date().toISOString()
+        : p.completedAt;
+      return { ...p, levelsCompleted, levels: { ...p.levels, [level]: levelDetail }, completedAt };
+    });
+  }, [updateLesson]);
+
+  const recordQuizScore = useCallback((slug: string, score: number, total: number) => {
+    updateLesson(slug, (p) => {
+      const detail: LevelDetail = { ...p.levels[0], quizScore: score, quizTotal: total, viewed: true };
+      // Auto-complete Level 0 if quiz score >= 60%
+      const levelsSet = new Set(p.levelsCompleted);
+      if (total > 0 && score / total >= 0.6) {
+        levelsSet.add(0);
+        detail.completedAt = detail.completedAt || new Date().toISOString();
+      }
+      return { ...p, levelsCompleted: Array.from(levelsSet).sort(), levels: { ...p.levels, [0]: detail } };
+    });
+  }, [updateLesson]);
+
+  const recordLevelViewed = useCallback((slug: string, level: number) => {
+    updateLesson(slug, (p) => {
+      const detail: LevelDetail = { ...p.levels[level], viewed: true };
+      return { ...p, levels: { ...p.levels, [level]: detail } };
+    });
+  }, [updateLesson]);
+
+  const recordMiniLessonSeen = useCallback((slug: string, level: number, seen: number, total: number) => {
+    updateLesson(slug, (p) => {
+      const existing = p.levels[level] || {};
+      const detail: LevelDetail = {
+        ...existing,
+        viewed: true,
+        miniLessonsSeen: Math.max(existing.miniLessonsSeen || 0, seen),
+        miniLessonsTotal: total,
+      };
+      return { ...p, levels: { ...p.levels, [level]: detail } };
+    });
+  }, [updateLesson]);
+
+  const recordCodeRun = useCallback((slug: string, level: number) => {
+    updateLesson(slug, (p) => {
+      const detail: LevelDetail = { ...p.levels[level], viewed: true, codeRun: true };
+      return { ...p, levels: { ...p.levels, [level]: detail } };
+    });
+  }, [updateLesson]);
+
+  const getLevelDetail = useCallback((slug: string, level: number): LevelDetail | undefined => {
+    return progress[slug]?.levels?.[level];
+  }, [progress]);
+
+  const canMarkComplete = useCallback((slug: string, level: number): boolean => {
+    const detail = progress[slug]?.levels?.[level];
+    if (!detail?.viewed) return false;
+    if (level === 0) {
+      // Level 0: must have attempted quiz with >= 60%
+      if (!detail.quizTotal || !detail.quizScore) return false;
+      return detail.quizScore / detail.quizTotal >= 0.6;
+    }
+    // Levels 1-4: must have seen all mini-lessons
+    if (detail.miniLessonsTotal && detail.miniLessonsSeen) {
+      return detail.miniLessonsSeen >= detail.miniLessonsTotal;
+    }
+    // Fallback: if we don't know total, just require viewed
+    return true;
+  }, [progress]);
+
+  const getStoryProgress = useCallback((slug: string): number => {
+    const p = progress[slug];
+    if (!p) return 0;
+    // Weight: Level 0 = 30%, Levels 1-4 = 70% split evenly (17.5% each)
+    let pct = 0;
+    // Level 0
+    const l0 = p.levels?.[0];
+    if (l0?.completedAt) pct += 30;
+    else if (l0?.quizScore && l0.quizTotal) pct += 15; // attempted quiz
+    else if (l0?.viewed) pct += 5; // just viewed
+
+    // Levels 1-4
+    for (let lv = 1; lv <= 4; lv++) {
+      if (p.levelsCompleted.includes(lv)) {
+        pct += 17.5;
+      } else {
+        const detail = p.levels?.[lv];
+        if (detail?.miniLessonsSeen && detail.miniLessonsTotal) {
+          pct += 17.5 * (detail.miniLessonsSeen / detail.miniLessonsTotal) * 0.8; // 80% for partial
+        } else if (detail?.viewed) {
+          pct += 3; // just opened
+        }
+      }
+    }
+    return Math.min(100, Math.round(pct));
+  }, [progress]);
 
   const isLevelComplete = useCallback((slug: string, level: number) => {
     return progress[slug]?.levelsCompleted?.includes(level) || false;
@@ -188,11 +299,13 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
 
   const isStoryComplete = useCallback((slug: string) => {
     const p = progress[slug];
-    return p ? p.levelsCompleted.includes(1) && p.levelsCompleted.includes(2) : false;
+    if (!p) return false;
+    // Complete = Level 0 done + at least Level 1 done
+    return p.levelsCompleted.includes(0) && p.levelsCompleted.includes(1);
   }, [progress]);
 
   const getCompletedCount = useCallback(() => {
-    return Object.values(progress).filter(p => p.levelsCompleted.includes(1) && p.levelsCompleted.includes(2)).length;
+    return Object.values(progress).filter(p => p.levelsCompleted.includes(0) && p.levelsCompleted.includes(1)).length;
   }, [progress]);
 
   const getTotalHoursCompleted = useCallback(() => {
@@ -220,6 +333,8 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     <ProgressContext.Provider value={{
       progress, markLevelComplete, isLevelComplete, isStoryComplete,
       getCompletedCount, getTotalHoursCompleted,
+      recordQuizScore, recordLevelViewed, recordMiniLessonSeen, recordCodeRun,
+      getLevelDetail, getStoryProgress, canMarkComplete,
       studentName, setStudentName, resetProgress, syncing,
     }}>
       {children}
