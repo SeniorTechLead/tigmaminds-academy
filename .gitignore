@@ -23,9 +23,12 @@ dist-ssr
 *.sw?
 .env
 
-# Illustration assets (watermarked PNGs, raw Midjourney, and WebP output)
+# Illustration source assets (watermarked PNGs, raw Midjourney)
 content/illustrations/
 content/illustrations-raw/
-public/content/
 compareimagevariants/
+
+# Ignore everything in public/content EXCEPT the production webp illustrations
+public/content/*
+!public/content/illustrations/
 .vercel
