@@ -1,5 +1,6 @@
-import { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { lazy, Suspense, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { useVersionCheck } from './hooks/useVersionCheck';
 
 // Retry dynamic imports once — if chunk is stale, reload the page to get fresh index.html
 function lazyWithRetry(factory: () => Promise<any>) {
@@ -9,6 +10,17 @@ function lazyWithRetry(factory: () => Promise<any>) {
       return new Promise(() => {}); // never resolves — page is reloading
     })
   );
+}
+
+// Reload if a new version was deployed and user navigates
+function VersionGate({ children }: { children: React.ReactNode }) {
+  const location = useLocation();
+  useEffect(() => {
+    if (window.__TMA_STALE__) {
+      window.location.reload();
+    }
+  }, [location.pathname]);
+  return <>{children}</>;
 }
 
 const HomePage = lazyWithRetry(() => import('./pages/HomePage'));
@@ -30,8 +42,11 @@ const NotFoundPage = lazyWithRetry(() => import('./pages/NotFoundPage'));
 const PartnerPage = lazyWithRetry(() => import('./pages/PartnerPage'));
 
 function App() {
+  useVersionCheck();
+
   return (
     <Router>
+      <VersionGate>
       <Suspense fallback={
         <div className="min-h-screen bg-white dark:bg-gray-900 flex items-center justify-center">
           <div className="flex flex-col items-center gap-3">
@@ -62,6 +77,7 @@ function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
+      </VersionGate>
     </Router>
   );
 }
