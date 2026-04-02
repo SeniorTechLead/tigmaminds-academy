@@ -4,10 +4,10 @@
  */
 export default function ActivityTessellationDiagram() {
   const panelW = 240;
-  const panelH = 120;
-  const gap = 12;
+  const panelH = 130;
+  const gap = 14;
   const startX = 14;
-  const startY = 38;
+  const startY = 42;
 
   const panels = [0, 1, 2, 3].map((i) => ({
     x: startX + (i % 2) * (panelW + gap),
@@ -21,12 +21,12 @@ export default function ActivityTessellationDiagram() {
   return (
     <div className="w-full max-w-lg mx-auto my-4">
       <svg
-        viewBox="0 0 508 300"
+        viewBox="0 0 510 330"
         className="w-full"
         role="img"
         aria-label="Step-by-step guide to making an Escher-style tessellation from a triangle"
       >
-        <rect width="508" height="300" className="fill-white dark:fill-slate-950" rx="8" />
+        <rect width="510" height="330" className="fill-white dark:fill-slate-950" rx="8" />
 
         <text
           x="254"

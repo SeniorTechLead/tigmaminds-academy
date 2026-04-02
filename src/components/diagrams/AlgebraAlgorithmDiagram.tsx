@@ -1,25 +1,25 @@
 /**
- * AlgebraAlgorithmDiagram — Al-Khwarizmi’s step-by-step procedure as a flowchart.
+ * AlgebraAlgorithmDiagram — Al-Khwarizmi's step-by-step procedure as a flowchart.
  * Shows how his method for solving equations IS an algorithm.
  */
 export default function AlgebraAlgorithmDiagram() {
   const steps = [
-    { y: 28, label: 'START: Read the equation', shape: 'oval', color: 'fill-gray-200 dark:fill-gray-700' },
-    { y: 68, label: 'Are there terms to move?', shape: 'diamond', color: 'fill-amber-100 dark:fill-amber-800' },
-    { y: 112, label: 'al-Jabr: move negatives\nto the other side', shape: 'rect', color: 'fill-blue-100 dark:fill-blue-800' },
-    { y: 156, label: 'al-Muqabala: combine\nlike terms', shape: 'rect', color: 'fill-blue-100 dark:fill-blue-800' },
-    { y: 196, label: 'Is it linear or quadratic?', shape: 'diamond', color: 'fill-amber-100 dark:fill-amber-800' },
-    { y: 236, label: 'Solve: isolate x\nor complete the square', shape: 'rect', color: 'fill-emerald-100 dark:fill-emerald-800' },
-    { y: 276, label: 'DONE: x = answer', shape: 'oval', color: 'fill-green-200 dark:fill-green-700' },
+    { y: 54, label: 'START: Read the equation', shape: 'oval', color: 'fill-gray-200 dark:fill-gray-700' },
+    { y: 100, label: 'Are there terms to move?', shape: 'diamond', color: 'fill-amber-100 dark:fill-amber-800' },
+    { y: 150, label: 'al-Jabr: move negatives\nto the other side', shape: 'rect', color: 'fill-blue-100 dark:fill-blue-800' },
+    { y: 200, label: 'al-Muqabala: combine\nlike terms', shape: 'rect', color: 'fill-blue-100 dark:fill-blue-800' },
+    { y: 250, label: 'Is it linear or quadratic?', shape: 'diamond', color: 'fill-amber-100 dark:fill-amber-800' },
+    { y: 300, label: 'Solve: isolate x\nor complete the square', shape: 'rect', color: 'fill-emerald-100 dark:fill-emerald-800' },
+    { y: 350, label: 'DONE: x = answer', shape: 'oval', color: 'fill-green-200 dark:fill-green-700' },
   ];
 
   const cx = 200;
 
   return (
     <div className="w-full max-w-lg mx-auto my-4">
-      <svg viewBox="0 0 400 310" className="w-full" role="img" aria-label="Flowchart of al-Khwarizmi’s algorithm for solving equations">
-        <rect width="400" height="310" className="fill-white dark:fill-slate-950" rx="8" />
-        <text x="200" y="18" textAnchor="middle" className="fill-gray-900 dark:fill-slate-50" fontSize="13" fontWeight="bold">The Original Algorithm</text>
+      <svg viewBox="0 0 400 390" className="w-full" role="img" aria-label="Flowchart of al-Khwarizmi's algorithm for solving equations">
+        <rect width="400" height="390" className="fill-white dark:fill-slate-950" rx="8" />
+        <text x="200" y="24" textAnchor="middle" className="fill-gray-900 dark:fill-slate-50" fontSize="13" fontWeight="bold">The Original Algorithm</text>
 
         {/* Arrows between steps */}
         {steps.slice(0, -1).map((s, i) => (
@@ -68,7 +68,7 @@ export default function AlgebraAlgorithmDiagram() {
         <text x="330" y={steps[4].y - 8} className="fill-gray-500 dark:fill-gray-400" fontSize="10">Linear or</text>
         <text x="330" y={steps[4].y + 4} className="fill-gray-500 dark:fill-gray-400" fontSize="10">Quadratic</text>
 
-        <text x="200" y="300" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">Every step is precise and repeatable — this IS an algorithm.</text>
+        <text x="200" y="380" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">Every step is precise and repeatable — this IS an algorithm.</text>
       </svg>
     </div>
   );
