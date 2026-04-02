@@ -8,6 +8,9 @@ import {
 import { supabase } from '../lib/supabase';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import CheckoutButton from '../components/CheckoutButton';
+import { useSubscription } from '../contexts/SubscriptionContext';
+import { useAuth } from '../contexts/AuthContext';
 
 /* ── "What Students Will Build" — real capstone projects from real lessons ── */
 const capstoneProjects = [
@@ -191,6 +194,10 @@ function FAQ({ q, a }: { q: string; a: string }) {
 }
 
 export default function ProgramsPage() {
+  const { user } = useAuth();
+  const { hasActiveSubscription, plan: currentPlan } = useSubscription();
+  const paymentResult = new URLSearchParams(window.location.search).get('payment');
+
   // Detect India via timezone
   const isIndia = (() => {
     try {
@@ -221,6 +228,23 @@ export default function ProgramsPage() {
           </Link>
         </div>
       </section>
+
+      {/* ── Payment result banner ── */}
+      {paymentResult === 'success' && (
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 mb-6">
+          <div className="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-xl p-4 flex items-center gap-3">
+            <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0" />
+            <p className="text-sm font-semibold text-emerald-800 dark:text-emerald-300">Payment successful! Your subscription is now active.</p>
+          </div>
+        </div>
+      )}
+      {paymentResult === 'failed' && (
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 mb-6">
+          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4 flex items-center gap-3">
+            <p className="text-sm font-semibold text-red-800 dark:text-red-300">Payment was not completed. Please try again or contact us.</p>
+          </div>
+        </div>
+      )}
 
       {/* ── What You Get (Free) ── */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
@@ -308,9 +332,13 @@ export default function ProgramsPage() {
                 <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> Interactive tools</li>
                 <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> Progress tracking</li>
               </ul>
-              <Link to="/auth" className="block w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm font-semibold hover:shadow-lg transition-all">
-                Start Free Trial
-              </Link>
+              {hasActiveSubscription && currentPlan === 'online' ? (
+                <div className="py-2.5 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-sm font-semibold text-center">
+                  ✓ Current Plan
+                </div>
+              ) : (
+                <CheckoutButton plan="online_monthly" label="Subscribe — Monthly" />
+              )}
             </div>
             {/* In-Person */}
             <div className="rounded-2xl border-2 border-purple-200 dark:border-purple-800 p-6 bg-white dark:bg-gray-800 text-center">
