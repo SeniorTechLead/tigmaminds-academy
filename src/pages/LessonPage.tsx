@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, CheckCircle, ExternalLink, BookOpen, Wrench, Lightbulb, Gamepad2, Clock, Target, Package, ListChecks, Trophy } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle, ExternalLink, BookOpen, Wrench, Lightbulb, Gamepad2, Clock, Target, Package, ListChecks, Trophy, Sparkles } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { getLessonBySlug, lessons } from '../data/lessons';
@@ -21,7 +21,7 @@ export default function LessonPage() {
   const { slug } = useParams<{ slug: string }>();
   const lesson = slug ? getLessonBySlug(slug) : undefined;
   const [activeLevel, setActiveLevelRaw] = useState<Level>('listener');
-  const { markLevelComplete, isLevelComplete } = useProgress();
+  const { markLevelComplete, isLevelComplete, canMarkComplete, recordLevelViewed, getStoryProgress, getLevelDetail } = useProgress();
   const { isDemoStory } = useLessonMeta();
   const { user } = useAuth();
   const isSignedIn = !!user;
@@ -36,9 +36,13 @@ export default function LessonPage() {
   };
 
   // Prevent setting a locked level
+  const levelToNumber: Record<Level, number> = { listener: 0, explorer: 1, builder: 2, engineer: 3, creator: 4 };
+
   const setActiveLevel = (lvl: Level) => {
     if (isLevelLocked(lvl)) return;
     setActiveLevelRaw(lvl);
+    // Record that this level was viewed
+    if (lesson) recordLevelViewed(lesson.slug, levelToNumber[lvl]);
   };
 
   if (!lesson) {
@@ -312,53 +316,64 @@ export default function LessonPage() {
           </div>
         </section>
 
-      {/* === Everything below is hidden on Level 0 (Listener) === */}
-      {activeLevel !== 'listener' && lesson.playground && (
-        <section className="py-8 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6 border border-gray-200 dark:border-gray-700">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                  <Trophy className="w-5 h-5 text-amber-500" /> Your Progress
-                </h3>
-                <div className="flex gap-1">
-                  {[1, 2, 3].map((level) => (
-                    <div
-                      key={level}
-                      className={`w-8 h-2 rounded-full ${
-                        isLevelComplete(lesson.slug, level as 1 | 2 | 3)
-                          ? 'bg-emerald-500'
-                          : 'bg-gray-200 dark:bg-gray-700'
-                      }`}
-                    />
-                  ))}
+      {/* === Story Progress — always visible === */}
+      <section className="py-8 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6 border border-gray-200 dark:border-gray-700">
+            {/* Progress bar */}
+            {(() => {
+              const pct = getStoryProgress(lesson.slug);
+              return (
+                <div className="mb-5">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-base font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                      <Trophy className="w-5 h-5 text-amber-500" /> Story Progress
+                    </h3>
+                    <span className="text-sm font-bold text-gray-600 dark:text-gray-400">{pct}%</span>
+                  </div>
+                  <div className="w-full h-2.5 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
+                    <div className={`h-full rounded-full transition-all duration-500 ${pct === 100 ? 'bg-emerald-500' : 'bg-gradient-to-r from-amber-400 to-orange-500'}`}
+                      style={{ width: `${Math.max(pct, 1)}%` }} />
+                  </div>
                 </div>
-              </div>
+              );
+            })()}
+
+            {/* Level completion buttons */}
               <div className="flex gap-3">
                 {([
+                  { level: 0 as const, name: 'Level 0: Listener', tab: 'listener' as Level },
                   { level: 1 as const, name: 'Level 1: Explorer', tab: 'explorer' as Level },
                   { level: 2 as const, name: 'Level 2: Builder', tab: 'builder' as Level },
                   { level: 3 as const, name: 'Level 3: Engineer', tab: 'engineer' as Level },
-                ]).map(({ level, name, tab }) => {
+                ]).map(({ level, name }) => {
                   const complete = isLevelComplete(lesson.slug, level);
+                  const canComplete = canMarkComplete(lesson.slug, level);
+                  const detail = getLevelDetail(lesson.slug, level);
                   return (
                     <button
                       key={level}
                       onClick={() => {
-                        if (!complete) {
+                        if (!complete && canComplete) {
                           markLevelComplete(lesson.slug, level);
                         }
                       }}
+                      disabled={complete || !canComplete}
+                      title={!canComplete && !complete ? (level === 0 ? 'Complete the quiz first (60%+ to pass)' : 'View all mini-lessons first') : undefined}
                       className={`flex-1 py-3 px-4 rounded-xl text-sm font-semibold transition-all ${
                         complete
                           ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 cursor-default'
-                          : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-amber-100 dark:hover:bg-amber-900/30 hover:text-amber-700 dark:hover:text-amber-400'
+                          : canComplete
+                            ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 hover:bg-amber-200 dark:hover:bg-amber-800/30 ring-2 ring-amber-300 dark:ring-amber-700'
+                            : 'bg-gray-100 dark:bg-gray-700 text-gray-400 dark:text-gray-500 cursor-not-allowed'
                       }`}
                     >
                       {complete ? (
                         <span className="flex items-center justify-center gap-1"><CheckCircle className="w-4 h-4" /> {name}</span>
+                      ) : canComplete ? (
+                        <span className="flex items-center justify-center gap-1"><Sparkles className="w-4 h-4" /> Mark {name} Complete</span>
                       ) : (
-                        <span>Mark {name} Complete</span>
+                        <span>{name} {detail?.viewed ? '(in progress)' : ''}</span>
                       )}
                     </button>
                   );
@@ -367,7 +382,6 @@ export default function LessonPage() {
             </div>
           </div>
         </section>
-      )}
 
       {activeLevel !== 'listener' && (<>
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
