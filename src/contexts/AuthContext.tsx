@@ -101,7 +101,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const signInWithGoogle = async () => {
-    const returnTo = window.location.pathname + window.location.search;
+    // If on /auth page, use its returnTo query param (the page the user actually came from)
+    // Otherwise use the current page
+    let returnTo = window.location.pathname + window.location.search;
+    if (window.location.pathname === '/auth') {
+      const params = new URLSearchParams(window.location.search);
+      returnTo = params.get('returnTo') || '/lessons';
+    }
     window.location.href = `/api/auth/google/login?returnTo=${encodeURIComponent(returnTo)}`;
   };
 
