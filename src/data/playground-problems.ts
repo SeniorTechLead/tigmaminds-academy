@@ -378,7 +378,7 @@ export const problems: Problem[] = [
         tier: 3, tierName: 'Optimize It',
         goal: 'Use binary search — O(log n) instead of O(n).',
         hint: 'bisect module or manual binary search.',
-        hintRef: { slug: 'algorithms-data-structures', section: 'section-algorithms-data-structures-6', label: 'Search algorithms in the Library' },
+        hintRef: { slug: 'python', section: 'section-python-19', label: 'bisect module in the Library' },
         starterCode: `def find_temperature(readings, altitude):\n    """Binary search for closest altitude — O(log n)."""\n    # Your code here\n    pass\n`,
         testCases: [
           { input: '[(0, 30), (1000, 23.5), (2000, 17), (3000, 10.5), (4000, 4)], 2500', expected: '17', label: 'Binary search' },
@@ -2276,7 +2276,7 @@ export const problems: Problem[] = [
           { input: '[], ["W1"]', expected: '{}', label: 'No gardens' },
           { input: '["A"], []', expected: '{}', label: 'No workers' },
         ] },
-      { tier: 3, tierName: 'Optimize It', goal: 'Use itertools.cycle for elegant cycling.', hint: 'from itertools import cycle; zip(gardens, cycle(workers))', hintRef: { slug: 'python', section: 'section-python-14', label: 'Functions in the Library' },
+      { tier: 3, tierName: 'Optimize It', goal: 'Use itertools.cycle for elegant cycling.', hint: 'from itertools import cycle; zip(gardens, cycle(workers))', hintRef: { slug: 'python', section: 'section-python-20', label: 'itertools in the Library' },
         starterCode: 'from itertools import cycle\n\ndef schedule_harvests(gardens, workers):\n    """Using itertools.cycle for clean round-robin."""\n    # Your code here\n    pass\n',
         testCases: [
           { input: '["A", "B", "C"], ["W1", "W2"]', expected: '{"A": "W1", "B": "W2", "C": "W1"}', label: 'Cycle' },
@@ -2679,7 +2679,7 @@ export const problems: Problem[] = [
         testCases: [
           { input: '2, 2', expected: '[(0,0),(0,1),(1,0),(1,1)]', label: 'Comprehension' },
         ] },
-      { tier: 3, tierName: 'Optimize It', goal: 'Use itertools.product for a generator.', hint: 'from itertools import product', hintRef: { slug: 'python', section: 'section-python-14', label: 'Functions in the Library' },
+      { tier: 3, tierName: 'Optimize It', goal: 'Use itertools.product for a generator.', hint: 'from itertools import product', hintRef: { slug: 'python', section: 'section-python-20', label: 'itertools in the Library' },
         starterCode: 'from itertools import product\n\ndef grid_points(rows, cols):\n    """Using itertools.product."""\n    # Your code here\n    pass\n',
         testCases: [
           { input: '2, 3', expected: '[(0,0),(0,1),(0,2),(1,0),(1,1),(1,2)]', label: 'Product' },
@@ -2695,7 +2695,7 @@ export const problems: Problem[] = [
         starterCode: 'def repeat_pattern(pattern, n):\n    pass\n', testCases: [{ input: '[1, 2, 3], 3', expected: '[1, 2, 3, 1, 2, 3, 1, 2, 3]', label: '3x' }, { input: '[], 5', expected: '[]', label: 'Empty' }] },
       { tier: 2, tierName: 'Clean It', goal: 'Handle n=0 and negative n.', hint: 'Return [] for n <= 0.', hintRef: { slug: 'python', section: 'section-python-14', label: 'Functions in the Library' },
         starterCode: 'def repeat_pattern(pattern, n):\n    """Repeat with validation."""\n    pass\n', testCases: [{ input: '[1], 0', expected: '[]', label: 'Zero' }, { input: '[1], -1', expected: '[]', label: 'Negative' }] },
-      { tier: 3, tierName: 'Optimize It', goal: 'Use itertools.chain and islice for lazy repetition.', hint: 'from itertools import chain, islice, repeat', hintRef: { slug: 'python', section: 'section-python-14', label: 'Functions in the Library' },
+      { tier: 3, tierName: 'Optimize It', goal: 'Use itertools.chain and islice for lazy repetition.', hint: 'from itertools import chain, islice, repeat', hintRef: { slug: 'python', section: 'section-python-20', label: 'itertools in the Library' },
         starterCode: 'from itertools import chain, repeat, islice\n\ndef repeat_pattern(pattern, total_length):\n    """Repeat to fill exactly total_length items."""\n    pass\n', testCases: [{ input: '[1, 2, 3], 7', expected: '[1, 2, 3, 1, 2, 3, 1]', label: 'Partial last cycle' }] },
     ],
   },

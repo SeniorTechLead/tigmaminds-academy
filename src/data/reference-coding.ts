@@ -752,6 +752,202 @@ with open("elephant_data.csv", "r") as f:
     line_count = sum(1 for line in f)
     print(f"Total rows: {line_count - 1}")  # minus header`,
       },
+      {
+        title: 'Error Handling — try / except',
+        content:
+          'Errors happen. `try/except` catches them so your program doesn\u2019t crash.\n\n' +
+          '**Common errors:** `ValueError` (wrong value), `TypeError` (wrong type), `KeyError` (missing dict key), ' +
+          '`IndexError` (list index out of range), `ZeroDivisionError`.\n\n' +
+          '**Best practice:** Catch specific errors, not bare `except:`. Validate input at boundaries, trust internal code.',
+        code: `# ── Basic try/except ──
+try:
+    number = int("hello")       # this will fail
+except ValueError:
+    print("That's not a number!")  # catches it gracefully
+
+# ── Catch specific errors ──
+def safe_divide(a, b):
+    try:
+        return round(a / b, 2)
+    except ZeroDivisionError:
+        return None
+    except TypeError:
+        return None
+
+print(safe_divide(10, 3))    # 3.33
+print(safe_divide(10, 0))    # None
+print(safe_divide(10, "x"))  # None
+
+# ── Multiple except + else + finally ──
+def read_config(filename):
+    try:
+        with open(filename) as f:
+            data = f.read()
+    except FileNotFoundError:
+        print(f"{filename} not found — using defaults")
+        data = "default=true"
+    except PermissionError:
+        print(f"No permission to read {filename}")
+        data = ""
+    else:
+        print(f"Loaded {filename} successfully")  # runs if NO error
+    finally:
+        print("Config loading complete")  # ALWAYS runs
+    return data
+
+# ── Raising errors ──
+def set_age(age):
+    if not isinstance(age, int):
+        raise TypeError(f"age must be int, got {type(age).__name__}")
+    if age < 0 or age > 150:
+        raise ValueError(f"age must be 0-150, got {age}")
+    return age
+
+try:
+    set_age(-5)
+except ValueError as e:
+    print(f"Error: {e}")  # Error: age must be 0-150, got -5
+
+# ── The LBYL vs EAFP debate ──
+# LBYL (Look Before You Leap):
+if "name" in elephant:
+    print(elephant["name"])
+
+# EAFP (Easier to Ask Forgiveness — Pythonic):
+try:
+    print(elephant["name"])
+except KeyError:
+    print("no name")`,
+      },
+      {
+        title: 'The bisect Module — Binary Search Built In',
+        content:
+          'Python\u2019s `bisect` module provides efficient binary search for sorted lists. ' +
+          'Instead of writing your own binary search, use `bisect_left()` and `bisect_right()` to find insertion points in O(log n).\n\n' +
+          '**Use cases:** finding closest values, counting items in a range, classifying values by thresholds.',
+        code: `import bisect
+
+# ── bisect_left: where would target go? ──
+data = [10, 20, 30, 40, 50, 60, 70, 80, 90]
+
+# Find insertion point for 35
+pos = bisect.bisect_left(data, 35)
+print(pos)  # 3 (would go between 30 and 40)
+
+# Check if a value exists (binary search!)
+def binary_search(sorted_list, target):
+    pos = bisect.bisect_left(sorted_list, target)
+    if pos < len(sorted_list) and sorted_list[pos] == target:
+        return pos  # found at this index
+    return -1       # not found
+
+print(binary_search(data, 50))   # 4
+print(binary_search(data, 55))   # -1
+
+# ── Find closest value ──
+def find_closest(sorted_list, target):
+    pos = bisect.bisect_left(sorted_list, target)
+    if pos == 0:
+        return sorted_list[0]
+    if pos == len(sorted_list):
+        return sorted_list[-1]
+    before = sorted_list[pos - 1]
+    after = sorted_list[pos]
+    return before if (target - before) <= (after - target) else after
+
+temps = [0, 1000, 2000, 3000, 4000, 5000]
+print(find_closest(temps, 1800))  # 2000
+print(find_closest(temps, 1200))  # 1000
+
+# ── Count items in a range [lo, hi] ──
+def count_in_range(sorted_list, lo, hi):
+    left = bisect.bisect_left(sorted_list, lo)
+    right = bisect.bisect_right(sorted_list, hi)
+    return right - left
+
+scores = [55, 62, 70, 75, 80, 85, 90, 95]
+print(count_in_range(scores, 70, 90))  # 4 (70, 75, 80, 85, 90... wait)
+# bisect_right(90) = 7, bisect_left(70) = 2 → 7-2 = 5 ✓
+
+# ── Classify with thresholds ──
+def richter_class(magnitude):
+    thresholds = [2, 4, 5, 6, 7]
+    labels = ["micro", "minor", "light", "moderate", "strong", "major"]
+    return labels[bisect.bisect_right(thresholds, magnitude)]
+
+print(richter_class(1.5))  # micro
+print(richter_class(5.5))  # moderate
+print(richter_class(7.2))  # major
+
+# ── insort: insert and keep sorted ──
+scores = [60, 70, 80, 90]
+bisect.insort(scores, 75)
+print(scores)  # [60, 70, 75, 80, 90] — inserted in right place`,
+      },
+      {
+        title: 'The itertools Module — Power Tools for Iteration',
+        content:
+          '`itertools` provides building blocks for efficient iteration. All functions return lazy iterators (memory-efficient).\n\n' +
+          '**Key functions:**\n' +
+          '- `cycle()` — repeat a sequence forever\n' +
+          '- `chain()` — join multiple iterables into one\n' +
+          '- `product()` — all combinations (like nested loops)\n' +
+          '- `combinations()` / `permutations()` — choose items\n' +
+          '- `islice()` — slice an iterator (like list slicing but lazy)',
+        code: `from itertools import cycle, chain, product, combinations, islice, accumulate
+
+# ── cycle: repeat forever ──
+colors = cycle(["red", "green", "blue"])
+# Take first 7 from the infinite cycle
+first_7 = [next(colors) for _ in range(7)]
+print(first_7)
+# ['red', 'green', 'blue', 'red', 'green', 'blue', 'red']
+
+# Round-robin assignment
+gardens = ["A", "B", "C", "D", "E"]
+workers = ["W1", "W2"]
+assignments = dict(zip(gardens, cycle(workers)))
+print(assignments)
+# {'A': 'W1', 'B': 'W2', 'C': 'W1', 'D': 'W2', 'E': 'W1'}
+
+# ── chain: join iterables ──
+list1 = [1, 2, 3]
+list2 = [4, 5, 6]
+list3 = [7, 8, 9]
+print(list(chain(list1, list2, list3)))
+# [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+# ── product: all combinations (like nested loops) ──
+rows = range(2)
+cols = range(3)
+grid = list(product(rows, cols))
+print(grid)
+# [(0,0), (0,1), (0,2), (1,0), (1,1), (1,2)]
+
+# ── combinations: choose k items ──
+animals = ["elephant", "dolphin", "rhino", "tiger"]
+pairs = list(combinations(animals, 2))
+print(pairs)
+# [('elephant','dolphin'), ('elephant','rhino'), ...]
+print(f"{len(pairs)} pairs from {len(animals)} animals")  # 6
+
+# ── islice: slice an iterator ──
+# Useful for taking first N items from any iterator
+from itertools import count  # infinite counter
+first_10_evens = list(islice(count(0, 2), 10))
+print(first_10_evens)  # [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+
+# ── accumulate: running totals ──
+daily_rain = [5, 10, 3, 8, 2]
+cumulative = list(accumulate(daily_rain))
+print(cumulative)  # [5, 15, 18, 26, 28]
+
+# ── Repeat a pattern to fill a length ──
+pattern = [1, 2, 3]
+total_length = 7
+filled = list(islice(cycle(pattern), total_length))
+print(filled)  # [1, 2, 3, 1, 2, 3, 1]`,
+      },
     ],
   },
 
@@ -4559,6 +4755,49 @@ plt.show()
           'by key, and a *stack* enforces last-in-first-out order (like a stack of plates). Choosing the ' +
           'right data structure for the job is just as important as choosing the right algorithm — they ' +
           'go hand in hand.',
+        code: `from collections import deque
+
+# ── Stack: Last-In, First-Out (LIFO) ──
+# Use a regular list — append() and pop() are O(1)
+stack = []
+stack.append("page1")   # push
+stack.append("page2")
+stack.append("page3")
+print(stack)             # ['page1', 'page2', 'page3']
+last = stack.pop()       # pop — removes and returns last
+print(last)              # 'page3' (most recent)
+print(stack)             # ['page1', 'page2']
+
+# Real use: bracket matching, undo history, DFS
+
+# ── Queue: First-In, First-Out (FIFO) ──
+# Use deque — append() and popleft() are both O(1)
+queue = deque()
+queue.append("task1")    # enqueue
+queue.append("task2")
+queue.append("task3")
+first = queue.popleft()  # dequeue — removes and returns first
+print(first)             # 'task1' (oldest)
+print(queue)             # deque(['task2', 'task3'])
+
+# Real use: BFS, print queue, task scheduling
+
+# ── deque as a sliding window ──
+window = deque(maxlen=3)  # auto-evicts oldest when full
+for val in [10, 20, 30, 40, 50]:
+    window.append(val)
+    print(list(window))
+# [10]
+# [10, 20]
+# [10, 20, 30]
+# [20, 30, 40]  ← 10 auto-evicted
+# [30, 40, 50]  ← 20 auto-evicted
+
+# ── When to use what ──
+# List:  access by index, append/pop at end
+# Deque: fast append/pop at BOTH ends
+# Dict:  lookup by key, counting, grouping
+# Set:   membership testing, deduplication`,
         goDeeper:
           'An array stores elements in contiguous memory. Access by index: O(1) — jump directly to position. Insert/delete at the end: O(1) amortized. Insert/delete in the middle: O(n) — must shift all subsequent elements. Python lists are dynamic arrays that automatically resize (doubling capacity when full). A linked list stores each element with a pointer to the next: insert/delete anywhere is O(1) if you have a reference to the position, but access by index is O(n) — you must walk from the start. Arrays for random access; linked lists for frequent insertion/deletion.',
         advanced:
