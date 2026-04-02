@@ -160,7 +160,7 @@ export default function LessonsIndexPage() {
                   >
                     <div className="relative h-40 overflow-hidden">
                       <img
-                        src={`${lesson.illustration}?v=2`}
+                        src={lesson.illustration}
                         alt={lesson.story.title}
                         className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                       />
