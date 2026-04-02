@@ -16,6 +16,7 @@ const AuthPage = lazy(() => import('./pages/AuthPage'));
 const ReferencePage = lazy(() => import('./pages/ReferencePage'));
 const LessonPage = lazy(() => import('./pages/LessonPage'));
 const PlaygroundPage = lazy(() => import('./pages/PlaygroundPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
           <Route path="/reference/:slug" element={<ReferencePage />} />
           <Route path="/lessons/:slug" element={<LessonPage />} />
           <Route path="/playground" element={<PlaygroundPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
     </Router>

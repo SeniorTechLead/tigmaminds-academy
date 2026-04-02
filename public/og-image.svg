@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1f2937"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#f97316"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="0" y="0" width="1200" height="6" fill="url(#accent)"/>
+  <circle cx="120" cy="315" r="50" fill="url(#accent)"/>
+  <circle cx="120" cy="315" r="42" fill="#1f2937"/>
+  <text x="120" y="328" text-anchor="middle" font-family="system-ui, sans-serif" font-size="24" font-weight="800" fill="#f59e0b">TMA</text>
+  <text x="220" y="250" font-family="system-ui, sans-serif" font-size="56" font-weight="800" fill="#ffffff">TigmaMinds Academy</text>
+  <text x="220" y="320" font-family="system-ui, sans-serif" font-size="32" fill="#9ca3af">Learn to Build Through Imagination</text>
+  <text x="220" y="380" font-family="system-ui, sans-serif" font-size="22" fill="#6b7280">130+ stories from world traditions, each a doorway</text>
+  <text x="220" y="412" font-family="system-ui, sans-serif" font-size="22" fill="#6b7280">into real science, engineering, and code.</text>
+  <rect x="220" y="460" width="200" height="44" rx="22" fill="url(#accent)"/>
+  <text x="320" y="488" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#ffffff">Start Free</text>
+  <text x="220" y="580" font-family="system-ui, sans-serif" font-size="18" fill="#4b5563">tigmaminds.academy</text>
+</svg>
