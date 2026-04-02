@@ -36,9 +36,8 @@ export default function AuthPage() {
       const { error } = await signIn(email, password);
       if (error) {
         setError(error);
-      } else {
-        navigate(returnTo);
       }
+      // Navigation handled by useEffect watching `user` — wait for auth state to propagate
     } else {
       const { error } = await signUp(email, password, displayName);
       if (error) {
