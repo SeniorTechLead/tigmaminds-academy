@@ -7,4 +7,15 @@ export default defineConfig({
   optimizeDeps: {
     include: ['lucide-react'],
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-supabase': ['@supabase/supabase-js'],
+          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+          'data-lessons': ['./src/data/lessons.ts', './src/data/lessons-mythology.ts'],
+        },
+      },
+    },
+  },
 });

@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import type { ReferenceSection } from '../../data/reference';
 import diagramRegistry from './DiagramRegistry';
 import DiagramZoom from '../DiagramZoom';
@@ -237,11 +238,13 @@ export default function SectionRenderer({ section, level = 0 }: Props) {
 
       {/* Diagram */}
       {DiagramComponent && (
-        <div className="mt-3">
-          <DiagramZoom>
-            <DiagramComponent />
-          </DiagramZoom>
-        </div>
+        <Suspense fallback={<div className="h-48 rounded-xl bg-gray-100 dark:bg-gray-700/30 animate-pulse mt-3" />}>
+          <div className="mt-3">
+            <DiagramZoom>
+              <DiagramComponent />
+            </DiagramZoom>
+          </div>
+        </Suspense>
       )}
 
       {/* Interactive widget — gate rich tools for non-signed-in users */}

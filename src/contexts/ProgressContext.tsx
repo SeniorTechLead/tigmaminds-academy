@@ -1,7 +1,11 @@
 import { createContext, useContext, useState, useCallback, useEffect, ReactNode } from 'react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from './AuthContext';
-import { getLessonBySlug } from '../data/lessons';
+// Dynamically import lessons only when saving to Supabase — keeps 1.9MB out of main bundle
+const getLessonBySlug = async (slug: string) => {
+  const { getLessonBySlug: lookup } = await import('../data/lessons');
+  return lookup(slug);
+};
 
 interface LevelDetail {
   viewed?: boolean;         // opened the level tab
@@ -74,7 +78,7 @@ function saveLocal(progress: Record<string, LessonProgress>) {
 }
 
 async function saveToSupabase(userId: string, slug: string, progress: LessonProgress) {
-  const lesson = getLessonBySlug(slug);
+  const lesson = await getLessonBySlug(slug);
   if (!lesson) {
     console.error(`[Progress] Unknown lesson slug: ${slug}`);
     return;
