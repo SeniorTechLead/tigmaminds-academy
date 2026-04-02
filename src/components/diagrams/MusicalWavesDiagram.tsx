@@ -127,7 +127,7 @@ export default function MusicalWavesDiagram() {
       <text x={140} y={tubeBottom + 58} textAnchor="middle" className="fill-gray-500" fontSize="9">
         shorter tube = higher pitch
       </text>
-      <path d="M90,{tubeBottom + 44} L80,{tubeBottom + 41} L80,{tubeBottom + 47}Z" className="fill-gray-500 dark:fill-gray-500" />
+      <path d={`M90,${tubeBottom + 44} L80,${tubeBottom + 41} L80,${tubeBottom + 47}Z`} className="fill-gray-500 dark:fill-gray-500" />
 
       {/* Divider */}
       <line x1="390" y1="30" x2="390" y2="280" stroke="#374151" strokeWidth="1" strokeDasharray="4,4" />
