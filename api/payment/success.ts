@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { verifyHash, isValidPlan, calculatePeriodEnd, PLANS, getSupabaseAdmin } from '../_lib/payu';
-import type { PlanId } from '../_lib/payu';
+import { verifyHash, isValidPlan, calculatePeriodEnd, PLANS, getSupabaseAdmin } from '../_lib/payu.js';
+import type { PlanId } from '../_lib/payu.js';
 import { parse } from 'querystring';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {

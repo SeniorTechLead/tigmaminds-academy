@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { getSupabaseAdmin } from '../_lib/payu';
+import { getSupabaseAdmin } from '../_lib/payu.js';
 import { parse } from 'querystring';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {

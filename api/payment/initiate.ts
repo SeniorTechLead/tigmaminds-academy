@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { createClient } from '@supabase/supabase-js';
-import { PLANS, isValidPlan, generateTxnId, generateHash, getSupabaseAdmin } from '../_lib/payu';
-import type { PlanId, Currency } from '../_lib/payu';
+import { PLANS, isValidPlan, generateTxnId, generateHash, getSupabaseAdmin } from '../_lib/payu.js';
+import type { PlanId, Currency } from '../_lib/payu.js';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
