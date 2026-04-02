@@ -126,16 +126,19 @@ export default function GuideCard({ guide, defaultTab = 'understand', expandedSl
             <div className="mb-4 py-2.5 px-3 bg-gray-50 dark:bg-gray-700/40 rounded-lg border border-gray-100 dark:border-gray-700">
               <p className="text-[11px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-1.5">In this guide</p>
               <div className="flex flex-wrap gap-x-1 gap-y-1">
-                {allSections.map((section, i) => (
-                  <button
-                    key={i}
-                    onClick={() => document.getElementById(`section-${guide.slug}-${i}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
-                    className="text-xs text-gray-600 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
-                  >
-                    {i > 0 && <span className="text-gray-300 dark:text-gray-600 mr-1">·</span>}
-                    {section.title}
-                  </button>
-                ))}
+                {allSections.map((section, i) => {
+                  const sectionDomId = section.id || `section-${guide.slug}-${i}`;
+                  return (
+                    <button
+                      key={i}
+                      onClick={() => document.getElementById(sectionDomId)?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+                      className="text-xs text-gray-600 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
+                    >
+                      {i > 0 && <span className="text-gray-300 dark:text-gray-600 mr-1">·</span>}
+                      {section.title}
+                    </button>
+                  );
+                })}
               </div>
             </div>
           )}
@@ -143,7 +146,7 @@ export default function GuideCard({ guide, defaultTab = 'understand', expandedSl
           {/* All sections — understand + build combined */}
           <div className="space-y-1">
             {(isSignedIn ? allSections : allSections.slice(0, 1)).map((section, i) => (
-              <div key={i} id={`section-${guide.slug}-${i}`} className="scroll-mt-20">
+              <div key={i} id={section.id || `section-${guide.slug}-${i}`} className="scroll-mt-20">
                 <SectionRenderer section={section} level={level} />
               </div>
             ))}
