@@ -32,6 +32,7 @@ export default function Footer() {
               <li><Link to="/programs" className="hover:text-amber-400 transition-colors">Programs</Link></li>
               {/* Mentors link removed for launch */}
               <li><Link to="/careers" className="hover:text-amber-400 transition-colors">Teach With Us</Link></li>
+              <li><Link to="/partner" className="hover:text-amber-400 transition-colors">Partner With Us</Link></li>
               <li><Link to="/contact" className="hover:text-amber-400 transition-colors">Contact</Link></li>
             </ul>
           </div>

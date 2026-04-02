@@ -538,8 +538,8 @@ export default function ProgramsPage() {
             </div>
           </div>
           <div className="text-center">
-            <Link to="/contact" className="inline-flex items-center gap-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-8 py-3 rounded-full font-semibold hover:opacity-90 transition-opacity">
-              Get in Touch <ArrowRight className="w-4 h-4" />
+            <Link to="/partner" className="inline-flex items-center gap-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-8 py-3 rounded-full font-semibold hover:opacity-90 transition-opacity">
+              Learn More & Apply <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
