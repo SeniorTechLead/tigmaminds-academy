@@ -505,6 +505,46 @@ export default function ProgramsPage() {
         </div>
       </section>
 
+      {/* ── Partner With Us ── */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800/50">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">Partner With Us</h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              Bring story-driven STEM education to your school, college, or organization. We work with institutions across India to integrate our curriculum.
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-3 gap-6 mb-10">
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+              <div className="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center mb-3">
+                <span className="text-xl">🏫</span>
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-2">Schools</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">12-month STEM program that fits alongside your existing curriculum. Teacher training included.</p>
+            </div>
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+              <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-3">
+                <span className="text-xl">🎓</span>
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-2">Colleges</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Project-based bootcamp tracks for CS, engineering, and science departments. Real-world portfolio outcomes.</p>
+            </div>
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+              <div className="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center mb-3">
+                <span className="text-xl">🤝</span>
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-2">NGOs & Government</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Subsidized access for underserved communities. We partner with organizations working in rural education.</p>
+            </div>
+          </div>
+          <div className="text-center">
+            <Link to="/contact" className="inline-flex items-center gap-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-8 py-3 rounded-full font-semibold hover:opacity-90 transition-opacity">
+              Get in Touch <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ── Footer CTA ── */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-amber-500 to-orange-500">
         <div className="max-w-4xl mx-auto text-center">
