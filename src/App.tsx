@@ -1,23 +1,33 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-const HomePage = lazy(() => import('./pages/HomePage'));
-const AboutPage = lazy(() => import('./pages/AboutPage'));
-const ProgramsPage = lazy(() => import('./pages/ProgramsPage'));
-const ContactPage = lazy(() => import('./pages/ContactPage'));
-const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
-const TermsPage = lazy(() => import('./pages/TermsPage'));
-const InstructorsPage = lazy(() => import('./pages/InstructorsPage'));
-const CareersPage = lazy(() => import('./pages/CareersPage'));
-const LessonsIndexPage = lazy(() => import('./pages/LessonsIndexPage'));
-const CertificatePage = lazy(() => import('./pages/CertificatePage'));
-const LessonPlanPage = lazy(() => import('./pages/LessonPlanPage'));
-const AuthPage = lazy(() => import('./pages/AuthPage'));
-const ReferencePage = lazy(() => import('./pages/ReferencePage'));
-const LessonPage = lazy(() => import('./pages/LessonPage'));
-const PlaygroundPage = lazy(() => import('./pages/PlaygroundPage'));
-const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
-const PartnerPage = lazy(() => import('./pages/PartnerPage'));
+// Retry dynamic imports once — if chunk is stale, reload the page to get fresh index.html
+function lazyWithRetry(factory: () => Promise<any>) {
+  return lazy(() =>
+    factory().catch(() => {
+      window.location.reload();
+      return new Promise(() => {}); // never resolves — page is reloading
+    })
+  );
+}
+
+const HomePage = lazyWithRetry(() => import('./pages/HomePage'));
+const AboutPage = lazyWithRetry(() => import('./pages/AboutPage'));
+const ProgramsPage = lazyWithRetry(() => import('./pages/ProgramsPage'));
+const ContactPage = lazyWithRetry(() => import('./pages/ContactPage'));
+const PrivacyPage = lazyWithRetry(() => import('./pages/PrivacyPage'));
+const TermsPage = lazyWithRetry(() => import('./pages/TermsPage'));
+const InstructorsPage = lazyWithRetry(() => import('./pages/InstructorsPage'));
+const CareersPage = lazyWithRetry(() => import('./pages/CareersPage'));
+const LessonsIndexPage = lazyWithRetry(() => import('./pages/LessonsIndexPage'));
+const CertificatePage = lazyWithRetry(() => import('./pages/CertificatePage'));
+const LessonPlanPage = lazyWithRetry(() => import('./pages/LessonPlanPage'));
+const AuthPage = lazyWithRetry(() => import('./pages/AuthPage'));
+const ReferencePage = lazyWithRetry(() => import('./pages/ReferencePage'));
+const LessonPage = lazyWithRetry(() => import('./pages/LessonPage'));
+const PlaygroundPage = lazyWithRetry(() => import('./pages/PlaygroundPage'));
+const NotFoundPage = lazyWithRetry(() => import('./pages/NotFoundPage'));
+const PartnerPage = lazyWithRetry(() => import('./pages/PartnerPage'));
 
 function App() {
   return (
