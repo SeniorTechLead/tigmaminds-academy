@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowLeft, Clock, BookOpen, CheckCircle, Plus, X, ArrowRight,
-  Sparkles, Target, Flame, Trophy, Map, Filter,
+  Sparkles, Target, Flame, Trophy, Map as MapIcon, Filter,
 } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -183,7 +183,7 @@ export default function LessonPlanPage() {
       <section className="pt-32 pb-10 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-amber-50 via-white to-orange-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800">
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 px-4 py-2 rounded-full mb-4 text-sm font-semibold">
-            <Map className="w-4 h-4" />
+            <MapIcon className="w-4 h-4" />
             Your Learning Journey
           </div>
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-3">
