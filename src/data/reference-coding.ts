@@ -960,6 +960,388 @@ total_length = 7
 filled = list(islice(cycle(pattern), total_length))
 print(filled)  # [1, 2, 3, 1, 2, 3, 1]`,
       },
+      {
+        id: 'py-tuples-sets',
+        title: 'Tuples & Sets',
+        content:
+          '**Tuples** are immutable sequences — once created, they cannot be changed. Create them with parentheses `()` or just commas. They\'re perfect for fixed data like coordinates, RGB colors, or database records.\n\n' +
+          '**Tuple unpacking** lets you assign multiple variables at once: `lat, lon = (26.14, 91.74)`. This works in for-loops too.\n\n' +
+          '**Named tuples** from `collections` give each position a name, making code more readable than raw index access.\n\n' +
+          '**Sets** hold unique values only — duplicates are automatically removed. Create them with `{}` or `set()`. They\'re backed by hash tables, making membership testing (`x in my_set`) blazingly fast — O(1) vs O(n) for lists.\n\n' +
+          '**Set operations** mirror mathematical set theory: `|` union, `&` intersection, `-` difference, `^` symmetric difference.\n\n' +
+          '**When to use what:** Tuples for fixed data and dict keys (they\'re hashable). Lists for mutable collections. Sets for membership testing and deduplication.',
+        code: `# ── Tuples: immutable sequences ──
+elephant_pos = (26.14, 91.74)  # latitude, longitude
+# elephant_pos[0] = 27.0  # ERROR! Tuples can't be changed.
+
+# Create without parentheses — commas make the tuple
+species = "Asian elephant", "Indian rhino", "Bengal tiger"
+print(type(species))  # <class 'tuple'>
+
+# ── Tuple unpacking ──
+lat, lon = elephant_pos
+print(f"Latitude: {lat}, Longitude: {lon}")
+
+# Swap variables — Python's elegant trick
+a, b = 10, 20
+a, b = b, a  # now a=20, b=10
+
+# Unpack in a loop
+sightings = [("Ranga", 5), ("Mohini", 3), ("Gaja", 8)]
+for name, count in sightings:
+    print(f"{name}: {count} sightings")
+
+# ── Named tuples: readable tuple access ──
+from collections import namedtuple
+Animal = namedtuple("Animal", ["name", "species", "weight"])
+ranga = Animal("Ranga", "Asian elephant", 4500)
+print(ranga.name)      # "Ranga" (much clearer than ranga[0])
+print(ranga.weight)    # 4500
+
+# ── Sets: unique values only ──
+river_species = {"dolphin", "turtle", "catfish", "dolphin", "turtle"}
+print(river_species)  # {'dolphin', 'turtle', 'catfish'} — no duplicates!
+print(len(river_species))  # 3
+
+# Add and remove
+river_species.add("otter")
+river_species.discard("catfish")  # safe — no error if missing
+
+# ── Set operations ──
+kaziranga = {"elephant", "rhino", "tiger", "buffalo"}
+manas = {"elephant", "rhino", "langur", "pygmy hog"}
+
+# Union: all species in either park
+all_species = kaziranga | manas
+print(all_species)  # {'elephant', 'rhino', 'tiger', 'buffalo', 'langur', 'pygmy hog'}
+
+# Intersection: species in both parks
+shared = kaziranga & manas
+print(shared)  # {'elephant', 'rhino'}
+
+# Difference: only in Kaziranga
+only_kaziranga = kaziranga - manas
+print(only_kaziranga)  # {'tiger', 'buffalo'}
+
+# Symmetric difference: in one but not both
+unique_to_each = kaziranga ^ manas
+print(unique_to_each)  # {'tiger', 'buffalo', 'langur', 'pygmy hog'}
+
+# ── Fast membership testing ──
+endangered = {"rhino", "pygmy hog", "tiger", "dolphin", "vulture"}
+animal = "rhino"
+print(animal in endangered)  # True — O(1) lookup!
+
+# ── Deduplication while preserving order ──
+sighting_log = ["elephant", "rhino", "elephant", "tiger", "rhino", "elephant"]
+unique_ordered = list(dict.fromkeys(sighting_log))
+print(unique_ordered)  # ['elephant', 'rhino', 'tiger']
+
+# ── Tuples as dict keys (sets can't be keys!) ──
+grid_data = {}
+grid_data[(0, 0)] = "forest"
+grid_data[(0, 1)] = "river"
+grid_data[(1, 0)] = "grassland"
+print(grid_data[(0, 1)])  # "river"
+
+# ── Frozenset: an immutable set (can be a dict key) ──
+habitat = frozenset(["forest", "grassland"])
+print("forest" in habitat)  # True`,
+      },
+      {
+        id: 'py-classes',
+        title: 'Classes — Building Your Own Types',
+        content:
+          'A **class** is a blueprint for creating objects. An **instance** is a specific object built from that blueprint. Think of it like a "species card" template (the class) vs. a card filled out for a specific elephant (the instance).\n\n' +
+          '`__init__` is the constructor — it runs when you create a new instance and sets up its data. `self` refers to the specific instance being created or used.\n\n' +
+          '**Instance variables** (set via `self.name = ...`) belong to each object individually. **Methods** are functions defined inside the class that operate on the instance\'s data.\n\n' +
+          '`__str__` controls what `print()` shows. `__repr__` controls what the REPL shows (aim for a string that could recreate the object).\n\n' +
+          '**Inheritance** lets one class extend another, reusing code. The child class gets all parent methods and can override or add new ones.\n\n' +
+          '**When to use classes vs dicts:** Use dicts for simple key-value data. Use classes when the data has behavior (methods), validation, or relationships. If you\'re passing the same group of variables to many functions, that group probably wants to be a class.',
+        code: `# ── Basic class: a blueprint ──
+class ElephantTracker:
+    """Tracks sightings of an individual elephant."""
+
+    def __init__(self, name, species="Asian"):
+        self.name = name
+        self.species = species
+        self.sightings = []  # starts empty
+
+    def record_sighting(self, location, date):
+        """Add a new sighting record."""
+        self.sightings.append({"location": location, "date": date})
+
+    def total_sightings(self):
+        """How many times this elephant has been seen."""
+        return len(self.sightings)
+
+    def __str__(self):
+        return f"{self.name} ({self.species}) — {self.total_sightings()} sightings"
+
+    def __repr__(self):
+        return f"ElephantTracker('{self.name}', '{self.species}')"
+
+# Create instances
+ranga = ElephantTracker("Ranga")
+mohini = ElephantTracker("Mohini")
+
+# Use methods
+ranga.record_sighting("Kaziranga East", "2026-01-15")
+ranga.record_sighting("Kaziranga Central", "2026-02-20")
+mohini.record_sighting("Manas NP", "2026-01-22")
+
+print(ranga)          # Ranga (Asian) — 2 sightings
+print(repr(mohini))   # ElephantTracker('Mohini', 'Asian')
+print(ranga.total_sightings())  # 2
+
+# ── Class with validation ──
+class Lesson:
+    VALID_LEVELS = (0, 1, 2, 3)
+
+    def __init__(self, title, story, level=0):
+        if level not in self.VALID_LEVELS:
+            raise ValueError(f"Level must be one of {self.VALID_LEVELS}")
+        self.title = title
+        self.story = story
+        self.level = level
+        self.completed = False
+
+    def complete(self):
+        self.completed = True
+
+    def __str__(self):
+        status = "done" if self.completed else "in progress"
+        return f"L{self.level}: {self.title} [{status}]"
+
+lesson = Lesson("AI & Wildlife Tracking", "The Girl Who Spoke to Elephants", level=1)
+print(lesson)  # L1: AI & Wildlife Tracking [in progress]
+lesson.complete()
+print(lesson)  # L1: AI & Wildlife Tracking [done]
+
+# ── Inheritance: extending a class ──
+class Animal:
+    """Base class for all tracked animals."""
+    def __init__(self, name, species):
+        self.name = name
+        self.species = species
+
+    def describe(self):
+        return f"{self.name} the {self.species}"
+
+class Elephant(Animal):
+    """An elephant with herd tracking."""
+    def __init__(self, name, herd=None):
+        super().__init__(name, "Asian elephant")  # call parent __init__
+        self.herd = herd
+
+    def describe(self):
+        base = super().describe()  # reuse parent method
+        if self.herd:
+            return f"{base} (herd: {self.herd})"
+        return base
+
+class Dolphin(Animal):
+    def __init__(self, name, river):
+        super().__init__(name, "Gangetic dolphin")
+        self.river = river
+
+gaja = Elephant("Gaja", herd="Kaziranga East")
+print(gaja.describe())  # Gaja the Asian elephant (herd: Kaziranga East)
+
+susu = Dolphin("Susu", river="Brahmaputra")
+print(susu.describe())  # Susu the Gangetic dolphin
+
+# They share the Animal interface
+animals = [gaja, susu]
+for a in animals:
+    print(isinstance(a, Animal))  # True for both`,
+      },
+      {
+        id: 'py-scope',
+        title: 'Scope — Where Variables Live',
+        content:
+          'Every variable in Python lives in a **scope** — a region of code where that name is valid. Understanding scope prevents bugs where variables seem to "disappear" or hold unexpected values.\n\n' +
+          'Python uses the **LEGB rule** to look up names: **L**ocal (inside the current function) → **E**nclosing (inside any outer function) → **G**lobal (module level) → **B**uilt-in (Python\'s own names like `print`, `len`).\n\n' +
+          'A **closure** is a function that remembers variables from its enclosing scope, even after that scope has finished executing. This is the foundation of function factories and decorators.\n\n' +
+          '**Why avoid global variables:** They create hidden dependencies between functions, make testing harder, and cause subtle bugs when two functions modify the same global. Instead, pass data as arguments and return results.\n\n' +
+          '**Function factories** are functions that return new functions, each with its own enclosed state — powerful for creating specialized versions of a general function.',
+        code: `# ── Local vs Global scope ──
+species = "elephant"  # global variable
+
+def track_animal():
+    species = "dolphin"  # local variable — shadows the global
+    print(species)        # "dolphin"
+
+track_animal()
+print(species)  # "elephant" — global unchanged!
+
+# ── LEGB rule in action ──
+habitat = "forest"           # Global
+
+def outer():
+    habitat = "wetland"      # Enclosing
+    def inner():
+        habitat = "river"    # Local
+        print(habitat)       # "river" (found at Local level)
+    inner()
+    print(habitat)           # "wetland" (Enclosing, unchanged)
+
+outer()
+print(habitat)               # "forest" (Global, unchanged)
+
+# ── Closures: functions that remember ──
+def make_tracker(animal_name):
+    """Returns a function that tracks sightings for one animal."""
+    sightings = []  # this lives in the enclosing scope
+
+    def record(location):
+        sightings.append(location)  # closure captures 'sightings'
+        return f"{animal_name}: {len(sightings)} sightings"
+
+    return record
+
+track_ranga = make_tracker("Ranga")
+track_mohini = make_tracker("Mohini")
+
+print(track_ranga("Kaziranga"))   # Ranga: 1 sightings
+print(track_ranga("Manas"))       # Ranga: 2 sightings
+print(track_mohini("Pobitora"))   # Mohini: 1 sightings
+# Each function has its OWN sightings list!
+
+# ── Function factory: specialized functions ──
+def make_converter(factor, unit):
+    """Create a unit converter function."""
+    def convert(value):
+        return f"{value * factor:.2f} {unit}"
+    return convert
+
+km_to_miles = make_converter(0.621371, "miles")
+kg_to_pounds = make_converter(2.20462, "lbs")
+celsius_to_f = make_converter(1.8, "°F offset")  # simplified
+
+print(km_to_miles(100))    # "62.14 miles"
+print(kg_to_pounds(4500))  # "9920.79 lbs" (one elephant!)
+
+# ── Why globals are bad — the bug ──
+count = 0  # global
+
+def add_sighting_bad():
+    global count    # modifying global — fragile!
+    count += 1
+
+def add_sighting_good(current_count):
+    return current_count + 1  # pure function — no side effects
+
+# The good version is testable, predictable, safe
+result = add_sighting_good(0)
+result = add_sighting_good(result)
+print(result)  # 2
+
+# ── Score tracker with closure (practical example) ──
+def create_scorer():
+    scores = []
+    def add(score):
+        scores.append(score)
+        avg = sum(scores) / len(scores)
+        return f"Added {score}, average: {avg:.1f}, total: {len(scores)}"
+    def get_scores():
+        return scores.copy()  # return copy so caller can't mutate
+    return add, get_scores
+
+add_score, get_scores = create_scorer()
+print(add_score(85))   # Added 85, average: 85.0, total: 1
+print(add_score(92))   # Added 92, average: 88.5, total: 2
+print(get_scores())    # [85, 92]`,
+      },
+      {
+        id: 'py-formatting',
+        title: 'String Formatting — f-strings and Beyond',
+        content:
+          '**f-strings** (formatted string literals, Python 3.6+) are the modern way to embed expressions in strings. Prefix with `f` and put expressions in `{curly braces}`.\n\n' +
+          '**Format specs** after a colon control appearance: `:.2f` for 2 decimal places, `:>20` for right-alignment in 20 chars, `:,` for thousands separators, `:<10` for left-alignment, `:^15` for center.\n\n' +
+          '**Multiline f-strings** work with triple quotes — great for generating reports and formatted output.\n\n' +
+          'The older **`.format()`** method uses `{}` placeholders filled by `.format(args)`. It\'s still useful for reusable templates where the template string is defined separately from the data.\n\n' +
+          '**When to use which:** f-strings for most cases (readable, fast). `.format()` for reusable templates. `%` formatting is legacy — avoid in new code.',
+        code: `# ── Basic f-strings ──
+elephant = "Ranga"
+weight = 4500
+print(f"Tracking {elephant}, weight: {weight}kg")
+# Tracking Ranga, weight: 4500kg
+
+# Expressions inside braces
+sightings = [3, 7, 2, 5]
+print(f"Total sightings: {sum(sightings)}")     # Total sightings: 17
+print(f"Average: {sum(sightings)/len(sightings):.1f}")  # Average: 4.2
+
+# ── Number formatting ──
+distance = 1234567.891
+print(f"Distance: {distance:,.2f} meters")  # Distance: 1,234,567.89 meters
+print(f"Rounded: {distance:.0f}")           # Rounded: 1234568
+print(f"Scientific: {distance:.2e}")        # Scientific: 1.23e+06
+
+population = 42
+print(f"Count: {population:05d}")  # Count: 00042 (zero-padded)
+
+# ── Alignment and padding ──
+animals = [("Elephant", 4500), ("Dolphin", 85), ("Rhino", 2200)]
+
+print(f"{'Animal':<15} {'Weight (kg)':>12}")
+print("-" * 28)
+for name, wt in animals:
+    print(f"{name:<15} {wt:>12,}")
+
+# Output:
+# Animal           Weight (kg)
+# ----------------------------
+# Elephant                4,500
+# Dolphin                    85
+# Rhino                  2,200
+
+# ── Multiline f-strings ──
+species = "Asian elephant"
+location = "Kaziranga National Park"
+count = 2413
+status = "Endangered"
+
+report = f"""
+╔══════════════════════════════════╗
+║  Wildlife Report                 ║
+╠══════════════════════════════════╣
+║  Species:  {species:<22}║
+║  Location: {location:<22}║
+║  Count:    {count:<22,}║
+║  Status:   {status:<22}║
+╚══════════════════════════════════╝
+"""
+print(report)
+
+# ── Formatting types quick reference ──
+val = 42.5678
+print(f"{val:.2f}")    # 42.57    — 2 decimal places
+print(f"{val:10.2f}")  # "     42.57" — right-aligned in 10 chars
+print(f"{val:<10.2f}") # "42.57     " — left-aligned
+print(f"{val:^10.2f}") # "  42.57   " — centered
+
+pct = 0.8567
+print(f"{pct:.1%}")    # 85.7%    — percentage format
+
+# ── .format() for reusable templates ──
+template = "The {animal} was spotted at {location} on {date}."
+
+# Same template, different data
+print(template.format(animal="elephant", location="Kaziranga", date="Jan 15"))
+print(template.format(animal="dolphin", location="Brahmaputra", date="Feb 20"))
+
+# Positional arguments
+print("Coordinates: ({0}, {1})".format(26.14, 91.74))
+
+# ── Debugging with f-strings (Python 3.8+) ──
+x = 42
+name = "Ranga"
+print(f"{x = }")        # x = 42
+print(f"{name = }")     # name = 'Ranga'
+print(f"{len(name) = }")  # len(name) = 5`,
+      },
     ],
   },
 

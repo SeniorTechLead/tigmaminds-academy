@@ -396,7 +396,7 @@ export default function PlaygroundPage() {
     return true;
   });
 
-  const topics: Topic[] = ['strings', 'lists', 'math', 'sorting', 'dictionaries', 'loops', 'functions', 'data'];
+  const topics: Topic[] = ['strings', 'lists', 'math', 'sorting', 'dictionaries', 'loops', 'functions', 'data', 'tuples-sets', 'classes', 'recursion', 'error-handling'];
 
   // If a problem + tier is selected, show the solver
   if (selectedProblem && selectedTier) {
