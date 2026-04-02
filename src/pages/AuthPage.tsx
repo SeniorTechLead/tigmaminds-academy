@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Lock, User, ArrowRight, Loader2 } from 'lucide-react';
 import Header from '../components/Header';
@@ -13,10 +13,17 @@ export default function AuthPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState('');
-  const { signIn, signUp, signInWithGoogle } = useAuth();
+  const { user, signIn, signUp, signInWithGoogle } = useAuth();
   const [googleRedirecting, setGoogleRedirecting] = useState(false);
   const navigate = useNavigate();
   const returnTo = new URLSearchParams(window.location.search).get('returnTo') || '/lessons';
+
+  // If user is already signed in (e.g., after Google OAuth redirect), go to returnTo
+  useEffect(() => {
+    if (user) {
+      navigate(returnTo, { replace: true });
+    }
+  }, [user, navigate, returnTo]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
