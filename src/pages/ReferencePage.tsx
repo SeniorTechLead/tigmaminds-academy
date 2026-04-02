@@ -26,6 +26,25 @@ export default function ReferencePage() {
     return saved ? (parseInt(saved) as ReferenceLevel) : 0;
   });
 
+  // When navigating directly to a guide via slug, clear filters and scroll to it
+  useEffect(() => {
+    if (slug) {
+      setSelectedCategory(null);
+      setSearchQuery('');
+      // Scroll to the guide card after render
+      const attempt = (tries: number) => {
+        const el = document.getElementById(`ref-${slug}`);
+        if (el) {
+          const top = el.getBoundingClientRect().top + window.scrollY - 100;
+          window.scrollTo({ top, behavior: 'smooth' });
+        } else if (tries < 10) {
+          setTimeout(() => attempt(tries + 1), 200);
+        }
+      };
+      setTimeout(() => attempt(0), 300);
+    }
+  }, [slug]);
+
   // Deep-link to a section within a guide via URL hash (e.g. #section-python-10)
   useEffect(() => {
     const hash = location.hash?.slice(1);
