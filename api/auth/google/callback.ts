@@ -74,10 +74,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     ].join('; ');
 
     // 4. Build redirect URL that passes tokens via hash fragment
-    //    The Supabase JS client on the frontend will pick these up from the URL
     const separator = returnTo.includes('#') ? '&' : '#';
-    const redirectUrl = `${returnTo}${separator}access_token=${access_token}&refresh_token=${refresh_token}&type=recovery`;
+    const redirectUrl = `${origin}${returnTo}${separator}access_token=${access_token}&refresh_token=${refresh_token}&type=recovery`;
 
+    console.log('OAuth callback redirecting to:', redirectUrl.replace(/access_token=[^&]+/, 'access_token=REDACTED'));
     res.redirect(302, redirectUrl);
   } catch (err) {
     console.error('OAuth callback error:', err);
