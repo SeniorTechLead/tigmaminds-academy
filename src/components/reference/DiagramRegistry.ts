@@ -1,1843 +1,842 @@
-import type { ComponentType } from 'react';
+import { lazy, ComponentType } from 'react';
 
-import LeopardGPSDiagram from '../diagrams/LeopardGPSDiagram';
-import LeopardCameraTrapDiagram from '../diagrams/LeopardCameraTrapDiagram';
-import LeopardMarkRecaptureDiagram from '../diagrams/LeopardMarkRecaptureDiagram';
-import LeopardConservationDiagram from '../diagrams/LeopardConservationDiagram';
-import ActivityTrackingDiagram from '../diagrams/ActivityTrackingDiagram';
-import SineWaveDiagram from '../diagrams/SineWaveDiagram';
-import SpectrogramDiagram from '../diagrams/SpectrogramDiagram';
-import NumPyRulerDiagram from '../diagrams/NumPyRulerDiagram';
-import PlotAnatomyDiagram from '../diagrams/PlotAnatomyDiagram';
-import VariablesDiagram from '../diagrams/VariablesDiagram';
-import AmplitudeModDiagram from '../diagrams/AmplitudeModDiagram';
-import CircuitDiagram from '../diagrams/CircuitDiagram';
-import WavelengthSpectrum from '../diagrams/WavelengthSpectrum';
-import PhotosynthesisDiagram from '../diagrams/PhotosynthesisDiagram';
-import PopulationGrowthCurve from '../diagrams/PopulationGrowthCurve';
-import SilkStructureDiagram from '../diagrams/SilkStructureDiagram';
-import MugaSilkFibroinDiagram from '../diagrams/MugaSilkFibroinDiagram';
-import MugaSilkNanostructureDiagram from '../diagrams/MugaSilkNanostructureDiagram';
-import MugaSilkProcessDiagram from '../diagrams/MugaSilkProcessDiagram';
-import MugaSilkEndemicDiagram from '../diagrams/MugaSilkEndemicDiagram';
-import ActivitySilkTestDiagram from '../diagrams/ActivitySilkTestDiagram';
-import FoodWebDiagram from '../diagrams/FoodWebDiagram';
-import RayleighScatteringDiagram from '../diagrams/RayleighScatteringDiagram';
-import MajuliErosionDepositionDiagram from '../diagrams/MajuliErosionDepositionDiagram';
-import MajuliFormationDiagram from '../diagrams/MajuliFormationDiagram';
-import MajuliShrinkingDiagram from '../diagrams/MajuliShrinkingDiagram';
-import MajuliProtectionDiagram from '../diagrams/MajuliProtectionDiagram';
-import ActivityErosionModelDiagram from '../diagrams/ActivityErosionModelDiagram';
-import RiverErosionDiagram from '../diagrams/RiverErosionDiagram';
-import RiverSourceDiagram from '../diagrams/RiverSourceDiagram';
-import RiverTransportDiagram from '../diagrams/RiverTransportDiagram';
-import RiverBraidedDiagram from '../diagrams/RiverBraidedDiagram';
-import RiverFloodplainDiagram from '../diagrams/RiverFloodplainDiagram';
-import RiverDeltaDiagram from '../diagrams/RiverDeltaDiagram';
-import RiverOxbowDiagram from '../diagrams/RiverOxbowDiagram';
-import EcholocationDiagram from '../diagrams/EcholocationDiagram';
-import MusicalWavesDiagram from '../diagrams/MusicalWavesDiagram';
-import NewtonForceDiagram from '../diagrams/NewtonForceDiagram';
-import CycloneCrossSectionDiagram from '../diagrams/CycloneCrossSectionDiagram';
-import FibonacciSpiralDiagram from '../diagrams/FibonacciSpiralDiagram';
-import CSSBoxModelDiagram from '../diagrams/CSSBoxModelDiagram';
-import KNNClassificationDiagram from '../diagrams/KNNClassificationDiagram';
-import AltitudeProfileDiagram from '../diagrams/AltitudeProfileDiagram';
-import FlowchartDiagram from '../diagrams/FlowchartDiagram';
-import FeatureExtractionDiagram from '../diagrams/FeatureExtractionDiagram';
-import FeatureWeightsDiagram from '../diagrams/FeatureWeightsDiagram';
-import TrainTestSplitDiagram from '../diagrams/TrainTestSplitDiagram';
-import PostmanSortingDiagram from '../diagrams/PostmanSortingDiagram';
-import DogVsCatDiagram from '../diagrams/DogVsCatDiagram';
-import DecisionTreeDiagram from '../diagrams/DecisionTreeDiagram';
-import LinearClassifierDiagram from '../diagrams/LinearClassifierDiagram';
-import NeuralNetworkDiagram from '../diagrams/NeuralNetworkDiagram';
-import TransformerAttentionDiagram from '../diagrams/TransformerAttentionDiagram';
-import TessellationDiagram from '../diagrams/TessellationDiagram';
-import FractalTreeDiagram from '../diagrams/FractalTreeDiagram';
-import SymmetryDiagram from '../diagrams/SymmetryDiagram';
-import VoronoiDiagram from '../diagrams/VoronoiDiagram';
-import MeanMedianModeDiagram from '../diagrams/MeanMedianModeDiagram';
-import StdDevDiagram from '../diagrams/StdDevDiagram';
-import CorrelationDiagram from '../diagrams/CorrelationDiagram';
-import HistogramDiagram from '../diagrams/HistogramDiagram';
-import OhmsLawDiagram from '../diagrams/OhmsLawDiagram';
-import HeatTransferDiagram from '../diagrams/HeatTransferDiagram';
-import DopplerEffectDiagram from '../diagrams/DopplerEffectDiagram';
-import AnimalCellDiagram from '../diagrams/AnimalCellDiagram';
-import AtomStructureDiagram from '../diagrams/AtomStructureDiagram';
-import BalanceScaleDiagram from '../diagrams/BalanceScaleDiagram';
-import CellComparisonDiagram from '../diagrams/CellComparisonDiagram';
-import DNADoubleHelixDiagram from '../diagrams/DNADoubleHelixDiagram';
-import EnergyBarChartDiagram from '../diagrams/EnergyBarChartDiagram';
-import EnergyPyramidDiagram from '../diagrams/EnergyPyramidDiagram';
-import HeartDiagram from '../diagrams/HeartDiagram';
-import IonicBondDiagram from '../diagrams/IonicBondDiagram';
-import LensRayDiagram from '../diagrams/LensRayDiagram';
-import MagneticFieldLinesDiagram from '../diagrams/MagneticFieldLinesDiagram';
-import PHScaleDiagram from '../diagrams/PHScaleDiagram';
-import PeriodicTableOverviewDiagram from '../diagrams/PeriodicTableOverviewDiagram';
-import PhaseChangeDiagram from '../diagrams/PhaseChangeDiagram';
-import PunnettSquareDiagram from '../diagrams/PunnettSquareDiagram';
-import PythagoreanDiagram from '../diagrams/PythagoreanDiagram';
-import SeriesParallelCircuitDiagram from '../diagrams/SeriesParallelCircuitDiagram';
-import TangentLineDiagram from '../diagrams/TangentLineDiagram';
-import TransverseLongitudinalDiagram from '../diagrams/TransverseLongitudinalDiagram';
-import UnitCircleDiagram from '../diagrams/UnitCircleDiagram';
-import WaveEquationDiagram from '../diagrams/WaveEquationDiagram';
-import InterferenceDiagram from '../diagrams/InterferenceDiagram';
-import MolecularMotionDiagram from '../diagrams/MolecularMotionDiagram';
-import StaticElectricityDiagram from '../diagrams/StaticElectricityDiagram';
-import CovalentBondDiagram from '../diagrams/CovalentBondDiagram';
-import BalancingEquationDiagram from '../diagrams/BalancingEquationDiagram';
-import CarbonCycleDiagram from '../diagrams/CarbonCycleDiagram';
-import NaturalSelectionDiagram from '../diagrams/NaturalSelectionDiagram';
-import BernoulliDiagram from '../diagrams/BernoulliDiagram';
-import BuoyancyDiagram from '../diagrams/BuoyancyDiagram';
-import CarbonBondingDiagram from '../diagrams/CarbonBondingDiagram';
-import CellMembraneDiagram from '../diagrams/CellMembraneDiagram';
-import ChromosomeDiagram from '../diagrams/ChromosomeDiagram';
-import CoordinatePlaneDiagram from '../diagrams/CoordinatePlaneDiagram';
-import DigestiveSystemDiagram from '../diagrams/DigestiveSystemDiagram';
-import DominantRecessiveDiagram from '../diagrams/DominantRecessiveDiagram';
-import EarthMagnetismDiagram from '../diagrams/EarthMagnetismDiagram';
-import ElectromagnetDiagram from '../diagrams/ElectromagnetDiagram';
-import ElectronShellDiagram from '../diagrams/ElectronShellDiagram';
-import EnergyProfileDiagram from '../diagrams/EnergyProfileDiagram';
-import FunctionalGroupsDiagram from '../diagrams/FunctionalGroupsDiagram';
-import GravitationalFieldDiagram from '../diagrams/GravitationalFieldDiagram';
-import HeightDistanceDiagram from '../diagrams/HeightDistanceDiagram';
-import HomologousStructuresDiagram from '../diagrams/HomologousStructuresDiagram';
-import HydraulicPressDiagram from '../diagrams/HydraulicPressDiagram';
-import IsotopeDiagram from '../diagrams/IsotopeDiagram';
-import LinearGraphDiagram from '../diagrams/LinearGraphDiagram';
-import LungsDiagram from '../diagrams/LungsDiagram';
-import MetallicBondDiagram from '../diagrams/MetallicBondDiagram';
-import MitosisDiagram from '../diagrams/MitosisDiagram';
-import MolecularShapeDiagram from '../diagrams/MolecularShapeDiagram';
-import MotorGeneratorDiagram from '../diagrams/MotorGeneratorDiagram';
-import MutationTypesDiagram from '../diagrams/MutationTypesDiagram';
-import NeuronDiagram from '../diagrams/NeuronDiagram';
-import NumberLineDiagram from '../diagrams/NumberLineDiagram';
-import OrbitalMechanicsDiagram from '../diagrams/OrbitalMechanicsDiagram';
-import PolymerChainDiagram from '../diagrams/PolymerChainDiagram';
-import PressureDepthDiagram from '../diagrams/PressureDepthDiagram';
-import ProbabilityScaleDiagram from '../diagrams/ProbabilityScaleDiagram';
-import ReactionTypesDiagram from '../diagrams/ReactionTypesDiagram';
-import SOHCAHTOADiagram from '../diagrams/SOHCAHTOADiagram';
-import SieveOfEratosthenesDiagram from '../diagrams/SieveOfEratosthenesDiagram';
-import SkeletonMuscleDiagram from '../diagrams/SkeletonMuscleDiagram';
-import SubatomicParticlesDiagram from '../diagrams/SubatomicParticlesDiagram';
-import TidesDiagram from '../diagrams/TidesDiagram';
-import TreeDiagramProbability from '../diagrams/TreeDiagramProbability';
-import TrigGraphsDiagram from '../diagrams/TrigGraphsDiagram';
-import VectorAdditionDiagram from '../diagrams/VectorAdditionDiagram';
-import AdaptationDiagram from '../diagrams/AdaptationDiagram';
-import AngleTypesDiagram from '../diagrams/AngleTypesDiagram';
-import AreaUnderCurveDiagram from '../diagrams/AreaUnderCurveDiagram';
-import DistanceFormulaDiagram from '../diagrams/DistanceFormulaDiagram';
-import EMCSquaredDiagram from '../diagrams/EMCSquaredDiagram';
-import LimitDiagram from '../diagrams/LimitDiagram';
-import BacteriaStructureDiagram from '../diagrams/BacteriaStructureDiagram';
-import BatteryCrossSectionDiagram from '../diagrams/BatteryCrossSectionDiagram';
-import BoyleLawDiagram from '../diagrams/BoyleLawDiagram';
-import CirclePropertiesDiagram from '../diagrams/CirclePropertiesDiagram';
-import CodonTableDiagram from '../diagrams/CodonTableDiagram';
-import CombinatoricsGridDiagram from '../diagrams/CombinatoricsGridDiagram';
-import ConicSectionsDiagram from '../diagrams/ConicSectionsDiagram';
-import DNAReplicationDiagram from '../diagrams/DNAReplicationDiagram';
-import DichotomousKeyDiagram from '../diagrams/DichotomousKeyDiagram';
-import DiffractionDiagram from '../diagrams/DiffractionDiagram';
-import ElementBoxDiagram from '../diagrams/ElementBoxDiagram';
-import EnergyConversionChainDiagram from '../diagrams/EnergyConversionChainDiagram';
-import ExpectedValueDiagram from '../diagrams/ExpectedValueDiagram';
-import EyeAnatomyDiagram from '../diagrams/EyeAnatomyDiagram';
-import FermentationDiagram from '../diagrams/FermentationDiagram';
-import FissionFusionDiagram from '../diagrams/FissionFusionDiagram';
-import FiveKingdomsDiagram from '../diagrams/FiveKingdomsDiagram';
-import FungiDiagram from '../diagrams/FungiDiagram';
-import HalfLifeDiagram from '../diagrams/HalfLifeDiagram';
-import HydroelectricDiagram from '../diagrams/HydroelectricDiagram';
-import LightClockDiagram from '../diagrams/LightClockDiagram';
-import MatrixMultiplicationDiagram from '../diagrams/MatrixMultiplicationDiagram';
-import MetalNonmetalDiagram from '../diagrams/MetalNonmetalDiagram';
-import MirrorReflectionDiagram from '../diagrams/MirrorReflectionDiagram';
-import ModularClockDiagram from '../diagrams/ModularClockDiagram';
-import NEIndiaBiomesDiagram from '../diagrams/NEIndiaBiomesDiagram';
-import NitrogenCycleDiagram from '../diagrams/NitrogenCycleDiagram';
-import NucleusStructureDiagram from '../diagrams/NucleusStructureDiagram';
-import ParticleModelDiagram from '../diagrams/ParticleModelDiagram';
-import PeriodicTrendsDiagram from '../diagrams/PeriodicTrendsDiagram';
-import PhaseTransitionDiagram from '../diagrams/PhaseTransitionDiagram';
-import PhylogeneticTreeDiagram from '../diagrams/PhylogeneticTreeDiagram';
-import RadioactiveDecayDiagram from '../diagrams/RadioactiveDecayDiagram';
-import RedoxDiagram from '../diagrams/RedoxDiagram';
-import SequencePatternDiagram from '../diagrams/SequencePatternDiagram';
-import SlopeInterceptDiagram from '../diagrams/SlopeInterceptDiagram';
-import TaxonomyHierarchyDiagram from '../diagrams/TaxonomyHierarchyDiagram';
-import TotalInternalReflectionDiagram from '../diagrams/TotalInternalReflectionDiagram';
-import TranscriptionDiagram from '../diagrams/TranscriptionDiagram';
-import TransformationMatrixDiagram from '../diagrams/TransformationMatrixDiagram';
-import TransformationsDiagram from '../diagrams/TransformationsDiagram';
-import TranslationDiagram from '../diagrams/TranslationDiagram';
-import VirusReplicationDiagram from '../diagrams/VirusReplicationDiagram';
-import VoltaicCellDiagram from '../diagrams/VoltaicCellDiagram';
-import Volume3DDiagram from '../diagrams/Volume3DDiagram';
-import WorkForceDiagram from '../diagrams/WorkForceDiagram';
-import ClimateFactorsDiagram from '../diagrams/ClimateFactorsDiagram';
-import ClimateZonesDiagram from '../diagrams/ClimateZonesDiagram';
-import EarthLayersDiagram from '../diagrams/EarthLayersDiagram';
-import LatLongGridDiagram from '../diagrams/LatLongGridDiagram';
-import PlateBoundaryDiagram from '../diagrams/PlateBoundaryDiagram';
-import RockCycleDiagram from '../diagrams/RockCycleDiagram';
-import SeismicWavesDiagram from '../diagrams/SeismicWavesDiagram';
-import SoilHorizonDiagram from '../diagrams/SoilHorizonDiagram';
-import TectonicPlatesDiagram from '../diagrams/TectonicPlatesDiagram';
-import WaterCycleDiagram from '../diagrams/WaterCycleDiagram';
-import ContourMapDiagram from '../diagrams/ContourMapDiagram';
-import DemographicTransitionDiagram from '../diagrams/DemographicTransitionDiagram';
-import MapProjectionDiagram from '../diagrams/MapProjectionDiagram';
-import MonsoonDiagram from '../diagrams/MonsoonDiagram';
-import MonsoonHeatingDiagram from '../diagrams/MonsoonHeatingDiagram';
-import MonsoonReversalDiagram from '../diagrams/MonsoonReversalDiagram';
-import MonsoonJetStreamDiagram from '../diagrams/MonsoonJetStreamDiagram';
-import MonsoonFailureDiagram from '../diagrams/MonsoonFailureDiagram';
-import ActivityMonsoonModelDiagram from '../diagrams/ActivityMonsoonModelDiagram';
-import MagnitudeStaircaseDiagram from '../diagrams/MagnitudeStaircaseDiagram';
-import SunsetPathDiagram from '../diagrams/SunsetPathDiagram';
-import MilkScatteringDiagram from '../diagrams/MilkScatteringDiagram';
-import SunsetSimulatorOutputDiagram from '../diagrams/SunsetSimulatorOutputDiagram';
-import MieVsRayleighDiagram from '../diagrams/MieVsRayleighDiagram';
-import MirageDiagram from '../diagrams/MirageDiagram';
-import RainbowRaindropDiagram from '../diagrams/RainbowRaindropDiagram';
-import BioluminescenceReactionDiagram from '../diagrams/BioluminescenceReactionDiagram';
-import FireflySyncDiagram from '../diagrams/FireflySyncDiagram';
-import FireflyCircuitBasicDiagram from '../diagrams/FireflyCircuitBasicDiagram';
-import FireflyPWMDiagram from '../diagrams/FireflyPWMDiagram';
-import FireflyParallelDiagram from '../diagrams/FireflyParallelDiagram';
-import FireflyRandomDiagram from '../diagrams/FireflyRandomDiagram';
-import FireflySyncStepsDiagram from '../diagrams/FireflySyncStepsDiagram';
-import FireflyJarDiagram from '../diagrams/FireflyJarDiagram';
-import FireflyForLoopDiagram from '../diagrams/FireflyForLoopDiagram';
-import FireflyArrayDiagram from '../diagrams/FireflyArrayDiagram';
-import FireflySineBreatheDiagram from '../diagrams/FireflySineBreatheDiagram';
-import FireflyPhaseOffsetDiagram from '../diagrams/FireflyPhaseOffsetDiagram';
-import FireflyKuramotoDiagram from '../diagrams/FireflyKuramotoDiagram';
-import FireflyProductionDiagram from '../diagrams/FireflyProductionDiagram';
-import FireflyEfficiencyDiagram from '../diagrams/FireflyEfficiencyDiagram';
-import FireflySpeciesCodeDiagram from '../diagrams/FireflySpeciesCodeDiagram';
-import FireflyLuciferinPathwayDiagram from '../diagrams/FireflyLuciferinPathwayDiagram';
-import FireflyNeuralControlDiagram from '../diagrams/FireflyNeuralControlDiagram';
-import FireflyNetworkProtocolDiagram from '../diagrams/FireflyNetworkProtocolDiagram';
-import FireflyConservationDiagram from '../diagrams/FireflyConservationDiagram';
-import JapiTopViewDiagram from '../diagrams/JapiTopViewDiagram';
-import ConicalShapeDiagram from '../diagrams/ConicalShapeDiagram';
-import SquareVsTriangleDiagram from '../diagrams/SquareVsTriangleDiagram';
-import WeavePatternDiagram from '../diagrams/WeavePatternDiagram';
-import JapiHexagonDiagram from '../diagrams/JapiHexagonDiagram';
-import ActivityJapiMakeDiagram from '../diagrams/ActivityJapiMakeDiagram';
-import AlgorithmStepsDiagram from '../diagrams/AlgorithmStepsDiagram';
-import RhythmPlayerDiagram from '../diagrams/RhythmPlayerDiagram';
-import ElephantRumblePlayerDiagram from '../diagrams/ElephantRumblePlayerDiagram';
-import ElephantGroundWaveDiagram from '../diagrams/ElephantGroundWaveDiagram';
-import ElephantSpectrogramDiagram from '../diagrams/ElephantSpectrogramDiagram';
-import CoriolisEffectDiagram from '../diagrams/CoriolisEffectDiagram';
-import StormSurgeDiagram from '../diagrams/StormSurgeDiagram';
-import MountainTemperatureDiagram from '../diagrams/MountainTemperatureDiagram';
-import MountainPressureDiagram from '../diagrams/MountainPressureDiagram';
-import MountainLapseRateDiagram from '../diagrams/MountainLapseRateDiagram';
-import MountainOxygenDiagram from '../diagrams/MountainOxygenDiagram';
-import MountainWeatherDiagram from '../diagrams/MountainWeatherDiagram';
-import MountainBodyAdaptDiagram from '../diagrams/MountainBodyAdaptDiagram';
-import MountainZonationDiagram from '../diagrams/MountainZonationDiagram';
-import MountainTreelineDiagram from '../diagrams/MountainTreelineDiagram';
-import MountainBarometricDiagram from '../diagrams/MountainBarometricDiagram';
-import MountainGasLawDiagram from '../diagrams/MountainGasLawDiagram';
-import MountainO2PartialDiagram from '../diagrams/MountainO2PartialDiagram';
-import MountainWindChillDiagram from '../diagrams/MountainWindChillDiagram';
-import MountainRadiationDiagram from '../diagrams/MountainRadiationDiagram';
-import MountainUVDiagram from '../diagrams/MountainUVDiagram';
-import BeeColonyDiagram from '../diagrams/BeeColonyDiagram';
-import BeeWaggleDanceDiagram from '../diagrams/BeeWaggleDanceDiagram';
-import BeePollinationDiagram from '../diagrams/BeePollinationDiagram';
-import BeeHoneymakingDiagram from '../diagrams/BeeHoneymakingDiagram';
-import BeeHiveTempDiagram from '../diagrams/BeeHiveTempDiagram';
-import BeeLifeCycleDiagram from '../diagrams/BeeLifeCycleDiagram';
-import BeeAnatomyDiagram from '../diagrams/BeeAnatomyDiagram';
-import BeeFlowerCoevolutionDiagram from '../diagrams/BeeFlowerCoevolutionDiagram';
-import BeeNavigationDiagram from '../diagrams/BeeNavigationDiagram';
-import BeeCommunicationDiagram from '../diagrams/BeeCommunicationDiagram';
-import BeeEcosystemServiceDiagram from '../diagrams/BeeEcosystemServiceDiagram';
-import BeeColonyCollapseDiagram from '../diagrams/BeeColonyCollapseDiagram';
-import BeeForagingModelDiagram from '../diagrams/BeeForagingModelDiagram';
-import BeePopulationDynamicsDiagram from '../diagrams/BeePopulationDynamicsDiagram';
-import BeeGeneticsDiagram from '../diagrams/BeeGeneticsDiagram';
-import BeeSwarmIntelligenceDiagram from '../diagrams/BeeSwarmIntelligenceDiagram';
-import BeeVenomChemistryDiagram from '../diagrams/BeeVenomChemistryDiagram';
-import BeeRobotDiagram from '../diagrams/BeeRobotDiagram';
-import BeeMonitoringDiagram from '../diagrams/BeeMonitoringDiagram';
-import BeePathOptimizationDiagram from '../diagrams/BeePathOptimizationDiagram';
-import BeeDiseaseDetectionDiagram from '../diagrams/BeeDiseaseDetectionDiagram';
-import BeePollinationNetworkDiagram from '../diagrams/BeePollinationNetworkDiagram';
-import BeeConservationPlanDiagram from '../diagrams/BeeConservationPlanDiagram';
-import BeeDataDashboardDiagram from '../diagrams/BeeDataDashboardDiagram';
-import WoodpeckerImpactDiagram from '../diagrams/WoodpeckerImpactDiagram';
-import WoodpeckerSkullLayersDiagram from '../diagrams/WoodpeckerSkullLayersDiagram';
-import WoodpeckerHyoidDiagram from '../diagrams/WoodpeckerHyoidDiagram';
-import WoodpeckerSpongyBoneDiagram from '../diagrams/WoodpeckerSpongyBoneDiagram';
-import WoodpeckerBrainFitDiagram from '../diagrams/WoodpeckerBrainFitDiagram';
-import WoodpeckerHelmetDiagram from '../diagrams/WoodpeckerHelmetDiagram';
-import WoodpeckerForceMassDiagram from '../diagrams/WoodpeckerForceMassDiagram';
-import WoodpeckerDecelerationDiagram from '../diagrams/WoodpeckerDecelerationDiagram';
-import WoodpeckerTongueDiagram from '../diagrams/WoodpeckerTongueDiagram';
-import WoodpeckerDrumPatternDiagram from '../diagrams/WoodpeckerDrumPatternDiagram';
-import WoodpeckerMaterialsDiagram from '../diagrams/WoodpeckerMaterialsDiagram';
-import WoodpeckerEvolutionDiagram from '../diagrams/WoodpeckerEvolutionDiagram';
-import WoodpeckerStressDistributionDiagram from '../diagrams/WoodpeckerStressDistributionDiagram';
-import WoodpeckerImpulseTheoryDiagram from '../diagrams/WoodpeckerImpulseTheoryDiagram';
-import WoodpeckerResonanceDiagram from '../diagrams/WoodpeckerResonanceDiagram';
-import WoodpeckerEnergyAbsorptionDiagram from '../diagrams/WoodpeckerEnergyAbsorptionDiagram';
-import WoodpeckerRotationalForceDiagram from '../diagrams/WoodpeckerRotationalForceDiagram';
-import WoodpeckerFatigueAnalysisDiagram from '../diagrams/WoodpeckerFatigueAnalysisDiagram';
-import WoodpeckerBioInspirationDiagram from '../diagrams/WoodpeckerBioInspirationDiagram';
-import WoodpeckerCrashTestDiagram from '../diagrams/WoodpeckerCrashTestDiagram';
-import WoodpeckerMetamaterialDiagram from '../diagrams/WoodpeckerMetamaterialDiagram';
-import WoodpeckerSensorDesignDiagram from '../diagrams/WoodpeckerSensorDesignDiagram';
-import WoodpeckerSafetyStandardDiagram from '../diagrams/WoodpeckerSafetyStandardDiagram';
-import WoodpeckerCapstoneProjectDiagram from '../diagrams/WoodpeckerCapstoneProjectDiagram';
-import ActivityEggDropDiagram from '../diagrams/ActivityEggDropDiagram';
-import ActivityStarCountDiagram from '../diagrams/ActivityStarCountDiagram';
-import ActivityFlowerWatchDiagram from '../diagrams/ActivityFlowerWatchDiagram';
-import ActivityVortexDiagram from '../diagrams/ActivityVortexDiagram';
-import ActivityBalloonDiagram from '../diagrams/ActivityBalloonDiagram';
-import ActivityMapDrawDiagram from '../diagrams/ActivityMapDrawDiagram';
-import ActivityTreeMeasureDiagram from '../diagrams/ActivityTreeMeasureDiagram';
-import ActivityMilkGlassDiagram from '../diagrams/ActivityMilkGlassDiagram';
-import ActivityEarGroundDiagram from '../diagrams/ActivityEarGroundDiagram';
-import ActivityFlashlightSyncDiagram from '../diagrams/ActivityFlashlightSyncDiagram';
-// Dancing Deer of Loktak Lake
-import LoktakPhumdiDiagram from '../diagrams/LoktakPhumdiDiagram';
-import LoktakSangaiDiagram from '../diagrams/LoktakSangaiDiagram';
-import LoktakDamImpactDiagram from '../diagrams/LoktakDamImpactDiagram';
-import LoktakConservationDiagram from '../diagrams/LoktakConservationDiagram';
-import ActivityWetlandModelDiagram from '../diagrams/ActivityWetlandModelDiagram';
-// Bamboo Flute of Nagaland
-import FluteStandingWaveDiagram from '../diagrams/FluteStandingWaveDiagram';
-import FluteFingerHoleDiagram from '../diagrams/FluteFingerHoleDiagram';
-import FluteOvertonesDiagram from '../diagrams/FluteOvertonesDiagram';
-import FluteDesignDiagram from '../diagrams/FluteDesignDiagram';
-import ActivityFluteBuildDiagram from '../diagrams/ActivityFluteBuildDiagram';
-import BambooVortexDiagram from '../diagrams/BambooVortexDiagram';
-import BambooResonanceDiagram from '../diagrams/BambooResonanceDiagram';
-import BambooHarmonicsDiagram from '../diagrams/BambooHarmonicsDiagram';
-import BambooMaterialDiagram from '../diagrams/BambooMaterialDiagram';
-import ActivityBambooFluteDiagram from '../diagrams/ActivityBambooFluteDiagram';
-// Northeast India: Golden Hilsa — Sustainable Fishing
-import HilsaMigrationDiagram from '../diagrams/HilsaMigrationDiagram';
-import HilsaOlfactoryDiagram from '../diagrams/HilsaOlfactoryDiagram';
-import HilsaPopulationDiagram from '../diagrams/HilsaPopulationDiagram';
-import HilsaRiverHealthDiagram from '../diagrams/HilsaRiverHealthDiagram';
-import ActivityFishCountDiagram from '../diagrams/ActivityFishCountDiagram';
-// Why Fish Jump in the Barak River
-import FishOxygenDiagram from '../diagrams/FishOxygenDiagram';
-import FishJumpReasonsDiagram from '../diagrams/FishJumpReasonsDiagram';
-import FishBiomechanicsDiagram from '../diagrams/FishBiomechanicsDiagram';
-import FishRiverHealthDiagram from '../diagrams/FishRiverHealthDiagram';
-import ActivityFishObserveDiagram from '../diagrams/ActivityFishObserveDiagram';
-import AltitudeAdaptationDiagram from '../diagrams/AltitudeAdaptationDiagram';
-import BanyanRootsDiagram from '../diagrams/BanyanRootsDiagram';
-import StarBrightnessStepDiagram from '../diagrams/StarBrightnessStepDiagram';
-import StarBortleScaleDiagram from '../diagrams/StarBortleScaleDiagram';
-import StarSkyQualityDiagram from '../diagrams/StarSkyQualityDiagram';
-// Mythology: Churning of the Ocean
-import ChurningEmulsionDiagram from '../diagrams/ChurningEmulsionDiagram';
-import DensityColumnDiagram from '../diagrams/DensityColumnDiagram';
-import PHScaleChurningDiagram from '../diagrams/PHScaleChurningDiagram';
-import DistillationDiagram from '../diagrams/DistillationDiagram';
-import ActivityDensityColumnDiagram from '../diagrams/ActivityDensityColumnDiagram';
-import ChurningCentrifugeDiagram from '../diagrams/ChurningCentrifugeDiagram';
-import ChurningChromatographyDiagram from '../diagrams/ChurningChromatographyDiagram';
-import ChurningColloidDiagram from '../diagrams/ChurningColloidDiagram';
-import ChurningDensityColumnDiagram from '../diagrams/ChurningDensityColumnDiagram';
-import ChurningDistillationDiagram from '../diagrams/ChurningDistillationDiagram';
-import ChurningEmulsifierDiagram from '../diagrams/ChurningEmulsifierDiagram';
-import ChurningIntermolecularDiagram from '../diagrams/ChurningIntermolecularDiagram';
-import ChurningMassSpecDiagram from '../diagrams/ChurningMassSpecDiagram';
-import ChurningPolarityDiagram from '../diagrams/ChurningPolarityDiagram';
-import ChurningSeparationPipelineDiagram from '../diagrams/ChurningSeparationPipelineDiagram';
-import ChurningTitrationDiagram from '../diagrams/ChurningTitrationDiagram';
-// Mythology: David and Goliath
-import SlingCircularMotionDiagram from '../diagrams/SlingCircularMotionDiagram';
-import ProjectileArcDiagram from '../diagrams/ProjectileArcDiagram';
-import KineticEnergyComparisonDiagram from '../diagrams/KineticEnergyComparisonDiagram';
-import ImpactPressureDiagram from '../diagrams/ImpactPressureDiagram';
-import ActivitySlingRangeDiagram from '../diagrams/ActivitySlingRangeDiagram';
-// Mythology: Sand Mandala
-import SymmetryTypesMandala from '../diagrams/SymmetryTypesMandala';
-import TessellationMandala from '../diagrams/TessellationMandala';
-import FractalZoomDiagram from '../diagrams/FractalZoomDiagram';
-import GoldenRatioNatureDiagram from '../diagrams/GoldenRatioNatureDiagram';
-import ActivityMandalaDiagram from '../diagrams/ActivityMandalaDiagram';
-// Mythology: Alhambra Geometry
-import TileAnglesDiagram from '../diagrams/TileAnglesDiagram';
-import SymmetryOperationsDiagram from '../diagrams/SymmetryOperationsDiagram';
-import WallpaperGroupsDiagram from '../diagrams/WallpaperGroupsDiagram';
-import CrystalSymmetryDiagram from '../diagrams/CrystalSymmetryDiagram';
-import ActivityTessellationDiagram from '../diagrams/ActivityTessellationDiagram';
-// Mythology: Hanuman Lifted a Mountain
-import HanumanTectonicDiagram from '../diagrams/HanumanTectonicDiagram';
-import HanumanAltitudeZonesDiagram from '../diagrams/HanumanAltitudeZonesDiagram';
-import HanumanDichotomousKeyDiagram from '../diagrams/HanumanDichotomousKeyDiagram';
-import HanumanMedicineDiagram from '../diagrams/HanumanMedicineDiagram';
-import ActivityHerbIdentifyDiagram from '../diagrams/ActivityHerbIdentifyDiagram';
-// Mythology: Astrolabe — Islamic Astronomy
-import AstrolabeSundialDiagram from '../diagrams/AstrolabeSundialDiagram';
-import AstrolabeProjectionDiagram from '../diagrams/AstrolabeProjectionDiagram';
-import AstrolabeCelestialNavDiagram from '../diagrams/AstrolabeCelestialNavDiagram';
-import AstrolabeFunctionsDiagram from '../diagrams/AstrolabeFunctionsDiagram';
-import ActivityStarNavigateDiagram from '../diagrams/ActivityStarNavigateDiagram';
-// Mythology: Ravana's Ten Heads
-import RavanaNeuronDiagram from '../diagrams/RavanaNeuronDiagram';
-import RavanaParallelDiagram from '../diagrams/RavanaParallelDiagram';
-import RavanaCPUGPUDiagram from '../diagrams/RavanaCPUGPUDiagram';
-import RavanaNeuralNetDiagram from '../diagrams/RavanaNeuralNetDiagram';
-import ActivityReactionTimeDiagram from '../diagrams/ActivityReactionTimeDiagram';
-// Mythology: Noah's Ark
-import ArkBuoyancyDiagram from '../diagrams/ArkBuoyancyDiagram';
-import ArkCapacityDiagram from '../diagrams/ArkCapacityDiagram';
-import ArkEcosystemDiagram from '../diagrams/ArkEcosystemDiagram';
-import ArkBiodiversityDiagram from '../diagrams/ArkBiodiversityDiagram';
-import ActivityFloatTestDiagram from '../diagrams/ActivityFloatTestDiagram';
-// Mythology: Bodhi Tree
-import BodhiSeedCuttingDiagram from '../diagrams/BodhiSeedCuttingDiagram';
-import BodhiDNACloneDiagram from '../diagrams/BodhiDNACloneDiagram';
-import BodhiGraftingDiagram from '../diagrams/BodhiGraftingDiagram';
-import BodhiCRISPRDiagram from '../diagrams/BodhiCRISPRDiagram';
-import ActivityCuttingDiagram from '../diagrams/ActivityCuttingDiagram';
-// Mythology: Wheel of Dharma
-import DharmaWheelFrictionDiagram from '../diagrams/DharmaWheelFrictionDiagram';
-import DharmaTorqueDiagram from '../diagrams/DharmaTorqueDiagram';
-import DharmaGyroscopeDiagram from '../diagrams/DharmaGyroscopeDiagram';
-import DharmaFlywheelDiagram from '../diagrams/DharmaFlywheelDiagram';
-import ActivitySpinningTopDiagram from '../diagrams/ActivitySpinningTopDiagram';
-// Mythology: Monastery Bells of Tawang
-import BellSoundWaveDiagram from '../diagrams/BellSoundWaveDiagram';
-import BellFrequencyDiagram from '../diagrams/BellFrequencyDiagram';
-import BellHarmonicsDiagram from '../diagrams/BellHarmonicsDiagram';
-import BellFourierDiagram from '../diagrams/BellFourierDiagram';
-import ActivityBellStrikeDiagram from '../diagrams/ActivityBellStrikeDiagram';
-// Mythology: Angulimala — Neuroplasticity
-import AngulimalaNeuroplasticityDiagram from '../diagrams/AngulimalaNeuroplasticityDiagram';
-import AngulimalaHabitPathwayDiagram from '../diagrams/AngulimalaHabitPathwayDiagram';
-import AngulimalaFMRIDiagram from '../diagrams/AngulimalaFMRIDiagram';
-import AngulimalaReinforcementDiagram from '../diagrams/AngulimalaReinforcementDiagram';
-import ActivityHabitTrackerDiagram from '../diagrams/ActivityHabitTrackerDiagram';
-// Mythology: Pushpaka Vimana — Aerodynamics & Flight
-import VimanaLiftDragDiagram from '../diagrams/VimanaLiftDragDiagram';
-import VimanaBernoulliDiagram from '../diagrams/VimanaBernoulliDiagram';
-import VimanaJetEngineDiagram from '../diagrams/VimanaJetEngineDiagram';
-import VimanaRocketDiagram from '../diagrams/VimanaRocketDiagram';
-import ActivityPaperPlaneDiagram from '../diagrams/ActivityPaperPlaneDiagram';
-// Mythology: Agni — Science of Fire
-import AgniCombustionTriangleDiagram from '../diagrams/AgniCombustionTriangleDiagram';
-import AgniFlameColorDiagram from '../diagrams/AgniFlameColorDiagram';
-import AgniHeatTransferDiagram from '../diagrams/AgniHeatTransferDiagram';
-import AgniSpectroscopyDiagram from '../diagrams/AgniSpectroscopyDiagram';
-import ActivityCandleDiagram from '../diagrams/ActivityCandleDiagram';
-// Mythology: Tower of Babel
-import BabelForcesDiagram from '../diagrams/BabelForcesDiagram';
-import BabelBucklingDiagram from '../diagrams/BabelBucklingDiagram';
-import BabelSkyscraperDiagram from '../diagrams/BabelSkyscraperDiagram';
-import BabelNLPDiagram from '../diagrams/BabelNLPDiagram';
-import ActivityTowerBuildDiagram from '../diagrams/ActivityTowerBuildDiagram';
-// Mythology: Al-Khwarizmi — Algebra & Algorithms
-import AlgebraBalanceScaleDiagram from '../diagrams/AlgebraBalanceScaleDiagram';
-import AlgebraLinearDiagram from '../diagrams/AlgebraLinearDiagram';
-import AlgebraQuadraticDiagram from '../diagrams/AlgebraQuadraticDiagram';
-import AlgebraAlgorithmDiagram from '../diagrams/AlgebraAlgorithmDiagram';
-import ActivityBalanceDiagram from '../diagrams/ActivityBalanceDiagram';
-// Mythology: Star of Bethlehem
-import BethlehemMagnitudeDiagram from '../diagrams/BethlehemMagnitudeDiagram';
-import BethlehemConjunctionDiagram from '../diagrams/BethlehemConjunctionDiagram';
-import BethlehemCelestialNavDiagram from '../diagrams/BethlehemCelestialNavDiagram';
-import BethlehemKeplerDiagram from '../diagrams/BethlehemKeplerDiagram';
-import ActivityStarFinderDiagram from '../diagrams/ActivityStarFinderDiagram';
-// Mythology: Parting of the Red Sea
-import RedSeaTideDiagram from '../diagrams/RedSeaTideDiagram';
-import RedSeaWindSetdownDiagram from '../diagrams/RedSeaWindSetdownDiagram';
-import RedSeaCFDDiagram from '../diagrams/RedSeaCFDDiagram';
-import RedSeaCrossSectionDiagram from '../diagrams/RedSeaCrossSectionDiagram';
-import ActivityTideModelDiagram from '../diagrams/ActivityTideModelDiagram';
-// Mythology: Well of Zamzam
-import ZamzamAquiferDiagram from '../diagrams/ZamzamAquiferDiagram';
-import ZamzamPorosityDiagram from '../diagrams/ZamzamPorosityDiagram';
-import ZamzamDarcyLawDiagram from '../diagrams/ZamzamDarcyLawDiagram';
-import ZamzamWaterCycleDiagram from '../diagrams/ZamzamWaterCycleDiagram';
-import ActivityWellModelDiagram from '../diagrams/ActivityWellModelDiagram';
-// Mythology: Muezzin's Call
-import MuezzinInverseSquareDiagram from '../diagrams/MuezzinInverseSquareDiagram';
-import MuezzinDomeAcousticsDiagram from '../diagrams/MuezzinDomeAcousticsDiagram';
-import MuezzinSpeakerDiagram from '../diagrams/MuezzinSpeakerDiagram';
-import MuezzinCityPropagationDiagram from '../diagrams/MuezzinCityPropagationDiagram';
-import ActivitySoundDistanceDiagram from '../diagrams/ActivitySoundDistanceDiagram';
-// NE India: The Girl Who Grew a Forest
-import ForestSuccessionDiagram from '../diagrams/ForestSuccessionDiagram';
-import ForestCarbonCycleDiagram from '../diagrams/ForestCarbonCycleDiagram';
-import ForestSoilLayersDiagram from '../diagrams/ForestSoilLayersDiagram';
-import ForestScalingDiagram from '../diagrams/ForestScalingDiagram';
-import ActivityTreePlantDiagram from '../diagrams/ActivityTreePlantDiagram';
-// NE India: The Bridge That Grew
-import BridgeRootGrowthDiagram from '../diagrams/BridgeRootGrowthDiagram';
-import BridgeTensileStrengthDiagram from '../diagrams/BridgeTensileStrengthDiagram';
-import BridgeLoadDistributionDiagram from '../diagrams/BridgeLoadDistributionDiagram';
-import BridgeTimelineDiagram from '../diagrams/BridgeTimelineDiagram';
-import ActivityBridgeModelDiagram from '../diagrams/ActivityBridgeModelDiagram';
-// River Dolphin's Secret — Echolocation & Sonar
-import DolphinEcholocationDiagram from '../diagrams/DolphinEcholocationDiagram';
-import DolphinSonarWaveDiagram from '../diagrams/DolphinSonarWaveDiagram';
-import DolphinArduinoSensorDiagram from '../diagrams/DolphinArduinoSensorDiagram';
-import DolphinAdaptationDiagram from '../diagrams/DolphinAdaptationDiagram';
-import ActivitySonarDiagram from '../diagrams/ActivitySonarDiagram';
-// Kite Festival of Guwahati — Aerodynamics & Flight
-import KiteLiftDiagram from '../diagrams/KiteLiftDiagram';
-import KiteDragForceDiagram from '../diagrams/KiteDragForceDiagram';
-import KiteShapesDiagram from '../diagrams/KiteShapesDiagram';
-import KiteWindDiagram from '../diagrams/KiteWindDiagram';
-import ActivityKiteBuildDiagram from '../diagrams/ActivityKiteBuildDiagram';
-// NE India: The Cloud That Refused to Rain
-import CloudFormationDiagram from '../diagrams/CloudFormationDiagram';
-import CloudRainProcessDiagram from '../diagrams/CloudRainProcessDiagram';
-import CloudSeedingDiagram from '../diagrams/CloudSeedingDiagram';
-import CloudTypesDiagram from '../diagrams/CloudTypesDiagram';
-import ActivityCloudJarDiagram from '../diagrams/ActivityCloudJarDiagram';
-// Reference: Aerodynamics & Flight
-import AeroFourForcesDiagram from '../diagrams/AeroFourForcesDiagram';
-import AeroBernoulliDiagram from '../diagrams/AeroBernoulliDiagram';
-import AeroWingShapesDiagram from '../diagrams/AeroWingShapesDiagram';
-// Reference: Neuroscience & The Brain
-import BrainNeuronDiagram from '../diagrams/BrainNeuronDiagram';
-import BrainSynapseDiagram from '../diagrams/BrainSynapseDiagram';
-import BrainPlasticityDiagram from '../diagrams/BrainPlasticityDiagram';
-// Reference: Geology & Earth Science
-import GeoMountainGrowthDiagram from '../diagrams/GeoMountainGrowthDiagram';
-import GeoVolcanoDiagram from '../diagrams/GeoVolcanoDiagram';
-import GeoFossilDiagram from '../diagrams/GeoFossilDiagram';
-import GeoErosionProcessDiagram from '../diagrams/GeoErosionProcessDiagram';
-// Reference: Hydrology & Water Science
-import HydroAquiferDiagram from '../diagrams/HydroAquiferDiagram';
-import HydroPurificationDiagram from '../diagrams/HydroPurificationDiagram';
-import HydroGroundwaterDiagram from '../diagrams/HydroGroundwaterDiagram';
-import HydroWellDiagram from '../diagrams/HydroWellDiagram';
-import HydroRiverStagesDiagram from '../diagrams/HydroRiverStagesDiagram';
-import HydroFloodDroughtDiagram from '../diagrams/HydroFloodDroughtDiagram';
-import HydroDesalinationDiagram from '../diagrams/HydroDesalinationDiagram';
-// Reference: Structural Engineering
-import StructForcesDiagram from '../diagrams/StructForcesDiagram';
-import StructTriangleDiagram from '../diagrams/StructTriangleDiagram';
-import StructSkyscraperDiagram from '../diagrams/StructSkyscraperDiagram';
-// Reference: Rotational Mechanics
-import RotTorqueDiagram from '../diagrams/RotTorqueDiagram';
-import RotGyroscopeDiagram from '../diagrams/RotGyroscopeDiagram';
-import RotGearsDiagram from '../diagrams/RotGearsDiagram';
-// Reference: Sonar & Echolocation
-import SonarEchoDiagram from '../diagrams/SonarEchoDiagram';
-import SonarBatDiagram from '../diagrams/SonarBatDiagram';
-import SonarSensorDiagram from '../diagrams/SonarSensorDiagram';
-// Reference: Tides & Oceanography
-import TideMoonDiagram from '../diagrams/TideMoonDiagram';
-import TideSpringNeapDiagram from '../diagrams/TideSpringNeapDiagram';
-import OceanCurrentDiagram from '../diagrams/OceanCurrentDiagram';
-import OceanWaveAnatomyDiagram from '../diagrams/OceanWaveAnatomyDiagram';
-import OceanStormSurgeDiagram from '../diagrams/OceanStormSurgeDiagram';
-import OceanDepthZonesDiagram from '../diagrams/OceanDepthZonesDiagram';
-import OceanCoralReefDiagram from '../diagrams/OceanCoralReefDiagram';
-import OceanFunctionsDiagram from '../diagrams/OceanFunctionsDiagram';
-// Reference: Climate & Climate Zones
-import ClimateVsWeatherDiagram from '../diagrams/ClimateVsWeatherDiagram';
-import ClimateChangeDiagram from '../diagrams/ClimateChangeDiagram';
-// Reference: Maps & Navigation
-import MapGPSSatelliteDiagram from '../diagrams/MapGPSSatelliteDiagram';
-import MapGISLayersDiagram from '../diagrams/MapGISLayersDiagram';
-// Reference: Population & Urbanization
-import PopDistributionDiagram from '../diagrams/PopDistributionDiagram';
-import PopUrbanizationDiagram from '../diagrams/PopUrbanizationDiagram';
-import PopSustainabilityDiagram from '../diagrams/PopSustainabilityDiagram';
-// Reference: Natural Resources
-import ResourceRenewableDiagram from '../diagrams/ResourceRenewableDiagram';
-import ResourceForestDiagram from '../diagrams/ResourceForestDiagram';
-import ResourceCircularDiagram from '../diagrams/ResourceCircularDiagram';
-// Reference: Music & Arts
-import MusicHarmonicsDiagram from '../diagrams/MusicHarmonicsDiagram';
-import MusicDecibelDiagram from '../diagrams/MusicDecibelDiagram';
-import RhythmBeatDiagram from '../diagrams/RhythmBeatDiagram';
-import DrumVibrationDiagram from '../diagrams/DrumVibrationDiagram';
-import ColorSpectrumArtDiagram from '../diagrams/ColorSpectrumArtDiagram';
-import PerspectiveDiagram from '../diagrams/PerspectiveDiagram';
-// Pitcher Plant — Carnivorous Plants & Adaptation
-import PitcherNutrientDiagram from '../diagrams/PitcherNutrientDiagram';
-import PitcherAnatomyDiagram from '../diagrams/PitcherAnatomyDiagram';
-import PitcherSurfaceTensionDiagram from '../diagrams/PitcherSurfaceTensionDiagram';
-import PitcherSpeciesDiagram from '../diagrams/PitcherSpeciesDiagram';
-import ActivityTrapModelDiagram from '../diagrams/ActivityTrapModelDiagram';
-// Orchid Colors — Plant Pigments & Pollination
-import OrchidPigmentDiagram from '../diagrams/OrchidPigmentDiagram';
-import OrchidBeeVisionDiagram from '../diagrams/OrchidBeeVisionDiagram';
-import OrchidCoevolutionDiagram from '../diagrams/OrchidCoevolutionDiagram';
-import OrchidEpiphyteDiagram from '../diagrams/OrchidEpiphyteDiagram';
-import ActivityFlowerDissectDiagram from '../diagrams/ActivityFlowerDissectDiagram';
-// Tejimola — Plant Biology & Genetics
-import TejimolaPlantReproDiagram from '../diagrams/TejimolaPlantReproDiagram';
-import TejimolaDNADiagram from '../diagrams/TejimolaDNADiagram';
-import TejimolaMutationDiagram from '../diagrams/TejimolaMutationDiagram';
-import TejimolaTraditionalMedicineDiagram from '../diagrams/TejimolaTraditionalMedicineDiagram';
-import ActivitySeedGrowDiagram from '../diagrams/ActivitySeedGrowDiagram';
-// Golden Deer of Kamakhya — Optics & Light
-import DeerLightSpectrumDiagram from '../diagrams/DeerLightSpectrumDiagram';
-import DeerReflectionDiagram from '../diagrams/DeerReflectionDiagram';
-import DeerRefractionDiagram from '../diagrams/DeerRefractionDiagram';
-import DeerOpticalIllusionDiagram from '../diagrams/DeerOpticalIllusionDiagram';
-import ActivityPrismDiagram from '../diagrams/ActivityPrismDiagram';
-// Red Panda Mask — Evolution & Camouflage
-import PandaCamouflageDiagram from '../diagrams/PandaCamouflageDiagram';
-import PandaSelectionDiagram from '../diagrams/PandaSelectionDiagram';
-import PandaMaskFunctionDiagram from '../diagrams/PandaMaskFunctionDiagram';
-import PandaConvergentDiagram from '../diagrams/PandaConvergentDiagram';
-import ActivityCamouflageGameDiagram from '../diagrams/ActivityCamouflageGameDiagram';
-// Elephant Mud Bath — Thermoregulation
-import ElephantThermoregDiagram from '../diagrams/ElephantThermoregDiagram';
-import ElephantHeatTransferDiagram from '../diagrams/ElephantHeatTransferDiagram';
-import ElephantSurfaceAreaDiagram from '../diagrams/ElephantSurfaceAreaDiagram';
-import ElephantEcosystemDiagram from '../diagrams/ElephantEcosystemDiagram';
-import ActivityCoolingExperimentDiagram from '../diagrams/ActivityCoolingExperimentDiagram';
-// Boy Who Talked to Clouds — Meteorology
-import CloudsFormationDiagram from '../diagrams/CloudsFormationDiagram';
-import CloudsFamilyDiagram from '../diagrams/CloudsFamilyDiagram';
-import CloudsWaterEngineDiagram from '../diagrams/CloudsWaterEngineDiagram';
-import CloudsForecastDiagram from '../diagrams/CloudsForecastDiagram';
-import ActivityCloudWatchDiagram from '../diagrams/ActivityCloudWatchDiagram';
-
-// Little Boat on the Brahmaputra — Fluid Dynamics & Buoyancy
-import BoatBuoyancyDiagram from '../diagrams/BoatBuoyancyDiagram';
-import BoatHullShapesDiagram from '../diagrams/BoatHullShapesDiagram';
-import BoatCurrentDiagram from '../diagrams/BoatCurrentDiagram';
-import BoatBrahmaputraDiagram from '../diagrams/BoatBrahmaputraDiagram';
-import ActivityFloatBoatDiagram from '../diagrams/ActivityFloatBoatDiagram';
-// Little Potter — Ceramics & Material Science
-import ClayParticlesDiagram from '../diagrams/ClayParticlesDiagram';
-import SinteringProcessDiagram from '../diagrams/SinteringProcessDiagram';
-import GlazeChemistryDiagram from '../diagrams/GlazeChemistryDiagram';
-import ThermalShockDiagram from '../diagrams/ThermalShockDiagram';
-import ActivityClayTestDiagram from '../diagrams/ActivityClayTestDiagram';
-import PotteryOutputDiagram from '../diagrams/PotteryOutputDiagram';
-// Grandmother Remembered — Memory & Neuroscience
-import MemoryFormationDiagram from '../diagrams/MemoryFormationDiagram';
-import ForgettingCurveDiagram from '../diagrams/ForgettingCurveDiagram';
-import MnemonicTechniquesDiagram from '../diagrams/MnemonicTechniquesDiagram';
-import ActivityMemoryTestDiagram from '../diagrams/ActivityMemoryTestDiagram';
-import MemoryOutputDiagram from '../diagrams/MemoryOutputDiagram';
-// Festival Lights — Energy & Light Technology
-import IncandescentVsLEDDiagram from '../diagrams/IncandescentVsLEDDiagram';
-import SolarCellBasicsDiagram from '../diagrams/SolarCellBasicsDiagram';
-import EnergyEfficiencyDiagram from '../diagrams/EnergyEfficiencyDiagram';
-import ActivityLightCompareDiagram from '../diagrams/ActivityLightCompareDiagram';
-import LightEfficiencyOutputDiagram from '../diagrams/LightEfficiencyOutputDiagram';
-// Music of Dimasa — Music Theory & Vibrations
-import PitchFrequencyDiagram from '../diagrams/PitchFrequencyDiagram';
-import RhythmDivisionDiagram from '../diagrams/RhythmDivisionDiagram';
-import TimbreDiagram from '../diagrams/TimbreDiagram';
-import ActivityStringPitchDiagram from '../diagrams/ActivityStringPitchDiagram';
-import RhythmAnalyzerOutputDiagram from '../diagrams/RhythmAnalyzerOutputDiagram';
-// Flying Squirrel — Gliding & Aerodynamics
-import GlidingVsFlyingDiagram from '../diagrams/GlidingVsFlyingDiagram';
-import SquareCubeLawDiagram from '../diagrams/SquareCubeLawDiagram';
-import ActivityGliderTestDiagram from '../diagrams/ActivityGliderTestDiagram';
-import GlideRatioOutputDiagram from '../diagrams/GlideRatioOutputDiagram';
-// Library — Python & Algorithms visual diagrams
-import StringSlicingDiagram from '../diagrams/StringSlicingDiagram';
-import TwoPointerDiagram from '../diagrams/TwoPointerDiagram';
-import BinarySearchDiagram from '../diagrams/BinarySearchDiagram';
-import SlidingWindowDiagram from '../diagrams/SlidingWindowDiagram';
-import BFSDFSDiagram from '../diagrams/BFSDFSDiagram';
-import BubbleSortDiagram from '../diagrams/BubbleSortDiagram';
-import RecursionTreeDiagram from '../diagrams/RecursionTreeDiagram';
-import DictCounterDiagram from '../diagrams/DictCounterDiagram';
-
-// Hornbill's Crown — Ornithology & Animal Behavior
-import HornbillCasqueDiagram from '../diagrams/HornbillCasqueDiagram';
-import HornbillNestDiagram from '../diagrams/HornbillNestDiagram';
-import HornbillKeystoneDiagram from '../diagrams/HornbillKeystoneDiagram';
-import HornbillCallDiagram from '../diagrams/HornbillCallDiagram';
-import ActivityBirdWatchDiagram from '../diagrams/ActivityBirdWatchDiagram';
-// Tortoise and Hare — Speed, Acceleration & Biomechanics
-import RaceSpeedDiagram from '../diagrams/RaceSpeedDiagram';
-import RaceAccelerationDiagram from '../diagrams/RaceAccelerationDiagram';
-import RaceScalingDiagram from '../diagrams/RaceScalingDiagram';
-import RaceEnergyDiagram from '../diagrams/RaceEnergyDiagram';
-import ActivityRaceTimerDiagram from '../diagrams/ActivityRaceTimerDiagram';
-// Seed Keeper of Nagaland — Seed Banks & Genetic Diversity
-import SeedDiversityDiagram from '../diagrams/SeedDiversityDiagram';
-import SeedBankDiagram from '../diagrams/SeedBankDiagram';
-import SeedGerminationDiagram from '../diagrams/SeedGerminationDiagram';
-import SeedJhumDiagram from '../diagrams/SeedJhumDiagram';
-import ActivitySeedGerminateDiagram from '../diagrams/ActivitySeedGerminateDiagram';
-// Star Fell Deepor — Meteorites & Astronomy
-import MeteorAtmosphereDiagram from '../diagrams/MeteorAtmosphereDiagram';
-import MeteoriteTypesDiagram from '../diagrams/MeteoriteTypesDiagram';
-import MeteorImpactDiagram from '../diagrams/MeteorImpactDiagram';
-import DeeporBeelDiagram from '../diagrams/DeeporBeelDiagram';
-import ActivityMeteorWatchDiagram from '../diagrams/ActivityMeteorWatchDiagram';
-// Tiny Frog — Size Limits, Scaling & Biodiversity
-import FrogSizeLimitsDiagram from '../diagrams/FrogSizeLimitsDiagram';
-import FrogCubeSquareDiagram from '../diagrams/FrogCubeSquareDiagram';
-import FrogSkinBreathingDiagram from '../diagrams/FrogSkinBreathingDiagram';
-import FrogBiodiversityDiagram from '../diagrams/FrogBiodiversityDiagram';
-import ActivitySizeScaleDiagram from '../diagrams/ActivitySizeScaleDiagram';
-
-import FishIridescenceDiagram from '../diagrams/FishIridescenceDiagram';
-import FishStructuralColorDiagram from '../diagrams/FishStructuralColorDiagram';
-import FishLightWaterDiagram from '../diagrams/FishLightWaterDiagram';
-import FishUmiamLakeDiagram from '../diagrams/FishUmiamLakeDiagram';
-import ActivityIridescenceDiagram from '../diagrams/ActivityIridescenceDiagram';
-// Little Train of the Hills — Mechanical Engineering & Railways
-import TrainFrictionDiagram from '../diagrams/TrainFrictionDiagram';
-import TrainGearsDiagram from '../diagrams/TrainGearsDiagram';
-import TrainSteamEngineDiagram from '../diagrams/TrainSteamEngineDiagram';
-import TrainMountainRouteDiagram from '../diagrams/TrainMountainRouteDiagram';
-import ActivityGearModelDiagram from '../diagrams/ActivityGearModelDiagram';
-// Reference: Logic Gates & Boolean Algebra
-import LogicGateSymbolsDiagram from '../diagrams/LogicGateSymbolsDiagram';
-import LogicHalfAdderDiagram from '../diagrams/LogicHalfAdderDiagram';
-import LogicProcessorDiagram from '../diagrams/LogicProcessorDiagram';
-// Lost Temple — Archaeology & Dating Methods
-import StratigraphyLayersDiagram from '../diagrams/StratigraphyLayersDiagram';
-import Carbon14DecayDiagram from '../diagrams/Carbon14DecayDiagram';
-import RuinsTimelineDiagram from '../diagrams/RuinsTimelineDiagram';
-import ExcavationGridDiagram from '../diagrams/ExcavationGridDiagram';
-import ActivityDigBoxDiagram from '../diagrams/ActivityDigBoxDiagram';
-// Kingfisher Blue — Structural Color & Nanostructures
-import StructuralColorDiagram from '../diagrams/StructuralColorDiagram';
-import ThinFilmWavesDiagram from '../diagrams/ThinFilmWavesDiagram';
-import ColorFadeTestDiagram from '../diagrams/ColorFadeTestDiagram';
-import ShinkansenBeakDiagram from '../diagrams/ShinkansenBeakDiagram';
-import ActivityCDRainbowDiagram from '../diagrams/ActivityCDRainbowDiagram';
-// Firewalker — Heat Transfer & Thermal Physics
-import ConductionBarsDiagram from '../diagrams/ConductionBarsDiagram';
-import LeidenfrostDropDiagram from '../diagrams/LeidenfrostDropDiagram';
-import SpecificHeatBarsDiagram from '../diagrams/SpecificHeatBarsDiagram';
-import FirewalkPhysicsDiagram from '../diagrams/FirewalkPhysicsDiagram';
-import ActivitySpoonTestDiagram from '../diagrams/ActivitySpoonTestDiagram';
-// Lotus Float — Buoyancy & Plant Adaptations
-import LotusNanobumpsDiagram from '../diagrams/LotusNanobumpsDiagram';
-import SurfaceTensionWalkDiagram from '../diagrams/SurfaceTensionWalkDiagram';
-import LotusEngineeringDiagram from '../diagrams/LotusEngineeringDiagram';
-import AerenchymaCrossDiagram from '../diagrams/AerenchymaCrossDiagram';
-import ActivityDropletTestDiagram from '../diagrams/ActivityDropletTestDiagram';
-// Boy Who Counted Butterflies — Data Collection & Citizen Science
-import SamplingVsCensusDiagram from '../diagrams/SamplingVsCensusDiagram';
-import TransectMethodDiagram from '../diagrams/TransectMethodDiagram';
-import DataQualityTargetDiagram from '../diagrams/DataQualityTargetDiagram';
-import CitizenScienceScaleDiagram from '../diagrams/CitizenScienceScaleDiagram';
-import ActivityButterflyCountDiagram from '../diagrams/ActivityButterflyCountDiagram';
-// Kaziranga Grass — Grassland Ecology & Fire Cycles
-import GrassFireCycleDiagram from '../diagrams/GrassFireCycleDiagram';
-import GrassC4PathwayDiagram from '../diagrams/GrassC4PathwayDiagram';
-import GrassNDVIDiagram from '../diagrams/GrassNDVIDiagram';
-import GrassRhinoHabitatDiagram from '../diagrams/GrassRhinoHabitatDiagram';
-import ActivityGrassGrowDiagram from '../diagrams/ActivityGrassGrowDiagram';
-// Night Jasmine — Circadian Rhythms in Plants
-import JasminePhotoperiodDiagram from '../diagrams/JasminePhotoperiodDiagram';
-import JasminePhytochromeDiagram from '../diagrams/JasminePhytochromeDiagram';
-import JasmineScentClockDiagram from '../diagrams/JasmineScentClockDiagram';
-import JasmineStomataClockDiagram from '../diagrams/JasmineStomataClockDiagram';
-import ActivityPlantRhythmDiagram from '../diagrams/ActivityPlantRhythmDiagram';
-// Postman of the Hills — Logistics & Optimization
-import PostmanGraphTheoryDiagram from '../diagrams/PostmanGraphTheoryDiagram';
-import PostmanShortestPathDiagram from '../diagrams/PostmanShortestPathDiagram';
-import PostmanTSPDiagram from '../diagrams/PostmanTSPDiagram';
-import PostmanTerrainCostDiagram from '../diagrams/PostmanTerrainCostDiagram';
-import ActivityRouteMapDiagram from '../diagrams/ActivityRouteMapDiagram';
-// Turtle Who Carried a Mountain — Geology & Plate Tectonics
-import TurtleEarthLayersDiagram from '../diagrams/TurtleEarthLayersDiagram';
-import TurtleConvectionDiagram from '../diagrams/TurtleConvectionDiagram';
-import TurtleMountainCollisionDiagram from '../diagrams/TurtleMountainCollisionDiagram';
-import TurtleEarthquakeDiagram from '../diagrams/TurtleEarthquakeDiagram';
-import ActivityEarthShakeDiagram from '../diagrams/ActivityEarthShakeDiagram';
-// Owl Wisest — Owl Adaptations & Night Vision
-import OwlRodConeDiagram from '../diagrams/OwlRodConeDiagram';
-import OwlAsymmetricEarsDiagram from '../diagrams/OwlAsymmetricEarsDiagram';
-import OwlSilentFlightDiagram from '../diagrams/OwlSilentFlightDiagram';
-import OwlTapetumDiagram from '../diagrams/OwlTapetumDiagram';
-import ActivitySoundLocateDiagram from '../diagrams/ActivitySoundLocateDiagram';
-
-// Boy Who Built a Library — Web Development & Databases
-import LibraryHTMLStructureDiagram from '../diagrams/LibraryHTMLStructureDiagram';
-import LibraryDatabaseDiagram from '../diagrams/LibraryDatabaseDiagram';
-import LibraryAPIDiagram from '../diagrams/LibraryAPIDiagram';
-import LibraryCommunityDiagram from '../diagrams/LibraryCommunityDiagram';
-import ActivityCatalogDiagram from '../diagrams/ActivityCatalogDiagram';
-import LibraryAppOutputDiagram from '../diagrams/LibraryAppOutputDiagram';
-// Dragonfly and the Paddy Field — Drones & Computer Vision
-import DroneRotorDiagram from '../diagrams/DroneRotorDiagram';
-import PixelGridDiagram from '../diagrams/PixelGridDiagram';
-import NDVIFieldDiagram from '../diagrams/NDVIFieldDiagram';
-import ActivityAerialPhotoDiagram from '../diagrams/ActivityAerialPhotoDiagram';
-import CropHealthOutputDiagram from '../diagrams/CropHealthOutputDiagram';
-// Tiger's Whisker — Animal Anatomy & Sensory Systems
-import WhiskerSensorDiagram from '../diagrams/WhiskerSensorDiagram';
-import WhiskerSpatialMapDiagram from '../diagrams/WhiskerSpatialMapDiagram';
-import WhiskerRobotDiagram from '../diagrams/WhiskerRobotDiagram';
-import ActivityWhiskerTestDiagram from '../diagrams/ActivityWhiskerTestDiagram';
-import SensoryRangeOutputDiagram from '../diagrams/SensoryRangeOutputDiagram';
-// Cuckoo Calls at Dawn — Circadian Rhythms & Biological Clocks
-import CircadianClockDiagram from '../diagrams/CircadianClockDiagram';
-import LightResetDiagram from '../diagrams/LightResetDiagram';
-import CuckooTimingDiagram from '../diagrams/CuckooTimingDiagram';
-import ActivitySleepTrackDiagram from '../diagrams/ActivitySleepTrackDiagram';
-import DawnChorusOutputDiagram from '../diagrams/DawnChorusOutputDiagram';
-// Grandmother's Pitha — Food Science & Chemistry
-import MaillardReactionDiagram from '../diagrams/MaillardReactionDiagram';
-import GlutenNetworkDiagram from '../diagrams/GlutenNetworkDiagram';
-import HeatTransferCookingDiagram from '../diagrams/HeatTransferCookingDiagram';
-import ActivityToastTestDiagram from '../diagrams/ActivityToastTestDiagram';
-import PithaScienceOutputDiagram from '../diagrams/PithaScienceOutputDiagram';
-// Batch D missing imports
-import FrogVocalSacDiagram from '../diagrams/FrogVocalSacDiagram';
-import FrogFrequencyDiagram from '../diagrams/FrogFrequencyDiagram';
-import FrogChorusDiagram from '../diagrams/FrogChorusDiagram';
-import FrogHumidityDiagram from '../diagrams/FrogHumidityDiagram';
-import ActivityFrogListenDiagram from '../diagrams/ActivityFrogListenDiagram';
-import PeacockSexualSelectionDiagram from '../diagrams/PeacockSexualSelectionDiagram';
-import PeacockHonestSignalDiagram from '../diagrams/PeacockHonestSignalDiagram';
-import PeacockIridescenceDiagram from '../diagrams/PeacockIridescenceDiagram';
-import PeacockInfrasoundDiagram from '../diagrams/PeacockInfrasoundDiagram';
-import ActivityIridescenceTestDiagram from '../diagrams/ActivityIridescenceTestDiagram';
-import BambooMeristemDiagram from '../diagrams/BambooMeristemDiagram';
-import BambooAuxinDiagram from '../diagrams/BambooAuxinDiagram';
-import BambooCellElongationDiagram from '../diagrams/BambooCellElongationDiagram';
-import ActivityBambooGrowthDiagram from '../diagrams/ActivityBambooGrowthDiagram';
-import CorridorFragmentDiagram from '../diagrams/CorridorFragmentDiagram';
-import CorridorGeneFlowDiagram from '../diagrams/CorridorGeneFlowDiagram';
-import CorridorCameraTrapDiagram from '../diagrams/CorridorCameraTrapDiagram';
-import CorridorConflictSolutionDiagram from '../diagrams/CorridorConflictSolutionDiagram';
-import ActivityCorridorMapDiagram from '../diagrams/ActivityCorridorMapDiagram';
-import HoliNaturalDyeDiagram from '../diagrams/HoliNaturalDyeDiagram';
-import HoliPHIndicatorDiagram from '../diagrams/HoliPHIndicatorDiagram';
-import HoliMordantDiagram from '../diagrams/HoliMordantDiagram';
-import HoliTeaConnectionDiagram from '../diagrams/HoliTeaConnectionDiagram';
-import ActivityDyeExtractDiagram from '../diagrams/ActivityDyeExtractDiagram';
-// Seed Dispersal
-import SeedWindDispersalDiagram from '../diagrams/SeedWindDispersalDiagram';
-import SeedAnimalDispersalDiagram from '../diagrams/SeedAnimalDispersalDiagram';
-import SeedExplosiveGravityDiagram from '../diagrams/SeedExplosiveGravityDiagram';
-import SeedAutorotationDiagram from '../diagrams/SeedAutorotationDiagram';
-import ActivitySeedDropDiagram from '../diagrams/ActivitySeedDropDiagram';
-import SeedDispersalOutputDiagram from '../diagrams/SeedDispersalOutputDiagram';
-// Wild Orchids — Epiphytes & Symbiosis
-import OrchidEpiphyteAnatomyDiagram from '../diagrams/OrchidEpiphyteAnatomyDiagram';
-import OrchidMycorrhizalNetworkDiagram from '../diagrams/OrchidMycorrhizalNetworkDiagram';
-import OrchidSymbiosisSpectrumDiagram from '../diagrams/OrchidSymbiosisSpectrumDiagram';
-import OrchidConservationDiagram from '../diagrams/OrchidConservationDiagram';
-import ActivityEpiphyteSurveyDiagram from '../diagrams/ActivityEpiphyteSurveyDiagram';
-// Moonlit Boat Race — Fluid Dynamics
-import BoatHullSpeedDiagram from '../diagrams/BoatHullSpeedDiagram';
-import BoatDragTypesDiagram from '../diagrams/BoatDragTypesDiagram';
-import BoatRowingBiomechanicsDiagram from '../diagrams/BoatRowingBiomechanicsDiagram';
-import ActivityBoatShapeDiagram from '../diagrams/ActivityBoatShapeDiagram';
-// Haflong Blue Mountains — Atmospheric Optics
-import BlueMountainScatteringDiagram from '../diagrams/BlueMountainScatteringDiagram';
-import HazeFogComparisonDiagram from '../diagrams/HazeFogComparisonDiagram';
-import AerialPerspectiveDiagram from '../diagrams/AerialPerspectiveDiagram';
-import ActivityHillColorDiagram from '../diagrams/ActivityHillColorDiagram';
-// Girl and Python — Reptile Biology
-import PythonEctothermyDiagram from '../diagrams/PythonEctothermyDiagram';
-import PythonPitOrganDiagram from '../diagrams/PythonPitOrganDiagram';
-import PythonConstrictionDiagram from '../diagrams/PythonConstrictionDiagram';
-import ActivityWildlifeSurveyDiagram from '../diagrams/ActivityWildlifeSurveyDiagram';
-// Brave Mithun — Domestication & Selective Breeding
-import MithunWildVsDomesticDiagram from '../diagrams/MithunWildVsDomesticDiagram';
-import MithunSelectionDiagram from '../diagrams/MithunSelectionDiagram';
-import MithunTraitChangeDiagram from '../diagrams/MithunTraitChangeDiagram';
-import MithunKeystoneDiagram from '../diagrams/MithunKeystoneDiagram';
-import ActivityBreedingSimDiagram from '../diagrams/ActivityBreedingSimDiagram';
-import BreedingSimOutputDiagram from '../diagrams/BreedingSimOutputDiagram';
-// Sal Tree — Wood Science & Material Strength
-import SalHeartwoodDiagram from '../diagrams/SalHeartwoodDiagram';
-import SalCelluloseLigninDiagram from '../diagrams/SalCelluloseLigninDiagram';
-import SalGrainDirectionDiagram from '../diagrams/SalGrainDirectionDiagram';
-import SalForestryDiagram from '../diagrams/SalForestryDiagram';
-import ActivityWoodTestDiagram from '../diagrams/ActivityWoodTestDiagram';
-import WoodStrengthOutputDiagram from '../diagrams/WoodStrengthOutputDiagram';
-// Girl Who Painted Rain — Color Science & Pigments
-import PigmentAbsorptionDiagram from '../diagrams/PigmentAbsorptionDiagram';
-import SubtractiveMixingDiagram from '../diagrams/SubtractiveMixingDiagram';
-import CapillaryActionDiagram from '../diagrams/CapillaryActionDiagram';
-import RainColorVividDiagram from '../diagrams/RainColorVividDiagram';
-import ActivityColorMixDiagram from '../diagrams/ActivityColorMixDiagram';
-import ColorMixerOutputDiagram from '../diagrams/ColorMixerOutputDiagram';
-// Cloud Weaver of Tawang — Textiles & Weaving Technology
-import WarpWeftDiagram from '../diagrams/WarpWeftDiagram';
-import LoomMechanicsDiagram from '../diagrams/LoomMechanicsDiagram';
-import ThreadTensionDiagram from '../diagrams/ThreadTensionDiagram';
-import PatternEncodingDiagram from '../diagrams/PatternEncodingDiagram';
-import ActivityWeaveCardDiagram from '../diagrams/ActivityWeaveCardDiagram';
-import FabricAnalysisOutputDiagram from '../diagrams/FabricAnalysisOutputDiagram';
-// Seven Sisters — Geography & Maps
-import PoliticalVsPhysicalMapDiagram from '../diagrams/PoliticalVsPhysicalMapDiagram';
-import MapScaleDistanceDiagram from '../diagrams/MapScaleDistanceDiagram';
-import ContourLinesDiagram from '../diagrams/ContourLinesDiagram';
-import NEIndiaStatesDiagram from '../diagrams/NEIndiaStatesDiagram';
-import ActivityNeighborhoodMapDiagram from '../diagrams/ActivityNeighborhoodMapDiagram';
-import NEIndiaAtlasOutputDiagram from '../diagrams/NEIndiaAtlasOutputDiagram';
-// Eri Silk — Silk Biology & Ethics
-import EriLifeCycleDiagram from '../diagrams/EriLifeCycleDiagram';
-import EriFibroinDiagram from '../diagrams/EriFibroinDiagram';
-import EriAhimsaDiagram from '../diagrams/EriAhimsaDiagram';
-import EriSustainableFashionDiagram from '../diagrams/EriSustainableFashionDiagram';
-import ActivitySilkStretchDiagram from '../diagrams/ActivitySilkStretchDiagram';
-import EriSilkOutputDiagram from '../diagrams/EriSilkOutputDiagram';
-// First Rice — Agriculture & Crop Origins
-import RiceDomesticationDiagram from '../diagrams/RiceDomesticationDiagram';
-import RiceMendelDiagram from '../diagrams/RiceMendelDiagram';
-import RiceSeedSavingDiagram from '../diagrams/RiceSeedSavingDiagram';
-import ActivityRiceSproutDiagram from '../diagrams/ActivityRiceSproutDiagram';
-import RiceGrowthOutputDiagram from '../diagrams/RiceGrowthOutputDiagram';
-// Dhol Drum — Percussion Physics & Vibration
-import DholChladniDiagram from '../diagrams/DholChladniDiagram';
-import DholSizePitchDiagram from '../diagrams/DholSizePitchDiagram';
-import DholStrikeDiagram from '../diagrams/DholStrikeDiagram';
-import DholResonanceDiagram from '../diagrams/DholResonanceDiagram';
-import ActivityDrumBuildDiagram from '../diagrams/ActivityDrumBuildDiagram';
-// Mountain Echoes — Sound Reflection
-import EchoDistanceDiagram from '../diagrams/EchoDistanceDiagram';
-import ReverberationDiagram from '../diagrams/ReverberationDiagram';
-import ValleyAcousticsDiagram from '../diagrams/ValleyAcousticsDiagram';
-import ActivityEchoTimeDiagram from '../diagrams/ActivityEchoTimeDiagram';
-import EchoSpeedOutputDiagram from '../diagrams/EchoSpeedOutputDiagram';
-// Ferryman's Riddle — Fluid Mechanics
-import LaminarTurbulentDiagram from '../diagrams/LaminarTurbulentDiagram';
-import FerryVectorDiagram from '../diagrams/FerryVectorDiagram';
-import WhirlpoolEddyDiagram from '../diagrams/WhirlpoolEddyDiagram';
-import ActivityFloatPathDiagram from '../diagrams/ActivityFloatPathDiagram';
-import FerryCrossingOutputDiagram from '../diagrams/FerryCrossingOutputDiagram';
-
-const registry: Record<string, ComponentType> = {
-  SineWaveDiagram,
-  SpectrogramDiagram,
-  NumPyRulerDiagram,
-  PlotAnatomyDiagram,
-  VariablesDiagram,
-  AmplitudeModDiagram,
-  CircuitDiagram,
-  WavelengthSpectrum,
-  PhotosynthesisDiagram,
-  PopulationGrowthCurve,
-  SilkStructureDiagram,
-  FoodWebDiagram,
-  RayleighScatteringDiagram,
-  RiverErosionDiagram,
-  RiverSourceDiagram,
-  RiverTransportDiagram,
-  RiverBraidedDiagram,
-  RiverFloodplainDiagram,
-  RiverDeltaDiagram,
-  RiverOxbowDiagram,
-  EcholocationDiagram,
-  MusicalWavesDiagram,
-  NewtonForceDiagram,
-  CycloneCrossSectionDiagram,
-  FibonacciSpiralDiagram,
-  CSSBoxModelDiagram,
-  KNNClassificationDiagram,
-  AltitudeProfileDiagram,
-  FlowchartDiagram,
-  FeatureExtractionDiagram,
-  FeatureWeightsDiagram,
-  TrainTestSplitDiagram,
-  PostmanSortingDiagram,
-  DogVsCatDiagram,
-  DecisionTreeDiagram,
-  LinearClassifierDiagram,
-  NeuralNetworkDiagram,
-  TransformerAttentionDiagram,
-  TessellationDiagram,
-  FractalTreeDiagram,
-  SymmetryDiagram,
-  VoronoiDiagram,
-  MeanMedianModeDiagram,
-  StdDevDiagram,
-  CorrelationDiagram,
-  HistogramDiagram,
-  OhmsLawDiagram,
-  HeatTransferDiagram,
-  DopplerEffectDiagram,
-  AnimalCellDiagram,
-  AtomStructureDiagram,
-  BalanceScaleDiagram,
-  CellComparisonDiagram,
-  DNADoubleHelixDiagram,
-  EnergyBarChartDiagram,
-  EnergyPyramidDiagram,
-  HeartDiagram,
-  IonicBondDiagram,
-  LensRayDiagram,
-  MagneticFieldLinesDiagram,
-  PHScaleDiagram,
-  PeriodicTableOverviewDiagram,
-  PhaseChangeDiagram,
-  PunnettSquareDiagram,
-  PythagoreanDiagram,
-  SeriesParallelCircuitDiagram,
-  TangentLineDiagram,
-  TransverseLongitudinalDiagram,
-  UnitCircleDiagram,
-  WaveEquationDiagram,
-  InterferenceDiagram,
-  MolecularMotionDiagram,
-  StaticElectricityDiagram,
-  CovalentBondDiagram,
-  BalancingEquationDiagram,
-  CarbonCycleDiagram,
-  NaturalSelectionDiagram,
-  BernoulliDiagram,
-  BuoyancyDiagram,
-  CarbonBondingDiagram,
-  CellMembraneDiagram,
-  ChromosomeDiagram,
-  CoordinatePlaneDiagram,
-  DigestiveSystemDiagram,
-  DominantRecessiveDiagram,
-  EarthMagnetismDiagram,
-  ElectromagnetDiagram,
-  ElectronShellDiagram,
-  EnergyProfileDiagram,
-  FunctionalGroupsDiagram,
-  GravitationalFieldDiagram,
-  HeightDistanceDiagram,
-  HomologousStructuresDiagram,
-  HydraulicPressDiagram,
-  IsotopeDiagram,
-  LinearGraphDiagram,
-  LungsDiagram,
-  MetallicBondDiagram,
-  MitosisDiagram,
-  MolecularShapeDiagram,
-  MotorGeneratorDiagram,
-  MutationTypesDiagram,
-  NeuronDiagram,
-  NumberLineDiagram,
-  OrbitalMechanicsDiagram,
-  PolymerChainDiagram,
-  PressureDepthDiagram,
-  ProbabilityScaleDiagram,
-  ReactionTypesDiagram,
-  SOHCAHTOADiagram,
-  SieveOfEratosthenesDiagram,
-  SkeletonMuscleDiagram,
-  SubatomicParticlesDiagram,
-  TidesDiagram,
-  TreeDiagramProbability,
-  TrigGraphsDiagram,
-  VectorAdditionDiagram,
-  AdaptationDiagram,
-  AngleTypesDiagram,
-  AreaUnderCurveDiagram,
-  DistanceFormulaDiagram,
-  EMCSquaredDiagram,
-  LimitDiagram,
-  BacteriaStructureDiagram,
-  BatteryCrossSectionDiagram,
-  BoyleLawDiagram,
-  CirclePropertiesDiagram,
-  CodonTableDiagram,
-  CombinatoricsGridDiagram,
-  ConicSectionsDiagram,
-  DNAReplicationDiagram,
-  DichotomousKeyDiagram,
-  DiffractionDiagram,
-  ElementBoxDiagram,
-  EnergyConversionChainDiagram,
-  ExpectedValueDiagram,
-  EyeAnatomyDiagram,
-  FermentationDiagram,
-  FissionFusionDiagram,
-  FiveKingdomsDiagram,
-  FungiDiagram,
-  HalfLifeDiagram,
-  HydroelectricDiagram,
-  LightClockDiagram,
-  MatrixMultiplicationDiagram,
-  MetalNonmetalDiagram,
-  MirrorReflectionDiagram,
-  ModularClockDiagram,
-  NEIndiaBiomesDiagram,
-  NitrogenCycleDiagram,
-  NucleusStructureDiagram,
-  ParticleModelDiagram,
-  PeriodicTrendsDiagram,
-  PhaseTransitionDiagram,
-  PhylogeneticTreeDiagram,
-  RadioactiveDecayDiagram,
-  RedoxDiagram,
-  SequencePatternDiagram,
-  SlopeInterceptDiagram,
-  TaxonomyHierarchyDiagram,
-  TotalInternalReflectionDiagram,
-  TranscriptionDiagram,
-  TransformationMatrixDiagram,
-  TransformationsDiagram,
-  TranslationDiagram,
-  VirusReplicationDiagram,
-  VoltaicCellDiagram,
-  Volume3DDiagram,
-  WorkForceDiagram,
-  ClimateFactorsDiagram,
-  ClimateZonesDiagram,
-  EarthLayersDiagram,
-  LatLongGridDiagram,
-  PlateBoundaryDiagram,
-  RockCycleDiagram,
-  SeismicWavesDiagram,
-  SoilHorizonDiagram,
-  TectonicPlatesDiagram,
-  WaterCycleDiagram,
-  ContourMapDiagram,
-  DemographicTransitionDiagram,
-  MapProjectionDiagram,
-  MonsoonDiagram,
-  MonsoonHeatingDiagram,
-  MonsoonReversalDiagram,
-  MonsoonJetStreamDiagram,
-  MonsoonFailureDiagram,
-  ActivityMonsoonModelDiagram,
-  MagnitudeStaircaseDiagram,
-  SunsetPathDiagram,
-  MilkScatteringDiagram,
-  SunsetSimulatorOutputDiagram,
-  MieVsRayleighDiagram,
-  MirageDiagram,
-  RainbowRaindropDiagram,
-  BioluminescenceReactionDiagram,
-  FireflySyncDiagram,
-  FireflyCircuitBasicDiagram,
-  FireflyPWMDiagram,
-  FireflyParallelDiagram,
-  FireflyRandomDiagram,
-  FireflySyncStepsDiagram,
-  FireflyJarDiagram,
-  FireflyForLoopDiagram,
-  FireflyArrayDiagram,
-  FireflySineBreatheDiagram,
-  FireflyPhaseOffsetDiagram,
-  FireflyKuramotoDiagram,
-  FireflyProductionDiagram,
-  FireflyEfficiencyDiagram,
-  FireflySpeciesCodeDiagram,
-  FireflyLuciferinPathwayDiagram,
-  FireflyNeuralControlDiagram,
-  FireflyNetworkProtocolDiagram,
-  FireflyConservationDiagram,
-  JapiTopViewDiagram,
-  ConicalShapeDiagram,
-  SquareVsTriangleDiagram,
-  WeavePatternDiagram,
-  JapiHexagonDiagram,
-  ActivityJapiMakeDiagram,
-  AlgorithmStepsDiagram,
-  RhythmPlayerDiagram,
-  ElephantRumblePlayerDiagram,
-  ElephantGroundWaveDiagram,
-  ElephantSpectrogramDiagram,
-  CoriolisEffectDiagram,
-  StormSurgeDiagram,
-  MountainTemperatureDiagram,
-  MountainPressureDiagram,
-  MountainLapseRateDiagram,
-  MountainOxygenDiagram,
-  MountainWeatherDiagram,
-  MountainBodyAdaptDiagram,
-  MountainZonationDiagram,
-  MountainTreelineDiagram,
-  MountainBarometricDiagram,
-  MountainGasLawDiagram,
-  MountainO2PartialDiagram,
-  MountainWindChillDiagram,
-  MountainRadiationDiagram,
-  MountainUVDiagram,
-  BeeColonyDiagram,
-  BeeWaggleDanceDiagram,
-  BeePollinationDiagram,
-  BeeHoneymakingDiagram,
-  BeeHiveTempDiagram,
-  BeeLifeCycleDiagram,
-  BeeAnatomyDiagram,
-  BeeFlowerCoevolutionDiagram,
-  BeeNavigationDiagram,
-  BeeCommunicationDiagram,
-  BeeEcosystemServiceDiagram,
-  BeeColonyCollapseDiagram,
-  BeeForagingModelDiagram,
-  BeePopulationDynamicsDiagram,
-  BeeGeneticsDiagram,
-  BeeSwarmIntelligenceDiagram,
-  BeeVenomChemistryDiagram,
-  BeeRobotDiagram,
-  BeeMonitoringDiagram,
-  BeePathOptimizationDiagram,
-  BeeDiseaseDetectionDiagram,
-  BeePollinationNetworkDiagram,
-  BeeConservationPlanDiagram,
-  BeeDataDashboardDiagram,
-  WoodpeckerImpactDiagram,
-  WoodpeckerSkullLayersDiagram,
-  WoodpeckerHyoidDiagram,
-  WoodpeckerSpongyBoneDiagram,
-  WoodpeckerBrainFitDiagram,
-  WoodpeckerHelmetDiagram,
-  WoodpeckerForceMassDiagram,
-  WoodpeckerDecelerationDiagram,
-  WoodpeckerTongueDiagram,
-  WoodpeckerDrumPatternDiagram,
-  WoodpeckerMaterialsDiagram,
-  WoodpeckerEvolutionDiagram,
-  WoodpeckerStressDistributionDiagram,
-  WoodpeckerImpulseTheoryDiagram,
-  WoodpeckerResonanceDiagram,
-  WoodpeckerEnergyAbsorptionDiagram,
-  WoodpeckerRotationalForceDiagram,
-  WoodpeckerFatigueAnalysisDiagram,
-  WoodpeckerBioInspirationDiagram,
-  WoodpeckerCrashTestDiagram,
-  WoodpeckerMetamaterialDiagram,
-  WoodpeckerSensorDesignDiagram,
-  WoodpeckerSafetyStandardDiagram,
-  WoodpeckerCapstoneProjectDiagram,
-  ActivityEggDropDiagram,
-  ActivityStarCountDiagram,
-  ActivityFlowerWatchDiagram,
-  ActivityVortexDiagram,
-  ActivityBalloonDiagram,
-  ActivityMapDrawDiagram,
-  ActivityTreeMeasureDiagram,
-  ActivityMilkGlassDiagram,
-  ActivityEarGroundDiagram,
-  ActivityFlashlightSyncDiagram,
-  AltitudeAdaptationDiagram,
-  BanyanRootsDiagram,
-  StarBrightnessStepDiagram,
-  StarBortleScaleDiagram,
-  StarSkyQualityDiagram,
-  // Mythology: Churning of the Ocean
-  ChurningEmulsionDiagram,
-  DensityColumnDiagram,
-  PHScaleChurningDiagram,
-  DistillationDiagram,
-  ActivityDensityColumnDiagram,
-  ChurningCentrifugeDiagram,
-  ChurningChromatographyDiagram,
-  ChurningColloidDiagram,
-  ChurningDensityColumnDiagram,
-  ChurningDistillationDiagram,
-  ChurningEmulsifierDiagram,
-  ChurningIntermolecularDiagram,
-  ChurningMassSpecDiagram,
-  ChurningPolarityDiagram,
-  ChurningSeparationPipelineDiagram,
-  ChurningTitrationDiagram,
-  // Mythology: David and Goliath
-  SlingCircularMotionDiagram,
-  ProjectileArcDiagram,
-  KineticEnergyComparisonDiagram,
-  ImpactPressureDiagram,
-  ActivitySlingRangeDiagram,
-  // Mythology: Sand Mandala
-  SymmetryTypesMandala,
-  TessellationMandala,
-  FractalZoomDiagram,
-  GoldenRatioNatureDiagram,
-  ActivityMandalaDiagram,
-  // Mythology: Alhambra Geometry
-  TileAnglesDiagram,
-  SymmetryOperationsDiagram,
-  WallpaperGroupsDiagram,
-  CrystalSymmetryDiagram,
-  ActivityTessellationDiagram,
-  // Mythology: Hanuman Lifted a Mountain
-  HanumanTectonicDiagram,
-  HanumanAltitudeZonesDiagram,
-  HanumanDichotomousKeyDiagram,
-  HanumanMedicineDiagram,
-  ActivityHerbIdentifyDiagram,
-  // Mythology: Astrolabe — Islamic Astronomy
-  AstrolabeSundialDiagram,
-  AstrolabeProjectionDiagram,
-  AstrolabeCelestialNavDiagram,
-  AstrolabeFunctionsDiagram,
-  ActivityStarNavigateDiagram,
-  // Mythology: Ravana's Ten Heads
-  RavanaNeuronDiagram,
-  RavanaParallelDiagram,
-  RavanaCPUGPUDiagram,
-  RavanaNeuralNetDiagram,
-  ActivityReactionTimeDiagram,
-  ArkBuoyancyDiagram,
-  ArkCapacityDiagram,
-  ArkEcosystemDiagram,
-  ArkBiodiversityDiagram,
-  ActivityFloatTestDiagram,
-  // Mythology: Bodhi Tree
-  BodhiSeedCuttingDiagram,
-  BodhiDNACloneDiagram,
-  BodhiGraftingDiagram,
-  BodhiCRISPRDiagram,
-  ActivityCuttingDiagram,
-  // Mythology: Wheel of Dharma
-  DharmaWheelFrictionDiagram,
-  DharmaTorqueDiagram,
-  DharmaGyroscopeDiagram,
-  DharmaFlywheelDiagram,
-  ActivitySpinningTopDiagram,
-  // Mythology: Monastery Bells of Tawang
-  BellSoundWaveDiagram,
-  BellFrequencyDiagram,
-  BellHarmonicsDiagram,
-  BellFourierDiagram,
-  ActivityBellStrikeDiagram,
-  // Mythology: Angulimala — Neuroplasticity
-  AngulimalaNeuroplasticityDiagram,
-  AngulimalaHabitPathwayDiagram,
-  AngulimalaFMRIDiagram,
-  AngulimalaReinforcementDiagram,
-  ActivityHabitTrackerDiagram,
-  // Mythology: Pushpaka Vimana — Aerodynamics & Flight
-  VimanaLiftDragDiagram,
-  VimanaBernoulliDiagram,
-  VimanaJetEngineDiagram,
-  VimanaRocketDiagram,
-  ActivityPaperPlaneDiagram,
-  // Mythology: Agni — Science of Fire
-  AgniCombustionTriangleDiagram,
-  AgniFlameColorDiagram,
-  AgniHeatTransferDiagram,
-  AgniSpectroscopyDiagram,
-  ActivityCandleDiagram,
-  // Mythology: Tower of Babel
-  BabelForcesDiagram,
-  BabelBucklingDiagram,
-  BabelSkyscraperDiagram,
-  BabelNLPDiagram,
-  ActivityTowerBuildDiagram,
-  // Mythology: Al-Khwarizmi — Algebra & Algorithms
-  AlgebraBalanceScaleDiagram,
-  AlgebraLinearDiagram,
-  AlgebraQuadraticDiagram,
-  AlgebraAlgorithmDiagram,
-  ActivityBalanceDiagram,
-  // Mythology: Star of Bethlehem
-  BethlehemMagnitudeDiagram,
-  BethlehemConjunctionDiagram,
-  BethlehemCelestialNavDiagram,
-  BethlehemKeplerDiagram,
-  ActivityStarFinderDiagram,
-  // Mythology: Parting of the Red Sea
-  RedSeaTideDiagram,
-  RedSeaWindSetdownDiagram,
-  RedSeaCFDDiagram,
-  RedSeaCrossSectionDiagram,
-  ActivityTideModelDiagram,
-  // Mythology: Well of Zamzam
-  ZamzamAquiferDiagram,
-  ZamzamPorosityDiagram,
-  ZamzamDarcyLawDiagram,
-  ZamzamWaterCycleDiagram,
-  ActivityWellModelDiagram,
-  // Mythology: Muezzin's Call
-  MuezzinInverseSquareDiagram,
-  MuezzinDomeAcousticsDiagram,
-  MuezzinSpeakerDiagram,
-  MuezzinCityPropagationDiagram,
-  ActivitySoundDistanceDiagram,
-  // NE India: The Girl Who Grew a Forest
-  ForestSuccessionDiagram,
-  ForestCarbonCycleDiagram,
-  ForestSoilLayersDiagram,
-  ForestScalingDiagram,
-  ActivityTreePlantDiagram,
-  // Northeast India: Bamboo Taught Wind
-  // Bamboo Flute of Nagaland
-  FluteStandingWaveDiagram,
-  FluteFingerHoleDiagram,
-  FluteOvertonesDiagram,
-  FluteDesignDiagram,
-  ActivityFluteBuildDiagram,
-  BambooVortexDiagram,
-  BambooResonanceDiagram,
-  BambooHarmonicsDiagram,
-  BambooMaterialDiagram,
-  ActivityBambooFluteDiagram,
-  // Northeast India: Golden Hilsa — Sustainable Fishing
-  HilsaMigrationDiagram,
-  HilsaOlfactoryDiagram,
-  HilsaPopulationDiagram,
-  HilsaRiverHealthDiagram,
-  ActivityFishCountDiagram,
-  // Why Fish Jump in the Barak River
-  FishOxygenDiagram,
-  FishJumpReasonsDiagram,
-  FishBiomechanicsDiagram,
-  FishRiverHealthDiagram,
-  ActivityFishObserveDiagram,
-  // NE India: The Bridge That Grew
-  BridgeRootGrowthDiagram,
-  BridgeTensileStrengthDiagram,
-  BridgeLoadDistributionDiagram,
-  BridgeTimelineDiagram,
-  ActivityBridgeModelDiagram,
-  // River Dolphin's Secret — Echolocation & Sonar
-  DolphinEcholocationDiagram,
-  DolphinSonarWaveDiagram,
-  DolphinArduinoSensorDiagram,
-  DolphinAdaptationDiagram,
-  ActivitySonarDiagram,
-  // Kite Festival of Guwahati — Aerodynamics & Flight
-  KiteLiftDiagram,
-  KiteDragForceDiagram,
-  KiteShapesDiagram,
-  KiteWindDiagram,
-  ActivityKiteBuildDiagram,
-  // NE India: The Cloud That Refused to Rain
-  CloudFormationDiagram,
-  CloudRainProcessDiagram,
-  CloudSeedingDiagram,
-  CloudTypesDiagram,
-  ActivityCloudJarDiagram,
-  // Dancing Deer of Loktak Lake
-  LoktakPhumdiDiagram,
-  LoktakSangaiDiagram,
-  LoktakDamImpactDiagram,
-  LoktakConservationDiagram,
-  ActivityWetlandModelDiagram,
-  // Muga Silk
-  MugaSilkFibroinDiagram,
-  MugaSilkNanostructureDiagram,
-  MugaSilkProcessDiagram,
-  MugaSilkEndemicDiagram,
-  ActivitySilkTestDiagram,
-  // Reference: Aerodynamics & Flight
-  AeroFourForcesDiagram,
-  AeroBernoulliDiagram,
-  AeroWingShapesDiagram,
-  // Reference: Neuroscience & The Brain
-  BrainNeuronDiagram,
-  BrainSynapseDiagram,
-  BrainPlasticityDiagram,
-  // Reference: Geology & Earth Science
-  GeoMountainGrowthDiagram,
-  GeoVolcanoDiagram,
-  GeoFossilDiagram,
-  GeoErosionProcessDiagram,
-  // Reference: Hydrology & Water Science
-  HydroAquiferDiagram,
-  HydroPurificationDiagram,
-  HydroGroundwaterDiagram,
-  HydroWellDiagram,
-  HydroRiverStagesDiagram,
-  HydroFloodDroughtDiagram,
-  HydroDesalinationDiagram,
-  // Reference: Structural Engineering
-  StructForcesDiagram,
-  StructTriangleDiagram,
-  StructSkyscraperDiagram,
-  // Reference: Rotational Mechanics
-  RotTorqueDiagram,
-  RotGyroscopeDiagram,
-  RotGearsDiagram,
-  // Reference: Sonar & Echolocation
-  SonarEchoDiagram,
-  SonarBatDiagram,
-  SonarSensorDiagram,
-  // Reference: Tides & Oceanography
-  TideMoonDiagram,
-  TideSpringNeapDiagram,
-  OceanCurrentDiagram,
-  OceanWaveAnatomyDiagram,
-  OceanStormSurgeDiagram,
-  OceanDepthZonesDiagram,
-  OceanCoralReefDiagram,
-  OceanFunctionsDiagram,
-  // Reference: Climate & Climate Zones
-  ClimateVsWeatherDiagram,
-  ClimateChangeDiagram,
-  // Reference: Maps & Navigation
-  MapGPSSatelliteDiagram,
-  MapGISLayersDiagram,
-  // Reference: Population & Urbanization
-  PopDistributionDiagram,
-  PopUrbanizationDiagram,
-  PopSustainabilityDiagram,
-  // Reference: Natural Resources
-  ResourceRenewableDiagram,
-  ResourceForestDiagram,
-  ResourceCircularDiagram,
-  // Reference: Music & Arts
-  MusicHarmonicsDiagram,
-  MusicDecibelDiagram,
-  RhythmBeatDiagram,
-  DrumVibrationDiagram,
-  ColorSpectrumArtDiagram,
-  PerspectiveDiagram,
-  // Lesson: How Majuli Island Was Born
-  MajuliErosionDepositionDiagram,
-  MajuliFormationDiagram,
-  MajuliShrinkingDiagram,
-  MajuliProtectionDiagram,
-  ActivityErosionModelDiagram,
-  // Tejimola — Plant Biology & Genetics
-  TejimolaPlantReproDiagram,
-  TejimolaDNADiagram,
-  TejimolaMutationDiagram,
-  TejimolaTraditionalMedicineDiagram,
-  ActivitySeedGrowDiagram,
-  // Lesson: Golden Deer of Kamakhya — Optics & Light
-  DeerLightSpectrumDiagram,
-  DeerReflectionDiagram,
-  DeerRefractionDiagram,
-  DeerOpticalIllusionDiagram,
-  ActivityPrismDiagram,
-  // Red Panda Mask — Evolution & Camouflage
-  PandaCamouflageDiagram,
-  PandaSelectionDiagram,
-  PandaMaskFunctionDiagram,
-  PandaConvergentDiagram,
-  ActivityCamouflageGameDiagram,
-  // Elephant Mud Bath — Thermoregulation
-  ElephantThermoregDiagram,
-  ElephantHeatTransferDiagram,
-  ElephantSurfaceAreaDiagram,
-  ElephantEcosystemDiagram,
-  ActivityCoolingExperimentDiagram,
-  // Boy Who Talked to Clouds — Meteorology
-  CloudsFormationDiagram,
-  CloudsFamilyDiagram,
-  CloudsWaterEngineDiagram,
-  CloudsForecastDiagram,
-  ActivityCloudWatchDiagram,
-  // Hornbill's Crown — Ornithology & Animal Behavior
-  HornbillCasqueDiagram,
-  HornbillNestDiagram,
-  HornbillKeystoneDiagram,
-  HornbillCallDiagram,
-  ActivityBirdWatchDiagram,
-  // Tortoise and Hare — Speed, Acceleration & Biomechanics
-  RaceSpeedDiagram,
-  RaceAccelerationDiagram,
-  RaceScalingDiagram,
-  RaceEnergyDiagram,
-  ActivityRaceTimerDiagram,
-  // Pitcher Plant — Carnivorous Plants & Adaptation
-  PitcherNutrientDiagram,
-  PitcherAnatomyDiagram,
-  PitcherSurfaceTensionDiagram,
-  PitcherSpeciesDiagram,
-  ActivityTrapModelDiagram,
-  // Orchid Colors — Plant Pigments & Pollination
-  OrchidPigmentDiagram,
-  OrchidBeeVisionDiagram,
-  OrchidCoevolutionDiagram,
-  OrchidEpiphyteDiagram,
-  ActivityFlowerDissectDiagram,
-  // Star Fell Deepor — Meteorites & Astronomy
-  MeteorAtmosphereDiagram,
-  MeteoriteTypesDiagram,
-  MeteorImpactDiagram,
-  DeeporBeelDiagram,
-  ActivityMeteorWatchDiagram,
-  // Seed Keeper of Nagaland — Seed Banks & Genetic Diversity
-  SeedDiversityDiagram,
-  SeedBankDiagram,
-  SeedGerminationDiagram,
-  SeedJhumDiagram,
-  ActivitySeedGerminateDiagram,
-  // Tiny Frog — Size Limits, Scaling & Biodiversity
-  FrogSizeLimitsDiagram,
-  FrogCubeSquareDiagram,
-  FrogSkinBreathingDiagram,
-  FrogBiodiversityDiagram,
-  ActivitySizeScaleDiagram,
-  // Clouded Leopard — Conservation & Tracking
-  LeopardGPSDiagram,
-  LeopardCameraTrapDiagram,
-  LeopardMarkRecaptureDiagram,
-  LeopardConservationDiagram,
-  ActivityTrackingDiagram,
-  // Little Boat on the Brahmaputra — Fluid Dynamics & Buoyancy
-  BoatBuoyancyDiagram,
-  BoatHullShapesDiagram,
-  BoatCurrentDiagram,
-  BoatBrahmaputraDiagram,
-  ActivityFloatBoatDiagram,
-  // Little Train of the Hills — Mechanical Engineering & Railways
-  TrainFrictionDiagram,
-  TrainGearsDiagram,
-  TrainSteamEngineDiagram,
-  TrainMountainRouteDiagram,
-  ActivityGearModelDiagram,
-  // Reference: Logic Gates & Boolean Algebra
-  LogicGateSymbolsDiagram,
-  LogicHalfAdderDiagram,
-  LogicProcessorDiagram,
-  // Lost Temple — Archaeology & Dating Methods
-  StratigraphyLayersDiagram,
-  Carbon14DecayDiagram,
-  RuinsTimelineDiagram,
-  ExcavationGridDiagram,
-  ActivityDigBoxDiagram,
-  // Kingfisher Blue — Structural Color & Nanostructures
-  StructuralColorDiagram,
-  ThinFilmWavesDiagram,
-  ColorFadeTestDiagram,
-  ShinkansenBeakDiagram,
-  ActivityCDRainbowDiagram,
-  // Firewalker — Heat Transfer & Thermal Physics
-  ConductionBarsDiagram,
-  LeidenfrostDropDiagram,
-  SpecificHeatBarsDiagram,
-  FirewalkPhysicsDiagram,
-  ActivitySpoonTestDiagram,
-  // Lotus Float — Buoyancy & Plant Adaptations
-  LotusNanobumpsDiagram,
-  SurfaceTensionWalkDiagram,
-  LotusEngineeringDiagram,
-  AerenchymaCrossDiagram,
-  ActivityDropletTestDiagram,
-  // Boy Who Counted Butterflies — Data Collection & Citizen Science
-  SamplingVsCensusDiagram,
-  TransectMethodDiagram,
-  DataQualityTargetDiagram,
-  CitizenScienceScaleDiagram,
-  ActivityButterflyCountDiagram,
-  // Frogs Sing Rain — Acoustics & Animal Communication
-  FrogVocalSacDiagram,
-  FrogFrequencyDiagram,
-  FrogChorusDiagram,
-  FrogHumidityDiagram,
-  ActivityFrogListenDiagram,
-  // Peacocks Dance — Animal Communication & Signaling
-  PeacockSexualSelectionDiagram,
-  PeacockIridescenceDiagram,
-  PeacockInfrasoundDiagram,
-  PeacockHonestSignalDiagram,
-  ActivityIridescenceTestDiagram,
-  // Bamboo Grows Fast — Plant Growth Hormones & Cell Biology
-  BambooMeristemDiagram,
-  BambooAuxinDiagram,
-  BambooCellElongationDiagram,
-  ActivityBambooGrowthDiagram,
-  // Elephant Corridor — Wildlife Corridors
-  CorridorFragmentDiagram,
-  CorridorGeneFlowDiagram,
-  CorridorCameraTrapDiagram,
-  CorridorConflictSolutionDiagram,
-  ActivityCorridorMapDiagram,
-  // Holi Tea Gardens — Chemistry of Colors & Dyes
-  HoliNaturalDyeDiagram,
-  HoliPHIndicatorDiagram,
-  HoliMordantDiagram,
-  HoliTeaConnectionDiagram,
-  ActivityDyeExtractDiagram,
-  // Boy Who Built a Library
-  LibraryHTMLStructureDiagram,
-  LibraryDatabaseDiagram,
-  LibraryAPIDiagram,
-  LibraryCommunityDiagram,
-  ActivityCatalogDiagram,
-  LibraryAppOutputDiagram,
-  // Dragonfly — Drones & Computer Vision
-  DroneRotorDiagram,
-  PixelGridDiagram,
-  NDVIFieldDiagram,
-  ActivityAerialPhotoDiagram,
-  CropHealthOutputDiagram,
-  // Tiger's Whisker — Sensory Systems
-  WhiskerSensorDiagram,
-  WhiskerSpatialMapDiagram,
-  WhiskerRobotDiagram,
-  ActivityWhiskerTestDiagram,
-  SensoryRangeOutputDiagram,
-  // Cuckoo — Circadian Rhythms
-  CircadianClockDiagram,
-  LightResetDiagram,
-  CuckooTimingDiagram,
-  ActivitySleepTrackDiagram,
-  DawnChorusOutputDiagram,
-  // Grandmother's Pitha — Food Science
-  MaillardReactionDiagram,
-  GlutenNetworkDiagram,
-  HeatTransferCookingDiagram,
-  ActivityToastTestDiagram,
-  PithaScienceOutputDiagram,
-  // Kaziranga Grass
-  GrassFireCycleDiagram,
-  GrassC4PathwayDiagram,
-  GrassNDVIDiagram,
-  GrassRhinoHabitatDiagram,
-  ActivityGrassGrowDiagram,
-  // Night Jasmine
-  JasminePhotoperiodDiagram,
-  JasminePhytochromeDiagram,
-  JasmineScentClockDiagram,
-  JasmineStomataClockDiagram,
-  ActivityPlantRhythmDiagram,
-  // Postman Hills
-  PostmanGraphTheoryDiagram,
-  PostmanShortestPathDiagram,
-  PostmanTSPDiagram,
-  PostmanTerrainCostDiagram,
-  ActivityRouteMapDiagram,
-  // Turtle Mountain
-  TurtleEarthLayersDiagram,
-  TurtleConvectionDiagram,
-  TurtleMountainCollisionDiagram,
-  TurtleEarthquakeDiagram,
-  ActivityEarthShakeDiagram,
-  // Owl Wisest
-  OwlRodConeDiagram,
-  OwlAsymmetricEarsDiagram,
-  OwlSilentFlightDiagram,
-  OwlTapetumDiagram,
-  ActivitySoundLocateDiagram,
-  // Seed Dispersal
-  SeedWindDispersalDiagram,
-  SeedAnimalDispersalDiagram,
-  SeedExplosiveGravityDiagram,
-  SeedAutorotationDiagram,
-  ActivitySeedDropDiagram,
-  SeedDispersalOutputDiagram,
-  // Wild Orchids — Epiphytes & Symbiosis
-  OrchidEpiphyteAnatomyDiagram,
-  OrchidMycorrhizalNetworkDiagram,
-  OrchidSymbiosisSpectrumDiagram,
-  OrchidConservationDiagram,
-  ActivityEpiphyteSurveyDiagram,
-  // Moonlit Boat Race — Fluid Dynamics
-  BoatHullSpeedDiagram,
-  BoatDragTypesDiagram,
-  BoatRowingBiomechanicsDiagram,
-  ActivityBoatShapeDiagram,
-  // Haflong Blue Mountains — Atmospheric Optics
-  BlueMountainScatteringDiagram,
-  HazeFogComparisonDiagram,
-  AerialPerspectiveDiagram,
-  ActivityHillColorDiagram,
-  // Girl and Python — Reptile Biology
-  PythonEctothermyDiagram,
-  PythonPitOrganDiagram,
-  PythonConstrictionDiagram,
-  ActivityWildlifeSurveyDiagram,
-  // Brave Mithun — Domestication & Selective Breeding
-  MithunWildVsDomesticDiagram,
-  MithunSelectionDiagram,
-  MithunTraitChangeDiagram,
-  MithunKeystoneDiagram,
-  ActivityBreedingSimDiagram,
-  BreedingSimOutputDiagram,
-  // Sal Tree — Wood Science & Material Strength
-  SalHeartwoodDiagram,
-  SalCelluloseLigninDiagram,
-  SalGrainDirectionDiagram,
-  SalForestryDiagram,
-  ActivityWoodTestDiagram,
-  WoodStrengthOutputDiagram,
-  // Girl Who Painted Rain — Color Science & Pigments
-  PigmentAbsorptionDiagram,
-  SubtractiveMixingDiagram,
-  CapillaryActionDiagram,
-  RainColorVividDiagram,
-  ActivityColorMixDiagram,
-  ColorMixerOutputDiagram,
-  // Cloud Weaver of Tawang — Textiles & Weaving Technology
-  WarpWeftDiagram,
-  LoomMechanicsDiagram,
-  ThreadTensionDiagram,
-  PatternEncodingDiagram,
-  ActivityWeaveCardDiagram,
-  FabricAnalysisOutputDiagram,
-  // Seven Sisters — Geography & Maps
-  PoliticalVsPhysicalMapDiagram,
-  MapScaleDistanceDiagram,
-  ContourLinesDiagram,
-  NEIndiaStatesDiagram,
-  ActivityNeighborhoodMapDiagram,
-  NEIndiaAtlasOutputDiagram,
-  // Eri Silk — Silk Biology & Ethics
-  EriLifeCycleDiagram,
-  EriFibroinDiagram,
-  EriAhimsaDiagram,
-  EriSustainableFashionDiagram,
-  ActivitySilkStretchDiagram,
-  EriSilkOutputDiagram,
-  // First Rice — Agriculture & Crop Origins
-  RiceDomesticationDiagram,
-  RiceMendelDiagram,
-  RiceSeedSavingDiagram,
-  ActivityRiceSproutDiagram,
-  RiceGrowthOutputDiagram,
-  // Dhol Drum — Percussion Physics & Vibration
-  DholChladniDiagram,
-  DholSizePitchDiagram,
-  DholStrikeDiagram,
-  DholResonanceDiagram,
-  ActivityDrumBuildDiagram,
-  // Mountain Echoes — Sound Reflection
-  EchoDistanceDiagram,
-  ReverberationDiagram,
-  ValleyAcousticsDiagram,
-  ActivityEchoTimeDiagram,
-  EchoSpeedOutputDiagram,
-  // Ferryman's Riddle — Fluid Mechanics
-  LaminarTurbulentDiagram,
-  FerryVectorDiagram,
-  WhirlpoolEddyDiagram,
-  ActivityFloatPathDiagram,
-  FerryCrossingOutputDiagram,
-  // Little Potter — Ceramics & Material Science
-  ClayParticlesDiagram,
-  SinteringProcessDiagram,
-  GlazeChemistryDiagram,
-  ThermalShockDiagram,
-  ActivityClayTestDiagram,
-  PotteryOutputDiagram,
-  // Grandmother Remembered — Memory & Neuroscience
-  MemoryFormationDiagram,
-  ForgettingCurveDiagram,
-  MnemonicTechniquesDiagram,
-  ActivityMemoryTestDiagram,
-  MemoryOutputDiagram,
-  // Festival Lights — Energy & Light Technology
-  IncandescentVsLEDDiagram,
-  SolarCellBasicsDiagram,
-  EnergyEfficiencyDiagram,
-  ActivityLightCompareDiagram,
-  LightEfficiencyOutputDiagram,
-  // Music of Dimasa — Music Theory & Vibrations
-  PitchFrequencyDiagram,
-  RhythmDivisionDiagram,
-  TimbreDiagram,
-  ActivityStringPitchDiagram,
-  RhythmAnalyzerOutputDiagram,
-  // Flying Squirrel — Gliding & Aerodynamics
-  GlidingVsFlyingDiagram,
-  SquareCubeLawDiagram,
-  ActivityGliderTestDiagram,
-  GlideRatioOutputDiagram,
-  // Library — Python & Algorithms
-  StringSlicingDiagram,
-  TwoPointerDiagram,
-  BinarySearchDiagram,
-  SlidingWindowDiagram,
-  BFSDFSDiagram,
-  BubbleSortDiagram,
-  RecursionTreeDiagram,
-  DictCounterDiagram,
+// Lazy-loaded diagram registry — each diagram loads on demand
+// Uses Proxy to lazily create React.lazy components on first access
+const lazyMap: Record<string, () => Promise<{ default: ComponentType<any> }>> = {
+  LeopardGPSDiagram: () => import('../diagrams/LeopardGPSDiagram'),
+  LeopardCameraTrapDiagram: () => import('../diagrams/LeopardCameraTrapDiagram'),
+  LeopardMarkRecaptureDiagram: () => import('../diagrams/LeopardMarkRecaptureDiagram'),
+  LeopardConservationDiagram: () => import('../diagrams/LeopardConservationDiagram'),
+  ActivityTrackingDiagram: () => import('../diagrams/ActivityTrackingDiagram'),
+  SineWaveDiagram: () => import('../diagrams/SineWaveDiagram'),
+  SpectrogramDiagram: () => import('../diagrams/SpectrogramDiagram'),
+  NumPyRulerDiagram: () => import('../diagrams/NumPyRulerDiagram'),
+  PlotAnatomyDiagram: () => import('../diagrams/PlotAnatomyDiagram'),
+  VariablesDiagram: () => import('../diagrams/VariablesDiagram'),
+  AmplitudeModDiagram: () => import('../diagrams/AmplitudeModDiagram'),
+  CircuitDiagram: () => import('../diagrams/CircuitDiagram'),
+  WavelengthSpectrum: () => import('../diagrams/WavelengthSpectrum'),
+  PhotosynthesisDiagram: () => import('../diagrams/PhotosynthesisDiagram'),
+  PopulationGrowthCurve: () => import('../diagrams/PopulationGrowthCurve'),
+  SilkStructureDiagram: () => import('../diagrams/SilkStructureDiagram'),
+  MugaSilkFibroinDiagram: () => import('../diagrams/MugaSilkFibroinDiagram'),
+  MugaSilkNanostructureDiagram: () => import('../diagrams/MugaSilkNanostructureDiagram'),
+  MugaSilkProcessDiagram: () => import('../diagrams/MugaSilkProcessDiagram'),
+  MugaSilkEndemicDiagram: () => import('../diagrams/MugaSilkEndemicDiagram'),
+  ActivitySilkTestDiagram: () => import('../diagrams/ActivitySilkTestDiagram'),
+  FoodWebDiagram: () => import('../diagrams/FoodWebDiagram'),
+  RayleighScatteringDiagram: () => import('../diagrams/RayleighScatteringDiagram'),
+  MajuliErosionDepositionDiagram: () => import('../diagrams/MajuliErosionDepositionDiagram'),
+  MajuliFormationDiagram: () => import('../diagrams/MajuliFormationDiagram'),
+  MajuliShrinkingDiagram: () => import('../diagrams/MajuliShrinkingDiagram'),
+  MajuliProtectionDiagram: () => import('../diagrams/MajuliProtectionDiagram'),
+  ActivityErosionModelDiagram: () => import('../diagrams/ActivityErosionModelDiagram'),
+  RiverErosionDiagram: () => import('../diagrams/RiverErosionDiagram'),
+  RiverSourceDiagram: () => import('../diagrams/RiverSourceDiagram'),
+  RiverTransportDiagram: () => import('../diagrams/RiverTransportDiagram'),
+  RiverBraidedDiagram: () => import('../diagrams/RiverBraidedDiagram'),
+  RiverFloodplainDiagram: () => import('../diagrams/RiverFloodplainDiagram'),
+  RiverDeltaDiagram: () => import('../diagrams/RiverDeltaDiagram'),
+  RiverOxbowDiagram: () => import('../diagrams/RiverOxbowDiagram'),
+  EcholocationDiagram: () => import('../diagrams/EcholocationDiagram'),
+  MusicalWavesDiagram: () => import('../diagrams/MusicalWavesDiagram'),
+  NewtonForceDiagram: () => import('../diagrams/NewtonForceDiagram'),
+  CycloneCrossSectionDiagram: () => import('../diagrams/CycloneCrossSectionDiagram'),
+  FibonacciSpiralDiagram: () => import('../diagrams/FibonacciSpiralDiagram'),
+  CSSBoxModelDiagram: () => import('../diagrams/CSSBoxModelDiagram'),
+  KNNClassificationDiagram: () => import('../diagrams/KNNClassificationDiagram'),
+  AltitudeProfileDiagram: () => import('../diagrams/AltitudeProfileDiagram'),
+  FlowchartDiagram: () => import('../diagrams/FlowchartDiagram'),
+  FeatureExtractionDiagram: () => import('../diagrams/FeatureExtractionDiagram'),
+  FeatureWeightsDiagram: () => import('../diagrams/FeatureWeightsDiagram'),
+  TrainTestSplitDiagram: () => import('../diagrams/TrainTestSplitDiagram'),
+  PostmanSortingDiagram: () => import('../diagrams/PostmanSortingDiagram'),
+  DogVsCatDiagram: () => import('../diagrams/DogVsCatDiagram'),
+  DecisionTreeDiagram: () => import('../diagrams/DecisionTreeDiagram'),
+  LinearClassifierDiagram: () => import('../diagrams/LinearClassifierDiagram'),
+  NeuralNetworkDiagram: () => import('../diagrams/NeuralNetworkDiagram'),
+  TransformerAttentionDiagram: () => import('../diagrams/TransformerAttentionDiagram'),
+  TessellationDiagram: () => import('../diagrams/TessellationDiagram'),
+  FractalTreeDiagram: () => import('../diagrams/FractalTreeDiagram'),
+  SymmetryDiagram: () => import('../diagrams/SymmetryDiagram'),
+  VoronoiDiagram: () => import('../diagrams/VoronoiDiagram'),
+  MeanMedianModeDiagram: () => import('../diagrams/MeanMedianModeDiagram'),
+  StdDevDiagram: () => import('../diagrams/StdDevDiagram'),
+  CorrelationDiagram: () => import('../diagrams/CorrelationDiagram'),
+  HistogramDiagram: () => import('../diagrams/HistogramDiagram'),
+  OhmsLawDiagram: () => import('../diagrams/OhmsLawDiagram'),
+  HeatTransferDiagram: () => import('../diagrams/HeatTransferDiagram'),
+  DopplerEffectDiagram: () => import('../diagrams/DopplerEffectDiagram'),
+  AnimalCellDiagram: () => import('../diagrams/AnimalCellDiagram'),
+  AtomStructureDiagram: () => import('../diagrams/AtomStructureDiagram'),
+  BalanceScaleDiagram: () => import('../diagrams/BalanceScaleDiagram'),
+  CellComparisonDiagram: () => import('../diagrams/CellComparisonDiagram'),
+  DNADoubleHelixDiagram: () => import('../diagrams/DNADoubleHelixDiagram'),
+  EnergyBarChartDiagram: () => import('../diagrams/EnergyBarChartDiagram'),
+  EnergyPyramidDiagram: () => import('../diagrams/EnergyPyramidDiagram'),
+  HeartDiagram: () => import('../diagrams/HeartDiagram'),
+  IonicBondDiagram: () => import('../diagrams/IonicBondDiagram'),
+  LensRayDiagram: () => import('../diagrams/LensRayDiagram'),
+  MagneticFieldLinesDiagram: () => import('../diagrams/MagneticFieldLinesDiagram'),
+  PHScaleDiagram: () => import('../diagrams/PHScaleDiagram'),
+  PeriodicTableOverviewDiagram: () => import('../diagrams/PeriodicTableOverviewDiagram'),
+  PhaseChangeDiagram: () => import('../diagrams/PhaseChangeDiagram'),
+  PunnettSquareDiagram: () => import('../diagrams/PunnettSquareDiagram'),
+  PythagoreanDiagram: () => import('../diagrams/PythagoreanDiagram'),
+  SeriesParallelCircuitDiagram: () => import('../diagrams/SeriesParallelCircuitDiagram'),
+  TangentLineDiagram: () => import('../diagrams/TangentLineDiagram'),
+  TransverseLongitudinalDiagram: () => import('../diagrams/TransverseLongitudinalDiagram'),
+  UnitCircleDiagram: () => import('../diagrams/UnitCircleDiagram'),
+  WaveEquationDiagram: () => import('../diagrams/WaveEquationDiagram'),
+  InterferenceDiagram: () => import('../diagrams/InterferenceDiagram'),
+  MolecularMotionDiagram: () => import('../diagrams/MolecularMotionDiagram'),
+  StaticElectricityDiagram: () => import('../diagrams/StaticElectricityDiagram'),
+  CovalentBondDiagram: () => import('../diagrams/CovalentBondDiagram'),
+  BalancingEquationDiagram: () => import('../diagrams/BalancingEquationDiagram'),
+  CarbonCycleDiagram: () => import('../diagrams/CarbonCycleDiagram'),
+  NaturalSelectionDiagram: () => import('../diagrams/NaturalSelectionDiagram'),
+  BernoulliDiagram: () => import('../diagrams/BernoulliDiagram'),
+  BuoyancyDiagram: () => import('../diagrams/BuoyancyDiagram'),
+  CarbonBondingDiagram: () => import('../diagrams/CarbonBondingDiagram'),
+  CellMembraneDiagram: () => import('../diagrams/CellMembraneDiagram'),
+  ChromosomeDiagram: () => import('../diagrams/ChromosomeDiagram'),
+  CoordinatePlaneDiagram: () => import('../diagrams/CoordinatePlaneDiagram'),
+  DigestiveSystemDiagram: () => import('../diagrams/DigestiveSystemDiagram'),
+  DominantRecessiveDiagram: () => import('../diagrams/DominantRecessiveDiagram'),
+  EarthMagnetismDiagram: () => import('../diagrams/EarthMagnetismDiagram'),
+  ElectromagnetDiagram: () => import('../diagrams/ElectromagnetDiagram'),
+  ElectronShellDiagram: () => import('../diagrams/ElectronShellDiagram'),
+  EnergyProfileDiagram: () => import('../diagrams/EnergyProfileDiagram'),
+  FunctionalGroupsDiagram: () => import('../diagrams/FunctionalGroupsDiagram'),
+  GravitationalFieldDiagram: () => import('../diagrams/GravitationalFieldDiagram'),
+  HeightDistanceDiagram: () => import('../diagrams/HeightDistanceDiagram'),
+  HomologousStructuresDiagram: () => import('../diagrams/HomologousStructuresDiagram'),
+  HydraulicPressDiagram: () => import('../diagrams/HydraulicPressDiagram'),
+  IsotopeDiagram: () => import('../diagrams/IsotopeDiagram'),
+  LinearGraphDiagram: () => import('../diagrams/LinearGraphDiagram'),
+  LungsDiagram: () => import('../diagrams/LungsDiagram'),
+  MetallicBondDiagram: () => import('../diagrams/MetallicBondDiagram'),
+  MitosisDiagram: () => import('../diagrams/MitosisDiagram'),
+  MolecularShapeDiagram: () => import('../diagrams/MolecularShapeDiagram'),
+  MotorGeneratorDiagram: () => import('../diagrams/MotorGeneratorDiagram'),
+  MutationTypesDiagram: () => import('../diagrams/MutationTypesDiagram'),
+  NeuronDiagram: () => import('../diagrams/NeuronDiagram'),
+  NumberLineDiagram: () => import('../diagrams/NumberLineDiagram'),
+  OrbitalMechanicsDiagram: () => import('../diagrams/OrbitalMechanicsDiagram'),
+  PolymerChainDiagram: () => import('../diagrams/PolymerChainDiagram'),
+  PressureDepthDiagram: () => import('../diagrams/PressureDepthDiagram'),
+  ProbabilityScaleDiagram: () => import('../diagrams/ProbabilityScaleDiagram'),
+  ReactionTypesDiagram: () => import('../diagrams/ReactionTypesDiagram'),
+  SOHCAHTOADiagram: () => import('../diagrams/SOHCAHTOADiagram'),
+  SieveOfEratosthenesDiagram: () => import('../diagrams/SieveOfEratosthenesDiagram'),
+  SkeletonMuscleDiagram: () => import('../diagrams/SkeletonMuscleDiagram'),
+  SubatomicParticlesDiagram: () => import('../diagrams/SubatomicParticlesDiagram'),
+  TidesDiagram: () => import('../diagrams/TidesDiagram'),
+  TreeDiagramProbability: () => import('../diagrams/TreeDiagramProbability'),
+  TrigGraphsDiagram: () => import('../diagrams/TrigGraphsDiagram'),
+  VectorAdditionDiagram: () => import('../diagrams/VectorAdditionDiagram'),
+  AdaptationDiagram: () => import('../diagrams/AdaptationDiagram'),
+  AngleTypesDiagram: () => import('../diagrams/AngleTypesDiagram'),
+  AreaUnderCurveDiagram: () => import('../diagrams/AreaUnderCurveDiagram'),
+  DistanceFormulaDiagram: () => import('../diagrams/DistanceFormulaDiagram'),
+  EMCSquaredDiagram: () => import('../diagrams/EMCSquaredDiagram'),
+  LimitDiagram: () => import('../diagrams/LimitDiagram'),
+  BacteriaStructureDiagram: () => import('../diagrams/BacteriaStructureDiagram'),
+  BatteryCrossSectionDiagram: () => import('../diagrams/BatteryCrossSectionDiagram'),
+  BoyleLawDiagram: () => import('../diagrams/BoyleLawDiagram'),
+  CirclePropertiesDiagram: () => import('../diagrams/CirclePropertiesDiagram'),
+  CodonTableDiagram: () => import('../diagrams/CodonTableDiagram'),
+  CombinatoricsGridDiagram: () => import('../diagrams/CombinatoricsGridDiagram'),
+  ConicSectionsDiagram: () => import('../diagrams/ConicSectionsDiagram'),
+  DNAReplicationDiagram: () => import('../diagrams/DNAReplicationDiagram'),
+  DichotomousKeyDiagram: () => import('../diagrams/DichotomousKeyDiagram'),
+  DiffractionDiagram: () => import('../diagrams/DiffractionDiagram'),
+  ElementBoxDiagram: () => import('../diagrams/ElementBoxDiagram'),
+  EnergyConversionChainDiagram: () => import('../diagrams/EnergyConversionChainDiagram'),
+  ExpectedValueDiagram: () => import('../diagrams/ExpectedValueDiagram'),
+  EyeAnatomyDiagram: () => import('../diagrams/EyeAnatomyDiagram'),
+  FermentationDiagram: () => import('../diagrams/FermentationDiagram'),
+  FissionFusionDiagram: () => import('../diagrams/FissionFusionDiagram'),
+  FiveKingdomsDiagram: () => import('../diagrams/FiveKingdomsDiagram'),
+  FungiDiagram: () => import('../diagrams/FungiDiagram'),
+  HalfLifeDiagram: () => import('../diagrams/HalfLifeDiagram'),
+  HydroelectricDiagram: () => import('../diagrams/HydroelectricDiagram'),
+  LightClockDiagram: () => import('../diagrams/LightClockDiagram'),
+  MatrixMultiplicationDiagram: () => import('../diagrams/MatrixMultiplicationDiagram'),
+  MetalNonmetalDiagram: () => import('../diagrams/MetalNonmetalDiagram'),
+  MirrorReflectionDiagram: () => import('../diagrams/MirrorReflectionDiagram'),
+  ModularClockDiagram: () => import('../diagrams/ModularClockDiagram'),
+  NEIndiaBiomesDiagram: () => import('../diagrams/NEIndiaBiomesDiagram'),
+  NitrogenCycleDiagram: () => import('../diagrams/NitrogenCycleDiagram'),
+  NucleusStructureDiagram: () => import('../diagrams/NucleusStructureDiagram'),
+  ParticleModelDiagram: () => import('../diagrams/ParticleModelDiagram'),
+  PeriodicTrendsDiagram: () => import('../diagrams/PeriodicTrendsDiagram'),
+  PhaseTransitionDiagram: () => import('../diagrams/PhaseTransitionDiagram'),
+  PhylogeneticTreeDiagram: () => import('../diagrams/PhylogeneticTreeDiagram'),
+  RadioactiveDecayDiagram: () => import('../diagrams/RadioactiveDecayDiagram'),
+  RedoxDiagram: () => import('../diagrams/RedoxDiagram'),
+  SequencePatternDiagram: () => import('../diagrams/SequencePatternDiagram'),
+  SlopeInterceptDiagram: () => import('../diagrams/SlopeInterceptDiagram'),
+  TaxonomyHierarchyDiagram: () => import('../diagrams/TaxonomyHierarchyDiagram'),
+  TotalInternalReflectionDiagram: () => import('../diagrams/TotalInternalReflectionDiagram'),
+  TranscriptionDiagram: () => import('../diagrams/TranscriptionDiagram'),
+  TransformationMatrixDiagram: () => import('../diagrams/TransformationMatrixDiagram'),
+  TransformationsDiagram: () => import('../diagrams/TransformationsDiagram'),
+  TranslationDiagram: () => import('../diagrams/TranslationDiagram'),
+  VirusReplicationDiagram: () => import('../diagrams/VirusReplicationDiagram'),
+  VoltaicCellDiagram: () => import('../diagrams/VoltaicCellDiagram'),
+  Volume3DDiagram: () => import('../diagrams/Volume3DDiagram'),
+  WorkForceDiagram: () => import('../diagrams/WorkForceDiagram'),
+  ClimateFactorsDiagram: () => import('../diagrams/ClimateFactorsDiagram'),
+  ClimateZonesDiagram: () => import('../diagrams/ClimateZonesDiagram'),
+  EarthLayersDiagram: () => import('../diagrams/EarthLayersDiagram'),
+  LatLongGridDiagram: () => import('../diagrams/LatLongGridDiagram'),
+  PlateBoundaryDiagram: () => import('../diagrams/PlateBoundaryDiagram'),
+  RockCycleDiagram: () => import('../diagrams/RockCycleDiagram'),
+  SeismicWavesDiagram: () => import('../diagrams/SeismicWavesDiagram'),
+  SoilHorizonDiagram: () => import('../diagrams/SoilHorizonDiagram'),
+  TectonicPlatesDiagram: () => import('../diagrams/TectonicPlatesDiagram'),
+  WaterCycleDiagram: () => import('../diagrams/WaterCycleDiagram'),
+  ContourMapDiagram: () => import('../diagrams/ContourMapDiagram'),
+  DemographicTransitionDiagram: () => import('../diagrams/DemographicTransitionDiagram'),
+  MapProjectionDiagram: () => import('../diagrams/MapProjectionDiagram'),
+  MonsoonDiagram: () => import('../diagrams/MonsoonDiagram'),
+  MonsoonHeatingDiagram: () => import('../diagrams/MonsoonHeatingDiagram'),
+  MonsoonReversalDiagram: () => import('../diagrams/MonsoonReversalDiagram'),
+  MonsoonJetStreamDiagram: () => import('../diagrams/MonsoonJetStreamDiagram'),
+  MonsoonFailureDiagram: () => import('../diagrams/MonsoonFailureDiagram'),
+  ActivityMonsoonModelDiagram: () => import('../diagrams/ActivityMonsoonModelDiagram'),
+  MagnitudeStaircaseDiagram: () => import('../diagrams/MagnitudeStaircaseDiagram'),
+  SunsetPathDiagram: () => import('../diagrams/SunsetPathDiagram'),
+  MilkScatteringDiagram: () => import('../diagrams/MilkScatteringDiagram'),
+  SunsetSimulatorOutputDiagram: () => import('../diagrams/SunsetSimulatorOutputDiagram'),
+  MieVsRayleighDiagram: () => import('../diagrams/MieVsRayleighDiagram'),
+  MirageDiagram: () => import('../diagrams/MirageDiagram'),
+  RainbowRaindropDiagram: () => import('../diagrams/RainbowRaindropDiagram'),
+  BioluminescenceReactionDiagram: () => import('../diagrams/BioluminescenceReactionDiagram'),
+  FireflySyncDiagram: () => import('../diagrams/FireflySyncDiagram'),
+  FireflyCircuitBasicDiagram: () => import('../diagrams/FireflyCircuitBasicDiagram'),
+  FireflyPWMDiagram: () => import('../diagrams/FireflyPWMDiagram'),
+  FireflyParallelDiagram: () => import('../diagrams/FireflyParallelDiagram'),
+  FireflyRandomDiagram: () => import('../diagrams/FireflyRandomDiagram'),
+  FireflySyncStepsDiagram: () => import('../diagrams/FireflySyncStepsDiagram'),
+  FireflyJarDiagram: () => import('../diagrams/FireflyJarDiagram'),
+  FireflyForLoopDiagram: () => import('../diagrams/FireflyForLoopDiagram'),
+  FireflyArrayDiagram: () => import('../diagrams/FireflyArrayDiagram'),
+  FireflySineBreatheDiagram: () => import('../diagrams/FireflySineBreatheDiagram'),
+  FireflyPhaseOffsetDiagram: () => import('../diagrams/FireflyPhaseOffsetDiagram'),
+  FireflyKuramotoDiagram: () => import('../diagrams/FireflyKuramotoDiagram'),
+  FireflyProductionDiagram: () => import('../diagrams/FireflyProductionDiagram'),
+  FireflyEfficiencyDiagram: () => import('../diagrams/FireflyEfficiencyDiagram'),
+  FireflySpeciesCodeDiagram: () => import('../diagrams/FireflySpeciesCodeDiagram'),
+  FireflyLuciferinPathwayDiagram: () => import('../diagrams/FireflyLuciferinPathwayDiagram'),
+  FireflyNeuralControlDiagram: () => import('../diagrams/FireflyNeuralControlDiagram'),
+  FireflyNetworkProtocolDiagram: () => import('../diagrams/FireflyNetworkProtocolDiagram'),
+  FireflyConservationDiagram: () => import('../diagrams/FireflyConservationDiagram'),
+  JapiTopViewDiagram: () => import('../diagrams/JapiTopViewDiagram'),
+  ConicalShapeDiagram: () => import('../diagrams/ConicalShapeDiagram'),
+  SquareVsTriangleDiagram: () => import('../diagrams/SquareVsTriangleDiagram'),
+  WeavePatternDiagram: () => import('../diagrams/WeavePatternDiagram'),
+  JapiHexagonDiagram: () => import('../diagrams/JapiHexagonDiagram'),
+  ActivityJapiMakeDiagram: () => import('../diagrams/ActivityJapiMakeDiagram'),
+  AlgorithmStepsDiagram: () => import('../diagrams/AlgorithmStepsDiagram'),
+  RhythmPlayerDiagram: () => import('../diagrams/RhythmPlayerDiagram'),
+  ElephantRumblePlayerDiagram: () => import('../diagrams/ElephantRumblePlayerDiagram'),
+  ElephantGroundWaveDiagram: () => import('../diagrams/ElephantGroundWaveDiagram'),
+  ElephantSpectrogramDiagram: () => import('../diagrams/ElephantSpectrogramDiagram'),
+  CoriolisEffectDiagram: () => import('../diagrams/CoriolisEffectDiagram'),
+  StormSurgeDiagram: () => import('../diagrams/StormSurgeDiagram'),
+  MountainTemperatureDiagram: () => import('../diagrams/MountainTemperatureDiagram'),
+  MountainPressureDiagram: () => import('../diagrams/MountainPressureDiagram'),
+  MountainLapseRateDiagram: () => import('../diagrams/MountainLapseRateDiagram'),
+  MountainOxygenDiagram: () => import('../diagrams/MountainOxygenDiagram'),
+  MountainWeatherDiagram: () => import('../diagrams/MountainWeatherDiagram'),
+  MountainBodyAdaptDiagram: () => import('../diagrams/MountainBodyAdaptDiagram'),
+  MountainZonationDiagram: () => import('../diagrams/MountainZonationDiagram'),
+  MountainTreelineDiagram: () => import('../diagrams/MountainTreelineDiagram'),
+  MountainBarometricDiagram: () => import('../diagrams/MountainBarometricDiagram'),
+  MountainGasLawDiagram: () => import('../diagrams/MountainGasLawDiagram'),
+  MountainO2PartialDiagram: () => import('../diagrams/MountainO2PartialDiagram'),
+  MountainWindChillDiagram: () => import('../diagrams/MountainWindChillDiagram'),
+  MountainRadiationDiagram: () => import('../diagrams/MountainRadiationDiagram'),
+  MountainUVDiagram: () => import('../diagrams/MountainUVDiagram'),
+  BeeColonyDiagram: () => import('../diagrams/BeeColonyDiagram'),
+  BeeWaggleDanceDiagram: () => import('../diagrams/BeeWaggleDanceDiagram'),
+  BeePollinationDiagram: () => import('../diagrams/BeePollinationDiagram'),
+  BeeHoneymakingDiagram: () => import('../diagrams/BeeHoneymakingDiagram'),
+  BeeHiveTempDiagram: () => import('../diagrams/BeeHiveTempDiagram'),
+  BeeLifeCycleDiagram: () => import('../diagrams/BeeLifeCycleDiagram'),
+  BeeAnatomyDiagram: () => import('../diagrams/BeeAnatomyDiagram'),
+  BeeFlowerCoevolutionDiagram: () => import('../diagrams/BeeFlowerCoevolutionDiagram'),
+  BeeNavigationDiagram: () => import('../diagrams/BeeNavigationDiagram'),
+  BeeCommunicationDiagram: () => import('../diagrams/BeeCommunicationDiagram'),
+  BeeEcosystemServiceDiagram: () => import('../diagrams/BeeEcosystemServiceDiagram'),
+  BeeColonyCollapseDiagram: () => import('../diagrams/BeeColonyCollapseDiagram'),
+  BeeForagingModelDiagram: () => import('../diagrams/BeeForagingModelDiagram'),
+  BeePopulationDynamicsDiagram: () => import('../diagrams/BeePopulationDynamicsDiagram'),
+  BeeGeneticsDiagram: () => import('../diagrams/BeeGeneticsDiagram'),
+  BeeSwarmIntelligenceDiagram: () => import('../diagrams/BeeSwarmIntelligenceDiagram'),
+  BeeVenomChemistryDiagram: () => import('../diagrams/BeeVenomChemistryDiagram'),
+  BeeRobotDiagram: () => import('../diagrams/BeeRobotDiagram'),
+  BeeMonitoringDiagram: () => import('../diagrams/BeeMonitoringDiagram'),
+  BeePathOptimizationDiagram: () => import('../diagrams/BeePathOptimizationDiagram'),
+  BeeDiseaseDetectionDiagram: () => import('../diagrams/BeeDiseaseDetectionDiagram'),
+  BeePollinationNetworkDiagram: () => import('../diagrams/BeePollinationNetworkDiagram'),
+  BeeConservationPlanDiagram: () => import('../diagrams/BeeConservationPlanDiagram'),
+  BeeDataDashboardDiagram: () => import('../diagrams/BeeDataDashboardDiagram'),
+  WoodpeckerImpactDiagram: () => import('../diagrams/WoodpeckerImpactDiagram'),
+  WoodpeckerSkullLayersDiagram: () => import('../diagrams/WoodpeckerSkullLayersDiagram'),
+  WoodpeckerHyoidDiagram: () => import('../diagrams/WoodpeckerHyoidDiagram'),
+  WoodpeckerSpongyBoneDiagram: () => import('../diagrams/WoodpeckerSpongyBoneDiagram'),
+  WoodpeckerBrainFitDiagram: () => import('../diagrams/WoodpeckerBrainFitDiagram'),
+  WoodpeckerHelmetDiagram: () => import('../diagrams/WoodpeckerHelmetDiagram'),
+  WoodpeckerForceMassDiagram: () => import('../diagrams/WoodpeckerForceMassDiagram'),
+  WoodpeckerDecelerationDiagram: () => import('../diagrams/WoodpeckerDecelerationDiagram'),
+  WoodpeckerTongueDiagram: () => import('../diagrams/WoodpeckerTongueDiagram'),
+  WoodpeckerDrumPatternDiagram: () => import('../diagrams/WoodpeckerDrumPatternDiagram'),
+  WoodpeckerMaterialsDiagram: () => import('../diagrams/WoodpeckerMaterialsDiagram'),
+  WoodpeckerEvolutionDiagram: () => import('../diagrams/WoodpeckerEvolutionDiagram'),
+  WoodpeckerStressDistributionDiagram: () => import('../diagrams/WoodpeckerStressDistributionDiagram'),
+  WoodpeckerImpulseTheoryDiagram: () => import('../diagrams/WoodpeckerImpulseTheoryDiagram'),
+  WoodpeckerResonanceDiagram: () => import('../diagrams/WoodpeckerResonanceDiagram'),
+  WoodpeckerEnergyAbsorptionDiagram: () => import('../diagrams/WoodpeckerEnergyAbsorptionDiagram'),
+  WoodpeckerRotationalForceDiagram: () => import('../diagrams/WoodpeckerRotationalForceDiagram'),
+  WoodpeckerFatigueAnalysisDiagram: () => import('../diagrams/WoodpeckerFatigueAnalysisDiagram'),
+  WoodpeckerBioInspirationDiagram: () => import('../diagrams/WoodpeckerBioInspirationDiagram'),
+  WoodpeckerCrashTestDiagram: () => import('../diagrams/WoodpeckerCrashTestDiagram'),
+  WoodpeckerMetamaterialDiagram: () => import('../diagrams/WoodpeckerMetamaterialDiagram'),
+  WoodpeckerSensorDesignDiagram: () => import('../diagrams/WoodpeckerSensorDesignDiagram'),
+  WoodpeckerSafetyStandardDiagram: () => import('../diagrams/WoodpeckerSafetyStandardDiagram'),
+  WoodpeckerCapstoneProjectDiagram: () => import('../diagrams/WoodpeckerCapstoneProjectDiagram'),
+  ActivityEggDropDiagram: () => import('../diagrams/ActivityEggDropDiagram'),
+  ActivityStarCountDiagram: () => import('../diagrams/ActivityStarCountDiagram'),
+  ActivityFlowerWatchDiagram: () => import('../diagrams/ActivityFlowerWatchDiagram'),
+  ActivityVortexDiagram: () => import('../diagrams/ActivityVortexDiagram'),
+  ActivityBalloonDiagram: () => import('../diagrams/ActivityBalloonDiagram'),
+  ActivityMapDrawDiagram: () => import('../diagrams/ActivityMapDrawDiagram'),
+  ActivityTreeMeasureDiagram: () => import('../diagrams/ActivityTreeMeasureDiagram'),
+  ActivityMilkGlassDiagram: () => import('../diagrams/ActivityMilkGlassDiagram'),
+  ActivityEarGroundDiagram: () => import('../diagrams/ActivityEarGroundDiagram'),
+  ActivityFlashlightSyncDiagram: () => import('../diagrams/ActivityFlashlightSyncDiagram'),
+  LoktakPhumdiDiagram: () => import('../diagrams/LoktakPhumdiDiagram'),
+  LoktakSangaiDiagram: () => import('../diagrams/LoktakSangaiDiagram'),
+  LoktakDamImpactDiagram: () => import('../diagrams/LoktakDamImpactDiagram'),
+  LoktakConservationDiagram: () => import('../diagrams/LoktakConservationDiagram'),
+  ActivityWetlandModelDiagram: () => import('../diagrams/ActivityWetlandModelDiagram'),
+  FluteStandingWaveDiagram: () => import('../diagrams/FluteStandingWaveDiagram'),
+  FluteFingerHoleDiagram: () => import('../diagrams/FluteFingerHoleDiagram'),
+  FluteOvertonesDiagram: () => import('../diagrams/FluteOvertonesDiagram'),
+  FluteDesignDiagram: () => import('../diagrams/FluteDesignDiagram'),
+  ActivityFluteBuildDiagram: () => import('../diagrams/ActivityFluteBuildDiagram'),
+  BambooVortexDiagram: () => import('../diagrams/BambooVortexDiagram'),
+  BambooResonanceDiagram: () => import('../diagrams/BambooResonanceDiagram'),
+  BambooHarmonicsDiagram: () => import('../diagrams/BambooHarmonicsDiagram'),
+  BambooMaterialDiagram: () => import('../diagrams/BambooMaterialDiagram'),
+  ActivityBambooFluteDiagram: () => import('../diagrams/ActivityBambooFluteDiagram'),
+  HilsaMigrationDiagram: () => import('../diagrams/HilsaMigrationDiagram'),
+  HilsaOlfactoryDiagram: () => import('../diagrams/HilsaOlfactoryDiagram'),
+  HilsaPopulationDiagram: () => import('../diagrams/HilsaPopulationDiagram'),
+  HilsaRiverHealthDiagram: () => import('../diagrams/HilsaRiverHealthDiagram'),
+  ActivityFishCountDiagram: () => import('../diagrams/ActivityFishCountDiagram'),
+  FishOxygenDiagram: () => import('../diagrams/FishOxygenDiagram'),
+  FishJumpReasonsDiagram: () => import('../diagrams/FishJumpReasonsDiagram'),
+  FishBiomechanicsDiagram: () => import('../diagrams/FishBiomechanicsDiagram'),
+  FishRiverHealthDiagram: () => import('../diagrams/FishRiverHealthDiagram'),
+  ActivityFishObserveDiagram: () => import('../diagrams/ActivityFishObserveDiagram'),
+  AltitudeAdaptationDiagram: () => import('../diagrams/AltitudeAdaptationDiagram'),
+  BanyanRootsDiagram: () => import('../diagrams/BanyanRootsDiagram'),
+  StarBrightnessStepDiagram: () => import('../diagrams/StarBrightnessStepDiagram'),
+  StarBortleScaleDiagram: () => import('../diagrams/StarBortleScaleDiagram'),
+  StarSkyQualityDiagram: () => import('../diagrams/StarSkyQualityDiagram'),
+  ChurningEmulsionDiagram: () => import('../diagrams/ChurningEmulsionDiagram'),
+  DensityColumnDiagram: () => import('../diagrams/DensityColumnDiagram'),
+  PHScaleChurningDiagram: () => import('../diagrams/PHScaleChurningDiagram'),
+  DistillationDiagram: () => import('../diagrams/DistillationDiagram'),
+  ActivityDensityColumnDiagram: () => import('../diagrams/ActivityDensityColumnDiagram'),
+  ChurningCentrifugeDiagram: () => import('../diagrams/ChurningCentrifugeDiagram'),
+  ChurningChromatographyDiagram: () => import('../diagrams/ChurningChromatographyDiagram'),
+  ChurningColloidDiagram: () => import('../diagrams/ChurningColloidDiagram'),
+  ChurningDensityColumnDiagram: () => import('../diagrams/ChurningDensityColumnDiagram'),
+  ChurningDistillationDiagram: () => import('../diagrams/ChurningDistillationDiagram'),
+  ChurningEmulsifierDiagram: () => import('../diagrams/ChurningEmulsifierDiagram'),
+  ChurningIntermolecularDiagram: () => import('../diagrams/ChurningIntermolecularDiagram'),
+  ChurningMassSpecDiagram: () => import('../diagrams/ChurningMassSpecDiagram'),
+  ChurningPolarityDiagram: () => import('../diagrams/ChurningPolarityDiagram'),
+  ChurningSeparationPipelineDiagram: () => import('../diagrams/ChurningSeparationPipelineDiagram'),
+  ChurningTitrationDiagram: () => import('../diagrams/ChurningTitrationDiagram'),
+  SlingCircularMotionDiagram: () => import('../diagrams/SlingCircularMotionDiagram'),
+  ProjectileArcDiagram: () => import('../diagrams/ProjectileArcDiagram'),
+  KineticEnergyComparisonDiagram: () => import('../diagrams/KineticEnergyComparisonDiagram'),
+  ImpactPressureDiagram: () => import('../diagrams/ImpactPressureDiagram'),
+  ActivitySlingRangeDiagram: () => import('../diagrams/ActivitySlingRangeDiagram'),
+  SymmetryTypesMandala: () => import('../diagrams/SymmetryTypesMandala'),
+  TessellationMandala: () => import('../diagrams/TessellationMandala'),
+  FractalZoomDiagram: () => import('../diagrams/FractalZoomDiagram'),
+  GoldenRatioNatureDiagram: () => import('../diagrams/GoldenRatioNatureDiagram'),
+  ActivityMandalaDiagram: () => import('../diagrams/ActivityMandalaDiagram'),
+  TileAnglesDiagram: () => import('../diagrams/TileAnglesDiagram'),
+  SymmetryOperationsDiagram: () => import('../diagrams/SymmetryOperationsDiagram'),
+  WallpaperGroupsDiagram: () => import('../diagrams/WallpaperGroupsDiagram'),
+  CrystalSymmetryDiagram: () => import('../diagrams/CrystalSymmetryDiagram'),
+  ActivityTessellationDiagram: () => import('../diagrams/ActivityTessellationDiagram'),
+  HanumanTectonicDiagram: () => import('../diagrams/HanumanTectonicDiagram'),
+  HanumanAltitudeZonesDiagram: () => import('../diagrams/HanumanAltitudeZonesDiagram'),
+  HanumanDichotomousKeyDiagram: () => import('../diagrams/HanumanDichotomousKeyDiagram'),
+  HanumanMedicineDiagram: () => import('../diagrams/HanumanMedicineDiagram'),
+  ActivityHerbIdentifyDiagram: () => import('../diagrams/ActivityHerbIdentifyDiagram'),
+  AstrolabeSundialDiagram: () => import('../diagrams/AstrolabeSundialDiagram'),
+  AstrolabeProjectionDiagram: () => import('../diagrams/AstrolabeProjectionDiagram'),
+  AstrolabeCelestialNavDiagram: () => import('../diagrams/AstrolabeCelestialNavDiagram'),
+  AstrolabeFunctionsDiagram: () => import('../diagrams/AstrolabeFunctionsDiagram'),
+  ActivityStarNavigateDiagram: () => import('../diagrams/ActivityStarNavigateDiagram'),
+  RavanaNeuronDiagram: () => import('../diagrams/RavanaNeuronDiagram'),
+  RavanaParallelDiagram: () => import('../diagrams/RavanaParallelDiagram'),
+  RavanaCPUGPUDiagram: () => import('../diagrams/RavanaCPUGPUDiagram'),
+  RavanaNeuralNetDiagram: () => import('../diagrams/RavanaNeuralNetDiagram'),
+  ActivityReactionTimeDiagram: () => import('../diagrams/ActivityReactionTimeDiagram'),
+  ArkBuoyancyDiagram: () => import('../diagrams/ArkBuoyancyDiagram'),
+  ArkCapacityDiagram: () => import('../diagrams/ArkCapacityDiagram'),
+  ArkEcosystemDiagram: () => import('../diagrams/ArkEcosystemDiagram'),
+  ArkBiodiversityDiagram: () => import('../diagrams/ArkBiodiversityDiagram'),
+  ActivityFloatTestDiagram: () => import('../diagrams/ActivityFloatTestDiagram'),
+  BodhiSeedCuttingDiagram: () => import('../diagrams/BodhiSeedCuttingDiagram'),
+  BodhiDNACloneDiagram: () => import('../diagrams/BodhiDNACloneDiagram'),
+  BodhiGraftingDiagram: () => import('../diagrams/BodhiGraftingDiagram'),
+  BodhiCRISPRDiagram: () => import('../diagrams/BodhiCRISPRDiagram'),
+  ActivityCuttingDiagram: () => import('../diagrams/ActivityCuttingDiagram'),
+  DharmaWheelFrictionDiagram: () => import('../diagrams/DharmaWheelFrictionDiagram'),
+  DharmaTorqueDiagram: () => import('../diagrams/DharmaTorqueDiagram'),
+  DharmaGyroscopeDiagram: () => import('../diagrams/DharmaGyroscopeDiagram'),
+  DharmaFlywheelDiagram: () => import('../diagrams/DharmaFlywheelDiagram'),
+  ActivitySpinningTopDiagram: () => import('../diagrams/ActivitySpinningTopDiagram'),
+  BellSoundWaveDiagram: () => import('../diagrams/BellSoundWaveDiagram'),
+  BellFrequencyDiagram: () => import('../diagrams/BellFrequencyDiagram'),
+  BellHarmonicsDiagram: () => import('../diagrams/BellHarmonicsDiagram'),
+  BellFourierDiagram: () => import('../diagrams/BellFourierDiagram'),
+  ActivityBellStrikeDiagram: () => import('../diagrams/ActivityBellStrikeDiagram'),
+  AngulimalaNeuroplasticityDiagram: () => import('../diagrams/AngulimalaNeuroplasticityDiagram'),
+  AngulimalaHabitPathwayDiagram: () => import('../diagrams/AngulimalaHabitPathwayDiagram'),
+  AngulimalaFMRIDiagram: () => import('../diagrams/AngulimalaFMRIDiagram'),
+  AngulimalaReinforcementDiagram: () => import('../diagrams/AngulimalaReinforcementDiagram'),
+  ActivityHabitTrackerDiagram: () => import('../diagrams/ActivityHabitTrackerDiagram'),
+  VimanaLiftDragDiagram: () => import('../diagrams/VimanaLiftDragDiagram'),
+  VimanaBernoulliDiagram: () => import('../diagrams/VimanaBernoulliDiagram'),
+  VimanaJetEngineDiagram: () => import('../diagrams/VimanaJetEngineDiagram'),
+  VimanaRocketDiagram: () => import('../diagrams/VimanaRocketDiagram'),
+  ActivityPaperPlaneDiagram: () => import('../diagrams/ActivityPaperPlaneDiagram'),
+  AgniCombustionTriangleDiagram: () => import('../diagrams/AgniCombustionTriangleDiagram'),
+  AgniFlameColorDiagram: () => import('../diagrams/AgniFlameColorDiagram'),
+  AgniHeatTransferDiagram: () => import('../diagrams/AgniHeatTransferDiagram'),
+  AgniSpectroscopyDiagram: () => import('../diagrams/AgniSpectroscopyDiagram'),
+  ActivityCandleDiagram: () => import('../diagrams/ActivityCandleDiagram'),
+  BabelForcesDiagram: () => import('../diagrams/BabelForcesDiagram'),
+  BabelBucklingDiagram: () => import('../diagrams/BabelBucklingDiagram'),
+  BabelSkyscraperDiagram: () => import('../diagrams/BabelSkyscraperDiagram'),
+  BabelNLPDiagram: () => import('../diagrams/BabelNLPDiagram'),
+  ActivityTowerBuildDiagram: () => import('../diagrams/ActivityTowerBuildDiagram'),
+  AlgebraBalanceScaleDiagram: () => import('../diagrams/AlgebraBalanceScaleDiagram'),
+  AlgebraLinearDiagram: () => import('../diagrams/AlgebraLinearDiagram'),
+  AlgebraQuadraticDiagram: () => import('../diagrams/AlgebraQuadraticDiagram'),
+  AlgebraAlgorithmDiagram: () => import('../diagrams/AlgebraAlgorithmDiagram'),
+  ActivityBalanceDiagram: () => import('../diagrams/ActivityBalanceDiagram'),
+  BethlehemMagnitudeDiagram: () => import('../diagrams/BethlehemMagnitudeDiagram'),
+  BethlehemConjunctionDiagram: () => import('../diagrams/BethlehemConjunctionDiagram'),
+  BethlehemCelestialNavDiagram: () => import('../diagrams/BethlehemCelestialNavDiagram'),
+  BethlehemKeplerDiagram: () => import('../diagrams/BethlehemKeplerDiagram'),
+  ActivityStarFinderDiagram: () => import('../diagrams/ActivityStarFinderDiagram'),
+  RedSeaTideDiagram: () => import('../diagrams/RedSeaTideDiagram'),
+  RedSeaWindSetdownDiagram: () => import('../diagrams/RedSeaWindSetdownDiagram'),
+  RedSeaCFDDiagram: () => import('../diagrams/RedSeaCFDDiagram'),
+  RedSeaCrossSectionDiagram: () => import('../diagrams/RedSeaCrossSectionDiagram'),
+  ActivityTideModelDiagram: () => import('../diagrams/ActivityTideModelDiagram'),
+  ZamzamAquiferDiagram: () => import('../diagrams/ZamzamAquiferDiagram'),
+  ZamzamPorosityDiagram: () => import('../diagrams/ZamzamPorosityDiagram'),
+  ZamzamDarcyLawDiagram: () => import('../diagrams/ZamzamDarcyLawDiagram'),
+  ZamzamWaterCycleDiagram: () => import('../diagrams/ZamzamWaterCycleDiagram'),
+  ActivityWellModelDiagram: () => import('../diagrams/ActivityWellModelDiagram'),
+  MuezzinInverseSquareDiagram: () => import('../diagrams/MuezzinInverseSquareDiagram'),
+  MuezzinDomeAcousticsDiagram: () => import('../diagrams/MuezzinDomeAcousticsDiagram'),
+  MuezzinSpeakerDiagram: () => import('../diagrams/MuezzinSpeakerDiagram'),
+  MuezzinCityPropagationDiagram: () => import('../diagrams/MuezzinCityPropagationDiagram'),
+  ActivitySoundDistanceDiagram: () => import('../diagrams/ActivitySoundDistanceDiagram'),
+  ForestSuccessionDiagram: () => import('../diagrams/ForestSuccessionDiagram'),
+  ForestCarbonCycleDiagram: () => import('../diagrams/ForestCarbonCycleDiagram'),
+  ForestSoilLayersDiagram: () => import('../diagrams/ForestSoilLayersDiagram'),
+  ForestScalingDiagram: () => import('../diagrams/ForestScalingDiagram'),
+  ActivityTreePlantDiagram: () => import('../diagrams/ActivityTreePlantDiagram'),
+  BridgeRootGrowthDiagram: () => import('../diagrams/BridgeRootGrowthDiagram'),
+  BridgeTensileStrengthDiagram: () => import('../diagrams/BridgeTensileStrengthDiagram'),
+  BridgeLoadDistributionDiagram: () => import('../diagrams/BridgeLoadDistributionDiagram'),
+  BridgeTimelineDiagram: () => import('../diagrams/BridgeTimelineDiagram'),
+  ActivityBridgeModelDiagram: () => import('../diagrams/ActivityBridgeModelDiagram'),
+  DolphinEcholocationDiagram: () => import('../diagrams/DolphinEcholocationDiagram'),
+  DolphinSonarWaveDiagram: () => import('../diagrams/DolphinSonarWaveDiagram'),
+  DolphinArduinoSensorDiagram: () => import('../diagrams/DolphinArduinoSensorDiagram'),
+  DolphinAdaptationDiagram: () => import('../diagrams/DolphinAdaptationDiagram'),
+  ActivitySonarDiagram: () => import('../diagrams/ActivitySonarDiagram'),
+  KiteLiftDiagram: () => import('../diagrams/KiteLiftDiagram'),
+  KiteDragForceDiagram: () => import('../diagrams/KiteDragForceDiagram'),
+  KiteShapesDiagram: () => import('../diagrams/KiteShapesDiagram'),
+  KiteWindDiagram: () => import('../diagrams/KiteWindDiagram'),
+  ActivityKiteBuildDiagram: () => import('../diagrams/ActivityKiteBuildDiagram'),
+  CloudFormationDiagram: () => import('../diagrams/CloudFormationDiagram'),
+  CloudRainProcessDiagram: () => import('../diagrams/CloudRainProcessDiagram'),
+  CloudSeedingDiagram: () => import('../diagrams/CloudSeedingDiagram'),
+  CloudTypesDiagram: () => import('../diagrams/CloudTypesDiagram'),
+  ActivityCloudJarDiagram: () => import('../diagrams/ActivityCloudJarDiagram'),
+  AeroFourForcesDiagram: () => import('../diagrams/AeroFourForcesDiagram'),
+  AeroBernoulliDiagram: () => import('../diagrams/AeroBernoulliDiagram'),
+  AeroWingShapesDiagram: () => import('../diagrams/AeroWingShapesDiagram'),
+  BrainNeuronDiagram: () => import('../diagrams/BrainNeuronDiagram'),
+  BrainSynapseDiagram: () => import('../diagrams/BrainSynapseDiagram'),
+  BrainPlasticityDiagram: () => import('../diagrams/BrainPlasticityDiagram'),
+  GeoMountainGrowthDiagram: () => import('../diagrams/GeoMountainGrowthDiagram'),
+  GeoVolcanoDiagram: () => import('../diagrams/GeoVolcanoDiagram'),
+  GeoFossilDiagram: () => import('../diagrams/GeoFossilDiagram'),
+  GeoErosionProcessDiagram: () => import('../diagrams/GeoErosionProcessDiagram'),
+  HydroAquiferDiagram: () => import('../diagrams/HydroAquiferDiagram'),
+  HydroPurificationDiagram: () => import('../diagrams/HydroPurificationDiagram'),
+  HydroGroundwaterDiagram: () => import('../diagrams/HydroGroundwaterDiagram'),
+  HydroWellDiagram: () => import('../diagrams/HydroWellDiagram'),
+  HydroRiverStagesDiagram: () => import('../diagrams/HydroRiverStagesDiagram'),
+  HydroFloodDroughtDiagram: () => import('../diagrams/HydroFloodDroughtDiagram'),
+  HydroDesalinationDiagram: () => import('../diagrams/HydroDesalinationDiagram'),
+  StructForcesDiagram: () => import('../diagrams/StructForcesDiagram'),
+  StructTriangleDiagram: () => import('../diagrams/StructTriangleDiagram'),
+  StructSkyscraperDiagram: () => import('../diagrams/StructSkyscraperDiagram'),
+  RotTorqueDiagram: () => import('../diagrams/RotTorqueDiagram'),
+  RotGyroscopeDiagram: () => import('../diagrams/RotGyroscopeDiagram'),
+  RotGearsDiagram: () => import('../diagrams/RotGearsDiagram'),
+  SonarEchoDiagram: () => import('../diagrams/SonarEchoDiagram'),
+  SonarBatDiagram: () => import('../diagrams/SonarBatDiagram'),
+  SonarSensorDiagram: () => import('../diagrams/SonarSensorDiagram'),
+  TideMoonDiagram: () => import('../diagrams/TideMoonDiagram'),
+  TideSpringNeapDiagram: () => import('../diagrams/TideSpringNeapDiagram'),
+  OceanCurrentDiagram: () => import('../diagrams/OceanCurrentDiagram'),
+  OceanWaveAnatomyDiagram: () => import('../diagrams/OceanWaveAnatomyDiagram'),
+  OceanStormSurgeDiagram: () => import('../diagrams/OceanStormSurgeDiagram'),
+  OceanDepthZonesDiagram: () => import('../diagrams/OceanDepthZonesDiagram'),
+  OceanCoralReefDiagram: () => import('../diagrams/OceanCoralReefDiagram'),
+  OceanFunctionsDiagram: () => import('../diagrams/OceanFunctionsDiagram'),
+  ClimateVsWeatherDiagram: () => import('../diagrams/ClimateVsWeatherDiagram'),
+  ClimateChangeDiagram: () => import('../diagrams/ClimateChangeDiagram'),
+  MapGPSSatelliteDiagram: () => import('../diagrams/MapGPSSatelliteDiagram'),
+  MapGISLayersDiagram: () => import('../diagrams/MapGISLayersDiagram'),
+  PopDistributionDiagram: () => import('../diagrams/PopDistributionDiagram'),
+  PopUrbanizationDiagram: () => import('../diagrams/PopUrbanizationDiagram'),
+  PopSustainabilityDiagram: () => import('../diagrams/PopSustainabilityDiagram'),
+  ResourceRenewableDiagram: () => import('../diagrams/ResourceRenewableDiagram'),
+  ResourceForestDiagram: () => import('../diagrams/ResourceForestDiagram'),
+  ResourceCircularDiagram: () => import('../diagrams/ResourceCircularDiagram'),
+  MusicHarmonicsDiagram: () => import('../diagrams/MusicHarmonicsDiagram'),
+  MusicDecibelDiagram: () => import('../diagrams/MusicDecibelDiagram'),
+  RhythmBeatDiagram: () => import('../diagrams/RhythmBeatDiagram'),
+  DrumVibrationDiagram: () => import('../diagrams/DrumVibrationDiagram'),
+  ColorSpectrumArtDiagram: () => import('../diagrams/ColorSpectrumArtDiagram'),
+  PerspectiveDiagram: () => import('../diagrams/PerspectiveDiagram'),
+  PitcherNutrientDiagram: () => import('../diagrams/PitcherNutrientDiagram'),
+  PitcherAnatomyDiagram: () => import('../diagrams/PitcherAnatomyDiagram'),
+  PitcherSurfaceTensionDiagram: () => import('../diagrams/PitcherSurfaceTensionDiagram'),
+  PitcherSpeciesDiagram: () => import('../diagrams/PitcherSpeciesDiagram'),
+  ActivityTrapModelDiagram: () => import('../diagrams/ActivityTrapModelDiagram'),
+  OrchidPigmentDiagram: () => import('../diagrams/OrchidPigmentDiagram'),
+  OrchidBeeVisionDiagram: () => import('../diagrams/OrchidBeeVisionDiagram'),
+  OrchidCoevolutionDiagram: () => import('../diagrams/OrchidCoevolutionDiagram'),
+  OrchidEpiphyteDiagram: () => import('../diagrams/OrchidEpiphyteDiagram'),
+  ActivityFlowerDissectDiagram: () => import('../diagrams/ActivityFlowerDissectDiagram'),
+  TejimolaPlantReproDiagram: () => import('../diagrams/TejimolaPlantReproDiagram'),
+  TejimolaDNADiagram: () => import('../diagrams/TejimolaDNADiagram'),
+  TejimolaMutationDiagram: () => import('../diagrams/TejimolaMutationDiagram'),
+  TejimolaTraditionalMedicineDiagram: () => import('../diagrams/TejimolaTraditionalMedicineDiagram'),
+  ActivitySeedGrowDiagram: () => import('../diagrams/ActivitySeedGrowDiagram'),
+  DeerLightSpectrumDiagram: () => import('../diagrams/DeerLightSpectrumDiagram'),
+  DeerReflectionDiagram: () => import('../diagrams/DeerReflectionDiagram'),
+  DeerRefractionDiagram: () => import('../diagrams/DeerRefractionDiagram'),
+  DeerOpticalIllusionDiagram: () => import('../diagrams/DeerOpticalIllusionDiagram'),
+  ActivityPrismDiagram: () => import('../diagrams/ActivityPrismDiagram'),
+  PandaCamouflageDiagram: () => import('../diagrams/PandaCamouflageDiagram'),
+  PandaSelectionDiagram: () => import('../diagrams/PandaSelectionDiagram'),
+  PandaMaskFunctionDiagram: () => import('../diagrams/PandaMaskFunctionDiagram'),
+  PandaConvergentDiagram: () => import('../diagrams/PandaConvergentDiagram'),
+  ActivityCamouflageGameDiagram: () => import('../diagrams/ActivityCamouflageGameDiagram'),
+  ElephantThermoregDiagram: () => import('../diagrams/ElephantThermoregDiagram'),
+  ElephantHeatTransferDiagram: () => import('../diagrams/ElephantHeatTransferDiagram'),
+  ElephantSurfaceAreaDiagram: () => import('../diagrams/ElephantSurfaceAreaDiagram'),
+  ElephantEcosystemDiagram: () => import('../diagrams/ElephantEcosystemDiagram'),
+  ActivityCoolingExperimentDiagram: () => import('../diagrams/ActivityCoolingExperimentDiagram'),
+  CloudsFormationDiagram: () => import('../diagrams/CloudsFormationDiagram'),
+  CloudsFamilyDiagram: () => import('../diagrams/CloudsFamilyDiagram'),
+  CloudsWaterEngineDiagram: () => import('../diagrams/CloudsWaterEngineDiagram'),
+  CloudsForecastDiagram: () => import('../diagrams/CloudsForecastDiagram'),
+  ActivityCloudWatchDiagram: () => import('../diagrams/ActivityCloudWatchDiagram'),
+  BoatBuoyancyDiagram: () => import('../diagrams/BoatBuoyancyDiagram'),
+  BoatHullShapesDiagram: () => import('../diagrams/BoatHullShapesDiagram'),
+  BoatCurrentDiagram: () => import('../diagrams/BoatCurrentDiagram'),
+  BoatBrahmaputraDiagram: () => import('../diagrams/BoatBrahmaputraDiagram'),
+  ActivityFloatBoatDiagram: () => import('../diagrams/ActivityFloatBoatDiagram'),
+  ClayParticlesDiagram: () => import('../diagrams/ClayParticlesDiagram'),
+  SinteringProcessDiagram: () => import('../diagrams/SinteringProcessDiagram'),
+  GlazeChemistryDiagram: () => import('../diagrams/GlazeChemistryDiagram'),
+  ThermalShockDiagram: () => import('../diagrams/ThermalShockDiagram'),
+  ActivityClayTestDiagram: () => import('../diagrams/ActivityClayTestDiagram'),
+  PotteryOutputDiagram: () => import('../diagrams/PotteryOutputDiagram'),
+  MemoryFormationDiagram: () => import('../diagrams/MemoryFormationDiagram'),
+  ForgettingCurveDiagram: () => import('../diagrams/ForgettingCurveDiagram'),
+  MnemonicTechniquesDiagram: () => import('../diagrams/MnemonicTechniquesDiagram'),
+  ActivityMemoryTestDiagram: () => import('../diagrams/ActivityMemoryTestDiagram'),
+  MemoryOutputDiagram: () => import('../diagrams/MemoryOutputDiagram'),
+  IncandescentVsLEDDiagram: () => import('../diagrams/IncandescentVsLEDDiagram'),
+  SolarCellBasicsDiagram: () => import('../diagrams/SolarCellBasicsDiagram'),
+  EnergyEfficiencyDiagram: () => import('../diagrams/EnergyEfficiencyDiagram'),
+  ActivityLightCompareDiagram: () => import('../diagrams/ActivityLightCompareDiagram'),
+  LightEfficiencyOutputDiagram: () => import('../diagrams/LightEfficiencyOutputDiagram'),
+  PitchFrequencyDiagram: () => import('../diagrams/PitchFrequencyDiagram'),
+  RhythmDivisionDiagram: () => import('../diagrams/RhythmDivisionDiagram'),
+  TimbreDiagram: () => import('../diagrams/TimbreDiagram'),
+  ActivityStringPitchDiagram: () => import('../diagrams/ActivityStringPitchDiagram'),
+  RhythmAnalyzerOutputDiagram: () => import('../diagrams/RhythmAnalyzerOutputDiagram'),
+  GlidingVsFlyingDiagram: () => import('../diagrams/GlidingVsFlyingDiagram'),
+  SquareCubeLawDiagram: () => import('../diagrams/SquareCubeLawDiagram'),
+  ActivityGliderTestDiagram: () => import('../diagrams/ActivityGliderTestDiagram'),
+  GlideRatioOutputDiagram: () => import('../diagrams/GlideRatioOutputDiagram'),
+  StringSlicingDiagram: () => import('../diagrams/StringSlicingDiagram'),
+  TwoPointerDiagram: () => import('../diagrams/TwoPointerDiagram'),
+  BinarySearchDiagram: () => import('../diagrams/BinarySearchDiagram'),
+  SlidingWindowDiagram: () => import('../diagrams/SlidingWindowDiagram'),
+  BFSDFSDiagram: () => import('../diagrams/BFSDFSDiagram'),
+  BubbleSortDiagram: () => import('../diagrams/BubbleSortDiagram'),
+  RecursionTreeDiagram: () => import('../diagrams/RecursionTreeDiagram'),
+  DictCounterDiagram: () => import('../diagrams/DictCounterDiagram'),
+  HornbillCasqueDiagram: () => import('../diagrams/HornbillCasqueDiagram'),
+  HornbillNestDiagram: () => import('../diagrams/HornbillNestDiagram'),
+  HornbillKeystoneDiagram: () => import('../diagrams/HornbillKeystoneDiagram'),
+  HornbillCallDiagram: () => import('../diagrams/HornbillCallDiagram'),
+  ActivityBirdWatchDiagram: () => import('../diagrams/ActivityBirdWatchDiagram'),
+  RaceSpeedDiagram: () => import('../diagrams/RaceSpeedDiagram'),
+  RaceAccelerationDiagram: () => import('../diagrams/RaceAccelerationDiagram'),
+  RaceScalingDiagram: () => import('../diagrams/RaceScalingDiagram'),
+  RaceEnergyDiagram: () => import('../diagrams/RaceEnergyDiagram'),
+  ActivityRaceTimerDiagram: () => import('../diagrams/ActivityRaceTimerDiagram'),
+  SeedDiversityDiagram: () => import('../diagrams/SeedDiversityDiagram'),
+  SeedBankDiagram: () => import('../diagrams/SeedBankDiagram'),
+  SeedGerminationDiagram: () => import('../diagrams/SeedGerminationDiagram'),
+  SeedJhumDiagram: () => import('../diagrams/SeedJhumDiagram'),
+  ActivitySeedGerminateDiagram: () => import('../diagrams/ActivitySeedGerminateDiagram'),
+  MeteorAtmosphereDiagram: () => import('../diagrams/MeteorAtmosphereDiagram'),
+  MeteoriteTypesDiagram: () => import('../diagrams/MeteoriteTypesDiagram'),
+  MeteorImpactDiagram: () => import('../diagrams/MeteorImpactDiagram'),
+  DeeporBeelDiagram: () => import('../diagrams/DeeporBeelDiagram'),
+  ActivityMeteorWatchDiagram: () => import('../diagrams/ActivityMeteorWatchDiagram'),
+  FrogSizeLimitsDiagram: () => import('../diagrams/FrogSizeLimitsDiagram'),
+  FrogCubeSquareDiagram: () => import('../diagrams/FrogCubeSquareDiagram'),
+  FrogSkinBreathingDiagram: () => import('../diagrams/FrogSkinBreathingDiagram'),
+  FrogBiodiversityDiagram: () => import('../diagrams/FrogBiodiversityDiagram'),
+  ActivitySizeScaleDiagram: () => import('../diagrams/ActivitySizeScaleDiagram'),
+  FishIridescenceDiagram: () => import('../diagrams/FishIridescenceDiagram'),
+  FishStructuralColorDiagram: () => import('../diagrams/FishStructuralColorDiagram'),
+  FishLightWaterDiagram: () => import('../diagrams/FishLightWaterDiagram'),
+  FishUmiamLakeDiagram: () => import('../diagrams/FishUmiamLakeDiagram'),
+  ActivityIridescenceDiagram: () => import('../diagrams/ActivityIridescenceDiagram'),
+  TrainFrictionDiagram: () => import('../diagrams/TrainFrictionDiagram'),
+  TrainGearsDiagram: () => import('../diagrams/TrainGearsDiagram'),
+  TrainSteamEngineDiagram: () => import('../diagrams/TrainSteamEngineDiagram'),
+  TrainMountainRouteDiagram: () => import('../diagrams/TrainMountainRouteDiagram'),
+  ActivityGearModelDiagram: () => import('../diagrams/ActivityGearModelDiagram'),
+  LogicGateSymbolsDiagram: () => import('../diagrams/LogicGateSymbolsDiagram'),
+  LogicHalfAdderDiagram: () => import('../diagrams/LogicHalfAdderDiagram'),
+  LogicProcessorDiagram: () => import('../diagrams/LogicProcessorDiagram'),
+  StratigraphyLayersDiagram: () => import('../diagrams/StratigraphyLayersDiagram'),
+  Carbon14DecayDiagram: () => import('../diagrams/Carbon14DecayDiagram'),
+  RuinsTimelineDiagram: () => import('../diagrams/RuinsTimelineDiagram'),
+  ExcavationGridDiagram: () => import('../diagrams/ExcavationGridDiagram'),
+  ActivityDigBoxDiagram: () => import('../diagrams/ActivityDigBoxDiagram'),
+  StructuralColorDiagram: () => import('../diagrams/StructuralColorDiagram'),
+  ThinFilmWavesDiagram: () => import('../diagrams/ThinFilmWavesDiagram'),
+  ColorFadeTestDiagram: () => import('../diagrams/ColorFadeTestDiagram'),
+  ShinkansenBeakDiagram: () => import('../diagrams/ShinkansenBeakDiagram'),
+  ActivityCDRainbowDiagram: () => import('../diagrams/ActivityCDRainbowDiagram'),
+  ConductionBarsDiagram: () => import('../diagrams/ConductionBarsDiagram'),
+  LeidenfrostDropDiagram: () => import('../diagrams/LeidenfrostDropDiagram'),
+  SpecificHeatBarsDiagram: () => import('../diagrams/SpecificHeatBarsDiagram'),
+  FirewalkPhysicsDiagram: () => import('../diagrams/FirewalkPhysicsDiagram'),
+  ActivitySpoonTestDiagram: () => import('../diagrams/ActivitySpoonTestDiagram'),
+  LotusNanobumpsDiagram: () => import('../diagrams/LotusNanobumpsDiagram'),
+  SurfaceTensionWalkDiagram: () => import('../diagrams/SurfaceTensionWalkDiagram'),
+  LotusEngineeringDiagram: () => import('../diagrams/LotusEngineeringDiagram'),
+  AerenchymaCrossDiagram: () => import('../diagrams/AerenchymaCrossDiagram'),
+  ActivityDropletTestDiagram: () => import('../diagrams/ActivityDropletTestDiagram'),
+  SamplingVsCensusDiagram: () => import('../diagrams/SamplingVsCensusDiagram'),
+  TransectMethodDiagram: () => import('../diagrams/TransectMethodDiagram'),
+  DataQualityTargetDiagram: () => import('../diagrams/DataQualityTargetDiagram'),
+  CitizenScienceScaleDiagram: () => import('../diagrams/CitizenScienceScaleDiagram'),
+  ActivityButterflyCountDiagram: () => import('../diagrams/ActivityButterflyCountDiagram'),
+  GrassFireCycleDiagram: () => import('../diagrams/GrassFireCycleDiagram'),
+  GrassC4PathwayDiagram: () => import('../diagrams/GrassC4PathwayDiagram'),
+  GrassNDVIDiagram: () => import('../diagrams/GrassNDVIDiagram'),
+  GrassRhinoHabitatDiagram: () => import('../diagrams/GrassRhinoHabitatDiagram'),
+  ActivityGrassGrowDiagram: () => import('../diagrams/ActivityGrassGrowDiagram'),
+  JasminePhotoperiodDiagram: () => import('../diagrams/JasminePhotoperiodDiagram'),
+  JasminePhytochromeDiagram: () => import('../diagrams/JasminePhytochromeDiagram'),
+  JasmineScentClockDiagram: () => import('../diagrams/JasmineScentClockDiagram'),
+  JasmineStomataClockDiagram: () => import('../diagrams/JasmineStomataClockDiagram'),
+  ActivityPlantRhythmDiagram: () => import('../diagrams/ActivityPlantRhythmDiagram'),
+  PostmanGraphTheoryDiagram: () => import('../diagrams/PostmanGraphTheoryDiagram'),
+  PostmanShortestPathDiagram: () => import('../diagrams/PostmanShortestPathDiagram'),
+  PostmanTSPDiagram: () => import('../diagrams/PostmanTSPDiagram'),
+  PostmanTerrainCostDiagram: () => import('../diagrams/PostmanTerrainCostDiagram'),
+  ActivityRouteMapDiagram: () => import('../diagrams/ActivityRouteMapDiagram'),
+  TurtleEarthLayersDiagram: () => import('../diagrams/TurtleEarthLayersDiagram'),
+  TurtleConvectionDiagram: () => import('../diagrams/TurtleConvectionDiagram'),
+  TurtleMountainCollisionDiagram: () => import('../diagrams/TurtleMountainCollisionDiagram'),
+  TurtleEarthquakeDiagram: () => import('../diagrams/TurtleEarthquakeDiagram'),
+  ActivityEarthShakeDiagram: () => import('../diagrams/ActivityEarthShakeDiagram'),
+  OwlRodConeDiagram: () => import('../diagrams/OwlRodConeDiagram'),
+  OwlAsymmetricEarsDiagram: () => import('../diagrams/OwlAsymmetricEarsDiagram'),
+  OwlSilentFlightDiagram: () => import('../diagrams/OwlSilentFlightDiagram'),
+  OwlTapetumDiagram: () => import('../diagrams/OwlTapetumDiagram'),
+  ActivitySoundLocateDiagram: () => import('../diagrams/ActivitySoundLocateDiagram'),
+  LibraryHTMLStructureDiagram: () => import('../diagrams/LibraryHTMLStructureDiagram'),
+  LibraryDatabaseDiagram: () => import('../diagrams/LibraryDatabaseDiagram'),
+  LibraryAPIDiagram: () => import('../diagrams/LibraryAPIDiagram'),
+  LibraryCommunityDiagram: () => import('../diagrams/LibraryCommunityDiagram'),
+  ActivityCatalogDiagram: () => import('../diagrams/ActivityCatalogDiagram'),
+  LibraryAppOutputDiagram: () => import('../diagrams/LibraryAppOutputDiagram'),
+  DroneRotorDiagram: () => import('../diagrams/DroneRotorDiagram'),
+  PixelGridDiagram: () => import('../diagrams/PixelGridDiagram'),
+  NDVIFieldDiagram: () => import('../diagrams/NDVIFieldDiagram'),
+  ActivityAerialPhotoDiagram: () => import('../diagrams/ActivityAerialPhotoDiagram'),
+  CropHealthOutputDiagram: () => import('../diagrams/CropHealthOutputDiagram'),
+  WhiskerSensorDiagram: () => import('../diagrams/WhiskerSensorDiagram'),
+  WhiskerSpatialMapDiagram: () => import('../diagrams/WhiskerSpatialMapDiagram'),
+  WhiskerRobotDiagram: () => import('../diagrams/WhiskerRobotDiagram'),
+  ActivityWhiskerTestDiagram: () => import('../diagrams/ActivityWhiskerTestDiagram'),
+  SensoryRangeOutputDiagram: () => import('../diagrams/SensoryRangeOutputDiagram'),
+  CircadianClockDiagram: () => import('../diagrams/CircadianClockDiagram'),
+  LightResetDiagram: () => import('../diagrams/LightResetDiagram'),
+  CuckooTimingDiagram: () => import('../diagrams/CuckooTimingDiagram'),
+  ActivitySleepTrackDiagram: () => import('../diagrams/ActivitySleepTrackDiagram'),
+  DawnChorusOutputDiagram: () => import('../diagrams/DawnChorusOutputDiagram'),
+  MaillardReactionDiagram: () => import('../diagrams/MaillardReactionDiagram'),
+  GlutenNetworkDiagram: () => import('../diagrams/GlutenNetworkDiagram'),
+  HeatTransferCookingDiagram: () => import('../diagrams/HeatTransferCookingDiagram'),
+  ActivityToastTestDiagram: () => import('../diagrams/ActivityToastTestDiagram'),
+  PithaScienceOutputDiagram: () => import('../diagrams/PithaScienceOutputDiagram'),
+  FrogVocalSacDiagram: () => import('../diagrams/FrogVocalSacDiagram'),
+  FrogFrequencyDiagram: () => import('../diagrams/FrogFrequencyDiagram'),
+  FrogChorusDiagram: () => import('../diagrams/FrogChorusDiagram'),
+  FrogHumidityDiagram: () => import('../diagrams/FrogHumidityDiagram'),
+  ActivityFrogListenDiagram: () => import('../diagrams/ActivityFrogListenDiagram'),
+  PeacockSexualSelectionDiagram: () => import('../diagrams/PeacockSexualSelectionDiagram'),
+  PeacockHonestSignalDiagram: () => import('../diagrams/PeacockHonestSignalDiagram'),
+  PeacockIridescenceDiagram: () => import('../diagrams/PeacockIridescenceDiagram'),
+  PeacockInfrasoundDiagram: () => import('../diagrams/PeacockInfrasoundDiagram'),
+  ActivityIridescenceTestDiagram: () => import('../diagrams/ActivityIridescenceTestDiagram'),
+  BambooMeristemDiagram: () => import('../diagrams/BambooMeristemDiagram'),
+  BambooAuxinDiagram: () => import('../diagrams/BambooAuxinDiagram'),
+  BambooCellElongationDiagram: () => import('../diagrams/BambooCellElongationDiagram'),
+  ActivityBambooGrowthDiagram: () => import('../diagrams/ActivityBambooGrowthDiagram'),
+  CorridorFragmentDiagram: () => import('../diagrams/CorridorFragmentDiagram'),
+  CorridorGeneFlowDiagram: () => import('../diagrams/CorridorGeneFlowDiagram'),
+  CorridorCameraTrapDiagram: () => import('../diagrams/CorridorCameraTrapDiagram'),
+  CorridorConflictSolutionDiagram: () => import('../diagrams/CorridorConflictSolutionDiagram'),
+  ActivityCorridorMapDiagram: () => import('../diagrams/ActivityCorridorMapDiagram'),
+  HoliNaturalDyeDiagram: () => import('../diagrams/HoliNaturalDyeDiagram'),
+  HoliPHIndicatorDiagram: () => import('../diagrams/HoliPHIndicatorDiagram'),
+  HoliMordantDiagram: () => import('../diagrams/HoliMordantDiagram'),
+  HoliTeaConnectionDiagram: () => import('../diagrams/HoliTeaConnectionDiagram'),
+  ActivityDyeExtractDiagram: () => import('../diagrams/ActivityDyeExtractDiagram'),
+  SeedWindDispersalDiagram: () => import('../diagrams/SeedWindDispersalDiagram'),
+  SeedAnimalDispersalDiagram: () => import('../diagrams/SeedAnimalDispersalDiagram'),
+  SeedExplosiveGravityDiagram: () => import('../diagrams/SeedExplosiveGravityDiagram'),
+  SeedAutorotationDiagram: () => import('../diagrams/SeedAutorotationDiagram'),
+  ActivitySeedDropDiagram: () => import('../diagrams/ActivitySeedDropDiagram'),
+  SeedDispersalOutputDiagram: () => import('../diagrams/SeedDispersalOutputDiagram'),
+  OrchidEpiphyteAnatomyDiagram: () => import('../diagrams/OrchidEpiphyteAnatomyDiagram'),
+  OrchidMycorrhizalNetworkDiagram: () => import('../diagrams/OrchidMycorrhizalNetworkDiagram'),
+  OrchidSymbiosisSpectrumDiagram: () => import('../diagrams/OrchidSymbiosisSpectrumDiagram'),
+  OrchidConservationDiagram: () => import('../diagrams/OrchidConservationDiagram'),
+  ActivityEpiphyteSurveyDiagram: () => import('../diagrams/ActivityEpiphyteSurveyDiagram'),
+  BoatHullSpeedDiagram: () => import('../diagrams/BoatHullSpeedDiagram'),
+  BoatDragTypesDiagram: () => import('../diagrams/BoatDragTypesDiagram'),
+  BoatRowingBiomechanicsDiagram: () => import('../diagrams/BoatRowingBiomechanicsDiagram'),
+  ActivityBoatShapeDiagram: () => import('../diagrams/ActivityBoatShapeDiagram'),
+  BlueMountainScatteringDiagram: () => import('../diagrams/BlueMountainScatteringDiagram'),
+  HazeFogComparisonDiagram: () => import('../diagrams/HazeFogComparisonDiagram'),
+  AerialPerspectiveDiagram: () => import('../diagrams/AerialPerspectiveDiagram'),
+  ActivityHillColorDiagram: () => import('../diagrams/ActivityHillColorDiagram'),
+  PythonEctothermyDiagram: () => import('../diagrams/PythonEctothermyDiagram'),
+  PythonPitOrganDiagram: () => import('../diagrams/PythonPitOrganDiagram'),
+  PythonConstrictionDiagram: () => import('../diagrams/PythonConstrictionDiagram'),
+  ActivityWildlifeSurveyDiagram: () => import('../diagrams/ActivityWildlifeSurveyDiagram'),
+  MithunWildVsDomesticDiagram: () => import('../diagrams/MithunWildVsDomesticDiagram'),
+  MithunSelectionDiagram: () => import('../diagrams/MithunSelectionDiagram'),
+  MithunTraitChangeDiagram: () => import('../diagrams/MithunTraitChangeDiagram'),
+  MithunKeystoneDiagram: () => import('../diagrams/MithunKeystoneDiagram'),
+  ActivityBreedingSimDiagram: () => import('../diagrams/ActivityBreedingSimDiagram'),
+  BreedingSimOutputDiagram: () => import('../diagrams/BreedingSimOutputDiagram'),
+  SalHeartwoodDiagram: () => import('../diagrams/SalHeartwoodDiagram'),
+  SalCelluloseLigninDiagram: () => import('../diagrams/SalCelluloseLigninDiagram'),
+  SalGrainDirectionDiagram: () => import('../diagrams/SalGrainDirectionDiagram'),
+  SalForestryDiagram: () => import('../diagrams/SalForestryDiagram'),
+  ActivityWoodTestDiagram: () => import('../diagrams/ActivityWoodTestDiagram'),
+  WoodStrengthOutputDiagram: () => import('../diagrams/WoodStrengthOutputDiagram'),
+  PigmentAbsorptionDiagram: () => import('../diagrams/PigmentAbsorptionDiagram'),
+  SubtractiveMixingDiagram: () => import('../diagrams/SubtractiveMixingDiagram'),
+  CapillaryActionDiagram: () => import('../diagrams/CapillaryActionDiagram'),
+  RainColorVividDiagram: () => import('../diagrams/RainColorVividDiagram'),
+  ActivityColorMixDiagram: () => import('../diagrams/ActivityColorMixDiagram'),
+  ColorMixerOutputDiagram: () => import('../diagrams/ColorMixerOutputDiagram'),
+  WarpWeftDiagram: () => import('../diagrams/WarpWeftDiagram'),
+  LoomMechanicsDiagram: () => import('../diagrams/LoomMechanicsDiagram'),
+  ThreadTensionDiagram: () => import('../diagrams/ThreadTensionDiagram'),
+  PatternEncodingDiagram: () => import('../diagrams/PatternEncodingDiagram'),
+  ActivityWeaveCardDiagram: () => import('../diagrams/ActivityWeaveCardDiagram'),
+  FabricAnalysisOutputDiagram: () => import('../diagrams/FabricAnalysisOutputDiagram'),
+  PoliticalVsPhysicalMapDiagram: () => import('../diagrams/PoliticalVsPhysicalMapDiagram'),
+  MapScaleDistanceDiagram: () => import('../diagrams/MapScaleDistanceDiagram'),
+  ContourLinesDiagram: () => import('../diagrams/ContourLinesDiagram'),
+  NEIndiaStatesDiagram: () => import('../diagrams/NEIndiaStatesDiagram'),
+  ActivityNeighborhoodMapDiagram: () => import('../diagrams/ActivityNeighborhoodMapDiagram'),
+  NEIndiaAtlasOutputDiagram: () => import('../diagrams/NEIndiaAtlasOutputDiagram'),
+  EriLifeCycleDiagram: () => import('../diagrams/EriLifeCycleDiagram'),
+  EriFibroinDiagram: () => import('../diagrams/EriFibroinDiagram'),
+  EriAhimsaDiagram: () => import('../diagrams/EriAhimsaDiagram'),
+  EriSustainableFashionDiagram: () => import('../diagrams/EriSustainableFashionDiagram'),
+  ActivitySilkStretchDiagram: () => import('../diagrams/ActivitySilkStretchDiagram'),
+  EriSilkOutputDiagram: () => import('../diagrams/EriSilkOutputDiagram'),
+  RiceDomesticationDiagram: () => import('../diagrams/RiceDomesticationDiagram'),
+  RiceMendelDiagram: () => import('../diagrams/RiceMendelDiagram'),
+  RiceSeedSavingDiagram: () => import('../diagrams/RiceSeedSavingDiagram'),
+  ActivityRiceSproutDiagram: () => import('../diagrams/ActivityRiceSproutDiagram'),
+  RiceGrowthOutputDiagram: () => import('../diagrams/RiceGrowthOutputDiagram'),
+  DholChladniDiagram: () => import('../diagrams/DholChladniDiagram'),
+  DholSizePitchDiagram: () => import('../diagrams/DholSizePitchDiagram'),
+  DholStrikeDiagram: () => import('../diagrams/DholStrikeDiagram'),
+  DholResonanceDiagram: () => import('../diagrams/DholResonanceDiagram'),
+  ActivityDrumBuildDiagram: () => import('../diagrams/ActivityDrumBuildDiagram'),
+  EchoDistanceDiagram: () => import('../diagrams/EchoDistanceDiagram'),
+  ReverberationDiagram: () => import('../diagrams/ReverberationDiagram'),
+  ValleyAcousticsDiagram: () => import('../diagrams/ValleyAcousticsDiagram'),
+  ActivityEchoTimeDiagram: () => import('../diagrams/ActivityEchoTimeDiagram'),
+  EchoSpeedOutputDiagram: () => import('../diagrams/EchoSpeedOutputDiagram'),
+  LaminarTurbulentDiagram: () => import('../diagrams/LaminarTurbulentDiagram'),
+  FerryVectorDiagram: () => import('../diagrams/FerryVectorDiagram'),
+  WhirlpoolEddyDiagram: () => import('../diagrams/WhirlpoolEddyDiagram'),
+  ActivityFloatPathDiagram: () => import('../diagrams/ActivityFloatPathDiagram'),
+  FerryCrossingOutputDiagram: () => import('../diagrams/FerryCrossingOutputDiagram'),
 };
 
-export default registry;
+const cache: Record<string, ComponentType<any>> = {};
+
+const diagramRegistry: Record<string, ComponentType<any>> = new Proxy(cache, {
+  get(target, name: string) {
+    if (target[name]) return target[name];
+    const factory = lazyMap[name];
+    if (!factory) return undefined;
+    const LazyComponent = lazy(factory);
+    target[name] = LazyComponent;
+    return LazyComponent;
+  },
+});
+
+export default diagramRegistry;
