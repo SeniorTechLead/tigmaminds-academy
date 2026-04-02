@@ -1,22 +1,18 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowLeft, Clock, BookOpen, CheckCircle, Plus, X, ArrowRight,
-  Sparkles, Target, Flame, Trophy, Map as MapIcon, Filter,
+  Sparkles, Target, Flame, Trophy, Map as MapIcon, Filter, Code2,
+  Cpu, FlaskConical, Globe, Lightbulb, ChevronDown, Zap, Search,
 } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { lessons, SUBJECTS, Subject, getLessonBySlug, type Lesson } from '../data/lessons';
+import { lessons, SUBJECTS, type Subject, getLessonBySlug, type Lesson } from '../data/lessons';
 import { useProgress } from '../contexts/ProgressContext';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
 
-interface PlanEntry {
-  id: number;
-  slug: string;
-  addedAt: string;
-}
-
+interface PlanEntry { id: number; slug: string; addedAt: string; }
 type PlanMap = Map<string, { id: number; addedAt: string }>;
 
 function loadPlanLocal(): PlanMap {
@@ -24,69 +20,117 @@ function loadPlanLocal(): PlanMap {
     const saved = localStorage.getItem('tma_plan');
     if (!saved) return new Map();
     const raw = JSON.parse(saved);
-    if (Array.isArray(raw) && raw.length > 0) {
-      const now = new Date().toISOString();
-      if (typeof raw[0] === 'string') {
-        const map: PlanMap = new Map();
-        for (const slug of raw as string[]) {
-          const lesson = getLessonBySlug(slug);
-          if (lesson) map.set(slug, { id: lesson.id, addedAt: now });
-        }
-        return map;
+    if (!Array.isArray(raw) || raw.length === 0) return new Map();
+    const now = new Date().toISOString();
+    if (typeof raw[0] === 'string') {
+      const map: PlanMap = new Map();
+      for (const slug of raw as string[]) {
+        const lesson = getLessonBySlug(slug);
+        if (lesson) map.set(slug, { id: lesson.id, addedAt: now });
       }
-      if (raw[0].slug && !raw[0].id) {
-        const map: PlanMap = new Map();
-        for (const entry of raw) {
-          const lesson = getLessonBySlug(entry.slug);
-          if (lesson) map.set(entry.slug, { id: lesson.id, addedAt: entry.addedAt || now });
-        }
-        return map;
-      }
-      return new Map((raw as PlanEntry[]).map(e => [e.slug, { id: e.id, addedAt: e.addedAt }]));
+      return map;
     }
-    return new Map();
+    if (raw[0].slug && !raw[0].id) {
+      const map: PlanMap = new Map();
+      for (const entry of raw) {
+        const lesson = getLessonBySlug(entry.slug);
+        if (lesson) map.set(entry.slug, { id: lesson.id, addedAt: entry.addedAt || now });
+      }
+      return map;
+    }
+    return new Map((raw as PlanEntry[]).map(e => [e.slug, { id: e.id, addedAt: e.addedAt }]));
   } catch { return new Map(); }
 }
 
-function entriesToJSON(plan: PlanMap): PlanEntry[] {
-  return [...plan.entries()].map(([slug, { id, addedAt }]) => ({ id, slug, addedAt }));
-}
-
 function savePlanLocal(plan: PlanMap) {
-  localStorage.setItem('tma_plan', JSON.stringify(entriesToJSON(plan)));
+  localStorage.setItem('tma_plan', JSON.stringify([...plan.entries()].map(([slug, { id, addedAt }]) => ({ id, slug, addedAt }))));
 }
 
 async function savePlanDB(userId: string, plan: PlanMap) {
   try {
     await supabase.from('user_plans').upsert({
       user_id: userId,
-      lesson_entries: entriesToJSON(plan),
+      lesson_entries: [...plan.entries()].map(([slug, { id, addedAt }]) => ({ id, slug, addedAt })),
       updated_at: new Date().toISOString(),
     }, { onConflict: 'user_id' });
-  } catch (err) {
-    console.error('[Plan] Network error:', err);
-  }
+  } catch {}
 }
 
-/* ── Motivational messages based on plan size ── */
+/* ── Curated learning paths ── */
+const LEARNING_GOALS = [
+  {
+    id: 'python-beginner',
+    title: 'Learn Python from Scratch',
+    desc: 'No coding experience? Start here. These stories introduce variables, loops, functions, and data — through elephants, fireflies, and monsoons.',
+    icon: Code2,
+    color: 'from-blue-400 to-indigo-500',
+    slugs: ['girl-who-spoke-to-elephants', 'orange-sunsets-assam', 'firefly-festival-of-majuli', 'muga-silk-golden', 'old-banyan-trees-stories'],
+    skills: ['Python', 'Variables', 'Loops', 'Functions'],
+  },
+  {
+    id: 'data-science',
+    title: 'Data Science & Visualization',
+    desc: 'Track cyclones, count rhinos, analyze rainfall. Learn NumPy, Matplotlib, and how to turn raw data into understanding.',
+    icon: FlaskConical,
+    color: 'from-emerald-400 to-teal-500',
+    slugs: ['fishermans-daughter-storm', 'one-horned-guardian', 'monsoon-home', 'dragonfly-paddy-field', 'snow-leopards-promise'],
+    skills: ['NumPy', 'Matplotlib', 'Data Analysis', 'Statistics'],
+  },
+  {
+    id: 'biology-ecology',
+    title: 'Biology & Ecology',
+    desc: 'How do elephants communicate? Why is muga silk golden? What makes fireflies synchronize? Discover the science of living systems.',
+    icon: Globe,
+    color: 'from-green-400 to-lime-500',
+    slugs: ['girl-who-spoke-to-elephants', 'muga-silk-golden', 'firefly-festival-of-majuli', 'wild-orchids-trees', 'bees-built-empire', 'girl-grew-forest'],
+    skills: ['Biology', 'Ecology', 'Conservation'],
+  },
+  {
+    id: 'physics-engineering',
+    title: 'Physics & Engineering',
+    desc: 'Why are sunsets orange? How do bridges grow? What makes a cyclone spin? Build simulators that model real physics.',
+    icon: Zap,
+    color: 'from-amber-400 to-orange-500',
+    slugs: ['orange-sunsets-assam', 'bridge-that-grew', 'fishermans-daughter-storm', 'snow-leopards-promise', 'boy-saw-atoms'],
+    skills: ['Physics', 'Engineering', 'Simulation'],
+  },
+  {
+    id: 'electronics',
+    title: 'Arduino & Electronics',
+    desc: 'LEDs, sensors, circuits. Build physical projects inspired by fireflies, dolphins, and bamboo instruments.',
+    icon: Cpu,
+    color: 'from-rose-400 to-pink-500',
+    slugs: ['firefly-festival-of-majuli', 'river-dolphins-secret', 'dimasa-music', 'cat-who-read-wind'],
+    skills: ['Arduino', 'Circuits', 'Sensors'],
+  },
+  {
+    id: 'mythology-stem',
+    title: 'World Mythologies Meet STEM',
+    desc: 'Algebra from Al-Khwarizmi, geometry from Hindu temples, navigation from Polynesian voyagers. Ancient wisdom, modern code.',
+    icon: Lightbulb,
+    color: 'from-purple-400 to-violet-500',
+    slugs: ['astrolabe-al-khwarizmi', 'dharma-wheel-nalanda', 'noahs-ark-flood', 'bodhi-tree-enlightenment', 'sacred-river-ganges'],
+    skills: ['Mathematics', 'History', 'Algorithms'],
+  },
+];
+
 function getPlanMessage(count: number, completed: number): string {
-  if (count === 0) return 'Pick your first story below — every adventure starts with one step.';
-  if (completed === count) return 'You did it. Every story, every concept, every project. What a journey.';
+  if (count === 0) return 'Choose a learning goal below, or pick individual stories.';
+  if (completed === count) return 'You completed every story in your plan. What a journey.';
   if (completed > count * 0.7) return 'Almost there — the finish line is in sight!';
-  if (completed > count * 0.3) return 'Great momentum. Keep going — every story makes you stronger.';
-  if (count <= 3) return 'A focused plan. Quality over quantity — smart move.';
-  if (count <= 10) return 'A solid learning path. Enough to go deep, not so many it feels overwhelming.';
-  return `An ambitious plan — ${count} stories, each one a new world to explore.`;
+  if (completed > 0) return 'Great momentum. Every story makes you stronger.';
+  return `${count} stories ready. Pick one and start.`;
 }
 
 export default function LessonPlanPage() {
   const { user } = useAuth();
   const [planMap, setPlanMap] = useState<PlanMap>(loadPlanLocal);
+  const [view, setView] = useState<'goals' | 'browse'>('goals');
   const [filterSubject, setFilterSubject] = useState<Subject | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [expandedGoal, setExpandedGoal] = useState<string | null>(null);
   const { isStoryComplete } = useProgress();
 
-  // Load plan from Supabase
   useEffect(() => {
     if (!user) return;
     (async () => {
@@ -102,22 +146,16 @@ export default function LessonPlanPage() {
           const local = loadPlanLocal();
           const merged: PlanMap = new Map(dbMap);
           for (const [slug, val] of local) {
-            if (!merged.has(slug) || val.addedAt < merged.get(slug)!.addedAt) {
-              merged.set(slug, val);
-            }
+            if (!merged.has(slug) || val.addedAt < merged.get(slug)!.addedAt) merged.set(slug, val);
           }
           setPlanMap(merged);
           savePlanLocal(merged);
-          if (merged.size !== dbMap.size) {
-            await savePlanDB(user.id, merged);
-          }
+          if (merged.size !== dbMap.size) await savePlanDB(user.id, merged);
         } else {
           const local = loadPlanLocal();
           if (local.size > 0 && user) await savePlanDB(user.id, local);
         }
-      } catch (err) {
-        console.error('[Plan] Sync error:', err);
-      }
+      } catch {}
     })();
   }, [user]);
 
@@ -128,25 +166,11 @@ export default function LessonPlanPage() {
 
   const selectedSlugs = new Set(planMap.keys());
 
-  const availableLessons = lessons.filter(l => {
-    if (filterSubject && !l.subjects?.includes(filterSubject)) return false;
-    if (searchQuery) {
-      const q = searchQuery.toLowerCase();
-      return l.story.title.toLowerCase().includes(q) || l.stem.title.toLowerCase().includes(q);
-    }
-    return true;
-  });
-
-  const selectedLessons = lessons.filter(l => selectedSlugs.has(l.slug));
-  const totalHours = selectedLessons.reduce((sum, l) => sum + (l.estimatedHours || 12), 0);
-  const completedInPlan = selectedLessons.filter(l => isStoryComplete(l.slug)).length;
-
   const toggleLesson = (slug: string) => {
     setPlanMap(prev => {
       const next = new Map(prev);
-      if (next.has(slug)) {
-        next.delete(slug);
-      } else {
+      if (next.has(slug)) { next.delete(slug); }
+      else {
         const lesson = getLessonBySlug(slug);
         if (lesson) next.set(slug, { id: lesson.id, addedAt: new Date().toISOString() });
       }
@@ -155,43 +179,61 @@ export default function LessonPlanPage() {
     });
   };
 
-  const selectAllInSubject = (subject: Subject) => {
-    const inSubject = lessons.filter(l => l.subjects?.includes(subject));
+  const addGoal = (slugs: string[]) => {
     setPlanMap(prev => {
       const next = new Map(prev);
       const now = new Date().toISOString();
-      inSubject.forEach(l => { if (!next.has(l.slug)) next.set(l.slug, { id: l.id, addedAt: now }); });
+      for (const slug of slugs) {
+        if (!next.has(slug)) {
+          const lesson = getLessonBySlug(slug);
+          if (lesson) next.set(slug, { id: lesson.id, addedAt: now });
+        }
+      }
       savePlan(next);
       return next;
     });
   };
 
-  const clearAll = () => {
-    const empty: PlanMap = new Map();
-    setPlanMap(empty);
-    savePlan(empty);
-  };
+  const clearAll = () => { const empty: PlanMap = new Map(); setPlanMap(empty); savePlan(empty); };
 
+  const selectedLessons = lessons.filter(l => selectedSlugs.has(l.slug));
+  const totalHours = selectedLessons.reduce((sum, l) => sum + (l.estimatedHours || 12), 0);
+  const completedInPlan = selectedLessons.filter(l => isStoryComplete(l.slug)).length;
   const nextLesson = selectedLessons.find(l => !isStoryComplete(l.slug));
   const progressPct = selectedLessons.length > 0 ? Math.round(completedInPlan / selectedLessons.length * 100) : 0;
+
+  const filteredLessons = useMemo(() => lessons.filter(l => {
+    if (filterSubject && !l.subjects?.includes(filterSubject)) return false;
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase();
+      return l.story.title.toLowerCase().includes(q) || l.stem.title.toLowerCase().includes(q) ||
+        l.stem.skills.some(s => s.toLowerCase().includes(q));
+    }
+    return true;
+  }), [filterSubject, searchQuery]);
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
       <Header />
 
       {/* ── Hero ── */}
-      <section className="pt-32 pb-10 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-amber-50 via-white to-orange-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800">
+      <section className="pt-32 pb-8 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-amber-50 via-white to-orange-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 px-4 py-2 rounded-full mb-4 text-sm font-semibold">
-            <MapIcon className="w-4 h-4" />
-            Your Learning Journey
-          </div>
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-3">
             Build Your Lesson Plan
           </h1>
-          <p className="text-gray-600 dark:text-gray-300 max-w-xl mx-auto">
+          <p className="text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-6">
             {getPlanMessage(selectedLessons.length, completedInPlan)}
           </p>
+          {/* View toggle */}
+          <div className="inline-flex gap-1 bg-gray-100 dark:bg-gray-800 p-1 rounded-xl">
+            <button onClick={() => setView('goals')} className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${view === 'goals' ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm' : 'text-gray-500'}`}>
+              Learning Goals
+            </button>
+            <button onClick={() => setView('browse')} className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${view === 'browse' ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm' : 'text-gray-500'}`}>
+              Browse All Stories
+            </button>
+          </div>
         </div>
       </section>
 
@@ -199,149 +241,191 @@ export default function LessonPlanPage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-3 gap-8">
 
-            {/* ── Left: Lesson picker ── */}
+            {/* ── Left: Goals or Browse ── */}
             <div className="lg:col-span-2">
-              {/* Quick-add by subject */}
-              <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-4 mb-4">
-                <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-3">Quick add by subject</p>
-                <div className="flex flex-wrap gap-2">
-                  {SUBJECTS.map(s => {
-                    const count = lessons.filter(l => l.subjects?.includes(s.key)).length;
-                    if (count === 0) return null;
+              {view === 'goals' ? (
+                <div className="space-y-4">
+                  {LEARNING_GOALS.map(goal => {
+                    const goalLessons = goal.slugs.map(s => getLessonBySlug(s)).filter(Boolean) as Lesson[];
+                    const inPlan = goal.slugs.filter(s => selectedSlugs.has(s)).length;
+                    const goalComplete = goal.slugs.filter(s => isStoryComplete(s)).length;
+                    const isExpanded = expandedGoal === goal.id;
+                    const Icon = goal.icon;
+
                     return (
-                      <button
-                        key={s.key}
-                        onClick={() => selectAllInSubject(s.key)}
-                        className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${s.color} hover:ring-2 hover:ring-amber-400`}
-                      >
-                        {s.icon} {s.key} ({count})
-                      </button>
+                      <div key={goal.id} className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+                        {/* Goal header */}
+                        <button
+                          onClick={() => setExpandedGoal(isExpanded ? null : goal.id)}
+                          className="w-full text-left p-5 flex items-start gap-4 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
+                        >
+                          <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${goal.color} flex items-center justify-center flex-shrink-0`}>
+                            <Icon className="w-6 h-6 text-white" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h3 className="text-base font-bold text-gray-900 dark:text-white mb-1">{goal.title}</h3>
+                            <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{goal.desc}</p>
+                            <div className="flex flex-wrap gap-1.5 mt-2">
+                              {goal.skills.map(s => (
+                                <span key={s} className="text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-0.5 rounded-full">{s}</span>
+                              ))}
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-3 flex-shrink-0">
+                            {inPlan > 0 && (
+                              <span className="text-xs font-semibold text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/30 px-2 py-1 rounded-full">
+                                {inPlan}/{goal.slugs.length} in plan
+                              </span>
+                            )}
+                            <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+                          </div>
+                        </button>
+
+                        {/* Expanded: show individual stories */}
+                        {isExpanded && (
+                          <div className="border-t border-gray-100 dark:border-gray-700 px-5 pb-5">
+                            <div className="flex items-center justify-between py-3">
+                              <span className="text-xs text-gray-500 dark:text-gray-400">{goalLessons.length} stories &middot; ~{goalLessons.length * 12} hours</span>
+                              <button
+                                onClick={() => addGoal(goal.slugs)}
+                                className="text-xs font-semibold text-amber-600 dark:text-amber-400 hover:underline"
+                              >
+                                Add all to plan
+                              </button>
+                            </div>
+                            <div className="space-y-2">
+                              {goalLessons.map((lesson, i) => {
+                                const selected = selectedSlugs.has(lesson.slug);
+                                const complete = isStoryComplete(lesson.slug);
+                                return (
+                                  <div key={lesson.slug} className={`flex items-center gap-3 p-3 rounded-xl border transition-all ${
+                                    selected ? (complete ? 'border-emerald-300 bg-emerald-50/50 dark:border-emerald-800 dark:bg-emerald-900/10' : 'border-amber-300 bg-amber-50/50 dark:border-amber-800 dark:bg-amber-900/10')
+                                    : 'border-gray-100 dark:border-gray-700 hover:border-gray-200 dark:hover:border-gray-600'
+                                  }`}>
+                                    <button onClick={() => toggleLesson(lesson.slug)} className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 ${
+                                      complete ? 'bg-emerald-500 text-white' : selected ? 'bg-amber-500 text-white' : 'bg-gray-200 dark:bg-gray-700 hover:bg-amber-200'
+                                    }`}>
+                                      {complete ? <CheckCircle className="w-4 h-4" /> : selected ? <CheckCircle className="w-4 h-4" /> : <Plus className="w-4 h-4 text-gray-400" />}
+                                    </button>
+                                    <div className="flex-1 min-w-0">
+                                      <div className="flex items-center gap-2">
+                                        <span className="text-xs text-gray-400 dark:text-gray-500 font-mono w-5">{i + 1}.</span>
+                                        <Link to={`/lessons/${lesson.slug}`} className="text-sm font-semibold text-gray-900 dark:text-white hover:text-amber-600 dark:hover:text-amber-400 truncate">
+                                          {lesson.story.title}
+                                        </Link>
+                                      </div>
+                                      <p className="text-xs text-gray-500 dark:text-gray-400 ml-7 truncate">
+                                        {lesson.stem.title}
+                                      </p>
+                                    </div>
+                                    <div className="text-right flex-shrink-0">
+                                      <p className="text-xs text-gray-400">{lesson.estimatedHours || 12}h</p>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        )}
+                      </div>
                     );
                   })}
                 </div>
-              </div>
-
-              {/* Search + Filter */}
-              <div className="flex gap-2 mb-4 flex-wrap">
-                <div className="relative flex-1 min-w-[200px]">
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search stories..."
-                    className="w-full pl-4 pr-4 py-2 border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-transparent"
-                  />
-                </div>
-                <div className="flex gap-1 items-center">
-                  <Filter className="w-4 h-4 text-gray-400" />
-                  <button
-                    onClick={() => setFilterSubject(null)}
-                    className={`px-3 py-2 rounded-lg text-xs font-semibold ${!filterSubject ? 'bg-amber-500 text-white' : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400'}`}
-                  >
-                    All
-                  </button>
-                  {SUBJECTS.filter(s => lessons.some(l => l.subjects?.includes(s.key))).map(s => (
-                    <button
-                      key={s.key}
-                      onClick={() => setFilterSubject(filterSubject === s.key ? null : s.key)}
-                      className={`px-3 py-2 rounded-lg text-xs font-semibold ${filterSubject === s.key ? 'bg-amber-500 text-white' : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400'}`}
+              ) : (
+                /* Browse all stories */
+                <div>
+                  {/* Search + Filter */}
+                  <div className="flex gap-2 mb-4 flex-wrap">
+                    <div className="relative flex-1 min-w-[200px]">
+                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                      <input
+                        type="text"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        placeholder="Search stories, topics, or skills..."
+                        className="w-full pl-9 pr-4 py-2.5 border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                      />
+                    </div>
+                    <select
+                      value={filterSubject || ''}
+                      onChange={(e) => setFilterSubject(e.target.value ? e.target.value as Subject : null)}
+                      className="px-3 py-2.5 border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg text-sm"
                     >
-                      {s.icon}
-                    </button>
-                  ))}
-                </div>
-              </div>
+                      <option value="">All Subjects</option>
+                      {SUBJECTS.filter(s => lessons.some(l => l.subjects?.includes(s.key))).map(s => (
+                        <option key={s.key} value={s.key}>{s.icon} {s.key}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <p className="text-xs text-gray-400 dark:text-gray-500 mb-3">{filteredLessons.length} stories</p>
 
-              {/* Lesson cards */}
-              <div className="space-y-2 max-h-[600px] overflow-y-auto pr-1">
-                {availableLessons.map(lesson => {
-                  const selected = selectedSlugs.has(lesson.slug);
-                  const complete = isStoryComplete(lesson.slug);
-                  return (
-                    <button
-                      key={lesson.slug}
-                      onClick={() => toggleLesson(lesson.slug)}
-                      className={`w-full text-left p-4 rounded-xl border-2 transition-all ${
-                        selected
-                          ? complete
-                            ? 'border-emerald-400 bg-emerald-50 dark:bg-emerald-900/20'
-                            : 'border-amber-400 bg-amber-50 dark:bg-amber-900/20'
+                  {/* Story cards */}
+                  <div className="space-y-2 max-h-[600px] overflow-y-auto pr-1">
+                    {filteredLessons.map(lesson => {
+                      const selected = selectedSlugs.has(lesson.slug);
+                      const complete = isStoryComplete(lesson.slug);
+                      return (
+                        <div key={lesson.slug} className={`flex items-start gap-3 p-4 rounded-xl border-2 transition-all ${
+                          selected ? (complete ? 'border-emerald-300 bg-emerald-50/50 dark:border-emerald-800 dark:bg-emerald-900/10' : 'border-amber-300 bg-amber-50/50 dark:border-amber-800 dark:bg-amber-900/10')
                           : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
-                      }`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 ${
-                          selected && complete ? 'bg-emerald-500 text-white' :
-                          selected ? 'bg-amber-500 text-white' :
-                          'bg-gray-200 dark:bg-gray-700'
                         }`}>
-                          {selected && complete ? <CheckCircle className="w-4 h-4" /> :
-                           selected ? <CheckCircle className="w-4 h-4" /> :
-                           <Plus className="w-4 h-4 text-gray-400" />}
+                          <button onClick={() => toggleLesson(lesson.slug)} className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                            complete ? 'bg-emerald-500 text-white' : selected ? 'bg-amber-500 text-white' : 'bg-gray-200 dark:bg-gray-700 hover:bg-amber-200'
+                          }`}>
+                            {complete ? <CheckCircle className="w-4 h-4" /> : selected ? <CheckCircle className="w-4 h-4" /> : <Plus className="w-4 h-4 text-gray-400" />}
+                          </button>
+                          <div className="flex-1 min-w-0">
+                            <Link to={`/lessons/${lesson.slug}`} className="text-sm font-bold text-gray-900 dark:text-white hover:text-amber-600 dark:hover:text-amber-400">
+                              {lesson.story.title}
+                            </Link>
+                            <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{lesson.stem.title}</p>
+                            <p className="text-xs text-gray-400 dark:text-gray-500 mt-1 line-clamp-1">{lesson.stem.project.title}: {lesson.stem.project.description}</p>
+                            <div className="flex flex-wrap gap-1 mt-2">
+                              {lesson.subjects?.slice(0, 3).map(s => {
+                                const sd = SUBJECTS.find(x => x.key === s);
+                                return sd ? <span key={s} className={`text-[10px] px-1.5 py-0.5 rounded ${sd.color}`}>{sd.icon} {sd.key}</span> : null;
+                              })}
+                              {lesson.toolSkills?.slice(0, 2).map(s => (
+                                <span key={s} className="text-[10px] px-1.5 py-0.5 rounded bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300">{s}</span>
+                              ))}
+                            </div>
+                          </div>
+                          <span className="text-xs text-gray-400 flex-shrink-0">{lesson.estimatedHours || 12}h</span>
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <h3 className="text-sm font-bold text-gray-900 dark:text-white truncate">
-                            {lesson.story.title}
-                          </h3>
-                          <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{lesson.stem.title}</p>
-                        </div>
-                        <div className="flex gap-1 flex-shrink-0">
-                          {lesson.subjects?.slice(0, 3).map(s => {
-                            const sd = SUBJECTS.find(x => x.key === s);
-                            return sd ? <span key={s} className={`text-xs px-1.5 py-0.5 rounded ${sd.color}`}>{sd.icon}</span> : null;
-                          })}
-                        </div>
-                      </div>
-                    </button>
-                  );
-                })}
-                {availableLessons.length === 0 && (
-                  <p className="text-center py-8 text-gray-400 dark:text-gray-500 text-sm">No stories match your search.</p>
-                )}
-              </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* ── Right: Plan summary ── */}
             <div className="lg:col-span-1">
               <div className="sticky top-24 bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-lg overflow-hidden">
-                {/* Plan header with gradient */}
                 <div className="bg-gradient-to-r from-amber-500 to-orange-500 px-6 py-5 text-white">
                   <h2 className="text-lg font-bold flex items-center gap-2">
-                    <Target className="w-5 h-5" />
-                    Your Plan
+                    <Target className="w-5 h-5" /> Your Plan
                   </h2>
                   {selectedLessons.length > 0 && (
-                    <div className="flex items-center gap-4 mt-3">
-                      <div>
-                        <p className="text-2xl font-bold">{selectedLessons.length}</p>
-                        <p className="text-xs text-white/80">stories</p>
-                      </div>
-                      <div>
-                        <p className="text-2xl font-bold">{totalHours}</p>
-                        <p className="text-xs text-white/80">hours</p>
-                      </div>
-                      <div>
-                        <p className="text-2xl font-bold">{completedInPlan}</p>
-                        <p className="text-xs text-white/80">done</p>
-                      </div>
+                    <div className="flex items-center gap-5 mt-3">
+                      <div><p className="text-2xl font-bold">{selectedLessons.length}</p><p className="text-xs text-white/80">stories</p></div>
+                      <div><p className="text-2xl font-bold">{totalHours}</p><p className="text-xs text-white/80">hours</p></div>
+                      <div><p className="text-2xl font-bold">{completedInPlan}</p><p className="text-xs text-white/80">done</p></div>
                     </div>
                   )}
                 </div>
 
-                <div className="p-6">
+                <div className="p-5">
                   {selectedLessons.length === 0 ? (
                     <div className="text-center py-6">
                       <Sparkles className="w-10 h-10 text-amber-300 mx-auto mb-3" />
                       <p className="text-sm text-gray-500 dark:text-gray-400">
-                        Click stories on the left to build your plan.
-                      </p>
-                      <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
-                        Each story is a complete learning journey — from a children's tale to a working project.
+                        Choose a learning goal or pick stories to build your plan.
                       </p>
                     </div>
                   ) : (
                     <>
-                      {/* Progress bar */}
+                      {/* Progress */}
                       <div className="mb-5">
                         <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-1.5">
                           <span className="flex items-center gap-1">
@@ -351,42 +435,34 @@ export default function LessonPlanPage() {
                           <span className="font-bold">{progressPct}%</span>
                         </div>
                         <div className="w-full h-3 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
-                          <div
-                            className={`h-full rounded-full transition-all duration-500 ${progressPct === 100 ? 'bg-emerald-500' : 'bg-gradient-to-r from-amber-400 to-orange-500'}`}
-                            style={{ width: `${Math.max(progressPct, 2)}%` }}
-                          />
+                          <div className={`h-full rounded-full transition-all duration-500 ${progressPct === 100 ? 'bg-emerald-500' : 'bg-gradient-to-r from-amber-400 to-orange-500'}`}
+                            style={{ width: `${Math.max(progressPct, 2)}%` }} />
                         </div>
                       </div>
 
                       {/* Time estimate */}
-                      <div className="bg-amber-50 dark:bg-amber-900/15 border border-amber-200 dark:border-amber-800 rounded-lg p-3 mb-5">
-                        <p className="text-xs text-amber-800 dark:text-amber-300 flex items-start gap-2">
-                          <Clock className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" />
-                          <span>
-                            <strong>At 1 hour/day:</strong> {totalHours - completedInPlan * 12} days remaining
-                            <br />
-                            <strong>At 2 hours/day:</strong> {Math.ceil((totalHours - completedInPlan * 12) / 2)} days remaining
-                          </span>
-                        </p>
-                      </div>
+                      {completedInPlan < selectedLessons.length && (
+                        <div className="bg-amber-50 dark:bg-amber-900/15 border border-amber-200 dark:border-amber-800 rounded-lg p-3 mb-5">
+                          <p className="text-xs text-amber-800 dark:text-amber-300 flex items-start gap-2">
+                            <Clock className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" />
+                            <span>~{(selectedLessons.length - completedInPlan) * 12} hours remaining &middot; {Math.ceil((selectedLessons.length - completedInPlan) * 12 / 7)} weeks at 2h/day</span>
+                          </p>
+                        </div>
+                      )}
 
-                      {/* Selected lessons */}
-                      <div className="space-y-1.5 max-h-[250px] overflow-y-auto mb-5">
+                      {/* Story list */}
+                      <div className="space-y-1.5 max-h-[250px] overflow-y-auto mb-4">
                         {selectedLessons.map(lesson => {
                           const complete = isStoryComplete(lesson.slug);
                           return (
                             <div key={lesson.slug} className={`flex items-center justify-between p-2 rounded-lg ${complete ? 'bg-emerald-50 dark:bg-emerald-900/10' : 'bg-gray-50 dark:bg-gray-700/50'}`}>
                               <div className="flex items-center gap-2 min-w-0">
-                                {complete ? (
-                                  <CheckCircle className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-                                ) : (
-                                  <div className="w-4 h-4 rounded-full border-2 border-amber-400 flex-shrink-0" />
-                                )}
+                                {complete ? <CheckCircle className="w-4 h-4 text-emerald-500 flex-shrink-0" /> : <div className="w-4 h-4 rounded-full border-2 border-amber-400 flex-shrink-0" />}
                                 <Link to={`/lessons/${lesson.slug}`} className="text-xs text-gray-700 dark:text-gray-300 truncate hover:text-amber-600 dark:hover:text-amber-400">
                                   {lesson.story.title}
                                 </Link>
                               </div>
-                              <button onClick={(e) => { e.stopPropagation(); toggleLesson(lesson.slug); }} className="p-1 text-gray-400 hover:text-red-500 flex-shrink-0">
+                              <button onClick={() => toggleLesson(lesson.slug)} className="p-1 text-gray-400 hover:text-red-500 flex-shrink-0">
                                 <X className="w-3 h-3" />
                               </button>
                             </div>
@@ -396,11 +472,9 @@ export default function LessonPlanPage() {
 
                       {/* CTA */}
                       {nextLesson ? (
-                        <Link
-                          to={`/lessons/${nextLesson.slug}`}
-                          className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-4 py-3 rounded-xl font-semibold hover:shadow-lg transition-all"
-                        >
-                          Continue: {nextLesson.story.title.length > 25 ? nextLesson.story.title.slice(0, 25) + '...' : nextLesson.story.title}
+                        <Link to={`/lessons/${nextLesson.slug}`}
+                          className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-4 py-3 rounded-xl font-semibold hover:shadow-lg transition-all">
+                          Start: {nextLesson.story.title.length > 22 ? nextLesson.story.title.slice(0, 22) + '...' : nextLesson.story.title}
                           <ArrowRight className="w-4 h-4" />
                         </Link>
                       ) : (
@@ -410,10 +484,7 @@ export default function LessonPlanPage() {
                         </div>
                       )}
 
-                      <button
-                        onClick={clearAll}
-                        className="w-full text-xs text-gray-400 hover:text-red-500 transition-colors py-2 mt-2"
-                      >
+                      <button onClick={clearAll} className="w-full text-xs text-gray-400 hover:text-red-500 transition-colors py-2 mt-2">
                         Clear plan
                       </button>
                     </>
