@@ -11,7 +11,7 @@ export default function ResourceRenewableDiagram() {
 
         {/* Renewable side */}
         <rect x="20" y="45" width="235" height="240" rx="8" fill="none" stroke="#34d399" strokeWidth="1.5" />
-        <rect x="20" y="45" width="235" height="28" rx="8 8 0 0" fill="#166534" opacity="0.3" />
+        <rect x="20" y="45" width="235" height="28" rx="8" fill="#166534" opacity="0.3" />
         <text x="137" y="64" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#6ee7b7">RENEWABLE</text>
 
         <text x="137" y="88" textAnchor="middle" fontSize="10" fill="#94a3b8">Replenished within a human lifetime</text>
@@ -49,7 +49,7 @@ export default function ResourceRenewableDiagram() {
 
         {/* Non-renewable side */}
         <rect x="270" y="45" width="230" height="240" rx="8" fill="none" stroke="#f87171" strokeWidth="1.5" />
-        <rect x="270" y="45" width="230" height="28" rx="8 8 0 0" fill="#991b1b" opacity="0.3" />
+        <rect x="270" y="45" width="230" height="28" rx="8" fill="#991b1b" opacity="0.3" />
         <text x="385" y="64" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#fca5a5">NON-RENEWABLE</text>
 
         <text x="385" y="88" textAnchor="middle" fontSize="10" fill="#94a3b8">Millions of years to form, finite supply</text>

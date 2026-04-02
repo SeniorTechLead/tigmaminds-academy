@@ -11,7 +11,7 @@ export default function PopUrbanizationDiagram() {
 
         {/* Rural scene */}
         <rect x="20" y="50" width="170" height="170" rx="8" fill="none" stroke="#34d399" strokeWidth="1.5" />
-        <rect x="20" y="50" width="170" height="24" rx="8 8 0 0" fill="#166534" opacity="0.3" />
+        <rect x="20" y="50" width="170" height="24" rx="8" fill="#166534" opacity="0.3" />
         <text x="105" y="67" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#6ee7b7">Rural</text>
 
         {/* Rural elements */}
@@ -41,7 +41,7 @@ export default function PopUrbanizationDiagram() {
 
         {/* Urban scene */}
         <rect x="315" y="50" width="185" height="170" rx="8" fill="none" stroke="#60a5fa" strokeWidth="1.5" />
-        <rect x="315" y="50" width="185" height="24" rx="8 8 0 0" fill="#1e40af" opacity="0.3" />
+        <rect x="315" y="50" width="185" height="24" rx="8" fill="#1e40af" opacity="0.3" />
         <text x="407" y="67" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#93c5fd">Urban</text>
 
         {/* Buildings */}
