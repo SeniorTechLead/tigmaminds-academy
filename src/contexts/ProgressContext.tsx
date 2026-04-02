@@ -73,7 +73,7 @@ function saveLocal(progress: Record<string, LessonProgress>) {
   localStorage.setItem('tma_progress', JSON.stringify(progress));
 }
 
-async function saveToSupabase(userId: string, slug: string, levelsCompleted: number[], completedAt?: string) {
+async function saveToSupabase(userId: string, slug: string, progress: LessonProgress) {
   const lesson = getLessonBySlug(slug);
   if (!lesson) {
     console.error(`[Progress] Unknown lesson slug: ${slug}`);
@@ -84,9 +84,10 @@ async function saveToSupabase(userId: string, slug: string, levelsCompleted: num
       user_id: userId,
       lesson_id: lesson.id,
       lesson_slug: slug,
-      levels_completed: levelsCompleted,
-      completed_at: completedAt,
-    }, { onConflict: 'user_id,lesson_id' });
+      levels_completed: progress.levelsCompleted,
+      level_details: progress.levels,
+      completed_at: progress.completedAt,
+    }, { onConflict: 'user_id,lesson_slug' });
 
     if (error) {
       console.error(`[Progress] Failed to save ${slug}:`, error.message);
@@ -131,6 +132,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
             dbProgress[row.lesson_slug] = {
               slug: row.lesson_slug,
               levelsCompleted: row.levels_completed || [],
+              levels: row.level_details || {},
               completedAt: row.completed_at,
             };
           }
@@ -141,6 +143,21 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
             if (merged[slug]) {
               const combined = new Set([...merged[slug].levelsCompleted, ...localP.levelsCompleted]);
               merged[slug].levelsCompleted = Array.from(combined).sort();
+              // Merge level details — keep the more detailed version per level
+              const mergedLevels = { ...merged[slug].levels };
+              for (const [lv, detail] of Object.entries(localP.levels || {})) {
+                const existing = mergedLevels[lv as any] || {};
+                mergedLevels[lv as any] = {
+                  viewed: existing.viewed || detail.viewed,
+                  quizScore: Math.max(existing.quizScore || 0, detail.quizScore || 0),
+                  quizTotal: detail.quizTotal || existing.quizTotal,
+                  miniLessonsSeen: Math.max(existing.miniLessonsSeen || 0, detail.miniLessonsSeen || 0),
+                  miniLessonsTotal: detail.miniLessonsTotal || existing.miniLessonsTotal,
+                  codeRun: existing.codeRun || detail.codeRun,
+                  completedAt: existing.completedAt || detail.completedAt,
+                };
+              }
+              merged[slug].levels = mergedLevels;
             } else {
               merged[slug] = localP;
             }
@@ -150,13 +167,13 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
 
           // Push merged back to Supabase
           for (const [slug, p] of Object.entries(merged)) {
-            await saveToSupabase(user.id, slug, p.levelsCompleted, p.completedAt);
+            await saveToSupabase(user.id, slug, p);
           }
         } else {
           // No DB data — push local to Supabase
           const local = loadLocal();
           for (const [slug, p] of Object.entries(local)) {
-            await saveToSupabase(user.id, slug, p.levelsCompleted, p.completedAt);
+            await saveToSupabase(user.id, slug, p);
           }
         }
 
@@ -187,7 +204,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       const newProgress = { ...prev, [slug]: updated };
       saveLocal(newProgress);
       if (user) {
-        saveToSupabase(user.id, slug, updated.levelsCompleted, updated.completedAt);
+        saveToSupabase(user.id, slug, updated);
       }
       return newProgress;
     });
