@@ -125,7 +125,7 @@ function getPlanMessage(count: number, completed: number): string {
 export default function LessonPlanPage() {
   const { user } = useAuth();
   const [planMap, setPlanMap] = useState<PlanMap>(loadPlanLocal);
-  const [view, setView] = useState<'goals' | 'browse'>('goals');
+  const [view, setView] = useState<'goals' | 'browse' | 'plan'>('goals');
   const [filterSubject, setFilterSubject] = useState<Subject | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedGoal, setExpandedGoal] = useState<string | null>(null);
@@ -231,7 +231,15 @@ export default function LessonPlanPage() {
               Learning Goals
             </button>
             <button onClick={() => setView('browse')} className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${view === 'browse' ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm' : 'text-gray-500'}`}>
-              Browse All Stories
+              Browse All
+            </button>
+            <button onClick={() => setView('plan')} className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all relative ${view === 'plan' ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm' : 'text-gray-500'}`}>
+              My Plan
+              {selectedLessons.length > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-amber-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                  {selectedLessons.length}
+                </span>
+              )}
             </button>
           </div>
         </div>
@@ -239,6 +247,142 @@ export default function LessonPlanPage() {
 
       <section className="pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
+
+          {/* ═══ My Plan — full width detailed view ═══ */}
+          {view === 'plan' && (
+            <div className="max-w-4xl mx-auto">
+              {selectedLessons.length === 0 ? (
+                <div className="text-center py-16">
+                  <Sparkles className="w-12 h-12 text-amber-300 mx-auto mb-4" />
+                  <p className="text-lg text-gray-500 dark:text-gray-400 mb-2">Your plan is empty</p>
+                  <p className="text-sm text-gray-400 dark:text-gray-500 mb-6">Switch to Learning Goals to pick a path, or browse all stories.</p>
+                  <button onClick={() => setView('goals')} className="inline-flex items-center gap-2 bg-amber-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-amber-600 transition-colors">
+                    <Target className="w-4 h-4" /> Choose a Learning Goal
+                  </button>
+                </div>
+              ) : (
+                <>
+                  {/* Stats bar */}
+                  <div className="grid grid-cols-4 gap-4 mb-6">
+                    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 text-center">
+                      <p className="text-3xl font-bold text-amber-600">{selectedLessons.length}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Stories</p>
+                    </div>
+                    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 text-center">
+                      <p className="text-3xl font-bold text-blue-600">{totalHours}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Total Hours</p>
+                    </div>
+                    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 text-center">
+                      <p className="text-3xl font-bold text-emerald-600">{completedInPlan}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Completed</p>
+                    </div>
+                    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 text-center">
+                      <p className="text-3xl font-bold text-gray-900 dark:text-white">{progressPct}%</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Progress</p>
+                    </div>
+                  </div>
+
+                  {/* Progress bar */}
+                  <div className="w-full h-3 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden mb-8">
+                    <div className={`h-full rounded-full transition-all duration-700 ${progressPct === 100 ? 'bg-emerald-500' : 'bg-gradient-to-r from-amber-400 to-orange-500'}`}
+                      style={{ width: `${Math.max(progressPct, 1)}%` }} />
+                  </div>
+
+                  {/* Story timeline */}
+                  <div className="relative">
+                    {/* Vertical line */}
+                    <div className="absolute left-5 top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-gray-700" />
+
+                    <div className="space-y-4">
+                      {selectedLessons.map((lesson, i) => {
+                        const complete = isStoryComplete(lesson.slug);
+                        const isNext = !complete && (i === 0 || isStoryComplete(selectedLessons[i - 1]?.slug));
+                        const Icon = lesson.stem.icon;
+                        return (
+                          <div key={lesson.slug} className={`relative pl-14 ${complete ? 'opacity-80' : ''}`}>
+                            {/* Timeline dot */}
+                            <div className={`absolute left-2.5 top-4 w-6 h-6 rounded-full flex items-center justify-center z-10 ${
+                              complete ? 'bg-emerald-500' :
+                              isNext ? 'bg-amber-500 ring-4 ring-amber-200 dark:ring-amber-900' :
+                              'bg-gray-300 dark:bg-gray-600'
+                            }`}>
+                              {complete ? <CheckCircle className="w-4 h-4 text-white" /> :
+                               <span className="text-[10px] font-bold text-white">{i + 1}</span>}
+                            </div>
+
+                            {/* Story card */}
+                            <div className={`bg-white dark:bg-gray-800 rounded-xl border-2 p-5 transition-all ${
+                              isNext ? 'border-amber-400 dark:border-amber-600 shadow-md' :
+                              complete ? 'border-emerald-200 dark:border-emerald-800' :
+                              'border-gray-200 dark:border-gray-700'
+                            }`}>
+                              <div className="flex items-start gap-4">
+                                <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${lesson.stem.color} flex items-center justify-center flex-shrink-0`}>
+                                  <Icon className="w-5 h-5 text-white" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-start justify-between gap-2">
+                                    <div>
+                                      <Link to={`/lessons/${lesson.slug}`} className="text-base font-bold text-gray-900 dark:text-white hover:text-amber-600 dark:hover:text-amber-400">
+                                        {lesson.story.title}
+                                      </Link>
+                                      {complete && <span className="ml-2 text-xs text-emerald-500 font-semibold">Completed</span>}
+                                      {isNext && <span className="ml-2 text-xs text-amber-500 font-semibold">Up next</span>}
+                                    </div>
+                                    <button onClick={() => toggleLesson(lesson.slug)} className="p-1.5 text-gray-400 hover:text-red-500 flex-shrink-0" title="Remove from plan">
+                                      <X className="w-4 h-4" />
+                                    </button>
+                                  </div>
+                                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{lesson.stem.title}</p>
+                                  <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+                                    <strong>You'll build:</strong> {lesson.stem.project.title}
+                                  </p>
+                                  <p className="text-xs text-gray-400 dark:text-gray-500">{lesson.stem.project.description}</p>
+                                  <div className="flex flex-wrap gap-1.5 mt-3">
+                                    {lesson.subjects?.map(s => {
+                                      const sd = SUBJECTS.find(x => x.key === s);
+                                      return sd ? <span key={s} className={`text-[10px] px-1.5 py-0.5 rounded ${sd.color}`}>{sd.icon} {sd.key}</span> : null;
+                                    })}
+                                    {lesson.toolSkills?.map(s => (
+                                      <span key={s} className="text-[10px] px-1.5 py-0.5 rounded bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300">{s}</span>
+                                    ))}
+                                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400">
+                                      <Clock className="w-3 h-3 inline mr-0.5" />{lesson.estimatedHours || 12}h
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+
+                              {/* CTA for the next lesson */}
+                              {isNext && (
+                                <Link to={`/lessons/${lesson.slug}`}
+                                  className="mt-4 w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-4 py-2.5 rounded-lg font-semibold text-sm hover:shadow-lg transition-all">
+                                  Start This Lesson <ArrowRight className="w-4 h-4" />
+                                </Link>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Actions */}
+                  <div className="flex items-center justify-between mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+                    <button onClick={() => setView('goals')} className="text-sm text-amber-600 dark:text-amber-400 hover:underline font-medium flex items-center gap-1">
+                      <Plus className="w-4 h-4" /> Add more stories
+                    </button>
+                    <button onClick={clearAll} className="text-sm text-gray-400 hover:text-red-500 transition-colors">
+                      Clear entire plan
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
+          )}
+
+          {/* ═══ Goals / Browse — two-column with sidebar ═══ */}
+          {view !== 'plan' && (
           <div className="grid lg:grid-cols-3 gap-8">
 
             {/* ── Left: Goals or Browse ── */}
@@ -493,6 +637,7 @@ export default function LessonPlanPage() {
               </div>
             </div>
           </div>
+          )}
         </div>
       </section>
 
