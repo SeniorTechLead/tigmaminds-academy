@@ -40,7 +40,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
-    // Get initial session
+    // Handle tokens from custom Google OAuth callback (hash fragment)
+    const hash = window.location.hash;
+    if (hash.includes('access_token=') && hash.includes('refresh_token=')) {
+      const params = new URLSearchParams(hash.slice(1));
+      const accessToken = params.get('access_token');
+      const refreshToken = params.get('refresh_token');
+      if (accessToken && refreshToken) {
+        // Set the session from our custom OAuth flow, then clean the URL
+        supabase.auth.setSession({ access_token: accessToken, refresh_token: refreshToken }).then(({ data: { session } }) => {
+          if (session) {
+            setSession(session);
+            setUser(session.user);
+            fetchProfile(session.user.id);
+            // Clean hash from URL without triggering navigation
+            window.history.replaceState(null, '', window.location.pathname + window.location.search);
+          }
+          setLoading(false);
+        });
+        return; // skip normal getSession — setSession handles it
+      }
+    }
+
+    // Normal flow: get existing session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
