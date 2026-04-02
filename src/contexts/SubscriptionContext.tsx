@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from './AuthContext';
+import { FEATURES } from '../config/features';
 
 export interface Subscription {
   id: string;
@@ -29,6 +30,13 @@ export function SubscriptionProvider({ children }: { children: ReactNode }) {
 
   const fetchSubscription = useCallback(async () => {
     if (!user) {
+      setSubscription(null);
+      setLoading(false);
+      return;
+    }
+
+    // Don't query the table if payments are disabled (table may not exist)
+    if (!FEATURES.PAYMENTS_ENABLED) {
       setSubscription(null);
       setLoading(false);
       return;

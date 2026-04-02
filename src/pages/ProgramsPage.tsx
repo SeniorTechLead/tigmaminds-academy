@@ -11,6 +11,7 @@ import Footer from '../components/Footer';
 import CheckoutButton from '../components/CheckoutButton';
 import { useSubscription } from '../contexts/SubscriptionContext';
 import { useAuth } from '../contexts/AuthContext';
+import { FEATURES } from '../config/features';
 
 /* ── "What Students Will Build" — real capstone projects from real lessons ── */
 const capstoneProjects = [
@@ -230,7 +231,7 @@ export default function ProgramsPage() {
       </section>
 
       {/* ── Payment result banner ── */}
-      {paymentResult === 'success' && (
+      {FEATURES.PAYMENTS_ENABLED && paymentResult === 'success' && (
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 mb-6">
           <div className="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-xl p-4 flex items-center gap-3">
             <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0" />
@@ -238,7 +239,7 @@ export default function ProgramsPage() {
           </div>
         </div>
       )}
-      {paymentResult === 'failed' && (
+      {FEATURES.PAYMENTS_ENABLED && paymentResult === 'failed' && (
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 mb-6">
           <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4 flex items-center gap-3">
             <p className="text-sm font-semibold text-red-800 dark:text-red-300">Payment was not completed. Please try again or contact us.</p>
