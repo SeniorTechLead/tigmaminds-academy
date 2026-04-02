@@ -20,6 +20,7 @@ export interface InteractiveConfig {
 }
 
 export interface ReferenceSection {
+  id?: string;                // unique section identifier (e.g., 'py-strings', 'algo-binary-search')
   title: string;
   content: string;            // Level 0 — everyone reads this (analogies, try-this, zero jargon)
   goDeeper?: string;          // Level 1-2 — formulas, calculations, code snippets

@@ -170,6 +170,7 @@ print(3 + 7)        # 10
 print("Age:", 14)    # you can mix types with commas`,
       },
       {
+        id: 'py-variables',
         title: 'Variables and Types',
         content:
           'Variables store values. Python figures out the type automatically — you never declare types like in Java or C.\n\n' +
@@ -218,6 +219,7 @@ print(isinstance(x, (int, float)))  # True (either type)
 print(isinstance("hi", str))     # True`,
       },
       {
+        id: 'py-strings',
         title: 'Strings',
         diagram: 'StringSlicingDiagram',
         content:
@@ -273,6 +275,7 @@ print(f"We spotted {count} {animal}s today!")
 print(f"Name reversed: {name[::-1]}")`,
       },
       {
+        id: 'py-lists',
         title: 'Lists',
         content:
           'Lists hold ordered collections enclosed in square brackets `[]`. They can contain any type — numbers, strings, ' +
@@ -334,6 +337,7 @@ print(max(scores))   # 95
 print(sum(scores))   # 438`,
       },
       {
+        id: 'py-conditionals',
         title: 'If / Elif / Else',
         content:
           'Branching lets your program make decisions based on conditions. Python uses indentation (4 spaces) to define code blocks.\n\n' +
@@ -390,6 +394,7 @@ def classify(magnitude):
 print(classify(5.5))  # "moderate"`,
       },
       {
+        id: 'py-loops',
         title: 'Loops',
         content:
           '`for` loops iterate over any sequence (list, string, range). `while` loops repeat until a condition is false.\n\n' +
@@ -476,6 +481,7 @@ for g in growth:
 print(f"Longest growth streak: {longest_streak}")  # 3`,
       },
       {
+        id: 'py-functions',
         title: 'Functions',
         content:
           'Functions group reusable logic. They take parameters and return results. Use `def` to define, and `return` to send back a value.\n\n' +
@@ -564,6 +570,7 @@ by_weight = sorted(animals, key=lambda a: a[1])
 print(by_weight[0])  # ('dolphin', 150)`,
       },
       {
+        id: 'py-dicts',
         title: 'Dictionaries',
         diagram: 'DictCounterDiagram',
         content:
@@ -657,6 +664,7 @@ grid = {(0, 0): "start", (3, 4): "end"}
 print(grid[(3, 4)])    # end`,
       },
       {
+        id: 'py-comprehensions',
         title: 'List Comprehensions — One-Line Loops',
         content:
           'A list comprehension builds a new list in one line: `[expression for item in iterable]`.\n\n' +
@@ -715,6 +723,7 @@ profiles = {name: age for name, age in zip(names, ages)}
 print(profiles)  # {'Ranga': 25, 'Mohini': 18, 'Kavi': 30}`,
       },
       {
+        id: 'py-files',
         title: 'Working with Files',
         content:
           'Real data lives in files. Python makes it easy to read and write text files and CSVs. ' +
@@ -753,6 +762,7 @@ with open("elephant_data.csv", "r") as f:
     print(f"Total rows: {line_count - 1}")  # minus header`,
       },
       {
+        id: 'py-errors',
         title: 'Error Handling — try / except',
         content:
           'Errors happen. `try/except` catches them so your program doesn\u2019t crash.\n\n' +
@@ -820,6 +830,7 @@ except KeyError:
     print("no name")`,
       },
       {
+        id: 'py-bisect',
         title: 'The bisect Module — Binary Search Built In',
         content:
           'Python\u2019s `bisect` module provides efficient binary search for sorted lists. ' +
@@ -885,6 +896,7 @@ bisect.insort(scores, 75)
 print(scores)  # [60, 70, 75, 80, 90] — inserted in right place`,
       },
       {
+        id: 'py-itertools',
         title: 'The itertools Module — Power Tools for Iteration',
         content:
           '`itertools` provides building blocks for efficient iteration. All functions return lazy iterators (memory-efficient).\n\n' +
@@ -3836,6 +3848,7 @@ void loop() {
 
     build: [
       {
+        id: 'stats-central',
         title: 'Central Tendency: Mean, Median, Mode',
         content:
           'Calculate the three measures of center and see how they differ when outliers are present.',
@@ -3857,6 +3870,7 @@ print(f"Median: {np.median(scores_with_outlier):.1f}") # stays at 85.0
 # The median barely moved — that's why it's called "robust"`,
       },
       {
+        id: 'stats-stddev',
         title: 'Standard Deviation and Variance',
         content:
           'Standard deviation tells you how far values typically are from the mean. Variance is its square.',
@@ -3882,6 +3896,7 @@ print(f"Class B variance: {np.var(class_b):.1f}")
 # ~99.7% fall within 3 SDs`,
       },
       {
+        id: 'stats-histograms',
         title: 'Histograms and Distribution Shapes',
         content:
           'Visualize how data is distributed using histograms. The shape reveals patterns words cannot.',
@@ -3917,6 +3932,7 @@ plt.tight_layout()
 plt.show()`,
       },
       {
+        id: 'stats-outliers',
         title: 'Detecting Outliers with IQR',
         content:
           'The interquartile range method flags values that are unusually far from the middle 50% of the data.',
@@ -3944,6 +3960,7 @@ print(f"\\nMean with outlier:    {np.mean(data):.1f}")
 print(f"Mean without outlier: {np.mean(clean):.1f}")`,
       },
       {
+        id: 'stats-correlation',
         title: 'Correlation and Scatter Plots',
         content:
           'Visualize the relationship between two variables and compute the correlation coefficient.',
@@ -4741,6 +4758,7 @@ plt.show()
         diagram: 'FlowchartDiagram',
       },
       {
+        id: 'algo-arrays',
         title: 'Arrays and Lists: Storing Ordered Data',
         content:
           'Before you can run algorithms on data, you need a way to organize that data. The simplest ' +
@@ -4899,6 +4917,7 @@ for val in [10, 20, 30, 40, 50]:
 
     build: [
       {
+        id: 'algo-search',
         title: 'Linear and Binary Search',
         diagram: 'BinarySearchDiagram',
         content:
@@ -4956,6 +4975,7 @@ temps = [0, 1000, 2000, 3000, 4000]
 print(find_closest(temps, 1500))  # 1000 or 2000`,
       },
       {
+        id: 'algo-sorting',
         title: 'Sorting Algorithms',
         diagram: 'BubbleSortDiagram',
         content:
@@ -5010,6 +5030,7 @@ by_weight_desc = sorted(animals, key=lambda a: a[1], reverse=True)
 print(by_weight_desc[0])  # ('elephant', 4500)`,
       },
       {
+        id: 'algo-two-pointer',
         title: 'Two-Pointer Technique',
         diagram: 'TwoPointerDiagram',
         content:
@@ -5070,6 +5091,7 @@ print(is_symmetric([5, 8, 10, 8, 5]))       # True
 print(is_symmetric([5, 8, 10, 8.1, 4.9], 0.2))  # True`,
       },
       {
+        id: 'algo-sliding-window',
         title: 'Sliding Window',
         diagram: 'SlidingWindowDiagram',
         content:
@@ -5127,6 +5149,7 @@ growth = [2, 3, 0, 1, 4, 5, 0, 1]
 print(longest_positive_streak(growth))  # 3`,
       },
       {
+        id: 'algo-bfs-dfs',
         title: 'BFS and DFS — Graph Traversal',
         diagram: 'BFSDFSDiagram',
         content:
@@ -5216,6 +5239,7 @@ def shortest_path(graph, start, end):
 print(shortest_path(village_graph, "A", "D"))  # 2`,
       },
       {
+        id: 'algo-recursion',
         title: 'Recursion',
         diagram: 'RecursionTreeDiagram',
         content:

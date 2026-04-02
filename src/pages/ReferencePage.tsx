@@ -45,28 +45,24 @@ export default function ReferencePage() {
     }
   }, [slug]);
 
-  // Deep-link to a section within a guide via URL hash (e.g. #section-python-10)
+  // Deep-link to a section via URL hash (e.g. #py-strings or legacy #section-python-10)
   useEffect(() => {
     const hash = location.hash?.slice(1);
-    if (!hash || !hash.startsWith('section-')) return;
-    // Extract guide slug from section ID: "section-python-10" -> "python"
-    const parts = hash.replace('section-', '').split('-');
-    parts.pop(); // remove index
-    const guideSlug = parts.join('-');
+    if (!hash) return;
 
     const attempt = (tries: number) => {
       const el = document.getElementById(hash);
       if (el && el.offsetHeight > 0) {
         const top = el.getBoundingClientRect().top + window.scrollY - 120;
         window.scrollTo({ top, behavior: 'smooth' });
-      } else if (tries >= 8) {
+      } else if (tries >= 8 && slug) {
         // Section not found (likely gated) — scroll to the guide card instead
-        const guideEl = document.getElementById(`ref-${guideSlug}`);
+        const guideEl = document.getElementById(`ref-${slug}`);
         if (guideEl) {
           const top = guideEl.getBoundingClientRect().top + window.scrollY - 120;
           window.scrollTo({ top, behavior: 'smooth' });
         }
-      } else {
+      } else if (tries < 12) {
         setTimeout(() => attempt(tries + 1), 250);
       }
     };
