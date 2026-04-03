@@ -8,6 +8,7 @@ import { ProgressProvider } from './contexts/ProgressContext';
 import { LessonMetaProvider } from './contexts/LessonMetaContext';
 import { SubscriptionProvider } from './contexts/SubscriptionContext';
 import { PyodideProvider } from './contexts/PyodideContext';
+import { SqlJsProvider } from './contexts/SqlJsContext';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -17,7 +18,9 @@ createRoot(document.getElementById('root')!).render(
           <PrefsProvider>
             <ProgressProvider>
               <PyodideProvider>
-                <App />
+                <SqlJsProvider>
+                  <App />
+                </SqlJsProvider>
               </PyodideProvider>
             </ProgressProvider>
           </PrefsProvider>

@@ -5173,6 +5173,13 @@ SELECT name AS elephant_name,
        weight * 2.2 AS weight_lbs
 FROM elephants;`,
         diagram: 'SQLQueryFlowDiagram',
+        interactive: {
+          type: 'sql-playground',
+          props: {
+            starterCode: "-- Try these queries on the sample database\nSELECT * FROM elephants;\n\n-- Filter by weight\nSELECT name, weight FROM elephants\nWHERE weight > 4000\nORDER BY weight DESC;",
+            title: 'Try SELECT Queries',
+          },
+        },
       },
       {
         id: 'sql-aggregate',
@@ -5247,6 +5254,13 @@ FROM elephants
 GROUP BY park
 HAVING AVG(weight) > 4000;`,
         diagram: 'SQLAggregateDiagram',
+        interactive: {
+          type: 'sql-playground',
+          props: {
+            starterCode: "-- Count elephants per park\nSELECT park, COUNT(*) AS num_elephants\nFROM elephants\nGROUP BY park;\n\n-- Average weight per park (only parks with 2+ elephants)\n-- SELECT park, ROUND(AVG(weight), 1) AS avg_weight\n-- FROM elephants\n-- GROUP BY park\n-- HAVING COUNT(*) >= 2;",
+            title: 'Try GROUP BY Queries',
+          },
+        },
       },
       {
         id: 'sql-joins',
@@ -5299,6 +5313,13 @@ FROM elephants a
 JOIN elephants b ON a.id < b.id
 WHERE ABS(a.weight - b.weight) < 500;`,
         diagram: 'SQLJoinDiagram',
+        interactive: {
+          type: 'sql-playground',
+          props: {
+            starterCode: "-- LEFT JOIN: all elephants, even those with no sightings\nSELECT e.name, s.date, s.location\nFROM elephants e\nLEFT JOIN sightings s ON e.id = s.elephant_id;",
+            title: 'Try JOIN Queries',
+          },
+        },
       },
       {
         id: 'sql-relationships',
@@ -5369,6 +5390,13 @@ DELETE FROM elephants WHERE id = 1;
 -- all sightings with elephant_id = 1 are automatically deleted too.
 -- Without CASCADE, this DELETE would fail because sightings still reference id=1.`,
         diagram: 'SQLRelationshipDiagram',
+        interactive: {
+          type: 'sql-playground',
+          props: {
+            starterCode: "-- Query through the junction table\nSELECT e.name, p.name AS park, pe.first_seen\nFROM elephants e\nJOIN park_elephants pe ON e.id = pe.elephant_id\nJOIN parks p ON pe.park_id = p.id;",
+            title: 'Try Relationship Queries',
+          },
+        },
       },
       {
         id: 'sql-create-modify',
@@ -5426,6 +5454,13 @@ COMMIT;
 -- DROP TABLE: delete entire table (irreversible!)
 -- DROP TABLE elephants;  -- be very careful!`,
         diagram: 'SQLTableDiagram',
+        interactive: {
+          type: 'sql-playground',
+          props: {
+            starterCode: "-- Insert a new elephant\nINSERT INTO elephants (id, name, weight, park)\nVALUES (6, 'Lakshmi', 3900, 'Nameri');\n\n-- Verify it was added\nSELECT * FROM elephants;",
+            title: 'Try INSERT / UPDATE / DELETE',
+          },
+        },
       },
       {
         id: 'sql-subqueries',
@@ -5510,6 +5545,13 @@ FROM elephants;
 -- Tara     | Kaziranga | 3
 -- Mohini   | Manas     | 2
 -- Bala     | Manas     | 2`,
+        interactive: {
+          type: 'sql-playground',
+          props: {
+            starterCode: "-- Elephants heavier than average\nSELECT name, weight\nFROM elephants\nWHERE weight > (SELECT AVG(weight) FROM elephants);\n\n-- Rank by weight using a window function\n-- SELECT name, weight,\n--        RANK() OVER (ORDER BY weight DESC) AS rank\n-- FROM elephants;",
+            title: 'Try Subqueries & Window Functions',
+          },
+        },
       },
     ],
   },
