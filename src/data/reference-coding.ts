@@ -5042,7 +5042,6 @@ plt.show()
           'WHERE clauses filter rows: WHERE weight > 4000, WHERE name LIKE "R%", WHERE location IN ("Kaziranga", "Manas"), WHERE date BETWEEN "2024-01-01" AND "2024-12-31". AND/OR combine conditions: WHERE weight > 4000 AND location = "Kaziranga". ORDER BY sorts results: ORDER BY weight DESC (heaviest first), ORDER BY name ASC (alphabetical). LIMIT restricts output: LIMIT 10 returns the first 10 rows. Combined: SELECT name, weight FROM elephants WHERE weight > 3500 ORDER BY weight DESC LIMIT 5 — top 5 heaviest elephants over 3500 kg.',
         advanced:
           'Query performance depends on whether indexes exist for filtered columns. Without an index, the database performs a full table scan (checking every row). With a B-tree index on the weight column, WHERE weight > 4000 jumps directly to the relevant portion — O(log n) vs O(n). Composite indexes (CREATE INDEX ON sightings(location, date)) optimize queries filtering on multiple columns. The EXPLAIN command shows the query plan: Sequential Scan (slow) vs Index Scan (fast). Trade-off: indexes speed up reads but slow down writes (every INSERT/UPDATE must update the index).',
-        diagram: 'PostmanSortingDiagram',
         interactive: {
           type: 'matching',
           props: {
