@@ -828,6 +828,7 @@ try:
     print(elephant["name"])
 except KeyError:
     print("no name")`,
+        diagram: 'ErrorFlowDiagram',
       },
       {
         id: 'py-bisect',
@@ -1047,6 +1048,7 @@ print(grid_data[(0, 1)])  # "river"
 # ── Frozenset: an immutable set (can be a dict key) ──
 habitat = frozenset(["forest", "grassland"])
 print("forest" in habitat)  # True`,
+        diagram: 'TupleSetDiagram',
       },
       {
         id: 'py-classes',
@@ -1155,6 +1157,7 @@ print(susu.describe())  # Susu the Gangetic dolphin
 animals = [gaja, susu]
 for a in animals:
     print(isinstance(a, Animal))  # True for both`,
+        diagram: 'ClassBlueprintDiagram',
       },
       {
         id: 'py-scope',
@@ -1341,6 +1344,153 @@ name = "Ranga"
 print(f"{x = }")        # x = 42
 print(f"{name = }")     # name = 'Ranga'
 print(f"{len(name) = }")  # len(name) = 5`,
+      },
+      {
+        id: 'py-math',
+        title: 'Math & Numbers — Beyond Arithmetic',
+        content:
+          'Python\'s built-in `math` module provides essential mathematical functions: rounding, powers, roots, logarithms, trigonometry, and constants like `math.pi` and `math.e`.\n\n' +
+          '**Rounding family:** `math.floor(x)` always rounds down, `math.ceil(x)` always rounds up, `round(x)` rounds to nearest (with banker\'s rounding for .5). `round(x, n)` rounds to n decimal places.\n\n' +
+          '**Powers & roots:** `x ** n` for integer powers, `math.sqrt(x)` for square roots, `math.pow(x, n)` for float powers. `math.log(x, base)` for logarithms.\n\n' +
+          '**The `statistics` module** (standard library) provides `mean()`, `median()`, `stdev()`, `mode()` — safer than writing your own because they handle edge cases.\n\n' +
+          '**Integer division:** `//` gives the integer quotient (floor division), `%` gives the remainder (modulo). Together: `divmod(17, 5)` returns `(3, 2)` meaning 17 = 5×3 + 2.',
+        code: `import math
+import statistics
+
+# ── Rounding ──
+x = 3.7
+print(math.floor(x))   # 3  (always down)
+print(math.ceil(x))    # 4  (always up)
+print(round(x))        # 4  (nearest)
+print(round(3.14159, 2))  # 3.14  (2 decimal places)
+
+# Banker's rounding for .5 (round to even)
+print(round(2.5))  # 2  (not 3!)
+print(round(3.5))  # 4
+
+# ── Powers, roots, logs ──
+print(2 ** 10)           # 1024 (integer power)
+print(math.sqrt(144))    # 12.0
+print(math.pow(2, 0.5))  # 1.4142... (same as sqrt(2))
+
+print(math.log(1000, 10))  # 3.0 (10^3 = 1000)
+print(math.log2(256))      # 8.0 (2^8 = 256)
+
+# ── Absolute value and sign ──
+print(abs(-42))          # 42
+print(math.copysign(5, -1))  # -5.0 (copy sign)
+
+# ── Integer division & modulo ──
+print(17 // 5)   # 3  (quotient)
+print(17 % 5)    # 2  (remainder)
+q, r = divmod(17, 5)
+print(f"17 = 5 × {q} + {r}")  # 17 = 5 × 3 + 2
+
+# ── Constants ──
+print(math.pi)   # 3.141592653589793
+print(math.e)    # 2.718281828459045
+print(math.inf)  # infinity (useful for min/max init)
+
+# ── Statistics module ──
+weights = [4500, 3800, 5200, 4100, 3200]
+
+print(statistics.mean(weights))    # 4160.0
+print(statistics.median(weights))  # 4100
+print(statistics.stdev(weights))   # 756.6... (sample std dev)
+
+# Percentile-like: quantiles (Python 3.8+)
+print(statistics.quantiles(weights, n=4))
+# [3500.0, 4100.0, 4850.0] — quartile boundaries
+
+# ── Useful patterns ──
+# Clamp a value to a range
+value = 150
+clamped = max(0, min(value, 100))  # 100
+
+# Check if float is "close enough" (avoid ==)
+a = 0.1 + 0.2
+print(a == 0.3)                # False! (floating point)
+print(math.isclose(a, 0.3))   # True (within tolerance)`,
+        diagram: 'MathModuleDiagram',
+      },
+      {
+        id: 'py-data',
+        title: 'Data Processing — Filter, Transform, Aggregate',
+        content:
+          'Data processing follows a pipeline pattern: **raw data → filter → transform → aggregate → result**. Python\'s built-in tools make each step clean and composable.\n\n' +
+          '**Filtering** selects items that match a condition. Use list comprehensions with `if`: `[x for x in data if x > 0]`. For complex filters, `filter(fn, data)` works too.\n\n' +
+          '**Transforming** (mapping) applies a function to each item: `[fn(x) for x in data]` or `map(fn, data)`. Extract fields, convert types, compute derived values.\n\n' +
+          '**Aggregating** reduces a collection to a single value: `sum()`, `min()`, `max()`, `len()`, or custom reductions with `functools.reduce()`. The `statistics` module handles mean, median, stdev.\n\n' +
+          '**Grouping** organizes items by a key. Use `collections.defaultdict(list)` or `itertools.groupby()` (requires sorted input). Pattern: loop over items, append to group dict.\n\n' +
+          '**Chaining** these steps is the core of data analysis. Each step is small and testable. This is the same pattern used by pandas, SQL, and every data tool.',
+        code: `from collections import defaultdict
+import statistics
+
+# ── Sample data: elephant sightings ──
+sightings = [
+    {"name": "Ranga", "weight": 4500, "park": "Kaziranga"},
+    {"name": "Mohini", "weight": 3800, "park": "Manas"},
+    {"name": "Gaja", "weight": 5200, "park": "Kaziranga"},
+    {"name": "Tara", "weight": 4100, "park": "Kaziranga"},
+    {"name": "Bala", "weight": 3200, "park": "Manas"},
+]
+
+# ── Step 1: Filter ──
+kaziranga = [s for s in sightings if s["park"] == "Kaziranga"]
+print(len(kaziranga))  # 3
+
+# ── Step 2: Transform (extract weights) ──
+weights = [s["weight"] for s in kaziranga]
+print(weights)  # [4500, 5200, 4100]
+
+# ── Step 3: Aggregate ──
+avg_weight = statistics.mean(weights)
+print(f"Average: {avg_weight:.0f} kg")  # Average: 4600 kg
+
+# ── Grouping by key ──
+by_park = defaultdict(list)
+for s in sightings:
+    by_park[s["park"]].append(s["name"])
+
+for park, names in by_park.items():
+    print(f"{park}: {', '.join(names)}")
+# Kaziranga: Ranga, Gaja, Tara
+# Manas: Mohini, Bala
+
+# ── Moving average (sliding window) ──
+def moving_average(data, window):
+    """Smooth noisy data with a sliding window."""
+    result = []
+    for i in range(len(data) - window + 1):
+        chunk = data[i:i + window]
+        result.append(sum(chunk) / window)
+    return result
+
+readings = [10, 12, 11, 15, 14, 20, 18, 22]
+smoothed = moving_average(readings, 3)
+print(smoothed)  # [11.0, 12.67, 13.33, 16.33, 17.33, 20.0]
+
+# ── Percentile ──
+def percentile(data, p):
+    """Simple percentile calculation."""
+    sorted_data = sorted(data)
+    k = (len(sorted_data) - 1) * (p / 100)
+    f = int(k)
+    c = f + 1 if f + 1 < len(sorted_data) else f
+    return sorted_data[f] + (k - f) * (sorted_data[c] - sorted_data[f])
+
+all_weights = [s["weight"] for s in sightings]
+print(f"25th percentile: {percentile(all_weights, 25)}")  # 3500.0
+print(f"75th percentile: {percentile(all_weights, 75)}")  # 4800.0
+
+# ── Chained pipeline (one expression) ──
+result = statistics.mean(
+    s["weight"]
+    for s in sightings
+    if s["park"] == "Kaziranga"
+)
+print(f"Kaziranga avg: {result:.0f} kg")  # 4600 kg`,
+        diagram: 'DataPipelineDiagram',
       },
     ],
   },
@@ -4857,6 +5007,7 @@ plt.show()
             ],
           },
         },
+        diagram: 'SQLTableDiagram',
       },
       {
         title: 'SQL Basics: SELECT, FROM, WHERE',
@@ -4876,6 +5027,7 @@ plt.show()
           'JOIN combines tables: SELECT e.name, s.date FROM elephants e JOIN sightings s ON e.id = s.elephant_id WHERE s.date > "2024-01-01". Aggregates: SELECT location, COUNT(*), AVG(group_size) FROM sightings GROUP BY location HAVING COUNT(*) > 10. Subqueries: SELECT name FROM elephants WHERE id IN (SELECT elephant_id FROM sightings WHERE location = "Kaziranga"). Window functions: RANK() OVER (ORDER BY weight DESC) adds ranking without collapsing rows.',
         advanced:
           'Query optimization: the planner chooses table scan, index scan, or hash join. EXPLAIN ANALYZE shows execution plans. Create indexes on filtered/joined columns. Avoid SELECT * — fetch only needed columns. Database normalization (1NF, 2NF, 3NF) reduces redundancy but increases JOIN complexity. **Denormalization** (storing computed aggregates) speeds reads at the cost of write complexity. Modern databases use cost-based optimizers that estimate row counts and choose the cheapest plan. Connection pooling (PgBouncer, SQLAlchemy) reuses database connections to avoid the overhead of establishing new ones for every query.',
+        diagram: 'SQLQueryFlowDiagram',
       },
       {
         title: 'Filtering and Sorting: ORDER BY, LIMIT, LIKE, AND/OR',
@@ -4930,6 +5082,7 @@ plt.show()
           'JOIN types: **INNER JOIN** returns only matching rows from both tables. **LEFT JOIN** returns all rows from the left table, with NULLs where no right-table match exists. **RIGHT JOIN** is the mirror. **FULL OUTER JOIN** returns all rows from both tables. Example: SELECT e.name, COUNT(s.id) FROM elephants e LEFT JOIN sightings s ON e.id = s.elephant_id GROUP BY e.name — shows every elephant, even those with zero sightings (which INNER JOIN would omit). Self-joins compare rows within the same table: find elephant pairs of similar weight.',
         advanced:
           'Joins can be expensive for large tables. Nested loop join is O(n×m) — the database checks every combination. Hash join builds a hash table on the smaller table, then probes with the larger — O(n+m). Sort-merge join sorts both tables by the join key, then merges — O(n log n + m log m). The query planner chooses based on table sizes and available indexes. Denormalization (storing redundant data to avoid joins) is common in read-heavy applications: a sightings table might include elephant_name directly, avoiding a join for every query at the cost of update complexity. This tradeoff between normalization and performance is a core database design decision.',
+        diagram: 'SQLJoinDiagram',
       },
       {
         title: 'Creating and Modifying Data',
@@ -4962,6 +5115,360 @@ plt.show()
             ],
           },
         },
+      },
+    ],
+
+    build: [
+      {
+        id: 'sql-select',
+        title: 'SELECT — Reading Data',
+        content:
+          '`SELECT` is the most common SQL statement. It reads data from one or more tables.\n\n' +
+          '**Basic pattern:** `SELECT columns FROM table WHERE condition ORDER BY column LIMIT n;`\n\n' +
+          '**SELECT *:** returns all columns — convenient for exploration, but in production always name the columns you need (faster, clearer).\n\n' +
+          '**WHERE operators:** `=`, `!=`, `<`, `>`, `<=`, `>=`, `BETWEEN ... AND ...`, `IN (...)`, `LIKE` (pattern matching with `%` and `_` wildcards), `IS NULL` / `IS NOT NULL`.\n\n' +
+          '**Combining conditions:** `AND` (both must be true), `OR` (either), `NOT` (invert). Use parentheses to group: `WHERE (park = "Kaziranga" OR park = "Manas") AND weight > 4000`.\n\n' +
+          '**DISTINCT:** `SELECT DISTINCT park FROM elephants` returns each park name only once — removes duplicate rows from the result.',
+        code: `-- All elephants
+SELECT * FROM elephants;
+
+-- Specific columns
+SELECT name, weight FROM elephants;
+
+-- Filter with WHERE
+SELECT name, weight
+FROM elephants
+WHERE weight > 4000;
+
+-- Multiple conditions
+SELECT name, weight, park
+FROM elephants
+WHERE park = 'Kaziranga' AND weight > 4000;
+
+-- Pattern matching
+SELECT name FROM elephants
+WHERE name LIKE 'R%';     -- starts with R
+-- WHERE name LIKE '%a';  -- ends with a
+-- WHERE name LIKE '_a%'; -- second letter is a
+
+-- IN: match any value in a list
+SELECT name, park FROM elephants
+WHERE park IN ('Kaziranga', 'Manas');
+
+-- BETWEEN: range (inclusive)
+SELECT name, weight FROM elephants
+WHERE weight BETWEEN 3500 AND 5000;
+
+-- NULL checks
+SELECT name FROM elephants
+WHERE last_seen IS NULL;  -- never seen
+
+-- Sort + limit
+SELECT name, weight
+FROM elephants
+ORDER BY weight DESC   -- heaviest first
+LIMIT 5;               -- top 5 only
+
+-- Unique values
+SELECT DISTINCT park FROM elephants;
+-- Returns: Kaziranga, Manas (no duplicates)
+
+-- Aliases make output readable
+SELECT name AS elephant_name,
+       weight AS weight_kg,
+       weight * 2.2 AS weight_lbs
+FROM elephants;`,
+        diagram: 'SQLQueryFlowDiagram',
+      },
+      {
+        id: 'sql-aggregate',
+        title: 'Aggregates & GROUP BY',
+        content:
+          '**Aggregate functions** collapse multiple rows into a single value: `COUNT()`, `SUM()`, `AVG()`, `MIN()`, `MAX()`.\n\n' +
+          '**GROUP BY** splits rows into groups and applies aggregates to each group separately. `SELECT park, COUNT(*) FROM elephants GROUP BY park` gives the count per park.\n\n' +
+          '**HAVING** filters groups (like WHERE, but runs after GROUP BY). `HAVING COUNT(*) > 2` keeps only groups with more than 2 rows.\n\n' +
+          '**Execution order matters:** FROM → WHERE (filter rows) → GROUP BY (form groups) → HAVING (filter groups) → SELECT (compute output) → ORDER BY → LIMIT. This is why you can\'t use an alias from SELECT in WHERE — WHERE runs first.\n\n' +
+          '**COUNT(*) vs COUNT(column):** `COUNT(*)` counts all rows including NULLs. `COUNT(column)` skips rows where that column is NULL.',
+        code: `-- Count all elephants
+SELECT COUNT(*) AS total FROM elephants;
+-- total: 5
+
+-- Count per park
+SELECT park, COUNT(*) AS num_elephants
+FROM elephants
+GROUP BY park;
+-- Kaziranga | 3
+-- Manas     | 2
+
+-- Average weight per park
+SELECT park,
+       COUNT(*) AS count,
+       ROUND(AVG(weight), 1) AS avg_weight,
+       MIN(weight) AS lightest,
+       MAX(weight) AS heaviest
+FROM elephants
+GROUP BY park;
+
+-- HAVING: filter groups (not rows!)
+SELECT park, AVG(weight) AS avg_w
+FROM elephants
+GROUP BY park
+HAVING AVG(weight) > 4000;
+-- Only Kaziranga (avg 4600) — Manas (avg 3500) excluded
+
+-- SUM: total weight across all elephants
+SELECT SUM(weight) AS total_weight FROM elephants;
+
+-- Count sightings per elephant, sorted
+SELECT e.name, COUNT(s.id) AS sighting_count
+FROM elephants e
+LEFT JOIN sightings s ON e.id = s.elephant_id
+GROUP BY e.name
+ORDER BY sighting_count DESC;
+
+-- Combining WHERE and GROUP BY
+-- WHERE filters rows BEFORE grouping
+SELECT park, AVG(weight) AS avg_weight
+FROM elephants
+WHERE species = 'Asian'    -- filter first
+GROUP BY park              -- then group
+HAVING COUNT(*) >= 2       -- then filter groups
+ORDER BY avg_weight DESC;  -- then sort`,
+        diagram: 'SQLAggregateDiagram',
+      },
+      {
+        id: 'sql-joins',
+        title: 'Joins — Combining Tables',
+        content:
+          '**JOIN** combines rows from two or more tables based on a related column (usually a foreign key).\n\n' +
+          '**INNER JOIN:** Returns only rows where both tables have a match. If an elephant has no sightings, it won\'t appear. If a sighting references a deleted elephant, it won\'t appear.\n\n' +
+          '**LEFT JOIN:** All rows from the left table + matching rows from the right. If no match, right-side columns are NULL. Perfect for "show all elephants, even those never sighted."\n\n' +
+          '**RIGHT JOIN:** Mirror of LEFT JOIN. All rows from the right table.\n\n' +
+          '**FULL OUTER JOIN:** All rows from both tables. NULLs fill in wherever there\'s no match on either side.\n\n' +
+          '**Table aliases** (`elephants e`, `sightings s`) keep queries short. Always qualify ambiguous column names: `e.id` vs `s.id`.',
+        code: `-- Setup: two related tables
+-- elephants: id, name, weight, park
+-- sightings: id, elephant_id, date, location
+
+-- INNER JOIN: only elephants WITH sightings
+SELECT e.name, s.date, s.location
+FROM elephants e
+INNER JOIN sightings s ON e.id = s.elephant_id;
+
+-- LEFT JOIN: ALL elephants, sightings if they exist
+SELECT e.name, s.date, s.location
+FROM elephants e
+LEFT JOIN sightings s ON e.id = s.elephant_id;
+-- Tara | NULL | NULL  (she has no sightings)
+
+-- Find elephants with ZERO sightings
+SELECT e.name
+FROM elephants e
+LEFT JOIN sightings s ON e.id = s.elephant_id
+WHERE s.id IS NULL;
+
+-- Count sightings per elephant (including zero)
+SELECT e.name, COUNT(s.id) AS num_sightings
+FROM elephants e
+LEFT JOIN sightings s ON e.id = s.elephant_id
+GROUP BY e.name
+ORDER BY num_sightings DESC;
+
+-- Join THREE tables
+SELECT e.name, s.date, p.name AS park_name
+FROM elephants e
+JOIN sightings s ON e.id = s.elephant_id
+JOIN parks p ON s.park_id = p.id
+WHERE s.date >= '2025-01-01';
+
+-- Self-join: find elephant pairs with similar weight
+SELECT a.name, b.name, ABS(a.weight - b.weight) AS diff
+FROM elephants a
+JOIN elephants b ON a.id < b.id
+WHERE ABS(a.weight - b.weight) < 500;`,
+        diagram: 'SQLJoinDiagram',
+      },
+      {
+        id: 'sql-relationships',
+        title: 'Relationships & Foreign Keys',
+        content:
+          'Tables relate to each other through **foreign keys** — a column in one table that references the primary key of another.\n\n' +
+          '**One-to-Many (1:N):** One elephant has many sightings. The sightings table has `elephant_id` pointing to `elephants.id`. This is the most common relationship.\n\n' +
+          '**Many-to-Many (M:N):** An elephant visits many parks, and a park has many elephants. This requires a **junction table** (also called a bridge or linking table) with two foreign keys: `park_elephants(elephant_id, park_id)`.\n\n' +
+          '**One-to-One (1:1):** Rare — one elephant has one GPS collar. Usually just extra columns on the same table.\n\n' +
+          '**Referential integrity:** `FOREIGN KEY` constraints prevent orphan records. You can\'t insert a sighting for elephant_id=99 if no elephant with id=99 exists. `ON DELETE CASCADE` automatically removes sightings when an elephant is deleted.',
+        code: `-- One-to-Many: elephants → sightings
+CREATE TABLE elephants (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    weight REAL CHECK(weight > 0),
+    species TEXT DEFAULT 'Asian'
+);
+
+CREATE TABLE sightings (
+    id INTEGER PRIMARY KEY,
+    elephant_id INTEGER NOT NULL,
+    date DATE NOT NULL,
+    location TEXT,
+    group_size INTEGER DEFAULT 1,
+    FOREIGN KEY (elephant_id)
+        REFERENCES elephants(id)
+        ON DELETE CASCADE  -- delete sightings if elephant removed
+);
+
+-- Many-to-Many: elephants ↔ parks (via junction table)
+CREATE TABLE parks (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    state TEXT
+);
+
+CREATE TABLE park_elephants (
+    elephant_id INTEGER,
+    park_id INTEGER,
+    first_seen DATE,
+    PRIMARY KEY (elephant_id, park_id),  -- composite PK
+    FOREIGN KEY (elephant_id) REFERENCES elephants(id),
+    FOREIGN KEY (park_id) REFERENCES parks(id)
+);
+
+-- Insert with relationships
+INSERT INTO elephants (id, name, weight) VALUES (1, 'Ranga', 4500);
+INSERT INTO parks (id, name, state) VALUES (1, 'Kaziranga', 'Assam');
+INSERT INTO park_elephants (elephant_id, park_id, first_seen)
+    VALUES (1, 1, '2020-03-15');
+
+-- Query through the junction table
+SELECT e.name, p.name AS park, pe.first_seen
+FROM elephants e
+JOIN park_elephants pe ON e.id = pe.elephant_id
+JOIN parks p ON pe.park_id = p.id;`,
+        diagram: 'SQLRelationshipDiagram',
+      },
+      {
+        id: 'sql-create-modify',
+        title: 'CREATE, INSERT, UPDATE, DELETE',
+        content:
+          '**DDL (Data Definition Language):** `CREATE TABLE`, `ALTER TABLE`, `DROP TABLE` — define and change the structure.\n\n' +
+          '**DML (Data Manipulation Language):** `INSERT`, `UPDATE`, `DELETE` — add, change, and remove data.\n\n' +
+          '**Constraints** enforce data rules: `PRIMARY KEY` (unique identifier), `NOT NULL` (required), `UNIQUE` (no duplicates), `CHECK` (value rules), `DEFAULT` (auto-fill), `FOREIGN KEY` (must reference existing row).\n\n' +
+          '**Transactions** (`BEGIN`, `COMMIT`, `ROLLBACK`) group operations atomically — all succeed or all fail. Essential for operations like transferring funds between accounts.\n\n' +
+          '**Safety tip:** Always use WHERE with UPDATE and DELETE. `DELETE FROM elephants;` (no WHERE) deletes every row. Test with SELECT first: if `SELECT * FROM elephants WHERE id = 3` returns the right row, then `DELETE FROM elephants WHERE id = 3` is safe.',
+        code: `-- CREATE TABLE with constraints
+CREATE TABLE elephants (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL UNIQUE,
+    weight REAL CHECK(weight > 0),
+    species TEXT DEFAULT 'Asian',
+    park TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- INSERT: add rows
+INSERT INTO elephants (name, weight, park)
+VALUES ('Ranga', 4500, 'Kaziranga');
+
+-- Insert multiple rows
+INSERT INTO elephants (name, weight, park) VALUES
+    ('Mohini', 3800, 'Manas'),
+    ('Gaja', 5200, 'Kaziranga'),
+    ('Tara', 4100, 'Kaziranga');
+
+-- UPDATE: modify existing rows (always use WHERE!)
+UPDATE elephants
+SET weight = 4600, park = 'Kaziranga Central'
+WHERE name = 'Ranga';
+
+-- DELETE: remove rows (always use WHERE!)
+DELETE FROM elephants WHERE name = 'Tara';
+
+-- Safety: test with SELECT first
+SELECT * FROM elephants WHERE weight < 3000;
+-- If that looks right, then:
+-- DELETE FROM elephants WHERE weight < 3000;
+
+-- ALTER TABLE: change structure
+ALTER TABLE elephants ADD COLUMN last_seen DATE;
+
+-- Transactions: all or nothing
+BEGIN TRANSACTION;
+UPDATE accounts SET balance = balance - 1000 WHERE id = 1;
+UPDATE accounts SET balance = balance + 1000 WHERE id = 2;
+COMMIT;
+-- If anything fails between BEGIN and COMMIT,
+-- ROLLBACK undoes everything
+
+-- DROP TABLE: delete entire table (irreversible!)
+-- DROP TABLE elephants;  -- be very careful!`,
+        diagram: 'SQLTableDiagram',
+      },
+      {
+        id: 'sql-subqueries',
+        title: 'Subqueries & Advanced Patterns',
+        content:
+          'A **subquery** is a SELECT inside another query. It lets you use the result of one query as input to another.\n\n' +
+          '**WHERE subqueries:** `WHERE id IN (SELECT ...)` filters rows based on another query\'s results. `WHERE weight > (SELECT AVG(weight) FROM elephants)` compares against a computed value.\n\n' +
+          '**FROM subqueries:** Use a query result as a temporary table: `SELECT * FROM (SELECT ...) AS temp`.\n\n' +
+          '**EXISTS:** `WHERE EXISTS (SELECT 1 FROM sightings WHERE ...)` returns true if the subquery has any results. Often faster than `IN` for large datasets.\n\n' +
+          '**Common Table Expressions (CTEs):** `WITH name AS (SELECT ...) SELECT ... FROM name` — like naming a subquery. Cleaner, reusable, and can be recursive.\n\n' +
+          '**Window functions:** `ROW_NUMBER()`, `RANK()`, `SUM() OVER (...)` compute values across rows without collapsing them (unlike GROUP BY). Essential for rankings, running totals, and moving averages.',
+        code: `-- Subquery in WHERE: elephants heavier than average
+SELECT name, weight
+FROM elephants
+WHERE weight > (SELECT AVG(weight) FROM elephants);
+
+-- Subquery with IN: elephants seen in Kaziranga
+SELECT name FROM elephants
+WHERE id IN (
+    SELECT elephant_id FROM sightings
+    WHERE location = 'Kaziranga East'
+);
+
+-- EXISTS: elephants that HAVE been sighted
+SELECT name FROM elephants e
+WHERE EXISTS (
+    SELECT 1 FROM sightings s
+    WHERE s.elephant_id = e.id
+);
+
+-- CTE (Common Table Expression): named subquery
+WITH heavy AS (
+    SELECT name, weight, park
+    FROM elephants
+    WHERE weight > 4000
+)
+SELECT park, COUNT(*) AS heavy_count
+FROM heavy
+GROUP BY park;
+
+-- Multiple CTEs
+WITH
+    kaz AS (SELECT * FROM elephants WHERE park = 'Kaziranga'),
+    sighting_counts AS (
+        SELECT elephant_id, COUNT(*) AS cnt
+        FROM sightings GROUP BY elephant_id
+    )
+SELECT k.name, COALESCE(sc.cnt, 0) AS times_seen
+FROM kaz k
+LEFT JOIN sighting_counts sc ON k.id = sc.elephant_id;
+
+-- Window function: rank elephants by weight
+SELECT name, weight,
+       RANK() OVER (ORDER BY weight DESC) AS weight_rank
+FROM elephants;
+
+-- Running total (cumulative sum)
+SELECT date, group_size,
+       SUM(group_size) OVER (ORDER BY date) AS cumulative
+FROM sightings;
+
+-- Partition: rank within each park
+SELECT name, park, weight,
+       ROW_NUMBER() OVER (
+           PARTITION BY park
+           ORDER BY weight DESC
+       ) AS rank_in_park
+FROM elephants;`,
       },
     ],
   },

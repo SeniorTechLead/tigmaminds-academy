@@ -824,6 +824,16 @@ const lazyMap: Record<string, () => Promise<{ default: ComponentType<any> }>> = 
   WhirlpoolEddyDiagram: () => import('../diagrams/WhirlpoolEddyDiagram'),
   ActivityFloatPathDiagram: () => import('../diagrams/ActivityFloatPathDiagram'),
   FerryCrossingOutputDiagram: () => import('../diagrams/FerryCrossingOutputDiagram'),
+  TupleSetDiagram: () => import('../diagrams/TupleSetDiagram'),
+  ErrorFlowDiagram: () => import('../diagrams/ErrorFlowDiagram'),
+  ClassBlueprintDiagram: () => import('../diagrams/ClassBlueprintDiagram'),
+  DataPipelineDiagram: () => import('../diagrams/DataPipelineDiagram'),
+  MathModuleDiagram: () => import('../diagrams/MathModuleDiagram'),
+  SQLTableDiagram: () => import('../diagrams/SQLTableDiagram'),
+  SQLJoinDiagram: () => import('../diagrams/SQLJoinDiagram'),
+  SQLQueryFlowDiagram: () => import('../diagrams/SQLQueryFlowDiagram'),
+  SQLRelationshipDiagram: () => import('../diagrams/SQLRelationshipDiagram'),
+  SQLAggregateDiagram: () => import('../diagrams/SQLAggregateDiagram'),
 };
 
 const cache: Record<string, ComponentType<any>> = {};
