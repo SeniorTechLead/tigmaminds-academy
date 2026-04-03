@@ -3887,4 +3887,1148 @@ export const problems: Problem[] = [
         ] },
     ],
   },
+
+  // ═══════════════════════════════════════════════════════════════
+  // HARD: STRINGS (filling the gap — 0 hard strings before)
+  // ═══════════════════════════════════════════════════════════════
+  {
+    id: 129, slug: 'run-length-encode', title: 'Run-Length Encoder',
+    story: 'The Silk Route of the Northeast', storySlug: 'silk-route-northeast',
+    description: 'Write `rle_encode(s)` that compresses a string using run-length encoding. Consecutive identical characters become the character followed by its count. Single characters have no count. Example: `rle_encode("aaabbc")` → `"a3b2c"`.',
+    difficulty: 'hard', topic: 'strings',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Encode consecutive runs.', hint: 'Walk through the string, track current char and count. When char changes, emit.', hintRef: { slug: 'python', section: 'py-strings', label: 'Strings in the Library' },
+        starterCode: 'def rle_encode(s):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '"aaabbc"', expected: '"a3b2c"', label: 'Basic' },
+          { input: '"abc"', expected: '"abc"', label: 'No repeats' },
+          { input: '"aaa"', expected: '"a3"', label: 'All same' },
+          { input: '""', expected: '""', label: 'Empty' },
+          { input: '"aabbbcccc"', expected: '"a2b3c4"', label: 'Increasing runs' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Also write rle_decode that reverses the encoding.', hint: 'Parse character followed by optional digits.', hintRef: { slug: 'python', section: 'py-strings', label: 'Strings in the Library' },
+        starterCode: 'def rle_decode(encoded):\n    """Decode a run-length encoded string.\n    \n    "a3b2c" → "aaabbc"\n    """\n    pass\n',
+        testCases: [
+          { input: '"a3b2c"', expected: '"aaabbc"', label: 'Basic decode' },
+          { input: '"abc"', expected: '"abc"', label: 'No counts' },
+          { input: '"a10"', expected: '"aaaaaaaaaa"', label: 'Double digit count' },
+          { input: '""', expected: '""', label: 'Empty' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Handle the encode in a single pass, O(n) time.', hint: 'Use a list to collect parts and join at the end — avoid string concatenation in a loop.', hintRef: { slug: 'python', section: 'py-strings', label: 'Strings in the Library' },
+        starterCode: 'def rle_encode(s):\n    """O(n) run-length encoding using list accumulation."""\n    pass\n',
+        testCases: [
+          { input: '"aaabbc"', expected: '"a3b2c"', label: 'Basic' },
+          { input: '"a" * 1000', expected: '"a1000"', label: 'Long run' },
+          { input: '"ab" * 500', expected: '"ab" * 500', label: 'No compression' },
+          { input: '""', expected: '""', label: 'Empty' },
+        ] },
+    ],
+  },
+  {
+    id: 130, slug: 'balanced-brackets', title: 'Balanced Brackets',
+    story: 'The Boy Who Built a Library', storySlug: 'boy-who-built-library',
+    description: 'Write `is_balanced(s)` that checks if a string of brackets `()[]{}` is properly balanced. Every opening bracket must have a matching closing bracket in the correct order.',
+    difficulty: 'hard', topic: 'strings',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Return True if balanced, False otherwise.', hint: 'Use a stack (list). Push opening brackets, pop on closing. Check match.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-arrays', label: 'Arrays in the Library' },
+        starterCode: 'def is_balanced(s):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '"([])"', expected: 'True', label: 'Nested' },
+          { input: '"([)]"', expected: 'False', label: 'Mismatched' },
+          { input: '"()"', expected: 'True', label: 'Simple' },
+          { input: '""', expected: 'True', label: 'Empty' },
+          { input: '"{[()]}"', expected: 'True', label: 'Deep nesting' },
+          { input: '"((("', expected: 'False', label: 'Unclosed' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Ignore non-bracket characters in the input.', hint: 'Skip characters that are not in "()[]{}".', hintRef: { slug: 'algorithms-data-structures', section: 'algo-arrays', label: 'Arrays in the Library' },
+        starterCode: 'def is_balanced(s):\n    """Check balanced brackets, ignoring other characters."""\n    pass\n',
+        testCases: [
+          { input: '"hello (world) [!]"', expected: 'True', label: 'With text' },
+          { input: '"func(a[0])"', expected: 'True', label: 'Code-like' },
+          { input: '"a(b[c)d]"', expected: 'False', label: 'Mis-nested with text' },
+          { input: '"no brackets"', expected: 'True', label: 'No brackets at all' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Return the position of the first mismatch, or -1 if balanced.', hint: 'Track index as you scan. Return the position when a mismatch is detected.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-arrays', label: 'Arrays in the Library' },
+        starterCode: 'def first_mismatch(s):\n    """Return index of first bracket mismatch, or -1 if balanced."""\n    pass\n',
+        testCases: [
+          { input: '"([])"', expected: '-1', label: 'Balanced' },
+          { input: '"([)]"', expected: '2', label: 'Mismatch at 2' },
+          { input: '"((("', expected: '0', label: 'Unclosed at 0' },
+          { input: '")"', expected: '0', label: 'Extra close' },
+        ] },
+    ],
+  },
+  {
+    id: 131, slug: 'caesar-cipher', title: 'Caesar Cipher',
+    story: 'The Silk Route of the Northeast', storySlug: 'silk-route-northeast',
+    description: 'Write `caesar(text, shift)` that shifts each letter by `shift` positions in the alphabet. Wrap around (z+1=a). Preserve case and non-letter characters.',
+    difficulty: 'hard', topic: 'strings',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Encrypt letters with wrapping.', hint: 'Use ord() and chr(). For lowercase: (ord(c) - ord("a") + shift) % 26 + ord("a").', hintRef: { slug: 'python', section: 'py-strings', label: 'Strings in the Library' },
+        starterCode: 'def caesar(text, shift):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '"abc", 1', expected: '"bcd"', label: 'Shift 1' },
+          { input: '"xyz", 3', expected: '"abc"', label: 'Wrap around' },
+          { input: '"Hello!", 5', expected: '"Mjqqt!"', label: 'Mixed case + punct' },
+          { input: '"abc", 0', expected: '"abc"', label: 'No shift' },
+          { input: '"abc", 26', expected: '"abc"', label: 'Full rotation' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Support negative shifts (decrypt).', hint: 'Negative shift is just shift backwards. The % 26 handles it.', hintRef: { slug: 'python', section: 'py-strings', label: 'Strings in the Library' },
+        starterCode: 'def caesar(text, shift):\n    """Caesar cipher with positive and negative shifts."""\n    pass\n',
+        testCases: [
+          { input: '"bcd", -1', expected: '"abc"', label: 'Decrypt' },
+          { input: '"Mjqqt!", -5', expected: '"Hello!"', label: 'Decrypt mixed' },
+          { input: '"abc", -26', expected: '"abc"', label: 'Full backward rotation' },
+          { input: '"a", -1', expected: '"z"', label: 'Wrap backward' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Crack a caesar cipher: find the shift by frequency analysis. Most common letter = "e".', hint: 'Count letter frequencies. The most common letter maps to "e". Calculate the shift.', hintRef: { slug: 'python', section: 'py-dicts', label: 'Dictionaries in the Library' },
+        starterCode: 'def crack_caesar(ciphertext):\n    """Return the most likely plaintext by frequency analysis."""\n    pass\n',
+        testCases: [
+          { input: '"Khoor Zruog"', expected: '"Hello World"', label: 'Shift 3' },
+          { input: '"eeeee"', expected: '"eeeee"', label: 'Already e' },
+          { input: '"bcd"', expected: '"yza"', label: 'Short text (b→e shift=3 → yza)' },
+        ] },
+    ],
+  },
+  {
+    id: 132, slug: 'longest-palindrome-substring', title: 'Longest Palindrome Substring',
+    story: 'The Girl Who Painted Rain', storySlug: 'girl-who-painted-rain',
+    description: 'Write `longest_palindrome(s)` that finds the longest palindromic substring. Example: `longest_palindrome("babad")` → `"bab"` or `"aba"`.',
+    difficulty: 'hard', topic: 'strings',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Find the longest palindrome substring.', hint: 'Expand around each center. Check both odd-length and even-length centers.', hintRef: { slug: 'python', section: 'py-strings', label: 'Strings in the Library' },
+        starterCode: 'def longest_palindrome(s):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '"babad"', expected: 'True', label: 'Returns bab or aba (length 3: checked below)' },
+          { input: '"cbbd"', expected: '"bb"', label: 'Even length' },
+          { input: '"a"', expected: '"a"', label: 'Single char' },
+          { input: '"racecar"', expected: '"racecar"', label: 'Whole string' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Handle case-insensitive matching. Return lowercase.', hint: 'Convert to lowercase before checking, but track original positions.', hintRef: { slug: 'python', section: 'py-strings', label: 'Strings in the Library' },
+        starterCode: 'def longest_palindrome(s):\n    """Case-insensitive longest palindrome, returned in lowercase."""\n    pass\n',
+        testCases: [
+          { input: '"Aba"', expected: '"aba"', label: 'Case insensitive' },
+          { input: '"RaceCar"', expected: '"racecar"', label: 'Full palindrome' },
+          { input: '""', expected: '""', label: 'Empty' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Achieve O(n²) with expand-around-center, not O(n³) brute force.', hint: 'For each index, expand outward while chars match. Track the best.', hintRef: { slug: 'python', section: 'py-strings', label: 'Strings in the Library' },
+        starterCode: 'def longest_palindrome(s):\n    """O(n²) expand-around-center approach."""\n    pass\n',
+        testCases: [
+          { input: '"a" * 1000', expected: '"a" * 1000', label: 'All same chars' },
+          { input: '"abcba" + "x" * 100', expected: '"abcba"', label: 'Palindrome at start' },
+          { input: '"x" * 100 + "abcba"', expected: '"abcba"', label: 'Palindrome at end' },
+        ] },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════
+  // HARD: MATH (filling the gap — 0 hard math before)
+  // ═══════════════════════════════════════════════════════════════
+  {
+    id: 133, slug: 'prime-factorization', title: 'Prime Factorization',
+    story: 'The Boy Who Saw Atoms', storySlug: 'boy-who-saw-atoms',
+    description: 'Write `prime_factors(n)` that returns the prime factorization of n as a sorted list. Example: `prime_factors(12)` → `[2, 2, 3]`.',
+    difficulty: 'hard', topic: 'math',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Return sorted list of prime factors.', hint: 'Divide by 2 until odd, then try odd factors up to sqrt(n).', hintRef: { slug: 'python', section: 'py-math', label: 'Math in the Library' },
+        starterCode: 'def prime_factors(n):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '12', expected: '[2, 2, 3]', label: 'Basic' },
+          { input: '100', expected: '[2, 2, 5, 5]', label: '100' },
+          { input: '7', expected: '[7]', label: 'Prime' },
+          { input: '1', expected: '[]', label: 'One' },
+          { input: '60', expected: '[2, 2, 3, 5]', label: '60' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Return as dict of {prime: exponent}. prime_factors(12) → {2: 2, 3: 1}.', hint: 'Count how many times each prime divides n.', hintRef: { slug: 'python', section: 'py-dicts', label: 'Dictionaries in the Library' },
+        starterCode: 'def prime_factors(n):\n    """Return dict of {prime: exponent}."""\n    pass\n',
+        testCases: [
+          { input: '12', expected: '{2: 2, 3: 1}', label: '12' },
+          { input: '100', expected: '{2: 2, 5: 2}', label: '100' },
+          { input: '7', expected: '{7: 1}', label: 'Prime' },
+          { input: '1', expected: '{}', label: 'One' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Only check factors up to sqrt(n). Handle remaining factor > sqrt(n).', hint: 'After dividing by all factors up to sqrt(n), if n > 1 then n itself is a prime factor.', hintRef: { slug: 'python', section: 'py-math', label: 'Math in the Library' },
+        starterCode: 'def prime_factors(n):\n    """Optimized: O(sqrt(n)) prime factorization."""\n    pass\n',
+        testCases: [
+          { input: '999999937', expected: '[999999937]', label: 'Large prime' },
+          { input: '2 * 3 * 5 * 7 * 11', expected: '[2, 3, 5, 7, 11]', label: 'Product of primes' },
+          { input: '2**20', expected: '[2] * 20', label: 'Power of 2' },
+        ] },
+    ],
+  },
+  {
+    id: 134, slug: 'matrix-multiply', title: 'Matrix Multiplier',
+    story: 'The Dragonfly and the Paddy Field', storySlug: 'dragonfly-paddy-field',
+    description: 'Write `mat_mul(a, b)` that multiplies two matrices (2D lists). Return the resulting matrix. Return None if dimensions are incompatible.',
+    difficulty: 'hard', topic: 'math',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Multiply two matrices.', hint: 'Result[i][j] = sum(a[i][k] * b[k][j] for k in range(cols_a)).', hintRef: { slug: 'python', section: 'py-math', label: 'Math in the Library' },
+        starterCode: 'def mat_mul(a, b):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[[1, 2], [3, 4]], [[5, 6], [7, 8]]', expected: '[[19, 22], [43, 50]]', label: '2x2 times 2x2' },
+          { input: '[[1, 2, 3]], [[4], [5], [6]]', expected: '[[32]]', label: '1x3 times 3x1' },
+          { input: '[[1]], [[2]]', expected: '[[2]]', label: '1x1' },
+          { input: '[[1, 2]], [[1, 2]]', expected: 'None', label: 'Incompatible' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Validate inputs: check that both are non-empty 2D lists with consistent row lengths.', hint: 'Check len(a), len(a[0]), and that all rows in a have the same length.', hintRef: { slug: 'python', section: 'py-math', label: 'Math in the Library' },
+        starterCode: 'def mat_mul(a, b):\n    """Multiply with validation. Return None for invalid inputs."""\n    pass\n',
+        testCases: [
+          { input: '[[1, 2], [3, 4]], [[5, 6], [7, 8]]', expected: '[[19, 22], [43, 50]]', label: 'Valid 2x2' },
+          { input: '[], [[1]]', expected: 'None', label: 'Empty a' },
+          { input: '[[1, 2], [3]], [[1], [2]]', expected: 'None', label: 'Ragged rows' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Use list comprehension for a clean one-pass solution.', hint: 'Nested comprehension: [[sum(a[i][k]*b[k][j] for k in range(n)) for j in range(p)] for i in range(m)]', hintRef: { slug: 'python', section: 'py-comprehensions', label: 'Comprehensions in the Library' },
+        starterCode: 'def mat_mul(a, b):\n    """Matrix multiply using comprehensions."""\n    pass\n',
+        testCases: [
+          { input: '[[1, 0], [0, 1]], [[5, 6], [7, 8]]', expected: '[[5, 6], [7, 8]]', label: 'Identity matrix' },
+          { input: '[[1, 2, 3], [4, 5, 6]], [[7, 8], [9, 10], [11, 12]]', expected: '[[58, 64], [139, 154]]', label: '2x3 times 3x2' },
+        ] },
+    ],
+  },
+  {
+    id: 135, slug: 'newton-sqrt', title: 'Newton\'s Square Root',
+    story: 'The Bodhi Tree and Enlightenment', storySlug: 'bodhi-tree-enlightenment',
+    description: 'Write `my_sqrt(n, precision=0.0001)` that calculates the square root of n using Newton\'s method (Babylonian method). Do not use math.sqrt.',
+    difficulty: 'hard', topic: 'math',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Implement Newton\'s method for square root.', hint: 'Start with guess = n/2. Repeat: guess = (guess + n/guess) / 2 until close enough.', hintRef: { slug: 'python', section: 'py-math', label: 'Math in the Library' },
+        starterCode: 'def my_sqrt(n, precision=0.0001):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '4', expected: 'True', label: 'sqrt(4) ≈ 2.0 (checked via abs)' },
+          { input: '9', expected: 'True', label: 'sqrt(9) ≈ 3.0' },
+          { input: '2', expected: 'True', label: 'sqrt(2) ≈ 1.4142' },
+          { input: '0', expected: '0', label: 'sqrt(0) = 0' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Handle negative input by raising ValueError. Return exact int when result is whole.', hint: 'Check n < 0 first. After convergence, check if round(result) ** 2 == n.', hintRef: { slug: 'python', section: 'py-errors', label: 'Error Handling in the Library' },
+        starterCode: 'def my_sqrt(n, precision=0.0001):\n    """Newton sqrt with validation and int coercion."""\n    pass\n',
+        testCases: [
+          { input: '4', expected: '2', label: 'Exact int' },
+          { input: '16', expected: '4', label: 'Exact 4' },
+          { input: '-1', expected: 'None', label: 'Negative raises error (return None for testing)' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Return the number of iterations needed to converge.', hint: 'Count iterations in the loop.', hintRef: { slug: 'python', section: 'py-math', label: 'Math in the Library' },
+        starterCode: 'def my_sqrt(n, precision=0.0001):\n    """Return (result, iterations)."""\n    pass\n',
+        testCases: [
+          { input: '4', expected: 'True', label: 'Converges in few iterations' },
+          { input: '1000000', expected: 'True', label: 'Large number still converges fast' },
+        ] },
+    ],
+  },
+  {
+    id: 136, slug: 'gcd-lcm', title: 'GCD and LCM',
+    story: 'The Astrolabe of Al-Khwarizmi', storySlug: 'astrolabe-al-khwarizmi',
+    description: 'Write `gcd(a, b)` using Euclid\'s algorithm and `lcm(a, b)` using the relationship lcm(a,b) = a*b // gcd(a,b). Do not use math.gcd.',
+    difficulty: 'hard', topic: 'math',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Implement GCD and LCM.', hint: 'Euclid: gcd(a, b) = gcd(b, a % b), base case: gcd(a, 0) = a.', hintRef: { slug: 'python', section: 'py-math', label: 'Math in the Library' },
+        starterCode: 'def gcd(a, b):\n    pass\n\ndef lcm(a, b):\n    pass\n',
+        testCases: [
+          { input: '12, 8', expected: '(4, 24)', label: 'gcd=4, lcm=24' },
+          { input: '7, 5', expected: '(1, 35)', label: 'Coprime' },
+          { input: '0, 5', expected: '(5, 0)', label: 'Zero' },
+          { input: '100, 75', expected: '(25, 300)', label: 'Larger numbers' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Handle negative numbers (GCD is always positive). Add docstrings.', hint: 'Use abs(a) and abs(b) at the start.', hintRef: { slug: 'python', section: 'py-math', label: 'Math in the Library' },
+        starterCode: 'def gcd(a, b):\n    """Greatest common divisor (always non-negative)."""\n    pass\n\ndef lcm(a, b):\n    """Least common multiple (always non-negative)."""\n    pass\n',
+        testCases: [
+          { input: '-12, 8', expected: '(4, 24)', label: 'Negative a' },
+          { input: '12, -8', expected: '(4, 24)', label: 'Negative b' },
+          { input: '-12, -8', expected: '(4, 24)', label: 'Both negative' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Write gcd_list(numbers) that finds GCD of an entire list.', hint: 'Reduce: gcd of list is gcd(gcd(a,b), c) etc. Use functools.reduce.', hintRef: { slug: 'python', section: 'py-math', label: 'Math in the Library' },
+        starterCode: 'def gcd_list(numbers):\n    """GCD of a list of numbers."""\n    pass\n',
+        testCases: [
+          { input: '[12, 8, 4]', expected: '4', label: 'Basic' },
+          { input: '[100, 75, 50, 25]', expected: '25', label: 'All multiples of 25' },
+          { input: '[7]', expected: '7', label: 'Single' },
+          { input: '[13, 17, 19]', expected: '1', label: 'All prime' },
+        ] },
+    ],
+  },
+  {
+    id: 137, slug: 'evaluate-polynomial', title: 'Polynomial Evaluator',
+    story: 'The Cave Paintings of Meghalaya', storySlug: 'cave-paintings-meghalaya',
+    description: 'Write `poly_eval(coefficients, x)` that evaluates a polynomial. Coefficients are ordered from highest degree to lowest. Example: `[3, 2, 1]` at x=2 → 3(2²) + 2(2) + 1 = 17.',
+    difficulty: 'hard', topic: 'math',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Evaluate the polynomial at x.', hint: 'For [a, b, c] at x: a*x² + b*x + c. Use enumerate with reversed index.', hintRef: { slug: 'python', section: 'py-math', label: 'Math in the Library' },
+        starterCode: 'def poly_eval(coefficients, x):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[3, 2, 1], 2', expected: '17', label: '3x²+2x+1 at x=2' },
+          { input: '[1, 0, 0], 5', expected: '25', label: 'x² at x=5' },
+          { input: '[1], 999', expected: '1', label: 'Constant' },
+          { input: '[1, -1], 1', expected: '0', label: 'x-1 at x=1' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Handle empty coefficients (return 0). Add type validation.', hint: 'Check for empty list. Validate that x is numeric.', hintRef: { slug: 'python', section: 'py-errors', label: 'Error Handling in the Library' },
+        starterCode: 'def poly_eval(coefficients, x):\n    """Evaluate polynomial with validation."""\n    pass\n',
+        testCases: [
+          { input: '[], 5', expected: '0', label: 'Empty' },
+          { input: '[3, 2, 1], 0', expected: '1', label: 'At zero' },
+          { input: '[1, 0, 0, 0], 10', expected: '1000', label: 'x³ at 10' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Use Horner\'s method: O(n) with no exponentiation.', hint: 'Horner: result = 0; for coeff in coefficients: result = result * x + coeff.', hintRef: { slug: 'python', section: 'py-math', label: 'Math in the Library' },
+        starterCode: 'def poly_eval(coefficients, x):\n    """Horner\'s method — O(n), no pow() calls."""\n    pass\n',
+        testCases: [
+          { input: '[3, 2, 1], 2', expected: '17', label: 'Horner basic' },
+          { input: '[1] + [0] * 100, 2', expected: '2 ** 100', label: 'High degree' },
+          { input: '[1, 1, 1, 1, 1], 10', expected: '11111', label: 'Repunit' },
+        ] },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════
+  // HARD: LOOPS (filling the gap — 0 hard loops before)
+  // ═══════════════════════════════════════════════════════════════
+  {
+    id: 138, slug: 'spiral-matrix', title: 'Spiral Matrix',
+    story: 'The Sand Mandala', storySlug: 'sand-mandala',
+    description: 'Write `spiral_order(matrix)` that returns elements of a 2D matrix in spiral order (clockwise from top-left).',
+    difficulty: 'hard', topic: 'loops',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Traverse the matrix in spiral order.', hint: 'Track top/bottom/left/right boundaries. Shrink after each pass.', hintRef: { slug: 'python', section: 'py-loops', label: 'Loops in the Library' },
+        starterCode: 'def spiral_order(matrix):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[[1, 2, 3], [4, 5, 6], [7, 8, 9]]', expected: '[1, 2, 3, 6, 9, 8, 7, 4, 5]', label: '3x3' },
+          { input: '[[1, 2], [3, 4]]', expected: '[1, 2, 4, 3]', label: '2x2' },
+          { input: '[[1]]', expected: '[1]', label: '1x1' },
+          { input: '[[1, 2, 3, 4]]', expected: '[1, 2, 3, 4]', label: 'Single row' },
+          { input: '[[1], [2], [3]]', expected: '[1, 2, 3]', label: 'Single column' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Handle empty matrix and non-rectangular input.', hint: 'Check len(matrix) == 0 or len(matrix[0]) == 0.', hintRef: { slug: 'python', section: 'py-loops', label: 'Loops in the Library' },
+        starterCode: 'def spiral_order(matrix):\n    """Spiral traversal with edge case handling."""\n    pass\n',
+        testCases: [
+          { input: '[]', expected: '[]', label: 'Empty' },
+          { input: '[[]]', expected: '[]', label: 'Empty row' },
+          { input: '[[1, 2, 3], [4, 5, 6], [7, 8, 9]]', expected: '[1, 2, 3, 6, 9, 8, 7, 4, 5]', label: '3x3 still works' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Generate a spiral matrix of size n×n filled with 1 to n².', hint: 'Create empty n×n grid. Walk in spiral, filling values 1, 2, 3...', hintRef: { slug: 'python', section: 'py-loops', label: 'Loops in the Library' },
+        starterCode: 'def generate_spiral(n):\n    """Generate n×n spiral matrix filled 1 to n²."""\n    pass\n',
+        testCases: [
+          { input: '3', expected: '[[1, 2, 3], [8, 9, 4], [7, 6, 5]]', label: '3x3 spiral' },
+          { input: '1', expected: '[[1]]', label: '1x1' },
+          { input: '2', expected: '[[1, 2], [4, 3]]', label: '2x2' },
+        ] },
+    ],
+  },
+  {
+    id: 139, slug: 'collatz-sequence', title: 'Collatz Sequence',
+    story: 'The Song the River Sings', storySlug: 'song-river-sings',
+    description: 'Write `collatz(n)` that generates the Collatz sequence starting from n. If even → n/2, if odd → 3n+1. Stop when you reach 1. Return the sequence as a list.',
+    difficulty: 'hard', topic: 'loops',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Generate the sequence.', hint: 'Start with [n]. While n != 1: apply the rule and append.', hintRef: { slug: 'python', section: 'py-loops', label: 'Loops in the Library' },
+        starterCode: 'def collatz(n):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '6', expected: '[6, 3, 10, 5, 16, 8, 4, 2, 1]', label: 'Starting at 6' },
+          { input: '1', expected: '[1]', label: 'Already 1' },
+          { input: '2', expected: '[2, 1]', label: 'Simple even' },
+          { input: '27', expected: 'True', label: 'Length is 112 (checked via len)' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Validate: n must be a positive integer. Raise ValueError otherwise.', hint: 'Check isinstance(n, int) and n > 0.', hintRef: { slug: 'python', section: 'py-errors', label: 'Error Handling in the Library' },
+        starterCode: 'def collatz(n):\n    """Collatz sequence with input validation."""\n    pass\n',
+        testCases: [
+          { input: '6', expected: '[6, 3, 10, 5, 16, 8, 4, 2, 1]', label: 'Valid' },
+          { input: '0', expected: 'None', label: 'Zero → error (return None)' },
+          { input: '-5', expected: 'None', label: 'Negative → error' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Find the starting number (1 to max_n) that produces the longest sequence. Return (number, length).', hint: 'Loop through range, compute lengths, use memoization (cache) for speed.', hintRef: { slug: 'python', section: 'py-loops', label: 'Loops in the Library' },
+        starterCode: 'def longest_collatz(max_n):\n    """Return (start, length) for the longest Collatz sequence up to max_n."""\n    pass\n',
+        testCases: [
+          { input: '10', expected: '(9, 20)', label: '9 has the longest below 10' },
+          { input: '1', expected: '(1, 1)', label: 'Just 1' },
+          { input: '5', expected: '(3, 8)', label: '3 has longest below 5' },
+        ] },
+    ],
+  },
+  {
+    id: 140, slug: 'look-and-say', title: 'Look and Say Sequence',
+    story: 'The Monastery Bells', storySlug: 'monastery-bells',
+    description: 'Write `look_and_say(n)` that generates the nth term of the look-and-say sequence. Start: "1". Read aloud: "one 1" → "11". "Two 1s" → "21". "One 2 one 1" → "1211".',
+    difficulty: 'hard', topic: 'loops',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Generate the nth term.', hint: 'For each term, group consecutive digits and describe each group.', hintRef: { slug: 'python', section: 'py-loops', label: 'Loops in the Library' },
+        starterCode: 'def look_and_say(n):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '1', expected: '"1"', label: 'First term' },
+          { input: '2', expected: '"11"', label: 'Second' },
+          { input: '3', expected: '"21"', label: 'Third' },
+          { input: '4', expected: '"1211"', label: 'Fourth' },
+          { input: '5', expected: '"111221"', label: 'Fifth' },
+          { input: '6', expected: '"312211"', label: 'Sixth' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Handle edge cases: n < 1 returns "". Add type check.', hint: 'Validate n is a positive integer.', hintRef: { slug: 'python', section: 'py-errors', label: 'Error Handling in the Library' },
+        starterCode: 'def look_and_say(n):\n    """Look-and-say with validation."""\n    pass\n',
+        testCases: [
+          { input: '0', expected: '""', label: 'Zero' },
+          { input: '-1', expected: '""', label: 'Negative' },
+          { input: '5', expected: '"111221"', label: 'Normal' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Return the first n terms as a list, using itertools.groupby for clean grouping.', hint: 'itertools.groupby groups consecutive identical elements.', hintRef: { slug: 'python', section: 'py-itertools', label: 'Itertools in the Library' },
+        starterCode: 'def look_and_say_sequence(n):\n    """Return first n terms using itertools.groupby."""\n    pass\n',
+        testCases: [
+          { input: '6', expected: '["1", "11", "21", "1211", "111221", "312211"]', label: 'First 6' },
+          { input: '1', expected: '["1"]', label: 'Just first' },
+        ] },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════
+  // HARD: SORTING (filling the gap — 0 hard sorting before)
+  // ═══════════════════════════════════════════════════════════════
+  {
+    id: 141, slug: 'merge-sort', title: 'Merge Sort',
+    story: 'The Postman of the Hills', storySlug: 'postman-of-the-hills',
+    description: 'Write `merge_sort(lst)` that sorts a list using the merge sort algorithm. Do not use the built-in sorted() or .sort().',
+    difficulty: 'hard', topic: 'sorting',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Implement merge sort.', hint: 'Split list in half, sort each half recursively, merge the two sorted halves.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-sorting', label: 'Sorting in the Library' },
+        starterCode: 'def merge_sort(lst):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[3, 1, 4, 1, 5, 9, 2, 6]', expected: '[1, 1, 2, 3, 4, 5, 6, 9]', label: 'Basic' },
+          { input: '[]', expected: '[]', label: 'Empty' },
+          { input: '[1]', expected: '[1]', label: 'Single' },
+          { input: '[5, 4, 3, 2, 1]', expected: '[1, 2, 3, 4, 5]', label: 'Reversed' },
+          { input: '[1, 1, 1]', expected: '[1, 1, 1]', label: 'All same' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Make it stable (equal elements keep their original order).', hint: 'During merge, when elements are equal, take from the left half first.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-sorting', label: 'Sorting in the Library' },
+        starterCode: 'def merge_sort(lst):\n    """Stable merge sort — equal elements maintain original order."""\n    pass\n',
+        testCases: [
+          { input: '[3, 1, 4, 1, 5]', expected: '[1, 1, 3, 4, 5]', label: 'Stable' },
+          { input: '[(1, "b"), (1, "a"), (2, "c")]', expected: '[(1, "b"), (1, "a"), (2, "c")]', label: 'Stable tuples' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Count the number of inversions during merge sort. An inversion is a pair (i,j) where i < j but lst[i] > lst[j].', hint: 'During merge, when you take from the right half, add the number of remaining left elements to the count.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-sorting', label: 'Sorting in the Library' },
+        starterCode: 'def count_inversions(lst):\n    """Return (sorted_list, inversion_count)."""\n    pass\n',
+        testCases: [
+          { input: '[2, 4, 1, 3, 5]', expected: '([1, 2, 3, 4, 5], 3)', label: '3 inversions' },
+          { input: '[1, 2, 3]', expected: '([1, 2, 3], 0)', label: 'Already sorted' },
+          { input: '[3, 2, 1]', expected: '([1, 2, 3], 3)', label: 'Fully reversed' },
+        ] },
+    ],
+  },
+  {
+    id: 142, slug: 'quickselect-kth', title: 'Kth Smallest (QuickSelect)',
+    story: 'The Dancing Deer of Kaziranga', storySlug: 'dancing-deer-kaziranga',
+    description: 'Write `kth_smallest(lst, k)` that finds the kth smallest element without fully sorting. Use the QuickSelect algorithm.',
+    difficulty: 'hard', topic: 'sorting',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Find kth smallest element (1-indexed).', hint: 'Pick a pivot. Partition into less-than, equal, greater-than. Recurse into the right partition based on k.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-sorting', label: 'Sorting in the Library' },
+        starterCode: 'def kth_smallest(lst, k):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[3, 1, 4, 1, 5], 2', expected: '1', label: '2nd smallest' },
+          { input: '[3, 1, 4, 1, 5], 4', expected: '4', label: '4th smallest' },
+          { input: '[7], 1', expected: '7', label: 'Single element' },
+          { input: '[5, 5, 5], 2', expected: '5', label: 'All same' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Handle invalid k (< 1 or > len). Return None for invalid.', hint: 'Check 1 <= k <= len(lst) before processing.', hintRef: { slug: 'python', section: 'py-errors', label: 'Error Handling in the Library' },
+        starterCode: 'def kth_smallest(lst, k):\n    """QuickSelect with boundary validation."""\n    pass\n',
+        testCases: [
+          { input: '[3, 1, 4], 0', expected: 'None', label: 'k too small' },
+          { input: '[3, 1, 4], 5', expected: 'None', label: 'k too large' },
+          { input: '[], 1', expected: 'None', label: 'Empty list' },
+          { input: '[3, 1, 4], 2', expected: '3', label: 'Valid' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Implement in-place partition for O(1) extra space.', hint: 'Lomuto or Hoare partition scheme. Swap elements around the pivot.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-sorting', label: 'Sorting in the Library' },
+        starterCode: 'def kth_smallest(lst, k):\n    """In-place QuickSelect, average O(n)."""\n    pass\n',
+        testCases: [
+          { input: '[3, 1, 4, 1, 5, 9, 2, 6], 5', expected: '4', label: '5th smallest' },
+          { input: 'list(range(100, 0, -1)), 50', expected: '50', label: 'Large reversed' },
+        ] },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════
+  // CLASSES (filling thin topic — was 5, adding 6 more)
+  // ═══════════════════════════════════════════════════════════════
+  {
+    id: 143, slug: 'stack-class', title: 'Build a Stack',
+    story: 'The Boy Who Built a Library', storySlug: 'boy-who-built-library',
+    description: 'Write a `Stack` class with push(item), pop(), peek(), is_empty(), and size() methods. Pop and peek on empty stack should return None.',
+    difficulty: 'easy', topic: 'classes',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Implement all five methods.', hint: 'Use a list internally. Push = append, pop = pop, peek = last element.', hintRef: { slug: 'python', section: 'py-classes', label: 'Classes in the Library' },
+        starterCode: 'class Stack:\n    def __init__(self):\n        pass\n\n    def push(self, item):\n        pass\n\n    def pop(self):\n        pass\n\n    def peek(self):\n        pass\n\n    def is_empty(self):\n        pass\n\n    def size(self):\n        pass\n',
+        testCases: [
+          { input: '', expected: 'True', label: 'Push/pop/peek work correctly (custom test)' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Add __str__ and __len__ dunder methods.', hint: '__str__ shows the stack contents, __len__ returns the size.', hintRef: { slug: 'python', section: 'py-classes', label: 'Classes in the Library' },
+        starterCode: 'class Stack:\n    def __init__(self):\n        self._items = []\n\n    def push(self, item):\n        self._items.append(item)\n\n    def pop(self):\n        return self._items.pop() if self._items else None\n\n    def peek(self):\n        return self._items[-1] if self._items else None\n\n    def is_empty(self):\n        return len(self._items) == 0\n\n    def size(self):\n        return len(self._items)\n\n    def __str__(self):\n        pass\n\n    def __len__(self):\n        pass\n',
+        testCases: [
+          { input: '', expected: 'True', label: '__str__ and __len__ work (custom test)' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Add a max_size parameter. Push returns False when full.', hint: 'Check size against max_size before push.', hintRef: { slug: 'python', section: 'py-classes', label: 'Classes in the Library' },
+        starterCode: 'class Stack:\n    def __init__(self, max_size=None):\n        pass\n\n    def push(self, item):\n        """Return True if pushed, False if full."""\n        pass\n\n    def pop(self):\n        pass\n\n    def is_full(self):\n        pass\n',
+        testCases: [
+          { input: '', expected: 'True', label: 'Bounded stack works (custom test)' },
+        ] },
+    ],
+  },
+  {
+    id: 144, slug: 'temperature-converter-class', title: 'Temperature Converter',
+    story: 'The Cloud That Refused to Rain', storySlug: 'cloud-refused-to-rain',
+    description: 'Write a `Temperature` class that stores a value in Celsius. Add methods `to_fahrenheit()`, `to_kelvin()`, and class methods `from_fahrenheit(f)` and `from_kelvin(k)` that create Temperature instances.',
+    difficulty: 'easy', topic: 'classes',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Implement all conversion methods.', hint: 'F = C * 9/5 + 32. K = C + 273.15. @classmethod for from_fahrenheit.', hintRef: { slug: 'python', section: 'py-classes', label: 'Classes in the Library' },
+        starterCode: 'class Temperature:\n    def __init__(self, celsius):\n        self.celsius = celsius\n\n    def to_fahrenheit(self):\n        pass\n\n    def to_kelvin(self):\n        pass\n\n    @classmethod\n    def from_fahrenheit(cls, f):\n        pass\n\n    @classmethod\n    def from_kelvin(cls, k):\n        pass\n',
+        testCases: [
+          { input: '', expected: 'True', label: 'All conversions correct (custom test)' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Validate that temperature is above absolute zero (-273.15°C). Raise ValueError if not.', hint: 'Check in __init__: if celsius < -273.15, raise ValueError.', hintRef: { slug: 'python', section: 'py-errors', label: 'Error Handling in the Library' },
+        starterCode: 'class Temperature:\n    def __init__(self, celsius):\n        """Validate >= absolute zero."""\n        pass\n',
+        testCases: [
+          { input: '', expected: 'True', label: 'Validation works (custom test)' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Add __eq__, __lt__, __gt__ so temperatures can be compared. Add __add__ for averaging.', hint: 'Compare the .celsius values. __add__ returns Temperature((self.celsius + other.celsius) / 2).', hintRef: { slug: 'python', section: 'py-classes', label: 'Classes in the Library' },
+        starterCode: 'class Temperature:\n    def __init__(self, celsius):\n        self.celsius = celsius\n\n    def __eq__(self, other):\n        pass\n\n    def __lt__(self, other):\n        pass\n\n    def __add__(self, other):\n        """Return new Temperature that is the average."""\n        pass\n',
+        testCases: [
+          { input: '', expected: 'True', label: 'Comparison operators work (custom test)' },
+        ] },
+    ],
+  },
+  {
+    id: 145, slug: 'linked-list', title: 'Linked List',
+    story: 'The Elephant Corridor', storySlug: 'elephant-corridor',
+    description: 'Write a `LinkedList` class with append(value), prepend(value), find(value), delete(value), and to_list() methods.',
+    difficulty: 'medium', topic: 'classes',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Implement all methods.', hint: 'Each node has .value and .next. Walk the list to find/delete.', hintRef: { slug: 'python', section: 'py-classes', label: 'Classes in the Library' },
+        starterCode: 'class Node:\n    def __init__(self, value):\n        self.value = value\n        self.next = None\n\nclass LinkedList:\n    def __init__(self):\n        self.head = None\n\n    def append(self, value):\n        pass\n\n    def prepend(self, value):\n        pass\n\n    def find(self, value):\n        """Return True if value exists."""\n        pass\n\n    def delete(self, value):\n        """Delete first occurrence. Return True if deleted."""\n        pass\n\n    def to_list(self):\n        pass\n',
+        testCases: [
+          { input: '', expected: 'True', label: 'All operations work (custom test)' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Add __len__ and __contains__ dunder methods.', hint: '__len__ walks the list counting. __contains__ wraps find().', hintRef: { slug: 'python', section: 'py-classes', label: 'Classes in the Library' },
+        starterCode: 'class LinkedList:\n    def __init__(self):\n        self.head = None\n\n    def append(self, value):\n        node = Node(value)\n        if not self.head:\n            self.head = node\n            return\n        curr = self.head\n        while curr.next:\n            curr = curr.next\n        curr.next = node\n\n    def __len__(self):\n        pass\n\n    def __contains__(self, value):\n        pass\n\n    def to_list(self):\n        result, curr = [], self.head\n        while curr:\n            result.append(curr.value)\n            curr = curr.next\n        return result\n',
+        testCases: [
+          { input: '', expected: 'True', label: 'Dunder methods work (custom test)' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Add a reverse() method that reverses the list in-place (O(n) time, O(1) space).', hint: 'Three pointers: prev, current, next. Walk and flip .next pointers.', hintRef: { slug: 'python', section: 'py-classes', label: 'Classes in the Library' },
+        starterCode: 'class LinkedList:\n    def __init__(self):\n        self.head = None\n\n    def append(self, value):\n        node = Node(value)\n        if not self.head:\n            self.head = node\n            return\n        curr = self.head\n        while curr.next:\n            curr = curr.next\n        curr.next = node\n\n    def reverse(self):\n        """Reverse in-place. O(1) extra space."""\n        pass\n\n    def to_list(self):\n        result, curr = [], self.head\n        while curr:\n            result.append(curr.value)\n            curr = curr.next\n        return result\n',
+        testCases: [
+          { input: '', expected: 'True', label: 'Reverse works (custom test)' },
+        ] },
+    ],
+  },
+  {
+    id: 146, slug: 'counter-class', title: 'Build a Counter',
+    story: 'The Boy Who Counted Butterflies', storySlug: 'boy-who-counted-butterflies',
+    description: 'Write a `Counter` class that counts occurrences of items. Support Counter(iterable), .most_common(n), .total(), and dictionary-style access counter["key"].',
+    difficulty: 'medium', topic: 'classes',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Count items and return most common.', hint: 'Use a dict internally. Loop over the iterable in __init__.', hintRef: { slug: 'python', section: 'py-classes', label: 'Classes in the Library' },
+        starterCode: 'class Counter:\n    def __init__(self, iterable=None):\n        self._counts = {}\n        if iterable:\n            for item in iterable:\n                self._counts[item] = self._counts.get(item, 0) + 1\n\n    def __getitem__(self, key):\n        pass\n\n    def most_common(self, n=None):\n        """Return list of (item, count) sorted by count descending."""\n        pass\n\n    def total(self):\n        pass\n',
+        testCases: [
+          { input: '', expected: 'True', label: 'Counter works (custom test)' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Add update(iterable) and subtract(iterable) methods.', hint: 'update adds counts, subtract decreases (but never below 0).', hintRef: { slug: 'python', section: 'py-classes', label: 'Classes in the Library' },
+        starterCode: 'class Counter:\n    def __init__(self, iterable=None):\n        self._counts = {}\n        if iterable:\n            for item in iterable:\n                self._counts[item] = self._counts.get(item, 0) + 1\n\n    def update(self, iterable):\n        pass\n\n    def subtract(self, iterable):\n        """Subtract counts (min 0)."""\n        pass\n\n    def __getitem__(self, key):\n        return self._counts.get(key, 0)\n\n    def most_common(self, n=None):\n        items = sorted(self._counts.items(), key=lambda x: -x[1])\n        return items[:n] if n else items\n',
+        testCases: [
+          { input: '', expected: 'True', label: 'update and subtract work (custom test)' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Add __add__ and __sub__ that combine two Counters. Support + and - operators.', hint: '__add__ merges counts, __sub__ subtracts (dropping zeros and negatives).', hintRef: { slug: 'python', section: 'py-classes', label: 'Classes in the Library' },
+        starterCode: 'class Counter:\n    def __init__(self, iterable=None):\n        self._counts = {}\n        if iterable:\n            for item in iterable:\n                self._counts[item] = self._counts.get(item, 0) + 1\n\n    def __add__(self, other):\n        """Combine counts from both counters."""\n        pass\n\n    def __sub__(self, other):\n        """Subtract counts, dropping non-positive."""\n        pass\n\n    def items(self):\n        return self._counts.items()\n',
+        testCases: [
+          { input: '', expected: 'True', label: 'Operator overloading works (custom test)' },
+        ] },
+    ],
+  },
+  {
+    id: 147, slug: 'binary-search-tree', title: 'Binary Search Tree',
+    story: 'The Old Banyan Tree\u2019s Stories', storySlug: 'old-banyan-tree',
+    description: 'Write a `BST` class with insert(value), search(value) → bool, and in_order() → sorted list.',
+    difficulty: 'hard', topic: 'classes',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Implement insert, search, and in-order traversal.', hint: 'Each node has value, left, right. Insert: if less go left, if greater go right. In-order: left → root → right.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-bfs-dfs', label: 'BFS & DFS in the Library' },
+        starterCode: 'class TreeNode:\n    def __init__(self, value):\n        self.value = value\n        self.left = None\n        self.right = None\n\nclass BST:\n    def __init__(self):\n        self.root = None\n\n    def insert(self, value):\n        pass\n\n    def search(self, value):\n        pass\n\n    def in_order(self):\n        """Return sorted list of all values."""\n        pass\n',
+        testCases: [
+          { input: '', expected: 'True', label: 'BST operations work (custom test)' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Add min(), max(), and height() methods.', hint: 'min is leftmost node. max is rightmost. height is 1 + max(left_height, right_height).', hintRef: { slug: 'algorithms-data-structures', section: 'algo-bfs-dfs', label: 'BFS & DFS in the Library' },
+        starterCode: 'class BST:\n    def __init__(self):\n        self.root = None\n\n    def insert(self, value):\n        # ... (provided)\n        pass\n\n    def min(self):\n        pass\n\n    def max(self):\n        pass\n\n    def height(self):\n        pass\n',
+        testCases: [
+          { input: '', expected: 'True', label: 'min/max/height work (custom test)' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Add delete(value) that handles all three cases: leaf, one child, two children.', hint: 'Two children: replace with in-order successor (smallest in right subtree).', hintRef: { slug: 'algorithms-data-structures', section: 'algo-bfs-dfs', label: 'BFS & DFS in the Library' },
+        starterCode: 'class BST:\n    def __init__(self):\n        self.root = None\n\n    def insert(self, value):\n        pass\n\n    def delete(self, value):\n        """Delete node, handling leaf/one-child/two-children cases."""\n        pass\n\n    def in_order(self):\n        pass\n',
+        testCases: [
+          { input: '', expected: 'True', label: 'Delete works (custom test)' },
+        ] },
+    ],
+  },
+  {
+    id: 148, slug: 'event-emitter', title: 'Event Emitter',
+    story: 'The Festival of Lights on the River', storySlug: 'festival-lights-river',
+    description: 'Write an `EventEmitter` class with on(event, callback), off(event, callback), and emit(event, *args) methods. Multiple callbacks per event.',
+    difficulty: 'hard', topic: 'classes',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Register and emit callbacks.', hint: 'Use a dict mapping event names to lists of callbacks.', hintRef: { slug: 'python', section: 'py-classes', label: 'Classes in the Library' },
+        starterCode: 'class EventEmitter:\n    def __init__(self):\n        pass\n\n    def on(self, event, callback):\n        pass\n\n    def off(self, event, callback):\n        pass\n\n    def emit(self, event, *args):\n        pass\n',
+        testCases: [
+          { input: '', expected: 'True', label: 'Event system works (custom test)' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Add once(event, callback) that fires only once then auto-removes.', hint: 'Wrap the callback in a wrapper that calls off() after executing.', hintRef: { slug: 'python', section: 'py-classes', label: 'Classes in the Library' },
+        starterCode: 'class EventEmitter:\n    def __init__(self):\n        self._events = {}\n\n    def on(self, event, cb):\n        self._events.setdefault(event, []).append(cb)\n\n    def off(self, event, cb):\n        if event in self._events:\n            self._events[event] = [c for c in self._events[event] if c != cb]\n\n    def emit(self, event, *args):\n        for cb in self._events.get(event, []):\n            cb(*args)\n\n    def once(self, event, callback):\n        """Fire callback once, then auto-remove."""\n        pass\n',
+        testCases: [
+          { input: '', expected: 'True', label: 'once() auto-removes (custom test)' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Add listener_count(event) and remove_all(event) methods. Support wildcard "*" that catches all events.', hint: 'emit should also call all "*" listeners. listener_count sums registered callbacks.', hintRef: { slug: 'python', section: 'py-classes', label: 'Classes in the Library' },
+        starterCode: 'class EventEmitter:\n    def __init__(self):\n        self._events = {}\n\n    def on(self, event, cb):\n        self._events.setdefault(event, []).append(cb)\n\n    def emit(self, event, *args):\n        """Emit to specific listeners AND wildcard "*" listeners."""\n        pass\n\n    def listener_count(self, event):\n        pass\n\n    def remove_all(self, event=None):\n        """Remove all listeners for event, or ALL if event is None."""\n        pass\n',
+        testCases: [
+          { input: '', expected: 'True', label: 'Wildcards and remove_all work (custom test)' },
+        ] },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════
+  // TUPLES-SETS (filling thin topic — was 4, adding 6 more)
+  // ═══════════════════════════════════════════════════════════════
+  {
+    id: 149, slug: 'coordinate-distance', title: 'Coordinate Distance',
+    story: 'The Map Maker\u2019s Secret', storySlug: 'map-maker',
+    description: 'Write `distance(p1, p2)` that calculates the Euclidean distance between two coordinate tuples (x, y).',
+    difficulty: 'easy', topic: 'tuples-sets',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Calculate distance between two points.', hint: 'distance = sqrt((x2-x1)² + (y2-y1)²). Use ** 0.5 for sqrt.', hintRef: { slug: 'python', section: 'py-tuples-sets', label: 'Tuples & Sets in the Library' },
+        starterCode: 'def distance(p1, p2):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '(0, 0), (3, 4)', expected: '5.0', label: '3-4-5 triangle' },
+          { input: '(1, 1), (1, 1)', expected: '0.0', label: 'Same point' },
+          { input: '(0, 0), (1, 0)', expected: '1.0', label: 'Unit distance' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Support 3D coordinates (x, y, z). Make it work for any dimension.', hint: 'Use sum((a - b) ** 2 for a, b in zip(p1, p2)) ** 0.5.', hintRef: { slug: 'python', section: 'py-tuples-sets', label: 'Tuples & Sets in the Library' },
+        starterCode: 'def distance(p1, p2):\n    """N-dimensional Euclidean distance."""\n    pass\n',
+        testCases: [
+          { input: '(0, 0, 0), (1, 1, 1)', expected: 'True', label: '≈ 1.732 (checked via round)' },
+          { input: '(1, 2, 3, 4), (5, 6, 7, 8)', expected: '8.0', label: '4D' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Find the closest pair of points from a list. Return the two points and the distance.', hint: 'Compare all pairs (brute force is fine for now). Track minimum.', hintRef: { slug: 'python', section: 'py-tuples-sets', label: 'Tuples & Sets in the Library' },
+        starterCode: 'def closest_pair(points):\n    """Return (p1, p2, distance) for the closest pair."""\n    pass\n',
+        testCases: [
+          { input: '[(0, 0), (3, 4), (1, 1)]', expected: 'True', label: 'Closest is (0,0)-(1,1)' },
+          { input: '[(0, 0), (10, 10)]', expected: 'True', label: 'Only two points' },
+        ] },
+    ],
+  },
+  {
+    id: 150, slug: 'named-tuple-records', title: 'Named Tuple Records',
+    story: 'The Girl Who Spoke to Elephants', storySlug: 'girl-who-spoke-to-elephants',
+    description: 'Write `parse_records(raw)` that converts a list of dicts into named tuples. Each dict has "name", "weight", "park". Return a list of Elephant namedtuples.',
+    difficulty: 'easy', topic: 'tuples-sets',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Convert dicts to named tuples.', hint: 'from collections import namedtuple. Define Elephant = namedtuple("Elephant", ["name", "weight", "park"]).', hintRef: { slug: 'python', section: 'py-tuples-sets', label: 'Tuples & Sets in the Library' },
+        starterCode: 'from collections import namedtuple\n\ndef parse_records(raw):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[{"name": "Ranga", "weight": 4500, "park": "Kaziranga"}]', expected: 'True', label: 'Single record (namedtuple check)' },
+          { input: '[]', expected: '[]', label: 'Empty' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Handle missing keys by using defaults. Default weight=0, park="Unknown".', hint: 'Use dict.get() with defaults.', hintRef: { slug: 'python', section: 'py-tuples-sets', label: 'Tuples & Sets in the Library' },
+        starterCode: 'from collections import namedtuple\n\ndef parse_records(raw):\n    """Convert dicts to namedtuples with defaults."""\n    pass\n',
+        testCases: [
+          { input: '[{"name": "Ranga"}]', expected: 'True', label: 'Missing fields use defaults' },
+          { input: '[{"name": "Gaja", "weight": 5200, "park": "Kaziranga"}]', expected: 'True', label: 'All fields present' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Sort the records by weight descending and return the top N.', hint: 'sorted(records, key=lambda r: r.weight, reverse=True)[:n]', hintRef: { slug: 'python', section: 'py-tuples-sets', label: 'Tuples & Sets in the Library' },
+        starterCode: 'from collections import namedtuple\n\ndef top_n(raw, n):\n    """Parse, sort by weight desc, return top n as namedtuples."""\n    pass\n',
+        testCases: [
+          { input: '[{"name": "A", "weight": 100}, {"name": "B", "weight": 200}], 1', expected: 'True', label: 'Top 1 is B' },
+        ] },
+    ],
+  },
+  {
+    id: 151, slug: 'set-similarity', title: 'Set Similarity (Jaccard)',
+    story: 'The Seven Sisters of the Northeast', storySlug: 'seven-sisters-states',
+    description: 'Write `jaccard(set_a, set_b)` that computes the Jaccard similarity: |A ∩ B| / |A ∪ B|. Return 0.0 if both sets are empty.',
+    difficulty: 'medium', topic: 'tuples-sets',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Compute Jaccard similarity.', hint: 'intersection = A & B, union = A | B. Result = len(intersection) / len(union).', hintRef: { slug: 'python', section: 'py-tuples-sets', label: 'Tuples & Sets in the Library' },
+        starterCode: 'def jaccard(set_a, set_b):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '{1, 2, 3}, {2, 3, 4}', expected: '0.5', label: '2 shared out of 4 total' },
+          { input: '{1, 2}, {1, 2}', expected: '1.0', label: 'Identical' },
+          { input: '{1}, {2}', expected: '0.0', label: 'Disjoint' },
+          { input: 'set(), set()', expected: '0.0', label: 'Both empty' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Accept lists too — convert to sets internally.', hint: 'set(set_a) works on both sets and lists.', hintRef: { slug: 'python', section: 'py-tuples-sets', label: 'Tuples & Sets in the Library' },
+        starterCode: 'def jaccard(a, b):\n    """Jaccard similarity, accepts sets or lists."""\n    pass\n',
+        testCases: [
+          { input: '[1, 2, 2, 3], [2, 3, 4]', expected: '0.5', label: 'Lists with duplicates' },
+          { input: '"hello", "world"', expected: 'True', label: 'Strings (char sets)' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Find the most similar pair from a list of sets. Return (i, j, similarity).', hint: 'Compare all pairs, track highest Jaccard.', hintRef: { slug: 'python', section: 'py-tuples-sets', label: 'Tuples & Sets in the Library' },
+        starterCode: 'def most_similar_pair(sets_list):\n    """Return (i, j, similarity) of the most similar pair."""\n    pass\n',
+        testCases: [
+          { input: '[{1, 2, 3}, {4, 5, 6}, {1, 2, 4}]', expected: 'True', label: 'Pair 0,2 most similar' },
+        ] },
+    ],
+  },
+  {
+    id: 152, slug: 'tuple-histogram', title: 'Tuple Histogram',
+    story: 'The Bees That Built an Empire', storySlug: 'bees-built-empire',
+    description: 'Write `histogram(data)` that takes a list of values and returns a list of (value, count) tuples sorted by count descending, then by value ascending.',
+    difficulty: 'medium', topic: 'tuples-sets',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Count and sort as tuples.', hint: 'Count with a dict, convert to list of tuples, sort by (-count, value).', hintRef: { slug: 'python', section: 'py-tuples-sets', label: 'Tuples & Sets in the Library' },
+        starterCode: 'def histogram(data):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '["a", "b", "a", "c", "b", "a"]', expected: '[("a", 3), ("b", 2), ("c", 1)]', label: 'Basic' },
+          { input: '[1, 1, 2, 2]', expected: '[(1, 2), (2, 2)]', label: 'Tied counts → sorted by value' },
+          { input: '[]', expected: '[]', label: 'Empty' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Add a top_n parameter to return only the top N.', hint: 'Slice the sorted result.', hintRef: { slug: 'python', section: 'py-tuples-sets', label: 'Tuples & Sets in the Library' },
+        starterCode: 'def histogram(data, top_n=None):\n    """Return histogram, optionally top N only."""\n    pass\n',
+        testCases: [
+          { input: '["a", "b", "a", "c", "b", "a"], 2', expected: '[("a", 3), ("b", 2)]', label: 'Top 2' },
+          { input: '["x", "y", "z"], None', expected: '[("x", 1), ("y", 1), ("z", 1)]', label: 'No limit' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Return as visual bars: [(value, count, bar)] where bar is "█" * count.', hint: 'Add a third element to each tuple with the bar string.', hintRef: { slug: 'python', section: 'py-tuples-sets', label: 'Tuples & Sets in the Library' },
+        starterCode: 'def histogram(data, top_n=None):\n    """Return [(value, count, bar_string)]."""\n    pass\n',
+        testCases: [
+          { input: '["a", "a", "b"], None', expected: '[("a", 2, "██"), ("b", 1, "█")]', label: 'With bars' },
+        ] },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════
+  // ERROR-HANDLING (filling thin topic — was 4, adding 6 more)
+  // ═══════════════════════════════════════════════════════════════
+  {
+    id: 153, slug: 'safe-json-parse', title: 'Safe JSON Parser',
+    story: 'The Boy Who Built a Library', storySlug: 'boy-who-built-library',
+    description: 'Write `safe_parse(json_string, default=None)` that parses a JSON string. If parsing fails, return the default value instead of crashing.',
+    difficulty: 'easy', topic: 'error-handling',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Parse JSON safely.', hint: 'Use json.loads() inside try/except json.JSONDecodeError.', hintRef: { slug: 'python', section: 'py-errors', label: 'Error Handling in the Library' },
+        starterCode: 'import json\n\ndef safe_parse(json_string, default=None):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '\'{"name": "Ranga"}\', None', expected: "{'name': 'Ranga'}", label: 'Valid JSON' },
+          { input: '"not json", "fallback"', expected: '"fallback"', label: 'Invalid → default' },
+          { input: '"[]", None', expected: '[]', label: 'Valid array' },
+          { input: '"", {}', expected: '{}', label: 'Empty string → default' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Also handle TypeError (when input is not a string).', hint: 'Catch both JSONDecodeError and TypeError.', hintRef: { slug: 'python', section: 'py-errors', label: 'Error Handling in the Library' },
+        starterCode: 'import json\n\ndef safe_parse(json_string, default=None):\n    """Parse JSON, handling invalid input and non-string types."""\n    pass\n',
+        testCases: [
+          { input: '123, "fallback"', expected: '"fallback"', label: 'Integer input' },
+          { input: 'None, []', expected: '[]', label: 'None input' },
+          { input: '\'{"a": 1}\', None', expected: "{'a': 1}", label: 'Still works for valid' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Return a tuple (result, error_message). None for error_message if successful.', hint: 'In except: capture str(e) as the error message.', hintRef: { slug: 'python', section: 'py-errors', label: 'Error Handling in the Library' },
+        starterCode: 'import json\n\ndef safe_parse(json_string):\n    """Return (parsed_result, error_message_or_None)."""\n    pass\n',
+        testCases: [
+          { input: '\'{"a": 1}\'', expected: "({'a': 1}, None)", label: 'Success' },
+          { input: '"bad"', expected: 'True', label: 'Failure has error message (checked via [1] is not None)' },
+        ] },
+    ],
+  },
+  {
+    id: 154, slug: 'retry-decorator', title: 'Retry Decorator',
+    story: 'The Fisherman\u2019s Storm Warning', storySlug: 'fisherman-storm-warning',
+    description: 'Write a `retry(max_attempts)` decorator that retries a function up to max_attempts times if it raises an exception. Return the result on success, or re-raise the last exception.',
+    difficulty: 'medium', topic: 'error-handling',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Implement the retry decorator.', hint: 'Use a for loop up to max_attempts. Catch exceptions. If all fail, raise the last one.', hintRef: { slug: 'python', section: 'py-errors', label: 'Error Handling in the Library' },
+        starterCode: 'def retry(max_attempts):\n    def decorator(func):\n        def wrapper(*args, **kwargs):\n            # Your code here\n            pass\n        return wrapper\n    return decorator\n',
+        testCases: [
+          { input: '', expected: 'True', label: 'Retries and succeeds (custom test)' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Add a specific exception type to catch. Only retry on that type.', hint: 'Add exc_type parameter. Catch only that exception type.', hintRef: { slug: 'python', section: 'py-errors', label: 'Error Handling in the Library' },
+        starterCode: 'def retry(max_attempts, exc_type=Exception):\n    """Retry only on specific exception type."""\n    def decorator(func):\n        def wrapper(*args, **kwargs):\n            pass\n        return wrapper\n    return decorator\n',
+        testCases: [
+          { input: '', expected: 'True', label: 'Only retries matching exception (custom test)' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Return (result, attempts_used) tuple. Add optional delay between retries.', hint: 'Count attempts. Use time.sleep(delay) between retries.', hintRef: { slug: 'python', section: 'py-errors', label: 'Error Handling in the Library' },
+        starterCode: 'import time\n\ndef retry(max_attempts, delay=0):\n    """Retry with delay. Return (result, attempts_used)."""\n    def decorator(func):\n        def wrapper(*args, **kwargs):\n            pass\n        return wrapper\n    return decorator\n',
+        testCases: [
+          { input: '', expected: 'True', label: 'Returns attempt count (custom test)' },
+        ] },
+    ],
+  },
+  {
+    id: 155, slug: 'input-validator', title: 'Input Validator',
+    story: 'The Seed Keeper of Majuli', storySlug: 'seed-keeper-majuli',
+    description: 'Write `validate(value, rules)` that checks a value against a list of rule strings. Rules: "required", "int", "float", "min:N", "max:N", "len:N". Return list of failed rule descriptions.',
+    difficulty: 'medium', topic: 'error-handling',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Check value against each rule.', hint: 'Parse each rule string. "min:5" → check value >= 5. Return list of failure messages.', hintRef: { slug: 'python', section: 'py-errors', label: 'Error Handling in the Library' },
+        starterCode: 'def validate(value, rules):\n    # Return list of error strings for failed rules\n    pass\n',
+        testCases: [
+          { input: '5, ["int", "min:1", "max:10"]', expected: '[]', label: 'All pass' },
+          { input: 'None, ["required"]', expected: 'True', label: 'Required fails' },
+          { input: '15, ["int", "max:10"]', expected: 'True', label: 'Max fails' },
+          { input: '"abc", ["int"]', expected: 'True', label: 'Type fails' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Handle unknown rules gracefully — skip them with a warning in the errors list.', hint: 'If a rule is not recognized, add "unknown rule: X" to errors.', hintRef: { slug: 'python', section: 'py-errors', label: 'Error Handling in the Library' },
+        starterCode: 'def validate(value, rules):\n    """Validate with unknown rule handling."""\n    pass\n',
+        testCases: [
+          { input: '5, ["int", "foobar"]', expected: 'True', label: 'Unknown rule noted' },
+          { input: '5, []', expected: '[]', label: 'No rules = pass' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Support custom rules as callables: (name, fn) tuples in the rules list. fn(value) returns True/False.', hint: 'Check if rule is a tuple with a callable second element.', hintRef: { slug: 'python', section: 'py-errors', label: 'Error Handling in the Library' },
+        starterCode: 'def validate(value, rules):\n    """Support string rules and (name, callable) custom rules."""\n    pass\n',
+        testCases: [
+          { input: '7, [("is_odd", lambda x: x % 2 == 1)]', expected: '[]', label: 'Custom rule passes' },
+          { input: '8, [("is_odd", lambda x: x % 2 == 1)]', expected: 'True', label: 'Custom rule fails' },
+        ] },
+    ],
+  },
+  {
+    id: 156, slug: 'context-manager', title: 'Timer Context Manager',
+    story: 'The Moonlit Boat Race', storySlug: 'moonlit-boat-race',
+    description: 'Write a `Timer` context manager class that measures how long a code block takes. Access elapsed time via timer.elapsed (in seconds).',
+    difficulty: 'easy', topic: 'error-handling',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Implement __enter__ and __exit__ to measure time.', hint: 'In __enter__: record time.time(). In __exit__: compute elapsed = time.time() - start.', hintRef: { slug: 'python', section: 'py-errors', label: 'Error Handling in the Library' },
+        starterCode: 'import time\n\nclass Timer:\n    def __init__(self):\n        self.elapsed = 0\n\n    def __enter__(self):\n        pass\n\n    def __exit__(self, exc_type, exc_val, exc_tb):\n        pass\n',
+        testCases: [
+          { input: '', expected: 'True', label: 'Timer measures elapsed time (custom test)' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Support nested timers. Add a name parameter for labeling.', hint: 'Store name in __init__. Each Timer instance is independent.', hintRef: { slug: 'python', section: 'py-errors', label: 'Error Handling in the Library' },
+        starterCode: 'import time\n\nclass Timer:\n    def __init__(self, name="default"):\n        self.name = name\n        self.elapsed = 0\n\n    def __enter__(self):\n        pass\n\n    def __exit__(self, exc_type, exc_val, exc_tb):\n        pass\n\n    def __str__(self):\n        pass\n',
+        testCases: [
+          { input: '', expected: 'True', label: 'Named timer works (custom test)' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'If an exception occurs inside the block, still record the time but re-raise the exception.', hint: '__exit__ returning False (or None) re-raises. Just make sure you set elapsed before returning.', hintRef: { slug: 'python', section: 'py-errors', label: 'Error Handling in the Library' },
+        starterCode: 'import time\n\nclass Timer:\n    def __init__(self):\n        self.elapsed = 0\n        self.error = None\n\n    def __enter__(self):\n        pass\n\n    def __exit__(self, exc_type, exc_val, exc_tb):\n        """Record elapsed time even on error. Store error but re-raise."""\n        pass\n',
+        testCases: [
+          { input: '', expected: 'True', label: 'Records time even on exception (custom test)' },
+        ] },
+    ],
+  },
+  {
+    id: 157, slug: 'error-chain', title: 'Error Chain Logger',
+    story: 'The Grandmother Who Remembered', storySlug: 'grandmother-remembered',
+    description: 'Write `process_data(raw)` that tries to: 1) parse as int, 2) if fails try float, 3) if fails try JSON. Return (value, type_name) or raise ValueError with all three error messages chained.',
+    difficulty: 'hard', topic: 'error-handling',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Try int → float → JSON. Return (value, type) on success.', hint: 'Nest try/except blocks or use sequential attempts.', hintRef: { slug: 'python', section: 'py-errors', label: 'Error Handling in the Library' },
+        starterCode: 'import json\n\ndef process_data(raw):\n    # Return (parsed_value, "int"/"float"/"json")\n    pass\n',
+        testCases: [
+          { input: '"42"', expected: '(42, "int")', label: 'Integer string' },
+          { input: '"3.14"', expected: '(3.14, "float")', label: 'Float string' },
+          { input: '\'[1, 2]\'', expected: '([1, 2], "json")', label: 'JSON array' },
+          { input: '"hello"', expected: 'None', label: 'All fail → error (return None for test)' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Collect all error messages and include them in the final ValueError.', hint: 'Append each error message to a list. If all fail, raise ValueError with joined messages.', hintRef: { slug: 'python', section: 'py-errors', label: 'Error Handling in the Library' },
+        starterCode: 'import json\n\ndef process_data(raw):\n    """Try int/float/json. Collect all errors if all fail."""\n    pass\n',
+        testCases: [
+          { input: '"42"', expected: '(42, "int")', label: 'Success' },
+          { input: '"hello"', expected: 'None', label: 'All fail with collected errors' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Make it extensible: accept a list of (name, parser_fn) tuples. Try each in order.', hint: 'Loop over parsers. First success returns. All fail → raise with all messages.', hintRef: { slug: 'python', section: 'py-errors', label: 'Error Handling in the Library' },
+        starterCode: 'def process_data(raw, parsers=None):\n    """Try parsers in order. Return (value, parser_name) or raise."""\n    pass\n',
+        testCases: [
+          { input: '"42", [("int", int), ("float", float)]', expected: '(42, "int")', label: 'Custom parsers' },
+          { input: '"hello", [("int", int)]', expected: 'None', label: 'Custom fail' },
+        ] },
+    ],
+  },
+  {
+    id: 158, slug: 'circuit-breaker', title: 'Circuit Breaker',
+    story: 'The Firefly Festival of Majuli', storySlug: 'firefly-festival-majuli',
+    description: 'Write a `CircuitBreaker` class. After `threshold` consecutive failures, the breaker "opens" and immediately raises without calling the function. After `reset_timeout` seconds, it allows one retry.',
+    difficulty: 'hard', topic: 'error-handling',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Track failures. Open circuit after threshold.', hint: 'Count consecutive failures. When count >= threshold, raise immediately.', hintRef: { slug: 'python', section: 'py-errors', label: 'Error Handling in the Library' },
+        starterCode: 'class CircuitBreaker:\n    def __init__(self, threshold=3):\n        self.threshold = threshold\n        self.failures = 0\n        self.open = False\n\n    def call(self, func, *args):\n        """Call func. Track failures. Open circuit after threshold."""\n        pass\n',
+        testCases: [
+          { input: '', expected: 'True', label: 'Circuit opens after threshold (custom test)' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Add state tracking: "closed", "open", "half-open". Success in half-open → close.', hint: 'After timeout, switch to half-open. Allow one call. If it succeeds → closed. If fails → open again.', hintRef: { slug: 'python', section: 'py-errors', label: 'Error Handling in the Library' },
+        starterCode: 'import time\n\nclass CircuitBreaker:\n    def __init__(self, threshold=3, reset_timeout=5):\n        self.threshold = threshold\n        self.reset_timeout = reset_timeout\n        self.failures = 0\n        self.state = "closed"  # closed, open, half-open\n        self.last_failure_time = None\n\n    def call(self, func, *args):\n        pass\n',
+        testCases: [
+          { input: '', expected: 'True', label: 'State transitions work (custom test)' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Make it a decorator: @circuit_breaker(threshold=3).', hint: 'Return a decorator that wraps the function with CircuitBreaker.call.', hintRef: { slug: 'python', section: 'py-errors', label: 'Error Handling in the Library' },
+        starterCode: 'def circuit_breaker(threshold=3, reset_timeout=5):\n    """Decorator that wraps function in a CircuitBreaker."""\n    pass\n',
+        testCases: [
+          { input: '', expected: 'True', label: 'Decorator works (custom test)' },
+        ] },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════
+  // RECURSION (new topic — was 0, adding 6)
+  // ═══════════════════════════════════════════════════════════════
+  {
+    id: 159, slug: 'recursive-sum', title: 'Recursive Sum',
+    story: 'The Sacred River Ganges', storySlug: 'sacred-river-ganges',
+    description: 'Write `recursive_sum(lst)` that sums a list of numbers using recursion (no loops, no sum()).',
+    difficulty: 'easy', topic: 'recursion',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Sum a list recursively.', hint: 'Base case: empty list → 0. Recursive: first element + recursive_sum(rest).', hintRef: { slug: 'algorithms-data-structures', section: 'algo-recursion', label: 'Recursion in the Library' },
+        starterCode: 'def recursive_sum(lst):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[1, 2, 3, 4, 5]', expected: '15', label: 'Basic' },
+          { input: '[]', expected: '0', label: 'Empty' },
+          { input: '[42]', expected: '42', label: 'Single' },
+          { input: '[-1, 1, -1, 1]', expected: '0', label: 'Cancelling' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Handle nested lists: recursive_sum([1, [2, [3]]]) → 6.', hint: 'If element is a list, recurse into it. Use isinstance(x, list).', hintRef: { slug: 'algorithms-data-structures', section: 'algo-recursion', label: 'Recursion in the Library' },
+        starterCode: 'def recursive_sum(lst):\n    """Sum nested lists recursively."""\n    pass\n',
+        testCases: [
+          { input: '[1, [2, [3, [4]]]]', expected: '10', label: 'Deeply nested' },
+          { input: '[[1, 2], [3, 4]]', expected: '10', label: 'Two nested' },
+          { input: '[]', expected: '0', label: 'Empty' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Use tail recursion pattern with an accumulator for O(1) stack usage conceptually.', hint: 'Add an acc parameter with default 0. Return acc when list empty.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-recursion', label: 'Recursion in the Library' },
+        starterCode: 'def recursive_sum(lst, acc=0):\n    """Tail-recursive sum with accumulator."""\n    pass\n',
+        testCases: [
+          { input: 'list(range(100))', expected: '4950', label: 'Larger list' },
+          { input: '[1, 2, 3]', expected: '6', label: 'Basic' },
+        ] },
+    ],
+  },
+  {
+    id: 160, slug: 'flatten-recursive', title: 'Flatten List',
+    story: 'The Little River That Joined the Sea', storySlug: 'little-river-joined-sea',
+    description: 'Write `flatten(lst)` that takes a nested list of any depth and returns a flat list. Example: `flatten([1, [2, [3]], 4])` → `[1, 2, 3, 4]`.',
+    difficulty: 'easy', topic: 'recursion',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Flatten nested lists.', hint: 'For each element: if it is a list, recursively flatten it. Otherwise, add to result.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-recursion', label: 'Recursion in the Library' },
+        starterCode: 'def flatten(lst):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[1, [2, [3]], 4]', expected: '[1, 2, 3, 4]', label: 'Mixed depth' },
+          { input: '[[1, 2], [3, [4, 5]]]', expected: '[1, 2, 3, 4, 5]', label: 'Two levels' },
+          { input: '[]', expected: '[]', label: 'Empty' },
+          { input: '[1, 2, 3]', expected: '[1, 2, 3]', label: 'Already flat' },
+          { input: '[[[[1]]]]', expected: '[1]', label: 'Very deep' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Add a max_depth parameter. Only flatten up to that depth.', hint: 'Decrement depth on each recursive call. Stop flattening when depth = 0.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-recursion', label: 'Recursion in the Library' },
+        starterCode: 'def flatten(lst, max_depth=float("inf")):\n    """Flatten up to max_depth levels."""\n    pass\n',
+        testCases: [
+          { input: '[1, [2, [3]]], 1', expected: '[1, 2, [3]]', label: 'Depth 1' },
+          { input: '[1, [2, [3]]], 2', expected: '[1, 2, 3]', label: 'Depth 2' },
+          { input: '[1, [2, [3]]], 0', expected: '[1, [2, [3]]]', label: 'Depth 0 = no flatten' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Implement using a generator (yield) for memory efficiency.', hint: 'Use yield instead of appending to a list. yield from for recursive calls.', hintRef: { slug: 'python', section: 'py-functions', label: 'Functions in the Library' },
+        starterCode: 'def flatten(lst):\n    """Generator-based flatten using yield."""\n    pass\n',
+        testCases: [
+          { input: '[1, [2, [3]], 4]', expected: '[1, 2, 3, 4]', label: 'Generator result (wrap in list)' },
+          { input: '[[1, 2], [3, [4, 5]]]', expected: '[1, 2, 3, 4, 5]', label: 'Nested' },
+        ] },
+    ],
+  },
+  {
+    id: 161, slug: 'fibonacci-recursive', title: 'Fibonacci Memoized',
+    story: 'The Bodhi Tree and Enlightenment', storySlug: 'bodhi-tree-enlightenment',
+    description: 'Write `fib(n)` that returns the nth Fibonacci number. F(0)=0, F(1)=1, F(n)=F(n-1)+F(n-2).',
+    difficulty: 'medium', topic: 'recursion',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Implement recursive Fibonacci.', hint: 'Base cases: fib(0)=0, fib(1)=1. Otherwise fib(n-1) + fib(n-2).', hintRef: { slug: 'algorithms-data-structures', section: 'algo-recursion', label: 'Recursion in the Library' },
+        starterCode: 'def fib(n):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '0', expected: '0', label: 'F(0)' },
+          { input: '1', expected: '1', label: 'F(1)' },
+          { input: '10', expected: '55', label: 'F(10)' },
+          { input: '20', expected: '6765', label: 'F(20)' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Add memoization to avoid exponential time.', hint: 'Use a dict as cache. Check if n is already computed before recursing.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-recursion', label: 'Recursion in the Library' },
+        starterCode: 'def fib(n, memo={}):\n    """Memoized Fibonacci — O(n) time."""\n    pass\n',
+        testCases: [
+          { input: '50', expected: '12586269025', label: 'F(50) fast' },
+          { input: '0', expected: '0', label: 'F(0)' },
+          { input: '100', expected: '354224848179261915075', label: 'F(100)' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Use @functools.lru_cache and compare. Also implement iterative version.', hint: '@lru_cache(maxsize=None) on a recursive function gives free memoization.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-recursion', label: 'Recursion in the Library' },
+        starterCode: 'def fib_iterative(n):\n    """Iterative Fibonacci — O(n) time, O(1) space."""\n    pass\n',
+        testCases: [
+          { input: '50', expected: '12586269025', label: 'F(50)' },
+          { input: '0', expected: '0', label: 'F(0)' },
+          { input: '1', expected: '1', label: 'F(1)' },
+        ] },
+    ],
+  },
+  {
+    id: 162, slug: 'recursive-binary-search', title: 'Recursive Binary Search',
+    story: 'The Postman of the Hills', storySlug: 'postman-of-the-hills',
+    description: 'Write `binary_search(sorted_list, target)` using recursion. Return the index if found, -1 otherwise.',
+    difficulty: 'medium', topic: 'recursion',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Binary search recursively.', hint: 'Compare target to middle. If less, search left half. If greater, search right half. Base: empty range → -1.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-search', label: 'Search in the Library' },
+        starterCode: 'def binary_search(lst, target, lo=0, hi=None):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[1, 3, 5, 7, 9], 5', expected: '2', label: 'Found in middle' },
+          { input: '[1, 3, 5, 7, 9], 1', expected: '0', label: 'First element' },
+          { input: '[1, 3, 5, 7, 9], 9', expected: '4', label: 'Last element' },
+          { input: '[1, 3, 5, 7, 9], 4', expected: '-1', label: 'Not found' },
+          { input: '[], 5', expected: '-1', label: 'Empty list' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Return the index of the first occurrence if duplicates exist.', hint: 'When found, check if there is an earlier occurrence in the left half.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-search', label: 'Search in the Library' },
+        starterCode: 'def binary_search(lst, target, lo=0, hi=None):\n    """Return index of first occurrence."""\n    pass\n',
+        testCases: [
+          { input: '[1, 2, 2, 2, 3], 2', expected: '1', label: 'First of duplicates' },
+          { input: '[5, 5, 5, 5], 5', expected: '0', label: 'All same' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Count and return the number of recursive calls made. Return (index, call_count).', hint: 'Pass a mutable counter (list of one int) through the recursion.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-search', label: 'Search in the Library' },
+        starterCode: 'def binary_search(lst, target):\n    """Return (index, call_count)."""\n    pass\n',
+        testCases: [
+          { input: 'list(range(100)), 50', expected: 'True', label: 'Index 50, few calls (checked via [0] and [1])' },
+          { input: 'list(range(1024)), 512', expected: 'True', label: 'Max ~10 calls for 1024 elements' },
+        ] },
+    ],
+  },
+  {
+    id: 163, slug: 'tower-of-hanoi', title: 'Tower of Hanoi',
+    story: 'The Dharma Wheel of Nalanda', storySlug: 'dharma-wheel-nalanda',
+    description: 'Write `hanoi(n, source="A", target="C", auxiliary="B")` that returns a list of moves to solve the Tower of Hanoi for n disks. Each move is a tuple (from_peg, to_peg).',
+    difficulty: 'hard', topic: 'recursion',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Solve Tower of Hanoi recursively.', hint: 'Move n-1 disks to auxiliary. Move largest to target. Move n-1 from auxiliary to target.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-recursion', label: 'Recursion in the Library' },
+        starterCode: 'def hanoi(n, source="A", target="C", auxiliary="B"):\n    # Return list of (from, to) tuples\n    pass\n',
+        testCases: [
+          { input: '1', expected: '[("A", "C")]', label: '1 disk' },
+          { input: '2', expected: '[("A", "B"), ("A", "C"), ("B", "C")]', label: '2 disks' },
+          { input: '3', expected: 'True', label: '7 moves (checked via len)' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Validate n > 0. Return move count alongside moves.', hint: 'The formula is 2^n - 1 moves. Validate n >= 1.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-recursion', label: 'Recursion in the Library' },
+        starterCode: 'def hanoi(n):\n    """Return (moves_list, move_count)."""\n    pass\n',
+        testCases: [
+          { input: '3', expected: 'True', label: '7 moves total' },
+          { input: '0', expected: '([], 0)', label: 'Zero disks' },
+          { input: '4', expected: 'True', label: '15 moves' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Print visual state of all three pegs after each move. Return the final state.', hint: 'Use lists for each peg. Pop from source, append to target after each recursive move.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-recursion', label: 'Recursion in the Library' },
+        starterCode: 'def hanoi_visual(n):\n    """Return list of peg states after each move.\n    \n    Each state is {"A": [...], "B": [...], "C": [...]}\n    """\n    pass\n',
+        testCases: [
+          { input: '2', expected: 'True', label: '3 states (after each move)' },
+        ] },
+    ],
+  },
+  {
+    id: 164, slug: 'power-set', title: 'Power Set',
+    story: 'The Seven Sisters of the Northeast', storySlug: 'seven-sisters-states',
+    description: 'Write `power_set(s)` that returns all subsets of a list. Example: `power_set([1, 2])` → `[[], [1], [2], [1, 2]]`.',
+    difficulty: 'hard', topic: 'recursion',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Generate all subsets.', hint: 'Base: power_set([]) = [[]]. For each element, take all subsets without it and add it to each.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-recursion', label: 'Recursion in the Library' },
+        starterCode: 'def power_set(s):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[]', expected: '[[]]', label: 'Empty set' },
+          { input: '[1]', expected: '[[], [1]]', label: 'Single element' },
+          { input: '[1, 2]', expected: 'True', label: '4 subsets (checked via len)' },
+          { input: '[1, 2, 3]', expected: 'True', label: '8 subsets' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Return subsets sorted by length, then lexicographically.', hint: 'Sort by (len(subset), subset).', hintRef: { slug: 'algorithms-data-structures', section: 'algo-recursion', label: 'Recursion in the Library' },
+        starterCode: 'def power_set(s):\n    """Return sorted subsets: by length, then by content."""\n    pass\n',
+        testCases: [
+          { input: '[1, 2, 3]', expected: '[[], [1], [2], [3], [1, 2], [1, 3], [2, 3], [1, 2, 3]]', label: 'Sorted output' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Use a generator to yield subsets lazily instead of building the full list.', hint: 'yield from recursion. yield each subset as you build it.', hintRef: { slug: 'python', section: 'py-functions', label: 'Functions in the Library' },
+        starterCode: 'def power_set(s):\n    """Generator that yields subsets lazily."""\n    pass\n',
+        testCases: [
+          { input: '[1, 2, 3]', expected: 'True', label: '8 subsets yielded (checked via len(list(...)))' },
+        ] },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════
+  // DATA (filling — was 8, adding 4 more: 2 medium, 2 hard)
+  // ═══════════════════════════════════════════════════════════════
+  {
+    id: 165, slug: 'outlier-detector', title: 'Outlier Detector',
+    story: 'The Boy Who Counted Butterflies', storySlug: 'boy-who-counted-butterflies',
+    description: 'Write `find_outliers(data, threshold=2)` that finds values more than `threshold` standard deviations from the mean. Return a list of (index, value) tuples.',
+    difficulty: 'medium', topic: 'data',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Find outliers using standard deviation.', hint: 'Calculate mean and stdev. Check |value - mean| > threshold * stdev for each value.', hintRef: { slug: 'python', section: 'py-data', label: 'Data Processing in the Library' },
+        starterCode: 'def find_outliers(data, threshold=2):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[10, 12, 11, 10, 100, 11, 12], 2', expected: '[(4, 100)]', label: 'One outlier' },
+          { input: '[1, 2, 3, 4, 5], 2', expected: '[]', label: 'No outliers' },
+          { input: '[1, 1, 1, 1, 1], 1', expected: '[]', label: 'No variance' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Handle edge cases: empty data, single value, all same values.', hint: 'Check len(data) < 2 (can\'t compute stdev). Zero stdev = no outliers.', hintRef: { slug: 'python', section: 'py-data', label: 'Data Processing in the Library' },
+        starterCode: 'def find_outliers(data, threshold=2):\n    """Outlier detection with edge case handling."""\n    pass\n',
+        testCases: [
+          { input: '[], 2', expected: '[]', label: 'Empty' },
+          { input: '[42], 2', expected: '[]', label: 'Single value' },
+          { input: '[5, 5, 5, 5], 1', expected: '[]', label: 'Zero variance' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Return (outliers, cleaned_data) where cleaned_data has outliers removed.', hint: 'Build both lists in one pass.', hintRef: { slug: 'python', section: 'py-data', label: 'Data Processing in the Library' },
+        starterCode: 'def find_outliers(data, threshold=2):\n    """Return (outlier_list, cleaned_data)."""\n    pass\n',
+        testCases: [
+          { input: '[10, 12, 11, 100, 11], 2', expected: 'True', label: 'Cleaned data excludes 100' },
+        ] },
+    ],
+  },
+  {
+    id: 166, slug: 'normalize-data', title: 'Data Normalizer',
+    story: 'The Tea Leaf and the Fly', storySlug: 'tea-leaf-and-fly',
+    description: 'Write `normalize(data)` that scales values to the range [0, 1] using min-max normalization: (x - min) / (max - min).',
+    difficulty: 'medium', topic: 'data',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Normalize to [0, 1].', hint: 'Find min and max. For each value: (v - min) / (max - min).', hintRef: { slug: 'python', section: 'py-data', label: 'Data Processing in the Library' },
+        starterCode: 'def normalize(data):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[10, 20, 30, 40, 50]', expected: '[0.0, 0.25, 0.5, 0.75, 1.0]', label: 'Linear' },
+          { input: '[5, 5, 5]', expected: '[0.0, 0.0, 0.0]', label: 'All same' },
+          { input: '[100]', expected: '[0.0]', label: 'Single value' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Handle empty list and support custom range [a, b].', hint: 'Scale to (x - min) / (max - min) * (b - a) + a.', hintRef: { slug: 'python', section: 'py-data', label: 'Data Processing in the Library' },
+        starterCode: 'def normalize(data, new_min=0.0, new_max=1.0):\n    """Normalize to custom range [new_min, new_max]."""\n    pass\n',
+        testCases: [
+          { input: '[10, 20, 30], 0, 100', expected: '[0.0, 50.0, 100.0]', label: 'Scale to 0-100' },
+          { input: '[], 0, 1', expected: '[]', label: 'Empty' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Implement z-score normalization: (x - mean) / stdev. Return both min-max and z-score versions.', hint: 'Compute mean and stdev. Z-score handles outliers better than min-max.', hintRef: { slug: 'python', section: 'py-data', label: 'Data Processing in the Library' },
+        starterCode: 'def normalize(data, method="minmax"):\n    """method = "minmax" or "zscore"."""\n    pass\n',
+        testCases: [
+          { input: '[10, 20, 30, 40, 50], "minmax"', expected: '[0.0, 0.25, 0.5, 0.75, 1.0]', label: 'Min-max' },
+          { input: '[10, 20, 30, 40, 50], "zscore"', expected: 'True', label: 'Z-scores sum to ~0' },
+        ] },
+    ],
+  },
+  {
+    id: 167, slug: 'correlation', title: 'Correlation Calculator',
+    story: 'The Dragonfly and the Paddy Field', storySlug: 'dragonfly-paddy-field',
+    description: 'Write `correlation(x, y)` that computes Pearson\'s correlation coefficient between two lists. Return a float between -1 and 1.',
+    difficulty: 'hard', topic: 'data',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Compute Pearson correlation.', hint: 'r = Σ(xi-x̄)(yi-ȳ) / sqrt(Σ(xi-x̄)² × Σ(yi-ȳ)²). Compute means first, then sums.', hintRef: { slug: 'python', section: 'py-data', label: 'Data Processing in the Library' },
+        starterCode: 'def correlation(x, y):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[1, 2, 3, 4, 5], [2, 4, 6, 8, 10]', expected: '1.0', label: 'Perfect positive' },
+          { input: '[1, 2, 3, 4, 5], [10, 8, 6, 4, 2]', expected: '-1.0', label: 'Perfect negative' },
+          { input: '[1, 2, 3], [1, 2, 3]', expected: '1.0', label: 'Identity' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Handle edge cases: mismatched lengths, zero variance, less than 2 points.', hint: 'Check len(x) == len(y) >= 2. If stdev is 0, correlation is undefined → return 0.', hintRef: { slug: 'python', section: 'py-data', label: 'Data Processing in the Library' },
+        starterCode: 'def correlation(x, y):\n    """Pearson correlation with edge case handling."""\n    pass\n',
+        testCases: [
+          { input: '[1, 1, 1], [2, 3, 4]', expected: '0.0', label: 'Zero variance in x' },
+          { input: '[1], [2]', expected: '0.0', label: 'Too few points' },
+          { input: '[1, 2], [3, 4, 5]', expected: '0.0', label: 'Mismatched lengths' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Compute in a single pass (no separate mean calculation). Use running sums.', hint: 'Track sum_x, sum_y, sum_xy, sum_x2, sum_y2. Apply the formula at the end.', hintRef: { slug: 'python', section: 'py-data', label: 'Data Processing in the Library' },
+        starterCode: 'def correlation(x, y):\n    """Single-pass Pearson correlation."""\n    pass\n',
+        testCases: [
+          { input: '[1, 2, 3, 4, 5], [2, 4, 6, 8, 10]', expected: '1.0', label: 'Perfect positive (single pass)' },
+          { input: 'list(range(1000)), list(range(1000, 2000))', expected: '1.0', label: 'Large dataset' },
+        ] },
+    ],
+  },
+  {
+    id: 168, slug: 'frequency-table', title: 'Frequency Table',
+    story: 'The Music of the Dimasa', storySlug: 'music-of-dimasa',
+    description: 'Write `freq_table(data, bins=5)` that creates a frequency distribution. Divide the range into equal bins and count how many values fall in each. Return list of (range_start, range_end, count) tuples.',
+    difficulty: 'hard', topic: 'data',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Create a binned frequency table.', hint: 'Compute bin_width = (max - min) / bins. For each value, determine which bin it falls in.', hintRef: { slug: 'python', section: 'py-data', label: 'Data Processing in the Library' },
+        starterCode: 'def freq_table(data, bins=5):\n    # Return list of (start, end, count)\n    pass\n',
+        testCases: [
+          { input: '[1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 5', expected: 'True', label: '5 bins, roughly 2 each' },
+          { input: '[1, 1, 1, 1], 3', expected: 'True', label: 'All same value' },
+          { input: '[], 5', expected: '[]', label: 'Empty' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Handle single-value data and ensure last value falls in the last bin.', hint: 'For single value: use a bin of width 1 centered on the value. For max value: include in last bin.', hintRef: { slug: 'python', section: 'py-data', label: 'Data Processing in the Library' },
+        starterCode: 'def freq_table(data, bins=5):\n    """Frequency table with edge case handling."""\n    pass\n',
+        testCases: [
+          { input: '[5, 5, 5], 3', expected: 'True', label: 'Single value handled' },
+          { input: '[1, 10], 2', expected: 'True', label: 'Max in last bin' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Add a text-based bar chart visualization. Return list of (range_label, count, bar).', hint: 'Bar = "█" * count or scaled to max_width.', hintRef: { slug: 'python', section: 'py-data', label: 'Data Processing in the Library' },
+        starterCode: 'def freq_table(data, bins=5, max_bar_width=20):\n    """Return [(label, count, bar_string)]."""\n    pass\n',
+        testCases: [
+          { input: 'list(range(100)), 5', expected: 'True', label: '5 bins with bars' },
+        ] },
+    ],
+  },
 ];
