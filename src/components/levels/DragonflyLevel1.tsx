@@ -58,6 +58,7 @@ sys.stderr = _stdout_capture
 
 import matplotlib
 matplotlib.use('AGG')
+import warnings; warnings.filterwarnings('ignore', category=UserWarning)
 import matplotlib.pyplot as plt
 import base64
 
