@@ -1,55 +1,11 @@
 import { useState, useRef, useCallback } from 'react';
 import { Loader2, Cpu } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
+import { usePyodide } from '../../contexts/PyodideContext';
 
 export default function OrchidLevel4() {
-  const pyodideRef = useRef<any>(null);
-  const [pyReady, setPyReady] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [loadProgress, setLoadProgress] = useState('');
-
-  const loadPyodide = useCallback(async () => {
-    if (pyodideRef.current) return pyodideRef.current;
-    setLoading(true);
-    setLoadProgress('Loading Python runtime...');
-    try {
-      if (!(window as any).loadPyodide) {
-        const script = document.createElement('script');
-        script.src = 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js';
-        document.head.appendChild(script);
-        await new Promise<void>((resolve, reject) => { script.onload = () => resolve(); script.onerror = () => reject(new Error('Failed')); });
-      }
-      setLoadProgress('Starting Python...');
-      const pyodide = await (window as any).loadPyodide({ indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/' });
-      setLoadProgress('Installing numpy & matplotlib...');
-      await pyodide.loadPackage('micropip');
-      const micropip = pyodide.pyimport('micropip');
-      for (const pkg of ['numpy', 'matplotlib']) {
-        try { await micropip.install(pkg); } catch { await pyodide.loadPackage(pkg).catch(() => {}); }
-      }
-      await pyodide.runPythonAsync(`
-import sys, io
-class OutputCapture:
-    def __init__(self): self.output = []
-    def write(self, text): self.output.append(text)
-    def flush(self): pass
-    def get_output(self): return ''.join(self.output)
-    def clear(self): self.output = []
-_stdout_capture = OutputCapture()
-sys.stdout = _stdout_capture
-sys.stderr = _stdout_capture
-import matplotlib; matplotlib.use('AGG')
-import warnings; warnings.filterwarnings('ignore', category=UserWarning)
-import matplotlib.pyplot as plt; import base64
-def _get_plot_as_base64():
-    buf = io.BytesIO()
-    plt.savefig(buf, format='png', dpi=100, bbox_inches='tight', facecolor='#1f2937', edgecolor='none')
-    buf.seek(0); img_str = base64.b64encode(buf.read()).decode('utf-8'); plt.close('all'); return img_str
-`);
-      pyodideRef.current = pyodide; setPyReady(true); setLoading(false); setLoadProgress('');
-      return pyodide;
-    } catch (err: any) { setLoading(false); setLoadProgress('Error: ' + err.message); return null; }
-  }, []);
+  const { pyodideRef, load: loadPyodide, ready: pyReady, state: pyState, loadProgress } = usePyodide();
+  const loading = pyState === 'loading';
 
   const miniLessons = [
     {title:'Capstone overview — Flower Color Analyzer',concept:`In this capstone you will build a **Flower Color Analyzer** that models how pigment concentrations produce different colors and predicts flower color from gene expression levels. The system combines biochemistry (pigment absorption spectra), physics (Beer-Lambert law, color perception), and genetics (biosynthesis pathway) into a unified prediction pipeline.\n\nYour analyzer will:\n1. Take gene expression levels as input (CHS, DFR, ANS, etc.)\n2. Simulate the anthocyanin biosynthesis pathway to predict pigment concentrations\n3. Calculate the reflectance spectrum using Beer-Lambert law\n4. Convert the spectrum to perceived color (RGB) using human cone responses\n5. Predict how the color appears to different pollinators (bee, butterfly, moth)\n6. Identify which gene mutations produce specific target colors`,analogy:'The Color Analyzer is like a virtual paint mixing studio. Instead of mixing paints by trial and error, you calculate the exact proportions needed from first principles. Give it "2x CHS, 0.5x DFR, pH 4.5" and it predicts the exact shade of pink — no experiments needed.',storyConnection:'NE India orchid breeders spend years crossing varieties to achieve desired colors. Your analyzer can predict the color of offspring from parent gene expression levels, dramatically accelerating the breeding process.',checkQuestion:'If you want to create a blue orchid, which genes would you need to modify and why?',checkAnswer:'You need high anthocyanin production (upregulate CHS, ANS, UFGT), the F3\'5\'H enzyme to produce delphinidin (blue anthocyanidin instead of red cyanidin), and elevated vacuolar pH (near 7) or metal ion copigmentation (Al3+). Blue is the hardest flower color to engineer because it requires simultaneous control of pigment type, concentration, and chemical environment.',codeIntro:'Build the gene-to-color prediction engine.',code:`import numpy as np\nimport matplotlib.pyplot as plt\n\nnp.random.seed(42)\nwavelengths = np.linspace(380, 750, 300)\n\ndef pathway_simulate(chs=1, dfr=1, ans=1, ufgt=1):\n    """Simplified: gene expression -> anthocyanin concentration."""\n    rate = min(chs, dfr, ans, ufgt) * 0.7 + 0.3 * (chs*dfr*ans*ufgt)**0.25\n    return np.clip(rate * 0.003, 0, 0.01)\n\ndef anthocyanin_abs(wl, ph=4.5):\n    peak = 520 if ph < 4 else (545 if ph < 6 else 580)\n    return np.exp(-0.5*((wl-peak)/(40 if ph<4 else 50))**2)\n\ndef carotenoid_abs(wl):\n    return np.exp(-0.5*((wl-450)/35)**2) + 0.4*np.exp(-0.5*((wl-480)/30)**2)\n\ndef reflectance(wl, conc_a, conc_c=0, ph=4.5):\n    A = conc_a*30000*anthocyanin_abs(wl,ph)*0.02 + conc_c*20000*carotenoid_abs(wl)*0.02\n    return np.clip(0.1 + 0.8*10**(-A), 0, 1)\n\ndef to_rgb(refl, wl):\n    r = np.trapz(refl*np.exp(-0.5*((wl-610)/40)**2), wl)\n    g = np.trapz(refl*np.exp(-0.5*((wl-540)/35)**2), wl)\n    b = np.trapz(refl*np.exp(-0.5*((wl-450)/30)**2), wl)\n    mx = max(r,g,b,0.01)\n    return np.clip([r/mx,g/mx,b/mx],0,1)\n\n# Test matrix: sweep CHS and DFR\nchs_range = np.linspace(0, 2, 20)\ndfr_range = np.linspace(0, 2, 20)\ncolor_grid = np.zeros((20, 20, 3))\nconc_grid = np.zeros((20, 20))\n\nfor i, chs in enumerate(chs_range):\n    for j, dfr in enumerate(dfr_range):\n        conc = pathway_simulate(chs=chs, dfr=dfr)\n        refl = reflectance(wavelengths, conc, ph=4)\n        color_grid[j, i] = to_rgb(refl, wavelengths)\n        conc_grid[j, i] = conc\n\nfig, axes = plt.subplots(2, 3, figsize=(16, 10))\nfig.patch.set_facecolor('#1f2937')\nfig.suptitle('Flower Color Analyzer: Gene Expression to Color', color='white', fontsize=14, fontweight='bold')\nfor ax in axes.flat:\n    ax.set_facecolor('#111827')\n    ax.tick_params(colors='gray')\n\n# Color grid\naxes[0,0].imshow(color_grid, aspect='auto', origin='lower', extent=[0,2,0,2])\naxes[0,0].set_xlabel('CHS expression', color='white')\naxes[0,0].set_ylabel('DFR expression', color='white')\naxes[0,0].set_title('Gene expression -> flower color', color='white', fontsize=10)\n\n# Concentration grid\nim = axes[0,1].imshow(conc_grid*1000, aspect='auto', origin='lower', extent=[0,2,0,2], cmap='hot')\naxes[0,1].set_xlabel('CHS expression', color='white')\naxes[0,1].set_ylabel('DFR expression', color='white')\naxes[0,1].set_title('Anthocyanin concentration (mM)', color='white', fontsize=10)\nplt.colorbar(im, ax=axes[0,1])\n\n# pH effect\nph_range = np.linspace(3, 7.5, 20)\nph_colors = np.zeros((10, 20, 3))\nfor i, ph in enumerate(ph_range):\n    refl = reflectance(wavelengths, 0.003, ph=ph)\n    ph_colors[:, i] = to_rgb(refl, wavelengths)\naxes[0,2].imshow(ph_colors, aspect='auto', extent=[3,7.5,0,1])\naxes[0,2].set_xlabel('Vacuolar pH', color='white')\naxes[0,2].set_title('pH shifts color: red -> purple -> blue', color='white', fontsize=10)\naxes[0,2].set_yticks([])\n\n# Specific predictions\nvarieties = {\n    'White (CHS=0)': {'chs':0,'dfr':1,'ph':5,'carot':0},\n    'Pale pink': {'chs':0.3,'dfr':0.5,'ph':4,'carot':0},\n    'Deep red': {'chs':2,'dfr':2,'ph':3.5,'carot':0},\n    'Purple': {'chs':1.5,'dfr':1,'ph':5.5,'carot':0},\n    'Blue': {'chs':1.5,'dfr':1.5,'ph':7,'carot':0},\n    'Orange': {'chs':0.5,'dfr':0.5,'ph':4,'carot':0.003},\n    'Yellow': {'chs':0,'dfr':0,'ph':5,'carot':0.004},\n}\nfor idx, (name, params) in enumerate(varieties.items()):\n    conc = pathway_simulate(chs=params['chs'], dfr=params['dfr'])\n    refl = reflectance(wavelengths, conc, params['carot'], params['ph'])\n    rgb = to_rgb(refl, wavelengths)\n    axes[1,0].plot(wavelengths, refl, linewidth=2, color=rgb, label=name)\naxes[1,0].set_xlabel('Wavelength (nm)', color='white')\naxes[1,0].set_ylabel('Reflectance', color='white')\naxes[1,0].set_title('Predicted spectra for 7 varieties', color='white', fontsize=10)\naxes[1,0].legend(fontsize=6, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\n\n# Color swatches\nfor idx, (name, params) in enumerate(varieties.items()):\n    conc = pathway_simulate(chs=params['chs'], dfr=params['dfr'])\n    refl = reflectance(wavelengths, conc, params['carot'], params['ph'])\n    rgb = to_rgb(refl, wavelengths)\n    axes[1,1].add_patch(plt.Rectangle((0, idx*0.13), 1, 0.12, facecolor=rgb))\n    axes[1,1].text(1.05, idx*0.13+0.06, name, va='center', color='white', fontsize=8)\naxes[1,1].set_xlim(0, 2.5); axes[1,1].set_ylim(0, 1)\naxes[1,1].set_title('Predicted color swatches', color='white', fontsize=10)\naxes[1,1].axis('off')\n\n# Sensitivity: which gene has most color impact\ngenes = ['CHS','DFR','ANS','UFGT']\nsensitivity = []\nfor gene in genes:\n    kw_base = {g.lower():1 for g in genes}\n    kw_up = dict(kw_base); kw_up[gene.lower()] = 1.5\n    c_base = pathway_simulate(**kw_base)\n    c_up = pathway_simulate(**kw_up)\n    sensitivity.append((c_up-c_base)/c_base*100)\naxes[1,2].bar(genes, sensitivity, color=['#ef4444','#a855f7','#f59e0b','#22c55e'], alpha=0.8)\naxes[1,2].set_ylabel('% change in anthocyanin', color='white')\naxes[1,2].set_title('Gene sensitivity analysis', color='white', fontsize=10)\n\nplt.tight_layout()\nplt.show()\n\nprint("Color Analyzer predictions:")\nfor name, params in varieties.items():\n    conc = pathway_simulate(chs=params['chs'],dfr=params['dfr'])\n    refl = reflectance(wavelengths, conc, params['carot'], params['ph'])\n    rgb = to_rgb(refl, wavelengths)\n    print(f"  {name:<16} -> RGB({rgb[0]:.2f},{rgb[1]:.2f},{rgb[2]:.2f}) conc={conc*1000:.2f}mM")`,challenge:'Add a "target color" feature: given a desired RGB color, find the gene expression levels and pH that produce the closest match. Use a grid search over CHS, DFR, and pH.',successHint:'You can now predict flower color from gene expression. This is the foundation of computational flower breeding.'},
@@ -83,7 +39,7 @@ def _get_plot_as_base64():
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
-            pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
+            />
         ))}
       </div>
     </div>

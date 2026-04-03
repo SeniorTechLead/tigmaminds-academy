@@ -1,25 +1,11 @@
 import { useState, useRef, useCallback } from 'react';
 import { Loader2, Sparkles } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
+import { usePyodide } from '../../contexts/PyodideContext';
 
 export default function TakinFaceLevel1() {
-  const pyodideRef = useRef<any>(null);
-  const [pyReady, setPyReady] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [loadProgress, setLoadProgress] = useState('');
-
-  const loadPyodide = useCallback(async () => {
-    if (pyodideRef.current) return pyodideRef.current;
-    setLoading(true); setLoadProgress('Loading Python...');
-    try {
-      if (!(window as any).loadPyodide) { const s = document.createElement('script'); s.src = 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js'; document.head.appendChild(s); await new Promise<void>((r, j) => { s.onload = () => r(); s.onerror = () => j(new Error('Failed')); }); }
-      setLoadProgress('Starting Python...'); const py = await (window as any).loadPyodide({ indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/' });
-      setLoadProgress('Installing packages...'); await py.loadPackage('micropip'); const mp = py.pyimport('micropip');
-      for (const p of ['numpy', 'matplotlib']) { try { await mp.install(p); } catch { await py.loadPackage(p).catch(() => {}); } }
-      await py.runPythonAsync(`import sys,io\nclass OC:\n def __init__(self):self.o=[]\n def write(self,t):self.o.append(t)\n def flush(self):pass\n def get_output(self):return''.join(self.o)\n def clear(self):self.o=[]\n_stdout_capture=OC();sys.stdout=_stdout_capture;sys.stderr=_stdout_capture\nimport matplotlib;matplotlib.use('AGG');import warnings;warnings.filterwarnings('ignore',category=UserWarning);import matplotlib.pyplot as plt;import base64\ndef _get_plot_as_base64():\n buf=io.BytesIO();plt.savefig(buf,format='png',dpi=100,bbox_inches='tight',facecolor='#1f2937',edgecolor='none');buf.seek(0);s=base64.b64encode(buf.read()).decode('utf-8');plt.close('all');return s`);
-      pyodideRef.current = py; setPyReady(true); setLoading(false); setLoadProgress(''); return py;
-    } catch (e: any) { setLoading(false); setLoadProgress('Error: ' + e.message); return null; }
-  }, []);
+  const { pyodideRef, load: loadPyodide, ready: pyReady, state: pyState, loadProgress } = usePyodide();
+  const loading = pyState === 'loading';
 
   const miniLessons = [
     { title: 'What determines body shape — genes plus environment', concept: `In "How the Takin Got Its Funny Face," the takin looks like it was assembled from spare parts: the body of a cow, the legs of a bear, the nose of a moose, and the horns of a wildebeest. But this "funny" shape is perfectly adapted to life on steep Himalayan bamboo slopes.\n\n**Body shape is determined by:**\n- **Genetics**: DNA provides the blueprint (bone length, muscle attachment points, organ size)\n- **Environment during development**: nutrition, temperature, altitude affect how the genetic plan is expressed\n- **Evolutionary history**: ancestors' body plans constrain what is possible\n- **Natural selection**: shapes that improve survival and reproduction are favoured\n\nThe takin's stocky build, arched nose, and thick coat are not random — they are solutions to specific problems: cold, altitude, steep terrain, and bamboo diet. Every feature has a function, even if it looks odd to human eyes.`, analogy: 'An animal\'s body shape is like a house designed by three architects working together: Genetics draws the initial blueprints, Environment modifies the plans during construction, and Evolution selected which blueprints survived from millions of drafts. The takin\'s "funny" house is perfectly designed for its neighbourhood.', storyConnection: 'The story says the takin looks like "the gods assembled it from leftover parts." In evolutionary biology, this is called a **mosaic** body plan — different body parts evolved at different rates and under different pressures. The takin\'s nose evolved for warming cold air, its legs for climbing, and its horns for defence — each under separate selection pressure.', checkQuestion: 'Identical human twins have the same DNA but can look different as adults. What accounts for the differences?', checkAnswer: 'Epigenetics and environment. Different nutrition, exercise, sun exposure, and even gut bacteria during development change how genes are expressed. One twin might be taller (better nutrition), more muscular (more exercise), or darker (more sun). Genes set the range of possible outcomes; environment determines where within that range each individual falls.', codeIntro: 'Model how genes and environment interact to determine body size in a population.', code: `import numpy as np\nimport matplotlib.pyplot as plt\n\nnp.random.seed(42)\nn = 500\n\ngenetic_height = np.random.normal(170, 8, n)  # cm, genetic component\nenvironmental_effect = np.random.normal(0, 5, n)  # nutrition, etc.\nactual_height = genetic_height + environmental_effect\n\nfig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))\nfig.patch.set_facecolor('#1f2937')\n\nax1.set_facecolor('#111827')\nax1.hist(genetic_height, bins=30, alpha=0.5, color='#3b82f6', label='Genetic potential', density=True)\nax1.hist(actual_height, bins=30, alpha=0.5, color='#22c55e', label='Actual (genes + environment)', density=True)\nax1.set_xlabel('Height (cm)', color='white')\nax1.set_ylabel('Density', color='white')\nax1.set_title('Height: Genetic Blueprint vs Reality', color='white', fontsize=12)\nax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')\nax1.tick_params(colors='gray')\n\nax2.set_facecolor('#111827')\nax2.scatter(genetic_height, actual_height, alpha=0.3, s=10, color='#f59e0b')\nax2.plot([145, 195], [145, 195], '--', color='white', alpha=0.3)\nax2.set_xlabel('Genetic potential (cm)', color='white')\nax2.set_ylabel('Actual height (cm)', color='white')\nax2.set_title('Genes vs Reality (r\²={:.2f})'.format(np.corrcoef(genetic_height, actual_height)[0,1]**2), color='white', fontsize=12)\nax2.tick_params(colors='gray')\n\nplt.tight_layout()\nplt.show()\n\nprint(f"Genetic variation (std): {np.std(genetic_height):.1f} cm")\nprint(f"Environmental variation (std): {np.std(environmental_effect):.1f} cm")\nprint(f"Total variation (std): {np.std(actual_height):.1f} cm")\nprint(f"Heritability: {np.var(genetic_height)/np.var(actual_height):.2f}")`, challenge: 'What happens in a famine? Set environmental_effect mean to -10cm. How does the height distribution change? This is why average height increased dramatically in the 20th century — better nutrition, not genetic change.', successHint: 'Body shape is never purely genetic or purely environmental — it is always an interaction. Understanding this interaction is the foundation of developmental biology.' },
@@ -53,7 +39,7 @@ export default function TakinFaceLevel1() {
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
-            pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
+            />
         ))}
       </div>
     </div>

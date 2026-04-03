@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { Play, RotateCcw, Loader2, CheckCircle, Terminal, ChevronRight, Sun, Moon } from 'lucide-react';
 import { usePrefs } from '../contexts/PrefsContext';
+import { usePyodide } from '../contexts/PyodideContext';
 
 interface CodePlaygroundProps {
   /** Initial code in the editor */
@@ -29,100 +30,19 @@ export default function CodePlayground({
   const [code, setCode] = useState(starterCode);
   const [output, setOutput] = useState('');
   const [imageOutput, setImageOutput] = useState<string | null>(null);
-  const [pyState, setPyState] = useState<PyodideState>('idle');
-  const [loadProgress, setLoadProgress] = useState('');
   const [currentStep, setCurrentStep] = useState(0);
-  const pyodideRef = useRef<any>(null);
+  const [running, setRunning] = useState(false);
+  const { pyodideRef, load: loadPyodide, state: ctxState, loadProgress } = usePyodide();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  const loadPyodide = useCallback(async () => {
-    if (pyodideRef.current) return pyodideRef.current;
-
-    setPyState('loading');
-    setLoadProgress('Loading Python runtime...');
-
-    try {
-      // Load Pyodide from CDN
-      if (!(window as any).loadPyodide) {
-        const script = document.createElement('script');
-        script.src = 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js';
-        document.head.appendChild(script);
-        await new Promise<void>((resolve, reject) => {
-          script.onload = () => resolve();
-          script.onerror = () => reject(new Error('Failed to load Pyodide'));
-        });
-      }
-
-      setLoadProgress('Initializing Python...');
-      const pyodide = await (window as any).loadPyodide({
-        indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/',
-      });
-
-      // Install requested packages
-      if (packages.length > 0) {
-        setLoadProgress(`Installing packages: ${packages.join(', ')}...`);
-        await pyodide.loadPackage('micropip');
-        const micropip = pyodide.pyimport('micropip');
-        for (const pkg of packages) {
-          setLoadProgress(`Installing ${pkg}...`);
-          try {
-            await micropip.install(pkg);
-          } catch {
-            // Some packages are built-in to Pyodide, try loading directly
-            try {
-              await pyodide.loadPackage(pkg);
-            } catch {
-              console.warn(`Could not install ${pkg}, skipping`);
-            }
-          }
-        }
-      }
-
-      // Set up matplotlib for inline rendering
-      await pyodide.runPythonAsync(`
-import sys
-import io
-
-# Redirect stdout
-class OutputCapture:
-    def __init__(self):
-        self.output = []
-    def write(self, text):
-        self.output.append(text)
-    def flush(self):
-        pass
-    def get_output(self):
-        return ''.join(self.output)
-    def clear(self):
-        self.output = []
-
-_stdout_capture = OutputCapture()
-sys.stdout = _stdout_capture
-sys.stderr = _stdout_capture
-`);
-
-      // Set up matplotlib backend if matplotlib is in packages
-      if (packages.includes('matplotlib')) {
-        await pyodide.runPythonAsync(`import matplotlib\nmatplotlib.use('AGG')\nimport warnings\nwarnings.filterwarnings('ignore', category=UserWarning)\nimport matplotlib.pyplot as plt\nimport base64\ndef _get_plot_as_base64():\n    buf = io.BytesIO()\n    plt.savefig(buf, format='png', dpi=100, bbox_inches='tight', facecolor='#1f2937', edgecolor='none')\n    buf.seek(0)\n    img_str = base64.b64encode(buf.read()).decode('utf-8')\n    plt.close('all')\n    return img_str`);
-      }
-
-      pyodideRef.current = pyodide;
-      setPyState('ready');
-      setLoadProgress('');
-      return pyodide;
-    } catch (err: any) {
-      setPyState('error');
-      setLoadProgress('');
-      setOutput(`Error loading Python: ${err.message}`);
-      return null;
-    }
-  }, [packages]);
+  // Combine context state with local running state
+  const pyState: PyodideState = running ? 'running' : ctxState === 'idle' ? 'idle' : ctxState === 'loading' ? 'loading' : ctxState === 'ready' ? 'ready' : 'error';
 
   const runCode = useCallback(async () => {
     const pyodide = pyodideRef.current || (await loadPyodide());
     if (!pyodide) return;
 
-    setPyState('running');
+    setRunning(true);
     setOutput('');
     setImageOutput(null);
 
@@ -153,12 +73,12 @@ len(plt.get_fignums()) > 0
         }
       }
 
-      setPyState('ready');
+      setRunning(false);
     } catch (err: any) {
       // Extract Python traceback
       const errMsg = err.message || String(err);
       setOutput(errMsg);
-      setPyState('ready');
+      setRunning(false);
     }
   }, [code, loadPyodide, packages]);
 

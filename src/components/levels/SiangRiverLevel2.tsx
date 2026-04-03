@@ -1,25 +1,11 @@
 import { useState, useRef, useCallback } from 'react';
 import { Loader2, Sparkles } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
+import { usePyodide } from '../../contexts/PyodideContext';
 
 export default function SiangRiverLevel2() {
-  const pyodideRef = useRef<any>(null);
-  const [pyReady, setPyReady] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [loadProgress, setLoadProgress] = useState('');
-
-  const loadPyodide = useCallback(async () => {
-    if (pyodideRef.current) return pyodideRef.current;
-    setLoading(true); setLoadProgress('Loading Python...');
-    try {
-      if (!(window as any).loadPyodide) { const s = document.createElement('script'); s.src = 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js'; document.head.appendChild(s); await new Promise<void>((r, j) => { s.onload = () => r(); s.onerror = () => j(new Error('Failed')); }); }
-      setLoadProgress('Starting Python...'); const py = await (window as any).loadPyodide({ indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/' });
-      setLoadProgress('Installing packages...'); await py.loadPackage('micropip'); const mp = py.pyimport('micropip');
-      for (const p of ['numpy', 'matplotlib']) { try { await mp.install(p); } catch { await py.loadPackage(p).catch(() => {}); } }
-      await py.runPythonAsync(`import sys,io\nclass OC:\n def __init__(self):self.o=[]\n def write(self,t):self.o.append(t)\n def flush(self):pass\n def get_output(self):return''.join(self.o)\n def clear(self):self.o=[]\n_stdout_capture=OC();sys.stdout=_stdout_capture;sys.stderr=_stdout_capture\nimport matplotlib;matplotlib.use('AGG');import warnings;warnings.filterwarnings('ignore',category=UserWarning);import matplotlib.pyplot as plt;import base64\ndef _get_plot_as_base64():\n buf=io.BytesIO();plt.savefig(buf,format='png',dpi=100,bbox_inches='tight',facecolor='#1f2937',edgecolor='none');buf.seek(0);s=base64.b64encode(buf.read()).decode('utf-8');plt.close('all');return s`);
-      pyodideRef.current = py; setPyReady(true); setLoading(false); setLoadProgress(''); return py;
-    } catch (e: any) { setLoading(false); setLoadProgress('Error: ' + e.message); return null; }
-  }, []);
+  const { pyodideRef, load: loadPyodide, ready: pyReady, state: pyState, loadProgress } = usePyodide();
+  const loading = pyState === 'loading';
 
   const miniLessons = [
     { title: 'Erosion rate calculations — quantifying landscape change', concept: `Geomorphologists measure erosion rates using cosmogenic nuclide dating (10Be, 26Al from cosmic rays hitting rock), sediment gauging (measuring river sediment flux), and thermochronology (tracking when minerals cooled as they were brought to the surface).\n\nThe Siang basin shows erosion rates of 2-5 mm/yr in the gorge section — among the highest on Earth. The **denudation rate** formula: E = Qs / (rho * A), where Qs = sediment flux (kg/yr), rho = rock density (2700 kg/m3), A = basin area (m2).\n\nA key finding is the "Sadler effect": apparent erosion rates decrease with measurement timescale. Sediment gauging (decades) gives lower rates than cosmogenic nuclides (millennia) because rare catastrophic events (landslides, outburst floods) are missed by short-term measurements.`, analogy: 'Erosion rate measurement is like tracking weight loss. Weighing yourself daily (sediment gauging) misses water weight fluctuations. Weighing monthly (cosmogenic nuclides) captures the real trend. Each timescale tells a different part of the story.', storyConnection: 'The Siang erodes at 2-5 mm/yr. In the story, the river "carved through mountains" — cosmogenic data confirms this as literally true at one of the fastest rates measured anywhere on Earth.', checkQuestion: 'Why do long-term erosion rates tend to be higher than short-term ones?', checkAnswer: 'Rare catastrophic events (mega-landslides, glacial lake outburst floods) move enormous sediment volumes but happen once in thousands of years. Short-term measurements miss these events. Long-term methods average over many such events, giving higher rates.', codeIntro: 'Calculate erosion rates and compare measurement methods.', code: `import numpy as np\nimport matplotlib.pyplot as plt\n\nfig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))\nfig.patch.set_facecolor('#1f2937')\n\nrivers = ['Siang\\n(gorge)', 'Ganges', 'Amazon', 'Mississippi', 'Rhine', 'Nile']\nrates = [3.5, 0.8, 0.07, 0.05, 0.04, 0.02]\ncolors = ['#ef4444', '#f59e0b', '#22c55e', '#3b82f6', '#a855f7', '#6b7280']\n\nax1.set_facecolor('#111827')\nbars = ax1.barh(rivers, rates, color=colors, height=0.6)\nax1.set_xlabel('Erosion rate (mm/year)', color='white')\nax1.set_title('Basin Erosion Rates', color='white', fontsize=12)\nax1.tick_params(colors='gray')\nfor bar, val in zip(bars, rates):\n    ax1.text(bar.get_width() + 0.05, bar.get_y() + bar.get_height()/2,\n             f'{val}', va='center', color='white', fontsize=9)\n\nax2.set_facecolor('#111827')\ntimescales = np.logspace(0, 7, 50)\nE0 = 5\napparent_rate = E0 * timescales**(-0.15)\nax2.loglog(timescales, apparent_rate, color='#f59e0b', linewidth=2)\nax2.fill_between(timescales, apparent_rate * 0.5, apparent_rate * 2, alpha=0.15, color='#f59e0b')\n\nmethods = [(1, 'Sediment\\ngauging', '#3b82f6'), (10000, 'Cosmogenic', '#f59e0b'), (1e6, 'Thermo-\\nchronology', '#ef4444')]\nfor ts, label, color in methods:\n    rate = E0 * ts**(-0.15)\n    ax2.plot(ts, rate, 'o', color=color, markersize=12)\n    ax2.annotate(label, (ts, rate), xytext=(10, 10), textcoords='offset points', color=color, fontsize=8)\n\nax2.set_xlabel('Measurement timescale (years)', color='white')\nax2.set_ylabel('Apparent rate (mm/yr)', color='white')\nax2.set_title('Sadler Effect', color='white', fontsize=12)\nax2.tick_params(colors='gray')\n\nplt.tight_layout()\nplt.show()\n\nprint("Siang gorge erosion: ~3.5 mm/yr")\nprint("This is 50x the global average (0.07 mm/yr)")`, challenge: 'Calculate denudation rate from: sediment flux 200 Mt/yr, basin area 20,000 km2, rock density 2,700 kg/m3.', successHint: 'Erosion rate measurement is where geomorphology becomes quantitative. Understanding timescale dependence is key to interpreting any erosion study.' },
@@ -53,7 +39,7 @@ export default function SiangRiverLevel2() {
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
-            pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
+            />
         ))}
       </div>
     </div>

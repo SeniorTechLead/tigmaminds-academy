@@ -1,6 +1,7 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useContext } from 'react';
 import { Play, Loader2, CheckCircle, RotateCcw, HelpCircle, ChevronDown, ChevronUp } from 'lucide-react';
 import DiagramZoom from './DiagramZoom';
+import { usePyodide } from '../contexts/PyodideContext';
 
 interface MiniLessonProps {
   /** HTML id for scroll targeting */
@@ -44,10 +45,10 @@ interface MiniLessonProps {
     hint?: string;
   }[];
 
-  // --- Shared state ---
-  pyodideRef: React.MutableRefObject<any>;
-  onLoadPyodide: () => Promise<any>;
-  pyReady: boolean;
+  // --- Shared state (legacy props — now falls back to context) ---
+  pyodideRef?: React.MutableRefObject<any>;
+  onLoadPyodide?: () => Promise<any>;
+  pyReady?: boolean;
 
   // --- Legacy support (maps to concept) ---
   /** @deprecated Use concept instead */
@@ -74,12 +75,17 @@ export default function MiniLesson({
   codeIntro,
   challenge,
   successHint,
-  pyodideRef,
-  onLoadPyodide,
-  pyReady,
+  pyodideRef: propPyodideRef,
+  onLoadPyodide: propOnLoadPyodide,
+  pyReady: propPyReady,
   practice,
   explanation,
 }: MiniLessonProps) {
+  // Use context as primary, fall back to props for legacy compatibility
+  const ctx = usePyodide();
+  const pyodideRef = propPyodideRef ?? ctx.pyodideRef;
+  const onLoadPyodide = propOnLoadPyodide ?? ctx.load;
+  const pyReady = propPyReady ?? ctx.ready;
   const [code, setCode] = useState(initialCode);
   const [output, setOutput] = useState('');
   const [imageOutput, setImageOutput] = useState<string | null>(null);
