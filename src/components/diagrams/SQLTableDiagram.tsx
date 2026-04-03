@@ -17,15 +17,15 @@ export default function SQLTableDiagram() {
     ['4', 'Tara', '4100', 'Kaziranga'],
   ];
 
-  const colW = [50, 90, 70, 100];
-  const rowH = 26;
-  const headerH = 30;
-  const typeH = 18;
-  const padL = 60;
-  const padT = 52;
+  const colW = [55, 95, 75, 110];
+  const rowH = 28;
+  const headerH = 32;
+  const typeH = 20;
+  const padL = 70;
+  const padT = 58;
   const totalTableW = colW.reduce((a, b) => a + b, 0);
-  const totalW = padL + totalTableW + 80;
-  const totalH = padT + headerH + typeH + rows.length * rowH + 70;
+  const totalW = padL + totalTableW + 100;
+  const totalH = padT + headerH + typeH + rows.length * rowH + 75;
 
   const colX = (i: number) => padL + colW.slice(0, i).reduce((a, b) => a + b, 0);
 
@@ -120,9 +120,8 @@ export default function SQLTableDiagram() {
       </g>
 
       {/* Column arrow */}
-      <g transform={`translate(${colX(1) + colW[1] / 2}, ${padT - 8})`}>
-        <line x1="0" y1="0" x2="0" y2="-10" className="stroke-gray-400 dark:stroke-gray-500" strokeWidth="1" />
-        <text x="0" y="-14" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="9" fontWeight="600">
+      <g transform={`translate(${colX(2) + colW[2] / 2}, ${padT - 4})`}>
+        <text x="0" y="-4" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="9" fontWeight="600">
           ↑ column (field)
         </text>
       </g>
