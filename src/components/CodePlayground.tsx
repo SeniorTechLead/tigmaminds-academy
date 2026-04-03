@@ -103,22 +103,7 @@ sys.stderr = _stdout_capture
 
       // Set up matplotlib backend if matplotlib is in packages
       if (packages.includes('matplotlib')) {
-        await pyodide.runPythonAsync(`
-import warnings
-warnings.filterwarnings('ignore', message='.*non-GUI backend.*')
-import matplotlib
-matplotlib.use('AGG')
-import matplotlib.pyplot as plt
-import base64
-
-def _get_plot_as_base64():
-    buf = io.BytesIO()
-    plt.savefig(buf, format='png', dpi=100, bbox_inches='tight', facecolor='#1f2937', edgecolor='none')
-    buf.seek(0)
-    img_str = base64.b64encode(buf.read()).decode('utf-8')
-    plt.close('all')
-    return img_str
-`);
+        await pyodide.runPythonAsync(`import matplotlib\nmatplotlib.use('AGG')\nimport warnings\nwarnings.filterwarnings('ignore', category=UserWarning)\nimport matplotlib.pyplot as plt\nimport base64\ndef _get_plot_as_base64():\n    buf = io.BytesIO()\n    plt.savefig(buf, format='png', dpi=100, bbox_inches='tight', facecolor='#1f2937', edgecolor='none')\n    buf.seek(0)\n    img_str = base64.b64encode(buf.read()).decode('utf-8')\n    plt.close('all')\n    return img_str`);
       }
 
       pyodideRef.current = pyodide;

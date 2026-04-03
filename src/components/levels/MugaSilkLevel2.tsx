@@ -27,7 +27,7 @@ class OC:
  def get_output(self):return''.join(self.o)
  def clear(self):self.o=[]
 _stdout_capture=OC();sys.stdout=_stdout_capture;sys.stderr=_stdout_capture
-import matplotlib;matplotlib.use('AGG');import matplotlib.pyplot as plt;import base64
+import matplotlib;matplotlib.use('AGG');import warnings;warnings.filterwarnings('ignore',category=UserWarning);import matplotlib.pyplot as plt;import base64
 def _get_plot_as_base64():
  buf=io.BytesIO();plt.savefig(buf,format='png',dpi=100,bbox_inches='tight',facecolor='#1f2937',edgecolor='none');buf.seek(0);s=base64.b64encode(buf.read()).decode('utf-8');plt.close('all');return s
 `);
