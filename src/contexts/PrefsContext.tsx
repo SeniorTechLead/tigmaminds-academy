@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, useCallback, useMemo, ReactNode } from 'react';
 
 type EditorTheme = 'dark' | 'light';
 
@@ -21,18 +21,23 @@ export function PrefsProvider({ children }: { children: ReactNode }) {
     return saved === null ? true : saved === 'true';
   });
 
-  const setEditorTheme = (theme: EditorTheme) => {
+  const setEditorTheme = useCallback((theme: EditorTheme) => {
     setEditorThemeState(theme);
     localStorage.setItem('editorTheme', theme);
-  };
+  }, []);
 
-  const setSoundEnabled = (enabled: boolean) => {
+  const setSoundEnabled = useCallback((enabled: boolean) => {
     setSoundEnabledState(enabled);
     localStorage.setItem('soundEnabled', String(enabled));
-  };
+  }, []);
+
+  const value = useMemo(
+    () => ({ editorTheme, setEditorTheme, soundEnabled, setSoundEnabled }),
+    [editorTheme, setEditorTheme, soundEnabled, setSoundEnabled],
+  );
 
   return (
-    <PrefsContext.Provider value={{ editorTheme, setEditorTheme, soundEnabled, setSoundEnabled }}>
+    <PrefsContext.Provider value={value}>
       {children}
     </PrefsContext.Provider>
   );

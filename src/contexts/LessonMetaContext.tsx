@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, useMemo, ReactNode } from 'react';
 import { supabase } from '../lib/supabase';
 
 interface LessonMeta {
@@ -34,8 +34,7 @@ export function LessonMetaProvider({ children }: { children: ReactNode }) {
 
         if (error || !data || data.length === 0) {
           if (error) console.error('[LessonMeta] Failed to load:', error.message);
-          // Fallback: treat all lessons as demos so nothing is locked
-          setDemoSlugs(null); // null signals "no DB data, allow all"
+          setDemoSlugs(null);
           setLoading(false);
           return;
         }
@@ -50,12 +49,23 @@ export function LessonMetaProvider({ children }: { children: ReactNode }) {
     })();
   }, []);
 
+  const isDemoStory = useCallback(
+    (slug: string) => demoSlugs === null || demoSlugs.has(slug),
+    [demoSlugs],
+  );
+
+  const isPublished = useCallback(
+    (slug: string) => publishedSlugs.has(slug),
+    [publishedSlugs],
+  );
+
+  const value = useMemo(
+    () => ({ isDemoStory, isPublished, loading }),
+    [isDemoStory, isPublished, loading],
+  );
+
   return (
-    <LessonMetaContext.Provider value={{
-      isDemoStory: (slug: string) => demoSlugs === null || demoSlugs.has(slug),
-      isPublished: (slug: string) => publishedSlugs.has(slug),
-      loading,
-    }}>
+    <LessonMetaContext.Provider value={value}>
       {children}
     </LessonMetaContext.Provider>
   );

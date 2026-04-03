@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect, useMemo, ReactNode } from 'react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from './AuthContext';
 // Dynamically import lessons only when saving to Supabase — keeps 1.9MB out of main bundle
@@ -350,14 +350,20 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     }
   }, [user]);
 
+  const value = useMemo(() => ({
+    progress, markLevelComplete, isLevelComplete, isStoryComplete,
+    getCompletedCount, getTotalHoursCompleted,
+    recordQuizScore, recordLevelViewed, recordMiniLessonSeen, recordCodeRun,
+    getLevelDetail, getStoryProgress, canMarkComplete,
+    studentName, setStudentName, resetProgress, syncing,
+  }), [progress, markLevelComplete, isLevelComplete, isStoryComplete,
+    getCompletedCount, getTotalHoursCompleted,
+    recordQuizScore, recordLevelViewed, recordMiniLessonSeen, recordCodeRun,
+    getLevelDetail, getStoryProgress, canMarkComplete,
+    studentName, setStudentName, resetProgress, syncing]);
+
   return (
-    <ProgressContext.Provider value={{
-      progress, markLevelComplete, isLevelComplete, isStoryComplete,
-      getCompletedCount, getTotalHoursCompleted,
-      recordQuizScore, recordLevelViewed, recordMiniLessonSeen, recordCodeRun,
-      getLevelDetail, getStoryProgress, canMarkComplete,
-      studentName, setStudentName, resetProgress, syncing,
-    }}>
+    <ProgressContext.Provider value={value}>
       {children}
     </ProgressContext.Provider>
   );

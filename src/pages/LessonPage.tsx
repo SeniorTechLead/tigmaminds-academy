@@ -17,6 +17,21 @@ import SignUpGate from '../components/SignUpGate';
 
 type Level = 'listener' | 'explorer' | 'builder' | 'engineer' | 'creator';
 
+const LEVEL_TABS: { key: Level; label: string; desc: string; color: string }[] = [
+  { key: 'listener', label: 'Level 0: Listener', desc: 'No coding needed', color: 'sky' },
+  { key: 'explorer', label: 'Level 1: Explorer', desc: 'Intro to coding', color: 'emerald' },
+  { key: 'builder', label: 'Level 2: Builder', desc: 'Intermediate', color: 'amber' },
+  { key: 'engineer', label: 'Level 3: Engineer', desc: 'Advanced', color: 'rose' },
+  { key: 'creator', label: 'Level 4: Creator', desc: 'Capstone project', color: 'purple' },
+];
+
+const LEVEL_COMPLETION: { level: 0 | 1 | 2 | 3; name: string; tab: Level }[] = [
+  { level: 0, name: 'Level 0: Listener', tab: 'listener' },
+  { level: 1, name: 'Level 1: Explorer', tab: 'explorer' },
+  { level: 2, name: 'Level 2: Builder', tab: 'builder' },
+  { level: 3, name: 'Level 3: Engineer', tab: 'engineer' },
+];
+
 export default function LessonPage() {
   const { slug } = useParams<{ slug: string }>();
   const lesson = slug ? getLessonBySlug(slug) : undefined;
@@ -214,13 +229,7 @@ export default function LessonPage() {
 
             {/* Level tabs — sticky so they stay visible while scrolling */}
             <div className="flex gap-2 mb-10 flex-wrap sticky top-16 z-30 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm py-3 -mx-4 px-4">
-              {([
-                { key: 'listener' as Level, label: 'Level 0: Listener', desc: 'No coding needed', color: 'sky' },
-                { key: 'explorer' as Level, label: 'Level 1: Explorer', desc: 'Intro to coding', color: 'emerald' },
-                { key: 'builder' as Level, label: 'Level 2: Builder', desc: 'Intermediate', color: 'amber' },
-                { key: 'engineer' as Level, label: 'Level 3: Engineer', desc: 'Advanced', color: 'rose' },
-                { key: 'creator' as Level, label: 'Level 4: Creator', desc: 'Capstone project', color: 'purple' },
-              ]).map((lvl) => {
+              {LEVEL_TABS.map((lvl) => {
                 const locked = isLevelLocked(lvl.key);
                 return (
                   <button
@@ -341,12 +350,7 @@ export default function LessonPage() {
 
             {/* Level completion buttons */}
               <div className="flex gap-3">
-                {([
-                  { level: 0 as const, name: 'Level 0: Listener', tab: 'listener' as Level },
-                  { level: 1 as const, name: 'Level 1: Explorer', tab: 'explorer' as Level },
-                  { level: 2 as const, name: 'Level 2: Builder', tab: 'builder' as Level },
-                  { level: 3 as const, name: 'Level 3: Engineer', tab: 'engineer' as Level },
-                ]).map(({ level, name }) => {
+                {LEVEL_COMPLETION.map(({ level, name }) => {
                   const complete = isLevelComplete(lesson.slug, level);
                   const canComplete = canMarkComplete(lesson.slug, level);
                   const detail = getLevelDetail(lesson.slug, level);
