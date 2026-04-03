@@ -9,7 +9,7 @@
 // ─── Types ───────────────────────────────────────────────────
 
 export type ReferenceCategory =
-  | 'language' | 'data-science' | 'electronics' | 'math' | 'ai'
+  | 'language' | 'data-science' | 'database' | 'electronics' | 'math' | 'ai'
   | 'physics' | 'biology' | 'chemistry' | 'geography'
   | 'ecology' | 'earth-science'
   | 'economics' | 'engineering' | 'music-arts';
@@ -139,6 +139,13 @@ export const REFERENCE_CATEGORIES: CategoryMeta[] = [
     label: 'Data Science',
     icon: '📊',
     color: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300',
+    group: 'coding',
+  },
+  {
+    key: 'database',
+    label: 'Databases & SQL',
+    icon: '🗄️',
+    color: 'bg-cyan-100 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-300',
     group: 'coding',
   },
   {

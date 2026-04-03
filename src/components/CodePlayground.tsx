@@ -104,6 +104,8 @@ sys.stderr = _stdout_capture
       // Set up matplotlib backend if matplotlib is in packages
       if (packages.includes('matplotlib')) {
         await pyodide.runPythonAsync(`
+import warnings
+warnings.filterwarnings('ignore', message='.*non-GUI backend.*')
 import matplotlib
 matplotlib.use('AGG')
 import matplotlib.pyplot as plt
