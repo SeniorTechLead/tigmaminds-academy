@@ -24,7 +24,7 @@ export default function SQLTableDiagram() {
   const padL = 70;
   const padT = 58;
   const totalTableW = colW.reduce((a, b) => a + b, 0);
-  const totalW = padL + totalTableW + 100;
+  const totalW = padL + totalTableW + 130;
   const totalH = padT + headerH + typeH + rows.length * rowH + 75;
 
   const colX = (i: number) => padL + colW.slice(0, i).reduce((a, b) => a + b, 0);
