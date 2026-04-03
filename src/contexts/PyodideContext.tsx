@@ -1,20 +1,13 @@
-import { createContext, useContext, useRef, useState, useCallback, ReactNode } from 'react';
+import { createContext, useContext, useRef, useState, useCallback, useMemo, useEffect, ReactNode } from 'react';
 
 type PyodideState = 'idle' | 'loading' | 'ready' | 'error';
 
 interface PyodideContextType {
-  /** The shared Pyodide instance (null until loaded) */
-  pyodide: any;
-  /** Current loading state */
-  state: PyodideState;
-  /** Human-readable loading progress message */
-  loadProgress: string;
-  /** True when Pyodide is ready to run code */
-  ready: boolean;
-  /** Load Pyodide if not already loaded. Returns the instance. */
   load: () => Promise<any>;
-  /** Ref to the Pyodide instance (for legacy prop-drilling compatibility) */
   pyodideRef: React.MutableRefObject<any>;
+  stateRef: React.MutableRefObject<PyodideState>;
+  progressRef: React.MutableRefObject<string>;
+  subscribe: (cb: () => void) => () => void;
 }
 
 const PyodideContext = createContext<PyodideContextType | undefined>(undefined);
@@ -24,28 +17,33 @@ const PYODIDE_CDN = `https://cdn.jsdelivr.net/pyodide/v${PYODIDE_VERSION}/full`;
 
 export function PyodideProvider({ children }: { children: ReactNode }) {
   const pyodideRef = useRef<any>(null);
+  const stateRef = useRef<PyodideState>('idle');
+  const progressRef = useRef('');
   const loadingRef = useRef(false);
   const loadPromiseRef = useRef<Promise<any> | null>(null);
-  const [state, setState] = useState<PyodideState>('idle');
-  const [loadProgress, setLoadProgress] = useState('');
+  const listenersRef = useRef<Set<() => void>>(new Set());
+
+  const notify = useCallback(() => {
+    listenersRef.current.forEach(cb => cb());
+  }, []);
+
+  const subscribe = useCallback((cb: () => void) => {
+    listenersRef.current.add(cb);
+    return () => { listenersRef.current.delete(cb); };
+  }, []);
 
   const load = useCallback(async () => {
-    // Already loaded — return immediately
     if (pyodideRef.current) return pyodideRef.current;
-
-    // Another call is already loading — wait for it
-    if (loadingRef.current && loadPromiseRef.current) {
-      return loadPromiseRef.current;
-    }
+    if (loadingRef.current && loadPromiseRef.current) return loadPromiseRef.current;
 
     loadingRef.current = true;
-    setState('loading');
+    stateRef.current = 'loading';
+    progressRef.current = 'Loading Python runtime...';
+    notify();
 
     const promise = (async () => {
       try {
-        // 1. Load Pyodide script from CDN (if not already on window)
         if (!(window as any).loadPyodide) {
-          setLoadProgress('Loading Python runtime...');
           const script = document.createElement('script');
           script.src = `${PYODIDE_CDN}/pyodide.js`;
           document.head.appendChild(script);
@@ -55,26 +53,21 @@ export function PyodideProvider({ children }: { children: ReactNode }) {
           });
         }
 
-        // 2. Initialize Pyodide
-        setLoadProgress('Starting Python...');
-        const pyodide = await (window as any).loadPyodide({
-          indexURL: `${PYODIDE_CDN}/`,
-        });
+        progressRef.current = 'Starting Python...';
+        notify();
+        const pyodide = await (window as any).loadPyodide({ indexURL: `${PYODIDE_CDN}/` });
 
-        // 3. Install packages
-        setLoadProgress('Installing packages...');
+        progressRef.current = 'Installing packages...';
+        notify();
         await pyodide.loadPackage('micropip');
         const micropip = pyodide.pyimport('micropip');
         for (const pkg of ['numpy', 'matplotlib']) {
-          try {
-            await micropip.install(pkg);
-          } catch {
-            await pyodide.loadPackage(pkg).catch(() => {});
-          }
+          try { await micropip.install(pkg); }
+          catch { await pyodide.loadPackage(pkg).catch(() => {}); }
         }
 
-        // 4. Set up stdout/stderr capture + matplotlib
-        setLoadProgress('Configuring environment...');
+        progressRef.current = 'Configuring environment...';
+        notify();
         await pyodide.runPythonAsync([
           "import sys, io",
           "class _OutputCapture:",
@@ -86,7 +79,6 @@ export function PyodideProvider({ children }: { children: ReactNode }) {
           "_stdout_capture = _OutputCapture()",
           "sys.stdout = _stdout_capture",
           "sys.stderr = _stdout_capture",
-          "# Alias for PlaygroundPage compatibility",
           "_out = _stdout_capture",
           "_out.get = _out.get_output",
         ].join('\n'));
@@ -108,40 +100,58 @@ export function PyodideProvider({ children }: { children: ReactNode }) {
         ].join('\n'));
 
         pyodideRef.current = pyodide;
-        setState('ready');
-        setLoadProgress('');
+        stateRef.current = 'ready';
+        progressRef.current = '';
         loadingRef.current = false;
+        notify();
         return pyodide;
       } catch (err: any) {
-        setState('error');
-        setLoadProgress(`Error: ${err.message}`);
+        stateRef.current = 'error';
+        progressRef.current = `Error: ${err.message}`;
         loadingRef.current = false;
+        notify();
         return null;
       }
     })();
 
     loadPromiseRef.current = promise;
     return promise;
-  }, []);
+  }, [notify]);
+
+  const value = useMemo<PyodideContextType>(
+    () => ({ load, pyodideRef, stateRef, progressRef, subscribe }),
+    [load, subscribe],
+  );
 
   return (
-    <PyodideContext.Provider
-      value={{
-        pyodide: pyodideRef.current,
-        state,
-        loadProgress,
-        ready: state === 'ready',
-        load,
-        pyodideRef,
-      }}
-    >
+    <PyodideContext.Provider value={value}>
       {children}
     </PyodideContext.Provider>
   );
 }
 
+/**
+ * Hook for components that need Pyodide.
+ * Only components that call usePyodide() re-render on state changes —
+ * the rest of the app is unaffected.
+ */
 export function usePyodide() {
   const ctx = useContext(PyodideContext);
   if (!ctx) throw new Error('usePyodide must be used within PyodideProvider');
-  return ctx;
+
+  const { load, pyodideRef, stateRef, progressRef, subscribe } = ctx;
+  const [tick, setTick] = useState(0);
+
+  useEffect(() => {
+    return subscribe(() => setTick(n => n + 1));
+  }, [subscribe]);
+
+  return {
+    pyodide: pyodideRef.current,
+    state: stateRef.current,
+    loadProgress: progressRef.current,
+    ready: stateRef.current === 'ready',
+    load,
+    pyodideRef,
+  };
 }
