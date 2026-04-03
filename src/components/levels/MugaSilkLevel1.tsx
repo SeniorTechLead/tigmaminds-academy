@@ -35,6 +35,7 @@ class OutputCapture:
 _stdout_capture = OutputCapture()
 sys.stdout = _stdout_capture; sys.stderr = _stdout_capture
 import matplotlib; matplotlib.use('AGG')
+import warnings; warnings.filterwarnings('ignore', category=UserWarning)
 import matplotlib.pyplot as plt; import base64
 def _get_plot_as_base64():
     buf = io.BytesIO(); plt.savefig(buf, format='png', dpi=100, bbox_inches='tight', facecolor='#1f2937', edgecolor='none')
