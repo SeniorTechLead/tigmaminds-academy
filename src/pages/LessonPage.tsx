@@ -4,7 +4,6 @@ import { ArrowLeft, ArrowRight, CheckCircle, ExternalLink, BookOpen, Wrench, Lig
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { getLessonBySlug, lessons } from '../data/lessons';
-import { Suspense } from 'react';
 import { getLevelComponents } from '../components/levels';
 import { useProgress } from '../contexts/ProgressContext';
 import Level0Listener from '../components/Level0Listener';
