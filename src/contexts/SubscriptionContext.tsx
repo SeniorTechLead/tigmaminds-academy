@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, useMemo, ReactNode } from 'react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from './AuthContext';
 import { FEATURES } from '../config/features';
@@ -35,7 +35,6 @@ export function SubscriptionProvider({ children }: { children: ReactNode }) {
       return;
     }
 
-    // Don't query the table if payments are disabled (table may not exist)
     if (!FEATURES.PAYMENTS_ENABLED) {
       setSubscription(null);
       setLoading(false);
@@ -54,7 +53,6 @@ export function SubscriptionProvider({ children }: { children: ReactNode }) {
 
     if (error) {
       console.error('Failed to fetch subscription:', error.message);
-      // Don't block the app — treat as free tier
     }
 
     setSubscription(data || null);
@@ -65,12 +63,12 @@ export function SubscriptionProvider({ children }: { children: ReactNode }) {
     fetchSubscription();
   }, [fetchSubscription]);
 
-  // Check URL for payment success — trigger refresh
+  // Check URL for payment success — trigger refresh with cleanup
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     if (params.get('payment') === 'success') {
-      // Delay slightly to let the serverless function finish writing
-      setTimeout(fetchSubscription, 1500);
+      const timer = setTimeout(fetchSubscription, 1500);
+      return () => clearTimeout(timer);
     }
   }, [fetchSubscription]);
 
@@ -80,8 +78,13 @@ export function SubscriptionProvider({ children }: { children: ReactNode }) {
     ? subscription.plan.startsWith('in_person') ? 'in_person' : 'online'
     : 'free';
 
+  const value = useMemo(
+    () => ({ subscription, loading, hasActiveSubscription, plan, refresh: fetchSubscription }),
+    [subscription, loading, hasActiveSubscription, plan, fetchSubscription],
+  );
+
   return (
-    <SubscriptionContext.Provider value={{ subscription, loading, hasActiveSubscription, plan, refresh: fetchSubscription }}>
+    <SubscriptionContext.Provider value={value}>
       {children}
     </SubscriptionContext.Provider>
   );
