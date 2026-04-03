@@ -1,0 +1,224 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Mail, Lock, Check, Loader2, AlertCircle, ArrowLeft } from 'lucide-react';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import { useAuth } from '../contexts/AuthContext';
+
+export default function AccountSettingsPage() {
+  const { user, updateEmail, updatePassword, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  // Email change
+  const [newEmail, setNewEmail] = useState('');
+  const [emailLoading, setEmailLoading] = useState(false);
+  const [emailMsg, setEmailMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+
+  // Password change
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [pwLoading, setPwLoading] = useState(false);
+  const [pwMsg, setPwMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+
+  if (!user) {
+    navigate('/auth?returnTo=/account', { replace: true });
+    return null;
+  }
+
+  const handleEmailChange = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setEmailMsg(null);
+
+    if (!newEmail.trim()) {
+      setEmailMsg({ type: 'error', text: 'Please enter a new email address.' });
+      return;
+    }
+    if (newEmail === user.email) {
+      setEmailMsg({ type: 'error', text: 'That is already your current email.' });
+      return;
+    }
+
+    setEmailLoading(true);
+    const { error } = await updateEmail(newEmail.trim());
+    setEmailLoading(false);
+
+    if (error) {
+      setEmailMsg({ type: 'error', text: error });
+    } else {
+      setEmailMsg({ type: 'success', text: 'Confirmation email sent to ' + newEmail + '. Check your inbox to complete the change.' });
+      setNewEmail('');
+    }
+  };
+
+  const handlePasswordChange = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setPwMsg(null);
+
+    if (newPassword.length < 8) {
+      setPwMsg({ type: 'error', text: 'Password must be at least 8 characters.' });
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      setPwMsg({ type: 'error', text: 'Passwords do not match.' });
+      return;
+    }
+
+    setPwLoading(true);
+    const { error } = await updatePassword(newPassword);
+    setPwLoading(false);
+
+    if (error) {
+      setPwMsg({ type: 'error', text: error });
+    } else {
+      setPwMsg({ type: 'success', text: 'Password updated successfully.' });
+      setCurrentPassword('');
+      setNewPassword('');
+      setConfirmPassword('');
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
+      <Header />
+
+      <section className="pt-28 pb-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-xl mx-auto">
+          <button onClick={() => navigate(-1)} className="text-sm text-gray-500 dark:text-gray-400 hover:text-amber-600 dark:hover:text-amber-400 font-medium mb-6 flex items-center gap-1">
+            <ArrowLeft className="w-3.5 h-3.5" /> Back
+          </button>
+
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Account Settings</h1>
+          <p className="text-gray-500 dark:text-gray-400 mb-10">Manage your email and password.</p>
+
+          {/* Current account info */}
+          <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-5 border border-gray-200 dark:border-gray-700 mb-8">
+            <p className="text-sm text-gray-500 dark:text-gray-400">Signed in as</p>
+            <p className="text-lg font-semibold text-gray-900 dark:text-white">{user.email}</p>
+          </div>
+
+          {/* Change Email */}
+          <div className="mb-10">
+            <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Change Email</h2>
+            <form onSubmit={handleEmailChange} className="space-y-4">
+              <div>
+                <label htmlFor="new-email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  New email address
+                </label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <input
+                    id="new-email"
+                    type="email"
+                    value={newEmail}
+                    onChange={(e) => setNewEmail(e.target.value)}
+                    placeholder="new@example.com"
+                    className="w-full pl-10 pr-4 py-2.5 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                  />
+                </div>
+              </div>
+
+              {emailMsg && (
+                <div className={`flex items-start gap-2 text-sm rounded-lg p-3 ${
+                  emailMsg.type === 'success'
+                    ? 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300'
+                    : 'bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300'
+                }`}>
+                  {emailMsg.type === 'success' ? <Check className="w-4 h-4 mt-0.5 flex-shrink-0" /> : <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />}
+                  {emailMsg.text}
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={emailLoading}
+                className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 disabled:bg-gray-400 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-colors"
+              >
+                {emailLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Mail className="w-4 h-4" />}
+                Update Email
+              </button>
+            </form>
+          </div>
+
+          {/* Divider */}
+          <hr className="border-gray-200 dark:border-gray-700 mb-10" />
+
+          {/* Change Password */}
+          <div className="mb-10">
+            <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Change Password</h2>
+            <form onSubmit={handlePasswordChange} className="space-y-4">
+              <div>
+                <label htmlFor="new-password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  New password
+                </label>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <input
+                    id="new-password"
+                    type="password"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    placeholder="Minimum 8 characters"
+                    className="w-full pl-10 pr-4 py-2.5 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="confirm-password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Confirm new password
+                </label>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <input
+                    id="confirm-password"
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    placeholder="Re-enter new password"
+                    className="w-full pl-10 pr-4 py-2.5 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                  />
+                </div>
+              </div>
+
+              {pwMsg && (
+                <div className={`flex items-start gap-2 text-sm rounded-lg p-3 ${
+                  pwMsg.type === 'success'
+                    ? 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300'
+                    : 'bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300'
+                }`}>
+                  {pwMsg.type === 'success' ? <Check className="w-4 h-4 mt-0.5 flex-shrink-0" /> : <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />}
+                  {pwMsg.text}
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={pwLoading}
+                className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 disabled:bg-gray-400 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-colors"
+              >
+                {pwLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Lock className="w-4 h-4" />}
+                Update Password
+              </button>
+            </form>
+          </div>
+
+          {/* Divider */}
+          <hr className="border-gray-200 dark:border-gray-700 mb-10" />
+
+          {/* Sign out */}
+          <div>
+            <button
+              onClick={async () => { await signOut(); navigate('/'); }}
+              className="text-sm text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 font-semibold"
+            >
+              Sign out of all devices
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
+}

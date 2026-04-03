@@ -76,9 +76,9 @@ export default function Header() {
                 </Link>
                 <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 px-3 py-1.5 rounded-full">
                   <User className="w-4 h-4 text-amber-600" />
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  <Link to="/account" className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 transition-colors" title="Account settings">
                     {profile?.display_name || user.email?.split('@')[0]}
-                  </span>
+                  </Link>
                   <button onClick={signOut} className="text-gray-400 hover:text-red-500 transition-colors" title="Sign out">
                     <LogOut className="w-4 h-4" />
                   </button>
@@ -129,6 +129,7 @@ export default function Header() {
             {user ? (
               <>
                 <Link to="/plan" className="block px-4 py-2 text-gray-600 dark:text-gray-300 font-medium" onClick={() => setIsMenuOpen(false)}>My Plan</Link>
+                <Link to="/account" className="block px-4 py-2 text-gray-600 dark:text-gray-300 font-medium" onClick={() => setIsMenuOpen(false)}>Account Settings</Link>
                 <button onClick={() => { signOut(); setIsMenuOpen(false); }} className="block w-full text-left px-4 py-2 text-red-500 font-medium">Sign Out</button>
               </>
             ) : (

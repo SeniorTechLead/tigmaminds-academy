@@ -35,6 +35,7 @@ const LessonsIndexPage = lazyWithRetry(() => import('./pages/LessonsIndexPage'))
 const CertificatePage = lazyWithRetry(() => import('./pages/CertificatePage'));
 const LessonPlanPage = lazyWithRetry(() => import('./pages/LessonPlanPage'));
 const AuthPage = lazyWithRetry(() => import('./pages/AuthPage'));
+const AccountSettingsPage = lazyWithRetry(() => import('./pages/AccountSettingsPage'));
 const ReferencePage = lazyWithRetry(() => import('./pages/ReferencePage'));
 const LessonPage = lazyWithRetry(() => import('./pages/LessonPage'));
 const PlaygroundPage = lazyWithRetry(() => import('./pages/PlaygroundPage'));
@@ -69,6 +70,7 @@ function App() {
           <Route path="/certificate" element={<CertificatePage />} />
           <Route path="/plan" element={<LessonPlanPage />} />
           <Route path="/auth" element={<AuthPage />} />
+          <Route path="/account" element={<AccountSettingsPage />} />
           <Route path="/reference" element={<ReferencePage />} />
           <Route path="/reference/:slug" element={<ReferencePage />} />
           <Route path="/lessons/:slug" element={<LessonPage />} />
