@@ -4993,7 +4993,7 @@ plt.show()
         goDeeper:
           'A relational database organizes data into **tables** (rows and columns). Each row is a record; each column is a field with a specific data type (INTEGER, TEXT, REAL, DATETIME). The **primary key** uniquely identifies each row (e.g., elephant_id). **Foreign keys** link tables: a sightings table might have elephant_id referencing the elephants table. Core SQL: `SELECT name, weight FROM elephants WHERE weight > 4000 ORDER BY weight DESC` retrieves heavy elephants sorted by weight. `INSERT INTO elephants (name, weight) VALUES ("Ranga", 4500)` adds a record. `UPDATE elephants SET weight = 4600 WHERE name = "Ranga"` modifies one.',
         advanced:
-          'Database normalization reduces redundancy: **1NF** (no repeating groups), **2NF** (every non-key column depends on the whole primary key), **3NF** (no transitive dependencies — every non-key column depends ONLY on the key). Example: instead of storing elephant_name in every sighting record, store elephant_id (foreign key) and look up the name from the elephants table. **Indexing** (B-tree structures on frequently queried columns) speeds lookups from O(n) to O(log n). **ACID properties** (Atomicity, Consistency, Isolation, Durability) guarantee that transactions either complete fully or not at all — essential for financial systems. NoSQL databases (MongoDB, Redis) trade ACID guarantees for horizontal scalability, handling millions of requests/second for web applications.',
+          'Database normalization reduces redundancy. **1NF:** no repeating groups — instead of `hobbies: "chess, painting, coding"` in one cell, make a separate hobbies table with one row per hobby. **2NF:** every non-key column depends on the *whole* key — if a composite key is (student_id, course_id), then student_name depends only on student_id, so it belongs in a students table, not the enrollment table. **3NF:** no transitive dependencies — if zip_code determines city, store city in a zip_codes table, not in every customer row. Example: instead of storing elephant_name in every sighting record, store elephant_id (foreign key) and look up the name from the elephants table. **Indexing** (B-tree structures on frequently queried columns) speeds lookups from O(n) to O(log n). **ACID properties** (Atomicity, Consistency, Isolation, Durability) guarantee that transactions either complete fully or not at all — essential for financial systems. NoSQL databases (MongoDB, Redis) trade ACID guarantees for horizontal scalability, handling millions of requests/second for web applications.',
         interactive: {
           type: 'true-false',
           props: {
@@ -5014,11 +5014,10 @@ plt.show()
           'For example, `SELECT name, marks FROM students WHERE class = 10;` asks: "Give me the name and ' +
           'marks of every student in class 10." `SELECT *` means "all columns." If you leave out the WHERE ' +
           'clause, you get every row in the table.\n\n' +
-          'SQL is declarative — you describe *what* data you want, not *how* to get it. The database engine ' +
-          'figures out the fastest way to find it. This is different from languages like Python, where you ' +
-          'write step-by-step instructions. SQL was designed in the 1970s and is still the standard today. ' +
-          'Almost every app you use — Instagram, Google, Zomato, banking apps — runs SQL queries behind ' +
-          'the scenes every time you tap a button.',
+          'SQL is **declarative** — you describe *what* data you want, not *how* to get it. Compare finding students with marks above 80:\n\n' +
+          '**Python (imperative — you write every step):**\n`results = []\nfor student in students:\n    if student["marks"] > 80:\n        results.append(student["name"])`\n\n' +
+          '**SQL (declarative — you describe the goal):**\n`SELECT name FROM students WHERE marks > 80;`\n\n' +
+          'The database engine figures out the fastest way to find those rows. SQL was designed in the 1970s and is still the standard today. Almost every app you use — Instagram, Google, Zomato, banking apps — runs SQL queries behind the scenes every time you tap a button.',
         goDeeper:
           'JOIN combines tables: SELECT e.name, s.date FROM elephants e JOIN sightings s ON e.id = s.elephant_id WHERE s.date > "2024-01-01". Aggregates: SELECT location, COUNT(*), AVG(group_size) FROM sightings GROUP BY location HAVING COUNT(*) > 10. Subqueries: SELECT name FROM elephants WHERE id IN (SELECT elephant_id FROM sightings WHERE location = "Kaziranga"). Window functions: RANK() OVER (ORDER BY weight DESC) adds ranking without collapsing rows.',
         advanced:
@@ -5120,7 +5119,7 @@ plt.show()
         content:
           '`SELECT` is the most common SQL statement. It reads data from one or more tables.\n\n' +
           '**Basic pattern:** `SELECT columns FROM table WHERE condition ORDER BY column LIMIT n;`\n\n' +
-          '**SELECT *:** returns all columns — convenient for exploration, but in production always name the columns you need (faster, clearer).\n\n' +
+          '**SELECT *:** returns all columns — convenient for exploration, but in production name the columns you need. Why? With `SELECT *` the database sends every column (name, weight, park, species, created_at, notes, photo_url...) when you only needed name and weight. That\'s wasted memory and network bandwidth, especially with millions of rows.\n\n' +
           '**WHERE operators:** `=`, `!=`, `<`, `>`, `<=`, `>=`, `BETWEEN ... AND ...`, `IN (...)`, `LIKE` (pattern matching with `%` and `_` wildcards), `IS NULL` / `IS NOT NULL`.\n\n' +
           '**Combining conditions:** `AND` (both must be true), `OR` (either), `NOT` (invert). Use parentheses to group: `WHERE (park = "Kaziranga" OR park = "Manas") AND weight > 4000`.\n\n' +
           '**DISTINCT:** `SELECT DISTINCT park FROM elephants` returns each park name only once — removes duplicate rows from the result.',
@@ -5182,8 +5181,9 @@ FROM elephants;`,
           '**Aggregate functions** collapse multiple rows into a single value: `COUNT()`, `SUM()`, `AVG()`, `MIN()`, `MAX()`.\n\n' +
           '**GROUP BY** splits rows into groups and applies aggregates to each group separately. `SELECT park, COUNT(*) FROM elephants GROUP BY park` gives the count per park.\n\n' +
           '**HAVING** filters groups (like WHERE, but runs after GROUP BY). `HAVING COUNT(*) > 2` keeps only groups with more than 2 rows.\n\n' +
-          '**Execution order matters:** FROM → WHERE (filter rows) → GROUP BY (form groups) → HAVING (filter groups) → SELECT (compute output) → ORDER BY → LIMIT. This is why you can\'t use an alias from SELECT in WHERE — WHERE runs first.\n\n' +
-          '**COUNT(*) vs COUNT(column):** `COUNT(*)` counts all rows including NULLs. `COUNT(column)` skips rows where that column is NULL.',
+          '**Execution order matters:** FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT. This means you **can\'t** use a SELECT alias in WHERE, because WHERE runs before SELECT:\n\n' +
+          '```\n-- ❌ FAILS: avg_w doesn\'t exist yet when WHERE runs\nSELECT park, AVG(weight) AS avg_w FROM elephants WHERE avg_w > 4000;\n\n-- ✅ WORKS: use HAVING (runs after GROUP BY and SELECT)\nSELECT park, AVG(weight) AS avg_w FROM elephants GROUP BY park HAVING avg_w > 4000;\n\n-- ✅ ALSO WORKS: repeat the expression in WHERE\nSELECT park, AVG(weight) AS avg_w FROM elephants GROUP BY park HAVING AVG(weight) > 4000;\n```\n\n' +
+          '**COUNT(*) vs COUNT(column):** `COUNT(*)` counts all rows including NULLs. `COUNT(column)` skips NULLs. Example: if 3 elephants have a `last_seen` date and 2 don\'t, `COUNT(*)` = 5 but `COUNT(last_seen)` = 3.',
         code: `-- Count all elephants
 SELECT COUNT(*) AS total FROM elephants;
 -- total: 5
@@ -5228,7 +5228,24 @@ FROM elephants
 WHERE species = 'Asian'    -- filter first
 GROUP BY park              -- then group
 HAVING COUNT(*) >= 2       -- then filter groups
-ORDER BY avg_weight DESC;  -- then sort`,
+ORDER BY avg_weight DESC;  -- then sort
+
+-- COUNT(*) vs COUNT(column) — the NULL difference
+-- Suppose 2 elephants have NULL for last_seen:
+SELECT COUNT(*) AS total_rows,       -- 5 (counts every row)
+       COUNT(last_seen) AS with_date -- 3 (skips NULLs)
+FROM elephants;
+
+-- ❌ THIS FAILS — can't use alias in WHERE
+-- SELECT park, AVG(weight) AS avg_w
+-- FROM elephants WHERE avg_w > 4000;
+-- Error: no such column: avg_w
+
+-- ✅ Use HAVING instead (runs after SELECT)
+SELECT park, AVG(weight) AS avg_w
+FROM elephants
+GROUP BY park
+HAVING AVG(weight) > 4000;`,
         diagram: 'SQLAggregateDiagram',
       },
       {
@@ -5240,7 +5257,7 @@ ORDER BY avg_weight DESC;  -- then sort`,
           '**LEFT JOIN:** All rows from the left table + matching rows from the right. If no match, right-side columns are NULL. Perfect for "show all elephants, even those never sighted."\n\n' +
           '**RIGHT JOIN:** Mirror of LEFT JOIN. All rows from the right table.\n\n' +
           '**FULL OUTER JOIN:** All rows from both tables. NULLs fill in wherever there\'s no match on either side.\n\n' +
-          '**Table aliases** (`elephants e`, `sightings s`) keep queries short. Always qualify ambiguous column names: `e.id` vs `s.id`.',
+          '**Table aliases** (`elephants e`, `sightings s`) keep queries short. Always qualify ambiguous column names — both tables have an `id` column, so `SELECT id` is ambiguous and will error. Write `SELECT e.id` or `SELECT s.id` to be explicit.',
         code: `-- Setup: two related tables
 -- elephants: id, name, weight, park
 -- sightings: id, elephant_id, date, location
@@ -5291,7 +5308,9 @@ WHERE ABS(a.weight - b.weight) < 500;`,
           '**One-to-Many (1:N):** One elephant has many sightings. The sightings table has `elephant_id` pointing to `elephants.id`. This is the most common relationship.\n\n' +
           '**Many-to-Many (M:N):** An elephant visits many parks, and a park has many elephants. This requires a **junction table** (also called a bridge or linking table) with two foreign keys: `park_elephants(elephant_id, park_id)`.\n\n' +
           '**One-to-One (1:1):** Rare — one elephant has one GPS collar. Usually just extra columns on the same table.\n\n' +
-          '**Referential integrity:** `FOREIGN KEY` constraints prevent orphan records. You can\'t insert a sighting for elephant_id=99 if no elephant with id=99 exists. `ON DELETE CASCADE` automatically removes sightings when an elephant is deleted.',
+          '**Referential integrity:** `FOREIGN KEY` constraints prevent orphan records:\n\n' +
+          '```\n-- ❌ FAILS: no elephant with id=99 exists\nINSERT INTO sightings (elephant_id, date, location)\n  VALUES (99, \'2025-01-01\', \'Kaziranga\');\n-- Error: FOREIGN KEY constraint failed\n```\n\n' +
+          '`ON DELETE CASCADE` means: when you delete an elephant, all its sightings are automatically deleted too. Without it, you\'d have to manually delete the sightings first, or the database would refuse to delete the elephant.',
         code: `-- One-to-Many: elephants → sightings
 CREATE TABLE elephants (
     id INTEGER PRIMARY KEY,
@@ -5337,7 +5356,18 @@ INSERT INTO park_elephants (elephant_id, park_id, first_seen)
 SELECT e.name, p.name AS park, pe.first_seen
 FROM elephants e
 JOIN park_elephants pe ON e.id = pe.elephant_id
-JOIN parks p ON pe.park_id = p.id;`,
+JOIN parks p ON pe.park_id = p.id;
+
+-- FK violation: this INSERT will FAIL
+-- INSERT INTO sightings (elephant_id, date, location)
+--   VALUES (99, '2025-01-01', 'Kaziranga');
+-- Error: FOREIGN KEY constraint failed (no elephant with id=99)
+
+-- CASCADE in action:
+DELETE FROM elephants WHERE id = 1;
+-- Because sightings has ON DELETE CASCADE,
+-- all sightings with elephant_id = 1 are automatically deleted too.
+-- Without CASCADE, this DELETE would fail because sightings still reference id=1.`,
         diagram: 'SQLRelationshipDiagram',
       },
       {
@@ -5347,7 +5377,7 @@ JOIN parks p ON pe.park_id = p.id;`,
           '**DDL (Data Definition Language):** `CREATE TABLE`, `ALTER TABLE`, `DROP TABLE` — define and change the structure.\n\n' +
           '**DML (Data Manipulation Language):** `INSERT`, `UPDATE`, `DELETE` — add, change, and remove data.\n\n' +
           '**Constraints** enforce data rules: `PRIMARY KEY` (unique identifier), `NOT NULL` (required), `UNIQUE` (no duplicates), `CHECK` (value rules), `DEFAULT` (auto-fill), `FOREIGN KEY` (must reference existing row).\n\n' +
-          '**Transactions** (`BEGIN`, `COMMIT`, `ROLLBACK`) group operations atomically — all succeed or all fail. Essential for operations like transferring funds between accounts.\n\n' +
+          '**Transactions** (`BEGIN`, `COMMIT`, `ROLLBACK`) group operations atomically — all succeed or all fail. Without a transaction, a bank transfer could debit Account A but crash before crediting Account B — money vanishes. With a transaction, the crash triggers `ROLLBACK` and Account A\'s balance is restored.\n\n' +
           '**Safety tip:** Always use WHERE with UPDATE and DELETE. `DELETE FROM elephants;` (no WHERE) deletes every row. Test with SELECT first: if `SELECT * FROM elephants WHERE id = 3` returns the right row, then `DELETE FROM elephants WHERE id = 3` is safe.',
         code: `-- CREATE TABLE with constraints
 CREATE TABLE elephants (
@@ -5404,9 +5434,9 @@ COMMIT;
           'A **subquery** is a SELECT inside another query. It lets you use the result of one query as input to another.\n\n' +
           '**WHERE subqueries:** `WHERE id IN (SELECT ...)` filters rows based on another query\'s results. `WHERE weight > (SELECT AVG(weight) FROM elephants)` compares against a computed value.\n\n' +
           '**FROM subqueries:** Use a query result as a temporary table: `SELECT * FROM (SELECT ...) AS temp`.\n\n' +
-          '**EXISTS:** `WHERE EXISTS (SELECT 1 FROM sightings WHERE ...)` returns true if the subquery has any results. Often faster than `IN` for large datasets.\n\n' +
+          '**EXISTS:** `WHERE EXISTS (SELECT 1 FROM sightings WHERE ...)` returns true if the subquery has any results. EXISTS stops as soon as it finds one match (short-circuits), while `IN` must build the full list first — so EXISTS is faster when the subquery could return thousands of rows but you only care whether *any* match exists.\n\n' +
           '**Common Table Expressions (CTEs):** `WITH name AS (SELECT ...) SELECT ... FROM name` — like naming a subquery. Cleaner, reusable, and can be recursive.\n\n' +
-          '**Window functions:** `ROW_NUMBER()`, `RANK()`, `SUM() OVER (...)` compute values across rows without collapsing them (unlike GROUP BY). Essential for rankings, running totals, and moving averages.',
+          '**Window functions:** `ROW_NUMBER()`, `RANK()`, `SUM() OVER (...)` compute values across rows **without collapsing them**. Compare: `SELECT park, COUNT(*) FROM elephants GROUP BY park` gives 2 rows (one per park). But `SELECT name, park, COUNT(*) OVER (PARTITION BY park) AS park_count FROM elephants` gives 5 rows — every elephant, each annotated with how many elephants share its park.',
         code: `-- Subquery in WHERE: elephants heavier than average
 SELECT name, weight
 FROM elephants
@@ -5463,7 +5493,23 @@ SELECT name, park, weight,
            PARTITION BY park
            ORDER BY weight DESC
        ) AS rank_in_park
-FROM elephants;`,
+FROM elephants;
+
+-- Window vs GROUP BY — see the difference:
+-- GROUP BY collapses to 2 rows (one per park):
+--   SELECT park, COUNT(*) FROM elephants GROUP BY park;
+--   Kaziranga | 3
+--   Manas     | 2
+
+-- Window keeps all 5 rows, adds the count to each:
+SELECT name, park,
+       COUNT(*) OVER (PARTITION BY park) AS elephants_in_park
+FROM elephants;
+-- Ranga    | Kaziranga | 3
+-- Gaja     | Kaziranga | 3
+-- Tara     | Kaziranga | 3
+-- Mohini   | Manas     | 2
+-- Bala     | Manas     | 2`,
       },
     ],
   },
