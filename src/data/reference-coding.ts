@@ -4993,7 +4993,10 @@ plt.show()
         goDeeper:
           'A relational database organizes data into **tables** (rows and columns). Each row is a record; each column is a field with a specific data type (INTEGER, TEXT, REAL, DATETIME). The **primary key** uniquely identifies each row (e.g., elephant_id). **Foreign keys** link tables: a sightings table might have elephant_id referencing the elephants table. Core SQL: `SELECT name, weight FROM elephants WHERE weight > 4000 ORDER BY weight DESC` retrieves heavy elephants sorted by weight. `INSERT INTO elephants (name, weight) VALUES ("Ranga", 4500)` adds a record. `UPDATE elephants SET weight = 4600 WHERE name = "Ranga"` modifies one.',
         advanced:
-          'Database normalization reduces redundancy. **1NF:** no repeating groups — instead of `hobbies: "chess, painting, coding"` in one cell, make a separate hobbies table with one row per hobby. **2NF:** every non-key column depends on the *whole* key — if a composite key is (student_id, course_id), then student_name depends only on student_id, so it belongs in a students table, not the enrollment table. **3NF:** no transitive dependencies — if zip_code determines city, store city in a zip_codes table, not in every customer row. Example: instead of storing elephant_name in every sighting record, store elephant_id (foreign key) and look up the name from the elephants table. **Indexing** (B-tree structures on frequently queried columns) speeds lookups from O(n) to O(log n). **ACID properties** (Atomicity, Consistency, Isolation, Durability) guarantee that transactions either complete fully or not at all — essential for financial systems. NoSQL databases (MongoDB, Redis) trade ACID guarantees for horizontal scalability, handling millions of requests/second for web applications.',
+          'When your database grows, two problems appear: **redundancy** (the same data stored in multiple places) and **speed** (finding data in millions of rows).\n\n' +
+          '**The redundancy problem.** Imagine you store each elephant\'s park name directly in the sightings table: every time Ranga is sighted, "Kaziranga National Park, Assam, India" is written again. Now Kaziranga changes its official name. You have to find and update every single sighting row — miss one, and your data contradicts itself. The fix: store park information once in a `parks` table, and in sightings just store `park_id = 1`. One update to the parks table fixes everything. This process of removing redundancy is called **normalization**.\n\n' +
+          '**The speed problem.** Searching 10 million rows one by one is slow. An **index** is like a book\'s index — instead of reading every page to find "Kaziranga", you look up "K" in the index and jump directly to the right page. Databases use B-tree indexes: `CREATE INDEX idx_park ON elephants(park)` lets `WHERE park = \'Kaziranga\'` skip straight to matching rows instead of scanning all 10 million.\n\n' +
+          '**The safety problem.** If you transfer money between two bank accounts — debit Account A, then credit Account B — and the system crashes between those two steps, the money vanishes. **Transactions** group operations so they either ALL succeed or ALL roll back: `BEGIN; UPDATE accounts SET balance = balance - 100 WHERE id = 1; UPDATE accounts SET balance = balance + 100 WHERE id = 2; COMMIT;` — if anything fails, neither account changes.',
         interactive: {
           type: 'true-false',
           props: {
@@ -5550,6 +5553,77 @@ FROM elephants;
           props: {
             starterCode: "-- Elephants heavier than average\nSELECT name, weight\nFROM elephants\nWHERE weight > (SELECT AVG(weight) FROM elephants);\n\n-- Rank by weight using a window function\n-- SELECT name, weight,\n--        RANK() OVER (ORDER BY weight DESC) AS rank\n-- FROM elephants;",
             title: 'Try Subqueries & Window Functions',
+          },
+        },
+      },
+      {
+        id: 'sql-normalization',
+        title: 'Normalization — Why We Split Tables',
+        content:
+          'Imagine a wildlife ranger keeps one giant spreadsheet for everything:\n\n' +
+          '| sighting_id | elephant_name | elephant_weight | park_name | park_state | date | location |\n' +
+          '|---|---|---|---|---|---|---|\n' +
+          '| 1 | Ranga | 4500 | Kaziranga National Park | Assam | 2026-01-15 | East Range |\n' +
+          '| 2 | Ranga | 4500 | Kaziranga National Park | Assam | 2026-02-20 | Central Range |\n' +
+          '| 3 | Ranga | 4500 | Manas National Park | Assam | 2026-03-10 | West Zone |\n\n' +
+          'See the problem? "Ranga" and "4500" appear three times. "Kaziranga National Park, Assam" appears twice. Now imagine 10,000 sightings.\n\n' +
+          '**What goes wrong with duplication:**\n' +
+          '- **Update problem:** Ranga\'s weight changes to 4600. You have to find and update EVERY row that mentions Ranga. Miss one → your data contradicts itself.\n' +
+          '- **Delete problem:** You delete all sightings for Manas park. Oops — you just lost the fact that Manas exists, because it was only stored inside sighting rows.\n' +
+          '- **Insert problem:** A new park opens but has no sightings yet. You can\'t add it to this table — there\'s no sighting to attach it to.\n\n' +
+          '**The fix: split into separate tables.** Store each elephant once in an `elephants` table. Store each park once in a `parks` table. The `sightings` table only stores IDs that point back:\n\n' +
+          '`sightings: sighting_id, elephant_id, park_id, date, location`\n\n' +
+          'Now Ranga\'s weight is stored once. Update it in one place → every query that joins to elephants automatically sees the new weight. This process of removing duplication by splitting tables is called **normalization.**\n\n' +
+          '**Check yourself:** In the original spreadsheet, what happens if someone misspells "Kaziranga" as "Kaziranaga" in one row? With normalized tables, could that mistake happen?',
+        code: `-- THE PROBLEM: one big messy table
+-- (Don't do this in real databases)
+CREATE TABLE bad_sightings (
+    id INTEGER PRIMARY KEY,
+    elephant_name TEXT,
+    elephant_weight REAL,
+    park_name TEXT,
+    park_state TEXT,
+    date DATE,
+    location TEXT
+);
+
+INSERT INTO bad_sightings VALUES
+    (1, 'Ranga', 4500, 'Kaziranga NP', 'Assam', '2026-01-15', 'East'),
+    (2, 'Ranga', 4500, 'Kaziranga NP', 'Assam', '2026-02-20', 'Central'),
+    (3, 'Ranga', 4500, 'Manas NP',     'Assam', '2026-03-10', 'West');
+
+-- How many times is "Ranga" stored?
+SELECT elephant_name, COUNT(*) AS times_duplicated
+FROM bad_sightings
+GROUP BY elephant_name;
+-- Ranga | 3  (wasteful and dangerous)
+
+-- THE FIX: normalized tables (already in our sample DB)
+-- Ranga's weight stored ONCE:
+SELECT name, weight FROM elephants WHERE name = 'Ranga';
+
+-- Sightings just reference the ID:
+SELECT s.id, s.elephant_id, s.date, s.location
+FROM sightings s
+WHERE s.elephant_id = 1;
+
+-- Need the full picture? JOIN puts it back together:
+SELECT e.name, e.weight, s.date, s.location, p.name AS park
+FROM sightings s
+JOIN elephants e ON s.elephant_id = e.id
+JOIN parks p ON s.park_id = p.id
+WHERE e.name = 'Ranga';
+
+-- Update weight in ONE place — all queries see it instantly
+UPDATE elephants SET weight = 4600 WHERE name = 'Ranga';
+
+-- Clean up our bad example
+DROP TABLE bad_sightings;`,
+        interactive: {
+          type: 'sql-playground',
+          props: {
+            starterCode: "-- See the normalized version in action:\n-- Elephant data stored once\nSELECT * FROM elephants;\n\n-- Sightings reference by ID, not by copying names\nSELECT * FROM sightings;\n\n-- JOIN reconstructs the full picture\nSELECT e.name, e.weight, s.date, s.location\nFROM sightings s\nJOIN elephants e ON s.elephant_id = e.id;",
+            title: 'Normalized vs Denormalized',
           },
         },
       },
