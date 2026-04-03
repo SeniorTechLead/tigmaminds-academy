@@ -84,7 +84,7 @@ export default function SQLTableDiagram() {
             {/* Zebra stripe */}
             <rect x={padL} y={y} width={totalTableW} height={rowH}
               className={isEven ? 'fill-white dark:fill-gray-900' : 'fill-gray-50 dark:fill-gray-800/30'}
-              rx={ri === rows.length - 1 ? '0 0 8 8' : undefined} />
+              rx={ri === rows.length - 1 ? 8 : undefined} />
             {/* Cell values */}
             {row.map((val, ci) => (
               <text key={ci} x={colX(ci) + colW[ci] / 2} y={y + 17} textAnchor="middle"
