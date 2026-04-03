@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback } from 'react';
 import { Loader2, Zap } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
+import { usePyodide } from '../../contexts/PyodideContext';
 
 export default function MugaSilkLevel2() {
   const pyodideRef = useRef<any>(null);
@@ -388,7 +389,7 @@ print("Story → Science → Engineering → Impact.")`,
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
-            pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady}
+           
           />
         ))}
       </div>

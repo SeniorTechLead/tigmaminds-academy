@@ -1,55 +1,11 @@
 import { useState, useRef, useCallback } from 'react';
 import { Loader2, Cpu } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
+import { usePyodide } from '../../contexts/PyodideContext';
 
 export default function MajuliLevel3() {
-  const pyodideRef = useRef<any>(null);
-  const [pyReady, setPyReady] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [loadProgress, setLoadProgress] = useState('');
-
-  const loadPyodide = useCallback(async () => {
-    if (pyodideRef.current) return pyodideRef.current;
-    setLoading(true);
-    setLoadProgress('Loading Python runtime...');
-    try {
-      if (!(window as any).loadPyodide) {
-        const script = document.createElement('script');
-        script.src = 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js';
-        document.head.appendChild(script);
-        await new Promise<void>((resolve, reject) => { script.onload = () => resolve(); script.onerror = () => reject(new Error('Failed')); });
-      }
-      setLoadProgress('Starting Python...');
-      const pyodide = await (window as any).loadPyodide({ indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/' });
-      setLoadProgress('Installing numpy & matplotlib...');
-      await pyodide.loadPackage('micropip');
-      const micropip = pyodide.pyimport('micropip');
-      for (const pkg of ['numpy', 'matplotlib']) {
-        try { await micropip.install(pkg); } catch { await pyodide.loadPackage(pkg).catch(() => {}); }
-      }
-      await pyodide.runPythonAsync(`
-import sys, io
-class OutputCapture:
-    def __init__(self): self.output = []
-    def write(self, text): self.output.append(text)
-    def flush(self): pass
-    def get_output(self): return ''.join(self.output)
-    def clear(self): self.output = []
-_stdout_capture = OutputCapture()
-sys.stdout = _stdout_capture
-sys.stderr = _stdout_capture
-import matplotlib; matplotlib.use('AGG')
-import warnings; warnings.filterwarnings('ignore', category=UserWarning)
-import matplotlib.pyplot as plt; import base64
-def _get_plot_as_base64():
-    buf = io.BytesIO()
-    plt.savefig(buf, format='png', dpi=100, bbox_inches='tight', facecolor='#1f2937', edgecolor='none')
-    buf.seek(0); img_str = base64.b64encode(buf.read()).decode('utf-8'); plt.close('all'); return img_str
-`);
-      pyodideRef.current = pyodide; setPyReady(true); setLoading(false); setLoadProgress('');
-      return pyodide;
-    } catch (err: any) { setLoading(false); setLoadProgress('Error: ' + err.message); return null; }
-  }, []);
+  const { pyodideRef, load: loadPyodide, ready: pyReady, state: pyState, loadProgress } = usePyodide();
+  const loading = pyState === 'loading';
 
   const miniLessons = [
     {
@@ -919,7 +875,7 @@ print("  15-year lifespan with maintenance")`,
             storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
             checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
             code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
-            pyodideRef={pyodideRef} onLoadPyodide={loadPyodide} pyReady={pyReady} />
+            />
         ))}
       </div>
     </div>

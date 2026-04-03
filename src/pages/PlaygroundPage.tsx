@@ -11,6 +11,7 @@ import SignUpGate from '../components/SignUpGate';
 import SectionRenderer from '../components/reference/SectionRenderer';
 import { usePrefs } from '../contexts/PrefsContext';
 import { useAuth } from '../contexts/AuthContext';
+import { usePyodide } from '../contexts/PyodideContext';
 import { problems, type Problem, type ProblemTier, type Difficulty, type Topic } from '../data/playground-problems';
 import { lookupSection } from '../utils/referenceLookup';
 
@@ -111,64 +112,19 @@ function ProblemSolver({ problem, tier, onBack }: { problem: Problem; tier: Prob
   const { editorTheme, setEditorTheme } = usePrefs();
   const isDark = editorTheme === 'dark';
   const [code, setCode] = useState(tier.starterCode);
-  const [pyState, setPyState] = useState<'idle' | 'loading' | 'ready' | 'running'>('idle');
-  const [loadProgress, setLoadProgress] = useState('');
+  const [running, setRunning] = useState(false);
   const [results, setResults] = useState<TestResult[]>([]);
   const [output, setOutput] = useState('');
-  const pyodideRef = useRef<any>(null);
+  const { pyodideRef, load: loadPyodide, state: ctxState, loadProgress } = usePyodide();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  const loadPyodide = useCallback(async () => {
-    if (pyodideRef.current) return pyodideRef.current;
-    setPyState('loading');
-    setLoadProgress('Loading Python runtime...');
-    try {
-      if (!(window as any).loadPyodide) {
-        const script = document.createElement('script');
-        script.src = 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js';
-        document.head.appendChild(script);
-        await new Promise<void>((resolve, reject) => {
-          script.onload = () => resolve();
-          script.onerror = () => reject(new Error('Failed to load Pyodide'));
-        });
-      }
-      setLoadProgress('Initializing Python...');
-      const pyodide = await (window as any).loadPyodide({
-        indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/',
-      });
-      await pyodide.runPythonAsync(`
-import sys, io
-class _Out:
-    def __init__(self):
-        self.buf = []
-    def write(self, t):
-        self.buf.append(t)
-    def flush(self):
-        pass
-    def get(self):
-        return ''.join(self.buf)
-    def clear(self):
-        self.buf = []
-_out = _Out()
-sys.stdout = _out
-sys.stderr = _out
-`);
-      pyodideRef.current = pyodide;
-      setPyState('ready');
-      setLoadProgress('');
-      return pyodide;
-    } catch (err: any) {
-      setPyState('idle');
-      setOutput(`Error loading Python: ${err.message}`);
-      return null;
-    }
-  }, []);
+  const pyState = running ? 'running' as const : ctxState === 'idle' ? 'idle' as const : ctxState === 'loading' ? 'loading' as const : 'ready' as const;
 
   const runTests = useCallback(async () => {
     const pyodide = pyodideRef.current || (await loadPyodide());
     if (!pyodide) return;
 
-    setPyState('running');
+    setRunning(true);
     setResults([]);
     setOutput('');
 
@@ -214,10 +170,10 @@ sys.stderr = _out
       if (stdout) setOutput(stdout);
 
       setResults(testResults);
-      setPyState('ready');
+      setRunning(false);
     } catch (err: any) {
       setOutput(err.message || String(err));
-      setPyState('ready');
+      setRunning(false);
     }
   }, [code, tier, loadPyodide]);
 
