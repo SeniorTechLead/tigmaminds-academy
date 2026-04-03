@@ -4970,7 +4970,7 @@ plt.show()
   {
     slug: 'databases-and-sql',
     title: 'Databases & SQL',
-    category: 'data-science',
+    category: 'database',
     icon: '📊',
     tagline: 'Store, query, and organize data — the foundation of every app, website, and AI system.',
 
