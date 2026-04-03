@@ -2044,7 +2044,7 @@ document.addEventListener("DOMContentLoaded", loadAnimals);`,
           'The Arduino program structure: setup() runs once at power-on, loop() runs repeatedly. Essential functions: pinMode(pin, OUTPUT/INPUT/INPUT_PULLUP), digitalWrite(pin, HIGH/LOW), digitalRead(pin), analogRead(pin) → 0-1023, analogWrite(pin, 0-255), Serial.begin(9600), Serial.println(value), delay(ms), millis() (time since boot). A temperature logger: void loop() { int raw = analogRead(A0); float tempC = (raw * 5.0 / 1024.0 - 0.5) * 100; Serial.println(tempC); delay(1000); }.',
         advanced:
           'Non-blocking programming replaces delay() with millis() timing: if (millis() - lastRead > 1000) { lastRead = millis(); readSensor(); }. This handles multiple tasks simultaneously. **State machines** organize complex behavior: define states (IDLE, READING, ALERTING), transitions (IDLE→READING on timer), and actions for each state. This pattern scales from simple projects to industrial controllers. Watchdog timers (WDT) automatically reset the microcontroller if code hangs — essential for unattended deployments like weather stations and wildlife monitoring sensors.',
-        diagram: 'CircuitDiagram',
+        diagram: 'SetupLoopDiagram',
       },
       {
         title: 'Digital vs Analog — Two Ways to Talk',
@@ -2061,7 +2061,7 @@ document.addEventListener("DOMContentLoaded", loadAnimals);`,
           'Digital signals have two states: HIGH (5V on Arduino Uno) and LOW (0V). Like a light switch — on or off. Analog signals vary continuously between 0V and 5V. The Arduino reads analog with analogRead() returning 0-1023 (10-bit ADC: 2^10 = 1024 levels). Resolution: 5V/1024 ≈ 4.88 mV per step. analogWrite() uses PWM (Pulse Width Modulation) — rapidly switching between HIGH and LOW. duty cycle 50% = average 2.5V, 75% = 3.75V. LEDs dimmed this way flicker at ~490 Hz — too fast for your eye to see, so it looks like smooth dimming.',
         advanced:
           'ADC conversion time on the Arduino Uno is ~100 μs (10,000 samples/second max). For faster sampling, configure the ADC prescaler: ADCSRA = (ADCSRA & 0xF8) | 0x04 sets prescaler to 16, achieving ~77 kHz sampling at reduced accuracy. External ADCs (ADS1115: 16-bit, MCP3008: 10-bit SPI) provide better resolution and speed. DAC (Digital-to-Analog Converter) output is not available on the Uno — use PWM with an RC low-pass filter (R=10kΩ, C=100nF, cutoff ~159 Hz) to smooth the PWM into a true analog voltage for audio or control applications.',
-        diagram: 'OhmsLawDiagram',
+        diagram: 'DigitalAnalogDiagram',
       },
       {
         title: 'Sensors — How Arduino Reads the World',
@@ -4602,7 +4602,7 @@ print(f"Each extra hour ≈ +{m:.1f} points on the exam")`,
           'Phase φ shifts a sine wave in time: y = sin(2πft + φ). φ = 0 starts at zero crossing (rising). φ = π/2 starts at the peak (= cosine). φ = π starts at zero (falling). φ = 3π/2 starts at the trough. Two waves at the same frequency with different phases: Δφ = 0 → perfectly in sync (constructive interference, double amplitude). Δφ = π → perfectly opposite (destructive interference, cancel out). Phase difference is measured in degrees or radians: 90° = π/2 rad, 180° = π rad.',
         advanced:
           'In electronics, phase relationships are critical for AC circuit analysis. A capacitor\'s current leads its voltage by 90° (π/2); an inductor\'s current lags by 90°. This is represented using complex impedance: Z_C = 1/(jωC), Z_L = jωL, where j = √(-1). Phasor diagrams show amplitude as length and phase as angle. In stereophonic audio, phase differences between left and right channels create the perception of sound source location. Noise-canceling headphones detect ambient sound, invert its phase (add π), and play the result — the two waves destructively interfere, reducing ambient noise by 20-30 dB.',
-        diagram: 'InterferenceDiagram',
+        diagram: 'PhaseDiagram',
       },
       {
         title: 'Harmonics — The Overtone Series',
@@ -4907,7 +4907,7 @@ plt.show()
           'Branch workflow: git branch feature-xyz (create), git switch feature-xyz (switch), make changes, commit, then git switch main; git merge feature-xyz. Merge conflicts occur when both branches modify the same lines — manually edit, then git add and commit. **Git flow**: main (production), develop (integration), feature/*, release/*, hotfix/*. Simpler: **trunk-based development** — short-lived branches merged frequently. GitHub/GitLab pull requests enable code review before merging.',
         advanced:
           'Advanced Git: **interactive rebase** (git rebase -i HEAD~5) reorders, squashes, edits, or drops commits. **Cherry-pick** (git cherry-pick abc123) applies a specific commit. **Bisect** (git bisect start/bad/good) binary-searches through history to find bug-introducing commits in O(log n) steps. **Submodules** manage repository dependencies. **Git hooks** run scripts before/after events (pre-commit: lint code, pre-push: run tests). **Git LFS** handles large binaries by storing pointers in the repo and actual files on a separate server.',
-        diagram: 'DecisionTreeDiagram',
+        diagram: 'GitBranchDiagram',
       },
       {
         title: 'Remote Repositories: push, pull, clone, and GitHub',
