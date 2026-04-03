@@ -19,6 +19,8 @@ interface AuthContextType {
   signInWithGoogle: (returnTo?: string) => Promise<void>;
   signOut: () => Promise<void>;
   updateProfile: (updates: Partial<UserProfile>) => Promise<void>;
+  updateEmail: (newEmail: string) => Promise<{ error: string | null }>;
+  updatePassword: (newPassword: string) => Promise<{ error: string | null }>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -128,8 +130,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (data) setProfile(data);
   };
 
+  const updateEmail = async (newEmail: string): Promise<{ error: string | null }> => {
+    const { error } = await supabase.auth.updateUser({ email: newEmail });
+    if (error) return { error: error.message };
+    return { error: null };
+  };
+
+  const updatePassword = async (newPassword: string): Promise<{ error: string | null }> => {
+    const { error } = await supabase.auth.updateUser({ password: newPassword });
+    if (error) return { error: error.message };
+    return { error: null };
+  };
+
   return (
-    <AuthContext.Provider value={{ user, profile, session, loading, signUp, signIn, signInWithGoogle, signOut, updateProfile }}>
+    <AuthContext.Provider value={{ user, profile, session, loading, signUp, signIn, signInWithGoogle, signOut, updateProfile, updateEmail, updatePassword }}>
       {children}
     </AuthContext.Provider>
   );
