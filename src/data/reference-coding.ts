@@ -5057,6 +5057,7 @@ plt.show()
             ],
           },
         },
+        diagram: 'SQLFilterSortDiagram',
       },
       {
         title: 'Joins: Combining Tables',
@@ -5112,6 +5113,7 @@ plt.show()
             ],
           },
         },
+        diagram: 'SQLMutationDiagram',
       },
     ],
 
@@ -5191,8 +5193,9 @@ FROM elephants;`,
           '**Aggregate functions** collapse multiple rows into a single value: `COUNT()`, `SUM()`, `AVG()`, `MIN()`, `MAX()`.\n\n' +
           '**GROUP BY** splits rows into groups and applies aggregates to each group separately. `SELECT park, COUNT(*) FROM elephants GROUP BY park` gives the count per park.\n\n' +
           '**HAVING** filters groups (like WHERE, but runs after GROUP BY). `HAVING COUNT(*) > 2` keeps only groups with more than 2 rows.\n\n' +
-          '**Execution order matters:** FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT. This means you **can\'t** use a SELECT alias in WHERE, because WHERE runs before SELECT:\n\n' +
-          '```\n-- ❌ FAILS: avg_w doesn\'t exist yet when WHERE runs\nSELECT park, AVG(weight) AS avg_w FROM elephants WHERE avg_w > 4000;\n\n-- ✅ WORKS: use HAVING (runs after GROUP BY and SELECT)\nSELECT park, AVG(weight) AS avg_w FROM elephants GROUP BY park HAVING avg_w > 4000;\n\n-- ✅ ALSO WORKS: repeat the expression in WHERE\nSELECT park, AVG(weight) AS avg_w FROM elephants GROUP BY park HAVING AVG(weight) > 4000;\n```\n\n' +
+          '**Execution order matters:** FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT.\n\n' +
+          'An **alias** is a nickname you give a column using `AS`: `SELECT AVG(weight) AS avg_w` means "calculate the average weight and call the result column avg_w." The problem: WHERE runs *before* SELECT, so the alias doesn\'t exist yet when WHERE is evaluated:\n\n' +
+          '```\n-- ❌ FAILS: avg_w doesn\'t exist yet when WHERE runs\nSELECT park, AVG(weight) AS avg_w FROM elephants WHERE avg_w > 4000;\n\n-- ✅ WORKS: use HAVING (runs after GROUP BY)\nSELECT park, AVG(weight) AS avg_w FROM elephants GROUP BY park HAVING AVG(weight) > 4000;\n```\n\n' +
           '**COUNT(*) vs COUNT(column):** `COUNT(*)` counts all rows including NULLs. `COUNT(column)` skips NULLs. Example: if 3 elephants have a `last_seen` date and 2 don\'t, `COUNT(*)` = 5 but `COUNT(last_seen)` = 3.',
         code: `-- Count all elephants
 SELECT COUNT(*) AS total FROM elephants;
@@ -5548,6 +5551,7 @@ FROM elephants;
 -- Tara     | Kaziranga | 3
 -- Mohini   | Manas     | 2
 -- Bala     | Manas     | 2`,
+        diagram: 'SQLSubqueryDiagram',
         interactive: {
           type: 'sql-playground',
           props: {
@@ -5619,6 +5623,7 @@ UPDATE elephants SET weight = 4600 WHERE name = 'Ranga';
 
 -- Clean up our bad example
 DROP TABLE bad_sightings;`,
+        diagram: 'SQLNormalizationDiagram',
         interactive: {
           type: 'sql-playground',
           props: {
