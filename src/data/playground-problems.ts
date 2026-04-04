@@ -3928,7 +3928,7 @@ export const problems: Problem[] = [
   },
   {
     id: 130, slug: 'balanced-brackets', title: 'Balanced Brackets',
-    story: 'The Boy Who Built a Library', storySlug: 'boy-who-built-library',
+    story: 'The Girl Who Spoke to Elephants', storySlug: 'girl-who-spoke-to-elephants',
     description: 'Write `is_balanced(s)` that checks if a string of brackets `()[]{}` is properly balanced. Every opening bracket must have a matching closing bracket in the correct order.',
     difficulty: 'hard', topic: 'strings',
     tiers: [
@@ -4343,7 +4343,7 @@ export const problems: Problem[] = [
   // ═══════════════════════════════════════════════════════════════
   {
     id: 143, slug: 'stack-class', title: 'Build a Stack',
-    story: 'The Boy Who Built a Library', storySlug: 'boy-who-built-library',
+    story: 'The Girl Who Spoke to Elephants', storySlug: 'girl-who-spoke-to-elephants',
     description: 'Write a `Stack` class with push(item), pop(), peek(), is_empty(), and size() methods. Pop and peek on empty stack should return None.',
     difficulty: 'easy', topic: 'classes',
     tiers: [
@@ -4594,7 +4594,7 @@ export const problems: Problem[] = [
   // ═══════════════════════════════════════════════════════════════
   {
     id: 153, slug: 'safe-json-parse', title: 'Safe JSON Parser',
-    story: 'The Boy Who Built a Library', storySlug: 'boy-who-built-library',
+    story: 'The Girl Who Spoke to Elephants', storySlug: 'girl-who-spoke-to-elephants',
     description: 'Write `safe_parse(json_string, default=None)` that parses a JSON string. If parsing fails, return the default value instead of crashing.',
     difficulty: 'easy', topic: 'error-handling',
     tiers: [
@@ -5041,7 +5041,7 @@ export const problems: Problem[] = [
   // ── EASY: sql-select ──
   {
     id: 169, slug: 'sql-all-elephants', title: 'List All Elephants',
-    story: 'The Boy Who Built a Library', storySlug: 'boy-who-built-library',
+    story: 'The Girl Who Spoke to Elephants', storySlug: 'girl-who-spoke-to-elephants',
     description: 'Write a query to list all elephants showing their name and weight.',
     difficulty: 'easy', topic: 'sql-select', language: 'sql',
     tiers: [
@@ -5064,7 +5064,7 @@ export const problems: Problem[] = [
   },
   {
     id: 170, slug: 'sql-filter-park', title: 'Filter by Park',
-    story: 'The Boy Who Built a Library', storySlug: 'boy-who-built-library',
+    story: 'The Girl Who Spoke to Elephants', storySlug: 'girl-who-spoke-to-elephants',
     description: 'Write a query to find all elephants in Kaziranga.',
     difficulty: 'easy', topic: 'sql-select', language: 'sql',
     tiers: [
@@ -5087,7 +5087,7 @@ export const problems: Problem[] = [
   },
   {
     id: 171, slug: 'sql-null-check', title: 'Find Missing Data',
-    story: 'The Boy Who Built a Library', storySlug: 'boy-who-built-library',
+    story: 'The Girl Who Spoke to Elephants', storySlug: 'girl-who-spoke-to-elephants',
     description: 'Write a query to find elephants that have never been sighted (last_seen is NULL).',
     difficulty: 'easy', topic: 'sql-select', language: 'sql',
     tiers: [
@@ -5112,7 +5112,7 @@ export const problems: Problem[] = [
   // ── EASY: sql-aggregate ──
   {
     id: 172, slug: 'sql-count-per-park', title: 'Count per Park',
-    story: 'The Boy Who Built a Library', storySlug: 'boy-who-built-library',
+    story: 'The Girl Who Spoke to Elephants', storySlug: 'girl-who-spoke-to-elephants',
     description: 'Write a query to count how many elephants are in each park.',
     difficulty: 'easy', topic: 'sql-aggregate', language: 'sql',
     tiers: [
@@ -5135,7 +5135,7 @@ export const problems: Problem[] = [
   },
   {
     id: 173, slug: 'sql-heaviest-lightest', title: 'Heaviest and Lightest',
-    story: 'The Boy Who Built a Library', storySlug: 'boy-who-built-library',
+    story: 'The Girl Who Spoke to Elephants', storySlug: 'girl-who-spoke-to-elephants',
     description: 'Write a query to find the heaviest and lightest elephant in each park.',
     difficulty: 'medium', topic: 'sql-aggregate', language: 'sql',
     tiers: [
@@ -5160,7 +5160,7 @@ export const problems: Problem[] = [
   // ── EASY/MEDIUM: sql-joins ──
   {
     id: 174, slug: 'sql-sightings-join', title: 'Elephant Sightings',
-    story: 'The Boy Who Built a Library', storySlug: 'boy-who-built-library',
+    story: 'The Girl Who Spoke to Elephants', storySlug: 'girl-who-spoke-to-elephants',
     description: 'Write a query to show each elephant\'s name alongside their sighting dates and locations.',
     difficulty: 'easy', topic: 'sql-joins', language: 'sql',
     tiers: [
@@ -5183,7 +5183,7 @@ export const problems: Problem[] = [
   },
   {
     id: 175, slug: 'sql-three-table-join', title: 'Three-Table Join',
-    story: 'The Boy Who Built a Library', storySlug: 'boy-who-built-library',
+    story: 'The Girl Who Spoke to Elephants', storySlug: 'girl-who-spoke-to-elephants',
     description: 'Write a query that joins elephants, sightings, and parks to show which elephant was seen at which park on what date.',
     difficulty: 'medium', topic: 'sql-joins', language: 'sql',
     tiers: [
@@ -5208,7 +5208,7 @@ export const problems: Problem[] = [
   // ── MEDIUM: sql-modify ──
   {
     id: 176, slug: 'sql-insert-update', title: 'Add and Update',
-    story: 'The Boy Who Built a Library', storySlug: 'boy-who-built-library',
+    story: 'The Girl Who Spoke to Elephants', storySlug: 'girl-who-spoke-to-elephants',
     description: 'Write SQL to add a new elephant and then update its weight.',
     difficulty: 'medium', topic: 'sql-modify', language: 'sql',
     tiers: [
@@ -5233,7 +5233,7 @@ export const problems: Problem[] = [
   // ── HARD: sql-select ──
   {
     id: 177, slug: 'sql-subquery-heavier', title: 'Heavier Than Average',
-    story: 'The Boy Who Built a Library', storySlug: 'boy-who-built-library',
+    story: 'The Girl Who Spoke to Elephants', storySlug: 'girl-who-spoke-to-elephants',
     description: 'Write a query to find elephants heavier than the average weight using a subquery.',
     difficulty: 'hard', topic: 'sql-select', language: 'sql',
     tiers: [
@@ -5258,7 +5258,7 @@ export const problems: Problem[] = [
   // ── HARD: sql-joins ──
   {
     id: 178, slug: 'sql-most-sighted', title: 'Most Sighted Elephant',
-    story: 'The Boy Who Built a Library', storySlug: 'boy-who-built-library',
+    story: 'The Girl Who Spoke to Elephants', storySlug: 'girl-who-spoke-to-elephants',
     description: 'Write a query to find which elephant has been sighted the most times.',
     difficulty: 'hard', topic: 'sql-joins', language: 'sql',
     tiers: [
@@ -5276,6 +5276,179 @@ export const problems: Problem[] = [
         starterCode: '-- Most recent sighting per elephant\n',
         testCases: [
           { input: '', expected: '[["Ranga","2026-02-20"],["Mohini","2026-01-22"],["Gaja","2026-03-15"],["Bala","2026-02-10"],["Tara",null]]', label: 'Latest date per elephant (NULL for Tara)' },
+        ] },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════
+  // SQL: THE BOY WHO BUILT A LIBRARY (books, members, loans)
+  // ═══════════════════════════════════════════════════════════════
+  {
+    id: 179, slug: 'sql-overdue-books', title: 'Overdue Books',
+    story: 'The Boy Who Built a Library', storySlug: 'boy-who-built-library',
+    description: 'Write a query to find all books currently on loan (return_date is NULL), showing the book title and who borrowed it.',
+    difficulty: 'easy', topic: 'sql-joins', language: 'sql',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'JOIN loans and books where return_date IS NULL.', hint: 'JOIN books ON book_id, JOIN members ON member_id, WHERE return_date IS NULL.', hintRef: { slug: 'databases-and-sql', section: 'sql-joins', label: 'Joins in the Library' },
+        starterCode: '-- Find books currently on loan (not returned)\n-- Show book title and member name\n',
+        testCases: [
+          { input: '', expected: '[["Wings of Fire","Anamika"],["The God of Small Things","Priya"],["Gitanjali","Meera"],["Ignited Minds","Priya"]]', label: '4 books not yet returned' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Count how many unreturned books each member has.', hint: 'GROUP BY member name, COUNT(*), WHERE return_date IS NULL.', hintRef: { slug: 'databases-and-sql', section: 'sql-aggregate', label: 'Aggregates in the Library' },
+        starterCode: '-- Unreturned books per member\n',
+        testCases: [
+          { input: '', expected: '[["Priya",2],["Anamika",1],["Meera",1]]', label: 'Priya has 2, others have 1' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Find members who have more than one book currently on loan.', hint: 'GROUP BY member_id HAVING COUNT(*) > 1.', hintRef: { slug: 'databases-and-sql', section: 'sql-aggregate', label: 'Aggregates in the Library' },
+        starterCode: '-- Members with more than 1 unreturned book\n',
+        testCases: [
+          { input: '', expected: '[["Priya",2]]', label: 'Only Priya has 2 books out' },
+        ] },
+    ],
+  },
+  {
+    id: 180, slug: 'sql-books-by-author', title: 'Books by Author',
+    story: 'The Boy Who Built a Library', storySlug: 'boy-who-built-library',
+    description: 'Write a query to count how many books each author has in the library and find unborrowed books.',
+    difficulty: 'easy', topic: 'sql-aggregate', language: 'sql',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'GROUP BY author with COUNT.', hint: 'SELECT author, COUNT(*) FROM books GROUP BY author.', hintRef: { slug: 'databases-and-sql', section: 'sql-aggregate', label: 'Aggregates in the Library' },
+        starterCode: '-- Count books per author\n',
+        testCases: [
+          { input: '', expected: '[["A.P.J. Abdul Kalam",2],["Arundhati Roy",1],["Jawaharlal Nehru",1],["M.K. Gandhi",1],["Rabindranath Tagore",1],["Rudyard Kipling",1],["Stephen Hawking",1]]', label: 'Kalam has 2, rest have 1' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Find the most borrowed book.', hint: 'JOIN books with loans, GROUP BY title, ORDER BY COUNT DESC LIMIT 1.', hintRef: { slug: 'databases-and-sql', section: 'sql-joins', label: 'Joins in the Library' },
+        starterCode: '-- Most borrowed book\n',
+        testCases: [
+          { input: '', expected: '[["The Jungle Book",2]]', label: 'Jungle Book borrowed twice' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Find books that have NEVER been borrowed.', hint: 'LEFT JOIN loans, WHERE loans.id IS NULL.', hintRef: { slug: 'databases-and-sql', section: 'sql-joins', label: 'Joins in the Library' },
+        starterCode: '-- Books never borrowed\n',
+        testCases: [
+          { input: '', expected: '[["Discovery of India"]]', label: 'Discovery of India has no loans' },
+        ] },
+    ],
+  },
+  {
+    id: 181, slug: 'sql-reader-analytics', title: 'Reader Analytics',
+    story: 'The Boy Who Built a Library', storySlug: 'boy-who-built-library',
+    description: 'Analyze the library\'s reading patterns — who reads what genre most.',
+    difficulty: 'medium', topic: 'sql-aggregate', language: 'sql',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Find the average age of members.', hint: 'SELECT ROUND(AVG(age), 1) FROM members.', hintRef: { slug: 'databases-and-sql', section: 'sql-aggregate', label: 'Aggregates in the Library' },
+        starterCode: '-- Average age of library members\n',
+        testCases: [
+          { input: '', expected: '[[13.0]]', label: 'Average age is 13' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Find how many books each member has borrowed total.', hint: 'LEFT JOIN loans on member_id, GROUP BY name.', hintRef: { slug: 'databases-and-sql', section: 'sql-joins', label: 'Joins in the Library' },
+        starterCode: '-- Total loans per member\n',
+        testCases: [
+          { input: '', expected: '[["Anamika",2],["Priya",2],["Rishi",2],["Dev",1],["Meera",1]]', label: 'Loan count per member' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Find which genre is most popular (most borrowed).', hint: 'JOIN books with loans, GROUP BY genre, ORDER BY COUNT DESC.', hintRef: { slug: 'databases-and-sql', section: 'sql-aggregate', label: 'Aggregates in the Library' },
+        starterCode: '-- Most popular genre by loan count\n',
+        testCases: [
+          { input: '', expected: '[["fiction",3],["autobiography",2],["science",2],["poetry",1]]', label: 'Fiction leads with 3 loans' },
+        ] },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════
+  // SQL: THE BOY WHO COUNTED BUTTERFLIES
+  // ═══════════════════════════════════════════════════════════════
+  {
+    id: 182, slug: 'sql-endangered-butterflies', title: 'Endangered Species',
+    story: 'The Boy Who Counted Butterflies', storySlug: 'boy-who-counted-butterflies',
+    description: 'Find all endangered butterfly species and how many have been sighted.',
+    difficulty: 'easy', topic: 'sql-joins', language: 'sql',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Filter endangered butterflies.', hint: 'WHERE endangered = 1.', hintRef: { slug: 'databases-and-sql', section: 'sql-select', label: 'SELECT in the Library' },
+        starterCode: '-- List endangered butterfly species with wingspan\n',
+        testCases: [
+          { input: '', expected: '[["Golden Birdwing",19.5],["Kaiser-i-Hind",12.0],["Krishna Peacock",9.0]]', label: '3 endangered species' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Count total individuals sighted per endangered species.', hint: 'JOIN butterfly_sightings, GROUP BY species, SUM(count).', hintRef: { slug: 'databases-and-sql', section: 'sql-aggregate', label: 'Aggregates in the Library' },
+        starterCode: '-- Total sighted per endangered species\n',
+        testCases: [
+          { input: '', expected: '[["Golden Birdwing",3],["Kaiser-i-Hind",1],["Krishna Peacock",3]]', label: 'Sighting totals for endangered' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Find which observer spotted the most endangered species.', hint: 'JOIN, WHERE endangered=1, GROUP BY observer, COUNT(DISTINCT butterfly_id).', hintRef: { slug: 'databases-and-sql', section: 'sql-aggregate', label: 'Aggregates in the Library' },
+        starterCode: '-- Which observer saw the most endangered species?\n',
+        testCases: [
+          { input: '', expected: '[["Arjun",3]]', label: 'Arjun saw all 3 endangered species' },
+        ] },
+    ],
+  },
+  {
+    id: 183, slug: 'sql-butterfly-hotspot', title: 'Butterfly Hotspots',
+    story: 'The Boy Who Counted Butterflies', storySlug: 'boy-who-counted-butterflies',
+    description: 'Find which locations have the most butterfly sightings and the largest single sighting.',
+    difficulty: 'medium', topic: 'sql-aggregate', language: 'sql',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Total butterflies per location.', hint: 'GROUP BY location with SUM(count).', hintRef: { slug: 'databases-and-sql', section: 'sql-aggregate', label: 'Aggregates in the Library' },
+        starterCode: '-- Total butterflies counted per location\n',
+        testCases: [
+          { input: '', expected: '[["Kaziranga Edge",26],["Manas Buffer",20],["Namdapha",18],["Hollongapar",6],["Eaglenest",4]]', label: 'Locations ranked by total count' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Count different species per location.', hint: 'COUNT(DISTINCT butterfly_id) per location.', hintRef: { slug: 'databases-and-sql', section: 'sql-aggregate', label: 'Aggregates in the Library' },
+        starterCode: '-- Species diversity per location\n',
+        testCases: [
+          { input: '', expected: '[["Eaglenest",2],["Kaziranga Edge",2],["Manas Buffer",2],["Namdapha",2],["Hollongapar",1]]', label: 'Distinct species per location' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Find the single largest sighting with species and observer.', hint: 'JOIN butterflies, ORDER BY count DESC LIMIT 1.', hintRef: { slug: 'databases-and-sql', section: 'sql-joins', label: 'Joins in the Library' },
+        starterCode: '-- Largest single sighting\n',
+        testCases: [
+          { input: '', expected: '[["Common Jezebel","Priya","Kaziranga Edge",22]]', label: '22 Common Jezebels by Priya' },
+        ] },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════
+  // SQL: THE FISHERMAN'S DAUGHTER AND THE STORM (weather data)
+  // ═══════════════════════════════════════════════════════════════
+  {
+    id: 184, slug: 'sql-storm-day', title: 'The Storm Day',
+    story: "The Fisherman's Daughter and the Storm", storySlug: 'fishermans-daughter-storm',
+    description: 'Find the day with the highest average wind speed across all stations — the storm day.',
+    difficulty: 'medium', topic: 'sql-aggregate', language: 'sql',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Average wind speed per day.', hint: 'GROUP BY date, AVG(wind_kph), ORDER BY avg DESC.', hintRef: { slug: 'databases-and-sql', section: 'sql-aggregate', label: 'Aggregates in the Library' },
+        starterCode: '-- Average wind speed per day across all stations\n',
+        testCases: [
+          { input: '', expected: '[["2026-06-03",38.75],["2026-06-02",18.875],["2026-06-01",9.75]]', label: 'June 3 was the storm day' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: "Show each station's readings on the storm day.", hint: "WHERE date = '2026-06-03' JOIN weather_stations.", hintRef: { slug: 'databases-and-sql', section: 'sql-joins', label: 'Joins in the Library' },
+        starterCode: "-- Station readings for the storm day\n",
+        testCases: [
+          { input: '', expected: '[["Jorhat AWS",28.5,35.0,120.8],["Majuli Island",27.0,48.0,185.3],["Kaziranga Gate",29.0,30.0,95.6],["Tezpur North",28.0,42.0,155.0]]', label: 'All 4 stations on June 3' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Find which station had the most total rainfall.', hint: 'GROUP BY station_id, SUM(rainfall_mm).', hintRef: { slug: 'databases-and-sql', section: 'sql-aggregate', label: 'Aggregates in the Library' },
+        starterCode: '-- Total rainfall per station\n',
+        testCases: [
+          { input: '', expected: '[["Majuli Island",223.8],["Tezpur North",185.0],["Jorhat AWS",166.0],["Kaziranga Gate",117.6]]', label: 'Majuli got the most rain' },
+        ] },
+    ],
+  },
+  {
+    id: 185, slug: 'sql-weather-warning', title: 'Storm Warning System',
+    story: "The Fisherman's Daughter and the Storm", storySlug: 'fishermans-daughter-storm',
+    description: 'Identify dangerous weather conditions and classify readings by severity.',
+    difficulty: 'hard', topic: 'sql-select', language: 'sql',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Find readings with wind > 30 AND rainfall > 100.', hint: 'WHERE wind_kph > 30 AND rainfall_mm > 100.', hintRef: { slug: 'databases-and-sql', section: 'sql-select', label: 'SELECT in the Library' },
+        starterCode: '-- Dangerous readings: high wind + heavy rain\n-- Show station name, date, wind, rainfall\n',
+        testCases: [
+          { input: '', expected: '[["Jorhat AWS","2026-06-03",35.0,120.8],["Majuli Island","2026-06-03",48.0,185.3],["Tezpur North","2026-06-03",42.0,155.0]]', label: '3 dangerous readings on June 3' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: "Classify each reading as calm/windy/dangerous using CASE.", hint: "CASE WHEN wind > 30 AND rainfall > 50 THEN 'dangerous' WHEN wind > 15 THEN 'windy' ELSE 'calm' END.", hintRef: { slug: 'databases-and-sql', section: 'sql-select', label: 'SELECT in the Library' },
+        starterCode: "-- Classify each reading's danger level\n",
+        testCases: [
+          { input: '', expected: '[["Jorhat AWS","2026-06-01","calm"],["Jorhat AWS","2026-06-02","windy"],["Jorhat AWS","2026-06-03","dangerous"],["Majuli Island","2026-06-01","calm"],["Majuli Island","2026-06-02","windy"],["Majuli Island","2026-06-03","dangerous"],["Kaziranga Gate","2026-06-01","calm"],["Kaziranga Gate","2026-06-02","calm"],["Kaziranga Gate","2026-06-03","dangerous"],["Tezpur North","2026-06-01","calm"],["Tezpur North","2026-06-02","windy"],["Tezpur North","2026-06-03","dangerous"]]', label: 'All 12 readings classified' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Find the temperature drop from June 1 to June 3 per station.', hint: 'Self-join or subquery comparing temp on day 1 vs day 3.', hintRef: { slug: 'databases-and-sql', section: 'sql-subqueries', label: 'Subqueries in the Library' },
+        starterCode: '-- Temperature drop from June 1 to June 3\n',
+        testCases: [
+          { input: '', expected: '[["Majuli Island",6.0],["Tezpur North",5.5],["Kaziranga Gate",5.0],["Jorhat AWS",4.0]]', label: 'Majuli dropped the most (6°C)' },
         ] },
     ],
   },
