@@ -1986,6 +1986,386 @@ document.addEventListener("DOMContentLoaded", loadAnimals);`,
 </body>
 </html>`,
       },
+      {
+        id: 'html-dom',
+        title: 'The DOM — Selecting & Changing Elements',
+        beginnerContent:
+          'The **DOM (Document Object Model)** is the browser\'s live representation of your HTML page as a tree of objects. JavaScript can read and change any part of it.\n\n' +
+          '**Selecting elements:**\n' +
+          '- `document.getElementById("myId")` — find one element by its id\n' +
+          '- `document.querySelector(".myClass")` — find the first element matching a CSS selector\n' +
+          '- `document.querySelectorAll("p")` — find ALL matching elements (returns a NodeList)\n\n' +
+          '**Changing elements:**\n' +
+          '- `el.textContent = "new text"` — change the text inside\n' +
+          '- `el.innerHTML = "<strong>bold</strong>"` — change the HTML inside\n' +
+          '- `el.style.color = "red"` — change a CSS property\n' +
+          '- `el.classList.add("active")` — add a CSS class\n' +
+          '- `el.setAttribute("href", "/new-link")` — change an attribute\n\n' +
+          '**Creating elements:**\n' +
+          '- `document.createElement("div")` — create a new element\n' +
+          '- `parent.appendChild(newEl)` — add it to the page\n' +
+          '- `el.remove()` — remove an element\n\n' +
+          '**Check yourself:** What\'s the difference between `textContent` and `innerHTML`? (Answer: textContent sets plain text — HTML tags are displayed as text. innerHTML parses HTML tags.)',
+        code: `<!-- DOM Manipulation -->
+<div id="app">
+  <h2 id="title">Original Title</h2>
+  <p class="message">Hello world</p>
+  <ul id="list"></ul>
+  <button id="btn">Click Me</button>
+</div>
+
+<script>
+  // Select elements
+  const title = document.getElementById("title");
+  const message = document.querySelector(".message");
+  const list = document.getElementById("list");
+
+  // Change text and style
+  title.textContent = "Updated Title";
+  title.style.color = "#d97706";
+  message.innerHTML = "This is <strong>bold</strong> and <em>italic</em>";
+
+  // Create and add elements
+  const items = ["Ranga", "Mohini", "Gaja"];
+  items.forEach(name => {
+    const li = document.createElement("li");
+    li.textContent = name;
+    li.style.padding = "4px 0";
+    list.appendChild(li);
+  });
+
+  // Add/remove classes
+  title.classList.add("highlight");
+</script>
+
+<style>
+  #app { font-family: sans-serif; padding: 16px; }
+  .highlight { background: #fef3c7; padding: 4px 8px; border-radius: 4px; }
+  li { list-style: none; }
+</style>`,
+        interactive: { type: 'html-playground', props: { starterCode: '<h2 id="title">Change Me</h2>\n<p id="msg">Original message</p>\n<button onclick="document.getElementById(\'title\').textContent = \'Changed!\'; document.getElementById(\'msg\').style.color = \'blue\';">Click</button>', title: 'Try DOM Manipulation' } },
+      },
+      {
+        id: 'html-events',
+        title: 'Events — Responding to User Actions',
+        beginnerContent:
+          'An **event** is something the user does: click a button, type in an input, hover over an image, submit a form. JavaScript lets you run code when events happen.\n\n' +
+          '**Adding event listeners:**\n' +
+          '```\nconst btn = document.getElementById("myBtn");\nbtn.addEventListener("click", function() {\n  alert("Button clicked!");\n});\n```\n\n' +
+          '**Common events:**\n' +
+          '- `click` — user clicks an element\n' +
+          '- `input` — user types in a text field\n' +
+          '- `submit` — user submits a form\n' +
+          '- `mouseover` / `mouseout` — hover in / out\n' +
+          '- `keydown` — user presses a key\n' +
+          '- `load` — page finished loading\n\n' +
+          '**The event object** — every listener receives an event object with details:\n' +
+          '```\ninput.addEventListener("input", function(event) {\n  console.log(event.target.value);  // what the user typed\n});\n```\n\n' +
+          '**`event.preventDefault()`** — stops the default behavior (e.g., stops a form from reloading the page).',
+        code: `<!-- Events Demo -->
+<div id="app" style="font-family: sans-serif; padding: 16px;">
+  <h3>Event Examples</h3>
+
+  <!-- Click event -->
+  <button id="clickBtn" style="padding: 8px 16px; background: #3b82f6; color: white; border: none; border-radius: 6px; cursor: pointer;">
+    Click me
+  </button>
+  <p id="clickResult" style="color: #6b7280;"></p>
+
+  <!-- Input event (live typing) -->
+  <input id="nameInput" type="text" placeholder="Type your name..."
+    style="margin-top: 12px; padding: 8px; border: 1px solid #d1d5db; border-radius: 6px; width: 200px;" />
+  <p id="greeting" style="color: #059669; font-weight: bold;"></p>
+
+  <!-- Hover event -->
+  <div id="hoverBox" style="margin-top: 12px; width: 150px; height: 60px; background: #e5e7eb; border-radius: 8px; display: flex; align-items: center; justify-content: center; transition: all 0.2s;">
+    Hover me
+  </div>
+</div>
+
+<script>
+  let clicks = 0;
+
+  document.getElementById("clickBtn").addEventListener("click", () => {
+    clicks++;
+    document.getElementById("clickResult").textContent = "Clicked " + clicks + " time(s)";
+  });
+
+  document.getElementById("nameInput").addEventListener("input", (e) => {
+    const name = e.target.value;
+    document.getElementById("greeting").textContent = name ? "Hello, " + name + "!" : "";
+  });
+
+  const box = document.getElementById("hoverBox");
+  box.addEventListener("mouseover", () => {
+    box.style.background = "#3b82f6";
+    box.style.color = "white";
+    box.textContent = "Hovering!";
+  });
+  box.addEventListener("mouseout", () => {
+    box.style.background = "#e5e7eb";
+    box.style.color = "black";
+    box.textContent = "Hover me";
+  });
+</script>`,
+        interactive: { type: 'html-playground', props: { starterCode: '<button id="btn" style="padding:8px 16px; background:#3b82f6; color:white; border:none; border-radius:6px; cursor:pointer;">Count: 0</button>\n<script>\nlet n = 0;\ndocument.getElementById("btn").addEventListener("click", () => {\n  n++;\n  document.getElementById("btn").textContent = "Count: " + n;\n});\n</script>', title: 'Try Events' } },
+      },
+      {
+        id: 'html-forms',
+        title: 'Forms — Collecting User Input',
+        beginnerContent:
+          'Forms collect data from users: text fields, dropdowns, checkboxes, radio buttons.\n\n' +
+          '**Basic form:**\n' +
+          '```\n<form id="myForm">\n  <input type="text" name="name" placeholder="Your name" />\n  <button type="submit">Submit</button>\n</form>\n```\n\n' +
+          '**Input types:** `text`, `number`, `email`, `password`, `date`, `checkbox`, `radio`, `select`\n\n' +
+          '**Reading form values:**\n' +
+          '```\nconst form = document.getElementById("myForm");\nform.addEventListener("submit", (e) => {\n  e.preventDefault();  // Stop page reload\n  const name = form.elements.name.value;\n  console.log("Submitted:", name);\n});\n```\n\n' +
+          '**`e.preventDefault()`** is critical — without it, the form submission reloads the page and you lose all your JavaScript state.\n\n' +
+          '**Validation:** HTML has built-in validation: `required`, `minlength="3"`, `type="email"` (enforces email format), `min="0"` for numbers.',
+        code: `<!-- Form Demo -->
+<div style="font-family: sans-serif; padding: 16px; max-width: 400px;">
+  <h3>Elephant Registration</h3>
+  <form id="regForm" style="display: flex; flex-direction: column; gap: 8px;">
+    <input type="text" name="name" placeholder="Elephant name" required
+      style="padding: 8px; border: 1px solid #d1d5db; border-radius: 6px;" />
+    <input type="number" name="weight" placeholder="Weight (kg)" min="1000" required
+      style="padding: 8px; border: 1px solid #d1d5db; border-radius: 6px;" />
+    <select name="park" style="padding: 8px; border: 1px solid #d1d5db; border-radius: 6px;">
+      <option value="">Select park...</option>
+      <option value="Kaziranga">Kaziranga</option>
+      <option value="Manas">Manas</option>
+      <option value="Nameri">Nameri</option>
+    </select>
+    <label style="display: flex; align-items: center; gap: 6px;">
+      <input type="checkbox" name="endangered" /> Endangered species
+    </label>
+    <button type="submit"
+      style="padding: 10px; background: #059669; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">
+      Register
+    </button>
+  </form>
+  <div id="output" style="margin-top: 12px; padding: 12px; background: #f0fdf4; border-radius: 8px; display: none;"></div>
+</div>
+
+<script>
+  document.getElementById("regForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const data = {
+      name: form.elements.name.value,
+      weight: Number(form.elements.weight.value),
+      park: form.elements.park.value,
+      endangered: form.elements.endangered.checked,
+    };
+    const output = document.getElementById("output");
+    output.style.display = "block";
+    output.innerHTML = "<strong>Registered!</strong><br>" +
+      data.name + " (" + data.weight + "kg) at " + data.park +
+      (data.endangered ? " — <em>endangered</em>" : "");
+  });
+</script>`,
+        interactive: { type: 'html-playground', props: { starterCode: '<form id="f" style="font-family:sans-serif; padding:16px;">\n  <input type="text" id="name" placeholder="Your name" style="padding:6px; border:1px solid #ccc; border-radius:4px;" />\n  <button type="submit" style="padding:6px 12px; background:#059669; color:white; border:none; border-radius:4px; cursor:pointer;">Say Hi</button>\n  <p id="out"></p>\n</form>\n<script>\ndocument.getElementById("f").addEventListener("submit", e => {\n  e.preventDefault();\n  document.getElementById("out").textContent = "Hello, " + document.getElementById("name").value + "!";\n});\n</script>', title: 'Try Forms' } },
+      },
+      {
+        id: 'html-flexbox',
+        title: 'Flexbox — Layout Made Simple',
+        beginnerContent:
+          'Before flexbox, laying out elements side by side required hacks (floats, tables). Flexbox makes it one line: `display: flex`.\n\n' +
+          '**Key properties on the container (parent):**\n' +
+          '- `display: flex` — children line up in a row\n' +
+          '- `flex-direction: column` — stack vertically instead\n' +
+          '- `justify-content: center` — center horizontally (or space-between, space-around)\n' +
+          '- `align-items: center` — center vertically\n' +
+          '- `gap: 12px` — space between children\n' +
+          '- `flex-wrap: wrap` — wrap to next line if too wide\n\n' +
+          '**Key properties on the children:**\n' +
+          '- `flex: 1` — grow to fill available space equally\n' +
+          '- `flex: 2` — grow twice as much as `flex: 1` siblings\n\n' +
+          '**Check yourself:** What does `justify-content: space-between` do? (Answer: puts the first item at the start, last at the end, and distributes remaining space equally between items.)',
+        code: `<!-- Flexbox Layout -->
+<style>
+  .container { display: flex; gap: 12px; padding: 16px; font-family: sans-serif; }
+  .card {
+    flex: 1;
+    padding: 16px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    text-align: center;
+  }
+  .card h3 { margin: 0 0 8px; color: #1e293b; }
+  .card p { margin: 0; color: #64748b; font-size: 14px; }
+
+  /* Center content vertically */
+  .centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    background: #dbeafe;
+    border-radius: 8px;
+    margin-top: 12px;
+    font-weight: bold;
+    color: #1e40af;
+  }
+
+  /* Responsive: stack on small screens */
+  @media (max-width: 500px) {
+    .container { flex-direction: column; }
+  }
+</style>
+
+<div class="container">
+  <div class="card">
+    <h3>Ranga</h3>
+    <p>4500 kg</p>
+    <p>Kaziranga</p>
+  </div>
+  <div class="card">
+    <h3>Mohini</h3>
+    <p>3800 kg</p>
+    <p>Manas</p>
+  </div>
+  <div class="card">
+    <h3>Gaja</h3>
+    <p>5200 kg</p>
+    <p>Kaziranga</p>
+  </div>
+</div>
+
+<div class="centered">I'm perfectly centered!</div>`,
+        interactive: { type: 'html-playground', props: { starterCode: '<style>\n  .row { display: flex; gap: 10px; padding: 10px; }\n  .box { flex: 1; padding: 20px; background: #dbeafe; border-radius: 8px; text-align: center; font-family: sans-serif; }\n</style>\n<div class="row">\n  <div class="box">One</div>\n  <div class="box">Two</div>\n  <div class="box">Three</div>\n</div>', title: 'Try Flexbox' } },
+      },
+      {
+        id: 'html-grid',
+        title: 'CSS Grid — Two-Dimensional Layout',
+        beginnerContent:
+          'Flexbox is one-dimensional (row OR column). **CSS Grid** is two-dimensional — rows AND columns at the same time.\n\n' +
+          '**Basic grid:**\n' +
+          '```\n.grid {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;  /* 3 equal columns */\n  gap: 12px;\n}\n```\n\n' +
+          '`1fr` means "1 fraction of available space." `1fr 2fr` = two columns, second twice as wide.\n\n' +
+          '**Named areas:**\n' +
+          '```\ngrid-template-areas:\n  "header header"\n  "sidebar content"\n  "footer footer";\n```\n\n' +
+          '**When to use Flexbox vs Grid:**\n' +
+          '- **Flexbox** — one direction (nav bar, card row, vertical stack)\n' +
+          '- **Grid** — two directions (page layout, image gallery, dashboard)',
+        code: `<!-- CSS Grid Layout -->
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    padding: 16px;
+    font-family: sans-serif;
+  }
+  .grid-item {
+    padding: 20px;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 10px;
+    text-align: center;
+  }
+  /* Span 2 columns */
+  .wide { grid-column: span 2; background: #dbeafe; border-color: #93c5fd; }
+  /* Span 2 rows */
+  .tall { grid-row: span 2; background: #fef3c7; border-color: #fcd34d; }
+
+  /* Page layout with named areas */
+  .page {
+    display: grid;
+    grid-template-areas:
+      "header header"
+      "sidebar content"
+      "footer footer";
+    grid-template-columns: 200px 1fr;
+    gap: 8px;
+    margin-top: 16px;
+    padding: 16px;
+  }
+  .page > div {
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .page .header { grid-area: header; background: #1e293b; color: white; }
+  .page .sidebar { grid-area: sidebar; background: #e2e8f0; }
+  .page .content { grid-area: content; background: #f1f5f9; min-height: 80px; }
+  .page .footer { grid-area: footer; background: #1e293b; color: white; }
+</style>
+
+<div class="grid">
+  <div class="grid-item">1</div>
+  <div class="grid-item wide">2 (spans 2 cols)</div>
+  <div class="grid-item tall">3 (spans 2 rows)</div>
+  <div class="grid-item">4</div>
+  <div class="grid-item">5</div>
+</div>
+
+<div class="page">
+  <div class="header">Header</div>
+  <div class="sidebar">Sidebar</div>
+  <div class="content">Main Content</div>
+  <div class="footer">Footer</div>
+</div>`,
+        interactive: { type: 'html-playground', props: { starterCode: '<style>\n  .grid {\n    display: grid;\n    grid-template-columns: repeat(3, 1fr);\n    gap: 8px;\n    padding: 12px;\n    font-family: sans-serif;\n  }\n  .cell {\n    padding: 20px;\n    background: #dbeafe;\n    border-radius: 8px;\n    text-align: center;\n  }\n</style>\n<div class="grid">\n  <div class="cell">A</div>\n  <div class="cell">B</div>\n  <div class="cell">C</div>\n  <div class="cell">D</div>\n  <div class="cell">E</div>\n  <div class="cell">F</div>\n</div>', title: 'Try CSS Grid' } },
+      },
+      {
+        id: 'html-ts-dom',
+        title: 'TypeScript + DOM — Type-Safe Web Pages',
+        beginnerContent:
+          'When you use TypeScript to manipulate the DOM, you get type safety for every element access. The browser\'s built-in types tell TypeScript what properties and methods each element has.\n\n' +
+          '**The problem with plain JavaScript:**\n' +
+          '`const input = document.getElementById("name");`\n' +
+          '`input.value; // JavaScript: works at runtime, maybe crashes`\n\n' +
+          '**TypeScript catches the issue:**\n' +
+          '`const input = document.getElementById("name");`\n' +
+          '`input.value; // Error: .value doesn\'t exist on HTMLElement`\n\n' +
+          'Why? `getElementById` returns `HTMLElement | null` — a generic element. Only `HTMLInputElement` has `.value`. You need to narrow the type:\n\n' +
+          '```\nconst input = document.getElementById("name") as HTMLInputElement;\ninput.value; // OK — TypeScript knows it\'s an input\n```\n\n' +
+          'Or safer:\n' +
+          '```\nconst input = document.querySelector<HTMLInputElement>("#name");\nif (input) {\n  input.value; // OK — null check + type narrowing\n}\n```\n\n' +
+          '**Common DOM types:** `HTMLInputElement`, `HTMLButtonElement`, `HTMLSelectElement`, `HTMLFormElement`, `HTMLDivElement`, `HTMLImageElement`.',
+        intermediateContent:
+          '**Typed event handlers:**\n\n' +
+          '```\nconst btn = document.querySelector<HTMLButtonElement>("#submit");\nbtn?.addEventListener("click", (e: MouseEvent) => {\n  e.preventDefault();\n  // e.target is EventTarget, need to narrow:\n  const target = e.target as HTMLButtonElement;\n  target.disabled = true;\n});\n\nconst input = document.querySelector<HTMLInputElement>("#search");\ninput?.addEventListener("input", (e: Event) => {\n  const value = (e.target as HTMLInputElement).value;\n  console.log("Searching:", value);\n});\n```\n\n' +
+          '**Form data with TypeScript:**\n\n' +
+          '```\ninterface FormData {\n  name: string;\n  weight: number;\n  park: string;\n}\n\nfunction getFormData(form: HTMLFormElement): FormData {\n  return {\n    name: (form.elements.namedItem("name") as HTMLInputElement).value,\n    weight: Number((form.elements.namedItem("weight") as HTMLInputElement).value),\n    park: (form.elements.namedItem("park") as HTMLSelectElement).value,\n  };\n}\n```',
+        code: `// TypeScript + DOM (run this in the TS playground)
+// Note: DOM APIs need a browser — this demonstrates the types
+
+// querySelector with generic type parameter
+// const input = document.querySelector<HTMLInputElement>("#name");
+// if (input) {
+//   input.value = "Ranga";  // TS knows .value exists
+//   input.focus();           // TS knows .focus() exists
+// }
+
+// Type-safe event handler
+interface ElephantForm {
+  name: string;
+  weight: number;
+  park: "Kaziranga" | "Manas" | "Nameri";
+}
+
+function validateForm(data: ElephantForm): string[] {
+  const errors: string[] = [];
+  if (data.name.length < 2) errors.push("Name too short");
+  if (data.weight < 1000 || data.weight > 8000) errors.push("Weight out of range");
+  return errors;
+}
+
+// Test the validation logic (no DOM needed)
+const testData: ElephantForm = { name: "Ranga", weight: 4500, park: "Kaziranga" };
+const errors = validateForm(testData);
+console.log("Valid:", errors.length === 0);
+console.log("Errors:", errors);
+
+const badData: ElephantForm = { name: "R", weight: 500, park: "Manas" };
+const badErrors = validateForm(badData);
+console.log("Bad data errors:", badErrors);`,
+        interactive: { type: 'ts-playground', props: { starterCode: '// TypeScript form validation\ninterface ElephantForm {\n  name: string;\n  weight: number;\n  park: "Kaziranga" | "Manas" | "Nameri";\n}\n\nfunction validate(data: ElephantForm): string[] {\n  const errors: string[] = [];\n  if (data.name.length < 2) errors.push("Name too short");\n  if (data.weight < 1000) errors.push("Too light");\n  return errors;\n}\n\nconsole.log(validate({ name: "Ranga", weight: 4500, park: "Kaziranga" }));\nconsole.log(validate({ name: "R", weight: 500, park: "Manas" }));', title: 'Try TypeScript + DOM Types' } },
+      },
     ],
   },
 
