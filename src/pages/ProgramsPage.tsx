@@ -241,6 +241,180 @@ function FAQ({ q, a }: { q: string; a: string }) {
   );
 }
 
+/* ── Bootcamp specializations with week-by-week curriculum ── */
+const bootcampTracks = [
+  {
+    name: 'Full-Stack Development',
+    color: 'sky',
+    weeks: [
+      { phase: 'Weeks 1–4: Foundations', topics: ['HTML/CSS/JS fundamentals', 'Git & command line', 'Responsive design', 'DOM manipulation'] },
+      { phase: 'Weeks 5–8: Frontend', topics: ['React components & state', 'TypeScript', 'API integration (REST)', 'Routing & forms'] },
+      { phase: 'Weeks 9–12: Backend', topics: ['Node.js & Express', 'SQL & PostgreSQL', 'Authentication & sessions', 'REST API design'] },
+      { phase: 'Weeks 13–16: Advanced', topics: ['Database modeling & migrations', 'Testing (unit, integration, E2E)', 'CI/CD pipelines', 'Cloud deployment (Vercel/AWS)'] },
+      { phase: 'Weeks 17–20: Projects', topics: ['Build 2 production-grade apps', 'Code review with mentor', 'Performance optimization', 'Security best practices'] },
+      { phase: 'Weeks 21–24: Career', topics: ['Portfolio site', 'Resume & LinkedIn review', 'Mock technical interviews', 'Job referral introductions'] },
+    ],
+  },
+  {
+    name: 'AI & Machine Learning',
+    color: 'rose',
+    weeks: [
+      { phase: 'Weeks 1–4: Python & Data', topics: ['Python fluency', 'NumPy & Pandas', 'Data cleaning & exploration', 'Matplotlib & Seaborn'] },
+      { phase: 'Weeks 5–8: Classical ML', topics: ['Regression & classification', 'Decision trees & random forests', 'Feature engineering', 'Model evaluation & cross-validation'] },
+      { phase: 'Weeks 9–12: Deep Learning', topics: ['Neural network fundamentals', 'PyTorch basics', 'CNNs for image classification', 'Transfer learning'] },
+      { phase: 'Weeks 13–16: NLP & Applications', topics: ['Text preprocessing & embeddings', 'Sentiment analysis', 'LLM APIs & prompt engineering', 'Building AI-powered apps'] },
+      { phase: 'Weeks 17–20: Projects', topics: ['Build 2 end-to-end ML pipelines', 'Model deployment (FastAPI + Docker)', 'Experiment tracking (MLflow)', 'Code review with mentor'] },
+      { phase: 'Weeks 21–24: Career', topics: ['ML portfolio & case studies', 'Technical writing', 'Mock ML interviews', 'Job referral introductions'] },
+    ],
+  },
+  {
+    name: 'Cloud & DevOps',
+    color: 'violet',
+    weeks: [
+      { phase: 'Weeks 1–4: Linux & Networking', topics: ['Linux command line mastery', 'Networking fundamentals (TCP/IP, DNS, HTTP)', 'Shell scripting (Bash)', 'SSH & remote servers'] },
+      { phase: 'Weeks 5–8: Containers & Orchestration', topics: ['Docker fundamentals', 'Docker Compose & multi-container apps', 'Kubernetes basics', 'Helm charts & deployments'] },
+      { phase: 'Weeks 9–12: Cloud Platforms', topics: ['AWS core services (EC2, S3, RDS, Lambda)', 'Infrastructure as Code (Terraform)', 'IAM & security best practices', 'Cost optimization'] },
+      { phase: 'Weeks 13–16: CI/CD & Monitoring', topics: ['GitHub Actions / GitLab CI', 'Automated testing pipelines', 'Prometheus & Grafana', 'Log aggregation (ELK stack)'] },
+      { phase: 'Weeks 17–20: Projects', topics: ['Build 2 production infrastructure projects', 'Migrate a monolith to microservices', 'Disaster recovery & scaling', 'Code review with mentor'] },
+      { phase: 'Weeks 21–24: Career', topics: ['DevOps portfolio & architecture docs', 'System design interview prep', 'Mock DevOps interviews', 'Job referral introductions'] },
+    ],
+  },
+];
+
+function BootcampCard({ isIndia }: { isIndia: boolean }) {
+  const [expanded, setExpanded] = useState(false);
+  const [activeTrack, setActiveTrack] = useState(0);
+
+  return (
+    <div className="bg-white dark:bg-gray-800 rounded-xl border border-sky-200 dark:border-sky-800 p-5 mb-4">
+      <h4 className="text-sm font-bold text-sky-700 dark:text-sky-300 uppercase tracking-wide mb-2">24-Week Bootcamp</h4>
+      <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">Career changers &amp; college grads</p>
+      <ul className="space-y-1.5 text-sm text-gray-700 dark:text-gray-300">
+        <li className="flex items-start gap-2"><span className="text-sky-500 mt-0.5">✓</span> Full-stack, AI/ML, or Cloud &amp; DevOps specialization</li>
+        <li className="flex items-start gap-2"><span className="text-sky-500 mt-0.5">✓</span> Portfolio of 6+ production-grade projects</li>
+        <li className="flex items-start gap-2"><span className="text-sky-500 mt-0.5">✓</span> Weekly code reviews with industry mentors</li>
+        <li className="flex items-start gap-2"><span className="text-sky-500 mt-0.5">✓</span> Mock interviews &amp; resume building</li>
+        <li className="flex items-start gap-2"><span className="text-sky-500 mt-0.5">✓</span> Job referral network</li>
+      </ul>
+
+      <button onClick={() => setExpanded(!expanded)}
+        className="mt-4 flex items-center gap-1.5 text-xs font-semibold text-sky-600 dark:text-sky-400 hover:underline">
+        {expanded ? 'Hide' : 'See'} full curriculum <ChevronDown className={`w-3.5 h-3.5 transition-transform ${expanded ? 'rotate-180' : ''}`} />
+      </button>
+
+      {expanded && (
+        <div className="mt-4 border-t border-sky-100 dark:border-sky-900 pt-4">
+          <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-3">Choose a specialization</p>
+          <div className="flex gap-2 mb-4">
+            {bootcampTracks.map((track, i) => (
+              <button key={track.name} onClick={() => setActiveTrack(i)}
+                className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${activeTrack === i ? 'bg-sky-500 text-white shadow-sm' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'}`}>
+                {track.name}
+              </button>
+            ))}
+          </div>
+          <div className="space-y-3">
+            {bootcampTracks[activeTrack].weeks.map((w) => (
+              <div key={w.phase} className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3">
+                <h5 className="text-xs font-bold text-gray-900 dark:text-white mb-1.5">{w.phase}</h5>
+                <div className="flex flex-wrap gap-1.5">
+                  {w.topics.map((t) => (
+                    <span key={t} className="text-xs bg-white dark:bg-gray-600 text-gray-600 dark:text-gray-200 px-2 py-0.5 rounded-full border border-gray-200 dark:border-gray-500">{t}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ── School program tracks with term-by-term curriculum ── */
+const schoolTracks = [
+  {
+    name: 'Robotics & Arduino',
+    color: 'emerald',
+    terms: [
+      { phase: 'Term 1: Circuits & Light', topics: ['What is electricity?', 'LEDs, resistors, breadboards', 'Build: traffic light system', 'Intro to Arduino IDE'] },
+      { phase: 'Term 2: Sensors & Input', topics: ['Buttons, potentiometers, LDRs', 'Reading analog vs digital', 'Build: automatic night light', 'Build: theremin instrument'] },
+      { phase: 'Term 3: Motors & Movement', topics: ['DC motors & servos', 'Motor drivers & H-bridges', 'Build: obstacle-avoiding robot', 'Basic PID control'] },
+      { phase: 'Term 4: Communication', topics: ['Serial communication', 'Bluetooth & wireless', 'Build: remote-controlled car', 'Sensor data logging'] },
+    ],
+  },
+  {
+    name: 'Python & AI',
+    color: 'rose',
+    terms: [
+      { phase: 'Term 1: Python Foundations', topics: ['Variables, loops, functions', 'Lists, dictionaries, files', 'Build: quiz game', 'Build: password generator'] },
+      { phase: 'Term 2: Data & Visualization', topics: ['Reading CSV files', 'Matplotlib charts', 'Build: weather data analyzer', 'Build: population tracker'] },
+      { phase: 'Term 3: Intro to AI', topics: ['What is machine learning?', 'Training vs testing data', 'Build: spam classifier', 'Build: image recognizer'] },
+      { phase: 'Term 4: AI Projects', topics: ['Natural language basics', 'Chatbot fundamentals', 'Build: story generator', 'Final showcase project'] },
+    ],
+  },
+  {
+    name: 'Creative Coding',
+    color: 'violet',
+    terms: [
+      { phase: 'Term 1: Web Basics', topics: ['HTML structure', 'CSS styling & layout', 'Build: personal portfolio', 'Build: recipe website'] },
+      { phase: 'Term 2: Interactivity', topics: ['JavaScript fundamentals', 'DOM manipulation & events', 'Build: interactive quiz', 'Build: drawing app'] },
+      { phase: 'Term 3: Games & Animation', topics: ['Canvas & animation loops', 'Collision detection', 'Build: platformer game', 'Build: particle effects'] },
+      { phase: 'Term 4: Full Projects', topics: ['APIs & data fetching', 'Responsive design', 'Build: weather dashboard', 'Final showcase project'] },
+    ],
+  },
+];
+
+function SchoolProgramCard({ isIndia }: { isIndia: boolean }) {
+  const [expanded, setExpanded] = useState(false);
+  const [activeTrack, setActiveTrack] = useState(0);
+
+  return (
+    <div className="bg-white dark:bg-gray-800 rounded-xl border border-emerald-200 dark:border-emerald-800 p-5 mb-4">
+      <h4 className="text-sm font-bold text-emerald-700 dark:text-emerald-300 uppercase tracking-wide mb-2">12-Month School Program</h4>
+      <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">Students — Grades 6 and up</p>
+      <ul className="space-y-1.5 text-sm text-gray-700 dark:text-gray-300">
+        <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span> Robotics &amp; Arduino, Python &amp; AI, or Creative Coding</li>
+        <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span> Small cohorts (max 12) with dedicated mentor</li>
+        <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span> Hands-on experiments with real hardware</li>
+        <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span> Monthly project presentations</li>
+        <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span> Progress reports for parents &amp; schools</li>
+      </ul>
+
+      <button onClick={() => setExpanded(!expanded)}
+        className="mt-4 flex items-center gap-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:underline">
+        {expanded ? 'Hide' : 'See'} full curriculum <ChevronDown className={`w-3.5 h-3.5 transition-transform ${expanded ? 'rotate-180' : ''}`} />
+      </button>
+
+      {expanded && (
+        <div className="mt-4 border-t border-emerald-100 dark:border-emerald-900 pt-4">
+          <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-3">Choose a track</p>
+          <div className="flex gap-2 mb-4">
+            {schoolTracks.map((track, i) => (
+              <button key={track.name} onClick={() => setActiveTrack(i)}
+                className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${activeTrack === i ? 'bg-emerald-500 text-white shadow-sm' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'}`}>
+                {track.name}
+              </button>
+            ))}
+          </div>
+          <div className="space-y-3">
+            {schoolTracks[activeTrack].terms.map((t) => (
+              <div key={t.phase} className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3">
+                <h5 className="text-xs font-bold text-gray-900 dark:text-white mb-1.5">{t.phase}</h5>
+                <div className="flex flex-wrap gap-1.5">
+                  {t.topics.map((topic) => (
+                    <span key={topic} className="text-xs bg-white dark:bg-gray-600 text-gray-600 dark:text-gray-200 px-2 py-0.5 rounded-full border border-gray-200 dark:border-gray-500">{topic}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function ProgramsPage() {
   const { user } = useAuth();
   const { hasActiveSubscription, plan: currentPlan } = useSubscription();
@@ -325,30 +499,10 @@ export default function ProgramsPage() {
               <p className="text-gray-600 dark:text-gray-400 text-sm mb-6">Everything online, plus a mentor, a cohort, and real-world outcomes. Two formats:</p>
 
               {/* Sub-track: Bootcamp */}
-              <div className="bg-white dark:bg-gray-800 rounded-xl border border-sky-200 dark:border-sky-800 p-5 mb-4">
-                <h4 className="text-sm font-bold text-sky-700 dark:text-sky-300 uppercase tracking-wide mb-2">24-Week Bootcamp</h4>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">Career changers &amp; college grads</p>
-                <ul className="space-y-1.5 text-sm text-gray-700 dark:text-gray-300">
-                  <li className="flex items-start gap-2"><span className="text-sky-500 mt-0.5">✓</span> Full-stack, AI/ML, or Cloud &amp; DevOps specialization</li>
-                  <li className="flex items-start gap-2"><span className="text-sky-500 mt-0.5">✓</span> Portfolio of 6+ production-grade projects</li>
-                  <li className="flex items-start gap-2"><span className="text-sky-500 mt-0.5">✓</span> Weekly code reviews with industry mentors</li>
-                  <li className="flex items-start gap-2"><span className="text-sky-500 mt-0.5">✓</span> Mock interviews &amp; resume building</li>
-                  <li className="flex items-start gap-2"><span className="text-sky-500 mt-0.5">✓</span> Job referral network</li>
-                </ul>
-              </div>
+              <BootcampCard isIndia={isIndia} />
 
               {/* Sub-track: School Program */}
-              <div className="bg-white dark:bg-gray-800 rounded-xl border border-emerald-200 dark:border-emerald-800 p-5 mb-4">
-                <h4 className="text-sm font-bold text-emerald-700 dark:text-emerald-300 uppercase tracking-wide mb-2">12-Month School Program</h4>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">Students — Grades 6 and up</p>
-                <ul className="space-y-1.5 text-sm text-gray-700 dark:text-gray-300">
-                  <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span> Robotics &amp; Arduino, Python &amp; AI, or Creative Coding</li>
-                  <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span> Small cohorts (max 12) with dedicated mentor</li>
-                  <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span> Hands-on experiments with real hardware</li>
-                  <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span> Monthly project presentations</li>
-                  <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span> Progress reports for parents &amp; schools</li>
-                </ul>
-              </div>
+              <SchoolProgramCard isIndia={isIndia} />
 
               <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">Both formats: {isIndia ? '₹9,999' : '$59'}/mo — coming to select cities</p>
               <a href="#waitlist" className="inline-flex items-center gap-1.5 text-sm text-amber-600 dark:text-amber-400 hover:underline font-medium">
