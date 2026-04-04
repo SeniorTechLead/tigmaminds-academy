@@ -112,7 +112,7 @@ export default function ReferencePage() {
     const searchIn = (sections: typeof guide.understand) =>
       sections.some(s =>
         s.title.toLowerCase().includes(searchLower) ||
-        s.content.toLowerCase().includes(searchLower)
+        (s.beginnerContent && s.beginnerContent.toLowerCase().includes(searchLower))
       );
 
     return (

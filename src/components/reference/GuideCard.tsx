@@ -31,16 +31,17 @@ function getMatchingSnippets(guide: ReferenceGuide, query: string): { sectionTit
   const allSections = [...guide.understand, ...(guide.build || [])];
 
   for (const section of allSections) {
-    const contentLower = section.content.toLowerCase();
+    const text = section.beginnerContent || '';
+    const contentLower = text.toLowerCase();
     const idx = contentLower.indexOf(q);
     if (idx === -1) continue;
 
     // Extract ~120 chars around the match
     const start = Math.max(0, idx - 50);
-    const end = Math.min(section.content.length, idx + query.length + 70);
-    let snippet = section.content.slice(start, end).trim();
+    const end = Math.min(text.length, idx + query.length + 70);
+    let snippet = text.slice(start, end).trim();
     if (start > 0) snippet = '...' + snippet;
-    if (end < section.content.length) snippet = snippet + '...';
+    if (end < text.length) snippet = snippet + '...';
 
     results.push({ sectionTitle: section.title, snippet });
     if (results.length >= 3) break;
