@@ -6141,6 +6141,208 @@ DROP TABLE bad_sightings;`,
           },
         },
       },
+      {
+        id: 'sql-sorting',
+        title: 'Sorting & Pagination',
+        beginnerContent:
+          '`ORDER BY` sorts your results. By default, sorting is **ascending** (ASC) — smallest first for numbers, A→Z for text. Add `DESC` for descending — largest first, Z→A.\n\n' +
+          '**Multi-column sorting:** `ORDER BY park ASC, weight DESC` — first sorts by park alphabetically, then within each park, sorts by weight heaviest first.\n\n' +
+          '**Pagination with LIMIT + OFFSET:** Real apps don\'t show 10,000 results at once. `LIMIT 10` returns only 10 rows. `OFFSET 20` skips the first 20. Together: `LIMIT 10 OFFSET 20` = rows 21-30 (page 3 of 10-per-page).\n\n' +
+          '**NULLs in sorting:** NULL values sort last in ASC order and first in DESC order (in SQLite). If you need different behavior: `ORDER BY last_seen IS NULL, last_seen DESC` — this puts non-NULL rows first.\n\n' +
+          '**Check yourself:** `LIMIT 5 OFFSET 10` — which rows does this return from a 100-row table? (Answer: rows 11-15.)',
+        code: `-- ASC (default) vs DESC
+SELECT name, weight FROM elephants ORDER BY weight ASC;   -- lightest first
+SELECT name, weight FROM elephants ORDER BY weight DESC;  -- heaviest first
+
+-- Multi-column sort: by park, then weight within park
+SELECT name, park, weight FROM elephants
+ORDER BY park ASC, weight DESC;
+-- Kaziranga: Gaja(5200), Ranga(4500), Tara(4100)
+-- Manas: Mohini(3800), Bala(3200)
+
+-- Pagination: 2 per page
+SELECT name, weight FROM elephants
+ORDER BY weight DESC
+LIMIT 2 OFFSET 0;  -- Page 1: Gaja, Ranga
+
+SELECT name, weight FROM elephants
+ORDER BY weight DESC
+LIMIT 2 OFFSET 2;  -- Page 2: Tara, Mohini
+
+-- NULLs: put sighted elephants first
+SELECT name, last_seen FROM elephants
+ORDER BY last_seen IS NULL, last_seen DESC;
+
+-- Sort by computed value
+SELECT name, weight, ROUND(weight * 2.2, 0) AS weight_lbs
+FROM elephants
+ORDER BY weight_lbs DESC;`,
+        diagram: 'SQLSortPaginationDiagram',
+        interactive: { type: 'sql-playground', props: { starterCode: "-- Try multi-column sort\nSELECT name, park, weight FROM elephants\nORDER BY park ASC, weight DESC;", title: 'Try Sorting' } },
+      },
+      {
+        id: 'sql-case',
+        title: 'CASE, COALESCE & Conditional Logic',
+        beginnerContent:
+          '`CASE WHEN` is SQL\'s if/else. It tests conditions for each row and returns a value based on which condition matches first:\n\n' +
+          '```\nCASE\n  WHEN weight > 4500 THEN \'heavy\'\n  WHEN weight > 3500 THEN \'medium\'\n  ELSE \'light\'\nEND\n```\n\n' +
+          'Conditions are checked **in order** — the first match wins. If Gaja (5200kg) matches "weight > 4500", it gets "heavy" and the remaining conditions are skipped.\n\n' +
+          '**COALESCE** returns the first non-NULL value from a list: `COALESCE(last_seen, \'Never\')` — if `last_seen` is NULL, returns "Never".\n\n' +
+          '**IIF** is a shorthand for simple two-way choices: `IIF(weight > 4000, \'heavy\', \'light\')` — same as `CASE WHEN weight > 4000 THEN \'heavy\' ELSE \'light\' END`.\n\n' +
+          '**Computed columns** — you can do math in SELECT: `weight * 2.2 AS weight_lbs` creates a new column that doesn\'t exist in the table.',
+        code: `-- CASE WHEN: classify elephants by weight
+SELECT name, weight,
+  CASE
+    WHEN weight > 4500 THEN 'heavy'
+    WHEN weight > 3500 THEN 'medium'
+    ELSE 'light'
+  END AS category
+FROM elephants;
+
+-- COALESCE: replace NULL with a default
+SELECT name, COALESCE(last_seen, 'Never sighted') AS status
+FROM elephants;
+
+-- IIF: simple two-way choice
+SELECT name, IIF(weight > 4000, 'big', 'small') AS size
+FROM elephants;
+
+-- Computed column
+SELECT name, weight,
+       weight * 2.2 AS weight_lbs,
+       ROUND(weight / 1000.0, 1) AS weight_tons
+FROM elephants;
+
+-- CASE inside aggregation
+SELECT
+  SUM(CASE WHEN park = 'Kaziranga' THEN 1 ELSE 0 END) AS kaziranga_count,
+  SUM(CASE WHEN park = 'Manas' THEN 1 ELSE 0 END) AS manas_count
+FROM elephants;
+
+-- Conditional counting with CASE
+SELECT park,
+  COUNT(*) AS total,
+  SUM(CASE WHEN last_seen IS NOT NULL THEN 1 ELSE 0 END) AS sighted,
+  SUM(CASE WHEN last_seen IS NULL THEN 1 ELSE 0 END) AS unsighted
+FROM elephants
+GROUP BY park;`,
+        diagram: 'SQLCaseDiagram',
+        interactive: { type: 'sql-playground', props: { starterCode: "-- Classify elephants by weight\nSELECT name, weight,\n  CASE\n    WHEN weight > 4500 THEN 'heavy'\n    WHEN weight > 3500 THEN 'medium'\n    ELSE 'light'\n  END AS category\nFROM elephants;", title: 'Try CASE WHEN' } },
+      },
+      {
+        id: 'sql-string-date',
+        title: 'String & Date Functions',
+        beginnerContent:
+          'SQL has built-in functions for manipulating text and dates.\n\n' +
+          '**String functions:**\n' +
+          '- `UPPER(name)` → "RANGA" — converts to uppercase\n' +
+          '- `LOWER(name)` → "ranga" — converts to lowercase\n' +
+          '- `LENGTH(name)` → 5 — character count\n' +
+          '- `SUBSTR(name, 1, 3)` → "Ran" — extract characters (position starts at 1)\n' +
+          '- `REPLACE(park, \'NP\', \'National Park\')` — substitute text\n' +
+          '- `name || \' (ID: \' || id || \')\'` → "Ranga (ID: 1)" — concatenate with ||\n\n' +
+          '**Date functions (SQLite):**\n' +
+          '- `date(\'now\')` → today\'s date\n' +
+          '- `julianday(date1) - julianday(date2)` → days between two dates\n' +
+          '- `date(last_seen, \'+30 days\')` → add 30 days\n' +
+          '- `strftime(\'%Y\', date)` → extract year\n\n' +
+          '**ROUND** — round a number: `ROUND(weight * 2.2, 1)` → 9900.0\n\n' +
+          '**CAST** — convert types: `CAST(weight AS TEXT)` — number to string',
+        code: `-- String functions
+SELECT name,
+       UPPER(name) AS upper_name,
+       LOWER(name) AS lower_name,
+       LENGTH(name) AS name_length,
+       SUBSTR(name, 1, 3) AS short_name
+FROM elephants;
+
+-- Concatenation with ||
+SELECT name || ' weighs ' || weight || 'kg' AS description
+FROM elephants;
+
+-- ID code: first 2 letters of park + elephant id
+SELECT name, SUBSTR(park, 1, 2) || '-' || id AS code
+FROM elephants;
+
+-- REPLACE
+SELECT REPLACE(park, 'Kaziranga', 'KNP') AS short_park, name
+FROM elephants;
+
+-- Date functions
+SELECT name, last_seen,
+       CAST(julianday('2026-04-04') - julianday(last_seen) AS INTEGER) AS days_ago
+FROM elephants
+WHERE last_seen IS NOT NULL;
+
+-- ROUND
+SELECT name, weight,
+       ROUND(weight * 2.2, 0) AS lbs,
+       ROUND(weight / 1000.0, 2) AS tons
+FROM elephants;
+
+-- CAST
+SELECT name, CAST(weight AS TEXT) || 'kg' AS weight_text
+FROM elephants;`,
+        diagram: 'SQLStringFuncDiagram',
+        interactive: { type: 'sql-playground', props: { starterCode: "-- Try string functions\nSELECT name,\n       UPPER(name) AS caps,\n       LENGTH(name) AS len,\n       SUBSTR(name, 1, 3) AS short\nFROM elephants;", title: 'Try String Functions' } },
+      },
+      {
+        id: 'sql-set-operations',
+        title: 'Set Operations & Views',
+        beginnerContent:
+          '**Set operations** combine the results of two SELECT queries:\n\n' +
+          '- **UNION** — all rows from both queries, duplicates removed\n' +
+          '- **UNION ALL** — all rows from both, duplicates kept\n' +
+          '- **INTERSECT** — only rows that appear in BOTH queries\n' +
+          '- **EXCEPT** — rows in the first query but NOT in the second\n\n' +
+          'Both queries must have the **same number of columns** and compatible types.\n\n' +
+          '**Views** — a saved query you can use like a table:\n\n' +
+          '`CREATE VIEW heavy_elephants AS SELECT * FROM elephants WHERE weight > 4000;`\n\n' +
+          'Now `SELECT * FROM heavy_elephants` works as if it were a real table. Views don\'t store data — they re-run the query each time.\n\n' +
+          '**GROUP_CONCAT** — concatenates values from multiple rows into one string:\n\n' +
+          '`SELECT park, GROUP_CONCAT(name, \', \') FROM elephants GROUP BY park`\n→ "Kaziranga | Ranga, Gaja, Tara"',
+        code: `-- UNION: combine two queries, remove duplicates
+SELECT name FROM elephants WHERE park = 'Kaziranga'
+UNION
+SELECT name FROM elephants WHERE weight > 4000;
+-- Returns: Gaja, Ranga, Tara (no duplicates)
+
+-- UNION ALL: keep duplicates
+SELECT name FROM elephants WHERE park = 'Kaziranga'
+UNION ALL
+SELECT name FROM elephants WHERE weight > 4000;
+-- Ranga and Gaja and Tara appear twice
+
+-- INTERSECT: only in both
+SELECT name FROM elephants WHERE park = 'Kaziranga'
+INTERSECT
+SELECT name FROM elephants WHERE weight > 4000;
+-- Ranga, Gaja, Tara (all Kaziranga elephants are > 4000)
+
+-- EXCEPT: in first but not second
+SELECT name FROM elephants
+EXCEPT
+SELECT e.name FROM elephants e
+JOIN sightings s ON e.id = s.elephant_id;
+-- Tara (in elephants but has no sightings)
+
+-- CREATE VIEW: save a query as a virtual table
+CREATE VIEW IF NOT EXISTS heavy_elephants AS
+SELECT name, weight, park FROM elephants WHERE weight > 4000;
+
+SELECT * FROM heavy_elephants;
+
+DROP VIEW IF EXISTS heavy_elephants;
+
+-- GROUP_CONCAT: combine values into one string
+SELECT park, GROUP_CONCAT(name, ', ') AS elephants
+FROM elephants
+GROUP BY park;
+-- Kaziranga | Ranga, Gaja, Tara
+-- Manas     | Mohini, Bala`,
+        diagram: 'SQLSetOperationsDiagram',
+        interactive: { type: 'sql-playground', props: { starterCode: "-- Try UNION: Kaziranga elephants + heavy elephants\nSELECT name FROM elephants WHERE park = 'Kaziranga'\nUNION\nSELECT name FROM elephants WHERE weight > 4000;", title: 'Try Set Operations' } },
+      },
     ],
   },
 

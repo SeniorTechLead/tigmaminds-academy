@@ -846,6 +846,10 @@ const lazyMap: Record<string, () => Promise<{ default: ComponentType<any> }>> = 
   SQLSubqueryDiagram: () => import('../diagrams/SQLSubqueryDiagram'),
   SQLNormalizationDiagram: () => import('../diagrams/SQLNormalizationDiagram'),
   SQLAliasDiagram: () => import('../diagrams/SQLAliasDiagram'),
+  SQLSortPaginationDiagram: () => import('../diagrams/SQLSortPaginationDiagram'),
+  SQLCaseDiagram: () => import('../diagrams/SQLCaseDiagram'),
+  SQLStringFuncDiagram: () => import('../diagrams/SQLStringFuncDiagram'),
+  SQLSetOperationsDiagram: () => import('../diagrams/SQLSetOperationsDiagram'),
 };
 
 const cache: Record<string, ComponentType<any>> = {};
