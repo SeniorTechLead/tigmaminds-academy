@@ -5194,8 +5194,9 @@ FROM elephants;`,
           '**GROUP BY** splits rows into groups and applies aggregates to each group separately. `SELECT park, COUNT(*) FROM elephants GROUP BY park` gives the count per park.\n\n' +
           '**HAVING** filters groups (like WHERE, but runs after GROUP BY). `HAVING COUNT(*) > 2` keeps only groups with more than 2 rows.\n\n' +
           '**Execution order matters:** FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT.\n\n' +
-          'An **alias** is a nickname you give a column using `AS`: `SELECT AVG(weight) AS avg_w` means "calculate the average weight and call the result column avg_w." The problem: WHERE runs *before* SELECT, so the alias doesn\'t exist yet when WHERE is evaluated:\n\n' +
-          '```\n-- ❌ FAILS: avg_w doesn\'t exist yet when WHERE runs\nSELECT park, AVG(weight) AS avg_w FROM elephants WHERE avg_w > 4000;\n\n-- ✅ WORKS: use HAVING (runs after GROUP BY)\nSELECT park, AVG(weight) AS avg_w FROM elephants GROUP BY park HAVING AVG(weight) > 4000;\n```\n\n' +
+          'There are two kinds of aliases in SQL. **Table aliases** are nicknames for tables, defined in FROM: `FROM elephants e` — these work everywhere because FROM runs first. **Column aliases** are nicknames for result columns, defined in SELECT: `SELECT AVG(weight) AS avg_w` — these are the ones that cause trouble, because SELECT runs near the end.\n\n' +
+          'Since WHERE runs before SELECT, column aliases don\'t exist yet when WHERE is evaluated:\n\n' +
+          '```\n-- ❌ FAILS: avg_w is a column alias created in SELECT — WHERE runs before SELECT\nSELECT park, AVG(weight) AS avg_w FROM elephants WHERE avg_w > 4000;\n\n-- ✅ WORKS: HAVING runs after GROUP BY, so the aggregate is available\nSELECT park, AVG(weight) AS avg_w FROM elephants GROUP BY park HAVING AVG(weight) > 4000;\n\n-- ✅ Table alias works fine — FROM runs before WHERE\nSELECT e.name FROM elephants e WHERE e.weight > 4000;\n```\n\n' +
           '**COUNT(*) vs COUNT(column):** `COUNT(*)` counts all rows including NULLs. `COUNT(column)` skips NULLs. Example: if 3 elephants have a `last_seen` date and 2 don\'t, `COUNT(*)` = 5 but `COUNT(last_seen)` = 3.',
         code: `-- Count all elephants
 SELECT COUNT(*) AS total FROM elephants;
