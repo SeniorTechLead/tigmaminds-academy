@@ -14,6 +14,7 @@ import GaussianExplorer from '../interactive/GaussianExplorer';
 import ContourExplainer from '../interactive/ContourExplainer';
 import LogicGateSimulator from '../interactive/LogicGateSimulator';
 import SqlPlayground from '../SqlPlayground';
+import TsPlayground from '../TsPlayground';
 import { useAuth } from '../../contexts/AuthContext';
 import SignUpGate from '../SignUpGate';
 
@@ -181,6 +182,8 @@ function renderInteractive(config: NonNullable<ReferenceSection['interactive']>)
       return <LogicGateSimulator />;
     case 'sql-playground':
       return <SqlPlayground starterCode={config.props.starterCode as string} title={config.props.title as string | undefined} />;
+    case 'ts-playground':
+      return <TsPlayground starterCode={config.props.starterCode as string} title={config.props.title as string | undefined} />;
     default:
       return null;
   }
@@ -193,7 +196,7 @@ interface Props {
 
 const GATED_INTERACTIVE_TYPES = new Set([
   'slider', 'tone-player', 'interval-player', 'beat-machine',
-  'harmonics-explorer', 'gaussian-explorer', 'contour-explainer', 'logic-gate-simulator', 'sql-playground',
+  'harmonics-explorer', 'gaussian-explorer', 'contour-explainer', 'logic-gate-simulator', 'sql-playground', 'ts-playground',
 ]);
 
 export default function SectionRenderer({ section, level = 0 }: Props) {

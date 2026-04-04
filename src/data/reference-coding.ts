@@ -2152,6 +2152,7 @@ console.log(label);  // "Ranga weighs 4500kg"
 // ── Type errors (uncomment to see) ──
 // weight = "heavy";  // Error: string not assignable to number
 // names.push(42);    // Error: number not assignable to string`,
+        interactive: { type: 'ts-playground', props: { starterCode: '// Try TypeScript variables\nlet name: string = "Ranga";\nlet weight: number = 4500;\nlet active: boolean = true;\n\nconsole.log(name, weight, active);\n\n// Uncomment to see the type error:\n// weight = "heavy";', title: 'Try Variables' } },
       },
       {
         id: 'ts-functions',
@@ -2199,6 +2200,7 @@ function log(message: string): void {
 type MathOp = (a: number, b: number) => number;
 const subtract: MathOp = (a, b) => a - b;
 console.log(subtract(10, 3));  // 7`,
+        interactive: { type: 'ts-playground', props: { starterCode: '// Try typed functions\nfunction add(a: number, b: number): number {\n  return a + b;\n}\n\nconsole.log(add(3, 4));\n\n// Try calling with wrong types:\n// console.log(add("3", 4));', title: 'Try Functions' } },
       },
       {
         id: 'ts-interfaces',
@@ -2254,6 +2256,7 @@ const herd: Elephant[] = [
   { name: "Gaja", weight: 5200, park: "Kaziranga" },
 ];
 console.log(herd.length);  // 2`,
+        interactive: { type: 'ts-playground', props: { starterCode: 'interface Elephant {\n  name: string;\n  weight: number;\n  park: string;\n}\n\nconst ranga: Elephant = {\n  name: "Ranga",\n  weight: 4500,\n  park: "Kaziranga",\n};\n\nconsole.log(ranga.name, ranga.weight);', title: 'Try Interfaces' } },
       },
       {
         id: 'ts-unions',
@@ -2304,6 +2307,7 @@ function area(shape: Shape): number {
 
 console.log(area({ kind: "circle", radius: 5 }));
 console.log(area({ kind: "rectangle", width: 4, height: 3 }));`,
+        interactive: { type: 'ts-playground', props: { starterCode: 'let id: number | string = 42;\nconsole.log(typeof id, id);\n\nid = "E-042";\nconsole.log(typeof id, id);\n\n// Try: id = true;  // What error?', title: 'Try Union Types' } },
       },
       {
         id: 'ts-null-safety',
@@ -2353,6 +2357,7 @@ console.log(lastSeenStr);  // "Never sighted" (lastSeen is null)
 // ── The dangerous escape hatch: non-null assertion ──
 // el!.weight;  // Tells TS "trust me, it's not null"
 // Only use when you're 100% certain — crashes if you're wrong`,
+        interactive: { type: 'ts-playground', props: { starterCode: 'function findName(names: string[], search: string): string | null {\n  const found = names.find(n => n === search);\n  return found ?? null;\n}\n\nconst result = findName(["Ranga", "Gaja"], "Ranga");\nconsole.log(result?.toUpperCase() ?? "Not found");', title: 'Try Null Safety' } },
       },
       {
         id: 'ts-generics',
@@ -2398,6 +2403,7 @@ function longest<T extends HasLength>(a: T, b: T): T {
 console.log(longest("hello", "hi"));       // "hello"
 console.log(longest([1, 2, 3], [1, 2]));   // [1, 2, 3]
 // longest(10, 20);  // Error: number doesn't have .length`,
+        interactive: { type: 'ts-playground', props: { starterCode: 'function first<T>(arr: T[]): T | undefined {\n  return arr[0];\n}\n\nconsole.log(first([10, 20, 30]));     // number\nconsole.log(first(["a", "b", "c"]));  // string', title: 'Try Generics' } },
       },
       {
         id: 'ts-enums',
@@ -2448,6 +2454,7 @@ let currentTier = Tier.Solve;  // compiles to: let currentTier = 1;
 // ── Alternative: string union (often simpler) ──
 type DifficultyLevel = "easy" | "medium" | "hard";
 // Achieves the same goal without the enum keyword`,
+        interactive: { type: 'ts-playground', props: { starterCode: 'enum Status {\n  Active = "active",\n  Completed = "completed",\n  Cancelled = "cancelled",\n}\n\nlet s: Status = Status.Active;\nconsole.log(s);\n\n// Try: s = "pending";  // What error?', title: 'Try Enums' } },
       },
       {
         id: 'ts-utility-types',
@@ -2493,6 +2500,7 @@ const el: FrozenElephant = {
   name: "Ranga", weight: 4500, park: "Kaziranga", lastSeen: new Date()
 };
 // el.weight = 4600;  // Error: cannot assign to readonly property`,
+        interactive: { type: 'ts-playground', props: { starterCode: 'interface Elephant {\n  name: string;\n  weight: number;\n  park: string;\n}\n\n// Partial makes all fields optional\nfunction update(e: Partial<Elephant>) {\n  console.log("Updating:", e);\n}\n\nupdate({ weight: 4600 });  // Only weight — OK', title: 'Try Utility Types' } },
       },
     ],
   },
