@@ -259,7 +259,7 @@ That, he realised, was the part that lasted.
     track: 'school',
     subjects: ['Mathematics' as Subject],
     toolSkills: ['Python' as Skill, 'Data Visualization' as Skill],
-    skillTags: [{ discipline: 'Data Science', skill: 'Data Visualization', tools: ['Charts & plots'], application: 'Geometric patterns' }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    skillTags: [{ discipline: 'Data Science', skill: 'Data Visualization', tools: ['Geometric & mathematical'], application: 'Geometric patterns' }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
     learningTracks: ['Programming' as Track],
     estimatedHours: 10,
     level0: {
@@ -626,7 +626,7 @@ Zahra looked at her tiles, then at the crystal drawings. The same geometry — o
     track: 'school',
     subjects: ['Mathematics' as Subject],
     toolSkills: ['Python' as Skill, 'Data Visualization' as Skill],
-    skillTags: [{ discipline: 'Data Science', skill: 'Data Visualization', tools: ['Charts & plots'], application: 'Geometric patterns' }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    skillTags: [{ discipline: 'Data Science', skill: 'Data Visualization', tools: ['Geometric & mathematical'], application: 'Geometric patterns' }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
     learningTracks: ['Programming' as Track],
     estimatedHours: 10,
     level0: {
@@ -2839,7 +2839,7 @@ That idea changed everything.
     track: 'school',
     subjects: ['Mathematics' as Subject, 'Computer Science' as Subject, 'Astronomy' as Subject],
     toolSkills: ['Python' as Skill, 'Data Visualization' as Skill],
-    skillTags: [{ discipline: 'Data Science', skill: 'Data Visualization', tools: ['Charts & plots'], application: 'Mathematical visualization' }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    skillTags: [{ discipline: 'Data Science', skill: 'Data Visualization', tools: ['Geometric & mathematical'], application: 'Mathematical visualization' }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
     learningTracks: ['Programming' as Track],
     estimatedHours: 12,
     level0: {
