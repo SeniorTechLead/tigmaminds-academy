@@ -21,12 +21,14 @@ const tracks = [
     audience: 'Career changers & college grads',
     subjects: ['Full-Stack Development', 'AI & Machine Learning', 'Cloud & DevOps'],
     color: 'from-sky-500 to-cyan-400',
+    link: '/programs#bootcamp',
   },
   {
     title: '12-Month School Program',
     audience: 'Grades 6–12',
     subjects: ['Robotics & Arduino', 'Python & AI', 'Creative Coding'],
     color: 'from-emerald-500 to-green-400',
+    link: '/programs#school-program',
   },
 ];
 
@@ -182,7 +184,7 @@ export default function HomePage() {
                   ))}
                 </ul>
                 <Link
-                  to="/programs"
+                  to={track.link}
                   className="inline-flex items-center mt-6 text-sky-600 dark:text-sky-400 font-semibold hover:text-sky-700 dark:hover:text-sky-300 transition-colors"
                 >
                   View Details
