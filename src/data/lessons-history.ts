@@ -1290,4 +1290,369 @@ This is **signal detection theory** applied to navigation — the same mathemati
     learningTracks: ['Science & Lab' as Track],
     estimatedHours: 14,
 },
+{
+    id: 216,
+    slug: 'mesopotamian-irrigation',
+    tradition: 'World History',
+    illustration: '/content/illustrations/mesopotamian-irrigation.webp',
+    story: { title: 'Mesopotamian Irrigation', tagline: 'The invention of agriculture at scale — canals, salination, and the collapse that followed.', content: `
+**Between Two Rivers**
+
+The name says it all. **Mesopotamia** — from the Greek *mesos* (middle) and *potamos* (river) — was the land between the **Tigris** and **Euphrates** rivers, in what is now Iraq. Around 6,000 BCE, the people living there faced a paradox: they lived beside two enormous rivers, but the land between them was **desert**.
+
+The rivers flooded in spring, fed by snowmelt from the mountains of Turkey. But the floods came at the wrong time — too early for planting, too violent for crops. And the rest of the year, the land baked under temperatures exceeding 45°C, with almost no rainfall.
+
+The solution was **irrigation** — diverting river water through artificial channels to water fields when and where it was needed. This was not a small project. It required **canals** dug by hand (some stretching 80 kilometres), **levees** to prevent uncontrolled flooding, **distribution gates** to regulate flow, and a **social organization** capable of mobilizing thousands of workers for construction and maintenance.
+
+The result was the most productive agricultural region on Earth. Irrigated fields in southern Mesopotamia produced **wheat yields of 2,500 litres per hectare** — a figure not matched by European agriculture until the 18th century, five thousand years later. This surplus fed the world's first cities: **Ur**, **Uruk**, **Eridu**, **Babylon**.
+
+But irrigation carried a hidden poison.
+
+**The Salt Problem**
+
+Every river carries dissolved minerals — tiny amounts of **sodium, calcium, magnesium**, and other salts picked up as the water flows over and through rock. In a natural river system, these minerals wash out to sea. But in an irrigation system, the water is spread across fields and **evaporates**, leaving the dissolved salts behind in the soil.
+
+This process is called **salinisation**. Each irrigation cycle deposits a thin film of salt on the soil surface. Over years, decades, and centuries, the salt accumulates. Eventually, the soil becomes so salty that plant roots cannot absorb water — the **osmotic pressure** of the salt solution in the soil exceeds the plant's ability to draw water inward.
+
+The Sumerians noticed the problem as early as 2400 BCE. Their agricultural records — inscribed on clay tablets in cuneiform script — show a gradual shift from **wheat** (which is salt-sensitive) to **barley** (which tolerates higher salinity). By 1700 BCE, wheat had disappeared entirely from southern Mesopotamian agriculture. By 1200 BCE, even barley yields had declined catastrophically.
+
+The great cities of southern Mesopotamia — the cradle of civilization — were slowly **poisoned by their own success**. The irrigation that made civilization possible was destroying the soil that fed it.
+
+**The Science of Salinisation**
+
+Soil salinisation is an osmotic process. Healthy soil has a **low salt concentration** — the water between soil particles is relatively pure. Plant roots absorb this water through **osmosis**: water moves from the low-concentration soil solution, through the semi-permeable root membrane, into the higher-concentration cell interior.
+
+When soil salt concentration rises, the osmotic gradient **reverses**. The soil solution becomes more concentrated than the cell interior. Water is pulled *out* of the roots instead of in. The plant wilts, even though the soil is wet. This is called **physiological drought** — the plant dies of thirst while surrounded by water, because the water is too salty to absorb.
+
+The critical threshold is measured as **electrical conductivity (EC)** of the soil solution. Most crops begin to suffer when EC exceeds **4 deciSiemens per metre (dS/m)**. At 8 dS/m, only salt-tolerant crops (barley, date palms) can survive. Above 16 dS/m, virtually nothing grows.
+
+Modern satellite imagery shows that **salinisation affects 20% of all irrigated land worldwide** — roughly 60 million hectares. It is happening today in the **Indus Valley** (Pakistan), the **Murray-Darling Basin** (Australia), the **San Joaquin Valley** (California), and across the Middle East. We are repeating the Mesopotamian mistake on a global scale.
+
+**The Solution (That the Sumerians Didn't Have)**
+
+Modern agriculture manages salinisation through **leaching** — applying extra water to flush salts below the root zone — and **drainage** — installing underground pipes to carry the salty water away. Both require energy, infrastructure, and fresh water, all of which are increasingly scarce.
+
+A more sustainable approach is **drip irrigation**, which delivers water directly to plant roots in small, precise amounts, minimising evaporation and salt accumulation. Israel — a country that is mostly desert — produces enormous agricultural output using drip irrigation technology developed in the 1960s.
+
+The lesson of Mesopotamia is the lesson of unintended consequences: the technology that creates abundance can, if misunderstood, destroy the very foundation it depends on. **Understanding the chemistry of your soil is as important as understanding the engineering of your canals.**
+
+*The end.*` },
+    stem: { title: 'Soil Chemistry & Hydrology', description: 'How irrigation built civilization and then destroyed it — osmosis, salinisation, and the chemistry of soil.', icon: Leaf, color: 'from-green-400 to-lime-500', skills: ['Understand osmosis and how salt concentration affects water uptake by roots', 'Model soil salinisation: salt accumulation over irrigation cycles', 'Calculate electrical conductivity thresholds for crop survival', 'Analyze the water balance of an irrigation system'], project: {
+        title: 'Build a Soil Salinisation Model',
+        description: 'Create a Python program that models salt accumulation in irrigated soil over centuries — simulate different irrigation strategies and predict when crop failure begins.',
+        steps: [
+          'Model a single irrigation cycle: apply water with dissolved salts, evaporate water, calculate residual salt',
+          'Simulate cumulative salt buildup over 100, 500, and 2,000 years of continuous irrigation',
+          'Implement crop response: given soil EC, calculate yield reduction using FAO salinity-yield curves',
+          'Compare strategies: flood irrigation vs drip irrigation vs leaching, and their effect on long-term salinity',
+          'Visualize soil salt concentration and crop yield over millennia using Matplotlib',
+        ],
+      } },
+    track: 'school',
+    subjects: ['Chemistry' as Subject, 'Agriculture' as Subject, 'Geography' as Subject, 'History' as Subject],
+    toolSkills: ['Python' as Skill, 'Scientific Modeling' as Skill],
+    skillTags: [{ discipline: 'Scientific Modeling', skill: 'Earth science simulation', tools: ['Hydrological models'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    learningTracks: ['Science & Lab' as Track],
+    estimatedHours: 12,
+},
+{
+    id: 217,
+    slug: 'indian-wootz-steel',
+    tradition: 'World History',
+    illustration: '/content/illustrations/indian-wootz-steel.webp',
+    story: { title: 'Indian Wootz Steel', tagline: 'The legendary Damascus steel — carbon nanostructures discovered 2,000 years before nanotechnology.', content: `
+**The Sword That Cut Silk**
+
+In the year 1192, during the Third Crusade, a legend circulated among the Crusader armies about the swords carried by **Saladin's** warriors. These blades, the stories said, could **cut a silk scarf** dropped onto the edge — the weight of the falling fabric alone was enough to part it. They could **cleave through European swords** that were twice as thick. And their surfaces showed a distinctive pattern of light and dark bands, like flowing water — the mark of **Damascus steel**.
+
+The Crusaders were terrified of these blades. They tried to buy them, steal them, and capture the smiths who made them. They failed on all counts. Because the secret of Damascus steel was not in Damascus. It was in **India**.
+
+**Crucible Steel**
+
+The raw material for Damascus blades was **wootz** — a type of steel produced in crucibles in southern India, particularly in the regions now known as **Tamil Nadu, Karnataka, and Telangana**. The process had been developed as early as **300 BCE**, making it one of the oldest steelmaking techniques in the world.
+
+The method was deceptively simple. Iron ore was mixed with **charcoal** and sealed in a small clay crucible — a pot about the size of a football. The crucible was placed in a charcoal-fired furnace and heated to approximately **1,200°C** — hot enough to melt the iron and dissolve the carbon from the charcoal into the molten metal.
+
+Ordinary iron contains very little carbon (less than 0.1%). Steel is iron with **0.5-2% carbon**. The carbon atoms fit into the gaps between iron atoms in the crystal lattice, making the metal harder and stronger. But controlling the carbon content — getting exactly the right amount — requires precise control of temperature, time, and atmosphere.
+
+The Indian crucible method achieved this control beautifully. The sealed crucible prevented oxygen from reaching the molten metal (which would burn off the carbon). The small volume of the crucible ensured even heating. And the specific ratio of iron to charcoal, refined over centuries of practice, produced steel with a carbon content of approximately **1.5%** — the ideal range for a blade that is both **hard** (it holds an edge) and **tough** (it doesn't shatter on impact).
+
+**The Pattern**
+
+The distinctive wavy pattern of Damascus steel — called the **damask** pattern — is formed during the slow cooling of high-carbon crucible steel. As the metal cools, the carbon atoms segregate into bands of **cementite** (iron carbide, Fe₃C) — a very hard, brittle compound — embedded in a matrix of softer, more ductile iron.
+
+The cementite bands are microscopically thin — just a few micrometres across. But there are millions of them, layered through the blade. When the smith forges the ingot into a blade (heating and hammering repeatedly), these bands deform and flow, creating the visible swirling pattern on the surface. Etching the finished blade with weak acid reveals the pattern, because the cementite bands resist the acid differently than the surrounding iron.
+
+In 2006, researchers at the **Technical University of Dresden** examined samples of genuine Damascus steel using **electron microscopy** and discovered something extraordinary: the cementite bands contained **carbon nanotubes** — cylindrical structures of carbon atoms just a few nanometres in diameter.
+
+Carbon nanotubes are one of the strongest materials known to science. They have a **tensile strength 100 times greater than steel** at one-sixth the weight. They are a product of **21st-century nanotechnology** — or so we thought. The Indian steelmakers were producing them, unknowingly, **2,000 years** before the word "nanotechnology" was coined.
+
+The nanotubes formed because of trace impurities in the Indian iron ore — small amounts of **vanadium, molybdenum, and tungsten** — that catalysed the formation of carbon nanostructures during the slow cooling process. The Indian smiths didn't know about nanotubes. But they knew which ores produced the best steel, and they passed that knowledge down through generations.
+
+**The Lost Recipe**
+
+By the **mid-18th century**, the production of true wootz steel had ceased. The specific ores that contained the right trace impurities were exhausted. The family workshops that had guarded the technique for centuries were disrupted by colonial rule. The knowledge was lost — not suddenly, but gradually, as the chain of master-to-apprentice transmission was broken.
+
+Despite two centuries of effort by metallurgists — including **Michael Faraday**, who published a study on Indian steel in 1819 — no one has been able to fully reproduce wootz steel with all its properties. Modern metallurgy can create steel with the right carbon content and even produce similar surface patterns. But the exact combination of ore chemistry, crucible design, firing temperature, cooling rate, and forging technique that produced the original blades — with their carbon nanotubes and their silk-cutting edges — remains elusive.
+
+**What It Teaches**
+
+Wootz steel is a humbling lesson for modern science. We assume that advanced materials are products of advanced understanding — that you need electron microscopes and particle accelerators to make nanostructured materials. But Indian steelmakers produced carbon nanotubes in clay pots over charcoal fires, guided by nothing but **empirical knowledge** — the accumulated observations of hundreds of generations of smiths who noticed which ores, which temperatures, and which cooling rates produced the best blades.
+
+Science is not only what we understand theoretically. It is also what we discover through practice — through doing, observing, refining, and passing on. The Indian smiths were scientists. They just didn't call themselves that.
+
+*The end.*` },
+    stem: { title: 'Metallurgy & Materials Science', description: 'The science of wootz steel — carbon in iron, crystal lattices, phase diagrams, and nanostructures from 300 BCE.', icon: Hammer, color: 'from-gray-400 to-stone-500', skills: ['Understand how carbon content determines steel hardness and toughness', 'Explain the iron-carbon phase diagram and cementite formation', 'Analyze how trace impurities catalyse nanostructure formation', 'Model the relationship between cooling rate and crystal structure'], project: {
+        title: 'Build a Steel Properties Calculator',
+        description: 'Create a Python program that models the iron-carbon phase diagram — predict steel microstructure, hardness, and toughness from carbon content and cooling rate.',
+        steps: [
+          'Model the iron-carbon phase diagram: map carbon percentage to phase regions (ferrite, austenite, cementite)',
+          'Calculate hardness as a function of carbon content using empirical formulas',
+          'Simulate cooling: for a given rate, predict whether the steel forms pearlite (slow) or martensite (fast)',
+          'Model the trade-off between hardness and toughness for different carbon percentages',
+          'Visualize the phase diagram and property curves using Matplotlib',
+        ],
+      } },
+    track: 'school',
+    subjects: ['Materials Science' as Subject, 'Chemistry' as Subject, 'Physics' as Subject, 'History' as Subject],
+    toolSkills: ['Python' as Skill, 'Scientific Modeling' as Skill],
+    skillTags: [{ discipline: 'Scientific Modeling', skill: 'Chemical simulation', tools: ['Materials science'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    learningTracks: ['Science & Lab' as Track],
+    estimatedHours: 12,
+},
+{
+    id: 218,
+    slug: 'mayan-astronomy',
+    tradition: 'World History',
+    illustration: '/content/illustrations/mayan-astronomy.webp',
+    story: { title: 'Mayan Astronomy', tagline: 'The most precise astronomical observations in the ancient world — eclipse prediction, the Venus cycle, and a calendar more accurate than Europe\'s.', content: `
+**The Observatory**
+
+In the city of **Chichén Itzá**, on the Yucatán Peninsula of Mexico, there stands a round tower called **El Caracol** — "The Snail" — named for the spiral staircase inside it. Built around 900 CE, it is one of the few circular buildings in Maya architecture, and it looks nothing like the pyramids and temples that surround it.
+
+El Caracol was an **astronomical observatory**. Its windows are aligned not with the cardinal directions but with specific points on the horizon where **Venus** rises and sets at its extreme positions — the northernmost and southernmost points it reaches during its 584-day cycle. Other windows align with the solstice sunrise and the equinox sunset.
+
+The Maya were not stargazers in the romantic sense. They were **precision astronomers** — rigorous, mathematical, obsessed with accuracy. They tracked the movements of the Sun, Moon, Venus, Mars, and Jupiter with a precision that, in some cases, exceeded European astronomy of the same era by a factor of ten.
+
+And they did it **without telescopes** — using only naked-eye observation, crossed sticks for sighting, and a number system that was, in one crucial respect, more advanced than anything in Europe.
+
+**The Zero**
+
+The Maya independently invented the concept of **zero** — a mathematical placeholder that represents "nothing" in a positional number system. They did this by approximately **36 BCE**, at least 600 years before the concept appeared in Indian mathematics (which is the source of our modern zero).
+
+The Maya number system was **vigesimal** — base-20, compared to our base-10. They represented numbers using three symbols: a **dot** for 1, a **bar** for 5, and a **shell** for 0. Numbers were written vertically, with the lowest place value at the bottom.
+
+The zero was essential for their astronomical calculations. Without a placeholder, you cannot distinguish between 20 and 200 or between 1 and 100. The Maya needed this precision because their astronomical tables — inscribed in bark-paper books called **codices** — tracked planetary positions over thousands of years. A single arithmetic error would compound across centuries, destroying the prediction's accuracy.
+
+**The Venus Table**
+
+The most spectacular achievement of Maya astronomy is the **Venus Table** in the **Dresden Codex** — one of only four surviving Maya manuscripts.
+
+Venus has a **synodic period** of 583.92 days — the time between successive appearances as the "evening star." The Maya calculated this period as **584 days** — an error of just **0.08 days**, or about **two hours** over a 584-day cycle. Over the 104-year span of their Venus table, the accumulated error is less than **one day**.
+
+For comparison, the European value for Venus's synodic period, as late as the 16th century, was less accurate than the Maya calculation made six hundred years earlier.
+
+The Venus table doesn't just track Venus's position — it **predicts** specific events: the first appearance of Venus as an evening star, its disappearance into the Sun's glare, its reappearance as a morning star, and its final disappearance before the cycle repeats. Each prediction includes a **correction factor** to keep the table accurate over centuries — the Maya astronomers knew their 584-day value was an approximation and built in periodic adjustments of exactly the right magnitude.
+
+**Eclipse Prediction**
+
+The **Dresden Codex** also contains an **eclipse table** that spans 405 lunations (about 33 years). The table lists dates on which **solar eclipses are possible** — not when they will definitely occur (because solar eclipses are only visible from specific locations), but the dates when the Sun and Moon are in the right alignment for an eclipse to happen *somewhere* on Earth.
+
+The Maya eclipse table is based on the **eclipse cycle of 11,960 days** (approximately 32.75 years), which is the period after which eclipse patterns repeat. This is close to — but not identical with — the **Saros cycle** of 6,585.3 days used by Babylonian and Greek astronomers. The Maya cycle is actually **more convenient** for long-term prediction because it is a near-perfect multiple of both the synodic month (29.53 days) and the eclipse year (346.62 days).
+
+**The Calendar**
+
+The Maya used multiple interlocking calendars:
+
+The **Tzolkin** (260 days) — a ritual calendar combining 13 numbers with 20 day-names. Its origin may be astronomical (close to the human gestation period of 266 days and to the interval between zenith passages of the Sun at Maya latitudes) or agricultural (close to the growing season for maize).
+
+The **Haab** (365 days) — a solar calendar of 18 months of 20 days plus 5 unlucky days. The Maya knew the solar year was actually closer to **365.2420 days** — their value, implied by their calendar corrections, is accurate to within **0.0002 days** of the modern measurement (365.2422 days). The Gregorian calendar, introduced in 1582, uses the value 365.2425 — *less accurate* than the Maya value calculated centuries earlier.
+
+The **Long Count** — a linear count of days from a mythological starting point (August 11, 3114 BCE in our calendar), used for historical dating. It was this calendar that gave rise to the "2012 apocalypse" myth — the Long Count completed a cycle of approximately 5,125 years on December 21, 2012. The Maya never predicted the world would end; they simply started a new count, the way our calendar starts a new year on January 1.
+
+**What the Maya Teach Us**
+
+The Maya astronomical achievement is remarkable not for any single observation but for the **systematic, multigenerational program** that produced it. Individual observers made careful measurements. Scribes recorded them in codices. Mathematicians analyzed the data, found patterns, and built predictive models. Errors were identified and corrected over centuries.
+
+This is the **scientific method** — observation, recording, analysis, prediction, verification — practiced consistently for a thousand years, without any of the instruments (telescopes, clocks, mathematical notation) that European scientists would later rely on.
+
+The Maya prove that science is not a product of technology. It is a product of **discipline** — the willingness to observe carefully, record honestly, and test your predictions against reality, generation after generation.
+
+*The end.*` },
+    stem: { title: 'Astronomy & Calendar Mathematics', description: 'The most precise naked-eye astronomy in history — Venus tables, eclipse prediction, and calendars more accurate than the Gregorian.', icon: Sun, color: 'from-amber-400 to-red-500', skills: ['Understand synodic periods and how planetary cycles repeat', 'Calculate eclipse windows from lunar node positions', 'Model interlocking calendar systems and their mathematical properties', 'Analyze observational accuracy: Maya vs European vs modern values'], project: {
+        title: 'Build a Maya Astronomy Calculator',
+        description: 'Create a Python program that implements the Maya Venus table — predict Venus appearances, calculate eclipse windows, and compare Maya calendar accuracy to the Gregorian calendar.',
+        steps: [
+          'Implement the Venus synodic cycle: predict evening star, disappearance, morning star, and disappearance dates',
+          'Add the Maya correction factor: adjust the 584-day period to maintain accuracy over centuries',
+          'Build an eclipse predictor: using the 11,960-day cycle, list dates when solar eclipses are possible',
+          'Compare calendar accuracy: calculate the drift of Maya Haab vs Gregorian vs Julian calendars over 1,000 years',
+          'Visualize Venus\'s apparent position in the sky over a full cycle using Matplotlib',
+        ],
+      } },
+    track: 'school',
+    subjects: ['Astronomy' as Subject, 'Mathematics' as Subject, 'History' as Subject],
+    toolSkills: ['Python' as Skill, 'Data Analysis' as Skill],
+    skillTags: [{ discipline: 'Scientific Modeling', skill: 'Physics simulation', tools: ['Mechanics'] }, { discipline: 'Data Science', skill: 'Data Analysis', tools: ['Pandas', 'NumPy'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    learningTracks: ['Science & Lab' as Track],
+    estimatedHours: 12,
+},
+{
+    id: 219,
+    slug: 'persian-ice-houses',
+    tradition: 'World History',
+    illustration: '/content/illustrations/persian-ice-houses.webp',
+    story: { title: 'Persian Ice Houses', tagline: 'Making and storing ice in the desert — thermodynamics, evaporative cooling, and architecture as engineering.', content: `
+**Ice in the Desert**
+
+In the summer of 400 BCE, in the city of **Isfahan**, in the heart of the Persian Empire, a merchant poured his guest a glass of **cold water with ice**. The temperature outside was 42°C. There was no electricity, no refrigerant gas, no freezer. The nearest mountain snow was 200 kilometres away.
+
+The ice had been made *here*, in the desert, using nothing but **water, wind, and the night sky**.
+
+This was not magic. It was **thermodynamics** — understood intuitively by Persian engineers two thousand years before the science was named.
+
+**The Yakhchāl**
+
+The structure that stored the ice was called a **yakhchāl** — literally "ice pit" in Persian. From the outside, it looked like a giant mud-brick dome, sometimes 18 metres tall and 15 metres in diameter. Below ground, a storage chamber extended 5 metres deep, insulated from the desert heat by walls up to 2 metres thick.
+
+The walls were built from **sārooj** — a mortar made from sand, clay, egg whites, lime, goat hair, and ash, mixed in specific proportions. This composite material was **waterproof**, **insect-resistant**, and had remarkably **low thermal conductivity** — it conducted heat far more slowly than ordinary brick or stone. A wall of sārooj 2 metres thick could maintain the interior at near-freezing temperatures while the exterior baked at 40°C.
+
+But the yakhchāl was only the storage. The real engineering marvel was **how the ice was made**.
+
+**Making Ice Without a Freezer**
+
+In the Iranian plateau, winter nights are cold — temperatures can drop to **-5°C** even in desert regions. But the Persians didn't simply wait for water to freeze on a cold night. That would produce a thin, fragile layer of ice that melted quickly.
+
+Instead, they built **shallow canals** — long, narrow channels 30-50 centimetres deep and sometimes hundreds of metres long — fed by qanats (underground aqueducts). At night, the water in these canals was exposed to the clear desert sky.
+
+Here is where the physics gets beautiful. A clear night sky has an effective **radiative temperature** of approximately **-40°C to -60°C**. This is because the atmosphere is largely transparent to **infrared radiation** in the 8-13 micrometre wavelength band — the so-called **atmospheric window**. Water in the canal radiates heat directly into the cold of space, bypassing the relatively warm air above it.
+
+This is **radiative cooling** — the same process that causes frost to form on grass on clear nights even when the air temperature is above freezing. The water loses heat by radiation faster than it gains heat from the air, and its temperature drops below the air temperature — sometimes by 5-8°C.
+
+On a night when the air temperature is -2°C, radiative cooling can drop the water temperature to **-8°C** — well below freezing. The water freezes from the surface down, forming sheets of ice 5-10 centimetres thick by morning.
+
+**The Shade Wall**
+
+To enhance the cooling, the Persians built **tall walls** on the south side of the ice-making canals. These walls, oriented east-west, did two things: they **blocked sunlight** from warming the canals during the early morning (when the ice was most fragile), and they **blocked warm southerly winds** that would transfer heat to the water surface.
+
+The wall is a deceptively sophisticated piece of engineering. Its height, length, and orientation were calculated to maximise the duration of shade on the canal — keeping the water in shadow from sunrise until the ice was thick enough to harvest.
+
+**Evaporative Cooling**
+
+The yakhchāl dome had one more trick: **wind catchers** — vertical towers with openings at the top that caught prevailing breezes and channelled them down into the ice storage chamber.
+
+But the air wasn't just moved — it was **cooled**. At the base of the wind catcher, water trickled over porous surfaces. As the breeze passed over this wet surface, the water **evaporated**, absorbing heat from the air. This is **evaporative cooling** — the same principle that makes you feel cold when you step out of a swimming pool.
+
+The amount of cooling is determined by the **wet-bulb temperature** — the lowest temperature achievable through evaporation at a given humidity. In the dry Iranian climate (relative humidity often below 20%), evaporative cooling can reduce air temperature by **10-15°C**. Hot, dry desert air at 40°C could be cooled to 25-28°C before it entered the ice chamber — cold enough to slow the melting of the stored ice dramatically.
+
+**The Qanat Connection**
+
+The water for ice-making came from **qanats** — underground aqueducts that tapped groundwater from mountain aquifers and carried it, by gravity, through gently sloping tunnels to cities and farms on the plains. Some qanats are **70 kilometres long** and reach depths of **200 metres**.
+
+The qanat water was naturally cold — groundwater temperature is approximately equal to the **annual average air temperature** of the region, typically 15-20°C. This cold water served double duty: it was the raw material for ice-making, and it provided passive cooling for buildings through a system of underground channels and cisterns.
+
+The entire system — qanat, ice canal, shade wall, yakhchāl, wind catcher — was a masterpiece of **passive thermal engineering**. No moving parts (except wind). No fuel. No electricity. Just a deep understanding of how heat moves — by radiation, conduction, convection, and evaporation — and how to manipulate each pathway to move heat *away* from where you don't want it.
+
+**The Legacy**
+
+Yakhchāls were used in Iran from at least **400 BCE** until the early 20th century — roughly **2,300 years** of continuous operation. Some are still standing, their domes visible from kilometres away across the flat desert landscape.
+
+Today, with air conditioning consuming **10% of global electricity** and refrigerants like HFCs contributing to climate change, engineers are looking back at passive cooling techniques with renewed interest. The principles behind the yakhchāl — radiative cooling, evaporative cooling, thermal mass, and intelligent orientation — are being incorporated into modern **net-zero buildings** and **off-grid cooling systems** for developing countries.
+
+The Persians solved a problem we're still working on: how to stay cool without burning the planet.
+
+*The end.*` },
+    stem: { title: 'Thermodynamics & Passive Cooling', description: 'Making ice in the desert — radiative cooling, evaporative cooling, thermal insulation, and the physics of heat transfer.', icon: Wind, color: 'from-sky-400 to-blue-500', skills: ['Understand the four modes of heat transfer: radiation, conduction, convection, evaporation', 'Calculate radiative cooling rates using the Stefan-Boltzmann law', 'Model evaporative cooling from wet-bulb temperature and humidity', 'Analyze the thermal performance of thick-walled structures'], project: {
+        title: 'Build a Passive Cooling Simulator',
+        description: 'Create a Python program that models the yakhchāl system — simulate radiative ice-making, evaporative air cooling, and thermal insulation to predict ice production and storage life.',
+        steps: [
+          'Model radiative cooling: calculate heat loss from a water surface to the night sky using the Stefan-Boltzmann law',
+          'Simulate ice formation: given air temperature, humidity, and sky clarity, predict ice thickness per night',
+          'Model the yakhchāl storage chamber: thick sārooj walls, underground chamber, calculate heat flux and melting rate',
+          'Add evaporative cooling: model a wind catcher system and calculate the temperature drop for different humidities',
+          'Visualize the daily temperature cycle inside and outside the yakhchāl, and ice mass over a full summer, using Matplotlib',
+        ],
+      } },
+    track: 'school',
+    subjects: ['Physics' as Subject, 'Engineering' as Subject, 'History' as Subject],
+    toolSkills: ['Python' as Skill, 'Scientific Modeling' as Skill],
+    skillTags: [{ discipline: 'Scientific Modeling', skill: 'Physics simulation', tools: ['Thermodynamics'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    learningTracks: ['Science & Lab' as Track],
+    estimatedHours: 12,
+},
+{
+    id: 220,
+    slug: 'zheng-he-fleet',
+    tradition: 'World History',
+    illustration: '/content/illustrations/zheng-he-fleet.webp',
+    story: { title: "Zheng He's Treasure Fleet", tagline: 'The largest ships ever built before the 20th century — naval architecture, navigation, and the voyages that almost changed history.', content: `
+**The Admiral**
+
+In the year 1405, a fleet sailed from the port of **Nanjing**, China, and turned south into the open sea. It was the largest fleet the world had ever seen — or would see for another five hundred years.
+
+The fleet contained **317 ships**. The largest of them — the **treasure ships** (baochuan) — were approximately **120 metres long and 50 metres wide**. For comparison, Columbus's largest ship, the *Santa María*, was **19 metres long**. Zheng He's flagship was six times longer than anything Europe would produce for another century.
+
+The admiral of this fleet was **Zheng He** — a Muslim eunuch from the province of Yunnan, captured as a boy during the Ming conquest of the south, castrated, and raised in the imperial court. He rose through the ranks through intelligence, loyalty, and physical imposingness (contemporary accounts describe him as over 2 metres tall).
+
+Between 1405 and 1433, Zheng He commanded **seven voyages** across the Indian Ocean, visiting Southeast Asia, India, the Persian Gulf, the Red Sea, and the **east coast of Africa**. His fleet carried silk, porcelain, tea, and lacquerware for trade. It also carried **28,000 men** — soldiers, sailors, translators, doctors, and merchants.
+
+These were not voyages of exploration in the European sense — Zheng He wasn't looking for new worlds. The routes were known. The purpose was **diplomacy and trade** — to project Ming Dynasty power across the Indian Ocean and establish China as the centre of a tribute-based international order.
+
+**The Ships**
+
+The treasure ships were engineering marvels. Their size alone — if the Chinese accounts are accurate — represents a shipbuilding achievement not matched until the steel-hulled ships of the late 19th century.
+
+The key innovation was the **watertight bulkhead**. Chinese shipwrights divided the hull into **separate sealed compartments** using transverse walls (bulkheads) that ran from the keel to the deck. If one compartment was holed — by a reef, a collision, or enemy action — water flooded only that compartment. The others remained dry, and the ship stayed afloat.
+
+This technology did not reach European shipbuilding until the **early 19th century**, four hundred years later. When it did, it was inspired by **observation of Chinese junks**. Benjamin Franklin, who examined a Chinese-built ship, wrote in 1787 that European ships should adopt the bulkhead system. The technology was finally widely adopted after the sinking of the **Titanic** in 1912 — though even the Titanic's bulkheads didn't extend to the top deck, which is why the flooding cascaded over them.
+
+The treasure ships also featured **centreline rudders** (which provide better steering than the side-mounted steering oars used by European ships), **multiple masts** (up to nine, carrying square and lateen sails for different wind conditions), and a **flat bottom** that allowed them to navigate shallow coastal waters and sit upright when beached for repairs.
+
+**Navigation**
+
+Zheng He's navigators used a combination of techniques:
+
+**The magnetic compass**: China had been using magnetic compasses for navigation since the **11th century** — two hundred years before the compass reached Europe. Zheng He's navigators used a **48-point compass** (compared to the European 32-point compass), giving finer directional resolution.
+
+**Star altitude**: Navigators measured the altitude of **Polaris** and other stars above the horizon using a simple device — a wooden board held at arm's length, with a string attached to the centre. The string was held between the teeth, ensuring a consistent distance between the eye and the board. Different marks on the board corresponded to different star altitudes, and thus different latitudes.
+
+**Sailing directions**: Zheng He's expeditions produced detailed **rutters** (written sailing directions) called **hǎidào zhēnjīng** — "compass needle classics." These gave the compass bearing and number of watches (time periods) between successive waypoints, along with descriptions of landmarks, depths, and hazards. They were essentially **medieval GPS coordinates** — bearing and distance, in a pre-digital format.
+
+**The Cancellation**
+
+After Zheng He's death in 1433, the voyages stopped. The new emperor's Confucian advisors argued that the expeditions were wasteful — they cost the treasury enormous sums and brought back exotic gifts (giraffes, ostriches, zebras) but no meaningful revenue. The court faction that favoured northern land defence won out over the maritime faction.
+
+In 1525, the Chenghua Emperor ordered the **destruction of all records** of Zheng He's voyages. The great ships were burned or left to rot. The technology was abandoned. China turned inward.
+
+Within sixty years, European ships — tiny by comparison — would round Africa and begin building colonial empires across the very ocean that Zheng He had once dominated. Portuguese, Dutch, and British traders would establish the trade routes that Zheng He had pioneered, but with a very different purpose: not diplomacy but **extraction**.
+
+**The Engineering Question**
+
+The great unresolved question about Zheng He's fleet is: **were the treasure ships really 120 metres long?**
+
+The Chinese historical sources consistently report this size. But no treasure ship has ever been found by archaeologists (a massive rudder post found in Nanjing in 1957 is the strongest physical evidence). Modern naval architects are divided: some argue that a wooden ship longer than about **70 metres** would be structurally unsound — the forces of waves and wind would cause the hull to flex and the seams to open, a problem called **hogging and sagging**.
+
+Others point out that the flat-bottomed junk design, with its watertight bulkheads acting as internal structural reinforcement, distributes forces differently than a European ship hull, and that 120-metre wooden ships might have been feasible with this design — though barely.
+
+The debate is a lesson in **naval architecture** — the science of making a structure that is strong enough to survive the dynamic forces of the ocean, flexible enough not to crack, and light enough to float. Every ship is a compromise between these competing requirements, and the maximum size of a wooden ship is determined by the material properties of wood — its **tensile strength, compressive strength, and resistance to shear** — pushed to their absolute limits.
+
+*The end.*` },
+    stem: { title: 'Naval Architecture & Structural Engineering', description: 'The engineering of the largest wooden ships ever built — bulkheads, buoyancy, structural limits, and why size matters in ship design.', icon: Ship, color: 'from-red-400 to-orange-500', skills: ['Understand buoyancy and Archimedes\' principle for ship displacement', 'Analyze watertight bulkheads and how they improve survivability', 'Model the structural limits of wooden hulls: hogging, sagging, and shear', 'Compare Chinese junk design with European caravel design'], project: {
+        title: 'Build a Ship Design Calculator',
+        description: 'Create a Python program that models the structural engineering of a large wooden ship — calculate buoyancy, stress distribution, and the maximum feasible length for different hull designs.',
+        steps: [
+          'Calculate buoyancy: given hull dimensions and wood density, determine displacement and freeboard',
+          'Model hogging and sagging: simulate wave-induced bending forces on a hull of given length',
+          'Calculate maximum stress in the keel and hull planking, and compare to the tensile strength of teak',
+          'Add bulkheads: model how internal walls redistribute forces and improve structural rigidity',
+          'Visualize stress distribution along the hull for different ship lengths and wave conditions using Matplotlib',
+        ],
+      } },
+    track: 'school',
+    subjects: ['Engineering' as Subject, 'Physics' as Subject, 'Geography' as Subject, 'History' as Subject],
+    toolSkills: ['Python' as Skill, 'Scientific Modeling' as Skill],
+    skillTags: [{ discipline: 'Scientific Modeling', skill: 'Physics simulation', tools: ['Mechanics'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    learningTracks: ['Science & Lab' as Track],
+    estimatedHours: 12,
+},
 ];
