@@ -4,10 +4,11 @@ import {
   ArrowLeft, Clock, BookOpen, CheckCircle, Plus, X, ArrowRight,
   Sparkles, Target, Flame, Trophy, Map as MapIcon, Filter, Code2,
   Cpu, FlaskConical, Globe, Lightbulb, ChevronDown, Zap, Search,
+  Star, TrendingUp,
 } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { lessons, SUBJECTS, type Subject, getLessonBySlug, type Lesson } from '../data/lessons';
+import { lessons, SUBJECTS, type Subject, getLessonBySlug, type Lesson, DISCIPLINES, type Discipline } from '../data/lessons';
 import { useProgress } from '../contexts/ProgressContext';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
@@ -55,6 +56,86 @@ async function savePlanDB(userId: string, plan: PlanMap) {
     }, { onConflict: 'user_id' });
   } catch {}
 }
+
+/* ── Per-level progress dots ── */
+function LevelDots({ slug, isLevelComplete }: { slug: string; isLevelComplete: (slug: string, level: number) => boolean }) {
+  return (
+    <div className="flex gap-1 items-center" title="Levels 0–4">
+      {[0, 1, 2, 3, 4].map(lvl => (
+        <div key={lvl} className={`w-2 h-2 rounded-full ${isLevelComplete(slug, lvl) ? 'bg-emerald-500' : 'bg-gray-300 dark:bg-gray-600'}`}
+          title={`Level ${lvl}${isLevelComplete(slug, lvl) ? ' ✓' : ''}`} />
+      ))}
+    </div>
+  );
+}
+
+/* ── Streak helpers ── */
+function getStreakData(): { current: number; best: number; todayDone: boolean; lastDate: string } {
+  try {
+    const raw = localStorage.getItem('tma_streak');
+    if (raw) return JSON.parse(raw);
+  } catch {}
+  return { current: 0, best: 0, todayDone: false, lastDate: '' };
+}
+function updateStreak() {
+  const today = new Date().toISOString().slice(0, 10);
+  const data = getStreakData();
+  if (data.lastDate === today) return data; // already counted today
+  const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+  const current = data.lastDate === yesterday ? data.current + 1 : 1;
+  const best = Math.max(current, data.best);
+  const next = { current, best, todayDone: true, lastDate: today };
+  localStorage.setItem('tma_streak', JSON.stringify(next));
+  return next;
+}
+
+/* ── XP calculation ── */
+function calcXP(isLevelComplete: (slug: string, lvl: number) => boolean, slugs: string[]): number {
+  let xp = 0;
+  for (const slug of slugs) {
+    if (isLevelComplete(slug, 0)) xp += 10;  // Level 0: 10 XP
+    if (isLevelComplete(slug, 1)) xp += 20;  // Level 1: 20 XP
+    if (isLevelComplete(slug, 2)) xp += 30;  // Level 2: 30 XP
+    if (isLevelComplete(slug, 3)) xp += 40;  // Level 3: 40 XP
+    if (isLevelComplete(slug, 4)) xp += 50;  // Level 4: 50 XP
+  }
+  return xp;
+}
+
+const XP_MILESTONES = [
+  { xp: 50, label: 'First Steps', icon: '🌱' },
+  { xp: 150, label: 'Getting Curious', icon: '🔍' },
+  { xp: 500, label: 'Pattern Spotter', icon: '🧩' },
+  { xp: 1000, label: 'Code Builder', icon: '🏗️' },
+  { xp: 2500, label: 'Science Explorer', icon: '🔬' },
+  { xp: 5000, label: 'STEM Master', icon: '🏆' },
+];
+
+/* ── Auto-generated discipline goals ── */
+const DISCIPLINE_GOALS = DISCIPLINES.filter(d => {
+  return lessons.some(l => l.skillTags?.some(t => t.discipline === d.key));
+}).map(d => {
+  const matchingLessons = lessons.filter(l => l.skillTags?.some(t => t.discipline === d.key));
+  // Pick top 5-6 lessons by estimated hours (prioritize fully-built lessons)
+  const sorted = matchingLessons
+    .filter(l => l.level0)
+    .slice(0, 6);
+  const skills = d.skills.map(s => s.name);
+  return {
+    id: `discipline-${d.key.toLowerCase().replace(/[^a-z]/g, '-')}`,
+    title: d.key,
+    desc: `${matchingLessons.length} lessons using ${skills.slice(0, 3).join(', ')}${skills.length > 3 ? ` and ${skills.length - 3} more` : ''}.`,
+    icon: d.icon,
+    color: d.key === 'Programming' ? 'from-violet-400 to-purple-500' :
+           d.key === 'Data Science' ? 'from-cyan-400 to-blue-500' :
+           d.key === 'AI & Machine Learning' ? 'from-rose-400 to-pink-500' :
+           d.key === 'Scientific Modeling' ? 'from-indigo-400 to-blue-500' :
+           'from-teal-400 to-emerald-500',
+    slugs: sorted.map(l => l.slug),
+    skills: skills.slice(0, 4),
+    discipline: d.key as Discipline,
+  };
+});
 
 /* ── Curated learning paths ── */
 const LEARNING_GOALS = [
@@ -127,9 +208,12 @@ export default function LessonPlanPage() {
   const [planMap, setPlanMap] = useState<PlanMap>(loadPlanLocal);
   const [view, setView] = useState<'goals' | 'browse' | 'plan'>('goals');
   const [filterSubject, setFilterSubject] = useState<Subject | null>(null);
+  const [filterDiscipline, setFilterDiscipline] = useState<Discipline | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedGoal, setExpandedGoal] = useState<string | null>(null);
-  const { isStoryComplete } = useProgress();
+  const [goalTab, setGoalTab] = useState<'curated' | 'discipline'>('curated');
+  const { isStoryComplete, isLevelComplete, getStoryProgress } = useProgress();
+  const [streak] = useState(getStreakData);
 
   useEffect(() => {
     if (!user) return;
@@ -201,16 +285,29 @@ export default function LessonPlanPage() {
   const completedInPlan = selectedLessons.filter(l => isStoryComplete(l.slug)).length;
   const nextLesson = selectedLessons.find(l => !isStoryComplete(l.slug));
   const progressPct = selectedLessons.length > 0 ? Math.round(completedInPlan / selectedLessons.length * 100) : 0;
+  const totalLevelsInPlan = selectedLessons.length * 5;
+  const completedLevels = selectedLessons.reduce((sum, l) => {
+    return sum + [0, 1, 2, 3, 4].filter(lvl => isLevelComplete(l.slug, lvl)).length;
+  }, 0);
+  const levelPct = totalLevelsInPlan > 0 ? Math.round(completedLevels / totalLevelsInPlan * 100) : 0;
+  const xp = calcXP(isLevelComplete, selectedLessons.map(l => l.slug));
+  const currentMilestone = XP_MILESTONES.filter(m => xp >= m.xp).pop();
+  const nextMilestone = XP_MILESTONES.find(m => xp < m.xp);
+  const hoursRemaining = selectedLessons.reduce((sum, l) => {
+    const pct = getStoryProgress(l.slug);
+    return sum + ((l.estimatedHours || 12) * (1 - pct / 100));
+  }, 0);
 
   const filteredLessons = useMemo(() => lessons.filter(l => {
     if (filterSubject && !l.subjects?.includes(filterSubject)) return false;
+    if (filterDiscipline && !l.skillTags?.some(t => t.discipline === filterDiscipline)) return false;
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
       return l.story.title.toLowerCase().includes(q) || l.stem.title.toLowerCase().includes(q) ||
         l.stem.skills.some(s => s.toLowerCase().includes(q));
     }
     return true;
-  }), [filterSubject, searchQuery]);
+  }), [filterSubject, filterDiscipline, searchQuery]);
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
@@ -263,29 +360,53 @@ export default function LessonPlanPage() {
               ) : (
                 <>
                   {/* Stats bar */}
-                  <div className="grid grid-cols-4 gap-4 mb-6">
-                    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 text-center">
-                      <p className="text-3xl font-bold text-amber-600">{selectedLessons.length}</p>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Stories</p>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+                    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-3 sm:p-4 text-center">
+                      <p className="text-2xl sm:text-3xl font-bold text-amber-600">{xp}</p>
+                      <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 mt-1">XP earned</p>
                     </div>
-                    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 text-center">
-                      <p className="text-3xl font-bold text-blue-600">{totalHours}</p>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Total Hours</p>
+                    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-3 sm:p-4 text-center">
+                      <p className="text-2xl sm:text-3xl font-bold text-orange-500">{streak.current}</p>
+                      <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 mt-1 flex items-center justify-center gap-1"><Flame className="w-3 h-3" /> Day streak</p>
                     </div>
-                    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 text-center">
-                      <p className="text-3xl font-bold text-emerald-600">{completedInPlan}</p>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Completed</p>
+                    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-3 sm:p-4 text-center">
+                      <p className="text-2xl sm:text-3xl font-bold text-emerald-600">{completedLevels}<span className="text-sm text-gray-400">/{totalLevelsInPlan}</span></p>
+                      <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 mt-1">Levels done</p>
                     </div>
-                    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 text-center">
-                      <p className="text-3xl font-bold text-gray-900 dark:text-white">{progressPct}%</p>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Progress</p>
+                    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-3 sm:p-4 text-center">
+                      <p className="text-2xl sm:text-3xl font-bold text-blue-600">{Math.round(hoursRemaining)}</p>
+                      <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 mt-1">Hours left</p>
                     </div>
                   </div>
 
-                  {/* Progress bar */}
-                  <div className="w-full h-3 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden mb-8">
-                    <div className={`h-full rounded-full transition-all duration-700 ${progressPct === 100 ? 'bg-emerald-500' : 'bg-gradient-to-r from-amber-400 to-orange-500'}`}
-                      style={{ width: `${Math.max(progressPct, 1)}%` }} />
+                  {/* Milestone badge */}
+                  {currentMilestone && (
+                    <div className="flex items-center gap-3 bg-amber-50 dark:bg-amber-900/15 border border-amber-200 dark:border-amber-800 rounded-xl p-3 mb-4">
+                      <span className="text-2xl">{currentMilestone.icon}</span>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-bold text-amber-800 dark:text-amber-300">{currentMilestone.label}</p>
+                        {nextMilestone && (
+                          <div className="flex items-center gap-2 mt-1">
+                            <div className="flex-1 h-1.5 bg-amber-200 dark:bg-amber-800 rounded-full overflow-hidden">
+                              <div className="h-full bg-amber-500 rounded-full" style={{ width: `${Math.min(100, ((xp - currentMilestone.xp) / (nextMilestone.xp - currentMilestone.xp)) * 100)}%` }} />
+                            </div>
+                            <span className="text-[10px] text-amber-600 dark:text-amber-400 font-semibold whitespace-nowrap">{nextMilestone.xp - xp} XP to {nextMilestone.label}</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Level progress bar */}
+                  <div className="mb-6">
+                    <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-1.5">
+                      <span>Level progress</span>
+                      <span className="font-bold">{levelPct}%</span>
+                    </div>
+                    <div className="w-full h-3 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
+                      <div className={`h-full rounded-full transition-all duration-700 ${levelPct === 100 ? 'bg-emerald-500' : 'bg-gradient-to-r from-amber-400 to-orange-500'}`}
+                        style={{ width: `${Math.max(levelPct, 1)}%` }} />
+                    </div>
                   </div>
 
                   {/* Story timeline */}
@@ -338,14 +459,15 @@ export default function LessonPlanPage() {
                                     <strong>You'll build:</strong> {lesson.stem.project.title}
                                   </p>
                                   <p className="text-xs text-gray-400 dark:text-gray-500">{lesson.stem.project.description}</p>
-                                  <div className="flex flex-wrap gap-1.5 mt-3">
-                                    {lesson.subjects?.map(s => {
+                                  <div className="flex flex-wrap items-center gap-1.5 mt-3">
+                                    <LevelDots slug={lesson.slug} isLevelComplete={isLevelComplete} />
+                                    {lesson.skillTags?.filter(t => t.discipline !== 'Programming').slice(0, 2).map((t, i) => (
+                                      <span key={i} className="text-[10px] px-1.5 py-0.5 rounded bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300">{t.skill}</span>
+                                    ))}
+                                    {lesson.subjects?.slice(0, 2).map(s => {
                                       const sd = SUBJECTS.find(x => x.key === s);
                                       return sd ? <span key={s} className={`text-[10px] px-1.5 py-0.5 rounded ${sd.color}`}>{sd.icon} {sd.key}</span> : null;
                                     })}
-                                    {lesson.toolSkills?.map(s => (
-                                      <span key={s} className="text-[10px] px-1.5 py-0.5 rounded bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300">{s}</span>
-                                    ))}
                                     <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400">
                                       <Clock className="w-3 h-3 inline mr-0.5" />{lesson.estimatedHours || 12}h
                                     </span>
@@ -388,7 +510,90 @@ export default function LessonPlanPage() {
             {/* ── Left: Goals or Browse ── */}
             <div className="lg:col-span-2">
               {view === 'goals' ? (
-                <div className="space-y-4">
+                <div>
+                  {/* Goal type tabs */}
+                  <div className="flex gap-2 mb-4">
+                    <button onClick={() => setGoalTab('curated')}
+                      className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${goalTab === 'curated' ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300' : 'bg-gray-100 dark:bg-gray-800 text-gray-500'}`}>
+                      Curated Paths
+                    </button>
+                    <button onClick={() => setGoalTab('discipline')}
+                      className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${goalTab === 'discipline' ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300' : 'bg-gray-100 dark:bg-gray-800 text-gray-500'}`}>
+                      By Discipline
+                    </button>
+                  </div>
+
+                  {/* Discipline goals */}
+                  {goalTab === 'discipline' && (
+                    <div className="space-y-4 mb-4">
+                      {DISCIPLINE_GOALS.map(goal => {
+                        const goalLessons = goal.slugs.map(s => getLessonBySlug(s)).filter(Boolean) as Lesson[];
+                        const inPlan = goal.slugs.filter(s => selectedSlugs.has(s)).length;
+                        const isExpanded = expandedGoal === goal.id;
+
+                        return (
+                          <div key={goal.id} className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+                            <button onClick={() => setExpandedGoal(isExpanded ? null : goal.id)}
+                              className="w-full text-left p-5 flex items-start gap-4 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
+                              <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${goal.color} flex items-center justify-center flex-shrink-0 text-2xl`}>
+                                {goal.icon}
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <h3 className="text-base font-bold text-gray-900 dark:text-white mb-1">{goal.title}</h3>
+                                <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{goal.desc}</p>
+                                <div className="flex flex-wrap gap-1.5 mt-2">
+                                  {goal.skills.map(s => (
+                                    <span key={s} className="text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-0.5 rounded-full">{s}</span>
+                                  ))}
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-3 flex-shrink-0">
+                                {inPlan > 0 && (
+                                  <span className="text-xs font-semibold text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/30 px-2 py-1 rounded-full">
+                                    {inPlan}/{goal.slugs.length}
+                                  </span>
+                                )}
+                                <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+                              </div>
+                            </button>
+                            {isExpanded && (
+                              <div className="border-t border-gray-100 dark:border-gray-700 px-5 pb-5">
+                                <div className="flex items-center justify-between py-3">
+                                  <span className="text-xs text-gray-500 dark:text-gray-400">{goalLessons.length} stories</span>
+                                  <button onClick={() => addGoal(goal.slugs)} className="text-xs font-semibold text-amber-600 dark:text-amber-400 hover:underline">Add all to plan</button>
+                                </div>
+                                <div className="space-y-2">
+                                  {goalLessons.map((lesson, i) => {
+                                    const selected = selectedSlugs.has(lesson.slug);
+                                    const complete = isStoryComplete(lesson.slug);
+                                    return (
+                                      <div key={lesson.slug} className={`flex items-center gap-3 p-3 rounded-xl border transition-all ${
+                                        selected ? (complete ? 'border-emerald-300 bg-emerald-50/50 dark:border-emerald-800 dark:bg-emerald-900/10' : 'border-amber-300 bg-amber-50/50 dark:border-amber-800 dark:bg-amber-900/10')
+                                        : 'border-gray-100 dark:border-gray-700'
+                                      }`}>
+                                        <button onClick={() => toggleLesson(lesson.slug)} className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 ${
+                                          complete ? 'bg-emerald-500 text-white' : selected ? 'bg-amber-500 text-white' : 'bg-gray-200 dark:bg-gray-700 hover:bg-amber-200'
+                                        }`}>
+                                          {complete || selected ? <CheckCircle className="w-4 h-4" /> : <Plus className="w-4 h-4 text-gray-400" />}
+                                        </button>
+                                        <div className="flex-1 min-w-0">
+                                          <Link to={`/lessons/${lesson.slug}`} className="text-sm font-semibold text-gray-900 dark:text-white hover:text-amber-600 truncate block">{lesson.story.title}</Link>
+                                          <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{lesson.stem.title}</p>
+                                        </div>
+                                        <LevelDots slug={lesson.slug} isLevelComplete={isLevelComplete} />
+                                      </div>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                <div className={`space-y-4 ${goalTab !== 'curated' ? 'hidden' : ''}`}>
                   {LEARNING_GOALS.map(goal => {
                     const goalLessons = goal.slugs.map(s => getLessonBySlug(s)).filter(Boolean) as Lesson[];
                     const inPlan = goal.slugs.filter(s => selectedSlugs.has(s)).length;
@@ -475,21 +680,32 @@ export default function LessonPlanPage() {
                     );
                   })}
                 </div>
+                </div>
               ) : (
                 /* Browse all stories */
                 <div>
-                  {/* Search + Filter */}
-                  <div className="flex gap-2 mb-4 flex-wrap">
-                    <div className="relative flex-1 min-w-[200px]">
+                  {/* Search + Filters */}
+                  <div className="flex gap-2 mb-3 flex-wrap">
+                    <div className="relative flex-1 min-w-[180px]">
                       <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                       <input
                         type="text"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        placeholder="Search stories, topics, or skills..."
+                        placeholder="Search stories or topics..."
                         className="w-full pl-9 pr-4 py-2.5 border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                       />
                     </div>
+                    <select
+                      value={filterDiscipline || ''}
+                      onChange={(e) => { setFilterDiscipline(e.target.value ? e.target.value as Discipline : null); setFilterSubject(null); }}
+                      className="px-3 py-2.5 border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg text-sm"
+                    >
+                      <option value="">All Skills</option>
+                      {DISCIPLINES.map(d => (
+                        <option key={d.key} value={d.key}>{d.icon} {d.key}</option>
+                      ))}
+                    </select>
                     <select
                       value={filterSubject || ''}
                       onChange={(e) => setFilterSubject(e.target.value ? e.target.value as Subject : null)}
@@ -524,14 +740,15 @@ export default function LessonPlanPage() {
                             </Link>
                             <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{lesson.stem.title}</p>
                             <p className="text-xs text-gray-400 dark:text-gray-500 mt-1 line-clamp-1">{lesson.stem.project.title}: {lesson.stem.project.description}</p>
-                            <div className="flex flex-wrap gap-1 mt-2">
-                              {lesson.subjects?.slice(0, 3).map(s => {
+                            <div className="flex flex-wrap items-center gap-1 mt-2">
+                              <LevelDots slug={lesson.slug} isLevelComplete={isLevelComplete} />
+                              {lesson.skillTags?.filter(t => t.discipline !== 'Programming').slice(0, 2).map((t, i) => (
+                                <span key={i} className="text-[10px] px-1.5 py-0.5 rounded bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300">{t.skill}</span>
+                              ))}
+                              {lesson.subjects?.slice(0, 2).map(s => {
                                 const sd = SUBJECTS.find(x => x.key === s);
                                 return sd ? <span key={s} className={`text-[10px] px-1.5 py-0.5 rounded ${sd.color}`}>{sd.icon} {sd.key}</span> : null;
                               })}
-                              {lesson.toolSkills?.slice(0, 2).map(s => (
-                                <span key={s} className="text-[10px] px-1.5 py-0.5 rounded bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300">{s}</span>
-                              ))}
                             </div>
                           </div>
                           <span className="text-xs text-gray-400 flex-shrink-0">{lesson.estimatedHours || 12}h</span>
@@ -546,15 +763,18 @@ export default function LessonPlanPage() {
             {/* ── Right: Plan summary ── */}
             <div className="lg:col-span-1">
               <div className="sticky top-24 bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-lg overflow-hidden">
-                <div className="bg-gradient-to-r from-amber-500 to-orange-500 px-6 py-5 text-white">
-                  <h2 className="text-lg font-bold flex items-center gap-2">
-                    <Target className="w-5 h-5" /> Your Plan
+                <div className="bg-gradient-to-r from-amber-500 to-orange-500 px-5 py-4 text-white">
+                  <h2 className="text-base font-bold flex items-center gap-2">
+                    <Target className="w-4 h-4" /> Your Plan
                   </h2>
                   {selectedLessons.length > 0 && (
-                    <div className="flex items-center gap-5 mt-3">
-                      <div><p className="text-2xl font-bold">{selectedLessons.length}</p><p className="text-xs text-white/80">stories</p></div>
-                      <div><p className="text-2xl font-bold">{totalHours}</p><p className="text-xs text-white/80">hours</p></div>
-                      <div><p className="text-2xl font-bold">{completedInPlan}</p><p className="text-xs text-white/80">done</p></div>
+                    <div className="flex items-center gap-4 mt-2">
+                      <div><p className="text-xl font-bold">{selectedLessons.length}</p><p className="text-[10px] text-white/80">stories</p></div>
+                      <div><p className="text-xl font-bold">{xp}</p><p className="text-[10px] text-white/80">XP</p></div>
+                      <div><p className="text-xl font-bold">{completedLevels}</p><p className="text-[10px] text-white/80">levels</p></div>
+                      {streak.current > 0 && (
+                        <div><p className="text-xl font-bold flex items-center gap-1"><Flame className="w-4 h-4" />{streak.current}</p><p className="text-[10px] text-white/80">streak</p></div>
+                      )}
                     </div>
                   )}
                 </div>
@@ -585,11 +805,11 @@ export default function LessonPlanPage() {
                       </div>
 
                       {/* Time estimate */}
-                      {completedInPlan < selectedLessons.length && (
+                      {hoursRemaining > 0 && (
                         <div className="bg-amber-50 dark:bg-amber-900/15 border border-amber-200 dark:border-amber-800 rounded-lg p-3 mb-5">
                           <p className="text-xs text-amber-800 dark:text-amber-300 flex items-start gap-2">
                             <Clock className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" />
-                            <span>~{(selectedLessons.length - completedInPlan) * 12} hours remaining &middot; {Math.ceil((selectedLessons.length - completedInPlan) * 12 / 7)} weeks at 2h/day</span>
+                            <span>~{Math.round(hoursRemaining)}h remaining &middot; {Math.ceil(hoursRemaining / 14)} weeks at 2h/day</span>
                           </p>
                         </div>
                       )}
@@ -600,13 +820,14 @@ export default function LessonPlanPage() {
                           const complete = isStoryComplete(lesson.slug);
                           return (
                             <div key={lesson.slug} className={`flex items-center justify-between p-2 rounded-lg ${complete ? 'bg-emerald-50 dark:bg-emerald-900/10' : 'bg-gray-50 dark:bg-gray-700/50'}`}>
-                              <div className="flex items-center gap-2 min-w-0">
+                              <div className="flex items-center gap-2 min-w-0 flex-1">
                                 {complete ? <CheckCircle className="w-4 h-4 text-emerald-500 flex-shrink-0" /> : <div className="w-4 h-4 rounded-full border-2 border-amber-400 flex-shrink-0" />}
-                                <Link to={`/lessons/${lesson.slug}`} className="text-xs text-gray-700 dark:text-gray-300 truncate hover:text-amber-600 dark:hover:text-amber-400">
+                                <Link to={`/lessons/${lesson.slug}`} className="text-xs text-gray-700 dark:text-gray-300 truncate hover:text-amber-600 dark:hover:text-amber-400 flex-1 min-w-0">
                                   {lesson.story.title}
                                 </Link>
+                                <LevelDots slug={lesson.slug} isLevelComplete={isLevelComplete} />
                               </div>
-                              <button onClick={() => toggleLesson(lesson.slug)} className="p-1 text-gray-400 hover:text-red-500 flex-shrink-0">
+                              <button onClick={() => toggleLesson(lesson.slug)} className="p-1 text-gray-400 hover:text-red-500 flex-shrink-0 ml-1">
                                 <X className="w-3 h-3" />
                               </button>
                             </div>
