@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import {
   ArrowRight, BookOpen, Code2, Sparkles, Lock, Unlock,
   ChevronDown, GraduationCap, Lightbulb, Wrench, Rocket,
@@ -286,7 +286,7 @@ function BootcampCard({ isIndia }: { isIndia: boolean }) {
   const [activeTrack, setActiveTrack] = useState(0);
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl border border-sky-200 dark:border-sky-800 p-5 mb-4">
+    <div id="bootcamp" className="bg-white dark:bg-gray-800 rounded-xl border border-sky-200 dark:border-sky-800 p-5 mb-4 scroll-mt-24">
       <h4 className="text-sm font-bold text-sky-700 dark:text-sky-300 uppercase tracking-wide mb-2">24-Week Bootcamp</h4>
       <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">Career changers &amp; college grads</p>
       <ul className="space-y-1.5 text-sm text-gray-700 dark:text-gray-300">
@@ -370,7 +370,7 @@ function SchoolProgramCard({ isIndia }: { isIndia: boolean }) {
   const [activeTrack, setActiveTrack] = useState(0);
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl border border-emerald-200 dark:border-emerald-800 p-5 mb-4">
+    <div id="school-program" className="bg-white dark:bg-gray-800 rounded-xl border border-emerald-200 dark:border-emerald-800 p-5 mb-4 scroll-mt-24">
       <h4 className="text-sm font-bold text-emerald-700 dark:text-emerald-300 uppercase tracking-wide mb-2">12-Month School Program</h4>
       <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">Students — Grades 6 and up</p>
       <ul className="space-y-1.5 text-sm text-gray-700 dark:text-gray-300">
@@ -419,6 +419,17 @@ export default function ProgramsPage() {
   const { user } = useAuth();
   const { hasActiveSubscription, plan: currentPlan } = useSubscription();
   const paymentResult = new URLSearchParams(window.location.search).get('payment');
+  const { hash } = useLocation();
+
+  // Scroll to hash anchor (e.g., #bootcamp, #school-program)
+  useEffect(() => {
+    if (hash) {
+      setTimeout(() => {
+        const el = document.querySelector(hash);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
+  }, [hash]);
 
   // Detect India via timezone
   const isIndia = (() => {
