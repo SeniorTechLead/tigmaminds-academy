@@ -258,7 +258,7 @@ const LEARNING_GOALS = [
     icon: Lightbulb,
     color: 'from-purple-400 to-violet-500',
     slugs: ['al-khwarizmi-algebra', 'geometry-of-alhambra', 'david-and-goliath', 'sand-mandala', 'noahs-ark'],
-    skills: ['Mathematics', 'History', 'Algorithms'],
+    skills: ['Mathematics', 'Physics', 'Geometry', 'Algorithms'],
   },
 ];
 
@@ -433,9 +433,15 @@ export default function LessonPlanPage() {
                 <>
                   {/* Stats bar */}
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
-                    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-3 sm:p-4 text-center">
+                    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-3 sm:p-4 text-center group relative">
                       <p className="text-2xl sm:text-3xl font-bold text-amber-600">{xp}</p>
                       <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 mt-1">XP earned</p>
+                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 bg-gray-900 dark:bg-gray-700 text-white text-[10px] rounded-lg p-2.5 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity z-20 shadow-lg">
+                        <p className="font-semibold mb-1">How XP works</p>
+                        <p>L0: 10 XP &middot; L1: 20 XP &middot; L2: 30 XP</p>
+                        <p>L3: 40 XP &middot; L4: 50 XP</p>
+                        <p className="mt-1 text-gray-300">Complete levels in any story to earn XP and unlock milestones.</p>
+                      </div>
                     </div>
                     <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-3 sm:p-4 text-center">
                       <p className="text-2xl sm:text-3xl font-bold text-orange-500">{streak.current}</p>
