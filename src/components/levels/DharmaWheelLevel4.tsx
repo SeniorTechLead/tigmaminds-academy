@@ -157,7 +157,7 @@ print("=" * 60)
 hours = np.linspace(0, 24, 1440)
 
 # Base demand (MW): peaks morning and evening
-demand = 100 + 30 * np.sin(2 * np.pi * (hours - 6) / 24) + \\
+demand = 100 + 30 * np.sin(2 * np.pi * (hours - 6) / 24) + \
          20 * np.sin(2 * np.pi * (hours - 18) / 12)
 demand += np.random.normal(0, 3, len(hours))  # noise
 
@@ -304,8 +304,8 @@ rpm = 30000
 freq = rpm / 60  # Hz
 
 healthy = 0.01 * np.sin(2 * np.pi * freq * t)  # tiny baseline
-cracked = 0.01 * np.sin(2 * np.pi * freq * t) + \\
-          0.005 * np.sin(2 * np.pi * 2 * freq * t) + \\
+cracked = 0.01 * np.sin(2 * np.pi * freq * t) + \
+          0.005 * np.sin(2 * np.pi * 2 * freq * t) + \
           0.1 * np.exp(t * 3 - 3)  # growing harmonic + exponential growth
 
 vib_h = np.max(np.abs(healthy))

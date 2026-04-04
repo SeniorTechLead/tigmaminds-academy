@@ -202,7 +202,7 @@ print()
 print(f"Stable age distribution: {', '.join(f'{a}: {s:.1%}' for a, s in zip(short_names, stable_age_dist))}")
 print()
 print("Sensitivity ranking (most to least impactful):")
-all_sens = list(zip(['Surv ' + n for n in short_names], surv_sensitivity)) + \\
+all_sens = list(zip(['Surv ' + n for n in short_names], surv_sensitivity)) + \
            list(zip(['Fec ' + n for n in short_names], fec_sensitivity))
 all_sens.sort(key=lambda x: -abs(x[1]))
 for name, sens in all_sens[:5]:

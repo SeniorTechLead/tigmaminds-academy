@@ -55,10 +55,60 @@ interface MiniLessonProps {
   explanation?: string;
 }
 
-function renderMarkdown(text: string) {
+export function inlineMarkdown(text: string) {
   return text
     .replace(/\*\*(.+?)\*\*/g, '<strong class="text-gray-900 dark:text-white">$1</strong>')
     .replace(/`(.+?)`/g, '<code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-amber-700 dark:text-amber-300 text-xs font-mono">$1</code>');
+}
+
+export function renderMarkdown(text: string) {
+  const paragraphs = text.split(/\n\n+/);
+  const html: string[] = [];
+
+  for (const para of paragraphs) {
+    const trimmed = para.trim();
+    if (!trimmed) continue;
+
+    const lines = trimmed.split('\n');
+
+    // Process lines in groups: plain text, then list items, then plain text, etc.
+    let i = 0;
+    while (i < lines.length) {
+      const line = lines[i].trim();
+
+      // Numbered list run
+      if (/^\d+\.\s/.test(line)) {
+        const items: string[] = [];
+        while (i < lines.length && /^\d+\.\s/.test(lines[i].trim())) {
+          items.push(`<li class="ml-4 mb-1">${inlineMarkdown(lines[i].trim().replace(/^\d+\.\s/, ''))}</li>`);
+          i++;
+        }
+        html.push(`<ol class="list-decimal pl-4 my-2 space-y-1">${items.join('')}</ol>`);
+        continue;
+      }
+
+      // Bullet list run
+      if (/^[-•]\s/.test(line)) {
+        const items: string[] = [];
+        while (i < lines.length && /^[-•]\s/.test(lines[i].trim())) {
+          items.push(`<li class="ml-4 mb-1">${inlineMarkdown(lines[i].trim().replace(/^[-•]\s/, ''))}</li>`);
+          i++;
+        }
+        html.push(`<ul class="list-disc pl-4 my-2 space-y-1">${items.join('')}</ul>`);
+        continue;
+      }
+
+      // Plain text run — collect consecutive non-list lines
+      const textLines: string[] = [];
+      while (i < lines.length && !/^\d+\.\s/.test(lines[i].trim()) && !/^[-•]\s/.test(lines[i].trim())) {
+        textLines.push(inlineMarkdown(lines[i].trim()));
+        i++;
+      }
+      html.push(`<p class="mb-3">${textLines.join('<br/>')}</p>`);
+    }
+  }
+
+  return html.join('');
 }
 
 export default function MiniLesson({

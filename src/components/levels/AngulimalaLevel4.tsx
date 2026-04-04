@@ -731,7 +731,7 @@ axes[2, 1].set_ylabel('Compassion pathway', fontsize=10)
 axes[2, 1].set_title('Phase Portrait (trajectory)', fontsize=12)
 axes[2, 1].grid(alpha=0.3)
 
-plt.suptitle('Angulimala\\'s Transformation: 365-Day Computational Model',
+plt.suptitle('Angulimala\'s Transformation: 365-Day Computational Model',
              fontsize=15, fontweight='bold')
 plt.tight_layout()
 plt.show()

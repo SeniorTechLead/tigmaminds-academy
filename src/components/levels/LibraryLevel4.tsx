@@ -158,7 +158,7 @@ print(f"\\nLanguage: {assamese} Assamese / {len(books)-assamese} English")
 # --- Visualization ---
 fig, axes = plt.subplots(2, 2, figsize=(14, 10))
 fig.patch.set_facecolor('#1f2937')
-fig.suptitle('Library Data Overview — Dipankar\\'s Digital Library',
+fig.suptitle('Library Data Overview — Dipankar\'s Digital Library',
              color='white', fontsize=14, fontweight='bold')
 
 # Genre pie chart
@@ -1142,7 +1142,7 @@ for r in recs[:3]:
 # Borrow with business rules
 print(f"\\nBorrow attempt (user 1, book 1):")
 result = lib.borrow(1, 1)
-print(f"  {'Success' if result['success'] else 'Failed'}: {result.get('error', f'Due: {result.get(\"due_date\")}')}")
+print(f"  {'Success' if result['success'] else 'Failed'}: {result.get('error', f'Due: {result.get("due_date")}')}")
 
 # --- Final showcase ---
 fig, axes = plt.subplots(2, 2, figsize=(14, 10))

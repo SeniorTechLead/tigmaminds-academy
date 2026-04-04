@@ -402,7 +402,8 @@ checks["Water supply"] = {
 
 # === PRINT REPORT ===
 print("=" * 60)
-print(f"{'NOAH\\'S ARK — SAFETY CERTIFICATION REPORT':^60}")
+title = "NOAHS ARK - SAFETY CERTIFICATION REPORT"
+print(f"{title:^60}")
 print("=" * 60)
 all_pass = True
 for name, check in checks.items():

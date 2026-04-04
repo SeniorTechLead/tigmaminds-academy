@@ -72,9 +72,10 @@ And for a science student, the story is a goldmine. An ocean of milk being separ
         ],
       } },
     track: 'school',
-    subjects: ['Chemistry' as Subject, 'Physics' as Subject],
-    toolSkills: ['Python' as Skill, 'Matplotlib' as Skill, 'Data Analysis' as Skill, 'Lab Skills' as Skill],
-    learningTracks: ['Science & Lab' as Track, 'Programming' as Track],
+    subjects: ['Chemistry' as Subject, 'Physics' as Subject, 'Materials Science' as Subject],
+    toolSkills: ['Python' as Skill, 'Scientific Modeling' as Skill],
+    skillTags: [{ discipline: 'Scientific Modeling', skill: 'Physics simulation', tools: ['Fluid dynamics'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    learningTracks: ['Science & Lab' as Track],
     estimatedHours: 10,
     level0: {
       concepts: [
@@ -257,8 +258,9 @@ That, he realised, was the part that lasted.
       } },
     track: 'school',
     subjects: ['Mathematics' as Subject],
-    toolSkills: ['Python' as Skill, 'Matplotlib' as Skill],
-    learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
+    toolSkills: ['Python' as Skill, 'Data Visualization' as Skill],
+    skillTags: [{ discipline: 'Data Science', skill: 'Data Visualization', tools: ['Charts & plots'], application: 'Geometric patterns' }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    learningTracks: ['Programming' as Track],
     estimatedHours: 10,
     level0: {
       concepts: [
@@ -430,8 +432,9 @@ He knew the physics. He just knew it in his hands.
       } },
     track: 'school',
     subjects: ['Physics' as Subject, 'Mathematics' as Subject],
-    toolSkills: ['Python' as Skill, 'NumPy' as Skill, 'Matplotlib' as Skill],
-    learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
+    toolSkills: ['Python' as Skill, 'Scientific Modeling' as Skill],
+    skillTags: [{ discipline: 'Scientific Modeling', skill: 'Physics simulation', tools: ['Mechanics'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    learningTracks: ['Science & Lab' as Track],
     estimatedHours: 10,
     level0: {
       concepts: [
@@ -622,8 +625,9 @@ Zahra looked at her tiles, then at the crystal drawings. The same geometry — o
       } },
     track: 'school',
     subjects: ['Mathematics' as Subject],
-    toolSkills: ['Python' as Skill, 'NumPy' as Skill, 'Matplotlib' as Skill],
-    learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
+    toolSkills: ['Python' as Skill, 'Data Visualization' as Skill],
+    skillTags: [{ discipline: 'Data Science', skill: 'Data Visualization', tools: ['Charts & plots'], application: 'Geometric patterns' }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    learningTracks: ['Programming' as Track],
     estimatedHours: 10,
     level0: {
       concepts: [
@@ -794,9 +798,10 @@ The most powerful systems combine both: serial reasoning for complex decisions, 
         ],
       } },
     track: 'school',
-    subjects: ['Computer Science' as Subject, 'Biology' as Subject],
-    toolSkills: ['Python' as Skill, 'Matplotlib' as Skill, 'Data Analysis' as Skill],
-    learningTracks: ['Programming' as Track, 'AI & Data' as Track],
+    subjects: ['Computer Science' as Subject, 'Biology' as Subject, 'Neuroscience' as Subject],
+    toolSkills: ['Python' as Skill, 'Scientific Modeling' as Skill],
+    skillTags: [{ discipline: 'Scientific Modeling', skill: 'Biological simulation', tools: ['Population dynamics'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    learningTracks: ['AI & Data' as Track],
     estimatedHours: 12,
     level0: {
       concepts: [
@@ -983,9 +988,10 @@ And the first thing Noah did on dry land was plant a vineyard. After a year on a
         ],
       } },
     track: 'school',
-    subjects: ['Biology' as Subject, 'Engineering' as Subject, 'Physics' as Subject],
-    toolSkills: ['Python' as Skill, 'NumPy' as Skill, 'Matplotlib' as Skill, 'Data Analysis' as Skill],
-    learningTracks: ['Science & Lab' as Track, 'Programming' as Track],
+    subjects: ['Biology' as Subject, 'Engineering' as Subject, 'Physics' as Subject, 'Zoology' as Subject, 'Marine Science' as Subject],
+    toolSkills: ['Python' as Skill, 'Scientific Modeling' as Skill],
+    skillTags: [{ discipline: 'Scientific Modeling', skill: 'Biological simulation', tools: ['Population dynamics'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    learningTracks: ['Science & Lab' as Track],
     estimatedHours: 12,
     level0: {
       concepts: [
@@ -1158,9 +1164,10 @@ The Bodhi Tree offers no easy answers. But it has been asking the right question
         ],
       } },
     track: 'school',
-    subjects: ['Biology' as Subject],
-    toolSkills: ['Python' as Skill, 'Matplotlib' as Skill, 'Data Analysis' as Skill],
-    learningTracks: ['Science & Lab' as Track, 'Programming' as Track],
+    subjects: ['Biology' as Subject, 'Botany' as Subject],
+    toolSkills: ['Python' as Skill, 'Scientific Modeling' as Skill],
+    skillTags: [{ discipline: 'Scientific Modeling', skill: 'Biological simulation', tools: ['Plant growth'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    learningTracks: ['Science & Lab' as Track],
     estimatedHours: 10,
     level0: {
       concepts: [
@@ -1366,9 +1373,10 @@ Zahra held the astrolabe up to the sky and sighted Polaris. Thirty-two degrees. 
         ],
       } },
     track: 'school',
-    subjects: ['Physics' as Subject, 'Mathematics' as Subject, 'Engineering' as Subject],
-    toolSkills: ['Python' as Skill, 'NumPy' as Skill, 'Matplotlib' as Skill, 'Data Analysis' as Skill],
-    learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
+    subjects: ['Physics' as Subject, 'Mathematics' as Subject, 'Engineering' as Subject, 'Astronomy' as Subject],
+    toolSkills: ['Python' as Skill, 'Scientific Modeling' as Skill],
+    skillTags: [{ discipline: 'Scientific Modeling', skill: 'Physics simulation', tools: ['Optics & light'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    learningTracks: ['Science & Lab' as Track],
     estimatedHours: 12,
     level0: {
       concepts: [
@@ -1565,9 +1573,10 @@ Hanuman's strength was divine. But the real miracle is knowledge — and that is
         ],
       } },
     track: 'school',
-    subjects: ['Biology' as Subject, 'Chemistry' as Subject, 'Geography' as Subject],
-    toolSkills: ['Python' as Skill, 'Matplotlib' as Skill, 'Data Analysis' as Skill, 'Machine Learning' as Skill],
-    learningTracks: ['Science & Lab' as Track, 'Programming' as Track, 'AI & Data' as Track],
+    subjects: ['Biology' as Subject, 'Chemistry' as Subject, 'Geography' as Subject, 'Geology' as Subject],
+    toolSkills: ['Python' as Skill, 'Machine Learning' as Skill],
+    skillTags: [{ discipline: 'AI & Machine Learning', skill: 'Machine Learning', tools: ['Classification'], application: 'Plant identification' }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    learningTracks: ['AI & Data' as Track],
     estimatedHours: 12,
     level0: {
       concepts: [
@@ -1765,8 +1774,9 @@ Dorji reached up and placed his palm on Sangha’s cold surface. Somewhere insid
       } },
     track: 'school',
     subjects: ['Physics' as Subject, 'Mathematics' as Subject, 'Music & Arts' as Subject],
-    toolSkills: ['Python' as Skill, 'NumPy' as Skill, 'Matplotlib' as Skill],
-    learningTracks: ['Programming' as Track, 'Science & Lab' as Track],
+    toolSkills: ['Python' as Skill, 'Scientific Modeling' as Skill],
+    skillTags: [{ discipline: 'Scientific Modeling', skill: 'Physics simulation', tools: ['Acoustics & sound'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    learningTracks: ['Science & Lab' as Track],
     estimatedHours: 10,
     level0: {
       concepts: [
@@ -1931,8 +1941,9 @@ The Pushpaka Vimana flew by divine will. Real aircraft fly by engineering. But t
       } },
     track: 'school',
     subjects: ['Physics' as Subject, 'Engineering' as Subject],
-    toolSkills: ['Python' as Skill, 'Matplotlib' as Skill, 'NumPy' as Skill, 'Data Analysis' as Skill],
-    learningTracks: ['Science & Lab' as Track, 'Programming' as Track],
+    toolSkills: ['Python' as Skill, 'Scientific Modeling' as Skill],
+    skillTags: [{ discipline: 'Scientific Modeling', skill: 'Physics simulation', tools: ['Optics & light'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    learningTracks: ['Science & Lab' as Track],
     estimatedHours: 10,
     level0: {
       concepts: [
@@ -2129,8 +2140,9 @@ They did not call it chemistry. They called it Agni.
       } },
     track: 'school',
     subjects: ['Chemistry' as Subject, 'Physics' as Subject],
-    toolSkills: ['Python' as Skill, 'Matplotlib' as Skill, 'Data Analysis' as Skill, 'Lab Skills' as Skill],
-    learningTracks: ['Science & Lab' as Track, 'Programming' as Track],
+    toolSkills: ['Python' as Skill, 'Scientific Modeling' as Skill],
+    skillTags: [{ discipline: 'Scientific Modeling', skill: 'Physics simulation', tools: ['Thermodynamics'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    learningTracks: ['Science & Lab' as Track],
     estimatedHours: 10,
     level0: {
       concepts: [
@@ -2305,8 +2317,9 @@ The Dharma Wheel encodes these principles in its very design. It turns. It persi
       } },
     track: 'school',
     subjects: ['Physics' as Subject, 'Engineering' as Subject],
-    toolSkills: ['Python' as Skill, 'NumPy' as Skill, 'Matplotlib' as Skill, 'Data Analysis' as Skill],
-    learningTracks: ['Science & Lab' as Track, 'Programming' as Track],
+    toolSkills: ['Python' as Skill, 'Scientific Modeling' as Skill],
+    skillTags: [{ discipline: 'Scientific Modeling', skill: 'Physics simulation', tools: ['Mechanics'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    learningTracks: ['Science & Lab' as Track],
     estimatedHours: 12,
     level0: {
       concepts: [
@@ -2489,9 +2502,10 @@ The murderer became a saint. Not through magic. Through practice.
         ],
       } },
     track: 'school',
-    subjects: ['Biology' as Subject, 'Computer Science' as Subject],
-    toolSkills: ['Python' as Skill, 'NumPy' as Skill, 'Matplotlib' as Skill, 'Machine Learning' as Skill],
-    learningTracks: ['AI & Data' as Track, 'Science & Lab' as Track, 'Programming' as Track],
+    subjects: ['Biology' as Subject, 'Computer Science' as Subject, 'Neuroscience' as Subject],
+    toolSkills: ['Python' as Skill, 'Machine Learning' as Skill],
+    skillTags: [{ discipline: 'AI & Machine Learning', skill: 'Reinforcement Learning', tools: ['Q-learning'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    learningTracks: ['AI & Data' as Track],
     estimatedHours: 12,
     level0: {
       concepts: [
@@ -2655,8 +2669,9 @@ Today, we have both. The Burj Khalifa stands 828 metres tall. Machine translatio
       } },
     track: 'school',
     subjects: ['Engineering' as Subject, 'Physics' as Subject],
-    toolSkills: ['Python' as Skill, 'NumPy' as Skill, 'Matplotlib' as Skill, 'Data Analysis' as Skill],
-    learningTracks: ['Science & Lab' as Track, 'Programming' as Track],
+    toolSkills: ['Python' as Skill, 'Scientific Modeling' as Skill],
+    skillTags: [{ discipline: 'Scientific Modeling', skill: 'Physics simulation', tools: ['Mechanics'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    learningTracks: ['Science & Lab' as Track],
     estimatedHours: 14,
     level0: {
       concepts: [
@@ -2822,9 +2837,10 @@ That idea changed everything.
         ],
       } },
     track: 'school',
-    subjects: ['Mathematics' as Subject, 'Computer Science' as Subject],
-    toolSkills: ['Python' as Skill, 'NumPy' as Skill, 'Matplotlib' as Skill],
-    learningTracks: ['Programming' as Track, 'AI & Data' as Track],
+    subjects: ['Mathematics' as Subject, 'Computer Science' as Subject, 'Astronomy' as Subject],
+    toolSkills: ['Python' as Skill, 'Data Visualization' as Skill],
+    skillTags: [{ discipline: 'Data Science', skill: 'Data Visualization', tools: ['Charts & plots'], application: 'Mathematical visualization' }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    learningTracks: ['Programming' as Track],
     estimatedHours: 12,
     level0: {
       concepts: [
@@ -2990,9 +3006,10 @@ For a science student, this story opens a universe of questions. How do we measu
         ],
       } },
     track: 'school',
-    subjects: ['Physics' as Subject, 'Mathematics' as Subject],
-    toolSkills: ['Python' as Skill, 'NumPy' as Skill, 'Matplotlib' as Skill, 'Data Analysis' as Skill],
-    learningTracks: ['Science & Lab' as Track, 'Programming' as Track],
+    subjects: ['Physics' as Subject, 'Mathematics' as Subject, 'Astronomy' as Subject],
+    toolSkills: ['Python' as Skill, 'Scientific Modeling' as Skill],
+    skillTags: [{ discipline: 'Scientific Modeling', skill: 'Physics simulation', tools: ['Mechanics'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    learningTracks: ['Science & Lab' as Track],
     estimatedHours: 12,
     level0: {
       concepts: [
@@ -3148,8 +3165,9 @@ The sea did not need to break the laws of physics to part. It needed the right w
       } },
     track: 'school',
     subjects: ['Physics' as Subject],
-    toolSkills: ['Python' as Skill, 'Matplotlib' as Skill, 'Data Analysis' as Skill],
-    learningTracks: ['Science & Lab' as Track, 'Programming' as Track],
+    toolSkills: ['Python' as Skill, 'Scientific Modeling' as Skill],
+    skillTags: [{ discipline: 'Scientific Modeling', skill: 'Physics simulation', tools: ['Fluid dynamics'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    learningTracks: ['Science & Lab' as Track],
     estimatedHours: 10,
     level0: {
       concepts: [
@@ -3315,9 +3333,10 @@ This is the story of all groundwater. It is the story of a hidden, patient cycle
         ],
       } },
     track: 'school',
-    subjects: ['Physics' as Subject, 'Chemistry' as Subject],
-    toolSkills: ['Python' as Skill, 'Matplotlib' as Skill, 'Data Analysis' as Skill],
-    learningTracks: ['Science & Lab' as Track, 'Programming' as Track],
+    subjects: ['Physics' as Subject, 'Chemistry' as Subject, 'Geology' as Subject],
+    toolSkills: ['Python' as Skill, 'Scientific Modeling' as Skill],
+    skillTags: [{ discipline: 'Scientific Modeling', skill: 'Earth science simulation', tools: ['Hydrological models'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    learningTracks: ['Science & Lab' as Track],
     estimatedHours: 10,
     level0: {
       concepts: [
@@ -3482,8 +3501,9 @@ The Muezzin’s call connects acoustic physics, architectural engineering, and s
       } },
     track: 'school',
     subjects: ['Physics' as Subject],
-    toolSkills: ['Python' as Skill, 'Matplotlib' as Skill],
-    learningTracks: ['Science & Lab' as Track, 'Programming' as Track],
+    toolSkills: ['Python' as Skill, 'Scientific Modeling' as Skill],
+    skillTags: [{ discipline: 'Scientific Modeling', skill: 'Physics simulation', tools: ['Acoustics & sound'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    learningTracks: ['Science & Lab' as Track],
     estimatedHours: 10,
     level0: {
       concepts: [

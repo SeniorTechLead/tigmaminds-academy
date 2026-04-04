@@ -127,10 +127,14 @@ function ProblemSolver({ problem, tier, onBack }: { problem: Problem; tier: Prob
   const isSql = lang === 'sql';
   const isTs = lang === 'typescript';
   const isHtml = lang === 'html';
-  const ctxState = isHtml ? 'ready' as const : isSql ? sqlCtxState : isTs ? tsCtxState : pyCtxState;
+  const isArduino = lang === 'arduino';
+  const ctxState = (isHtml || isArduino) ? 'ready' as const : isSql ? sqlCtxState : isTs ? tsCtxState : pyCtxState;
   const loadProgress = isSql ? sqlLoadProgress : isTs ? tsLoadProgress : pyLoadProgress;
   const pyState = running ? 'running' as const : ctxState === 'idle' ? 'idle' as const : ctxState === 'loading' ? 'loading' as const : 'ready' as const;
+  const [arduinoLeds, setArduinoLeds] = useState<{pin: number; brightness: number}[]>([]);
+  const arduinoAbortRef = useRef<AbortController | null>(null);
   const [htmlPreview, setHtmlPreview] = useState('');
+  const [htmlIframeKey, setHtmlIframeKey] = useState(0);
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const runPythonTests = useCallback(async () => {
@@ -329,6 +333,7 @@ function ProblemSolver({ problem, tier, onBack }: { problem: Problem; tier: Prob
     setResults([]);
     setOutput('');
     setHtmlPreview(code);
+    setHtmlIframeKey(k => k + 1);
 
     // Wait for iframe to render
     await new Promise(r => setTimeout(r, 500));
@@ -411,7 +416,97 @@ function ProblemSolver({ problem, tier, onBack }: { problem: Problem; tier: Prob
     setRunning(false);
   }, [code, tier]);
 
-  const runTests = isHtml ? runHtmlTests : isTs ? runTsTests : isSql ? runSqlTests : runPythonTests;
+  const runArduinoTests = useCallback(async () => {
+    setRunning(true);
+    setResults([]);
+    setOutput('');
+    arduinoAbortRef.current?.abort();
+    const ac = new AbortController();
+    arduinoAbortRef.current = ac;
+
+    // Parse code for setup/loop, extract serial output and pin states
+    const lines = code.split('\n').map(l => l.trim()).filter(l => l && !l.startsWith('//') && !l.startsWith('#'));
+    const serialLines: string[] = [];
+    const pinStates: Record<number, number> = {};
+    const ledStates: {pin: number; brightness: number}[] = [];
+
+    // Simple parse: find pinMode, digitalWrite, analogWrite, Serial.println
+    for (const line of lines) {
+      const dw = line.match(/digitalWrite\((\d+),\s*(HIGH|LOW|1|0)\)/);
+      if (dw) pinStates[parseInt(dw[1])] = (dw[2] === 'HIGH' || dw[2] === '1') ? 255 : 0;
+      const aw = line.match(/analogWrite\((\d+),\s*(\d+)\)/);
+      if (aw) pinStates[parseInt(aw[1])] = parseInt(aw[2]);
+      const sp = line.match(/Serial\.println?\("([^"]+)"\)/);
+      if (sp) serialLines.push(sp[1]);
+      const pm = line.match(/pinMode\((\d+),\s*(OUTPUT|INPUT)\)/);
+      if (pm) { if (!pinStates[parseInt(pm[1])]) pinStates[parseInt(pm[1])] = 0; }
+    }
+
+    // Update LED display
+    const maxPin = Math.max(13, ...Object.keys(pinStates).map(Number));
+    for (let p = 2; p <= Math.min(maxPin, 13); p++) {
+      ledStates.push({ pin: p, brightness: pinStates[p] || 0 });
+    }
+    setArduinoLeds(ledStates);
+    setOutput(serialLines.join('\n'));
+
+    const testResults: TestResult[] = [];
+    for (const tc of tier.testCases) {
+      try {
+        if (tc.expected === 'OK') {
+          // Basic check: code has setup() and loop()
+          const hasSetup = code.includes('void setup()');
+          const hasLoop = code.includes('void loop()');
+          testResults.push({
+            label: tc.label,
+            passed: hasSetup && hasLoop,
+            expected: 'setup() and loop() defined',
+            actual: hasSetup && hasLoop ? 'Both found' : `Missing: ${!hasSetup ? 'setup()' : ''} ${!hasLoop ? 'loop()' : ''}`.trim(),
+          });
+        } else {
+          // Expected is a JSON check: [{"serial":"text"}, {"pin":13,"state":"HIGH"}]
+          const checks = JSON.parse(tc.expected) as { serial?: string; pin?: number; state?: string; analogMin?: number; analogMax?: number }[];
+          let allPass = true;
+          const failures: string[] = [];
+          for (const check of checks) {
+            if (check.serial !== undefined) {
+              if (!serialLines.some(l => l.includes(check.serial!))) {
+                failures.push(`Serial output missing: "${check.serial}"`);
+                allPass = false;
+              }
+            }
+            if (check.pin !== undefined && check.state !== undefined) {
+              const val = pinStates[check.pin];
+              const expected = check.state === 'HIGH' ? 255 : 0;
+              if (val !== expected) {
+                failures.push(`Pin ${check.pin}: expected ${check.state}, got ${val === 255 ? 'HIGH' : val === 0 ? 'LOW' : val}`);
+                allPass = false;
+              }
+            }
+            if (check.pin !== undefined && check.analogMin !== undefined) {
+              const val = pinStates[check.pin] || 0;
+              if (val < check.analogMin || val > (check.analogMax || 255)) {
+                failures.push(`Pin ${check.pin}: analog ${val} not in range ${check.analogMin}-${check.analogMax || 255}`);
+                allPass = false;
+              }
+            }
+          }
+          testResults.push({
+            label: tc.label,
+            passed: allPass,
+            expected: tc.label,
+            actual: allPass ? 'All checks passed' : failures.join('; '),
+          });
+        }
+      } catch (err: any) {
+        testResults.push({ label: tc.label, passed: false, expected: tc.expected, actual: `Error: ${err.message}` });
+      }
+    }
+    setResults(testResults);
+    setRunning(false);
+  }, [code, tier]);
+
+  const runTests = isArduino ? runArduinoTests : isHtml ? runHtmlTests : isTs ? runTsTests : isSql ? runSqlTests : runPythonTests;
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Tab') {
@@ -589,6 +684,7 @@ function ProblemSolver({ problem, tier, onBack }: { problem: Problem; tier: Prob
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden mb-4">
           <div className="px-4 py-2 border-b border-gray-200 dark:border-gray-700 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Live Preview</div>
           <iframe
+            key={htmlIframeKey}
             ref={iframeRef}
             srcDoc={htmlPreview}
             title="Preview"
@@ -596,6 +692,29 @@ function ProblemSolver({ problem, tier, onBack }: { problem: Problem; tier: Prob
             className="w-full border-0"
             style={{ height: 300 }}
           />
+        </div>
+      )}
+
+      {/* Arduino LED simulator */}
+      {isArduino && arduinoLeds.length > 0 && (
+        <div className="bg-gray-900 rounded-xl border border-gray-700 overflow-hidden mb-4">
+          <div className="px-4 py-2 border-b border-gray-700 text-xs font-semibold text-gray-400 uppercase tracking-wide flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" /> LED Simulator
+          </div>
+          <div className="flex items-center justify-center gap-4 p-6">
+            {arduinoLeds.map((led) => (
+              <div key={led.pin} className="flex flex-col items-center gap-1">
+                <div
+                  className="w-6 h-6 rounded-full transition-all duration-200"
+                  style={{
+                    backgroundColor: led.brightness > 0 ? `rgba(251, 191, 36, ${led.brightness / 255})` : '#374151',
+                    boxShadow: led.brightness > 0 ? `0 0 ${led.brightness / 10}px rgba(251, 191, 36, ${led.brightness / 255})` : 'none',
+                  }}
+                />
+                <span className="text-[10px] text-gray-500 font-mono">D{led.pin}</span>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
@@ -640,7 +759,8 @@ export default function PlaygroundPage() {
   const sqlTopics: Topic[] = ['sql-select', 'sql-joins', 'sql-aggregate', 'sql-modify', 'sql-subqueries'];
   const tsTopics: Topic[] = ['ts-variables', 'ts-functions', 'ts-interfaces', 'ts-unions', 'ts-arrays', 'ts-generics', 'ts-enums', 'ts-classes'];
   const htmlTopics: Topic[] = ['html-structure', 'css-styling', 'css-layout', 'html-forms', 'js-dom', 'js-events', 'html-animation', 'html-responsive'];
-  const topics = filterLanguage === 'sql' ? sqlTopics : filterLanguage === 'typescript' ? tsTopics : filterLanguage === 'html' ? htmlTopics : filterLanguage === 'python' ? pythonTopics : [...pythonTopics, ...sqlTopics, ...tsTopics, ...htmlTopics];
+  const arduinoTopics: Topic[] = ['arduino-digital', 'arduino-analog', 'arduino-serial', 'arduino-timing', 'arduino-sensors', 'arduino-projects'];
+  const topics = filterLanguage === 'sql' ? sqlTopics : filterLanguage === 'typescript' ? tsTopics : filterLanguage === 'html' ? htmlTopics : filterLanguage === 'arduino' ? arduinoTopics : filterLanguage === 'python' ? pythonTopics : [...pythonTopics, ...sqlTopics, ...tsTopics, ...htmlTopics, ...arduinoTopics];
 
   // If a problem + tier is selected, show the solver
   if (selectedProblem && selectedTier) {
@@ -726,7 +846,7 @@ export default function PlaygroundPage() {
             Playground
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            {problems.length} problems inspired by real stories. Solve them, clean them up, then optimize. Same problem, three levels of mastery.
+            {problems.length}+ problems and growing — inspired by real stories. Solve them, clean them up, then optimize. Same problem, three levels of mastery.
           </p>
         </div>
       </section>
@@ -756,6 +876,7 @@ export default function PlaygroundPage() {
               <option value="sql">SQL</option>
               <option value="typescript">TypeScript</option>
               <option value="html">HTML/CSS/JS</option>
+              <option value="arduino">Arduino</option>
             </select>
             <select
               value={filterDifficulty}
@@ -821,6 +942,11 @@ export default function PlaygroundPage() {
                           HTML
                         </span>
                       )}
+                      {p.language === 'arduino' && (
+                        <span className="px-2 py-0.5 rounded-full text-xs font-semibold bg-teal-100 text-teal-700 dark:bg-teal-900/40 dark:text-teal-300">
+                          Arduino
+                        </span>
+                      )}
                     </div>
                     <span className="text-xs text-gray-400 dark:text-gray-500 bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded-full">
                       {p.topic}
@@ -846,7 +972,7 @@ export default function PlaygroundPage() {
           {/* Sign-up gate after free problems */}
           {!user && filtered.some(p => !isFree(p)) && (
             <div className="mt-8">
-              <SignUpGate message={`Sign up free to unlock all ${problems.length} problems`} />
+              <SignUpGate message={`Sign up free to unlock all ${problems.length}+ problems`} />
             </div>
           )}
 

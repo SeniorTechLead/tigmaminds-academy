@@ -1,7 +1,18 @@
 import type { LucideIcon } from 'lucide-react';
 
-export type Skill = 'Python' | 'HTML/CSS' | 'JavaScript' | 'Arduino' | 'NumPy' | 'Matplotlib' | 'Data Analysis' | 'Machine Learning' | 'Circuit Design' | 'Lab Skills';
+// Legacy flat types — kept for backward compatibility during migration
+export type Skill = 'Python' | 'Web Development' | 'Arduino & Electronics' | 'Data Visualization' | 'Data Analysis' | 'Machine Learning' | 'Scientific Modeling' | 'SQL & Databases';
 export type Track = 'Programming' | 'AI & Data' | 'Robotics & Electronics' | 'Web Development' | 'Science & Lab';
+
+// Hierarchical skill taxonomy (see docs/skill-taxonomy.md)
+export type Discipline = 'Programming' | 'Data Science' | 'AI & Machine Learning' | 'Scientific Modeling' | 'Electronics & Hardware';
+
+export interface SkillTag {
+  discipline: Discipline;                 // Level 1: what field
+  skill: string;                          // Level 2: what you learn to do
+  tools?: string[];                       // Level 3: what technology you use
+  application?: string;                   // Level 4: what domain (optional)
+}
 export type Subject =
   | 'Biology'
   | 'Physics'
@@ -12,7 +23,19 @@ export type Subject =
   | 'Geography'
   | 'Ecology'
   | 'Economics'
-  | 'Music & Arts';
+  | 'Music & Arts'
+  | 'Materials Science'
+  | 'Environmental Science'
+  | 'Agriculture'
+  | 'Zoology'
+  | 'Botany'
+  | 'Conservation'
+  | 'Neuroscience'
+  | 'Meteorology'
+  | 'Geology'
+  | 'Astronomy'
+  | 'Health & Medicine'
+  | 'Marine Science';
 
 export type Tradition = 'Northeast India' | 'Hindu' | 'Buddhist' | 'Christian' | 'Islamic';
 
@@ -40,6 +63,7 @@ export interface Lesson {
   subjects?: Subject[];
   toolSkills?: Skill[];
   learningTracks?: Track[];
+  skillTags?: SkillTag[];
   estimatedHours?: number;
   playground?: string;
   level0?: {

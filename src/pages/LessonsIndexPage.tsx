@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Clock, CheckCircle, BookOpen, Search } from 'lucide-react';
+import { ArrowRight, Clock, CheckCircle, BookOpen, Search, Code2, ChevronRight } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { lessons, SUBJECTS, Subject, SKILLS, Skill, TRACKS, Track } from '../data/lessons';
+import { lessons, SUBJECTS, Subject, SKILLS, Skill, TRACKS, Track, DISCIPLINES, Discipline } from '../data/lessons';
 import { useProgress } from '../contexts/ProgressContext';
 
 function highlightMatch(text: string, query: string): React.ReactNode {
@@ -16,26 +16,55 @@ function highlightMatch(text: string, query: string): React.ReactNode {
   );
 }
 
-type FilterType = 'subject' | 'skill' | 'track';
+type FilterType = 'subject' | 'discipline' | 'track';
 
 export default function LessonsIndexPage() {
   const [filterType, setFilterType] = useState<FilterType>('subject');
   const [selectedSubject, setSelectedSubject] = useState<Subject | null>(null);
-  const [selectedSkill, setSelectedSkill] = useState<Skill | null>(null);
+  const [selectedDiscipline, setSelectedDiscipline] = useState<Discipline | null>(null);
+  const [selectedL2Skill, setSelectedL2Skill] = useState<string | null>(null);
+  const [selectedL3Tool, setSelectedL3Tool] = useState<string | null>(null);
   const [selectedTrack, setSelectedTrack] = useState<Track | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const { isStoryComplete, isLevelComplete, getCompletedCount } = useProgress();
 
+  // Discipline filter matching
+  const matchesDisciplineFilter = (lesson: typeof lessons[0]) => {
+    if (!selectedDiscipline) return true;
+    const tags = lesson.skillTags;
+    if (!tags || tags.length === 0) return false;
+    if (selectedL3Tool) {
+      return tags.some(t => t.discipline === selectedDiscipline && t.skill === selectedL2Skill && t.tools?.includes(selectedL3Tool));
+    }
+    if (selectedL2Skill) {
+      return tags.some(t => t.discipline === selectedDiscipline && t.skill === selectedL2Skill);
+    }
+    return tags.some(t => t.discipline === selectedDiscipline);
+  };
+
   const filtered = lessons.filter((lesson) => {
     const matchesSubject = !selectedSubject || lesson.subjects?.includes(selectedSubject);
-    const matchesSkill = !selectedSkill || lesson.toolSkills?.includes(selectedSkill);
+    const matchesDiscipline = filterType !== 'discipline' || matchesDisciplineFilter(lesson);
     const matchesTrack = !selectedTrack || lesson.learningTracks?.includes(selectedTrack);
     const matchesSearch = !searchQuery ||
       lesson.story.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       lesson.stem.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       lesson.story.tagline.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesSubject && matchesSkill && matchesTrack && matchesSearch;
+    return matchesSubject && matchesDiscipline && matchesTrack && matchesSearch;
   });
+
+  // Compute counts for discipline drill-down
+  const disciplineCount = (d: Discipline) => lessons.filter(l => l.skillTags?.some(t => t.discipline === d)).length;
+  const skillCount = (d: Discipline, skill: string) => lessons.filter(l => l.skillTags?.some(t => t.discipline === d && t.skill === skill)).length;
+  const toolCount = (d: Discipline, skill: string, tool: string) => lessons.filter(l => l.skillTags?.some(t => t.discipline === d && t.skill === skill && t.tools?.includes(tool))).length;
+
+  const clearAllFilters = () => {
+    setSelectedSubject(null);
+    setSelectedDiscipline(null);
+    setSelectedL2Skill(null);
+    setSelectedL3Tool(null);
+    setSelectedTrack(null);
+  };
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
@@ -45,16 +74,8 @@ export default function LessonsIndexPage() {
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-5xl font-bold text-gray-900 dark:text-white mb-4">All Lessons</h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-4">
-            {lessons.length} stories, each with interactive STEM lessons. Filter by subject or search for a topic.
+            {lessons.length}+ stories and growing, each with interactive STEM lessons. Filter by subject or search for a topic.
           </p>
-          <div className="flex gap-3 justify-center mb-4">
-            <Link to="/plan" className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-colors">
-              <BookOpen className="w-4 h-4" /> Build a Lesson Plan
-            </Link>
-            <Link to="/reference" className="inline-flex items-center gap-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-              <Search className="w-4 h-4" /> Reference Library
-            </Link>
-          </div>
           {getCompletedCount() > 0 && (
             <div className="inline-flex items-center gap-2 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 px-4 py-2 rounded-full text-sm font-semibold mb-4">
               <CheckCircle className="w-4 h-4" />
@@ -77,10 +98,10 @@ export default function LessonsIndexPage() {
           <div className="flex gap-1 bg-gray-100 dark:bg-gray-800 rounded-xl p-1 max-w-md mx-auto mb-4">
             {([
               { key: 'subject' as FilterType, label: 'By Subject' },
-              { key: 'skill' as FilterType, label: 'By Skill' },
+              { key: 'discipline' as FilterType, label: 'By Skill' },
               { key: 'track' as FilterType, label: 'By Track' },
             ]).map(tab => (
-              <button key={tab.key} onClick={() => { setFilterType(tab.key); setSelectedSubject(null); setSelectedSkill(null); setSelectedTrack(null); }}
+              <button key={tab.key} onClick={() => { setFilterType(tab.key); clearAllFilters(); }}
                 className={`flex-1 py-2 rounded-lg text-sm font-semibold transition-all ${filterType === tab.key ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm' : 'text-gray-500 dark:text-gray-400'}`}>
                 {tab.label}
               </button>
@@ -89,8 +110,8 @@ export default function LessonsIndexPage() {
 
           {/* Filter pills */}
           <div className="flex flex-wrap gap-2 justify-center mb-4">
-            <button onClick={() => { setSelectedSubject(null); setSelectedSkill(null); setSelectedTrack(null); }}
-              className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${!selectedSubject && !selectedSkill && !selectedTrack ? 'bg-amber-500 text-white shadow-md' : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400'}`}>
+            <button onClick={clearAllFilters}
+              className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${!selectedSubject && !selectedDiscipline && !selectedTrack ? 'bg-amber-500 text-white shadow-md' : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400'}`}>
               All ({lessons.length})
             </button>
 
@@ -105,13 +126,17 @@ export default function LessonsIndexPage() {
               );
             })}
 
-            {filterType === 'skill' && SKILLS.map(s => {
-              const count = lessons.filter(l => l.toolSkills?.includes(s.key)).length;
+            {/* Hierarchical discipline filter: L1 → L2 → L3 drill-down */}
+            {filterType === 'discipline' && DISCIPLINES.map(d => {
+              const count = disciplineCount(d.key);
               if (count === 0) return null;
               return (
-                <button key={s.key} onClick={() => setSelectedSkill(selectedSkill === s.key ? null : s.key)}
-                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${selectedSkill === s.key ? 'bg-amber-500 text-white shadow-md' : `${s.color} hover:ring-2 hover:ring-amber-400`}`}>
-                  {s.key} ({count})
+                <button key={d.key} onClick={() => {
+                  if (selectedDiscipline === d.key) { setSelectedDiscipline(null); setSelectedL2Skill(null); setSelectedL3Tool(null); }
+                  else { setSelectedDiscipline(d.key); setSelectedL2Skill(null); setSelectedL3Tool(null); }
+                }}
+                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${selectedDiscipline === d.key ? 'bg-amber-500 text-white shadow-md' : `${d.color} hover:ring-2 hover:ring-amber-400`}`}>
+                  {d.icon} {d.key} ({count})
                 </button>
               );
             })}
@@ -128,9 +153,69 @@ export default function LessonsIndexPage() {
             })}
           </div>
 
-          {selectedSubject && (
+          {/* L2 skill drill-down row */}
+          {filterType === 'discipline' && selectedDiscipline && (() => {
+            const disc = DISCIPLINES.find(d => d.key === selectedDiscipline);
+            if (!disc) return null;
+            return (
+              <div className="mb-4">
+                <div className="flex items-center justify-center gap-1 text-xs text-gray-400 dark:text-gray-500 mb-2">
+                  <span>{disc.icon} {disc.key}</span>
+                  <ChevronRight className="w-3 h-3" />
+                  <span className="font-semibold text-gray-600 dark:text-gray-300">Skills</span>
+                </div>
+                <div className="flex flex-wrap gap-2 justify-center">
+                  {disc.skills.map(s => {
+                    const count = skillCount(disc.key, s.name);
+                    if (count === 0) return null;
+                    return (
+                      <button key={s.name} onClick={() => {
+                        if (selectedL2Skill === s.name) { setSelectedL2Skill(null); setSelectedL3Tool(null); }
+                        else { setSelectedL2Skill(s.name); setSelectedL3Tool(null); }
+                      }}
+                        className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${selectedL2Skill === s.name ? 'bg-amber-500 text-white shadow-md' : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:ring-2 hover:ring-amber-400'}`}>
+                        {s.name} ({count})
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })()}
+
+          {/* L3 tool drill-down row */}
+          {filterType === 'discipline' && selectedDiscipline && selectedL2Skill && (() => {
+            const disc = DISCIPLINES.find(d => d.key === selectedDiscipline);
+            const skill = disc?.skills.find(s => s.name === selectedL2Skill);
+            if (!disc || !skill) return null;
+            return (
+              <div className="mb-4">
+                <div className="flex items-center justify-center gap-1 text-xs text-gray-400 dark:text-gray-500 mb-2">
+                  <span>{disc.icon} {disc.key}</span>
+                  <ChevronRight className="w-3 h-3" />
+                  <span>{selectedL2Skill}</span>
+                  <ChevronRight className="w-3 h-3" />
+                  <span className="font-semibold text-gray-600 dark:text-gray-300">Tools</span>
+                </div>
+                <div className="flex flex-wrap gap-2 justify-center">
+                  {skill.tools.map(tool => {
+                    const count = toolCount(disc.key, skill.name, tool);
+                    if (count === 0) return null;
+                    return (
+                      <button key={tool} onClick={() => setSelectedL3Tool(selectedL3Tool === tool ? null : tool)}
+                        className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${selectedL3Tool === tool ? 'bg-amber-500 text-white shadow-md' : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:ring-2 hover:ring-amber-400'}`}>
+                        {tool} ({count})
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })()}
+
+          {(selectedSubject || selectedDiscipline || selectedTrack) && (
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              Showing {filtered.length} {selectedSubject} lessons
+              Showing {filtered.length} lesson{filtered.length !== 1 ? 's' : ''}
             </p>
           )}
         </div>
@@ -142,7 +227,7 @@ export default function LessonsIndexPage() {
             <div className="text-center py-12">
               <p className="text-gray-500 dark:text-gray-400 mb-4">No lessons match your search.</p>
               <button
-                onClick={() => { setSelectedSubject(null); setSearchQuery(''); }}
+                onClick={() => { clearAllFilters(); setSearchQuery(''); }}
                 className="text-amber-600 dark:text-amber-400 font-semibold hover:underline"
               >
                 Clear filters
@@ -207,9 +292,20 @@ export default function LessonsIndexPage() {
                         })}
                       </div>
 
+                      {/* Tool skills */}
+                      {lesson.toolSkills && lesson.toolSkills.length > 0 && (
+                        <div className="flex flex-wrap gap-1 mb-3">
+                          {lesson.toolSkills.slice(0, 4).map((skill) => (
+                            <span key={skill} className="text-xs px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300">
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400">
-                          <span>{lesson.track === 'school' ? '12-Month School' : lesson.track === 'bootcamp' ? '24-Week Bootcamp' : 'Both Tracks'}</span>
+                          <span>{lesson.track === 'school' ? 'School Program' : lesson.track === 'bootcamp' ? 'Bootcamp' : 'All Tracks'}</span>
                           {lesson.estimatedHours && (
                             <span className="flex items-center gap-1">
                               <Clock className="w-3 h-3" /> {lesson.estimatedHours}h
@@ -226,6 +322,24 @@ export default function LessonsIndexPage() {
               })}
             </div>
           )}
+        </div>
+      </section>
+
+      {/* Also explore — navigation to related pages */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800/50 border-t border-gray-200 dark:border-gray-700">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-sm text-gray-500 dark:text-gray-400 text-center mb-4">Also explore</p>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <Link to="/plan" className="inline-flex items-center gap-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 px-5 py-3 rounded-xl text-sm font-semibold hover:border-amber-400 hover:text-amber-600 dark:hover:text-amber-400 transition-all">
+              <BookOpen className="w-4 h-4" /> Build a Lesson Plan
+            </Link>
+            <Link to="/reference" className="inline-flex items-center gap-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 px-5 py-3 rounded-xl text-sm font-semibold hover:border-amber-400 hover:text-amber-600 dark:hover:text-amber-400 transition-all">
+              <Search className="w-4 h-4" /> Reference Library
+            </Link>
+            <Link to="/playground" className="inline-flex items-center gap-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 px-5 py-3 rounded-xl text-sm font-semibold hover:border-amber-400 hover:text-amber-600 dark:hover:text-amber-400 transition-all">
+              <Code2 className="w-4 h-4" /> Coding Playground
+            </Link>
+          </div>
         </div>
       </section>
 

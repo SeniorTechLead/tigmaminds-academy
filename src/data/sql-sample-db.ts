@@ -215,4 +215,143 @@ INSERT OR IGNORE INTO weather_readings (id, station_id, date, temp_c, humidity_p
     (10, 4, '2026-06-01', 33.5, 80, 9.0, 0),
     (11, 4, '2026-06-02', 31.5, 86, 20.0, 30.0),
     (12, 4, '2026-06-03', 28.0, 96, 42.0, 155.0);
+
+-- ═══════════════════════════════════════════
+-- FIREFLIES (The Firefly Festival of Majuli)
+-- Connects to Level 4 capstone: Kuramoto synchronization model
+-- ═══════════════════════════════════════════
+
+CREATE TABLE IF NOT EXISTS firefly_species (
+    id INTEGER PRIMARY KEY,
+    species TEXT NOT NULL,
+    flash_hz REAL,             -- natural flash frequency in Hz
+    glow_color TEXT,           -- yellow, green, orange
+    sync_tendency TEXT          -- 'strong', 'weak', 'none'
+);
+
+CREATE TABLE IF NOT EXISTS firefly_surveys (
+    id INTEGER PRIMARY KEY,
+    species_id INTEGER NOT NULL,
+    location TEXT NOT NULL,
+    date DATE NOT NULL,
+    count INTEGER DEFAULT 1,
+    sync_observed INTEGER DEFAULT 0,  -- 1 if group synchronization seen
+    observer TEXT,
+    FOREIGN KEY (species_id) REFERENCES firefly_species(id)
+);
+
+INSERT OR IGNORE INTO firefly_species (id, species, flash_hz, glow_color, sync_tendency) VALUES
+    (1, 'Pteroptyx malaccae',    3.0, 'yellow',  'strong'),
+    (2, 'Luciola praeusta',      1.5, 'green',   'weak'),
+    (3, 'Asymmetricata circumdata', 2.2, 'orange', 'strong'),
+    (4, 'Colophotia brevis',     4.0, 'yellow',  'none'),
+    (5, 'Luciola ficta',         1.8, 'green',   'weak');
+
+INSERT OR IGNORE INTO firefly_surveys (id, species_id, location, date, count, sync_observed, observer) VALUES
+    (1,  1, 'Majuli North Bank',    '2026-02-10', 200, 1, 'Rina'),
+    (2,  1, 'Majuli South Bank',    '2026-02-10', 350, 1, 'Rina'),
+    (3,  2, 'Kaziranga Edge',       '2026-02-12', 80,  0, 'Bhaskar'),
+    (4,  3, 'Majuli North Bank',    '2026-02-15', 120, 1, 'Rina'),
+    (5,  4, 'Manas Riverbank',      '2026-02-18', 45,  0, 'Deepa'),
+    (6,  1, 'Majuli North Bank',    '2026-03-01', 500, 1, 'Bhaskar'),
+    (7,  2, 'Majuli South Bank',    '2026-03-01', 150, 1, 'Rina'),
+    (8,  5, 'Hollongapar Forest',   '2026-03-05', 30,  0, 'Deepa'),
+    (9,  3, 'Majuli South Bank',    '2026-03-10', 220, 1, 'Bhaskar'),
+    (10, 1, 'Majuli North Bank',    '2026-03-15', 800, 1, 'Rina'),
+    (11, 2, 'Kaziranga Edge',       '2026-03-15', 60,  0, 'Deepa'),
+    (12, 4, 'Manas Riverbank',      '2026-03-20', 25,  0, 'Bhaskar');
+
+-- ═══════════════════════════════════════════
+-- DOLPHINS (The River Dolphin's Secret)
+-- Connects to Level 4 capstone: underwater acoustic modem
+-- ═══════════════════════════════════════════
+
+CREATE TABLE IF NOT EXISTS river_dolphins (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    species TEXT DEFAULT 'Ganges River Dolphin',
+    length_cm REAL,
+    estimated_age INTEGER,
+    river_section TEXT
+);
+
+CREATE TABLE IF NOT EXISTS sonar_clicks (
+    id INTEGER PRIMARY KEY,
+    dolphin_id INTEGER NOT NULL,
+    date DATE NOT NULL,
+    frequency_khz REAL,        -- echolocation click frequency
+    duration_ms REAL,          -- click duration
+    depth_m REAL,              -- water depth at recording
+    prey_detected INTEGER DEFAULT 0,
+    FOREIGN KEY (dolphin_id) REFERENCES river_dolphins(id)
+);
+
+INSERT OR IGNORE INTO river_dolphins (id, name, species, length_cm, estimated_age, river_section) VALUES
+    (1, 'Ganga',   'Ganges River Dolphin', 210, 12, 'Brahmaputra Upper'),
+    (2, 'Sisu',    'Ganges River Dolphin', 180, 8,  'Brahmaputra Middle'),
+    (3, 'Makara',  'Ganges River Dolphin', 240, 18, 'Brahmaputra Upper'),
+    (4, 'Jala',    'Ganges River Dolphin', 160, 5,  'Brahmaputra Lower'),
+    (5, 'Dhara',   'Ganges River Dolphin', 195, 10, 'Brahmaputra Middle');
+
+INSERT OR IGNORE INTO sonar_clicks (id, dolphin_id, date, frequency_khz, duration_ms, depth_m, prey_detected) VALUES
+    (1,  1, '2026-03-01', 65.2, 0.12, 4.5, 1),
+    (2,  1, '2026-03-01', 72.8, 0.08, 4.5, 0),
+    (3,  2, '2026-03-02', 58.0, 0.15, 3.2, 1),
+    (4,  3, '2026-03-02', 80.5, 0.06, 6.0, 1),
+    (5,  3, '2026-03-03', 75.0, 0.09, 5.8, 0),
+    (6,  4, '2026-03-04', 55.0, 0.18, 2.5, 1),
+    (7,  4, '2026-03-04', 60.0, 0.14, 2.5, 1),
+    (8,  5, '2026-03-05', 68.3, 0.11, 4.0, 0),
+    (9,  2, '2026-03-06', 62.0, 0.13, 3.5, 1),
+    (10, 1, '2026-03-07', 70.0, 0.10, 5.0, 1),
+    (11, 3, '2026-03-08', 85.0, 0.05, 6.2, 1),
+    (12, 5, '2026-03-08', 66.0, 0.12, 3.8, 0);
+
+-- ═══════════════════════════════════════════
+-- SILK (Why the Muga Silk Is Golden)
+-- Connects to Level 4 capstone: materials science / fiber analysis
+-- ═══════════════════════════════════════════
+
+CREATE TABLE IF NOT EXISTS silk_fibers (
+    id INTEGER PRIMARY KEY,
+    fiber_type TEXT NOT NULL,          -- 'muga', 'eri', 'pat', 'mulberry'
+    origin_district TEXT,
+    tensile_strength_mpa REAL,        -- megapascals
+    elongation_pct REAL,              -- stretch before breaking
+    luster_score REAL,                -- 1-10 subjective quality
+    golden_hue INTEGER DEFAULT 0      -- 1 if naturally golden
+);
+
+CREATE TABLE IF NOT EXISTS silk_production (
+    id INTEGER PRIMARY KEY,
+    fiber_id INTEGER NOT NULL,
+    year INTEGER NOT NULL,
+    cocoons_kg REAL,
+    raw_silk_kg REAL,
+    village TEXT,
+    weaver TEXT,
+    FOREIGN KEY (fiber_id) REFERENCES silk_fibers(id)
+);
+
+INSERT OR IGNORE INTO silk_fibers (id, fiber_type, origin_district, tensile_strength_mpa, elongation_pct, luster_score, golden_hue) VALUES
+    (1, 'muga',     'Sivasagar',  400, 26.0, 9.2, 1),
+    (2, 'muga',     'Jorhat',     385, 24.5, 8.8, 1),
+    (3, 'eri',      'Kamrup',     280, 18.0, 6.5, 0),
+    (4, 'pat',      'Sualkuchi',  350, 22.0, 7.8, 0),
+    (5, 'mulberry', 'Karnataka',  320, 20.0, 7.0, 0),
+    (6, 'muga',     'Dibrugarh',  410, 27.5, 9.5, 1);
+
+INSERT OR IGNORE INTO silk_production (id, fiber_id, year, cocoons_kg, raw_silk_kg, village, weaver) VALUES
+    (1,  1, 2024, 120.0, 8.5,  'Simaluguri',  'Bina Borah'),
+    (2,  1, 2025, 145.0, 10.2, 'Simaluguri',  'Bina Borah'),
+    (3,  2, 2024, 95.0,  6.8,  'Titabar',     'Hema Gogoi'),
+    (4,  2, 2025, 110.0, 7.9,  'Titabar',     'Hema Gogoi'),
+    (5,  3, 2024, 200.0, 12.0, 'Palasbari',   'Rina Das'),
+    (6,  3, 2025, 220.0, 13.5, 'Palasbari',   'Rina Das'),
+    (7,  4, 2024, 180.0, 11.0, 'Sualkuchi',   'Moni Kalita'),
+    (8,  4, 2025, 175.0, 10.8, 'Sualkuchi',   'Moni Kalita'),
+    (9,  5, 2024, 300.0, 22.0, 'Ramanagara',  'Lakshmi Devi'),
+    (10, 5, 2025, 310.0, 23.0, 'Ramanagara',  'Lakshmi Devi'),
+    (11, 6, 2024, 80.0,  5.5,  'Lahowal',     'Juri Phukan'),
+    (12, 6, 2025, 100.0, 7.0,  'Lahowal',     'Juri Phukan');
 `;

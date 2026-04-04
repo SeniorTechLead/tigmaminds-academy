@@ -240,6 +240,7 @@ def bootstrap_predict(X_cal, log_y_cal, x_new, n_bootstrap=500):
         'point': np.median(predictions),
         'mean': np.mean(predictions),
         'ci_lower': np.percentile(predictions, 2.5),
+        }
 
 print("\n[Full visualization available in the playground]")`,
       challenge: 'Test the effect of calibration dataset size on CI width: run the bootstrap with n=30, 60, and 100 calibration trees. How does the CI for the ancient temple banyan change? At what n does the CI stabilize?',

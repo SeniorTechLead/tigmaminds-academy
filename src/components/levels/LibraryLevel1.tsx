@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Sparkles, ChevronDown, ChevronUp, CheckCircle, HelpCircle } from 'lucide-react';
 import HtmlPlayground from '../HtmlPlayground';
+import { renderMarkdown } from '../MiniLesson';
 
 interface WebLesson {
   title: string;
@@ -15,11 +16,6 @@ interface WebLesson {
   successHint?: string;
 }
 
-function renderMd(text: string) {
-  return text
-    .replace(/\*\*(.+?)\*\*/g, '<strong class="text-gray-900 dark:text-white">$1</strong>')
-    .replace(/`(.+?)`/g, '<code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-violet-700 dark:text-violet-300 text-xs font-mono">$1</code>');
-}
 
 function WebMiniLesson({ lesson, number }: { lesson: WebLesson; number: number }) {
   const [showAnswer, setShowAnswer] = useState(false);
@@ -32,7 +28,7 @@ function WebMiniLesson({ lesson, number }: { lesson: WebLesson; number: number }
           <span className="w-8 h-8 rounded-full bg-gradient-to-r from-violet-500 to-purple-500 text-white flex items-center justify-center text-sm font-bold flex-shrink-0">{number}</span>
           <h4 className="text-xl font-bold text-gray-900 dark:text-white">{lesson.title}</h4>
         </div>
-        <div className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: renderMd(lesson.concept) }} />
+        <div className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: renderMarkdown(lesson.concept) }} />
 
         {lesson.analogy && (
           <div className="bg-sky-50 dark:bg-sky-900/20 border-l-4 border-sky-400 rounded-r-lg px-4 py-3 mb-4">
