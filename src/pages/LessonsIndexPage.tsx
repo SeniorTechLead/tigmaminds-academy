@@ -146,9 +146,7 @@ export default function LessonsIndexPage() {
             return (
               <div className="mb-4">
                 <div className="flex items-center justify-center gap-1 text-xs text-gray-400 dark:text-gray-500 mb-2">
-                  <span>{disc.icon} {disc.key}</span>
-                  <ChevronRight className="w-3 h-3" />
-                  <span className="font-semibold text-gray-600 dark:text-gray-300">Skills</span>
+                  <span className="font-semibold text-gray-600 dark:text-gray-300">{disc.icon} {disc.key}</span>
                 </div>
                 <div className="flex flex-wrap gap-2 justify-center">
                   {disc.skills.map(s => {
@@ -169,24 +167,23 @@ export default function LessonsIndexPage() {
             );
           })()}
 
-          {/* L3 tool drill-down row */}
+          {/* L3 sub-skill drill-down — only when 2+ sub-categories have lessons */}
           {filterType === 'discipline' && selectedDiscipline && selectedL2Skill && (() => {
             const disc = DISCIPLINES.find(d => d.key === selectedDiscipline);
             const skill = disc?.skills.find(s => s.name === selectedL2Skill);
             if (!disc || !skill) return null;
+            const toolsWithLessons = skill.tools.filter(t => toolCount(disc.key, skill.name, t) > 0);
+            if (toolsWithLessons.length < 2) return null;
             return (
               <div className="mb-4">
                 <div className="flex items-center justify-center gap-1 text-xs text-gray-400 dark:text-gray-500 mb-2">
                   <span>{disc.icon} {disc.key}</span>
                   <ChevronRight className="w-3 h-3" />
-                  <span>{selectedL2Skill}</span>
-                  <ChevronRight className="w-3 h-3" />
-                  <span className="font-semibold text-gray-600 dark:text-gray-300">Tools</span>
+                  <span className="font-semibold text-gray-600 dark:text-gray-300">{selectedL2Skill}</span>
                 </div>
                 <div className="flex flex-wrap gap-2 justify-center">
-                  {skill.tools.map(tool => {
+                  {toolsWithLessons.map(tool => {
                     const count = toolCount(disc.key, skill.name, tool);
-                    if (count === 0) return null;
                     return (
                       <button key={tool} onClick={() => setSelectedL3Tool(selectedL3Tool === tool ? null : tool)}
                         className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${selectedL3Tool === tool ? 'bg-amber-500 text-white shadow-md' : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:ring-2 hover:ring-amber-400'}`}>
