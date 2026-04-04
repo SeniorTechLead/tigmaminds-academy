@@ -4990,8 +4990,6 @@ plt.show()
           '"students" table by roll number — which is why these are called *relational databases*. This ' +
           'structure avoids duplication: you store each student\'s name once, and every table that needs ' +
           'it just points to the right row.',
-        intermediateContent:
-          'A relational database organizes data into **tables** (rows and columns). Each row is a record; each column is a field with a specific data type (INTEGER, TEXT, REAL, DATETIME). The **primary key** uniquely identifies each row (e.g., elephant_id). **Foreign keys** link tables: a sightings table might have elephant_id referencing the elephants table. Core SQL: `SELECT name, weight FROM elephants WHERE weight > 4000 ORDER BY weight DESC` retrieves heavy elephants sorted by weight. `INSERT INTO elephants (name, weight) VALUES ("Ranga", 4500)` adds a record. `UPDATE elephants SET weight = 4600 WHERE name = "Ranga"` modifies one.',
         advancedContent:
           'When your database grows, two problems appear: **redundancy** (the same data stored in multiple places) and **speed** (finding data in millions of rows).\n\n' +
           '**The redundancy problem.** Imagine you store each elephant\'s park name directly in the sightings table: every time Ranga is sighted, "Kaziranga National Park, Assam, India" is written again. Now Kaziranga changes its official name. You have to find and update every single sighting row — miss one, and your data contradicts itself. The fix: store park information once in a `parks` table, and in sightings just store `park_id = 1`. One update to the parks table fixes everything. This process of removing redundancy is called **normalization**.\n\n' +
@@ -5021,10 +5019,6 @@ plt.show()
           '**Python (imperative — you write every step):**\n`results = []\nfor student in students:\n    if student["marks"] > 80:\n        results.append(student["name"])`\n\n' +
           '**SQL (declarative — you describe the goal):**\n`SELECT name FROM students WHERE marks > 80;`\n\n' +
           'The database engine figures out the fastest way to find those rows. SQL was designed in the 1970s and is still the standard today. Almost every app you use — Instagram, Google, Zomato, banking apps — runs SQL queries behind the scenes every time you tap a button.',
-        intermediateContent:
-          'JOIN combines tables: SELECT e.name, s.date FROM elephants e JOIN sightings s ON e.id = s.elephant_id WHERE s.date > "2024-01-01". Aggregates: SELECT location, COUNT(*), AVG(group_size) FROM sightings GROUP BY location HAVING COUNT(*) > 10. Subqueries: SELECT name FROM elephants WHERE id IN (SELECT elephant_id FROM sightings WHERE location = "Kaziranga"). Window functions: RANK() OVER (ORDER BY weight DESC) adds ranking without collapsing rows.',
-        advancedContent:
-          'Query optimization: the planner chooses table scan, index scan, or hash join. EXPLAIN ANALYZE shows execution plans. Create indexes on filtered/joined columns. Avoid SELECT * — fetch only needed columns. Database normalization (1NF, 2NF, 3NF) reduces redundancy but increases JOIN complexity. **Denormalization** (storing computed aggregates) speeds reads at the cost of write complexity. Modern databases use cost-based optimizers that estimate row counts and choose the cheapest plan. Connection pooling (PgBouncer, SQLAlchemy) reuses database connections to avoid the overhead of establishing new ones for every query.',
         diagram: 'SQLQueryFlowDiagram',
       },
       {
@@ -5040,10 +5034,6 @@ plt.show()
           'high-scoring students in class 10, while `WHERE class = 10 OR class = 12` finds students in ' +
           'either class. These operators let you express surprisingly complex questions in a single readable ' +
           'sentence — no loops, no if-statements, just a clear description of the data you want.',
-        intermediateContent:
-          'WHERE clauses filter rows: WHERE weight > 4000, WHERE name LIKE "R%", WHERE location IN ("Kaziranga", "Manas"), WHERE date BETWEEN "2024-01-01" AND "2024-12-31". AND/OR combine conditions: WHERE weight > 4000 AND location = "Kaziranga". ORDER BY sorts results: ORDER BY weight DESC (heaviest first), ORDER BY name ASC (alphabetical). LIMIT restricts output: LIMIT 10 returns the first 10 rows. Combined: SELECT name, weight FROM elephants WHERE weight > 3500 ORDER BY weight DESC LIMIT 5 — top 5 heaviest elephants over 3500 kg.',
-        advancedContent:
-          'Query performance depends on whether indexes exist for filtered columns. Without an index, the database performs a full table scan (checking every row). With a B-tree index on the weight column, WHERE weight > 4000 jumps directly to the relevant portion — O(log n) vs O(n). Composite indexes (CREATE INDEX ON sightings(location, date)) optimize queries filtering on multiple columns. The EXPLAIN command shows the query plan: Sequential Scan (slow) vs Index Scan (fast). Trade-off: indexes speed up reads but slow down writes (every INSERT/UPDATE must update the index).',
         interactive: {
           type: 'matching',
           props: {
@@ -5076,10 +5066,6 @@ plt.show()
           'match in the right table — useful for finding students who have not submitted any marks yet. ' +
           'Understanding joins is the key to working with any real database, because real-world data is ' +
           'almost always split across multiple related tables.',
-        intermediateContent:
-          'JOIN types: **INNER JOIN** returns only matching rows from both tables. **LEFT JOIN** returns all rows from the left table, with NULLs where no right-table match exists. **RIGHT JOIN** is the mirror. **FULL OUTER JOIN** returns all rows from both tables. Example: SELECT e.name, COUNT(s.id) FROM elephants e LEFT JOIN sightings s ON e.id = s.elephant_id GROUP BY e.name — shows every elephant, even those with zero sightings (which INNER JOIN would omit). Self-joins compare rows within the same table: find elephant pairs of similar weight.',
-        advancedContent:
-          'Joins can be expensive for large tables. Nested loop join is O(n×m) — the database checks every combination. Hash join builds a hash table on the smaller table, then probes with the larger — O(n+m). Sort-merge join sorts both tables by the join key, then merges — O(n log n + m log m). The query planner chooses based on table sizes and available indexes. Denormalization (storing redundant data to avoid joins) is common in read-heavy applications: a sightings table might include elephant_name directly, avoiding a join for every query at the cost of update complexity. This tradeoff between normalization and performance is a core database design decision.',
         diagram: 'SQLJoinDiagram',
       },
       {
@@ -5099,10 +5085,6 @@ plt.show()
           'fail. If you are transferring money from one bank account to another, you need the debit and ' +
           'credit to happen together — a crash in between would lose money. Databases guarantee this ' +
           'atomicity, which is why banks, airlines, and hospitals trust them with critical data.',
-        intermediateContent:
-          'INSERT adds rows: INSERT INTO elephants (name, weight, location) VALUES ("Mohini", 3800, "Kaziranga"). UPDATE modifies: UPDATE elephants SET weight = 3900 WHERE name = "Mohini". DELETE removes: DELETE FROM sightings WHERE date < "2020-01-01". **Transactions** group operations atomically: BEGIN; UPDATE accounts SET balance = balance - 100 WHERE id = 1; UPDATE accounts SET balance = balance + 100 WHERE id = 2; COMMIT; — either both updates happen or neither does (ACID atomicity). CREATE TABLE defines schema: CREATE TABLE elephants (id INTEGER PRIMARY KEY, name TEXT NOT NULL, weight REAL CHECK(weight > 0)).',
-        advancedContent:
-          'Schema migrations manage database changes over time: ALTER TABLE elephants ADD COLUMN last_seen DATE; Tools like Alembic (Python/SQLAlchemy) or Flyway (Java) version-control schema changes, applying them in order across development, staging, and production databases. Soft deletes (SET deleted_at = NOW() instead of DELETE) preserve data for audit trails. Triggers automatically execute code on events: CREATE TRIGGER log_update AFTER UPDATE ON elephants — useful for audit logging and maintaining derived data. Stored procedures run complex server-side logic, reducing network round-trips for multi-step operations.',
         interactive: {
           type: 'true-false',
           props: {
