@@ -125,7 +125,7 @@ export default function SQLQueryFlowDiagram() {
         <text x={totalW / 2} y={totalH - 8} textAnchor="middle" className="fill-gray-400 dark:fill-gray-500" fontSize="9">
           {view === 'write'
             ? 'You write SELECT first, but the database reads FROM first.'
-            : 'This is why you can\'t use a SELECT alias in WHERE — WHERE runs before SELECT.'}
+            : 'Column aliases (AS avg_w) are created in step 5 — so WHERE (step 2) can\'t see them yet.'}
         </text>
       </svg>
     </div>
