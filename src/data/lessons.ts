@@ -94,6 +94,7 @@ export const SUBJECTS: { key: Subject; color: string; icon: string }[] = [
   { key: 'Astronomy', color: 'bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-300', icon: '🔭' },
   { key: 'Health & Medicine', color: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300', icon: '🏥' },
   { key: 'Marine Science', color: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300', icon: '🐟' },
+  { key: 'History', color: 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300', icon: '📜' },
 ];
 
 export const lessons: Lesson[] = [
@@ -19509,6 +19510,10 @@ Among the people of Assam, the Brahmaputra is not just a river. It is a teacher.
 // Mythology lessons (separate file for maintainability)
 import { mythologyLessons } from './lessons-mythology';
 lessons.push(...mythologyLessons);
+
+// World History lessons
+import { historyLessons } from './lessons-history';
+lessons.push(...historyLessons);
 
 export function getLessonBySlug(slug: string): Lesson | undefined {
   return lessons.find((l) => l.slug === slug);
