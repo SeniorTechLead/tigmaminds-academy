@@ -207,26 +207,26 @@ export default function SectionRenderer({ section, level = 0 }: Props) {
         {section.title}
       </h4>
 
-      {/* Level 0: Beginner — everyone sees this */}
-      {section.content && renderContent(section.content)}
+      {/* Beginner — everyone sees this */}
+      {section.beginnerContent && renderContent(section.beginnerContent)}
 
-      {/* Level 1: Intermediate — formulas, calculations */}
-      {level >= 1 && section.goDeeper && (
+      {/* Intermediate — formulas, calculations */}
+      {level >= 1 && section.intermediateContent && (
         <div className="mt-3 pl-3 border-l-2 border-blue-300 dark:border-blue-700">
           <div className="flex items-center gap-1.5 mb-1">
             <span className="text-xs font-semibold text-blue-600 dark:text-blue-400">🔬 Going deeper</span>
           </div>
-          {renderContent(section.goDeeper)}
+          {renderContent(section.intermediateContent)}
         </div>
       )}
 
-      {/* Level 2: Advanced — derivations, research */}
-      {level >= 2 && section.advanced && (
+      {/* Advanced — derivations, research */}
+      {level >= 2 && section.advancedContent && (
         <div className="mt-3 pl-3 border-l-2 border-purple-300 dark:border-purple-700">
           <div className="flex items-center gap-1.5 mb-1">
             <span className="text-xs font-semibold text-purple-600 dark:text-purple-400">🚀 Advanced</span>
           </div>
-          {renderContent(section.advanced)}
+          {renderContent(section.advancedContent)}
         </div>
       )}
 
