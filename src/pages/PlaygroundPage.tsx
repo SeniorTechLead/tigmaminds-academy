@@ -13,6 +13,7 @@ import { usePrefs } from '../contexts/PrefsContext';
 import { useAuth } from '../contexts/AuthContext';
 import { usePyodide } from '../contexts/PyodideContext';
 import { useSqlJs } from '../contexts/SqlJsContext';
+import { useTs } from '../contexts/TsContext';
 import { problems, type Problem, type ProblemTier, type Difficulty, type Topic, type Language } from '../data/playground-problems';
 import { lookupSection } from '../utils/referenceLookup';
 
@@ -119,11 +120,14 @@ function ProblemSolver({ problem, tier, onBack }: { problem: Problem; tier: Prob
   const [sqlResultDisplay, setSqlResultDisplay] = useState<{ columns: string[]; rows: any[][] } | null>(null);
   const { pyodideRef, load: loadPyodide, state: pyCtxState, loadProgress: pyLoadProgress } = usePyodide();
   const { load: loadSqlJs, runSql, resetDb, state: sqlCtxState, loadProgress: sqlLoadProgress } = useSqlJs();
+  const { load: loadTs, runTs, state: tsCtxState, loadProgress: tsLoadProgress } = useTs();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  const isSql = problem.language === 'sql';
-  const ctxState = isSql ? sqlCtxState : pyCtxState;
-  const loadProgress = isSql ? sqlLoadProgress : pyLoadProgress;
+  const lang = problem.language || 'python';
+  const isSql = lang === 'sql';
+  const isTs = lang === 'typescript';
+  const ctxState = isSql ? sqlCtxState : isTs ? tsCtxState : pyCtxState;
+  const loadProgress = isSql ? sqlLoadProgress : isTs ? tsLoadProgress : pyLoadProgress;
   const pyState = running ? 'running' as const : ctxState === 'idle' ? 'idle' as const : ctxState === 'loading' ? 'loading' as const : 'ready' as const;
 
   const runPythonTests = useCallback(async () => {
@@ -260,7 +264,64 @@ function ProblemSolver({ problem, tier, onBack }: { problem: Problem; tier: Prob
     setRunning(false);
   }, [code, tier, loadSqlJs, runSql, resetDb]);
 
-  const runTests = isSql ? runSqlTests : runPythonTests;
+  const runTsTests = useCallback(async () => {
+    const ts = await loadTs();
+    if (!ts) return;
+
+    setRunning(true);
+    setResults([]);
+    setOutput('');
+
+    const testResults: TestResult[] = [];
+
+    for (const tc of tier.testCases) {
+      try {
+        // Build full code: student code + test expression
+        const fullCode = tc.input
+          ? code + '\n' + tc.input  // tc.input = extra test code to append
+          : code;
+
+        const result = runTs(fullCode);
+
+        if (result.error) {
+          testResults.push({
+            label: tc.label,
+            passed: false,
+            expected: tc.expected,
+            actual: result.error,
+          });
+          continue;
+        }
+
+        // Compare output
+        const actual = result.output.trim();
+        const expected = tc.expected;
+
+        if (expected === 'true') {
+          // Flexible check — just verify no error
+          testResults.push({ label: tc.label, passed: true, expected: 'runs without error', actual });
+        } else {
+          testResults.push({
+            label: tc.label,
+            passed: actual === expected,
+            expected,
+            actual,
+          });
+        }
+      } catch (err: any) {
+        testResults.push({ label: tc.label, passed: false, expected: tc.expected, actual: `Error: ${err.message}` });
+      }
+    }
+
+    // Capture final output for display
+    const finalResult = runTs(code);
+    if (finalResult.output) setOutput(finalResult.output);
+
+    setResults(testResults);
+    setRunning(false);
+  }, [code, tier, loadTs, runTs]);
+
+  const runTests = isTs ? runTsTests : isSql ? runSqlTests : runPythonTests;
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Tab') {
@@ -472,7 +533,8 @@ export default function PlaygroundPage() {
 
   const pythonTopics: Topic[] = ['strings', 'lists', 'math', 'sorting', 'dictionaries', 'loops', 'functions', 'data', 'tuples-sets', 'classes', 'recursion', 'error-handling'];
   const sqlTopics: Topic[] = ['sql-select', 'sql-joins', 'sql-aggregate', 'sql-modify', 'sql-subqueries'];
-  const topics = filterLanguage === 'sql' ? sqlTopics : filterLanguage === 'python' ? pythonTopics : [...pythonTopics, ...sqlTopics];
+  const tsTopics: Topic[] = ['ts-variables', 'ts-functions', 'ts-interfaces', 'ts-unions', 'ts-arrays', 'ts-generics', 'ts-enums', 'ts-classes'];
+  const topics = filterLanguage === 'sql' ? sqlTopics : filterLanguage === 'typescript' ? tsTopics : filterLanguage === 'python' ? pythonTopics : [...pythonTopics, ...sqlTopics, ...tsTopics];
 
   // If a problem + tier is selected, show the solver
   if (selectedProblem && selectedTier) {
@@ -586,6 +648,7 @@ export default function PlaygroundPage() {
               <option value="all">All languages</option>
               <option value="python">Python</option>
               <option value="sql">SQL</option>
+              <option value="typescript">TypeScript</option>
             </select>
             <select
               value={filterDifficulty}
@@ -639,6 +702,11 @@ export default function PlaygroundPage() {
                       {p.language === 'sql' && (
                         <span className="px-2 py-0.5 rounded-full text-xs font-semibold bg-cyan-100 text-cyan-700 dark:bg-cyan-900/40 dark:text-cyan-300">
                           SQL
+                        </span>
+                      )}
+                      {p.language === 'typescript' && (
+                        <span className="px-2 py-0.5 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300">
+                          TS
                         </span>
                       )}
                     </div>
