@@ -471,7 +471,7 @@ export default function PlaygroundPage() {
   });
 
   const pythonTopics: Topic[] = ['strings', 'lists', 'math', 'sorting', 'dictionaries', 'loops', 'functions', 'data', 'tuples-sets', 'classes', 'recursion', 'error-handling'];
-  const sqlTopics: Topic[] = ['sql-select', 'sql-joins', 'sql-aggregate', 'sql-modify'];
+  const sqlTopics: Topic[] = ['sql-select', 'sql-joins', 'sql-aggregate', 'sql-modify', 'sql-subqueries'];
   const topics = filterLanguage === 'sql' ? sqlTopics : filterLanguage === 'python' ? pythonTopics : [...pythonTopics, ...sqlTopics];
 
   // If a problem + tier is selected, show the solver
