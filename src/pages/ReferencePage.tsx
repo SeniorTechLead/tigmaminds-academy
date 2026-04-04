@@ -201,24 +201,7 @@ export default function ReferencePage() {
               <CategoryPills cats={codingCats} />
             </div>
           </div>
-          {/* Level selector */}
-          <div className="mt-4 flex items-center justify-center gap-1">
-            <span className="text-xs text-gray-500 dark:text-gray-400 mr-2">Depth:</span>
-            {LEVEL_OPTIONS.map(opt => (
-              <button
-                key={opt.value}
-                onClick={() => { setLevel(opt.value); localStorage.setItem('tma_ref_level', String(opt.value)); }}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                  level === opt.value
-                    ? 'bg-amber-500 text-white shadow-md'
-                    : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
-                }`}
-                title={opt.desc}
-              >
-                {opt.label}
-              </button>
-            ))}
-          </div>
+          {/* Level selector — also rendered sticky below */}
 
           {/* Index toggle */}
           <div className="mt-4">
@@ -272,6 +255,27 @@ export default function ReferencePage() {
           </div>
         </section>
       )}
+
+      {/* Sticky depth toggle — stays visible while scrolling */}
+      <div className="sticky top-20 z-40 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-b border-gray-100 dark:border-gray-800 py-2 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto flex items-center justify-center gap-1">
+          <span className="text-xs text-gray-500 dark:text-gray-400 mr-2">Depth:</span>
+          {LEVEL_OPTIONS.map(opt => (
+            <button
+              key={opt.value}
+              onClick={() => { setLevel(opt.value); localStorage.setItem('tma_ref_level', String(opt.value)); }}
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                level === opt.value
+                  ? 'bg-amber-500 text-white shadow-md'
+                  : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
+              }`}
+              title={opt.desc}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
+      </div>
 
       <section className="py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
