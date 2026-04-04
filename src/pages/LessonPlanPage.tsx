@@ -254,11 +254,17 @@ const LEARNING_GOALS = [
   {
     id: 'mythology-stem',
     title: 'World Mythologies Meet STEM',
-    desc: 'Algebra from Al-Khwarizmi, geometry from Alhambra, physics from David and Goliath. Ancient wisdom, modern code.',
+    desc: '20 stories from Hindu, Buddhist, Christian, and Islamic traditions — each one a doorway into real science. Fluid dynamics from the Churning of the Ocean, projectile physics from David and Goliath, algebra from Al-Khwarizmi.',
     icon: Lightbulb,
     color: 'from-purple-400 to-violet-500',
-    slugs: ['al-khwarizmi-algebra', 'geometry-of-alhambra', 'david-and-goliath', 'sand-mandala', 'noahs-ark'],
-    skills: ['Mathematics', 'Physics', 'Geometry', 'Algorithms'],
+    slugs: [
+      'churning-of-the-ocean', 'sand-mandala', 'david-and-goliath', 'geometry-of-alhambra',
+      'ravanas-ten-heads', 'noahs-ark', 'bodhi-tree', 'the-astrolabe',
+      'hanuman-lifted-mountain', 'monastery-bells', 'pushpaka-vimana', 'agni-science-of-fire',
+      'wheel-of-dharma', 'angulimala-change', 'tower-of-babel', 'al-khwarizmi-algebra',
+      'star-of-bethlehem', 'parting-red-sea', 'well-of-zamzam', 'muezzins-call',
+    ],
+    skills: ['Physics', 'Chemistry', 'Mathematics', 'Biology'],
   },
 ];
 
