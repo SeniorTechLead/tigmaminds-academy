@@ -1,4 +1,4 @@
-import { Construction, Compass, BookOpen, Ship, Rocket, FlaskConical, Cog, Mountain, Sparkles, Atom } from 'lucide-react';
+import { Construction, Compass, BookOpen, Ship, Rocket, FlaskConical, Cog, Mountain, Sparkles, Atom, Droplets, Flame, Waves, Globe, Sun, Lightbulb, Cpu, Music, Leaf, Cloud, Zap, TreePine, Factory, Radio, Microscope, Brain, Satellite, Wind, Hammer, Crown } from 'lucide-react';
 import type { Lesson, Subject, Skill, Track } from './lesson-types';
 
 export const historyLessons: Lesson[] = [
@@ -876,6 +876,417 @@ The Manhattan Project proved that physics is not neutral. The same equation — 
     subjects: ['Physics' as Subject, 'Chemistry' as Subject, 'Mathematics' as Subject, 'History' as Subject],
     toolSkills: ['Python' as Skill, 'Scientific Modeling' as Skill],
     skillTags: [{ discipline: 'Scientific Modeling', skill: 'Physics simulation', tools: ['Mechanics'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    learningTracks: ['Science & Lab' as Track],
+    estimatedHours: 14,
+},
+{
+    id: 211,
+    slug: 'roman-aqueducts',
+    tradition: 'World History',
+    illustration: '/content/illustrations/roman-aqueducts.webp',
+    story: { title: 'The Roman Aqueducts', tagline: 'Gravity, gradient, and the engineering that brought water to a million people.', content: `
+**A City That Drinks**
+
+By the first century CE, **Rome** had a problem that no city had ever faced before: it had **one million inhabitants**. No city in human history had reached this size. And every one of those million people needed water — to drink, to bathe, to flush the sewers, to supply the public fountains, and to fill the ornamental pools of the wealthy.
+
+The River Tiber flowed through Rome, but its water was muddy, polluted, and increasingly insufficient. The springs within the city walls had been tapped out centuries ago. Rome needed water from *elsewhere* — from the clean mountain springs in the hills surrounding the city, some as far as **90 kilometres away**.
+
+The solution was the **aqueduct** — one of the most remarkable engineering achievements in human history. Over five centuries, the Romans built **11 major aqueducts** that delivered a combined **one million cubic metres of water per day** to the city. That's roughly **1,000 litres per person per day** — more water per capita than most modern cities provide.
+
+And they did it using nothing but **gravity**.
+
+**The Gradient**
+
+An aqueduct is, at its most basic, a **channel** that carries water downhill from a source to a city. The genius is in the **gradient** — the slope of the channel.
+
+The Romans understood that water flows downhill, and that the speed of flow depends on how steep the hill is. Too steep, and the water rushes too fast, eroding the channel. Too gentle, and the water barely moves, allowing silt to accumulate and block the flow. The ideal gradient for an aqueduct is approximately **1 metre of drop per 1,000 metres of length** — a slope of 0.1%.
+
+This means that for the **Aqua Marcia** — Rome's longest aqueduct at 91 kilometres — the total drop from source to city was only about **90 metres**. The water took roughly **24 hours** to travel the full length, flowing at a gentle walking pace.
+
+Achieving this precise gradient over 91 kilometres of varied terrain — across valleys, around hills, through mountains — required surveying skills of extraordinary accuracy. The Romans used a tool called the **chorobates** — a 6-metre-long wooden bench with plumb lines at each end and a water-filled groove along the top for checking level. By sighting along this instrument, Roman surveyors could establish a gradient accurate to within **a few centimetres per kilometre**.
+
+**Arches and Siphons**
+
+The most iconic image of Roman aqueducts is the **multi-tiered stone arch bridge** — like the **Pont du Gard** in southern France, which carried water 50 metres above the Gardon River valley on three levels of arches.
+
+But these grand bridges were the exception, not the rule. Most of the aqueduct's length ran **underground**, in covered channels cut through rock or laid in trenches. Only about **5% of the typical aqueduct** was carried on arched bridges — only where the terrain dipped so low that a tunnel or trench couldn't maintain the gradient.
+
+Where a valley was too deep for a bridge, the Romans used an **inverted siphon** — a U-shaped pipe that carried water down one side of the valley and up the other. The water was driven upward by the **pressure** of the water column behind it, following the principle that water in a U-tube will rise to the same level on both sides (Pascal's principle, though Pascal wouldn't be born for 1,600 years).
+
+The siphon pipes were made of **lead** — the Latin word for lead, *plumbum*, is where we get the word "plumbing." These lead pipes could withstand pressures of several atmospheres, enough to push water up the far side of a valley that might be 30 or 40 metres deep.
+
+**The Distribution System**
+
+When the water reached Rome, it entered a **castellum divisorium** — a distribution tank at the edge of the city. From there, it was divided into three channels: one for public fountains, one for public baths, and one for private subscribers (wealthy households that paid for a direct water connection).
+
+The public fountains were the backbone of the system. Rome had over **1,300 public fountains**, placed so that no citizen had to walk more than **80 metres** to reach fresh water. The fountains ran continuously — there were no taps. Water flowed day and night, and the overflow fed the sewers, flushing waste into the Tiber.
+
+This continuous flow was not wasteful — it was deliberate engineering. The constant movement prevented stagnation (which breeds mosquitoes and bacteria), kept the channels clear of sediment, and maintained water pressure throughout the system.
+
+**Frontinus and the Science of Flow**
+
+In 97 CE, the Emperor Nerva appointed **Sextus Julius Frontinus** as the water commissioner of Rome — essentially the head of the city's water department. Frontinus was an engineer, a soldier, and a meticulous record-keeper. He wrote *De Aquaeductu Urbis Romae* — "On the Aqueducts of the City of Rome" — the most detailed technical manual to survive from the ancient world.
+
+Frontinus measured the **flow rate** of each aqueduct by measuring the cross-sectional area of the water in the channel and its velocity. He discovered that the aqueducts were delivering **more water than was being officially distributed** — the difference was being stolen by illegal taps. He estimated that **40% of Rome's water supply** was being diverted by unauthorized connections, many of them installed by the very workers who maintained the aqueducts.
+
+Frontinus's work represents one of the earliest examples of **systems engineering** — analyzing a complex infrastructure system, measuring its performance, identifying inefficiencies, and implementing reforms. His methods — flow measurement, audit, standardization of pipe sizes — are still used by water engineers today.
+
+**The Legacy**
+
+The Roman aqueducts operated for over **500 years**. Some continued to function, with repairs, into the medieval period. The **Aqua Virgo**, built in 19 BCE, was restored in the Renaissance and still feeds the **Trevi Fountain** in Rome today — delivering the same mountain spring water through essentially the same channel, more than two thousand years after it was built.
+
+When the aqueducts stopped working — when the Goths cut them during the sieges of the 6th century — Rome's population collapsed from one million to fewer than **30,000**. The city couldn't survive without its water.
+
+This is the lesson of the aqueducts: **civilization is infrastructure**. The poetry, the philosophy, the law, the art — all of it depended on the unglamorous fact that someone had figured out how to move water downhill at a gradient of one metre per kilometre, across ninety kilometres of mountains and valleys, and deliver it to a fountain within eighty metres of every citizen's home.
+
+*The end.*` },
+    stem: { title: 'Hydraulic Engineering & Fluid Flow', description: 'How gravity and gradient moved a million cubic metres of water per day — flow dynamics, pressure, and infrastructure design.', icon: Droplets, color: 'from-blue-400 to-indigo-500', skills: ['Understand how gradient determines flow velocity in open channels', 'Calculate flow rate from channel cross-section and velocity', 'Model inverted siphons using Pascal\'s principle', 'Analyze a water distribution network for efficiency and loss'], project: {
+        title: 'Build an Aqueduct Flow Simulator',
+        description: 'Create a Python program that models water flow through an aqueduct system — from mountain source to city fountain, including bridges, siphons, and distribution.',
+        steps: [
+          'Model an open-channel flow: given gradient, channel dimensions, and roughness, calculate flow velocity using Manning\'s equation',
+          'Simulate an inverted siphon: calculate pressure at the bottom of a valley and verify the water rises on the far side',
+          'Build a distribution network: split flow into fountains, baths, and private connections',
+          'Add water theft: simulate 40% illegal diversion and show the impact on fountain pressure',
+          'Visualize the aqueduct profile from source to city, showing elevation, gradient, and flow velocity using Matplotlib',
+        ],
+      } },
+    track: 'school',
+    subjects: ['Physics' as Subject, 'Engineering' as Subject, 'Geography' as Subject, 'History' as Subject],
+    toolSkills: ['Python' as Skill, 'Scientific Modeling' as Skill],
+    skillTags: [{ discipline: 'Scientific Modeling', skill: 'Physics simulation', tools: ['Fluid dynamics'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    learningTracks: ['Science & Lab' as Track],
+    estimatedHours: 12,
+},
+{
+    id: 212,
+    slug: 'greek-fire',
+    tradition: 'World History',
+    illustration: '/content/illustrations/greek-fire.webp',
+    story: { title: 'Greek Fire', tagline: 'The secret weapon of Byzantium — combustion chemistry, flamethrowers, and the original weapons mystery.', content: `
+**The Burning Sea**
+
+In the summer of 678 CE, the **Arab fleet** — the most powerful navy in the world — sailed through the Sea of Marmara toward **Constantinople**, the capital of the Byzantine Empire. The fleet carried thousands of soldiers. The city's walls had never been breached by sea. But the Arabs had a plan: they would blockade the city, starve it, and force a surrender.
+
+They never got the chance.
+
+As the Arab ships approached the sea walls, Byzantine warships — small, fast **dromons** — raced out to meet them. Mounted on the prow of each dromon was a device that looked like a bronze lion's head with its mouth open. From that mouth came a jet of **liquid fire** — a stream of burning fluid that arced through the air and splashed across the Arab ships.
+
+The fire stuck to everything it touched. It could not be put out with water. In fact, **water made it burn harder**. It floated on the surface of the sea, turning the water itself into a burning field. Sailors who jumped overboard to escape burning ships found themselves swimming through fire.
+
+The Arab fleet was destroyed. The siege was broken. Constantinople would survive for another **775 years**.
+
+The weapon was called **Greek Fire**, and it was the most closely guarded military secret in the ancient world.
+
+**What Was It?**
+
+We don't know. And that's not a failure of modern chemistry — it's a testament to how well the Byzantines kept their secret.
+
+The recipe for Greek Fire was known only to the **Kallinikos family** — its inventors — and the reigning Emperor. It was passed down through generations under an oath of secrecy. When the Byzantine Empire finally fell in 1453, the secret died with it.
+
+What we do know, from contemporary descriptions and modern chemical analysis of residues, is that Greek Fire had several extraordinary properties:
+
+1. **It burned on water.** This rules out any purely alcohol-based or oil-based incendiary. Ordinary oil floats and burns on water, but it can be smothered or diluted.
+
+2. **Water intensified the burning.** This suggests a component that reacts *exothermically* with water — meaning the reaction with water produces heat, which feeds the fire.
+
+3. **It was projected as a liquid stream** from pressurized siphons, like a modern flamethrower.
+
+4. **It adhered to surfaces** — hulls, sails, skin — and could not be easily scraped off.
+
+Modern chemists have proposed several candidate recipes. The most widely accepted theory is that Greek Fire was based on **crude petroleum** (naphtha), thickened with **pine resin** to make it sticky, and possibly combined with **quicklime** (calcium oxide) — a substance that reacts violently with water, producing intense heat.
+
+**The Chemistry of Combustion**
+
+To understand Greek Fire, you need to understand combustion — the chemical reaction that produces fire.
+
+Combustion is an **exothermic oxidation reaction**. A fuel (a substance containing carbon and hydrogen) reacts with oxygen, producing carbon dioxide, water, and **energy** in the form of heat and light:
+
+Fuel + O₂ → CO₂ + H₂O + Energy
+
+The key requirement is the **fire triangle**: fuel, oxygen, and heat. Remove any one, and the fire goes out.
+
+Ordinary fires can be extinguished by removing oxygen (smothering with a blanket), removing heat (pouring water), or removing fuel (creating a firebreak). Greek Fire was terrifying because **none of these methods worked**:
+
+- **Water** didn't cool it — the quicklime reacted with water exothermically, *adding* heat.
+- **Smothering** didn't work because the naphtha was liquid and spread across any surface that tried to cover it.
+- **Removing fuel** was impossible because the sticky resin adhered to whatever it touched.
+
+**Quicklime and Water**
+
+The reaction between quicklime and water is one of the most dramatic in everyday chemistry:
+
+CaO + H₂O → Ca(OH)₂ + Heat (65 kJ/mol)
+
+Calcium oxide (quicklime) reacts with water to produce calcium hydroxide (slaked lime) and a large amount of heat — enough to raise the temperature of the surrounding material above the **flash point** of naphtha, reigniting any fire that water might have temporarily cooled.
+
+This reaction is so energetic that quicklime was used for centuries as a **heat source** in situations where fire was impractical. During World War I, soldiers heated their food using cans of quicklime activated by water. Today, self-heating coffee cans and military ration heaters use the same chemistry.
+
+**The Siphon**
+
+The delivery system was as remarkable as the fuel. The Byzantines projected Greek Fire through bronze tubes using **air pressure** — essentially a pump-action flamethrower.
+
+The mechanism was a **force pump** (similar to a bicycle pump) connected to a heated, pressurized tank of Greek Fire. A fire was kept burning beneath the tank to keep the mixture liquid and to increase the internal pressure. When the operator worked the pump lever, pressurized air forced the liquid through a narrow bronze nozzle, creating a jet that could reach **15 to 20 metres**.
+
+The nozzle was often shaped like an **animal's head** — a lion, a dragon, a serpent — both for psychological effect and because the narrow throat of the animal shape created a natural **nozzle** that accelerated the liquid stream, increasing its range.
+
+**The Mystery Endures**
+
+Despite centuries of research, no one has conclusively recreated Greek Fire. Several teams have come close — producing sticky, water-resistant incendiary mixtures based on naphtha and quicklime — but none has matched all the described properties simultaneously.
+
+The mystery is part of the lesson. Greek Fire teaches us that **chemistry is power** — and that the people who understood combustion, pressure, and chemical reactions 1,300 years ago wielded that understanding as effectively as any modern weapons engineer.
+
+It also teaches us something about secrets: the Byzantines kept this one for **800 years**. In an age of instant information, it's worth remembering that the most powerful technology in the medieval world was protected not by encryption, not by patents, but by a family oath and the silence of emperors.
+
+*The end.*` },
+    stem: { title: 'Combustion Chemistry & Thermodynamics', description: 'The chemistry of fire — exothermic reactions, the fire triangle, quicklime-water reactions, and why Greek Fire burned on water.', icon: Flame, color: 'from-orange-400 to-red-500', skills: ['Understand exothermic combustion reactions and the fire triangle', 'Explain why quicklime reacts with water to produce heat', 'Model the thermodynamics of different fuel-oxidizer combinations', 'Analyze pressure-driven fluid projection (flamethrower physics)'], project: {
+        title: 'Build a Combustion Simulator',
+        description: 'Create a Python program that models combustion reactions — calculate energy output for different fuels, simulate the quicklime-water reaction, and model the range of a pressurized liquid jet.',
+        steps: [
+          'Calculate the heat of combustion for different fuels: naphtha, wood, alcohol, using bond energies',
+          'Model the quicklime-water reaction: calculate temperature rise for different quantities of CaO and H₂O',
+          'Simulate the fire triangle: model ignition, sustaining, and extinguishing for different fuel-oxygen-heat combinations',
+          'Calculate flamethrower range: model a pressurized liquid jet using Bernoulli\'s equation and projectile motion',
+          'Visualize energy release profiles and temperature curves using Matplotlib',
+        ],
+      } },
+    track: 'school',
+    subjects: ['Chemistry' as Subject, 'Physics' as Subject, 'History' as Subject],
+    toolSkills: ['Python' as Skill, 'Scientific Modeling' as Skill],
+    skillTags: [{ discipline: 'Scientific Modeling', skill: 'Physics simulation', tools: ['Thermodynamics'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    learningTracks: ['Science & Lab' as Track],
+    estimatedHours: 12,
+},
+{
+    id: 213,
+    slug: 'egyptian-embalming',
+    tradition: 'World History',
+    illustration: '/content/illustrations/egyptian-embalming.webp',
+    story: { title: 'Egyptian Embalming', tagline: 'Biochemistry, preservation, and a 3,000-year experiment in stopping decay.', content: `
+**Seventy Days**
+
+When a pharaoh of Egypt died, the clock started. The embalmers had **seventy days** to transform a body that would rot within a week in the Egyptian heat into a preserved form that would last — they believed — for eternity.
+
+The embalmers of ancient Egypt were not priests performing a mystical ritual. They were **applied chemists** — practitioners who, through thousands of years of trial and error, had developed a sophisticated understanding of the biochemistry of decomposition and how to prevent it.
+
+Their methods worked. Mummies from 3,000 years ago — older than the Roman Empire, older than the Greek city-states, older than the Buddha — still have recognizable features, intact skin, and even identifiable DNA. No other preservation technology in human history has achieved comparable results over such timescales.
+
+**Why Bodies Decay**
+
+To understand mummification, you first need to understand decomposition. When an organism dies, its cells stop producing **ATP** — the molecule that powers all cellular processes. Without ATP, the cell membranes lose their integrity and begin to leak. The cell's own digestive enzymes — **lysozymes and proteases** — are released from their compartments and begin digesting the cell from the inside. This process is called **autolysis** — literally, "self-eating."
+
+Within hours, **bacteria** that were harmlessly living in the gut and on the skin begin to invade the tissues. These bacteria feed on the dead cells, producing gases (hydrogen sulphide, methane, ammonia) that cause bloating, and enzymes that liquefy tissues. This is **putrefaction** — and in the Egyptian climate, at temperatures above 35°C, it can reduce a body to skeleton in as little as **two weeks**.
+
+The embalmers' task was to stop both autolysis and putrefaction. Their solution targeted the one thing both processes need: **water**.
+
+**Natron: The Key**
+
+The primary preservative used by Egyptian embalmers was **natron** — a naturally occurring mineral salt found in dried lake beds throughout Egypt, especially at **Wadi el-Natrun** in the western desert.
+
+Natron is a mixture of **sodium carbonate** (Na₂CO₃), **sodium bicarbonate** (NaHCO₃), **sodium chloride** (NaCl), and **sodium sulphate** (Na₂SO₄). This combination is a powerful **desiccant** — it absorbs water from any material it contacts.
+
+The process was straightforward in concept but required precise execution. After the internal organs were removed (the brain through the nose using a hooked bronze tool, the organs through an incision in the left side), the body cavity was packed with natron, and the entire body was covered in a mound of natron crystals.
+
+Over the next **40 days**, the natron drew water out of the body tissues through **osmosis**. The high concentration of sodium ions outside the cells created an osmotic gradient that pulled water outward, across the cell membranes, and into the salt crystals. The body lost approximately **75% of its weight** in water.
+
+Without water, the enzymes that drive autolysis cannot function. Without water, bacteria cannot metabolize and reproduce. The body was effectively **frozen in chemical time** — not by cold, but by dryness.
+
+**The Resin Seal**
+
+Drying alone wasn't enough. Dried tissue is hygroscopic — it will **reabsorb moisture** from the air. In humid seasons along the Nile, an unprotected mummy would rehydrate and begin decaying again.
+
+The embalmers solved this by coating the dried body in layers of **tree resin** — primarily from **Pistacia** trees (related to pistachios) and **coniferous trees** (pine, cedar). The resin was heated until liquid, applied to the skin, and allowed to harden into a waterproof, airtight seal.
+
+Modern analysis has revealed that these resins contained **antibacterial compounds** — terpenes and terpenoids that actively inhibit microbial growth. The embalmers may not have known the mechanism, but they knew from experience that resin-treated bodies lasted longer than uncoated ones.
+
+Recent studies using **gas chromatography-mass spectrometry** (GC-MS) on samples from mummies have identified complex mixtures of plant oils, animal fats, beeswax, and tree resins — each contributing specific preservative properties. Some mummies show evidence of treatment with **bitumen** (natural asphalt), which provides additional waterproofing and antimicrobial protection.
+
+**Canopic Jars and Organ Chemistry**
+
+The internal organs — liver, lungs, stomach, and intestines — were removed because they decay fastest. They contain the highest concentration of digestive enzymes and bacteria.
+
+Each organ was treated separately with natron, wrapped in linen, and stored in one of four **canopic jars**, each protected by a different son of Horus. The heart was left in place — the Egyptians believed it was the seat of intelligence and identity, needed for the afterlife.
+
+The brain was considered unimportant. It was extracted through the nose using a long bronze hook that broke through the **cribriform plate** (a thin bone at the top of the nasal cavity) and stirred the brain tissue until it liquefied enough to drain out. This may seem crude, but it demonstrates a practical understanding of cranial anatomy that was not matched in European medicine until the Renaissance.
+
+**What We've Learned**
+
+The study of mummies has produced genuine scientific discoveries. Analysis of mummy DNA has revealed the **genetic relationships** between ancient Egyptian populations and modern ones. CT scanning of mummies has identified diseases — **atherosclerosis, cancer, tuberculosis** — in individuals who lived millennia ago, proving that these conditions are not exclusively modern.
+
+In 2023, researchers identified the specific chemicals used at an embalming workshop at **Saqqara** by analyzing residues in labeled jars. For the first time, they could match the ancient Egyptian names for substances to their actual chemical identities — bridging a gap of 2,600 years between ancient practice and modern chemistry.
+
+Egyptian embalming was not magic. It was **applied biochemistry** — a 3,000-year experiment in understanding and manipulating the chemistry of life and death. The embalmers didn't know the word "osmosis" or "enzyme" or "bacterium." But they understood the principles well enough to produce results that modern science can barely improve upon.
+
+*The end.*` },
+    stem: { title: 'Biochemistry & Preservation Science', description: 'How the Egyptians stopped decomposition — osmosis, desiccation, antibacterial resins, and the chemistry of decay.', icon: FlaskConical, color: 'from-amber-400 to-yellow-500', skills: ['Understand autolysis and putrefaction: why bodies decompose', 'Explain osmosis and how natron draws water from tissues', 'Analyze the antibacterial properties of tree resins', 'Model desiccation rates as a function of temperature, humidity, and salt concentration'], project: {
+        title: 'Build a Preservation Simulator',
+        description: 'Create a Python program that models the desiccation process — simulate water loss through osmosis, bacterial growth inhibition, and predict preservation outcomes under different conditions.',
+        steps: [
+          'Model osmotic water loss: given tissue water content, natron concentration, and temperature, calculate desiccation rate',
+          'Simulate bacterial growth: model population growth under normal conditions, then with reduced water activity',
+          'Calculate the critical water activity threshold below which bacteria cannot reproduce',
+          'Compare preservation methods: natron vs salt vs modern freeze-drying vs formaldehyde',
+          'Visualize water content and bacterial population over the 70-day embalming period using Matplotlib',
+        ],
+      } },
+    track: 'school',
+    subjects: ['Biology' as Subject, 'Chemistry' as Subject, 'History' as Subject],
+    toolSkills: ['Python' as Skill, 'Scientific Modeling' as Skill],
+    skillTags: [{ discipline: 'Scientific Modeling', skill: 'Chemical simulation', tools: ['Reactions & kinetics'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    learningTracks: ['Science & Lab' as Track],
+    estimatedHours: 12,
+},
+{
+    id: 214,
+    slug: 'chinese-gunpowder',
+    tradition: 'World History',
+    illustration: '/content/illustrations/chinese-gunpowder.webp',
+    story: { title: 'Chinese Gunpowder', tagline: 'An accidental discovery by alchemists seeking immortality — and the chemistry that changed warfare forever.', content: `
+**The Search for Immortality**
+
+In the 9th century CE, during the **Tang Dynasty**, Chinese alchemists were obsessed with a single goal: finding the **elixir of immortality**. They believed that the right combination of minerals, heated in the right way, would produce a substance that could extend human life forever.
+
+They tried thousands of combinations. They mixed mercury with jade. They heated arsenic with gold. They combined sulphur with saltpetre. Most of their concoctions were useless. Some were poisonous — several emperors died from taking alchemical "elixirs" that contained mercury or lead.
+
+But one combination did something entirely unexpected.
+
+Around **850 CE**, an anonymous alchemist — recording his experiments in a text called the **Zhenyuan miaodao yaolüe** — noted a mixture that should be avoided at all costs: **sulphur, saltpetre (potassium nitrate), and charcoal**. When heated together, this mixture did not produce an elixir. It produced a **violent flash, a loud bang, and singed the alchemist's hands and face**.
+
+The text warns: "Some have heated together sulphur, realgar, and saltpetre with honey; smoke and flames result, so that their hands and faces have been burnt, and even the whole house burned down."
+
+The alchemists were looking for immortality. They found **gunpowder**.
+
+**The Chemistry**
+
+Gunpowder is a mixture of three substances in specific proportions: approximately **75% potassium nitrate (KNO₃)**, **15% charcoal (carbon)**, and **10% sulphur**.
+
+Each component has a specific role:
+
+**Potassium nitrate (saltpetre)** is the **oxidizer**. It provides the oxygen needed for combustion, which is why gunpowder can burn in an enclosed space — or even underwater. The oxygen comes from the nitrate (NO₃⁻) ion, not from the air. This is what makes gunpowder fundamentally different from ordinary fire, which stops burning when deprived of air.
+
+**Charcoal (carbon)** is the **fuel**. It burns (combines with oxygen) to produce carbon dioxide and heat.
+
+**Sulphur** is the **secondary fuel and reaction accelerator**. It has a low ignition temperature (approximately 240°C, compared to charcoal's 300°C), which means it catches fire first and then ignites the charcoal. It also produces sulphur dioxide gas, which contributes to the expansion that makes gunpowder an effective propellant.
+
+The overall reaction is approximately:
+
+2KNO₃ + 3C + S → K₂S + 3CO₂ + N₂
+
+The products are solids (potassium sulphide) and gases (carbon dioxide and nitrogen). The gases occupy **about 3,000 times more volume** than the original solid mixture. This sudden, violent expansion of gas is what creates the explosion.
+
+**From Fireworks to Weapons**
+
+The Chinese did not immediately use gunpowder for weapons. For more than a century, it was used primarily for **fireworks** and **signal flares** — the earliest "fire arrows" were conventional arrows with small bags of gunpowder tied to the shaft, used to set fire to enemy fortifications.
+
+The first true gunpowder weapon was the **fire lance** — a bamboo tube packed with gunpowder and shrapnel, attached to a spear. When lit, it produced a jet of flame and projectiles at close range. By the 12th century, Chinese armies were using **bombs** (gunpowder packed in iron or ceramic shells), **rockets** (tubes of gunpowder with a stick for stability), and the earliest **cannons** (bronze tubes that fired stone or iron balls).
+
+The critical insight — the step from firework to weapon — was **containment**. Gunpowder burned in the open produces a flash and a bang. Gunpowder contained in a sealed vessel produces an **explosion**, because the gases have nowhere to go. Gunpowder contained in a tube with one open end and a projectile produces a **gun** — the gases expand, pushing the projectile out at high velocity.
+
+**The Spread**
+
+Gunpowder reached the **Islamic world** by the 13th century, probably via the Mongol conquests and the Silk Road trade routes. Arab chemists documented the recipe and improved the formulation — they discovered that **purifying** the saltpetre (dissolving it in water, filtering out impurities, and recrystallizing) produced a more powerful mixture.
+
+It reached **Europe** by the mid-13th century. The English friar **Roger Bacon** described the recipe in 1267 (encrypted in an anagram to keep it secret). By the 14th century, European armies were using cannons — and the age of castles, knights, and feudal warfare was coming to an end. No stone wall could withstand a sustained bombardment. No armoured knight could survive a musket ball.
+
+**The Lesson**
+
+Gunpowder is a reminder that chemistry is **not morally neutral**. The same reaction that delights a crowd at a fireworks display can destroy a city. The same understanding of oxidation, ignition temperature, and gas expansion that enables a beautiful Roman candle also enables a cannon.
+
+The Chinese alchemists wanted immortality. What they found was a mixture that would, over the following millennium, kill more human beings than any other invention in history — until the nuclear weapons that the Manhattan Project built eight centuries later.
+
+Science gives us power. What we do with it is not a chemistry question. It is a human one.
+
+*The end.*` },
+    stem: { title: 'Combustion Chemistry & Gas Laws', description: 'The chemistry of gunpowder — oxidizers, fuels, gas expansion, and the physics of containment and propulsion.', icon: Sparkles, color: 'from-red-400 to-amber-500', skills: ['Understand oxidation reactions and why gunpowder burns without air', 'Calculate gas expansion ratios from solid reactants to gaseous products', 'Explain ignition temperature and how sulphur accelerates combustion', 'Model the pressure inside a sealed vessel as gunpowder burns'], project: {
+        title: 'Build a Propellant Chemistry Simulator',
+        description: 'Create a Python program that models gunpowder combustion — calculate gas volumes, pressure in a sealed chamber, and projectile velocity from a cannon barrel.',
+        steps: [
+          'Balance the gunpowder reaction equation and calculate moles of gas produced per gram of mixture',
+          'Use the ideal gas law (PV = nRT) to calculate pressure inside a sealed chamber at combustion temperature',
+          'Model the effect of different ratios of saltpetre:charcoal:sulphur on gas production and energy release',
+          'Simulate a cannon: calculate projectile velocity from gas expansion using the work-energy theorem',
+          'Visualize pressure buildup over time and compare different powder formulations using Matplotlib',
+        ],
+      } },
+    track: 'school',
+    subjects: ['Chemistry' as Subject, 'Physics' as Subject, 'History' as Subject],
+    toolSkills: ['Python' as Skill, 'Scientific Modeling' as Skill],
+    skillTags: [{ discipline: 'Scientific Modeling', skill: 'Chemical simulation', tools: ['Reactions & kinetics'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
+    learningTracks: ['Science & Lab' as Track],
+    estimatedHours: 12,
+},
+{
+    id: 215,
+    slug: 'polynesian-wayfinding',
+    tradition: 'World History',
+    illustration: '/content/illustrations/polynesian-wayfinding.webp',
+    story: { title: 'Polynesian Wayfinding', tagline: 'The greatest navigators in human history — star compasses, wave patterns, and crossing the Pacific without instruments.', content: `
+**The Largest Migration**
+
+The **Polynesians** settled the largest ocean on Earth. Starting from Southeast Asia around **3,000 years ago**, they spread across the Pacific — an area covering **one-third of the planet's surface** — reaching every habitable island from Hawaii to New Zealand to Easter Island.
+
+They did this in **double-hulled sailing canoes** — vessels 15 to 25 metres long, with no deck, no shelter from the weather, and carrying up to **80 people** along with pigs, chickens, dogs, seedlings, and enough food and water for weeks at sea.
+
+And they did it without any navigation instruments. No compass, no sextant, no charts, no clock. They navigated using a system so sophisticated that Western scientists didn't fully understand it until the 1970s — and some aspects remain poorly understood today.
+
+**The Star Compass**
+
+Polynesian navigators used a mental model called the **star compass** — a circle of horizon points defined by the rising and setting positions of specific stars.
+
+Unlike Western celestial navigation, which measures a star's angle above the horizon, Polynesian navigation focuses on where stars **touch the horizon** — the points where they rise in the east and set in the west. Each star rises at a specific compass bearing that changes slightly with latitude but remains constant enough for navigation.
+
+A skilled navigator memorized the rising and setting points of approximately **220 stars**, creating a mental compass with dozens of directional points around the horizon. As one star rose too high to be useful, the next one was already appearing at the same horizon point, creating a continuous chain of directional references throughout the night.
+
+During the day, the navigator used the **sun's arc** and, when the sky was overcast, the **direction of ocean swells** — which maintain a consistent bearing over hundreds of kilometres, driven by distant trade winds.
+
+**Reading the Waves**
+
+The most remarkable aspect of Polynesian navigation was the ability to read **wave patterns** to detect land that was far beyond the horizon.
+
+The Pacific has multiple swell systems running simultaneously — long-period swells generated by different wind systems in different parts of the ocean. These swells interact with each other, creating complex patterns on the surface. When a swell encounters a submerged reef, an atoll, or an island, it **refracts, reflects, and diffracts** around the obstacle, creating distortion patterns that radiate outward for **50 to 100 kilometres** beyond the island.
+
+A navigator lying in the hull of the canoe — feeling the motion of the boat rather than looking at the water — could detect these distortion patterns. The boat's rocking changes subtly as the regular swell pattern is disrupted by reflections from distant land. **Mau Piailug**, one of the last traditional navigators from Satawal in Micronesia, described it as "feeling the island" through the motion of the hull.
+
+Modern oceanography has confirmed this phenomenon. When ocean swells encounter an island, they refract around it and create interference patterns on the far side — zones where waves cancel each other (creating unusual calm) and zones where they reinforce each other (creating unusual chop). These patterns are detectable instrumentally at distances of 30-50 kilometres from the island. Polynesian navigators detected them by feel.
+
+**The Evidence**
+
+The settlement of Polynesia was not accidental — not a series of lucky fishermen blown off course. The evidence for **intentional, planned voyaging** is overwhelming:
+
+**The plants and animals**: Every Polynesian settlement has the same suite of domesticated species — taro, breadfruit, sweet potato, coconut, banana, pigs, chickens, dogs. These were brought deliberately, in canoes, with their seeds and breeding populations. You don't accidentally bring 20 plant species and 3 animal species to an island 3,000 kilometres from the nearest land.
+
+**The genetics**: DNA analysis of Polynesian populations shows clear patterns of genetic relatedness that match a settlement sequence from west to east — Samoa, Tonga, the Cook Islands, the Society Islands (Tahiti), the Marquesas, Hawaii, Easter Island, and finally New Zealand.
+
+**The linguistics**: Polynesian languages form a family tree that mirrors the genetic evidence. Hawaiian, Tahitian, Maori, and Rapa Nui (Easter Island) are all related, with mutual intelligibility decreasing with geographic and temporal distance from the homeland.
+
+**The canoes**: In 1976, the replica double-hulled canoe **Hōkūleʻa** sailed from Hawaii to Tahiti — 4,000 kilometres — using only traditional Polynesian navigation methods, guided by Mau Piailug. The voyage proved that traditional wayfinding could accurately guide a canoe across open ocean. The Hōkūleʻa has since sailed over 240,000 kilometres across the Pacific, Indian, and Atlantic Oceans, all navigated by star compass, swell reading, and observation of birds, clouds, and sea colour.
+
+**The Mathematics of Finding an Island**
+
+Finding an island in the Pacific is a probability problem. A typical Polynesian target island might be **10 kilometres wide**. The surrounding ocean is thousands of kilometres across. How do you find a 10-kilometre target in a 3,000-kilometre ocean?
+
+The navigators expanded their target. An island isn't just the land — it's surrounded by a **zone of signs**: reflected swells (detectable at 50 km), altered cloud patterns (clouds pile up over land, visible at 100+ km), seabirds (certain species fly 50-100 km from shore to feed), changes in water colour and temperature, floating vegetation and debris, and the smell of vegetation carried on the wind.
+
+All of these signs expand the effective "target" from a 10-kilometre island to a **zone of detection roughly 200 kilometres in diameter**. This changes the mathematics dramatically: the probability of sailing past a 200-km detection zone is much lower than the probability of missing a 10-km island.
+
+This is **signal detection theory** applied to navigation — the same mathematics used in radar, sonar, and modern search algorithms. The Polynesian navigators were, unknowingly, optimizing their search strategy by maximizing the number of detectable signals from their target.
+
+*The end.*` },
+    stem: { title: 'Wave Physics, Celestial Navigation & Signal Detection', description: 'How Polynesians navigated the Pacific — star compasses, wave refraction, and the mathematics of finding an island in an ocean.', icon: Waves, color: 'from-cyan-400 to-blue-500', skills: ['Understand wave refraction, reflection, and diffraction around islands', 'Model a star compass: map star rising/setting azimuths by latitude', 'Apply signal detection theory to navigation target searching', 'Analyze the genetics and linguistics of Polynesian settlement patterns'], project: {
+        title: 'Build a Wayfinding Simulator',
+        description: 'Create a Python program that models Polynesian navigation — a star compass, wave refraction around islands, and the probability of detecting an island at different distances.',
+        steps: [
+          'Build a star compass: given latitude, calculate the rising and setting azimuths of 20 key navigation stars',
+          'Model wave refraction: simulate an ocean swell encountering an island and calculate the interference pattern behind it',
+          'Implement signal detection: model the probability of detecting an island as a function of distance, swell distortion, bird range, and cloud patterns',
+          'Simulate a Pacific crossing: starting from a known position, navigate by star compass toward a target island with realistic errors',
+          'Visualize the star compass, wave patterns, and detection probability zones using Matplotlib',
+        ],
+      } },
+    track: 'school',
+    subjects: ['Physics' as Subject, 'Mathematics' as Subject, 'Geography' as Subject, 'History' as Subject],
+    toolSkills: ['Python' as Skill, 'Scientific Modeling' as Skill],
+    skillTags: [{ discipline: 'Scientific Modeling', skill: 'Physics simulation', tools: ['Fluid dynamics'] }, { discipline: 'Data Science', skill: 'Data Analysis', tools: ['Pandas', 'NumPy', 'Statistics'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
     learningTracks: ['Science & Lab' as Track],
     estimatedHours: 14,
 },
