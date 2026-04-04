@@ -200,7 +200,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     loadFromSupabase();
   }, [user]);
 
-  // Helper to update a lesson's progress and persist
+  // Helper to update a lesson's progress, persist, and record streak
   const updateLesson = useCallback((slug: string, updater: (p: LessonProgress) => LessonProgress) => {
     setProgress((prev) => {
       const existing = prev[slug] || { slug, levelsCompleted: [], levels: {} };
@@ -210,6 +210,24 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       if (user) {
         saveToSupabase(user.id, slug, updated);
       }
+      // Record daily streak on any learning activity
+      try {
+        const today = new Date().toISOString().slice(0, 10);
+        const raw = localStorage.getItem('tma_streak');
+        const streak = raw ? JSON.parse(raw) : { current: 0, best: 0, todayDone: false, lastDate: '' };
+        if (streak.lastDate !== today) {
+          const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+          const current = streak.lastDate === yesterday ? streak.current + 1 : 1;
+          const best = Math.max(current, streak.best);
+          const next = { current, best, todayDone: true, lastDate: today };
+          localStorage.setItem('tma_streak', JSON.stringify(next));
+          if (user) {
+            supabase.from('user_plans').upsert({
+              user_id: user.id, streak_data: next, updated_at: new Date().toISOString(),
+            }, { onConflict: 'user_id' }).catch(() => {});
+          }
+        }
+      } catch {}
       return newProgress;
     });
   }, [user]);
