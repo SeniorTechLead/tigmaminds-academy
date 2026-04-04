@@ -35,9 +35,10 @@ export type Subject =
   | 'Geology'
   | 'Astronomy'
   | 'Health & Medicine'
-  | 'Marine Science';
+  | 'Marine Science'
+  | 'History';
 
-export type Tradition = 'Northeast India' | 'Hindu' | 'Buddhist' | 'Christian' | 'Islamic';
+export type Tradition = 'Northeast India' | 'Hindu' | 'Buddhist' | 'Christian' | 'Islamic' | 'World History';
 
 export interface Lesson {
   id: number;
