@@ -780,17 +780,25 @@ export default function ProgramsPage() {
       {/* ── Footer CTA ── */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-amber-500 to-orange-500">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Start with any story — it's free</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+            {user ? 'Continue your journey' : 'Start with any story — it\'s free'}
+          </h2>
           <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-            {lessons.length}+ stories and growing. {problems.length}+ coding problems. Real science. No credit card.
+            {lessons.length}+ stories and growing. {problems.length}+ coding problems. Real science.{!user && ' No credit card.'}
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link to="/lessons" className="inline-flex items-center bg-white text-amber-600 px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl hover:scale-105 transition-all">
               Browse Lessons <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
-            <Link to="/auth" className="inline-flex items-center bg-white/20 text-white border-2 border-white/40 px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/30 transition-all">
-              Sign Up Free <ArrowRight className="ml-2 w-5 h-5" />
-            </Link>
+            {user ? (
+              <Link to="/plan" className="inline-flex items-center bg-white/20 text-white border-2 border-white/40 px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/30 transition-all">
+                My Lesson Plan <ArrowRight className="ml-2 w-5 h-5" />
+              </Link>
+            ) : (
+              <Link to="/auth" className="inline-flex items-center bg-white/20 text-white border-2 border-white/40 px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/30 transition-all">
+                Sign Up Free <ArrowRight className="ml-2 w-5 h-5" />
+              </Link>
+            )}
           </div>
         </div>
       </section>
