@@ -17,6 +17,7 @@ export default function HtmlPlayground({
 }: HtmlPlaygroundProps) {
   const [code, setCode] = useState(starterCode);
   const [preview, setPreview] = useState('');
+  const [iframeKey, setIframeKey] = useState(0);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -58,7 +59,7 @@ export default function HtmlPlayground({
           <span className="text-xs text-violet-400 bg-violet-900/30 px-2 py-0.5 rounded-full">Live Preview</span>
         </div>
         <button
-          onClick={() => { setCode(starterCode); setPreview(starterCode); }}
+          onClick={() => { setCode(starterCode); setPreview(starterCode); setIframeKey(k => k + 1); }}
           className="p-1.5 text-gray-400 hover:text-white transition-colors"
           title="Reset"
         >
@@ -69,8 +70,8 @@ export default function HtmlPlayground({
       {/* Editor + Preview split */}
       <div className="flex flex-col lg:flex-row">
         {/* Code editor */}
-        <div className="flex-1 min-w-0 border-b lg:border-b-0 lg:border-r border-gray-700">
-          <div className="flex max-h-[400px] overflow-y-auto">
+        <div className="flex-1 min-w-0 border-b lg:border-b-0 lg:border-r border-gray-700" style={{ minHeight: previewHeight }}>
+          <div className="flex h-full max-h-[400px] overflow-y-auto">
             {/* Line numbers */}
             <div className="flex-shrink-0 pt-3 pb-3 pr-2 pl-3 select-none border-r border-gray-700" aria-hidden>
               {Array.from({ length: lineCount }).map((_, i) => (
@@ -78,7 +79,7 @@ export default function HtmlPlayground({
               ))}
             </div>
             {/* Editor */}
-            <div className="flex-1 min-w-0">
+            <div className="flex-1 min-w-0 flex">
               <textarea
                 ref={textareaRef}
                 value={code}
@@ -86,7 +87,7 @@ export default function HtmlPlayground({
                 onKeyDown={handleKeyDown}
                 spellCheck={false}
                 rows={lineCount}
-                className="w-full bg-transparent text-gray-100 font-mono text-sm pl-3 pr-4 py-3 resize-none focus:outline-none leading-6"
+                className="w-full flex-1 bg-transparent text-gray-100 font-mono text-sm pl-3 pr-4 py-3 resize-none focus:outline-none leading-6"
                 style={{ tabSize: 2 }}
               />
             </div>
@@ -96,6 +97,7 @@ export default function HtmlPlayground({
         {/* Live preview */}
         <div className="flex-1 min-w-0 bg-white" style={{ minHeight: previewHeight }}>
           <iframe
+            key={iframeKey}
             ref={iframeRef}
             srcDoc={preview}
             title="Preview"

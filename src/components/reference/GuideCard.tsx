@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { ReferenceGuide } from '../../data/reference';
 import { REFERENCE_CATEGORIES } from '../../data/reference';
 import SectionRenderer from './SectionRenderer';
@@ -51,6 +51,12 @@ function getMatchingSnippets(guide: ReferenceGuide, query: string): { sectionTit
 
 export default function GuideCard({ guide, defaultTab = 'understand', expandedSlug, searchQuery = '', level = 0 }: Props) {
   const [isExpanded, setIsExpanded] = useState(expandedSlug === guide.slug);
+
+  // Re-expand when expandedSlug changes (e.g. deep-link hash navigation)
+  useEffect(() => {
+    if (expandedSlug === guide.slug) setIsExpanded(true);
+  }, [expandedSlug, guide.slug]);
+
   const { user } = useAuth();
   const isSignedIn = !!user;
   const category = REFERENCE_CATEGORIES.find((c) => c.key === guide.category);

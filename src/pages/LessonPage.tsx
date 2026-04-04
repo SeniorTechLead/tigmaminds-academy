@@ -107,7 +107,7 @@ export default function LessonPage() {
               → {lesson.stem.title}
             </span>
             <span className="text-white/60 text-sm">
-              {lesson.track === 'school' ? '12-Month School Program' : lesson.track === 'bootcamp' ? '24-Week Bootcamp' : 'Both Tracks'}
+              {lesson.track === 'school' ? '12-Month School Program' : lesson.track === 'bootcamp' ? '24-Week Bootcamp' : 'All Tracks'}
             </span>
           </div>
         </div>
@@ -130,7 +130,7 @@ export default function LessonPage() {
                 <div>
                   <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Track</p>
                   <p className="text-gray-900 dark:text-white font-medium">
-                    {lesson.track === 'school' ? '12-Month School Program' : lesson.track === 'bootcamp' ? '24-Week Bootcamp' : 'Both Tracks'}
+                    {lesson.track === 'school' ? '12-Month School Program' : lesson.track === 'bootcamp' ? '24-Week Bootcamp' : 'All Tracks'}
                   </p>
                 </div>
               </div>

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Sparkles, ChevronDown, ChevronUp, CheckCircle, HelpCircle } from 'lucide-react';
 import HtmlPlayground from '../HtmlPlayground';
+import { renderMarkdown } from '../MiniLesson';
 
 interface WebLesson {
   title: string;
@@ -15,11 +16,6 @@ interface WebLesson {
   successHint?: string;
 }
 
-function renderMd(text: string) {
-  return text
-    .replace(/\*\*(.+?)\*\*/g, '<strong class="text-gray-900 dark:text-white">$1</strong>')
-    .replace(/`(.+?)`/g, '<code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-violet-700 dark:text-violet-300 text-xs font-mono">$1</code>');
-}
 
 function WebMiniLesson({ lesson, number }: { lesson: WebLesson; number: number }) {
   const [showAnswer, setShowAnswer] = useState(false);
@@ -31,7 +27,7 @@ function WebMiniLesson({ lesson, number }: { lesson: WebLesson; number: number }
           <span className="w-8 h-8 rounded-full bg-gradient-to-r from-violet-500 to-purple-500 text-white flex items-center justify-center text-sm font-bold flex-shrink-0">{number}</span>
           <h4 className="text-xl font-bold text-gray-900 dark:text-white">{lesson.title}</h4>
         </div>
-        <div className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: renderMd(lesson.concept) }} />
+        <div className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: renderMarkdown(lesson.concept) }} />
 
         {lesson.analogy && (
           <div className="bg-sky-50 dark:bg-sky-900/20 border-l-4 border-sky-400 rounded-r-lg px-4 py-3 mb-4">
@@ -160,45 +156,41 @@ const books = [
 
 // COMPONENT 1: Header — a pure function of props
 function Header(props) {
-  return \`
-    <div class="header">
-      <h1>\{props.title}</h1>
-      <p>\{props.subtitle}</p>
-    </div>\`;
+  return '<div class="header">' +
+      '<h1>' + props.title + '</h1>' +
+      '<p>' + props.subtitle + '</p>' +
+    '</div>';
 }
 
 // COMPONENT 2: BookCard — renders one book
 function BookCard(book) {
-  return \`
-    <div class="book-card" onclick="alert('Opening: \{book.title}')">
-      <h3>\{book.title}</h3>
-      <div class="author">\{book.author}</div>
-      <span class="genre">\{book.genre}</span>
-    </div>\`;
+  return '<div class="book-card" onclick="alert(\\'Opening: ' + book.title + '\\')">' +
+      '<h3>' + book.title + '</h3>' +
+      '<div class="author">' + book.author + '</div>' +
+      '<span class="genre">' + book.genre + '</span>' +
+    '</div>';
 }
 
 // COMPONENT 3: Stats — derived from data
 function Stats(books) {
   const genres = [...new Set(books.map(b => b.genre))];
-  return \`
-    <div class="stats">
-      <div class="stat"><div class="num">\{books.length}</div><div class="label">Books</div></div>
-      <div class="stat"><div class="num">\{genres.length}</div><div class="label">Genres</div></div>
-      <div class="stat"><div class="num">\{books.length * 42}</div><div class="label">Pages</div></div>
-    </div>\`;
+  return '<div class="stats">' +
+      '<div class="stat"><div class="num">' + books.length + '</div><div class="label">Books</div></div>' +
+      '<div class="stat"><div class="num">' + genres.length + '</div><div class="label">Genres</div></div>' +
+      '<div class="stat"><div class="num">' + (books.length * 42) + '</div><div class="label">Pages</div></div>' +
+    '</div>';
 }
 
 // COMPOSITION: assemble components into a page
 // React does this with JSX; we do it with template literals
 function App() {
-  return \`
-    <div class="library">
-      \{Header({ title: "Dipankar's Digital Library", subtitle: \`\{books.length} books — component-driven UI\` })}
-      <div class="book-grid">
-        \{books.map(book => BookCard(book)).join('')}
-      </div>
-      \{Stats(books)}
-    </div>\`;
+  return '<div class="library">' +
+      Header({ title: "Dipankar's Digital Library", subtitle: books.length + ' books — component-driven UI' }) +
+      '<div class="book-grid">' +
+        books.map(book => BookCard(book)).join('') +
+      '</div>' +
+      Stats(books) +
+    '</div>';
 }
 
 // RENDER: mount the app (React does this with ReactDOM.render)
@@ -301,17 +293,17 @@ function createState(initialValue, renderFn) {
 const [getCount, setCount] = createState(0, renderCounter);
 
 function renderCounter() {
-  document.getElementById('counter-app').innerHTML = \`
-    <div style="display:flex;align-items:center;gap:12px;">
-      <button onclick="setCount(c => c - 1)">-</button>
-      <span style="font-size:24px;font-weight:700;min-width:40px;text-align:center;">
-        \{getCount()}
-      </span>
-      <button onclick="setCount(c => c + 1)">+</button>
-      <button class="secondary" onclick="setCount(0)">Reset</button>
-    </div>
-    <div class="output">State: { count: \{getCount()} }
-React equivalent: const [count, setCount] = useState(0);</div>\`;
+  document.getElementById('counter-app').innerHTML =
+    '<div style="display:flex;align-items:center;gap:12px;">' +
+      '<button onclick="setCount(c => c - 1)">-</button>' +
+      '<span style="font-size:24px;font-weight:700;min-width:40px;text-align:center;">' +
+        getCount() +
+      '</span>' +
+      '<button onclick="setCount(c => c + 1)">+</button>' +
+      '<button class="secondary" onclick="setCount(0)">Reset</button>' +
+    '</div>' +
+    '<div class="output">State: { count: ' + getCount() + ' }\\n' +
+    'React equivalent: const [count, setCount] = useState(0);</div>';
 }
 
 // ============================================
@@ -335,7 +327,7 @@ function libraryReducer(state, action) {
         books: state.books.map(b =>
           b.id === action.id ? { ...b, available: false } : b
         ),
-        log: [...state.log, \`Checked out: \{action.title}\`],
+        log: [...state.log, 'Checked out: ' + action.title],
       };
     case 'RETURN':
       return {
@@ -343,14 +335,14 @@ function libraryReducer(state, action) {
         books: state.books.map(b =>
           b.id === action.id ? { ...b, available: true } : b
         ),
-        log: [...state.log, \`Returned: \{action.title}\`],
+        log: [...state.log, 'Returned: ' + action.title],
       };
     case 'ADD_BOOK':
       const newId = Math.max(...state.books.map(b => b.id)) + 1;
       return {
         ...state,
         books: [...state.books, { id: newId, title: action.title, available: true }],
-        log: [...state.log, \`Added: \{action.title}\`],
+        log: [...state.log, 'Added: ' + action.title],
       };
     default:
       return state;
@@ -366,20 +358,21 @@ function dispatch(action) {
 function renderLibrary() {
   const state = getLibrary();
   const available = state.books.filter(b => b.available).length;
-  document.getElementById('library-app').innerHTML = \`
-    <div>\{state.books.map(b => \`
-      <div class="book-item \{b.available ? '' : 'checked-out'}">
-        <span style="flex:1">\{b.title}</span>
-        \{b.available
-          ? \`<button onclick="dispatch({type:'CHECKOUT',id:\{b.id},title:'\{b.title}'})">Borrow</button>\`
-          : \`<button class="secondary" onclick="dispatch({type:'RETURN',id:\{b.id},title:'\{b.title}'})">Return</button>\`
-        }
-      </div>\`).join('')}
-    </div>
-    <div style="margin-top:8px;font-size:12px;color:#64748b;">
-      \{available}/\{state.books.length} available
-    </div>
-    <div class="output">\{state.log.length ? state.log.join('\\n') : 'No actions yet — borrow a book!'}</div>\`;
+  document.getElementById('library-app').innerHTML =
+    '<div>' + state.books.map(function(b) {
+      return '<div class="book-item ' + (b.available ? '' : 'checked-out') + '">' +
+        '<span style="flex:1">' + b.title + '</span>' +
+        (b.available
+          ? '<button onclick="dispatch({type:\\'CHECKOUT\\',id:' + b.id + ',title:\\'' + b.title + '\\'})">Borrow</button>'
+          : '<button class="secondary" onclick="dispatch({type:\\'RETURN\\',id:' + b.id + ',title:\\'' + b.title + '\\'})">Return</button>'
+        ) +
+      '</div>';
+    }).join('') +
+    '</div>' +
+    '<div style="margin-top:8px;font-size:12px;color:#64748b;">' +
+      available + '/' + state.books.length + ' available' +
+    '</div>' +
+    '<div class="output">' + (state.log.length ? state.log.join('\\n') : 'No actions yet — borrow a book!') + '</div>';
 }
 
 // ============================================
@@ -405,21 +398,21 @@ function renderTheme() {
   const theme = ThemeContext.get();
   const bg = theme === 'dark' ? '#1e293b' : '#ffffff';
   const fg = theme === 'dark' ? '#e2e8f0' : '#1e293b';
-  document.getElementById('theme-app').innerHTML = \`
-    <div style="display:flex;gap:8px;margin-bottom:8px;">
-      <button onclick="ThemeContext.set('light')">Light</button>
-      <button onclick="ThemeContext.set('dark')">Dark</button>
-      <button onclick="ThemeContext.set('sepia')">Sepia</button>
-    </div>
-    <div style="background:\{bg};color:\{fg};padding:12px;border-radius:8px;font-size:13px;
-      border:1px solid #e2e8f0;transition:all 0.3s;">
-      <strong>Preview:</strong> This panel reads from ThemeContext.
-      <br/>Any component can subscribe — no prop drilling needed.
-      <br/>Current theme: <strong>\{theme}</strong>
-    </div>
-    <div class="output">Context value: "\{theme}"
-Any deeply nested component can call ThemeContext.get()
-without receiving it as a prop through every parent.</div>\`;
+  document.getElementById('theme-app').innerHTML =
+    '<div style="display:flex;gap:8px;margin-bottom:8px;">' +
+      '<button onclick="ThemeContext.set(\\'light\\')">Light</button>' +
+      '<button onclick="ThemeContext.set(\\'dark\\')">Dark</button>' +
+      '<button onclick="ThemeContext.set(\\'sepia\\')">Sepia</button>' +
+    '</div>' +
+    '<div style="background:' + bg + ';color:' + fg + ';padding:12px;border-radius:8px;font-size:13px;' +
+      'border:1px solid #e2e8f0;transition:all 0.3s;">' +
+      '<strong>Preview:</strong> This panel reads from ThemeContext.' +
+      '<br/>Any component can subscribe — no prop drilling needed.' +
+      '<br/>Current theme: <strong>' + theme + '</strong>' +
+    '</div>' +
+    '<div class="output">Context value: "' + theme + '"\\n' +
+    'Any deeply nested component can call ThemeContext.get()\\n' +
+    'without receiving it as a prop through every parent.</div>';
 }
 
 ThemeContext.subscribe(renderTheme);
@@ -585,13 +578,13 @@ function runQuery(type) {
     case 'all_books':
       sql = "SELECT books.title, authors.name AS author\\nFROM books\\nINNER JOIN authors ON books.author_id = authors.id";
       result = innerJoin(db.books, db.authors, 'author_id', 'id')
-        .map(r => \`  \{r.title} — by \{r.name}\`).join('\\n');
+        .map(function(r) { return '  ' + r.title + ' — by ' + r.name; }).join('\\n');
       break;
 
     case 'by_author':
       sql = "SELECT title, year FROM books\\nWHERE author_id = 1  -- Nabajit Sharma";
       result = db.books.filter(b => b.author_id === 1)
-        .map(b => \`  \{b.title} (\{b.year})\`).join('\\n');
+        .map(function(b) { return '  ' + b.title + ' (' + b.year + ')'; }).join('\\n');
       break;
 
     case 'with_genres':
@@ -599,7 +592,7 @@ function runQuery(type) {
       result = db.book_genres.map(bg => {
         const book = db.books.find(b => b.id === bg.book_id);
         const genre = db.genres.find(g => g.id === bg.genre_id);
-        return \`  \{book.title} → \{genre.name}\`;
+        return '  ' + book.title + ' → ' + genre.name;
       }).join('\\n');
       break;
 
@@ -610,13 +603,13 @@ function runQuery(type) {
         const g = db.genres.find(g => g.id === bg.genre_id).name;
         counts[g] = (counts[g] || 0) + 1;
       });
-      result = Object.entries(counts).map(([g, c]) => \`  \{g}: \{c} book(s)\`).join('\\n');
+      result = Object.entries(counts).map(function(e) { return '  ' + e[0] + ': ' + e[1] + ' book(s)'; }).join('\\n');
       break;
   }
 
-  document.getElementById('query-output').innerHTML = \`
-    <div class="sql">\{sql}</div>
-    <div class="result"><strong>Result (\{result.split('\\n').length} rows):</strong>\\n\{result}</div>\`;
+  document.getElementById('query-output').innerHTML =
+    '<div class="sql">' + sql + '</div>' +
+    '<div class="result"><strong>Result (' + result.split('\\n').length + ' rows):</strong>\\n' + result + '</div>';
 }
 </script>
 </body>
@@ -801,10 +794,10 @@ function callAPI(method, path, body) {
   const isOk = response.status < 400;
   const statusText = {200:'OK',201:'Created',400:'Bad Request',404:'Not Found'}[response.status];
 
-  document.getElementById('req-display').innerHTML = \`
-    <span class="method-label">\{method}</span> <span class="url">\{path}</span>
-    \{body ? '\\nBody: ' + JSON.stringify(body) : ''}
-    <span class="status \{isOk ? 'ok' : 'err'}" id="status-display">\{response.status} \{statusText}</span>\`;
+  document.getElementById('req-display').innerHTML =
+    '<span class="method-label">' + method + '</span> <span class="url">' + path + '</span>' +
+    (body ? '\\nBody: ' + JSON.stringify(body) : '') +
+    '<span class="status ' + (isOk ? 'ok' : 'err') + '" id="status-display">' + response.status + ' ' + statusText + '</span>';
 
   document.getElementById('res-body').textContent = JSON.stringify(response.body, null, 2);
 }
@@ -924,58 +917,58 @@ function render() {
   const user = currentSession ? usersDB.find(u => u.id === sessions[currentSession]) : null;
 
   document.getElementById('status-bar').innerHTML = user
-    ? \`<div class="status auth">
-        Logged in as <strong>\{user.username}</strong>
-        <span class="role-badge \{user.role}">\{user.role}</span>
-        &nbsp; Token: <code style="font-size:10px">\{currentSession.slice(0,20)}...</code>
-       </div>\`
+    ? '<div class="status auth">' +
+        'Logged in as <strong>' + user.username + '</strong> ' +
+        '<span class="role-badge ' + user.role + '">' + user.role + '</span>' +
+        '&nbsp; Token: <code style="font-size:10px">' + currentSession.slice(0,20) + '...</code>' +
+       '</div>'
     : '<div class="status unauth">Not authenticated — register or log in</div>';
 
   if (user) {
     // Protected dashboard
-    document.getElementById('auth-ui').innerHTML = \`
-      <div class="panel">
-        <h3>Dashboard (Protected Route)</h3>
-        <p style="font-size:13px;color:#334155;margin-bottom:8px;">
-          Welcome, <strong>\{user.username}</strong>!
-          Role: <span class="role-badge \{user.role}">\{user.role}</span>
-        </p>
-        <p style="font-size:12px;color:#64748b;margin-bottom:12px;">
-          \{user.role === 'admin'
+    document.getElementById('auth-ui').innerHTML =
+      '<div class="panel">' +
+        '<h3>Dashboard (Protected Route)</h3>' +
+        '<p style="font-size:13px;color:#334155;margin-bottom:8px;">' +
+          'Welcome, <strong>' + user.username + '</strong>! ' +
+          'Role: <span class="role-badge ' + user.role + '">' + user.role + '</span>' +
+        '</p>' +
+        '<p style="font-size:12px;color:#64748b;margin-bottom:12px;">' +
+          (user.role === 'admin'
             ? 'You can: borrow books, add books, delete books, manage users'
-            : 'You can: borrow books, leave reviews'}
-        </p>
-        <button onclick="testProtectedAction('borrow')">Borrow Book</button>
-        <button onclick="testProtectedAction('add')" \{user.role !== 'admin' ? 'style="opacity:0.5"' : ''}>Add Book (admin)</button>
-        <button onclick="testProtectedAction('delete')" \{user.role !== 'admin' ? 'style="opacity:0.5"' : ''}>Delete Book (admin)</button>
-        <br/><br/>
-        <button class="danger" onclick="logout()">Logout</button>
-      </div>
-      <div class="panel">
-        <h3>Token Details</h3>
-        <p style="font-size:11px;color:#64748b;margin-bottom:6px;">Session token stored as HTTP-only cookie:</p>
-        <code style="font-size:10px;word-break:break-all;color:#334155;">\{currentSession}</code>
-        <p style="font-size:11px;color:#64748b;margin-top:8px;">JWT equivalent:</p>
-        <code style="font-size:10px;word-break:break-all;color:#334155;">\{createJWT({user_id: user.id, role: user.role})}</code>
-      </div>\`;
+            : 'You can: borrow books, leave reviews') +
+        '</p>' +
+        '<button onclick="testProtectedAction(\\'borrow\\')">Borrow Book</button>' +
+        '<button onclick="testProtectedAction(\\'add\\')" ' + (user.role !== 'admin' ? 'style="opacity:0.5"' : '') + '>Add Book (admin)</button>' +
+        '<button onclick="testProtectedAction(\\'delete\\')" ' + (user.role !== 'admin' ? 'style="opacity:0.5"' : '') + '>Delete Book (admin)</button>' +
+        '<br/><br/>' +
+        '<button class="danger" onclick="logout()">Logout</button>' +
+      '</div>' +
+      '<div class="panel">' +
+        '<h3>Token Details</h3>' +
+        '<p style="font-size:11px;color:#64748b;margin-bottom:6px;">Session token stored as HTTP-only cookie:</p>' +
+        '<code style="font-size:10px;word-break:break-all;color:#334155;">' + currentSession + '</code>' +
+        '<p style="font-size:11px;color:#64748b;margin-top:8px;">JWT equivalent:</p>' +
+        '<code style="font-size:10px;word-break:break-all;color:#334155;">' + createJWT({user_id: user.id, role: user.role}) + '</code>' +
+      '</div>';
   } else {
-    document.getElementById('auth-ui').innerHTML = \`
-      <div class="panel">
-        <h3>Register</h3>
-        <input id="reg-user" placeholder="Username" />
-        <input id="reg-pass" type="password" placeholder="Password (min 8 chars)" />
-        <select id="reg-role" style="width:100%;padding:8px;border:1px solid #e2e8f0;border-radius:6px;margin-bottom:8px;font-size:13px;">
-          <option value="member">Member</option>
-          <option value="admin">Admin (librarian)</option>
-        </select>
-        <button onclick="register()">Register</button>
-      </div>
-      <div class="panel">
-        <h3>Login</h3>
-        <input id="login-user" placeholder="Username" />
-        <input id="login-pass" type="password" placeholder="Password" />
-        <button onclick="login()">Login</button>
-      </div>\`;
+    document.getElementById('auth-ui').innerHTML =
+      '<div class="panel">' +
+        '<h3>Register</h3>' +
+        '<input id="reg-user" placeholder="Username" />' +
+        '<input id="reg-pass" type="password" placeholder="Password (min 8 chars)" />' +
+        '<select id="reg-role" style="width:100%;padding:8px;border:1px solid #e2e8f0;border-radius:6px;margin-bottom:8px;font-size:13px;">' +
+          '<option value="member">Member</option>' +
+          '<option value="admin">Admin (librarian)</option>' +
+        '</select>' +
+        '<button onclick="register()">Register</button>' +
+      '</div>' +
+      '<div class="panel">' +
+        '<h3>Login</h3>' +
+        '<input id="login-user" placeholder="Username" />' +
+        '<input id="login-pass" type="password" placeholder="Password" />' +
+        '<button onclick="login()">Login</button>' +
+      '</div>';
   }
 }
 
@@ -992,10 +985,10 @@ function register() {
   const user = { id: usersDB.length + 1, username, password: hashedPassword, role };
   usersDB.push(user);
 
-  log(\`REGISTER: Created user "\{username}" (role: \{role})\`);
-  log(\`  Plain password: "\{password}"\`);
-  log(\`  Stored hash: "\{hashedPassword}"\`);
-  log(\`  The server NEVER stores the plain password\`);
+  log('REGISTER: Created user "' + username + '" (role: ' + role + ')');
+  log('  Plain password: "' + password + '"');
+  log('  Stored hash: "' + hashedPassword + '"');
+  log('  The server NEVER stores the plain password');
   render();
 }
 
@@ -1004,13 +997,13 @@ function login() {
   const password = document.getElementById('login-pass').value;
   const user = usersDB.find(u => u.username === username);
 
-  if (!user) { log(\`LOGIN FAILED: User "\{username}" not found (401)\`); return; }
+  if (!user) { log('LOGIN FAILED: User "' + username + '" not found (401)'); return; }
 
   const hashMatch = mockVerify(password, user.password);
-  log(\`LOGIN ATTEMPT: "\{username}"\`);
-  log(\`  Submitted password hash: "\{mockHash(password)}"\`);
-  log(\`  Stored hash:            "\{user.password}"\`);
-  log(\`  Match: \{hashMatch}\`);
+  log('LOGIN ATTEMPT: "' + username + '"');
+  log('  Submitted password hash: "' + mockHash(password) + '"');
+  log('  Stored hash:            "' + user.password + '"');
+  log('  Match: ' + hashMatch);
 
   if (!hashMatch) { log('  RESULT: 401 Unauthorized — wrong password'); return; }
 
@@ -1018,13 +1011,13 @@ function login() {
   sessions[token] = user.id;
   currentSession = token;
 
-  log(\`  RESULT: 200 OK — session created\`);
-  log(\`  Token: \{token}\`);
+  log('  RESULT: 200 OK — session created');
+  log('  Token: ' + token);
   render();
 }
 
 function logout() {
-  log(\`LOGOUT: Session \{currentSession.slice(0,15)}... destroyed\`);
+  log('LOGOUT: Session ' + currentSession.slice(0,15) + '... destroyed');
   delete sessions[currentSession];
   currentSession = null;
   render();
@@ -1033,11 +1026,11 @@ function logout() {
 function testProtectedAction(action) {
   const user = usersDB.find(u => u.id === sessions[currentSession]);
   if (action === 'borrow') {
-    log(\`ACTION: \{user.username} borrowed a book (200 OK)\`);
+    log('ACTION: ' + user.username + ' borrowed a book (200 OK)');
   } else if (user.role === 'admin') {
-    log(\`ACTION: Admin \{user.username} performed "\{action}" (200 OK)\`);
+    log('ACTION: Admin ' + user.username + ' performed "' + action + '" (200 OK)');
   } else {
-    log(\`ACTION DENIED: \{user.username} tried "\{action}" — role "\{user.role}" insufficient (403 Forbidden)\`);
+    log('ACTION DENIED: ' + user.username + ' tried "' + action + '" — role "' + user.role + '" insufficient (403 Forbidden)');
   }
 }
 
@@ -1198,15 +1191,17 @@ const buildLogs = [
 let running = false;
 
 function renderStages(currentStage, stageState) {
-  document.getElementById('stages').innerHTML = stages.map((s, i) => {
-    let state = 'pending';
+  document.getElementById('stages').innerHTML = stages.map(function(s, i) {
+    var state = 'pending';
     if (i < currentStage) state = 'success';
     else if (i === currentStage) state = stageState || 'running';
-    return \`<div class="stage \{state}">
-      <div class="stage-icon">\{state === 'success' ? '&#10003;' : state === 'running' ? '&#9654;' : s.icon}</div>
-      <span class="stage-name">\{s.name}</span>
-      <span class="stage-time">\{i <= currentStage ? s.time : ''}</span>
-    </div>\`;
+    var icon = state === 'success' ? '&#10003;' : state === 'running' ? '&#9654;' : s.icon;
+    var time = i <= currentStage ? s.time : '';
+    return '<div class="stage ' + state + '">' +
+      '<div class="stage-icon">' + icon + '</div>' +
+      '<span class="stage-name">' + s.name + '</span>' +
+      '<span class="stage-time">' + time + '</span>' +
+    '</div>';
   }).join('');
 }
 
@@ -1245,7 +1240,7 @@ async function startPipeline() {
     ['Cache', 'immutable (1 year, hash-busted)'],
     ['Pipeline time', '28s total'],
     ['Commit', 'e4a1b2c "Add search feature"'],
-  ].map(([l, v]) => \`<div class="metric"><span class="label">\{l}</span><span class="value">\{v}</span></div>\`).join('');
+  ].map(function(e) { return '<div class="metric"><span class="label">' + e[0] + '</span><span class="value">' + e[1] + '</span></div>'; }).join('');
 
   running = false;
   document.getElementById('deploy-btn').disabled = false;

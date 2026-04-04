@@ -232,6 +232,7 @@ def eps_foam_stress_scalar(strain, plateau_stress):
     if strain < 0.05:
         return (plateau_stress / 0.03) * strain
     elif strain < 0.7:
+        pass
 
 print("\n[Full visualization in playground]")`,
       challenge: 'Implement HIC36 (36ms window) in addition to HIC15. For which helmet designs do the two metrics diverge most? HIC36 is used in some automotive standards and tends to give higher values for longer-duration impacts.',

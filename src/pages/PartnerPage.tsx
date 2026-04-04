@@ -141,8 +141,8 @@ export default function PartnerPage() {
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white text-center mb-12">What Your Students Get</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { icon: BookOpen, title: '130+ Story-Driven Lessons', desc: 'Each lesson starts with a story from world traditions and connects it to real STEM concepts — physics, biology, chemistry, CS, engineering.' },
-              { icon: Code2, title: 'Hands-On Coding', desc: 'Browser-based Python playground with 100+ guided problems. No installation needed — students code directly in the browser.' },
+              { icon: BookOpen, title: 'Story-Driven Lessons', desc: 'Each lesson starts with a story from world traditions and connects it to real STEM concepts — physics, biology, chemistry, CS, engineering. New stories added regularly.' },
+              { icon: Code2, title: 'Hands-On Coding', desc: 'Browser-based playground with 550+ guided problems across Python, SQL, TypeScript, and HTML. No installation needed.' },
               { icon: GraduationCap, title: '5 Learning Levels', desc: 'From no-code exploration (Level 0) to advanced engineering projects (Level 4). Every student finds their entry point.' },
               { icon: Users, title: 'Teacher Dashboard', desc: 'Track student progress across lessons, quiz scores, and code exercises. Identify who needs help and who is ready for more.' },
               { icon: Building2, title: 'Curriculum Integration', desc: 'Maps to CBSE, ICSE, and state board science syllabi. Use alongside your existing curriculum, not instead of it.' },

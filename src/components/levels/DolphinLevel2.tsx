@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Zap, ChevronDown, ChevronUp, CheckCircle, HelpCircle } from 'lucide-react';
 import ArduinoPlayground from '../ArduinoPlayground';
+import { renderMarkdown } from '../MiniLesson';
 
 interface SonarLesson { title: string; concept: string; analogy?: string; storyConnection?: string; checkQuestion?: string; checkAnswer?: string; codeIntro?: string; code: string; ledCount?: number; challenge?: string; successHint?: string; }
 
-function renderMd(text: string) { return text.replace(/\*\*(.+?)\*\*/g, '<strong class="text-gray-900 dark:text-white">$1</strong>').replace(/`(.+?)`/g, '<code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sky-700 dark:text-sky-300 text-xs font-mono">$1</code>'); }
 
 function SonarMiniLesson({ lesson, number }: { lesson: SonarLesson; number: number }) {
   const [showAnswer, setShowAnswer] = useState(false);
@@ -15,7 +15,7 @@ function SonarMiniLesson({ lesson, number }: { lesson: SonarLesson; number: numb
           <span className="w-8 h-8 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-white flex items-center justify-center text-sm font-bold flex-shrink-0">{number}</span>
           <h4 className="text-xl font-bold text-gray-900 dark:text-white">{lesson.title}</h4>
         </div>
-        <div className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: renderMd(lesson.concept) }} />
+        <div className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: renderMarkdown(lesson.concept) }} />
         {lesson.analogy && (<div className="bg-sky-50 dark:bg-sky-900/20 border-l-4 border-sky-400 rounded-r-lg px-4 py-3 mb-4"><p className="text-sm text-sky-800 dark:text-sky-300"><strong>Think of it this way:</strong> {lesson.analogy}</p></div>)}
         {lesson.storyConnection && (<div className="bg-emerald-50 dark:bg-emerald-900/20 border-l-4 border-emerald-400 rounded-r-lg px-4 py-3 mb-4"><p className="text-sm text-emerald-800 dark:text-emerald-300"><strong>In the story:</strong> {lesson.storyConnection}</p></div>)}
         {lesson.checkQuestion && (<div className="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-4 mb-2"><div className="flex items-start gap-3"><HelpCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" /><div className="flex-1"><p className="text-sm font-semibold text-amber-900 dark:text-amber-200 mb-1">Before you code:</p><p className="text-sm text-amber-800 dark:text-amber-300">{lesson.checkQuestion}</p>{lesson.checkAnswer && (<><button onClick={() => setShowAnswer(!showAnswer)} className="mt-2 flex items-center gap-1 text-xs font-semibold text-amber-600">{showAnswer ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}{showAnswer ? 'Hide' : 'Show answer'}</button>{showAnswer && <p className="mt-2 text-sm text-amber-700 bg-amber-100 dark:bg-amber-900/30 px-3 py-2 rounded-lg">{lesson.checkAnswer}</p>}</>)}</div></div></div>)}

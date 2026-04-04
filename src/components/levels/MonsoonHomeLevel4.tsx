@@ -22,7 +22,7 @@ import matplotlib.pyplot as plt
 # === PASSIVE COOLING HOUSE DESIGNER — Climate Module ===
 
 class ClimateData:
-    \"\"\"Generate and process climate data for monsoon regions.\"\"\"
+    """Generate and process climate data for monsoon regions."""
     def __init__(self, location='guwahati'):
         self.location = location
         self.profiles = {

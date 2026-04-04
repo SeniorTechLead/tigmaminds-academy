@@ -222,6 +222,7 @@ default_dlat = np.mean(clim_dlat[mask]) if mask.any() else 0.2
 default_dlon = np.mean(clim_dlon[mask]) if mask.any() else -0.1
 
 def get_climatology(lat, lon):
+    pass
 
 print("\n[Code trimmed — run in Level 2+ for full visualization]")`,
       challenge: 'Implement an "analog" forecaster: find the 3 most similar historical tracks (based on recent motion and position), and average their future paths. Compare it to CLIPER. Does the analog method beat CLIPER?',
@@ -289,6 +290,7 @@ y_train, y_test = y[:n_train], y[n_train:]
 
 # Multiple linear regression from scratch
 def fit_linear_regression(X, y):
+    pass
 
 print("\n[Code trimmed — run in Level 2+ for full visualization]")`,
       challenge: 'Add a "rapid intensification" detector: flag samples where intensity increases by more than 15 m/s in 24 hours. What environmental conditions are associated with RI events? Build a logistic regression classifier to predict RI probability.',
@@ -356,6 +358,7 @@ scenarios = {
     'Aila 2009':  {'p': 968, 'v': 40, 'depth': 20, 'width': 280e3, 'tide': 0.8,
                    'observed_surge': 3.0, 'deaths': 339},
     'Amphan 2020': {'p': 920, 'v': 85, 'depth': 25, 'width': 300e3, 'tide': 0.2,
+    }}
 
 print("\n[Code trimmed — run in Level 2+ for full visualization]")`,
       challenge: 'Add sea level rise to the analysis: for each historical cyclone, compute how much higher the surge would be with +0.5m SLR (projected for 2070). Which cities face the largest increase in risk? Express the risk change as a percentage of current surge.',

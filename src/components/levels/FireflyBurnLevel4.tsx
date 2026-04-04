@@ -28,7 +28,7 @@ import matplotlib.pyplot as plt
 # =============================================
 
 class BiolumCalculator:
-    \"\"\"Complete bioluminescence efficiency analysis tool.\"\"\"
+    """Complete bioluminescence efficiency analysis tool."""
 
     # Reaction parameters database
     SYSTEMS = {
@@ -74,7 +74,7 @@ class BiolumCalculator:
         self.params = self.SYSTEMS[system].copy()
 
     def reaction_rate(self, luciferin, atp=2.0, o2=0.25):
-        \"\"\"Michaelis-Menten rate with multiple substrates.\"\"\"
+        """Michaelis-Menten rate with multiple substrates."""
         p = self.params
         rate = p['Vmax']
         rate *= luciferin / (p['Km_luciferin'] + luciferin)
@@ -335,7 +335,7 @@ np.random.seed(42)
 def simulate_qy_measurement(n_molecules, true_qy, detector_qe=0.15,
                              geometric_factor=0.05, dark_rate=10,
                              measurement_time=10.0, n_trials=1000):
-    \"\"\"Simulate quantum yield measurements with realistic noise.\"\"\"
+    """Simulate quantum yield measurements with realistic noise."""
     # True photons emitted
     true_photons = np.random.binomial(n_molecules, true_qy, n_trials)
     # Detected photons (geometric and detector efficiency losses)
@@ -466,7 +466,7 @@ import matplotlib.pyplot as plt
 h = 6.626e-34; c = 3e8; eV = 1.602e-19
 
 def V_lambda(wl_nm):
-    \"\"\"Photopic luminosity function (approximate).\"\"\"
+    """Photopic luminosity function (approximate)."""
     return np.exp(-0.5 * ((wl_nm - 555) / 50)**2)
 
 class PhotonFluxCalc:
@@ -479,7 +479,7 @@ class PhotonFluxCalc:
         self.spd /= np.trapz(self.spd, self.wl)  # normalize
 
     def compute(self, reaction_rate):
-        \"\"\"Given reactions/second, compute all lighting metrics.\"\"\"
+        """Given reactions/second, compute all lighting metrics."""
         photon_rate = reaction_rate * self.qy  # photons/s
         # Average photon energy
         E_avg = h * c / (self.peak * 1e-9)  # J
@@ -769,7 +769,7 @@ import matplotlib.pyplot as plt
 # ================================================
 
 class BiolumDesignOptimizer:
-    \"\"\"Find optimal bioluminescent system for given requirements.\"\"\"
+    """Find optimal bioluminescent system for given requirements."""
 
     ORGANISMS = {
         'firefly': {'qy': 0.41, 'peak': 560, 'cost_per_mol': 500, 'rate_factor': 1.0,
@@ -817,7 +817,7 @@ class BiolumDesignOptimizer:
 
     def optimize(self, target_lumens=10, max_volume=50, max_cost=100,
                  require_continuous=False):
-        \"\"\"Grid search for optimal design.\"\"\"
+        """Grid search for optimal design."""
         best = None
         all_results = []
 

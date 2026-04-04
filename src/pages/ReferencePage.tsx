@@ -21,6 +21,7 @@ export default function ReferencePage() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [showIndex, setShowIndex] = useState(false);
   const [jumpToSlug, setJumpToSlug] = useState<string | null>(null);
+  const [forceExpandSlug, setForceExpandSlug] = useState<string | null>(null);
   const [level, setLevel] = useState<ReferenceLevel>(() => {
     const saved = localStorage.getItem('tma_ref_level');
     return saved ? (parseInt(saved) as ReferenceLevel) : 0;
@@ -49,6 +50,11 @@ export default function ReferencePage() {
   useEffect(() => {
     const hash = location.hash?.slice(1);
     if (!hash) return;
+
+    // Ensure the guide card is expanded so the section element is in the DOM
+    if (slug) {
+      setForceExpandSlug(slug);
+    }
 
     const attempt = (tries: number) => {
       const el = document.getElementById(hash);
@@ -167,7 +173,7 @@ export default function ReferencePage() {
             <GuideCard
               key={guide.slug}
               guide={guide}
-              expandedSlug={slug || null}
+              expandedSlug={slug || forceExpandSlug || null}
               searchQuery={searchQuery}
               level={level}
             />
@@ -232,41 +238,105 @@ export default function ReferencePage() {
         </div>
       </section>
 
-      {/* Collapsible Index */}
+      {/* Collapsible Index — context-sensitive to selected filter */}
       {showIndex && (
         <section className="px-4 sm:px-6 lg:px-8 pb-2">
           <div className="max-w-5xl mx-auto bg-amber-50/50 dark:bg-gray-800/50 border border-amber-200 dark:border-gray-700 rounded-xl p-5">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4">
-              {REFERENCE_CATEGORIES.filter(cat => references.some(r => r.category === cat.key)).map(cat => {
-                const catGuides = references.filter(r => r.category === cat.key).sort((a, b) => a.title.localeCompare(b.title));
+            {selectedCategory ? (
+              /* Single-category TOC: show section-level detail for each guide */
+              (() => {
+                const cat = REFERENCE_CATEGORIES.find(c => c.key === selectedCategory);
+                const catGuides = references.filter(r => r.category === selectedCategory).sort((a, b) => a.title.localeCompare(b.title));
                 return (
-                  <div key={cat.key}>
-                    <h3 className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1.5">
-                      {cat.icon} {cat.label}
+                  <div>
+                    <h3 className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3">
+                      {cat?.icon} {cat?.label} — {catGuides.length} guide{catGuides.length !== 1 ? 's' : ''}
                     </h3>
-                    <ul className="space-y-0.5">
-                      {catGuides.map(guide => (
-                        <li key={guide.slug}>
-                          <a
-                            href={`#ref-${guide.slug}`}
-                            onClick={(e) => {
-                              e.preventDefault();
-                              setSelectedCategory(null);
-                              setSearchQuery('');
-                              setShowIndex(false);
-                              setJumpToSlug(guide.slug);
-                            }}
-                            className="text-sm text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
-                          >
-                            {guide.icon} {guide.title}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4">
+                      {catGuides.map(guide => {
+                        const allSections = [...guide.understand, ...(guide.build || [])];
+                        return (
+                          <div key={guide.slug}>
+                            <a
+                              href={`#ref-${guide.slug}`}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setShowIndex(false);
+                                setJumpToSlug(guide.slug);
+                              }}
+                              className="text-sm font-semibold text-gray-800 dark:text-gray-200 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
+                            >
+                              {guide.icon} {guide.title}
+                            </a>
+                            {allSections.length > 0 && (
+                              <ul className="mt-1 space-y-0.5 pl-5">
+                                {allSections.map((section, i) => (
+                                  <li key={i}>
+                                    <a
+                                      href={section.id ? `#${section.id}` : `#ref-${guide.slug}`}
+                                      onClick={(e) => {
+                                        e.preventDefault();
+                                        setShowIndex(false);
+                                        setJumpToSlug(guide.slug);
+                                        if (section.id) {
+                                          setTimeout(() => {
+                                            const el = document.getElementById(section.id!);
+                                            if (el) {
+                                              const top = el.getBoundingClientRect().top + window.scrollY - 120;
+                                              window.scrollTo({ top, behavior: 'smooth' });
+                                            }
+                                          }, 600);
+                                        }
+                                      }}
+                                      className="text-xs text-gray-500 dark:text-gray-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
+                                    >
+                                      {section.title}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
                 );
-              })}
-            </div>
+              })()
+            ) : (
+              /* All-categories TOC: show category groups with guide titles */
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4">
+                {REFERENCE_CATEGORIES.filter(cat => references.some(r => r.category === cat.key)).map(cat => {
+                  const catGuides = references.filter(r => r.category === cat.key).sort((a, b) => a.title.localeCompare(b.title));
+                  return (
+                    <div key={cat.key}>
+                      <h3 className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1.5">
+                        {cat.icon} {cat.label}
+                      </h3>
+                      <ul className="space-y-0.5">
+                        {catGuides.map(guide => (
+                          <li key={guide.slug}>
+                            <a
+                              href={`#ref-${guide.slug}`}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setSelectedCategory(null);
+                                setSearchQuery('');
+                                setShowIndex(false);
+                                setJumpToSlug(guide.slug);
+                              }}
+                              className="text-sm text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
+                            >
+                              {guide.icon} {guide.title}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
         </section>
       )}
@@ -303,7 +373,7 @@ export default function ReferencePage() {
             // Flat list when a specific category is selected
             <div className="space-y-3">
               {filtered.map(guide => (
-                <GuideCard key={guide.slug} guide={guide} expandedSlug={slug || null} searchQuery={searchQuery} level={level} />
+                <GuideCard key={guide.slug} guide={guide} expandedSlug={slug || forceExpandSlug || null} searchQuery={searchQuery} level={level} />
               ))}
             </div>
           ) : (

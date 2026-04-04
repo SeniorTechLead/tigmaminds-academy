@@ -115,7 +115,7 @@ y_data = 2 * x_data + 1 + np.random.normal(0, 2, 30)
 
 # Method 1: Closed-form (normal equation)
 n = len(x_data)
-m_exact = (n * np.sum(x_data * y_data) - np.sum(x_data) * np.sum(y_data)) / \\
+m_exact = (n * np.sum(x_data * y_data) - np.sum(x_data) * np.sum(y_data)) / \
           (n * np.sum(x_data**2) - np.sum(x_data)**2)
 b_exact = np.mean(y_data) - m_exact * np.mean(x_data)
 print(f"=== Closed-Form Solution ===")

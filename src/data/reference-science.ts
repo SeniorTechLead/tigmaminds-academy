@@ -471,7 +471,7 @@ export const scienceReferences: ReferenceGuide[] = [
   {
     slug: 'plant-biology',
     title: 'Plant Biology',
-    category: 'biology',
+    category: 'botany',
     icon: '🌱',
     tagline: 'How plants make food from sunlight, grow toward the sky, and reproduce.',
     relatedStories: ['old-banyan-trees-stories', 'tejimola-the-girl-who-became-a-plant', 'orchid-colors', 'pitcher-plant', 'bamboo-grows-fast', 'girl-grew-forest'],
@@ -629,7 +629,7 @@ export const scienceReferences: ReferenceGuide[] = [
   {
     slug: 'animal-senses-and-behavior',
     title: 'Animal Senses & Behavior',
-    category: 'biology',
+    category: 'zoology',
     icon: '🦇',
     tagline: 'How animals see, hear, and sense the world in ways humans cannot.',
     relatedStories: ['girl-who-spoke-to-elephants', 'tigers-whisker', 'river-dolphins-secret', 'owl-wisest', 'dancing-deer-of-loktak-lake', 'peacocks-dance'],
@@ -1008,7 +1008,7 @@ export const scienceReferences: ReferenceGuide[] = [
   {
     slug: 'weather-and-climate',
     title: 'Weather & Climate',
-    category: 'earth-science',
+    category: 'meteorology',
     icon: '🌧️',
     tagline: 'Monsoons, cyclones, and why Cherrapunji gets 12 meters of rain a year.',
     relatedStories: ['fishermans-daughter-storm', 'boy-who-talked-to-clouds', 'monsoon-home', 'cloud-refused-rain'],
@@ -1111,7 +1111,7 @@ export const scienceReferences: ReferenceGuide[] = [
   {
     slug: 'materials-and-chemistry',
     title: 'Materials & Chemistry',
-    category: 'chemistry',
+    category: 'materials-science',
     icon: '🧪',
     tagline: 'Silk proteins, clay minerals, bamboo composites — the chemistry of everyday materials.',
     relatedStories: ['why-the-muga-silk-is-golden', 'eri-silk', 'little-potter', 'grandmothers-pitha', 'holi-tea-gardens', 'paper-umbrella'],
@@ -1788,7 +1788,7 @@ export const scienceReferences: ReferenceGuide[] = [
   {
     slug: 'evolution-and-natural-selection',
     title: 'Evolution & Natural Selection',
-    category: 'biology',
+    category: 'zoology',
     icon: '🧬',
     tagline:
       "How species change over millions of years — from ancient fish to Assam's one-horned rhino.",
@@ -2172,7 +2172,7 @@ export const scienceReferences: ReferenceGuide[] = [
   {
     slug: 'gravity-and-orbits',
     title: 'Gravity & Orbits',
-    category: 'physics',
+    category: 'astronomy',
     icon: '🪐',
     tagline: "The force that keeps the Moon in orbit and mangoes falling from trees.",
     relatedStories: ['kite-festival', 'star-fell-deepor', 'lotus-float'],
@@ -2628,7 +2628,7 @@ export const scienceReferences: ReferenceGuide[] = [
   {
     slug: 'classification-of-life',
     title: 'Classification of Living Things',
-    category: 'biology',
+    category: 'zoology',
     icon: '🔬',
     tagline: 'How scientists organize millions of species — from five kingdoms to binomial naming.',
     relatedStories: ['boy-counted-butterflies', 'kaziranga-grass', 'tiny-frog'],
@@ -2744,7 +2744,7 @@ export const scienceReferences: ReferenceGuide[] = [
   {
     slug: 'ecosystems-and-biomes',
     title: 'Ecosystems & Biomes',
-    category: 'biology',
+    category: 'ecology',
     icon: '🌿',
     tagline: 'Energy flows, nutrients cycle, and biomes from Kaziranga grasslands to Himalayan alpine meadows.',
     relatedStories: ['kaziranga-grass', 'elephant-corridor', 'girl-grew-forest', 'dancing-deer-of-loktak-lake'],
@@ -3259,7 +3259,7 @@ export const scienceReferences: ReferenceGuide[] = [
   {
     slug: 'plate-tectonics',
     title: 'Plate Tectonics & Earthquakes',
-    category: 'earth-science',
+    category: 'geology',
     icon: '🌍',
     tagline: 'The ground beneath your feet is moving — how continents drift and earthquakes shake.',
     relatedStories: ['mountain-echoes', 'siang-river', 'turtle-mountain'],
@@ -3399,7 +3399,7 @@ export const scienceReferences: ReferenceGuide[] = [
   {
     slug: 'rocks-minerals-soil',
     title: 'Rocks, Minerals & Soil',
-    category: 'earth-science',
+    category: 'geology',
     icon: '🪨',
     tagline: 'The building blocks of Earth — from granite mountains to the red soil that grows Assam\'s tea.',
     relatedStories: ['little-potter', 'lost-temple', 'siang-river'],
@@ -3756,7 +3756,7 @@ export const scienceReferences: ReferenceGuide[] = [
   {
     slug: 'conservation-biology',
     title: 'Conservation Biology',
-    category: 'ecology',
+    category: 'conservation',
     icon: '🌿',
     tagline: 'Protecting biodiversity — from Kaziranga\'s rhinos to the world\'s disappearing species.',
     relatedStories: ['elephant-corridor', 'girl-grew-forest', 'golden-hilsa', 'red-panda-mask'],
@@ -3887,7 +3887,7 @@ export const scienceReferences: ReferenceGuide[] = [
   {
     slug: 'solar-system-and-space',
     title: 'The Solar System & Space',
-    category: 'physics',
+    category: 'astronomy',
     icon: '🪐',
     tagline: 'Eight planets, one star, and billions of mysteries — our cosmic neighborhood.',
     relatedStories: ['stars-ziro-valley', 'star-fell-deepor'],
@@ -3976,7 +3976,7 @@ export const scienceReferences: ReferenceGuide[] = [
   {
     slug: 'human-health-nutrition',
     title: 'Human Health & Nutrition',
-    category: 'biology',
+    category: 'health-medicine',
     icon: '🍎',
     tagline: 'What your body needs, how diseases spread, and why sleep matters more than you think.',
     relatedStories: ['grandmothers-pitha', 'little-chef', 'holi-tea-gardens'],
@@ -4156,7 +4156,7 @@ export const scienceReferences: ReferenceGuide[] = [
   {
     slug: 'environmental-science',
     title: 'Environmental Science & Pollution',
-    category: 'ecology',
+    category: 'conservation',
     icon: '🌍',
     tagline: 'Air, water, soil — how pollution affects ecosystems and what we can do about it.',
     relatedStories: ['girl-grew-forest', 'elephant-corridor', 'cloud-refused-rain'],
@@ -5266,7 +5266,7 @@ export const scienceReferences: ReferenceGuide[] = [
   {
     slug: 'sonar-and-echolocation',
     title: 'Sonar & Echolocation',
-    category: 'physics',
+    category: 'marine-science',
     icon: '🦇',
     tagline: 'How bats hunt in darkness, dolphins see with sound, and submarines navigate the deep.',
     relatedStories: ['river-dolphins-secret', 'girl-who-spoke-to-elephants', 'mountain-echoes'],
@@ -5399,7 +5399,7 @@ export const scienceReferences: ReferenceGuide[] = [
   {
     slug: 'tides-and-oceanography',
     title: 'Tides & Oceanography',
-    category: 'geography',
+    category: 'marine-science',
     icon: '🌊',
     tagline: 'Why the ocean breathes with the Moon, waves carry energy but not water, and coral reefs are underwater cities.',
     relatedStories: ['fishermans-storm-shelter', 'river-dolphins-secret', 'parting-red-sea'],
@@ -5510,7 +5510,7 @@ export const scienceReferences: ReferenceGuide[] = [
   {
     slug: 'aerodynamics-and-flight',
     title: 'Aerodynamics & Flight',
-    category: 'physics',
+    category: 'engineering',
     icon: '✈️',
     tagline: 'Why birds soar, planes stay up, and skydivers stop accelerating.',
     relatedStories: ['kite-festival', 'flying-squirrel'],
@@ -5600,7 +5600,7 @@ export const scienceReferences: ReferenceGuide[] = [
   {
     slug: 'neuroscience-and-brain',
     title: 'Neuroscience & The Brain',
-    category: 'biology',
+    category: 'neuroscience',
     icon: '🧠',
     tagline: 'Your brain is an electrical storm — 86 billion neurons firing at lightning speed.',
     relatedStories: [],
@@ -5724,7 +5724,7 @@ export const scienceReferences: ReferenceGuide[] = [
   {
     slug: 'geology-and-earth',
     title: 'Geology & Earth Science',
-    category: 'geography',
+    category: 'geology',
     icon: '🌍',
     tagline: 'The ground under your feet is moving, mountains are growing, and rocks tell stories.',
     relatedStories: [],
@@ -5811,7 +5811,7 @@ export const scienceReferences: ReferenceGuide[] = [
   {
     slug: 'hydrology-and-water',
     title: 'Hydrology & Water Science',
-    category: 'geography',
+    category: 'marine-science',
     icon: '💧',
     tagline: 'The same water dinosaurs drank is falling from your tap right now.',
     relatedStories: [],

@@ -12,7 +12,10 @@ export type ReferenceCategory =
   | 'language' | 'data-science' | 'database' | 'electronics' | 'math' | 'ai'
   | 'physics' | 'biology' | 'chemistry' | 'geography'
   | 'ecology' | 'earth-science'
-  | 'economics' | 'engineering' | 'music-arts';
+  | 'economics' | 'engineering' | 'music-arts'
+  | 'zoology' | 'botany' | 'neuroscience' | 'materials-science'
+  | 'meteorology' | 'geology' | 'astronomy' | 'marine-science'
+  | 'conservation' | 'health-medicine' | 'agriculture';
 
 export interface InteractiveConfig {
   type: 'matching' | 'true-false' | 'slider' | 'did-you-know' | 'tone-player' | 'interval-player' | 'beat-machine' | 'harmonics-explorer' | 'gaussian-explorer' | 'contour-explainer' | 'logic-gate-simulator' | 'sql-playground' | 'ts-playground' | 'html-playground';
@@ -116,6 +119,83 @@ export const REFERENCE_CATEGORIES: CategoryMeta[] = [
     label: 'Music & Arts',
     icon: '🎵',
     color: 'bg-pink-100 text-pink-700 dark:bg-pink-900/30 dark:text-pink-300',
+    group: 'science',
+  },
+  {
+    key: 'zoology',
+    label: 'Zoology',
+    icon: '🐾',
+    color: 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-300',
+    group: 'science',
+  },
+  {
+    key: 'botany',
+    label: 'Botany',
+    icon: '🌺',
+    color: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300',
+    group: 'science',
+  },
+  {
+    key: 'neuroscience',
+    label: 'Neuroscience',
+    icon: '🧠',
+    color: 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300',
+    group: 'science',
+  },
+  {
+    key: 'materials-science',
+    label: 'Materials Science',
+    icon: '🧵',
+    color: 'bg-slate-100 text-slate-700 dark:bg-slate-900/30 dark:text-slate-300',
+    group: 'science',
+  },
+  {
+    key: 'meteorology',
+    label: 'Meteorology',
+    icon: '🌦️',
+    color: 'bg-cyan-100 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-300',
+    group: 'science',
+  },
+  {
+    key: 'geology',
+    label: 'Geology',
+    icon: '🪨',
+    color: 'bg-stone-100 text-stone-700 dark:bg-stone-900/30 dark:text-stone-300',
+    group: 'science',
+  },
+  {
+    key: 'astronomy',
+    label: 'Astronomy',
+    icon: '🔭',
+    color: 'bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-300',
+    group: 'science',
+  },
+  {
+    key: 'marine-science',
+    label: 'Marine Science',
+    icon: '🐟',
+    color: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300',
+    group: 'science',
+  },
+  {
+    key: 'conservation',
+    label: 'Conservation',
+    icon: '🛡️',
+    color: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300',
+    group: 'science',
+  },
+  {
+    key: 'health-medicine',
+    label: 'Health & Medicine',
+    icon: '🏥',
+    color: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300',
+    group: 'science',
+  },
+  {
+    key: 'agriculture',
+    label: 'Agriculture',
+    icon: '🌾',
+    color: 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300',
     group: 'science',
   },
 
