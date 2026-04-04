@@ -1,9 +1,10 @@
 export type Difficulty = 'easy' | 'medium' | 'hard';
-export type Topic = 'strings' | 'lists' | 'math' | 'sorting' | 'dictionaries' | 'loops' | 'functions' | 'data' | 'tuples-sets' | 'classes' | 'recursion' | 'error-handling';
+export type Topic = 'strings' | 'lists' | 'math' | 'sorting' | 'dictionaries' | 'loops' | 'functions' | 'data' | 'tuples-sets' | 'classes' | 'recursion' | 'error-handling' | 'sql-select' | 'sql-joins' | 'sql-aggregate' | 'sql-modify';
+export type Language = 'python' | 'sql';
 
 export interface TestCase {
-  input: string;   // Python expression for the argument(s)
-  expected: string; // Python expression for the expected output
+  input: string;   // Python: expression for the argument(s). SQL: setup SQL to run before the student's query (optional)
+  expected: string; // Python: expression for expected output. SQL: JSON string of expected rows e.g. '[["Ranga",4500]]'
   label: string;    // Human-readable description
 }
 
@@ -26,6 +27,7 @@ export interface Problem {
   description: string; // The problem statement
   difficulty: Difficulty;
   topic: Topic;
+  language?: Language;  // defaults to 'python'
   tiers: ProblemTier[];
 }
 
@@ -5028,6 +5030,252 @@ export const problems: Problem[] = [
         starterCode: 'def freq_table(data, bins=5, max_bar_width=20):\n    """Return [(label, count, bar_string)]."""\n    pass\n',
         testCases: [
           { input: 'list(range(100)), 5', expected: 'True', label: '5 bins with bars' },
+        ] },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════
+  // SQL PROBLEMS
+  // ═══════════════════════════════════════════════════════════════
+
+  // ── EASY: sql-select ──
+  {
+    id: 169, slug: 'sql-all-elephants', title: 'List All Elephants',
+    story: 'The Boy Who Built a Library', storySlug: 'boy-who-built-library',
+    description: 'Write a query to list all elephants showing their name and weight.',
+    difficulty: 'easy', topic: 'sql-select', language: 'sql',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Select name and weight from all elephants.', hint: 'Use SELECT name, weight FROM elephants.', hintRef: { slug: 'databases-and-sql', section: 'sql-select', label: 'SELECT in the Library' },
+        starterCode: '-- Write your query here\n',
+        testCases: [
+          { input: '', expected: '[["Ranga",4500],["Mohini",3800],["Gaja",5200],["Tara",4100],["Bala",3200]]', label: 'All 5 elephants with name and weight' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Sort by weight, heaviest first.', hint: 'Add ORDER BY weight DESC.', hintRef: { slug: 'databases-and-sql', section: 'sql-select', label: 'SELECT in the Library' },
+        starterCode: '-- List all elephants sorted by weight (heaviest first)\n',
+        testCases: [
+          { input: '', expected: '[["Gaja",5200],["Ranga",4500],["Tara",4100],["Mohini",3800],["Bala",3200]]', label: 'Sorted by weight DESC' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Show only the top 3 heaviest.', hint: 'Add LIMIT 3 after ORDER BY.', hintRef: { slug: 'databases-and-sql', section: 'sql-select', label: 'SELECT in the Library' },
+        starterCode: '-- Top 3 heaviest elephants\n',
+        testCases: [
+          { input: '', expected: '[["Gaja",5200],["Ranga",4500],["Tara",4100]]', label: 'Top 3 by weight' },
+        ] },
+    ],
+  },
+  {
+    id: 170, slug: 'sql-filter-park', title: 'Filter by Park',
+    story: 'The Boy Who Built a Library', storySlug: 'boy-who-built-library',
+    description: 'Write a query to find all elephants in Kaziranga.',
+    difficulty: 'easy', topic: 'sql-select', language: 'sql',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Select elephants where park is Kaziranga.', hint: "Use WHERE park = 'Kaziranga'.", hintRef: { slug: 'databases-and-sql', section: 'sql-select', label: 'SELECT in the Library' },
+        starterCode: "-- Find all elephants in Kaziranga\n",
+        testCases: [
+          { input: '', expected: '[["Ranga",4500,"Kaziranga"],["Gaja",5200,"Kaziranga"],["Tara",4100,"Kaziranga"]]', label: 'Kaziranga elephants with name, weight, park' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Find elephants heavier than 4000kg in Kaziranga.', hint: "Combine conditions with AND.", hintRef: { slug: 'databases-and-sql', section: 'sql-select', label: 'SELECT in the Library' },
+        starterCode: "-- Kaziranga elephants heavier than 4000kg\n",
+        testCases: [
+          { input: '', expected: '[["Ranga",4500],["Gaja",5200],["Tara",4100]]', label: 'Heavy Kaziranga elephants' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Find elephants whose name starts with "R" or "G".', hint: "Use LIKE 'R%' OR name LIKE 'G%'.", hintRef: { slug: 'databases-and-sql', section: 'sql-select', label: 'SELECT in the Library' },
+        starterCode: "-- Elephants whose name starts with R or G\n",
+        testCases: [
+          { input: '', expected: '[["Ranga"],["Gaja"]]', label: 'Names starting with R or G' },
+        ] },
+    ],
+  },
+  {
+    id: 171, slug: 'sql-null-check', title: 'Find Missing Data',
+    story: 'The Boy Who Built a Library', storySlug: 'boy-who-built-library',
+    description: 'Write a query to find elephants that have never been sighted (last_seen is NULL).',
+    difficulty: 'easy', topic: 'sql-select', language: 'sql',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Find elephants with NULL last_seen.', hint: "Use WHERE last_seen IS NULL, not = NULL.", hintRef: { slug: 'databases-and-sql', section: 'sql-select', label: 'SELECT in the Library' },
+        starterCode: "-- Find elephants that have never been sighted\n",
+        testCases: [
+          { input: '', expected: '[["Tara"],["Bala"]]', label: 'Elephants with NULL last_seen' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Count how many have been sighted vs not.', hint: "Use COUNT(*) and COUNT(last_seen) — COUNT(column) skips NULLs.", hintRef: { slug: 'databases-and-sql', section: 'sql-aggregate', label: 'Aggregates in the Library' },
+        starterCode: "-- Count total elephants and elephants with sighting dates\n",
+        testCases: [
+          { input: '', expected: '[[5,3]]', label: 'Total=5, with dates=3' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'List all elephants with "sighted" or "never sighted" status.', hint: "Use CASE WHEN last_seen IS NULL THEN 'never sighted' ELSE 'sighted' END.", hintRef: { slug: 'databases-and-sql', section: 'sql-select', label: 'SELECT in the Library' },
+        starterCode: "-- List each elephant with their sighting status\n",
+        testCases: [
+          { input: '', expected: '[["Ranga","sighted"],["Mohini","sighted"],["Gaja","sighted"],["Tara","never sighted"],["Bala","never sighted"]]', label: 'Name with status' },
+        ] },
+    ],
+  },
+
+  // ── EASY: sql-aggregate ──
+  {
+    id: 172, slug: 'sql-count-per-park', title: 'Count per Park',
+    story: 'The Boy Who Built a Library', storySlug: 'boy-who-built-library',
+    description: 'Write a query to count how many elephants are in each park.',
+    difficulty: 'easy', topic: 'sql-aggregate', language: 'sql',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Count elephants grouped by park.', hint: 'Use GROUP BY park with COUNT(*).', hintRef: { slug: 'databases-and-sql', section: 'sql-aggregate', label: 'Aggregates in the Library' },
+        starterCode: '-- Count elephants per park\n',
+        testCases: [
+          { input: '', expected: '[["Kaziranga",3],["Manas",2]]', label: 'Kaziranga=3, Manas=2' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Show average weight per park too.', hint: 'Add ROUND(AVG(weight), 0) to the SELECT.', hintRef: { slug: 'databases-and-sql', section: 'sql-aggregate', label: 'Aggregates in the Library' },
+        starterCode: '-- Count and average weight per park\n',
+        testCases: [
+          { input: '', expected: '[["Kaziranga",3,4600.0],["Manas",2,3500.0]]', label: 'Count + avg weight per park' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Only show parks with more than 2 elephants.', hint: 'Add HAVING COUNT(*) > 2 after GROUP BY.', hintRef: { slug: 'databases-and-sql', section: 'sql-aggregate', label: 'Aggregates in the Library' },
+        starterCode: '-- Parks with more than 2 elephants\n',
+        testCases: [
+          { input: '', expected: '[["Kaziranga",3]]', label: 'Only Kaziranga qualifies' },
+        ] },
+    ],
+  },
+  {
+    id: 173, slug: 'sql-heaviest-lightest', title: 'Heaviest and Lightest',
+    story: 'The Boy Who Built a Library', storySlug: 'boy-who-built-library',
+    description: 'Write a query to find the heaviest and lightest elephant in each park.',
+    difficulty: 'medium', topic: 'sql-aggregate', language: 'sql',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Use MIN and MAX with GROUP BY.', hint: 'SELECT park, MIN(weight), MAX(weight) FROM elephants GROUP BY park.', hintRef: { slug: 'databases-and-sql', section: 'sql-aggregate', label: 'Aggregates in the Library' },
+        starterCode: '-- Heaviest and lightest per park\n',
+        testCases: [
+          { input: '', expected: '[["Kaziranga",4100,5200],["Manas",3200,3800]]', label: 'Min and max weight per park' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Also show the weight range (max - min).', hint: 'Add MAX(weight) - MIN(weight) AS range.', hintRef: { slug: 'databases-and-sql', section: 'sql-aggregate', label: 'Aggregates in the Library' },
+        starterCode: '-- Weight range per park\n',
+        testCases: [
+          { input: '', expected: '[["Kaziranga",4100,5200,1100],["Manas",3200,3800,600]]', label: 'Min, max, and range' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Find the single heaviest elephant across all parks (name and weight).', hint: 'ORDER BY weight DESC LIMIT 1 — no GROUP BY needed.', hintRef: { slug: 'databases-and-sql', section: 'sql-select', label: 'SELECT in the Library' },
+        starterCode: '-- The heaviest elephant overall\n',
+        testCases: [
+          { input: '', expected: '[["Gaja",5200]]', label: 'Gaja at 5200' },
+        ] },
+    ],
+  },
+
+  // ── EASY/MEDIUM: sql-joins ──
+  {
+    id: 174, slug: 'sql-sightings-join', title: 'Elephant Sightings',
+    story: 'The Boy Who Built a Library', storySlug: 'boy-who-built-library',
+    description: 'Write a query to show each elephant\'s name alongside their sighting dates and locations.',
+    difficulty: 'easy', topic: 'sql-joins', language: 'sql',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'JOIN elephants with sightings.', hint: 'JOIN sightings s ON e.id = s.elephant_id.', hintRef: { slug: 'databases-and-sql', section: 'sql-joins', label: 'Joins in the Library' },
+        starterCode: '-- Show elephant name, sighting date, and location\n',
+        testCases: [
+          { input: '', expected: '[["Ranga","2026-01-15","Kaziranga East"],["Ranga","2026-02-20","Kaziranga Central"],["Mohini","2026-01-22","Manas NP"],["Gaja","2026-03-01","Kaziranga East"],["Gaja","2026-03-15","Kaziranga West"],["Bala","2026-02-10","Manas South"]]', label: '6 sighting rows with elephant names' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Count sightings per elephant, including elephants with zero sightings.', hint: 'Use LEFT JOIN so Tara (0 sightings) appears. COUNT(s.id) skips NULLs.', hintRef: { slug: 'databases-and-sql', section: 'sql-joins', label: 'Joins in the Library' },
+        starterCode: '-- Count sightings per elephant (include zero)\n',
+        testCases: [
+          { input: '', expected: '[["Ranga",2],["Gaja",2],["Mohini",1],["Bala",1],["Tara",0]]', label: 'All 5 elephants with counts' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Find elephants that have NEVER been sighted using a LEFT JOIN.', hint: 'LEFT JOIN sightings, then WHERE s.id IS NULL.', hintRef: { slug: 'databases-and-sql', section: 'sql-joins', label: 'Joins in the Library' },
+        starterCode: '-- Elephants with zero sightings\n',
+        testCases: [
+          { input: '', expected: '[["Tara"]]', label: 'Only Tara has no sightings' },
+        ] },
+    ],
+  },
+  {
+    id: 175, slug: 'sql-three-table-join', title: 'Three-Table Join',
+    story: 'The Boy Who Built a Library', storySlug: 'boy-who-built-library',
+    description: 'Write a query that joins elephants, sightings, and parks to show which elephant was seen at which park on what date.',
+    difficulty: 'medium', topic: 'sql-joins', language: 'sql',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Join all three tables.', hint: 'JOIN sightings ON elephant_id, then JOIN parks ON park_id.', hintRef: { slug: 'databases-and-sql', section: 'sql-joins', label: 'Joins in the Library' },
+        starterCode: '-- Show elephant name, park name, and sighting date\n',
+        testCases: [
+          { input: '', expected: '[["Ranga","Kaziranga","2026-01-15"],["Ranga","Kaziranga","2026-02-20"],["Mohini","Manas","2026-01-22"],["Gaja","Kaziranga","2026-03-01"],["Gaja","Kaziranga","2026-03-15"],["Bala","Manas","2026-02-10"]]', label: 'All sightings with park names' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Count sightings per park.', hint: 'GROUP BY p.name with COUNT(*).', hintRef: { slug: 'databases-and-sql', section: 'sql-aggregate', label: 'Aggregates in the Library' },
+        starterCode: '-- Count sightings per park\n',
+        testCases: [
+          { input: '', expected: '[["Kaziranga",4],["Manas",2]]', label: 'Kaziranga=4, Manas=2' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Find which parks each elephant has visited (using park_elephants junction table).', hint: 'JOIN park_elephants and parks.', hintRef: { slug: 'databases-and-sql', section: 'sql-relationships', label: 'Relationships in the Library' },
+        starterCode: '-- Which parks has each elephant visited?\n',
+        testCases: [
+          { input: '', expected: '[["Ranga","Kaziranga"],["Ranga","Manas"],["Mohini","Manas"],["Gaja","Kaziranga"],["Tara","Kaziranga"],["Bala","Manas"]]', label: 'Elephant-park pairs' },
+        ] },
+    ],
+  },
+
+  // ── MEDIUM: sql-modify ──
+  {
+    id: 176, slug: 'sql-insert-update', title: 'Add and Update',
+    story: 'The Boy Who Built a Library', storySlug: 'boy-who-built-library',
+    description: 'Write SQL to add a new elephant and then update its weight.',
+    difficulty: 'medium', topic: 'sql-modify', language: 'sql',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: "Insert a new elephant named 'Lakshmi' with weight 3900 in park 'Nameri'.", hint: "INSERT INTO elephants (id, name, weight, park) VALUES (6, 'Lakshmi', 3900, 'Nameri').", hintRef: { slug: 'databases-and-sql', section: 'sql-create-modify', label: 'CREATE/INSERT in the Library' },
+        starterCode: "-- Add Lakshmi to the elephants table\n-- Then SELECT * FROM elephants to verify\n",
+        testCases: [
+          { input: '', expected: '[["Ranga",4500],["Mohini",3800],["Gaja",5200],["Tara",4100],["Bala",3200],["Lakshmi",3900]]', label: '6 elephants after insert' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: "Update Lakshmi's weight to 4000 after inserting.", hint: "Run INSERT first, then UPDATE elephants SET weight = 4000 WHERE name = 'Lakshmi'.", hintRef: { slug: 'databases-and-sql', section: 'sql-create-modify', label: 'CREATE/INSERT in the Library' },
+        starterCode: "-- Insert Lakshmi, then update her weight to 4000\n-- End with SELECT name, weight FROM elephants WHERE name = 'Lakshmi'\n",
+        testCases: [
+          { input: '', expected: '[["Lakshmi",4000]]', label: 'Lakshmi with updated weight' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Delete all elephants lighter than 3500kg and show who remains.', hint: "DELETE FROM elephants WHERE weight < 3500, then SELECT.", hintRef: { slug: 'databases-and-sql', section: 'sql-create-modify', label: 'CREATE/INSERT in the Library' },
+        starterCode: "-- Delete elephants under 3500kg\n-- Then list the remaining elephants\n",
+        testCases: [
+          { input: '', expected: '[["Ranga",4500],["Gaja",5200],["Tara",4100],["Mohini",3800]]', label: 'Only 4 remain (Bala removed)' },
+        ] },
+    ],
+  },
+
+  // ── HARD: sql-select ──
+  {
+    id: 177, slug: 'sql-subquery-heavier', title: 'Heavier Than Average',
+    story: 'The Boy Who Built a Library', storySlug: 'boy-who-built-library',
+    description: 'Write a query to find elephants heavier than the average weight using a subquery.',
+    difficulty: 'hard', topic: 'sql-select', language: 'sql',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Use a subquery to compute the average.', hint: 'WHERE weight > (SELECT AVG(weight) FROM elephants).', hintRef: { slug: 'databases-and-sql', section: 'sql-subqueries', label: 'Subqueries in the Library' },
+        starterCode: '-- Elephants heavier than the average\n',
+        testCases: [
+          { input: '', expected: '[["Ranga",4500],["Gaja",5200],["Tara",4100]]', label: 'Above average (4160)' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Show how much heavier than average each one is.', hint: 'Subtract the subquery: weight - (SELECT AVG(weight) FROM elephants) AS above_avg.', hintRef: { slug: 'databases-and-sql', section: 'sql-subqueries', label: 'Subqueries in the Library' },
+        starterCode: '-- Elephants above average with the difference\n',
+        testCases: [
+          { input: '', expected: '[["Gaja",5200,1040.0],["Ranga",4500,340.0],["Tara",4100,-60.0]]', label: 'Name, weight, and difference from avg' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Rank all elephants by weight using a window function.', hint: 'RANK() OVER (ORDER BY weight DESC) AS rank.', hintRef: { slug: 'databases-and-sql', section: 'sql-subqueries', label: 'Subqueries in the Library' },
+        starterCode: '-- Rank elephants by weight\n',
+        testCases: [
+          { input: '', expected: '[["Gaja",5200,1],["Ranga",4500,2],["Tara",4100,3],["Mohini",3800,4],["Bala",3200,5]]', label: 'All elephants ranked' },
+        ] },
+    ],
+  },
+
+  // ── HARD: sql-joins ──
+  {
+    id: 178, slug: 'sql-most-sighted', title: 'Most Sighted Elephant',
+    story: 'The Boy Who Built a Library', storySlug: 'boy-who-built-library',
+    description: 'Write a query to find which elephant has been sighted the most times.',
+    difficulty: 'hard', topic: 'sql-joins', language: 'sql',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'JOIN, GROUP BY, ORDER BY, LIMIT.', hint: 'LEFT JOIN sightings, GROUP BY name, ORDER BY COUNT DESC, LIMIT 1.', hintRef: { slug: 'databases-and-sql', section: 'sql-joins', label: 'Joins in the Library' },
+        starterCode: '-- The most sighted elephant\n',
+        testCases: [
+          { input: '', expected: '[["Ranga",2]]', label: 'Ranga with 2 sightings (or Gaja with 2)' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Show ALL elephants tied for the most sightings (not just one).', hint: 'Use a subquery: WHERE count = (SELECT MAX(count) FROM ...).', hintRef: { slug: 'databases-and-sql', section: 'sql-subqueries', label: 'Subqueries in the Library' },
+        starterCode: '-- All elephants tied for most sightings\n',
+        testCases: [
+          { input: '', expected: '[["Gaja",2],["Ranga",2]]', label: 'Both Ranga and Gaja with 2' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Find the most recent sighting for each elephant.', hint: 'Use MAX(s.date) with GROUP BY.', hintRef: { slug: 'databases-and-sql', section: 'sql-joins', label: 'Joins in the Library' },
+        starterCode: '-- Most recent sighting per elephant\n',
+        testCases: [
+          { input: '', expected: '[["Ranga","2026-02-20"],["Mohini","2026-01-22"],["Gaja","2026-03-15"],["Bala","2026-02-10"],["Tara",null]]', label: 'Latest date per elephant (NULL for Tara)' },
         ] },
     ],
   },
