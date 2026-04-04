@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Clock, CheckCircle, BookOpen, Search, Code2, ChevronRight } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { lessons, SUBJECTS, Subject, SKILLS, Skill, TRACKS, Track, DISCIPLINES, Discipline } from '../data/lessons';
+import { lessons, SUBJECTS, Subject, DISCIPLINES, Discipline } from '../data/lessons';
 import { useProgress } from '../contexts/ProgressContext';
 
 function highlightMatch(text: string, query: string): React.ReactNode {
@@ -16,7 +16,7 @@ function highlightMatch(text: string, query: string): React.ReactNode {
   );
 }
 
-type FilterType = 'subject' | 'discipline' | 'track';
+type FilterType = 'subject' | 'discipline';
 
 export default function LessonsIndexPage() {
   const [filterType, setFilterType] = useState<FilterType>('subject');
@@ -24,7 +24,6 @@ export default function LessonsIndexPage() {
   const [selectedDiscipline, setSelectedDiscipline] = useState<Discipline | null>(null);
   const [selectedL2Skill, setSelectedL2Skill] = useState<string | null>(null);
   const [selectedL3Tool, setSelectedL3Tool] = useState<string | null>(null);
-  const [selectedTrack, setSelectedTrack] = useState<Track | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const { isStoryComplete, isLevelComplete, getCompletedCount } = useProgress();
 
@@ -45,12 +44,11 @@ export default function LessonsIndexPage() {
   const filtered = lessons.filter((lesson) => {
     const matchesSubject = !selectedSubject || lesson.subjects?.includes(selectedSubject);
     const matchesDiscipline = filterType !== 'discipline' || matchesDisciplineFilter(lesson);
-    const matchesTrack = !selectedTrack || lesson.learningTracks?.includes(selectedTrack);
     const matchesSearch = !searchQuery ||
       lesson.story.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       lesson.stem.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       lesson.story.tagline.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesSubject && matchesDiscipline && matchesTrack && matchesSearch;
+    return matchesSubject && matchesDiscipline && matchesSearch;
   });
 
   // Compute counts for discipline drill-down
@@ -63,7 +61,6 @@ export default function LessonsIndexPage() {
     setSelectedDiscipline(null);
     setSelectedL2Skill(null);
     setSelectedL3Tool(null);
-    setSelectedTrack(null);
   };
 
   return (
@@ -95,11 +92,10 @@ export default function LessonsIndexPage() {
           </div>
 
           {/* Filter type tabs */}
-          <div className="flex gap-1 bg-gray-100 dark:bg-gray-800 rounded-xl p-1 max-w-md mx-auto mb-4">
+          <div className="flex gap-1 bg-gray-100 dark:bg-gray-800 rounded-xl p-1 max-w-xs mx-auto mb-4">
             {([
               { key: 'subject' as FilterType, label: 'By Subject' },
               { key: 'discipline' as FilterType, label: 'By Skill' },
-              { key: 'track' as FilterType, label: 'By Track' },
             ]).map(tab => (
               <button key={tab.key} onClick={() => { setFilterType(tab.key); clearAllFilters(); }}
                 className={`flex-1 py-2 rounded-lg text-sm font-semibold transition-all ${filterType === tab.key ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm' : 'text-gray-500 dark:text-gray-400'}`}>
@@ -111,7 +107,7 @@ export default function LessonsIndexPage() {
           {/* Filter pills */}
           <div className="flex flex-wrap gap-2 justify-center mb-4">
             <button onClick={clearAllFilters}
-              className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${!selectedSubject && !selectedDiscipline && !selectedTrack ? 'bg-amber-500 text-white shadow-md' : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400'}`}>
+              className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${!selectedSubject && !selectedDiscipline ? 'bg-amber-500 text-white shadow-md' : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400'}`}>
               All ({lessons.length})
             </button>
 
@@ -141,16 +137,6 @@ export default function LessonsIndexPage() {
               );
             })}
 
-            {filterType === 'track' && TRACKS.map(t => {
-              const count = lessons.filter(l => l.learningTracks?.includes(t.key)).length;
-              if (count === 0) return null;
-              return (
-                <button key={t.key} onClick={() => setSelectedTrack(selectedTrack === t.key ? null : t.key)}
-                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${selectedTrack === t.key ? `${t.color} text-white shadow-md` : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200'}`}>
-                  {t.icon} {t.key} ({count})
-                </button>
-              );
-            })}
           </div>
 
           {/* L2 skill drill-down row */}
@@ -213,7 +199,7 @@ export default function LessonsIndexPage() {
             );
           })()}
 
-          {(selectedSubject || selectedDiscipline || selectedTrack) && (
+          {(selectedSubject || selectedDiscipline) && (
             <p className="text-sm text-gray-500 dark:text-gray-400">
               Showing {filtered.length} lesson{filtered.length !== 1 ? 's' : ''}
             </p>
