@@ -116,6 +116,7 @@ function ProblemSolver({ problem, tier, onBack }: { problem: Problem; tier: Prob
   const [running, setRunning] = useState(false);
   const [results, setResults] = useState<TestResult[]>([]);
   const [output, setOutput] = useState('');
+  const [sqlResultDisplay, setSqlResultDisplay] = useState<{ columns: string[]; rows: any[][] } | null>(null);
   const { pyodideRef, load: loadPyodide, state: pyCtxState, loadProgress: pyLoadProgress } = usePyodide();
   const { load: loadSqlJs, runSql, resetDb, state: sqlCtxState, loadProgress: sqlLoadProgress } = useSqlJs();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -185,6 +186,7 @@ function ProblemSolver({ problem, tier, onBack }: { problem: Problem; tier: Prob
     setRunning(true);
     setResults([]);
     setOutput('');
+    setSqlResultDisplay(null);
 
     // Reset DB to clean state before each test run
     resetDb();
@@ -243,6 +245,16 @@ function ProblemSolver({ problem, tier, onBack }: { problem: Problem; tier: Prob
         resetDb();
       }
     }
+
+    // Run the query one more time to capture results for display
+    resetDb();
+    try {
+      const displayResult = runSql(code);
+      if (!displayResult.error && displayResult.results.length > 0) {
+        const last = displayResult.results[displayResult.results.length - 1];
+        setSqlResultDisplay({ columns: last.columns, rows: last.rows });
+      }
+    } catch { /* ignore display errors */ }
 
     setResults(testResults);
     setRunning(false);
@@ -378,9 +390,9 @@ function ProblemSolver({ problem, tier, onBack }: { problem: Problem; tier: Prob
                 <div className="min-w-0 flex-1">
                   <p className={`text-sm font-medium ${r.passed ? 'text-gray-700 dark:text-gray-300' : 'text-red-700 dark:text-red-300'}`}>{r.label}</p>
                   {!r.passed && (
-                    <div className="mt-1 text-xs font-mono">
-                      <p className="text-gray-500 dark:text-gray-400">Expected: <span className="text-emerald-600 dark:text-emerald-400">{r.expected}</span></p>
-                      <p className="text-gray-500 dark:text-gray-400">Got: <span className="text-red-600 dark:text-red-400">{r.actual}</span></p>
+                    <div className="mt-2 text-xs font-mono space-y-1">
+                      <p className="text-gray-500 dark:text-gray-400">Expected: <span className="text-emerald-600 dark:text-emerald-400 break-all">{r.expected}</span></p>
+                      <p className="text-gray-500 dark:text-gray-400">Got: <span className="text-red-600 dark:text-red-400 break-all">{r.actual}</span></p>
                     </div>
                   )}
                 </div>
@@ -390,7 +402,38 @@ function ProblemSolver({ problem, tier, onBack }: { problem: Problem; tier: Prob
         </div>
       )}
 
-      {/* Stdout output */}
+      {/* SQL query results table */}
+      {sqlResultDisplay && sqlResultDisplay.rows.length > 0 && (
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden mb-4">
+          <div className="px-4 py-2 border-b border-gray-200 dark:border-gray-700 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+            Query Result — {sqlResultDisplay.rows.length} row{sqlResultDisplay.rows.length !== 1 ? 's' : ''}
+          </div>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className={isDark ? 'bg-gray-700' : 'bg-gray-50'}>
+                  {sqlResultDisplay.columns.map((col, ci) => (
+                    <th key={ci} className={`px-3 py-2 text-left font-semibold font-mono text-xs ${isDark ? 'text-cyan-300 border-gray-600' : 'text-cyan-700 border-gray-200'} border-b`}>{col}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {sqlResultDisplay.rows.slice(0, 50).map((row, ri) => (
+                  <tr key={ri} className={ri % 2 === 0 ? (isDark ? 'bg-gray-800' : 'bg-white') : (isDark ? 'bg-gray-800/50' : 'bg-gray-50')}>
+                    {row.map((cell, ci) => (
+                      <td key={ci} className={`px-3 py-1.5 font-mono text-xs ${isDark ? 'text-gray-300 border-gray-700' : 'text-gray-700 border-gray-100'} border-b`}>
+                        {cell === null ? <span className="text-gray-400 italic">NULL</span> : String(cell)}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {/* Stdout output (Python) */}
       {output && (
         <div className="bg-gray-900 rounded-xl border border-gray-700 overflow-hidden mb-4">
           <div className="px-4 py-2 border-b border-gray-700 text-xs font-semibold text-gray-500 uppercase tracking-wide">Console Output</div>
