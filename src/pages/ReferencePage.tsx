@@ -74,17 +74,32 @@ export default function ReferencePage() {
     if (!jumpToSlug) return;
     const slug = jumpToSlug;
     setJumpToSlug(null);
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        const el = document.getElementById(`ref-${slug}`);
-        if (el) {
-          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          // Expand the card by clicking its button
-          const btn = el.querySelector('button');
-          if (btn) btn.click();
+
+    // Retry until element exists (filters may cause re-renders)
+    let attempts = 0;
+    const tryScroll = () => {
+      attempts++;
+      const el = document.getElementById(`ref-${slug}`);
+      if (!el) {
+        if (attempts < 20) requestAnimationFrame(tryScroll);
+        return;
+      }
+
+      // Expand the card
+      const btn = el.querySelector('[role="button"]') as HTMLElement;
+      if (btn) btn.click();
+
+      // Scroll after expansion
+      setTimeout(() => {
+        const el2 = document.getElementById(`ref-${slug}`);
+        if (el2) {
+          const top = el2.getBoundingClientRect().top + window.scrollY - 140; // 140 = header + sticky bar
+          window.scrollTo({ top, behavior: 'smooth' });
         }
-      });
-    });
+      }, 400);
+    };
+
+    requestAnimationFrame(tryScroll);
   }, [jumpToSlug]);
 
   const searchLower = searchQuery.toLowerCase();

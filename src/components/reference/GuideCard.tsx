@@ -59,7 +59,7 @@ export default function GuideCard({ guide, defaultTab = 'understand', expandedSl
   return (
     <div
       id={`ref-${guide.slug}`}
-      className={`scroll-mt-20 rounded-2xl border transition-all duration-300 ${
+      className={`scroll-mt-32 rounded-2xl border transition-all duration-300 ${
         isExpanded
           ? 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-lg'
           : 'bg-white dark:bg-gray-800/60 border-gray-200 dark:border-gray-700/50 hover:shadow-md hover:border-gray-300 dark:hover:border-gray-600'
