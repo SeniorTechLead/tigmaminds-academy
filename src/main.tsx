@@ -9,6 +9,7 @@ import { LessonMetaProvider } from './contexts/LessonMetaContext';
 import { SubscriptionProvider } from './contexts/SubscriptionContext';
 import { PyodideProvider } from './contexts/PyodideContext';
 import { SqlJsProvider } from './contexts/SqlJsContext';
+import { TsProvider } from './contexts/TsContext';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -19,7 +20,9 @@ createRoot(document.getElementById('root')!).render(
             <ProgressProvider>
               <PyodideProvider>
                 <SqlJsProvider>
-                  <App />
+                  <TsProvider>
+                    <App />
+                  </TsProvider>
                 </SqlJsProvider>
               </PyodideProvider>
             </ProgressProvider>
