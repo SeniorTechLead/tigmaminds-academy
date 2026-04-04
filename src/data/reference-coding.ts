@@ -5242,7 +5242,7 @@ SELECT park, AVG(weight) AS avg_w
 FROM elephants
 GROUP BY park
 HAVING AVG(weight) > 4000;`,
-        diagram: 'SQLAggregateDiagram',
+        diagram: 'SQLAliasDiagram',
         interactive: {
           type: 'sql-playground',
           props: {
