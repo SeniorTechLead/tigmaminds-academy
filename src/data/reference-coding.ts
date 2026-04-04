@@ -5562,6 +5562,17 @@ FROM elephants;
           '`sightings: sighting_id, elephant_id, park_id, date, location`\n\n' +
           'Now Ranga\'s weight is stored once. Update it in one place → every query that joins to elephants automatically sees the new weight. This process of removing duplication by splitting tables is called **normalization.**\n\n' +
           '**Check yourself:** In the original spreadsheet, what happens if someone misspells "Kaziranga" as "Kaziranaga" in one row? With normalized tables, could that mistake happen?',
+        intermediateContent:
+          '**How far do you split?** You could take normalization to an extreme — put every single piece of data in its own table. But that creates a different problem: your queries need 10 JOINs to answer a simple question, and each JOIN costs performance.\n\n' +
+          'In practice, you normalize enough to eliminate the update/delete/insert problems, then stop. The test: "If I change this value, do I have to change it in more than one row?" If yes → split it out into its own table.\n\n' +
+          '**Example of a judgment call:** Should `park` be a column on the elephants table or a separate parks table?\n' +
+          '- If parks just have a name → a text column is fine: `park TEXT`\n' +
+          '- If parks have name, state, area, ranger_count, established_year → a separate `parks` table avoids repeating all that data for every elephant\n\n' +
+          'The right answer depends on what data you need to store about each entity. More attributes about the related thing → more reason to split.',
+        advancedContent:
+          '**Denormalization — intentionally adding duplication back.** Sometimes a normalized database is too slow because a frequent query requires joining 5 tables. The fix: store a copy of the data you need in the table you\'re querying. For example, storing `elephant_name` directly in the sightings table so you don\'t have to JOIN elephants every time you list sightings.\n\n' +
+          'The tradeoff is explicit: reads get faster (no JOIN), but writes get more complex (update the name in BOTH tables). This is common in read-heavy applications — dashboards, analytics, feeds — where the same query runs millions of times but data changes rarely.\n\n' +
+          '**How real apps handle this:** Many applications normalize first (correct data), then add strategic denormalization for performance (fast reads). Tools like materialized views automate this — a materialized view is a pre-computed JOIN result that the database keeps up to date automatically when the source tables change.',
         code: `-- THE PROBLEM: one big messy table
 -- (Don't do this in real databases)
 CREATE TABLE bad_sightings (
