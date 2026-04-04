@@ -69,24 +69,91 @@ function LevelDots({ slug, isLevelComplete }: { slug: string; isLevelComplete: (
   );
 }
 
-/* ── Streak helpers ── */
-function getStreakData(): { current: number; best: number; todayDone: boolean; lastDate: string } {
+/* ── Streak helpers (localStorage + Supabase) ── */
+type StreakData = { current: number; best: number; todayDone: boolean; lastDate: string };
+
+function getStreakLocal(): StreakData {
   try {
     const raw = localStorage.getItem('tma_streak');
     if (raw) return JSON.parse(raw);
   } catch {}
   return { current: 0, best: 0, todayDone: false, lastDate: '' };
 }
-function updateStreak() {
+
+function saveStreakLocal(data: StreakData) {
+  localStorage.setItem('tma_streak', JSON.stringify(data));
+}
+
+async function loadStreakDB(userId: string): Promise<StreakData | null> {
+  try {
+    const { data } = await supabase
+      .from('user_plans')
+      .select('streak_data')
+      .eq('user_id', userId)
+      .maybeSingle();
+    if (data?.streak_data) return data.streak_data as StreakData;
+  } catch {}
+  return null;
+}
+
+async function saveStreakDB(userId: string, streak: StreakData) {
+  try {
+    await supabase.from('user_plans').upsert({
+      user_id: userId,
+      streak_data: streak,
+      updated_at: new Date().toISOString(),
+    }, { onConflict: 'user_id' });
+  } catch {}
+}
+
+function mergeStreaks(a: StreakData, b: StreakData): StreakData {
+  // Take the one with the most recent activity; keep highest best
+  const best = Math.max(a.best, b.best);
+  if (a.lastDate >= b.lastDate) return { ...a, best };
+  return { ...b, best };
+}
+
+function computeStreak(prev: StreakData): StreakData {
   const today = new Date().toISOString().slice(0, 10);
-  const data = getStreakData();
-  if (data.lastDate === today) return data; // already counted today
+  if (prev.lastDate === today) return prev;
   const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
-  const current = data.lastDate === yesterday ? data.current + 1 : 1;
-  const best = Math.max(current, data.best);
-  const next = { current, best, todayDone: true, lastDate: today };
-  localStorage.setItem('tma_streak', JSON.stringify(next));
-  return next;
+  const current = prev.lastDate === yesterday ? prev.current + 1 : 1;
+  const best = Math.max(current, prev.best);
+  return { current, best, todayDone: true, lastDate: today };
+}
+
+function useStreak(userId: string | undefined) {
+  const [streak, setStreak] = useState<StreakData>(getStreakLocal);
+
+  // Sync from Supabase on login
+  useEffect(() => {
+    if (!userId) return;
+    (async () => {
+      const db = await loadStreakDB(userId);
+      if (db) {
+        const local = getStreakLocal();
+        const merged = mergeStreaks(local, db);
+        setStreak(merged);
+        saveStreakLocal(merged);
+        if (JSON.stringify(merged) !== JSON.stringify(db)) await saveStreakDB(userId, merged);
+      } else {
+        // First login — push local to DB
+        const local = getStreakLocal();
+        if (local.current > 0) await saveStreakDB(userId, local);
+      }
+    })();
+  }, [userId]);
+
+  const recordActivity = useCallback(() => {
+    setStreak(prev => {
+      const next = computeStreak(prev);
+      saveStreakLocal(next);
+      if (userId) saveStreakDB(userId, next);
+      return next;
+    });
+  }, [userId]);
+
+  return { streak, recordActivity };
 }
 
 /* ── XP calculation ── */
@@ -213,7 +280,7 @@ export default function LessonPlanPage() {
   const [expandedGoal, setExpandedGoal] = useState<string | null>(null);
   const [goalTab, setGoalTab] = useState<'curated' | 'discipline'>('curated');
   const { isStoryComplete, isLevelComplete, getStoryProgress } = useProgress();
-  const [streak] = useState(getStreakData);
+  const { streak, recordActivity } = useStreak(user?.id);
 
   useEffect(() => {
     if (!user) return;
@@ -256,7 +323,10 @@ export default function LessonPlanPage() {
       if (next.has(slug)) { next.delete(slug); }
       else {
         const lesson = getLessonBySlug(slug);
-        if (lesson) next.set(slug, { id: lesson.id, addedAt: new Date().toISOString() });
+        if (lesson) {
+          next.set(slug, { id: lesson.id, addedAt: new Date().toISOString() });
+          recordActivity(); // streak: user took action today
+        }
       }
       savePlan(next);
       return next;
@@ -267,12 +337,14 @@ export default function LessonPlanPage() {
     setPlanMap(prev => {
       const next = new Map(prev);
       const now = new Date().toISOString();
+      let added = false;
       for (const slug of slugs) {
         if (!next.has(slug)) {
           const lesson = getLessonBySlug(slug);
-          if (lesson) next.set(slug, { id: lesson.id, addedAt: now });
+          if (lesson) { next.set(slug, { id: lesson.id, addedAt: now }); added = true; }
         }
       }
+      if (added) recordActivity();
       savePlan(next);
       return next;
     });
