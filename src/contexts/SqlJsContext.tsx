@@ -145,7 +145,8 @@ export function useSqlJs() {
   const resetDb = useCallback(() => {
     const db = dbRef.current;
     if (!db) return;
-    // Drop all tables and re-init
+    // Disable FK checks, drop all tables, re-init
+    db.run("PRAGMA foreign_keys = OFF");
     const tables = db.exec("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'");
     if (tables.length > 0) {
       for (const row of tables[0].values) {

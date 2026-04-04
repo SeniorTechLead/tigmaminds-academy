@@ -12,7 +12,8 @@ import SectionRenderer from '../components/reference/SectionRenderer';
 import { usePrefs } from '../contexts/PrefsContext';
 import { useAuth } from '../contexts/AuthContext';
 import { usePyodide } from '../contexts/PyodideContext';
-import { problems, type Problem, type ProblemTier, type Difficulty, type Topic } from '../data/playground-problems';
+import { useSqlJs } from '../contexts/SqlJsContext';
+import { problems, type Problem, type ProblemTier, type Difficulty, type Topic, type Language } from '../data/playground-problems';
 import { lookupSection } from '../utils/referenceLookup';
 
 const FREE_PROBLEM_COUNT = 5;
@@ -115,12 +116,16 @@ function ProblemSolver({ problem, tier, onBack }: { problem: Problem; tier: Prob
   const [running, setRunning] = useState(false);
   const [results, setResults] = useState<TestResult[]>([]);
   const [output, setOutput] = useState('');
-  const { pyodideRef, load: loadPyodide, state: ctxState, loadProgress } = usePyodide();
+  const { pyodideRef, load: loadPyodide, state: pyCtxState, loadProgress: pyLoadProgress } = usePyodide();
+  const { load: loadSqlJs, runSql, resetDb, state: sqlCtxState, loadProgress: sqlLoadProgress } = useSqlJs();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
+  const isSql = problem.language === 'sql';
+  const ctxState = isSql ? sqlCtxState : pyCtxState;
+  const loadProgress = isSql ? sqlLoadProgress : pyLoadProgress;
   const pyState = running ? 'running' as const : ctxState === 'idle' ? 'idle' as const : ctxState === 'loading' ? 'loading' as const : 'ready' as const;
 
-  const runTests = useCallback(async () => {
+  const runPythonTests = useCallback(async () => {
     const pyodide = pyodideRef.current || (await loadPyodide());
     if (!pyodide) return;
 
@@ -129,19 +134,16 @@ function ProblemSolver({ problem, tier, onBack }: { problem: Problem; tier: Prob
     setOutput('');
 
     try {
-      // Clear and define user function
       await pyodide.runPythonAsync('_out.clear()');
       await pyodide.runPythonAsync(code);
 
       const testResults: TestResult[] = [];
-      // Extract function name from the code
       const fnMatch = code.match(/def\s+(\w+)\s*\(/);
       const fnName = fnMatch ? fnMatch[1] : '';
 
       for (const tc of tier.testCases) {
         try {
           await pyodide.runPythonAsync('_out.clear()');
-          // Handle generator tier: wrap in list()
           const isGenerator = tier.starterCode.includes('yield');
           const callExpr = isGenerator
             ? `list(${fnName}(${tc.input}))`
@@ -165,7 +167,6 @@ function ProblemSolver({ problem, tier, onBack }: { problem: Problem; tier: Prob
         }
       }
 
-      // Capture any print output
       const stdout = await pyodide.runPythonAsync('_out.get()');
       if (stdout) setOutput(stdout);
 
@@ -175,7 +176,79 @@ function ProblemSolver({ problem, tier, onBack }: { problem: Problem; tier: Prob
       setOutput(err.message || String(err));
       setRunning(false);
     }
-  }, [code, tier, loadPyodide]);
+  }, [code, tier, loadPyodide, pyodideRef]);
+
+  const runSqlTests = useCallback(async () => {
+    const db = await loadSqlJs();
+    if (!db) return;
+
+    setRunning(true);
+    setResults([]);
+    setOutput('');
+
+    // Reset DB to clean state before each test run
+    resetDb();
+
+    const testResults: TestResult[] = [];
+
+    for (const tc of tier.testCases) {
+      try {
+        // Run setup SQL if provided (tc.input)
+        if (tc.input.trim()) {
+          const setupResult = runSql(tc.input);
+          if (setupResult.error) {
+            testResults.push({ label: tc.label, passed: false, expected: tc.expected, actual: `Setup error: ${setupResult.error}` });
+            continue;
+          }
+        }
+
+        // Run student's query
+        const { results: queryResults, error, rowsModified } = runSql(code);
+
+        if (error) {
+          testResults.push({ label: tc.label, passed: false, expected: tc.expected, actual: `Error: ${error}` });
+          continue;
+        }
+
+        // Compare results
+        const expectedParsed = JSON.parse(tc.expected);
+
+        if (Array.isArray(expectedParsed)) {
+          // Expected is rows: compare row data
+          const actualRows = queryResults.length > 0 ? queryResults[queryResults.length - 1].rows : [];
+          const actualStr = JSON.stringify(actualRows);
+          const expectedStr = JSON.stringify(expectedParsed);
+          testResults.push({
+            label: tc.label,
+            passed: actualStr === expectedStr,
+            expected: tc.expected,
+            actual: actualStr,
+          });
+        } else if (typeof expectedParsed === 'number') {
+          // Expected is a count (rowsModified)
+          testResults.push({
+            label: tc.label,
+            passed: rowsModified === expectedParsed,
+            expected: String(expectedParsed),
+            actual: String(rowsModified),
+          });
+        } else {
+          testResults.push({ label: tc.label, passed: false, expected: tc.expected, actual: 'Unknown expected format' });
+        }
+
+        // Reset DB between tests so they're independent
+        resetDb();
+      } catch (err: any) {
+        testResults.push({ label: tc.label, passed: false, expected: tc.expected, actual: `Error: ${err.message}` });
+        resetDb();
+      }
+    }
+
+    setResults(testResults);
+    setRunning(false);
+  }, [code, tier, loadSqlJs, runSql, resetDb]);
+
+  const runTests = isSql ? runSqlTests : runPythonTests;
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Tab') {
@@ -338,6 +411,7 @@ export default function PlaygroundPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterDifficulty, setFilterDifficulty] = useState<Difficulty | 'all'>('all');
   const [filterTopic, setFilterTopic] = useState<Topic | 'all'>('all');
+  const [filterLanguage, setFilterLanguage] = useState<Language | 'all'>('all');
 
   const isFree = (p: Problem) => p.id <= FREE_PROBLEM_COUNT;
   const canAccess = (p: Problem) => !!user || isFree(p);
@@ -345,6 +419,7 @@ export default function PlaygroundPage() {
   const filtered = problems.filter(p => {
     if (filterDifficulty !== 'all' && p.difficulty !== filterDifficulty) return false;
     if (filterTopic !== 'all' && p.topic !== filterTopic) return false;
+    if (filterLanguage !== 'all' && (p.language || 'python') !== filterLanguage) return false;
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
       return p.title.toLowerCase().includes(q) || p.story.toLowerCase().includes(q) || p.topic.includes(q);
@@ -352,7 +427,9 @@ export default function PlaygroundPage() {
     return true;
   });
 
-  const topics: Topic[] = ['strings', 'lists', 'math', 'sorting', 'dictionaries', 'loops', 'functions', 'data', 'tuples-sets', 'classes', 'recursion', 'error-handling'];
+  const pythonTopics: Topic[] = ['strings', 'lists', 'math', 'sorting', 'dictionaries', 'loops', 'functions', 'data', 'tuples-sets', 'classes', 'recursion', 'error-handling'];
+  const sqlTopics: Topic[] = ['sql-select', 'sql-joins', 'sql-aggregate', 'sql-modify'];
+  const topics = filterLanguage === 'sql' ? sqlTopics : filterLanguage === 'python' ? pythonTopics : [...pythonTopics, ...sqlTopics];
 
   // If a problem + tier is selected, show the solver
   if (selectedProblem && selectedTier) {
@@ -459,6 +536,15 @@ export default function PlaygroundPage() {
           <div className="flex items-center gap-2">
             <Filter className="w-4 h-4 text-gray-400" />
             <select
+              value={filterLanguage}
+              onChange={(e) => { setFilterLanguage(e.target.value as any); setFilterTopic('all'); }}
+              className="px-3 py-2 border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg text-sm"
+            >
+              <option value="all">All languages</option>
+              <option value="python">Python</option>
+              <option value="sql">SQL</option>
+            </select>
+            <select
               value={filterDifficulty}
               onChange={(e) => setFilterDifficulty(e.target.value as any)}
               className="px-3 py-2 border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg text-sm"
@@ -503,9 +589,16 @@ export default function PlaygroundPage() {
                     </div>
                   )}
                   <div className="flex items-center justify-between mb-3">
-                    <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${difficultyColors[p.difficulty]}`}>
-                      {p.difficulty}
-                    </span>
+                    <div className="flex items-center gap-1.5">
+                      <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${difficultyColors[p.difficulty]}`}>
+                        {p.difficulty}
+                      </span>
+                      {p.language === 'sql' && (
+                        <span className="px-2 py-0.5 rounded-full text-xs font-semibold bg-cyan-100 text-cyan-700 dark:bg-cyan-900/40 dark:text-cyan-300">
+                          SQL
+                        </span>
+                      )}
+                    </div>
                     <span className="text-xs text-gray-400 dark:text-gray-500 bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded-full">
                       {p.topic}
                     </span>
