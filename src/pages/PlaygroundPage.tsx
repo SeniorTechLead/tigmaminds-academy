@@ -126,9 +126,12 @@ function ProblemSolver({ problem, tier, onBack }: { problem: Problem; tier: Prob
   const lang = problem.language || 'python';
   const isSql = lang === 'sql';
   const isTs = lang === 'typescript';
-  const ctxState = isSql ? sqlCtxState : isTs ? tsCtxState : pyCtxState;
+  const isHtml = lang === 'html';
+  const ctxState = isHtml ? 'ready' as const : isSql ? sqlCtxState : isTs ? tsCtxState : pyCtxState;
   const loadProgress = isSql ? sqlLoadProgress : isTs ? tsLoadProgress : pyLoadProgress;
   const pyState = running ? 'running' as const : ctxState === 'idle' ? 'idle' as const : ctxState === 'loading' ? 'loading' as const : 'ready' as const;
+  const [htmlPreview, setHtmlPreview] = useState('');
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const runPythonTests = useCallback(async () => {
     const pyodide = pyodideRef.current || (await loadPyodide());
@@ -321,7 +324,94 @@ function ProblemSolver({ problem, tier, onBack }: { problem: Problem; tier: Prob
     setRunning(false);
   }, [code, tier, loadTs, runTs]);
 
-  const runTests = isTs ? runTsTests : isSql ? runSqlTests : runPythonTests;
+  const runHtmlTests = useCallback(async () => {
+    setRunning(true);
+    setResults([]);
+    setOutput('');
+    setHtmlPreview(code);
+
+    // Wait for iframe to render
+    await new Promise(r => setTimeout(r, 500));
+
+    const testResults: TestResult[] = [];
+
+    for (const tc of tier.testCases) {
+      try {
+        const assertions = JSON.parse(tc.expected) as { selector: string; text?: string; count?: number; style?: Record<string, string>; exists?: boolean; attr?: Record<string, string> }[];
+        let allPass = true;
+        const failures: string[] = [];
+
+        // Create a temporary iframe to test
+        const tempIframe = document.createElement('iframe');
+        tempIframe.style.position = 'absolute';
+        tempIframe.style.left = '-9999px';
+        tempIframe.sandbox.add('allow-scripts', 'allow-same-origin');
+        document.body.appendChild(tempIframe);
+        tempIframe.srcdoc = code;
+        await new Promise(r => setTimeout(r, 300));
+
+        const doc = tempIframe.contentDocument;
+        if (!doc) { failures.push('Could not access iframe'); allPass = false; }
+        else {
+          for (const a of assertions) {
+            const els = doc.querySelectorAll(a.selector);
+            if (a.exists === false) {
+              if (els.length > 0) { failures.push(`"${a.selector}" should not exist`); allPass = false; }
+              continue;
+            }
+            if (els.length === 0) { failures.push(`"${a.selector}" not found`); allPass = false; continue; }
+            if (a.count !== undefined && els.length !== a.count) {
+              failures.push(`Expected ${a.count} "${a.selector}", found ${els.length}`);
+              allPass = false;
+            }
+            if (a.text !== undefined) {
+              const actualText = els[0].textContent?.trim() || '';
+              if (!actualText.includes(a.text)) {
+                failures.push(`"${a.selector}" text: expected "${a.text}", got "${actualText.substring(0, 50)}"`);
+                allPass = false;
+              }
+            }
+            if (a.style) {
+              const computed = tempIframe.contentWindow?.getComputedStyle(els[0]);
+              if (computed) {
+                for (const [prop, val] of Object.entries(a.style)) {
+                  const actual = computed.getPropertyValue(prop);
+                  if (!actual.includes(val)) {
+                    failures.push(`"${a.selector}" style ${prop}: expected "${val}", got "${actual}"`);
+                    allPass = false;
+                  }
+                }
+              }
+            }
+            if (a.attr) {
+              for (const [name, val] of Object.entries(a.attr)) {
+                const actual = els[0].getAttribute(name);
+                if (actual !== val) {
+                  failures.push(`"${a.selector}" attr ${name}: expected "${val}", got "${actual}"`);
+                  allPass = false;
+                }
+              }
+            }
+          }
+        }
+        tempIframe.remove();
+
+        testResults.push({
+          label: tc.label,
+          passed: allPass,
+          expected: tc.label,
+          actual: allPass ? 'All checks passed' : failures.join('; '),
+        });
+      } catch (err: any) {
+        testResults.push({ label: tc.label, passed: false, expected: tc.expected, actual: `Error: ${err.message}` });
+      }
+    }
+
+    setResults(testResults);
+    setRunning(false);
+  }, [code, tier]);
+
+  const runTests = isHtml ? runHtmlTests : isTs ? runTsTests : isSql ? runSqlTests : runPythonTests;
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Tab') {
@@ -494,7 +584,22 @@ function ProblemSolver({ problem, tier, onBack }: { problem: Problem; tier: Prob
         </div>
       )}
 
-      {/* Stdout output (Python) */}
+      {/* HTML live preview */}
+      {isHtml && htmlPreview && (
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden mb-4">
+          <div className="px-4 py-2 border-b border-gray-200 dark:border-gray-700 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Live Preview</div>
+          <iframe
+            ref={iframeRef}
+            srcDoc={htmlPreview}
+            title="Preview"
+            sandbox="allow-scripts allow-same-origin"
+            className="w-full border-0"
+            style={{ height: 300 }}
+          />
+        </div>
+      )}
+
+      {/* Stdout output (Python/TS) */}
       {output && (
         <div className="bg-gray-900 rounded-xl border border-gray-700 overflow-hidden mb-4">
           <div className="px-4 py-2 border-b border-gray-700 text-xs font-semibold text-gray-500 uppercase tracking-wide">Console Output</div>
@@ -534,7 +639,8 @@ export default function PlaygroundPage() {
   const pythonTopics: Topic[] = ['strings', 'lists', 'math', 'sorting', 'dictionaries', 'loops', 'functions', 'data', 'tuples-sets', 'classes', 'recursion', 'error-handling'];
   const sqlTopics: Topic[] = ['sql-select', 'sql-joins', 'sql-aggregate', 'sql-modify', 'sql-subqueries'];
   const tsTopics: Topic[] = ['ts-variables', 'ts-functions', 'ts-interfaces', 'ts-unions', 'ts-arrays', 'ts-generics', 'ts-enums', 'ts-classes'];
-  const topics = filterLanguage === 'sql' ? sqlTopics : filterLanguage === 'typescript' ? tsTopics : filterLanguage === 'python' ? pythonTopics : [...pythonTopics, ...sqlTopics, ...tsTopics];
+  const htmlTopics: Topic[] = ['html-structure', 'css-styling', 'css-layout', 'html-forms', 'js-dom', 'js-events', 'html-animation', 'html-responsive'];
+  const topics = filterLanguage === 'sql' ? sqlTopics : filterLanguage === 'typescript' ? tsTopics : filterLanguage === 'html' ? htmlTopics : filterLanguage === 'python' ? pythonTopics : [...pythonTopics, ...sqlTopics, ...tsTopics, ...htmlTopics];
 
   // If a problem + tier is selected, show the solver
   if (selectedProblem && selectedTier) {
@@ -649,6 +755,7 @@ export default function PlaygroundPage() {
               <option value="python">Python</option>
               <option value="sql">SQL</option>
               <option value="typescript">TypeScript</option>
+              <option value="html">HTML/CSS/JS</option>
             </select>
             <select
               value={filterDifficulty}
@@ -707,6 +814,11 @@ export default function PlaygroundPage() {
                       {p.language === 'typescript' && (
                         <span className="px-2 py-0.5 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300">
                           TS
+                        </span>
+                      )}
+                      {p.language === 'html' && (
+                        <span className="px-2 py-0.5 rounded-full text-xs font-semibold bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300">
+                          HTML
                         </span>
                       )}
                     </div>
