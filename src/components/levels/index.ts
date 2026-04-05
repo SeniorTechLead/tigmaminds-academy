@@ -168,6 +168,7 @@ const registry: Record<string, LevelComponents> = {
   'roman-aqueducts': { Level1: lazy(() => import('./AqueductsLevel1')) },
   'greek-fire': { Level1: lazy(() => import('./GreekFireLevel1')) },
   'egyptian-embalming': { Level1: lazy(() => import('./EmbalmingLevel1')) },
+  'chinese-gunpowder': { Level1: lazy(() => import('./GunpowderLevel1')) },
 };
 
 export function getLevelComponents(slug: string): LevelComponents {
