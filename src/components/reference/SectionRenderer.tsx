@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+import { Suspense, Component, type ReactNode } from 'react';
 import type { ReferenceSection } from '../../data/reference';
 import diagramRegistry from './DiagramRegistry';
 import DiagramZoom from '../DiagramZoom';
@@ -202,6 +202,12 @@ const GATED_INTERACTIVE_TYPES = new Set([
   'harmonics-explorer', 'gaussian-explorer', 'contour-explainer', 'logic-gate-simulator', 'sql-playground', 'ts-playground', 'html-playground',
 ]);
 
+class DiagramErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
+  state = { hasError: false };
+  static getDerivedStateFromError() { return { hasError: true }; }
+  render() { return this.state.hasError ? null : this.props.children; }
+}
+
 export default function SectionRenderer({ section, level = 0 }: Props) {
   const { user } = useAuth();
   const isSignedIn = !!user;
@@ -247,13 +253,15 @@ export default function SectionRenderer({ section, level = 0 }: Props) {
 
       {/* Diagram */}
       {DiagramComponent && (
-        <Suspense fallback={<div className="h-48 rounded-xl bg-gray-100 dark:bg-gray-700/30 animate-pulse mt-3" />}>
-          <div className="mt-3">
-            <DiagramZoom>
-              <DiagramComponent />
-            </DiagramZoom>
-          </div>
-        </Suspense>
+        <DiagramErrorBoundary>
+          <Suspense fallback={<div className="h-48 rounded-xl bg-gray-100 dark:bg-gray-700/30 animate-pulse mt-3" />}>
+            <div className="mt-3">
+              <DiagramZoom>
+                <DiagramComponent />
+              </DiagramZoom>
+            </div>
+          </Suspense>
+        </DiagramErrorBoundary>
       )}
 
       {/* Interactive widget — gate rich tools for non-signed-in users */}
