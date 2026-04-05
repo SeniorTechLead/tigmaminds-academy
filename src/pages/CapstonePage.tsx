@@ -242,7 +242,7 @@ export default function CapstonePage() {
       <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800/50">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 text-center">Skills you'll demonstrate</h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400 text-center mb-8">Each skill links to its interactive guide in the Reference Library</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400 text-center mb-8">Click any skill to explore it further in the Reference Library</p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {[
               { skill: 'Python & NumPy', desc: 'Classes, functions, arrays, data pipelines', ref: '/reference/python' },
