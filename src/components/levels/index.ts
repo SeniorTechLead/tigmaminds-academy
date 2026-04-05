@@ -172,7 +172,7 @@ const registry: Record<string, LevelComponents> = {
   'polynesian-wayfinding': { Level1: lazy(() => import('./PolynesianLevel1')), Level2: lazy(() => import('./PolynesianLevel2')), Level3: lazy(() => import('./PolynesianLevel3')), Level4: lazy(() => import('./PolynesianLevel4')) },
   'mesopotamian-irrigation': { Level1: lazy(() => import('./MesopotamiaLevel1')), Level2: lazy(() => import('./MesopotamiaLevel2')), Level3: lazy(() => import('./MesopotamiaLevel3')), Level4: lazy(() => import('./MesopotamiaLevel4')) },
   'indian-wootz-steel': { Level1: lazy(() => import('./WootzSteelLevel1')), Level2: lazy(() => import('./WootzSteelLevel2')), Level3: lazy(() => import('./WootzSteelLevel3')), Level4: lazy(() => import('./WootzSteelLevel4')) },
-  'mayan-astronomy': { Level1: lazy(() => import('./MayaAstronomyLevel1')) },
+  'mayan-astronomy': { Level1: lazy(() => import('./MayaAstronomyLevel1')), Level2: lazy(() => import('./MayaAstronomyLevel2')), Level3: lazy(() => import('./MayaAstronomyLevel3')), Level4: lazy(() => import('./MayaAstronomyLevel4')) },
   'persian-ice-houses': { Level1: lazy(() => import('./PersianIceLevel1')), Level2: lazy(() => import('./PersianIceLevel2')), Level3: lazy(() => import('./PersianIceLevel3')), Level4: lazy(() => import('./PersianIceLevel4')) },
   'zheng-he-fleet': { Level1: lazy(() => import('./ZhengHeLevel1')), Level2: lazy(() => import('./ZhengHeLevel2')), Level3: lazy(() => import('./ZhengHeLevel3')), Level4: lazy(() => import('./ZhengHeLevel4')) },
   'gothic-cathedrals': { Level1: lazy(() => import('./CathedralsLevel1')), Level2: lazy(() => import('./CathedralsLevel2')), Level3: lazy(() => import('./CathedralsLevel3')), Level4: lazy(() => import('./CathedralsLevel4')) },
