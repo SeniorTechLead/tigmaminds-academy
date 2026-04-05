@@ -170,6 +170,16 @@ const registry: Record<string, LevelComponents> = {
   'egyptian-embalming': { Level1: lazy(() => import('./EmbalmingLevel1')) },
   'chinese-gunpowder': { Level1: lazy(() => import('./GunpowderLevel1')) },
   'polynesian-wayfinding': { Level1: lazy(() => import('./PolynesianLevel1')) },
+  'mesopotamian-irrigation': { Level1: lazy(() => import('./MesopotamiaLevel1')) },
+  'indian-wootz-steel': { Level1: lazy(() => import('./WootzSteelLevel1')) },
+  'mayan-astronomy': { Level1: lazy(() => import('./MayaAstronomyLevel1')) },
+  'persian-ice-houses': { Level1: lazy(() => import('./PersianIceLevel1')) },
+  'zheng-he-fleet': { Level1: lazy(() => import('./ZhengHeLevel1')) },
+  'gothic-cathedrals': { Level1: lazy(() => import('./CathedralsLevel1')) },
+  'ibn-al-haytham-optics': { Level1: lazy(() => import('./IbnAlHaythamLevel1')) },
+  'silk-road-network': { Level1: lazy(() => import('./SilkRoadLevel1')) },
+  'leonardo-machines': { Level1: lazy(() => import('./LeonardoLevel1')) },
+  'the-black-death': { Level1: lazy(() => import('./BlackDeathLevel1')) },
 };
 
 export function getLevelComponents(slug: string): LevelComponents {
