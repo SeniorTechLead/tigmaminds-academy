@@ -1612,11 +1612,11 @@ bars = ax.barh(range(len(items)), costs, color='#06b6d4', alpha=0.8)
 ax.set_yticks(range(len(items)))
 ax.set_yticklabels(items, color='white', fontsize=7)
 ax.set_xlabel('Cost ($)', color='white')
-ax.set_title(f'Bill of Materials (\${total_cost} total)', color='white', fontsize=11)
+ax.set_title(f'Bill of Materials (\{total_cost} total)', color='white', fontsize=11)
 
 for bar, cost in zip(bars, costs):
     ax.text(bar.get_width() + 0.5, bar.get_y() + bar.get_height()/2,
-            f'\${cost}', va='center', color='white', fontsize=7)
+            f'\{cost}', va='center', color='white', fontsize=7)
 
 plt.tight_layout(rect=[0, 0, 1, 0.96])
 plt.show()
@@ -1630,7 +1630,7 @@ print(f"Whisker lengths: {system['whisker_lengths_cm']} cm")
 print(f"Sensing range: {system['sensing_range_cm']} cm (360 degrees)")
 print(f"Processor: {system['processor']}")
 print(f"Total power: {total_power} mW")
-print(f"Total cost: \${total_cost}")
+print(f"Total cost: \{total_cost}")
 print()
 print("REQUIREMENTS COMPLIANCE:")
 n_pass = 0

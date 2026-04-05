@@ -860,7 +860,7 @@ plt.tight_layout()
 plt.show()
 
 print(f"Optimal stocking density for max yield:  {densities[best_yield_idx]:.0f} fish/m3 ({final_yields[best_yield_idx]:.0f} kg)")
-print(f"Optimal stocking density for max profit: {densities[best_profit_idx]:.0f} fish/m3 (\${profits[best_profit_idx]:.0f})")
+print(f"Optimal stocking density for max profit: {densities[best_profit_idx]:.0f} fish/m3 (\{profits[best_profit_idx]:.0f})")
 print(f"Max yield density FCR: {final_fcrs[best_yield_idx]:.1f}")
 print(f"Max profit density FCR: {final_fcrs[best_profit_idx]:.1f}")
 print()

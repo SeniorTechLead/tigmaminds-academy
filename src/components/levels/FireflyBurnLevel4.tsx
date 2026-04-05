@@ -933,7 +933,7 @@ if best:
         f'  Continuous: {"Yes" if best["continuous"] else "No"}',
         f'',
         f'ECONOMICS:',
-        f'  Monthly substrate: \${best["monthly_cost"]:.2f}',
+        f'  Monthly substrate: \{best["monthly_cost"]:.2f}',
         f'  Score: {best["score"]:.3f}',
     ]
 else:
@@ -952,7 +952,7 @@ print("Design optimization complete.")
 print(f"Evaluated {len(all_results)} configurations")
 print(f"Feasible designs: {len(feasible)}")
 if best:
-    print(f"Optimal: {best['organism']}, {best['volume_L']}L, {best['luminous_flux_lm']:.3f} lm, \${best['monthly_cost']:.2f}/mo")`,
+    print(f"Optimal: {best['organism']}, {best['volume_L']}L, {best['luminous_flux_lm']:.3f} lm, \{best['monthly_cost']:.2f}/mo")`,
       challenge: `Add a Pareto front visualization: find all designs where no other design is simultaneously brighter AND cheaper. Plot the Pareto front and identify the "knee" — the design with the best balance between brightness and cost. This is multi-objective optimization in action.`,
       successHint: `You have built a complete Bioluminescence Efficiency Calculator — from quantum chemistry through color science to engineering design optimization. This capstone demonstrates that understanding nature\'s solutions (firefly light) enables engineering nature-inspired solutions (bioluminescent devices). The 41% quantum yield, evolved over 100 million years, is now a parameter in your optimizer.`,
     },

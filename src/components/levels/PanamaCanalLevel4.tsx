@@ -382,7 +382,7 @@ for n_ships in [25, 35, 40, 45, 50, 60]:
     water_ml = scheduler.water_used / 1e6
 
     print(f"{n_ships:>7} {len(done):>10} {len(rejected):>9} "
-          f"${revenue/1e6:>9.1f}M {avg_wait:>8.0f}min {water_ml:>9.0f}")
+          f"{revenue/1e6:>9.1f}M {avg_wait:>8.0f}min {water_ml:>9.0f}")
 
 # Detailed breakdown for 40-ship day
 print("\\n=== Detailed Day (40 ships) ===")
@@ -402,7 +402,8 @@ for s in done:
 print(f"{'Type':<18} {'Count':>6} {'Revenue':>10} {'Avg Wait':>10}")
 print("-" * 46)
 for t, stats in sorted(type_stats.items()):
-    print(f"{t:<18} {stats['count']:>6} ${stats['revenue']/1e6:>8.1f}M "
+    rev_m = stats['revenue']/1e6
+    print(f"{t:<18} {stats['count']:>6} {rev_m:>8.1f}M "
           f"{np.mean(stats['wait']):>8.0f}min")`,
       challenge: 'Implement a "revenue-maximising" scheduler that prioritises high-toll ships over first-come-first-served. Compare it against the current priority scheduler: does revenue go up? What happens to average wait time for small bulk carriers? This is the fairness vs efficiency trade-off that every scheduling system faces.',
       successHint: 'You built a scheduling system for one of the busiest chokepoints in global trade. The same scheduling algorithms are used by airports (runway assignment), hospitals (operating theatres), and cloud computing platforms (job scheduling). The greedy heuristic with priority classes is a practical, widely-used approach.',
@@ -518,7 +519,7 @@ for year in range(1, 6):
 
     min_level = min(h["level"] for h in year_hist)
     restricted_days = sum(1 for h in year_hist if h["tier"] != "Normal")
-    print(f"Year {year}: {year_ships:,} ships | Revenue: ${year_rev/1e9:.2f}B | "
+    print(f"Year {year}: {year_ships:,} ships | Revenue: {year_rev/1e9:.2f}B | "
           f"Min level: {min_level:.2f}m | Restricted days: {restricted_days}")
 
 # Drought scenario (Year 3 has 40% less rainfall)
@@ -677,7 +678,7 @@ baseline_rev = results["Baseline (current)"]["avg_ships_yr"] * toll
 for name, r in results.items():
     rev = r["avg_ships_yr"] * toll
     diff = rev - baseline_rev
-    print(f"{name:<32} ${rev/1e9:>5.2f}B/yr  ({'+' if diff >= 0 else ''}{diff/1e6:>7.0f}M)")
+    print(f"{name:<32} {rev/1e9:>5.2f}B/yr  ({'+' if diff >= 0 else ''}{diff/1e6:>7.0f}M)")
 
 print("""
 4. RISK ASSESSMENT

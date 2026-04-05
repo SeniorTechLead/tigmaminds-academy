@@ -17,10 +17,10 @@ This brings together everything from Levels 1-3: orbital mechanics, the rocket e
 The first step is **system design** — defining classes and data structures before writing a single calculation. Apollo's flight software was designed by MIT's Instrumentation Lab; they spent two years on architecture before writing code.
 
 *System design means deciding what your program does, how it's organized, and what data flows between components — BEFORE you write code.*`,
-      analogy: 'Before Apollo 11 launched, NASA ran thousands of simulations on paper and on computers. Every phase — launch, translunar injection, lunar orbit insertion, descent, ascent, return — was planned to the second and to the kilogram of fuel. The mission plan was the "architecture" and the Saturn V was the "implementation." You are doing the same thing: architecture first, code second.',
+      analogy: 'Before Apollo 11 launched, NASA ran thousands of simulations. Every phase was planned to the second and to the kilogram of fuel. The mission plan was the "architecture" and the Saturn V was the "implementation." Architecture first, code second.',
       storyConnection: 'When Mission Control calculated the trajectory for Apollo 11, they did not improvise. Every manoeuvre was pre-computed, every contingency mapped. The "go/no-go" decisions at each phase boundary were possible only because the mission was architected as distinct, testable modules — exactly what we are building now.',
       checkQuestion: 'Why do we separate Orbit, Spacecraft, and Engine into different classes instead of putting everything in one big function?',
-      checkAnswer: 'Because each class represents a distinct physical entity with its own properties and behaviours. An orbit has altitude and velocity; a spacecraft has mass and fuel; an engine has thrust and efficiency. Separating them lets you swap components (different engines, different orbits) without rewriting the whole program. Apollo used the same command module with different service module configurations — modularity in hardware mirrors modularity in software.',
+      checkAnswer: 'Each class represents a distinct physical entity with its own properties. Separating them lets you swap components (different engines, different orbits) without rewriting the program. Apollo used the same command module with different service module configurations — modularity in hardware mirrors modularity in software.',
       codeIntro: 'Design the architecture of the Orbital Transfer Calculator — define the Orbit, Engine, and Spacecraft classes.',
       code: `import numpy as np
 
@@ -111,23 +111,18 @@ for sc in [csm, lm_descent, lm_ascent]:
     },
     {
       title: 'Hohmann transfer — computing the delta-v budget',
-      concept: `Now we build the **trajectory engine**: the code that calculates the delta-v for each phase of the Apollo mission using **Hohmann transfer orbits**.
-
-A Hohmann transfer is the most fuel-efficient way to move between two circular orbits. It uses an elliptical orbit that is tangent to both the departure and arrival orbits. Two burns are required:
-
-1. **Departure burn** — accelerate from the lower orbit onto the transfer ellipse
-2. **Arrival burn** — accelerate (or decelerate) from the transfer ellipse into the higher orbit
+      concept: `Now we build the **trajectory engine**: the code that calculates the delta-v for each phase using **Hohmann transfer orbits** — the most fuel-efficient way to move between two circular orbits. Two burns are required: a departure burn onto the transfer ellipse and an arrival burn into the target orbit.
 
 For Apollo, the key manoeuvres were:
-- **TLI (Trans-Lunar Injection)**: LEO → transfer ellipse to Moon (~3,100 m/s)
-- **LOI (Lunar Orbit Insertion)**: capture into lunar orbit (~900 m/s)
-- **Descent**: lunar orbit → surface (~1,700 m/s with gravity losses)
-- **Ascent**: surface → lunar orbit (~1,900 m/s)
-- **TEI (Trans-Earth Injection)**: lunar orbit → return trajectory (~900 m/s)
+- **TLI**: LEO to Moon transfer (~3,100 m/s)
+- **LOI**: capture into lunar orbit (~900 m/s)
+- **Descent**: lunar orbit to surface (~1,700 m/s with gravity losses)
+- **Ascent**: surface to lunar orbit (~1,900 m/s)
+- **TEI**: lunar orbit to Earth return (~900 m/s)
 
 The **delta-v budget** is the sum of all these. If the spacecraft cannot provide the total delta-v, the mission is impossible.
 
-*A Hohmann transfer uses the minimum energy to move between two circular orbits. It was discovered by Walter Hohmann in 1925 and remains the backbone of interplanetary mission planning.*`,
+*A Hohmann transfer was discovered by Walter Hohmann in 1925 and remains the backbone of interplanetary mission planning.*`,
       analogy: 'Imagine driving from one city to another on a highway. You accelerate onto the on-ramp (departure burn), cruise on the highway (transfer ellipse), then decelerate on the off-ramp (arrival burn). A Hohmann transfer is the "highway" of space — the most fuel-efficient route, though not the fastest.',
       storyConnection: 'Apollo 11\'s translunar coast took about 73 hours — three days of "highway driving" on the transfer ellipse after the TLI burn. Armstrong, Aldrin, and Collins had nothing to do but wait, monitor systems, and make small course corrections. The physics of the Hohmann transfer dictated their schedule.',
       checkQuestion: 'Why can\'t a spacecraft just point at the Moon and fire its engines straight there?',
@@ -216,21 +211,17 @@ for phase in apollo_actual:
     err = abs(calc - actual) / actual * 100
     print(f"  {phase:<12} Actual: {actual:>5}  Computed: {calc:>6.0f}  Error: {err:>4.1f}%")`,
       challenge: 'Compute the delta-v budget for a Mars mission: LEO to Mars transfer orbit, Mars orbit insertion, and Mars landing. Mars mass is 6.39e23 kg, radius 3.39e6 m, distance from Sun ~2.28e11 m. How does the total delta-v compare to the Moon mission? This is why Mars missions are so much harder.',
-      successHint: 'You have built a trajectory engine that computes the delta-v budget for the entire Apollo mission. The Hohmann transfer math — two tangent burns on an elliptical path — is used by every space agency on Earth for mission planning. Your computed values match Apollo 11 actuals within 5-10%, which is excellent for a simplified model.',
+      successHint: 'You built a trajectory engine computing the delta-v budget for the entire Apollo mission. Hohmann transfer math is used by every space agency for mission planning. Your values match Apollo 11 actuals within 5-10% — excellent for a simplified model.',
     },
     {
       title: 'Powered descent simulator — landing on the Moon',
-      concept: `The most dangerous phase of Apollo was the **powered descent** — 12 minutes from lunar orbit to touchdown. The Lunar Module\'s descent engine had to slow the spacecraft from 1,700 m/s to zero while fighting lunar gravity, all with a finite fuel supply.
+      concept: `The most dangerous phase of Apollo was the **powered descent** — 12 minutes from lunar orbit to touchdown. The LM\'s descent engine had to slow from 1,700 m/s to zero while fighting lunar gravity, all with finite fuel.
 
-Our simulator models this descent second by second:
-- **Thrust** decelerates the spacecraft against gravity
-- **Fuel burns** reduce the spacecraft mass (which changes the acceleration)
-- **Altitude** decreases toward zero — the surface
-- **The 1202 alarm** — at 33,500 feet, Apollo 11\'s computer overflowed. We simulate what happens if the computer restarts and thrust is interrupted for several seconds
+Our simulator models this second by second: thrust decelerates against gravity, fuel burns reduce mass (changing acceleration), altitude drops toward zero, and we recreate the **1202 alarm** — Apollo 11\'s computer overflow that interrupted thrust for critical seconds.
 
-If fuel runs out before velocity reaches zero, the spacecraft crashes. If velocity reaches zero before altitude reaches zero, the spacecraft hovers (wasting fuel) or ascends. The pilot — and our simulator — must balance thrust against fuel to achieve soft touchdown.
+If fuel runs out before velocity reaches zero, the spacecraft crashes. The pilot must balance thrust against fuel for soft touchdown.
 
-*Powered descent is a control problem: you must drive velocity to zero at the exact moment altitude reaches zero, with a limited fuel budget. One variable wrong and the mission fails.*`,
+*Powered descent is a control problem: drive velocity to zero at the exact moment altitude reaches zero, with a limited fuel budget.*`,
       analogy: 'Imagine stopping a car at a precise white line. If you brake too early, you stop short and have to creep forward (wasting fuel). If you brake too late, you overshoot (crash). Now imagine the brake pedal also makes the car lighter over time, so the same pressure brakes harder as you slow down. That is powered descent — a moving target requiring constant adjustment.',
       storyConnection: 'At 33,500 feet, the Apollo 11 guidance computer triggered a 1202 alarm — executive overflow from the rendezvous radar feeding unwanted data. Steve Bales in Mission Control had 30 seconds to call "go" or "abort." He called "go." Armstrong took manual control in the final 90 seconds when the planned landing site turned out to be a boulder field. Thirteen seconds of fuel remained at touchdown.',
       checkQuestion: 'Why does decreasing spacecraft mass during the burn actually help the descent?',
@@ -341,27 +332,17 @@ if result_alarm["vel"][idx_a] < 2.0:
 else:
     print(f"  Status: HARD LANDING — impact at {result_alarm['vel'][idx_a]:.1f} m/s")`,
       challenge: 'Add a "boulder field" scenario: at altitude 150m, the pilot sees boulders and increases throttle to hover (throttle to hold velocity near zero) while translating horizontally for 30 seconds, then resumes descent. How much extra fuel does this cost? Armstrong did exactly this — it left him with 13 seconds of fuel.',
-      successHint: 'You have built a descent simulator that captures the core physics of lunar landing: thrust vs gravity, decreasing mass, finite fuel. The 1202 alarm scenario shows how a computer failure affects the fuel budget — the same analysis Mission Control performed in real time on July 20, 1969. Your simulator is a simplified version of the software that actually guided the LM to the surface.',
+      successHint: 'You built a descent simulator capturing the core physics of lunar landing: thrust vs gravity, decreasing mass, finite fuel. The 1202 alarm scenario mirrors Mission Control\'s real-time analysis on July 20, 1969.',
     },
     {
       title: 'Mission timeline — launch to splashdown',
-      concept: `Now we integrate all phases into a **complete mission timeline** — from launch at Kennedy Space Center to splashdown in the Pacific Ocean. Each phase has a start time, duration, delta-v, and fuel consumption. The timeline must be **self-consistent**: fuel burned in one phase reduces mass for the next.
+      concept: `Now we integrate all phases into a **complete mission timeline** — from launch to splashdown. Each phase has a start time, duration, delta-v, and fuel consumption. The timeline must be **self-consistent**: fuel burned in one phase reduces mass for the next.
 
-The Apollo 11 timeline:
-- **T+0:00:00** — Launch (Saturn V, 7.5 million pounds of thrust)
-- **T+0:11:49** — Earth orbit insertion (LEO at 185 km)
-- **T+2:44:16** — TLI burn (S-IVB third stage, 5 min 47 sec)
-- **T+75:49:50** — LOI burn (SPS engine, 5 min 57 sec)
-- **T+102:33:05** — Powered descent initiation
-- **T+102:45:42** — Touchdown on the Moon (Sea of Tranquility)
-- **T+124:21:12** — Lunar liftoff
-- **T+128:03:00** — Docking with CSM
-- **T+135:23:42** — TEI burn (SPS engine, 2 min 28 sec)
-- **T+195:18:35** — Splashdown (Pacific Ocean)
+Apollo 11 lasted 195 hours 18 minutes: launch at T+0, LEO at T+12m, TLI at T+2h44m, LOI at T+75h50m, touchdown at T+102h46m, liftoff at T+124h21m, TEI at T+135h24m, splashdown at T+195h19m.
 
-Our mission planner will compute each phase sequentially, tracking cumulative time, fuel, and mass throughout.
+Our mission planner computes each phase sequentially, tracking cumulative time, fuel, and mass throughout.
 
-*A mission timeline is the integration of all orbital mechanics, propulsion, and operational phases into a single coherent plan. It is the master document of any space mission.*`,
+*A mission timeline is the master document of any space mission — the integration of all mechanics, propulsion, and operations into one coherent plan.*`,
       analogy: 'A mission timeline is like a multi-leg relay race. Each runner (mission phase) must receive the baton (spacecraft state) from the previous runner. If one runner drops the baton — burns too much fuel, arrives at the wrong velocity — every subsequent runner is affected. The timeline tracks the baton through every hand-off.',
       storyConnection: 'Apollo 11 lasted 8 days, 3 hours, 18 minutes, and 35 seconds — 195 hours from launch to splashdown. Every second was planned, every manoeuvre had a backup, every "go/no-go" decision was made against the timeline. The mission succeeded because the timeline was the single source of truth for 400,000 engineers and three astronauts.',
       checkQuestion: 'Why must we compute phases sequentially rather than independently?',
@@ -369,153 +350,97 @@ Our mission planner will compute each phase sequentially, tracking cumulative ti
       codeIntro: 'Build a complete mission timeline from launch to splashdown, tracking time, mass, and fuel through every phase.',
       code: `import numpy as np
 
-ISP_SPS = 314    # SPS specific impulse (s)
-ISP_DPS = 311    # DPS specific impulse (s)
-ISP_APS = 311    # APS specific impulse (s)
+ISP_SPS, ISP_DPS, ISP_APS = 314, 311, 311  # specific impulse (s)
 g0 = 9.81
 
-def fuel_for_dv(delta_v, isp, mass_after_burn):
-    """Tsiolkovsky: fuel needed given delta-v, Isp, and final mass."""
+def fuel_for_dv(dv, isp, m_final):
     ve = isp * g0
-    mass_ratio = np.exp(delta_v / ve)
-    mass_before = mass_after_burn * mass_ratio
-    return mass_before - mass_after_burn
+    return m_final * (np.exp(dv / ve) - 1)
 
-def burn_time(fuel_mass, thrust, isp):
-    """How long the burn takes."""
-    mass_flow = thrust / (isp * g0)
-    return fuel_mass / mass_flow
+def burn_time(fuel, thrust, isp):
+    return fuel / (thrust / (isp * g0))
 
-# === Spacecraft masses (kg) ===
-csm_dry = 11_900
-csm_fuel = 18_410
-csm_thrust = 91_200
+# Spacecraft masses (kg)
+csm_dry, csm_fuel, csm_thrust = 11_900, 18_410, 91_200
+lm_desc_dry, lm_desc_fuel, lm_desc_thrust = 2_150, 8_200, 45_040
+lm_asc_dry, lm_asc_fuel, lm_asc_thrust = 2_150, 2_353, 15_600
 
-lm_descent_dry = 2_150
-lm_descent_fuel = 8_200
-lm_descent_thrust = 45_040
-
-lm_ascent_dry = 2_150
-lm_ascent_fuel = 2_353
-lm_ascent_thrust = 15_600
-
-# === Phase-by-phase computation ===
 phases = []
-t_cumul = 0.0
-fuel_remaining = {"CSM": csm_fuel, "LM_desc": lm_descent_fuel, "LM_asc": lm_ascent_fuel}
+t = 0.0
+fuel_left = {"CSM": csm_fuel, "LM_desc": lm_desc_fuel, "LM_asc": lm_asc_fuel}
 
-# Phase 1: Launch to LEO (Saturn V — not modelled in detail)
-t_cumul += 11.0 * 60 + 49  # 11 min 49 sec
-phases.append(("Launch to LEO", t_cumul, 0, "Saturn V stages"))
+# Launch to LEO
+t += 11*60+49; phases.append(("Launch to LEO", t, 0, "Saturn V"))
+# LEO coast
+t += 2*3600+32*60; phases.append(("LEO coast", t, 0, "Parking orbit"))
+# TLI burn (S-IVB)
+t += 5*60+47; phases.append(("TLI burn", t, 3100, "S-IVB stage"))
+# Translunar coast
+t += 73*3600; phases.append(("Translunar coast", t, 0, "73h cruise"))
 
-# Phase 2: LEO coast (1.5 orbits before TLI)
-t_cumul += 2 * 3600 + 32 * 60  # about 2h32m parking orbit
-phases.append(("LEO coast", t_cumul, 0, "Parking orbit"))
-
-# Phase 3: TLI burn (S-IVB third stage — we track CSM fuel from LOI onward)
-dv_tli = 3100  # m/s (S-IVB)
-t_tli_burn = 5 * 60 + 47
-t_cumul += t_tli_burn
-phases.append(("TLI burn", t_cumul, dv_tli, "S-IVB third stage"))
-
-# Phase 4: Translunar coast
-coast_hours = 73.0
-t_cumul += coast_hours * 3600
-phases.append(("Translunar coast", t_cumul, 0, f"{coast_hours:.0f}h cruise"))
-
-# Phase 5: LOI burn (SPS engine on CSM)
+# LOI burn (SPS)
 dv_loi = 900
-mass_after_loi = csm_dry + lm_descent_dry + lm_descent_fuel + lm_ascent_dry + lm_ascent_fuel
-fuel_loi = fuel_for_dv(dv_loi, ISP_SPS, mass_after_loi)
-fuel_remaining["CSM"] -= fuel_loi
-t_burn_loi = burn_time(fuel_loi, csm_thrust, ISP_SPS)
-t_cumul += t_burn_loi
-phases.append(("LOI burn", t_cumul, dv_loi, f"SPS — {fuel_loi:.0f}kg fuel"))
+m_after = csm_dry + lm_desc_dry + lm_desc_fuel + lm_asc_dry + lm_asc_fuel
+f_loi = fuel_for_dv(dv_loi, ISP_SPS, m_after)
+fuel_left["CSM"] -= f_loi
+t += burn_time(f_loi, csm_thrust, ISP_SPS)
+phases.append(("LOI burn", t, dv_loi, f"SPS — {f_loi:.0f}kg"))
 
-# Phase 6: Lunar orbit operations (undocking, systems check)
-t_cumul += 26.5 * 3600
-phases.append(("Lunar orbit ops", t_cumul, 0, "Undock, checkout"))
+# Lunar orbit ops
+t += 26.5*3600; phases.append(("Lunar orbit ops", t, 0, "Undock"))
+# Powered descent (DPS)
+dv_desc = 1700
+f_desc = fuel_for_dv(dv_desc, ISP_DPS, lm_desc_dry + lm_asc_dry + lm_asc_fuel)
+fuel_left["LM_desc"] -= f_desc
+t += 12*60+37; phases.append(("Powered descent", t, dv_desc, f"DPS — {f_desc:.0f}kg"))
 
-# Phase 7: Powered descent (DPS engine)
-dv_descent = 1700
-fuel_descent = fuel_for_dv(dv_descent, ISP_DPS, lm_descent_dry + lm_ascent_dry + lm_ascent_fuel)
-fuel_remaining["LM_desc"] -= fuel_descent
-t_descent = 12 * 60 + 37
-t_cumul += t_descent
-phases.append(("Powered descent", t_cumul, dv_descent, f"DPS — {fuel_descent:.0f}kg fuel"))
+# Lunar surface
+t += 21*3600+36*60; phases.append(("Lunar surface", t, 0, "EVA"))
+# Ascent (APS — descent stage jettisoned)
+dv_asc = 1900
+f_asc = fuel_for_dv(dv_asc, ISP_APS, lm_asc_dry)
+fuel_left["LM_asc"] -= f_asc
+t += burn_time(f_asc, lm_asc_thrust, ISP_APS) + 7*60
+phases.append(("Lunar ascent", t, dv_asc, f"APS — {f_asc:.0f}kg"))
 
-# Phase 8: Lunar surface stay
-t_cumul += 21 * 3600 + 36 * 60
-phases.append(("Lunar surface", t_cumul, 0, "EVA, experiments"))
-
-# Phase 9: Lunar ascent (APS engine — descent stage jettisoned)
-dv_ascent = 1900
-fuel_ascent = fuel_for_dv(dv_ascent, ISP_APS, lm_ascent_dry)
-fuel_remaining["LM_asc"] -= fuel_ascent
-t_ascent_burn = burn_time(fuel_ascent, lm_ascent_thrust, ISP_APS)
-t_cumul += t_ascent_burn + 7 * 60
-phases.append(("Lunar ascent", t_cumul, dv_ascent, f"APS — {fuel_ascent:.0f}kg fuel"))
-
-# Phase 10: Rendezvous and docking
-t_cumul += 3.5 * 3600
-phases.append(("Rendezvous & dock", t_cumul, 0, "Ascent stage jettisoned"))
-
-# Phase 11: TEI burn (SPS engine)
+# Rendezvous
+t += 3.5*3600; phases.append(("Rendezvous & dock", t, 0, "LM jettisoned"))
+# TEI burn (SPS)
 dv_tei = 900
-mass_after_tei = csm_dry
-fuel_tei = fuel_for_dv(dv_tei, ISP_SPS, mass_after_tei)
-fuel_remaining["CSM"] -= fuel_tei
-t_burn_tei = burn_time(fuel_tei, csm_thrust, ISP_SPS)
-t_cumul += t_burn_tei
-phases.append(("TEI burn", t_cumul, dv_tei, f"SPS — {fuel_tei:.0f}kg fuel"))
+f_tei = fuel_for_dv(dv_tei, ISP_SPS, csm_dry)
+fuel_left["CSM"] -= f_tei
+t += burn_time(f_tei, csm_thrust, ISP_SPS)
+phases.append(("TEI burn", t, dv_tei, f"SPS — {f_tei:.0f}kg"))
 
-# Phase 12: Trans-Earth coast
-t_cumul += 60 * 3600
-phases.append(("Trans-Earth coast", t_cumul, 0, "60h return"))
+# Trans-Earth coast and splashdown
+t += 60*3600; phases.append(("Trans-Earth coast", t, 0, "60h return"))
+t += 30*60; phases.append(("Splashdown", t, 0, "Pacific Ocean"))
 
-# Phase 13: Re-entry and splashdown
-t_cumul += 30 * 60
-phases.append(("Re-entry & splashdown", t_cumul, 0, "Pacific Ocean"))
-
-# === Print timeline ===
-print("=" * 72)
-print("          APOLLO MISSION TIMELINE — FULL COMPUTATION")
-print("=" * 72)
+print("=" * 68)
+print("        APOLLO MISSION TIMELINE — FULL COMPUTATION")
+print("=" * 68)
 total_dv = 0
-for name, t, dv, note in phases:
-    h = t / 3600
-    d = h / 24
-    total_dv += dv
-    dv_str = f"{dv:>6} m/s" if dv > 0 else "       —"
-    print(f"T+{h:>7.1f}h ({d:>4.1f}d)  {name:<25} {dv_str}  [{note}]")
+for name, tm, dv, note in phases:
+    h = tm/3600; total_dv += dv
+    dv_s = f"{dv:>5} m/s" if dv else "      —"
+    print(f"T+{h:>6.1f}h ({h/24:>4.1f}d)  {name:<22} {dv_s}  [{note}]")
 
-print("-" * 72)
-print(f"Total mission time: {t_cumul/3600:.1f} hours ({t_cumul/3600/24:.1f} days)")
-print(f"Total delta-v:      {total_dv} m/s")
+print("-" * 68)
+print(f"Total: {t/3600:.1f}h ({t/3600/24:.1f}d) | delta-v: {total_dv} m/s")
 print(f"\\nFuel remaining:")
-for tank, fuel in fuel_remaining.items():
-    print(f"  {tank:<10}: {fuel:>7.0f} kg")
-print(f"\\nApollo 11 actual: 195.3 hours (8.1 days)")
-print(f"Our computation:  {t_cumul/3600:.1f} hours ({t_cumul/3600/24:.1f} days)")`,
+for tank, f in fuel_left.items():
+    print(f"  {tank:<10}: {f:>7.0f} kg")
+print(f"\\nApollo 11 actual: 195.3h | Computed: {t/3600:.1f}h")`,
       challenge: 'Add a contingency analysis: what if LOI requires 10% more delta-v than planned (rougher capture trajectory)? Recompute the entire timeline downstream — does the CSM have enough fuel for TEI? What is the remaining margin? This is exactly the analysis Mission Control ran for every "what if" scenario.',
       successHint: 'You have built a complete mission computer — tracking mass, fuel, time, and delta-v through every phase of an Apollo-class mission. The sequential computation, where each phase inherits state from the previous one, is exactly how real mission planning software works. Your timeline matches Apollo 11 within a few hours — remarkably close for a simplified model.',
     },
     {
       title: 'Technical report — validation and skills portfolio',
-      concept: `The final step in any engineering project is **documentation** — recording what you built, how it works, and how it compares to reality. A well-documented capstone project becomes a **portfolio piece** that demonstrates your skills.
-
-Your Orbital Transfer Calculator report should include:
-
-1. **Introduction** — what problem does it solve?
-2. **Methodology** — Hohmann transfers, Tsiolkovsky equation, descent simulation
-3. **Results** — delta-v budget, mission timeline, descent fuel margins
-4. **Validation** — compare computed values against Apollo 11 actual data
-5. **Limitations** — what does the model simplify or ignore?
-6. **Future work** — patched conics, 3-body problem, Monte Carlo trajectory analysis
+      concept: `The final step is **documentation** — recording what you built, how it works, and how it compares to reality. Your report includes introduction, methodology, results, validation against Apollo 11 data, limitations, and future work.
 
 Validation is critical. Any model that cannot be checked against known data is speculation, not engineering. Apollo 11 provides the perfect benchmark: every manoeuvre was recorded to high precision.
 
-*The ability to explain technical work clearly is often more valuable than the work itself. A brilliant analysis that nobody understands has zero impact.*`,
+*The ability to explain technical work clearly is often more valuable than the work itself.*`,
       analogy: 'A pilot logs every flight — hours, conditions, manoeuvres, anomalies. This logbook is not busywork; it is evidence of skill and experience. Your technical report is your flight logbook for this project: evidence that you can design, build, and validate an engineering tool.',
       storyConnection: 'Every Apollo mission produced a detailed post-flight report — thousands of pages documenting every system, every anomaly, every deviation from the plan. The Apollo 11 Mission Report is still studied today by engineers designing missions to the Moon and Mars. Your report follows the same tradition: document what you built so others can learn from it.',
       checkQuestion: 'Your computed TLI delta-v is 3,100 m/s but the actual Apollo 11 value was 3,050 m/s. Is that a problem?',
@@ -523,116 +448,77 @@ Validation is critical. Any model that cannot be checked against known data is s
       codeIntro: 'Generate a validation report and skills portfolio for the Orbital Transfer Calculator.',
       code: `import numpy as np
 
-# Computed vs actual Apollo 11 values
 validation = {
-    "TLI delta-v (m/s)":         (3100, 3050),
-    "LOI delta-v (m/s)":         (900, 889),
-    "Descent delta-v (m/s)":     (1700, 1694),
-    "Ascent delta-v (m/s)":      (1900, 1867),
-    "TEI delta-v (m/s)":         (900, 1076),
-    "Translunar coast (hr)":     (73.0, 73.1),
-    "Lunar surface stay (hr)":   (21.6, 21.6),
-    "Total mission time (hr)":   (195.0, 195.3),
+    "TLI delta-v (m/s)":       (3100, 3050),
+    "LOI delta-v (m/s)":       (900, 889),
+    "Descent delta-v (m/s)":   (1700, 1694),
+    "Ascent delta-v (m/s)":    (1900, 1867),
+    "TEI delta-v (m/s)":       (900, 1076),
+    "Translunar coast (hr)":   (73.0, 73.1),
+    "Total mission time (hr)": (195.0, 195.3),
 }
 
-print("=" * 68)
-print("       ORBITAL TRANSFER CALCULATOR — TECHNICAL REPORT")
-print("=" * 68)
-
+print("=" * 64)
+print("     ORBITAL TRANSFER CALCULATOR — TECHNICAL REPORT")
+print("=" * 64)
 print("""
-1. INTRODUCTION
----------------
-This tool computes the orbital mechanics, propulsion requirements,
-and mission timeline for a lunar mission modelled on Apollo 11.
-It calculates Hohmann transfer delta-v, simulates powered descent
-with fuel management, and integrates all phases from launch to
-splashdown.
+1. INTRODUCTION: Computes orbital mechanics, propulsion, and
+   timeline for an Apollo-class lunar mission.
 
-2. METHODOLOGY
---------------
-Three core models are implemented:
+2. METHODOLOGY:
+   a) Hohmann transfer: v = sqrt(GM(2/r - 1/a))
+   b) Tsiolkovsky: dv = Ve * ln(m0/mf)
+   c) Descent sim: a_net = g_moon - thrust*throttle/mass(t)
 
-  a) Hohmann transfer:
-     dv1 = |v_transfer(r1) - v_circular(r1)|
-     dv2 = |v_circular(r2) - v_transfer(r2)|
-     Uses vis-viva equation: v = sqrt(GM(2/r - 1/a))
+3. VALIDATION:""")
 
-  b) Tsiolkovsky rocket equation:
-     delta_v = Ve * ln(m_initial / m_final)
-     Fuel = m_final * (exp(dv/Ve) - 1)
-
-  c) Powered descent simulation:
-     Second-by-second integration of:
-     a_net = g_moon - (thrust * throttle) / mass(t)
-     With variable throttle profile and 1202 alarm scenario
-
-3. VALIDATION
--------------""")
-
-print(f"{'Quantity':<32} {'Computed':>10} {'Actual':>10} {'Error':>8}")
-print("-" * 62)
+print(f"{'Quantity':<28} {'Computed':>9} {'Actual':>9} {'Error':>7}")
+print("-" * 55)
 errors = []
-for qty, (computed, actual) in validation.items():
-    err = abs(computed - actual) / actual * 100
+for qty, (comp, act) in validation.items():
+    err = abs(comp - act) / act * 100
     errors.append(err)
-    status = "ok" if err < 5 else "review"
-    print(f"{qty:<32} {computed:>10.1f} {actual:>10.1f} {err:>6.1f}% {status}")
+    print(f"{qty:<28} {comp:>9.1f} {act:>9.1f} {err:>5.1f}%")
 
-mean_err = np.mean(errors)
-max_err = np.max(errors)
-print(f"\nMean error: {mean_err:.1f}%  |  Max error: {max_err:.1f}%")
-print(f"Validation: {'PASS — all within engineering tolerance' if max_err < 20 else 'REVIEW — some values need refinement'}")
+print(f"\\nMean error: {np.mean(errors):.1f}% | Max: {np.max(errors):.1f}%")
+print(f"Status: {'PASS' if np.max(errors) < 20 else 'REVIEW'}")
 
 print("""
-4. KEY FINDINGS
----------------
-  - The total delta-v budget for a lunar mission is ~8,500 m/s
-  - The descent phase has the tightest fuel margin (~5% at touchdown)
-  - The 1202 alarm costs ~200 kg of extra fuel (computer restart delay)
-  - Armstrong's manual override used ~360 kg for boulder avoidance
-  - 13 seconds of fuel remained — the thinnest margin of any phase
+4. KEY FINDINGS:
+  - Total delta-v budget: ~8,500 m/s
+  - Descent has tightest fuel margin (~5% at touchdown)
+  - 1202 alarm costs ~200 kg extra fuel
+  - 13 seconds of fuel remained at Apollo 11 touchdown
 
-5. LIMITATIONS
---------------
-  - Two-body approximation (ignores Sun's gravitational influence)
-  - Circular orbit assumption (real orbits are slightly elliptical)
-  - Simplified LOI (real capture uses hyperbolic excess velocity)
-  - 1D descent model (real descent has horizontal and vertical axes)
-  - No mid-course corrections modelled
-  - No atmospheric drag for Earth departure/re-entry
+5. LIMITATIONS:
+  - Two-body approximation (no Sun influence)
+  - Circular orbits (real orbits slightly elliptical)
+  - 1D descent (no horizontal translation)
+  - No mid-course corrections or atmospheric drag
 
-6. FUTURE IMPROVEMENTS
-----------------------
-  - Patched conic approximation for Earth-Moon transfer
-  - Three-body problem (Sun-Earth-Moon) for trajectory refinement
-  - 2D descent simulation with horizontal translation
-  - Monte Carlo analysis of trajectory uncertainties
-  - Free-return trajectory computation for abort scenarios
-  - Fuel-optimal descent using Pontryagin's maximum principle
+6. FUTURE WORK:
+  - Patched conic Earth-Moon transfer
+  - 3-body problem, Monte Carlo trajectories
+  - 2D descent with horizontal manoeuvres
+  - Free-return abort trajectory computation
 
-7. SKILLS DEMONSTRATED
-----------------------""")
+7. SKILLS DEMONSTRATED:""")
 
 skills = [
-    ("Python programming", "Classes, functions, NumPy, simulation loops"),
-    ("Orbital mechanics", "Hohmann transfers, vis-viva, circular orbits"),
-    ("Propulsion engineering", "Tsiolkovsky equation, Isp, thrust profiles"),
-    ("Control simulation", "Second-by-second descent with throttle control"),
-    ("Systems integration", "Multi-phase mission with mass/fuel tracking"),
+    ("Python OOP", "Classes, NumPy, simulation loops"),
+    ("Orbital mechanics", "Hohmann transfers, vis-viva equation"),
+    ("Propulsion", "Tsiolkovsky equation, Isp, throttle profiles"),
+    ("Control simulation", "Second-by-second descent with fuel tracking"),
+    ("Systems integration", "Multi-phase mission timeline"),
     ("Validation", "Comparison against Apollo 11 flight data"),
-    ("Technical writing", "Structured engineering report"),
 ]
-
-for skill, detail in skills:
-    print(f"  * {skill}: {detail}")
-
-print("""
-================================================================
-            Project completed — all systems nominal.
-================================================================
-""")`,
+for s, d in skills:
+    print(f"  * {s}: {d}")
+print("\\n" + "=" * 64)
+print("         Project completed — all systems nominal.")
+print("=" * 64)`,
       challenge: 'Turn this into a real portfolio piece. Add a section comparing your simplified model to what NASA actually used (patched conics, numerical integration, Monte Carlo trajectory analysis). List three specific ways you would improve the model with another week of work. This document — plus your code from all four levels — demonstrates real aerospace engineering skills.',
-      successHint: 'You have completed a full aerospace engineering project cycle: architecture, trajectory computation, descent simulation, mission integration, and validated documentation. This is the same process used by every space agency — from NASA to SpaceX to ISRO. The tools are more sophisticated, but the method is identical. You now have a portfolio project that demonstrates real orbital mechanics and computational skills.',
+      successHint: 'You completed a full aerospace engineering project cycle: architecture, trajectory computation, descent simulation, mission integration, and validated documentation. This is the process used by every space agency. You now have a portfolio project demonstrating real orbital mechanics and computational skills.',
     },
   ];
 

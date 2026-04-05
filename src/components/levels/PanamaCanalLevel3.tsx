@@ -480,13 +480,14 @@ for name, rain_f, var_f in scenarios:
 
 # Revenue impact
 toll_per_ship = 400000  # USD average
-print(f"\\n=== Revenue Impact (avg toll ${toll_per_ship:,}/ship) ===")
+toll_str = f"{toll_per_ship:,}"
+print(f"\\n=== Revenue Impact (avg toll {toll_str}/ship) ===")
 for name, rain_f, var_f in scenarios:
     r = simulate_climate_scenario(name, rain_f, var_f)
     annual_lost = r["ships_lost"] / 200 / 20  # per simulation per year
     revenue_lost = annual_lost * toll_per_ship
     print(f"{name:<28} Ships lost/yr: {annual_lost:>6.0f}  "
-          f"Revenue lost: ${revenue_lost/1e6:>6.1f}M/yr")`,
+          f"Revenue lost: {revenue_lost/1e6:>6.1f}M/yr")`,
       challenge: 'Model a mitigation strategy: the Rio Indio reservoir adds 800 million m³/year of supplemental water when the lake drops below 25.5 m. Add this to the "Severe" scenario. Does it restore full reliability? What size reservoir would be needed to maintain full capacity under the "Extreme" scenario? This is the actual engineering question the Panama Canal Authority is studying.',
       successHint: 'You built a climate adaptation model — the same approach used by every water utility, hydropower company, and agricultural system facing climate uncertainty. The key insight: reliability analysis (what fraction of time can we operate normally?) is more useful than predicting the average outcome. Extremes, not averages, drive infrastructure failure.',
     },

@@ -841,7 +841,7 @@ details = [
     f"Water: {best_imp['water']:.0f} L/year",
     f"Microplastic: {best_imp['micro']:.1f} g/year",
     f"Biodegrades in: {best_imp['biodegrade']:.0f} years",
-    f"Annual cost: \${best_imp['cost']:.2f}",
+    f"Annual cost: \{best_imp['cost']:.2f}",
     f"Warmth rating: {best_imp['warmth']:.0%}",
 ]
 for i, detail in enumerate(details):

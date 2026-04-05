@@ -701,9 +701,9 @@ print("Harvest Optimization Results:")
 print(f"  Optimal harvest day: {optimal_day}")
 print(f"  Fish weight at harvest: {sim['weight'][optimal_day]:.0f} g")
 print(f"  Total biomass: {sim['biomass'][optimal_day]:.0f} kg")
-print(f"  Cumulative cost: \${sim['cumulative_cost'][optimal_day]:.0f}")
-print(f"  Revenue at harvest: \${sim['daily_revenue'][optimal_day]:.0f}")
-print(f"  Maximum profit: \${sim['total_profit'][optimal_day]:.0f}")
+print(f"  Cumulative cost: \{sim['cumulative_cost'][optimal_day]:.0f}")
+print(f"  Revenue at harvest: \{sim['daily_revenue'][optimal_day]:.0f}")
+print(f"  Maximum profit: \{sim['total_profit'][optimal_day]:.0f}")
 print(f"  Marginal profit hits zero at day: {marginal_day}")`,
       challenge: 'Run the simulation for 3 different stocking densities (3, 8, 15 fish/m3) and find the optimal harvest day for each. Plot all three profit curves on one chart. Which density gives the highest total profit? Which gives the highest profit per fish?',
       successHint: 'This is the complete decision model: biology (growth) feeds into chemistry (water quality) feeds into economics (profit). Changing any input — stocking density, feed price, temperature — ripples through the entire system. This is why aquaculture management is hard and why models are valuable.',
@@ -949,7 +949,7 @@ Total biomass:     {best_params['biomass']:.0f} kg
 Final DO:          {best_params['do']:.1f} mg/L
 Final NH3:         {best_params['nh3']:.2f} mg/L
 
-PROFIT:            \${best_params['profit']:.0f}
+PROFIT:            \{best_params['profit']:.0f}
 Constraints:       All satisfied"""
 ax.text(0.1, 0.9, summary_text, transform=ax.transAxes, fontsize=11,
         verticalalignment='top', fontfamily='monospace', color='#22c55e',
@@ -965,7 +965,7 @@ print("\\nTop 5 feasible solutions:")
 print(f"{'Rank':<6} {'Density':>8} {'Feed%':>8} {'Harvest':>8} {'Profit':>10} {'Weight':>8}")
 print("-" * 52)
 for i, r in enumerate(feasible[:5]):
-    print(f"{i+1:<6} {r['density']:>7}/m3 {r['feed']:>7.1f}% {r['harvest']:>7}d \${r['profit']:>9.0f} {r['weight']:>6.0f}g")`,
+    print(f"{i+1:<6} {r['density']:>7}/m3 {r['feed']:>7.1f}% {r['harvest']:>7}d \{r['profit']:>9.0f} {r['weight']:>6.0f}g")`,
       challenge: 'Add a second objective: minimize environmental impact (total ammonia released over the cycle). Use the Pareto frontier concept — find all solutions where you cannot improve profit without worsening environmental impact and vice versa. Plot the Pareto frontier.',
       successHint: 'You have built a complete decision support system for aquaculture management. This is the kind of model that consulting firms charge thousands of dollars to build. The core skills — simulation, optimization, constraint handling — apply to any operational planning problem.',
     },
@@ -1145,11 +1145,11 @@ ax = axes[0, 1]
 ax.set_facecolor('#111827')
 ax.hist(mc_profits, bins=40, color='#3b82f6', edgecolor='none', alpha=0.8)
 ax.axvline(np.mean(mc_profits), color='#f59e0b', linestyle='--', linewidth=2,
-           label=f'Mean: \${np.mean(mc_profits):.0f}')
+           label=f'Mean: \{np.mean(mc_profits):.0f}')
 ax.axvline(np.percentile(mc_profits, 10), color='#ef4444', linestyle='--', linewidth=1.5,
-           label=f'P10: \${np.percentile(mc_profits, 10):.0f}')
+           label=f'P10: \{np.percentile(mc_profits, 10):.0f}')
 ax.axvline(np.percentile(mc_profits, 90), color='#22c55e', linestyle='--', linewidth=1.5,
-           label=f'P90: \${np.percentile(mc_profits, 90):.0f}')
+           label=f'P90: \{np.percentile(mc_profits, 90):.0f}')
 ax.axvline(0, color='white', linestyle=':', linewidth=1)
 ax.set_xlabel('Profit ($)', color='white')
 ax.set_ylabel('Count', color='white')
@@ -1165,7 +1165,7 @@ cumulative = np.arange(1, len(sorted_profits) + 1) / len(sorted_profits)
 ax.plot(sorted_profits, cumulative, color='#a855f7', linewidth=2)
 ax.axhline(0.5, color='gray', linestyle=':', linewidth=1)
 ax.axvline(np.median(mc_profits), color='#f59e0b', linestyle='--',
-           label=f'Median: \${np.median(mc_profits):.0f}')
+           label=f'Median: \{np.median(mc_profits):.0f}')
 prob_loss = (mc_profits < 0).mean()
 ax.axvline(0, color='#ef4444', linestyle='--', label=f'P(loss): {prob_loss:.1%}')
 ax.set_xlabel('Profit ($)', color='white')
@@ -1203,18 +1203,18 @@ risk_text = f"""RISK ASSESSMENT SUMMARY
 
 Monte Carlo: {n_simulations} simulations
 
-Mean profit:     \${np.mean(mc_profits):>10,.0f}
-Median profit:   \${np.median(mc_profits):>10,.0f}
-Std deviation:   \${np.std(mc_profits):>10,.0f}
+Mean profit:     \{np.mean(mc_profits):>10,.0f}
+Median profit:   \{np.median(mc_profits):>10,.0f}
+Std deviation:   \{np.std(mc_profits):>10,.0f}
 
-10th percentile: \${np.percentile(mc_profits, 10):>10,.0f}
-25th percentile: \${np.percentile(mc_profits, 25):>10,.0f}
-75th percentile: \${np.percentile(mc_profits, 75):>10,.0f}
-90th percentile: \${np.percentile(mc_profits, 90):>10,.0f}
+10th percentile: \{np.percentile(mc_profits, 10):>10,.0f}
+25th percentile: \{np.percentile(mc_profits, 25):>10,.0f}
+75th percentile: \{np.percentile(mc_profits, 75):>10,.0f}
+90th percentile: \{np.percentile(mc_profits, 90):>10,.0f}
 
 Probability of loss: {prob_loss:>8.1%}
-Max loss:        \${mc_profits.min():>10,.0f}
-Max profit:      \${mc_profits.max():>10,.0f}
+Max loss:        \{mc_profits.min():>10,.0f}
+Max profit:      \{mc_profits.max():>10,.0f}
 
 CV (risk/return): {np.std(mc_profits)/abs(np.mean(mc_profits))*100:>7.0f}%"""
 

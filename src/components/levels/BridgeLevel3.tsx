@@ -869,7 +869,7 @@ for name, b in bridges.items():
     n_replacements = max(0, (200 - b['build_time']) // b['lifespan'])
     total_cost += n_replacements * b['replacement_cost']
     total_carbon = b['carbon_build'] + 200 * b['carbon_annual'] + n_replacements * b['carbon_build']
-    print(f"{name:30s}: \${total_cost:>10,.0f} | {total_carbon/1000:>7.1f} t CO2 | {n_replacements} replacements")
+    print(f"{name:30s}: \{total_cost:>10,.0f} | {total_carbon/1000:>7.1f} t CO2 | {n_replacements} replacements")
 
 print()
 print("The living root bridge wins on EVERY metric except build time.")

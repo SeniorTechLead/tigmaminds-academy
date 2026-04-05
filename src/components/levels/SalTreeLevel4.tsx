@@ -204,7 +204,7 @@ for (name, params), color in zip(scenarios[:2], colors_scen[:2]):
     ax.plot([r['age'] for r in results], credit_value, color=color, linewidth=2, label=name)
 ax.set_xlabel('Forest age (years)', color='white')
 ax.set_ylabel('Carbon credit value (M USD)', color='white')
-ax.set_title(f'Carbon Credit Value (\${carbon_price}/tCO2)', color='white', fontsize=11)
+ax.set_title(f'Carbon Credit Value (\{carbon_price}/tCO2)', color='white', fontsize=11)
 ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
 # Plot 6: Summary dashboard
@@ -239,7 +239,7 @@ plt.show()
 print("Carbon Sequestration Calculator built and calibrated.")
 print(f"A 100-ha sal forest at age 100 stores {r100['total']*100:,.0f} tonnes of carbon")
 print(f"That is {r100['total']*3.67*100:,.0f} tonnes CO2 equivalent")
-print(f"Worth \${r100['total']*3.67*100*15:,.0f} in carbon credits")`,
+print(f"Worth \{r100['total']*3.67*100*15:,.0f} in carbon credits")`,
       challenge: 'Add a "reforestation vs avoided deforestation" comparison: model the carbon benefit of (a) planting 100 ha of new sal forest vs (b) preventing the logging of 100 ha of 80-year-old forest. Over 50 years, which intervention stores more carbon? This is one of the most important questions in climate policy.',
       successHint: 'You have built a professional-grade carbon sequestration calculator. This is exactly the kind of tool that REDD+ (Reducing Emissions from Deforestation) projects use to quantify carbon credits. Your sal forest is now a quantified climate asset.',
     },
@@ -577,7 +577,7 @@ for name, (_, _, econ), color in scenarios:
     ax.plot(range(len(econ)), np.array(econ) / 1e6, color=color, linewidth=2, label=name)
 ax.set_xlabel('Year', color='white')
 ax.set_ylabel('Cumulative revenue (M USD)', color='white')
-ax.set_title(f'Economic Returns (CO2 @ \${carbon_price}/t)', color='white', fontsize=11)
+ax.set_title(f'Economic Returns (CO2 @ \{carbon_price}/t)', color='white', fontsize=11)
 ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
 # Plot 4: Carbon price sensitivity

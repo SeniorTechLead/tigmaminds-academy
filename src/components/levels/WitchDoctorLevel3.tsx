@@ -370,7 +370,7 @@ stage_costs = [0.1, 0.2, 0.5, 1, 2, 10, 50, 100, 300, 500]  # millions USD
 cumulative_cost = np.cumsum(stage_costs)
 ax2.plot(stage_times, cumulative_cost, 'o-', color='#ef4444', linewidth=2, markersize=8)
 for i, (t, c) in enumerate(zip(stage_times, cumulative_cost)):
-    ax2.annotate(f'\${c:.0f}M', (t, c), textcoords='offset points',
+    ax2.annotate(f'\{c:.0f}M', (t, c), textcoords='offset points',
                  xytext=(5, 10), color='#ef4444', fontsize=7)
 ax2_twin = ax2.twinx()
 ax2_twin.plot(stage_times, survivors, 's-', color='#3b82f6', linewidth=2, markersize=8)
@@ -428,9 +428,9 @@ print("=" * 60)
 print(f"\\nStarting with {n_initial} ethnobotanical leads:")
 for stage, count, time, cost in zip(pipeline_stages, survivors, stage_times, cumulative_cost):
     stage_clean = stage.replace('\\n', ' ')
-    print(f"  {stage_clean:<22} {count:>4} candidates  ({time:.0f} yr, \${cost:.0f}M)")
+    print(f"  {stage_clean:<22} {count:>4} candidates  ({time:.0f} yr, \{cost:.0f}M)")
 print(f"\\nEthnobotanical advantage: {75/5:.0f}x higher hit rate than random screening")
-print(f"Total cost to bring one drug to market: ~\${cumulative_cost[-1]:.0f}M")
+print(f"Total cost to bring one drug to market: ~\{cumulative_cost[-1]:.0f}M")
 print(f"Total timeline: ~{stage_times[-1]:.0f} years")`,
       challenge: 'Simulate a Monte Carlo drug discovery campaign: run 1000 simulations of the pipeline with stochastic survival at each stage. Report the probability distribution of final successful drugs and the expected return on investment.',
       successHint: 'You have modeled the complete drug discovery pipeline — from the witch doctor\'s field knowledge to approved medicines. The high hit rate from ethnobotanical leads validates traditional knowledge as a scientifically valuable resource.',

@@ -880,7 +880,7 @@ for i in range(n):
 for p in patches:
     ax.scatter(p['y'], p['x'], s=p['pop']/5, c='#3b82f6', edgecolors='white', linewidths=1, zorder=5)
     ax.text(p['y']+2, p['x']+2, p['name'][:6], color='white', fontsize=7)
-ax.set_title(f'Greedy (\${ g_cost}M, conn={g_conn:.0f}, pairs={g_pairs})', color='white', fontsize=10)
+ax.set_title(f'Greedy (\{ g_cost}M, conn={g_conn:.0f}, pairs={g_pairs})', color='white', fontsize=10)
 ax.tick_params(colors='gray')
 
 # Plot 3: SA solution
@@ -897,7 +897,7 @@ for i in range(n):
 for p in patches:
     ax.scatter(p['y'], p['x'], s=p['pop']/5, c='#3b82f6', edgecolors='white', linewidths=1, zorder=5)
     ax.text(p['y']+2, p['x']+2, p['name'][:6], color='white', fontsize=7)
-ax.set_title(f'SA (\${sa_cost}M, conn={sa_conn_full:.0f}, pairs={sa_pairs})', color='white', fontsize=10)
+ax.set_title(f'SA (\{sa_cost}M, conn={sa_conn_full:.0f}, pairs={sa_pairs})', color='white', fontsize=10)
 ax.tick_params(colors='gray')
 
 # Plot 4: Greedy build order
@@ -954,7 +954,7 @@ plt.show()
 print("=" * 70)
 print("CORRIDOR OPTIMIZER RESULTS")
 print("=" * 70)
-print(f"Budget: \${budget}M")
+print(f"Budget: \{budget}M")
 print()
 print(f"{'Metric':<30} {'Baseline':>12} {'Greedy':>12} {'SA':>12}")
 print("-" * 70)
@@ -965,12 +965,12 @@ print()
 print("GREEDY PROJECTS:")
 for pid in g_selected:
     p = projects[pid]
-    print(f"  {p['name']:<25} \${p['cost']}M  (reduces {patches[p['i']]['name']}-{patches[p['j']]['name']} by {p['reduction']})")
+    print(f"  {p['name']:<25} \{p['cost']}M  (reduces {patches[p['i']]['name']}-{patches[p['j']]['name']} by {p['reduction']})")
 print()
 print("SA PROJECTS:")
 for pid in sa_selected:
     p = projects[pid]
-    print(f"  {p['name']:<25} \${p['cost']}M  (reduces {patches[p['i']]['name']}-{patches[p['j']]['name']} by {p['reduction']})")`,
+    print(f"  {p['name']:<25} \{p['cost']}M  (reduces {patches[p['i']]['name']}-{patches[p['j']]['name']} by {p['reduction']})")`,
       challenge: 'Try budgets of $30M, $55M, and $80M. Plot the total connectivity achieved at each budget level. Is there a point of diminishing returns? What is the minimum budget needed to achieve Nm >= 1 for all pairs?',
       successHint: 'You have built a complete corridor optimization system — from landscape resistance to population genetics to budget-constrained optimization. This is the workflow used by the Wildlife Institute of India and WWF for corridor planning across India.',
     },

@@ -609,10 +609,10 @@ total_reclaim = drain_install_per_ha + reclaim_water_cost
 annual_crop_value = 1500  # $/ha for barley
 payback = total_reclaim / annual_crop_value
 
-print(f"Drainage installation: \${drain_install_per_ha}/ha")
-print(f"Reclamation water: {reclaim_water_m3:.0f} m³/ha = \${reclaim_water_cost:.0f}/ha")
-print(f"Total cost: \${total_reclaim:.0f}/ha")
-print(f"Annual crop value: \${annual_crop_value}/ha")
+print(f"Drainage installation: \{drain_install_per_ha}/ha")
+print(f"Reclamation water: {reclaim_water_m3:.0f} m³/ha = \{reclaim_water_cost:.0f}/ha")
+print(f"Total cost: \{total_reclaim:.0f}/ha")
+print(f"Annual crop value: \{annual_crop_value}/ha")
 print(f"Payback period: {payback:.1f} years")
 print(f"\\nVerdict: {'Economically viable' if payback < 10 else 'Marginal'} "
       f"— reclamation pays for itself in {payback:.0f} years")`,
