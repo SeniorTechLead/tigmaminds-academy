@@ -41,11 +41,10 @@ export default function LessonPage() {
   const isSignedIn = !!user;
   const isDemo = lesson ? isDemoStory(lesson.slug) : false;
 
-  // Levels 1-4 require sign-in; non-demo stories also require enrollment
+  // Levels 1-4 require sign-in; Level 0 is always free
   const isLevelLocked = (lvl: Level) => {
     if (lvl === 'listener') return false;
     if (!isSignedIn) return true;
-    if (!isDemo) return true;
     return false;
   };
 
