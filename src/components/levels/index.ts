@@ -164,7 +164,7 @@ const registry: Record<string, LevelComponents> = {
   'penicillin-discovery': { Level1: lazy(() => import('./PenicillinLevel1')), Level2: lazy(() => import('./PenicillinLevel2')), Level3: lazy(() => import('./PenicillinLevel3')), Level4: lazy(() => import('./PenicillinLevel4')) },
   'gutenberg-printing-press': { Level1: lazy(() => import('./GutenbergLevel1')), Level2: lazy(() => import('./GutenbergLevel2')), Level3: lazy(() => import('./GutenbergLevel3')), Level4: lazy(() => import('./GutenbergLevel4')) },
   'inca-road-system': { Level1: lazy(() => import('./IncaRoadsLevel1')), Level2: lazy(() => import('./IncaRoadsLevel2')), Level3: lazy(() => import('./IncaRoadsLevel3')), Level4: lazy(() => import('./IncaRoadsLevel4')) },
-  'manhattan-project': { Level1: lazy(() => import('./ManhattanLevel1')) },
+  'manhattan-project': { Level1: lazy(() => import('./ManhattanLevel1')), Level2: lazy(() => import('./ManhattanLevel2')), Level3: lazy(() => import('./ManhattanLevel3')), Level4: lazy(() => import('./ManhattanLevel4')) },
   'roman-aqueducts': { Level1: lazy(() => import('./AqueductsLevel1')), Level2: lazy(() => import('./AqueductsLevel2')), Level3: lazy(() => import('./AqueductsLevel3')), Level4: lazy(() => import('./AqueductsLevel4')) },
   'greek-fire': { Level1: lazy(() => import('./GreekFireLevel1')) },
   'egyptian-embalming': { Level1: lazy(() => import('./EmbalmingLevel1')) },
