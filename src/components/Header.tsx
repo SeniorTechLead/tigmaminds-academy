@@ -25,6 +25,7 @@ export default function Header() {
     { name: 'Home', href: '/' },
     { name: 'Programs', href: '/programs' },
     { name: 'Lessons', href: '/lessons' },
+    { name: 'Capstones', href: '/capstones' },
     { name: 'Library', href: '/reference' },
     { name: 'Playground', href: '/playground' },
   ];

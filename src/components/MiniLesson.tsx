@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback, useContext } from 'react';
-import { Play, Loader2, CheckCircle, RotateCcw, HelpCircle, ChevronDown, ChevronUp } from 'lucide-react';
+import { Play, Loader2, CheckCircle, RotateCcw, HelpCircle, ChevronDown, ChevronUp, Sparkles } from 'lucide-react';
 import DiagramZoom from './DiagramZoom';
 import { usePyodide } from '../contexts/PyodideContext';
 
@@ -314,14 +314,24 @@ len(plt.get_fignums()) > 0
 
         {/* Run / reset buttons */}
         <div className="flex-shrink-0 p-2 flex flex-col items-center justify-start gap-2">
-          <button
-            onClick={run}
-            disabled={running || (!pyReady && !pyodideRef.current)}
-            className="p-2 bg-emerald-600 hover:bg-emerald-700 disabled:bg-gray-700 text-white rounded-lg transition-colors"
-            title="Run (⌘↵)"
-          >
-            {running ? <Loader2 className="w-4 h-4 animate-spin" /> : <Play className="w-4 h-4" />}
-          </button>
+          {!pyReady && !pyodideRef?.current ? (
+            <button
+              onClick={onLoadPyodide}
+              className="p-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg transition-colors animate-pulse"
+              title="Load Python to run this code"
+            >
+              <Sparkles className="w-4 h-4" />
+            </button>
+          ) : (
+            <button
+              onClick={run}
+              disabled={running}
+              className="p-2 bg-emerald-600 hover:bg-emerald-700 disabled:bg-gray-700 text-white rounded-lg transition-colors"
+              title="Run (⌘↵)"
+            >
+              {running ? <Loader2 className="w-4 h-4 animate-spin" /> : <Play className="w-4 h-4" />}
+            </button>
+          )}
           <button
             onClick={() => { setCode(initialCode); setOutput(''); setImageOutput(null); setHasRun(false); }}
             className="p-2 text-gray-500 hover:text-white transition-colors"
@@ -331,6 +341,16 @@ len(plt.get_fignums()) > 0
           </button>
         </div>
       </div>
+
+      {/* Python not loaded hint */}
+      {!pyReady && !pyodideRef?.current && !output && (
+        <div className="border-t border-gray-700 bg-gray-800/50 px-4 py-3 flex items-center gap-2">
+          <Sparkles className="w-4 h-4 text-amber-400 flex-shrink-0" />
+          <p className="text-xs text-amber-300">
+            <button onClick={onLoadPyodide} className="underline hover:text-amber-200 font-semibold">Load Python</button> to run this code — it takes a few seconds the first time.
+          </p>
+        </div>
+      )}
 
       {/* Output */}
       {output && (
