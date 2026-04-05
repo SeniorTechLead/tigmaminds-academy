@@ -177,7 +177,7 @@ const registry: Record<string, LevelComponents> = {
   'zheng-he-fleet': { Level1: lazy(() => import('./ZhengHeLevel1')), Level2: lazy(() => import('./ZhengHeLevel2')), Level3: lazy(() => import('./ZhengHeLevel3')), Level4: lazy(() => import('./ZhengHeLevel4')) },
   'gothic-cathedrals': { Level1: lazy(() => import('./CathedralsLevel1')), Level2: lazy(() => import('./CathedralsLevel2')), Level3: lazy(() => import('./CathedralsLevel3')), Level4: lazy(() => import('./CathedralsLevel4')) },
   'ibn-al-haytham-optics': { Level1: lazy(() => import('./IbnAlHaythamLevel1')), Level2: lazy(() => import('./IbnAlHaythamLevel2')), Level3: lazy(() => import('./IbnAlHaythamLevel3')), Level4: lazy(() => import('./IbnAlHaythamLevel4')) },
-  'silk-road-network': { Level1: lazy(() => import('./SilkRoadLevel1')) },
+  'silk-road-network': { Level1: lazy(() => import('./SilkRoadLevel1')), Level2: lazy(() => import('./SilkRoadLevel2')), Level3: lazy(() => import('./SilkRoadLevel3')), Level4: lazy(() => import('./SilkRoadLevel4')) },
   'leonardo-machines': { Level1: lazy(() => import('./LeonardoLevel1')) },
   'the-black-death': { Level1: lazy(() => import('./BlackDeathLevel1')) },
 };
