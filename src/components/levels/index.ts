@@ -157,7 +157,7 @@ const registry: Record<string, LevelComponents> = {
   // World History lessons
   'great-wall-of-china': { Level1: lazy(() => import('./GreatWallLevel1')), Level2: lazy(() => import('./GreatWallLevel2')), Level3: lazy(() => import('./GreatWallLevel3')), Level4: lazy(() => import('./GreatWallLevel4')) },
   'panama-canal': { Level1: lazy(() => import('./PanamaCanalLevel1')), Level2: lazy(() => import('./PanamaCanalLevel2')), Level3: lazy(() => import('./PanamaCanalLevel3')), Level4: lazy(() => import('./PanamaCanalLevel4')) },
-  'library-of-alexandria': { Level1: lazy(() => import('./AlexandriaLevel1')) },
+  'library-of-alexandria': { Level1: lazy(() => import('./AlexandriaLevel1')), Level2: lazy(() => import('./AlexandriaLevel2')), Level3: lazy(() => import('./AlexandriaLevel3')), Level4: lazy(() => import('./AlexandriaLevel4')) },
   'viking-navigation': { Level1: lazy(() => import('./VikingNavLevel1')) },
   'building-the-pyramids': { Level1: lazy(() => import('./PyramidsLevel1')), Level2: lazy(() => import('./PyramidsLevel2')), Level3: lazy(() => import('./PyramidsLevel3')), Level4: lazy(() => import('./PyramidsLevel4')) },
   'apollo-moon-landing': { Level1: lazy(() => import('./ApolloLevel1')) },
