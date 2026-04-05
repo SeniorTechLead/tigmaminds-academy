@@ -166,7 +166,7 @@ const registry: Record<string, LevelComponents> = {
   'inca-road-system': { Level1: lazy(() => import('./IncaRoadsLevel1')), Level2: lazy(() => import('./IncaRoadsLevel2')), Level3: lazy(() => import('./IncaRoadsLevel3')), Level4: lazy(() => import('./IncaRoadsLevel4')) },
   'manhattan-project': { Level1: lazy(() => import('./ManhattanLevel1')), Level2: lazy(() => import('./ManhattanLevel2')), Level3: lazy(() => import('./ManhattanLevel3')), Level4: lazy(() => import('./ManhattanLevel4')) },
   'roman-aqueducts': { Level1: lazy(() => import('./AqueductsLevel1')), Level2: lazy(() => import('./AqueductsLevel2')), Level3: lazy(() => import('./AqueductsLevel3')), Level4: lazy(() => import('./AqueductsLevel4')) },
-  'greek-fire': { Level1: lazy(() => import('./GreekFireLevel1')) },
+  'greek-fire': { Level1: lazy(() => import('./GreekFireLevel1')), Level2: lazy(() => import('./GreekFireLevel2')), Level3: lazy(() => import('./GreekFireLevel3')), Level4: lazy(() => import('./GreekFireLevel4')) },
   'egyptian-embalming': { Level1: lazy(() => import('./EmbalmingLevel1')) },
   'chinese-gunpowder': { Level1: lazy(() => import('./GunpowderLevel1')), Level2: lazy(() => import('./GunpowderLevel2')), Level3: lazy(() => import('./GunpowderLevel3')), Level4: lazy(() => import('./GunpowderLevel4')) },
   'polynesian-wayfinding': { Level1: lazy(() => import('./PolynesianLevel1')) },
