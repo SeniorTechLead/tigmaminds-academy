@@ -160,7 +160,7 @@ const registry: Record<string, LevelComponents> = {
   'library-of-alexandria': { Level1: lazy(() => import('./AlexandriaLevel1')), Level2: lazy(() => import('./AlexandriaLevel2')), Level3: lazy(() => import('./AlexandriaLevel3')), Level4: lazy(() => import('./AlexandriaLevel4')) },
   'viking-navigation': { Level1: lazy(() => import('./VikingNavLevel1')), Level2: lazy(() => import('./VikingNavLevel2')), Level3: lazy(() => import('./VikingNavLevel3')), Level4: lazy(() => import('./VikingNavLevel4')) },
   'building-the-pyramids': { Level1: lazy(() => import('./PyramidsLevel1')), Level2: lazy(() => import('./PyramidsLevel2')), Level3: lazy(() => import('./PyramidsLevel3')), Level4: lazy(() => import('./PyramidsLevel4')) },
-  'apollo-moon-landing': { Level1: lazy(() => import('./ApolloLevel1')) },
+  'apollo-moon-landing': { Level1: lazy(() => import('./ApolloLevel1')), Level2: lazy(() => import('./ApolloLevel2')), Level3: lazy(() => import('./ApolloLevel3')), Level4: lazy(() => import('./ApolloLevel4')) },
   'penicillin-discovery': { Level1: lazy(() => import('./PenicillinLevel1')), Level2: lazy(() => import('./PenicillinLevel2')), Level3: lazy(() => import('./PenicillinLevel3')), Level4: lazy(() => import('./PenicillinLevel4')) },
   'gutenberg-printing-press': { Level1: lazy(() => import('./GutenbergLevel1')), Level2: lazy(() => import('./GutenbergLevel2')), Level3: lazy(() => import('./GutenbergLevel3')), Level4: lazy(() => import('./GutenbergLevel4')) },
   'inca-road-system': { Level1: lazy(() => import('./IncaRoadsLevel1')), Level2: lazy(() => import('./IncaRoadsLevel2')), Level3: lazy(() => import('./IncaRoadsLevel3')), Level4: lazy(() => import('./IncaRoadsLevel4')) },
