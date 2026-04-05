@@ -238,25 +238,35 @@ export default function CapstonePage() {
         </div>
       </section>
 
-      {/* What you'll demonstrate */}
+      {/* Skills you'll demonstrate — linked to Reference Library */}
       <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800/50">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">Skills every project demonstrates</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 text-center">Skills you'll demonstrate</h2>
+          <p className="text-sm text-gray-500 dark:text-gray-400 text-center mb-8">Each skill links to its interactive guide in the Reference Library</p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {[
-              { skill: 'Python Programming', desc: 'Classes, functions, NumPy, data analysis' },
-              { skill: 'System Design', desc: 'Architecture before code — plan, then build' },
-              { skill: 'Scientific Modeling', desc: 'Translate real-world physics into code' },
-              { skill: 'Technical Writing', desc: 'Document your work for employers and peers' },
-              { skill: 'Data Visualization', desc: 'Matplotlib charts that tell a story' },
-              { skill: 'Monte Carlo Methods', desc: 'Random sampling, statistical inference' },
-              { skill: 'Optimization', desc: 'Find the best solution in a large search space' },
-              { skill: 'Problem Decomposition', desc: 'Break complex systems into manageable parts' },
+              { skill: 'Python & NumPy', desc: 'Classes, functions, arrays, data pipelines', ref: '/reference/python' },
+              { skill: 'Data Analysis', desc: 'Pandas, statistics, pattern recognition', ref: '/reference/statistics-basics' },
+              { skill: 'Data Visualization', desc: 'Matplotlib charts, scientific figures', ref: '/reference/numpy' },
+              { skill: 'Algorithms', desc: 'Dijkstra, sorting, graph traversal, search', ref: '/reference/algorithms-data-structures' },
+              { skill: 'Databases & SQL', desc: 'Schema design, queries, indexing', ref: '/reference/databases-and-sql' },
+              { skill: 'Epidemiology', desc: 'SIR/SEIR models, R₀, herd immunity', ref: '/reference/ecology-and-populations' },
+              { skill: 'Machine Learning', desc: 'Classification, regression, Bayesian methods', ref: '/reference/probability-and-combinatorics' },
+              { skill: 'Network Science', desc: 'Graph theory, centrality, resilience', ref: '/reference/algorithms-data-structures' },
+              { skill: 'Structural Engineering', desc: 'Stress analysis, material properties, FEA', ref: '/reference/structural-engineering' },
+              { skill: 'Fluid Dynamics', desc: 'Bernoulli, Manning, pipe flow, buoyancy', ref: '/reference/fluid-mechanics' },
+              { skill: 'Thermodynamics', desc: 'Heat transfer, radiation, phase changes', ref: '/reference/heat-and-thermodynamics' },
+              { skill: 'Optics', desc: 'Refraction, lenses, polarisation, cameras', ref: '/reference/optics-and-lenses' },
+              { skill: 'Orbital Mechanics', desc: 'Hohmann transfers, rocket equation, orbits', ref: '/reference/gravity-and-orbits' },
+              { skill: 'Economics', desc: 'Supply chains, trade networks, cost analysis', ref: '/reference/supply-demand-economics' },
+              { skill: 'System Design', desc: 'Architecture before code — plan, then build', ref: '/reference/engineering-design' },
+              { skill: 'Technical Writing', desc: 'Reports, documentation, portfolio pieces', ref: '/reference/scientific-method' },
             ].map(item => (
-              <div key={item.skill} className="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 text-left">
-                <p className="font-semibold text-gray-900 dark:text-white text-sm mb-1">{item.skill}</p>
+              <Link key={item.skill} to={item.ref}
+                className="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 text-left hover:border-purple-300 dark:hover:border-purple-700 hover:shadow-sm transition-all group">
+                <p className="font-semibold text-gray-900 dark:text-white text-sm mb-1 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">{item.skill}</p>
                 <p className="text-xs text-gray-500 dark:text-gray-400">{item.desc}</p>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
