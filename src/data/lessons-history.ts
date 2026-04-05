@@ -253,7 +253,8 @@ Today, about **14,000 ships** pass through the Panama Canal every year. Each one
       concepts: [
         {
           title: 'How Does a Lock Lift a Ship?',
-          paragraphs: [
+                    diagram: 'LockChamberDiagram',
+paragraphs: [
             'Imagine you\'re standing in a bathtub. Someone starts filling the tub with water. As the water level rises, you rise with it — you\'re floating, and the water carries you upward. You don\'t need a crane, a pulley, or any machinery. Just water, flowing in from a tap.',
             'A **canal lock** works exactly the same way, but on a massive scale. A lock is a water-tight chamber — basically a giant bathtub — with gates at each end. A ship sails in through the lower gate. The gate closes behind it. Then a valve opens, letting water flow in from the higher level above. The water level in the chamber rises, and the ship rises with it.',
             'When the water inside the lock reaches the same level as the water on the high side, the upper gate opens, and the ship sails out — now 8 or 9 metres higher than when it entered. No pumps, no engines, no electricity. Just **gravity** pulling water from a high place to a low place.',
@@ -266,7 +267,8 @@ Today, about **14,000 ships** pass through the Panama Canal every year. Each one
         },
         {
           title: 'Buoyancy: Why Do Ships Float?',
-          paragraphs: [
+                    diagram: 'BuoyancyDiagram',
+paragraphs: [
             'A nail sinks in water. A ship made of steel floats. Both are made of metal. So why the difference?',
             'The answer is **shape**. A nail is solid steel all the way through — its density (mass per volume) is about 7.8 g/cm³, much heavier than water (1.0 g/cm³). But a ship is mostly **air**. The steel hull is thin, and the interior is hollow. If you could take all the steel in a ship and calculate the average density of the entire ship (steel + air inside), it comes out to about **0.2-0.3 g/cm³** — less dense than water. So it floats.',
             '**Archimedes\' principle** explains exactly how much the ship sinks: it sinks until the weight of the water it pushes aside (displaces) equals the weight of the ship itself. A loaded cargo ship sits deeper in the water than an empty one — it needs to displace more water to support its greater weight.',
@@ -279,7 +281,8 @@ Today, about **14,000 ships** pass through the Panama Canal every year. Each one
         },
         {
           title: 'Mosquitoes and Disease: The Science That Saved the Canal',
-          paragraphs: [
+                    diagram: 'SIRModelDiagram',
+paragraphs: [
             'The French attempt to build the canal killed **over 20,000 workers** — not from construction accidents, but from **malaria** and **yellow fever**. The French didn\'t know how these diseases spread. They thought "bad air" (mal-aria) from swamps was the cause. They were wrong.',
             'Both diseases are transmitted by **mosquitoes**. A female mosquito (only females bite — they need blood proteins to develop their eggs) bites an infected person and picks up the pathogen — a **parasite** (Plasmodium) for malaria, a **virus** for yellow fever. The pathogen replicates inside the mosquito. When the mosquito bites its next victim, it injects the pathogen along with its saliva (which contains anticoagulants to keep the blood flowing).',
             'The French hospitals unknowingly **bred mosquitoes**. They placed patients\' bed legs in dishes of water (to keep ants from climbing up). Those dishes were perfect nurseries for mosquito larvae. They planted gardens around the hospitals, attracting more mosquitoes. They left windows open. They were creating the ideal environment for the very insect that was killing their workers.',
@@ -420,7 +423,8 @@ The lesson of Alexandria is not just about fire and conquest. It is about **the 
       concepts: [
         {
           title: 'How Do You Find a Book in a Million Books?',
-          paragraphs: [
+                    diagram: 'SearchIndexDiagram',
+paragraphs: [
             'Imagine you own 20 books. They\'re on a shelf. If someone asks you for "the blue one about sharks," you can scan the shelf in a few seconds and find it. No system needed.',
             'Now imagine you own **400,000 books** — the approximate size of the Library of Alexandria at its peak. They\'re stored in cubbyholes along kilometres of corridors. Someone asks for "that scroll by Aristarchus about the Sun." How do you find it?',
             'Without a system, the answer is: **you can\'t**. You would need to check every single cubbyhole, one by one. With 400,000 scrolls, even at 10 seconds per scroll, a linear search would take **46 days** of non-stop searching. The library might as well not exist.',
@@ -446,7 +450,8 @@ The lesson of Alexandria is not just about fire and conquest. It is about **the 
         },
         {
           title: 'Knowledge as a Network: What Happens When Nodes Disappear',
-          paragraphs: [
+                    diagram: 'SearchIndexDiagram',
+paragraphs: [
             'Think of human knowledge not as a list of books but as a **network** — a web of ideas connected to each other. Aristarchus\'s idea that the Earth orbits the Sun connects to Eratosthenes\'s measurement of the Earth\'s size, which connects to the concept of geometry, which connects to astronomy, navigation, and cartography.',
             'Each book is a **node** in this network. Each time one book references, builds on, or responds to another, that\'s a **connection** (an edge). The Library of Alexandria was the largest hub in this network — the place where the most connections converged.',
             'When you remove a single book, you lose that book — but you also lose all its **connections**. If a mathematics text references a lost astronomy text, and that astronomy text referenced a lost geography text, the chain is broken in multiple places. Knowledge doesn\'t just disappear — it **fragments**. The remaining pieces can no longer connect to each other.',
@@ -968,7 +973,8 @@ Margaret Hamilton later coined the term **"software engineering"** — arguing t
         },
         {
           title: 'Priority Scheduling: The Software That Saved the Landing',
-          paragraphs: [
+                    diagram: 'PrioritySchedulerDiagram',
+paragraphs: [
             'Imagine you\'re juggling five tasks: cooking dinner, answering the phone, helping your child with homework, feeding the dog, and watching a pot that might boil over. If everything happens at once, you can\'t do all five simultaneously. You have to **prioritize**: the boiling pot is urgent (ignore it and you have a mess), homework can wait 5 minutes, the phone can go to voicemail.',
             'This is exactly the problem the Apollo Guidance Computer faced three minutes before landing on the Moon. It had to calculate navigation, control the throttle, process landing radar, track rendezvous radar, update the display, and more — but it only had the processing power to handle a few of these at once.',
             'Margaret Hamilton\'s software solved this with **priority scheduling**. Every task was assigned a priority level. When the computer was overloaded (the famous **1202 alarm**), it would pause the lowest-priority task, save its progress, and run the highest-priority task instead. When the high-priority task finished, it resumed the paused task exactly where it left off.',
@@ -1109,7 +1115,8 @@ The story of penicillin is the story of biology at its most powerful — a mold 
       concepts: [
         {
           title: 'Exponential Growth: Why Bacteria Are So Dangerous',
-          paragraphs: [
+                    diagram: 'PopulationGrowthCurve',
+paragraphs: [
             'A single bacterium lands on a warm piece of chicken left on the kitchen counter. It divides into **two bacteria** in 20 minutes. Each of those divides into two more. After 40 minutes, there are 4. After an hour, 8. After two hours, 64. This doesn\'t sound like much.',
             'But keep going. After 6 hours: **262,144 bacteria**. After 12 hours: **68 billion**. After 24 hours: about **4.7 sextillion** (4,700,000,000,000,000,000,000). One bacterium becomes a number larger than the number of stars in the observable universe — in a single day.',
             'This is **exponential growth** — each generation doubles the population. The key feature of exponential growth is that it starts slowly and then **accelerates dramatically**. For the first few hours, the numbers seem manageable. Then suddenly, they explode.',
@@ -1135,7 +1142,8 @@ The story of penicillin is the story of biology at its most powerful — a mold 
         },
         {
           title: 'Evolution in Fast-Forward: How Bacteria Become Resistant',
-          paragraphs: [
+                    diagram: 'SIRModelDiagram',
+paragraphs: [
             'In a population of a billion bacteria, most are identical. But a few — perhaps one in a million — have a random **mutation** that gives them slight resistance to penicillin. Maybe their cell wall enzyme has a slightly different shape that penicillin doesn\'t bind to as well.',
             'Under normal conditions, this mutation doesn\'t matter — the resistant bacterium is no better or worse than its neighbours. But when you add penicillin, everything changes. The penicillin kills the 999,999 non-resistant bacteria. The 1 resistant one survives. It divides. Its offspring are all resistant. Within days, the entire surviving population is resistant.',
             'This is **natural selection** — Darwin\'s mechanism of evolution — running at bacterial speed. In nature, evolution takes millions of years because animal generations are long (years to decades). Bacteria have a new generation every 20 minutes. Evolution that would take a million years in elephants takes **months** in bacteria.',
@@ -1637,7 +1645,8 @@ The Manhattan Project proved that physics is not neutral. The same equation — 
         },
         {
           title: 'Fission: Splitting the Atom',
-          paragraphs: [
+                    diagram: 'ChainReactionDiagram',
+paragraphs: [
             'Most atomic nuclei are **stable** — the strong nuclear force holds them together and they stay that way forever. But some very large nuclei — particularly **uranium-235** — are barely stable. They\'re like a water balloon filled almost to bursting: one more drop and it pops.',
             'When a neutron strikes a uranium-235 nucleus, it\'s that extra drop. The nucleus absorbs the neutron, becomes **uranium-236** for a fraction of a second, then **splits** into two smaller nuclei (typically barium and krypton, though the exact products vary). This splitting is called **nuclear fission**.',
             'When the nucleus splits, two things happen. First, the two smaller nuclei fly apart at enormous speed — this is the **kinetic energy** of fission, and it\'s what produces the heat. Second, **2-3 free neutrons** are released, each capable of hitting another uranium-235 nucleus and causing another fission.',
@@ -1650,7 +1659,8 @@ The Manhattan Project proved that physics is not neutral. The same equation — 
         },
         {
           title: 'Chain Reactions: From One to a Billion in a Microsecond',
-          paragraphs: [
+                    diagram: 'ChainReactionDiagram',
+paragraphs: [
             'One fission event releases energy equivalent to about 200 million electron volts — powerful at the atomic scale but invisible to the human eye. A single fission is not a bomb. What makes nuclear weapons possible is the **chain reaction**.',
             'When one uranium-235 nucleus fissions, it releases 2-3 neutrons. Each of those neutrons can strike another uranium-235 nucleus, causing another fission, releasing 2-3 more neutrons each. It\'s like knocking over dominoes — except each domino knocks over *two or three more*.',
             'Generation 1: 1 fission, 3 neutrons. Generation 2: 3 fissions, 9 neutrons. Generation 3: 9 fissions, 27 neutrons. Generation 10: 59,049 fissions. Generation 20: 3.5 billion fissions. Generation 80: more fissions than there are atoms in a kilogram of uranium. And all 80 generations happen in about **one microsecond** — one millionth of a second.',
@@ -1787,7 +1797,8 @@ This is the lesson of the aqueducts: **civilization is infrastructure**. The poe
       concepts: [
         {
           title: 'Gravity: The Only Engine You Need',
-          paragraphs: [
+                    diagram: 'LockChamberDiagram',
+paragraphs: [
             'Put a ball at the top of a slope. What happens? It rolls downhill. You didn\'t push it, no motor turned on, no battery was needed. **Gravity** pulled it from high to low — and it will do this forever, for free.',
             'Water does the same thing. It flows downhill, always seeking the lowest point. The Roman aqueducts exploited this simple fact to deliver water from mountain springs to a city 90 kilometres away. The entire system — serving one million people — ran on nothing but **gravity pulling water downhill**.',
             'The key is the **gradient** — how steep the downhill slope is. Too steep and the water rushes destructively. Too gentle and the water barely moves, allowing silt to clog the channel. The Roman engineers found the sweet spot: about **1 metre of drop per 1,000 metres of length** — a 0.1% slope. So gentle you couldn\'t see it with the naked eye, but enough to keep the water flowing at a walking pace.',
@@ -1967,7 +1978,8 @@ It also teaches us something about secrets: the Byzantines kept this one for **8
         },
         {
           title: 'Exothermic Reactions: When Chemistry Produces Heat',
-          paragraphs: [
+                    diagram: 'EvaporativeCoolingDiagram',
+paragraphs: [
             'Not all chemical reactions need heat from outside — some **produce** their own heat. These are called **exothermic reactions** (from Greek: *exo* = outside, *thermos* = heat — heat flowing outward from the reaction).',
             'You experience exothermic reactions every day. Hand warmers contain iron powder and salt — when exposed to air, the iron **oxidizes** (rusts), releasing heat. The reaction is slow enough to warm your hands for hours without burning them.',
             'But some exothermic reactions are violent. **Quicklime** (calcium oxide, CaO) reacts with water in a fiercely exothermic reaction: CaO + H₂O → Ca(OH)₂ + 65 kJ of heat per mole. That\'s enough heat to boil the water and raise the surrounding temperature above the ignition point of many fuels.',
@@ -2113,7 +2125,8 @@ Egyptian embalming was not magic. It was **applied biochemistry** — a 3,000-ye
         },
         {
           title: 'Osmosis: How Salt Pulls Water from Cells',
-          paragraphs: [
+                    diagram: 'OsmosisDiagram',
+paragraphs: [
             'Sprinkle salt on a slug and it shrivels. Marinate a steak in salt and water pools on the surface. Salt cucumber slices and they go limp and release liquid. In all three cases, salt is **pulling water out** of living or dead tissue. How?',
             'The mechanism is **osmosis** — the movement of water across a semi-permeable membrane (like a cell membrane) from a region of **low salt concentration** to a region of **high salt concentration**. The water molecules move toward the salt, trying to equalize the concentration on both sides.',
             'Egyptian embalmers covered the body in **natron** — a mixture of sodium carbonate and sodium chloride. The high salt concentration outside the cells created an osmotic gradient that sucked water out through the cell membranes. Over 40 days, the body lost about **75% of its weight** in water.',
@@ -2260,7 +2273,8 @@ Science gives us power. What we do with it is not a chemistry question. It is a 
         },
         {
           title: 'Gas Expansion: From Powder to Explosion',
-          paragraphs: [
+                    diagram: 'GasExpansionDiagram',
+paragraphs: [
             'Blow up a balloon. The air inside pushes outward against the rubber, stretching it. Now imagine the air inside suddenly multiplied by **3,000** — the balloon would burst violently.',
             'That\'s essentially what gunpowder does. The solid powder (a few grams) reacts to produce **gases** (carbon dioxide and nitrogen) that occupy **3,000 times more volume** than the original solid. If this happens in an open space, you get a flash and a whoosh. If it happens in a **sealed container**, the gases have nowhere to go — pressure builds until the container ruptures. That\'s an explosion.',
             'And if it happens in a **tube with one open end** (a gun barrel or rocket nozzle), the gases push out the open end, accelerating anything in front of them — a bullet, a cannonball, or the rocket itself.',
@@ -2389,7 +2403,8 @@ This is **signal detection theory** applied to navigation — the same mathemati
       concepts: [
         {
           title: 'Stars as Compass Points',
-          paragraphs: [
+                    diagram: 'StarCompassDiagram',
+paragraphs: [
             'Go outside on a clear night and face the horizon. Pick a bright star that is just above the horizon — one that just rose in the east. Watch it for 20 minutes. It moves — slowly climbing upward and to the right (if you\'re facing east). Every star rises at a specific point on the eastern horizon and sets at a specific point on the western horizon.',
             'The **key insight** of Polynesian navigation: each star always rises at the **same compass bearing**. Sirius always rises at about 110° (roughly east-southeast). Arcturus always rises at about 63° (roughly east-northeast). If you memorize 20-30 star rising points, you have a **star compass** — a mental circle of directional references around the horizon.',
             'Unlike a magnetic compass (which points to magnetic north), the star compass has **dozens of points**, not just four. And it works without any technology — no batteries, no calibration, no metal needle. Just your eyes and your memory.',
@@ -2653,7 +2668,8 @@ Science is not only what we understand theoretically. It is also what we discove
       concepts: [
         {
           title: 'Iron vs Steel: What Carbon Does',
-          paragraphs: [
+                    diagram: 'PhaseDiagramSteelDiagram',
+paragraphs: [
             'Pick up a paperclip. Bend it back and forth. It bends easily without breaking — that\'s **iron** being ductile (flexible). Now try to bend a sewing needle. You can\'t — it\'s stiff and hard. If you push too hard, it snaps. That\'s **steel** — iron with a small amount of **carbon** added.',
             'Pure iron is soft because its atoms are arranged in a regular crystal lattice with space between them. The atomic layers can slide over each other easily, which is why iron bends. When you add **carbon atoms** (0.5-2% by weight), they fit into the gaps between the iron atoms and **lock the layers in place**, like putting pebbles between stacked plates. The layers can no longer slide freely — the metal becomes harder.',
             'But there\'s a trade-off. More carbon = harder steel = better at holding a sharp edge. But also more carbon = more brittle = more likely to shatter on impact. A sword needs to be hard enough to cut but tough enough not to break. Too much carbon and it shatters like glass. Too little and it bends like a paperclip.',
@@ -2679,7 +2695,8 @@ Science is not only what we understand theoretically. It is also what we discove
         },
         {
           title: 'Nanostructures: Ancient Technology, Modern Discovery',
-          paragraphs: [
+                    diagram: 'WootzMicrostructureDiagram',
+paragraphs: [
             'In 2006, scientists examined genuine Damascus steel blades under an **electron microscope** — a microscope so powerful it can see individual atoms. They found something astonishing: the steel contained **carbon nanotubes** — cylindrical structures of carbon atoms just a few nanometres (billionths of a metre) in diameter.',
             'Carbon nanotubes are one of the strongest materials known to science — about **100 times stronger than steel** by weight. They\'re a flagship product of **nanotechnology**, a field that only emerged in the late 20th century. And yet Indian steelmakers were producing them, unknowingly, in clay pots over charcoal fires **2,000 years** before anyone knew what nanotechnology was.',
             'How? Trace impurities in the Indian iron ore — small amounts of **vanadium, molybdenum, and tungsten** — acted as **catalysts** that promoted the formation of carbon nanostructures during the slow cooling process. The smiths didn\'t know about catalysts or nanotubes. But they knew which ores produced the best blades, and they selected those ores generation after generation.',
@@ -2798,7 +2815,8 @@ The Maya prove that science is not a product of technology. It is a product of *
       concepts: [
         {
           title: 'Venus: The Star That Isn\'t a Star',
-          paragraphs: [
+                    diagram: 'HohmannTransferDiagram',
+paragraphs: [
             'Go outside just after sunset and look west. If the timing is right (about half the year), you\'ll see a **brilliant white point of light** — brighter than any star in the sky. This is **Venus**, often called the "evening star." But Venus is not a star — it\'s a **planet**, reflecting sunlight from about 40 million kilometres away.',
             'Venus is special because it orbits **between Earth and the Sun**. This means it never appears far from the Sun in the sky — you\'ll only ever see it near the horizon, shortly after sunset (evening star) or before sunrise (morning star). It disappears for a few weeks in between, when it passes either in front of or behind the Sun.',
             'The Maya tracked Venus\'s complete cycle: **evening star → disappears behind the Sun → morning star → disappears in front of the Sun → evening star again**. This cycle takes **583.92 days** — and the Maya measured it as **584 days**, with an error of just 2 hours over the entire cycle.',
@@ -2962,7 +2980,8 @@ The Persians solved a problem we're still working on: how to stay cool without b
         },
         {
           title: 'Radiative Cooling: How Water Can Freeze on a Warm Night',
-          paragraphs: [
+                    diagram: 'EvaporativeCoolingDiagram',
+paragraphs: [
             'Here\'s a fact that surprises most people: on a clear night, a shallow pool of water can **freeze even when the air temperature is above 0°C**. How? Through **radiative cooling**.',
             'Everything above absolute zero (-273°C) emits **infrared radiation** — invisible light that carries energy away from the surface. The water in the Persian ice-making canal radiated heat upward, toward the sky. On a clear night, that radiation passed through the atmosphere and escaped into **outer space**, which has an effective temperature of about **-270°C**.',
             'The atmosphere is mostly transparent to infrared in the 8-13 micrometre wavelength range — a "window" that lets radiation escape. On a clear, dry desert night (no clouds, low humidity), this window is wide open. The water loses heat by radiation **faster than it gains heat from the air** — so its temperature drops below the air temperature.',
@@ -3091,7 +3110,8 @@ The debate is a lesson in **naval architecture** — the science of making a str
       concepts: [
         {
           title: 'Why Do Ships Float? Archimedes in Action',
-          paragraphs: [
+                    diagram: 'BuoyancyDiagram',
+paragraphs: [
             'A steel nail sinks. A steel ship floats. Both are made of the same metal. So what\'s different?',
             'The nail is **solid steel** — its density is about 7.8 g/cm³, much heavier than water (1.0 g/cm³). But a ship is a **hollow shell** of steel enclosing a vast volume of air. If you calculated the average density of the entire ship — steel hull, air inside, cargo, everything — it comes out to about **0.3 g/cm³**. Less than water. So it floats.',
             '**Archimedes\' principle** (discovered around 250 BCE) explains exactly how much a ship sinks: it sinks until the **weight of water it pushes aside** (displaces) equals its own weight. A 10,000-tonne ship pushes aside exactly 10,000 tonnes of water. If you add cargo, the ship sinks deeper — it needs to displace more water to support the extra weight.',
@@ -3104,7 +3124,8 @@ The debate is a lesson in **naval architecture** — the science of making a str
         },
         {
           title: 'Watertight Bulkheads: Surviving a Leak',
-          paragraphs: [
+                    diagram: 'BulkheadDiagram',
+paragraphs: [
             'Imagine your house has one giant room — no internal walls. Now imagine a water pipe bursts. Water floods the entire house. Everything is ruined.',
             'Now imagine the same house divided into **six sealed rooms** with watertight doors. The pipe bursts in room 3. Water floods room 3 — but rooms 1, 2, 4, 5, and 6 stay dry. You\'ve lost one-sixth of your house instead of all of it.',
             'This is the principle of **watertight bulkheads** — internal walls that divide a ship\'s hull into sealed compartments. Chinese shipbuilders had been using this technology since at least the **2nd century CE** — about 1,700 years before it reached European ship design.',
@@ -3252,7 +3273,8 @@ In an age of quarterly earnings reports and two-year product cycles, the cathedr
       concepts: [
         {
           title: 'Arches: How Stone Holds Itself Up',
-          paragraphs: [
+                    diagram: 'ArchForcesDiagram',
+paragraphs: [
             'Stone is **strong in compression** (you can stack enormous weight on it) but **weak in tension** (it cracks easily if you try to stretch it). This is a fundamental problem for builders: how do you span a gap — a doorway, a window, a river — using a material that can\'t handle stretching?',
             'A flat stone beam (lintel) spanning a gap bends under its own weight and any load placed on it. The bottom surface stretches (tension) while the top compresses. Since stone fails in tension, the lintel cracks at the bottom. This limits stone lintels to short spans — about 2-3 metres before they break.',
             'An **arch** solves this elegantly. An arch is made of wedge-shaped stones (voussoirs) that lean against each other. Each stone is in **compression only** — squeezed between its neighbours. No stone is being stretched. The forces flow through the arch in a smooth curve from the top (keystone) to the base (springing points), always in compression.',
@@ -3265,7 +3287,8 @@ In an age of quarterly earnings reports and two-year product cycles, the cathedr
         },
         {
           title: 'Pointed vs Round: How the Gothic Arch Changed Everything',
-          paragraphs: [
+                    diagram: 'ArchForcesDiagram',
+paragraphs: [
             'A **round arch** (Roman style) is a perfect semicircle. It\'s strong, but it has two limitations. First, the width determines the height — a wider arch must be taller, because it\'s always a half-circle. This makes it hard to create arches of different widths that reach the same height (which you need for a uniform ceiling over a rectangular room).',
             'Second, a round arch pushes **outward** as well as downward. The curve of the semicircle directs forces at roughly 45° — half downward, half sideways. These sideways forces (thrust) push the walls apart. To resist this thrust, the walls must be **thick and massive** — which means small windows and dark interiors.',
             'The **pointed arch** (Gothic style) solves both problems. By adjusting the angle of the point, you can create arches of any height at any width — a narrow arch and a wide arch can reach the same peak. And the steeper curves direct more force **straight downward**, reducing the outward thrust by as much as 50%.',
@@ -3278,7 +3301,8 @@ In an age of quarterly earnings reports and two-year product cycles, the cathedr
         },
         {
           title: 'Flying Buttresses: Solving the Problem Outside the Building',
-          paragraphs: [
+                    diagram: 'ArchForcesDiagram',
+paragraphs: [
             'Even with pointed arches, some outward thrust remains. The vault pushes outward on the columns, and the columns want to topple. In a Romanesque church, this is handled by **thick walls** between the columns. In a Gothic cathedral, the builders wanted to remove those walls and replace them with **glass**.',
             'The solution was the **flying buttress** — a stone arm that reaches from a heavy pier (a thick support column *outside* the building) to the point on the interior column where the outward thrust is greatest. It transfers the thrust away from the thin wall and down into the massive pier, which is heavy enough to absorb it.',
             'Think of it like a friend holding your arm to stop you from falling sideways. You\'re the column, experiencing outward push from the vault. Your friend (the buttress) braces you from outside. The push flows from you, through your friend\'s arm, down through your friend\'s body (the pier), and into the ground.',
@@ -3444,7 +3468,8 @@ From a dark room in Cairo, under house arrest, pretending to be insane, one man 
         },
         {
           title: 'Refraction: Why a Straw Looks Bent in Water',
-          paragraphs: [
+                    diagram: 'LensRayDiagram',
+paragraphs: [
             'Put a straw in a glass of water and look from the side. The straw appears to **bend** at the water\'s surface. It\'s not actually bent — if you pull it out, it\'s perfectly straight. The *light* is bending, not the straw.',
             'When light passes from one material to another (air → water, air → glass), it changes speed. Light moves **slower** in water and glass than in air. When it crosses the boundary at an angle, the speed change causes the light ray to change direction. This is **refraction**.',
             'The analogy: imagine pushing a shopping cart from a smooth floor onto thick carpet, at an angle. The wheel that hits the carpet first slows down, while the other wheel is still on the smooth floor moving fast. The cart turns. The same thing happens to a light wave — one edge enters the glass and slows down while the other edge is still in air at full speed. The wave pivots.',
@@ -3593,7 +3618,8 @@ But the Silk Road's pattern — a network of routes connecting centers of produc
         },
         {
           title: 'Supply Chains and Markups: Why Silk Cost 100x More in Rome',
-          paragraphs: [
+                    diagram: 'SupplyChainDiagram',
+paragraphs: [
             'No single merchant traveled the entire Silk Road. A bolt of Chinese silk changed hands **10-15 times** between Chang\'an and Rome. Each intermediary bought at one city, marked up the price, and sold at the next.',
             'If each of 12 intermediaries adds a **30% markup**, the final price is 1.3¹² = **23 times** the original price. If they each add 50%, it\'s 1.5¹² = **130 times** the original. A bolt of silk that cost 1 gold piece in Chang\'an could cost 100+ gold pieces in Rome — not because silk is inherently that valuable, but because of the accumulated cost of **12 people making a living along the way**.',
             'This is a **supply chain** — a sequence of steps that transforms and transports a product from producer to consumer. Every modern product has one: a smartphone involves miners (lithium, cobalt), refiners, component manufacturers, assembly workers, shippers, distributors, and retailers. Each step adds value — and cost.',
@@ -3606,7 +3632,8 @@ But the Silk Road's pattern — a network of routes connecting centers of produc
         },
         {
           title: 'Connectivity Has Costs: Disease on the Trade Routes',
-          paragraphs: [
+                    diagram: 'SIRModelDiagram',
+paragraphs: [
             'Trade routes carry goods. They also carry **diseases**. The **Black Death** — the bubonic plague that killed 75-200 million people between 1346 and 1353 — traveled the Silk Road from Central Asia to Europe.',
             'The bacterium *Yersinia pestis* was carried by **fleas** on **rats**, which traveled in grain sacks and merchandise along the trade routes. The speed of the plague\'s spread was determined by the **speed of trade** — roughly 2-5 km per day overland, faster along sea routes. Epidemiologists have modeled the plague\'s spread using the same network mathematics used to analyze trade flows.',
             'This is not ancient history. **COVID-19** spread along modern trade and travel routes — airports and shipping lanes. The virus reached Italy through Chinese textile workers in Lombardy, a direct consequence of globalized supply chains. Connectivity creates wealth and vulnerability in equal measure.',
@@ -3747,7 +3774,8 @@ Four hundred years separated Leonardo's notebooks from the Wright Flyer. The sci
       concepts: [
         {
           title: 'Lift: Why Wings Keep Birds (and Planes) in the Air',
-          paragraphs: [
+                    diagram: 'BernoulliDiagram',
+paragraphs: [
             'Hold a piece of paper flat in front of your mouth. Let the far edge hang down. Now blow **over the top** of the paper. What happens? The paper rises — even though you\'re blowing over it, not under it.',
             'This is **lift** — the upward force that keeps birds, planes, and gliders in the air. It works because of a principle discovered by Daniel Bernoulli (1738, but understood intuitively by Leonardo 200 years earlier): **faster-moving air has lower pressure than slower-moving air**.',
             'A wing (or your piece of paper) is shaped so that air flows **faster over the top** and **slower under the bottom**. The higher pressure beneath pushes upward; the lower pressure above creates a partial vacuum that pulls upward. Together, these create lift — an upward force that can support the weight of a bird, a paper airplane, or a 400-tonne Boeing 747.',
@@ -3924,7 +3952,8 @@ The Black Death teaches us that pandemics are not just medical events — they a
       concepts: [
         {
           title: 'How Diseases Spread: The Chain of Infection',
-          paragraphs: [
+                    diagram: 'SIRModelDiagram',
+paragraphs: [
             'A cold starts with one person sneezing in a room. A few days later, three more people are sick. A week later, half the class is out. Two weeks after that, the school closes. What happened? The disease **spread** — one person infected a few, those few infected more, and the chain reaction expanded through the population.',
             'Every infectious disease follows a **chain of infection** with specific links: (1) an **agent** (the germ — a bacterium, virus, or parasite), (2) a **reservoir** (where the germ lives — humans, animals, soil), (3) a **mode of transmission** (how it gets from one host to another — air, water, contact, vectors like mosquitoes or fleas), and (4) a **susceptible host** (someone whose immune system hasn\'t encountered this germ before).',
             'For the Black Death, the chain was: **agent** = *Yersinia pestis* (a bacterium), **reservoir** = rats, **vector** = fleas (which carried the bacterium from rats to humans), **susceptible hosts** = essentially everyone (nobody had immunity because the disease was new to Europe).',
@@ -3937,7 +3966,8 @@ The Black Death teaches us that pandemics are not just medical events — they a
         },
         {
           title: 'R₀: The Number That Predicts Pandemics',
-          paragraphs: [
+                    diagram: 'SIRModelDiagram',
+paragraphs: [
             'Here\'s the most important number in epidemiology: **R₀** (pronounced "R-nought"). It stands for the **basic reproduction number** — the average number of new infections caused by a single infected person in a population where everyone is susceptible.',
             'If R₀ = 2, each infected person infects 2 others. Those 2 infect 2 more each (total: 4). Those 4 infect 8, then 16, then 32... The epidemic grows **exponentially**. If R₀ = 0.5, each infected person infects only 0.5 others on average — the epidemic shrinks and dies out.',
             'The critical threshold is **R₀ = 1**. Above 1, the epidemic grows. Below 1, it dies out. Exactly at 1, it stays stable — each infected person replaces themselves with exactly one new case. Every public health intervention aims to push R₀ below 1.',
