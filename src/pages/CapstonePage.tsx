@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Code2, Trophy, Clock, Target } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { lessons, DISCIPLINES } from '../data/lessons';
+import { lessons } from '../data/lessons';
 import { getLevelComponents } from '../components/levels';
 
 /* ── Extract capstone projects from all lessons that have Level 4 ── */
@@ -28,15 +28,34 @@ function getCapstoneProjects() {
     }));
 }
 
+/* ── Categorize projects by what the student builds, not the underlying physics ── */
+const PROJECT_CATEGORIES: { key: string; label: string; icon: string; desc: string; keywords: string[] }[] = [
+  { key: 'simulator', label: 'Simulators & Models', icon: '🔬', desc: 'Build computational models of real-world systems', keywords: ['simulator', 'simulation', 'model', 'simulate'] },
+  { key: 'analyzer', label: 'Data Analysis Tools', icon: '📊', desc: 'Analyze real data and extract insights', keywords: ['analyzer', 'analysis', 'calculator', 'estimator', 'predictor'] },
+  { key: 'optimizer', label: 'Optimizers & Planners', icon: '🎯', desc: 'Find the best solution in a complex design space', keywords: ['optimizer', 'planner', 'design', 'optimis'] },
+  { key: 'engine', label: 'Search & Knowledge Systems', icon: '🔍', desc: 'Build systems that organize and retrieve information', keywords: ['search', 'knowledge', 'graph', 'network', 'index', 'catalog'] },
+  { key: 'hardware', label: 'Hardware & Engineering', icon: '🔧', desc: 'Design physical systems — ships, bridges, buildings', keywords: ['ship', 'bridge', 'flight', 'structural', 'arch', 'canal', 'lock', 'aqueduct'] },
+];
+
+function categorizeProject(title: string, desc: string): string {
+  const text = (title + ' ' + desc).toLowerCase();
+  for (const cat of PROJECT_CATEGORIES) {
+    if (cat.keywords.some(kw => text.includes(kw))) return cat.key;
+  }
+  return 'simulator'; // default
+}
+
 export default function CapstonePage() {
   const projects = getCapstoneProjects();
 
-  // Group by discipline
-  const byDiscipline = new Map<string, typeof projects>();
+  // Group by what the student builds
+  const byCategory = new Map<string, typeof projects>();
+  for (const cat of PROJECT_CATEGORIES) {
+    byCategory.set(cat.key, []);
+  }
   for (const p of projects) {
-    const primary = p.skillTags.find(t => t.discipline !== 'Programming')?.discipline || 'Programming';
-    if (!byDiscipline.has(primary)) byDiscipline.set(primary, []);
-    byDiscipline.get(primary)!.push(p);
+    const cat = categorizeProject(p.projectTitle, p.projectDescription);
+    byCategory.get(cat)!.push(p);
   }
 
   const totalHours = projects.reduce((sum, p) => sum + p.estimatedHours, 0);
@@ -68,7 +87,7 @@ export default function CapstonePage() {
             </div>
             <div className="flex items-center gap-2">
               <Target className="w-4 h-4 text-purple-500" />
-              <span>{byDiscipline.size} disciplines</span>
+              <span>{PROJECT_CATEGORIES.length} project types</span>
             </div>
           </div>
         </div>
@@ -100,18 +119,20 @@ export default function CapstonePage() {
       {/* Projects by discipline */}
       <section className="py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
-          {[...byDiscipline.entries()].map(([discipline, disciplineProjects]) => {
-            const discInfo = DISCIPLINES.find(d => d.key === discipline);
+          {PROJECT_CATEGORIES.map(cat => {
+            const catProjects = byCategory.get(cat.key) || [];
+            if (catProjects.length === 0) return null;
             return (
-              <div key={discipline} className="mb-12">
-                <div className="flex items-center gap-3 mb-6">
-                  <span className="text-2xl">{discInfo?.icon || '🔬'}</span>
-                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{discipline}</h2>
-                  <span className="text-sm text-gray-500 dark:text-gray-400">({disciplineProjects.length} projects)</span>
+              <div key={cat.key} className="mb-12">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-2xl">{cat.icon}</span>
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{cat.label}</h2>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">({catProjects.length} projects)</span>
                 </div>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 ml-11">{cat.desc}</p>
 
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {disciplineProjects.map(project => {
+                  {catProjects.map(project => {
                     const Icon = project.icon;
                     return (
                       <Link
