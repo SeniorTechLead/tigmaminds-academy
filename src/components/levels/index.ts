@@ -159,7 +159,7 @@ const registry: Record<string, LevelComponents> = {
   'panama-canal': { Level1: lazy(() => import('./PanamaCanalLevel1')), Level2: lazy(() => import('./PanamaCanalLevel2')), Level3: lazy(() => import('./PanamaCanalLevel3')), Level4: lazy(() => import('./PanamaCanalLevel4')) },
   'library-of-alexandria': { Level1: lazy(() => import('./AlexandriaLevel1')) },
   'viking-navigation': { Level1: lazy(() => import('./VikingNavLevel1')) },
-  'building-the-pyramids': { Level1: lazy(() => import('./PyramidsLevel1')) },
+  'building-the-pyramids': { Level1: lazy(() => import('./PyramidsLevel1')), Level2: lazy(() => import('./PyramidsLevel2')), Level3: lazy(() => import('./PyramidsLevel3')), Level4: lazy(() => import('./PyramidsLevel4')) },
   'apollo-moon-landing': { Level1: lazy(() => import('./ApolloLevel1')) },
   'penicillin-discovery': { Level1: lazy(() => import('./PenicillinLevel1')) },
   'gutenberg-printing-press': { Level1: lazy(() => import('./GutenbergLevel1')) },
