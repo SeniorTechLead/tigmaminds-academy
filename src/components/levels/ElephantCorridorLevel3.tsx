@@ -1140,13 +1140,13 @@ for proj in greedy_selected:
             color='#22c55e', linewidth=3, alpha=0.8)
     mid_x = (patch_x[i] + patch_x[j]) / 2
     mid_y = (patch_y[i] + patch_y[j]) / 2
-    ax.text(mid_x, mid_y, f'\${proj["cost"]}M', color='#22c55e', fontsize=7, ha='center')
+    ax.text(mid_x, mid_y, f'\{proj["cost"]}M', color='#22c55e', fontsize=7, ha='center')
 
 for p in range(n_patches):
     size = patch_pop[p] / 5
     ax.scatter(patch_x[p], patch_y[p], s=size, c='#3b82f6', edgecolors='white', linewidths=1, zorder=5)
     ax.text(patch_x[p], patch_y[p] - 4, patch_names[p], color='white', fontsize=7, ha='center')
-ax.set_title(f'Greedy solution (cost: \${greedy_cost}M)', color='white', fontsize=11)
+ax.set_title(f'Greedy solution (cost: \{greedy_cost}M)', color='white', fontsize=11)
 ax.set_xlim(-5, 80)
 ax.set_ylim(0, 60)
 ax.tick_params(colors='gray')
@@ -1162,13 +1162,13 @@ for proj in sa_selected:
             color='#f59e0b', linewidth=3, alpha=0.8)
     mid_x = (patch_x[i] + patch_x[j]) / 2
     mid_y = (patch_y[i] + patch_y[j]) / 2
-    ax.text(mid_x, mid_y, f'\${proj["cost"]}M', color='#f59e0b', fontsize=7, ha='center')
+    ax.text(mid_x, mid_y, f'\{proj["cost"]}M', color='#f59e0b', fontsize=7, ha='center')
 
 for p in range(n_patches):
     size = patch_pop[p] / 5
     ax.scatter(patch_x[p], patch_y[p], s=size, c='#3b82f6', edgecolors='white', linewidths=1, zorder=5)
     ax.text(patch_x[p], patch_y[p] - 4, patch_names[p], color='white', fontsize=7, ha='center')
-ax.set_title(f'Simulated annealing (cost: \${sa_cost}M)', color='white', fontsize=11)
+ax.set_title(f'Simulated annealing (cost: \{sa_cost}M)', color='white', fontsize=11)
 ax.set_xlim(-5, 80)
 ax.set_ylim(0, 60)
 ax.tick_params(colors='gray')
@@ -1208,18 +1208,18 @@ ax.tick_params(colors='gray')
 plt.tight_layout()
 plt.show()
 
-print(f"Budget: \${budget}M")
+print(f"Budget: \{budget}M")
 print(f"Baseline benefit (no new corridors): {baseline_benefit:.0f}")
 print()
 print("GREEDY SOLUTION:")
 for p in greedy_selected:
-    print(f"  {p['name']:<30} cost=\${p['cost']}M  quality={p['quality']}")
-print(f"  Total cost: \${greedy_cost}M  Benefit: {greedy_benefit:.0f}  Improvement: +{greedy_benefit - baseline_benefit:.0f}")
+    print(f"  {p['name']:<30} cost=\{p['cost']}M  quality={p['quality']}")
+print(f"  Total cost: \{greedy_cost}M  Benefit: {greedy_benefit:.0f}  Improvement: +{greedy_benefit - baseline_benefit:.0f}")
 print()
 print("SIMULATED ANNEALING SOLUTION:")
 for p in sa_selected:
-    print(f"  {p['name']:<30} cost=\${p['cost']}M  quality={p['quality']}")
-print(f"  Total cost: \${sa_cost}M  Benefit: {sa_benefit:.0f}  Improvement: +{sa_benefit - baseline_benefit:.0f}")`,
+    print(f"  {p['name']:<30} cost=\{p['cost']}M  quality={p['quality']}")
+print(f"  Total cost: \{sa_cost}M  Benefit: {sa_benefit:.0f}  Improvement: +{sa_benefit - baseline_benefit:.0f}")`,
       challenge: 'Change the budget to $60M and re-run. With more money, does the greedy algorithm still find a good solution, or does simulated annealing pull further ahead? Try increasing n_iter in SA to 5000 for better convergence.',
       successHint: 'Systematic Conservation Planning (SCP) is a real field. Software like Marxan and Zonation use exactly these optimization algorithms to design protected area networks worldwide. You just built a simplified version of what guides billion-dollar conservation investments.',
     },

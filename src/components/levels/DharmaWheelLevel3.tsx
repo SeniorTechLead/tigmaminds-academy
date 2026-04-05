@@ -561,7 +561,7 @@ print("-" * 65)
 
 for mat, ro, ri, t in designs:
     d = design_flywheel(mat, ro, ri, t)
-    print(f"{mat:>14} | {d['mass']:>5.1f} | {d['rpm_max']:>8.0f} | {d['usable_kWh']:>11.3f} | {d['energy_density']:>5.1f} | \${d['cost']:>6.0f}")
+    print(f"{mat:>14} | {d['mass']:>5.1f} | {d['rpm_max']:>8.0f} | {d['usable_kWh']:>11.3f} | {d['energy_density']:>5.1f} | \{d['cost']:>6.0f}")
 
 print()
 

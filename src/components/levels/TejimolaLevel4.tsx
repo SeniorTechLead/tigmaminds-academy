@@ -420,7 +420,7 @@ ax.set_xticklabels([f'{t} plants' for t in targets], color='white', fontsize=9)
 ax.set_ylabel('Estimated cost ($)', color='white')
 ax.set_title('Experiment Cost', color='white', fontsize=11)
 for i, c in enumerate(costs):
-    ax.text(i, c + 10, f'\${c:.0f}', ha='center', color='white', fontsize=10)
+    ax.text(i, c + 10, f'\{c:.0f}', ha='center', color='white', fontsize=10)
 
 # Plot 4: Multi-species comparison at optimal
 ax = axes[1, 0]
@@ -483,7 +483,7 @@ protocol = [
     f"Predicted success: {best_rate*100:.1f}%",
     f"For 20 plants: {required_replicates(20, best_rate)} vessels",
     f"Timeline: {SPECIES_DB[species]['weeks']} weeks",
-    f"Est. cost: \${experiment_cost(required_replicates(20, best_rate), SPECIES_DB[species]['weeks']):.0f}",
+    f"Est. cost: \{experiment_cost(required_replicates(20, best_rate), SPECIES_DB[species]['weeks']):.0f}",
 ]
 for i, line in enumerate(protocol):
     ax.text(0.5, 0.68 - i * 0.09, line, transform=ax.transAxes,
@@ -501,7 +501,7 @@ print()
 print(f"{'Target':>8} {'Vessels':>8} {'Cost':>10}")
 print("-" * 30)
 for t, r, c in zip(targets, replicates_needed, costs):
-    print(f"{t:>8} {r:>8} \${c:>9.0f}")
+    print(f"{t:>8} {r:>8} \{c:>9.0f}")
 print()
 print("Sensitivity ranking (most to least important):")
 for param, sens in sorted_sens:
@@ -856,7 +856,7 @@ protocol_lines = [
     f"Predicted rate: {best_rate*100:.1f}%",
     f"P(≥{EXPERIMENT['target_plants']}): {p_target:.0%}",
     f"Timeline: {total_weeks} weeks",
-    f"Budget: \${total_cost:.0f}",
+    f"Budget: \{total_cost:.0f}",
 ]
 for i, line in enumerate(protocol_lines):
     ax.text(0.5, 0.82 - i * 0.085, line, transform=ax.transAxes,
@@ -870,7 +870,7 @@ colors_cost = ['#22c55e', '#3b82f6', '#a855f7', '#f59e0b', '#64748b', '#ec4899',
 wedges, texts, autotexts = ax.pie(cost_vals, labels=cost_items, autopct='%1.0f%%',
     colors=colors_cost[:len(cost_items)],
     textprops={'color': 'white', 'fontsize': 7})
-ax.set_title(f'Budget: \${total_cost:.0f}', color='white', fontsize=11)
+ax.set_title(f'Budget: \{total_cost:.0f}', color='white', fontsize=11)
 
 # Plot 3: Gantt chart timeline
 ax = axes[0, 2]
@@ -941,8 +941,8 @@ metrics = [
     ('Target plants', f'{EXPERIMENT["target_plants"]}', '#f59e0b'),
     ('Predicted yield', f'{np.mean(mc_success):.0f} ± {np.std(mc_success):.0f}', '#22c55e'),
     ('Success probability', f'{p_target:.0%}', '#22c55e' if p_target > 0.8 else '#ef4444'),
-    ('Total cost', f'\${total_cost:.0f}', '#22c55e' if total_cost < EXPERIMENT["budget_limit"] else '#ef4444'),
-    ('Cost/plant', f'\${total_cost/max(1,np.mean(mc_success)):.1f}', '#f59e0b'),
+    ('Total cost', f'\{total_cost:.0f}', '#22c55e' if total_cost < EXPERIMENT["budget_limit"] else '#ef4444'),
+    ('Cost/plant', f'\{total_cost/max(1,np.mean(mc_success)):.1f}', '#f59e0b'),
     ('Timeline', f'{total_weeks} weeks', '#22c55e' if within_limit else '#ef4444'),
     ('Vessels needed', f'{n_vessels}', '#3b82f6'),
 ]
@@ -975,8 +975,8 @@ print(f"  90% CI: [{ci5:.0f}, {ci95:.0f}]")
 print()
 print("BUDGET:")
 for item, cost in costs.items():
-    print(f"  {item:<25} \${cost:>8.0f}")
-print(f"  {'TOTAL':<25} \${total_cost:>8.0f}")
+    print(f"  {item:<25} \{cost:>8.0f}")
+print(f"  {'TOTAL':<25} \{total_cost:>8.0f}")
 within_budget = total_cost <= EXPERIMENT['budget_limit']
 print(f"  Status: {'WITHIN BUDGET' if within_budget else 'OVER BUDGET'}")
 print()
@@ -1194,8 +1194,8 @@ metrics = [
     ('Success rate', f'{success_rate*100:.0f}%', '#22c55e'),
     ('Expected yield', f'{mc_mean} +/- {mc_std}', '#3b82f6'),
     ('P(reach target)', f'{p_target*100:.0f}%', '#f59e0b'),
-    ('Total cost', f'\${total_cost:,}', '#a855f7'),
-    ('Cost per plant', f'\${total_cost/mc_mean:.0f}', '#f472b6'),
+    ('Total cost', f'\{total_cost:,}', '#a855f7'),
+    ('Cost per plant', f'\{total_cost/mc_mean:.0f}', '#f472b6'),
     ('Timeline', f'{timeline_weeks} weeks', '#22d3ee'),
 ]
 ax2.text(0.5, 0.98, 'KEY METRICS', transform=ax2.transAxes,
@@ -1248,7 +1248,7 @@ print("EXPERIMENT DASHBOARD COMPLETE")
 print(f"Decision: {verdict}")
 print(f"  Success probability: {p_target:.0%}")
 print(f"  Expected yield: {mc_mean} plants (target: {target_plants})")
-print(f"  Budget: \${total_cost:,} (\${total_cost/mc_mean:.0f}/plant)")
+print(f"  Budget: \{total_cost:,} (\{total_cost/mc_mean:.0f}/plant)")
 print(f"  Timeline: {timeline_weeks} weeks")
 print()
 print("CAPSTONE COMPLETE: From Tejimola's garden to a complete")

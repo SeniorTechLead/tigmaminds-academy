@@ -240,7 +240,7 @@ for name, sp, sa, wt in bridges:
         T_str = f"{T/1000:.0f} kN"
     print(f"{name:<30} {sp:>4}m {sa:>3}m {T_str:>12}")`,
       challenge: 'The Q\'eswachaka bridge is rebuilt every year. If the ichu grass loses 30% of its tensile strength per year due to weathering, what is the maximum safe span for a bridge that\'s 18 months old (70% of original strength)? This is why annual rebuilding is essential — the grass weakens, and the bridge must be replaced before it becomes dangerous.',
-      successHint: 'You modeled suspension bridge physics — the same mathematics used to design every suspension bridge, cable car, and zip line in the world. The key insight: more sag = less tension = longer cable life. The Inca bridges' deep sag wasn\'t a flaw — it was brilliant engineering.',
+      successHint: 'You modeled suspension bridge physics — the same mathematics used to design every suspension bridge, cable car, and zip line in the world. The key insight: more sag = less tension = longer cable life. The Inca bridges\' deep sag wasn\'t a flaw — it was brilliant engineering.',
     },
     {
       title: 'The quipu — modelling a knotted-string database',

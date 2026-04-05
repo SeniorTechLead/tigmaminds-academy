@@ -156,26 +156,26 @@ function useStreak(userId: string | undefined) {
   return { streak, recordActivity };
 }
 
-/* ── XP calculation ── */
-function calcXP(isLevelComplete: (slug: string, lvl: number) => boolean, slugs: string[]): number {
-  let xp = 0;
+/* ── Points calculation — earn points for completing levels ── */
+function calcPoints(isLevelComplete: (slug: string, lvl: number) => boolean, slugs: string[]): number {
+  let pts = 0;
   for (const slug of slugs) {
-    if (isLevelComplete(slug, 0)) xp += 10;  // Level 0: 10 XP
-    if (isLevelComplete(slug, 1)) xp += 20;  // Level 1: 20 XP
-    if (isLevelComplete(slug, 2)) xp += 30;  // Level 2: 30 XP
-    if (isLevelComplete(slug, 3)) xp += 40;  // Level 3: 40 XP
-    if (isLevelComplete(slug, 4)) xp += 50;  // Level 4: 50 XP
+    if (isLevelComplete(slug, 0)) pts += 10;
+    if (isLevelComplete(slug, 1)) pts += 20;
+    if (isLevelComplete(slug, 2)) pts += 30;
+    if (isLevelComplete(slug, 3)) pts += 40;
+    if (isLevelComplete(slug, 4)) pts += 50;
   }
-  return xp;
+  return pts;
 }
 
-const XP_MILESTONES = [
-  { xp: 50, label: 'First Steps', icon: '🌱' },
-  { xp: 150, label: 'Getting Curious', icon: '🔍' },
-  { xp: 500, label: 'Pattern Spotter', icon: '🧩' },
-  { xp: 1000, label: 'Code Builder', icon: '🏗️' },
-  { xp: 2500, label: 'Science Explorer', icon: '🔬' },
-  { xp: 5000, label: 'STEM Master', icon: '🏆' },
+const MILESTONES = [
+  { pts: 50, label: 'First Steps', icon: '🌱' },
+  { pts: 150, label: 'Getting Curious', icon: '🔍' },
+  { pts: 500, label: 'Pattern Spotter', icon: '🧩' },
+  { pts: 1000, label: 'Code Builder', icon: '🏗️' },
+  { pts: 2500, label: 'Science Explorer', icon: '🔬' },
+  { pts: 5000, label: 'STEM Master', icon: '🏆' },
 ];
 
 /* ── Auto-generated discipline goals ── */

@@ -273,14 +273,14 @@ ax2.tick_params(labelsize=10)
 
 for bar, c in zip(bars, cost):
     ax2.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.3,
-             f'\${c:.2f}/m³', ha='center', fontsize=10, color='lightgray')
+             f'\{c:.2f}/m³', ha='center', fontsize=10, color='lightgray')
 
 plt.tight_layout()
 plt.show()
 
 print("=== Water Source Comparison ===")
 for s, e, c in zip(sources, energy, cost):
-    print(f"  {s.replace(chr(10),' '):20s}: {e:>5.1f} kWh/m³, \${c:.2f}/m³")
+    print(f"  {s.replace(chr(10),' '):20s}: {e:>5.1f} kWh/m³, \{c:.2f}/m³")
 print()
 print("Zamzam: naturally filtered, mineral-rich, near-zero energy")
 print("Protecting aquifers is 35x cheaper than desalination!")`,

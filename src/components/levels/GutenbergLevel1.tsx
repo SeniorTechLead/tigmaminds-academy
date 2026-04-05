@@ -76,7 +76,7 @@ for name, copies in productions:
     savings = scribe_total - print_total
     savings_pct = savings / scribe_total * 100
     per_copy = cost_per_copy_print(copies)
-    print(f"  {name}: {copies:>7,} copies, per-copy: ${per_copy:.2f} "
+    print(f"  {name}: {copies:>7,} copies, per-copy: {per_copy:.2f} "
           f"(saving {savings_pct:.0f}% vs scribing)")`,
       challenge: 'A modern ebook has $0 variable cost (no paper, no ink) but the same fixed cost ($5,000 for editing, design). Calculate the per-copy cost at 100, 1,000, and 1,000,000 copies. What happens to the economics when variable cost is zero? (The per-copy cost drops to near-zero at scale — which is why ebooks and digital distribution are so transformative.)',
       successHint: 'Fixed cost vs variable cost is one of the most important concepts in economics and business. It explains why startups need scale, why software has zero marginal cost, why airlines fill seats at any price, and why Gutenberg changed the world: he converted the cost of knowledge from O(n) to O(1).',
@@ -597,11 +597,11 @@ for tech in technologies:
 
     cost = tech["cost_per_mbit"]
     if cost >= 1000:
-        cost_str = f"${cost/1000:.0f}K"
+        cost_str = f"{cost/1000:.0f}K"
     elif cost >= 1:
-        cost_str = f"${cost:.0f}"
+        cost_str = f"{cost:.0f}"
     else:
-        cost_str = f"${cost:.4f}"
+        cost_str = f"{cost:.4f}"
 
     reach = tech["reach_people"]
     if reach >= 1e9:

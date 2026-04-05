@@ -428,7 +428,7 @@ for years in [10, 20, 30, 50, 100, 200, 500]:
     m_cost = modern_cold_room(years)
     savings = m_cost - y_cost
     winner = "YAKHCHAL" if savings > 0 else "MODERN"
-    print(f"{years:>7} yr ${y_cost:>10,.0f} ${m_cost:>10,.0f} ${savings:>+9,.0f} {winner}")
+    print(f"{years:>7} yr {y_cost:>10,.0f} {m_cost:>10,.0f} {savings:>+9,.0f} {winner}")
 
 # Sensitivity to discount rate
 print("\\n=== Sensitivity to Discount Rate (100-year horizon) ===")
@@ -439,7 +439,7 @@ for rate in [0.01, 0.02, 0.03, 0.05, 0.07, 0.10]:
     y = yakkchal_lifecycle(100, rate)
     m = modern_cold_room(100, rate)
     winner = "YAKHCHAL" if m > y else "MODERN"
-    print(f"{rate*100:>4.0f}% ${y:>10,.0f} ${m:>10,.0f} {winner}")
+    print(f"{rate*100:>4.0f}% {y:>10,.0f} {m:>10,.0f} {winner}")
 
 # Carbon analysis
 print("\\n=== Carbon Footprint Comparison (100 years) ===")
