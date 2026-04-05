@@ -179,7 +179,7 @@ const registry: Record<string, LevelComponents> = {
   'ibn-al-haytham-optics': { Level1: lazy(() => import('./IbnAlHaythamLevel1')), Level2: lazy(() => import('./IbnAlHaythamLevel2')), Level3: lazy(() => import('./IbnAlHaythamLevel3')), Level4: lazy(() => import('./IbnAlHaythamLevel4')) },
   'silk-road-network': { Level1: lazy(() => import('./SilkRoadLevel1')), Level2: lazy(() => import('./SilkRoadLevel2')), Level3: lazy(() => import('./SilkRoadLevel3')), Level4: lazy(() => import('./SilkRoadLevel4')) },
   'leonardo-machines': { Level1: lazy(() => import('./LeonardoLevel1')), Level2: lazy(() => import('./LeonardoLevel2')), Level3: lazy(() => import('./LeonardoLevel3')), Level4: lazy(() => import('./LeonardoLevel4')) },
-  'the-black-death': { Level1: lazy(() => import('./BlackDeathLevel1')) },
+  'the-black-death': { Level1: lazy(() => import('./BlackDeathLevel1')), Level2: lazy(() => import('./BlackDeathLevel2')), Level3: lazy(() => import('./BlackDeathLevel3')), Level4: lazy(() => import('./BlackDeathLevel4')) },
 };
 
 export function getLevelComponents(slug: string): LevelComponents {
