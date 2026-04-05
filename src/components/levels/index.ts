@@ -153,6 +153,9 @@ const registry: Record<string, LevelComponents> = {
   'parting-red-sea': { Level1: lazy(() => import('./RedSeaLevel1')), Level2: lazy(() => import('./RedSeaLevel2')), Level3: lazy(() => import('./RedSeaLevel3')), Level4: lazy(() => import('./RedSeaLevel4')) },
   'well-of-zamzam': { Level1: lazy(() => import('./ZamzamLevel1')), Level2: lazy(() => import('./ZamzamLevel2')), Level3: lazy(() => import('./ZamzamLevel3')), Level4: lazy(() => import('./ZamzamLevel4')) },
   'muezzins-call': { Level1: lazy(() => import('./MuezzinLevel1')), Level2: lazy(() => import('./MuezzinLevel2')), Level3: lazy(() => import('./MuezzinLevel3')), Level4: lazy(() => import('./MuezzinLevel4')) },
+
+  // World History lessons
+  'great-wall-of-china': { Level1: lazy(() => import('./GreatWallLevel1')), Level2: lazy(() => import('./GreatWallLevel2')), Level3: lazy(() => import('./GreatWallLevel3')), Level4: lazy(() => import('./GreatWallLevel4')) },
 };
 
 export function getLevelComponents(slug: string): LevelComponents {
