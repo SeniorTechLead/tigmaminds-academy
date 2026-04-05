@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Code2, Trophy, Clock, Target } from 'lucide-react';
 import Header from '../components/Header';
@@ -47,15 +48,23 @@ function categorizeProject(title: string, desc: string): string {
 
 export default function CapstonePage() {
   const projects = getCapstoneProjects();
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
-  // Group by what the student builds
-  const byCategory = new Map<string, typeof projects>();
-  for (const cat of PROJECT_CATEGORIES) {
-    byCategory.set(cat.key, []);
-  }
-  for (const p of projects) {
-    const cat = categorizeProject(p.projectTitle, p.projectDescription);
-    byCategory.get(cat)!.push(p);
+  // Tag each project with its category
+  const taggedProjects = projects.map(p => ({
+    ...p,
+    category: categorizeProject(p.projectTitle, p.projectDescription),
+  }));
+
+  // Filter
+  const filtered = selectedCategory
+    ? taggedProjects.filter(p => p.category === selectedCategory)
+    : taggedProjects;
+
+  // Counts per category
+  const categoryCounts = new Map<string, number>();
+  for (const p of taggedProjects) {
+    categoryCounts.set(p.category, (categoryCounts.get(p.category) || 0) + 1);
   }
 
   const totalHours = projects.reduce((sum, p) => sum + p.estimatedHours, 0);
@@ -116,23 +125,46 @@ export default function CapstonePage() {
         </div>
       </section>
 
-      {/* Projects by discipline */}
+      {/* Filter pills + project grid */}
       <section className="py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
-          {PROJECT_CATEGORIES.map(cat => {
-            const catProjects = byCategory.get(cat.key) || [];
-            if (catProjects.length === 0) return null;
-            return (
-              <div key={cat.key} className="mb-12">
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="text-2xl">{cat.icon}</span>
-                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{cat.label}</h2>
-                  <span className="text-sm text-gray-500 dark:text-gray-400">({catProjects.length} projects)</span>
-                </div>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 ml-11">{cat.desc}</p>
+          {/* Category filter pills */}
+          <div className="flex flex-wrap gap-2 justify-center mb-8">
+            <button
+              onClick={() => setSelectedCategory(null)}
+              className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${!selectedCategory ? 'bg-purple-500 text-white shadow-md' : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200'}`}
+            >
+              All ({projects.length})
+            </button>
+            {PROJECT_CATEGORIES.map(cat => {
+              const count = categoryCounts.get(cat.key) || 0;
+              if (count === 0) return null;
+              return (
+                <button
+                  key={cat.key}
+                  onClick={() => setSelectedCategory(selectedCategory === cat.key ? null : cat.key)}
+                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${selectedCategory === cat.key ? 'bg-purple-500 text-white shadow-md' : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200'}`}
+                >
+                  {cat.icon} {cat.label} ({count})
+                </button>
+              );
+            })}
+          </div>
 
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {catProjects.map(project => {
+          {/* Selected category description */}
+          {selectedCategory && (
+            <p className="text-center text-sm text-gray-500 dark:text-gray-400 mb-6">
+              {PROJECT_CATEGORIES.find(c => c.key === selectedCategory)?.desc}
+            </p>
+          )}
+
+          {/* Showing count */}
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+            Showing {filtered.length} project{filtered.length !== 1 ? 's' : ''}
+          </p>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filtered.map(project => {
                     const Icon = project.icon;
                     return (
                       <Link
@@ -201,11 +233,8 @@ export default function CapstonePage() {
                         </div>
                       </Link>
                     );
-                  })}
-                </div>
-              </div>
-            );
-          })}
+            })}
+          </div>
         </div>
       </section>
 
