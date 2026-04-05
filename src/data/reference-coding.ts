@@ -77,7 +77,6 @@ export const codingReferences: ReferenceGuide[] = [
           'Chained comparisons in Python: `18 <= age < 65` is equivalent to `age >= 18 and age < 65` but more readable. Boolean operators: `and` (both true), `or` (at least one true), `not` (inverts). Short-circuit evaluation: `if x != 0 and 10/x > 2` is safe because Python stops evaluating after `x != 0` is False, never dividing by zero. The ternary expression `result = "adult" if age >= 18 else "minor"` is a one-line if/else. Truthy/falsy values: `0`, `""`, `[]`, `None`, `False` are falsy; everything else is truthy.',
         advancedContent:
           'Pattern matching (Python 3.10+) uses `match/case` for structural pattern matching: `match command: case "quit": exit()`, `case ["move", x, y]: move_to(int(x), int(y))`, `case _: print("unknown")`. This is more powerful than if/elif chains for complex decision trees. Guard clauses (`case x if x > 0:`) add conditions to patterns. Under the hood, Python compiles match statements into efficient decision trees. In functional programming languages (Haskell, Erlang), pattern matching is the primary control flow mechanism — Python\'s adoption reflects the convergence of programming paradigms.',
-        diagram: 'FlowchartDiagram',
       },
       {
         title: 'Repeating Things (Loops)',
@@ -121,7 +120,6 @@ export const codingReferences: ReferenceGuide[] = [
           'The call stack tracks function execution. When `main()` calls `analyze()` which calls `sort()`, the stack is [main → analyze → sort]. When sort finishes, execution returns to analyze. A `RecursionError: maximum recursion depth exceeded` means the stack grew too deep — usually from a recursive function missing its base case. Python\'s default limit is 1,000 frames. Stack traces (tracebacks) read bottom-to-top: the last line is where the error occurred, and each line above shows the caller. Learning to read tracebacks is the single most valuable debugging skill.',
         advancedContent:
           'Python\'s Global Interpreter Lock (GIL) means only one thread executes Python bytecode at a time — even on multi-core CPUs. For CPU-bound work, use `multiprocessing` (separate processes with separate GILs) instead of `threading`. For I/O-bound work (network requests, file reads), `threading` or `asyncio` (cooperative multitasking) works well because the GIL is released during I/O waits. The `asyncio` event loop uses `async/await` syntax: `async def fetch(url): response = await session.get(url)`. Understanding concurrency models — threading, multiprocessing, and async — is essential for building responsive, high-performance Python applications.',
-        diagram: 'FlowchartDiagram',
       },
       {
         title: 'Debugging — Finding and Fixing Mistakes',
@@ -1592,7 +1590,6 @@ print(f"Kaziranga avg: {result:.0f} kg")  # 4600 kg`,
           'Core concepts: variables (let, const), functions (arrow: (a,b) => a+b), arrays ([1,2,3].map(x => x*2)), objects ({name: "Ranga", age: 25}). DOM: document.querySelector(".btn").addEventListener("click", handler). Template literals: `Hello ${name}`. Async: fetch("/api").then(r => r.json()). Error handling: try { risky() } catch(e) { console.error(e) }. The console object: .log(), .error(), .table(), .time()/.timeEnd() for debugging.',
         advancedContent:
           'ES6+ features: destructuring ({name, age} = obj), spread ([...arr1, ...arr2]), optional chaining (obj?.prop), nullish coalescing (val ?? default). The event loop: microtasks (Promises) run before macrotasks (setTimeout). Closures capture variables from outer scope — enabling private state and factory functions. Prototypal inheritance differs from classical OOP: objects inherit directly from other objects via the prototype chain. TypeScript adds static type checking: function add(a: number, b: number): number — catching type errors at compile time rather than runtime.',
-        diagram: 'FlowchartDiagram',
       },
       {
         title: 'How the Three Work Together',
@@ -4442,7 +4439,6 @@ plt.show()`,
           'Sound enters the ear canal, vibrates the eardrum, which moves three tiny bones (hammer, anvil, stirrup) that amplify vibrations 20× and transmit them to the cochlea. The cochlea is a fluid-filled spiral with ~16,000 hair cells along the basilar membrane. Different positions respond to different frequencies: the base (narrow, stiff) responds to high frequencies, the apex (wide, flexible) to low. When hair cells bend, they generate electrical signals sent to the brain. This frequency-to-position mapping is the basis of place theory of pitch perception.',
         advancedContent:
           'The cochlea performs a real-time Fourier transform mechanically — separating complex sounds into frequency components along the basilar membrane. Each hair cell has ~100 stereocilia that open mechanically-gated ion channels when deflected. Outer hair cells amplify weak signals through electromotility (they physically change length in response to voltage), providing 40-60 dB of cochlear gain. This "cochlear amplifier" gives the ear its remarkable dynamic range (0-120 dB, a factor of 10⁶ in amplitude). Noise-induced hearing loss permanently damages hair cells (they don\'t regenerate in humans), starting with the high-frequency region — which is why hearing loss typically begins with difficulty hearing consonants.',
-        diagram: 'MusicalWavesDiagram',
       },
       {
         title: 'Separating Sounds — The FFT Prism',
@@ -5844,7 +5840,6 @@ plt.show()
           'PR workflow: (1) Fork/clone the repo, (2) Create a feature branch: git switch -c feature-name, (3) Make changes, commit with clear messages, (4) Push: git push origin feature-name, (5) Open PR on GitHub with description, (6) Address review comments, push updates, (7) Maintainer merges. **Code review** catches bugs, improves design, and shares knowledge. Good PR practice: small, focused changes (not giant PRs); descriptive title and body; link to relevant issue; include tests.',
         advancedContent:
           'Advanced collaboration: **Conventional Commits** standardize messages (feat:, fix:, docs:, refactor:) enabling automated changelog generation. **Semantic Versioning** (MAJOR.MINOR.PATCH) communicates compatibility: breaking change → major bump, new feature → minor, bug fix → patch. **Monorepos** (Google, Meta) keep all code in one repository, using build tools (Bazel, Nx) to manage dependencies between projects. **Git hooks** automate quality checks: pre-commit runs linters, commit-msg validates format, pre-push runs tests. Husky (Node.js) and pre-commit (Python) manage hook installation across teams.',
-        diagram: 'FlowchartDiagram',
         interactive: {
           type: 'true-false',
           props: {
@@ -6756,7 +6751,6 @@ GROUP BY park;
           'The internet is a network of networks. Your device → router → ISP → internet backbone → destination server. Data travels as packets: each packet has a source IP, destination IP, and payload. TCP breaks data into ordered packets and ensures delivery (retransmits lost packets). UDP sends without guarantees (faster, used for video streaming and gaming). DNS translates domain names (google.com) to IP addresses (142.250.80.46). HTTP is the protocol web browsers use: a request (GET /page.html) produces a response (200 OK + content).',
         advancedContent:
           'The OSI model describes 7 layers of networking: Physical (cables, radio) → Data Link (Ethernet frames, MAC addresses) → Network (IP packets, routing) → Transport (TCP/UDP, ports) → Session → Presentation → Application (HTTP, SMTP, DNS). In practice, the TCP/IP model collapses these to 4 layers. Content Delivery Networks (CDNs) cache content at servers worldwide — when you access a website, the CDN serves content from the nearest edge server. HTTPS uses TLS encryption: the server presents a certificate (verified by a Certificate Authority), a secure session key is negotiated, and all subsequent data is encrypted. Certificate Transparency logs make it detectable when fake certificates are issued.',
-        diagram: 'FlowchartDiagram',
         interactive: {
           type: 'matching',
           props: {
@@ -6897,7 +6891,6 @@ GROUP BY park;
           'Algorithm efficiency is measured by **Big O notation**: O(1) = constant time (array access), O(log n) = logarithmic (binary search), O(n) = linear (scanning a list), O(n log n) = linearithmic (merge sort), O(n²) = quadratic (bubble sort), O(2ⁿ) = exponential (brute force). For n=1,000,000: O(n) takes ~1 ms, O(n log n) ~20 ms, O(n²) ~17 minutes, O(2ⁿ) → heat death of the universe. Binary search on a sorted array of 1 billion elements finds any item in at most **30 comparisons** (log₂ 10⁹ ≈ 30). This is why sorting data first (O(n log n) one-time cost) pays off with repeated O(log n) searches.',
         advancedContent:
           'The P vs NP problem asks whether every problem whose solution can be verified quickly (in polynomial time) can also be solved quickly. If P = NP, then problems like the travelling salesman, protein folding, and breaking RSA encryption would have efficient algorithms — transforming science, medicine, and rendering current cryptography useless. Most computer scientists believe P ≠ NP, but no proof exists. This is one of the seven Millennium Prize Problems ($1 million reward). **NP-complete** problems (Boolean satisfiability, graph coloring, subset sum) are the hardest in NP — solving any one efficiently would solve all of them. Practical approaches: heuristics, approximation algorithms, and quantum computing (which offers speedups for some problems but does not solve NP-complete problems in general).',
-        diagram: 'FlowchartDiagram',
       },
       {
         id: 'algo-arrays',
@@ -7537,7 +7530,6 @@ print(fibonacci(10))  # 55`,
           'Phishing emails mimic legitimate senders — check the actual sender address (not display name), hover over links before clicking, be suspicious of urgency ("Your account will be closed in 24 hours!"). **Malware** types: virus (attaches to programs, requires user action), worm (self-propagating across networks), trojan (disguised as legitimate software), ransomware (encrypts files, demands payment). Defense: keep software updated (patches fix known vulnerabilities), use antivirus, don\'t download from untrusted sources, enable automatic updates.',
         advancedContent:
           'Social engineering exploits human psychology rather than technical vulnerabilities. **Pretexting** (creating a fake scenario to extract information), **baiting** (leaving infected USB drives in parking lots), **tailgating** (following authorized personnel through secure doors), and **vishing** (phone phishing) all bypass technical defenses. Defense requires security awareness training — organizations that conduct regular simulated phishing exercises reduce click rates from ~30% to ~5%. The weakest link in any security system is usually human behavior, which is why security culture matters more than technology alone.',
-        diagram: 'FlowchartDiagram',
         interactive: {
           type: 'matching',
           props: {
