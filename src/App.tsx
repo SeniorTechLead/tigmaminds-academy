@@ -41,6 +41,7 @@ const LessonPage = lazyWithRetry(() => import('./pages/LessonPage'));
 const PlaygroundPage = lazyWithRetry(() => import('./pages/PlaygroundPage'));
 const NotFoundPage = lazyWithRetry(() => import('./pages/NotFoundPage'));
 const PartnerPage = lazyWithRetry(() => import('./pages/PartnerPage'));
+const CapstonePage = lazyWithRetry(() => import('./pages/CapstonePage'));
 
 function App() {
   useVersionCheck();
@@ -76,6 +77,7 @@ function App() {
           <Route path="/lessons/:slug" element={<LessonPage />} />
           <Route path="/playground" element={<PlaygroundPage />} />
           <Route path="/partner" element={<PartnerPage />} />
+          <Route path="/capstones" element={<CapstonePage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
