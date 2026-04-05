@@ -850,6 +850,27 @@ const lazyMap: Record<string, () => Promise<{ default: ComponentType<any> }>> = 
   SQLCaseDiagram: () => import('../diagrams/SQLCaseDiagram'),
   SQLStringFuncDiagram: () => import('../diagrams/SQLStringFuncDiagram'),
   SQLSetOperationsDiagram: () => import('../diagrams/SQLSetOperationsDiagram'),
+  // World History capstone diagrams
+  SIRModelDiagram: () => import('../diagrams/SIRModelDiagram'),
+  SearchIndexDiagram: () => import('../diagrams/SearchIndexDiagram'),
+  OsmosisDiagram: () => import('../diagrams/OsmosisDiagram'),
+  ChainReactionDiagram: () => import('../diagrams/ChainReactionDiagram'),
+  CatenaryBridgeDiagram: () => import('../diagrams/CatenaryBridgeDiagram'),
+  HohmannTransferDiagram: () => import('../diagrams/HohmannTransferDiagram'),
+  PhaseDiagramSteelDiagram: () => import('../diagrams/PhaseDiagramSteelDiagram'),
+  FreezeTnawDiagram: () => import('../diagrams/FreezeTnawDiagram'),
+  LockChamberDiagram: () => import('../diagrams/LockChamberDiagram'),
+  SupplyChainDiagram: () => import('../diagrams/SupplyChainDiagram'),
+  RocketEquationDiagram: () => import('../diagrams/RocketEquationDiagram'),
+  PrioritySchedulerDiagram: () => import('../diagrams/PrioritySchedulerDiagram'),
+  StarCompassDiagram: () => import('../diagrams/StarCompassDiagram'),
+  ArchForcesDiagram: () => import('../diagrams/ArchForcesDiagram'),
+  SalinisationDiagram: () => import('../diagrams/SalinisationDiagram'),
+  WootzMicrostructureDiagram: () => import('../diagrams/WootzMicrostructureDiagram'),
+  EvaporativeCoolingDiagram: () => import('../diagrams/EvaporativeCoolingDiagram'),
+  BulkheadDiagram: () => import('../diagrams/BulkheadDiagram'),
+  DoseResponseDiagram: () => import('../diagrams/DoseResponseDiagram'),
+  GasExpansionDiagram: () => import('../diagrams/GasExpansionDiagram'),
 };
 
 const cache: Record<string, ComponentType<any>> = {};
