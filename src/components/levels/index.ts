@@ -170,7 +170,7 @@ const registry: Record<string, LevelComponents> = {
   'egyptian-embalming': { Level1: lazy(() => import('./EmbalmingLevel1')), Level2: lazy(() => import('./EmbalmingLevel2')), Level3: lazy(() => import('./EmbalmingLevel3')), Level4: lazy(() => import('./EmbalmingLevel4')) },
   'chinese-gunpowder': { Level1: lazy(() => import('./GunpowderLevel1')), Level2: lazy(() => import('./GunpowderLevel2')), Level3: lazy(() => import('./GunpowderLevel3')), Level4: lazy(() => import('./GunpowderLevel4')) },
   'polynesian-wayfinding': { Level1: lazy(() => import('./PolynesianLevel1')), Level2: lazy(() => import('./PolynesianLevel2')), Level3: lazy(() => import('./PolynesianLevel3')), Level4: lazy(() => import('./PolynesianLevel4')) },
-  'mesopotamian-irrigation': { Level1: lazy(() => import('./MesopotamiaLevel1')) },
+  'mesopotamian-irrigation': { Level1: lazy(() => import('./MesopotamiaLevel1')), Level2: lazy(() => import('./MesopotamiaLevel2')), Level3: lazy(() => import('./MesopotamiaLevel3')), Level4: lazy(() => import('./MesopotamiaLevel4')) },
   'indian-wootz-steel': { Level1: lazy(() => import('./WootzSteelLevel1')), Level2: lazy(() => import('./WootzSteelLevel2')), Level3: lazy(() => import('./WootzSteelLevel3')), Level4: lazy(() => import('./WootzSteelLevel4')) },
   'mayan-astronomy': { Level1: lazy(() => import('./MayaAstronomyLevel1')) },
   'persian-ice-houses': { Level1: lazy(() => import('./PersianIceLevel1')), Level2: lazy(() => import('./PersianIceLevel2')), Level3: lazy(() => import('./PersianIceLevel3')), Level4: lazy(() => import('./PersianIceLevel4')) },
