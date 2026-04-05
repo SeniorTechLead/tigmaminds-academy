@@ -173,7 +173,7 @@ const registry: Record<string, LevelComponents> = {
   'mesopotamian-irrigation': { Level1: lazy(() => import('./MesopotamiaLevel1')) },
   'indian-wootz-steel': { Level1: lazy(() => import('./WootzSteelLevel1')), Level2: lazy(() => import('./WootzSteelLevel2')), Level3: lazy(() => import('./WootzSteelLevel3')), Level4: lazy(() => import('./WootzSteelLevel4')) },
   'mayan-astronomy': { Level1: lazy(() => import('./MayaAstronomyLevel1')) },
-  'persian-ice-houses': { Level1: lazy(() => import('./PersianIceLevel1')) },
+  'persian-ice-houses': { Level1: lazy(() => import('./PersianIceLevel1')), Level2: lazy(() => import('./PersianIceLevel2')), Level3: lazy(() => import('./PersianIceLevel3')), Level4: lazy(() => import('./PersianIceLevel4')) },
   'zheng-he-fleet': { Level1: lazy(() => import('./ZhengHeLevel1')) },
   'gothic-cathedrals': { Level1: lazy(() => import('./CathedralsLevel1')) },
   'ibn-al-haytham-optics': { Level1: lazy(() => import('./IbnAlHaythamLevel1')) },
