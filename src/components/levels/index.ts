@@ -14,7 +14,7 @@ const registry: Record<string, LevelComponents> = {
   'girl-who-spoke-to-elephants': {Level1: lazy(() => import('../ElephantLevel1')), Level2: lazy(() => import('../ElephantLevel2')), Level3: lazy(() => import('./ElephantLevel3')), Level4: lazy(() => import('./ElephantLevel4')) },
   'dragonfly-and-the-paddy-field': {Level1: lazy(() => import('./DragonflyLevel1')), Level2: lazy(() => import('./DragonflyLevel2')), Level3: lazy(() => import('./DragonflyLevel3')), Level4: lazy(() => import('./DragonflyLevel4')) },
   'boy-who-built-a-library': {Level1: lazy(() => import('./LibraryLevel1')), Level2: lazy(() => import('./LibraryLevel2')), Level3: lazy(() => import('./LibraryLevel3')), Level4: lazy(() => import('./LibraryLevel4')) },
-  'firefly-festival-of-majuli': { Level1: lazy(() => import('./FireflyLevel1')), Level2: lazy(() => import('./FireflyLevel2')), Level3: lazy(() => import('./FireflyLevel3')) },
+  'firefly-festival-of-majuli': { Level1: lazy(() => import('./FireflyLevel1')), Level2: lazy(() => import('./FireflyLevel2')), Level3: lazy(() => import('./FireflyLevel3')), Level4: lazy(() => import('./FireflyLevel4')) },
   'river-dolphins-secret': {Level1: lazy(() => import('./DolphinLevel1')), Level2: lazy(() => import('./DolphinLevel2')), Level3: lazy(() => import('./DolphinLevel3')), Level4: lazy(() => import('./DolphinLevel4')) },
   'why-the-muga-silk-is-golden': {Level1: lazy(() => import('./MugaSilkLevel1')), Level2: lazy(() => import('./MugaSilkLevel2')), Level3: lazy(() => import('./MugaSilkLevel3')), Level4: lazy(() => import('./MugaSilkLevel4')) },
 
