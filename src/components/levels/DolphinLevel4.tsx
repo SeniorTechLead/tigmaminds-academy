@@ -1,1159 +1,541 @@
-import { useState, useRef, useCallback } from 'react';
-import { Loader2, Cpu } from 'lucide-react';
-import MiniLesson from '../MiniLesson';
-import { usePyodide } from '../../contexts/PyodideContext';
+import { useState } from 'react';
+import { ChevronDown, ChevronUp, CheckCircle, HelpCircle, Cpu } from 'lucide-react';
+import ArduinoPlayground from '../ArduinoPlayground';
+import { renderMarkdown } from '../MiniLesson';
+
+interface CircuitLesson {
+  title: string;
+  concept: string;
+  analogy?: string;
+  storyConnection?: string;
+  checkQuestion?: string;
+  checkAnswer?: string;
+  codeIntro?: string;
+  code: string;
+  ledCount?: number;
+  challenge?: string;
+  successHint?: string;
+}
+
+
+function CircuitMiniLesson({ lesson, number }: { lesson: CircuitLesson; number: number }) {
+  const [showAnswer, setShowAnswer] = useState(false);
+
+  return (
+    <div id={`L4-${number}`} className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden scroll-mt-24">
+      <div className="px-6 pt-6 pb-4">
+        <div className="flex items-center gap-3 mb-4">
+          <span className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-fuchsia-500 text-white flex items-center justify-center text-sm font-bold flex-shrink-0">{number}</span>
+          <h4 className="text-xl font-bold text-gray-900 dark:text-white">{lesson.title}</h4>
+        </div>
+        <div className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: renderMarkdown(lesson.concept) }} />
+
+        {lesson.analogy && (
+          <div className="bg-sky-50 dark:bg-sky-900/20 border-l-4 border-sky-400 rounded-r-lg px-4 py-3 mb-4">
+            <p className="text-sm text-sky-800 dark:text-sky-300 leading-relaxed"><strong>Think of it this way:</strong> {lesson.analogy}</p>
+          </div>
+        )}
+        {lesson.storyConnection && (
+          <div className="bg-emerald-50 dark:bg-emerald-900/20 border-l-4 border-emerald-400 rounded-r-lg px-4 py-3 mb-4">
+            <p className="text-sm text-emerald-800 dark:text-emerald-300 leading-relaxed"><strong>In the story:</strong> {lesson.storyConnection}</p>
+          </div>
+        )}
+        {lesson.checkQuestion && (
+          <div className="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-4 mb-2">
+            <div className="flex items-start gap-3">
+              <HelpCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+              <div className="flex-1">
+                <p className="text-sm font-semibold text-amber-900 dark:text-amber-200 mb-1">Before you code — think about this:</p>
+                <p className="text-sm text-amber-800 dark:text-amber-300">{lesson.checkQuestion}</p>
+                {lesson.checkAnswer && (
+                  <>
+                    <button onClick={() => setShowAnswer(!showAnswer)} className="mt-2 flex items-center gap-1 text-xs font-semibold text-amber-600 dark:text-amber-400">
+                      {showAnswer ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+                      {showAnswer ? 'Hide answer' : 'Show answer'}
+                    </button>
+                    {showAnswer && <p className="mt-2 text-sm text-amber-700 dark:text-amber-300 bg-amber-100 dark:bg-amber-900/30 px-3 py-2 rounded-lg">{lesson.checkAnswer}</p>}
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {lesson.codeIntro && (
+        <div className="px-6 py-2 bg-gray-50 dark:bg-gray-700/30 border-t border-gray-200 dark:border-gray-700">
+          <p className="text-sm text-gray-600 dark:text-gray-400"><strong className="text-gray-900 dark:text-white">Now try it:</strong> {lesson.codeIntro}</p>
+        </div>
+      )}
+
+      <div className="border-t border-gray-200 dark:border-gray-700">
+        <ArduinoPlayground starterCode={lesson.code} title={`Circuit ${number}`} ledCount={lesson.ledCount || 3} />
+      </div>
+
+      {lesson.challenge && (
+        <div className="px-6 py-3 bg-purple-50 dark:bg-purple-900/20 border-t border-purple-200 dark:border-purple-800">
+          <p className="text-sm text-purple-800 dark:text-purple-300"><strong>Experiment:</strong> {lesson.challenge}</p>
+        </div>
+      )}
+      {lesson.successHint && (
+        <div className="px-6 py-3 bg-emerald-50 dark:bg-emerald-900/20 border-t border-emerald-200 dark:border-emerald-800">
+          <p className="text-sm text-emerald-800 dark:text-emerald-300"><CheckCircle className="w-4 h-4 inline mr-1" />{lesson.successHint}</p>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function DolphinLevel4() {
-  const { pyodideRef, load: loadPyodide, ready: pyReady, state: pyState, loadProgress } = usePyodide();
-  const loading = pyState === 'loading';
-
-  const miniLessons = [
+  const circuitLessons: CircuitLesson[] = [
     {
-      title: 'System Design: Ultrasonic Sensor + Buzzer + Display',
-      concept: `In previous levels you explored the physics of echolocation and sonar mathematics. Now you build a real **underwater-inspired sonar ranging system** using an Arduino Uno, an HC-SR04 ultrasonic sensor, a piezo buzzer for proximity alerts, and a 16x2 LCD display for distance readout.
+      title: 'System Design: Ultrasonic Sonar with LED Distance Indicator',
+      concept: `You've reached the capstone: build a **sonar ranging system** inspired by river dolphin echolocation. The system uses an HC-SR04 ultrasonic sensor to measure distance, a piezo buzzer for proximity alerts, and **3 LEDs** as a distance indicator (close/medium/far).
 
-The **HC-SR04** is a time-of-flight sensor: it emits a 40 kHz ultrasonic pulse from one transducer and listens for the echo on a second transducer. The Arduino measures the round-trip time and calculates distance using the speed of sound in air (~343 m/s at 20 degrees C). While our sensor works in air rather than water, the principle is identical to dolphin echolocation and submarine sonar.
+The **HC-SR04** is a time-of-flight sensor: it emits a 40 kHz ultrasonic pulse and listens for the echo. The Arduino measures the round-trip time and calculates distance using the speed of sound (~343 m/s at 20 degrees C).
 
-The hardware architecture has three subsystems connected to the Arduino:
+Hardware layout:
+- **HC-SR04**: TRIG on pin 7, ECHO on pin 8 (simulated via serial in our playground)
+- **LED indicators**: Red (pin 2) = close, Yellow (pin 3) = medium, Green (pin 4) = far
+- **Buzzer**: pin 5 (simulated as LED brightness = beep rate)
 
-**Sensing**: HC-SR04 with TRIG (digital pin 7) and ECHO (digital pin 8). The TRIG pin receives a 10-microsecond pulse to initiate a measurement. The ECHO pin goes HIGH for a duration proportional to the round-trip time.
-
-**Alert**: Piezo buzzer on PWM pin 3. The buzzer frequency and beep rate change with distance — fast, high-pitched beeps when close (like a parking sensor), slow low beeps when far.
-
-**Display**: 16x2 LCD via I2C (SDA=A4, SCL=A5, address 0x27). Shows distance in centimeters, a bar graph for visual feedback, and the alert status.
-
-Power budget: HC-SR04 draws 15 mA during measurement, LCD backlight draws ~20 mA, buzzer peaks at 30 mA. Total ~65 mA, well within USB power limits. The HC-SR04 operates at 5V logic — compatible with the Uno's pins directly.
-
-The measurement cycle takes ~60 ms (maximum range timeout), giving us about 16 readings per second. This is our **sample rate** — fast enough for a handheld distance scanner but slow enough to avoid echo interference between consecutive pulses.`,
-      analogy: 'Think of the system as a simplified dolphin: the HC-SR04 is the melon (the dolphin forehead organ that focuses outgoing clicks) and the lower jaw (which channels returning echoes to the inner ear). The buzzer is the dolphin alerting its pod to nearby obstacles. The LCD is the dolphin brain forming a mental image of the surroundings. Our Arduino ties all three together, just as the dolphin nervous system does.',
-      storyConnection: 'The river dolphin navigates the murky Brahmaputra by emitting clicks and interpreting echoes — a biological sonar system perfected over millions of years. Our HC-SR04 project recreates this in electronics: emit a pulse, time the echo, calculate the distance, and alert the operator. The dolphin does this hundreds of times per second; our system manages sixteen, but the physics is identical.',
+The measurement cycle takes ~60 ms (maximum range timeout), giving about 16 readings per second. This is fast enough for a handheld distance scanner but slow enough to avoid echo interference between consecutive pulses.`,
+      analogy: 'The HC-SR04 is a simplified dolphin: the transmitter is the melon (the dolphin forehead organ that focuses outgoing clicks) and the receiver is the lower jaw (which channels returning echoes to the inner ear). The buzzer alerts the operator like a dolphin alerting its pod. The LEDs form a visual "mental image" of the surroundings.',
+      storyConnection: 'The river dolphin navigates the murky Brahmaputra by emitting clicks and interpreting echoes — a biological sonar perfected over millions of years. Our HC-SR04 project recreates this: emit a pulse, time the echo, calculate distance, and alert the operator.',
       checkQuestion: 'Why does the HC-SR04 use 40 kHz ultrasound instead of audible sound frequencies?',
-      checkAnswer: 'Higher frequencies are more directional (shorter wavelength = tighter beam), which improves spatial resolution and reduces false echoes from objects to the side. 40 kHz is also above human hearing range (20 kHz), so the sensor operates silently. The tradeoff is that higher frequencies attenuate faster in air, limiting the HC-SR04 maximum range to about 4 meters. Dolphins use even higher frequencies (up to 150 kHz) for the same reason — tighter beams for better resolution.',
-      codeIntro: 'Set up the Arduino sketch with pin definitions, LCD initialization, and the basic measurement framework.',
-      code: `// =============================================
-// Underwater Sonar Capstone — System Setup
-// HC-SR04 + Buzzer + LCD on Arduino Uno
-// =============================================
-
-// --- Pin Assignments ---
-const int TRIG_PIN = 7;     // HC-SR04 trigger
-const int ECHO_PIN = 8;     // HC-SR04 echo
-const int BUZZER_PIN = 3;   // Piezo buzzer (PWM capable)
-const int LED_CLOSE = 9;    // Red LED: object very close
-const int LED_MID = 10;     // Yellow LED: medium distance
-const int LED_FAR = 11;     // Green LED: far / clear
-
-// --- LCD via I2C (address 0x27, 16 columns x 2 rows) ---
-// Requires LiquidCrystal_I2C library
-// #include <LiquidCrystal_I2C.h>
-// LiquidCrystal_I2C lcd(0x27, 16, 2);
-
-// --- Physical Constants ---
-const float SPEED_OF_SOUND = 343.0;  // m/s at 20 deg C in air
-const float US_PER_CM_ROUNDTRIP = 58.2;  // microseconds per cm (round trip)
-// Derivation: 1 cm = 0.01 m; round trip = 0.02 m
-// time = 0.02 / 343 = 58.3 microseconds
-
-// --- Measurement Parameters ---
-const int MAX_DISTANCE_CM = 400;     // HC-SR04 max range
-const int MIN_DISTANCE_CM = 2;       // HC-SR04 min range
-const unsigned long TIMEOUT_US = 23200;  // 400cm round-trip timeout
-const int MEASUREMENT_DELAY_MS = 60; // minimum between measurements
-
-// --- State Variables ---
-float currentDistance = 0.0;   // latest measurement in cm
-float filteredDistance = 0.0;  // after running average (Lesson 3)
-int measurementCount = 0;
-bool objectDetected = false;
-
-unsigned long lastMeasureMillis = 0;
-unsigned long lastDisplayMillis = 0;
+      checkAnswer: 'Higher frequencies are more directional (shorter wavelength = tighter beam), improving spatial resolution and reducing false echoes. 40 kHz is above human hearing (20 kHz), so the sensor operates silently. The tradeoff: higher frequencies attenuate faster, limiting range to about 4 meters. Dolphins use up to 150 kHz for even tighter beams.',
+      codeIntro: 'Set up the sonar system with LED indicators and a self-test routine.',
+      code: `// Dolphin Sonar Capstone - System Setup
+// 3 LEDs: Red(close) Yellow(mid) Green(far)
 
 void setup() {
-  Serial.begin(115200);
-  Serial.println("=== Underwater Sonar Ranging System ===");
-  Serial.println("HC-SR04 | Buzzer | LED indicators");
-  Serial.println();
+  pinMode(2, OUTPUT);  // Red - CLOSE
+  pinMode(3, OUTPUT);  // Yellow - MEDIUM
+  pinMode(4, OUTPUT);  // Green - FAR
+  Serial.println("=== Dolphin Sonar System ===");
+  Serial.println("Self-test: cycling LEDs...");
 
-  // Configure pins
-  pinMode(TRIG_PIN, OUTPUT);
-  pinMode(ECHO_PIN, INPUT);
-  pinMode(BUZZER_PIN, OUTPUT);
-  pinMode(LED_CLOSE, OUTPUT);
-  pinMode(LED_MID, OUTPUT);
-  pinMode(LED_FAR, OUTPUT);
-
-  // Ensure trigger starts LOW
-  digitalWrite(TRIG_PIN, LOW);
-
-  // LCD setup (uncomment when hardware connected)
-  // lcd.init();
-  // lcd.backlight();
-  // lcd.setCursor(0, 0);
-  // lcd.print("Sonar System");
-  // lcd.setCursor(0, 1);
-  // lcd.print("Initializing...");
-
-  // Self-test: cycle LEDs
-  Serial.println("Self-test: LED sequence...");
-  int leds[] = {LED_FAR, LED_MID, LED_CLOSE};
-  for (int i = 0; i < 3; i++) {
-    digitalWrite(leds[i], HIGH);
-    delay(300);
-    digitalWrite(leds[i], LOW);
-  }
-
-  // Buzzer test: quick chirp
-  tone(BUZZER_PIN, 2000, 100);
-  delay(200);
-  noTone(BUZZER_PIN);
-  Serial.println("Self-test complete.");
-  Serial.println();
-
-  // Print CSV header for Serial Plotter
-  Serial.println("count\\traw_cm\\tstatus");
-
-  lastMeasureMillis = millis();
-}
-
-// --- Measure distance using HC-SR04 ---
-float measureDistance() {
-  // Send 10us trigger pulse
-  digitalWrite(TRIG_PIN, LOW);
-  delayMicroseconds(2);
-  digitalWrite(TRIG_PIN, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(TRIG_PIN, LOW);
-
-  // Measure echo duration
-  unsigned long duration = pulseIn(ECHO_PIN, HIGH, TIMEOUT_US);
-
-  if (duration == 0) {
-    return -1.0;  // timeout: no echo received
-  }
-
-  // Convert to distance in cm
-  float distance = duration / US_PER_CM_ROUNDTRIP;
-
-  // Clamp to valid range
-  if (distance < MIN_DISTANCE_CM) return MIN_DISTANCE_CM;
-  if (distance > MAX_DISTANCE_CM) return MAX_DISTANCE_CM;
-
-  return distance;
-}
-
-// --- Update LED indicators based on distance ---
-void updateIndicators(float dist) {
-  if (dist < 0) {
-    // No echo: all LEDs off
-    digitalWrite(LED_CLOSE, LOW);
-    digitalWrite(LED_MID, LOW);
-    digitalWrite(LED_FAR, LOW);
-    return;
-  }
-
-  if (dist < 30) {
-    digitalWrite(LED_CLOSE, HIGH);  // Red: close
-    digitalWrite(LED_MID, LOW);
-    digitalWrite(LED_FAR, LOW);
-  } else if (dist < 100) {
-    digitalWrite(LED_CLOSE, LOW);
-    digitalWrite(LED_MID, HIGH);    // Yellow: medium
-    digitalWrite(LED_FAR, LOW);
-  } else {
-    digitalWrite(LED_CLOSE, LOW);
-    digitalWrite(LED_MID, LOW);
-    digitalWrite(LED_FAR, HIGH);    // Green: far / clear
-  }
+  // Self-test: light each LED
+  digitalWrite(2, HIGH); delay(300);
+  digitalWrite(2, LOW);
+  digitalWrite(3, HIGH); delay(300);
+  digitalWrite(3, LOW);
+  digitalWrite(4, HIGH); delay(300);
+  digitalWrite(4, LOW);
+  Serial.println("Self-test OK");
 }
 
 void loop() {
-  if (millis() - lastMeasureMillis >= MEASUREMENT_DELAY_MS) {
-    lastMeasureMillis = millis();
-    measurementCount++;
+  // Simulate distance reading (replace with HC-SR04 on real hardware)
+  int dist = random(10, 300);  // cm
 
-    currentDistance = measureDistance();
-    objectDetected = (currentDistance > 0);
+  // Clear all LEDs
+  digitalWrite(2, LOW);
+  digitalWrite(3, LOW);
+  digitalWrite(4, LOW);
 
-    updateIndicators(currentDistance);
-
-    // Serial output
-    Serial.print(measurementCount);
-    Serial.print("\\t");
-    if (objectDetected) {
-      Serial.print(currentDistance, 1);
-      Serial.print("\\t");
-      if (currentDistance < 30) Serial.println("CLOSE");
-      else if (currentDistance < 100) Serial.println("MEDIUM");
-      else Serial.println("FAR");
-    } else {
-      Serial.println("-1\\tNO_ECHO");
-    }
+  // Light the appropriate indicator
+  if (dist < 30) {
+    digitalWrite(2, HIGH);  // RED = close
+    Serial.print(dist);
+    Serial.println(" cm - CLOSE!");
+  } else if (dist < 100) {
+    digitalWrite(3, HIGH);  // YELLOW = medium
+    Serial.print(dist);
+    Serial.println(" cm - medium");
+  } else {
+    digitalWrite(4, HIGH);  // GREEN = far
+    Serial.print(dist);
+    Serial.println(" cm - far");
   }
-}
 
-// Upload and open Serial Monitor at 115200.
-// Move your hand toward the HC-SR04 sensor and watch
-// distance readings update and LEDs change color.`,
-      challenge: 'Add temperature compensation: connect a TMP36 sensor to analog pin A0 and calculate the actual speed of sound using v = 331.3 + 0.606 * T (where T is temperature in Celsius). How much does the distance reading change between a cold room (15C) and a warm room (30C)?',
-      successHint: 'You have the hardware platform ready: ultrasonic sensing, visual indicators, and serial output. The HC-SR04 trigger-echo protocol is the electronic equivalent of a dolphin click — a brief pulse followed by patient listening. In the next lesson, you will dig into the timing math that converts echo duration to precise distance.',
+  delay(200);
+}`,
+      ledCount: 3,
+      challenge: 'Change the distance thresholds: try 20 cm for close and 80 cm for medium. On real hardware, you would tune these to your room size.',
+      successHint: 'The 3-LED indicator gives instant visual feedback on distance zones. Next you add the actual timing-based measurement.',
     },
     {
-      title: 'Distance Measurement with HC-SR04 Timing Code',
-      concept: `The HC-SR04 measurement cycle has four precise timing phases:
+      title: 'Distance Measurement: Pulse Timing in Arduino C',
+      concept: `The HC-SR04 measurement sequence:
+1. Send a 10-microsecond HIGH pulse on TRIG
+2. The sensor emits 8 cycles of 40 kHz ultrasound
+3. ECHO pin goes HIGH when the echo returns
+4. Measure the ECHO pulse duration with \`pulseIn()\`
+5. Calculate distance: **distance_cm = duration_us / 58.2**
 
-**1. Trigger pulse**: We hold TRIG HIGH for exactly 10 microseconds. The sensor's internal circuit uses this to generate eight 40 kHz ultrasonic pulses (a burst of 8 cycles at 25 microsecond period = 200 microseconds total burst).
+Why 58.2? Sound travels 343 m/s = 0.0343 cm/us. The pulse travels to the object AND back (round trip), so divide by 2: 0.01715 cm/us. Invert to get us/cm: **58.2 us per cm** of round-trip distance.
 
-**2. Echo wait**: After the burst, the ECHO pin goes HIGH. The Arduino calls \`pulseIn(ECHO_PIN, HIGH, timeout)\`, which blocks and times how long ECHO stays HIGH.
+Edge cases matter in sonar:
+- **No echo** (object too far or angled away): pulseIn() returns 0 after timeout
+- **Too close** (< 2 cm): the echo overlaps with the outgoing pulse
+- **Noise**: temperature, humidity, and surface texture affect readings`,
+      analogy: 'Imagine shouting into a canyon and timing the echo with a stopwatch. If the echo takes 1 second and sound travels 343 m/s, the canyon wall is 343/2 = 171.5 m away (divide by 2 because the sound went there and back). The HC-SR04 does exactly this, but with ultrasound instead of your voice and microsecond precision instead of a stopwatch.',
+      storyConnection: 'The dolphin\'s brain processes echo timing with extraordinary precision — it can distinguish objects just centimeters apart in murky water. Our Arduino does the same calculation: measure time, multiply by speed, divide by two. The math is identical; the dolphin just does it faster.',
+      checkQuestion: 'If the ECHO pulse duration is 1164 microseconds, how far away is the object?',
+      checkAnswer: '1164 / 58.2 = 20.0 cm. At this distance, the Red (CLOSE) LED should light up and the buzzer should beep rapidly.',
+      codeIntro: 'Implement the full distance calculation with the 58.2 constant and LED zone mapping.',
+      code: `// Sonar Distance Measurement
+// Simulated HC-SR04 with LED indicators
 
-**3. Round-trip calculation**: The echo duration in microseconds divided by 58.2 gives distance in centimeters. Why 58.2? Sound travels 343 m/s = 0.0343 cm/microsecond. Round trip means the sound travels the distance twice: distance = (duration * 0.0343) / 2 = duration / 58.2.
+int ledClose = 2;   // Red
+int ledMid = 3;      // Yellow
+int ledFar = 4;      // Green
 
-**4. Recovery delay**: We wait at least 60 ms before the next measurement to avoid receiving echoes from the previous pulse (at 400 cm max range, the round-trip time is 23.2 ms, plus safety margin).
-
-The \`pulseIn()\` function is blocking — it halts the CPU until the echo returns or the timeout expires. For a simple project this is fine, but for a system that must do other work while waiting (like updating an LCD or playing buzzer tones), we need **non-blocking measurement** using interrupts or polling \`digitalRead()\` in the loop.
-
-We implement both approaches: the blocking version for simplicity, and a **state machine** version that starts a measurement, continues running other code, and checks for the echo return on each loop iteration. The state machine version is more complex but allows true multitasking — essential for responsive buzzer alerts that should not freeze while waiting for a distant echo.
-
-Accuracy analysis: the Arduino's \`micros()\` has 4-microsecond resolution (on a 16 MHz Uno). At 58.2 us/cm, this gives ~0.07 cm quantization error. In practice, the HC-SR04's accuracy is limited to about +/-3 mm by acoustic beam width, surface angle, and temperature variations — far coarser than the timing resolution.`,
-      analogy: 'Imagine standing in a canyon and clapping your hands. You start a stopwatch when you clap, stop it when you hear the echo, and divide by two (the sound traveled to the wall and back). If the echo comes back in 1 second, the wall is ~172 meters away. The HC-SR04 does the same thing at ultrasonic frequencies, and the Arduino is your stopwatch — except it can measure microseconds instead of seconds.',
-      storyConnection: 'The river dolphin emits rapid clicks — each one a tiny ultrasonic pulse, just like our HC-SR04 burst. The dolphin brain measures the delay between click and echo with extraordinary precision, building a three-dimensional acoustic image of the riverbed. Our single-sensor system gives one-dimensional distance, but the timing principle is identical.',
-      checkQuestion: 'Why do we divide the echo duration by 58.2 rather than just by the speed of sound directly?',
-      checkAnswer: 'The raw calculation is: distance = (duration_us * speed_cm_per_us) / 2. Speed of sound = 343 m/s = 34300 cm/s = 0.0343 cm/us. So distance = duration * 0.0343 / 2 = duration / 58.31. The factor 58.2 (commonly rounded) combines the speed of sound and the divide-by-2 for round trip into a single constant, making the code simpler and avoiding a floating-point division in the loop.',
-      codeIntro: 'Implement both blocking and non-blocking distance measurement with detailed timing analysis.',
-      code: `// =============================================
-// HC-SR04 Distance Measurement — Timing Deep Dive
-// Blocking and non-blocking measurement modes
-// =============================================
-
-const int TRIG_PIN = 7;
-const int ECHO_PIN = 8;
-const int BUZZER_PIN = 3;
-
-const float SPEED_OF_SOUND_CM_US = 0.0343;  // cm per microsecond
-const unsigned long TIMEOUT_US = 23200;       // ~400 cm max range
-const int MEASURE_INTERVAL_MS = 60;
-
-// --- Non-blocking state machine ---
-enum MeasureState {
-  IDLE,
-  TRIGGER_SENT,
-  WAITING_ECHO_START,
-  TIMING_ECHO
-};
-
-MeasureState measureState = IDLE;
-unsigned long triggerSentTime = 0;
-unsigned long echoStartTime = 0;
-unsigned long echoEndTime = 0;
-float lastDistance = -1.0;
-unsigned long lastMeasureTime = 0;
-int readingCount = 0;
-
-// ---- Method 1: Blocking measurement (simple) ----
-float measureBlocking() {
-  // Send trigger
-  digitalWrite(TRIG_PIN, LOW);
-  delayMicroseconds(2);
-  digitalWrite(TRIG_PIN, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(TRIG_PIN, LOW);
-
-  // Time the echo (BLOCKS until echo returns or timeout)
-  unsigned long duration = pulseIn(ECHO_PIN, HIGH, TIMEOUT_US);
-
-  if (duration == 0) return -1.0;  // no echo
-
-  // Distance = (time * speed) / 2 for round trip
-  float distance = (duration * SPEED_OF_SOUND_CM_US) / 2.0;
-  return distance;
-}
-
-// ---- Method 2: Non-blocking state machine ----
-// Call this every loop iteration; it progresses through states
-// without blocking the CPU.
-
-void startMeasurement() {
-  // Send trigger pulse
-  digitalWrite(TRIG_PIN, LOW);
-  delayMicroseconds(2);  // brief low (unavoidable short block)
-  digitalWrite(TRIG_PIN, HIGH);
-  delayMicroseconds(10);  // 10 us trigger (unavoidable short block)
-  digitalWrite(TRIG_PIN, LOW);
-
-  triggerSentTime = micros();
-  measureState = WAITING_ECHO_START;
-}
-
-float updateMeasurement() {
-  // Returns distance if measurement complete, -999 if still in progress
-  unsigned long now = micros();
-
-  switch (measureState) {
-    case IDLE:
-      return -999.0;  // nothing happening
-
-    case WAITING_ECHO_START:
-      if (digitalRead(ECHO_PIN) == HIGH) {
-        echoStartTime = micros();
-        measureState = TIMING_ECHO;
-      }
-      else if (now - triggerSentTime > TIMEOUT_US) {
-        measureState = IDLE;
-        return -1.0;  // timeout, no echo
-      }
-      return -999.0;
-
-    case TIMING_ECHO:
-      if (digitalRead(ECHO_PIN) == LOW) {
-        echoEndTime = micros();
-        unsigned long duration = echoEndTime - echoStartTime;
-        float distance = (duration * SPEED_OF_SOUND_CM_US) / 2.0;
-        measureState = IDLE;
-        return distance;
-      }
-      else if (now - echoStartTime > TIMEOUT_US) {
-        measureState = IDLE;
-        return -1.0;  // echo too long (beyond max range)
-      }
-      return -999.0;
-
-    default:
-      measureState = IDLE;
-      return -999.0;
-  }
-}
-
-// --- Buzzer alert: pitch and rate based on distance ---
-unsigned long lastBeepTime = 0;
-bool beepOn = false;
-
-void updateBuzzer(float dist) {
-  if (dist < 0) {
-    noTone(BUZZER_PIN);
-    return;
-  }
-
-  // Map distance to beep interval: 30cm=100ms (fast), 200cm=1000ms (slow)
-  int beepInterval = map(constrain((int)dist, 30, 200), 30, 200, 100, 1000);
-
-  // Map distance to tone frequency: close=3000Hz (urgent), far=500Hz (gentle)
-  int freq = map(constrain((int)dist, 30, 200), 30, 200, 3000, 500);
-
-  if (millis() - lastBeepTime >= (unsigned long)beepInterval) {
-    lastBeepTime = millis();
-    if (dist < 200) {
-      tone(BUZZER_PIN, freq, beepInterval / 3);  // beep for 1/3 of interval
-    }
-  }
-}
+// Speed of sound constant
+// 58.2 microseconds per cm (round trip)
+int step = 0;
 
 void setup() {
-  Serial.begin(115200);
-  Serial.println("=== HC-SR04 Distance Measurement ===");
-  Serial.println("Blocking + Non-blocking modes");
-  Serial.println();
-
-  pinMode(TRIG_PIN, OUTPUT);
-  pinMode(ECHO_PIN, INPUT);
-  pinMode(BUZZER_PIN, OUTPUT);
-  digitalWrite(TRIG_PIN, LOW);
-
-  // --- Demonstrate blocking mode first (5 readings) ---
-  Serial.println("--- Blocking Mode (5 readings) ---");
-  for (int i = 0; i < 5; i++) {
-    unsigned long t0 = micros();
-    float d = measureBlocking();
-    unsigned long elapsed = micros() - t0;
-
-    Serial.print("  Reading ");
-    Serial.print(i + 1);
-    Serial.print(": ");
-    if (d > 0) {
-      Serial.print(d, 1);
-      Serial.print(" cm");
-    } else {
-      Serial.print("NO ECHO");
-    }
-    Serial.print("  (took ");
-    Serial.print(elapsed);
-    Serial.println(" us)");
-    delay(MEASURE_INTERVAL_MS);
-  }
-
-  Serial.println();
-  Serial.println("--- Non-blocking Mode (continuous) ---");
-  Serial.println("count\\tdist_cm\\techo_us\\tstatus");
-
-  lastMeasureTime = millis();
+  pinMode(ledClose, OUTPUT);
+  pinMode(ledMid, OUTPUT);
+  pinMode(ledFar, OUTPUT);
+  Serial.println("echo_us,dist_cm,zone");
 }
 
 void loop() {
-  // Start a new measurement every MEASURE_INTERVAL_MS
-  if (measureState == IDLE && millis() - lastMeasureTime >= MEASURE_INTERVAL_MS) {
-    lastMeasureTime = millis();
-    startMeasurement();
+  // Simulate object moving closer then farther
+  // (On real hardware: pulseIn(ECHO, HIGH))
+  int distances[] = {250, 200, 150, 100, 80, 60, 40, 25, 15, 10,
+                     15, 25, 40, 60, 80, 100, 150, 200, 250, 300};
+  int dist = distances[step % 20];
+  int echo_us = dist * 58;  // reverse: duration from distance
+
+  // Add simulated noise (+/- 3mm)
+  dist = dist + random(-1, 2);
+
+  // Clear LEDs
+  digitalWrite(ledClose, LOW);
+  digitalWrite(ledMid, LOW);
+  digitalWrite(ledFar, LOW);
+
+  // Zone detection with LED indicator
+  if (dist < 30) {
+    analogWrite(ledClose, 255);  // Red bright
+    Serial.print(echo_us);
+    Serial.print(",");
+    Serial.print(dist);
+    Serial.println(",CLOSE");
+  } else if (dist < 100) {
+    analogWrite(ledMid, 180);    // Yellow medium
+    Serial.print(echo_us);
+    Serial.print(",");
+    Serial.print(dist);
+    Serial.println(",MEDIUM");
+  } else {
+    analogWrite(ledFar, 100);    // Green dim
+    Serial.print(echo_us);
+    Serial.print(",");
+    Serial.print(dist);
+    Serial.println(",FAR");
   }
 
-  // Poll the state machine (non-blocking)
-  float result = updateMeasurement();
-
-  if (result > -900) {  // measurement complete (either valid or -1 timeout)
-    readingCount++;
-    lastDistance = result;
-
-    Serial.print(readingCount);
-    Serial.print("\\t");
-    if (result > 0) {
-      Serial.print(result, 1);
-      Serial.print("\\t");
-      unsigned long echoDuration = echoEndTime - echoStartTime;
-      Serial.print(echoDuration);
-      Serial.print("\\t");
-      if (result < 30)       Serial.println("CLOSE");
-      else if (result < 100) Serial.println("MEDIUM");
-      else                   Serial.println("FAR");
-    } else {
-      Serial.println("-1\\t0\\tNO_ECHO");
-    }
-  }
-
-  // Buzzer runs independently of measurement (non-blocking benefit!)
-  updateBuzzer(lastDistance);
-}
-
-// The non-blocking version lets the buzzer beep smoothly even while
-// waiting for slow echoes. In blocking mode, the buzzer would stutter
-// because pulseIn() freezes the CPU for up to 23 ms per reading.`,
-      challenge: 'Add a "speed gun" mode: measure distance twice with a known time gap (e.g., 100 ms), calculate the velocity of a moving object as (d2 - d1) / dt, and display it on Serial. What is the minimum detectable speed given the sensor accuracy of +/-3 mm?',
-      successHint: 'You now understand the HC-SR04 at the timing level — not just "call a library function" but exactly how trigger pulses, echo timing, and the speed of sound combine to produce a distance measurement. The non-blocking state machine is a pattern you will use in every Arduino project that needs to do more than one thing at a time.',
+  step++;
+  delay(250);
+}`,
+      ledCount: 3,
+      challenge: 'Add a "no echo" case: when dist > 400 (beyond HC-SR04 range), turn all LEDs off and print "OUT_OF_RANGE". This handles the timeout condition.',
+      successHint: 'You now understand the core sonar equation: distance = time * speed / 2. This same principle drives parking sensors, robotic obstacle avoidance, and submarine navigation.',
     },
     {
       title: 'Signal Processing: Filtering Noisy Readings',
-      concept: `Raw ultrasonic readings are **noisy**. Point the HC-SR04 at a flat wall from 50 cm away and take 100 readings: you will get values scattered from 48 to 52 cm, with occasional spikes to 10 cm (a stray echo) or 400 cm (a missed echo). Displaying raw readings on the LCD would produce a jittery, unreadable number. We need **filtering**.
+      concept: `Raw sensor data is always noisy. The HC-SR04 has ~3mm accuracy, but single readings can spike due to multipath reflections, surface angles, or electrical interference. A **moving average filter** smooths these spikes.
 
-The simplest filter is a **running average** (also called moving average): keep the last N readings in a circular buffer, and output their mean. With N=5, a single spike of 10 cm among readings of [50, 50, 10, 50, 50] produces an average of 42 cm — better than 10, but still pulled down by the outlier.
+A moving average keeps the last N readings in a buffer and outputs their average. With N=5:
+- Reading arrives: 100, 102, 98, 150 (spike!), 101
+- Average: (100+102+98+150+101)/5 = 110.2
+- Next reading: 99 replaces 100 in the buffer
+- New average: (102+98+150+101+99)/5 = 110.0
 
-A better approach for outlier rejection is the **median filter**: sort the last N readings and take the middle value. For [50, 50, 10, 50, 50] sorted = [10, 50, 50, 50, 50], median = 50. The outlier has zero effect. Median filters are computationally expensive for large N (sorting is O(N log N)), but for N=5 the cost is negligible.
+The spike at 150 is diluted by the 4 good readings. Larger N = smoother output but slower response to real changes. N=5 is a good balance for sonar.
 
-We can combine both: first apply a **median filter** (N=5) to reject spikes, then apply an **exponential moving average** (EMA) to smooth the result: \`filtered = alpha * new_reading + (1 - alpha) * filtered\`. The parameter alpha (0 to 1) controls responsiveness: alpha=0.3 gives smooth, laggy output; alpha=0.8 gives responsive, slightly jittery output.
+On Arduino, we implement this with a **circular buffer** — an array where the write index wraps around, overwriting the oldest value.`,
+      analogy: 'Imagine asking 5 friends to estimate a distance by eye. One friend guesses wildly high. But when you average all 5 guesses, the wild guess barely moves the needle. That\'s a moving average: the group is more reliable than any individual.',
+      storyConnection: 'The dolphin\'s brain doesn\'t rely on a single click-echo pair. It fires rapid bursts of clicks and integrates the echoes over time, building a filtered "image" of the surroundings. Our moving average mimics this biological signal processing.',
+      checkQuestion: 'With a 5-sample moving average, how many consecutive bad readings does it take to significantly corrupt the output?',
+      checkAnswer: 'At least 3 out of 5. If only 1-2 readings are bad, the other 3-4 good readings dominate the average. This is why N=5 is robust: it takes a sustained fault, not a single spike, to fool the filter.',
+      codeIntro: 'Implement a moving average filter with a circular buffer and watch how it smooths the LED transitions.',
+      code: `// Moving Average Filter for Sonar
+// Smooths noisy distance readings
 
-This two-stage filter pipeline (median for outlier rejection + EMA for smoothing) is used in production automotive parking sensors, industrial level measurement, and robotics distance sensing. It is simple, uses minimal memory (5 floats for the median buffer + 1 float for the EMA state), and runs in microseconds.
+int ledClose = 2;  // Red
+int ledMid = 3;    // Yellow
+int ledFar = 4;    // Green
 
-We also compute **statistics**: standard deviation of recent readings (to quantify noise), and a "confidence" flag that drops to LOW if more than 2 of the last 5 readings were timeouts.`,
-      analogy: 'Imagine five friends each estimating the height of a tree. Four say "about 10 meters" and one (who was not paying attention) says "50 meters." If you average all five, you get 18 meters — wrong. If you take the median (sort and pick the middle), you get 10 meters — right. The median filter does the same thing with sensor readings: it ignores the one wild outlier and trusts the consensus.',
-      storyConnection: 'The river dolphin processes hundreds of echoes per second in turbulent, debris-filled water. Not every echo is useful — some bounce off floating plants, some are distorted by currents. The dolphin brain filters out the noise and extracts the signal: the shape and distance of fish, the contour of the riverbed. Our median + EMA filter pipeline is a crude approximation of that biological signal processing.',
-      checkQuestion: 'Why is a median filter better than a simple average for rejecting single-point outlier spikes?',
-      checkAnswer: 'An average is sensitive to extreme values: one reading of 10 cm among four readings of 50 cm pulls the average down to 42 cm. The median, by contrast, is the middle value after sorting — it is completely unaffected by a single outlier as long as fewer than half the readings are corrupted. This "robust" property makes median filtering the standard first stage in noisy sensor pipelines.',
-      codeIntro: 'Implement a two-stage filter pipeline: median filter for spike rejection, then EMA for smoothing.',
-      code: `// =============================================
-// Sonar Signal Processing — Noise Filtering
-// Median filter + Exponential Moving Average
-// =============================================
+// Circular buffer for moving average
+int buffer[] = {100, 100, 100, 100, 100};
+int bufIdx = 0;
+int bufSize = 5;
+int tick = 0;
 
-const int TRIG_PIN = 7;
-const int ECHO_PIN = 8;
-const int BUZZER_PIN = 3;
-
-const float SPEED_OF_SOUND_CM_US = 0.0343;
-const unsigned long TIMEOUT_US = 23200;
-const int MEASURE_INTERVAL_MS = 60;
-
-// --- Median Filter Buffer ---
-const int MEDIAN_SIZE = 5;
-float medianBuffer[MEDIAN_SIZE];
-int medianIndex = 0;
-bool bufferFull = false;
-
-// --- EMA (Exponential Moving Average) ---
-float emaValue = 0.0;
-float emaAlpha = 0.5;  // 0.0 = max smooth, 1.0 = no smoothing
-bool emaInitialized = false;
-
-// --- Statistics ---
-float readings[20];     // circular buffer for stats
-int statsIndex = 0;
-int statsCount = 0;
-int timeoutCount = 0;   // recent timeouts out of last 5
-
-// --- Sort helper for median (insertion sort, N=5) ---
-void sortArray(float arr[], int n) {
-  for (int i = 1; i < n; i++) {
-    float key = arr[i];
-    int j = i - 1;
-    while (j >= 0 && arr[j] > key) {
-      arr[j + 1] = arr[j];
-      j--;
-    }
-    arr[j + 1] = key;
+int getAverage() {
+  int sum = 0;
+  for (int i = 0; i < bufSize; i++) {
+    sum += buffer[i];
   }
+  return sum / bufSize;
 }
-
-float getMedian() {
-  if (!bufferFull) return medianBuffer[0];  // not enough data yet
-
-  // Copy buffer, sort, return middle value
-  float sorted[MEDIAN_SIZE];
-  for (int i = 0; i < MEDIAN_SIZE; i++) {
-    sorted[i] = medianBuffer[i];
-  }
-  sortArray(sorted, MEDIAN_SIZE);
-  return sorted[MEDIAN_SIZE / 2];  // middle element
-}
-
-// --- Add a reading to the filter pipeline ---
-float addReading(float rawDistance) {
-  // Stage 1: Add to median buffer
-  medianBuffer[medianIndex] = rawDistance;
-  medianIndex = (medianIndex + 1) % MEDIAN_SIZE;
-  if (medianIndex == 0) bufferFull = true;
-
-  // Get median-filtered value
-  float medianValue = getMedian();
-
-  // Stage 2: Apply EMA smoothing
-  if (!emaInitialized) {
-    emaValue = medianValue;
-    emaInitialized = true;
-  } else {
-    emaValue = emaAlpha * medianValue + (1.0 - emaAlpha) * emaValue;
-  }
-
-  // Track statistics
-  if (statsCount < 20) statsCount++;
-  readings[statsIndex] = rawDistance;
-  statsIndex = (statsIndex + 1) % 20;
-
-  return emaValue;
-}
-
-// --- Compute standard deviation of recent readings ---
-float computeStdDev() {
-  if (statsCount < 2) return 0.0;
-
-  float sum = 0.0;
-  for (int i = 0; i < statsCount; i++) sum += readings[i];
-  float mean = sum / statsCount;
-
-  float sumSq = 0.0;
-  for (int i = 0; i < statsCount; i++) {
-    float diff = readings[i] - mean;
-    sumSq += diff * diff;
-  }
-  return sqrt(sumSq / (statsCount - 1));
-}
-
-// --- Confidence level: based on recent timeout rate ---
-int computeConfidence() {
-  // Count valid (non-negative) readings in median buffer
-  int valid = 0;
-  int total = bufferFull ? MEDIAN_SIZE : medianIndex;
-  for (int i = 0; i < total; i++) {
-    if (medianBuffer[i] > 0) valid++;
-  }
-  // Return percentage
-  if (total == 0) return 0;
-  return (valid * 100) / total;
-}
-
-// --- HC-SR04 measurement ---
-float measureDistance() {
-  digitalWrite(TRIG_PIN, LOW);
-  delayMicroseconds(2);
-  digitalWrite(TRIG_PIN, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(TRIG_PIN, LOW);
-
-  unsigned long duration = pulseIn(ECHO_PIN, HIGH, TIMEOUT_US);
-  if (duration == 0) return -1.0;
-  return (duration * SPEED_OF_SOUND_CM_US) / 2.0;
-}
-
-int readingNum = 0;
-unsigned long lastMeasure = 0;
-unsigned long lastReport = 0;
 
 void setup() {
-  Serial.begin(115200);
-  Serial.println("=== Sonar Signal Processing ===");
-  Serial.println("Median filter (N=5) + EMA (alpha=0.5)");
-  Serial.println();
-
-  pinMode(TRIG_PIN, OUTPUT);
-  pinMode(ECHO_PIN, INPUT);
-  pinMode(BUZZER_PIN, OUTPUT);
-  digitalWrite(TRIG_PIN, LOW);
-
-  // Initialize buffers
-  for (int i = 0; i < MEDIAN_SIZE; i++) medianBuffer[i] = 0;
-  for (int i = 0; i < 20; i++) readings[i] = 0;
-
-  Serial.println("count\\traw\\tmedian\\tema\\tstddev\\tconf%");
-  lastMeasure = millis();
-  lastReport = millis();
+  pinMode(ledClose, OUTPUT);
+  pinMode(ledMid, OUTPUT);
+  pinMode(ledFar, OUTPUT);
+  Serial.println("raw,filtered,zone");
 }
 
 void loop() {
-  if (millis() - lastMeasure >= MEASURE_INTERVAL_MS) {
-    lastMeasure = millis();
-    readingNum++;
+  // Simulate noisy readings (object at ~80 cm)
+  int raw = 80 + random(-5, 6);
 
-    float raw = measureDistance();
-
-    if (raw > 0) {
-      float filtered = addReading(raw);
-      float median = getMedian();
-      float stddev = computeStdDev();
-      int confidence = computeConfidence();
-
-      Serial.print(readingNum);
-      Serial.print("\\t");
-      Serial.print(raw, 1);
-      Serial.print("\\t");
-      Serial.print(median, 1);
-      Serial.print("\\t");
-      Serial.print(filtered, 1);
-      Serial.print("\\t");
-      Serial.print(stddev, 2);
-      Serial.print("\\t");
-      Serial.println(confidence);
-    } else {
-      // Timeout: use last known good value
-      Serial.print(readingNum);
-      Serial.println("\\t-1\\t-\\t-\\t-\\t-");
-    }
+  // Inject occasional spike
+  if (random(0, 8) == 0) {
+    raw = raw + random(40, 80);  // spike!
   }
 
-  // Summary report every 5 seconds
-  if (millis() - lastReport >= 5000) {
-    lastReport = millis();
-    Serial.print("# STATS: ");
-    Serial.print(readingNum);
-    Serial.print(" readings, stddev=");
-    Serial.print(computeStdDev(), 2);
-    Serial.print(" cm, confidence=");
-    Serial.print(computeConfidence());
-    Serial.println("%");
-  }
-}
+  // Add to circular buffer
+  buffer[bufIdx] = raw;
+  bufIdx = (bufIdx + 1) % bufSize;
 
-// Watch the "raw" column jitter while "ema" stays smooth.
-// Try blocking the sensor briefly — the confidence drops
-// but the EMA holds the last good value instead of jumping.`,
-      challenge: 'Implement an adaptive alpha: when stddev is low (stable readings), decrease alpha toward 0.2 for maximum smoothing. When stddev spikes (object moving fast), increase alpha toward 0.9 for fast response. This gives you the best of both worlds: stable display for static scenes, fast tracking for moving objects.',
-      successHint: 'You have built a production-quality sensor filtering pipeline. The median filter rejects spikes that would fool a simple average. The EMA smooths the remaining jitter into a stable, readable distance value. The statistics and confidence metrics tell you when to trust the readings and when to be cautious. This same two-stage pattern applies to every noisy sensor: accelerometers, temperature probes, air quality monitors.',
+  // Filtered value
+  int filtered = getAverage();
+
+  // Clear LEDs
+  digitalWrite(ledClose, LOW);
+  digitalWrite(ledMid, LOW);
+  digitalWrite(ledFar, LOW);
+
+  // Display filtered zone
+  if (filtered < 30) {
+    analogWrite(ledClose, 255);
+  } else if (filtered < 100) {
+    analogWrite(ledMid, 200);
+  } else {
+    analogWrite(ledFar, 120);
+  }
+
+  Serial.print(raw);
+  Serial.print(",");
+  Serial.print(filtered);
+  if (filtered < 30) Serial.println(",CLOSE");
+  else if (filtered < 100) Serial.println(",MEDIUM");
+  else Serial.println(",FAR");
+
+  tick++;
+  delay(200);
+}`,
+      ledCount: 3,
+      challenge: 'Change bufSize to 1 (no filtering) and watch how spikes cause the LEDs to jump zones erratically. Then try bufSize = 10 — very smooth but slow to respond. Find the sweet spot for your use case.',
+      successHint: 'Moving average filtering is used in every sensor system: weather stations, fitness trackers, industrial controllers, self-driving cars. You just learned a universal signal processing technique.',
     },
     {
-      title: 'Serial Plotter: Sending Data for PC Visualization',
-      concept: `The Arduino Serial Plotter (Tools > Serial Plotter in the Arduino IDE) is a powerful real-time visualization tool — but it has specific format requirements. Understanding these turns your Arduino into a **streaming data acquisition system**.
+      title: 'Proximity Alert: Buzzer Frequency Mapping',
+      concept: `A sonar system needs an **audio alert** — beeping faster as objects get closer, like a parking sensor. On Arduino, we simulate this with LED brightness (the playground doesn't have audio, but the code maps directly to a real piezo buzzer).
 
-The Serial Plotter reads one line of text per sample. Each line contains tab-separated or space-separated numeric values. The first line can optionally contain labels (one per column). Example:
+The mapping is **inverse**: closer distance = higher frequency = faster blinking. We use a formula:
 
-\`\`\`
-raw\\tfiltered\\tthreshold
-52.3\\t51.8\\t30.0
-53.1\\t52.0\\t30.0
-\`\`\`
+**beepInterval = map(distance, 10, 300, 50, 800)**
 
-The Plotter draws one line per column, auto-scaling the Y axis. It keeps a scrolling window of the most recent ~500 samples. This is enough for basic real-time monitoring, but for **post-experiment analysis**, we need to save data to a file.
+At 10 cm: beep every 50 ms (frantic). At 300 cm: beep every 800 ms (lazy). Between: linear interpolation.
 
-We design a **dual-format output** protocol. Lines starting with \`#\` are comments (ignored by the Plotter but useful for log files). Lines starting with \`>\` are human-readable status messages (displayed in Serial Monitor but ignored by the Plotter). All other lines are tab-separated data for the Plotter.
+For the buzzer tone itself, we also map distance to **pitch**: close = 2000 Hz (high, urgent), far = 500 Hz (low, calm). The \`tone(pin, frequency, duration)\` function generates the square wave.
 
-For PC-side logging, we write a simple protocol: the Arduino sends a special \`>START\` marker when measurement begins and \`>END\` marker when it stops. A PC-side script (Python, Processing, or even a terminal tool like \`screen\`) captures everything between these markers into a CSV file.
+The three LEDs continue to show the distance zone while the buzzer (simulated as LED 2 brightness pulsing) provides the audio alert pattern.`,
+      analogy: 'Think of a Geiger counter near radioactive material — the closer you get, the faster it clicks. Our sonar buzzer follows the same principle: the click rate encodes the distance. Your brain processes the rhythm faster than it could read a number on a display.',
+      storyConnection: 'When the dolphin detects something close, its click rate increases dramatically — up to 600 clicks per second in a "buzz" that gives maximum resolution at close range. Our beep-rate mapping mirrors this biological strategy: more information when it matters most.',
+      checkQuestion: 'Why use an inverse mapping (closer = faster beeps) instead of a direct mapping (closer = slower beeps)?',
+      checkAnswer: 'Urgency naturally associates with faster rates in human perception. A rapid beeping triggers alertness — you instinctively know something needs attention. Slow beeping feels calm and safe. This matches the priority: close objects are dangerous and need fast reaction.',
+      codeIntro: 'Map distance to beep rate. The closer the object, the faster LED 2 pulses.',
+      code: `// Proximity Alert with Beep Rate
+// LED pulse rate increases as distance decreases
 
-We also implement **triggered recording**: the Arduino normally sends data at 10 Hz for the Plotter, but when it detects an "event" (an object enters the sensor range or distance drops below a threshold), it switches to **burst mode** at the full measurement rate (~16 Hz) and flags the event with a \`>EVENT\` marker. This gives high-resolution data exactly when something interesting happens, without flooding the serial link during quiet periods.`,
-      analogy: 'Think of the serial output as a wildlife camera trap. Most of the time it takes a photo every 10 seconds (low-rate monitoring). But when the motion sensor detects an animal (event trigger), it switches to burst mode — 5 frames per second — capturing the action in detail. After the animal passes, it returns to low-rate mode. Our Arduino does the same with distance data.',
-      storyConnection: 'Researchers monitoring the Brahmaputra river dolphin use hydrophones that record continuously but flag high-activity periods for detailed analysis. You cannot store every second of audio at full bandwidth — the data volume would be enormous. Instead, you monitor at low resolution and burst-record the interesting moments. Our event-triggered serial logging follows the same principle.',
-      checkQuestion: 'Why do we use tab-separated values instead of comma-separated for the Arduino Serial Plotter?',
-      checkAnswer: 'The Arduino Serial Plotter specifically expects tab-separated or space-separated values. Comma-separated values are treated as a single string and plotted as one flat line. This is a quirk of the IDE implementation, not a fundamental limitation. For CSV file export, we can easily substitute commas, but for real-time plotting compatibility we use tabs.',
-      codeIntro: 'Build a dual-mode serial output system with event-triggered burst recording for the Serial Plotter.',
-      code: `// =============================================
-// Sonar Data Visualization — Serial Plotter Protocol
-// Dual-mode: continuous monitoring + event burst recording
-// =============================================
+int ledClose = 2;  // Red - also pulses as "buzzer"
+int ledMid = 3;    // Yellow
+int ledFar = 4;    // Green
 
-const int TRIG_PIN = 7;
-const int ECHO_PIN = 8;
-const int BUZZER_PIN = 3;
-const int LED_PIN = 13;  // onboard LED for event indicator
-
-const float SPEED_OF_SOUND_CM_US = 0.0343;
-const unsigned long TIMEOUT_US = 23200;
-
-// --- Measurement Modes ---
-enum OutputMode {
-  MODE_MONITOR,   // 10 Hz, for Serial Plotter
-  MODE_BURST      // Full rate (~16 Hz), event triggered
-};
-OutputMode currentMode = MODE_MONITOR;
-
-// --- Timing ---
-const int MONITOR_INTERVAL_MS = 100;  // 10 Hz
-const int BURST_INTERVAL_MS = 60;     // ~16 Hz
-unsigned long lastMeasureMs = 0;
-
-// --- Filter state (from Lesson 3) ---
-const int MEDIAN_SIZE = 5;
-float medianBuf[MEDIAN_SIZE];
-int medIdx = 0;
-bool medFull = false;
-float emaVal = 0.0;
-bool emaInit = false;
-const float EMA_ALPHA = 0.4;
-
-// --- Event detection ---
-const float EVENT_THRESHOLD = 50.0;  // cm: object closer than this triggers burst
-const unsigned long BURST_DURATION_MS = 3000;  // record for 3 seconds after event
-unsigned long burstStartMs = 0;
-int eventCount = 0;
-int sampleCount = 0;
-
-// --- Statistics per session ---
-float minDist = 999.0;
-float maxDist = 0.0;
-unsigned long sessionStartMs = 0;
-
-// --- Helpers ---
-float measureDistance() {
-  digitalWrite(TRIG_PIN, LOW);
-  delayMicroseconds(2);
-  digitalWrite(TRIG_PIN, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(TRIG_PIN, LOW);
-  unsigned long dur = pulseIn(ECHO_PIN, HIGH, TIMEOUT_US);
-  if (dur == 0) return -1.0;
-  return (dur * SPEED_OF_SOUND_CM_US) / 2.0;
-}
-
-void sortSmall(float arr[], int n) {
-  for (int i = 1; i < n; i++) {
-    float key = arr[i];
-    int j = i - 1;
-    while (j >= 0 && arr[j] > key) { arr[j+1] = arr[j]; j--; }
-    arr[j+1] = key;
-  }
-}
-
-float filterReading(float raw) {
-  if (raw < 0) return emaVal;  // timeout: keep last value
-
-  medianBuf[medIdx] = raw;
-  medIdx = (medIdx + 1) % MEDIAN_SIZE;
-  if (medIdx == 0) medFull = true;
-
-  // Median
-  float sorted[MEDIAN_SIZE];
-  int count = medFull ? MEDIAN_SIZE : medIdx;
-  for (int i = 0; i < count; i++) sorted[i] = medianBuf[i];
-  sortSmall(sorted, count);
-  float median = sorted[count / 2];
-
-  // EMA
-  if (!emaInit) { emaVal = median; emaInit = true; }
-  else { emaVal = EMA_ALPHA * median + (1.0 - EMA_ALPHA) * emaVal; }
-
-  return emaVal;
-}
+int dist = 200;
+int direction = -5;  // object approaching
+int beepTimer = 0;
+int beepState = 0;
 
 void setup() {
-  Serial.begin(115200);
-  pinMode(TRIG_PIN, OUTPUT);
-  pinMode(ECHO_PIN, INPUT);
-  pinMode(BUZZER_PIN, OUTPUT);
-  pinMode(LED_PIN, OUTPUT);
-  digitalWrite(TRIG_PIN, LOW);
-
-  // Session header (comments for log file, ignored by Plotter)
-  Serial.println("# =================================");
-  Serial.println("# Sonar Data Logger — Session Start");
-  Serial.println("# Threshold: 50 cm | Burst: 3 sec");
-  Serial.println("# =================================");
-  Serial.println(">START");
-
-  // Column labels for Serial Plotter
-  Serial.println("raw\\tfiltered\\tthreshold\\tevent");
-
-  for (int i = 0; i < MEDIAN_SIZE; i++) medianBuf[i] = 200.0;
-
-  sessionStartMs = millis();
-  lastMeasureMs = millis();
+  pinMode(ledClose, OUTPUT);
+  pinMode(ledMid, OUTPUT);
+  pinMode(ledFar, OUTPUT);
+  Serial.println("=== Proximity Alert ===");
+  Serial.println("dist_cm,beep_ms");
 }
 
 void loop() {
-  // Determine measurement interval based on mode
-  int interval = (currentMode == MODE_BURST) ? BURST_INTERVAL_MS : MONITOR_INTERVAL_MS;
+  // Simulate object approaching and retreating
+  dist += direction;
+  if (dist < 10) direction = 5;
+  if (dist > 300) direction = -5;
 
-  if (millis() - lastMeasureMs >= (unsigned long)interval) {
-    lastMeasureMs = millis();
-    sampleCount++;
+  // Map distance to beep interval
+  // Close (10cm) = fast (50ms), Far (300cm) = slow (800ms)
+  int beepInterval;
+  if (dist < 10) beepInterval = 50;
+  else if (dist > 300) beepInterval = 800;
+  else beepInterval = 50 + ((dist - 10) * 750) / 290;
 
-    float raw = measureDistance();
-    float filtered = filterReading(raw);
+  // Zone LEDs
+  digitalWrite(ledMid, LOW);
+  digitalWrite(ledFar, LOW);
 
-    // Track session stats
-    if (filtered > 0 && filtered < minDist) minDist = filtered;
-    if (filtered > maxDist) maxDist = filtered;
-
-    // --- Event detection ---
-    float eventFlag = 0.0;  // 0 = no event, 50 = event active
-    bool isClose = (filtered > 0 && filtered < EVENT_THRESHOLD);
-
-    if (isClose && currentMode == MODE_MONITOR) {
-      // Trigger burst mode
-      currentMode = MODE_BURST;
-      burstStartMs = millis();
-      eventCount++;
-      eventFlag = EVENT_THRESHOLD;
-      digitalWrite(LED_PIN, HIGH);
-
-      Serial.print(">EVENT ");
-      Serial.print(eventCount);
-      Serial.print(" at ");
-      Serial.print((millis() - sessionStartMs) / 1000.0, 1);
-      Serial.print("s, dist=");
-      Serial.print(filtered, 1);
-      Serial.println(" cm");
-
-      tone(BUZZER_PIN, 2500, 50);  // short chirp
+  if (dist < 30) {
+    // CLOSE: red LED pulses rapidly
+    beepTimer += 60;
+    if (beepTimer >= beepInterval) {
+      beepState = 1 - beepState;
+      beepTimer = 0;
     }
-
-    if (currentMode == MODE_BURST) {
-      eventFlag = EVENT_THRESHOLD;
-      if (millis() - burstStartMs > BURST_DURATION_MS) {
-        // End burst mode
-        currentMode = MODE_MONITOR;
-        digitalWrite(LED_PIN, LOW);
-        noTone(BUZZER_PIN);
-        Serial.println(">BURST_END");
-      }
+    analogWrite(ledClose, beepState * 255);
+  } else if (dist < 100) {
+    // MEDIUM: yellow steady, red pulses slowly
+    digitalWrite(ledMid, HIGH);
+    beepTimer += 60;
+    if (beepTimer >= beepInterval) {
+      beepState = 1 - beepState;
+      beepTimer = 0;
     }
-
-    // --- Data output (Plotter-compatible) ---
-    if (raw > 0) {
-      Serial.print(raw, 1);
-    } else {
-      Serial.print(filtered, 1);  // substitute filtered on timeout
-    }
-    Serial.print("\\t");
-    Serial.print(filtered, 1);
-    Serial.print("\\t");
-    Serial.print(EVENT_THRESHOLD, 1);
-    Serial.print("\\t");
-    Serial.println(eventFlag, 1);
+    analogWrite(ledClose, beepState * 128);
+  } else {
+    // FAR: green steady, no buzzer
+    digitalWrite(ledFar, HIGH);
+    analogWrite(ledClose, 0);
+    beepTimer = 0;
   }
 
-  // Periodic summary (every 10 seconds)
-  if (millis() - sessionStartMs > 0 && (millis() - sessionStartMs) % 10000 < 70) {
-    Serial.print("# Summary: ");
-    Serial.print(sampleCount);
-    Serial.print(" samples, ");
-    Serial.print(eventCount);
-    Serial.print(" events, range=[");
-    Serial.print(minDist, 1);
-    Serial.print("-");
-    Serial.print(maxDist, 1);
-    Serial.println("] cm");
-  }
-}
+  Serial.print(dist);
+  Serial.print(",");
+  Serial.println(beepInterval);
 
-// Open Tools > Serial Plotter to see:
-// - Blue line (raw): jittery real measurements
-// - Red line (filtered): smooth EMA output
-// - Green line (threshold): flat at 50 cm
-// - Purple line (event): spikes to 50 when burst mode active
-//
-// Move your hand toward the sensor to trigger events.
-// The data rate increases during burst mode for higher resolution.`,
-      challenge: 'Write a companion Python script using pyserial that connects to the Arduino COM port, reads the serial stream, saves all data lines to a timestamped CSV file, and generates a matplotlib plot at the end. The script should detect >EVENT markers and annotate them on the plot with vertical lines and labels.',
-      successHint: 'You have built a complete data acquisition and visualization pipeline. The Arduino handles real-time sensing and filtering; the Serial Plotter provides immediate visual feedback; and the structured protocol supports offline analysis. The event-triggered burst mode captures high-resolution data exactly when it matters, mimicking how professional data acquisition systems work in marine biology, seismology, and industrial monitoring.',
+  delay(60);
+}`,
+      ledCount: 3,
+      challenge: 'Change the mapping to non-linear: use beepInterval = 50 + (dist * dist) / 120 for a quadratic curve. This makes the alert ramp up much faster at close range, which feels more natural for collision avoidance.',
+      successHint: 'Frequency-mapped alerts are everywhere: parking sensors, medical monitors, radiation detectors, submarine sonar. The distance-to-rate mapping is a fundamental human-computer interaction pattern.',
     },
     {
-      title: 'Documentation and Deployment Guide',
-      concept: `A capstone project must be reproducible. Someone reading your documentation should be able to **buy the parts, wire the circuit, upload the code, and get the same results** without ever talking to you. This is the standard for open-source hardware projects, Arduino community libraries, and professional engineering deliverables.
+      title: 'Complete Sonar Capstone: Distance + Filter + Alert',
+      concept: `Everything comes together: **3-LED distance indicator**, time-of-flight measurement, moving average filtering, and proximity alert beeping. This is a complete embedded sonar system.
 
-We structure the documentation in five sections:
+The final sketch combines:
+1. **Distance measurement** — simulated HC-SR04 pulse timing (58.2 us/cm)
+2. **Moving average filter** — 5-sample circular buffer smooths noise
+3. **Zone LEDs** — Red/Yellow/Green for close/medium/far
+4. **Proximity alert** — LED pulse rate maps inversely to distance
+5. **Serial CSV logging** — timestamped data for analysis
 
-**1. Overview**: What does this project do? Who is it for? What will you learn? A two-paragraph summary that helps someone decide whether to build it.
+On real hardware, this project uses an HC-SR04 ($2), a piezo buzzer ($0.50), 3 LEDs, and an Arduino Uno. Total cost under $15.`,
+      storyConnection: 'The river dolphin combines echolocation, signal filtering, and alert behavior into one seamless system — click, listen, filter, respond. Your Arduino capstone does the same: sense, process, display, alert. The dolphin has millions of years of evolution; you built yours in five lessons.',
+      checkQuestion: 'How would you extend this to measure direction (not just distance) — like a dolphin that knows WHERE an object is, not just how far?',
+      checkAnswer: 'Use two HC-SR04 sensors spaced apart (like dolphin ears). If the left sensor reads 50 cm and the right reads 55 cm, the object is slightly to the left. The angle can be calculated using the difference in distances and the sensor spacing (trigonometry). This is called "binaural ranging" — exactly how dolphins (and humans) localize sound sources.',
+      codeIntro: 'The final capstone: full sonar system with filtering, zone display, proximity alert, and data logging.',
+      code: `// === DOLPHIN SONAR CAPSTONE ===
+// Distance + Filter + Zone LEDs + Alert + Logging
 
-**2. Bill of Materials**: Every component with specifications, quantities, and approximate cost. Include links to common suppliers (Amazon, Robu.in, AliExpress). Specify acceptable substitutes (e.g., "Arduino Uno or Nano or Pro Mini").
+int ledClose = 2;  // Red
+int ledMid = 3;    // Yellow
+int ledFar = 4;    // Green
 
-**3. Circuit Description**: Unambiguous connection list. For each wire: source pin, destination pin, and any components in between. Include a text-art diagram showing the physical layout on a breadboard. Note safety warnings (e.g., "never exceed 5V on the ECHO pin").
+// Moving average filter
+int buf[] = {150, 150, 150, 150, 150};
+int bIdx = 0;
+int dist = 200;
+int dir = -3;
+int tick = 0;
+int beepTimer = 0;
+int beepState = 0;
 
-**4. Software Setup**: Arduino IDE version, required libraries (with installation instructions), board selection, upload procedure, and Serial Monitor configuration.
-
-**5. Operation and Calibration**: Step-by-step guide from power-on through self-test, normal operation, event detection, and data export. Include expected Serial output examples so the user can verify their build is working correctly. Describe calibration procedures: how to verify accuracy with a ruler, how to adjust the EMA alpha for their specific environment.
-
-We also include a **troubleshooting matrix**: symptom in the left column, likely cause in the middle, and fix in the right column. This saves hours of forum-posting for common issues like reversed LED polarity, wrong baud rate, or I2C address mismatch.`,
-      analogy: 'Good documentation is like a travel guide for a country you have never visited. It does not just list attractions — it tells you how to get there, what to bring, what to expect, and what to do if something goes wrong. A builder reading your documentation is a traveler in unfamiliar territory. Your job is to make their journey smooth and successful.',
-      storyConnection: 'The river dolphin researchers publish their monitoring protocols in detail so that other teams on other rivers can replicate the study. Without that documentation, each new team would spend months reinventing methods that already work. Our deployment guide serves the same purpose — it lets anyone, anywhere, build this sonar system and contribute data to the understanding of underwater acoustics.',
-      checkQuestion: 'Why do we include expected Serial output examples in the documentation?',
-      checkAnswer: 'Expected output examples serve as a verification tool. When a builder uploads the code and opens Serial Monitor, they can compare what they see with what the documentation says they should see. If the output matches, the build is correct. If it differs — wrong numbers, missing lines, garbled text — the discrepancy points directly to the problem (wrong baud rate, miswired sensor, failed component). Without expected output, a builder has no way to know if their results are correct.',
-      codeIntro: 'Create the complete capstone sketch with documentation header, self-test, and all subsystems integrated.',
-      code: `// =============================================================
-// UNDERWATER SONAR RANGING SYSTEM — CAPSTONE PROJECT
-// =============================================================
-//
-// PROJECT: Ultrasonic Distance Measurement with Filtering & Alerts
-// PLATFORM: Arduino Uno (ATmega328P, 16 MHz)
-// AUTHOR: [Your Name]
-// DATE: [Date]
-// LICENSE: MIT
-//
-// OVERVIEW:
-//   A sonar ranging system inspired by river dolphin echolocation.
-//   Uses an HC-SR04 ultrasonic sensor to measure distance, filters
-//   noisy readings with median + EMA pipeline, provides buzzer
-//   alerts and LED indicators, and streams data to Serial Plotter
-//   with event-triggered burst recording.
-//
-// BILL OF MATERIALS:
-//   1x  Arduino Uno (or Nano, Pro Mini)          ~$5-8
-//   1x  HC-SR04 Ultrasonic Sensor                ~$1-2
-//   1x  Piezo Buzzer (active or passive)         ~$0.50
-//   3x  LEDs (red, yellow, green; 5mm, 20mA)    ~$0.30
-//   3x  220 ohm resistors (1/4W)                ~$0.10
-//   1x  Breadboard (half-size)                   ~$2
-//   ~15 Jumper wires (male-to-male)              ~$1
-//   1x  USB cable (A to B for Uno)
-//   Total estimated cost: $10-14 USD / 700-1000 INR
-//
-// CIRCUIT CONNECTIONS:
-//   HC-SR04:
-//     VCC   --> Arduino 5V
-//     TRIG  --> Arduino Pin 7
-//     ECHO  --> Arduino Pin 8
-//     GND   --> Arduino GND
-//
-//   Buzzer:
-//     (+)   --> Arduino Pin 3 (PWM)
-//     (-)   --> Arduino GND
-//
-//   LEDs (each: pin --> 220 ohm --> LED anode --> cathode --> GND):
-//     Pin 9  --> 220R --> RED LED    --> GND   (close alert)
-//     Pin 10 --> 220R --> YELLOW LED --> GND   (medium range)
-//     Pin 11 --> 220R --> GREEN LED  --> GND   (far / clear)
-//
-// BREADBOARD LAYOUT (top view):
-//     [Arduino Uno]
-//        |  |  |  |  |  |  |
-//       7T 8E 3B 9R 10Y 11G  GND  5V
-//        |  |  |  |  |   |    |    |
-//      [HC-SR04 ]  Bz  [220R+LED] x3
-//      T  E  G  V   |    |
-//                   GND  GND rail
-//
-// SOFTWARE SETUP:
-//   1. Install Arduino IDE 1.8.x or 2.x
-//   2. No external libraries required (uses only built-in functions)
-//   3. Select Board: "Arduino Uno" (or your board)
-//   4. Select Port: (your USB serial port)
-//   5. Upload this sketch
-//   6. Open Serial Monitor at 115200 baud
-//   7. Or open Serial Plotter for real-time graphs
-//
-// EXPECTED SERIAL OUTPUT (first 10 seconds):
-//   === UNDERWATER SONAR CAPSTONE ===
-//   Self-test: LEDs...
-//     Red OK | Yellow OK | Green OK | Buzzer OK
-//   Self-test: HC-SR04...
-//     Reading: 47.3 cm — SENSOR OK
-//   --- System Ready ---
-//   raw  filtered  threshold  zone
-//   48.1  47.8  50.0  MEDIUM
-//   47.5  47.7  50.0  MEDIUM
-//   ...
-//
-// TROUBLESHOOTING:
-//   Symptom              | Likely Cause          | Fix
-//   ---------------------|-----------------------|---------------------------
-//   Always reads 0 cm    | TRIG/ECHO swapped     | Swap pins 7 and 8
-//   Always reads -1      | Sensor not powered    | Check 5V and GND
-//   Readings very noisy  | Sensor aimed at angle | Point at flat surface
-//   LEDs not lighting    | Polarity reversed     | Flip LED (long leg = +)
-//   No Serial output     | Wrong baud rate       | Set Monitor to 115200
-//   Buzzer always on     | Pin 3 floating        | Check buzzer ground
-// =============================================================
-
-const int TRIG_PIN = 7;
-const int ECHO_PIN = 8;
-const int BUZZER_PIN = 3;
-const int LED_R = 9;
-const int LED_Y = 10;
-const int LED_G = 11;
-
-const float SPEED_CM_US = 0.0343;
-const unsigned long TIMEOUT_US = 23200;
-
-// Filter state
-const int MED_N = 5;
-float medBuf[MED_N];
-int medIdx = 0;
-bool medFull = false;
-float emaVal = 0.0;
-bool emaInit = false;
-const float ALPHA = 0.4;
-
-// Timing
-unsigned long lastMeasure = 0;
-unsigned long lastReport = 0;
-unsigned long startTime = 0;
-int sampleNum = 0;
-int eventNum = 0;
-
-// --- Core functions ---
-float measure() {
-  digitalWrite(TRIG_PIN, LOW);
-  delayMicroseconds(2);
-  digitalWrite(TRIG_PIN, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(TRIG_PIN, LOW);
-  unsigned long d = pulseIn(ECHO_PIN, HIGH, TIMEOUT_US);
-  if (d == 0) return -1.0;
-  return (d * SPEED_CM_US) / 2.0;
-}
-
-float applyFilter(float raw) {
-  if (raw < 0) return emaVal;
-  medBuf[medIdx] = raw;
-  medIdx = (medIdx + 1) % MED_N;
-  if (medIdx == 0) medFull = true;
-
-  float sorted[MED_N];
-  int n = medFull ? MED_N : medIdx;
-  for (int i = 0; i < n; i++) sorted[i] = medBuf[i];
-  for (int i = 1; i < n; i++) {
-    float k = sorted[i]; int j = i - 1;
-    while (j >= 0 && sorted[j] > k) { sorted[j+1] = sorted[j]; j--; }
-    sorted[j+1] = k;
-  }
-  float med = sorted[n / 2];
-
-  if (!emaInit) { emaVal = med; emaInit = true; }
-  else { emaVal = ALPHA * med + (1.0 - ALPHA) * emaVal; }
-  return emaVal;
-}
-
-void setLEDs(float dist) {
-  digitalWrite(LED_R, dist > 0 && dist < 30  ? HIGH : LOW);
-  digitalWrite(LED_Y, dist >= 30 && dist < 100 ? HIGH : LOW);
-  digitalWrite(LED_G, dist >= 100 ? HIGH : LOW);
-}
-
-void updateBuzzer(float dist) {
-  if (dist < 0 || dist > 200) { noTone(BUZZER_PIN); return; }
-  int freq = map(constrain((int)dist, 10, 200), 10, 200, 3000, 500);
-  int interval = map(constrain((int)dist, 10, 200), 10, 200, 80, 800);
-  if ((millis() / interval) % 2 == 0) tone(BUZZER_PIN, freq);
-  else noTone(BUZZER_PIN);
-}
-
-// --- Self-test ---
-void selfTest() {
-  Serial.println("Self-test: LEDs...");
-  int pins[] = {LED_R, LED_Y, LED_G};
-  const char* names[] = {"Red", "Yellow", "Green"};
-  for (int i = 0; i < 3; i++) {
-    digitalWrite(pins[i], HIGH);
-    delay(300);
-    digitalWrite(pins[i], LOW);
-    Serial.print("  ");
-    Serial.print(names[i]);
-    Serial.println(" OK");
-  }
-
-  Serial.print("  Buzzer ");
-  tone(BUZZER_PIN, 1000, 100);
-  delay(150);
-  noTone(BUZZER_PIN);
-  Serial.println("OK");
-
-  Serial.println("Self-test: HC-SR04...");
-  float d = measure();
-  Serial.print("  Reading: ");
-  if (d > 0) {
-    Serial.print(d, 1);
-    Serial.println(" cm — SENSOR OK");
-  } else {
-    Serial.println("NO ECHO — check wiring!");
-  }
-  Serial.println("--- System Ready ---");
-  Serial.println();
+int avgFilter() {
+  int s = 0;
+  for (int i = 0; i < 5; i++) s += buf[i];
+  return s / 5;
 }
 
 void setup() {
-  Serial.begin(115200);
-  while (!Serial) { ; }
+  pinMode(ledClose, OUTPUT);
+  pinMode(ledMid, OUTPUT);
+  pinMode(ledFar, OUTPUT);
 
-  Serial.println("=== UNDERWATER SONAR CAPSTONE ===");
-  Serial.println("HC-SR04 | Median+EMA filter | Buzzer+LED alerts");
-  Serial.println();
-
-  pinMode(TRIG_PIN, OUTPUT);
-  pinMode(ECHO_PIN, INPUT);
-  pinMode(BUZZER_PIN, OUTPUT);
-  pinMode(LED_R, OUTPUT);
-  pinMode(LED_Y, OUTPUT);
-  pinMode(LED_G, OUTPUT);
-  digitalWrite(TRIG_PIN, LOW);
-
-  for (int i = 0; i < MED_N; i++) medBuf[i] = 200.0;
-
-  selfTest();
-
-  Serial.println("raw\\tfiltered\\tthreshold\\tzone");
-  startTime = millis();
-  lastMeasure = millis();
-  lastReport = millis();
+  // Self-test
+  Serial.println("=== Dolphin Sonar Capstone ===");
+  digitalWrite(ledFar, HIGH); delay(200);
+  digitalWrite(ledFar, LOW);
+  digitalWrite(ledMid, HIGH); delay(200);
+  digitalWrite(ledMid, LOW);
+  digitalWrite(ledClose, HIGH); delay(200);
+  digitalWrite(ledClose, LOW);
+  Serial.println("Self-test OK");
+  Serial.println("ms,raw,filtered,zone,beep_ms");
 }
 
 void loop() {
-  if (millis() - lastMeasure >= 60) {
-    lastMeasure = millis();
-    sampleNum++;
+  // Simulate approaching/retreating object
+  dist += dir;
+  if (dist < 8) dir = 3;
+  if (dist > 300) dir = -3;
 
-    float raw = measure();
-    float filt = applyFilter(raw);
+  // Add noise + occasional spike
+  int raw = dist + random(-3, 4);
+  if (random(0, 10) == 0) raw += random(30, 60);
 
-    setLEDs(filt);
-    updateBuzzer(filt);
+  // Filter
+  buf[bIdx] = raw;
+  bIdx = (bIdx + 1) % 5;
+  int filtered = avgFilter();
 
-    // Plotter-compatible output
-    Serial.print(raw > 0 ? raw : filt, 1);
-    Serial.print("\\t");
-    Serial.print(filt, 1);
-    Serial.print("\\t50.0\\t");
+  // Beep interval
+  int beepInt;
+  if (filtered < 10) beepInt = 50;
+  else if (filtered > 300) beepInt = 800;
+  else beepInt = 50 + ((filtered - 10) * 750) / 290;
 
-    if (filt < 30)       Serial.println("CLOSE");
-    else if (filt < 100) Serial.println("MEDIUM");
-    else                 Serial.println("FAR");
+  // Clear LEDs
+  digitalWrite(ledClose, LOW);
+  digitalWrite(ledMid, LOW);
+  digitalWrite(ledFar, LOW);
+
+  // Zone display + alert
+  if (filtered < 30) {
+    beepTimer += 60;
+    if (beepTimer >= beepInt) {
+      beepState = 1 - beepState;
+      beepTimer = 0;
+    }
+    analogWrite(ledClose, beepState * 255);
+  } else if (filtered < 100) {
+    digitalWrite(ledMid, HIGH);
+    beepTimer += 60;
+    if (beepTimer >= beepInt) {
+      beepState = 1 - beepState;
+      beepTimer = 0;
+    }
+    analogWrite(ledClose, beepState * 80);
+  } else {
+    digitalWrite(ledFar, HIGH);
+    analogWrite(ledClose, 0);
+    beepTimer = 0;
   }
 
-  // Summary every 10 seconds
-  if (millis() - lastReport >= 10000) {
-    lastReport = millis();
-    unsigned long elapsed = (millis() - startTime) / 1000;
-    Serial.print("# ");
-    Serial.print(elapsed);
-    Serial.print("s: ");
-    Serial.print(sampleNum);
-    Serial.print(" samples, filtered=");
-    Serial.print(emaVal, 1);
-    Serial.println(" cm");
-  }
-}
+  // CSV log
+  Serial.print(tick * 60);
+  Serial.print(",");
+  Serial.print(raw);
+  Serial.print(",");
+  Serial.print(filtered);
+  if (filtered < 30) Serial.print(",CLOSE,");
+  else if (filtered < 100) Serial.print(",MEDIUM,");
+  else Serial.print(",FAR,");
+  Serial.println(beepInt);
 
-// CALIBRATION:
-// 1. Place a flat object at exactly 30 cm (use a ruler)
-// 2. Read the "filtered" column — should show ~30.0 +/- 1 cm
-// 3. If consistently off, adjust SPEED_CM_US for your temperature:
-//    v = 331.3 + 0.606 * T_celsius (in m/s), then / 10000 for cm/us
-// 4. For 25C: v = 346.4 m/s = 0.03464 cm/us
-//
-// CAPSTONE COMPLETE
-// Skills: ultrasonic sensing, timing measurement, median filtering,
-// EMA smoothing, PWM buzzer control, serial data protocols, LED
-// indicators, self-test routines, and professional documentation.`,
-      challenge: 'Add an I2C 16x2 LCD display: show distance with a horizontal bar graph on row 1 (each character represents 20 cm) and zone status (CLOSE/MEDIUM/FAR) with the measurement count on row 2. Requires the LiquidCrystal_I2C library. This completes the "dolphin brain" — a display that forms a visual representation from acoustic data.',
-      successHint: 'You have built a complete, documented sonar ranging system from first principles. Every subsystem — sensing, filtering, alerting, displaying, and logging — is tested and documented. The deployment guide means anyone can build it. The troubleshooting matrix means they can fix it. This is professional embedded systems engineering, inspired by millions of years of dolphin evolution.',
+  tick++;
+  delay(60);
+}`,
+      ledCount: 3,
+      challenge: 'On real hardware: connect an HC-SR04 (TRIG to pin 7, ECHO to pin 8) and replace the simulated distance with pulseIn(ECHO, HIGH) / 58.2. Add a piezo buzzer on pin 5 and use tone(5, 2000 - filtered * 5, beepInt) for pitch-mapped audio alerts.',
+      successHint: 'You built a complete sonar ranging system: sensing, filtering, visual display, audio alert, and data logging. This is the same architecture used in parking sensors, robotic navigation, and accessibility devices.',
     },
   ];
 
@@ -1165,22 +547,16 @@ void loop() {
         </div>
         <span className="text-sm text-gray-500 dark:text-gray-400">Requires Level 3 (sonar physics & signal processing)</span>
       </div>
-      {!pyReady && (
-        <div className="mb-8 bg-gray-50 dark:bg-gray-800 rounded-xl p-6 text-center">
-          <p className="text-gray-600 dark:text-gray-300 mb-4">This capstone project uses Arduino C/C++ to build an ultrasonic sonar ranging system with HC-SR04, signal filtering, buzzer alerts, and serial data visualization. Click to start the code environment.</p>
-          <button onClick={loadPyodide} disabled={loading} className="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-500 text-white px-6 py-3 rounded-full font-semibold transition-colors">
-            {loading ? (<><Loader2 className="w-5 h-5 animate-spin" />{loadProgress}</>) : (<><Cpu className="w-5 h-5" />Load Code Environment</>)}
-          </button>
-        </div>
-      )}
+
+      <div className="mb-8 bg-purple-50 dark:bg-purple-900/20 rounded-xl p-4 border border-purple-200 dark:border-purple-800">
+        <p className="text-sm text-purple-800 dark:text-purple-300">
+          This capstone uses a <strong>simulated Arduino</strong> to build a sonar ranging system with HC-SR04 distance measurement, moving average filtering, and proximity alerts. Edit the code, click "Upload & Run", and watch the virtual LEDs respond.
+        </p>
+      </div>
+
       <div className="space-y-8">
-        {miniLessons.map((lesson, i) => (
-          <MiniLesson key={i} id={`L4-${i + 1}`} number={i + 1}
-            title={lesson.title} concept={lesson.concept} analogy={lesson.analogy}
-            storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
-            checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
-            code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
-            />
+        {circuitLessons.map((lesson, i) => (
+          <CircuitMiniLesson key={i} lesson={lesson} number={i + 1} />
         ))}
       </div>
     </div>
