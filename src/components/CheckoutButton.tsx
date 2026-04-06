@@ -51,8 +51,17 @@ export default function CheckoutButton({ plan, label, className }: Props) {
       });
 
       if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || 'Failed to initiate payment');
+        let message = 'Failed to initiate payment';
+        try {
+          const data = await res.json();
+          message = data.error || message;
+        } catch {
+          // Non-JSON response (e.g., local dev server returning HTML 404)
+          if (res.status === 404) {
+            message = 'Payment service not available — this feature works after deployment to production.';
+          }
+        }
+        throw new Error(message);
       }
 
       const params = await res.json();
