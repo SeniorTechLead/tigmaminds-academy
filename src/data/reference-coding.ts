@@ -5264,6 +5264,114 @@ void loop() {
           'In higher dimensions, contour "lines" become contour **surfaces** (hyperellipsoids). Gaussian Mixture Models (GMMs) combine multiple Gaussians, each with its own mean, covariance, and weight — the resulting contour plot shows multiple overlapping elliptical regions. The EM algorithm iteratively refines these parameters. In Bayesian inference, posterior contour plots reveal parameter uncertainty: the 95% **credible region** (the contour enclosing 95% of the posterior mass) is the Bayesian analog of a confidence interval. Kernel Density Estimation produces non-parametric contour plots from raw data — useful when the true distribution is not Gaussian.',
         interactive: { type: 'contour-explainer' as const, props: {} },
       },
+      {
+        title: 'Dose-Response Curves',
+        diagram: 'DoseResponseDiagram',
+        beginnerContent:
+          'How much medicine do you need before it actually works? Give too little and nothing happens. ' +
+          'Give too much and you get dangerous side effects. Somewhere in between is the sweet spot. A ' +
+          'dose-response curve maps this relationship on a graph: the x-axis shows the dose (how much ' +
+          'drug you give) and the y-axis shows the response (how strong the effect is).\n\n' +
+          'Most dose-response curves have a characteristic S-shape called a *sigmoidal curve*. At low ' +
+          'doses the curve is flat — the drug has little effect. Then there is a steep rise where small ' +
+          'increases in dose produce large increases in effect. Finally the curve flattens again at high ' +
+          'doses — the receptors are saturated and more drug does not help. The dose that produces 50% ' +
+          'of the maximum effect is called the EC50 (half-maximal effective concentration). A lower EC50 ' +
+          'means the drug is more potent.\n\n' +
+          'In microbiology, the Minimum Inhibitory Concentration (MIC) is the lowest dose that stops ' +
+          'bacteria from growing. The *therapeutic window* is the range between the dose that works and ' +
+          'the dose that becomes toxic. A wide therapeutic window means the drug is safer; a narrow one ' +
+          'means doctors must dose very carefully. Understanding these curves is essential for pharmacology, ' +
+          'toxicology, and even pesticide science.',
+        intermediateContent:
+          'The standard sigmoidal model is the Hill equation: E = Emax × Dⁿ / (EC50ⁿ + Dⁿ), where E is ' +
+          'effect, D is dose, Emax is maximum effect, EC50 is the half-maximal dose, and n is the Hill ' +
+          'coefficient controlling steepness. When n=1 the curve is a standard hyperbola (Michaelis-Menten ' +
+          'kinetics). When n>1 the curve is steeper, indicating cooperative binding — one molecule binding ' +
+          'makes the next more likely. The **therapeutic index** = TD50/ED50 (toxic dose / effective dose). ' +
+          'Drugs like warfarin have a narrow therapeutic index (~2), while penicillin\'s is very wide (~100). ' +
+          'Log-dose plots spread out the low-dose region, making EC50 easier to read visually.',
+        advancedContent:
+          'The four-parameter logistic (4PL) model generalizes the Hill equation: E = bottom + (top - bottom) / ' +
+          '(1 + (EC50/D)ⁿ). Fitting uses nonlinear least squares (Levenberg-Marquardt). For combination ' +
+          'therapies, the **Bliss independence** model predicts combined effect as E_AB = E_A + E_B - E_A×E_B; ' +
+          'deviations indicate synergy or antagonism. The **isobologram** plots equi-effective dose pairs — ' +
+          'concave curves indicate synergy. Population PK/PD models add inter-individual variability using ' +
+          'mixed-effects modeling (NONMEM), enabling personalized dosing from sparse clinical data.',
+      },
+      {
+        title: 'Monte Carlo Simulation',
+        beginnerContent:
+          'Imagine you want to know the probability of winning a board game, but the rules are too ' +
+          'complicated to calculate mathematically. What if you just played the game 10,000 times and ' +
+          'counted how often you won? That is the core idea behind **Monte Carlo simulation** — using ' +
+          'random sampling to estimate answers that are too complex for exact calculation.\n\n' +
+          'The method is named after the Monte Carlo casino in Monaco, because it relies on randomness ' +
+          'just like gambling does. Here is how it works: you build a simple model of the situation, then ' +
+          'run it thousands or millions of times with **random inputs** drawn from realistic distributions. ' +
+          'Each run is called a **trial** or **iteration**. After all trials, you look at the distribution ' +
+          'of results to estimate probabilities, averages, and ranges.\n\n' +
+          'A classic example: estimating the value of **pi**. Draw a square with a quarter-circle inside ' +
+          'it. Randomly throw darts at the square. The fraction that land inside the quarter-circle is ' +
+          'approximately π/4. Throw 10 darts and your estimate is rough. Throw 1,000,000 and it converges ' +
+          'to 3.14159. The more trials you run, the more **confident** you can be in the answer.\n\n' +
+          'Monte Carlo is used everywhere: predicting weather, pricing stock options, planning traffic ' +
+          'flow, simulating nuclear reactions, and designing bridges. Whenever the real system is too ' +
+          'complex for a neat formula, scientists let randomness do the heavy lifting.',
+        intermediateContent:
+          'A Monte Carlo estimate of a quantity θ uses N random samples x₁…xₙ to compute θ̂ = (1/N)Σf(xᵢ). ' +
+          'The **standard error** of the estimate is σ/√N, where σ is the standard deviation of f(x). ' +
+          'Halving the error requires 4× as many samples. For the pi estimation: generate N points (x,y) ' +
+          'uniformly in [0,1]². Count hits where x²+y² ≤ 1. Then π ≈ 4 × hits/N. With N = 10⁶, the ' +
+          'standard error is about 0.002. **Variance reduction** techniques — importance sampling, ' +
+          'stratified sampling, antithetic variates — can dramatically reduce the number of samples ' +
+          'needed for a given accuracy. In finance, the Black-Scholes model prices options analytically, ' +
+          'but Monte Carlo handles path-dependent options (Asian, barrier) where no closed-form exists.',
+        advancedContent:
+          'Monte Carlo integration extends to high-dimensional integrals where deterministic quadrature ' +
+          'fails due to the **curse of dimensionality**. Markov Chain Monte Carlo (MCMC) methods — ' +
+          'Metropolis-Hastings, Gibbs sampling, Hamiltonian Monte Carlo — sample from complex posterior ' +
+          'distributions by constructing a Markov chain whose stationary distribution is the target. ' +
+          'Convergence diagnostics (Gelman-Rubin R̂, effective sample size) determine when the chain ' +
+          'has mixed sufficiently. Quasi-Monte Carlo uses low-discrepancy sequences (Sobol, Halton) ' +
+          'instead of pseudorandom numbers, achieving convergence rates of O(1/N) vs O(1/√N).',
+      },
+      {
+        title: 'Bayesian Inference',
+        beginnerContent:
+          'Suppose a friend tells you they saw a tiger in Assam. How much should you believe them? ' +
+          'It depends on what you already knew. If they were visiting Kaziranga National Park, tigers ' +
+          'are common — you would believe them easily. If they said they saw a tiger in Guwahati city ' +
+          'centre, you would be much more skeptical. **Bayesian inference** is a mathematical framework ' +
+          'for updating your beliefs when you receive new evidence.\n\n' +
+          'The process has three parts. First, your **prior** — what you believed before seeing any ' +
+          'new data. This captures your existing knowledge or assumptions. Second, the **likelihood** — ' +
+          'how probable the new evidence would be if your belief were true. Third, the **posterior** — ' +
+          'your updated belief after combining the prior with the evidence.\n\n' +
+          'The magic formula is **Bayes\' theorem**: P(hypothesis | data) = P(data | hypothesis) × ' +
+          'P(hypothesis) / P(data). In words: the probability of your hypothesis given the data equals ' +
+          'the probability of the data given your hypothesis, times your prior belief, divided by the ' +
+          'overall probability of the data.\n\n' +
+          'Example: A medical test is 99% accurate. You test positive for a rare disease that affects ' +
+          '1 in 10,000 people. What is the probability you actually have the disease? Most people guess ' +
+          '99%, but Bayes\' theorem shows it is only about 1%. The prior (the disease is extremely rare) ' +
+          'overwhelms the likelihood (the test is accurate). This is why doctors order confirmatory tests.',
+        intermediateContent:
+          'Bayes\' theorem: **P(H|D) = P(D|H) × P(H) / P(D)**. For the medical test: P(H) = 0.0001 ' +
+          '(prior — disease prevalence). P(D|H) = 0.99 (sensitivity — true positive rate). P(D|¬H) = ' +
+          '0.01 (false positive rate). P(D) = P(D|H)P(H) + P(D|¬H)P(¬H) = 0.99×0.0001 + 0.01×0.9999 ' +
+          '= 0.010098. So P(H|D) = 0.99 × 0.0001 / 0.010098 = **0.0098 ≈ 1%**. After a second ' +
+          'independent positive test, the new prior becomes 0.0098 and the posterior jumps to about 50%. ' +
+          'A third positive test brings it to ~99%. Each piece of evidence updates the prior iteratively.',
+        advancedContent:
+          'In continuous settings, Bayes\' theorem becomes p(θ|x) = p(x|θ)p(θ)/p(x), where p(θ) is the ' +
+          'prior density, p(x|θ) is the likelihood function, and p(x) = ∫p(x|θ)p(θ)dθ is the marginal ' +
+          'likelihood (evidence). Conjugate priors yield closed-form posteriors: Beta-Binomial for ' +
+          'proportions, Normal-Normal for means, Gamma-Poisson for rates. When conjugacy fails, MCMC ' +
+          'or variational inference approximate the posterior. The Bayesian approach naturally quantifies ' +
+          'uncertainty through credible intervals and handles small samples gracefully by incorporating ' +
+          'prior knowledge — unlike frequentist methods which rely solely on observed data.',
+      },
     ],
 
     build: [
@@ -7047,6 +7155,115 @@ for val in [10, 20, 30, 40, 50]:
           'Big O describes how time grows with input size n: O(1) constant (array access, hash lookup), O(log n) logarithmic (binary search), O(n) linear (scan entire list), O(n log n) linearithmic (merge sort, Python sorted()), O(n²) quadratic (nested loops, bubble sort), O(2ⁿ) exponential (brute force subset enumeration). To find Big O: count nested loops. One loop over n → O(n). Two nested loops each over n → O(n²). A loop that halves n each iteration → O(log n). Drop constants and lower terms: O(3n² + 5n + 7) = O(n²).',
         advancedContent:
           'Space complexity measures memory usage: merge sort uses O(n) extra space; quicksort uses O(log n) stack space. In-place algorithms (heapsort) use O(1) extra space. Amortized analysis: Python list.append() is O(1) amortized — occasional O(n) resize is spread across n operations. The Master Theorem solves divide-and-conquer recurrences: T(n) = aT(n/b) + O(n^d). If d < log_b(a): T = O(n^(log_b(a))); if d = log_b(a): T = O(n^d log n); if d > log_b(a): T = O(n^d). For merge sort: a=2, b=2, d=1, log₂2 = 1 = d → T = O(n log n). This theorem covers most recursive algorithm analyses.',
+      },
+      {
+        title: 'Information Entropy',
+        beginnerContent:
+          'How do you measure surprise? If someone tells you the sun rose this morning, that is not ' +
+          'surprising at all — it happens every day. But if someone tells you it snowed in the Sahara, ' +
+          'that is extremely surprising. Claude Shannon, the father of information theory, turned this ' +
+          'intuition into a precise formula. He defined *information* as the amount of surprise in a ' +
+          'message, measured in *bits*.\n\n' +
+          'A fair coin flip carries 1 bit of information — there are two equally likely outcomes and you ' +
+          'need one yes/no question to determine which happened. A fair six-sided die carries about 2.58 ' +
+          'bits — you need more questions because there are more possibilities. Shannon\'s entropy formula ' +
+          'is H = -\\u03A3 p\\u1D62 log\\u2082(p\\u1D62), where p\\u1D62 is the probability of each outcome. The negative sign ' +
+          'makes the result positive (since log of a fraction is negative). When all outcomes are equally ' +
+          'likely, entropy is maximized — that is maximum uncertainty. When one outcome is certain, ' +
+          'entropy is zero — there is no surprise at all.\n\n' +
+          'Entropy measures diversity too. An ecosystem where every species is equally common has high ' +
+          'entropy. A monoculture has low entropy. In data compression, entropy tells you the theoretical ' +
+          'minimum number of bits needed to encode a message. You cannot compress below the entropy limit ' +
+          'without losing information — this is Shannon\'s source coding theorem.',
+        intermediateContent:
+          'For a discrete random variable X with outcomes {x₁, ..., xₙ} and probabilities {p₁, ..., pₙ}, ' +
+          'Shannon entropy is H(X) = -\\u03A3 p\\u1D62 log\\u2082(p\\u1D62). For a fair coin: H = -2(0.5 × log\\u2082 0.5) = 1 bit. ' +
+          'For an unfair coin (p=0.9): H = -(0.9 log\\u2082 0.9 + 0.1 log\\u2082 0.1) \\u2248 0.47 bits — less uncertainty ' +
+          'because the outcome is mostly predictable. **Cross-entropy** H(p,q) = -\\u03A3 p\\u1D62 log\\u2082(q\\u1D62) measures ' +
+          'the average bits needed when using distribution q to encode data from distribution p. ' +
+          '**KL divergence** D(p||q) = H(p,q) - H(p) measures the extra bits wasted by using the wrong ' +
+          'distribution. In machine learning, cross-entropy loss is the standard objective for classification.',
+        advancedContent:
+          'Shannon\'s channel capacity theorem: C = max_{p(x)} I(X;Y), where mutual information I(X;Y) = H(X) - H(X|Y). ' +
+          'For a binary symmetric channel with error probability \\u03F5: C = 1 - H(\\u03F5). The noisy channel coding ' +
+          'theorem guarantees error-free communication at any rate below capacity using sufficiently long codes. ' +
+          'Differential entropy extends to continuous distributions: h(X) = -\\u222B f(x) log f(x) dx. The Gaussian ' +
+          'maximizes entropy for a given variance: h(N(\\u03BC,\\u03C3\\u00B2)) = \\u00BD log\\u2082(2\\u03C0e\\u03C3\\u00B2). In Bayesian inference, ' +
+          'maximum entropy priors encode minimal assumptions. Rate-distortion theory defines the minimum bits ' +
+          'needed for lossy compression at a given distortion level.',
+      },
+      {
+        title: 'Priority Scheduling',
+        diagram: 'PrioritySchedulerDiagram',
+        beginnerContent:
+          'Imagine you are a doctor in an emergency room. A patient with a paper cut and a patient having ' +
+          'a heart attack arrive at the same time. You do not serve them first-come-first-served — you ' +
+          'treat the heart attack first because it has higher priority. This is *priority scheduling*, and ' +
+          'computers use the same idea to decide which tasks to run.\n\n' +
+          'An operating system juggles dozens of programs at once: your music player, your web browser, ' +
+          'system updates, antivirus scans. Each task gets a *priority level*. High-priority tasks (like ' +
+          'responding to your keystrokes) run before low-priority tasks (like background indexing). The ' +
+          'data structure that makes this efficient is a *priority queue* — it always gives you the highest-' +
+          'priority item in O(log n) time using a structure called a *heap*.\n\n' +
+          'In *preemptive* scheduling, a high-priority task can interrupt a running lower-priority task ' +
+          'mid-execution. Your music keeps playing smoothly even while a large file downloads because the ' +
+          'audio task has higher priority and preempts the download whenever it needs CPU time. In *non-' +
+          'preemptive* scheduling, tasks run to completion before the next starts — simpler but riskier, ' +
+          'because one slow task blocks everything. The Apollo Guidance Computer used priority scheduling ' +
+          'during the Moon landing — when overloaded, it dropped low-priority display tasks to keep ' +
+          'critical navigation running, saving the mission.',
+        intermediateContent:
+          'Common scheduling algorithms: **Fixed Priority** assigns static priorities (real-time systems, ' +
+          'Apollo AGC). **Round Robin** gives each task a fixed time slice (quantum) and rotates — fair but ' +
+          'no priority differentiation. **Multilevel Feedback Queue** (used in Linux/Windows) combines both: ' +
+          'multiple priority queues, with tasks moving between levels based on behavior. CPU-bound tasks sink ' +
+          'to lower priority; I/O-bound tasks rise. **Priority inversion** occurs when a high-priority task ' +
+          'waits for a lock held by a low-priority task — the Mars Pathfinder bug in 1997 caused system resets ' +
+          'until engineers uploaded a fix enabling **priority inheritance** (temporarily boosting the low-' +
+          'priority task to release the lock faster).',
+        advancedContent:
+          'Rate-Monotonic Scheduling (RMS) assigns priorities by period: shorter period = higher priority. ' +
+          'RMS is optimal among fixed-priority preemptive algorithms for independent periodic tasks. The ' +
+          'schedulability bound is U = \\u03A3(Cᵢ/Tᵢ) \\u2264 n(2^(1/n) - 1), approaching ln(2) \\u2248 0.693 as n\\u2192\\u221E. ' +
+          'Earliest Deadline First (EDF) is optimal among dynamic-priority algorithms with bound U \\u2264 1.0. ' +
+          'The Linux Completely Fair Scheduler (CFS) uses a red-black tree keyed by virtual runtime — the ' +
+          'task with the smallest virtual runtime runs next, achieving O(log n) scheduling decisions. ' +
+          'Real-time systems use WCET (Worst Case Execution Time) analysis to guarantee deadlines.',
+      },
+      {
+        title: 'Technology Diffusion Models',
+        beginnerContent:
+          'Why does every new technology seem to follow the same pattern? First a handful of enthusiasts ' +
+          'adopt it, then adoption accelerates rapidly, and finally it levels off as nearly everyone who ' +
+          'wants it already has it. This pattern traces an S-shaped curve — slow start, fast middle, slow ' +
+          'finish — and it shows up everywhere: smartphones, electricity, the printing press, social media.\n\n' +
+          'Everett Rogers identified five adopter categories: *innovators* (2.5% — the risk-takers who try ' +
+          'anything new), *early adopters* (13.5% — opinion leaders who see the potential), *early majority* ' +
+          '(34% — pragmatists who wait for proof), *late majority* (34% — skeptics who adopt only when it ' +
+          'becomes the norm), and *laggards* (16% — the last holdouts). The critical moment is crossing the ' +
+          '*chasm* between early adopters and the early majority — many technologies die here because ' +
+          'enthusiast appeal does not translate to mainstream value.\n\n' +
+          '*Network effects* accelerate the middle of the S-curve: each new telephone user makes the network ' +
+          'more valuable for everyone, which attracts more users, creating a positive feedback loop. This is ' +
+          'why adoption curves are S-shaped rather than linear. The *adoption threshold* is the penetration ' +
+          'rate at which growth becomes self-sustaining — below it, the technology might fade away.',
+        intermediateContent:
+          'The **Bass diffusion model** separates two forces: innovation (external influence like advertising, ' +
+          'coefficient p) and imitation (internal influence like word-of-mouth, coefficient q). The adoption ' +
+          'rate is f(t)/[1-F(t)] = p + qF(t), where F(t) is cumulative adoption. Typical values: p \\u2248 0.03, ' +
+          'q \\u2248 0.38 for consumer electronics. When q > p (common), the curve is S-shaped with a peak at ' +
+          't* = ln(q/p)/(p+q). **Metcalfe\'s Law** states network value grows as n\\u00B2 (every node can connect to ' +
+          'every other), though empirical studies suggest n log n is more realistic. The **technology S-curve** ' +
+          'also applies to performance: a technology improves slowly at first, then rapidly, then hits physical ' +
+          'limits — at which point a disruptive technology begins its own S-curve.',
+        advancedContent:
+          'The Bass model\'s closed-form solution: F(t) = [1 - e^(-(p+q)t)] / [1 + (q/p)e^(-(p+q)t)], which is ' +
+          'a generalized logistic function. Extensions: multi-generation models (Norton-Bass) handle successive ' +
+          'product generations; spatial diffusion models add geographic spread via reaction-diffusion PDEs. ' +
+          'Agent-based models simulate heterogeneous agents with varying thresholds on network graphs — ' +
+          'revealing that network topology (scale-free vs small-world vs lattice) dramatically affects diffusion ' +
+          'speed and final adoption. Granovetter\'s threshold model: agent i adopts when fraction of adopters ' +
+          'exceeds personal threshold \\u03B8\\u1D62. The distribution of \\u03B8 values determines whether cascades occur.',
       },
     ],
 
