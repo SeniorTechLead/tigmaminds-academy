@@ -26,7 +26,7 @@ function getCapstoneProjects() {
       skillTags: l.skillTags || [],
       estimatedHours: l.estimatedHours || 12,
       tradition: l.tradition,
-      difficulty: rateDifficulty(l.stem.project.steps, l.stem.project.description, l.skillTags || []),
+      difficulty: rateDifficulty(l.stem.project.steps, l.stem.project.description, l.skillTags || [], l.estimatedHours || 12),
     }));
 }
 
@@ -42,19 +42,34 @@ const PROJECT_CATEGORIES: { key: string; label: string; icon: string; desc: stri
 /* ── Difficulty rating based on project complexity ── */
 type Difficulty = 'Beginner' | 'Intermediate' | 'Advanced';
 
-function rateDifficulty(steps: string[], desc: string, skillTags: { skill: string }[]): Difficulty {
+function rateDifficulty(steps: string[], desc: string, skillTags: { skill: string }[], hours: number): Difficulty {
+  // Use multiple signals: step count, estimated hours, skill complexity, and description keywords
+  let score = 0;
+
+  // Step count (more steps = more complex)
+  score += steps.length;
+
+  // Estimated hours
+  if (hours >= 14) score += 3;
+  else if (hours >= 12) score += 1;
+
+  // Advanced skills
+  const advancedSkills = ['Machine Learning', 'Computer Vision', 'Reinforcement Learning', 'Natural Language', 'Algorithms'];
+  const hasAdvancedSkill = skillTags.some(t => advancedSkills.includes(t.skill));
+  if (hasAdvancedSkill) score += 4;
+
+  // Keywords in description and steps
   const text = (desc + ' ' + steps.join(' ')).toLowerCase();
-  const advancedSignals = ['monte carlo', 'finite element', 'differential', 'fourier', 'bayesian',
-    'stochastic', 'pde', 'eigenvalue', 'optimization', 'neural', 'machine learning',
-    'multi-objective', 'pareto', 'kalman', 'markov'];
-  const intermediateSignals = ['class ', 'numpy', 'simulation', 'algorithm', 'graph',
-    'dijkstra', 'regression', 'statistical', 'network'];
+  const advancedKeywords = ['monte carlo', 'finite element', 'differential', 'fourier', 'bayesian',
+    'stochastic', 'eigenvalue', 'neural', 'machine learning', 'multi-objective', 'pareto',
+    'kalman', 'markov', 'optimization', 'pde'];
+  const beginnerKeywords = ['basic', 'simple', 'introduction', 'first', 'beginner', 'define', 'calculate'];
 
-  const advCount = advancedSignals.filter(s => text.includes(s)).length;
-  const intCount = intermediateSignals.filter(s => text.includes(s)).length;
+  score += advancedKeywords.filter(k => text.includes(k)).length * 2;
+  score -= beginnerKeywords.filter(k => text.includes(k)).length;
 
-  if (advCount >= 2 || steps.length >= 7) return 'Advanced';
-  if (intCount >= 2 || steps.length >= 5) return 'Intermediate';
+  if (score >= 10) return 'Advanced';
+  if (score >= 6) return 'Intermediate';
   return 'Beginner';
 }
 
