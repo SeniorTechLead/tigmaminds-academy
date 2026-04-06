@@ -1,525 +1,200 @@
-import { useState, useRef, useCallback } from 'react';
-import { Loader2, Cpu } from 'lucide-react';
-import MiniLesson from '../MiniLesson';
-import { usePyodide } from '../../contexts/PyodideContext';
+import { useState } from 'react';
+import { ChevronDown, ChevronUp, CheckCircle, HelpCircle, Cpu } from 'lucide-react';
+import ArduinoPlayground from '../ArduinoPlayground';
+import { renderMarkdown } from '../MiniLesson';
+
+interface CircuitLesson {
+  title: string;
+  concept: string;
+  analogy?: string;
+  storyConnection?: string;
+  checkQuestion?: string;
+  checkAnswer?: string;
+  codeIntro?: string;
+  code: string;
+  ledCount?: number;
+  challenge?: string;
+  successHint?: string;
+}
+
+
+function CircuitMiniLesson({ lesson, number }: { lesson: CircuitLesson; number: number }) {
+  const [showAnswer, setShowAnswer] = useState(false);
+
+  return (
+    <div id={`L4-${number}`} className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden scroll-mt-24">
+      <div className="px-6 pt-6 pb-4">
+        <div className="flex items-center gap-3 mb-4">
+          <span className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-fuchsia-500 text-white flex items-center justify-center text-sm font-bold flex-shrink-0">{number}</span>
+          <h4 className="text-xl font-bold text-gray-900 dark:text-white">{lesson.title}</h4>
+        </div>
+        <div className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: renderMarkdown(lesson.concept) }} />
+
+        {lesson.analogy && (
+          <div className="bg-sky-50 dark:bg-sky-900/20 border-l-4 border-sky-400 rounded-r-lg px-4 py-3 mb-4">
+            <p className="text-sm text-sky-800 dark:text-sky-300 leading-relaxed"><strong>Think of it this way:</strong> {lesson.analogy}</p>
+          </div>
+        )}
+        {lesson.storyConnection && (
+          <div className="bg-emerald-50 dark:bg-emerald-900/20 border-l-4 border-emerald-400 rounded-r-lg px-4 py-3 mb-4">
+            <p className="text-sm text-emerald-800 dark:text-emerald-300 leading-relaxed"><strong>In the story:</strong> {lesson.storyConnection}</p>
+          </div>
+        )}
+        {lesson.checkQuestion && (
+          <div className="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-4 mb-2">
+            <div className="flex items-start gap-3">
+              <HelpCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+              <div className="flex-1">
+                <p className="text-sm font-semibold text-amber-900 dark:text-amber-200 mb-1">Before you code — think about this:</p>
+                <p className="text-sm text-amber-800 dark:text-amber-300">{lesson.checkQuestion}</p>
+                {lesson.checkAnswer && (
+                  <>
+                    <button onClick={() => setShowAnswer(!showAnswer)} className="mt-2 flex items-center gap-1 text-xs font-semibold text-amber-600 dark:text-amber-400">
+                      {showAnswer ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+                      {showAnswer ? 'Hide answer' : 'Show answer'}
+                    </button>
+                    {showAnswer && <p className="mt-2 text-sm text-amber-700 dark:text-amber-300 bg-amber-100 dark:bg-amber-900/30 px-3 py-2 rounded-lg">{lesson.checkAnswer}</p>}
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {lesson.codeIntro && (
+        <div className="px-6 py-2 bg-gray-50 dark:bg-gray-700/30 border-t border-gray-200 dark:border-gray-700">
+          <p className="text-sm text-gray-600 dark:text-gray-400"><strong className="text-gray-900 dark:text-white">Now try it:</strong> {lesson.codeIntro}</p>
+        </div>
+      )}
+
+      <div className="border-t border-gray-200 dark:border-gray-700">
+        <ArduinoPlayground starterCode={lesson.code} title={`Circuit ${number}`} ledCount={lesson.ledCount || 3} />
+      </div>
+
+      {lesson.challenge && (
+        <div className="px-6 py-3 bg-purple-50 dark:bg-purple-900/20 border-t border-purple-200 dark:border-purple-800">
+          <p className="text-sm text-purple-800 dark:text-purple-300"><strong>Experiment:</strong> {lesson.challenge}</p>
+        </div>
+      )}
+      {lesson.successHint && (
+        <div className="px-6 py-3 bg-emerald-50 dark:bg-emerald-900/20 border-t border-emerald-200 dark:border-emerald-800">
+          <p className="text-sm text-emerald-800 dark:text-emerald-300"><CheckCircle className="w-4 h-4 inline mr-1" />{lesson.successHint}</p>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function FestivalLightsLevel4() {
-  const { pyodideRef, load: loadPyodide, ready: pyReady, state: pyState, loadProgress } = usePyodide();
-  const loading = pyState === 'loading';
-
-  const miniLessons = [
+  const circuitLessons: CircuitLesson[] = [
     {
-      title: 'System Design: LDR Sensor + LED Strip + Arduino',
-      concept: `In previous levels you explored the physics of light, LED circuits, and photometry. Now you build an **ambient-responsive LED installation** — a light sculpture that senses its environment and adapts its display in real time. As daylight fades during a festival evening, the installation gradually brightens. When someone shines a flashlight at it, it responds with a burst of color. When clouds pass overhead, it shifts to warmer tones.
+      title: 'System Design: LDR Sensor + 6-LED RGB Installation',
+      concept: `You've reached the capstone: build an **ambient-responsive LED installation** that senses its environment and adapts in real time. As daylight fades during a festival evening, the installation gradually brightens.
 
-The core sensing element is a **Light-Dependent Resistor (LDR)**, also called a photoresistor. An LDR is made of cadmium sulfide (CdS), a semiconductor whose resistance decreases when exposed to light. In darkness, its resistance can be 1 megaohm or more. In bright light, it drops to a few hundred ohms. By placing the LDR in a **voltage divider** with a fixed resistor, we convert this resistance change into a voltage that the Arduino's ADC (Analog-to-Digital Converter) can read.
+The core sensor is a **Light-Dependent Resistor (LDR)** — a cadmium sulfide semiconductor whose resistance decreases in light. In darkness: ~1 megaohm. In bright light: ~200 ohms. A **voltage divider** (5V -> LDR -> junction -> 10k resistor -> GND) converts this to a voltage the Arduino ADC reads on pin A0.
 
-The voltage divider circuit: 5V --> LDR --> junction point --> 10k ohm resistor --> GND. The Arduino analog pin (A0) connects to the junction point. In bright light (LDR low resistance), the junction voltage is high (~4V). In darkness (LDR high resistance), the junction voltage is low (~0.5V). The ADC reads this as a value from 0 (dark) to 1023 (bright).
+The output is **6 LEDs** on PWM pins, representing an RGB strip installation:
+- Pins 2, 3: Red channel pair
+- Pins 4, 5: Green channel pair
+- Pins 6, 7: Blue channel pair
 
-For the LED output, we use an **RGB LED strip** (common anode or WS2812B NeoPixel). For this lesson, we start with three individual LEDs (red, green, blue) on PWM pins, representing one RGB pixel. In the final build, these map directly to the R, G, B channels of each pixel in a strip.
-
-The system architecture: **Sensor** (LDR on A0) --> **Processing** (Arduino: read, map, decide mode) --> **Output** (RGB LEDs on PWM pins 9, 10, 11). A potentiometer on A1 lets the user set sensitivity. A pushbutton on pin 2 cycles through display modes.
-
-Power: Three LEDs at 20 mA each = 60 mA. For a full WS2812B strip (30 pixels), each pixel draws up to 60 mA at full white = 1.8A total. That exceeds the Arduino's 5V regulator (500 mA), so a strip requires an external 5V power supply. We design for this from the start.`,
-      analogy: 'Think of the LDR as a pupil in your eye. In bright light, the pupil contracts (low resistance = high voltage reading) to reduce light intake. In darkness, it dilates (high resistance = low voltage reading) to gather more light. Our circuit reads the "pupil size" and adjusts the LED brightness accordingly — bright LEDs when the environment is dark, dim LEDs when it is bright. The installation is, in effect, a single giant artificial eye that responds to its surroundings.',
-      storyConnection: 'The festival lights in the story transform as evening falls — starting as subtle glimmers in the afternoon haze, growing to a dazzling display at nightfall. Our light-responsive installation does the same thing automatically. The LDR senses the fading daylight, and the Arduino smoothly increases LED brightness. The installation becomes part of the festival rhythm, responding to the same sunset that the celebrants are watching.',
-      checkQuestion: 'Why do we use a 10k ohm fixed resistor in the voltage divider with the LDR, rather than a 100 ohm or 1M ohm resistor?',
-      checkAnswer: 'The fixed resistor should be in the same range as the LDR resistance in the middle of the operating range. An LDR typically varies from ~1k (bright) to ~100k (dim). A 10k fixed resistor puts the voltage divider output in the middle of the ADC range under typical indoor lighting. With 100 ohms, the voltage would be near 5V for all but the brightest light (no dynamic range in the dark). With 1M, the voltage would be near 0V except in near-total darkness. The 10k value maximizes sensitivity across the useful light range.',
-      codeIntro: 'Set up the hardware interface: LDR reading, RGB LED output, potentiometer for sensitivity, and button for mode selection.',
-      code: `# ============================================================
-# ARDUINO CODE (copy to Arduino IDE to run on hardware)
-# ============================================================
-arduino_code = """
-// Festival Light Installation - System Setup
-// LDR sensor + RGB LEDs + user controls
-const int LDR_PIN = A0, POT_PIN = A1, BUTTON_PIN = 2;
-const int LED_R = 9, LED_G = 10, LED_B = 11;
-int ldrMin = 50, ldrMax = 900;
-
-void setup() {
-  Serial.begin(115200);
-  // Self-test: ramp R, G, B channels
-  // Calibration: read LDR for 3 seconds
-}
-void loop() {
-  int ldrRaw = analogRead(LDR_PIN);
-  int mapped = map(constrain(ldrRaw, ldrMin, ldrMax), ldrMin, ldrMax, 0, 255);
-  int brightness = 255 - mapped;  // dark = bright LEDs
-  analogWrite(LED_R, brightness);
-}
-"""
-print("=== Arduino Code (copy to Arduino IDE) ===")
-print(arduino_code)
-
-# ============================================================
-# PYTHON SIMULATION of LDR sensor + RGB LED system
-# ============================================================
-import numpy as np
-
-print("\n=== Python Simulation: Festival Light Installation ===\n")
-print("Self-test: RGB channels...")
-for c in ["Red", "Green", "Blue"]: print("  {} ramp... OK".format(c))
-
-np.random.seed(42)
-cal_readings = np.random.randint(80, 850, 150)
-cal_min, cal_max = int(np.min(cal_readings)), int(np.max(cal_readings))
-print("\nCalibration: min={} max={}".format(cal_min, cal_max))
-
-print("\n--- Voltage Divider (LDR + 10k) ---")
-print("LDR_R (ohm)\tVoltage\tADC\tCondition")
-for r_ldr in [500, 1000, 5000, 10000, 50000, 100000]:
-    v = 5.0 * 10000 / (r_ldr + 10000)
-    adc = int(v / 5.0 * 1023)
-    cond = "bright" if r_ldr < 2000 else "indoor" if r_ldr < 20000 else "dark"
-    print("{}\t\t{:.2f}\t{}\t{}".format(r_ldr, v, adc, cond))
-
-print("\n--- Mode 0: Auto Brightness ---")
-print("ldr_raw\tmapped\tR\tG\tB")
-for ldr_raw in np.linspace(850, 100, 15):
-    ldr_raw = int(ldr_raw + np.random.normal(0, 5))
-    clamped = max(cal_min, min(cal_max, ldr_raw))
-    mapped = int((clamped - cal_min) / (cal_max - cal_min) * 255)
-    br = 255 - mapped
-    print("{}\t{}\t{}\t{}\t{}".format(ldr_raw, mapped, br, br, br))
-
-print("\nAs ambient light fades, LED brightness increases.")`,
-      challenge: 'Add a second LDR on pin A2 positioned at a different angle. Compare the two readings to determine the direction of the brightest light source (left vs right). Use this to create a "sunflower" mode where the LED color shifts to indicate which side the light is coming from.',
-      successHint: 'You have the complete hardware interface working: the LDR reads ambient light, the potentiometer adjusts sensitivity, the button cycles modes, and the RGB LEDs respond. This is the sensory backbone of the installation. In the next lessons, you will build the processing intelligence: color mapping, state machines, and pattern generation.',
+Each pair lets us create two "pixels" of full RGB color. The ADC reads 0-1023 (dark to bright), which we map to LED patterns using different display modes.`,
+      analogy: "The LDR is like a pupil in your eye. In bright light, the pupil contracts (low resistance = high voltage). In darkness, it dilates (high resistance = low voltage). Our circuit reads the 'pupil size' and adjusts LED brightness accordingly.",
+      storyConnection: "The festival lights transform as evening falls — starting as subtle glimmers in afternoon haze, growing to a dazzling display at nightfall. Our installation does the same automatically. The LDR senses fading daylight and the Arduino smoothly increases LED brightness.",
+      checkQuestion: 'Why do we use a 10k ohm fixed resistor in the voltage divider with the LDR, rather than 100 ohms or 1M ohms?',
+      checkAnswer: "The fixed resistor should match the LDR's mid-range resistance. An LDR varies from ~1k (bright) to ~100k (dim). A 10k resistor puts the divider output in the middle of the ADC range under typical indoor lighting. With 100 ohms, voltage would be near 5V for all but the brightest light. With 1M, voltage would be near 0V except in total darkness. 10k maximizes sensitivity across the useful range.",
+      codeIntro: 'Set up the 6-LED RGB installation with a self-test that cycles through red, green, and blue.',
+      code: `// Festival Light Installation - System Setup\n// 6 LEDs: 2 Red, 2 Green, 2 Blue (RGB pairs)\n\nvoid setup() {\n  pinMode(2, OUTPUT);\n  pinMode(3, OUTPUT);\n  pinMode(4, OUTPUT);\n  pinMode(5, OUTPUT);\n  pinMode(6, OUTPUT);\n  pinMode(7, OUTPUT);\n  Serial.println("=== Festival Lights ===");\n  Serial.println("Self-test: RGB channels...");\n\n  analogWrite(2, 200); analogWrite(3, 200);\n  delay(400);\n  analogWrite(2, 0); analogWrite(3, 0);\n\n  analogWrite(4, 200); analogWrite(5, 200);\n  delay(400);\n  analogWrite(4, 0); analogWrite(5, 0);\n\n  analogWrite(6, 200); analogWrite(7, 200);\n  delay(400);\n  analogWrite(6, 0); analogWrite(7, 0);\n  Serial.println("Self-test OK");\n}\n\nvoid loop() {\n  int ambient = random(100, 900);\n  int brightness = 255 - (ambient * 255 / 1023);\n\n  analogWrite(2, brightness);\n  analogWrite(3, brightness);\n  analogWrite(4, brightness);\n  analogWrite(5, brightness);\n  analogWrite(6, brightness);\n  analogWrite(7, brightness);\n\n  Serial.print("Ambient: ");\n  Serial.print(ambient);\n  Serial.print(" -> Brightness: ");\n  Serial.println(brightness);\n  delay(300);\n}`,
+      ledCount: 6,
+      challenge: 'Instead of white (all channels equal), try warm white: Red at full brightness, Green at 70%, Blue at 30%. This produces a candlelight tone more suitable for a festival atmosphere.',
+      successHint: 'The auto-brightness response is the foundation of every adaptive lighting system — from phone screens to smart home bulbs. Next you add color temperature mapping.',
     },
     {
-      title: 'Analog Reading from LDR (Light-Dependent Resistor)',
-      concept: `The Arduino's ADC (Analog-to-Digital Converter) is the bridge between the continuous analog world and the discrete digital world your code operates in. Understanding its characteristics and limitations is essential for building reliable sensor systems.
+      title: 'Analog Reading: LDR Sensor with Calibration',
+      concept: `The Arduino ADC converts the voltage divider output to a 10-bit number (0-1023). But raw ADC readings need **calibration** — your specific LDR, resistor tolerance, and lighting conditions affect the actual range.
 
-The ATmega328P has a **10-bit successive approximation ADC** with 6 input channels (A0-A5). "10-bit" means it divides the 0-5V input range into 2^10 = 1024 steps. Each step = 5V / 1024 = 4.88 mV. When you call \`analogRead(A0)\`, the ADC takes approximately 112 microseconds to sample and convert the voltage.
+Calibration procedure:
+1. Cover the LDR completely (darkness) — record the ADC value as \`ldrMin\`
+2. Shine a bright light directly on it — record as \`ldrMax\`
+3. Map all future readings to a 0-255 range using: \`mapped = map(raw, ldrMin, ldrMax, 0, 255)\`
 
-But the ADC introduces **noise**. Even with a perfectly stable voltage, consecutive readings will fluctuate by +/-2 to +/-5 counts due to digital switching noise on the power supply, capacitive coupling from nearby digital pins, and the ADC's own quantization noise. For our LDR circuit, this means readings at a stable light level might bounce between, say, 510 and 518.
-
-We address this with **oversampling and averaging**: take multiple rapid readings and compute the mean. Taking 16 samples and averaging reduces noise by a factor of sqrt(16) = 4, effectively giving us 12-bit resolution (4 times finer). The cost is time: 16 * 112 us = ~1.8 ms per averaged reading, still fast enough for our 50 Hz update rate.
-
-The LDR response is **logarithmic**: its resistance changes roughly as R = R0 * (Lux)^(-gamma), where gamma is about 0.7 for typical CdS cells. This means the voltage divider output compresses bright light into a narrow range at the top of the ADC and spreads dim light across a wide range at the bottom. For perceptually uniform brightness mapping, we can apply a log transform: \`mappedValue = log(rawValue)\`, which linearizes the perceived brightness response.
-
-We also need to handle the LDR's **response time**. Unlike a photodiode (nanosecond response), a CdS LDR takes 20-50 ms to respond to a brightness increase and 200-500 ms to respond to a decrease (going from bright to dark). This asymmetric response means our filtering must account for the sensor physics, not just electrical noise.`,
-      analogy: 'The ADC is like a ruler with 1024 tick marks between 0 and 5 volts. When you measure a voltage, you read off the nearest tick mark. But the ruler is slightly wobbly (noise), so you measure three times and take the average. The LDR is like a person whose eyes adjust to darkness slowly but adapt to brightness quickly — it "remembers" the dark for a while, so your readings lag behind reality when lights come on.',
-      storyConnection: 'The festival unfolds over hours — from bright afternoon to deep twilight. The light changes gradually, not in sudden jumps. Our oversampled, filtered ADC reading captures this gradual transition faithfully, just as a photographer adjusts exposure throughout a long time-lapse of the festival. Every fraction of a lux matters for smooth, responsive lighting.',
-      checkQuestion: 'Why does taking 16 ADC samples and averaging improve effective resolution from 10 bits to approximately 12 bits?',
-      checkAnswer: 'Oversampling works because the noise is random: some readings are above the true value, some below. Averaging N samples reduces random noise by a factor of sqrt(N). With N=16, noise drops by 4x. Since each "bit" of resolution halves the noise floor, reducing noise by 4x adds log2(4) = 2 extra bits of effective resolution: 10 + 2 = 12 bits. This only works if the noise is truly random and uncorrelated — which is approximately true for ADC quantization noise.',
-      codeIntro: 'Implement oversampled ADC reading with logarithmic mapping and adaptive filtering for the LDR.',
-      code: `# ============================================================
-# ARDUINO CODE (copy to Arduino IDE to run on hardware)
-# ============================================================
-arduino_code = """
-// LDR Analog Reading - Deep ADC Techniques
-// Oversampling (16x), logarithmic mapping, adaptive filtering
-float readLDR_oversampled() {
-  long sum = 0;
-  for (int i = 0; i < 16; i++) sum += analogRead(A0);
-  return sum / 16.0;
-}
-int logMap(float raw, int inMin, int inMax) {
-  float norm = (raw - inMin) / (float)(inMax - inMin);
-  return (int)(log(1.0 + norm * (exp(1.0) - 1.0)) * 255);
-}
-float adaptiveFilter(float newVal, float old) {
-  float alpha = (newVal > old) ? 0.3 : 0.08;
-  return alpha * newVal + (1-alpha) * old;
-}
-"""
-print("=== Arduino Code (copy to Arduino IDE) ===")
-print(arduino_code)
-
-# ============================================================
-# PYTHON SIMULATION: ADC oversampling, log mapping, filtering
-# ============================================================
-import numpy as np
-
-LDR_MIN, LDR_MAX = 30, 950
-
-def log_map(raw, in_min, in_max):
-    norm = max(0, min(1, (raw - in_min) / (in_max - in_min)))
-    return int(np.log(1.0 + norm * (np.e - 1.0)) * 255)
-
-print("\n=== Python Simulation: LDR Analog Reading ===\n")
-
-np.random.seed(42)
-raw_10 = 500 + np.random.randint(-5, 6, 10)
-over_10 = [np.mean(500 + np.random.randint(-5, 6, 16)) for _ in range(10)]
-print("--- Noise Comparison (at ~500 ADC) ---")
-print("  Raw stddev:  {:.2f}".format(np.std(raw_10)))
-print("  Over stddev: {:.2f}  (4x reduction)\n".format(np.std(over_10)))
-
-print("--- Log Mapping Curve ---")
-print("  ADC\tLinear\tLog-mapped")
-for p in [50, 200, 400, 600, 800, 950]:
-    lin = int((p - LDR_MIN) / (LDR_MAX - LDR_MIN) * 255)
-    log_val = log_map(p, LDR_MIN, LDR_MAX)
-    print("  {}\t{}\t{}".format(p, lin, log_val))
-
-print("\n--- Adaptive Filter: Light Transition ---")
-print("raw\tfiltered\tlog_mapped")
-filtered = 800.0
-for t in np.arange(0, 10.0, 0.2):
-    true_l = float(np.interp(t, [0,2,4,6,8,10], [800,800,100,100,800,800]))
-    raw = true_l + np.random.normal(0, 3)
-    alpha = 0.3 if raw > filtered else 0.08
-    filtered = alpha * raw + (1 - alpha) * filtered
-    mapped = log_map(filtered, LDR_MIN, LDR_MAX)
-    if abs(t % 1.0) < 0.01:
-        print("{:.0f}\t{:.1f}\t\t{}".format(raw, filtered, mapped))
-
-print("\nFilter: FAST to brightening (0.3), SLOW to darkening (0.08)")`,
-      challenge: 'Implement auto-calibration: continuously track the minimum and maximum ADC readings over a rolling 60-second window, and use those as the mapping endpoints. This means the installation self-adjusts to any venue without manual calibration. Add a Serial command "CAL" that prints the current auto-calibrated range.',
-      successHint: 'You now understand the full analog signal chain: from photons hitting the CdS semiconductor, through the voltage divider, into the ADC, through oversampling and filtering, to a perceptually-linear brightness value. Each stage addresses a specific problem — noise, nonlinearity, temporal lag — and together they transform a noisy analog world into clean digital data.',
+We also apply **smoothing** — averaging the last few readings to avoid LED flicker from sensor noise. A simple exponential moving average works well: \`smoothed = 0.8 * smoothed + 0.2 * newReading\`.`,
+      analogy: "Calibration is like zeroing a kitchen scale before weighing ingredients. Every scale has a slightly different zero point. By setting your specific zero (darkness) and max (bright light), all measurements in between become accurate.",
+      storyConnection: "A festival lighting designer doesn't just install lights — they calibrate them on-site. The venue's ambient light at sunset is different from a dark indoor hall. Our calibration routine adapts the installation to its specific environment.",
+      checkQuestion: 'If your LDR reads 50 in darkness and 900 in bright light, what ADC value corresponds to "twilight" (50% brightness)?',
+      checkAnswer: 'The midpoint between 50 and 900 is (50 + 900) / 2 = 475. After mapping: map(475, 50, 900, 0, 255) = 127. So twilight maps to brightness level 127.',
+      codeIntro: 'Implement LDR calibration and smoothed reading with visual feedback on the LEDs.',
+      code: `// LDR Calibration and Smoothed Reading\n// 6 LEDs respond to simulated light level\n\nint ldrMin = 50;\nint ldrMax = 900;\nint smoothed = 128;\nint tick = 0;\n\nvoid setup() {\n  for (int i = 2; i <= 7; i++) {\n    pinMode(i, OUTPUT);\n  }\n  Serial.println("=== LDR Calibration ===");\n  Serial.println("raw,smoothed,mapped,leds_on");\n}\n\nvoid loop() {\n  int raw;\n  int cycle = tick % 60;\n  if (cycle < 20) {\n    raw = ldrMin + (cycle * (ldrMax - ldrMin)) / 20;\n  } else if (cycle < 40) {\n    raw = ldrMax - ((cycle - 20) * 100) / 20;\n  } else {\n    raw = ldrMax - ((cycle - 40) * (ldrMax - ldrMin)) / 20;\n  }\n  raw += random(-20, 21);\n\n  smoothed = (smoothed * 4 + raw) / 5;\n\n  int mapped = (smoothed - ldrMin) * 255 / (ldrMax - ldrMin);\n  if (mapped < 0) mapped = 0;\n  if (mapped > 255) mapped = 255;\n\n  int brightness = 255 - mapped;\n  int ledsOn = 1 + (brightness * 5) / 255;\n  for (int i = 2; i <= 7; i++) {\n    if (i - 2 < ledsOn) {\n      analogWrite(i, brightness);\n    } else {\n      analogWrite(i, 0);\n    }\n  }\n\n  Serial.print(raw);\n  Serial.print(",");\n  Serial.print(smoothed);\n  Serial.print(",");\n  Serial.print(mapped);\n  Serial.print(",");\n  Serial.println(ledsOn);\n\n  tick++;\n  delay(200);\n}`,
+      ledCount: 6,
+      challenge: 'Change the smoothing ratio from 4:1 (80/20) to 1:1 (50/50). The LEDs respond faster but flicker more. Then try 9:1 (90/10) — very smooth but sluggish.',
+      successHint: 'Sensor calibration and smoothing are essential in every embedded system. Without calibration, your code only works in one environment. Without smoothing, sensor noise makes outputs jittery.',
     },
     {
-      title: 'Mapping Sensor Values to LED Patterns',
-      concept: `The Arduino \`map()\` function is the workhorse of sensor-to-output conversion: \`map(value, fromLow, fromHigh, toLow, toHigh)\` performs linear interpolation. But for creative LED patterns, linear mapping is just the beginning.
+      title: 'Color Temperature Mapping: Warm to Cool',
+      concept: `Effective festival lighting shifts **color temperature** with ambient conditions. In low ambient light (dusk), warm tones (reds and oranges) feel natural. In bright ambient light (daylight), cool tones (blues and whites) match.
 
-We need to map a single sensor value (ambient light level, 0-255) into a **three-dimensional color space** (R, G, B, each 0-255). This is where the art of lighting design meets programming.
+Color temperature in Kelvin:
+- **1800K** — candlelight, deep orange-red
+- **2700K** — warm white, incandescent
+- **4000K** — neutral white
+- **6500K** — daylight, blue-white
 
-**Color temperature mapping**: Real-world light has color temperature measured in Kelvin. Candles are ~1800K (warm orange), daylight is ~5500K (neutral white), and overcast sky is ~7000K (cool blue). We can map our LDR reading to simulate this natural progression: dark environment = warm orange (like indoor candlelight), bright environment = cool blue-white (like outdoor daylight). The RGB values for color temperature follow well-known formulas.
-
-**HSV color space**: Instead of thinking in R/G/B, it is often easier to work in **Hue-Saturation-Value (HSV)**. Hue is the color (0-360 degrees: red-yellow-green-cyan-blue-magenta). Saturation is the color intensity (0=gray, 100=vivid). Value is brightness (0=black, 100=full). We can map the LDR to hue (creating a rainbow response) while keeping saturation and value fixed.
-
-The HSV-to-RGB conversion is a standard algorithm involving six sectors of the color wheel. We implement it as a function that takes H (0-360), S (0-255), V (0-255) and returns R, G, B values. This is the same conversion used in every LED strip controller, stage lighting desk, and graphics program.
-
-**Pattern blending**: For smooth transitions between modes, we use **linear interpolation (lerp)** between two color states: \`result = colorA * (1-t) + colorB * t\`, where t transitions from 0.0 to 1.0 over time. This prevents jarring color jumps when the light level crosses a threshold.`,
-      analogy: 'Mapping sensor values to colors is like a DJ mixing music. The DJ has one slider (the sensor reading) but controls multiple channels — bass, treble, volume, effects. Moving the slider smoothly changes the mix. Our map() function is the simplest mixer: one slider to one channel. HSV is like a professional mixing board with separate knobs for which instrument (hue), how loud (value), and how much reverb (saturation).',
-      storyConnection: 'Festival lighting is never a single color — it is a composition that shifts with the mood of the evening. The warm glow of oil lamps at dusk, the vivid colors of electric garlands at midnight, the soft dawn light as the festival winds down. Our color mapping recreates this progression automatically, letting the ambient light tell the installation what mood to express.',
-      checkQuestion: 'Why is HSV color space easier to work with than RGB for lighting effects?',
-      checkAnswer: 'HSV separates the three perceptual dimensions of color: what color (hue), how vivid (saturation), and how bright (value). To create a rainbow, you just sweep hue from 0 to 360 while holding S and V constant. In RGB, the same rainbow requires coordinated changes to all three channels following complex sine-wave relationships. Similarly, to dim a color without changing its hue, you just reduce V in HSV — but in RGB you must scale all three channels proportionally while being careful about rounding errors.',
-      codeIntro: 'Implement HSV-to-RGB conversion and multiple color mapping modes driven by the LDR sensor.',
-      code: `# ============================================================
-# ARDUINO CODE (copy to Arduino IDE to run on hardware)
-# ============================================================
-arduino_code = """
-// Sensor-to-LED Pattern Mapping
-// HSV color space, color temperature, 4 display modes
-void hsvToRgb(int h, int s, int v, int* r, int* g, int* b) {
-  // Standard 6-sector HSV conversion
-}
-void colorTemperature(int level, int* r, int* g, int* b) {
-  // level 0 = warm candle (255,147,41)
-  // level 255 = cool daylight (201,226,255)
-}
-"""
-print("=== Arduino Code (copy to Arduino IDE) ===")
-print(arduino_code)
-
-# ============================================================
-# PYTHON SIMULATION: HSV, color temperature, 4 display modes
-# ============================================================
-import numpy as np
-
-def hsv_to_rgb(h, s, v):
-    h = h % 360
-    region = h // 60
-    rem = (h % 60) * 255 // 60
-    p = (v * (255 - s)) // 255
-    q = (v * (255 - (s * rem) // 255)) // 255
-    t = (v * (255 - (s * (255 - rem)) // 255)) // 255
-    if region == 0: return v, t, p
-    elif region == 1: return q, v, p
-    elif region == 2: return p, v, t
-    elif region == 3: return p, q, v
-    elif region == 4: return t, p, v
-    else: return v, p, q
-
-def color_temp(level):
-    if level < 128:
-        t = level / 128.0
-        return 255, int(147 + t * 97), int(41 + t * 188)
-    t = (level - 128) / 127.0
-    return int(255 - t * 54), int(244 - t * 18), int(229 + t * 26)
-
-print("\n=== Python Simulation: Sensor-to-LED Mapping ===\n")
-
-print("--- Color Temperature Gradient ---")
-print("Level\tR\tG\tB")
-for lev in range(0, 256, 32):
-    r, g, b = color_temp(lev)
-    print("{}\t{}\t{}\t{}".format(lev, r, g, b))
-
-print("\n--- HSV Rainbow ---")
-print("Hue\tR\tG\tB")
-for hue in range(0, 360, 30):
-    r, g, b = hsv_to_rgb(hue, 255, 255)
-    print("{}\t{}\t{}\t{}".format(hue, r, g, b))
-
-print("\n--- 4 Display Modes ---")
-levels = np.linspace(0, 255, 8).astype(int)
-mode_names = ["Auto Brightness", "Color Temperature", "Breathing Pulse", "Rainbow Cycle"]
-for mode in range(4):
-    print("\nMode {}: {}".format(mode, mode_names[mode]))
-    print("  Level\tR\tG\tB")
-    for i, lev in enumerate(levels):
-        if mode == 0:
-            br = 255 - lev
-            r, g, b = br, (br*200)//255, (br*150)//255
-        elif mode == 1:
-            r, g, b = color_temp(lev)
-            sc = 255 - lev // 2
-            r, g, b = (r*sc)//255, (g*sc)//255, (b*sc)//255
-        elif mode == 2:
-            breathe = (1 + np.cos(i/len(levels) * 2 * np.pi)) / 2
-            br = int(breathe * (255 - lev // 2))
-            r, g, b = br, (br*180)//255, (br*100)//255
-        else:
-            hue = int(i / len(levels) * 360)
-            r, g, b = hsv_to_rgb(hue, 255, 255 - lev // 3)
-        print("  {}\t{}\t{}\t{}".format(lev, r, g, b))`,
-      challenge: 'Add a "fire" mode: use random flickering between orange and red tones, with the flicker intensity controlled by the LDR (more ambient light = calmer fire, darkness = wild flickering). Use random() with constrained ranges for each RGB channel to create realistic candle simulation.',
-      successHint: 'You can now map a single sensor value into an infinite variety of lighting effects. The HSV color space gives you independent control over hue, saturation, and brightness. The color temperature function recreates the natural light progression of a festival evening. And the pattern modes demonstrate that the same sensor data can drive completely different visual experiences depending on how you map it.',
+We map the LDR reading to RGB ratios:
+- Dark ambient -> warm: R=255, G=140, B=20 (candlelight)
+- Bright ambient -> cool: R=180, G=220, B=255 (daylight)`,
+      analogy: "Think of how sunlight changes throughout the day. At sunrise and sunset, the sky is warm orange-red. At noon, it's cool blue-white. Our installation mimics this natural color shift automatically.",
+      storyConnection: "Festival lighting evolves through the evening — warm oil lamps at twilight, bright displays at night, soft amber as the celebration winds down. Our color temperature mapping recreates this progression automatically.",
+      checkQuestion: 'Why does warm light (low color temperature) have MORE red and LESS blue, even though higher Kelvin numbers are called "cooler"?',
+      checkAnswer: 'The naming comes from blackbody radiation. A metal heated to 1800K glows red-orange. At 6500K it glows blue-white. In interior design the meaning flipped: "warm" = cozy orange, "cool" = clinical blue.',
+      codeIntro: 'Map ambient light to color temperature, with smooth RGB transitions across 6 LEDs.',
+      code: `// Color Temperature Mapping\n// 6 LEDs shift from warm (dark) to cool (bright)\n\nint tick = 0;\n\nvoid setup() {\n  for (int i = 2; i <= 7; i++) {\n    pinMode(i, OUTPUT);\n  }\n  Serial.println("=== Color Temperature ===");\n  Serial.println("ambient,R,G,B,temp_K");\n}\n\nvoid loop() {\n  int cycle = tick % 100;\n  int ambient;\n  if (cycle < 50) {\n    ambient = cycle * 20;\n  } else {\n    ambient = (100 - cycle) * 20;\n  }\n\n  int level = ambient * 255 / 1000;\n  if (level > 255) level = 255;\n\n  int r = 255 - (level * 75 / 255);\n  int g = 140 + (level * 80 / 255);\n  int b = 20 + (level * 235 / 255);\n\n  int brightness = 255 - level;\n  r = r * brightness / 255;\n  g = g * brightness / 255;\n  b = b * brightness / 255;\n\n  analogWrite(2, r); analogWrite(3, r);\n  analogWrite(4, g); analogWrite(5, g);\n  analogWrite(6, b); analogWrite(7, b);\n\n  int temp = 1800 + (level * 4700 / 255);\n\n  Serial.print(ambient);\n  Serial.print(",R=");\n  Serial.print(r);\n  Serial.print(",G=");\n  Serial.print(g);\n  Serial.print(",B=");\n  Serial.print(b);\n  Serial.print(",");\n  Serial.print(temp);\n  Serial.println("K");\n\n  tick++;\n  delay(150);\n}`,
+      ledCount: 6,
+      challenge: 'Add a "sunset mode" — when ambient drops below 200, shift to deep orange (R=255, G=80, B=0) instead of the standard warm mapping.',
+      successHint: 'Color temperature mapping is how smart bulbs (Philips Hue, LIFX) create their "adaptive lighting" modes. You built the core algorithm that drives a multi-billion dollar industry.',
     },
     {
-      title: 'State Machine for Different Lighting Modes',
-      concept: `A **finite state machine (FSM)** is one of the most powerful patterns in embedded programming. Instead of tangled if/else chains, you define **states** (what the system is doing), **transitions** (what causes a change), and **actions** (what happens in each state and during transitions).
+      title: 'State Machine: Multiple Display Modes',
+      concept: `A professional light installation needs multiple **display modes**. A **state machine** is the cleanest implementation: the system is always in exactly one state, and inputs cause transitions.
 
-Our festival light installation has four primary states: **AMBIENT** (normal light-responsive mode), **ALERT** (rapid change detected — flash response), **PARTY** (manual override — fast color cycling), and **SLEEP** (low power — minimal glow). The transitions between states are triggered by sensor events and user input.
+Our four modes:
+- **Mode 0: Auto Brightness** — white light, intensity follows ambient
+- **Mode 1: Color Temperature** — warm in dark, cool in bright
+- **Mode 2: Pulse** — breathing rhythm, speed follows ambient
+- **Mode 3: Rainbow Cycle** — cycling hue, speed follows ambient
 
-We implement the FSM with an enum for states, a struct for transition rules, and a \`switch\` statement in the main loop that dispatches to the current state's update function. Each state has:
-
-- **entry action**: runs once when entering the state (e.g., print status, set initial color)
-- **update action**: runs every loop iteration while in the state (e.g., update LEDs)
-- **exit action**: runs once when leaving the state (e.g., save settings)
-- **transition conditions**: checked every iteration (e.g., "if LDR drops below 100 for 2 seconds, go to SLEEP")
-
-The FSM pattern prevents a common Arduino bug: **state tangling**, where a \`delay()\` in one mode blocks the button handler, or a flag from one mode is accidentally read by another. With a proper FSM, each state is self-contained. The button handler always works because it is outside the state logic. Transitions are explicit and traceable.
-
-We also add **timed transitions**: the ALERT state automatically returns to AMBIENT after 3 seconds (a flash response should not last forever). The PARTY state has a 60-second timeout to prevent leaving the installation in override mode. These timeouts use \`millis()\` comparisons, not \`delay()\`, so the LEDs keep updating smoothly.`,
-      analogy: 'A traffic light is a state machine. It has three states (GREEN, YELLOW, RED), with timed transitions between them. The light does not "think about" all three states simultaneously — it is always in exactly one state, doing that state action (showing that color). When the timer expires, it transitions to the next state. Our lighting installation is a more complex traffic light: more states, more transition triggers, but the same clean, predictable structure.',
-      storyConnection: 'A festival has distinct phases: preparation (setting up lights during the day), opening (the moment of first illumination at dusk), celebration (the vibrant heart of the evening), and closing (the gradual dimming at dawn). Our state machine mirrors these phases: SLEEP during the day, AMBIENT at dusk, ALERT when the crowd surges, PARTY at the peak of celebration. The installation lives the festival rhythm.',
-      checkQuestion: 'Why is a state machine better than nested if/else statements for managing multiple modes?',
-      checkAnswer: 'Nested if/else statements create "spaghetti code" where the logic for one mode leaks into another through shared variables and conditions. Adding a new mode means modifying every branch. A state machine isolates each mode: its logic, its variables, and its transitions are self-contained. Adding a new state means adding one new case to the switch, one entry/exit pair, and defining its transitions. The rest of the code is untouched. This modularity is why FSMs are used in everything from elevator controllers to video game AI.',
-      codeIntro: 'Implement a full state machine with four states, timed and event-triggered transitions, and per-state LED behavior.',
-      code: `# ============================================================
-# ARDUINO CODE (copy to Arduino IDE to run on hardware)
-# ============================================================
-arduino_code = """
-// Festival Lights - State Machine Controller
-// 4 states: AMBIENT, ALERT, PARTY, SLEEP
-// Transitions:
-//   AMBIENT -> ALERT: sudden LDR change (>150)
-//   ALERT -> AMBIENT: 3s timeout
-//   AMBIENT -> PARTY: button
-//   PARTY -> AMBIENT: 60s timeout or button
-//   AMBIENT -> SLEEP: bright light for 10s
-//   SLEEP -> AMBIENT: darkness or button
-"""
-print("=== Arduino Code (copy to Arduino IDE) ===")
-print(arduino_code)
-
-# ============================================================
-# PYTHON SIMULATION: Finite State Machine
-# ============================================================
-import numpy as np
-
-def hsv_to_rgb(h, s, v):
-    h = h % 360
-    region = h // 60
-    rem = (h % 60) * 255 // 60
-    p = (v*(255-s))//255
-    q = (v*(255-(s*rem)//255))//255
-    t = (v*(255-(s*(255-rem))//255))//255
-    if region == 0: return v, t, p
-    elif region == 1: return q, v, p
-    elif region == 2: return p, v, t
-    elif region == 3: return p, q, v
-    elif region == 4: return t, p, v
-    else: return v, p, q
-
-print("\n=== Python Simulation: Festival Light State Machine ===\n")
-
-events = [
-    (0,500,False), (2,500,False), (4,500,False),
-    (5,200,False), (6,200,False), (8,200,False),
-    (9,200,False), (10,200,True), (12,200,False),
-    (15,200,True), (17,200,False), (20,900,False),
-    (25,900,False), (30,900,False), (33,900,False),
-    (35,100,False), (38,100,False),
-]
-
-state = "AMBIENT"
-state_start = 0.0
-prev_ldr = 500
-log = []
-
-print("[ENTER AMBIENT]\n")
-print("time\tstate\t\tldr\tR\tG\tB\ttransition")
-print("-" * 75)
-
-for time_s, ldr, button in events:
-    elapsed = time_s - state_start
-    transition = ""
-    if state == "AMBIENT":
-        lev = max(0, min(255, int((ldr - 50) / 850 * 255)))
-        br = 255 - lev
-        r, g, b = br, (br*200)//255, (br*140)//255
-        if abs(ldr - prev_ldr) > 150:
-            transition = "-> ALERT"
-            state, state_start = "ALERT", time_s
-        elif ldr > 800 and elapsed > 10:
-            transition = "-> SLEEP"
-            state, state_start = "SLEEP", time_s
-        elif button:
-            transition = "-> PARTY"
-            state, state_start = "PARTY", time_s
-    elif state == "ALERT":
-        p = int((1 + np.cos(elapsed * 5 * 2 * np.pi)) / 2 * 255)
-        r, g, b = p, p, p
-        if elapsed > 3 or button:
-            transition = "-> AMBIENT"
-            state, state_start = "AMBIENT", time_s
-    elif state == "PARTY":
-        hue = int((elapsed * 200) % 360)
-        r, g, b = hsv_to_rgb(hue, 255, 255)
-        if elapsed > 60 or button:
-            transition = "-> AMBIENT"
-            state, state_start = "AMBIENT", time_s
-    elif state == "SLEEP":
-        glow = 10 + int((1 + np.cos(time_s % 4 / 4 * 2 * np.pi)) / 2 * 15)
-        r, g, b = glow, glow // 2, 0
-        if ldr < 200 or button:
-            transition = "-> AMBIENT"
-            state, state_start = "AMBIENT", time_s
-
-    st = state + "\t" if len(state) < 7 else state
-    print("{}\t{}\t{}\t{}\t{}\t{}\t{}".format(time_s, st, ldr, r, g, b, transition))
-    if transition: log.append((time_s, transition))
-    prev_ldr = ldr
-
-print("\n=== Transition Log ===")
-for t, tr in log: print("  t={}s: {}".format(t, tr))
-print("Total transitions: {}".format(len(log)))`,
-      challenge: 'Add a SUNRISE state that activates at a specific time (configurable via Serial command). The SUNRISE state slowly ramps from deep red to warm orange to full white over 5 minutes, simulating a dawn wake-up light. Add a simple clock using millis() and a "SET HH:MM" serial command to set the current time.',
-      successHint: 'The state machine makes the installation behavior predictable, debuggable, and extensible. Each state is isolated — you can modify PARTY mode without touching AMBIENT. Transitions are explicit and logged. Timeouts prevent stuck states. This FSM pattern is the same one used in industrial PLCs, traffic light controllers, and spacecraft mission sequencers.',
+A button (simulated with a timer) cycles through modes. This pattern scales to any number of modes without spaghetti code.`,
+      analogy: "A traffic light is a state machine: always in exactly one state (red, yellow, green). A timer triggers transitions. Our display modes work the same way — one mode active at a time, button presses cycle through them.",
+      storyConnection: "A festival has phases — the quiet anticipation before sunset, the first lights, the peak celebration, the wind-down. Our state machine gives the installation these distinct personalities.",
+      checkQuestion: 'Why use a state machine instead of nested if-else statements for multiple modes?',
+      checkAnswer: 'A state machine separates "which mode am I in?" from "what does this mode do?" Each mode is independent. Adding a new mode means adding one case — not threading logic through if-else chains. It also makes debugging easier.',
+      codeIntro: 'Implement a 4-mode state machine with automatic mode cycling.',
+      code: `// State Machine: 4 Display Modes\n// Auto-cycles every 30 ticks for demo\n\nint mode = 0;\nint tick = 0;\nint breathStep = 0;\nint hueStep = 0;\n\nvoid setup() {\n  for (int i = 2; i <= 7; i++) {\n    pinMode(i, OUTPUT);\n  }\n  Serial.println("=== Mode: Auto Brightness ===");\n}\n\nvoid allOff() {\n  for (int i = 2; i <= 7; i++) analogWrite(i, 0);\n}\n\nvoid loop() {\n  if (tick > 0 && tick % 30 == 0) {\n    mode = (mode + 1) % 4;\n    allOff();\n    if (mode == 0) Serial.println("=== Mode: Auto Brightness ===");\n    if (mode == 1) Serial.println("=== Mode: Color Temperature ===");\n    if (mode == 2) Serial.println("=== Mode: Pulse ===");\n    if (mode == 3) Serial.println("=== Mode: Rainbow ===");\n  }\n\n  int ambient = 400 + random(-50, 51);\n\n  if (mode == 0) {\n    int b = 255 - (ambient * 255 / 1023);\n    for (int i = 2; i <= 7; i++) analogWrite(i, b);\n  }\n  else if (mode == 1) {\n    int level = ambient * 255 / 1023;\n    int r = (255 - level * 75 / 255) * (255 - level) / 255;\n    int g = (140 + level * 80 / 255) * (255 - level) / 255;\n    int b = (20 + level * 235 / 255) * (255 - level) / 255;\n    analogWrite(2, r); analogWrite(3, r);\n    analogWrite(4, g); analogWrite(5, g);\n    analogWrite(6, b); analogWrite(7, b);\n  }\n  else if (mode == 2) {\n    breathStep = (breathStep + 3) % 510;\n    int b = (breathStep < 255) ? breathStep : (510 - breathStep);\n    for (int i = 2; i <= 7; i++) analogWrite(i, b);\n  }\n  else if (mode == 3) {\n    hueStep = (hueStep + 5) % 765;\n    int r = 0, g = 0, b = 0;\n    if (hueStep < 255) { r = 255 - hueStep; g = hueStep; }\n    else if (hueStep < 510) { g = 510 - hueStep; b = hueStep - 255; }\n    else { b = 765 - hueStep; r = hueStep - 510; }\n    analogWrite(2, r); analogWrite(3, r);\n    analogWrite(4, g); analogWrite(5, g);\n    analogWrite(6, b); analogWrite(7, b);\n  }\n\n  tick++;\n  delay(100);\n}`,
+      ledCount: 6,
+      challenge: 'Add a 5th mode: "Strobe" — all LEDs flash on/off at maximum brightness. Remember to update the mode cycle count.',
+      successHint: 'State machines are the backbone of embedded programming — from washing machines to space probes. Every multi-mode device runs on this exact pattern.',
     },
     {
-      title: 'Documentation and Installation Guide',
-      concept: `A festival light installation is not a lab experiment — it goes into a real venue, is handled by non-engineers, and must work reliably for hours without supervision. The documentation must address three realities: **setup** (getting it working at the venue), **operation** (how staff interact with it), and **failure recovery** (what to do when something goes wrong at 9 PM with a hundred people watching).
+      title: 'Complete Festival Lights Capstone: Sensor + Modes + RGB',
+      concept: `Everything comes together: **6-LED RGB installation** with LDR sensing, calibrated analog input, smoothed readings, color temperature mapping, and a 4-mode state machine.
 
-The installation guide differs from lab documentation in important ways. Lab docs assume the reader is a fellow engineer with a bench, tools, and time. Installation docs assume the reader is a festival volunteer with a screwdriver, a flashlight, and ten minutes before the crowd arrives.
+The final sketch combines:
+1. **LDR sensor with calibration** — normalized 0-255, exponential smoothing
+2. **Auto brightness** — inverse mapping, dark = bright LEDs
+3. **Color temperature** — warm candlelight to cool daylight
+4. **Pulse mode** — breathing with ambient-adaptive speed
+5. **Rainbow cycle** — hue rotation with adaptive speed
+6. **Gamma correction** — perceptually smooth fading
 
-We write the guide at three levels of detail:
-
-**Quick Start** (1 page): For the person who just needs it working. Power on, verify LED self-test, aim LDR toward the festival area, press button to select mode. Done.
-
-**Setup Guide** (3 pages): For the person installing it. Mounting the Arduino enclosure, routing wires to the LED strip, positioning the LDR, connecting the power supply, waterproofing for outdoor use, and running the calibration routine.
-
-**Technical Reference** (5 pages): For the person who needs to modify or repair it. Complete circuit description, code architecture, state machine diagram, calibration procedures, component specifications, and replacement instructions.
-
-We also write a **pre-event checklist**: a numbered list of tests to run before the festival opens. Self-test passes? Check. LDR responding to light changes? Check. Button cycling modes? Check. Buzzer/speaker working? Check. Power supply warm but not hot? Check. Backup Arduino and LED strip on hand? Check. This checklist is the difference between a smooth opening and a panicked scramble.`,
-      analogy: 'An installation guide is like the safety card in an airplane seat pocket. It must work for everyone — engineers, artists, volunteers, people who do not speak the language fluently. It uses pictures, numbered steps, and clear warnings. It covers normal operation ("how to adjust your seat") and emergencies ("if the lights stop working"). Our guide follows the same principles: clarity, brevity, and coverage of what to do when things go wrong.',
-      storyConnection: 'Festival traditions survive because the knowledge of how to organize them is carefully passed down. Who hangs the lanterns? Where do the oil lamps go? How do you keep them lit in the wind? Our installation guide is the modern equivalent of that oral tradition — a written record that ensures the light display can be set up, operated, and maintained by anyone, year after year.',
-      checkQuestion: 'Why do we include a "failure recovery" section in installation documentation for a simple LED project?',
-      checkAnswer: 'Because failures happen at the worst possible time — during the festival, in the dark, with an audience. A loose wire, a drained battery, a corrupted upload. Without a troubleshooting guide, the installer is helpless. With one, they can diagnose and fix the most common issues in minutes: "LEDs not responding? Check the data wire connection at pin 11. Still nothing? Swap to the backup Arduino." The troubleshooting section is often the most-used part of any installation guide.',
-      codeIntro: 'Create the complete capstone sketch with full documentation header, self-test, state machine, and all subsystems integrated.',
-      code: `# ============================================================
-# ARDUINO CODE (copy to Arduino IDE to run on hardware)
-# ============================================================
-arduino_code = """
-// FESTIVAL LIGHT INSTALLATION - CAPSTONE
-// LDR sensor | RGB LEDs | 4-state FSM
-//
-// BOM: Arduino Uno, LDR + 10k, 3 LEDs + 220R, pot, button ($10-20)
-// CIRCUIT:
-//   LDR: 5V -> LDR -> A0 -> 10k -> GND
-//   LEDs: Pin 9->RED, Pin 10->GREEN, Pin 11->BLUE (via 220R)
-//   Button: Pin 2 -> button -> GND (internal pull-up)
-//
-// STATE MACHINE:
-//   AMBIENT <-> ALERT (sudden light change, 3s timeout)
-//   AMBIENT <-> PARTY (button, 60s timeout)
-//   AMBIENT <-> SLEEP (bright 10s / darkness wakes)
-//
-// TROUBLESHOOTING:
-//   No LEDs:      Check pin/polarity
-//   Always bright: LDR disconnected
-//   Stuck SLEEP:   Press button or cover LDR
-"""
-print("=== Arduino Code (copy to Arduino IDE) ===")
-print(arduino_code)
-
-# ============================================================
-# PYTHON SIMULATION: Complete capstone
-# ============================================================
-import numpy as np
-
-def hsv_to_rgb(h, s, v):
-    h = h % 360
-    region = h // 60
-    rem = (h % 60) * 255 // 60
-    p = (v*(255-s))//255
-    q = (v*(255-(s*rem)//255))//255
-    t = (v*(255-(s*(255-rem))//255))//255
-    if region == 0: return v, t, p
-    elif region == 1: return q, v, p
-    elif region == 2: return p, v, t
-    elif region == 3: return p, q, v
-    elif region == 4: return t, p, v
-    else: return v, p, q
-
-print("\n=== FESTIVAL LIGHT INSTALLATION CAPSTONE ===\n")
-
-print("--- SELF TEST ---")
-for c in ["Red", "Green", "Blue"]: print("  {} ramp... OK".format(c))
-print("  LDR: 520 (normal indoor)")
-print("--- SELF TEST COMPLETE ---\n")
-
-scenario = [
-    (0,500,False,"Evening begins"), (3,500,False,""),
-    (5,200,False,"Sudden dark"), (7,200,False,"ALERT pulsing"),
-    (8,200,False,"Timeout->AMBIENT"), (10,200,True,"Button->PARTY"),
-    (12,200,False,"Rainbow"), (15,200,True,"Button->AMBIENT"),
-    (18,200,False,"Warm glow"), (20,900,False,"Dawn rising"),
-    (25,900,False,"Bright 5s"), (30,900,False,"10s->SLEEP"),
-    (33,900,False,"Dim glow"), (35,100,False,"Dark->WAKE"),
-    (38,100,False,"Ready"),
-]
-
-state = "AMBIENT"
-state_start = 0.0
-prev_ldr = 500
-transitions = []
-
-print("[ENTER AMBIENT]")
-print("time\tstate\t\tldr\tR\tG\tB\tnote")
-print("-" * 75)
-
-for time_s, ldr, btn, note in scenario:
-    elapsed = time_s - state_start
-    tr = ""
-    if state == "AMBIENT":
-        lev = max(0, min(255, int((ldr-50)/850*255)))
-        br = 255 - lev
-        r, g, b = br, (br*200)//255, (br*140)//255
-        if abs(ldr-prev_ldr) > 150: tr="->ALERT"; state="ALERT"; state_start=time_s
-        elif ldr > 800 and elapsed > 10: tr="->SLEEP"; state="SLEEP"; state_start=time_s
-        elif btn: tr="->PARTY"; state="PARTY"; state_start=time_s
-    elif state == "ALERT":
-        p = int((1+np.cos(elapsed*5*2*np.pi))/2*255)
-        r, g, b = p, p, p
-        if elapsed > 3 or btn: tr="->AMBIENT"; state="AMBIENT"; state_start=time_s
-    elif state == "PARTY":
-        hue = int((elapsed*200)%360)
-        r, g, b = hsv_to_rgb(hue, 255, 255)
-        if elapsed > 60 or btn: tr="->AMBIENT"; state="AMBIENT"; state_start=time_s
-    elif state == "SLEEP":
-        glow = 10+int((1+np.cos(time_s%4/4*2*np.pi))/2*15)
-        r, g, b = glow, glow//2, 0
-        if ldr < 200 or btn: tr="->AMBIENT"; state="AMBIENT"; state_start=time_s
-
-    st = state+"\t" if len(state) < 7 else state
-    print("{}\t{}\t{}\t{}\t{}\t{}\t{}".format(time_s, st, ldr, r, g, b, note))
-    if tr: transitions.append((time_s, tr))
-    prev_ldr = ldr
-
-print("\n=== CAPSTONE COMPLETE ===")
-print("Transitions: {}".format(len(transitions)))
-for t, tr in transitions: print("  t={}s: {}".format(t, tr))
-print("\nSkills: analog sensing, ADC oversampling, voltage dividers,")
-print("  log mapping, HSV color, state machines, adaptive filtering")`,
-      challenge: 'Extend the installation with a WS2812B NeoPixel strip (30 pixels) using the Adafruit NeoPixel library. Each pixel responds to the same state machine but with a spatial gradient: pixel 0 is the "leader" that follows the LDR directly, and each subsequent pixel follows the previous one with a slight delay (creating a wave effect). Add a "waterfall" animation in PARTY mode.',
-      successHint: 'You have built a complete, documented, installation-ready festival light system. The LDR senses the environment. The state machine manages behavior. The HSV color mapping creates beautiful effects. The documentation ensures anyone can set it up, operate it, and fix it. This is the full engineering cycle: concept, design, build, test, document, deploy.',
+On real hardware: 6 LEDs, an LDR, a 10k resistor, a pushbutton, and an Arduino Uno. Total under $10.`,
+      storyConnection: "The festival lights weren't just decoration — they were part of the experience, responding to the evening, the weather, the crowd. Your installation does the same: it reads its environment and adapts. Technology in service of celebration.",
+      checkQuestion: 'How would you add a "sound reactive" mode that pulses LEDs to music?',
+      checkAnswer: 'Add an electret microphone on an analog pin. Read amplitude, apply peak detection, and map peaks to LED brightness. For beat detection, compare current amplitude to a running average — spikes indicate beats.',
+      codeIntro: 'The final capstone: full installation with sensor, smoothing, 4 modes, gamma correction, and logging.',
+      code: `// === FESTIVAL LIGHTS CAPSTONE ===\n// LDR sensor + 4 modes + RGB + logging\n\nint mode = 0;\nint tick = 0;\nint smoothed = 500;\nint breathStep = 0;\nint hueStep = 0;\n\nint gammaLUT[] = {0, 1, 4, 10, 20, 36, 58, 86,\n                  120, 161, 208, 255};\n\nint gc(int raw) {\n  int idx = raw / 23;\n  if (idx > 11) idx = 11;\n  if (idx < 0) idx = 0;\n  return gammaLUT[idx];\n}\n\nvoid setup() {\n  for (int i = 2; i <= 7; i++) pinMode(i, OUTPUT);\n  Serial.println("=== Festival Lights Capstone ===");\n  for (int i = 2; i <= 7; i++) {\n    analogWrite(i, 180); delay(100); analogWrite(i, 0);\n  }\n  Serial.println("Self-test OK");\n  Serial.println("ms,mode,ambient,r,g,b");\n}\n\nvoid loop() {\n  if (tick > 0 && tick % 40 == 0) {\n    mode = (mode + 1) % 4;\n    for (int i = 2; i <= 7; i++) analogWrite(i, 0);\n  }\n\n  int cycle = tick % 80;\n  int ambient;\n  if (cycle < 40) ambient = 100 + cycle * 20;\n  else ambient = 900 - (cycle - 40) * 20;\n  ambient += random(-30, 31);\n\n  smoothed = (smoothed * 4 + ambient) / 5;\n  int level = (smoothed - 50) * 255 / 850;\n  if (level < 0) level = 0;\n  if (level > 255) level = 255;\n\n  int r = 0, g = 0, b = 0;\n\n  if (mode == 0) {\n    int brt = gc(255 - level);\n    r = brt; g = brt; b = brt;\n  }\n  else if (mode == 1) {\n    int brt = 255 - level;\n    r = gc((255 - level * 75 / 255) * brt / 255);\n    g = gc((140 + level * 80 / 255) * brt / 255);\n    b = gc((20 + level * 235 / 255) * brt / 255);\n  }\n  else if (mode == 2) {\n    int speed = 2 + level / 40;\n    breathStep = (breathStep + speed) % 510;\n    int brt = (breathStep < 255) ? breathStep : (510 - breathStep);\n    r = gc(brt); g = gc(brt); b = gc(brt);\n  }\n  else if (mode == 3) {\n    int speed = 3 + level / 30;\n    hueStep = (hueStep + speed) % 765;\n    if (hueStep < 255) { r = gc(255 - hueStep); g = gc(hueStep); }\n    else if (hueStep < 510) { g = gc(510 - hueStep); b = gc(hueStep - 255); }\n    else { b = gc(765 - hueStep); r = gc(hueStep - 510); }\n  }\n\n  analogWrite(2, r); analogWrite(3, r);\n  analogWrite(4, g); analogWrite(5, g);\n  analogWrite(6, b); analogWrite(7, b);\n\n  if (tick % 4 == 0) {\n    Serial.print(tick * 100);\n    Serial.print(",");\n    Serial.print(mode);\n    Serial.print(",");\n    Serial.print(smoothed);\n    Serial.print(",");\n    Serial.print(r);\n    Serial.print(",");\n    Serial.print(g);\n    Serial.print(",");\n    Serial.println(b);\n  }\n\n  tick++;\n  delay(100);\n}`,
+      ledCount: 6,
+      challenge: 'On real hardware: connect an LDR + 10k voltage divider to A0, a pushbutton to pin 8, and replace the simulated ambient with analogRead(A0). Add debouncing for reliable mode switching.',
+      successHint: 'You built a complete ambient-responsive light installation: sensor calibration, smoothing, color temperature, multiple display modes, gamma correction, and data logging. This is the architecture behind smart home lighting and interactive art.',
     },
   ];
 
@@ -529,24 +204,18 @@ print("  log mapping, HSV color, state machines, adaptive filtering")`,
         <div className="flex items-center gap-2 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 px-4 py-2 rounded-full text-sm font-semibold">
           <Cpu className="w-4 h-4" /> Level 4: Creator
         </div>
-        <span className="text-sm text-gray-500 dark:text-gray-400">Requires Level 3 (LED circuit design & photometry)</span>
+        <span className="text-sm text-gray-500 dark:text-gray-400">Requires Level 3 (LED circuits & sensor integration)</span>
       </div>
-      {!pyReady && (
-        <div className="mb-8 bg-gray-50 dark:bg-gray-800 rounded-xl p-6 text-center">
-          <p className="text-gray-600 dark:text-gray-300 mb-4">This capstone project uses Arduino C/C++ to build a light-responsive LED festival installation with LDR sensing, HSV color mapping, state machine control, and professional documentation. Click to start the code environment.</p>
-          <button onClick={loadPyodide} disabled={loading} className="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-500 text-white px-6 py-3 rounded-full font-semibold transition-colors">
-            {loading ? (<><Loader2 className="w-5 h-5 animate-spin" />{loadProgress}</>) : (<><Cpu className="w-5 h-5" />Load Code Environment</>)}
-          </button>
-        </div>
-      )}
+
+      <div className="mb-8 bg-purple-50 dark:bg-purple-900/20 rounded-xl p-4 border border-purple-200 dark:border-purple-800">
+        <p className="text-sm text-purple-800 dark:text-purple-300">
+          This capstone uses a <strong>simulated Arduino</strong> to build an ambient-responsive festival lighting installation with LDR sensing, color temperature mapping, and multiple display modes. Edit the code, click "Upload & Run", and watch the virtual LEDs respond.
+        </p>
+      </div>
+
       <div className="space-y-8">
-        {miniLessons.map((lesson, i) => (
-          <MiniLesson key={i} id={`L4-${i + 1}`} number={i + 1}
-            title={lesson.title} concept={lesson.concept} analogy={lesson.analogy}
-            storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
-            checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
-            code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
-            />
+        {circuitLessons.map((lesson, i) => (
+          <CircuitMiniLesson key={i} lesson={lesson} number={i + 1} />
         ))}
       </div>
     </div>

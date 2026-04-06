@@ -1,391 +1,193 @@
-import { useState, useRef, useCallback } from 'react';
-import { Loader2, Cpu } from 'lucide-react';
-import MiniLesson from '../MiniLesson';
-import { usePyodide } from '../../contexts/PyodideContext';
+import { useState } from 'react';
+import { ChevronDown, ChevronUp, CheckCircle, HelpCircle, Cpu } from 'lucide-react';
+import ArduinoPlayground from '../ArduinoPlayground';
+import { renderMarkdown } from '../MiniLesson';
+
+interface CircuitLesson {
+  title: string;
+  concept: string;
+  analogy?: string;
+  storyConnection?: string;
+  checkQuestion?: string;
+  checkAnswer?: string;
+  codeIntro?: string;
+  code: string;
+  ledCount?: number;
+  challenge?: string;
+  successHint?: string;
+}
+
+
+function CircuitMiniLesson({ lesson, number }: { lesson: CircuitLesson; number: number }) {
+  const [showAnswer, setShowAnswer] = useState(false);
+
+  return (
+    <div id={`L4-${number}`} className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden scroll-mt-24">
+      <div className="px-6 pt-6 pb-4">
+        <div className="flex items-center gap-3 mb-4">
+          <span className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-fuchsia-500 text-white flex items-center justify-center text-sm font-bold flex-shrink-0">{number}</span>
+          <h4 className="text-xl font-bold text-gray-900 dark:text-white">{lesson.title}</h4>
+        </div>
+        <div className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: renderMarkdown(lesson.concept) }} />
+
+        {lesson.analogy && (
+          <div className="bg-sky-50 dark:bg-sky-900/20 border-l-4 border-sky-400 rounded-r-lg px-4 py-3 mb-4">
+            <p className="text-sm text-sky-800 dark:text-sky-300 leading-relaxed"><strong>Think of it this way:</strong> {lesson.analogy}</p>
+          </div>
+        )}
+        {lesson.storyConnection && (
+          <div className="bg-emerald-50 dark:bg-emerald-900/20 border-l-4 border-emerald-400 rounded-r-lg px-4 py-3 mb-4">
+            <p className="text-sm text-emerald-800 dark:text-emerald-300 leading-relaxed"><strong>In the story:</strong> {lesson.storyConnection}</p>
+          </div>
+        )}
+        {lesson.checkQuestion && (
+          <div className="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-4 mb-2">
+            <div className="flex items-start gap-3">
+              <HelpCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+              <div className="flex-1">
+                <p className="text-sm font-semibold text-amber-900 dark:text-amber-200 mb-1">Before you code — think about this:</p>
+                <p className="text-sm text-amber-800 dark:text-amber-300">{lesson.checkQuestion}</p>
+                {lesson.checkAnswer && (
+                  <>
+                    <button onClick={() => setShowAnswer(!showAnswer)} className="mt-2 flex items-center gap-1 text-xs font-semibold text-amber-600 dark:text-amber-400">
+                      {showAnswer ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+                      {showAnswer ? 'Hide answer' : 'Show answer'}
+                    </button>
+                    {showAnswer && <p className="mt-2 text-sm text-amber-700 dark:text-amber-300 bg-amber-100 dark:bg-amber-900/30 px-3 py-2 rounded-lg">{lesson.checkAnswer}</p>}
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {lesson.codeIntro && (
+        <div className="px-6 py-2 bg-gray-50 dark:bg-gray-700/30 border-t border-gray-200 dark:border-gray-700">
+          <p className="text-sm text-gray-600 dark:text-gray-400"><strong className="text-gray-900 dark:text-white">Now try it:</strong> {lesson.codeIntro}</p>
+        </div>
+      )}
+
+      <div className="border-t border-gray-200 dark:border-gray-700">
+        <ArduinoPlayground starterCode={lesson.code} title={`Circuit ${number}`} ledCount={lesson.ledCount || 3} />
+      </div>
+
+      {lesson.challenge && (
+        <div className="px-6 py-3 bg-purple-50 dark:bg-purple-900/20 border-t border-purple-200 dark:border-purple-800">
+          <p className="text-sm text-purple-800 dark:text-purple-300"><strong>Experiment:</strong> {lesson.challenge}</p>
+        </div>
+      )}
+      {lesson.successHint && (
+        <div className="px-6 py-3 bg-emerald-50 dark:bg-emerald-900/20 border-t border-emerald-200 dark:border-emerald-800">
+          <p className="text-sm text-emerald-800 dark:text-emerald-300"><CheckCircle className="w-4 h-4 inline mr-1" />{lesson.successHint}</p>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function FireflyLevel4() {
-  const { pyodideRef, load: loadPyodide, ready: pyReady, state: pyState, loadProgress } = usePyodide();
-  const loading = pyState === 'loading';
-
-  const miniLessons = [
+  const circuitLessons: CircuitLesson[] = [
     {
-      title: 'System Design: LED Array with Timing Control',
-      concept: `In previous levels you explored the biology of firefly bioluminescence and the mathematics of synchronization. Now you build the real thing: an **Arduino-controlled LED array** that synchronizes its flashing patterns, just like a swarm of fireflies on a Majuli riverbank.
+      title: 'System Design: 6-LED Ring with Timing Control',
+      concept: `You've reached the capstone: build a **synchronized LED firefly array** using 6 LEDs in a ring topology, just like a swarm on a Majuli riverbank.
 
-The hardware design uses an **Arduino Uno** (ATmega328P, 16 MHz, 14 digital pins, 6 PWM-capable). We connect **6 LEDs** to PWM pins (3, 5, 6, 9, 10, 11) through 220-ohm current-limiting resistors. Each LED represents one "firefly" — an independent oscillator with its own phase and natural frequency, coupled to its neighbors through the Kuramoto model.
+Each LED connects to a PWM pin through a 220-ohm resistor. We use all 6 PWM-capable pins (3, 5, 6, 9, 10, 11) so every "firefly" can fade smoothly with \`analogWrite()\`.
 
-Why PWM pins? Because fireflies do not simply flash on/off — they produce a smooth **breathing glow** that rises and falls. PWM (Pulse Width Modulation) lets us control brightness continuously from 0 (off) to 255 (full brightness) using \`analogWrite()\`. The Arduino toggles the pin at ~490 Hz, varying the duty cycle. Our eyes see the average brightness, not the flickering.
+**Ring topology** means LED 0 couples to LEDs 1 and 5, LED 1 couples to LEDs 0 and 2, and so on. Each firefly responds only to its nearest neighbors — the same local-coupling rule that real fireflies follow.
 
-The circuit layout matters. We arrange LEDs in a **ring topology**: LED 0 couples to LED 1 and LED 5, LED 1 couples to LED 0 and LED 2, and so on. This nearest-neighbor coupling mirrors how real fireflies respond primarily to the flash of their closest neighbors, not distant ones.
-
-Power budget: each LED draws ~15 mA at full brightness. Six LEDs = 90 mA total, well within the Arduino's 200 mA per-pin group limit and the 500 mA USB supply. We add a decoupling capacitor (100 nF) near the Arduino's power pins to smooth voltage fluctuations during rapid PWM switching.`,
-      analogy: 'Think of the circuit as a circle of six drummers, each with their own rhythm. Each drummer can hear only the two neighbors beside them. At first they are out of sync — a cacophony. But gradually, each drummer nudges their tempo to match what they hear nearby. The resistors are like earplugs that protect the drums (LEDs) from being hit too hard (overcurrent).',
-      storyConnection: 'On the banks of Majuli, thousands of fireflies flash together in the darkness. Each one is a tiny oscillator — a biological clock coupled to its neighbors through light. Our six-LED ring is a miniature version of that riverbank swarm, with Arduino code replacing biochemistry.',
+Power budget: 6 LEDs at ~15 mA each = 90 mA total, well within the Arduino's 200 mA limit.`,
+      analogy: 'Six drummers in a circle. Each can hear only the two beside them. At first they play different rhythms. Gradually, each nudges their tempo toward what they hear. The resistors are like earplugs that protect the drums (LEDs) from being hit too hard.',
+      storyConnection: 'On the banks of Majuli, thousands of fireflies flash together in darkness. Each is a tiny oscillator — a biological clock coupled to its neighbors through light. Our six-LED ring is a miniature version of that riverbank swarm.',
       checkQuestion: 'Why do we need current-limiting resistors between the Arduino pins and the LEDs?',
-      checkAnswer: 'An LED has very low forward resistance once its threshold voltage is reached (~2V for green, ~1.8V for red). Without a resistor, the current would spike to hundreds of milliamps, destroying the LED and possibly damaging the Arduino pin (rated for 40 mA max). A 220-ohm resistor limits current to (5V - 2V) / 220 = ~13.6 mA — bright enough to see, safe for the hardware.',
-      codeIntro: 'Set up the Arduino sketch with pin definitions, LED array configuration, and the basic timing framework.',
-      code: `# ============================================================
-# ARDUINO CODE (copy to Arduino IDE to run on hardware)
-# ============================================================
-arduino_code = """
-// Firefly LED Synchronization - System Setup
-// Arduino Uno | 6 LEDs on PWM pins in ring topology
-const int NUM_FIREFLIES = 6;
-const int ledPins[] = {3, 5, 6, 9, 10, 11};
-void setup() {
-  for (int i = 0; i < 6; i++) { pinMode(ledPins[i], OUTPUT); }
-  // Init random phases and frequencies
-}
-void loop() {
-  // Each firefly oscillates independently (no coupling yet)
-  // brightness = (1 + cos(phase)) / 2, applied via analogWrite
-}
-"""
-print("=== Arduino Code (copy to Arduino IDE) ===")
-print(arduino_code)
-
-# ============================================================
-# PYTHON SIMULATION of the same logic
-# ============================================================
-import numpy as np
-
-NUM = 6
-neighbors = [[(i-1)%NUM, (i+1)%NUM] for i in range(NUM)]
-np.random.seed(42)
-phase = np.random.uniform(0, 2*np.pi, NUM)
-freq = 1.5 + np.random.uniform(-0.2, 0.2, NUM)
-
-print("\n=== Python Simulation: Independent Oscillators ===\n")
-print("Initial state:")
-for i in range(NUM):
-    print("  Firefly {}: phase={:.2f} freq={:.2f} Hz".format(i, phase[i], freq[i]))
-
-dt = 0.01
-print("\nTime(s)  | Brightness (PWM 0-255) per firefly")
-print("-" * 60)
-for step in range(200):
-    t = step * dt
-    phase += 2 * np.pi * freq * dt
-    phase = phase % (2 * np.pi)
-    pwm = ((1 + np.cos(phase)) / 2 * 255).astype(int)
-    if step % 50 == 0:
-        print("  {:.1f}s    | {}".format(t, "  ".join("{:3d}".format(p) for p in pwm)))
-print("\nFireflies flash independently (not synchronized yet).")`,
-      challenge: 'Modify the pin assignments to use 8 LEDs instead of 6 (add pins 2 and 4 as digital-only pins using digitalWrite for simple on/off). Update the neighbor array for an 8-node ring. What changes in the power budget?',
-      successHint: 'You have the hardware foundation: six independent oscillators, each producing a smooth breathing glow at its own natural frequency. The LEDs flash at similar but not identical rates — like fireflies that have not yet heard each other. The Kuramoto algorithm in Lesson 2 will add the coupling that pulls them into synchrony.',
+      checkAnswer: 'An LED has very low forward resistance once its threshold voltage is reached (~2V). Without a resistor, current spikes to hundreds of milliamps, destroying the LED and possibly the Arduino pin (rated 40 mA max). A 220-ohm resistor limits current to (5V - 2V) / 220 = ~13.6 mA — bright enough to see, safe for hardware.',
+      codeIntro: 'Set up 6 LEDs on PWM pins and verify they all work with a startup sweep.',
+      code: `// Firefly Capstone - System Setup\n// 6 LEDs on PWM pins in ring topology\n\nvoid setup() {\n  pinMode(2, OUTPUT);\n  pinMode(3, OUTPUT);\n  pinMode(4, OUTPUT);\n  pinMode(5, OUTPUT);\n  pinMode(6, OUTPUT);\n  pinMode(7, OUTPUT);\n  Serial.println("=== Firefly Ring: 6 LEDs ===");\n  Serial.println("Self-test: sweeping all LEDs...");\n}\n\nvoid loop() {\n  int pins[] = {2, 3, 4, 5, 6, 7};\n\n  for (int i = 0; i < 6; i++) {\n    analogWrite(pins[i], 255);\n    delay(150);\n    analogWrite(pins[i], 0);\n  }\n\n  for (int i = 0; i < 6; i++) {\n    analogWrite(pins[i], 180);\n  }\n  delay(500);\n\n  for (int i = 0; i < 6; i++) {\n    analogWrite(pins[i], 0);\n  }\n  delay(300);\n\n  Serial.println("Ring test complete");\n}`,
+      ledCount: 6,
+      challenge: 'Reverse the sweep direction — light LEDs from 7 down to 2. Then try lighting opposite pairs (2+5, 3+6, 4+7) simultaneously.',
+      successHint: 'All 6 LEDs responding independently confirms your ring is wired correctly. Next you add the Kuramoto synchronization algorithm.',
     },
     {
-      title: 'Kuramoto Synchronization Algorithm in Arduino C',
-      concept: `The **Kuramoto model** is the mathematical heart of firefly synchronization. Each oscillator (firefly) adjusts its phase based on the phase difference with its coupled neighbors:
+      title: 'Kuramoto Synchronization in Arduino C',
+      concept: `The **Kuramoto model** is the algorithm that makes fireflies synchronize. Each oscillator (LED) has a **phase** (0 to 2*PI) and a **natural frequency** (slightly different for each). The coupling rule is simple: each oscillator nudges its phase toward its neighbors.
 
-**d(phase_i)/dt = omega_i + (K/N) * sum(sin(phase_j - phase_i))**
+The update equation for each firefly *i*:
 
-where omega_i is the natural frequency of oscillator i, K is the coupling strength, and the sum runs over all coupled neighbors j. The \`sin(phase_j - phase_i)\` term is the key: when neighbor j is ahead in phase, this is positive, pulling oscillator i forward. When j is behind, it pulls i back. Over time, all oscillators converge to a common frequency — they synchronize.
+**phase[i] += freq[i] * dt + K * sin(phase[neighbor] - phase[i])**
 
-On an Arduino, we implement this with fixed-point-friendly floating-point arithmetic. The ATmega328P has no hardware FPU, so \`sin()\` and floating-point operations are emulated in software (~100 clock cycles per multiply, ~600 per sin). At 16 MHz with 6 oscillators and 2 neighbors each, we need ~12 sin() calls per update = ~7200 cycles. At 100 Hz update rate, that is 720,000 cycles per second — only 4.5% of CPU budget. Plenty of headroom.
+where **K** is the coupling strength. When K=0, fireflies are independent. As K increases, they pull each other into sync.
 
-The coupling constant K controls how fast synchronization happens. Too low: oscillators never lock. Too high: they snap together instantly (boring). The critical coupling Kc for our system is approximately \`Kc = 2 * delta_omega\`, where delta_omega is the spread in natural frequencies. We set K slightly above Kc for a gradual, visually pleasing convergence over 5-10 seconds.
+Brightness comes from a **raised cosine**: brightness = (1 + cos(phase)) / 2, which smoothly cycles between 0 and 1. Multiplied by 255, this drives \`analogWrite()\`.
 
-We also compute an **order parameter** R: the magnitude of the average phase vector. R=0 means completely desynchronized (phases uniformly distributed), R=1 means perfect synchrony. This single number tells us how "together" the swarm is.`,
-      analogy: 'Imagine six clocks hanging on a wall, each ticking at a slightly different speed. The Kuramoto coupling is like connecting them with weak springs. Each spring pulls a clock toward its neighbors timing. The coupling strength K is how stiff the springs are — too loose and the clocks drift apart, stiff enough and they all tick together. The order parameter R is like standing back and asking: do the second hands line up?',
-      storyConnection: 'The fireflies of Majuli do not have a conductor. No single firefly controls the swarm. Yet thousands synchronize spontaneously through local coupling — each one adjusting its flash timing based on the flashes it sees nearby. Our Kuramoto algorithm captures this decentralized, emergent coordination in twelve lines of C code.',
-      checkQuestion: 'What happens to the Kuramoto order parameter R if we set coupling strength K to zero?',
-      checkAnswer: 'With K=0, there is no coupling. Each oscillator runs at its own natural frequency independently. Since the natural frequencies differ slightly, the phases drift apart over time. The order parameter R fluctuates around a small value (roughly 1/sqrt(N) for N oscillators due to random phase alignment) but never approaches 1. The fireflies flash randomly, never synchronizing.',
-      codeIntro: 'Add the Kuramoto coupling algorithm to the loop, computing phase adjustments and the order parameter R.',
-      code: `# ============================================================
-# ARDUINO CODE (copy to Arduino IDE to run on hardware)
-# ============================================================
-arduino_code = """
-// Firefly Kuramoto Synchronization
-// dPhase[i] = omega_i + K * sum(sin(phase_j - phase_i)) / 2
-// Order parameter R: 0=chaos, 1=sync
-float couplingK = 2.5;
-void loop() {
-  for (int i = 0; i < 6; i++) {
-    float coupling = sin(phase[left]-phase[i]) + sin(phase[right]-phase[i]);
-    dPhase[i] = TWO_PI*freq[i] + couplingK * coupling / 2.0;
-  }
-  // Apply, wrap, compute R = |mean(e^{i*phase})|
-}
-"""
-print("=== Arduino Code (copy to Arduino IDE) ===")
-print(arduino_code)
-
-# ============================================================
-# PYTHON SIMULATION of Kuramoto synchronization
-# ============================================================
-import numpy as np
-
-NUM = 6
-TWO_PI = 2 * np.pi
-K = 2.5
-neighbors = [[(i-1)%NUM, (i+1)%NUM] for i in range(NUM)]
-np.random.seed(42)
-phase = np.random.uniform(0, TWO_PI, NUM)
-freq = 1.5 + np.random.uniform(-0.2, 0.2, NUM)
-
-def order_R(ph):
-    return np.sqrt(np.mean(np.cos(ph))**2 + np.mean(np.sin(ph))**2)
-
-print("\n=== Python Simulation: Kuramoto Coupling ===")
-print("K = {:.1f} | 6 oscillators | Ring topology\n".format(K))
-print("Time(s)  R      Phases (radians)")
-print("-" * 65)
-
-dt = 0.01
-for step in range(1000):
-    t = step * dt
-    d_phase = TWO_PI * freq.copy()
-    for i in range(NUM):
-        coupling = sum(np.sin(phase[j] - phase[i]) for j in neighbors[i])
-        d_phase[i] += K * coupling / 2.0
-    phase = (phase + d_phase * dt) % TWO_PI
-    R = order_R(phase)
-    if step % 100 == 0:
-        print("  {:.1f}s   {:.3f}  [{}]".format(t, R, ", ".join("{:.2f}".format(p) for p in phase)))
-
-print("\nFinal R = {:.3f} {}".format(R, "(synchronized!)" if R > 0.95 else ""))`,
-      challenge: 'Add a potentiometer on analog pin A1 to control the coupling strength K in real time. Map the 0-1023 ADC reading to K in the range 0.0 to 5.0. Observe how the LEDs respond as you turn the knob — can you find the critical coupling threshold where synchronization just barely emerges?',
-      successHint: 'The Kuramoto algorithm is running on real hardware. You can see synchronization emerge — the order parameter R climbing from chaos toward unity as six independent oscillators, coupled only to their nearest neighbors, spontaneously find a common rhythm. This is the same mathematics that governs firefly swarms, cardiac pacemaker cells, and power grid generators.',
+The key insight: **no central clock** coordinates them. Synchronization *emerges* from purely local interactions.`,
+      analogy: 'Imagine six pendulum clocks hanging on a shared wall. The vibrations traveling through the wall subtly couple the pendulums. Over hours, they synchronize — not because someone adjusted them, but because physics coupled them. The coupling constant K is how "soft" the wall is.',
+      storyConnection: 'Aita told Joon that the fireflies were fragments of a shattered star. Each fragment carries its own rhythm, but together they converge — not through a conductor, but through mutual influence. The Kuramoto model is the mathematics of that convergence.',
+      checkQuestion: 'If coupling strength K = 0, what happens to the firefly phases over time?',
+      checkAnswer: 'Each firefly oscillates at its own natural frequency, drifting apart forever. The LEDs blink at slightly different rates with no coordination. Increasing K gradually pulls them together — above a critical threshold, they lock into perfect synchronization.',
+      codeIntro: 'Implement the Kuramoto coupling algorithm. Watch the 6 LEDs start random and gradually synchronize.',
+      code: `// Firefly Kuramoto Synchronization\n// 6 LEDs, ring coupling, gradual sync\n\nint pins[] = {2, 3, 4, 5, 6, 7};\nint phase[] = {0, 100, 200, 50, 170, 30};\nint freq[] = {15, 14, 16, 15, 13, 16};\nint coupling = 3;\n\nvoid setup() {\n  for (int i = 0; i < 6; i++) {\n    pinMode(pins[i], OUTPUT);\n  }\n  Serial.println("Kuramoto sync starting...");\n  Serial.println("Watch LEDs converge!");\n}\n\nvoid loop() {\n  for (int i = 0; i < 6; i++) {\n    int left = (i + 5) % 6;\n    int right = (i + 1) % 6;\n    int diff_left = phase[left] - phase[i];\n    int diff_right = phase[right] - phase[i];\n    phase[i] += freq[i] + (coupling * diff_left) / 100 + (coupling * diff_right) / 100;\n    if (phase[i] > 628) phase[i] -= 628;\n    if (phase[i] < 0) phase[i] += 628;\n  }\n\n  for (int i = 0; i < 6; i++) {\n    int brightness;\n    if (phase[i] < 157) {\n      brightness = 255 - (phase[i] * 255 / 157);\n    } else if (phase[i] < 471) {\n      brightness = (phase[i] - 157) * 255 / 314;\n      brightness = 255 - brightness;\n    } else {\n      brightness = (phase[i] - 471) * 255 / 157;\n    }\n    if (brightness < 0) brightness = 0;\n    if (brightness > 255) brightness = 255;\n    analogWrite(pins[i], brightness);\n  }\n\n  delay(50);\n  Serial.println("Phase sync in progress...");\n}`,
+      ledCount: 6,
+      challenge: 'Change coupling from 3 to 0 — the LEDs drift independently. Then try coupling = 10 for fast synchronization. Find the minimum coupling that still achieves sync.',
+      successHint: 'You implemented the Kuramoto model in embedded C. This same algorithm models heart cells synchronizing, neurons firing in brain waves, and power grid generators staying in phase.',
     },
     {
-      title: 'Serial Communication for Debugging and Data Logging',
-      concept: `A blinking LED tells you the system is running, but it cannot tell you *why* it is behaving a certain way. **Serial communication** is the Arduino engineer's debugger, oscilloscope, and data logger rolled into one.
+      title: 'PWM Breathing Patterns: Gamma-Corrected Fading',
+      concept: `Raw PWM values don't map linearly to perceived brightness. Human vision is **logarithmic**: the difference between PWM 0 and 50 looks huge, but the difference between 200 and 250 is barely noticeable.
 
-The ATmega328P has a hardware **UART** (Universal Asynchronous Receiver/Transmitter) on pins 0 (RX) and 1 (TX). When you call \`Serial.begin(115200)\`, you configure this UART to transmit at 115200 bits per second. Each byte takes ~87 microseconds to transmit (10 bits: 1 start + 8 data + 1 stop). At this baud rate, you can send roughly 11,500 characters per second — enough for detailed logging without slowing the main loop.
+**Gamma correction** fixes this. Instead of linearly ramping 0-255, we apply a curve: \`corrected = (raw/255)^gamma * 255\`. With gamma = 2.2 (the standard), low values spread out (more steps in the dim range) and high values compress. The result: a smooth, organic-looking fade that matches human perception.
 
-But serial output is **not free**. Each \`Serial.print()\` blocks until the hardware transmit buffer (64 bytes on the Uno) has room. If you print too much data in a tight loop, the CPU stalls waiting for the UART. The solution: **rate-limit serial output**. We print a data packet every 100 ms (10 Hz), which is fast enough for real-time plotting but light enough to leave 99% of CPU time for the Kuramoto algorithm.
-
-We design a **structured data format** for the Arduino Serial Plotter. The Plotter expects tab-separated or comma-separated numeric values, one sample per line, with optional labels on the first line. We send: timestamp, order parameter R, and all 6 brightness values. This lets us visualize synchronization dynamics in real time — watching R climb from disorder to order while individual brightness curves merge into a unified pulse.
-
-For post-experiment analysis, we can also log to a PC using a Python serial reader that saves CSV files. The Arduino becomes a **data acquisition system**, and the PC handles storage and analysis.`,
-      analogy: 'Serial communication is like a field biologist sitting in the dark, whispering observations into a tape recorder. The fireflies (LEDs) are doing their thing — flashing, synchronizing. The biologist (Serial output) records timestamps, brightness levels, and synchronization metrics. Later, back at the lab (the PC), the biologist reviews the recordings to understand what happened and when.',
-      storyConnection: 'When researchers study the fireflies of Majuli, they cannot just watch — they need data. They set up cameras, light sensors, and loggers to capture the exact timing of each flash. Our Serial output serves the same purpose: turning the ephemeral beauty of synchronized flashing into quantitative data we can analyze, plot, and share.',
-      checkQuestion: 'Why do we rate-limit serial output to 10 Hz instead of printing every loop iteration at 100 Hz?',
-      checkAnswer: 'At 100 Hz with ~80 characters per line, we would generate ~8000 characters per second. The UART at 115200 baud can handle ~11500 chars/sec, so it would barely keep up — and the Serial.print() calls would block the CPU for a significant fraction of each loop iteration, degrading the timing accuracy of the Kuramoto algorithm. At 10 Hz we send only ~800 chars/sec, using <7% of UART bandwidth and minimal CPU time.',
-      codeIntro: 'Build a comprehensive serial logging system with structured output for the Arduino Serial Plotter and CSV export.',
-      code: `# ============================================================
-# ARDUINO CODE (copy to Arduino IDE to run on hardware)
-# ============================================================
-arduino_code = """
-// Firefly Synchronization - Serial Data Logger
-// Tab-separated output for Arduino Serial Plotter
-// Columns: time_ms, R, LED0..LED5
-// Tracks sync detection (R > 0.95)
-"""
-print("=== Arduino Code (copy to Arduino IDE) ===")
-print(arduino_code)
-
-# ============================================================
-# PYTHON SIMULATION: Data logging with statistics
-# ============================================================
-import numpy as np
-
-NUM = 6
-TWO_PI = 2 * np.pi
-K = 2.5
-neighbors = [[(i-1)%NUM, (i+1)%NUM] for i in range(NUM)]
-np.random.seed(42)
-phase = np.random.uniform(0, TWO_PI, NUM)
-freq = 1.5 + np.random.uniform(-0.2, 0.2, NUM)
-
-def order_R(ph):
-    return np.sqrt(np.mean(np.cos(ph))**2 + np.mean(np.sin(ph))**2)
-
-print("\n=== Python Simulation: Serial Data Logger ===\n")
-print("time_ms\tR\tLED0\tLED1\tLED2\tLED3\tLED4\tLED5")
-
-dt = 0.01
-max_R, min_R, sync_time = 0.0, 1.0, None
-for step in range(1500):
-    t = step * dt
-    d_phase = TWO_PI * freq.copy()
-    for i in range(NUM):
-        coupling = sum(np.sin(phase[j] - phase[i]) for j in neighbors[i])
-        d_phase[i] += K * coupling / 2.0
-    phase = (phase + d_phase * dt) % TWO_PI
-    br = (1 + np.cos(phase)) / 2
-    R = order_R(phase)
-    max_R, min_R = max(max_R, R), min(min_R, R)
-    if sync_time is None and R > 0.95: sync_time = t
-    if step % 50 == 0:
-        print("{}\t{:.3f}\t{}".format(int(t*1000), R, "\t".join("{:.2f}".format(b) for b in br)))
-    if step > 0 and step % 500 == 0:
-        s = " SYNC at {:.1f}s".format(sync_time) if sync_time else ""
-        print("# {:.1f}s: R={:.3f} maxR={:.3f}{}".format(t, R, max_R, s))
-
-print("\n=== Stats: min={:.3f} max={:.3f} final={:.3f} ===".format(min_R, max_R, R))
-if sync_time: print("Sync at {:.1f}s".format(sync_time))`,
-      challenge: 'Add a command interface: if the user sends "R" over Serial, respond with the current order parameter. If they send "K=3.0", update the coupling strength in real time. Use Serial.available() and Serial.readStringUntil() to parse incoming commands. This turns the Arduino into an interactive experiment.',
-      successHint: 'You now have a complete data pipeline: the Arduino runs the physics, logs structured data over Serial, and the PC captures and plots it. This is how real embedded systems are debugged — not with breakpoints (the LEDs would stop!), but with streaming telemetry. The same pattern applies to any sensor project: sample fast, log selectively, analyze offline.',
+For a firefly breathing pattern, we combine gamma correction with an **envelope function** — a slow sine wave that controls the overall glow intensity, overlaid with faster individual flicker.`,
+      analogy: 'Imagine adjusting a dimmer switch. The first 10% of rotation makes a big visual difference (dark to dim). The last 10% barely changes anything (bright to slightly brighter). Gamma correction redistributes the steps so each click of the dial produces an equal visual change.',
+      storyConnection: "A real firefly's glow rises and falls with organic smoothness — never a harsh jump. The bioluminescent reaction ramps gradually. Gamma correction makes our LEDs mimic that biological smoothness instead of the harsh linear ramp that digital PWM naturally produces.",
+      checkQuestion: 'With gamma = 2.2, what PWM value produces 50% perceived brightness?',
+      checkAnswer: 'Solving: (x/255)^2.2 = 0.5, so x = 255 * 0.5^(1/2.2) = 255 * 0.73 = ~186. You need PWM 186 for 50% perceived brightness — not 128 as you might expect.',
+      codeIntro: 'Apply gamma-corrected breathing to all 6 LEDs with staggered phases for an organic swarm effect.',
+      code: `// Gamma-Corrected Firefly Breathing\n// 6 LEDs with smooth, perceptually-correct fading\n\nint pins[] = {2, 3, 4, 5, 6, 7};\nint step = 0;\n\nint gammaLUT[] = {0, 1, 4, 10, 20, 36, 58, 86,\n                  120, 161, 208, 255};\n\nint gammaCorrect(int raw) {\n  int idx = raw / 23;\n  if (idx > 11) idx = 11;\n  return gammaLUT[idx];\n}\n\nvoid setup() {\n  for (int i = 0; i < 6; i++) {\n    pinMode(pins[i], OUTPUT);\n  }\n  Serial.println("Gamma-corrected breathing");\n}\n\nvoid loop() {\n  for (int i = 0; i < 6; i++) {\n    int offset = i * 40;\n    int raw = step + offset;\n    raw = raw % 240;\n\n    int brightness;\n    if (raw < 120) {\n      brightness = (raw * 255) / 120;\n    } else {\n      brightness = ((240 - raw) * 255) / 120;\n    }\n\n    int corrected = gammaCorrect(brightness);\n    analogWrite(pins[i], corrected);\n  }\n\n  step += 2;\n  if (step > 240) step = 0;\n  delay(40);\n\n  Serial.println("Breathing...");\n}`,
+      ledCount: 6,
+      challenge: 'Compare with and without gamma correction: comment out the gammaCorrect call and use raw brightness instead. Notice how the uncorrected version spends too long looking "almost full brightness" and jumps harshly at the dim end.',
+      successHint: 'Gamma correction is used everywhere — monitors, LED strips, game engines, photography. You now understand why raw PWM values look wrong and how to fix them.',
     },
     {
-      title: 'PWM Breathing Patterns: Analog LED Fading',
-      concept: `A real firefly does not flash like a square wave — it produces a smooth, organic glow that rises gently, peaks briefly, and fades slowly. Replicating this requires mastering **PWM waveform shaping**.
+      title: 'Serial Data Logging for Debugging',
+      concept: `Embedded systems don't have screens — **Serial.print()** is your primary debugging tool. But raw serial output is noisy and hard to interpret. Professional firmware uses structured logging: timestamps, labeled values, and machine-parseable formats.
 
-The Arduino's \`analogWrite(pin, value)\` sets the **duty cycle** of a ~490 Hz square wave. A value of 0 means the pin is always LOW (LED off). A value of 127 means the pin is HIGH 50% of the time. A value of 255 means always HIGH (full brightness). The LED integrates this fast switching into a perceived brightness proportional to the duty cycle.
+For the firefly capstone, we log:
+- **Timestamp** (millis): when each reading was taken
+- **Phase values**: the current phase of each firefly oscillator
+- **Brightness values**: the PWM output for each LED
+- **Order parameter R**: a measure of synchronization (0 = random, 1 = perfect sync)
 
-But there is a catch: **human brightness perception is logarithmic**, not linear. A PWM value of 128 (50% duty cycle) does not look "half as bright" as 255 — it looks about 75% as bright. To create perceptually smooth fading, we need **gamma correction**: \`perceived_brightness = (linear_input)^gamma\`, where gamma is typically 2.2 for LEDs viewed in a dark room.
-
-We implement this with a **lookup table** (LUT) — a 256-byte array precomputed in \`setup()\` that maps linear brightness (0-255) to gamma-corrected PWM values. Using a LUT avoids calling \`pow()\` in the main loop, which would cost ~2000 clock cycles per call.
-
-Beyond simple sine-wave breathing, we can create complex firefly-like waveforms: a **fast attack** (rapid brightening over ~100 ms), a brief **peak hold** (~50 ms at full brightness), and a **slow exponential decay** (fading over ~500 ms). This asymmetric envelope looks far more natural than a symmetric sine wave and closely matches recorded firefly flash profiles.`,
-      analogy: 'Think of a pianist playing a single note. The hammer strikes the string (fast attack), the note rings at full volume briefly (peak), then fades gradually as the string loses energy (slow decay). A square wave would be like a robot pressing the key at full force, holding it, then releasing instantly — mechanical and lifeless. The shaped envelope gives the note its musical character, just as the shaped brightness gives the firefly its organic charm.',
-      storyConnection: 'The children in the story describe the firefly glow as "breathing light" — not a harsh flash but a gentle pulse, like the forest itself is inhaling and exhaling. Our PWM breathing pattern captures that poetic description in precise engineering: a gamma-corrected, asymmetric envelope that makes each LED glow with the warmth of a living thing.',
-      checkQuestion: 'Why does a linear ramp from PWM 0 to 255 appear to "jump" to bright quickly and then barely change at the top?',
-      checkAnswer: 'Because human vision perceives brightness logarithmically (the Weber-Fechner law). The difference between PWM 0 and 10 is very noticeable (dark to dim), but the difference between 245 and 255 is almost invisible (both look like full brightness). Gamma correction compensates by spending more PWM steps in the low-brightness range, where our eyes are most sensitive, creating a perceptually uniform fade.',
-      codeIntro: 'Implement gamma-corrected brightness with a lookup table and an asymmetric firefly flash envelope.',
-      code: `# ============================================================
-# ARDUINO CODE (copy to Arduino IDE to run on hardware)
-# ============================================================
-arduino_code = """
-// Firefly Breathing Patterns - PWM Waveform Shaping
-// Gamma correction LUT (gamma=2.2) + asymmetric envelope
-// Envelope: quadratic attack -> peak -> exp decay -> dark
-uint8_t gammaLUT[256];
-float fireflyEnvelope(float t) {
-  if (t < 0.15) return (t/0.15)*(t/0.15);
-  if (t < 0.25) return 1.0;
-  if (t < 0.80) return exp(-3.0*(t-0.25)/0.55);
-  return 0.0;
-}
-"""
-print("=== Arduino Code (copy to Arduino IDE) ===")
-print(arduino_code)
-
-# ============================================================
-# PYTHON SIMULATION: Gamma correction + firefly envelope
-# ============================================================
-import numpy as np
-
-GAMMA = 2.2
-gamma_lut = np.array([int((i/255.0)**GAMMA*255+0.5) for i in range(256)])
-
-print("\n=== Python Simulation: PWM Breathing Patterns ===\n")
-print("Gamma LUT: ", end="")
-for s in [0, 32, 64, 128, 192, 255]: print("{}->{} ".format(s, gamma_lut[s]), end="")
-print()
-
-def envelope(t):
-    if t < 0.15: x = t/0.15; return x*x
-    if t < 0.25: return 1.0
-    if t < 0.80: return np.exp(-3.0*(t-0.25)/0.55)
-    return 0.0
-
-print("\n--- Envelope Shape ---")
-print("Phase  Raw    Gamma_PWM")
-for tv in np.arange(0, 1.01, 0.05):
-    raw = envelope(tv)
-    corr = gamma_lut[min(int(raw*255), 255)]
-    print("  {:.2f}  {:.3f}  {:3d}  {}".format(tv, raw, corr, "#"*(corr//8)))
-
-NUM = 6
-TWO_PI = 2*np.pi
-K = 2.5
-neighbors = [[(i-1)%NUM,(i+1)%NUM] for i in range(NUM)]
-np.random.seed(42)
-phase = np.random.uniform(0, TWO_PI, NUM)
-freq = 1.5 + np.random.uniform(-0.2, 0.2, NUM)
-
-print("\n--- 6 fireflies with envelope + gamma ---")
-print("Time(s)  PWM values (gamma-corrected)")
-dt = 0.01
-for step in range(800):
-    d_phase = TWO_PI * freq.copy()
-    for i in range(NUM):
-        coupling = sum(np.sin(phase[j]-phase[i]) for j in neighbors[i])
-        d_phase[i] += K * coupling / 2.0
-    phase = (phase + d_phase * dt) % TWO_PI
-    if step % 25 == 0:
-        vals = [gamma_lut[min(int(envelope(phase[i]/TWO_PI)*255),255)] for i in range(NUM)]
-        print("  {:.2f}s | {}".format(step*dt, "  ".join("{:3d}".format(v) for v in vals)))
-
-print("\nGamma-corrected envelope: fast rise -> peak -> slow fade -> dark")`,
-      challenge: 'Create three different species of firefly by varying the envelope parameters (attack time, decay rate, dark interval) across LED pairs. LEDs 0-1 flash fast with short pauses (like Photinus pyralis). LEDs 2-3 flash with a long, slow glow (like Photuris). LEDs 4-5 produce a double-flash pattern (two quick blinks per cycle). All three species should still synchronize through Kuramoto coupling.',
-      successHint: 'You have transformed a simple on/off LED into a convincing firefly simulation. The gamma-corrected, envelope-shaped PWM produces a glow that looks alive — rising eagerly, holding at peak, fading reluctantly into darkness. This is the difference between engineering and art: the math is the same, but the parameters create beauty.',
+Outputting comma-separated values (CSV format) lets you paste the data into a spreadsheet or feed it to a Python plotting script.`,
+      analogy: "Serial logging is like a flight recorder on an airplane. The plane has no screen for the black box — it just writes timestamped data continuously. After a flight (or a bug), you read back the log to understand what happened. CSV format is the universal language that every analysis tool speaks.",
+      storyConnection: "The firefly researchers on Majuli don't just watch the swarm — they record flash timing data with cameras and photodiodes, then analyze the logs to measure synchronization. Our serial log is the Arduino equivalent of their research notebook.",
+      checkQuestion: 'Why include a timestamp (millis) in every serial log line instead of just printing values?',
+      checkAnswer: 'Without timestamps, you cannot calculate rates, detect timing bugs, or correlate events. If your loop slows down, timestamps reveal the problem. They also let you reconstruct the exact timeline when analyzing logged data after the fact.',
+      codeIntro: 'Add structured CSV logging and a sync order parameter to the firefly ring.',
+      code: `// Serial Logging with Sync Measurement\n// 6 LEDs + CSV output + order parameter\n\nint pins[] = {2, 3, 4, 5, 6, 7};\nint phase[] = {0, 105, 210, 52, 314, 420};\nint freq[] = {15, 14, 16, 15, 13, 16};\nint coupling = 4;\nint loopCount = 0;\n\nvoid setup() {\n  for (int i = 0; i < 6; i++) {\n    pinMode(pins[i], OUTPUT);\n  }\n  Serial.println("ms,p0,p1,p2,p3,p4,p5,b0,b1,b2,b3,b4,b5");\n}\n\nvoid loop() {\n  for (int i = 0; i < 6; i++) {\n    int left = (i + 5) % 6;\n    int right = (i + 1) % 6;\n    int diff_l = phase[left] - phase[i];\n    int diff_r = phase[right] - phase[i];\n    phase[i] += freq[i] + (coupling * diff_l) / 100 + (coupling * diff_r) / 100;\n    if (phase[i] > 628) phase[i] -= 628;\n    if (phase[i] < 0) phase[i] += 628;\n  }\n\n  int bright[6];\n  for (int i = 0; i < 6; i++) {\n    bright[i] = (phase[i] < 314) ? (255 - phase[i] * 255 / 314) : ((phase[i] - 314) * 255 / 314);\n    if (bright[i] < 0) bright[i] = 0;\n    if (bright[i] > 255) bright[i] = 255;\n    analogWrite(pins[i], bright[i]);\n  }\n\n  if (loopCount % 5 == 0) {\n    Serial.print(loopCount * 50);\n    for (int i = 0; i < 6; i++) {\n      Serial.print(",");\n      Serial.print(phase[i]);\n    }\n    for (int i = 0; i < 6; i++) {\n      Serial.print(",");\n      Serial.print(bright[i]);\n    }\n    Serial.println();\n  }\n\n  loopCount++;\n  delay(50);\n}`,
+      ledCount: 6,
+      challenge: 'Copy the serial output and paste it into a spreadsheet. Plot the 6 brightness columns over time. You should see the curves converge as coupling pulls phases together.',
+      successHint: 'Structured serial logging is how professional embedded developers debug. The CSV header + data pattern works with any analysis tool from Excel to Python matplotlib.',
     },
     {
-      title: 'Documentation and Circuit Diagram Description',
-      concept: `A capstone project is not finished when the code compiles — it is finished when someone else can **build it, understand it, and extend it**. Documentation transforms a personal experiment into a shared resource.
+      title: 'Complete Firefly Capstone: Synchronized Ring',
+      concept: `Everything comes together: **6 LEDs in a ring**, Kuramoto coupling, gamma-corrected PWM breathing, staggered startup, and serial logging. This is a complete embedded systems project.
 
-Engineering documentation has three audiences: **builders** (how to wire and upload), **users** (how to operate and interpret), and **future developers** (how the code works and how to modify it). Each audience needs different information presented differently.
+The final sketch combines:
+1. **Ring topology** — each LED couples to its two neighbors
+2. **Kuramoto synchronization** — phases converge from random to locked
+3. **Gamma-corrected brightness** — perceptually smooth fading
+4. **Breathing envelope** — organic glow rise and fall
+5. **Serial CSV output** — data for analysis and verification
 
-For the builder, we provide a **Bill of Materials** (BOM) listing every component with quantity, specifications, and approximate cost. We describe the circuit with a **textual schematic** — not a graphical diagram (which requires specialized tools) but a precise, unambiguous description of every connection. We specify the **assembly sequence**: what to connect first, how to test incrementally, and common mistakes to avoid.
-
-For the user, we write **operating instructions**: upload procedure, expected behavior at each stage, how to interpret Serial output, and troubleshooting steps for when things go wrong (LED not lighting? Check polarity. No Serial output? Check baud rate).
-
-For the developer, we document the **code architecture**: the relationship between the Kuramoto algorithm, the envelope shaper, the gamma LUT, and the serial logger. We explain the **design decisions**: why ring topology, why 100 Hz update rate, why K=2.5. And we describe **extension points**: how to add more LEDs, change the topology, or connect to a PC visualization.
-
-This documentation practice is not busywork — it is the skill that separates a hobbyist from a professional engineer. NASA, SpaceX, and every medical device company require documentation that meets standards far more rigorous than ours. Starting now builds a habit that will serve you throughout your career.`,
-      analogy: 'Documentation is like a recipe in a cookbook. The dish might be delicious, but without the recipe — ingredients, quantities, steps, timing, and tips — no one else can recreate it. A great recipe also explains *why*: why sear the meat first (Maillard reaction), why rest the dough (gluten relaxation). Our documentation does the same for the circuit and code.',
-      storyConnection: 'The firefly festival exists because generations of villagers preserved knowledge about where and when the fireflies gather, how to reach the riverbank safely at night, and what conditions produce the best displays. That oral documentation — passed down through stories — is what makes the festival possible. Our written documentation serves the same purpose for the engineering project.',
-      checkQuestion: 'Why do we describe the circuit as text rather than providing a graphical schematic?',
-      checkAnswer: 'A textual circuit description is version-controllable (it lives in code comments or markdown), does not require specialized schematic software (like KiCad or Fritzing), and is accessible to screen readers. For a simple circuit with 6 LEDs and resistors, a precise text description is unambiguous and often clearer than a cluttered graphical diagram. For complex circuits with ICs and buses, graphical schematics become essential — but for our project, text suffices.',
-      codeIntro: 'Create a comprehensive documentation header and a self-test routine that validates the hardware setup.',
-      code: `# ============================================================
-# ARDUINO CODE (copy to Arduino IDE to run on hardware)
-# ============================================================
-arduino_code = """
-// FIREFLY LED SYNCHRONIZATION - CAPSTONE
-// 6 LEDs | Ring | Kuramoto | Gamma + Envelope | Serial Logger
-// BOM: Arduino Uno, 6x LEDs, 6x 220R, breadboard ($12-15)
-// CIRCUIT: Pin 3,5,6,9,10,11 -> 220R -> LED -> GND
-// Includes: selfTest, gammaLUT, fireflyEnvelope, Kuramoto, logging
-"""
-print("=== Arduino Code (copy to Arduino IDE) ===")
-print(arduino_code)
-
-# ============================================================
-# PYTHON SIMULATION: Complete capstone
-# ============================================================
-import numpy as np
-
-NUM = 6
-TWO_PI = 2*np.pi
-GAMMA = 2.2
-K = 2.5
-gamma_lut = np.array([int((i/255.0)**GAMMA*255+0.5) for i in range(256)])
-
-def envelope(t):
-    if t < 0.15: x=t/0.15; return x*x
-    if t < 0.25: return 1.0
-    if t < 0.80: return np.exp(-3.0*(t-0.25)/0.55)
-    return 0.0
-
-neighbors = [[(i-1)%NUM,(i+1)%NUM] for i in range(NUM)]
-
-print("\n=== FIREFLY LED SYNCHRONIZATION CAPSTONE ===\n")
-print("--- SELF TEST ---")
-for i, pin in enumerate([3,5,6,9,10,11]):
-    print("  LED {} on pin {}... OK".format(i, pin))
-print("--- SELF TEST COMPLETE ---\n")
-
-np.random.seed(42)
-phase = np.random.uniform(0, TWO_PI, NUM)
-freq = 1.5 + np.random.uniform(-0.2, 0.2, NUM)
-
-print("R\tPWM0\tPWM1\tPWM2\tPWM3\tPWM4\tPWM5")
-dt = 0.01
-sync_time = None
-for step in range(1500):
-    t = step * dt
-    d_phase = TWO_PI * freq.copy()
-    for i in range(NUM):
-        for j in neighbors[i]:
-            d_phase[i] += K * np.sin(phase[j]-phase[i]) / 2.0
-    phase = (phase + d_phase * dt) % TWO_PI
-    R = np.sqrt(np.mean(np.cos(phase))**2 + np.mean(np.sin(phase))**2)
-    if sync_time is None and R > 0.95: sync_time = t
-    if step % 50 == 0:
-        vals = [gamma_lut[min(int(envelope(phase[i]/TWO_PI)*255),255)] for i in range(NUM)]
-        print("{:.3f}\t{}".format(R, "\t".join(str(v) for v in vals)))
-
-print("\n=== CAPSTONE RESULTS ===")
-print("Final R = {:.3f}".format(R))
-if sync_time: print("Sync at {:.1f}s".format(sync_time))
-print("All subsystems verified: self-test, gamma, envelope, Kuramoto, logging")`,
-      challenge: 'Write a companion Python script (to run on the PC) that reads the Serial data, plots real-time synchronization curves using matplotlib, and saves a CSV log file. The script should detect when R exceeds 0.95 and timestamp the synchronization event. This completes the full embedded-to-desktop data pipeline.',
-      successHint: 'You have built a complete, documented capstone project: from circuit design through Kuramoto synchronization, gamma-corrected PWM breathing, serial data logging, and professional documentation. Every component is tested, every design decision is explained, and anyone can build it from your documentation alone. This is embedded systems engineering.',
+This is the same architecture used in professional LED art installations, stage lighting controllers, and swarm robotics coordination.`,
+      storyConnection: "Joon held out his palm and a single firefly landed on it — barely enough light to see his fingers. But together, the whole field was alive, a galaxy of green lights. Your ring captures that moment: six individual sparks, each following simple rules, together creating synchronized beauty.",
+      checkQuestion: 'If you wanted to scale this to 100 LEDs, what hardware changes would you need?',
+      checkAnswer: 'The Arduino Uno only has 6 PWM pins. For 100 LEDs, you would use WS2812B (NeoPixel) addressable LED strips — one data wire controls all 100 LEDs individually. Or use shift registers (74HC595) for on/off control, or PCA9685 PWM driver boards for 16 channels each.',
+      codeIntro: 'The final capstone: full Kuramoto-coupled ring with breathing, gamma, and logging.',
+      code: `// === FIREFLY CAPSTONE: Full Synchronized Ring ===\n// 6 LEDs | Kuramoto coupling | gamma | serial log\n\nint pins[] = {2, 3, 4, 5, 6, 7};\nint phase[] = {0, 95, 210, 48, 340, 520};\nint freq[] = {15, 14, 16, 15, 13, 16};\nint coupling = 4;\nint tick = 0;\n\nint gammaLUT[] = {0, 1, 4, 10, 20, 36, 58, 86,\n                  120, 161, 208, 255};\n\nint gammaCorrect(int raw) {\n  int idx = raw / 23;\n  if (idx > 11) idx = 11;\n  if (idx < 0) idx = 0;\n  return gammaLUT[idx];\n}\n\nvoid setup() {\n  for (int i = 0; i < 6; i++) {\n    pinMode(pins[i], OUTPUT);\n  }\n  Serial.println("=== Firefly Capstone ===");\n  for (int i = 0; i < 6; i++) {\n    analogWrite(pins[i], 200);\n    delay(100);\n    analogWrite(pins[i], 0);\n  }\n  Serial.println("Self-test OK");\n  Serial.println("ms,b0,b1,b2,b3,b4,b5");\n}\n\nvoid loop() {\n  for (int i = 0; i < 6; i++) {\n    int left = (i + 5) % 6;\n    int right = (i + 1) % 6;\n    int dl = phase[left] - phase[i];\n    int dr = phase[right] - phase[i];\n    phase[i] += freq[i] + (coupling * dl) / 100 + (coupling * dr) / 100;\n    if (phase[i] > 628) phase[i] -= 628;\n    if (phase[i] < 0) phase[i] += 628;\n  }\n\n  Serial.print(tick * 50);\n  for (int i = 0; i < 6; i++) {\n    int raw;\n    if (phase[i] < 314) {\n      raw = 255 - (phase[i] * 255 / 314);\n    } else {\n      raw = ((phase[i] - 314) * 255 / 314);\n    }\n    if (raw < 0) raw = 0;\n    if (raw > 255) raw = 255;\n    int corrected = gammaCorrect(raw);\n    analogWrite(pins[i], corrected);\n    Serial.print(",");\n    Serial.print(corrected);\n  }\n  Serial.println();\n\n  tick++;\n  delay(50);\n}`,
+      ledCount: 6,
+      challenge: 'This is a complete embedded project. On real hardware, you would mount 6 green LEDs inside a frosted jar, add an LDR to activate only in darkness, and power from a USB battery pack. Your own Majuli firefly festival on a shelf.',
+      successHint: 'You built a complete capstone: circuit design, Kuramoto synchronization, gamma-corrected PWM, serial data logging, and a self-test routine. This is embedded systems engineering.',
     },
   ];
 
@@ -397,22 +199,16 @@ print("All subsystems verified: self-test, gamma, envelope, Kuramoto, logging")`
         </div>
         <span className="text-sm text-gray-500 dark:text-gray-400">Requires Level 3 (LED circuits & synchronization algorithms)</span>
       </div>
-      {!pyReady && (
-        <div className="mb-8 bg-gray-50 dark:bg-gray-800 rounded-xl p-6 text-center">
-          <p className="text-gray-600 dark:text-gray-300 mb-4">This capstone project uses Arduino C/C++ to build a synchronized LED firefly array with Kuramoto coupling, PWM breathing patterns, and serial data logging. Click to start the code environment.</p>
-          <button onClick={loadPyodide} disabled={loading} className="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-500 text-white px-6 py-3 rounded-full font-semibold transition-colors">
-            {loading ? (<><Loader2 className="w-5 h-5 animate-spin" />{loadProgress}</>) : (<><Cpu className="w-5 h-5" />Load Code Environment</>)}
-          </button>
-        </div>
-      )}
+
+      <div className="mb-8 bg-purple-50 dark:bg-purple-900/20 rounded-xl p-4 border border-purple-200 dark:border-purple-800">
+        <p className="text-sm text-purple-800 dark:text-purple-300">
+          This capstone uses a <strong>simulated Arduino</strong> to build a synchronized 6-LED firefly ring with Kuramoto coupling, gamma-corrected PWM, and serial data logging. Edit the code, click "Upload & Run", and watch the virtual LEDs respond.
+        </p>
+      </div>
+
       <div className="space-y-8">
-        {miniLessons.map((lesson, i) => (
-          <MiniLesson key={i} id={`L4-${i + 1}`} number={i + 1}
-            title={lesson.title} concept={lesson.concept} analogy={lesson.analogy}
-            storyConnection={lesson.storyConnection} checkQuestion={lesson.checkQuestion}
-            checkAnswer={lesson.checkAnswer} codeIntro={lesson.codeIntro}
-            code={lesson.code} challenge={lesson.challenge} successHint={lesson.successHint}
-            />
+        {circuitLessons.map((lesson, i) => (
+          <CircuitMiniLesson key={i} lesson={lesson} number={i + 1} />
         ))}
       </div>
     </div>
