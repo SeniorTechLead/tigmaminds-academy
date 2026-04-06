@@ -368,9 +368,9 @@ export default function LessonPlanPage() {
     return sum + [0, 1, 2, 3, 4].filter(lvl => isLevelComplete(l.slug, lvl)).length;
   }, 0);
   const levelPct = totalLevelsInPlan > 0 ? Math.round(completedLevels / totalLevelsInPlan * 100) : 0;
-  const xp = calcXP(isLevelComplete, selectedLessons.map(l => l.slug));
-  const currentMilestone = XP_MILESTONES.filter(m => xp >= m.xp).pop();
-  const nextMilestone = XP_MILESTONES.find(m => xp < m.xp);
+  const points = calcPoints(isLevelComplete, selectedLessons.map(l => l.slug));
+  const currentMilestone = MILESTONES.filter(m => points >= m.pts).pop();
+  const nextMilestone = MILESTONES.find(m => points < m.pts);
   const hoursRemaining = selectedLessons.reduce((sum, l) => {
     const pct = getStoryProgress(l.slug);
     return sum + ((l.estimatedHours || 12) * (1 - pct / 100));
@@ -440,13 +440,13 @@ export default function LessonPlanPage() {
                   {/* Stats bar */}
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
                     <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-3 sm:p-4 text-center group relative">
-                      <p className="text-2xl sm:text-3xl font-bold text-amber-600">{xp}</p>
-                      <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 mt-1">XP earned</p>
+                      <p className="text-2xl sm:text-3xl font-bold text-amber-600">{points}</p>
+                      <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 mt-1">Points earned</p>
                       <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 bg-gray-900 dark:bg-gray-700 text-white text-[10px] rounded-lg p-2.5 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity z-20 shadow-lg">
-                        <p className="font-semibold mb-1">How XP works</p>
-                        <p>L0: 10 XP &middot; L1: 20 XP &middot; L2: 30 XP</p>
-                        <p>L3: 40 XP &middot; L4: 50 XP</p>
-                        <p className="mt-1 text-gray-300">Complete levels in any story to earn XP and unlock milestones.</p>
+                        <p className="font-semibold mb-1">How points work</p>
+                        <p>L0: 10 pts &middot; L1: 20 pts &middot; L2: 30 pts</p>
+                        <p>L3: 40 pts &middot; L4: 50 pts</p>
+                        <p className="mt-1 text-gray-300">Complete levels in any story to earn points and unlock milestones.</p>
                       </div>
                     </div>
                     <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-3 sm:p-4 text-center">
@@ -472,9 +472,9 @@ export default function LessonPlanPage() {
                         {nextMilestone && (
                           <div className="flex items-center gap-2 mt-1">
                             <div className="flex-1 h-1.5 bg-amber-200 dark:bg-amber-800 rounded-full overflow-hidden">
-                              <div className="h-full bg-amber-500 rounded-full" style={{ width: `${Math.min(100, ((xp - currentMilestone.xp) / (nextMilestone.xp - currentMilestone.xp)) * 100)}%` }} />
+                              <div className="h-full bg-amber-500 rounded-full" style={{ width: `${Math.min(100, ((points - currentMilestone.pts) / (nextMilestone.pts - currentMilestone.pts)) * 100)}%` }} />
                             </div>
-                            <span className="text-[10px] text-amber-600 dark:text-amber-400 font-semibold whitespace-nowrap">{nextMilestone.xp - xp} XP to {nextMilestone.label}</span>
+                            <span className="text-[10px] text-amber-600 dark:text-amber-400 font-semibold whitespace-nowrap">{nextMilestone.pts - points} pts to {nextMilestone.label}</span>
                           </div>
                         )}
                       </div>
@@ -854,7 +854,7 @@ export default function LessonPlanPage() {
                   {selectedLessons.length > 0 && (
                     <div className="flex items-center gap-4 mt-2">
                       <div><p className="text-xl font-bold">{selectedLessons.length}</p><p className="text-[10px] text-white/80">stories</p></div>
-                      <div><p className="text-xl font-bold">{xp}</p><p className="text-[10px] text-white/80">XP</p></div>
+                      <div><p className="text-xl font-bold">{points}</p><p className="text-[10px] text-white/80">points</p></div>
                       <div><p className="text-xl font-bold">{completedLevels}</p><p className="text-[10px] text-white/80">levels</p></div>
                       {streak.current > 0 && (
                         <div><p className="text-xl font-bold flex items-center gap-1"><Flame className="w-4 h-4" />{streak.current}</p><p className="text-[10px] text-white/80">streak</p></div>
