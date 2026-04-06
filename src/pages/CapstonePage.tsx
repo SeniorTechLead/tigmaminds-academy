@@ -26,6 +26,7 @@ function getCapstoneProjects() {
       skillTags: l.skillTags || [],
       estimatedHours: l.estimatedHours || 12,
       tradition: l.tradition,
+      difficulty: rateDifficulty(l.stem.project.steps, l.stem.project.description, l.skillTags || []),
     }));
 }
 
@@ -38,6 +39,31 @@ const PROJECT_CATEGORIES: { key: string; label: string; icon: string; desc: stri
   { key: 'hardware', label: 'Hardware & Engineering', icon: '🔧', desc: 'Design physical systems — ships, bridges, buildings', keywords: ['ship', 'bridge', 'flight', 'structural', 'arch', 'canal', 'lock', 'aqueduct'] },
 ];
 
+/* ── Difficulty rating based on project complexity ── */
+type Difficulty = 'Beginner' | 'Intermediate' | 'Advanced';
+
+function rateDifficulty(steps: string[], desc: string, skillTags: { skill: string }[]): Difficulty {
+  const text = (desc + ' ' + steps.join(' ')).toLowerCase();
+  const advancedSignals = ['monte carlo', 'finite element', 'differential', 'fourier', 'bayesian',
+    'stochastic', 'pde', 'eigenvalue', 'optimization', 'neural', 'machine learning',
+    'multi-objective', 'pareto', 'kalman', 'markov'];
+  const intermediateSignals = ['class ', 'numpy', 'simulation', 'algorithm', 'graph',
+    'dijkstra', 'regression', 'statistical', 'network'];
+
+  const advCount = advancedSignals.filter(s => text.includes(s)).length;
+  const intCount = intermediateSignals.filter(s => text.includes(s)).length;
+
+  if (advCount >= 2 || steps.length >= 7) return 'Advanced';
+  if (intCount >= 2 || steps.length >= 5) return 'Intermediate';
+  return 'Beginner';
+}
+
+const DIFFICULTY_COLORS: Record<Difficulty, string> = {
+  'Beginner': 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300',
+  'Intermediate': 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300',
+  'Advanced': 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-300',
+};
+
 function categorizeProject(title: string, desc: string): string {
   const text = (title + ' ' + desc).toLowerCase();
   for (const cat of PROJECT_CATEGORIES) {
@@ -49,6 +75,7 @@ function categorizeProject(title: string, desc: string): string {
 export default function CapstonePage() {
   const projects = getCapstoneProjects();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty | null>(null);
 
   // Tag each project with its category
   const taggedProjects = projects.map(p => ({
@@ -56,15 +83,23 @@ export default function CapstonePage() {
     category: categorizeProject(p.projectTitle, p.projectDescription),
   }));
 
-  // Filter
-  const filtered = selectedCategory
-    ? taggedProjects.filter(p => p.category === selectedCategory)
-    : taggedProjects;
+  // Filter by category AND difficulty
+  const filtered = taggedProjects.filter(p => {
+    if (selectedCategory && p.category !== selectedCategory) return false;
+    if (selectedDifficulty && p.difficulty !== selectedDifficulty) return false;
+    return true;
+  });
 
   // Counts per category
   const categoryCounts = new Map<string, number>();
   for (const p of taggedProjects) {
     categoryCounts.set(p.category, (categoryCounts.get(p.category) || 0) + 1);
+  }
+
+  // Counts per difficulty
+  const difficultyCounts: Record<Difficulty, number> = { Beginner: 0, Intermediate: 0, Advanced: 0 };
+  for (const p of taggedProjects) {
+    difficultyCounts[p.difficulty]++;
   }
 
   const totalHours = projects.reduce((sum, p) => sum + p.estimatedHours, 0);
@@ -151,9 +186,23 @@ export default function CapstonePage() {
             })}
           </div>
 
+          {/* Difficulty filter pills */}
+          <div className="flex flex-wrap gap-2 justify-center mb-6">
+            <span className="text-xs text-gray-400 dark:text-gray-500 self-center mr-1">Difficulty:</span>
+            {(['Beginner', 'Intermediate', 'Advanced'] as Difficulty[]).map(d => (
+              <button
+                key={d}
+                onClick={() => setSelectedDifficulty(selectedDifficulty === d ? null : d)}
+                className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${selectedDifficulty === d ? DIFFICULTY_COLORS[d] + ' shadow-sm ring-2 ring-offset-1 ring-gray-300 dark:ring-gray-600' : 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:bg-gray-200'}`}
+              >
+                {d} ({difficultyCounts[d]})
+              </button>
+            ))}
+          </div>
+
           {/* Selected category description */}
           {selectedCategory && (
-            <p className="text-center text-sm text-gray-500 dark:text-gray-400 mb-6">
+            <p className="text-center text-sm text-gray-500 dark:text-gray-400 mb-4">
               {PROJECT_CATEGORIES.find(c => c.key === selectedCategory)?.desc}
             </p>
           )}
@@ -182,9 +231,14 @@ export default function CapstonePage() {
                               <h3 className="text-base font-bold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors leading-tight">
                                 {project.projectTitle}
                               </h3>
-                              <p className="text-xs text-amber-600 dark:text-amber-400 font-semibold mt-1">
-                                {project.storyTitle}
-                              </p>
+                              <div className="flex items-center gap-2 mt-1">
+                                <p className="text-xs text-amber-600 dark:text-amber-400 font-semibold">
+                                  {project.storyTitle}
+                                </p>
+                                <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-semibold ${DIFFICULTY_COLORS[project.difficulty]}`}>
+                                  {project.difficulty}
+                                </span>
+                              </div>
                             </div>
                           </div>
 
