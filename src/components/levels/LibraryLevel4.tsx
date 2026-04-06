@@ -30,11 +30,16 @@ The relationship between tables is called a **schema**. Drawing it out: books 1-
       checkQuestion: 'Why does the loans table need its own id column? Could we just use the combination of book_id and member_id as the key?',
       checkAnswer: 'A member can borrow the same book multiple times — once in January, once in June. If the key were just (book_id, member_id), you could only store one loan per member-book pair, destroying the history. The separate id column lets you record every individual loan event. This is a fundamental database design principle: use a surrogate key when the natural key is not truly unique.',
       codeIntro: 'Write SQL to create the three tables with proper types, keys, and constraints, then populate them with sample data from Dipankar\'s library.',
-      code: `-- ============================================================
--- DATABASE SCHEMA: Dipankar's Library Management System
--- ============================================================
+      code: `import sqlite3
 
--- Table 1: Books catalog
+# Create an in-memory database — Dipankar's Library Management System
+conn = sqlite3.connect(':memory:')
+cursor = conn.cursor()
+
+# ============================================================
+# Table 1: Books catalog
+# ============================================================
+cursor.execute('''
 CREATE TABLE books (
     id            INTEGER PRIMARY KEY AUTOINCREMENT,
     title         TEXT NOT NULL,
@@ -43,17 +48,25 @@ CREATE TABLE books (
     published_year INTEGER,
     copies_available INTEGER DEFAULT 1,
     CHECK (copies_available >= 0)
-);
+)
+''')
 
--- Table 2: Library members
+# ============================================================
+# Table 2: Library members
+# ============================================================
+cursor.execute('''
 CREATE TABLE members (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
     name        TEXT NOT NULL,
     email       TEXT UNIQUE NOT NULL,
     joined_date DATE DEFAULT CURRENT_DATE
-);
+)
+''')
 
--- Table 3: Loan records (junction table)
+# ============================================================
+# Table 3: Loan records (junction table)
+# ============================================================
+cursor.execute('''
 CREATE TABLE loans (
     id            INTEGER PRIMARY KEY AUTOINCREMENT,
     book_id       INTEGER NOT NULL,
@@ -63,62 +76,88 @@ CREATE TABLE loans (
     returned_date DATE,
     FOREIGN KEY (book_id)   REFERENCES books(id),
     FOREIGN KEY (member_id) REFERENCES members(id)
-);
+)
+''')
 
--- ============================================================
--- SAMPLE DATA: Assamese + English books
--- ============================================================
+# ============================================================
+# SAMPLE DATA: Assamese + English books
+# ============================================================
+cursor.executemany(
+    'INSERT INTO books (title, author, genre, published_year, copies_available) VALUES (?,?,?,?,?)',
+    [
+        ('Miri Jiyori',               'Rajanikanta Bordoloi',    'Fiction',    1894, 2),
+        ('Burhi Aair Sadhu',          'Lakshminath Bezbaroa',    'Folklore',   1911, 3),
+        ('Pita Putra',                'Bhabendra Nath Saikia',   'Fiction',    1972, 1),
+        ('Mamore Dhora Tarowal',      'Jyoti Prasad Agarwala',   'Poetry',     1939, 2),
+        ('The Shadow Lines',          'Amitav Ghosh',            'Fiction',    1988, 2),
+        ('The God of Small Things',   'Arundhati Roy',           'Fiction',    1997, 3),
+        ('Homen Borgohain Stories',   'Homen Borgohain',         'Fiction',    1980, 1),
+        ('Interpreter of Maladies',   'Jhumpa Lahiri',           'Fiction',    1999, 2),
+        ('A Brief History of Time',   'Stephen Hawking',         'Science',    1988, 1),
+        ('Datal Hatir Uye Khowa Howdah', 'Mamoni R. Goswami',   'Fiction',    1988, 2),
+        ('The Room on the Roof',      'Ruskin Bond',             'Fiction',    1956, 3),
+        ('Wings of Fire',             'A.P.J. Abdul Kalam',      'Biography',  1999, 2),
+        ('Ramayana Retold',           'C. Rajagopalachari',      'Mythology',  1951, 1),
+        ('Gitanjali',                 'Rabindranath Tagore',     'Poetry',     1910, 2),
+        ('Discovery of India',        'Jawaharlal Nehru',        'History',    1946, 1),
+    ]
+)
 
-INSERT INTO books (title, author, genre, published_year, copies_available) VALUES
-('Miri Jiyori',               'Rajanikanta Bordoloi',    'Fiction',    1894, 2),
-('Burhi Aair Sadhu',          'Lakshminath Bezbaroa',    'Folklore',   1911, 3),
-('Pita Putra',                'Bhabendra Nath Saikia',   'Fiction',    1972, 1),
-('Mamore Dhora Tarowal',      'Jyoti Prasad Agarwala',   'Poetry',     1939, 2),
-('The Shadow Lines',          'Amitav Ghosh',            'Fiction',    1988, 2),
-('The God of Small Things',   'Arundhati Roy',           'Fiction',    1997, 3),
-('Homen Borgohain Stories',   'Homen Borgohain',         'Fiction',    1980, 1),
-('Interpreter of Maladies',   'Jhumpa Lahiri',           'Fiction',    1999, 2),
-('A Brief History of Time',   'Stephen Hawking',         'Science',    1988, 1),
-('Datal Hatir Uye Khowa Howdah', 'Mamoni R. Goswami',   'Fiction',    1988, 2),
-('The Room on the Roof',      'Ruskin Bond',             'Fiction',    1956, 3),
-('Wings of Fire',             'A.P.J. Abdul Kalam',      'Biography',  1999, 2),
-('Ramayana Retold',           'C. Rajagopalachari',      'Mythology',  1951, 1),
-('Gitanjali',                 'Rabindranath Tagore',     'Poetry',     1910, 2),
-('Discovery of India',        'Jawaharlal Nehru',        'History',    1946, 1);
+cursor.executemany(
+    'INSERT INTO members (name, email, joined_date) VALUES (?,?,?)',
+    [
+        ('Dipankar Sharma',   'dipankar@library.org',   '2024-01-15'),
+        ('Ananya Bora',       'ananya@library.org',     '2024-02-20'),
+        ('Rishi Kalita',      'rishi@library.org',      '2024-03-10'),
+        ('Meera Hazarika',    'meera@library.org',      '2024-04-05'),
+        ('Kabir Deka',        'kabir@library.org',      '2024-05-18'),
+        ('Priya Choudhury',   'priya@library.org',      '2024-06-01'),
+        ('Arjun Nath',        'arjun@library.org',      '2024-07-22'),
+        ('Tara Goswami',      'tara@library.org',       '2024-08-14'),
+    ]
+)
 
-INSERT INTO members (name, email, joined_date) VALUES
-('Dipankar Sharma',   'dipankar@library.org',   '2024-01-15'),
-('Ananya Bora',       'ananya@library.org',     '2024-02-20'),
-('Rishi Kalita',      'rishi@library.org',      '2024-03-10'),
-('Meera Hazarika',    'meera@library.org',      '2024-04-05'),
-('Kabir Deka',        'kabir@library.org',      '2024-05-18'),
-('Priya Choudhury',   'priya@library.org',      '2024-06-01'),
-('Arjun Nath',        'arjun@library.org',      '2024-07-22'),
-('Tara Goswami',      'tara@library.org',       '2024-08-14');
+cursor.executemany(
+    'INSERT INTO loans (book_id, member_id, checkout_date, due_date, returned_date) VALUES (?,?,?,?,?)',
+    [
+        (1,  1, '2025-01-10', '2025-01-24', '2025-01-22'),
+        (2,  2, '2025-01-15', '2025-01-29', '2025-01-28'),
+        (5,  3, '2025-02-01', '2025-02-15', None),
+        (6,  1, '2025-02-05', '2025-02-19', '2025-02-18'),
+        (3,  4, '2025-02-10', '2025-02-24', None),
+        (8,  5, '2025-02-12', '2025-02-26', '2025-02-25'),
+        (1,  6, '2025-02-20', '2025-03-06', None),
+        (9,  7, '2025-03-01', '2025-03-15', '2025-03-14'),
+        (11, 2, '2025-03-05', '2025-03-19', None),
+        (14, 8, '2025-03-10', '2025-03-24', '2025-03-20'),
+        (4,  3, '2025-03-12', '2025-03-26', None),
+        (6,  4, '2025-03-15', '2025-03-29', '2025-03-27'),
+        (7,  1, '2025-03-18', '2025-04-01', None),
+        (12, 5, '2025-03-20', '2025-04-03', None),
+        (10, 6, '2025-03-22', '2025-04-05', None),
+    ]
+)
+conn.commit()
 
-INSERT INTO loans (book_id, member_id, checkout_date, due_date, returned_date) VALUES
-(1,  1, '2025-01-10', '2025-01-24', '2025-01-22'),
-(2,  2, '2025-01-15', '2025-01-29', '2025-01-28'),
-(5,  3, '2025-02-01', '2025-02-15', NULL),
-(6,  1, '2025-02-05', '2025-02-19', '2025-02-18'),
-(3,  4, '2025-02-10', '2025-02-24', NULL),
-(8,  5, '2025-02-12', '2025-02-26', '2025-02-25'),
-(1,  6, '2025-02-20', '2025-03-06', NULL),
-(9,  7, '2025-03-01', '2025-03-15', '2025-03-14'),
-(11, 2, '2025-03-05', '2025-03-19', NULL),
-(14, 8, '2025-03-10', '2025-03-24', '2025-03-20'),
-(4,  3, '2025-03-12', '2025-03-26', NULL),
-(6,  4, '2025-03-15', '2025-03-29', '2025-03-27'),
-(7,  1, '2025-03-18', '2025-04-01', NULL),
-(12, 5, '2025-03-20', '2025-04-03', NULL),
-(10, 6, '2025-03-22', '2025-04-05', NULL);
+# Verify: show all tables with row counts
+print("=== Database Summary ===")
+for table in ['books', 'members', 'loans']:
+    count = cursor.execute(f'SELECT COUNT(*) FROM {table}').fetchone()[0]
+    print(f"{table}: {count} rows")
 
--- Verify: show all tables with row counts
-SELECT 'books' AS table_name, COUNT(*) AS rows FROM books
-UNION ALL
-SELECT 'members', COUNT(*) FROM members
-UNION ALL
-SELECT 'loans', COUNT(*) FROM loans;`,
+print("\\n=== Sample Books ===")
+for row in cursor.execute('SELECT id, title, author, genre FROM books LIMIT 5').fetchall():
+    print(row)
+
+print("\\n=== Sample Members ===")
+for row in cursor.execute('SELECT id, name, email FROM members LIMIT 5').fetchall():
+    print(row)
+
+print("\\n=== Sample Loans ===")
+for row in cursor.execute('SELECT id, book_id, member_id, due_date, returned_date FROM loans LIMIT 5').fetchall():
+    print(row)
+
+conn.close()`,
       challenge: 'Add a fourth table called reservations with columns: id, book_id, member_id, reserved_date, and status (either "waiting" or "fulfilled"). Add proper foreign keys and insert 3 sample reservations.',
       successHint: 'A well-designed schema is the foundation of every web application. The tables, types, and foreign keys you wrote here are exactly what a real library system uses. Every web framework — Django, Rails, Express — generates SQL like this under the hood. You just wrote the real thing.',
     },
@@ -144,91 +183,203 @@ Subqueries let you nest one query inside another. The inner query runs first, an
       checkQuestion: 'What is the difference between WHERE and HAVING? Why can\'t you use WHERE to filter on COUNT(*)?',
       checkAnswer: 'WHERE filters individual rows before any grouping happens. At that point, COUNT(*) does not exist yet — it is computed during grouping. HAVING filters after GROUP BY, so aggregate values like COUNT(*) are available. Example: WHERE genre = "Fiction" filters rows before grouping. HAVING COUNT(*) > 2 filters groups after counting. Using WHERE with COUNT(*) is a syntax error because the count has not been calculated yet.',
       codeIntro: 'Write queries to answer real library questions: overdue books, popular authors, active members, and genre statistics.',
-      code: `-- ============================================================
--- QUERY 1: Find all currently overdue books
--- A book is overdue if returned_date IS NULL and
--- due_date < today's date
--- ============================================================
-SELECT
-    b.title,
-    b.author,
-    m.name       AS borrower,
-    l.checkout_date,
-    l.due_date,
-    JULIANDAY('2025-04-05') - JULIANDAY(l.due_date) AS days_overdue
-FROM loans l
-JOIN books b   ON l.book_id = b.id
-JOIN members m ON l.member_id = m.id
-WHERE l.returned_date IS NULL
-  AND l.due_date < '2025-04-05'
-ORDER BY days_overdue DESC;
+      code: `import sqlite3
 
--- ============================================================
--- QUERY 2: Most popular authors (by total loans)
--- ============================================================
-SELECT
-    b.author,
-    COUNT(*)        AS total_loans,
-    COUNT(DISTINCT l.member_id) AS unique_borrowers
-FROM loans l
-JOIN books b ON l.book_id = b.id
-GROUP BY b.author
-ORDER BY total_loans DESC
-LIMIT 5;
+# Rebuild the database (same schema from Lesson 1)
+conn = sqlite3.connect(':memory:')
+cursor = conn.cursor()
 
--- ============================================================
--- QUERY 3: Members who currently have unreturned books
--- ============================================================
-SELECT
-    m.name,
-    m.email,
-    COUNT(l.id) AS books_out,
-    GROUP_CONCAT(b.title, ', ') AS titles
-FROM members m
-JOIN loans l ON l.member_id = m.id
-JOIN books b ON l.book_id = b.id
-WHERE l.returned_date IS NULL
-GROUP BY m.id
-ORDER BY books_out DESC;
+cursor.execute('''CREATE TABLE books (
+    id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL,
+    author TEXT NOT NULL, genre TEXT NOT NULL,
+    published_year INTEGER, copies_available INTEGER DEFAULT 1)''')
 
--- ============================================================
--- QUERY 4: Genre popularity breakdown
--- ============================================================
-SELECT
-    b.genre,
-    COUNT(DISTINCT b.id) AS books_in_catalog,
-    COUNT(l.id)          AS total_loans,
-    ROUND(COUNT(l.id) * 1.0 / COUNT(DISTINCT b.id), 1)
-                         AS loans_per_book
-FROM books b
-LEFT JOIN loans l ON l.book_id = b.id
-GROUP BY b.genre
-ORDER BY total_loans DESC;
+cursor.execute('''CREATE TABLE members (
+    id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL, joined_date DATE)''')
 
--- ============================================================
--- QUERY 5: Members who have NEVER borrowed a book
--- Uses LEFT JOIN: members with no matching loans get NULL
--- ============================================================
-SELECT
-    m.name,
-    m.email,
-    m.joined_date
-FROM members m
-LEFT JOIN loans l ON l.member_id = m.id
-WHERE l.id IS NULL;
+cursor.execute('''CREATE TABLE loans (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    book_id INTEGER NOT NULL, member_id INTEGER NOT NULL,
+    checkout_date DATE NOT NULL, due_date DATE NOT NULL,
+    returned_date DATE,
+    FOREIGN KEY (book_id) REFERENCES books(id),
+    FOREIGN KEY (member_id) REFERENCES members(id))''')
 
--- ============================================================
--- QUERY 6: Books borrowed more than once
--- ============================================================
-SELECT
-    b.title,
-    b.author,
-    COUNT(l.id) AS times_borrowed
-FROM books b
-JOIN loans l ON l.book_id = b.id
-GROUP BY b.id
-HAVING COUNT(l.id) > 1
-ORDER BY times_borrowed DESC;`,
+cursor.executemany(
+    'INSERT INTO books (title, author, genre, published_year, copies_available) VALUES (?,?,?,?,?)',
+    [
+        ('Miri Jiyori','Rajanikanta Bordoloi','Fiction',1894,2),
+        ('Burhi Aair Sadhu','Lakshminath Bezbaroa','Folklore',1911,3),
+        ('Pita Putra','Bhabendra Nath Saikia','Fiction',1972,1),
+        ('Mamore Dhora Tarowal','Jyoti Prasad Agarwala','Poetry',1939,2),
+        ('The Shadow Lines','Amitav Ghosh','Fiction',1988,2),
+        ('The God of Small Things','Arundhati Roy','Fiction',1997,3),
+        ('Homen Borgohain Stories','Homen Borgohain','Fiction',1980,1),
+        ('Interpreter of Maladies','Jhumpa Lahiri','Fiction',1999,2),
+        ('A Brief History of Time','Stephen Hawking','Science',1988,1),
+        ('Datal Hatir Uye Khowa Howdah','Mamoni R. Goswami','Fiction',1988,2),
+        ('The Room on the Roof','Ruskin Bond','Fiction',1956,3),
+        ('Wings of Fire','A.P.J. Abdul Kalam','Biography',1999,2),
+        ('Ramayana Retold','C. Rajagopalachari','Mythology',1951,1),
+        ('Gitanjali','Rabindranath Tagore','Poetry',1910,2),
+        ('Discovery of India','Jawaharlal Nehru','History',1946,1),
+    ])
+
+cursor.executemany(
+    'INSERT INTO members (name, email, joined_date) VALUES (?,?,?)',
+    [
+        ('Dipankar Sharma','dipankar@library.org','2024-01-15'),
+        ('Ananya Bora','ananya@library.org','2024-02-20'),
+        ('Rishi Kalita','rishi@library.org','2024-03-10'),
+        ('Meera Hazarika','meera@library.org','2024-04-05'),
+        ('Kabir Deka','kabir@library.org','2024-05-18'),
+        ('Priya Choudhury','priya@library.org','2024-06-01'),
+        ('Arjun Nath','arjun@library.org','2024-07-22'),
+        ('Tara Goswami','tara@library.org','2024-08-14'),
+    ])
+
+cursor.executemany(
+    'INSERT INTO loans (book_id, member_id, checkout_date, due_date, returned_date) VALUES (?,?,?,?,?)',
+    [
+        (1,1,'2025-01-10','2025-01-24','2025-01-22'),
+        (2,2,'2025-01-15','2025-01-29','2025-01-28'),
+        (5,3,'2025-02-01','2025-02-15',None),
+        (6,1,'2025-02-05','2025-02-19','2025-02-18'),
+        (3,4,'2025-02-10','2025-02-24',None),
+        (8,5,'2025-02-12','2025-02-26','2025-02-25'),
+        (1,6,'2025-02-20','2025-03-06',None),
+        (9,7,'2025-03-01','2025-03-15','2025-03-14'),
+        (11,2,'2025-03-05','2025-03-19',None),
+        (14,8,'2025-03-10','2025-03-24','2025-03-20'),
+        (4,3,'2025-03-12','2025-03-26',None),
+        (6,4,'2025-03-15','2025-03-29','2025-03-27'),
+        (7,1,'2025-03-18','2025-04-01',None),
+        (12,5,'2025-03-20','2025-04-03',None),
+        (10,6,'2025-03-22','2025-04-05',None),
+    ])
+conn.commit()
+
+# ============================================================
+# QUERY 1: Find all currently overdue books
+# A book is overdue if returned_date IS NULL and
+# due_date < today
+# ============================================================
+print("=== QUERY 1: Currently Overdue Books ===")
+rows = cursor.execute('''
+    SELECT
+        b.title,
+        b.author,
+        m.name       AS borrower,
+        l.checkout_date,
+        l.due_date,
+        CAST(JULIANDAY('2025-04-05') - JULIANDAY(l.due_date) AS INTEGER) AS days_overdue
+    FROM loans l
+    JOIN books b   ON l.book_id = b.id
+    JOIN members m ON l.member_id = m.id
+    WHERE l.returned_date IS NULL
+      AND l.due_date < '2025-04-05'
+    ORDER BY days_overdue DESC
+''').fetchall()
+for r in rows:
+    print(f"  {r[0]} by {r[1]} | Borrower: {r[2]} | Due: {r[4]} | {r[5]} days overdue")
+
+# ============================================================
+# QUERY 2: Most popular authors (by total loans)
+# ============================================================
+print("\\n=== QUERY 2: Most Popular Authors ===")
+rows = cursor.execute('''
+    SELECT
+        b.author,
+        COUNT(*)        AS total_loans,
+        COUNT(DISTINCT l.member_id) AS unique_borrowers
+    FROM loans l
+    JOIN books b ON l.book_id = b.id
+    GROUP BY b.author
+    ORDER BY total_loans DESC
+    LIMIT 5
+''').fetchall()
+for r in rows:
+    print(f"  {r[0]}: {r[1]} loans, {r[2]} unique borrowers")
+
+# ============================================================
+# QUERY 3: Members who currently have unreturned books
+# ============================================================
+print("\\n=== QUERY 3: Members with Unreturned Books ===")
+rows = cursor.execute('''
+    SELECT
+        m.name,
+        m.email,
+        COUNT(l.id) AS books_out,
+        GROUP_CONCAT(b.title, ', ') AS titles
+    FROM members m
+    JOIN loans l ON l.member_id = m.id
+    JOIN books b ON l.book_id = b.id
+    WHERE l.returned_date IS NULL
+    GROUP BY m.id
+    ORDER BY books_out DESC
+''').fetchall()
+for r in rows:
+    print(f"  {r[0]} ({r[1]}): {r[2]} books out — {r[3]}")
+
+# ============================================================
+# QUERY 4: Genre popularity breakdown
+# ============================================================
+print("\\n=== QUERY 4: Genre Popularity ===")
+rows = cursor.execute('''
+    SELECT
+        b.genre,
+        COUNT(DISTINCT b.id) AS books_in_catalog,
+        COUNT(l.id)          AS total_loans,
+        ROUND(COUNT(l.id) * 1.0 / COUNT(DISTINCT b.id), 1)
+                             AS loans_per_book
+    FROM books b
+    LEFT JOIN loans l ON l.book_id = b.id
+    GROUP BY b.genre
+    ORDER BY total_loans DESC
+''').fetchall()
+for r in rows:
+    print(f"  {r[0]}: {r[1]} books, {r[2]} loans, {r[3]} loans/book")
+
+# ============================================================
+# QUERY 5: Members who have NEVER borrowed a book
+# Uses LEFT JOIN: members with no matching loans get NULL
+# ============================================================
+print("\\n=== QUERY 5: Members Who Never Borrowed ===")
+rows = cursor.execute('''
+    SELECT
+        m.name,
+        m.email,
+        m.joined_date
+    FROM members m
+    LEFT JOIN loans l ON l.member_id = m.id
+    WHERE l.id IS NULL
+''').fetchall()
+if rows:
+    for r in rows:
+        print(f"  {r[0]} ({r[1]}) — joined {r[2]}")
+else:
+    print("  All members have borrowed at least one book.")
+
+# ============================================================
+# QUERY 6: Books borrowed more than once
+# ============================================================
+print("\\n=== QUERY 6: Books Borrowed More Than Once ===")
+rows = cursor.execute('''
+    SELECT
+        b.title,
+        b.author,
+        COUNT(l.id) AS times_borrowed
+    FROM books b
+    JOIN loans l ON l.book_id = b.id
+    GROUP BY b.id
+    HAVING COUNT(l.id) > 1
+    ORDER BY times_borrowed DESC
+''').fetchall()
+for r in rows:
+    print(f"  {r[0]} by {r[1]}: borrowed {r[2]} times")
+
+conn.close()`,
       challenge: 'Write a query that finds the average loan duration (in days) for each genre, but only for books that have been returned. Use JULIANDAY(returned_date) - JULIANDAY(checkout_date) to compute duration. Which genre do people read fastest?',
       successHint: 'These queries are not toy examples. Real library software runs exactly these queries — overdue reports, patron activity, collection analysis. A developer who can write JOIN, GROUP BY, HAVING, and subqueries fluently can work with any database-backed application.',
     },
@@ -261,8 +412,65 @@ Semantic HTML is not optional decoration. It determines how screen readers navig
       storyConnection: 'When Dipankar organized his physical library, he did not just pile books randomly. He created sections (fiction shelf, science shelf), put a sign at the entrance, and made a card for each book with title and author. Our HTML does the same thing digitally — each structural element has a purpose, and the book cards contain the same information Dipankar wrote on his index cards.',
       checkQuestion: 'Why use <article> for book cards instead of <div>? They look the same in the browser.',
       checkAnswer: 'They render identically, but they communicate different meaning to machines. Screen readers announce <article> as a distinct content block — a user can press a key to jump between articles. Search engines treat <article> content as a standalone unit. Automated tools (RSS readers, content extractors) can pull <article> elements meaningfully. Using <div> discards all this semantic information. The browser does not care, but users with assistive technology, search engine crawlers, and your future self reading the code all benefit from semantic tags.',
-      codeIntro: 'Build the complete HTML structure for the library catalog page — header, search form, and book cards with data attributes for filtering.',
-      code: `<!DOCTYPE html>
+      codeIntro: 'Build the complete HTML structure for the library catalog page — header, search form, and book cards with data attributes for filtering. We generate the HTML with Python so you can see how server-side templating works.',
+      code: `# ============================================================
+# Generate the library catalog HTML using Python
+# This mirrors how server-side frameworks (Django, Flask, Rails)
+# build HTML from database records.
+# ============================================================
+
+# Book data — in a real app this comes from the database
+books = [
+    {"id": 1,  "title": "Miri Jiyori",             "author": "Rajanikanta Bordoloi",  "genre": "Fiction",    "year": 1894, "available": 2},
+    {"id": 2,  "title": "Burhi Aair Sadhu",         "author": "Lakshminath Bezbaroa",  "genre": "Folklore",   "year": 1911, "available": 3},
+    {"id": 3,  "title": "Pita Putra",               "author": "Bhabendra Nath Saikia", "genre": "Fiction",    "year": 1972, "available": 1},
+    {"id": 5,  "title": "The Shadow Lines",          "author": "Amitav Ghosh",          "genre": "Fiction",    "year": 1988, "available": 2},
+    {"id": 6,  "title": "The God of Small Things",   "author": "Arundhati Roy",         "genre": "Fiction",    "year": 1997, "available": 0},
+    {"id": 9,  "title": "A Brief History of Time",   "author": "Stephen Hawking",       "genre": "Science",    "year": 1988, "available": 1},
+]
+
+# Collect unique genres for the filter dropdown
+genres = sorted(set(b["genre"] for b in books))
+
+def generate_book_card(book):
+    """Generate one <article> card for a book."""
+    genre_class = f"genre-{book['genre'].lower()}"
+    avail = book["available"]
+    if avail > 0:
+        avail_class = "available"
+        avail_text = f"{avail} {'copy' if avail == 1 else 'copies'} available"
+        btn = f'<button class="checkout-btn" data-book-id="{book["id"]}">Check Out</button>'
+    else:
+        avail_class = "unavailable"
+        avail_text = "0 copies — checked out"
+        btn = f'<button class="checkout-btn" disabled data-book-id="{book["id"]}">Unavailable</button>'
+
+    return f"""            <article class="book-card" data-genre="{book['genre']}"
+                     data-author="{book['author']}"
+                     data-available="{avail}">
+                <div class="card-badge {genre_class}">{book['genre']}</div>
+                <h3 class="card-title">{book['title']}</h3>
+                <p class="card-author">{book['author']}</p>
+                <p class="card-year">{book['year']}</p>
+                <div class="card-footer">
+                    <span class="availability {avail_class}">
+                        {avail_text}
+                    </span>
+                    {btn}
+                </div>
+            </article>"""
+
+# Build genre <option> tags
+genre_options = '\\n                    '.join(
+    [f'<option value="all">All Genres</option>'] +
+    [f'<option value="{g}">{g}</option>' for g in genres]
+)
+
+# Build all book cards
+book_cards = "\\n\\n".join(generate_book_card(b) for b in books)
+
+# Assemble the full HTML page
+html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -300,14 +508,7 @@ Semantic HTML is not optional decoration. It determines how screen readers navig
             <div class="filter-group">
                 <label for="genreFilter">Genre:</label>
                 <select id="genreFilter" class="filter-select">
-                    <option value="all">All Genres</option>
-                    <option value="Fiction">Fiction</option>
-                    <option value="Poetry">Poetry</option>
-                    <option value="Science">Science</option>
-                    <option value="Folklore">Folklore</option>
-                    <option value="Biography">Biography</option>
-                    <option value="History">History</option>
-                    <option value="Mythology">Mythology</option>
+                    {genre_options}
                 </select>
             </div>
             <button type="submit" class="search-btn">Search</button>
@@ -316,111 +517,10 @@ Semantic HTML is not optional decoration. It determines how screen readers navig
 
     <!-- Book Catalog Grid -->
     <section class="catalog-section" aria-label="Book catalog">
-        <h2>All Books <span id="bookCount" class="count-badge">15</span></h2>
+        <h2>All Books <span id="bookCount" class="count-badge">{len(books)}</span></h2>
         <div class="catalog-grid" id="catalogGrid">
 
-            <article class="book-card" data-genre="Fiction"
-                     data-author="Rajanikanta Bordoloi"
-                     data-available="2">
-                <div class="card-badge genre-fiction">Fiction</div>
-                <h3 class="card-title">Miri Jiyori</h3>
-                <p class="card-author">Rajanikanta Bordoloi</p>
-                <p class="card-year">1894</p>
-                <div class="card-footer">
-                    <span class="availability available">
-                        2 copies available
-                    </span>
-                    <button class="checkout-btn" data-book-id="1">
-                        Check Out
-                    </button>
-                </div>
-            </article>
-
-            <article class="book-card" data-genre="Folklore"
-                     data-author="Lakshminath Bezbaroa"
-                     data-available="3">
-                <div class="card-badge genre-folklore">Folklore</div>
-                <h3 class="card-title">Burhi Aair Sadhu</h3>
-                <p class="card-author">Lakshminath Bezbaroa</p>
-                <p class="card-year">1911</p>
-                <div class="card-footer">
-                    <span class="availability available">
-                        3 copies available
-                    </span>
-                    <button class="checkout-btn" data-book-id="2">
-                        Check Out
-                    </button>
-                </div>
-            </article>
-
-            <article class="book-card" data-genre="Fiction"
-                     data-author="Bhabendra Nath Saikia"
-                     data-available="1">
-                <div class="card-badge genre-fiction">Fiction</div>
-                <h3 class="card-title">Pita Putra</h3>
-                <p class="card-author">Bhabendra Nath Saikia</p>
-                <p class="card-year">1972</p>
-                <div class="card-footer">
-                    <span class="availability available">
-                        1 copy available
-                    </span>
-                    <button class="checkout-btn" data-book-id="3">
-                        Check Out
-                    </button>
-                </div>
-            </article>
-
-            <article class="book-card" data-genre="Fiction"
-                     data-author="Amitav Ghosh"
-                     data-available="2">
-                <div class="card-badge genre-fiction">Fiction</div>
-                <h3 class="card-title">The Shadow Lines</h3>
-                <p class="card-author">Amitav Ghosh</p>
-                <p class="card-year">1988</p>
-                <div class="card-footer">
-                    <span class="availability available">
-                        2 copies available
-                    </span>
-                    <button class="checkout-btn" data-book-id="5">
-                        Check Out
-                    </button>
-                </div>
-            </article>
-
-            <article class="book-card" data-genre="Fiction"
-                     data-author="Arundhati Roy"
-                     data-available="0">
-                <div class="card-badge genre-fiction">Fiction</div>
-                <h3 class="card-title">The God of Small Things</h3>
-                <p class="card-author">Arundhati Roy</p>
-                <p class="card-year">1997</p>
-                <div class="card-footer">
-                    <span class="availability unavailable">
-                        0 copies — checked out
-                    </span>
-                    <button class="checkout-btn" disabled
-                            data-book-id="6">
-                        Unavailable
-                    </button>
-                </div>
-            </article>
-
-            <article class="book-card" data-genre="Science"
-                     data-author="Stephen Hawking"
-                     data-available="1">
-                <div class="card-badge genre-science">Science</div>
-                <h3 class="card-title">A Brief History of Time</h3>
-                <p class="card-author">Stephen Hawking</p>
-                <p class="card-year">1988</p>
-                <div class="card-footer">
-                    <span class="availability available">
-                        1 copy available
-                    </span>
-                    <button class="checkout-btn" data-book-id="9">
-                        Check Out
-                    </button>
-                </div>
-            </article>
+{book_cards}
 
         </div>
     </section>
@@ -432,7 +532,13 @@ Semantic HTML is not optional decoration. It determines how screen readers navig
 
 <script src="app.js"></script>
 </body>
-</html>`,
+</html>"""
+
+print(html)
+print("\\n--- HTML generation complete ---")
+print(f"Generated {len(books)} book cards from data.")
+print(f"Genres in filter: {', '.join(genres)}")
+print("\\nCopy this HTML into an index.html file to use it!")`,
       challenge: 'Add a "Recently Returned" section below the catalog grid. Use an <aside> element with an ordered list (<ol>) showing the 3 most recently returned books. Each list item should include the title, who returned it, and the return date.',
       successHint: 'This HTML is production-grade. Every element has semantic meaning, every interactive element is accessible, and the data attributes make JavaScript filtering trivial. A screen reader can navigate this page. A search engine can index it. A developer can maintain it. That is the power of semantic HTML.',
     },
@@ -457,265 +563,249 @@ The \`.sr-only\` class hides content visually but keeps it accessible to screen 
       storyConnection: 'Dipankar\'s library was not just shelves of books — he painted the walls, put up signs, arranged reading nooks, and made it welcoming. The CSS does the same for our digital library. The card layout mirrors how physical libraries display new arrivals — cover visible, key information at a glance, easy to browse. The dark mode respects users who read at night, just as Dipankar kept a dim lamp corner for evening readers.',
       checkQuestion: 'Why use CSS Grid for the catalog layout instead of Flexbox? Both can create multi-column layouts.',
       checkAnswer: 'Flexbox wraps items onto new rows, but each row is independent — items in different rows do not align to the same columns. Grid creates a true two-dimensional grid where items in different rows align perfectly. For a catalog of cards that should line up in neat columns, Grid is the correct choice. Flexbox would work for a single row of navigation links, but a card grid needs Grid. The rule: Flexbox for one axis, Grid for two.',
-      codeIntro: 'Style the library catalog with CSS Grid, Flexbox cards, hover effects, responsive design, and automatic dark mode.',
-      code: `/* ============================================================
+      codeIntro: 'Build a CSS design system with Python — define colors, compute contrasts, and generate the full stylesheet programmatically. This is how design-token tools work.',
+      code: `# ============================================================
+# CSS Design System Generator
+# Build a complete stylesheet from design tokens using Python.
+# This is how tools like Style Dictionary and Tailwind work
+# under the hood — data in, CSS out.
+# ============================================================
+
+# --- Design tokens: the single source of truth ---
+light_theme = {
+    "color-primary":    "#2563eb",
+    "color-primary-dk": "#1d4ed8",
+    "color-accent":     "#7c3aed",
+    "color-success":    "#059669",
+    "color-danger":     "#dc2626",
+    "color-bg":         "#f8fafc",
+    "color-surface":    "#ffffff",
+    "color-text":       "#1e293b",
+    "color-text-muted": "#64748b",
+    "color-border":     "#e2e8f0",
+}
+
+dark_theme = {
+    "color-bg":         "#0f172a",
+    "color-surface":    "#1e293b",
+    "color-text":       "#f1f5f9",
+    "color-text-muted": "#94a3b8",
+    "color-border":     "#334155",
+}
+
+shadows_light = {
+    "shadow-sm": "0 1px 2px rgba(0,0,0,0.05)",
+    "shadow-md": "0 4px 6px rgba(0,0,0,0.07)",
+    "shadow-lg": "0 10px 15px rgba(0,0,0,0.1)",
+}
+
+shadows_dark = {
+    "shadow-sm": "0 1px 2px rgba(0,0,0,0.3)",
+    "shadow-md": "0 4px 6px rgba(0,0,0,0.4)",
+    "shadow-lg": "0 10px 15px rgba(0,0,0,0.5)",
+}
+
+genre_colors = {
+    "fiction":    ("#dbeafe", "#1e40af"),
+    "folklore":  ("#fef3c7", "#92400e"),
+    "science":   ("#d1fae5", "#065f46"),
+    "biography": ("#ede9fe", "#5b21b6"),
+    "poetry":    ("#fce7f3", "#9d174d"),
+    "history":   ("#fed7aa", "#9a3412"),
+    "mythology": ("#e0e7ff", "#3730a3"),
+}
+
+def tokens_to_vars(tokens, indent="    "):
+    """Convert a dict of tokens to CSS custom property declarations."""
+    return "\\n".join(f"{indent}--{k}: {v};" for k, v in tokens.items())
+
+def generate_genre_badges(genres):
+    """Generate CSS rules for genre badge colors."""
+    rules = []
+    for genre, (bg, fg) in genres.items():
+        rules.append(f".genre-{genre}   {{ background: {bg}; color: {fg}; }}")
+    return "\\n".join(rules)
+
+# --- Assemble the full stylesheet ---
+css = f"""/* ============================================================
    DESIGN SYSTEM: Custom Properties
    ============================================================ */
-:root {
-    --color-primary:    #2563eb;
-    --color-primary-dk: #1d4ed8;
-    --color-accent:     #7c3aed;
-    --color-success:    #059669;
-    --color-danger:     #dc2626;
-    --color-bg:         #f8fafc;
-    --color-surface:    #ffffff;
-    --color-text:       #1e293b;
-    --color-text-muted: #64748b;
-    --color-border:     #e2e8f0;
-    --shadow-sm:  0 1px 2px rgba(0,0,0,0.05);
-    --shadow-md:  0 4px 6px rgba(0,0,0,0.07);
-    --shadow-lg:  0 10px 15px rgba(0,0,0,0.1);
+:root {{
+{tokens_to_vars({**light_theme, **shadows_light})}
     --radius:     0.75rem;
     --transition: 200ms ease;
-}
+}}
 
 /* ============================================================
    DARK MODE: Automatic via OS preference
    ============================================================ */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --color-bg:         #0f172a;
-        --color-surface:    #1e293b;
-        --color-text:       #f1f5f9;
-        --color-text-muted: #94a3b8;
-        --color-border:     #334155;
-        --shadow-sm:  0 1px 2px rgba(0,0,0,0.3);
-        --shadow-md:  0 4px 6px rgba(0,0,0,0.4);
-        --shadow-lg:  0 10px 15px rgba(0,0,0,0.5);
-    }
-}
+@media (prefers-color-scheme: dark) {{
+    :root {{
+{tokens_to_vars({**dark_theme, **shadows_dark}, "        ")}
+    }}
+}}
 
 /* ============================================================
    BASE RESET & TYPOGRAPHY
    ============================================================ */
-*, *::before, *::after { box-sizing: border-box; margin: 0; }
+*, *::before, *::after {{ box-sizing: border-box; margin: 0; }}
 
-body {
+body {{
     font-family: system-ui, -apple-system, sans-serif;
     background: var(--color-bg);
     color: var(--color-text);
     line-height: 1.6;
-}
+}}
 
 /* Screen-reader only — visually hidden, accessible */
-.sr-only {
+.sr-only {{
     position: absolute; width: 1px; height: 1px;
     padding: 0; margin: -1px; overflow: hidden;
     clip: rect(0,0,0,0); border: 0;
-}
+}}
 
 /* ============================================================
    HEADER
    ============================================================ */
-.site-header {
+.site-header {{
     background: var(--color-primary);
     color: white;
     padding: 1.5rem 2rem;
     text-align: center;
-}
-.site-header h1 {
+}}
+.site-header h1 {{
     font-size: clamp(1.5rem, 4vw, 2.5rem);
     font-weight: 800;
-}
-.tagline {
-    opacity: 0.85;
-    font-size: 1rem;
-    margin-top: 0.25rem;
-}
-.main-nav {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    margin-top: 1rem;
-}
-.nav-link {
-    color: rgba(255,255,255,0.8);
-    text-decoration: none;
-    font-weight: 600;
-    padding: 0.25rem 0;
+}}
+.tagline {{ opacity: 0.85; font-size: 1rem; margin-top: 0.25rem; }}
+.main-nav {{
+    display: flex; justify-content: center;
+    gap: 1.5rem; margin-top: 1rem;
+}}
+.nav-link {{
+    color: rgba(255,255,255,0.8); text-decoration: none;
+    font-weight: 600; padding: 0.25rem 0;
     border-bottom: 2px solid transparent;
     transition: all var(--transition);
-}
-.nav-link:hover, .nav-link.active {
-    color: white;
-    border-bottom-color: white;
-}
+}}
+.nav-link:hover, .nav-link.active {{
+    color: white; border-bottom-color: white;
+}}
 
 /* ============================================================
    SEARCH FORM
    ============================================================ */
-.search-section {
-    max-width: 900px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-}
-.search-form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    align-items: center;
-}
-.search-input {
-    flex: 1;
-    min-width: 200px;
-    padding: 0.75rem 1rem;
-    border: 2px solid var(--color-border);
-    border-radius: var(--radius);
-    font-size: 1rem;
-    background: var(--color-surface);
-    color: var(--color-text);
-    transition: border-color var(--transition);
-}
-.search-input:focus {
-    outline: none;
-    border-color: var(--color-primary);
-}
-.filter-select {
-    padding: 0.75rem 1rem;
-    border: 2px solid var(--color-border);
-    border-radius: var(--radius);
-    background: var(--color-surface);
-    color: var(--color-text);
-    font-size: 1rem;
-}
-.search-btn {
-    padding: 0.75rem 1.5rem;
-    background: var(--color-primary);
-    color: white;
-    border: none;
-    border-radius: var(--radius);
-    font-weight: 600;
-    cursor: pointer;
+.search-section {{ max-width: 900px; margin: 2rem auto; padding: 0 1rem; }}
+.search-form {{
+    display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center;
+}}
+.search-input {{
+    flex: 1; min-width: 200px; padding: 0.75rem 1rem;
+    border: 2px solid var(--color-border); border-radius: var(--radius);
+    font-size: 1rem; background: var(--color-surface);
+    color: var(--color-text); transition: border-color var(--transition);
+}}
+.search-input:focus {{ outline: none; border-color: var(--color-primary); }}
+.filter-select {{
+    padding: 0.75rem 1rem; border: 2px solid var(--color-border);
+    border-radius: var(--radius); background: var(--color-surface);
+    color: var(--color-text); font-size: 1rem;
+}}
+.search-btn {{
+    padding: 0.75rem 1.5rem; background: var(--color-primary);
+    color: white; border: none; border-radius: var(--radius);
+    font-weight: 600; cursor: pointer;
     transition: background var(--transition);
-}
-.search-btn:hover { background: var(--color-primary-dk); }
+}}
+.search-btn:hover {{ background: var(--color-primary-dk); }}
 
 /* ============================================================
    CATALOG GRID — CSS Grid, responsive
    ============================================================ */
-.catalog-section {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1rem;
-}
-.catalog-section h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-}
-.count-badge {
-    background: var(--color-primary);
-    color: white;
-    font-size: 0.85rem;
-    padding: 0.15rem 0.6rem;
-    border-radius: 999px;
-    vertical-align: middle;
-}
-.catalog-grid {
+.catalog-section {{ max-width: 1200px; margin: 0 auto; padding: 1rem; }}
+.catalog-section h2 {{ font-size: 1.5rem; margin-bottom: 1rem; }}
+.count-badge {{
+    background: var(--color-primary); color: white;
+    font-size: 0.85rem; padding: 0.15rem 0.6rem;
+    border-radius: 999px; vertical-align: middle;
+}}
+.catalog-grid {{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1.5rem;
-}
+}}
 
 /* ============================================================
    BOOK CARDS — Flexbox interior
    ============================================================ */
-.book-card {
+.book-card {{
     background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    padding: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    border-radius: var(--radius); padding: 1.25rem;
+    display: flex; flex-direction: column; gap: 0.5rem;
     box-shadow: var(--shadow-sm);
-    transition: transform var(--transition),
-                box-shadow var(--transition);
-}
-.book-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-}
-.card-badge {
-    align-self: flex-start;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    padding: 0.2rem 0.6rem;
-    border-radius: 4px;
-}
-.genre-fiction   { background: #dbeafe; color: #1e40af; }
-.genre-folklore  { background: #fef3c7; color: #92400e; }
-.genre-science   { background: #d1fae5; color: #065f46; }
-.genre-biography { background: #ede9fe; color: #5b21b6; }
-.genre-poetry    { background: #fce7f3; color: #9d174d; }
-.genre-history   { background: #fed7aa; color: #9a3412; }
-.genre-mythology { background: #e0e7ff; color: #3730a3; }
+    transition: transform var(--transition), box-shadow var(--transition);
+}}
+.book-card:hover {{
+    transform: translateY(-2px); box-shadow: var(--shadow-lg);
+}}
+.card-badge {{
+    align-self: flex-start; font-size: 0.75rem; font-weight: 700;
+    text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 4px;
+}}
+{generate_genre_badges(genre_colors)}
 
-.card-title  { font-size: 1.1rem; font-weight: 700; }
-.card-author { color: var(--color-text-muted); }
-.card-year   { font-size: 0.85rem; color: var(--color-text-muted); }
+.card-title  {{ font-size: 1.1rem; font-weight: 700; }}
+.card-author {{ color: var(--color-text-muted); }}
+.card-year   {{ font-size: 0.85rem; color: var(--color-text-muted); }}
 
-.card-footer {
-    margin-top: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 0.75rem;
-    border-top: 1px solid var(--color-border);
-}
-.availability { font-size: 0.85rem; font-weight: 600; }
-.available   { color: var(--color-success); }
-.unavailable { color: var(--color-danger); }
+.card-footer {{
+    margin-top: auto; display: flex;
+    justify-content: space-between; align-items: center;
+    padding-top: 0.75rem; border-top: 1px solid var(--color-border);
+}}
+.availability {{ font-size: 0.85rem; font-weight: 600; }}
+.available   {{ color: var(--color-success); }}
+.unavailable {{ color: var(--color-danger); }}
 
-.checkout-btn {
-    padding: 0.4rem 1rem;
-    background: var(--color-accent);
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-weight: 600;
-    cursor: pointer;
+.checkout-btn {{
+    padding: 0.4rem 1rem; background: var(--color-accent);
+    color: white; border: none; border-radius: 6px;
+    font-weight: 600; cursor: pointer;
     transition: background var(--transition);
-}
-.checkout-btn:hover:not(:disabled) { background: #6d28d9; }
-.checkout-btn:disabled {
+}}
+.checkout-btn:hover:not(:disabled) {{ background: #6d28d9; }}
+.checkout-btn:disabled {{
     background: var(--color-text-muted);
-    cursor: not-allowed;
-    opacity: 0.6;
-}
+    cursor: not-allowed; opacity: 0.6;
+}}
 
 /* ============================================================
    FOOTER
    ============================================================ */
-.site-footer {
-    text-align: center;
-    padding: 2rem;
-    color: var(--color-text-muted);
-    font-size: 0.9rem;
-    border-top: 1px solid var(--color-border);
-    margin-top: 3rem;
-}
+.site-footer {{
+    text-align: center; padding: 2rem;
+    color: var(--color-text-muted); font-size: 0.9rem;
+    border-top: 1px solid var(--color-border); margin-top: 3rem;
+}}
 
 /* ============================================================
    RESPONSIVE: Stack search on narrow screens
    ============================================================ */
-@media (max-width: 600px) {
-    .search-form { flex-direction: column; }
-    .search-input { min-width: 100%; }
-    .catalog-grid {
-        grid-template-columns: 1fr;
-    }
-}`,
+@media (max-width: 600px) {{
+    .search-form {{ flex-direction: column; }}
+    .search-input {{ min-width: 100%; }}
+    .catalog-grid {{ grid-template-columns: 1fr; }}
+}}"""
+
+print(css)
+
+# --- Summary ---
+print("\\n--- CSS generation complete ---")
+print(f"Light theme: {len(light_theme)} tokens")
+print(f"Dark theme:  {len(dark_theme)} overrides")
+print(f"Genre badges: {len(genre_colors)} genres")
+print("\\nCopy this CSS into a styles.css file to use it!")`,
       challenge: 'Add a .book-card.featured class that gives featured books a left border of 4px solid gold and a subtle golden background tint. Then add a print stylesheet (@media print) that hides the nav, search form, and checkout buttons — only the book list should print.',
       successHint: 'This stylesheet uses every major CSS layout technique: Grid for the catalog, Flexbox for cards and nav, custom properties for theming, media queries for responsiveness and dark mode. This is the CSS you would write for a real production web application — no frameworks, no preprocessors, just clean modern CSS.',
     },
@@ -738,185 +828,193 @@ The **\`fetch\` API** sends HTTP requests to a server. We simulate a checkout by
       storyConnection: 'Dipankar could not be at the library every hour. He trained volunteers to handle common tasks: answer search questions, check out books, keep the log updated. Our JavaScript is that trained volunteer — it responds to every user action according to rules we define. The search function mirrors how Dipankar taught his helpers to find books: "Look at the title and author, check if it matches what they asked for."',
       checkQuestion: 'Why use event delegation (one listener on the parent) instead of adding a click listener to each checkout button individually?',
       checkAnswer: 'Three reasons. First, efficiency: 1000 books means 1000 listeners versus 1 listener. Each listener consumes memory. Second, dynamically added cards: if you add a new book card via JavaScript, you would need to manually add a listener to its button. With delegation, the parent listener automatically handles new children. Third, cleanup: removing the parent removes one listener instead of tracking and removing hundreds. Event delegation is a fundamental pattern in professional JavaScript.',
-      codeIntro: 'Add search, genre filtering, and checkout functionality with DOM manipulation, event delegation, and simulated API calls.',
-      code: `// ============================================================
-// app.js — Library catalog interactivity
-// ============================================================
+      codeIntro: 'Implement the search, filter, and checkout logic in Python — the same algorithms that power the JavaScript version. This demonstrates that programming concepts transfer across languages.',
+      code: `# ============================================================
+# Library Catalog — Search, Filter, and Checkout Logic
+# The same algorithms that power the browser JavaScript,
+# implemented in Python. Concepts transfer across languages.
+# ============================================================
 
+import json
+from datetime import datetime
+
+# --- Book catalog (mirrors the HTML data attributes) ---
+books = [
+    {"id": 1,  "title": "Miri Jiyori",             "author": "Rajanikanta Bordoloi",  "genre": "Fiction",    "year": 1894, "available": 2},
+    {"id": 2,  "title": "Burhi Aair Sadhu",         "author": "Lakshminath Bezbaroa",  "genre": "Folklore",   "year": 1911, "available": 3},
+    {"id": 3,  "title": "Pita Putra",               "author": "Bhabendra Nath Saikia", "genre": "Fiction",    "year": 1972, "available": 1},
+    {"id": 4,  "title": "Mamore Dhora Tarowal",     "author": "Jyoti Prasad Agarwala", "genre": "Poetry",     "year": 1939, "available": 2},
+    {"id": 5,  "title": "The Shadow Lines",          "author": "Amitav Ghosh",          "genre": "Fiction",    "year": 1988, "available": 2},
+    {"id": 6,  "title": "The God of Small Things",   "author": "Arundhati Roy",         "genre": "Fiction",    "year": 1997, "available": 0},
+    {"id": 7,  "title": "Homen Borgohain Stories",   "author": "Homen Borgohain",       "genre": "Fiction",    "year": 1980, "available": 1},
+    {"id": 8,  "title": "Interpreter of Maladies",   "author": "Jhumpa Lahiri",         "genre": "Fiction",    "year": 1999, "available": 2},
+    {"id": 9,  "title": "A Brief History of Time",   "author": "Stephen Hawking",       "genre": "Science",    "year": 1988, "available": 1},
+    {"id": 10, "title": "Datal Hatir Uye Khowa Howdah","author":"Mamoni R. Goswami",    "genre": "Fiction",    "year": 1988, "available": 2},
+    {"id": 11, "title": "The Room on the Roof",      "author": "Ruskin Bond",           "genre": "Fiction",    "year": 1956, "available": 3},
+    {"id": 12, "title": "Wings of Fire",             "author": "A.P.J. Abdul Kalam",    "genre": "Biography",  "year": 1999, "available": 2},
+    {"id": 13, "title": "Ramayana Retold",           "author": "C. Rajagopalachari",    "genre": "Mythology",  "year": 1951, "available": 1},
+    {"id": 14, "title": "Gitanjali",                 "author": "Rabindranath Tagore",   "genre": "Poetry",     "year": 1910, "available": 2},
+    {"id": 15, "title": "Discovery of India",        "author": "Jawaharlal Nehru",      "genre": "History",    "year": 1946, "available": 1},
+]
+
+# Checkout log — simulates the event log from JavaScript
+checkout_log = []
+
+# ========================================================
+# SEARCH + FILTER: same algorithm as the JS filterBooks()
+# ========================================================
+def filter_books(query="", genre="all"):
+    """Filter books by text query (title/author) and genre.
+
+    This is the exact same logic as the JavaScript filterBooks():
+    - Text match: title OR author contains query (case-insensitive)
+    - Genre match: 'all' passes everything, else exact match
+    """
+    query = query.lower().strip()
+    results = []
+    for book in books:
+        text_match = (
+            not query
+            or query in book["title"].lower()
+            or query in book["author"].lower()
+        )
+        genre_match = (genre == "all" or book["genre"] == genre)
+        if text_match and genre_match:
+            results.append(book)
+    return results
+
+# ========================================================
+# CHECKOUT: same pattern as the JS event delegation handler
+# ========================================================
+def checkout_book(book_id):
+    """Simulate checking out a book.
+
+    In JavaScript this uses event delegation on the catalog grid.
+    The pattern is identical: find the book, check availability,
+    decrement, log the event.
+    """
+    book = next((b for b in books if b["id"] == book_id), None)
+    if not book:
+        return f"Error: Book ID {book_id} not found"
+    if book["available"] <= 0:
+        return f"'{book['title']}' is unavailable (0 copies)"
+
+    # Decrement availability (same as: card.dataset.available -= 1)
+    book["available"] -= 1
+
+    # Log the checkout (same as: console.log('[Checkout]', ...))
+    log_entry = {
+        "bookId": book_id,
+        "title": book["title"],
+        "remaining": book["available"],
+        "timestamp": datetime.now().isoformat(),
+    }
+    checkout_log.append(log_entry)
+
+    status = "LAST COPY" if book["available"] == 0 else f"{book['available']} left"
+    return f"Checked out: '{book['title']}' ({status})"
+
+
+# ========================================================
+# DEMO: Run the same operations a user would perform
+# ========================================================
+print("=== SEARCH: 'ghosh' ===")
+results = filter_books(query="ghosh")
+for b in results:
+    print(f"  [{b['id']}] {b['title']} by {b['author']} ({b['available']} avail)")
+
+print("\\n=== FILTER: genre = 'Poetry' ===")
+results = filter_books(genre="Poetry")
+for b in results:
+    print(f"  [{b['id']}] {b['title']} by {b['author']} ({b['available']} avail)")
+
+print("\\n=== FILTER: genre = 'Fiction', query = 'roy' ===")
+results = filter_books(query="roy", genre="Fiction")
+for b in results:
+    print(f"  [{b['id']}] {b['title']} by {b['author']} ({b['available']} avail)")
+
+print("\\n=== CHECKOUT SIMULATION ===")
+print(checkout_book(3))   # Pita Putra — 1 copy, becomes 0
+print(checkout_book(3))   # Should say unavailable now
+print(checkout_book(5))   # The Shadow Lines — 2 copies, becomes 1
+print(checkout_book(99))  # Non-existent book
+
+print("\\n=== CHECKOUT LOG (like console.log in JS) ===")
+for entry in checkout_log:
+    print(f"  {json.dumps(entry)}")
+
+print("\\n=== ALL UNAVAILABLE BOOKS ===")
+unavailable = [b for b in books if b["available"] == 0]
+for b in unavailable:
+    print(f"  {b['title']} by {b['author']} — checked out")
+
+# ========================================================
+# GENERATE app.js — the actual JavaScript for the browser
+# ========================================================
+print("\\n=== GENERATED app.js (copy to use in browser) ===")
+js_code = """
 document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('searchInput');
+    const genreFilter = document.getElementById('genreFilter');
+    const searchForm  = document.getElementById('searchForm');
+    const catalogGrid = document.getElementById('catalogGrid');
+    const bookCount   = document.getElementById('bookCount');
+    const allCards    = catalogGrid.querySelectorAll('.book-card');
 
-    // --- Cache DOM references ---
-    const searchInput  = document.getElementById('searchInput');
-    const genreFilter  = document.getElementById('genreFilter');
-    const searchForm   = document.getElementById('searchForm');
-    const catalogGrid  = document.getElementById('catalogGrid');
-    const bookCount    = document.getElementById('bookCount');
-
-    // All book cards (static NodeList — fine if we don't add cards)
-    const allCards = catalogGrid.querySelectorAll('.book-card');
-
-    // ========================================================
-    // SEARCH + FILTER: runs on every input change
-    // ========================================================
     function filterBooks() {
         const query = searchInput.value.toLowerCase().trim();
         const genre = genreFilter.value;
         let visible = 0;
-
         allCards.forEach(card => {
-            const title  = card.querySelector('.card-title')
-                               .textContent.toLowerCase();
-            const author = card.querySelector('.card-author')
-                               .textContent.toLowerCase();
-            const cardGenre = card.dataset.genre;
-
-            // Text match: title OR author contains query
-            const textMatch = !query
-                || title.includes(query)
-                || author.includes(query);
-
-            // Genre match: "all" passes everything
-            const genreMatch = genre === 'all'
-                || cardGenre === genre;
-
-            if (textMatch && genreMatch) {
-                card.style.display = '';
-                visible++;
-            } else {
-                card.style.display = 'none';
-            }
+            const title  = card.querySelector('.card-title').textContent.toLowerCase();
+            const author = card.querySelector('.card-author').textContent.toLowerCase();
+            const textMatch  = !query || title.includes(query) || author.includes(query);
+            const genreMatch = genre === 'all' || card.dataset.genre === genre;
+            card.style.display = (textMatch && genreMatch) ? '' : 'none';
+            if (textMatch && genreMatch) visible++;
         });
-
-        // Update the visible count badge
         bookCount.textContent = visible;
     }
 
-    // Attach listeners — 'input' fires on every keystroke
     searchInput.addEventListener('input', filterBooks);
     genreFilter.addEventListener('change', filterBooks);
+    searchForm.addEventListener('submit', e => { e.preventDefault(); filterBooks(); });
 
-    // Prevent form submission (no server to submit to)
-    searchForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        filterBooks();
-    });
-
-    // ========================================================
-    // CHECKOUT: Event delegation on the catalog grid
-    // ========================================================
-    catalogGrid.addEventListener('click', (e) => {
-        // Only respond to checkout button clicks
+    catalogGrid.addEventListener('click', e => {
         const btn = e.target.closest('.checkout-btn');
         if (!btn || btn.disabled) return;
-
-        const card     = btn.closest('.book-card');
-        const bookId   = btn.dataset.bookId;
-        const title    = card.querySelector('.card-title').textContent;
-        let available  = parseInt(card.dataset.available, 10);
-
+        const card = btn.closest('.book-card');
+        const title = card.querySelector('.card-title').textContent;
+        let available = parseInt(card.dataset.available, 10);
         if (available <= 0) return;
-
-        // --- Simulate async API call ---
         btn.disabled = true;
         btn.textContent = 'Processing...';
-
-        // Simulated server delay (500ms)
         setTimeout(() => {
-            // Decrement availability
             available -= 1;
             card.dataset.available = available;
-
-            // Update the availability display
             const avail = card.querySelector('.availability');
             if (available > 0) {
-                avail.textContent =
-                    available + (available === 1
-                        ? ' copy available' : ' copies available');
+                avail.textContent = available + (available === 1 ? ' copy available' : ' copies available');
                 btn.textContent = 'Check Out';
                 btn.disabled = false;
             } else {
                 avail.textContent = '0 copies — checked out';
-                avail.classList.remove('available');
-                avail.classList.add('unavailable');
+                avail.classList.replace('available', 'unavailable');
                 btn.textContent = 'Unavailable';
-                // btn stays disabled
             }
-
-            // Log the checkout (simulating what fetch would do)
-            console.log(
-                '[Checkout]',
-                JSON.stringify({
-                    bookId,
-                    title,
-                    remaining: available,
-                    timestamp: new Date().toISOString()
-                })
-            );
-
-            // Show confirmation toast
-            showToast('Checked out: ' + title);
         }, 500);
     });
 
-    // ========================================================
-    // TOAST NOTIFICATION
-    // ========================================================
-    function showToast(message) {
-        // Create toast element if it doesn't exist
-        let toast = document.getElementById('toast');
-        if (!toast) {
-            toast = document.createElement('div');
-            toast.id = 'toast';
-            toast.setAttribute('role', 'status');
-            toast.setAttribute('aria-live', 'polite');
-            Object.assign(toast.style, {
-                position: 'fixed',
-                bottom: '2rem',
-                right: '2rem',
-                background: '#059669',
-                color: 'white',
-                padding: '0.75rem 1.5rem',
-                borderRadius: '0.5rem',
-                fontWeight: '600',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-                transform: 'translateY(100px)',
-                opacity: '0',
-                transition: 'all 300ms ease',
-                zIndex: '1000',
-            });
-            document.body.appendChild(toast);
-        }
-
-        toast.textContent = message;
-
-        // Animate in
-        requestAnimationFrame(() => {
-            toast.style.transform = 'translateY(0)';
-            toast.style.opacity = '1';
-        });
-
-        // Animate out after 2.5 seconds
-        setTimeout(() => {
-            toast.style.transform = 'translateY(100px)';
-            toast.style.opacity = '0';
-        }, 2500);
-    }
-
-    // ========================================================
-    // KEYBOARD SHORTCUT: Ctrl+K or Cmd+K to focus search
-    // ========================================================
-    document.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', e => {
         if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
             e.preventDefault();
             searchInput.focus();
             searchInput.select();
         }
     });
-
-    // --- Initial state ---
-    console.log('[Library] Catalog loaded with',
-                allCards.length, 'books');
-});`,
+});
+""".strip()
+print(js_code)`,
       challenge: 'Add a "Return Book" feature: when a book has 0 copies available, show a "Return" button next to "Unavailable." Clicking it increments the availability, updates the display, and re-enables the checkout button. Use the same event delegation pattern.',
       successHint: 'You have written production-quality JavaScript: event delegation for efficiency, simulated async API calls, toast notifications, keyboard shortcuts, and clean DOM manipulation. This is exactly how interactive web applications work before frameworks — and understanding this foundation makes you a better React/Vue/Svelte developer, because every framework is just automating these same DOM operations.',
     },
