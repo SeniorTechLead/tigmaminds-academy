@@ -9,1000 +9,1271 @@ export default function FestivalLightsLevel4() {
 
   const miniLessons = [
     {
-      title: 'Capstone Design: LED Display Designer',
-      concept: `Our LED Display Designer will be a complete system for designing, simulating, and optimizing festival lighting installations. The system takes a venue layout, desired mood/theme, and budget constraints, then produces a full lighting design: LED positions, colors, brightness patterns, circuit topology, power requirements, and thermal analysis.
+      title: 'System Design: LDR Sensor + LED Strip + Arduino',
+      concept: `In previous levels you explored the physics of light, LED circuits, and photometry. Now you build an **ambient-responsive LED installation** — a light sculpture that senses its environment and adapts its display in real time. As daylight fades during a festival evening, the installation gradually brightens. When someone shines a flashlight at it, it responds with a burst of color. When clouds pass overhead, it shifts to warmer tones.
 
-The pipeline has six stages. First, **venue modeling**: define the space as a 2D floor plan with key features (stage, pathways, trees, buildings). Second, **illumination targets**: specify desired lux levels for each zone. Third, **LED selection and placement**: choose LED types and calculate optimal positions using inverse-square-law optimization. Fourth, **color design**: create color palettes and animation sequences for each zone. Fifth, **circuit design**: calculate wiring topology, resistor values, driver requirements, and power distribution. Sixth, **simulation and visualization**: render the final design showing illumination patterns, color effects, and power consumption.
+The core sensing element is a **Light-Dependent Resistor (LDR)**, also called a photoresistor. An LDR is made of cadmium sulfide (CdS), a semiconductor whose resistance decreases when exposed to light. In darkness, its resistance can be 1 megaohm or more. In bright light, it drops to a few hundred ohms. By placing the LDR in a **voltage divider** with a fixed resistor, we convert this resistance change into a voltage that the Arduino's ADC (Analog-to-Digital Converter) can read.
 
-This is a real engineering design tool. Professional lighting designers use similar (more elaborate) software to plan everything from concert lighting to architectural illumination. Our version captures the essential physics and engineering while being accessible enough to run in a browser.`,
-      analogy: 'Building this designer is like building an architect\'s CAD tool for light. An architect draws a building, specifies structural loads, and the software checks if the design is safe. Our tool draws a venue, specifies illumination targets, and the software designs the LED layout that achieves them — automatically calculating circuits, power, and thermal requirements.',
-      storyConnection: 'The Festival of Lights transforms an entire village with carefully placed, colorful illumination. Our designer tool brings this same capability to anyone planning a festival — whether for a small courtyard celebration or a large community event. The tool combines the physics of light with the artistry of festival design.',
-      checkQuestion: 'Why do we need six pipeline stages instead of just placing LEDs and calculating power? What does each stage contribute that the others cannot?',
-      checkAnswer: 'Each stage addresses a different concern. Venue modeling defines the physical constraints. Illumination targets translate human needs (safety, ambiance) into engineering specs (lux). LED placement is a geometric optimization that depends on the venue. Color design is an aesthetic decision. Circuit design is an electrical engineering problem. Simulation validates the whole system. Skipping any stage risks a design that works on paper but fails in practice — too dim here, overheated there, ugly color there.',
-      codeIntro: 'Build the venue model layer and illumination target specification system.',
-      code: `import numpy as np
-import matplotlib.pyplot as plt
+The voltage divider circuit: 5V --> LDR --> junction point --> 10k ohm resistor --> GND. The Arduino analog pin (A0) connects to the junction point. In bright light (LDR low resistance), the junction voltage is high (~4V). In darkness (LDR high resistance), the junction voltage is low (~0.5V). The ADC reads this as a value from 0 (dark) to 1023 (bright).
 
-class Venue:
-    """Festival venue model."""
-    def __init__(self, width, height, name="Festival Venue"):
-        self.width = width
-        self.height = height
-        self.name = name
-        self.zones = []
-        self.features = []
+For the LED output, we use an **RGB LED strip** (common anode or WS2812B NeoPixel). For this lesson, we start with three individual LEDs (red, green, blue) on PWM pins, representing one RGB pixel. In the final build, these map directly to the R, G, B channels of each pixel in a strip.
 
-    def add_zone(self, x, y, w, h, name, target_lux, color_theme):
-        self.zones.append({
-            'x': x, 'y': y, 'w': w, 'h': h,
-            'name': name, 'target_lux': target_lux, 'color_theme': color_theme
-        })
+The system architecture: **Sensor** (LDR on A0) --> **Processing** (Arduino: read, map, decide mode) --> **Output** (RGB LEDs on PWM pins 9, 10, 11). A potentiometer on A1 lets the user set sensitivity. A pushbutton on pin 2 cycles through display modes.
 
-    def add_feature(self, x, y, feature_type, size=1):
-        self.features.append({'x': x, 'y': y, 'type': feature_type, 'size': size})
+Power: Three LEDs at 20 mA each = 60 mA. For a full WS2812B strip (30 pixels), each pixel draws up to 60 mA at full white = 1.8A total. That exceeds the Arduino's 5V regulator (500 mA), so a strip requires an external 5V power supply. We design for this from the start.`,
+      analogy: 'Think of the LDR as a pupil in your eye. In bright light, the pupil contracts (low resistance = high voltage reading) to reduce light intake. In darkness, it dilates (high resistance = low voltage reading) to gather more light. Our circuit reads the "pupil size" and adjusts the LED brightness accordingly — bright LEDs when the environment is dark, dim LEDs when it is bright. The installation is, in effect, a single giant artificial eye that responds to its surroundings.',
+      storyConnection: 'The festival lights in the story transform as evening falls — starting as subtle glimmers in the afternoon haze, growing to a dazzling display at nightfall. Our light-responsive installation does the same thing automatically. The LDR senses the fading daylight, and the Arduino smoothly increases LED brightness. The installation becomes part of the festival rhythm, responding to the same sunset that the celebrants are watching.',
+      checkQuestion: 'Why do we use a 10k ohm fixed resistor in the voltage divider with the LDR, rather than a 100 ohm or 1M ohm resistor?',
+      checkAnswer: 'The fixed resistor should be in the same range as the LDR resistance in the middle of the operating range. An LDR typically varies from ~1k (bright) to ~100k (dim). A 10k fixed resistor puts the voltage divider output in the middle of the ADC range under typical indoor lighting. With 100 ohms, the voltage would be near 5V for all but the brightest light (no dynamic range in the dark). With 1M, the voltage would be near 0V except in near-total darkness. The 10k value maximizes sensitivity across the useful light range.',
+      codeIntro: 'Set up the hardware interface: LDR reading, RGB LED output, potentiometer for sensitivity, and button for mode selection.',
+      code: `// =============================================
+// Festival Light Installation — System Setup
+// LDR sensor + RGB LEDs + user controls
+// =============================================
 
-# Create a festival venue
-venue = Venue(30, 20, "Bihu Festival Ground")
-venue.add_zone(10, 7, 10, 8, "Main Stage", 800, "warm_gold")
-venue.add_zone(0, 0, 8, 6, "Food Court", 300, "warm_white")
-venue.add_zone(22, 0, 8, 6, "Craft Stalls", 400, "cool_white")
-venue.add_zone(0, 14, 30, 6, "Audience Area", 100, "ambient_gold")
-venue.add_zone(8, 0, 14, 7, "Pathway", 50, "pathway_blue")
-venue.add_feature(15, 11, 'tree', 2)
-venue.add_feature(5, 3, 'tree', 1.5)
-venue.add_feature(25, 3, 'tree', 1.5)
+// --- Pin Assignments ---
+const int LDR_PIN = A0;       // Light-Dependent Resistor (voltage divider)
+const int POT_PIN = A1;       // Potentiometer for sensitivity adjustment
+const int BUTTON_PIN = 2;     // Mode select button (with internal pull-up)
 
-# Color themes
-themes = {
-    'warm_gold': {'primary': '#f59e0b', 'secondary': '#ef4444', 'accent': '#fbbf24'},
-    'warm_white': {'primary': '#fef3c7', 'secondary': '#f59e0b', 'accent': '#ffffff'},
-    'cool_white': {'primary': '#e0f2fe', 'secondary': '#3b82f6', 'accent': '#ffffff'},
-    'ambient_gold': {'primary': '#d97706', 'secondary': '#92400e', 'accent': '#f59e0b'},
-    'pathway_blue': {'primary': '#1e40af', 'secondary': '#3b82f6', 'accent': '#60a5fa'},
+const int LED_R = 9;          // Red channel (PWM)
+const int LED_G = 10;         // Green channel (PWM)
+const int LED_B = 11;         // Blue channel (PWM)
+
+// --- Sensor Calibration ---
+// These values depend on YOUR specific LDR and lighting conditions.
+// Run the calibration routine (below) to find your values.
+int ldrMin = 50;     // ADC reading in near-darkness
+int ldrMax = 900;    // ADC reading in bright light
+int ldrRaw = 0;      // latest raw ADC reading
+int ldrMapped = 0;   // mapped to 0-255 range
+
+// --- Sensitivity (from potentiometer) ---
+float sensitivity = 1.0;  // 0.5 to 2.0, controlled by pot
+
+// --- Display Mode ---
+int currentMode = 0;
+const int NUM_MODES = 4;
+const char* modeNames[] = {
+  "Auto Brightness",   // Mode 0: brightness follows ambient light
+  "Color Temperature",  // Mode 1: warm in dark, cool in bright
+  "Pulse",              // Mode 2: breathing pulse, rate follows light
+  "Rainbow Cycle"       // Mode 3: cycling hue, speed follows light
+};
+
+// --- Button debounce ---
+bool lastButtonState = HIGH;
+unsigned long lastDebounceTime = 0;
+const unsigned long DEBOUNCE_DELAY = 50;
+
+// --- Timing ---
+unsigned long lastReadTime = 0;
+unsigned long lastPrintTime = 0;
+const int READ_INTERVAL_MS = 20;   // 50 Hz sensor reading
+const int PRINT_INTERVAL_MS = 200; // 5 Hz serial output
+
+void setup() {
+  Serial.begin(115200);
+  Serial.println("=== Festival Light Installation ===");
+  Serial.println("LDR Sensor | RGB LEDs | 4 Display Modes");
+  Serial.println();
+
+  // Configure pins
+  pinMode(LED_R, OUTPUT);
+  pinMode(LED_G, OUTPUT);
+  pinMode(LED_B, OUTPUT);
+  pinMode(BUTTON_PIN, INPUT_PULLUP);  // internal pull-up resistor
+
+  // Self-test: cycle through R, G, B
+  Serial.println("Self-test: RGB channels...");
+  int pins[] = {LED_R, LED_G, LED_B};
+  const char* colors[] = {"Red", "Green", "Blue"};
+  for (int i = 0; i < 3; i++) {
+    for (int b = 0; b <= 255; b += 5) {
+      analogWrite(pins[i], b);
+      delay(2);
+    }
+    delay(200);
+    for (int b = 255; b >= 0; b -= 5) {
+      analogWrite(pins[i], b);
+      delay(2);
+    }
+    Serial.print("  ");
+    Serial.print(colors[i]);
+    Serial.println(" OK");
+  }
+
+  // Calibration: read LDR for 3 seconds
+  Serial.println();
+  Serial.println("Calibration: reading LDR for 3 seconds...");
+  Serial.println("  (cover and uncover the sensor for best calibration)");
+  int calMin = 1023, calMax = 0;
+  unsigned long calStart = millis();
+  while (millis() - calStart < 3000) {
+    int val = analogRead(LDR_PIN);
+    if (val < calMin) calMin = val;
+    if (val > calMax) calMax = val;
+    delay(20);
+  }
+
+  if (calMax - calMin > 50) {
+    ldrMin = calMin;
+    ldrMax = calMax;
+    Serial.print("  Calibrated: min=");
+    Serial.print(ldrMin);
+    Serial.print(" max=");
+    Serial.println(ldrMax);
+  } else {
+    Serial.println("  Using defaults (not enough variation detected)");
+  }
+
+  Serial.println();
+  Serial.print("Starting in mode: ");
+  Serial.println(modeNames[currentMode]);
+  Serial.println("Press button to cycle modes.");
+  Serial.println();
+  Serial.println("ldr_raw\\tldr_mapped\\tsensitivity\\tmode\\tR\\tG\\tB");
+
+  lastReadTime = millis();
+  lastPrintTime = millis();
 }
 
-fig, axes = plt.subplots(1, 2, figsize=(14, 6))
-fig.patch.set_facecolor('#1f2937')
-fig.suptitle('LED Display Designer: Venue Model & Targets',
-             color='white', fontsize=14, fontweight='bold')
-
-# Plot 1: Venue layout
-ax = axes[0]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-zone_colors = ['#f59e0b', '#22c55e', '#3b82f6', '#a855f7', '#6b7280']
-for i, zone in enumerate(venue.zones):
-    rect = plt.Rectangle((zone['x'], zone['y']), zone['w'], zone['h'],
-                         facecolor=zone_colors[i % len(zone_colors)], alpha=0.3,
-                         edgecolor=zone_colors[i % len(zone_colors)], linewidth=2)
-    ax.add_patch(rect)
-    ax.text(zone['x'] + zone['w']/2, zone['y'] + zone['h']/2,
-            f"{zone['name']}\\n{zone['target_lux']} lux",
-            color='white', fontsize=9, ha='center', va='center', fontweight='bold')
-for feat in venue.features:
-    if feat['type'] == 'tree':
-        circle = plt.Circle((feat['x'], feat['y']), feat['size'],
-                           color='#22c55e', alpha=0.4)
-        ax.add_patch(circle)
-        ax.text(feat['x'], feat['y'], 'T', color='white', ha='center', va='center')
-ax.set_xlim(-1, venue.width+1)
-ax.set_ylim(-1, venue.height+1)
-ax.set_aspect('equal')
-ax.set_xlabel('X (meters)', color='white')
-ax.set_ylabel('Y (meters)', color='white')
-ax.set_title(venue.name, color='white', fontsize=12)
-
-# Plot 2: Illumination target profile
-ax = axes[1]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-zone_names = [z['name'] for z in venue.zones]
-zone_lux = [z['target_lux'] for z in venue.zones]
-zone_areas = [z['w'] * z['h'] for z in venue.zones]
-total_lumens_needed = [lux * area for lux, area in zip(zone_lux, zone_areas)]
-
-bars = ax.barh(zone_names, zone_lux, color=zone_colors[:len(zone_names)], alpha=0.8)
-for bar, lux, lumens in zip(bars, zone_lux, total_lumens_needed):
-    ax.text(bar.get_width() + 10, bar.get_y() + bar.get_height()/2,
-            f'{lux} lux ({lumens/1000:.0f}k lm needed)',
-            color='white', va='center', fontsize=9)
-ax.set_xlabel('Target illuminance (lux)', color='white')
-ax.set_title('Illumination targets by zone', color='white', fontsize=12)
-
-plt.tight_layout()
-plt.show()
-
-print("Venue Model Summary")
-print("=" * 55)
-print(f"Venue: {venue.name} ({venue.width}m x {venue.height}m)")
-total_area = sum(z['w']*z['h'] for z in venue.zones)
-total_lumens = sum(z['target_lux']*z['w']*z['h'] for z in venue.zones)
-print(f"Total zone area: {total_area} m²")
-print(f"Total lumens needed: {total_lumens:,.0f} lm")
-print(f"Average target: {total_lumens/total_area:.0f} lux")
-print()
-for z in venue.zones:
-    lm = z['target_lux'] * z['w'] * z['h']
-    print(f"  {z['name']:<15} {z['w']*z['h']:>4}m²  {z['target_lux']:>4}lux  {lm:>6}lm  theme={z['color_theme']}")`,
-      challenge: 'Add obstacle avoidance: features like trees and buildings block light. Implement shadow casting by computing which grid points are occluded from each LED position by obstacles, and adjust the illumination map accordingly.',
-      successHint: 'The venue model is the foundation of the entire design tool. A well-defined venue with clear illumination targets transforms lighting design from guesswork into systematic engineering.',
-    },
-    {
-      title: 'LED Placement Optimization',
-      concept: `Given a venue and illumination targets, we need to find the optimal positions and orientations for LEDs. This is a continuous optimization problem: for N LEDs, each with position (x, y, z) and orientation angles, we have up to 5N free variables. The objective is to minimize the difference between achieved and target illuminance across all zones while using the minimum number of LEDs.
-
-The illuminance at any point on the ground from an LED at position (x_led, y_led, z_led) is: E = (I * cos(theta)) / d^2, where I is the luminous intensity, theta is the angle from the LED\'s axis to the point, and d is the distance. For a Lambertian emitter, I(theta) = I_0 * cos(theta). The total illuminance at any point is the sum of contributions from all LEDs.
-
-We solve this using **iterative placement**: start with a regular grid of LEDs, evaluate the illumination pattern, then adjust positions to reduce under-illuminated and over-illuminated areas. The algorithm is: (1) place LEDs on a grid with spacing determined by the target lux and LED flux, (2) compute illumination map, (3) identify under-lit areas and add LEDs there, (4) identify over-lit areas and remove or dim LEDs, (5) repeat until convergence.`,
-      analogy: 'LED placement optimization is like arranging sprinklers on a lawn. Each sprinkler (LED) covers a circular area. Too few sprinklers leave dry spots (dark zones). Too many waste water (energy). The optimal layout covers every part of the lawn with uniform moisture (illuminance) using the fewest sprinklers.',
-      storyConnection: 'A Bihu festival ground has specific areas that need different lighting levels — bright for the stage, moderate for food stalls, dim for ambient pathways. The optimizer finds where to hang each LED to achieve these targets with minimum equipment and power. Traditional festival decorators do this by experience; our tool does it by physics.',
-      checkQuestion: 'A single LED with 1000 lm output at 3m height produces what peak illuminance directly below it (Lambertian emission)? If the target is 200 lux over a 4m x 4m area, estimate the minimum number of such LEDs needed.',
-      checkAnswer: 'Peak illuminance: E = I_0/d^2 where I_0 = 1000/(2*pi) = 159 cd for Lambertian. At d=3m (directly below): E = 159/9 = 17.7 lux. Wait — for a Lambertian source viewed from directly below, cos(theta)=1 and the full hemisphere flux Phi = pi*I_0, so I_0 = 1000/pi = 318 cd. E_peak = 318/9 = 35.4 lux. To cover 16m^2 at 200 lux: total lumens on surface ~ 200*16 = 3200. With 50% utilization (light hits the target area), need 6400 lm total, so ~7 LEDs minimum. But uniformity requires more — probably 12-16.',
-      codeIntro: 'Implement the LED placement algorithm and generate illumination maps for the festival venue.',
-      code: `import numpy as np
-import matplotlib.pyplot as plt
-
-class LEDFixture:
-    def __init__(self, x, y, z, flux_lm, beam_angle_deg=120, color=(1,1,1)):
-        self.x, self.y, self.z = x, y, z
-        self.flux = flux_lm
-        self.beam_angle = np.radians(beam_angle_deg)
-        self.color = color
-        self.I0 = flux_lm / (2 * np.pi * (1 - np.cos(self.beam_angle/2)))
-
-    def illuminance_at(self, px, py):
-        dx, dy, dz = px - self.x, py - self.y, -self.z
-        d = np.sqrt(dx**2 + dy**2 + dz**2)
-        cos_theta = np.abs(dz) / np.maximum(d, 0.01)
-        # Within beam angle
-        angle = np.arccos(np.minimum(cos_theta, 1.0))
-        in_beam = angle < self.beam_angle / 2
-        E = self.I0 * cos_theta / np.maximum(d**2, 0.01) * in_beam
-        return E
-
-def compute_illumination(leds, x_grid, y_grid):
-    X, Y = np.meshgrid(x_grid, y_grid)
-    E = np.zeros_like(X)
-    for led in leds:
-        E += led.illuminance_at(X, Y)
-    return E
-
-# Venue zones
-zones = [
-    {'name': 'Stage', 'x': 10, 'y': 7, 'w': 10, 'h': 8, 'target': 800},
-    {'name': 'Food', 'x': 0, 'y': 0, 'w': 8, 'h': 6, 'target': 300},
-    {'name': 'Crafts', 'x': 22, 'y': 0, 'w': 8, 'h': 6, 'target': 400},
-    {'name': 'Audience', 'x': 0, 'y': 14, 'w': 30, 'h': 6, 'target': 100},
-]
-
-# Place LEDs based on zone targets
-leds = []
-for zone in zones:
-    area = zone['w'] * zone['h']
-    # LED height
-    z = 4.0 if zone['name'] == 'Stage' else 3.0
-    # Estimate LEDs needed (each 2000 lm LED covers ~10 m² at target lux)
-    flux_per_led = 2000
-    coverage = flux_per_led / (zone['target'] * 1.5)  # m² per LED (with overhead)
-    n_leds = max(4, int(area / coverage))
-    nx = max(2, int(np.sqrt(n_leds * zone['w'] / zone['h'])))
-    ny = max(2, int(n_leds / nx))
-    for i in range(nx):
-        for j in range(ny):
-            lx = zone['x'] + (i + 0.5) * zone['w'] / nx
-            ly = zone['y'] + (j + 0.5) * zone['h'] / ny
-            leds.append(LEDFixture(lx, ly, z, flux_per_led))
-
-# Compute illumination map
-x_grid = np.linspace(0, 30, 150)
-y_grid = np.linspace(0, 20, 100)
-E_map = compute_illumination(leds, x_grid, y_grid)
-
-fig, axes = plt.subplots(2, 2, figsize=(14, 10))
-fig.patch.set_facecolor('#1f2937')
-fig.suptitle('LED Placement Optimization: Illumination Design',
-             color='white', fontsize=14, fontweight='bold')
-
-# Plot 1: LED positions and illumination map
-ax = axes[0, 0]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-cs = ax.contourf(x_grid, y_grid, E_map, levels=np.linspace(0, 1000, 20), cmap='hot')
-plt.colorbar(cs, ax=ax, label='Illuminance (lux)')
-for led in leds:
-    ax.plot(led.x, led.y, 'w*', markersize=5)
-for z in zones:
-    rect = plt.Rectangle((z['x'], z['y']), z['w'], z['h'],
-                         fill=False, edgecolor='white', linewidth=1.5, linestyle='--')
-    ax.add_patch(rect)
-    ax.text(z['x']+0.5, z['y']+0.5, z['name'], color='white', fontsize=8)
-ax.set_xlabel('X (m)', color='white')
-ax.set_ylabel('Y (m)', color='white')
-ax.set_title(f'Illumination map ({len(leds)} LEDs)', color='white', fontsize=11)
-ax.set_aspect('equal')
-
-# Plot 2: Uniformity analysis per zone
-ax = axes[0, 1]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-X, Y = np.meshgrid(x_grid, y_grid)
-zone_stats = []
-for z in zones:
-    mask = (X >= z['x']) & (X <= z['x']+z['w']) & (Y >= z['y']) & (Y <= z['y']+z['h'])
-    zone_E = E_map[mask]
-    if len(zone_E) > 0:
-        stats = {'name': z['name'], 'target': z['target'],
-                 'mean': np.mean(zone_E), 'min': np.min(zone_E),
-                 'max': np.max(zone_E), 'uniformity': np.min(zone_E)/np.mean(zone_E)}
-        zone_stats.append(stats)
-
-names = [s['name'] for s in zone_stats]
-targets = [s['target'] for s in zone_stats]
-means = [s['mean'] for s in zone_stats]
-x_pos = np.arange(len(names))
-ax.bar(x_pos - 0.2, targets, 0.35, color='#f59e0b', alpha=0.8, label='Target')
-ax.bar(x_pos + 0.2, means, 0.35, color='#22c55e', alpha=0.8, label='Achieved')
-ax.set_xticks(x_pos)
-ax.set_xticklabels(names, color='white')
-ax.set_ylabel('Illuminance (lux)', color='white')
-ax.set_title('Target vs achieved per zone', color='white', fontsize=11)
-ax.legend(fontsize=9)
-
-# Plot 3: Cross-section through stage
-ax = axes[1, 0]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-y_idx = np.argmin(np.abs(y_grid - 11))  # middle of stage
-ax.plot(x_grid, E_map[y_idx, :], color='#f59e0b', linewidth=2.5, label='Achieved')
-ax.axhline(800, color='#ef4444', linewidth=1.5, linestyle='--', label='Stage target (800 lux)')
-ax.axhline(100, color='#3b82f6', linewidth=1, linestyle=':', label='Audience target (100 lux)')
-ax.fill_between(x_grid, E_map[y_idx, :], 800,
-                where=E_map[y_idx, :] < 800, alpha=0.2, color='#ef4444')
-ax.set_xlabel('X position (m)', color='white')
-ax.set_ylabel('Illuminance (lux)', color='white')
-ax.set_title('Cross-section at Y=11m (through stage)', color='white', fontsize=11)
-ax.legend(fontsize=8)
-
-# Plot 4: Power and LED count summary
-ax = axes[1, 1]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-n_per_zone = []
-for z in zones:
-    count = sum(1 for led in leds if z['x'] <= led.x <= z['x']+z['w'] and z['y'] <= led.y <= z['y']+z['h'])
-    n_per_zone.append(count)
-total_power = len(leds) * 2000 / 150  # 150 lm/W efficacy -> watts per LED
-zone_names = [z['name'] for z in zones]
-bars = ax.bar(zone_names, n_per_zone, color=['#f59e0b', '#22c55e', '#3b82f6', '#a855f7'], alpha=0.8)
-for bar, n in zip(bars, n_per_zone):
-    ax.text(bar.get_x()+bar.get_width()/2, bar.get_height()+0.5,
-            f'{n} LEDs', ha='center', color='white', fontsize=10)
-ax.set_ylabel('Number of LEDs', color='white')
-ax.set_title(f'LED count: {len(leds)} total, {total_power:.0f}W', color='white', fontsize=11)
-
-plt.tight_layout()
-plt.show()
-
-print("LED Placement Results")
-print("=" * 60)
-print(f"Total LEDs: {len(leds)} @ 2000 lm each")
-print(f"Total flux: {len(leds)*2000:,} lumens")
-print(f"Total power: {total_power:.0f}W (at 150 lm/W)")
-print()
-for s in zone_stats:
-    ratio = s['mean']/s['target']*100
-    print(f"  {s['name']:<10} target={s['target']:>4}lux  achieved={s['mean']:>6.0f}lux "
-          f"({ratio:.0f}%)  uniformity={s['uniformity']:.2f}")`,
-      challenge: 'Implement gradient-descent optimization: for each LED, compute the gradient of the error (target - achieved illuminance) with respect to position, then move each LED slightly in the direction that reduces error. Run for 50 iterations and show how the illumination map improves.',
-      successHint: 'LED placement optimization is a real engineering task that professional lighting designers perform for every installation. The inverse-square law and beam angle physics determine the optimal layout — the rest is clever algorithm design.',
-    },
-    {
-      title: 'Animation Engine: Dynamic Light Effects',
-      concept: `Festival lighting is not static — it pulses, fades, chases, and sparkles. Our animation engine generates time-varying brightness and color patterns for each LED in the display. The engine works by computing a **color function** for each LED at each time step: color(led_id, t) -> (R, G, B, brightness).
-
-Common effects include: **chase** (a bright spot moves along a string of LEDs), **rainbow sweep** (colors cycle through the hue wheel), **breathing** (sinusoidal brightness pulsing), **sparkle** (random LEDs flash briefly), **wave** (brightness ripples outward from a center point), and **fire** (flickering warm colors simulating flames). Each effect is parameterized: chase has speed and width, breathing has frequency and minimum brightness, sparkle has density and flash duration.
-
-Effects can be **composited**: layered on top of each other with blending modes. Additive blending adds the colors (like real light mixing). Maximum blending takes the brightest value at each pixel. Alpha blending mixes colors by transparency. Complex displays use multiple simultaneous effects — a breathing base layer, a chase highlight, and random sparkles on top — creating rich, dynamic visual experiences.`,
-      analogy: 'The animation engine is like a music sequencer. Each LED is an instrument. Each effect is a musical pattern (melody, bass line, drum beat). The sequencer plays all patterns simultaneously, mixing them together into a complete song. A "chase" effect is like a scale running up and down. A "sparkle" is like percussion hits. The composition of multiple effects creates the final performance.',
-      storyConnection: 'The Festival of Lights is alive with movement — flickering diyas, swaying lanterns, chasing reflections on water. Our animation engine recreates these natural light dynamics digitally, allowing festival designers to program effects that evoke the same emotional response as traditional flame-based lighting, but with the precision and flexibility of LEDs.',
-      checkQuestion: 'A chase effect moves at 2 LEDs per second along a string of 100 LEDs. How long does one complete cycle take? If the chase width is 10 LEDs with a Gaussian brightness profile, what is the peak brightness of the 5th LED from center relative to the center LED?',
-      checkAnswer: 'Cycle time = 100 LEDs / 2 LEDs/sec = 50 seconds. The Gaussian profile for the 5th LED from center (sigma = width/4 = 2.5): brightness = exp(-(5/2.5)^2 / 2) = exp(-2) = 0.135 = 13.5% of center brightness. The chase effect has a bright core with soft tails, creating a smooth moving glow rather than a harsh point of light.',
-      codeIntro: 'Build the animation engine with multiple effect types and demonstrate compositing on the festival venue.',
-      code: `import numpy as np
-import matplotlib.pyplot as plt
-
-class AnimationEngine:
-    """Generate time-varying LED color patterns."""
-
-    @staticmethod
-    def chase(n_leds, t, speed=2, width=10, color=(1, 0.8, 0)):
-        """Moving bright spot along LED string."""
-        position = (t * speed) % n_leds
-        indices = np.arange(n_leds)
-        dist = np.minimum(np.abs(indices - position), n_leds - np.abs(indices - position))
-        brightness = np.exp(-(dist / (width/4))**2 / 2)
-        return np.outer(brightness, color)
-
-    @staticmethod
-    def breathing(n_leds, t, freq=0.5, min_bright=0.1, color=(1, 0.9, 0.7)):
-        """Sinusoidal pulsing."""
-        brightness = min_bright + (1 - min_bright) * (0.5 + 0.5 * np.sin(2*np.pi*freq*t))
-        return np.full((n_leds, 3), brightness) * np.array(color)
-
-    @staticmethod
-    def rainbow(n_leds, t, speed=0.1):
-        """Cycling rainbow colors."""
-        hues = (np.linspace(0, 1, n_leds) + t * speed) % 1.0
-        colors = np.zeros((n_leds, 3))
-        for i, h in enumerate(hues):
-            h6 = h * 6
-            c = 1.0
-            x = c * (1 - abs(h6 % 2 - 1))
-            if h6 < 1: colors[i] = [c, x, 0]
-            elif h6 < 2: colors[i] = [x, c, 0]
-            elif h6 < 3: colors[i] = [0, c, x]
-            elif h6 < 4: colors[i] = [0, x, c]
-            elif h6 < 5: colors[i] = [x, 0, c]
-            else: colors[i] = [c, 0, x]
-        return colors
-
-    @staticmethod
-    def sparkle(n_leds, t, density=0.05, color=(1, 1, 1)):
-        """Random flashing LEDs."""
-        np.random.seed(int(t * 100) % 10000)
-        mask = np.random.random(n_leds) < density
-        brightness = mask.astype(float) * np.random.uniform(0.5, 1.0, n_leds)
-        return np.outer(brightness, color)
-
-    @staticmethod
-    def wave(n_leds, t, freq=0.3, wavelength=20, color=(0.2, 0.5, 1.0)):
-        """Rippling wave pattern."""
-        indices = np.arange(n_leds)
-        brightness = 0.5 + 0.5 * np.sin(2*np.pi*(indices/wavelength - freq*t))
-        return np.outer(brightness, color)
-
-    @staticmethod
-    def fire(n_leds, t):
-        """Flickering fire effect."""
-        np.random.seed(int(t * 50) % 10000)
-        base = 0.6 + 0.4 * np.random.random(n_leds)
-        # Warm color variation
-        r = np.clip(base * 1.0, 0, 1)
-        g = np.clip(base * 0.5 + np.random.random(n_leds) * 0.2, 0, 1)
-        b = np.clip(base * 0.1, 0, 1)
-        return np.column_stack([r, g, b])
-
-engine = AnimationEngine()
-n_leds = 60
-
-fig, axes = plt.subplots(3, 2, figsize=(14, 10))
-fig.patch.set_facecolor('#1f2937')
-fig.suptitle('Animation Engine: Dynamic Light Effects',
-             color='white', fontsize=14, fontweight='bold')
-
-effects = [
-    ('Chase', lambda t: engine.chase(n_leds, t)),
-    ('Breathing', lambda t: engine.breathing(n_leds, t)),
-    ('Rainbow', lambda t: engine.rainbow(n_leds, t)),
-    ('Sparkle', lambda t: engine.sparkle(n_leds, t)),
-    ('Wave', lambda t: engine.wave(n_leds, t)),
-    ('Fire', lambda t: engine.fire(n_leds, t)),
-]
-
-for ax, (name, effect_fn) in zip(axes.flat, effects):
-    ax.set_facecolor('#111827')
-    ax.tick_params(colors='gray')
-    # Show 8 time steps as rows
-    n_steps = 8
-    img = np.zeros((n_steps, n_leds, 3))
-    for step in range(n_steps):
-        t = step * 0.5  # 0.5s intervals
-        colors = effect_fn(t)
-        img[step] = np.clip(colors, 0, 1)
-    ax.imshow(img, aspect='auto', interpolation='nearest')
-    ax.set_ylabel('Time step', color='white', fontsize=8)
-    ax.set_xlabel('LED index', color='white', fontsize=8)
-    ax.set_title(name, color='white', fontsize=11)
-    ax.set_yticks(range(0, n_steps, 2))
-    ax.set_yticklabels([f'{i*0.5:.1f}s' for i in range(0, n_steps, 2)], fontsize=7)
-
-plt.tight_layout()
-plt.show()
-
-# Compositing demo
-fig2, ax2 = plt.subplots(figsize=(14, 3))
-fig2.patch.set_facecolor('#1f2937')
-ax2.set_facecolor('#111827')
-ax2.tick_params(colors='gray')
-n_steps = 16
-composite = np.zeros((n_steps, n_leds, 3))
-for step in range(n_steps):
-    t = step * 0.3
-    layer1 = engine.breathing(n_leds, t, color=(0.3, 0.1, 0))
-    layer2 = engine.chase(n_leds, t, speed=3, color=(1, 0.5, 0))
-    layer3 = engine.sparkle(n_leds, t, density=0.03)
-    composite[step] = np.clip(layer1 + layer2 * 0.5 + layer3 * 0.3, 0, 1)
-ax2.imshow(composite, aspect='auto', interpolation='nearest')
-ax2.set_title('Composited: Breathing + Chase + Sparkle', color='white', fontsize=12)
-ax2.set_xlabel('LED index', color='white')
-ax2.set_ylabel('Time', color='white')
-plt.tight_layout()
-plt.show()
-
-print("Animation Engine Effects")
-print("=" * 40)
-for name, _ in effects:
-    print(f"  {name}: implemented")
-print()
-print("Compositing: additive blending of layers")
-print(f"  {n_leds} LEDs x {n_steps} frames rendered")`,
-      challenge: 'Create a music-reactive mode: given an audio waveform (simulated as a time series), extract the beat (energy peaks) and map it to LED brightness — bass to red, midrange to green, treble to blue. Synchronize a chase effect with the beat tempo.',
-      successHint: 'The animation engine transforms static LEDs into a dynamic visual medium. Every music concert, holiday display, and architectural light show uses similar animation engines — the principles are universal.',
-    },
-    {
-      title: 'Circuit Topology & Power Distribution',
-      concept: `With hundreds of LEDs placed and programmed, we need a practical circuit design. The circuit topology determines wiring cost, reliability, and power efficiency. For a festival installation, the key decisions are: series vs parallel grouping, wire gauge selection, fuse placement, and power supply distribution.
-
-A large installation is divided into **zones**, each with its own power supply (or power supply channel). Within each zone, LEDs are grouped into **strings** — series chains of LEDs driven by a constant-current driver. The number of LEDs per string is limited by the supply voltage: N_max = floor((V_supply - V_driver_overhead) / V_f_per_LED). For a 24V supply with 2V driver overhead and 3V blue LEDs: N_max = floor(22/3) = 7 LEDs per string.
-
-Wire sizing uses the formula: R_wire = rho * L / A, where rho is copper resistivity (1.68e-8 ohm*m), L is wire length, and A is cross-sectional area. Voltage drop must stay below 5% of supply voltage to prevent brightness variation. For a 24V system: max drop = 1.2V. If a run carries 5A over 20m (40m round trip): R_max = 1.2/5 = 0.24 ohms. Required area: A = 1.68e-8 * 40 / 0.24 = 2.8 mm^2 — a 2.5 mm^2 wire is marginal; 4 mm^2 is safe.`,
-      analogy: 'Circuit topology design is like plumbing a building. The main water supply (power supply) feeds branches (zone circuits) that feed individual fixtures (LED strings). Pipe diameter (wire gauge) must handle the flow without excessive pressure drop (voltage drop). Shut-off valves (fuses) at each branch isolate problems. Bad plumbing leads to weak water pressure at distant fixtures — bad wiring leads to dim LEDs at the end of long runs.',
-      storyConnection: 'A festival installation may span hundreds of meters of wiring across a venue. Poor circuit design leads to brightness variations (dim LEDs at far ends), reliability issues (one failure kills a whole section), and safety hazards (overloaded wires). The circuit topology turns the physics and animation design into a practical, buildable system.',
-      checkQuestion: 'A zone has 100 white LEDs (V_f=3.2V, 60mA each) on a 48V supply. How many LEDs per series string? How many strings in parallel? What is the total current draw?',
-      checkAnswer: 'LEDs per string: floor((48-2)/3.2) = floor(14.375) = 14. With 14 LEDs: V_drop = 14*3.2 = 44.8V, leaving 3.2V for the driver — adequate. Strings needed: ceil(100/14) = 8 strings (7 full strings of 14 + 1 string of 2). Total current: 8 * 60mA = 480mA. Total power: 48V * 0.48A = 23W. LED power: 100 * 3.2V * 0.06A = 19.2W. Efficiency: 19.2/23 = 83%.',
-      codeIntro: 'Design the complete circuit topology for the festival venue: calculate string configurations, wire sizes, and power distribution.',
-      code: `import numpy as np
-import matplotlib.pyplot as plt
-
-class CircuitDesigner:
-    def __init__(self, V_supply=24.0, V_driver_overhead=2.0):
-        self.V_supply = V_supply
-        self.V_overhead = V_driver_overhead
-        self.V_available = V_supply - V_driver_overhead
-
-    def max_series(self, V_forward):
-        return int(self.V_available / V_forward)
-
-    def design_zone(self, n_leds, V_forward, I_led_mA):
-        per_string = self.max_series(V_forward)
-        n_strings = int(np.ceil(n_leds / per_string))
-        remainder = n_leds - (n_strings - 1) * per_string
-        I_total = n_strings * I_led_mA / 1000
-        V_led_drop = per_string * V_forward
-        V_resistor = self.V_supply - V_led_drop
-        P_total = self.V_supply * I_total
-        P_led = n_leds * V_forward * I_led_mA / 1000
-        efficiency = P_led / P_total if P_total > 0 else 0
-        return {
-            'per_string': per_string, 'n_strings': n_strings,
-            'I_total_A': I_total, 'P_total_W': P_total,
-            'P_led_W': P_led, 'efficiency': efficiency,
-            'V_resistor': V_resistor
-        }
-
-    def wire_size(self, I_amps, length_m, max_drop_pct=5):
-        max_drop_V = self.V_supply * max_drop_pct / 100
-        rho = 1.68e-8  # copper
-        total_length = 2 * length_m  # round trip
-        A_min = rho * total_length * I_amps / max_drop_V  # m²
-        A_mm2 = A_min * 1e6
-        # Standard sizes
-        std_sizes = [0.5, 0.75, 1.0, 1.5, 2.5, 4.0, 6.0, 10.0]
-        for s in std_sizes:
-            if s >= A_mm2: return s
-        return std_sizes[-1]
-
-designer = CircuitDesigner(V_supply=24.0)
-
-# Festival zones
-festival_zones = [
-    {'name': 'Stage', 'n_rgb': 80, 'distance_m': 15},
-    {'name': 'Food Court', 'n_rgb': 40, 'distance_m': 25},
-    {'name': 'Craft Stalls', 'n_rgb': 50, 'distance_m': 30},
-    {'name': 'Audience', 'n_rgb': 60, 'distance_m': 20},
-    {'name': 'Pathways', 'n_rgb': 30, 'distance_m': 40},
-]
-
-# Each RGB LED has 3 channels
-led_specs = {'R': {'Vf': 1.8, 'I': 20}, 'G': {'Vf': 2.2, 'I': 20}, 'B': {'Vf': 3.0, 'I': 20}}
-
-fig, axes = plt.subplots(2, 2, figsize=(13, 10))
-fig.patch.set_facecolor('#1f2937')
-fig.suptitle('Circuit Topology & Power Distribution',
-             color='white', fontsize=14, fontweight='bold')
-
-# Analyze each zone
-all_results = {}
-for zone in festival_zones:
-    zone_results = {}
-    for ch, spec in led_specs.items():
-        result = designer.design_zone(zone['n_rgb'], spec['Vf'], spec['I'])
-        zone_results[ch] = result
-    zone_results['wire'] = designer.wire_size(
-        sum(zone_results[ch]['I_total_A'] for ch in 'RGB'),
-        zone['distance_m'])
-    all_results[zone['name']] = zone_results
-
-# Plot 1: Power breakdown per zone
-ax = axes[0, 0]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-zone_names = [z['name'] for z in festival_zones]
-P_led_total = [sum(all_results[n][ch]['P_led_W'] for ch in 'RGB') for n in zone_names]
-P_overhead = [sum(all_results[n][ch]['P_total_W'] - all_results[n][ch]['P_led_W'] for ch in 'RGB') for n in zone_names]
-x = np.arange(len(zone_names))
-ax.bar(x, P_led_total, color='#22c55e', alpha=0.8, label='LED power')
-ax.bar(x, P_overhead, bottom=P_led_total, color='#ef4444', alpha=0.5, label='Driver/resistor')
-ax.set_xticks(x)
-ax.set_xticklabels(zone_names, color='white', fontsize=9)
-ax.set_ylabel('Power (W)', color='white')
-ax.set_title('Power breakdown by zone', color='white', fontsize=11)
-ax.legend(fontsize=9)
-for i, (pl, po) in enumerate(zip(P_led_total, P_overhead)):
-    ax.text(i, pl+po+0.5, f'{pl+po:.0f}W', ha='center', color='white', fontsize=9)
-
-# Plot 2: Wire sizing
-ax = axes[0, 1]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-distances = [z['distance_m'] for z in festival_zones]
-wire_sizes = [all_results[z['name']]['wire'] for z in festival_zones]
-currents = [sum(all_results[z['name']][ch]['I_total_A'] for ch in 'RGB') for z in festival_zones]
-colors_w = ['#3b82f6' if w <= 1.5 else '#f59e0b' if w <= 4 else '#ef4444' for w in wire_sizes]
-bars = ax.bar(zone_names, wire_sizes, color=colors_w, alpha=0.8)
-for bar, w, d, i_a in zip(bars, wire_sizes, distances, currents):
-    ax.text(bar.get_x()+bar.get_width()/2, bar.get_height()+0.1,
-            f'{w}mm²\\n{d}m, {i_a:.1f}A', ha='center', color='white', fontsize=8)
-ax.set_ylabel('Wire size (mm²)', color='white')
-ax.set_title('Wire gauge per zone (5% max drop)', color='white', fontsize=11)
-
-# Plot 3: Efficiency comparison
-ax = axes[1, 0]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-for ch, col in [('R', '#ef4444'), ('G', '#22c55e'), ('B', '#3b82f6')]:
-    effs = [all_results[z['name']][ch]['efficiency'] * 100 for z in festival_zones]
-    ax.plot(zone_names, effs, color=col, linewidth=2, marker='o', label=f'{ch} channel')
-ax.set_ylabel('Efficiency (%)', color='white')
-ax.set_title('Circuit efficiency by channel', color='white', fontsize=11)
-ax.legend(fontsize=9)
-
-# Plot 4: Bill of materials
-ax = axes[1, 1]
-ax.set_facecolor('#111827')
-ax.axis('off')
-total_leds = sum(z['n_rgb'] for z in festival_zones)
-total_power = sum(sum(all_results[z['name']][ch]['P_total_W'] for ch in 'RGB') for z in festival_zones)
-total_wire = sum(z['distance_m'] * 2 for z in festival_zones)  # approximate
-text = "BILL OF MATERIALS\n"
-text += "=" * 40 + "\n\n"
-text += f"RGB LEDs:        {total_leds} units\n"
-text += f"LED drivers:     {sum(sum(all_results[z['name']][ch]['n_strings'] for ch in 'RGB') for z in festival_zones)} channels\n"
-text += f"24V PSU:         {int(np.ceil(total_power/100))*100}W rated\n"
-text += f"Wire:            ~{total_wire}m total\n"
-text += f"Fuses/breakers:  {len(festival_zones)} zone circuits\n"
-text += f"GFCI protection: 1 unit\n\n"
-text += f"POWER SUMMARY\n"
-text += f"{'='*40}\n"
-text += f"Total LED power:    {sum(P_led_total):.0f}W\n"
-text += f"Total system power: {total_power:.0f}W\n"
-text += f"System efficiency:  {sum(P_led_total)/total_power*100:.0f}%\n"
-text += f"Daily energy (8h):  {total_power*8/1000:.1f} kWh\n"
-text += f"Monthly cost:       ₹{total_power*8*30*5/1000:.0f}\n"
-ax.text(0.05, 0.95, text, transform=ax.transAxes, fontsize=9, color='white',
-        fontfamily='monospace', verticalalignment='top')
-
-plt.tight_layout()
-plt.show()
-
-print("Circuit Design Complete")
-print("=" * 60)
-for zone in festival_zones:
-    n = zone['name']
-    r = all_results[n]
-    p = sum(r[ch]['P_total_W'] for ch in 'RGB')
-    print(f"  {n:<12} {zone['n_rgb']:>3} LEDs  wire={r['wire']}mm²  "
-          f"power={p:.0f}W  strings={sum(r[ch]['n_strings'] for ch in 'RGB')}")`,
-      challenge: 'Add voltage drop simulation: compute the actual voltage at each LED position along a wire run, accounting for cumulative current draw. Show how LEDs at the far end of a long run are dimmer than those near the power supply. Design a mitigation strategy (thicker wire, distributed power injection, or smaller zones).',
-      successHint: 'Circuit topology is where physics meets practical installation. The difference between a professional lighting installation and an amateur one is almost entirely in the circuit design — proper wire sizing, fuse placement, and power distribution.',
-    },
-    {
-      title: 'Thermal Simulation & Reliability',
-      concept: `With the circuit designed and power distribution calculated, we need to verify that no component overheats. The thermal simulation computes the temperature of every LED and driver based on the power dissipation, thermal resistance, and ambient conditions. For the Brahmaputra Valley, ambient temperatures can reach 40°C with high humidity, making thermal management especially critical.
-
-We model the thermal network as a resistive circuit: each LED has a thermal resistance from junction to ambient (R_ja), and the steady-state junction temperature is T_j = T_ambient + P * R_ja. For LEDs packed close together, there is thermal coupling — heat from one LED raises the ambient temperature of its neighbors. We model this with a **thermal interaction matrix** where the temperature contribution of LED j at position i decreases with distance: Delta_T_i = sum_j(P_j * k / d_ij), where k is a coupling coefficient and d_ij is the distance between LEDs i and j.
-
-Reliability is predicted using the Arrhenius model: L70_i = L70_rated * 2^((T_rated - T_j_i) / 10). The system reliability is limited by the hottest LED — the "weakest link." A good thermal design ensures that all LEDs operate within 10°C of each other, so no single LED is a premature failure point.`,
-      analogy: 'Thermal simulation is like a weather forecast for your LED system. Just as meteorologists model how heat spreads through the atmosphere, we model how heat spreads through the LED array. Hot spots are like heat waves — they stress the system and can cause "climate" damage (premature failure). The goal is to design a system where the thermal "climate" is mild and uniform everywhere.',
-      storyConnection: 'An Assam festival runs in summer heat and monsoon humidity — the worst possible conditions for electronics. A thermal simulation before installation prevents the embarrassment of lights failing mid-festival and the safety risk of overheated components. The simulation turns thermal engineering from guesswork into prediction.',
-      checkQuestion: 'Ten 1W LEDs are spaced 5 cm apart in an enclosed strip. Each has R_ja = 40°C/W. The thermal coupling coefficient is k = 0.5°C*cm/W. In a 40°C ambient, what is the junction temperature of the center LED (which receives heat contributions from all 9 neighbors)?',
-      checkAnswer: 'Self-heating: T_self = 40 + 1 * 40 = 80°C. Neighbor contributions: from LEDs at distances 5, 10, 15, 20, 25 cm on each side. Delta_T = 2 * 0.5 * 1 * (1/5 + 1/10 + 1/15 + 1/20 + 1/25) = 2 * 0.5 * (0.2 + 0.1 + 0.067 + 0.05 + 0.04) = 0.457°C. So T_j_center = 80 + 0.457 = 80.5°C. The coupling effect is small because LEDs are well-spaced, but in tightly packed arrays it can add 10-20°C.',
-      codeIntro: 'Run thermal simulation for the festival LED installation, identify hot spots, and predict system lifetime under Assam conditions.',
-      code: `import numpy as np
-import matplotlib.pyplot as plt
-
-class ThermalSimulator:
-    def __init__(self, T_ambient=38.0):
-        self.T_amb = T_ambient
-
-    def simulate_strip(self, n_leds, spacing_cm, P_per_led, R_ja, k_coupling=0.5):
-        positions = np.arange(n_leds) * spacing_cm
-        T_j = np.full(n_leds, self.T_amb)
-        # Self-heating
-        T_j += P_per_led * R_ja
-        # Thermal coupling
-        for i in range(n_leds):
-            for j in range(n_leds):
-                if i != j:
-                    d = abs(positions[i] - positions[j])
-                    T_j[i] += P_per_led * k_coupling / max(d, 1)
-        return positions, T_j
-
-    def lifetime(self, T_j, T_rated=85, L70_rated=50000):
-        return L70_rated * 2**((T_rated - T_j) / 10)
-
-    def output_derating(self, T_j, T_ref=25):
-        return np.maximum(0, 1 - 0.005 * (T_j - T_ref)) * 100
-
-sim = ThermalSimulator(T_ambient=38.0)
-
-fig, axes = plt.subplots(2, 3, figsize=(14, 9))
-fig.patch.set_facecolor('#1f2937')
-fig.suptitle('Thermal Simulation & Reliability Analysis (Assam: 38°C ambient)',
-             color='white', fontsize=14, fontweight='bold')
-
-# Scenario 1: Tight spacing (2cm)
-pos1, Tj1 = sim.simulate_strip(20, 2, 0.3, 40, 0.5)
-# Scenario 2: Normal spacing (5cm)
-pos2, Tj2 = sim.simulate_strip(20, 5, 0.3, 40, 0.5)
-# Scenario 3: With heatsink (lower R_ja)
-pos3, Tj3 = sim.simulate_strip(20, 2, 0.3, 20, 0.3)
-
-ax = axes[0, 0]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-ax.plot(pos1, Tj1, color='#ef4444', linewidth=2, marker='o', markersize=4, label='2cm spacing')
-ax.plot(pos2, Tj2, color='#22c55e', linewidth=2, marker='s', markersize=4, label='5cm spacing')
-ax.plot(pos3, Tj3, color='#3b82f6', linewidth=2, marker='^', markersize=4, label='2cm + heatsink')
-ax.axhline(85, color='#f59e0b', linewidth=1.5, linestyle='--', label='Max safe 85°C')
-ax.set_xlabel('Position (cm)', color='white')
-ax.set_ylabel('Junction temperature (°C)', color='white')
-ax.set_title('Temperature profile along LED strip', color='white', fontsize=11)
-ax.legend(fontsize=8)
-
-# Lifetime comparison
-ax = axes[0, 1]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-lt1 = sim.lifetime(Tj1) / 1000
-lt2 = sim.lifetime(Tj2) / 1000
-lt3 = sim.lifetime(Tj3) / 1000
-ax.plot(pos1, lt1, color='#ef4444', linewidth=2, label='Tight (2cm)')
-ax.plot(pos2, lt2, color='#22c55e', linewidth=2, label='Normal (5cm)')
-ax.plot(pos3, lt3, color='#3b82f6', linewidth=2, label='Heatsink')
-ax.set_xlabel('Position (cm)', color='white')
-ax.set_ylabel('L70 lifetime (k hours)', color='white')
-ax.set_title('Predicted lifetime by position', color='white', fontsize=11)
-ax.legend(fontsize=8)
-
-# Output derating
-ax = axes[0, 2]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-out1 = sim.output_derating(Tj1)
-out2 = sim.output_derating(Tj2)
-out3 = sim.output_derating(Tj3)
-ax.plot(pos1, out1, color='#ef4444', linewidth=2, label='Tight')
-ax.plot(pos2, out2, color='#22c55e', linewidth=2, label='Normal')
-ax.plot(pos3, out3, color='#3b82f6', linewidth=2, label='Heatsink')
-ax.axhline(70, color='#f59e0b', linewidth=1, linestyle='--', alpha=0.5)
-ax.set_xlabel('Position (cm)', color='white')
-ax.set_ylabel('Output (%)', color='white')
-ax.set_title('Brightness derating due to heat', color='white', fontsize=11)
-ax.legend(fontsize=8)
-
-# 2D thermal map of venue
-ax = axes[1, 0]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-# Simple 2D thermal model
-x_grid = np.linspace(0, 30, 60)
-y_grid = np.linspace(0, 20, 40)
-X, Y = np.meshgrid(x_grid, y_grid)
-T_map = np.full_like(X, sim.T_amb)
-# LED positions (simplified)
-led_positions = [(15, 11, 0.5), (5, 3, 0.3), (25, 3, 0.3),
-                 (10, 17, 0.2), (20, 17, 0.2), (15, 4, 0.3)]
-for lx, ly, P in led_positions:
-    d = np.sqrt((X-lx)**2 + (Y-ly)**2 + 9)  # 3m height
-    T_map += P * 5 / d  # simplified thermal spread
-cs = ax.contourf(X, Y, T_map, levels=20, cmap='hot')
-plt.colorbar(cs, ax=ax, label='Temperature (°C)')
-ax.set_xlabel('X (m)', color='white')
-ax.set_ylabel('Y (m)', color='white')
-ax.set_title('Venue thermal map (ground level)', color='white', fontsize=11)
-ax.set_aspect('equal')
-
-# Cost-benefit of thermal management
-ax = axes[1, 1]
-ax.set_facecolor('#111827')
-ax.tick_params(colors='gray')
-R_ja_range = np.linspace(15, 80, 100)
-T_j_curve = sim.T_amb + 0.3 * R_ja_range
-lifetime_curve = sim.lifetime(T_j_curve) / (365.25 * 8)  # years at 8h/day
-cost_heatsink = np.maximum(0, (80 - R_ja_range) * 2)  # ₹ per LED
-ax.plot(R_ja_range, lifetime_curve, color='#22c55e', linewidth=2.5, label='Lifetime (years)')
-ax2 = ax.twinx()
-ax2.plot(R_ja_range, cost_heatsink, color='#f59e0b', linewidth=2, linestyle='--', label='Heatsink cost (₹)')
-ax2.set_ylabel('Cost per LED (₹)', color='#f59e0b')
-ax2.tick_params(colors='#f59e0b')
-ax.set_xlabel('Thermal resistance R_ja (°C/W)', color='white')
-ax.set_ylabel('Expected lifetime (years @ 8h/day)', color='#22c55e')
-ax.set_title('Thermal investment vs lifetime', color='white', fontsize=11)
-lines1, labels1 = ax.get_legend_handles_labels()
-lines2, labels2 = ax2.get_legend_handles_labels()
-ax.legend(lines1+lines2, labels1+labels2, fontsize=8)
-
-# Reliability summary
-ax = axes[1, 2]
-ax.set_facecolor('#111827')
-ax.axis('off')
-text = "RELIABILITY REPORT\n"
-text += "=" * 40 + "\n\n"
-text += f"Ambient: {sim.T_amb}°C (Assam summer)\n\n"
-scenarios = [('Tight 2cm', Tj1), ('Normal 5cm', Tj2), ('Heatsink', Tj3)]
-for name, Tj in scenarios:
-    lt_min = sim.lifetime(np.max(Tj)) / (365.25 * 8)
-    text += f"{name}:\n"
-    text += f"  Max Tj: {np.max(Tj):.1f}°C\n"
-    text += f"  Min output: {sim.output_derating(np.max(Tj)):.0f}%\n"
-    text += f"  Min lifetime: {lt_min:.1f} years\n\n"
-text += "RECOMMENDATION: 5cm spacing\n"
-text += "or heatsink for tight spacing\n"
-text += f"Target: Tj < 75°C for 10+ year life"
-ax.text(0.05, 0.95, text, transform=ax.transAxes, fontsize=9, color='white',
-        fontfamily='monospace', verticalalignment='top')
-
-plt.tight_layout()
-plt.show()
-
-print("Thermal Simulation Results (Assam: 38°C)")
-print("=" * 55)
-for name, Tj in scenarios:
-    print(f"  {name:<12} Tj_max={np.max(Tj):.1f}°C  Tj_min={np.min(Tj):.1f}°C  "
-          f"Life={sim.lifetime(np.max(Tj))/1000:.0f}k hrs")`,
-      challenge: 'Add humidity effects: in high humidity (>80% RH common in Assam monsoon), moisture can cause corrosion of LED contacts, reducing lifetime independently of temperature. Model this as an additional failure rate that doubles for every 10% increase in RH above 60%. Combine with thermal Arrhenius to predict real-world lifetime in Assam conditions.',
-      successHint: 'Thermal simulation is the final validation before a design goes to installation. It catches problems that would otherwise appear weeks or months later as premature LED failures — turning expensive surprises into preventable engineering decisions.',
-    },
-    {
-      title: 'Complete Display Designer: Final Report',
-      concept: `The final lesson integrates all components into a complete LED Display Designer that generates a professional design report. The report covers every aspect of the installation: venue layout, LED selection and placement, illumination analysis, color design, animation programming, circuit topology, power distribution, thermal simulation, reliability prediction, bill of materials, and cost estimate.
-
-A professional lighting design document follows a standard structure. The **executive summary** gives the key numbers: total LEDs, total power, estimated cost, predicted lifetime. The **design drawings** show LED positions on the venue plan with illumination contours. The **circuit diagrams** show the wiring topology with component values. The **simulation results** show illumination uniformity, thermal analysis, and reliability predictions. The **bill of materials** lists every component with quantity and cost. The **installation guide** specifies mounting heights, cable routing, and safety requirements.
-
-This capstone demonstrates the full engineering design process: define requirements, model the physics, optimize the design, simulate performance, validate against constraints, document everything. The same process — scaled up with more sophisticated tools — is how professional lighting engineers design stadium lighting, architectural illumination, and concert rigs.`,
-      analogy: 'The final design report is like an architectural blueprint package. The architect delivers not just a pretty picture, but a complete set of documents that a contractor can build from: floor plans, structural calculations, electrical layouts, plumbing diagrams, material specifications, and cost estimates. Our LED display design package is the equivalent for lighting — everything a festival organizer needs to build the installation.',
-      storyConnection: 'The Festival of Lights in the story transforms a community. Our design tool transforms that vision into a concrete, buildable plan. A village committee could take this design report to an electrician and say: "Build this." Every wire, every LED, every fuse is specified. The magic of festival lighting becomes achievable engineering.',
-      checkQuestion: 'Why is a complete design report important even for a temporary festival installation that will be taken down after a week?',
-      checkAnswer: 'Safety: the report documents that the design meets electrical safety standards — critical for liability. Reproducibility: next year\'s festival can use the same design. Troubleshooting: if something fails during the festival, the report tells the electrician exactly what is connected where. Budget: the cost estimate prevents mid-installation surprises. And quality: a documented design produces a better result because every aspect has been thought through rather than improvised on-site.',
-      codeIntro: 'Generate the complete design report with all analyses, visualizations, and specifications.',
-      code: `import numpy as np
-import matplotlib.pyplot as plt
-
-# ============= COMPLETE LED DISPLAY DESIGNER REPORT =============
-
-# Design parameters
-VENUE = {'name': 'Bihu Festival Ground, Guwahati', 'width': 30, 'height': 20}
-T_AMBIENT = 38.0  # Assam summer
-HOURS_PER_DAY = 8
-DAYS_PER_FESTIVAL = 7
-COST_PER_KWH = 6.0  # INR
-
-# Zone specifications
-zones = [
-    {'name': 'Stage', 'n_led': 80, 'Ptotal': 52, 'lux': 800, 'area': 80},
-    {'name': 'Food Court', 'n_led': 40, 'Ptotal': 26, 'lux': 300, 'area': 48},
-    {'name': 'Crafts', 'n_led': 50, 'Ptotal': 32, 'lux': 400, 'area': 48},
-    {'name': 'Audience', 'n_led': 60, 'Ptotal': 38, 'lux': 100, 'area': 180},
-    {'name': 'Pathways', 'n_led': 30, 'Ptotal': 19, 'lux': 50, 'area': 98},
-]
-
-total_leds = sum(z['n_led'] for z in zones)
-total_power = sum(z['Ptotal'] for z in zones)
-total_energy_kwh = total_power / 1000 * HOURS_PER_DAY * DAYS_PER_FESTIVAL
-total_cost_energy = total_energy_kwh * COST_PER_KWH
-
-# Bill of materials
-bom = {
-    'RGB LEDs (WS2812B)': {'qty': total_leds, 'unit_cost': 15, 'unit': 'pcs'},
-    '24V PSU (200W)': {'qty': 1, 'unit_cost': 2500, 'unit': 'pcs'},
-    'LED driver modules': {'qty': 15, 'unit_cost': 150, 'unit': 'pcs'},
-    'Wire 2.5mm² (m)': {'qty': 200, 'unit_cost': 20, 'unit': 'm'},
-    'Wire 1.5mm² (m)': {'qty': 100, 'unit_cost': 15, 'unit': 'm'},
-    'GFCI/RCD 30mA': {'qty': 1, 'unit_cost': 1200, 'unit': 'pcs'},
-    'Fuse holders': {'qty': 5, 'unit_cost': 80, 'unit': 'pcs'},
-    'IP65 connectors': {'qty': 20, 'unit_cost': 50, 'unit': 'pcs'},
-    'Mounting hardware': {'qty': 1, 'unit_cost': 2000, 'unit': 'set'},
-    'Heatsink strips': {'qty': 10, 'unit_cost': 200, 'unit': 'pcs'},
+void setRGB(int r, int g, int b) {
+  analogWrite(LED_R, constrain(r, 0, 255));
+  analogWrite(LED_G, constrain(g, 0, 255));
+  analogWrite(LED_B, constrain(b, 0, 255));
 }
 
-fig = plt.figure(figsize=(16, 12))
-fig.patch.set_facecolor('#1f2937')
-fig.suptitle('LED DISPLAY DESIGNER — COMPLETE FESTIVAL LIGHTING REPORT',
-             color='white', fontsize=16, fontweight='bold', y=0.98)
+void loop() {
+  // --- Read sensor at 50 Hz ---
+  if (millis() - lastReadTime >= READ_INTERVAL_MS) {
+    lastReadTime = millis();
 
-gs = fig.add_gridspec(3, 3, hspace=0.35, wspace=0.3)
+    // Read and map LDR
+    ldrRaw = analogRead(LDR_PIN);
+    ldrMapped = map(constrain(ldrRaw, ldrMin, ldrMax), ldrMin, ldrMax, 0, 255);
 
-# Panel 1: Venue overview with LED positions
-ax1 = fig.add_subplot(gs[0, 0])
-ax1.set_facecolor('#111827')
-ax1.tick_params(colors='gray')
-zone_colors = ['#f59e0b', '#22c55e', '#3b82f6', '#a855f7', '#6b7280']
-zone_rects = [
-    (10, 7, 10, 8), (0, 0, 8, 6), (22, 0, 8, 6),
-    (0, 14, 30, 6), (8, 0, 14, 7)
-]
-for (x, y, w, h), col, z in zip(zone_rects, zone_colors, zones):
-    rect = plt.Rectangle((x, y), w, h, facecolor=col, alpha=0.2, edgecolor=col, linewidth=2)
-    ax1.add_patch(rect)
-    ax1.text(x+w/2, y+h/2, f"{z['name']}\\n{z['n_led']} LEDs", color='white',
-             fontsize=7, ha='center', va='center', fontweight='bold')
-ax1.set_xlim(-1, 31); ax1.set_ylim(-1, 21)
-ax1.set_aspect('equal')
-ax1.set_title('Venue Layout', color='white', fontsize=10)
+    // Read sensitivity pot (0-1023 -> 0.5-2.0)
+    int potVal = analogRead(POT_PIN);
+    sensitivity = 0.5 + (potVal / 1023.0) * 1.5;
 
-# Panel 2: Power breakdown pie chart
-ax2 = fig.add_subplot(gs[0, 1])
-ax2.set_facecolor('#111827')
-sizes = [z['Ptotal'] for z in zones]
-labels = [f"{z['name']}\\n{z['Ptotal']}W" for z in zones]
-ax2.pie(sizes, labels=labels, colors=zone_colors, autopct='%1.0f%%',
-        textprops={'color': 'white', 'fontsize': 8})
-ax2.set_title(f'Power distribution (total: {total_power}W)', color='white', fontsize=10)
+    // Apply sensitivity
+    int adjusted = constrain((int)(ldrMapped * sensitivity), 0, 255);
 
-# Panel 3: Key specifications
-ax3 = fig.add_subplot(gs[0, 2])
-ax3.set_facecolor('#111827')
-ax3.axis('off')
-specs = f"""DESIGN SPECIFICATIONS
-{'='*32}
-Venue: {VENUE['name']}
-Size:  {VENUE['width']}m x {VENUE['height']}m
+    // --- Mode 0: Auto Brightness (inverse: dark room = bright LEDs) ---
+    if (currentMode == 0) {
+      int brightness = 255 - adjusted;  // invert: dark = bright
+      setRGB(brightness, brightness, brightness);  // warm white
+    }
+  }
 
-LIGHTING
-{'='*32}
-Total LEDs:    {total_leds}
-Total power:   {total_power}W
-Supply:        24V DC
-Efficacy:      ~150 lm/W
+  // --- Button handling with debounce ---
+  bool reading = digitalRead(BUTTON_PIN);
+  if (reading != lastButtonState) {
+    lastDebounceTime = millis();
+  }
+  if (millis() - lastDebounceTime > DEBOUNCE_DELAY) {
+    if (reading == LOW && lastButtonState == HIGH) {
+      currentMode = (currentMode + 1) % NUM_MODES;
+      Serial.print(">MODE: ");
+      Serial.println(modeNames[currentMode]);
+    }
+  }
+  lastButtonState = reading;
 
-ENVIRONMENT
-{'='*32}
-Ambient:       {T_AMBIENT}°C
-Humidity:      70-95% RH
-Protection:    IP65
-Duration:      {DAYS_PER_FESTIVAL} days x {HOURS_PER_DAY}h
+  // --- Serial output at 5 Hz ---
+  if (millis() - lastPrintTime >= PRINT_INTERVAL_MS) {
+    lastPrintTime = millis();
+    Serial.print(ldrRaw);
+    Serial.print("\\t");
+    Serial.print(ldrMapped);
+    Serial.print("\\t");
+    Serial.print(sensitivity, 1);
+    Serial.print("\\t");
+    Serial.print(currentMode);
+    Serial.print("\\t");
+    // Read back actual PWM values would need tracking; print mapped instead
+    Serial.print(255 - ldrMapped);
+    Serial.print("\\t");
+    Serial.print(255 - ldrMapped);
+    Serial.print("\\t");
+    Serial.println(255 - ldrMapped);
+  }
+}
 
-ENERGY
-{'='*32}
-Festival total: {total_energy_kwh:.1f} kWh
-Cost:           ₹{total_cost_energy:.0f}"""
-ax3.text(0.05, 0.95, specs, transform=ax3.transAxes, fontsize=8, color='white',
-        fontfamily='monospace', verticalalignment='top')
+// Upload and open Serial Monitor at 115200.
+// Cover the LDR with your hand: LEDs should brighten.
+// Shine a flashlight on it: LEDs should dim.
+// Press the button: mode changes (modes 1-3 implemented in next lessons).`,
+      challenge: 'Add a second LDR on pin A2 positioned at a different angle. Compare the two readings to determine the direction of the brightest light source (left vs right). Use this to create a "sunflower" mode where the LED color shifts to indicate which side the light is coming from.',
+      successHint: 'You have the complete hardware interface working: the LDR reads ambient light, the potentiometer adjusts sensitivity, the button cycles modes, and the RGB LEDs respond. This is the sensory backbone of the installation. In the next lessons, you will build the processing intelligence: color mapping, state machines, and pattern generation.',
+    },
+    {
+      title: 'Analog Reading from LDR (Light-Dependent Resistor)',
+      concept: `The Arduino's ADC (Analog-to-Digital Converter) is the bridge between the continuous analog world and the discrete digital world your code operates in. Understanding its characteristics and limitations is essential for building reliable sensor systems.
 
-# Panel 4: Zone performance
-ax4 = fig.add_subplot(gs[1, 0])
-ax4.set_facecolor('#111827')
-ax4.tick_params(colors='gray')
-x = np.arange(len(zones))
-targets = [z['lux'] for z in zones]
-achieved = [z['lux'] * np.random.uniform(0.85, 1.1) for z in zones]  # simulated
-ax4.bar(x - 0.2, targets, 0.35, color='#f59e0b', alpha=0.8, label='Target')
-ax4.bar(x + 0.2, achieved, 0.35, color='#22c55e', alpha=0.8, label='Achieved')
-ax4.set_xticks(x)
-ax4.set_xticklabels([z['name'] for z in zones], color='white', fontsize=8)
-ax4.set_ylabel('Illuminance (lux)', color='white')
-ax4.set_title('Illumination performance', color='white', fontsize=10)
-ax4.legend(fontsize=8)
+The ATmega328P has a **10-bit successive approximation ADC** with 6 input channels (A0-A5). "10-bit" means it divides the 0-5V input range into 2^10 = 1024 steps. Each step = 5V / 1024 = 4.88 mV. When you call \`analogRead(A0)\`, the ADC takes approximately 112 microseconds to sample and convert the voltage.
 
-# Panel 5: Thermal summary
-ax5 = fig.add_subplot(gs[1, 1])
-ax5.set_facecolor('#111827')
-ax5.tick_params(colors='gray')
-T_j_zones = [T_AMBIENT + z['Ptotal']/z['n_led'] * 25 for z in zones]  # simplified
-lifetimes = [50000 * 2**((85 - tj)/10) / (365.25 * HOURS_PER_DAY) for tj in T_j_zones]
-ax5.bar([z['name'] for z in zones], T_j_zones, color=zone_colors, alpha=0.8)
-ax5.axhline(85, color='#ef4444', linewidth=2, linestyle='--', label='Max 85°C')
-for i, (tj, lt) in enumerate(zip(T_j_zones, lifetimes)):
-    ax5.text(i, tj+1, f'{tj:.0f}°C\\n{lt:.0f}yr', ha='center', color='white', fontsize=8)
-ax5.set_ylabel('Junction temperature (°C)', color='white')
-ax5.set_title('Thermal analysis', color='white', fontsize=10)
-ax5.legend(fontsize=8)
+But the ADC introduces **noise**. Even with a perfectly stable voltage, consecutive readings will fluctuate by +/-2 to +/-5 counts due to digital switching noise on the power supply, capacitive coupling from nearby digital pins, and the ADC's own quantization noise. For our LDR circuit, this means readings at a stable light level might bounce between, say, 510 and 518.
 
-# Panel 6: Bill of materials
-ax6 = fig.add_subplot(gs[1, 2])
-ax6.set_facecolor('#111827')
-ax6.axis('off')
-bom_text = "BILL OF MATERIALS\n" + "="*35 + "\n"
-total_cost = 0
-for item, info in bom.items():
-    cost = info['qty'] * info['unit_cost']
-    total_cost += cost
-    bom_text += f"{item[:22]:<22} {info['qty']:>4} {info['unit']:<4} ₹{cost:>6,}\n"
-bom_text += "-"*35 + "\n"
-bom_text += f"{'TOTAL':<28} ₹{total_cost:>6,}\n"
-bom_text += f"{'Energy cost':<28} ₹{total_cost_energy:>6,.0f}\n"
-bom_text += "-"*35 + "\n"
-bom_text += f"{'GRAND TOTAL':<28} ₹{total_cost+total_cost_energy:>6,.0f}"
-ax6.text(0.05, 0.95, bom_text, transform=ax6.transAxes, fontsize=8, color='white',
-        fontfamily='monospace', verticalalignment='top')
+We address this with **oversampling and averaging**: take multiple rapid readings and compute the mean. Taking 16 samples and averaging reduces noise by a factor of sqrt(16) = 4, effectively giving us 12-bit resolution (4 times finer). The cost is time: 16 * 112 us = ~1.8 ms per averaged reading, still fast enough for our 50 Hz update rate.
 
-# Panel 7: Timeline
-ax7 = fig.add_subplot(gs[2, :2])
-ax7.set_facecolor('#111827')
-ax7.tick_params(colors='gray')
-phases = ['Design\\n(1 day)', 'Procurement\\n(3 days)', 'Installation\\n(2 days)',
-          'Testing\\n(1 day)', 'Festival\\n(7 days)', 'Teardown\\n(1 day)']
-durations = [1, 3, 2, 1, 7, 1]
-starts = [0]
-for d in durations[:-1]:
-    starts.append(starts[-1] + d)
-phase_colors = ['#3b82f6', '#f59e0b', '#22c55e', '#a855f7', '#ef4444', '#6b7280']
-for i, (phase, dur, start, col) in enumerate(zip(phases, durations, starts, phase_colors)):
-    ax7.barh(0, dur, left=start, height=0.5, color=col, alpha=0.8)
-    ax7.text(start + dur/2, 0, phase, ha='center', va='center', color='white', fontsize=8)
-ax7.set_xlabel('Days', color='white')
-ax7.set_title('Project Timeline', color='white', fontsize=10)
-ax7.set_yticks([])
-ax7.set_xlim(-0.5, sum(durations) + 0.5)
+The LDR response is **logarithmic**: its resistance changes roughly as R = R0 * (Lux)^(-gamma), where gamma is about 0.7 for typical CdS cells. This means the voltage divider output compresses bright light into a narrow range at the top of the ADC and spreads dim light across a wide range at the bottom. For perceptually uniform brightness mapping, we can apply a log transform: \`mappedValue = log(rawValue)\`, which linearizes the perceived brightness response.
 
-# Panel 8: Final assessment
-ax8 = fig.add_subplot(gs[2, 2])
-ax8.set_facecolor('#111827')
-ax8.axis('off')
-assessment = f"""DESIGN ASSESSMENT
-{'='*30}
+We also need to handle the LDR's **response time**. Unlike a photodiode (nanosecond response), a CdS LDR takes 20-50 ms to respond to a brightness increase and 200-500 ms to respond to a decrease (going from bright to dark). This asymmetric response means our filtering must account for the sensor physics, not just electrical noise.`,
+      analogy: 'The ADC is like a ruler with 1024 tick marks between 0 and 5 volts. When you measure a voltage, you read off the nearest tick mark. But the ruler is slightly wobbly (noise), so you measure three times and take the average. The LDR is like a person whose eyes adjust to darkness slowly but adapt to brightness quickly — it "remembers" the dark for a while, so your readings lag behind reality when lights come on.',
+      storyConnection: 'The festival unfolds over hours — from bright afternoon to deep twilight. The light changes gradually, not in sudden jumps. Our oversampled, filtered ADC reading captures this gradual transition faithfully, just as a photographer adjusts exposure throughout a long time-lapse of the festival. Every fraction of a lux matters for smooth, responsive lighting.',
+      checkQuestion: 'Why does taking 16 ADC samples and averaging improve effective resolution from 10 bits to approximately 12 bits?',
+      checkAnswer: 'Oversampling works because the noise is random: some readings are above the true value, some below. Averaging N samples reduces random noise by a factor of sqrt(N). With N=16, noise drops by 4x. Since each "bit" of resolution halves the noise floor, reducing noise by 4x adds log2(4) = 2 extra bits of effective resolution: 10 + 2 = 12 bits. This only works if the noise is truly random and uncorrelated — which is approximately true for ADC quantization noise.',
+      codeIntro: 'Implement oversampled ADC reading with logarithmic mapping and adaptive filtering for the LDR.',
+      code: `// =============================================
+// LDR Analog Reading — Deep ADC Techniques
+// Oversampling, log mapping, adaptive filtering
+// =============================================
 
-Illumination:  PASS
-  All zones within 15% of target
+const int LDR_PIN = A0;
+const int LED_R = 9;
+const int LED_G = 10;
+const int LED_B = 11;
 
-Thermal:       PASS
-  Max Tj = {max(T_j_zones):.0f}°C < 85°C
+// --- Oversampling Configuration ---
+const int OVERSAMPLE_COUNT = 16;  // 16 samples -> ~12-bit effective resolution
+const int OVERSAMPLE_BITS = 2;    // extra bits gained: log2(sqrt(16)) = 2
 
-Safety:        PASS
-  IP65, GFCI, fused circuits
+// --- Calibration ---
+int ldrMin = 30;     // ADC value in near-darkness
+int ldrMax = 950;    // ADC value in bright light
 
-Reliability:   PASS
-  Min lifetime: {min(lifetimes):.0f} years
+// --- Adaptive filter ---
+// Different smoothing rates for brightening vs dimming
+// (matches LDR physics: fast response to light, slow to dark)
+float filteredValue = 0.0;
+const float ALPHA_BRIGHTEN = 0.3;  // fast: light increase
+const float ALPHA_DARKEN = 0.08;   // slow: light decrease (LDR lag)
+bool filterInit = false;
 
-Budget:        ₹{total_cost+total_cost_energy:,.0f}
-  Within typical festival budget
+// --- Noise statistics ---
+float noiseSum = 0.0;
+float noiseSumSq = 0.0;
+int noiseCount = 0;
 
-RECOMMENDATION:
-  Approved for installation.
+unsigned long lastReadTime = 0;
+unsigned long lastPrintTime = 0;
+const int READ_INTERVAL_MS = 20;
+const int PRINT_INTERVAL_MS = 200;
 
-CAPSTONE PROJECT COMPLETE
-Skills: LED physics, circuits,
-photometry, thermal, animation,
-optimization, reporting."""
-ax8.text(0.05, 0.95, assessment, transform=ax8.transAxes, fontsize=8, color='#22c55e',
-        fontfamily='monospace', verticalalignment='top')
+// --- Oversampled ADC read ---
+// Takes OVERSAMPLE_COUNT readings and returns the average
+// Result is in the 10-bit range (0-1023), but with reduced noise
+float readLDR_oversampled() {
+  long sum = 0;
+  for (int i = 0; i < OVERSAMPLE_COUNT; i++) {
+    sum += analogRead(LDR_PIN);
+    // Small delay between samples to allow ADC to settle
+    delayMicroseconds(50);
+  }
+  return (float)sum / OVERSAMPLE_COUNT;
+}
 
-plt.tight_layout()
-plt.show()
+// --- Logarithmic mapping ---
+// Converts ADC reading to perceptually-linear brightness (0-255)
+// Uses log mapping to compensate for LDR's logarithmic response
+int logMap(float rawValue, int inMin, int inMax) {
+  // Clamp input
+  if (rawValue < inMin) rawValue = inMin;
+  if (rawValue > inMax) rawValue = inMax;
 
-print("LED DISPLAY DESIGNER — REPORT COMPLETE")
-print("=" * 55)
-print(f"Venue: {VENUE['name']}")
-print(f"LEDs: {total_leds} | Power: {total_power}W | Cost: ₹{total_cost+total_cost_energy:,.0f}")
-print(f"All zones pass illumination, thermal, and safety checks.")
-print()
-print("CAPSTONE PROJECT COMPLETE")
-print("Skills demonstrated: LED physics, circuit design, photometry,")
-print("RGB color mixing, PWM control, thermal management, power")
-print("engineering, animation, optimization, and system integration.")`,
-      challenge: 'Extend the designer to include a cost optimizer: given a fixed budget, maximize the total festival experience (weighted combination of illumination quality, color variety, and animation complexity). Show the Pareto front of budget vs experience quality.',
-      successHint: 'You have built a complete LED Display Designer — from quantum physics of photon emission through circuit design, thermal management, and animation to a professional design report. This is real engineering: not a single formula, but an integrated system where physics, electronics, optics, and economics all connect.',
+  // Normalize to 0.0-1.0
+  float normalized = (rawValue - inMin) / (float)(inMax - inMin);
+
+  // Apply logarithmic curve (compensates LDR log response)
+  // log(1) = 0, log(e) = 1; we use a shifted log for 0-1 input
+  // mapped = log(1 + normalized * (e-1)) which gives 0 when norm=0, 1 when norm=1
+  float mapped = log(1.0 + normalized * (exp(1.0) - 1.0));
+
+  return (int)(mapped * 255);
+}
+
+// --- Adaptive exponential filter ---
+// Uses different alpha values for rising vs falling signals
+float adaptiveFilter(float newValue) {
+  if (!filterInit) {
+    filteredValue = newValue;
+    filterInit = true;
+    return filteredValue;
+  }
+
+  float alpha;
+  if (newValue > filteredValue) {
+    alpha = ALPHA_BRIGHTEN;  // light increasing: respond fast
+  } else {
+    alpha = ALPHA_DARKEN;    // light decreasing: respond slowly (like LDR)
+  }
+
+  filteredValue = alpha * newValue + (1.0 - alpha) * filteredValue;
+  return filteredValue;
+}
+
+// --- Track noise level ---
+void trackNoise(float rawValue) {
+  noiseSum += rawValue;
+  noiseSumSq += rawValue * rawValue;
+  noiseCount++;
+}
+
+float getNoiseStdDev() {
+  if (noiseCount < 2) return 0.0;
+  float mean = noiseSum / noiseCount;
+  float variance = (noiseSumSq / noiseCount) - (mean * mean);
+  if (variance < 0) variance = 0;  // numerical protection
+  return sqrt(variance);
+}
+
+void setup() {
+  Serial.begin(115200);
+  Serial.println("=== LDR Analog Reading — ADC Deep Dive ===");
+  Serial.println("Oversampling: 16x | Mapping: logarithmic | Filter: adaptive");
+  Serial.println();
+
+  pinMode(LED_R, OUTPUT);
+  pinMode(LED_G, OUTPUT);
+  pinMode(LED_B, OUTPUT);
+
+  // Demonstrate raw vs oversampled noise
+  Serial.println("--- Noise Comparison (sensor held still) ---");
+  Serial.println("10 raw readings vs 10 oversampled readings:");
+  Serial.print("  Raw:         ");
+  for (int i = 0; i < 10; i++) {
+    Serial.print(analogRead(LDR_PIN));
+    if (i < 9) Serial.print(", ");
+    delay(5);
+  }
+  Serial.println();
+
+  Serial.print("  Oversampled: ");
+  for (int i = 0; i < 10; i++) {
+    Serial.print(readLDR_oversampled(), 1);
+    if (i < 9) Serial.print(", ");
+  }
+  Serial.println();
+  Serial.println("  (Oversampled values should have tighter spread)");
+  Serial.println();
+
+  // Show log mapping curve
+  Serial.println("--- Log Mapping Curve ---");
+  Serial.println("  ADC -> Linear -> Log-mapped");
+  int testPoints[] = {50, 200, 400, 600, 800, 950};
+  for (int i = 0; i < 6; i++) {
+    int linear = map(testPoints[i], ldrMin, ldrMax, 0, 255);
+    int logged = logMap(testPoints[i], ldrMin, ldrMax);
+    Serial.print("  ");
+    Serial.print(testPoints[i]);
+    Serial.print("\\t-> ");
+    Serial.print(linear);
+    Serial.print("\\t-> ");
+    Serial.println(logged);
+  }
+  Serial.println("  (Log mapping spreads out the dark end for better sensitivity)");
+  Serial.println();
+
+  Serial.println("raw\\toversampled\\tfiltered\\tlog_mapped\\tnoise_sd");
+  lastReadTime = millis();
+  lastPrintTime = millis();
+}
+
+void loop() {
+  if (millis() - lastReadTime >= READ_INTERVAL_MS) {
+    lastReadTime = millis();
+
+    // Step 1: Oversampled reading (reduces ADC noise)
+    float oversampled = readLDR_oversampled();
+
+    // Track noise statistics
+    trackNoise(oversampled);
+
+    // Step 2: Adaptive filter (smooths temporal variation)
+    float filtered = adaptiveFilter(oversampled);
+
+    // Step 3: Logarithmic mapping (perceptually linear 0-255)
+    int mapped = logMap(filtered, ldrMin, ldrMax);
+
+    // Step 4: Apply to LEDs (inverted: dark room = bright LEDs)
+    int brightness = 255 - mapped;
+    analogWrite(LED_R, brightness);
+    analogWrite(LED_G, brightness);
+    analogWrite(LED_B, brightness);
+  }
+
+  // Serial output at 5 Hz
+  if (millis() - lastPrintTime >= PRINT_INTERVAL_MS) {
+    lastPrintTime = millis();
+    int rawSingle = analogRead(LDR_PIN);
+    float oversampled = readLDR_oversampled();
+    int mapped = logMap(filteredValue, ldrMin, ldrMax);
+
+    Serial.print(rawSingle);
+    Serial.print("\\t");
+    Serial.print(oversampled, 1);
+    Serial.print("\\t");
+    Serial.print(filteredValue, 1);
+    Serial.print("\\t");
+    Serial.print(mapped);
+    Serial.print("\\t");
+    Serial.println(getNoiseStdDev(), 2);
+
+    // Reset noise tracking every 50 readings (10 seconds)
+    if (noiseCount >= 50) {
+      noiseSum = 0; noiseSumSq = 0; noiseCount = 0;
+    }
+  }
+}
+
+// Open Serial Plotter: you will see 4 lines:
+// - raw (jittery), oversampled (less jittery), filtered (smooth), mapped (smooth + remapped)
+// Cover the LDR slowly: the filtered line should follow smoothly.
+// Flash a light quickly: the filtered line responds faster (adaptive alpha).`,
+      challenge: 'Implement auto-calibration: continuously track the minimum and maximum ADC readings over a rolling 60-second window, and use those as the mapping endpoints. This means the installation self-adjusts to any venue without manual calibration. Add a Serial command "CAL" that prints the current auto-calibrated range.',
+      successHint: 'You now understand the full analog signal chain: from photons hitting the CdS semiconductor, through the voltage divider, into the ADC, through oversampling and filtering, to a perceptually-linear brightness value. Each stage addresses a specific problem — noise, nonlinearity, temporal lag — and together they transform a noisy analog world into clean digital data.',
+    },
+    {
+      title: 'Mapping Sensor Values to LED Patterns',
+      concept: `The Arduino \`map()\` function is the workhorse of sensor-to-output conversion: \`map(value, fromLow, fromHigh, toLow, toHigh)\` performs linear interpolation. But for creative LED patterns, linear mapping is just the beginning.
+
+We need to map a single sensor value (ambient light level, 0-255) into a **three-dimensional color space** (R, G, B, each 0-255). This is where the art of lighting design meets programming.
+
+**Color temperature mapping**: Real-world light has color temperature measured in Kelvin. Candles are ~1800K (warm orange), daylight is ~5500K (neutral white), and overcast sky is ~7000K (cool blue). We can map our LDR reading to simulate this natural progression: dark environment = warm orange (like indoor candlelight), bright environment = cool blue-white (like outdoor daylight). The RGB values for color temperature follow well-known formulas.
+
+**HSV color space**: Instead of thinking in R/G/B, it is often easier to work in **Hue-Saturation-Value (HSV)**. Hue is the color (0-360 degrees: red-yellow-green-cyan-blue-magenta). Saturation is the color intensity (0=gray, 100=vivid). Value is brightness (0=black, 100=full). We can map the LDR to hue (creating a rainbow response) while keeping saturation and value fixed.
+
+The HSV-to-RGB conversion is a standard algorithm involving six sectors of the color wheel. We implement it as a function that takes H (0-360), S (0-255), V (0-255) and returns R, G, B values. This is the same conversion used in every LED strip controller, stage lighting desk, and graphics program.
+
+**Pattern blending**: For smooth transitions between modes, we use **linear interpolation (lerp)** between two color states: \`result = colorA * (1-t) + colorB * t\`, where t transitions from 0.0 to 1.0 over time. This prevents jarring color jumps when the light level crosses a threshold.`,
+      analogy: 'Mapping sensor values to colors is like a DJ mixing music. The DJ has one slider (the sensor reading) but controls multiple channels — bass, treble, volume, effects. Moving the slider smoothly changes the mix. Our map() function is the simplest mixer: one slider to one channel. HSV is like a professional mixing board with separate knobs for which instrument (hue), how loud (value), and how much reverb (saturation).',
+      storyConnection: 'Festival lighting is never a single color — it is a composition that shifts with the mood of the evening. The warm glow of oil lamps at dusk, the vivid colors of electric garlands at midnight, the soft dawn light as the festival winds down. Our color mapping recreates this progression automatically, letting the ambient light tell the installation what mood to express.',
+      checkQuestion: 'Why is HSV color space easier to work with than RGB for lighting effects?',
+      checkAnswer: 'HSV separates the three perceptual dimensions of color: what color (hue), how vivid (saturation), and how bright (value). To create a rainbow, you just sweep hue from 0 to 360 while holding S and V constant. In RGB, the same rainbow requires coordinated changes to all three channels following complex sine-wave relationships. Similarly, to dim a color without changing its hue, you just reduce V in HSV — but in RGB you must scale all three channels proportionally while being careful about rounding errors.',
+      codeIntro: 'Implement HSV-to-RGB conversion and multiple color mapping modes driven by the LDR sensor.',
+      code: `// =============================================
+// Sensor-to-LED Pattern Mapping
+// HSV color space, color temperature, rainbow cycle
+// =============================================
+
+const int LDR_PIN = A0;
+const int POT_PIN = A1;
+const int BUTTON_PIN = 2;
+const int LED_R = 9;
+const int LED_G = 10;
+const int LED_B = 11;
+
+// --- HSV to RGB conversion ---
+// H: 0-360 (degrees), S: 0-255, V: 0-255
+// Returns R, G, B via pointers (0-255 each)
+void hsvToRgb(int h, int s, int v, int* r, int* g, int* b) {
+  // Normalize H to 0-360
+  h = h % 360;
+  if (h < 0) h += 360;
+
+  int region = h / 60;
+  int remainder = (h % 60) * 255 / 60;
+
+  int p = (v * (255 - s)) / 255;
+  int q = (v * (255 - (s * remainder) / 255)) / 255;
+  int t = (v * (255 - (s * (255 - remainder)) / 255)) / 255;
+
+  switch (region) {
+    case 0:  *r = v; *g = t; *b = p; break;
+    case 1:  *r = q; *g = v; *b = p; break;
+    case 2:  *r = p; *g = v; *b = t; break;
+    case 3:  *r = p; *g = q; *b = v; break;
+    case 4:  *r = t; *g = p; *b = v; break;
+    default: *r = v; *g = p; *b = q; break;
+  }
+}
+
+// --- Color Temperature Mapping ---
+// Maps a value 0-255 (dark to bright) to warm-to-cool white
+// Approximation of blackbody radiation colors
+void colorTemperature(int level, int* r, int* g, int* b) {
+  // level 0 (dark room) = warm candle (255, 147, 41)
+  // level 128 (medium)  = neutral white (255, 244, 229)
+  // level 255 (bright)  = cool daylight (201, 226, 255)
+
+  if (level < 128) {
+    float t = level / 128.0;
+    *r = 255;
+    *g = 147 + (int)(t * (244 - 147));
+    *b = 41  + (int)(t * (229 - 41));
+  } else {
+    float t = (level - 128) / 127.0;
+    *r = 255 - (int)(t * (255 - 201));
+    *g = 244 - (int)(t * (244 - 226));
+    *b = 229 + (int)(t * (255 - 229));
+  }
+}
+
+// --- Lerp (linear interpolation) for smooth transitions ---
+int lerpColor(int a, int b, float t) {
+  return a + (int)((b - a) * t);
+}
+
+// --- State ---
+int currentMode = 0;
+const int NUM_MODES = 4;
+float filteredLDR = 0.0;
+bool filterInit = false;
+unsigned long cycleOffset = 0;  // for rainbow timing
+
+// Button debounce
+bool lastBtn = HIGH;
+unsigned long lastDebounce = 0;
+
+unsigned long lastRead = 0;
+unsigned long lastPrint = 0;
+
+void setup() {
+  Serial.begin(115200);
+  Serial.println("=== Sensor-to-LED Pattern Mapping ===");
+  Serial.println("4 modes: Auto | ColorTemp | Pulse | Rainbow");
+  Serial.println();
+
+  pinMode(LED_R, OUTPUT);
+  pinMode(LED_G, OUTPUT);
+  pinMode(LED_B, OUTPUT);
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
+
+  // Demo: show color temperature gradient
+  Serial.println("Color temperature gradient (dark to bright):");
+  for (int i = 0; i <= 255; i += 32) {
+    int r, g, b;
+    colorTemperature(i, &r, &g, &b);
+    Serial.print("  level=");
+    Serial.print(i);
+    Serial.print(" -> RGB(");
+    Serial.print(r);
+    Serial.print(",");
+    Serial.print(g);
+    Serial.print(",");
+    Serial.print(b);
+    Serial.println(")");
+  }
+  Serial.println();
+
+  Serial.println("mode\\tldr\\tR\\tG\\tB\\thue");
+  lastRead = millis();
+  lastPrint = millis();
+  cycleOffset = millis();
+}
+
+void setRGB(int r, int g, int b) {
+  analogWrite(LED_R, constrain(r, 0, 255));
+  analogWrite(LED_G, constrain(g, 0, 255));
+  analogWrite(LED_B, constrain(b, 0, 255));
+}
+
+int outR = 0, outG = 0, outB = 0;
+int currentHue = 0;
+
+void loop() {
+  // --- Sensor reading at 50 Hz ---
+  if (millis() - lastRead >= 20) {
+    lastRead = millis();
+
+    // Oversampled LDR
+    long sum = 0;
+    for (int i = 0; i < 8; i++) sum += analogRead(LDR_PIN);
+    float raw = sum / 8.0;
+
+    // Adaptive filter
+    float alpha = (raw > filteredLDR) ? 0.3 : 0.08;
+    if (!filterInit) { filteredLDR = raw; filterInit = true; }
+    else { filteredLDR = alpha * raw + (1.0 - alpha) * filteredLDR; }
+
+    int level = map(constrain((int)filteredLDR, 50, 900), 50, 900, 0, 255);
+
+    // --- Mode 0: Auto Brightness (warm white, brightness follows light) ---
+    if (currentMode == 0) {
+      int brightness = 255 - level;
+      outR = brightness;
+      outG = (brightness * 200) / 255;  // slight warm tint
+      outB = (brightness * 150) / 255;
+    }
+
+    // --- Mode 1: Color Temperature ---
+    else if (currentMode == 1) {
+      colorTemperature(level, &outR, &outG, &outB);
+      // Scale brightness inversely with ambient light
+      int scale = 255 - level / 2;  // never fully dark
+      outR = (outR * scale) / 255;
+      outG = (outG * scale) / 255;
+      outB = (outB * scale) / 255;
+    }
+
+    // --- Mode 2: Breathing Pulse (rate follows ambient light) ---
+    else if (currentMode == 2) {
+      // Pulse period: dark = slow (3s), bright = fast (0.5s)
+      float period = 0.5 + (level / 255.0) * 2.5;  // 0.5 to 3.0 seconds
+      float t = fmod((millis() - cycleOffset) / 1000.0, period) / period;
+      float breathe = (1.0 + cos(t * TWO_PI)) / 2.0;
+
+      int brightness = (int)(breathe * (255 - level / 2));
+      outR = brightness;
+      outG = (brightness * 180) / 255;
+      outB = (brightness * 100) / 255;
+    }
+
+    // --- Mode 3: Rainbow Cycle (speed follows ambient light) ---
+    else if (currentMode == 3) {
+      // Cycle speed: dark = slow (10s per revolution), bright = fast (1s)
+      float cyclePeriod = 1.0 + ((255 - level) / 255.0) * 9.0;
+      float elapsed = (millis() - cycleOffset) / 1000.0;
+      currentHue = (int)(fmod(elapsed / cyclePeriod, 1.0) * 360);
+
+      int brightness = 255 - level / 3;  // dim slightly in bright light
+      hsvToRgb(currentHue, 255, brightness, &outR, &outG, &outB);
+    }
+
+    setRGB(outR, outG, outB);
+  }
+
+  // --- Button ---
+  bool btn = digitalRead(BUTTON_PIN);
+  if (btn != lastBtn) lastDebounce = millis();
+  if (millis() - lastDebounce > 50 && btn == LOW && lastBtn == HIGH) {
+    currentMode = (currentMode + 1) % NUM_MODES;
+    cycleOffset = millis();
+    Serial.print(">MODE ");
+    Serial.println(currentMode);
+  }
+  lastBtn = btn;
+
+  // --- Serial output ---
+  if (millis() - lastPrint >= 200) {
+    lastPrint = millis();
+    Serial.print(currentMode);
+    Serial.print("\\t");
+    Serial.print((int)filteredLDR);
+    Serial.print("\\t");
+    Serial.print(outR);
+    Serial.print("\\t");
+    Serial.print(outG);
+    Serial.print("\\t");
+    Serial.print(outB);
+    Serial.print("\\t");
+    Serial.println(currentHue);
+  }
+}
+
+// Press button to cycle through modes:
+// Mode 0: Warm white, brightness tracks darkness
+// Mode 1: Color temperature shifts warm-to-cool with light
+// Mode 2: Breathing pulse, speed changes with ambient light
+// Mode 3: Rainbow cycle, hue rotates, speed follows light`,
+      challenge: 'Add a "fire" mode: use random flickering between orange and red tones, with the flicker intensity controlled by the LDR (more ambient light = calmer fire, darkness = wild flickering). Use random() with constrained ranges for each RGB channel to create realistic candle simulation.',
+      successHint: 'You can now map a single sensor value into an infinite variety of lighting effects. The HSV color space gives you independent control over hue, saturation, and brightness. The color temperature function recreates the natural light progression of a festival evening. And the pattern modes demonstrate that the same sensor data can drive completely different visual experiences depending on how you map it.',
+    },
+    {
+      title: 'State Machine for Different Lighting Modes',
+      concept: `A **finite state machine (FSM)** is one of the most powerful patterns in embedded programming. Instead of tangled if/else chains, you define **states** (what the system is doing), **transitions** (what causes a change), and **actions** (what happens in each state and during transitions).
+
+Our festival light installation has four primary states: **AMBIENT** (normal light-responsive mode), **ALERT** (rapid change detected — flash response), **PARTY** (manual override — fast color cycling), and **SLEEP** (low power — minimal glow). The transitions between states are triggered by sensor events and user input.
+
+We implement the FSM with an enum for states, a struct for transition rules, and a \`switch\` statement in the main loop that dispatches to the current state's update function. Each state has:
+
+- **entry action**: runs once when entering the state (e.g., print status, set initial color)
+- **update action**: runs every loop iteration while in the state (e.g., update LEDs)
+- **exit action**: runs once when leaving the state (e.g., save settings)
+- **transition conditions**: checked every iteration (e.g., "if LDR drops below 100 for 2 seconds, go to SLEEP")
+
+The FSM pattern prevents a common Arduino bug: **state tangling**, where a \`delay()\` in one mode blocks the button handler, or a flag from one mode is accidentally read by another. With a proper FSM, each state is self-contained. The button handler always works because it is outside the state logic. Transitions are explicit and traceable.
+
+We also add **timed transitions**: the ALERT state automatically returns to AMBIENT after 3 seconds (a flash response should not last forever). The PARTY state has a 60-second timeout to prevent leaving the installation in override mode. These timeouts use \`millis()\` comparisons, not \`delay()\`, so the LEDs keep updating smoothly.`,
+      analogy: 'A traffic light is a state machine. It has three states (GREEN, YELLOW, RED), with timed transitions between them. The light does not "think about" all three states simultaneously — it is always in exactly one state, doing that state action (showing that color). When the timer expires, it transitions to the next state. Our lighting installation is a more complex traffic light: more states, more transition triggers, but the same clean, predictable structure.',
+      storyConnection: 'A festival has distinct phases: preparation (setting up lights during the day), opening (the moment of first illumination at dusk), celebration (the vibrant heart of the evening), and closing (the gradual dimming at dawn). Our state machine mirrors these phases: SLEEP during the day, AMBIENT at dusk, ALERT when the crowd surges, PARTY at the peak of celebration. The installation lives the festival rhythm.',
+      checkQuestion: 'Why is a state machine better than nested if/else statements for managing multiple modes?',
+      checkAnswer: 'Nested if/else statements create "spaghetti code" where the logic for one mode leaks into another through shared variables and conditions. Adding a new mode means modifying every branch. A state machine isolates each mode: its logic, its variables, and its transitions are self-contained. Adding a new state means adding one new case to the switch, one entry/exit pair, and defining its transitions. The rest of the code is untouched. This modularity is why FSMs are used in everything from elevator controllers to video game AI.',
+      codeIntro: 'Implement a full state machine with four states, timed and event-triggered transitions, and per-state LED behavior.',
+      code: `// =============================================
+// Festival Lights — State Machine Controller
+// 4 states with entry/update/exit actions and timed transitions
+// =============================================
+
+const int LDR_PIN = A0;
+const int BUTTON_PIN = 2;
+const int LED_R = 9;
+const int LED_G = 10;
+const int LED_B = 11;
+
+// --- State Definitions ---
+enum LightState {
+  STATE_AMBIENT,   // Normal: light-responsive display
+  STATE_ALERT,     // Rapid light change detected: flash response
+  STATE_PARTY,     // Manual override: fast rainbow cycling
+  STATE_SLEEP      // Low power: dim warm glow
+};
+
+const char* stateNames[] = {"AMBIENT", "ALERT", "PARTY", "SLEEP"};
+
+LightState currentState = STATE_AMBIENT;
+LightState previousState = STATE_AMBIENT;
+unsigned long stateEnteredAt = 0;
+
+// --- Transition Timeouts ---
+const unsigned long ALERT_TIMEOUT_MS = 3000;    // auto-return to AMBIENT
+const unsigned long PARTY_TIMEOUT_MS = 60000;   // 60s max in party mode
+const unsigned long SLEEP_LIGHT_THRESHOLD = 800; // ADC value for "bright enough to sleep"
+const unsigned long SLEEP_DARK_THRESHOLD = 200;  // ADC value for "dark enough to wake"
+
+// --- Sensor State ---
+float filteredLDR = 500.0;
+float prevFilteredLDR = 500.0;
+const float LDR_CHANGE_THRESHOLD = 150.0;  // sudden change triggers ALERT
+
+// --- HSV helper ---
+void hsvToRgb(int h, int s, int v, int* r, int* g, int* b) {
+  h = h % 360;
+  int region = h / 60;
+  int rem = (h % 60) * 255 / 60;
+  int p = (v * (255 - s)) / 255;
+  int q = (v * (255 - (s * rem) / 255)) / 255;
+  int t = (v * (255 - (s * (255 - rem)) / 255)) / 255;
+  switch (region) {
+    case 0:  *r = v; *g = t; *b = p; break;
+    case 1:  *r = q; *g = v; *b = p; break;
+    case 2:  *r = p; *g = v; *b = t; break;
+    case 3:  *r = p; *g = q; *b = v; break;
+    case 4:  *r = t; *g = p; *b = v; break;
+    default: *r = v; *g = p; *b = q; break;
+  }
+}
+
+void setRGB(int r, int g, int b) {
+  analogWrite(LED_R, constrain(r, 0, 255));
+  analogWrite(LED_G, constrain(g, 0, 255));
+  analogWrite(LED_B, constrain(b, 0, 255));
+}
+
+// --- State Transition ---
+void transitionTo(LightState newState) {
+  if (newState == currentState) return;
+
+  // Exit action for current state
+  Serial.print("[EXIT ");
+  Serial.print(stateNames[currentState]);
+  Serial.print("] after ");
+  Serial.print((millis() - stateEnteredAt) / 1000.0, 1);
+  Serial.println("s");
+
+  previousState = currentState;
+  currentState = newState;
+  stateEnteredAt = millis();
+
+  // Entry action for new state
+  Serial.print("[ENTER ");
+  Serial.print(stateNames[currentState]);
+  Serial.println("]");
+
+  switch (currentState) {
+    case STATE_AMBIENT:
+      // Smooth fade to current ambient level
+      break;
+    case STATE_ALERT:
+      // Flash white briefly on entry
+      setRGB(255, 255, 255);
+      break;
+    case STATE_PARTY:
+      Serial.println("  Party mode! 60s timeout.");
+      break;
+    case STATE_SLEEP:
+      Serial.println("  Sleep mode. Bright light or button to wake.");
+      setRGB(20, 10, 0);  // dim warm glow
+      break;
+  }
+}
+
+// --- Button ---
+bool lastBtn = HIGH;
+unsigned long lastDebounce = 0;
+bool buttonPressed = false;
+
+void checkButton() {
+  bool btn = digitalRead(BUTTON_PIN);
+  if (btn != lastBtn) lastDebounce = millis();
+  buttonPressed = false;
+  if (millis() - lastDebounce > 50 && btn == LOW && lastBtn == HIGH) {
+    buttonPressed = true;
+  }
+  lastBtn = btn;
+}
+
+// --- Per-state update functions ---
+void updateAmbient() {
+  int level = map(constrain((int)filteredLDR, 50, 900), 50, 900, 0, 255);
+  int brightness = 255 - level;
+
+  // Warm white responsive to ambient light
+  setRGB(brightness, (brightness * 200) / 255, (brightness * 140) / 255);
+
+  // Transition: sudden light change -> ALERT
+  if (abs(filteredLDR - prevFilteredLDR) > LDR_CHANGE_THRESHOLD) {
+    transitionTo(STATE_ALERT);
+    return;
+  }
+
+  // Transition: very bright (daytime) for 10s -> SLEEP
+  if (filteredLDR > SLEEP_LIGHT_THRESHOLD &&
+      millis() - stateEnteredAt > 10000) {
+    transitionTo(STATE_SLEEP);
+    return;
+  }
+
+  // Transition: button -> PARTY
+  if (buttonPressed) {
+    transitionTo(STATE_PARTY);
+  }
+}
+
+void updateAlert() {
+  // Rapid pulsing white/color for attention
+  unsigned long elapsed = millis() - stateEnteredAt;
+  float t = (elapsed % 200) / 200.0;  // 5 Hz pulse
+  int pulse = (int)((1.0 + cos(t * TWO_PI)) / 2.0 * 255);
+  setRGB(pulse, pulse, pulse);
+
+  // Auto-return to AMBIENT after timeout
+  if (elapsed > ALERT_TIMEOUT_MS) {
+    transitionTo(STATE_AMBIENT);
+    return;
+  }
+
+  // Button skips back to AMBIENT immediately
+  if (buttonPressed) {
+    transitionTo(STATE_AMBIENT);
+  }
+}
+
+void updateParty() {
+  // Fast rainbow cycling
+  unsigned long elapsed = millis() - stateEnteredAt;
+  int hue = (int)((elapsed / 5) % 360);  // full cycle every 1.8 seconds
+  int r, g, b;
+  hsvToRgb(hue, 255, 255, &r, &g, &b);
+  setRGB(r, g, b);
+
+  // Timeout -> return to AMBIENT
+  if (elapsed > PARTY_TIMEOUT_MS) {
+    transitionTo(STATE_AMBIENT);
+    return;
+  }
+
+  // Button -> back to AMBIENT
+  if (buttonPressed) {
+    transitionTo(STATE_AMBIENT);
+  }
+}
+
+void updateSleep() {
+  // Minimal warm glow, very low power
+  float t = (millis() % 4000) / 4000.0;  // very slow breathe (4s period)
+  int glow = 10 + (int)((1.0 + cos(t * TWO_PI)) / 2.0 * 15);  // 10-25 range
+  setRGB(glow, glow / 2, 0);
+
+  // Wake on darkness (someone turned off the lights = festival starting)
+  if (filteredLDR < SLEEP_DARK_THRESHOLD) {
+    transitionTo(STATE_AMBIENT);
+    return;
+  }
+
+  // Button -> wake to AMBIENT
+  if (buttonPressed) {
+    transitionTo(STATE_AMBIENT);
+  }
+}
+
+// --- Timing ---
+unsigned long lastRead = 0;
+unsigned long lastPrint = 0;
+
+void setup() {
+  Serial.begin(115200);
+  Serial.println("=== Festival Light State Machine ===");
+  Serial.println("States: AMBIENT | ALERT | PARTY | SLEEP");
+  Serial.println();
+
+  pinMode(LED_R, OUTPUT);
+  pinMode(LED_G, OUTPUT);
+  pinMode(LED_B, OUTPUT);
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
+
+  stateEnteredAt = millis();
+  lastRead = millis();
+  lastPrint = millis();
+
+  Serial.println("[ENTER AMBIENT]");
+  Serial.println("state\\tldr\\telapsed_s");
+}
+
+void loop() {
+  // Sensor reading at 50 Hz
+  if (millis() - lastRead >= 20) {
+    lastRead = millis();
+
+    long sum = 0;
+    for (int i = 0; i < 8; i++) sum += analogRead(LDR_PIN);
+    float raw = sum / 8.0;
+
+    prevFilteredLDR = filteredLDR;
+    float alpha = (raw > filteredLDR) ? 0.2 : 0.05;
+    filteredLDR = alpha * raw + (1.0 - alpha) * filteredLDR;
+  }
+
+  // Button check
+  checkButton();
+
+  // State machine dispatch
+  switch (currentState) {
+    case STATE_AMBIENT: updateAmbient(); break;
+    case STATE_ALERT:   updateAlert();   break;
+    case STATE_PARTY:   updateParty();   break;
+    case STATE_SLEEP:   updateSleep();   break;
+  }
+
+  // Serial output at 5 Hz
+  if (millis() - lastPrint >= 200) {
+    lastPrint = millis();
+    Serial.print(stateNames[currentState]);
+    Serial.print("\\t");
+    Serial.print((int)filteredLDR);
+    Serial.print("\\t");
+    Serial.println((millis() - stateEnteredAt) / 1000.0, 1);
+  }
+}
+
+// Watch state transitions in Serial Monitor:
+// - Cover/uncover LDR quickly -> ALERT (3s flash, auto-returns)
+// - Press button -> PARTY (60s rainbow, button returns early)
+// - Leave in bright light 10s -> SLEEP (wakes on darkness or button)
+// Each transition is logged with entry/exit timestamps.`,
+      challenge: 'Add a SUNRISE state that activates at a specific time (configurable via Serial command). The SUNRISE state slowly ramps from deep red to warm orange to full white over 5 minutes, simulating a dawn wake-up light. Add a simple clock using millis() and a "SET HH:MM" serial command to set the current time.',
+      successHint: 'The state machine makes the installation behavior predictable, debuggable, and extensible. Each state is isolated — you can modify PARTY mode without touching AMBIENT. Transitions are explicit and logged. Timeouts prevent stuck states. This FSM pattern is the same one used in industrial PLCs, traffic light controllers, and spacecraft mission sequencers.',
+    },
+    {
+      title: 'Documentation and Installation Guide',
+      concept: `A festival light installation is not a lab experiment — it goes into a real venue, is handled by non-engineers, and must work reliably for hours without supervision. The documentation must address three realities: **setup** (getting it working at the venue), **operation** (how staff interact with it), and **failure recovery** (what to do when something goes wrong at 9 PM with a hundred people watching).
+
+The installation guide differs from lab documentation in important ways. Lab docs assume the reader is a fellow engineer with a bench, tools, and time. Installation docs assume the reader is a festival volunteer with a screwdriver, a flashlight, and ten minutes before the crowd arrives.
+
+We write the guide at three levels of detail:
+
+**Quick Start** (1 page): For the person who just needs it working. Power on, verify LED self-test, aim LDR toward the festival area, press button to select mode. Done.
+
+**Setup Guide** (3 pages): For the person installing it. Mounting the Arduino enclosure, routing wires to the LED strip, positioning the LDR, connecting the power supply, waterproofing for outdoor use, and running the calibration routine.
+
+**Technical Reference** (5 pages): For the person who needs to modify or repair it. Complete circuit description, code architecture, state machine diagram, calibration procedures, component specifications, and replacement instructions.
+
+We also write a **pre-event checklist**: a numbered list of tests to run before the festival opens. Self-test passes? Check. LDR responding to light changes? Check. Button cycling modes? Check. Buzzer/speaker working? Check. Power supply warm but not hot? Check. Backup Arduino and LED strip on hand? Check. This checklist is the difference between a smooth opening and a panicked scramble.`,
+      analogy: 'An installation guide is like the safety card in an airplane seat pocket. It must work for everyone — engineers, artists, volunteers, people who do not speak the language fluently. It uses pictures, numbered steps, and clear warnings. It covers normal operation ("how to adjust your seat") and emergencies ("if the lights stop working"). Our guide follows the same principles: clarity, brevity, and coverage of what to do when things go wrong.',
+      storyConnection: 'Festival traditions survive because the knowledge of how to organize them is carefully passed down. Who hangs the lanterns? Where do the oil lamps go? How do you keep them lit in the wind? Our installation guide is the modern equivalent of that oral tradition — a written record that ensures the light display can be set up, operated, and maintained by anyone, year after year.',
+      checkQuestion: 'Why do we include a "failure recovery" section in installation documentation for a simple LED project?',
+      checkAnswer: 'Because failures happen at the worst possible time — during the festival, in the dark, with an audience. A loose wire, a drained battery, a corrupted upload. Without a troubleshooting guide, the installer is helpless. With one, they can diagnose and fix the most common issues in minutes: "LEDs not responding? Check the data wire connection at pin 11. Still nothing? Swap to the backup Arduino." The troubleshooting section is often the most-used part of any installation guide.',
+      codeIntro: 'Create the complete capstone sketch with full documentation header, self-test, state machine, and all subsystems integrated.',
+      code: `// =============================================================
+// FESTIVAL LIGHT INSTALLATION — CAPSTONE PROJECT
+// =============================================================
+//
+// PROJECT: Light-Responsive LED Installation for Festival Venues
+// PLATFORM: Arduino Uno (ATmega328P, 16 MHz)
+// AUTHOR: [Your Name]
+// DATE: [Date]
+// LICENSE: MIT
+//
+// OVERVIEW:
+//   An ambient-responsive LED installation that senses environmental
+//   light via an LDR and automatically adjusts its display. Four
+//   modes: AMBIENT (auto-brightness), ALERT (flash response),
+//   PARTY (rainbow cycling), and SLEEP (low power). Designed for
+//   unattended operation at festival venues.
+//
+// BILL OF MATERIALS:
+//   1x  Arduino Uno (or Nano)                    ~$5-8
+//   1x  LDR (CdS photoresistor, 1k-100k range)  ~$0.20
+//   1x  10k ohm resistor (for LDR voltage divider) ~$0.05
+//   3x  LEDs (red, green, blue; 5mm, 20mA)      ~$0.30
+//   3x  220 ohm resistors (for LEDs)             ~$0.10
+//   1x  10k potentiometer (sensitivity control)   ~$0.50
+//   1x  Tactile pushbutton                        ~$0.10
+//   1x  Breadboard or perfboard                   ~$2
+//   ~20 Jumper wires                              ~$1
+//   1x  USB cable + 5V phone charger (power)
+//   Optional: WS2812B LED strip (30 pixels)       ~$5-8
+//   Optional: 5V 2A power supply (for LED strip)  ~$3
+//   Total: $10-20 USD / 700-1400 INR
+//
+// CIRCUIT CONNECTIONS:
+//   LDR Voltage Divider:
+//     5V --> LDR --> A0 --> 10k resistor --> GND
+//     (A0 reads high in bright light, low in dark)
+//
+//   Potentiometer:
+//     Left pin --> GND
+//     Center pin --> A1
+//     Right pin --> 5V
+//
+//   Button:
+//     Pin 2 --> button --> GND
+//     (uses internal pull-up; reads LOW when pressed)
+//
+//   LEDs:
+//     Pin 9  --> 220R --> RED LED    --> GND
+//     Pin 10 --> 220R --> GREEN LED  --> GND
+//     Pin 11 --> 220R --> BLUE LED   --> GND
+//
+// STATE MACHINE:
+//
+//     +----------+     sudden light     +----------+
+//     |          |------- change ------>|          |
+//     | AMBIENT  |                      |  ALERT   |
+//     |          |<--- 3s timeout ------|          |
+//     +----------+                      +----------+
+//        |    ^
+//   btn  |    | btn / timeout / darkness
+//        v    |
+//     +----------+
+//     |  PARTY   |-------- 60s timeout ----+
+//     +----------+                         |
+//        ^                                 v
+//        |                           (back to AMBIENT)
+//     +----------+
+//     |  SLEEP   |<--- bright light 10s --- AMBIENT
+//     |          |---- darkness/button ---> AMBIENT
+//     +----------+
+//
+// QUICK START:
+//   1. Connect circuit as described above
+//   2. Upload this sketch (Arduino IDE, Board: Uno)
+//   3. Open Serial Monitor at 115200 baud
+//   4. Self-test runs: all 3 LEDs light in sequence
+//   5. Installation enters AMBIENT mode automatically
+//   6. Press button to cycle: AMBIENT -> PARTY -> AMBIENT
+//   7. Aim LDR toward the festival area
+//
+// PRE-EVENT CHECKLIST:
+//   [ ] Self-test: all 3 LEDs light correctly
+//   [ ] LDR responds: cover sensor = LEDs brighten
+//   [ ] Button works: cycles to PARTY and back
+//   [ ] Serial output visible at 115200 baud
+//   [ ] Power supply stable (no flickering)
+//   [ ] LDR positioned toward audience/ambient area
+//   [ ] Potentiometer set to mid-range sensitivity
+//   [ ] Backup Arduino + LEDs available
+//
+// TROUBLESHOOTING:
+//   Symptom              | Likely Cause         | Fix
+//   ---------------------|----------------------|-------------------------
+//   No LEDs light        | Wrong pin or polarity| Check wiring, flip LED
+//   Always full bright   | LDR disconnected     | Check A0 wiring
+//   Always dim           | LDR + resistor swap  | Swap LDR and 10k positions
+//   Button not working   | Missing ground wire  | Check button to GND
+//   Stuck in SLEEP       | Bright venue light   | Press button or cover LDR
+//   Serial garbled       | Wrong baud rate      | Set to 115200
+// =============================================================
+
+const int LDR_PIN = A0;
+const int POT_PIN = A1;
+const int BUTTON_PIN = 2;
+const int LED_R = 9;
+const int LED_G = 10;
+const int LED_B = 11;
+
+// State machine
+enum LightState { ST_AMBIENT, ST_ALERT, ST_PARTY, ST_SLEEP };
+const char* stNames[] = {"AMBIENT", "ALERT", "PARTY", "SLEEP"};
+LightState state = ST_AMBIENT;
+unsigned long stateStart = 0;
+
+// Sensor
+float filtLDR = 500.0;
+float prevLDR = 500.0;
+
+// Button
+bool lastBtn = HIGH;
+unsigned long lastDeb = 0;
+bool btnPress = false;
+
+// Timing
+unsigned long lastSensor = 0;
+unsigned long lastPrint = 0;
+unsigned long sessionStart = 0;
+
+void hsvToRgb(int h, int s, int v, int* r, int* g, int* b) {
+  h = h % 360;
+  int reg = h / 60, rem = (h % 60) * 255 / 60;
+  int p = (v*(255-s))/255, q = (v*(255-(s*rem)/255))/255;
+  int t = (v*(255-(s*(255-rem))/255))/255;
+  switch(reg) {
+    case 0: *r=v;*g=t;*b=p; break; case 1: *r=q;*g=v;*b=p; break;
+    case 2: *r=p;*g=v;*b=t; break; case 3: *r=p;*g=q;*b=v; break;
+    case 4: *r=t;*g=p;*b=v; break; default:*r=v;*g=p;*b=q; break;
+  }
+}
+
+void setRGB(int r, int g, int b) {
+  analogWrite(LED_R, constrain(r,0,255));
+  analogWrite(LED_G, constrain(g,0,255));
+  analogWrite(LED_B, constrain(b,0,255));
+}
+
+void goState(LightState ns) {
+  if (ns == state) return;
+  Serial.print("[");
+  Serial.print(stNames[state]);
+  Serial.print(" -> ");
+  Serial.print(stNames[ns]);
+  Serial.print("] at ");
+  Serial.print((millis()-sessionStart)/1000.0, 1);
+  Serial.println("s");
+  state = ns;
+  stateStart = millis();
+}
+
+void selfTest() {
+  Serial.println("--- SELF TEST ---");
+  int pins[] = {LED_R, LED_G, LED_B};
+  const char* names[] = {"Red","Green","Blue"};
+  for (int i = 0; i < 3; i++) {
+    for (int b = 0; b <= 255; b += 10) { analogWrite(pins[i], b); delay(3); }
+    delay(200);
+    for (int b = 255; b >= 0; b -= 10) { analogWrite(pins[i], b); delay(3); }
+    Serial.print("  "); Serial.print(names[i]); Serial.println(" OK");
+  }
+
+  Serial.print("  LDR reading: ");
+  Serial.print(analogRead(LDR_PIN));
+  Serial.println(" (expect 100-900 for normal indoor light)");
+
+  Serial.println("--- SELF TEST COMPLETE ---");
+  Serial.println();
+}
+
+void setup() {
+  Serial.begin(115200);
+  while (!Serial) { ; }
+
+  Serial.println("=== FESTIVAL LIGHT INSTALLATION CAPSTONE ===");
+  Serial.println("LDR sensor | RGB LEDs | 4-state FSM");
+  Serial.println();
+
+  pinMode(LED_R, OUTPUT);
+  pinMode(LED_G, OUTPUT);
+  pinMode(LED_B, OUTPUT);
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
+
+  selfTest();
+
+  // Initial LDR reading
+  filtLDR = analogRead(LDR_PIN);
+  prevLDR = filtLDR;
+
+  Serial.println("[ENTER AMBIENT]");
+  Serial.println("state\\tldr\\telapsed\\tR\\tG\\tB");
+
+  sessionStart = millis();
+  stateStart = millis();
+  lastSensor = millis();
+  lastPrint = millis();
+}
+
+int outR = 0, outG = 0, outB = 0;
+
+void loop() {
+  // --- Sensor at 50 Hz ---
+  if (millis() - lastSensor >= 20) {
+    lastSensor = millis();
+    long sum = 0;
+    for (int i = 0; i < 8; i++) sum += analogRead(LDR_PIN);
+    float raw = sum / 8.0;
+    prevLDR = filtLDR;
+    float a = (raw > filtLDR) ? 0.2 : 0.05;
+    filtLDR = a * raw + (1.0 - a) * filtLDR;
+  }
+
+  // --- Button ---
+  bool btn = digitalRead(BUTTON_PIN);
+  if (btn != lastBtn) lastDeb = millis();
+  btnPress = false;
+  if (millis() - lastDeb > 50 && btn == LOW && lastBtn == HIGH) btnPress = true;
+  lastBtn = btn;
+
+  // --- State Machine ---
+  int level = map(constrain((int)filtLDR, 50, 900), 50, 900, 0, 255);
+  unsigned long elapsed = millis() - stateStart;
+
+  switch (state) {
+    case ST_AMBIENT: {
+      int br = 255 - level;
+      outR = br; outG = (br*200)/255; outB = (br*140)/255;
+      setRGB(outR, outG, outB);
+      if (abs(filtLDR - prevLDR) > 150) goState(ST_ALERT);
+      else if (filtLDR > 800 && elapsed > 10000) goState(ST_SLEEP);
+      else if (btnPress) goState(ST_PARTY);
+      break;
+    }
+    case ST_ALERT: {
+      float t = (elapsed % 200) / 200.0;
+      int p = (int)((1.0+cos(t*TWO_PI))/2.0*255);
+      outR = p; outG = p; outB = p;
+      setRGB(outR, outG, outB);
+      if (elapsed > 3000 || btnPress) goState(ST_AMBIENT);
+      break;
+    }
+    case ST_PARTY: {
+      int hue = (int)((elapsed / 5) % 360);
+      hsvToRgb(hue, 255, 255, &outR, &outG, &outB);
+      setRGB(outR, outG, outB);
+      if (elapsed > 60000 || btnPress) goState(ST_AMBIENT);
+      break;
+    }
+    case ST_SLEEP: {
+      float t = (millis() % 4000) / 4000.0;
+      int glow = 10 + (int)((1.0+cos(t*TWO_PI))/2.0*15);
+      outR = glow; outG = glow/2; outB = 0;
+      setRGB(outR, outG, outB);
+      if (filtLDR < 200 || btnPress) goState(ST_AMBIENT);
+      break;
+    }
+  }
+
+  // --- Serial at 5 Hz ---
+  if (millis() - lastPrint >= 200) {
+    lastPrint = millis();
+    Serial.print(stNames[state]);
+    Serial.print("\\t");
+    Serial.print((int)filtLDR);
+    Serial.print("\\t");
+    Serial.print(elapsed / 1000.0, 1);
+    Serial.print("\\t");
+    Serial.print(outR);
+    Serial.print("\\t");
+    Serial.print(outG);
+    Serial.print("\\t");
+    Serial.println(outB);
+  }
+}
+
+// INSTALLATION NOTES:
+// - Mount Arduino in a weatherproof enclosure (IP54 minimum for outdoor use)
+// - Route LDR through a small hole in the enclosure lid, facing outward
+// - Seal cable entry points with silicone
+// - Use a 5V/2A phone charger as power supply (USB connection)
+// - For WS2812B strip: connect data pin to pin 6, power to external 5V supply
+//   (do NOT power strip from Arduino 5V — max current exceeded)
+// - Zip-tie all connections for vibration resistance
+//
+// CAPSTONE COMPLETE
+// Skills: analog sensing, ADC oversampling, voltage dividers, logarithmic
+// mapping, HSV color space, state machines, debouncing, adaptive filtering,
+// serial protocols, and professional installation documentation.`,
+      challenge: 'Extend the installation with a WS2812B NeoPixel strip (30 pixels) using the Adafruit NeoPixel library. Each pixel responds to the same state machine but with a spatial gradient: pixel 0 is the "leader" that follows the LDR directly, and each subsequent pixel follows the previous one with a slight delay (creating a wave effect). Add a "waterfall" animation in PARTY mode.',
+      successHint: 'You have built a complete, documented, installation-ready festival light system. The LDR senses the environment. The state machine manages behavior. The HSV color mapping creates beautiful effects. The documentation ensures anyone can set it up, operate it, and fix it. This is the full engineering cycle: concept, design, build, test, document, deploy.',
     },
   ];
 
@@ -1016,9 +1287,9 @@ print("engineering, animation, optimization, and system integration.")`,
       </div>
       {!pyReady && (
         <div className="mb-8 bg-gray-50 dark:bg-gray-800 rounded-xl p-6 text-center">
-          <p className="text-gray-600 dark:text-gray-300 mb-4">This capstone project uses Python with numpy and matplotlib to build a complete LED Display Designer for festival lighting. Click to start.</p>
+          <p className="text-gray-600 dark:text-gray-300 mb-4">This capstone project uses Arduino C/C++ to build a light-responsive LED festival installation with LDR sensing, HSV color mapping, state machine control, and professional documentation. Click to start the code environment.</p>
           <button onClick={loadPyodide} disabled={loading} className="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-500 text-white px-6 py-3 rounded-full font-semibold transition-colors">
-            {loading ? (<><Loader2 className="w-5 h-5 animate-spin" />{loadProgress}</>) : (<><Cpu className="w-5 h-5" />Load Python + NumPy</>)}
+            {loading ? (<><Loader2 className="w-5 h-5 animate-spin" />{loadProgress}</>) : (<><Cpu className="w-5 h-5" />Load Code Environment</>)}
           </button>
         </div>
       )}
