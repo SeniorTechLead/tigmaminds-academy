@@ -26,7 +26,7 @@ function getCapstoneProjects() {
       skillTags: l.skillTags || [],
       estimatedHours: l.estimatedHours || 12,
       tradition: l.tradition,
-      difficulty: rateDifficulty(l.stem.project.steps, l.stem.project.description, l.skillTags || [], l.estimatedHours || 12),
+      complexity: rateComplexity(l.stem.project.steps, l.stem.project.description, l.skillTags || [], l.estimatedHours || 12),
     }));
 }
 
@@ -39,44 +39,49 @@ const PROJECT_CATEGORIES: { key: string; label: string; icon: string; desc: stri
   { key: 'hardware', label: 'Hardware & Engineering', icon: '🔧', desc: 'Design physical systems — ships, bridges, buildings', keywords: ['ship', 'bridge', 'flight', 'structural', 'arch', 'canal', 'lock', 'aqueduct'] },
 ];
 
-/* ── Difficulty rating based on project complexity ── */
-type Difficulty = 'Beginner' | 'Intermediate' | 'Advanced';
+/* ── Capstone complexity — what prior skills the project requires ── */
+type Complexity = 'Foundational' | 'Applied' | 'Research-grade';
 
-function rateDifficulty(steps: string[], desc: string, skillTags: { skill: string }[], hours: number): Difficulty {
-  // Use multiple signals: step count, estimated hours, skill complexity, and description keywords
+function rateComplexity(steps: string[], desc: string, skillTags: { skill: string }[], hours: number): Complexity {
   let score = 0;
 
-  // Step count (more steps = more complex)
+  // Step count (more steps = more complex integration)
   score += steps.length;
 
   // Estimated hours
   if (hours >= 14) score += 3;
   else if (hours >= 12) score += 1;
 
-  // Advanced skills
-  const advancedSkills = ['Machine Learning', 'Computer Vision', 'Reinforcement Learning', 'Natural Language', 'Algorithms'];
-  const hasAdvancedSkill = skillTags.some(t => advancedSkills.includes(t.skill));
-  if (hasAdvancedSkill) score += 4;
+  // Skills that require prior experience
+  const researchSkills = ['Machine Learning', 'Computer Vision', 'Reinforcement Learning', 'Natural Language', 'Algorithms'];
+  if (skillTags.some(t => researchSkills.includes(t.skill))) score += 4;
 
-  // Keywords in description and steps
+  // Keywords indicating research-grade complexity
   const text = (desc + ' ' + steps.join(' ')).toLowerCase();
-  const advancedKeywords = ['monte carlo', 'finite element', 'differential', 'fourier', 'bayesian',
+  const researchKeywords = ['monte carlo', 'finite element', 'differential', 'fourier', 'bayesian',
     'stochastic', 'eigenvalue', 'neural', 'machine learning', 'multi-objective', 'pareto',
     'kalman', 'markov', 'optimization', 'pde'];
-  const beginnerKeywords = ['basic', 'simple', 'introduction', 'first', 'beginner', 'define', 'calculate'];
+  const foundationalKeywords = ['basic', 'simple', 'introduction', 'first', 'define', 'calculate',
+    'density', 'compare', 'list', 'dictionary'];
 
-  score += advancedKeywords.filter(k => text.includes(k)).length * 2;
-  score -= beginnerKeywords.filter(k => text.includes(k)).length;
+  score += researchKeywords.filter(k => text.includes(k)).length * 2;
+  score -= foundationalKeywords.filter(k => text.includes(k)).length;
 
-  if (score >= 10) return 'Advanced';
-  if (score >= 6) return 'Intermediate';
-  return 'Beginner';
+  if (score >= 10) return 'Research-grade';
+  if (score >= 6) return 'Applied';
+  return 'Foundational';
 }
 
-const DIFFICULTY_COLORS: Record<Difficulty, string> = {
-  'Beginner': 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300',
-  'Intermediate': 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300',
-  'Advanced': 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-300',
+const COMPLEXITY_COLORS: Record<Complexity, string> = {
+  'Foundational': 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300',
+  'Applied': 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300',
+  'Research-grade': 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-300',
+};
+
+const COMPLEXITY_DESCRIPTIONS: Record<Complexity, string> = {
+  'Foundational': 'Needs Python basics — loops, functions, lists. Good first capstone.',
+  'Applied': 'Needs NumPy, classes, and simulation skills from Levels 1-3.',
+  'Research-grade': 'Needs Monte Carlo, optimization, or multi-system integration.',
 };
 
 function categorizeProject(title: string, desc: string): string {
@@ -90,7 +95,7 @@ function categorizeProject(title: string, desc: string): string {
 export default function CapstonePage() {
   const projects = getCapstoneProjects();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty | null>(null);
+  const [selectedComplexity, setSelectedComplexity] = useState<Complexity | null>(null);
 
   // Tag each project with its category
   const taggedProjects = projects.map(p => ({
@@ -101,7 +106,7 @@ export default function CapstonePage() {
   // Filter by category AND difficulty
   const filtered = taggedProjects.filter(p => {
     if (selectedCategory && p.category !== selectedCategory) return false;
-    if (selectedDifficulty && p.difficulty !== selectedDifficulty) return false;
+    if (selectedComplexity && p.complexity !== selectedComplexity) return false;
     return true;
   });
 
@@ -111,10 +116,10 @@ export default function CapstonePage() {
     categoryCounts.set(p.category, (categoryCounts.get(p.category) || 0) + 1);
   }
 
-  // Counts per difficulty
-  const difficultyCounts: Record<Difficulty, number> = { Beginner: 0, Intermediate: 0, Advanced: 0 };
+  // Counts per complexity
+  const complexityCounts: Record<Complexity, number> = { 'Foundational': 0, 'Applied': 0, 'Research-grade': 0 };
   for (const p of taggedProjects) {
-    difficultyCounts[p.difficulty]++;
+    complexityCounts[p.complexity]++;
   }
 
   const totalHours = projects.reduce((sum, p) => sum + p.estimatedHours, 0);
@@ -201,19 +206,27 @@ export default function CapstonePage() {
             })}
           </div>
 
-          {/* Difficulty filter pills */}
+          {/* Complexity filter pills */}
           <div className="flex flex-wrap gap-2 justify-center mb-6">
-            <span className="text-xs text-gray-400 dark:text-gray-500 self-center mr-1">Difficulty:</span>
-            {(['Beginner', 'Intermediate', 'Advanced'] as Difficulty[]).map(d => (
+            <span className="text-xs text-gray-400 dark:text-gray-500 self-center mr-1">Prerequisites:</span>
+            {(['Foundational', 'Applied', 'Research-grade'] as Complexity[]).map(c => (
               <button
-                key={d}
-                onClick={() => setSelectedDifficulty(selectedDifficulty === d ? null : d)}
-                className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${selectedDifficulty === d ? DIFFICULTY_COLORS[d] + ' shadow-sm ring-2 ring-offset-1 ring-gray-300 dark:ring-gray-600' : 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:bg-gray-200'}`}
+                key={c}
+                onClick={() => setSelectedComplexity(selectedComplexity === c ? null : c)}
+                className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${selectedComplexity === c ? COMPLEXITY_COLORS[c] + ' shadow-sm ring-2 ring-offset-1 ring-gray-300 dark:ring-gray-600' : 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:bg-gray-200'}`}
+                title={COMPLEXITY_DESCRIPTIONS[c]}
               >
-                {d} ({difficultyCounts[d]})
+                {c} ({complexityCounts[c]})
               </button>
             ))}
           </div>
+
+          {/* Complexity description */}
+          {selectedComplexity && (
+            <p className="text-center text-xs text-gray-500 dark:text-gray-400 mb-4">
+              {COMPLEXITY_DESCRIPTIONS[selectedComplexity]}
+            </p>
+          )}
 
           {/* Selected category description */}
           {selectedCategory && (
@@ -250,8 +263,8 @@ export default function CapstonePage() {
                                 <p className="text-xs text-amber-600 dark:text-amber-400 font-semibold">
                                   {project.storyTitle}
                                 </p>
-                                <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-semibold ${DIFFICULTY_COLORS[project.difficulty]}`}>
-                                  {project.difficulty}
+                                <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-semibold ${COMPLEXITY_COLORS[project.complexity]}`}>
+                                  {project.complexity}
                                 </span>
                               </div>
                             </div>
