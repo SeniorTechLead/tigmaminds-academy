@@ -27,6 +27,7 @@ function getCapstoneProjects() {
       estimatedHours: l.estimatedHours || 12,
       tradition: l.tradition,
       complexity: rateComplexity(l.stem.project.steps, l.stem.project.description, l.skillTags || [], l.estimatedHours || 12),
+      technologies: detectTechnologies(l.toolSkills || [], l.skillTags || []),
     }));
 }
 
@@ -84,6 +85,43 @@ const COMPLEXITY_DESCRIPTIONS: Record<Complexity, string> = {
   'Research-grade': 'Needs Monte Carlo, optimization, or multi-system integration.',
 };
 
+/* ── Technology detection — what languages/tools the capstone actually uses ── */
+type Technology = 'Python' | 'HTML/CSS/JS' | 'SQL' | 'Arduino' | 'TypeScript';
+
+const TECH_COLORS: Record<Technology, string> = {
+  'Python': 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300',
+  'HTML/CSS/JS': 'bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300',
+  'SQL': 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300',
+  'Arduino': 'bg-teal-100 text-teal-700 dark:bg-teal-900/30 dark:text-teal-300',
+  'TypeScript': 'bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-300',
+};
+
+function detectTechnologies(toolSkills: string[], skillTags: { discipline?: string; skill?: string; tools?: string[] }[]): Technology[] {
+  const techs = new Set<Technology>();
+
+  // Always Python unless it's purely web/arduino
+  techs.add('Python');
+
+  // Check toolSkills (legacy flat tags)
+  for (const skill of toolSkills) {
+    if (skill === 'Web Development') { techs.add('HTML/CSS/JS'); }
+    if (skill === 'Arduino & Electronics') { techs.add('Arduino'); techs.delete('Python'); }
+    if (skill === 'SQL & Databases') { techs.add('SQL'); }
+  }
+
+  // Check skillTags (hierarchical)
+  for (const tag of skillTags) {
+    if (tag.skill === 'Web Development') {
+      techs.add('HTML/CSS/JS');
+      if (tag.tools?.includes('TypeScript')) techs.add('TypeScript');
+    }
+    if (tag.skill === 'Databases') techs.add('SQL');
+    if (tag.discipline === 'Electronics & Hardware') { techs.add('Arduino'); techs.delete('Python'); }
+  }
+
+  return [...techs];
+}
+
 function categorizeProject(title: string, desc: string): string {
   const text = (title + ' ' + desc).toLowerCase();
   for (const cat of PROJECT_CATEGORIES) {
@@ -96,6 +134,7 @@ export default function CapstonePage() {
   const projects = getCapstoneProjects();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedComplexity, setSelectedComplexity] = useState<Complexity | null>(null);
+  const [selectedTech, setSelectedTech] = useState<Technology | null>(null);
 
   // Tag each project with its category
   const taggedProjects = projects.map(p => ({
@@ -103,10 +142,11 @@ export default function CapstonePage() {
     category: categorizeProject(p.projectTitle, p.projectDescription),
   }));
 
-  // Filter by category AND difficulty
+  // Filter by category AND complexity AND technology
   const filtered = taggedProjects.filter(p => {
     if (selectedCategory && p.category !== selectedCategory) return false;
     if (selectedComplexity && p.complexity !== selectedComplexity) return false;
+    if (selectedTech && !p.technologies.includes(selectedTech)) return false;
     return true;
   });
 
@@ -114,6 +154,14 @@ export default function CapstonePage() {
   const categoryCounts = new Map<string, number>();
   for (const p of taggedProjects) {
     categoryCounts.set(p.category, (categoryCounts.get(p.category) || 0) + 1);
+  }
+
+  // Counts per technology
+  const techCounts = new Map<Technology, number>();
+  for (const p of taggedProjects) {
+    for (const t of p.technologies) {
+      techCounts.set(t, (techCounts.get(t) || 0) + 1);
+    }
   }
 
   // Counts per complexity
@@ -228,6 +276,24 @@ export default function CapstonePage() {
             </p>
           )}
 
+          {/* Technology filter pills */}
+          <div className="flex flex-wrap gap-2 justify-center mb-6">
+            <span className="text-xs text-gray-400 dark:text-gray-500 self-center mr-1">Technology:</span>
+            {(['Python', 'HTML/CSS/JS', 'SQL', 'Arduino', 'TypeScript'] as Technology[]).map(t => {
+              const count = techCounts.get(t) || 0;
+              if (count === 0) return null;
+              return (
+                <button
+                  key={t}
+                  onClick={() => setSelectedTech(selectedTech === t ? null : t)}
+                  className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${selectedTech === t ? TECH_COLORS[t] + ' shadow-sm ring-2 ring-offset-1 ring-gray-300 dark:ring-gray-600' : 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:bg-gray-200'}`}
+                >
+                  {t} ({count})
+                </button>
+              );
+            })}
+          </div>
+
           {/* Selected category description */}
           {selectedCategory && (
             <p className="text-center text-sm text-gray-500 dark:text-gray-400 mb-4">
@@ -274,11 +340,11 @@ export default function CapstonePage() {
                             {project.projectDescription}
                           </p>
 
-                          {/* Skills */}
+                          {/* Technologies + Skills */}
                           <div className="flex flex-wrap gap-1 mb-3">
-                            {project.skillTags.slice(0, 3).map((tag, i) => (
-                              <span key={i} className="text-[10px] px-2 py-0.5 rounded-full bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-300">
-                                {tag.skill}
+                            {project.technologies.map((tech, i) => (
+                              <span key={`t-${i}`} className={`text-[10px] px-2 py-0.5 rounded-full font-semibold ${TECH_COLORS[tech]}`}>
+                                {tech}
                               </span>
                             ))}
                             {project.subjects.slice(0, 2).map((subj, i) => (
