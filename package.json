@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:api": "npx tsx server.ts",
+    "dev:full": "concurrently \"vite\" \"npx tsx server.ts\"",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -12,6 +14,9 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",
+    "concurrently": "^9.2.1",
+    "dotenv": "^17.4.1",
+    "express": "^5.2.1",
     "highlight.js": "^11.11.1",
     "lucide-react": "^0.344.0",
     "playwright": "^1.58.2",
