@@ -998,6 +998,47 @@ export const scienceReferences: ReferenceGuide[] = [
           },
         },
       },
+      {
+        title: 'SIR Epidemic Model',
+        diagram: 'SIRModelDiagram',
+        beginnerContent:
+          'When a new disease spreads through a community, how can scientists predict how many people ' +
+          'will get sick and when the outbreak will peak? The **SIR model** is a simple but powerful ' +
+          'framework that divides a population into three groups — or **compartments** — and tracks ' +
+          'how people flow between them.\n\n' +
+          '**S — Susceptible**: People who have not yet been infected and can catch the disease. At the ' +
+          'start of an outbreak, nearly everyone is in this group.\n\n' +
+          '**I — Infected**: People who currently have the disease and can spread it to susceptible people. ' +
+          'Each infected person contacts others at a certain rate, and some of those contacts result in ' +
+          'new infections.\n\n' +
+          '**R — Recovered** (or Removed): People who have recovered and are now immune, or who have died. ' +
+          'They can no longer catch or spread the disease.\n\n' +
+          'The key number is **R₀** (pronounced "R-naught") — the **basic reproduction number**. It tells ' +
+          'you how many new people one infected person will infect on average in a fully susceptible ' +
+          'population. If R₀ > 1, the disease spreads and an epidemic occurs. If R₀ < 1, the disease ' +
+          'dies out. Measles has R₀ ≈ 12-18, making it extraordinarily contagious. Seasonal flu has ' +
+          'R₀ ≈ 1.3. COVID-19\'s original strain had R₀ ≈ 2.5-3.\n\n' +
+          'Vaccination works by moving people directly from S to R without going through I. When enough ' +
+          'people are immune — the **herd immunity threshold** — the disease cannot sustain transmission. ' +
+          'This threshold is approximately 1 - 1/R₀. For measles (R₀ ≈ 15), about 93% of the population ' +
+          'must be immune to stop outbreaks.',
+        intermediateContent:
+          'The SIR differential equations: **dS/dt = -βSI/N**, **dI/dt = βSI/N - γI**, **dR/dt = γI**, ' +
+          'where β is the transmission rate (contacts per time × probability of transmission per contact), ' +
+          'γ is the recovery rate (1/γ = average infectious period), and N = S + I + R is the total ' +
+          'population. R₀ = β/γ. The epidemic peaks when dI/dt = 0, i.e., when S = N/R₀ = γN/β. The ' +
+          'herd immunity threshold H = 1 - 1/R₀. For R₀ = 3: H = 67%. The **final size equation** ' +
+          '1 - R_∞/N = e^(-R₀ × R_∞/N) gives the total fraction infected. For R₀ = 3, approximately ' +
+          '94% of the population is eventually infected without intervention.',
+        advancedContent:
+          'Extensions include SEIR (adding an Exposed/latent compartment), SIS (no lasting immunity), ' +
+          'SIRS (waning immunity), and age-structured models with contact matrices. The **effective ' +
+          'reproduction number** R_t = R₀ × S(t)/N tracks real-time transmissibility. Stochastic SIR ' +
+          'models handle small populations where random extinction of the infected class is possible. ' +
+          'Network-based SIR models replace the homogeneous mixing assumption with realistic contact ' +
+          'networks — on scale-free networks, super-spreader hubs dramatically alter epidemic dynamics ' +
+          'and the herd immunity threshold depends on the degree distribution variance, not just R₀.',
+      },
     ],
   },
 
@@ -1160,6 +1201,49 @@ export const scienceReferences: ReferenceGuide[] = [
       {
         title: 'Natural vs Synthetic — Trade-offs',
         beginnerContent: 'Natural dyes (turmeric for yellow, indigo for blue, lac for red) come from plants and insects. Synthetic dyes come from petroleum chemistry. Natural dyes are biodegradable and non-toxic but often fade faster and require mordants (chemical fixatives) to bind to fabric. Synthetic dyes are vivid, consistent, and permanent but can pollute waterways during manufacturing — textile dyeing is one of the largest sources of industrial water pollution worldwide.\n\nThe same trade-off appears across material choices. Bamboo is renewable, lightweight, and strong but vulnerable to insects and moisture without treatment. Concrete is durable and fireproof but energy-intensive to produce and responsible for about 8 percent of global carbon dioxide emissions. Cotton is comfortable and breathable but requires enormous amounts of water to grow. Polyester is cheap and durable but sheds microplastic fibres with every wash. There is rarely a simple answer — understanding chemistry helps you evaluate the real trade-offs and make informed choices rather than relying on marketing labels.',
+      },
+      {
+        title: 'Phase Diagrams',
+        diagram: 'PhaseDiagramSteelDiagram',
+        beginnerContent:
+          'What happens when you heat a piece of steel? At room temperature, the iron atoms are arranged ' +
+          'in a specific crystal pattern called **ferrite** (body-centred cubic). As you heat it past ' +
+          '727°C, the atoms rearrange into a different pattern called **austenite** (face-centred cubic). ' +
+          'If you cool it slowly, it changes back. If you cool it rapidly (quenching in water), the atoms ' +
+          'get "trapped" in a strained arrangement called **martensite** — which is extremely hard but ' +
+          'brittle. This is why blacksmiths quench hot steel in water to make hard blades.\n\n' +
+          'A **phase diagram** is a map that shows which structure (phase) a material will have at any ' +
+          'given combination of **temperature** and **composition**. For steel, the horizontal axis shows ' +
+          'the percentage of carbon mixed with iron, and the vertical axis shows temperature. Different ' +
+          'regions of the map correspond to different phases — ferrite, austenite, cementite (iron ' +
+          'carbide), and mixtures of these.\n\n' +
+          'Phase diagrams are not just for metals. Water has a phase diagram showing where it exists as ' +
+          'ice, liquid, or steam depending on temperature and pressure. The **triple point** is the exact ' +
+          'condition where all three phases coexist simultaneously. Chocolate has a phase diagram too — ' +
+          'tempering chocolate involves carefully controlling temperature to get the right crystal form ' +
+          '(Form V) that gives a glossy finish and satisfying snap.\n\n' +
+          'Engineers use phase diagrams to design materials with specific properties. Want a steel that ' +
+          'is hard? Add more carbon and quench it. Want one that is ductile and easy to shape? Use low ' +
+          'carbon and cool slowly. The phase diagram tells you exactly what you will get.',
+        intermediateContent:
+          'The **iron-carbon phase diagram** is the most important in metallurgy. Key features: the ' +
+          '**eutectoid point** at 0.76% C and 727°C, where austenite transforms to **pearlite** (alternating ' +
+          'layers of ferrite and cementite). Below 0.76% C: hypoeutectoid steel — proeutectoid ferrite ' +
+          'forms first, then remaining austenite transforms to pearlite. Above 0.76% C: hypereutectoid — ' +
+          'proeutectoid cementite forms first. The **eutectic point** at 4.3% C and 1,147°C is where ' +
+          'liquid transforms directly to a solid mixture. The **lever rule** calculates phase fractions: ' +
+          'at composition C₀ between phases at Cα and Cβ, the fraction of β phase = (C₀ - Cα)/(Cβ - Cα). ' +
+          'TTT (Time-Temperature-Transformation) diagrams add cooling rate as a variable, showing how ' +
+          'different cooling rates produce pearlite, bainite, or martensite.',
+        advancedContent:
+          'Phase diagrams are derived from **Gibbs free energy** minimization: at equilibrium, the system ' +
+          'adopts the phase(s) with the lowest total G = H - TS. The **Gibbs phase rule** F = C - P + 2 ' +
+          'determines degrees of freedom F given C components and P phases. Binary phase diagrams are ' +
+          'computed using the CALPHAD method, which models excess Gibbs energy of mixing with Redlich-Kister ' +
+          'polynomials fitted to experimental data. Modern computational thermodynamics (Thermo-Calc, ' +
+          'FactSage) extends this to multicomponent systems with dozens of elements. Phase-field modeling ' +
+          'simulates microstructure evolution during solidification and phase transformations by solving ' +
+          'coupled Cahn-Hilliard and Allen-Cahn equations on computational grids.',
       },
     ],
   },
@@ -1520,6 +1604,51 @@ export const scienceReferences: ReferenceGuide[] = [
             ],
           },
         },
+      },
+      {
+        title: 'Evaporative Cooling',
+        diagram: 'EvaporativeCoolingDiagram',
+        beginnerContent:
+          'Step out of a swimming pool on a windy day and you feel cold — much colder than the air ' +
+          'temperature. This is **evaporative cooling** in action, and it is one of nature\'s most ' +
+          'important cooling mechanisms.\n\n' +
+          'Here is what happens. Water molecules on your skin have a range of speeds — some slow, some ' +
+          'fast. The fastest molecules have enough energy to escape the liquid surface and fly off as ' +
+          'water vapor. But these were the **highest-energy** molecules. When they leave, the average ' +
+          'energy of the remaining molecules drops — and temperature is just a measure of average ' +
+          'molecular energy. So the remaining water (and your skin beneath it) gets cooler.\n\n' +
+          'This is exactly how **sweating** works. Your body pumps warm water onto your skin surface. ' +
+          'As it evaporates, it carries heat away from your body. A fan speeds up evaporation by replacing ' +
+          'the humid air near your skin with drier air, which is why fans make you feel cooler even though ' +
+          'they do not change the air temperature.\n\n' +
+          'The **wet-bulb temperature** is the lowest temperature air can reach through evaporation alone. ' +
+          'You measure it by wrapping a wet cloth around a thermometer and fanning it. In dry air, the ' +
+          'wet-bulb temperature is much lower than the actual (dry-bulb) temperature — evaporation is ' +
+          'very effective. In humid air, the wet-bulb temperature is close to the dry-bulb because the ' +
+          'air is already saturated and evaporation is slow. A wet-bulb temperature above 35°C is ' +
+          'dangerous to humans because sweating can no longer cool the body effectively.\n\n' +
+          'Traditional architecture uses evaporative cooling brilliantly. The **matka** (clay pot) used ' +
+          'across India cools water by allowing slow evaporation through its porous walls. Desert ' +
+          'coolers blow air through wet pads. Ancient Egyptians hung wet reeds in doorways.',
+        intermediateContent:
+          'The energy required to evaporate water is the **latent heat of vaporization**: **L_v = 2,260 kJ/kg** ' +
+          'at 100°C and approximately **2,450 kJ/kg** at 20°C (it takes more energy to evaporate cooler ' +
+          'water because more intermolecular bonds must be broken). Cooling power: Q = ṁ × L_v, where ṁ ' +
+          'is the mass evaporation rate (kg/s). A person sweating 1 litre/hour loses heat at ~680 W. ' +
+          'The wet-bulb temperature T_w satisfies the **psychrometric equation**: T_w is where the ' +
+          'adiabatic saturation line intersects the saturation curve on a psychrometric chart. Relative ' +
+          'humidity RH = (actual vapor pressure / saturation vapor pressure) × 100%. The **dew point** ' +
+          'is the temperature at which RH reaches 100%. Evaporative cooling is effective when the ' +
+          'wet-bulb depression (T_dry - T_wet) is large — typically in arid climates.',
+        advancedContent:
+          'The Penman equation models evaporation from surfaces using energy balance and aerodynamic ' +
+          'transport: E = (Δ·R_n + ρ_a·c_p·(e_s - e_a)/r_a) / (Δ + γ(1 + r_s/r_a)), where Δ is the ' +
+          'slope of the saturation vapor pressure curve, R_n is net radiation, r_a is aerodynamic ' +
+          'resistance, r_s is surface resistance, and γ is the psychrometric constant. The Clausius-' +
+          'Clapeyron relation predicts that saturation vapor pressure increases ~7% per °C of warming, ' +
+          'meaning a warmer atmosphere holds more moisture — this is why humid heat waves are becoming ' +
+          'more dangerous with climate change. At wet-bulb temperatures above 35°C, the human body ' +
+          'cannot maintain core temperature regardless of fitness, hydration, or shade.',
       },
     ],
   },
@@ -2162,6 +2291,52 @@ export const scienceReferences: ReferenceGuide[] = [
         advancedContent:
           'The fusion cross-section for D-T peaks at about **5 barns** at a centre-of-mass energy of ~64 keV (corresponding to ~700 million K), but the Maxwellian tail of the ion energy distribution means significant fusion occurs at the much lower "average" temperature of ~10-20 keV (100-200 million K). The **Gamow peak** — the energy where the product of the tunnelling probability and the Maxwell-Boltzmann distribution is maximum — determines the effective reaction rate: ⟨σv⟩ ∝ T^(−2/3) exp(−3E_G^(1/3)/(kT)^(1/3)), where E_G is the Gamow energy. In a tokamak, the plasma is confined by helical magnetic field lines created by combining toroidal (from external coils) and poloidal (from the plasma current itself) fields. The **safety factor** q = rB_t/(RB_p) must exceed 1 everywhere to avoid kink instabilities, and exceeding the **Greenwald density limit** n_G = I_p/(πa²) causes disruptive confinement loss. **Inertial confinement fusion** (ICF) compresses a millimetre-scale fuel pellet using 192 laser beams (NIF) delivering ~2 MJ in nanoseconds, achieving pressures >100 billion atmospheres. In December 2022, NIF achieved scientific breakeven (Q > 1), producing 3.15 MJ of fusion energy from 2.05 MJ of laser energy — a historic milestone.',
       },
+      {
+        title: 'Chain Reactions',
+        diagram: 'ChainReactionDiagram',
+        beginnerContent:
+          'When a uranium-235 nucleus absorbs a neutron, it splits (fissions) into two smaller nuclei ' +
+          'and releases 2 or 3 **free neutrons**. Each of those neutrons can strike another uranium-235 ' +
+          'nucleus, causing it to split and release more neutrons. Those neutrons cause more fissions, ' +
+          'releasing even more neutrons. This is a **chain reaction** — a self-sustaining cascade where ' +
+          'each reaction triggers the next.\n\n' +
+          'The crucial question is: on average, how many of the released neutrons go on to cause another ' +
+          'fission? This number is called **k** (the neutron multiplication factor, or k-effective). ' +
+          'If k < 1, each generation of fissions produces fewer neutrons than the last, and the reaction ' +
+          'fizzles out — this is called **subcritical**. If k = 1, the reaction sustains itself at a ' +
+          'steady rate — this is **critical**, and it is exactly what happens in a nuclear power reactor. ' +
+          'If k > 1, the reaction grows exponentially — this is **supercritical**, which is what happens ' +
+          'in a nuclear weapon.\n\n' +
+          'For a chain reaction to sustain itself, you need enough fissile material in one place. The ' +
+          'minimum amount is called the **critical mass**. For a bare sphere of uranium-235, the critical ' +
+          'mass is about 52 kg (a sphere roughly the size of a grapefruit). For plutonium-239, it is ' +
+          'only about 10 kg. A **neutron reflector** — a shell of dense material around the core — ' +
+          'bounces escaping neutrons back in, reducing the critical mass significantly.\n\n' +
+          'In a nuclear reactor, operators keep k at exactly 1.000 by inserting or withdrawing **control ' +
+          'rods** made of neutron-absorbing materials like boron or cadmium. Pushing the rods in absorbs ' +
+          'more neutrons, reducing k below 1 and slowing the reaction. Pulling them out lets more neutrons ' +
+          'cause fissions, increasing k.',
+        intermediateContent:
+          'The neutron multiplication factor k_eff = η × f × p × ε × P_FNL × P_TNL (the six-factor ' +
+          'formula). η = neutrons produced per absorption in fuel (~2.07 for U-235 thermal fission). ' +
+          'f = thermal utilization factor (fraction of thermal neutrons absorbed in fuel vs all materials). ' +
+          'p = resonance escape probability (fraction avoiding capture at intermediate energies). ε = fast ' +
+          'fission factor (~1.03). P_FNL, P_TNL = fast and thermal non-leakage probabilities. For ' +
+          'k_eff = 1 (critical): reactor power is constant. The **reactor period** T = ℓ/(k-1) where ℓ ' +
+          'is the mean neutron generation time (~10⁻⁵ s for thermal reactors). Delayed neutrons (~0.65% ' +
+          'of total for U-235, emitted seconds after fission by fission product decay) are essential for ' +
+          'control — they stretch the effective generation time to ~0.1 s, making the reactor controllable.',
+        advancedContent:
+          'The point kinetics equations model reactor transients: dn/dt = (ρ-β)/Λ × n + Σλᵢcᵢ and ' +
+          'dcᵢ/dt = βᵢn/Λ - λᵢcᵢ, where n is neutron population, ρ = (k-1)/k is reactivity, β is the ' +
+          'total delayed neutron fraction, Λ is the prompt neutron generation time, cᵢ are delayed neutron ' +
+          'precursor concentrations, and λᵢ are their decay constants. **Prompt criticality** occurs when ' +
+          'ρ > β (k > 1/(1-β) ≈ 1.0065 for U-235) — the chain reaction accelerates on the prompt neutron ' +
+          'timescale (~10⁻⁵ s), making control impossible. The Chernobyl disaster resulted from a prompt ' +
+          'criticality excursion. Reactor safety systems ensure ρ never approaches β through negative ' +
+          'temperature coefficients (Doppler broadening of U-238 resonances increases parasitic capture ' +
+          'as fuel heats) and negative void coefficients in PWRs.',
+      },
     ],
   },
 
@@ -2223,6 +2398,48 @@ export const scienceReferences: ReferenceGuide[] = [
           'Escape velocity derivation: set total energy to zero (just barely escaping). **½mv² − GMm/r = 0**, so **v_esc = √(2GM/r)**. For Earth: v_esc = √(2 × 6.674×10⁻¹¹ × 5.97×10²⁴ / 6.371×10⁶) = **11,186 m/s = 11.2 km/s**. For the Moon: v_esc = √(2 × 6.674×10⁻¹¹ × 7.342×10²² / 1.737×10⁶) = **2,376 m/s = 2.4 km/s**. The escape velocity is √2 times the circular orbital velocity at the same radius: v_esc = √2 × v_orbit. A satellite at Earth\'s surface: v_orbit = 7.9 km/s, v_esc = 11.2 km/s. To go from a circular orbit to escape, you need a Δv = (√2 − 1) × v_orbit = **0.414 × 7.9 = 3.3 km/s** additional speed. Escape velocity does not depend on direction — a horizontal launch requires the same speed as a vertical one. Energy required: **KE = ½mv² = GMm/r**. For a 1000 kg satellite from Earth\'s surface: KE = 6.674×10⁻¹¹ × 5.97×10²⁴ × 1000/6.371×10⁶ = **6.25 × 10¹⁰ J ≈ 62.5 GJ**.',
         advancedContent:
           'Escape velocity equals the speed of light at the **Schwarzschild radius** r_s = 2GM/c², defining the event horizon of a non-rotating (Schwarzschild) black hole. For the Sun: r_s = 2 × 6.674×10⁻¹¹ × 1.989×10³⁰ / (3×10⁸)² = **2,953 m ≈ 3 km**. For Earth: r_s = **8.87 mm**. For a rotating (Kerr) black hole, the ergosphere extends beyond the event horizon, and the Penrose process allows extraction of rotational energy. In practice, rockets don\'t need to reach escape velocity instantaneously — a sustained thrust that gradually accumulates speed works equally well (and is less physically demanding on the payload). The **Tsiolkovsky rocket equation** Δv = v_e ln(m₀/m_f) relates the achievable velocity change to the exhaust velocity v_e and the initial-to-final mass ratio. Chemical rockets have v_e ≈ 3-4.5 km/s, meaning a mass ratio of ~e³ ≈ 20 is needed for Earth escape — 95% of the initial mass must be propellant. Ion drives (v_e ≈ 30-50 km/s) are far more efficient but produce tiny thrust (millinewtons), useful only for deep-space missions where slow, continuous acceleration accumulates over months.',
+      },
+      {
+        title: 'Hohmann Transfer Orbits',
+        diagram: 'HohmannTransferDiagram',
+        beginnerContent:
+          'Suppose you have a satellite in a low orbit around Earth and you want to move it to a higher ' +
+          'orbit. You could fire the engines continuously, but that wastes enormous amounts of fuel. ' +
+          'In 1925, German engineer Walter Hohmann discovered the most **fuel-efficient** path between ' +
+          'two circular orbits: a simple ellipse that just touches both orbits. This is called a ' +
+          '**Hohmann transfer orbit**.\n\n' +
+          'Here is how it works. Your satellite starts in a low circular orbit. You fire the engine ' +
+          'briefly to speed up — this stretches the orbit into an **ellipse** whose closest point ' +
+          '(periapsis) is at your starting orbit and farthest point (apoapsis) reaches the target orbit. ' +
+          'The satellite then coasts along this ellipse for half a revolution, using no fuel at all. ' +
+          'When it reaches the high point, you fire the engine again to speed up just enough to ' +
+          '**circularize** into the target orbit.\n\n' +
+          'The beauty of the Hohmann transfer is that it uses only **two short engine burns** — one to ' +
+          'enter the transfer ellipse and one to exit it. Every other path between the two orbits ' +
+          'requires more total velocity change (called **delta-v**, written Δv), which means more fuel.\n\n' +
+          'This technique is used constantly in real spaceflight. When a satellite is launched to ' +
+          '**geostationary orbit** (36,000 km altitude), it first enters a low parking orbit, then ' +
+          'performs a Hohmann transfer to reach the high orbit. Mars missions use a similar principle — ' +
+          'the spacecraft follows an elliptical path from Earth\'s orbit to Mars\'s orbit, timed so that ' +
+          'Mars arrives at the meeting point just as the spacecraft does.',
+        intermediateContent:
+          'For a transfer from radius r₁ to r₂ (r₂ > r₁): the transfer ellipse has semi-major axis ' +
+          'a_t = (r₁ + r₂)/2. First burn Δv₁ = √(GM/r₁) × (√(2r₂/(r₁+r₂)) - 1). Second burn ' +
+          'Δv₂ = √(GM/r₂) × (1 - √(2r₁/(r₁+r₂))). Total Δv = Δv₁ + Δv₂. Transfer time = ' +
+          'π√(a_t³/GM) = half the orbital period of the transfer ellipse. Example — LEO (r₁ = 6,578 km) ' +
+          'to GEO (r₂ = 42,164 km): Δv₁ = 2.46 km/s, Δv₂ = 1.48 km/s, total = **3.94 km/s**, ' +
+          'transfer time = **5.26 hours**. For Earth to Mars: Δv₁ ≈ 2.94 km/s (Earth departure), ' +
+          'transfer time ≈ 259 days. Launch windows occur every ~26 months when the planetary alignment ' +
+          'is correct (synodic period).',
+        advancedContent:
+          'The Hohmann transfer is optimal (minimum Δv) only when r₂/r₁ < 11.94. Beyond this ratio, ' +
+          'a **bi-elliptic transfer** (three burns via a very high intermediate orbit) uses less Δv ' +
+          'despite taking longer. For interplanetary transfers, the **patched conic approximation** ' +
+          'breaks the trajectory into segments dominated by different gravitational bodies. **Gravity ' +
+          'assists** (planetary flybys) exploit a planet\'s orbital velocity to gain free Δv — Voyager 2 ' +
+          'used Jupiter, Saturn, and Uranus flybys to reach Neptune with far less fuel than a direct ' +
+          'Hohmann transfer would require. Low-thrust spiral transfers (ion engines) use continuous ' +
+          'acceleration and are analysed with optimal control theory rather than impulsive Δv calculations.',
       },
     ],
   },
@@ -3343,6 +3560,47 @@ export const scienceReferences: ReferenceGuide[] = [
         beginnerContent:
           'A Geographic Information System (GIS) is software that captures, stores, analyses, and displays geographic data. Think of it as a set of transparent map layers stacked on top of each other — one layer might show roads, another rivers, another elevation, another population density, another forest cover, another soil type. Each layer is geographically referenced, so the layers align perfectly. By combining and analysing these layers, GIS allows users to answer spatial questions that would be impossible with a single map: Where are the areas with both high flood risk AND dense population? Which villages are more than 10 kilometres from the nearest hospital? How has forest cover changed in Meghalaya over the past 20 years?\n\nGIS has transformed decision-making in fields from urban planning to disaster management to conservation biology. In NE India, GIS is used extensively: the Assam State Disaster Management Authority uses GIS to map flood-prone areas and plan evacuation routes; forest departments use it to monitor deforestation and track encroachment into protected areas; the tea industry uses GIS to map soil quality and optimise planting; and wildlife researchers use GIS to analyse elephant movement corridors between Kaziranga and the Karbi Hills. GIS data comes from many sources — satellite imagery, aerial surveys, GPS ground surveys, census data, and even crowdsourced data from platforms like OpenStreetMap. As India pushes for smart cities and digital governance, GIS literacy is becoming an essential skill for geographers, planners, engineers, and environmental scientists.',
       },
+      {
+        title: 'Dead Reckoning',
+        beginnerContent:
+          'Long before GPS satellites orbited the Earth, sailors navigated vast oceans using a technique ' +
+          'called **dead reckoning** — tracking their position by calculating where they should be based ' +
+          'on where they started, how fast they were moving, and which direction they were heading.\n\n' +
+          'The idea is simple: if you know you left port heading due east at 10 kilometres per hour, ' +
+          'then after 3 hours you should be 30 kilometres east of port. That calculation — **distance = ' +
+          'speed × time** — is the heart of dead reckoning. You update your estimated position ' +
+          'continuously as your speed or heading changes.\n\n' +
+          'Polynesian wayfinders were masters of dead reckoning. Without any instruments, they tracked ' +
+          'their canoe\'s speed by feeling the water flow against the hull, judged direction from stars ' +
+          'and wind patterns, and maintained a mental map of their position across thousands of kilometres ' +
+          'of open Pacific Ocean. European sailors used a **log line** (a rope with knots at regular ' +
+          'intervals, dragged behind the ship) to measure speed and a **compass** for heading.\n\n' +
+          'The great weakness of dead reckoning is that errors **accumulate**. Every small mistake in ' +
+          'speed or direction adds to previous errors, so your estimated position drifts further and ' +
+          'further from your true position over time. Ocean currents push you off course silently. Wind ' +
+          'shifts your heading without you noticing. After days at sea, dead reckoning alone could be ' +
+          'off by many kilometres. This is why navigators also used **celestial navigation** — taking ' +
+          'star and sun sights to reset their position and correct accumulated errors.',
+        intermediateContent:
+          'Dead reckoning computes position iteratively: **x(t+Δt) = x(t) + v × cos(θ) × Δt**, ' +
+          '**y(t+Δt) = y(t) + v × sin(θ) × Δt**, where v is speed and θ is heading. Error grows ' +
+          'roughly as √t for random heading errors (random walk) and linearly with t for systematic ' +
+          'bias (e.g., uncorrected current). For a speed error of ±5% and heading error of ±3°, after ' +
+          '24 hours at 10 knots, the position uncertainty ellipse has semi-axes of roughly 12 nmi ' +
+          '(along-track) and 6 nmi (cross-track). Modern **inertial navigation systems** (INS) use ' +
+          'accelerometers and gyroscopes for dead reckoning — aircraft INS drifts ~1 nmi/hr; submarine ' +
+          'INS ~0.1 nmi/hr. GPS/INS fusion uses Kalman filtering to combine GPS fixes with INS dead ' +
+          'reckoning for robust, continuous navigation.',
+        advancedContent:
+          'The error propagation in dead reckoning is modeled by the covariance matrix P(t) of the ' +
+          'state estimate. For a 2D position/heading state, P evolves as P(t+Δt) = F·P(t)·Fᵀ + Q, ' +
+          'where F is the state transition Jacobian and Q is the process noise covariance. The **Extended ' +
+          'Kalman Filter** (EKF) fuses dead reckoning predictions with periodic position fixes (GPS, ' +
+          'celestial, landmark) to bound error growth. In autonomous vehicles, wheel odometry provides ' +
+          'dead reckoning that is fused with LIDAR, camera, and GPS data via particle filters or factor ' +
+          'graph optimization (GTSAM). The theoretical lower bound on navigation error is given by the ' +
+          'Cramér-Rao bound applied to the sensor noise characteristics.',
+      },
     ],
   },
   // ──────────────────────────────────────────────────────────────
@@ -4457,6 +4715,50 @@ export const scienceReferences: ReferenceGuide[] = [
           },
         },
       },
+      {
+        title: 'Supply Chain Economics',
+        diagram: 'SupplyChainDiagram',
+        beginnerContent:
+          'When you buy a cotton shirt for 500 rupees, how much of that money went to the farmer who ' +
+          'grew the cotton? Surprisingly little — often less than 5%. The rest is absorbed by a long ' +
+          'chain of **intermediaries**: the cotton trader, the spinning mill, the weaving factory, the ' +
+          'garment manufacturer, the brand company, the wholesaler, and finally the retailer. Each one ' +
+          'adds a **markup** to cover their costs and earn a profit. This chain from raw material to ' +
+          'final consumer is called a **supply chain**.\n\n' +
+          'Why do markups compound so dramatically? Each intermediary faces costs — transport, storage, ' +
+          'labour, rent, risk — and each adds a percentage on top of their purchase price. If five ' +
+          'intermediaries each add a 30% markup, the final price is 1.3⁵ = 3.71 times the original cost. ' +
+          'That is a 271% total markup even though each individual step seems modest.\n\n' +
+          'The **value-to-weight ratio** is crucial in supply chain economics. Saffron is worth more than ' +
+          'gold by weight, so high transport costs barely matter — saffron is traded globally. Sand is ' +
+          'cheap and heavy, so transporting it long distances is uneconomical — you buy local sand. Tea ' +
+          'has a moderate value-to-weight ratio, which is why Assam tea reaches global markets but faces ' +
+          'price competition from closer producers.\n\n' +
+          'Supply chain efficiency matters enormously for farmers and producers. When intermediaries are ' +
+          'reduced — through cooperatives, direct-to-consumer sales, or digital platforms — the producer ' +
+          'keeps a larger share of the final price. India\'s ONDC (Open Network for Digital Commerce) and ' +
+          'farmer producer organizations (FPOs) are attempts to shorten supply chains and improve farmer ' +
+          'incomes.',
+        intermediateContent:
+          'The **markup multiplier** through n intermediaries with individual markups m₁, m₂, …, mₙ is: ' +
+          'Final price = Base cost × (1+m₁)(1+m₂)…(1+mₙ). For uniform 25% markups through 4 stages: ' +
+          'P = C × 1.25⁴ = **2.44C** (a 144% total markup). The **Herfindahl-Hirschman Index** (HHI) ' +
+          'measures market concentration: HHI = Σsᵢ², where sᵢ is the market share of firm i (as a ' +
+          'percentage). HHI < 1,500 = competitive; 1,500-2,500 = moderately concentrated; > 2,500 = ' +
+          'highly concentrated. Transport cost as fraction of value: for rice at ₹30/kg, truck transport ' +
+          'at ₹2/km/tonne over 500 km adds ₹1/kg (3.3% of value). For sand at ₹0.50/kg, the same ' +
+          'transport adds 200% of value — explaining why sand markets are hyper-local.',
+        advancedContent:
+          'Supply chain optimization uses **linear programming** (minimize total cost subject to capacity ' +
+          'and demand constraints) and **network flow models**. The **bullwhip effect** amplifies demand ' +
+          'variability upstream: a 10% retail demand fluctuation can become 40% at the manufacturer — ' +
+          'caused by order batching, demand signal processing, rationing, and price fluctuations (Lee et al., ' +
+          '1997). **Transaction cost economics** (Coase, Williamson) explains vertical integration: firms ' +
+          'absorb supply chain steps when market transaction costs (search, bargaining, enforcement) exceed ' +
+          'internal coordination costs. Blockchain-based supply chain tracking provides provenance transparency, ' +
+          'reducing information asymmetry and enabling premium pricing for verified origins (e.g., single-estate ' +
+          'Assam tea commanding 3-5× commodity prices).',
+      },
     ],
   },
   // ──────────────────────────────────────────────────────────────
@@ -5109,6 +5411,48 @@ export const scienceReferences: ReferenceGuide[] = [
             ],
           },
         },
+      },
+      {
+        title: 'Finite Element Analysis',
+        beginnerContent:
+          'How do engineers know whether a bridge will hold up before it is built? They cannot build ' +
+          'it and hope for the best. Instead, they use a technique called **Finite Element Analysis** ' +
+          '(FEA) — a computer method that predicts how a structure will behave under load by breaking ' +
+          'it into thousands of tiny pieces.\n\n' +
+          'Imagine you want to understand how a rubber band stretches. If you think of the whole band ' +
+          'at once, the math is impossibly complex because different parts stretch differently. But if ' +
+          'you mentally cut the band into 100 tiny segments, you can calculate the stretch of each ' +
+          'segment individually using simple equations. Then you stitch all the answers back together ' +
+          'to get the full picture. That is exactly what FEA does.\n\n' +
+          'Each tiny piece is called a **finite element** — typically a triangle or rectangle in 2D, ' +
+          'or a tetrahedron or brick shape in 3D. The collection of all elements is called a **mesh**. ' +
+          'A finer mesh (more, smaller elements) gives more accurate results but takes longer to compute. ' +
+          'Engineers apply **boundary conditions** — where the structure is fixed, where forces act — ' +
+          'and the computer solves thousands of simultaneous equations to find the **stress**, **strain**, ' +
+          'and **displacement** at every point.\n\n' +
+          'FEA is used to design everything from aircraft wings and car bodies to hip implants and ' +
+          'skyscrapers. It predicts where cracks might start, where heat concentrates, and where ' +
+          'vibrations are strongest — all before a single piece of metal is cut.',
+        intermediateContent:
+          'FEA discretises a continuous domain into elements connected at **nodes**. For structural ' +
+          'analysis, the fundamental equation is **[K]{u} = {F}**, where [K] is the global stiffness ' +
+          'matrix, {u} is the displacement vector, and {F} is the force vector. Each element contributes ' +
+          'a local stiffness matrix based on its geometry and material properties (Young\'s modulus E, ' +
+          'Poisson\'s ratio ν). For a 1D bar element of length L and cross-section A: k = (AE/L) × ' +
+          '[[1,-1],[-1,1]]. The global matrix is assembled by superimposing local matrices at shared ' +
+          'nodes. After applying boundary conditions, the system is solved (typically via LU decomposition ' +
+          'or iterative methods like conjugate gradient) to find nodal displacements, from which strains ' +
+          '(ε = Δu/Δx) and stresses (σ = Eε) are derived.',
+        advancedContent:
+          'Element types range from simple linear (constant strain) to higher-order quadratic and cubic ' +
+          'elements with mid-side nodes for better accuracy. **Isoparametric mapping** transforms ' +
+          'irregular physical elements to standard reference elements for integration. **Gaussian ' +
+          'quadrature** evaluates element integrals numerically. Convergence requires mesh refinement ' +
+          '(h-refinement) or polynomial order increase (p-refinement). Nonlinear FEA handles large ' +
+          'deformations (geometric nonlinearity), plastic yielding (material nonlinearity), and contact ' +
+          'between surfaces — each requiring iterative Newton-Raphson solvers. Modern FEA packages ' +
+          '(ANSYS, Abaqus, COMSOL) couple structural, thermal, and fluid domains for multiphysics ' +
+          'simulations with millions of degrees of freedom.',
       },
     ],
   },
@@ -5797,6 +6141,50 @@ export const scienceReferences: ReferenceGuide[] = [
         diagram: 'GeoErosionProcessDiagram',
         beginnerContent:
           'The Grand Canyon is 1,600 metres deep, 29 kilometres wide, and 446 kilometres long. It was carved almost entirely by water — the Colorado River — over about 5-6 million years. Water is patient.\n\n**Erosion** is the process by which rock and soil are worn away and transported by natural forces. The main agents are:\n\n**Water** — The most powerful erosion agent. Rainwater dissolves CO2 from the air, forming weak carbonic acid that slowly dissolves limestone and other rocks (this is how caves form). Rivers physically abrade their beds with the sediment they carry — sand and gravel act like natural sandpaper. Coastal waves pound cliffs with enormous force.\n\n**Ice** — Water seeps into cracks in rock, freezes, and expands by 9%. This **frost wedging** gradually splits rock apart. Glaciers — rivers of ice — scrape and gouge the landscape as they flow, carving U-shaped valleys and transporting boulders hundreds of kilometres.\n\n**Wind** — In deserts, wind-blown sand acts like a natural sandblaster, sculpting rocks into dramatic shapes. Wind also carries away topsoil, which can cause agricultural disasters (like the 1930s Dust Bowl in the USA).\n\n**Gravity** — The silent eroder. Rockfalls, landslides, and the slow creep of soil downhill are all gravity-driven erosion. Gravity ensures that any material loosened by water, ice, or wind moves downhill.\n\n**Biological erosion** — Plant roots grow into cracks and gradually pry rock apart. Burrowing animals mix and loosen soil. Lichens produce acids that dissolve rock surfaces.\n\nErosion is why no landscape is permanent. Given enough time, water and gravity will level any mountain. The question is always: is the mountain being pushed up faster than it is being worn down?\n\n**Check yourself:** The Himalayas are only 50 million years old but are the tallest mountains on Earth. The Appalachians are 480 million years old but are much shorter. Why? (Answer: The Himalayas are still being pushed up by active tectonic collision faster than erosion wears them down. The Appalachians have had no active uplift for hundreds of millions of years, so erosion has had free reign.)',
+      },
+      {
+        title: 'Freeze-Thaw Weathering',
+        diagram: 'FreezeTnawDiagram',
+        beginnerContent:
+          'Water is one of the very few substances that **expands when it freezes** — by about 9% in ' +
+          'volume. This seemingly small fact is one of the most powerful forces shaping landscapes on ' +
+          'Earth. The process is called **freeze-thaw weathering** (also known as frost wedging or ' +
+          'frost shattering), and it can split solid rock apart.\n\n' +
+          'Here is how it works. During the day, rainwater or snowmelt seeps into tiny cracks, joints, ' +
+          'and pores in rock. At night, when the temperature drops below 0°C, the water freezes. As it ' +
+          'turns to ice, it expands with enormous force — up to **207 MPa** (about 2,000 times ' +
+          'atmospheric pressure). This expansion pushes the crack walls apart, widening the crack ' +
+          'slightly. When the ice melts the next day, water flows deeper into the now-larger crack. ' +
+          'The next freeze widens it further. Over hundreds and thousands of cycles, solid rock is ' +
+          'gradually **pried apart** into smaller and smaller pieces.\n\n' +
+          'Freeze-thaw weathering is most active in regions where temperatures regularly cross the ' +
+          '**freezing point** — mountain environments, high latitudes, and continental interiors with ' +
+          'cold winters. In the Himalayas, freeze-thaw is a major cause of rockfalls and the scree ' +
+          'slopes you see below steep cliffs. In cities, freeze-thaw damages roads (creating potholes), ' +
+          'cracks building foundations, and breaks apart concrete structures.\n\n' +
+          'The talus slopes (piles of angular rock fragments) at the base of mountain cliffs are largely ' +
+          'the product of centuries of freeze-thaw weathering. Each fragment was once part of the cliff ' +
+          'face, loosened by the patient, relentless action of freezing water.',
+        intermediateContent:
+          'The pressure generated by freezing water depends on the confinement of the ice. In a fully ' +
+          'enclosed cavity, the theoretical maximum pressure is **207 MPa** at -22°C (the pressure ' +
+          'melting point of ice at that temperature). The **tensile strength** of common rocks: granite ' +
+          '~10-20 MPa, sandstone ~4-10 MPa, limestone ~5-15 MPa — all far below the maximum ice pressure, ' +
+          'explaining why freeze-thaw is so effective. The rate of weathering depends on: (1) **frequency** ' +
+          'of freeze-thaw cycles (not just cold temperatures — a constant -20°C does nothing), (2) ' +
+          '**water availability** (dry rock cannot freeze-thaw), (3) **rock porosity** (more pores = more ' +
+          'water entry points), (4) **crack density** (pre-existing fractures accelerate the process). ' +
+          'Alpine environments may experience 200+ freeze-thaw cycles per year near the 0°C isotherm.',
+        advancedContent:
+          'The ice segregation model (Walder and Hallet, 1985) shows that maximum frost damage occurs ' +
+          'not at the freezing front but in a **frozen fringe** behind it, where thin films of unfrozen ' +
+          'water migrate toward growing ice lenses via cryosuction (thermodynamic pressure gradients). ' +
+          'The critical temperature range for maximum damage is -3°C to -8°C, not colder, because ' +
+          'cryosuction requires partially unfrozen pore water. Frost susceptibility of rocks is quantified ' +
+          'by the **saturation coefficient** S_cr: rocks with S > S_cr (~0.80-0.91) are vulnerable. ' +
+          'Periglacial geomorphology studies landforms shaped by freeze-thaw: patterned ground, solifluction ' +
+          'lobes, pingos, and thermokarst. Climate change is shifting freeze-thaw zones poleward and upward, ' +
+          'destabilizing permafrost regions and increasing rockfall hazards in alpine environments.',
       },
     ],
   },

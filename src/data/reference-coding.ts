@@ -7265,6 +7265,45 @@ for val in [10, 20, 30, 40, 50]:
           'speed and final adoption. Granovetter\'s threshold model: agent i adopts when fraction of adopters ' +
           'exceeds personal threshold \\u03B8\\u1D62. The distribution of \\u03B8 values determines whether cascades occur.',
       },
+      {
+        title: 'Graph Theory and Network Analysis',
+        beginnerContent:
+          'Think of a social network: each person is a dot, and each friendship is a line connecting ' +
+          'two dots. In mathematics, those dots are called **nodes** (or vertices) and the lines are ' +
+          'called **edges**. Together they form a **graph** — one of the most powerful structures in ' +
+          'computer science and mathematics.\n\n' +
+          'Graphs are everywhere once you learn to see them. Cities connected by roads form a graph. ' +
+          'Web pages connected by hyperlinks form a graph. Neurons connected by synapses form a graph. ' +
+          'Atoms connected by chemical bonds form a graph. Any time you have things and relationships ' +
+          'between those things, you have a graph.\n\n' +
+          'The most famous graph problem is the **shortest path**: what is the quickest route between ' +
+          'two nodes? Google Maps solves this billions of times daily using Dijkstra\'s algorithm, which ' +
+          'explores outward from the starting node, always expanding the closest unvisited node first, ' +
+          'until it reaches the destination.\n\n' +
+          '**Centrality** measures how important a node is. A person with many friends has high **degree ' +
+          'centrality**. A person who connects two otherwise separate groups has high **betweenness ' +
+          'centrality** — removing them would disconnect the network. Google\'s PageRank algorithm measures ' +
+          'a kind of centrality for web pages: a page is important if important pages link to it. This ' +
+          'recursive definition is what made Google\'s search engine revolutionary.',
+        intermediateContent:
+          'A graph G = (V, E) has |V| vertices and |E| edges. Storage: **adjacency matrix** uses O(V²) ' +
+          'space but allows O(1) edge lookup; **adjacency list** uses O(V + E) space and is preferred ' +
+          'for sparse graphs. BFS (breadth-first search) finds shortest paths in unweighted graphs in ' +
+          'O(V + E). **Dijkstra\'s algorithm** handles non-negative weighted edges in O((V + E) log V) ' +
+          'with a min-heap. **Bellman-Ford** handles negative weights in O(VE). **Floyd-Warshall** finds ' +
+          'all-pairs shortest paths in O(V³). Degree centrality: C_D(v) = deg(v)/(|V|-1). Betweenness: ' +
+          'C_B(v) = Σ σ_st(v)/σ_st summed over all pairs s,t where σ_st is the number of shortest paths ' +
+          'and σ_st(v) is those passing through v.',
+        advancedContent:
+          'Spectral graph theory analyses the eigenvalues of the graph Laplacian L = D - A (degree matrix ' +
+          'minus adjacency matrix). The second-smallest eigenvalue λ₂ (algebraic connectivity) measures ' +
+          'how well-connected the graph is — the Cheeger inequality relates it to the minimum cut. ' +
+          'Community detection algorithms (Louvain, spectral clustering) partition graphs into densely ' +
+          'connected subgroups. Random graph models — Erdős-Rényi G(n,p), Barabási-Albert preferential ' +
+          'attachment, Watts-Strogatz small-world — generate networks with specific statistical properties. ' +
+          'NP-hard graph problems (clique, coloring, Hamiltonian path) are approximated using heuristics ' +
+          'or parameterized algorithms.',
+      },
     ],
 
     build: [
