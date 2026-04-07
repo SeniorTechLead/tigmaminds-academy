@@ -59,7 +59,7 @@ fig, axes = plt.subplots(1, 3, figsize=(14, 5))
 fig.patch.set_facecolor('#1f2937')
 
 # Funnel visualization
-stages = ['Sensory\\\nInput', 'Working\\\nMemory', 'Long-term\\\nMemory']
+stages = ['Sensory\\nInput', 'Working\\nMemory', 'Long-term\\nMemory']
 counts = [n_items, n_wm, max(n_ltm, 1)]
 colors = ['#3b82f6', '#f59e0b', '#22c55e']
 
@@ -172,7 +172,7 @@ ax2.plot(time_days, ltm_decay, color='#ef4444', linewidth=2.5, label='No review'
 ax2.plot(time_days, ltm_reviewed, color='#22c55e', linewidth=2, label='Spaced review (days 1, 7, 30, 90)')
 for rd in review_days:
     ax2.axvline(rd, color='#f59e0b', linestyle=':', alpha=0.5)
-    ax2.text(rd + 5, 95, f'Review\\\nday {rd}', color='#f59e0b', fontsize=7)
+    ax2.text(rd + 5, 95, f'Review\\nday {rd}', color='#f59e0b', fontsize=7)
 ax2.set_xlabel('Time (days)', color='white')
 ax2.set_ylabel('% Retained', color='white')
 ax2.set_title('Long-Term Memory (Ebbinghaus Curve)', color='white', fontsize=13)
@@ -252,7 +252,7 @@ ax1.tick_params(colors='gray')
 
 # Context-dependent memory experiment
 ax2.set_facecolor('#111827')
-conditions = ['Same room\\\nSame mood', 'Same room\\\nDiff mood', 'Diff room\\\nSame mood', 'Diff room\\\nDiff mood']
+conditions = ['Same room\\nSame mood', 'Same room\\nDiff mood', 'Diff room\\nSame mood', 'Diff room\\nDiff mood']
 # Based on Godden & Baddeley (1975) and mood-congruent memory studies
 recall_scores = [78, 62, 58, 42]
 bar_colors = ['#22c55e', '#3b82f6', '#f59e0b', '#ef4444']
@@ -350,7 +350,7 @@ ax1.tick_params(colors='gray')
 
 # Bar comparison summary
 ax2.set_facecolor('#111827')
-conditions = ['List A\\\n(alone)', 'List A\\\n(after B)', 'List B\\\n(alone)', 'List B\\\n(after A)']
+conditions = ['List A\\n(alone)', 'List A\\n(after B)', 'List B\\n(alone)', 'List B\\n(after A)']
 means = [control_a.mean(), interfered_a.mean(), control_b.mean(), interfered_b.mean()]
 sems = [control_a.std()/np.sqrt(n_participants), interfered_a.std()/np.sqrt(n_participants),
         control_b.std()/np.sqrt(n_participants), interfered_b.std()/np.sqrt(n_participants)]
@@ -369,10 +369,10 @@ for bar, m in zip(bars, means):
              f'{m:.1f}', ha='center', color='white', fontsize=11)
 
 # Arrows showing interference
-ax2.annotate('Retroactive\\\ninterference', xy=(0.5, means[1] + 0.5), xytext=(0.5, means[0] + 1.5),
+ax2.annotate('Retroactive\\ninterference', xy=(0.5, means[1] + 0.5), xytext=(0.5, means[0] + 1.5),
              color='#f59e0b', fontsize=9, ha='center',
              arrowprops=dict(arrowstyle='->', color='#f59e0b'))
-ax2.annotate('Proactive\\\ninterference', xy=(2.5, means[3] + 0.5), xytext=(2.5, means[2] + 1.5),
+ax2.annotate('Proactive\\ninterference', xy=(2.5, means[3] + 0.5), xytext=(2.5, means[2] + 1.5),
              color='#f59e0b', fontsize=9, ha='center',
              arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
@@ -477,11 +477,11 @@ ax2.set_ylabel('Probability of recall', color='white')
 ax2.set_title('Serial Position Effect', color='white', fontsize=13)
 ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax2.tick_params(colors='gray')
-ax2.annotate('Primacy\\\neffect', xy=(3, rote_serial[2]), color='#f59e0b', fontsize=9,
+ax2.annotate('Primacy\\neffect', xy=(3, rote_serial[2]), color='#f59e0b', fontsize=9,
              xytext=(5, 0.55), arrowprops=dict(arrowstyle='->', color='#f59e0b'))
-ax2.annotate('Recency\\\neffect', xy=(28, rote_serial[27]), color='#f59e0b', fontsize=9,
+ax2.annotate('Recency\\neffect', xy=(28, rote_serial[27]), color='#f59e0b', fontsize=9,
              xytext=(24, 0.55), arrowprops=dict(arrowstyle='->', color='#f59e0b'))
-ax2.annotate('Weak middle\\\n(rote only)', xy=(15, rote_serial[14]), color='#ef4444', fontsize=9,
+ax2.annotate('Weak middle\\n(rote only)', xy=(15, rote_serial[14]), color='#ef4444', fontsize=9,
              xytext=(16, 0.2), arrowprops=dict(arrowstyle='->', color='#ef4444'))
 
 plt.tight_layout()

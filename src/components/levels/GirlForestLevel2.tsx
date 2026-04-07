@@ -227,7 +227,7 @@ print("Pathway analysis:")
 print(f"  Net-zero 2050: cumulative = {cumulative_2050[-1]:.0f} GtCO₂")
 print(f"  Net-zero 2070: cumulative = {cumulative_2070[-1]:.0f} GtCO₂")
 print(f"  Delayed action: cumulative = {cumulative_delayed[-1]:.0f} GtCO₂")
-print(f"\\\n  1.5°C carbon budget: {budget} GtCO₂")
+print(f"\\n  1.5°C carbon budget: {budget} GtCO₂")
 print(f"  At 40 Gt/year, budget exhausted in {budget/40:.0f} years ({2024 + budget//40})")`,
       challenge: 'India argues it should have a later net-zero date (2070) because its cumulative historical emissions are much lower than the US or EU. Calculate cumulative emissions for India (starting at 3 GtCO₂/year, growing 4%/year) vs. USA (starting at 5 GtCO₂/year, declining 2%/year). Who has the bigger cumulative total by 2070?',
       successHint: 'Net-zero is a math problem with a hard deadline. The carbon budget is finite, pathways are computable, and every year of delay narrows our options. Understanding the math is what separates credible climate plans from political rhetoric.',
@@ -458,7 +458,7 @@ print("Total abatement potential at different carbon prices:")
 for price in [10, 50, 100, 200, 300]:
     total = sum(d['potential'] for _, d in technologies.items() if d['cost'] <= price)
     print(f"  {price}/tonne: {total:.1f} GtCO₂/year")
-print(f"\\\nWorld needs: ~20 GtCO₂/year reduction")
+print(f"\\nWorld needs: ~20 GtCO₂/year reduction")
 print(f"This requires carbon price > $100/tonne to unlock enough technology")`,
       challenge: 'If the Girl\'s forest generates 5,000 credits per year at $10/tonne, the community earns $50,000/year. But at $50/tonne (EU ETS level), they\'d earn $250,000. What carbon price makes community forestry more profitable than palm oil farming (which earns ~$1,000/hectare/year)? This is the critical threshold.',
       successHint: 'Carbon markets are an attempt to put a price on pollution and a value on forests. When the price is right, economic incentives align with environmental needs. When the price is too low, markets fail. Understanding market design is essential for anyone working on climate policy.',
@@ -595,7 +595,7 @@ print(f"  Mean height: {final['mean_h'][-1]:.1f} m")
 print(f"  Max height: {final['max_h'][-1]:.1f} m")
 print(f"  Total biomass: {final['biomass'][-1]:.1f} tonnes")
 print(f"  Estimated carbon: {final['biomass'][-1]*0.5:.1f} tonnes")
-print(f"\\\nCompetition killed {n_trees - final['alive'][-1]} trees (natural thinning)")
+print(f"\\nCompetition killed {n_trees - final['alive'][-1]} trees (natural thinning)")
 print("Survivors are taller and have more resources per tree.")`,
       challenge: 'Add a "thinning" intervention at Year 20: remove the 30 smallest trees. Does this increase or decrease total biomass at Year 50? Foresters call this "release" — freeing resources for the remaining trees to grow faster.',
       successHint: 'Forest growth models are where biology meets computation. From carbon accounting to net-zero calculations to REDD+ crediting to carbon markets to growth modeling — you now have the full toolkit for understanding forests as both ecosystems and climate assets. The Girl Who Grew a Forest started with a single sapling. You started with a single lesson. Both grew into something much larger.',
@@ -709,7 +709,7 @@ if len(alert_times) > 0:
     ax2.scatter(alert_times, alert_vals, s=50, color='#ef4444', zorder=5, label='ALERTS')
     first_alert = alert_times[0]
     delay = first_alert - deforest_time
-    ax2.annotate(f'First alert: year {first_alert:.2f}\\\nDelay: {delay*365:.0f} days',
+    ax2.annotate(f'First alert: year {first_alert:.2f}\\nDelay: {delay*365:.0f} days',
                 xy=(first_alert, alert_vals[0]), xytext=(first_alert+0.3, 0.35),
                 color='#ef4444', fontsize=10, arrowprops=dict(arrowstyle='->', color='#ef4444'))
 
@@ -732,7 +732,7 @@ if len(alert_times) > 0:
     print(f"  Total alerts: {len(alert_times)}")
 else:
     print("No deforestation detected (algorithm may need tuning)")
-print(f"\\\nCloud cover caused {np.sum(~cloud_mask)} of {n_observations} observations to be lost")
+print(f"\\nCloud cover caused {np.sum(~cloud_mask)} of {n_observations} observations to be lost")
 print(f"Effective coverage: {np.sum(cloud_mask)/n_observations*100:.0f}%")`,
       challenge: 'Lower the threshold from 0.5 to 0.6 to detect deforestation faster. What happens to the detection delay? But also count how many false alerts occur before the actual deforestation event. This is the precision-recall trade-off — a fundamental concept in all detection systems.',
       successHint: 'From carbon accounting to net-zero pathways to REDD+ crediting to carbon markets to growth modeling to satellite detection — you now command the full toolkit of climate forestry. The Girl Who Grew a Forest worked by hand and by heart. You work with data and algorithms. Together, both approaches are needed to protect the world\'s forests.',

@@ -332,7 +332,7 @@ for i in range(n):
         if d < min_dist: min_dist, min_pair = d, f"{names_short[i]} - {names_short[j]}"
         if d > max_dist: max_dist, max_pair = d, f"{names_short[i]} - {names_short[j]}"
 
-print(f"\\\nClosest pair: {min_pair} ({min_dist:.0f} km)")
+print(f"\\nClosest pair: {min_pair} ({min_dist:.0f} km)")
 print(f"Farthest pair: {max_pair} ({max_dist:.0f} km)")`,
       challenge: 'The haversine formula calculates "as the crow flies" distance. But in NE India with mountainous terrain, actual road distance can be 2-3× the straight-line distance. For Guwahati to Kohima, the haversine distance is ~260 km but the road is ~340 km. Calculate the "circuity factor" (road/straight-line) for each pair.',
       successHint: 'The coordinate system is the backbone of all geographic analysis. Every GPS device, every navigation app, every satellite image is referenced to latitude and longitude. Understanding coordinates is understanding the language of geography.',
@@ -426,7 +426,7 @@ ax2.plot(y, profile, color='#22c55e', linewidth=2)
 # Annotate features
 ax2.annotate('Floodplain', xy=(5, profile[20]), xytext=(5, 250),
             color='#3b82f6', fontsize=9, arrowprops=dict(arrowstyle='->', color='#3b82f6'))
-ax2.annotate('Hill summit\\\n(~700m)', xy=(30, profile[120]), xytext=(35, 750),
+ax2.annotate('Hill summit\\n(~700m)', xy=(30, profile[120]), xytext=(35, 750),
             color='#f59e0b', fontsize=9, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 ax2.annotate('Valley', xy=(25, profile[100]), xytext=(15, 500),
             color='#22c55e', fontsize=9, arrowprops=dict(arrowstyle='->', color='#22c55e'))
@@ -606,9 +606,9 @@ ax.fill_between(distance, 0, elevation_profile, color='#8B7355', alpha=0.5)
 ax.plot(distance, elevation_profile, color='#22c55e', linewidth=2)
 
 # Annotate
-ax.annotate('Brahmaputra Valley\\\n(~30m)', xy=(10, 40), xytext=(30, 1500),
+ax.annotate('Brahmaputra Valley\\n(~30m)', xy=(10, 40), xytext=(30, 1500),
            color='#3b82f6', fontsize=9, arrowprops=dict(arrowstyle='->', color='#3b82f6'))
-ax.annotate('Kangto Peak\\\n(7,090m)', xy=(195, 6500), xytext=(150, 6800),
+ax.annotate('Kangto Peak\\n(7,090m)', xy=(195, 6500), xytext=(150, 6800),
            color='#ef4444', fontsize=9, arrowprops=dict(arrowstyle='->', color='#ef4444'))
 
 ax.set_xlabel('Distance from Brahmaputra (km)', color='white')
@@ -652,7 +652,7 @@ theta = np.linspace(0, 2*np.pi, 100)
 
 # Indian plate (from south)
 ax.arrow(5, 1, 0, 3, head_width=0.3, head_length=0.2, fc='#22c55e', ec='#22c55e')
-ax.text(5, 0.5, 'Indian Plate\\\n(moving N at 5cm/yr)', ha='center', color='#22c55e', fontsize=9)
+ax.text(5, 0.5, 'Indian Plate\\n(moving N at 5cm/yr)', ha='center', color='#22c55e', fontsize=9)
 
 # Eurasian plate (from north)
 ax.arrow(5, 9, 0, -3, head_width=0.3, head_length=0.2, fc='#3b82f6', ec='#3b82f6')
@@ -660,12 +660,12 @@ ax.text(5, 9.5, 'Eurasian Plate', ha='center', color='#3b82f6', fontsize=9)
 
 # Burma plate (from east)
 ax.arrow(9, 5, -3, 0, head_width=0.3, head_length=0.2, fc='#f59e0b', ec='#f59e0b')
-ax.text(9.5, 5, 'Burma\\\nPlate', ha='left', color='#f59e0b', fontsize=9)
+ax.text(9.5, 5, 'Burma\\nPlate', ha='left', color='#f59e0b', fontsize=9)
 
 # Collision zone = NE India
 circle = plt.Circle((5, 5), 1.5, fill=True, facecolor='#ef4444', alpha=0.3, edgecolor='#ef4444', linewidth=2)
 ax.add_patch(circle)
-ax.text(5, 5, 'NE INDIA\\\n(triple junction)', ha='center', va='center', color='white', fontsize=10, fontweight='bold')
+ax.text(5, 5, 'NE INDIA\\n(triple junction)', ha='center', va='center', color='white', fontsize=10, fontweight='bold')
 
 ax.set_xlim(0, 11)
 ax.set_ylim(0, 11)

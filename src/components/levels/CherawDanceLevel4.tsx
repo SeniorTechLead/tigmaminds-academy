@@ -181,7 +181,7 @@ conn.commit()
 print("SAFETY ANALYSIS — Cheraw Dance Performances (500 records)")
 print("=" * 70)
 
-print("\\\nIncident Rate by Pattern:")
+print("\\nIncident Rate by Pattern:")
 print(f"{'Pattern':<15} {'Performances':>12} {'Incidents':>10} {'Rate':>8}")
 print("-" * 50)
 for row in c.execute('''
@@ -192,7 +192,7 @@ for row in c.execute('''
 '''):
     print(f"{row[0]:<15} {row[1]:>12} {row[2]:>10} {row[3]:>7.1f}%")
 
-print("\\\nIncident Rate by Holder Experience:")
+print("\\nIncident Rate by Holder Experience:")
 print(f"{'Experience':<15} {'Performances':>12} {'Rate':>8}")
 print("-" * 38)
 for row in c.execute('''
@@ -202,7 +202,7 @@ for row in c.execute('''
 '''):
     print(f"{row[0]:<15} {row[1]:>12} {row[2]:>7.1f}%")
 
-print("\\\nHighest risk combination (pattern + experience):")
+print("\\nHighest risk combination (pattern + experience):")
 for row in c.execute('''
     SELECT p.name, pe.holder_experience, COUNT(*),
            ROUND(100.0 * SUM(pe.incidents) / COUNT(*), 1) as rate
@@ -291,7 +291,7 @@ print("Euclidean Rhythm Generator for Cheraw Dance")
 print("=" * 55)
 
 for steps in [8, 12, 16]:
-    print(f"\\\n--- {steps}-step patterns ---")
+    print(f"\\n--- {steps}-step patterns ---")
     for hits in range(2, steps):
         pattern = euclidean_rhythm(hits, steps)
         pat_str = pattern_to_str(pattern)
@@ -314,7 +314,7 @@ for steps in [8, 12, 16]:
             print(f"  {name:<25} {visual}  sync={sync:.2f}")
 
 # Find optimal patterns for Cheraw
-print("\\\nBest patterns for Cheraw (density 0.4-0.6, medium syncopation):")
+print("\\nBest patterns for Cheraw (density 0.4-0.6, medium syncopation):")
 for row in c.execute('''
     SELECT name, pattern, density, syncopation FROM generated_patterns
     WHERE density BETWEEN 0.4 AND 0.6 AND syncopation BETWEEN 0.2 AND 0.6
@@ -447,7 +447,7 @@ for pat, name in zip(patterns, pattern_names):
 conn.commit()
 
 # Find best choreographies
-print(f"\\\n{'Pattern':<15} {'Dancers':>8} {'Safety':>8} {'Beauty':>8} {'Total':>8}")
+print(f"\\n{'Pattern':<15} {'Dancers':>8} {'Safety':>8} {'Beauty':>8} {'Total':>8}")
 print("-" * 52)
 for row in c.execute('''
     SELECT pattern, num_dancers, safety_score, aesthetic_score, total_score
@@ -457,7 +457,7 @@ for row in c.execute('''
     print(f"{pname:<15} {row[1]:>8} {row[2]:>7.1f}% {row[3]:>7.1f}% {row[4]:>7.1f}%")
 
 # Visualize best choreography
-print("\\\nBest choreography visualization (top-down view):")
+print("\\nBest choreography visualization (top-down view):")
 best = c.execute('SELECT pattern, num_dancers, solution FROM choreographies ORDER BY total_score DESC LIMIT 1').fetchone()
 history = eval(best[2])
 print(f"Pattern: {best[0]}, Dancers: {best[1]}")
@@ -574,13 +574,13 @@ total = c.execute('SELECT COUNT(*) FROM simulations').fetchone()[0]
 print(f"CHERAW SIMULATION ENGINE — {total} configurations tested")
 print("=" * 60)
 
-print("\\\nSafety breakdown:")
+print("\\nSafety breakdown:")
 for row in c.execute('''SELECT safety_rating, COUNT(*),
     ROUND(AVG(safe_window_pct),1), ROUND(AVG(max_gap_velocity),2)
     FROM simulations GROUP BY safety_rating ORDER BY 2 DESC'''):
     print(f"  {row[0]:<10}: {row[1]:>4} configs, avg safe window {row[2]}%, avg velocity {row[3]} m/s")
 
-print("\\\nBest configurations (SAFE, recommended):")
+print("\\nBest configurations (SAFE, recommended):")
 print(f"  {'Pattern':<10} {'BPM':>4} {'Amp':>4} {'Damp':>5} {'D':>2} {'Window':>7} {'Vel':>5}")
 print("  " + "-" * 45)
 for row in c.execute('''SELECT pattern, tempo_bpm, amplitude_cm, damping,
@@ -589,14 +589,14 @@ for row in c.execute('''SELECT pattern, tempo_bpm, amplitude_cm, damping,
     ORDER BY safe_window_pct DESC LIMIT 8'''):
     print(f"  {row[0]:<10} {row[1]:>4} {row[2]:>4.0f} {row[3]:>5.1f} {row[4]:>2} {row[5]:>6.1f}% {row[6]:>5.2f}")
 
-print("\\\nRiskiest tempo:")
+print("\\nRiskiest tempo:")
 for row in c.execute('''SELECT tempo_bpm, COUNT(*),
     ROUND(100.0*SUM(CASE WHEN safety_rating='RISKY' THEN 1 ELSE 0 END)/COUNT(*),1)
     FROM simulations GROUP BY tempo_bpm ORDER BY 3 DESC LIMIT 1'''):
     print(f"  {row[0]} BPM: {row[2]}% of configurations rated RISKY")
 
 conn.close()
-print("\\\nSimulation complete. Physics + patterns + database = full Cheraw engine.")`,
+print("\\nSimulation complete. Physics + patterns + database = full Cheraw engine.")`,
       challenge: 'Add a "performer_fatigue" model: over a 5-minute performance, the holders gradually increase damping and decrease amplitude. At what point does the safety rating transition from SAFE to MODERATE? This models real-world performance degradation.',
       successHint: 'You built a complete simulation engine integrating physics, algorithms, and databases. This capstone demonstrates that software engineering is about composition: combining simple, well-tested components into systems that solve complex problems. The Cheraw dance, a centuries-old tradition, meets computational science.',
     },

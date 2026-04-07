@@ -101,7 +101,7 @@ raw = WaterQuality(
 )
 
 print("=== Water Treatment Pre-Treatment Chain ===")
-print("\\\n[Stage 0] Raw Sundarbans Water")
+print("\\n[Stage 0] Raw Sundarbans Water")
 raw.report("Raw")
 
 stages = [
@@ -114,7 +114,7 @@ stages = [
 water = raw
 for i, (name, func) in enumerate(stages, 1):
     water = func(water)
-    print(f"\\\n[Stage {i}] After {name}")
+    print(f"\\n[Stage {i}] After {name}")
     water.report(name)
 
 # Check if water is RO-ready
@@ -132,7 +132,7 @@ for desc, passed in checks:
     if not passed:
         all_pass = False
 
-print(f"\\\nWater is {'READY' if all_pass else 'NOT READY'} for RO membranes.")
+print(f"\\nWater is {'READY' if all_pass else 'NOT READY'} for RO membranes.")
 print(f"Volume recovered: {water.volume/raw.volume*100:.1f}% of intake")`,
       challenge: 'Raw water quality varies with monsoon/dry season. Try turbidity of 500 NTU (monsoon flood) and 50 NTU (dry season). Does the same treatment chain work for both? What adjustments would you make for monsoon conditions?',
       successHint: 'You just simulated a real water treatment plant. Every municipal water system follows this same logic: measure quality at each stage, verify against limits, and only proceed when the water meets the next stage\'s requirements. This systematic approach prevents costly membrane damage.',
@@ -228,7 +228,7 @@ total_perm = r1["permeate_flow"] + r2["permeate_flow"]
 total_recovery = total_perm / feed_flow * 100
 blended_salt = (r1["permeate_salt"] * r1["permeate_flow"] +
                 r2["permeate_salt"] * r2["permeate_flow"]) / total_perm
-print(f"\\\nTotal: {total_perm:.0f} L/h at {blended_salt:.3f} g/L")
+print(f"\\nTotal: {total_perm:.0f} L/h at {blended_salt:.3f} g/L")
 print(f"System recovery: {total_recovery:.1f}% (vs {r1['recovery']:.1f}% single-stage)")`,
       challenge: 'Add a third stage to treat Stage 2 concentrate. What recovery can you achieve? At what point does the brine become too concentrated for practical membrane operation? Calculate the brine disposal volume for 2-stage vs 3-stage designs.',
       successHint: 'Membrane array design is a core skill in water engineering. The same staging concepts apply to chemical plants, refineries, and pharmaceutical manufacturing — anywhere you need to separate mixtures at scale.',
@@ -304,7 +304,7 @@ print(f"Net power:      {with_erd['net_kw']:.2f} kW")
 print(f"SEC:            {with_erd['sec_kwh_m3']:.2f} kWh/m3")
 
 savings = (1 - with_erd['sec_kwh_m3'] / no_erd['sec_kwh_m3']) * 100
-print(f"\\\nEnergy savings with ERD: {savings:.0f}%")
+print(f"\\nEnergy savings with ERD: {savings:.0f}%")
 
 # Compare across different system sizes
 print()
@@ -405,7 +405,7 @@ for r in results[::5]:  # every 50m
     status = "EXCEED" if r["salinity"] > threshold else "OK"
     print(f"{r['distance']:>12} {r['salinity']:>12.1f} {status:<10}")
 
-print(f"\\\nSafe distance from outfall: {safe_dist} m")
+print(f"\\nSafe distance from outfall: {safe_dist} m")
 
 # Compare management options
 print()
@@ -556,10 +556,10 @@ print(f"Hours short:     {hours_short}")
 print(f"Solar energy:    {total_energy:.1f} kWh")
 
 if total_produced >= total_demand:
-    print("\\\nSystem MEETS daily demand!")
+    print("\\nSystem MEETS daily demand!")
 else:
     deficit = total_demand - total_produced
-    print(f"\\\nSystem SHORT by {deficit:.0f} L/day.")
+    print(f"\\nSystem SHORT by {deficit:.0f} L/day.")
     extra_panels = deficit * 0.003 / panel_eff  # rough estimate
     print(f"Need ~{extra_panels:.0f} m2 more solar panels.")`,
       challenge: 'Modify the simulation for monsoon conditions: reduce solar irradiance by 50% (cloud cover) but reduce salinity by 60% (freshwater flooding). Does the system still meet demand? What about a cyclone day with zero solar and maximum salinity? Design a battery backup to handle 2 days without sun.',

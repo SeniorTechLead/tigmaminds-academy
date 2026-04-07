@@ -141,9 +141,9 @@ ax.bar(centers * 1e6, counts, width=np.diff(np.concatenate([centers, [centers[-1
        color='#3b82f6', alpha=0.8)
 ax.set_xscale('log')
 ax.axvline(x=40, color='#f59e0b', linewidth=1.5, linestyle='--', alpha=0.7)
-ax.text(45, max(counts) * 0.9, 'Collision\\nthreshold', color='#f59e0b', fontsize=8)
+ax.text(45, max(counts) * 0.9, 'Collision\nthreshold', color='#f59e0b', fontsize=8)
 ax.axvline(x=100, color='#ec4899', linewidth=1.5, linestyle=':', alpha=0.7)
-ax.text(110, max(counts) * 0.8, 'Rain\\nthreshold', color='#ec4899', fontsize=8)
+ax.text(110, max(counts) * 0.8, 'Rain\nthreshold', color='#ec4899', fontsize=8)
 ax.set_xlabel('Droplet radius (um)', color='white')
 ax.set_ylabel('Count', color='white')
 ax.set_title('Initial size distribution (N=10,000)', color='white', fontsize=11, fontweight='bold')
@@ -717,7 +717,7 @@ if result_no_seed['precip_mass'] > 0:
 else:
     enhancement = float('inf') if result_seeded['precip_mass'] > 0 else 1.0
 
-ax.bar(['Enhancement\\nratio'], [enhancement], color='#f59e0b', alpha=0.8, width=0.4)
+ax.bar(['Enhancement\nratio'], [enhancement], color='#f59e0b', alpha=0.8, width=0.4)
 ax.axhline(y=1.0, color='white', linewidth=1, linestyle='--', alpha=0.5)
 ax.text(0, enhancement + 0.05, f'{enhancement:.2f}x', ha='center', color='white', fontsize=14, fontweight='bold')
 ax.set_ylabel('Seeded / Unseeded', color='white')

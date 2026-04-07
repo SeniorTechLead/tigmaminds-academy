@@ -60,9 +60,9 @@ ax.set_ylabel('Elevation (m)', color='white')
 ax.set_title('The Siang River: Tibet to Assam', color='white', fontsize=13)
 ax.tick_params(colors='gray')
 # Label sections
-ax.text(50, 3500, 'Tibet\\\nPlateau', color='#60a5fa', fontsize=10, ha='center')
-ax.text(200, 2000, 'Himalayan\\\nGorge', color='#ef4444', fontsize=10, ha='center')
-ax.text(400, 500, 'Assam\\\nPlains', color='#22c55e', fontsize=10, ha='center')
+ax.text(50, 3500, 'Tibet\\nPlateau', color='#60a5fa', fontsize=10, ha='center')
+ax.text(200, 2000, 'Himalayan\\nGorge', color='#ef4444', fontsize=10, ha='center')
+ax.text(400, 500, 'Assam\\nPlains', color='#22c55e', fontsize=10, ha='center')
 
 # Velocity
 ax = axes[1]
@@ -614,9 +614,9 @@ ax.tick_params(colors='gray')
 
 # Section labels
 sections = [
-    (850, 3500, 'YARLUNG TSANGPO\\n(Tibet)', '#60a5fa'),
-    (1850, 2500, 'SIANG\\n(Gorge)', '#ef4444'),
-    (2350, 500, 'BRAHMAPUTRA\\n(Assam)', '#22c55e'),
+    (850, 3500, 'YARLUNG TSANGPO\n(Tibet)', '#60a5fa'),
+    (1850, 2500, 'SIANG\n(Gorge)', '#ef4444'),
+    (2350, 500, 'BRAHMAPUTRA\n(Assam)', '#22c55e'),
     (2800, 200, 'DELTA', '#f59e0b'),
 ]
 for x, y, label, color in sections:
@@ -646,7 +646,7 @@ ax = axes[3]
 ax.set_facecolor('#111827')
 ax.plot(distance, sed_conc, color='#ef4444', linewidth=2)
 ax.fill_between(distance, sed_conc, alpha=0.15, color='#ef4444')
-ax.set_ylabel('Sediment conc.\\n(kg/m³)', color='white')
+ax.set_ylabel('Sediment conc.\n(kg/m³)', color='white')
 ax.set_xlabel('Distance from source (km)', color='white')
 ax.tick_params(colors='gray')
 

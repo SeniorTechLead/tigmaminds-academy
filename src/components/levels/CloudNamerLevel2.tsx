@@ -170,7 +170,7 @@ ax1.tick_params(colors='gray')
 
 # Right: Gini impurity at each split
 ax2.set_facecolor('#111827')
-splits = ['Parent', 'After Split 1\\\n(left)', 'After Split 1\\\n(right)']
+splits = ['Parent', 'After Split 1\\n(left)', 'After Split 1\\n(right)']
 gini_values = [gini(y), gini(y[mask_l]), gini(y[~mask_l])]
 colors = ['#f59e0b', '#22c55e', '#3b82f6']
 bars = ax2.bar(splits, gini_values, color=colors, alpha=0.8, edgecolor='white', linewidth=0.5)
@@ -583,7 +583,7 @@ for ax, (name, clf_func) in zip(axes, classifiers):
 
     pred = nearest_centroid(X, y, X) if 'Centroid' in name else (knn_classify(X, y, X) if 'NN' in name else decision_stump_ensemble(X, y, X))
     acc = (pred == y).mean()
-    ax.set_title(f'{name}\\\nAccuracy: {acc:.1%}', color='white', fontsize=11)
+    ax.set_title(f'{name}\\nAccuracy: {acc:.1%}', color='white', fontsize=11)
     ax.tick_params(colors='gray', labelsize=7)
 
 plt.suptitle('Three Classifiers on Non-Linear Data', color='white', fontsize=14, y=1.02)

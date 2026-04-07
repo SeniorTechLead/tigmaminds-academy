@@ -63,7 +63,7 @@ ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax1.tick_params(colors='gray')
 
 # Annotate typical bird bone
-ax1.annotate('Typical bird bone\\\n(~1mm wall)', xy=(1, ratio_hollow[10] / ratio_solid * 100),
+ax1.annotate('Typical bird bone\\n(~1mm wall)', xy=(1, ratio_hollow[10] / ratio_solid * 100),
             xytext=(2, 250), color='#f59e0b', fontsize=10,
             arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
@@ -251,7 +251,7 @@ fig.patch.set_facecolor('#1f2937')
 
 # Daily energy budget
 ax1.set_facecolor('#111827')
-categories = ['Basal\\\nmetabolism', 'Flight\\\n(delivery)', 'Total\\\nexpenditure', 'Food\\\nintake']
+categories = ['Basal\\nmetabolism', 'Flight\\n(delivery)', 'Total\\nexpenditure', 'Food\\nintake']
 values = [basal_metabolism, delivery_energy, basal_metabolism + delivery_energy, male_intake]
 colors_list = ['#3b82f6', '#f59e0b', '#ef4444', '#22c55e']
 bars = ax1.bar(categories, values, color=colors_list, edgecolor='none')
@@ -278,8 +278,8 @@ ax2.annotate(f'{pct_loss:.0f}% body mass lost', xy=(120, male_mass[-1]),
 
 # Nesting success rates comparison
 ax3.set_facecolor('#111827')
-bird_types = ['Hornbill\\\n(sealed nest)', 'Eagle\\\n(open nest)', 'Songbird\\\n(open nest)',
-              'Ground nester\\\n(plover)', 'Cuckoo\\\n(brood parasite)']
+bird_types = ['Hornbill\\n(sealed nest)', 'Eagle\\n(open nest)', 'Songbird\\n(open nest)',
+              'Ground nester\\n(plover)', 'Cuckoo\\n(brood parasite)']
 success_rates = [75, 60, 35, 25, 90]
 colors_bar = ['#22c55e', '#3b82f6', '#f59e0b', '#ef4444', '#a855f7']
 bars = ax3.bar(bird_types, success_rates, color=colors_bar, edgecolor='none')
@@ -370,7 +370,7 @@ circle = plt.Circle((0, 0), 10, fill=False, color='#22c55e', linewidth=2, linest
 ax1.add_patch(circle)
 ax1.set_xlim(-50, 50)
 ax1.set_ylim(-50, 50)
-ax1.set_title('No dispersers\\\n(gravity only)', color='white', fontsize=11)
+ax1.set_title('No dispersers\\n(gravity only)', color='white', fontsize=11)
 ax1.set_xlabel('Distance (m)', color='white')
 ax1.tick_params(colors='gray')
 ax1.set_aspect('equal')
@@ -400,7 +400,7 @@ circle2 = plt.Circle((0, 0), 10, fill=False, color='#22c55e', linewidth=2, lines
 ax2.add_patch(circle2)
 ax2.set_xlim(-50, 50)
 ax2.set_ylim(-50, 50)
-ax2.set_title('With hornbill dispersal\\\n(seeds spread far)', color='white', fontsize=11)
+ax2.set_title('With hornbill dispersal\\n(seeds spread far)', color='white', fontsize=11)
 ax2.set_xlabel('Distance (m)', color='white')
 ax2.tick_params(colors='gray')
 ax2.set_aspect('equal')
@@ -421,7 +421,7 @@ ax3.fill_between(distances, recruitment / 5, alpha=0.3, color='#f59e0b')
 ax3.plot(distances, recruitment / 5, color='#f59e0b', linewidth=2, label='Seedling recruitment')
 ax3.set_xlabel('Distance from parent (m)', color='white')
 ax3.set_ylabel('Relative value', color='white')
-ax3.set_title('Janzen-Connell Effect:\\\nWhy Distance Matters', color='white', fontsize=11)
+ax3.set_title('Janzen-Connell Effect:\\nWhy Distance Matters', color='white', fontsize=11)
 ax3.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
 ax3.tick_params(colors='gray')
 
@@ -643,7 +643,7 @@ ax2.tick_params(colors='gray')
 
 # Threats breakdown
 ax3.set_facecolor('#111827')
-threats = ['Habitat loss', 'Hunting', 'Logging\\\n(nest trees)', 'Fragmentation', 'Climate\\\nchange']
+threats = ['Habitat loss', 'Hunting', 'Logging\\n(nest trees)', 'Fragmentation', 'Climate\\nchange']
 impact = [35, 25, 20, 15, 5]
 colors_pie = ['#ef4444', '#f59e0b', '#a855f7', '#3b82f6', '#6b7280']
 bars = ax3.barh(threats, impact, color=colors_pie, edgecolor='none')
@@ -665,7 +665,7 @@ species_count = c * fragment_sizes**z
 # Hornbill needs >50 km² for viable population
 ax4.plot(fragment_sizes, species_count, color='#22c55e', linewidth=2, label='Bird species supported')
 ax4.axvline(50, color='#f59e0b', linestyle='--', linewidth=1)
-ax4.annotate('Minimum fragment size\\\nfor hornbills (~50 km²)',
+ax4.annotate('Minimum fragment size\\nfor hornbills (~50 km²)',
             xy=(50, c * 50**z), xytext=(60, c * 30**z),
             color='#f59e0b', fontsize=9,
             arrowprops=dict(arrowstyle='->', color='#f59e0b'))

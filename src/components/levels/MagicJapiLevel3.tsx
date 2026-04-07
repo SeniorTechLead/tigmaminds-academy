@@ -133,8 +133,8 @@ print("Reflection:  flip across a mirror axis")
 print("Glide refl:  reflect + translate along mirror")
 print()
 print("Matrix representations:")
-print(f"  Rotation 60°:\\\n{rotation_matrix(np.pi/3).round(3)}")
-print(f"  Reflection (x-axis):\\\n{reflection_matrix(0).round(3)}")
+print(f"  Rotation 60°:\\n{rotation_matrix(np.pi/3).round(3)}")
+print(f"  Reflection (x-axis):\\n{reflection_matrix(0).round(3)}")
 print(f"  D6 group: 6 rotations + 6 reflections = 12 symmetries")`,
       challenge: 'Implement all 7 frieze groups (the only possible symmetry groups for a 1D repeating strip pattern). Generate a visual example of each using the leaf motif. Label each with its crystallographic notation (p1, p11m, p11g, p2, p2mm, p2mg, p2gm).',
       successHint: 'Every repeating pattern in every culture — from Assamese Japi weaving to Islamic tile work to Celtic knots — belongs to one of a finite number of symmetry groups. Mathematics does not constrain art; it reveals the hidden structure that makes art beautiful.',
@@ -239,7 +239,7 @@ for i in range(3):
     verts = regular_polygon_vertices(5, (cx, cy), r_p, start_angle=angle - np.pi/5)
     ax.fill(verts[:, 0], verts[:, 1], color='#ef4444', alpha=0.4, edgecolor='white', linewidth=1.5)
 # Highlight gap
-ax.annotate('GAP!\\\n36° missing', xy=center, fontsize=11, color='#f59e0b',
+ax.annotate('GAP!\\n36° missing', xy=center, fontsize=11, color='#f59e0b',
             fontweight='bold', ha='center', va='center',
             bbox=dict(boxstyle='round', facecolor='#1f2937', edgecolor='#f59e0b'))
 ax.set_xlim(0, 5); ax.set_ylim(0, 4)

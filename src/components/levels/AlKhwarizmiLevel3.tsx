@@ -454,7 +454,7 @@ for n in ns:
 # DP can handle huge n
 t = time.time()
 big = fib_bottom_up(1000)
-print(f"\\\nfib(1000) has {len(str(big))} digits! Computed in {time.time()-t:.6f}s")
+print(f"\\nfib(1000) has {len(str(big))} digits! Computed in {time.time()-t:.6f}s")
 print()
 
 plt.figure(figsize=(8, 5))

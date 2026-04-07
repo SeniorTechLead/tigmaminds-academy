@@ -77,7 +77,7 @@ ax.tick_params(colors='gray')
 for wl, name in [(450, 'Blue'), (550, 'Green'), (700, 'Red')]:
     idx = np.argmin(np.abs(wavelengths - wl))
     intensity = relative_intensity[idx]
-    ax.annotate(f'{name}\\\n{wl} nm\\\nI = {intensity:.1f}x',
+    ax.annotate(f'{name}\\n{wl} nm\\nI = {intensity:.1f}x',
                 xy=(wl, intensity), xytext=(wl + 30, intensity + 1),
                 color='white', fontsize=9,
                 arrowprops=dict(arrowstyle='->', color='white', lw=1))
@@ -86,7 +86,7 @@ for wl, name in [(450, 'Blue'), (550, 'Green'), (700, 'Red')]:
 ax2 = axes[1]
 ax2.set_facecolor('#111827')
 colors_bar = ['#7c3aed', '#3b82f6', '#06b6d4', '#22c55e', '#eab308', '#f97316', '#ef4444']
-names = ['Violet\\\n380', 'Blue\\\n450', 'Cyan\\\n490', 'Green\\\n550', 'Yellow\\\n580', 'Orange\\\n620', 'Red\\\n700']
+names = ['Violet\\n380', 'Blue\\n450', 'Cyan\\n490', 'Green\\n550', 'Yellow\\n580', 'Orange\\n620', 'Red\\n700']
 wls = [380, 450, 490, 550, 580, 620, 700]
 ratios = [(700 / wl) ** 4 for wl in wls]
 
@@ -171,11 +171,11 @@ ax.axvline(x=1, color='#a855f7', linestyle=':', linewidth=1.5, alpha=0.7,
 ax.axhline(y=2, color='gray', linestyle=':', linewidth=1, alpha=0.5)
 
 # Annotate regimes
-ax.text(0.03, 1e-6, 'Rayleigh\\\nregime', color='#60a5fa', fontsize=11,
+ax.text(0.03, 1e-6, 'Rayleigh\\nregime', color='#60a5fa', fontsize=11,
         fontweight='bold', ha='center')
-ax.text(3, 0.3, 'Mie\\\nregime', color='#f97316', fontsize=11,
+ax.text(3, 0.3, 'Mie\\nregime', color='#f97316', fontsize=11,
         fontweight='bold', ha='center')
-ax.text(100, 2.5, 'Geometric\\\nlimit (Q\→2)', color='gray', fontsize=10,
+ax.text(100, 2.5, 'Geometric\\nlimit (Q\→2)', color='gray', fontsize=10,
         ha='center')
 
 ax.set_xlabel('Size parameter x = \πd/\λ', color='white', fontsize=12)
@@ -441,7 +441,7 @@ ax1.plot(wavelengths, solar_with_lines, color='#f97316', linewidth=1, label='Wit
 
 for line_wl, name, depth in fraunhofer_lines:
     idx = np.argmin(np.abs(wavelengths - line_wl))
-    ax1.annotate(f'{name}\\\n{line_wl}', xy=(line_wl, solar_with_lines[idx]),
+    ax1.annotate(f'{name}\\n{line_wl}', xy=(line_wl, solar_with_lines[idx]),
                  xytext=(line_wl, solar_with_lines[idx] + 0.12),
                  color='#93c5fd', fontsize=7, ha='center', rotation=45,
                  arrowprops=dict(arrowstyle='-', color='#93c5fd', lw=0.5))
@@ -915,7 +915,7 @@ for i, (za, rgb) in enumerate(zip(zenith_angles, rgb_trajectory)):
 # Mark where blue channel drops to zero
 b_zero_idx = next((i for i, b in enumerate(b_vals) if b < 0.01), len(b_vals)-1)
 ax2.axvline(zenith_angles[b_zero_idx], color='#3b82f6', linestyle=':', alpha=0.5)
-ax2.text(zenith_angles[b_zero_idx] + 1, 0.5, 'Blue\\\ngone', color='#3b82f6',
+ax2.text(zenith_angles[b_zero_idx] + 1, 0.5, 'Blue\\ngone', color='#3b82f6',
          fontsize=10)
 
 ax2.set_xlabel('Solar zenith angle (degrees)', color='white', fontsize=12)

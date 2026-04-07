@@ -291,10 +291,10 @@ ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax1.tick_params(colors='gray')
 
 # Annotate key zones
-ax1.annotate('Soil\\\n(0 to -0.1 MPa)', xy=(soil_water_potential, 0),
+ax1.annotate('Soil\\n(0 to -0.1 MPa)', xy=(soil_water_potential, 0),
              xytext=(soil_water_potential+0.3, 3), color='#22c55e', fontsize=8,
              arrowprops=dict(arrowstyle='->', color='#22c55e'))
-ax1.annotate('Leaves\\\n(-2 MPa tension)', xy=(water_potential[-1], 30),
+ax1.annotate('Leaves\\n(-2 MPa tension)', xy=(water_potential[-1], 30),
              xytext=(water_potential[-1]+0.3, 27), color='#ef4444', fontsize=8,
              arrowprops=dict(arrowstyle='->', color='#ef4444'))
 
@@ -322,7 +322,7 @@ ax2.tick_params(colors='gray')
 
 # Mark growth zone
 ax2.axhspan(0, 5, alpha=0.1, color='#a855f7')
-ax2.text(0.01, 2.5, 'Active growth\\\nzone (needs water)', color='#a855f7', fontsize=8)
+ax2.text(0.01, 2.5, 'Active growth\\nzone (needs water)', color='#a855f7', fontsize=8)
 
 plt.tight_layout()
 plt.show()
@@ -401,7 +401,7 @@ bamboo_mass = np.pi * (R_outer**2 - (R_outer - bamboo_wall)**2) / area_solid * 1
 
 ax1.plot(bamboo_wall, bamboo_I, 'o', color='#f59e0b', markersize=10)
 ax1.plot(bamboo_wall, bamboo_mass, 'o', color='#f59e0b', markersize=10)
-ax1.annotate(f'Bamboo: {bamboo_I:.0f}% strength\\\nat {bamboo_mass:.0f}% mass',
+ax1.annotate(f'Bamboo: {bamboo_I:.0f}% strength\\nat {bamboo_mass:.0f}% mass',
              xy=(bamboo_wall, bamboo_I), xytext=(bamboo_wall+1, bamboo_I-15),
              color='#f59e0b', fontsize=9, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
@@ -581,11 +581,11 @@ import matplotlib.pyplot as plt
 # Engineering material comparison
 materials = {
     'Raw bamboo': {'tensile': 185, 'compressive': 65, 'density': 700, 'cost': 200, 'co2': 0.5, 'color': '#22c55e'},
-    'Laminated\\\nbamboo (LBL)': {'tensile': 120, 'compressive': 55, 'density': 650, 'cost': 500, 'co2': 1.2, 'color': '#86efac'},
+    'Laminated\\nbamboo (LBL)': {'tensile': 120, 'compressive': 55, 'density': 650, 'cost': 500, 'co2': 1.2, 'color': '#86efac'},
     'Pine wood': {'tensile': 40, 'compressive': 35, 'density': 500, 'cost': 300, 'co2': 0.7, 'color': '#f59e0b'},
-    'Steel\\\n(mild)': {'tensile': 250, 'compressive': 250, 'density': 7800, 'cost': 800, 'co2': 2.5, 'color': '#6b7280'},
+    'Steel\\n(mild)': {'tensile': 250, 'compressive': 250, 'density': 7800, 'cost': 800, 'co2': 2.5, 'color': '#6b7280'},
     'Concrete': {'tensile': 5, 'compressive': 40, 'density': 2400, 'cost': 50, 'co2': 0.15, 'color': '#94a3b8'},
-    'Carbon\\\nfiber': {'tensile': 3500, 'compressive': 1500, 'density': 1600, 'cost': 15000, 'co2': 30, 'color': '#3b82f6'},
+    'Carbon\\nfiber': {'tensile': 3500, 'compressive': 1500, 'density': 1600, 'cost': 15000, 'co2': 30, 'color': '#3b82f6'},
 }
 
 fig, axes = plt.subplots(2, 2, figsize=(14, 10))
@@ -600,7 +600,7 @@ ax.set_facecolor('#111827')
 for i, (name, props) in enumerate(materials.items()):
     ax.scatter(props['compressive'], props['tensile'], s=200, color=props['color'],
                edgecolor='white', linewidth=1, zorder=5)
-    ax.annotate(name.replace('\\\n', ' '), xy=(props['compressive'], props['tensile']),
+    ax.annotate(name.replace('\\n', ' '), xy=(props['compressive'], props['tensile']),
                 xytext=(props['compressive']+5, props['tensile']+10),
                 color=props['color'], fontsize=7)
 ax.set_xlabel('Compressive strength (MPa)', color='white')
@@ -633,7 +633,7 @@ for name, props in materials.items():
     if props['cost'] < 5000:  # exclude carbon fiber for scale
         ax.scatter(props['cost'], props['co2'], s=200, color=props['color'],
                    edgecolor='white', linewidth=1, zorder=5)
-        ax.annotate(name.replace('\\\n', ' '), xy=(props['cost'], props['co2']),
+        ax.annotate(name.replace('\\n', ' '), xy=(props['cost'], props['co2']),
                     xytext=(props['cost']+20, props['co2']+0.1),
                     color=props['color'], fontsize=7)
 ax.set_xlabel('Cost (USD/tonne)', color='white')
@@ -644,7 +644,7 @@ ax.tick_params(colors='gray')
 # Application feasibility matrix
 ax = axes[1, 1]
 ax.set_facecolor('#111827')
-applications = ['Housing\\\nstructure', 'Furniture', 'Bicycle\\\nframe', 'Reinforcement\\\n(rebar)', 'Flooring']
+applications = ['Housing\\nstructure', 'Furniture', 'Bicycle\\nframe', 'Reinforcement\\n(rebar)', 'Flooring']
 bamboo_feasibility = [7, 9, 8, 6, 9]
 steel_feasibility = [9, 4, 7, 10, 3]
 wood_feasibility = [8, 9, 3, 2, 8]
@@ -666,8 +666,8 @@ plt.show()
 
 print("Bamboo engineering summary:")
 print(f"  Specific strength: {materials['Raw bamboo']['tensile']/materials['Raw bamboo']['density']*1000:.0f} kN*m/kg")
-print(f"  vs Steel: {materials['Steel\\\n(mild)']['tensile']/materials['Steel\\\n(mild)']['density']*1000:.0f} kN*m/kg")
-print(f"  Bamboo is {materials['Raw bamboo']['tensile']/materials['Raw bamboo']['density'] / (materials['Steel\\\n(mild)']['tensile']/materials['Steel\\\n(mild)']['density']):.1f}x better strength-per-mass than steel")
+print(f"  vs Steel: {materials['Steel\\n(mild)']['tensile']/materials['Steel\\n(mild)']['density']*1000:.0f} kN*m/kg")
+print(f"  Bamboo is {materials['Raw bamboo']['tensile']/materials['Raw bamboo']['density'] / (materials['Steel\\n(mild)']['tensile']/materials['Steel\\n(mild)']['density']):.1f}x better strength-per-mass than steel")
 print()
 print("Best bamboo applications:")
 print("  Flooring, furniture, bicycle frames, low-rise housing")

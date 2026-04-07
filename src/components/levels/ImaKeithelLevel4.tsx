@@ -79,7 +79,7 @@ for day in range(1, 31):
                   (vid, f'2024-03-{day:02d}', revenue, items, profit))
 
 # Analytics
-print("=== Ima Keithel Market Management Report ===\\\n")
+print("=== Ima Keithel Market Management Report ===\\n")
 
 c.execute('''SELECT v.category, COUNT(*) as vendors,
              ROUND(AVG(d.revenue),0) as avg_daily_rev,
@@ -92,7 +92,7 @@ print("-" * 52)
 for row in c.fetchall():
     print(f"{row[0]:<12} {row[1]:>8} {row[2]:>7}₹ {row[3]:>10}₹ {row[4]:>9}₹")
 
-print("\\\nTop 5 vendors by profit:")
+print("\\nTop 5 vendors by profit:")
 c.execute('''SELECT v.name, v.category, ROUND(SUM(d.profit),0), ROUND(AVG(d.revenue),0)
              FROM vendors v JOIN daily_sales d ON v.id=d.vendor_id
              GROUP BY v.id ORDER BY SUM(d.profit) DESC LIMIT 5''')
@@ -102,7 +102,7 @@ for name, cat, profit, rev in c.fetchall():
 c.execute('''SELECT s.location, ROUND(AVG(d.revenue),0)
              FROM stalls s JOIN vendors v ON v.stall_id=s.id JOIN daily_sales d ON v.id=d.vendor_id
              GROUP BY s.location ORDER BY AVG(d.revenue) DESC''')
-print("\\\nRevenue by stall location:")
+print("\\nRevenue by stall location:")
 for loc, rev in c.fetchall():
     print(f"  {loc}: avg {rev}₹/day")
 
@@ -158,7 +158,7 @@ for name, qty, cost, price, shelf in products:
 np.random.seed(42)
 
 # Simulate 12 hours of trading (6 AM to 6 PM)
-print("=== Dynamic Pricing Engine ===\\\n")
+print("=== Dynamic Pricing Engine ===\\n")
 
 for hour in range(12):
     actual_hour = 6 + hour
@@ -214,7 +214,7 @@ c.execute('''SELECT i.product, ROUND(SUM(pl.revenue),0), ROUND(SUM(pl.sales),1),
              i.initial_price, i.current_price, ROUND(i.quantity,1)
              FROM price_log pl JOIN inventory i ON pl.product_id=i.id
              GROUP BY i.id''')
-print("\\\n--- End of Day Summary ---")
+print("\\n--- End of Day Summary ---")
 print(f"{'Product':<10} {'Revenue':>8} {'Sold':>7} {'Start ₹':>8} {'End ₹':>6} {'Left':>6}")
 for row in c.fetchall():
     print(f"{row[0]:<10} {row[1]:>7}₹ {row[2]:>5.1f}kg {row[3]:>7.1f} {row[4]:>5.1f} {row[5]:>5.1f}kg")
@@ -280,8 +280,8 @@ farm_data = c.fetchall()
 market_demand = 400  # kg needed today
 remaining = market_demand
 
-print("=== Supply Chain Optimisation ===\\\n")
-print(f"Market demand: {market_demand} kg of tomatoes\\\n")
+print("=== Supply Chain Optimisation ===\\n")
+print(f"Market demand: {market_demand} kg of tomatoes\\n")
 print(f"{'Farm':<18} {'Capacity':>9} {'Farm ₹':>7} {'Transport':>10} {'Total ₹/kg':>10}")
 print("-" * 58)
 
@@ -304,7 +304,7 @@ for fid, name, capacity, price, transport, total in farm_data:
     marker = ' <<<' if qty > 0 else ''
     print(f"{name:<18} {capacity:>7.0f}kg {price:>6.0f}₹ {transport:>8.1f}₹ {total:>9.1f}₹{marker}")
 
-print(f"\\\n{'':>18} Demand met: {market_demand - remaining:.0f}/{market_demand} kg")
+print(f"\\n{'':>18} Demand met: {market_demand - remaining:.0f}/{market_demand} kg")
 if remaining > 0:
     print(f"  SHORTAGE: {remaining:.0f} kg unmet!")
 
@@ -312,13 +312,13 @@ c.execute('''SELECT f.name, op.quantity_kg, op.purchase_cost, op.transport_cost,
              FROM optimal_plan op JOIN farms f ON op.farm_id=f.id
              WHERE op.quantity_kg > 0 ORDER BY op.total_cost/op.quantity_kg''')
 
-print("\\\n--- Optimal Procurement Plan ---")
+print("\\n--- Optimal Procurement Plan ---")
 print(f"{'Farm':<18} {'Qty':>6} {'Purchase':>9} {'Transport':>10} {'Total':>8} {'₹/kg':>6}")
 print("-" * 60)
 for name, qty, pur, trans, total in c.fetchall():
     print(f"{name:<18} {qty:>4.0f}kg {pur:>8.0f}₹ {trans:>9.0f}₹ {total:>7.0f}₹ {total/qty:>5.1f}")
 
-print(f"\\\nTotal cost: {total_purchase + total_transport:.0f}₹ for {market_demand}kg")
+print(f"\\nTotal cost: {total_purchase + total_transport:.0f}₹ for {market_demand}kg")
 print(f"Average cost: {(total_purchase + total_transport)/market_demand:.1f}₹/kg")
 print(f"  Purchase: {total_purchase:.0f}₹ ({total_purchase/(total_purchase+total_transport)*100:.0f}%)")
 print(f"  Transport: {total_transport:.0f}₹ ({total_transport/(total_purchase+total_transport)*100:.0f}%)")
@@ -379,7 +379,7 @@ for i in range(n_vendors):
     c.execute('INSERT INTO sim_vendors VALUES (?,?,?,?,?)',
               (i+1, f'Vendor-{i+1}', strategy, capital, daily_cost))
 
-print("=== Ima Keithel 30-Day Simulation ===\\\n")
+print("=== Ima Keithel 30-Day Simulation ===\\n")
 
 for day in range(1, days + 1):
     base_demand = 150 + 50 * np.sin(2 * np.pi * day / 7)  # weekly cycle
@@ -443,7 +443,7 @@ c.execute('SELECT * FROM sim_market WHERE day % 5 = 0 OR day = 1 ORDER BY day')
 for row in c.fetchall():
     print(f"{row[0]:>4} {row[3]:>8} {row[1]:>8.1f}₹ {row[2]:>7.0f} {row[4]:>7.0f}")
 
-print("\\\n--- Strategy Performance ---")
+print("\\n--- Strategy Performance ---")
 c.execute('''SELECT v.strategy, COUNT(DISTINCT v.id),
              ROUND(AVG(d.profit),0), ROUND(SUM(d.revenue),0),
              ROUND(AVG(v.capital),0)
@@ -456,11 +456,11 @@ for row in c.fetchall():
 c.execute('SELECT name, strategy, capital FROM sim_vendors WHERE capital <= 0')
 bankruptcies = c.fetchall()
 if bankruptcies:
-    print(f"\\\nBankruptcies: {len(bankruptcies)}")
+    print(f"\\nBankruptcies: {len(bankruptcies)}")
     for name, strat, cap in bankruptcies:
         print(f"  {name} ({strat}): final capital {cap:.0f}₹")
 else:
-    print("\\\nNo bankruptcies — all vendors survived!")
+    print("\\nNo bankruptcies — all vendors survived!")
 
 db.close()`,
       challenge: 'Add seasonal events: a festival on day 15 doubles demand, while a strike on day 22 halves it. How do different strategies handle shocks?',

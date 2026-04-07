@@ -104,12 +104,12 @@ ax3.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=9
 ax3.tick_params(colors='gray')
 peak_dist = dist_range[np.argmax(recruitment)]
 ax3.axvline(peak_dist, color='#a855f7', linestyle=':', linewidth=1)
-ax3.annotate(f'Optimal recruitment\\\ndistance: {peak_dist:.0f}m', xy=(peak_dist, 0.8),
+ax3.annotate(f'Optimal recruitment\\ndistance: {peak_dist:.0f}m', xy=(peak_dist, 0.8),
              color='#a855f7', fontsize=10, ha='center')
 
 # Dispersal mechanism comparison
 ax4.set_facecolor('#111827')
-mechanisms = ['Gravity', 'Wind\\\n(light)', 'Wind\\\n(wing)', 'Animal\\\n(cache)', 'Water', 'Explosive']
+mechanisms = ['Gravity', 'Wind\\n(light)', 'Wind\\n(wing)', 'Animal\\n(cache)', 'Water', 'Explosive']
 avg_dist = [2, 50, 200, 500, 5000, 10]
 max_dist = [5, 200, 2000, 10000, 100000, 30]
 colors_mech = ['#6b7280', '#3b82f6', '#22c55e', '#f59e0b', '#a855f7', '#ef4444']
@@ -434,7 +434,7 @@ ax3.tick_params(colors='gray')
 
 # Compare water-dispersed species
 ax4.set_facecolor('#111827')
-species = ['Coconut', 'Mangrove\\\npropagule', 'Sea bean', 'Lotus seed', 'Willow\\\n(river)']
+species = ['Coconut', 'Mangrove\\npropagule', 'Sea bean', 'Lotus seed', 'Willow\\n(river)']
 max_survival_days = [120, 60, 365, 30, 5]
 max_distance_km = [9000, 3000, 15000, 50, 100]
 buoyancy_months = [12, 3, 24, 1, 0.1]
@@ -561,7 +561,7 @@ for idx, (name, mech) in enumerate(mechanisms.items()):
         mean_d = max_d = median_d = 0
         pct_dispersed = 0
 
-    ax.set_title(f'{name}\\\n(mean: {mean_d:.0f}m, max: {max_d:.0f}m, {pct_dispersed:.0f}% dispersed)',
+    ax.set_title(f'{name}\\n(mean: {mean_d:.0f}m, max: {max_d:.0f}m, {pct_dispersed:.0f}% dispersed)',
                  color='white', fontsize=10)
     ax.set_xlabel('m', color='white')
     ax.set_ylabel('m', color='white')
@@ -794,7 +794,7 @@ ax1.tick_params(colors='gray')
 
 # Speed comparison: natural vs human dispersal
 ax2.set_facecolor('#111827')
-mechanisms = ['Wind\\\n(dandelion)', 'Water\\\n(coconut)', 'Bird\\\n(fruit)', 'Human\\\n(trade)', 'Human\\\n(airline)']
+mechanisms = ['Wind\\n(dandelion)', 'Water\\n(coconut)', 'Bird\\n(fruit)', 'Human\\n(trade)', 'Human\\n(airline)']
 speed_km_per_year = [1, 50, 100, 5000, 20000]
 colors_speed = ['#a855f7', '#3b82f6', '#22c55e', '#f59e0b', '#ef4444']
 
@@ -809,7 +809,7 @@ for bar, s in zip(bars2, speed_km_per_year):
 
 # Major invasive plants: impact
 ax3.set_facecolor('#111827')
-invasives = ['Water\\\nhyacinth', 'Japanese\\\nknotweed', 'Kudzu', 'Giant\\\nhogweed', 'Lantana']
+invasives = ['Water\\nhyacinth', 'Japanese\\nknotweed', 'Kudzu', 'Giant\\nhogweed', 'Lantana']
 damage_millions = [100, 50, 500, 20, 200]  # estimated annual economic damage ($ millions)
 countries_affected = [50, 15, 3, 20, 60]
 inv_colors = ['#3b82f6', '#ef4444', '#22c55e', '#f59e0b', '#a855f7']

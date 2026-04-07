@@ -118,10 +118,10 @@ plt.plot(days, total_tide, linewidth=1.5, color='#06b6d4', label='Combined tide'
 plt.fill_between(days, total_tide, alpha=0.1, color='#06b6d4')
 
 # Mark spring and neap
-for d, label, color in [(0, 'Spring\\\n(new moon)', 'gold'),
-                         (7.4, 'Neap\\\n(1st quarter)', 'silver'),
-                         (14.8, 'Spring\\\n(full moon)', 'gold'),
-                         (22.1, 'Neap\\\n(3rd quarter)', 'silver')]:
+for d, label, color in [(0, 'Spring\\n(new moon)', 'gold'),
+                         (7.4, 'Neap\\n(1st quarter)', 'silver'),
+                         (14.8, 'Spring\\n(full moon)', 'gold'),
+                         (22.1, 'Neap\\n(3rd quarter)', 'silver')]:
     plt.axvline(d, color=color, linewidth=1, linestyle='--', alpha=0.7)
     plt.text(d + 0.3, 1.3, label, fontsize=8, color=color)
 
@@ -190,7 +190,7 @@ plt.axhline(depth, color='#3b82f6', linewidth=1.5, linestyle='--',
             label=f'Ridge depth ({depth} m)')
 plt.axvline(63, color='silver', linewidth=1, linestyle=':')
 plt.plot(63, target_drop, 'o', color='red', markersize=8)
-plt.annotate(f'63 mph wind\\\nΔh = {target_drop:.1f} m',
+plt.annotate(f'63 mph wind\\nΔh = {target_drop:.1f} m',
              xy=(63, target_drop), xytext=(40, target_drop + 0.3),
              fontsize=10, color='white',
              arrowprops=dict(arrowstyle='->', color='white'))

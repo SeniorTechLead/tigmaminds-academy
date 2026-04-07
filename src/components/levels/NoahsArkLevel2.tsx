@@ -111,10 +111,10 @@ for a in ark_animals:
 # Count unique at each level
 for level in ['class', 'order', 'family', 'genus']:
     unique = len(set(a[level] for a in ark_animals))
-    print(f"\\\nUnique {level}s: {unique} (from {len(ark_animals)} species)")
+    print(f"\\nUnique {level}s: {unique} (from {len(ark_animals)} species)")
 
 # Species vs Family comparison
-print(f"\\\n--- Ark loading comparison ---")
+print(f"\\n--- Ark loading comparison ---")
 print(f"At species level: {len(ark_animals)} species × 2 = {len(ark_animals)*2} animals")
 families = len(set(a['family'] for a in ark_animals))
 print(f"At family level:  {families} families × 2 = {families*2} animals")
@@ -167,7 +167,7 @@ for name, mass in animals:
     total_daily += food * 2  # pairs
     print(f"{name:<14} {mass:>10,.1f} {food:>10.3f} kg {food*365:>10.1f} kg")
 
-print(f"\\\nTotal daily food (pairs only): {total_daily:.1f} kg")
+print(f"\\nTotal daily food (pairs only): {total_daily:.1f} kg")
 
 # Plot the power law
 masses = np.logspace(-2, 4, 100)  # 0.01 to 10,000 kg
@@ -300,7 +300,7 @@ markers = {
 for name, area in markers.items():
     s = c * area**z
     plt.plot(area, s, 'o', markersize=10)
-    plt.annotate(f'{name}\\\n~{s:.0f} species', xy=(area, s),
+    plt.annotate(f'{name}\\n~{s:.0f} species', xy=(area, s),
                  fontsize=8, color='white', xytext=(10, 10),
                  textcoords='offset points')
 
@@ -315,7 +315,7 @@ print(f"Ark area: 9,100 m²")
 print(f"Natural species capacity: ~{ark_species:.0f}")
 print(f"Actual species loaded: ~35,000")
 print(f"Compression ratio: {35000/ark_species:.0f}x beyond natural capacity")
-print(f"\\\nThis is why the ark was emergency storage, not a habitat.")`,
+print(f"\\nThis is why the ark was emergency storage, not a habitat.")`,
       challenge: 'If the ark were 10 times bigger (91,000 m²), how many more species could it naturally support? What area would be needed to naturally support 35,000 species? Solve: A = (35000/c)^(1/z).',
       successHint: 'The species-area relationship is ecology\'s power law. It governs island biogeography, habitat fragmentation, and conservation planning. The ark broke this law by sheer density — possible for short-term survival, impossible long-term.',
     },
@@ -375,7 +375,7 @@ print(f"{'TOTAL':<10} {sum(c['species'] for c in categories):>8,} "
 food_year_t = total_food * 365 / 1000
 water_year_t = total_animals * 0.5 * 365 / 1000  # 0.5 L/animal/day avg
 
-print(f"\\\n--- ANNUAL SUPPLY REQUIREMENTS ---")
+print(f"\\n--- ANNUAL SUPPLY REQUIREMENTS ---")
 print(f"Food: {food_year_t:,.0f} tonnes/year")
 print(f"Water: {water_year_t:,.0f} tonnes/year")
 print(f"Total supplies: {food_year_t + water_year_t:,.0f} tonnes")
@@ -383,7 +383,7 @@ print(f"Total supplies: {food_year_t + water_year_t:,.0f} tonnes")
 # Feasibility check
 ark_area = 9112 * 0.65  # usable
 ark_cargo = 25375 - 5000  # max displacement minus hull
-print(f"\\\n--- FEASIBILITY ---")
+print(f"\\n--- FEASIBILITY ---")
 print(f"Pen area needed: {total_area:,.0f} m² | Available: {ark_area:,.0f} m²")
 print(f"Cargo needed: {total_mass + food_year_t + water_year_t:,.0f}t "
       f"| Capacity: {ark_cargo:,.0f}t")

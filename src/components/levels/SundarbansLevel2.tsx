@@ -209,7 +209,7 @@ for r in results:
         print(f"{r['recovery']:>10} {r['brine_gL']:>10.1f} {r['P_osmotic']:>10.1f} {r['flux']:>8.1f}")
 
 max_rec = max(r["recovery"] for r in results if r["flux"] > 0)
-print(f"\\nMaximum recovery at 60 atm: {max_rec}%")
+print(f"\nMaximum recovery at 60 atm: {max_rec}%")
 
 # Compare: brackish water
 print()
@@ -224,7 +224,7 @@ for r in results_b:
         print(f"{r['recovery']:>10} {r['brine_gL']:>10.1f} {r['P_osmotic']:>10.1f} {r['flux']:>8.1f}")
 
 max_rec_b = max(r["recovery"] for r in results_b if r["flux"] > 0)
-print(f"\\nMaximum recovery at 20 atm: {max_rec_b}%")
+print(f"\nMaximum recovery at 20 atm: {max_rec_b}%")
 print()
 print("Brackish water allows much higher recovery than seawater!")`,
       challenge: 'Increase the applied pressure to 80 atm for seawater. How much higher can recovery go? Calculate the energy cost per cubic metre at 50% vs 70% recovery. Is the extra water worth the extra energy? This trade-off is central to desalination plant economics.',

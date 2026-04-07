@@ -103,7 +103,7 @@ India irrigates ~68 million hectares — the world's largest irrigated area. But
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
-methods = ['Flood', 'Furrow', 'Sprinkler', 'Drip', 'Sub-surface\\\ndrip']
+methods = ['Flood', 'Furrow', 'Sprinkler', 'Drip', 'Sub-surface\\ndrip']
 efficiency = [40, 60, 78, 90, 95]
 water_applied = [15000, 10000, 7700, 6700, 6300]
 crop_need = 6000
@@ -277,7 +277,7 @@ ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax1.tick_params(colors='gray')
 
 ax2.set_facecolor('#111827')
-countries = ['Japan', 'China', 'Vietnam', 'India', 'NE India', 'Sub-Saharan\\\nAfrica']
+countries = ['Japan', 'China', 'Vietnam', 'India', 'NE India', 'Sub-Saharan\\nAfrica']
 potential = [9.5, 9.0, 8.5, 8.0, 7.5, 7.0]
 actual = [6.8, 7.0, 5.8, 3.9, 2.5, 1.5]
 gap = [p - a for p, a in zip(potential, actual)]

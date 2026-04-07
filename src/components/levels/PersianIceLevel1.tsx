@@ -49,7 +49,7 @@ def sky_temperature(T_air_C, relative_humidity):
     return T_sky_K - 273.15
 
 # Desert conditions: cold winter night, very dry
-print("=== Radiative Cooling in the Persian Desert ===\\\n")
+print("=== Radiative Cooling in the Persian Desert ===\\n")
 print(f"{'Air T (°C)':<12} {'RH %':<8} {'Sky T (°C)':<12} {'Net Loss (W/m²)':<17} {'Freezes?'}")
 print("-" * 62)
 
@@ -61,9 +61,9 @@ for T_air in [8, 5, 3, 0, -2]:
         print(f"{T_air:<12} {rh*100:<8.0f} {T_sky:<12.1f} {q_net:<17.1f} {freezes}")
 
 # Simulate freezing overnight
-print(f"\\\n=== Overnight Freezing Simulation ===")
+print(f"\\n=== Overnight Freezing Simulation ===")
 print(f"Pool: 10 m × 10 m × 0.15 m deep")
-print(f"Air temperature: 5°C, RH: 10%\\\n")
+print(f"Air temperature: 5°C, RH: 10%\\n")
 
 pool_area = 100        # m^2
 depth = 0.15           # m
@@ -79,7 +79,7 @@ dt = 60  # 1-minute time steps
 ice_formed = 0
 
 print(f"Sky temperature: {T_sky:.1f}°C")
-print(f"\\\n{'Hour':<6} {'Water T (°C)':<14} {'Heat Loss (kW)':<16} {'Ice (kg)'}")
+print(f"\\n{'Hour':<6} {'Water T (°C)':<14} {'Heat Loss (kW)':<16} {'Ice (kg)'}")
 print("-" * 52)
 
 for minute in range(720):  # 12-hour night
@@ -99,9 +99,9 @@ for minute in range(720):  # 12-hour night
     if minute % 60 == 0:
         print(f"{minute//60:<6} {T_water:<14.2f} {q_net/1000:<16.2f} {ice_formed:<.0f}")
 
-print(f"\\\nFinal: {ice_formed:.0f} kg of ice formed ({ice_formed/water_mass*100:.1f}% of pool)")
+print(f"\\nFinal: {ice_formed:.0f} kg of ice formed ({ice_formed/water_mass*100:.1f}% of pool)")
 print(f"Ice thickness: {ice_formed / (pool_area * 917) * 100:.1f} cm")
-print(f"\\\nThis is how Persian engineers froze water in the desert —")
+print(f"\\nThis is how Persian engineers froze water in the desert —")
 print(f"no electricity, no chemicals, just physics and clear skies.")`,
       challenge: 'What happens on a humid night (RH = 70%)? Modify the simulation. You will find the sky temperature rises dramatically, the radiative loss drops, and the water may not freeze. This explains why yakhchāl work in arid Iran but would fail in tropical climates.',
       successHint: 'You modeled the Stefan-Boltzmann law — the same physics that governs Earth\'s energy balance, star luminosity, and spacecraft thermal design. Persian engineers exploited this physics 2,400 years before Stefan formalized the equation in 1879. The desert climate was not a disadvantage — it was the key ingredient.',
@@ -150,7 +150,7 @@ def evaporative_cooling_rate(T_air_C, RH_pct, wind_speed_ms, area_m2):
     return q_evap, Twb
 
 # Compare climates
-print("=== Wet-Bulb Temperature Across Climates ===\\\n")
+print("=== Wet-Bulb Temperature Across Climates ===\\n")
 print(f"{'Location':<22} {'T (°C)':<8} {'RH %':<7} {'Twb (°C)':<10} {'Cooling (°C)'}")
 print("-" * 55)
 
@@ -172,9 +172,9 @@ for name, T, rh in climates:
     print(f"{name:<22} {T:<8} {rh:<7} {Twb:<10.1f} {cooling:<.1f}")
 
 # Yakhchal badgir (wind tower) analysis
-print(f"\\\n=== Bādgir Evaporative Cooling for a Yakhchāl ===")
+print(f"\\n=== Bādgir Evaporative Cooling for a Yakhchāl ===")
 print(f"Wind tower cross-section: 2 m × 2 m")
-print(f"Wind speed through tower: 3 m/s\\\n")
+print(f"Wind speed through tower: 3 m/s\\n")
 
 tower_area = 4.0  # m^2
 wind = 3.0  # m/s
@@ -182,7 +182,7 @@ air_density = 1.2  # kg/m^3
 c_air = 1005  # J/kg K
 airflow = air_density * tower_area * wind  # kg/s
 
-print(f"Air mass flow: {airflow:.1f} kg/s\\\n")
+print(f"Air mass flow: {airflow:.1f} kg/s\\n")
 print(f"{'Condition':<25} {'T_in (°C)':<11} {'T_out (°C)':<12} {'Cooling (kW)'}")
 print("-" * 58)
 
@@ -196,14 +196,14 @@ for label, T, rh in [("Summer day (dry)", 40, 10),
     print(f"{label:<25} {T:<11} {T_out:<12.1f} {q:<.1f}")
 
 # Water consumption
-print(f"\\\n=== Water Cost of Evaporative Cooling ===")
+print(f"\\n=== Water Cost of Evaporative Cooling ===")
 latent_heat = 2450  # kJ/kg
 for q_kw in [10, 30, 60]:
     water_rate = q_kw / latent_heat  # kg/s
     liters_per_hour = water_rate * 3600
     print(f"  {q_kw} kW cooling requires {liters_per_hour:.1f} L/hour evaporation")
 
-print(f"\\\nPersian qanats (underground water channels) supplied this water.")
+print(f"\\nPersian qanats (underground water channels) supplied this water.")
 print(f"The qanat system is itself an engineering marvel — gravity-fed")
 print(f"tunnels up to 70 km long, maintaining a gentle slope underground.")`,
       challenge: 'Calculate the wet-bulb temperature for a worst-case scenario: 50°C with 50% humidity. This represents a wet-bulb value near 35°C — the threshold for human survival. How does this connect to modern climate change concerns?',
@@ -256,7 +256,7 @@ def heat_flow(U, area, T_out, T_in):
     return U * area * (T_out - T_in)
 
 # Compare wall constructions
-print("=== U-Value Comparison: Ancient vs Modern ===\\\n")
+print("=== U-Value Comparison: Ancient vs Modern ===\\n")
 print(f"{'Wall Type':<35} {'U (W/m²K)':<12} {'Rating'}")
 print("-" * 55)
 
@@ -292,10 +292,10 @@ for name, layers in walls:
     print(f"{name:<35} {U:<12.3f} {rating}")
 
 # Yakhchal ice melt analysis
-print(f"\\\n=== Yakhchal Ice Survival Over Summer ===")
+print(f"\\n=== Yakhchal Ice Survival Over Summer ===")
 print(f"Storage: dome, 12 m diameter, 8 m high")
 print(f"Wall: 2 m thick sarooj (k = 0.4 W/m·K)")
-print(f"Initial ice: 5,000 kg at 0°C\\\n")
+print(f"Initial ice: 5,000 kg at 0°C\\n")
 
 r_outer = 6.0  # m
 height = 8.0
@@ -307,7 +307,7 @@ latent_heat = 334000  # J/kg
 ice_mass = 5000  # kg
 
 print(f"Surface area: {surface_area:.0f} m²")
-print(f"U-value: {U_wall:.3f} W/(m²·K)\\\n")
+print(f"U-value: {U_wall:.3f} W/(m²·K)\\n")
 
 # Monthly average temperatures in Yazd, Iran
 months = ["Apr", "May", "Jun", "Jul", "Aug", "Sep"]
@@ -326,11 +326,11 @@ for i, (month, T_out) in enumerate(zip(months, T_outside)):
     print(f"{month:<6} {T_out:<12} {q:<13.0f} {melt_per_day:<19.1f} {ice_mass:<.0f}")
 
 if ice_mass > 0:
-    print(f"\\\nIce survives the summer! {ice_mass:.0f} kg remain in September.")
+    print(f"\\nIce survives the summer! {ice_mass:.0f} kg remain in September.")
 else:
-    print(f"\\\nIce ran out — a larger initial store or thicker walls needed.")
+    print(f"\\nIce ran out — a larger initial store or thicker walls needed.")
 
-print(f"\\\nThe 2 m sarooj wall achieves U = {U_wall:.3f} W/(m²K) —")
+print(f"\\nThe 2 m sarooj wall achieves U = {U_wall:.3f} W/(m²K) —")
 print(f"comparable to a modern insulated cavity wall, using only")
 print(f"sand, clay, lime, egg whites, and goat hair.")`,
       challenge: 'Add a ground floor to the model. The yakhchāl was dug several metres below ground level, where the soil temperature stays around 15°C year-round. How does the underground portion change the total heat gain? (Hint: the ground acts as a thermal buffer, reducing heat flow through the floor.)',
@@ -382,7 +382,7 @@ rho_sar = 1800    # kg/m^3
 c_sar = 900       # J/(kg K)
 alpha_sar = thermal_properties(k_sar, rho_sar, c_sar)
 
-print("=== Thermal Mass Properties ===\\\n")
+print("=== Thermal Mass Properties ===\\n")
 
 materials = [
     ("Sarooj (2.0 m)", 2.0, 0.40, 1800, 900),
@@ -406,9 +406,9 @@ for name, d, k, rho, c in materials:
     print(f"{name:<22} {lag:<10.1f} {dec:<12.6f} {inside_swing:<.4f}")
 
 # Simulate temperature wave through sarooj wall
-print(f"\\\n=== 72-Hour Temperature Simulation ===")
+print(f"\\n=== 72-Hour Temperature Simulation ===")
 print(f"Outside: 22.5°C mean, ±17.5°C swing (5°C night, 40°C day)")
-print(f"Wall: 2.0 m sarooj\\\n")
+print(f"Wall: 2.0 m sarooj\\n")
 
 T_mean = 22.5
 T_amp = 17.5
@@ -427,11 +427,11 @@ for h in range(0, 72, 6):
     diff = T_outside[h] - T_inside[h]
     print(f"{h:<6} {T_outside[h]:<14.1f} {T_inside[h]:<14.4f} {diff:<+.1f}")
 
-print(f"\\\nOutside range: {T_outside.min():.1f}°C to {T_outside.max():.1f}°C")
+print(f"\\nOutside range: {T_outside.min():.1f}°C to {T_outside.max():.1f}°C")
 print(f"Inside range:  {T_inside.min():.4f}°C to {T_inside.max():.4f}°C")
 print(f"Time lag: {lag:.1f} hours")
 print(f"Decrement: {dec:.6f}")
-print(f"\\\nThe interior is essentially isothermal — the 35°C outside")
+print(f"\\nThe interior is essentially isothermal — the 35°C outside")
 print(f"swing is reduced to {T_amp*dec*2:.4f}°C inside. The ice")
 print(f"experiences a nearly constant temperature environment.")`,
       challenge: 'Model a wall made of two layers: 0.5 m brick on the outside and 1.5 m sārooj on the inside. How do the time lag and decrement factor compare to 2.0 m of pure sārooj? (Hint: you need to compute each layer\'s resistance and time constant separately, then combine them.)',
@@ -509,7 +509,7 @@ max_ice = 0
 
 print("=== Complete Yakhchal Annual Simulation ===")
 print(f"Location: Yazd, Iran")
-print(f"Pool area: {pool_area} m², Dome U-value: {dome_U} W/(m²K)\\\n")
+print(f"Pool area: {pool_area} m², Dome U-value: {dome_U} W/(m²K)\\n")
 print(f"{'Month':<6} {'Avg T':<7} {'Production':<13} {'Melt':<11} {'Stored (kg)':<13} {'Status'}")
 print("-" * 62)
 
@@ -531,14 +531,14 @@ for month, (T_avg, T_max, T_min) in temps.items():
     status = "Producing" if produced > melted else "Stable" if melted < 100 else "Melting"
     print(f"{month:<6} {T_avg:<7} {produced:<13.0f} {melted:<11.0f} {ice_stored:<13.0f} {status}")
 
-print(f"\\\nPeak ice stored: {max_ice:.0f} kg")
+print(f"\\nPeak ice stored: {max_ice:.0f} kg")
 if ice_stored > 0:
     print(f"Ice surviving to December: {ice_stored:.0f} kg — SUCCESS")
 else:
     print(f"Ice depleted during summer — need more production capacity")
 
 # System efficiency
-print(f"\\\n=== System Analysis ===")
+print(f"\\n=== System Analysis ===")
 total_produced = sum(
     nightly_ice_production(T_min, rh_winter, pool_area, pool_depth) *
     (20 if T_avg < 8 else 10 if T_avg < 15 else 3)
@@ -552,7 +552,7 @@ print(f"Total annual production: {total_produced:.0f} kg")
 print(f"Total summer melt: {total_melted:.0f} kg")
 print(f"Net surplus: {total_produced - total_melted:.0f} kg")
 print(f"Efficiency: {(1 - total_melted/total_produced)*100:.0f}%")
-print(f"\\\nA well-designed yakhchal is a self-sustaining cold storage")
+print(f"\\nA well-designed yakhchal is a self-sustaining cold storage")
 print(f"system — zero energy input, zero carbon emissions, reliable")
 print(f"ice supply through 40°C summers. 2,400 years old.")`,
       challenge: 'Modify the simulation to model a bad year — a warm winter with only 30 cold nights instead of 60. At what point does the system fail? How much larger would the pools need to be to compensate?',
@@ -592,7 +592,7 @@ def carbon_emissions(energy_kWh, grid_factor_kgCO2_per_kWh=0.5):
 
 # Compare cooling strategies for a 500 m^2 building in a hot climate
 print("=== Cooling Strategy Comparison ===")
-print(f"Building: 500 m² in a hot-dry climate (like Yazd)\\\n")
+print(f"Building: 500 m² in a hot-dry climate (like Yazd)\\n")
 
 strategies = [
     ("Conventional AC", 150, 3.0, False),
@@ -619,7 +619,7 @@ for name, load, cop, passive in strategies:
     print(f"{name:<30} {load:<8} {elec:<12.0f} {co2:<10.0f} {saving:<.0f}")
 
 # City-scale analysis
-print(f"\\\n=== City-Scale Impact: 100,000 Buildings ===\\\n")
+print(f"\\n=== City-Scale Impact: 100,000 Buildings ===\\n")
 
 n_buildings = 100000
 avg_floor = 200  # m^2
@@ -644,7 +644,7 @@ for name, frac_ac, frac_passive in scenarios:
     print(f"{name:<28} {total_gwh:<12.0f} {co2_kt:<10.0f} {saving:<.0f}%")
 
 # Yakhchal techniques mapped to modern equivalents
-print(f"\\\n=== Ancient to Modern Technology Map ===\\\n")
+print(f"\\n=== Ancient to Modern Technology Map ===\\n")
 mappings = [
     ("Shallow freezing pools", "Radiative sky-cooling panels",
      "Stanford photonic film cools 5°C below ambient 24/7"),
@@ -663,7 +663,7 @@ mappings = [
 for ancient, modern, detail in mappings:
     print(f"  Ancient: {ancient}")
     print(f"  Modern:  {modern}")
-    print(f"  Detail:  {detail}\\\n")
+    print(f"  Detail:  {detail}\\n")
 
 # Final perspective
 print(f"=== The 2,400-Year-Old Solution ===")
@@ -672,7 +672,7 @@ print(f"engineers face: keeping things cold without burning fuel.")
 print(f"Their solution — radiative cooling, evaporative cooling, and")
 print(f"massive thermal insulation — is the foundation of modern")
 print(f"passive building design.")
-print(f"\\\nThe physics hasn't changed. The Stefan-Boltzmann law, the")
+print(f"\\nThe physics hasn't changed. The Stefan-Boltzmann law, the")
 print(f"wet-bulb equation, and Fourier's law of heat conduction are")
 print(f"the same equations the Persians used intuitively. What has")
 print(f"changed is our ability to optimize — and our urgent need to,")

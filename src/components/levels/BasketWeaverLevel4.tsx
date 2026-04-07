@@ -179,14 +179,14 @@ for label in ax2.get_xticklabels():
 # Characterization report
 ax3 = axes[1, 1]
 ax3.axis('off')
-report = "FIBER CHARACTERIZATION REPORT\\n" + "=" * 45 + "\\n\\n"
+report = "FIBER CHARACTERIZATION REPORT\n" + "=" * 45 + "\n\n"
 for name, fc in characterizations.items():
-    report += f"{name}:\\n"
-    report += f"  Tests: {len(fc.test_results)}, E: {fc.youngs_modulus:.1f} GPa\\n"
-    report += f"  Weibull: m={fc.weibull_m:.2f}, sigma0={fc.weibull_sigma0:.1f} MPa\\n"
-    report += f"  Mean: {np.mean(fc.test_results):.1f}, Std: {np.std(fc.test_results):.1f} MPa\\n"
-    report += f"  95% reliable: {fc.predict_strength_at_reliability(0.95):.1f} MPa\\n"
-    report += f"  Grade: {fc.quality_grade()}\\n\\n"
+    report += f"{name}:\n"
+    report += f"  Tests: {len(fc.test_results)}, E: {fc.youngs_modulus:.1f} GPa\n"
+    report += f"  Weibull: m={fc.weibull_m:.2f}, sigma0={fc.weibull_sigma0:.1f} MPa\n"
+    report += f"  Mean: {np.mean(fc.test_results):.1f}, Std: {np.std(fc.test_results):.1f} MPa\n"
+    report += f"  95% reliable: {fc.predict_strength_at_reliability(0.95):.1f} MPa\n"
+    report += f"  Grade: {fc.quality_grade()}\n\n"
 
 ax3.text(0.05, 0.95, report, transform=ax3.transAxes, color='#22c55e',
     fontsize=8, va='top', fontfamily='monospace',

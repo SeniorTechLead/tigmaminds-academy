@@ -496,7 +496,7 @@ for idx, (name, nutrient, drought) in enumerate(conditions):
     par_frac = np.mean(interact < -0.5)
     com_frac = 1 - mut_frac - par_frac
 
-    ax.set_title(f'{name}\\\nMut:{mut_frac:.0%} Com:{com_frac:.0%} Par:{par_frac:.0%}',
+    ax.set_title(f'{name}\\nMut:{mut_frac:.0%} Com:{com_frac:.0%} Par:{par_frac:.0%}',
                  color='white', fontsize=10)
     ax.set_xlabel('Time', color='white')
     ax.set_ylabel('Fitness', color='white')

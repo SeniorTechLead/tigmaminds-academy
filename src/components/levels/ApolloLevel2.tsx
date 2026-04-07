@@ -50,7 +50,7 @@ print(f"Circular LEO (200 km): {v_leo:.0f} m/s ({v_leo/1000:.2f} km/s)")
 a_transfer = (R_leo + R_moon) / 2  # semi-major axis of transfer ellipse
 v_tli = vis_viva(R_leo, a_transfer)  # velocity at perigee after TLI burn
 delta_v_tli = v_tli - v_leo
-print(f"\\\nTransfer orbit semi-major axis: {a_transfer/1000:.0f} km")
+print(f"\\nTransfer orbit semi-major axis: {a_transfer/1000:.0f} km")
 print(f"TLI velocity (at perigee): {v_tli:.0f} m/s ({v_tli/1000:.2f} km/s)")
 print(f"Delta-v for TLI: {delta_v_tli:.0f} m/s ({delta_v_tli/1000:.2f} km/s)")
 
@@ -59,7 +59,7 @@ v_arrival = vis_viva(R_moon, a_transfer)
 print(f"Arrival velocity near Moon: {v_arrival:.0f} m/s ({v_arrival/1000:.3f} km/s)")
 
 # 4. Velocity profile along the transfer orbit
-print("\\\n=== Velocity Profile Along Transfer Orbit ===")
+print("\\n=== Velocity Profile Along Transfer Orbit ===")
 print(f"{'Distance (km)':>14} {'Altitude (km)':>14} {'Velocity (m/s)':>15} {'Velocity (km/s)':>16}")
 print("-" * 61)
 
@@ -70,7 +70,7 @@ for r in distances:
     print(f"{r/1000:>13,.0f} {alt:>13,.0f} {v:>14,.0f} {v/1000:>15.3f}")
 
 # 5. Energy analysis
-print("\\\n=== Energy Budget ===")
+print("\\n=== Energy Budget ===")
 KE_leo = 0.5 * v_leo**2
 KE_tli = 0.5 * v_tli**2
 KE_arrival = 0.5 * v_arrival**2
@@ -141,11 +141,11 @@ for name, dv, ve in burns:
     cumulative_ratio *= er
     print(f"{name:<26} {dv:>12,} {ve:>10,} {mr:>10.2f}x {er:>10.2f}x")
 
-print(f"\\\nTotal delta-v: {total_dv:,} m/s")
+print(f"\\nTotal delta-v: {total_dv:,} m/s")
 print(f"Cumulative mass ratio: {cumulative_ratio:,.0f}x")
 
 # Compare staging strategies
-print("\\\n=== Staging Comparison ===")
+print("\\n=== Staging Comparison ===")
 total_mission_dv = 9400 + 3100  # Earth to TLI
 v_e_avg = 3500  # average exhaust velocity
 
@@ -166,7 +166,7 @@ for n_stages in [1, 2, 3, 4, 5]:
 # Payload to Moon for 3-stage Saturn V
 payload_kg = 48_600  # Apollo CSM + LM
 launch_mass = payload_kg * cumulative_ratio
-print(f"\\\nApollo payload to TLI: {payload_kg:,} kg")
+print(f"\\nApollo payload to TLI: {payload_kg:,} kg")
 print(f"Estimated launch mass: {launch_mass/1000:,.0f} tonnes")
 print(f"Actual Saturn V launch mass: 2,970 tonnes")`,
       challenge: 'Find the optimal delta-v split between stages to minimise total launch mass. Is it best to split delta-v equally between stages, or should earlier stages carry more? (Hint: the optimal split depends on each stage\'s exhaust velocity and structural fraction.)',
@@ -285,13 +285,13 @@ while altitude > 0 and time < max_time and mass > (m_dry + m_ascent):
 fuel_used = m_total - mass
 fuel_remaining = mass - m_dry - m_ascent
 
-print(f"\\\n=== Descent Profile ===")
+print(f"\\n=== Descent Profile ===")
 print(f"{'Time (s)':>9} {'Alt (m)':>10} {'V_horiz':>10} {'V_vert':>10} {'Fuel used':>10}")
 print("-" * 51)
 for i in range(len(log_times)):
     print(f"{log_times[i]:>8.0f} {log_alt[i]:>9.0f} {log_vh[i]:>9.1f} {log_vv[i]:>9.1f} {log_fuel[i]:>9.0f}")
 
-print(f"\\\n=== Touchdown Summary ===")
+print(f"\\n=== Touchdown Summary ===")
 print(f"Descent time: {time:.0f} seconds ({time/60:.1f} minutes)")
 print(f"Horizontal velocity at landing: {v_horizontal:.1f} m/s")
 print(f"Vertical velocity at landing: {v_vertical:.1f} m/s")
@@ -352,7 +352,7 @@ schedule_log = []
 cpu_busy_ms = 0
 
 print("=== Apollo Guidance Computer Task Scheduler ===")
-print(f"Simulation: {sim_duration_ms} ms | {len(tasks)} tasks\\\n")
+print(f"Simulation: {sim_duration_ms} ms | {len(tasks)} tasks\\n")
 
 print(f"{'Task':<14} {'Priority':>8} {'Period':>8} {'Exec':>6} {'Deadline':>9}")
 print("-" * 47)
@@ -361,7 +361,7 @@ for t in tasks:
 
 # Calculate CPU utilisation
 total_util = sum(t.exec_time_ms / t.period_ms for t in tasks)
-print(f"\\\nTotal CPU utilisation: {total_util*100:.1f}%")
+print(f"\\nTotal CPU utilisation: {total_util*100:.1f}%")
 if total_util > 1.0:
     print("WARNING: CPU is overloaded — deadline misses guaranteed!")
 
@@ -393,7 +393,7 @@ while current_time < sim_duration_ms:
     current_time += 1
 
 # Results
-print(f"\\\n=== Scheduler Results ({sim_duration_ms} ms) ===")
+print(f"\\n=== Scheduler Results ({sim_duration_ms} ms) ===")
 print(f"{'Task':<14} {'Completions':>12} {'Missed':>8} {'Preempted':>10} {'Success%':>9}")
 print("-" * 55)
 for t in tasks:
@@ -401,7 +401,7 @@ for t in tasks:
     success = (t.completions - t.deadline_misses) / max(t.completions, 1) * 100
     print(f"{t.name:<14} {t.completions:>10}/{expected:<3} {t.deadline_misses:>6} {t.preemptions:>9} {success:>8.0f}%")
 
-print(f"\\\nCPU busy: {cpu_busy_ms/sim_duration_ms*100:.1f}% | Idle: {(1-cpu_busy_ms/sim_duration_ms)*100:.1f}%")`,
+print(f"\\nCPU busy: {cpu_busy_ms/sim_duration_ms*100:.1f}% | Idle: {(1-cpu_busy_ms/sim_duration_ms)*100:.1f}%")`,
       challenge: 'Simulate the Apollo 11 "1202 alarm" scenario: add a rogue RADAR_STEAL task (priority 5, period 20 ms, exec 8 ms) that floods the scheduler. Which tasks start missing deadlines? What happens if you reduce RADAR_STEAL\'s priority to 1? This is exactly how the AGC survived — it shed low-priority tasks under overload.',
       successHint: 'Real-time scheduling is used in every embedded system: cars, aircraft, medical devices, industrial robots. The priority-based preemptive scheduler you built is the same algorithm (Rate Monotonic Scheduling) used in modern RTOS systems like FreeRTOS, VxWorks, and QNX.',
     },
@@ -444,7 +444,7 @@ shield_cm = 2.0   # Apollo hull: ~2 cm aluminium equivalent
 print("=== Lunar Mission Radiation Model ===")
 print(f"Mission duration: {mission_days} days")
 print(f"Time outside magnetosphere: {transit_days} days")
-print(f"Hull shielding: {shield_cm} cm aluminium\\\n")
+print(f"Hull shielding: {shield_cm} cm aluminium\\n")
 
 # GCR dose
 gcr_unshielded = GCR_RATE_MSV_DAY * transit_days
@@ -453,7 +453,7 @@ print(f"GCR dose (unshielded): {gcr_unshielded:.1f} mSv")
 print(f"GCR dose (shielded):   {gcr_shielded:.1f} mSv")
 
 # Monte Carlo SPE analysis
-print(f"\\\n=== Solar Particle Event Risk (10,000 mission simulations) ===")
+print(f"\\n=== Solar Particle Event Risk (10,000 mission simulations) ===")
 n_sims = 10_000
 mission_doses = []
 
@@ -476,7 +476,7 @@ print(f"Missions > 100 mSv:   {np.sum(doses > 100):>6} ({np.mean(doses > 100)*10
 print(f"Missions > 1000 mSv:  {np.sum(doses > 1000):>6} ({np.mean(doses > 1000)*100:.2f}%)")
 
 # Shielding analysis
-print(f"\\\n=== Shielding Effectiveness ===")
+print(f"\\n=== Shielding Effectiveness ===")
 print(f"{'Al Thickness':>14} {'GCR dose':>10} {'SPE (500 mSv)':>14} {'Total mass/m2':>14}")
 print("-" * 54)
 for t in [0, 1, 2, 5, 10, 20]:
@@ -486,7 +486,7 @@ for t in [0, 1, 2, 5, 10, 20]:
     print(f"{t:>12} cm {gcr:>8.1f} mSv {spe:>12.1f} mSv {mass:>12.1f} kg/m2")
 
 # Career dose limits
-print(f"\\\n=== Context: Dose Limits ===")
+print(f"\\n=== Context: Dose Limits ===")
 limits = [
     ("Earth background (annual)", 2.4),
     ("Chest X-ray", 0.1),

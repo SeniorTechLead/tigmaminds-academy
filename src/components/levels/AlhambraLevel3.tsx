@@ -85,7 +85,7 @@ for a in names:
     print()
 
 # Verify group axioms
-print(f"\\\nClosure: every product is in the group? YES")
+print(f"\\nClosure: every product is in the group? YES")
 print(f"Identity: 'e' row/column matches headers? YES")
 print(f"Inverses exist for all elements? ", end='')
 for n in names:

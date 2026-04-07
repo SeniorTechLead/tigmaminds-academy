@@ -119,7 +119,7 @@ quantum_yield = 0.41
 E_photon = 2.22   # eV (at 560 nm)
 E_light = quantum_yield * E_photon
 E_heat = E_chemical - E_light
-labels = ['Chemical energy\\\n(input)', 'Light output', 'Heat (waste)']
+labels = ['Chemical energy\\n(input)', 'Light output', 'Heat (waste)']
 values = [E_chemical, E_light, E_heat]
 colors_e = ['#3b82f6', '#22c55e', '#ef4444']
 bars = ax.bar(labels, values, color=colors_e, alpha=0.8)
@@ -247,7 +247,7 @@ efficacies = {
     'Fluorescent': 70,
     'White LED': 120,
     'Firefly': 90,  # estimated luminous efficacy
-    'Theoretical max\\\n(555 nm mono)': 683,
+    'Theoretical max\\n(555 nm mono)': 683,
 }
 names_e = list(efficacies.keys())
 values_e = list(efficacies.values())
@@ -421,7 +421,7 @@ print("Flash pattern analysis:")
 for name, props in species.items():
     freq = 1.0 / props['period']
     print(f"  {name}: period={props['period']}s, freq={freq:.3f} Hz, flash={props['flash_dur']}s")
-print(f"\\\nSynchronization (K={coupling_strength}):")
+print(f"\\nSynchronization (K={coupling_strength}):")
 print(f"  Final order parameter: r = {order_param[-1]:.3f}")
 print(f"  Time to sync (r > 0.8): ~{t_k[np.argmax(order_param > 0.8)]:.1f}s")`,
       challenge: 'Implement the "firefly femme fatale" effect: predatory Photuris females mimic the flash patterns of Photinus species to lure males. Add a predator that dynamically switches between mimicking two different species patterns, and track which "prey" fireflies are attracted (their oscillators shift toward the predator\'s frequency).',
@@ -482,10 +482,10 @@ daily_metabolism = 0.5  # J/day (rough estimate)
 
 # Activity energy costs (estimated, relative)
 activities = {
-    'Resting metabolism\\\n(24 hours)': daily_metabolism,
+    'Resting metabolism\\n(24 hours)': daily_metabolism,
     'Flight (1 hour)': daily_metabolism * 0.3,
-    'Bioluminescence\\\n(2-hour display)': E_total_biolum,
-    'Light energy\\\n(visible output)': E_light_total,
+    'Bioluminescence\\n(2-hour display)': E_total_biolum,
+    'Light energy\\n(visible output)': E_light_total,
 }
 
 # Flash energy time series
@@ -502,7 +502,7 @@ fig.suptitle('ATP Energy Budget: Metabolic Cost of Bioluminescence',
 # Panel 1: Energy flow diagram (Sankey-style)
 ax = axes[0, 0]
 ax.set_facecolor('#111827'); ax.tick_params(colors='gray')
-stages = ['ATP\\\nactivation', 'ATP\\\nsynthesis', 'Light\\\noutput', 'Heat\\\nwaste']
+stages = ['ATP\\nactivation', 'ATP\\nsynthesis', 'Light\\noutput', 'Heat\\nwaste']
 values = [E_activation * 1e9, E_synthesis * 1e9, E_light_total * 1e9,
           (E_total_biolum - E_light_total) * 1e9]
 colors_s = ['#3b82f6', '#a855f7', '#22c55e', '#ef4444']
@@ -544,11 +544,11 @@ ax.set_xscale('log')
 ax = axes[1, 1]
 ax.set_facecolor('#111827'); ax.tick_params(colors='gray')
 cascade = {
-    'Chemical energy\\\n(ATP + luciferin)': 100,
-    'Excited state\\\n(oxyluciferin*)': 65,
-    'Photons emitted\\\n(quantum yield)': 41,
-    'Visible light\\\n(in useful direction)': 20,
-    'Detected by\\\nfemale firefly': 0.01,
+    'Chemical energy\\n(ATP + luciferin)': 100,
+    'Excited state\\n(oxyluciferin*)': 65,
+    'Photons emitted\\n(quantum yield)': 41,
+    'Visible light\\n(in useful direction)': 20,
+    'Detected by\\nfemale firefly': 0.01,
 }
 stages_c = list(cascade.keys())
 values_c = list(cascade.values())
@@ -833,14 +833,14 @@ ax.legend(fontsize=8)
 ax = axes[1, 0]
 ax.set_facecolor('#111827'); ax.tick_params(colors='gray')
 milestones = [
-    (1947, 'Luciferin structure\\\ndetermined'),
-    (1962, 'GFP discovered\\\n(Shimomura)'),
-    (1992, 'GFP gene cloned\\\n(Prasher/Chalfie)'),
-    (1994, 'GFP expression\\\nin C. elegans'),
-    (2004, 'ATP hygiene assays\\\ncommercialized'),
-    (2008, 'Nobel Prize\\\n(Shimomura/Chalfie/Tsien)'),
-    (2012, 'Bio-LED nanostructure\\\n(KAIST)'),
-    (2020, 'Glowing plants\\\n(MIT, Planta)'),
+    (1947, 'Luciferin structure\\ndetermined'),
+    (1962, 'GFP discovered\\n(Shimomura)'),
+    (1992, 'GFP gene cloned\\n(Prasher/Chalfie)'),
+    (1994, 'GFP expression\\nin C. elegans'),
+    (2004, 'ATP hygiene assays\\ncommercialized'),
+    (2008, 'Nobel Prize\\n(Shimomura/Chalfie/Tsien)'),
+    (2012, 'Bio-LED nanostructure\\n(KAIST)'),
+    (2020, 'Glowing plants\\n(MIT, Planta)'),
 ]
 years = [m[0] for m in milestones]
 labels = [m[1] for m in milestones]

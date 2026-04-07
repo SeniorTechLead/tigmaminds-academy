@@ -44,7 +44,7 @@ print(f"Venus orbital period: {P_venus} days")
 print(f"Earth orbital period: {P_earth} days")
 print(f"Calculated synodic period: {P_synodic:.4f} days")
 print(f"Maya recorded value: 584 days")
-print(f"Error: {abs(P_synodic - 584):.4f} days ({abs(P_synodic - 584)/P_synodic*100:.4f}%)\\\n")
+print(f"Error: {abs(P_synodic - 584):.4f} days ({abs(P_synodic - 584)/P_synodic*100:.4f}%)\\n")
 
 # Phase breakdown of the Venus cycle
 phases = [
@@ -60,7 +60,7 @@ for name, days in phases:
     total += days
     bar = "█" * (days // 5)
     print(f"  {name:<42} {days:>3} days {bar}")
-print(f"  {'Total':<42} {total:>3} days\\\n")
+print(f"  {'Total':<42} {total:>3} days\\n")
 
 # The 8-year resonance
 print("=== The 8-Year Resonance ===")
@@ -69,14 +69,14 @@ earth_years = 8 * 365
 print(f"5 Venus cycles: 5 × 584 = {venus_cycles} days")
 print(f"8 Earth years:  8 × 365 = {earth_years} days")
 print(f"Exact match! Venus returns to the same sky position")
-print(f"on the same calendar date every 8 years.\\\n")
+print(f"on the same calendar date every 8 years.\\n")
 
 # More precise check
 precise_venus = 5 * P_synodic
 precise_earth = 8 * P_earth
 print(f"Precise 5 cycles: {precise_venus:.2f} days")
 print(f"Precise 8 years:  {precise_earth:.2f} days")
-print(f"Drift per 8 years: {abs(precise_venus - precise_earth):.2f} days\\\n")
+print(f"Drift per 8 years: {abs(precise_venus - precise_earth):.2f} days\\n")
 
 # Error accumulation over centuries
 print("=== Error Accumulation (Maya 584-day value) ===")
@@ -90,9 +90,9 @@ for n in [1, 5, 10, 65, 100, 301]:
     print(f"{n:>7} {years:>7.1f} {maya_total:>10,} d {actual_total:>12,.1f} d {drift:>+7.1f} d")
 
 # Dresden Codex correction scheme
-print(f"\\\n=== Dresden Codex Corrections ===")
+print(f"\\n=== Dresden Codex Corrections ===")
 print(f"The Maya did NOT simply use 584 days forever.")
-print(f"The codex applies corrections at specific intervals:\\\n")
+print(f"The codex applies corrections at specific intervals:\\n")
 
 corrections = [
     (57, 584, -8, "After 57 cycles, subtract 8 days"),
@@ -109,7 +109,7 @@ for cycles, base, correction, note in corrections:
     running_actual += cycles * P_synodic
     error = running_maya - running_actual
     print(f"  {note}")
-    print(f"    Cumulative: {running_cycles} cycles, error = {error:+.1f} days\\\n")
+    print(f"    Cumulative: {running_cycles} cycles, error = {error:+.1f} days\\n")
 
 print(f"With corrections, the Maya tables maintained accuracy")
 print(f"of better than 1 day over centuries of predictions.")`,
@@ -174,12 +174,12 @@ def render_maya_digit(n):
         parts.append("  " + "● " * dots)
     for _ in range(bars):
         parts.append("  ━━━━━━━")
-    return "\\\n".join(parts)
+    return "\\n".join(parts)
 
 # Basic conversions
 print("=== Maya Vigesimal Number System ===")
 print(f"Base: 20 (fingers + toes)")
-print(f"Symbols: ● (1), ━━━ (5), 𝟎 shell (0)\\\n")
+print(f"Symbols: ● (1), ━━━ (5), 𝟎 shell (0)\\n")
 
 print("=== Digits 0-19 ===")
 for i in range(20):
@@ -191,7 +191,7 @@ for i in range(20):
     print(f"  {i:>2} = {symbol.strip()}")
 
 # Convert some numbers
-print(f"\\\n=== Decimal → Maya Conversion ===")
+print(f"\\n=== Decimal → Maya Conversion ===")
 test_numbers = [0, 19, 20, 42, 365, 584, 1872000, 7200]
 for n in test_numbers:
     maya = decimal_to_maya(n)
@@ -206,14 +206,14 @@ for n in test_numbers:
     assert back == n, f"Conversion error: {back} != {n}"
 
 # Place values
-print(f"\\\n=== Maya Place Values ===")
+print(f"\\n=== Maya Place Values ===")
 for i in range(6):
     pv = 20**i
     print(f"  Position {i+1}: {pv:>10,} (20^{i})")
 
 # Visual rendering of a number
-print(f"\\\n=== Visual Rendering: 1,872,000 ===")
-print(f"(The Long Count creation date: 13.0.0.0.0)\\\n")
+print(f"\\n=== Visual Rendering: 1,872,000 ===")
+print(f"(The Long Count creation date: 13.0.0.0.0)\\n")
 maya = decimal_to_maya(1872000)
 place_values = [20**i for i in range(len(maya)-1, -1, -1)]
 for i, (digit, pv) in enumerate(zip(maya, place_values)):
@@ -223,9 +223,9 @@ for i, (digit, pv) in enumerate(zip(maya, place_values)):
         print(f"    {'─' * 14}")
 
 # Compare with other number systems
-print(f"\\\n=== Number System Comparison ===")
+print(f"\\n=== Number System Comparison ===")
 n = 7200
-print(f"The number {n:,} in different bases:\\\n")
+print(f"The number {n:,} in different bases:\\n")
 systems = [
     ("Binary (base 2)", 2),
     ("Octal (base 8)", 8),
@@ -243,7 +243,7 @@ for name, base in systems:
     digit_str = ".".join(str(d) for d in digits)
     print(f"  {name:<25} {digit_str:<20} ({len(digits)} digits)")
 
-print(f"\\\nHigher bases need fewer digits — Maya base-20 is")
+print(f"\\nHigher bases need fewer digits — Maya base-20 is")
 print(f"very compact. That's why they could carve huge numbers")
 print(f"into stone monuments with relatively few symbols.")`,
       challenge: 'The Maya calendar system actually used a modified base-20 for the third position: instead of 20×20 = 400, the third place is 18×20 = 360 (closer to the number of days in a year). Modify the converter to handle this "modified vigesimal" system used in Long Count dates.',
@@ -284,7 +284,7 @@ print("=== Fundamental Eclipse Periods ===")
 print(f"Synodic month (new Moon cycle): {SYNODIC_MONTH:.5f} days")
 print(f"Draconic month (node cycle):    {DRACONIC_MONTH:.5f} days")
 print(f"Eclipse year (node-to-node):    {ECLIPSE_YEAR:.4f} days")
-print(f"Eclipse season (half):          {ECLIPSE_SEASON:.4f} days\\\n")
+print(f"Eclipse season (half):          {ECLIPSE_SEASON:.4f} days\\n")
 
 # The Maya 11,960-day cycle
 maya_cycle = 11960
@@ -296,19 +296,19 @@ print("=== The Maya 11,960-Day Cycle ===")
 print(f"Duration: {maya_cycle:,} days = {maya_cycle/365.2422:.1f} years")
 print(f"Lunations: {lunations:.2f} (≈ {round(lunations)} synodic months)")
 print(f"Eclipse seasons: {eclipse_seasons:.2f} (≈ {round(eclipse_seasons)})")
-print(f"Draconic months: {draconic_months:.2f} (≈ {round(draconic_months)})\\\n")
+print(f"Draconic months: {draconic_months:.2f} (≈ {round(draconic_months)})\\n")
 
 # Check the cycle accuracy
 lunar_drift = (405 * SYNODIC_MONTH) - maya_cycle
 node_drift = (69 * ECLIPSE_SEASON) - maya_cycle
 print(f"Lunar alignment error: {lunar_drift:+.2f} days per cycle")
 print(f"Node alignment error:  {node_drift:+.2f} days per cycle")
-print(f"Both < 2 days over 32.7 years — remarkably precise.\\\n")
+print(f"Both < 2 days over 32.7 years — remarkably precise.\\n")
 
 # Simulate eclipse windows
 print("=== Eclipse Window Simulation ===")
 print("An eclipse can occur when the Sun is within ±18 days of a node")
-print("AND a new Moon falls within that window.\\\n")
+print("AND a new Moon falls within that window.\\n")
 
 eclipse_limit = 18  # days from node for eclipse possibility
 eclipses_found = []
@@ -333,7 +333,7 @@ print(f"Eclipse windows found: {len(eclipses_found)}")
 print(f"High-probability eclipses: {sum(1 for e in eclipses_found if e['likely'])}")
 
 # Show first 15 eclipse windows
-print(f"\\\n{'#':>3} {'Day':>8} {'Year':>6} {'Node dist':>10} {'Probability'}")
+print(f"\\n{'#':>3} {'Day':>8} {'Year':>6} {'Node dist':>10} {'Probability'}")
 print("-" * 42)
 for i, e in enumerate(eclipses_found[:15]):
     year = e['day'] / 365.2422
@@ -345,7 +345,7 @@ print(f"  ... ({len(eclipses_found)} total windows over {maya_cycle/365.2422:.1f
 
 # Compare with the Saros cycle (known to Babylonians)
 saros = 6585.32  # days
-print(f"\\\n=== Comparison: Maya vs Saros Cycle ===")
+print(f"\\n=== Comparison: Maya vs Saros Cycle ===")
 print(f"{'':>20} {'Maya':>12} {'Saros':>12}")
 print("-" * 46)
 print(f"{'Duration (days)':<20} {maya_cycle:>12,} {saros:>12,.2f}")
@@ -356,7 +356,7 @@ print(f"{'Lunar drift':<20} {lunar_drift:>+11.2f}d {(223*SYNODIC_MONTH-saros):>+
 
 saros_node = (38 * ECLIPSE_SEASON) - saros
 print(f"{'Node drift':<20} {node_drift:>+11.2f}d {saros_node:>+11.2f}d")
-print(f"\\\nBoth civilizations found the same phenomenon independently.")
+print(f"\\nBoth civilizations found the same phenomenon independently.")
 print(f"The Maya cycle is longer but covers more eclipses per cycle.")`,
       challenge: 'A total solar eclipse was visible from Maya territory on July 11, 1991. Using the Maya 11,960-day cycle, calculate when the Maya would have predicted the previous and next eclipses in this series. Check against historical records — were eclipses actually recorded near those dates?',
       successHint: 'You modeled orbital mechanics and resonance cycles — the same mathematics NASA uses to predict eclipses centuries ahead, plan satellite orbits to avoid Earth\'s shadow, and design observation schedules for space telescopes. The Maya achieved this with naked-eye observations and arithmetic; you achieved it with code and the same underlying physics.',
@@ -404,8 +404,8 @@ for name, length in calendars.items():
     print(f"{name:<12} {length:>12.5f} {error:>+12.5f} {seconds:>+14.1f} s")
 
 # Drift over centuries
-print(f"\\\n=== Calendar Drift Over Time ===")
-print(f"Starting from a perfectly aligned calendar...\\\n")
+print(f"\\n=== Calendar Drift Over Time ===")
+print(f"Starting from a perfectly aligned calendar...\\n")
 print(f"{'Year span':>12}", end="")
 for name in calendars:
     if name != "Actual":
@@ -422,19 +422,19 @@ for years in [10, 50, 100, 500, 1000, 2000, 5000, 10000]:
     print()
 
 # The Gregorian reform
-print(f"\\\n=== The Gregorian Reform (1582 AD) ===")
+print(f"\\n=== The Gregorian Reform (1582 AD) ===")
 julian_years = 1582 + 46  # from 46 BC to 1582 AD
 julian_drift = (365.25 - ACTUAL_YEAR) * julian_years
 print(f"Julian calendar used for {julian_years} years")
 print(f"Accumulated drift: {julian_drift:.1f} days")
 print(f"Gregory XIII dropped 10 days (Oct 4 → Oct 15, 1582)")
-print(f"and added leap year exceptions:\\\n")
+print(f"and added leap year exceptions:\\n")
 
 print(f"Leap year rules comparison:")
 print(f"  Julian:    every 4 years (no exceptions)")
 print(f"  Gregorian: every 4 years EXCEPT centuries,")
 print(f"             UNLESS divisible by 400")
-print(f"  Example: 1900 = not leap, 2000 = leap, 2100 = not leap\\\n")
+print(f"  Example: 1900 = not leap, 2000 = leap, 2100 = not leap\\n")
 
 # How many leap years in different systems?
 def count_leaps(start, end, system):
@@ -454,11 +454,11 @@ greg_leaps = count_leaps(span_start, span_end, "gregorian")
 print(f"Leap years from {span_start}-{span_end}:")
 print(f"  Julian:    {jul_leaps} leap years")
 print(f"  Gregorian: {greg_leaps} leap years")
-print(f"  Difference: {jul_leaps - greg_leaps} fewer = 3 days less drift\\\n")
+print(f"  Difference: {jul_leaps - greg_leaps} fewer = 3 days less drift\\n")
 
 # Maya precision analysis
 print(f"=== Maya Precision: How Did They Do It? ===")
-print(f"Method: count days between identical astronomical events\\\n")
+print(f"Method: count days between identical astronomical events\\n")
 
 observations = [50, 100, 200, 500, 1000]
 true_year = ACTUAL_YEAR
@@ -470,7 +470,7 @@ for n_years in observations:
     derived_year = counted_days / n_years
     error = abs(derived_year - true_year)
     print(f"  {n_years:>4} years observed: {counted_days:>7,} days counted")
-    print(f"    Derived year = {derived_year:.5f} (error: {error:.5f} days)\\\n")
+    print(f"    Derived year = {derived_year:.5f} (error: {error:.5f} days)\\n")
 
 print(f"With ~500+ years of records, Maya astronomers could")
 print(f"determine the year length to ±0.0002 days — matching")
@@ -572,7 +572,7 @@ for name, val in places:
     print(f"  1 {name:<8} = {val:>8,} days ({years:>8.2f} years)")
 
 # Convert famous Long Count dates
-print(f"\\\n=== Famous Maya Long Count Dates ===\\\n")
+print(f"\\n=== Famous Maya Long Count Dates ===\\n")
 famous_dates = [
     ((13, 0, 0, 0, 0), "Creation date (Maya epoch)"),
     ((8, 14, 3, 1, 12), "Earliest known Long Count inscription"),
@@ -597,7 +597,7 @@ for lc, event in famous_dates:
     print(f"{lc_to_string(lc):<16} {days:>10,} {greg:>15} {event}")
 
 # Convert today's date to Long Count
-print(f"\\\n=== Today in the Long Count ===")
+print(f"\\n=== Today in the Long Count ===")
 today_jd = gregorian_to_julian_day(2026, 4, 5)
 today_maya_days = int(today_jd - GMT_CORRELATION)
 today_lc = days_to_long_count(today_maya_days)
@@ -607,18 +607,18 @@ print(f"Maya day count: {today_maya_days:,}")
 print(f"Long Count: {lc_to_string(today_lc)}")
 
 # The 2012 myth
-print(f"\\\n=== The 2012 Myth: Debunked ===")
+print(f"\\n=== The 2012 Myth: Debunked ===")
 cycle_13 = long_count_to_days(13, 0, 0, 0, 0)
 jd_2012 = days_to_julian_day(cycle_13)
 y, m, d = julian_day_to_gregorian(jd_2012)
 print(f"13.0.0.0.0 = {cycle_13:,} days = Dec 21, 2012")
-print(f"\\\nThis is NOT the end of the calendar:")
+print(f"\\nThis is NOT the end of the calendar:")
 print(f"  13.0.0.0.1 = Dec 22, 2012 (the next day)")
 print(f"  14.0.0.0.0 = {long_count_to_days(14,0,0,0,0):,} days")
 jd_14 = days_to_julian_day(long_count_to_days(14, 0, 0, 0, 0))
 y14, m14, d14 = julian_day_to_gregorian(jd_14)
 print(f"             = {['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][m14]} {d14}, {y14} AD")
-print(f"\\\nMaya inscriptions at Palenque reference dates like")
+print(f"\\nMaya inscriptions at Palenque reference dates like")
 print(f"1.0.0.0.0.0.0.0 — a 20-Baktun cycle. They clearly")
 print(f"did not think the calendar ended at 13.0.0.0.0.")`,
       challenge: 'Calculate your own birthday in the Maya Long Count. Then find the next "round" Long Count date (one where the last three positions are all zero, like X.Y.0.0.0) and calculate what Gregorian date that falls on.',
@@ -653,7 +653,7 @@ np.random.seed(42)
 TRUE_YEAR = 365.24220  # actual tropical year length
 
 print("=== The Central Limit Theorem in Astronomy ===")
-print(f"True tropical year: {TRUE_YEAR} days\\\n")
+print(f"True tropical year: {TRUE_YEAR} days\\n")
 
 # Simulate individual observations with noise
 def simulate_observations(n_obs, single_error_std=1.0):
@@ -663,7 +663,7 @@ def simulate_observations(n_obs, single_error_std=1.0):
 
 # Show how averaging improves precision
 print("=== Method 1: Average Many Single-Year Measurements ===")
-print(f"Each observation: ±1.0 day uncertainty\\\n")
+print(f"Each observation: ±1.0 day uncertainty\\n")
 print(f"{'Observations':>14} {'Mean':>12} {'Std Error':>10} {'Error':>10} {'Improvement'}")
 print("-" * 60)
 
@@ -676,9 +676,9 @@ for n in [1, 5, 10, 25, 50, 100, 250, 500, 1000]:
     print(f"{n:>14} {mean:>12.5f} {std_err:>10.5f} {error:>10.5f} {improvement:>10.4f}×")
 
 # The long-baseline method (what Maya actually used)
-print(f"\\\n=== Method 2: Long-Baseline Measurement (Maya Method) ===")
+print(f"\\n=== Method 2: Long-Baseline Measurement (Maya Method) ===")
 print(f"Instead of measuring one year at a time, measure the")
-print(f"interval between events MANY years apart.\\\n")
+print(f"interval between events MANY years apart.\\n")
 
 def long_baseline_measurement(baseline_years, obs_error=1.0):
     """
@@ -706,8 +706,8 @@ for baseline in [1, 5, 10, 25, 50, 100, 200, 500, 1000]:
     print(f"{baseline:>8} yr {mean_year:>14.5f} {error:>11.5f} d {error_sec:>10.1f} s")
 
 # Monte Carlo: required observation time for target precision
-print(f"\\\n=== How Long to Reach Maya Precision? ===")
-print(f"Target: ±0.0002 days (Maya achieved this)\\\n")
+print(f"\\n=== How Long to Reach Maya Precision? ===")
+print(f"Target: ±0.0002 days (Maya achieved this)\\n")
 
 target = 0.0002
 n_trials = 1000
@@ -724,7 +724,7 @@ for baseline in [50, 100, 200, 300, 500]:
     bar = "█" * int(success_rate * 20)
     print(f"  {baseline:>3}-year baseline, 5 measurements:")
     print(f"    Median error: {median_error:.5f} days")
-    print(f"    Achieves target: {success_rate:.0%} of the time {bar}\\\n")
+    print(f"    Achieves target: {success_rate:.0%} of the time {bar}\\n")
 
 # Comparison: naked eye vs early telescopes
 print(f"=== Naked Eye vs Early Telescopes ===")
@@ -745,9 +745,9 @@ for name, value, era in comparisons:
     error = abs(value - TRUE_YEAR)
     print(f"  {name:<28} {value:>12.5f} {error:>10.5f} {era}")
 
-print(f"\\\nThe Maya value (365.24200) is MORE accurate than")
+print(f"\\nThe Maya value (365.24200) is MORE accurate than")
 print(f"Copernicus (365.24270) who had telescopes!")
-print(f"\\\nLesson: patience + systematic records can rival")
+print(f"\\nLesson: patience + systematic records can rival")
 print(f"or exceed technology. Precision is about method,")
 print(f"not just instruments.")`,
       challenge: 'Simulate 500 years of a Maya observatory: each year, an astronomer records the solstice day with ±1 day error. At each generation (every 50 years), compute the running best estimate of the year length. Plot how the estimate converges toward the true value over centuries. At what generation does it first achieve ±0.001-day precision?',

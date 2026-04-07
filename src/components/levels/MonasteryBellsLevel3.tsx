@@ -65,7 +65,7 @@ for idx, (m, n, title) in enumerate(modes):
     c = ax.contourf(X, Y, displacement, levels=20, cmap='RdBu_r')
     ax.contour(X, Y, displacement, levels=[0], colors='white', linewidths=1.5)
     ax.set_aspect('equal')
-    ax.set_title(f'{title}\\\nf = {freq_ratios[idx]:.2f} × f₁', fontsize=10, color='white')
+    ax.set_title(f'{title}\\nf = {freq_ratios[idx]:.2f} × f₁', fontsize=10, color='white')
     ax.set_xlim(-1.2, 1.2)
     ax.set_ylim(-1.2, 1.2)
     ax.tick_params(labelsize=7)
@@ -337,7 +337,7 @@ for ax, signal, title, color in [
         ax.axvline(n * fundamental, color='white', linewidth=0.3, alpha=0.3)
 
 # Highlight missing 200 Hz
-axes[1, 1].annotate('No energy at 200 Hz!\\\nBut brain still perceives it',
+axes[1, 1].annotate('No energy at 200 Hz!\\nBut brain still perceives it',
                     xy=(200, 0), xytext=(400, 0.5),
                     fontsize=9, color='#ef4444',
                     arrowprops=dict(arrowstyle='->', color='#ef4444'))
@@ -543,7 +543,7 @@ axes[1, 1].plot(sample_rates / 1000, max_freq / 1000, color='#a855f7', linewidth
 axes[1, 1].axhline(20, color='#f59e0b', linewidth=1.5, linestyle='--')
 axes[1, 1].text(35, 21, 'Human hearing limit (20 kHz)', fontsize=9, color='#f59e0b')
 axes[1, 1].scatter([44.1], [22.05], color='white', edgecolor='#10b981', s=80, zorder=5, linewidth=2)
-axes[1, 1].annotate('CD quality\\\n44.1 kHz → 22.05 kHz max', xy=(44.1, 22.05),
+axes[1, 1].annotate('CD quality\\n44.1 kHz → 22.05 kHz max', xy=(44.1, 22.05),
                    xytext=(30, 25), fontsize=9, color='lightgray',
                    arrowprops=dict(arrowstyle='->', color='lightgray'))
 axes[1, 1].set_xlabel('Sample rate (kHz)', fontsize=10)

@@ -305,7 +305,7 @@ print("Key trend: mass DOWN, speed UP, energy UP")
 print(f"Sling energy:   {KEs[0]:.0f} J")
 print(f"Modern rifle:   {KEs[-1]:.0f} J")
 print(f"Ratio: {KEs[-1]/KEs[0]:.0f}x more energy")
-print(f"\\\nBut momentum ratio is only {momenta[-1]/momenta[0]:.1f}x")
+print(f"\\nBut momentum ratio is only {momenta[-1]/momenta[0]:.1f}x")
 print("Energy scales as v^2, momentum as v — energy grows faster")`,
       challenge: 'Add trajectory simulations for each weapon. Plot all six trajectories on the same graph. Which weapons are affected most by air resistance? (Hint: lighter, slower projectiles are affected more relative to their energy.)',
       successHint: 'The evolution of projectile weapons is a story of exploiting v-squared. Each generation found ways to launch projectiles faster, and the quadratic energy scaling rewarded speed over mass. Physics drove military history.',
@@ -476,7 +476,7 @@ print(f"Release: {v0:.1f} m/s | Impact: {v_imp:.1f} m/s")
 print(f"Flight: {ts[-1]:.3f}s | Range: {xs[-1]:.1f}m")
 print(f"Force: {F_impact:.0f}N | Pressure: {P_impact:.1f}MPa | KE: {KE_impact:.1f}J")
 verdict = "LETHAL" if P_impact > 40 else "NON-LETHAL"
-print(f"\\\nVERDICT: {verdict} — {'exceeds' if P_impact>40 else 'below'} skull fracture threshold")`,
+print(f"\\nVERDICT: {verdict} — {'exceeds' if P_impact>40 else 'below'} skull fracture threshold")`,
       challenge: 'Modify the config to test: (1) a Balearic slinger with a longer sling (1.2m) and heavier stone (80g), (2) a Roman lead sling bullet (30g, denser so smaller radius=0.007m), (3) a child with a short sling (0.4m) and weaker torque (2.0). Which is most effective? Build a comparison table.',
       successHint: 'You built a complete physics laboratory in code. From F = ma to Hertzian contact theory, from Euler integration to optimization — this capstone demonstrates that a story about a shepherd boy and a giant is, at its core, a story about physics.',
     },

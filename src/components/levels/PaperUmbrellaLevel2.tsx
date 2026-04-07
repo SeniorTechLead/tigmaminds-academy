@@ -65,10 +65,10 @@ ax1.set_xlabel('Moisture content (%)', color='white')
 ax1.set_ylabel('Paper strength (relative)', color='white')
 ax1.set_title('Water Destroys Hydrogen Bonds', color='white', fontsize=12)
 ax1.tick_params(colors='gray')
-ax1.annotate('Dry paper\\\n(maximum strength)', xy=(5, strengths_moisture[10]),
+ax1.annotate('Dry paper\\n(maximum strength)', xy=(5, strengths_moisture[10]),
             xytext=(20, strengths_moisture[10]*0.9), color='#22c55e', fontsize=9,
             arrowprops=dict(arrowstyle='->', color='#22c55e'))
-ax1.annotate('Wet paper\\\n(very weak)', xy=(40, strengths_moisture[80]),
+ax1.annotate('Wet paper\\n(very weak)', xy=(40, strengths_moisture[80]),
             xytext=(30, strengths_moisture[40]*0.5), color='#ef4444', fontsize=9,
             arrowprops=dict(arrowstyle='->', color='#ef4444'))
 
@@ -80,10 +80,10 @@ ax2.set_xlabel('Fiber contact area (relative units)', color='white')
 ax2.set_ylabel('Paper strength (relative)', color='white')
 ax2.set_title('More Fiber Contact = Stronger Paper', color='white', fontsize=12)
 ax2.tick_params(colors='gray')
-ax2.annotate('Light beating\\\n(fewer bonds)', xy=(30, strengths_contact[10]),
+ax2.annotate('Light beating\\n(fewer bonds)', xy=(30, strengths_contact[10]),
             xytext=(50, strengths_contact[40]), color='#f59e0b', fontsize=9,
             arrowprops=dict(arrowstyle='->', color='#f59e0b'))
-ax2.annotate('Heavy beating\\\n(many bonds)', xy=(180, strengths_contact[85]),
+ax2.annotate('Heavy beating\\n(many bonds)', xy=(180, strengths_contact[85]),
             xytext=(140, strengths_contact[70]), color='#22c55e', fontsize=9,
             arrowprops=dict(arrowstyle='->', color='#22c55e'))
 
@@ -372,7 +372,7 @@ import matplotlib.pyplot as plt
 # Life Cycle Analysis: Paper vs Plastic umbrella
 # Impact categories: CO2, water use, waste, toxicity
 
-categories = ['CO₂\\\n(kg)', 'Water\\\n(liters)', 'Solid waste\\\n(kg)', 'Toxic\\\nchemicals\\\n(g)', 'Biodeg.\\\ntime (years)']
+categories = ['CO₂\\n(kg)', 'Water\\n(liters)', 'Solid waste\\n(kg)', 'Toxic\\nchemicals\\n(g)', 'Biodeg.\\ntime (years)']
 
 # Per umbrella impacts
 paper_umbrella = {
@@ -526,7 +526,7 @@ ax1.fill_between(intensities, 0, power_mw, alpha=0.1, color='#3b82f6')
 for name, rate in rain_rates.items():
     power = rate * umbrella_area * energy_per_drop * 1000
     ax1.plot(rate / 10, power, 'o', color='#f59e0b', markersize=8)
-    ax1.annotate(f'{name}\\\n{power:.2f} mW', xy=(rate/10, power),
+    ax1.annotate(f'{name}\\n{power:.2f} mW', xy=(rate/10, power),
                 xytext=(rate/10 + 5, power + 0.2), color='#f59e0b', fontsize=8)
 
 ax1.set_xlabel('Rain intensity (mm/h)', color='white')
@@ -537,11 +537,11 @@ ax1.tick_params(colors='gray')
 # Annual energy by location
 ax2.set_facecolor('#111827')
 locations = {
-    'Cherrapunji\\\n(11,777mm/yr)': {'rain_hours': 2000, 'avg_rate': 25},
-    'Guwahati\\\n(1,722mm/yr)': {'rain_hours': 800, 'avg_rate': 15},
-    'Mumbai\\\n(2,166mm/yr)': {'rain_hours': 900, 'avg_rate': 18},
-    'London\\\n(602mm/yr)': {'rain_hours': 1500, 'avg_rate': 5},
-    'Sahara\\\n(25mm/yr)': {'rain_hours': 20, 'avg_rate': 5},
+    'Cherrapunji\\n(11,777mm/yr)': {'rain_hours': 2000, 'avg_rate': 25},
+    'Guwahati\\n(1,722mm/yr)': {'rain_hours': 800, 'avg_rate': 15},
+    'Mumbai\\n(2,166mm/yr)': {'rain_hours': 900, 'avg_rate': 18},
+    'London\\n(602mm/yr)': {'rain_hours': 1500, 'avg_rate': 5},
+    'Sahara\\n(25mm/yr)': {'rain_hours': 20, 'avg_rate': 5},
 }
 
 loc_names = list(locations.keys())

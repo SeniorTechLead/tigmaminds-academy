@@ -86,24 +86,24 @@ print(f"Guide RNA designed: {guide_rna}")
 
 # Find all matches (including off-target)
 matches = find_target(genome, guide_rna)
-print(f"\\\nMatches found: {len(matches)}")
+print(f"\\nMatches found: {len(matches)}")
 for pos, mm in matches:
     target_type = "ON-TARGET" if mm == 0 else f"OFF-TARGET ({mm} mismatches)"
     print(f"  Position {pos}: {target_type}")
 
 # Perform the cut
-print("\\\n--- Performing CRISPR cut ---")
+print("\\n--- Performing CRISPR cut ---")
 edited, result = crispr_cut(genome, target_gene_start, 'NHEJ')
 print(f"  Repair type: NHEJ (non-homologous end joining)")
 print(f"  Result: {result}")
 print(f"  New genome length: {len(edited)} bp")
 
-print("\\\n--- With HDR template ---")
+print("\\n--- With HDR template ---")
 edited2, result2 = crispr_cut(genome, target_gene_start, 'HDR')
 print(f"  Repair type: HDR (homology-directed repair)")
 print(f"  Result: {result2}")
 
-print("\\\nCRISPR can disable a gene (NHEJ) or replace it (HDR).")
+print("\\nCRISPR can disable a gene (NHEJ) or replace it (HDR).")
 print("Off-target cuts are the main safety concern.")`,
       challenge: 'Design a CRISPR experiment to make the Bodhi Tree resistant to a specific fungal disease. Define the target gene (a susceptibility gene), design the guide RNA, and simulate the editing. What off-target risks must you check?',
       successHint: 'CRISPR is the most powerful gene-editing tool ever discovered. Understanding its mechanism — guide RNA targeting, Cas9 cutting, cellular repair — is essential for anyone working in modern biology or agriculture.',
@@ -586,7 +586,7 @@ comparisons = [
 
 for name, p1, p2 in comparisons:
     matches = compare_profiles(p1, p2)
-    print(f"\\\n{name}")
+    print(f"\\n{name}")
     print(f"  Matching loci: {matches}/{n_loci} ({100*matches/n_loci:.0f}%)")
     if matches == n_loci:
         print(f"  Verdict: CONFIRMED CLONE")
@@ -597,7 +597,7 @@ for name, p1, p2 in comparisons:
     else:
         print(f"  Verdict: UNRELATED")
 
-print("\\\n" + "=" * 55)
+print("\\n" + "=" * 55)
 print("Genetic fingerprinting can verify clone identity in hours.")
 print("2,300 years of monastic records, confirmed by 20 DNA markers.")`,
       challenge: 'A temple claims to have a Bodhi Tree clone but the microsatellite test shows 16/20 matches. Design a follow-up investigation: what additional tests would distinguish "old clone with many somatic mutations" from "seed-grown descendant"?',

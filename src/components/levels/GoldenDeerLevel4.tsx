@@ -104,10 +104,10 @@ ax.set_facecolor('#111827')
 
 # Draw module boxes
 modules = [
-    (0.5, 3, 'SPECTRAL\\\nDATABASE', '#3b82f6', 'Reference lines\\\nfor known elements'),
-    (3.5, 3, 'SIGNAL\\\nPROCESSOR', '#22c55e', 'Smoothing,\\\nnormalization'),
-    (6.5, 3, 'PEAK\\\nDETECTOR', '#f59e0b', 'Find emission/\\\nabsorption lines'),
-    (9.5, 3, 'SPECTRAL\\\nMATCHER', '#ef4444', 'Cross-reference\\\n& identify'),
+    (0.5, 3, 'SPECTRAL\\nDATABASE', '#3b82f6', 'Reference lines\\nfor known elements'),
+    (3.5, 3, 'SIGNAL\\nPROCESSOR', '#22c55e', 'Smoothing,\\nnormalization'),
+    (6.5, 3, 'PEAK\\nDETECTOR', '#f59e0b', 'Find emission/\\nabsorption lines'),
+    (9.5, 3, 'SPECTRAL\\nMATCHER', '#ef4444', 'Cross-reference\\n& identify'),
 ]
 
 for x, y, label, color, desc in modules:
@@ -125,8 +125,8 @@ for x_start, x_end in [(2.7, 3.5), (5.7, 6.5), (8.7, 9.5)]:
                 arrowprops=dict(arrowstyle='->', color='#fbbf24', lw=2))
 
 # Input/output labels
-ax.text(0.5, 4.5, 'INPUT:\\\nUnknown spectrum', color='#a855f7', fontsize=10, fontweight='bold')
-ax.text(9.5, 4.5, 'OUTPUT:\\\nElement IDs + confidence', color='#a855f7', fontsize=10, fontweight='bold')
+ax.text(0.5, 4.5, 'INPUT:\\nUnknown spectrum', color='#a855f7', fontsize=10, fontweight='bold')
+ax.text(9.5, 4.5, 'OUTPUT:\\nElement IDs + confidence', color='#a855f7', fontsize=10, fontweight='bold')
 
 ax.set_xlim(-0.5, 12.5)
 ax.set_ylim(0.5, 5.5)
@@ -323,7 +323,7 @@ print("-" * 55)
 print(f"{'TOTAL':<12} {total_lines:>6} lines across {len(spectral_database)} elements")
 
 # Check for potential line overlaps
-print("\\\nPotential line overlaps (within 3nm):")
+print("\\nPotential line overlaps (within 3nm):")
 all_lines = []
 for elem, lines in spectral_database.items():
     for wl, _ in lines:
@@ -668,7 +668,7 @@ plt.show()
 # Detailed results
 for name, peaks in test_cases:
     results = identify_elements(peaks, spectral_database)
-    print(f"\\\n{'='*55}")
+    print(f"\\n{'='*55}")
     print(f"Test: {name}")
     print(f"Detected peaks: {len(peaks)}")
     print(f"{'='*55}")
@@ -900,7 +900,7 @@ print(f"Peaks detected: {len(detected)}")
 print(f"Elements identified: {len(matches)}")
 print("-" * 55)
 for elem, info in matches.items():
-    print(f"\\\n  {elem}")
+    print(f"\\n  {elem}")
     print(f"    Confidence: {info['score']:.1%}")
     print(f"    Lines matched: {info['matched']}/{info['total']}")
     for rw, pw in info['matches']:
@@ -1185,7 +1185,7 @@ for noise in noise_levels:
     f1 = 2*p*r/(p+r) if (p+r) > 0 else 0
     print(f"  Noise {noise:.0%}: Precision={p:.1%}  Recall={r:.1%}  F1={f1:.2f}")
 
-print(f"\\\nOptimal threshold: {thresholds[best_idx]:.2f} (F1={f1_scores[best_idx]:.2f})")
+print(f"\\nOptimal threshold: {thresholds[best_idx]:.2f} (F1={f1_scores[best_idx]:.2f})")
 print()
 print("EXTENSIONS FOR REAL-WORLD USE:")
 print("-" * 60)

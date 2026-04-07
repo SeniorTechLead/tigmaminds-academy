@@ -174,7 +174,7 @@ for i in range(1, n_steps):
         F_transmitted[j, i] = F_ext
 
 
-print("\\n[Full visualization in playground]")`,
+print("\n[Full visualization in playground]")`,
       challenge: 'Remove the spongy bone layer from the simulation (set its damping to near zero). How much more force reaches the brain? This models what happens with a concussion — when the absorption system fails.',
       successHint: 'Multi-stage energy absorption is the core principle behind all protective equipment. Motorcycle helmets use the same layered approach: hard shell, EPS foam, comfort liner, and a gap for the skull. The woodpecker invented this design millions of years ago.',
     },
@@ -303,7 +303,7 @@ print(f"Instantaneous modulus: {E_inst/1e9:.2f} GPa (stiff during impact)")
 print(f"Relaxed modulus: {E_R/1e9:.2f} GPa (soft at equilibrium)")
 print(f"Ratio: {E_inst/E_R:.1f}x stiffer during impact than at rest")
 
-print("\\n[Full visualization in playground]")`,
+print("\n[Full visualization in playground]")`,
       challenge: 'Modify the viscosity (eta) to find the relaxation time that would make 50 Hz drumming safe (less than 20% residual stress). How does this change the instantaneous stiffness of the material?',
       successHint: 'Viscoelasticity is everywhere in biology — skin, cartilage, tendons, blood vessel walls. It is also the basis of engineered materials like memory foam, polymer dashpots in buildings, and the EPS foam in bicycle helmets. Understanding rate-dependent behavior is essential for any impact protection design.',
     },
@@ -380,7 +380,7 @@ for e in range(n_elements):
         [-c*s, -s*s,  c*s,  s*s],
     ])
 
-print("\\n[Full visualization in playground]")`,
+print("\n[Full visualization in playground]")`,
       challenge: 'Add more nodes to the mesh (try n_nodes = 50 and 100). How does the stress distribution change? Does the solution converge? Plot stress vs mesh refinement to demonstrate FEA convergence.',
       successHint: 'You just built a finite element solver from scratch. Commercial FEA software like ANSYS, Abaqus, and COMSOL do exactly this, but with millions of 3D elements, nonlinear materials, and dynamic loading. The principles are identical — discretize, assemble, solve. You now understand the engine behind every structural simulation in engineering.',
     },

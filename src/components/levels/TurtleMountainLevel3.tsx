@@ -312,7 +312,7 @@ ax2.tick_params(colors='gray')
 # Plot 5: Composite material properties
 ax = axes[1, 1]
 ax.set_facecolor('#111827')
-materials = ['Keratin\\n(outer)', 'Bone\\n(inner)', 'Composite\\n(shell)', 'Steel\\n(reference)']
+materials = ['Keratin\n(outer)', 'Bone\n(inner)', 'Composite\n(shell)', 'Steel\n(reference)']
 youngs = [3, 18, 12, 200]  # GPa (approximate)
 toughness = [50, 5, 30, 100]  # kJ/m² (approximate)
 x = np.arange(len(materials))
@@ -497,7 +497,7 @@ ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 # Plot 6: Management strategies comparison
 ax = axes[1, 2]
 ax.set_facecolor('#111827')
-strategies = ['No action', 'Shade\\nstructures', 'Water\\ncooling', 'Higher\\naltitude', 'Incubation\\ncontrol']
+strategies = ['No action', 'Shade\nstructures', 'Water\ncooling', 'Higher\naltitude', 'Incubation\ncontrol']
 base_ratio = sex_ratio(31) * 100  # current hot beach
 ratios_strat = [
     base_ratio,
@@ -1212,7 +1212,7 @@ print(f"    Survive to age 20: {lt['lx'][20]*1000:.1f}")
 print(f"  Life expectancy at birth: {lt['ex'][0]:.1f} years")
 print(f"  Life expectancy if survive to age 5: {lt['ex'][5]:.1f} years")
 print(f"  Population growth rate (lambda): {base_lambda:.4f}")
-print(f"\\\nConservation priority: ADULT SURVIVAL is {elasticities[3]/elasticities[0]:.1f}x more")
+print(f"\\nConservation priority: ADULT SURVIVAL is {elasticities[3]/elasticities[0]:.1f}x more")
 print(f"important than egg survival for population growth.")`,
       challenge: 'Simulate a population viability analysis (PVA): run the life table model stochastically for 100 years and estimate the probability of extinction under different adult survival scenarios (0.85, 0.90, 0.92, 0.95). What is the minimum viable population size?',
       successHint: 'Life table analysis and population viability analysis are the workhorses of conservation biology. Every endangered species recovery plan starts with these numbers. The insight that adult survival matters most has redirected millions of conservation dollars from nest protection to bycatch reduction for sea turtles worldwide.',

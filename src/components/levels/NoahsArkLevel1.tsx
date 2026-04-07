@@ -50,7 +50,7 @@ for name, d in materials.items():
 
 # Noah's ark: gopher wood (~0.55) + pitch coating (~0.02)
 ark_density = 0.55
-print(f"\\\nArk hull density: ~{ark_density} g/cm³")
+print(f"\\nArk hull density: ~{ark_density} g/cm³")
 print(f"Floats with {(1.0 - ark_density)/1.0 * 100:.0f}% margin")`,
       challenge: 'Add "Aluminium" (2.70), "Pumice" (0.64), and "Milk" (1.03) to the dictionary. Which surprise you — does pumice (volcanic rock) really float?',
       successHint: 'Density is the gatekeeper of floating. Below 1.0 g/cm³ → float. Above 1.0 → sink. But the hollow-shape trick lets dense materials (steel, even concrete) make floating vessels.',
@@ -94,10 +94,10 @@ water_density = 1.0    # tonnes per m³ (freshwater)
 draft = total_mass / (length * width * water_density)
 
 freeboard = height - draft
-print(f"\\\nTotal loaded mass: {total_mass:,.0f} tonnes")
+print(f"\\nTotal loaded mass: {total_mass:,.0f} tonnes")
 print(f"Draft (depth in water): {draft:.1f} m")
 print(f"Freeboard (above water): {freeboard:.1f} m")
-print(f"\\\nSafety margin: {freeboard/height*100:.0f}% of hull above water")
+print(f"\\nSafety margin: {freeboard/height*100:.0f}% of hull above water")
 
 if freeboard > 2:
     print("✓ Safe — plenty of freeboard")
@@ -142,7 +142,7 @@ categories = {
     "Mega (>1000kg)":  {"count": 1400, "pen_m2": 15.0},
 }
 
-print(f"\\\n{'Category':<22} {'Animals':>8} {'Pen m²':>8} {'Total m²':>10}")
+print(f"\\n{'Category':<22} {'Animals':>8} {'Pen m²':>8} {'Total m²':>10}")
 print("=" * 52)
 total_needed = 0
 for cat, info in categories.items():
@@ -150,7 +150,7 @@ for cat, info in categories.items():
     total_needed += area
     print(f"{cat:<22} {info['count']:>8,} {info['pen_m2']:>8.2f} {area:>10,.0f}")
 
-print(f"\\\nTotal pen area needed: {total_needed:,.0f} m²")
+print(f"\\nTotal pen area needed: {total_needed:,.0f} m²")
 print(f"Usable area available: {usable_area:,.0f} m²")
 diff = usable_area - total_needed
 print(f"{'Surplus' if diff > 0 else 'Deficit'}: {abs(diff):,.0f} m²")`,
@@ -283,7 +283,7 @@ for idx, (name, loads) in enumerate(scenarios.items()):
     ax.axhline(cg, color='red', linestyle='--', label=f'CG = {cg:.1f}m')
     ax.axhline(metacentre, color='cyan', linestyle=':',
                label=f'M = {metacentre:.1f}m')
-    ax.set_title(f'{name}\\\nGM = {gm:.1f}m', fontsize=10,
+    ax.set_title(f'{name}\\nGM = {gm:.1f}m', fontsize=10,
                  color='lime' if gm > 0 else 'red')
     ax.set_ylabel('Height (m)'); ax.set_ylim(0, 14)
     ax.legend(fontsize=8)

@@ -445,7 +445,7 @@ for i, w in enumerate(wells):
     print(f"{w['name']}: own drawdown = {own:.1f}m, "
           f"interference = {interference:.1f}m, total = {own+interference:.1f}m")
 
-print(f"\\\nTotal field yield: {sum(w['Q']*1000 for w in wells):.0f} L/s")`,
+print(f"\\nTotal field yield: {sum(w['Q']*1000 for w in wells):.0f} L/s")`,
       challenge: 'Try increasing well spacing to 400m between each well. How does interference change? Then try 100m spacing. Find the minimum spacing where no well exceeds 10m total drawdown.',
       successHint: 'Well field design is where hydrogeology meets engineering. The superposition principle — total drawdown equals the sum of individual contributions — is the key to designing systems that work. Every major city’s water supply depends on these calculations.',
     },

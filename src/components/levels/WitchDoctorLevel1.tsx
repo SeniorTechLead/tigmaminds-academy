@@ -103,7 +103,7 @@ active_compound = 17
 # Step 3: Test each, split again
 # Step 4: Pure compound
 
-steps = ['Crude extract', 'Fraction B\\n(of 4)', 'Sub-fraction B3\\n(of 4)', 'Compound 17\\n(pure)']
+steps = ['Crude extract', 'Fraction B\n(of 4)', 'Sub-fraction B3\n(of 4)', 'Compound 17\n(pure)']
 n_compounds_at_step = [32, 8, 2, 1]
 activity = [100, 95, 92, 100]  # % activity relative to crude
 purity = [3.1, 12.5, 50, 100]  # % purity
@@ -199,7 +199,7 @@ for ax, ta, tb, title, ti in [(ax1, drug_a_toxic, drug_a_effect, 'Drug A: Narrow
     ec50 = 10
     td50 = 30 if ax == ax1 else 80
     ax.fill_betweenx([0, 100], ec50, td50, alpha=0.1, color='#22c55e')
-    ax.annotate('Therapeutic\\\nwindow', xy=((ec50+td50)/2, 50), ha='center', color='#22c55e', fontsize=9)
+    ax.annotate('Therapeutic\\nwindow', xy=((ec50+td50)/2, 50), ha='center', color='#22c55e', fontsize=9)
     ax.set_xlabel('Dose (mg)', color='white')
     ax.set_ylabel('Response (%)', color='white')
     ax.set_title(f'{title} (TI={ti})', color='white', fontsize=11)
@@ -245,7 +245,7 @@ import matplotlib.pyplot as plt
 # Alkaloid-receptor binding affinity matrix
 # Higher = stronger binding (0-10 scale)
 alkaloids = ['Caffeine', 'Nicotine', 'Morphine', 'Quinine', 'Capsaicin', 'Atropine']
-receptors = ['Adenosine', 'Nicotinic\\\nACh', 'Opioid\\\n(mu)', 'Heme\\\n(parasite)', 'TRPV1\\\n(pain)', 'Muscarinic\\\nACh']
+receptors = ['Adenosine', 'Nicotinic\\nACh', 'Opioid\\n(mu)', 'Heme\\n(parasite)', 'TRPV1\\n(pain)', 'Muscarinic\\nACh']
 
 # Binding matrix (rows=alkaloids, cols=receptors)
 binding = np.array([

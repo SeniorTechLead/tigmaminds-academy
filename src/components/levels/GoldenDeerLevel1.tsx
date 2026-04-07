@@ -149,7 +149,7 @@ ax2.text(0, -0.3, 'Rough surface (deer fur)', color='#94a3b8', ha='center', font
 # Single incident ray
 ax2.annotate('', xy=(0, 0), xytext=(-1.5, 3),
              arrowprops=dict(arrowstyle='->', color='#f59e0b', lw=2.5))
-ax2.text(-1.2, 2.5, 'Incoming\\\nlight', color='#f59e0b', fontsize=9)
+ax2.text(-1.2, 2.5, 'Incoming\\nlight', color='#f59e0b', fontsize=9)
 
 # Multiple scattered reflected rays
 np.random.seed(42)
@@ -421,10 +421,10 @@ ax2.set_xlim(380, 700)
 ax2.set_ylim(0, 105)
 
 # Annotate
-ax2.annotate('Absorbs blue/violet\\\n(low reflectance)', xy=(430, 15),
+ax2.annotate('Absorbs blue/violet\\n(low reflectance)', xy=(430, 15),
              xytext=(420, 60), color='#38bdf8', fontsize=9,
              arrowprops=dict(arrowstyle='->', color='#38bdf8'))
-ax2.annotate('Reflects yellow-red\\\n(high reflectance)', xy=(600, 95),
+ax2.annotate('Reflects yellow-red\\n(high reflectance)', xy=(600, 95),
              xytext=(520, 40), color='#f59e0b', fontsize=9,
              arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
@@ -633,13 +633,13 @@ ax1.set_facecolor('#111827')
 
 # Define regions (wavelength in meters, log scale)
 regions = [
-    ('Gamma\\\nrays', 1e-13, 1e-11, '#8b5cf6'),
+    ('Gamma\\nrays', 1e-13, 1e-11, '#8b5cf6'),
     ('X-rays', 1e-11, 1e-8, '#6366f1'),
     ('UV', 1e-8, 3.8e-7, '#a78bfa'),
     ('Visible', 3.8e-7, 7e-7, '#f59e0b'),
     ('Infrared', 7e-7, 1e-3, '#ef4444'),
-    ('Micro-\\\nwaves', 1e-3, 1, '#f97316'),
-    ('Radio\\\nwaves', 1, 1e5, '#22c55e'),
+    ('Micro-\\nwaves', 1e-3, 1, '#f97316'),
+    ('Radio\\nwaves', 1, 1e5, '#22c55e'),
 ]
 
 for name, wl_min, wl_max, color in regions:
@@ -651,7 +651,7 @@ for name, wl_min, wl_max, color in regions:
 # Highlight visible
 vis_min, vis_max = np.log10(3.8e-7), np.log10(7e-7)
 ax1.axvspan(vis_min, vis_max, color='#f59e0b', alpha=0.8)
-ax1.annotate('VISIBLE\\\nLIGHT', xy=((vis_min + vis_max)/2, 0.85),
+ax1.annotate('VISIBLE\\nLIGHT', xy=((vis_min + vis_max)/2, 0.85),
              color='white', ha='center', fontsize=10, fontweight='bold')
 
 ax1.set_xlim(-13, 5)
@@ -722,7 +722,7 @@ for i in range(len(wavelengths) - 1):
 
 # Mark golden deer's reflection peak
 ax2.axvspan(570, 600, color='#f59e0b', alpha=0.3)
-ax2.annotate('Golden deer\\\nreflection peak', xy=(585, 0.85),
+ax2.annotate('Golden deer\\nreflection peak', xy=(585, 0.85),
              xytext=(500, 0.4), color='#f59e0b', fontsize=9,
              arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 

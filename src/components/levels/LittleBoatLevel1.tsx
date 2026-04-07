@@ -68,12 +68,12 @@ ax2.plot(boat_x + [boat_x[0]], boat_y + [boat_y[0]], color='#f59e0b', linewidth=
 # Weight arrow (down)
 ax2.annotate('', xy=(0, -1.5), xytext=(0, 0),
             arrowprops=dict(arrowstyle='->', color='#ef4444', lw=3))
-ax2.text(0.3, -0.8, 'Weight\\n(gravity)', color='#ef4444', fontsize=10)
+ax2.text(0.3, -0.8, 'Weight\n(gravity)', color='#ef4444', fontsize=10)
 
 # Buoyant force arrow (up)
 ax2.annotate('', xy=(0, 1.5), xytext=(0, 0),
             arrowprops=dict(arrowstyle='->', color='#22c55e', lw=3))
-ax2.text(0.3, 0.8, 'Buoyant\\nforce', color='#22c55e', fontsize=10)
+ax2.text(0.3, 0.8, 'Buoyant\nforce', color='#22c55e', fontsize=10)
 
 ax2.set_title('Forces on a Floating Boat', color='white', fontsize=13)
 ax2.tick_params(colors='gray')
@@ -455,7 +455,7 @@ for ax, (name, angle) in zip(axes, strategies):
     # Show drift
     drift = path_x[-1]
     time = len(path_x) * dt
-    ax.set_title(f'{name}\\\nDrift: {drift:.0f}m, Time: {time:.0f}s', color='white', fontsize=10)
+    ax.set_title(f'{name}\\nDrift: {drift:.0f}m, Time: {time:.0f}s', color='white', fontsize=10)
     ax.set_xlabel('East (m)', color='white')
     ax.set_ylabel('North (m)', color='white')
     ax.tick_params(colors='gray')
@@ -581,7 +581,7 @@ ax2.text(m_point[0] + 0.2, m_point[1], 'M', color='#3b82f6', fontsize=11, fontwe
 
 # Line from CG to M
 ax2.plot([cg[0], m_point[0]], [cg[1], m_point[1]], '--', color='#3b82f6', linewidth=1)
-ax2.annotate('GM > 0\\\n(stable!)', xy=(0.4, 0.5), color='#3b82f6', fontsize=10)
+ax2.annotate('GM > 0\\n(stable!)', xy=(0.4, 0.5), color='#3b82f6', fontsize=10)
 
 ax2.set_title('Tilted Boat: Stability Check', color='white', fontsize=13)
 ax2.set_xticks([])

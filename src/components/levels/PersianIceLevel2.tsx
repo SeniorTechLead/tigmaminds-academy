@@ -61,7 +61,7 @@ for T_air in [8, 5, 2, 0, -3, -5]:
     print(f"{T_air:>7.0f} C {T_sky:>7.1f} C {flux:>10.1f} {power_100m2:>12.1f} {ice_rate:>8.3f}")
 
 # Effect of cloud cover
-print("\\\n=== Cloud Cover Destroys Ice Production ===")
+print("\\n=== Cloud Cover Destroys Ice Production ===")
 T_air = 3  # mild winter night
 for cloud in [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]:
     T_sky = sky_temperature(T_air, cloud_fraction=cloud)
@@ -70,7 +70,7 @@ for cloud in [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]:
     print(f"  Cloud {cloud*100:>3.0f}%: sky {T_sky:>6.1f} C  flux {flux:>6.1f} W/m^2  {status}")
 
 # Emissivity comparison
-print("\\\n=== Surface Emissivity Matters ===")
+print("\\n=== Surface Emissivity Matters ===")
 T_sky = sky_temperature(3, 0, 15)
 for name, eps in [("Water", 0.96), ("Wet clay", 0.92), ("Dry earth", 0.90),
                   ("Polished metal", 0.05), ("White paint", 0.90), ("Black paint", 0.95)]:
@@ -127,7 +127,7 @@ def specific_humidity(T_db, RH_pct, P_atm=101325):
     return 0.622 * p_v / (P_atm - p_v)
 
 # Isfahan climate conditions
-print("=== Psychrometric Analysis: Isfahan Desert Climate ===\\\n")
+print("=== Psychrometric Analysis: Isfahan Desert Climate ===\\n")
 print(f"{'T_db (C)':>9} {'RH (%)':>7} {'T_wb (C)':>9} {'T_dp (C)':>9} {'w (g/kg)':>9} {'Cooling':>9}")
 print("-" * 54)
 
@@ -144,7 +144,7 @@ for T_db, RH in conditions:
     print(f"{T_db:>7.0f} {RH:>6.0f} {T_wb:>8.1f} {T_dp_val:>8.1f} {w:>8.2f} {cooling:>7.1f} C")
 
 # Evaporative cooling in a wind-catcher
-print("\\\n=== Wind-Catcher Evaporative Cooling Performance ===")
+print("\\n=== Wind-Catcher Evaporative Cooling Performance ===")
 print("Air enters at outdoor conditions, exits near wet-bulb temperature")
 print(f"{'Season':<14} {'T_in':>5} {'RH_in':>6} {'T_out':>6} {'Cooling':>8} {'Comfort?':>9}")
 print("-" * 50)
@@ -245,13 +245,13 @@ for name, k, rho, Cp, L in walls:
     print(f"{name:<22} {k:>4.2f} {L:>5.1f} {flux:>10.1f} {daily_loss:>12.0f}")
 
 # Time constants
-print("\\\n=== Thermal Time Constants ===")
+print("\\n=== Thermal Time Constants ===")
 for name, k, rho, Cp, L in walls:
     tau = thermal_time_constant(rho, Cp, L, k)
     print(f"{name:<22} tau = {tau/3600:>6.0f} hours ({tau/3600/24:.1f} days)")
 
 # Transient response: sudden heat wave
-print("\\\n=== Transient Response: Heat Wave Hits Yakhchal ===")
+print("\\n=== Transient Response: Heat Wave Hits Yakhchal ===")
 print("Outside jumps from 30C to 45C at t=0. Inside held at 2C by ice.")
 
 def heat_wave(t_hr):
@@ -317,7 +317,7 @@ for width in [0.6, 0.8, 1.0, 1.2]:
         print(f"{width:>9.1f} {0.3:>9.1f} {slope:>9.4f} {Q*1000:>9.1f} {V:>9.2f}")
 
 # Qanat length vs elevation budget
-print("\\\n=== Elevation Budget for Different Qanat Lengths ===")
+print("\\n=== Elevation Budget for Different Qanat Lengths ===")
 print("(Available head = mountain elevation - yakhchal elevation)")
 available_head = 200  # metres
 print(f"Available head: {available_head} m")
@@ -331,7 +331,7 @@ for length_km in [5, 10, 20, 30, 50, 70]:
     print(f"{length_km:>10.0f} {slope:>10.5f} {Q*1000:>9.1f} {feasible:>9}")
 
 # Water budget for ice production
-print("\\\n=== Yakhchal Water Budget ===")
+print("\\n=== Yakhchal Water Budget ===")
 trough_area = 200  # m^2 (total trough area)
 trough_depth = 0.10  # m (10 cm water depth per night)
 nights_per_season = 90  # winter ice-making season
@@ -410,7 +410,7 @@ def comfort_category(pmv):
     return "EXTREME"
 
 # Compare conditions: outdoor vs wind-catcher cooled
-print("=== Thermal Comfort: Outdoor vs Wind-Catcher Cooled ===\\\n")
+print("=== Thermal Comfort: Outdoor vs Wind-Catcher Cooled ===\\n")
 scenarios = [
     ("Desert noon (no shade)",    45, 55, 0.5, 10,  1.0, 0.3),
     ("Desert shade",              42, 40, 0.3, 12,  1.0, 0.5),
@@ -430,7 +430,7 @@ for name, Ta, Tr, V, RH, met, clo in scenarios:
     print(f"{name:<28} {Ta:>3.0f} {Tr:>3.0f} {V:>3.1f} {RH:>3.0f} {pmv:>+5.1f} {ppd:>4.0f}% {cat}")
 
 # Effect of wind-catcher air velocity
-print("\\\n=== Air Velocity Effect (T=30C, RH=25%, light clothing) ===")
+print("\\n=== Air Velocity Effect (T=30C, RH=25%, light clothing) ===")
 for v in [0.0, 0.3, 0.5, 1.0, 1.5, 2.0, 3.0]:
     pmv = pmv_simple(30, 28, v, 25)
     ppd = ppd_from_pmv(pmv)

@@ -1002,7 +1002,7 @@ class IslandChangeDetector:
 
         fig = plt.figure(figsize=(20, 13))
         fig.patch.set_facecolor('#1f2937')
-        fig.suptitle(f'RIVER ISLAND CHANGE DETECTOR — {self.name}\\\n'
+        fig.suptitle(f'RIVER ISLAND CHANGE DETECTOR — {self.name}\\n'
                      f'Analysis period: 1975-2024 | Projection: 2025-2075',
                      color='white', fontsize=16, fontweight='bold')
 
@@ -1091,7 +1091,7 @@ class IslandChangeDetector:
         bars = ax3.bar(theta_seg, erosion_by_segment, width=2*np.pi/len(segments)*0.8,
                        color=colors_seg, alpha=0.8, edgecolor='none')
         ax3.set_thetagrids(np.degrees(theta_seg), segments)
-        ax3.set_title('Erosion by bank segment\\\n(km\²/year)', color='white', fontsize=10, pad=15)
+        ax3.set_title('Erosion by bank segment\\n(km\²/year)', color='white', fontsize=10, pad=15)
 
         # PANEL 4: Monthly risk calendar
         ax4 = fig.add_subplot(2, 3, 4)

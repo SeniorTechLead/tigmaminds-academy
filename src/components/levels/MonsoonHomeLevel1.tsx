@@ -95,8 +95,8 @@ ax2.set_title('Pressure Belts', color='white', fontsize=12)
 ax2.tick_params(colors='gray')
 
 pressure_labels = [
-    (0, 'ITCZ\\n(Low)', '#ef4444'), (30, 'Subtropical\\nHigh', '#3b82f6'),
-    (60, 'Subpolar\\nLow', '#ef4444'), (-30, 'Subtropical\\nHigh', '#3b82f6'),
+    (0, 'ITCZ\n(Low)', '#ef4444'), (30, 'Subtropical\nHigh', '#3b82f6'),
+    (60, 'Subpolar\nLow', '#ef4444'), (-30, 'Subtropical\nHigh', '#3b82f6'),
 ]
 for lat, label, color in pressure_labels:
     ax2.annotate(label, xy=(pressure[np.argmin(np.abs(latitudes - lat))], lat),
@@ -155,7 +155,7 @@ print("Global wind pattern summary:")
 print("  0-30°: Trade winds (easterly) — powered by Hadley cell")
 print("  30-60°: Westerlies — drive mid-latitude weather")
 print("  60-90°: Polar easterlies — cold polar air")
-print("\\\nThe monsoon is a SEASONAL REVERSAL of the Hadley cell")
+print("\\nThe monsoon is a SEASONAL REVERSAL of the Hadley cell")
 print("over South Asia — the key topic of this course.")`,
       challenge: 'The ITCZ migrates north in boreal summer and south in boreal winter. If it reaches 25°N over India in July, how does this change the wind direction over Assam?',
       successHint: 'Global wind patterns are the foundation of all climate and weather. Every monsoon, cyclone, and drought connects back to these three circulation cells. Understanding them is understanding the atmosphere\'s operating system.',
@@ -238,9 +238,9 @@ ax2.set_title('Rainfall: Rising Air = Rain, Sinking Air = Desert', color='white'
 ax2.tick_params(colors='gray')
 
 # Mark zones
-ax2.annotate('ITCZ\\n(rain)', xy=(0, rainfall[100]), color='#3b82f6', fontsize=10, ha='center')
-ax2.annotate('Desert\\nbelt', xy=(28, 10), color='#ef4444', fontsize=10, ha='center')
-ax2.annotate('Desert\\nbelt', xy=(-28, 10), color='#ef4444', fontsize=10, ha='center')
+ax2.annotate('ITCZ\n(rain)', xy=(0, rainfall[100]), color='#3b82f6', fontsize=10, ha='center')
+ax2.annotate('Desert\nbelt', xy=(28, 10), color='#ef4444', fontsize=10, ha='center')
+ax2.annotate('Desert\nbelt', xy=(-28, 10), color='#ef4444', fontsize=10, ha='center')
 
 # Hadley cell cross-section
 ax3 = axes[1, 0]
@@ -266,12 +266,12 @@ for height_frac in [0.2, 0.4, 0.6, 0.8]:
 # Rising at equator
 ax3.annotate('', xy=(0, 0.9), xytext=(0, 0.1),
             arrowprops=dict(arrowstyle='->', color='#22c55e', lw=3))
-ax3.text(-3, 0.5, 'RISING\\n(ITCZ)', color='#22c55e', fontsize=10, ha='center')
+ax3.text(-3, 0.5, 'RISING\n(ITCZ)', color='#22c55e', fontsize=10, ha='center')
 
 # Sinking at 30°
 ax3.annotate('', xy=(30, 0.1), xytext=(30, 0.9),
             arrowprops=dict(arrowstyle='->', color='#f59e0b', lw=3))
-ax3.text(33, 0.5, 'SINKING\\n(Desert)', color='#f59e0b', fontsize=10, ha='center')
+ax3.text(33, 0.5, 'SINKING\n(Desert)', color='#f59e0b', fontsize=10, ha='center')
 
 ax3.set_xlabel('Latitude (°N)', color='white')
 ax3.set_ylabel('Altitude (relative)', color='white')
@@ -304,7 +304,7 @@ print("  Rising branch: ITCZ (near equator) → rain, storms")
 print("  Sinking branch: ~30° latitude → deserts")
 print("  Energy transported: ~5 PW (5 × 10^15 watts)")
 print("  Trade wind speed: ~8 m/s (29 km/h)")
-print("\\\nThe monsoon modifies the Hadley cell over South Asia")
+print("\\nThe monsoon modifies the Hadley cell over South Asia")
 print("by pulling the ITCZ northward to ~25°N in summer.")`,
       challenge: 'If Earth had no axial tilt (23.5° tilt causes seasons), the ITCZ would stay at the equator year-round. How would this change the monsoon? Would India still have one?',
       successHint: 'The Hadley cell is the atmosphere\'s most powerful engine. Understanding it explains tropical rainfall, deserts, trade winds, and — when modified by continental geography — the monsoon. Every weather pattern in the tropics starts here.',
@@ -423,7 +423,7 @@ print("  Reaches NE India: ~June 5-10")
 print("  Reaches Delhi: ~June 25")
 print("  Peak rainfall: July-August")
 print("  Monsoon withdrawal: October")
-print(f"\\\nNE India total monsoon rain: {sum(ne_rainfall[5:10]):.0f} mm (Jun-Oct)")`,
+print(f"\\nNE India total monsoon rain: {sum(ne_rainfall[5:10]):.0f} mm (Jun-Oct)")`,
       challenge: 'If the ITCZ arrives 2 weeks late in a given year, how much rainfall does NE India lose? Estimate by shifting the rainfall pattern by 2 weeks. What does this mean for rice planting?',
       successHint: 'The ITCZ is the atmospheric mechanism behind the monsoon. Its position, timing, and strength determine whether 1.4 billion people have enough water for their crops. Tracking the ITCZ is not academic — it\'s a food security issue.',
     },
@@ -554,7 +554,7 @@ print("  Warming since 1900: ~1°C")
 print("  Moisture increase: ~7% per °C")
 print("  Effect: more moisture → more intense rainfall events")
 print("  But also: changed circulation → more erratic monsoon")
-print("\\\nThe monsoon is getting wetter AND more unpredictable.")`,
+print("\\nThe monsoon is getting wetter AND more unpredictable.")`,
       challenge: 'Calculate: if the Indian Ocean warms by 2°C (from 28 to 30°C), how much does the saturation humidity increase? Use the Clausius-Clapeyron equation. What does this mean for flood risk in Assam?',
       successHint: 'The Indian Ocean is the monsoon\'s moisture source, and its temperature is the single most important variable for monsoon strength. Understanding the Clausius-Clapeyron relationship — more heat means exponentially more moisture — is key to understanding why climate change makes extreme rainfall more likely.',
     },
@@ -631,8 +631,8 @@ ax2.set_xticklabels(month_names, color='white')
 ax2.set_ylabel('Wind component (+ = SW monsoon, - = NE dry)', color='white')
 ax2.set_title('Seasonal Wind Reversal', color='white', fontsize=12)
 ax2.tick_params(colors='gray')
-ax2.annotate('SW Monsoon\\n(wet)', xy=(7, wind_u[6]), color='#ef4444', fontsize=10, ha='center')
-ax2.annotate('NE Winds\\n(dry)', xy=(1, wind_u[0]), color='#3b82f6', fontsize=10, ha='center')
+ax2.annotate('SW Monsoon\n(wet)', xy=(7, wind_u[6]), color='#ef4444', fontsize=10, ha='center')
+ax2.annotate('NE Winds\n(dry)', xy=(1, wind_u[0]), color='#3b82f6', fontsize=10, ha='center')
 
 # Moisture transport
 ax3 = axes[1, 0]
@@ -647,7 +647,7 @@ ax3.tick_params(colors='gray')
 
 # Annotate monsoon season
 ax3.axvspan(6, 9, alpha=0.1, color='#22c55e')
-ax3.text(7.5, moisture.max() * 0.9, 'MONSOON\\nSEASON', color='#22c55e', fontsize=12, ha='center')
+ax3.text(7.5, moisture.max() * 0.9, 'MONSOON\nSEASON', color='#22c55e', fontsize=12, ha='center')
 
 # Schematic of monsoon mechanism
 ax4 = axes[1, 1]
@@ -656,27 +656,27 @@ ax4.set_facecolor('#111827')
 # Draw simplified India + Ocean
 # Ocean (bottom)
 ax4.fill_between([0, 10], [0, 0], [2, 2], color='#3b82f6', alpha=0.2)
-ax4.text(5, 1, 'Indian Ocean\\n(warm, moist)', color='#3b82f6', fontsize=10, ha='center')
+ax4.text(5, 1, 'Indian Ocean\n(warm, moist)', color='#3b82f6', fontsize=10, ha='center')
 
 # Land (middle)
 ax4.fill_between([0, 10], [2, 2], [5, 5], color='#f59e0b', alpha=0.2)
-ax4.text(5, 3.5, 'Indian Landmass\\n(HOT in summer)', color='#f59e0b', fontsize=10, ha='center')
+ax4.text(5, 3.5, 'Indian Landmass\n(HOT in summer)', color='#f59e0b', fontsize=10, ha='center')
 
 # Tibet (top)
 ax4.fill_between([5, 10], [5, 5], [7, 7], color='#a855f7', alpha=0.3)
-ax4.text(7.5, 6, 'Tibetan Plateau\\n(4500m, heated)', color='#a855f7', fontsize=10, ha='center')
+ax4.text(7.5, 6, 'Tibetan Plateau\n(4500m, heated)', color='#a855f7', fontsize=10, ha='center')
 
 # Wind arrows (monsoon)
 for y in [1.5, 2.5, 3.5]:
     ax4.annotate('', xy=(8, y+0.5), xytext=(2, y),
                 arrowprops=dict(arrowstyle='->', color='#22c55e', lw=2))
 
-ax4.annotate('Moist SW winds\\n(monsoon)', xy=(3, 3), color='#22c55e', fontsize=10)
+ax4.annotate('Moist SW winds\n(monsoon)', xy=(3, 3), color='#22c55e', fontsize=10)
 
 # Rising air over land
 ax4.annotate('', xy=(5, 7), xytext=(5, 3),
             arrowprops=dict(arrowstyle='->', color='#ef4444', lw=2))
-ax4.text(4, 5.5, 'Hot air\\nrises', color='#ef4444', fontsize=9)
+ax4.text(4, 5.5, 'Hot air\nrises', color='#ef4444', fontsize=9)
 
 # Rain
 for x in [3, 4, 5, 6, 7]:
@@ -798,8 +798,8 @@ ax3.axvline(0, color='white', linewidth=0.5, alpha=0.3)
 ax3.set_xlabel('ENSO index (+ = El Nino)', color='white')
 ax3.set_ylabel('Rainfall anomaly (mm)', color='white')
 ax3.set_title('El Nino Suppresses the Monsoon', color='white', fontsize=12)
-ax3.annotate('El Nino\\n(drought risk)', xy=(1.5, -80), color='#ef4444', fontsize=10, ha='center')
-ax3.annotate('La Nina\\n(flood risk)', xy=(-1.5, 80), color='#3b82f6', fontsize=10, ha='center')
+ax3.annotate('El Nino\n(drought risk)', xy=(1.5, -80), color='#ef4444', fontsize=10, ha='center')
+ax3.annotate('La Nina\n(flood risk)', xy=(-1.5, 80), color='#3b82f6', fontsize=10, ha='center')
 ax3.tick_params(colors='gray')
 
 # Prediction skill by category
@@ -847,7 +847,7 @@ print(f"Prediction model:")
 print(f"  Predictors: ENSO, IOD, Eurasian snow")
 print(f"  R² = {r2:.2f} (explains {r2*100:.0f}% of variance)")
 print(f"  Category accuracy: {accuracy:.0f}%")
-print(f"\\\nModel coefficients:")
+print(f"\\nModel coefficients:")
 print(f"  ENSO: {coeffs[0]:.1f} mm per unit (El Nino → less rain)")
 print(f"  IOD: {coeffs[1]:.1f} mm per unit (positive IOD → more rain)")
 print(f"  Snow: {coeffs[2]:.1f} mm per unit (more snow → less rain)")`,

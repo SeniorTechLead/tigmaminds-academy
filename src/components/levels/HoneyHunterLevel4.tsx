@@ -83,7 +83,7 @@ plant_degree = np.sum(binary, axis=0)
 connectance = np.sum(binary) / (n_pollinators * n_plants)
 
 
-print("\\n[Full visualization in playground]")`,
+print("\n[Full visualization in playground]")`,
       challenge: 'Generate a random network with the same number of species and interactions but without nested structure. Compare its nestedness and robustness metrics. This demonstrates why real networks evolve nestedness — it provides structural resilience.',
       successHint: 'You have built the data infrastructure of a pollination network analyzer. Real tools like the R package bipartite and the web app pollinator-network use the same metrics to assess ecosystem health worldwide.',
     },
@@ -165,7 +165,7 @@ def simulate_cascade(binary_matrix, removal_order):
 
         # Primary removal
 
-print("\\n[Full visualization in playground]")`,
+print("\n[Full visualization in playground]")`,
       challenge: 'Run 100 random removal orders and compute the distribution of robustness values. What is the probability that random species loss causes >50% plant extinction before >50% of pollinators are lost?',
       successHint: 'Keystone identification is used by IUCN and national conservation agencies to prioritize pollinator protection. The cascade simulation you built is the same analysis that informed the EU ban on neonicotinoid pesticides.',
     },
@@ -243,7 +243,7 @@ def simulate_colony(pesticide_impact=0, varroa_load=0, habitat_loss=0, label='')
         if 90 < day < 280:
             foragers = adults * 0.35
 
-print("\\n[Full visualization in playground]")`,
+print("\n[Full visualization in playground]")`,
       challenge: 'Model a beekeeper\'s intervention: treating for Varroa in August (reducing varroa_load to 0.1 after day 220) and providing supplemental feeding in October (adding 5kg honey). Does this save the severe CCD colony?',
       successHint: 'CCD modeling integrates ecology, toxicology, and economics. Your model quantifies the multi-billion-dollar value of pollinator protection — the scientific basis for pesticide regulation and pollinator conservation policy worldwide.',
     },
@@ -323,7 +323,7 @@ def cascade_with_rewiring(binary_matrix, removal_order, rewiring_prob=0.0):
                 if remaining == 0:
                     orphaned_plants.append(p)
 
-print("\\n[Full visualization in playground]")`,
+print("\n[Full visualization in playground]")`,
       challenge: 'Test a targeted wildflower strip that specifically adds plants for the most vulnerable pollinator (lowest degree). Compare to an untargeted strip. Is targeted planting more efficient?',
       successHint: 'Your Pollination Network Analyzer is complete. From network construction through keystone identification, CCD modeling, and resilience engineering — this tool could help agricultural extension officers design pollinator-friendly farming landscapes. The honey hunter\'s lesson, formalized in mathematics.',
     },
@@ -402,7 +402,7 @@ nestedness = nodf_sum / nodf_pairs if nodf_pairs > 0 else 0
 
 # Robustness (most-connected removal)
 
-print("\\n[Full visualization in playground]")`,
+print("\n[Full visualization in playground]")`,
       challenge: 'Run the dashboard on a degraded network (remove 30% of interactions randomly to simulate habitat loss). Compare the health scores. How many wildflower strips would you need to add to restore the original health score?',
       successHint: 'You have built a complete, end-to-end Pollination Network Analyzer. From bipartite network construction through keystone identification, CCD modeling, resilience engineering, and management recommendations — this is a publication-quality tool that could serve real conservation and agriculture.',
     },
@@ -487,7 +487,7 @@ print(f"Random  — nectar: {np.mean(random_totals):.0f} +/- {np.std(random_tota
 print(f"Guided  — nectar: {np.mean(guided_totals):.0f} +/- {np.std(guided_totals):.0f}")
 print(f"Guided advantage: {np.mean(guided_totals)/np.mean(random_totals):.1%}")
 
-print("\\\n[Full visualization in playground]")`,
+print("\\n[Full visualization in playground]")`,
       challenge: 'Add a fifth panel that shows a heatmap of patch visit frequency across all runs. Which patches are over-visited by guided bees and which are neglected? Propose a multi-target waggle dance strategy that balances exploitation of rich patches with exploration of undervisited ones.',
       successHint: 'Your four-panel foraging dashboard is a complete decision-support tool. Real precision apiculture systems use similar dashboards — combining GPS-tracked flight data, nectar flow sensors, and hive weight data — to optimize colony placement and foraging efficiency across landscapes.',
     },

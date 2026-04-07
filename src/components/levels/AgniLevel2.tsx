@@ -51,19 +51,19 @@ plt.plot(x, E, linewidth=2.5, color='#ef4444')
 plt.fill_between(x, 0, E, alpha=0.1, color='#ef4444')
 
 # Annotations
-plt.annotate('Reactants\\\n(CH₄ + 2O₂)', xy=(1, E_reactants), fontsize=10,
+plt.annotate('Reactants\\n(CH₄ + 2O₂)', xy=(1, E_reactants), fontsize=10,
              color='#93c5fd', ha='center')
-plt.annotate('Activation\\\nenergy barrier', xy=(3.5, E_activation), fontsize=10,
+plt.annotate('Activation\\nenergy barrier', xy=(3.5, E_activation), fontsize=10,
              color='#fbbf24', ha='center',
              xytext=(5.5, E_activation + 10),
              arrowprops=dict(arrowstyle='->', color='#fbbf24'))
-plt.annotate('Products\\\n(CO₂ + 2H₂O)', xy=(8.5, E_products + 5), fontsize=10,
+plt.annotate('Products\\n(CO₂ + 2H₂O)', xy=(8.5, E_products + 5), fontsize=10,
              color='#86efac', ha='center')
 
 # Energy released arrow
 plt.annotate('', xy=(9, E_products), xytext=(9, E_reactants),
              arrowprops=dict(arrowstyle='<->', color='white', linewidth=1.5))
-plt.text(9.3, (E_reactants + E_products) / 2, 'Energy\\\nreleased\\\n(heat + light)',
+plt.text(9.3, (E_reactants + E_products) / 2, 'Energy\\nreleased\\n(heat + light)',
          fontsize=9, color='lightgray')
 
 plt.xlabel('Reaction progress', fontsize=12)
@@ -123,7 +123,7 @@ reactions = [
     },
 ]
 
-print("=== Bond Energy Combustion Calculator ===\\\n")
+print("=== Bond Energy Combustion Calculator ===\\n")
 names = []
 energies = []
 
@@ -347,7 +347,7 @@ fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 8), sharex=True)
 # Efficiency plot
 ax1.plot(o2_ratio, efficiency, linewidth=2.5, color='#22c55e', label='Energy efficiency')
 ax1.axvline(1.0, color='white', linewidth=1, linestyle=':', alpha=0.3)
-ax1.text(1.01, 50, 'Stoichiometric\\\n(perfect ratio)', fontsize=9, color='lightgray')
+ax1.text(1.01, 50, 'Stoichiometric\\n(perfect ratio)', fontsize=9, color='lightgray')
 ax1.set_ylabel('Efficiency (%)', fontsize=11)
 ax1.set_title('Combustion Efficiency vs Oxygen Supply', fontsize=14)
 ax1.legend(fontsize=10)
@@ -407,7 +407,7 @@ fuels = [
 ]
 
 print(f"Calorimeter: {water_mass}g water at {T_initial}°C")
-print(f"Burning 2.0g of each fuel\\\n")
+print(f"Burning 2.0g of each fuel\\n")
 print(f"{'Fuel':<12} {'Energy (kJ)':>12} {'ΔT (°C)':>10} {'T_final':>10}")
 print("-" * 48)
 
@@ -438,7 +438,7 @@ for bar, dT in zip(bars, delta_Ts):
 plt.tight_layout()
 plt.show()
 
-print("\\\nThe formula q = mcΔT connects heat energy to temperature change.")
+print("\\nThe formula q = mcΔT connects heat energy to temperature change.")
 print("This is how food calories, fuel ratings, and heating systems are measured.")`,
       challenge: 'Design a "reverse calorimeter": given a target water temperature of 60°C and 1,000 g of water, calculate how many grams of each fuel are needed. Which fuel requires the least mass?',
       successHint: 'Calorimetry connects the abstract concept of "energy" to something you can measure with a thermometer. The q = mcΔT equation is one of the most useful in all of science and engineering. You will use it in every future thermodynamics problem.',

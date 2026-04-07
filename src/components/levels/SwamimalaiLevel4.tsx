@@ -460,7 +460,7 @@ castings = [
 ]
 
 for casting in castings:
-    print(f"\\\nInspecting: {casting['name']}")
+    print(f"\\nInspecting: {casting['name']}")
     inspector = CastingInspector(spec)
     inspector.check_composition(casting["tin"], casting["lead"], casting["impurities"])
     inspector.check_porosity(casting["density"], 8800)
@@ -575,7 +575,7 @@ scenarios = [
 ]
 
 for scenario in scenarios:
-    print(f"\\\n{'='*55}")
+    print(f"\\n{'='*55}")
     print(f"  SCENARIO: {scenario['name']}")
     print(f"{'='*55}")
 
@@ -585,18 +585,18 @@ for scenario in scenarios:
         scenario["charcoal"], scenario["mass"]
     )
 
-    print("\\\n  INPUT PARAMETERS:")
+    print("\\n  INPUT PARAMETERS:")
     for k, v in r["parameters"].items():
         print(f"    {k}: {v}")
 
-    print("\\\n  PREDICTIONS:")
+    print("\\n  PREDICTIONS:")
     for k, v in r["predictions"].items():
         if isinstance(v, float):
             print(f"    {k}: {v:.1f}")
         else:
             print(f"    {k}: {v}")
 
-    print("\\\n  QUALITY CHECKS:")
+    print("\\n  QUALITY CHECKS:")
     all_pass = True
     for k, v in r["quality"].items():
         status = "PASS" if v else "FAIL"
@@ -605,7 +605,7 @@ for scenario in scenarios:
         print(f"    {k}: {status}")
 
     verdict = "ACCEPTED" if all_pass else "NEEDS REVIEW"
-    print(f"\\\n  VERDICT: {verdict}")`,
+    print(f"\\n  VERDICT: {verdict}")`,
       challenge: 'Add an optimization loop: try 100 random combinations of tin percentage (8-12%), pour temperature (1000-1100 degrees C), and cooling rate (1-10 degrees C/s). Find the combination that maximizes strength while keeping all quality checks passing. Print the top 5 results.',
       successHint: 'You have built a complete digital twin of the Swamimalai lost-wax casting process. This is exactly what modern Industry 4.0 foundries do — they simulate the entire process digitally before committing expensive materials to a physical pour. You have bridged 4000 years of traditional knowledge with computational engineering.',
     },

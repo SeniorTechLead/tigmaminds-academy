@@ -215,11 +215,11 @@ print("-" * 36)
 for n_high, lam, E in balmer_lines:
     print(f"  n={n_high} -> n=2  {lam:>10.1f} nm  {E:>8.3f} eV")
 
-print(f"\\\nSodium doublet: {sodium_lines[0]:.1f} nm and {sodium_lines[1]:.1f} nm")
+print(f"\\nSodium doublet: {sodium_lines[0]:.1f} nm and {sodium_lines[1]:.1f} nm")
 print("  (The yellow glow of street lamps and sodium flames)")
-print(f"\\\nNeon has {len(neon_lines)} visible lines -- mostly orange/red")
+print(f"\\nNeon has {len(neon_lines)} visible lines -- mostly orange/red")
 print("  (That's why neon signs glow orange-red)")
-print(f"\\\nIron has {len(iron_lines)} visible lines -- a complex spectrum")
+print(f"\\nIron has {len(iron_lines)} visible lines -- a complex spectrum")
 print("  (Iron lines in sunlight revealed the Sun's composition)")
 print()
 print("Each element's spectral lines are unique.")
@@ -354,7 +354,7 @@ for name, lam, depth in fraunhofer:
     elem = name.split()[0] if ' ' in name else name.rstrip('0123456789')
     print(f"{name:<8} {'':>12} {lam:>8.1f} nm  {depth:>6.0%}")
 
-print(f"\\\nTotal lines shown: {len(fraunhofer)}")
+print(f"\\nTotal lines shown: {len(fraunhofer)}")
 print("The real solar spectrum has thousands of absorption lines.")
 print("Notice Na D lines at 589nm -- right in the golden region.")
 print("The golden deer's color comes from wavelengths BETWEEN absorption lines.")
@@ -605,12 +605,12 @@ for angle in [0, 30, 45, 60, 90]:
     T = np.cos(np.radians(angle))**2
     print(f"  θ = {angle:>3}°  →  I/I₀ = {T:.4f} ({T:.1%})")
 
-print(f"\\\nThree-polarizer paradox:")
+print(f"\\nThree-polarizer paradox:")
 print(f"  Two crossed polarizers (0° + 90°): 0% transmission")
 print(f"  Add middle at 45°: {0.25:.1%} transmission!")
 print(f"  Adding a filter INCREASES total light — counterintuitive.")
 
-print(f"\\\nN-polarizer limit (0° to 90° in N steps):")
+print(f"\\nN-polarizer limit (0° to 90° in N steps):")
 for n in [3, 5, 10, 20, 50]:
     step = 90 / (n-1)
     T = np.cos(np.radians(step))**(2*(n-1))
@@ -770,13 +770,13 @@ for (name, phi) in work_functions.items():
     print(f"  {name}")
     print(f"    Threshold: f = {f_thresh:.2e} Hz, λ = {lam_thresh:.0f} nm")
 
-print(f"\\\nGolden deer photon (580nm):")
+print(f"\\nGolden deer photon (580nm):")
 print(f"  Energy: {1240/580:.2f} eV")
 print(f"  Could eject electrons from cesium ({1240/580-2.1:.2f} eV kinetic)")
 print(f"  Could eject electrons from sodium ({1240/580-2.3:.2f} eV kinetic)")
 print(f"  Cannot eject from copper (needs 4.7 eV, has only {1240/580:.2f} eV)")
 
-print(f"\\\nDouble-slit experiment:")
+print(f"\\nDouble-slit experiment:")
 print(f"  Each photon arrives as a single dot (PARTICLE)")
 print(f"  Pattern of many photons shows interference fringes (WAVE)")
 print(f"  This is wave-particle duality -- not a metaphor, but physics.")

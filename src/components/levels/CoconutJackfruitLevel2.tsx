@@ -183,7 +183,7 @@ ax1.set_xticks(range(n_genes))
 ax1.set_yticks(range(len(tissues)))
 ax1.set_xticklabels(genes, color='white', fontsize=7, rotation=45, ha='right')
 ax1.set_yticklabels(list(tissues.keys()), color='white', fontsize=9)
-ax1.set_title('Gene Expression by Tissue\\\n(same DNA, different reading)', color='white', fontsize=11)
+ax1.set_title('Gene Expression by Tissue\\n(same DNA, different reading)', color='white', fontsize=11)
 plt.colorbar(im, ax=ax1, shrink=0.8, label='Expression level')
 
 for i in range(len(tissues)):
@@ -253,21 +253,21 @@ np.random.seed(42)
 # Trait comparison: convergent vs divergent evolution
 # Compare physical traits between pairs of species
 
-traits = ['Body shape', 'Size', 'Fruit/food\\\ntype', 'Dispersal\\\nmethod', 'Leaf\\\nshape', 'Habitat']
+traits = ['Body shape', 'Size', 'Fruit/food\\ntype', 'Dispersal\\nmethod', 'Leaf\\nshape', 'Habitat']
 
 # Trait similarity scores (0-10, 10=identical)
 # Related species (should be similar due to shared ancestry)
 related_pairs = {
-    'Coconut vs\\\nDate palm': [5, 7, 6, 7, 9, 8],     # Both palms
-    'Jackfruit vs\\\nFig': [3, 2, 4, 8, 5, 7],          # Same family
-    'Tiger vs\\\nLion': [8, 9, 9, 8, 9, 6],              # Same genus
+    'Coconut vs\\nDate palm': [5, 7, 6, 7, 9, 8],     # Both palms
+    'Jackfruit vs\\nFig': [3, 2, 4, 8, 5, 7],          # Same family
+    'Tiger vs\\nLion': [8, 9, 9, 8, 9, 6],              # Same genus
 }
 
 # Convergent species (similar traits, unrelated)
 convergent_pairs = {
-    'Coconut vs\\\nJackfruit': [2, 3, 7, 6, 1, 5],      # Both large tropical fruits
-    'Cactus vs\\\nEuphorbia': [9, 7, 3, 3, 9, 9],        # Desert adaptation
-    'Dolphin vs\\\nShark': [9, 6, 5, 3, 0, 9],            # Aquatic body plan
+    'Coconut vs\\nJackfruit': [2, 3, 7, 6, 1, 5],      # Both large tropical fruits
+    'Cactus vs\\nEuphorbia': [9, 7, 3, 3, 9, 9],        # Desert adaptation
+    'Dolphin vs\\nShark': [9, 6, 5, 3, 0, 9],            # Aquatic body plan
 }
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 6))
@@ -370,7 +370,7 @@ for name, (x, y) in tree_positions.items():
     ax1.plot(x, y, 'o', color=color, markersize=8)
     ax1.text(x, y + 0.4, name, ha='center', color=color, fontsize=8)
 
-ax1.set_title('Traditional Tree of Life\\\n(vertical inheritance only)', color='white', fontsize=11)
+ax1.set_title('Traditional Tree of Life\\n(vertical inheritance only)', color='white', fontsize=11)
 ax1.set_xlim(-0.5, 10)
 ax1.set_ylim(-1, 7.5)
 ax1.axis('off')
@@ -393,9 +393,9 @@ for name, (x, y) in tree_positions.items():
 
 # HGT events (horizontal connections)
 hgt_events = [
-    ('Yeast', 'Coconut', 'Fungal genes\\\nin plants'),
-    ('Fish', 'Coconut', 'Viral-mediated\\\ntransfer'),
-    ('Mushroom', 'Human', 'Mitochondrial\\\ngene transfer'),
+    ('Yeast', 'Coconut', 'Fungal genes\\nin plants'),
+    ('Fish', 'Coconut', 'Viral-mediated\\ntransfer'),
+    ('Mushroom', 'Human', 'Mitochondrial\\ngene transfer'),
 ]
 
 for src, tgt, label in hgt_events:
@@ -407,7 +407,7 @@ for src, tgt, label in hgt_events:
     mx, my = (x1+x2)/2, (y1+y2)/2
     ax2.text(mx, my + 0.5, label, ha='center', color='#ef4444', fontsize=7)
 
-ax2.set_title('Web of Life\\\n(with horizontal gene transfer)', color='white', fontsize=11)
+ax2.set_title('Web of Life\\n(with horizontal gene transfer)', color='white', fontsize=11)
 ax2.set_xlim(-0.5, 10)
 ax2.set_ylim(-1, 7.5)
 ax2.axis('off')

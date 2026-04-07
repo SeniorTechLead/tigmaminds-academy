@@ -30,7 +30,7 @@ The **First Law of Thermodynamics** says energy cannot be created or destroyed �
 import matplotlib.pyplot as plt
 
 # Energy conversion efficiency of different light sources
-sources = ['Oil lamp', 'Candle', 'Incandescent\\\nbulb', 'CFL', 'LED', 'Firefly\\\n(bioluminescence)']
+sources = ['Oil lamp', 'Candle', 'Incandescent\\nbulb', 'CFL', 'LED', 'Firefly\\n(bioluminescence)']
 light_efficiency = [1.5, 0.8, 5, 22, 40, 90]  # % of energy → visible light
 heat_pct = [100 - e for e in light_efficiency]
 
@@ -50,7 +50,7 @@ for bar, eff in zip(bars, light_efficiency):
 
 # Stacked bar: light vs heat for the festival lamp
 ax2.set_facecolor('#111827')
-categories = ['Chemical\\\nenergy in\\\n(100%)', 'Heat output', 'Light output']
+categories = ['Chemical\\nenergy in\\n(100%)', 'Heat output', 'Light output']
 values = [100, 98.5, 1.5]
 colors_stack = ['#f59e0b', '#ef4444', '#fbbf24']
 bars2 = ax2.bar(categories, values, color=colors_stack, alpha=0.8)
@@ -470,7 +470,7 @@ ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax2.tick_params(colors='gray')
 
 # Add time labels
-for h, label in [(6, 'Morning'), (12, 'Noon'), (18, 'Festival\\\nstarts'), (24, 'Midnight'),
+for h, label in [(6, 'Morning'), (12, 'Noon'), (18, 'Festival\\nstarts'), (24, 'Midnight'),
                   (30, 'Morning'), (36, 'Noon'), (42, 'Evening')]:
     ax2.annotate(label, xy=(h, -0.5), color='gray', fontsize=7, ha='center')
 
@@ -547,12 +547,12 @@ comparisons = [
     ('CO₂ Emissions (kg)', [oil_co2, solar_co2], axes[0,0]),
     ('Cost per Festival (₹)', [oil_total_cost, solar_cost_per_year], axes[0,1]),
     ('Waste Generated (kg)', [oil_waste_kg, solar_waste], axes[1,0]),
-    ('Resource Use (litres oil\\\nor kWh electricity)', [oil_total_litres, led_energy_kwh], axes[1,1]),
+    ('Resource Use (litres oil\\nor kWh electricity)', [oil_total_litres, led_energy_kwh], axes[1,1]),
 ]
 
 for title, values, ax in comparisons:
     ax.set_facecolor('#111827')
-    labels = ['Traditional\\\n(oil lamps)', 'Solar-powered\\\n(LED)']
+    labels = ['Traditional\\n(oil lamps)', 'Solar-powered\\n(LED)']
     bars = ax.bar(labels, values, color=['#f59e0b', '#3b82f6'], alpha=0.8, width=0.5)
     ax.set_title(title, color='white', fontsize=11)
     ax.tick_params(colors='gray')

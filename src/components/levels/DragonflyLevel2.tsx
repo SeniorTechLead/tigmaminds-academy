@@ -403,10 +403,10 @@ for true in labels:
 # Metrics
 correct = sum(1 for t, p in zip(true_labels, pred_labels) if t == p)
 total = len(true_labels)
-print(f"\\\nOverall accuracy: {correct}/{total} = {correct/total*100:.1f}%")
+print(f"\\nOverall accuracy: {correct}/{total} = {correct/total*100:.1f}%")
 
 # Per-class recall
-print("\\\nPer-class recall:")
+print("\\nPer-class recall:")
 for label in labels:
     true_count = sum(1 for t in true_labels if t == label)
     correct_count = sum(1 for t, p in zip(true_labels, pred_labels) if t == label and p == label)

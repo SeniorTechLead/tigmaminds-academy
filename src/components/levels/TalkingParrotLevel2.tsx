@@ -169,10 +169,10 @@ ax.set_facecolor('#1f2937')
 
 # Concentric circles
 circles = [
-    (0.9, '#ef4444', 'Type 0: Recursively Enumerable\\\n(Turing machines)'),
-    (0.7, '#f59e0b', 'Type 1: Context-Sensitive\\\n(Human language features)'),
-    (0.5, '#3b82f6', 'Type 2: Context-Free\\\n(Programming languages)'),
-    (0.3, '#22c55e', 'Type 3: Regular\\\n(Bird calls, simple patterns)'),
+    (0.9, '#ef4444', 'Type 0: Recursively Enumerable\\n(Turing machines)'),
+    (0.7, '#f59e0b', 'Type 1: Context-Sensitive\\n(Human language features)'),
+    (0.5, '#3b82f6', 'Type 2: Context-Free\\n(Programming languages)'),
+    (0.3, '#22c55e', 'Type 3: Regular\\n(Bird calls, simple patterns)'),
 ]
 
 for radius, color, label in circles:

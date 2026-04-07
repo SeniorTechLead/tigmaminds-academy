@@ -127,7 +127,7 @@ for l in log[::3]:
     print(f"{l['t']:>6.1f} {l['x']:>5.0f}m {l['v_kmh']:>6.1f} {l['mode']:>7} "
           f"{l['P_kW']:>6.1f} {l['E_kJ']:>6.0f}")
 
-print(f"\\nTotal time: {total_t:.0f} s ({total_t/60:.1f} min)")
+print(f"\nTotal time: {total_t:.0f} s ({total_t/60:.1f} min)")
 print(f"Total energy: {total_E:.0f} kJ ({total_E/3600:.2f} kWh)")
 print(f"Energy per km: {total_E/(stops[-1]/1000):.0f} kJ/km")
 
@@ -223,7 +223,7 @@ for i in range(len(positions)):
     print(f"{i+1:>4} {positions[i]:>8.1f} km {currents[i]:>6} A {voltages[i]:>8.1f} V {P:>8.1f} kW")
 
 min_V = min(voltages)
-print(f"\\nMinimum voltage: {min_V:.1f} V (limit: 500 V)")
+print(f"\nMinimum voltage: {min_V:.1f} V (limit: 500 V)")
 print(f"Status: {'OK' if min_V > 500 else 'UNDERVOLTAGE!'}")
 
 # Scenario 3: What if a substation fails?

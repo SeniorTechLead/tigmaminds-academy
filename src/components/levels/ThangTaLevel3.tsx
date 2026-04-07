@@ -192,9 +192,9 @@ plt.show()
 
 print(f"Centre of Percussion: {cop:.3f}m ({cop*100:.0f}cm from handle)")
 print(f"This is {cop/L*100:.0f}% along the blade")
-print(f"\\\nAt CoP: v={omega0*cop:.1f} m/s, hand force ≈ 0 N")
+print(f"\\nAt CoP: v={omega0*cop:.1f} m/s, hand force ≈ 0 N")
 print(f"At tip:  v={omega0*L:.1f} m/s, hand force = {hand_force[-1]:.0f} N")
-print(f"\\\nTotal KE available: {KE_initial:.1f} J")`,
+print(f"\\nTotal KE available: {KE_initial:.1f} J")`,
       challenge: 'What if the sword has a weighted tip (centre of mass shifts from L/2 to 0.6L)? Recalculate the centre of percussion. How does tip-weighting affect the sweet spot?',
       successHint: 'The centre of percussion is real physics that every martial artist, cricketer, and baseball player exploits instinctively. You just derived it mathematically.',
     },
@@ -284,7 +284,7 @@ plt.tight_layout()
 plt.savefig('dual_sword.png', dpi=100, bbox_inches='tight', facecolor='#1f2937')
 plt.show()
 
-print("\\\nOpposite-direction swords create much less torso disturbance!")
+print("\\nOpposite-direction swords create much less torso disturbance!")
 print("This is why dual-sword katas almost always use counter-rotation.")`,
       challenge: 'What if the two swords have different masses (right=1.2kg, left=0.8kg)? How does the torso disturbance change for opposite-direction spinning? Can you adjust the left sword speed to compensate?',
       successHint: 'Multi-body dynamics with coupling is the foundation of robotics, vehicle dynamics, and biomechanics. You just modelled a system with three interacting rigid bodies.',
@@ -373,7 +373,7 @@ for kata, color, ax in [(kata_staccato, '#ef4444', ax1), (kata_flowing, '#34d399
 
     ax.plot(times, omegas, color=color, linewidth=2)
     ax.fill_between(times, omegas, 0, alpha=0.15, color=color)
-    ax.set_title(f'{kata.name}\\\nEnergy: {E_total:.0f} J', color='white', fontsize=11, fontweight='bold')
+    ax.set_title(f'{kata.name}\\nEnergy: {E_total:.0f} J', color='white', fontsize=11, fontweight='bold')
     ax.set_xlabel('Time (s)', color='white')
     ax.set_ylabel('Angular velocity (rad/s)', color='white')
     ax.tick_params(colors='white')
@@ -389,7 +389,7 @@ E_flowing, _ = kata_flowing.calculate_energy()
 print(f"Staccato kata energy: {E_staccato:.0f} J (metabolic)")
 print(f"Flowing kata energy:  {E_flowing:.0f} J (metabolic)")
 print(f"Efficiency gain: {(1 - E_flowing/E_staccato)*100:.0f}% less energy for flowing style")
-print(f"\\\nA master using the flowing style can fight {E_staccato/E_flowing:.1f}x longer!")`,
+print(f"\\nA master using the flowing style can fight {E_staccato/E_flowing:.1f}x longer!")`,
       challenge: 'Design your own kata with 10 moves that is even more efficient than the flowing kata. The constraint: every move must reach at least omega=15 rad/s (to be combat-effective). What is the minimum energy cost?',
       successHint: 'Energy efficiency analysis applies to everything from martial arts to electric vehicles to industrial robotics. The principle is universal: smooth transitions waste less energy than abrupt ones.',
     },
@@ -502,7 +502,7 @@ print("Peak torques:")
 print(f"  Shoulder: {np.max(np.abs(tau_shoulder)):.1f} Nm")
 print(f"  Elbow:    {np.max(np.abs(tau_elbow)):.1f} Nm")
 print(f"  Wrist:    {np.max(np.abs(tau_wrist)):.1f} Nm")
-print(f"\\\nShoulder generates {np.max(np.abs(tau_shoulder))/np.max(np.abs(tau_wrist)):.1f}x more torque than wrist")`,
+print(f"\\nShoulder generates {np.max(np.abs(tau_shoulder))/np.max(np.abs(tau_wrist)):.1f}x more torque than wrist")`,
       challenge: 'Add gravity effects: each segment exerts a gravitational torque m*g*L_com*cos(theta) on its joint. Recalculate the torques. How much does gravity change the picture?',
       successHint: 'Inverse dynamics is the core tool of biomechanics, rehabilitation engineering, and sports science. You just performed the same analysis that Olympic coaches use to optimise athlete performance.',
     },

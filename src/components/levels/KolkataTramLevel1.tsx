@@ -75,7 +75,7 @@ for e in elements:
     print(f"{e.name:<28} {e.R:>6.2f} {v_drop:>6.1f} V {p_loss:>8.0f} {pct:>6.1f}%")
 
 efficiency = motor_power / total_power * 100
-print(f"\\nTotal power from supply: {total_power:.0f} W ({total_power/1000:.1f} kW)")
+print(f"\nTotal power from supply: {total_power:.0f} W ({total_power/1000:.1f} kW)")
 print(f"Power delivered to motor: {motor_power:.0f} W ({motor_power/1000:.1f} kW)")
 print(f"Electrical efficiency: {efficiency:.1f}%")
 
@@ -314,13 +314,13 @@ for seg in segs:
           f"{seg['distance']:>4.0f} {seg['accel_kJ']:>6.1f} {seg['cruise_kJ']:>6.1f} "
           f"{seg['energy_kJ']:>6.1f}")
 
-print(f"\\nTotal energy: {total_E:.0f} kJ ({total_E/3600:.2f} kWh)")
+print(f"\nTotal energy: {total_E:.0f} kJ ({total_E/3600:.2f} kWh)")
 print(f"Total time: {total_T:.0f} s ({total_T/60:.1f} min)")
 print(f"Energy per km: {total_E/stops[-1]:.0f} kJ/km ({total_E/3600/stops[-1]:.2f} kWh/km)")
 
 # Braking energy wasted
 brake_waste = sum(s["brake_waste_kJ"] for s in segs)
-print(f"\\nEnergy wasted in braking: {brake_waste:.0f} kJ ({brake_waste/total_E*100:.0f}% of total)")
+print(f"\nEnergy wasted in braking: {brake_waste:.0f} kJ ({brake_waste/total_E*100:.0f}% of total)")
 print("This energy could be recovered with regenerative braking!")`,
       challenge: 'Simulate the same route with only 5 stops (every other stop removed). How much energy is saved by fewer stops? Calculate energy per passenger-km if the tram carries 100 passengers. Compare to a diesel bus (0.5 MJ per passenger-km).',
       successHint: 'Energy analysis of transportation is how cities decide between trams, buses, metro, and BRT. The energy per passenger-km metric you calculated is the universal comparison tool. Trams typically use 0.1-0.3 MJ per passenger-km — far less than cars (2-4 MJ) or buses (0.5-1.0 MJ).',
@@ -537,7 +537,7 @@ for h in hist:
         kmh = h["omega"] * 0.5 * 3.6
         print(f"{h['t']:>8.1f} {kmh:>10.1f} {h['I']:>10.0f} {h['torque']:>10.0f}")
 
-print(f"\\nStartup current (t=0): {hist[0]['I']:.0f} A")
+print(f"\nStartup current (t=0): {hist[0]['I']:.0f} A")
 print(f"Steady current: {hist[-1]['I']:.0f} A")
 print(f"Current ratio: {hist[0]['I']/hist[-1]['I']:.1f}x")
 print("This high startup current is why starting resistors are essential!")`,

@@ -969,8 +969,8 @@ ax.tick_params(colors='gray')
 plt.tight_layout()
 plt.show()
 
-print(f"\\\nModel Performance: accuracy = {accuracy:.1%}, AUC = {auc:.3f}")
-print(f"\\\nCoefficients (standardized):")
+print(f"\\nModel Performance: accuracy = {accuracy:.1%}, AUC = {auc:.3f}")
+print(f"\\nCoefficients (standardized):")
 print(f"  Intercept: {beta[0]:.3f}")
 for i, name in enumerate(feature_names):
     direction = "+" if beta[i+1] > 0 else "-"

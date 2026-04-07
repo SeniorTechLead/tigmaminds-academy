@@ -346,7 +346,7 @@ for fr in ratios:
 # Find and display optimum
 drags = [total_drag(fr, volume)[2] for fr in np.arange(2, 10, 0.1)]
 opt_fr = np.arange(2, 10, 0.1)[np.argmin(drags)]
-print(f"\\nOptimal fineness ratio: {opt_fr:.1f}")
+print(f"\nOptimal fineness ratio: {opt_fr:.1f}")
 print(f"Hilsa fineness ratio:   4.5")
 print(f"Match: {'Excellent' if abs(opt_fr - 4.5) < 1 else 'Good'}")
 
@@ -461,7 +461,7 @@ for v in np.arange(0.3, 2.5, 0.1):
     marker = " *" if abs(v - best_speed) < 0.05 else ""
     print(f"{v:>8.1f} {E:>10.0f} {T:>8.0f} {cot:>8.2f} {fat_pct:>8.1f}%{marker}")
 
-print(f"\\nOptimal speed: {best_speed:.1f} m/s")
+print(f"\nOptimal speed: {best_speed:.1f} m/s")
 print(f"Minimum energy: {min_energy:.0f} kJ ({min_energy/total_energy_kJ*100:.1f}% of reserves)")
 
 # Effect of river current

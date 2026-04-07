@@ -101,7 +101,7 @@ ax2_t.plot(v0_range, flight_times, color='#3b82f6', linewidth=2.5, linestyle='--
 best_range_idx = np.argmax(ranges)
 best_time_idx = np.argmax(flight_times)
 ax2.plot(v0_range[best_range_idx], ranges[best_range_idx], 'o', color='#22c55e', markersize=10)
-ax2.annotate(f'Max range: {ranges[best_range_idx]:.0f}m\\\nat {v0_range[best_range_idx]:.1f} m/s',
+ax2.annotate(f'Max range: {ranges[best_range_idx]:.0f}m\\nat {v0_range[best_range_idx]:.1f} m/s',
              xy=(v0_range[best_range_idx], ranges[best_range_idx]),
              xytext=(v0_range[best_range_idx]+2, ranges[best_range_idx]-5),
              color='#22c55e', fontsize=9, arrowprops=dict(arrowstyle='->', color='#22c55e'))
@@ -178,7 +178,7 @@ colors_p = [p['color'] for p in pilots.values()]
 x = np.arange(len(names))
 ax1.bar(x, stall_speeds, color=colors_p, alpha=0.8, edgecolor='white', linewidth=0.5)
 for i, (ss, wl) in enumerate(zip(stall_speeds, wing_loadings)):
-    ax1.text(i, ss + 1, f'{ss:.0f} m/s\\n({ss*3.6:.0f} km/h)', ha='center', color='white', fontsize=7)
+    ax1.text(i, ss + 1, f'{ss:.0f} m/s\n({ss*3.6:.0f} km/h)', ha='center', color='white', fontsize=7)
 
 ax1.axhline(5, color='#22c55e', linestyle=':', alpha=0.3)
 ax1.text(6.5, 6, 'Survivable landing speed (~5 m/s)', color='#22c55e', fontsize=8)
@@ -448,7 +448,7 @@ ax.tick_params(colors='gray')
 ax = axes[0, 1]
 ax.set_facecolor('#111827')
 
-drone_types = ['Quadcopter\\n(battery)', 'Fixed-wing\\n(battery)', 'Glider\\n(no thermal)', 'Glider\\n(thermal soaring)']
+drone_types = ['Quadcopter\n(battery)', 'Fixed-wing\n(battery)', 'Glider\n(no thermal)', 'Glider\n(thermal soaring)']
 endurance_hrs = [0.5, 2, 4, 48]  # hours
 range_km = [5, 50, 80, 500]
 colors_drone = ['#ef4444', '#f59e0b', '#22c55e', '#3b82f6']
@@ -585,11 +585,11 @@ ax1_t.plot(soar_x * 3, soar_z, color='#22c55e', linewidth=2, label='Albatross pa
 ax1_t.set_xlabel('Position (relative)', color='#22c55e')
 
 # Annotate phases
-ax1.annotate('Climb into\\\nfast wind', xy=(8, 18), color='#f59e0b', fontsize=8,
+ax1.annotate('Climb into\\nfast wind', xy=(8, 18), color='#f59e0b', fontsize=8,
              bbox=dict(boxstyle='round', facecolor='#f59e0b', alpha=0.2))
-ax1.annotate('Dive toward\\\nsurface', xy=(3, 4), color='#ef4444', fontsize=8,
+ax1.annotate('Dive toward\\nsurface', xy=(3, 4), color='#ef4444', fontsize=8,
              bbox=dict(boxstyle='round', facecolor='#ef4444', alpha=0.2))
-ax1.annotate('ENERGY\\\nEXTRACTED\\\nHERE', xy=(10, 12), color='#22c55e', fontsize=9,
+ax1.annotate('ENERGY\\nEXTRACTED\\nHERE', xy=(10, 12), color='#22c55e', fontsize=9,
              fontweight='bold')
 
 ax1.set_xlabel('Wind speed (m/s)', color='#3b82f6')
@@ -721,7 +721,7 @@ milestones = [
 
 for i, (year, name, inspiration, color) in enumerate(milestones):
     ax.plot(year, i, 'o', color=color, markersize=12)
-    ax.text(year + 3, i, f'{name}\\n({inspiration})', va='center', color='white', fontsize=8)
+    ax.text(year + 3, i, f'{name}\n({inspiration})', va='center', color='white', fontsize=8)
     ax.axhline(i, color='#4b5563', alpha=0.1, linewidth=0.5)
 
 ax.set_xlabel('Year', color='white')
@@ -769,7 +769,7 @@ ax.tick_params(colors='gray')
 # 4. Future concepts
 ax = axes[1, 1]
 ax.set_facecolor('#111827')
-concepts = ['Morphing\\\nwings', 'Perching\\\nlanding', 'Thermal\\\nsoaring', 'Formation\\\nflight', 'Bio-hybrid\\\nmaterials', 'Neural\\\ncontrol']
+concepts = ['Morphing\\nwings', 'Perching\\nlanding', 'Thermal\\nsoaring', 'Formation\\nflight', 'Bio-hybrid\\nmaterials', 'Neural\\ncontrol']
 readiness = [7, 6, 8, 5, 3, 4]  # Technology Readiness Level (1-9)
 impact = [8, 7, 9, 6, 10, 9]  # Potential impact (1-10)
 colors_c = ['#22c55e', '#3b82f6', '#f59e0b', '#a855f7', '#ef4444', '#ec4899']

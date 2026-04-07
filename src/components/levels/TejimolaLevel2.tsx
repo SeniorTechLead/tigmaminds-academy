@@ -176,7 +176,7 @@ ax.tick_params(colors='gray')
 expected = [9/16, 3/16, 3/16, 1/16]
 for bar, count, exp in zip(bars, results.values(), expected):
     ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 50,
-            f'{count/n*100:.1f}%\\\n(expect {exp*100:.1f}%)',
+            f'{count/n*100:.1f}%\\n(expect {exp*100:.1f}%)',
             ha='center', color='white', fontsize=9)
 
 plt.tight_layout()

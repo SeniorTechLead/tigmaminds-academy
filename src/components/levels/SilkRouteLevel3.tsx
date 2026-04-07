@@ -324,8 +324,8 @@ plt.show()
 path_cities = [city_list[i] for i in path]
 print(f"Shortest path: {' → '.join(path_cities)}")
 print(f"Total distance: {dist[target]} days")
-print(f"\\\nDijkstra explored {len(steps)} nodes out of {n} total")
-print(f"\\\nAll distances from Sualkuchi:")
+print(f"\\nDijkstra explored {len(steps)} nodes out of {n} total")
+print(f"\\nAll distances from Sualkuchi:")
 for i, city in enumerate(city_list):
     d = dist[i]
     print(f"  {city:>15s}: {d:.0f} days" if d < float('inf') else f"  {city:>15s}: unreachable")`,
@@ -508,16 +508,16 @@ axes[1, 0].set_title('Route utilization (red = saturated)', color='white', fonts
 
 # Min-cut analysis: which routes are at capacity?
 axes[1, 1].axis('off')
-text = "AUGMENTING PATHS FOUND:\\\n\\\n"
+text = "AUGMENTING PATHS FOUND:\\n\\n"
 for i, it in enumerate(iterations):
-    text += f"  {i+1}. {' → '.join(it['path'][:4])}...\\\n"
-    text += f"     Bottleneck: {it['bottleneck']:.0f}, Total: {it['total']:.0f}\\\n"
-text += f"\\\nMax flow = Min cut = {total:.0f} units"
-text += f"\\\n\\\nSaturated routes (min-cut candidates):"
+    text += f"  {i+1}. {' → '.join(it['path'][:4])}...\\n"
+    text += f"     Bottleneck: {it['bottleneck']:.0f}, Total: {it['total']:.0f}\\n"
+text += f"\\nMax flow = Min cut = {total:.0f} units"
+text += f"\\n\\nSaturated routes (min-cut candidates):"
 for c1, c2, cap in routes_cap:
     f = max(flow[idx[c1], idx[c2]], 0)
     if abs(f - cap) < 0.1 and f > 0:
-        text += f"\\\n  {c1} → {c2}: {f:.0f}/{cap}"
+        text += f"\\n  {c1} → {c2}: {f:.0f}/{cap}"
 
 axes[1, 1].text(0.05, 0.95, text, transform=axes[1, 1].transAxes,
                 color='white', fontsize=8, verticalalignment='top', fontfamily='monospace')
@@ -692,14 +692,14 @@ axes[1, 1].set_ylabel('Best tour length (days)', color='white')
 axes[1, 1].set_title('Simulated annealing convergence', color='white', fontsize=11)
 
 # Method comparison
-methods = ['Nearest\\\nNeighbor', '2-opt', 'Simulated\\\nAnnealing']
+methods = ['Nearest\\nNeighbor', '2-opt', 'Simulated\\nAnnealing']
 lengths = [nn_length, opt2_length, sa_length]
 colors_bar = ['#ef4444', '#22c55e', '#3b82f6']
 axes[1, 2].bar(methods, lengths, color=colors_bar, alpha=0.8)
 best_len = min(lengths)
 for i, l in enumerate(lengths):
     pct = (l - best_len) / best_len * 100
-    axes[1, 2].text(i, l + 1, f'{pct:.1f}%\\\nabove best' if pct > 0 else 'BEST',
+    axes[1, 2].text(i, l + 1, f'{pct:.1f}%\\nabove best' if pct > 0 else 'BEST',
                      ha='center', color='white', fontsize=8)
 axes[1, 2].set_ylabel('Tour length (days)', color='white')
 axes[1, 2].set_title('Method comparison', color='white', fontsize=11)
@@ -877,7 +877,7 @@ R_random = np.mean(random_mean) / n_active * n_active
 R_degree = np.sum(targeted_degree) / n_active
 R_between = np.sum(targeted_between) / n_active
 
-bars = axes[0, 1].bar(['Random\\\nfailure', 'Targeted\\\n(degree)', 'Targeted\\\n(betweenness)'],
+bars = axes[0, 1].bar(['Random\\nfailure', 'Targeted\\n(degree)', 'Targeted\\n(betweenness)'],
                        [R_random, R_degree, R_between],
                        color=['#3b82f6', '#ef4444', '#f59e0b'], alpha=0.8)
 axes[0, 1].set_ylabel('Robustness coefficient R', color='white')
@@ -1084,7 +1084,7 @@ top_20_share = np.sum(wealth_sorted[:top_20_pct]) / np.sum(wealth_sorted) * 100
 bottom_80_share = 100 - top_20_share
 
 axes[1, 1].pie([top_20_share, bottom_80_share],
-               labels=[f'Top 20%\\\n({top_20_share:.1f}%)', f'Bottom 80%\\\n({bottom_80_share:.1f}%)'],
+               labels=[f'Top 20%\\n({top_20_share:.1f}%)', f'Bottom 80%\\n({bottom_80_share:.1f}%)'],
                colors=['#ef4444', '#3b82f6'], startangle=90,
                textprops={'color': 'white', 'fontsize': 10})
 axes[1, 1].set_title('Wealth concentration (Pareto effect)', color='white', fontsize=11)

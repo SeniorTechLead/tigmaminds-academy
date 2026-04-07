@@ -271,9 +271,9 @@ plt.show()
 print("Comparison:")
 print(f"  Observer A error: mean={np.mean(error_a):.1f}, std={np.std(error_a):.1f}")
 print(f"  Observer B error: mean={np.mean(error_b):.1f}, std={np.std(error_b):.1f}")
-print(f"\\\nObserver A detects the trend (slope = {z[0]:.2f} butterflies/day)")
+print(f"\\nObserver A detects the trend (slope = {z[0]:.2f} butterflies/day)")
 print(f"Observer B cannot — the categories are too coarse to see the gradual decline")
-print(f"\\\nLesson: measurement precision determines what questions you can answer")`,
+print(f"\\nLesson: measurement precision determines what questions you can answer")`,
       challenge: 'What if Observer B uses 5 categories instead of 3 ("very few", "few", "some", "many", "lots")? Does the error improve? At what point do categories become as good as counting?',
       successHint: 'The resolution of your measurement determines what patterns you can detect. Coarse observations miss subtle trends. This is why ecologists count precisely, physicists measure to many decimal places, and doctors order blood tests instead of just looking at patients.',
     },
@@ -358,7 +358,7 @@ for qx, qy in zip(quadrat_x, quadrat_y):
 
 density_est = np.mean(quadrat_counts) / (quadrat_size ** 2)
 pop_est = density_est * landscape_size ** 2
-ax.set_title(f'Random Quadrats\\\nEstimate: {pop_est:.0f} (true: {n_butterflies})', color='white', fontsize=10)
+ax.set_title(f'Random Quadrats\\nEstimate: {pop_est:.0f} (true: {n_butterflies})', color='white', fontsize=10)
 ax.set_xlim(0, landscape_size); ax.set_ylim(0, landscape_size)
 ax.tick_params(colors='gray'); ax.set_aspect('equal')
 
@@ -379,7 +379,7 @@ for gx in np.arange(5, landscape_size, grid_spacing):
 
 sys_density = np.mean(sys_counts) / (quadrat_size ** 2)
 sys_est = sys_density * landscape_size ** 2
-ax.set_title(f'Systematic Grid\\\nEstimate: {sys_est:.0f} (true: {n_butterflies})', color='white', fontsize=10)
+ax.set_title(f'Systematic Grid\\nEstimate: {sys_est:.0f} (true: {n_butterflies})', color='white', fontsize=10)
 ax.set_xlim(0, landscape_size); ax.set_ylim(0, landscape_size)
 ax.tick_params(colors='gray'); ax.set_aspect('equal')
 
@@ -400,7 +400,7 @@ for ty in transect_positions:
 
 trans_density = np.mean(trans_counts) / (landscape_size * transect_width)
 trans_est = trans_density * landscape_size ** 2
-ax.set_title(f'Line Transects\\\nEstimate: {trans_est:.0f} (true: {n_butterflies})', color='white', fontsize=10)
+ax.set_title(f'Line Transects\\nEstimate: {trans_est:.0f} (true: {n_butterflies})', color='white', fontsize=10)
 ax.set_xlim(0, landscape_size); ax.set_ylim(0, landscape_size)
 ax.tick_params(colors='gray'); ax.set_aspect('equal')
 
@@ -610,7 +610,7 @@ print(f"  Date range: {dates[0]} to {dates[-1]}")
 print(f"  Locations: {', '.join(locations)}")
 print(f"  Species: {len(species_list)}")
 print(f"  Total butterflies: {sum(r[4] for r in clean_data)}")
-print(f"\\\nData quality rules:")
+print(f"\\nData quality rules:")
 print(f"  1. One observation per row")
 print(f"  2. One variable per column")
 print(f"  3. Consistent formats (dates, names, units)")
@@ -683,7 +683,7 @@ mean_out = np.mean(counts_with_outlier)
 median_out = np.median(counts_with_outlier)
 ax2.axvline(mean_out, color='#ef4444', linewidth=2, linestyle='--', label=f'Mean: {mean_out:.1f}')
 ax2.axvline(median_out, color='#22c55e', linewidth=2, linestyle=':', label=f'Median: {median_out:.1f}')
-ax2.annotate('Migration\\nevent!', xy=(85, 0.5), color='#f59e0b', fontsize=10)
+ax2.annotate('Migration\nevent!', xy=(85, 0.5), color='#f59e0b', fontsize=10)
 ax2.set_xlabel('Daily butterfly count', color='white')
 ax2.set_title('With Outlier: Mean ≠ Median', color='white', fontsize=12)
 ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
@@ -734,10 +734,10 @@ print("Without outlier:")
 print(f"  Mean: {np.mean(counts):.1f}")
 print(f"  Median: {np.median(counts):.1f}")
 print(f"  Range: {np.min(counts)} - {np.max(counts)}")
-print(f"\\\nWith outlier (day 16 = 85):")
+print(f"\\nWith outlier (day 16 = 85):")
 print(f"  Mean: {np.mean(counts_with_outlier):.1f} (shifted by {np.mean(counts_with_outlier) - np.mean(counts):.1f})")
 print(f"  Median: {np.median(counts_with_outlier):.1f} (barely changed)")
-print(f"\\\nLesson: median is robust to outliers; mean is not.")`,
+print(f"\\nLesson: median is robust to outliers; mean is not.")`,
       challenge: 'Generate 30 days of "income data" using np.random.lognormal(10, 1, 30). Calculate both mean and median. Which better represents a "typical" income? This is why countries report median income, not mean.',
       successHint: 'Mean and median are the two most-used numbers in all of science, economics, and medicine. Knowing when each is appropriate — and when one is misleading — is a fundamental statistical literacy skill. The boy\'s butterfly counts taught him what professional statisticians use every day.',
     },
@@ -893,7 +893,7 @@ print(f"  Coverage: {np.sum(grid_counts > 0)} / 100 cells ({np.sum(grid_counts >
 print(f"  Under-sampled cells (< 3 volunteers): {np.sum(grid_counts < 3)}")
 print(f"  Mean count error: {np.mean(error):.2f} (slight undercount due to missed IDs)")
 print(f"  Std of error: {np.std(error):.2f}")
-print(f"\\\nKey issues:")
+print(f"\\nKey issues:")
 print(f"  Spatial bias: {np.sum(grid_counts == 0)} cells with zero coverage")
 print(f"  Urban bias: most volunteers near cities, not wilderness")
 print(f"  Data quality: {volunteer_accuracy*100:.0f}% accuracy is usable with corrections")`,

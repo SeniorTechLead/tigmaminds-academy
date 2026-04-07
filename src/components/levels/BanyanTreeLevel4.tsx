@@ -83,7 +83,7 @@ def simulate_tree(age, noise_level=0.15):
     density = min(1, 0.3 + 0.5 * (1 - np.exp(-0.01 * age)) + np.random.normal(0, 0.05))
 
 
-print("\\n[Full visualization available in the playground]")`,
+print("\n[Full visualization available in the playground]")`,
       challenge: 'Split the data into trees < 200 years and trees > 200 years. Train separate models for each group. Does specialized modeling improve accuracy for ancient trees?',
       successHint: 'Stage 1 is complete — you have a calibrated model trained on multiple allometric features.',
     },
@@ -162,7 +162,7 @@ def kfold_cv(X_base, y_true, log_y_true, k=5):
         models_preds['Log-linear'][test_idx] = np.exp(X_te_aug @ w)
 
 
-print("\\n[Full visualization available in the playground]")`,
+print("\n[Full visualization available in the playground]")`,
       challenge: 'Implement leave-one-out cross-validation (k=n) and compare its RMSE estimate to 5-fold. Is the additional computation worth the potentially better estimate?',
       successHint: 'Stage 2 is complete — you have a cross-validated model selection with diagnostic plots.',
     },
@@ -242,7 +242,7 @@ def bootstrap_predict(X_cal, log_y_cal, x_new, n_bootstrap=500):
         'ci_lower': np.percentile(predictions, 2.5),
         }
 
-print("\\n[Full visualization available in the playground]")`,
+print("\n[Full visualization available in the playground]")`,
       challenge: 'Test the effect of calibration dataset size on CI width: run the bootstrap with n=30, 60, and 100 calibration trees. How does the CI for the ancient temple banyan change? At what n does the CI stabilize?',
       successHint: 'Stage 3 is complete — you have bootstrap confidence intervals for honest uncertainty quantification.',
     },
@@ -321,7 +321,7 @@ def monte_carlo_propagation(canopy, pillars, basal, height, density, n_samples=1
         p_noisy = max(0, pillars * (1 + np.random.normal(0, MEASUREMENT_ERRORS['pillars'])))
         b_noisy = max(0.001, basal * (1 + np.random.normal(0, MEASUREMENT_ERRORS['basal'])))
 
-print("\\n[Full visualization available in the playground]")`,
+print("\n[Full visualization available in the playground]")`,
       challenge: 'Identify which measurement contributes most to prediction uncertainty: run Monte Carlo with only one measurement varied at a time (all others fixed). Which measurement, when uncertain, causes the widest age CI?',
       successHint: 'Stage 4 is complete — you have Monte Carlo error propagation and quality scoring for honest field-deployable predictions.',
     },
@@ -401,7 +401,7 @@ def generate_recommendations(age_est, ci_lower, ci_upper, quality_score,
         recs.append(f"STRUCTURAL: {n_pillars} pillar roots provide good redundancy — "
                     f"monitor for root cutting by construction")
 
-print("\\n[Full visualization available in the playground]")`,
+print("\n[Full visualization available in the playground]")`,
       challenge: 'Add a "threat proximity" layer: assign each tree a distance to the nearest planned construction project. Trees with high heritage grade AND close threat proximity should be flagged as "URGENT" in the recommendations. How many of the 8 trees become urgent?',
       successHint: 'Stage 5 is complete — you have probabilistic heritage classification with evidence-backed conservation recommendations.',
     },

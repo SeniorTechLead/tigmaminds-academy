@@ -93,7 +93,7 @@ for name, camber, thick, alpha in [
     print(f"{name:<30} {alpha:>4}deg {cl_panel:>9.3f} {cl_theory:>10.3f}")
 
 # Convergence study: how many panels are enough?
-print("\\\n=== Panel Convergence Study (NACA 2412, alpha=5) ===")
+print("\\n=== Panel Convergence Study (NACA 2412, alpha=5) ===")
 print(f"{'Panels':>8} {'Cl':>8} {'Delta':>8}")
 prev_cl = 0
 for n in [5, 10, 20, 40, 60, 80, 100]:
@@ -102,7 +102,7 @@ for n in [5, 10, 20, 40, 60, 80, 100]:
     print(f"{n:>8} {cl:>7.4f} {delta:>7.5f}")
     prev_cl = cl
 
-print("\\\nThe solution converges as panel count increases.")
+print("\\nThe solution converges as panel count increases.")
 print("30-50 panels are typically sufficient for engineering accuracy.")`,
       challenge: 'Run the panel method at angles from -5 to 15 degrees and plot the Cl vs alpha curve. Where does the curve become non-linear? In reality, the wing stalls (Cl drops sharply) at about 12-15 degrees — the panel method can\'t predict stall because it assumes inviscid flow. This is its fundamental limitation.',
       successHint: 'You implemented the core of computational aerodynamics. The panel method (Hess & Smith, 1960s) was the first practical computational tool for wing design. Modern CFD codes (XFOIL, OpenFOAM, ANSYS Fluent) descend from this same idea.',
@@ -143,7 +143,7 @@ def tail_sizing(x_cg, x_wing_cp, wing_area, wing_chord,
     return max(wing_area * (x_cp_target - x_wing_cp) / (x_tail - x_cp_target), 0)
 
 # Analyse Leonardo's designs
-print("=== Pitch Stability Analysis ===\\\n")
+print("=== Pitch Stability Analysis ===\\n")
 
 # CP movement with angle of attack
 print("Centre of pressure vs angle of attack (NACA 4-series camber):")
@@ -157,7 +157,7 @@ for alpha in [-2, 0, 2, 5, 8, 10, 12, 15]:
     print(f"{alpha:>4}deg {cl:>5.2f} {xcp:>7.3f} {sm:>+7.3f} ({stability})")
 
 # Leonardo's machines — stability check
-print("\\\n=== Leonardo's Designs — Stability Assessment ===")
+print("\\n=== Leonardo's Designs — Stability Assessment ===")
 designs = [
     ("Ornithopter (no tail)",    0.50, 0.35, 12, 0, 1.2),
     ("Ornithopter (pilot forward)", 0.35, 0.35, 12, 0, 1.2),
@@ -174,7 +174,7 @@ for name, cg, cp, area, tail_arm, chord in designs:
     print(f"{name:<30} {cg:>4.2f} {cp:>4.2f} {sm:>+5.2f} {status:>12}")
 
 # Tail sizing for Leonardo
-print("\\\n=== Required Tail to Stabilise Leonardo's Ornithopter ===")
+print("\\n=== Required Tail to Stabilise Leonardo's Ornithopter ===")
 wing_area = 12  # m²
 chord = 1.2     # m
 for arm in [1.5, 2.0, 3.0, 4.0, 5.0]:
@@ -232,7 +232,7 @@ configs = [
     ("Modern sailplane",     0.02, 0.12, 20, 0.008),
 ]
 
-print("=== Virtual Wind Tunnel Results ===\\\n")
+print("=== Virtual Wind Tunnel Results ===\\n")
 
 for name, camber, thick, ar, cd0 in configs:
     results = wind_tunnel_sweep(camber, thick, ar, cd0)
@@ -311,7 +311,7 @@ aircraft = {
     },
 }
 
-print("=== Five Pillars of Flight: Comparative Analysis ===\\\n")
+print("=== Five Pillars of Flight: Comparative Analysis ===\\n")
 
 # Pillar 1: Lift
 print("--- Pillar 1: LIFT ---")
@@ -324,7 +324,7 @@ for name, a in aircraft.items():
     print(f"{name:<28} {wl:>7.1f} {cl_max:>7.2f} {v_stall:>5.1f}m/s")
 
 # Pillar 2: Propulsion
-print("\\\n--- Pillar 2: PROPULSION ---")
+print("\\n--- Pillar 2: PROPULSION ---")
 print(f"{'Aircraft':<28} {'Power(W)':>9} {'P/W':>10} {'Excess':>10}")
 print("-" * 59)
 for name, a in aircraft.items():
@@ -345,26 +345,26 @@ for name, a in aircraft.items():
     print(f"{name:<28} {a['power_W']:>7.0f} {pw:>8.2f} {excess:>+8.0f}W ({status})")
 
 # Pillar 3: Structure (wing loading capacity)
-print("\\\n--- Pillar 3: STRUCTURES ---")
+print("\\n--- Pillar 3: STRUCTURES ---")
 for name, a in aircraft.items():
     ar = a["span_m"]**2 / a["wing_area_m2"]
     root_moment = a["mass_kg"] * 9.81 * a["span_m"] / 8
     print(f"  {name:<28} Root moment: {root_moment:>6.0f} N·m | AR: {ar:.1f}")
 
 # Pillar 4: Stability
-print("\\\n--- Pillar 4: STABILITY ---")
+print("\\n--- Pillar 4: STABILITY ---")
 for name, a in aircraft.items():
     stable = "YES (tail)" if a["has_tail"] else "NO (no tail)"
     print(f"  {name:<28} Longitudinal stability: {stable}")
 
 # Pillar 5: Control
-print("\\\n--- Pillar 5: CONTROL ---")
+print("\\n--- Pillar 5: CONTROL ---")
 for name, a in aircraft.items():
     control = "3-axis (wing warp + rudder + canard)" if a["has_control"] else "NONE"
     print(f"  {name:<28} Control: {control}")
 
 # Summary scorecard
-print("\\\n=== SCORECARD ===")
+print("\\n=== SCORECARD ===")
 print(f"{'Aircraft':<28} {'Lift':>5} {'Power':>6} {'Struct':>7} {'Stab':>5} {'Ctrl':>5} {'Total':>6}")
 print("-" * 64)
 for name, a in aircraft.items():
@@ -457,14 +457,14 @@ bio_strategies = [
     },
 ]
 
-print("=== Biomimicry Flight Strategy Database ===\\\n")
+print("=== Biomimicry Flight Strategy Database ===\\n")
 print(f"{'Organism':<18} {'Strategy':<30} {'WL':>5} {'AR':>4} {'Eff':>5}")
 print("-" * 64)
 for b in bio_strategies:
     print(f"{b['organism']:<18} {b['strategy']:<30} {b['wing_loading']:>4.0f} {b['aspect_ratio']:>4} {b['efficiency']:>4.0f}%")
 
 # Design matching: given requirements, find best bio-inspiration
-print("\\\n=== Design Matching: Bio-Inspiration Selector ===")
+print("\\n=== Design Matching: Bio-Inspiration Selector ===")
 requirements = [
     {"name": "Cargo drone (heavy, long range)", "wl_target": 100, "speed_target": 20, "hover": False},
     {"name": "Indoor inspection drone",         "wl_target": 10,  "speed_target": 3,  "hover": True},
@@ -473,7 +473,7 @@ requirements = [
 ]
 
 for req in requirements:
-    print(f"\\\nRequirement: {req['name']}")
+    print(f"\\nRequirement: {req['name']}")
     print(f"  Target WL: {req['wl_target']} N/m² | Speed: {req['speed_target']} m/s | Hover: {req['hover']}")
 
     # Score each bio-strategy
@@ -490,7 +490,7 @@ for req in requirements:
     print(f"  Runner-up:  {scores[1][0]} ({scores[1][1]}), score={scores[1][2]:.2f}")
 
 # Leonardo's biomimicry assessment
-print("\\\n=== Leonardo's Biomimicry Scorecard ===")
+print("\\n=== Leonardo's Biomimicry Scorecard ===")
 steps = [
     ("1. Identify function",    "EXCELLENT", "Clearly defined: human flight"),
     ("2. Discover bio-models",  "EXCELLENT", "Studied dozens of bird species"),

@@ -41,7 +41,7 @@ fig.patch.set_facecolor('#1f2937')
 # 1. Communication channel properties radar chart
 ax = fig.add_subplot(2, 2, 1, polar=True)
 ax.set_facecolor('#111827')
-categories = ['Speed', 'Range', 'Persistence', 'Directionality', 'Info\\\ncontent', 'Night\\\nuse']
+categories = ['Speed', 'Range', 'Persistence', 'Directionality', 'Info\\ncontent', 'Night\\nuse']
 N = len(categories)
 angles = np.linspace(0, 2 * np.pi, N, endpoint=False).tolist()
 angles += angles[:1]
@@ -962,7 +962,7 @@ print("Bio-meteorology results (365 days):")
 print(f"  Actual rain days: {np.sum(rain_actual)}")
 for name, acc, prec, rec in zip(names, accuracies, precisions, recalls):
     print(f"  {name:20s}: accuracy={acc:.0f}%, precision={prec:.0f}%, recall={rec:.0f}%")
-print(f"\\\n  4-animal ensemble: {ensemble_acc:.0f}% accuracy")
+print(f"\\n  4-animal ensemble: {ensemble_acc:.0f}% accuracy")
 print(f"  Wisdom of crowds: combining imperfect predictors beats any single one")`,
       challenge: 'Weight the ensemble by each animal\'s historical accuracy instead of equal votes. Does weighted voting improve the prediction? This is exactly how ensemble machine learning models (like Random Forest) work.',
       successHint: 'Bio-meteorology connects animal behavior, atmospheric physics, and traditional knowledge. The principle that combining multiple noisy signals improves predictions is the foundation of modern ensemble methods in machine learning, weather forecasting, and even stock market analysis.',

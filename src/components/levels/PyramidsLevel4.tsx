@@ -70,10 +70,10 @@ class PyramidSpec:
 # Create the Great Pyramid specification
 giza = PyramidSpec(base_m=230.4, height_m=146.5, block_size_m=1.2)
 
-print("=== Pyramid Construction Planner — System Design ===\\\n")
+print("=== Pyramid Construction Planner — System Design ===\\n")
 print("PyramidSpec class created with methods:")
 print("  volume(), mass_tonnes(), n_courses()")
-print("  course_width(n), blocks_in_course(n), total_blocks()\\\n")
+print("  course_width(n), blocks_in_course(n), total_blocks()\\n")
 
 print(f"Great Pyramid of Giza:")
 print(f"  Base: {giza.base} m x {giza.base} m")
@@ -83,11 +83,11 @@ print(f"  Courses: {giza.n_courses()}")
 print(f"  Volume: {giza.volume():,.0f} m3")
 print(f"  Mass: {giza.mass_tonnes():,.0f} tonnes")
 print(f"  Estimated blocks: {giza.total_blocks():,}")
-print(f"\\\n  Actual historical estimate: ~2,300,000 blocks")
+print(f"\\n  Actual historical estimate: ~2,300,000 blocks")
 print(f"  Model accuracy: {giza.total_blocks()/2_300_000*100:.0f}%")
 
 # Quick verification: first and last courses
-print(f"\\\n  Course 0 (base): {giza.course_width(0):.1f}m wide, "
+print(f"\\n  Course 0 (base): {giza.course_width(0):.1f}m wide, "
       f"{giza.blocks_in_course(0):,} blocks")
 print(f"  Course 60 (mid):  {giza.course_width(60):.1f}m wide, "
       f"{giza.blocks_in_course(60):,} blocks")
@@ -190,7 +190,7 @@ spec = PyramidSpec(230.4, 146.5)
 calc = BlockCalculator(spec, base_rate=400, workers=20000)
 schedule = calc.schedule()
 
-print("=== Block Calculator — Course-by-Course Schedule ===\\\n")
+print("=== Block Calculator — Course-by-Course Schedule ===\\n")
 print(f"{'Course':>7} {'Height':>8} {'Width':>8} {'Blocks':>8} {'Rate/day':>9} "
       f"{'Days':>7} {'Cumul days':>11} {'Block mass':>11}")
 print("-" * 71)
@@ -203,7 +203,7 @@ for s in schedule:
               f"{s['cumul_days']:>9.0f} {s['mass_per_block_t']:>9.1f}t")
 
 total = schedule[-1]
-print(f"\\\n=== Summary ===")
+print(f"\\n=== Summary ===")
 print(f"Total courses: {len(schedule)}")
 print(f"Total blocks: {total['cumul_blocks']:,}")
 print(f"Total construction days: {total['cumul_days']:,.0f}")
@@ -216,7 +216,7 @@ for i in range(3):
     section = schedule[thirds[i]:thirds[i+1]]
     blocks = sum(s["blocks"] for s in section)
     days = sum(s["days"] for s in section)
-    print(f"\\\nSection {i+1} (courses {thirds[i]}-{thirds[i+1]-1}):")
+    print(f"\\nSection {i+1} (courses {thirds[i]}-{thirds[i+1]-1}):")
     print(f"  Blocks: {blocks:,} ({blocks/total['cumul_blocks']*100:.0f}%)")
     print(f"  Days: {days:.0f} ({days/total['cumul_days']*100:.0f}%)")`,
       challenge: 'The top 10% of the pyramid by height contains less than 1% of the blocks but takes a disproportionate amount of time. Calculate the exact percentage of total time spent on the top 10%. Is this where the capstone (pyramidion) placement ceremony happened — the dramatic final act?',
@@ -316,7 +316,7 @@ blocks_placed = 0
 yearly_summary = []
 bottleneck_counts = {"quarry": 0, "transport": 0, "placement": 0}
 
-print("=== Workforce Simulation — 20-Year Construction ===\\\n")
+print("=== Workforce Simulation — 20-Year Construction ===\\n")
 
 for year in range(1, 21):
     year_blocks = 0
@@ -354,9 +354,9 @@ for ys in yearly_summary:
           f"{ys['pct']:>8.1f}% {ys['bottleneck']:>12}")
 
 completion_year = next((ys["year"] for ys in yearly_summary if ys["pct"] >= 100), 20)
-print(f"\\\nConstruction completed in year {completion_year}")
+print(f"\\nConstruction completed in year {completion_year}")
 print(f"Total blocks placed: {blocks_placed:,.0f}")
-print(f"\\\nBottleneck frequency: {dict(bottleneck_counts)}")
+print(f"\\nBottleneck frequency: {dict(bottleneck_counts)}")
 print(f"Transport was the bottleneck {bottleneck_counts['transport']/(sum(bottleneck_counts.values()))*100:.0f}% of the time")`,
       challenge: 'Add a "Nile flood season" where 5,000 workers switch to farming for 3 months per year. But during the flood, granite can be barged from Aswan (normally impossible). Model this seasonal shift — does the flood help or hurt overall progress?',
       successHint: 'You built a discrete-event production simulator — the same tool used by Toyota for assembly line optimisation, by hospitals for patient flow management, and by Amazon for warehouse operations. The universal insight: identify the bottleneck, optimise it, and rebalance when conditions change.',
@@ -415,7 +415,7 @@ def simulate_construction(quarry_pct, transport_pct, place_pct,
     return days
 
 # Grid search over allocations
-print("=== Timeline Optimisation — Parametric Search ===\\\n")
+print("=== Timeline Optimisation — Parametric Search ===\\n")
 
 best_days = float('inf')
 best_params = None
@@ -437,7 +437,7 @@ for qp in quarry_range:
                     best_days = days
                     best_params = (qp, tp, pp)
 
-print(f"Evaluated {len(results)} valid allocations\\\n")
+print(f"Evaluated {len(results)} valid allocations\\n")
 
 # Top 10 allocations
 results.sort(key=lambda r: r[3])
@@ -449,18 +449,18 @@ for r in results[:10]:
     print(f"{r[0]*100:>6.0f}% {r[1]*100:>9.0f}% {r[2]*100:>6.0f}% "
           f"{support*100:>7.0f}% {r[3]:>5.0f} {years:>5.1f}")
 
-print(f"\\\n=== Optimal Allocation ===")
+print(f"\\n=== Optimal Allocation ===")
 q, t, p = best_params
 s = 1 - q - t - p
 print(f"Quarrying:  {q*100:.0f}% ({int(20000*q):,} workers)")
 print(f"Transport:  {t*100:.0f}% ({int(20000*t):,} workers)")
 print(f"Placement:  {p*100:.0f}% ({int(20000*p):,} workers)")
 print(f"Support:    {s*100:.0f}% ({int(20000*s):,} workers)")
-print(f"\\\nMinimum construction time: {best_days} days ({best_days/300:.1f} years)")
+print(f"\\nMinimum construction time: {best_days} days ({best_days/300:.1f} years)")
 print(f"Historical estimate: ~20 years (6,000 days)")
 
 # Sensitivity analysis
-print("\\\n=== Sensitivity: Effect of Total Workforce Size ===")
+print("\\n=== Sensitivity: Effect of Total Workforce Size ===")
 print(f"{'Workers':>10} {'Optimal days':>13} {'Years':>7} {'Speedup':>8}")
 print("-" * 40)
 baseline = simulate_construction(*best_params, total_workers=20000)
@@ -560,10 +560,10 @@ print(f"    Quarrying:  {quarry_w:,} ({quarry_pct*100:.0f}%)")
 print(f"    Transport:  {transport_w:,} ({transport_pct*100:.0f}%)")
 print(f"    Placement:  {place_w:,} ({place_pct*100:.0f}%)")
 print(f"    Support:    {support_w:,} ({(1-quarry_pct-transport_pct-place_pct)*100:.0f}%)")
-print(f"\\\n  Construction time: {days:,} days ({days/300:.1f} years)")
+print(f"\\n  Construction time: {days:,} days ({days/300:.1f} years)")
 print(f"  Total blocks: {blocks:,.0f}")
 print(f"  Average throughput: {target/days:.0f} blocks/day")
-print(f"\\\n  Milestones:")
+print(f"\\n  Milestones:")
 for d, b, h in milestones:
     print(f"    Day {d:>5,}: {b:>10,.0f} blocks ({h*100:.0f}% complete)")
 

@@ -221,11 +221,11 @@ ax2.set_title('Dispersion: n Varies with Wavelength', color='white', fontsize=12
 ax2.tick_params(colors='gray')
 
 # Annotate
-ax2.annotate(f'Violet: n = {n_glass[0]:.4f}\\\n(bends most)',
+ax2.annotate(f'Violet: n = {n_glass[0]:.4f}\\n(bends most)',
              xy=(380, n_glass[0]), xytext=(430, n_glass[0] + 0.003),
              color='#8b5cf6', fontsize=9,
              arrowprops=dict(arrowstyle='->', color='#8b5cf6'))
-ax2.annotate(f'Red: n = {n_glass[-1]:.4f}\\\n(bends least)',
+ax2.annotate(f'Red: n = {n_glass[-1]:.4f}\\n(bends least)',
              xy=(700, n_glass[-1]), xytext=(580, n_glass[-1] - 0.005),
              color='#ef4444', fontsize=9,
              arrowprops=dict(arrowstyle='->', color='#ef4444'))
@@ -485,7 +485,7 @@ ax3.plot([10, 10], [-1.5, 1.5], color='#94a3b8', linewidth=4, linestyle='--',
 
 # Gain medium
 ax3.fill_between([1, 9], -1, 1, color='#7c3aed', alpha=0.2)
-ax3.text(5, 0, 'Gain medium\\\n(excited atoms)', color='#a855f7',
+ax3.text(5, 0, 'Gain medium\\n(excited atoms)', color='#a855f7',
          ha='center', fontsize=9, fontweight='bold')
 
 # Photons bouncing
@@ -496,7 +496,7 @@ for y_off in [-0.3, 0, 0.3]:
 # Output beam
 ax3.annotate('', xy=(13, 0), xytext=(10.2, 0),
              arrowprops=dict(arrowstyle='->', color='#ef4444', lw=3))
-ax3.text(11.5, 0.5, 'LASER\\\nBEAM', color='#ef4444', fontsize=10,
+ax3.text(11.5, 0.5, 'LASER\\nBEAM', color='#ef4444', fontsize=10,
          ha='center', fontweight='bold')
 
 ax3.set_title('Laser Cavity', color='white', fontsize=11)
@@ -585,7 +585,7 @@ combined[sq:size-sq, sq:size-sq] = gray_val
 combined[sq:size-sq, size+10+sq:size*2+10-sq] = gray_val
 
 ax1.imshow(combined, cmap='gray', vmin=0, vmax=1)
-ax1.set_title('Brightness Contrast\\\n(Both inner squares are identical gray)', color='white', fontsize=10)
+ax1.set_title('Brightness Contrast\\n(Both inner squares are identical gray)', color='white', fontsize=10)
 ax1.tick_params(colors='gray', labelbottom=False, labelleft=False)
 
 # --- 2. Hermann grid illusion ---
@@ -600,7 +600,7 @@ for row in range(0, 200, square_size + gap):
         grid[row:row+square_size, col:col+square_size] = 1
 
 ax2.imshow(grid, cmap='gray', vmin=0, vmax=1)
-ax2.set_title('Hermann Grid\\\n(See gray dots at intersections?\\\nThey are not there!)',
+ax2.set_title('Hermann Grid\\n(See gray dots at intersections?\\nThey are not there!)',
               color='white', fontsize=10)
 ax2.tick_params(colors='gray', labelbottom=False, labelleft=False)
 
@@ -662,7 +662,7 @@ v2 = board_shadowed[r2, c2]
 
 ax4.plot(c1, r1, 's', color='#ef4444', markersize=20, markerfacecolor='none', markeredgewidth=2)
 ax4.plot(c2, r2, 's', color='#22c55e', markersize=20, markerfacecolor='none', markeredgewidth=2)
-ax4.set_title(f'Shadow Illusion\\\nRed={v1:.2f}, Green={v2:.2f}\\\n(close values, look different!)',
+ax4.set_title(f'Shadow Illusion\\nRed={v1:.2f}, Green={v2:.2f}\\n(close values, look different!)',
               color='white', fontsize=10)
 ax4.tick_params(colors='gray', labelbottom=False, labelleft=False)
 
@@ -727,7 +727,7 @@ for r in range(8):
                 bayer[r, c] = [0, 0.7, 0]  # green
 
 ax1.imshow(bayer, interpolation='nearest')
-ax1.set_title('Camera Bayer Filter\\\n(50% green, 25% red, 25% blue)', color='white', fontsize=10)
+ax1.set_title('Camera Bayer Filter\\n(50% green, 25% red, 25% blue)', color='white', fontsize=10)
 ax1.tick_params(colors='gray', labelbottom=False, labelleft=False)
 ax1.text(3.5, -0.8, 'Each colored cell = one photodiode on the sensor',
          color='gray', ha='center', fontsize=8)
@@ -748,7 +748,7 @@ for row in range(6):
         pixel_grid[row, col+2] = [0, 0, gold_b/255]      # B sub-pixel
 
 ax2.imshow(pixel_grid, interpolation='nearest', aspect='auto')
-ax2.set_title(f'OLED Sub-pixels Rendering Gold\\\nRGB({gold_r}, {gold_g}, {gold_b})',
+ax2.set_title(f'OLED Sub-pixels Rendering Gold\\nRGB({gold_r}, {gold_g}, {gold_b})',
               color='#f59e0b', fontsize=10)
 ax2.tick_params(colors='gray', labelbottom=False, labelleft=False)
 

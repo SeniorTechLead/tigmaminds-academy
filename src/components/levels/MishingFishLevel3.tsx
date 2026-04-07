@@ -846,7 +846,7 @@ ax.tick_params(colors='gray')
 # Plot 6: Summary comparison
 ax = axes[1, 2]
 ax.set_facecolor('#111827')
-categories = ['Max Yield\\\nDensity', 'Max Profit\\\nDensity']
+categories = ['Max Yield\\nDensity', 'Max Profit\\nDensity']
 vals = [densities[best_yield_idx], densities[best_profit_idx]]
 bars = ax.bar(categories, vals, color=['#22c55e', '#a855f7'], edgecolor='none', width=0.5)
 for bar, v in zip(bars, vals):
@@ -1034,7 +1034,7 @@ x_pos = range(len(scenarios))
 bars = ax.bar(x_pos, scenario_rates, color='#3b82f6', edgecolor='none', width=0.6)
 for bar, rate, breadth in zip(bars, scenario_rates, scenario_diets):
     ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.5,
-            f'{rate:.1f}\\\n({breadth} types)', ha='center', color='white', fontsize=9)
+            f'{rate:.1f}\\n({breadth} types)', ha='center', color='white', fontsize=9)
 ax.set_xticks(x_pos)
 ax.set_xticklabels(scenario_names, color='white', fontsize=8, rotation=15)
 ax.set_ylabel('Intake rate', color='white')

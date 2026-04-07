@@ -60,8 +60,8 @@ ax1.tick_params(colors='gray')
 # 2. Distribution across the tree of life
 ax2.set_facecolor('#111827')
 
-groups = ['Deep-sea\\\nfish', 'Jellyfish/\\\ncorals', 'Squid/\\\noctopus', 'Fireflies/\\\nbeetles',
-          'Marine\\\nbacteria', 'Dino-\\\nflagellates', 'Fungi', 'Worms']
+groups = ['Deep-sea\\nfish', 'Jellyfish/\\ncorals', 'Squid/\\noctopus', 'Fireflies/\\nbeetles',
+          'Marine\\nbacteria', 'Dino-\\nflagellates', 'Fungi', 'Worms']
 n_species = [1500, 200, 70, 2000, 30, 68, 80, 100]
 n_independent = [5, 3, 2, 1, 1, 1, 4, 3]  # independent evolutionary origins
 colors_grp = ['#3b82f6', '#06b6d4', '#a855f7', '#84cc16', '#f59e0b', '#22c55e', '#ec4899', '#ef4444']
@@ -178,7 +178,7 @@ ax2.set_title('Firefly Flash Pattern', color='white', fontsize=13)
 ax2.tick_params(colors='gray')
 
 # Annotate
-ax2.text(2, 0.85, 'Species-specific\\\nflash pattern', color='#f59e0b', fontsize=9,
+ax2.text(2, 0.85, 'Species-specific\\nflash pattern', color='#f59e0b', fontsize=9,
          bbox=dict(boxstyle='round', facecolor='#f59e0b', alpha=0.2))
 
 plt.tight_layout()
@@ -229,7 +229,7 @@ fig.patch.set_facecolor('#1f2937')
 
 # 1. Quantum yield / efficiency comparison
 ax1.set_facecolor('#111827')
-sources = ['Candle', 'Incandescent', 'Fluorescent', 'LED\\\n(current)', 'LED\\\n(best)', 'Bacterial\\\nbiolum.', 'Jellyfish', 'Firefly']
+sources = ['Candle', 'Incandescent', 'Fluorescent', 'LED\\n(current)', 'LED\\n(best)', 'Bacterial\\nbiolum.', 'Jellyfish', 'Firefly']
 efficiency = [0.02, 2, 25, 40, 55, 10, 40, 88]
 colors_eff = ['#ef4444', '#ef4444', '#f59e0b', '#22c55e', '#22c55e', '#3b82f6', '#06b6d4', '#84cc16']
 
@@ -247,11 +247,11 @@ ax1.set_xlim(0, 100)
 ax2.set_facecolor('#111827')
 
 # Firefly energy budget
-labels = ['Chemical\\\nenergy\\\n(100%)', 'Light\\\n(88%)', 'Heat\\\n(12%)']
+labels = ['Chemical\\nenergy\\n(100%)', 'Light\\n(88%)', 'Heat\\n(12%)']
 sizes = [100, 88, 12]
 
 # Incandescent bulb
-labels_bulb = ['Electrical\\\nenergy\\\n(100%)', 'Light\\\n(2%)', 'Heat\\\n(98%)']
+labels_bulb = ['Electrical\\nenergy\\n(100%)', 'Light\\n(2%)', 'Heat\\n(98%)']
 sizes_bulb = [100, 2, 98]
 
 # Draw Sankey-style diagram (simplified)
@@ -327,16 +327,16 @@ fig.patch.set_facecolor('#1f2937')
 ax1.set_facecolor('#0c1524')
 
 habitats = {
-    'Surface ocean\\\n(0-200m)': [
+    'Surface ocean\\n(0-200m)': [
         ('Dinoflagellates', 470, '#06b6d4', 50),
         ('Comb jellies', 490, '#3b82f6', 30),
     ],
-    'Twilight zone\\\n(200-1000m)': [
+    'Twilight zone\\n(200-1000m)': [
         ('Lanternfish', 475, '#3b82f6', 80),
         ('Hatchetfish', 480, '#3b82f6', 60),
         ('Squid', 490, '#06b6d4', 70),
     ],
-    'Deep sea\\\n(>1000m)': [
+    'Deep sea\\n(>1000m)': [
         ('Anglerfish', 470, '#3b82f6', 40),
         ('Dragonfish', 700, '#ef4444', 20),
         ('Giant squid', 480, '#3b82f6', 50),
@@ -370,9 +370,9 @@ ax1.tick_params(colors='gray')
 # 2. Functions of bioluminescence
 ax2.set_facecolor('#111827')
 
-functions = ['Mate\\\nattraction', 'Prey\\\nluring', 'Counter-\\\nillumination', 'Predator\\\nstartle', 'Illumination', 'Unknown/\\\nbyproduct']
+functions = ['Mate\\nattraction', 'Prey\\nluring', 'Counter-\\nillumination', 'Predator\\nstartle', 'Illumination', 'Unknown/\\nbyproduct']
 n_species = [2500, 500, 300, 400, 100, 200]
-examples = ['Fireflies', 'Anglerfish', 'Squid', 'Dinoflag.', 'Flashlight\\\nfish', 'Fungi']
+examples = ['Fireflies', 'Anglerfish', 'Squid', 'Dinoflag.', 'Flashlight\\nfish', 'Fungi']
 colors_func = ['#ec4899', '#ef4444', '#3b82f6', '#f59e0b', '#84cc16', '#a855f7']
 
 bars = ax2.bar(functions, n_species, color=colors_func, alpha=0.8, edgecolor='white', linewidth=0.5)
@@ -492,7 +492,7 @@ for r, a in [(4, 0.05), (2, 0.15), (1, 0.3)]:
     circle = plt.Circle((75, 33), r, facecolor='#22c55e', alpha=a, edgecolor='none')
     ax2.add_patch(circle)
 ax2.scatter(75, 33, s=15, c='#22c55e', zorder=5)
-ax2.text(78, 33, 'Anglerfish\\\nlure', color='#22c55e', fontsize=7)
+ax2.text(78, 33, 'Anglerfish\\nlure', color='#22c55e', fontsize=7)
 
 ax2.set_xlim(0, 100)
 ax2.set_ylim(0, 100)

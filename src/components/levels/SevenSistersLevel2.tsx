@@ -364,7 +364,7 @@ risk_pop = village_pop[village_at_risk].sum()
 safe_count = np.sum(~village_at_risk)
 risk_count = np.sum(village_at_risk)
 
-categories = ['Villages\\\nat risk', 'Villages\\\nsafe', 'Population\\\nat risk', 'Population\\\nsafe']
+categories = ['Villages\\nat risk', 'Villages\\nsafe', 'Population\\nat risk', 'Population\\nsafe']
 values = [risk_count, safe_count, risk_pop/1000, safe_pop/1000]
 colors_bar = ['#ef4444', '#22c55e', '#ef4444', '#22c55e']
 
@@ -662,7 +662,7 @@ for i, name in enumerate(names):
     rect = plt.Rectangle((px - size/2, py - size/2), size, size,
                           facecolor=colors_state[i], alpha=0.7, edgecolor='white')
     ax.add_patch(rect)
-    ax.text(px, py, f'{short_names[i]}\\\n{states[name]["pop"]/1e6:.1f}M',
+    ax.text(px, py, f'{short_names[i]}\\n{states[name]["pop"]/1e6:.1f}M',
            ha='center', va='center', color='white', fontsize=7, fontweight='bold')
 
 ax.set_xlim(-0.5, 6)
@@ -765,7 +765,7 @@ locations_alt = {'Brahmaputra plain': 50, 'Shillong': 1496, 'Tawang': 3048, 'Sel
 for name, alt in locations_alt.items():
     t = base_temp - lapse_rate * alt / 1000
     ax.plot(alt, t, 'o', color='white', markersize=6)
-    ax.annotate(f'{name}\\\n({alt}m, {t:.0f}°C)', xy=(alt, t), xytext=(alt+200, t+2),
+    ax.annotate(f'{name}\\n({alt}m, {t:.0f}°C)', xy=(alt, t), xytext=(alt+200, t+2),
                color='white', fontsize=7, arrowprops=dict(arrowstyle='->', color='gray', lw=0.5))
 
 ax.set_xlabel('Altitude (m)', color='white')
@@ -805,8 +805,8 @@ ax.tick_params(axis='y', colors='#8B7355')
 ax_rain.tick_params(axis='y', colors='#3b82f6')
 ax.tick_params(axis='x', colors='gray')
 
-ax.text(105, 4500, 'Mawsynram\\\n(windward)', color='#3b82f6', fontsize=9, ha='center')
-ax.text(170, 2000, 'Rain shadow\\\n(leeward)', color='#ef4444', fontsize=9, ha='center')
+ax.text(105, 4500, 'Mawsynram\\n(windward)', color='#3b82f6', fontsize=9, ha='center')
+ax.text(170, 2000, 'Rain shadow\\n(leeward)', color='#ef4444', fontsize=9, ha='center')
 
 # 3. Monthly climate comparison
 ax = axes[1, 0]

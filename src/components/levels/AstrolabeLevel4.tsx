@@ -86,7 +86,7 @@ lst = 22 + (172 * 24 / 365.25) + (51.7 / 15)  # approximate LST
 lst = lst % 24
 
 print(f"Local Sidereal Time: {lst:.2f}h")
-print(f"\\\nVisible stars from Isfahan (32°N):")
+print(f"\\nVisible stars from Isfahan (32°N):")
 print(f"{'Star':12s} {'Alt':>6s} {'Az':>6s} {'Mag':>5s}")
 print("-" * 32)
 for name, alt, az, mag in catalog.visible_stars(32, lst):
@@ -381,7 +381,7 @@ print(f"  Rising solution: {int(t_rise)}:{int((t_rise%1)*60):02d}")
 print(f"  Setting solution: {int(t_set)}:{int((t_set%1)*60):02d}")
 
 # 2. Sunrise/sunset
-print("\\\n=== Sunrise & Sunset ===")
+print("\\n=== Sunrise & Sunset ===")
 for day, label in [(80, 'Mar 21'), (172, 'Jun 21'),
                    (266, 'Sep 23'), (356, 'Dec 21')]:
     sr, ss = astrolabe.sunrise_sunset(day)
@@ -391,7 +391,7 @@ for day, label in [(80, 'Mar 21'), (172, 'Jun 21'),
           f"  [{daylen:.1f}h daylight]")
 
 # 3. Visible stars right now
-print("\\\n=== Sky at LST = 20h ===")
+print("\\n=== Sky at LST = 20h ===")
 for star in astrolabe.stars:
     alt, az = astrolabe.star_alt_az(star, 20)
     if alt > 0:
@@ -518,7 +518,7 @@ visible = sum(1 for n, ra, dec in stars
               if np.sqrt(rotate(*stereo_xy(dec, ra*15), rot)[0]**2 +
                          (rotate(*stereo_xy(dec, ra*15), rot)[1] + z_r)**2)
               < horizon_r)
-print(f"\\\nVisible stars: {visible} of {len(stars)}")
+print(f"\\nVisible stars: {visible} of {len(stars)}")
 print(f"Polaris altitude: {lat}° (matches Isfahan's latitude)")`,
       challenge: 'Add an interactive feature: change the hour from 18 to 6 (evening to morning) and watch the stars sweep across the sky. Count how many stars are visible at each hour.',
       successHint: 'You have built a complete digital astrolabe. Two projected layers, one rotating over the other, with time-solving and sky rendering. A thousand years of Islamic astronomical heritage, encoded in 100 lines of Python.',
@@ -595,17 +595,17 @@ for label, data in known.items():
     print(f"  {label:20s} {dl:6.1f}h  {data['daylen']:5.1f}h {err_dl:+.1f}h"
           f"  {na:6.1f}°  {data['noon_alt']:5.1f}° {err_na:+.1f}°")
 
-print(f"\\\nMean absolute error:")
+print(f"\\nMean absolute error:")
 print(f"  Day length: {np.mean(errors_dl):.2f} hours ({np.mean(errors_dl)*60:.0f} minutes)")
 print(f"  Noon altitude: {np.mean(errors_na):.2f} degrees")
 
 # Polaris test
 polaris_alt = 90 - abs(32.65 - 89.26)
-print(f"\\\nPolaris altitude: {polaris_alt:.1f}° (expected: ~32.7°)")
+print(f"\\nPolaris altitude: {polaris_alt:.1f}° (expected: ~32.7°)")
 print(f"  Error: {abs(polaris_alt - 32.65):.2f}°")
 
 # Year-round day length
-print("\\\n=== Day Length Through the Year ===")
+print("\\n=== Day Length Through the Year ===")
 for month, d in zip(['Jan','Feb','Mar','Apr','May','Jun',
                      'Jul','Aug','Sep','Oct','Nov','Dec'],
                     [15,46,75,106,136,167,197,228,258,289,319,350]):
@@ -613,7 +613,7 @@ for month, d in zip(['Jan','Feb','Mar','Apr','May','Jun',
     bar = '█' * int(dl * 2)
     print(f"  {month}: {dl:5.1f}h {bar}")
 
-print("\\\n✔ Validation complete. Errors are within expected range")
+print("\\n✔ Validation complete. Errors are within expected range")
 print("  for a simplified model (no refraction, equation of time,")
 print("  or precession corrections).")`,
       challenge: 'Add refraction correction to the sunrise/sunset calculation (hint: sunrise occurs when the Sun’s center is at altitude -0.83° including refraction and solar semi-diameter). How much does this improve accuracy?',

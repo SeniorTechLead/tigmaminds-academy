@@ -377,7 +377,7 @@ for D_cm in range(300, 750, 25):
     print(f"{D:>7.1f} m {pipe_cost/1e6:>8.1f}M {annual_cost/1e3:>9.0f}k "
           f"{total_20yr/1e6:>9.1f}M{optimal}")
 
-print(f"\\n* Pipe cost is a simplified estimate (proportional to D^2 * L)")
+print(f"\n* Pipe cost is a simplified estimate (proportional to D^2 * L)")
 print(f"Optimal diameter: {best_D:.1f} m (minimizes 20-year total cost)")`,
       challenge: 'What if the pipe surface becomes rougher over 30 years (friction factor doubles from corrosion)? Recalculate the optimal diameter accounting for degradation. Should engineers oversize the pipe initially to account for future roughness?',
       successHint: 'Pipe friction analysis is essential for every fluid system — from the water supply to your house to the cooling systems of nuclear reactors. The Darcy-Weisbach equation and the economic optimization you performed are exactly what hydraulic engineers do when designing pipelines.',

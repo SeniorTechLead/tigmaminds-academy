@@ -276,11 +276,11 @@ circle = plt.Circle((rock_x, rock_y), rock_r, color='#854d0e', zorder=5)
 ax1.add_patch(circle)
 
 # Mark zones
-ax1.annotate('Eddy zone\\\n(fish rest here)', xy=(1.5, 0), xytext=(3, 1.2),
+ax1.annotate('Eddy zone\\n(fish rest here)', xy=(1.5, 0), xytext=(3, 1.2),
             color='#22c55e', fontsize=10, arrowprops=dict(arrowstyle='->', color='#22c55e'))
-ax1.annotate('Boundary layer\\\n(slow flow near bed)', xy=(-2, -1.8), xytext=(-1, -1.5),
+ax1.annotate('Boundary layer\\n(slow flow near bed)', xy=(-2, -1.8), xytext=(-1, -1.5),
             color='#f59e0b', fontsize=9)
-ax1.annotate('Fast current\\\n(carries food)', xy=(0, 1.5), xytext=(2, 1.8),
+ax1.annotate('Fast current\\n(carries food)', xy=(0, 1.5), xytext=(2, 1.8),
             color='#ef4444', fontsize=9)
 
 ax1.set_title('Flow Around a Rock: Where Fish Hide', color='white', fontsize=12)
@@ -401,7 +401,7 @@ ax2.plot(h_range, sustainable_yield, color='#22c55e', linewidth=2)
 ax2.axvline(msy_h, color='#f59e0b', linestyle='--', linewidth=1)
 ax2.axhline(msy, color='#f59e0b', linestyle='--', linewidth=1)
 ax2.plot(msy_h, msy, 'o', color='#f59e0b', markersize=10)
-ax2.annotate(f'MSY = {msy:.0f} fish/year\\\nat h = {msy_h:.0%}',
+ax2.annotate(f'MSY = {msy:.0f} fish/year\\nat h = {msy_h:.0%}',
             xy=(msy_h, msy), xytext=(0.3, msy*0.7),
             color='#f59e0b', fontsize=10, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
@@ -599,7 +599,7 @@ ax1.imshow(sonar_image, aspect='auto', cmap='hot', vmin=0, vmax=1,
 
 # Label fish schools
 for cx, cd, n, spread in fish_schools:
-    ax1.annotate(f'School\\\n({n} fish)', xy=(cx, cd), xytext=(cx+15, cd-5),
+    ax1.annotate(f'School\\n({n} fish)', xy=(cx, cd), xytext=(cx+15, cd-5),
                 color='#22c55e', fontsize=8, arrowprops=dict(arrowstyle='->', color='#22c55e', lw=0.5))
 
 ax1.set_xlabel('Boat position (time →)', color='white')
@@ -620,7 +620,7 @@ ax2.set_title('Echo Strength vs Fish Size', color='white', fontsize=12)
 ax2.tick_params(colors='gray')
 
 # Mark common species
-species = [('Small fish\\\n(puntius)', 10, '#22c55e'), ('Rohu', 40, '#3b82f6'),
+species = [('Small fish\\n(puntius)', 10, '#22c55e'), ('Rohu', 40, '#3b82f6'),
           ('Catfish', 60, '#f59e0b'), ('Mahseer', 80, '#ef4444')]
 for name, length, color in species:
     ts = 20 * np.log10(length / 100)

@@ -357,7 +357,7 @@ for r in results[::3]:  # show every 3rd result
           f"{r['eta']:>5.0%} {r['quality']:>8}/10 {r['total_cost']:>6.2f} "
           f"{r['score']:>6.2f}{marker}")
 
-print(f"\\nOptimal current density: {best_j:.1f} A/dm^2")
+print(f"\nOptimal current density: {best_j:.1f} A/dm^2")
 
 # Production planning
 print()

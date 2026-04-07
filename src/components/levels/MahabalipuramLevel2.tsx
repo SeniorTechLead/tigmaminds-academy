@@ -68,12 +68,12 @@ operations = [
 
 for name, op in operations:
     result = op(seed)
-    print(f"\\\n{name}:")
+    print(f"\\n{name}:")
     for i, (x, y) in enumerate(result):
         print(f"  V{i}: ({x:.3f}, {y:.3f})")
 
 # Generate a triangular tessellation using symmetry
-print("\\\n=== Generating Triangular Tessellation ===")
+print("\\n=== Generating Triangular Tessellation ===")
 print()
 
 all_triangles = []

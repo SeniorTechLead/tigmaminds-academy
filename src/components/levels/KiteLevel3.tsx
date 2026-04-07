@@ -429,8 +429,8 @@ for yl in y_levels:
 x_rot = x_k * np.cos(np.radians(10)) - y_k * np.sin(np.radians(10))
 y_rot = x_k * np.sin(np.radians(10)) + y_k * np.cos(np.radians(10))
 ax.fill(x_rot*100, y_rot*100, color='#f59e0b', alpha=0.8, edgecolor='white', linewidth=2)
-ax.annotate('Low pressure\\\n(fast flow)', xy=(20, 8), color='#3b82f6', fontsize=9, fontweight='bold')
-ax.annotate('High pressure\\\n(slow flow)', xy=(15, -5), color='#ef4444', fontsize=9, fontweight='bold')
+ax.annotate('Low pressure\\n(fast flow)', xy=(20, 8), color='#3b82f6', fontsize=9, fontweight='bold')
+ax.annotate('High pressure\\n(slow flow)', xy=(15, -5), color='#ef4444', fontsize=9, fontweight='bold')
 ax.set_xlabel('Position (cm)', color='white')
 ax.set_ylabel('Height (cm)', color='white')
 ax.set_title('Airflow around cambered kite at 10°', color='white', fontsize=11)
@@ -542,7 +542,7 @@ ax.legend(fontsize=9)
 h_fly = h[L > W]
 if len(h_fly) > 0:
     ax.axhspan(0, h_fly[0], alpha=0.1, color='#ef4444')
-    ax.text(W*1.5, h_fly[0]/2, 'Cannot fly\\\n(lift < weight)', color='#ef4444', fontsize=8)
+    ax.text(W*1.5, h_fly[0]/2, 'Cannot fly\\n(lift < weight)', color='#ef4444', fontsize=8)
 
 # Plot 3: Gusty wind time series
 ax = axes[1, 0]

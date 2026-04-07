@@ -66,7 +66,7 @@ for (name, props), color in zip(objects.items(), colors_obj):
     d = props['density']
     frac = min(d / water_density, 1.0) * 100
     ax1.plot(d, frac, 'o', color=color, markersize=10)
-    ax1.annotate(f'{name}\\\n({d} kg/m3)', xy=(d, frac),
+    ax1.annotate(f'{name}\\n({d} kg/m3)', xy=(d, frac),
                  xytext=(10, -10), textcoords='offset points',
                  color=color, fontsize=8)
 
@@ -178,7 +178,7 @@ root_d = 120  # cm
 ax1.axvline(root_d, color='#f59e0b', linestyle=':', linewidth=1)
 diff_at_root = (root_d/100)**2 / (2 * D_oxygen) / 60
 conv_at_root = (root_d/100) / flow_velocity / 60
-ax1.annotate(f'Root distance\\\nDiffusion: {diff_at_root:.0f} min\\\nConvection: {conv_at_root:.0f} min',
+ax1.annotate(f'Root distance\\nDiffusion: {diff_at_root:.0f} min\\nConvection: {conv_at_root:.0f} min',
              xy=(root_d, conv_at_root), xytext=(root_d - 40, conv_at_root * 100),
              color='#f59e0b', fontsize=9, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
@@ -277,7 +277,7 @@ for name, r_mm, mass_g, color in objects:
     max_m = gamma * 2 * np.pi * (r_mm/1000) / g * 1000
     can_float = "floats" if mass_g < max_m else "sinks"
     ax1.plot(r_mm, mass_g, 'o', color=color, markersize=8)
-    ax1.annotate(f'{name}\\\n({can_float})', xy=(r_mm, mass_g),
+    ax1.annotate(f'{name}\\n({can_float})', xy=(r_mm, mass_g),
                  xytext=(5, 5), textcoords='offset points', color=color, fontsize=8)
 
 ax1.set_xlabel('Object radius (mm)', color='white')
@@ -425,7 +425,7 @@ ax3.tick_params(colors='gray')
 
 # Applications
 ax4.set_facecolor('#111827')
-applications = ['Lotus\\\nleaf', 'Self-clean\\\npaint', 'Anti-fog\\\nglass', 'Stain-free\\\nfabric', 'Solar\\\npanel']
+applications = ['Lotus\\nleaf', 'Self-clean\\npaint', 'Anti-fog\\nglass', 'Stain-free\\nfabric', 'Solar\\npanel']
 contact_angles = [160, 155, 150, 145, 140]
 effectiveness = [98, 90, 85, 80, 88]
 colors_app = ['#22c55e', '#3b82f6', '#a855f7', '#f59e0b', '#ef4444']
@@ -436,7 +436,7 @@ ax4.set_title('Lotus Effect Applications', color='white', fontsize=12)
 ax4.tick_params(colors='gray')
 for bar, ca, eff in zip(bars, contact_angles, effectiveness):
     ax4.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1,
-             f'{eff}%\\\n({ca}deg)', ha='center', color='white', fontsize=9)
+             f'{eff}%\\n({ca}deg)', ha='center', color='white', fontsize=9)
 
 plt.tight_layout()
 plt.show()
@@ -487,7 +487,7 @@ import matplotlib.pyplot as plt
 plants = ['Lotus', 'Water lily', 'Duckweed', 'Seagrass', 'Water hyacinth', 'Mangrove']
 
 # Adaptation scores (0-10)
-categories = ['Buoyancy', 'Gas\\\nexchange', 'Light\\\ncapture', 'Nutrient\\\nuptake', 'Mechanical\\\nflexibility', 'Reproduction']
+categories = ['Buoyancy', 'Gas\\nexchange', 'Light\\ncapture', 'Nutrient\\nuptake', 'Mechanical\\nflexibility', 'Reproduction']
 N = len(categories)
 
 data = {
@@ -544,7 +544,7 @@ ax2.plot(light_turbid, -depth, color='#ef4444', linewidth=2, label='Turbid river
 ax2.axhline(-1, color='#22c55e', linestyle=':', linewidth=1)
 ax2.text(50, -0.7, 'Lotus leaf floating zone', color='#22c55e', fontsize=9)
 ax2.axvline(1, color='gray', linestyle=':', linewidth=1)
-ax2.text(2, -18, 'Min for\\\nphotosynthesis', color='gray', fontsize=8)
+ax2.text(2, -18, 'Min for\\nphotosynthesis', color='gray', fontsize=8)
 
 ax2.set_xlabel('Light intensity (% of surface)', color='white')
 ax2.set_ylabel('Depth (m)', color='white')
@@ -650,7 +650,7 @@ annual_manual = base_daily_kwh * np.sum(eff_no_coat / 100)
 annual_lotus = base_daily_kwh * np.sum(eff_lotus / 100)
 annual_max = base_daily_kwh * 365
 
-labels = ['No cleaning', 'Monthly\\\ncleaning', 'Lotus\\\ncoating', 'Theoretical\\\nmax']
+labels = ['No cleaning', 'Monthly\\ncleaning', 'Lotus\\ncoating', 'Theoretical\\nmax']
 values = [annual_no_clean, annual_manual, annual_lotus, annual_max]
 colors_bar = ['#ef4444', '#f59e0b', '#22c55e', '#6b7280']
 bars = ax2.bar(labels, values, color=colors_bar, width=0.6)
@@ -712,9 +712,9 @@ print(f"Annual energy per panel:")
 print(f"  No cleaning: {annual_no_clean:.0f} kWh ({annual_no_clean/annual_max*100:.0f}% of max)")
 print(f"  Monthly cleaning: {annual_manual:.0f} kWh ({annual_manual/annual_max*100:.0f}%)")
 print(f"  Lotus coating: {annual_lotus:.0f} kWh ({annual_lotus/annual_max*100:.0f}%)")
-print(f"\\\nLotus coating payback period: {payback:.1f} years")
+print(f"\\nLotus coating payback period: {payback:.1f} years")
 print(f"20-year savings per panel: {cumulative_savings[-1]:.0f}")
-print(f"\\\nFor a 100,000-panel desert farm:")
+print(f"\\nFor a 100,000-panel desert farm:")
 print(f"  20-year savings: {100000 * cumulative_savings[-1]:,.0f}")`,
       challenge: 'Add a "sandstorm" event that drops efficiency by 30% in a single day. How does the lotus coating handle sandstorms vs. regular dust? Does it still self-clean after a major dust event, or does it need manual intervention?',
       successHint: 'From Archimedes\' principle to aerenchyma to surface tension to the lotus effect to aquatic adaptations to biomimicry — you\'ve traced a complete scientific arc from fundamental physics to real-world engineering. Level 2 goes deeper into fluid mechanics and the mathematics of surfaces.',

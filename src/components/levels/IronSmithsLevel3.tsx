@@ -300,7 +300,7 @@ ax2.fill_between(grain_sizes, sigma_y, alpha=0.15, color='#a78bfa')
 for gs, label in [(5, 'Cold-worked'), (20, 'Normalized'), (50, 'Annealed'), (80, 'Cast')]:
     sy = sigma_0 + k_hp / np.sqrt(gs)
     ax2.plot(gs, sy, 'o', color='white', markersize=8)
-    ax2.annotate(f'{label}\\\n({sy:.0f} MPa)', xy=(gs, sy),
+    ax2.annotate(f'{label}\\n({sy:.0f} MPa)', xy=(gs, sy),
                  xytext=(gs+5, sy+20), color='white', fontsize=8,
                  arrowprops=dict(arrowstyle='->', color='white', lw=0.5))
 
@@ -399,7 +399,7 @@ ax2.fill_between(soak_times / 60, strength, alpha=0.15, color='#a78bfa')
 # Mark optimal window
 optimal_end = soak_times[np.argmin(np.abs(strength - (strength[0] * 0.9)))] / 60
 ax2.axvspan(0, optimal_end, alpha=0.1, color='#34d399')
-ax2.text(optimal_end / 2, strength.min() * 1.01, 'Optimal\\nwindow',
+ax2.text(optimal_end / 2, strength.min() * 1.01, 'Optimal\nwindow',
          color='#34d399', fontsize=10, ha='center')
 
 ax2.set_xlabel('Time at 900°C (minutes)', color='lightgray', fontsize=12)

@@ -105,7 +105,7 @@ ax.fill_between(light, rate, respiration, where=rate > respiration, alpha=0.15, 
 # Compensation point (where photo = respiration)
 comp_light = km * respiration / (vmax - respiration)
 ax.axvline(comp_light, color='#f59e0b', linestyle=':', linewidth=1)
-ax.annotate(f'Compensation point\\\n({comp_light:.0f} μmol)', xy=(comp_light, respiration),
+ax.annotate(f'Compensation point\\n({comp_light:.0f} μmol)', xy=(comp_light, respiration),
             xytext=(comp_light + 100, respiration + 5), color='#f59e0b', fontsize=9,
             arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
@@ -290,7 +290,7 @@ These adaptations didn't happen overnight — they evolved over millions of year
 import matplotlib.pyplot as plt
 
 # Adaptation scores (0-10) for each plant
-categories = ['Water\\\ntolerance', 'Height', 'Growth\\\nspeed', 'Insect\\\ndefense', 'Light\\\nneeds', 'Root\\\ndepth']
+categories = ['Water\\ntolerance', 'Height', 'Growth\\nspeed', 'Insect\\ndefense', 'Light\\nneeds', 'Root\\ndepth']
 N = len(categories)
 
 plants = {

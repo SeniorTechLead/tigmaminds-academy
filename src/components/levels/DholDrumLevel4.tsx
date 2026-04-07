@@ -184,10 +184,10 @@ axes[1,0].set_ylabel('Beat strength (envelope CV)', color='white')
 axes[1,0].set_title('Uniformity detection from beating', color='white', fontsize=11)
 
 axes[1,1].axis('off')
-axes[1,1].text(0.05, 0.95, "STAGE 2 COMPLETE: Mode Identification\\n" + "=" * 40 + "\\n\\n"
-    "Mode splitting detected from spectrum\\n"
-    "Beating strength correlates with non-uniformity\\n"
-    "Uniformity < 70% produces audible warbling\\n"
+axes[1,1].text(0.05, 0.95, "STAGE 2 COMPLETE: Mode Identification\n" + "=" * 40 + "\n\n"
+    "Mode splitting detected from spectrum\n"
+    "Beating strength correlates with non-uniformity\n"
+    "Uniformity < 70% produces audible warbling\n"
     "Recommendation: retune if beat strength > 0.15",
     transform=axes[1,1].transAxes, color='#22c55e', fontsize=9, va='top', fontfamily='monospace',
     bbox=dict(boxstyle='round,pad=0.5', facecolor='#0d1117', edgecolor='#22c55e', alpha=0.8))
@@ -311,13 +311,13 @@ for label in ax2.get_xticklabels(): label.set_color('white')
 ax3 = axes[1, 1]
 ax3.axis('off')
 rec = recommendations[0]
-rep = f"TUNING RECOMMENDATION\\n{'='*35}\\n\\n"
-rep += f"Current: {rec['current_f']:.1f} Hz ({rec['current_T']:.0f} N/m)\\n"
-rep += f"Target:  {rec['target_f']:.1f} Hz ({rec['target_T']:.0f} N/m)\\n"
-rep += f"Action:  {rec['direction']} by {abs(rec['delta_T']):.0f} N/m\\n\\n"
-rep += "Environmental adjustments:\\n"
+rep = f"TUNING RECOMMENDATION\n{'='*35}\n\n"
+rep += f"Current: {rec['current_f']:.1f} Hz ({rec['current_T']:.0f} N/m)\n"
+rep += f"Target:  {rec['target_f']:.1f} Hz ({rec['target_T']:.0f} N/m)\n"
+rep += f"Action:  {rec['direction']} by {abs(rec['delta_T']):.0f} N/m\n\n"
+rep += "Environmental adjustments:\n"
 for r in recommendations:
-    rep += f"  {r['condition']}: {r['direction']} {abs(r['delta_T']):.0f} N/m\\n"
+    rep += f"  {r['condition']}: {r['direction']} {abs(r['delta_T']):.0f} N/m\n"
 ax3.text(0.05, 0.95, rep, transform=ax3.transAxes, color='#22c55e',
     fontsize=9, va='top', fontfamily='monospace',
     bbox=dict(boxstyle='round,pad=0.5', facecolor='#0d1117', edgecolor='#22c55e', alpha=0.8))
@@ -401,16 +401,16 @@ axes[0,1].set_title('Recommendations with 95% CI', color='white', fontsize=11)
 for label in axes[0,1].get_yticklabels(): label.set_color('white'); label.set_fontsize(8)
 
 # Error contribution analysis
-axes[1,0].bar(['Frequency\\nmeasurement', 'Temperature', 'Humidity'], [45, 30, 15], color=['#22c55e', '#f59e0b', '#3b82f6'])
+axes[1,0].bar(['Frequency\nmeasurement', 'Temperature', 'Humidity'], [45, 30, 15], color=['#22c55e', '#f59e0b', '#3b82f6'])
 axes[1,0].set_ylabel('CI width contribution (N/m)', color='white')
 axes[1,0].set_title('Error source contribution', color='white', fontsize=11)
 for label in axes[1,0].get_xticklabels(): label.set_color('white'); label.set_fontsize(8)
 
 # Report
 axes[1,1].axis('off')
-rep = "STAGE 4: Uncertainty Report\\n" + "=" * 40 + "\\n\\n"
+rep = "STAGE 4: Uncertainty Report\n" + "=" * 40 + "\n\n"
 for name, med, low, high in ci_data:
-    rep += f"{name}:\\n  Adjust: {med:.0f} N/m\\n  95% CI: [{low+med:.0f}, {high+med:.0f}]\\n  Width: {(high-low+2*med-2*med):.0f} N/m\\n\\n"
+    rep += f"{name}:\n  Adjust: {med:.0f} N/m\n  95% CI: [{low+med:.0f}, {high+med:.0f}]\n  Width: {(high-low+2*med-2*med):.0f} N/m\n\n"
 axes[1,1].text(0.05, 0.95, rep, transform=axes[1,1].transAxes, color='#22c55e',
     fontsize=9, va='top', fontfamily='monospace',
     bbox=dict(boxstyle='round,pad=0.5', facecolor='#0d1117', edgecolor='#22c55e', alpha=0.8))
@@ -500,16 +500,16 @@ ax2.set_xlabel('Cents deviation', color='white')
 # Session report
 ax3 = axes[1, 1]
 ax3.axis('off')
-rep = f"TUNING SESSION REPORT\\n{'='*40}\\n\\n"
-rep += f"Target: {target_f:.1f} Hz (D3)\\n"
-rep += f"Starting: {initial_f:.1f} Hz ({cents[0]:+.0f} cents)\\n"
-rep += f"Final: {adjustments[-1]:.1f} Hz ({cents[-1]:+.1f} cents)\\n"
-rep += f"Adjustments: {len(adjustments)-1}\\n"
-rep += f"Status: {status}\\n\\n"
-rep += "History:\\n"
+rep = f"TUNING SESSION REPORT\n{'='*40}\n\n"
+rep += f"Target: {target_f:.1f} Hz (D3)\n"
+rep += f"Starting: {initial_f:.1f} Hz ({cents[0]:+.0f} cents)\n"
+rep += f"Final: {adjustments[-1]:.1f} Hz ({cents[-1]:+.1f} cents)\n"
+rep += f"Adjustments: {len(adjustments)-1}\n"
+rep += f"Status: {status}\n\n"
+rep += "History:\n"
 for i, (f, c) in enumerate(zip(adjustments, cents)):
     marker = '>>>' if abs(c) < 3 else '   '
-    rep += f"  {marker} Strike {i}: {f:.1f} Hz ({c:+.1f} cents)\\n"
+    rep += f"  {marker} Strike {i}: {f:.1f} Hz ({c:+.1f} cents)\n"
 
 ax3.text(0.05, 0.95, rep, transform=ax3.transAxes, color='#22c55e',
     fontsize=8.5, va='top', fontfamily='monospace',

@@ -45,7 +45,7 @@ wings = [
 ]
 
 print("=== Lift at Different Airspeeds ===")
-print(f"Air density: {rho_sea} kg/m³ (sea level)\\\n")
+print(f"Air density: {rho_sea} kg/m³ (sea level)\\n")
 
 speeds = [5, 10, 15, 20, 30]
 
@@ -80,12 +80,12 @@ print(f"Pilot: {pilot_mass} kg  Frame: {frame_mass} kg  Total: {total_mass} kg")
 print(f"Total weight: {total_weight:.0f} N")
 print(f"Wing area: {wing_area} m²  C_L: {c_l}")
 print(f"Speed needed for level flight: {v_required:.1f} m/s ({v_required * 3.6:.1f} km/h)")
-print(f"\\\nThis speed is achievable in a GLIDE (downhill).")
+print(f"\\nThis speed is achievable in a GLIDE (downhill).")
 print(f"But sustaining it by flapping? That requires power...")
 
 # Effect of camber on lift
-print(f"\\\n=== Camber Matters ===")
-print(f"Same wing (16 m²), same speed (12 m/s), different C_L:\\\n")
+print(f"\\n=== Camber Matters ===")
+print(f"Same wing (16 m²), same speed (12 m/s), different C_L:\\n")
 for c_l_test in [0.3, 0.6, 0.9, 1.2, 1.5, 2.0]:
     L = lift_force(rho_sea, 12, 16, c_l_test)
     pct = L / total_weight * 100
@@ -138,7 +138,7 @@ def total_drag(v, frontal_area, c_d, weight, wingspan, e=0.8):
 
 # Compare shapes at same speed
 print("=== Drag Coefficients: Shape Matters ===")
-print(f"Frontal area: 0.5 m²  |  Speed: 15 m/s\\\n")
+print(f"Frontal area: 0.5 m²  |  Speed: 15 m/s\\n")
 
 shapes = [
     ("Flat plate (perpendicular)", 1.28),
@@ -157,7 +157,7 @@ for name, c_d in shapes:
     print(f"  {name:<30} C_D={c_d:<5.2f}  D={D:>6.1f} N  {bar}")
 
 # Drag breakdown for different flyers
-print(f"\\\n=== Total Drag vs Speed ===")
+print(f"\\n=== Total Drag vs Speed ===")
 flyers = [
     ("Pigeon",             0.003, 0.12, 0.35*9.81,  0.65),
     ("Eagle",              0.02,  0.10, 4.5*9.81,   2.0),
@@ -166,7 +166,7 @@ flyers = [
 ]
 
 for name, frontal, c_d, weight, span in flyers:
-    print(f"\\\n--- {name} ---")
+    print(f"\\n--- {name} ---")
     print(f"  Frontal: {frontal} m²  C_D: {c_d}  Weight: {weight:.0f} N  Span: {span} m")
     print(f"  {'Speed':>7} {'Parasitic':>10} {'Induced':>10} {'Total':>10} {'L/D':>6}")
 
@@ -189,11 +189,11 @@ for name, frontal, c_d, weight, span in flyers:
     print(f"  → Minimum drag at {best_speed} m/s (L/D = {weight/min_drag:.1f})")
 
 # Leonardo vs modern: the streamlining gap
-print(f"\\\n=== Leonardo vs Modern: Streamlining Gap ===")
+print(f"\\n=== Leonardo vs Modern: Streamlining Gap ===")
 v = 12  # m/s cruising speed
 weight = 105 * 9.81
 
-print(f"Speed: {v} m/s  Total weight: 105 kg\\\n")
+print(f"Speed: {v} m/s  Total weight: 105 kg\\n")
 configs = [
     ("Leonardo (upright pilot, rough frame)",  0.5, 0.6, 7.0),
     ("Leonardo (prone pilot, fabric skin)",    0.3, 0.35, 8.0),
@@ -261,10 +261,10 @@ print("=== Human Power Output ===")
 print(f"  Sustained (hours):     75 W")
 print(f"  Trained cyclist (1hr): 250 W")
 print(f"  Sprint (seconds):      1200 W")
-print(f"  Elite peak (5 sec):    2000 W\\\n")
+print(f"  Elite peak (5 sec):    2000 W\\n")
 
 # Flight power requirements
-print("=== Power Required for Level Flight ===\\\n")
+print("=== Power Required for Level Flight ===\\n")
 
 aircraft = [
     ("Pigeon",               0.35, 0.06, 1.6, 0.02, 0.65),
@@ -283,10 +283,10 @@ for name, mass, area, c_l, c_d, span in aircraft:
     print(f"    Min power: {power:.0f} W at {speed:.1f} m/s ({speed*3.6:.0f} km/h)")
     print(f"    Power/kg: {power_per_kg:.1f} W/kg")
     human_ok = "YES" if power < 250 else "MAYBE (sprint)" if power < 1200 else "NO"
-    print(f"    Human-sustainable? {human_ok}\\\n")
+    print(f"    Human-sustainable? {human_ok}\\n")
 
 # The ornithopter vs alternatives
-print("=== Why Gliding Works and Flapping Doesn't ===\\\n")
+print("=== Why Gliding Works and Flapping Doesn't ===\\n")
 
 mass = 105  # kg (pilot + frame)
 weight = mass * 9.81
@@ -300,9 +300,9 @@ for ld in [5, 8, 10, 15, 20]:
     print(f"  L/D={ld:>2}: range={range_m:>5} m  sink={9.81/ld:>4.1f} m/s")
 
 # Flapping efficiency
-print(f"\\\n=== Flapping Efficiency Penalty ===")
+print(f"\\n=== Flapping Efficiency Penalty ===")
 print(f"Flapping adds drag from wing oscillation.")
-print(f"Muscle-to-thrust efficiency: ~25% (human) vs ~35% (bird)\\\n")
+print(f"Muscle-to-thrust efficiency: ~25% (human) vs ~35% (bird)\\n")
 
 flap_penalty = 1.5  # flapping adds ~50% to power requirement
 for name, mass, area, c_l, c_d, span in aircraft:
@@ -313,7 +313,7 @@ for name, mass, area, c_l, c_d, span in aircraft:
         print(f"    Glide power (gravity): {p_glide:.0f} W")
         print(f"    Flap power (muscles):  {p_flap:.0f} W")
         print(f"    Human sustainable?     {'Yes' if p_flap < 250 else 'No'}")
-        print(f"    Shortfall factor:      {p_flap/250:.1f}×\\\n")`,
+        print(f"    Shortfall factor:      {p_flap/250:.1f}×\\n")`,
       challenge: 'The Gossamer Condor succeeded by being extremely light and slow. Calculate: if Leonardo could have built his ornithopter frame from modern carbon fiber (reducing frame mass from 30 kg to 5 kg) and increased wingspan to 12 m, would human-powered flight become possible? At what frame mass does it become feasible?',
       successHint: 'You proved mathematically what Leonardo could not: human muscles are roughly 20× too weak for ornithopter flight. This is not an engineering gap that better materials can close — it is a fundamental power-to-weight mismatch. The Gossamer Condor succeeded only by extreme wingspan (29 m), ultra-low weight, and a champion cyclist as pilot. Leonardo\'s genius was real; the physics was impossible.',
     },
@@ -381,7 +381,7 @@ pigeon_area = 0.06   # m²
 pigeon_power = 8     # watts sustained flight
 
 print("=== Square-Cube Law: Scaling a Pigeon ===")
-print(f"Base: pigeon ({pigeon_mass} kg, {pigeon_span} m span, {pigeon_power} W)\\\n")
+print(f"Base: pigeon ({pigeon_mass} kg, {pigeon_span} m span, {pigeon_power} W)\\n")
 
 print(f"{'Target':>12} {'k':>5} {'Span':>6} {'Area':>6} {'Loading':>8} "
       f"{'Vmin':>6} {'Str/Wt':>7} {'P_avail':>8} {'P_need':>8} {'Flies?':>7}")
@@ -403,8 +403,8 @@ for mass in targets:
           f"{r['power_required']:>7.0f}W {flies:>7}")
 
 # Real birds vs geometric prediction
-print(f"\\\n=== Real Birds vs Geometric Scaling ===")
-print(f"Real birds cheat: they change proportions as they get bigger.\\\n")
+print(f"\\n=== Real Birds vs Geometric Scaling ===")
+print(f"Real birds cheat: they change proportions as they get bigger.\\n")
 
 real_birds = [
     ("Hummingbird",   0.004, 0.08,  0.001),
@@ -429,7 +429,7 @@ for name, mass, span, area in real_birds:
     print(f"{name:<15} {mass:>5.2f}kg {span:>5.1f}m {area:>5.2f}m² "
           f"{loading:>6.0f}N/m² {aspect:>6.1f} {v_min:>5.1f}m/s")
 
-print(f"\\\nNotice: larger birds have higher aspect ratios (longer, thinner wings)")
+print(f"\\nNotice: larger birds have higher aspect ratios (longer, thinner wings)")
 print(f"and much higher wing loading — they MUST fly faster.")
 print(f"Argentavis needed ~11 m/s just to stay aloft — it was a thermal soarer,")
 print(f"not a flapper. Leonardo's 105 kg ornithopter is beyond even this limit.")`,
@@ -532,7 +532,7 @@ for name, mass, area, c_l, c_d_w, c_d_b, frontal, span in designs:
     range_m = 200 * best_ld['ld']
     time_s = 200 / min_sink['sink']
     print(f"  From Monte Ceceri (200 m): range {range_m:.0f} m, "
-          f"max time {time_s:.0f} s ({time_s/60:.1f} min)\\\n")
+          f"max time {time_s:.0f} s ({time_s/60:.1f} min)\\n")
 
 # Speed-to-fly polar
 print("=== Speed Polar: Leonardo vs Modern ===")
@@ -598,7 +598,7 @@ def flow_regime(Re):
         return "Turbulent"
 
 # Reynolds numbers across Leonardo's world
-print("=== Reynolds Numbers: Leonardo's Observations ===\\\n")
+print("=== Reynolds Numbers: Leonardo's Observations ===\\n")
 
 scenarios = [
     ("Honey stirred slowly",      1400, 0.05, 0.02, 2.0),
@@ -624,8 +624,8 @@ for name, rho, v, L, mu in scenarios:
     print(f"{name:<30} {Re:>12.0f} {regime:<15} (10^{exp})")
 
 # Drag: laminar vs turbulent
-print(f"\\\n=== Skin Friction: Laminar vs Turbulent ===")
-print(f"The friction coefficient depends on Reynolds number:\\\n")
+print(f"\\n=== Skin Friction: Laminar vs Turbulent ===")
+print(f"The friction coefficient depends on Reynolds number:\\n")
 
 def c_f_laminar(Re):
     """Blasius solution for laminar flat plate."""
@@ -645,13 +645,13 @@ for exp in range(4, 9):
     print(f"  10^{exp:<6} {c_fl:>12.6f} {c_ft:>14.6f} {ratio:>14.1f}×")
 
 # Leonardo's wing: transition effects
-print(f"\\\n=== Leonardo's Wing: Transition Point ===")
+print(f"\\n=== Leonardo's Wing: Transition Point ===")
 chord = 2.0  # m
 v = 12       # m/s
 
 Re_chord = reynolds(rho_air, v, chord, mu_air)
 print(f"Wing chord: {chord} m, Airspeed: {v} m/s")
-print(f"Full-chord Re: {Re_chord:.0f}\\\n")
+print(f"Full-chord Re: {Re_chord:.0f}\\n")
 
 # Transition occurs at Re ≈ 500,000
 x_transition = 500000 * mu_air / (rho_air * v)
@@ -665,14 +665,14 @@ area = 16  # m² wing area
 d_lam = 0.5 * rho_air * v**2 * area * c_f_laminar(Re_chord)
 d_turb = 0.5 * rho_air * v**2 * area * c_f_turbulent(Re_chord)
 d_mixed = d_lam * (pct/100) + d_turb * (1 - pct/100)
-print(f"\\\nSkin friction drag (16 m² wing at {v} m/s):")
+print(f"\\nSkin friction drag (16 m² wing at {v} m/s):")
 print(f"  If fully laminar:    {d_lam:.1f} N")
 print(f"  If fully turbulent:  {d_turb:.1f} N")
 print(f"  Mixed (realistic):   {d_mixed:.1f} N")
 
 # The Kolmogorov cascade
-print(f"\\\n=== Turbulent Energy Cascade (Kolmogorov 1941) ===")
-print(f"Leonardo sketched eddies within eddies — Kolmogorov quantified it.\\\n")
+print(f"\\n=== Turbulent Energy Cascade (Kolmogorov 1941) ===")
+print(f"Leonardo sketched eddies within eddies — Kolmogorov quantified it.\\n")
 
 Re_flow = 1e6
 eta = chord * Re_flow**(-3/4)  # Kolmogorov microscale
@@ -683,9 +683,9 @@ print(f"Flow Re = {Re_flow:.0e}")
 print(f"Largest eddy:       {L_large*1000:.1f} mm")
 print(f"Smallest eddy (η):  {eta*1000:.4f} mm")
 print(f"Scale ratio:        {ratio:.0f}:1")
-print(f"\\\nEnergy cascades from {L_large*1000:.1f} mm eddies down to")
+print(f"\\nEnergy cascades from {L_large*1000:.1f} mm eddies down to")
 print(f"{eta*1000:.4f} mm eddies where viscosity dissipates it as heat.")
-print(f"\\\nThis cascade is what Leonardo drew — and what the")
+print(f"\\nThis cascade is what Leonardo drew — and what the")
 print(f"Navier-Stokes Millennium Prize problem asks us to prove")
 print(f"always behaves smoothly. 500 years later, still unsolved.")`,
       challenge: 'Leonardo observed water, not air. Calculate the Reynolds number for water flowing past a 30 cm rock at 1 m/s, then find the equivalent airspeed that would produce the same Reynolds number around his 2 m wing chord. This explains why Leonardo could observe turbulence in water but not easily in air — same physics, different scales.',

@@ -68,7 +68,7 @@ lat = 20.0  # Hawaii
 day = 172   # June solstice
 
 print("=== Star Positions Through the Night (June, Hawaii) ===")
-print(f"Latitude: {lat}°N | Day of year: {day}\\\n")
+print(f"Latitude: {lat}°N | Day of year: {day}\\n")
 
 header = f"{'Star':<26}" + "".join(f"{'  '+str(h)+'h':>6}" for h in range(20, 30))
 print(header.replace("24h"," 0h").replace("25h"," 1h").replace("26h"," 2h")
@@ -89,7 +89,7 @@ for name, ra, dec in stars:
     print(row)
 
 # Sidereal time shift across the year
-print("\\\n=== Sidereal Time at 9 PM Across the Year ===")
+print("\\n=== Sidereal Time at 9 PM Across the Year ===")
 print("(Shows which stars are on the meridian at 9 PM each month)")
 for month, day in [(1,15),(3,80),(6,172),(9,265),(12,349)]:
     lst = solar_to_sidereal(21, day)
@@ -97,7 +97,7 @@ for month, day in [(1,15),(3,80),(6,172),(9,265),(12,349)]:
                   "Jul","Aug","Sep","Oct","Nov","Dec"][month-1]
     print(f"  {month_name}: LST = {lst:.1f}h — stars with RA ~{lst:.0f}h are on meridian")
 
-print("\\\nThis is why different constellations dominate different seasons.")
+print("\\nThis is why different constellations dominate different seasons.")
 print("Navigators memorised these seasonal patterns over years of training.")`,
       challenge: 'Calculate the LST at midnight for your birthday. Which bright star (from the list) is closest to the meridian at that time? This is "your" navigation star — the one a Polynesian navigator would use to guide a canoe on the night you were born.',
       successHint: 'Hour angle and sidereal time are the foundation of all positional astronomy. Every telescope on Earth, every satellite tracker, and every planetarium program uses these same equations. You now understand the coordinate system that maps the rotating sky.',
@@ -146,7 +146,7 @@ island_width = 8000    # 8 km wide island (like Tahiti)
 wavelength = 180       # typical Pacific swell wavelength (metres)
 
 print("=== Wave Interference Behind an Island ===")
-print(f"Island width: {island_width/1000:.0f} km | Swell wavelength: {wavelength} m\\\n")
+print(f"Island width: {island_width/1000:.0f} km | Swell wavelength: {wavelength} m\\n")
 
 for dist_km in [50, 30, 15, 5]:
     y, intensity = interference_pattern(island_width, wavelength, dist_km * 1000)
@@ -239,7 +239,7 @@ founder_sizes = [50, 30, 20]  # crew sizes decrease for remote islands
 island_names = ["Mainland", "Near Island", "Mid Island", "Remote Island"]
 
 print("=== Founder Effect Across Island Chain ===")
-print(f"Source allele frequency: {source_freq:.0%}\\\n")
+print(f"Source allele frequency: {source_freq:.0%}\\n")
 
 n_simulations = 500
 all_results = {name: [] for name in island_names}
@@ -267,8 +267,8 @@ for name in island_names:
     print(f"{name:<18} {mean_f:>8.1%} {std_f:>8.3f} {lost:>8.1f}% {fixed:>10.1f}%")
 
 # Long-term drift on each island
-print("\\\n=== 50-Generation Drift on Remote Island (pop=200) ===")
-print("(5 independent simulations)\\\n")
+print("\\n=== 50-Generation Drift on Remote Island (pop=200) ===")
+print("(5 independent simulations)\\n")
 
 for sim in range(5):
     start = all_results["Remote Island"][sim]
@@ -354,7 +354,7 @@ direct_bearing = np.degrees(np.arctan2(dlon, dlat)) % 360
 print("=== Hawaii to Tahiti Voyage Simulation ===")
 print(f"Start: {hawaii[0]}°N, {360-hawaii[1]:.0f}°W")
 print(f"Target: {abs(tahiti[0])}°S, {360-tahiti[1]:.0f}°W")
-print(f"Direct bearing: {direct_bearing:.1f}°\\\n")
+print(f"Direct bearing: {direct_bearing:.1f}°\\n")
 
 # Compare: no correction vs corrected heading
 for label, correction in [("No correction", 0), ("5° east correction", 5),
@@ -440,7 +440,7 @@ lat = 20.0   # Hawaii
 day = 80     # March equinox
 
 print("=== Full Sky View: March Equinox, Hawaii ===")
-print(f"Latitude: {lat}°N\\\n")
+print(f"Latitude: {lat}°N\\n")
 
 # Track each star through the night
 for name, ra, dec in stars:
@@ -469,7 +469,7 @@ for name, ra, dec in stars:
 
 # Compare star positions at two latitudes
 print("=== Coordinate Comparison: Hawaii (20°N) vs Tahiti (17.5°S) ===")
-print("(At LST = 14h — when Arcturus is near meridian)\\\n")
+print("(At LST = 14h — when Arcturus is near meridian)\\n")
 
 for name, ra, dec in stars:
     alt_h, az_h = equatorial_to_horizon(ra, dec, 20.0, 14.0)
@@ -484,7 +484,7 @@ for name, ra, dec in stars:
     else:
         print(f"  Tahiti:  below horizon")
 
-print("\\\nNote: Polaris is barely visible from Hawaii and invisible from Tahiti.")
+print("\\nNote: Polaris is barely visible from Hawaii and invisible from Tahiti.")
 print("Southern Cross is high from Tahiti but low from Hawaii.")
 print("This shift is how navigators determined latitude.")`,
       challenge: 'Implement the reverse transform: given a star\'s observed altitude and azimuth, calculate the observer\'s latitude. This is the fundamental problem of celestial navigation — observe a star, calculate your position. (Hint: if you know the star\'s declination and its measured altitude at transit, latitude = 90° - altitude + declination.)',

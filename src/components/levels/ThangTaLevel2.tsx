@@ -40,13 +40,13 @@ theta1 = np.linspace(0, 2*np.pi, 200)
 r1 = np.full_like(theta1, sword_length)
 axes[0].plot(theta1, r1, color='#34d399', linewidth=2)
 axes[0].fill(theta1, r1, alpha=0.1, color='#34d399')
-axes[0].set_title('Full Circle\\\n(Defensive)', color='white', fontsize=10, pad=15)
+axes[0].set_title('Full Circle\\n(Defensive)', color='white', fontsize=10, pad=15)
 
 # Arc 2: Half-arc overhead strike
 theta2 = np.linspace(-np.pi/4, np.pi + np.pi/4, 200)
 r2 = np.full_like(theta2, sword_length)
 axes[1].plot(theta2, r2, color='#f59e0b', linewidth=3)
-axes[1].set_title('Overhead Arc\\\n(Attack)', color='white', fontsize=10, pad=15)
+axes[1].set_title('Overhead Arc\\n(Attack)', color='white', fontsize=10, pad=15)
 
 # Arc 3: Figure-of-eight (two offset arcs)
 theta3a = np.linspace(0, np.pi, 100)
@@ -55,7 +55,7 @@ theta3b = np.linspace(np.pi, 2*np.pi, 100)
 r3b = sword_length * (1 - 0.2*np.sin(2*theta3b))
 axes[2].plot(theta3a, r3a, color='#ef4444', linewidth=2)
 axes[2].plot(theta3b, r3b, color='#a78bfa', linewidth=2)
-axes[2].set_title('Figure-Eight\\\n(Transition)', color='white', fontsize=10, pad=15)
+axes[2].set_title('Figure-Eight\\n(Transition)', color='white', fontsize=10, pad=15)
 
 for ax in axes:
     ax.set_facecolor('#1f2937')
@@ -112,7 +112,7 @@ for ax in (ax1, ax2):
     ax.set_facecolor('#1f2937')
 fig.patch.set_facecolor('#1f2937')
 
-print("=== Rotational Energy Comparison ===\\\n")
+print("=== Rotational Energy Comparison ===\\n")
 print(f"{'Weapon':<22} {'I (kg⋅m²)':>10} {'KE at 3rev/s':>13} {'KE at 5rev/s':>13}")
 print("-" * 62)
 
@@ -144,7 +144,7 @@ plt.savefig('rotational_energy.png', dpi=100, bbox_inches='tight', facecolor='#1
 plt.show()
 
 # Impact force estimate
-print("\\\nImpact estimate (stopping in 0.01s at 3 rev/s):")
+print("\\nImpact estimate (stopping in 0.01s at 3 rev/s):")
 for name, props in weapons.items():
     I = (1.0/3) * props['mass'] * props['length']**2
     omega = 3 * 2 * np.pi
@@ -313,7 +313,7 @@ print(f"Optimal striking speed: {opt_omega/(2*np.pi):.1f} rev/s ({opt_omega:.1f}
 print(f"At optimal: torque = {opt_tau:.1f} Nm, power = {power[opt_idx]:.0f} W")
 print(f"At max speed ({omega_max/(2*np.pi):.1f} rev/s): torque ≈ 0, power ≈ 0")
 print(f"At zero speed: torque = {tau_max} Nm, power = 0")
-print(f"\\\nThe optimal speed is {opt_omega/omega_max*100:.0f}% of maximum — NOT at max speed!")`,
+print(f"\\nThe optimal speed is {opt_omega/omega_max*100:.0f}% of maximum — NOT at max speed!")`,
       challenge: 'Compare a trained warrior (tau_max=25, omega_max=40) with a beginner (tau_max=12, omega_max=25). Plot both power curves. How much more powerful is the trained warrior?',
       successHint: 'The force-velocity relationship governs all athletic performance. Sprinters, swimmers, and martial artists all have optimal speeds where they generate maximum power. Training shifts the entire curve upward and rightward.',
     },

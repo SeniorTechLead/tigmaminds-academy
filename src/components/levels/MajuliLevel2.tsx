@@ -73,11 +73,11 @@ ax1.clabel(cs, fontsize=7, fmt='%d m')
 
 # Mark key features
 ax1.plot(cx, cy, '*', color='red', markersize=12)
-ax1.annotate('Highest point\\\n(settlement area)', xy=(cx, cy), xytext=(cx+2, cy+1.5),
+ax1.annotate('Highest point\\n(settlement area)', xy=(cx, cy), xytext=(cx+2, cy+1.5),
              color='white', fontsize=8, arrowprops=dict(arrowstyle='->', color='white'))
 ax1.annotate('Natural levee', xy=(8, 3.5), xytext=(3, 2),
              color='white', fontsize=8, arrowprops=dict(arrowstyle='->', color='white'))
-ax1.annotate('Steep cut bank\\\n(erosion zone)', xy=(10, 1.3), xytext=(14, 1),
+ax1.annotate('Steep cut bank\\n(erosion zone)', xy=(10, 1.3), xytext=(14, 1),
              color='#ef4444', fontsize=8, fontweight='bold',
              arrowprops=dict(arrowstyle='->', color='#ef4444'))
 
@@ -350,13 +350,13 @@ ax.tick_params(colors='gray')
 ax = axes[1, 1]
 ax.set_facecolor('#111827')
 ax.axis('off')
-stats_text = "EROSION STATISTICS (2004-2024)\\\n" + "=" * 38 + "\\\n\\\n"
+stats_text = "EROSION STATISTICS (2004-2024)\\n" + "=" * 38 + "\\n\\n"
 for name, data in retreat_data.items():
     annual = data['annual']
-    stats_text += f"{name}:\\\n"
-    stats_text += f"  Mean: {np.mean(annual):.1f} m/yr\\\n"
-    stats_text += f"  Max:  {np.max(annual):.1f} m/yr\\\n"
-    stats_text += f"  Total: {data['cumulative'][-1]:.0f} m in {n_years} years\\\n\\\n"
+    stats_text += f"{name}:\\n"
+    stats_text += f"  Mean: {np.mean(annual):.1f} m/yr\\n"
+    stats_text += f"  Max:  {np.max(annual):.1f} m/yr\\n"
+    stats_text += f"  Total: {data['cumulative'][-1]:.0f} m in {n_years} years\\n\\n"
 ax.text(0.05, 0.95, stats_text, transform=ax.transAxes, color='white', fontsize=9,
         verticalalignment='top', fontfamily='monospace',
         bbox=dict(boxstyle='round', facecolor='#111827', edgecolor='gray'))
@@ -371,7 +371,7 @@ for name, data in retreat_data.items():
     area_lost = data['cumulative'][-1] * bank_length * 1000 / 1e6  # km^2
     total_area_loss += area_lost
     print(f"  {name}: {data['cumulative'][-1]:.0f}m retreat, ~{area_lost:.1f} km² lost")
-print(f"\\\nEstimated total area lost: ~{total_area_loss:.0f} km² in 20 years")`,
+print(f"\\nEstimated total area lost: ~{total_area_loss:.0f} km² in 20 years")`,
       challenge: 'Calculate the correlation coefficient between monsoon discharge and erosion rate for each location. Which location is most sensitive to flood intensity? Which is least? What might explain the difference?',
       successHint: 'Erosion measurement is where field work meets data science. The ability to quantify erosion rates, correlate them with environmental variables, and project future trends is what transforms concern into actionable policy. This is exactly the kind of analysis that informs Majuli\'s conservation planning.',
     },
@@ -504,7 +504,7 @@ plt.show()
 print("Satellite-derived area measurements:")
 for year, area in areas:
     print(f"  {year}: {area:.0f} km²")
-print(f"\\\nTotal loss ({areas[0][0]}-{areas[-1][0]}): {areas[0][1]-areas[-1][1]:.0f} km²")
+print(f"\\nTotal loss ({areas[0][0]}-{areas[-1][0]}): {areas[0][1]-areas[-1][1]:.0f} km²")
 print(f"Average rate: {(areas[0][1]-areas[-1][1])/(areas[-1][0]-areas[0][0]):.1f} km²/year")
 print()
 print("NDVI classification accuracy depends on:")

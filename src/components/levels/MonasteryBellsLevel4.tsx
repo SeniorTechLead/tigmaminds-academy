@@ -596,7 +596,7 @@ axes[1, 2].text(0.5, 0.40, f'Max beat freq: {max(beat_freqs):.1f} Hz → 0.0 Hz'
 axes[1, 2].text(0.5, 0.25, f'Status: SANGHA RESTORED',
                fontsize=12, color='#f59e0b', ha='center', fontweight='bold',
                transform=axes[1, 2].transAxes)
-axes[1, 2].text(0.5, 0.10, f'After 40 years of silence,\\\nthe bell can sing again.',
+axes[1, 2].text(0.5, 0.10, f'After 40 years of silence,\\nthe bell can sing again.',
                fontsize=10, color='lightgray', ha='center', style='italic',
                transform=axes[1, 2].transAxes)
 axes[1, 2].set_xlim(0, 1)

@@ -647,7 +647,7 @@ plt.tight_layout()
 plt.show()
 
 best_robust = max(robustness_results, key=lambda r: r['robust_score'])
-print("\\\nOPTIMIZATION RESULTS")
+print("\\nOPTIMIZATION RESULTS")
 print("=" * 60)
 print(f"Global optimum: {best_params['temp']:.1f}°C, {best_params['duration']:.1f}h, "
       f"N0={best_params['N0']:.0e} -> Q={best_score:.3f}")
@@ -1028,13 +1028,13 @@ ax.tick_params(colors='gray')
 ax = axes[1, 2]
 ax.set_facecolor('#111827')
 ax.axis('off')
-recipe = "ADAPTED RECIPE CARD\\\n" + "=" * 40 + "\\\n\\\n"
+recipe = "ADAPTED RECIPE CARD\\n" + "=" * 40 + "\\n\\n"
 for rice in rice_names[:4]:
     r = results_grid[rice][30]
-    recipe += f"{rice}:\\\n"
-    recipe += f"  Ferment: {r['duration']:.0f}h at 30°C\\\n"
-    recipe += f"  Starter: {r['N0']:.0e} CFU/mL\\\n"
-    recipe += f"  Expected quality: {r['quality']:.1f}/10\\\n\\\n"
+    recipe += f"{rice}:\\n"
+    recipe += f"  Ferment: {r['duration']:.0f}h at 30°C\\n"
+    recipe += f"  Starter: {r['N0']:.0e} CFU/mL\\n"
+    recipe += f"  Expected quality: {r['quality']:.1f}/10\\n\\n"
 ax.text(0.05, 0.95, recipe, transform=ax.transAxes, fontsize=9, color='white',
         verticalalignment='top', fontfamily='monospace')
 
@@ -1043,7 +1043,7 @@ plt.show()
 
 print("RECIPE ADAPTATION COMPLETE")
 print("=" * 60)
-print(f"\\\n{'Rice Variety':<18} {'Temp':>5} {'Time(h)':>8} {'Starter':>10} {'Quality':>8}")
+print(f"\\n{'Rice Variety':<18} {'Temp':>5} {'Time(h)':>8} {'Starter':>10} {'Quality':>8}")
 print("-" * 51)
 for rice in rice_names:
     for temp in [25, 30, 35]:
@@ -1143,21 +1143,21 @@ class FermentationOptimizer:
             "=" * 55,
             "  FERMENTATION PROCESS OPTIMIZER — REPORT",
             "=" * 55,
-            f"\\\nRice variety: {rice} (amylose {self.rice_db[rice]['amylose']}%)",
+            f"\\nRice variety: {rice} (amylose {self.rice_db[rice]['amylose']}%)",
             f"Temperature: {temp}°C",
             f"Duration: {duration:.1f} hours",
             f"Starter culture: {N0:.0e} CFU/mL",
-            f"\\\n--- SIMULATION RESULTS ---",
+            f"\\n--- SIMULATION RESULTS ---",
             f"Final pH: {sim_results['pH'][-1]:.2f}",
             f"Lactic acid: {sim_results['lactic_acid'][-1]:.1f} g/L",
             f"Residual sugar: {sim_results['glucose'][-1]:.1f} g/L",
             f"Volume rise: {(sim_results['volume'][-1]-1)*100:.0f}%",
-            f"\\\n--- FLAVOR PREDICTION ---",
+            f"\\n--- FLAVOR PREDICTION ---",
             f"Sour intensity: {flavor['sour']:.1f}/10",
             f"Sweet intensity: {flavor['sweet']:.1f}/10",
             f"Overall quality: {flavor['quality']:.1f}/10",
         ]
-        return "\\\n".join(lines)
+        return "\\n".join(lines)
 
 # ============================================================
 # RUN COMPLETE PIPELINE

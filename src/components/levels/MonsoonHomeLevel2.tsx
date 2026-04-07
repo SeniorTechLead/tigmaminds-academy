@@ -500,7 +500,7 @@ burst_rain = scenarios['Burst (2050)']
 normal_yield = calc_yield(burst_rain, daily_need, sensitivity)
 sub1_yield = calc_yield(burst_rain, daily_need, sensitivity * 0.3)
 drought_yield = calc_yield(burst_rain, daily_need * 0.7, sensitivity)
-varieties = ['Standard', 'Flood-tolerant\\\n(Sub1)', 'Drought-tolerant']
+varieties = ['Standard', 'Flood-tolerant\\n(Sub1)', 'Drought-tolerant']
 vy = [normal_yield, sub1_yield, drought_yield]
 ax3.bar(varieties, vy, color=['#ef4444', '#22c55e', '#3b82f6'], alpha=0.8)
 for bar, y in zip(ax3.patches, vy):
@@ -524,7 +524,7 @@ plt.show()
 
 print("Yield by scenario:")
 for n, y in yields.items(): print(f"  {n}: {y:.1f} t/ha")
-print(f"\\\nSub1 variety recovers {sub1_yield - normal_yield:.1f} t/ha under burst scenario")
+print(f"\\nSub1 variety recovers {sub1_yield - normal_yield:.1f} t/ha under burst scenario")
 print(f"Value: INR {(sub1_yield-normal_yield)*area_Mha*price/1e9:.0f}B additional income")`,
       challenge: 'Design a climate-smart farm combining flood-tolerant rice, backup crop, rainwater harvesting, and insurance. Calculate cost vs expected return under the 2050 scenario.',
       successHint: 'The monsoon-agriculture nexus is where climate science becomes personal. Every projection ultimately comes down to whether a farmer in Assam can feed their family. The monsoon always finds its way home; the question is whether agriculture can keep up with how home is changing.',

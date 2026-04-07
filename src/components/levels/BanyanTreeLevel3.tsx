@@ -85,7 +85,7 @@ t3, B3, H3 = simulate_competition(
     years=200
 )
 
-print("\\n[Full visualization available in the playground]")`,
+print("\n[Full visualization available in the playground]")`,
       challenge: 'Add environmental stochasticity: multiply each growth rate by (1 + noise) where noise is drawn from a normal distribution each year. Run 100 simulations and plot the distribution of outcomes. What fraction of the time does the banyan win on a young host?',
       successHint: 'You can now model competition dynamics between strangler fig and host tree — the ecological foundation of banyan biology.',
     },
@@ -156,7 +156,7 @@ class AerialRoot:
         return np.pi**2 * self.elastic_modulus * self.moment_of_inertia() / self.length**2
 
 
-print("\\n[Full visualization available in the playground]")`,
+print("\n[Full visualization available in the playground]")`,
       challenge: 'Simulate 50 aerial roots at different branch heights (4-15m) with random variation in growth rates. Plot the distribution of grounding times and final diameters. Which branch height produces the most structurally effective pillars?',
       successHint: 'You can now model the biomechanical lifecycle of aerial roots — from pendant filament to load-bearing pillar.',
     },
@@ -233,7 +233,7 @@ class BanyanGrowth:
                 for _ in range(n_sub):
                     angle = base_angle + np.random.normal(0, 0.6)
 
-print("\\n[Full visualization available in the playground]")`,
+print("\n[Full visualization available in the playground]")`,
       challenge: 'Add wind bias: make branches grow preferentially in the downwind direction (e.g., add +0.3 to the angle for branches growing eastward). How does persistent wind affect canopy symmetry and root distribution?',
       successHint: 'You can now model fractal canopy expansion with aerial root feedback — capturing the positive loop that makes banyans the largest single-organism canopies on Earth.',
     },
@@ -305,7 +305,7 @@ class EcologicalNetwork:
             surviving -= newly_lost
 
 
-print("\\n[Full visualization available in the playground]")`,
+print("\n[Full visualization available in the playground]")`,
       challenge: 'Add redundancy: for each species, add a second, weaker interaction to a different food source. How does redundancy change the banyan keystoneness score? At what redundancy level does the banyan stop being the top keystone species?',
       successHint: 'You can now quantify ecological keystoneness through network analysis and cascade simulation — the scientific foundation for conservation prioritization.',
     },
@@ -381,7 +381,7 @@ def fit_power_law(x, y):
     a = np.exp(log_a)
 
 
-print("\\n[Full visualization available in the playground]")`,
+print("\n[Full visualization available in the playground]")`,
       challenge: 'Use leave-one-out cross-validation: for each tree, train the model on the other 79 and predict its age. Compare the cross-validated R² to the in-sample R². How much overfitting is there?',
       successHint: 'You can now estimate banyan tree age from non-destructive measurements using allometric power laws and multi-predictor regression.',
     },
@@ -464,7 +464,7 @@ class BanyanPopulationModel:
         return v / v.sum()
 
 
-print("\\n[Full visualization available in the playground]")`,
+print("\n[Full visualization available in the playground]")`,
       challenge: 'Implement a sensitivity analysis: vary each survival and fecundity parameter by ±20% one at a time and measure the change in λ. Which parameter has the largest effect on population growth? This identifies the most effective conservation intervention target.',
       successHint: 'You have built a complete conservation analysis: from growth dynamics to biomechanics to population modeling. The integration of ecological theory with computational tools is what makes modern conservation science effective.',
     },

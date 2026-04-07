@@ -508,7 +508,7 @@ transitions = np.array([
     [0.00, 0.00, 0.05, 0.05, 0.80, 0.10],  # agriculture → ...
     [0.00, 0.00, 0.00, 0.00, 0.10, 0.90],  # settlement → ...
 ])
-short_names = ['Thick\\nphumdi', 'Thin\\nphumdi', 'Open\\nwater', 'Hyacinth', 'Agri', 'Settle']
+short_names = ['Thick\nphumdi', 'Thin\nphumdi', 'Open\nwater', 'Hyacinth', 'Agri', 'Settle']
 
 im = ax.imshow(transitions, cmap='YlOrRd', vmin=0, vmax=1, aspect='auto')
 ax.set_xticks(range(6))
@@ -670,10 +670,10 @@ ax.tick_params(colors='gray')
 ax = axes[1, 0]
 ax.set_facecolor('#111827')
 best_vals = list(best_alloc.values())
-best_labels = [f'{n}\\n{v/1e6:.2f}M' for n, v in best_alloc.items()]
+best_labels = [f'{n}\n{v/1e6:.2f}M' for n, v in best_alloc.items()]
 ax.pie(best_vals, labels=best_labels, colors=colors_e, autopct='%1.0f%%',
        textprops={'color': 'white', 'fontsize': 8})
-ax.set_title(f'Optimal Budget Allocation\\n({best_deer:.0f} deer saved/year)',
+ax.set_title(f'Optimal Budget Allocation\n({best_deer:.0f} deer saved/year)',
              color='white', fontsize=12)
 
 # Return on investment over time
@@ -791,7 +791,7 @@ im2 = ax.imshow(observer_effort, cmap='Blues', origin='lower')
 ax.set_title('Observer Effort (biased!)', color='white', fontsize=12)
 ax.set_xlabel('West ← → East', color='white')
 ax.plot(2, 18, '*', color='#f59e0b', markersize=15)
-ax.text(3, 18, 'Park\\nentrance', color='#f59e0b', fontsize=9)
+ax.text(3, 18, 'Park\nentrance', color='#f59e0b', fontsize=9)
 ax.tick_params(colors='gray')
 plt.colorbar(im2, ax=ax, label='Observer-hours')
 

@@ -121,12 +121,12 @@ for table in ['sites', 'surveys', 'observations', 'environmental']:
     count = c.execute(f'SELECT COUNT(*) FROM {table}').fetchone()[0]
     print(f"Table '{table}': {count} rows")
 
-print("\\\nSample sites:")
+print("\\nSample sites:")
 for row in c.execute('SELECT name, altitude_m, habitat_type FROM sites'):
     print(f"  {row[0]:15s} | {row[1]}m | {row[2]}")
 
 conn.close()
-print("\\\nDatabase created successfully!")`,
+print("\\nDatabase created successfully!")`,
       challenge: 'Add a "threats" table that records observed threats (tourism, grazing, invasive species) with severity scores at each site. Insert at least 10 threat records.',
       successHint: 'You have designed a real ecological database. The same schema structure is used by biodiversity monitoring programs worldwide.',
     },
@@ -212,12 +212,12 @@ rows = c.execute('''
 current_site = ""
 for name, year, total, health in rows:
     if name != current_site:
-        print(f"\\\n  {name}:")
+        print(f"\\n  {name}:")
         current_site = name
     print(f"    {year}: {total:>4} lilies | health: {health}")
 
 # Query 2: Best month for flowering
-print("\\\n" + "=" * 50)
+print("\\n" + "=" * 50)
 print("QUERY 2: Flowering peak analysis")
 print("=" * 50)
 rows = c.execute('''
@@ -234,7 +234,7 @@ for month, total, flowering in rows:
     print(f"  Month {month}: {total:>4} plants | {flowering:>4} flowering ({pct:.0f}%) {bar}")
 
 # Query 3: Environmental correlations
-print("\\\n" + "=" * 50)
+print("\\n" + "=" * 50)
 print("QUERY 3: High-count sites vs environmental conditions")
 print("=" * 50)
 rows = c.execute('''
@@ -394,14 +394,14 @@ for site_id, name, alt, area, habitat, protected in sites:
 # Sort by priority (highest first)
 results.sort(key=lambda x: -x[1])
 
-print(f"\\\n{'Rank':>4} | {'Site':15s} | {'Score':>5} | {'Pop':>5} | {'Decline':>7} | {'Threat':>6} | {'Protected':>9}")
+print(f"\\n{'Rank':>4} | {'Site':15s} | {'Score':>5} | {'Pop':>5} | {'Decline':>7} | {'Threat':>6} | {'Protected':>9}")
 print(f"{'':>4}-+-{'-'*15}-+-{'-'*5}-+-{'-'*5}-+-{'-'*7}-+-{'-'*6}-+-{'-'*9}")
 for rank, (name, score, pop, decline, threat, prot) in enumerate(results, 1):
     status = "Yes" if prot else "NO"
     urgency = "CRITICAL" if score > 0.6 else "HIGH" if score > 0.4 else "MODERATE" if score > 0.25 else "LOW"
     print(f"  {rank:>2} | {name:15s} | {score:5.3f} | {pop:>5} | {decline:>6.1f}% | {threat:>6.1f} | {status:>9} → {urgency}")
 
-print(f"\\\nRECOMMENDATION: Prioritize protection for '{results[0][0]}' (score: {results[0][1]:.3f})")
+print(f"\\nRECOMMENDATION: Prioritize protection for '{results[0][0]}' (score: {results[0][1]:.3f})")
 conn.close()`,
       challenge: 'Add a "budget" constraint: each site costs a different amount to protect. Find the combination of sites that maximizes total priority score without exceeding a budget of 100 units.',
       successHint: 'You have built a decision-support tool used by real conservation organizations. The scoring and ranking approach is the foundation of systematic conservation planning.',
@@ -527,7 +527,7 @@ plt.tight_layout()
 plt.show()
 
 # Summary from database
-print("\\\nProjected status in 2075 and 2125:")
+print("\\nProjected status in 2075 and 2125:")
 for scenario in scenarios:
     for target_year in [2075, 2125]:
         row = c.execute('''SELECT temp_increase, habitat_low_m, area_fraction, estimated_population
@@ -608,7 +608,7 @@ print("║     DZUKOU LILY CONSERVATION DECISION REPORT — 2025    ║")
 print("╚══════════════════════════════════════════════════════════╝")
 
 # 1. Population Status
-print("\\\n[1] POPULATION STATUS")
+print("\\n[1] POPULATION STATUS")
 print("-" * 55)
 site_status = []
 for sid, name, alt, area, prot in sites:
@@ -628,7 +628,7 @@ for sid, name, alt, area, prot in sites:
     print(f"  {name:15s} | Pop: {latest[1]:>5} | Trend: {pct_change:>+5.1f}%/yr | Health: {latest[2]:.1f} | {status}")
 
 # 2. Threat Assessment
-print(f"\\\n[2] THREAT ASSESSMENT")
+print(f"\\n[2] THREAT ASSESSMENT")
 print("-" * 55)
 for sid, name, _, _, _ in sites:
     threats = c.execute('SELECT threat, severity, mitigation_cost FROM site_threats WHERE site_id=? ORDER BY severity DESC', (sid,)).fetchall()
@@ -637,7 +637,7 @@ for sid, name, _, _, _ in sites:
     print(f"  {name:15s} | {threat_str:40s} | Mitigation: \${total_cost:>5.0f}")
 
 # 3. Generate Actions
-print(f"\\\n[3] RECOMMENDED ACTIONS")
+print(f"\\n[3] RECOMMENDED ACTIONS")
 print("-" * 55)
 for sid, name, pop, trend, health, threat_sum, status in site_status:
     if status == "CRITICAL":
@@ -663,7 +663,7 @@ for name, action, priority, benefit, cost in actions:
     print(f"  [{priority:>6}] {name:15s} → {action:35s} (benefit: +{benefit*100:.0f}%, cost: \${cost:.0f})")
     total_cost += cost
 
-print(f"\\\n  Total budget required: \${total_cost:,.0f}")
+print(f"\\n  Total budget required: \${total_cost:,.0f}")
 
 # 4. Visualization
 fig, axes = plt.subplots(1, 2, figsize=(12, 5))
@@ -704,7 +704,7 @@ plt.tight_layout()
 plt.show()
 
 conn.close()
-print("\\\n✓ Decision report complete. All data stored and queryable.")`,
+print("\\n✓ Decision report complete. All data stored and queryable.")`,
       challenge: 'Add a 5-year budget allocation optimizer: given $1,000 total budget over 5 years, which actions in which years maximize the total population in 2030? Use a greedy algorithm to find the best allocation.',
       successHint: 'You have built a complete conservation decision support system from scratch. This capstone demonstrates mastery of databases, algorithms, mathematical modeling, and data visualization — the same skills used by professional conservation biologists.',
     },

@@ -829,9 +829,9 @@ ax3.tick_params(colors='gray')
 ax4 = axes[1, 1]
 ax4.set_facecolor('#111827')
 visits = [
-    ('Visit 1: Happy\\\n(leaning forward, ~15 deg)', 15, '#f59e0b'),
-    ('Visit 2: Upset\\\n(hunched down, ~55 deg)', 55, '#a855f7'),
-    ('Visit 3: Afraid\\\n(sitting upright, ~5 deg)', 5, '#94a3b8'),
+    ('Visit 1: Happy\\n(leaning forward, ~15 deg)', 15, '#f59e0b'),
+    ('Visit 2: Upset\\n(hunched down, ~55 deg)', 55, '#a855f7'),
+    ('Visit 3: Afraid\\n(sitting upright, ~5 deg)', 5, '#94a3b8'),
 ]
 for i, (label, ang, fallback) in enumerate(visits):
     R = tmm_reflectance(wavelengths, stack, N_WATER, N_CYTOPLASM, ang)

@@ -371,7 +371,7 @@ ax2.tick_params(colors='gray')
 max_M = np.max(moment_envelope)
 max_M_pos = x_bridge[np.argmax(moment_envelope)]
 ax2.plot(max_M_pos, max_M/1000, 'o', color='#ef4444', markersize=10)
-ax2.annotate(f'Max: {max_M/1000:.0f} kN·m\\\nat {max_M_pos:.1f} m',
+ax2.annotate(f'Max: {max_M/1000:.0f} kN·m\\nat {max_M_pos:.1f} m',
              xy=(max_M_pos, max_M/1000), xytext=(max_M_pos + 3, max_M/1000 - 50),
              color='#ef4444', fontsize=10, arrowprops=dict(arrowstyle='->', color='#ef4444'))
 
@@ -408,7 +408,7 @@ ax4.set_title('Bridge Deflection Under Load', color='white', fontsize=11)
 ax4.tick_params(colors='gray')
 
 max_defl = np.min(deflection) * 1000
-ax4.annotate(f'Max deflection: {abs(max_defl):.1f} mm\\\n(L/{L/(abs(max_defl/1000)):.0f})',
+ax4.annotate(f'Max deflection: {abs(max_defl):.1f} mm\\n(L/{L/(abs(max_defl/1000)):.0f})',
              xy=(L/2, max_defl), xytext=(L/2 + 3, max_defl * 0.5),
              color='#a855f7', fontsize=10, arrowprops=dict(arrowstyle='->', color='#a855f7'))
 
@@ -526,10 +526,10 @@ ax2.plot(x_tunnel, y_tunnel, color='white', linewidth=2, label='Tunnel wall')
 ax2.plot(x_plot, y_plot, color='#ef4444', linewidth=2, label='Stress magnitude')
 ax2.fill_between(x_plot, y_plot, alpha=0.1, color='#ef4444')
 
-ax2.annotate(f'Max stress\\\n{np.max(sigma_theta):.1f} MPa', xy=(0, np.max(r_plot)),
+ax2.annotate(f'Max stress\\n{np.max(sigma_theta):.1f} MPa', xy=(0, np.max(r_plot)),
              xytext=(2, np.max(r_plot) + 1), color='#ef4444', fontsize=9,
              arrowprops=dict(arrowstyle='->', color='#ef4444'))
-ax2.annotate(f'Min stress\\\n{np.min(sigma_theta):.1f} MPa', xy=(np.min(r_plot), 0),
+ax2.annotate(f'Min stress\\n{np.min(sigma_theta):.1f} MPa', xy=(np.min(r_plot), 0),
              xytext=(np.min(r_plot) - 3, -2), color='#3b82f6', fontsize=9,
              arrowprops=dict(arrowstyle='->', color='#3b82f6'))
 

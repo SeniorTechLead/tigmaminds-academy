@@ -277,7 +277,7 @@ for idx, (name, semitones) in enumerate(scales.items()):
     bars = ax.bar(range(len(freqs)), freqs, color=color, alpha=0.8, edgecolor='none')
 
     for i, (freq, note) in enumerate(zip(freqs, notes)):
-        ax.text(i, freq + 10, f'{note}\\\n{freq:.0f}Hz', ha='center', color='white', fontsize=7)
+        ax.text(i, freq + 10, f'{note}\\n{freq:.0f}Hz', ha='center', color='white', fontsize=7)
 
     ax.set_title(f'{name} Scale', color='white', fontsize=11)
     ax.set_ylabel('Frequency (Hz)', color='white', fontsize=9)

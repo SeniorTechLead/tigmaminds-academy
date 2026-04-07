@@ -88,19 +88,19 @@ BODIES = {
 cal = Calendar()
 
 print("=== Maya Astronomy Calculator — Architecture ===")
-print(f"\\\n{'Body':<10} {'Sidereal':>10} {'Synodic':>10} {'Maya':>6} {'Error/cyc':>10}")
+print(f"\\n{'Body':<10} {'Sidereal':>10} {'Synodic':>10} {'Maya':>6} {'Error/cyc':>10}")
 print("-" * 48)
 for b in BODIES.values():
     print(f"{b.name:<10} {b.sidereal_period:>8.1f}d {b.synodic_period:>8.3f}d "
           f"{b.maya_synodic:>4}d {b.synodic_error():>+8.3f}d")
 
-print("\\\nCalendar test:")
+print("\\nCalendar test:")
 for days in [0, 584, 18980, 1872000]:
     lc = cal.to_long_count(days)
     print(f"  Day {days:>9,}: LC={'.'.join(str(x) for x in lc)}")
 
 obs = Observation("Venus", 583.92, 65)
-print(f"\\\nObservation test: Venus 65 cycles, 95% CI: +/-{obs.ci_95():.4f}d")`,
+print(f"\\nObservation test: Venus 65 cycles, 95% CI: +/-{obs.ci_95():.4f}d")`,
       challenge: 'Add a `phase_on_day(day_offset)` method to CelestialBody that returns the synodic phase (0.0-1.0). Use it to determine if Venus is morning star, evening star, or in conjunction on any date.',
       successHint: 'Good system design makes everything else easier. You defined three classes with clear responsibilities — the same separation used by Stellarium, HORIZONS, and every professional astronomical tool.',
     },
@@ -160,7 +160,7 @@ class VenusTableEngine:
 
         errs = [c["error"] for c in self.cycles]
         tc = sum(c["corr"] for c in self.cycles)
-        print(f"\\\nTotal corrections: {tc}d")
+        print(f"\\nTotal corrections: {tc}d")
         print(f"Final error: {self.cycles[-1]['error']:+.2f}d")
         print(f"Without corrections: {65*self.MAYA_SYN - 65*self.TRUE_SYN:+.2f}d")
         print(f"Max error: {max(errs):+.2f}d  Min: {min(errs):+.2f}d")
@@ -171,18 +171,18 @@ engine.run()
 engine.report()
 
 # Phase predictions for selected cycles
-print(f"\\\n=== Phase Predictions ===")
+print(f"\\n=== Phase Predictions ===")
 for c in engine.cycles:
     if c["cycle"] in [1, 13, 33, 65]:
         start = c["maya"] - engine.MAYA_SYN + c["corr"]
-        print(f"\\\nCycle {c['cycle']} (day {c['maya']:,}):")
+        print(f"\\nCycle {c['cycle']} (day {c['maya']:,}):")
         day_in = 0
         for pname, pdur in engine.PHASES:
             print(f"  {pname:<20} day {start+day_in:>8,} ({pdur}d)")
             day_in += pdur
 
 # Corrected vs uncorrected
-print(f"\\\n=== Corrected vs Uncorrected Drift ===")
+print(f"\\n=== Corrected vs Uncorrected Drift ===")
 print(f"{'Cycle':>6} {'Uncorrected':>12} {'Corrected':>12}")
 for c in engine.cycles:
     if c["cycle"] % 10 == 0 or c["cycle"] == 65:
@@ -237,9 +237,9 @@ class EclipsePredictor:
         print(f"Draconic months: {self.CYCLE/self.DRACONIC:.1f}")
         solar = [w for w in warnings if w["type"]=="Solar"]
         lunar = [w for w in warnings if w["type"]=="Lunar"]
-        print(f"\\\nWarnings: {len(warnings)} (Solar: {len(solar)}, Lunar: {len(lunar)})")
+        print(f"\\nWarnings: {len(warnings)} (Solar: {len(solar)}, Lunar: {len(lunar)})")
 
-        print(f"\\\n{'#':>3} {'Day':>7} {'Type':<7} {'Node':>8} {'Lun':>5}")
+        print(f"\\n{'#':>3} {'Day':>7} {'Type':<7} {'Node':>8} {'Lun':>5}")
         print("-" * 32)
         for i, w in enumerate(warnings):
             print(f"{i+1:>3} {w['day']:>7} {w['type']:<7} {w['node_dist']:>6.1f}d {w['lunation']:>5}")
@@ -247,7 +247,7 @@ class EclipsePredictor:
         # Interval analysis
         intervals = [warnings[i+1]["day"]-warnings[i]["day"]
                       for i in range(len(warnings)-1)]
-        print(f"\\\n=== Interval Analysis ===")
+        print(f"\\n=== Interval Analysis ===")
         print(f"Mean interval: {np.mean(intervals):.1f} days")
         groups = {}
         for iv in intervals:
@@ -264,7 +264,7 @@ class EclipsePredictor:
                 seasons[-1].append(w)
             else:
                 seasons.append([w])
-        print(f"\\\nEclipse seasons: {len(seasons)}")
+        print(f"\\nEclipse seasons: {len(seasons)}")
         gaps = [seasons[i+1][0]["day"]-seasons[i][-1]["day"]
                 for i in range(len(seasons)-1)]
         if gaps:
@@ -273,7 +273,7 @@ class EclipsePredictor:
 pred = EclipsePredictor()
 warnings = pred.predict()
 pred.report(warnings)
-print(f"\\\nDresden Codex: 69 warnings | Predicted: {len(warnings)}")
+print(f"\\nDresden Codex: 69 warnings | Predicted: {len(warnings)}")
 print(f"(Adjust ECLIPSE_LIMIT to calibrate match count)")`,
       challenge: 'Tune the eclipse limit to get exactly 69 warnings matching the Dresden Codex. What limit value produces 69? This reveals the Maya\'s implicit tolerance. Also classify each eclipse as total or annular based on the Moon\'s anomalistic phase.',
       successHint: 'You built a working eclipse predictor from orbital mechanics. The core logic (Moon near node at new/full Moon) has not changed in 3,000 years — the tools improved, the physics stayed the same.',
@@ -357,7 +357,7 @@ def fmt(r):
     return (f"  {y:>5}-{m:02d}-{d:02d}  JDN:{r['jdn']:,}  "
             f"LC:{lc}  {r['tz'][0]} {r['tz'][1]}  {r['hb'][0]} {r['hb'][1]}")
 
-print("=== Maya Date Converter ===\\\n")
+print("=== Maya Date Converter ===\\n")
 dates = [(2026,4,5,"Today"),(2012,12,21,"13 Baktun"),
          (2000,1,1,"Y2K"),(1969,7,20,"Moon landing"),
          (1492,10,12,"Columbus"),(683,8,31,"Pakal's death")]
@@ -366,7 +366,7 @@ for (y,m,d), label in dates:
     print(f"{label}:")
     print(fmt(r))
 
-print("\\\n=== Reverse: Long Count to Gregorian ===")
+print("\\n=== Reverse: Long Count to Gregorian ===")
 for lc, label in [((13,0,0,0,0),"13 Baktun"),((9,12,2,0,16),"Pakal accession"),
                     ((0,0,0,0,0),"Maya epoch")]:
     r = conv.from_long_count(lc)
@@ -375,7 +375,7 @@ for lc, label in [((13,0,0,0,0),"13 Baktun"),((9,12,2,0,16),"Pakal accession"),
           f"{r['tz'][0]} {r['tz'][1]}  {r['hb'][0]} {r['hb'][1]}")
 
 # Verify Calendar Round periodicity
-print("\\\n=== Calendar Round Periodicity ===")
+print("\\n=== Calendar Round Periodicity ===")
 base = conv.convert(2026, 4, 5)
 print(f"Today: {base['tz'][0]} {base['tz'][1]}, {base['hb'][0]} {base['hb'][1]}")
 md2 = base["maya_days"] + 18980

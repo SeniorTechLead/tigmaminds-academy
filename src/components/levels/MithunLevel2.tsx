@@ -633,8 +633,8 @@ random_selected = np.random.choice(n_candidates, n_sel, replace=False)
 
 gains = {
     'Random': np.mean(cand_true_gv[random_selected]),
-    'Mass\\nselection': np.mean(cand_true_gv[mass_selected]),
-    'Genomic\\nselection': np.mean(cand_true_gv[genomic_selected]),
+    'Mass\nselection': np.mean(cand_true_gv[mass_selected]),
+    'Genomic\nselection': np.mean(cand_true_gv[genomic_selected]),
 }
 bar_colors = ['#ef4444', '#f59e0b', '#22c55e']
 bars = ax.bar(range(3), list(gains.values()), color=bar_colors, alpha=0.8)
@@ -728,7 +728,7 @@ ax1.set_ylim(0, 2000)
 
 # Global breed status
 ax2.set_facecolor('#111827')
-statuses = ['Not at risk', 'Vulnerable', 'Endangered', 'Critical', 'Extinct\\n(since 2000)']
+statuses = ['Not at risk', 'Vulnerable', 'Endangered', 'Critical', 'Extinct\n(since 2000)']
 counts = [5720, 880, 740, 460, 1000]
 status_colors = ['#22c55e', '#f59e0b', '#ef4444', '#a855f7', '#6b7280']
 

@@ -143,7 +143,7 @@ for epoch in range(500):
         b_history.append(b_gd)
         print(f"Epoch {epoch:3d}: m={m_gd:.3f}, b={b_gd:.3f}, MSE={mse:.3f}")
 
-print(f"\\\nGradient descent: y = {m_gd:.3f}x + {b_gd:.3f}")
+print(f"\\nGradient descent: y = {m_gd:.3f}x + {b_gd:.3f}")
 print(f"Closed-form:      y = {m_exact:.3f}x + {b_exact:.3f}")
 print(f"They match!")
 print()
@@ -241,7 +241,7 @@ for epoch in range(5000):
 z1 = X @ W1 + b1; a1 = sigmoid(z1)
 z2 = a1 @ W2 + b2; pred = sigmoid(z2)
 
-print(f"\\\n=== Learned XOR ===")
+print(f"\\n=== Learned XOR ===")
 for i in range(4):
     print(f"  {X[i]} -> {pred[i][0]:.3f} (expected {y[i][0]})")
 
@@ -253,7 +253,7 @@ plt.title('Neural Network Learning XOR', fontsize=13)
 plt.grid(alpha=0.3)
 plt.show()
 
-print("\\\nEvery step is algebra: Wx + b, then gradient descent.")
+print("\\nEvery step is algebra: Wx + b, then gradient descent.")
 print("A neural network is al-Khwarizmi's equations, running millions of times.")`,
       challenge: 'Modify the network to have 8 hidden neurons instead of 4. Does it learn faster? Try learning a different function: AND (output 1 only when both inputs are 1). How does the loss curve change?',
       successHint: 'You just built a neural network from scratch using nothing but linear algebra and gradient descent. No TensorFlow, no magic — just variables, equations, and an algorithm. Al-Khwarizmi’s three contributions to mathematics (variables, equations, algorithms) are literally the three building blocks of modern AI.',
@@ -318,12 +318,12 @@ for vx, vy in vertices:
     obj = 5 * vx + 4 * vy
     print(f"  ({vx}, {vy}): profit = 5({vx}) + 4({vy}) = {obj}")
     plt.plot(vx, vy, 'o', color='#10b981', markersize=8, zorder=5)
-    plt.annotate(f'({vx},{vy})\\\nP={obj}', xy=(vx, vy), xytext=(vx+3, vy+5), fontsize=9)
+    plt.annotate(f'({vx},{vy})\\nP={obj}', xy=(vx, vy), xytext=(vx+3, vy+5), fontsize=9)
     if obj > best_val:
         best_val = obj
         best_pt = (vx, vy)
 
-print(f"\\\nOptimal: ({best_pt[0]}, {best_pt[1]}) with profit = {best_val}")
+print(f"\\nOptimal: ({best_pt[0]}, {best_pt[1]}) with profit = {best_val}")
 
 plt.plot(best_pt[0], best_pt[1], '*', color='#10b981', markersize=20, zorder=6)
 plt.xlim(-5, 110)
@@ -335,7 +335,7 @@ plt.legend(fontsize=9)
 plt.grid(alpha=0.3)
 plt.show()
 
-print("\\\nThe optimal solution is always at a vertex of the feasible region.")
+print("\\nThe optimal solution is always at a vertex of the feasible region.")
 print("This is the Simplex theorem — check corners, find the optimum.")`,
       challenge: 'Add a third constraint: x + 2y ≤ 120. How does the feasible region change? Does the optimal solution move to a different vertex?',
       successHint: 'Linear programming is used by every airline (scheduling), logistics company (routing), manufacturer (production planning), and financial institution (portfolio optimisation). The algebra is al-Khwarizmi’s; the algorithmic thinking is his legacy; the applications are everywhere.',

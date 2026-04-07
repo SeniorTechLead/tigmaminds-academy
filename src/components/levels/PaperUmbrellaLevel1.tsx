@@ -152,7 +152,7 @@ def draw_droplet(ax, contact_angle, surface_name, color):
         ax.plot(base_half - arc_r * np.cos(arc_t) if contact_angle < 90 else -base_half + arc_r * np.cos(arc_t),
                arc_r * np.sin(arc_t), color='#f59e0b', linewidth=1.5)
 
-    ax.text(0, -0.5, f'{surface_name}\\\n(θ = {contact_angle}°)', ha='center',
+    ax.text(0, -0.5, f'{surface_name}\\n(θ = {contact_angle}°)', ha='center',
            color='white', fontsize=10, fontweight='bold')
     ax.set_xlim(-2, 2)
     ax.set_ylim(-0.8, 2)
@@ -265,7 +265,7 @@ categories = [(20, 'Light breeze'), (40, 'Moderate wind'), (60, 'Strong wind'),
 for speed, name in categories:
     f = 0.5 * rho * (speed/3.6)**2 * Cd * area
     ax1.plot(speed, f, 'o', color='#f59e0b', markersize=6)
-    ax1.annotate(f'{name}\\\n{f:.0f}N', xy=(speed, f), xytext=(speed-10, f+5),
+    ax1.annotate(f'{name}\\n{f:.0f}N', xy=(speed, f), xytext=(speed-10, f+5),
                 color='#f59e0b', fontsize=8)
 
 ax1.set_xlabel('Wind speed (km/h)', color='white')
@@ -385,7 +385,7 @@ ax1.tick_params(colors='gray')
 ax2 = fig.add_subplot(122, polar=True)
 ax2.set_facecolor('#111827')
 
-categories = ['Strength', 'Flexibility', 'Water\\\nresistance', 'Cost', 'Durability']
+categories = ['Strength', 'Flexibility', 'Water\\nresistance', 'Cost', 'Durability']
 n_cats = len(categories)
 angles = np.linspace(0, 2 * np.pi, n_cats, endpoint=False).tolist()
 angles += angles[:1]
@@ -519,7 +519,7 @@ for i, (ws, color) in enumerate([(0, '#22c55e'), (10, '#3b82f6'),
     y_person = person_radius * np.sin(theta)
     ax2.plot(x_person, y_person + i*2.5, '--', color='white', linewidth=1, alpha=0.5)
 
-    ax2.text(-1.5, i*2.5, f'{ws} km/h\\\nwind', color=color, fontsize=9, ha='right')
+    ax2.text(-1.5, i*2.5, f'{ws} km/h\\nwind', color=color, fontsize=9, ha='right')
 
 ax2.set_title('Rain Shadow (top view) at Different Wind Speeds', color='white', fontsize=11)
 ax2.set_aspect('equal')
@@ -605,10 +605,10 @@ ax1.tick_params(colors='gray')
 ax2.set_facecolor('#111827')
 examples = {
     'Plain paper': {'angle': 40, 'color': '#854d0e'},
-    'Oiled paper\\\n(traditional)': {'angle': 95, 'color': '#f59e0b'},
+    'Oiled paper\\n(traditional)': {'angle': 95, 'color': '#f59e0b'},
     'Waxed surface': {'angle': 110, 'color': '#22c55e'},
-    'Lotus-inspired\\\nnano coating': {'angle': 160, 'color': '#3b82f6'},
-    'Actual lotus\\\nleaf': {'angle': 164, 'color': '#a855f7'},
+    'Lotus-inspired\\nnano coating': {'angle': 160, 'color': '#3b82f6'},
+    'Actual lotus\\nleaf': {'angle': 164, 'color': '#a855f7'},
 }
 
 names = list(examples.keys())

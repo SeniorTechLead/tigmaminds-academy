@@ -46,7 +46,7 @@ pitches = [3, 4, 5, 6, 8]
 f_worker = 50  # N — a comfortable sustained push
 
 print("=== Screw Press Force Multiplication ===")
-print(f"Worker input force: {f_worker} N | Efficiency: 30%\\\n")
+print(f"Worker input force: {f_worker} N | Efficiency: 30%\\n")
 
 print(f"{'Handle (m)':<12} {'Pitch (mm)':>11} {'Ideal MA':>9} {'Actual MA':>10} {'Output (N)':>11} {'Output (kN)':>12}")
 print("-" * 67)
@@ -62,7 +62,7 @@ for p in pitches:
     print(f"{0.5:<12.1f} {p:>9} {ideal:>9.0f} {actual:>10.0f} {f_out:>11.0f} {f_out/1000:>10.1f}")
 
 # Pressure on the page
-print("\\\n=== Printing Pressure Analysis ===")
+print("\\n=== Printing Pressure Analysis ===")
 page_area_m2 = 0.30 * 0.45  # ~A3 page size (Gutenberg Bible page)
 target_pressure_kpa = 150    # minimum for good ink transfer
 
@@ -72,7 +72,7 @@ for h in [0.4, 0.5, 0.6]:
     quality = "GOOD" if pressure_kpa >= target_pressure_kpa else "FAINT"
     print(f"Handle {h}m: {f_out/1000:.1f} kN -> {pressure_kpa:.0f} kPa ({quality})")
 
-print(f"\\\nTarget: >= {target_pressure_kpa} kPa for uniform ink transfer")
+print(f"\\nTarget: >= {target_pressure_kpa} kPa for uniform ink transfer")
 print("Gutenberg's press achieved ~200-300 kPa — enough for crisp text.")`,
       challenge: 'A longer handle gives more force, but also makes the press slower (the worker sweeps a bigger arc per impression). Calculate impressions per hour for handles of 0.3 m to 0.7 m, assuming one full turn per impression and the worker moves the handle at 1 m/s. What handle length maximises pages per hour while meeting the 150 kPa minimum?',
       successHint: 'The screw press is a force multiplier — one of the six classical simple machines. Every hydraulic press, car jack, and bottle cap uses the same principle: trade distance for force. Gutenberg applied ancient physics to create a new technology.',
@@ -125,7 +125,7 @@ for sn_pct in range(0, 101, 10):
     print(f"{sn_pct:<8} {100-sn_pct:>4}% {liq_t:>12.0f} {phase:>16}")
 
 # Type metal: ternary Pb-Sn-Sb
-print("\\\n=== Gutenberg Type Metal Compositions ===")
+print("\\n=== Gutenberg Type Metal Compositions ===")
 recipes = [
     {"name": "Gutenberg original", "pb": 83, "sb": 12, "sn": 5},
     {"name": "Modern book type",   "pb": 75, "sb": 18, "sn": 7},
@@ -147,7 +147,7 @@ for r in recipes:
     quality = "EXCELLENT" if cast_score > 8 else "GOOD" if cast_score > 6 else "FAIR"
     print(f"{r['name']:<24} {r['pb']:>3} {r['sb']:>3} {r['sn']:>3} {melt:>7.0f} {hardness:>7.1f} {quality:>12}")
 
-print("\\\nHigher antimony = harder type but more brittle")
+print("\\nHigher antimony = harder type but more brittle")
 print("Higher tin = better flow into mould but softer")
 print("Gutenberg's ratio balanced all three properties.")`,
       challenge: 'Gutenberg\'s type needed to last 300 impressions before serifs wore noticeably. Model the wear rate as proportional to 1/hardness and calculate how many impressions each recipe survives before 10% height loss. Which recipe maximises total impressions before needing recast?',
@@ -232,7 +232,7 @@ print(f"  Total badness: {total_badness_g:.0f}")
 
 # Optimised: try different break points using dynamic programming
 # Simplified version: evaluate first-fit-decreasing vs greedy
-print("\\\n=== Optimised vs Greedy Comparison ===")
+print("\\n=== Optimised vs Greedy Comparison ===")
 np.random.seed(42)
 
 # Generate 100 random paragraphs and compare
@@ -261,7 +261,7 @@ print(f"  Greedy mean badness: {np.mean(greedy_scores):.0f}")
 print(f"  Greedy std badness:  {np.std(greedy_scores):.0f}")
 print(f"  Worst paragraph:     {np.max(greedy_scores):.0f}")
 print(f"  Best paragraph:      {np.min(greedy_scores):.0f}")
-print(f"\\\nKnuth-Plass DP typically reduces badness by 30-50%.")
+print(f"\\nKnuth-Plass DP typically reduces badness by 30-50%.")
 print(f"This is why LaTeX produces visually superior text.")`,
       challenge: 'Implement a simple improvement: after greedy breaking, check if moving the last word of one line to the next line reduces total badness. This "local search" won\'t match Knuth-Plass but will outperform pure greedy. How much does it improve?',
       successHint: 'You just explored the line-breaking problem — which is a special case of bin packing, one of the most important problems in computer science. Bin packing appears in shipping container loading, memory allocation, cloud server scheduling, and cutting stock problems in manufacturing.',
@@ -303,7 +303,7 @@ def average_cost(n_copies, fixed_cost, marginal_cost):
 # Compare scribal vs printing economics
 print("=== Scribal vs Printing: Cost Comparison ===")
 print(f"Scribe: 30 guilders/copy (constant)")
-print(f"Press: 100 guilders setup + 2 guilders/copy\\\n")
+print(f"Press: 100 guilders setup + 2 guilders/copy\\n")
 
 quantities = [1, 2, 5, 10, 20, 50, 100, 200, 500, 1000]
 
@@ -319,11 +319,11 @@ for n in quantities:
 
 # Find exact crossover
 n_cross = 100 / (30 - 2)
-print(f"\\\nExact crossover: {n_cross:.1f} copies")
+print(f"\\nExact crossover: {n_cross:.1f} copies")
 print(f"At 4+ copies, printing is cheaper per total cost.")
 
 # Different book types
-print("\\\n=== Crossover Points for Different Productions ===")
+print("\\n=== Crossover Points for Different Productions ===")
 books = [
     {"name": "Pamphlet (4 pages)", "fixed": 10, "marginal": 0.5, "scribe": 3},
     {"name": "Textbook (200 pages)", "fixed": 80, "marginal": 3, "scribe": 25},
@@ -339,7 +339,7 @@ for b in books:
     savings_100 = 1 - (b["fixed"] + 100 * b["marginal"]) / (100 * b["scribe"])
     print(f"{b['name']:<28} {cross:>8.0f} copies {savings_100:>14.0%}")
 
-print("\\\nSmaller works have lower crossover points — pamphlets became")
+print("\\nSmaller works have lower crossover points — pamphlets became")
 print("the first truly mass-produced printed material (Martin Luther's")
 print("95 Theses: printed as a 4-page pamphlet, distributed by thousands).")`,
       challenge: 'Add a "time" dimension: a scribe produces 1 copy per 3 months. A press produces 300 copies per month after a 2-month setup period. Plot the cumulative copies over 2 years for a single scribe vs a single press. When does the press\'s total output overtake the scribe\'s? This time advantage was even more revolutionary than the cost advantage.',
@@ -399,7 +399,7 @@ scenarios = [
 ]
 
 print("=== Information Diffusion: SI Model ===")
-print(f"Population: {population:,} | Initial informed: {initial}\\\n")
+print(f"Population: {population:,} | Initial informed: {initial}\\n")
 
 print(f"{'Scenario':<28} {'30 days':>8} {'90 days':>8} {'180 days':>9} {'365 days':>9} {'50% day':>8}")
 print("-" * 73)
@@ -415,7 +415,7 @@ for name, beta in scenarios:
     print(f"{name:<28} {I[29]:>7.0f} {I[89]:>7.0f} {I[179]:>8.0f} {I[364]:>8.0f} {half_day:>7}d")
 
 # Luther's 95 Theses: actual vs model
-print("\\\n=== Case Study: Luther's 95 Theses (1517) ===")
+print("\\n=== Case Study: Luther's 95 Theses (1517) ===")
 europe_pop = 5_000_000  # literate population of Europe
 S, I = si_model(europe_pop, 50, 0.015, 365)
 
@@ -425,7 +425,7 @@ print("-" * 29)
 for d in milestones:
     print(f"{d:>5}d {I[d-1]:>11,.0f} {I[d-1]/europe_pop*100:>8.1f}%")
 
-print(f"\\\nWithout printing (beta=0.0003):")
+print(f"\\nWithout printing (beta=0.0003):")
 S2, I2 = si_model(europe_pop, 50, 0.0003, 365)
 print(f"  After 1 year: {I2[364]:,.0f} informed ({I2[364]/europe_pop*100:.2f}%)")
 print(f"  Printing accelerated spread by {I[364]/max(I2[364],1):.0f}x")`,

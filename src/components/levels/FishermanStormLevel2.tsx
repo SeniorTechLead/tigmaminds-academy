@@ -137,7 +137,7 @@ hours = np.arange(len(u_hist))
 print(f"Geostrophic wind: {vg_x:.1f} m/s eastward ({vg_x*3.6:.0f} km/h)")
 print(f"PGF: {abs(dpdy/rho):.5f} m/s² (northward)")
 print(f"Coriolis: {f*vg_x:.5f} m/s² (southward, balancing PGF)")
-print(f"\\\nThe wind blows PARALLEL to isobars, not across them.")
+print(f"\\nThe wind blows PARALLEL to isobars, not across them.")
 print(f"This is why weather maps show isobars — they're wind direction indicators.")`,
       challenge: 'Near the surface, friction reduces the wind speed by ~30% and turns it ~20-30° toward low pressure. Modify the simulation to include friction. How does the trajectory change?',
       successHint: 'Geostrophic balance is the default state of large-scale atmospheric flow. Understanding it is essential for reading weather maps, predicting wind, and understanding why weather systems move the way they do.',
@@ -256,7 +256,7 @@ print(f"  Initial perturbation: ±{perturbation}")
 print(f"  Spread at step 10: {spread[10]:.4f}")
 print(f"  Spread at step 30: {spread[30]:.4f}")
 print(f"  Spread at step 50: {spread[50]:.4f}")
-print(f"\\\nSmall errors grow exponentially — this is chaos.")
+print(f"\\nSmall errors grow exponentially — this is chaos.")
 print(f"Ensemble forecasting acknowledges this by giving probabilities, not certainties.")`,
       challenge: 'Change the Lorenz parameter from 3.9 to 3.5 (less chaotic) and to 4.0 (maximally chaotic). How does the ensemble spread change? At what parameter value does the system become predictable?',
       successHint: 'NWP is one of humanity\'s greatest scientific achievements. Every day, supercomputers solve the equations of atmospheric physics to predict tomorrow\'s weather with remarkable accuracy. Ensemble forecasting honestly represents what we know and what we don\'t.',
@@ -317,7 +317,7 @@ print("  Fewer total cyclones (less favorable conditions overall)")
 print("  More intense cyclones (warmer water = more fuel)")
 print("  Higher storm surges (sea level rise + intensity increase)")
 print("  Changing monsoon patterns (affects cyclone steering)")
-print("\\\nClimate sensitivity (best estimate): 3.0°C per CO2 doubling")
+print("\\nClimate sensitivity (best estimate): 3.0°C per CO2 doubling")
 print("This means: if CO2 doubles from pre-industrial, equilibrium warming ~ 3°C")`,
       challenge: 'Modify the energy balance model to include ice-albedo feedback: as temperature rises, albedo decreases (less ice). Set albedo = 0.30 - 0.02 * max(dT, 0). How does this change the warming? This is a positive feedback loop.',
       successHint: 'Climate models are our only tool for seeing the long-term future of Earth\'s atmosphere. They\'re imperfect, but their core physics is well-tested and their projections are the basis for global climate policy. Understanding their strengths and limitations is essential for informed citizenship.',
@@ -367,7 +367,7 @@ shelter_factor = shelter_pct / 100
 
 print("Key takeaway: the same cyclones hit India today as in 1970.")
 print("The difference is preparedness, not nature.")
-print("\\\nCost-effectiveness winners:")
+print("\\nCost-effectiveness winners:")
 for name, data in sorted(interventions.items(), key=lambda x: x[1]['cost']/x[1]['lives_saved_per_event']):
     cpl = data['cost'] / data['lives_saved_per_event'] * 1e6
     print(f"  {name.replace(chr(10), ' ')}: {cpl:,.0f} per life saved")`,

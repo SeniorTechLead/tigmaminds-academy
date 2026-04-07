@@ -365,7 +365,7 @@ if np.any(in_gap):
     gap_center = (gap_low + gap_high) / 2
     gap_width = gap_high - gap_low
     ax1.axvspan(gap_low, gap_high, alpha=0.15, color='#ef4444')
-    ax1.annotate(f'Band gap: {gap_low:.0f}-{gap_high:.0f}nm\\\n(width: {gap_width:.0f}nm)',
+    ax1.annotate(f'Band gap: {gap_low:.0f}-{gap_high:.0f}nm\\n(width: {gap_width:.0f}nm)',
                 xy=(gap_center, 98), color='#ef4444', fontsize=10, ha='center')
 
 # Band structure diagram (angle vs reflected wavelength)
@@ -640,7 +640,7 @@ technologies = {
     'Structural fabric': {'performance': [7, 10, 9, 6, 8], 'color': '#22c55e'},
     'Food sensor': {'performance': [6, 7, 5, 8, 9], 'color': '#ef4444'},
 }
-categories = ['Colour\\\nvividness', 'Durability', 'Angle\\\ndependence', 'Energy\\\nefficiency', 'Cost\\\neffective']
+categories = ['Colour\\nvividness', 'Durability', 'Angle\\ndependence', 'Energy\\nefficiency', 'Cost\\neffective']
 
 angles = np.linspace(0, 2 * np.pi, len(categories), endpoint=False).tolist()
 angles += angles[:1]
@@ -755,15 +755,15 @@ ax1.set_ylim(0, 5)
 # Timeline of biomimetic optics
 ax2.set_facecolor('#111827')
 events = [
-    (1665, "Hooke observes peacock\\nfeather colours", '#a855f7'),
-    (1801, "Young's double slit\\nproves wave nature", '#3b82f6'),
-    (1917, "Lord Rayleigh explains\\nthin-film colour", '#f59e0b'),
-    (1962, "First observation of\\nphotonic structure in beetle", '#22c55e'),
-    (1987, "Yablonovitch proposes\\nphotonic crystals", '#ef4444'),
-    (2001, "First biomimetic\\nmoth-eye AR coating", '#3b82f6'),
-    (2010, "Qualcomm Mirasol\\nMorpho-inspired display", '#f59e0b'),
-    (2015, "Structural colour\\nfabrics commercialized", '#22c55e'),
-    (2024, "Photonic crystal\\nsensors in development", '#a855f7'),
+    (1665, "Hooke observes peacock\nfeather colours", '#a855f7'),
+    (1801, "Young's double slit\nproves wave nature", '#3b82f6'),
+    (1917, "Lord Rayleigh explains\nthin-film colour", '#f59e0b'),
+    (1962, "First observation of\nphotonic structure in beetle", '#22c55e'),
+    (1987, "Yablonovitch proposes\nphotonic crystals", '#ef4444'),
+    (2001, "First biomimetic\nmoth-eye AR coating", '#3b82f6'),
+    (2010, "Qualcomm Mirasol\nMorpho-inspired display", '#f59e0b'),
+    (2015, "Structural colour\nfabrics commercialized", '#22c55e'),
+    (2024, "Photonic crystal\nsensors in development", '#a855f7'),
 ]
 
 for i, (year, label, color) in enumerate(events):
@@ -802,7 +802,7 @@ for i, (name, metrics) in enumerate(natural.items()):
     ax3.bar(x + i * width, normalized, width, label=name, alpha=0.8)
 
 ax3.set_xticks(x + width * 1.5)
-ax3.set_xticklabels(['Peak\\nreflectance %', 'Bandwidth\\n(nm)', 'Angular\\nrange (°)', 'Durability\\n(years)'],
+ax3.set_xticklabels(['Peak\nreflectance %', 'Bandwidth\n(nm)', 'Angular\nrange (°)', 'Durability\n(years)'],
                      color='gray', fontsize=9)
 ax3.set_ylabel('Value', color='white')
 ax3.set_title('Natural Optical Structure Performance', color='white', fontsize=13)
