@@ -442,7 +442,7 @@ for d, label in [(1, '1m (bell tower)'), (50, '50m (courtyard)'),
 
 ax.set_xlabel('Distance from bell (metres)', fontsize=11)
 ax.set_ylabel('Sound level (dB)', fontsize=11)
-ax.set_title('Sangha\\'s Sound Fading Across the Tawang Valley', fontsize=13)
+ax.set_title('Sangha\'s Sound Fading Across the Tawang Valley', fontsize=13)
 ax.legend(fontsize=10)
 ax.grid(alpha=0.3)
 ax.set_xlim(1, 10000)

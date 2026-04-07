@@ -277,7 +277,7 @@ import matplotlib.pyplot as plt
 # --- Evaporative Cooling & Psychrometrics ---
 
 def wet_bulb_approx(T_db, RH):
-    \"\"\"Approximate wet-bulb temperature using Stull (2011) formula.\"\"\"
+    """Approximate wet-bulb temperature using Stull (2011) formula."""
     return T_db * np.arctan(0.151977 * (RH + 8.313659)**0.5) + \
            np.arctan(T_db + RH) - np.arctan(RH - 1.676331) + \
            0.00391838 * RH**1.5 * np.arctan(0.023101 * RH) - 4.686035

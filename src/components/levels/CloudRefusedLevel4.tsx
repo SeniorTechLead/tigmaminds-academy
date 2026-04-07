@@ -555,7 +555,7 @@ def simulate_with_seeding(n_droplets=5000, duration_min=30, dt=5.0,
             n_liquid_hist.append(np.sum(phase[act] == 0))
             n_precip_hist.append(np.sum(~active))
 
-        # Temperature at each droplet\'s height
+        # Temperature at each droplet's height
         temps = T_base - lapse * heights
 
         # --- CONDENSATION ---

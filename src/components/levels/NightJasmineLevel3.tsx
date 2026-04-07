@@ -273,7 +273,7 @@ for row, (name, day_len, nb) in enumerate(scenarios):
 
     # Flowering signal: CO protein present AND Pfr is low (night)
     # In short-day plants: flowering when CO peak falls in darkness (low Pfr)
-    flowering_signal = co * (1 - Pfr)  # high when CO is high AND it\'s dark
+    flowering_signal = co * (1 - Pfr)  # high when CO is high AND it's dark
     avg_signal = np.mean(flowering_signal[len(t)//3:])  # average over last 2 days
     flowering_signals.append(avg_signal)
 
@@ -468,7 +468,7 @@ print()
 print("The cascade acts as:")
 print("  1. Signal AMPLIFIER: 1 Pfr -> many PIF degraded -> hundreds of genes")
 print("  2. Temporal FILTER: rapid flickers are smoothed by nuclear translocation delay")
-print("  3. Binary SWITCH: PIF acts as a threshold — above it, genes are off; below, they\'re on")`,
+print("  3. Binary SWITCH: PIF acts as a threshold — above it, genes are off; below, they're on")`,
       challenge: 'Add a feedback loop where gene expression products stabilize Pfr in the nucleus (positive feedback). How does this change the switching dynamics? Does the system become bistable (having two stable states)?',
       successHint: 'Signal transduction cascades are the computational circuits of cells. They amplify, filter, integrate, and switch — performing logic operations without any silicon or electricity. The same cascade architecture appears in immune signaling, neural transmission, and hormone response.',
     },

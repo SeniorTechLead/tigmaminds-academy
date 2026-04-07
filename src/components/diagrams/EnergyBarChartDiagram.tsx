@@ -53,7 +53,7 @@ export default function EnergyBarChartDiagram() {
           d={`${hillPath} L${hillRight},${hillBottom} L${hillLeft},${hillBottom} Z`}
           className="fill-emerald-100 dark:fill-emerald-900/30 stroke-emerald-600 dark:stroke-emerald-500"
           strokeWidth="2"
-          fill-opacity="0.6"
+          fillOpacity="0.6"
         />
 
         {/* Height reference dashed line */}

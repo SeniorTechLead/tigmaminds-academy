@@ -651,7 +651,7 @@ print(f"True population sizes: {true_pop_sizes}")
 #   m_t: marked animals captured
 #   u_t: unmarked animals captured
 #   n_t: total captured
-#   R_t: animals released (= captured, since camera traps don\'t hold animals)
+#   R_t: animals released (= captured, since camera traps don't hold animals)
 #   z_t: animals captured before t and after t but not at t
 
 n_t = np.sum(histories, axis=0)  # total captured per session

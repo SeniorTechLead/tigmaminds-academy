@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Lock, LogIn, Loader2 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useAuth } from '../contexts/AuthContext';
 
 interface Props {
@@ -16,8 +17,9 @@ export default function SignUpGate({
 }: Props) {
   const { signInWithGoogle } = useAuth();
   const [redirecting, setRedirecting] = useState(false);
+  const pathname = usePathname();
 
-  const effectiveReturnTo = returnTo || window.location.pathname + window.location.search;
+  const effectiveReturnTo = returnTo || pathname || '/';
 
   const handleGoogle = () => {
     setRedirecting(true);
@@ -44,8 +46,7 @@ export default function SignUpGate({
             </svg>
             {redirecting ? <><Loader2 className="w-4 h-4 animate-spin" /> Redirecting to Google...</> : 'Continue with Google'}
           </button>
-          <Link
-            to={`/auth?returnTo=${encodeURIComponent(effectiveReturnTo)}`}
+          <Link href={`/auth?returnTo=${encodeURIComponent(effectiveReturnTo)}`}
             className="text-sm text-amber-600 dark:text-amber-400 hover:underline font-medium"
           >
             or sign up with email
@@ -81,8 +82,7 @@ export default function SignUpGate({
               </svg>
               {redirecting ? <><Loader2 className="w-4 h-4 animate-spin" /> Redirecting to Google...</> : 'Continue with Google'}
             </button>
-            <Link
-              to={`/auth?returnTo=${encodeURIComponent(effectiveReturnTo)}`}
+            <Link href={`/auth?returnTo=${encodeURIComponent(effectiveReturnTo)}`}
               className="inline-flex items-center gap-1.5 text-sm text-amber-600 dark:text-amber-400 hover:underline font-medium"
             >
               <LogIn className="w-3.5 h-3.5" />

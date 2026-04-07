@@ -36,14 +36,92 @@ export type Subject =
   | 'Astronomy'
   | 'Health & Medicine'
   | 'Marine Science'
-  | 'History';
+  | 'History'
+  | 'Robotics';
 
-export type Tradition = 'Northeast India' | 'Hindu' | 'Buddhist' | 'Christian' | 'Islamic' | 'World History';
+export type Tradition = 'Northeast India' | 'Hindu' | 'Buddhist' | 'Christian' | 'Islamic' | 'World History' | 'Bengali' | 'Telugu' | 'Tamil';
+
+export interface LessonOrigin {
+  state?: string;      // e.g. 'Assam', 'West Bengal', 'Tamil Nadu', 'Telangana'
+  country?: string;    // e.g. 'India', 'Egypt', 'Greece'
+  religion?: string;   // e.g. 'Hindu', 'Buddhist', 'Christian', 'Islamic'
+  label: string;       // display label: 'Assam', 'West Bengal', 'World History'
+}
+
+const TRADITION_TO_ORIGIN: Record<Tradition, LessonOrigin> = {
+  'Northeast India': { state: 'Assam', country: 'India', label: 'Assam' },
+  'Hindu': { country: 'India', religion: 'Hindu', label: 'Hinduism' },
+  'Buddhist': { country: 'India', religion: 'Buddhist', label: 'Buddhism' },
+  'Christian': { religion: 'Christian', label: 'Christianity' },
+  'Islamic': { religion: 'Islamic', label: 'Islam' },
+  'World History': { label: 'World History' },
+  'Bengali': { state: 'West Bengal', country: 'India', label: 'West Bengal' },
+  'Telugu': { country: 'India', label: 'South India' },  // fallback only — stories should use per-lesson origin
+  'Tamil': { state: 'Tamil Nadu', country: 'India', label: 'Tamil Nadu' },
+};
+
+// Per-slug overrides for stories set in states other than the tradition default
+const SLUG_ORIGIN_OVERRIDES: Record<string, LessonOrigin> = {
+  // NE stories not in Assam
+  'snow-leopards-promise': { state: 'Sikkim', country: 'India', label: 'Sikkim' },
+  'map-makers-granddaughter': { state: 'Meghalaya', country: 'India', label: 'Meghalaya' },
+  'bridge-that-grew': { state: 'Meghalaya', country: 'India', label: 'Meghalaya' },
+  'monsoon-home': { state: 'Meghalaya', country: 'India', label: 'Meghalaya' },
+  'pitcher-plant': { state: 'Meghalaya', country: 'India', label: 'Meghalaya' },
+  'wild-orchids-clouds': { state: 'Meghalaya', country: 'India', label: 'Meghalaya' },
+  'postman-hills': { state: 'Meghalaya', country: 'India', label: 'Meghalaya' },
+  'bamboo-flute-of-nagaland': { state: 'Nagaland', country: 'India', label: 'Nagaland' },
+  'seed-keeper-of-nagaland': { state: 'Nagaland', country: 'India', label: 'Nagaland' },
+  'the-hornbills-crown': { state: 'Nagaland', country: 'India', label: 'Nagaland' },
+  'dancing-deer-of-loktak-lake': { state: 'Manipur', country: 'India', label: 'Manipur' },
+  'secret-garden-loktak': { state: 'Manipur', country: 'India', label: 'Manipur' },
+  'red-panda-mask': { state: 'Arunachal Pradesh', country: 'India', label: 'Arunachal Pradesh' },
+  'brave-mithun-arunachal': { state: 'Arunachal Pradesh', country: 'India', label: 'Arunachal Pradesh' },
+  'how-orchid-got-colors': { state: 'Arunachal Pradesh', country: 'India', label: 'Arunachal Pradesh' },
+  'stars-of-ziro': { state: 'Arunachal Pradesh', country: 'India', label: 'Arunachal Pradesh' },
+  'stars-ziro-valley': { state: 'Arunachal Pradesh', country: 'India', label: 'Arunachal Pradesh' },
+  // Mizoram
+  'cheraw-bamboo-dance': { state: 'Mizoram', country: 'India', label: 'Mizoram' },
+  'mautam-bamboo-famine': { state: 'Mizoram', country: 'India', label: 'Mizoram' },
+  'iron-smiths-lushai': { state: 'Mizoram', country: 'India', label: 'Mizoram' },
+  'hawk-blue-mountain': { state: 'Mizoram', country: 'India', label: 'Mizoram' },
+  'orchids-phawngpui': { state: 'Mizoram', country: 'India', label: 'Mizoram' },
+  // Manipur
+  'kangla-fort-manipur': { state: 'Manipur', country: 'India', label: 'Manipur' },
+  'thang-ta-manipur': { state: 'Manipur', country: 'India', label: 'Manipur' },
+  'ras-lila-manipur': { state: 'Manipur', country: 'India', label: 'Manipur' },
+  'ima-keithel-market': { state: 'Manipur', country: 'India', label: 'Manipur' },
+  'polo-manipur': { state: 'Manipur', country: 'India', label: 'Manipur' },
+  // Tripura
+  'neermahal-water-palace': { state: 'Tripura', country: 'India', label: 'Tripura' },
+  'fourteen-gods-tripura': { state: 'Tripura', country: 'India', label: 'Tripura' },
+  'rubber-tripura': { state: 'Tripura', country: 'India', label: 'Tripura' },
+  'cane-weavers-tripura': { state: 'Tripura', country: 'India', label: 'Tripura' },
+  'tripura-sundari-temple': { state: 'Tripura', country: 'India', label: 'Tripura' },
+  // Nagaland
+  'dzukou-valley-lily': { state: 'Nagaland', country: 'India', label: 'Nagaland' },
+  'stone-pulling-nagaland': { state: 'Nagaland', country: 'India', label: 'Nagaland' },
+  'hornbill-flight-nagaland': { state: 'Nagaland', country: 'India', label: 'Nagaland' },
+  'naga-dao-metallurgy': { state: 'Nagaland', country: 'India', label: 'Nagaland' },
+  // Sikkim
+  'kanchenjunga-five-treasures': { state: 'Sikkim', country: 'India', label: 'Sikkim' },
+  'red-panda-sikkim': { state: 'Sikkim', country: 'India', label: 'Sikkim' },
+  'cardamom-hills-sikkim': { state: 'Sikkim', country: 'India', label: 'Sikkim' },
+  'prayer-flags-sikkim': { state: 'Sikkim', country: 'India', label: 'Sikkim' },
+};
+
+export function getLessonOrigin(lesson: { slug?: string; tradition?: Tradition; origin?: LessonOrigin }): LessonOrigin {
+  if (lesson.origin) return lesson.origin;
+  if (lesson.slug && SLUG_ORIGIN_OVERRIDES[lesson.slug]) return SLUG_ORIGIN_OVERRIDES[lesson.slug];
+  if (lesson.tradition) return TRADITION_TO_ORIGIN[lesson.tradition];
+  return { country: 'India', label: 'India' };
+}
 
 export interface Lesson {
   id: number;
   slug: string;
-  tradition?: Tradition;
+  tradition?: Tradition;  // legacy — kept for backward compat
+  origin?: LessonOrigin;
   story: { title: string; tagline: string; content: string };
   stem: {
     title: string;

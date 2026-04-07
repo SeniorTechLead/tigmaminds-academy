@@ -246,7 +246,7 @@ def build_network(tree_pos, orchid_pos, fungi_pos, tree_range=3.0, orchid_range=
             dist = np.linalg.norm(orchid_pos[i] - fungi_pos[j])
             if dist < orchid_range:
                 edges.append(('orchid', i, 'fungus', j))
-                capacities.append(1.0)  # orchids receive, don\'t contribute much
+                capacities.append(1.0)  # orchids receive, don't contribute much
 
     return edges, np.array(capacities)
 

@@ -944,6 +944,32 @@ export const scienceReferences: ReferenceGuide[] = [
           },
         },
       },
+      {
+        id: 'fish-migration',
+        title: 'Fish Migration — Navigating Rivers and Oceans',
+        beginnerContent:
+          'Many fish species make incredible journeys — swimming hundreds or thousands of kilometres between where they feed and where they breed. The **hilsa** fish of South Asia swims upstream from the Bay of Bengal into freshwater rivers to spawn. Atlantic salmon cross entire oceans, then return to the exact stream where they were born.\n\n' +
+          'How do they navigate? Fish use multiple cues: **smell** (they can detect the unique chemical signature of their home river), **Earth\'s magnetic field** (they have magnetite crystals in their bodies that act like a compass), **water temperature gradients**, and **ocean currents**. It\'s like having GPS, a thermometer, and a nose all working together.\n\n' +
+          'Swimming upstream is incredibly hard. Fish must fight against the current, and the energy cost is enormous. The hilsa stops eating during its migration — it runs entirely on stored body fat. A fish that weighs 2 kg at the start of its journey may weigh only 1.2 kg when it arrives. Every gram of fat is fuel.',
+        intermediateContent:
+          'The physics of fish swimming involves **thrust vs drag**. A fish generates thrust by oscillating its tail (the caudal fin), creating vortices that push water backward. Newton\'s third law: the water pushes the fish forward. The drag force opposes motion and depends on the fish\'s shape, speed, and the fluid\'s viscosity: F_drag = ½ρv²C_dA, where ρ is water density, v is speed, C_d is the drag coefficient, and A is the cross-sectional area.\n\n' +
+          'Fish that migrate long distances have evolved streamlined, fusiform body shapes that minimise C_d. The hilsa\'s elongated, laterally compressed body has a drag coefficient around 0.04 — compared to 1.0 for a flat plate. River fish must also contend with turbulent flow. They exploit **Kármán vortex streets** — alternating vortices shed by rocks — to reduce their own energy expenditure by "slaloming" through the wake.',
+        advancedContent:
+          'Fish navigation involves **true bicoordinate magnetic maps**. Experiments with sea turtles and salmon show they can detect both the **inclination** (dip angle) and **intensity** of Earth\'s magnetic field, which vary predictably with latitude and longitude. This gives them a two-coordinate positioning system analogous to GPS. The sensory mechanism involves chains of magnetite (Fe₃O₄) nanoparticles in the olfactory epithelium, coupled to mechanosensitive ion channels. The signal-to-noise ratio is estimated at 10⁻⁵ Tesla — a thousand times weaker than a refrigerator magnet, yet sufficient for basin-scale navigation.',
+      },
+      {
+        id: 'homing-navigation',
+        title: 'Homing Navigation — How Animals Find Their Way Home',
+        beginnerContent:
+          'Homing pigeons can fly 1,000 kilometres and return to their loft with astonishing accuracy. Monarch butterflies migrate 4,000 km from Canada to a specific forest in Mexico. Sea turtles cross entire oceans and return to the exact beach where they hatched. How?\n\n' +
+          'Animals use a combination of navigation tools: **Magnetoreception** — sensing Earth\'s magnetic field using tiny iron-containing crystals in their bodies. **Sun compass** — tracking the sun\'s position (adjusted for time of day using an internal clock). **Star compass** — some birds navigate by star patterns at night. **Olfactory maps** — pigeons can smell their way home using gradients of atmospheric chemicals. **Landmarks** — once close to home, visual memory takes over.\n\n' +
+          'Think of it like this: the magnetic field gets you to the right city, the sun compass gets you to the right neighbourhood, smell gets you to the right street, and landmarks get you to your front door.',
+        intermediateContent:
+          'The **magnetic map hypothesis** proposes that animals encode position using two components of Earth\'s field: **total intensity** (which varies roughly north-south) and **inclination angle** (the angle the field makes with the surface, which also varies geographically). Together, these two values form a bicoordinate grid — like latitude and longitude. Experiments displacing pigeons to unfamiliar locations show they orient homeward within minutes, even when visual and olfactory cues are removed.\n\n' +
+          'The **sun compass** requires an internal circadian clock. If you shift a pigeon\'s day-night cycle by 6 hours (keep it in artificial light), then release it — it flies 90° off course. This proves it\'s using the sun\'s position + time to calculate direction. GPS works on a similar principle: triangulating position from signals with known timing.',
+        advancedContent:
+          'Two competing mechanisms for magnetoreception: (1) **Magnetite-based** — chains of biogenic Fe₃O₄ nanoparticles in the upper beak (pigeons) or ethmoid sinus act as microscopic compass needles, mechanically activating ion channels. (2) **Radical pair mechanism** — the cryptochrome protein in the retina undergoes a light-dependent reaction producing radical pairs whose singlet-triplet interconversion rates are affected by weak magnetic fields. Evidence: birds are disoriented by oscillating RF fields (1-100 MHz) that disrupt radical pair chemistry but not magnetite — suggesting the radical pair mechanism dominates for compass orientation, while magnetite may provide the intensity-based map.',
+      },
     ],
   },
 
@@ -1268,6 +1294,34 @@ export const scienceReferences: ReferenceGuide[] = [
           'FactSage) extends this to multicomponent systems with dozens of elements. Phase-field modeling ' +
           'simulates microstructure evolution during solidification and phase transformations by solving ' +
           'coupled Cahn-Hilliard and Allen-Cahn equations on computational grids.',
+      },
+      {
+        id: 'lost-wax-casting',
+        title: 'Lost-Wax Casting — Turning Wax into Metal',
+        beginnerContent:
+          'Lost-wax casting (also called *cire perdue*) is one of humanity\'s oldest metalworking techniques — at least 5,000 years old. The basic idea is brilliant: you sculpt a detailed model in **wax**, encase it in a heat-resistant mould, melt out the wax, and pour molten metal into the space left behind. The wax is "lost" — sacrificed — to create the metal object.\n\n' +
+          'Here\'s the step-by-step: (1) Sculpt the object in wax. (2) Coat the wax in layers of clay or ceramic slurry, building up a hard shell. (3) Heat the mould to melt and drain the wax (this is the "lost wax" step). (4) Pour molten metal (bronze, brass, gold, silver) into the empty cavity. (5) Break away the mould to reveal the metal casting. (6) Polish and finish.\n\n' +
+          'The technique is still used today for jet engine turbine blades, dental crowns, jewellery, and the bronze Nataraja statues of Swamimalai in Tamil Nadu — where fifth-generation families use essentially the same method as their ancestors.\n\n' +
+          '**Check yourself:** Why do you think the technique uses wax specifically, rather than wood or plastic? (Because wax melts at a low temperature — around 60-80°C — and flows out completely, leaving a perfectly clean cavity. It\'s also soft enough to carve fine detail.)',
+        intermediateContent:
+          'The metallurgy involves several **phase transitions**. Wax undergoes solid → liquid at ~65°C (melting). The mould clay undergoes dehydration at 100-300°C, then sintering at 700-900°C (clay particles fuse into ceramic). The metal — typically bronze (88% Cu, 12% Sn) — melts at ~950°C and must be poured at ~1050-1100°C (superheated to ensure it flows into fine details before solidifying).\n\n' +
+          'The **cooling rate** determines grain structure. Slow cooling produces large grains (softer, more ductile). Fast cooling produces small grains (harder, stronger). Temple bronze statues are designed for beauty, not strength — slow cooling in the mould produces a fine surface finish. Turbine blades are cooled in precisely controlled ways to produce single-crystal structures with no grain boundaries at all.',
+        advancedContent:
+          'Investment casting (the industrial version of lost-wax) produces turbine blades with internal cooling channels impossible to machine. The wax pattern includes ceramic cores that create hollow passages in the final metal. Single-crystal casting uses a helical grain selector at the base of the mould — only one crystal orientation survives the spiral, producing a blade with zero grain boundaries. This eliminates grain-boundary creep, allowing operating temperatures within 30°C of the alloy\'s melting point (1300°C for nickel superalloys). The directional solidification rate is controlled to ~0.1 mm/s in a Bridgman furnace with a thermal gradient of 30-50°C/cm.',
+      },
+      {
+        id: 'solar-concentration',
+        title: 'Solar Concentration — Focusing Sunlight for Energy',
+        beginnerContent:
+          'A magnifying glass can focus sunlight to a point hot enough to light paper on fire. **Solar concentration** uses the same principle at a much larger scale — curved mirrors focus sunlight to heat water, cook food, or generate electricity.\n\n' +
+          'The key shape is the **parabola**. A parabolic mirror has the special property that all incoming parallel rays (sunlight) reflect to a single point called the **focus**. Place a pot at the focus, and it heats up intensely — not because you\'re adding energy, but because you\'re concentrating energy from a large area onto a small one.\n\n' +
+          'The **concentration ratio** is the area of the mirror divided by the area of the receiver. A 2-metre diameter parabolic dish with a 10 cm receiver has a concentration ratio of about 400:1. That means the receiver gets 400 times the intensity of normal sunlight — enough to reach temperatures over 500°C.\n\n' +
+          'Auroville\'s Solar Kitchen in Tamil Nadu uses a large parabolic concentrator to cook lunch for 1,000 people daily, using no fuel at all.',
+        intermediateContent:
+          'Three main concentrator geometries: (1) **Parabolic trough** — a long curved mirror focusing light onto a tube at its focal line. Used in solar thermal power plants (e.g., Andasol, Spain: 510,000 mirrors generating 150 MW). Concentration ratio: 30-100. (2) **Parabolic dish** — focuses to a point. Highest concentration ratio: 1,000-3,000. Used for Stirling engines and solar cooking. (3) **Power tower** (heliostat field) — hundreds of flat mirrors track the sun and reflect light to a central receiver on a tall tower. Ivanpah, California: 347,000 mirrors, 392 MW.\n\n' +
+          'The maximum temperature achievable is limited by the **Stefan-Boltzmann law**: P = σAT⁴. As the receiver heats up, it radiates energy back at a rate proportional to T⁴. Equilibrium is reached when absorbed solar power equals radiated power. With concentration ratio C and solar flux S: T_max = (C·S/σ)^(1/4). For C=1000, T_max ≈ 3,400 K (theoretical). In practice, convective losses and imperfect mirrors limit this to ~1,500°C.',
+        advancedContent:
+          'Concentrated Solar Power (CSP) with thermal storage solves the intermittency problem. Molten salt (60% NaNO₃ + 40% KNO₃) is heated to 565°C by concentrated sunlight and stored in insulated tanks. The salt stays liquid above 220°C and stores energy at ~1 kWh/m³/°C — a 30,000 m³ tank stores ~6 hours of generation. Gemasolar in Spain achieves 24-hour operation using this approach. The thermodynamic efficiency of the Rankine steam cycle driven by CSP is η = 1 - T_cold/T_hot (Carnot limit). At T_hot=838K and T_cold=308K, η_Carnot=63%. Real-world cycle efficiency is 35-42% due to irreversibilities. Combining CSP with supercritical CO₂ Brayton cycles (operating at 700°C+) promises efficiencies above 50%.',
       },
     ],
   },

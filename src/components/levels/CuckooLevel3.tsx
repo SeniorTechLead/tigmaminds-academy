@@ -388,7 +388,7 @@ class MigrationNavigator:
     def star_compass(self, pos, error_std=3, cloud_prob=0.3):
         """Star compass: works at night, good accuracy, fails in clouds."""
         if np.random.random() < cloud_prob:
-            return None  # cloudy, can\'t see stars
+            return None  # cloudy, can't see stars
         return self.true_heading(pos) + np.random.normal(0, error_std)
 
     def sun_compass(self, pos, error_std=8, time_error=0.5):
@@ -677,7 +677,7 @@ ax.scatter(spring_temps, host_breeding_days, s=20, color='#3b82f6', alpha=0.6, l
 ax.scatter(spring_temps, cuckoo_arrival_days, s=20, color='#ef4444', alpha=0.6, label='Cuckoo arrival')
 ax.set_xlabel('Mean spring temperature (°C)', color='white')
 ax.set_ylabel('Day of year', color='white')
-ax.set_title('Temperature sensitivity: host responds, cuckoo doesn\'t', color='white', fontsize=11)
+ax.set_title("Temperature sensitivity: host responds, cuckoo doesn't", color='white', fontsize=11)
 ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax.tick_params(colors='gray')
 

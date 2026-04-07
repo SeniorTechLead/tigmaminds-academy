@@ -1,4 +1,4 @@
-import { Suspense, Component, type ReactNode } from 'react';
+import { Suspense, Component, useState, useEffect, type ReactNode } from 'react';
 import type { ReferenceSection } from '../../data/reference';
 import diagramRegistry from './DiagramRegistry';
 import DiagramZoom from '../DiagramZoom';
@@ -202,6 +202,13 @@ const GATED_INTERACTIVE_TYPES = new Set([
   'harmonics-explorer', 'gaussian-explorer', 'contour-explainer', 'logic-gate-simulator', 'sql-playground', 'ts-playground', 'html-playground',
 ]);
 
+function ClientOnly({ children }: { children: ReactNode }) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return <div className="h-48 rounded-xl bg-gray-100 dark:bg-gray-700/30 animate-pulse mt-3" />;
+  return <>{children}</>;
+}
+
 class DiagramErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
   state = { hasError: false };
   static getDerivedStateFromError() { return { hasError: true }; }
@@ -251,17 +258,19 @@ export default function SectionRenderer({ section, level = 0 }: Props) {
         </div>
       )}
 
-      {/* Diagram */}
+      {/* Diagram — client-only to avoid hydration mismatch with lazy imports */}
       {DiagramComponent && (
-        <DiagramErrorBoundary>
-          <Suspense fallback={<div className="h-48 rounded-xl bg-gray-100 dark:bg-gray-700/30 animate-pulse mt-3" />}>
-            <div className="mt-3">
-              <DiagramZoom>
-                <DiagramComponent />
-              </DiagramZoom>
-            </div>
-          </Suspense>
-        </DiagramErrorBoundary>
+        <ClientOnly>
+          <DiagramErrorBoundary>
+            <Suspense fallback={<div className="h-48 rounded-xl bg-gray-100 dark:bg-gray-700/30 animate-pulse mt-3" />}>
+              <div className="mt-3">
+                <DiagramZoom>
+                  <DiagramComponent />
+                </DiagramZoom>
+              </div>
+            </Suspense>
+          </DiagramErrorBoundary>
+        </ClientOnly>
       )}
 
       {/* Interactive widget — gate rich tools for non-signed-in users */}

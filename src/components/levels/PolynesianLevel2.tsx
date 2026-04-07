@@ -419,8 +419,8 @@ def equatorial_to_horizon(ra_h, dec_deg, lat_deg, lst_h):
     alt = np.degrees(np.arcsin(np.clip(sin_alt, -1, 1)))
 
     # Azimuth
-    cos_az = (np.sin(dec) - np.sin(alt*np.pi/180)*np.sin(lat)) / \\
-             (np.cos(alt*np.pi/180)*np.cos(lat) + 1e-10)
+    cos_az = ((np.sin(dec) - np.sin(alt*np.pi/180)*np.sin(lat)) /
+             (np.cos(alt*np.pi/180)*np.cos(lat) + 1e-10))
     az = np.degrees(np.arccos(np.clip(cos_az, -1, 1)))
     if np.sin(ha) > 0:
         az = 360 - az  # western half of sky

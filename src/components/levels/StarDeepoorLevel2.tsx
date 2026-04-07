@@ -491,7 +491,7 @@ for i, color in enumerate(colors_sector):
         ax.fill(sector_x, sector_y, color=color, alpha=0.2)
 
 ax.set_aspect('equal')
-ax.set_title('Kepler\\'s 2nd Law:\\nEqual Areas in Equal Times', color='white', fontsize=10)
+ax.set_title('Kepler\'s 2nd Law:\\nEqual Areas in Equal Times', color='white', fontsize=10)
 ax.tick_params(colors='gray')
 ax.set_xlim(-4, 2); ax.set_ylim(-3, 3)
 
@@ -527,7 +527,7 @@ for name, a, T in planet_data:
 
 ax.set_xlabel('Semi-major axis (AU)', color='white')
 ax.set_ylabel('Orbital period (years)', color='white')
-ax.set_title('Kepler\\'s 3rd Law: T² ∝ a³', color='white', fontsize=10)
+ax.set_title('Kepler\'s 3rd Law: T² ∝ a³', color='white', fontsize=10)
 ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=9)
 ax.tick_params(colors='gray')
 

@@ -91,7 +91,7 @@ When air rushes inward toward a low-pressure center in the Northern Hemisphere, 
 dt = 60.0       # time step in seconds
 n_steps = 800
 lat = 20.0      # degrees N (Bay of Bengal)
-omega = 7.2921e-5  # Earth\'s angular velocity (rad/s)
+omega = 7.2921e-5  # Earth's angular velocity (rad/s)
 f = 2 * omega * np.sin(np.radians(lat))  # Coriolis parameter
 
 # Low-pressure center at origin
@@ -267,6 +267,7 @@ for label, pert in [('Control', 0.0), ('Perturbed (+0.01m)', 0.01)]:
     f = 5e-5  # Coriolis parameter
 
     for step in range(n_steps):
+        pass
 
 print("\n[Code trimmed — run in Level 2+ for full visualization]")`,
       challenge: 'Run an "ensemble" of 10 simulations with random perturbations of different magnitudes (0.001 to 0.1 m). At each time snapshot, compute the ensemble spread. How quickly does the spread saturate?',

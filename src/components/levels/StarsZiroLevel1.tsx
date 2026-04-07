@@ -2,7 +2,6 @@ import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Sparkles } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
 import { usePyodide } from '../../contexts/PyodideContext';
-import { createElement } from 'react';
 import StarMagnitudeScaleDiagram from '../diagrams/StarMagnitudeScaleDiagram';
 import StarBrightnessStepDiagram from '../diagrams/StarBrightnessStepDiagram';
 import StarTwinklingDiagram from '../diagrams/StarTwinklingDiagram';

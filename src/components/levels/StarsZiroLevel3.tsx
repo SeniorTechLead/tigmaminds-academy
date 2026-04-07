@@ -407,6 +407,7 @@ famous_stars = [
     ('Betelgeuse', 3500, -5.85, '#ff4400'),
     ('Rigel', 12100, -6.69, '#aaccff'),
     ('Vega', 9602, 0.58, '#ffffff'),
+]
 
 print("\n[Full visualization in playground]")`,
       challenge: 'Add stellar evolution tracks to the HR diagram: show how a Sun-like star moves from the main sequence to the red giant branch to the white dwarf region. Plot the track as a colored path with arrows showing the direction of evolution.',

@@ -133,7 +133,7 @@ import matplotlib.pyplot as plt
 # Size parameter x = pi * d / lambda
 # In Rayleigh regime (x << 1): scattering efficiency Q ~ x^4
 # In Mie regime (x ~ 1): Q oscillates, approaches ~2 for large x
-# We\'ll use the exact Mie efficiency approximation for spheres
+# We'll use the exact Mie efficiency approximation for spheres
 
 def rayleigh_efficiency(x, n=1.33):
     """Rayleigh scattering efficiency for small x."""

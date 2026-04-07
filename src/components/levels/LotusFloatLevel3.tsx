@@ -468,7 +468,7 @@ for name, ca, eff in zip(design_names, contact_angles, efficiencies):
 print()
 print("The lotus-inspired design achieves the highest contact angle")
 print("because it combines low surface energy with hierarchical roughness.")
-print("Biomimicry works by identifying nature\'s design principles, not just copying shapes.")`,
+print("Biomimicry works by identifying nature's design principles, not just copying shapes.")`,
       challenge: 'Design a surface that is superhydrophobic to water but superoleophilic (attracts oil). This would be useful for oil-water separation in environmental cleanup. What combination of surface energy and roughness is needed?',
       successHint: 'Biomimicry is not just copying nature — it is understanding the design principle and applying it to new problems. The lotus effect principle (chemistry + roughness = extreme wetting behavior) has applications far beyond self-cleaning surfaces.',
     },

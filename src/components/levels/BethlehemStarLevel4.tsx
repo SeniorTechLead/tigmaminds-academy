@@ -352,7 +352,7 @@ for w in nav.waypoints:
 
 ax1.set_xlabel('Longitude (°E)', fontsize=12)
 ax1.set_ylabel('Latitude (°N)', fontsize=12)
-ax1.set_title('The Magi\'s Route', fontsize=13)
+ax1.set_title("The Magi's Route", fontsize=13)
 ax1.grid(alpha=0.3)
 ax1.set_facecolor('#1a2332')
 
@@ -485,7 +485,7 @@ class HypothesisEvaluator:
             ax3.annotate(f"{name}\\n({h['year']} BCE)",
                         (h['year'], i), textcoords="offset points",
                         xytext=(10, 0), fontsize=9, color=colors[i])
-        ax3.axvspan(4, 8, alpha=0.1, color='#fbbf24', label='Herod\'s reign overlap')
+        ax3.axvspan(4, 8, alpha=0.1, color='#fbbf24', label="Herod's reign overlap")
         ax3.set_xlabel('Year BCE', fontsize=11)
         ax3.set_title('Timeline of Candidate Events', fontsize=12)
         ax3.set_yticks([])
@@ -512,7 +512,7 @@ ev.add_hypothesis('Nova in Aquila',
     [8, 8, 8, 5, 5], 5,
     'Recorded in Chinese annals; visible for 70 days; position less significant to Magi')
 
-ev.add_hypothesis('Halley\'s Comet',
+ev.add_hypothesis("Halley's Comet",
     [3, 9, 8, 4, 4], 12,
     'Too early (12 BCE); comets were bad omens in ancient world, not good signs')
 

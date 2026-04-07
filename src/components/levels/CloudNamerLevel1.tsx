@@ -411,7 +411,7 @@ for y, label, c in [(2, 'Low clouds (0-2 km)', '#6b7280'),
 ax.set_xlim(0, 1.15)
 ax.set_ylim(-1, 13)
 ax.set_ylabel('Altitude (km)', color='white', fontsize=11)
-ax.set_title('Luke Howard\\'s Cloud Classification (1802)', color='white', fontsize=13)
+ax.set_title('Luke Howard\'s Cloud Classification (1802)', color='white', fontsize=13)
 ax.set_xticks([])
 ax.tick_params(axis='y', colors='gray')
 

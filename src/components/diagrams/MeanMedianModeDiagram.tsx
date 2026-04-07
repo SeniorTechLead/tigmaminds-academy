@@ -56,7 +56,7 @@ export default function MeanMedianModeDiagram() {
     });
   }
 
-  const indicatorTop = 40;
+  const indicatorTop = 55;
   const indicatorBot = lineY + 14;
 
   const indicators = [
@@ -97,7 +97,7 @@ export default function MeanMedianModeDiagram() {
       </div>
 
       <svg
-        viewBox="0 0 546 242"
+        viewBox="0 0 546 260"
         className="w-full"
         role="img"
         aria-label="Mean, Median, and Mode diagram"
@@ -150,9 +150,15 @@ export default function MeanMedianModeDiagram() {
           </circle>
         ))}
 
-        {/* Indicator lines + labels */}
-        {indicators.map((ind) => {
+        {/* Indicator lines + labels — stack labels when values are close */}
+        {indicators.map((ind, idx) => {
           const x = xOf(ind.value);
+          // Count how many prior indicators are within 8 units
+          let overlapCount = 0;
+          for (let j = 0; j < idx; j++) {
+            if (Math.abs(ind.value - indicators[j].value) < 8) overlapCount++;
+          }
+          const labelY = indicatorTop - 6 - overlapCount * 14;
           return (
             <g key={ind.label}>
               <line
@@ -166,7 +172,7 @@ export default function MeanMedianModeDiagram() {
               />
               <text
                 x={x}
-                y={indicatorTop - 6}
+                y={labelY}
                 textAnchor="middle"
                 fontSize={11}
                 fontWeight={600}

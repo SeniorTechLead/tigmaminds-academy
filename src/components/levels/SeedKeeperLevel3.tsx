@@ -531,7 +531,7 @@ plt.show()
 
 print("Ex situ conservation is humanity's backup plan for food security.")
 print(f"With {n_banks} gene banks and redundancy of 3, we lose {all_losses[3]:.0f} of 50,000 samples")
-print(f"With redundancy of 1, we lose {all_losses[1]:.0f} — that\'s why Svalbard exists.")`,
+print(f"With redundancy of 1, we lose {all_losses[1]:.0f} — that's why Svalbard exists.")`,
       challenge: 'Model climate change impact: permafrost at Svalbard is warming. If the backup temperature rises from -3.5°C to 0°C over 50 years, how does this affect the "cooling failure" safety margin? At what point does the vault need an engineering upgrade?',
       successHint: 'The Svalbard vault embodies a simple truth: redundancy saves diversity. Every seed keeper who stores backup seeds in a different location practices the same principle. Understanding the math of redundancy and viability is essential for designing systems that protect our food future.',
     },

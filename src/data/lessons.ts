@@ -77,6 +77,7 @@ export const SUBJECTS: { key: Subject; color: string; icon: string }[] = [
   { key: 'Chemistry', color: 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300', icon: '🧪' },
   { key: 'Computer Science', color: 'bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-300', icon: '💻' },
   { key: 'Engineering', color: 'bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300', icon: '🔧' },
+  { key: 'Robotics', color: 'bg-teal-100 text-teal-700 dark:bg-teal-900/30 dark:text-teal-300', icon: '🤖' },
   { key: 'Geography', color: 'bg-teal-100 text-teal-700 dark:bg-teal-900/30 dark:text-teal-300', icon: '🌍' },
   { key: 'Ecology', color: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300', icon: '🌿' },
   { key: 'Mathematics', color: 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300', icon: '📐' },
@@ -2251,7 +2252,7 @@ Every monsoon, when the power goes out on Majuli, the fireflies still come. The 
     },
     illustration: '/content/illustrations/firefly-festival-majuli.webp',
     track: 'school',
-    subjects: ['Biology', 'Chemistry', 'Materials Science'] as Subject[],
+    subjects: ['Biology', 'Chemistry', 'Materials Science', 'Robotics'] as Subject[],
     toolSkills: ['Arduino & Electronics' as Skill, 'Python' as Skill],
     skillTags: [{ discipline: 'Electronics & Hardware', skill: 'Arduino', tools: ['Digital I/O'], application: 'Bioluminescence' }, { discipline: 'Electronics & Hardware', skill: 'Circuit Design', tools: ['Breadboard prototyping'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
     learningTracks: ['Robotics & Electronics' as Track],
@@ -2475,7 +2476,7 @@ The river dolphin had taught him her secret: the world speaks to those who close
     },
     illustration: '/content/illustrations/river-dolphins-secret.webp',
     track: 'school',
-    subjects: ['Biology', 'Marine Science', 'Neuroscience', 'Zoology'] as Subject[],
+    subjects: ['Biology', 'Marine Science', 'Neuroscience', 'Zoology', 'Robotics'] as Subject[],
     toolSkills: ['Arduino & Electronics' as Skill, 'Python' as Skill],
     skillTags: [{ discipline: 'Electronics & Hardware', skill: 'Arduino', tools: ['Analog I/O'], application: 'Sonar detection' }, { discipline: 'Electronics & Hardware', skill: 'Sensors', tools: ['Ultrasonic'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
     learningTracks: ['Robotics & Electronics' as Track],
@@ -10119,7 +10120,7 @@ The people of Assam say that during Kati Bihu, the Brahmaputra isn't just a rive
     },
     illustration: '/content/illustrations/festival-lights-river.webp',
     track: 'school',
-    subjects: ['Physics', 'Engineering'] as Subject[],
+    subjects: ['Physics', 'Engineering', 'Robotics'] as Subject[],
     toolSkills: ['Arduino & Electronics' as Skill, 'Python' as Skill],
     skillTags: [{ discipline: 'Electronics & Hardware', skill: 'Arduino', tools: ['Digital I/O'] }, { discipline: 'Electronics & Hardware', skill: 'Sensors', tools: ['Light sensors'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
     learningTracks: ['Robotics & Electronics' as Track],
@@ -19514,6 +19515,14 @@ lessons.push(...mythologyLessons);
 // World History lessons
 import { historyLessons } from './lessons-history';
 lessons.push(...historyLessons);
+
+// Regional folklore lessons
+import { regionalLessons } from './lessons-regional';
+lessons.push(...regionalLessons);
+
+// Northeast state lessons (Mizoram, Manipur, Tripura, Nagaland, Sikkim)
+import { neStatesLessons } from './lessons-ne-states';
+lessons.push(...neStatesLessons);
 
 export function getLessonBySlug(slug: string): Lesson | undefined {
   return lessons.find((l) => l.slug === slug);

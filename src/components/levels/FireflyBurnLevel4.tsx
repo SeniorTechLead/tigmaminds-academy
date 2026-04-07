@@ -631,7 +631,7 @@ organisms = {
 
 metrics = ['qy', 'peak', 'atp', 'eff']
 metric_labels = ['Quantum yield', 'Peak λ (nm)', 'ATP cost', 'Lum. efficacy']
-metric_good = ['high', 'near 555', 'low', 'high']  # what\'s desirable
+metric_good = ['high', 'near 555', 'low', 'high']  # what's desirable
 
 names = list(organisms.keys())
 n_org = len(names)

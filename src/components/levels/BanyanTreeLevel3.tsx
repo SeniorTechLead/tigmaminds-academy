@@ -81,6 +81,9 @@ t3, B3, H3 = simulate_competition(
     B0=0.5, H0=50,
     r_B=0.06, r_H=0.06,
     K_B=100, K_H=100,
+    alpha=1.0, beta=1.0,
+    years=200
+)
 
 print("\n[Full visualization available in the playground]")`,
       challenge: 'Add environmental stochasticity: multiply each growth rate by (1 + noise) where noise is drawn from a normal distribution each year. Run 100 simulations and plot the distribution of outcomes. What fraction of the time does the banyan win on a young host?',
@@ -438,7 +441,7 @@ class BanyanPopulationModel:
         # Fecundity (top row): each stage produces seedlings
         M[0, :] = f
         # Survival in same stage (diagonal)
-        M[0, 0] += s[0] * (1 - g[0])  # seedlings that survive but don\'t grow
+        M[0, 0] += s[0] * (1 - g[0])  # seedlings that survive but don't grow
         M[1, 1] = s[1] * (1 - g[1])
         M[2, 2] = s[2] * (1 - g[2])
         M[3, 3] = s[3]  # ancients stay ancient

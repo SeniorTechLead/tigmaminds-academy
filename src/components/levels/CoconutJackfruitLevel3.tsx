@@ -495,7 +495,7 @@ print(f"Jackfruit energy: {energy[1]:.0f} kcal/100g (carbs provide {fruits_data[
 print()
 print("Coconut's medium-chain triglycerides (MCTs) go directly to the liver —")
 print("  bypassing lymphatic absorption, providing rapid ketone energy.")
-print("Jackfruit\'s starch provides sustained glucose release, ideal for")
+print("Jackfruit's starch provides sustained glucose release, ideal for")
 print("  tropical subsistence diets where coconut fat is not available.")`,
       challenge: 'Calculate the amino acid score of coconut meat vs jackfruit seeds. Both have protein, but the limiting amino acid differs. Which fruit would a vegetarian athlete prefer as a protein source?',
       successHint: 'Nutritional biochemistry connects molecular structure to metabolism to ecology. The coconut did not "choose" to store MCTs — natural selection favored seeds with energy-dense, rapidly-metabolizable fats that could fuel germination after months at sea.',

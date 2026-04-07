@@ -195,7 +195,7 @@ bars = ax2.barh(species_res, acuity, color=['#3b82f6', '#22c55e', '#f59e0b', '#a
                 alpha=0.8, edgecolor='white', linewidth=0.5)
 for bar, angle in zip(bars, min_angle):
     ax2.text(bar.get_width() + 2, bar.get_y() + bar.get_height()/2,
-             f'{angle}\' min angle', va='center', color='white', fontsize=9)
+             f"{angle}' min angle", va='center', color='white', fontsize=9)
 
 ax2.set_xlabel('Visual acuity (cycles/degree)', color='white')
 ax2.set_title('Visual Resolution: Sharpness vs Sensitivity Trade-off', color='white', fontsize=13)

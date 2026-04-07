@@ -548,7 +548,7 @@ FROM KINGFISHER TO TECHNOLOGY:
    Refraction correction inspires
    adaptive optics designs.
 
-Nature\'s R&D budget: 3.8 billion years.
+Nature's R&D budget: 3.8 billion years.
 Our job: learn and apply."""
 ax.text(0.05, 0.95, text, transform=ax.transAxes, fontsize=9,
         verticalalignment='top', color='white', fontfamily='monospace')

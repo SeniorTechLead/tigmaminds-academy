@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Linkedin, Award, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { supabase, Instructor } from '../lib/supabase';
 
 export default function Instructors() {
@@ -104,8 +104,7 @@ export default function Instructors() {
         </div>
 
         <div className="mt-12 text-center">
-          <Link
-            to="/instructors"
+          <Link href="/instructors"
             className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded-lg hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl group"
           >
             <span className="text-lg font-semibold">View All Instructors</span>

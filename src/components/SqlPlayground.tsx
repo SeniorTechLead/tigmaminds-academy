@@ -93,19 +93,19 @@ export default function SqlPlayground({ starterCode, title = 'SQL Playground' }:
           <Database className={`w-4 h-4 ${isDark ? 'text-cyan-400' : 'text-cyan-600'}`} />
           <span className={`text-sm font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>{title}</span>
           {ready && (
-            <span className="text-xs text-emerald-400 bg-emerald-900/30 px-2 py-0.5 rounded-full">Ready</span>
+            <span className={`text-xs px-2 py-0.5 rounded-full ${isDark ? 'text-emerald-400 bg-emerald-900/30' : 'text-emerald-700 bg-emerald-100'}`}>Ready</span>
           )}
         </div>
         <div className="flex items-center gap-2">
           {ready && (
-            <button onClick={handleReset} className="p-1.5 text-gray-400 hover:text-amber-400 transition-colors" title="Reset database to sample data">
+            <button onClick={handleReset} className={`p-1.5 transition-colors ${isDark ? 'text-gray-400 hover:text-amber-400' : 'text-gray-500 hover:text-amber-600'}`} title="Reset database to sample data">
               <RefreshCw className="w-3.5 h-3.5" />
             </button>
           )}
-          <button onClick={() => { setCode(starterCode); setResults([]); setMessage(''); setError(''); }} className="p-1.5 text-gray-400 hover:text-gray-200 transition-colors" title="Reset code">
+          <button onClick={() => { setCode(starterCode); setResults([]); setMessage(''); setError(''); }} className={`p-1.5 transition-colors ${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-500 hover:text-gray-900'}`} title="Reset code">
             <RotateCcw className="w-3.5 h-3.5" />
           </button>
-          <button onClick={() => setEditorTheme(isDark ? 'light' : 'dark')} className="p-1.5 text-gray-400 hover:text-gray-200 transition-colors" title="Toggle theme">
+          <button onClick={() => setEditorTheme(isDark ? 'light' : 'dark')} className={`p-1.5 transition-colors ${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-500 hover:text-gray-900'}`} title="Toggle theme">
             {isDark ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
           </button>
           <button
@@ -123,7 +123,7 @@ export default function SqlPlayground({ starterCode, title = 'SQL Playground' }:
 
       {/* Loading progress */}
       {sqlState === 'loading' && loadProgress && (
-        <div className="px-4 py-2 bg-gray-800 border-b border-gray-700 text-sm text-amber-400 flex items-center gap-2">
+        <div className={`px-4 py-2 border-b text-sm flex items-center gap-2 ${isDark ? 'bg-gray-800 border-gray-700 text-amber-400' : 'bg-amber-50 border-gray-200 text-amber-700'}`}>
           <Loader2 className="w-3.5 h-3.5 animate-spin" /> {loadProgress}
         </div>
       )}
@@ -148,22 +148,22 @@ export default function SqlPlayground({ starterCode, title = 'SQL Playground' }:
 
       {/* Results */}
       {error && (
-        <div className="border-t border-red-800 bg-red-900/20 p-4">
-          <p className="text-xs font-semibold text-red-400 uppercase tracking-wide mb-1">Error</p>
-          <pre className="text-sm text-red-300 font-mono whitespace-pre-wrap">{error}</pre>
+        <div className={`border-t p-4 ${isDark ? 'border-red-800 bg-red-900/20' : 'border-red-200 bg-red-50'}`}>
+          <p className={`text-xs font-semibold uppercase tracking-wide mb-1 ${isDark ? 'text-red-400' : 'text-red-600'}`}>Error</p>
+          <pre className={`text-sm font-mono whitespace-pre-wrap ${isDark ? 'text-red-300' : 'text-red-700'}`}>{error}</pre>
         </div>
       )}
 
       {message && !error && (
-        <div className="border-t border-gray-700 bg-gray-800/50 px-4 py-3">
-          <p className="text-sm text-emerald-400 font-medium">{message}</p>
+        <div className={`border-t px-4 py-3 ${isDark ? 'border-gray-700 bg-gray-800/50' : 'border-gray-200 bg-emerald-50'}`}>
+          <p className={`text-sm font-medium ${isDark ? 'text-emerald-400' : 'text-emerald-700'}`}>{message}</p>
         </div>
       )}
 
       {results.map((result, ri) => (
-        <div key={ri} className="border-t border-gray-700">
+        <div key={ri} className={`border-t ${isDark ? 'border-gray-700' : 'border-gray-200'}`}>
           {results.length > 1 && (
-            <div className="px-4 py-1 bg-gray-800/50 text-xs text-gray-500 font-semibold">
+            <div className={`px-4 py-1 text-xs font-semibold ${isDark ? 'bg-gray-800/50 text-gray-500' : 'bg-gray-50 text-gray-400'}`}>
               Result {ri + 1}
             </div>
           )}
@@ -199,13 +199,13 @@ export default function SqlPlayground({ starterCode, title = 'SQL Playground' }:
 
       {/* Hint bar */}
       {!ready && sqlState === 'idle' && (
-        <div className="border-t border-gray-700 px-4 py-2 bg-gray-800/30">
-          <p className="text-xs text-gray-500">Click Run SQL to load the database. Sample tables: elephants, sightings, parks.</p>
+        <div className={`border-t px-4 py-2 ${isDark ? 'border-gray-700 bg-gray-800/30' : 'border-gray-200 bg-gray-50'}`}>
+          <p className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Click Run SQL to load the database. Sample tables: elephants, sightings, parks.</p>
         </div>
       )}
       {ready && results.length === 0 && !error && !message && (
-        <div className="border-t border-gray-700 px-4 py-2 bg-gray-800/30">
-          <p className="text-xs text-gray-500">Press Ctrl+Enter to run. Tables: elephants, sightings, parks, park_elephants.</p>
+        <div className={`border-t px-4 py-2 ${isDark ? 'border-gray-700 bg-gray-800/30' : 'border-gray-200 bg-gray-50'}`}>
+          <p className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Press {typeof navigator !== 'undefined' && /Mac/.test(navigator.platform) ? '⌘' : 'Ctrl'}+Enter to run. Tables: elephants, sightings, parks, park_elephants.</p>
         </div>
       )}
     </div>

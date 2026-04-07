@@ -678,7 +678,7 @@ def simulate_pathway(gene_expression, hours=48, dt=0.1):
             Km = enz['Km']
             S = pools[enz['substrate']][i-1 if enz['substrate'] != 'phenylalanine' else i]
             rate = Vmax * S / (Km + S) * dt
-            rate = min(rate, S)  # can\'t consume more than available
+            rate = min(rate, S)  # can't consume more than available
 
             pools[enz['substrate']][i] = max(0, pools[enz['substrate']][i] - rate) if enz['substrate'] != 'phenylalanine' else pools[enz['substrate']][i] - rate
             pools[enz['product']][i] = pools[enz['product']][i-1] + rate
@@ -847,7 +847,7 @@ visible_refl = np.ones((size, size)) * 0.9 * petal_mask
 
 # Create comparison images
 patterns = {
-    'Bull\\'s eye': bull_eye_uv(R, petal_mask),
+    'Bull\'s eye': bull_eye_uv(R, petal_mask),
     'Landing strips': landing_strip_uv(R, Theta, petal_mask),
     'Spotted': spotted_uv(X, Y, petal_mask),
 }

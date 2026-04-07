@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Loader2, CreditCard } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useCurrency } from '../hooks/useCurrency';
@@ -18,22 +19,21 @@ export default function CheckoutButton({ plan, label, className }: Props) {
   // When payments are off, show a sign-up or contact link instead
   if (!FEATURES.PAYMENTS_ENABLED) {
     return (
-      <Link
-        to={user ? '/contact' : '/auth?returnTo=/programs'}
+      <Link href={user ? '/contact' : '/auth?returnTo=/programs'}
         className={className || 'block w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm font-semibold text-center hover:shadow-lg transition-all'}
       >
         {user ? 'Contact Us to Enroll' : 'Sign Up Free'}
       </Link>
     );
   }
-  const navigate = useNavigate();
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   const handleCheckout = async () => {
     // Must be signed in
     if (!user || !session) {
-      navigate(`/auth?returnTo=${encodeURIComponent('/programs')}`);
+      router.push(`/auth?returnTo=${encodeURIComponent('/programs')}`);
       return;
     }
 

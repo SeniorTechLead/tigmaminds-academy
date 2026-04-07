@@ -200,7 +200,7 @@ the parrot speak knew that language was the greatest gift of all
 words = text.lower().split()
 word_counts = {}
 for w in words:
-    w = w.strip('.,;:!?"\'')
+    w = w.strip('.,;:!?"')
     if w:
         word_counts[w] = word_counts.get(w, 0) + 1
 
@@ -227,7 +227,7 @@ ax2.loglog(ranks, frequencies, 'o', color='#22c55e', markersize=4, alpha=0.7)
 # Theoretical Zipf line
 zipf_line = frequencies[0] / ranks
 ax2.loglog(ranks, zipf_line, '--', color='#f59e0b', linewidth=2, label='Zipf prediction')
-ax2.set_title('Zipf\\'s Law: Log-Log Plot', color='white', fontsize=12)
+ax2.set_title('Zipf\'s Law: Log-Log Plot', color='white', fontsize=12)
 ax2.set_xlabel('Rank (log)', color='white')
 ax2.set_ylabel('Frequency (log)', color='white')
 ax2.legend(facecolor='#1f2937', labelcolor='white')

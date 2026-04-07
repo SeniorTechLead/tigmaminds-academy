@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Mail } from 'lucide-react';
 
 export default function Footer() {
@@ -17,7 +17,7 @@ export default function Footer() {
               </div>
               <div>
                 <span className="text-xl font-bold text-white">TigmaMinds</span>
-                <span className="block text-[10px] text-gray-400 tracking-[0.52em] uppercase font-medium">Academy</span>
+                <span className="block text-[10px] text-gray-400 tracking-widest uppercase font-medium">Academy</span>
               </div>
             </div>
             <p className="text-gray-400 max-w-md leading-relaxed">
@@ -28,12 +28,12 @@ export default function Footer() {
           <div>
             <h3 className="text-white font-semibold mb-4">Explore</h3>
             <ul className="space-y-2">
-              <li><Link to="/about" className="hover:text-amber-400 transition-colors">About</Link></li>
-              <li><Link to="/programs" className="hover:text-amber-400 transition-colors">Programs</Link></li>
+              <li><Link href="/about" className="hover:text-amber-400 transition-colors">About</Link></li>
+              <li><Link href="/programs" className="hover:text-amber-400 transition-colors">Programs</Link></li>
               {/* Mentors link removed for launch */}
-              <li><Link to="/careers" className="hover:text-amber-400 transition-colors">Teach With Us</Link></li>
-              <li><Link to="/partner" className="hover:text-amber-400 transition-colors">Partner With Us</Link></li>
-              <li><Link to="/contact" className="hover:text-amber-400 transition-colors">Contact</Link></li>
+              <li><Link href="/careers" className="hover:text-amber-400 transition-colors">Teach With Us</Link></li>
+              <li><Link href="/partner" className="hover:text-amber-400 transition-colors">Partner With Us</Link></li>
+              <li><Link href="/contact" className="hover:text-amber-400 transition-colors">Contact</Link></li>
             </ul>
           </div>
 
@@ -53,10 +53,10 @@ export default function Footer() {
             &copy; {currentYear} TigmaMinds Academy. All rights reserved.
           </p>
           <div className="flex space-x-6 text-sm">
-            <Link to="/privacy" className="text-gray-400 hover:text-amber-400 transition-colors">
+            <Link href="/privacy" className="text-gray-400 hover:text-amber-400 transition-colors">
               Privacy Policy
             </Link>
-            <Link to="/terms" className="text-gray-400 hover:text-amber-400 transition-colors">
+            <Link href="/terms" className="text-gray-400 hover:text-amber-400 transition-colors">
               Terms of Service
             </Link>
           </div>

@@ -234,7 +234,7 @@ for i in range(n):
         rates[i][j] = currencies[names[j]]['silver_g'] / currencies[names[i]]['silver_g']
 
 # Silk Road cities and their primary currencies
-cities = ['Xi\\'an', 'Dunhuang', 'Kashgar', 'Samarkand', 'Merv',
+cities = ['Xi\'an', 'Dunhuang', 'Kashgar', 'Samarkand', 'Merv',
           'Ctesiphon', 'Palmyra', 'Antioch', 'Constantinople', 'Rome']
 city_currencies = [0, 0, 1, 1, 2, 2, 3, 3, 4, 3]  # index into names
 
@@ -267,10 +267,10 @@ for c in [0, 2, 4, 6, 9]:  # show key cities
     ax1.plot(range(days), local_price / local_price[0], color=colors_prop[c],
              linewidth=2, label=cities[c])
 
-ax1.axvline(x=50, color='red', linestyle='--', alpha=0.5, label='Price shock in Xi\\'an')
+ax1.axvline(x=50, color='red', linestyle='--', alpha=0.5, label='Price shock in Xi\'an')
 ax1.set_xlabel('Days', color='white')
 ax1.set_ylabel('Price index (1.0 = baseline)', color='white')
-ax1.set_title('Price Signal Propagation: Silk Shortage in Xi\\'an', color='white', fontsize=13)
+ax1.set_title('Price Signal Propagation: Silk Shortage in Xi\'an', color='white', fontsize=13)
 ax1.legend(facecolor='#1f2937', labelcolor='white', fontsize=9)
 ax1.tick_params(colors='gray')
 

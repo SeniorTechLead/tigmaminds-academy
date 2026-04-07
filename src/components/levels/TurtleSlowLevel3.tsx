@@ -150,7 +150,7 @@ ax.set_yticks(range(len(names)))
 ax.set_yticklabels(names, fontsize=7, color='white')
 ax.axvline(0, color='gray', linewidth=1)
 ax.set_xlabel('log10(observed/predicted)', color='white')
-ax.set_title('Deviations from Kleiber\'s law', color='white', fontsize=11)
+ax.set_title("Deviations from Kleiber's law", color='white', fontsize=11)
 ax.tick_params(colors='gray')
 
 plt.tight_layout()

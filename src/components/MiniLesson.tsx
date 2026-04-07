@@ -1,7 +1,8 @@
-import { useState, useRef, useCallback, useContext } from 'react';
-import { Play, Loader2, CheckCircle, RotateCcw, HelpCircle, ChevronDown, ChevronUp, Sparkles } from 'lucide-react';
+import { useState, useRef, useCallback, useContext, useEffect } from 'react';
+import { Play, Loader2, CheckCircle, RotateCcw, HelpCircle, ChevronDown, ChevronUp, Sparkles, GripHorizontal, Maximize2, Minimize2, Moon, Sun } from 'lucide-react';
 import DiagramZoom from './DiagramZoom';
 import { usePyodide } from '../contexts/PyodideContext';
+import { usePrefs } from '../contexts/PrefsContext';
 
 interface MiniLessonProps {
   /** HTML id for scroll targeting */
@@ -111,6 +112,156 @@ export function renderMarkdown(text: string) {
   return html.join('');
 }
 
+/* ── Split pane: code on top, output on bottom, draggable divider, fullscreen ── */
+const INLINE_HEIGHT = 460;
+const MIN_CODE = 100;
+const MIN_OUTPUT = 80;
+
+function SplitPane({ code, lineCount, onCodeChange, onKeyDown, textareaRef, output, imageOutput, running, pyReady, toolbar, dark, onToggleTheme }: {
+  code: string; lineCount: number; onCodeChange: (v: string) => void;
+  onKeyDown: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+  textareaRef: React.RefObject<HTMLTextAreaElement | null>;
+  output: string; imageOutput: string | null; running: boolean; pyReady: boolean;
+  toolbar: React.ReactNode;
+  dark: boolean;
+  onToggleTheme: () => void;
+}) {
+  const [expanded, setExpanded] = useState(false);
+  const [splitRatio, setSplitRatio] = useState(0.6); // 60% code, 40% output
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Close on Escape
+  useEffect(() => {
+    if (!expanded) return;
+    const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') setExpanded(false); };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [expanded]);
+
+  // Lock body scroll when expanded
+  useEffect(() => {
+    if (expanded) { document.body.style.overflow = 'hidden'; }
+    else { document.body.style.overflow = ''; }
+    return () => { document.body.style.overflow = ''; };
+  }, [expanded]);
+
+  const onDividerMouseDown = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    const container = containerRef.current;
+    if (!container) return;
+    const startY = e.clientY;
+    const startRatio = splitRatio;
+    const totalH = container.offsetHeight;
+    const onMove = (ev: MouseEvent) => {
+      const delta = ev.clientY - startY;
+      const next = Math.max(MIN_CODE / totalH, Math.min(1 - MIN_OUTPUT / totalH, startRatio + delta / totalH));
+      setSplitRatio(next);
+    };
+    const onUp = () => { window.removeEventListener('mousemove', onMove); window.removeEventListener('mouseup', onUp); };
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+  }, [splitRatio]);
+
+  const onDividerTouchStart = useCallback((e: React.TouchEvent) => {
+    const container = containerRef.current;
+    if (!container) return;
+    const startY = e.touches[0].clientY;
+    const startRatio = splitRatio;
+    const totalH = container.offsetHeight;
+    const onMove = (ev: TouchEvent) => {
+      const delta = ev.touches[0].clientY - startY;
+      const next = Math.max(MIN_CODE / totalH, Math.min(1 - MIN_OUTPUT / totalH, startRatio + delta / totalH));
+      setSplitRatio(next);
+    };
+    const onEnd = () => { window.removeEventListener('touchmove', onMove); window.removeEventListener('touchend', onEnd); };
+    window.addEventListener('touchmove', onMove, { passive: true });
+    window.addEventListener('touchend', onEnd);
+  }, [splitRatio]);
+
+  const wrapperClass = expanded
+    ? `fixed inset-0 z-50 flex flex-col ${dark ? 'bg-gray-900' : 'bg-white'}`
+    : 'flex flex-col';
+  const totalStyle = expanded ? {} : { height: INLINE_HEIGHT };
+
+  return (
+    <div ref={containerRef} style={totalStyle} className={wrapperClass}>
+      {/* Toolbar */}
+      <div className={`flex items-center gap-2 px-4 py-2 flex-shrink-0 border-b ${dark ? 'bg-gray-800 border-gray-700' : 'bg-gray-100 border-gray-300'}`}>
+        {toolbar}
+        <div className="ml-auto flex items-center gap-1">
+          <button
+            onClick={onToggleTheme}
+            className={`flex items-center gap-1 px-2 py-1.5 text-xs transition-colors ${dark ? 'text-gray-400 hover:text-white' : 'text-gray-500 hover:text-gray-900'}`}
+            title={dark ? 'Switch to light editor' : 'Switch to dark editor'}
+          >
+            {dark ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
+          </button>
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className={`flex items-center gap-1 px-2 py-1.5 text-xs transition-colors ${dark ? 'text-gray-400 hover:text-white' : 'text-gray-500 hover:text-gray-900'}`}
+            title={expanded ? 'Exit fullscreen (Esc)' : 'Expand to fullscreen'}
+          >
+            {expanded ? <Minimize2 className="w-3.5 h-3.5" /> : <Maximize2 className="w-3.5 h-3.5" />}
+            {expanded ? 'Exit' : 'Expand'}
+          </button>
+        </div>
+      </div>
+
+      {/* Code editor */}
+      <div className={`flex overflow-y-auto ${dark ? 'bg-gray-900' : 'bg-gray-50'}`} style={{ flex: `0 0 ${splitRatio * 100}%` }}>
+        <div className={`flex-shrink-0 pt-3 pb-3 pr-2 pl-3 select-none border-r ${dark ? 'border-gray-700' : 'border-gray-300'}`} aria-hidden>
+          {Array.from({ length: lineCount }).map((_, i) => (
+            <div key={i} className={`leading-6 text-xs font-mono ${dark ? 'text-gray-600' : 'text-gray-400'}`}>{i + 1}</div>
+          ))}
+        </div>
+        <div className="flex-1 min-w-0">
+          <textarea
+            ref={textareaRef}
+            value={code}
+            onChange={(e) => onCodeChange(e.target.value)}
+            onKeyDown={onKeyDown}
+            spellCheck={false}
+            rows={lineCount}
+            className={`w-full bg-transparent font-mono text-sm pl-3 pr-4 py-3 resize-none focus:outline-none leading-6 ${dark ? 'text-gray-100' : 'text-gray-900'}`}
+            style={{ tabSize: 4 }}
+          />
+        </div>
+      </div>
+
+      {/* Draggable divider */}
+      <div
+        onMouseDown={onDividerMouseDown}
+        onTouchStart={onDividerTouchStart}
+        className={`flex-shrink-0 h-2 hover:bg-emerald-600 cursor-row-resize flex items-center justify-center transition-colors group ${dark ? 'bg-gray-700' : 'bg-gray-300'}`}
+        title="Drag to resize"
+      >
+        <GripHorizontal className={`w-4 h-3 group-hover:text-white ${dark ? 'text-gray-500' : 'text-gray-400'}`} />
+      </div>
+
+      {/* Output area */}
+      <div className={`flex flex-col overflow-hidden flex-1 min-h-0 ${dark ? 'bg-gray-950' : 'bg-white'}`}>
+        <div className={`flex items-center gap-2 px-4 py-1.5 border-b flex-shrink-0 ${dark ? 'bg-gray-800/80 border-gray-700' : 'bg-gray-100 border-gray-300'}`}>
+          <span className={`text-[10px] font-bold uppercase tracking-wider ${dark ? 'text-gray-500' : 'text-gray-400'}`}>Output</span>
+          {running && <Loader2 className="w-3 h-3 text-emerald-400 animate-spin" />}
+        </div>
+        <div className="flex-1 overflow-y-auto">
+          {output ? (
+            <pre className={`px-4 py-3 text-sm font-mono whitespace-pre-wrap ${dark ? 'text-emerald-300' : 'text-emerald-700'}`}>{output}</pre>
+          ) : imageOutput ? (
+            <div className="p-4 flex justify-center">
+              <img src={imageOutput} alt="Plot" className="max-w-full rounded-lg" />
+            </div>
+          ) : (
+            <p className={`px-4 py-3 text-xs italic ${dark ? 'text-gray-600' : 'text-gray-400'}`}>
+              {!pyReady ? 'Click "Load Python" above, then click "Run" to execute the code.' : 'Click "Run" to execute the code.'}
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function MiniLesson({
   id,
   number,
@@ -131,6 +282,12 @@ export default function MiniLesson({
   practice,
   explanation,
 }: MiniLessonProps) {
+  // Editor theme from preferences — toggle persists to localStorage
+  const { editorTheme, setEditorTheme } = usePrefs();
+  const isDark = editorTheme === 'dark';
+  const toggleTheme = useCallback(() => {
+    setEditorTheme(isDark ? 'light' : 'dark');
+  }, [isDark, setEditorTheme]);
   // Use context as primary, fall back to props for legacy compatibility
   const ctx = usePyodide();
   const pyodideRef = propPyodideRef ?? ctx.pyodideRef;
@@ -290,80 +447,48 @@ len(plt.get_fignums()) > 0
         </div>
       )}
 
-      <div className="flex bg-gray-900">
-        {/* Line numbers */}
-        <div className="flex-shrink-0 pt-3 pb-3 pr-2 pl-3 select-none border-r border-gray-700" aria-hidden>
-          {Array.from({ length: lineCount }).map((_, i) => (
-            <div key={i} className="leading-6 text-xs font-mono text-gray-600">{i + 1}</div>
-          ))}
-        </div>
-
-        {/* Editor */}
-        <div className="flex-1 min-w-0 relative">
-          <textarea
-            ref={textareaRef}
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
-            onKeyDown={handleKeyDown}
-            spellCheck={false}
-            rows={lineCount}
-            className="w-full bg-transparent text-gray-100 font-mono text-sm pl-3 pr-4 py-3 resize-none focus:outline-none leading-6"
-            style={{ tabSize: 4 }}
-          />
-        </div>
-
-        {/* Run / reset buttons */}
-        <div className="flex-shrink-0 p-2 flex flex-col items-center justify-start gap-2">
+      <SplitPane
+        code={code}
+        lineCount={lineCount}
+        onCodeChange={setCode}
+        onKeyDown={handleKeyDown}
+        textareaRef={textareaRef}
+        output={output}
+        imageOutput={imageOutput}
+        running={running}
+        pyReady={!!(pyReady || pyodideRef?.current)}
+        dark={isDark}
+        onToggleTheme={toggleTheme}
+        toolbar={<>
           {!pyReady && !pyodideRef?.current ? (
             <button
               onClick={onLoadPyodide}
-              className="p-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg transition-colors animate-pulse"
+              className="flex items-center gap-2 px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-sm font-semibold transition-colors animate-pulse"
               title="Load Python to run this code"
             >
-              <Sparkles className="w-4 h-4" />
+              <Sparkles className="w-4 h-4" /> Load Python
             </button>
           ) : (
             <button
               onClick={run}
               disabled={running}
-              className="p-2 bg-emerald-600 hover:bg-emerald-700 disabled:bg-gray-700 text-white rounded-lg transition-colors"
-              title="Run (⌘↵)"
+              className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 disabled:bg-gray-600 text-white rounded-lg text-sm font-semibold transition-colors"
+              title={`Run (${typeof navigator !== 'undefined' && /Mac/.test(navigator.platform) ? '⌘' : 'Ctrl'}+Enter)`}
             >
               {running ? <Loader2 className="w-4 h-4 animate-spin" /> : <Play className="w-4 h-4" />}
+              {running ? 'Running...' : 'Run'}
             </button>
           )}
           <button
             onClick={() => { setCode(initialCode); setOutput(''); setImageOutput(null); setHasRun(false); }}
-            className="p-2 text-gray-500 hover:text-white transition-colors"
-            title="Reset"
+            className={`flex items-center gap-1 px-3 py-2 text-sm transition-colors ${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-500 hover:text-gray-900'}`}
+            title="Reset code"
           >
-            <RotateCcw className="w-3 h-3" />
+            <RotateCcw className="w-3.5 h-3.5" /> Reset
           </button>
-        </div>
-      </div>
-
-      {/* Python not loaded hint */}
-      {!pyReady && !pyodideRef?.current && !output && (
-        <div className="border-t border-gray-700 bg-gray-800/50 px-4 py-3 flex items-center gap-2">
-          <Sparkles className="w-4 h-4 text-amber-400 flex-shrink-0" />
-          <p className="text-xs text-amber-300">
-            <button onClick={onLoadPyodide} className="underline hover:text-amber-200 font-semibold">Load Python</button> to run this code — it takes a few seconds the first time.
-          </p>
-        </div>
-      )}
-
-      {/* Output */}
-      {output && (
-        <div className="border-t border-gray-700 bg-gray-900">
-          <pre className="px-4 py-3 text-sm text-gray-300 font-mono whitespace-pre-wrap max-h-[150px] overflow-y-auto">{output}</pre>
-        </div>
-      )}
-
-      {imageOutput && (
-        <div className="border-t border-gray-700 bg-gray-800/50 p-4 flex justify-center">
-          <img src={imageOutput} alt="Plot" className="max-w-full rounded-lg" />
-        </div>
-      )}
+          {hasRun && <CheckCircle className="w-4 h-4 text-emerald-500" />}
+        </>}
+      />
 
       {/* Challenge */}
       {challenge && (
@@ -463,10 +588,10 @@ len(plt.get_fignums()) > 0
                         )}
 
                         {/* Mini editor */}
-                        <div className="flex bg-gray-900 border-t border-gray-700">
-                          <div className="flex-shrink-0 pt-3 pb-3 pr-2 pl-3 select-none border-r border-gray-700" aria-hidden>
+                        <div className={`flex border-t ${isDark ? 'bg-gray-900 border-gray-700' : 'bg-gray-50 border-gray-300'}`}>
+                          <div className={`flex-shrink-0 pt-3 pb-3 pr-2 pl-3 select-none border-r ${isDark ? 'border-gray-700' : 'border-gray-300'}`} aria-hidden>
                             {Array.from({ length: pLineCount }).map((_, li) => (
-                              <div key={li} className="leading-6 text-xs font-mono text-gray-600">{li + 1}</div>
+                              <div key={li} className={`leading-6 text-xs font-mono ${isDark ? 'text-gray-600' : 'text-gray-400'}`}>{li + 1}</div>
                             ))}
                           </div>
                           <div className="flex-1 min-w-0">
@@ -475,7 +600,7 @@ len(plt.get_fignums()) > 0
                               onChange={(e) => setPracticeCode(prev => ({ ...prev, [i]: e.target.value }))}
                               spellCheck={false}
                               rows={pLineCount}
-                              className="w-full bg-transparent text-gray-100 font-mono text-sm pl-3 pr-4 py-3 resize-none focus:outline-none leading-6"
+                              className={`w-full bg-transparent font-mono text-sm pl-3 pr-4 py-3 resize-none focus:outline-none leading-6 ${isDark ? 'text-gray-100' : 'text-gray-900'}`}
                               style={{ tabSize: 4 }}
                               onKeyDown={(e) => {
                                 if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); runPractice(); }
@@ -487,7 +612,7 @@ len(plt.get_fignums()) > 0
                               onClick={runPractice}
                               disabled={isRunning}
                               className="p-2 bg-emerald-600 hover:bg-emerald-700 disabled:bg-gray-700 text-white rounded-lg transition-colors"
-                              title="Run (⌘↵)"
+                              title={`Run (${typeof navigator !== 'undefined' && /Mac/.test(navigator.platform) ? '⌘' : 'Ctrl'}+Enter)`}
                             >
                               {isRunning ? <Loader2 className="w-4 h-4 animate-spin" /> : <Play className="w-4 h-4" />}
                             </button>
@@ -495,12 +620,12 @@ len(plt.get_fignums()) > 0
                         </div>
 
                         {pOutput && (
-                          <div className="border-t border-gray-700 bg-gray-900">
-                            <pre className="px-4 py-3 text-sm text-gray-300 font-mono whitespace-pre-wrap max-h-[120px] overflow-y-auto">{pOutput}</pre>
+                          <div className={`border-t ${isDark ? 'border-gray-700 bg-gray-900' : 'border-gray-300 bg-gray-50'}`}>
+                            <pre className={`px-4 py-3 text-sm font-mono whitespace-pre-wrap max-h-[120px] overflow-y-auto ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>{pOutput}</pre>
                           </div>
                         )}
                         {pImage && (
-                          <div className="border-t border-gray-700 bg-gray-800/50 p-4 flex justify-center">
+                          <div className={`border-t p-4 flex justify-center ${isDark ? 'border-gray-700 bg-gray-800/50' : 'border-gray-300 bg-gray-100'}`}>
                             <img src={pImage} alt="Plot" className="max-w-full rounded-lg" />
                           </div>
                         )}

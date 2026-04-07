@@ -162,7 +162,7 @@ np.random.seed(42)
 
 # Evolutionary simulation of peacock sexual selection
 # Males have: genetic_quality (0-1) and display_investment (0-1)
-# Display = quality * investment (can\'t fake quality)
+# Display = quality * investment (can't fake quality)
 # Survival probability decreases with display size
 # Mating probability increases with display size
 

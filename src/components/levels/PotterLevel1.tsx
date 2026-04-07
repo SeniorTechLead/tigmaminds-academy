@@ -95,7 +95,7 @@ clay_dist = 100 / (1 + (sizes / 1) ** 3)
 silt_dist = 100 / (1 + (sizes / 20) ** 3)
 sand_dist = 100 / (1 + (sizes / 500) ** 3)
 
-ax2.plot(sizes, clay_dist, color='#ef4444', linewidth=2, label='Potter\'s clay')
+ax2.plot(sizes, clay_dist, color='#ef4444', linewidth=2, label="Potter's clay")
 ax2.plot(sizes, silt_dist, color='#f59e0b', linewidth=2, label='Silt')
 ax2.plot(sizes, sand_dist, color='#22c55e', linewidth=2, label='Sand')
 

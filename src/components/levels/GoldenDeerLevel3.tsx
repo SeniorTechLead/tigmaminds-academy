@@ -119,8 +119,8 @@ for name, lam, _ in examples:
 
 print()
 print("The golden deer's coat reflects 580nm photons, each carrying 2.14 eV.")
-print("That\'s enough energy to excite electrons but not enough to break bonds.")
-print("UV photons (>3.1 eV) start breaking molecular bonds -- that\'s why UV is dangerous.")`,
+print("That's enough energy to excite electrons but not enough to break bonds.")
+print("UV photons (>3.1 eV) start breaking molecular bonds -- that's why UV is dangerous.")`,
       challenge: 'Add a fourth subplot that shows the visible spectrum as a color bar (380-750nm). Map each wavelength to an approximate RGB color and display it. Hint: use a simple piecewise function to convert wavelength to RGB.',
       successHint: 'The two equations c=λf and E=hf are the Rosetta Stone of the electromagnetic spectrum. With them you can convert between any representation — wavelength, frequency, or energy — and understand why different parts of the spectrum interact with matter so differently.',
     },
@@ -218,7 +218,7 @@ for n_high, lam, E in balmer_lines:
 print(f"\\nSodium doublet: {sodium_lines[0]:.1f} nm and {sodium_lines[1]:.1f} nm")
 print("  (The yellow glow of street lamps and sodium flames)")
 print(f"\\nNeon has {len(neon_lines)} visible lines -- mostly orange/red")
-print("  (That\'s why neon signs glow orange-red)")
+print("  (That's why neon signs glow orange-red)")
 print(f"\\nIron has {len(iron_lines)} visible lines -- a complex spectrum")
 print("  (Iron lines in sunlight revealed the Sun's composition)")
 print()

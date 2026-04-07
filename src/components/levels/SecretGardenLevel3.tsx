@@ -243,7 +243,7 @@ for name, org, wat, gas in stages:
 
 print(f"\\nAfter {tau} years of waterlogging, freeboard drops to {freeboard_t[tau]*100:.1f} cm")
 print(f"After 40 years: {freeboard_t[40]*100:.1f} cm — Loktak's phumdis are in crisis.")
-print("The Ithai Barrage was built in 1983 — that\'s ~40 years of permanent waterlogging.")`,
+print("The Ithai Barrage was built in 1983 — that's ~40 years of permanent waterlogging.")`,
       challenge: 'Model the effect of seasonal water level fluctuations (±1m) on phumdi health. Compare a natural regime (lake drops 1m in dry season, phumdis ground on sediment) vs the barrage regime (constant high water). Show how grounding replenishes nutrients.',
       successHint: 'Phumdis are a remarkable natural phenomenon — floating ecosystems built over decades by the accumulation of partially decomposed organic matter. Archimedes\' principle governs their behavior, and human alteration of hydrology is pushing them past the point of no return.',
     },

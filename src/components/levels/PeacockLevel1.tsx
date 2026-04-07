@@ -551,7 +551,7 @@ ax.plot(range(len(mean_tail)), mean_tail, color='#3b82f6', linewidth=2, label='M
 ax.plot(range(len(mean_pref)), mean_pref, color='#ef4444', linewidth=2, label='Mean female preference')
 ax.set_xlabel('Generation', color='white')
 ax.set_ylabel('Tail length (cm)', color='white')
-ax.set_title('Fisher\\'s Runaway: Tail & Preference Co-evolve', color='white', fontsize=11)
+ax.set_title('Fisher\'s Runaway: Tail & Preference Co-evolve', color='white', fontsize=11)
 ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax.tick_params(colors='gray')
 

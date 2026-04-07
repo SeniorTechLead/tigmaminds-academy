@@ -145,7 +145,7 @@ substances = [
     ("Coffee",        1e-5),
     ("Pure water",    1e-7),
     ("Blood",         4e-8),
-    ("Baking soda",   1e-8.5),
+    ("Baking soda",   10**(-8.5)),
     ("Soap",          1e-10),
     ("Bleach",        1e-13),
 ]

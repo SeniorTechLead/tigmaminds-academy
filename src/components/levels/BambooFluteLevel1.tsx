@@ -418,7 +418,7 @@ Modern Western music "solves" this with **equal temperament**: divide the octave
 import matplotlib.pyplot as plt
 
 # Three tuning systems compared
-note_names = ['C', 'D', 'E', 'F', 'G', 'A', 'B', 'C\\'']
+note_names = ['C', 'D', 'E', 'F', 'G', 'A', 'B', 'C\'']
 
 # Just intonation (pure ratios)
 just_ratios = [1, 9/8, 5/4, 4/3, 3/2, 5/3, 15/8, 2]

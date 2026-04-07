@@ -465,7 +465,7 @@ fig.suptitle('Four Dimensions of Globalization', color='white', fontsize=14)
 data = [
     (trade_gdp, 'Trade (% of world GDP)', '#22c55e'),
     (fdi, 'FDI inflows (T USD)', '#3b82f6'),
-    (migrants, 'Int\'l migrants (millions)', '#f59e0b'),
+    (migrants, "Int'l migrants (millions)", '#f59e0b'),
     (internet, 'Internet users (billions)', '#a855f7'),
 ]
 

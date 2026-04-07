@@ -167,6 +167,83 @@ MAPPING = {
     "610c7a92": "little-river-joined",                  # small stream merging into Brahmaputra
     "8ef6647b": "haflong-blue-mountains",               # blue hills of Haflong at twilight
     "e71a482b": "kite-eagle-dimapur",                   # paper kite and eagle over Dimapur
+
+    # NE State stories (Mizoram, Manipur, Tripura, Nagaland, Sikkim)
+    "a2e7457a": "cheraw-bamboo-dance",                   # Mizo girls leaping between bamboo poles
+    "1198d58a": "mautam-bamboo-famine",                  # Mizoram hillside with bamboo flowers
+    "e71cb565": "iron-smiths-lushai",                    # Mizo blacksmith hammering blade
+    "180e2b05": "hawk-blue-mountain",                    # crested Jerdon's Baza hawk soaring
+    "49e55b66": "orchids-phawngpui",                     # moss-draped cloud forest orchids
+    "998f1337": "kangla-fort-manipur",                   # ancient Kangla Fort with moat
+    "383ec557": "thang-ta-manipur",                      # young Manipuri Thang-Ta warrior mid-spin
+    "40a86a3f": "ras-lila-manipur",                      # twelve Manipuri dancers in circle
+    "c18f748e": "ima-keithel-market",                    # bustling Ima Keithel market
+    "371cc489": "polo-manipur",                          # two Manipuri polo players on ponies
+    "f5ec2676": "neermahal-water-palace",                # Neermahal palace reflected in lake
+    "811fccf1": "fourteen-gods-tripura",                 # ancient Chaturdasha temple at night
+    "d8812e6b": "rubber-tripura",                        # neat rows of rubber trees with latex
+    "1489d5f7": "cane-weavers-tripura",                  # Riang tribal woman weaving cane
+    "2f06b2b9": "tripura-sundari-temple",                # aerial view temple on turtle hillock
+    "773c02f5": "dzukou-valley-lily",                    # wide alpine valley carpeted in pink lilies
+    "c2cee55b": "stone-pulling-nagaland",                # Angami Naga warriors pulling megalith
+    "27a25d5f": "hornbill-flight-nagaland",              # magnificent Great Hornbill with casque
+    "6e0e0538": "naga-dao-metallurgy",                   # Konyak Naga smith forging blade
+    "64f6af23": "kanchenjunga-five-treasures",           # Kanchenjunga's five snow peaks
+    "faf41cf2": "red-panda-sikkim",                      # red panda curled on rhododendron branch
+    "3a4d2455": "cardamom-hills-sikkim",                 # shaded cardamom plantation
+    "95e8b215": "prayer-flags-sikkim",                   # prayer flags across mountain pass
+
+    # Extras (not yet matched to stories)
+    "45029776": "astrolabe-brass",                       # beautifully crafted brass astrolabe
+    "64fa6094": "powerful-monk-bell",                    # powerful monk striking bell
+
+    # World History stories
+    "edb5b6f5": "great-wall-of-china",                   # sweeping view of Great Wall
+    "55619c75": "panama-canal",                           # cargo ship in canal locks
+    "3f9d9fa2": "library-of-alexandria",                  # interior of Great Library
+    "32788ecc": "viking-navigation",                      # Viking longship with sunstone
+    "dc540ccb": "building-the-pyramids",                  # Great Pyramid under construction
+    "7d27cbf8": "apollo-moon-landing",                    # Apollo 11 on Moon surface
+    "322d9521": "penicillin-discovery",                   # Fleming's lab bench with petri dish
+    "7bc5baea": "gutenberg-printing-press",               # Gutenberg at printing press
+    "d499904f": "inca-road-system",                       # Inca stone road with chasqui runner
+    "9658037e": "manhattan-project",                      # physicists at Los Alamos chalkboard
+    "a3220757": "roman-aqueducts",                        # Pont du Gard aqueduct
+    "c8a71e97": "greek-fire",                             # Byzantine warship launching Greek fire
+    "7c7670ad": "egyptian-embalming",                     # Egyptian embalming workshop
+    "f3841073": "chinese-gunpowder",                      # Song Dynasty alchemist workshop
+    "ea95b474": "polynesian-wayfinding",                  # Polynesian canoe under Milky Way
+    "f52cc725": "mesopotamian-irrigation",                # Mesopotamian irrigation channels
+    "0a1f3fa7": "indian-wootz-steel",                     # Indian smith pouring wootz steel
+    "315aec84": "mayan-astronomy",                        # Mayan astronomer at Caracol observatory
+    "f31d8fe2": "persian-ice-houses",                     # Persian yakhchal dome
+    "a94019c6": "zheng-he-fleet",                         # Zheng He treasure ship with red sails
+    "37775049": "gothic-cathedrals",                      # Gothic cathedral interior ribbed vaults
+    "dd8583ed": "ibn-al-haytham-optics",                  # Ibn al-Haytham camera obscura experiment
+    "a6c5f8db": "leonardo-machines",                      # Leonardo workshop with ornithopter
+    "b9a27b20": "silk-road-network",                      # Silk Road camel caravan
+    "67f625ff": "the-black-death",                        # plague doctor with lantern
+
+    # Bengali stories
+    "180bef4a": "sundarbans-mangroves",                   # Sundarbans mangrove forest with tiger
+    "59e6c391": "kumartuli-pandal-builder",               # Kumartuli artisans sculpting Durga
+    "59694869": "hilsa-migration",                        # hilsa fish swimming upstream
+    "f3206450": "kolkata-last-tram",                      # old Kolkata tram on tree-lined avenue
+    "07c5a288": "bankura-terracotta-horse",               # Bankura potter shaping terracotta horse
+
+    # Telugu stories
+    "4c053abc": "kuchipudi-anklet",                       # Kuchipudi dancer on brass plate
+    "716749c4": "pochampally-ikat-weaver",                # Pochampally weaver at pit loom
+    "9d1bed4c": "nagarjuna-sagar-dam",                    # Nagarjuna Sagar Dam with spillway
+    "eb042653": "bidriware-silver-inlay",                  # Bidar craftsman pressing silver wire
+    "326d69b8": "charminar-pigeons",                      # pigeons swirling around Charminar
+
+    # Tamil stories
+    "786eea74": "swamimalai-bronze-casters",              # Swamimalai bronze caster pouring metal
+    "ee5b80b9": "mahabalipuram-stone-screens",            # stone carver at Mahabalipuram jali
+    "b1a8202e": "chettinad-spice-trader",                 # Chettinad mansion spice trader
+    "fe05c39e": "pamban-bridge",                          # Pamban railway bridge over Palk Strait
+    "8bb8aaa5": "auroville-solar-kitchen",                # Auroville Solar Kitchen parabolic dish
 }
 
 # Skip duplicates (the "(1)" file)
@@ -217,7 +294,8 @@ def add_watermark(img: Image.Image, text: str) -> Image.Image:
     return watermarked
 
 
-def process():
+def process(only_slugs: list[str] | None = None):
+    """Process raw images. If only_slugs is provided, process ONLY those slugs."""
     os.makedirs(OUT_PNG_DIR, exist_ok=True)
     os.makedirs(OUT_WEBP_DIR, exist_ok=True)
 
@@ -234,8 +312,13 @@ def process():
                 break
 
         if not friendly:
-            print(f"  SKIP (no mapping): {raw_file.name}")
+            if not only_slugs:
+                print(f"  SKIP (no mapping): {raw_file.name}")
             stats["skipped"] += 1
+            continue
+
+        # If --only is set, skip anything not in the list
+        if only_slugs and friendly not in only_slugs:
             continue
 
         # Skip duplicates
@@ -276,4 +359,16 @@ def process():
 
 
 if __name__ == "__main__":
-    process()
+    import sys
+    # Usage: python3 scripts/watermark.py                    → process ALL
+    #        python3 scripts/watermark.py --only slug1 slug2  → process only these slugs
+    if "--only" in sys.argv:
+        idx = sys.argv.index("--only")
+        slugs = sys.argv[idx + 1:]
+        if not slugs:
+            print("Error: --only requires at least one slug")
+            sys.exit(1)
+        print(f"Processing {len(slugs)} specific slugs: {', '.join(slugs)}")
+        process(only_slugs=slugs)
+    else:
+        process()

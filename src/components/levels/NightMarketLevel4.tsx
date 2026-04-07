@@ -966,7 +966,7 @@ class MarketDashboard:
         ax1.set_yticks(y_pos)
         ax1.set_yticklabels(prod_names, color='white', fontsize=10)
         ax1.set_xlabel('Predicted price (Rs/kg)', color='white')
-        ax1.set_title('TODAY\'S PRICE FORECAST', color='#22c55e', fontsize=12, fontweight='bold')
+        ax1.set_title("TODAY'S PRICE FORECAST", color='#22c55e', fontsize=12, fontweight='bold')
 
         # PANEL 2: Stocking recommendations
         ax2 = fig.add_subplot(2, 3, 2)

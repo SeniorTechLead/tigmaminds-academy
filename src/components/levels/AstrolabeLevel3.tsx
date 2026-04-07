@@ -179,10 +179,10 @@ ax1.set_xlabel('Apparent altitude (°)', color='#e2e8f0')
 ax1.set_ylabel('Refraction (arcminutes)', color='#e2e8f0')
 ax1.set_title('Atmospheric Refraction', color='white')
 ax1.grid(True, alpha=0.2)
-ax1.annotate(f'At horizon: {refraction(0):.1f}\\'',
+ax1.annotate(f'At horizon: {refraction(0):.1f}\'',
              (0, refraction(0)), fontsize=9, color='#fbbf24',
              xytext=(10, -10), textcoords='offset points')
-ax1.annotate(f'At 10°: {refraction(10):.1f}\\'',
+ax1.annotate(f'At 10°: {refraction(10):.1f}\'',
              (10, refraction(10)), fontsize=9, color='#fbbf24',
              xytext=(10, 5), textcoords='offset points')
 
@@ -196,9 +196,9 @@ cos_ha = -np.tan(np.radians(lat)) * np.tan(np.radians(dec))
 ha_true = np.degrees(np.arccos(cos_ha))
 
 # Apparent sunset: alt = -0.57 (refracted to horizon)
-cos_ha_ref = (-np.sin(np.radians(-0.57)) -
-              np.sin(np.radians(lat)) * np.sin(np.radians(dec))) / \\
-             (np.cos(np.radians(lat)) * np.cos(np.radians(dec)))
+cos_ha_ref = ((-np.sin(np.radians(-0.57)) -
+              np.sin(np.radians(lat)) * np.sin(np.radians(dec))) /
+             (np.cos(np.radians(lat)) * np.cos(np.radians(dec))))
 cos_ha_ref = np.clip(cos_ha_ref, -1, 1)
 ha_refr = np.degrees(np.arccos(cos_ha_ref))
 
@@ -212,9 +212,9 @@ for la in lats:
     c1 = -np.tan(np.radians(la)) * np.tan(np.radians(dec))
     c1 = np.clip(c1, -1, 1)
     h1 = np.degrees(np.arccos(c1))
-    c2 = (-np.sin(np.radians(-0.57)) -
-          np.sin(np.radians(la)) * np.sin(np.radians(dec))) / \\
-         (np.cos(np.radians(la)) * np.cos(np.radians(dec)))
+    c2 = ((-np.sin(np.radians(-0.57)) -
+          np.sin(np.radians(la)) * np.sin(np.radians(dec))) /
+         (np.cos(np.radians(la)) * np.cos(np.radians(dec))))
     c2 = np.clip(c2, -1, 1)
     h2 = np.degrees(np.arccos(c2))
     extras.append(2 * (h2 - h1) / 15 * 60)
