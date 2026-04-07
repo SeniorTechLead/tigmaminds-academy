@@ -665,7 +665,7 @@ for T_C, label, color in key_temps:
     T_K = T_C + 273.15
     P = sigma * T_K**4
     ax1.plot(T_C, P/1000, 'o', color=color, markersize=8, zorder=5)
-    ax1.annotate(f'{label}\\n{P/1000:.1f} kW/m²', xy=(T_C, P/1000),
+    ax1.annotate(f'{label}\\\n{P/1000:.1f} kW/m²', xy=(T_C, P/1000),
                 xytext=(10, 10), textcoords='offset points',
                 color=color, fontsize=8)
 

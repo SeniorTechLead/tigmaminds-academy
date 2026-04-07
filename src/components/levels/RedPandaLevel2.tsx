@@ -263,7 +263,7 @@ y_pos = range(len(names))
 for i, (name, (low, mid, high)) in enumerate(zip(names, estimated_ranges)):
     ax2.barh(i, high - low, left=low, color=colors_div[i], alpha=0.4, height=0.6)
     ax2.plot(mid, i, 'D', color=colors_div[i], markersize=8)
-    ax2.text(high + 1, i, f'{mid:.0f} Mya\\n({low:.0f}-{high:.0f})', va='center',
+    ax2.text(high + 1, i, f'{mid:.0f} Mya\\\n({low:.0f}-{high:.0f})', va='center',
              color=colors_div[i], fontsize=9)
 
 ax2.set_yticks(y_pos)

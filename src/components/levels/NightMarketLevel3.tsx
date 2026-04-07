@@ -373,7 +373,7 @@ ax.legend(fontsize=9, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
 additional_revenue = revenue_cold[-1] - revenue_no_cold[-1] - ice_cost
 ax.text(14, (revenue_cold[-1] + revenue_no_cold[-1])/2,
-        f'Additional profit:\\nRs {additional_revenue:.0f}/day\\n(minus Rs {ice_cost} ice)',
+        f'Additional profit:\\\nRs {additional_revenue:.0f}/day\\\n(minus Rs {ice_cost} ice)',
         color='#22c55e', fontsize=9, ha='center',
         bbox=dict(facecolor='#1f2937', alpha=0.8, boxstyle='round'))
 
@@ -776,9 +776,9 @@ ax = axes[1, 1]
 # Daily cost of different designs
 design_costs = {
     'Open table': {'fixed': 0, 'daily_ice': 0, 'revenue': 2100},
-    'Thermocol\\n+ 2kg ice': {'fixed': 200/180, 'daily_ice': 30, 'revenue': 2700},
-    'Thermocol\\n+ 3kg ice': {'fixed': 200/180, 'daily_ice': 45, 'revenue': 3200},
-    'Thermocol\\n+ 5kg ice': {'fixed': 300/180, 'daily_ice': 75, 'revenue': 3400},
+    'Thermocol\\\n+ 2kg ice': {'fixed': 200/180, 'daily_ice': 30, 'revenue': 2700},
+    'Thermocol\\\n+ 3kg ice': {'fixed': 200/180, 'daily_ice': 45, 'revenue': 3200},
+    'Thermocol\\\n+ 5kg ice': {'fixed': 300/180, 'daily_ice': 75, 'revenue': 3400},
 }
 
 names = list(design_costs.keys())
@@ -1019,7 +1019,7 @@ ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
 # Plot 6: Impact on family welfare (gender economics)
 ax = axes[1, 2]
-categories_welfare = ['Child\\neducation', 'Family\\nnutrition', 'Healthcare', 'Housing\\nimprovement', 'Savings']
+categories_welfare = ['Child\\\neducation', 'Family\\\nnutrition', 'Healthcare', 'Housing\\\nimprovement', 'Savings']
 # Women-controlled income allocation (research-based estimates)
 women_pct = [35, 30, 15, 10, 10]
 men_pct = [15, 15, 10, 25, 35]

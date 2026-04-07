@@ -77,7 +77,7 @@ for instr in program:
     print(f"  [{cpu.cycle_count:>2} cycles] {instr}")
 
 time_ns = cpu.cycle_count / cpu.clock * 1e9
-print(f"\\nTotal cycles: {cpu.cycle_count}")
+print(f"\\\nTotal cycles: {cpu.cycle_count}")
 print(f"Time at 3 GHz: {time_ns:.2f} nanoseconds")
 print(f"That's {time_ns/1e6:.6f} milliseconds")`,
       challenge: 'Add a SUB (subtract) instruction and write a program that computes (10 + 5) * (8 - 3). How many cycles does it take? What if you had 2 cores that could compute (10+5) and (8-3) in parallel?',
@@ -128,7 +128,7 @@ start = time.time()
 for name, task, dur in heads:
     ravana_head(name, task, dur)
 serial_time = time.time() - start
-print(f"Serial total: {serial_time:.2f}s\\n")
+print(f"Serial total: {serial_time:.2f}s\\\n")
 
 # --- Threaded execution ---
 import threading
@@ -145,7 +145,7 @@ for t in threads:
     t.join()  # Wait for all to finish
 threaded_time = time.time() - start
 
-print(f"\\nSerial: {serial_time:.2f}s")
+print(f"\\\nSerial: {serial_time:.2f}s")
 print(f"Threaded: {threaded_time:.2f}s")
 print(f"Speedup: {serial_time/threaded_time:.1f}x")`,
       challenge: 'Add 6 more heads to make Ravana\'s full complement of 10. Give each a different task and duration. Does the speedup scale linearly? What is the speedup limited by?',
@@ -267,7 +267,7 @@ def reduce_results(partials):
             total[word] = total.get(word, 0) + count
     return total
 
-print(f"\\n=== REDUCE Phase (1 heart) ===")
+print(f"\\\n=== REDUCE Phase (1 heart) ===")
 start = time.time()
 final_counts = reduce_results(partial_results)
 reduce_time = time.time() - start
@@ -277,7 +277,7 @@ for word, count in sorted(final_counts.items(), key=lambda x: -x[1]):
     bar = "#" * (count // 20)
     print(f"  {word:>8}: {count:>4} {bar}")
 
-print(f"\\nMap time: {map_time*1000:.1f}ms")
+print(f"\\\nMap time: {map_time*1000:.1f}ms")
 print(f"Reduce time: {reduce_time*1000:.1f}ms")
 print(f"Total: {(map_time+reduce_time)*1000:.1f}ms")`,
       challenge: 'Modify the code to find the maximum word length in each chunk (map) and then find the global maximum (reduce). Also try: compute the average word length using map (sum + count per chunk) and reduce (total sum / total count).',
@@ -338,7 +338,7 @@ threads = [threading.Thread(target=increment_safe) for _ in range(4)]
 for t in threads: t.start()
 for t in threads: t.join()
 
-print(f"\\n=== WITH Lock ===")
+print(f"\\\n=== WITH Lock ===")
 print(f"Expected: {expected:,}")
 print(f"Actual:   {counter:,}")
 print(f"Lost:     {expected - counter:,} increments")
@@ -417,7 +417,7 @@ plt.tight_layout()
 plt.show()
 
 print(f"Primes found: {total_primes}")
-print(f"\\n{'Workers':>8} {'Time':>8} {'Speedup':>8} {'Efficiency':>10}")
+print(f"\\\n{'Workers':>8} {'Time':>8} {'Speedup':>8} {'Efficiency':>10}")
 for w, t, s in zip(worker_counts, times, speedups):
     eff = s / w * 100
     print(f"{w:>8} {t:>7.3f}s {s:>7.1f}x {eff:>9.0f}%")`,

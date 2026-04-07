@@ -76,20 +76,20 @@ totals = np.array([r["total"] for r in results])
 fizzled = np.sum(totals < 50)
 
 print("=== Stochastic Epidemic Simulation (Individual-Based) ===")
-print(f"Population: 5,000 | Initial infected: 3 | {n_runs} runs\\n")
+print(f"Population: 5,000 | Initial infected: 3 | {n_runs} runs\\\n")
 print(f"{'Run':>4} {'Total Infected':>15} {'Peak':>8} {'Peak Day':>10} {'Outcome':>12}")
 print("-" * 51)
 for i, r in enumerate(results[:10]):
     outcome = "FIZZLED" if r["total"] < 50 else "EPIDEMIC"
     print(f"{i+1:>4} {r['total']:>14,} {r['peak']:>7,} {r['peak_day']:>8} {outcome:>12}")
 
-print(f"\\n=== Summary ({n_runs} runs) ===")
+print(f"\\\n=== Summary ({n_runs} runs) ===")
 print(f"  Fizzled: {fizzled}/{n_runs} ({fizzled/n_runs*100:.0f}%)")
 epidemic_totals = totals[totals >= 50]
 if len(epidemic_totals) > 0:
     print(f"  Epidemic median: {np.median(epidemic_totals):,.0f} infected")
     print(f"  Range: {epidemic_totals.min():,} - {epidemic_totals.max():,}")
-print(f"\\n{fizzled/n_runs*100:.0f}% of introductions fizzled — the SEIR model misses this.")`,
+print(f"\\\n{fizzled/n_runs*100:.0f}% of introductions fizzled — the SEIR model misses this.")`,
       challenge: 'Increase the initial infected from 3 to 20 (a whole ship crew). How does this change the fizzle rate? With more initial infections, stochastic extinction becomes unlikely — explaining why the Black Death, arriving on ships with many infected sailors AND thousands of infected fleas, almost never fizzled out in port cities.',
       successHint: 'Individual-based models are the gold standard in computational epidemiology. They were used to model COVID-19 school reopenings, Ebola containment strategies, and influenza pandemic planning. The key advantage over SEIR: they capture the stochastic variability that determines whether an introduction becomes a pandemic or fizzles out.',
     },
@@ -152,7 +152,7 @@ barrier_cells = [(25, c) for c in range(10, 40)]
 daily_barrier = spatial_epidemic(barriers=barrier_cells)
 
 print("=== Spatial Epidemic Model (50×50 grid) ===")
-print(f"Source: bottom-left corner (port city)\\n")
+print(f"Source: bottom-left corner (port city)\\\n")
 
 for label, data in [("Open terrain", daily_open), ("With barrier", daily_barrier)]:
     peak = max(data)
@@ -161,7 +161,7 @@ for label, data in [("Open terrain", daily_open), ("With barrier", daily_barrier
     print(f"{label}: peak = {peak:,} cells on day {peak_day}, active for {total} days")
 
 delay = daily_barrier.index(max(daily_barrier)) - daily_open.index(max(daily_open))
-print(f"\\nBarrier delayed peak by {delay} days.")
+print(f"\\\nBarrier delayed peak by {delay} days.")
 print("Barriers slow but don't stop the wave — plague goes around")
 print("or jumps over via long-range trade transmission.")`,
       challenge: 'Add a second seed point (a second port city) in the top-right corner, infected on day 30. This models the Black Death entering Europe through multiple ports simultaneously. How does the two-front invasion change the time to full coverage? This is exactly what happened: plague entered through Messina, Genoa, Venice, and Marseille nearly simultaneously.',
@@ -195,7 +195,7 @@ land = 100; pop_1340 = 100
 base_wage = marginal_product(land, pop_1340)
 
 print("=== Black Death Economic Impact Model ===")
-print(f"Production: Y = Land^0.4 × Labour^0.6\\n")
+print(f"Production: Y = Land^0.4 × Labour^0.6\\\n")
 print(f"{'Mortality':>10} {'Pop':>5} {'Wage Index':>11} {'Land/Worker':>12}")
 print("-" * 40)
 
@@ -206,7 +206,7 @@ for mort in [0.0, 0.10, 0.20, 0.30, 0.40, 0.50, 0.60]:
     print(f"{mort*100:>8.0f}% {pop:>4.0f} {wage/base_wage*100:>9.0f}% "
           f"{land_per/(land/pop_1340)*100:>10.0f}%")
 
-print("\\n=== 200-Year Post-Plague Trajectory ===")
+print("\\\n=== 200-Year Post-Plague Trajectory ===")
 print(f"{'Year':>6} {'Pop':>5} {'Wage':>7} {'Serfdom':>9} {'Innovation':>11}")
 print("-" * 40)
 
@@ -220,7 +220,7 @@ for year_offset in range(0, 201, 25):
     innovation = min(100, 20 + (wage_idx - 100) * 0.8)
     print(f"{year:>6} {pop:>4.0f} {wage_idx:>5.0f}% {serfdom:>7.0f}% {innovation:>9.0f}%")
 
-print(f"\\n40% mortality → wages double → feudalism collapses in 2 generations.")
+print(f"\\\n40% mortality → wages double → feudalism collapses in 2 generations.")
 print(f"Population takes ~150 years to recover → sustained high wages.")`,
       challenge: 'Model the Eastern European case, where feudalism STRENGTHENED after the plague (the "second serfdom"). In the East, lords had enough political power to force serfs to stay. Add a "lord power index" that, when high, suppresses wage increases and maintains serfdom despite labour scarcity. This explains the economic divergence between Western and Eastern Europe after 1348.',
       successHint: 'You just modelled one of the most important economic transitions in history using a Cobb-Douglas production function — the same framework economists use to analyse GDP, wage policy, and immigration impacts today. The Black Death is a natural experiment in what happens when labour supply drops suddenly — and the economics are clear: scarce labour becomes expensive labour.',
@@ -272,7 +272,7 @@ pandemics = [
 ]
 
 N = 100_000
-print("=== Comparative Pandemic Simulation (pop 100,000) ===\\n")
+print("=== Comparative Pandemic Simulation (pop 100,000) ===\\\n")
 print(f"{'Pandemic':<26} {'R0':>4} {'CFR':>6} {'Attack%':>8} {'Deaths':>8} {'Peak Day':>9}")
 print("-" * 63)
 for name, r0, inc, inf, cfr in pandemics:
@@ -280,7 +280,7 @@ for name, r0, inc, inf, cfr in pandemics:
     print(f"{name:<26} {r0:>3.1f} {cfr*100:>4.1f}% {r['attack']*100:>6.1f}% "
           f"{r['dead']:>7,.0f} {r['peak_day']:>7.0f}")
 
-print("\\n=== Danger Matrix (deaths per 100k) ===")
+print("\\\n=== Danger Matrix (deaths per 100k) ===")
 print(f"{'':>8}", end="")
 for cfr in [0.01, 0.05, 0.10, 0.30, 0.50]:
     print(f" CFR{cfr*100:>3.0f}%", end="")
@@ -292,7 +292,7 @@ for r0 in [1.5, 2.0, 3.0, 5.0, 8.0]:
         print(f" {r['dead']:>7,.0f}", end="")
     print()
 
-print("\\nHigh R0 + high CFR = civilisation-ending (top-right corner).")
+print("\\\nHigh R0 + high CFR = civilisation-ending (top-right corner).")
 print("The Black Death sat squarely in the danger zone.")`,
       challenge: 'Add a "medical intervention" modifier: for modern pandemics, reduce the CFR by 50% (simulating hospitals, antivirals, ventilators). How much does this change the death toll? For medieval plague, no medical intervention existed — the CFR was the raw biological lethality. This comparison quantifies how much modern medicine actually matters vs epidemic containment.',
       successHint: 'Comparative pandemic analysis is how public health agencies prepare for future threats. The WHO maintains a list of "priority pathogens" rated by R0 and CFR — the same two parameters you just explored. Understanding the danger matrix (R0 vs CFR) is essential for evaluating pandemic preparedness policies.',
@@ -365,7 +365,7 @@ strategies = [
 ]
 
 print("=== Intervention Optimisation: Plague Epidemic ===")
-print(f"Population: 50,000 | R0 = 4.0 | Base CFR = 40%\\n")
+print(f"Population: 50,000 | R0 = 4.0 | Base CFR = 40%\\\n")
 print(f"{'Strategy':<28} {'Deaths':>8} {'Reduction':>10}")
 print("-" * 48)
 
@@ -376,7 +376,7 @@ for name, vax, target, quar, hosp in strategies:
     red = (1 - dead/baseline) * 100 if baseline > 0 else 0
     print(f"{name:<28} {dead:>7,.0f} {red:>8.1f}%")
 
-print(f"\\nCombined intervention is optimal — layered defences multiply.")
+print(f"\\\nCombined intervention is optimal — layered defences multiply.")
 print(f"Medieval cities had ONLY quarantine. Modern response layers all three.")`,
       challenge: 'Add a cost constraint: vaccines cost 10 units each, quarantine costs 2 units per person per day, hospital beds cost 100 units per day. Given a budget of 500,000 units, find the optimal allocation across all three interventions. This is the real-world resource allocation problem facing every health ministry during a pandemic.',
       successHint: 'Intervention optimisation is the core task of epidemic response planning. The WHO, CDC, and every national health agency use models like this to decide how to allocate vaccines, hospital beds, and containment resources. The key insight: layered interventions (defence in depth) are far more effective than any single strategy.',

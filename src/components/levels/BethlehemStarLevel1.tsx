@@ -41,7 +41,7 @@ plt.figure(figsize=(10, 5))
 plt.bar(magnitudes, brightness, color=['#fbbf24' if m < 0 else '#3b82f6' if m < 3 else '#64748b' for m in magnitudes], width=0.7)
 
 # Label some famous objects
-labels = {-2: 'Jupiter', 0: 'Vega', 2: 'Polaris', 6: 'Faintest\\nvisible'}
+labels = {-2: 'Jupiter', 0: 'Vega', 2: 'Polaris', 6: 'Faintest\\\nvisible'}
 for mag, name in labels.items():
     idx = list(magnitudes).index(mag)
     plt.annotate(name, (mag, brightness[idx]), textcoords="offset points",

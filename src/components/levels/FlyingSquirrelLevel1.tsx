@@ -178,7 +178,7 @@ ax2.set_facecolor('#111827')
 ax2.plot(speeds, LD_ratio, color='#22c55e', linewidth=2.5)
 ax2.fill_between(speeds, LD_ratio, alpha=0.1, color='#22c55e')
 ax2.plot(best_speed, best_LD, 'o', color='#f59e0b', markersize=12, zorder=5)
-ax2.annotate(f'Best L/D = {best_LD:.1f}\\nat {best_speed:.1f} m/s',
+ax2.annotate(f'Best L/D = {best_LD:.1f}\\\nat {best_speed:.1f} m/s',
              xy=(best_speed, best_LD), xytext=(best_speed+3, best_LD-0.5),
              color='#f59e0b', fontsize=10, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
@@ -413,7 +413,7 @@ ax2.axvline(0, color='#4b5563', linestyle=':', alpha=0.3)
 
 # Stall region
 ax2.axvspan(15, 25, alpha=0.1, color='#ef4444')
-ax2.text(20, 0.5, 'Stall\\nregion', color='#ef4444', fontsize=9, ha='center')
+ax2.text(20, 0.5, 'Stall\\\nregion', color='#ef4444', fontsize=9, ha='center')
 
 ax2.set_xlabel('Angle of attack (degrees)', color='white')
 ax2.set_ylabel('Lift coefficient (CL)', color='white')

@@ -49,8 +49,8 @@ for month in range(months + 1):
     if month < months:
         population *= growth_rate
 
-print(f"\\nTotal increase: {population / initial_rats:,.0f}x in {months} months")
-print(f"\\nAt this rate, starting from 100 rats:")
+print(f"\\\nTotal increase: {population / initial_rats:,.0f}x in {months} months")
+print(f"\\\nAt this rate, starting from 100 rats:")
 print(f"  After 6 months:  {initial_rats * growth_rate**6:,.0f}")
 print(f"  After 12 months: {initial_rats * growth_rate**12:,.0f}")
 print(f"  After 18 months: {initial_rats * growth_rate**18:,.0f}")`,
@@ -113,9 +113,9 @@ print("-" * 48)
 for t in range(0, months + 1, 3):
     print(f"{t:5d} {exp_pop[t]:>15,.0f} {log_normal[t]:>12,.0f} {log_mautam[t]:>12,.0f}")
 
-print(f"\\nNormal carrying capacity: {K_normal:,}")
+print(f"\\\nNormal carrying capacity: {K_normal:,}")
 print(f"Mautam carrying capacity: {K_mautam:,}")
-print(f"\\nThe Mautam allows {K_mautam/K_normal:.0f}x more rats than normal!")
+print(f"\\\nThe Mautam allows {K_mautam/K_normal:.0f}x more rats than normal!")
 print(f"When bamboo seeds run out, {K_mautam - K_normal:,} excess rats need food...")`,
       challenge: 'What happens after the Mautam ends at month 18? Switch K back to 5000 and continue the simulation. How fast does the population crash? This crash is when the famine hits.',
       successHint: 'You learned that carrying capacity is the key difference between theoretical exponential growth and real population dynamics. The Mautam tragedy is fundamentally a story of a temporary carrying capacity spike followed by a devastating collapse.',
@@ -194,7 +194,7 @@ for m in range(0, months, 2):
 
 peak_pop = max(populations)
 peak_month = populations.index(peak_pop)
-print(f"\\nPeak population: {peak_pop:,} at month {peak_month}")
+print(f"\\\nPeak population: {peak_pop:,} at month {peak_month}")
 print(f"Minimum after crash: {min(populations[19:]):,}")
 print(f"Crash ratio: {peak_pop / min(populations[19:]):.0f}x decline")`,
       challenge: 'Add a "disease outbreak" at month 22 that temporarily triples the death rate for 3 months. How does this change the crash dynamics? Does the population recover to the same level?',
@@ -273,7 +273,7 @@ peak_m = populations.index(peak)
 trough = min(populations[20:])
 trough_m = populations.index(trough, 20)
 
-print(f"\\nPeak: {peak:,} at month {peak_m}")
+print(f"\\\nPeak: {peak:,} at month {peak_m}")
 print(f"Trough: {trough:,} at month {trough_m}")
 print(f"Overshoot above base K: {peak/K_base:.1f}x")
 print(f"Crash magnitude: {peak/trough:.0f}x decline")
@@ -343,7 +343,7 @@ print("=" * 60)
 # Show key years around each Mautam
 for my in mautam_years:
     idx_base = my - start_year
-    print(f"\\n--- MAUTAM EVENT: {my} ---")
+    print(f"\\\n--- MAUTAM EVENT: {my} ---")
     for offset in [-2, -1, 0, 1, 2, 3, 5, 10]:
         idx = idx_base + offset
         if 0 <= idx < years:
@@ -352,9 +352,9 @@ for my in mautam_years:
             bar = "█" * min(int(populations[idx] / 2000), 30)
             print(f"  {yr}: Rats {populations[idx]:>8,}  Grain {grain_history[idx]:>5.0f}%  {bar}{status}")
 
-print(f"\\nMautam years detected: {mautam_years}")
+print(f"\\\nMautam years detected: {mautam_years}")
 print(f"Cycle length: ~{mautam_years[1] - mautam_years[0]} years")
-print(f"\\nThis cycle has repeated for centuries.")
+print(f"\\\nThis cycle has repeated for centuries.")
 print(f"Next predicted Mautam: ~{mautam_years[-1] + 48}")`,
       challenge: 'What if climate change shifts the flowering cycle from 48 years to 40 years? Modify the simulation and compare: more frequent but perhaps less intense events, or worse overall? Add grain stockpiling that starts 5 years before each predicted Mautam.',
       successHint: 'You modeled a multi-century ecological cycle using basic Python. The 48-year bamboo cycle is one of nature\'s most dramatic examples of periodic biological events. Understanding it combines ecology, evolutionary biology, and the resilience of indigenous knowledge systems.',

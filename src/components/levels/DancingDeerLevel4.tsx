@@ -40,7 +40,7 @@ np.random.seed(42)
 
 # --- Leslie matrix for Sangai deer ---
 # Age classes: Fawn(0-1), Juvenile(1-2), YoungAdult(2-5), PrimeAdult(5-10), OldAdult(10+)
-age_classes = ['Fawn\\n(0-1)', 'Juvenile\\n(1-2)', 'Young\\n(2-5)', 'Prime\\n(5-10)', 'Old\\n(10+)']
+age_classes = ['Fawn\\\n(0-1)', 'Juvenile\\\n(1-2)', 'Young\\\n(2-5)', 'Prime\\\n(5-10)', 'Old\\\n(10+)']
 n_classes = 5
 
 # Fecundity (female fawns per female per year)
@@ -115,7 +115,7 @@ ax = axes[0, 0]
 ax.set_facecolor('#111827')
 colors = ['#ef4444', '#f59e0b', '#22c55e', '#3b82f6', '#a855f7']
 for i, (name, color) in enumerate(zip(age_classes, colors)):
-    ax.plot(population_history[i], color=color, linewidth=1.5, label=name.replace('\\n', ' '))
+    ax.plot(population_history[i], color=color, linewidth=1.5, label=name.replace('\\\n', ' '))
 ax.plot(total_pop, color='white', linewidth=2, linestyle='--', label='Total')
 ax.set_xlabel('Year', color='white')
 ax.set_ylabel('Female population', color='white')
@@ -128,7 +128,7 @@ ax = axes[0, 1]
 ax.set_facecolor('#111827')
 for i, (name, color) in enumerate(zip(age_classes, colors)):
     proportions = population_history[i] / np.maximum(total_pop, 1)
-    ax.plot(proportions, color=color, linewidth=1.5, label=name.replace('\\n', ' '))
+    ax.plot(proportions, color=color, linewidth=1.5, label=name.replace('\\\n', ' '))
     ax.axhline(stable_age_dist[i], color=color, linestyle=':', linewidth=0.5, alpha=0.5)
 ax.set_xlabel('Year', color='white')
 ax.set_ylabel('Proportion', color='white')
@@ -141,7 +141,7 @@ ax = axes[0, 2]
 ax.set_facecolor('#111827')
 bars = ax.bar(range(n_classes), stable_age_dist, color=colors, edgecolor='none')
 ax.set_xticks(range(n_classes))
-ax.set_xticklabels([a.replace('\\n', ' ') for a in age_classes], color='white', fontsize=8)
+ax.set_xticklabels([a.replace('\\\n', ' ') for a in age_classes], color='white', fontsize=8)
 ax.set_ylabel('Proportion', color='white')
 ax.set_title('Stable age distribution', color='white', fontsize=11)
 for bar, val in zip(bars, stable_age_dist):
@@ -467,7 +467,7 @@ ax.set_title('PVA Summary', color='white', fontsize=11, pad=15)
 plt.tight_layout()
 plt.show()
 
-print("\\nKey findings:")
+print("\\\nKey findings:")
 print("  Environmental stochasticity is the dominant risk factor for Sangai.")
 print("  Catastrophes (floods) compound the risk significantly.")
 print("  Even at current population (~130 females), extinction risk is non-trivial.")`,
@@ -710,7 +710,7 @@ ax.set_title('Scenario comparison', color='white', fontsize=11, pad=15)
 plt.tight_layout()
 plt.show()
 
-print("\\nHabitat determines destiny:")
+print("\\\nHabitat determines destiny:")
 print("  Active restoration protects the deer by growing their habitat.")
 print("  Dam reform alone stabilizes but doesn't improve.")
 print("  Status quo = slow extinction. Climate change = fast extinction.")`,
@@ -1006,7 +1006,7 @@ ax.set_title('Strategy comparison', color='white', fontsize=11, pad=15)
 plt.tight_layout()
 plt.show()
 
-print("\\nKey insight: satellite populations dramatically reduce species extinction risk.")
+print("\\\nKey insight: satellite populations dramatically reduce species extinction risk.")
 print("Even small satellite populations (K=30 captive colony) provide insurance value.")
 print("Geographic separation reduces correlated catastrophe risk.")
 print("The optimal strategy combines wild satellites with a captive insurance colony.")`,
@@ -1135,7 +1135,7 @@ for mask in range(2**n_opts):
             best_portfolio = {'selected': selected, 'cost': total_cost,
                             'ext_prob': result['ext_prob'], 'trajectories': result['trajectories']}
 
-print(f"\\nOptimal portfolio (budget={budget} Cr):")
+print(f"\\\nOptimal portfolio (budget={budget} Cr):")
 for s in best_portfolio['selected']:
     print(f"  {s} ({options[s.split(':')[0] + ':' + s.split(':')[1]]['cost_crores']} Cr)" if ':' in s else f"  {s}")
 
@@ -1294,15 +1294,15 @@ ax.text(0.5, 0.05,
 plt.tight_layout()
 plt.show()
 
-print("\\n" + "=" * 70)
+print("\\\n" + "=" * 70)
 print("SANGAI DEER PVA — EXECUTIVE SUMMARY")
 print("=" * 70)
 print(f"Current population: {current_pop} ({current_females} females)")
 print(f"Status quo extinction risk (80 years): {baseline['ext_prob']:.0%}")
-print(f"\\nOptimal portfolio ({best_portfolio['cost']} Cr):")
+print(f"\\\nOptimal portfolio ({best_portfolio['cost']} Cr):")
 for s in best_portfolio['selected']:
     print(f"  - {s}: {options[s]['description']}")
-print(f"\\nWith optimal portfolio: extinction risk = {best_portfolio['ext_prob']:.0%}")
+print(f"\\\nWith optimal portfolio: extinction risk = {best_portfolio['ext_prob']:.0%}")
 print(f"Risk reduction: {(baseline['ext_prob'] - best_portfolio['ext_prob'])*100:.0f} percentage points")
 print()
 print("The dancing deer of Loktak Lake can be saved.")

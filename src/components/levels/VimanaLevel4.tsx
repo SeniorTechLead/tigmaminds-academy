@@ -106,7 +106,7 @@ plt.show()
 L_per_unit = 1.225 * U_inf * Gamma
 print(f"Circulation Γ = {Gamma:.1f}")
 print(f"Kutta-Joukowski lift (per unit span): L = ρUΓ = {L_per_unit:.2f} N/m")
-print(f"\\nNote: asymmetric streamlines = net upward force (LIFT)")
+print(f"\\\nNote: asymmetric streamlines = net upward force (LIFT)")
 print(f"The stagnation points have shifted due to circulation.")`,
       challenge: 'Set Gamma = 0 (no circulation). The flow becomes symmetric and there is no lift — this is d’Alembert’s paradox. Then gradually increase Gamma and observe how asymmetry (and lift) develops.',
       successHint: 'Potential flow theory gives exact solutions for idealised flows. The Kutta-Joukowski theorem — L = ρUΓ — is one of the most elegant results in all of physics. Real wings generate circulation naturally through their shape and the Kutta condition at the trailing edge.',
@@ -188,11 +188,11 @@ plt.gca().add_patch(circle)
 plt.arrow(-15, -5, 5, 0, head_width=0.5, color='blue', alpha=0.5)
 plt.text(-12, -6.5, f'Approach ({v_approach_inf/1000:.0f} km/s)', fontsize=10, color='blue')
 defl = 2 * np.arcsin(1 / e)
-print(f"\\n=== Jupiter Gravity Assist ===")
+print(f"\\\n=== Jupiter Gravity Assist ===")
 print(f"Closest approach: {r_p/R_jupiter:.1f} Jupiter radii")
 print(f"Deflection angle: {np.degrees(defl):.1f}°")
 print(f"Speed gain: {2*v_inf*np.sin(defl/2)/1000:.1f} km/s")
-print(f"\\nEntry speed (Sun frame): {v_approach_inf/1000:.0f} km/s")
+print(f"\\\nEntry speed (Sun frame): {v_approach_inf/1000:.0f} km/s")
 print(f"Exit speed (Sun frame): ~{(v_approach_inf + 2*v_inf*np.sin(defl/2))/1000:.0f} km/s")
 print(f"Free Δv = {2*v_inf*np.sin(defl/2)/1000:.1f} km/s (no fuel spent!)")
 
@@ -290,7 +290,7 @@ print(f"=== Optimal Earth-Mars Transfer ===")
 print(f"Best launch: day {best_launch}")
 print(f"Flight time: {best_tof} days ({best_tof/30:.1f} months)")
 print(f"Minimum Δv: {best_dv:.2f} km/s")
-print(f"\\nMars synodic period: {T_earth * T_mars / abs(T_mars - T_earth):.0f} days (~26 months)")
+print(f"\\\nMars synodic period: {T_earth * T_mars / abs(T_mars - T_earth):.0f} days (~26 months)")
 print(f"Next launch windows appear as blue valleys on the plot")
 print(f"Missing a window means waiting ~780 days for the next one")`,
       challenge: 'Modify the code to generate a porkchop plot for Earth-to-Venus. Venus is closer (r = 1.082×10¹¹ m, T = 225 days). How does the synodic period and minimum Δv compare to Mars?',
@@ -490,13 +490,13 @@ for name, v_frac, mass_note in concepts:
     print(f"  {name:30s}: {v_frac*100:6.2f}% c, {t:>10,.0f} years, KE = {KE:.2e} J")
 
 # Context
-print(f"\\nFor comparison:")
+print(f"\\\nFor comparison:")
 print(f"  World annual energy use: ~5.8 × 10¹²⁰ J")
 print(f"  Sun output per second:   3.8 × 10²⁶ J")
 print(f"  Tsar Bomba (largest nuke): 2.1 × 10¹⁷ J")
 
 # Relativistic time dilation at constant 1g acceleration
-print(f"\\n=== 1g Continuous Acceleration ===")
+print(f"\\\n=== 1g Continuous Acceleration ===")
 g_accel = 9.8
 # Ship time to reach Alpha Centauri at 1g (acceleration for half, deceleration for half)
 # tau = (c/g) * arccosh(1 + g*d/(2*c^2)) for half the journey
@@ -541,7 +541,7 @@ print("  VIMANA MISSION PLANNER: Earth to Mars")
 print("=" * 60)
 
 # === PHASE 1: Launch to LEO ===
-print("\\n--- Phase 1: Launch to Low Earth Orbit ---")
+print("\\\n--- Phase 1: Launch to Low Earth Orbit ---")
 alt_leo = 400e3
 v_leo = np.sqrt(G * M_earth / (R_earth + alt_leo))
 dv_gravity_loss = 1500  # m/s (typical)
@@ -552,7 +552,7 @@ print(f"  Gravity + drag losses: {dv_gravity_loss + dv_drag_loss} m/s")
 print(f"  Total Δv to LEO: {dv_to_leo:.0f} m/s ({dv_to_leo/1000:.2f} km/s)")
 
 # === PHASE 2: Trans-Mars Injection ===
-print("\\n--- Phase 2: Trans-Mars Injection (TMI) ---")
+print("\\\n--- Phase 2: Trans-Mars Injection (TMI) ---")
 a_transfer = (r_earth_orbit + r_mars_orbit) / 2
 v_earth_orbit = np.sqrt(G * M_sun / r_earth_orbit)
 v_transfer_earth = np.sqrt(G * M_sun * (2/r_earth_orbit - 1/a_transfer))
@@ -566,11 +566,11 @@ print(f"  From LEO (Oberth effect): {dv_tmi_actual:.0f} m/s")
 
 # === PHASE 3: Cruise ===
 T_transfer = np.pi * np.sqrt(a_transfer**3 / (G * M_sun))
-print(f"\\n--- Phase 3: Cruise ---")
+print(f"\\\n--- Phase 3: Cruise ---")
 print(f"  Transfer time: {T_transfer/86400:.0f} days ({T_transfer/86400/30:.1f} months)")
 
 # === PHASE 4: Mars Orbit Insertion ===
-print("\\n--- Phase 4: Mars Orbit Insertion ---")
+print("\\\n--- Phase 4: Mars Orbit Insertion ---")
 v_transfer_mars = np.sqrt(G * M_sun * (2/r_mars_orbit - 1/a_transfer))
 v_mars_orbit = np.sqrt(G * M_mars / r_mars_orbit)
 v_mars_orbital = np.sqrt(G * M_sun / r_mars_orbit)
@@ -584,12 +584,12 @@ print(f"  MOI Δv: {dv_moi:.0f} m/s")
 
 # === TOTAL BUDGET ===
 dv_total = dv_to_leo + dv_tmi_actual + dv_moi
-print(f"\\n{'='*60}")
+print(f"\\\n{'='*60}")
 print(f"  TOTAL Δv BUDGET: {dv_total:.0f} m/s ({dv_total/1000:.2f} km/s)")
 print(f"{'='*60}")
 
 # === VEHICLE SIZING ===
-print("\\n--- Vehicle Sizing ---")
+print("\\\n--- Vehicle Sizing ---")
 payload = 5000  # kg (spacecraft + instruments)
 Isp_stage1 = 310; Isp_stage2 = 450; Isp_stage3 = 450
 g0 = 9.8

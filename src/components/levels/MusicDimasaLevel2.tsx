@@ -51,7 +51,7 @@ ax1.plot(midi_notes, frequencies, color='#22c55e', linewidth=2)
 ax1.fill_between(midi_notes, frequencies, alpha=0.1, color='#22c55e')
 
 # Highlight specific notes
-highlights = [(60, 'C4'), (69, 'A4\\n440Hz'), (48, 'C3'), (72, 'C5'), (84, 'C6')]
+highlights = [(60, 'C4'), (69, 'A4\\\n440Hz'), (48, 'C3'), (72, 'C5'), (84, 'C6')]
 for note, label in highlights:
     freq = 440 * 2**((note - 69) / 12)
     ax1.plot(note, freq, 'o', color='#f59e0b', markersize=8)
@@ -74,7 +74,7 @@ for i, (note, black, color) in enumerate(zip(octave_notes, is_black, bar_colors)
     ax2.bar(i, 1, width=width, color=color, edgecolor='#6b7280', linewidth=0.5)
     name = note_names[note % 12]
     freq = 440 * 2**((note - 69) / 12)
-    ax2.text(i, 0.5, f'{name}\\n{freq:.0f}Hz', ha='center', va='center',
+    ax2.text(i, 0.5, f'{name}\\\n{freq:.0f}Hz', ha='center', va='center',
             color='black' if not black else 'white', fontsize=7)
     ax2.text(i, -0.1, f'M{note}', ha='center', color='#9ca3af', fontsize=7)
 
@@ -432,7 +432,7 @@ plt.show()
 print(f"Generated {n_notes} notes on C pentatonic scale")
 print(f"Melody: {' '.join(melody_names[:16])}")
 print(f"         {' '.join(melody_names[16:])}")
-print(f"\\nInterval stats: mean={np.mean(intervals):.1f}, std={np.std(intervals):.1f}")
+print(f"\\\nInterval stats: mean={np.mean(intervals):.1f}, std={np.std(intervals):.1f}")
 print("Small intervals dominate → stepwise motion → sounds melodic")`,
       challenge: 'Add a rhythm component: assign each note a random duration (quarter note = 1, eighth note = 0.5, half note = 2). Plot the melody as a time series (x = cumulative time, y = pitch). Does varying rhythm make it sound more or less musical?',
       successHint: 'Algorithmic composition is the intersection of computer science, music theory, and creativity. Every generated melody follows the same physics and mathematics that the Dimasa musicians used intuitively — but now the "musician" is code.',
@@ -509,7 +509,7 @@ ax2.fill_between(fft_freqs[mask], fft_vals[mask], alpha=0.2, color='#3b82f6')
 for h, label_h in zip(harmonics[:3], ['Fund.', '2nd', '3rd']):
     freq = fundamental * h
     ax2.axvline(freq, color='#f59e0b', linestyle=':', alpha=0.7)
-    ax2.text(freq, max(fft_vals[mask]) * 0.9, f'{label_h}\\n{freq:.0f}Hz',
+    ax2.text(freq, max(fft_vals[mask]) * 0.9, f'{label_h}\\\n{freq:.0f}Hz',
             color='#f59e0b', fontsize=8, ha='center')
 
 ax2.set_xlabel('Frequency (Hz)', color='white')

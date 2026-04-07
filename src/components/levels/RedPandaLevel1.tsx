@@ -146,7 +146,7 @@ disruptive = lambda x: np.exp(-0.003 * (x - 25)**2) + np.exp(-0.003 * (x - 75)**
 
 fig, axes = plt.subplots(2, 3, figsize=(14, 8))
 fig.patch.set_facecolor('#1f2937')
-titles = ['Directional\\n(favors dark fur)', 'Stabilizing\\n(favors medium)', 'Disruptive\\n(favors extremes)']
+titles = ['Directional\\\n(favors dark fur)', 'Stabilizing\\\n(favors medium)', 'Disruptive\\\n(favors extremes)']
 funcs = [directional, stabilizing, disruptive]
 
 for i, (title, func) in enumerate(zip(titles, funcs)):
@@ -235,7 +235,7 @@ axes[0,0].set_facecolor('#111827')
 scene1 = bg.copy()
 scene1[40:60, 40:60] = 0.9  # bright square = visible animal
 axes[0,0].imshow(scene1, cmap='YlGn_r', vmin=0, vmax=1)
-axes[0,0].set_title('No camouflage\\n(easy to spot)', color='white', fontsize=10)
+axes[0,0].set_title('No camouflage\\\n(easy to spot)', color='white', fontsize=10)
 axes[0,0].axis('off')
 
 # 2. Background matching (crypsis)
@@ -245,7 +245,7 @@ scene2 = bg.copy()
 animal_color = np.mean(bg[40:60, 40:60])
 scene2[40:60, 40:60] = animal_color + np.random.normal(0, 0.05, (20, 20))
 axes[0,1].imshow(scene2, cmap='YlGn_r', vmin=0, vmax=1)
-axes[0,1].set_title('Background matching\\n(hard to spot)', color='white', fontsize=10)
+axes[0,1].set_title('Background matching\\\n(hard to spot)', color='white', fontsize=10)
 axes[0,1].axis('off')
 
 # 3. Disruptive coloration
@@ -254,7 +254,7 @@ scene3 = bg.copy()
 animal = np.random.choice([0.2, 0.6, 0.8], size=(20, 20))
 scene3[40:60, 40:60] = animal
 axes[0,2].imshow(scene3, cmap='YlGn_r', vmin=0, vmax=1)
-axes[0,2].set_title('Disruptive coloration\\n(outline broken)', color='white', fontsize=10)
+axes[0,2].set_title('Disruptive coloration\\\n(outline broken)', color='white', fontsize=10)
 axes[0,2].axis('off')
 
 # 4. Countershading effect
@@ -266,7 +266,7 @@ sunlight_2d = np.tile(sunlight, (1, 20))
 combined = shade + sunlight_2d - 0.5  # countershading + sunlight ≈ uniform
 axes[1,0].imshow(np.hstack([shade, sunlight_2d, combined]),
                  cmap='gray', vmin=0, vmax=1)
-axes[1,0].set_title('Countershading\\n(fur | light | combined)', color='white', fontsize=10)
+axes[1,0].set_title('Countershading\\\n(fur | light | combined)', color='white', fontsize=10)
 axes[1,0].axis('off')
 
 # 5. Survival simulation
@@ -369,7 +369,7 @@ def make_pattern(mc1r_map, agouti_map):
 mc1r = np.ones((size, size)) * 0.3
 agouti = np.zeros((size, size))
 axes[0,0].imshow(make_pattern(mc1r, agouti))
-axes[0,0].set_title('Uniform MC1R\\n(solid red-brown)', color='white', fontsize=10)
+axes[0,0].set_title('Uniform MC1R\\\n(solid red-brown)', color='white', fontsize=10)
 axes[0,0].axis('off')
 
 # 2. Spotted pattern (like a leopard)
@@ -381,7 +381,7 @@ for _ in range(30):
     mask = xx**2 + yy**2 < r**2
     mc1r[mask] = 0.9
 axes[0,1].imshow(make_pattern(mc1r, np.zeros((size, size))))
-axes[0,1].set_title('Spotted pattern\\n(local MC1R activation)', color='white', fontsize=10)
+axes[0,1].set_title('Spotted pattern\\\n(local MC1R activation)', color='white', fontsize=10)
 axes[0,1].axis('off')
 
 # 3. Red panda-like pattern (masked face)
@@ -396,7 +396,7 @@ agouti[25:45, 30:70] = 0.9  # white face center
 # Dark legs (bottom)
 mc1r[75:100, :] = 0.9
 axes[0,2].imshow(make_pattern(mc1r, agouti))
-axes[0,2].set_title('Red panda-like\\n(regional expression)', color='white', fontsize=10)
+axes[0,2].set_title('Red panda-like\\\n(regional expression)', color='white', fontsize=10)
 axes[0,2].axis('off')
 
 # 4. MC1R mutation effects

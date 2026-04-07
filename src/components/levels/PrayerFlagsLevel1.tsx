@@ -78,11 +78,11 @@ for name, lam in wavelengths.items():
     E = photon_energy_kJ_per_mol(lam)
     print(f"{name:<20} {lam:>8} {E:>16.0f}")
 
-print(f"\\n=== Bond Energies (minimum to break) ===")
+print(f"\\\n=== Bond Energies (minimum to break) ===")
 for bond, energy in sorted(bonds.items(), key=lambda x: x[1]):
     print(f"  {bond:<15} {energy:>6} kJ/mol")
 
-print(f"\\n=== Can This Light Break This Bond? ===")
+print(f"\\\n=== Can This Light Break This Bond? ===")
 print(f"{'':15}", end="")
 for bond in ["C-N", "C-C", "C-H", "C=C"]:
     print(f"{bond:>8}", end="")
@@ -96,7 +96,7 @@ for light, lam in wavelengths.items():
         print(f"{can_break:>8}", end="")
     print()
 
-print(f"\\nKey finding: UV-A and UV-B break the weakest bonds in dyes (C-N, C-C)")
+print(f"\\\nKey finding: UV-A and UV-B break the weakest bonds in dyes (C-N, C-C)")
 print(f"Visible light cannot break any bonds — this is why it does not cause fading")
 print(f"Prayer flags fade because of UV, not because of visible light!")`,
       challenge: 'At what wavelength does a photon have exactly the energy to break a C-N bond (305 kJ/mol)? This is the "critical wavelength" for dye degradation.',
@@ -163,8 +163,8 @@ dyes = {
     },
 }
 
-print("=== Prayer Flag Dye Analysis ===\\n")
-print("Dye color is determined by what light is ABSORBED (removed)\\n")
+print("=== Prayer Flag Dye Analysis ===\\\n")
+print("Dye color is determined by what light is ABSORBED (removed)\\\n")
 
 for dye_name, data in dyes.items():
     # Calculate absorption spectrum
@@ -299,7 +299,7 @@ locations = {
     },
 }
 
-print("=== Prayer Flag Weathering Model ===\\n")
+print("=== Prayer Flag Weathering Model ===\\\n")
 print(f"{'Location':<25} {'UV':>6} {'Wind':>6} {'Moist':>6} {'Therm':>6} {'Bio':>6} {'Total':>8} {'Life(mo)':>9}")
 print("-" * 80)
 
@@ -351,7 +351,7 @@ for name, rate in components:
     bar = "█" * int(pct / 2)
     print(f"  {name:<22} {pct:5.1f}% {bar}")
 
-print(f"\\nAt Dzongri, flags last ~{lifetimes['Dzongri (4020m)']:.0f} months")
+print(f"\\\nAt Dzongri, flags last ~{lifetimes['Dzongri (4020m)']:.0f} months")
 print(f"At Gangtok, flags last ~{lifetimes['Gangtok (1650m)']:.0f} months")
 print(f"Altitude difference: {lifetimes['Gangtok (1650m)']/lifetimes['Dzongri (4020m)']:.1f}x longer at lower altitude")`,
       challenge: 'What if you use UV-resistant synthetic fabric (reduce R_UV by 80%)? How much longer do flags last at Dzongri? Is it worth the cultural trade-off of using non-traditional materials?',
@@ -410,7 +410,7 @@ m = 8     # fatigue exponent (cotton)
 # Simulation over 24 months
 months = range(0, 25)
 
-print("=== Prayer Flag Fiber Degradation ===\\n")
+print("=== Prayer Flag Fiber Degradation ===\\\n")
 print(f"{'Month':>6} {'Strength(MPa)':>14} {'Fatigue Limit':>14} {'Cycles':>12} {'Status'}")
 print("-" * 62)
 
@@ -452,11 +452,11 @@ for month in months:
 
     print(f"{month:>6} {strength:>14.1f} {fatigue_limit:>14.1f} {total_cycles/1e6:>10.1f}M {status}")
 
-print(f"\\nFlag structural failure at month {failure_month}")
+print(f"\\\nFlag structural failure at month {failure_month}")
 print(f"Total flutter cycles: {total_cycles/1e6:.0f} million")
 
 # Factor analysis
-print(f"\\n=== What Kills the Flag First? ===")
+print(f"\\\n=== What Kills the Flag First? ===")
 
 # UV alone (no wind)
 strength_12mo = initial_strength * math.exp(-k_uv_strength * 12)
@@ -522,7 +522,7 @@ wetness = [0.05, 0.05, 0.1, 0.2, 0.4, 0.8, 0.95, 0.9, 0.7, 0.2, 0.05, 0.03]
 # UV intensity factor (1.0 = average)
 uv_factor = [0.7, 0.8, 0.9, 1.0, 0.9, 0.6, 0.4, 0.5, 0.7, 0.9, 0.8, 0.7]
 
-print("=== Cellulose Hydrolysis During Sikkim Year ===\\n")
+print("=== Cellulose Hydrolysis During Sikkim Year ===\\\n")
 print(f"{'Month':>5} {'Rain(mm)':>10} {'Wetness':>8} {'UV':>5} {'k_eff':>8} {'DP':>8} {'Strength%':>10}")
 print("-" * 62)
 
@@ -553,7 +553,7 @@ for i in range(12):
     print(f"{months[i]:>5} {rainfall[i]:>10} {wetness[i]:>8.2f} {uv_factor[i]:>5.1f} {k_eff:>8.4f} {DP:>8.0f} {strength_pct:>9.1f}%{status}")
 
 # Second year
-print(f"\\n--- Continuing into Year 2 ---")
+print(f"\\\n--- Continuing into Year 2 ---")
 for i in range(12):
     w = wetness[i]
     uv = uv_factor[i]
@@ -564,12 +564,12 @@ for i in range(12):
     if i % 3 == 0:
         print(f"{months[i]:>5} (Year 2) {'':>25} {DP:>8.0f} {strength_pct:>9.1f}%")
 
-print(f"\\n=== Summary ===")
+print(f"\\\n=== Summary ===")
 print(f"Initial DP: {DP_initial}")
 print(f"After 1 year: {dp_history[12]:.0f} ({dp_history[12]/DP_initial*100:.0f}% of original)")
 print(f"After 2 years: {dp_history[24]:.0f} ({dp_history[24]/DP_initial*100:.0f}% of original)")
 print(f"Disintegration DP: {DP_disintegration}")
-print(f"\\nThe monsoon months (Jun-Sep) cause {((dp_history[5]-dp_history[9])/dp_history[5]*100):.0f}% of annual DP loss")
+print(f"\\\nThe monsoon months (Jun-Sep) cause {((dp_history[5]-dp_history[9])/dp_history[5]*100):.0f}% of annual DP loss")
 print(f"One monsoon season does more damage than 8 months of dry weather!")`,
       challenge: 'What if the flag is coated with a water-repellent treatment that reduces wetness by 60%? How many extra months of life does the flag gain?',
       successHint: 'You have modeled cellulose hydrolysis with seasonal environmental variation. The monsoon\'s outsized role in flag degradation is clearly quantified — 4 months of rain does more damage than 8 months of sun. This explains why flags strung in October (post-monsoon) last much longer than those strung in May (pre-monsoon).',

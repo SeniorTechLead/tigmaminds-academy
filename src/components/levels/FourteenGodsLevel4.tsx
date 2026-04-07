@@ -106,7 +106,7 @@ for r in cur.execute('SELECT date, type, subtype, saros_id, max_duration_s, gamm
     dur = f"{r[4]:.0f}s" if r[4] > 0 else "n/a"
     print(f"{r[0]:<12} {r[1]:<10} {r[2]:<10} {r[3]:>5} {dur:>8} {r[5]:>7.3f}")
 
-print(f"\\nTotal eclipses: {cur.execute('SELECT COUNT(*) FROM eclipses').fetchone()[0]}")
+print(f"\\\nTotal eclipses: {cur.execute('SELECT COUNT(*) FROM eclipses').fetchone()[0]}")
 print(f"Solar: {cur.execute('SELECT COUNT(*) FROM eclipses WHERE type=\"solar\"').fetchone()[0]}")
 print(f"Lunar: {cur.execute('SELECT COUNT(*) FROM eclipses WHERE type=\"lunar\"').fetchone()[0]}")`,
       challenge: 'Add visibility data for 5 more regions (Delhi, Mumbai, London, New York, Tokyo) and query which city sees the most eclipses in this period.',
@@ -191,7 +191,7 @@ for row in cur.execute('''
     print(f"  {row[0]:10s}: {row[1]:3d} eclipses, avg duration {row[2]:.0f}s")
 
 # Analysis 2: Eclipses per 5-year period
-print("\\nECLIPSES PER 5-YEAR PERIOD")
+print("\\\nECLIPSES PER 5-YEAR PERIOD")
 print("-" * 35)
 for row in cur.execute('''
     SELECT (year/5)*5 as period, COUNT(*) as n
@@ -201,7 +201,7 @@ for row in cur.execute('''
     print(f"  {row[0]}-{row[0]+4}: {row[1]:2d} {bar}")
 
 # Analysis 3: Most active Saros series
-print("\\nMOST ACTIVE SAROS SERIES")
+print("\\\nMOST ACTIVE SAROS SERIES")
 print("-" * 45)
 for row in cur.execute('''
     SELECT saros_id, COUNT(*) as n, GROUP_CONCAT(subtype) as types,
@@ -211,7 +211,7 @@ for row in cur.execute('''
     print(f"  Saros {row[0]:>3d}: {row[1]} eclipses ({row[3]}-{row[4]})")
 
 # Analysis 4: Longest eclipses
-print("\\nTOP 5 LONGEST ECLIPSES")
+print("\\\nTOP 5 LONGEST ECLIPSES")
 print("-" * 50)
 for row in cur.execute('''
     SELECT date, subtype, saros_id, duration_s
@@ -331,10 +331,10 @@ for r in cur.execute('SELECT year,month,day,subtype,gamma,node_dist FROM predict
 
 total = cur.execute('SELECT COUNT(*) FROM predictions').fetchone()[0]
 by_type = cur.execute('SELECT subtype, COUNT(*) FROM predictions GROUP BY subtype ORDER BY COUNT(*) DESC').fetchall()
-print(f"\\nTotal predicted: {total}")
+print(f"\\\nTotal predicted: {total}")
 for t, n in by_type:
     print(f"  {t}: {n}")
-print("\\nNote: dates are approximate (±1-2 days). Real predictions")
+print("\\\nNote: dates are approximate (±1-2 days). Real predictions")
 print("require full perturbation theory for higher accuracy.")`,
       challenge: 'Add lunar eclipse prediction (check Full Moons near nodes with a 12° limit). How many total eclipses (solar + lunar) are predicted per year on average?',
       successHint: 'You have built an eclipse predictor from first principles — combining three orbital periods to determine when the cosmic geometry aligns. This is exactly how professional eclipse catalogues are computed.',
@@ -464,12 +464,12 @@ print("=" * 50)
 for r in cur.execute('SELECT year, approx_date, month_name, tithi, paksha FROM festivals WHERE name="Kharchi Puja" ORDER BY year'):
     print(f"  {r[0]}: ≈ {r[1]} ({r[2]}, {r[3]}th tithi, {r[4]} Paksha)")
 
-print("\\nALL FESTIVALS BY YEAR")
+print("\\\nALL FESTIVALS BY YEAR")
 print("=" * 50)
 for r in cur.execute('SELECT year, name, approx_date FROM festivals ORDER BY year, approx_date'):
     print(f"  {r[0]}: {r[1]:20s} ≈ {r[2]}")
 
-print(f"\\nTotal lunar months generated: {cur.execute('SELECT COUNT(*) FROM lunar_months').fetchone()[0]}")
+print(f"\\\nTotal lunar months generated: {cur.execute('SELECT COUNT(*) FROM lunar_months').fetchone()[0]}")
 print(f"Total tithis: {cur.execute('SELECT COUNT(*) FROM tithis').fetchone()[0]}")
 print(f"Total festivals: {cur.execute('SELECT COUNT(*) FROM festivals').fetchone()[0]}")`,
       challenge: 'Add a leap month detection algorithm: if two New Moons fall in the same solar month (zodiac sign), the first is Adhik Maas. Implement this check.',
@@ -611,22 +611,22 @@ db.commit()
 print(f"CELESTIAL ALMANAC — {year}")
 print("=" * 70)
 
-print("\\nFESTIVAL DATES")
+print("\\\nFESTIVAL DATES")
 print("-" * 50)
 for r in cur.execute('SELECT date, name, description FROM almanac_festivals ORDER BY date'):
     print(f"  {r[0]}: {r[1]} — {r[2]}")
 
-print("\\nECLIPSES")
+print("\\\nECLIPSES")
 print("-" * 50)
 for r in cur.execute("SELECT date, eclipse, moon_phase_pct FROM almanac_days WHERE eclipse != '' ORDER BY day_of_year"):
     print(f"  {r[0]}: {r[1]} eclipse (Moon {r[2]:.0f}% illuminated)")
 
-print("\\nSUMMARY")
+print("\\\nSUMMARY")
 print("-" * 50)
 for r in cur.execute('SELECT metric, value FROM almanac_summary ORDER BY metric'):
     print(f"  {r[0]}: {r[1]}")
 
-print("\\nSAMPLE DAYS (around Kharchi Puja)")
+print("\\\nSAMPLE DAYS (around Kharchi Puja)")
 print("-" * 70)
 kp = cur.execute("SELECT day_of_year FROM almanac_festivals WHERE name='Kharchi Puja'").fetchone()
 if kp:
@@ -635,7 +635,7 @@ if kp:
         ecl = f" *** {r[6]} ***" if r[6] else ""
         print(f"  {r[0]}: Moon {r[1]:5.1f}% | {r[4]} {r[3]} ({r[2]}) | {r[5]}{ecl}")
 
-print("\\nThis almanac covers 365 days with phase, tithi, and eclipse data.")
+print("\\\nThis almanac covers 365 days with phase, tithi, and eclipse data.")
 print("A real Panchanga adds nakshatra, yoga, and karana for complete coverage.")`,
       challenge: 'Add nakshatra computation (27 lunar mansions, each spanning 13°20\' of the Moon\'s path). Display the nakshatra alongside the tithi for each day.',
       successHint: 'You have built a digital Panchanga — the culmination of thousands of years of Indian astronomical tradition, implemented in Python. The fourteen gods of Tripura would approve: their celestial science lives on in code.',

@@ -339,7 +339,7 @@ These properties depend on three things: (1) the fibre type, (2) the yarn constr
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
-fabrics = ['Cotton\\nplain', 'Wool\\ntwill', 'Silk\\nsatin', 'Polyester\\nplain', 'Muga silk\\nplain']
+fabrics = ['Cotton\\\nplain', 'Wool\\\ntwill', 'Silk\\\nsatin', 'Polyester\\\nplain', 'Muga silk\\\nplain']
 
 # Scores 0-10 for comfort-related properties
 breathability = [9, 5, 6, 3, 7]
@@ -348,7 +348,7 @@ moisture_mgmt = [7, 8, 5, 2, 6]
 drape = [4, 5, 9, 3, 7]
 durability = [6, 7, 5, 9, 6]
 
-categories = ['Breathability', 'Warmth', 'Moisture\\nmgmt', 'Drape', 'Durability']
+categories = ['Breathability', 'Warmth', 'Moisture\\\nmgmt', 'Drape', 'Durability']
 N = len(categories)
 
 angles = np.linspace(0, 2 * np.pi, N, endpoint=False).tolist()
@@ -410,7 +410,7 @@ The irony: many "ancient" textile practices in NE India — natural dyes, handlo
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
-fibres = ['Conventional\\ncotton', 'Organic\\ncotton', 'Polyester', 'Recycled\\npolyester', 'Hemp', 'Muga silk\\n(traditional)']
+fibres = ['Conventional\\\ncotton', 'Organic\\\ncotton', 'Polyester', 'Recycled\\\npolyester', 'Hemp', 'Muga silk\\\n(traditional)']
 
 water_use = [10000, 7000, 500, 400, 2700, 1500]  # litres per kg
 co2_kg = [5.9, 3.8, 9.5, 5.7, 1.6, 2.0]  # kg CO2 per kg fibre

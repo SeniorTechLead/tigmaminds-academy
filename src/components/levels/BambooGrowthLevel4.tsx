@@ -290,7 +290,7 @@ for model in models:
     h = results[model]['cumulative'][-1]
     peak = max(results[model]['growth'])
     print(f"  {model:<16}: final height = {h:.0f} cm ({h/100:.1f} m), peak = {peak:.1f} cm/day")
-print(f"\\nLiebig model is most optimistic (only worst factor limits)")
+print(f"\\\nLiebig model is most optimistic (only worst factor limits)")
 print(f"Multiplicative is most conservative (all factors compound)")`,
       challenge: 'Add a drought event: set soil moisture to 0.1 for days 40-50. Compare how each model responds. Which model shows the most realistic recovery pattern?',
       successHint: 'You now have a working growth engine. The next steps will add temporal dynamics, calibration against real data, and interactive parameter exploration.',
@@ -751,7 +751,7 @@ for rank, pname in enumerate(sorted_params, 1):
     print(f"  {rank}. {pname:<16} sensitivity={sensitivities[pname]:.3f}  "
           f"range: {data['heights'].min():.0f}-{data['heights'].max():.0f} cm")
 
-print(f"\\nMost sensitive: {sorted_params[0]} — focus your measurements here!")
+print(f"\\\nMost sensitive: {sorted_params[0]} — focus your measurements here!")
 print(f"Least sensitive: {sorted_params[-1]} — rough estimates are fine.")`,
       challenge: 'Implement a simple interaction test: sweep water AND temperature simultaneously on a 10x10 grid. Plot a heatmap of final height. Is the interaction additive or multiplicative? Do you see any surprising combinations?',
       successHint: 'Sensitivity analysis is essential for any model. It tells you what to measure carefully and what to approximate. In agriculture, this translates directly to which field measurements are worth the cost.',
@@ -875,7 +875,7 @@ for patch, name in zip(bp['boxes'], scenarios):
     patch.set_facecolor(colors[name])
     patch.set_alpha(0.7)
 axes[0, 1].set_xticks(positions)
-axes[0, 1].set_xticklabels([n.replace(' ', '\\n') for n in scenarios], fontsize=7, color='white')
+axes[0, 1].set_xticklabels([n.replace(' ', '\\\n') for n in scenarios], fontsize=7, color='white')
 axes[0, 1].set_ylabel('Final height (cm)', color='white')
 axes[0, 1].set_title('Height distributions', color='white', fontsize=10)
 
@@ -895,7 +895,7 @@ bars = axes[1, 0].bar(range(len(scenarios)), means, yerr=stds,
                         color=[colors[n] for n in scenarios], alpha=0.8,
                         capsize=5, error_kw={'color': 'white', 'linewidth': 1.5})
 axes[1, 0].set_xticks(range(len(scenarios)))
-axes[1, 0].set_xticklabels([n.replace(' ', '\\n') for n in scenarios], fontsize=7, color='white')
+axes[1, 0].set_xticklabels([n.replace(' ', '\\\n') for n in scenarios], fontsize=7, color='white')
 axes[1, 0].set_ylabel('Final height (cm)', color='white')
 axes[1, 0].set_title('Mean height + std dev', color='white', fontsize=10)
 
@@ -904,7 +904,7 @@ cvs = [s / m * 100 for m, s in zip(means, stds)]
 axes[1, 1].bar(range(len(scenarios)), cvs,
                color=[colors[n] for n in scenarios], alpha=0.8)
 axes[1, 1].set_xticks(range(len(scenarios)))
-axes[1, 1].set_xticklabels([n.replace(' ', '\\n') for n in scenarios], fontsize=7, color='white')
+axes[1, 1].set_xticklabels([n.replace(' ', '\\\n') for n in scenarios], fontsize=7, color='white')
 axes[1, 1].set_ylabel('CV (%)', color='white')
 axes[1, 1].set_title('Prediction uncertainty (CV)', color='white', fontsize=10)
 
@@ -929,13 +929,13 @@ print("SCENARIO COMPARISON RESULTS")
 print("=" * 65)
 for name in scenarios:
     f = all_results[name]['finals']
-    print(f"\\n  {name}:")
+    print(f"\\\n  {name}:")
     print(f"    Mean height: {f.mean():.0f} cm ({f.mean()/100:.1f} m)")
     print(f"    Std dev: {f.std():.0f} cm  (CV = {f.std()/f.mean()*100:.1f}%)")
     print(f"    Range: {f.min():.0f} - {f.max():.0f} cm")
     print(f"    Growth loss: {(1-f.mean()/optimal_mean)*100:.1f}% vs optimal")
 
-print(f"\\n  RECOMMENDATION:")
+print(f"\\\n  RECOMMENDATION:")
 print(f"  Biggest risk: Drought ({(1-all_results['Drought year']['finals'].mean()/optimal_mean)*100:.0f}% loss)")
 print(f"  Most uncertain: highest CV scenario needs more data")
 print(f"  Climate +2C: moderate loss but manageable with irrigation")`,

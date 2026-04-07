@@ -374,10 +374,10 @@ print("Mating season results:")
 for ss in sample_sizes:
     m = all_matings[ss]
     print(f"  Sample size {ss:>2}: {len(m)} males mated, top male got {max(m.values())} matings")
-print(f"\\nSelection differential (mated - population mean):")
+print(f"\\\nSelection differential (mated - population mean):")
 for name, sd in zip(trait_labels, sel_diff):
     print(f"  {name}: {sd:+.3f}")
-print(f"\\nMating skew: {sum(1 for c in mate_counts if c == 0)} of {n_m} males got zero matings")`,
+print(f"\\\nMating skew: {sum(1 for c in mate_counts if c == 0)} of {n_m} males got zero matings")`,
       challenge: 'Implement male-male competition for display positions: higher-condition males get positions that are sampled more frequently by females. How does this pre-selection amplify or dampen the effects of female choice?',
       successHint: 'The mating algorithm is where selection pressure is generated. The parameters (sample size, threshold stringency, weight distribution) control how strong that pressure is. Change them and you change the evolutionary trajectory.',
     },

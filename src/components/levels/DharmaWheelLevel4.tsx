@@ -544,7 +544,7 @@ for t, rpm, tau, dist in log:
 
 # Performance metrics
 rpms = [r for _, r, _, _ in log]
-print(f"\\nRise time (to 90%): ~{next((t for t, r, _, _ in log if r > 0.9*target_rpm), 'N/A')}s")
+print(f"\\\nRise time (to 90%): ~{next((t for t, r, _, _ in log if r > 0.9*target_rpm), 'N/A')}s")
 print(f"Overshoot: {(max(rpms) - target_rpm)/target_rpm*100:.1f}%")
 print(f"Steady-state error: {abs(rpms[-1] - target_rpm):.1f} RPM")`,
       challenge: 'Try three PID tunings: aggressive (Kp=20, Ki=2, Kd=5), moderate (Kp=5, Ki=0.5, Kd=1), conservative (Kp=1, Ki=0.1, Kd=0.5). Compare rise time, overshoot, and disturbance rejection. Which is best for a flywheel?',

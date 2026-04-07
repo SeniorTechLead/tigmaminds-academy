@@ -109,7 +109,7 @@ class IcePit:
         return self.ice_volume / self.max_volume * 100
 
 # Test the architecture
-print("=== Passive Cooling Simulator: Architecture Test ===\\n")
+print("=== Passive Cooling Simulator: Architecture Test ===\\\n")
 
 surface = Surface(area=200)
 wall = Wall(thickness=2.0, k=0.4)
@@ -125,13 +125,13 @@ print(f"IcePit: {pit.radius}m radius, {pit.depth}m deep, "
 
 # Quick integration test
 T_sky = -45
-print(f"\\nRadiative flux (0C surface, {T_sky}C sky): "
+print(f"\\\nRadiative flux (0C surface, {T_sky}C sky): "
       f"{surface.radiative_flux(0, T_sky):.1f} W/m^2")
 print(f"Wall flux (45C outside, 2C inside): "
       f"{wall.steady_flux(45, 2):.1f} W/m^2")
 print(f"Wind-catcher output (42C, 10% RH): "
       f"{catcher.cooled_temperature(42, 10):.1f} C")
-print(f"\\nArchitecture verified. Ready for simulation engine.")`,
+print(f"\\\nArchitecture verified. Ready for simulation engine.")`,
       challenge: 'Add a Qanat class with flow_rate(slope, roughness) using Manning\'s equation. Connect it to the Surface: the qanat supplies water to refill troughs each night. If the qanat silts up (roughness increases), ice production drops. This adds a fifth subsystem to the simulator.',
       successHint: 'Good system design makes everything else easier. You defined four interacting classes with clear responsibilities and interfaces — the same architecture used in professional building simulation tools. The key insight: each component can be tested independently, then integrated into the full system.',
     },
@@ -237,7 +237,7 @@ class HeatTransferEngine:
 # Run the engine
 engine = HeatTransferEngine()
 
-print("=== Heat Transfer Engine: Nightly Simulation ===\\n")
+print("=== Heat Transfer Engine: Nightly Simulation ===\\\n")
 
 # Test across conditions
 tests = [
@@ -257,7 +257,7 @@ for name, T, RH, w, c in tests:
     print(f"{name:<28} {ice_cm:>6.2f} {result}")
 
 # Detailed breakdown for the ideal case
-print("\\n=== Detailed Hourly Breakdown: Ideal Night ===")
+print("\\\n=== Detailed Hourly Breakdown: Ideal Night ===")
 ice, hist = engine.simulate_night(0, 10, 0.5, 0.0)
 print(f"{'Hour':>5} {'T_w':>6} {'Ice':>6} {'q_rad':>7} {'q_conv':>7} "
       f"{'q_evap':>7} {'q_gnd':>7} {'q_net':>7}")
@@ -267,7 +267,7 @@ for h in hist:
           f"{h['q_rad']:>6.0f} {h['q_conv']:>6.0f} {h['q_evap']:>6.0f} "
           f"{h['q_ground']:>6.0f} {h['q_net']:>6.0f}")
 
-print(f"\\nTotal ice produced: {ice:.2f} cm")`,
+print(f"\\\nTotal ice produced: {ice:.2f} cm")`,
       challenge: 'The engine currently uses constant T_air through the night. In reality, air temperature drops during the night and rises before dawn. Modify T_air to follow a sinusoidal curve: coldest at 4 AM, warmest at sunset. How does this affect total ice production compared to using the mean night temperature?',
       successHint: 'You built a multi-physics simulation engine combining four heat transfer modes into a single time-stepping loop. This is exactly how professional tools like EnergyPlus work internally — just with more sophisticated models for each mode. The engine correctly handles phase change (latent heat at 0 degrees C), which is the trickiest part of thermal simulation.',
     },
@@ -385,7 +385,7 @@ records, total_prod, successes = sim.simulate_season(weather)
 
 print("=== Full-Season Ice Production Simulation ===")
 print(f"Trough area: {sim.trough_area} m^2 | Pit capacity: {sim.pit_capacity:.0f} m^3")
-print(f"Season: {len(weather)} nights\\n")
+print(f"Season: {len(weather)} nights\\\n")
 
 # Weekly summary
 print(f"{'Week':>5} {'Prod nights':>12} {'Ice stored':>11} {'Fill %':>7}")
@@ -398,7 +398,7 @@ for week in range(0, len(records), 7):
           f"{last['fill_pct']:>5.0f}%")
 
 final = records[-1]
-print(f"\\n=== Season Summary ===")
+print(f"\\\n=== Season Summary ===")
 print(f"Successful production nights: {successes}/{len(weather)}")
 print(f"Total ice produced: {total_prod:.0f} m^3 ({total_prod * 917 / 1000:.0f} tonnes)")
 print(f"Final storage: {final['stored_m3']:.0f} m^3 ({final['fill_pct']:.0f}% full)")
@@ -406,7 +406,7 @@ print(f"Melt losses during production season: "
       f"{total_prod - final['stored_m3']:.0f} m^3 ({(total_prod - final['stored_m3'])/total_prod*100:.0f}%)")
 
 # Compare trough sizes
-print("\\n=== Trough Area Optimisation ===")
+print("\\\n=== Trough Area Optimisation ===")
 print(f"{'Area (m2)':>10} {'Produced':>9} {'Stored':>8} {'Fill%':>6} {'Nights':>7}")
 print("-" * 42)
 for area in [50, 100, 200, 300, 500]:
@@ -520,14 +520,14 @@ class AnnualPerformance:
 # Run annual simulation
 perf = AnnualPerformance()
 
-print("=== Annual Performance Calculator ===\\n")
+print("=== Annual Performance Calculator ===\\\n")
 
 # Winter production
 ice_end_winter, prod_nights = perf.winter_production()
 print(f"Winter production: {prod_nights} successful nights")
 print(f"Ice stored at end of winter: {ice_end_winter:.0f} m^3 "
       f"({ice_end_winter/perf.pit_capacity*100:.0f}% full)")
-print(f"({ice_end_winter * 917 / 1000:.0f} tonnes)\\n")
+print(f"({ice_end_winter * 917 / 1000:.0f} tonnes)\\\n")
 
 # Summer melt
 records = perf.summer_melt(ice_end_winter)
@@ -554,11 +554,11 @@ if month_melts:
 # Supply duration
 days_with_ice = len([r for r in records if r["ice_m3"] > 0])
 last_month = records[days_with_ice - 1]["month"] if days_with_ice > 0 else "N/A"
-print(f"\\nIce supply lasts: {days_with_ice} days (through {last_month})")
+print(f"\\\nIce supply lasts: {days_with_ice} days (through {last_month})")
 print(f"{'SUFFICIENT' if days_with_ice >= 150 else 'INSUFFICIENT'} for summer supply")
 
 # Sensitivity: wall thickness
-print("\\n=== Wall Thickness Sensitivity (same ice stored) ===")
+print("\\\n=== Wall Thickness Sensitivity (same ice stored) ===")
 for U in [0.10, 0.15, 0.20, 0.30, 0.40, 0.60]:
     perf_test = AnnualPerformance(wall_U=U)
     recs_t = perf_test.summer_melt(ice_end_winter)

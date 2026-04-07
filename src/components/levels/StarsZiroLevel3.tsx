@@ -139,7 +139,7 @@ planet_brightness = {}
 for r0 in r0_values:
     brightness = []
 
-print("\n[Full visualization in playground]")`,
+print("\\n[Full visualization in playground]")`,
       challenge: 'Add a simulation for a telescope with adaptive optics: at each timestep, subtract the mean phase from the screen (simulating a tip-tilt corrector). How much does this reduce the scintillation index? Real AO systems correct hundreds of modes.',
       successHint: 'Understanding atmospheric seeing is what separates casual stargazers from serious astronomers. Every telescope observation is a battle against the atmosphere. Sites like Ziro Valley win that battle through geography alone.',
     },
@@ -206,7 +206,7 @@ sodium_total /= norm
 led_cool_total /= norm
 led_warm_total /= norm
 
-print("\n[Full visualization in playground]")`,
+print("\\n[Full visualization in playground]")`,
       challenge: 'Add Mie scattering to the model with a humidity parameter (0 = dry, 1 = monsoon). Show how the relative advantage of sodium vs LED changes with humidity. In humid conditions, the wavelength advantage of sodium diminishes because Mie scattering is wavelength-independent.',
       successHint: 'Light pollution is a solvable problem. Unlike other forms of pollution, it disappears the instant you turn off the light. Understanding the physics empowers you to advocate for better lighting policies — shielded fixtures, warm color temperatures, and dark sky preserves like Ziro Valley.',
     },
@@ -273,7 +273,7 @@ locations = {
 
 np.random.seed(42)
 
-print("\n[Full visualization in playground]")`,
+print("\\n[Full visualization in playground]")`,
       challenge: 'Build an interactive Bortle classifier: given a set of yes/no observational questions (Can you see the Milky Way? Is it structured? Can you see zodiacal light?), determine the Bortle class without an SQM. This is how amateur astronomers classify sites in the field.',
       successHint: 'The Bortle scale transforms subjective impressions ("nice sky" vs "amazing sky") into reproducible science. Documenting Ziro Valley as a Bortle 2 site creates a scientific record that can drive dark sky conservation policy.',
     },
@@ -340,7 +340,7 @@ def aperture_photometry(image, cx, cy, r_aperture=10, r_inner=15, r_outer=25):
 
     # SNR estimation
 
-print("\n[Full visualization in playground]")`,
+print("\\n[Full visualization in playground]")`,
       challenge: 'Implement differential photometry: add a second "comparison star" to the image and measure the brightness ratio between target and comparison. Show that atmospheric variations (simulate by multiplying the whole image by a random factor each frame) cancel out in the ratio.',
       successHint: 'Photometry is the workhorse of observational astronomy. Exoplanet discoveries, supernova classifications, and asteroid surveys all depend on measuring brightness precisely. A dark sky like Ziro Valley gives every observation a head start in SNR.',
     },
@@ -408,7 +408,7 @@ famous_stars = [
     ('Vega', 9602, 0.58, '#ffffff'),
 ]
 
-print("\n[Full visualization in playground]")`,
+print("\\n[Full visualization in playground]")`,
       challenge: 'Add stellar evolution tracks to the HR diagram: show how a Sun-like star moves from the main sequence to the red giant branch to the white dwarf region. Plot the track as a colored path with arrows showing the direction of evolution.',
       successHint: 'The HR diagram is to astronomy what the periodic table is to chemistry — a single visualization that organizes an entire field. Every star you see from Ziro Valley has a place on this diagram, and that place tells you its mass, temperature, size, age, and fate.',
     },

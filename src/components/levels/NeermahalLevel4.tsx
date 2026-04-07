@@ -103,7 +103,7 @@ print("=" * 50)
 for row in cur.execute('SELECT id, name, type, location FROM elements'):
     print(f"  [{row[0]}] {row[1]:20s} | {row[2]:6s} | {row[3]}")
 
-print(f"\\nTotal elements: {cur.execute('SELECT COUNT(*) FROM elements').fetchone()[0]}")
+print(f"\\\nTotal elements: {cur.execute('SELECT COUNT(*) FROM elements').fetchone()[0]}")
 print(f"Total inspections: {cur.execute('SELECT COUNT(*) FROM inspections').fetchone()[0]}")
 print(f"Total measurements: {cur.execute('SELECT COUNT(*) FROM measurements').fetchone()[0]}")`,
       challenge: 'Add 4 more elements (east wall, west wall, floor slab, staircase) and create inspection records for each. Query to find which element has the most inspections.',
@@ -178,7 +178,7 @@ for row in cur.execute(query):
     print(f"{row[0]:<16} {row[1]:<14} {row[2]:>6.1f} {row[3]:>8.1f} {row[4]:>7.1f}%")
 
 # Query 2: Average deterioration by element type
-print("\\nAVERAGE DETERIORATION BY TYPE")
+print("\\\nAVERAGE DETERIORATION BY TYPE")
 print("-" * 40)
 query2 = '''
 SELECT e.type, COUNT(*) as n,
@@ -193,7 +193,7 @@ GROUP BY e.type ORDER BY avg_pct DESC
 for row in cur.execute(query2):
     print(f"  {row[0]:>8s}: {row[2]:>6.1f}% avg change ({row[1]} elements)")
 
-print("\\nColumns show the WORST deterioration — repair priority is clear.")`,
+print("\\\nColumns show the WORST deterioration — repair priority is clear.")`,
       challenge: 'Add a "priority" query that flags any element where deterioration exceeds 50% as "URGENT" and others as "MONITOR". Sort by priority.',
       successHint: 'SQL transforms raw inspection data into actionable intelligence. A few well-crafted queries can save a heritage structure by directing limited repair funds where they matter most.',
     },
@@ -262,7 +262,7 @@ for r in rows:
 print(f"  Total: {greedy_cost:.1f}L, Benefit: {greedy_benefit:.0f}")
 
 # Dynamic programming (0-1 knapsack, costs in units of 0.5 lakhs)
-print("\\nDYNAMIC PROGRAMMING (optimal)")
+print("\\\nDYNAMIC PROGRAMMING (optimal)")
 print("=" * 60)
 items = cur.execute('SELECT id, element, cost_lakhs, benefit_score FROM repairs').fetchall()
 n = len(items)
@@ -291,7 +291,7 @@ for r in dp_list:
 print(f"  Total: {dp_cost:.1f}L, Benefit: {dp_benefit:.0f}")
 
 # Compare
-print(f"\\nGreedy: {greedy_benefit:.0f} benefit for {greedy_cost:.1f}L")
+print(f"\\\nGreedy: {greedy_benefit:.0f} benefit for {greedy_cost:.1f}L")
 print(f"Optimal: {dp_benefit:.0f} benefit for {dp_cost:.1f}L")
 improvement = (dp_benefit - greedy_benefit) / greedy_benefit * 100
 print(f"DP improves over greedy by {improvement:.1f}%")`,
@@ -501,21 +501,21 @@ for elem in cur.execute('SELECT * FROM elements').fetchall():
                 (name, urgency, failure_year, repair_cost,
                  f"{'Immediate repair' if urgency=='CRITICAL' else 'Schedule repair' if urgency=='HIGH' else 'Continue monitoring'}"))
 
-    print(f"\\n{name} ({etype})")
+    print(f"\\\n{name} ({etype})")
     print(f"  Current crack: {current_crack:.1f} mm | Growth rate: {rate:.2f} mm/yr")
     print(f"  Predicted danger year: {failure_year} | Urgency: {urgency}")
     if depth > 0:
         print(f"  Current load: {current_force:.0f} kN / {capacity} kN ({utilisation:.0f}% utilised)")
 
 # Final action plan
-print("\\n" + "=" * 70)
+print("\\\n" + "=" * 70)
 print("PRIORITISED ACTION PLAN")
 print("=" * 70)
 for row in cur.execute('SELECT element, urgency, predicted_failure_year, repair_cost_lakhs, action FROM action_plan ORDER BY predicted_failure_year'):
     print(f"  [{row[1]:8s}] {row[0]:14s} — fail by {row[2]} — cost {row[3]:5.1f}L — {row[4]}")
 
 total = cur.execute("SELECT SUM(repair_cost_lakhs) FROM action_plan WHERE urgency IN ('CRITICAL','HIGH')").fetchone()[0]
-print(f"\\nTotal urgent repair budget needed: {total:.1f} lakhs")`,
+print(f"\\\nTotal urgent repair budget needed: {total:.1f} lakhs")`,
       challenge: 'Add a budget constraint of 30 lakhs and implement a knapsack optimiser to select the best subset of repairs. Store the optimised plan in a new table.',
       successHint: 'You have built a complete engineering management system from scratch — database, physics, prediction, and optimisation. This is exactly how real infrastructure is managed in the 21st century.',
     },

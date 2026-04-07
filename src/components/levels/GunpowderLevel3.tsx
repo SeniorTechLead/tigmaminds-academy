@@ -50,7 +50,7 @@ explosives = [
     {"name": "Ammonium nitrate",  "Q": 1590,  "rho": 1725, "type": "detonation"},
 ]
 
-print("=== Chapman-Jouguet Detonation Analysis ===\\n")
+print("=== Chapman-Jouguet Detonation Analysis ===\\\n")
 print(f"{'Explosive':<22} {'Q (kJ/kg)':>10} {'D_CJ (m/s)':>11} {'P_CJ (GPa)':>11} {'Type':>14}")
 print("-" * 70)
 
@@ -60,7 +60,7 @@ for ex in explosives:
     print(f"{ex['name']:<22} {ex['Q']:>8} {D:>9.0f} {P:>9.1f} {ex['type']:>14}")
 
 # Actual vs CJ velocity (CJ overpredicts for deflagrating materials)
-print("\\n=== Actual vs CJ-Predicted Velocity ===")
+print("\\\n=== Actual vs CJ-Predicted Velocity ===")
 actual = {"Black powder": 400, "TNT": 6900, "Nitroglycerin": 7700,
           "RDX": 8750, "PETN": 8400, "Ammonium nitrate": 5270}
 
@@ -146,7 +146,7 @@ proj = 2000     # g (2 kg stone ball)
 lengths = np.arange(0.2, 5.0, 0.1)
 
 print("=== Barrel Length Optimisation ===")
-print(f"Charge: {charge}g | Bore: {bore}mm | Projectile: {proj}g\\n")
+print(f"Charge: {charge}g | Bore: {bore}mm | Projectile: {proj}g\\\n")
 print(f"{'Length (m)':>10} {'Velocity (m/s)':>15} {'Energy (kJ)':>12} {'Efficiency':>12}")
 print("-" * 51)
 
@@ -168,11 +168,11 @@ for L in [0.3, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 4.0]:
         eff = energy / (charge/1000 * 2700) * 100  # energy / chemical energy
         print(f"{L:>8.1f}m {v:>13.0f} {energy:>10.1f} {eff:>10.1f}%")
 
-print(f"\\nOptimal barrel length: {best_L:.1f} m")
+print(f"\\\nOptimal barrel length: {best_L:.1f} m")
 print(f"Peak muzzle velocity:  {best_v:.0f} m/s")
 
 # Compare weapon types
-print("\\n=== Optimal Barrel Length by Weapon Type ===")
+print("\\\n=== Optimal Barrel Length by Weapon Type ===")
 weapons = [
     ("Hand cannon",   20, 25, 30),
     ("Field cannon",  200, 80, 2000),
@@ -222,7 +222,7 @@ def rocket_range(dv, launch_angle_deg=45, g=9.81):
     return dv**2 * np.sin(2 * angle) / g
 
 # Chinese black powder rockets through history
-print("=== Chinese Rocket Evolution ===\\n")
+print("=== Chinese Rocket Evolution ===\\\n")
 rockets = [
     {"name": "Fire arrow (1232)",     "m_total": 0.5,  "m_prop": 0.2,
      "v_e": 600,  "description": "Bamboo tube on arrow shaft"},
@@ -247,7 +247,7 @@ for r in rockets:
     print(f"{r['name']:<24} {mass_ratio:>8.2f} {dv:>8.0f} {rng:>10.0f}")
 
 # Compare with modern rockets
-print("\\n=== Historical vs Modern Rocket Performance ===\\n")
+print("\\\n=== Historical vs Modern Rocket Performance ===\\\n")
 modern = [
     ("Black powder (1232)",      700,   0.6, "First rockets"),
     ("Congreve rocket (1804)",   800,   0.7, "Napoleonic wars"),
@@ -354,7 +354,7 @@ scenarios = [
     ("Low supplies",     15000, 2000, 20, 8000),
 ]
 
-print("=== Gunpowder Siege Simulation ===\\n")
+print("=== Gunpowder Siege Simulation ===\\\n")
 for name, att, defn, guns, powder in scenarios:
     outcome, days, hist = simulate_siege(att, defn, guns, powder)
 
@@ -440,7 +440,7 @@ for a, b, p in routes:
     adj[b].append((a, p))
 
 # Calculate centrality metrics
-print("=== Silk Road Network Analysis ===\\n")
+print("=== Silk Road Network Analysis ===\\\n")
 print(f"{'City':<18} {'Degree':>7} {'Connections':>40}")
 print("-" * 67)
 for c in cities:
@@ -478,7 +478,7 @@ def simulate_diffusion(adj, source, n_sims=500, max_decades=50):
 # Normal diffusion
 avg_arrival = simulate_diffusion(adj, "Chang'an")
 
-print("\\n=== Gunpowder Diffusion (decades after invention) ===")
+print("\\\n=== Gunpowder Diffusion (decades after invention) ===")
 sorted_cities = sorted(avg_arrival.items(), key=lambda x: x[1])
 for city, decades in sorted_cities:
     years = decades * 10
@@ -486,7 +486,7 @@ for city, decades in sorted_cities:
     print(f"  {city:<18} {decades:>4.1f} decades ({years:>4.0f} years)  {bar}")
 
 # Historical comparison
-print("\\nHistorical record:")
+print("\\\nHistorical record:")
 print("  Gunpowder invented: ~850 CE (Chang'an)")
 print("  Reached Islamic world: ~1240 CE (~390 years)")
 print("  Reached Europe: ~1280 CE (~430 years)")`,

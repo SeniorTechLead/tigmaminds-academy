@@ -52,7 +52,7 @@ ax1.set_facecolor('#111827')
 ax1.plot(demand, price, color='#3b82f6', linewidth=2, label='Demand')
 ax1.plot(supply, price, color='#22c55e', linewidth=2, label='Supply')
 ax1.plot(eq_quantity, eq_price, 'o', color='#f59e0b', markersize=12, zorder=5)
-ax1.annotate(f'Equilibrium\\nP=₹{eq_price}, Q={eq_quantity}kg', xy=(eq_quantity, eq_price),
+ax1.annotate(f'Equilibrium\\\nP=₹{eq_price}, Q={eq_quantity}kg', xy=(eq_quantity, eq_price),
              xytext=(eq_quantity+15, eq_price+5), color='#f59e0b', fontsize=10,
              arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 ax1.set_xlabel('Quantity (kg)', color='white')
@@ -69,7 +69,7 @@ ax2.plot(demand, price, color='#3b82f6', linewidth=2, label='Demand (unchanged)'
 ax2.plot(supply, price, color='#22c55e', linewidth=1, linestyle='--', alpha=0.5, label='Old supply')
 ax2.plot(supply_drought, price, color='#ef4444', linewidth=2, label='New supply (drought)')
 ax2.plot(eq_quantity_drought, eq_price_drought, 'o', color='#f59e0b', markersize=12, zorder=5)
-ax2.annotate(f'New equilibrium\\nP=₹{eq_price_drought}, Q={eq_quantity_drought}kg',
+ax2.annotate(f'New equilibrium\\\nP=₹{eq_price_drought}, Q={eq_quantity_drought}kg',
              xy=(eq_quantity_drought, eq_price_drought),
              xytext=(eq_quantity_drought+15, eq_price_drought+5), color='#f59e0b', fontsize=10,
              arrowprops=dict(arrowstyle='->', color='#f59e0b'))
@@ -452,7 +452,7 @@ ax2.set_title('The Inflation Gap: Nominal vs Real Wages', color='white', fontsiz
 ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax2.tick_params(colors='gray')
 
-ax2.annotate('Purchasing power\\nDECLINES even as\\nnominal wage rises',
+ax2.annotate('Purchasing power\\\nDECLINES even as\\\nnominal wage rises',
              xy=(2018, (nominal_wage[13] + real_wage[13])/2),
              color='#ef4444', fontsize=10, ha='center')
 
@@ -556,7 +556,7 @@ ax2.plot(quantity, social_cost, color='#ef4444', linewidth=2, label='Social cost
 ax2.plot(quantity, demand, color='#22c55e', linewidth=2, label='Demand')
 
 ax2.plot(q_optimal, p_optimal, 'o', color='#22c55e', markersize=12, zorder=5)
-ax2.annotate(f'New equilibrium = optimal!\\nQ={q_optimal:.0f}', xy=(q_optimal, p_optimal),
+ax2.annotate(f'New equilibrium = optimal!\\\nQ={q_optimal:.0f}', xy=(q_optimal, p_optimal),
              xytext=(q_optimal-25, p_optimal+8), color='#22c55e', fontsize=10,
              arrowprops=dict(arrowstyle='->', color='#22c55e'))
 

@@ -91,7 +91,7 @@ transport_costs = {
 }
 
 print("=== Agent-Based Silk Road Simulation ===")
-print(f"50 merchants | 5 cities | 24 months\\n")
+print(f"50 merchants | 5 cities | 24 months\\\n")
 
 for month in range(1, 25):
     # Each merchant acts
@@ -146,7 +146,7 @@ for month in range(1, 25):
         print(f"Month {month:>2}: {prices}")
 
 # Final merchant performance
-print("\\n=== Top 10 Merchants by Profit ===")
+print("\\\n=== Top 10 Merchants by Profit ===")
 merchants.sort(key=lambda m: m.total_profit, reverse=True)
 print(f"{'Name':>6} {'Home':<16} {'Gold':>7} {'Profit':>8} {'Trades':>7} {'Risk':>5}")
 print("-" * 51)
@@ -155,7 +155,7 @@ for m in merchants[:10]:
           f"{m.trades:>6} {m.risk_tolerance:>4.1f}")
 
 # Risk vs return analysis
-print("\\n=== Risk Tolerance vs Average Profit ===")
+print("\\\n=== Risk Tolerance vs Average Profit ===")
 for low, high in [(0.2, 0.4), (0.4, 0.6), (0.6, 0.8), (0.8, 1.0)]:
     group = [m for m in merchants if low <= m.risk_tolerance < high]
     if group:
@@ -204,8 +204,8 @@ shock_day = 0
 base_price = np.array([20, 35, 50, 65, 75, 90, 100, 120.0])  # baseline prices
 shock_magnitude = 0.40  # 40% production drop -> prices rise
 
-print(f"\\n=== Price Shock Propagation ===")
-print(f"Event: 40% silk production drop in Chang'an on Day 0\\n")
+print(f"\\\n=== Price Shock Propagation ===")
+print(f"Event: 40% silk production drop in Chang'an on Day 0\\\n")
 
 # Track when each city learns about the shock
 # Two information channels: caravan (slow) and relay rider (fast, some cities only)
@@ -249,7 +249,7 @@ for i, city in enumerate(cities):
     print(f"{city:<18} {caravan_d:>6.0f}d {rider_str:>7} {actual:>7.0f}d {p30:>9.1f}")
 
 # Value of early information
-print("\\n=== Value of Information Advantage ===")
+print("\\\n=== Value of Information Advantage ===")
 print("A trader who knows about the shock before competitors:")
 for i in range(1, len(cities)):
     if i in rider_cities:
@@ -263,7 +263,7 @@ for i in range(1, len(cities)):
               f"profit potential: {total_value:>6.0f} gold ({units_traded} units)")
 
 # Price correlation vs distance
-print("\\n=== Price Correlation Decay with Distance ===")
+print("\\\n=== Price Correlation Decay with Distance ===")
 final_prices = prices[200:]  # last 50 days
 for i in range(len(cities)):
     corr_with_changan = np.corrcoef(final_prices[:, 0], final_prices[:, i])[0, 1]
@@ -341,7 +341,7 @@ days = 365
 history = {name: {"S": [], "I": [], "R": []} for name in nodes}
 
 print("=== Pandemic Spread on the Silk Road Network ===")
-print(f"Origin: Samarkand | Beta: {beta} | Recovery: {1/gamma:.0f} days\\n")
+print(f"Origin: Samarkand | Beta: {beta} | Recovery: {1/gamma:.0f} days\\\n")
 
 for day in range(days):
     # Inter-city transmission
@@ -389,7 +389,7 @@ for node in arrival_order:
     print(f"{node.name:<18} {node.pop:>7,} {day_str:>11} {peak_I:>7,.0f} {total_R:>7,.0f} {pct:>5.1f}%")
 
 # Quarantine simulation
-print("\\n=== Impact of Quarantining Samarkand on Day 30 ===")
+print("\\\n=== Impact of Quarantining Samarkand on Day 30 ===")
 nodes2 = {name: CityNode(name, pop) for name, pop in city_data}
 nodes2["Samarkand"].I = 10
 nodes2["Samarkand"].S -= 10
@@ -487,7 +487,7 @@ technologies = [
 
 years = np.arange(0, 1500)
 
-print("=== Technology Adoption Along the Silk Road ===\\n")
+print("=== Technology Adoption Along the Silk Road ===\\\n")
 
 for tech in technologies:
     print(f"--- {tech['name']} (invented {tech['origin_year']} CE) ---")
@@ -601,7 +601,7 @@ routes = [
     CaravanRisk("Baghdad-Constantinople",    15000, 0.06, 0.08, 0.04),
 ]
 
-print("=== Caravan Insurance Pricing ===\\n")
+print("=== Caravan Insurance Pricing ===\\\n")
 print(f"{'Route':<30} {'Value':>7} {'E[Loss]':>8} {'Fair Prem':>10} {'Loaded':>8}")
 print("-" * 65)
 
@@ -612,9 +612,9 @@ for r in routes:
     print(f"{r.route:<30} {r.value:>6,} {el:>7,.0f} {fair:>9,.0f} {loaded:>7,.0f}")
 
 # Diversification effect
-print("\\n=== Diversification: Insuring N Independent Caravans ===")
+print("\\\n=== Diversification: Insuring N Independent Caravans ===")
 route = routes[3]  # Samarkand-Baghdad (highest risk)
-print(f"Route: {route.route} | Value: {route.value:,}\\n")
+print(f"Route: {route.route} | Value: {route.value:,}\\\n")
 
 for n_caravans in [1, 5, 10, 25, 50, 100]:
     per_caravan_losses = []
@@ -632,10 +632,10 @@ for n_caravans in [1, 5, 10, 25, 50, 100]:
     print(f"N={n_caravans:>3}: mean loss/caravan={mean_loss:>6,.0f}  "
           f"std={std_loss:>5,.0f}  95th pctile={worst_5:>6,.0f}")
 
-print("\\nAs N increases, std shrinks -> losses become predictable -> lower risk loading needed")
+print("\\\nAs N increases, std shrinks -> losses become predictable -> lower risk loading needed")
 
 # Correlated risk: war disrupts ALL caravans
-print("\\n=== Correlated Risk: What If War Breaks Out? ===")
+print("\\\n=== Correlated Risk: What If War Breaks Out? ===")
 war_probability = 0.05  # 5% per year
 war_loss_multiplier = 3.0  # triples all loss probabilities
 
@@ -652,7 +652,7 @@ for scenario in ["Normal", "With War Risk"]:
         total_claims.append(year_claims)
 
     tc = np.array(total_claims)
-    print(f"\\n{scenario}:")
+    print(f"\\\n{scenario}:")
     print(f"  Mean annual claims: {np.mean(tc):>10,.0f}")
     print(f"  Std of claims:      {np.std(tc):>10,.0f}")
     print(f"  Worst 5% year:      {np.percentile(tc, 95):>10,.0f}")

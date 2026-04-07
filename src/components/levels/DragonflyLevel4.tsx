@@ -142,7 +142,7 @@ CLASS_COLORS = ['#22c55e', '#f59e0b', '#ef4444', '#dc2626', '#3b82f6', '#a0845c'
 print("CROP HEALTH MONITOR — Field Analysis")
 print("=" * 55)
 print(f"Field size: {FIELD_SIZE}x{FIELD_SIZE} pixels")
-print(f"\\n{'Class':<12} {'Pixels':>8} {'%':>7} {'NDVI mean':>10} {'NDVI std':>10}")
+print(f"\\\n{'Class':<12} {'Pixels':>8} {'%':>7} {'NDVI mean':>10} {'NDVI std':>10}")
 print("-" * 50)
 for i, name in enumerate(CLASS_NAMES):
     mask = labels == i
@@ -210,7 +210,7 @@ plt.colorbar(im, ax=ax, fraction=0.046)
 plt.tight_layout()
 plt.show()
 
-print("\\nNDVI clearly separates healthy paddy from diseased regions.")
+print("\\\nNDVI clearly separates healthy paddy from diseased regions.")
 print("Blast patches show lowest NDVI (dead tissue). Blight shows moderate reduction.")
 print("Next: build a classifier to automate this analysis.")`,
       challenge: 'Add a "moisture stress index" using NDVI temporal difference: generate two images (same field, one month apart) and compute delta-NDVI. Regions where NDVI dropped more than 0.15 are likely experiencing moisture stress.',
@@ -358,7 +358,7 @@ knn_acc = np.mean(knn_pred.ravel() == labels.ravel())
 print(f"Classification Accuracy:")
 print(f"  Threshold (NDVI only): {thresh_acc:.1%}")
 print(f"  KNN (4 features):     {knn_acc:.1%}")
-print(f"\\nKNN per-class accuracy:")
+print(f"\\\nKNN per-class accuracy:")
 for i, name in enumerate(CLASS_NAMES):
     mask = labels.ravel() == i
     if mask.sum() > 0:
@@ -405,7 +405,7 @@ ax.tick_params(colors='gray')
 plt.tight_layout()
 plt.show()
 
-print("\\nTexture features enable blast/blight distinction that NDVI alone cannot make.")
+print("\\\nTexture features enable blast/blight distinction that NDVI alone cannot make.")
 print("Local variance highlights disease boundaries; gradient ratio detects streak patterns.")`,
       challenge: 'Implement a "disease boundary detector": apply a Sobel edge filter to the KNN classification map to find the boundaries of diseased regions. Compute the total boundary perimeter and average patch size for each disease type.',
       successHint: 'Multi-feature classification dramatically outperforms simple thresholding because diseases differ in texture, not just spectral values. This is a general principle in remote sensing: spatial features complement spectral features.',
@@ -572,13 +572,13 @@ print("DISEASE PATCH ANALYSIS")
 print("=" * 65)
 print(f"Blast patches:  {len(blast_patches)}")
 print(f"Blight patches: {len(blight_patches)}")
-print(f"\\n{'Type':<8} {'ID':>3} {'Area':>6} {'Perim':>6} {'Compact':>8} {'Centroid'}")
+print(f"\\\n{'Type':<8} {'ID':>3} {'Area':>6} {'Perim':>6} {'Compact':>8} {'Centroid'}")
 print("-" * 60)
 for p in sorted(all_patches, key=lambda x: -x['area'])[:12]:
     print(f"{p['class']:<8} {p['id']:>3} {p['area']:>6} {p['perimeter']:>6} "
           f"{p['compactness']:>8.3f} ({p['centroid'][0]:.0f}, {p['centroid'][1]:.0f})")
 
-print(f"\\nBlast avg compactness: {np.mean([p['compactness'] for p in blast_patches]):.3f} (circular)")
+print(f"\\\nBlast avg compactness: {np.mean([p['compactness'] for p in blast_patches]):.3f} (circular)")
 print(f"Blight avg compactness: {np.mean([p['compactness'] for p in blight_patches]):.3f} (elongated)")
 
 # --- Visualization ---
@@ -654,7 +654,7 @@ plt.colorbar(im, ax=ax, fraction=0.046)
 plt.tight_layout()
 plt.show()
 
-print("\\nCompactness distinguishes disease types: blast ~ 0.5+ (circular), blight ~ 0.1-0.3 (streaks)")
+print("\\\nCompactness distinguishes disease types: blast ~ 0.5+ (circular), blight ~ 0.1-0.3 (streaks)")
 print("The density heatmap shows disease hotspots for targeted treatment.")`,
       challenge: 'Implement a "spread risk" model: for each disease patch, compute the distance to the nearest healthy paddy edge. Patches closer to healthy tissue have higher spread risk. Generate a risk-ranked list of patches requiring immediate treatment.',
       successHint: 'Spatial analysis transforms pixel-level classification into field-level intelligence. Connected components, patch characterization, and density mapping are the same techniques used in medical imaging (tumor detection), ecology (habitat mapping), and urban planning (land use classification).',
@@ -838,7 +838,7 @@ plt.show()
 # Report
 total_px = SIZE * SIZE
 deteriorated = np.sum(diff_03 < -0.15)
-print(f"\\n4-Week Change Report:")
+print(f"\\\n4-Week Change Report:")
 print(f"  Mean NDVI: {fields[0].mean():.2f} -> {fields[-1].mean():.2f} (delta: {fields[-1].mean()-fields[0].mean():.3f})")
 print(f"  Pixels deteriorated (>0.15 drop): {deteriorated} ({deteriorated/total_px*100:.1f}%)")
 print(f"  Anomaly pixels (last date): {anomalies.sum()} ({anomalies.sum()/total_px*100:.1f}%)")
@@ -1060,14 +1060,14 @@ print(f"Field area: {report['field_area_m2']:.0f} m2 ({report['field_area_m2']/1
 print(f"Mean NDVI: {report['mean_ndvi']:.3f}")
 print(f"Disease patches found: {len(report['disease_patches'])}")
 
-print(f"\\n{'Class':<12} {'Pixels':>8} {'%':>7} {'Area (m2)':>10} {'NDVI':>7}")
+print(f"\\\n{'Class':<12} {'Pixels':>8} {'%':>7} {'Area (m2)':>10} {'NDVI':>7}")
 print("-" * 48)
 for name, stats in report['summary'].items():
     if stats['pixels'] > 0:
         print(f"{name:<12} {stats['pixels']:>8} {stats['percent']:>6.1f}% "
               f"{stats['area_m2']:>10.0f} {stats['mean_ndvi']:>7.3f}")
 
-print(f"\\nRecommendations:")
+print(f"\\\nRecommendations:")
 for rec in report['recommendations']:
     print(f"  {rec}")
 

@@ -227,10 +227,10 @@ plt.show()
 print("=" * 60)
 print("    TRUSS BRIDGE STRUCTURAL ANALYSIS")
 print("=" * 60)
-print(f"\\nBridge: {span}m span, {height}m height, {n_panels} panels")
+print(f"\\\nBridge: {span}m span, {height}m height, {n_panels} panels")
 print(f"Nodes: {n_nodes}, Members: {n_members}")
 print(f"Determinacy: m+3 = {n_members + 3}, 2n = {2*n_nodes}")
-print(f"\\nMax tension: {max(member_forces)/1000:.1f} kN")
+print(f"\\\nMax tension: {max(member_forces)/1000:.1f} kN")
 print(f"Max compression: {min(member_forces)/1000:.1f} kN")
 print(f"Max deflection: {max_deflection:.2f} mm")
 print(f"Deflection limit (L/300): {span/300*1000:.1f} mm")
@@ -347,11 +347,11 @@ plt.show()
 print("=" * 60)
 print("    BRIDGE MATERIAL COMPARISON")
 print("=" * 60)
-print(f"\\nFor 50 kN tension member (SF = {safety_factor}):")
+print(f"\\\nFor 50 kN tension member (SF = {safety_factor}):")
 for name, area, mass in zip(names, required_areas, required_masses):
     equiv_dia = 2 * np.sqrt(area / np.pi)
     print(f"  {name:<22}: A = {area:>8.0f} mm² (d = {equiv_dia:.0f} mm), mass = {mass:.1f} kg/m")
-print(f"\\nBamboo requires {required_areas[3]/required_areas[0]:.1f}x the area of steel")
+print(f"\\\nBamboo requires {required_areas[3]/required_areas[0]:.1f}x the area of steel")
 print(f"but only {required_masses[3]/required_masses[0]:.1f}x the mass — bamboo is competitive by weight!")`,
       challenge: 'Design a composite bamboo-concrete bridge member where bamboo handles tension and concrete handles compression. Calculate the neutral axis position and compare the composite member to pure bamboo and pure concrete alternatives.',
       successHint: 'You have compared bridge materials quantitatively — bamboo\'s excellent specific strength explains its widespread use in traditional Northeast Indian bridges, while steel and concrete dominate modern construction for their absolute strength and durability.',
@@ -384,7 +384,7 @@ fig.patch.set_facecolor('#1f2937')
 # Plot 1: Load components for different bridge types
 ax = axes[0, 0]
 ax.set_facecolor('#111827')
-bridge_types = ['Footbridge\\n(bamboo)', 'Footbridge\\n(steel)', 'Rural road\\n(concrete)', 'Highway\\n(steel-conc)', 'Railway\\n(steel)']
+bridge_types = ['Footbridge\\\n(bamboo)', 'Footbridge\\\n(steel)', 'Rural road\\\n(concrete)', 'Highway\\\n(steel-conc)', 'Railway\\\n(steel)']
 dead_loads = [1, 3, 25, 15, 30]  # kN/m
 live_loads = [5, 8, 20, 40, 80]  # kN/m
 wind_loads = [0.5, 1, 2, 3, 2]   # kN/m
@@ -412,7 +412,7 @@ ax2.axhline(1.0, color='gray', linestyle=':', linewidth=0.5)
 for s, label in [(10, 'Village'), (20, 'Town'), (50, 'Highway'), (80, 'Major')]:
     d = dynamic_amp_factor(s)
     ax2.plot(s, d, 'o', color='#fbbf24', markersize=8)
-    ax2.annotate(f'{label}\\nDAF={d:.2f}', (s, d), textcoords='offset points',
+    ax2.annotate(f'{label}\\\nDAF={d:.2f}', (s, d), textcoords='offset points',
                  xytext=(10, 10), color='#fbbf24', fontsize=8,
                  arrowprops=dict(arrowstyle='->', color='#fbbf24'))
 ax2.set_xlabel('Bridge span (m)', color='white')
@@ -451,7 +451,7 @@ ax3.tick_params(colors='gray')
 # Plot 4: Safety factor across load scenarios
 ax4 = axes[1, 1]
 ax4.set_facecolor('#111827')
-scenarios = ['Normal\\ntraffic', 'Heavy\\ntruck', 'Festival\\ncrowd', 'Monsoon\\n+ wind', 'Seismic\\nevent', 'Extreme\\n(all)']
+scenarios = ['Normal\\\ntraffic', 'Heavy\\\ntruck', 'Festival\\\ncrowd', 'Monsoon\\\n+ wind', 'Seismic\\\nevent', 'Extreme\\\n(all)']
 design_capacity = 500  # kN·m (bridge design capacity)
 applied_moments = [180, 320, 280, 350, 400, 480]
 safety_factors = [design_capacity / m for m in applied_moments]
@@ -477,12 +477,12 @@ plt.show()
 print("=" * 60)
 print("    BRIDGE LOAD ANALYSIS")
 print("=" * 60)
-print(f"\\nDesign parameters (20m span):")
+print(f"\\\nDesign parameters (20m span):")
 print(f"  Dead load: {w_dead} kN/m")
 print(f"  Point live load: {P_live} kN")
 print(f"  DAF: {dynamic_amp_factor(20):.3f}")
 print(f"  Max design moment: {max(M_factored):.1f} kN·m")
-print(f"\\nSafety factors:")
+print(f"\\\nSafety factors:")
 for scen, sf in zip(scenarios, safety_factors):
     status = "SAFE" if sf > 1.5 else "MARGINAL" if sf > 1.0 else "UNSAFE"
     print(f"  {scen.replace(chr(10), ' '):<18}: SF = {sf:.2f} ({status})")`,
@@ -587,7 +587,7 @@ safe_idx = np.where(np.array(q_ult_vals)/1000 > q_applied * 2.5)[0]  # SF > 2.5
 if len(safe_idx) > 0:
     B_min = B_range[safe_idx[0]]
     ax3.axvline(B_min, color='#fbbf24', linestyle='--', linewidth=1.5)
-    ax3.text(B_min + 0.1, max(q_applied) * 0.8, f'Min B = {B_min:.1f}m\\n(SF > 2.5)',
+    ax3.text(B_min + 0.1, max(q_applied) * 0.8, f'Min B = {B_min:.1f}m\\\n(SF > 2.5)',
              color='#fbbf24', fontsize=10)
 ax3.set_xlabel('Footing width B (m)', color='white')
 ax3.set_ylabel('Pressure (kPa × 10³)', color='white')
@@ -624,15 +624,15 @@ print("=" * 60)
 print("    BRIDGE FOUNDATION ANALYSIS")
 print("=" * 60)
 q_design = bearing_capacity(c_design, gamma, 1.5, 3.0, phi_design)
-print(f"\\nDesign soil: c={c_design} kPa, phi={phi_design}°, gamma={gamma} kN/m³")
+print(f"\\\nDesign soil: c={c_design} kPa, phi={phi_design}°, gamma={gamma} kN/m³")
 print(f"Bearing capacity (B=3m, D=1.5m): {q_design[0]/1000:.0f} kPa")
 print(f"Applied load: {P_load} kN → pressure = {P_load/9:.0f} kPa")
 print(f"Safety factor: {q_design[0]/(P_load/9*1000):.1f}")
-print(f"\\nScour analysis (Q=1000 m³/s):")
+print(f"\\\nScour analysis (Q=1000 m³/s):")
 for f, label in zip(silt_factors, silt_labels):
     d = scour_depth_lacey(1000, f)
     print(f"  {label}: scour depth = {d:.1f} m")
-print(f"\\nMinimum foundation depth: max(scour) + 1m safety = {extreme_scour + 1:.0f}m")`,
+print(f"\\\nMinimum foundation depth: max(scour) + 1m safety = {extreme_scour + 1:.0f}m")`,
       challenge: 'Design a pile foundation for soft alluvial soil: calculate the number of piles needed, pile spacing (minimum 3× diameter), and group efficiency. Compare the cost of a pile foundation vs a deep spread footing.',
       successHint: 'You have analyzed bridge foundations including bearing capacity, scour, and depth optimization — the hidden but critical part of every bridge that keeps it standing through monsoon floods.',
     },
@@ -941,7 +941,7 @@ ax3.set_facecolor('#111827')
 # Plot 4: Constructability index
 ax4 = axes[1, 1]
 ax4.set_facecolor('#111827')
-construct_factors = ['Local\\nmaterial', 'Local\\nlabor', 'No heavy\\nequipment', 'Quick\\nbuild', 'Easy\\nrepair', 'Community\\nownership']
+construct_factors = ['Local\\\nmaterial', 'Local\\\nlabor', 'No heavy\\\nequipment', 'Quick\\\nbuild', 'Easy\\\nrepair', 'Community\\\nownership']
 steel_scores = [2, 3, 2, 4, 3, 3]
 bamboo_scores = [9, 9, 9, 7, 8, 9]
 concrete_scores = [5, 5, 3, 3, 4, 4]
@@ -966,16 +966,16 @@ plt.show()
 print("=" * 60)
 print("    BRIDGE DESIGN OPTIMIZATION")
 print("=" * 60)
-print(f"\\nDesign for {span}m span, {width}m wide bridge:")
+print(f"\\\nDesign for {span}m span, {width}m wide bridge:")
 for mat, color in zip(materials_list, colors_mat):
     info = bridge_cost(mat, span, width, load)
     lcc = info['initial'] + info['annual_maint'] * analysis_period
-    print(f"\\n{mat.upper()}:")
+    print(f"\\\n{mat.upper()}:")
     print(f"  Initial cost: Rs {info['initial']:.2f} lakh")
     print(f"  Annual maintenance: Rs {info['annual_maint']:.2f} lakh")
     print(f"  Lifespan: {info['lifespan']} years")
     print(f"  {analysis_period}-year LCC: Rs {lcc:.2f} lakh")
-print(f"\\nFor a rural NE Indian community, bamboo wins on cost and")
+print(f"\\\nFor a rural NE Indian community, bamboo wins on cost and")
 print(f"constructability, while steel/concrete win on durability.")
 print(f"The optimal choice depends on local priorities and resources.")`,
       challenge: 'Implement a genetic algorithm that optimizes member sizes for a truss bridge: each "gene" is a member cross-section area, the fitness function is inverse of total weight subject to stress and deflection constraints. Show how the algorithm converges to an efficient design.',

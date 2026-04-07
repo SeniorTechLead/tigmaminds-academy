@@ -67,25 +67,25 @@ print(f"   (This is heat LOST through the kiln walls)")
 
 # 2. Convection from hot gas to pottery
 Q_conv = convection(h_inside, pottery_area, kiln_gas_T, pottery_T)
-print(f"\n2. Convection (gas to pottery): {Q_conv:.0f} W ({Q_conv/1000:.1f} kW)")
+print(f"\\n2. Convection (gas to pottery): {Q_conv:.0f} W ({Q_conv/1000:.1f} kW)")
 print(f"   (This HEATS the pottery)")
 
 # 3. Radiation from kiln walls to pottery
 T_wall_K = kiln_inner_T + 273
 T_pot_K = pottery_T + 273
 Q_rad = radiation(emissivity, pottery_area, T_wall_K, T_pot_K)
-print(f"\n3. Radiation (walls to pottery): {Q_rad:.0f} W ({Q_rad/1000:.1f} kW)")
+print(f"\\n3. Radiation (walls to pottery): {Q_rad:.0f} W ({Q_rad/1000:.1f} kW)")
 print(f"   (This also HEATS the pottery)")
 
 # Total heat to pottery
 Q_to_pottery = Q_conv + Q_rad
-print(f"\nTotal heat to pottery: {Q_to_pottery:.0f} W ({Q_to_pottery/1000:.1f} kW)")
+print(f"\\nTotal heat to pottery: {Q_to_pottery:.0f} W ({Q_to_pottery/1000:.1f} kW)")
 print(f"  Convection: {Q_conv/Q_to_pottery*100:.0f}%")
 print(f"  Radiation:  {Q_rad/Q_to_pottery*100:.0f}%")
 
 # Heat balance: fire must provide heat to pottery + losses
 Q_fire = Q_to_pottery + Q_cond
-print(f"\nFire must produce: {Q_fire:.0f} W ({Q_fire/1000:.1f} kW)")
+print(f"\\nFire must produce: {Q_fire:.0f} W ({Q_fire/1000:.1f} kW)")
 
 # How radiation dominates at high temperature
 print()
@@ -195,13 +195,13 @@ for name, mass, c in kiln_components:
     print(f"{name:<28} {mass:>10} {E:>10.0f}")
 
 print(f"{'TOTAL':<28} {'':>10} {total_E:>10.0f}")
-print(f"\nTotal: {total_E/1000:.1f} MJ ({total_E/3600:.1f} kWh)")
+print(f"\\nTotal: {total_E/1000:.1f} MJ ({total_E/3600:.1f} kWh)")
 
 # Wood fuel needed
 wood_energy = 15000  # kJ/kg (air-dried wood)
 kiln_eff = 0.15  # 15% of wood energy reaches pottery (traditional kiln)
 wood_needed = total_E / (wood_energy * kiln_eff)
-print(f"\nWood fuel needed: {wood_needed:.0f} kg (at {kiln_eff*100:.0f}% kiln efficiency)")
+print(f"\\nWood fuel needed: {wood_needed:.0f} kg (at {kiln_eff*100:.0f}% kiln efficiency)")
 print(f"That is about {wood_needed/20:.0f} bundles of firewood!")`,
       challenge: 'If the kiln uses 300 kg of wood (each kg releases 15 MJ), total fuel energy is 4,500 MJ. The kiln needs 340 MJ (the total we calculated). What is the kiln efficiency? Where does the other 92% of fuel energy go? (Hint: exhaust gases, wall losses, incomplete combustion.)',
       successHint: 'The distinction between temperature and heat (thermal energy) is one of the most important concepts in thermodynamics. It governs everything from cooking to industrial furnaces to climate science. The Q = mcT equation is deceptively simple but incredibly powerful.',
@@ -338,7 +338,7 @@ for s in schedule:
         total_fuel_kg += fuel_kg
         print(f"  {s['name']:<22} dT={dT:>4} C  Fuel: {fuel_kg:>5.1f} kg wood")
 
-print(f"\nTotal fuel: {total_fuel_kg:.0f} kg wood")`,
+print(f"\\nTotal fuel: {total_fuel_kg:.0f} kg wood")`,
       challenge: 'Design a firing curve for stoneware (peak 1200 C instead of 900 C). How much longer does the firing take? How much more fuel is needed? What new phases might be required (e.g., vitrification soak)?',
       successHint: 'Firing curves are used in every ceramic process: bricks, tiles, porcelain, glass, and even semiconductor manufacturing (thermal processing of silicon chips). The principle is universal: control the rate of temperature change to manage phase transitions and thermal stress.',
     },
@@ -441,7 +441,7 @@ x = np.linspace(0, thick, n_pts)
 T_surface = 500
 dT_max, _ = temp_gradient(80, thick, clay_k, clay_rho, clay_c, h_kiln)
 
-print(f"\n{'Position':>10} {'Depth (mm)':>12} {'Temp (C)':>10}")
+print(f"\\n{'Position':>10} {'Depth (mm)':>12} {'Temp (C)':>10}")
 print("-" * 34)
 
 for xi in x:
@@ -452,7 +452,7 @@ for xi in x:
     print(f"{'surface' if xi < 0.001 else 'centre' if abs(xi-L) < 0.001 else '':>10} "
           f"{xi*1000:>10.1f} {T:>8.1f}")
 
-print(f"\nSurface-centre difference: {dT_max:.1f} C")
+print(f"\\nSurface-centre difference: {dT_max:.1f} C")
 print("This gradient creates the thermal stress that cracks pottery!")`,
       challenge: 'A Bankura potter wants to fire a 10 cm thick temple panel. What maximum ramp rate is safe? How long will the firing take? Design a modified firing schedule that includes a "soak" at 400 C (hold temperature for 2 hours to let the centre catch up to the surface). How does this reduce thermal stress?',
       successHint: 'Thermal stress analysis applies to every situation where materials are heated or cooled: engine blocks, reactor vessels, glass tempering, semiconductor processing, and even the re-entry of spacecraft. The Biot number and thermal stress equations are universal tools.',

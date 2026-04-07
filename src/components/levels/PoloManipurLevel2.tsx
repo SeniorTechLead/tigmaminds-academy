@@ -246,7 +246,7 @@ for idx, (phase, lean, stick_pos) in enumerate(zip(swing_phases, rider_leans, st
     ax.axhline(y=0, color='white', alpha=0.3)
     ax.fill_between([-0.5, 0.6], -0.1, 0, alpha=0.1, color='#34d399')
 
-    ax.set_title(f'{phase}\\nCoM: ({system_com[0]:.2f}, {system_com[1]:.2f})', color='white', fontsize=10, fontweight='bold')
+    ax.set_title(f'{phase}\\\nCoM: ({system_com[0]:.2f}, {system_com[1]:.2f})', color='white', fontsize=10, fontweight='bold')
     ax.set_xlim(-1.2, 1.5)
     ax.set_ylim(-0.2, 2.5)
     ax.set_aspect('equal')
@@ -348,7 +348,7 @@ for idx, angle_deg in enumerate(impact_angles):
 
     speed1 = np.linalg.norm(v1_after)
     speed2 = np.linalg.norm(v2_after)
-    ax.set_title(f'Impact: {angle_deg}°\\nSeparation: {angle_between:.0f}°', color='white', fontsize=9, fontweight='bold')
+    ax.set_title(f'Impact: {angle_deg}°\\\nSeparation: {angle_between:.0f}°', color='white', fontsize=9, fontweight='bold')
     ax.set_xlim(-2, 7)
     ax.set_ylim(-3, 4)
     ax.set_aspect('equal')

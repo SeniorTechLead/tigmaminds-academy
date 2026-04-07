@@ -284,8 +284,8 @@ fig.patch.set_facecolor('#1f2937')
 ax1.set_facecolor('#111827')
 ax1.fill_between(x, 0, mountain, color='#6b7280', alpha=0.6)
 ax1.plot(x, mountain, color='white', linewidth=1.5)
-ax1.annotate('WINDWARD\\n(wet)', xy=(-25, 500), color='#3b82f6', fontsize=11, fontweight='bold', ha='center')
-ax1.annotate('LEEWARD\\n(dry)', xy=(25, 500), color='#f59e0b', fontsize=11, fontweight='bold', ha='center')
+ax1.annotate('WINDWARD\\\n(wet)', xy=(-25, 500), color='#3b82f6', fontsize=11, fontweight='bold', ha='center')
+ax1.annotate('LEEWARD\\\n(dry)', xy=(25, 500), color='#f59e0b', fontsize=11, fontweight='bold', ha='center')
 ax1.annotate('<-- Wind', xy=(-40, 3000), color='#94a3b8', fontsize=10)
 ax1.set_ylabel('Elevation (m)', color='white')
 ax1.set_title('Orographic Precipitation Model', color='white', fontsize=13)
@@ -427,7 +427,7 @@ Population: only **4,000-6,500** remain in the wild across 12 countries. They ar
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
-categories = ['Cold\\ntolerance', 'Climbing\\nability', 'Sprint\\nspeed', 'Leap\\ndistance', 'Camouflage', 'Altitude\\ntolerance']
+categories = ['Cold\\\ntolerance', 'Climbing\\\nability', 'Sprint\\\nspeed', 'Leap\\\ndistance', 'Camouflage', 'Altitude\\\ntolerance']
 N = len(categories)
 
 cats = {

@@ -103,8 +103,8 @@ ax2.set_ylabel('Annual sustainable catch', color='white')
 ax2.set_title('Maximum Sustainable Yield (MSY)', color='white', fontsize=12)
 ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax2.tick_params(colors='gray')
-ax2.text(0.05, msy * 0.4, 'Under-fishing\\n(safe)', color='#22c55e', fontsize=10)
-ax2.text(0.25, msy * 0.4, 'Over-fishing\\n(collapse)', color='#ef4444', fontsize=10)
+ax2.text(0.05, msy * 0.4, 'Under-fishing\\\n(safe)', color='#22c55e', fontsize=10)
+ax2.text(0.25, msy * 0.4, 'Over-fishing\\\n(collapse)', color='#ef4444', fontsize=10)
 
 plt.tight_layout()
 plt.show()
@@ -198,7 +198,7 @@ ax2.tick_params(colors='gray')
 for name, obs in obstacles.items():
     if obs['mortality'] > 0:
         idx = np.argmin(np.abs(distance - obs['pos']))
-        ax2.annotate(f"{name}\\n-{obs['mortality']*100:.0f}%",
+        ax2.annotate(f"{name}\\\n-{obs['mortality']*100:.0f}%",
                      xy=(obs['pos'], survival[idx]),
                      xytext=(obs['pos']+20, survival[idx]+50),
                      color='#ef4444', fontsize=9,
@@ -537,7 +537,7 @@ ax2.set_title('Effort vs CPUE: Detecting Hyperstability', color='white', fontsiz
 ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax2.tick_params(colors='gray')
 
-ax2.annotate('CPUE declining with\\nincreasing effort\\n= OVERFISHING', xy=(130, cpue[15]),
+ax2.annotate('CPUE declining with\\\nincreasing effort\\\n= OVERFISHING', xy=(130, cpue[15]),
              xytext=(140, cpue[15]+3), color='#ef4444', fontsize=9)
 
 plt.tight_layout()
@@ -605,7 +605,7 @@ ax1.tick_params(colors='gray')
 ax1.axvline(2024, color='#f59e0b', linestyle=':', label='Now')
 
 # Sustainability metrics
-metrics = ['Feed\\nconversion', 'Water\\nuse', 'CO2\\nemissions', 'Land\\nuse', 'Antibiotic\\nuse']
+metrics = ['Feed\\\nconversion', 'Water\\\nuse', 'CO2\\\nemissions', 'Land\\\nuse', 'Antibiotic\\\nuse']
 wild_scores = [0, 2, 5, 0, 0]  # 0-10 (lower is better)
 aqua_scores = [4, 7, 3, 5, 6]
 

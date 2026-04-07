@@ -228,9 +228,9 @@ axes[0,1].legend(facecolor='#374151', edgecolor='#4b5563', labelcolor='white', f
 final_KE = KE[-1]; final_PE = PE[-1]; final_fric = W_friction[-1]
 total = final_KE + final_PE + final_fric
 sizes = [final_PE, final_fric, final_KE]
-labels = [f'Potential Energy\\n{final_PE/1000:.1f} kJ ({final_PE/total*100:.1f}%)',
-          f'Friction Losses\\n{final_fric/1000:.1f} kJ ({final_fric/total*100:.1f}%)',
-          f'Kinetic Energy\\n{final_KE/1000:.1f} kJ ({final_KE/total*100:.1f}%)']
+labels = [f'Potential Energy\\\n{final_PE/1000:.1f} kJ ({final_PE/total*100:.1f}%)',
+          f'Friction Losses\\\n{final_fric/1000:.1f} kJ ({final_fric/total*100:.1f}%)',
+          f'Kinetic Energy\\\n{final_KE/1000:.1f} kJ ({final_KE/total*100:.1f}%)']
 pie_colors = ['#10b981', '#f87171', '#f59e0b']
 axes[1,0].pie(sizes, labels=labels, colors=pie_colors, textprops={'color':'white', 'fontsize':9},
               startangle=90, labeldistance=1.2)
@@ -345,7 +345,7 @@ for i in range(n_ropes):
 # Resultant force
 ax.annotate('', xy=(total_Fx*0.005, total_Fy*0.005), xytext=(0, 0),
            arrowprops=dict(arrowstyle='->', color='white', lw=3))
-ax.text(8, -3, f'Resultant: {total_F/1000:.1f} kN\\nDirection: {pull_direction:.1f}°',
+ax.text(8, -3, f'Resultant: {total_F/1000:.1f} kN\\\nDirection: {pull_direction:.1f}°',
         color='white', fontsize=10, bbox=dict(facecolor='#374151', edgecolor='#4b5563', pad=5))
 
 ax.set_xlim(-5, 25); ax.set_ylim(-12, 12)
@@ -389,7 +389,7 @@ print("Force Resolution:")
 for i in range(n_ropes):
     print(f"  Rope {i+1}: angle={puller_angles[i]:>+5.0f}° | F={pull_forces[i]/1000:.1f} kN | "
           f"Fx={F_x[i]/1000:.2f} kN | Fy={F_y[i]/1000:.2f} kN")
-print(f"\\n  Total forward force: {total_Fx/1000:.2f} kN")
+print(f"\\\n  Total forward force: {total_Fx/1000:.2f} kN")
 print(f"  Total lateral force: {total_Fy/1000:.2f} kN (should be ~0)")
 print(f"  Rope sag (center rope): {sag:.2f} m")`,
       challenge: 'What happens if the rightmost rope breaks? Recalculate the resultant force and direction. How does the stone\'s trajectory change? Should the remaining teams adjust their positions?',
@@ -616,7 +616,7 @@ def bending_analysis(n_supports, L, w_per_m, h, b):
 
 w_per_m = weight / length  # load per meter
 
-print(f"\n{'Supports':>10} | {'Span':>6} | {'M_max':>8} | {'Stress':>8} | {'SF':>5} | {'Status':>10}")
+print(f"\\n{'Supports':>10} | {'Span':>6} | {'M_max':>8} | {'Stress':>8} | {'SF':>5} | {'Status':>10}")
 print("-" * 60)
 
 configs = [2, 3, 4, 5, 6, 8, 10]
@@ -685,7 +685,7 @@ plt.suptitle('Structural Analysis: Will the Stone Crack?', color='white', fontsi
 plt.tight_layout()
 plt.show()
 
-print(f"\\nMinimum rollers needed (safety factor > 2): {configs[next(i for i, sf in enumerate(sfs) if sf > 2)]}")`,
+print(f"\\\nMinimum rollers needed (safety factor > 2): {configs[next(i for i, sf in enumerate(sfs) if sf > 2)]}")`,
       challenge: 'What if the stone has a pre-existing crack at the center? Model how a crack reduces the effective cross-section and increases local stress. At what crack depth does the stone become unsafe?',
       successHint: 'You have performed structural analysis — the same calculations that civil engineers use for bridges, buildings, and dams. The insight that more support points reduce stress explains many engineering design choices.',
     },

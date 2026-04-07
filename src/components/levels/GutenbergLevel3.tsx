@@ -52,7 +52,7 @@ for y in [1450, 1455, 1460, 1470, 1480, 1490, 1500, 1510, 1520, 1540]:
     print(f"{y:<8} {n:>7} {cities:>7} {value:>13,} {titles:>11,}")
 
 # Compare linear vs network growth
-print("\\n=== Linear vs Network Value ===")
+print("\\\n=== Linear vs Network Value ===")
 print("If presses had no network effects (value = N):")
 for n in [10, 50, 100, 500, 1000]:
     linear = n
@@ -61,14 +61,14 @@ for n in [10, 50, 100, 500, 1000]:
     print(f"  {n:>4} presses: linear={linear:>6,}  network={network:>10,}  ratio={ratio:>6.0f}x")
 
 # Reed's law: group-forming networks scale as 2^N
-print("\\n=== Beyond Metcalfe: Reed's Law ===")
+print("\\\n=== Beyond Metcalfe: Reed's Law ===")
 print("If presses form specialised sub-networks (theology, science, law):")
 for n in [5, 10, 15, 20, 25]:
     metcalfe = n ** 2
     reed = min(2 ** n, 10**9)  # cap for display
     print(f"  {n:>2} presses: Metcalfe={metcalfe:>8,}  Reed={reed:>12,}")
 
-print("\\nReed's law grows so fast it becomes unrealistic beyond ~25 nodes.")
+print("\\\nReed's law grows so fast it becomes unrealistic beyond ~25 nodes.")
 print("In practice, not all possible sub-groups form — real network value")
 print("falls between Metcalfe (N^2) and Reed (2^N).")`,
       challenge: 'Not all connections are equal — a press in Venice (major trade hub) connects to more cities than one in a small town. Modify the model to weight nodes by their connectivity (degree). A "weighted Metcalfe" model: V = sum of (degree_i x degree_j) for all pairs. How does this change the value curve?',
@@ -138,7 +138,7 @@ print(f"Top max curvature: {np.max(k1):.2f} (at the tightest bend)")
 print(f"Bottom max curvature: {np.max(k2):.2f}")
 
 # ASCII rendering of the curve
-print("\\n=== ASCII Render ===")
+print("\\\n=== ASCII Render ===")
 grid = [[' ' for _ in range(40)] for _ in range(20)]
 for x, y in zip(np.concatenate([x1, x2]), np.concatenate([y1, y2])):
     col = int(x * 35) + 2
@@ -149,7 +149,7 @@ for row in grid:
     print('  ' + ''.join(row))
 
 # Compare font styles: different control points = different aesthetics
-print("\\n=== Font Style Comparison ===")
+print("\\\n=== Font Style Comparison ===")
 styles = {
     "Serif (Gutenberg-style)": [(0, 0), (0, 0.8), (1.0, 0.8), (1.0, 0)],
     "Sans-serif (modern)":     [(0, 0), (0.1, 0.9), (0.9, 0.9), (1.0, 0)],
@@ -163,7 +163,7 @@ for name, pts in styles.items():
     max_k = np.max(curvature(x, y))
     print(f"  {name:<28} length={length:.3f}  max curvature={max_k:.2f}")
 
-print("\\nMore curvature = tighter bends = more ink needed = bolder appearance")
+print("\\\nMore curvature = tighter bends = more ink needed = bolder appearance")
 print("Gutenberg's textura had very high curvature — dense, dark letterforms")`,
       challenge: 'Design the letter "O" using 4 cubic Bezier segments (one per quadrant). Each segment should connect smoothly to the next (tangent continuity: the direction at the end of one segment matches the start of the next). Calculate the total curve length and verify it approximates the circumference of an ellipse.',
       successHint: 'You just explored the mathematics behind every font on every screen in the world. Bezier curves — developed for car design — became the universal language of digital typography. Every time you read text on a screen, you\'re looking at thousands of Bezier curves rendered in real time.',
@@ -241,7 +241,7 @@ for ink in inks:
     print(f"{ink['name']:<24} {ink['visc']:>9.3f} {ink['st']*1000:>8.1f} {ca:>8.2f} {we:>8.2f} {quality:>10}")
 
 # Ink penetration depth over time
-print("\\n=== Ink Penetration into Paper (mm) ===")
+print("\\\n=== Ink Penetration into Paper (mm) ===")
 paper_porosity = 10  # micrometres — typical rag paper
 times_ms = [1, 5, 10, 50, 100, 500]
 
@@ -254,7 +254,7 @@ for ink in inks:
     row = f"{ink['name']:<24}" + "".join(f"{d:>6.3f}" for d in depths)
     print(row)
 
-print("\\nGutenberg's oil ink penetrated slowly — giving sharp edges.")
+print("\\\nGutenberg's oil ink penetrated slowly — giving sharp edges.")
 print("Water-based inks penetrate deeply and quickly — causing feathering.")
 print("Modern inkjet uses surfactants to control spread precisely.")`,
       challenge: 'Paper quality matters too. Model three papers: smooth vellum (porosity 2 um), rag paper (10 um), and cheap pulp (25 um). For Gutenberg\'s oil ink, calculate the penetration depth at 10 ms on each paper. Which paper gives the crispest print? Why did Gutenberg print some copies on vellum and others on paper?',
@@ -308,7 +308,7 @@ def censorship_game(n_presses, n_inspectors, n_violators,
 
 # Historical scenario: Europe circa 1550
 print("=== Censorship vs Distribution Game ===")
-print("Setting: 100 presses, 8 printing banned material\\n")
+print("Setting: 100 presses, 8 printing banned material\\\n")
 
 n_presses = 100
 n_violators = 8
@@ -327,7 +327,7 @@ for n_insp in [5, 10, 20, 30, 50, 75, 100]:
           f"{escapes:>7.1f} {result['censor_payoff']:>8.0f} {result['printer_payoff']:>9.0f}")
 
 # Find Nash equilibrium: where censor's marginal gain = marginal cost
-print("\\n=== Finding Nash Equilibrium ===")
+print("\\\n=== Finding Nash Equilibrium ===")
 best_censor = -float('inf')
 eq_inspectors = 0
 for n_insp in range(1, n_presses + 1):
@@ -345,7 +345,7 @@ print(f"Catch rate: {eq_result['p_catch']:.1%}")
 print(f"Books that escape: {n_violators - eq_result['expected_catches']:.1f} per month")
 
 # How network growth defeats censorship
-print("\\n=== Network Growth vs Censorship Capacity ===")
+print("\\\n=== Network Growth vs Censorship Capacity ===")
 for era, n_press, n_viol in [
     ("1460 (early)", 20, 2),
     ("1480 (growth)", 100, 10),
@@ -357,7 +357,7 @@ for era, n_press, n_viol in [
     print(f"  {era:<24} {n_press:>5} presses, {n_viol:>3} violators: "
           f"{escape_pct:.0f}% escape, censor payoff: {result['censor_payoff']:.0f}")
 
-print("\\nAs the network grew, censorship became a losing game —")
+print("\\\nAs the network grew, censorship became a losing game —")
 print("the cost of enforcement grew faster than the ability to fund it.")`,
       challenge: 'Add a "smuggling" option: printers can pay a cost to move operations to a different jurisdiction (beyond the censor\'s reach). How does the availability of "exit" change the equilibrium? This models why Geneva, Amsterdam, and Venice became printing capitals — they offered jurisdictional escape from censorship.',
       successHint: 'You modelled a real adversarial game with historical consequences. The same game-theoretic framework applies to modern content moderation (platforms vs policy violations), copyright enforcement (studios vs piracy), and cybersecurity (defenders vs attackers). The economics of enforcement vs distribution haven\'t changed since Gutenberg.',
@@ -433,7 +433,7 @@ for m in media:
     print(f"{m.name:<22}" + "".join(f"{c:>8}" for c in costs))
 
 # Average cost per copy
-print("\\n=== Average Cost Per Copy ===")
+print("\\\n=== Average Cost Per Copy ===")
 print(f"{'Technology':<22}" + "".join(f"{v:>8}" for v in volumes))
 print("-" * (22 + 8 * len(volumes)))
 
@@ -446,7 +446,7 @@ for m in media:
     print(f"{m.name:<22}" + "".join(f"{a:>8}" for a in avgs))
 
 # Time to reach 1000 people at different distances
-print("\\n=== Months to Reach 1,000 Readers ===")
+print("\\\n=== Months to Reach 1,000 Readers ===")
 distances = [100, 500, 1000, 5000]
 print(f"{'Technology':<22}" + "".join(f"{d:>7}km" for d in distances))
 print("-" * (22 + 9 * len(distances)))
@@ -464,7 +464,7 @@ for m in media:
     print(row)
 
 # Disruption index: how much cheaper/faster than predecessor
-print("\\n=== Disruption Index (vs predecessor) ===")
+print("\\\n=== Disruption Index (vs predecessor) ===")
 for i in range(1, len(media)):
     prev = media[i-1]
     curr = media[i]

@@ -264,7 +264,7 @@ std_error = std_density / np.sqrt(n_quadrats)
 ci_low = (mean_density - 1.96 * std_error) * total_area
 ci_high = (mean_density + 1.96 * std_error) * total_area
 
-print(f"\\nMean density: {mean_density:.2f} ± {std_error:.2f} plants/m²")
+print(f"\\\nMean density: {mean_density:.2f} ± {std_error:.2f} plants/m²")
 print(f"Estimated population: {estimated_pop:,.0f} lilies")
 print(f"95% confidence interval: {ci_low:,.0f} to {ci_high:,.0f} lilies")
 print(f"True density was: {true_mean_density} plants/m² ({true_mean_density * total_area:,.0f} expected)")`,

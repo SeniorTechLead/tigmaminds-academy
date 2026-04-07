@@ -74,7 +74,7 @@ flows = {
 }
 
 print("=== Roman Water Distribution Network ===")
-print(f"Total source supply: {total_demand*1000:.0f} L/s\\n")
+print(f"Total source supply: {total_demand*1000:.0f} L/s\\\n")
 
 # Kirchhoff check: junction balance
 print("Junction Balance Check (Kirchhoff's 1st Law):")
@@ -84,7 +84,7 @@ print(f"  Castellum: In = {castellum_in*1000:.1f} L/s, Out = {castellum_out*1000
       f"{'BALANCED' if abs(castellum_in - castellum_out) < 0.001 else 'IMBALANCED'}")
 
 # Head losses in each branch
-print(f"\\nHead Loss in Each Branch:")
+print(f"\\\nHead Loss in Each Branch:")
 print(f"{'Branch':<18} {'Flow (L/s)':>10} {'Head Loss (m)':>14}")
 print("-" * 44)
 for name, pipe in pipes.items():
@@ -94,7 +94,7 @@ for name, pipe in pipes.items():
 
 # Pressure at each district
 source_head = 50  # metres of head at source
-print(f"\\nPressure at Each District (source head = {source_head} m):")
+print(f"\\\nPressure at Each District (source head = {source_head} m):")
 main_loss = pipes["main"].head_loss(flows["main"])
 for district in ["north", "south", "east", "west"]:
     branch_loss = pipes[district].head_loss(flows[district])
@@ -104,7 +104,7 @@ for district in ["north", "south", "east", "west"]:
           f"Flow: {flows[district]*1000:.0f} L/s")
 
 # What if north branch is blocked?
-print("\\n=== Scenario: North Branch Blocked ===")
+print("\\\n=== Scenario: North Branch Blocked ===")
 blocked_north = demands["north"]
 redistributed = blocked_north / 3
 for d in ["south", "east", "west"]:
@@ -160,7 +160,7 @@ city_elev = elevations[-1]
 print(f"=== Aqueduct Route Optimisation ===")
 print(f"Source elevation: {source_elev:.0f} m | City elevation: {city_elev:.0f} m")
 print(f"Total drop available: {source_elev - city_elev:.0f} m over {x_km[-1]:.0f} km")
-print(f"Ideal gradient: {(source_elev - city_elev)/x_km[-1]:.1f} m/km\\n")
+print(f"Ideal gradient: {(source_elev - city_elev)/x_km[-1]:.1f} m/km\\\n")
 
 # Cost per km for different construction types
 COST_SURFACE = 10     # surface channel
@@ -202,7 +202,7 @@ for i in range(0, n_points - 1, 10):  # report every 10 segments
     print(f"{x_km[i]:>4.0f}-{x_km[j]:>4.0f} km {avg_terrain:>6.0f} m {avg_ideal:>6.0f} m "
           f"{seg_type:<10} {cost:>5.0f}")
 
-print(f"\\n=== Cost Summary ===")
+print(f"\\\n=== Cost Summary ===")
 for stype, length in segment_types.items():
     unit_cost = {"surface": COST_SURFACE, "tunnel": COST_TUNNEL, "bridge": COST_BRIDGE}[stype]
     print(f"  {stype.capitalize():<10} {length:>5.1f} km × {unit_cost:>3} = {length * unit_cost:>6.0f} units")
@@ -210,7 +210,7 @@ print(f"  Total cost: {total_cost:.0f} units")
 
 # Compare: what if we added 20% more distance to avoid tunnels?
 surface_only_cost = x_km[-1] * 1.2 * COST_SURFACE
-print(f"\\n=== Alternative: Contour-following route (+20% distance) ===")
+print(f"\\\n=== Alternative: Contour-following route (+20% distance) ===")
 print(f"  Length: {x_km[-1]*1.2:.0f} km all surface channel")
 print(f"  Cost: {surface_only_cost:.0f} units")
 print(f"  Savings vs direct route: {total_cost - surface_only_cost:.0f} units "
@@ -272,7 +272,7 @@ for s in sediments:
     print(f"{s['name']:<16} {s['d_mm']:>8.3f} mm {v_s:>10.6f} m/s {time_1m:>10.0f} sec")
 
 # Aqueduct sections with varying gradient
-print("\\n=== Sediment Transport Along Aqueduct ===")
+print("\\\n=== Sediment Transport Along Aqueduct ===")
 sections = [
     {"name": "Mountain source", "slope_m_per_km": 5.0, "width": 0.8, "depth": 0.5},
     {"name": "Valley bridge",   "slope_m_per_km": 0.5, "width": 1.2, "depth": 0.7},
@@ -301,7 +301,7 @@ for sec in sections:
     print(f"{sec['name']:<20} {v:>7.3f}m/s {statuses[0]:>8} {statuses[1]:>8} {statuses[2]:>8}")
 
 # Sedimentation rate over time
-print("\\n=== Channel Capacity Loss Over Time ===")
+print("\\\n=== Channel Capacity Loss Over Time ===")
 print("(Assuming 50 mg/L sediment load, 0.1 m³/s flow)")
 sediment_load = 50e-6  # kg/L = 50 mg/L
 flow_rate = 0.1        # m³/s
@@ -384,7 +384,7 @@ analysis_period = 500  # years
 discount_rates = [0.01, 0.03, 0.05, 0.08]
 
 print("=== Aqueduct vs Pipeline: Cost-Benefit Analysis ===")
-print(f"Analysis period: {analysis_period} years\\n")
+print(f"Analysis period: {analysis_period} years\\\n")
 
 # Annualised cost comparison
 print("Annualised Cost (capital + operating) at various discount rates:")
@@ -410,7 +410,7 @@ for name, sys in systems.items():
     print(row)
 
 # Cost per m³ delivered
-print(f"\\n=== Cost per 1000 m³ Delivered (at 3% discount rate) ===")
+print(f"\\\n=== Cost per 1000 m³ Delivered (at 3% discount rate) ===")
 r = 0.03
 for name, sys in systems.items():
     cash_flows = np.zeros(analysis_period)
@@ -426,7 +426,7 @@ for name, sys in systems.items():
     print(f"  {name:<25} NPV: {total_npv_cost:>8.0f}  Cost/1000m³: {cost_per_1000m3:>6.2f}")
 
 # Crossover analysis
-print(f"\\n=== Break-Even Analysis ===")
+print(f"\\\n=== Break-Even Analysis ===")
 print("Year when aqueduct becomes cheaper than pipeline (cumulative cost):")
 for r in [0.01, 0.03, 0.05]:
     aq_cumul = 5000
@@ -525,7 +525,7 @@ for s in scenarios:
     print(f"{s['name']:<36} {pb_water:>8.1f} {pb_blood:>8.1f} μg/dL {iq_loss:>6.1f} pts {risk:>10}")
 
 # Population-level impact
-print("\\n=== Population Impact on Rome (est. 1 million people) ===")
+print("\\\n=== Population Impact on Rome (est. 1 million people) ===")
 population = 1_000_000
 typical_pb = lead_dissolution(7.2, 150, 6)
 typical_blood = blood_lead_steady_state(typical_pb)
@@ -537,7 +537,7 @@ print(f"Average IQ reduction: {typical_iq:.1f} points")
 print(f"Population with blood Pb > 25 μg/dL (high risk): ~{population * 0.3:,.0f}")
 
 # Vitruvius was right — terracotta comparison
-print("\\n=== What If Vitruvius Had Won the Argument? ===")
+print("\\\n=== What If Vitruvius Had Won the Argument? ===")
 terracotta_pb = 2.0  # μg/L (ceramic leaches almost no lead)
 terra_blood = blood_lead_steady_state(terracotta_pb)
 terra_iq = iq_reduction(terra_blood)

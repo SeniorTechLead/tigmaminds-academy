@@ -228,7 +228,7 @@ ax.tick_params(colors='gray')
 # Plot 4: SA:V ratio across species
 ax = axes[1, 1]
 ax.set_facecolor('#111827')
-species = ['Mouse\\n(20g)', 'Cat\\n(4kg)', 'Human\\n(70kg)', 'Horse\\n(500kg)', 'Elephant\\n(5000kg)']
+species = ['Mouse\\\n(20g)', 'Cat\\\n(4kg)', 'Human\\\n(70kg)', 'Horse\\\n(500kg)', 'Elephant\\\n(5000kg)']
 masses = [0.02, 4, 70, 500, 5000]
 sav_ratios = [(3 * m / 1000)**(1/3) for m in masses]  # simplified
 sav_ratios = [m**(-1/3) * 6 for m in masses]  # cube approximation
@@ -511,7 +511,7 @@ def generate_wrinkle_pattern(size=50, n_centers=200, crack_width=0.3):
 # Generate patterns with different wrinkle densities
 sizes = [50, 50, 50]
 densities = [50, 200, 500]  # number of growth centers
-names = ['Young elephant\n(few wrinkles)', 'Adult elephant\n(moderate)', 'Old elephant\n(dense wrinkles)']
+names = ['Young elephant\\n(few wrinkles)', 'Adult elephant\\n(moderate)', 'Old elephant\\n(dense wrinkles)']
 
 fig, axes = plt.subplots(2, 3, figsize=(15, 10))
 fig.patch.set_facecolor('#1f2937')
@@ -536,7 +536,7 @@ for col, (n_centers, name) in enumerate(zip(densities, names)):
     ax = axes[0, col]
     ax.set_facecolor('#111827')
     ax.imshow(pattern, cmap='bone_r', interpolation='nearest')
-    ax.set_title(f'{name}\nCrack fraction: {crack_frac:.1%}', color='white', fontsize=10)
+    ax.set_title(f'{name}\\nCrack fraction: {crack_frac:.1%}', color='white', fontsize=10)
     ax.set_xticks([])
     ax.set_yticks([])
 
@@ -1261,7 +1261,7 @@ ax.set_xlim(-20, 20)
 ax.set_ylim(-20, 20)
 ax.set_xlabel('km', color='white')
 ax.set_ylabel('km', color='white')
-ax.set_title('Communication range map\\n(blue=dawn, red=noon)', color='white', fontsize=10)
+ax.set_title('Communication range map\\\n(blue=dawn, red=noon)', color='white', fontsize=10)
 ax.set_aspect('equal')
 ax.tick_params(colors='gray')
 

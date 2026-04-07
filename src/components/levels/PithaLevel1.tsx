@@ -112,11 +112,11 @@ ax.fill_between(temp_C, rate_normalized, alpha=0.15, color='#f59e0b')
 
 # Mark key zones
 zones = [
-    (20, 100, 'No browning\\n(water limited)', '#3b82f6', 0.15),
-    (100, 140, 'Minimal\\nreaction', '#22c55e', 0.15),
-    (140, 180, 'Maillard\\nsweet spot', '#f59e0b', 0.25),
-    (180, 220, 'Intense\\nbrowning', '#ef4444', 0.2),
-    (220, 250, 'Burning\\nzone', '#991b1b', 0.3),
+    (20, 100, 'No browning\\\n(water limited)', '#3b82f6', 0.15),
+    (100, 140, 'Minimal\\\nreaction', '#22c55e', 0.15),
+    (140, 180, 'Maillard\\\nsweet spot', '#f59e0b', 0.25),
+    (180, 220, 'Intense\\\nbrowning', '#ef4444', 0.2),
+    (220, 250, 'Burning\\\nzone', '#991b1b', 0.3),
 ]
 for start, end, label, color, alpha in zones:
     ax.axvspan(start, end, alpha=alpha, color=color)
@@ -273,7 +273,7 @@ for name, params in rice_types.items():
 
 # Mark key phases
 ax.axvspan(55, 70, alpha=0.1, color='#f59e0b')
-ax.text(62.5, 750, 'Gelatinization\\nzone', ha='center', color='#f59e0b', fontsize=9)
+ax.text(62.5, 750, 'Gelatinization\\\nzone', ha='center', color='#f59e0b', fontsize=9)
 
 ax.set_xlabel('Temperature (°C)', color='white')
 ax.set_ylabel('Viscosity (arbitrary units)', color='white')

@@ -67,7 +67,7 @@ for name, ev, bv in [("Centroid (Hz)", e[0], b[0]),
                       ("Zero-crossing", e[3], b[3])]:
     print(f"{name:<20} {ev:>10.1f} {bv:>10.1f}")
 
-print("\\n44,100 samples → 4 numbers. That's feature engineering.")`,
+print("\\\n44,100 samples → 4 numbers. That's feature engineering.")`,
       challenge: 'Add a third sound class: rain (broadband noise). Generate it with np.random.randn, compute its features, and compare. Does it overlap with elephant or bird in any feature dimension?',
       successHint: 'Feature engineering is where domain expertise meets data science. Knowing that elephant rumbles are infrasonic (below 20 Hz) tells you exactly which features will separate them. The best ML engineers are also domain experts.',
     },
@@ -186,7 +186,7 @@ for k in [1, 3, 5, 11, 21]:
     print(f"k={k:2d}  train={train_acc:.1%}  test={test_acc:.1%}"
           f"  {'← overfits' if k == 1 else '← best' if k == 5 else ''}")
 
-print("\\nk=1: memorizes noise. k=21: too smooth. k=5: sweet spot.")
+print("\\\nk=1: memorizes noise. k=21: too smooth. k=5: sweet spot.")
 print("The algorithm: find k nearest, let them vote. That's it.")`,
       challenge: 'Switch from Euclidean to Manhattan distance by changing the metric parameter. Does the decision boundary change? Which metric gives better test accuracy for this dataset?',
       successHint: 'k-NN is often the first algorithm you should try on a new problem. It gives you a baseline accuracy with minimal assumptions. If k-NN fails, the problem is likely in your features, not your classifier.',
@@ -373,10 +373,10 @@ acc = np.mean(preds == y)
 
 print(f"Learned weights: w1={w[0]:.3f}, w2={w[1]:.3f}, bias={b:.3f}")
 print(f"Accuracy: {acc:.1%}")
-print(f"\\nThe entire model is 3 numbers (2 weights + 1 bias).")
+print(f"\\\nThe entire model is 3 numbers (2 weights + 1 bias).")
 print(f"k-NN stored {len(X)*2} numbers for the same task.")
 print(f"That's the power of learning: compress data into weights.")
-print(f"\\nLevel 4 stacks many perceptrons → deep neural network.")`,
+print(f"\\\nLevel 4 stacks many perceptrons → deep neural network.")`,
       challenge: 'Generate the concentric circles dataset from the previous lesson and try to train the perceptron on it. It will fail — why? Then try adding a feature: x1^2 + x2^2 (the radius squared). The perceptron can now separate the circles. This is the kernel trick — transforming features to make them linearly separable.',
       successHint: 'You have gone from raw audio to spectral features, through train/test methodology, k-NN classification, decision boundaries, rigorous evaluation, and now the foundation of neural networks. Level 4 would take the perceptron and stack it into a deep network. You already understand the core mechanics. The rest is scale.',
     },

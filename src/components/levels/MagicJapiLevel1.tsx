@@ -196,7 +196,7 @@ ax2_twin.plot(heights, angles, color='#f59e0b', linewidth=2.5, linestyle='--', l
 
 # Mark our Japi
 ax2.plot(height, lateral_area, 'o', color='#ef4444', markersize=10, zorder=5)
-ax2.annotate(f'Our Japi\\n{lateral_area:.0f} cm²',
+ax2.annotate(f'Our Japi\\\n{lateral_area:.0f} cm²',
              xy=(height, lateral_area), xytext=(height + 8, lateral_area + 500),
              color='#ef4444', fontsize=9, arrowprops=dict(arrowstyle='->', color='#ef4444'))
 
@@ -649,7 +649,7 @@ ax.plot(angles, material / material.max(), color='#f59e0b', linewidth=2.5, label
 # Mark Japi angle
 japi_angle = 63.4
 ax.axvline(japi_angle, color='#a855f7', linewidth=2, linestyle='--')
-ax.text(japi_angle + 1, 0.5, f'Japi angle\\n{japi_angle}°', color='#a855f7', fontsize=9)
+ax.text(japi_angle + 1, 0.5, f'Japi angle\\\n{japi_angle}°', color='#a855f7', fontsize=9)
 
 ax.set_xlabel('Roof slope angle (°)', color='white')
 ax.set_ylabel('Relative value', color='white')

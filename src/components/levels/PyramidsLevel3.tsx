@@ -38,7 +38,7 @@ n_layers = 30
 layer_h = H / n_layers
 
 print("=== 2D Stress Profile — Great Pyramid Cross-Section ===")
-print(f"Height: {H}m | Base: {B}m | Density: {density} kg/m3\\n")
+print(f"Height: {H}m | Base: {B}m | Density: {density} kg/m3\\\n")
 
 print(f"{'Height (m)':>10} {'Width (m)':>10} {'Weight above (MN)':>18} {'Stress (kPa)':>14} {'% of limit':>10}")
 print("-" * 64)
@@ -73,7 +73,7 @@ for i in range(n_layers):
           f"{stress_kpa:>12.1f} {pct_limit:>8.1f}%{marker}")
 
 # Stress concentration at King's Chamber
-print("\\n=== Stress Concentration at King's Chamber ===")
+print("\\\n=== Stress Concentration at King's Chamber ===")
 kc_width = 5.2     # chamber width (m)
 kc_height = 5.8    # chamber height (m)
 kc_level = 43      # height from base (m)
@@ -102,7 +102,7 @@ print(f"Effective load-bearing width: {effective_width:.1f} m")
 print(f"Nominal stress: {nominal_stress:.0f} kPa")
 print(f"Peak stress at chamber corners: {peak_stress:.0f} kPa ({peak_stress/40000*100:.1f}% of limit)")
 print(f"Stress concentration factor: {scf * 1.8:.1f}x")
-print(f"\\nThe 5 relieving chambers reduce peak stress by distributing")
+print(f"\\\nThe 5 relieving chambers reduce peak stress by distributing")
 print(f"the load across a wider area above the King's Chamber.")`,
       challenge: 'The Grand Gallery (47 m long, 8.5 m tall, 2 m wide) creates an even larger void than the King\'s Chamber. Model its stress concentration. Why did the builders use a corbelled ceiling (stepped inward) instead of flat beams? (A corbelled ceiling distributes stress more gradually than a flat span.)',
       successHint: 'You performed a structural analysis of one of humanity\'s greatest engineering achievements. The same FEA principles apply to designing modern skyscrapers, bridges, and tunnels — dividing a complex structure into elements and calculating stress at each point to find where failure is most likely.',
@@ -137,7 +137,7 @@ alignments = {
     "Pyramid of Menkaure":   {"error_arcmin": 12.2, "date_bce": 2490},
 }
 
-print("=== Pyramid Alignment Analysis ===\\n")
+print("=== Pyramid Alignment Analysis ===\\\n")
 for name, data in alignments.items():
     err_deg = data["error_arcmin"] / 60
     # Probability of this accuracy by chance
@@ -152,10 +152,10 @@ combined_p = 1
 for data in alignments.values():
     combined_p *= 2 * (data["error_arcmin"] / 60) / 360
 print(f"Combined probability (all three by chance): {combined_p:.2e}")
-print(f"This is approximately 1 in {1/combined_p:.0f} — clearly intentional.\\n")
+print(f"This is approximately 1 in {1/combined_p:.0f} — clearly intentional.\\\n")
 
 # Model different alignment techniques
-print("=== Simulated Alignment Methods (10,000 trials each) ===\\n")
+print("=== Simulated Alignment Methods (10,000 trials each) ===\\\n")
 
 def simulate_alignment(method, n_trials=10000):
     """Simulate alignment errors for different techniques."""
@@ -201,7 +201,7 @@ for method_id, method_name in methods:
     p_within_5 = np.mean(np.abs(errors) < 5) * 100
     print(f"{method_name:<28} {median_abs:>10.1f}' {std:>7.1f}' {p_within_5:>12.1f}%")
 
-print("\\nThe simultaneous transit method best matches the observed accuracy.")
+print("\\\nThe simultaneous transit method best matches the observed accuracy.")
 print("It naturally cancels systematic errors through symmetry — a brilliant technique.")`,
       challenge: 'Precession of the equinoxes shifts the celestial pole over millennia. In 2560 BCE, Thuban was the pole star but was 2 degrees from the true pole. By 2000 CE, Polaris is within 0.7 degrees. How does the era affect pole-star alignment accuracy? Model both epochs.',
       successHint: 'You combined statistics, astronomy, and measurement science to analyse an ancient engineering achievement. This interdisciplinary approach — using quantitative methods to test archaeological hypotheses — is the foundation of archaeoastronomy, a field that reveals the scientific sophistication of ancient civilisations.',
@@ -259,7 +259,7 @@ mason_used = sum(current[i] for i in mason_tasks)
 mason_remaining = skilled_masons - mason_used
 
 print("=== Workforce Optimisation — Great Pyramid ===")
-print(f"Total workers: {total_workers:,} | Skilled masons: {skilled_masons:,}\\n")
+print(f"Total workers: {total_workers:,} | Skilled masons: {skilled_masons:,}\\\n")
 
 # Iterative bottleneck relief
 print("Starting from minimum staffing:")
@@ -290,7 +290,7 @@ for iteration in range(20):
     current[bottleneck_idx] += add
     remaining -= add
 
-print(f"\\nOptimised allocation (after bottleneck relief):")
+print(f"\\\nOptimised allocation (after bottleneck relief):")
 print(f"{'Task':<20} {'Workers':>8} {'Output':>10} {'Bottleneck?':>12}")
 print("-" * 52)
 throughput = evaluate_allocation(current)
@@ -299,7 +299,7 @@ for i, t in enumerate(tasks):
     is_bn = "<<< YES" if t["blocks_per_worker"] > 0 and abs(output - throughput) < 1 else ""
     print(f"  {t['name']:<20} {current[i]:>6} {output:>8.0f}/day {is_bn}")
 
-print(f"\\nOptimised throughput: {throughput:.0f} blocks/day")
+print(f"\\\nOptimised throughput: {throughput:.0f} blocks/day")
 print(f"Total workers used: {sum(current):,}")
 print(f"Blocks per year (300 days): {throughput * 300:,.0f}")
 print(f"Years for 2.3M blocks: {2_300_000 / (throughput * 300):.1f}")`,
@@ -393,7 +393,7 @@ final_heights = [r["final_height"] for r in results]
 final_casings = [r["final_casing"] for r in results]
 
 print("=== Pyramid Erosion Model — 5,000 Year Simulation ===")
-print(f"Original height: 146.5 m | Simulations: {len(results)}\\n")
+print(f"Original height: 146.5 m | Simulations: {len(results)}\\\n")
 
 print(f"After 5,000 years:")
 print(f"  Height — Median: {np.median(final_heights):.1f} m | "
@@ -403,7 +403,7 @@ print(f"  Casing — Median: {np.median(final_casings):.1f}% remaining")
 print(f"  Actual (today): ~0% (almost entirely stripped)")
 
 # Height over time
-print("\\n=== Height Trajectory (median across simulations) ===")
+print("\\\n=== Height Trajectory (median across simulations) ===")
 checkpoints = [0, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000]
 print(f"{'Year':>6} {'Era':>16} {'Height (m)':>12} {'Loss (m)':>10}")
 print("-" * 46)
@@ -418,7 +418,7 @@ for idx, year in enumerate(checkpoints):
         print(f"{year:>5} {era:>16} {median_h:>10.1f} {loss:>8.1f}")
 
 # Erosion rate by source
-print("\\n=== Erosion Contribution by Source ===")
+print("\\\n=== Erosion Contribution by Source ===")
 sources = [
     ("Wind abrasion", 0.03, "mm/year on exposed face"),
     ("Chemical weathering", 0.01, "mm/year (rain dissolution)"),
@@ -475,12 +475,12 @@ for angle in ramp_angles:
           f"force {pull_force:.0f}N ({workers} workers)")
 
 pyramid_volume = B**2 * H / 3
-print(f"\\nPyramid volume: {pyramid_volume/1e6:.1f}M m3")
+print(f"\\\nPyramid volume: {pyramid_volume/1e6:.1f}M m3")
 print(f"A 7-degree ramp uses {0.5 * (H/np.sin(np.radians(7))) * H * 10 / 1e6 / (pyramid_volume/1e6) * 100:.0f}% "
       f"as much material as the pyramid itself!")
 
 # Internal spiral ramp model
-print("\\n=== Houdin's Internal Spiral Ramp ===")
+print("\\\n=== Houdin's Internal Spiral Ramp ===")
 ramp_angle = 7  # degrees
 ramp_width = 2.0  # metres
 ramp_height = 2.5  # metres (clearance)
@@ -517,13 +517,13 @@ for h in levels:
 internal_volume = total_ramp_length * ramp_width * ramp_height
 external_7deg = 0.5 * (H / np.sin(np.radians(7))) * H * 10
 
-print(f"\\n=== Ramp Volume Comparison ===")
+print(f"\\\n=== Ramp Volume Comparison ===")
 print(f"External ramp (7 deg): {external_7deg:,.0f} m3")
 print(f"Internal ramp:         {internal_volume:,.0f} m3")
 print(f"Saving:                {(1 - internal_volume/external_7deg)*100:.0f}%")
 
 # Hybrid model: external ramp to 43m, internal above
-print("\\n=== Hybrid Strategy (Houdin's proposal) ===")
+print("\\\n=== Hybrid Strategy (Houdin's proposal) ===")
 switchover = 43  # metres
 ext_ramp_length = switchover / np.sin(np.radians(7))
 ext_ramp_vol = 0.5 * ext_ramp_length * switchover * 10
@@ -537,7 +537,7 @@ print(f"External ramp: ground to {switchover}m ({pct_below}% of pyramid volume)"
 print(f"  Ramp length: {ext_ramp_length:.0f}m | Volume: {ext_ramp_vol:,.0f} m3")
 print(f"Internal ramp: {switchover}m to {H}m ({100-pct_below}% of volume)")
 print(f"  Ramp volume: {internal_volume * 0.35:,.0f} m3 (upper section only)")
-print(f"\\nTotal ramp material: {ext_ramp_vol + internal_volume * 0.35:,.0f} m3")
+print(f"\\\nTotal ramp material: {ext_ramp_vol + internal_volume * 0.35:,.0f} m3")
 print(f"vs full external ramp: {external_7deg:,.0f} m3")
 print(f"Material saving: {(1 - (ext_ramp_vol + internal_volume*0.35)/external_7deg)*100:.0f}%")`,
       challenge: 'The corner turns are the hardest part of the internal ramp — the sledge must rotate 90 degrees in a cramped space. Model the geometry of a corner turn: what minimum turning radius is needed for a 2.5m sledge? How wide must the corner notch be? This is the most debated aspect of Houdin\'s theory.',

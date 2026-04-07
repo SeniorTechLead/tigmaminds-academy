@@ -429,11 +429,11 @@ for i, a in enumerate(fcc_atoms):
 
 fig, axes = plt.subplots(1, 3, figsize=(15, 5))
 draw_lattice(axes[0], sc_atoms, sc_bonds,
-             'Simple Cubic (SC)\n1 atom/cell, 52% packing', '#3498db')
+             'Simple Cubic (SC)\\n1 atom/cell, 52% packing', '#3498db')
 draw_lattice(axes[1], bcc_atoms, bcc_bonds,
-             'Body-Centered Cubic (BCC)\n2 atoms/cell, 68% packing', '#e74c3c')
+             'Body-Centered Cubic (BCC)\\n2 atoms/cell, 68% packing', '#e74c3c')
 draw_lattice(axes[2], fcc_atoms, fcc_bonds,
-             'Face-Centered Cubic (FCC)\n4 atoms/cell, 74% packing', '#2ecc71')
+             'Face-Centered Cubic (FCC)\\n4 atoms/cell, 74% packing', '#2ecc71')
 plt.suptitle('3D Crystal Lattices (Isometric Projection)')
 plt.tight_layout(); plt.show()
 print("SC: iron (alpha), polonium")

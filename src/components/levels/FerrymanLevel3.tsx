@@ -410,8 +410,8 @@ ax.set_title('Pressure on hull surface', color='white', fontsize=11)
 ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
 # Mark key points
-ax.annotate('Stagnation\\n(bow)', xy=(0, 1), fontsize=8, color='#ef4444', ha='center')
-ax.annotate('Max suction\\n(beam)', xy=(90, -3), fontsize=8, color='#3b82f6', ha='center')
+ax.annotate('Stagnation\\\n(bow)', xy=(0, 1), fontsize=8, color='#ef4444', ha='center')
+ax.annotate('Max suction\\\n(beam)', xy=(90, -3), fontsize=8, color='#3b82f6', ha='center')
 
 # Plot 4: Venturi effect at bridge piers
 ax = axes[1, 0]
@@ -920,10 +920,10 @@ cbar.ax.tick_params(colors='gray')
 
 # Mark Brahmaputra conditions
 ax.scatter(10, 3, c='#ef4444', s=150, zorder=5, edgecolors='white', linewidths=2)
-ax.annotate('Brahmaputra\\n(dry season)', (10, 3), textcoords="offset points",
+ax.annotate('Brahmaputra\\\n(dry season)', (10, 3), textcoords="offset points",
             xytext=(10, 10), color='#ef4444', fontsize=8)
 ax.scatter(15, 6, c='#f59e0b', s=150, zorder=5, edgecolors='white', linewidths=2)
-ax.annotate('Brahmaputra\\n(monsoon)', (15, 6), textcoords="offset points",
+ax.annotate('Brahmaputra\\\n(monsoon)', (15, 6), textcoords="offset points",
             xytext=(10, -15), color='#f59e0b', fontsize=8)
 
 ax.set_xlabel('River depth (m)', color='white')
@@ -1430,7 +1430,7 @@ hazards = [
     (100, 0, 'Sandbank', '#f59e0b', 30),
     (250, 50, 'Bridge piers', '#ef4444', 20),
     (250, -50, 'Vortex zone', '#ef4444', 25),
-    (400, -30, 'Confluence\\neddies', '#f59e0b', 35),
+    (400, -30, 'Confluence\\\neddies', '#f59e0b', 35),
 ]
 
 for x, y, name, color, size in hazards:

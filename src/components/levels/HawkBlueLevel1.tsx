@@ -57,7 +57,7 @@ for name, lift, w, thrust, drag in conditions:
     print(f"{name:<22} {lift:>7.1f} {w:>7.1f} {thrust:>7.2f} {drag:>7.2f} {vert:>10} {horiz:>10}")
 
 # Glide ratio calculation
-print(f"\\nGlide Ratio Calculation:")
+print(f"\\\nGlide Ratio Calculation:")
 for speed in [10, 15, 20, 25]:
     # Simplified drag model
     drag = 0.5 * 1.225 * speed**2 * 0.02 * 0.3  # rho * v² * Cd * A
@@ -104,13 +104,13 @@ print("THERMAL MODEL — PHAWNGPUI (BLUE MOUNTAIN)")
 print("=" * 55)
 
 # Temperature at different altitudes
-print("\\nAmbient temperature profile:")
+print("\\\nAmbient temperature profile:")
 for alt in range(0, 2500, 250):
     T = T_ground - lapse_rate * alt / 1000
     print(f"  {alt:5d}m: {T:5.1f}°C")
 
 # Thermal strength at different ground temperatures
-print("\\nThermal strength vs ground heating:")
+print("\\\nThermal strength vs ground heating:")
 print(f"{'Surface ΔT':>10} {'Rise speed':>11} {'Hawk climb':>11} {'Alt gain/min':>13}")
 print("-" * 50)
 
@@ -129,7 +129,7 @@ for delta_T in [1, 2, 3, 5, 8, 10]:
     print(f"{delta_T:>8}°C {rise_rate:>10.1f} m/s {hawk_climb:>10.1f} m/s {alt_per_min:>10.0f} m {status}")
 
 # Daily thermal cycle
-print("\\nDaily thermal cycle:")
+print("\\\nDaily thermal cycle:")
 hours = range(6, 19)
 for hour in hours:
     # Sun angle drives ground heating
@@ -194,7 +194,7 @@ print("HAWK AERODYNAMICS — BLUE MOUNTAIN")
 print("=" * 55)
 
 # Lift vs speed at different altitudes
-print("\\nMinimum speed for level flight:")
+print("\\\nMinimum speed for level flight:")
 for alt in [0, 500, 1000, 1500, 2000]:
     rho = air_density(alt)
     CL_max = 1.3
@@ -202,7 +202,7 @@ for alt in [0, 500, 1000, 1500, 2000]:
     print(f"  {alt:5d}m (ρ={rho:.3f}): v_min = {v_min:.1f} m/s ({v_min*3.6:.0f} km/h)")
 
 # Lift coefficient vs angle of attack
-print("\\nLift coefficient vs angle of attack:")
+print("\\\nLift coefficient vs angle of attack:")
 for alpha in range(-4, 20, 2):
     CL = lift_coeff(alpha)
     bar = "█" * int(max(CL, 0) * 20)
@@ -210,7 +210,7 @@ for alpha in range(-4, 20, 2):
     print(f"  α={alpha:>3}°: C_L = {CL:5.2f}  {bar}{status}")
 
 # Speed for minimum sink rate (best soaring speed)
-print("\\nOptimal soaring speeds at summit altitude:")
+print("\\\nOptimal soaring speeds at summit altitude:")
 rho = air_density(2000)
 for CL in [0.5, 0.8, 1.0, 1.3]:
     v = (2 * weight / (rho * wing_area * CL))**0.5
@@ -284,18 +284,18 @@ max_ld_idx = ld_ratios.index(max(ld_ratios))
 
 print("HAWK DRAG ANALYSIS")
 print("=" * 55)
-print(f"\\nBest glide speed: {speeds[max_ld_idx]:.1f} m/s ({speeds[max_ld_idx]*3.6:.0f} km/h)")
+print(f"\\\nBest glide speed: {speeds[max_ld_idx]:.1f} m/s ({speeds[max_ld_idx]*3.6:.0f} km/h)")
 print(f"Maximum L/D ratio: {max(ld_ratios):.1f}")
 print(f"Minimum drag speed: {speeds[min_drag_idx]:.1f} m/s")
 print(f"Minimum drag force: {min(d_total):.2f} N")
 
 # Glide ratio = L/D
 glide_ratio = max(ld_ratios)
-print(f"\\nGlide ratio: {glide_ratio:.0f}:1")
+print(f"\\\nGlide ratio: {glide_ratio:.0f}:1")
 print(f"From 1000m height, the hawk can glide {glide_ratio:.0f} km!")
 print(f"Sink rate at best glide: {weight / (max(ld_ratios) * mass):.2f} m/s")
 
-print(f"\\nDrag breakdown at key speeds:")
+print(f"\\\nDrag breakdown at key speeds:")
 print(f"{'Speed':>6} {'Parasitic':>10} {'Induced':>10} {'Total':>10} {'L/D':>6}")
 print("-" * 45)
 for i in range(0, len(speeds), 25):
@@ -341,7 +341,7 @@ total_distance = 200  # km
 
 thermal_strengths = [1.5, 2.5, 3.5, 5.0]
 
-print(f"\\nMigration distance: {total_distance} km")
+print(f"\\\nMigration distance: {total_distance} km")
 print(f"Glide ratio: {glide_ratio}:1, Sink rate: {sink_rate} m/s")
 print()
 print(f"{'Thermal':>8} {'Climb':>6} {'Alt/cycle':>10} {'Dist/cycle':>10} {'Cycles':>7} {'Time':>8}")
@@ -366,7 +366,7 @@ for w in thermal_strengths:
     print(f"{w:>8.1f} {net_climb:>6.1f} {alt_gained:>10.0f} {cycle_distance:>10.1f} {n_cycles:>7.0f} {total_time:>8.1f}")
 
 # Daily migration budget
-print("\\nDaily migration budget (8 hours of usable thermals):")
+print("\\\nDaily migration budget (8 hours of usable thermals):")
 for w in thermal_strengths:
     net_climb = w - sink_rate
     daily_km = (w - sink_rate) * 300 * glide_ratio / 1000 * (8 * 3600 / (300 + (w - sink_rate) * 300 * glide_ratio / (sink_rate * 1000) * 1000 / glide_speed))
@@ -380,7 +380,7 @@ for w in thermal_strengths:
 # Energy comparison: gliding vs flapping
 flap_speed = 12  # m/s
 flap_power = 15  # watts (measured for hawks)
-print(f"\\nEnergy comparison for {total_distance}km:")
+print(f"\\\nEnergy comparison for {total_distance}km:")
 flap_time = total_distance * 1000 / flap_speed / 3600
 flap_energy = flap_power * flap_time * 3600 / 1000
 print(f"  Flapping: {flap_time:.1f} hours, {flap_energy:.0f} kJ of energy")

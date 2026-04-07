@@ -64,7 +64,7 @@ print("=== Electron Shell Structure ===")
 for sym in ["Zn", "Ag"]:
     el = elements[sym]
     shells = el["config"].split("-")
-    print(f"\n{el['name']} (Z={el['number']}): {el['config']}")
+    print(f"\\n{el['name']} (Z={el['number']}): {el['config']}")
     for i, count in enumerate(shells):
         n = int(count)
         max_cap = 2 * (i + 1) ** 2  # max electrons per shell

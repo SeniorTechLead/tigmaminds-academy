@@ -187,11 +187,11 @@ plt.savefig('viscoelastic.png', dpi=100, facecolor='#1f2937')
 plt.show()
 
 print(f"Relaxation time τ = η/E = {eta}/{E:.0e} = {tau:.4f} s")
-print(f"\\nStress Relaxation (Maxwell):")
+print(f"\\\nStress Relaxation (Maxwell):")
 print(f"  Initial stress: {E * strain_0 / 1e6:.2f} MPa")
 print(f"  Stress at t=τ:  {E * strain_0 * np.exp(-1) / 1e6:.2f} MPa (37%)")
 print(f"  Stress at t=3τ: {E * strain_0 * np.exp(-3) / 1e6:.2f} MPa (5%)")
-print(f"\\nCreep (Kelvin-Voigt):")
+print(f"\\\nCreep (Kelvin-Voigt):")
 print(f"  Final strain: {stress_applied / E * 100:.1f}%")
 print(f"  At t=τ: {(stress_applied / E * (1-np.exp(-1))) * 100:.1f}% (63%)")`,
       challenge: 'Combine Maxwell and Kelvin elements to build a Standard Linear Solid model. This requires solving a 2nd-order ODE — how does it improve the fit?',
@@ -254,7 +254,7 @@ for ax, N, color in zip(axes, chain_lengths, colors):
     R_theory = 0.5 * np.sqrt(N)
     contour = N * 0.5
 
-    ax.set_title(f'N={N}, R={R:.1f}nm\\nContour={contour:.0f}nm', color='white', fontsize=10)
+    ax.set_title(f'N={N}, R={R:.1f}nm\\\nContour={contour:.0f}nm', color='white', fontsize=10)
     ax.set_aspect('equal')
     ax.legend(facecolor='#374151', labelcolor='white', fontsize=7)
 

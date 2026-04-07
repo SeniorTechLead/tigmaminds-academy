@@ -97,7 +97,7 @@ print(f"Bamboo flute (35 cm) fundamental frequency:")
 print(f"  At 10C: {f10:.1f} Hz")
 print(f"  At 30C: {f30:.1f} Hz")
 print(f"  Shift:  {f30 - f10:.1f} Hz ({(f30 - f10) / f10 * 100:.1f}%)")
-print(f"\\nThis is why Naga musicians tune their flutes to the ambient temperature.")`,
+print(f"\\\nThis is why Naga musicians tune their flutes to the ambient temperature.")`,
       challenge: 'Add CO2 (B = 1.41e5 Pa, rho = 1.98 kg/m^3) and hydrogen (B = 1.01e5 Pa, rho = 0.082 kg/m^3) to the bar chart. Which gas would make a flute sound highest in pitch?',
       successHint: 'Hydrogen has extremely low density, giving it a sound speed around 1100 m/s — about 3x faster than air. A flute filled with hydrogen would play about 3x higher in pitch. This is the physics behind the "squeaky voice" helium effect.',
     },
@@ -184,7 +184,7 @@ ax2.plot(L_range * 100, f1_closed, color='#f97316', linewidth=2, label='Closed-o
 for l in [30, 35, 40]:
     f = v_sound / (2 * l / 100)
     ax2.plot(l, f, 'o', color='#4ade80', markersize=8, zorder=5)
-    ax2.annotate(f'{l} cm\\n{f:.0f} Hz', xy=(l, f), fontsize=8, color='#4ade80',
+    ax2.annotate(f'{l} cm\\\n{f:.0f} Hz', xy=(l, f), fontsize=8, color='#4ade80',
                  xytext=(l + 2, f + 40))
 ax2.set_xlabel('Tube length (cm)', color='white')
 ax2.set_ylabel('Fundamental frequency (Hz)', color='white')
@@ -234,7 +234,7 @@ print("Bamboo flute waveguide summary (35 cm, 20 mm bore):")
 print(f"  Fundamental (open-open): {v_sound / (2 * 0.35):.1f} Hz")
 print(f"  First cutoff mode:       {waveguide_cutoff(0.020, v_sound):.0f} Hz")
 print(f"  Ratio cutoff/fundamental: {waveguide_cutoff(0.020, v_sound) / (v_sound / (2 * 0.35)):.0f}x")
-print(f"\\nOnly the plane wave mode matters for normal playing.")
+print(f"\\\nOnly the plane wave mode matters for normal playing.")
 print(f"The tube acts as a simple 1D resonator for all musical notes.")`,
       challenge: 'Model a tube with finger holes by computing the effective length when a hole is open (shortens the air column). Plot how the fundamental changes as you open holes progressively from the far end.',
       successHint: 'Each open finger hole acts approximately like a new open end for the tube. The effective length shortens, raising the pitch. This is exactly how a bamboo flute produces different notes — each finger position creates a different effective tube length.',
@@ -540,7 +540,7 @@ print("Room acoustics summary:")
 for name, rt60 in sorted(rt60_values.items(), key=lambda x: x[1]):
     category = "dead" if rt60 < 0.5 else "moderate" if rt60 < 1.5 else "reverberant" if rt60 < 2.5 else "echoey"
     print(f"  {name:<28s}  RT60 = {rt60:.2f}s  ({category})")
-print(f"\\nNaga morung: warm reverb ({rt60_values['Naga morung (wood hall)']:.2f}s) — suits sustained flute notes")
+print(f"\\\nNaga morung: warm reverb ({rt60_values['Naga morung (wood hall)']:.2f}s) — suits sustained flute notes")
 print(f"Open festival ground: almost dry — suits fast rhythmic drumming")`,
       challenge: 'Add audience absorption to the morung (30 seated people, each with ~0.5 sabins of absorption). How does this change the RT60? Why do concert halls sound different when empty vs. full?',
       successHint: 'Adding 30 people adds 15 sabins to the morung, reducing RT60 from ~1.77s to ~1.05s. Audiences are significant absorbers. This is why concert halls are tuned with seats that have similar absorption whether occupied or empty — so the acoustics do not change between rehearsal and performance.',
@@ -622,7 +622,7 @@ ax.set_xticklabels(just_names_short, fontsize=8, color='white')
 ax.set_ylabel('Deviation (cents)', color='white')
 ax.set_title('Just intonation vs equal temperament', color='white', fontsize=11)
 ax.axhline(0, color='gray', linewidth=0.5)
-ax.text(6, max(diffs) * 0.8, 'Green: <5 cents (inaudible)\\nYellow: 5-15 cents (subtle)\\nRed: >15 cents (noticeable)',
+ax.text(6, max(diffs) * 0.8, 'Green: <5 cents (inaudible)\\\nYellow: 5-15 cents (subtle)\\\nRed: >15 cents (noticeable)',
         fontsize=7, color='white', ha='center',
         bbox=dict(boxstyle='round', facecolor='#1f2937', edgecolor='gray'))
 
@@ -712,7 +712,7 @@ plt.show()
 print(f"Pentatonic scale from {f0} Hz (just intonation):")
 for name, ratio, freq in zip(penta_note_names, penta_just_ratios, penta_freqs):
     print(f"  {name:<12s}  ratio {ratio:<6.3f}  freq {freq:.1f} Hz")
-print(f"\\nThe pentatonic scale avoids semitone intervals,")
+print(f"\\\nThe pentatonic scale avoids semitone intervals,")
 print(f"making it universally consonant across all cultures.")
 print(f"Naga tribal music uses this same 5-note framework.")`,
       challenge: 'Implement the Pythagorean comma: stack 12 perfect fifths (each 3:2) and compare to 7 octaves (2^7). The mismatch shows why equal temperament was invented. How big is the difference in cents?',

@@ -45,7 +45,7 @@ reactants = {"KNO₃": 2, "C": 3, "S": 1}
 products = {"K₂S": 1, "CO₂": 3, "N₂": 1}
 
 print("=== Gunpowder Reaction Analysis ===")
-print("2KNO₃ + 3C + S → K₂S + 3CO₂ + N₂\\n")
+print("2KNO₃ + 3C + S → K₂S + 3CO₂ + N₂\\\n")
 
 # Mass balance
 reactant_mass = sum(n * molar_masses[r] for r, n in reactants.items())
@@ -57,7 +57,7 @@ for r, n in reactants.items():
     print(f"  {n} × {r}: {mass:.1f} g")
 print(f"  Total: {reactant_mass:.1f} g")
 
-print(f"\\nProduct masses:")
+print(f"\\\nProduct masses:")
 for p, n in products.items():
     mass = n * molar_masses[p]
     state = "gas" if p in ["CO₂", "N₂"] else "solid"
@@ -65,12 +65,12 @@ for p, n in products.items():
 print(f"  Total: {product_mass:.1f} g")
 
 # Mass balance check
-print(f"\\nMass balance: {reactant_mass:.1f} g → {product_mass:.1f} g "
+print(f"\\\nMass balance: {reactant_mass:.1f} g → {product_mass:.1f} g "
       f"({'✓ balanced' if abs(reactant_mass - product_mass) < 1 else '✗ unbalanced'})")
 
 # Oxygen from KNO₃
 o_from_kno3 = 2 * 3 * 16  # 2 molecules × 3 oxygen atoms × 16 g/mol
-print(f"\\nOxygen provided by KNO₃: {o_from_kno3} g")
+print(f"\\\nOxygen provided by KNO₃: {o_from_kno3} g")
 print(f"This is INTERNAL oxygen — no air needed!")
 
 # Gas volume at room temperature
@@ -78,14 +78,14 @@ gas_moles = products["CO₂"] + products["N₂"]  # 3 + 1 = 4 moles of gas
 gas_volume_L = gas_moles * 22.4  # litres at STP
 gas_volume_at_combustion = gas_volume_L * (2500 + 273) / 273  # at ~2500°C
 
-print(f"\\n=== Gas Production ===")
+print(f"\\\n=== Gas Production ===")
 print(f"Moles of gas produced: {gas_moles}")
 print(f"Volume at room temperature: {gas_volume_L:.0f} litres")
 print(f"Volume at combustion temp (~2500°C): {gas_volume_at_combustion:.0f} litres")
 print(f"Expansion ratio (solid → gas at temp): {gas_volume_at_combustion / (reactant_mass/1600 * 1000):.0f}×")
 
 # Traditional gunpowder ratio
-print(f"\\n=== Traditional vs Stoichiometric Ratio ===")
+print(f"\\\n=== Traditional vs Stoichiometric Ratio ===")
 traditional = {"KNO₃": 75, "C": 15, "S": 10}  # weight percent
 stoichiometric = {r: n * molar_masses[r] / reactant_mass * 100 for r, n in reactants.items()}
 
@@ -94,12 +94,12 @@ print("-" * 44)
 for comp in ["KNO₃", "C", "S"]:
     print(f"{comp:<10} {traditional[comp]:>12}% {stoichiometric[comp]:>16.1f}%")
 
-print(f"\\nThe traditional ratio (75/15/10) is close to stoichiometric")
+print(f"\\\nThe traditional ratio (75/15/10) is close to stoichiometric")
 print(f"but has slightly MORE oxidizer — ensuring complete combustion")
 print(f"of all the carbon and sulphur (no unburned fuel = max gas production).")
 
 # Compare with other propellants
-print(f"\\n=== Self-Oxidizing Propellants ===")
+print(f"\\\n=== Self-Oxidizing Propellants ===")
 propellants = [
     ("Black powder (gunpowder)", 3, 270, "9th century China"),
     ("Smokeless powder", 5, 250, "1886 (Vieille)"),
@@ -168,27 +168,27 @@ print(f"  Total gas: {total_gas_moles:.3f} moles")
 vol_room = ideal_gas_volume(total_gas_moles, room_temp_K, 101325)
 vol_hot = ideal_gas_volume(total_gas_moles, combustion_temp_K, 101325)
 
-print(f"\\nGas volume at room temperature (1 atm): {vol_room*1000:.1f} litres")
+print(f"\\\nGas volume at room temperature (1 atm): {vol_room*1000:.1f} litres")
 print(f"Gas volume at combustion temp (1 atm): {vol_hot*1000:.1f} litres")
 print(f"Expansion ratio: {vol_hot/vol_room:.0f}×")
 
 # Original solid volume
 solid_volume_m3 = 0.1 / 1600  # 100g at ~1600 kg/m³ density
 solid_volume_L = solid_volume_m3 * 1000
-print(f"\\nOriginal solid volume: {solid_volume_L:.4f} litres ({solid_volume_L*1e6:.0f} mm³)")
+print(f"\\\nOriginal solid volume: {solid_volume_L:.4f} litres ({solid_volume_L*1e6:.0f} mm³)")
 print(f"Total expansion (solid → hot gas): {vol_hot/solid_volume_m3:.0f}×")
 
 # Scenario analysis
-print(f"\\n=== Three Containment Scenarios ===")
+print(f"\\\n=== Three Containment Scenarios ===")
 
 # Scenario 1: Open air (flash)
-print(f"\\n1. OPEN AIR (firecracker without wrapper)")
+print(f"\\\n1. OPEN AIR (firecracker without wrapper)")
 print(f"   Gas expands freely → flash and pop")
 print(f"   Pressure: ~1 atm (ambient)")
 print(f"   Danger radius: ~0.5 m (noise/flash only)")
 
 # Scenario 2: Sealed container (bomb)
-print(f"\\n2. SEALED CONTAINER (firecracker)")
+print(f"\\\n2. SEALED CONTAINER (firecracker)")
 container_volumes = [1e-6, 10e-6, 100e-6, 1000e-6]  # m³
 
 print(f"   {'Container':>15} {'Pressure (atm)':>16} {'Pressure (psi)':>16} {'Effect'}")
@@ -203,7 +203,7 @@ for vol in container_volumes:
     print(f"   {vol_mL:>12.0f} mL {pressure_atm:>14.0f} {pressure_psi:>14.0f} {effect}")
 
 # Scenario 3: Gun barrel
-print(f"\\n3. GUN BARREL (tube, one open end)")
+print(f"\\\n3. GUN BARREL (tube, one open end)")
 barrel_diameter = 0.02  # 20 mm
 barrel_length = 0.5     # 500 mm
 barrel_area = np.pi * (barrel_diameter/2)**2
@@ -233,7 +233,7 @@ print(f"   Projectile acceleration: {acceleration:.0f} m/s² ({acceleration/9.81
 print(f"   Muzzle velocity: ~{muzzle_velocity:.0f} m/s ({muzzle_velocity*3.6:.0f} km/h)")
 
 # Same chemistry, different containment
-print(f"\\n=== Same 100g of Gunpowder, Different Results ===")
+print(f"\\\n=== Same 100g of Gunpowder, Different Results ===")
 results = [
     ("Open air", "Flash, pop, smoke", "Harmless beyond 1m"),
     ("Paper wrapper", "Firecracker bang", "Dangerous within 2m"),
@@ -345,7 +345,7 @@ def weapon_analysis(powder_mass_g, weapon_type):
 powder = 100  # grams
 
 print("=== Evolution of Gunpowder Weapons ===")
-print(f"All using {powder}g of gunpowder ({powder/1000*3:.0f} kJ total energy)\\n")
+print(f"All using {powder}g of gunpowder ({powder/1000*3:.0f} kJ total energy)\\\n")
 
 weapons = ["incendiary", "fire_lance", "bomb", "rocket", "cannon"]
 
@@ -358,7 +358,7 @@ for w in weapons:
           f"{result['velocity']:>8.0f} m/s {result['range']:>6.0f}m {result['destructive']}")
 
 # Energy efficiency comparison
-print(f"\\n=== Energy Efficiency ===")
+print(f"\\\n=== Energy Efficiency ===")
 total_energy = powder / 1000 * 3e6
 
 for w in weapons:
@@ -368,7 +368,7 @@ for w in weapons:
     print(f"{result['type']:<14} {efficiency:>5.0f}% {bar}")
 
 # Historical timeline
-print(f"\\n=== Timeline of Gunpowder Weapons ===")
+print(f"\\\n=== Timeline of Gunpowder Weapons ===")
 timeline = [
     ("~850 CE", "Gunpowder discovered", "China — alchemists seeking immortality"),
     ("~900 CE", "Fire arrows", "Bags of powder tied to arrows"),
@@ -388,7 +388,7 @@ for date, dev, sig in timeline:
     print(f"{date:<12} {dev:<28} {sig}")
 
 # The key insight at each step
-print(f"\\n=== The Engineering Insight at Each Step ===")
+print(f"\\\n=== The Engineering Insight at Each Step ===")
 insights = [
     ("Fire arrow → Fire lance", "AIM the flame in a direction"),
     ("Fire lance → Bomb", "CONTAIN the explosion for maximum blast"),
@@ -520,11 +520,11 @@ for kno3, c, s, label in ratios:
             best_gas = result['gas_moles']
             best_ratio = (kno3, c, s, label)
 
-print(f"\\nBest ratio: {best_ratio[0]}/{best_ratio[1]}/{best_ratio[2]} ({best_ratio[3]})")
+print(f"\\\nBest ratio: {best_ratio[0]}/{best_ratio[1]}/{best_ratio[2]} ({best_ratio[3]})")
 print(f"Traditional (75/15/10) is within 2% of stoichiometric optimum!")
 
 # Why the traditional ratio has extra carbon
-print(f"\\n=== Why 15% Carbon Instead of 13.3%? ===")
+print(f"\\\n=== Why 15% Carbon Instead of 13.3%? ===")
 print(f"Extra carbon serves two purposes:")
 print(f"  1. Ensures ALL KNO₃ is consumed (KNO₃ is the most expensive ingredient)")
 print(f"  2. The excess carbon burns with atmospheric oxygen AFTER the initial")
@@ -534,13 +534,13 @@ print(f"     reaction, producing additional heat and the characteristic black sm
 result_trad = gunpowder_performance(75, 15, 10)
 result_stoich = gunpowder_performance(74.8, 13.3, 11.9)
 
-print(f"\\nTraditional: excess carbon = {result_trad['excess_c']:.1f}g → produces smoke")
+print(f"\\\nTraditional: excess carbon = {result_trad['excess_c']:.1f}g → produces smoke")
 print(f"Stoichiometric: excess carbon = {result_stoich['excess_c']:.1f}g → less smoke")
 print(f"This is why 'smokeless powder' (1886) was revolutionary — ")
 print(f"it burned completely, leaving no visible residue on the battlefield.")
 
 # The 75/15/10 ratio across cultures
-print(f"\\n=== Same Ratio, Different Cultures ===")
+print(f"\\\n=== Same Ratio, Different Cultures ===")
 cultures = [
     ("China (850 CE)", 75, 15, 10, "Original discovery"),
     ("Arab world (1240 CE)", 75, 15, 10, "Hasan al-Rammah's recipe"),
@@ -553,7 +553,7 @@ print("-" * 55)
 for culture, k, c, s, note in cultures:
     print(f"{culture:<28} {k:>4}% {c:>3}% {s:>3}% {note}")
 
-print(f"\\nRemarkable: every culture that independently optimized")
+print(f"\\\nRemarkable: every culture that independently optimized")
 print(f"gunpowder arrived at approximately the same ratio.")
 print(f"This isn't coincidence — it's chemistry (stoichiometry).")`,
       challenge: 'The Corned Powder improvement (15th century) involved wetting the powder into a paste, forming it into granules, and drying. The grains burned more consistently than fine powder. Model this: if fine powder burns from the surface inward, and granular powder exposes more total surface area, how does grain size affect burn rate?',
@@ -604,7 +604,7 @@ gas_per_100g = 0.37  # moles
 
 print("=== Ideal Gas Law Applied to Gunpowder ===")
 print(f"PV = nRT")
-print(f"R = {R} J/(mol·K)\\n")
+print(f"R = {R} J/(mol·K)\\\n")
 
 # Different weapons, different chambers
 weapons = [
@@ -628,8 +628,8 @@ for name, powder_g, volume_m3, temp_K in weapons:
     print(f"{name:<20} {powder_g:>5} {volume_m3*1e6:>8.0f} {pressure_atm:>10.0f} {force_kn:>10.1f}")
 
 # Temperature effect
-print(f"\\n=== How Temperature Affects Pressure ===")
-print(f"100g powder in 500 mL chamber at different combustion temperatures:\\n")
+print(f"\\\n=== How Temperature Affects Pressure ===")
+print(f"100g powder in 500 mL chamber at different combustion temperatures:\\\n")
 
 n = gas_per_100g
 V = 500e-6  # 500 mL
@@ -643,7 +643,7 @@ for temp_c in [25, 500, 1000, 1500, 2000, 2500, 3000]:
     print(f"{temp_c:>8} {temp_k:>8} {p/101325:>14.0f}")
 
 # What determines combustion temperature?
-print(f"\\n=== Combustion Temperature of Different Mixtures ===")
+print(f"\\\n=== Combustion Temperature of Different Mixtures ===")
 powders = [
     ("Black powder (standard)", 2500, 3),
     ("Black powder (optimized)", 2700, 3.2),
@@ -658,7 +658,7 @@ for name, temp, energy in powders:
     print(f"{name:<35} {temp:>8} {energy:>12.1f}")
 
 # Real-world validation
-print(f"\\n=== Checking Against Real Firearms ===")
+print(f"\\\n=== Checking Against Real Firearms ===")
 real_weapons = [
     ("9mm pistol", 4, 12.5e-6, "~2,200 atm actual", 375),
     ("5.56 rifle", 25, 40e-6, "~3,600 atm actual", 940),
@@ -674,7 +674,7 @@ for name, powder, vol, actual, muzzle_v in real_weapons:
     p_calc = ideal_gas(n=n, V=vol, T=3273) / 101325  # 3000°C for smokeless
     print(f"{name:<16} {powder:>7} {vol*1e6:>9.1f} {p_calc:>10.0f} atm {actual:>16} {muzzle_v:>8} m/s")
 
-print(f"\\nThe ideal gas law gives reasonable estimates for real firearms!")
+print(f"\\\nThe ideal gas law gives reasonable estimates for real firearms!")
 print(f"Differences are due to non-ideal gas behavior at extreme pressures")
 print(f"and the complex dynamics of gas expansion in a barrel.")`,
       challenge: 'A "pipe bomb" (extremely dangerous — never attempt!) uses gunpowder in a sealed steel pipe. If the pipe withstands 50 atm before bursting, what mass of gunpowder in a 100 mL pipe would create 50 atm at combustion temperature? (Solve PV = nRT for n, then convert to mass.) This calculation shows why even small amounts of gunpowder are dangerous in sealed containers.',
@@ -759,7 +759,7 @@ results = technology_diffusion(civilizations, transfer_speed_km_year=25,
 
 print("=== Gunpowder Technology Diffusion ===")
 print(f"Origin: China, 850 CE")
-print(f"Transfer speed: ~25 km/year (Silk Road average)\\n")
+print(f"Transfer speed: ~25 km/year (Silk Road average)\\\n")
 
 print(f"{'Civilization':<20} {'Distance':>9} {'Received':>10} {'Adopted':>9} {'Optimized':>10}")
 print("-" * 60)
@@ -771,7 +771,7 @@ for name, data in results.items():
     print(f"{name:<20} {data['distance']:>7} km {r_year:>8.0f} {a_year:>7.0f} {o_year:>8.0f}")
 
 # Actual historical dates (for comparison)
-print(f"\\n=== Predicted vs Actual Dates ===")
+print(f"\\\n=== Predicted vs Actual Dates ===")
 actual = [
     ("China", 850, 850),
     ("Korea", 900, 950),
@@ -790,7 +790,7 @@ for name, pred_year, actual_year in actual:
     print(f"{name:<20} {predicted:>8.0f} {actual_year:>8} {error:>+10.0f}")
 
 # How each civilization used gunpowder differently
-print(f"\\n=== Adaptation by Civilization ===")
+print(f"\\\n=== Adaptation by Civilization ===")
 adaptations = [
     ("China", "Fireworks, rockets, fire lances", "Entertainment + battlefield pyrotechnics"),
     ("Mongol Empire", "Bombs, siege weapons", "Adapted for conquest and siege warfare"),
@@ -805,7 +805,7 @@ for civ, use, innovation in adaptations:
     print(f"{civ:<18} {use:<35} {innovation}")
 
 # The speed of technology transfer over time
-print(f"\\n=== Technology Transfer Speed Over Time ===")
+print(f"\\\n=== Technology Transfer Speed Over Time ===")
 transfers = [
     ("Gunpowder (850-1267)", 400, 8000, "Silk Road (camel)"),
     ("Printing (1455-1480)", 25, 3000, "Trade routes (ship/horse)"),
@@ -824,7 +824,7 @@ for name, years, km, medium in transfers:
     speed = km / years
     print(f"{name:<28} {years:>4} {km:>8,} {speed:>10,.0f} {medium}")
 
-print(f"\\nTechnology transfer speed has increased by ~1,000,000× over 1,200 years.")
+print(f"\\\nTechnology transfer speed has increased by ~1,000,000× over 1,200 years.")
 print(f"Gunpowder: 20 km/year. Smartphones: 5,000 km/year.")
 print(f"The internet makes the next technology transfer essentially instantaneous.")`,
       challenge: 'Model the spread of AI (Large Language Models) starting from 2022. What is the effective "transfer speed"? (Essentially instantaneous — the same day a model is released, it\'s available worldwide.) How does this compare with gunpowder? What are the implications of technology transfer at light speed?',
@@ -916,14 +916,14 @@ for tech in technologies:
     print(f"  {tech['name']} (discovered {tech['year']})")
     print(f"{'='*60}")
 
-    print(f"\\n  Beneficial applications:")
+    print(f"\\\n  Beneficial applications:")
     total_benefit = 0
     for app, score in tech["beneficial"]:
         bar = "█" * score
         print(f"    {app:<35} [{score}/10] {bar}")
         total_benefit += score
 
-    print(f"\\n  Harmful applications:")
+    print(f"\\\n  Harmful applications:")
     total_harm = 0
     for app, score in tech["harmful"]:
         bar = "▓" * score
@@ -931,7 +931,7 @@ for tech in technologies:
         total_harm += score
 
     ratio = total_benefit / total_harm
-    print(f"\\n  Benefit/Harm ratio: {ratio:.2f}")
+    print(f"\\\n  Benefit/Harm ratio: {ratio:.2f}")
     print(f"  Governance: {tech['governance']}")
     print()
 

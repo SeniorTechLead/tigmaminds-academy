@@ -413,7 +413,7 @@ for name in names:
           f"{p['trees']} trees")
 print(f"  {'TOTAL':8s}: {total_c_30:6.1f} tonnes C | "
       f"{total_co2_30:7.1f} tonnes CO2")
-print(f"\\nEquivalent to taking {total_co2_30/(CAR_CO2_YEAR/1000):.0f} "
+print(f"\\\nEquivalent to taking {total_co2_30/(CAR_CO2_YEAR/1000):.0f} "
       f"cars off the road for a year")`,
       challenge: 'Add below-ground carbon: roots store an additional 20-30% of above-ground biomass as carbon. Add this "root factor" (1.25x for most species) and recalculate totals. How much does including roots change the car-offset number?',
       successHint: 'You can now translate tree growth into climate impact. The conversion chain — biomass to carbon to CO2 — is exactly what carbon offset programs use to calculate credits. Every tree in Junali\'s forest has a measurable, quantifiable impact on atmospheric CO2.',
@@ -723,7 +723,7 @@ ax.set_title('30-Year Total by Scenario', color='white',
 ax.tick_params(colors='gray', labelsize=10)
 for bar, val, cars in zip(bars, co2_30, cars_30):
     ax.text(bar.get_x() + bar.get_width()/2, val + 2,
-            f'{val:.0f}t CO2\\n({cars:.0f} cars)',
+            f'{val:.0f}t CO2\\\n({cars:.0f} cars)',
             ha='center', color='white', fontsize=11,
             fontweight='bold')
 
@@ -757,7 +757,7 @@ for label, sc in scenarios.items():
     cars = co2 / CAR_CO2_YEAR
     trees = sum(sc['tree_counts'].values())
     h = sc['shannon'][30]
-    print(f"\\n  {label}:")
+    print(f"\\\n  {label}:")
     print(f"    Trees planted: {trees}")
     print(f"    CO2 removed (30 yr): {co2:.0f} tonnes")
     print(f"    Cars offset: {cars:.0f} per year")
@@ -767,13 +767,13 @@ mixed = scenarios['Mixed (Junali)']
 sisoo = scenarios['Sisoo only']
 advantage = (mixed['total_co2'][30] / sisoo['total_co2'][30]
              - 1) * 100
-print(f"\\nMixed forest advantage over monoculture: "
+print(f"\\\nMixed forest advantage over monoculture: "
       f"+{advantage:.0f}% more CO2 captured")
-print(f"\\nValidation: peak annual rate "
+print(f"\\\nValidation: peak annual rate "
       f"{max(np.diff(mixed['total_co2'])):.1f} t CO2/ha/yr")
 print(f"Published range: 5-15 t CO2/ha/yr for tropical "
       f"reforestation")
-print(f"\\nJunali planted one tree a day. Her instinct to mix")
+print(f"\\\nJunali planted one tree a day. Her instinct to mix")
 print(f"species was scientifically optimal: mixed forests")
 print(f"capture more carbon AND support more biodiversity.")`,
       challenge: 'Add a fifth scenario: "Junali + climate change" where growth rates decline by 1% per year due to rising temperatures and unpredictable rainfall. How much less carbon does the forest store over 30 years? At what point does climate change erase the advantage of the mixed-species strategy?',

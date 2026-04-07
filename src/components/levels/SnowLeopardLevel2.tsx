@@ -56,13 +56,13 @@ zones = [
 ax1.set_facecolor('#111827')
 for lo, hi, name, color, species in zones:
     ax1.barh(0, 1, bottom=lo, height=hi-lo, color=color, alpha=0.7, edgecolor='white', linewidth=0.5)
-    ax1.text(0.5, (lo+hi)/2, f'{name}\\n{lo}-{hi}m', ha='center', va='center',
+    ax1.text(0.5, (lo+hi)/2, f'{name}\\\n{lo}-{hi}m', ha='center', va='center',
              color='white', fontsize=8, fontweight='bold')
 
 # Snow leopard range
 ax1.axhline(3500, color='white', linestyle='--', linewidth=1.5)
 ax1.axhline(5500, color='white', linestyle='--', linewidth=1.5)
-ax1.annotate('Snow leopard\\nrange', xy=(0.85, 4500), color='white', fontsize=8,
+ax1.annotate('Snow leopard\\\nrange', xy=(0.85, 4500), color='white', fontsize=8,
              fontweight='bold', ha='center')
 
 ax1.set_xlim(0, 1)
@@ -161,7 +161,7 @@ ax1.plot(altitudes / 1000, resp, color='#ef4444', linewidth=2, label='Respiratio
 ax1.fill_between(altitudes / 1000, photo, resp, where=photo > resp, alpha=0.15, color='#22c55e', label='Surplus (growth)')
 ax1.fill_between(altitudes / 1000, photo, resp, where=photo <= resp, alpha=0.15, color='#ef4444', label='Deficit (death)')
 ax1.axvline(treeline_alt / 1000, color='#f59e0b', linestyle='--', linewidth=2)
-ax1.annotate(f'Treeline\\n{treeline_alt:.0f}m ({treeline_temp:.1f}°C)', xy=(treeline_alt / 1000, 10),
+ax1.annotate(f'Treeline\\\n{treeline_alt:.0f}m ({treeline_temp:.1f}°C)', xy=(treeline_alt / 1000, 10),
              xytext=(treeline_alt / 1000 + 0.3, 14), color='#f59e0b', fontsize=10, fontweight='bold',
              arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 ax1.set_ylabel('Carbon flux (arbitrary units)', color='white')
@@ -250,8 +250,8 @@ ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8
 ax1.tick_params(colors='gray')
 
 # Annotate zones
-ax1.annotate('ABLATION ZONE\\n(net melting)', xy=(2, 4600), color='#ef4444', fontsize=9, fontweight='bold')
-ax1.annotate('ACCUMULATION ZONE\\n(net snowfall)', xy=(7, 7200), color='#3b82f6', fontsize=9, fontweight='bold')
+ax1.annotate('ABLATION ZONE\\\n(net melting)', xy=(2, 4600), color='#ef4444', fontsize=9, fontweight='bold')
+ax1.annotate('ACCUMULATION ZONE\\\n(net snowfall)', xy=(7, 7200), color='#3b82f6', fontsize=9, fontweight='bold')
 
 # Mass balance
 ax2 = axes[1]
@@ -428,7 +428,7 @@ for (name, warming), color in zip(scenarios.items(), colors_scen):
     ax1.plot(local_warming, altitudes / 1000, color=color, linewidth=2, label=name)
 
 ax1.axhspan(3.5, 5.5, alpha=0.1, color='#a855f7')
-ax1.annotate('Snow leopard\\nhabitat', xy=(5, 4.5), color='#a855f7', fontsize=9, fontweight='bold')
+ax1.annotate('Snow leopard\\\nhabitat', xy=(5, 4.5), color='#a855f7', fontsize=9, fontweight='bold')
 ax1.set_xlabel('Local warming (°C)', color='white')
 ax1.set_ylabel('Altitude (km)', color='white')
 ax1.set_title('Elevation-Dependent Warming', color='white', fontsize=13)

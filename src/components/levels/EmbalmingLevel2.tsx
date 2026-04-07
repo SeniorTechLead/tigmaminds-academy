@@ -83,7 +83,7 @@ print("longer — this is why embalmers removed organs first.")
 print("Diffusion time scales as thickness² (Fick's second law).")
 
 # Verify the square law
-print("\\n=== Thickness² Scaling Verification ===")
+print("\\\n=== Thickness² Scaling Verification ===")
 for thick in [1.0, 2.0, 4.0, 8.0]:
     days, _ = fick_diffusion_1d(thick, 0.5, 75, target)
     ratio = days / (thick**2)
@@ -165,7 +165,7 @@ scenarios = [
 ]
 
 print("=== Autolysis vs Desiccation Race ===")
-print("Tracking protein remaining in muscle tissue over 120 hours\\n")
+print("Tracking protein remaining in muscle tissue over 120 hours\\\n")
 
 for name, water_fn in scenarios:
     result = autolysis_simulation(100.0, water_fn, hours=120)
@@ -239,7 +239,7 @@ for t in terpenes:
           f"{t['half_life_days']:>7} {t['antibac_score']:>7.1f} {t['seal_score']:>5.1f}")
 
 # Model effectiveness over time
-print("\\n=== Resin Mixture Effectiveness Over Time ===")
+print("\\\n=== Resin Mixture Effectiveness Over Time ===")
 time_points = [0, 30, 90, 365, 1000, 10000, 100000]  # days
 
 print(f"{'Time':<12}", end="")
@@ -264,7 +264,7 @@ for metric_name, metric_key in [("Antibacterial", "antibac_score"), ("Sealing", 
     print()
 
 # Isoprene rule verification
-print("\\n=== Isoprene Rule Verification ===")
+print("\\\n=== Isoprene Rule Verification ===")
 print("All terpenes are built from 5-carbon isoprene (C5H8) units:")
 for t in terpenes:
     units = t["C"] // 5
@@ -332,7 +332,7 @@ for o in organs:
           f"{o['enzyme']:<12} {o['bacteria']}")
 
 # Compare treatment timing
-print("\\n=== Effect of Treatment Timing on Preservation ===")
+print("\\\n=== Effect of Treatment Timing on Preservation ===")
 print(f"{'Organ':<14} {'No treat':>10} {'At 2hr':>10} {'At 6hr':>10} {'At 12hr':>10} {'At 24hr':>10}")
 print("-" * 64)
 
@@ -353,7 +353,7 @@ print("Critical window: intestines must be treated within 2-6 hours")
 print("for acceptable preservation. Liver and lungs allow more time.")
 
 # Total body decomposition with vs without evisceration
-print("\\n=== Body Preservation: Eviscerated vs Intact ===")
+print("\\\n=== Body Preservation: Eviscerated vs Intact ===")
 body_mass = 70000  # grams
 organ_mass = sum(o["mass_g"] for o in organs)
 k_body_intact = 0.015     # body decomposes slower (organs sealed inside)
@@ -404,7 +404,7 @@ reference_db = [
 present_compounds = [0, 3, 4, 5, 6, 7, 9]  # indices into reference_db
 
 print("=== Simulated GC-MS Analysis of Mummy Resin ===")
-print("Sample: Chest cavity resin, 18th Dynasty (~1350 BCE)\\n")
+print("Sample: Chest cavity resin, 18th Dynasty (~1350 BCE)\\\n")
 
 # Generate chromatogram
 print("--- Gas Chromatogram (Total Ion Current) ---")
@@ -421,7 +421,7 @@ for idx in present_compounds:
     print(f"{rt_observed:>8.1f} {intensity:>10.0f}   Peak {len(detected)}")
 
 # Mass spectrum identification
-print("\\n--- Mass Spectral Identification ---")
+print("\\\n--- Mass Spectral Identification ---")
 print(f"{'Peak':>5} {'RT':>6} {'Base m/z':>9} {'Key Fragments':<24} {'Match':<28} {'Source'}")
 print("-" * 88)
 
@@ -434,7 +434,7 @@ for i, det in enumerate(detected):
           f"{ref['name']:<28} {ref['class']}")
 
 # Summary interpretation
-print("\\n=== Chemical Interpretation ===")
+print("\\\n=== Chemical Interpretation ===")
 classes_found = set(reference_db[idx]["class"] for idx in present_compounds)
 print(f"Compound classes identified: {len(classes_found)}")
 for cls in sorted(classes_found):

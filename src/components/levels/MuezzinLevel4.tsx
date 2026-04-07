@@ -561,7 +561,7 @@ axes[1,0].legend(fontsize=9, loc='upper right')
 axes[1,0].grid(alpha=0.3)
 
 # Time-of-day schedule with volume adjustment
-prayer_times = ['Fajr\\n4:30', 'Dhuhr\\n12:30', 'Asr\\n15:30', 'Maghrib\\n18:30', 'Isha\\n20:00']
+prayer_times = ['Fajr\\\n4:30', 'Dhuhr\\\n12:30', 'Asr\\\n15:30', 'Maghrib\\\n18:30', 'Isha\\\n20:00']
 base_volume = [0.5, 1.0, 0.9, 0.8, 0.7]  # volume multiplier
 ambient_noise = [30, 55, 50, 45, 40]  # typical ambient dB
 
@@ -693,7 +693,7 @@ axes[0,2].axhline(day_limit, color='#10b981', linewidth=1.5, linestyle='--', lab
 axes[0,2].axhline(night_limit, color='#f59e0b', linewidth=1.5, linestyle='--', label=f'Night: {night_limit} dBA')
 axes[0,2].axhline(ambient_night, color='#ef4444', linewidth=1, linestyle=':', alpha=0.5)
 axes[0,2].axvline(nearest_building, color='white', linewidth=1, linestyle=':', alpha=0.3)
-axes[0,2].text(nearest_building + 5, 85, 'Nearest\\nbuilding', color='white', fontsize=10)
+axes[0,2].text(nearest_building + 5, 85, 'Nearest\\\nbuilding', color='white', fontsize=10)
 axes[0,2].set_xlabel('Distance (m)', fontsize=10)
 axes[0,2].set_ylabel('Level (dBA)', fontsize=10)
 axes[0,2].set_title('Compliance Check', fontsize=12)
@@ -748,7 +748,7 @@ axes[1,1].legend(fontsize=10)
 axes[1,1].grid(alpha=0.3)
 
 # 6. Design scorecard
-categories = ['Interior\\nRT60', 'Day\\ncompliance', 'Night\\ncompliance', 'Day\\ncoverage', 'Night\\ncoverage']
+categories = ['Interior\\\nRT60', 'Day\\\ncompliance', 'Night\\\ncompliance', 'Day\\\ncoverage', 'Night\\\ncoverage']
 # Calculate scores (0-100)
 level_at_boundary = total_source - 20*np.log10(nearest_building) - 0.005*nearest_building
 scores = [

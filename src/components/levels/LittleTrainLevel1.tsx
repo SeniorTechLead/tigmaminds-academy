@@ -48,7 +48,7 @@ ax1.fill_between(1/gradient_vals, force, alpha=0.1, color='#22c55e')
 for grad in gradients:
     f = mass * g * grad / 1000
     ax1.plot(1/grad, f, 'o', color='#f59e0b', markersize=8)
-    ax1.annotate(f'1-in-{1/grad:.0f}\\n{f:.1f} kN', xy=(1/grad, f),
+    ax1.annotate(f'1-in-{1/grad:.0f}\\\n{f:.1f} kN', xy=(1/grad, f),
                  xytext=(1/grad + 3, f + 2), color='#f59e0b', fontsize=8)
 
 # Direct lift force
@@ -145,7 +145,7 @@ conditions = [
 for mu, label, color in conditions:
     grad = 1/mu
     ax1.plot(mu, grad, 'o', color=color, markersize=10)
-    ax1.annotate(f'{label}\\nμ={mu}, 1-in-{grad:.0f}', xy=(mu, grad),
+    ax1.annotate(f'{label}\\\nμ={mu}, 1-in-{grad:.0f}', xy=(mu, grad),
                  xytext=(mu + 0.02, grad + 5), color=color, fontsize=9,
                  arrowprops=dict(arrowstyle='->', color=color))
 
@@ -230,13 +230,13 @@ import matplotlib.pyplot as plt
 coal_energy = 100  # start with 100 units
 
 losses = {
-    'Exhaust heat\\n(hot steam/gas)': 45,
-    'Radiation\\n(boiler/firebox)': 15,
-    'Incomplete\\ncombustion': 12,
-    'Mechanical\\nfriction': 5,
-    'Auxiliary\\nsystems': 3,
-    'Useful work\\n(wheels)': 8,
-    'Condenser\\nloss': 12,
+    'Exhaust heat\\\n(hot steam/gas)': 45,
+    'Radiation\\\n(boiler/firebox)': 15,
+    'Incomplete\\\ncombustion': 12,
+    'Mechanical\\\nfriction': 5,
+    'Auxiliary\\\nsystems': 3,
+    'Useful work\\\n(wheels)': 8,
+    'Condenser\\\nloss': 12,
 }
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 6))
@@ -298,7 +298,7 @@ ax2.plot([v12[0], v12[0]], [P_exhaust, P_admission], color='#22c55e', linewidth=
 ax2.fill_between(np.concatenate([v12, v23]),
                  np.concatenate([p12, p23]),
                  P_exhaust, alpha=0.15, color='#f59e0b')
-ax2.annotate('WORK\\n(shaded area)', xy=(0.5, 5), color='#f59e0b', fontsize=11, fontweight='bold', ha='center')
+ax2.annotate('WORK\\\n(shaded area)', xy=(0.5, 5), color='#f59e0b', fontsize=11, fontweight='bold', ha='center')
 
 ax2.set_xlabel('Volume', color='white')
 ax2.set_ylabel('Pressure (atm)', color='white')

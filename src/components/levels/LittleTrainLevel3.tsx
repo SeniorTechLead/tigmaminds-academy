@@ -43,7 +43,7 @@ ax1.fill_between(T_hot - 273, real_steam, carnot_eff, alpha=0.1, color='#ef4444'
 ax1.axhline(35, color='#3b82f6', linewidth=1.5, linestyle='--', label='Diesel engine')
 ax1.axhline(90, color='#22c55e', linewidth=1.5, linestyle='--', label='Electric motor')
 ax1.axvline(200, color='#f59e0b', linewidth=1, linestyle=':', alpha=0.5)
-ax1.text(205, 5, 'Typical boiler\\n200°C', color='#f59e0b', fontsize=8)
+ax1.text(205, 5, 'Typical boiler\\\n200°C', color='#f59e0b', fontsize=8)
 ax1.set_xlabel('Hot-side temperature (°C)', color='white')
 ax1.set_ylabel('Efficiency (%)', color='white')
 ax1.set_title('Thermodynamic Efficiency Limits', color='white', fontsize=12)
@@ -52,7 +52,7 @@ ax1.tick_params(colors='gray')
 
 # Energy flow Sankey-style bar chart
 ax2.set_facecolor('#111827')
-stages = ['Coal\\n(chemical)', 'Boiler\\n(thermal)', 'Cylinder\\n(pressure)', 'Wheels\\n(kinetic)']
+stages = ['Coal\\\n(chemical)', 'Boiler\\\n(thermal)', 'Cylinder\\\n(pressure)', 'Wheels\\\n(kinetic)']
 energies = [100, 85, 25, 8]
 losses = [0, 15, 60, 17]
 colors = ['#ef4444', '#f59e0b', '#3b82f6', '#22c55e']
@@ -209,11 +209,11 @@ ax2.plot(radii, curve_resist, color='#ef4444', linewidth=2, label='Curve resista
 ax2.fill_between(radii, curve_resist, alpha=0.1, color='#ef4444')
 
 # Mark notable curves
-notable = [(18, 'Darjeeling\\nmin R'), (50, 'Typical\\nhill'), (200, 'Mainline\\ncurve')]
+notable = [(18, 'Darjeeling\\\nmin R'), (50, 'Typical\\\nhill'), (200, 'Mainline\\\ncurve')]
 for r, label in notable:
     resist = 700 / r
     ax2.plot(r, resist, 'o', color='#f59e0b', markersize=8)
-    ax2.annotate(f'{label}\\n{resist:.0f} N/t', xy=(r, resist),
+    ax2.annotate(f'{label}\\\n{resist:.0f} N/t', xy=(r, resist),
                  xytext=(r + 30, resist + 3), color='#f59e0b', fontsize=8,
                  arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
@@ -231,7 +231,7 @@ for r in [18, 50, 100, 200, 500]:
     cr = 700 / r
     grade_eq = cr / g / 10
     print(f"  R={r}m: curve resistance = {cr:.1f} N/tonne = equivalent to {grade_eq:.2f}% grade")
-print("\\nAt R=18m (Darjeeling), curve resistance alone equals a 0.40% grade!")`,
+print("\\\nAt R=18m (Darjeeling), curve resistance alone equals a 0.40% grade!")`,
       challenge: 'Model a complete curve: combine grade resistance, curve resistance, and rolling resistance to find the total force on a 50-tonne train negotiating a 50 m radius curve on a 3% grade. What speed maximises throughput (tonnes per hour)?',
       successHint: 'Every curve on a mountain railway is a compromise between speed (which generates centrifugal force) and gradient (which demands tractive effort). Balancing these is the art of railway engineering.',
     },

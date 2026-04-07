@@ -110,7 +110,7 @@ for ax in axes.flat:
 
 # 1. Architecture diagram (text-based)
 ax = axes[0, 0]
-components = ['Scale\\nEngine', 'Waveform\\nGenerator', 'Envelope\\nShaper', 'Melody\\nComposer', 'Spectral\\nDisplay']
+components = ['Scale\\\nEngine', 'Waveform\\\nGenerator', 'Envelope\\\nShaper', 'Melody\\\nComposer', 'Spectral\\\nDisplay']
 x_pos = np.linspace(0.1, 0.9, 5)
 for i, (comp, x) in enumerate(zip(components, x_pos)):
     color = ['#4ade80', '#60a5fa', '#f97316', '#a78bfa', '#f472b6'][i]
@@ -174,10 +174,10 @@ plt.show()
 print("Naga Scale Synthesizer — Project skeleton ready")
 print(f"Sample rate: {SAMPLE_RATE} Hz")
 print(f"Available scales: {', '.join(SCALES.keys())}")
-print(f"\\nNaga Folk scale from {scale.root_freq} Hz:")
+print(f"\\\nNaga Folk scale from {scale.root_freq} Hz:")
 for i, ratio in enumerate(scale.ratios):
     print(f"  Degree {i}: ratio {ratio:.4f} -> {scale.get_freq(i):.1f} Hz")
-print(f"\\nNext steps: waveform generation, envelopes, melody algorithm")`,
+print(f"\\\nNext steps: waveform generation, envelopes, melody algorithm")`,
       challenge: 'Add a "Naga warrior" scale with root at 330 Hz and ratios [1, 7/6, 4/3, 3/2, 7/4] — using septimal intervals (ratios involving 7) that give a raw, powerful quality. Plot its frequencies alongside the other scales.',
       successHint: 'Septimal intervals (7th harmonic ratios) sound distinctly different from the familiar 5-limit ratios used in Western music. The 7/6 ratio (~267 cents) is a narrow minor third, and 7/4 (~969 cents) is the "harmonic seventh" — flatter than the Western minor seventh. These intervals appear in many non-Western musical traditions and create a raw, earthy quality.',
     },
@@ -472,7 +472,7 @@ print("Envelope and modulation summary:")
 print(f"  ADSR: Shapes each note's amplitude life cycle")
 print(f"  Vibrato: Pitch wobble at 5-7 Hz, 1-2% depth -> warmth")
 print(f"  Tremolo: Volume pulse at 4-6 Hz, 20-40% depth -> animation")
-print(f"\\nBamboo flute model combines all three:")
+print(f"\\\nBamboo flute model combines all three:")
 print(f"  Soft attack (breath onset), sustained tone, gentle release")
 print(f"  Subtle vibrato from breath pressure variation")
 print(f"  Optional tremolo from diaphragm pulsing")`,
@@ -663,11 +663,11 @@ plt.show()
 print("Scale system summary:")
 for name, sc in scales.items():
     intervals = sc.get_intervals_cents()
-    print(f"\\n  {name}:")
+    print(f"\\\n  {name}:")
     print(f"    Root: {sc.root} Hz, Degrees: {sc.n_degrees}")
     print(f"    Ratios: {[f'{r:.4f}' for r in sc.ratios]}")
     print(f"    Intervals: {[f'{c:.0f}c' for c in intervals]}")
-print(f"\\nQuantization example: 567 Hz -> {sc_folk.quantize_freq(567):.1f} Hz (nearest Naga folk note)")`,
+print(f"\\\nQuantization example: 567 Hz -> {sc_folk.quantize_freq(567):.1f} Hz (nearest Naga folk note)")`,
       challenge: 'Add a "Naga harvest" scale with ratios [1, 10/9, 5/4, 3/2, 15/8] and compare its interval pattern to the other scales. This scale has a large gap (major 7th to octave = 135 cents) that creates dramatic tension before resolution.',
       successHint: 'The large 7th-to-octave interval (135 cents, a semitone) creates a strong "pull" toward the octave — a sense of tension and resolution. Different scales create different emotional characters through their interval patterns. The Naga harvest scale with its wide gaps and tight resolutions could evoke the anticipation and celebration of harvest time.',
     },
@@ -859,14 +859,14 @@ degrees, freqs, sec_durs, beat_durs = gen.generate_melody(4, 4)
 print("Generated Naga folk melody:")
 print(f"  Scale: {sc.name}, Root: {sc.root} Hz, Tempo: 100 BPM")
 print(f"  Notes: {len(degrees)}, Phrases: 4 x 4 beats")
-print(f"\\n  {'Note':<6} {'Degree':<8} {'Freq':<10} {'Duration':<10}")
+print(f"\\\n  {'Note':<6} {'Degree':<8} {'Freq':<10} {'Duration':<10}")
 print(f"  {'-'*34}")
 for i, (d, f, dur) in enumerate(zip(degrees, freqs, beat_durs)):
     print(f"  {i+1:<6} {d:<8} {f:<10.1f} {dur:.2f} beats")
 
 # Contour analysis
 steps = [degrees[i+1] - degrees[i] for i in range(len(degrees)-1)]
-print(f"\\n  Interval distribution:")
+print(f"\\\n  Interval distribution:")
 print(f"    Small steps (|step| <= 1): {sum(1 for s in steps if abs(s) <= 1)} / {len(steps)}")
 print(f"    Medium steps (|step| = 2): {sum(1 for s in steps if abs(s) == 2)} / {len(steps)}")
 print(f"    Large leaps (|step| >= 3):  {sum(1 for s in steps if abs(s) >= 3)} / {len(steps)}")
@@ -1187,18 +1187,18 @@ plt.show()
 print("=" * 60)
 print("NAGA SCALE SYNTHESIZER — PORTFOLIO COMPLETE")
 print("=" * 60)
-print(f"\\nScale: {synth.scale_name} (root = {synth.root} Hz)")
+print(f"\\\nScale: {synth.scale_name} (root = {synth.root} Hz)")
 print(f"Waveform: {synth.waveform}")
 print(f"Melody: {len(degrees)} notes, {sum(sec_durs):.1f}s total")
 print(f"Audio: {len(audio)} samples ({len(audio)/SAMPLE_RATE:.1f}s at {SAMPLE_RATE} Hz)")
-print(f"\\nComponents built:")
+print(f"\\\nComponents built:")
 print(f"  1. Scale engine with 3 Naga scales")
 print(f"  2. 5 waveform generators (sine, square, sawtooth, triangle, bamboo_flute)")
 print(f"  3. ADSR envelope shaper")
 print(f"  4. Vibrato (FM) and tremolo (AM) modulation")
 print(f"  5. Algorithmic melody generator with phrase structure")
 print(f"  6. Spectral analysis and visualization")
-print(f"\\nThis synthesizer bridges physics, music theory, signal processing,")
+print(f"\\\nThis synthesizer bridges physics, music theory, signal processing,")
 print(f"and programming — all inspired by the bamboo flute of Nagaland.")`,
       challenge: 'Add a "duet mode" where two synthesizers play simultaneously — one with the naga_folk scale and another with naga_ceremonial — creating a two-voice texture. Mix the two audio streams and visualize the combined spectrogram. How do the different scale systems interact harmonically?',
       successHint: 'When two different pentatonic scales play simultaneously, some notes will be consonant (close to simple ratios) and others will create interesting "beating" patterns (slight frequency differences). This is the basis of heterophony — a texture common in Southeast Asian and tribal music where multiple performers play the same melody with individual variations. The result is richer than unison but less structured than Western harmony.',

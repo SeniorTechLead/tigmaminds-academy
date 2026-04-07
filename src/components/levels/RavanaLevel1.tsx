@@ -47,9 +47,9 @@ for i, (d, t) in enumerate(zip(catches_cm, reaction_times)):
 
 avg_time = np.mean(reaction_times) * 1000
 std_time = np.std(reaction_times) * 1000
-print(f"\\nAverage reaction time: {avg_time:.1f} ms")
+print(f"\\\nAverage reaction time: {avg_time:.1f} ms")
 print(f"Variability (std dev): {std_time:.1f} ms")
-print(f"\\nFastest: {min(reaction_times)*1000:.1f} ms")
+print(f"\\\nFastest: {min(reaction_times)*1000:.1f} ms")
 print(f"Slowest: {max(reaction_times)*1000:.1f} ms")`,
       challenge: 'Replace the catches_cm list with your own real measurements from the ruler-drop test. Do 10 trials with your dominant hand, then 10 with your non-dominant hand. Is there a significant difference?',
       successHint: 'You just turned a physical experiment into data analysis. The sqrt(2d/g) formula connects physics (falling objects) to neuroscience (brain processing speed). Every number tells a story about your nervous system.',
@@ -102,14 +102,14 @@ for i, n in enumerate(chain):
     print(f"Neuron {i+1}: axon={n.axon_length:.2f}m, "
           f"speed={n.speed}m/s, time={t:.2f}ms")
 
-print(f"\\nTotal signal time: {total_time*1000:.1f} ms")
+print(f"\\\nTotal signal time: {total_time*1000:.1f} ms")
 print(f"(Real reaction time is ~200ms because")
 print(f" there are many more neurons and processing steps)")
 
 # What if NOT myelinated?
 chain_slow = [Neuron(n.axon_length, False) for n in chain]
 slow_time = sum(n.signal_time() for n in chain_slow)
-print(f"\\nWithout myelin: {slow_time*1000:.1f} ms")
+print(f"\\\nWithout myelin: {slow_time*1000:.1f} ms")
 print(f"Myelin speedup: {slow_time/total_time:.0f}x faster!")`,
       challenge: 'Add more neurons to the chain to model a more realistic reflex arc (10-15 neurons). How does the total time change? What happens if some neurons in the middle lose their myelin (set myelinated=False) — simulating a disease like multiple sclerosis?',
       successHint: 'You modelled the nervous system as a relay chain. Each neuron adds time (axon transit + synapse delay). Myelin makes a dramatic difference — without it, signals are 60x slower. This is why demyelinating diseases cause such severe symptoms.',
@@ -153,7 +153,7 @@ print(f"  Total: {focused_total:.1f}s | Switches: 0")
 rounds = 3  # each task needs 3 rounds to complete
 switches = num_tasks * rounds - 1
 switching_total = num_tasks * task_time + switches * switch_cost
-print(f"\\n=== Switching Mode (one head, multitasking) ===")
+print(f"\\\n=== Switching Mode (one head, multitasking) ===")
 print(f"  Work time: {num_tasks * task_time:.1f}s")
 print(f"  Switches: {switches}")
 print(f"  Switch overhead: {switches * switch_cost:.1f}s")
@@ -162,13 +162,13 @@ print(f"  Total: {switching_total:.1f}s")
 # Error rate increases with switching
 error_rate_focused = 0.02   # 2% error rate
 error_rate_switching = 0.05  # 5% error rate
-print(f"\\n=== Error Rates ===")
+print(f"\\\n=== Error Rates ===")
 print(f"  Focused: {error_rate_focused*100:.0f}% errors")
 print(f"  Switching: {error_rate_switching*100:.0f}% errors")
 print(f"  Switching makes {error_rate_switching/error_rate_focused:.1f}x more errors")
 
 overhead_pct = (switching_total - focused_total) / focused_total * 100
-print(f"\\n=> Multitasking penalty: +{overhead_pct:.0f}% time")`,
+print(f"\\\n=> Multitasking penalty: +{overhead_pct:.0f}% time")`,
       challenge: 'Experiment with different switch_cost values (0.1, 0.5, 1.0 seconds). At what switch cost does multitasking take twice as long as focused work? Also try increasing the number of tasks to 20 — how does the overhead scale?',
       successHint: 'Task switching is not free — every switch wastes time. This is why "multitasking" is a myth for serial processors (including your brain). The optimal strategy is Ravana\'s: dedicate each processor to one task and avoid switching entirely.',
     },
@@ -292,7 +292,7 @@ plt.xticks(processors)
 plt.tight_layout()
 plt.show()
 
-print(f"\\nSerial time (1 head): {serial_time:.2f}s")
+print(f"\\\nSerial time (1 head): {serial_time:.2f}s")
 for p, t, s in zip(processors, parallel_times, speedups):
     print(f"{p:>2} heads: {t:.2f}s (speedup: {s:.1f}x)")`,
       challenge: 'What happens when tasks have very different durations (one is 10s, the rest are 1s)? Modify task_durations to include one very long task and see how it affects parallel speedup. This demonstrates the "straggler problem" — one slow head holds back all the others.',

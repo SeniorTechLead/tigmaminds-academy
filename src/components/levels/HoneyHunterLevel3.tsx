@@ -90,7 +90,7 @@ for day in range(days):
     # Deaths
     lifespan = worker_lifespan(day)
 
-print("\n[Full visualization in playground]")`,
+print("\\n[Full visualization in playground]")`,
       challenge: 'Increase queen_max_eggs to 2500 (a productive queen) and decrease summer_lifespan to 35 (harder foraging conditions). How does this change the balance? What determines whether the colony can survive winter?',
       successHint: 'Colony dynamics is the foundation of apiculture (beekeeping) and crucial for understanding pollination services. The model you built captures why colony losses spike when any one parameter shifts — the colony is a finely balanced system.',
     },
@@ -168,7 +168,7 @@ def individual_fitness(n_females, fecundity=5, survival=0.3):
         offspring = np.random.poisson(fecundity)
         survivors = np.random.binomial(offspring, survival)
 
-print("\n[Full visualization in playground]")`,
+print("\\n[Full visualization in playground]")`,
       challenge: 'What happens to eusociality if a mutation makes workers reproduce at 50% queen efficiency instead of being sterile? Model the genetic conflict and predict whether the colony would fragment. (Hint: this is worker policing.)',
       successHint: 'Hamilton\'s rule and kin selection theory earned W.D. Hamilton a place among the most important evolutionary biologists of the 20th century. Understanding why bees cooperate reveals a deep truth: what looks like altruism is actually genetic self-interest at a different level.',
     },
@@ -245,7 +245,7 @@ def decode_dance(dance_angle, waggle_duration, hive_x, hive_y, sun_azimuth_deg,
 # Setup
 hive = (0, 0)  # hive at origin
 
-print("\n[Full visualization in playground]")`,
+print("\\n[Full visualization in playground]")`,
       challenge: 'Simulate a "lying dance" — a bee dances for a food source that has been exhausted. Model how quickly the colony wastes foraging effort following stale dances, and how the colony self-corrects when scouts return empty-handed.',
       successHint: 'The waggle dance is information theory in action. The bee compresses a 2D location into two scalar values (angle, duration) with known noise characteristics. Karl von Frisch\'s decoding of this system earned the 1973 Nobel Prize and changed how we think about animal communication.',
     },
@@ -321,7 +321,7 @@ for t in range(n_timesteps):
     # Average return across habitat (the threshold from MVT)
     mean_return = np.mean(marginal_returns[marginal_returns > 0])
 
-print("\n[Full visualization in playground]")`,
+print("\\n[Full visualization in playground]")`,
       challenge: 'Add a new patch that appears at timestep 50 with very high quality (1.0) and high nectar (2000). How quickly does the colony discover and exploit it? How does the scout fraction affect discovery speed?',
       successHint: 'Bee foraging algorithms inspired real optimization methods: Artificial Bee Colony (ABC) optimization, Swarm Intelligence, and the Explore-Exploit trade-off in reinforcement learning. The bees solved multi-armed bandits millions of years before computer scientists formalized the problem.',
     },
@@ -396,7 +396,7 @@ def compute_nestedness(matrix):
                     paired_overlaps += overlap / min_deg
                     total_pairs += 1
 
-print("\n[Full visualization in playground]")`,
+print("\\n[Full visualization in playground]")`,
       challenge: 'Make the network more nested by ensuring every specialist bee only visits plants also visited by generalists. How does this change the robustness to CCD? Compare with a "random" network of the same connectance.',
       successHint: 'Pollination network analysis is critical for agricultural policy. Researchers use exactly these methods to predict the economic impact of pollinator loss — estimated at $235-577 billion per year globally. The honey hunter\'s lesson extends to all of agriculture: protect the pollinators, protect the food supply.',
     },

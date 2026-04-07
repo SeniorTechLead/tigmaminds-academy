@@ -42,7 +42,7 @@ molecules = {
 # Atomic weights (g/mol)
 weights = {"C": 12.01, "H": 1.008, "O": 16.00}
 
-print("=== Cardamom Essential Oil — Molecular Profile ===\\n")
+print("=== Cardamom Essential Oil — Molecular Profile ===\\\n")
 print(f"{'Compound':<30} {'Formula':<12} {'MW(g/mol)':>10} {'%Oil':>6} {'Aroma'}")
 print("-" * 85)
 
@@ -118,7 +118,7 @@ def vapor_pressure(A, B, C, T_celsius):
     return 10**(A - B / (C + T_celsius))
 
 print("=== Vapor Pressure of Cardamom Compounds ===")
-print("(higher pressure = more molecules in air = stronger smell)\\n")
+print("(higher pressure = more molecules in air = stronger smell)\\\n")
 
 temps = [20, 30, 50, 80, 100]
 
@@ -199,7 +199,7 @@ terpene_classes = {
     "Tetraterpene":   {"units": 8, "C": 40, "examples": "Beta-carotene (orange pigment)"},
 }
 
-print("=== Terpene Classification System ===\\n")
+print("=== Terpene Classification System ===\\\n")
 print(f"{'Class':<15} {'Units':>6} {'Carbons':>8} {'MW range':>10} {'Examples'}")
 print("-" * 75)
 for cls, data in terpene_classes.items():
@@ -212,7 +212,7 @@ for cls, data in terpene_classes.items():
     print(f"{cls:<15} {n:>6} {c:>8} {mw_low:>4}-{mw_high:<4} {data['examples']}")
 
 # Check cardamom compounds against isoprene rule
-print("\\n=== Cardamom Compounds: Isoprene Rule Check ===\\n")
+print("\\\n=== Cardamom Compounds: Isoprene Rule Check ===\\\n")
 
 cardamom = [
     ("1,8-Cineole", 10, 18, 1),
@@ -244,7 +244,7 @@ for name, c, h, o in cardamom:
     check = "✓ follows rule" if follows_rule else "? modified"
     print(f"  {name:<25} C{c}H{h}{'O' + str(o) if o else '':4s}  MW={mw:3d}  {cls:14s} {check}")
 
-print(f"\\n{sum(1 for _, c, _, _ in cardamom if c % 5 == 0 or c == 12)}/{len(cardamom)} compounds follow the isoprene rule")
+print(f"\\\n{sum(1 for _, c, _, _ in cardamom if c % 5 == 0 or c == 12)}/{len(cardamom)} compounds follow the isoprene rule")
 print("Nature builds aroma from a single 5-carbon brick!")`,
       challenge: 'Beta-carotene (the orange pigment in carrots) is C₄₀H₅₆. How many isoprene units is it? What terpene class? Why is it orange while monoterpenes are colorless?',
       successHint: 'You have discovered the isoprene rule — one of the great unifying principles of natural product chemistry. From the scent of cardamom to the color of carrots to the cholesterol in your blood, terpenes built from this simple 5-carbon unit are everywhere in biology.',
@@ -323,7 +323,7 @@ for hours in [1, 2, 3, 4, 5]:
 # d(cost)/dt = steam_cost
 # Optimal when: oil_initial * k * e^(-k*t) * price = steam_cost
 t_optimal = -math.log(steam_cost / (oil_initial * k * oil_price)) / k
-print(f"\\nOptimal distillation time: {t_optimal:.1f} hours")
+print(f"\\\nOptimal distillation time: {t_optimal:.1f} hours")
 print(f"After this point, fuel costs exceed oil revenue per hour")
 optimal_yield = oil_initial * (1 - math.exp(-k * t_optimal))
 print(f"Oil at optimal time: {optimal_yield:.2f} mL ({optimal_yield/oil_initial*100:.0f}% of maximum)")`,
@@ -391,7 +391,7 @@ shape_profiles = {
                        0.5, 0.4, 0.2, 0.6, 0.1, 0.3, 0.7, 0.2, 0.4, 0.4],
 }
 
-print("=== Olfactory Receptor Activation Patterns ===\\n")
+print("=== Olfactory Receptor Activation Patterns ===\\\n")
 
 # Add noise and display
 activations = {}
@@ -410,7 +410,7 @@ for name, data in compounds.items():
     print(f"  {name:<22} [{bar}]")
 
 # Similarity analysis
-print("\\n=== Aroma Similarity (cosine similarity) ===")
+print("\\\n=== Aroma Similarity (cosine similarity) ===")
 import math
 
 def cosine_sim(a, b):
@@ -420,7 +420,7 @@ def cosine_sim(a, b):
     return dot / (mag_a * mag_b) if mag_a * mag_b > 0 else 0
 
 names = list(activations.keys())
-print(f"\\n{'':22}", end="")
+print(f"\\\n{'':22}", end="")
 for n in names:
     print(f"{n[:8]:>9}", end="")
 print()
@@ -433,7 +433,7 @@ for i, n1 in enumerate(names):
     print()
 
 # Find most similar pair
-print("\\nMost similar pair (excluding self):")
+print("\\\nMost similar pair (excluding self):")
 best_sim = 0
 best_pair = ("", "")
 for i in range(len(names)):

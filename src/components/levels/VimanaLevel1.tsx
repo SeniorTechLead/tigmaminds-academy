@@ -70,7 +70,7 @@ else:
 # Net acceleration (F = ma)
 a_vertical = net_vertical / mass
 a_horizontal = net_horizontal / mass
-print(f"\\nVertical acceleration: {a_vertical:.2f} m/s²")
+print(f"\\\nVertical acceleration: {a_vertical:.2f} m/s²")
 print(f"Horizontal acceleration: {a_horizontal:.2f} m/s²")`,
       challenge: 'Change the mass to 90,000 kg (a fully loaded aircraft). Does it still climb? How much extra lift or thrust would you need to maintain the same flight status?',
       successHint: 'You have built your first flight model. The four forces are just arithmetic: compare lift vs. weight and thrust vs. drag. Every flight simulator in the world starts with exactly this calculation.',
@@ -134,7 +134,7 @@ plt.show()
 
 print(f"Takeoff speed: {v_takeoff_ms:.1f} m/s = {v_takeoff_kmh:.0f} km/h")
 print(f"At this speed, lift ({weight/1000:.0f} kN) = weight ({weight/1000:.0f} kN)")
-print(f"\\nNotice the curve is a PARABOLA (v² effect):")
+print(f"\\\nNotice the curve is a PARABOLA (v² effect):")
 print(f"  At 50 km/h: lift = {0.5*rho*(50/3.6)**2*S*C_L/1000:.0f} kN")
 print(f"  At 100 km/h: lift = {0.5*rho*(100/3.6)**2*S*C_L/1000:.0f} kN (4x more!)")`,
       challenge: 'Change rho to 0.4 (high altitude, thin air). What happens to the takeoff speed? This is why airports at high altitude need longer runways — aircraft need to go faster to get the same lift.',
@@ -196,7 +196,7 @@ plt.show()
 
 print(f"Lift-to-drag ratio (L/D): {ld_ratio:.1f}")
 print(f"  For every 1 N of drag, wings produce {ld_ratio:.1f} N of lift")
-print(f"\\nPower required (P = D × v) grows as v³:")
+print(f"\\\nPower required (P = D × v) grows as v³:")
 print(f"  At 200 km/h: {0.5*rho*(200/3.6)**2*S*C_D*(200/3.6)/1e6:.2f} MW")
 print(f"  At 400 km/h: {0.5*rho*(400/3.6)**2*S*C_D*(400/3.6)/1e6:.2f} MW")
 print(f"  At 800 km/h: {0.5*rho*(800/3.6)**2*S*C_D*(800/3.6)/1e6:.2f} MW")
@@ -350,9 +350,9 @@ plt.show()
 
 print(f"At standstill (v=0): thrust = {mass_flow * v_exhaust / 1000:.0f} kN (maximum)")
 print(f"At 250 m/s (900 km/h): thrust = {thrust_total[np.argmin(np.abs(airspeeds-250))]/1000:.0f} kN")
-print(f"\\nBypass contributes {m_bypass/(m_core+m_bypass)*100:.0f}% of air mass")
+print(f"\\\nBypass contributes {m_bypass/(m_core+m_bypass)*100:.0f}% of air mass")
 print(f"  but at lower exhaust speed ({v_bypass_exit} vs {v_exhaust} m/s)")
-print(f"\\nThis is why turbofans are efficient: they move a LOT")
+print(f"\\\nThis is why turbofans are efficient: they move a LOT")
 print(f"of air a LITTLE bit faster, rather than a little air a lot faster.")`,
       challenge: 'Increase bypass_ratio to 10 (like the latest engines). How does the thrust profile change? Why do modern engines have increasingly large fans?',
       successHint: 'The thrust equation shows why jet engines get less effective at higher speeds: the speed difference between exhaust and intake shrinks. This fundamental limit is why supersonic aircraft need afterburners or completely different engine designs.',
@@ -414,9 +414,9 @@ plt.show()
 print("=== Escape Velocities ===")
 for name, v in zip(names, v_escapes):
     print(f"  {name:10s}: {v:5.1f} km/s  ({v*3600:.0f} km/h)")
-print(f"\\nJupiter’s escape velocity is {v_escapes[4]/v_escapes[2]:.1f}x Earth’s")
+print(f"\\\nJupiter’s escape velocity is {v_escapes[4]/v_escapes[2]:.1f}x Earth’s")
 print(f"Moon’s escape velocity is {v_escapes[8]/v_escapes[2]:.2f}x Earth’s")
-print(f"\\nThis is why leaving Earth requires massive rockets,")
+print(f"\\\nThis is why leaving Earth requires massive rockets,")
 print(f"but leaving the Moon was done with a small engine.")`,
       challenge: 'Add Pluto (mass 1.31×10²² kg, radius 1.19×10⁶ m) and the Sun (mass 1.99×10³⁰ kg, radius 6.96×10⁸ m) to the chart. The Sun’s escape velocity is a surprise — how does it compare to the speed of light?',
       successHint: 'Escape velocity connects the ancient dream of flying to the heavens with modern rocket science. The formula is elegant: more massive or smaller planet = harder to escape. This single equation governs every space mission ever launched.',

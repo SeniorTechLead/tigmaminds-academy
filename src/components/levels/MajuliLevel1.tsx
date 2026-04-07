@@ -537,14 +537,14 @@ import matplotlib.pyplot as plt
 
 # Conservation strategy comparison
 strategies = [
-    'Earthen\\nembankment',
-    'Rock\\nrevetment',
-    'Concrete\\nwall',
-    'Bamboo\\nporcupines',
-    'Vetiver\\ngrass',
-    'Mangrove\\nrestoration',
-    'Geotextile\\ntubes',
-    'Hybrid\\n(porcupine+plants)'
+    'Earthen\\\nembankment',
+    'Rock\\\nrevetment',
+    'Concrete\\\nwall',
+    'Bamboo\\\nporcupines',
+    'Vetiver\\\ngrass',
+    'Mangrove\\\nrestoration',
+    'Geotextile\\\ntubes',
+    'Hybrid\\\n(porcupine+plants)'
 ]
 
 # Cost per km (lakhs INR, approximate)
@@ -611,7 +611,7 @@ plt.show()
 print("Cost-effectiveness ranking:")
 ranked = sorted(zip(strategies, ce_ratio, cost, eco_score), key=lambda x: -x[1])
 for i, (name, score, c, eco) in enumerate(ranked, 1):
-    name_clean = name.replace('\\n', ' ')
+    name_clean = name.replace('\\\n', ' ')
     print(f"  {i}. {name_clean}: score={score:.1f}, cost=₹{c}L/km, eco={eco}/10")
 print()
 print("Key insight: The cheapest, most eco-friendly solutions")

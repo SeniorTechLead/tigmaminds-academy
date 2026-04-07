@@ -117,7 +117,7 @@ print("ALLOY DATABASE — QUERY RESULTS")
 print("=" * 70)
 
 # Query: Best alloy for a blade (high hardness + adequate toughness)
-print("\\nBest blade steel (HV > 500, toughness > 15J):")
+print("\\\nBest blade steel (HV > 500, toughness > 15J):")
 print(f"{'Alloy':<15} {'Treatment':<15} {'HV':>5} {'Tough':>6} {'YS':>6} {'Cost':>5}")
 print("-" * 55)
 for row in c.execute('''
@@ -131,7 +131,7 @@ for row in c.execute('''
     print(f"{row[0]:<15} {row[1]:<15} {row[2]:>5.0f} {row[3]:>6.1f} {row[4]:>6.0f} \${row[5]:.1f}")
 
 # Compare Lushai iron to modern steels
-print("\\nLushai Iron vs Modern Steels (quenched):")
+print("\\\nLushai Iron vs Modern Steels (quenched):")
 for row in c.execute('''
     SELECT a.name, p.hardness_hv, p.yield_strength, p.elongation, a.cost_per_kg
     FROM properties p JOIN heat_treatments h ON p.treatment_id=h.id JOIN alloys a ON h.alloy_id=a.id
@@ -426,7 +426,7 @@ print("-" * 86)
 for row in c.execute('SELECT * FROM process_log ORDER BY id'):
     print(f"{row[1]:<22} {row[2]:>7.0f} {row[3]:>7.1f} {row[4]:>7.1f} {row[5]:>7.3f} {row[6]:>7.3f} {row[7]:>6.1f} {row[8]:<15} {row[9]:>4.0f}")
 
-print(f"\\nFinal blade properties:")
+print(f"\\\nFinal blade properties:")
 print(f"  Surface: {blade.C[1]*100:.1f}% C, {blade.hardness(1):.0f} HV ({blade.phase})")
 print(f"  Core:    {blade.C[blade.nx//2]*100:.1f}% C, {blade.hardness(blade.nx//2):.0f} HV")
 print(f"  Grain size: {blade.grain:.1f} μm")
@@ -551,7 +551,7 @@ print("=" * 75)
 # Find best design for each application
 for app in apps:
     _, app_name, min_hv, min_tough, max_grain, max_cost = app
-    print(f"\\n--- {app_name} (HV>{min_hv}, Tough>{min_tough}, Grain<{max_grain}) ---")
+    print(f"\\\n--- {app_name} (HV>{min_hv}, Tough>{min_tough}, Grain<{max_grain}) ---")
 
     rows = c.execute('''
         SELECT alloy_name, aust_temp, hold_min, cool_method, temper_temp,
@@ -569,7 +569,7 @@ for app in apps:
         print("  No design meets all requirements — relax constraints")
 
 # Overall best
-print("\\nOverall best designs (top 5):")
+print("\\\nOverall best designs (top 5):")
 for row in c.execute('SELECT alloy_name, aust_temp, cool_method, temper_temp, surface_hardness, toughness, fitness FROM designs ORDER BY fitness DESC LIMIT 5'):
     print(f"  {row[0]:<15}: {row[1]}°C/{row[2]}/temper {row[3]}°C → HV={row[4]:.0f}, Tough={row[5]:.0f}, Score={row[6]:.1f}")
 

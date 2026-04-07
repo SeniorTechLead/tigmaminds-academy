@@ -108,7 +108,7 @@ ax.plot(0.3 + p_norm, y, color='#3b82f6', linewidth=2)
 cp = 2 * h_wall / 3  # from surface
 ax.plot(0.3 + rho * g * cp / pressure.max() * 3, cp, 'o',
         color='#f59e0b', markersize=12, zorder=5)
-ax.annotate('Centre of\\npressure', xy=(2.2, cp),
+ax.annotate('Centre of\\\npressure', xy=(2.2, cp),
             fontsize=10, color='#f59e0b', fontweight='bold')
 
 # Force arrow
@@ -160,7 +160,7 @@ weight = 50000        # total palace weight
 buoyancy = 15000      # upward water force
 pile_reaction = weight - buoyancy  # piles carry the rest
 
-forces = ['Weight\\n(down)', 'Buoyancy\\n(up)', 'Pile Reaction\\n(up)']
+forces = ['Weight\\\n(down)', 'Buoyancy\\\n(up)', 'Pile Reaction\\\n(up)']
 values = [weight, buoyancy, pile_reaction]
 colors = ['#ef4444', '#3b82f6', '#22c55e']
 

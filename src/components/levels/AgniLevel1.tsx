@@ -40,7 +40,7 @@ scenarios = [
     {"name": "Space vacuum",    "fuel": True,  "oxygen": False, "heat": True},
 ]
 
-print("=== Combustion Triangle Checker ===\\n")
+print("=== Combustion Triangle Checker ===\\\n")
 print(f"{'Scenario':<20} {'Fuel':>6} {'O₂':>6} {'Heat':>6}  {'Fire?':>6}")
 print("-" * 52)
 
@@ -89,7 +89,7 @@ fuels = {
 # Energy needed to heat 1 kg of water from 20°C to 100°C
 E_needed = 1.0 * 4.186 * 80  # kJ (mass * specific heat * delta T)
 
-print(f"Energy to boil 1L water: {E_needed:.1f} kJ\\n")
+print(f"Energy to boil 1L water: {E_needed:.1f} kJ\\\n")
 print(f"{'Fuel':<12} {'kJ/kg':>10} {'grams needed':>14}")
 print("-" * 38)
 
@@ -112,7 +112,7 @@ plt.grid(axis='x', alpha=0.3)
 plt.tight_layout()
 plt.show()
 
-print("\\nHydrogen wins per kg — but try carrying hydrogen gas to a campfire!")`,
+print("\\\nHydrogen wins per kg — but try carrying hydrogen gas to a campfire!")`,
       challenge: 'Add "Ethanol" (29,700 kJ/kg) and "Propane" (50,300 kJ/kg) to the dictionary. Plot all 8 fuels. Then calculate: how many grams of each fuel would you need to heat 5 litres of water?',
       successHint: 'You just did your first energy calculation with real data. The formula E = m × c × ΔT is fundamental to thermodynamics. Every heating system, engine, and power plant is designed around this equation.',
     },
@@ -156,7 +156,7 @@ products = [
 left = count_atoms(reactants)
 right = count_atoms(products)
 
-print("Methane Combustion: CH₄ + 2O₂ → CO₂ + 2H₂O\\n")
+print("Methane Combustion: CH₄ + 2O₂ → CO₂ + 2H₂O\\\n")
 print(f"{'Atom':<8} {'Left':>6} {'Right':>6} {'Balanced?':>10}")
 print("-" * 32)
 
@@ -169,7 +169,7 @@ for atom in sorted(all_atoms):
     if l != r: balanced = False
     print(f"{atom:<8} {l:>6} {r:>6} {ok:>10}")
 
-print(f"\\nOverall: {'BALANCED ✅' if balanced else 'NOT BALANCED ❌'}")
+print(f"\\\nOverall: {'BALANCED ✅' if balanced else 'NOT BALANCED ❌'}")
 print()
 print("Every atom on the left appears on the right.")
 print("Nothing created, nothing destroyed — just rearranged.")`,
@@ -210,10 +210,10 @@ temp[height < 0.8] = np.linspace(T_base, temp[height >= 0.8][0], sum(height < 0.
 
 # Define flame zones
 zones = [
-    (0, 0.8, "Dark zone\\n(wax vapour)", "#374151", 0.15),
-    (0.8, 2.0, "Luminous zone\\n(yellow glow)", "#f59e0b", 0.15),
-    (2.0, 3.2, "Outer zone\\n(hottest, blue)", "#3b82f6", 0.15),
-    (3.2, 4.0, "Tip\\n(cooling)", "#9ca3af", 0.1),
+    (0, 0.8, "Dark zone\\\n(wax vapour)", "#374151", 0.15),
+    (0.8, 2.0, "Luminous zone\\\n(yellow glow)", "#f59e0b", 0.15),
+    (2.0, 3.2, "Outer zone\\\n(hottest, blue)", "#3b82f6", 0.15),
+    (3.2, 4.0, "Tip\\\n(cooling)", "#9ca3af", 0.1),
 ]
 
 plt.figure(figsize=(10, 6))
@@ -276,7 +276,7 @@ A = 1.0    # m²
 L = 0.01   # m (1 cm thick)
 dT = 100   # °C difference
 
-print("Heat flow through a 1cm slab (A=1m², ΔT=100°C)\\n")
+print("Heat flow through a 1cm slab (A=1m², ΔT=100°C)\\\n")
 print(f"{'Material':<14} {'k (W/m·K)':>12} {'Heat flow (W)':>14}")
 print("-" * 42)
 
@@ -301,7 +301,7 @@ plt.grid(axis='x', alpha=0.3)
 plt.tight_layout()
 plt.show()
 
-print("\\nCopper conducts ~15,000× better than wood!")
+print("\\\nCopper conducts ~15,000× better than wood!")
 print("This is why metal handles get hot and wooden handles stay cool.")`,
       challenge: 'Add a "Thermos vacuum" with k = 0.000001 (almost zero). Also try calculating: if you wrap a copper pipe with 2 cm of styrofoam, what is the total heat loss? (Hint: resistances in series add up.)',
       successHint: 'Fourier’s law is the foundation of thermal engineering. Every insulated building, every heat sink on a computer chip, and every cooking pot is designed using this equation. You now understand why some materials burn your hand and others protect it.',

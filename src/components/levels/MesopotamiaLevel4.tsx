@@ -126,22 +126,22 @@ modern_drip = Irrigation("Drip + drainage", water_ec=0.8,
                           leaching_fraction=0.15)
 
 # System test
-print("=== Soil Salinisation Model — System Architecture ===\\n")
+print("=== Soil Salinisation Model — System Architecture ===\\\n")
 
 print("Climate:", mesopotamia_climate.name)
 weather = mesopotamia_climate.annual_weather(42)
 print(f"  Sample year: rain={weather['rain_mm']:.0f}mm, "
-      f"ET={weather['et_mm']:.0f}mm, drought={weather['drought']}\\n")
+      f"ET={weather['et_mm']:.0f}mm, drought={weather['drought']}\\\n")
 
 print("Soil:", alluvial_soil.name)
 print(f"  CEC: {alluvial_soil.cec} meq/100g | Porosity: {alluvial_soil.porosity}")
-print(f"  Initial EC: {alluvial_soil.ec} dS/m | Status: {alluvial_soil.status()}\\n")
+print(f"  Initial EC: {alluvial_soil.ec} dS/m | Status: {alluvial_soil.status()}\\\n")
 
 for irr in [flood_irrigation, modern_drip]:
     print(f"Irrigation: {irr.name}")
     water, drain = irr.seasonal_application(crop_et_mm=1800)
     print(f"  Water applied: {water:.0f} mm | Drainage: {drain:.0f} mm")
-    print(f"  Water EC: {irr.water_ec} dS/m\\n")
+    print(f"  Water EC: {irr.water_ec} dS/m\\\n")
 
 print("Components defined. Ready for simulation engine.")`,
       challenge: 'Add a fourth class: Crop, with properties name, ec_threshold, kc (crop coefficient), and a method yield_factor(soil_ec) that returns 0-1 based on the FAO salinity-yield relationship: Ky = max(0, 1 - b(EC - ECt)) where b is a slope parameter. This lets the model predict actual crop yields.',
@@ -253,7 +253,7 @@ scenarios = [
     ("Drip + full drainage", Irrigation("Drip", 0.8, 0.90, 0.20)),
 ]
 
-print("=== Salt Transport Engine — 500-Year Simulation ===\\n")
+print("=== Salt Transport Engine — 500-Year Simulation ===\\\n")
 
 for scenario_name, irr in scenarios:
     soil = Soil(porosity=0.42, root_depth=1.0, initial_ec=1.5)
@@ -276,7 +276,7 @@ for scenario_name, irr in scenarios:
 
     final_ec = history[-1]["ec"]
     final_yield = history[-1]["yield_frac"] * 100
-    print(f"  Final: EC={final_ec:.1f} dS/m, Yield={final_yield:.0f}%\\n")`,
+    print(f"  Final: EC={final_ec:.1f} dS/m, Yield={final_yield:.0f}%\\\n")`,
       challenge: 'Add a "canal deterioration" factor: every 100 years without maintenance, irrigation water EC increases by 0.5 dS/m (because silted canals pick up more soil salt). With a "maintenance" flag that resets water EC every 100 years, compare maintained vs unmaintained systems. How much does canal maintenance affect the 500-year outcome?',
       successHint: 'You built a coupled simulation engine — the same architecture used in professional models like FAO\'s AquaCrop, USDA\'s SWAT, and CSIRO\'s APSIM. The salt mass balance is the physical law; the time-stepping loop is the computational method. Together, they predict how irrigation systems evolve over centuries.',
     },
@@ -357,8 +357,8 @@ for ec in ec_range:
     print()
 
 # Simulate agricultural output over time
-print("\\n=== Multi-Crop Agricultural Simulation ===")
-print("Southern Mesopotamia: 1000 hectares, rising salinity\\n")
+print("\\\n=== Multi-Crop Agricultural Simulation ===")
+print("Southern Mesopotamia: 1000 hectares, rising salinity\\\n")
 
 n_years = 400
 # Salinity rises from 1.5 to 20+ dS/m over 400 years
@@ -400,7 +400,7 @@ for decade in range(0, n_years, 20):
           f"{best_yield:>10.0f} {revenue:>10,.0f} {food_status:<14}")
 
 # Crop switching timeline
-print("\\n=== Crop Adaptation Timeline ===")
+print("\\\n=== Crop Adaptation Timeline ===")
 prev_crop = None
 for yr in range(n_years):
     ec = ec_trajectory[yr]
@@ -411,7 +411,7 @@ for yr in range(n_years):
         prev_crop = best.name
 
 # Total food production collapse
-print("\\n=== Total Agricultural Output Index ===")
+print("\\\n=== Total Agricultural Output Index ===")
 baseline_output = sum(c.absolute_yield(1.5) for c in crops) / len(crops) * total_area
 for decade in range(0, n_years, 40):
     ec = np.mean(ec_trajectory[decade:decade+40])
@@ -500,7 +500,7 @@ strategies = [
     ("Drip + full drainage",       0.8, 0.90, 0.20, 0),
 ]
 
-print("=== 800-Year Irrigation Strategy Comparison ===\\n")
+print("=== 800-Year Irrigation Strategy Comparison ===\\\n")
 
 all_results = {}
 for name, w_ec, eff, df, leach in strategies:
@@ -524,7 +524,7 @@ for name in all_results:
     print()
 
 # Cumulative food production
-print(f"\\n{'Strategy':<32} {'Total Food':>12} {'Water Used':>12} {'Collapse Yr':>12} {'Efficiency':>12}")
+print(f"\\\n{'Strategy':<32} {'Total Food':>12} {'Water Used':>12} {'Collapse Yr':>12} {'Efficiency':>12}")
 print("-" * 82)
 
 for name in all_results:
@@ -538,7 +538,7 @@ for name in all_results:
           f"{collapse_yr:>10} {food_per_water:>10.2f}")
 
 # Winner analysis
-print(f"\\n=== Strategy Rankings ===")
+print(f"\\\n=== Strategy Rankings ===")
 rankings = []
 for name in all_results:
     results = all_results[name]
@@ -547,18 +547,18 @@ for name in all_results:
     final_ec = results[-1]["ec"]
     rankings.append((name, total_food, total_water, final_ec))
 
-print("\\nBy total food production (800 years):")
+print("\\\nBy total food production (800 years):")
 for rank, (name, food, water, ec) in enumerate(
         sorted(rankings, key=lambda x: x[1], reverse=True), 1):
     print(f"  {rank}. {name:<32} {food/1000:>8.0f} tonnes")
 
-print("\\nBy water efficiency (kg food per m³ water):")
+print("\\\nBy water efficiency (kg food per m³ water):")
 for rank, (name, food, water, ec) in enumerate(
         sorted(rankings, key=lambda x: x[1]/max(x[2],1), reverse=True), 1):
     eff = food / max(water, 1)
     print(f"  {rank}. {name:<32} {eff:>8.2f} kg/m³")
 
-print("\\nBy final soil health (lower EC = better):")
+print("\\\nBy final soil health (lower EC = better):")
 for rank, (name, food, water, ec) in enumerate(
         sorted(rankings, key=lambda x: x[3]), 1):
     print(f"  {rank}. {name:<32} EC = {ec:>5.1f} dS/m")`,

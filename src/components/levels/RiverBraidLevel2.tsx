@@ -91,7 +91,7 @@ ax.plot(distance, specific_power, color='#f59e0b', linewidth=2)
 ax.fill_between(distance, specific_power, alpha=0.15, color='#f59e0b')
 ax.axhline(35, color='#ef4444', linestyle='--', alpha=0.5, label='Erosion threshold (35 W/m²)')
 ax.axhline(10, color='#22c55e', linestyle='--', alpha=0.5, label='Deposition threshold (10 W/m²)')
-ax.set_ylabel('Specific stream\\npower (W/m²)', color='white')
+ax.set_ylabel('Specific stream\\\npower (W/m²)', color='white')
 ax.set_yscale('log')
 ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
 ax.tick_params(colors='gray')
@@ -185,7 +185,7 @@ ax1.fill_between(D * 1000, 0.001, tau_critical, alpha=0.15, color='#22c55e', lab
 
 # Mark Brahmaputra typical
 ax1.plot(0.2, 0.5, '*', color='white', markersize=15)
-ax1.annotate('Brahmaputra\\nbed sand', (0.2, 0.5), xytext=(0.5, 2),
+ax1.annotate('Brahmaputra\\\nbed sand', (0.2, 0.5), xytext=(0.5, 2),
              color='white', fontsize=9, arrowprops=dict(arrowstyle='->', color='white'))
 
 ax1.set_xlabel('Grain size (mm)', color='white')
@@ -207,7 +207,7 @@ qb = np.where(tau_star > tau_star_c_val,
 ax2.plot(tau_star, qb * 1e6, color='#3b82f6', linewidth=2)  # convert to mm2/s for readability
 ax2.fill_between(tau_star, qb * 1e6, alpha=0.15, color='#3b82f6')
 ax2.axvline(tau_star_c_val, color='#ef4444', linestyle='--', alpha=0.5)
-ax2.text(tau_star_c_val + 0.01, max(qb * 1e6) * 0.8, 'Critical\\nShields', color='#ef4444', fontsize=9)
+ax2.text(tau_star_c_val + 0.01, max(qb * 1e6) * 0.8, 'Critical\\\nShields', color='#ef4444', fontsize=9)
 
 ax2.set_xlabel('Dimensionless shear stress (τ*)', color='white')
 ax2.set_ylabel('Bedload transport (×10⁻⁶ m²/s)', color='white')

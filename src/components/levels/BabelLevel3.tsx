@@ -82,7 +82,7 @@ for i in range(n_elements):
     status = "OK" if stresses[i] < 2.0 else "FAILED!"
     print(f"{i+1:>8d} {heights_elements[i]:>10.1f} {stresses[i]:>12.3f} {status:>10s}")
 
-print(f"\\nMax compression at base: {u[-1]*1000:.2f} mm")
+print(f"\\\nMax compression at base: {u[-1]*1000:.2f} mm")
 print(f"Max stress: {max(stresses):.3f} MPa (limit: 2.0 MPa)")
 if max(stresses) > 2.0:
     print("TOWER FAILS — base bricks are crushed!")
@@ -139,7 +139,7 @@ load_force = -50000  # Newtons (downward)
 # Calculate member lengths and angles
 print("Truss Analysis: 4-Node, 6-Member Structure")
 print("=" * 55)
-print(f"\\nLoad: {abs(load_force)/1000:.0f} kN downward on node {load_node}")
+print(f"\\\nLoad: {abs(load_force)/1000:.0f} kN downward on node {load_node}")
 print()
 
 print(f"{'Member':>8s} {'Nodes':>8s} {'Length(m)':>10s} {'Angle(deg)':>11s}")
@@ -298,8 +298,8 @@ A_s_cm2 = A_s * 1e4
 
 # Number of bars needed
 bar_diameters = [12, 16, 20, 25]  # mm
-print(f"\\nRequired steel area: {A_s_cm2:.2f} cm²")
-print(f"\\nBar options:")
+print(f"\\\nRequired steel area: {A_s_cm2:.2f} cm²")
+print(f"\\\nBar options:")
 for d_bar in bar_diameters:
     area_per_bar = np.pi * (d_bar/1000)**2 / 4
     n_bars = int(np.ceil(A_s / area_per_bar))
@@ -334,7 +334,7 @@ ax.grid(alpha=0.3)
 plt.tight_layout()
 plt.show()
 
-print("\\nTop of beam: COMPRESSION (concrete handles this)")
+print("\\\nTop of beam: COMPRESSION (concrete handles this)")
 print("Bottom of beam: TENSION (steel rebar handles this)")
 print("Neutral axis: zero stress (middle of beam)")`,
       challenge: 'Double the load to 40,000 N/m. How much more steel is needed? What if you also increase beam depth to 0.6 m? Deeper beams need less steel — this is the depth-vs-reinforcement trade-off that engineers optimise.',

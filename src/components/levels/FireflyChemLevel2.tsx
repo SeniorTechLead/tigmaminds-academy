@@ -220,7 +220,7 @@ ax1.axvline(det_limit, color='#f59e0b', linestyle=':', label=f'Detection limit (
 # Mark bacteria equivalent
 atp_per_bacterium = 1  # fmol
 ax1.axvline(atp_per_bacterium, color='#3b82f6', linestyle=':', alpha=0.5)
-ax1.text(atp_per_bacterium * 1.5, 50, '1 bacterium\\n(~1 fmol ATP)', color='#3b82f6', fontsize=8)
+ax1.text(atp_per_bacterium * 1.5, 50, '1 bacterium\\\n(~1 fmol ATP)', color='#3b82f6', fontsize=8)
 
 ax1.set_xlabel('ATP (femtomoles)', color='white')
 ax1.set_ylabel('Light output (RLU)', color='white')
@@ -662,12 +662,12 @@ ax = axes[1, 1]
 ax.set_facecolor('#111827')
 
 events = [
-    (2002, 'ChR2 discovered\\nin algae', '#3b82f6'),
-    (2005, 'First optogenetic\\nneuron control', '#22c55e'),
-    (2010, 'Fear circuits\\nmapped', '#f59e0b'),
-    (2015, 'Memory cells\\nactivated', '#a855f7'),
-    (2020, 'Human clinical\\ntrial (blindness)', '#ef4444'),
-    (2024, 'Partial vision\\nrestored', '#ec4899'),
+    (2002, 'ChR2 discovered\\\nin algae', '#3b82f6'),
+    (2005, 'First optogenetic\\\nneuron control', '#22c55e'),
+    (2010, 'Fear circuits\\\nmapped', '#f59e0b'),
+    (2015, 'Memory cells\\\nactivated', '#a855f7'),
+    (2020, 'Human clinical\\\ntrial (blindness)', '#ef4444'),
+    (2024, 'Partial vision\\\nrestored', '#ec4899'),
 ]
 
 for i, (year, label, color) in enumerate(events):
@@ -730,8 +730,8 @@ ax1.set_facecolor('#111827')
 
 years = [1985, 1990, 1995, 2000, 2005, 2010, 2012, 2015, 2018, 2020, 2023]
 brightness = [1, 1.5, 3, 5, 10, 20, 50, 80, 150, 200, 350]  # relative to wild-type
-names = ['Wild-type\\nfirefly', '', 'Click beetle\\ngreen', '', 'Renilla\\nimproved',
-         '', 'NanoLuc', '', 'teLuc', 'Antares2', 'NanoBRET\\n3.0']
+names = ['Wild-type\\\nfirefly', '', 'Click beetle\\\ngreen', '', 'Renilla\\\nimproved',
+         '', 'NanoLuc', '', 'teLuc', 'Antares2', 'NanoBRET\\\n3.0']
 
 ax1.semilogy(years, brightness, 'o-', color='#84cc16', linewidth=2.5, markersize=8)
 for y, b, n in zip(years, brightness, names):
@@ -760,14 +760,14 @@ ax1.set_ylim(0.5, 1e12)
 ax2.set_facecolor('#111827')
 
 applications = {
-    'Medical\\nimaging': (9, 8, '#22c55e'),
-    'Drug\\nscreening': (10, 9, '#3b82f6'),
-    'Environmental\\nsensors': (6, 7, '#f59e0b'),
-    'Glowing\\nplants': (4, 6, '#84cc16'),
-    'Living\\narchitecture': (2, 9, '#a855f7'),
-    'Autonomous\\nlighting': (1, 10, '#ef4444'),
-    'Food safety\\ntesting': (9, 5, '#06b6d4'),
-    'Space\\nbiosensors': (3, 8, '#ec4899'),
+    'Medical\\\nimaging': (9, 8, '#22c55e'),
+    'Drug\\\nscreening': (10, 9, '#3b82f6'),
+    'Environmental\\\nsensors': (6, 7, '#f59e0b'),
+    'Glowing\\\nplants': (4, 6, '#84cc16'),
+    'Living\\\narchitecture': (2, 9, '#a855f7'),
+    'Autonomous\\\nlighting': (1, 10, '#ef4444'),
+    'Food safety\\\ntesting': (9, 5, '#06b6d4'),
+    'Space\\\nbiosensors': (3, 8, '#ec4899'),
 }
 
 for name, (readiness, impact, color) in applications.items():

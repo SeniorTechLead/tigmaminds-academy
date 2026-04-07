@@ -88,7 +88,7 @@ class GlacierEnergyBalance:
 model = GlacierEnergyBalance(altitude_m=5500)
 
 # Compare fresh snow vs dirty ice in June
-print("=== Energy Balance Comparison (June, 5500m) ===\\n")
+print("=== Energy Balance Comparison (June, 5500m) ===\\\n")
 for surface, albedo in [("Fresh snow", 0.85), ("Old snow", 0.60), ("Dirty ice", 0.35)]:
     q, sw, lw, qs = model.energy_balance(month=6, albedo=albedo, air_temp=2)
     melt = model.melt_rate(q)
@@ -219,7 +219,7 @@ plt.show()
 surface_v = u_m_per_year[-1]
 print(f"Surface velocity: {surface_v:.1f} m/year ({surface_v/365:.2f} m/day)")
 print(f"Basal velocity: {u_m_per_year[0]:.1f} m/year (no sliding)")
-print(f"\\nWith n=3, most deformation happens near the base")
+print(f"\\\nWith n=3, most deformation happens near the base")
 print(f"The top 50% of the glacier moves as a nearly rigid block")`,
       challenge: 'Add basal sliding: add a constant 15 m/year to the entire velocity profile. How does the profile shape change? What fraction of total motion is now from sliding?',
       successHint: 'You have solved Glen\'s Flow Law analytically and visualized the characteristic velocity profiles. The "plug flow" shape (rigid top, shearing base) is observed in every glacier on Earth — a beautiful confirmation of the physics.',
@@ -591,7 +591,7 @@ plt.tight_layout()
 plt.savefig('projections.png', dpi=100, facecolor='#1f2937')
 plt.show()
 
-print("=== Kanchenjunga Glacier Projections for 2100 ===\\n")
+print("=== Kanchenjunga Glacier Projections for 2100 ===\\\n")
 for scenario, (color, label) in scenarios.items():
     V, A, ELA = model.project(scenario, years)
     loss = (1 - V[-1] / model.V0) * 100

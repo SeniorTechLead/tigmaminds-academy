@@ -61,22 +61,22 @@ fig.suptitle('Fibre Cross-Sections (40x)', color='white', fontsize=13)
 # Silk: triangular
 t = np.linspace(0, 2*np.pi, 4)
 axes[0].fill(np.cos(t + np.pi/6) * 0.8, np.sin(t + np.pi/6) * 0.8, color='#f59e0b', alpha=0.7)
-axes[0].set_title('Muga Silk\\n(triangular)', color='white', fontsize=9)
+axes[0].set_title('Muga Silk\\\n(triangular)', color='white', fontsize=9)
 
 # Cotton: twisted ribbon with hollow center
 t = np.linspace(0, 2*np.pi, 50)
 axes[1].fill(np.cos(t)*0.9, np.sin(t)*0.5, color='#a3e635', alpha=0.5)
 axes[1].fill(np.cos(t)*0.4, np.sin(t)*0.2, color='#1f2937', alpha=1)
-axes[1].set_title('Cotton\\n(flat, hollow)', color='white', fontsize=9)
+axes[1].set_title('Cotton\\\n(flat, hollow)', color='white', fontsize=9)
 
 # Nylon: perfect circle
 axes[2].fill(np.cos(t)*0.7, np.sin(t)*0.7, color='#3b82f6', alpha=0.7)
-axes[2].set_title('Nylon\\n(circular)', color='white', fontsize=9)
+axes[2].set_title('Nylon\\\n(circular)', color='white', fontsize=9)
 
 # Wool: scaly surface
 r = 0.7 + 0.1 * np.sin(12 * t)
 axes[3].fill(r * np.cos(t), r * np.sin(t), color='#f87171', alpha=0.5)
-axes[3].set_title('Wool\\n(scaly)', color='white', fontsize=9)
+axes[3].set_title('Wool\\\n(scaly)', color='white', fontsize=9)
 
 for ax in axes:
     ax.set_facecolor('#111827')

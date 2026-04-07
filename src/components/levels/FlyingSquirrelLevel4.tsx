@@ -121,7 +121,7 @@ ax.tick_params(colors='gray')
 
 # 3. Parameter comparison bar chart
 ax = axes[1, 0]; ax.set_facecolor('#111827')
-params = ['AR', 'Area\\n(cm^2/50)', 'Loading\\n(N/m^2)', 'L/D\\npredicted']
+params = ['AR', 'Area\\\n(cm^2/50)', 'Loading\\\n(N/m^2)', 'L/D\\\npredicted']
 x_pos = np.arange(len(params))
 width = 0.18
 for i, (d, c) in enumerate(zip(designs, colors)):
@@ -485,7 +485,7 @@ plt.show()
 # Ranking
 ranked = sorted(zip(names, grs, gr_stds, cvs),
                 key=lambda x: x[1], reverse=True)
-print("\\nRanking by glide ratio:")
+print("\\\nRanking by glide ratio:")
 for rank, (name, gr, gs, cv) in enumerate(ranked, 1):
     print(f"  {rank}. {name}: GR = {gr:.2f} +/- {gs:.2f} (CV = {cv:.1f}%)")`,
       challenge: 'Implement a simple significance test: for the top two designs, compute the t-statistic = (mean1 - mean2) / sqrt(std1^2/n + std2^2/n). If t > 2.0, the difference is statistically significant at 95% confidence. Are your top two designs significantly different, or could the ranking be due to chance?',
@@ -606,16 +606,16 @@ opt_idx = np.argmax(ranges_by_cg)
 opt_cg = cg_positions[opt_idx]
 opt_range = ranges_by_cg[opt_idx]
 ax.plot(opt_cg, opt_range, 'o', color='#f59e0b', markersize=10, zorder=5)
-ax.annotate(f'Optimal: {opt_cg:.0f}% chord\\n{opt_range:.2f} m',
+ax.annotate(f'Optimal: {opt_cg:.0f}% chord\\\n{opt_range:.2f} m',
             xy=(opt_cg, opt_range), xytext=(opt_cg + 5, opt_range - 0.5),
             color='#f59e0b', fontsize=10,
             arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
 # Mark zones
 ax.axvspan(15, 25, alpha=0.1, color='#ef4444')
-ax.text(17, min(ranges_by_cg) + 0.3, 'Nose-heavy\\n(divey)', color='#ef4444', fontsize=9)
+ax.text(17, min(ranges_by_cg) + 0.3, 'Nose-heavy\\\n(divey)', color='#ef4444', fontsize=9)
 ax.axvspan(40, 50, alpha=0.1, color='#ef4444')
-ax.text(41, min(ranges_by_cg) + 0.3, 'Tail-heavy\\n(unstable)', color='#ef4444', fontsize=9)
+ax.text(41, min(ranges_by_cg) + 0.3, 'Tail-heavy\\\n(unstable)', color='#ef4444', fontsize=9)
 
 ax.set_xlabel('CG position (% chord from nose)', color='white')
 ax.set_ylabel('Horizontal range (m)', color='white')
@@ -805,7 +805,7 @@ for ar, gr, name, c in zip(ars, grs_plot, names, colors_scatter):
 # Add squirrel point
 ax.scatter(squirrel['AR'], squirrel['GR'], color='#f59e0b', s=200,
            marker='*', zorder=5, edgecolors='white', linewidth=1.5)
-ax.annotate('Flying Squirrel\\n(AR=1.7, GR=2.5)', (squirrel['AR'], squirrel['GR']),
+ax.annotate('Flying Squirrel\\\n(AR=1.7, GR=2.5)', (squirrel['AR'], squirrel['GR']),
             textcoords="offset points", xytext=(10, -15),
             color='#f59e0b', fontsize=9, fontweight='bold')
 
@@ -824,7 +824,7 @@ ax.tick_params(colors='gray')
 ax = axes[1, 0]; ax.set_facecolor('#111827')
 best_name = sorted_names[0]
 best = data[best_name]
-categories = ['Mass (g)', 'Area (cm^2)', 'Wing loading\\n(N/m^2)', 'Glide ratio']
+categories = ['Mass (g)', 'Area (cm^2)', 'Wing loading\\\n(N/m^2)', 'Glide ratio']
 paper_vals = [best['mass_g'], best['area_cm2'], best['wl'], best['range_m']/launch_h]
 squirrel_vals = [squirrel['mass_g'], squirrel['area_cm2'], squirrel['wl'], squirrel['GR']]
 
@@ -858,7 +858,7 @@ ax2.set_ylabel('Relative turn radius (m)', color='#ef4444')
 
 # Mark squirrel's AR
 ax.axvline(1.7, color='#f59e0b', linestyle=':', linewidth=2)
-ax.text(1.8, 3, 'Squirrel AR\\n(1.7)', color='#f59e0b', fontsize=10)
+ax.text(1.8, 3, 'Squirrel AR\\\n(1.7)', color='#f59e0b', fontsize=10)
 
 ax.set_xlabel('Aspect ratio', color='white')
 ax.set_title('The AR Trade-off: Range vs Manoeuvrability', color='white', fontsize=12)
@@ -904,7 +904,7 @@ plt.show()
 print("Final rankings:")
 for i, (name, gr, std) in enumerate(zip(sorted_names, sorted_grs, sorted_stds)):
     print(f"  {i+1}. {name}: GR = {gr:.2f} +/- {std:.2f}")
-print(f"\\nFlying squirrel: GR = {squirrel['GR']} (optimised for forest, not range)")`,
+print(f"\\\nFlying squirrel: GR = {squirrel['GR']} (optimised for forest, not range)")`,
       challenge: 'Build a "squirrel mode" paper glider: low AR (1.7), but with adjustable flaps (fold wing tips up) that let you change AoA mid-flight by throwing with a flick. Test whether you can make it turn 90 degrees during a glide like the real squirrel does. What happens to range when you force a turn?',
       successHint: 'The most important lesson from this capstone is not which paper glider flies farthest. It is that "best" is always relative to the objective. The flying squirrel sacrifices raw glide performance for manoeuvrability, consistency, and landing precision, because those are what keep it alive in the Hollongapar forest. Good engineering, like good evolution, optimises for the right objective.',
     },
@@ -981,8 +981,8 @@ ax.tick_params(colors='gray')
 # 2. Reynolds number comparison
 ax = axes[0, 1]; ax.set_facecolor('#111827')
 flyers = [
-    ('Paper glider\\n(Wide & Short)', 3.0, 0.10, '#3b82f6'),
-    ('Paper glider\\n(Narrow & Long)', 3.0, 0.10, '#22c55e'),
+    ('Paper glider\\\n(Wide & Short)', 3.0, 0.10, '#3b82f6'),
+    ('Paper glider\\\n(Narrow & Long)', 3.0, 0.10, '#22c55e'),
     ('Flying squirrel', 8.5, 0.15, '#f59e0b'),
     ('Sugar glider', 6.0, 0.08, '#ef4444'),
     ('Wingsuit', 55.0, 0.60, '#a855f7'),

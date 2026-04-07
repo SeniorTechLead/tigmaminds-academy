@@ -425,7 +425,7 @@ for d in [10, 30, 50, 65, 90, 120]:
     idx = np.argmin(np.abs(days - d))
     print(f"{d:<8} {exponential[idx]:>12.1f} cm {logistic[idx]:>12.1f} cm {bamboo[idx]:>12.1f} cm")
 
-print(f"\\nExponential at day 120: {exponential[-1]:,.0f} cm = {exponential[-1]/100:,.0f} m (absurd)")
+print(f"\\\nExponential at day 120: {exponential[-1]:,.0f} cm = {exponential[-1]/100:,.0f} m (absurd)")
 print(f"Logistic at day 120: {logistic[-1]:.0f} cm = {logistic[-1]/100:.1f} m (realistic)")
 print(f"Bamboo at day 120: {bamboo[-1]:.0f} cm — stopped growing at day {cutoff_day}")`,
       challenge: 'Add a fourth model: Gompertz growth, where dN/dt = r * N * ln(K/N). This model has a more asymmetric S-curve that often fits biological growth better than logistic. Plot it alongside the others.',
@@ -550,7 +550,7 @@ print("Cell expansion results after 48 hours:")
 for name, data in results.items():
     expansion = data['V'][-1] / data['V'][0]
     print(f"  {name:<22}: {data['V'][-1]:.0f} vol units ({expansion:.1f}x expansion)")
-print(f"\\nWater is the dominant factor: drought cuts expansion by ~{(1 - results['Drought stress']['V'][-1]/results['Normal bamboo']['V'][-1])*100:.0f}%")
+print(f"\\\nWater is the dominant factor: drought cuts expansion by ~{(1 - results['Drought stress']['V'][-1]/results['Normal bamboo']['V'][-1])*100:.0f}%")
 print(f"Extensibility (auxin) matters too: low m cuts by ~{(1 - results['Low extensibility']['V'][-1]/results['Normal bamboo']['V'][-1])*100:.0f}%")`,
       challenge: 'Add a scenario where the plant pumps in extra potassium ions at hour 12 (increasing P_base by 0.3 for the remaining time). This models active osmotic adjustment. How much extra growth does the cell gain?',
       successHint: 'The Lockhart equation captures a deep truth: growth requires both the force to expand (turgor pressure) and the structural permission to expand (wall extensibility). Biology controls both independently.',
@@ -660,13 +660,13 @@ plt.tight_layout()
 plt.show()
 
 print("Growth rate rankings:")
-print(f"\\n  By ABSOLUTE rate (cm/day):")
+print(f"\\\n  By ABSOLUTE rate (cm/day):")
 for i in sorted(range(len(names)), key=lambda x: agrs[x], reverse=True)[:5]:
     print(f"    {names[i]:<25} {agrs[i]:>10.3f} cm/day  [{strategies[i]}]")
-print(f"\\n  By RELATIVE rate (doublings/day):")
+print(f"\\\n  By RELATIVE rate (doublings/day):")
 for i in sorted(range(len(names)), key=lambda x: rgrs[x], reverse=True)[:5]:
     print(f"    {names[i]:<25} {rgrs[i]*24:>10.3f} /day  [{strategies[i]}]")
-print(f"\\nBamboo wins AGR but bacteria dominate RGR.")
+print(f"\\\nBamboo wins AGR but bacteria dominate RGR.")
 print(f"The metric you choose changes the ranking entirely.")`,
       challenge: 'Add data for two more species you know about. Then calculate "growth efficiency" = final_size / total_growth_days. Which species is most efficient at reaching its maximum size?',
       successHint: 'Comparing across species requires careful normalization. This lesson applies to any comparison problem: raw numbers can be misleading without proper baselines. Relative growth rate is to biology what percentage return is to finance.',

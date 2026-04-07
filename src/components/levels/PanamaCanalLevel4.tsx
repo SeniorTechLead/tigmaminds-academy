@@ -96,13 +96,13 @@ neopanamax_locks = [
 lake = GatunLake(area_km2=425, initial_level=26.0, min_level=24.84, max_level=26.7)
 
 # System overview
-print("=== Canal Lock Simulator — Architecture ===\\n")
+print("=== Canal Lock Simulator — Architecture ===\\\n")
 print("Lock Systems:")
 for lock in gatun_locks + neopanamax_locks:
     print(f"  {lock}")
     print(f"    Water per cycle: {lock.water_volume:,.0f} m³ ({lock.water_volume/1e6:.1f} ML)")
 
-print(f"\\nGatun Lake:")
+print(f"\\\nGatun Lake:")
 print(f"  Area: {lake.area_m2/1e6:.0f} km² | Level: {lake.level:.1f}m")
 print(f"  Operating range: {lake.min_level}-{lake.max_level}m")
 
@@ -113,7 +113,7 @@ test_ships = [
     Ship("MSC Gulsun", 400, 61.5, 16.0, 230000, "too_large"),
 ]
 
-print("\\nShip Compatibility:")
+print("\\\nShip Compatibility:")
 for ship in test_ships:
     for lock in [gatun_locks[0], neopanamax_locks[0]]:
         fits = ship.fits_lock(lock)
@@ -217,7 +217,7 @@ configs = [
     ("Agua Clara (Neo)",   427.0, 55.0, 24, 6.0, 9.0),
 ]
 
-print("=== Lock Filling Engine Test Results ===\\n")
+print("=== Lock Filling Engine Test Results ===\\\n")
 
 for name, length, width, n_culv, diam, head in configs:
     r = engine.fill(length, width, n_culv, diam, head)
@@ -366,7 +366,7 @@ ship_mix = [
 # Simulate different demand levels
 scheduler = TransitScheduler(lock_cycle_min=30, lake_volume_limit_m3=8e9)
 
-print("=== Panama Canal Transit Scheduler ===\\n")
+print("=== Panama Canal Transit Scheduler ===\\\n")
 print(f"{'Demand':>7} {'Completed':>10} {'Rejected':>9} {'Revenue':>12} "
       f"{'Avg Wait':>10} {'Water (ML)':>10}")
 print("-" * 63)
@@ -384,7 +384,7 @@ for n_ships in [25, 35, 40, 45, 50, 60]:
           f"{revenue/1e6:>9.1f}M {avg_wait:>8.0f}min {water_ml:>9.0f}")
 
 # Detailed breakdown for 40-ship day
-print("\\n=== Detailed Day (40 ships) ===")
+print("\\\n=== Detailed Day (40 ships) ===")
 scheduler.water_used = 0
 ships = scheduler.generate_arrivals(40, ship_mix)
 done, rejected = scheduler.schedule_day(ships, 2, 2)
@@ -502,7 +502,7 @@ class WaterManager:
         return year_history, total_ships, total_revenue
 
 # Run multi-year simulation
-print("=== Integrated Water Management Simulation ===\\n")
+print("=== Integrated Water Management Simulation ===\\\n")
 
 # Scenario: Normal conditions
 mgr = WaterManager(425, 26.0)
@@ -522,7 +522,7 @@ for year in range(1, 6):
           f"Min level: {min_level:.2f}m | Restricted days: {restricted_days}")
 
 # Drought scenario (Year 3 has 40% less rainfall)
-print("\\n=== Drought Scenario (reduced rainfall Year 2-3) ===")
+print("\\\n=== Drought Scenario (reduced rainfall Year 2-3) ===")
 mgr2 = WaterManager(425, 26.0)
 
 for year in range(1, 6):
@@ -671,7 +671,7 @@ for name, (level, rain, demand, water) in scenarios.items():
 
 # Revenue analysis
 toll = 400000
-print("\\n3. REVENUE IMPACT")
+print("\\\n3. REVENUE IMPACT")
 print("-" * 72)
 baseline_rev = results["Baseline (current)"]["avg_ships_yr"] * toll
 for name, r in results.items():
@@ -726,7 +726,7 @@ skills = [
 for skill, detail in skills:
     print(f"  {skill}: {detail}")
 
-print("\\n" + "=" * 72)`,
+print("\\\n" + "=" * 72)`,
       challenge: 'Add a "dynamic pricing" scenario: when the lake drops below 25.5 m, double the toll. This reduces demand by 20% (price elasticity). Model this feedback and compare revenue: does the canal earn MORE by charging higher tolls to fewer ships? What is the optimal toll multiplier during drought? This is the real pricing question facing the Panama Canal Authority.',
       successHint: 'You completed a full engineering capstone project: from system architecture through physics simulation, scheduling optimisation, water management, and professional reporting. This is exactly how real infrastructure engineering decisions are made — the Panama Canal Authority commissions analyses like this to plan investments worth billions of dollars. You now have a portfolio project demonstrating hydraulic engineering, optimisation, Monte Carlo methods, and technical communication.',
     },

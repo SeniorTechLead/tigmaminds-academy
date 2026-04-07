@@ -114,7 +114,7 @@ I_beam = (web_t * web_h**3 / 12 +
           2 * (flange_w * flange_t**3 / 12 +
                flange_w * flange_t * ((web_h + flange_t) / 2)**2))
 
-shapes = ['Solid\\ncircle', 'Hollow\\ntube', 'Solid\\nsquare', 'I-beam']
+shapes = ['Solid\\\ncircle', 'Hollow\\\ntube', 'Solid\\\nsquare', 'I-beam']
 I_values = [I_solid, I_tube, I_square, I_beam]
 relative = [I / I_solid for I in I_values]
 

@@ -83,14 +83,14 @@ for ax, (name, (r, g, b)) in zip(axes.flatten(), test_colors.items()):
     ax.add_patch(plt.Rectangle((0, 0.5), 1, 0.5, color=(r/255, g/255, b/255)))
     ax.add_patch(plt.Rectangle((0, 0), 1, 0.5, color=(r2/255, g2/255, b2/255)))
 
-    ax.text(0.5, 0.75, f'RGB\\n({r},{g},{b})', ha='center', va='center',
+    ax.text(0.5, 0.75, f'RGB\\\n({r},{g},{b})', ha='center', va='center',
             color='white' if (r+g+b)/3 < 128 else '#1f2937', fontsize=7, fontweight='bold')
-    ax.text(0.5, 0.25, f'Round-trip\\n({r2},{g2},{b2})', ha='center', va='center',
+    ax.text(0.5, 0.25, f'Round-trip\\\n({r2},{g2},{b2})', ha='center', va='center',
             color='white' if (r2+g2+b2)/3 < 128 else '#1f2937', fontsize=7, fontweight='bold')
 
     # Calculate color difference
     diff = np.sqrt((r-r2)**2 + (g-g2)**2 + (b-b2)**2)
-    ax.set_title(f'{name}\\ndE={diff:.1f}', color='white', fontsize=9)
+    ax.set_title(f'{name}\\\ndE={diff:.1f}', color='white', fontsize=9)
     ax.set_xlim(0, 1); ax.set_ylim(0, 1)
     ax.set_xticks([]); ax.set_yticks([])
 

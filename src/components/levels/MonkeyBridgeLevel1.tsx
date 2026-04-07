@@ -207,10 +207,10 @@ for h, label, color in layers:
 # Species by layer
 ax2.set_facecolor('#111827')
 species_data = {
-    'Emergent\n(40-45m)': ['Hornbills', 'Eagles'],
-    'Upper canopy\n(20-40m)': ['Gibbons', 'Langurs', 'Macaques'],
-    'Understory\n(5-20m)': ['Civets', 'Tree frogs', 'Snakes'],
-    'Forest floor\n(0-5m)': ['Deer', 'Porcupines', 'Beetles'],
+    'Emergent\\n(40-45m)': ['Hornbills', 'Eagles'],
+    'Upper canopy\\n(20-40m)': ['Gibbons', 'Langurs', 'Macaques'],
+    'Understory\\n(5-20m)': ['Civets', 'Tree frogs', 'Snakes'],
+    'Forest floor\\n(0-5m)': ['Deer', 'Porcupines', 'Beetles'],
 }
 
 y_positions = [42, 30, 15, 3]
@@ -232,7 +232,7 @@ plt.show()
 print(f"Light at emergent layer (42m): {I0 * np.exp(-k * max_LAI * (1 - 42/45)):.0f} umol/m2/s")
 print(f"Light at upper canopy (30m): {I0 * np.exp(-k * max_LAI * (1 - 30/45)):.0f} umol/m2/s")
 print(f"Light at forest floor (0m): {I0 * np.exp(-k * max_LAI):.0f} umol/m2/s")
-print(f"\\nThat's only {I0 * np.exp(-k * max_LAI) / I0 * 100:.1f}% of sunlight reaching the ground.")`,
+print(f"\\\nThat's only {I0 * np.exp(-k * max_LAI) / I0 * 100:.1f}% of sunlight reaching the ground.")`,
       challenge: 'Increase the total LAI from 8 to 12 (a denser forest). How much light reaches the floor now? At what LAI does the floor get less than 1 umol/m2/s (essentially total darkness)?',
       successHint: 'The Beer-Lambert law is used in everything from forest ecology to ocean science to atmospheric physics. Wherever light passes through a medium, this exponential decay applies. The canopy is a biological light filter.',
     },
@@ -261,7 +261,7 @@ import matplotlib.pyplot as plt
 solar_input = 1000000  # kcal/m2/year hitting the canopy
 efficiency = [0.01, 0.10, 0.10, 0.10]  # photosynthesis, then each trophic transfer
 
-levels = ['Sunlight', 'Producers\\n(trees)', 'Primary\\nconsumers', 'Secondary\\nconsumers', 'Tertiary\\nconsumers']
+levels = ['Sunlight', 'Producers\\\n(trees)', 'Primary\\\nconsumers', 'Secondary\\\nconsumers', 'Tertiary\\\nconsumers']
 energy = [solar_input]
 for eff in efficiency:
     energy.append(energy[-1] * eff)
@@ -296,7 +296,7 @@ species = {
     'Monkeys': (0.65, 0.5),
     'Birds': (0.35, 0.5),
     'Civets': (0.2, 0.7),
-    'Clouded\\nleopard': (0.5, 0.85),
+    'Clouded\\\nleopard': (0.5, 0.85),
     'Eagle': (0.8, 0.8),
 }
 
@@ -305,14 +305,14 @@ connections = [
     ('Trees', 'Insects'), ('Trees', 'Fruit/seeds'),
     ('Fruit/seeds', 'Monkeys'), ('Fruit/seeds', 'Birds'),
     ('Insects', 'Birds'), ('Insects', 'Civets'),
-    ('Monkeys', 'Clouded\\nleopard'), ('Monkeys', 'Eagle'),
+    ('Monkeys', 'Clouded\\\nleopard'), ('Monkeys', 'Eagle'),
     ('Birds', 'Eagle'), ('Birds', 'Civets'),
-    ('Civets', 'Clouded\\nleopard'),
+    ('Civets', 'Clouded\\\nleopard'),
 ]
 
 sp_colors = {'Trees': '#22c55e', 'Insects': '#f59e0b', 'Fruit/seeds': '#22c55e',
              'Monkeys': '#3b82f6', 'Birds': '#ef4444', 'Civets': '#a855f7',
-             'Clouded\\nleopard': '#ec4899', 'Eagle': '#ef4444'}
+             'Clouded\\\nleopard': '#ec4899', 'Eagle': '#ef4444'}
 
 for src, dst in connections:
     x1, y1 = species[src]
@@ -336,7 +336,7 @@ print("Energy at each level:")
 for level, e in zip(levels, energy):
     pct = e / solar_input * 100
     print(f"  {level.replace(chr(10), ' ')}: {e:,.0f} kcal ({pct:.4f}%)")
-print("\\n10% rule: only 10% of energy passes to the next level.")
+print("\\\n10% rule: only 10% of energy passes to the next level.")
 print("This is why top predators are rare — there's barely any energy left for them.")`,
       challenge: 'What if the transfer efficiency were 20% instead of 10% (some aquatic food webs achieve this)? How much more energy would reach the top predator?',
       successHint: 'The 10% rule explains why ecosystems are shaped like pyramids, why big predators need huge territories, and why eating plants is more energy-efficient than eating meat. It\'s thermodynamics applied to ecology.',
@@ -417,7 +417,7 @@ plt.show()
 
 print(f"Optimal group size: {optimal}")
 print(f"Net benefit at optimal: {net_benefit[optimal-1]:.1f}")
-print(f"\\nReal macaque group sizes: 20-50 (matches the model!)")
+print(f"\\\nReal macaque group sizes: 20-50 (matches the model!)")
 print(f"Too small: not enough eyes for predator detection")
 print(f"Too large: too much competition for food")`,
       challenge: 'What if predation pressure doubles (multiply safety_benefit by 2)? How does the optimal group size change? What about in a food-rich environment (halve competition_cost)?',
@@ -494,7 +494,7 @@ print("After 500 years:")
 print(f"  Old-growth stored: {carbon_old_growth[-1]:.0f} tonnes C/ha")
 print(f"  Plantation average: {np.mean(carbon_plantation):.0f} tonnes C/ha")
 print(f"  Old-growth stores {carbon_old_growth[-1] / np.mean(carbon_plantation):.1f}x more carbon")
-print(f"\\nCutting an old-growth forest releases centuries of stored carbon.")
+print(f"\\\nCutting an old-growth forest releases centuries of stored carbon.")
 print(f"A plantation can never catch up — it keeps getting reset to zero.")`,
       challenge: 'What if we extend the plantation harvest cycle to 80 years instead of 40? Does the gap shrink? At what harvest cycle would the plantation match old-growth carbon storage? (Hint: it never can.)',
       successHint: 'Old-growth forests are not just collections of big trees — they are centuries-old carbon banks, biodiversity reservoirs, and ecological machines that cannot be rebuilt on human timescales. Conservation of existing old-growth is always more effective than planting new forest.',

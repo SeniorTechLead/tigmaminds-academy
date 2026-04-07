@@ -122,7 +122,7 @@ for label, te, k, _ in scenarios:
         t_h = -np.log((30 - te) / (T0 - te)) / k
         print(f"  {label}: {t_h:.1f} minutes")
 
-print("\\nDry fur buys critical rescue time!")
+print("\\\nDry fur buys critical rescue time!")
 print("Wet fur in cold = emergency situation.")`,
       challenge: 'Add metabolism: modify the equation to dT/dt = -k(T-T_env) + M, where M is metabolic heat production (about 0.5°C/min at full metabolism). At what ambient temperature can the panda maintain 38°C indefinitely?',
       successHint: 'You have solved a first-order ODE both numerically (Euler) and analytically. The exponential decay captures the essential physics of heat loss, and the comparison between dry and wet fur quantifies why rain + cold is the deadliest combination for the red panda.',
@@ -405,7 +405,7 @@ x, Ta, Tv = counter_current_exchange()
 print(f"Artery at core: {Ta[0]:.1f}°C → at paw: {Ta[-1]:.1f}°C")
 print(f"Vein at paw: {Tv[-1]:.1f}°C → at core: {Tv[0]:.1f}°C")
 print(f"Heat recovered: {(Tv[0]-Tv[-1])/(Ta[0]-Tv[-1])*100:.0f}%")
-print(f"\\nWithout CCHE: paw at 38°C, gradient to -10°C = 48°C")
+print(f"\\\nWithout CCHE: paw at 38°C, gradient to -10°C = 48°C")
 print(f"With CCHE: paw at {Ta[-1]:.0f}°C, gradient to 0°C = {Ta[-1]:.0f}°C")
 print(f"Heat loss reduction: {(1 - Ta[-1]/38)*100:.0f}%")`,
       challenge: 'Model what happens during exercise (increased flow rate from 0.001 to 0.005 kg/s). Does the CCHE still work well, or does high flow overwhelm the exchange? Plot the comparison.',
@@ -613,7 +613,7 @@ reserve_change = data['reserve'][-1] - data['reserve'][0]
 print(f"Starting reserve: {data['reserve'][0]:.0f} kcal")
 print(f"Ending reserve:   {data['reserve'][-1]:.0f} kcal")
 print(f"Daily change:     {reserve_change:+.0f} kcal")
-print(f"\\nForaging hours: ~10h  Sleeping: ~9h  Basking: ~4h")`,
+print(f"\\\nForaging hours: ~10h  Sleeping: ~9h  Basking: ~4h")`,
       challenge: 'Run the simulation for a summer day (base temp +5°C, more solar) and compare the energy reserve trajectory. Does the panda gain or lose weight in summer?',
       successHint: 'You have built a complete bioenergetic simulation — the kind of model used in conservation biology to assess habitat viability. The day shows the panda\'s tight energy margins: most of its waking hours go to eating, and even moderate disruptions can tip the balance negative.',
     },
@@ -789,7 +789,7 @@ print(f"=== 12-Hour Night Energy Cost at -10°C ===")
 print(f"Without torpor: {e2[-1]:.0f} kcal")
 print(f"With torpor:    {e1[-1]:.0f} kcal")
 print(f"Savings:        {savings:.0f} kcal ({savings/e2[-1]*100:.0f}%)")
-print(f"\\nThat's {savings:.0f} kcal = ~{savings/0.6:.0f}g of bamboo saved per night!")
+print(f"\\\nThat's {savings:.0f} kcal = ~{savings/0.6:.0f}g of bamboo saved per night!")
 print(f"Over 90 winter nights: ~{savings*90/1000:.0f} kg less bamboo needed!")`,
       challenge: 'Model deeper torpor (target 20°C instead of 28°C). How much more energy is saved? Is there a point of diminishing returns — why not go even lower?',
       successHint: 'You have modeled a complex thermoregulatory behavior with coupled temperature and metabolic dynamics. Torpor is a remarkable survival adaptation — it transforms the red panda from a species that barely survives winter into one that can endure it. The energy savings are not trivial: they represent hundreds of grams of bamboo that do not need to be found in scarce winter conditions.',

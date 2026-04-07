@@ -86,8 +86,8 @@ ax1.axhline(700, color='#ef4444', linestyle=':', linewidth=0.5)
 ax1.text(13.5, 390, 'Visible range', color='gray', fontsize=8)
 
 # Label some molecules
-molecules = {3: 'Butadiene\n(UV, colourless)', 5: 'Vitamin A\n(UV, colourless)',
-             8: 'Turmeric\n(blue abs, yellow)', 11: 'Beta-carotene\n(blue-green abs, orange)'}
+molecules = {3: 'Butadiene\\n(UV, colourless)', 5: 'Vitamin A\\n(UV, colourless)',
+             8: 'Turmeric\\n(blue abs, yellow)', 11: 'Beta-carotene\\n(blue-green abs, orange)'}
 for n, label in molecules.items():
     idx = list(n_bonds).index(n)
     ax1.annotate(label, xy=(n, wavelength[idx]), xytext=(n + 0.5, wavelength[idx] + 30),
@@ -100,7 +100,7 @@ ax1.tick_params(colors='gray')
 
 # Energy level diagram for 3 different molecules
 ax2.set_facecolor('#111827')
-for i, (n, label, x_offset) in enumerate([(3, 'Short\n(colourless)', 0), (7, 'Medium\n(yellow)', 4), (11, 'Long\n(orange)', 8)]):
+for i, (n, label, x_offset) in enumerate([(3, 'Short\\n(colourless)', 0), (7, 'Medium\\n(yellow)', 4), (11, 'Long\\n(orange)', 8)]):
     L_val = n * 2 * bond_length
     for level in range(1, n + 2):
         E = level**2 * h**2 / (8 * m * L_val**2) * 1e19  # scale for display
@@ -199,11 +199,11 @@ ax1.tick_params(colors='gray')
 # Arrow showing shift direction
 ax1.annotate('', xy=(380, 0.85), xytext=(480, 0.85),
              arrowprops=dict(arrowstyle='->', color='#a855f7', linewidth=2))
-ax1.text(410, 0.88, 'Blue shift\n(hypsochromic)', color='#a855f7', fontsize=8, ha='center')
+ax1.text(410, 0.88, 'Blue shift\\n(hypsochromic)', color='#a855f7', fontsize=8, ha='center')
 
 ax1.annotate('', xy=(600, 0.85), xytext=(500, 0.85),
              arrowprops=dict(arrowstyle='->', color='#ef4444', linewidth=2))
-ax1.text(560, 0.88, 'Red shift\n(bathochromic)', color='#ef4444', fontsize=8, ha='center')
+ax1.text(560, 0.88, 'Red shift\\n(bathochromic)', color='#ef4444', fontsize=8, ha='center')
 
 # Resulting apparent colour
 ax2.set_facecolor('#111827')
@@ -218,13 +218,13 @@ def absorbed_to_apparent(peak_nm):
     elif peak_nm < 620: return '#22c55e', 'Green'
     else: return '#f59e0b', 'Yellow'
 
-modifications = ['Base\n(azo dye)', '+NH2\n(donor)', '+NH2 +OH\n(2 donors)', 'Extended\nconjugation', '-NO2\n(withdrawing)']
+modifications = ['Base\\n(azo dye)', '+NH2\\n(donor)', '+NH2 +OH\\n(2 donors)', 'Extended\\nconjugation', '-NO2\\n(withdrawing)']
 peaks = [480, 510, 540, 580, 440]
 apparent_colors = [absorbed_to_apparent(p) for p in peaks]
 
 for i, (mod, peak, (color, name)) in enumerate(zip(modifications, peaks, apparent_colors)):
     ax2.barh(i, 1, color=color, alpha=0.8, height=0.6)
-    ax2.text(0.5, i, f'{mod}\nAbsorbs {peak}nm -> Appears {name}', color='white',
+    ax2.text(0.5, i, f'{mod}\\nAbsorbs {peak}nm -> Appears {name}', color='white',
              fontsize=9, ha='center', va='center', fontweight='bold')
 
 ax2.set_xlim(0, 1)
@@ -409,7 +409,7 @@ ax.plot(known_conc * 1e5, known_abs, 'o-', color='#3b82f6', linewidth=2, markers
 # Mark unknowns
 for i, (a, conc) in enumerate(zip(unknown_abs, unknown_conc)):
     ax.plot(conc * 1e5, a, 's', color='#ef4444', markersize=10)
-    ax.annotate(f'Unknown {i+1}\nA={a}, c={conc*1e5:.2f}x10⁻⁵M',
+    ax.annotate(f'Unknown {i+1}\\nA={a}, c={conc*1e5:.2f}x10⁻⁵M',
                 xy=(conc * 1e5, a), xytext=(conc * 1e5 + 1, a + 0.1),
                 color='#ef4444', fontsize=8, arrowprops=dict(arrowstyle='->', color='#ef4444'))
 
@@ -436,7 +436,7 @@ ax.tick_params(colors='gray')
 # Spectrophotometer schematic
 ax = axes[1, 1]
 ax.set_facecolor('#111827')
-components = ['Light\nsource', 'Mono-\nchromator', 'Sample\ncuvette', 'Detector', 'Computer']
+components = ['Light\\nsource', 'Mono-\\nchromator', 'Sample\\ncuvette', 'Detector', 'Computer']
 x_pos = np.arange(len(components))
 colors_comp = ['#f59e0b', '#a855f7', '#3b82f6', '#22c55e', '#ef4444']
 
@@ -541,7 +541,7 @@ ax.tick_params(colors='gray')
 
 slope = -Ea / R
 ax.text(np.mean(inv_T), np.mean(ln_k) + 1,
-        f'Ea = {Ea/1000:.0f} kJ/mol\nSlope = -Ea/R = {slope:.0f} K',
+        f'Ea = {Ea/1000:.0f} kJ/mol\\nSlope = -Ea/R = {slope:.0f} K',
         color='#a855f7', fontsize=9)
 
 # Time to 90% uptake vs temperature
@@ -562,7 +562,7 @@ ax.set_ylim(0, min(200, max(t90)))
 # Effect of agitation (reduces boundary layer)
 ax = axes[1, 1]
 ax.set_facecolor('#111827')
-agitation_levels = ['No\nstirring', 'Gentle\nstir', 'Moderate\nagitation', 'Vigorous\nagitation']
+agitation_levels = ['No\\nstirring', 'Gentle\\nstir', 'Moderate\\nagitation', 'Vigorous\\nagitation']
 boundary_thickness = [1.0, 0.5, 0.2, 0.05]  # mm
 effective_rate = [0.01, 0.02, 0.04, 0.045]  # overall k at 80°C
 
@@ -623,7 +623,7 @@ Current green dye innovations:
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
-processes = ['Conventional\n(reactive dye)', 'Low-temp\nreactive', 'Supercritical\nCO2 (DyeCoo)', 'Bio-dyeing\n(Colorifix)', 'Traditional\nnatural dye']
+processes = ['Conventional\\n(reactive dye)', 'Low-temp\\nreactive', 'Supercritical\\nCO2 (DyeCoo)', 'Bio-dyeing\\n(Colorifix)', 'Traditional\\nnatural dye']
 
 # Environmental metrics (normalized, lower = better)
 water_use = [100, 70, 0, 10, 80]          # litres per kg fabric
@@ -632,7 +632,7 @@ energy = [100, 80, 90, 40, 50]            # energy consumption
 wastewater_tox = [100, 50, 0, 5, 20]      # wastewater toxicity
 co2_emissions = [100, 70, 50, 30, 40]     # carbon footprint
 
-metrics = ['Water\nuse', 'Chemical\nload', 'Energy', 'Wastewater\ntoxicity', 'CO2\nemissions']
+metrics = ['Water\\nuse', 'Chemical\\nload', 'Energy', 'Wastewater\\ntoxicity', 'CO2\\nemissions']
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 7))
 fig.patch.set_facecolor('#1f2937')
@@ -663,7 +663,7 @@ angles += angles[:1]
 for i, (process, c) in enumerate(zip(processes, colors_proc)):
     values = [water_use[i], chemical_use[i], energy[i], wastewater_tox[i], co2_emissions[i]]
     values += values[:1]
-    ax2.plot(angles, values, 'o-', linewidth=2, label=process.replace('\n', ' '), color=c)
+    ax2.plot(angles, values, 'o-', linewidth=2, label=process.replace('\\n', ' '), color=c)
     ax2.fill(angles, values, alpha=0.05, color=c)
 
 ax2.set_xticks(angles[:-1])

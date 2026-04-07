@@ -567,7 +567,7 @@ ax2.legend(facecolor='#374151', edgecolor='#4b5563', labelcolor='white', fontsiz
 plt.tight_layout()
 plt.show()
 
-print("\\nEvolution converges to optimal anthocyanin levels matching local UV:")
+print("\\\nEvolution converges to optimal anthocyanin levels matching local UV:")
 for (name, uv), color in zip(uv_scenarios.items(), colors):
     h = simulate_evolution(500, n_gen, uv)
     print(f"  {name:30s} → anthocyanin level: {h['mean'][-1]:.1f} (UV optimum: ~{uv:.0f})")`,

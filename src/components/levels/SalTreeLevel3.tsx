@@ -495,7 +495,7 @@ forest_daily_liters = total_trees * daily_total
 forest_daily_mm = forest_daily_liters / (forest_area * 1e6) * 1  # mm
 
 # Water cycle budget
-components = ['Rainfall\\n(monsoon)', 'Transpiration', 'Evaporation\\n(soil)', 'Runoff', 'Groundwater\\nrecharge']
+components = ['Rainfall\\\n(monsoon)', 'Transpiration', 'Evaporation\\\n(soil)', 'Runoff', 'Groundwater\\\nrecharge']
 fluxes = [8, forest_daily_mm, 1.5, 3, 1.5]  # mm/day during monsoon
 colors = ['#3b82f6', '#22c55e', '#f59e0b', '#a855f7', '#6b7280']
 bars = ax.bar(components, fluxes, color=colors, edgecolor='none', width=0.6)
@@ -666,10 +666,10 @@ ax = axes[1, 1]
 # Radial strip showing tissue layers
 tissues = [
     ('Outer bark', 5, '#6b4c3b'),
-    ('Inner bark\\n(phloem)', 3, '#8b6c5c'),
+    ('Inner bark\\\n(phloem)', 3, '#8b6c5c'),
     ('Cambium', 0.5, '#22c55e'),
-    ('Sapwood\\n(active xylem)', 15, '#c4a882'),
-    ('Heartwood\\n(dead xylem)', 25, '#8b7355'),
+    ('Sapwood\\\n(active xylem)', 15, '#c4a882'),
+    ('Heartwood\\\n(dead xylem)', 25, '#8b7355'),
     ('Pith', 2, '#ddd'),
 ]
 left = 0
@@ -686,7 +686,7 @@ ax.set_yticks([])
 
 # Plot 6: Earlywood vs latewood comparison
 ax = axes[1, 2]
-cell_types = ['Earlywood\\nvessel', 'Latewood\\nvessel', 'Earlywood\\nfiber', 'Latewood\\nfiber']
+cell_types = ['Earlywood\\\nvessel', 'Latewood\\\nvessel', 'Earlywood\\\nfiber', 'Latewood\\\nfiber']
 diameters = [200, 80, 30, 15]  # micrometers
 wall_thickness = [3, 8, 4, 10]  # micrometers
 colors = ['#22c55e', '#3b82f6', '#f59e0b', '#ef4444']

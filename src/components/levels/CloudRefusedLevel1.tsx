@@ -263,7 +263,7 @@ ax2.annotate(f'Peak: {supersaturation[peak_idx]:.1f}% at {temps[peak_idx]:.0f}°
             xytext=(temps[peak_idx] + 8, supersaturation[peak_idx] - 3),
             color='#f59e0b', fontsize=10, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 ax2.axvline(-12, color='#ef4444', linestyle='--', alpha=0.5)
-ax2.text(-11.5, 2, 'AgI activates\\nhere (-5 to -15°C)', color='#ef4444', fontsize=8)
+ax2.text(-11.5, 2, 'AgI activates\\\nhere (-5 to -15°C)', color='#ef4444', fontsize=8)
 ax2.set_xlabel('Temperature (°C)', color='white')
 ax2.set_ylabel('Supersaturation over ice (%)', color='white')
 ax2.set_title('Ice Crystal Growth Rate (higher = faster)', color='white', fontsize=12)
@@ -447,9 +447,9 @@ for i in range(len(distance_km) - 1):
     ax1.plot(distance_km[i:i+2], air_height[i:i+2], color=color, linewidth=3)
 
 ax1.axhline(0, color='white', linewidth=0.5)
-ax1.text(10, 200, 'Bay of Bengal\\n(warm, moist)', color='#ef4444', fontsize=9)
+ax1.text(10, 200, 'Bay of Bengal\\\n(warm, moist)', color='#ef4444', fontsize=9)
 ax1.text(110, 1800, 'Cherrapunji', color='#60a5fa', fontsize=9, ha='center')
-ax1.text(170, 200, 'Rain shadow\\n(dry)', color='#f59e0b', fontsize=9)
+ax1.text(170, 200, 'Rain shadow\\\n(dry)', color='#f59e0b', fontsize=9)
 ax1.set_ylabel('Altitude (m)', color='white')
 ax1.set_title('Orographic Lift: Why Meghalaya Is the Wettest Place', color='white', fontsize=12)
 ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
@@ -467,7 +467,7 @@ ax2.set_title('Rainfall Peaks at the Windward Slope', color='white', fontsize=12
 
 # Annotate
 peak_idx = np.argmax(rainfall)
-ax2.annotate(f'Peak rainfall at {distance_km[peak_idx]:.0f} km\\n(southern slope)',
+ax2.annotate(f'Peak rainfall at {distance_km[peak_idx]:.0f} km\\\n(southern slope)',
             xy=(distance_km[peak_idx], rainfall[peak_idx]),
             xytext=(distance_km[peak_idx] + 30, rainfall[peak_idx] * 0.8),
             color='#f59e0b', fontsize=9, arrowprops=dict(arrowstyle='->', color='#f59e0b'))

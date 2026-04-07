@@ -287,7 +287,7 @@ for trial in range(10):
     ax.plot(freqs, color='#3b82f6', alpha=0.4, linewidth=0.8)
 
 ax.axvspan(100, 110, alpha=0.2, color='#ef4444')
-ax.text(105, 0.95, 'Bottleneck\\n(N=10)', ha='center', color='#ef4444', fontsize=8)
+ax.text(105, 0.95, 'Bottleneck\\\n(N=10)', ha='center', color='#ef4444', fontsize=8)
 ax.set_title('Population Bottleneck Effect', color='white', fontsize=11)
 ax.set_xlabel('Generation', color='white')
 ax.set_ylabel('Allele frequency', color='white')
@@ -407,8 +407,8 @@ ax1.tick_params(colors='gray')
 
 # 2. Ne/N ratios for real species
 ax2.set_facecolor('#111827')
-species = ['Humans\\n(global)', 'Bengal\\ntiger', 'Cheetah', 'Rice\\n(modern cv.)',
-           'Rice\\n(traditional)', 'Kakapo', 'Corn\\n(modern cv.)']
+species = ['Humans\\\n(global)', 'Bengal\\\ntiger', 'Cheetah', 'Rice\\\n(modern cv.)',
+           'Rice\\\n(traditional)', 'Kakapo', 'Corn\\\n(modern cv.)']
 ne_values = [10000, 2500, 100, 50, 500, 70, 30]
 n_values = [8000000000, 3000, 7000, 1e9, 50000, 250, 1e9]
 ne_n_ratio = [ne/n for ne, n in zip(ne_values, n_values)]

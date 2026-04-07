@@ -71,7 +71,7 @@ y = np.array(labels)
 print(f"Dataset: {len(y)} clips × {n} samples each")
 print(f"Moods: {list(MOODS.keys())}")
 print(f"30 clips per mood, each with random variation")
-print("\\nStage 1 complete: synthetic dataset ready for feature extraction.")`,
+print("\\\nStage 1 complete: synthetic dataset ready for feature extraction.")`,
       challenge: 'Add a seventh mood category: "greeting_rumble" — similar to contact_rumble but with a rising pitch (frequency modulation). Synthesize it and visually confirm it looks different from the flat contact_rumble.',
       successHint: 'A well-defined taxonomy and realistic synthetic data are the foundation of any classification system. In real conservation work, these categories come from decades of ethological research. Your synthetic data captures the essential acoustic distinctions that a classifier needs to learn.',
     },
@@ -151,10 +151,10 @@ X = (X - X.mean(axis=0)) / (X.std(axis=0) + 1e-10)
 
 names = ['Centroid','Bandwidth','Rolloff','RMS','ZCR','EnvVar']
 print(f"Feature matrix: {X.shape[0]} clips × {X.shape[1]} features")
-print(f"\\n{'Feature':<12} {'Mean':>8} {'Std':>8}")
+print(f"\\\n{'Feature':<12} {'Mean':>8} {'Std':>8}")
 for i, nm in enumerate(names):
     print(f"{nm:<12} {X[:,i].mean():>8.2f} {X[:,i].std():>8.2f}")
-print("\\n16,000 samples per clip → 6 numbers. That's feature engineering.")`,
+print("\\\n16,000 samples per clip → 6 numbers. That's feature engineering.")`,
       challenge: 'Add spectral flatness as a 9th feature: the geometric mean of the spectrum divided by the arithmetic mean. This measures how "noise-like" vs "tonal" a sound is. Does it help distinguish content_snort from other categories?',
       successHint: 'Eight features compress 44,100 raw samples into 8 informative numbers — a 5,500x compression with minimal information loss for classification. The feature space visualization shows that moods cluster in distinct regions, which is exactly what a classifier needs.',
     },
@@ -220,7 +220,7 @@ for k in [1, 3, 5, 7, 11]:
     te = np.mean([knn(Xtr,ytr,x,k)==l for x,l in zip(Xte,yte)])
     print(f"k={k:2d}  train={tr:.1%}  test={te:.1%}")
 
-print("\\nSmall k → overfits. Large k → underfits. Cross-validate to find the sweet spot.")`,
+print("\\\nSmall k → overfits. Large k → underfits. Cross-validate to find the sweet spot.")`,
       challenge: 'Implement Manhattan distance (L1 norm) as an alternative to Euclidean distance. Compare test accuracy. Which works better for this dataset, and why might that be?',
       successHint: 'KNN is the ultimate interpretable baseline. When it achieves high accuracy, it proves the features are well-separated. When it fails, it tells you exactly where — you can inspect the misclassified neighbors to understand confusion patterns.',
     },
@@ -273,18 +273,18 @@ for i, mood in enumerate(moods):
     f1 = 2*prec*rec/(prec+rec) if prec+rec else 0
     print(f"{mood:<10} {prec:>6.2f} {rec:>6.2f} {f1:>6.2f}")
 
-print(f"\\nOverall accuracy: {np.trace(cm)/cm.sum():.1%}")
+print(f"\\\nOverall accuracy: {np.trace(cm)/cm.sum():.1%}")
 
 # Find worst confusions
 cm_off = cm.copy(); np.fill_diagonal(cm_off, 0)
-print("\\nWorst confusions:")
+print("\\\nWorst confusions:")
 for _ in range(3):
     i, j = np.unravel_index(cm_off.argmax(), cm_off.shape)
     if cm_off[i,j] > 0:
         print(f"  {moods[i]} → {moods[j]}: {cm_off[i,j]} errors")
         cm_off[i,j] = 0
 
-print("\\nFor conservation: low recall on 'cry' = missed distress calls.")`,
+print("\\\nFor conservation: low recall on 'cry' = missed distress calls.")`,
       challenge: 'Compute a "conservation risk score" by weighting misclassifications asymmetrically: confusing distress_cry or aggression_roar with a benign class costs 10x more than other errors. Report the weighted error rate alongside the unweighted one.',
       successHint: 'The confusion matrix is the most important evaluation tool in applied ML. It reveals not just how often the model is wrong, but HOW it is wrong — which errors are dangerous, which are benign, and where to focus improvement efforts.',
     },
@@ -347,7 +347,7 @@ for f in range(5):
     knn_scores.append(knn_acc); cent_scores.append(cent_acc)
     print(f"Fold {f+1}: KNN={knn_acc:.1%}  Centroid={cent_acc:.1%}")
 
-print(f"\\nKNN:      {np.mean(knn_scores):.1%} ± {np.std(knn_scores):.1%}")
+print(f"\\\nKNN:      {np.mean(knn_scores):.1%} ± {np.std(knn_scores):.1%}")
 print(f"Centroid: {np.mean(cent_scores):.1%} ± {np.std(cent_scores):.1%}")
 winner = 'KNN' if np.mean(knn_scores) > np.mean(cent_scores) else 'Centroid'
 print(f"Winner: {winner}")`,
@@ -416,8 +416,8 @@ for i in range(len(X_new)):
     print(f"{ok} Predicted: {mood:8s} ({conf:.0%}) | Actual: {y_new[i]}{alert}")
 
 correct = sum(clf.predict(X_new[i])[0] == y_new[i] for i in range(len(X_new)))
-print(f"\\nAccuracy: {correct}/{len(X_new)}")
-print("\\nFrom Rongpharpi's ear to an automated monitoring network.")`,
+print(f"\\\nAccuracy: {correct}/{len(X_new)}")
+print("\\\nFrom Rongpharpi's ear to an automated monitoring network.")`,
       challenge: 'Add a real-time monitoring mode: simulate a continuous audio stream (concatenated random clips) and have the classifier process 2-second windows with 50% overlap, printing mood predictions as they arrive. Flag any safety-critical detections with a timestamp.',
       successHint: 'You have completed a full capstone project: from raw audio to deployed classifier. This is the shape of real conservation technology — not a single algorithm, but a pipeline where domain knowledge (elephant ethology), signal processing, machine learning, and software engineering all work together. The classifier is portfolio-ready.',
     },

@@ -81,7 +81,7 @@ for name, p in planets.items():
 theta = np.linspace(0, 2*np.pi, 100)
 dance_r = 0.15  # scaled to AU
 ax.plot(dance_r * np.cos(theta), dance_r * np.sin(theta), '--', color='#34d399', linewidth=1, alpha=0.5)
-ax.annotate('Ras Lila\\n(to scale!)', (0.12, 0.12), color='#34d399', fontsize=7, style='italic')
+ax.annotate('Ras Lila\\\n(to scale!)', (0.12, 0.12), color='#34d399', fontsize=7, style='italic')
 
 ax.set_title('Inner Solar System — Cosmic Ras Lila', color='white', fontsize=14, fontweight='bold')
 ax.set_xlabel('x (AU)', color='white')
@@ -154,7 +154,7 @@ for idx, (name, body) in enumerate(bodies.items()):
     ax.axhline(y=0, color='white', alpha=0.3, linestyle='--')
 
     v_escape = np.sqrt(2 * G * M / R)
-    ax.set_title(f"{name}\\nv_esc = {v_escape/1000:.1f} km/s", color='white', fontsize=11, fontweight='bold')
+    ax.set_title(f"{name}\\\nv_esc = {v_escape/1000:.1f} km/s", color='white', fontsize=11, fontweight='bold')
     ax.set_xlabel('r / R_surface', color='white')
     if idx == 0:
         ax.set_ylabel('U / |U_surface|', color='white')
@@ -170,7 +170,7 @@ print("Escape velocities:")
 for name, body in bodies.items():
     v_esc = np.sqrt(2 * G * body['M'] / body['R'])
     print(f"  {name}: {v_esc/1000:.1f} km/s ({v_esc/1000*3600:.0f} km/h)")
-print(f"\\nTo leave the solar system from Earth's orbit: {np.sqrt(2*G*1.989e30/1.496e11)/1000:.1f} km/s")`,
+print(f"\\\nTo leave the solar system from Earth's orbit: {np.sqrt(2*G*1.989e30/1.496e11)/1000:.1f} km/s")`,
       challenge: 'Calculate the escape velocity from the surface of Mars (M=6.39e23 kg, R=3.39e6 m). Compare it to Earth\'s. Why is it much easier to launch rockets from Mars?',
       successHint: 'Gravity wells explain why it costs so much energy to leave Earth but relatively little to leave the Moon. Every space mission is fundamentally about climbing out of gravity wells.',
     },
@@ -242,7 +242,7 @@ for radius in [5, 8, 10, 15]:
     v_min = np.sqrt(g * radius)
     print(f"Loop radius {radius}m: minimum top speed = {v_min:.1f} m/s ({v_min*3.6:.0f} km/h)")
 
-print("\\n=== Washing Machine ===")
+print("\\\n=== Washing Machine ===")
 drum_radius = 0.25  # metres
 for rpm in [400, 800, 1200, 1600]:
     omega = rpm * 2 * np.pi / 60
@@ -336,7 +336,7 @@ for alt_km_val, name in key_orbits:
 v_iss = np.sqrt(G * M_earth / (R_earth + 400e3))
 KE_iss = 0.5 * v_iss**2
 PE_iss = -G * M_earth / (R_earth + 400e3)
-print(f"\\nVirial theorem (ISS): KE = {KE_iss/1e6:.2f} MJ/kg, -PE/2 = {-PE_iss/2/1e6:.2f} MJ/kg")
+print(f"\\\nVirial theorem (ISS): KE = {KE_iss/1e6:.2f} MJ/kg, -PE/2 = {-PE_iss/2/1e6:.2f} MJ/kg")
 print(f"Ratio KE / (-PE/2) = {KE_iss / (-PE_iss/2):.4f} (should be 1.000)")`,
       challenge: 'Calculate the energy needed to move a 1000 kg satellite from ISS orbit (400 km) to geostationary orbit (35,786 km). This is the "delta-v" budget in rocket science.',
       successHint: 'Orbital energy is counter-intuitive: speeding up raises your orbit and eventually slows you down. This paradox is central to understanding space travel and is beautifully illustrated by the Ras Lila connection between radius and speed.',

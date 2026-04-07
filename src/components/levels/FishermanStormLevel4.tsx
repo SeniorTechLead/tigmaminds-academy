@@ -83,7 +83,7 @@ def generate_bob_cyclone(name, year, season):
     if season == 'pre-monsoon':
         lat0 = np.random.uniform(8, 13)
 
-print("\n[Code trimmed — run in Level 2+ for full visualization]")`,
+print("\\n[Code trimmed — run in Level 2+ for full visualization]")`,
       challenge: 'Enhance the data generator to include rapid intensification events (wind speed increase of 15+ m/s in 24 hours). What fraction of your cyclones undergo RI? How does this compare to the observed ~10-15% rate in the Bay of Bengal?',
       successHint: 'Good synthetic data is the foundation of any analysis tool. By calibrating your generator to real statistics, you can test algorithms without needing access to restricted operational datasets. This is a standard technique in meteorological research.',
     },
@@ -154,7 +154,7 @@ def generate_bob_cyclone(name, year, season):
             winds[i] = max(max_wind * (1 - decay**1.2), 10)
     winds = np.clip(winds + np.random.normal(0, 2, n), 10, 80)
 
-print("\n[Code trimmed — run in Level 2+ for full visualization]")`,
+print("\\n[Code trimmed — run in Level 2+ for full visualization]")`,
       challenge: 'Compute the "return period" for different intensity thresholds at a specific coastal grid cell (e.g., near Kolkata at 88°E, 22°N). How often does a Cat 3+ cyclone pass within 200 km? Express it as "once every N years."',
       successHint: 'Climatology is the foundation of probabilistic forecasting. Every number you computed — average motion, track density, intensity distribution — feeds directly into the prediction model. Without climatology, prediction is just extrapolation. With it, prediction becomes informed estimation.',
     },
@@ -224,7 +224,7 @@ default_dlon = np.mean(clim_dlon[mask]) if mask.any() else -0.1
 def get_climatology(lat, lon):
     pass
 
-print("\n[Code trimmed — run in Level 2+ for full visualization]")`,
+print("\\n[Code trimmed — run in Level 2+ for full visualization]")`,
       challenge: 'Implement an "analog" forecaster: find the 3 most similar historical tracks (based on recent motion and position), and average their future paths. Compare it to CLIPER. Does the analog method beat CLIPER?',
       successHint: 'CLIPER is elegant in its simplicity — two ingredients, one blending formula, and it provides a surprisingly good baseline. This is a recurring lesson in forecasting: simple models calibrated to good data often outperform complex models trained on poor data. Always benchmark against the simple baseline first.',
     },
@@ -292,7 +292,7 @@ y_train, y_test = y[:n_train], y[n_train:]
 def fit_linear_regression(X, y):
     pass
 
-print("\n[Code trimmed — run in Level 2+ for full visualization]")`,
+print("\\n[Code trimmed — run in Level 2+ for full visualization]")`,
       challenge: 'Add a "rapid intensification" detector: flag samples where intensity increases by more than 15 m/s in 24 hours. What environmental conditions are associated with RI events? Build a logistic regression classifier to predict RI probability.',
       successHint: 'Intensity forecasting is the hardest problem in tropical meteorology. Even with satellites, AI, and supercomputers, 24-hour intensity forecasts still have average errors of 5-10 m/s. Understanding the key predictors — SST, shear, ocean heat content — is the first step toward reducing those errors.',
     },
@@ -360,7 +360,7 @@ scenarios = {
     'Amphan 2020': {'p': 920, 'v': 85, 'depth': 25, 'width': 300e3, 'tide': 0.2,
     }}
 
-print("\n[Code trimmed — run in Level 2+ for full visualization]")`,
+print("\\n[Code trimmed — run in Level 2+ for full visualization]")`,
       challenge: 'Add sea level rise to the analysis: for each historical cyclone, compute how much higher the surge would be with +0.5m SLR (projected for 2070). Which cities face the largest increase in risk? Express the risk change as a percentage of current surge.',
       successHint: 'Storm surge estimation closes the loop between atmospheric science and human safety. The same physics that governs pressure gradients and wind stress determines whether a fishing village floods or stays dry. Accurate surge models, combined with early warning, have already saved hundreds of thousands of lives in the Bay of Bengal.',
     },
@@ -429,7 +429,7 @@ def forecast_intensity(fc_lats, fc_lons, current_wind=62):
 
         # Intensity tendency
 
-print("\n[Code trimmed — run in Level 2+ for full visualization]")`,
+print("\\n[Code trimmed — run in Level 2+ for full visualization]")`,
       challenge: 'Add a "what-if" module: allow the user to change the cyclone\'s current intensity and direction, and show how the risk assessment changes in real time. This is how emergency managers use operational tools — exploring scenarios to make evacuation decisions.',
       successHint: 'You have built a cyclone tracker from scratch — data generation, climatological analysis, track prediction, intensity estimation, surge calculation, and integrated visualization. Every component connects atmospheric physics to human safety. The fisherman\'s daughter\'s village deserves this tool. Across the Bay of Bengal, systems built on these same principles save thousands of lives every cyclone season.',
     },

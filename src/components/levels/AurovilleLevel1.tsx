@@ -166,7 +166,7 @@ for fD in [0.25, 0.30, 0.33, 0.40, 0.50, 0.60, 0.80, 1.00]:
     conc = geometric_concentration(D)
     print(f"{fD:>4.2f}    {f:>6.1f}    {depth:>6.2f}    {angle:>13.1f}    {conc:>12.0f}")
 
-print(f"\\nAuroville dish: f/D = 0.33, f = {0.33 * 15:.1f} m")
+print(f"\\\nAuroville dish: f/D = 0.33, f = {0.33 * 15:.1f} m")
 
 # Compare different dish sizes
 print()
@@ -492,7 +492,7 @@ for hour in range(8, 15):
 
     print(f"  {hour:>2}:00  Irr={irr:>4.0f} W/m2  Power={useful:>5.1f} kW  Meals={meals:>4.0f}/hr")
 
-print(f"\\n  Total meals (8am-2pm): {total_meals:.0f}")
+print(f"\\\n  Total meals (8am-2pm): {total_meals:.0f}")
 print(f"  Total energy delivered: {total_energy_kWh:.0f} kWh")
 print(f"  Target: 1000 meals  -->  {'MET' if total_meals >= 1000 else 'NOT MET'}")`,
       challenge: 'Add thermal storage: the Solar Kitchen uses an insulated water tank to store excess heat from midday for use in late afternoon. Model the tank temperature over the day (charging when solar exceeds cooking demand, discharging when demand exceeds solar). How many additional meals can be cooked from stored heat?',

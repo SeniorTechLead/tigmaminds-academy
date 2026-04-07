@@ -262,13 +262,13 @@ plt.semilogy(T_boil, P_boil, 'b-', linewidth=2)
 
 # Triple point
 plt.plot(273.16, 611.657, 'wo', markersize=8, zorder=5)
-plt.annotate('Triple point\\n(0.01°C, 611 Pa)', xy=(273.16, 611.657),
+plt.annotate('Triple point\\\n(0.01°C, 611 Pa)', xy=(273.16, 611.657),
              xytext=(290, 100), fontsize=9, color='white',
              arrowprops=dict(arrowstyle='->', color='white'))
 
 # Critical point
 plt.plot(647, P_boil[-1], 'r*', markersize=12, zorder=5)
-plt.annotate('Critical point\\n(374°C, 22.1 MPa)', xy=(647, P_boil[-1]),
+plt.annotate('Critical point\\\n(374°C, 22.1 MPa)', xy=(647, P_boil[-1]),
              xytext=(550, P_boil[-1]*5), fontsize=9, color='red',
              arrowprops=dict(arrowstyle='->', color='red'))
 

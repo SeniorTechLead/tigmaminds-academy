@@ -118,8 +118,8 @@ This is why the sangai population can never be huge: there's only so much grass 
 import matplotlib.pyplot as plt
 
 # Energy flow through trophic levels (kJ/m²/year)
-levels = ['Sunlight', 'Producers\\n(grasses, algae)', 'Primary consumers\\n(sangai, insects, fish)',
-          'Secondary consumers\\n(birds, snakes)', 'Decomposers\\n(bacteria, fungi)']
+levels = ['Sunlight', 'Producers\\\n(grasses, algae)', 'Primary consumers\\\n(sangai, insects, fish)',
+          'Secondary consumers\\\n(birds, snakes)', 'Decomposers\\\n(bacteria, fungi)']
 energy = [1000000, 10000, 1000, 100, 0]  # decomposers recycle, don't store
 
 # Energy transferred vs lost at each level
@@ -337,13 +337,13 @@ fig.patch.set_facecolor('#1f2937')
 axes[0].set_facecolor('#111827')
 colors_h = plt.cm.Greens(np.linspace(0.3, 0.9, len(healthy)))
 axes[0].pie(healthy.values(), labels=None, colors=colors_h, startangle=90)
-axes[0].set_title(f'Healthy section\\nRichness: {len(healthy)} species', color='white', fontsize=11)
+axes[0].set_title(f'Healthy section\\\nRichness: {len(healthy)} species', color='white', fontsize=11)
 
 # Degraded section pie chart
 axes[1].set_facecolor('#111827')
 colors_d = plt.cm.Reds(np.linspace(0.3, 0.9, len(degraded)))
 axes[1].pie(degraded.values(), labels=None, colors=colors_d, startangle=90)
-axes[1].set_title(f'Degraded section\\nRichness: {len(degraded)} species', color='white', fontsize=11)
+axes[1].set_title(f'Degraded section\\\nRichness: {len(degraded)} species', color='white', fontsize=11)
 
 # Comparison bar chart
 axes[2].set_facecolor('#111827')
@@ -443,9 +443,9 @@ ax1.axhline(1000, color='#22c55e', linestyle='--', alpha=0.7, linewidth=1)
 ax1.text(1952, 1020, 'VU threshold (1000)', color='#22c55e', fontsize=8)
 
 # Annotate key events
-ax1.annotate('Rediscovered!\\n6 individuals', xy=(1953, 6), xytext=(1960, -50),
+ax1.annotate('Rediscovered!\\\n6 individuals', xy=(1953, 6), xytext=(1960, -50),
             color='#f59e0b', fontsize=9, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
-ax1.annotate('Keibul Lamjao\\nNational Park\\ncreated (1977)', xy=(1977, 55), xytext=(1964, 150),
+ax1.annotate('Keibul Lamjao\\\nNational Park\\\ncreated (1977)', xy=(1977, 55), xytext=(1964, 150),
             color='#3b82f6', fontsize=8, arrowprops=dict(arrowstyle='->', color='#3b82f6'))
 ax1.annotate(f'Current: ~{population[-1]}', xy=(years[-1], population[-1]),
             xytext=(2010, 350), color='#a855f7', fontsize=10, fontweight='bold',
@@ -459,8 +459,8 @@ ax1.tick_params(colors='gray')
 
 # Threats breakdown
 ax2.set_facecolor('#111827')
-threats = ['Habitat\\ndegradation', 'Tiny\\nrange', 'Small\\npopulation',
-           'Poaching', 'Human\\nencroachment', 'Inbreeding']
+threats = ['Habitat\\\ndegradation', 'Tiny\\\nrange', 'Small\\\npopulation',
+           'Poaching', 'Human\\\nencroachment', 'Inbreeding']
 severity = [9, 9, 8, 6, 7, 7]
 colors_t = ['#ef4444' if s >= 8 else '#f59e0b' if s >= 6 else '#22c55e' for s in severity]
 
@@ -573,7 +573,7 @@ ax1.tick_params(colors='gray')
 
 # Cost-benefit comparison
 ax2.set_facecolor('#111827')
-strategies = ['No\\naction', 'Protected\\narea', 'Protection +\\nrestoration', 'Full\\nstrategy']
+strategies = ['No\\\naction', 'Protected\\\narea', 'Protection +\\\nrestoration', 'Full\\\nstrategy']
 costs = [0, 2, 5, 10]  # million $ over 50 years
 final_pops = [no_action[-1], protected[-1], restored[-1], full_strategy[-1]]
 colors_s = ['#ef4444', '#f59e0b', '#3b82f6', '#22c55e']

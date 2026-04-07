@@ -172,7 +172,7 @@ result = osmotic_desiccation()
 print("=== Natron Desiccation Model ===")
 print(f"Initial tissue: 60% water by weight")
 print(f"Natron concentration: 4.0 mol/L")
-print(f"Temperature: 25°C\\n")
+print(f"Temperature: 25°C\\\n")
 
 print(f"{'Day':>4} {'Water %':>9} {'Mass %':>8} {'Osmotic ΔP (atm)':>18}")
 print("-" * 41)
@@ -185,11 +185,11 @@ for i in range(len(result["day"])):
 
 final_water = result["water_pct"][-1]
 final_mass = result["mass_pct"][-1]
-print(f"\\nFinal water content: {final_water:.1f}% (from {60}%)")
+print(f"\\\nFinal water content: {final_water:.1f}% (from {60}%)")
 print(f"Final mass: {final_mass:.0f}% of original (lost {100-final_mass:.0f}% as water)")
 
 # Compare desiccants
-print(f"\\n=== Desiccant Comparison ===")
+print(f"\\\n=== Desiccant Comparison ===")
 desiccants = [
     ("Natron (NaCO₃ + NaCl)", 4.0, "Egyptian standard"),
     ("Pure salt (NaCl)", 5.5, "Meat preservation"),
@@ -207,7 +207,7 @@ for name, conc, app in desiccants:
     print(f"{name:<28} {conc:>7.1f} {final_w:>13.1f}% {app}")
 
 # Osmotic pressure calculation
-print(f"\\n=== Osmotic Pressure Examples ===")
+print(f"\\\n=== Osmotic Pressure Examples ===")
 solutions = [
     ("Blood plasma", 0.3),
     ("Seawater", 1.1),
@@ -226,7 +226,7 @@ for name, conc in solutions:
     p = conc * R_val * T_val / 101325
     print(f"{name:<22} {conc:>7.1f} {p:>14.1f}")
 
-print(f"\\nFor comparison: atmospheric pressure = 1 atm")
+print(f"\\\nFor comparison: atmospheric pressure = 1 atm")
 print(f"Natron osmotic pressure: ~100 atm — enormous force pulling water out of tissue")`,
       challenge: 'Model "reverse osmosis" — the modern water purification method. If seawater has an osmotic pressure of ~27 atm, how much pressure must you apply to push pure water BACKWARD through the membrane? (At least 27 atm + friction losses ≈ 40-60 atm in practice.) This is how desalination plants work.',
       successHint: 'You modeled osmosis — one of the most important processes in biology and chemistry. It governs how cells absorb water, how kidneys filter blood, how plants draw water from soil, and how desalination produces fresh water. The same physics that preserved pharaohs now provides drinking water to millions.',
@@ -319,7 +319,7 @@ for day, count in no_preservation:
             print(f"{day:>4} {count:>13,.0f}")
 
 # Scenario 2: Mummification
-print(f"\\n=== Bacterial Growth: With Mummification ===")
+print(f"\\\n=== Bacterial Growth: With Mummification ===")
 mummified = mummification_model()
 
 print(f"{'Day':>4} {'Bacteria':>15} {'Water Activity':>15} {'Phase'}")
@@ -337,12 +337,12 @@ for day, count, wa in mummified:
 # Compare final states
 no_pres_final = no_preservation[-1][1]
 mum_final = mummified[-1][1]
-print(f"\\n=== Comparison at Day 14 ===")
+print(f"\\\n=== Comparison at Day 14 ===")
 print(f"No preservation: {no_preservation[14][1]:.2e} bacteria (body liquefied)")
 print(f"With mummification: {mummified[14][1]:.2e} bacteria (declining)")
 
 # The four phases of bacterial growth
-print(f"\\n=== Four Phases of Bacterial Growth ===")
+print(f"\\\n=== Four Phases of Bacterial Growth ===")
 phases = [
     ("Lag phase", "0-2 hours", "Bacteria adapt to environment, no growth",
      "Embalming starts HERE — maximum window for intervention"),
@@ -438,7 +438,7 @@ gcms = GCMSAnalyzer()
 
 # Analyze a mummy resin sample (based on Saqqara findings)
 print("=== GC-MS Analysis: Saqqara Mummy Resin Sample ===")
-print("Sample: Dark residue from embalming jar #7\\n")
+print("Sample: Dark residue from embalming jar #7\\\n")
 
 sample_compounds = [
     "Abietic acid", "Pimaric acid",  # pine resin
@@ -458,7 +458,7 @@ for i, r in enumerate(results, 1):
           f"{r['identified_as']:>20} {r['source']:>18}")
 
 # Interpret results
-print(f"\\n=== Chemical Interpretation ===")
+print(f"\\\n=== Chemical Interpretation ===")
 sources_found = set()
 for r in results:
     if r["identified_as"] != "Unknown":
@@ -470,7 +470,7 @@ for source in sorted(sources_found):
     print(f"  {source}: {', '.join(compounds)}")
 
 # What this tells us
-print(f"\\n=== Archaeological Interpretation ===")
+print(f"\\\n=== Archaeological Interpretation ===")
 interpretations = [
     ("Pine resin (abietic acid)", "Antibacterial coating — prevents microbial growth"),
     ("Pistachio resin (oleanolic acid)", "Imported from Levant — shows long-distance trade"),
@@ -485,7 +485,7 @@ for finding, significance in interpretations:
     print(f"{finding:<35} {significance}")
 
 # Modern validation
-print(f"\\n=== Testing Ancient Recipes ===")
+print(f"\\\n=== Testing Ancient Recipes ===")
 print(f"Researchers tested the identified substances for antibacterial activity:")
 
 substances = [
@@ -497,13 +497,13 @@ substances = [
     ("Combined recipe", 94, "Very strong"),
 ]
 
-print(f"\\n{'Substance':<24} {'Bacterial kill %':>16} {'Effectiveness':>14}")
+print(f"\\\n{'Substance':<24} {'Bacterial kill %':>16} {'Effectiveness':>14}")
 print("-" * 56)
 for name, kill, eff in substances:
     bar = "█" * int(kill / 5)
     print(f"{name:<24} {kill:>14}% {eff:>14} {bar}")
 
-print(f"\\nThe combination is more effective than any single component —")
+print(f"\\\nThe combination is more effective than any single component —")
 print(f"the Egyptians had empirically optimized a multi-component system.")`,
       challenge: 'The GC-MS also detected trace amounts of "Bitumen marker" — natural asphalt from the Dead Sea region. This was unexpected. What does the presence of Dead Sea bitumen in an Egyptian embalming jar tell us about ancient trade routes? Add bitumen to the sample and re-run the analysis.',
       successHint: 'You simulated a modern analytical chemistry technique (GC-MS) to solve an archaeological mystery. The same technology is used in drug testing, environmental monitoring, forensics, and food safety. The key insight: chemistry leaves molecular fingerprints that persist for millennia — and we now have tools to read them.',
@@ -611,8 +611,8 @@ for name, aw, temp, ph, o2, anti in methods:
           f"{survival:>7.4f} {bar}")
 
 # Hurdle analysis for mummification
-print(f"\\n=== Mummification: Hurdle Analysis ===")
-print(f"Each hurdle reduces bacterial survival multiplicatively:\\n")
+print(f"\\\n=== Mummification: Hurdle Analysis ===")
+print(f"Each hurdle reduces bacterial survival multiplicatively:\\\n")
 
 hurdles = [
     ("Organ removal", 1.0, 25, 7.0, True, 0.0, "Removes biggest decay source"),
@@ -632,11 +632,11 @@ for name, aw, temp, ph, o2, anti, desc in hurdles:
     print(f"{name:<22} {survival:>7.6f} {desc:<25}")
     prev_survival = survival
 
-print(f"\\nFinal bacterial survival probability: {prev_survival:.8f}")
+print(f"\\\nFinal bacterial survival probability: {prev_survival:.8f}")
 print(f"Reduction from no preservation: {1/prev_survival:.0f}× safer")
 
 # Longevity comparison
-print(f"\\n=== Preservation Longevity ===")
+print(f"\\\n=== Preservation Longevity ===")
 longevity = [
     ("Room temperature food", "3-7 days"),
     ("Refrigerated food", "1-3 weeks"),

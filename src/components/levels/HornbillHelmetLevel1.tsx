@@ -120,7 +120,7 @@ categories = [
     ("Sound (crack of impact)", 0.10),
 ]
 
-print(f"\n{'Energy destination':>40} | {'Joules':>6} | {'%':>4}")
+print(f"\\n{'Energy destination':>40} | {'Joules':>6} | {'%':>4}")
 print("-" * 55)
 
 for name, fraction in categories:
@@ -129,7 +129,7 @@ for name, fraction in categories:
     print(f"  {name:>38} | {energy:>5.2f} | {fraction*100:>3.0f}% {bar}")
 
 # Compare with human head impact
-print("\n--- Comparison: Human motorcycle helmet ---")
+print("\\n--- Comparison: Human motorcycle helmet ---")
 human_mass = 5.0    # kg (head)
 human_velocity = 8  # m/s (~30 km/h crash)
 human_KE = 0.5 * human_mass * human_velocity**2
@@ -144,7 +144,7 @@ helmet_mass = 0.5     # kg (motorcycle helmet padding)
 casque_energy_density = KE / casque_mass
 helmet_energy_density = human_KE / helmet_mass
 
-print(f"\nEnergy absorption per gram:")
+print(f"\\nEnergy absorption per gram:")
 print(f"  Hornbill casque: {casque_energy_density:.1f} J/kg = {casque_energy_density/1000:.2f} J/g")
 print(f"  Motorcycle foam: {helmet_energy_density:.1f} J/kg = {helmet_energy_density/1000:.2f} J/g")
 print(f"  The casque is {casque_energy_density/helmet_energy_density:.1f}x more efficient per gram!")`,
@@ -394,7 +394,7 @@ comparisons = [
 ]
 
 for comp in comparisons:
-    print(f"\nProblem: {comp['problem']}")
+    print(f"\\nProblem: {comp['problem']}")
     print(f"  Nature:  {comp['nature']['solution']}")
     print(f"           density: {comp['nature']['density_kg_m3']} kg/m³ | "
           f"energy: {comp['nature']['energy_J_per_kg']} J/kg | "

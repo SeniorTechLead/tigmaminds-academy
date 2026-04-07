@@ -127,7 +127,7 @@ print("  Year 0-20: Pioneer stage")
 print("  Year 20-80: Early successional")
 print("  Year 80-200: Mid successional")
 print("  Year 200+: Old-growth (maximum complexity and carbon)")
-print("\\nOld-growth forests take 200+ years. No shortcuts.")`,
+print("\\\nOld-growth forests take 200+ years. No shortcuts.")`,
       challenge: 'Add a disturbance at year 150 that removes 80% of biomass. How does secondary succession differ from primary? Is recovery faster the second time?',
       successHint: 'Forest succession explains why old-growth forests are irreplaceable on human timescales. You can plant a forest in a day, but you can\'t create old-growth in less than two centuries.',
     },
@@ -163,7 +163,7 @@ print("Recovery times to reach 90% of old-growth level:")
 for name, props in metrics_recovery.items():
     t90 = -np.log(0.1) / props['rate']
     print(f"  {name}: {t90:.0f} years")
-print("\\nSpecialist species take the longest: 500+ years.")`,
+print("\\\nSpecialist species take the longest: 500+ years.")`,
       challenge: 'Add a "degraded secondary" scenario where recovery rates are halved. Some degraded forests never reach old-growth status — they get stuck in a "degraded steady state."',
       successHint: 'The difference between old-growth and secondary forest is not just age — it\'s accumulated complexity and irreplaceable ecology.',
     },
@@ -202,7 +202,7 @@ print("Urban tree canopy impacts:")
 print(f"  0% canopy: {base_temp} C (full heat island)")
 print(f"  20% canopy: {base_temp - 0.12*20:.1f} C")
 print(f"  40% canopy: {base_temp - 0.12*40:.1f} C (near rural)")
-print(f"\\nA 50-year-old urban tree provides ~{total_value[49]:,.0f}/year in services")`,
+print(f"\\\nA 50-year-old urban tree provides ~{total_value[49]:,.0f}/year in services")`,
       challenge: 'Model climate change: add 2 degrees C to the base temperature. How much additional canopy is needed to maintain current heat levels?',
       successHint: 'Urban forestry is where ecology meets city planning. Trees are the cheapest cooling, cleaning, and calming technology a city can deploy.',
     },
@@ -258,7 +258,7 @@ print("  > 0.6: Dense forest")
 print("  0.35-0.6: Degraded / crops")
 print("  0.1-0.35: Sparse vegetation")
 print("  < 0.1: Urban / water")
-print(f"\\nClassification accuracy: {accuracy:.0f}%")`,
+print(f"\\\nClassification accuracy: {accuracy:.0f}%")`,
       challenge: 'Simulate deforestation: remove 20% of dense forest pixels and recalculate NDVI. Can the satellite detect the change?',
       successHint: 'Remote sensing has transformed forest ecology from local observation to global monitoring. Every hectare of forest on Earth is now watched by satellites.',
     },
@@ -327,7 +327,7 @@ pre_bio, pre_fuel, pre_div, pre_fires = simulate_fire_regime(501)
 
 
 for name, bio, fuel, div, fires, _ in scenarios:
-    print(f"\\n{name}:")
+    print(f"\\\n{name}:")
     print(f"  Fires: {len(fires)}")
     print(f"  Avg biomass (yr 100+): {np.mean(bio[100:]):.0f}")
     print(f"  Avg biodiversity: {np.mean(div[100:]):.0f}")`,

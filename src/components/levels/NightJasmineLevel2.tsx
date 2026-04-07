@@ -35,11 +35,11 @@ hours = np.linspace(0, 48, 500)
 # Gene expression waves (normalised 0-1)
 # Each peaks at a different phase
 gene_groups = {
-    'Dawn genes\\n(photosynthesis prep)': {'phase': 5, 'color': '#f59e0b'},
-    'Morning genes\\n(light harvesting)': {'phase': 9, 'color': '#22c55e'},
-    'Afternoon genes\\n(growth/starch)': {'phase': 14, 'color': '#3b82f6'},
-    'Dusk genes\\n(fragrance/flowering)': {'phase': 18, 'color': '#a855f7'},
-    'Night genes\\n(repair/division)': {'phase': 1, 'color': '#ef4444'},
+    'Dawn genes\\\n(photosynthesis prep)': {'phase': 5, 'color': '#f59e0b'},
+    'Morning genes\\\n(light harvesting)': {'phase': 9, 'color': '#22c55e'},
+    'Afternoon genes\\\n(growth/starch)': {'phase': 14, 'color': '#3b82f6'},
+    'Dusk genes\\\n(fragrance/flowering)': {'phase': 18, 'color': '#a855f7'},
+    'Night genes\\\n(repair/division)': {'phase': 1, 'color': '#ef4444'},
 }
 
 fig, axes = plt.subplots(len(gene_groups) + 1, 1, figsize=(12, 10), sharex=True,
@@ -293,11 +293,11 @@ for ax, (label, signal, color) in zip(axes, data):
     ax.tick_params(colors='gray')
 
 # Add time annotations
-axes[1].annotate('Pfr rises\\nwithin seconds', xy=(12, 0.5), xytext=(25, 0.3),
+axes[1].annotate('Pfr rises\\\nwithin seconds', xy=(12, 0.5), xytext=(25, 0.3),
                   color='#22c55e', fontsize=9, arrowprops=dict(arrowstyle='->', color='#22c55e'))
-axes[2].annotate('PIF degraded\\nwithin minutes', xy=(15, 0.5), xytext=(30, 0.7),
+axes[2].annotate('PIF degraded\\\nwithin minutes', xy=(15, 0.5), xytext=(30, 0.7),
                   color='#ef4444', fontsize=9, arrowprops=dict(arrowstyle='->', color='#ef4444'))
-axes[3].annotate('Gene active\\nwithin 5-10 min', xy=(20, 0.5), xytext=(35, 0.3),
+axes[3].annotate('Gene active\\\nwithin 5-10 min', xy=(20, 0.5), xytext=(35, 0.3),
                   color='#3b82f6', fontsize=9, arrowprops=dict(arrowstyle='->', color='#3b82f6'))
 
 axes[0].set_title('Phytochrome Signalling Cascade: Light → Gene Activation', color='white', fontsize=13)
@@ -374,7 +374,7 @@ normal = stomatal_aperture(hours)
 ax.fill_between(hours, normal, alpha=0.3, color='#22c55e')
 ax.plot(hours, normal, color='#22c55e', linewidth=2)
 ax.set_title('Normal conditions: clock + light', color='#22c55e', fontsize=11)
-ax.set_ylabel('Stomatal\\naperture', color='white', fontsize=9)
+ax.set_ylabel('Stomatal\\\naperture', color='white', fontsize=9)
 ax.tick_params(colors='gray')
 ax.set_ylim(-0.05, 1.1)
 
@@ -387,7 +387,7 @@ ax.plot(hours, drought, color='#f59e0b', linewidth=2)
 ax.axvline(12, color='#ef4444', linestyle='--', alpha=0.5)
 ax.text(12.5, 0.9, 'Drought starts', color='#ef4444', fontsize=9)
 ax.set_title('Drought stress at noon: ABA overrides clock', color='#f59e0b', fontsize=11)
-ax.set_ylabel('Stomatal\\naperture', color='white', fontsize=9)
+ax.set_ylabel('Stomatal\\\naperture', color='white', fontsize=9)
 ax.tick_params(colors='gray')
 ax.set_ylim(-0.05, 1.1)
 
@@ -400,7 +400,7 @@ ax.fill_between(hours, transpiration_normal, alpha=0.2, color='#3b82f6', label='
 ax.fill_between(hours, transpiration_drought, alpha=0.2, color='#ef4444', label='Drought')
 ax.plot(hours, transpiration_normal, color='#3b82f6', linewidth=1.5)
 ax.plot(hours, transpiration_drought, color='#ef4444', linewidth=1.5)
-ax.set_ylabel('Transpiration\\n(ml/h)', color='white', fontsize=9)
+ax.set_ylabel('Transpiration\\\n(ml/h)', color='white', fontsize=9)
 ax.set_xlabel('Hours', color='white')
 ax.set_title('Water loss: normal vs drought', color='white', fontsize=11)
 ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')

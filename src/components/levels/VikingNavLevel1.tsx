@@ -80,7 +80,7 @@ for name, dec in stars:
         print(f"{name:<28} {dec:>7.1f}° {az:>8.1f}° {direction:>12}")
 
 # Compare at different latitudes
-print(f"\\n=== Sirius Rising Azimuth at Different Latitudes ===")
+print(f"\\\n=== Sirius Rising Azimuth at Different Latitudes ===")
 for lat in [0, 20, 40, 50, 60, 65]:
     az = rising_azimuth(-16.7, lat)
     if az:
@@ -146,7 +146,7 @@ for lat in [55, 58, 60, 62, 64, 65, 67, 70]:
     print(f"{lat:>8}°N {alt:>12.1f}° {shadow:>12.1f}°")
 
 # Simulate a voyage with daily noon observations
-print(f"\\n=== Simulated Voyage: Norway to Iceland ===")
+print(f"\\\n=== Simulated Voyage: Norway to Iceland ===")
 print("Navigator measures noon sun each day and calculates latitude.")
 
 np.random.seed(42)
@@ -178,7 +178,7 @@ for day in range(10):
     if true_latitude < target_latitude:
         true_latitude += 0.8 + np.random.normal(0, 0.2)
 
-print(f"\\nArrived near {true_latitude:.1f}°N (target: {target_latitude}°N)")
+print(f"\\\nArrived near {true_latitude:.1f}°N (target: {target_latitude}°N)")
 print(f"Typical error: ±0.5-1° latitude = ±55-111 km")
 print(f"Good enough to hit Iceland (300 km long) from 500 km away.")`,
       challenge: 'Simulate the same voyage in December instead of June. How does the low sun angle (and potentially below-horizon sun at high latitudes) affect navigation? At what latitude does the sun not rise at all in December? This is why Vikings timed their voyages for summer.',
@@ -285,9 +285,9 @@ for entry in voyage:
           f"{entry['est_lat']:>8.1f}° {entry['est_lon']:>8.1f}° {entry['error_km']:>7.0f}")
 
 final = voyage[-1]
-print(f"\\nFinal position error: {final['error_km']:.0f} km")
+print(f"\\\nFinal position error: {final['error_km']:.0f} km")
 print(f"Newfoundland is about 300 km long — {'LANDFALL POSSIBLE' if final['error_km'] < 300 else 'MIGHT MISS'}")
-print("\\nNote: errors accumulate daily without correction.")
+print("\\\nNote: errors accumulate daily without correction.")
 print("A noon sun fix every 2-3 days resets the latitude error,")
 print("keeping the total error manageable.")`,
       challenge: 'Add a "noon sun fix" every 3 days: reset est_lat to true_lat + small random error (±0.5°). How much does this reduce the final position error? This shows why clear skies were essential for Viking navigation — cloudy days meant growing uncertainty.',
@@ -386,7 +386,7 @@ print("through the motion of their canoe hull — trained sensitivity")
 print("developed over a lifetime of practice.")
 
 # Expand detection zone with other signals
-print("\\n=== Total Detection Zone ===")
+print("\\\n=== Total Detection Zone ===")
 signals = [
     ("Wave disturbance", 50, "Medium"),
     ("Cloud buildup over island", 120, "Clear day only"),
@@ -403,7 +403,7 @@ for signal, range_km, condition in signals:
 
 max_range = max(s[1] for s in signals)
 island_apparent_size = island_width / 1000 + 2 * max_range
-print(f"\\nIsland actual size: {island_width/1000:.0f} km")
+print(f"\\\nIsland actual size: {island_width/1000:.0f} km")
 print(f"Effective detection zone: {island_apparent_size:.0f} km diameter")
 print(f"Target expansion factor: {island_apparent_size/(island_width/1000):.0f}×")`,
       challenge: 'A small atoll is only 2 km wide. Calculate its detection zone. Is it still findable? (Smaller islands have smaller wave disturbance patterns — but birds and cloud patterns still help. The detection zone might be 50 km instead of 200 km.)',
@@ -458,7 +458,7 @@ sun_alt = 15
 print(f"=== Sky Polarisation Pattern ===")
 print(f"Sun position: azimuth {sun_az}°, altitude {sun_alt}° (hidden by clouds)")
 print(f"Scanning at altitude 30°:")
-print(f"\\n{'Observer Az':>12} {'Direction':>10} {'Angle from Sun':>16} {'Polarisation':>14}")
+print(f"\\\n{'Observer Az':>12} {'Direction':>10} {'Angle from Sun':>16} {'Polarisation':>14}")
 print("-" * 54)
 
 for obs_az in range(0, 360, 30):
@@ -471,7 +471,7 @@ for obs_az in range(0, 360, 30):
     print(f"{obs_az:>10}° {direction:>10} {angle:>14.0f}° {pol:>12.2f} {bar}")
 
 # Simulate sunstone detection
-print(f"\\n=== Sunstone Detection Simulation ===")
+print(f"\\\n=== Sunstone Detection Simulation ===")
 print("Navigator rotates crystal at each sky direction.")
 print("Maximum polarisation direction → sun's bearing.")
 
@@ -487,7 +487,7 @@ for obs_az in range(0, 360, 5):
 sun_estimate = (max_az + 90) % 360  # or (max_az - 90) % 360
 sun_estimate2 = (max_az - 90) % 360
 
-print(f"\\nMaximum polarisation found at azimuth: {max_az}°")
+print(f"\\\nMaximum polarisation found at azimuth: {max_az}°")
 print(f"Sun must be 90° from this → azimuth {sun_estimate}° or {sun_estimate2}°")
 print(f"Actual sun azimuth: {sun_az}°")
 print(f"Error: {min(abs(sun_estimate - sun_az), abs(sun_estimate2 - sun_az))}°")
@@ -569,7 +569,7 @@ for d in [150, 120, 100, 80, 60, 50, 40, 30, 20, 10, 5]:
     print(f"{d:>12} km {prob:>8.1%} {conf:>12} {bar}")
 
 # Which signal contributes most at each range?
-print(f"\\n=== Dominant Signal by Distance ===")
+print(f"\\\n=== Dominant Signal by Distance ===")
 for d in [100, 60, 30, 10]:
     best_signal = None
     best_prob = 0
@@ -584,7 +584,7 @@ for d in [100, 60, 30, 10]:
         print(f"  At {d:>3} km: {best_signal} (p = {best_prob:.0%})")
 
 # Effective target expansion
-print(f"\\n=== Target Expansion ===")
+print(f"\\\n=== Target Expansion ===")
 # Find distance where P(detect) > 50%
 for d in range(200, 0, -1):
     if detection_probability(d, island_size, signals) > 0.5:

@@ -69,8 +69,8 @@ for epoch in range(20):
         print("Converged!")
         break
 
-print(f"\\nFinal weights: {p.weights.round(3)}, bias: {p.bias:.3f}")
-print(f"\\n=== Testing ===")
+print(f"\\\nFinal weights: {p.weights.round(3)}, bias: {p.bias:.3f}")
+print(f"\\\n=== Testing ===")
 for inputs, target in data:
     pred = p.predict(inputs)
     status = "correct" if pred == target else "WRONG"
@@ -141,13 +141,13 @@ for epoch in range(5000):
     w_hidden += lr * X.T @ d_hidden
     b_hidden += lr * d_hidden.sum(axis=0, keepdims=True)
 
-print(f"\\n=== Results ===")
+print(f"\\\n=== Results ===")
 for i in range(4):
     pred = output[i, 0]
     print(f"  {X[i]} -> {pred:.3f} (rounded: {round(pred)}, target: {y[i,0]})")
 
 correct = sum(round(output[i,0]) == y[i,0] for i in range(4))
-print(f"\\nAccuracy: {correct}/4 = {correct/4*100:.0f}%")`,
+print(f"\\\nAccuracy: {correct}/4 = {correct/4*100:.0f}%")`,
       challenge: 'Change the hidden layer size from 4 to 2. Does it still learn XOR? What about 8 hidden nodes? Also try reducing the learning rate to 0.1 — how many more epochs does it need?',
       successHint: 'You just implemented backpropagation — the algorithm that powers all of modern deep learning. A single perceptron fails on XOR, but adding one hidden layer makes it learnable. This insight (that depth enables learning) launched the deep learning revolution.',
     },
@@ -308,7 +308,7 @@ axes[1].set_ylabel('Loss'); axes[1].grid(alpha=0.3)
 plt.tight_layout(); plt.show()
 
 acc = np.mean((a3>0.5)==y)*100
-print(f"\\nFinal accuracy: {acc:.1f}%")`,
+print(f"\\\nFinal accuracy: {acc:.1f}%")`,
       challenge: 'Try reducing the hidden layers to just one (2->16->1). Can it still learn the spiral? What if you increase to three hidden layers (2->16->16->8->1)? Deeper is not always better — find the sweet spot.',
       successHint: 'You trained a neural network from raw numpy — no PyTorch, no TensorFlow, just matrix multiplication and gradients. This is the foundation that every ML framework builds upon. The decision boundary visualization shows the network learning a non-linear separation that no single line could achieve.',
     },
@@ -360,7 +360,7 @@ print(f"Output: {output[0]:.4f}")
 print(f"Target: {target}")
 print(f"Loss:   {loss[0]:.4f}")
 
-print(f"\\n=== Backward Pass (Backpropagation) ===")
+print(f"\\\n=== Backward Pass (Backpropagation) ===")
 # Output layer gradients
 d_output = 2 * (output - target) * output * (1 - output)
 d_w2 = a1.reshape(-1,1) * d_output
@@ -375,13 +375,13 @@ d_w1 = x.reshape(-1,1) @ d_hidden.reshape(1,-1)
 d_b1 = d_hidden
 
 print(f"Hidden gradients: {d_hidden.round(4)}")
-print(f"Weight gradients (w1):\\n{d_w1.round(4)}")
+print(f"Weight gradients (w1):\\\n{d_w1.round(4)}")
 
 # Update weights
 w2_new = w2 - lr * d_w2
 w1_new = w1 - lr * d_w1.reshape(w1.shape)
 
-print(f"\\n=== Weight Updates ===")
+print(f"\\\n=== Weight Updates ===")
 print(f"w2 old: {w2.ravel().round(3)} -> new: {w2_new.ravel().round(3)}")
 print(f"Change: {(w2_new - w2).ravel().round(4)}")
 
@@ -389,7 +389,7 @@ print(f"Change: {(w2_new - w2).ravel().round(4)}")
 a1_new = sigmoid(x @ w1_new + b1)
 output_new = sigmoid(a1_new @ w2_new + b2)
 loss_new = (target - output_new)**2
-print(f"\\n=== After Update ===")
+print(f"\\\n=== After Update ===")
 print(f"Output: {output[0]:.4f} -> {output_new[0]:.4f}")
 print(f"Loss:   {loss[0]:.4f} -> {loss_new[0]:.4f}")
 print(f"Improvement: {((loss[0]-loss_new[0])/loss[0]*100):.1f}%")`,

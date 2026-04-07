@@ -50,11 +50,11 @@ for sym, props in elements.items():
 
 # Iron's electron configuration
 shells = [2, 8, 14, 2]  # 1s², 2s²2p⁶, 3s²3p⁶3d⁶, 4s²
-print(f"\\nIron electron configuration: [Ar] 3d⁶ 4s²")
+print(f"\\\nIron electron configuration: [Ar] 3d⁶ 4s²")
 print("Electrons per shell:", shells, f"(total: {sum(shells)})")
 
 # Why iron is special
-print(f"\\nIron is special because:")
+print(f"\\\nIron is special because:")
 print(f"  - Most stable nucleus (highest binding energy)")
 print(f"  - 4th most abundant element in Earth's crust")
 print(f"  - Earth's core is ~85% iron")
@@ -99,8 +99,8 @@ CO2_mass = C_mass + 2 * O_mass           # 44.01 g/mol
 
 print("IRON SMELTING CHEMISTRY")
 print("=" * 50)
-print(f"\\nReaction: Fe₂O₃ + 3CO → 2Fe + 3CO₂")
-print(f"\\nMolar masses:")
+print(f"\\\nReaction: Fe₂O₃ + 3CO → 2Fe + 3CO₂")
+print(f"\\\nMolar masses:")
 print(f"  Fe₂O₃ (hematite): {Fe2O3_mass:.2f} g/mol")
 print(f"  CO (carbon monoxide): {CO_mass:.2f} g/mol")
 print(f"  Fe (iron): {Fe_mass:.3f} g/mol")
@@ -119,18 +119,18 @@ ore_needed_g = moles_Fe2O3 * Fe2O3_mass
 charcoal_needed_g = moles_C * C_mass
 co2_produced_g = moles_CO * CO2_mass
 
-print(f"\\nTo produce {target_iron_kg} kg of pure iron:")
+print(f"\\\nTo produce {target_iron_kg} kg of pure iron:")
 print(f"  Ore needed (Fe₂O₃):    {ore_needed_g:.0f} g = {ore_needed_g/1000:.2f} kg")
 print(f"  Charcoal needed (C):    {charcoal_needed_g:.0f} g = {charcoal_needed_g/1000:.2f} kg")
 print(f"  CO₂ produced:           {co2_produced_g:.0f} g = {co2_produced_g/1000:.2f} kg")
 
 # Yield calculation
 theoretical_yield = 2 * Fe_mass / Fe2O3_mass * 100
-print(f"\\nTheoretical iron yield from ore: {theoretical_yield:.1f}%")
+print(f"\\\nTheoretical iron yield from ore: {theoretical_yield:.1f}%")
 print(f"Real yield (with losses): ~{theoretical_yield * 0.7:.1f}%")
 
 # Oxidation states
-print(f"\\nOxidation state changes:")
+print(f"\\\nOxidation state changes:")
 print(f"  Fe: +3 (in ore) → 0 (metal)  [REDUCED, gained 3e⁻]")
 print(f"  C:  +2 (in CO)  → +4 (in CO₂) [OXIDIZED, lost 2e⁻]")
 print(f"  O:  -2 → -2  [unchanged, spectator]")`,
@@ -182,20 +182,20 @@ Q_total = Q1 + Q2 + Q3
 
 print("ENERGY TO SMELT 1 KG OF IRON")
 print("=" * 50)
-print(f"\\nStep 1: Heat solid ({T_start}°C → {T_melt}°C)")
+print(f"\\\nStep 1: Heat solid ({T_start}°C → {T_melt}°C)")
 print(f"  Q = {mass_g} g × {c_solid} J/(g·°C) × {T_melt - T_start}°C")
 print(f"  Q = {Q1:,.0f} J = {Q1/1000:.1f} kJ")
 
-print(f"\\nStep 2: Melt at {T_melt}°C")
+print(f"\\\nStep 2: Melt at {T_melt}°C")
 print(f"  Q = {mass_g} g × {L_fusion} J/g")
 print(f"  Q = {Q2:,.0f} J = {Q2/1000:.1f} kJ")
 
-print(f"\\nStep 3: Heat liquid ({T_melt}°C → {T_final}°C)")
+print(f"\\\nStep 3: Heat liquid ({T_melt}°C → {T_final}°C)")
 print(f"  Q = {mass_g} g × {c_liquid} J/(g·°C) × {T_final - T_melt}°C")
 print(f"  Q = {Q3:,.0f} J = {Q3/1000:.1f} kJ")
 
-print(f"\\nTotal energy: {Q_total:,.0f} J = {Q_total/1000:.1f} kJ")
-print(f"\\nEnergy breakdown:")
+print(f"\\\nTotal energy: {Q_total:,.0f} J = {Q_total/1000:.1f} kJ")
+print(f"\\\nEnergy breakdown:")
 print(f"  Heating solid:  {Q1/Q_total*100:5.1f}%  {'█' * int(Q1/Q_total*30)}")
 print(f"  Melting:        {Q2/Q_total*100:5.1f}%  {'█' * int(Q2/Q_total*30)}")
 print(f"  Heating liquid: {Q3/Q_total*100:5.1f}%  {'█' * int(Q3/Q_total*30)}")
@@ -205,7 +205,7 @@ charcoal_energy = 29000  # J/g (energy content of charcoal)
 furnace_efficiency = 0.15  # only 15% of heat goes into the iron
 charcoal_needed = Q_total / (charcoal_energy * furnace_efficiency)
 
-print(f"\\nCharcoal needed (at {furnace_efficiency*100:.0f}% efficiency): {charcoal_needed:.0f} g = {charcoal_needed/1000:.1f} kg")
+print(f"\\\nCharcoal needed (at {furnace_efficiency*100:.0f}% efficiency): {charcoal_needed:.0f} g = {charcoal_needed/1000:.1f} kg")
 print(f"That is {charcoal_needed/mass_g:.1f} kg of charcoal per kg of iron!")`,
       challenge: 'Compare the energy needed to melt iron vs. copper (melting point 1085°C, specific heat 0.385 J/g·°C, latent heat 207 J/g). Why did the Bronze Age come before the Iron Age?',
       successHint: 'You calculated the thermodynamics of iron smelting. The enormous energy requirement explains why iron smelting was one of the most transformative technologies in human history — it required mastering high-temperature furnaces, which only became possible with charcoal and bellows.',
@@ -274,16 +274,16 @@ print(f"{'Magnetic?':<30} {'Yes':>12} {'No':>12}")
 oct_bcc = 0.155 * a_bcc  # octahedral hole in BCC
 oct_fcc = 0.414 * (a_fcc / (2 * math.sqrt(2))) * 2  # simplified
 
-print(f"\\nInterstitial spaces:")
+print(f"\\\nInterstitial spaces:")
 print(f"  BCC octahedral hole radius: ~{oct_bcc:.3f} nm")
 print(f"  FCC octahedral hole radius: ~{oct_fcc:.3f} nm")
 print(f"  Carbon atom radius:          0.077 nm")
-print(f"\\n  FCC holes are larger → more room for carbon → steel!")
+print(f"\\\n  FCC holes are larger → more room for carbon → steel!")
 
 # Carbon atoms per unit cell at max solubility
 c_per_fcc = 4 * 0.0214  # 2.14% of 4 Fe atoms
 c_per_bcc = 2 * 0.0002  # 0.02% of 2 Fe atoms
-print(f"\\n  Carbon atoms per FCC cell at max: ~{c_per_fcc:.3f}")
+print(f"\\\n  Carbon atoms per FCC cell at max: ~{c_per_fcc:.3f}")
 print(f"  Carbon atoms per BCC cell at max: ~{c_per_bcc:.4f}")
 print(f"  Ratio: {c_per_fcc/c_per_bcc:.0f}x more carbon in FCC!")`,
       challenge: 'If you could create an alloy with a lattice parameter 10% larger than FCC iron, how much more carbon could it potentially dissolve? (Hint: interstitial hole size scales with lattice parameter.)',
@@ -340,7 +340,7 @@ for medium in T_env:
     k = k_values[medium]
     Te = T_env[medium]
 
-    print(f"\\n--- {medium} ---")
+    print(f"\\\n--- {medium} ---")
     print(f"{'Time (s)':>8} {'Temp (°C)':>10} {'Phase Zone':<20}")
     print("-" * 42)
 
@@ -381,7 +381,7 @@ for medium in T_env:
     print(f"  Cooling rate (first 10s): {cooling_rate:.0f} °C/s")
     print(f"  Predicted phase: {result}")
 
-print("\\n\\nSummary:")
+print("\\\n\\\nSummary:")
 print("  Water quench → Martensite → Hard blade (but may crack)")
 print("  Oil quench   → Bainite    → Tough blade (good balance)")
 print("  Air cool     → Pearlite   → Soft, workable iron")`,

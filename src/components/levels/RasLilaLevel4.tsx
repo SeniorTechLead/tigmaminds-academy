@@ -84,14 +84,14 @@ for sat in range(1, sat_id+1):
                       (sat, stn, f'2024-03-15 {hour:02d}:{minute:02d}', duration, max_elev))
 
 # Queries
-print("=== Satellite Constellation Database ===\\n")
+print("=== Satellite Constellation Database ===\\\n")
 c.execute('SELECT constellation, COUNT(*), ROUND(AVG(fuel_pct),1), SUM(CASE WHEN status="low-fuel" THEN 1 ELSE 0 END) FROM satellites GROUP BY constellation')
 print(f"{'Constellation':<12} {'Count':>6} {'Avg Fuel%':>10} {'Low Fuel':>9}")
 print("-" * 40)
 for row in c.fetchall():
     print(f"{row[0]:<12} {row[1]:>6} {row[2]:>9.1f}% {row[3]:>9}")
 
-print("\\nPasses visible from Imphal today:")
+print("\\\nPasses visible from Imphal today:")
 c.execute('''
     SELECT s.name, p.start_time, ROUND(p.duration_min,1), ROUND(p.max_elevation_deg,0)
     FROM passes p JOIN satellites s ON p.sat_id=s.id
@@ -104,7 +104,7 @@ for row in c.fetchall():
     print(f"{row[0]:<15} {row[1]:>16} {row[2]:>7.1f}m {row[3]:>7.0f}°")
 
 c.execute('''SELECT s.name, s.fuel_pct FROM satellites WHERE fuel_pct < 20 ORDER BY fuel_pct ASC LIMIT 5''')
-print("\\nCritical fuel levels:")
+print("\\\nCritical fuel levels:")
 for name, fuel in c.fetchall():
     print(f"  {name}: {fuel:.1f}% fuel remaining")
 
@@ -167,7 +167,7 @@ for i in range(15):
               (name, typ, alt, v, mass))
 
 # Detect close approaches (simplified: altitude-based proximity)
-print("=== Collision Avoidance System ===\\n")
+print("=== Collision Avoidance System ===\\\n")
 conj_count = 0
 for i in range(len(objects)):
     for j in range(i+1, len(objects)):
@@ -204,7 +204,7 @@ for row in c.fetchall():
     print(f"{row[0]:<12} {row[1]:<12} {row[2]:>7.2f}km {row[3]:>8} {row[4]}")
 
 c.execute('SELECT risk_level, COUNT(*) FROM conjunctions GROUP BY risk_level')
-print("\\nRisk summary:")
+print("\\\nRisk summary:")
 for risk, count in c.fetchall():
     print(f"  {risk}: {count} conjunctions")
 
@@ -215,7 +215,7 @@ c.execute('''
     JOIN objects o1 ON cj.obj1_id=o1.id
     ORDER BY am.fuel_kg ASC LIMIT 5
 ''')
-print("\\nRecommended manoeuvres (cheapest first):")
+print("\\\nRecommended manoeuvres (cheapest first):")
 for name, dv, fuel, miss in c.fetchall():
     print(f"  {name}: Δv={dv:.3f} m/s, fuel={fuel:.2f} kg → new miss: {miss:.1f} km")
 
@@ -354,7 +354,7 @@ plt.show()
 
 print(f"Hohmann transfer time: {T_transfer:.0f} days ({T_transfer/30:.1f} months)")
 print(f"Optimal Δv: {dv_hohmann/1000:.2f} km/s")
-print(f"\\nLaunch windows found:")
+print(f"\\\nLaunch windows found:")
 for idx in window_indices:
     year = 2024 + launch_days[idx]/365.25
     print(f"  {year:.2f}: Δv = {delta_vs[idx]/1000:.2f} km/s")
@@ -436,7 +436,7 @@ def orbital_position(a_km, e, omega_deg, t_frac):
 
 # Simulate 100 timesteps (1 orbit of LEO)
 n_steps = 100
-print("=== Orbital Simulation Engine ===\\n")
+print("=== Orbital Simulation Engine ===\\\n")
 
 for step in range(n_steps):
     t_frac = step / n_steps
@@ -475,19 +475,19 @@ for step in range(n_steps):
                           (step, ids[i], 'conjunction', f'{n1} - {n2}: {dist:.1f}km ({risk})'))
 
 # Results
-print("Simulation complete: 100 timesteps\\n")
+print("Simulation complete: 100 timesteps\\\n")
 
 c.execute('''SELECT event_type, COUNT(*) FROM sim_events GROUP BY event_type''')
 print("Event summary:")
 for etype, count in c.fetchall():
     print(f"  {etype}: {count}")
 
-print("\\nFuel status after simulation:")
+print("\\\nFuel status after simulation:")
 c.execute('SELECT name, ROUND(fuel_kg,2) FROM sim_objects ORDER BY fuel_kg ASC')
 for name, fuel in c.fetchall():
     print(f"  {name}: {fuel:.2f} kg")
 
-print("\\nClose approaches detected:")
+print("\\\nClose approaches detected:")
 c.execute('''SELECT timestep, details FROM sim_events WHERE event_type='conjunction' ORDER BY timestep LIMIT 5''')
 for step, details in c.fetchall():
     print(f"  Step {step}: {details}")
@@ -496,7 +496,7 @@ for step, details in c.fetchall():
 c.execute('''SELECT o.name, ROUND(MIN(s.altitude_km),0), ROUND(MAX(s.altitude_km),0), ROUND(AVG(s.speed_kms),2)
              FROM sim_state s JOIN sim_objects o ON s.object_id=o.id
              GROUP BY o.id''')
-print("\\nOrbit statistics:")
+print("\\\nOrbit statistics:")
 print(f"{'Name':<8} {'Min Alt':>8} {'Max Alt':>8} {'Avg Speed':>10}")
 for row in c.fetchall():
     print(f"{row[0]:<8} {row[1]:>7.0f}km {row[2]:>7.0f}km {row[3]:>8.2f} km/s")

@@ -238,7 +238,7 @@ for hour in range(504):
         n_root = sim.cell_state.count('root')
         base_auxin = sim.auxin[-5:].mean()
 
-        print(f"\\nDay {day} (hour {hour+1}):")
+        print(f"\\\nDay {day} (hour {hour+1}):")
         print(f"  Base auxin (avg last 5 cells): {base_auxin:.2f}")
         print(f"  Callus cells: {n_callus} | Primordia: {n_primordium} | Roots: {n_root}")
 
@@ -251,7 +251,7 @@ for hour in range(504):
             else:
                 print()
 
-print("\\n" + "=" * 60)
+print("\\\n" + "=" * 60)
 print("Auxin accumulates at the cut base → callus → root primordia → roots")
 print("This is how every Bodhi Tree cutting established itself.")`,
       challenge: 'Add rooting powder: at hour 0, add 5.0 units of auxin to the bottom 3 cells. Compare root emergence time with and without rooting powder. By how many days does it speed up rooting?',

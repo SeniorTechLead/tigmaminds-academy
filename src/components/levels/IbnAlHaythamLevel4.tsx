@@ -91,7 +91,7 @@ class Lens:
         return True
 
 # Test the architecture
-print("=== Optics Simulator — Architecture Test ===\\n")
+print("=== Optics Simulator — Architecture Test ===\\\n")
 
 # Create components
 ray1 = Ray(y=10, angle_deg=0, wavelength_nm=550)
@@ -103,7 +103,7 @@ print("Components created:")
 print(f"  {ray1}")
 print(f"  {ray2}")
 print(f"  {ray3}")
-print(f"  Lens: f={lens.f}mm at x={lens.position_x}mm\\n")
+print(f"  Lens: f={lens.f}mm at x={lens.position_x}mm\\\n")
 
 # Trace rays through the lens
 for r in [ray1, ray2, ray3]:
@@ -117,7 +117,7 @@ print("-" * 35)
 for i, r in enumerate([ray1, ray2, ray3], 1):
     print(f"  {i:>3} {r.history[1][1]:>6.1f}mm {r.y:>6.1f}mm {r.angle:>10.2f}°")
 
-print(f"\\nAll parallel rays converge near x = {lens.position_x + lens.f}mm (focal point)")
+print(f"\\\nAll parallel rays converge near x = {lens.position_x + lens.f}mm (focal point)")
 print("Architecture verified. Next: multi-element ray tracing engine.")`,
       challenge: 'Add a Mirror class that reflects rays (angle_out = -angle_in relative to surface normal). Test it with a concave mirror of radius 100 mm. Verify that parallel rays converge at f = R/2 = 50 mm.',
       successHint: 'Good system design makes everything else easier. You defined Ray, Surface, and Lens classes with clear properties and methods. Real optical design software (Zemax, Code V, Oslo) uses exactly this architecture: objects representing optical elements with methods that transform rays. Ibn al-Haytham\'s systematic decomposition of optics into light, surfaces, and interactions is the conceptual ancestor of this design.',
@@ -220,7 +220,7 @@ rays1 = [Ray(y=h, angle_deg=0) for h in [-15, -10, -5, 0, 5, 10, 15]]
 traced1 = trace_system(rays1, [lens1], screen_x=180)
 
 print(f"Lens: f={f1}mm at x=100mm | Screen at x=180mm")
-print(f"\\n{'Start y':>9} {'At lens':>9} {'At screen':>10} {'Status':<10}")
+print(f"\\\n{'Start y':>9} {'At lens':>9} {'At screen':>10} {'Status':<10}")
 print("-" * 40)
 for r in traced1:
     start_y = r.path[0][1]
@@ -230,7 +230,7 @@ for r in traced1:
           f"{'alive' if r.alive else 'BLOCKED'}")
 
 # === Test 2: Two-lens telescope ===
-print("\\n=== Test 2: Keplerian Telescope ===")
+print("\\\n=== Test 2: Keplerian Telescope ===")
 f_obj, f_eye = 200, 25
 sep = f_obj + f_eye  # afocal arrangement
 obj_lens = ThinLens(f_obj, x_pos=0, aperture=40)
@@ -244,7 +244,7 @@ traced2 = trace_system(rays2, [obj_lens, eye_lens], screen_x=sep + 50)
 
 print(f"Objective: f={f_obj}mm | Eyepiece: f={f_eye}mm | Separation: {sep}mm")
 print(f"Input angle: {star_angle}° | Expected output: {star_angle * f_obj/f_eye:.1f}°")
-print(f"Magnification: {f_obj/f_eye:.0f}×\\n")
+print(f"Magnification: {f_obj/f_eye:.0f}×\\\n")
 
 for r in traced2:
     if r.alive and len(r.path) >= 4:
@@ -254,7 +254,7 @@ for r in traced2:
               f"(magnified {abs(out_angle/star_angle):.1f}×)")
 
 # === Test 3: Three-element system ===
-print("\\n=== Test 3: Three-Lens Relay ===")
+print("\\\n=== Test 3: Three-Lens Relay ===")
 elements = [
     ThinLens(60, x_pos=0, aperture=20),
     ThinLens(-30, x_pos=80, aperture=15),
@@ -264,7 +264,7 @@ rays3 = [Ray(y=h, angle_deg=0) for h in [-12, -6, 0, 6, 12]]
 traced3 = trace_system(rays3, elements, screen_x=200)
 
 print("Elements: f=60mm @ 0, f=-30mm @ 80, f=40mm @ 140")
-print(f"\\n{'Start y':>8} {'Screen y':>10} {'Converge?':<12}")
+print(f"\\\n{'Start y':>8} {'Screen y':>10} {'Converge?':<12}")
 print("-" * 32)
 for r in traced3:
     screen_y = r.path[-1][1] if r.alive else float('nan')
@@ -356,7 +356,7 @@ def find_image(elements, obj_distance, obj_height, aperture_sample=7, screen_ran
     return best_x, best_y if best_spread < 100 else None, best_spread
 
 # === Single lens image formation ===
-print("=== Image Formation Calculator ===\\n")
+print("=== Image Formation Calculator ===\\\n")
 
 lens = LensElement(f=75, x_pos=0, aperture=20)
 
@@ -379,10 +379,10 @@ for d_obj in [300, 200, 150, 100, 80]:
     print(f"{d_obj:>10} mm {img_x:>9.1f} mm {mag_num:>+8.2f} {spot:>8.3f} mm {d_img_theory:>8.1f} mm")
 
 # === Chromatic aberration ===
-print("\\n--- Chromatic Focus Shift ---")
+print("\\\n--- Chromatic Focus Shift ---")
 lens_chrom = LensElement(f=100, x_pos=0, aperture=15, abbe=35)  # flint glass
 
-print(f"Lens f=100mm, Abbe number=35 (high dispersion)\\n")
+print(f"Lens f=100mm, Abbe number=35 (high dispersion)\\\n")
 print(f"{'Wavelength':>11} {'Effective f':>12} {'Focus shift':>12}")
 print("-" * 37)
 
@@ -392,14 +392,14 @@ for wl in [400, 450, 500, 550, 600, 650, 700]:
     print(f"{wl:>8} nm {f_eff:>10.2f} mm {shift:>+10.2f} mm")
 
 # === Two-lens system ===
-print("\\n--- Two-Lens Imaging System ---")
+print("\\\n--- Two-Lens Imaging System ---")
 system = [
     LensElement(f=60, x_pos=0, aperture=20),
     LensElement(f=40, x_pos=100, aperture=15),
 ]
 
 print("Lens 1: f=60mm @ x=0 | Lens 2: f=40mm @ x=100mm")
-print(f"\\n{'Object dist':>12} {'Image pos':>10} {'Magnification':>14} {'Spot (mm)':>10}")
+print(f"\\\n{'Object dist':>12} {'Image pos':>10} {'Magnification':>14} {'Spot (mm)':>10}")
 print("-" * 48)
 
 for d_obj in [200, 150, 120, 100, 80]:
@@ -478,7 +478,7 @@ def merit_function(f1, f2, sep, obj_dist=200, aperture=12):
 # Grid search optimisation
 print("=== Optical Design Optimiser ===")
 print("Two-element achromatic system")
-print("Free parameters: f1 (crown), f2 (flint), separation\\n")
+print("Free parameters: f1 (crown), f2 (flint), separation\\\n")
 
 best_merit = float('inf')
 best_config = None
@@ -501,14 +501,14 @@ print(f"Configurations tested: {configs_tested:,}")
 
 # Top 10 designs
 results.sort(key=lambda r: r[3])
-print(f"\\n{'Rank':>5} {'f1 (mm)':>8} {'f2 (mm)':>8} {'Sep (mm)':>9} {'Merit (RMS)':>12}")
+print(f"\\\n{'Rank':>5} {'f1 (mm)':>8} {'f2 (mm)':>8} {'Sep (mm)':>9} {'Merit (RMS)':>12}")
 print("-" * 44)
 for i, (f1, f2, sep, m) in enumerate(results[:10], 1):
     marker = " ◀ BEST" if i == 1 else ""
     print(f"{i:>5} {f1:>6.0f} {f2:>6.0f} {sep:>7.0f} {m:>10.4f}{marker}")
 
 # Analyse best design
-print(f"\\n=== Best Design Analysis ===")
+print(f"\\\n=== Best Design Analysis ===")
 f1_b, f2_b, sep_b = best_config
 print(f"Crown lens: f = {f1_b:.0f} mm (converging, Abbe 64)")
 print(f"Flint lens: f = {f2_b:.0f} mm (diverging, Abbe 28)")
@@ -519,7 +519,7 @@ f_eff = 1 / (1/f1_b + 1/f2_b - sep_b/(f1_b*f2_b))
 print(f"Effective focal length: {f_eff:.1f} mm")
 
 # Per-wavelength performance
-print(f"\\n{'Wavelength':>11} {'RMS spot':>10} {'Rating':<12}")
+print(f"\\\n{'Wavelength':>11} {'RMS spot':>10} {'Rating':<12}")
 print("-" * 35)
 for wl, colour in [(450, "Blue"), (550, "Green"), (650, "Red")]:
     spot = trace_spot(f1_b, f2_b, sep_b, 200, 12, wavelength=wl)

@@ -324,7 +324,7 @@ print("  Pesticide alone: colony weakened but survives")
 print("  Varroa alone: colony weakened but usually survives with management")
 print("  Habitat loss alone: colony forages less efficiently")
 print("  ALL COMBINED: colony collapses before winter")
-print("\\nThis is why bee decline is so hard to solve:")
+print("\\\nThis is why bee decline is so hard to solve:")
 print("  No single fix works — must address all stressors together")`,
       challenge: 'Model what happens if you remove one stressor at a time from the "all combined" scenario. Which single intervention saves the most colonies? This analysis drives policy decisions.',
       successHint: 'Bee decline is a systems problem — multiple interacting stressors creating a death spiral that no single solution can fix. Understanding this complexity is essential for anyone who wants to help: the answer is not "ban pesticides" or "plant flowers" alone, but ALL of these together.',
@@ -389,7 +389,7 @@ msy_pop = K / 2
 print("10-year cumulative harvest:")
 for method, cum in cumulative.items():
     print(f"  {method.replace(chr(10), ' ')}: {cum[-1]} kg total")
-print(f"\\nDestructive gets 30 kg once, then nothing.")
+print(f"\\\nDestructive gets 30 kg once, then nothing.")
 print(f"Sustainable gets 150-250 kg over 10 years.")
 print(f"Patience is not just ethical — it's mathematically optimal.")`,
       challenge: 'Add year-to-year variability: some years produce 50% more honey (good weather), some produce 50% less. With a fixed harvest of MSY, how often does the colony collapse? What harvest rate is safe with variability?',

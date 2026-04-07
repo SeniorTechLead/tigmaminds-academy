@@ -193,7 +193,7 @@ for rule_num in rules:
     is_symmetric = np.array_equal(grid, grid[:, ::-1])
     print(f"  Rule {rule_num:>3}: density={density:.1f}%, entropy={entropy:.3f}, symmetric={'Yes' if is_symmetric else 'No'}")
 
-print("\\nRule 30: chaotic (used for randomness)")
+print("\\\nRule 30: chaotic (used for randomness)")
 print("Rule 90: fractal (Sierpinski triangle)")
 print("Rule 110: Turing-complete (can compute anything)")
 print("Rule 150: quasi-periodic (good for weaves)")`,
@@ -405,10 +405,10 @@ print("Best pattern:")
 for row in best_pattern:
     print("  " + " ".join("█" if c else "░" for c in row))
 
-print(f"\\nFill: {best_pattern.mean()*100:.0f}%")
+print(f"\\\nFill: {best_pattern.mean()*100:.0f}%")
 sym = np.mean(best_pattern == np.rot90(best_pattern, 2)) * 100
 print(f"180° symmetry: {sym:.0f}%")
-print(f"\\nFitness progression: {best_history[0]:.1f} → {best_history[-1]:.1f}")
+print(f"\\\nFitness progression: {best_history[0]:.1f} → {best_history[-1]:.1f}")
 print(f"Improvement: {(best_history[-1]-best_history[0])/best_history[0]*100:.0f}%")`,
       challenge: 'Add an "aesthetic" fitness component that rewards patterns similar to known Tripura traditional patterns. Does the GA rediscover traditional designs?',
       successHint: 'Genetic algorithms show that design does not require a designer — selection pressure alone can create sophisticated, optimised patterns. The cane weavers of Tripura have been running this algorithm for generations.',
