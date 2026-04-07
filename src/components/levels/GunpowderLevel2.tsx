@@ -1,4 +1,3 @@
-import { createElement } from 'react';
 import { Loader2, Sparkles } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
 import { usePyodide } from '../../contexts/PyodideContext';
