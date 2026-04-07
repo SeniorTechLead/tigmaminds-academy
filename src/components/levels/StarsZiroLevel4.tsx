@@ -2,7 +2,6 @@ import { useState, useRef, useCallback, createElement } from 'react';
 import { Loader2, Cpu } from 'lucide-react';
 import MiniLesson from '../MiniLesson';
 import { usePyodide } from '../../contexts/PyodideContext';
-import { createElement } from 'react';
 import StarObservatoryDiagram from '../diagrams/StarObservatoryDiagram';
 import StarCatalogDiagram from '../diagrams/StarCatalogDiagram';
 import StarPhotometryPipelineDiagram from '../diagrams/StarPhotometryPipelineDiagram';
