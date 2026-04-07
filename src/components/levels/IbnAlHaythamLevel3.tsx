@@ -46,7 +46,7 @@ def rayleigh_limit(wavelength_nm, aperture_mm):
 # Microscope design exploration
 print("=== Compound Microscope Design ===")
 print(f"Tube length: 160 mm | Near point: 250 mm")
-print(f"\\\n{'Objective f':>12} {'Eyepiece f':>11} {'M_obj':>7} {'M_eye':>7} {'Total M':>9}")
+print(f"\\n{'Objective f':>12} {'Eyepiece f':>11} {'M_obj':>7} {'M_eye':>7} {'Total M':>9}")
 print("-" * 48)
 
 for f_obj in [2, 4, 10, 20, 40]:
@@ -55,8 +55,8 @@ for f_obj in [2, 4, 10, 20, 40]:
         print(f"{f_obj:>10} mm {f_eye:>8} mm {m_o:>6.0f}× {m_e:>6.0f}× {m_t:>8.0f}×")
 
 # Telescope design exploration
-print("\\\n=== Keplerian Telescope Design ===")
-print(f"\\\n{'Objective f':>12} {'Eyepiece f':>11} {'Magnification':>14} {'Tube length':>12}")
+print("\\n=== Keplerian Telescope Design ===")
+print(f"\\n{'Objective f':>12} {'Eyepiece f':>11} {'Magnification':>14} {'Tube length':>12}")
 print("-" * 51)
 
 for f_obj in [500, 1000, 1500, 2000]:
@@ -66,9 +66,9 @@ for f_obj in [500, 1000, 1500, 2000]:
         print(f"{f_obj:>10} mm {f_eye:>8} mm {mag:>12.0f}× {tube:>10} mm")
 
 # Resolution limits
-print("\\\n=== Angular Resolution (Rayleigh Limit) ===")
+print("\\n=== Angular Resolution (Rayleigh Limit) ===")
 print(f"Wavelength: 550 nm (green light)")
-print(f"\\\n{'Aperture':>12} {'Resolution':>14} {'Can resolve':<30}")
+print(f"\\n{'Aperture':>12} {'Resolution':>14} {'Can resolve':<30}")
 print("-" * 58)
 
 examples = [
@@ -84,7 +84,7 @@ for d, name in examples:
     res = rayleigh_limit(550, d)
     print(f"{d:>10} mm {res:>12.2f}\" {name:<30}")
 
-print("\\\nSmaller resolution = sharper image = can see finer detail")`,
+print("\\nSmaller resolution = sharper image = can see finer detail")`,
       challenge: 'A telescope needs to resolve two stars separated by 0.5 arcseconds. What minimum aperture is required? Now calculate for a microscope: what is the minimum resolvable feature size for an objective with numerical aperture NA = 0.65 at 550 nm? Use d = 0.61λ/NA. This resolution limit is why electron microscopes exist — electrons have much shorter wavelengths than light.',
       successHint: 'You just designed optical instruments using the same principles that guide real lens engineers. Every microscope, telescope, camera, and projector is designed by combining focal lengths, magnifications, and resolution limits — the exact calculations you performed.',
     },
@@ -134,7 +134,7 @@ slit_w = 30    # µm slit width
 print("=== Young's Double Slit Interference Pattern ===")
 print(f"Slit separation: {d} mm | Wavelength: {lam} nm | Screen: {L/1000:.1f} m")
 fringe_spacing = lam / 1e6 * L / d
-print(f"Predicted fringe spacing: {fringe_spacing:.2f} mm\\\n")
+print(f"Predicted fringe spacing: {fringe_spacing:.2f} mm\\n")
 
 print(f"{'Position (mm)':>14} {'Intensity':>10} {'Pattern':<30}")
 print("-" * 56)
@@ -145,15 +145,15 @@ for y in np.arange(-8, 8.1, 0.5):
     print(f"{y:>12.1f} mm {I:>9.4f} {bar}")
 
 # Wavelength measurement from fringe spacing
-print("\\\n=== Measuring Wavelength from Fringe Spacing ===")
+print("\\n=== Measuring Wavelength from Fringe Spacing ===")
 print("If we observe the pattern and measure fringe spacing Δy:")
 print(f"Δy = λL/d → λ = Δy × d / L")
-print(f"\\\nMeasured Δy = {fringe_spacing:.2f} mm")
+print(f"\\nMeasured Δy = {fringe_spacing:.2f} mm")
 print(f"Calculated λ = {fringe_spacing:.2f} × {d} / {L} = {fringe_spacing * d / L * 1e6:.0f} nm ✓")
 
 # Compare different wavelengths
-print("\\\n=== Fringe Spacing vs Wavelength ===")
-print(f"d = {d} mm, L = {L/1000} m\\\n")
+print("\\n=== Fringe Spacing vs Wavelength ===")
+print(f"d = {d} mm, L = {L/1000} m\\n")
 print(f"{'Colour':<10} {'λ (nm)':>7} {'Spacing (mm)':>13}")
 print("-" * 32)
 
@@ -165,8 +165,8 @@ for colour, wl in colours:
     print(f"{colour:<10} {wl:>5} nm {sp:>11.2f} mm")
 
 # Effect of slit separation
-print("\\\n=== Fringe Spacing vs Slit Separation ===")
-print(f"λ = {lam} nm, L = {L/1000} m\\\n")
+print("\\n=== Fringe Spacing vs Slit Separation ===")
+print(f"λ = {lam} nm, L = {L/1000} m\\n")
 print(f"{'d (mm)':>7} {'Spacing (mm)':>13} {'Fringes in ±10mm':>18}")
 print("-" * 40)
 
@@ -248,7 +248,7 @@ class HumanEye:
 
 # Age-related accommodation loss
 print("=== Human Eye Accommodation vs Age ===")
-print(f"\\\n{'Age':>5} {'Max Accomm (D)':>15} {'Near point (cm)':>16} {'Diagnosis':<30}")
+print(f"\\n{'Age':>5} {'Max Accomm (D)':>15} {'Near point (cm)':>16} {'Diagnosis':<30}")
 print("-" * 68)
 
 for age in [10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70]:
@@ -259,7 +259,7 @@ for age in [10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70]:
     print(f"{age:>5} {eye.max_accommodation:>13.1f} {np_str:>14} cm {diag:<30}")
 
 # Corrective lens prescription
-print("\\\n=== Corrective Lens Prescriptions ===")
+print("\\n=== Corrective Lens Prescriptions ===")
 
 conditions = [
     ("Myopia (far point 1m)",    -1.00),
@@ -270,7 +270,7 @@ conditions = [
     ("Presbyopia (age 50)",      +2.00),
 ]
 
-print(f"\\\n{'Condition':<28} {'Prescription (D)':>16} {'Lens type':<18}")
+print(f"\\n{'Condition':<28} {'Prescription (D)':>16} {'Lens type':<18}")
 print("-" * 64)
 
 for name, power in conditions:
@@ -278,7 +278,7 @@ for name, power in conditions:
     print(f"{name:<28} {power:>+14.2f} D {lens_type:<18}")
 
 # Retinal image size
-print("\\\n=== Retinal Image Size ===")
+print("\\n=== Retinal Image Size ===")
 print("Eye focal length ≈ 17 mm (effective)")
 f_eye = 17  # mm
 
@@ -289,7 +289,7 @@ objects = [
     ("Bacterium (5µm) at 25cm", 5e-6, 0.25),
 ]
 
-print(f"\\\n{'Object':<30} {'Retinal image':>14}")
+print(f"\\n{'Object':<30} {'Retinal image':>14}")
 print("-" * 46)
 for name, size, dist in objects:
     image_size_mm = f_eye * size / (dist * 1000)  # convert dist to mm
@@ -349,7 +349,7 @@ f = 100  # mm paraxial focal length
 R_lens = 25  # mm lens radius
 
 print(f"Paraxial focal length: {f} mm | Lens radius: {R_lens} mm")
-print(f"\\\n{'Ray height (mm)':>16} {'LSA (mm)':>10} {'Actual focus (mm)':>18} {'Blur at f':>10}")
+print(f"\\n{'Ray height (mm)':>16} {'LSA (mm)':>10} {'Actual focus (mm)':>18} {'Blur at f':>10}")
 print("-" * 56)
 
 for y in [1, 3, 5, 8, 10, 15, 20, 25]:
@@ -361,10 +361,10 @@ for y in [1, 3, 5, 8, 10, 15, 20, 25]:
     blur = 2 * y * lsa / f
     print(f"{y:>14} mm {lsa:>8.3f} {actual_f:>16.3f} {blur:>8.3f} mm")
 
-print(f"\\\nEdge rays focus {spherical_aberration(f, R_lens, R_lens):.1f} mm shorter than centre rays")
+print(f"\\nEdge rays focus {spherical_aberration(f, R_lens, R_lens):.1f} mm shorter than centre rays")
 
 # Stopping down reduces SA
-print("\\\n=== Effect of Aperture Stop (f-number) ===")
+print("\\n=== Effect of Aperture Stop (f-number) ===")
 for f_num in [2, 2.8, 4, 5.6, 8, 11, 16]:
     y_max = f / (2 * f_num)
     if y_max > R_lens:
@@ -373,11 +373,11 @@ for f_num in [2, 2.8, 4, 5.6, 8, 11, 16]:
     print(f"f/{f_num:<4} → max ray height: {y_max:>5.1f} mm, LSA: {lsa:.3f} mm")
 
 # Chromatic aberration
-print("\\\n=== Chromatic Aberration ===")
+print("\\n=== Chromatic Aberration ===")
 f_d = 100  # mm at d-line (587.6 nm)
 
 for glass, abbe in [("Crown BK7", 64), ("Flint SF11", 26), ("Plastic CR39", 58)]:
-    print(f"\\\n{glass} (Abbe V = {abbe}):")
+    print(f"\\n{glass} (Abbe V = {abbe}):")
     print(f"  {'Wavelength':>12} {'f (mm)':>10} {'Δf from d-line':>16}")
     for wl in [450, 486, 550, 587.6, 656, 700]:
         f_wl = chromatic_focal(f_d, abbe, wl)
@@ -385,7 +385,7 @@ for glass, abbe in [("Crown BK7", 64), ("Flint SF11", 26), ("Plastic CR39", 58)]
         print(f"  {wl:>9.1f} nm {f_wl:>10.2f} {delta:>+14.2f} mm")
 
 # Achromatic doublet design
-print("\\\n=== Achromatic Doublet Design ===")
+print("\\n=== Achromatic Doublet Design ===")
 V1, V2 = 64.2, 25.8  # crown, flint Abbe numbers
 f_target = 100  # mm combined focal length
 
@@ -396,7 +396,7 @@ print(f"Target combined f: {f_target} mm")
 print(f"Crown lens (V={V1}): f1 = {f1:.1f} mm (converging)")
 print(f"Flint lens (V={V2}): f2 = {f2:.1f} mm (diverging)")
 print(f"Combined: 1/f = 1/{f1:.1f} + 1/{f2:.1f} = {1/f1 + 1/f2:.4f} → f = {1/(1/f1+1/f2):.1f} mm")
-print(f"\\\nThe flint element cancels the crown's chromatic aberration")
+print(f"\\nThe flint element cancels the crown's chromatic aberration")
 print(f"while preserving most of its converging power.")`,
       challenge: 'An apochromatic triplet brings THREE wavelengths to the same focus. If you add a third element with Abbe number V₃ = 81 (fluorite), set up the three equations to solve for f₁, f₂, f₃. Apochromats are used in high-end camera lenses and microscope objectives where colour fringing is unacceptable.',
       successHint: 'Understanding aberrations is what separates a good lens from a great one. Every camera lens, from phone cameras to cinema lenses, is designed by balancing spherical and chromatic aberrations across multiple elements. Ibn al-Haytham\'s observation of edge blurring through glass spheres was the starting point for this entire field of optical engineering.',
@@ -455,7 +455,7 @@ class OpticsExperiment:
 # Experiment: Measure refractive index of glass using Snell's law
 print("=== Experiment: Measuring Refractive Index of Glass ===")
 print("Method: Shine laser at glass block, measure incidence & refraction angles")
-print("Hypothesis: n_glass = 1.520 ± 0.005 (manufacturer spec)\\\n")
+print("Hypothesis: n_glass = 1.520 ± 0.005 (manufacturer spec)\\n")
 
 exp = OpticsExperiment(
     "Refractive index measurement",
@@ -490,7 +490,7 @@ if len(all_n) > 12:
 exp.data = all_n
 stats = exp.analyse()
 
-print(f"\\\n--- Statistical Analysis ---")
+print(f"\\n--- Statistical Analysis ---")
 print(f"Number of measurements: {stats['n']}")
 print(f"Mean refractive index: {stats['mean']:.4f}")
 print(f"Standard deviation: {stats['std']:.4f}")
@@ -501,15 +501,15 @@ print(f"  → n = ({stats['mean'] - stats['ci_95']:.4f}, {stats['mean'] + stats[
 # Does the result agree with the manufacturer?
 mfg_n = 1.520
 within = abs(stats['mean'] - mfg_n) < stats['ci_95']
-print(f"\\\nManufacturer specification: {mfg_n:.3f}")
+print(f"\\nManufacturer specification: {mfg_n:.3f}")
 print(f"Our measurement: {stats['mean']:.4f} ± {stats['ci_95']:.4f}")
 print(f"Agreement: {'YES — within 95% CI' if within else 'NO — significant difference'}")
 
 # Systematic vs random error
-print(f"\\\n--- Error Analysis ---")
+print(f"\\n--- Error Analysis ---")
 print(f"Random error (std): {stats['std']:.4f} (from angle measurement precision)")
 print(f"Systematic error: {abs(stats['mean'] - true_n):.4f} (if true n is {true_n})")
-print(f"\\\nIbn al-Haytham's principle: repeat measurements reduce random error")
+print(f"\\nIbn al-Haytham's principle: repeat measurements reduce random error")
 print(f"(SEM decreases as 1/√n), but cannot eliminate systematic error.")`,
       challenge: 'Add a "sample size power analysis" — how many measurements do you need to distinguish n = 1.518 from n = 1.520 with 95% confidence? Calculate for angle measurement uncertainties of 0.5°, 0.2°, and 0.1°. This is how researchers plan experiments — they determine the required sample size BEFORE collecting data.',
       successHint: 'You applied the scientific method that Ibn al-Haytham pioneered: hypothesis, controlled experiment, quantitative data, statistical analysis, and honest assessment of error. This methodology — refined over a thousand years but fundamentally unchanged — is how all modern science operates.',

@@ -408,7 +408,7 @@ The timing is precise: night jasmine flowers open within 30 minutes of sunset, t
 import matplotlib.pyplot as plt
 
 # Pollination syndrome comparison
-traits = ['Fragrance\\\nstrength', 'Colour\\\nbrightness', 'Nectar\\\nvolume', 'Flower\\\nsize', 'Tube\\\ndepth', 'UV\\\npattern']
+traits = ['Fragrance\\nstrength', 'Colour\\nbrightness', 'Nectar\\nvolume', 'Flower\\nsize', 'Tube\\ndepth', 'UV\\npattern']
 N = len(traits)
 
 syndromes = {
@@ -511,7 +511,7 @@ print("No colour, no scent, no nectar — just massive pollen production.")`,
 import matplotlib.pyplot as plt
 
 # Clock parameters across organisms
-organisms = ['Cyanobacteria', 'Fungi\\\n(Neurospora)', 'Plants\\\n(Arabidopsis)', 'Fruit fly', 'Mouse', 'Human']
+organisms = ['Cyanobacteria', 'Fungi\\n(Neurospora)', 'Plants\\n(Arabidopsis)', 'Fruit fly', 'Mouse', 'Human']
 free_period = [24.0, 22.5, 24.5, 23.8, 23.7, 24.2]  # hours (free-running)
 n_clock_genes = [3, 5, 12, 8, 14, 14]
 temp_compensation = [0.95, 0.92, 0.97, 0.94, 0.99, 0.99]  # Q10 (1.0 = perfect)

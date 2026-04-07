@@ -164,13 +164,13 @@ for name, aux, cyt in experiments:
         culture.step()
 
     total = sum(culture.cells.values())
-    print(f"\\\n{name} — Day 30:")
+    print(f"\\n{name} — Day 30:")
     print(f"  Undifferentiated: {culture.cells['undifferentiated']} ({100*culture.cells['undifferentiated']/total:.0f}%)")
     print(f"  Root cells: {culture.cells['root']} ({100*culture.cells['root']/total:.0f}%)")
     print(f"  Shoot cells: {culture.cells['shoot']} ({100*culture.cells['shoot']/total:.0f}%)")
     print(f"  Total cells: {total}")
 
-print("\\\n" + "=" * 60)
+print("\\n" + "=" * 60)
 print("The ratio controls the fate. Same cells, same DNA,")
 print("but the hormone environment determines what they become.")`,
       challenge: 'Model a two-stage tissue culture protocol: 15 days at 1:10 (shoots), then switch to 10:1 (roots). This mimics real micropropagation. How many complete plantlets (with both shoots and roots) can you produce from one explant?',
@@ -259,7 +259,7 @@ for name, align, compat in scenarios:
     for _ in range(30):
         graft.step()
 
-    print(f"\\\n{name}")
+    print(f"\\n{name}")
     print(f"  Cambium alignment: {align:.0%} | Compatibility: {compat:.0%}")
     print(f"  Callus cells: {graft.callus}")
     print(f"  Xylem bridge: {graft.xylem_bridge} cells")
@@ -268,7 +268,7 @@ for name, align, compat in scenarios:
     success = "SUCCESS" if graft.water_flow > 50 else "FAILURE"
     print(f"  Outcome: {success}")
 
-print("\\\nAlignment AND compatibility both matter.")
+print("\\nAlignment AND compatibility both matter.")
 print("A perfect cut on incompatible species still fails.")`,
       challenge: 'Model the "scion wilting" problem: before the xylem bridge connects, the scion loses water through transpiration. Calculate how many days a scion can survive on stored water alone, and how this constrains the maximum compatible graft distance.',
       successHint: 'Grafting is living surgery — joining two vascular systems through wound healing. Understanding the mechanics explains why some grafts succeed and others fail, and why alignment, compatibility, and timing all matter.',
@@ -437,18 +437,18 @@ for cycles in [1, 5, 10, 20, 50]:
     n_variants = np.sum(mutations > variant_threshold)
     variant_rate = n_variants / 1000 * 100
 
-    print(f"\\\nAfter {cycles} subculture cycles:")
+    print(f"\\nAfter {cycles} subculture cycles:")
     print(f"  Mean mutations per plant: {np.mean(mutations):.1f}")
     print(f"  Max mutations: {np.max(mutations):.0f}")
     print(f"  Plants with transposon events: {np.sum(transposons > 0)}")
     print(f"  Detectable variants (>{variant_threshold} mutations): "
           f"{n_variants} ({variant_rate:.1f}%)")
 
-print("\\\n" + "=" * 55)
+print("\\n" + "=" * 55)
 print("Traditional cutting: ~1 cell division event, minimal variation")
 print("5 subculture cycles: low variation, acceptable for most uses")
 print("50 subculture cycles: significant variation, risky for sacred trees")
-print("\\\nFor the Bodhi Tree: fewer cycles = more faithful clone.")`,
+print("\\nFor the Bodhi Tree: fewer cycles = more faithful clone.")`,
       challenge: 'Model a "variant detection" system: after each subculture, a random sample of 10 plants is genotyped. If any variant is detected, the whole batch is discarded. How does this quality control affect overall production rate and final variant rate?',
       successHint: 'Somaclonal variation is the price of rapid multiplication. For commercial crops, it is manageable. For sacred trees where identity matters, traditional cuttings may be preferable to high-throughput tissue culture.',
     },
@@ -525,7 +525,7 @@ sri_lanka = EpigeneticTree("Sri Lanka (wet, warm)", {'drought': 0.2, 'cold': 0.1
 
 print("Epigenetic Divergence of Bodhi Tree Clones")
 print("=" * 55)
-print("Same DNA. Different environments. Different gene expression.\\\n")
+print("Same DNA. Different environments. Different gene expression.\\n")
 
 for year in range(n_years):
     bodh_gaya.adapt_year()

@@ -170,21 +170,21 @@ ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 # Plot 6: Experiment summary
 ax = axes[1, 2]
 ax.axis('off')
-text = "Experiment Design\\\n" + "=" * 30 + "\\\n\\\n"
-text += f"Species: {mustard.species}\\\n"
-text += f"Seeds per group: {n_seeds}\\\n"
-text += f"Treatment groups: {len(treatments)}\\\n"
-text += f"Total seeds: {n_seeds * len(treatments)}\\\n"
-text += f"Storage period: {storage_weeks} weeks\\\n\\\n"
-text += "Hypothesis:\\\n"
-text += "  Cold, dry storage preserves\\\n"
-text += "  seed viability significantly\\\n"
-text += "  better than room temperature\\\n"
-text += "  or moist conditions.\\\n\\\n"
-text += "Controls:\\\n"
-text += "  Same seed lot, same planting\\\n"
-text += "  conditions after storage.\\\n\\\n"
-text += "Next: generate realistic data\\\n"
+text = "Experiment Design\\n" + "=" * 30 + "\\n\\n"
+text += f"Species: {mustard.species}\\n"
+text += f"Seeds per group: {n_seeds}\\n"
+text += f"Treatment groups: {len(treatments)}\\n"
+text += f"Total seeds: {n_seeds * len(treatments)}\\n"
+text += f"Storage period: {storage_weeks} weeks\\n\\n"
+text += "Hypothesis:\\n"
+text += "  Cold, dry storage preserves\\n"
+text += "  seed viability significantly\\n"
+text += "  better than room temperature\\n"
+text += "  or moist conditions.\\n\\n"
+text += "Controls:\\n"
+text += "  Same seed lot, same planting\\n"
+text += "  conditions after storage.\\n\\n"
+text += "Next: generate realistic data\\n"
 text += "with biological variability."
 ax.text(0.05, 0.95, text, transform=ax.transAxes, fontsize=10,
         verticalalignment='top', color='white', fontfamily='monospace')
@@ -358,17 +358,17 @@ ax.set_title('Replicate Variation (dots = replicates)', color='white', fontsize=
 # Plot 6: Data summary
 ax = axes[1, 2]
 ax.axis('off')
-text = "Experiment Data Generated\\\n" + "=" * 30 + "\\\n\\\n"
-text += f"{'Treatment':<14} {'Predicted':>9} {'Observed':>9} {'SD':>6}\\\n"
-text += "-" * 42 + "\\\n"
+text = "Experiment Data Generated\\n" + "=" * 30 + "\\n\\n"
+text += f"{'Treatment':<14} {'Predicted':>9} {'Observed':>9} {'SD':>6}\\n"
+text += "-" * 42 + "\\n"
 for i, name in enumerate(t_names):
     text += (f"{name:<14} {data[name]['base_prob']*100:>8.1f}% "
              f"{data[name]['mean_rate']*100:>8.1f}% "
-             f"{data[name]['std_rate']*100:>5.1f}%\\\n")
-text += "\\\nBatch effects create realistic\\\n"
-text += "replicate-to-replicate variation.\\\n"
-text += "Individual seeds add per-seed noise.\\\n\\\n"
-text += "Next: statistical analysis to\\\n"
+             f"{data[name]['std_rate']*100:>5.1f}%\\n")
+text += "\\nBatch effects create realistic\\n"
+text += "replicate-to-replicate variation.\\n"
+text += "Individual seeds add per-seed noise.\\n\\n"
+text += "Next: statistical analysis to\\n"
 text += "determine significant differences."
 ax.text(0.05, 0.95, text, transform=ax.transAxes, fontsize=10,
         verticalalignment='top', color='white', fontfamily='monospace')
@@ -525,7 +525,7 @@ ax.bar(t_names, rates, color=colors, edgecolor='none', alpha=0.7)
 ax.errorbar(t_names, rates, yerr=[yerr_low, yerr_high], fmt='none',
             ecolor='white', capsize=8, capthick=2, linewidth=2)
 for i, (r, lo, hi) in enumerate(zip(rates, ci_lows, ci_highs)):
-    ax.text(i, hi + 2, f'{r:.0f}%\\\n[{lo:.0f}-{hi:.0f}]', ha='center',
+    ax.text(i, hi + 2, f'{r:.0f}%\\n[{lo:.0f}-{hi:.0f}]', ha='center',
             color='white', fontsize=8)
 ax.set_ylabel('Germination rate (%)', color='white')
 ax.set_title('Rates with 95% Confidence Intervals', color='white', fontsize=11)
@@ -610,18 +610,18 @@ ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 # Plot 6: Summary
 ax = axes[1, 2]
 ax.axis('off')
-text = "Statistical Analysis Summary\\\n" + "=" * 30 + "\\\n\\\n"
-text += f"n = {n_seeds} seeds/group, {storage_weeks} weeks\\\n"
-text += f"Bonferroni threshold: p < {bonferroni_threshold:.4f}\\\n\\\n"
-text += f"{'Treatment':<14} {'Rate':>6} {'95% CI':>14}\\\n"
-text += "-" * 36 + "\\\n"
+text = "Statistical Analysis Summary\\n" + "=" * 30 + "\\n\\n"
+text += f"n = {n_seeds} seeds/group, {storage_weeks} weeks\\n"
+text += f"Bonferroni threshold: p < {bonferroni_threshold:.4f}\\n\\n"
+text += f"{'Treatment':<14} {'Rate':>6} {'95% CI':>14}\\n"
+text += "-" * 36 + "\\n"
 for name in t_names:
     r = results[name]
     text += (f"{name:<14} {r['rate']*100:>5.0f}% "
-             f"[{r['ci_low']*100:>4.0f}-{r['ci_high']*100:>4.0f}%]\\\n")
-text += f"\\\nSignificant differences: {len(sig_pairs)}\\\n"
-text += f"Non-significant: {len(nonsig_pairs)}\\\n\\\n"
-text += "Cold dry storage is significantly\\\n"
+             f"[{r['ci_low']*100:>4.0f}-{r['ci_high']*100:>4.0f}%]\\n")
+text += f"\\nSignificant differences: {len(sig_pairs)}\\n"
+text += f"Non-significant: {len(nonsig_pairs)}\\n\\n"
+text += "Cold dry storage is significantly\\n"
 text += "better than warm moist storage."
 ax.text(0.05, 0.95, text, transform=ax.transAxes, fontsize=10,
         verticalalignment='top', color='white', fontfamily='monospace')
@@ -818,24 +818,24 @@ ax.set_title('Viability Landscape', color='white', fontsize=11)
 # Plot 6: Summary table
 ax = axes[1, 2]
 ax.axis('off')
-text = "Germination Metrics\\\n" + "=" * 35 + "\\\n\\\n"
-text += f"{'Treatment':<14} {'Rate':>6} {'Days':>6} {'GI':>6}\\\n"
-text += "-" * 36 + "\\\n"
+text = "Germination Metrics\\n" + "=" * 35 + "\\n\\n"
+text += f"{'Treatment':<14} {'Rate':>6} {'Days':>6} {'GI':>6}\\n"
+text += "-" * 36 + "\\n"
 for name in t_names:
     d = timing_data[name]
     text += (f"{name:<14} {d['rate']*100:>5.0f}% "
-             f"{d['mean_days']:>5.1f}d {d['germ_index']:>5}\\\n")
+             f"{d['mean_days']:>5.1f}d {d['germ_index']:>5}\\n")
 
 # Q10 estimate
 sl_25 = mustard.time_to_threshold(25, 6, 0.85) / 52
 sl_15 = mustard.time_to_threshold(15, 6, 0.85) / 52
 q10 = sl_15 / sl_25
-text += f"\\\nQ10 estimate: {q10:.1f}\\\n"
-text += f"  (each 10C drop = {q10:.1f}x\\\n"
-text += f"   longer shelf life)\\\n\\\n"
-text += "Key findings:\\\n"
-text += f"  Frozen:   {mustard.time_to_threshold(-18, 5, 0.85)/52:.0f} years\\\n"
-text += f"  Fridge:   {mustard.time_to_threshold(5, 6, 0.85)/52:.0f} years\\\n"
+text += f"\\nQ10 estimate: {q10:.1f}\\n"
+text += f"  (each 10C drop = {q10:.1f}x\\n"
+text += f"   longer shelf life)\\n\\n"
+text += "Key findings:\\n"
+text += f"  Frozen:   {mustard.time_to_threshold(-18, 5, 0.85)/52:.0f} years\\n"
+text += f"  Fridge:   {mustard.time_to_threshold(5, 6, 0.85)/52:.0f} years\\n"
 text += f"  Room dry: {mustard.time_to_threshold(25, 6, 0.85)/52:.1f} years"
 ax.text(0.05, 0.95, text, transform=ax.transAxes, fontsize=10,
         verticalalignment='top', color='white', fontfamily='monospace')
@@ -926,7 +926,7 @@ for t, label, color in [(-18, 'Svalbard', '#a855f7'), (5, 'Fridge', '#22c55e'),
                           (25, 'Room', '#f59e0b'), (40, 'Hot', '#ef4444')]:
     r = arrhenius_rate(t) / arrhenius_rate(25)
     ax.plot(t, r, 'o', color=color, markersize=12, markeredgecolor='white')
-    ax.annotate(f'{label}\\\n{r:.3f}x', (t, r), textcoords="offset points",
+    ax.annotate(f'{label}\\n{r:.3f}x', (t, r), textcoords="offset points",
                 xytext=(12, 0), color=color, fontsize=9)
 ax.set_xlabel('Temperature (C)', color='white')
 ax.set_ylabel('Relative deterioration rate (log)', color='white')
@@ -994,11 +994,11 @@ ax.set_title('Cumulative Protection', color='white', fontsize=11)
 # Plot 5: Global seed bank conditions comparison
 ax = axes[1, 1]
 seed_banks = [
-    ('Apfu Azuo\\\n(bamboo tube)', 22, 9, 2),
+    ('Apfu Azuo\\n(bamboo tube)', 22, 9, 2),
     ('Village fridge', 5, 8, 12),
-    ('National Gene Bank\\\n(India, NBPGR)', 5, 5, 45),
-    ('Svalbard Vault\\\n(Norway)', -18, 5, 500),
-    ('Cryo storage\\\n(-196C, liquid N)', -196, 0, 10000),
+    ('National Gene Bank\\n(India, NBPGR)', 5, 5, 45),
+    ('Svalbard Vault\\n(Norway)', -18, 5, 500),
+    ('Cryo storage\\n(-196C, liquid N)', -196, 0, 10000),
 ]
 sb_names = [s[0] for s in seed_banks]
 sb_years = [s[3] for s in seed_banks]
@@ -1015,22 +1015,22 @@ ax.set_title('Seed Storage: Traditional to Modern', color='white', fontsize=10)
 # Plot 6: Conclusions
 ax = axes[1, 2]
 ax.axis('off')
-text = "EXPERIMENTAL CONCLUSIONS\\\n"
-text += "=" * 30 + "\\\n\\\n"
-text += "1. Temperature is the dominant\\\n"
-text += "   factor (Arrhenius: exponential\\\n"
-text += "   effect on reaction rates).\\\n\\\n"
-text += "2. Moisture enables fungal growth\\\n"
-text += "   above ~13% seed moisture and\\\n"
-text += "   activates hydrolytic enzymes.\\\n\\\n"
-text += "3. Light causes DNA damage and\\\n"
-text += "   lipid oxidation (smaller effect\\\n"
-text += "   but cumulative over months).\\\n\\\n"
-text += "4. Protection is MULTIPLICATIVE:\\\n"
-text += "   cold AND dry AND dark together\\\n"
-text += "   provide 100-1000x improvement.\\\n\\\n"
-text += "Apfu Azuo's bamboo tubes: ~2 years.\\\n"
-text += "Svalbard vault: ~500 years.\\\n"
+text = "EXPERIMENTAL CONCLUSIONS\\n"
+text += "=" * 30 + "\\n\\n"
+text += "1. Temperature is the dominant\\n"
+text += "   factor (Arrhenius: exponential\\n"
+text += "   effect on reaction rates).\\n\\n"
+text += "2. Moisture enables fungal growth\\n"
+text += "   above ~13% seed moisture and\\n"
+text += "   activates hydrolytic enzymes.\\n\\n"
+text += "3. Light causes DNA damage and\\n"
+text += "   lipid oxidation (smaller effect\\n"
+text += "   but cumulative over months).\\n\\n"
+text += "4. Protection is MULTIPLICATIVE:\\n"
+text += "   cold AND dry AND dark together\\n"
+text += "   provide 100-1000x improvement.\\n\\n"
+text += "Apfu Azuo's bamboo tubes: ~2 years.\\n"
+text += "Svalbard vault: ~500 years.\\n"
 text += "Same principle, better execution."
 ax.text(0.05, 0.95, text, transform=ax.transAxes, fontsize=10,
         verticalalignment='top', color='white', fontfamily='monospace')
@@ -1199,16 +1199,16 @@ ax3 = fig.add_axes([0.70, 0.55, 0.27, 0.36])
 ax3.set_facecolor('#111827')
 ax3.axis('off')
 recs = recommend_storage(25, rice)
-text = "STORAGE PROTOCOL GENERATOR\\\n"
-text += "Target: Rice, 25 years at 85%\\\n"
-text += "=" * 35 + "\\\n\\\n"
-text += f"{'Method':<24} {'Life':>6} {'OK?':>4}\\\n"
-text += "-" * 35 + "\\\n"
+text = "STORAGE PROTOCOL GENERATOR\\n"
+text += "Target: Rice, 25 years at 85%\\n"
+text += "=" * 35 + "\\n\\n"
+text += f"{'Method':<24} {'Life':>6} {'OK?':>4}\\n"
+text += "-" * 35 + "\\n"
 for r in recs:
     check = 'YES' if r['meets_target'] else 'no'
     sl_label = f"{r['shelf_life']:.0f}y"
-    text += f"{r['method']:<24} {sl_label:>5} {check:>4}\\\n"
-text += "\\\nRecommendation: Refrigerator\\\n"
+    text += f"{r['method']:<24} {sl_label:>5} {check:>4}\\n"
+text += "\\nRecommendation: Refrigerator\\n"
 text += "(cheapest that meets target)"
 ax3.text(0.02, 0.95, text, transform=ax3.transAxes, fontsize=9,
          verticalalignment='top', color='white', fontfamily='monospace')
@@ -1263,25 +1263,25 @@ ax5.set_xlim(-0.5, None)
 ax6 = fig.add_axes([0.70, 0.08, 0.27, 0.36])
 ax6.set_facecolor('#111827')
 ax6.axis('off')
-text = "EXPERIMENT CONCLUSIONS\\\n"
-text += "=" * 32 + "\\\n\\\n"
+text = "EXPERIMENT CONCLUSIONS\\n"
+text += "=" * 32 + "\\n\\n"
 best = max(t_names, key=lambda n: exp_data[n]['rate'])
 worst = min(t_names, key=lambda n: exp_data[n]['rate'])
-text += f"Best: {best} ({exp_data[best]['rate']*100:.0f}%)\\\n"
-text += f"Worst: {worst} ({exp_data[worst]['rate']*100:.0f}%)\\\n\\\n"
-text += "Key findings:\\\n"
-text += "  1. Temperature dominates\\\n"
-text += "     (Arrhenius kinetics)\\\n"
-text += "  2. Moisture enables fungal\\\n"
-text += "     attack above 13%\\\n"
-text += "  3. Light adds cumulative\\\n"
-text += "     photo-oxidation damage\\\n"
-text += "  4. Protection compounds:\\\n"
-text += "     cold x dry x dark\\\n\\\n"
-text += "Apfu Azuo was right:\\\n"
-text += "  Cool, dark, sealed storage\\\n"
-text += "  preserves the stories inside\\\n"
-text += "  every seed. Our science just\\\n"
+text += f"Best: {best} ({exp_data[best]['rate']*100:.0f}%)\\n"
+text += f"Worst: {worst} ({exp_data[worst]['rate']*100:.0f}%)\\n\\n"
+text += "Key findings:\\n"
+text += "  1. Temperature dominates\\n"
+text += "     (Arrhenius kinetics)\\n"
+text += "  2. Moisture enables fungal\\n"
+text += "     attack above 13%\\n"
+text += "  3. Light adds cumulative\\n"
+text += "     photo-oxidation damage\\n"
+text += "  4. Protection compounds:\\n"
+text += "     cold x dry x dark\\n\\n"
+text += "Apfu Azuo was right:\\n"
+text += "  Cool, dark, sealed storage\\n"
+text += "  preserves the stories inside\\n"
+text += "  every seed. Our science just\\n"
 text += "  explains why it works."
 ax6.text(0.02, 0.97, text, transform=ax6.transAxes, fontsize=10,
          verticalalignment='top', color='white', fontfamily='monospace')

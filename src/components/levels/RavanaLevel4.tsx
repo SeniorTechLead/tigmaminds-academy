@@ -71,7 +71,7 @@ for strategy in ['round_robin', 'shortest_queue']:
     sched = TaskScheduler(num_heads=5, strategy=strategy)
     for name, dur in tasks:
         sched.assign(name, dur)
-    print(f"\\\n=== {strategy.upper()} (5 heads) ===")
+    print(f"\\n=== {strategy.upper()} (5 heads) ===")
     sched.display()
     print(f"  Total time: {sched.total_time():.1f}s")
 
@@ -201,10 +201,10 @@ for name, func, arg in tasks:
 pool.shutdown()
 elapsed = time.time() - start
 
-print(f"\\\n=== Results ===")
+print(f"\\n=== Results ===")
 for name, result in sorted(pool.results.items()):
     print(f"  {name}: {result:,}")
-print(f"\\\nTotal time: {elapsed:.2f}s with 5 heads")`,
+print(f"\\nTotal time: {elapsed:.2f}s with 5 heads")`,
       challenge: 'Run the same tasks with 1 head, 3 heads, and 10 heads. Plot the total time vs number of heads. At what point do additional heads stop helping? (Hint: with 6 tasks, you cannot benefit from more than 6 heads.)',
       successHint: 'A thread pool is the production-grade way to manage parallel workers. It avoids the overhead of creating and destroying threads. Every web server, every database, every GPU driver uses thread pools internally.',
     },
@@ -297,7 +297,7 @@ results = []
 
 print("=== Ravana's Intelligence Network ===")
 print(f"Queue capacity: {queue.max_size}")
-print(f"Scouts: 1 | Heads: 3\\\n")
+print(f"Scouts: 1 | Heads: 3\\n")
 
 producer = threading.Thread(target=scout_producer,
                            args=(queue, 12, stop_event))
@@ -313,7 +313,7 @@ time.sleep(0.5)  # Let consumers finish
 for c in consumers: c.join(timeout=1)
 elapsed = time.time() - start
 
-print(f"\\\n=== Summary ===")
+print(f"\\n=== Summary ===")
 print(f"Reports produced: {queue.produced}")
 print(f"Reports consumed: {queue.consumed}")
 print(f"Time: {elapsed:.2f}s")
@@ -409,7 +409,7 @@ plt.tight_layout(); plt.show()
 
 # Compute FLOPS
 ops = [2 * s**3 for s in sizes]  # multiply-add = 2 ops
-print(f"\\\n{'Size':>6} {'Operations':>12} {'Serial MFLOPS':>14} {'NumPy MFLOPS':>13}")
+print(f"\\n{'Size':>6} {'Operations':>12} {'Serial MFLOPS':>14} {'NumPy MFLOPS':>13}")
 for s, o, st, nt in zip(sizes, ops, serial_times, numpy_times):
     print(f"{s:>4}x{s:<2} {o:>12,} {o/st/1e6:>13.1f} {o/max(nt,1e-8)/1e6:>12.1f}")`,
       challenge: 'Add a "blocked" matrix multiply that divides the matrix into 4 quadrants and computes each quadrant separately. This is how GPUs actually work — they split the matrix into tiles that fit in fast local memory. Does blocking improve the serial implementation?',
@@ -473,7 +473,7 @@ max_stage = max(stage_times)
 # Pipeline time = first item latency + (n-1) * bottleneck stage
 pipeline_time_est = total_stage + (len(items) - 1) * max_stage
 
-print(f"\\\n=== PIPELINE Processing (simulated) ===")
+print(f"\\n=== PIPELINE Processing (simulated) ===")
 print(f"  Stage times: {[s.process_time for s in stages]}")
 print(f"  Bottleneck: {stages[stage_times.index(max_stage)].name} "
       f"({max_stage}s)")
@@ -509,7 +509,7 @@ ax.legend(loc='lower right', fontsize=10)
 plt.tight_layout()
 plt.show()
 
-print(f"\\\nSerial: {serial_time:.2f}s")
+print(f"\\nSerial: {serial_time:.2f}s")
 print(f"Pipeline: ~{pipeline_time_est:.2f}s")
 print(f"Speedup: {serial_time/pipeline_time_est:.1f}x "
       f"(max theoretical: {len(stages)}x)")`,
@@ -571,7 +571,7 @@ class RavanaOrchestrator:
         serial_time = total_work
         efficiency = total_work / (makespan * self.num_heads) * 100
 
-        print(f"\\\n{'='*50}")
+        print(f"\\n{'='*50}")
         print(f"  RAVANA ORCHESTRATOR — PERFORMANCE REPORT")
         print(f"{'='*50}")
         print(f"  Heads:     {self.num_heads}")
@@ -580,7 +580,7 @@ class RavanaOrchestrator:
         print(f"  Serial:    {serial_time:.2f}s")
         print(f"  Speedup:   {serial_time/makespan:.2f}x")
         print(f"  Efficiency: {efficiency:.0f}%")
-        print(f"\\\n  Per-head breakdown:")
+        print(f"\\n  Per-head breakdown:")
         for i in range(self.num_heads):
             bar = "#" * int(self.head_loads[i] * 3)
             print(f"    Head {i+1}: {self.head_tasks[i]:>2} tasks, "
@@ -659,7 +659,7 @@ orch.submit_batch(tasks)
 orch.report()
 orch.visualise()
 
-print("\\\nOrchestrator complete!")
+print("\\nOrchestrator complete!")
 print("You built a parallel task scheduler with:")
 print("  - Shortest-queue load balancing")
 print("  - Gantt chart visualisation")

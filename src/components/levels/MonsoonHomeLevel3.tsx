@@ -352,12 +352,12 @@ ax2.legend(loc='upper right', fontsize=8)
 ax = axes[1, 1]
 ax.set_facecolor('#111827'); ax.tick_params(colors='gray')
 strategies = {
-    'Evaporative cooling\\n(dry period, RH<50%)': 8,
-    'Cross-ventilation\\n(breezy, dT>2°C)': 4,
-    'Thermal mass\\n(24-hour averaging)': 5,
-    'Night flush\\n(cool night air)': 6,
-    'Evaporative cooling\\n(monsoon, RH>80%)': 1.5,
-    'Dehumidification\\n(desiccant)': 3,
+    'Evaporative cooling\n(dry period, RH<50%)': 8,
+    'Cross-ventilation\n(breezy, dT>2°C)': 4,
+    'Thermal mass\n(24-hour averaging)': 5,
+    'Night flush\n(cool night air)': 6,
+    'Evaporative cooling\n(monsoon, RH>80%)': 1.5,
+    'Dehumidification\n(desiccant)': 3,
 }
 names_s = list(strategies.keys())
 values_s = list(strategies.values())

@@ -259,8 +259,8 @@ axes[0,0].plot(x, wave_speed, color='#10b981', linewidth=2.5)
 axes[0,0].set_xlabel('Depth (mm)', color='white', fontsize=10)
 axes[0,0].set_ylabel('Wave Speed (m/s)', color='white', fontsize=10)
 axes[0,0].set_title('Speed of Sound Through Casque', color='white', fontsize=12, fontweight='bold')
-axes[0,0].text(2, 2500, 'Dense shell\\n(fast)', color='#10b981', fontsize=9)
-axes[0,0].text(10, 500, 'Porous core\\n(slow)', color='#10b981', fontsize=9)
+axes[0,0].text(2, 2500, 'Dense shell\n(fast)', color='#10b981', fontsize=9)
+axes[0,0].text(10, 500, 'Porous core\n(slow)', color='#10b981', fontsize=9)
 
 # Impedance profile
 axes[0,1].plot(x, impedance / 1e6, color='#f59e0b', linewidth=2.5)
@@ -438,13 +438,13 @@ axes[2].set_ylabel('Peak Transmitted Force (N)', color='white', fontsize=10)
 axes[2].set_title('Protection Comparison', color='white', fontsize=12, fontweight='bold')
 
 for i, (p, m) in enumerate(zip(peaks, masses)):
-    axes[2].text(i, p + 5, f'{p:.0f}N\\n{m*1000:.1f}g', ha='center', color='white', fontsize=8)
+    axes[2].text(i, p + 5, f'{p:.0f}N\n{m*1000:.1f}g', ha='center', color='white', fontsize=8)
 
 plt.suptitle('Casque Gradient Optimization', color='white', fontsize=14, fontweight='bold', y=1.02)
 plt.tight_layout()
 plt.show()
 
-print("\\\nOptimization Results:")
+print("\\nOptimization Results:")
 for (name, profile), peak in zip(strategies.items(), peaks):
     avg_mass = np.mean(profile) * 1900 * 0.015 * 0.001 * 1000  # grams
     print(f"  {name:30s} | Peak force: {peak:>7.0f} N | Mass: {avg_mass:>5.1f} g")
@@ -452,7 +452,7 @@ for (name, profile), peak in zip(strategies.items(), peaks):
 natural_peak = simulate_impact(natural)[0]
 opt_peak = simulate_impact(best_profile)[0]
 improvement = (natural_peak - opt_peak) / natural_peak * 100
-print(f"\\\nOptimized vs natural: {improvement:.1f}% improvement")
+print(f"\\nOptimized vs natural: {improvement:.1f}% improvement")
 print("The natural casque is remarkably close to the computational optimum!")`,
       challenge: 'Add a mass constraint: total casque mass must not exceed 50 grams. How does the optimal profile change when mass is limited? Is the natural casque still near-optimal under this constraint?',
       successHint: 'Computational optimization finds that the natural hornbill casque is within a few percent of the mathematical optimum. Evolution through natural selection is a powerful optimizer — given enough time, it finds near-optimal solutions.',
@@ -615,7 +615,7 @@ plt.suptitle('Comparative Biomechanics: Impact Protection Systems', color='white
 plt.tight_layout()
 plt.show()
 
-print("\\\nKey insight: biological systems optimize for lifetime performance (self-healing)")
+print("\\nKey insight: biological systems optimize for lifetime performance (self-healing)")
 print("Human systems optimize for single-impact performance (higher energy per event)")
 print("The ideal future system combines both: high energy absorption + self-healing")`,
       challenge: 'Add the coconut shell to the comparison. Research its approximate properties (thickness ~3mm, density ~1200 kg/m³, handles drops from palm trees at ~20 m/s). How does it rank in specific energy absorption?',
@@ -766,7 +766,7 @@ for i, r in enumerate(results):
 axes[1,0].axhline(y=safety_limit, color='#f87171', linestyle='--', alpha=0.5)
 axes[1,0].axvline(x=400, color='#f87171', linestyle='--', alpha=0.5)
 axes[1,0].fill_between([0, 400], 0, safety_limit, alpha=0.05, color='#10b981')
-axes[1,0].text(200, 1500, 'FEASIBLE\\nREGION', ha='center', color='#10b981', fontsize=12, alpha=0.5)
+axes[1,0].text(200, 1500, 'FEASIBLE\nREGION', ha='center', color='#10b981', fontsize=12, alpha=0.5)
 axes[1,0].set_xlabel('Mass (g)', color='white', fontsize=10)
 axes[1,0].set_ylabel('Peak Force (N)', color='white', fontsize=10)
 axes[1,0].set_title('Design Space', color='white', fontsize=12, fontweight='bold')
@@ -792,7 +792,7 @@ plt.show()
 for v in range(50, 0, -1):
     f, _ = best_design.simulate_impact(velocity=v/3.6)
     if f < safety_limit:
-        print(f"\\\nBest design: {best_design.name}")
+        print(f"\\nBest design: {best_design.name}")
         print(f"  Mass: {best_design.mass():.1f}g | Thickness: {best_design.total_thickness*1000:.0f}mm")
         print(f"  Maximum safe speed: {v} km/h")
         print(f"  Bio-inspired gradient reduces force by {(1-results[3][1]/results[0][1])*100:.0f}% vs uniform foam")

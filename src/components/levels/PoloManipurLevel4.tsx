@@ -100,7 +100,7 @@ for chukker in range(1, 5):
                           (play_id, pid, dist, angle, speed))
 
 # Analytics
-print("=== Polo Match Analytics ===\\\n")
+print("=== Polo Match Analytics ===\\n")
 
 c.execute('''SELECT p.name, p.team, COUNT(*) as actions,
              SUM(CASE WHEN pl.outcome='success' THEN 1 ELSE 0 END) as successes,
@@ -116,12 +116,12 @@ for row in c.fetchall():
 c.execute('''SELECT p.name, g.distance, g.angle_deg, g.ball_speed
              FROM goals g JOIN players p ON g.scorer_id=p.id ORDER BY g.distance''')
 goals = c.fetchall()
-print(f"\\\nGoals scored: {len(goals)}")
+print(f"\\nGoals scored: {len(goals)}")
 for name, dist, angle, speed in goals:
     print(f"  {name}: {dist:.0f}m, {angle:.0f}°, {speed:.0f} m/s")
 
 c.execute("SELECT action, COUNT(*), SUM(CASE WHEN outcome='success' THEN 1 ELSE 0 END) FROM plays GROUP BY action ORDER BY COUNT(*) DESC")
-print("\\\nAction breakdown:")
+print("\\nAction breakdown:")
 for action, total, success in c.fetchall():
     print(f"  {action:<10}: {total} attempts, {success} success ({success/total*100:.0f}%)")
 
@@ -241,7 +241,7 @@ class PoloBallEngine:
 
 engine = PoloBallEngine()
 
-print("=== Polo Ball Physics Engine ===\\\n")
+print("=== Polo Ball Physics Engine ===\\n")
 print(f"{'Shot':>4} {'Speed':>6} {'Angle':>6} {'Range':>7} {'Height':>7} {'Bounces':>8} {'Time':>6}")
 print("-" * 50)
 
@@ -251,12 +251,12 @@ for i, (v0, angle) in enumerate([(25, 15), (30, 20), (35, 25), (40, 30), (30, 45
 
 # Query database for analysis
 c.execute('SELECT shot_id, COUNT(*), MAX(z), MAX(x) FROM trajectories GROUP BY shot_id')
-print("\\\nTrajectory data stored:")
+print("\\nTrajectory data stored:")
 for sid, points, max_z, max_x in c.fetchall():
     print(f"  Shot {sid}: {points} data points, max height {max_z:.1f}m, distance {max_x:.1f}m")
 
 c.execute('SELECT phase, COUNT(*) FROM trajectories GROUP BY phase')
-print("\\\nPhase breakdown:")
+print("\\nPhase breakdown:")
 for phase, count in c.fetchall():
     print(f"  {phase}: {count} data points")
 
@@ -337,7 +337,7 @@ formations = {
 }
 
 np.random.seed(42)
-print("=== Polo Formation Analysis ===\\\n")
+print("=== Polo Formation Analysis ===\\n")
 print(f"{'Formation':<12} {'Offence':>8} {'Defence':>8} {'Total':>7}")
 print("-" * 38)
 
@@ -359,7 +359,7 @@ for name, positions in formations.items():
         best_total = total
         best_name = name
 
-print(f"\\\nOptimal formation: {best_name} (score: {best_total:.1f})")
+print(f"\\nOptimal formation: {best_name} (score: {best_total:.1f})")
 
 # Monte Carlo improvement: random perturbations of the best
 best_positions = list(formations[best_name])
@@ -376,7 +376,7 @@ for trial in range(1000):
         improved_score = total
         best_positions = perturbed
 
-print(f"\\\nAfter 1000 random improvements:")
+print(f"\\nAfter 1000 random improvements:")
 print(f"  Score: {best_total:.1f} → {improved_score:.1f} (+{(improved_score-best_total)/best_total*100:.1f}%)")
 print(f"  Optimal positions:")
 for i, (x, y) in enumerate(best_positions):
@@ -450,7 +450,7 @@ ball_x, ball_y = field_L/2, field_W/2
 possession_team = 'Manipur XI'
 
 print("=== Sagol Kangjei — Full Match Simulation ===")
-print(f"Manipur XI vs Bengal XI at Imphal Polo Ground\\\n")
+print(f"Manipur XI vs Bengal XI at Imphal Polo Ground\\n")
 
 for chukker in range(1, 5):
     chukker_goals_a, chukker_goals_b = 0, 0
@@ -516,17 +516,17 @@ for team, team_stats in stats.items():
     for stat, value in team_stats.items():
         c.execute('INSERT INTO match_stats VALUES (?,?,?)', (team, stat, value))
 
-print(f"\\\n{'='*40}")
+print(f"\\n{'='*40}")
 print(f"FINAL: Manipur XI {score['Manipur XI']} - {score['Bengal XI']} Bengal XI")
 print(f"{'='*40}")
 
 # Post-match analysis
-print("\\\n--- Match Statistics ---")
+print("\\n--- Match Statistics ---")
 c.execute('SELECT team, stat, value FROM match_stats ORDER BY team, stat')
 current_team = ''
 for team, stat, value in c.fetchall():
     if team != current_team:
-        print(f"\\\n  {team}:")
+        print(f"\\n  {team}:")
         current_team = team
     print(f"    {stat}: {value:.0f}")
 
@@ -534,14 +534,14 @@ c.execute('''SELECT player, team, COUNT(*) as actions,
              SUM(CASE WHEN outcome='success' THEN 1 ELSE 0 END) as successes,
              SUM(goal) as goals
              FROM match_plays GROUP BY player ORDER BY goals DESC, successes DESC''')
-print("\\\n--- Player Performance ---")
+print("\\n--- Player Performance ---")
 print(f"{'Player':<12} {'Team':<12} {'Actions':>8} {'Success%':>9} {'Goals':>6}")
 for name, team, actions, succ, goals in c.fetchall():
     print(f"{name:<12} {team:<12} {actions:>8} {succ/actions*100:>8.0f}% {goals:>6}")
 
 c.execute('''SELECT action, COUNT(*), SUM(goal), ROUND(AVG(ball_speed),1)
              FROM match_plays WHERE action='shot' GROUP BY team''')
-print("\\\n--- Shooting Analysis ---")
+print("\\n--- Shooting Analysis ---")
 for row in c.fetchall():
     print(f"  {row[0]}: {row[1]} shots, {row[2]} goals ({row[2]/row[1]*100:.0f}% conversion), avg speed {row[3]} m/s")
 

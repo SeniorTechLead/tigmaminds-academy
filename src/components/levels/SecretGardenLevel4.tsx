@@ -139,7 +139,7 @@ for name, r in results.items():
     ax.scatter(r['x'], r['y'], s=whi * 5 + 50, c=color, edgecolors='white',
               linewidth=1.5, zorder=5)
     short = name.split('-', 1)[1] if '-' in name else name
-    ax.annotate(f'{short}\\\nWHI={whi:.0f}', xy=(r['x'], r['y']),
+    ax.annotate(f'{short}\\nWHI={whi:.0f}', xy=(r['x'], r['y']),
                xytext=(r['x'] + 0.05, r['y'] + 0.06),
                color='white', fontsize=7, fontweight='bold',
                arrowprops=dict(arrowstyle='->', color='gray', lw=0.5))
@@ -194,7 +194,7 @@ ax3.set_xlim(0, 110)
 ax4 = axes[1, 1]
 ax4.set_facecolor('#111827')
 sorted_stations = sorted(results.items(), key=lambda x: x[1]['whi'], reverse=True)
-names_sorted = [n.split('-')[0] + '\\\n' + n.split('-',1)[1][:12] for n, _ in sorted_stations]
+names_sorted = [n.split('-')[0] + '\\n' + n.split('-',1)[1][:12] for n, _ in sorted_stations]
 whis_sorted = [r['whi'] for _, r in sorted_stations]
 bar_colors = ['#22c55e' if w >= 60 else '#f59e0b' if w >= 40 else '#ef4444' for w in whis_sorted]
 
@@ -221,7 +221,7 @@ print("=" * 70)
 print("     LOKTAK LAKE WETLAND HEALTH INDEX — FULL REPORT")
 print("=" * 70)
 lake_whi = np.mean([r['whi'] for r in results.values()])
-print(f"\\\nLake-wide average WHI: {lake_whi:.1f}/100 — {'GOOD' if lake_whi >= 60 else 'FAIR' if lake_whi >= 40 else 'POOR'}")
+print(f"\\nLake-wide average WHI: {lake_whi:.1f}/100 — {'GOOD' if lake_whi >= 60 else 'FAIR' if lake_whi >= 40 else 'POOR'}")
 print()
 for name, r in sorted(results.items(), key=lambda x: -x[1]['whi']):
     status = 'GOOD' if r['whi'] >= 60 else 'FAIR' if r['whi'] >= 40 else 'POOR'
@@ -243,7 +243,7 @@ for name, r in sorted(results.items(), key=lambda x: x[1]['whi']):
     elif r['whi'] < 60:
         print(f"  WATCH — {name}: overall fair, monitor closely")
 
-print("\\\nThis WHI framework integrates hydrology, chemistry, and ecology")
+print("\\nThis WHI framework integrates hydrology, chemistry, and ecology")
 print("into actionable management intelligence for Loktak Lake.")`,
       challenge: 'Extend the WHI with a temporal component: simulate 5 years of monthly monitoring data for each station. Add trend detection — is each station improving, stable, or declining? Plot the trend lines and flag stations with statistically significant decline.',
       successHint: 'You have built a real environmental decision-support tool. Composite indices like the WHI reduce complex multi-dimensional data into scores that non-scientists (policymakers, community leaders) can understand and act on. The challenge is always balancing scientific rigor with practical usability.',

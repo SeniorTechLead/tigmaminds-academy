@@ -65,7 +65,7 @@ authors_mentioned = [r["author"] for r in pinakes_flat]
 unique_authors = set(authors_mentioned)
 redundant_cells = sum(authors_mentioned.count(a) - 1 for a in unique_authors)
 total_cells = len(pinakes_flat) * 5
-print(f"\\\nRedundancy: {redundant_cells} duplicate author/birthplace/teacher entries")
+print(f"\\nRedundancy: {redundant_cells} duplicate author/birthplace/teacher entries")
 print(f"Total cells: {total_cells}  Redundant: ~{redundant_cells * 3} cells")
 
 # === NORMALIZED (3NF) ===
@@ -100,21 +100,21 @@ scrolls_table = [
     {"scroll_id": 10, "title": "Almagest", "author_id": 6, "subject_id": 5},
 ]
 
-print("\\\n=== NORMALIZED TABLES (3NF) ===")
-print("\\\nAuthors:")
+print("\\n=== NORMALIZED TABLES (3NF) ===")
+print("\\nAuthors:")
 for a in authors_table:
     print(f"  [{a['author_id']}] {a['name']:<14} born: {a['birthplace']}")
 
-print("\\\nSubjects:")
+print("\\nSubjects:")
 for s in subjects_table:
     print(f"  [{s['subject_id']}] {s['name']}")
 
-print("\\\nScrolls:")
+print("\\nScrolls:")
 for s in scrolls_table:
     print(f"  [{s['scroll_id']}] {s['title']:<20} author_id={s['author_id']}  subject_id={s['subject_id']}")
 
 # Simulated JOIN
-print("\\\n=== JOIN Query: All scrolls by Aristotle ===")
+print("\\n=== JOIN Query: All scrolls by Aristotle ===")
 aristotle_id = 2
 for scroll in scrolls_table:
     if scroll["author_id"] == aristotle_id:
@@ -126,7 +126,7 @@ for scroll in scrolls_table:
 flat_cells = len(pinakes_flat) * 5
 norm_cells = (len(authors_table) * 4 + len(subjects_table) * 2
               + len(scrolls_table) * 4)
-print(f"\\\n=== Storage Comparison ===")
+print(f"\\n=== Storage Comparison ===")
 print(f"Flat table cells: {flat_cells}")
 print(f"Normalized cells: {norm_cells}")
 print(f"Reduction: {(1 - norm_cells/flat_cells):.0%}")
@@ -191,7 +191,7 @@ print(f"Unique terms: {n_terms}")
 print(f"Total postings: {sum(len(v) for v in inverted_index.values())}")
 
 # Show sample entries
-print("\\\nSample index entries:")
+print("\\nSample index entries:")
 for term in ["sphere", "geometry", "war", "star", "body"]:
     if term in inverted_index:
         docs = inverted_index[term]
@@ -217,17 +217,17 @@ def tfidf_search(query, top_k=5):
     return ranked[:top_k]
 
 # Run searches
-print("\\\n=== TF-IDF Search Results ===")
+print("\\n=== TF-IDF Search Results ===")
 queries = ["sphere geometry", "war battle", "star planet", "body water float"]
 for q in queries:
-    print(f"\\\nQuery: '{q}'")
+    print(f"\\nQuery: '{q}'")
     results = tfidf_search(q)
     for rank, (doc, score) in enumerate(results):
         bar = "#" * int(score * 50)
         print(f"  {rank+1}. {doc:<22} score={score:.4f} {bar}")
 
 # IDF analysis: which words are most informative?
-print("\\\n=== Most Informative Terms (highest IDF) ===")
+print("\\n=== Most Informative Terms (highest IDF) ===")
 idf_scores = {}
 for term, postings in inverted_index.items():
     idf_scores[term] = np.log(n_docs / len(postings))
@@ -238,7 +238,7 @@ for term, idf in sorted_idf[:10]:
     docs_with = len(inverted_index[term])
     print(f"  {term:<14} {docs_with:>5} {idf:>6.3f}")
 
-print("\\\nLowest IDF (least informative):")
+print("\\nLowest IDF (least informative):")
 for term, idf in sorted_idf[-5:]:
     docs_with = len(inverted_index[term])
     print(f"  {term:<14} {docs_with:>5} {idf:>6.3f}")`,
@@ -333,7 +333,7 @@ print(f"Hub scholars: {hubs}")
 print(f"Avg connections per scholar: {adj.sum(axis=1).mean():.1f}")
 
 # Random failure simulation
-print("\\\n=== Random Node Removal (Random Failure) ===")
+print("\\n=== Random Node Removal (Random Failure) ===")
 print(f"{'% Removed':>10} {'Active':>7} {'Components':>11} {'Largest':>8} {'Connected?':>11}")
 print("-" * 49)
 
@@ -350,7 +350,7 @@ for step in [0, 5, 10, 15, 20, 25, 30, 35, 40, 45]:
         print(f"{step/n*100:>8.0f}% {len(active):>7} {n_comp:>11} {largest:>8} {connected:>11}")
 
 # Targeted attack on hubs
-print("\\\n=== Targeted Hub Removal (Deliberate Attack) ===")
+print("\\n=== Targeted Hub Removal (Deliberate Attack) ===")
 print(f"{'Hub Removed':<16} {'Components':>11} {'Largest':>8} {'% in Largest':>13}")
 print("-" * 50)
 
@@ -366,7 +366,7 @@ for hub in sorted(hubs, key=lambda h: adj[h].sum(), reverse=True):
     print(f"{name:<16} {n_comp:>11} {largest:>8} {largest/len(active)*100:>11.0f}%")
 
 # Percolation threshold comparison
-print("\\\n=== Percolation Threshold (1000 trials) ===")
+print("\\n=== Percolation Threshold (1000 trials) ===")
 thresholds_random = []
 thresholds_targeted = []
 
@@ -399,7 +399,7 @@ for trial in range(200):
 
 print(f"Random failure threshold:   {np.mean(thresholds_random):.0%} of nodes must fail")
 print(f"Targeted attack threshold:  {np.mean(thresholds_targeted):.0%} of nodes must fail")
-print(f"\\\nThe network is {np.mean(thresholds_random)/np.mean(thresholds_targeted):.1f}x more vulnerable to targeted attack than random failure.")`,
+print(f"\\nThe network is {np.mean(thresholds_random)/np.mean(thresholds_targeted):.1f}x more vulnerable to targeted attack than random failure.")`,
       challenge: 'Add "knowledge recovery": after removing nodes, allow new scholars to join (random connections). How many new scholars are needed to restore the largest component to 80% of its original size? This models the difficulty of rebuilding lost knowledge — it\'s far harder to recover than it was to destroy.',
       successHint: 'You modelled one of the most important phenomena in network science: the difference between random failure and targeted attack. This explains why the internet (random topology) is resilient to random router failures but vulnerable to targeted attacks on major exchanges — the same robust-yet-fragile property the Library suffered.',
     },
@@ -462,14 +462,14 @@ corrupted = simulate_bit_rot(n_files, years)
 
 print("=== Bit Rot Simulation ===")
 print(f"Files: {n_files:,} | Size: 10 MB each | Duration: {years} years")
-print(f"\\\nCorrupted files over time:")
+print(f"\\nCorrupted files over time:")
 for y in [10, 25, 50, 75, 100]:
     lost = np.sum((corrupted > 0) & (corrupted <= y))
     pct = lost / n_files * 100
     print(f"  After {y:>3} years: {lost:>5,} files corrupted ({pct:.1f}%)")
 
 # === Format Obsolescence ===
-print("\\\n=== Format Obsolescence Simulation ===")
+print("\\n=== Format Obsolescence Simulation ===")
 formats = ["JPEG", "PDF", "DOCX", "TIFF", "HTML", "XML",
            "MPEG4", "WAV", "CSV", "SQLite", "ZIP", "PNG"]
 deaths = simulate_format_obsolescence(len(formats), 100)
@@ -482,10 +482,10 @@ for i, fmt in enumerate(formats):
         print(f"  {fmt:<8} survives 100 years")
 
 surviving = np.sum(deaths == 0)
-print(f"\\\nFormats surviving 100 years: {surviving} of {len(formats)}")
+print(f"\\nFormats surviving 100 years: {surviving} of {len(formats)}")
 
 # === Archival Strategies ===
-print("\\\n=== Archival Strategy Comparison (100 years) ===")
+print("\\n=== Archival Strategy Comparison (100 years) ===")
 
 strategies = [
     {"name": "No maintenance", "copy_interval": 0, "format_migrate": False, "copies": 1},
@@ -526,7 +526,7 @@ for strat in strategies:
     p5 = np.percentile(files_surviving, 5)
     print(f"  {strat['name']:<36} avg={avg:>5.1f}/100  worst={p5:>5.1f}/100")
 
-print("\\\nConclusion: Multiple copies + format migration is the only")
+print("\\nConclusion: Multiple copies + format migration is the only")
 print("strategy that reliably preserves data beyond 50 years.")`,
       challenge: 'Add "geographic distribution" to the model: copies stored in different locations survive independent disasters (fire, flood). If each location has a 1% annual chance of catastrophic loss, how many geographically distributed copies do you need to achieve 99.999% survival over 100 years?',
       successHint: 'Digital preservation is one of the great unsolved problems of our era. You modelled the three horsemen of data death: bit rot, format obsolescence, and media decay. The solution — active preservation with multiple copies and format migration — is exactly what the Internet Archive, Library of Congress, and CERN practice today.',
@@ -673,7 +673,7 @@ print(f"Pages crawled: {len(crawler.visited)}")
 print(f"Pages in web: {len(ancient_web)}")
 print(f"Coverage: {len(crawler.visited)/len(ancient_web):.0%}")
 
-print("\\\n=== Crawl Order (BFS) ===")
+print("\\n=== Crawl Order (BFS) ===")
 print(f"{'#':>3} {'URL':<30} {'Title':<30} {'New Links':>10}")
 print("-" * 75)
 for entry in crawler.crawl_log:
@@ -681,7 +681,7 @@ for entry in crawler.crawl_log:
           f"{entry['new_links']:>10}")
 
 # Build simple search from crawled content
-print("\\\n=== Search Over Crawled Index ===")
+print("\\n=== Search Over Crawled Index ===")
 def simple_search(query, index):
     terms = query.lower().split()
     scores = {}
@@ -694,13 +694,13 @@ def simple_search(query, index):
 
 for query in ["sphere geometry", "animal bone", "star observation"]:
     results = simple_search(query, crawler.index)
-    print(f"\\\nQuery: '{query}'")
+    print(f"\\nQuery: '{query}'")
     for url, score in results[:3]:
         title = ancient_web[url].title
         print(f"  {title:<32} score={score}")
 
 # Coverage analysis: what if we start from different seeds?
-print("\\\n=== Seed URL Impact on Coverage ===")
+print("\\n=== Seed URL Impact on Coverage ===")
 for seed in ["/euclid/elements", "/galen/anatomy", "/ptolemy/almagest"]:
     c = Crawler(ancient_web)
     c.crawl(seed)

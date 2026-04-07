@@ -81,7 +81,7 @@ soils = [
 cursor.executemany('INSERT INTO soil_samples (section_id,sand_pct,silt_pct,clay_pct,gravel_pct,sample_date) VALUES (?,?,?,?,?,?)', soils)
 
 # Query: section summary with soil data
-print("=== Kangla Fort Moat Engineering Database ===\\\n")
+print("=== Kangla Fort Moat Engineering Database ===\\n")
 cursor.execute('''
     SELECT s.name, s.length_m, s.width_m, s.depth_m,
            ROUND(AVG(ss.clay_pct), 1) as avg_clay,
@@ -102,7 +102,7 @@ cursor.execute('''
     ORDER BY depth_m ASC LIMIT 1
 ''')
 weak = cursor.fetchone()
-print(f"\\\nWeakest section: {weak[0]} (only {weak[1]}m deep, slope {weak[2]}°)")
+print(f"\\nWeakest section: {weak[0]} (only {weak[1]}m deep, slope {weak[2]}°)")
 
 db.close()`,
       challenge: 'Add a water_levels table with monthly readings for each section. Write a query to find the section with the lowest minimum water level — that is the most vulnerable point.',
@@ -175,7 +175,7 @@ def control_gate(gate_id, water_level, rainfall_forecast, timestamp):
 
 # Simulate a week of monsoon conditions
 np.random.seed(42)
-print("=== Kangla Fort Automated Gate Control ===\\\n")
+print("=== Kangla Fort Automated Gate Control ===\\n")
 print(f"{'Day':>4} {'Gate':<16} {'Level':>6} {'Rain':>6} {'Action':<12} {'Reason'}")
 print("-" * 85)
 
@@ -190,7 +190,7 @@ for day in range(1, 8):
 
 # Summary
 c.execute('SELECT action, COUNT(*) FROM gate_decisions GROUP BY action ORDER BY COUNT(*) DESC')
-print("\\\n--- Decision Summary ---")
+print("\\n--- Decision Summary ---")
 for action, count in c.fetchall():
     print(f"  {action}: {count} decisions")
 
@@ -278,7 +278,7 @@ for section in sections:
     detect_alerts(section, 'seepage_rate', 0.015, 'increase')
 
 # Report
-print("=== Kangla Fort Structural Health Report ===\\\n")
+print("=== Kangla Fort Structural Health Report ===\\n")
 c.execute('''
     SELECT section, metric,
            MIN(value) as min_val, MAX(value) as max_val,
@@ -291,12 +291,12 @@ for row in c.fetchall():
     print(f"{row[0]:<14} {row[1]:<14} {row[2]:>5.2f} {row[3]:>5.2f} {row[4]:>6.2f}")
 
 c.execute('SELECT section, COUNT(*) as alerts FROM alerts GROUP BY section ORDER BY alerts DESC')
-print("\\\n--- Alert Count by Section ---")
+print("\\n--- Alert Count by Section ---")
 for row in c.fetchall():
     print(f"  {row[0]}: {row[1]} alerts")
 
 c.execute('SELECT section, message, year FROM alerts ORDER BY year DESC LIMIT 5')
-print("\\\n--- Most Recent Alerts ---")
+print("\\n--- Most Recent Alerts ---")
 for row in c.fetchall():
     print(f"  [{row[2]}] {row[0]}: {row[1]}")
 
@@ -388,7 +388,7 @@ for idx, repair_idx in enumerate(selected):
     c.execute('INSERT INTO schedule (repair_id, budget_used, cumulative_benefit) VALUES (?,?,?)',
               (repair_idx + 1, repairs[repair_idx][2], cum_benefit))
 
-print(f"=== Optimal Repair Schedule (Budget: {budget:,}) ===\\\n")
+print(f"=== Optimal Repair Schedule (Budget: {budget:,}) ===\\n")
 print(f"{'#':>2} {'Section':<14} {'Description':<25} {'Cost':>7} {'Benefit':>8}")
 print("-" * 60)
 for idx in selected:
@@ -396,7 +396,7 @@ for idx in selected:
     print(f"{idx+1:>2} {r[0]:<14} {r[1]:<25} {r[2]:>6,} {r[3]:>7.1f}")
 print("-" * 60)
 print(f"{'Total':<42} {total_cost:>6,} {total_benefit:>7.1f}")
-print(f"\\\nBudget remaining: {budget - total_cost:,}")
+print(f"\\nBudget remaining: {budget - total_cost:,}")
 print(f"Efficiency: {total_benefit/total_cost*1000:.1f} benefit per 1000 budget")
 
 # Compare with greedy
@@ -407,7 +407,7 @@ for i in greedy_order:
         greedy_cost += repairs[i][2]
         greedy_benefit += repairs[i][3]
         greedy_picks.append(i)
-print(f"\\\nGreedy approach: benefit={greedy_benefit:.1f}, cost={greedy_cost:,}")
+print(f"\\nGreedy approach: benefit={greedy_benefit:.1f}, cost={greedy_cost:,}")
 print(f"DP is {((total_benefit-greedy_benefit)/greedy_benefit*100):+.1f}% better than greedy")
 
 db.close()`,
@@ -466,7 +466,7 @@ alerts_count = 0
 flood_events = 0
 drought_events = 0
 
-print("=== Kangla Fort — One Year Simulation ===\\\n")
+print("=== Kangla Fort — One Year Simulation ===\\n")
 print(f"{'Month':>5} {'Rain':>6} {'Level':>6} {'Sed.':>5} {'Gate':>12} {'Alert'}")
 print("-" * 55)
 
@@ -531,7 +531,7 @@ summaries = [
 ]
 c.executemany('INSERT INTO annual_summary VALUES (?,?)', summaries)
 
-print("\\\n=== Annual Summary ===")
+print("\\n=== Annual Summary ===")
 c.execute('SELECT * FROM annual_summary')
 for metric, value in c.fetchall():
     if isinstance(value, float) and value < 10:
@@ -540,7 +540,7 @@ for metric, value in c.fetchall():
         print(f"  {metric}: {value:.0f}")
 
 c.execute('SELECT gate_action, COUNT(*) FROM monthly_state GROUP BY gate_action')
-print("\\\nGate actions:")
+print("\\nGate actions:")
 for action, count in c.fetchall():
     print(f"  {action}: {count} months")
 

@@ -145,15 +145,15 @@ for table in ['books', 'members', 'loans']:
     count = cursor.execute(f'SELECT COUNT(*) FROM {table}').fetchone()[0]
     print(f"{table}: {count} rows")
 
-print("\\\n=== Sample Books ===")
+print("\\n=== Sample Books ===")
 for row in cursor.execute('SELECT id, title, author, genre FROM books LIMIT 5').fetchall():
     print(row)
 
-print("\\\n=== Sample Members ===")
+print("\\n=== Sample Members ===")
 for row in cursor.execute('SELECT id, name, email FROM members LIMIT 5').fetchall():
     print(row)
 
-print("\\\n=== Sample Loans ===")
+print("\\n=== Sample Loans ===")
 for row in cursor.execute('SELECT id, book_id, member_id, due_date, returned_date FROM loans LIMIT 5').fetchall():
     print(row)
 
@@ -287,7 +287,7 @@ for r in rows:
 # ============================================================
 # QUERY 2: Most popular authors (by total loans)
 # ============================================================
-print("\\\n=== QUERY 2: Most Popular Authors ===")
+print("\\n=== QUERY 2: Most Popular Authors ===")
 rows = cursor.execute('''
     SELECT
         b.author,
@@ -305,7 +305,7 @@ for r in rows:
 # ============================================================
 # QUERY 3: Members who currently have unreturned books
 # ============================================================
-print("\\\n=== QUERY 3: Members with Unreturned Books ===")
+print("\\n=== QUERY 3: Members with Unreturned Books ===")
 rows = cursor.execute('''
     SELECT
         m.name,
@@ -325,7 +325,7 @@ for r in rows:
 # ============================================================
 # QUERY 4: Genre popularity breakdown
 # ============================================================
-print("\\\n=== QUERY 4: Genre Popularity ===")
+print("\\n=== QUERY 4: Genre Popularity ===")
 rows = cursor.execute('''
     SELECT
         b.genre,
@@ -345,7 +345,7 @@ for r in rows:
 # QUERY 5: Members who have NEVER borrowed a book
 # Uses LEFT JOIN: members with no matching loans get NULL
 # ============================================================
-print("\\\n=== QUERY 5: Members Who Never Borrowed ===")
+print("\\n=== QUERY 5: Members Who Never Borrowed ===")
 rows = cursor.execute('''
     SELECT
         m.name,
@@ -364,7 +364,7 @@ else:
 # ============================================================
 # QUERY 6: Books borrowed more than once
 # ============================================================
-print("\\\n=== QUERY 6: Books Borrowed More Than Once ===")
+print("\\n=== QUERY 6: Books Borrowed More Than Once ===")
 rows = cursor.execute('''
     SELECT
         b.title,
@@ -617,14 +617,14 @@ genre_colors = {
 
 def tokens_to_vars(tokens, indent="    "):
     """Convert a dict of tokens to CSS custom property declarations."""
-    return "\\\n".join(f"{indent}--{k}: {v};" for k, v in tokens.items())
+    return "\\n".join(f"{indent}--{k}: {v};" for k, v in tokens.items())
 
 def generate_genre_badges(genres):
     """Generate CSS rules for genre badge colors."""
     rules = []
     for genre, (bg, fg) in genres.items():
         rules.append(f".genre-{genre}   {{ background: {bg}; color: {fg}; }}")
-    return "\\\n".join(rules)
+    return "\\n".join(rules)
 
 # --- Assemble the full stylesheet ---
 css = f"""/* ============================================================
@@ -801,11 +801,11 @@ body {{
 print(css)
 
 # --- Summary ---
-print("\\\n--- CSS generation complete ---")
+print("\\n--- CSS generation complete ---")
 print(f"Light theme: {len(light_theme)} tokens")
 print(f"Dark theme:  {len(dark_theme)} overrides")
 print(f"Genre badges: {len(genre_colors)} genres")
-print("\\\nCopy this CSS into a styles.css file to use it!")`,
+print("\\nCopy this CSS into a styles.css file to use it!")`,
       challenge: 'Add a .book-card.featured class that gives featured books a left border of 4px solid gold and a subtle golden background tint. Then add a print stylesheet (@media print) that hides the nav, search form, and checkout buttons — only the book list should print.',
       successHint: 'This stylesheet uses every major CSS layout technique: Grid for the catalog, Flexbox for cards and nav, custom properties for theming, media queries for responsiveness and dark mode. This is the CSS you would write for a real production web application — no frameworks, no preprocessors, just clean modern CSS.',
     },

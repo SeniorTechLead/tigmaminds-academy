@@ -109,7 +109,7 @@ class IceTroughModel:
 # Simulate ice production under varying conditions
 model = IceTroughModel()
 
-print("=== Coupled Heat Transfer: Nightly Ice Production ===\\\n")
+print("=== Coupled Heat Transfer: Nightly Ice Production ===\\n")
 
 conditions = [
     ("Clear, cold, dry",    2, 10, 0.5, 0.0),
@@ -131,7 +131,7 @@ for name, T, RH, wind, cloud in conditions:
     print(f"{name:<22} {T:>4.0f}C {RH:>3.0f} {wind:>4.1f} {ice_cm:>8.2f} {status}")
 
 # Detailed hourly breakdown for best case
-print("\\\n=== Hourly Breakdown: Clear, Cold, Dry Night ===")
+print("\\n=== Hourly Breakdown: Clear, Cold, Dry Night ===")
 hist, _ = model.simulate_night(2, 10, 0.5, 0.0)
 print(f"{'Hour':>5} {'T_water':>8} {'Ice cm':>7} {'q_rad':>7} {'q_conv':>7} {'q_evap':>7} {'q_gnd':>7}")
 print("-" * 52)
@@ -210,7 +210,7 @@ def generate_winter_climate(city="Isfahan", n_nights=120):
 
 # Simulate full season for each city
 trough_area_m2 = 200
-print("=== Seasonal Ice Production Simulation ===\\\n")
+print("=== Seasonal Ice Production Simulation ===\\n")
 
 for city in ["Isfahan", "Yazd", "Kerman"]:
     nights = generate_winter_climate(city)
@@ -321,7 +321,7 @@ print(f"Floor: area={floor_area:.0f} m^2")
 print(f"Total surface: {total_area:.0f} m^2")
 
 # Degree-day analysis
-print("\\\n=== Degree-Day Analysis ===")
+print("\\n=== Degree-Day Analysis ===")
 months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
 
 for city in ["Isfahan", "Yazd", "Kerman"]:
@@ -329,7 +329,7 @@ for city in ["Isfahan", "Yazd", "Kerman"]:
     dd = degree_days(temps, base_temp=0)
     annual_dd = sum(dd)
 
-    print(f"\\\n{city}:")
+    print(f"\\n{city}:")
     print(f"  {'Month':<5} {'Temp C':>7} {'DD':>7}")
     for m, t, d in zip(months, temps, dd):
         bar = "#" * int(d / 30)
@@ -337,7 +337,7 @@ for city in ["Isfahan", "Yazd", "Kerman"]:
     print(f"  Annual total: {annual_dd:.0f} degree-days")
 
 # Ice melt for different wall constructions
-print("\\\n=== Annual Ice Melt by Wall Type ===")
+print("\\n=== Annual Ice Melt by Wall Type ===")
 temps_isf = monthly_temperatures("Isfahan")
 dd_isf = degree_days(temps_isf)
 storage_m3 = np.pi * pit_radius**2 * pit_depth * 0.8  # 80% fill
@@ -418,7 +418,7 @@ def modern_cold_room(years, discount_rate=0.03):
     return npv_stream(costs, discount_rate)
 
 # Compare over different horizons
-print("=== Lifecycle Cost Analysis: Yakhchal vs Modern Cold Room ===\\\n")
+print("=== Lifecycle Cost Analysis: Yakhchal vs Modern Cold Room ===\\n")
 print(f"{'Horizon':>10} {'Yakhchal':>12} {'Modern':>12} {'Savings':>10} {'Winner':<10}")
 print("-" * 56)
 
@@ -430,7 +430,7 @@ for years in [10, 20, 30, 50, 100, 200, 500]:
     print(f"{years:>7} yr {y_cost:>10,.0f} {m_cost:>10,.0f} {savings:>+9,.0f} {winner}")
 
 # Sensitivity to discount rate
-print("\\\n=== Sensitivity to Discount Rate (100-year horizon) ===")
+print("\\n=== Sensitivity to Discount Rate (100-year horizon) ===")
 print(f"{'Rate':>6} {'Yakhchal':>12} {'Modern':>12} {'Winner':<10}")
 print("-" * 42)
 
@@ -441,7 +441,7 @@ for rate in [0.01, 0.02, 0.03, 0.05, 0.07, 0.10]:
     print(f"{rate*100:>4.0f}% {y:>10,.0f} {m:>10,.0f} {winner}")
 
 # Carbon analysis
-print("\\\n=== Carbon Footprint Comparison (100 years) ===")
+print("\\n=== Carbon Footprint Comparison (100 years) ===")
 # Yakhchal: embodied carbon in construction only
 y_carbon = 50  # tonnes CO2 (lime production, transport)
 # Modern: electricity carbon + embodied in equipment
@@ -511,7 +511,7 @@ def seasonal_production(T_offset=0, RH_offset=0, n_nights=100):
 
 # Climate change scenarios
 print("=== Impact of Climate Change on Ice Production ===")
-print("(Isfahan baseline: mean winter night 2 C, RH 25%)\\\n")
+print("(Isfahan baseline: mean winter night 2 C, RH 25%)\\n")
 
 scenarios = [
     ("Pre-industrial (-1C)",      -1,  -5),
@@ -535,7 +535,7 @@ for name, dT, dRH in scenarios:
     print(f"{name:<32} {ice:>7.0f} {nights:>6} {pct:>+6.0f}% {status}")
 
 # Passive cooling effectiveness
-print("\\\n=== Passive Cooling Effectiveness vs Climate Change ===")
+print("\\n=== Passive Cooling Effectiveness vs Climate Change ===")
 print("Wind-catcher evaporative cooling (peak summer conditions)")
 print(f"{'Scenario':<28} {'T_out':>6} {'RH':>5} {'T_cooled':>9} {'Cooling':>8} {'Comfort?':>9}")
 print("-" * 67)
@@ -554,7 +554,7 @@ for name, dT, dRH in [("Today", 0, 0), ("2030s", 1.5, 5),
     print(f"{name:<28} {T:>4.0f}C {RH:>3.0f}% {T_cooled:>7.1f}C {cooling:>6.1f}C {comfort:>8}")
 
 # Modern radiative cooling materials
-print("\\\n=== Modern Radiative Cooling Technology ===")
+print("\\n=== Modern Radiative Cooling Technology ===")
 print("Spectrally selective surfaces: high solar reflectance + high IR emittance")
 for name, solar_refl, ir_emiss in [("Traditional whitewash", 0.80, 0.90),
                                      ("Modern white paint", 0.87, 0.90),

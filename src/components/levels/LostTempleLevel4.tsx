@@ -372,7 +372,7 @@ plt.tight_layout()
 plt.show()
 
 reliable = unc < 0.5
-print(f"\\\nSTAGE 2 COMPLETE: DEM Generation")
+print(f"\\nSTAGE 2 COMPLETE: DEM Generation")
 print(f"  Resolution: {result['resolution']}m")
 print(f"  Grid size: {dem.shape[0]} x {dem.shape[1]} cells")
 print(f"  Elevation range: {dem.min():.1f} - {dem.max():.1f} m")
@@ -566,7 +566,7 @@ plt.show()
 print(f"STAGE 3 COMPLETE: Feature Extraction")
 print(f"  Edge components detected: {n_components}")
 print(f"  After size filtering: {len(candidates)} candidates")
-print(f"\\\nTop 5 candidates:")
+print(f"\\nTop 5 candidates:")
 for i, c in enumerate(candidates[:5]):
     print(f"  #{i+1}: score={c['site_score']:.3f}, area={c['area']:.0f}m², "
           f"rect={c['rectangularity']:.2f}, height={c['height_anomaly']:.2f}m")`,
@@ -944,7 +944,7 @@ plt.show()
 print("STAGE 5 COMPLETE: Evidence Fusion & Site Ranking")
 print("=" * 65)
 for i, r in enumerate(kept):
-    print(f"\\\n  Site #{i+1}")
+    print(f"\\n  Site #{i+1}")
     print(f"    UTM:  {r['utm'][0]:.0f} E, {r['utm'][1]:.0f} N (Zone 46N)")
     print(f"    GPS:  {r['latlon'][0]:.6f}°N, {r['latlon'][1]:.6f}°E")
     print(f"    Area: {r['area']:.0f} m²")
@@ -1066,7 +1066,7 @@ ax_catalog = fig.add_subplot(5, 2, (5, 6))
 ax_catalog.set_facecolor('#0d1117')
 ax_catalog.axis('off')
 
-catalog = "SITE CATALOG\\\n" + "=" * 60 + "\\\n"
+catalog = "SITE CATALOG\\n" + "=" * 60 + "\\n"
 for s in detected_sites:
     catalog += f"""
 Site #{s['id']}: {s['name']}

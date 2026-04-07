@@ -50,7 +50,7 @@ print(f"Release speed: {v_release:.0f} m/s ({v_release * 3.6:.0f} km/h)")
 # Compare: how many "g"s is this?
 g = 9.8
 g_force = acceleration / g
-print(f"\\\nThat's {g_force:.0f}g of acceleration!")
+print(f"\\nThat's {g_force:.0f}g of acceleration!")
 print(f"The stone feels {g_force:.0f} times its own weight")
 print(f"while spinning in the sling.")`,
       challenge: 'Try changing angular_speed to 40 rad/s (faster spinning). How does the force and release speed change? At what angular_speed does the release speed exceed 150 km/h (the speed of a fast baseball pitch)?',

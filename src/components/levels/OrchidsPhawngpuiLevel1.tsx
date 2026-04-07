@@ -85,7 +85,7 @@ for name, data in strategies.items():
     print(f"  {name:<25}: {efficiency:>6.1f}  {bar}")
 
 # Key insight
-print("\\\nKey insight: Wind produces the most seeds per flower,")
+print("\\nKey insight: Wind produces the most seeds per flower,")
 print("but specific pollinators are the most energy-efficient.")
 print("Orchids bet on quality (specific pollinators) over quantity (wind).")`,
       challenge: 'If climate change reduces the specific moth population by 50%, how does the orchid\'s reproductive success change compared to a wind-pollinated grass? Which strategy is more resilient to environmental change?',
@@ -167,7 +167,7 @@ for orchid_name, traits in orchids.items():
     print()
 
 # Specialization index
-print("\\\nSpecialization index (how focused on one pollinator):")
+print("\\nSpecialization index (how focused on one pollinator):")
 for orchid_name, traits in orchids.items():
     scores = [match_score(traits, prefs) for prefs in pollinators.values()]
     max_s = max(scores)
@@ -243,7 +243,7 @@ for name, s in strategies.items():
     else:
         visits_95 = float('inf')
 
-    print(f"\\\n{name} ({s['description']}):")
+    print(f"\\n{name} ({s['description']}):")
     print(f"  Pickup: {s['pickup']:.0%} × Fidelity: {s['fidelity']:.0%} × "
           f"Carryover: {s['carryover']:.0%} × Receptive: {s['receptive']:.0%}")
     print(f"  Per-visit success: {p_per_visit:.4f} ({p_per_visit*100:.2f}%)")
@@ -251,7 +251,7 @@ for name, s in strategies.items():
     print(f"  Visits for 95% confidence: {visits_95}")
 
 # Comparison table
-print("\\\n\\\nSUMMARY TABLE")
+print("\\n\\nSUMMARY TABLE")
 print(f"{'Strategy':<22} {'Success/visit':>14} {'Seeds/flower':>13} {'Visits@95%':>11}")
 print("-" * 62)
 for name, s in strategies.items():
@@ -333,14 +333,14 @@ final_tongue = tongue_history[-1]
 increase_spur = (final_spur / spur_history[0] - 1) * 100
 increase_tongue = (final_tongue / tongue_history[0] - 1) * 100
 
-print(f"\\\nSpur increased: {spur_history[0]:.1f} → {final_spur:.1f} mm ({increase_spur:.0f}%)")
+print(f"\\nSpur increased: {spur_history[0]:.1f} → {final_spur:.1f} mm ({increase_spur:.0f}%)")
 print(f"Tongue increased: {tongue_history[0]:.1f} → {final_tongue:.1f} mm ({increase_tongue:.0f}%)")
-print(f"\\\nDarwin's prediction: coevolution drives ever-longer structures")
+print(f"\\nDarwin's prediction: coevolution drives ever-longer structures")
 print(f"Final spur-tongue gap: {final_spur - final_tongue:.1f} mm")
 print(f"(Orchid maintains ~2mm advantage to ensure pollen contact)")
 
 # Rate comparison
-print(f"\\\nEvolution rates:")
+print(f"\\nEvolution rates:")
 print(f"  Orchid: {spur_rate} per generation (slower, longer generation time)")
 print(f"  Moth:   {tongue_rate} per generation (faster, shorter generation time)")
 print(f"  The moth evolves {tongue_rate/spur_rate:.1f}x faster than the orchid")`,
@@ -428,7 +428,7 @@ for name, s in scenarios.items():
           f"{hist[100]*100:>6.1f}% {hist[200]*100:>6.1f}% {t50_str:>11}")
 
 # Detailed trajectory for moderate selection
-print("\\\nDetailed trajectory (s=0.1):")
+print("\\nDetailed trajectory (s=0.1):")
 hist = selection_simulation(p0, 0.1, generations)
 for gen in [0, 10, 20, 50, 75, 100, 150, 200]:
     bar = "█" * int(hist[gen] * 50)

@@ -427,7 +427,7 @@ axes[1].plot(t * 1000, received, color='#3b82f6', linewidth=0.5)
 for obj in objects:
     delay_ms = 2 * obj['distance'] / speed * 1000
     axes[1].axvline(x=delay_ms, color='#f59e0b', linestyle='--', linewidth=1, alpha=0.6)
-    axes[1].text(delay_ms, np.max(received)*0.8, f"{obj['name']}\\\n{obj['distance']}m",
+    axes[1].text(delay_ms, np.max(received)*0.8, f"{obj['name']}\\n{obj['distance']}m",
                  color='#f59e0b', fontsize=7, ha='center')
 axes[1].set_title('Received signal (echoes + noise)', color='white')
 axes[1].set_xlabel('Time (ms)', color='white')
@@ -749,7 +749,7 @@ axes[0].set_xlim(-220, 220)
 axes[0].set_ylim(-20, 420)
 axes[0].set_xlabel('Horizontal distance (m)', color='white')
 axes[0].set_ylabel('Altitude (m)', color='white')
-axes[0].set_title('Sound rays in a mountain valley\\\n(green = forested, gray = rock)', color='white', fontsize=11)
+axes[0].set_title('Sound rays in a mountain valley\\n(green = forested, gray = rock)', color='white', fontsize=11)
 
 # Panel 2: Echo arrival times and energies
 # Collect all reflection points and their arrival times

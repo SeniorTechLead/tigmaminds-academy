@@ -121,14 +121,14 @@ for node in sorted(inca.nodes(), key=lambda n: inca.degree(n), reverse=True):
     print(f"{node:<20} {deg:>10} {role:>10}")
 
 # Shortest paths from Cusco
-print(f"\\\n=== Shortest Routes from Cusco ===")
+print(f"\\n=== Shortest Routes from Cusco ===")
 for dest in ["Quito", "Lima", "Potosi", "Tumbes"]:
     dist, path = inca.shortest_path("Cusco", dest)
     path_str = " → ".join(path)
     print(f"  To {dest}: {dist:.0f} km via {path_str}")
 
 # Chasqui relay speed
-print(f"\\\n=== Chasqui Message Delivery Times ===")
+print(f"\\n=== Chasqui Message Delivery Times ===")
 chasqui_speed_km_day = 240  # relay runners
 
 for dest in ["Lima", "Quito", "Potosi"]:
@@ -191,13 +191,13 @@ print("=== Inca Rope Bridge Calculator ===")
 print(f"Q'eswachaka Bridge: span={span}m, sag={sag}m, weight={weight}kg/m")
 
 H, V, T = bridge_tension(span, sag, weight)
-print(f"\\\nHorizontal tension: {H:.0f} N ({H/1000:.1f} kN)")
+print(f"\\nHorizontal tension: {H:.0f} N ({H/1000:.1f} kN)")
 print(f"Vertical reaction: {V:.0f} N ({V/1000:.1f} kN)")
 print(f"Anchor tension: {T:.0f} N ({T/1000:.1f} kN)")
 print(f"That's {T/9.81:.0f} kg of force on each anchor")
 
 # How sag affects tension
-print(f"\\\n=== Sag vs Tension (span={span}m, weight={weight}kg/m) ===")
+print(f"\\n=== Sag vs Tension (span={span}m, weight={weight}kg/m) ===")
 print(f"{'Sag (m)':>8} {'Anchor T (kN)':>14} {'Sag/Span ratio':>16} {'Feasible?':>10}")
 print("-" * 50)
 
@@ -209,7 +209,7 @@ for s in [0.5, 1, 2, 3, 4, 5, 6, 8, 10]:
     print(f"{s:>6.1f}m {T/1000:>12.1f} {ratio:>14.1%} {feasible:>10}")
 
 # Pedestrian load
-print(f"\\\n=== Effect of Pedestrian Load ===")
+print(f"\\n=== Effect of Pedestrian Load ===")
 print(f"Empty bridge vs bridge with 5 people (70 kg each):")
 total_people_weight = 5 * 70 / span  # distributed as kg/m
 total_weight = weight + total_people_weight
@@ -221,7 +221,7 @@ print(f"  Empty:  {T_empty/1000:.1f} kN")
 print(f"  Loaded: {T_loaded/1000:.1f} kN (+{(T_loaded-T_empty)/T_empty*100:.0f}%)")
 
 # Compare with modern suspension bridges
-print(f"\\\n=== Scale Comparison ===")
+print(f"\\n=== Scale Comparison ===")
 bridges = [
     ("Q'eswachaka (Inca)", 28, 4, 15),
     ("Simple footbridge", 50, 5, 30),
@@ -324,7 +324,7 @@ class Quipu:
         colour = self.colours.get(category, "unknown")
         data = self.strings.get(category, {})
         total = sum(data.values())
-        print(f"\\\n[{colour} strings] {category}:")
+        print(f"\\n[{colour} strings] {category}:")
         for label, value in data.items():
             print(f"  {label:<20} {value:>8,}")
         print(f"  {'TOTAL':<20} {total:>8,}")
@@ -365,12 +365,12 @@ for category in census.strings:
     totals[category] = total
 
 # Show knot encoding for a specific number
-print("\\\n=== Knot Encoding Examples ===")
+print("\\n=== Knot Encoding Examples ===")
 for num in [3042, 507, 12000, 45]:
     census.display_knots(num)
 
 # Data query (what a quipucamayoc would do)
-print("\\\n=== Census Queries ===")
+print("\\n=== Census Queries ===")
 print(f"Total empire population: {totals['Population']:,}")
 print(f"Total soldiers: {totals['Soldiers']:,}")
 print(f"Soldiers per capita: {totals['Soldiers']/totals['Population']*100:.1f}%")
@@ -378,7 +378,7 @@ print(f"Grain per person: {totals['Grain (tonnes)']*1000/totals['Population']:.0
 print(f"Largest province: {max(census.strings['Population'], key=census.strings['Population'].get)}")
 
 # Compare with modern data
-print(f"\\\n=== Quipu vs Modern Database ===")
+print(f"\\n=== Quipu vs Modern Database ===")
 print(f"{'Feature':<24} {'Quipu':<24} {'SQL Database'}")
 print("-" * 72)
 comparisons = [
@@ -642,7 +642,7 @@ for a, b in mesh_edges:
 
 # Analyze each network
 print("=== Network Redundancy Analysis ===")
-print(f"Each road has a 10% annual failure probability\\\n")
+print(f"Each road has a 10% annual failure probability\\n")
 
 networks = [
     ("Tree (minimum)", tree, len(tree_edges)),
@@ -669,7 +669,7 @@ for name, net, n_edges in networks:
     efficiency = reliability / cost * 100
     print(f"{name:<20} {n_edges:>6} {reliability:>10.1%} {cost:>8} {efficiency:>14.4f}")
 
-print(f"\\\nMesh costs more but provides dramatically better reliability.")
+print(f"\\nMesh costs more but provides dramatically better reliability.")
 print(f"The Inca invested in redundancy because network failure")
 print(f"meant delayed messages, lost supplies, and military vulnerability.")`,
       challenge: 'The Internet uses a similar mesh topology. If each router has a 1% daily failure probability, calculate the network reliability for a path through 10 routers. How does adding redundant paths (2 or 3 independent routes) change the reliability? This is why Internet protocols use multi-path routing.',

@@ -242,7 +242,7 @@ ax.tick_params(colors='gray')
 # Annotate
 for dt, label in [(1, '1°C: bathtub splash'), (3, '3°C: serious mud bath')]:
     w = mass * specific_heat * dt / latent_heat
-    ax.annotate(f'{label}\\\n({w:.0f} kg water)', xy=(dt, w), xytext=(dt+0.5, w+2),
+    ax.annotate(f'{label}\\n({w:.0f} kg water)', xy=(dt, w), xytext=(dt+0.5, w+2),
                 color='#f59e0b', fontsize=9, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
 plt.tight_layout()
@@ -384,7 +384,7 @@ ax.set_title('Elephant Skin Wrinkles Increase SA', color='white', fontsize=11)
 ax.tick_params(colors='gray')
 ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
-ax.annotate(f'Elephant wrinkles: ~1cm deep\\\nSA increase: ~{(wrinkle_multiplier[33]-1)*100:.0f}%',
+ax.annotate(f'Elephant wrinkles: ~1cm deep\\nSA increase: ~{(wrinkle_multiplier[33]-1)*100:.0f}%',
             xy=(1, effective_sa[33]), xytext=(5, effective_sa[33]*1.05),
             color='#f59e0b', fontsize=10, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
@@ -608,7 +608,7 @@ daily_strict = np.sum(strict_energy[:1440])
 daily_hetero = np.sum(hetero_energy[:1440])
 savings = (daily_strict - daily_hetero) / daily_strict * 100
 
-ax.bar(['Strict\\\nhomeotherm', 'Heterotherm'], [daily_strict, daily_hetero],
+ax.bar(['Strict\\nhomeotherm', 'Heterotherm'], [daily_strict, daily_hetero],
        color=['#3b82f6', '#22c55e'])
 ax.set_ylabel('Daily energy cost (relative)', color='white')
 ax.set_title(f'Energy Savings: {savings:.0f}% less with heterothermy', color='white', fontsize=11)
@@ -656,7 +656,7 @@ colors_la = [a['color'] for a in large_animals.values()]
 ax.scatter(masses, Tmax, s=[m/20 for m in masses], c=colors_la, edgecolors='white', linewidth=1)
 for name, m, t, c in zip(names, masses, Tmax, colors_la):
     strategy = large_animals[name]['strategy']
-    ax.annotate(f'{name}\\\n({strategy})', xy=(m, t), xytext=(10, 5),
+    ax.annotate(f'{name}\\n({strategy})', xy=(m, t), xytext=(10, 5),
                 textcoords='offset points', color=c, fontsize=7)
 
 ax.set_xlabel('Body mass (kg)', color='white')
@@ -760,7 +760,7 @@ ax.tick_params(colors='gray')
 
 for dt, label in [(1.5, 'Paris +1.5°C'), (3, '+3°C'), (5, '+5°C (catastrophic)')]:
     e = baseline_energy + (8 * max(0, base_temp + dt - tnz_upper)**1.5)
-    ax.annotate(f'{label}\\\n{e:.0f}% energy', xy=(dt, e), xytext=(dt+0.3, e+5),
+    ax.annotate(f'{label}\\n{e:.0f}% energy', xy=(dt, e), xytext=(dt+0.3, e+5),
                 color='#f59e0b', fontsize=8, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
 # 3. Calf survival vs heat days

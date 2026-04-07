@@ -151,7 +151,7 @@ ax.tick_params(colors='gray')
 # Thermoneutral zones
 ax = axes[1, 1]
 ax.set_facecolor('#111827')
-species = ['Red panda\\\n(5 kg)', 'Giant panda\\\n(100 kg)', 'Mouse\\\n(0.03 kg)', 'Elephant\\\n(5000 kg)']
+species = ['Red panda\\n(5 kg)', 'Giant panda\\n(100 kg)', 'Mouse\\n(0.03 kg)', 'Elephant\\n(5000 kg)']
 lcts = [
     thermoregulation(5, temps, 4.0)['lct'],
     thermoregulation(100, temps, 3.0)['lct'],
@@ -789,7 +789,7 @@ for sp_a, sp_b, traits_a, traits_b, phylo_d, cat in species_pairs:
     pheno_d = np.sqrt(np.sum((np.array(traits_a) - np.array(traits_b))**2))
     pheno_dists.append(pheno_d)
     phylo_dists.append(phylo_d)
-    labels.append(f'{sp_a} vs\\n{sp_b}')
+    labels.append(f'{sp_a} vs\n{sp_b}')
     categories.append(cat)
 
 pheno_dists = np.array(pheno_dists)
@@ -822,9 +822,9 @@ ax.fill_between(x_line, x_line * 1, x_line * 3, alpha=0.05, color='white')
 ax.set_xlabel('Phylogenetic distance', color='white')
 ax.set_ylabel('Phenotypic distance', color='white')
 ax.set_title('Convergence detection', color='white', fontsize=11)
-ax.text(0.6, 0.5, 'CONVERGENT\\n(similar despite\\ndistant ancestry)', color='#ef4444',
+ax.text(0.6, 0.5, 'CONVERGENT\n(similar despite\ndistant ancestry)', color='#ef4444',
         fontsize=8, fontstyle='italic')
-ax.text(0.05, 2.0, 'DIVERGENT\\n(different despite\\nclose ancestry)', color='#3b82f6',
+ax.text(0.05, 2.0, 'DIVERGENT\n(different despite\nclose ancestry)', color='#3b82f6',
         fontsize=8, fontstyle='italic')
 ax.tick_params(colors='gray')
 

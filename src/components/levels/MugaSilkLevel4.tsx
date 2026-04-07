@@ -671,7 +671,7 @@ ax.set_xlabel('Toughness (MJ/m³)', color='white')
 ax.set_ylabel('Crystallinity (%)', color='white')
 ax.set_title('Toughest Compositions', color='white', fontsize=11)
 ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax.annotate(f'Optimal crystallinity:\\\n{top_20[:, 6].mean()*100:.0f}% ± {top_20[:, 6].std()*100:.0f}%',
+ax.annotate(f'Optimal crystallinity:\\n{top_20[:, 6].mean()*100:.0f}% ± {top_20[:, 6].std()*100:.0f}%',
             xy=(top_20[0, 4] * 0.8, top_20[:, 6].mean() * 100 + 5),
             color='#22c55e', fontsize=9, fontweight='bold')
 
@@ -1238,7 +1238,7 @@ x = np.arange(len(props))
 ax.bar(x - 0.15, target_vals, 0.3, color='#3b82f6', label='Target', edgecolor='none')
 ax.bar(x + 0.15, achieved_vals, 0.3, color='#22c55e', label='Achieved', edgecolor='none')
 ax.set_xticks(x)
-ax.set_xticklabels(['Strength\\\n(MPa)', 'Strain\\\n(%)', 'Toughness\\\n(MJ/m³)'],
+ax.set_xticklabels(['Strength\\n(MPa)', 'Strain\\n(%)', 'Toughness\\n(MJ/m³)'],
                     color='white', fontsize=9)
 ax.set_title('Target vs Achieved', color='white', fontsize=11)
 ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
@@ -1282,7 +1282,7 @@ ax.set_title(f'DNA: {len(dna_seq)} bp, GC={gc_content:.1f}%', color='white', fon
 # Plot 6: Expression feasibility
 ax = axes[1, 2]
 # Factors affecting expression yield
-factors = ['Protein\\\nsize', 'GC\\\ncontent', 'Codon\\\nusage', 'Solubility', 'Overall']
+factors = ['Protein\\nsize', 'GC\\ncontent', 'Codon\\nusage', 'Solubility', 'Overall']
 # Score each 0-100
 size_score = max(0, 100 - len(protein_seq) / 10)  # Smaller = easier
 gc_score = 100 - abs(gc_content - 50) * 3  # 50% GC is optimal
@@ -1523,7 +1523,7 @@ ax.set_xlabel('Alanine content (%)', color='white')
 ax.set_ylabel('Tensile strength (MPa)', color='white')
 ax.set_title('Limitation: Spider Silk Anomaly', color='white', fontsize=11)
 ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax.annotate('Model misses spider silk\\\n(proline + spinning effects)', xy=(28, 800),
+ax.annotate('Model misses spider silk\\n(proline + spinning effects)', xy=(28, 800),
             color='#ef4444', fontsize=8, fontweight='bold')
 
 # Plot 5: Feature importance (from ablation)
@@ -1548,11 +1548,11 @@ ax.set_title('Feature Importance (from ablation)', color='white', fontsize=11)
 # Plot 6: Future directions radar
 ax = axes[1, 2]
 improvements = [
-    ('Add sequence\\\neffects', 40),
-    ('ML regression\\\nfrom data', 35),
-    ('Spinning process\\\nparameters', 25),
-    ('Multi-scale\\\nmodeling', 20),
-    ('Experimental\\\nvalidation', 15),
+    ('Add sequence\\neffects', 40),
+    ('ML regression\\nfrom data', 35),
+    ('Spinning process\\nparameters', 25),
+    ('Multi-scale\\nmodeling', 20),
+    ('Experimental\\nvalidation', 15),
 ]
 imp_names = [i[0] for i in improvements]
 imp_vals = [i[1] for i in improvements]

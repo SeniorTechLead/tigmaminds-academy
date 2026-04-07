@@ -52,7 +52,7 @@ stars = [
 
 # Build compass at Hawaiian latitude (20°N)
 latitude = 20.0
-print(f"=== Star Compass at {latitude}°N (Hawaii) ===\\\n")
+print(f"=== Star Compass at {latitude}°N (Hawaii) ===\\n")
 
 print(f"{'Star (Hawaiian name)':<30} {'Dec':>6} {'Rising Az':>10} {'Direction':>10}")
 print("-" * 58)
@@ -69,9 +69,9 @@ for name, dec in stars:
         print(f"{name:<30} {dec:>5.1f}° {az:>8.1f}° {direction:>10}")
 
 # Compare across Polynesian latitudes
-print(f"\\\n=== Arcturus (Hoku-le'a) at Different Latitudes ===")
+print(f"\\n=== Arcturus (Hoku-le'a) at Different Latitudes ===")
 print(f"Arcturus is the 'zenith star' of Hawaii — it passes directly")
-print(f"overhead at latitude 19.2°N.\\\n")
+print(f"overhead at latitude 19.2°N.\\n")
 
 for lat in [-20, -10, 0, 10, 19.2, 30, 40, 50]:
     az = star_rising_azimuth(19.2, lat)
@@ -85,10 +85,10 @@ for lat in [-20, -10, 0, 10, 19.2, 30, 40, 50]:
         print(f"  Latitude {lat:>5.1f}°: does not rise")
 
 # The latitude sailing technique
-print(f"\\\n=== Latitude Sailing ===")
+print(f"\\n=== Latitude Sailing ===")
 print(f"Method: sail north/south until your zenith star passes overhead,")
 print(f"then sail due east or west along that latitude.")
-print(f"\\\nExample: Hawaii → Tahiti")
+print(f"\\nExample: Hawaii → Tahiti")
 print(f"  1. Sail south from Hawaii (20°N)")
 print(f"  2. Watch Arcturus — when it no longer passes through zenith,")
 print(f"     you've gone too far south")
@@ -148,7 +148,7 @@ def wave_pattern(island_width_km, swell_wavelength_m, distance_km):
 
 # Analyze detection range for different island sizes
 print("=== Wave Disturbance Behind Islands ===")
-print(f"Swell wavelength: 250 m\\\n")
+print(f"Swell wavelength: 250 m\\n")
 
 islands = [
     ("Small atoll", 2),
@@ -173,7 +173,7 @@ for name, width in islands:
 
 # Multiple signal types
 print("=== Multi-Signal Detection ===")
-print("Navigators used MULTIPLE signals simultaneously:\\\n")
+print("Navigators used MULTIPLE signals simultaneously:\\n")
 
 signals = [
     ("Swell disturbance", 60, 0.3, "Feel canoe hull motion change"),
@@ -192,7 +192,7 @@ for name, range_km, reliability, method in signals:
     print(f"{name:<24} {range_km:>7} {reliability:>10.0%} {method}")
 
 # Combined detection probability
-print(f"\\\n=== Combined Detection Probability ===")
+print(f"\\n=== Combined Detection Probability ===")
 for d in [150, 100, 80, 60, 40, 20, 10]:
     prob_miss = 1.0
     for name, range_km, reliability, _ in signals:
@@ -205,7 +205,7 @@ for d in [150, 100, 80, 60, 40, 20, 10]:
     bar = "█" * int(prob_detect * 20)
     print(f"  {d:>3} km: {prob_detect:>5.0%} {bar}")
 
-print(f"\\\nThe 10 km island becomes a ~200 km detection zone")
+print(f"\\nThe 10 km island becomes a ~200 km detection zone")
 print(f"when all signals are combined — a 20× target expansion.")`,
       challenge: 'A navigator approaches from the northeast at night (no visual signals). Only swell disturbance and bioluminescence are available. Recalculate the detection probability. How much does losing visual signals reduce detection range?',
       successHint: 'You modeled wave physics and multi-sensor detection — the same mathematics used in radar, sonar, autonomous vehicle sensing, and search-and-rescue operations. The key insight: combining weak independent signals creates strong detection. This is sensor fusion — and the Polynesians were the first to practice it systematically.',
@@ -285,7 +285,7 @@ def simulate_voyage(start_lat, start_lon, target_lat, target_lon,
 
 # Hawaii to Tahiti
 print("=== Polynesian Voyage: Hawaii → Tahiti ===")
-print(f"Distance: ~4,000 km | Duration: ~14 days\\\n")
+print(f"Distance: ~4,000 km | Duration: ~14 days\\n")
 
 # Scenario 1: No star fixes
 no_fix = simulate_voyage(20.0, -155.5, -17.5, -149.4, fix_interval=None)
@@ -304,20 +304,20 @@ for i in range(14):
           f" {with_fix[i]['error_km']:>10.0f} km"
           f" {nightly[i]['error_km']:>11.0f} km")
 
-print(f"\\\nFinal errors:")
+print(f"\\nFinal errors:")
 print(f"  No fixes:     {no_fix[-1]['error_km']:>5.0f} km")
 print(f"  Fix every 3d: {with_fix[-1]['error_km']:>5.0f} km")
 print(f"  Nightly fix:  {nightly[-1]['error_km']:>5.0f} km")
 
 # Can they find Tahiti?
-print(f"\\\nTahiti is ~50 km wide. Detection zone: ~200 km.")
+print(f"\\nTahiti is ~50 km wide. Detection zone: ~200 km.")
 for name, log in [("No fix", no_fix), ("3-day fix", with_fix), ("Nightly", nightly)]:
     err = log[-1]['error_km']
     found = "LANDFALL LIKELY" if err < 200 else "MIGHT MISS" if err < 400 else "LOST"
     print(f"  {name}: error {err:.0f} km → {found}")
 
 # Error growth: √n law
-print(f"\\\n=== Error Growth: √n Law ===")
+print(f"\\n=== Error Growth: √n Law ===")
 print(f"Daily error std: 5 km")
 print(f"{'Days':>5} {'Linear (5×n)':>14} {'√n (5×√n)':>12} {'Actual avg':>11}")
 print("-" * 44)
@@ -374,7 +374,7 @@ def search_probability(island_size_km, detection_zone_km,
     return detections / n_simulations
 
 # Detection probability for different scenarios
-print("=== Island Detection Probability ===\\\n")
+print("=== Island Detection Probability ===\\n")
 
 print(f"{'Island':>14} {'Det Zone':>10} {'Nav Error':>10} {'P(detect)':>10}")
 print("-" * 46)
@@ -398,8 +398,8 @@ for name, island, zone, error in scenarios:
     print(f"{name:>14} {zone:>8} km {error:>8} km {prob:>8.0%} {bar}")
 
 # ROC analysis for wave signal detection
-print(f"\\\n=== ROC Curve: Wave Signal Detection ===")
-print(f"How sensitive should the navigator be?\\\n")
+print(f"\\n=== ROC Curve: Wave Signal Detection ===")
+print(f"How sensitive should the navigator be?\\n")
 
 def roc_analysis(signal_strength, noise_level, thresholds):
     """
@@ -434,7 +434,7 @@ for thresh, tp, fp in roc:
     print(f"{thresh:>8.1f} {tp:>8.0%} {fp:>10.0%} {assess:>12}")
 
 # Expert vs novice
-print(f"\\\n=== Expert vs Novice Navigator ===")
+print(f"\\n=== Expert vs Novice Navigator ===")
 expert_roc = roc_analysis(1.0, 0.3, thresholds)  # low noise (trained)
 novice_roc = roc_analysis(1.0, 0.8, thresholds)  # high noise (untrained)
 
@@ -444,13 +444,13 @@ best_novice = max(novice_roc, key=lambda x: x[1] - x[2])
 
 print(f"Expert: Detection = {best_expert[1]:.0%}, False Alarm = {best_expert[2]:.0%}")
 print(f"Novice: Detection = {best_novice[1]:.0%}, False Alarm = {best_novice[2]:.0%}")
-print(f"\\\nThe expert detects {'more' if best_expert[1] > best_novice[1] else 'fewer'} real islands")
+print(f"\\nThe expert detects {'more' if best_expert[1] > best_novice[1] else 'fewer'} real islands")
 print(f"AND has {'fewer' if best_expert[2] < best_novice[2] else 'more'} false alarms.")
 print(f"Training doesn't just make you more sensitive — it makes you")
 print(f"better at distinguishing signal from noise. That's the real skill.")
 
 # Target expansion summary
-print(f"\\\n=== Target Expansion Summary ===")
+print(f"\\n=== Target Expansion Summary ===")
 print(f"A 10 km island becomes a {200} km detection zone")
 print(f"through multi-signal detection:")
 print(f"  Physical island:    10 km")
@@ -460,7 +460,7 @@ print(f"  + Seabird range:    80 km radius")
 print(f"  + Water colour:     30 km radius")
 print(f"  = Detection zone:   ~200 km diameter")
 print(f"  = Target expansion: 20×")
-print(f"\\\nThis transforms a 0.07% random-search probability into")
+print(f"\\nThis transforms a 0.07% random-search probability into")
 print(f"a 70%+ directed-search probability. That's why navigation")
 print(f"works — it's not luck, it's signal detection theory.")`,
       challenge: 'Model a "return voyage" — sailing back from Tahiti to Hawaii. The navigator must find Hawaii (Big Island, 150 km wide) from 4,000 km away. Is the return easier or harder than the outbound voyage? (Hawaii is much larger than most Pacific islands, so the detection zone is correspondingly larger — the return is actually easier.)',
@@ -496,7 +496,7 @@ settlements = [
     ("New Zealand (Aotearoa)", 1300, -41, 174),
 ]
 
-print("=== Polynesian Settlement Sequence ===\\\n")
+print("=== Polynesian Settlement Sequence ===\\n")
 print(f"{'Location':<28} {'Year':>6} {'Lat':>6} {'Lon':>7}")
 print("-" * 49)
 for name, year, lat, lon in settlements:
@@ -504,8 +504,8 @@ for name, year, lat, lon in settlements:
     print(f"{name:<28} {abs(year):>4} {era} {lat:>5.1f}° {lon:>6.1f}°")
 
 # Genetic distance model
-print(f"\\\n=== Genetic Distance (simulated) ===")
-print(f"Genetic distance increases with geographic distance and time\\\n")
+print(f"\\n=== Genetic Distance (simulated) ===")
+print(f"Genetic distance increases with geographic distance and time\\n")
 
 def genetic_distance(years_apart, km_apart):
     """Simplified genetic distance model."""
@@ -534,8 +534,8 @@ for a, b, years, km in pairs:
     print(f"{a:<20} {b:<20} {years:>4} {km:>5} {dist:>7.3f} {bar}")
 
 # Linguistic divergence
-print(f"\\\n=== Linguistic Divergence ===")
-print(f"Basic vocabulary retention rate: ~86% per 1000 years\\\n")
+print(f"\\n=== Linguistic Divergence ===")
+print(f"Basic vocabulary retention rate: ~86% per 1000 years\\n")
 
 def vocabulary_shared(years_apart, retention_per_1000=0.86):
     """Estimate shared vocabulary between two divergent languages."""
@@ -557,8 +557,8 @@ for a, b, years, status in lang_pairs:
     print(f"{a:<16} {b:<16} {years:>4} {shared:>11.0f}% {status}")
 
 # Archaeological dating
-print(f"\\\n=== Archaeological Consilience ===")
-print(f"Three independent lines of evidence converge:\\\n")
+print(f"\\n=== Archaeological Consilience ===")
+print(f"Three independent lines of evidence converge:\\n")
 
 evidence_types = [
     ("Carbon-14 dating", "Physical dates from settlement sites",
@@ -576,13 +576,13 @@ evidence_types = [
 for name, method, finding in evidence_types:
     print(f"  {name}:")
     print(f"    Method: {method}")
-    print(f"    Finding: {finding}\\\n")
+    print(f"    Finding: {finding}\\n")
 
 print(f"All five lines of evidence tell the SAME story:")
 print(f"intentional, planned migration from west to east,")
 print(f"carrying plants, animals, and cultural knowledge,")
 print(f"over approximately 3,000 years.")
-print(f"\\\nThis is consilience — the gold standard of scientific evidence.")`,
+print(f"\\nThis is consilience — the gold standard of scientific evidence.")`,
       challenge: 'The sweet potato controversy: some scientists argue the sweet potato floated to Polynesia naturally (no human transport needed). How would you test this? (Grow sweet potatoes, put them in seawater for the time a drift crossing would take — months — and see if they\'re still viable. This has been tested: sweet potatoes do NOT survive long ocean crossings. The human transport theory is strongly supported.)',
       successHint: 'You analyzed consilience — multiple independent lines of evidence converging on the same conclusion. This is the strongest form of scientific argument. The same approach is used in climate science (ice cores + tree rings + temperature records), evolutionary biology (fossils + DNA + biogeography), and forensics (physical + digital + testimonial evidence).',
     },
@@ -640,7 +640,7 @@ voyages = [
      "navigator": "Multiple", "method": "Traditional + GPS backup"},
 ]
 
-print("=== Hōkūleʻa Voyage Analysis ===\\\n")
+print("=== Hōkūleʻa Voyage Analysis ===\\n")
 print(f"{'Voyage':<35} {'Distance km':>12} {'Days':>5} {'km/day':>8} {'Navigator'}")
 print("-" * 75)
 
@@ -654,12 +654,12 @@ for v in voyages:
     speed = dist / v["days"]
     print(f"{v['name']:<35} {dist:>10,.0f} {v['days']:>5} {speed:>6.0f} {v['navigator']}")
 
-print(f"\\\nTotal distance sailed: {total_km:,.0f} km")
+print(f"\\nTotal distance sailed: {total_km:,.0f} km")
 print(f"Total voyages using traditional navigation: {len(voyages)}")
 print(f"Navigation failures: 0")
 
 # Accuracy analysis
-print(f"\\\n=== Navigation Accuracy ===")
+print(f"\\n=== Navigation Accuracy ===")
 print(f"1976 voyage: Hawaii to Tahiti")
 
 # Simulate the expected vs actual arrival
@@ -671,7 +671,7 @@ print(f"Target: Tahiti ({target_lat}°, {target_lon}°)")
 print(f"Distance: {distance:.0f} km")
 print(f"Actual landfall: within 50 km of target")
 print(f"Navigation error: <1.3% of total distance")
-print(f"\\\nFor comparison:")
+print(f"\\nFor comparison:")
 
 comparisons = [
     ("GPS", 0.001, "10 metres"),
@@ -686,26 +686,26 @@ for name, error, accuracy in comparisons:
     print(f"{name:<28} {error:>6.2f}% {accuracy:>12}")
 
 # Existence proof analysis
-print(f"\\\n=== Existence Proof ===")
+print(f"\\n=== Existence Proof ===")
 print(f"Before Hōkūleʻa (pre-1976):")
 print(f"  Western theory: settlement was ACCIDENTAL (drift voyages)")
 print(f"  Evidence: 'Primitive canoes can't navigate accurately'")
 print(f"  Problem: cultural bias — judging by Western technology standards")
-print(f"\\\nAfter Hōkūleʻa (1976+):")
+print(f"\\nAfter Hōkūleʻa (1976+):")
 print(f"  Proof: a canoe navigated 4,000 km by stars alone")
 print(f"  240,000 km total over 40+ years, zero navigation failures")
 print(f"  Circumnavigated the Earth using traditional methods")
 print(f"  Result: accidental drift theory DISPROVEN")
 
 # The cultural impact
-print(f"\\\n=== Cultural Revival ===")
+print(f"\\n=== Cultural Revival ===")
 print(f"The Hōkūleʻa revived Hawaiian cultural identity:")
 print(f"  Before: traditional navigation nearly extinct (Mau was among the last)")
 print(f"  After: navigation schools established across Polynesia")
 print(f"  Nainoa Thompson trained a new generation of navigators")
 print(f"  Traditional canoe building revived in Hawaii, NZ, and Tahiti")
 print(f"  The Hōkūleʻa became a symbol of indigenous scientific achievement")
-print(f"\\\n'The star compass is not a simple tool. It is a worldview —")
+print(f"\\n'The star compass is not a simple tool. It is a worldview —")
 print(f" a way of understanding your relationship to the Earth,")
 print(f" the ocean, and the sky.' — Nainoa Thompson")`,
       challenge: 'Calculate the Hōkūleʻa\'s average speed in knots across all its voyages. How does this compare with a modern sailboat (~6-8 knots) and a cargo ship (~12-15 knots)? The traditional canoe is slower but completely self-sufficient — no fuel, no electronics, no external support.',

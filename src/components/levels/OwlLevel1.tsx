@@ -65,7 +65,7 @@ ax1.tick_params(colors='gray')
 
 # 2. Light sensitivity comparison
 ax2.set_facecolor('#111827')
-species_sens = ['Human', 'Cat', 'Owl', 'Tarsier', 'Deep-sea\\\nfish']
+species_sens = ['Human', 'Cat', 'Owl', 'Tarsier', 'Deep-sea\\nfish']
 sensitivity = [1, 6, 10, 20, 100]  # relative to human
 rod_pct = [95, 97, 99, 99.5, 100]  # % of photoreceptors that are rods
 colors_bar = ['#3b82f6', '#22c55e', '#f59e0b', '#ef4444', '#a855f7']
@@ -495,9 +495,9 @@ ax1.set_ylim(0, 75)
 
 # 2. Applications: owl-inspired noise reduction
 ax2.set_facecolor('#111827')
-applications = ['Wind turbine\\\nblade', 'Aircraft\\\nlanding gear', 'Computer\\\nfan', 'Train\\\npantograph', 'Drone\\\npropeller']
+applications = ['Wind turbine\\nblade', 'Aircraft\\nlanding gear', 'Computer\\nfan', 'Train\\npantograph', 'Drone\\npropeller']
 noise_reduction = [6, 10, 8, 12, 5]  # dB reduction achieved
-bio_feature = ['Leading edge\\\nserrations', 'Trailing edge\\\nfringe', 'Velvety\\\nsurface', 'Edge\\\nserrations', 'Serrated\\\ntips']
+bio_feature = ['Leading edge\\nserrations', 'Trailing edge\\nfringe', 'Velvety\\nsurface', 'Edge\\nserrations', 'Serrated\\ntips']
 
 colors_app = ['#22c55e', '#3b82f6', '#f59e0b', '#a855f7', '#ef4444']
 bars = ax2.barh(applications, noise_reduction, color=colors_app, alpha=0.8, edgecolor='white', linewidth=0.5)

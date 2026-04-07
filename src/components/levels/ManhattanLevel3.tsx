@@ -354,7 +354,7 @@ for t in times:
     print(f"{t_str:>12} {R:>10.1f} {V:>14.0f} {mach:>10.1f} {min(T_behind, 1e8):>10.0f}")
 
 # Taylor's yield estimation from Trinity photographs
-print("\\\n=== Yield Estimation from Photographs ===")
+print("\\n=== Yield Estimation from Photographs ===")
 print("(Simulating Taylor's analysis of declassified Trinity photos)")
 print()
 
@@ -380,12 +380,12 @@ for t, R_obs in observations:
 
 mean_yield = np.mean(yields)
 std_yield = np.std(yields)
-print(f"\\\nEstimated yield: {mean_yield:.1f} ± {std_yield:.1f} kT")
+print(f"\\nEstimated yield: {mean_yield:.1f} ± {std_yield:.1f} kT")
 print(f"Actual yield:    ~20 kT")
 print(f"Taylor's method accuracy: {abs(mean_yield - 20)/20*100:.0f}% error")
 
 # Scaling to other yields
-print("\\\n=== Blast Radius at 1 Second for Different Yields ===")
+print("\\n=== Blast Radius at 1 Second for Different Yields ===")
 for yield_kt in [0.001, 0.1, 1, 10, 20, 100, 1000, 50000]:
     E = yield_kt * kt_to_joules
     R = blast_radius(E, 1.0)
@@ -459,7 +459,7 @@ for name, props in isotopes.items():
         print(f"{name:<10} {hl_str:>14} {n0:>12.2e} {act:>13.1f}")
 
 # Decay over time — total activity
-print("\\\n=== Total Activity Over Time ===")
+print("\\n=== Total Activity Over Time ===")
 time_points = [0.01, 0.1, 1, 10, 30, 100, 300, 1000, 10000, 100000, 1000000]
 print(f"{'Time':>12} {'Total (GBq)':>12} {'Dominant isotope':>20} {'Fraction of initial':>20}")
 print("-" * 66)
@@ -489,7 +489,7 @@ for t in time_points:
     print(f"{t_str:>12} {total_gbq:>10.1f} {dominant:>20} {fraction:>18.6f}")
 
 # Bateman equation: Sr-90 -> Y-90 -> Zr-90 (stable)
-print("\\\n=== Decay Chain: Sr-90 → Y-90 → Zr-90 (stable) ===")
+print("\\n=== Decay Chain: Sr-90 → Y-90 → Zr-90 (stable) ===")
 t_half_Sr = 28.8    # years
 t_half_Y  = 0.00731  # years (2.67 days)
 lam_Sr = decay_constant(t_half_Sr)
@@ -617,7 +617,7 @@ strategies = {
     "Random":        random_strategy,
 }
 
-print("\\\n=== Iterated Arms Race (100 rounds) ===")
+print("\\n=== Iterated Arms Race (100 rounds) ===")
 print(f"{'Strategy A':<18} {'Strategy B':<18} {'Score A':>9} {'Score B':>9} {'Winner':>10}")
 print("-" * 66)
 
@@ -629,7 +629,7 @@ for name_a, func_a in strategies.items():
             print(f"{name_a:<18} {name_b:<18} {sa:>9} {sb:>9} {winner:>10}")
 
 # Tournament: which strategy has highest total score?
-print("\\\n=== Tournament Results (total score vs all opponents) ===")
+print("\\n=== Tournament Results (total score vs all opponents) ===")
 totals = {name: 0 for name in strategies}
 for name_a, func_a in strategies.items():
     for name_b, func_b in strategies.items():

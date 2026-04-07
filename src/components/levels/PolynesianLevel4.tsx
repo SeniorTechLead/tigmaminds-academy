@@ -110,19 +110,19 @@ ISLANDS = [
 ]
 
 # System test
-print("=== Wayfinding Simulator — System Architecture ===\\\n")
+print("=== Wayfinding Simulator — System Architecture ===\\n")
 print("Star Catalogue:")
 for s in STARS:
     print(f"  {s.name:<12} RA={s.ra:>5.2f}h  Dec={s.dec:>+6.1f}°  Mag={s.mag:>+4.1f}")
 
-print(f"\\\nIsland Database:")
+print(f"\\nIsland Database:")
 for isle in ISLANDS:
     print(f"  {isle.name:<12} {isle.lat:>+6.1f}°, {isle.lon:>+7.1f}°  "
           f"Width={isle.width/1000:.0f}km  Visual range={isle.visual_range:.0f}nm")
 
 canoe = Canoe("Hokule'a", 20.0, -155.5, 5.0)
-print(f"\\\nCanoe: {canoe.name} at ({canoe.lat}°, {canoe.lon}°) speed={canoe.speed}kts")
-print("\\\nArchitecture: 3 classes (Star, Island, Canoe) + star catalogue + island database")
+print(f"\\nCanoe: {canoe.name} at ({canoe.lat}°, {canoe.lon}°) speed={canoe.speed}kts")
+print("\\nArchitecture: 3 classes (Star, Island, Canoe) + star catalogue + island database")
 print("Next: Build the star compass engine and voyage simulator.")`,
       challenge: 'Add a `distance_to(island)` method to the Canoe class that calculates great-circle distance in nautical miles. Use the Haversine formula: d = 2R × arcsin(sqrt(sin²(Δlat/2) + cos(lat1)cos(lat2)sin²(Δlon/2))). This method will be used by the detection probability calculator later.',
       successHint: 'Good system design makes everything else easier. You defined three clean classes — Star, Island, Canoe — each with clear responsibilities and useful methods. This is the foundation of object-oriented design: model the real world with objects that know how to compute their own properties.',
@@ -216,7 +216,7 @@ class StarCompass:
 # Generate star compass for a voyage
 compass = StarCompass()
 
-print("=== Star Compass Engine: Hawaii to Tahiti ===\\\n")
+print("=== Star Compass Engine: Hawaii to Tahiti ===\\n")
 
 # Track star compass at three points during the voyage
 waypoints = [
@@ -232,11 +232,11 @@ for label, lat, lon in waypoints:
     print("-" * 33)
     for name, alt, az, direction, mag in sky[:12]:  # top 12 brightest visible
         print(f"{direction:<6} {name:<14} {alt:>4.0f}° {az:>5.0f}°")
-    print(f"  ({len(sky)} stars visible)\\\n")
+    print(f"  ({len(sky)} stars visible)\\n")
 
 # Key navigation observation: Arcturus zenith passage
 print("=== Arcturus Altitude at Different Latitudes ===")
-print("(Zenith passage = you are at Arcturus' latitude: 19.2°N)\\\n")
+print("(Zenith passage = you are at Arcturus' latitude: 19.2°N)\\n")
 for lat in [25, 20, 19.2, 15, 10, 0, -10, -17.5]:
     sky = compass.compute_sky(lat, -155, 2024, 6, 15, 22)
     arcturus = [s for s in sky if s[0] == "Arcturus"]
@@ -348,11 +348,11 @@ for entry in log:
               f"{entry['est_lat']:>+8.2f}° {entry['error_nm']:>6.0f}nm {entry['dist_nm']:>6.0f}nm {sky:>6}")
 
 final = log[-1]
-print(f"\\\nFinal position error: {final['error_nm']:.0f} nm ({final['error_nm']*1.852:.0f} km)")
+print(f"\\nFinal position error: {final['error_nm']:.0f} nm ({final['error_nm']*1.852:.0f} km)")
 print(f"Distance to Tahiti: {final['dist_nm']:.0f} nm ({final['dist_nm']*1.852:.0f} km)")
 
 # Statistics from multiple runs
-print("\\\n=== Monte Carlo: 100 Voyage Simulations ===")
+print("\\n=== Monte Carlo: 100 Voyage Simulations ===")
 arrival_errors = []
 for seed in range(100):
     np.random.seed(seed)
@@ -456,7 +456,7 @@ islands = [
     ("Small motu", 5, 2, True),
 ]
 
-print("=== Island Detection Probability vs Distance ===\\\n")
+print("=== Island Detection Probability vs Distance ===\\n")
 
 for name, height, width, lagoon in islands:
     print(f"--- {name} (height={height}m, width={width}km) ---")

@@ -242,7 +242,7 @@ for entry in log:
     print(f"{entry['day']:>5.1f} {entry['position']:>8.1f} km {entry['energy']:>8.0f} kJ "
           f"{entry['condition']:>8.0%} {entry['segment']:<20}")
 
-print(f"\\nFinal: {'ARRIVED' if final.position > 250 else 'FAILED'} "
+print(f"\nFinal: {'ARRIVED' if final.position > 250 else 'FAILED'} "
       f"| {'SPAWNED' if final.spawned else 'TOO WEAK'} "
       f"| Energy: {max(0,final.energy):.0f} kJ")`,
       challenge: 'Run 100 simulations with random starting energy (4000-6000 kJ, uniform distribution). What fraction successfully spawns? This gives the population-level spawning success rate — the key metric for fisheries management.',
@@ -357,7 +357,7 @@ for n, pl, pw, pd in configs:
           f"{r['Ed']:>8.1f} {r['capacity']:>8.0f} {status:>6}")
 
 if best:
-    print(f"\\nOptimal design: {best['n_pools']} pools")
+    print(f"\nOptimal design: {best['n_pools']} pools")
     print(f"Passage time: {best['t_total_min']:.0f} minutes")
     print(f"Fish capacity: {best['capacity']:.0f} fish per pool")
 
@@ -647,7 +647,7 @@ if arrived:
     energies = [f.energy for f in arrived]
     spawn_threshold = 1500
     can_spawn = sum(1 for e in energies if e > spawn_threshold)
-    print(f"\\nOf those arrived:")
+    print(f"\nOf those arrived:")
     print(f"  Can spawn (>{spawn_threshold} kJ): {can_spawn} ({can_spawn/len(arrived)*100:.0f}%)")
     print(f"  Too weak to spawn: {len(arrived) - can_spawn}")
     print(f"  Avg energy on arrival: {np.mean(energies):.0f} kJ")
@@ -655,7 +655,7 @@ if arrived:
 
 # Effective spawning success
 total_spawners = can_spawn if arrived else 0
-print(f"\\nEffective spawning rate: {total_spawners}/{200} = {total_spawners/200*100:.0f}%")
+print(f"\nEffective spawning rate: {total_spawners}/{200} = {total_spawners/200*100:.0f}%")
 print(f"This rate determines next year's population!")`,
       challenge: 'Add a fish passage at km 180 that reduces the current from 0.85 to 0.5 m/s for the last section. Re-run the simulation. How many more fish arrive? How many more can spawn? Calculate the "fish saved per dollar" if the passage costs Rs 50 lakh — this is the metric that convinces policymakers to fund fish passages.',
       successHint: 'You just built an agent-based model — the same class of simulation used to model traffic, epidemics, financial markets, and ecosystems. Each agent (fish) follows simple rules, but the collective behaviour is complex and emergent. This is the frontier of computational science: understanding complex systems by simulating their individual components.',

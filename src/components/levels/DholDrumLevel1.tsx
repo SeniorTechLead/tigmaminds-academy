@@ -190,7 +190,7 @@ for ax, ((m, n), title, ratio) in zip(axes.flat, modes):
     cmap = plt.cm.coolwarm
     ax.pcolormesh(X, Y, Z, cmap=cmap, shading='auto')
     ax.set_aspect('equal')
-    ax.set_title(f'{title}\\\nFreq ratio: {ratio:.3f}', color='white', fontsize=10)
+    ax.set_title(f'{title}\\nFreq ratio: {ratio:.3f}', color='white', fontsize=10)
     ax.tick_params(colors='gray', labelsize=7)
 
     # Draw nodal lines (where Z ≈ 0)
@@ -279,7 +279,7 @@ ax.annotate(f'Dhol: {f_base:.0f} Hz', xy=(T_base, f_base), xytext=(T_base + 500,
             color='#f59e0b', fontsize=9)
 ax.set_xlabel('Tension (N/m)', color='white')
 ax.set_ylabel('Frequency (Hz)', color='white')
-ax.set_title('Pitch vs Tension\\n(tighter = higher)', color='white', fontsize=11)
+ax.set_title('Pitch vs Tension\n(tighter = higher)', color='white', fontsize=11)
 ax.tick_params(colors='gray')
 
 # 2. Frequency vs diameter
@@ -294,12 +294,12 @@ drums = [('Tabla', 0.075), ('Dholak', 0.125), ('Dhol', 0.20), ('Bass drum', 0.35
 for name, radius in drums:
     freq = (alpha_01 / (2 * np.pi * radius)) * np.sqrt(T_base / sigma_base)
     ax.plot(radius * 200, freq, 'o', color='#ef4444', markersize=8)
-    ax.annotate(f'{name}\\n{freq:.0f} Hz', xy=(radius * 200, freq),
+    ax.annotate(f'{name}\n{freq:.0f} Hz', xy=(radius * 200, freq),
                 xytext=(radius * 200 + 3, freq + 15), color='white', fontsize=8)
 
 ax.set_xlabel('Diameter (cm)', color='white')
 ax.set_ylabel('Frequency (Hz)', color='white')
-ax.set_title('Pitch vs Diameter\\n(bigger = deeper)', color='white', fontsize=11)
+ax.set_title('Pitch vs Diameter\n(bigger = deeper)', color='white', fontsize=11)
 ax.tick_params(colors='gray')
 
 # 3. Frequency vs membrane density
@@ -314,12 +314,12 @@ membranes = [('Thin synthetic', 0.2), ('Goatskin', 0.5), ('Buffalo hide', 1.0), 
 for name, sigma in membranes:
     freq = (alpha_01 / (2 * np.pi * R_base)) * np.sqrt(T_base / sigma)
     ax.plot(sigma, freq, 'o', color='#a855f7', markersize=8)
-    ax.annotate(f'{name}\\n{freq:.0f} Hz', xy=(sigma, freq),
+    ax.annotate(f'{name}\n{freq:.0f} Hz', xy=(sigma, freq),
                 xytext=(sigma + 0.1, freq + 10), color='white', fontsize=8)
 
 ax.set_xlabel('Surface density (kg/m²)', color='white')
 ax.set_ylabel('Frequency (Hz)', color='white')
-ax.set_title('Pitch vs Membrane Weight\\n(heavier = deeper)', color='white', fontsize=11)
+ax.set_title('Pitch vs Membrane Weight\n(heavier = deeper)', color='white', fontsize=11)
 ax.tick_params(colors='gray')
 
 plt.tight_layout()
@@ -377,7 +377,7 @@ f_helmholtz = (c / (2 * np.pi)) * np.sqrt(A / (volumes * L_eff))
 ax.plot(volumes * 1000, f_helmholtz, color='#f59e0b', linewidth=2)
 ax.set_xlabel('Drum body volume (litres)', color='white')
 ax.set_ylabel('Helmholtz resonance (Hz)', color='white')
-ax.set_title('Resonance vs Volume\\n(bigger body = deeper resonance)', color='white', fontsize=11)
+ax.set_title('Resonance vs Volume\n(bigger body = deeper resonance)', color='white', fontsize=11)
 ax.tick_params(colors='gray')
 
 # Mark common drums
@@ -411,7 +411,7 @@ ax.tick_params(colors='gray')
 # 3. Shell material comparison
 ax = axes[1, 0]
 ax.set_facecolor('#111827')
-materials = ['Jackfruit\\n(dhol)', 'Maple\\n(snare)', 'Metal\\n(steel)', 'Fibre-\\nglass', 'Clay\\n(mridanga)']
+materials = ['Jackfruit\n(dhol)', 'Maple\n(snare)', 'Metal\n(steel)', 'Fibre-\nglass', 'Clay\n(mridanga)']
 brightness = [4, 7, 9, 6, 5]   # how reflective (bright sound)
 warmth = [8, 6, 3, 5, 7]       # how absorptive (warm sound)
 sustain = [6, 7, 9, 7, 5]      # how long the sound rings
@@ -572,7 +572,7 @@ for i in range(8):
 # 4. Cultural significance chart
 ax = axes[1, 1]
 ax.set_facecolor('#111827')
-drums_ne = ['Dhol\\n(Assam)', 'Khol\\n(Assam)', 'Pung\\n(Manipur)', 'Dholak\\n(general)', 'Nagara\\n(ceremonial)']
+drums_ne = ['Dhol\n(Assam)', 'Khol\n(Assam)', 'Pung\n(Manipur)', 'Dholak\n(general)', 'Nagara\n(ceremonial)']
 ritual_use = [9, 8, 10, 5, 10]
 musical_use = [7, 9, 9, 8, 3]
 community = [10, 7, 8, 6, 9]
@@ -670,7 +670,7 @@ plot_rhythm(axes[1, 1], pung, 'Pung — Raas Leela (Manipuri dance)', '#a855f7')
 # 5. Comparative analysis radar chart
 ax = axes[2, 0]
 ax.set_facecolor('#111827')
-drums = ['Dhol\\\n(Assam)', 'Khol\\\n(Assam)', 'Pung\\\n(Manipur)', 'Nagara\\\n(ceremonial)']
+drums = ['Dhol\\n(Assam)', 'Khol\\n(Assam)', 'Pung\\n(Manipur)', 'Nagara\\n(ceremonial)']
 tempo = [9, 5, 7, 3]
 complexity = [7, 8, 9, 4]
 volume = [10, 5, 7, 10]

@@ -185,11 +185,11 @@ for i, (name, rule) in enumerate(rules.items()):
 
     # Pattern
     axes[0, i].imshow(grid, cmap='YlGn', interpolation='nearest')
-    axes[0, i].set_title(f'{name}\\n(pattern)', color='white', fontsize=10)
+    axes[0, i].set_title(f'{name}\n(pattern)', color='white', fontsize=10)
 
     # FFT
     axes[1, i].imshow(np.log1p(fft), cmap='hot', interpolation='nearest')
-    axes[1, i].set_title(f'{name}\\n(Fourier)', color='white', fontsize=10)
+    axes[1, i].set_title(f'{name}\n(Fourier)', color='white', fontsize=10)
 
 for ax in axes.flat:
     ax.set_facecolor('#1f2937')

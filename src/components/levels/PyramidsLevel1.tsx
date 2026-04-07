@@ -91,7 +91,7 @@ for name, base, height, years in pyramids:
     print(f"{name:<28} {stats['total_blocks']:>12,} {stats['blocks_per_day']:>6.0f} {stats['minutes_per_block']:>8.1f}")
 
 # Workforce calculation
-print("\\\n=== Workforce Estimate (Khufu) ===")
+print("\\n=== Workforce Estimate (Khufu) ===")
 blocks_per_day = khufu["blocks_per_day"]
 
 roles = [
@@ -153,7 +153,7 @@ print("=== Ramp Physics Calculator ===")
 print(f"Block mass: {block_mass} kg ({block_mass/1000:.1f} tonnes)")
 
 # Compare dry sand vs wet sand
-print(f"\\\n{'Grade':>6} {'Angle':>7} {'Force (dry)':>12} {'Workers (dry)':>14} "
+print(f"\\n{'Grade':>6} {'Angle':>7} {'Force (dry)':>12} {'Workers (dry)':>14} "
       f"{'Force (wet)':>12} {'Workers (wet)':>14}")
 print("-" * 67)
 
@@ -173,17 +173,17 @@ for grade_pct in [3, 5, 7, 10, 15, 20]:
           f"{f_wet:>10,.0f} N {w_wet:>12}")
 
 # Ramp length for the full pyramid height
-print(f"\\\n=== Ramp Length for Full Pyramid (146m height) ===")
+print(f"\\n=== Ramp Length for Full Pyramid (146m height) ===")
 for grade_pct in [5, 7, 10]:
     ramp_length = 146 / (grade_pct / 100)
     print(f"  {grade_pct}% grade: ramp length = {ramp_length:,.0f} m ({ramp_length/1000:.1f} km)")
 
-print(f"\\\nWet sand savings: {(1 - 0.25/0.5) * 100:.0f}% reduction in workers needed")
+print(f"\\nWet sand savings: {(1 - 0.25/0.5) * 100:.0f}% reduction in workers needed")
 print(f"For 315 blocks/day, that's thousands fewer workers — or")
 print(f"the same workers moving blocks 50% faster.")
 
 # Work calculation
-print(f"\\\n=== Total Energy to Build the Pyramid ===")
+print(f"\\n=== Total Energy to Build the Pyramid ===")
 height = 146  # average height each block is raised (simplified: center of mass at h/4)
 avg_height = height / 4  # average block is raised to ~1/4 of total height
 total_blocks = 2300000
@@ -279,18 +279,18 @@ cube_base_area = cube_side ** 2
 cube_weight = pyramid_volume * 2500 * 9.81
 cube_base_stress = cube_weight / cube_base_area / 1e6
 
-print(f"\\\n=== Shape Comparison (same total volume) ===")
+print(f"\\n=== Shape Comparison (same total volume) ===")
 pyramid_base_stress = layers[-1]["stress_mpa"]
 print(f"Pyramid: base stress = {pyramid_base_stress:.2f} MPa")
 print(f"Cube:    base stress = {cube_base_stress:.2f} MPa")
 print(f"Ratio:   cube is {cube_base_stress/pyramid_base_stress:.1f}× more stressed")
-print(f"\\\nLimestone compressive strength: ~40 MPa")
+print(f"\\nLimestone compressive strength: ~40 MPa")
 print(f"Pyramid base: {pyramid_base_stress:.2f} MPa — {pyramid_base_stress/40*100:.0f}% of limit (SAFE)")
 print(f"Cube base:    {cube_base_stress:.2f} MPa — {cube_base_stress/40*100:.0f}% of limit", end="")
 print(" (SAFE)" if cube_base_stress < 40 else " (FAILURE!)")
 
 # Blocks per layer (diminishing returns)
-print(f"\\\n=== Blocks Per Layer ===")
+print(f"\\n=== Blocks Per Layer ===")
 total_blocks = sum(l["blocks"] for l in layers)
 print(f"Total blocks: {total_blocks:,}")
 print(f"Bottom 10 layers: {sum(l['blocks'] for l in layers[-10:]):,} blocks "
@@ -368,14 +368,14 @@ wet_workers_per_block = int(np.ceil(block_mass * g * 0.24 / 500))
 daily_blocks = 315
 savings_per_day = (dry_workers_per_block - wet_workers_per_block) * daily_blocks
 
-print(f"\\\n=== Workforce Savings ===")
+print(f"\\n=== Workforce Savings ===")
 print(f"Workers per block (dry): {dry_workers_per_block}")
 print(f"Workers per block (wet): {wet_workers_per_block}")
 print(f"Savings per block: {dry_workers_per_block - wet_workers_per_block} workers")
 print(f"At 315 blocks/day: {savings_per_day:,} fewer worker-assignments per day")
 
 # Water requirements
-print(f"\\\n=== Water Requirements ===")
+print(f"\\n=== Water Requirements ===")
 path_width = 2.5  # metres
 path_depth = 0.05  # 5 cm of wet sand
 daily_path_length = 315 * 50  # 315 blocks × ~50m average drag distance
@@ -455,7 +455,7 @@ for year, star, era in pole_stars:
     print(f"{year:<8} {star:<30} {era}")
 
 # Alignment accuracy at different times
-print(f"\\\n=== Pyramid Alignment Accuracy vs Construction Date ===")
+print(f"\\n=== Pyramid Alignment Accuracy vs Construction Date ===")
 print(f"{'Year (BCE)':>12} {'Accuracy':>12} {'Error on 230m base':>20}")
 print("-" * 46)
 
@@ -468,12 +468,12 @@ for year in [3000, 2800, 2600, 2467, 2400, 2200, 2000, 1500]:
 # The actual Great Pyramid alignment
 actual_error_arcmin = 3.4  # measured value
 actual_error_m = 230 * np.tan(np.radians(actual_error_arcmin / 60))
-print(f"\\\nActual Great Pyramid error: {actual_error_arcmin}' = {actual_error_m:.2f} m on the base")
+print(f"\\nActual Great Pyramid error: {actual_error_arcmin}' = {actual_error_m:.2f} m on the base")
 print(f"Kochab-Mizar method in 2467 BCE predicts: 3' accuracy")
 print(f"Match: EXCELLENT — the method explains the observed precision")
 
 # Precision of base measurements
-print(f"\\\n=== Pyramid Base Precision ===")
+print(f"\\n=== Pyramid Base Precision ===")
 measurements = [
     ("North side", 230.253),
     ("South side", 230.454),
@@ -491,10 +491,10 @@ print("-" * 24)
 for name, length in measurements:
     print(f"{name:<12} {length:>10.3f}")
 
-print(f"\\\nMean: {mean_length:.3f} m")
+print(f"\\nMean: {mean_length:.3f} m")
 print(f"Max difference: {max_diff:.3f} m ({max_diff/mean_length*100:.003f}%)")
 print(f"Std deviation: {std_dev:.3f} m")
-print(f"\\\nThe four sides are equal to within 20 cm over 230 m —")
+print(f"\\nThe four sides are equal to within 20 cm over 230 m —")
 print(f"a precision of 0.09%. Achieved with ropes and pegs.")`,
       challenge: 'Calculate when the Kochab-Mizar method will be accurate again — when will those two stars next be equidistant from the pole? (Hint: precession is a ~26,000-year cycle, so the same configuration repeats roughly every 26,000 years.) Will the same method work in the year 23,500 CE?',
       successHint: 'You calculated stellar positions across millennia and used them for precision surveying — connecting astronomy, geometry, and engineering. The same trigonometry is used today in GPS satellite positioning, telescope pointing, and spacecraft navigation. The mathematics is timeless even as the pole star changes.',
@@ -569,7 +569,7 @@ for l in layers:
               f"{l['blocks']:>10,} {l['cum_blocks']:>10,} ({pct:>4.0f}%) {l['work_MJ']:>8.0f}")
 
 # Key statistics
-print(f"\\\n=== Construction Statistics ===")
+print(f"\\n=== Construction Statistics ===")
 print(f"Total blocks: {total_blocks:,}")
 print(f"Total work: {total_work:,.0f} MJ ({total_work/3600:.0f} MWh)")
 
@@ -581,7 +581,7 @@ for l in layers:
     work_by_quarter[quarter] += l["work_MJ"]
     blocks_by_quarter[quarter] += l["blocks"]
 
-print(f"\\\n{'Quarter':<16} {'Blocks':>10} {'Work (MJ)':>10} {'% of blocks':>12} {'% of work':>10}")
+print(f"\\n{'Quarter':<16} {'Blocks':>10} {'Work (MJ)':>10} {'% of blocks':>12} {'% of work':>10}")
 print("-" * 60)
 for q in range(4):
     h_range = f"{q*146//4}-{(q+1)*146//4}m"
@@ -591,14 +591,14 @@ for q in range(4):
 # Center of mass
 total_moment = sum(l["blocks"] * l["height_m"] for l in layers)
 com = total_moment / total_blocks
-print(f"\\\nCenter of mass height: {com:.1f} m ({com/146*100:.0f}% of total height)")
+print(f"\\nCenter of mass height: {com:.1f} m ({com/146*100:.0f}% of total height)")
 print(f"Average block raised: {com:.0f} m (not {146//2} m = half height)")
 print(f"This saves {(1 - com/(146/2))*100:.0f}% of work vs a constant-width tower")
 
 # Timeline (20 years)
 years = 20
 blocks_per_day = total_blocks / (years * 350)
-print(f"\\\nAt {blocks_per_day:.0f} blocks/day:")
+print(f"\\nAt {blocks_per_day:.0f} blocks/day:")
 
 cum = 0
 for year in range(1, years + 1):

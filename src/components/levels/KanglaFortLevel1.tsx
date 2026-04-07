@@ -134,7 +134,7 @@ for layer in range(1, layers + 1):
     if layer % 5 == 0 or layer == 1:
         print(f"Layer {layer:2d}: height = {total_height:.2f}m, density = {density:.0f} kg/m³")
 
-print(f"\\\nFinal wall: {total_height:.1f}m tall")
+print(f"\\nFinal wall: {total_height:.1f}m tall")
 print(f"Final density: {max_density} kg/m³")
 print(f"Density increase: {(max_density/initial_density - 1)*100:.0f}%")
 print(f"That's {max_density/initial_density:.1f}x denser than loose soil!")`,
@@ -182,7 +182,7 @@ for depth in [0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0]:
 chest_area = 0.15  # square metres (roughly 30cm x 50cm)
 depth = 3.0
 force = rho * g * depth * chest_area
-print(f"\\\nAt {depth}m depth, force on a diver's chest: {force:.0f} N")
+print(f"\\nAt {depth}m depth, force on a diver's chest: {force:.0f} N")
 print(f"That's like holding a {force/g:.0f} kg weight on your chest!")`,
       challenge: 'Calculate the total force on the bottom of the moat per square metre at 3m depth. Then calculate it for the entire moat bottom (length x width). That is the weight of the water the earth must support.',
       successHint: 'You now understand hydrostatic pressure — the same principle that governs dams, submarines, and blood pressure in your own body.',
@@ -240,9 +240,9 @@ for hour in range(24):
         print(f" {hour:2d}   |   {rain_mm:3d}    |  {water_level:.2f}   | {status}")
 
 if overflow:
-    print("\\\nThe moat overflowed! Need bigger drainage channels.")
+    print("\\nThe moat overflowed! Need bigger drainage channels.")
 else:
-    print(f"\\\nMoat held. Final level: {water_level:.2f}m")
+    print(f"\\nMoat held. Final level: {water_level:.2f}m")
     print(f"Remaining capacity: {(moat_depth - water_level)*moat_area:,.0f} cubic metres")`,
       challenge: 'Increase the drain_rate to 0.05 and run again. Does the moat still overflow? Find the minimum drain_rate that prevents overflow during this storm.',
       successHint: 'You just built a simulation — a simplified model of reality. Real hydraulic engineers use the same approach with more variables. The core logic is identical: track inflow, subtract outflow, check limits.',

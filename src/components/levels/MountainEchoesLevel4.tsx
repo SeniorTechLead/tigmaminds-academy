@@ -680,7 +680,7 @@ for v_kmh, label in [(30, 'Walking fast'), (60, 'Car in gorge'), (120, 'Highway'
     v_ms = v_kmh / 3.6
     f_e = doppler_echo_freq(f_source, v_ms)
     axes[1, 0].plot(v_kmh, f_e, 'o', color='#f59e0b', markersize=8)
-    axes[1, 0].annotate(f'{label}\\\n{f_e:.0f} Hz', xy=(v_kmh, f_e),
+    axes[1, 0].annotate(f'{label}\\n{f_e:.0f} Hz', xy=(v_kmh, f_e),
                           xytext=(v_kmh + 5, f_e + 15),
                           color='#f59e0b', fontsize=8,
                           arrowprops=dict(arrowstyle='->', color='#f59e0b'))

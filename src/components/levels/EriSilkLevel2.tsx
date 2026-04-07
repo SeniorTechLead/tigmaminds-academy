@@ -39,7 +39,7 @@ import matplotlib.pyplot as plt
 # Simplified LCA: Eri silk vs Polyester vs Cotton
 # Per functional unit: 1 kg of finished fabric
 
-stages = ['Raw material\\\nextraction', 'Processing', 'Manufacturing', 'Transport', 'Use phase\\\n(washing)', 'End of life']
+stages = ['Raw material\\nextraction', 'Processing', 'Manufacturing', 'Transport', 'Use phase\\n(washing)', 'End of life']
 
 # CO2 emissions (kg CO2e per kg fabric) by stage
 eri_co2 = [0.3, 0.5, 0.8, 0.2, 0.5, -0.1]  # negative = carbon sequestration at decomp
@@ -95,7 +95,7 @@ ax3.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=9
 ax3.tick_params(colors='gray')
 
 # Summary radar
-categories = ['Carbon\\\nfootprint', 'Water\\\nfootprint', 'Biodegradability', 'Durability', 'Ethical\\\nscore', 'Renewability']
+categories = ['Carbon\\nfootprint', 'Water\\nfootprint', 'Biodegradability', 'Durability', 'Ethical\\nscore', 'Renewability']
 N = len(categories)
 angles = np.linspace(0, 2 * np.pi, N, endpoint=False).tolist()
 angles += angles[:1]
@@ -327,7 +327,7 @@ for name, props in materials.items():
 
 ax1.set_xlabel('Ethics score (10 = best)', color='white')
 ax1.set_ylabel('Performance score (strength + durability)', color='white')
-ax1.set_title('Ethics vs Performance\\\n(bubble size = sustainability)', color='white', fontsize=12)
+ax1.set_title('Ethics vs Performance\\n(bubble size = sustainability)', color='white', fontsize=12)
 ax1.tick_params(colors='gray')
 
 # Legend for types
@@ -572,7 +572,7 @@ ax3.tick_params(colors='gray')
 
 # Summary comparison
 ax4.set_facecolor('#111827')
-metrics = ['Virgin material\\\n(20yr total)', 'Waste\\\n(20yr total)', 'Garment\\\nlifetime', 'Resource\\\nefficiency']
+metrics = ['Virgin material\\n(20yr total)', 'Waste\\n(20yr total)', 'Garment\\nlifetime', 'Resource\\nefficiency']
 linear_vals = [2000, lin_waste_cum[-1], garment_life, 30]  # normalized scores for efficiency
 circular_vals = [sum(circ_virgin), circ_waste_cum[-1], garment_life_circ, 70]
 x_pos = np.arange(len(metrics))
@@ -687,7 +687,7 @@ ax2.set_title('Target (2035): Circular Fashion', color='white', fontsize=12)
 
 # Recycling quality comparison
 ax3.set_facecolor('#111827')
-methods = ['Mechanical', 'Chemical\\\n(cellulose)', 'Chemical\\\n(polyester)', 'Enzymatic', 'Composting\\\n(silk/cotton)']
+methods = ['Mechanical', 'Chemical\\n(cellulose)', 'Chemical\\n(polyester)', 'Enzymatic', 'Composting\\n(silk/cotton)']
 quality = [4, 8, 9, 7, 0]  # output fiber quality (0 = nutrient return)
 cost = [2, 7, 8, 9, 1]  # relative cost
 energy = [3, 7, 6, 5, 1]  # energy intensity

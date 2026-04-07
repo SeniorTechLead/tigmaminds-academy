@@ -130,7 +130,7 @@ for ax, step_idx in zip(axes.flat, show_steps):
 
         ax.scatter(x, y, s=250, color=color, zorder=5, edgecolors='white', linewidth=1.5)
         d_str = f'{d:.0f}' if d < float('inf') else '?'
-        ax.annotate(f'{name}\\n{d_str}', (x, y), ha='center', va='center', color='white',
+        ax.annotate(f'{name}\n{d_str}', (x, y), ha='center', va='center', color='white',
                     fontsize=8, fontweight='bold')
 
     ax.set_title(f'Step {step_idx+1}: Visit {step["node"]} (dist={step["dist"]:.0f})',
@@ -256,7 +256,7 @@ ax2.tick_params(colors='gray')
 
 # Mark the Meghalaya road network scale
 ax2.axvline(10000, color='#f59e0b', linestyle='--', linewidth=1)
-ax2.annotate('Meghalaya\\\nroad network\\\n(~10K nodes)', xy=(10000, 100),
+ax2.annotate('Meghalaya\\nroad network\\n(~10K nodes)', xy=(10000, 100),
              color='#f59e0b', fontsize=9, fontweight='bold')
 
 plt.tight_layout()
@@ -952,7 +952,7 @@ for name, data in villages.items():
     color = '#ef4444' if name == 'Shillong' else '#6b7280' if (not assigned and name != 'Shillong') else '#f59e0b'
     size = 200 + data['mail'] * 3
     ax1.scatter(x, y, s=size, color=color, zorder=5, edgecolors='white', linewidth=1.5)
-    ax1.annotate(f'{name}\\\n({data["mail"]})', (x, y), textcoords="offset points",
+    ax1.annotate(f'{name}\\n({data["mail"]})', (x, y), textcoords="offset points",
                  xytext=(0, 15), ha='center', color='white', fontsize=7)
 
 ax1.set_title('Optimised Routes', color='white', fontsize=12)
@@ -964,7 +964,7 @@ ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8
 
 # Performance summary
 ax2.set_facecolor('#111827')
-categories = ['Villages\\\nassigned', 'Packages\\\ndelivered', 'Time used\\\n(hours)', 'Load used\\\n(packages)']
+categories = ['Villages\\nassigned', 'Packages\\ndelivered', 'Time used\\n(hours)', 'Load used\\n(packages)']
 for p, color in enumerate(route_colors):
     total_mail = sum(villages[v]['mail'] for v in routes[p])
     vals = [len(routes[p]), total_mail, route_times[p], route_loads[p]]

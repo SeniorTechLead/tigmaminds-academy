@@ -55,7 +55,7 @@ for c in conditions:
 print("* Workers needed to START block moving (sustained pull ~500 N each)")
 
 # Ramp friction: inclined plane adds gravity component
-print("\\\n=== Friction on Inclined Ramp ===")
+print("\\n=== Friction on Inclined Ramp ===")
 ramp_angles = [5, 10, 15, 20, 25]
 mu_k = 0.20  # damp sand
 
@@ -72,7 +72,7 @@ for angle in ramp_angles:
     workers = int(np.ceil(f_total / 500))
     print(f"{angle:>5}deg {f_friction:>10.0f} {f_gravity:>12.0f} {f_total:>10.0f} {workers:>6}")
 
-print("\\\nSteeper ramp = easier to build but harder to drag blocks up.")
+print("\\nSteeper ramp = easier to build but harder to drag blocks up.")
 print("The Egyptians likely used 7-10 degree ramps as a compromise.")`,
       challenge: 'At what ramp angle does the gravity component exceed the friction component? This is the "crossover angle" where the ramp becomes impractical. Calculate it analytically: tan(theta) = mu_k. For damp sand, theta = arctan(0.20) = 11.3 degrees. Verify with the code.',
       successHint: 'Coulomb\'s friction law is foundational to mechanical engineering — every machine with moving parts must account for friction. The static-to-kinetic transition you modelled is why anti-lock brakes pump (they prevent the tires from transitioning to lower kinetic friction), and why the Egyptians needed extra workers at the start of each pull.',
@@ -115,7 +115,7 @@ for d in grain_sizes:
     print(f"  Grain d = {d:.2f} mm: F = {f*1e6:.2f} uN ({f:.2e} N)")
 
 # Sand bed cohesion vs water content
-print("\\\n=== Sand Bed Properties vs Water Content ===")
+print("\\n=== Sand Bed Properties vs Water Content ===")
 grain_d = 0.2  # mm, typical Giza sand
 porosity = 0.38  # typical sand packing
 
@@ -148,7 +148,7 @@ for wc in [0, 1, 2, 3, 5, 7, 10, 15]:
     print(f"{wc:>6.0f}% {bridges_per_cm3:>10,} {cohesion:>13.2f} {stiffness:>8.1f}x {rating:>10}")
 
 # Drag force reduction
-print("\\\n=== Drag Force vs Water Content ===")
+print("\\n=== Drag Force vs Water Content ===")
 block_weight = 2500 * 9.81  # N
 mu_dry = 0.50
 for wc in [0, 2, 3, 5, 8, 12]:
@@ -235,9 +235,9 @@ for t in tasks:
     print(f"{t['id']:<4} {t['name']:<32} {t['duration']:>3}m {t['es']:>4} {t['ef']:>4} "
           f"{t['ls']:>4} {t['lf']:>4} {t['slack']:>5}m {marker}")
 
-print(f"\\\nCritical path: {' -> '.join(critical_path)}")
+print(f"\\nCritical path: {' -> '.join(critical_path)}")
 print(f"Project duration: {project_duration} months ({project_duration/12:.1f} years)")
-print(f"\\\nDelaying any critical task by 1 month delays the ENTIRE project by 1 month.")
+print(f"\\nDelaying any critical task by 1 month delays the ENTIRE project by 1 month.")
 print(f"Non-critical tasks have slack — they can be delayed without affecting completion.")`,
       challenge: 'What if the granite quarrying at Aswan (task E) takes 18 months instead of 12 due to a hard vein? Recalculate the critical path. Does the granite delay affect the project completion date? (Check if E-F-J is on the critical path.)',
       successHint: 'CPM is used to schedule every major construction project in the world — from skyscrapers to spacecraft. You modelled the same scheduling problem that Hemiunu (Khufu\'s vizier and chief architect) solved 4,500 years ago. The tools change; the mathematics is eternal.',
@@ -272,7 +272,7 @@ base_length_m = 230.4  # Great Pyramid base side
 target_error_mm = 21    # actual achieved accuracy
 
 print("=== Error Propagation in Pyramid Levelling ===")
-print(f"Base length: {base_length_m} m | Achieved accuracy: {target_error_mm} mm\\\n")
+print(f"Base length: {base_length_m} m | Achieved accuracy: {target_error_mm} mm\\n")
 
 # Different levelling step sizes and their required accuracy
 print("If levelling in steps of X metres, each step must be accurate to:")
@@ -286,7 +286,7 @@ for step in [1, 2, 5, 10, 20, 50]:
     print(f"{step:>8}m {n:>6} {per_step:>22.2f} {technique:>20}")
 
 # Monte Carlo simulation of levelling process
-print("\\\n=== Monte Carlo: 10,000 Simulated Levelling Runs ===")
+print("\\n=== Monte Carlo: 10,000 Simulated Levelling Runs ===")
 n_sims = 10000
 step_size = 5  # metres
 n_steps = int(np.ceil(base_length_m / step_size))
@@ -308,7 +308,7 @@ for instrument_error in [1.0, 2.0, 3.0, 5.0, 10.0]:
           f"95% within: {np.percentile(np.abs(total_errors), 95):.1f}mm")
 
 # Comparison: ancient vs modern surveying
-print("\\\n=== Surveying Accuracy Through History ===")
+print("\\n=== Surveying Accuracy Through History ===")
 methods = [
     ("Water levelling (Egypt)", 2.0, "2600 BCE"),
     ("Groma (Roman)", 5.0, "100 BCE"),
@@ -364,14 +364,14 @@ demands = [
     {"layer": "Mortuary temple floor",   "blocks_per_day": 5,   "stone": "basalt"},
 ]
 
-print("=== Quarry Allocation Optimiser ===\\\n")
+print("=== Quarry Allocation Optimiser ===\\n")
 print("Quarry capacities:")
 for q in quarries:
     daily_cost = q["capacity"] * q["distance_km"] * q["cost_per_block_km"]
     print(f"  {q['name']:<20} {q['capacity']:>4} blocks/day | {q['distance_km']:>6.1f} km | "
           f"Daily transport cost: {daily_cost:>8,.0f} units")
 
-print("\\\nDemand schedule:")
+print("\\nDemand schedule:")
 total_demand = 0
 for d in demands:
     total_demand += d["blocks_per_day"]
@@ -379,7 +379,7 @@ for d in demands:
 print(f"  {'TOTAL':<28} {total_demand:>4} blocks/day")
 
 # Greedy allocation: match demand to cheapest source
-print("\\\n=== Optimal Allocation (minimum cost) ===")
+print("\\n=== Optimal Allocation (minimum cost) ===")
 total_cost = 0
 allocations = []
 for d in demands:
@@ -392,10 +392,10 @@ for d in demands:
         allocations.append((q["name"], d["layer"], allocated, cost))
         print(f"  {q['name']:<20} -> {d['layer']:<28} {allocated:>4} blocks | cost: {cost:>8,.0f}")
 
-print(f"\\\nTotal daily transport cost: {total_cost:,.0f} units")
+print(f"\\nTotal daily transport cost: {total_cost:,.0f} units")
 
 # Annual logistics summary
-print("\\\n=== Annual Logistics Summary ===")
+print("\\n=== Annual Logistics Summary ===")
 days_per_year = 300  # working days (Nile flood season = no quarrying)
 annual_cost = total_cost * days_per_year
 annual_blocks = total_demand * days_per_year
@@ -406,7 +406,7 @@ print(f"Total blocks needed (2.3M): ~{2_300_000 / annual_blocks:.0f} years of pr
 print(f"Cost per block delivered: {total_cost / total_demand:.1f} units")
 
 # What-if: closer quarry for casing stone
-print("\\\n=== What-if: Tura quarry 5 km closer (new road)? ===")
+print("\\n=== What-if: Tura quarry 5 km closer (new road)? ===")
 tura_saving = 80 * (15 - 10) * 2.0  # blocks * distance_saved * cost_rate
 print(f"Daily saving: {tura_saving:,.0f} units")
 print(f"Annual saving: {tura_saving * days_per_year:,.0f} units")

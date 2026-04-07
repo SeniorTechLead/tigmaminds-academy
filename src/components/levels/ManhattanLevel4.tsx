@@ -131,7 +131,7 @@ MATERIALS = {
 
 # System overview
 print("=== Chain Reaction Simulator — System Design ===")
-print("\\\nCore classes defined:")
+print("\\nCore classes defined:")
 print("  1. Nucleus  — Z, A, cross-sections, nu, binding energy")
 print("  2. Neutron  — position, direction, energy, fate tracking")
 print("  3. Material — bulk properties, macroscopic cross-sections")
@@ -146,7 +146,7 @@ for key, mat in MATERIALS.items():
     print(f"{mat.name:<28} {mat.density:>6.1f} {mat.mfp:>8.2f} {p_f:>9.3f} {E:>8.1f} MeV")
 
 # Quick test: create a neutron and step it
-print("\\\n=== Neutron Test ===")
+print("\\n=== Neutron Test ===")
 n = Neutron([0, 0, 0], [1, 0, 0])
 mat = MATERIALS["HEU"]
 d = mat.sample_distance()
@@ -317,7 +317,7 @@ for R in [5, 6, 7, 8, 8.5, 9, 10, 12, 15]:
     print(f"{R:>10.1f} {k_mean:>12.4f} {k_std:>11.4f} {fiss_pct:>8.1f}% {esc_pct:>8.1f}%{status}")
 
 # Generation-by-generation tracking for a supercritical sphere
-print("\\\n=== Generation-by-Generation Tracking (R=12 cm) ===")
+print("\\n=== Generation-by-Generation Tracking (R=12 cm) ===")
 engine = ChainReactionEngine(12, 1.24*0.93, 0.09, 4.57, 2.43, n_density)
 k_vals, _ = engine.run_simulation(n_neutrons=3000, n_generations=15)
 print(f"{'Generation':>12} {'k-eff':>10} {'Cumulative avg':>16}")
@@ -468,7 +468,7 @@ for mat in materials:
         marker = " ←" if it == len(history) else ""
         print(f"{it:>5} {rl:>6.2f} {rh:>6.2f} {rm:>6.2f} {k:>7.3f}{marker}")
 
-    print(f"\\\nCritical radius: {r_crit:.1f} cm")
+    print(f"\\nCritical radius: {r_crit:.1f} cm")
     print(f"Critical mass:   {mass_kg:.1f} kg")
     print(f"Known value:     ~{mat['known_crit_mass_kg']} kg")
     print(f"Sphere diameter: {2*r_crit:.1f} cm ({2*r_crit/2.54:.1f} inches)")
@@ -609,7 +609,7 @@ for eff in [0.001, 0.005, 0.01, 0.015, 0.05, 0.10, 0.20, 0.50, 1.00]:
     print(f"{eff*100:>10.1f}% {n_f:>12.2e} {energy_tj:>10.1f} {y:>9.1f} {eq:>16}")
 
 # Mass of material that actually fissioned
-print("\\\n=== Mass That Actually Fissioned ===")
+print("\\n=== Mass That Actually Fissioned ===")
 for w in weapons:
     fissioned_kg = w["mass_kg"] * w["actual_eff"]
     energy = fissioned_kg * 1000 * N_A / w["A"] * E_per_fission_J

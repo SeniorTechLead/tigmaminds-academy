@@ -68,7 +68,7 @@ lock_width = 33.5  # metres
 lock_depth = 12.8  # metres
 lock_volume = lock_length * lock_width * lock_depth
 
-print(f"\\\nLock chamber volume: {lock_volume:,.0f} m³ ({lock_volume/1000:,.0f} thousand m³)")
+print(f"\\nLock chamber volume: {lock_volume:,.0f} m³ ({lock_volume/1000:,.0f} thousand m³)")
 print(f"That's {lock_volume/1000:.0f} million litres of water per fill!")`,
       challenge: 'A loaded container ship weighs 52,500 tonnes. After unloading 20,000 tonnes of cargo at the Pacific end, how much does its draft change? Calculate both drafts and the difference. This is why ships sit higher after unloading — they\'re displacing less water.',
       successHint: 'You just applied Archimedes\' principle — one of the oldest and most useful principles in physics (250 BCE). Every ship, submarine, hot air balloon, and fish uses the same physics: the buoyant force equals the weight of fluid displaced.',
@@ -147,7 +147,7 @@ for t, h, q in history:
 
 total_time_min = history[-1][0] / 60
 total_volume = 305 * 33.5 * 8.5
-print(f"\\\nFill time: {total_time_min:.1f} minutes")
+print(f"\\nFill time: {total_time_min:.1f} minutes")
 print(f"Total volume: {total_volume:,.0f} m³ ({total_volume/1000:.0f} thousand m³)")
 print(f"Note how flow rate DECREASES as the lock fills —")
 print(f"the height difference shrinks, so Torricelli's velocity drops.")`,
@@ -289,7 +289,7 @@ for name, depth in locations:
     print(f"{name:<35} {p/1000:>7.1f} kPa ({pressure_to_atm(p):>4.2f} atm)")
 
 # Force on lock gates
-print("\\\n=== Force on Lock Gates ===")
+print("\\n=== Force on Lock Gates ===")
 gate_width = 33.5  # metres
 gate_heights = [8.5, 17, 26]  # water height against the gate
 
@@ -303,7 +303,7 @@ for h in gate_heights:
     print(f"Water height {h:>4.1f}m: Force = {force/1e6:.1f} MN ({force_tonnes:,.0f} tonnes-force)")
 
 # Energy calculation: how much gravitational PE does each transit use?
-print("\\\n=== Energy Per Transit ===")
+print("\\n=== Energy Per Transit ===")
 lake_height = 26  # metres above sea level
 transit_volume = 200_000  # m³ (approximate water used per transit)
 water_mass = transit_volume * 1000  # kg
@@ -368,7 +368,7 @@ for s in sections:
 print(f"{'TOTAL':<24} {sum(s['length_km'] for s in sections):>5.1f}km {'':>6} {total_volume/1e6:>12.1f}")
 
 # Put in perspective
-print(f"\\\nTotal excavation: {total_volume/1e6:.0f} million m³")
+print(f"\\nTotal excavation: {total_volume/1e6:.0f} million m³")
 print(f"That's {total_volume / (1 * 1 * 40075e3):.0f}× a 1m-deep trench around Earth")
 
 # Time and workforce
@@ -376,12 +376,12 @@ steam_shovels = 100  # Bucyrus steam shovels
 capacity_per_shovel = 500  # m³ per day
 daily_output = steam_shovels * capacity_per_shovel
 years_needed = total_volume / daily_output / 300  # 300 work days/year
-print(f"\\\nWith {steam_shovels} steam shovels at {capacity_per_shovel} m³/day each:")
+print(f"\\nWith {steam_shovels} steam shovels at {capacity_per_shovel} m³/day each:")
 print(f"Daily output: {daily_output:,} m³")
 print(f"Time needed: {years_needed:.1f} years")
 
 # French vs American comparison
-print("\\\n=== French vs American Plan ===")
+print("\\n=== French vs American Plan ===")
 french_vol = 120e6  # sea-level plan
 american_vol = total_volume
 print(f"French (sea-level): {french_vol/1e6:.0f} million m³")
@@ -454,7 +454,7 @@ def transit_time(ship_name, ship_beam, ship_draft):
 results, total = transit_time("Panamax Container Ship", 32, 12)
 
 print("=== Panama Canal Transit Simulation ===")
-print(f"Ship: Panamax Container Ship (32m beam)\\\n")
+print(f"Ship: Panamax Container Ship (32m beam)\\n")
 
 print(f"{'Segment':<35} {'Time (min)':>10} {'Time (hr)':>10}")
 print("-" * 57)
@@ -466,12 +466,12 @@ for r in results:
 
 print("-" * 57)
 print(f"{'TOTAL TRANSIT TIME':<35} {total:>8.0f} {total/60:>8.1f}")
-print(f"\\\nThat's {total/60:.1f} hours to cross 82 km of canal.")
+print(f"\\nThat's {total/60:.1f} hours to cross 82 km of canal.")
 print(f"Without the canal: 22,500 km around Cape Horn = ~30 days.")
 print(f"Time saved: ~{30 - total/60/24:.0f} days per voyage!")
 
 # Throughput
-print("\\\n=== Canal Throughput ===")
+print("\\n=== Canal Throughput ===")
 for hours_per_day in [12, 18, 24]:
     transits = hours_per_day * 60 / total
     print(f"{hours_per_day}h operation: {transits:.1f} transits/day "

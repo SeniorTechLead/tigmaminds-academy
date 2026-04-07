@@ -573,7 +573,7 @@ print("=" * 50)
 print(f"Regression-only RMSE: {rmse_reg:.2f}")
 print(f"Full model RMSE: {rmse_full:.2f}")
 print(f"Improvement: {(1 - rmse_full/rmse_reg)*100:.0f}%")
-print(f"\\\nTotal predicted population (landscape): {pred_total.sum() * (50/res)**2:.0f}")
+print(f"\\nTotal predicted population (landscape): {pred_total.sum() * (50/res)**2:.0f}")
 print(f"Total surveyed population: {estimated_density.sum():.0f}")
 print(f"Extrapolation factor: {pred_total.sum() * (50/res)**2 / estimated_density.sum():.1f}x")`,
       challenge: 'Add an uncertainty map: at each grid cell, compute the distance to the nearest survey site and use it to flag areas where predictions are unreliable (extrapolation zones). Visualize confidence alongside the suitability map.',
@@ -763,13 +763,13 @@ ax.tick_params(colors='gray')
 ax = axes[1, 2]
 ax.set_facecolor('#111827')
 ax.axis('off')
-summary_text = "BIODIVERSITY SUMMARY\\\n" + "=" * 35 + "\\\n\\\n"
+summary_text = "BIODIVERSITY SUMMARY\\n" + "=" * 35 + "\\n\\n"
 for st in ['Core', 'Edge', 'Degraded']:
     mask = [t == st for t in site_types]
-    summary_text += f"{st} Forest:\\\n"
-    summary_text += f"  Mean richness: {richness[mask].mean():.1f}\\\n"
-    summary_text += f"  Mean Shannon:  {shannon[mask].mean():.2f}\\\n"
-    summary_text += f"  Mean Simpson:  {simpson_div[mask].mean():.2f}\\\n\\\n"
+    summary_text += f"{st} Forest:\\n"
+    summary_text += f"  Mean richness: {richness[mask].mean():.1f}\\n"
+    summary_text += f"  Mean Shannon:  {shannon[mask].mean():.2f}\\n"
+    summary_text += f"  Mean Simpson:  {simpson_div[mask].mean():.2f}\\n\\n"
 ax.text(0.05, 0.95, summary_text, transform=ax.transAxes, fontsize=10, color='white',
         verticalalignment='top', fontfamily='monospace')
 
@@ -780,7 +780,7 @@ print("BIODIVERSITY ANALYSIS COMPLETE")
 print("=" * 50)
 for st in ['Core', 'Edge', 'Degraded']:
     mask = [t == st for t in site_types]
-    print(f"\\\n{st} Forest (n={sum(mask)} sites):")
+    print(f"\\n{st} Forest (n={sum(mask)} sites):")
     print(f"  Species richness: {richness[mask].mean():.1f} +/- {richness[mask].std():.1f}")
     print(f"  Shannon H':       {shannon[mask].mean():.2f} +/- {shannon[mask].std():.2f}")
     print(f"  Simpson (1-D):    {simpson_div[mask].mean():.2f} +/- {simpson_div[mask].std():.2f}")`,
@@ -920,7 +920,7 @@ plt.show()
 # --- Quantitative summary ---
 print("CONSERVATION PRIORITY ANALYSIS")
 print("=" * 60)
-print(f"\\\n{'Strategy':<12} {'Top 10% area (km²)':>18} {'Mean priority':>14} {'Max':>6}")
+print(f"\\n{'Strategy':<12} {'Top 10% area (km²)':>18} {'Mean priority':>14} {'Max':>6}")
 print("-" * 52)
 cell_area = (50/res)**2
 for name, score in priority_maps.items():
@@ -930,7 +930,7 @@ for name, score in priority_maps.items():
 
 # Overlap statistics
 total_cells = res * res
-print(f"\\\nStrategy Agreement:")
+print(f"\\nStrategy Agreement:")
 print(f"  All 3 agree (top 20%): {all_three.sum()/total_cells*100:.1f}% of landscape")
 print(f"  At least 2 agree:       {any_two.sum()/total_cells*100:.1f}% of landscape")
 print(f"  Unique to 1 strategy:   {(only_one.sum()-any_two.sum())/total_cells*100:.1f}% of landscape")
@@ -1064,20 +1064,20 @@ class BirdCensusAnalyzer:
         lines.append("=" * 60)
         lines.append("     BIRD CENSUS ANALYZER — FINAL REPORT")
         lines.append("=" * 60)
-        lines.append(f"\\n--- POPULATION ---")
+        lines.append(f"\n--- POPULATION ---")
         lines.append(f"Total estimated abundance: {pop_results['total']:.0f}")
         lines.append(f"Detection probability: {pop_results['detection_prob']:.2f}")
         lines.append(f"Sites surveyed: {len(pop_results['abundance'])}")
-        lines.append(f"\\n--- HABITAT MODEL ---")
+        lines.append(f"\n--- HABITAT MODEL ---")
         lines.append(f"R-squared: {hab_results['r_squared']:.3f}")
-        lines.append(f"\\n--- DIVERSITY ---")
+        lines.append(f"\n--- DIVERSITY ---")
         lines.append(f"Mean richness: {div_results['richness'].mean():.1f}")
         lines.append(f"Mean Shannon H': {div_results['shannon'].mean():.2f}")
         lines.append(f"Mean Simpson (1-D): {div_results['simpson'].mean():.2f}")
-        lines.append(f"\\n--- PRIORITY ---")
+        lines.append(f"\n--- PRIORITY ---")
         for name, scores in priority_results.items():
             lines.append(f"{name}: mean={scores.mean():.3f}, max={scores.max():.3f}")
-        return "\\n".join(lines)
+        return "\n".join(lines)
 
 
 # ============================================================

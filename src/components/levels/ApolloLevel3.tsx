@@ -97,10 +97,10 @@ while time < max_time:
 
     # Check for Moon crash or Earth return
     if d_moon < 1_737_000:  # Moon radius
-        print(f"\\\n*** LUNAR IMPACT at t = {time/3600:.1f} hours ***")
+        print(f"\\n*** LUNAR IMPACT at t = {time/3600:.1f} hours ***")
         break
     if d_earth < 6_371_000 and time > 3600:  # Earth radius
-        print(f"\\\n*** EARTH RETURN at t = {time/3600:.1f} hours ***")
+        print(f"\\n*** EARTH RETURN at t = {time/3600:.1f} hours ***")
         break
 
     # Log every hour
@@ -111,18 +111,18 @@ while time < max_time:
         log_speed.append(speed)
 
 # Print trajectory summary
-print(f"\\\n=== Trajectory Summary ===")
+print(f"\\n=== Trajectory Summary ===")
 print(f"{'Time (hr)':>10} {'Earth (km)':>14} {'Moon (km)':>14} {'Speed (m/s)':>12}")
 print("-" * 52)
 step = max(1, len(log_time) // 15)
 for i in range(0, len(log_time), step):
     print(f"{log_time[i]:>9.1f} {log_dist_earth[i]:>13,.0f} {log_dist_moon[i]:>13,.0f} {log_speed[i]:>11,.0f}")
 
-print(f"\\\nClosest approach to Moon: {closest_moon/1000:,.0f} km at t = {closest_moon_time/3600:.1f} hours")
+print(f"\\nClosest approach to Moon: {closest_moon/1000:,.0f} km at t = {closest_moon_time/3600:.1f} hours")
 
 # Compare with simple two-body prediction
 v_2body_at_moon = np.sqrt(GM_e * (2/D_em - 2/(r0[0] + D_em)))
-print(f"\\\nTwo-body predicted speed at Moon distance: {v_2body_at_moon:.0f} m/s")
+print(f"\\nTwo-body predicted speed at Moon distance: {v_2body_at_moon:.0f} m/s")
 print(f"Three-body actual speed near Moon: {log_speed[-1]:.0f} m/s")
 print(f"Difference due to Moon's gravity: {abs(log_speed[-1] - v_2body_at_moon):.0f} m/s")`,
       challenge: 'Adjust the TLI velocity to achieve a free-return trajectory — one where the spacecraft swings around the Moon and returns to Earth without any burns. Try boost factors between 1.38 and 1.42. The Apollo 13 free-return trajectory saved the crew\'s lives.',
@@ -222,7 +222,7 @@ class Quaternion:
         return f"Q({self.w:.4f}, {self.x:.4f}, {self.y:.4f}, {self.z:.4f})"
 
 # === Apollo Attitude Control Simulation ===
-print("=== Quaternion-Based Attitude Control ===\\\n")
+print("=== Quaternion-Based Attitude Control ===\\n")
 
 # Initial orientation: spacecraft pointing toward Moon
 current = Quaternion(1, 0, 0, 0)  # identity = reference orientation
@@ -237,7 +237,7 @@ print(f"Rotation needed:     {current.angle_to(target):.1f} degrees")
 rotation_rate_dps = 2.0  # degrees per second (typical RCS rate)
 dt = 1.0  # 1-second time steps
 
-print(f"\\\n=== Rotation Manoeuvre (pitch 180 deg) ===")
+print(f"\\n=== Rotation Manoeuvre (pitch 180 deg) ===")
 print(f"{'Time (s)':>8} {'Roll':>8} {'Pitch':>8} {'Yaw':>8} {'Error':>8}")
 print("-" * 42)
 
@@ -255,10 +255,10 @@ while orientation.angle_to(target) > 1.0:
 
 roll, pitch, yaw = orientation.to_euler_deg()
 print(f"{time_s:>7.0f} {roll:>7.1f} {pitch:>7.1f} {yaw:>7.1f} {orientation.angle_to(target):>7.1f}°")
-print(f"\\\nManoeuvre complete in {time_s:.0f} seconds")
+print(f"\\nManoeuvre complete in {time_s:.0f} seconds")
 
 # Demonstrate gimbal lock problem with Euler angles
-print("\\\n=== Gimbal Lock Demonstration ===")
+print("\\n=== Gimbal Lock Demonstration ===")
 print("Rotating to 90° pitch (gimbal lock zone):")
 for pitch_deg in [0, 30, 60, 85, 89, 89.9]:
     q = Quaternion.from_axis_angle([0, 1, 0], pitch_deg)
@@ -268,7 +268,7 @@ for pitch_deg in [0, 30, 60, 85, 89, 89.9]:
     r, p, y = result.to_euler_deg()
     print(f"  Pitch={pitch_deg:>5.1f}° + 5° roll -> Euler: ({r:>7.1f}, {p:>7.1f}, {y:>7.1f})")
 
-print("\\\nNear 90° pitch, small roll causes large yaw changes in Euler angles")
+print("\\nNear 90° pitch, small roll causes large yaw changes in Euler angles")
 print("Quaternions handle this smoothly — no singularity!")`,
       challenge: 'Implement the "barbecue roll" manoeuvre: a slow continuous rotation around the spacecraft\'s long axis (x-axis) at 1 revolution per hour. Track the orientation for 2 hours and show that the quaternion representation stays stable while Euler angles wrap around. This rotation was used on Apollo to distribute solar heating evenly.',
       successHint: 'Quaternions are used in every modern 3D application: video games, robotics, satellite control, virtual reality, and drone navigation. Understanding quaternion rotation is a crucial skill for anyone working with 3D orientation — and you just built a working implementation from scratch.',
@@ -300,7 +300,7 @@ ROUND_TRIP_DELAY = 2 * ONE_WAY_DELAY
 print("=== Communication Delay Analysis ===")
 print(f"Earth-Moon distance: {MOON_DISTANCE:,} km")
 print(f"One-way delay: {ONE_WAY_DELAY:.2f} seconds")
-print(f"Round-trip delay: {ROUND_TRIP_DELAY:.2f} seconds\\\n")
+print(f"Round-trip delay: {ROUND_TRIP_DELAY:.2f} seconds\\n")
 
 # Simulate descent control with and without delay
 g_moon = 1.62  # m/s^2
@@ -391,7 +391,7 @@ for t, a, v, th in log_no_delay:
     print(f"{t:>7.1f} {a:>9.1f} {v:>9.2f} {th:>9.2f}")
 
 # Run with 1.28s delay
-print("\\\n=== Descent Control: 1.28s One-Way Delay ===")
+print("\\n=== Descent Control: 1.28s One-Way Delay ===")
 log_delayed = simulate_descent(ONE_WAY_DELAY)
 print(f"{'Time (s)':>8} {'Alt (m)':>10} {'V (m/s)':>10} {'Throttle':>10}")
 print("-" * 40)
@@ -401,13 +401,13 @@ for t, a, v, th in log_delayed:
 # Compare landing velocities
 v_final_no_delay = log_no_delay[-1][2]
 v_final_delayed = log_delayed[-1][2]
-print(f"\\\n=== Comparison ===")
+print(f"\\n=== Comparison ===")
 print(f"Landing velocity (no delay):  {v_final_no_delay:.2f} m/s")
 print(f"Landing velocity (1.28s delay): {v_final_delayed:.2f} m/s")
 print(f"Safe landing threshold: < 3.0 m/s vertical")
 
 # Delay comparison across solar system
-print(f"\\\n=== Communication Delays Across the Solar System ===")
+print(f"\\n=== Communication Delays Across the Solar System ===")
 targets = [
     ("Moon", 384_400),
     ("Mars (closest)", 55_700_000),
@@ -483,7 +483,7 @@ for angle in [0, 30, 60, 90, 120, 150, 180]:
     print(f"{angle:>8}° {q_solar:>11.0f} {t_eq:>10.1f} K {t_eq - 273.15:>9.1f}°C")
 
 # Simulate barbecue roll vs fixed orientation
-print("\\\n=== Thermal Simulation: Fixed vs Barbecue Roll ===")
+print("\\n=== Thermal Simulation: Fixed vs Barbecue Roll ===")
 dt = 60.0  # seconds
 duration = 4 * 3600  # 4 hours
 thermal_mass = sc.mass * sc.specific_heat  # J/K
@@ -528,7 +528,7 @@ for i in range(len(fixed_log)):
     print(f"{t_min:>9.0f} {t_f:>9.1f} {t_b:>12.1f} {abs(t_f - t_b):>10.1f}")
 
 # Shadow passage (entering Moon's shadow)
-print("\\\n=== Lunar Shadow Passage ===")
+print("\\n=== Lunar Shadow Passage ===")
 t_shadow = t_bbq + 273.15  # start from BBQ equilibrium
 shadow_log = []
 for step in range(int(1800 / dt)):  # 30 minutes in shadow
@@ -649,14 +649,14 @@ for fm in sorted(failures, key=lambda f: f.rpn, reverse=True):
 
 # Risk summary
 rpns = [f.rpn for f in failures]
-print(f"\\\n=== Risk Summary ===")
+print(f"\\n=== Risk Summary ===")
 print(f"Total failure modes analysed: {len(failures)}")
 print(f"Average RPN: {np.mean(rpns):.0f}")
 print(f"Max RPN: {max(rpns)} ({[f.failure for f in failures if f.rpn == max(rpns)][0]})")
 print(f"Modes with RPN > 100: {sum(1 for r in rpns if r > 100)}")
 
 # Categorise by risk level
-print(f"\\\n=== Risk Categories ===")
+print(f"\\n=== Risk Categories ===")
 for label, lo, hi in [("CRITICAL (RPN>200)", 200, 1001),
                        ("HIGH (100-200)", 100, 200),
                        ("MEDIUM (50-100)", 50, 100),
@@ -668,7 +668,7 @@ for label, lo, hi in [("CRITICAL (RPN>200)", 200, 1001),
         print(f"    - {m}")
 
 # Impact of mitigations
-print(f"\\\n=== Mitigation Impact (top 5 risks) ===")
+print(f"\\n=== Mitigation Impact (top 5 risks) ===")
 top5 = sorted(failures, key=lambda f: f.rpn, reverse=True)[:5]
 for fm in top5:
     mitigated = fm.mitigated_rpn(o_reduction=2, d_reduction=2)

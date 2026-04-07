@@ -68,15 +68,15 @@ print("Parent A genotype:")
 for i, (a1, a2) in enumerate(parent_a):
     print(f"  Gene {i+1}: {a1}/{a2}")
 
-print(f"\\\nClone matches parent: {sum(c == p for c, p in zip(clone, parent_a))}/10 genes")
+print(f"\\nClone matches parent: {sum(c == p for c, p in zip(clone, parent_a))}/10 genes")
 
-print("\\\n--- 5 seeds from Parent A x Parent B ---")
+print("\\n--- 5 seeds from Parent A x Parent B ---")
 for s in range(5):
     seed = make_seed(parent_a, parent_b)
     matches = sum(sd == pa for sd, pa in zip(seed, parent_a))
     print(f"  Seed {s+1}: {matches}/10 genes match parent A")
 
-print("\\\nClones are always 10/10. Seeds vary every time.")
+print("\\nClones are always 10/10. Seeds vary every time.")
 print("This is why the Bodhi Tree cutting preserved the original.")`,
       challenge: 'Model 1000 seeds and plot a histogram of how many genes each seed shares with Parent A. What distribution do you get? (Hint: each gene has a 50% chance of matching.)',
       successHint: 'Sexual reproduction creates variation — the raw material for natural selection. Asexual reproduction preserves what works. Both strategies have advantages, which is why many plants use both.',
@@ -237,19 +237,19 @@ for chr_name, genes in parent_genome.items():
     alleles = [f"{a}/{b}" for a, b in genes]
     print(f"  {chr_name}: {', '.join(alleles)}")
 
-print("\\\n--- MITOSIS (clone) ---")
+print("\\n--- MITOSIS (clone) ---")
 daughter = mitosis(parent_genome)
 matches = sum(d == p for chr_d, chr_p in zip(daughter.values(), parent_genome.values())
               for d, p in zip(chr_d, chr_p))
 print(f"  Daughter matches parent: {matches}/10 gene pairs")
 
-print("\\\n--- MEIOSIS (5 gametes) ---")
+print("\\n--- MEIOSIS (5 gametes) ---")
 for i in range(5):
     gamete = meiosis(parent_genome)
     alleles = [a for genes in gamete.values() for a in genes]
     print(f"  Gamete {i+1}: {alleles}")
 
-print("\\\nMitosis: always identical. Meiosis: always different.")
+print("\\nMitosis: always identical. Meiosis: always different.")
 print("This is why cuttings clone and seeds diversify.")`,
       challenge: 'Simulate two parents each producing gametes via meiosis, then combine two gametes to make a seed. Repeat 100 times. How much variation do you see among the 100 seeds?',
       successHint: 'Mitosis and meiosis are the two fundamental modes of cell division. Mitosis preserves — it is the engine of cloning. Meiosis diversifies — it is the engine of evolution. Plants use both, which is why they can both clone and evolve.',

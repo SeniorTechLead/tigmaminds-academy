@@ -99,7 +99,7 @@ ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 # Plot 3: Why 3/4? Comparing exponents
 ax = axes[1, 0]
 exponents = [0.5, 0.67, 0.75, 0.85, 1.0]
-exp_labels = ['Surface area\\\n(2/3)', 'Geometric\\\n(2/3)', "Kleiber's\\\n(3/4)", 'Empirical\\\n(0.85)', 'Linear\\\n(1.0)']
+exp_labels = ['Surface area\\n(2/3)', 'Geometric\\n(2/3)', "Kleiber's\\n(3/4)", 'Empirical\\n(0.85)', 'Linear\\n(1.0)']
 exp_colors = ['#ef4444', '#f59e0b', '#22c55e', '#3b82f6', '#6b7280']
 
 # Compare: 5000 kg elephant vs 3 kg hare
@@ -705,7 +705,7 @@ ax2.tick_params(colors='gray')
 
 # Plot 5: Food requirement comparison
 ax = axes[1, 1]
-food_categories = ['Resting\\\n(per day)', 'Active\\\n(per day)', 'Per year', 'Fasting\\\ntolerance']
+food_categories = ['Resting\\n(per day)', 'Active\\n(per day)', 'Per year', 'Fasting\\ntolerance']
 hare_food = [160, 400, 365 * 280, 3]  # kcal, kcal, kcal, days
 tortoise_food = [33, 60, 365 * 46, 180]  # kcal, kcal, kcal, days
 
@@ -828,7 +828,7 @@ ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
 # Plot 2: Dome vs Flat plate
 ax = axes[0, 1]
-comparison = ['Dome\\\n(apex)', 'Dome\\\n(45°)', 'Flat\\\nplate']
+comparison = ['Dome\\n(apex)', 'Dome\\n(45°)', 'Flat\\nplate']
 stresses = [
     P / (2 * np.pi * R * t) / 1e6,
     sigma_meridional[50] / 1e6,

@@ -448,7 +448,7 @@ ax1.set_facecolor('#111827')
 ax1.plot(demand, price, color='#3b82f6', linewidth=2, label='Demand')
 ax1.plot(supply, price, color='#ef4444', linewidth=2, label='Supply')
 ax1.plot(eq_qty, eq_price, 'o', color='#f59e0b', markersize=12, zorder=5, label=f'Equilibrium')
-ax1.annotate(f'Price: {eq_price:.0f} salt blocks\\\nQty: {eq_qty:.0f} bolts',
+ax1.annotate(f'Price: {eq_price:.0f} salt blocks\\nQty: {eq_qty:.0f} bolts',
             xy=(eq_qty, eq_price), xytext=(eq_qty+20, eq_price+5),
             color='#f59e0b', fontsize=10, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
@@ -522,10 +522,10 @@ trade_volume = [0.5, 1, 2, 5, 15, 50, 150, 500, 4000, 8000, 18000, 22000]
 
 # Key events
 events = [
-    (1498, 'Vasco da Gama\\nreaches India', 0.4),
-    (1869, 'Suez Canal\\nopens', 12),
-    (1956, 'Container\\nshipping invented', 120),
-    (1995, 'WTO\\nestablished', 5000),
+    (1498, 'Vasco da Gama\nreaches India', 0.4),
+    (1869, 'Suez Canal\nopens', 12),
+    (1956, 'Container\nshipping invented', 120),
+    (1995, 'WTO\nestablished', 5000),
 ]
 
 fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 8))
@@ -561,7 +561,7 @@ for y1, y2, label in periods:
     i1 = years.index(y1)
     i2 = years.index(y2)
     growth = (trade_volume[i2] / trade_volume[i1]) ** (1 / (y2 - y1)) - 1
-    ax2.annotate(f'{label}\\\n{growth*100:.1f}%/yr',
+    ax2.annotate(f'{label}\\n{growth*100:.1f}%/yr',
                 xy=((y1+y2)/2, np.sqrt(trade_volume[i1]*trade_volume[i2])),
                 color='#e5e7eb', fontsize=8, ha='center',
                 bbox=dict(boxstyle='round', facecolor='#1f2937', edgecolor='#4b5563'))

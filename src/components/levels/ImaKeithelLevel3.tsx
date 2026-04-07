@@ -97,14 +97,14 @@ for i, name1 in enumerate(strat_names):
         total_scores[name2] += score2
 
 # Display results
-print("=== Ima Keithel Pricing Game Tournament ===\\\n")
+print("=== Ima Keithel Pricing Game Tournament ===\\n")
 print(f"{'Matchup':<40} {'Score 1':>8} {'Score 2':>8} {'Winner'}")
 print("-" * 65)
 for (n1, n2), (s1, s2) in sorted(results.items()):
     winner = n1 if s1 > s2 else n2 if s2 > s1 else 'Tie'
     print(f"{n1} vs {n2:<20} {s1:>8} {s2:>8} {winner}")
 
-print("\\\n--- Total Scores ---")
+print("\\n--- Total Scores ---")
 for name, score in sorted(total_scores.items(), key=lambda x: -x[1]):
     print(f"  {name:<20}: {score:>6} points")
 
@@ -122,7 +122,7 @@ ax.grid(True, alpha=0.2, color='white', axis='y')
 plt.tight_layout()
 plt.savefig('game_theory.png', dpi=100, bbox_inches='tight', facecolor='#1f2937')
 plt.show()
-print(f"\\\nWinner: {max(total_scores, key=total_scores.get)} — Tit-for-Tat often wins in repeated games!")`,
+print(f"\\nWinner: {max(total_scores, key=total_scores.get)} — Tit-for-Tat often wins in repeated games!")`,
       challenge: 'Add a "Forgiving Tit-for-Tat" strategy that cooperates after the opponent defects once (forgives a single defection). Does it outperform regular Tit-for-Tat?',
       successHint: 'Game theory explains strategic behaviour in markets, politics, biology, and warfare. Tit-for-Tat\'s success in tournaments showed that simple, reciprocal strategies can outperform complex ones.',
     },
@@ -298,12 +298,12 @@ plt.tight_layout()
 plt.savefig('auctions.png', dpi=100, bbox_inches='tight', facecolor='#1f2937')
 plt.show()
 
-print("=== Revenue Equivalence Verification ===\\\n")
+print("=== Revenue Equivalence Verification ===\\n")
 print(f"{'Auction Type':<15} {'Mean Rev':>9} {'Std Dev':>8} {'Median':>8}")
 print("-" * 42)
 for name, revs in revenues.items():
     print(f"{name:<15} {np.mean(revs):>8.2f}₹ {np.std(revs):>7.2f} {np.median(revs):>7.2f}")
-print(f"\\\nRevenue Equivalence: all means within {max(means)-min(means):.2f}₹ of each other!")
+print(f"\\nRevenue Equivalence: all means within {max(means)-min(means):.2f}₹ of each other!")
 print("The theorem holds — auction format barely affects average revenue.")`,
       challenge: 'What if one bidder has inside information (knows others\' values)? Simulate an auction where bidder 1 can see bidder 2\'s value. How much extra profit does the informed bidder earn?',
       successHint: 'Auction theory won the 2020 Nobel Prize in Economics (Milgrom & Wilson). You just verified the Revenue Equivalence Theorem — one of the most elegant results in economic theory.',
@@ -367,21 +367,21 @@ rhs = a + d
 P_eq = np.linalg.solve(A, rhs)
 Q_eq = -d + e * P_eq
 
-print("=== General Equilibrium at Ima Keithel ===\\\n")
+print("=== General Equilibrium at Ima Keithel ===\\n")
 print(f"{'Good':<12} {'Price (₹)':>9} {'Quantity':>9} {'Revenue':>9}")
 print("-" * 42)
 for i in range(n):
     print(f"{goods[i]:<12} {P_eq[i]:>8.1f} {Q_eq[i]:>8.0f}kg {P_eq[i]*Q_eq[i]:>8.0f}₹")
 
 # Shock: tomato supply drops 30%
-print("\\\n--- Supply Shock: Tomato supply drops 30% ---")
+print("\\n--- Supply Shock: Tomato supply drops 30% ---")
 d_shocked = d.copy()
 d_shocked[0] = d[0] * 1.3  # higher intercept = less supply
 rhs_shocked = a + d_shocked
 P_new = np.linalg.solve(A, rhs_shocked)
 Q_new = -d_shocked + e * P_new
 
-print(f"\\\n{'Good':<12} {'Old P':>7} {'New P':>7} {'Change':>8} {'Reason'}")
+print(f"\\n{'Good':<12} {'Old P':>7} {'New P':>7} {'Change':>8} {'Reason'}")
 print("-" * 50)
 for i in range(n):
     change = P_new[i] - P_eq[i]
@@ -511,7 +511,7 @@ plt.show()
 print("Final state:")
 for name, data in results.items():
     print(f"  {name}: {data['n_active'][-1]} sellers, avg quality {data['avg_quality'][-1]:.1f}")
-print("\\\nWithout information: quality collapses (lemons problem)")
+print("\\nWithout information: quality collapses (lemons problem)")
 print("With reputation: quality stabilises near full-information level")`,
       challenge: 'Add a "certification" system where sellers can pay 50₹ to get their quality verified. Only sellers with quality > 6 find it worthwhile. How does certification affect the market?',
       successHint: 'Information asymmetry is a market failure that explains insurance markets, used car markets, and why brands exist. Akerlof, Spence, and Stiglitz won the 2001 Nobel Prize for this work.',

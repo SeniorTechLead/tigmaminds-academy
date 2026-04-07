@@ -54,7 +54,7 @@ for ion in ions:
 
 # Actual membrane potential
 V_membrane = -150  # mV (typical mangrove root cell)
-print(f"\\nActual membrane potential: {V_membrane} mV")
+print(f"\nActual membrane potential: {V_membrane} mV")
 print()
 
 # Driving force for each ion
@@ -420,7 +420,7 @@ for name, r in layers:
     salt_after = 35.0 * remaining_fraction
     print(f"{name:<20} {r*100:>8.0f}% {salt_after:>14.2f} {cumulative*100:>12.1f}%")
 
-print(f"\\nFinal salt in xylem sap: {35.0 * remaining_fraction:.2f} g/L")
+print(f"\nFinal salt in xylem sap: {35.0 * remaining_fraction:.2f} g/L")
 print(f"Total rejection: {(1-remaining_fraction)*100:.1f}%")`,
       challenge: 'Add a sixth layer (aquaporin gate) with 50% rejection. How close to 100% can you get? Then try making one layer fail (set rejection to 0). How does the cascade handle partial failure? This redundancy is why mangroves are so resilient.',
       successHint: 'Cascade filtration is used in uranium enrichment, petroleum refining, water treatment, and pharmaceutical purification. The mathematical principle is identical: moderate rejection per stage, multiplied across many stages, achieves extreme purity with less energy than a single extreme stage.',

@@ -62,7 +62,7 @@ salt_kg, ec = salt_accumulation(years, water, salt_conc, leach)
 print("=== Salt Accumulation in Mesopotamian Fields ===")
 print(f"Irrigation water: {water:,} m³/ha/year at {salt_conc} g/L")
 print(f"Leaching fraction: {leach*100:.0f}% (very poor drainage)")
-print(f"\\\n{'Year':>6} {'Salt (tonnes/ha)':>18} {'EC (dS/m)':>12} {'Status'}")
+print(f"\\n{'Year':>6} {'Salt (tonnes/ha)':>18} {'EC (dS/m)':>12} {'Status'}")
 print("-" * 55)
 
 thresholds = [
@@ -84,7 +84,7 @@ for y in [0, 50, 100, 200, 500, 800, 1000, 1500, 2000]:
     print(f"{y:>6} {salt_kg[y]/1000:>16.1f} {ec[y]:>12.1f}   {status}")
 
 # Demonstrate the effect of leaching fraction
-print(f"\\\n=== What If Drainage Were Better? ===")
+print(f"\\n=== What If Drainage Were Better? ===")
 print(f"{'Leaching %':>12} {'Salt after 500 yr (t/ha)':>25} {'EC':>8}")
 print("-" * 48)
 
@@ -93,7 +93,7 @@ for lf in [0.0, 0.05, 0.10, 0.20, 0.30, 0.50]:
     label = " ← Mesopotamia" if lf == 0.05 else ""
     print(f"{lf*100:>10.0f}% {s[500]/1000:>23.1f} {e[500]:>8.1f}{label}")
 
-print(f"\\\nWith 30% leaching, the soil stays usable after 500 years.")
+print(f"\\nWith 30% leaching, the soil stays usable after 500 years.")
 print(f"Mesopotamia's flat terrain gave only ~5% leaching.")
 print(f"This single factor — drainage — determined the fate of a civilization.")`,
       challenge: 'Modify the model to include a "fallow period" — every 5th year, no irrigation, and winter rains leach 10% of accumulated salt. Does fallowing save the soil, or merely delay the collapse? Mesopotamian records show they did practice fallowing — was it enough?',
@@ -150,7 +150,7 @@ def water_balance(years, precip_mm, irrigation_mm, et_rate,
     return results
 
 # === Mesopotamian water balance ===
-print("=== Water Balance: Mesopotamian Irrigated Field ===\\\n")
+print("=== Water Balance: Mesopotamian Irrigated Field ===\\n")
 
 results = water_balance(
     years=500,
@@ -171,22 +171,22 @@ print(f"{'Evapotranspiration':<25} {r['et']:>10.0f} {r['et']/r['input']*100:>9.1
 print(f"{'Drainage':<25} {r['drain']:>10.0f} {r['drain']/r['input']*100:>9.1f}%")
 print(f"{'Storage change':<25} {r['ds']:>10.0f} {r['ds']/r['input']*100:>9.1f}%")
 
-print(f"\\\n{'Year':>6} {'Salt in (t/ha)':>15} {'Salt out':>10} {'Cumulative':>12}")
+print(f"\\n{'Year':>6} {'Salt in (t/ha)':>15} {'Salt out':>10} {'Cumulative':>12}")
 print("-" * 46)
 for y_idx in [0, 49, 99, 199, 299, 499]:
     r = results[y_idx]
     print(f"{r['year']:>6} {r['salt_in']:>13.1f} {r['salt_out']:>10.1f} {r['cum_salt']/1000:>10.1f} t")
 
 # === Compare natural vs irrigated salt transport ===
-print(f"\\\n=== Where Does the Salt Go? ===")
-print(f"\\\nNatural cycle (no irrigation):")
+print(f"\\n=== Where Does the Salt Go? ===")
+print(f"\\nNatural cycle (no irrigation):")
 river_flow_km3 = 30      # Euphrates annual flow
 salt_to_sea = river_flow_km3 * 1e9 * 4 / 1e9  # million tonnes
 print(f"  River flow: {river_flow_km3} km³/year")
 print(f"  Salt delivered to Persian Gulf: {salt_to_sea:.0f} million tonnes/year")
 print(f"  Soil salinity: STABLE (salt passes through)")
 
-print(f"\\\nIrrigated cycle (Mesopotamia):")
+print(f"\\nIrrigated cycle (Mesopotamia):")
 irrigated_ha = 2_000_000
 diversion_pct = 0.6
 salt_diverted = salt_to_sea * diversion_pct
@@ -197,7 +197,7 @@ print(f"  Salt reaching the sea: {salt_to_sea - salt_diverted:.0f} million tonne
 print(f"  Soil salinity: RISING — {salt_diverted:.0f}M tonnes/year with no exit")
 
 # === Modern parallel: Aral Sea ===
-print(f"\\\n=== Modern Parallel: The Aral Sea ===")
+print(f"\\n=== Modern Parallel: The Aral Sea ===")
 aral_data = [
     (1960, 68000, 1090, "Pre-diversion — 4th largest lake"),
     (1970, 60000, 1000, "Soviet cotton irrigation begins"),
@@ -205,12 +205,12 @@ aral_data = [
     (2007, 17160, 100,  "South Aral nearly gone"),
     (2020, 8600,  50,   "Toxic salt flats, dust storms"),
 ]
-print(f"\\\n{'Year':>6} {'Area (km²)':>12} {'Volume (km³)':>13} {'Status'}")
+print(f"\\n{'Year':>6} {'Area (km²)':>12} {'Volume (km³)':>13} {'Status'}")
 print("-" * 60)
 for yr, area, vol, status in aral_data:
     print(f"{yr:>6} {area:>12,} {vol:>13,} {status}")
 
-print(f"\\\nSame physics, same result — 4,000 years apart.")
+print(f"\\nSame physics, same result — 4,000 years apart.")
 print(f"The water cycle does not forgive having its drain plugged.")`,
       challenge: 'Add a "modern drainage system" to the model — tile drains that remove 30% of water below the root zone. How many years can the field sustain crops? What happens to the drainage water (hint: it is very salty — this is the "drain water disposal" problem that California faces today)?',
       successHint: 'You traced the full water cycle from mountain to field to atmosphere and showed exactly where it breaks. The water balance equation is used by every irrigation engineer on Earth — it is the fundamental tool for preventing salinisation. Mesopotamia could not do this math; we can, yet the Aral Sea happened anyway.',
@@ -261,7 +261,7 @@ crops = [
     ("Sugar beet", 7.0,  5.9),
 ]
 
-print("=== FAO Salinity-Yield Curves ===\\\n")
+print("=== FAO Salinity-Yield Curves ===\\n")
 print(f"{'Crop':<12}", end="")
 for ec in range(0, 21, 2):
     print(f" {ec:>5} dS/m", end="")
@@ -277,8 +277,8 @@ for name, thresh, slope in crops:
     print()
 
 # === Mesopotamian agricultural history ===
-print(f"\\\n=== Mesopotamian Agricultural Collapse ===")
-print(f"Simulating rising salinity over 2,000 years\\\n")
+print(f"\\n=== Mesopotamian Agricultural Collapse ===")
+print(f"Simulating rising salinity over 2,000 years\\n")
 
 # Salinity rises roughly 0.005 dS/m per year in poorly drained land
 years = np.arange(-3500, -1500, 50)  # 3500 BCE to 1500 BCE
@@ -295,7 +295,7 @@ for i, yr in enumerate(years):
     print(f"{abs(yr):>10.0f} {ec:>8.1f} {w:>8.1f}% {b:>9.1f}% {best:>10}")
 
 # === The critical transition ===
-print(f"\\\n=== Key Transitions ===")
+print(f"\\n=== Key Transitions ===")
 
 # Find when wheat drops below barley
 for ec_test in np.arange(0, 20, 0.1):
@@ -321,7 +321,7 @@ for ec_test in np.arange(0, 30, 0.1):
         break
 
 # === Caloric consequences ===
-print(f"\\\n=== Caloric Impact on a City ===")
+print(f"\\n=== Caloric Impact on a City ===")
 city_pop = 50000
 cal_per_person = 2000
 ha_available = 10000
@@ -409,7 +409,7 @@ res = irrigation_comparison(crop_need, salt, years)
 
 print("=== Irrigation Method Comparison ===")
 print(f"Crop water requirement: {crop_need:,} m³/ha/year")
-print(f"Water salt content: {salt} g/L\\\n")
+print(f"Water salt content: {salt} g/L\\n")
 
 print(f"{'Method':<25} {'Applied':>8} {'Evap':>8} {'Drain':>8} "
       f"{'Eff %':>6} {'Salt/yr':>9}")
@@ -422,7 +422,7 @@ for name, r in res.items():
           f"{r['salt_per_yr']:>8,.0f}")
 
 # Salt over time for each method
-print(f"\\\n=== Soil Salinity Over Time (EC in dS/m) ===")
+print(f"\\n=== Soil Salinity Over Time (EC in dS/m) ===")
 print(f"{'Year':>6}", end="")
 for name in res:
     short = name[:15]
@@ -438,10 +438,10 @@ for y in [0, 25, 50, 100, 200, 300, 500]:
         print(f" {ec:>13.1f}{flag}", end="")
     print()
 
-print(f"\\\n(!) = exceeds barley salt tolerance (8 dS/m)")
+print(f"\\n(!) = exceeds barley salt tolerance (8 dS/m)")
 
 # Years until wheat fails, barley fails
-print(f"\\\n=== Years Until Crop Failure ===")
+print(f"\\n=== Years Until Crop Failure ===")
 print(f"{'Method':<25} {'Wheat fails':>12} {'Barley fails':>13}")
 print("-" * 52)
 
@@ -456,14 +456,14 @@ for name, r in res.items():
     print(f"{name:<25} {wheat_fail:>12} {barley_fail:>13}")
 
 # Water cost comparison
-print(f"\\\n=== Water Cost: Litres Wasted Per kg of Grain ===")
+print(f"\\n=== Water Cost: Litres Wasted Per kg of Grain ===")
 barley_yield = 1500  # kg/ha at full health
 for name, r in res.items():
     wasted = r['evap']  # m³ wasted per ha
     litres_wasted = wasted * 1000 / barley_yield
     print(f"  {name:<25} {litres_wasted:>6,.0f} L wasted per kg grain")
 
-print(f"\\\nMesopotamia used ~3× more water than drip irrigation would.")
+print(f"\\nMesopotamia used ~3× more water than drip irrigation would.")
 print(f"That extra water carried the salt that ended the civilization.")`,
       challenge: 'Add a "subsurface drip" method with 95% efficiency and 40% leaching (drainage pipes directly below drip lines). How many centuries can it sustain crops? Then calculate the cost: if drip infrastructure costs $2,000/ha to install and lasts 20 years, what is the cost per tonne of grain saved from salinisation?',
       successHint: 'You compared technologies separated by 5,000 years and showed that the physics is identical — only the engineering changed. Drip irrigation does not "solve" salinisation; it slows it by a factor of 10-20. The salt still has to go somewhere. This is why modern irrigation always includes drainage planning — something Mesopotamia could not do at scale.',
@@ -511,7 +511,7 @@ historical = [
 ]
 
 print("=== Mesopotamian Agricultural Collapse ===")
-print(f"Data from cuneiform temple records, 3500-1500 BCE\\\n")
+print(f"Data from cuneiform temple records, 3500-1500 BCE\\n")
 
 print(f"{'Year BCE':>10} {'Yield kg/ha':>12} {'Dominant crop':<15} {'Notes'}")
 print("-" * 70)
@@ -532,13 +532,13 @@ log_ratio = np.log(yields_data / Y0)
 # Linear regression: log(Y/Y0) = -lambda * t
 lambda_fit = -np.sum(log_ratio * from_t0) / np.sum(from_t0**2)
 
-print(f"\\\n=== Exponential Decay Model ===")
+print(f"\\n=== Exponential Decay Model ===")
 print(f"Y(t) = {Y0} × exp(-{lambda_fit:.6f} × t)")
 print(f"Decay rate: {lambda_fit:.6f} per year")
 print(f"Half-life: {np.log(2)/lambda_fit:.0f} years")
 
 # Compare model vs data
-print(f"\\\n{'Year BCE':>10} {'Actual':>8} {'Model':>8} {'Error':>8}")
+print(f"\\n{'Year BCE':>10} {'Actual':>8} {'Model':>8} {'Error':>8}")
 print("-" * 38)
 for yr, actual, _, _ in historical:
     t = yr - t0
@@ -547,8 +547,8 @@ for yr, actual, _, _ in historical:
     print(f"{abs(yr):>10} {actual:>8} {predicted:>8.0f} {error:>+7.0f}")
 
 # Population carrying capacity
-print(f"\\\n=== Population Consequences ===")
-print(f"Assumptions: 250 kg grain/person/year, 0.5 ha farmland/person\\\n")
+print(f"\\n=== Population Consequences ===")
+print(f"Assumptions: 250 kg grain/person/year, 0.5 ha farmland/person\\n")
 
 grain_per_person = 250  # kg/year minimum
 ha_per_person = 0.5
@@ -569,7 +569,7 @@ for yr, yld, _, _ in historical:
     print(f"{abs(yr):>10} {yld:>8,} {surplus:>+11.0f} {status}")
 
 # Political consequences
-print(f"\\\n=== Political Consequences ===")
+print(f"\\n=== Political Consequences ===")
 events = [
     (-3500, "Uruk period: surplus feeds world's first cities"),
     (-2900, "Early Dynastic: city-states compete for best farmland"),
@@ -585,7 +585,7 @@ for yr, event in events:
     closest = min(historical, key=lambda h: abs(h[0] - yr))
     print(f"  {abs(yr)} BCE (yield ~{closest[1]} kg/ha): {event}")
 
-print(f"\\\nThe political history of Mesopotamia tracks the salinity curve.")
+print(f"\\nThe political history of Mesopotamia tracks the salinity curve.")
 print(f"Power moved north as southern soils died — chemistry drove geopolitics.")`,
       challenge: 'The model assumes monotonic decline, but real yields fluctuated — good rain years temporarily leached salt, and canal rebuilding helped. Add random recovery events (every 50-100 years, yield recovers 15-20%) and see if the overall trend still leads to collapse. This tests whether the decline was inevitable or could have been reversed.',
       successHint: 'You reconstructed one of history\'s slowest catastrophes from the oldest quantitative data on Earth. The exponential decay model — the same mathematics used for radioactive decay, drug metabolism, and cooling curves — fits cuneiform agricultural records from 5,000 years ago. The physics of degradation is timeless.',
@@ -687,7 +687,7 @@ def calc_salt_rate(r):
     salt_out = applied_m3 * r['leach_frac'] * r['salt_g_per_L'] / 1000
     return (salt_in - salt_out) / 1000  # tonnes/ha/year
 
-print("=== Global Salinisation: Modern Regions vs Mesopotamia ===\\\n")
+print("=== Global Salinisation: Modern Regions vs Mesopotamia ===\\n")
 
 print(f"{'Region':<28} {'Area Mha':>9} {'Salt g/L':>9} {'Eff %':>6} "
       f"{'Salt t/ha/yr':>12}")
@@ -699,7 +699,7 @@ for r in regions:
           f"{r['efficiency']*100:>5.0f}% {rate:>11.1f}")
 
 # Project future salinisation
-print(f"\\\n=== Projected Soil EC (dS/m) Over Next 200 Years ===")
+print(f"\\n=== Projected Soil EC (dS/m) Over Next 200 Years ===")
 print(f"{'Region':<28}", end="")
 for y in [2025, 2050, 2100, 2150, 2225]:
     print(f" {y:>7}", end="")
@@ -722,10 +722,10 @@ for r in regions:
         print(f" {ec:>6.1f}{flag}", end="")
     print()
 
-print(f"\\\n(*) = exceeds barley tolerance — potential collapse zone")
+print(f"\\n(*) = exceeds barley tolerance — potential collapse zone")
 
 # Total global impact
-print(f"\\\n=== Global Scale ===")
+print(f"\\n=== Global Scale ===")
 total_salt = sum(calc_salt_rate(r) * r['area_mha'] * 1e6
                  for r in regions if not r['name'].startswith('Meso'))
 print(f"Total salt deposited on modern farmland: "
@@ -735,7 +735,7 @@ print(f"Total irrigated area at risk: "
       f" million hectares")
 
 # Economic cost
-print(f"\\\n=== Economic Cost ===")
+print(f"\\n=== Economic Cost ===")
 price_per_tonne_grain = 250  # USD
 for r in regions:
     if r['name'].startswith('Meso'):
@@ -754,7 +754,7 @@ for r in regions:
               f" = {cost_b:>4.1f} billion USD/year")
 
 # The verdict
-print(f"\\\n=== The Verdict ===")
+print(f"\\n=== The Verdict ===")
 print(f"Mesopotamia collapsed after ~2,000 years of flood irrigation.")
 print(f"Modern timelines (at current rates):")
 for r in regions:
@@ -773,7 +773,7 @@ for r in regions:
         else:
             print(f"  {r['name']:<28} ALREADY past barley threshold")
 
-print(f"\\\nWe have the cuneiform data. We have the FAO models.")
+print(f"\\nWe have the cuneiform data. We have the FAO models.")
 print(f"The question is not whether we know — it is whether we act.")`,
       challenge: 'Add India (35 million hectares irrigated, Ganges at 0.5 g/L, efficiency 50%) and China (55 million hectares, Yellow River at 1.2 g/L, efficiency 60%) to the comparison. These are the two largest irrigated countries on Earth. How do their timelines compare? What would switching to drip irrigation cost vs the cost of eventual soil loss?',
       successHint: 'You built a global salinisation dashboard comparing modern irrigation with a 5,000-year-old case study. The numbers are sobering: several modern regions are on the same trajectory as Mesopotamia, just earlier on the curve. This is exactly how the FAO and World Bank model irrigation sustainability — same equations, same warnings, same physics.',

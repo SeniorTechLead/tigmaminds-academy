@@ -78,11 +78,11 @@ axes[0,0].legend(fontsize=9)
 axes[0,0].grid(alpha=0.3)
 
 # Pressure gradient
-axes[0,1].barh(['Pressure\\\ngradient\\\n(-∇P)'], [abs(dPdx[0])], color='#ef4444', height=0.4)
+axes[0,1].barh(['Pressure\\ngradient\\n(-∇P)'], [abs(dPdx[0])], color='#ef4444', height=0.4)
 axes[0,1].set_xlabel('Force per unit volume (Pa/m)', fontsize=10)
 axes[0,1].set_title('Pressure Term (-∇P)', fontsize=12)
 axes[0,1].grid(alpha=0.3)
-axes[0,1].text(abs(dPdx[0])/2, 0, 'Drives flow\\\nfrom high to\\\nlow pressure', ha='center',
+axes[0,1].text(abs(dPdx[0])/2, 0, 'Drives flow\\nfrom high to\\nlow pressure', ha='center',
                va='center', fontsize=9, color='white')
 
 # Viscous term
@@ -94,7 +94,7 @@ axes[1,0].grid(alpha=0.3)
 
 # Wind stress
 wind_forces = [0, 0.5, 1.0, 1.44, 2.0]
-labels = ['Calm', 'Breeze', 'Gale', 'Storm\\\n(63 mph)', 'Hurricane']
+labels = ['Calm', 'Breeze', 'Gale', 'Storm\\n(63 mph)', 'Hurricane']
 axes[1,1].bar(labels, wind_forces, color='#f97316', width=0.5)
 axes[1,1].set_ylabel('Wind stress τ (Pa)', fontsize=10)
 axes[1,1].set_title('External Force Term (f)', fontsize=12)

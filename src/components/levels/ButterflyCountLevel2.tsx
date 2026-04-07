@@ -214,7 +214,7 @@ plt.show()
 print("Summary:")
 print(f"  Garden A: mean={np.mean(garden_a):.1f}, SD={np.std(garden_a):.1f}, CV={np.std(garden_a)/np.mean(garden_a)*100:.1f}%")
 print(f"  Garden B: mean={np.mean(garden_b):.1f}, SD={np.std(garden_b):.1f}, CV={np.std(garden_b)/np.mean(garden_b)*100:.1f}%")
-print(f"\\\n68-95-99.7 check for Garden A:")
+print(f"\\n68-95-99.7 check for Garden A:")
 within_1sd = np.mean(np.abs(garden_a - np.mean(garden_a)) < np.std(garden_a)) * 100
 within_2sd = np.mean(np.abs(garden_a - np.mean(garden_a)) < 2*np.std(garden_a)) * 100
 print(f"  Within ±1 SD: {within_1sd:.1f}% (expected 68%)")
@@ -352,7 +352,7 @@ plt.tight_layout()
 plt.show()
 
 print(f"True mean: {true_mean}, True SD: {true_sd}")
-print(f"\\\nRequired sample sizes for 95% CI:")
+print(f"\\nRequired sample sizes for 95% CI:")
 for margin in [0.5, 1, 2, 3]:
     n_req = (1.96 * true_sd / margin) ** 2
     print(f"  ±{margin} butterflies: n = {n_req:.0f} days")`,
@@ -487,7 +487,7 @@ print(f"t-statistic: {t_stat:.2f}")
 print(f"p-value: {p_value:.4f}")
 print(f"Cohen's d (effect size): {cohens_d:.2f}")
 sig = "Yes" if p_value < 0.05 else "No"
-print(f"\\\nStatistically significant at p < 0.05? {sig}")`,
+print(f"\\nStatistically significant at p < 0.05? {sig}")`,
       challenge: 'What if the difference were smaller — say, 13 vs 14 (just 1 butterfly more)? Run the t-test. With n=30, can you detect such a small difference? How many days would you need?',
       successHint: 'Hypothesis testing is the formal method scientists use to separate signal from noise. But it\'s often misunderstood and misused. A p-value is not the probability your hypothesis is true — it\'s the probability of your data under the null hypothesis. Understanding this distinction is essential scientific literacy.',
     },
@@ -573,8 +573,8 @@ ax2.fill_between(temp_range, pred - 1.96*se_pred, pred + 1.96*se_pred,
                 alpha=0.2, color='#ef4444', label='95% prediction interval')
 ax2.axvspan(15, 18, alpha=0.1, color='#f59e0b')
 ax2.axvspan(35, 38, alpha=0.1, color='#f59e0b')
-ax2.text(16, 30, 'Extrapolation\\n(risky!)', color='#f59e0b', fontsize=8, ha='center')
-ax2.text(37, 30, 'Extrapolation\\n(risky!)', color='#f59e0b', fontsize=8, ha='center')
+ax2.text(16, 30, 'Extrapolation\n(risky!)', color='#f59e0b', fontsize=8, ha='center')
+ax2.text(37, 30, 'Extrapolation\n(risky!)', color='#f59e0b', fontsize=8, ha='center')
 ax2.set_xlabel('Temperature (°C)', color='white')
 ax2.set_ylabel('Predicted count', color='white')
 ax2.set_title('Prediction with Uncertainty', color='white', fontsize=12)
@@ -623,7 +623,7 @@ print(f"Regression results:")
 print(f"  Equation: count = {intercept:.1f} + {slope:.2f} × temperature")
 print(f"  R² = {r_squared:.3f} ({r_squared*100:.1f}% of variation explained)")
 print(f"  Slope: {slope:.2f} more butterflies per °C")
-print(f"\\\nPredictions:")
+print(f"\\nPredictions:")
 for temp in [20, 25, 30, 35]:
     pred = intercept + slope * temp
     print(f"  At {temp}°C: {pred:.1f} butterflies")`,
@@ -727,7 +727,7 @@ monthly_totals = [total[:30].sum(), total[30:60].sum(), total[60:].sum()]
 months = ['Month 1', 'Month 2', 'Month 3']
 ax4.bar(months, monthly_totals, color='#ef4444', alpha=0.8)
 ax4.set_ylim(monthly_totals[0] * 0.9, max(monthly_totals) * 1.05)
-ax4.set_title('BAD: Y-axis starts at 90%\\n(exaggerates differences)', color='#ef4444', fontsize=10)
+ax4.set_title('BAD: Y-axis starts at 90%\n(exaggerates differences)', color='#ef4444', fontsize=10)
 ax4.tick_params(colors='gray')
 ax4.set_xticklabels(months, color='white')
 
@@ -736,7 +736,7 @@ ax5 = fig.add_subplot(2, 3, 5)
 ax5.set_facecolor('#111827')
 ax5.bar(months, monthly_totals, color='#22c55e', alpha=0.8)
 ax5.set_ylim(0, max(monthly_totals) * 1.1)
-ax5.set_title('GOOD: Y-axis starts at 0\\n(honest comparison)', color='#22c55e', fontsize=10)
+ax5.set_title('GOOD: Y-axis starts at 0\n(honest comparison)', color='#22c55e', fontsize=10)
 ax5.tick_params(colors='gray')
 ax5.set_xticklabels(months, color='white')
 

@@ -134,7 +134,7 @@ traj_cor = simulate_parcels(use_coriolis=True)
 
 
 
-print("\\n[Code trimmed — run in Level 2+ for full visualization]")`,
+print("\n[Code trimmed — run in Level 2+ for full visualization]")`,
       challenge: 'Change the latitude to -20 (Southern Hemisphere) and observe the direction of rotation. Then try lat=2 (near equator) — can a cyclone form? What happens to the trajectories?',
       successHint: 'The Coriolis effect is subtle — only 0.00007 radians per second — but over hundreds of kilometers and many hours, it bends wind into the spiral patterns visible from space. Understanding this "fictitious force" is key to understanding every large-scale weather system on Earth.',
     },
@@ -269,7 +269,7 @@ for label, pert in [('Control', 0.0), ('Perturbed (+0.01m)', 0.01)]:
     for step in range(n_steps):
         pass
 
-print("\\n[Code trimmed — run in Level 2+ for full visualization]")`,
+print("\n[Code trimmed — run in Level 2+ for full visualization]")`,
       challenge: 'Run an "ensemble" of 10 simulations with random perturbations of different magnitudes (0.001 to 0.1 m). At each time snapshot, compute the ensemble spread. How quickly does the spread saturate?',
       successHint: 'Numerical weather prediction is humanity\'s most successful application of physics to prediction. Yet chaos guarantees a fundamental limit. The art of forecasting is quantifying uncertainty honestly — telling a fisherman not just "the storm is coming" but "there is a 70% chance it hits within 100 km of here."',
     },
@@ -336,7 +336,7 @@ dx = x_offshore[1] - x_offshore[0]
 
 print("Storm Surge Analysis")
 
-print("\\n[Code trimmed — run in Level 2+ for full visualization]")`,
+print("\n[Code trimmed — run in Level 2+ for full visualization]")`,
       challenge: 'Add a river channel to the model: a 2 km-wide section where the depth is only 3m (simulating the Brahmaputra mouth). How does the surge funnel up the channel compared to the open coast?',
       successHint: 'Storm surge is a problem of geometry as much as meteorology. The same cyclone can produce a 2-meter surge on one coast and a 10-meter surge on another. For Brahmaputra delta communities, the gentle shelf and funnel-shaped coastline multiply every storm into a potential catastrophe.',
     },

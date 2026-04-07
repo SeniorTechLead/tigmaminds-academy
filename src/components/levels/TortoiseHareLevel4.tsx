@@ -155,17 +155,17 @@ ax.set_title('Sustainable Pace', color='white', fontsize=11)
 ax = axes[1, 2]
 ax.set_facecolor('#111827')
 ax.axis('off')
-text = "Race Simulator Blueprint\\\n" + "=" * 30 + "\\\n\\\n"
-text += "6 contestants defined with:\\\n"
-text += "  - Top speed\\\n  - Acceleration\\\n"
-text += "  - Stamina duration\\\n  - Recovery rate\\\n"
-text += "  - Cruise speed\\\n\\\n"
-text += "Key insight: The 'best' animal\\\n"
-text += "depends entirely on race distance.\\\n"
-text += "Short race = speed wins.\\\n"
-text += "Long race = endurance wins.\\\n\\\n"
-text += "Next: build the physics engine\\\n"
-text += "that simulates second-by-second\\\n"
+text = "Race Simulator Blueprint\\n" + "=" * 30 + "\\n\\n"
+text += "6 contestants defined with:\\n"
+text += "  - Top speed\\n  - Acceleration\\n"
+text += "  - Stamina duration\\n  - Recovery rate\\n"
+text += "  - Cruise speed\\n\\n"
+text += "Key insight: The 'best' animal\\n"
+text += "depends entirely on race distance.\\n"
+text += "Short race = speed wins.\\n"
+text += "Long race = endurance wins.\\n\\n"
+text += "Next: build the physics engine\\n"
+text += "that simulates second-by-second\\n"
 text += "movement for each contestant."
 ax.text(0.05, 0.95, text, transform=ax.transAxes, fontsize=10,
         verticalalignment='top', color='white', fontfamily='monospace')
@@ -347,17 +347,17 @@ ax.legend(fontsize=9, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 # Plot 6: Summary
 ax = axes[1, 2]
 ax.axis('off')
-text = f"Physics Engine Results ({race_dist}m)\\\n"
-text += "=" * 35 + "\\\n\\\n"
+text = f"Physics Engine Results ({race_dist}m)\\n"
+text += "=" * 35 + "\\n\\n"
 for name in names_sorted:
     ft = results[name]['finish_time']
     avg_speed = race_dist / ft
     label = f'{ft:.0f}s' if ft < 10000 else f'{ft/3600:.1f}h'
-    text += f"{name:12s} {label:>8}  avg {avg_speed*3.6:.1f} km/h\\\n"
-text += "\\\nThe hare leads early but the wild\\\n"
-text += "dog's endurance wins at 2 km.\\\n"
-text += "The tortoise finishes... eventually.\\\n\\\n"
-text += "Next: race at multiple distances\\\n"
+    text += f"{name:12s} {label:>8}  avg {avg_speed*3.6:.1f} km/h\\n"
+text += "\\nThe hare leads early but the wild\\n"
+text += "dog's endurance wins at 2 km.\\n"
+text += "The tortoise finishes... eventually.\\n\\n"
+text += "Next: race at multiple distances\\n"
 text += "to find the crossover points."
 ax.text(0.05, 0.95, text, transform=ax.transAxes, fontsize=10,
         verticalalignment='top', color='white', fontfamily='monospace')
@@ -588,16 +588,16 @@ ax = axes[1, 2]
 ax.axis('off')
 sorted_all = sorted(terrain_results.keys(),
     key=lambda n: terrain_results[n]['finish_time'])
-text = "Terrain Race Results (2 km)\\\n" + "=" * 32 + "\\\n\\\n"
+text = "Terrain Race Results (2 km)\\n" + "=" * 32 + "\\n\\n"
 for rank, name in enumerate(sorted_all, 1):
     ft = terrain_results[name]['finish_time']
     label = f'{ft:.0f}s' if ft < 3600 else f'{ft/3600:.1f}h'
     penalty = ft / flat_results[name]
-    text += f"#{rank} {name:12s} {label:>8} ({penalty:.1f}x flat)\\\n"
-text += "\\\nTerrain changes the ranking!\\\n"
-text += "Mud and grass penalize the hare\\\n"
-text += "far more than the tortoise.\\\n\\\n"
-text += "Next: sweep race distances to\\\n"
+    text += f"#{rank} {name:12s} {label:>8} ({penalty:.1f}x flat)\\n"
+text += "\\nTerrain changes the ranking!\\n"
+text += "Mud and grass penalize the hare\\n"
+text += "far more than the tortoise.\\n\\n"
+text += "Next: sweep race distances to\\n"
 text += "find all crossover points."
 ax.text(0.05, 0.95, text, transform=ax.transAxes, fontsize=10,
         verticalalignment='top', color='white', fontfamily='monospace')
@@ -769,19 +769,19 @@ ax.set_title('Winner at Each Distance', color='white', fontsize=11)
 # Plot 6: Summary
 ax = axes[1, 2]
 ax.axis('off')
-text = "Multi-Distance Results\\\n" + "=" * 30 + "\\\n\\\n"
-text += "Distance -> Winner\\\n" + "-" * 25 + "\\\n"
+text = "Multi-Distance Results\\n" + "=" * 30 + "\\n\\n"
+text += "Distance -> Winner\\n" + "-" * 25 + "\\n"
 for di, d in enumerate(distances):
     w = winners[di]
     ft = finish_times[w][di]
     label = f'{d/1000:.0f} km' if d >= 1000 else f'{d} m'
     ft_label = f'{ft:.0f}s' if ft < 3600 else f'{ft/3600:.1f}h'
-    text += f"  {label:>8} : {w:12s} ({ft_label})\\\n"
-text += "\\\nThree regimes:\\\n"
-text += " Short: acceleration wins\\\n"
-text += " Medium: stamina wins\\\n"
-text += " Long: cruise speed wins\\\n\\\n"
-text += "Next: assemble the complete\\\n"
+    text += f"  {label:>8} : {w:12s} ({ft_label})\\n"
+text += "\\nThree regimes:\\n"
+text += " Short: acceleration wins\\n"
+text += " Medium: stamina wins\\n"
+text += " Long: cruise speed wins\\n\\n"
+text += "Next: assemble the complete\\n"
 text += "race simulator dashboard."
 ax.text(0.05, 0.95, text, transform=ax.transAxes, fontsize=10,
         verticalalignment='top', color='white', fontfamily='monospace')
@@ -794,7 +794,7 @@ for di, d in enumerate(distances):
     w = winners[di]
     label = f'{d/1000:.0f} km' if d >= 1000 else f'{d} m'
     print(f"  {label}: {w} wins")
-print("\\\nThe tortoise never wins on a flat course (too slow).")
+print("\\nThe tortoise never wins on a flat course (too slow).")
 print("But add terrain, and the story changes completely.")`,
       challenge: 'Run the same sweep with the terrain model from Lesson 3. Does the tortoise ever beat the hare on the Pobitora course? At what distance? How does terrain shift each crossover point compared to the flat course?',
       successHint: 'The multi-distance analysis reveals the fundamental truth of the story: speed is not a single number. Every animal has a distance regime where it dominates. The "best" animal depends entirely on the race conditions, exactly as ecology predicts.',
@@ -910,21 +910,21 @@ ax.grid(True, alpha=0.15, color='gray')
 # Plot 6: Dominant parameter at each distance
 ax = axes[1, 2]
 ax.axis('off')
-text = "Sensitivity Summary (Hare)\\\n" + "=" * 35 + "\\\n\\\n"
-text += "What matters most at each distance:\\\n"
-text += "-" * 35 + "\\\n"
+text = "Sensitivity Summary (Hare)\\n" + "=" * 35 + "\\n\\n"
+text += "What matters most at each distance:\\n"
+text += "-" * 35 + "\\n"
 for di, dist in enumerate(sweep_dists):
     max_param = max(param_names, key=lambda p: sensitivities[p][di])
     max_val = sensitivities[max_param][di]
     label_idx = param_names.index(max_param)
     d_label = f'{dist/1000:.0f} km' if dist >= 1000 else f'{dist} m'
-    text += f"  {d_label:>8}: {param_labels[label_idx]:16s} ({max_val:.2f})\\\n"
+    text += f"  {d_label:>8}: {param_labels[label_idx]:16s} ({max_val:.2f})\\n"
 
-text += "\\\nThree regimes confirmed:\\\n"
-text += " <500m:  Speed + Acceleration\\\n"
-text += " 1-5km:  Stamina dominates\\\n"
-text += " >10km:  Cruise speed is king\\\n\\\n"
-text += "Advice for Khargosh:\\\n"
+text += "\\nThree regimes confirmed:\\n"
+text += " <500m:  Speed + Acceleration\\n"
+text += " 1-5km:  Stamina dominates\\n"
+text += " >10km:  Cruise speed is king\\n\\n"
+text += "Advice for Khargosh:\\n"
 text += " Train endurance, not sprinting!"
 ax.text(0.05, 0.95, text, transform=ax.transAxes, fontsize=10,
         verticalalignment='top', color='white', fontfamily='monospace')
@@ -1145,19 +1145,19 @@ ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax = axes[1, 2]
 ax.axis('off')
 t_sorted = sorted(names, key=lambda n: terrain_results[n]['finish_time'])
-text = "RACE REPORT CARD (2 km terrain)\\\n"
-text += "=" * 36 + "\\\n\\\n"
+text = "RACE REPORT CARD (2 km terrain)\\n"
+text += "=" * 36 + "\\n\\n"
 for rank, name in enumerate(t_sorted, 1):
     ft = terrain_results[name]['finish_time']
     ft_label = f'{ft:.0f}s' if ft < 3600 else f'{ft/3600:.1f}h'
     ts = animals[name]['top_speed'] * 3.6
     cs = animals[name]['cruise_speed'] * 3.6
-    text += f"#{rank} {name:10s} {ft_label:>8}\\\n"
-    text += f"   sprint {ts:.0f} km/h, cruise {cs:.0f} km/h\\\n"
+    text += f"#{rank} {name:10s} {ft_label:>8}\\n"
+    text += f"   sprint {ts:.0f} km/h, cruise {cs:.0f} km/h\\n"
 
-text += "\\\nKhargosh's lesson: stamina, not\\\n"
-text += "speed, wins the 2 km Pobitora race.\\\n"
-text += "Kaaso knew the terrain — and that\\\n"
+text += "\\nKhargosh's lesson: stamina, not\\n"
+text += "speed, wins the 2 km Pobitora race.\\n"
+text += "Kaaso knew the terrain — and that\\n"
 text += "knowledge beats raw speed every time."
 ax.text(0.02, 0.97, text, transform=ax.transAxes, fontsize=9,
         verticalalignment='top', color='white', fontfamily='monospace')

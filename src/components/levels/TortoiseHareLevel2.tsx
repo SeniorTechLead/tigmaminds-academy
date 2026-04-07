@@ -551,7 +551,7 @@ optimal_idx = np.argmin(race_times)
 opt_sf = sprint_fractions[optimal_idx]
 opt_time = race_times[optimal_idx]
 ax1.scatter(opt_sf * 100, opt_time, s=100, color='#f59e0b', zorder=5, edgecolors='white')
-ax1.annotate(f'Optimal: {opt_sf*100:.0f}% sprint\\\nTime: {opt_time:.1f}s',
+ax1.annotate(f'Optimal: {opt_sf*100:.0f}% sprint\\nTime: {opt_time:.1f}s',
              xy=(opt_sf*100, opt_time), xytext=(opt_sf*100+15, opt_time+50),
              color='#f59e0b', fontsize=10, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 

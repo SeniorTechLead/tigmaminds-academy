@@ -78,7 +78,7 @@ for i in range(5):
     start_w = instar_weights[i]
     end_w = instar_weights[i + 1]
     print(f"  Instar {i+1} (days {molt_days[i]}-{molt_days[i+1]}): {start_w:.1f} -> {end_w:.1f} mg ({end_w/start_w:.0f}x increase)")
-print(f"\\\nTotal growth: {instar_weights[0]} mg -> {instar_weights[-1]} mg = {instar_weights[-1]/instar_weights[0]:,.0f}x increase")
+print(f"\\nTotal growth: {instar_weights[0]} mg -> {instar_weights[-1]} mg = {instar_weights[-1]/instar_weights[0]:,.0f}x increase")
 print(f"That's like a 3.5 kg human baby growing to 35,000 kg (35 tonnes) in a month.")`,
       challenge: 'Add a "food consumed" line to the plot. Assume 25% efficiency (the worm eats 4x its weight gain in leaves). How many grams of leaves does one worm eat in its lifetime?',
       successHint: 'The silkworm\'s growth rate is one of the most extreme in the animal kingdom. Understanding each instar and molt is essential for timing silk production — and for understanding why eri silk requires a different approach.',
@@ -141,7 +141,7 @@ silks = {
     },
 }
 
-categories = ['Fineness', 'Durability', 'Luster', 'Warmth', 'Ethics\\\nscore', 'Availability']
+categories = ['Fineness', 'Durability', 'Luster', 'Warmth', 'Ethics\\nscore', 'Availability']
 N = len(categories)
 angles = np.linspace(0, 2 * np.pi, N, endpoint=False).tolist()
 angles += angles[:1]
@@ -228,7 +228,7 @@ The Bodo, Mising, and other communities of Assam and Northeast India have practi
 import matplotlib.pyplot as plt
 
 # Ethical comparison of silk production
-methods = ['Mulberry\\\n(conventional)', 'Mulberry\\\n(peace method)', 'Eri silk\\\n(traditional)', 'Synthetic\\\n(polyester)']
+methods = ['Mulberry\\n(conventional)', 'Mulberry\\n(peace method)', 'Eri silk\\n(traditional)', 'Synthetic\\n(polyester)']
 
 # Scores (0-10) across ethical dimensions
 metrics = {
@@ -263,7 +263,7 @@ ax1.tick_params(colors='gray')
 
 # Moth lifecycle comparison
 ax2.set_facecolor('#111827')
-stages = ['Egg', 'Larva', 'Pupa', 'Adult\\\nmoth', 'Mate &\\\nlay eggs']
+stages = ['Egg', 'Larva', 'Pupa', 'Adult\\nmoth', 'Mate &\\nlay eggs']
 mulberry_survival = [100, 95, 90, 0, 0]  # killed at pupa stage
 eri_survival = [100, 92, 88, 85, 80]
 
@@ -273,7 +273,7 @@ ax2.plot(range(len(stages)), eri_survival, 'o-', color='#22c55e', linewidth=2,
          markersize=8, label='Eri silk')
 
 # Annotate the kill point
-ax2.annotate('Cocoon boiled\\\n(moth killed)', xy=(2.5, 45), xytext=(3, 60),
+ax2.annotate('Cocoon boiled\\n(moth killed)', xy=(2.5, 45), xytext=(3, 60),
              color='#ef4444', fontsize=10, fontweight='bold',
              arrowprops=dict(arrowstyle='->', color='#ef4444'))
 
@@ -352,7 +352,7 @@ ax1.set_title('Amino Acid Composition of Silk Fibroin', color='white', fontsize=
 
 # Strength comparison (tensile strength in MPa)
 ax2.set_facecolor('#111827')
-materials = ['Cotton', 'Wool', 'Nylon', 'Eri silk', 'Mulberry\\\nsilk', 'Spider\\\nsilk', 'Kevlar', 'Steel\\\nwire']
+materials = ['Cotton', 'Wool', 'Nylon', 'Eri silk', 'Mulberry\\nsilk', 'Spider\\nsilk', 'Kevlar', 'Steel\\nwire']
 strengths = [400, 200, 900, 500, 600, 1400, 3600, 800]
 mat_colors = ['#f5f5dc', '#d2b48c', '#6b7280', '#22c55e', '#f59e0b', '#ef4444', '#3b82f6', '#a855f7']
 
@@ -411,7 +411,7 @@ Eri silk from Northeast India represents a model of sustainable fashion: ethical
 import matplotlib.pyplot as plt
 
 # Environmental impact comparison per kg of fabric
-fabrics = ['Polyester', 'Cotton', 'Nylon', 'Mulberry\\\nsilk', 'Eri silk', 'Organic\\\ncotton']
+fabrics = ['Polyester', 'Cotton', 'Nylon', 'Mulberry\\nsilk', 'Eri silk', 'Organic\\ncotton']
 
 # Data (approximate values from lifecycle analyses)
 water_use = [17, 10000, 30, 3000, 1500, 7000]  # liters per kg
@@ -525,7 +525,7 @@ import matplotlib.pyplot as plt
 # Village-level to industrial-scale comparison
 
 scales = np.array([10, 50, 100, 500, 1000, 5000, 10000])  # kg/year production
-labels = ['Tiny\\\nvillage', 'Village', 'Large\\\nvillage', 'Co-op', 'Small\\\nfactory', 'Medium\\\nfactory', 'Large\\\nfactory']
+labels = ['Tiny\\nvillage', 'Village', 'Large\\nvillage', 'Co-op', 'Small\\nfactory', 'Medium\\nfactory', 'Large\\nfactory']
 
 # Revenue per kg (price decreases at scale due to commoditization)
 price_per_kg = 5000 * np.exp(-scales / 5000) + 1500  # INR/kg

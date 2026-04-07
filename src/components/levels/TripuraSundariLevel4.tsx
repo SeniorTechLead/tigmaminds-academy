@@ -112,24 +112,24 @@ db.commit()
 print("GEOLOGICAL DATABASE — TRIPURA SUNDARI REGION")
 print("=" * 65)
 
-print("\\nSTRATIGRAPHIC COLUMN")
+print("\nSTRATIGRAPHIC COLUMN")
 print("-" * 65)
 for f in cur.execute('SELECT name, age_mya_start, age_mya_end, rock_type, avg_thickness_m FROM formations ORDER BY age_mya_start'):
     print(f"  {f[0]:15s} | {f[1]:>5.2f}-{f[2]:>5.1f} Mya | {f[3]:15s} | {f[4]:>5.0f}m")
 
-print(f"\\nBOREHOLES: {cur.execute('SELECT COUNT(*) FROM boreholes').fetchone()[0]}")
+print(f"\nBOREHOLES: {cur.execute('SELECT COUNT(*) FROM boreholes').fetchone()[0]}")
 for b in cur.execute('SELECT name, total_depth_m, year_drilled FROM boreholes'):
     n_layers = cur.execute('SELECT COUNT(*) FROM borehole_layers WHERE borehole_id=(SELECT id FROM boreholes WHERE name=?)', (b[0],)).fetchone()[0]
     print(f"  {b[0]}: {b[1]:.0f}m deep ({b[2]}), {n_layers} layers logged")
 
-print(f"\\nSTRUCTURES: {cur.execute('SELECT COUNT(*) FROM structures').fetchone()[0]}")
+print(f"\nSTRUCTURES: {cur.execute('SELECT COUNT(*) FROM structures').fetchone()[0]}")
 for s in cur.execute('SELECT type, name, wavelength_km, amplitude_m FROM structures'):
     if s[2] > 0:
         print(f"  {s[0]:10s}: {s[1]:20s} (λ={s[2]:.0f}km, A={s[3]:.0f}m)")
     else:
         print(f"  {s[0]:10s}: {s[1]:20s}")
 
-print(f"\\nSEISMIC EVENTS: {cur.execute('SELECT COUNT(*) FROM seismic_events').fetchone()[0]}")
+print(f"\nSEISMIC EVENTS: {cur.execute('SELECT COUNT(*) FROM seismic_events').fetchone()[0]}")
 max_q = cur.execute('SELECT date, magnitude, distance_to_temple_km FROM seismic_events ORDER BY magnitude DESC LIMIT 1').fetchone()
 print(f"  Largest: M{max_q[1]} on {max_q[0]} ({max_q[2]:.0f}km from temple)")`,
       challenge: 'Add a groundwater table to the database (depth to water at each borehole, varies seasonally). Query which boreholes have shallow water tables that could affect temple foundations.',
@@ -236,7 +236,7 @@ for bh in cur.execute('SELECT name, x_km, depth_m FROM boreholes'):
 
 # Temple marker
 ax.plot(10, 30, '^', color='#ef4444', markersize=14, zorder=5)
-ax.annotate('Tripura Sundari\\\nTemple', xy=(10.5, 20), color='#ef4444', fontsize=10, fontweight='bold')
+ax.annotate('Tripura Sundari\\nTemple', xy=(10.5, 20), color='#ef4444', fontsize=10, fontweight='bold')
 
 ax.set_xlabel('Distance (km)', color='white', fontsize=12)
 ax.set_ylabel('Depth (m)', color='white', fontsize=12)
@@ -369,17 +369,17 @@ for h in cur.execute('SELECT magnitude, annual_prob, pga_at_temple FROM hazard O
 
 db.commit()
 
-print(f"\\nANNUAL EXPECTED LOSS: {total_annual_loss:.2f}%")
+print(f"\nANNUAL EXPECTED LOSS: {total_annual_loss:.2f}%")
 print(f"50-YEAR CUMULATIVE LOSS: {total_annual_loss * 50:.1f}%")
 
 # Temple value and monetary risk
 temple_value_cr = 500  # crores (cultural/reconstruction value)
-print(f"\\nTemple cultural value: ₹{temple_value_cr} crore")
+print(f"\nTemple cultural value: ₹{temple_value_cr} crore")
 print(f"Annual risk: ₹{total_annual_loss * temple_value_cr / 100:.2f} crore/year")
 print(f"50-year risk: ₹{total_annual_loss * 50 * temple_value_cr / 100:.1f} crore")
 
 # Retrofit benefit
-print(f"\\nRETROFIT ANALYSIS:")
+print(f"\nRETROFIT ANALYSIS:")
 retrofit_cost = 5  # crores
 risk_reduction = 0.6  # 60% reduction
 saved_per_year = total_annual_loss * temple_value_cr / 100 * risk_reduction
@@ -488,21 +488,21 @@ print("GEOLOGICAL SURVEY & CONSERVATION REPORT")
 print("TRIPURA SUNDARI TEMPLE, UDAIPUR, TRIPURA")
 print("=" * 65)
 
-print("\\n1. SITE INFORMATION")
+print("\n1. SITE INFORMATION")
 for r in cur.execute('SELECT key, value FROM site_info'):
     print(f"   {r[0]:25s}: {r[1]}")
 
-print("\\n2. GEOLOGICAL PROFILE")
+print("\n2. GEOLOGICAL PROFILE")
 print(f"   {'Formation':<22} {'Depth':>6} {'Thick':>6} {'Type':<18} {'σ(MPa)':>7}")
 print("   " + "-" * 60)
 for r in cur.execute('SELECT formation, depth_m, thickness_m, rock_type, strength_mpa FROM geology'):
     print(f"   {r[0]:<22} {r[1]:>5.0f}m {r[2]:>5.0f}m {r[3]:<18} {r[4]:>6.0f}")
 
-print("\\n3. HAZARD ASSESSMENT")
+print("\n3. HAZARD ASSESSMENT")
 for r in cur.execute('SELECT type, severity, probability, impact FROM hazards ORDER BY probability DESC'):
     print(f"   [{r[1]:>8s}] {r[0]:<15s} P={r[2]:.2f}/yr — {r[3]}")
 
-print("\\n4. CONSERVATION PLAN")
+print("\n4. CONSERVATION PLAN")
 total_cost = 0
 total_risk_reduction = 0
 for r in cur.execute('SELECT action, priority, cost_lakhs, risk_reduction_pct, status FROM conservation_actions ORDER BY cost_lakhs DESC'):
@@ -511,7 +511,7 @@ for r in cur.execute('SELECT action, priority, cost_lakhs, risk_reduction_pct, s
     print(f"   [{r[1]:>8s}] {r[0]:<40s} ₹{r[2]:>5.0f}L  -{r[3]}%  [{r[4]}]")
 print(f"   {'TOTAL':>50s} ₹{total_cost:.0f}L  -{min(total_risk_reduction,95)}%")
 
-print("\\n5. MONITORING STATUS")
+print("\n5. MONITORING STATUS")
 alerts = 0
 for r in cur.execute('SELECT parameter, last_reading, unit, threshold FROM monitoring'):
     status = "OK" if r[1] < r[3] else "ALERT"
@@ -519,7 +519,7 @@ for r in cur.execute('SELECT parameter, last_reading, unit, threshold FROM monit
     print(f"   {r[0]:<25s}: {r[1]:>8.2f} {r[2]:<8s} (limit: {r[3]}) [{status}]")
 print(f"   Active alerts: {alerts}")
 
-print("\\n6. RECOMMENDATION")
+print("\n6. RECOMMENDATION")
 critical = cur.execute("SELECT COUNT(*) FROM conservation_actions WHERE priority='CRITICAL' AND status!='Completed'").fetchone()[0]
 if critical > 0:
     print(f"   {critical} CRITICAL actions pending. Immediate attention required.")

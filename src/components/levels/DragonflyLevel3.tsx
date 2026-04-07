@@ -432,10 +432,10 @@ axes[2, 2].set_title('Detection overlay', color='white', fontsize=9)
 # Receptive field diagram
 ax = axes[2, 3]
 ax.set_facecolor('#111827')
-sizes = [('Layer 1\\n3x3 kernel', 3, '#22c55e'),
-         ('After pool 1\\nRF = 6x6', 6, '#3b82f6'),
-         ('Layer 2\\nRF = 10x10', 10, '#f59e0b'),
-         ('After pool 2\\nRF = 20x20', 20, '#ef4444')]
+sizes = [('Layer 1\n3x3 kernel', 3, '#22c55e'),
+         ('After pool 1\nRF = 6x6', 6, '#3b82f6'),
+         ('Layer 2\nRF = 10x10', 10, '#f59e0b'),
+         ('After pool 2\nRF = 20x20', 20, '#ef4444')]
 for i, (label, size, color) in enumerate(sizes):
     rect = plt.Rectangle((32-size/2, 32-size/2), size, size,
                           linewidth=2, edgecolor=color, facecolor='none')
@@ -906,7 +906,7 @@ def nc_accuracy(X_train, y_train, X_test, y_test):
 acc_no_aug = nc_accuracy(X_train_small, y_train_small, X_test, y_test)
 acc_with_aug = nc_accuracy(X_train_aug, y_train_aug, X_test, y_test)
 
-print(f"\\\nTraining set sizes:")
+print(f"\\nTraining set sizes:")
 print(f"  Without augmentation: {len(y_train_small)} samples")
 print(f"  With augmentation:    {len(y_train_aug)} samples")
 print()
@@ -1090,9 +1090,9 @@ ax.tick_params(colors='gray')
 ax = axes[0, 2]
 ax.set_facecolor('#111827')
 sizes = {
-    'Float32\\n(original)': 10000 * 4 / 1024,
-    'Int8\\n(quantized)': 10000 * 1 / 1024,
-    'Pruned 50%\\n+ Int8': 5000 * 1 / 1024,
+    'Float32\n(original)': 10000 * 4 / 1024,
+    'Int8\n(quantized)': 10000 * 1 / 1024,
+    'Pruned 50%\n+ Int8': 5000 * 1 / 1024,
 }
 bars = ax.bar(sizes.keys(), sizes.values(),
               color=['#3b82f6', '#22c55e', '#a855f7'], edgecolor='none', width=0.5)
@@ -1139,7 +1139,7 @@ ax.set_yticklabels(['True: Clean', 'True: Disease'], color='white', fontsize=9)
 labels = ['TN', 'FP', 'FN', 'TP']
 for i in range(2):
     for j in range(2):
-        ax.text(j, i, f'{labels[i*2+j]}\\n{conf[i, j]}',
+        ax.text(j, i, f'{labels[i*2+j]}\n{conf[i, j]}',
                 ha='center', va='center', color='black', fontsize=12, fontweight='bold')
 ax.set_title('Field scan confusion matrix', color='white', fontsize=10)
 ax.tick_params(colors='gray')

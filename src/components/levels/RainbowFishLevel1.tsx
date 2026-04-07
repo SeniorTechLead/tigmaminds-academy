@@ -65,7 +65,7 @@ ax1.set_ylabel('Refracted angle (degrees)', color='white')
 ax1.set_title("Snell's Law: Air → Water", color='white', fontsize=13)
 ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax1.tick_params(colors='gray')
-ax1.annotate(f'n_air = {n_air}\\\nn_water = {n_water}', xy=(5, 60), color='#f59e0b', fontsize=11,
+ax1.annotate(f'n_air = {n_air}\\nn_water = {n_water}', xy=(5, 60), color='#f59e0b', fontsize=11,
              bbox=dict(boxstyle='round', facecolor='#1f2937', edgecolor='#f59e0b'))
 
 # Ray diagram
@@ -286,8 +286,8 @@ ax1.plot(theta_i, reflectance * 100, color='#3b82f6', linewidth=2.5)
 ax1.fill_between(theta_i, reflectance * 100, alpha=0.15, color='#3b82f6')
 ax1.axvline(theta_c, color='#ef4444', linestyle='--', linewidth=2, label=f'Critical angle ({theta_c:.1f}°)')
 ax1.axhspan(95, 100, xmin=theta_c/90, alpha=0.2, color='#22c55e')
-ax1.text(theta_c + 2, 50, 'Total Internal\\\nReflection', color='#22c55e', fontsize=12, fontweight='bold')
-ax1.text(theta_c - 15, 50, 'Partial\\\nreflection', color='#3b82f6', fontsize=12)
+ax1.text(theta_c + 2, 50, 'Total Internal\\nReflection', color='#22c55e', fontsize=12, fontweight='bold')
+ax1.text(theta_c - 15, 50, 'Partial\\nreflection', color='#3b82f6', fontsize=12)
 ax1.set_xlabel('Angle of incidence (degrees)', color='white')
 ax1.set_ylabel('Reflectance (%)', color='white')
 ax1.set_title('Water → Air: Reflectance vs Angle', color='white', fontsize=13)

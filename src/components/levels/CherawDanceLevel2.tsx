@@ -267,7 +267,7 @@ for gamma, color, label in zip(damping_values, colors, labels):
 
 # Mark the natural frequency
 ax.axvline(f_natural, color='white', linestyle=':', alpha=0.5, linewidth=1)
-ax.annotate('Natural frequency\\\n(90 BPM)', xy=(f_natural, 0.5),
+ax.annotate('Natural frequency\\n(90 BPM)', xy=(f_natural, 0.5),
             color='white', fontsize=10, ha='center')
 
 # Mark common dance tempos

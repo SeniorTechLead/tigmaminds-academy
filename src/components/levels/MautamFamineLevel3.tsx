@@ -193,7 +193,7 @@ eigenvalues = np.linalg.eigvals(L_mautam)
 dom_mautam = max(abs(eigenvalues))
 print(f"Dominant eigenvalue (normal): {dom_normal:.3f} → {'growing' if dom_normal > 1 else 'stable/declining'}")
 print(f"Dominant eigenvalue (Mautam): {dom_mautam:.3f} → {'growing' if dom_mautam > 1 else 'stable/declining'}")
-print(f"\\\nMautam growth rate is {dom_mautam/dom_normal:.1f}x the normal rate")`,
+print(f"\\nMautam growth rate is {dom_mautam/dom_normal:.1f}x the normal rate")`,
       challenge: 'What if a disease selectively kills adult rats (reduce adult survival from 0.85 to 0.3 during months 15-20)? How does targeting the reproductive age class affect population growth compared to killing an equal number of juveniles?',
       successHint: 'You built a Leslie matrix model — the standard tool for structured population analysis. The eigenvalue analysis reveals the deep mathematical structure underlying population growth. This technique is used for endangered species management, fisheries, and demographic forecasting.',
     },
@@ -414,7 +414,7 @@ plt.tight_layout()
 plt.savefig('/tmp/mautam_sensitivity.png', dpi=100, bbox_inches='tight', facecolor='#111827')
 plt.show()
 
-print(f"\\\nMost critical parameter: {params_sorted[0]} (sensitivity = {sensitivities[params_sorted[0]]:.3f})")
+print(f"\\nMost critical parameter: {params_sorted[0]} (sensitivity = {sensitivities[params_sorted[0]]:.3f})")
 print(f"Least critical parameter: {params_sorted[-1]} (sensitivity = {sensitivities[params_sorted[-1]]:.3f})")`,
       challenge: 'Implement global sensitivity analysis: vary all parameters simultaneously (sample 500 random combinations within ±30% of baseline). Which parameter explains the most variance in crop survival? Does it agree with the local analysis?',
       successHint: 'You performed sensitivity analysis — a critical tool for any model-based decision-making. In ecology, medicine, engineering, and climate science, identifying which parameters matter most guides where to focus research and intervention.',
@@ -521,7 +521,7 @@ for i, (fc, bc) in enumerate(zip(forward_crops, backward_crops)):
 for i, (fc, bc) in enumerate(zip(backward_crops, backward_crops)):
     if bc > 30 and i > 0 and backward_crops[i-1] <= 30:
         print(f"Recovery point: birth rate ≈ {birth_rates[i]:.3f}")
-print("\\\nHysteresis: recovery requires a LOWER birth rate than collapse.")
+print("\\nHysteresis: recovery requires a LOWER birth rate than collapse.")
 print("Prevention is easier than cure — stop the rats before the tipping point.")`,
       challenge: 'Add a second bifurcation parameter: the predation rate. Create a 2D bifurcation map (birth rate vs predation rate) showing regions of "crops survive" vs "crops collapse." This phase diagram guides intervention strategy.',
       successHint: 'You performed bifurcation analysis — revealing tipping points and hysteresis in the Mautam ecosystem. This is one of the most important concepts in complex systems science: sometimes gradual changes cause sudden, irreversible shifts. Identifying these thresholds before they are crossed is the key to prevention.',

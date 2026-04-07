@@ -75,7 +75,7 @@ for name, mass in objects:
     print(f"{name:<20} {mass:>10.4f} {energy:>14.2e} {tnt_str:>16}")
 
 # Nuclear vs chemical comparison
-print(f"\\\n=== Nuclear vs Chemical Energy (per kg of fuel) ===")
+print(f"\\n=== Nuclear vs Chemical Energy (per kg of fuel) ===")
 reactions = [
     ("Wood burning", 1.0, 1.6e7, 0.0000000002),
     ("Coal burning", 1.0, 2.4e7, 0.0000000003),
@@ -94,7 +94,7 @@ for name, mass, energy, eff in reactions:
     print(f"{name:<22} {energy:>10.2e} J {eff:>10.4%} {ratio:>8.0f}×")
 
 # The Hiroshima bomb
-print(f"\\\n=== Hiroshima Bomb (Little Boy) ===")
+print(f"\\n=== Hiroshima Bomb (Little Boy) ===")
 u235_mass = 64  # kg of uranium-235
 fission_fraction = 0.013  # only 1.3% actually fissioned
 fissioned_mass = u235_mass * fission_fraction
@@ -106,7 +106,7 @@ print(f"U-235 in bomb: {u235_mass} kg")
 print(f"Actually fissioned: {fissioned_mass:.1f} kg ({fission_fraction*100:.1f}%)")
 print(f"Mass converted to energy: {mass_converted*1000:.1f} grams")
 print(f"Energy released: {energy_j:.2e} J = {energy_kt:.0f} kilotons of TNT")
-print(f"\\\nLess than ONE GRAM of matter was converted to energy.")
+print(f"\\nLess than ONE GRAM of matter was converted to energy.")
 print(f"That gram destroyed a city.")`,
       challenge: 'The Sun converts 4 million tonnes of mass to energy every second (via nuclear fusion). Calculate its power output in watts. Then calculate how long the Sun can sustain this rate before losing 10% of its mass (2×10²⁹ kg). Is the Sun in danger of "running out"?',
       successHint: 'E = mc² is the most famous equation in physics — and you just applied it quantitatively. The key insight: matter IS energy, compressed by the enormous factor of c². Chemical reactions tap a billionth of this energy. Nuclear reactions tap a thousandth. The rest remains locked in matter — for now.',
@@ -174,14 +174,14 @@ for name, k in scenarios:
     print(f"{name:<30} {g10:>12.2e} {g20:>12.2e} {g40:>12.2e} {g80:>12.2e}")
 
 # Time scale
-print(f"\\\n=== Time Scale ===")
+print(f"\\n=== Time Scale ===")
 generation_time_ns = 10  # nanoseconds per generation (approximate)
 print(f"One generation: ~{generation_time_ns} nanoseconds")
 print(f"80 generations: {80 * generation_time_ns} ns = {80 * generation_time_ns / 1000:.1f} microseconds")
 print(f"A nuclear explosion completes in about 1 microsecond.")
 
 # Energy release
-print(f"\\\n=== Energy Released ===")
+print(f"\\n=== Energy Released ===")
 energy_per_fission_MeV = 200  # MeV per fission
 energy_per_fission_J = energy_per_fission_MeV * 1.6e-13  # joules
 
@@ -200,7 +200,7 @@ for name, k in [("Reactor (k=1.0, controlled)", 1.0), ("Bomb (k=2.5)", 2.5)]:
     print(f"{name}: {total_fissions:.2e} fissions → {energy_str}")
 
 # Critical mass calculation
-print(f"\\\n=== Critical Mass ===")
+print(f"\\n=== Critical Mass ===")
 print(f"For a SPHERE of pure U-235:")
 print(f"  k depends on: size, shape, density, and purity")
 print(f"  Larger sphere → fewer neutrons escape → higher k")
@@ -208,7 +208,7 @@ print(f"  Critical mass ≈ 52 kg for a bare sphere (about 17 cm diameter)")
 print(f"  With a neutron reflector: ≈ 15 kg (about 11 cm diameter)")
 
 # Why sphere?
-print(f"\\\n=== Why a Sphere? ===")
+print(f"\\n=== Why a Sphere? ===")
 shapes = [
     ("Sphere", 4.84, 1.00),         # SA/V for unit volume
     ("Cube", 6.00, 1.24),
@@ -221,7 +221,7 @@ print("-" * 44)
 for name, sav, rel in shapes:
     print(f"{name:<20} {sav:>10.2f} {rel:>8.2f}×")
 
-print(f"\\\nA sphere has the SMALLEST surface-area-to-volume ratio.")
+print(f"\\nA sphere has the SMALLEST surface-area-to-volume ratio.")
 print(f"Since neutrons escape through the surface, a sphere")
 print(f"minimises escape → maximises k → requires least material.")`,
       challenge: 'A reactor maintains k = 1.0000, but a control rod accidentally withdraws, increasing k to 1.003. How many generations until the neutron population doubles? (Solve: 1.003ⁿ = 2 → n = ln(2)/ln(1.003) ≈ 231 generations ≈ 2.3 microseconds.) Why is even this tiny deviation dangerous? (Because it leads to uncontrolled power increase within milliseconds.)',
@@ -418,7 +418,7 @@ materials = [
 ]
 
 print("=== Critical Mass Calculator ===")
-print(f"\\\n{'Material':<20} {'Density':>8} {'Crit Mass':>12} {'Diameter':>10}")
+print(f"\\n{'Material':<20} {'Density':>8} {'Crit Mass':>12} {'Diameter':>10}")
 print("-" * 52)
 
 for name, density, mfp in materials:
@@ -427,7 +427,7 @@ for name, density, mfp in materials:
     print(f"{name:<20} {density:>6} kg/m³ {mass:>8.1f} kg {diameter:>8.1f} cm")
 
 # Effect of shape on critical mass
-print(f"\\\n=== Effect of Shape (U-235, bare) ===")
+print(f"\\n=== Effect of Shape (U-235, bare) ===")
 u235_density = 19050
 u235_crit_sphere = 52  # kg (known value)
 
@@ -447,7 +447,7 @@ for shape in shapes:
     print(f"{shape:<20} {sav:>10.1f} {ratio:>12.2f}× {est_crit:>12.1f} kg")
 
 # Effect of reflector
-print(f"\\\n=== Effect of Neutron Reflector ===")
+print(f"\\n=== Effect of Neutron Reflector ===")
 print(f"A dense shell around the core bounces escaping neutrons back.")
 reflectors = [
     ("Bare (no reflector)", 1.0),
@@ -465,7 +465,7 @@ for name, factor in reflectors:
     print(f"{name:<24} {factor:>6.2f}× {crit:>12.1f} kg ({diameter:.0f} cm)")
 
 # Compression (implosion)
-print(f"\\\n=== Effect of Compression (Implosion Design) ===")
+print(f"\\n=== Effect of Compression (Implosion Design) ===")
 print(f"Compressing the material increases density → decreases critical mass")
 for compression in [1.0, 1.5, 2.0, 2.5, 3.0]:
     new_density = u235_density * compression
@@ -531,7 +531,7 @@ for t_ms in times_ms:
     print(f"{t_ms:>8.1f} {t_s:>8.4f} {r:>10.1f} {r_ft:>10.0f}")
 
 # Taylor's method: estimate yield from a photograph
-print(f"\\\n=== Taylor's Yield Estimation ===")
+print(f"\\n=== Taylor's Yield Estimation ===")
 print(f"Using declassified photographs of the Trinity test:")
 
 # Simulated photo measurements (close to historical values)
@@ -544,7 +544,7 @@ photos = [
     (62.0, 150),  # 62 ms, ~150 m
 ]
 
-print(f"\\\n{'Time (ms)':>10} {'Radius (m)':>12} {'Est Yield (kt)':>16} {'Error':>8}")
+print(f"\\n{'Time (ms)':>10} {'Radius (m)':>12} {'Est Yield (kt)':>16} {'Error':>8}")
 print("-" * 48)
 
 for t_ms, r_m in photos:
@@ -554,11 +554,11 @@ for t_ms, r_m in photos:
     error_pct = (est_kt - 21) / 21 * 100
     print(f"{t_ms:>8.1f} {r_m:>10.0f} {est_kt:>14.1f} {error_pct:>+7.0f}%")
 
-print(f"\\\nTaylor's published estimate: ~22 kt (actual: 21 kt)")
+print(f"\\nTaylor's published estimate: ~22 kt (actual: 21 kt)")
 print(f"He got within 5% using ONLY photographs and dimensional analysis.")
 
 # Compare nuclear yields
-print(f"\\\n=== Nuclear Weapon Yields ===")
+print(f"\\n=== Nuclear Weapon Yields ===")
 weapons = [
     ("Davy Crockett (smallest)", 0.02),
     ("Hiroshima (Little Boy)", 15),
@@ -570,7 +570,7 @@ weapons = [
     ("Tsar Bomba (largest ever)", 50000),
 ]
 
-print(f"\\\n{'Weapon':<35} {'Yield (kt)':>10} {'Fireball R at 1s':>18}")
+print(f"\\n{'Weapon':<35} {'Yield (kt)':>10} {'Fireball R at 1s':>18}")
 print("-" * 65)
 
 for name, yield_kt in weapons:
@@ -579,13 +579,13 @@ for name, yield_kt in weapons:
     print(f"{name:<35} {yield_kt:>8.0f} {r:>14.0f} m")
 
 # Ethics consideration
-print(f"\\\n=== The Human Cost ===")
+print(f"\\n=== The Human Cost ===")
 print(f"Hiroshima (Aug 6, 1945): ~80,000 killed immediately, ~60,000 more by year-end")
 print(f"Nagasaki (Aug 9, 1945): ~40,000 killed immediately, ~30,000 more by year-end")
 print(f"Total: ~200,000+ deaths, mostly civilians")
-print(f"\\\nMany Manhattan Project scientists petitioned against using the bomb")
+print(f"\\nMany Manhattan Project scientists petitioned against using the bomb")
 print(f"on cities. The petition never reached President Truman.")
-print(f"\\\n'The physicists have known sin, and this is a knowledge which")
+print(f"\\n'The physicists have known sin, and this is a knowledge which")
 print(f" they cannot lose.' — J. Robert Oppenheimer, 1947")`,
       challenge: 'If a nuclear weapon were detonated at altitude (10 km up instead of at ground level), how would the fireball behave differently? (Air density at 10 km is about 1/3 of sea level. Use the Taylor-Sedov equation to calculate the fireball radius at different air densities.) This is why high-altitude detonations produce larger fireballs but less ground damage.',
       successHint: 'You applied the Taylor-Sedov blast wave solution — one of the most elegant results in physics. Taylor derived the bomb\'s yield from nothing but photographs, dimensional analysis, and the physics of shock waves. This same physics is used to study supernovae, volcanic eruptions, and industrial explosions. The mathematics doesn\'t choose sides — it merely describes reality.',
@@ -614,7 +614,7 @@ These are not physics questions — they are **ethical** questions. But they ari
 print("=== Manhattan Project Decision Analysis ===")
 print()
 print("The US faced a decision in 1942 with incomplete information.")
-print("We can model it as a decision matrix:\\\n")
+print("We can model it as a decision matrix:\\n")
 
 # Decision options
 options = [
@@ -680,13 +680,13 @@ for option in options:
         print(f" {score:>16}", end="")
     print(f" {expected:>14.1f}")
 
-print(f"\\\nPrior probabilities: ", end="")
+print(f"\\nPrior probabilities: ", end="")
 for state, prob in priors.items():
     print(f"{prob:.0%} ", end="")
 print()
 
 # The decision that was actually made
-print(f"\\\nActual decision: Build the bomb (full program)")
+print(f"\\nActual decision: Build the bomb (full program)")
 print(f"Expected value: {sum(consequences['Build the bomb (full program)'][s] * priors[s] for s in states):.1f}")
 print()
 
@@ -699,17 +699,17 @@ revised_priors = {
     "No nation builds bomb": 0.10,
 }
 
-print(f"\\\nRevised probabilities:")
+print(f"\\nRevised probabilities:")
 for option in options:
     expected = sum(consequences[option][s] * revised_priors[s] for s in states)
     print(f"  {option:<45} EV = {expected:.1f}")
 
-print(f"\\\nWith hindsight, 'International control' or 'Research only'")
+print(f"\\nWith hindsight, 'International control' or 'Research only'")
 print(f"would have been better choices. But decisions must be made")
 print(f"with the information available AT THE TIME.")
 
 # The ongoing dilemma
-print(f"\\\n=== Nuclear Power vs Nuclear Weapons ===")
+print(f"\\n=== Nuclear Power vs Nuclear Weapons ===")
 nuclear_data = [
     ("Nuclear power (2024)", "~440 reactors", "10% of world electricity", "Zero CO₂"),
     ("Nuclear weapons (2024)", "~12,500 warheads", "9 nations", "Existential threat"),
@@ -717,12 +717,12 @@ nuclear_data = [
     ("Nuclear waste", "~300,000 tonnes", "Storage for 100,000+ years", "Unsolved"),
 ]
 
-print(f"\\\n{'Application':<25} {'Scale':>18} {'Benefit/Risk':>24} {'Status':>16}")
+print(f"\\n{'Application':<25} {'Scale':>18} {'Benefit/Risk':>24} {'Status':>16}")
 print("-" * 85)
 for app, scale, benefit, status in nuclear_data:
     print(f"{app:<25} {scale:>18} {benefit:>24} {status:>16}")
 
-print(f"\\\n'The release of atomic energy has not created a new problem.")
+print(f"\\n'The release of atomic energy has not created a new problem.")
 print(f" It has merely made more urgent the necessity of solving an")
 print(f" existing one.' — Albert Einstein, 1946")`,
       challenge: 'Add a "minimax" decision criterion: instead of maximizing expected value, choose the option where the WORST case outcome is the best (minimize maximum regret). Does minimax recommend a different option than expected value? This is the "play it safe" approach — and it\'s what drove the actual decision to build the bomb.',

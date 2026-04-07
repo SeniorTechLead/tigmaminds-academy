@@ -106,7 +106,7 @@ for row in cursor.execute('SELECT name, area_km2, max_elevation_m, min_elevation
     print(f"  {row[0]:12s}  {row[1]:5.1f} km²  {row[2]}m - {row[3]}m")
 
 # Query 2: Average mass balance per glacier
-print("\\\n=== Average Net Mass Balance (2000-2023) ===")
+print("\\n=== Average Net Mass Balance (2000-2023) ===")
 cursor.execute('''
     SELECT g.name,
            ROUND(AVG(m.net_balance_mwe), 3) as avg_balance,
@@ -120,7 +120,7 @@ for row in cursor.fetchall():
     print(f"  {row[0]:12s}  avg: {row[1]:+.3f} m w.e./yr  total: {row[2]:+.1f} m w.e.")
 
 # Query 3: Trend over decades
-print("\\\n=== Mass Balance by Decade ===")
+print("\\n=== Mass Balance by Decade ===")
 cursor.execute('''
     SELECT (year/10)*10 as decade,
            ROUND(AVG(net_balance_mwe), 3) as avg_balance,
@@ -398,7 +398,7 @@ weights = {
     'downstream_exposure': 0.10,
 }
 
-print("=== GLOF Hazard Assessment — Sikkim ===\\\n")
+print("=== GLOF Hazard Assessment — Sikkim ===\\n")
 print(f"{'Lake':20s} {'Vol(Mm³)':>8} {'Dam':>12} {'Hazard':>7} {'Risk Level':>12}")
 print("-" * 65)
 
@@ -424,7 +424,7 @@ for name, vol, dam, hazard, level in results:
     print(f"{name:20s} {vol:8.1f} {dam:>12} {hazard:7.2f} {level:>12}")
 
 # Downstream impact for top-risk lake
-print(f"\\\n=== Downstream Impact: {results[0][0]} ===")
+print(f"\\n=== Downstream Impact: {results[0][0]} ===")
 c.execute('''
     SELECT d.feature, d.distance_km, d.population
     FROM downstream d
@@ -601,7 +601,7 @@ plt.savefig('water_forecast.png', dpi=100, facecolor='#1f2937')
 plt.show()
 
 # Summary
-print("=== Water Resource Summary for 2060 ===\\\n")
+print("=== Water Resource Summary for 2060 ===\\n")
 for sid in [1, 2, 3]:
     c.execute('SELECT s.name, f.total, f.glacier_melt FROM forecasts f JOIN scenarios s ON f.scenario_id=s.id WHERE f.year=2060 AND f.scenario_id=?', (sid,))
     name, total, gm = c.fetchone()
@@ -714,14 +714,14 @@ class GlacierObservatory:
             GROUP BY g.id
         ''')
 
-        print("\\\n--- Glacier Status ---")
+        print("\\n--- Glacier Status ---")
         print(f"{'Name':12s} {'Original':>10} {'Current':>10} {'Loss':>8} {'Avg MB':>10}")
         for name, orig, curr, mb, ret in c.fetchall():
             loss = (1 - curr/orig) * 100
             print(f"{name:12s} {orig:>8.1f}km² {curr:>8.1f}km² {loss:>7.1f}% {mb:>+8.3f} mwe")
 
         # Trend analysis
-        print("\\\n--- Trend Analysis (2000-2023) ---")
+        print("\\n--- Trend Analysis (2000-2023) ---")
         c.execute('''
             SELECT g.name,
                    (SELECT mass_balance FROM annual_data WHERE glacier_id=g.id AND year=2023) -
@@ -733,7 +733,7 @@ class GlacierObservatory:
             print(f"  {name}: mass balance shifted by {change:+.3f} m w.e. → {direction}")
 
         # Lake hazard
-        print("\\\n--- Glacial Lake Hazard ---")
+        print("\\n--- Glacial Lake Hazard ---")
         c.execute('''
             SELECT lake_name,
                    area_km2 as area_2023,
@@ -747,13 +747,13 @@ class GlacierObservatory:
             print(f"  {lake}: {area:.2f} km², {vol:.0f} Mm³, hazard={hazard:.1f} [{level}]")
 
         # Projections
-        print("\\\n--- 2050 Projection (moderate scenario) ---")
+        print("\\n--- 2050 Projection (moderate scenario) ---")
         c.execute('SELECT g.name, a.area_km2 FROM glaciers g JOIN annual_data a ON g.id=a.glacier_id WHERE a.year=2023')
         for name, area_2023 in c.fetchall():
             area_2050 = area_2023 * 0.65  # ~35% loss by 2050
             print(f"  {name}: {area_2023:.1f} → {area_2050:.1f} km² (-{(1-0.65)*100:.0f}%)")
 
-        print("\\\n--- RECOMMENDATIONS ---")
+        print("\\n--- RECOMMENDATIONS ---")
         print("  1. URGENT: Drain South Lhonak Lake below critical volume")
         print("  2. Install early warning sirens in Chungthang valley")
         print("  3. Expand stake network on Yalung Glacier (fastest retreat)")

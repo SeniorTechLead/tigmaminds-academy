@@ -46,7 +46,7 @@ for m in materials:
     print(f"{m['name']:<16} {m['E_gpa']:>6.1f} {m['ult_mpa']:>8.1f} {fail_strain:>10.4f} {deform_mm:>10.1f} mm")
 
 # Wall height analysis: at what height does base stress = ultimate strength?
-print("\\\n=== Maximum Safe Wall Height ===")
+print("\\n=== Maximum Safe Wall Height ===")
 for m in materials:
     density = {"Rammed earth": 1800, "Fired brick": 2000, "Limestone": 2500,
                "Granite": 2700, "Concrete": 2400}[m["name"]]
@@ -112,7 +112,7 @@ print()
 # Strength vs age
 print("=== Mortar Strength vs Age (MPa) ===")
 for name, k in mortars:
-    print(f"\\\n{name}:")
+    print(f"\\n{name}:")
     base_strength = {"Plain lime mortar": 2, "Sticky rice mortar": 5,
                      "Modern Portland cement": 25, "Roman pozzolanic mortar": 4}[name]
     for y in [1, 10, 100, 1000]:
@@ -170,7 +170,7 @@ print("The Great Wall's 2m brick walls had U-values comparable to")
 print("modern uninsulated masonry — decent for keeping watchtowers habitable.")
 
 # Thermal mass: how long to heat up / cool down
-print("\\\n=== Thermal Time Constant (hours to reach equilibrium) ===")
+print("\\n=== Thermal Time Constant (hours to reach equilibrium) ===")
 for m in materials:
     # Simplified: τ = (density × specific_heat × thickness) / k
     cp = 900  # approximate specific heat for most masonry (J/kg·K)
@@ -230,7 +230,7 @@ for name, porosity in bricks:
     print(row)
 
 # Freeze-thaw vulnerability index
-print("\\\n=== Freeze-Thaw Vulnerability Index ===")
+print("\\n=== Freeze-Thaw Vulnerability Index ===")
 print("(Higher = more vulnerable to frost damage)")
 for name, porosity in bricks:
     # Vulnerability = water absorbed in 24h × expansion factor
@@ -293,12 +293,12 @@ for s in stages:
     is_bn = ">>> YES <<<" if s["name"] == bottleneck["name"] else ""
     print(f"{s['name']:<18} {s['capacity']:>8} b/d {s['workers']:>6} {is_bn}")
 
-print(f"\\\nOverall throughput: {throughput} blocks/day")
+print(f"\\nOverall throughput: {throughput} blocks/day")
 print(f"Bottleneck: {bottleneck['name']} ({bottleneck['capacity']} blocks/day)")
 print(f"30-day production: {total_30d:,} blocks")
 
 # What if we improve the bottleneck?
-print("\\\n=== Impact of Improving the Bottleneck ===")
+print("\\n=== Impact of Improving the Bottleneck ===")
 for improvement in [1.0, 1.25, 1.5, 2.0, 3.0]:
     modified = [dict(s) for s in stages]
     for s in modified:

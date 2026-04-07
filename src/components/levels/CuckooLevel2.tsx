@@ -300,7 +300,7 @@ ax1.plot(latitudes, day_lengths, color='#f59e0b', linewidth=2.5)
 for city, (lat, color) in cities.items():
     dl = day_lengths[lat]
     ax1.plot(lat, dl, 'o', color=color, markersize=8, zorder=5)
-    ax1.annotate(f'{city}\\\n{dl:.1f}h', xy=(lat, dl), xytext=(lat+2, dl+0.5),
+    ax1.annotate(f'{city}\\n{dl:.1f}h', xy=(lat, dl), xytext=(lat+2, dl+0.5),
                 color=color, fontsize=8)
 
 ax1.set_xlabel('Latitude (°N)', color='white')

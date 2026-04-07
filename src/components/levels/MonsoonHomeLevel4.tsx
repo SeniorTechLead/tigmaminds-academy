@@ -239,7 +239,7 @@ ax.set_title('Air speed cooling effect', color='white'); ax.legend(fontsize=8)
 ax = axes[1, 0]; ax.set_facecolor('#111827'); ax.tick_params(colors='gray')
 comfortable_air = np.sum((T_in >= comfort_low) & (T_in <= comfort_high))/168*100
 comfortable_eff = np.sum((T_eff >= comfort_low) & (T_eff <= comfort_high))/168*100
-bars = ax.bar(['Without\\nair movement', 'With\\nair movement'], [comfortable_air, comfortable_eff],
+bars = ax.bar(['Without\nair movement', 'With\nair movement'], [comfortable_air, comfortable_eff],
               color=['#ef4444', '#22c55e'], alpha=0.8)
 for bar, v in zip(bars, [comfortable_air, comfortable_eff]):
     ax.text(bar.get_x()+bar.get_width()/2, bar.get_height()+1, f'{v:.1f}%', color='white', fontsize=12, ha='center')

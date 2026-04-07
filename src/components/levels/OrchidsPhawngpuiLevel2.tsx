@@ -114,7 +114,7 @@ print(f"  Connectance: {connectance:.3f} ({connectance*100:.1f}%)")
 print(f"  Avg orchid partners: {orchid_degrees.mean():.1f}")
 print(f"  Avg pollinator partners: {poll_degrees.mean():.1f}")
 print(f"  Avg specialization: {np.mean(specialization):.3f}")
-print(f"\\\nMost specialized orchid: {orchids_sorted[np.argmax(specialization)]}")
+print(f"\\nMost specialized orchid: {orchids_sorted[np.argmax(specialization)]}")
 print(f"Most generalist orchid: {orchids_sorted[np.argmin(specialization)]}")`,
       challenge: 'Simulate the removal of the most-connected pollinator (honeybee). How many orchid species lose all their pollinators? Now remove random pollinators one by one and plot the number of "orphaned" orchids vs. number removed. This is network robustness analysis.',
       successHint: 'You built a pollination network visualization — the standard tool for community ecology. These networks reveal hidden vulnerabilities: specialist orchids depend on specific pollinators whose loss could trigger cascading extinctions.',
@@ -219,7 +219,7 @@ for i in range(n_orchids):
         print(f"  {names[i]} vs {names[j]}: {similarity[i,j]:.3f}")
 
 # Pollinator prediction from scent
-print("\\\nDominant compound → predicted pollinator:")
+print("\\nDominant compound → predicted pollinator:")
 for o, profile in orchid_scents.items():
     dominant = max(profile, key=profile.get)
     if dominant in ['Linalool', 'Geraniol', 'β-Ocimene']:
@@ -336,7 +336,7 @@ plt.show()
 
 spec_gen = next((i for i, iso in enumerate(isolation_history) if iso > 0.95), None)
 print(f"Speciation (95% isolation) reached at generation: {spec_gen}")
-print(f"\\\nFinal population traits:")
+print(f"\\nFinal population traits:")
 print(f"  Pop A (bee-adapted): {pop_A.mean(axis=0).round(3)}")
 print(f"  Pop B (moth-adapted): {pop_B.mean(axis=0).round(3)}")
 print(f"  Target A (bee): {poll_A_target}")

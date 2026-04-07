@@ -121,7 +121,7 @@ for ind_id in range(1, 21):
 db.commit()
 
 # Conservation queries
-print("=== RED PANDA POPULATION DATABASE — SIKKIM ===\\\n")
+print("=== RED PANDA POPULATION DATABASE — SIKKIM ===\\n")
 
 # Population summary
 c.execute("SELECT status, COUNT(*) FROM individuals GROUP BY status")
@@ -131,7 +131,7 @@ for status, count in c.fetchall():
 
 # Sex ratio
 c.execute("SELECT sex, COUNT(*) FROM individuals WHERE status='alive' GROUP BY sex")
-print("\\\nSex Ratio (alive):")
+print("\\nSex Ratio (alive):")
 for sex, count in c.fetchall():
     print(f"  {sex}: {count}")
 
@@ -146,7 +146,7 @@ c.execute("""
     ORDER BY offspring DESC
     LIMIT 5
 """)
-print("\\\nTop Breeding Females:")
+print("\\nTop Breeding Females:")
 for code, birth, age, offspring in c.fetchall():
     print(f"  {code}: age {age}, offspring: {offspring}")
 
@@ -159,7 +159,7 @@ c.execute("""
     GROUP BY h.date
     ORDER BY h.date
 """)
-print("\\\nPopulation Average Weight Trend:")
+print("\\nPopulation Average Weight Trend:")
 for date, avg_wt in c.fetchall():
     bar = "█" * int(avg_wt * 3)
     print(f"  {date}: {avg_wt} kg {bar}")
@@ -171,7 +171,7 @@ c.execute("""
     GROUP BY year
     ORDER BY year
 """)
-print("\\\nAverage Territory Size Trend:")
+print("\\nAverage Territory Size Trend:")
 for year, avg_area, n in c.fetchall():
     print(f"  {year}: {avg_area} km² (n={n})")
 
@@ -507,7 +507,7 @@ for a, b, dist, threat, quality in c.fetchall():
     edges.append((a, b, weight))
 
 n_patches = 9
-print("=== SIKKIM RED PANDA HABITAT CONNECTIVITY ===\\\n")
+print("=== SIKKIM RED PANDA HABITAT CONNECTIVITY ===\\n")
 
 # Shortest paths from core area (patch 1)
 dist_from_core, prev = dijkstra(n_patches, edges, 1)
@@ -522,7 +522,7 @@ for pid in range(1, 10):
     print(f"  {name:35s} ({pandas:2d} pandas) → {connected} [{status}]")
 
 # Critical corridor analysis
-print("\\\n=== Critical Corridors ===")
+print("\\n=== Critical Corridors ===")
 c.execute('''
     SELECT c.id, pa.name, pb.name, c.distance_km, c.quality, c.threat_level
     FROM corridors c
@@ -535,7 +535,7 @@ for cid, pa, pb, dist, quality, threat in c.fetchall():
     print(f"  [{priority:8s}] {pa[:20]:20s} ↔ {pb[:20]:20s} ({dist}km, {quality})")
 
 # Barriers needing mitigation
-print("\\\n=== Barriers Requiring Mitigation ===")
+print("\\n=== Barriers Requiring Mitigation ===")
 c.execute('''
     SELECT b.barrier_type, b.severity, b.mitigation,
            pa.name, pb.name
@@ -558,7 +558,7 @@ for pid in range(1, 10):
         total_connected += c.fetchone()[0]
 c.execute('SELECT SUM(estimated_pandas) FROM habitat_patches')
 total = c.fetchone()[0]
-print(f"\\\nConnected population: {total_connected}/{total} ({total_connected/total*100:.0f}%)")
+print(f"\\nConnected population: {total_connected}/{total} ({total_connected/total*100:.0f}%)")
 
 db.close()`,
       challenge: 'Remove the blocked corridor (6↔8) and see which patches become isolated. Then add a hypothetical new corridor directly from 1 to 9 — how does this change connectivity?',
@@ -788,13 +788,13 @@ plt.savefig('refugia.png', dpi=100, facecolor='#1f2937')
 plt.show()
 
 # Summary
-print("=== THERMAL REFUGIA SUMMARY ===\\\n")
+print("=== THERMAL REFUGIA SUMMARY ===\\n")
 for w in warmings:
     c.execute('SELECT COUNT(*) FROM refugia_scores WHERE warming_scenario=? AND suitability_score > 50', (w,))
     n = c.fetchone()[0]
     print(f"+{w}°C: {n}/225 cells suitable ({n/225*100:.0f}%)")
 
-print(f"\\\nProtection gap: {suitable_counts[3] - protected_suitable[3]} suitable cells at +3°C are UNPROTECTED")
+print(f"\\nProtection gap: {suitable_counts[3] - protected_suitable[3]} suitable cells at +3°C are UNPROTECTED")
 print("These should be priority areas for new protected zones!")
 
 db.close()`,
@@ -933,7 +933,7 @@ class ConservationDSS:
         print("=" * 70)
 
         # 1. Population Summary
-        print("\\\n╔══════════════════════════════════════════════════════════════════╗")
+        print("\\n╔══════════════════════════════════════════════════════════════════╗")
         print("║  1. POPULATION STATUS                                          ║")
         print("╚══════════════════════════════════════════════════════════════════╝")
 
@@ -953,7 +953,7 @@ class ConservationDSS:
         print(f"  {'TOTAL':30s}  {total:3d} pandas              ({total_bf} breeding ♀)")
 
         # 2. Threat Assessment
-        print("\\\n╔══════════════════════════════════════════════════════════════════╗")
+        print("\\n╔══════════════════════════════════════════════════════════════════╗")
         print("║  2. THREAT RANKING                                             ║")
         print("╚══════════════════════════════════════════════════════════════════╝")
 
@@ -965,7 +965,7 @@ class ConservationDSS:
             print(f"         Fix: {mitigation}")
 
         # 3. Action Ranking
-        print("\\\n╔══════════════════════════════════════════════════════════════════╗")
+        print("\\n╔══════════════════════════════════════════════════════════════════╗")
         print("║  3. RECOMMENDED ACTIONS (ranked by priority score)             ║")
         print("╚══════════════════════════════════════════════════════════════════╝")
 
@@ -980,14 +980,14 @@ class ConservationDSS:
             rank += 1
             priority_score = impact * urgency * feas / cost
             cost_per_panda = cost / max(1, impact)
-            print(f"\\\n  #{rank}. {name}")
+            print(f"\\n  #{rank}. {name}")
             print(f"     {desc}")
             print(f"     Cost: ₹{cost}L | Impact: {impact} pandas | Timeline: {timeline}yr")
             print(f"     Urgency: {urgency}/5 | Feasibility: {feas}/5 | Priority: {priority_score:.1f}")
             print(f"     Cost-effectiveness: ₹{cost_per_panda:.1f}L per panda protected")
 
         # 4. Corridor Status
-        print("\\\n╔══════════════════════════════════════════════════════════════════╗")
+        print("\\n╔══════════════════════════════════════════════════════════════════╗")
         print("║  4. CONNECTIVITY CORRIDORS                                     ║")
         print("╚══════════════════════════════════════════════════════════════════╝")
 
@@ -997,7 +997,7 @@ class ConservationDSS:
             print(f"  [{icon}] {name:25s} {status:10s} {connects:25s} ({pandas} pandas, ₹{cost}L)")
 
         # 5. Critical Recommendations
-        print("\\\n╔══════════════════════════════════════════════════════════════════╗")
+        print("\\n╔══════════════════════════════════════════════════════════════════╗")
         print("║  5. EXECUTIVE SUMMARY                                          ║")
         print("╚══════════════════════════════════════════════════════════════════╝")
         print(f"""

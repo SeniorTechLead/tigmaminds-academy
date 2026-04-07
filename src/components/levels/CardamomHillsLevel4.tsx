@@ -127,7 +127,7 @@ for d_id in range(1, 19):
 db.commit()
 
 # Queries
-print("=== SIKKIM CARDAMOM OIL — QUALITY MANAGEMENT SYSTEM ===\\\n")
+print("=== SIKKIM CARDAMOM OIL — QUALITY MANAGEMENT SYSTEM ===\\n")
 
 # Farm performance ranking
 print("--- Farm Performance Ranking ---")
@@ -149,7 +149,7 @@ for name, alt, org, cin, ta, premium, total in c.fetchall():
     print(f"  {name:20s} {alt}m {org_label:12s} cineole:{cin}% TA:{ta}% premium:{premium}/{total}")
 
 # ISO compliance rate
-print("\\\n--- ISO Compliance ---")
+print("\\n--- ISO Compliance ---")
 c.execute('''
     SELECT CASE WHEN iso_compliant THEN 'Compliant' ELSE 'Non-compliant' END as status,
            COUNT(*) as count
@@ -159,7 +159,7 @@ for status, count in c.fetchall():
     print(f"  {status}: {count} batches")
 
 # Revenue by grade
-print("\\\n--- Revenue by Grade ---")
+print("\\n--- Revenue by Grade ---")
 c.execute('''
     SELECT a.grade, COUNT(*) as batches,
            ROUND(SUM(s.price_per_ml * s.quantity_ml)) as revenue
@@ -172,7 +172,7 @@ for grade, batches, revenue in c.fetchall():
     print(f"  {grade:15s}: {batches} batches → Rs {revenue:,.0f}")
 
 # Traceability example
-print("\\\n--- Traceability: Best Batch ---")
+print("\\n--- Traceability: Best Batch ---")
 c.execute('''
     SELECT f.name, f.village, h.date, d.method,
            a.cineole_pct, a.terpinyl_acetate_pct, a.grade,
@@ -293,13 +293,13 @@ specs = {
 c.execute('SELECT * FROM source_oils')
 oils_data = c.fetchall()
 
-print("=== CARDAMOM OIL BLEND OPTIMIZER ===\\\n")
+print("=== CARDAMOM OIL BLEND OPTIMIZER ===\\n")
 print("--- Available Source Oils ---")
 for oil in oils_data:
     print(f"  {oil[1]:20s} Cin:{oil[3]}% TA:{oil[4]}% Lim:{oil[5]}% → Rs {oil[7]}/ml")
 
 for spec_name, targets in specs.items():
-    print(f"\\\n--- Optimizing: {spec_name} ---")
+    print(f"\\n--- Optimizing: {spec_name} ---")
     print(f"  Targets: Cin {targets['cineole_min']}-{targets['cineole_max']}%, "
           f"TA {targets['ta_min']}-{targets['ta_max']}%, Lim ≥{targets['limonene_min']}%")
 
@@ -330,7 +330,7 @@ for spec_name, targets in specs.items():
 db.commit()
 
 # Summary
-print("\\\n--- Blend Portfolio ---")
+print("\\n--- Blend Portfolio ---")
 c.execute('SELECT name, total_cost, meets_spec FROM blend_recipes')
 for name, cost, spec in c.fetchall():
     print(f"  {name:15s}: Rs {cost:,.0f}/L {'✓ ISO' if spec else '✗'}")
@@ -529,7 +529,7 @@ print(f"Activation energy: {Ea_fitted:.1f} kJ/mol")
 print(f"Rate at 25°C: k = {k_25:.6f} /day")
 print(f"Half-life at 25°C: {halflife} days ({halflife/30:.0f} months)")
 print(f"Shelf life (to ISO minimum): {shelf_life} days ({shelf_life/30:.0f} months)")
-print(f"\\\n60°C test for 12 weeks ≈ {12*7*acc_factors[-1]/7:.0f} weeks at 25°C")
+print(f"\\n60°C test for 12 weeks ≈ {12*7*acc_factors[-1]/7:.0f} weeks at 25°C")
 
 db.close()`,
       challenge: 'Run the analysis for terpinyl acetate separately. Does it have a longer or shorter shelf life than cineole? Which compound limits the overall shelf life?',
@@ -719,7 +719,7 @@ print(f"5-year average: Rs {np.mean(prices):.0f}/kg")
 print(f"5-year trend: {'Up' if prices[-1] > prices[0] else 'Down'} ({((prices[-1]-prices[0])/prices[0]*100):.0f}%)")
 print(f"Best selling month: {month_names[np.argmax(monthly_avg)]} (Rs {max(monthly_avg):.0f}/kg avg)")
 print(f"Worst month: {month_names[np.argmin(monthly_avg)]} (Rs {min(monthly_avg):.0f}/kg avg)")
-print(f"\\\n6-month forecast: Rs {forecast[-1]:.0f}/kg")
+print(f"\\n6-month forecast: Rs {forecast[-1]:.0f}/kg")
 
 db.close()`,
       challenge: 'Add a "monsoon failure" scenario: what if rainfall drops 40% for the next 6 months? Adjust the forecast using the price-rainfall correlation. How much does the price spike?',
@@ -805,7 +805,7 @@ class CardamomKnowledgeSystem:
         print("=" * 65)
 
         # Farm summary
-        print("\\\n--- FARM PERFORMANCE ---")
+        print("\\n--- FARM PERFORMANCE ---")
         c.execute('''
             SELECT f.name, f.altitude, ROUND(AVG(b.cineole),1),
                    ROUND(AVG(b.ta),1), SUM(b.oil_ml), COUNT(b.id),
@@ -818,7 +818,7 @@ class CardamomKnowledgeSystem:
             print(f"{row[0]:20s} {row[1]:>5} {row[2]:>5} {row[3]:>5} {row[4]:>8.0f} {row[5]:>8} {row[6]:>5}")
 
         # Inventory status
-        print("\\\n--- INVENTORY STATUS ---")
+        print("\\n--- INVENTORY STATUS ---")
         c.execute('''
             SELECT b.grade, SUM(i.current_ml), ROUND(AVG(i.quality_pct),1),
                    ROUND(AVG(i.days_stored),0)
@@ -833,14 +833,14 @@ class CardamomKnowledgeSystem:
         print(f"  {'TOTAL':10s}: {total_inventory:7.0f} ml")
 
         # Market outlook
-        print("\\\n--- MARKET OUTLOOK (next 3 months) ---")
+        print("\\n--- MARKET OUTLOOK (next 3 months) ---")
         c.execute("SELECT month, price_per_ml, demand_level FROM market WHERE month >= '2025-01' LIMIT 3")
         for month, price, demand in c.fetchall():
             signal = "SELL" if demand == 'High' else ("HOLD" if demand == 'Medium' else "WAIT")
             print(f"  {month}: Rs {price:.0f}/ml  Demand: {demand:6s}  Signal: {signal}")
 
         # Revenue projection
-        print("\\\n--- REVENUE PROJECTION ---")
+        print("\\n--- REVENUE PROJECTION ---")
         c.execute('''
             SELECT b.grade, SUM(i.current_ml) as stock
             FROM inventory i JOIN batches b ON i.batch_id = b.id
@@ -855,7 +855,7 @@ class CardamomKnowledgeSystem:
         print(f"  {'TOTAL':10s}: Rs {total_rev:,.0f}")
 
         # Blending opportunity
-        print("\\\n--- BLENDING OPPORTUNITIES ---")
+        print("\\n--- BLENDING OPPORTUNITIES ---")
         c.execute('''
             SELECT b.id, b.cineole, b.ta, b.grade, i.current_ml
             FROM batches b JOIN inventory i ON b.id = i.batch_id
@@ -885,7 +885,7 @@ class CardamomKnowledgeSystem:
             print(f"  Value uplift: Rs {uplift:+,.0f}")
 
         # Recommendations
-        print("\\\n--- RECOMMENDATIONS ---")
+        print("\\n--- RECOMMENDATIONS ---")
         print("  1. Sell Premium inventory NOW (demand peaks in Q4)")
         print("  2. Blend Basic batches #4,#5 with Premium #2 for ISO Standard")
         print("  3. Lhamo Highland farm: invest in expansion (best quality)")

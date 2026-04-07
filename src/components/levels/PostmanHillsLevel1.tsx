@@ -492,7 +492,7 @@ best_TB = 8 - best_TA
 best_V = v_vals[best_idx]
 
 ax1.plot(best_TA, best_TB, '*', color='#f59e0b', markersize=20, zorder=5)
-ax1.annotate(f'Optimal\\\n({best_V:.1f} villages)', xy=(best_TA, best_TB),
+ax1.annotate(f'Optimal\\n({best_V:.1f} villages)', xy=(best_TA, best_TB),
              xytext=(best_TA - 2, best_TB + 1.5), color='#f59e0b', fontsize=11, fontweight='bold',
              arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
@@ -509,7 +509,7 @@ ax2.set_facecolor('#111827')
 ax2.plot(ta_vals, v_vals, color='#22c55e', linewidth=2)
 ax2.fill_between(ta_vals, v_vals, alpha=0.1, color='#22c55e')
 ax2.plot(best_TA, best_V, '*', color='#f59e0b', markersize=15)
-ax2.annotate(f'Optimal: {best_V:.1f} villages\\\n(TA={best_TA:.1f}h, TB={best_TB:.1f}h)',
+ax2.annotate(f'Optimal: {best_V:.1f} villages\\n(TA={best_TA:.1f}h, TB={best_TB:.1f}h)',
              xy=(best_TA, best_V), xytext=(best_TA - 3, best_V - 1),
              color='#f59e0b', fontsize=10, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 ax2.set_xlabel('Time allocated to Zone A (hours)', color='white')
@@ -775,7 +775,7 @@ ax1.tick_params(colors='gray')
 
 # Cost comparison
 ax2.set_facecolor('#111827')
-strategies = ['Direct\\\n(star)', 'Clustered\\\n(postman)', 'Microhubs']
+strategies = ['Direct\\n(star)', 'Clustered\\n(postman)', 'Microhubs']
 costs = [direct_total, route_total, microhub_delivery]
 cost_per_delivery = [c / num_points for c in costs]
 
@@ -786,7 +786,7 @@ ax2.tick_params(colors='gray')
 
 for bar, cost, total in zip(bars, cost_per_delivery, costs):
     ax2.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.05,
-             f'{cost:.2f}/delivery\\\n({total:.0f} total)', ha='center', color='white', fontsize=9)
+             f'{cost:.2f}/delivery\\n({total:.0f} total)', ha='center', color='white', fontsize=9)
 
 plt.tight_layout()
 plt.show()

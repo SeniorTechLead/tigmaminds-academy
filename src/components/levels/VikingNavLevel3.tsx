@@ -63,7 +63,7 @@ lost = [r for r in results if r["status"] == "lost"]
 
 print("=== Monte Carlo Voyage Analysis: Iceland to Greenland ===")
 print(f"Simulations: {len(results)} | Arrived: {len(arrived)} ({len(arrived)/len(results)*100:.1f}%)")
-print(f"Lost: {len(lost)} ({len(lost)/len(results)*100:.1f}%)\\\n")
+print(f"Lost: {len(lost)} ({len(lost)/len(results)*100:.1f}%)\\n")
 
 if arrived:
     days = np.array([r["days"] for r in arrived])
@@ -71,7 +71,7 @@ if arrived:
     print("=== Crossing Time ===")
     for p in [10, 50, 90]:
         print(f"  {p}th pctile: {np.percentile(days, p):.1f} days")
-    print(f"\\\n=== Landing Accuracy ===")
+    print(f"\\n=== Landing Accuracy ===")
     for km in [50, 100, 200]:
         print(f"  Within {km} km: {np.sum(dists < km)/len(dists)*100:.0f}%")
     print(f"  Median error: {np.median(dists):.0f} km")`,
@@ -127,7 +127,7 @@ for week in range(52):
         print(f"{week+1:>4} {label:>8} {cond['daylight']:>5.2f} {cond['storm']:>5.2f} "
               f"{cond['ice']:>5.2f} {cond['wind']:>5.2f} {cond['current']:>5.2f} {score:>6.3f}")
 
-print(f"\\\nOptimal departure: {best_label} (score: {best_score:.3f})")
+print(f"\\nOptimal departure: {best_label} (score: {best_score:.3f})")
 threshold = best_score * 0.7
 viable = [w for w, s in enumerate(weekly) if s > threshold]
 if viable:
@@ -177,7 +177,7 @@ peaks = [i for i in range(2, len(amps)-2)
          if amps[i] > amps[i-1] and amps[i] > amps[i+1] and amps[i] > 0.15]
 
 print("=== Ocean Wave Spectrum Analysis ===")
-print(f"Duration: {duration}s | Sample rate: {1/dt:.0f} Hz | Points: {n}\\\n")
+print(f"Duration: {duration}s | Sample rate: {1/dt:.0f} Hz | Points: {n}\\n")
 print(f"{'Frequency':>11} {'Period':>9} {'Amplitude':>11} {'Type':>22}")
 print("-" * 55)
 
@@ -187,13 +187,13 @@ for idx in peaks[:8]:
            "Distant storm" if p < 12 else "Far swell" if p < 16 else "Reflected/coastal")
     print(f"{f:>9.4f} Hz {p:>7.1f} s {a:>9.2f} m {typ:>20}")
 
-print(f"\\\n=== Verification ===")
+print(f"\\n=== Verification ===")
 print(f"{'True Period':>12} {'True Amp':>10} {'Detected?':>10}")
 for p, a, _ in components:
     found = any(abs(freqs[i] - 1/p) < 0.02 for i in peaks)
     print(f"{p:>10.1f} s {a:>8.1f} m {'YES' if found else 'NO':>8}")
 
-print("\\\nLong-period swell (14-18s) indicates distant weather and land —")
+print("\\nLong-period swell (14-18s) indicates distant weather and land —")
 print("the same information Viking navigators extracted by feel.")`,
       challenge: 'Add a second measurement 6 hours later where the long-period swell has shifted in frequency (storm is moving). Calculate the storm\'s angular velocity from the frequency shift — the Doppler effect applied to ocean waves.',
       successHint: 'Fourier analysis is the backbone of audio processing (MP3), image compression (JPEG), telecommunications, and medical imaging (MRI). You applied it to the same problem Viking navigators solved by intuition.',
@@ -244,7 +244,7 @@ def fuse(measurements):
 # 7-day crossing with fusion
 true_lat, true_lon = 64.1, -21.9
 speed, heading = 8.0, 255
-print("=== Multi-Sensor Fusion: 7-Day Crossing ===\\\n")
+print("=== Multi-Sensor Fusion: 7-Day Crossing ===\\n")
 
 for day in range(1, 8):
     true_lat += speed * 24 * np.cos(np.radians(heading)) / 111
@@ -266,7 +266,7 @@ for day in range(1, 8):
         print(f"  No fixes — dead reckoning only")
 
 # Accuracy comparison
-print("\\\n=== Single Sensor vs Fused (500 trials, mid-ocean, clear sky) ===")
+print("\\n=== Single Sensor vs Fused (500 trials, mid-ocean, clear sky) ===")
 single_errs = {s.name: [] for s in sensors[:3]}
 fused_errs = []
 for _ in range(500):
@@ -336,7 +336,7 @@ routes = [
     ("Greenland to Vinland", 10), ("Norway to Vinland (direct)", 18),
 ]
 
-print("=== Viking Voyage Risk Assessment (5,000 sims each) ===\\\n")
+print("=== Viking Voyage Risk Assessment (5,000 sims each) ===\\n")
 for name, days in routes:
     out, causes = simulate_risk(hazards, days)
     tot = sum(out.values())
@@ -344,7 +344,7 @@ for name, days in routes:
     print(f"{name} ({days} days):")
     print(f"  Survived: {out['survived']/tot*100:>5.1f}% | Turned back: "
           f"{out['turned_back']/tot*100:.1f}% | Lost: {out['lost']/tot*100:.1f}%")
-    print(f"  Top risk: {top} ({causes[top]/tot*100:.1f}%)\\\n")
+    print(f"  Top risk: {top} ({causes[top]/tot*100:.1f}%)\\n")
 
 # Historical calibration
 print("=== Historical Calibration ===")
@@ -353,7 +353,7 @@ out25, _ = simulate_risk(hazards, 6, 25)
 print(f"Model for 25 ships: {(out25['lost']+out25['turned_back'])/25*100:.0f}% loss+turnback")
 
 # Expected value
-print("\\\n=== Risk-Benefit Decision ===")
+print("\\n=== Risk-Benefit Decision ===")
 trade_val, ship_cost, crew_val = 1000, 200, 500
 for name, days in routes:
     out, _ = simulate_risk(hazards, days)

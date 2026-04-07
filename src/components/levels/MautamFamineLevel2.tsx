@@ -66,7 +66,7 @@ for s in ax1.spines.values(): s.set_color('#374151')
 ax2.set_facecolor('#1f2937')
 ax2.plot(t, dPdt, color='#fbbf24', linewidth=2.5)
 ax2.axvline(t[np.argmax(dPdt)], color='white', linestyle=':', alpha=0.5)
-ax2.annotate('Maximum growth rate\\\n(P = K/2)', xy=(t[np.argmax(dPdt)], max(dPdt)),
+ax2.annotate('Maximum growth rate\\n(P = K/2)', xy=(t[np.argmax(dPdt)], max(dPdt)),
              xytext=(t[np.argmax(dPdt)] + 5, max(dPdt) * 0.8),
              color='white', fontsize=10,
              arrowprops=dict(arrowstyle='->', color='white'))
@@ -267,7 +267,7 @@ print("Key changes during Mautam:")
 print(f"  Rat biomass: {data['Before Mautam']['Rats']} → {data['During Mautam']['Rats']} → {data['After Mautam (Famine)']['Rats']}")
 print(f"  Grain crops: {data['Before Mautam']['Grain crops']} → {data['During Mautam']['Grain crops']} → {data['After Mautam (Famine)']['Grain crops']}")
 print(f"  Seed supply: {data['Before Mautam']['Seeds']} → {data['During Mautam']['Seeds']} → {data['After Mautam (Famine)']['Seeds']}")
-print("\\\nThe famine occurs because rats (biomass 100) turn to grain crops (biomass 10)")
+print("\\nThe famine occurs because rats (biomass 100) turn to grain crops (biomass 10)")
 print("when bamboo seeds (biomass 2) are exhausted.")`,
       challenge: 'Add a "predator introduction" scenario where snake populations are artificially doubled before the Mautam. Does this reduce the rat peak enough to prevent crop destruction? Plot the comparison.',
       successHint: 'You visualized food web dynamics across the Mautam cycle. This comparative visualization reveals how a single ecological event (bamboo flowering) cascades through an entire ecosystem — a concept called trophic cascade in ecology.',
@@ -371,7 +371,7 @@ wave_speed = 2 * np.sqrt(D * r)
 print(f"Theoretical wave speed: {wave_speed:.2f} km/month")
 print(f"Time for front to reach 10 km: ~{10/wave_speed:.0f} months")
 print(f"Time for front to reach 20 km: ~{20/wave_speed:.0f} months")
-print(f"\\\nVillage warning times:")
+print(f"\\nVillage warning times:")
 for dist in [2, 5, 10, 15]:
     print(f"  {dist} km from forest: ~{dist/wave_speed:.0f} months warning")`,
       challenge: 'Add a "barrier" at x = 10 km (like a river or cleared zone) that reduces the diffusion coefficient by 90%. Does the barrier slow the invasion enough to protect villages behind it? Plot the result.',

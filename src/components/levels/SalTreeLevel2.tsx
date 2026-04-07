@@ -76,7 +76,7 @@ ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8
 ax1.tick_params(colors='gray')
 
 # Mark elastic region
-ax1.annotate('Elastic\\\nregion', xy=(0.2, 25), color='#22c55e', fontsize=9)
+ax1.annotate('Elastic\\nregion', xy=(0.2, 25), color='#22c55e', fontsize=9)
 ax1.annotate('Yield', xy=(0.5, 63), xytext=(0.7, 90),
              color='#f59e0b', fontsize=8, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
@@ -173,7 +173,7 @@ ax1.plot(moisture, sal_strength, color='#8b4513', linewidth=2, label='Sal')
 ax1.plot(moisture, pine_strength, color='#deb887', linewidth=2, label='Pine')
 
 ax1.axvline(fsp, color='#3b82f6', linestyle='--', linewidth=1)
-ax1.text(fsp+1, sal_dry*0.9, 'Fiber Saturation\\\nPoint (28%)', color='#3b82f6', fontsize=8)
+ax1.text(fsp+1, sal_dry*0.9, 'Fiber Saturation\\nPoint (28%)', color='#3b82f6', fontsize=8)
 
 # Mark standard conditions
 for mc, label, color in [(12, 'Air-dried (12%)', '#22c55e'),
@@ -390,7 +390,7 @@ ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax1.tick_params(colors='gray')
 
 # At 45 degrees (worst case for solid wood)
-ax1.annotate('45° = worst case\\\nfor solid wood', xy=(45, solid_strength[50]),
+ax1.annotate('45° = worst case\\nfor solid wood', xy=(45, solid_strength[50]),
              xytext=(55, solid_strength[50]+10), color='#ef4444', fontsize=8,
              arrowprops=dict(arrowstyle='->', color='#ef4444'))
 
@@ -521,7 +521,7 @@ ax1.tick_params(colors='gray')
 
 # Savings annotation
 savings = concrete_total[50] - clt_reuse[50]
-ax1.annotate(f'50-year savings:\\\n{savings:.0f} tonnes CO2', xy=(50, clt_reuse[50]),
+ax1.annotate(f'50-year savings:\\n{savings:.0f} tonnes CO2', xy=(50, clt_reuse[50]),
              xytext=(60, clt_reuse[50]-100), color='#22c55e', fontsize=9,
              arrowprops=dict(arrowstyle='->', color='#22c55e'))
 
@@ -529,7 +529,7 @@ ax1.annotate(f'50-year savings:\\\n{savings:.0f} tonnes CO2', xy=(50, clt_reuse[
 ax2 = plt.subplot(122, polar=True)
 ax2.set_facecolor('#111827')
 
-categories = ['Strength', 'Cost', 'Carbon\\\nfootprint', 'Fire\\\nresistance', 'Durability', 'Renewability']
+categories = ['Strength', 'Cost', 'Carbon\\nfootprint', 'Fire\\nresistance', 'Durability', 'Renewability']
 N = len(categories)
 angles = np.linspace(0, 2*np.pi, N, endpoint=False).tolist()
 angles += angles[:1]
@@ -599,8 +599,8 @@ materials = {
     'Concrete': {'strength': 40, 'carbon': 150, 'renewable': 1, 'cost': 50, 'local_ne': 5, 'color': '#94a3b8'},
     'Steel': {'strength': 250, 'carbon': 2500, 'renewable': 1, 'cost': 800, 'local_ne': 2, 'color': '#6b7280'},
     'Sal CLT': {'strength': 120, 'carbon': -500, 'renewable': 6, 'cost': 600, 'local_ne': 9, 'color': '#8b4513'},
-    'Bamboo\\\ncomposite': {'strength': 185, 'carbon': -800, 'renewable': 9, 'cost': 400, 'local_ne': 10, 'color': '#22c55e'},
-    'Rammed\\\nearth': {'strength': 3, 'carbon': 20, 'renewable': 10, 'cost': 30, 'local_ne': 8, 'color': '#d2691e'},
+    'Bamboo\\ncomposite': {'strength': 185, 'carbon': -800, 'renewable': 9, 'cost': 400, 'local_ne': 10, 'color': '#22c55e'},
+    'Rammed\\nearth': {'strength': 3, 'carbon': 20, 'renewable': 10, 'cost': 30, 'local_ne': 8, 'color': '#d2691e'},
     'Hempcrete': {'strength': 1, 'carbon': -100, 'renewable': 8, 'cost': 200, 'local_ne': 4, 'color': '#86efac'},
 }
 
@@ -613,7 +613,7 @@ for name, props in materials.items():
     size = props['renewable'] * 30 + 50
     ax1.scatter(props['strength'], props['carbon'], s=size, color=props['color'],
                 edgecolor='white', linewidth=1.5, zorder=5)
-    ax1.annotate(name.replace('\\\n', ' '), xy=(props['strength'], props['carbon']),
+    ax1.annotate(name.replace('\\n', ' '), xy=(props['strength'], props['carbon']),
                  xytext=(props['strength']+5, props['carbon']+80),
                  color=props['color'], fontsize=7)
 
@@ -623,12 +623,12 @@ ax1.text(200, -100, 'CARBON NEGATIVE (below)', color='#22c55e', fontsize=7)
 
 ax1.set_xlabel('Compressive strength (MPa)', color='white')
 ax1.set_ylabel('Embodied carbon (kg CO2/m3)', color='white')
-ax1.set_title('Strength vs Carbon Footprint\\\n(bubble size = renewability)', color='white', fontsize=11)
+ax1.set_title('Strength vs Carbon Footprint\\n(bubble size = renewability)', color='white', fontsize=11)
 ax1.tick_params(colors='gray')
 
 # NE India suitability score
 ax2.set_facecolor('#111827')
-categories = ['Strength', 'Low carbon', 'Renewable', 'Affordable', 'Locally\\\navailable']
+categories = ['Strength', 'Low carbon', 'Renewable', 'Affordable', 'Locally\\navailable']
 N = len(categories)
 angles = np.linspace(0, 2*np.pi, N, endpoint=False).tolist()
 angles += angles[:1]
@@ -643,7 +643,7 @@ for name, props in materials.items():
 
     values = [strength_score, carbon_score, renew_score, cost_score, local_score]
     values += values[:1]
-    ax2.plot(angles, values, 'o-', linewidth=1.5, label=name.replace('\\\n', ' '),
+    ax2.plot(angles, values, 'o-', linewidth=1.5, label=name.replace('\\n', ' '),
              color=props['color'], markersize=3)
     ax2.fill(angles, values, alpha=0.05, color=props['color'])
 

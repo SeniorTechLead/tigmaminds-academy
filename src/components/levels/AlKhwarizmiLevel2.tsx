@@ -387,7 +387,7 @@ while low <= high:
         print(f"  too big, go left")
         high = mid - 1
 
-print(f"\\\nFound {target_small} in {step} steps (log2(32) = 5)")`,
+print(f"\\nFound {target_small} in {step} steps (log2(32) = 5)")`,
       challenge: 'Modify binary_search to return the index of the closest value if the exact target is not found. Test it with target = 42 in a list that does not contain 42.',
       successHint: 'Binary search is the algorithm behind every database index, search engine, and autocomplete feature. It works because a sorted list has structure — and the algorithm exploits that structure. This connection between data structure and algorithm efficiency is one of the deepest ideas in computer science.',
     },

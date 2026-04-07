@@ -130,7 +130,7 @@ ax2.tick_params(colors='gray')
 # Plot 5: Food requirement comparison
 ax = axes[1, 1]
 ax.set_facecolor('#111827')
-animals = ['Mouse\\\n(30g)', 'Lizard\\\n(100g)', 'Turtle\\\n(5kg)', 'Cat\\\n(4kg)', 'Human\\\n(70kg)']
+animals = ['Mouse\\n(30g)', 'Lizard\\n(100g)', 'Turtle\\n(5kg)', 'Cat\\n(4kg)', 'Human\\n(70kg)']
 # grams of food per day per kg body mass
 food_per_kg = [15, 3, 1.5, 5, 3.5]
 colors_food = ['#3b82f6', '#22c55e', '#22c55e', '#3b82f6', '#3b82f6']
@@ -160,7 +160,7 @@ print(f"Kleiber's law fit: B = {b0:.2e} * M^{alpha:.3f}")
 print(f"  Theoretical exponent: 0.750")
 print(f"  Fitted exponent: {alpha:.3f}")
 print(f"  R² = {np.corrcoef(log_m, log_b)[0,1]**2:.4f}")
-print(f"\\\n5 kg turtle vs 5 kg mammal:")
+print(f"\\n5 kg turtle vs 5 kg mammal:")
 print(f"  Mammal BMR: {b0 * 5**alpha:.2f} W")
 print(f"  Turtle BMR: {b0 * 5**alpha * 0.15:.2f} W (reptile ~15% of mammal)")
 print(f"  Turtle needs {(1/0.15-1)*100:.0f}% less food per day")`,
@@ -603,9 +603,9 @@ for em in em_range:
     opt_maints.append(maint_range[np.argmax(fitnesses)])
 ax.plot(em_range, np.array(opt_maints) * 100, color='#22c55e', linewidth=2)
 # Mark turtle and mouse
-ax.annotate('Turtle\\\n(low ext mort)', (0.01, opt_maints[1]*100), fontsize=9, color='#22c55e',
+ax.annotate('Turtle\\n(low ext mort)', (0.01, opt_maints[1]*100), fontsize=9, color='#22c55e',
            xytext=(0.08, 75), arrowprops=dict(arrowstyle='->', color='#22c55e'))
-ax.annotate('Mouse\\\n(high ext mort)', (0.3, opt_maints[-5]*100), fontsize=9, color='#ef4444',
+ax.annotate('Mouse\\n(high ext mort)', (0.3, opt_maints[-5]*100), fontsize=9, color='#ef4444',
            xytext=(0.2, 30), arrowprops=dict(arrowstyle='->', color='#ef4444'))
 ax.set_xlabel('External mortality rate', color='white')
 ax.set_ylabel('Optimal % to maintenance', color='white')
@@ -667,9 +667,9 @@ ax.tick_params(colors='gray')
 ax = axes[1, 2]
 ax.set_facecolor('#111827')
 strategies = {
-    'Turtle strategy\\\n(high maint)': (0.7, 0.005),
+    'Turtle strategy\\n(high maint)': (0.7, 0.005),
     'Balanced': (0.4, 0.05),
-    'Mouse strategy\\\n(low maint)': (0.15, 0.15),
+    'Mouse strategy\\n(low maint)': (0.15, 0.15),
 }
 for (name, (m, em)), clr in zip(strategies.items(), ['#22c55e', '#f59e0b', '#ef4444']):
     fit, surv, ages, mat, aging = lifetime_fitness(m, em)
@@ -688,7 +688,7 @@ plt.show()
 print("Disposable soma analysis:")
 for em, om in zip(external_morts, optimal_maints):
     print(f"  External mortality {em}: optimal maintenance = {om:.0%}")
-print(f"\\\nThe shell is the key innovation:")
+print(f"\\nThe shell is the key innovation:")
 print(f"  Without shell (ext mort ~0.15): optimal maintenance = {opt_maints[-5]*100:.0f}% -> short-lived")
 print(f"  With shell (ext mort ~0.005): optimal maintenance = {opt_maints[1]*100:.0f}% -> long-lived")`,
       challenge: 'Add a "repair efficiency" parameter that differs between species: turtles have better DNA repair per unit of maintenance investment. How does this shift the optimal strategy? Does it explain why turtles live even longer than the basic model predicts?',
@@ -794,7 +794,7 @@ ax.tick_params(colors='gray')
 # Plot 3: Contribution of each factor
 ax = axes[0, 2]
 ax.set_facecolor('#111827')
-factors = ['Cell division\\\nrate', 'Shortening\\\nper division', 'Telomerase\\\nactivity', 'Oxidative\\\nstress']
+factors = ['Cell division\\nrate', 'Shortening\\nper division', 'Telomerase\\nactivity', 'Oxidative\\nstress']
 human_vals = [1.0, 0.05, 0.01, 0.5]
 turtle_vals = [0.3, 0.03, 0.025, 0.1]
 x = np.arange(4)
@@ -871,7 +871,7 @@ for name, params in species_params.items():
     below_threshold = np.searchsorted(-lengths, -4)
     threshold_age = ages[min(below_threshold, len(ages)-1)] if below_threshold < len(ages) else float('inf')
     print(f"  {name}: L0={params['L0']}kb, reaches senescence threshold at age {threshold_age:.0f}")
-print(f"\\\nKey turtle advantages:")
+print(f"\\nKey turtle advantages:")
 print(f"  3x lower cell division rate -> fewer shortening events")
 print(f"  2.5x higher telomerase -> active maintenance")
 print(f"  5x lower oxidative stress -> less damage per division")`,
@@ -1005,7 +1005,7 @@ for var in plot_vars:
     rp_tortoise = allometric_predictions(250, 'reptile')
     print(f"{var:<25} {exp:<10.2f} {mp_mouse[var]:<15.2g} {mp_human[var]:<15.2g} {rp_turtle[var]:<15.2g} {rp_tortoise[var]:<15.2g}")
 
-print(f"\\\nKey insight: all exponents are multiples of 1/4.")
+print(f"\\nKey insight: all exponents are multiples of 1/4.")
 print(f"This emerges from fractal network geometry.")
 print(f"Turtles follow the reptile scaling but exceed lifespan predictions by 2-3x.")
 print(f"Total heartbeats: mammals ~1.5B, turtles ~2-3B (turtle hearts are more durable).")`,

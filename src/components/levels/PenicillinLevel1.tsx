@@ -42,7 +42,7 @@ times, pops = bacterial_growth(N0=1, doubling_time_min=20,
 
 print("=== Bacterial Exponential Growth ===")
 print(f"Starting: 1 bacterium | Doubling time: 20 min")
-print(f"\\\n{'Time':>8} {'Population':>20} {'Doublings':>10}")
+print(f"\\n{'Time':>8} {'Population':>20} {'Doublings':>10}")
 print("-" * 40)
 
 for t, n in zip(times, pops):
@@ -58,7 +58,7 @@ for t, n in zip(times, pops):
         print(f"{hours:>6.0f} hr {pop_str:>20} {doublings:>8.0f}")
 
 # The deceptive nature of exponential growth
-print(f"\\\n=== The Deception ===")
+print(f"\\n=== The Deception ===")
 half_day = 12 * 60 // 20  # doublings in 12 hours
 full_day = 24 * 60 // 20  # doublings in 24 hours
 pop_12h = 2 ** half_day
@@ -70,7 +70,7 @@ print(f"The SECOND 12 hours produced {pop_24h/pop_12h:.2e}× more bacteria")
 print(f"than the FIRST 12 hours combined!")
 
 # Compare with linear growth
-print(f"\\\n=== Exponential vs Linear Growth ===")
+print(f"\\n=== Exponential vs Linear Growth ===")
 print(f"{'Time':>6} {'Exponential':>15} {'Linear (+1000/hr)':>18}")
 print("-" * 41)
 for hours in [1, 4, 8, 12, 24]:
@@ -78,7 +78,7 @@ for hours in [1, 4, 8, 12, 24]:
     lin = 1 + 1000 * hours
     print(f"{hours:>4} hr {exp:>15,} {lin:>18,}")
 
-print(f"\\\nAt 24 hours, exponential = {2**(24*3):.2e}")
+print(f"\\nAt 24 hours, exponential = {2**(24*3):.2e}")
 print(f"            linear     = {1+1000*24:,}")
 print(f"Ratio: {2**(24*3)/(1+1000*24):.2e}× difference!")`,
       challenge: 'Some bacteria (like Mycobacterium tuberculosis) divide every 24 hours instead of every 20 minutes. Starting from 1 bacterium, how many are there after 30 days? Compare with a fast-growing bacterium. Why is TB harder to detect early? (It takes much longer to reach symptomatic numbers.)',
@@ -140,7 +140,7 @@ bacteria = [
 
 print("=== Zone of Inhibition Calculator ===")
 print(f"Antibiotic disk: {disk_conc} μg/mL penicillin")
-print(f"\\\n{'Bacterium':<30} {'MIC (μg/mL)':>12} {'Zone (mm)':>10} {'Status':>14}")
+print(f"\\n{'Bacterium':<30} {'MIC (μg/mL)':>12} {'Zone (mm)':>10} {'Status':>14}")
 print("-" * 68)
 
 for name, mic in bacteria:
@@ -156,7 +156,7 @@ for name, mic in bacteria:
     print(f"{name:<30} {mic:>10.2f} {zone:>8.1f} {status:>14}")
 
 # Show concentration gradient
-print(f"\\\n=== Concentration vs Distance from Disk ===")
+print(f"\\n=== Concentration vs Distance from Disk ===")
 print(f"{'Distance (mm)':>14} {'Conc (μg/mL)':>14} {'Kills Strep?':>14} {'Kills MRSA?':>14}")
 print("-" * 58)
 
@@ -167,7 +167,7 @@ for d in [0, 5, 10, 15, 20, 25, 30, 35, 40]:
     print(f"{d:>12} mm {conc:>12.2f} {kills_strep:>14} {kills_mrsa:>14}")
 
 # Clinical interpretation
-print(f"\\\n=== Clinical Interpretation ===")
+print(f"\\n=== Clinical Interpretation ===")
 print(f"Sensitive (zone ≥ 20mm): standard dose will cure the infection")
 print(f"Intermediate (14-19mm): higher dose might work")
 print(f"Resistant (zone < 14mm): this antibiotic won't work — need an alternative")`,
@@ -256,7 +256,7 @@ for entry in full_course:
           f"{entry['resistant']:>10,} {entry['pct_resistant']:>7.1f}% {treat:>10}")
 
 # Scenario 2: Incomplete course (3 days)
-print(f"\\\n=== Scenario 2: Stopped After 3 Days ('I feel better') ===")
+print(f"\\n=== Scenario 2: Stopped After 3 Days ('I feel better') ===")
 incomplete = simulate_resistance(treatment_start=3, treatment_end=6)
 
 for entry in incomplete:
@@ -267,12 +267,12 @@ for entry in incomplete:
 # Compare outcomes
 full_final = full_course[-1]
 incomplete_final = incomplete[-1]
-print(f"\\\n=== Comparison ===")
+print(f"\\n=== Comparison ===")
 print(f"Full course:     {full_final['total']:>10,} bacteria, "
       f"{full_final['pct_resistant']:.0f}% resistant")
 print(f"Stopped early:   {incomplete_final['total']:>10,} bacteria, "
       f"{incomplete_final['pct_resistant']:.0f}% resistant")
-print(f"\\\nStopping early: population rebounds with RESISTANT bacteria.")
+print(f"\\nStopping early: population rebounds with RESISTANT bacteria.")
 print(f"Next time you need antibiotics, the old ones won't work.")`,
       challenge: 'Add a third scenario: "Sublethal dose" — treatment that kills only 50% of sensitive bacteria per day instead of 99%. This simulates taking too low a dose. Does it accelerate resistance even faster than stopping early? (Yes — sublethal doses are the worst: they kill slowly, giving resistant mutants maximum time to multiply.)',
       successHint: 'You simulated evolution by natural selection — in fast-forward. The same process that took millions of years to create species diversity happens in days with bacteria because they reproduce so fast. Understanding this is essential for medicine, agriculture (pesticide resistance), and conservation.',
@@ -349,7 +349,7 @@ for conc in concentrations:
     print()
 
 # Pharmacokinetics: drug concentration over time
-print(f"\\\n=== Blood Concentration After 500mg Oral Dose ===")
+print(f"\\n=== Blood Concentration After 500mg Oral Dose ===")
 times, concs = pharmacokinetics(500, half_life_hours=1.0)
 
 print(f"{'Time (hr)':>10} {'Conc (μg/mL)':>14} {'Above MIC(1)?':>14} {'Above MIC(8)?':>14}")
@@ -364,14 +364,14 @@ for t, c in zip(times, concs):
 # Time above MIC
 time_above_mic_1 = sum(1 for c in concs if c > 1) * 0.1
 time_above_mic_8 = sum(1 for c in concs if c > 8) * 0.1
-print(f"\\\nTime above MIC=1: {time_above_mic_1:.1f} hours")
+print(f"\\nTime above MIC=1: {time_above_mic_1:.1f} hours")
 print(f"Time above MIC=8: {time_above_mic_8:.1f} hours")
-print(f"\\\nDosing interval should ensure concentration stays above")
+print(f"\\nDosing interval should ensure concentration stays above")
 print(f"MIC for most of the interval. For MIC=1: dose every ~{time_above_mic_1:.0f}h.")
 print(f"For MIC=8: need higher dose or more frequent dosing.")
 
 # Multiple doses
-print(f"\\\n=== Multiple Doses (500mg every 4 hours) ===")
+print(f"\\n=== Multiple Doses (500mg every 4 hours) ===")
 total_time = 24
 dt = 0.1
 times_multi = np.arange(0, total_time, dt)
@@ -391,7 +391,7 @@ for i, t in enumerate(times_multi):
         print(f"{t:>4.0f} {concs_multi[i]:>12.1f}")
 
 min_conc = min(concs_multi[int(4/dt):])  # trough after first dose
-print(f"\\\nTrough concentration: {min_conc:.1f} μg/mL")
+print(f"\\nTrough concentration: {min_conc:.1f} μg/mL")
 print(f"Stays above MIC=1? {'YES' if min_conc > 1 else 'NO'}")
 print(f"Stays above MIC=8? {'YES' if min_conc > 8 else 'NO'}")`,
       challenge: 'A patient has a kidney problem that slows drug elimination (half-life doubles from 1 hour to 2 hours). How does this change the blood concentration profile? Is the same dose still safe, or could it accumulate to toxic levels? (This is why doctors adjust doses for patients with kidney disease.)',
@@ -467,7 +467,7 @@ for name, vol, strain, medium in stages:
     print(f"{name:<30} {vol:>6.0f} L {yield_L:>7.1f} mg/L {total:>8.0f} mg {doses:>8.1f}")
 
 # The three breakthroughs
-print(f"\\\n=== Key Breakthroughs ===")
+print(f"\\n=== Key Breakthroughs ===")
 
 # 1. Corn steep liquor
 base = penicillin_yield(100, 1.0, 1.0)
@@ -483,7 +483,7 @@ ind = penicillin_yield(10000, 200.0, 10.0)
 print(f"3. Industrial scale: total production ×{ind[1]/cant[1]:.0f}")
 
 # D-Day requirement
-print(f"\\\n=== D-Day Production Target ===")
+print(f"\\n=== D-Day Production Target ===")
 soldiers_needing_treatment = 10000  # per month
 doses_per_soldier = 14  # 14-day course
 total_doses_month = soldiers_needing_treatment * doses_per_soldier
@@ -497,7 +497,7 @@ print(f"Total penicillin needed: {total_mg_month/1e6:.0f} kg/month")
 _, yield_per_tank = penicillin_yield(10000, 200.0, 10.0)
 batches_per_month = 30 / 7  # one batch per week
 tanks_needed = total_mg_month / (yield_per_tank * batches_per_month)
-print(f"\\\nWith 10,000L fermenters producing {yield_per_tank/1000:.0f} g/batch:")
+print(f"\\nWith 10,000L fermenters producing {yield_per_tank/1000:.0f} g/batch:")
 print(f"Batches per month: {batches_per_month:.0f}")
 print(f"Fermenters needed: {tanks_needed:.0f}")
 print(f"By D-Day, US industry had ~20 pharmaceutical companies")
@@ -560,7 +560,7 @@ def resistance_model(
 
 # Scenario 1: Business as usual (no new interventions)
 print("=== Global Antibiotic Resistance Projections ===")
-print(f"\\\nScenario 1: Business as Usual")
+print(f"\\nScenario 1: Business as Usual")
 bau = resistance_model(intervention_effect=0)
 
 print(f"{'Year':>6} {'Resistant %':>12} {'Annual Deaths':>15}")
@@ -570,7 +570,7 @@ for entry in bau:
         print(f"{entry['year']:>6} {entry['resistant_pct']:>10.1f}% {entry['deaths']:>13,.0f}")
 
 # Scenario 2: Moderate intervention
-print(f"\\\nScenario 2: Moderate Intervention (stewardship + R&D)")
+print(f"\\nScenario 2: Moderate Intervention (stewardship + R&D)")
 moderate = resistance_model(intervention_effect=0.3, new_antibiotic_interval=10)
 
 print(f"{'Year':>6} {'Resistant %':>12} {'Annual Deaths':>15}")
@@ -580,7 +580,7 @@ for entry in moderate:
         print(f"{entry['year']:>6} {entry['resistant_pct']:>10.1f}% {entry['deaths']:>13,.0f}")
 
 # Scenario 3: Aggressive intervention
-print(f"\\\nScenario 3: Aggressive Intervention (global coordination)")
+print(f"\\nScenario 3: Aggressive Intervention (global coordination)")
 aggressive = resistance_model(intervention_effect=0.6, new_antibiotic_interval=7)
 
 print(f"{'Year':>6} {'Resistant %':>12} {'Annual Deaths':>15}")
@@ -590,7 +590,7 @@ for entry in aggressive:
         print(f"{entry['year']:>6} {entry['resistant_pct']:>10.1f}% {entry['deaths']:>13,.0f}")
 
 # Comparison
-print(f"\\\n=== 2050 Comparison ===")
+print(f"\\n=== 2050 Comparison ===")
 bau_2050 = bau[-1]
 mod_2050 = moderate[-1]
 agg_2050 = aggressive[-1]
@@ -601,10 +601,10 @@ print(f"{'Business as usual':<40} {bau_2050['resistant_pct']:>10.1f}% {bau_2050[
 print(f"{'Moderate intervention':<40} {mod_2050['resistant_pct']:>10.1f}% {mod_2050['deaths']:>13,.0f}")
 print(f"{'Aggressive intervention':<40} {agg_2050['resistant_pct']:>10.1f}% {agg_2050['deaths']:>13,.0f}")
 lives_saved = bau_2050["deaths"] - agg_2050["deaths"]
-print(f"\\\nLives saved by aggressive intervention: {lives_saved:,.0f} per year")
+print(f"\\nLives saved by aggressive intervention: {lives_saved:,.0f} per year")
 
 # What interventions work?
-print(f"\\\n=== Intervention Strategies ===")
+print(f"\\n=== Intervention Strategies ===")
 strategies = [
     ("Complete prescribed courses", 0.05),
     ("Reduce agricultural antibiotics", 0.08),
@@ -623,7 +623,7 @@ for name, effect in strategies:
     print(f"{name:<40} {'−'}{effect*100:.0f}%{' ':>10}")
 
 print(f"{'COMBINED':.<40} {'−'}{cumulative*100:.0f}%{' ':>10}")
-print(f"\\\nCombined: {cumulative*100:.0f}% reduction in resistance growth rate")
+print(f"\\nCombined: {cumulative*100:.0f}% reduction in resistance growth rate")
 print(f"No single strategy is enough. ALL of them together barely keep pace.")`,
       challenge: 'Add a "phage therapy" strategy — using viruses that kill specific bacteria, bypassing antibiotic resistance entirely. Model it as reducing the effective resistant percentage by 20% (phages work on resistant bacteria that antibiotics can\'t kill). How does this change the 2050 projection?',
       successHint: 'You modeled one of the most important public health crises of the 21st century. The mathematics is clear: without intervention, antibiotic resistance will kill more people than cancer by 2050. But the projections also show that coordinated action — multiple strategies applied together — can dramatically reduce this toll.',

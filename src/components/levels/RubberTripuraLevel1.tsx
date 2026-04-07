@@ -324,10 +324,10 @@ for prop, vals in properties.items():
         sbr_wins += 1
     print(f"{prop:<28} | {nr:>6} | {sbr:>6} | {winner}")
 
-print(f"\\\nNR wins: {nr_wins} categories, SBR wins: {sbr_wins} categories")
+print(f"\\nNR wins: {nr_wins} categories, SBR wins: {sbr_wins} categories")
 
 # Economic analysis
-print("\\\nECONOMIC COMPARISON")
+print("\\nECONOMIC COMPARISON")
 print("-" * 55)
 nr_price = 180    # INR/kg
 sbr_price = 140   # INR/kg
@@ -345,7 +345,7 @@ if nr_price / nr_lifetime_multiplier < sbr_price:
 else:
     print("SBR is cheaper even accounting for NR's longer life.")
 
-print(f"\\\nTripura produced ~85,000 tonnes of natural rubber in 2023.")
+print(f"\\nTripura produced ~85,000 tonnes of natural rubber in 2023.")
 print(f"At ₹{nr_price}/kg, that is ₹{85000 * 1000 * nr_price / 1e9:.1f} billion in revenue.")
 print("Natural rubber is not just agriculture — it is high-value chemistry.")`,
       challenge: 'Oil prices affect SBR cost (SBR is petroleum-derived). If oil doubles, SBR price rises 40%. At what oil price does NR become cheaper per kg?',

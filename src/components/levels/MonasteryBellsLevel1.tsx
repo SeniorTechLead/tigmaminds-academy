@@ -371,7 +371,7 @@ ax1.plot(temperatures, speeds, linewidth=2.5, color='#3b82f6')
 for name, temp in locations.items():
     v = 331.4 + 0.6 * temp
     ax1.scatter(temp, v, s=60, zorder=5, color='white', edgecolor='#3b82f6', linewidth=2)
-    ax1.annotate(f'{name}\\\n{v:.0f} m/s', xy=(temp, v),
+    ax1.annotate(f'{name}\\n{v:.0f} m/s', xy=(temp, v),
                 xytext=(temp, v + 4), fontsize=8, color='lightgray', ha='center')
 
 ax1.set_xlabel('Temperature (°C)', fontsize=11)

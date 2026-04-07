@@ -527,7 +527,7 @@ print("Drum tuning parameters:")
 for note, freq in target_notes.items():
     T = tuner.tune_to_frequency(freq)
     print(f"  {note} ({freq:.1f} Hz): tension = {T:.0f} N/m")
-print(f"\\nTemperature sensitivity: {abs(drift_pct[0] - drift_pct[-1])/(temp_range[-1]-temp_range[0]):.2f}% per °C")`,
+print(f"\nTemperature sensitivity: {abs(drift_pct[0] - drift_pct[-1])/(temp_range[-1]-temp_range[0]):.2f}% per °C")`,
       challenge: "Model a drum with 8 individually adjustable tuning lugs. Simulate what happens when one lug is 20% loose while the rest are correct. Visualize the resulting non-uniform tension field and predict the beating frequency.",
       successHint: "You can now model drum tuning — connecting tension, temperature, and frequency into a complete acoustic prediction system.",
     },

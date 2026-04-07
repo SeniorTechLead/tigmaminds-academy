@@ -61,7 +61,7 @@ ax.set_title('Drag & Power vs Speed (v² and v³ scaling)', color='white', fonts
 # Mark jumping speed
 v_jump = np.sqrt(2 * g * 0.8)
 ax.axvline(v_jump, color='#fbbf24', linewidth=1.5, linestyle=':')
-ax.text(v_jump + 0.1, drag_force(v_jump) * 0.7, f'Jump speed\\\n{v_jump:.1f} m/s',
+ax.text(v_jump + 0.1, drag_force(v_jump) * 0.7, f'Jump speed\\n{v_jump:.1f} m/s',
         color='#fbbf24', fontsize=9)
 ax.tick_params(colors='gray'); ax2_twin.tick_params(colors='gray')
 lines1, labels1 = ax.get_legend_handles_labels()
@@ -130,7 +130,7 @@ for L, label in fish_sizes:
 ax4.axhspan(1, 1e3, alpha=0.1, color='#3b82f6')
 ax4.axhspan(1e3, 1e6, alpha=0.1, color='#22c55e')
 ax4.axhspan(1e6, 1e8, alpha=0.1, color='#f59e0b')
-ax4.text(0.2, 100, 'Viscous\\\n(Stokes)', color='#3b82f6', fontsize=8)
+ax4.text(0.2, 100, 'Viscous\\n(Stokes)', color='#3b82f6', fontsize=8)
 ax4.text(0.2, 1e4, 'Transitional', color='#22c55e', fontsize=8)
 ax4.text(0.2, 5e6, 'Turbulent', color='#f59e0b', fontsize=8)
 ax4.set_xlabel('Swimming speed (m/s)', color='white')
@@ -146,10 +146,10 @@ print("Fish Jump Physics:")
 print(f"  Exit velocity for 0.8m jump: {np.sqrt(2*g*0.8):.2f} m/s")
 print(f"  Exit velocity for 1.0m jump: {np.sqrt(2*g*1.0):.2f} m/s")
 print(f"  Exit velocity for 1.5m jump: {np.sqrt(2*g*1.5):.2f} m/s")
-print(f"\\\nDrag at jump speed ({v_jump:.1f} m/s): {drag_force(v_jump):.3f} N")
+print(f"\\nDrag at jump speed ({v_jump:.1f} m/s): {drag_force(v_jump):.3f} N")
 print(f"Power at jump speed: {drag_force(v_jump)*v_jump:.3f} W")
 print(f"Reynolds number at jump: {reynolds_number(v_jump):.0f} (turbulent)")
-print(f"\\\nEnergy for 0.8m jump: {0.5*mass*v_jump**2:.3f} J kinetic + drag losses")
+print(f"\\nEnergy for 0.8m jump: {0.5*mass*v_jump**2:.3f} J kinetic + drag losses")
 print(f"This is ~{0.5*mass*v_jump**2 / (mass * g * 0.8) * 100:.0f}% more than the gravitational PE gained.")`,
       challenge: 'Add air resistance to the jump trajectory. Model the fish as a projectile experiencing quadratic drag in air (Cd_air ≈ 0.4). How much does air resistance reduce the maximum height compared to vacuum?',
       successHint: 'Fish locomotion involves the same fluid dynamics principles as aircraft and submarine design. The v² drag law and v³ power law are universal consequences of moving through a fluid at high Reynolds numbers. Understanding these physics explains why fish body shapes are so remarkably streamlined.',
@@ -253,7 +253,7 @@ ax2.tick_params(colors='gray')
 ax3 = axes[1, 0]
 ax3.set_facecolor('#111827')
 # Model state transitions
-states = ['Detached\\\n(ATP bound)', 'Cocked\\\n(ADP+Pi)', 'Attached\\\n(power stroke)', 'Rigor\\\n(no ATP)']
+states = ['Detached\\n(ATP bound)', 'Cocked\\n(ADP+Pi)', 'Attached\\n(power stroke)', 'Rigor\\n(no ATP)']
 transition_rates = [100, 200, 150, 80]  # /s for fast-twitch
 # Steady state fractions
 total_rate = sum(transition_rates)
@@ -272,7 +272,7 @@ ax3.tick_params(colors='gray')
 # Plot 4: Muscle composition in different fish
 ax4 = axes[1, 1]
 ax4.set_facecolor('#111827')
-fish_species = ['Salmon\\\n(migratory)', 'Tuna\\\n(pelagic)', 'Mahseer\\\n(river)', 'Catfish\\\n(benthic)', 'Flying fish\\\n(jumper)']
+fish_species = ['Salmon\\n(migratory)', 'Tuna\\n(pelagic)', 'Mahseer\\n(river)', 'Catfish\\n(benthic)', 'Flying fish\\n(jumper)']
 white_pct = [55, 35, 70, 60, 80]
 red_pct = [40, 60, 25, 30, 15]
 pink_pct = [5, 5, 5, 10, 5]
@@ -294,13 +294,13 @@ plt.show()
 print("Muscle Biochemistry of Fish Jumping:")
 for name, params in fiber_types.items():
     F, f_att = muscle_force(params['n_heads'], params['attach_rate'], params['detach_rate'])
-    print(f"\\\n{name}:")
+    print(f"\\n{name}:")
     print(f"  Heads: {params['n_heads']:.0e}")
     print(f"  Fraction attached: {f_att:.1%}")
     print(f"  Force per fiber: {F*1e6:.1f} μN")
     print(f"  ATP consumption: {params['n_heads']*params['attach_rate']:.2e} /s")
     print(f"  Fatigue time: {params['fatigue_time']} s")
-print(f"\\\nJumping fish rely on white muscle — maximum power, rapid fatigue.")
+print(f"\\nJumping fish rely on white muscle — maximum power, rapid fatigue.")
 print(f"A jump lasting 0.2s consumes ~{1e10 * 100 * 0.2:.1e} ATP molecules per fiber.")
 print(f"Recovery takes minutes as creatine phosphate and glycolysis replenish ATP.")`,
       challenge: 'Model the recovery phase after a jump: add creatine phosphate buffering (fast, ~10s) and glycolysis (slow, ~minutes) as ATP replenishment pathways. Plot the ATP recovery curve and predict how many consecutive jumps a fish can make.',

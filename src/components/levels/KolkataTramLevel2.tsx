@@ -234,7 +234,7 @@ print("No driver intervention needed — back-EMF does the work.")
 # Energy analysis
 total_E_elec = sum(h["I"] * V * 0.01 for h in hist) / 1000
 total_E_mech = sum(h["T_motor"] * h["omega"] * 0.01 for h in hist) / 1000
-print(f"\\nElectrical energy consumed: {total_E_elec:.1f} kJ")
+print(f"\nElectrical energy consumed: {total_E_elec:.1f} kJ")
 print(f"Mechanical energy delivered: {total_E_mech:.1f} kJ")
 print(f"Overall efficiency: {total_E_mech/total_E_elec*100:.1f}%")`,
       challenge: 'Simulate a sudden load spike (passenger surge at a stop, load jumps from 200 to 800 Nm in 0.1 seconds). How quickly does the motor respond? What is the maximum current during the transient? Does it exceed the safe limit of 400 A?',
@@ -341,7 +341,7 @@ print(f"Annual saving:    Rs {savings_kWh * cost_per_kWh * 300:.0f}")
 chopper_cost = 500000  # INR per tram
 annual_saving = savings_kWh * cost_per_kWh * 300
 payback = chopper_cost / annual_saving
-print(f"\\nChopper retrofit cost: Rs {chopper_cost:,}")
+print(f"\nChopper retrofit cost: Rs {chopper_cost:,}")
 print(f"Payback period: {payback:.1f} years")`,
       challenge: 'A "regenerative chopper" not only saves energy during motoring but also recovers energy during braking. If 30% of a tram\'s daily energy can be regenerated, calculate the total annual savings. Does the payback period justify the 20% higher cost of a regenerative chopper?',
       successHint: 'Power electronics — the field of semiconductor switching for power control — has revolutionised transportation. Every electric vehicle, from Tesla to modern trams to electric trains, uses chopper or inverter control. The principle is always the same: control average voltage by rapid switching, not by resistive waste.',
@@ -461,7 +461,7 @@ T_m, _ = tram.motor_torque(v_test)
 F_net = (T_m - T_d) * tram.gr / tram.r_w
 a0 = F_net / tram.m
 t_to_30 = (30/3.6) / (a0 * 0.5)  # approximate with halving acceleration
-print(f"\\nApprox time to 30 km/h: {t_to_30:.0f} seconds")`,
+print(f"\nApprox time to 30 km/h: {t_to_30:.0f} seconds")`,
       challenge: 'The tram is redesigned as a lightweight modern vehicle: 12 tonnes (instead of 18), Cd = 0.5 (instead of 0.8), better bearings (f_roll = 0.003). Calculate the new maximum speed and acceleration. How much does modernisation improve performance without changing the motor?',
       successHint: 'Traction demand matching is the core task of powertrain engineering for every vehicle: cars, trucks, trains, ships, and aircraft. The curves you just plotted are identical in concept to those used by Tesla, Toyota, and Boeing. The motor must exceed the demand at every operating point.',
     },
@@ -542,7 +542,7 @@ print(f"Wasted as heat: {(KE - E_regen)/1000:.1f} kJ")
 
 # Detailed simulation
 E_rec, E_fric, dist, time, log = tram.simulate_stop(30, 1.2)
-print(f"\\nBraking distance: {dist:.1f} m")
+print(f"\nBraking distance: {dist:.1f} m")
 print(f"Braking time: {time:.1f} s")
 print(f"Energy recovered: {E_rec/1000:.1f} kJ")
 print(f"Energy to friction: {E_fric/1000:.1f} kJ")
@@ -572,21 +572,21 @@ for v, w in zip(speeds, weights):
     daily_KE_per_tram += daily_KE
     print(f"{v:>6} {n_stops:>8.0f} {KE_per_stop/1000:>6.1f} {daily_regen:>10.1f}")
 
-print(f"\\nDaily per tram: {daily_regen_per_tram:.1f} kJ ({daily_regen_per_tram/3600:.2f} kWh)")
+print(f"\nDaily per tram: {daily_regen_per_tram:.1f} kJ ({daily_regen_per_tram/3600:.2f} kWh)")
 print(f"Daily fleet total: {daily_regen_per_tram * fleet_size / 3600:.0f} kWh")
 
 annual = daily_regen_per_tram * fleet_size * 300 / 3600
 cost_rate = 8  # INR per kWh
 annual_savings = annual * cost_rate
 
-print(f"\\nAnnual fleet recovery: {annual:,.0f} kWh")
+print(f"\nAnnual fleet recovery: {annual:,.0f} kWh")
 print(f"Annual cost savings: Rs {annual_savings:,.0f}")
 print(f"  = " + f"USD {annual_savings/80:,.0f}")
 
 # Break-even analysis
 regen_retrofit_cost = fleet_size * 300000  # Rs 3 lakh per tram
 payback_years = regen_retrofit_cost / annual_savings
-print(f"\\nRetrofit cost (fleet): Rs {regen_retrofit_cost:,.0f}")
+print(f"\nRetrofit cost (fleet): Rs {regen_retrofit_cost:,.0f}")
 print(f"Payback period: {payback_years:.1f} years")`,
       challenge: 'Not all regenerated energy can be used immediately — it must either go to another tram on the same section (consuming power) or be stored in a battery. If only 60% of regenerated energy finds a consumer, recalculate the savings. Design a 100 kWh battery storage system at each substation — what does it cost, and does it pay for itself?',
       successHint: 'Regenerative braking is now standard in every electric and hybrid vehicle. Tesla cars recover 60-70% of braking energy. Electric trains in Japan recover enough energy to power station lighting. The Kolkata tram fleet represents an untapped opportunity — the same technology could save crores of rupees annually.',

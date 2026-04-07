@@ -251,7 +251,7 @@ print(f"Angular momentum L = {L:.2f} kg.m^2/s (conserved)")
 print(f"Arms extended: I = {I_values[0]:.3f} kg.m^2, spin = {rpm_values[0]:.2f} rev/s")
 print(f"Arms tucked:   I = {I_values[-1]:.3f} kg.m^2, spin = {rpm_values[-1]:.2f} rev/s")
 print(f"Speed multiplier: {rpm_values[-1]/rpm_values[0]:.2f}x")
-print(f"\\\nKey insight: The dancer does NO additional work to spin faster.")
+print(f"\\nKey insight: The dancer does NO additional work to spin faster.")
 print(f"The speed increase comes entirely from geometry — redistributing mass.")`,
       challenge: 'Extend the model to include the dancer holding a prop (a 0.5 kg flag on a 0.8 m pole) in one hand. How does this asymmetric mass distribution affect the spin? Calculate the wobble (precession) that results from the off-axis mass.',
       successHint: 'Angular momentum conservation is why every spinning dancer in the world uses the same technique — arms in to speed up, arms out to slow down. The physics is non-negotiable; the artistry is in how gracefully you exploit it.',
@@ -321,7 +321,7 @@ for ax, (pose_name, segments) in zip(axes.flat, poses.items()):
         f_muscle = tau_grav / lever
         ma = dist / lever  # mechanical disadvantage ratio
 
-        names.append(f"{seg_name}\\\n({muscle})")
+        names.append(f"{seg_name}\\n({muscle})")
         grav_torques.append(tau_grav)
         muscle_forces.append(f_muscle)
         mech_advantages.append(ma)
@@ -337,7 +337,7 @@ for ax, (pose_name, segments) in zip(axes.flat, poses.items()):
     # Annotate with muscle force
     for i, (f, ma) in enumerate(zip(muscle_forces, mech_advantages)):
         ax.text(x[i] + width/2, grav_torques[i] * 0.5,
-                f'F = {f:.0f} N\\\nMA = {ma:.1f}x',
+                f'F = {f:.0f} N\\nMA = {ma:.1f}x',
                 color='white', fontsize=8, ha='center', va='center')
 
     ax.set_title(pose_name, color='white', fontsize=11)
@@ -353,7 +353,7 @@ plt.show()
 print("Torque summary for all poses:")
 print("=" * 70)
 for pose_name, segments in poses.items():
-    print(f"\\\n{pose_name}:")
+    print(f"\\n{pose_name}:")
     total_torque = 0
     for seg in segments:
         seg_name, mass, dist, lever, muscle = seg
@@ -425,7 +425,7 @@ ax.set_ylabel('Ground reaction force (N)', color='white')
 ax.set_title('Push-off phase: GRF profile', color='white')
 ax.legend(fontsize=9)
 ax.text(push_off_time*500, F_extra_peak + mass*g - 50,
-        f'Peak = {F_extra_peak + mass*g:.0f} N\\\n({(F_extra_peak + mass*g)/(mass*g):.1f}x body weight)',
+        f'Peak = {F_extra_peak + mass*g:.0f} N\\n({(F_extra_peak + mass*g)/(mass*g):.1f}x body weight)',
         color='white', fontsize=9)
 
 # Panel 2: Trajectory — CoM vs Torso (floating illusion)
@@ -533,20 +533,20 @@ fig.suptitle('Momentum Transfer in Partner Dance',
 # Panel 1: Push-off on boats — velocity comparison
 ax = axes[0, 0]
 ax.set_facecolor('#111827'); ax.tick_params(colors='gray')
-labels = [f'Dancer 1\\\n({m1}kg + {m_boat}kg boat)', f'Dancer 2\\\n({m2}kg + {m_boat}kg boat)']
+labels = [f'Dancer 1\\n({m1}kg + {m_boat}kg boat)', f'Dancer 2\\n({m2}kg + {m_boat}kg boat)']
 velocities = [abs(v1_after), abs(v2_after)]
 momenta = [(m1+m_boat)*abs(v1_after), (m2+m_boat)*abs(v2_after)]
 bars = ax.bar(labels, velocities, color=['#3b82f6', '#f59e0b'], alpha=0.8)
 for bar, v, p in zip(bars, velocities, momenta):
     ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.005,
-            f'v = {v:.3f} m/s\\\np = {p:.1f} kg.m/s', ha='center', color='white', fontsize=9)
+            f'v = {v:.3f} m/s\\np = {p:.1f} kg.m/s', ha='center', color='white', fontsize=9)
 ax.set_ylabel('Speed (m/s)', color='white')
 ax.set_title('Push-off: lighter system moves faster', color='white')
 
 # Panel 2: Catch — energy analysis
 ax = axes[0, 1]
 ax.set_facecolor('#111827'); ax.tick_params(colors='gray')
-categories = ['KE before\\\n(runner only)', 'KE after\\\n(combined)', 'Energy absorbed\\\n(by muscles)']
+categories = ['KE before\\n(runner only)', 'KE after\\n(combined)', 'Energy absorbed\\n(by muscles)']
 values = [KE_before, KE_after, energy_absorbed]
 colors = ['#ef4444', '#22c55e', '#f59e0b']
 bars = ax.bar(categories, values, color=colors, alpha=0.8)
@@ -591,11 +591,11 @@ plt.tight_layout()
 plt.show()
 
 print("Momentum analysis summary:")
-print(f"\\\nPush-off on boats (impulse = {push_impulse} N.s):")
+print(f"\\nPush-off on boats (impulse = {push_impulse} N.s):")
 print(f"  Dancer 1 ({m1}kg) + boat: v = {abs(v1_after):.4f} m/s")
 print(f"  Dancer 2 ({m2}kg) + boat: v = {abs(v2_after):.4f} m/s")
 print(f"  Total momentum: {(m1+m_boat)*v1_after + (m2+m_boat)*v2_after:.6f} kg.m/s (≈ 0)")
-print(f"\\\nCatch move:")
+print(f"\\nCatch move:")
 print(f"  Runner: {m_runner}kg at {v_runner} m/s = {m_runner*v_runner:.1f} kg.m/s")
 print(f"  Combined velocity: {v_combined:.2f} m/s")
 print(f"  Energy absorbed by muscles: {energy_absorbed:.1f} J ({energy_absorbed/KE_before*100:.1f}% of total)")`,
@@ -759,7 +759,7 @@ print(f"  Dimensions: {boat_length} x {boat_width} m, draft = {draft:.3f} m")
 print(f"  Metacentric height GM = {GM:.3f} m")
 print(f"  Natural rocking period = {T_natural:.2f} s ({1/T_natural:.2f} Hz)")
 print(f"  Damping ratio = {damping_ratio}")
-print(f"\\\nKey insight: The dancer must AVOID the natural rocking frequency.")
+print(f"\\nKey insight: The dancer must AVOID the natural rocking frequency.")
 print(f"Dancing at {T_natural:.2f}s period causes resonance — maximum tilt.")
 print(f"Safe dance rhythms: < {T_natural*0.7:.2f}s or > {T_natural*1.5:.2f}s period.")`,
       challenge: 'Add a wave effect: the water itself oscillates with a 2-second period and 5 cm amplitude. Now the boat is driven by BOTH the waves and the dancer. Find the dancer\'s optimal rhythm that minimizes total rocking when waves are present (hint: destructive interference).',

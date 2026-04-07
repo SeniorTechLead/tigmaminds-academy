@@ -168,7 +168,7 @@ print("Bay of Bengal cyclone seasons:")
 print("  Pre-monsoon (Apr-May): warm water, low shear → cyclones")
 print("  Post-monsoon (Oct-Nov): still warm, monsoon retreating → peak season")
 print("  Monsoon (Jun-Sep): warm but HIGH wind shear → suppresses cyclones")
-print("\\\nSST alone doesn't determine cyclones — wind shear matters too.")`,
+print("\\nSST alone doesn't determine cyclones — wind shear matters too.")`,
       challenge: 'Climate models project Bay of Bengal SST rising by 1-2°C by 2100. Recalculate the cyclone potential at each month with SST + 1.5°C. How much does the potential increase?',
       successHint: 'Understanding cyclone formation is literally life-saving knowledge in coastal communities. The same physics that explains why cyclones form also explains why they weaken over land and why some years have more storms than others.',
     },
@@ -231,7 +231,7 @@ for dist in [10, Rm, 100, 200, 300]:
     idx = np.argmin(np.abs(r - dist))
     print(f"  At {dist:3d} km: wind={wind[idx]:5.0f} km/h  pressure={pressure[idx]:.0f} hPa")
 
-print("\\\nKey: strongest winds are NOT at the center (eye is calm).")
+print("\\nKey: strongest winds are NOT at the center (eye is calm).")
 print("They're in the eyewall — the ring just outside the eye.")`,
       challenge: 'Change the central pressure from 940 to 970 hPa (a weaker storm). How do the wind speeds change? The pressure-wind relationship is not linear — explore why.',
       successHint: 'A cyclone\'s structure is an elegant physical machine. Understanding eye, eyewall, and rainbands is essential for interpreting satellite images, predicting storm impacts, and knowing when the danger is truly past (it\'s not over when the eye passes).',

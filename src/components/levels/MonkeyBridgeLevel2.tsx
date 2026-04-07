@@ -71,13 +71,13 @@ for ax, travel in zip(axes.flat, travel_times):
 
     # Mark optimal point
     ax.plot(best_t, gain_at_best, 'o', color='#ef4444', markersize=8)
-    ax.annotate(f'Leave at t={best_t:.1f}min\\\nGain={gain_at_best:.1f} items\\\nRate={best_rate:.2f}/min',
+    ax.annotate(f'Leave at t={best_t:.1f}min\\nGain={gain_at_best:.1f} items\\nRate={best_rate:.2f}/min',
                xy=(best_t, gain_at_best), xytext=(best_t+5, gain_at_best-10),
                color='#ef4444', fontsize=8)
 
     # Mark travel time
     ax.axvspan(-travel, 0, alpha=0.1, color='#ef4444')
-    ax.text(-travel/2, 5, f'Travel\\\n{travel}min', color='#ef4444', fontsize=8, ha='center')
+    ax.text(-travel/2, 5, f'Travel\\n{travel}min', color='#ef4444', fontsize=8, ha='center')
 
     ax.set_xlim(-travel - 2, 60)
     ax.set_ylim(-2, 55)
@@ -216,7 +216,7 @@ plt.tight_layout()
 plt.show()
 
 print("Tournament winner:", list(sorted_results.keys())[0])
-print("\\\nKey insight: nice strategies (that start cooperating)")
+print("\\nKey insight: nice strategies (that start cooperating)")
 print("tend to beat nasty ones in tournaments with repeated interactions.")
 print("Tit-for-Tat succeeds because it's: nice, retaliatory, forgiving, clear.")`,
       challenge: 'Add a new strategy: "Generous Tit-for-Tat" that cooperates 90% of the time even after the opponent defects. Does it beat regular Tit-for-Tat in a noisy environment where 5% of moves are randomly flipped?',
@@ -441,7 +441,7 @@ for area in [50, 500, 2500, 5000, 10000]:
     s = c * area ** 0.25
     pct = s / (c * 10000 ** 0.25) * 100
     print(f"  {area:6,} ha: {s:.0f} species ({pct:.0f}% of original)")
-print("\\\nExtinction debt: species don't vanish immediately after fragmentation.")
+print("\\nExtinction debt: species don't vanish immediately after fragmentation.")
 print("Loss accumulates over decades — a 'debt' that must eventually be 'paid.'")`,
       challenge: 'Add corridors to the model. If a 100m-wide corridor connects two fragments, their effective area is somewhere between (A1 + A2) and max(A1, A2). Model different corridor qualities and their effect on species retention.',
       successHint: 'The species-area relationship and extinction debt are central to conservation planning. Understanding these models is essential for predicting which areas to protect and how corridors can reduce fragmentation impacts.',

@@ -195,7 +195,7 @@ plt.show()
 reduction = (1 - max(abs(x_b)) / max(abs(x_no))) * 100
 print(f"Building natural frequency: {f_b:.3f} Hz (period {1/f_b:.1f} s)")
 print(f"TMD mass: {m/1000:.0f} tonnes ({m/M*100:.0f}% of building)")
-print(f"\\\nWithout TMD: max sway = {max(abs(x_no))*100:.1f} cm")
+print(f"\\nWithout TMD: max sway = {max(abs(x_no))*100:.1f} cm")
 print(f"With TMD:    max sway = {max(abs(x_b))*100:.1f} cm")
 print(f"Reduction:   {reduction:.0f}%")`,
       challenge: 'Try changing the TMD mass ratio from 5% to 1% and 10%. Plot the reduction percentage for each. There is a sweet spot — too small and the TMD has no effect; too large and it adds too much weight to the building.',
@@ -297,7 +297,7 @@ ax.grid(axis='y', alpha=0.3)
 plt.tight_layout()
 plt.show()
 
-print(f"\\\nKey finding: {failed.sum()} of {n_cols} columns failed.")
+print(f"\\nKey finding: {failed.sum()} of {n_cols} columns failed.")
 print(f"If safety factor > 1.0, collapse is arrested.")
 print(f"If < 1.0, cascade continues to total collapse.")`,
       challenge: 'Change the safety factor by increasing column capacity to 1200 kN. Does the collapse stop earlier? Now try removing TWO adjacent columns. Modern building codes require survival even with two columns lost.',
@@ -370,7 +370,7 @@ top_10 = [
 ]
 
 print("Top 10 languages cover ~60% of world population.")
-print("The remaining 6,990 languages share the other 40%.\\\n")
+print("The remaining 6,990 languages share the other 40%.\\n")
 
 total_speakers = sum(s for _, s in top_10)
 world_pop = 8000
@@ -451,7 +451,7 @@ for i, en_word in enumerate(en_words):
           f"(sim: {sims[best_j]:.3f}) {match}")
 
 accuracy = correct / len(en_words) * 100
-print(f"\\\nTranslation accuracy: {correct}/{len(en_words)} ({accuracy:.0f}%)")
+print(f"\\nTranslation accuracy: {correct}/{len(en_words)} ({accuracy:.0f}%)")
 print(f"Using only {len(anchors)} anchor pairs for alignment!")
 print()
 print("Key insight: 5 known translations are enough to learn")
@@ -505,13 +505,13 @@ print("TOWER FEASIBILITY REPORT")
 print("=" * 55)
 print(f"Height: {height}m | Base: {base_width}m | Top: {top_width}m")
 print(f"Floors: {n_floors} | Material: {material}")
-print(f"\\\n1. SELF-WEIGHT")
+print(f"\\n1. SELF-WEIGHT")
 print(f"   Total mass: {total_mass/1000:,.0f} tonnes")
 print(f"   Ground pressure: {ground_pressure:,.0f} kPa")
 
 # 2. COMPRESSION CHECK
 base_stress = weight / (base_area * 0.3) / 1e6  # effective structural area
-print(f"\\\n2. COMPRESSION")
+print(f"\\n2. COMPRESSION")
 print(f"   Base stress: {base_stress:.1f} MPa")
 print(f"   Concrete limit: {f_concrete/1e6:.0f} MPa")
 comp_ok = base_stress < f_concrete/1e6 * 0.6  # 60% safety factor
@@ -522,7 +522,7 @@ v_top = 80  # m/s (Category 5 hurricane)
 rho = 1.225
 F_wind = 0.5 * rho * v_top**2 * (avg_width * height) * 0.8  # drag
 M_wind = F_wind * height * 0.6  # bending moment at base
-print(f"\\\n3. WIND LOAD")
+print(f"\\n3. WIND LOAD")
 print(f"   Top wind speed: {v_top} m/s ({v_top*3.6:.0f} km/h)")
 print(f"   Total wind force: {F_wind/1e6:.0f} MN")
 print(f"   Base moment: {M_wind/1e9:.1f} GN·m")
@@ -539,7 +539,7 @@ pga = 0.3  # peak ground acceleration (g) — moderate zone
 seismic_force = total_mass * pga * 9.8
 M_seismic = seismic_force * height * 0.67
 seismic_ok = M_restoring / M_seismic > 1.5
-print(f"\\\n4. EARTHQUAKE (PGA = {pga}g)")
+print(f"\\n4. EARTHQUAKE (PGA = {pga}g)")
 print(f"   Seismic force: {seismic_force/1e6:.0f} MN")
 print(f"   Stability ratio: {M_restoring/M_seismic:.2f}")
 print(f"   Status: {'PASS' if seismic_ok else 'FAIL'}")
@@ -548,7 +548,7 @@ print(f"   Status: {'PASS' if seismic_ok else 'FAIL'}")
 I = np.pi * (core_diameter/2)**4 / 4  # core moment of inertia
 P_critical = np.pi**2 * E_concrete * I / (height*0.7)**2
 buckling_ok = P_critical > weight * 2
-print(f"\\\n5. BUCKLING")
+print(f"\\n5. BUCKLING")
 print(f"   Critical load: {P_critical/1e6:.0f} MN")
 print(f"   Actual load: {weight/1e6:.0f} MN")
 print(f"   Safety factor: {P_critical/weight:.1f}")
@@ -558,7 +558,7 @@ print(f"   Status: {'PASS' if buckling_ok else 'FAIL'}")
 bearing_capacity = 5000  # kPa (hard rock)
 n_piles = int(np.ceil(weight / (bearing_capacity * np.pi * 1.0**2 * 1000)))
 found_ok = ground_pressure < bearing_capacity
-print(f"\\\n6. FOUNDATION")
+print(f"\\n6. FOUNDATION")
 print(f"   Required piles (1m dia): {n_piles}")
 print(f"   Ground pressure: {ground_pressure:.0f} kPa")
 print(f"   Rock capacity: {bearing_capacity} kPa")
@@ -566,7 +566,7 @@ print(f"   Status: {'PASS' if found_ok else 'FAIL'}")
 
 # OVERALL
 all_pass = comp_ok and wind_ok and seismic_ok and buckling_ok and found_ok
-print(f"\\\n{'='*55}")
+print(f"\\n{'='*55}")
 print(f"OVERALL: {'ALL CHECKS PASS — FEASIBLE' if all_pass else 'DESIGN NEEDS REVISION'}")
 print(f"{'='*55}")`,
       challenge: 'The design above may fail some checks. Modify the parameters to make ALL checks pass: try widening the base, increasing core diameter, or reducing height. What trade-offs do you face? This is the core of engineering design — optimising within constraints.',

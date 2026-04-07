@@ -100,7 +100,7 @@ cities_data = [
     ("Constantinople", 300000, 41.0, 28.9),
 ]
 
-print("=== Trade Network Simulator — Architecture ===\\\n")
+print("=== Trade Network Simulator — Architecture ===\\n")
 print("GOODS CATALOG:")
 print(f"{'Good':<12} {'Price':>6} {'Weight':>7} {'Origin':<14} {'Cost/1000km':>12}")
 print("-" * 53)
@@ -108,7 +108,7 @@ for g in goods_catalog:
     tc = g.transport_cost(1000)
     print(f"{g.name:<12} {g.base_price:>4}g {g.weight_kg:>5.1f}kg {g.origin:<14} {tc:>10.1f}g")
 
-print("\\\nCITY NETWORK:")
+print("\\nCITY NETWORK:")
 cities = {}
 for name, pop, lat, lon in cities_data:
     cities[name] = City(name, pop, lat, lon)
@@ -123,13 +123,13 @@ connections = [
     ("Baghdad", "Constantinople", 1900, 35),
 ]
 
-print("\\\nTRADE ROUTES:")
+print("\\nTRADE ROUTES:")
 for c1, c2, dist, traffic in connections:
     cities[c1].connections.append((c2, dist, traffic))
     cities[c2].connections.append((c1, dist, traffic))
     print(f"  {c1:<18} <-> {c2:<18} {dist:>5} km  {traffic:>3} caravans/yr")
 
-print("\\\n--- System designed. Classes: Good, City, Merchant ---")
+print("\\n--- System designed. Classes: Good, City, Merchant ---")
 print(f"Total goods: {len(goods_catalog)} | Cities: {len(cities)} | Routes: {len(connections)}")`,
       challenge: 'Add a TradeRoute class that encapsulates the connection between two cities: distance, terrain difficulty, bandit risk, and seasonal availability (some mountain passes close in winter). How does this improve the design compared to storing routes as tuples?',
       successHint: 'Good system design is the difference between a project that works and one that collapses under its own complexity. You defined clean data structures with clear responsibilities — City manages market state, Merchant manages agent state, Good defines commodity properties. This separation of concerns is the foundation of all good software.',
@@ -235,7 +235,7 @@ for i in range(len(cities) - 1):
                   f"{tariff:>6.1f} {markup:>6.1f}{'*' if markup > 20 else ''}")
 
 # Simulate 12 months of trade
-print("\\\n=== 12-Month Trade Simulation ===")
+print("\\n=== 12-Month Trade Simulation ===")
 total_volume = {g: 0 for g in goods}
 total_profit = 0
 
@@ -273,8 +273,8 @@ for month in range(1, 13):
         prices_str = " | ".join(f"{c.name[:4]}:s{c.prices['silk']:.0f}" for c in cities)
         print(f"Month {month:>2}: profit {month_profit:>7.0f}g  Silk prices: {prices_str}")
 
-print(f"\\\nTotal 12-month profit: {total_profit:,.0f} gold")
-print(f"\\\nTrade volume by good:")
+print(f"\\nTotal 12-month profit: {total_profit:,.0f} gold")
+print(f"\\nTrade volume by good:")
 for g in sorted(total_volume, key=total_volume.get, reverse=True):
     print(f"  {g:<10} {total_volume[g]:>5} units traded")`,
       challenge: 'Add "luxury goods" (jade, lapis lazuli) with very high value-to-weight ratios but very small markets (demand saturates after 5 units). How does the engine handle goods with limited demand? This is the real challenge of niche markets — high margins but small volume.',
@@ -358,7 +358,7 @@ trade_revenue = np.zeros(days)
 total_infected = np.zeros(days)
 
 print("=== Disease-Trade Coupled Simulation ===")
-print(f"Outbreak origin: Samarkand | Beta: {beta} | Recovery: {1/gamma:.0f} days\\\n")
+print(f"Outbreak origin: Samarkand | Beta: {beta} | Recovery: {1/gamma:.0f} days\\n")
 
 for day in range(days):
     # Inter-city disease spread via trade
@@ -399,7 +399,7 @@ for day in range(days):
         print(f" Trade:{trade_revenue[day]:>5.0f}g")
 
 # Summary
-print(f"\\\n=== Pandemic Impact Summary ===")
+print(f"\\n=== Pandemic Impact Summary ===")
 print(f"{'City':<18} {'Population':>10} {'Total Infected':>15} {'% Hit':>7} {'Wealth':>8}")
 print("-" * 60)
 for name in city_names:
@@ -411,7 +411,7 @@ for name in city_names:
 # Economic impact
 peak_trade = np.max(trade_revenue[:30])  # pre-pandemic peak
 trough_trade = np.min(trade_revenue[30:180])
-print(f"\\\nPeak daily trade revenue: {peak_trade:,.0f} gold")
+print(f"\\nPeak daily trade revenue: {peak_trade:,.0f} gold")
 print(f"Trough during pandemic:  {trough_trade:,.0f} gold")
 print(f"Revenue drop: {(1-trough_trade/peak_trade)*100:.0f}%")
 print(f"Total trade revenue: {np.sum(trade_revenue):,.0f} gold")`,
@@ -510,7 +510,7 @@ for tech in techs:
     cities[tech["origin"]].technologies[tech["name"]] = 0.8
 
 # Simulate 500 years
-print("=== Technology Diffusion Along the Silk Road ===\\\n")
+print("=== Technology Diffusion Along the Silk Road ===\\n")
 
 milestone_threshold = 0.5  # 50% adoption = "adopted"
 milestones = {t["name"]: {} for t in techs}
@@ -549,7 +549,7 @@ for cname, city in cities.items():
     print(row)
 
 # Network effect analysis
-print("\\\n=== Network Position vs Adoption Speed ===")
+print("\\n=== Network Position vs Adoption Speed ===")
 for cname, city in cities.items():
     n_connections = len(city.neighbours)
     avg_delay = np.mean([

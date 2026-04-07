@@ -62,7 +62,7 @@ ax.set_title('Paper Strength vs Cellulose Chain Length', color='white', fontsize
 ax.legend(fontsize=9, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax.tick_params(colors='gray')
 ax.axvline(1000, color='gray', linestyle='--', linewidth=0.5, alpha=0.5)
-ax.text(1050, 20, 'Typical\\\npaper pulp', color='gray', fontsize=8)
+ax.text(1050, 20, 'Typical\\npaper pulp', color='gray', fontsize=8)
 
 # Plot 2: Strength vs moisture content
 ax2 = axes[0, 1]
@@ -97,7 +97,7 @@ ax3.set_ylabel('Tensile strength (MPa)', color='white')
 ax3.set_title('Strength-Flexibility Trade-off', color='white', fontsize=12, fontweight='bold')
 ax3.tick_params(colors='gray')
 # Annotate regions
-ax3.annotate('Umbrella\\\nsweet spot', xy=(0.4, 55), fontsize=10, color='#fbbf24',
+ax3.annotate('Umbrella\\nsweet spot', xy=(0.4, 55), fontsize=10, color='#fbbf24',
              ha='center', fontweight='bold')
 
 # Plot 4: Hydrogen bond density model
@@ -115,7 +115,7 @@ ax4.set_ylabel('H-bonds per cm² (×10³)', color='white')
 ax4.set_title('Fiber Length → Hydrogen Bond Density', color='white', fontsize=12, fontweight='bold')
 ax4.tick_params(colors='gray')
 ax4.axvline(2.5, color='#fbbf24', linestyle='--', linewidth=1)
-ax4.text(2.6, max(total_hbonds)*0.3, 'Typical handmade\\\npaper fiber', color='#fbbf24', fontsize=9)
+ax4.text(2.6, max(total_hbonds)*0.3, 'Typical handmade\\npaper fiber', color='#fbbf24', fontsize=9)
 
 plt.tight_layout()
 plt.show()
@@ -123,12 +123,12 @@ plt.show()
 print("=" * 60)
 print("    CELLULOSE & PAPER STRENGTH MODEL")
 print("=" * 60)
-print(f"\\\nKey relationships:")
+print(f"\\nKey relationships:")
 print(f"  Tensile strength ∝ log(DP) × crystallinity × exp(-5 × moisture)")
 print(f"  At DP=1500, CI=0.65, dry: {paper_tensile_strength(1500, 0.65, 0):.1f} MPa")
 print(f"  Same paper at 10% moisture: {paper_tensile_strength(1500, 0.65, 0.10):.1f} MPa")
 print(f"  Same paper at 30% moisture: {paper_tensile_strength(1500, 0.65, 0.30):.1f} MPa")
-print(f"\\\nWater reduces strength by {(1 - paper_tensile_strength(1500,0.65,0.30)/paper_tensile_strength(1500,0.65,0)):.0%} at 30% moisture")
+print(f"\\nWater reduces strength by {(1 - paper_tensile_strength(1500,0.65,0.30)/paper_tensile_strength(1500,0.65,0)):.0%} at 30% moisture")
 print(f"This is why waterproofing is essential for paper umbrellas!")`,
       challenge: 'Add a fifth plot showing how fiber orientation (random vs aligned) affects tensile strength anisotropy. Model aligned fibers as having 3x strength along the alignment direction but only 0.3x perpendicular to it.',
       successHint: 'You have modeled the molecular basis of paper strength — every sheet of paper is a network of hydrogen bonds between cellulose chains. Understanding this lets you predict how to engineer paper for specific applications like umbrella panels.',
@@ -262,7 +262,7 @@ ax4.plot(time_min, one_coat * 100, color='#f59e0b', linewidth=2, label='1 coat t
 ax4.plot(time_min, two_coats * 100, color='#3b82f6', linewidth=2, label='2 coats tung oil')
 ax4.plot(time_min, three_coats * 100, color='#22c55e', linewidth=2, label='3 coats tung oil')
 ax4.axhline(50, color='gray', linestyle=':', linewidth=0.5)
-ax4.text(62, 50, 'Structural\\\nfailure', color='gray', fontsize=8)
+ax4.text(62, 50, 'Structural\\nfailure', color='gray', fontsize=8)
 ax4.set_xlabel('Time in rain (minutes)', color='white')
 ax4.set_ylabel('Water absorption (%)', color='white')
 ax4.set_title('Rain Resistance by Coating Level', color='white', fontsize=12, fontweight='bold')
@@ -275,14 +275,14 @@ plt.show()
 print("=" * 60)
 print("    WATERPROOFING PHYSICS — CONTACT ANGLE MODEL")
 print("=" * 60)
-print(f"\\\nWater surface tension: {gamma_LV*1000:.1f} mN/m")
-print(f"\\\nMaterial contact angles:")
+print(f"\\nWater surface tension: {gamma_LV*1000:.1f} mN/m")
+print(f"\\nMaterial contact angles:")
 for name, gsv, _ in materials:
     gsl = 0.3 * gsv * 1e-3
     theta = contact_angle_from_energy(gsv * 1e-3, gsl)
     status = "HYDROPHOBIC" if theta > 90 else "hydrophilic"
     print(f"  {name:<12} γ = {gsv:>3} mN/m  →  θ = {theta:>5.1f}°  ({status})")
-print(f"\\\nCoating analysis:")
+print(f"\\nCoating analysis:")
 for c in range(4):
     print(f"  {c} coats: pore coverage = {(1-np.exp(-0.8*c))*100:.0f}%, θ = {contact_angles[c]:.0f}°")`,
       challenge: 'Model the Cassie-Baxter equation for rough surfaces: cos(θ_CB) = f(1 + cos(θ)) - 1, where f is the solid fraction. Show how adding micro-texture to oiled paper could push contact angle above 150° (superhydrophobic).',
@@ -367,7 +367,7 @@ ax2_twin = ax2.twinx()
 ax2.plot(diameters, forces * 1000, color='#3b82f6', linewidth=2, label='Impact force')
 ax2_twin.plot(diameters, impact_stress, color='#ef4444', linewidth=2, label='Impact stress (2mm²)')
 ax2_twin.axhline(40, color='#fbbf24', linestyle='--', linewidth=1)
-ax2_twin.text(5, 42, 'Paper ultimate\\\nstrength', color='#fbbf24', fontsize=8)
+ax2_twin.text(5, 42, 'Paper ultimate\\nstrength', color='#fbbf24', fontsize=8)
 ax2.set_xlabel('Raindrop diameter (mm)', color='white')
 ax2.set_ylabel('Impact force (mN)', color='#3b82f6')
 ax2_twin.set_ylabel('Impact stress (MPa)', color='#ef4444')
@@ -437,13 +437,13 @@ plt.show()
 print("=" * 60)
 print("    PAPER MECHANICS — UMBRELLA ENGINEERING")
 print("=" * 60)
-print(f"\\\nOptimal paper thickness: {thickness_mm[best_idx]:.2f} mm")
-print(f"\\\nRaindrop impact (3mm drop at 8 m/s):")
+print(f"\\nOptimal paper thickness: {thickness_mm[best_idx]:.2f} mm")
+print(f"\\nRaindrop impact (3mm drop at 8 m/s):")
 f_3mm = raindrop_force(3, 8)
 print(f"  Force: {f_3mm*1000:.2f} mN")
 print(f"  Stress (2mm² area): {f_3mm/2e-6/1e6:.3f} MPa")
 print(f"  Ratio to paper strength: {f_3mm/2e-6/1e6/40*100:.2f}%")
-print(f"\\\nFatigue life estimates (to 50% strength):")
+print(f"\\nFatigue life estimates (to 50% strength):")
 for rate, label, _ in rain_rates:
     impacts_to_fail = 0.5 / fatigue_rate
     hours_to_fail = impacts_to_fail / (rate * 60)
@@ -583,14 +583,14 @@ plt.show()
 print("=" * 60)
 print("    TUNG OIL POLYMERIZATION KINETICS")
 print("=" * 60)
-print(f"\\\nActivation energy: {Ea/1000:.1f} kJ/mol")
-print(f"\\\nCuring rates (relative to 25°C):")
+print(f"\\nActivation energy: {Ea/1000:.1f} kJ/mol")
+print(f"\\nCuring rates (relative to 25°C):")
 k_25 = arrhenius_rate(A, Ea, 25)
 for T in [15, 25, 35, 45]:
     k = arrhenius_rate(A, Ea, T)
     print(f"  {T}°C: {k/k_25:.1f}x")
-print(f"\\\nWith cobalt drier at 25°C: {arrhenius_rate(A*5, Ea*0.8, 25)/k_25:.0f}x faster")
-print(f"\\\nOptimal cross-link density for umbrellas: {best_cl:.0f}%")
+print(f"\\nWith cobalt drier at 25°C: {arrhenius_rate(A*5, Ea*0.8, 25)/k_25:.0f}x faster")
+print(f"\\nOptimal cross-link density for umbrellas: {best_cl:.0f}%")
 print(f"(Balances water resistance with flexibility for folding)")`,
       challenge: 'Model how UV radiation accelerates curing by adding a photo-initiation term. Compare cure times for umbrellas dried indoors versus in direct sunlight, accounting for both temperature and UV effects.',
       successHint: 'You have modeled the chemistry behind the umbrella maker\'s art — tung oil polymerization is a free radical chain reaction controlled by temperature and oxygen, and the optimal cure produces a film that is waterproof yet still flexible enough to fold.',
@@ -744,14 +744,14 @@ plt.show()
 print("=" * 60)
 print("    UMBRELLA STRUCTURAL ANALYSIS")
 print("=" * 60)
-print(f"\\\nGeometry: {n_ribs} ribs, {rib_length*100:.0f} cm long")
+print(f"\\nGeometry: {n_ribs} ribs, {rib_length*100:.0f} cm long")
 print(f"Panel angle: {np.degrees(panel_angle):.1f}°")
 print(f"Umbrella area: {umbrella_area:.3f} m²")
-print(f"\\\nRain load ({rain_pressure} Pa):")
+print(f"\\nRain load ({rain_pressure} Pa):")
 print(f"  Total force: {rain_pressure * umbrella_area:.1f} N ({rain_pressure * umbrella_area / 9.81:.2f} kg)")
 print(f"  Max rib moment: {max(moment)*1000:.2f} N·mm")
 print(f"  Max rib stress: {max(stress_rib)/1e6:.1f} MPa (safety factor: {bamboo_strength/1e6/max(stress_rib)*1e6:.0f}x)")
-print(f"\\\nWind load at 40 km/h:")
+print(f"\\nWind load at 40 km/h:")
 v_40 = 40 / 3.6
 f_40 = 0.5 * rho_air * v_40**2 * Cd * umbrella_area
 print(f"  Force: {f_40:.1f} N ({f_40/9.81:.1f} kg equivalent)")
@@ -889,10 +889,10 @@ plt.show()
 print("=" * 60)
 print("    PAPER FOLDING MECHANICS")
 print("=" * 60)
-print(f"\\\nUmbrella with {n_ribs} ribs:")
+print(f"\\nUmbrella with {n_ribs} ribs:")
 print(f"  Panel angle: {360/n_ribs:.1f}°")
 print(f"  Kawasaki check: {'PASS' if kawasaki_residuals[-1] < 1 else 'FAIL'}")
-print(f"\\\nFold endurance (at 3.5mm fold radius):")
+print(f"\\nFold endurance (at 3.5mm fold radius):")
 for name, A, b, _ in paper_types:
     N = A * 3.5**b
     years = N / (365 * 2)
@@ -998,7 +998,7 @@ shrinkage = 0.2 * (moisture - 12)  # % dimensional change
 ax3.plot(moisture, E_bamboo, color='#3b82f6', linewidth=2, label="Young's modulus (GPa)")
 ax3.plot(moisture, strength_bamboo, color='#ef4444', linewidth=2, label='Tensile strength (MPa)')
 ax3.axvline(12, color='#fbbf24', linestyle='--', linewidth=1.5)
-ax3.text(13, max(strength_bamboo) * 0.9, 'Optimal MC\\\n(12%)', color='#fbbf24', fontsize=9)
+ax3.text(13, max(strength_bamboo) * 0.9, 'Optimal MC\\n(12%)', color='#fbbf24', fontsize=9)
 ax3.axvspan(10, 15, alpha=0.1, color='#22c55e')
 ax3.set_xlabel('Moisture content (%)', color='white')
 ax3.set_ylabel('Property value', color='white')
@@ -1033,15 +1033,15 @@ plt.show()
 print("=" * 60)
 print("    BAMBOO MATERIAL SCIENCE FOR UMBRELLA RIBS")
 print("=" * 60)
-print(f"\\\nBamboo fiber properties:")
+print(f"\\nBamboo fiber properties:")
 print(f"  Fiber strength: {sigma_f} MPa")
 print(f"  Matrix strength: {sigma_m} MPa")
 print(f"  Outer wall (Vf=60%): {rule_of_mixtures(0.6, sigma_f, sigma_m):.0f} MPa")
 print(f"  Inner wall (Vf=15%): {rule_of_mixtures(0.15, sigma_f, sigma_m):.0f} MPa")
-print(f"\\\nSpecific strength comparison:")
+print(f"\\nSpecific strength comparison:")
 for mat, ss in sorted(zip(names, specific_strength), key=lambda x: -x[1]):
     print(f"  {mat:<20}: {ss:.0f} MPa·m³/kg")
-print(f"\\\nBamboo outer layer rivals steel in specific strength")
+print(f"\\nBamboo outer layer rivals steel in specific strength")
 print(f"while weighing 10x less — nature's optimal structural material!")`,
       challenge: 'Model the splitting failure mode of bamboo ribs. When a lateral force is applied (e.g., wind catching the umbrella at an angle), calculate the transverse stress that could cause splitting and determine the maximum safe lateral load.',
       successHint: 'You have analyzed bamboo as an engineering material — a functionally graded composite that rivals modern materials in specific strength. Understanding bamboo mechanics explains why it has been used for umbrella frames for centuries.',

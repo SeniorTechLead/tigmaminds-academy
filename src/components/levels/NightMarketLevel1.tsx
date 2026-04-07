@@ -54,7 +54,7 @@ ax1.set_facecolor('#111827')
 ax1.plot(demand, prices, color='#3b82f6', linewidth=2, label='Demand')
 ax1.plot(supply, prices, color='#ef4444', linewidth=2, label='Supply')
 ax1.plot(eq_quantity, eq_price, 'o', color='#f59e0b', markersize=15, zorder=5)
-ax1.annotate(f'Equilibrium\\\n₹{eq_price:.0f}/kg, {eq_quantity:.0f} kg',
+ax1.annotate(f'Equilibrium\\n₹{eq_price:.0f}/kg, {eq_quantity:.0f} kg',
              xy=(eq_quantity, eq_price), xytext=(eq_quantity + 100, eq_price + 50),
              color='#f59e0b', fontsize=10, fontweight='bold',
              arrowprops=dict(arrowstyle='->', color='#f59e0b'))
@@ -96,11 +96,11 @@ ax2.plot(eq_quantity, eq_price, 'o', color='#f59e0b', markersize=12, zorder=5)
 ax2.plot(eq_fest_qty, eq_fest_price, 's', color='#a855f7', markersize=12, zorder=5)
 ax2.plot(eq_mon_qty, eq_mon_price, '^', color='#22c55e', markersize=12, zorder=5)
 
-ax2.annotate(f'Normal\\\n₹{eq_price:.0f}', xy=(eq_quantity, eq_price),
+ax2.annotate(f'Normal\\n₹{eq_price:.0f}', xy=(eq_quantity, eq_price),
              xytext=(eq_quantity+50, eq_price-40), color='#f59e0b', fontsize=8)
-ax2.annotate(f'Festival\\\n₹{eq_fest_price:.0f}', xy=(eq_fest_qty, eq_fest_price),
+ax2.annotate(f'Festival\\n₹{eq_fest_price:.0f}', xy=(eq_fest_qty, eq_fest_price),
              xytext=(eq_fest_qty+50, eq_fest_price+20), color='#a855f7', fontsize=8)
-ax2.annotate(f'Monsoon\\\n₹{eq_mon_price:.0f}', xy=(eq_mon_qty, eq_mon_price),
+ax2.annotate(f'Monsoon\\n₹{eq_mon_price:.0f}', xy=(eq_mon_qty, eq_mon_price),
              xytext=(eq_mon_qty+50, eq_mon_price-40), color='#22c55e', fontsize=8)
 
 ax2.set_xlabel('Quantity (kg)', color='white')
@@ -457,15 +457,15 @@ ax1.set_facecolor('#111827')
 ax1.plot(demand, prices, color='#3b82f6', linewidth=2, label='Market demand')
 
 markets = [
-    ('Perfect\\\ncompetition', pc_price, pc_qty, '#22c55e'),
-    ('Monopolistic\\\ncompetition', moc_price, moc_qty, '#3b82f6'),
-    ('Oligopoly\\\n(3 firms)', oli_price, oli_qty, '#f59e0b'),
+    ('Perfect\\ncompetition', pc_price, pc_qty, '#22c55e'),
+    ('Monopolistic\\ncompetition', moc_price, moc_qty, '#3b82f6'),
+    ('Oligopoly\\n(3 firms)', oli_price, oli_qty, '#f59e0b'),
     ('Monopoly', mon_price, mon_qty, '#ef4444'),
 ]
 
 for name, price, qty, color in markets:
     ax1.plot(qty, price, 'o', color=color, markersize=12, zorder=5)
-    ax1.annotate(f'{name}\\\n₹{price:.0f}, {qty:.0f}kg', xy=(qty, price),
+    ax1.annotate(f'{name}\\n₹{price:.0f}, {qty:.0f}kg', xy=(qty, price),
                  xytext=(qty+30, price+15), color=color, fontsize=8, fontweight='bold')
 
 ax1.set_xlabel('Quantity (kg)', color='white')
@@ -476,7 +476,7 @@ ax1.tick_params(colors='gray')
 
 # Consumer and producer welfare
 ax2.set_facecolor('#111827')
-market_names = [m[0].replace('\\\n', ' ') for m in markets]
+market_names = [m[0].replace('\\n', ' ') for m in markets]
 market_prices = [m[1] for m in markets]
 market_qtys = [m[2] for m in markets]
 market_colors = [m[3] for m in markets]
@@ -579,7 +579,7 @@ ax1.tick_params(colors='gray')
 
 # Fisherman's share
 fish_share = costs[0] / cumulative_price[-2] * 100
-ax1.annotate(f'Fisherman gets {fish_share:.0f}%\\\nof consumer price',
+ax1.annotate(f'Fisherman gets {fish_share:.0f}%\\nof consumer price',
              xy=(0, costs[0]/2), xytext=(2, 50),
              color='#22c55e', fontsize=10, fontweight='bold',
              arrowprops=dict(arrowstyle='->', color='#22c55e'))
@@ -594,7 +594,7 @@ for i, (stage, rem) in enumerate(zip(stages, remaining)):
                  textcoords='offset points', ha='center', color='white', fontsize=9)
     if i < len(wastage_pct):
         lost = remaining[i] * wastage_pct[i] / 100
-        ax2.annotate(f'-{lost:.1f} kg\\\n({wastage_pct[i]}%)', xy=(i+0.5, (remaining[i]+remaining[i+1])/2),
+        ax2.annotate(f'-{lost:.1f} kg\\n({wastage_pct[i]}%)', xy=(i+0.5, (remaining[i]+remaining[i+1])/2),
                      color='#ef4444', fontsize=7, ha='center')
 
 ax2.set_ylabel('Fish remaining (kg)', color='white')

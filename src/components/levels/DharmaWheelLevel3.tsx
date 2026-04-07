@@ -183,7 +183,7 @@ print("-" * 32)
 for step, ang, rpm in log:
     print(f"{step:>6} | {ang:>9.2f}° | {rpm:>9.1f}")
 
-print(f"\\\nFinal: Satellite at {sat.angle:.2f}°, Wheel at {sat.omega_wheel*60/(2*np.pi):.0f} RPM")
+print(f"\\nFinal: Satellite at {sat.angle:.2f}°, Wheel at {sat.omega_wheel*60/(2*np.pi):.0f} RPM")
 print()
 
 # Momentum budget
@@ -472,7 +472,7 @@ while car.v < target_ms and time < 30:
         last_print = t_int
         print(f"{time:>5.1f}s | {kmh:>8.1f} km/h | {rpm:>6.0f} | {gear:>4}")
 
-print(f"\\\n0-100 km/h: {time:.2f} seconds")`,
+print(f"\\n0-100 km/h: {time:.2f} seconds")`,
       challenge: 'Add a manual gear shift mode where you control when to shift (shift_rpm = 5000 vs 6500 vs redline). What shift point gives the fastest 0-100 time? Why?',
       successHint: 'Drivetrain simulation brings together everything in rotational physics: torque, angular momentum, moment of inertia, gear ratios, friction, and energy transfer. Real automotive engineers use this exact approach, with more detailed models, to design transmissions.',
     },

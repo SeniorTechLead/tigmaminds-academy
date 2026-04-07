@@ -288,7 +288,7 @@ ax.set_xlabel('Wavelength (nm)', color='white')
 ax.set_ylabel('Absorption (a.u.)', color='white')
 ax.set_title('Tyrosine Absorption → Golden Reflection', color='white', fontsize=11)
 ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax.annotate('Blue absorbed\\\n→ gold reflected', xy=(420, 1.2), fontsize=9,
+ax.annotate('Blue absorbed\\n→ gold reflected', xy=(420, 1.2), fontsize=9,
             color='#f59e0b', fontweight='bold')
 
 # Plot 3: Hydrophobicity profile
@@ -565,13 +565,13 @@ ax.set_title('Leaf Consumption per Instar', color='white', fontsize=11)
 for i, f in zip(instars, food):
     ax.text(i, f + 0.5, f'{f}g', ha='center', color='white', fontsize=10)
 total_food = sum(food)
-ax.text(3, max(food) * 0.7, f'Total: {total_food:.1f}g leaves\\\n→ ~0.5g silk\\\n= {0.5/total_food*100:.1f}% efficiency',
+ax.text(3, max(food) * 0.7, f'Total: {total_food:.1f}g leaves\\n→ ~0.5g silk\\n= {0.5/total_food*100:.1f}% efficiency',
         color='#f59e0b', fontsize=9, ha='center',
         bbox=dict(boxstyle='round', facecolor='#1f2937', edgecolor='#f59e0b'))
 
 # Plot 3: Full life cycle timeline
 ax = axes[0, 2]
-stages = ['Egg', 'Larva\\\n(5 instars)', 'Pupa\\\n(cocoon)', 'Adult\\\nmoth']
+stages = ['Egg', 'Larva\\n(5 instars)', 'Pupa\\n(cocoon)', 'Adult\\nmoth']
 durations = [10, 31, 18, 6]
 colors_stage = ['#60a5fa', '#22c55e', '#f59e0b', '#a855f7']
 starts = [0]
@@ -579,7 +579,7 @@ for d in durations[:-1]:
     starts.append(starts[-1] + d)
 for i, (stage, dur, start, color) in enumerate(zip(stages, durations, starts, colors_stage)):
     ax.barh(0, dur, left=start, height=0.4, color=color, edgecolor='none')
-    ax.text(start + dur/2, 0, f'{stage}\\\n{dur}d', ha='center', va='center',
+    ax.text(start + dur/2, 0, f'{stage}\\n{dur}d', ha='center', va='center',
             color='white', fontsize=8, fontweight='bold')
 ax.set_xlim(-2, sum(durations) + 2)
 ax.set_ylim(-0.5, 0.5)
@@ -602,7 +602,7 @@ ax.legend(fontsize=9, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 # Plot 5: Silk production economics
 ax = axes[1, 1]
 # Cocoons needed for different products
-products = ['1 Mekhela\\\nChadar', '1 Muga\\\nShawl', '1 Muga\\\nSari', '1 kg raw\\\nMuga silk']
+products = ['1 Mekhela\\nChadar', '1 Muga\\nShawl', '1 Muga\\nSari', '1 kg raw\\nMuga silk']
 cocoons_needed = [3000, 1500, 5000, 1000]
 ax.bar(range(len(products)), cocoons_needed,
        color=['#f59e0b', '#fbbf24', '#d97706', '#b45309'], edgecolor='none', width=0.6)
@@ -638,7 +638,7 @@ ax.legend(loc='upper left', fontsize=7, facecolor='#1f2937', edgecolor='gray', l
 ax2.legend(loc='upper right', fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
 # Mark rearing seasons
-for month_range, label in [((2, 5), 'Spring\\\nrearing'), ((8, 11), 'Autumn\\\nrearing')]:
+for month_range, label in [((2, 5), 'Spring\\nrearing'), ((8, 11), 'Autumn\\nrearing')]:
     mid = sum(month_range) / 2
     ax.annotate(label, xy=(mid, optimal_temp[1]),
                 color='#22c55e', fontsize=7, ha='center', fontweight='bold')
@@ -726,13 +726,13 @@ ax.set_xlabel('Shear rate (s⁻¹)', color='white')
 ax.set_ylabel('Crystallinity (%)', color='white')
 ax.set_title('Spinning-Induced Crystallization', color='white', fontsize=11)
 ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax.annotate('Optimal: pH 4.5\\\n(like silkworm gland)', xy=(120, 60),
+ax.annotate('Optimal: pH 4.5\\n(like silkworm gland)', xy=(120, 60),
             color='#22c55e', fontsize=8, fontweight='bold')
 
 # Plot 2: Energy cost comparison (manufacturing)
 ax = axes[0, 1]
-processes = ['Silkworm\\\n(natural)', 'Recombinant\\\n(bacteria)', 'Nylon\\\n(chemical)',
-             'Kevlar\\\n(chemical)', 'Carbon\\\nfiber', 'Steel\\\n(smelting)']
+processes = ['Silkworm\\n(natural)', 'Recombinant\\n(bacteria)', 'Nylon\\n(chemical)',
+             'Kevlar\\n(chemical)', 'Carbon\\nfiber', 'Steel\\n(smelting)']
 energy_MJ_per_kg = [1, 50, 120, 250, 300, 25]
 colors_proc = ['#22c55e', '#4ade80', '#3b82f6', '#ef4444', '#a855f7', '#64748b']
 bars = ax.bar(range(len(processes)), energy_MJ_per_kg, color=colors_proc,
@@ -743,15 +743,15 @@ ax.set_ylabel('Energy (MJ/kg)', color='white')
 ax.set_title('Manufacturing Energy per kg of Material', color='white', fontsize=11)
 for i, e in enumerate(energy_MJ_per_kg):
     ax.text(i, e + 5, f'{e}', ha='center', color='white', fontsize=10)
-ax.annotate('Nature: 1 MJ/kg\\\n(room temp, water-based)', xy=(0, 20),
+ax.annotate('Nature: 1 MJ/kg\\n(room temp, water-based)', xy=(0, 20),
             color='#22c55e', fontsize=8, fontweight='bold')
 
 # Plot 3: Hierarchical structure levels
 ax = axes[0, 2]
-scales = ['Amino acids\\\n(0.1 nm)', 'β-sheets\\\n(1 nm)', 'Nanofibrils\\\n(10 nm)',
-          'Microfibrils\\\n(100 nm)', 'Fibers\\\n(10 μm)', 'Yarn\\\n(100 μm)']
-properties = ['Sequence', 'Crystallinity', 'Composite\\\nstructure',
-              'Fiber\\\nbundling', 'Twist &\\\ntexture', 'Fabric\\\nproperties']
+scales = ['Amino acids\\n(0.1 nm)', 'β-sheets\\n(1 nm)', 'Nanofibrils\\n(10 nm)',
+          'Microfibrils\\n(100 nm)', 'Fibers\\n(10 μm)', 'Yarn\\n(100 μm)']
+properties = ['Sequence', 'Crystallinity', 'Composite\\nstructure',
+              'Fiber\\nbundling', 'Twist &\\ntexture', 'Fabric\\nproperties']
 y_pos = np.arange(len(scales))
 ax.barh(y_pos, np.arange(1, len(scales)+1), color='#f59e0b', alpha=0.6, edgecolor='none', height=0.5)
 for i, (scale, prop) in enumerate(zip(scales, properties)):
@@ -763,7 +763,7 @@ ax.set_yticks([])
 
 # Plot 4: Medical applications of silk biomaterials
 ax = axes[1, 0]
-applications = ['Sutures', 'Tissue\\\nscaffolds', 'Drug\\\ndelivery', 'Biosensors', 'Bone\\\nrepair']
+applications = ['Sutures', 'Tissue\\nscaffolds', 'Drug\\ndelivery', 'Biosensors', 'Bone\\nrepair']
 trl = [9, 6, 5, 4, 3]  # Technology Readiness Level (1-9)
 market_M = [500, 200, 150, 50, 80]  # Market size estimate ($ millions)
 colors_app = ['#22c55e', '#3b82f6', '#f59e0b', '#a855f7', '#ef4444']
@@ -795,7 +795,7 @@ ax.set_ylim(0, 105)
 
 # Plot 6: Recombinant silk production routes
 ax = axes[1, 2]
-routes = ['Bacteria\\\n(E. coli)', 'Yeast', 'Transgenic\\\ngoats', 'Plants\\\n(alfalfa)', 'Cell-free\\\nsynthesis']
+routes = ['Bacteria\\n(E. coli)', 'Yeast', 'Transgenic\\ngoats', 'Plants\\n(alfalfa)', 'Cell-free\\nsynthesis']
 yield_mg_L = [200, 500, 1000, 300, 50]  # mg per liter (or equivalent)
 cost_per_g = [500, 200, 100, 300, 2000]  # $/g
 ax.scatter(yield_mg_L, cost_per_g, s=[300, 300, 300, 300, 300],
@@ -913,11 +913,11 @@ E_funnel += 0.3 * np.sin(20 * q)  # roughness
 
 ax.plot(q, E_funnel, color='#22c55e', linewidth=2.5)
 ax.fill_between(q, E_funnel, max(E_funnel), alpha=0.1, color='#22c55e')
-ax.annotate('Unfolded\\\n(random coil)', xy=(0.05, E_funnel[5]), fontsize=8,
+ax.annotate('Unfolded\\n(random coil)', xy=(0.05, E_funnel[5]), fontsize=8,
             color='#ef4444', fontweight='bold')
-ax.annotate('Kinetic trap\\\n(misfolded)', xy=(0.3, E_funnel[90]+0.3), fontsize=8,
+ax.annotate('Kinetic trap\\n(misfolded)', xy=(0.3, E_funnel[90]+0.3), fontsize=8,
             color='#f59e0b', fontweight='bold')
-ax.annotate('Native fold\\\n(β-sheet)', xy=(0.95, E_funnel[-5]-0.5), fontsize=8,
+ax.annotate('Native fold\\n(β-sheet)', xy=(0.95, E_funnel[-5]-0.5), fontsize=8,
             color='#22c55e', fontweight='bold')
 ax.set_xlabel('Folding coordinate (0=unfolded, 1=native)', color='white')
 ax.set_ylabel('Free energy', color='white')
@@ -938,8 +938,8 @@ ax.set_ylabel('Fraction', color='white')
 ax.set_title('α→β Transition During Spinning', color='white', fontsize=11)
 ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax.set_ylim(0, 1)
-ax.annotate('Liquid silk\\\n(in gland)', xy=(5, 0.5), fontsize=8, color='white')
-ax.annotate('Solid fiber\\\n(in cocoon)', xy=(75, 0.5), fontsize=8, color='white')
+ax.annotate('Liquid silk\\n(in gland)', xy=(5, 0.5), fontsize=8, color='white')
+ax.annotate('Solid fiber\\n(in cocoon)', xy=(75, 0.5), fontsize=8, color='white')
 
 # Plot 4: Levinthal's paradox visualization
 ax = axes[1, 0]
@@ -990,7 +990,7 @@ ax.plot(years, gdt_scores, color='#a855f7', linewidth=2.5, marker='o', markersiz
 ax.fill_between(years, 0, gdt_scores, color='#a855f7', alpha=0.15)
 ax.axhline(90, color='#22c55e', linestyle='--', linewidth=1.5,
            label='Experimental accuracy')
-ax.annotate('AlphaFold2\\\n(2020)', xy=(2020, 92), xytext=(2015, 85),
+ax.annotate('AlphaFold2\\n(2020)', xy=(2020, 92), xytext=(2015, 85),
             color='#f59e0b', fontsize=9, fontweight='bold',
             arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 ax.set_xlabel('Year', color='white')

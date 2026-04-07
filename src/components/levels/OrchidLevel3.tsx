@@ -288,7 +288,7 @@ plt.show()
 print("Beer-Lambert Law demonstration:")
 print(f"  Doubling concentration doubles absorbance: {peak_abs[10]:.3f} -> {peak_abs[20]:.3f}")
 print(f"  But reflectance is NOT halved (exponential relationship)")
-print(f"\\\nColor depends on THREE factors:")
+print(f"\\nColor depends on THREE factors:")
 print(f"  1. Which pigments are present (absorption spectra)")
 print(f"  2. Their concentrations (Beer-Lambert intensity)")
 print(f"  3. The vacuolar pH (shifts anthocyanin peak)")`,
@@ -779,7 +779,7 @@ print("Rate-limiting step analysis:")
 for enz, sens in zip(enzyme_names, sensitivity):
     print(f"  {enz}: +50% expression -> {sens:+.1f}% anthocyanin")
 bottleneck = enzyme_names[np.argmax(sensitivity)]
-print(f"\\\nBottleneck enzyme: {bottleneck}")
+print(f"\\nBottleneck enzyme: {bottleneck}")
 print(f"Enhancing {bottleneck} has the greatest effect on flower color.")`,
       challenge: 'Model a bicolor flower: CHS expression is 2x in the petal tips (outer 30%) and 0.3x in the base (inner 70%). Simulate both zones and create a gradient showing the resulting color pattern.',
       successHint: 'The anthocyanin pathway is a beautiful example of how gene regulation creates visible phenotypes. Every color mutation in flowers maps to a specific enzyme in this pathway. Understanding the pathway lets you predict color from genotype.',
@@ -920,10 +920,10 @@ plt.show()
 print("UV pattern analysis:")
 print(f"  Human vision: all three flowers appear uniformly yellow")
 print(f"  Bee vision: each flower has a distinct, visible pattern")
-print(f"\\\n  Bull's eye: directs pollinators to center (nectar)")
+print(f"\\n  Bull's eye: directs pollinators to center (nectar)")
 print(f"  Landing strips: guides approach trajectory")
 print(f"  Spotted: creates visual texture for species recognition")
-print(f"\\\n  These patterns are invisible to predators but essential for pollination.")`,
+print(f"\\n  These patterns are invisible to predators but essential for pollination.")`,
       challenge: 'Create a "mimicry" scenario: design a UV pattern that copies the bull\'s eye pattern of a rewarding flower species, but the flower has no nectar. This is how some orchids deceive pollinators. How would you quantify the mimicry accuracy?',
       successHint: 'UV patterns reveal that flowers have a hidden visual language optimized for pollinator communication. What humans see is only part of the story — the UV world is equally rich and biologically important.',
     },

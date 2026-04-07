@@ -478,7 +478,7 @@ colors = ['gold', '#10b981', '#f97316']
 for (label, pi2), color in zip(scenarios, colors):
     pi1 = pi2
     plt.plot(pi2, pi1, 'o', color=color, markersize=10, zorder=5)
-    plt.annotate(f'{label}\\\nΠ₂ = {pi2:.2f}',
+    plt.annotate(f'{label}\\nΠ₂ = {pi2:.2f}',
                  xy=(pi2, pi1), xytext=(pi2 + 0.15, pi1 + 0.2),
                  fontsize=9, color=color,
                  arrowprops=dict(arrowstyle='->', color=color))

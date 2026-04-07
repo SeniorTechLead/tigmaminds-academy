@@ -100,7 +100,7 @@ axes[2].plot(t, v, color='#f87171', linewidth=2)
 axes[2].set_xlabel('Days', color='white')
 axes[2].set_ylabel('Speed (km/day)', color='white')
 axes[2].set_title('Law 2: Speed Variation', color='white', fontsize=11)
-axes[2].annotate(f'Fast at perigee\\\n{v.max():.0f} km/day', xy=(t[np.argmax(v)], v.max()),
+axes[2].annotate(f'Fast at perigee\\n{v.max():.0f} km/day', xy=(t[np.argmax(v)], v.max()),
                  xytext=(5, v.max()), color='#f59e0b', fontsize=8)
 
 plt.tight_layout()
@@ -271,19 +271,19 @@ for ax in axes:
 
 # Moon distance
 axes[0].plot(t, moon_dist / 1e6, color='#60a5fa', linewidth=2)
-axes[0].set_ylabel('Moon distance\\\n(×10⁶ km)', color='white', fontsize=10)
+axes[0].set_ylabel('Moon distance\\n(×10⁶ km)', color='white', fontsize=10)
 axes[0].set_title('Tidal Forces — Moon Distance & Phase Effects', color='white', fontsize=13)
 
 # Individual contributions
 axes[1].plot(t, a_moon * 1e6, color='#60a5fa', linewidth=2, label='Moon tidal')
 axes[1].axhline(y=a_sun * 1e6, color='#fbbf24', linestyle='--', linewidth=1.5, label='Sun tidal (avg)')
-axes[1].set_ylabel('Tidal accel\\\n(×10⁻⁶ m/s²)', color='white', fontsize=10)
+axes[1].set_ylabel('Tidal accel\\n(×10⁻⁶ m/s²)', color='white', fontsize=10)
 axes[1].legend(facecolor='#374151', labelcolor='white', fontsize=8)
 
 # Combined with spring/neap
 axes[2].plot(t, a_total * 1e6, color='#a78bfa', linewidth=2)
 axes[2].fill_between(t, 0, a_total * 1e6, alpha=0.15, color='#a78bfa')
-axes[2].set_ylabel('Combined tidal\\\n(×10⁻⁶ m/s²)', color='white', fontsize=10)
+axes[2].set_ylabel('Combined tidal\\n(×10⁻⁶ m/s²)', color='white', fontsize=10)
 axes[2].set_xlabel('Days', color='white')
 
 # Mark spring and neap tides

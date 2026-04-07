@@ -49,7 +49,7 @@ for conc, color in zip(alginate_concs, colors):
     ax1.plot(time_seconds, thickness, color=color, linewidth=2, label=f'{conc}% alginate')
 
 ax1.axhspan(0.3, 0.8, alpha=0.1, color='#22c55e')
-ax1.text(100, 0.55, 'Optimal gel\\\nthickness', color='#22c55e', fontsize=9, ha='center')
+ax1.text(100, 0.55, 'Optimal gel\\nthickness', color='#22c55e', fontsize=9, ha='center')
 ax1.set_xlabel('Time in CaCl\₂ bath (seconds)', color='white')
 ax1.set_ylabel('Gel membrane thickness (mm)', color='white')
 ax1.set_title('Spherification: Gel Growth Over Time', color='white', fontsize=12)
@@ -242,8 +242,8 @@ ax1.plot(temp, rate_burning, color='#ef4444', linewidth=2, label='Burning/charri
 ax1.axvspan(140, 165, alpha=0.1, color='#f59e0b')
 ax1.axvspan(165, 190, alpha=0.1, color='#a855f7')
 ax1.axvspan(200, 250, alpha=0.1, color='#ef4444')
-ax1.text(152, 0.9, 'Optimal\\\nMaillard', color='#f59e0b', fontsize=8, ha='center')
-ax1.text(177, 0.9, 'Optimal\\\ncaramel', color='#a855f7', fontsize=8, ha='center')
+ax1.text(152, 0.9, 'Optimal\\nMaillard', color='#f59e0b', fontsize=8, ha='center')
+ax1.text(177, 0.9, 'Optimal\\ncaramel', color='#a855f7', fontsize=8, ha='center')
 ax1.text(225, 0.9, 'DANGER', color='#ef4444', fontsize=8, ha='center')
 
 ax1.set_xlabel('Temperature (°C)', color='white')
@@ -334,7 +334,7 @@ ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8
 ax1.tick_params(colors='gray')
 
 # Texture radar
-categories = ['Firmness', 'Elasticity', 'Brittleness', 'Melt-in-\\\nmouth', 'Clarity']
+categories = ['Firmness', 'Elasticity', 'Brittleness', 'Melt-in-\\nmouth', 'Clarity']
 N = len(categories)
 angles = np.linspace(0, 2 * np.pi, N, endpoint=False).tolist()
 angles += angles[:1]

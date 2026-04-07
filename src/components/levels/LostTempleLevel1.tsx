@@ -258,7 +258,7 @@ for n in range(1, 7):
     t = n * half_life
     f = 100 * (0.5 ** n)
     ax1.plot(t / 1000, f, 'o', color='#f59e0b', markersize=8, zorder=5)
-    ax1.annotate(f'{n} half-lives\\\n{f:.1f}%', xy=(t/1000, f),
+    ax1.annotate(f'{n} half-lives\\n{f:.1f}%', xy=(t/1000, f),
                 xytext=(t/1000 + 1.5, f + 5), color='#f59e0b', fontsize=7,
                 arrowprops=dict(arrowstyle='->', color='#f59e0b', lw=0.5))
 
@@ -266,7 +266,7 @@ for n in range(1, 7):
 mk_age = 1100  # ~900 CE from 2025
 mk_frac = np.exp(-decay_constant * mk_age) * 100
 ax1.plot(mk_age / 1000, mk_frac, '*', color='#ef4444', markersize=15, zorder=5)
-ax1.annotate(f'Madan Kamdev\\\n(~{mk_age} years, {mk_frac:.1f}%)', xy=(mk_age/1000, mk_frac),
+ax1.annotate(f'Madan Kamdev\\n(~{mk_age} years, {mk_frac:.1f}%)', xy=(mk_age/1000, mk_frac),
             xytext=(mk_age/1000 + 5, mk_frac), color='#ef4444', fontsize=9,
             arrowprops=dict(arrowstyle='->', color='#ef4444'))
 
@@ -513,7 +513,7 @@ ax1.set_xlim(-0.1, 8.1)
 ax1.set_ylim(-0.1, 8.1)
 ax1.set_aspect('equal')
 ax1.set_title('Vastu Purusha Mandala (8×8)', color='white', fontsize=12)
-ax1.text(4, 4, 'BRAHMA\\\n(sanctum)', ha='center', va='center', color='white', fontsize=10, fontweight='bold')
+ax1.text(4, 4, 'BRAHMA\\n(sanctum)', ha='center', va='center', color='white', fontsize=10, fontweight='bold')
 ax1.text(4, 2.5, 'Devika zone', ha='center', color='white', fontsize=8)
 ax1.text(4, 1.5, 'Paisachika zone', ha='center', color='white', fontsize=8)
 ax1.tick_params(colors='gray')
@@ -546,8 +546,8 @@ ax2.add_patch(antarala)
 garbha = plt.Rectangle((14, 3), 4, 6, facecolor='#f59e0b', alpha=0.4,
                          edgecolor='#f59e0b', linewidth=2, label='Garbhagriha')
 ax2.add_patch(garbha)
-ax2.text(16, 6, 'SANCTUM\\\n(4×6 unit)', ha='center', va='center', color='white', fontsize=9, fontweight='bold')
-ax2.text(7.5, 6, 'MANDAPA\\\n(9×8 unit)', ha='center', va='center', color='white', fontsize=9, fontweight='bold')
+ax2.text(16, 6, 'SANCTUM\\n(4×6 unit)', ha='center', va='center', color='white', fontsize=9, fontweight='bold')
+ax2.text(7.5, 6, 'MANDAPA\\n(9×8 unit)', ha='center', va='center', color='white', fontsize=9, fontweight='bold')
 
 # Pillars in mandapa
 pillar_x = [4.5, 7.5, 10.5]

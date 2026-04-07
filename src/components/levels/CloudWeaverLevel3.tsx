@@ -153,7 +153,7 @@ print(f"  Air density: {air_density(P_tawang, temperature_altitude(3048)):.3f} k
 print(f"  Water boiling point: {bp_tawang:.1f}°C")
 print(f"  UV intensity: {uv_tawang:.0f}% of sea level")
 print(f"  O₂ partial pressure: {0.21*P_tawang/P0*100:.1f}% of sea level O₂")
-print(f"\\\nAt Tawang, every aspect of atmospheric physics is different from the plains.")
+print(f"\\nAt Tawang, every aspect of atmospheric physics is different from the plains.")
 print(f"The cloud weaver lives where the atmosphere is 30% thinner.")`,
       challenge: 'Add wind chill: model how wind speed at altitude makes effective temperature much colder than air temperature. Plot wind chill temperature as a function of altitude and wind speed, and show why Tawang\'s winters feel harsher than the thermometer suggests.',
       successHint: 'High-altitude meteorology is a complete atmospheric laboratory. At Tawang\'s elevation, every fundamental parameter — pressure, temperature, density, UV, oxygen — differs significantly from sea level, creating unique weather patterns and ecological conditions.',
@@ -276,7 +276,7 @@ ax2.legend(lines1+lines2, labels1+labels2, fontsize=9, facecolor='#1f2937',
            edgecolor='gray', labelcolor='white')
 ax2.tick_params(colors='gray'); ax2_twin.tick_params(colors='gray')
 # Mark foehn effect
-ax2.annotate('Foehn warming\\\n(descending dry)', xy=(70, T_profile[350]),
+ax2.annotate('Foehn warming\\n(descending dry)', xy=(70, T_profile[350]),
             xytext=(75, T_profile[350]-5), color='#ef4444', fontsize=9,
             arrowprops=dict(arrowstyle='->', color='#ef4444'))
 
@@ -343,7 +343,7 @@ print(f"  Cloud base: ~{1500:.0f}m (where air reaches saturation)")
 print(f"  Peak rainfall: windward slope, ~{rain_mm_hr.max():.1f} mm/hr")
 print(f"  Rain shadow: leeward side receives <1 mm/hr")
 print(f"  Foehn effect: air arrives warmer and drier on leeward side")
-print(f"\\\nThe Himalayas extract ~{moisture_initial - moisture_profile[-1]:.0f} g/kg of moisture from monsoon air.")
+print(f"\\nThe Himalayas extract ~{moisture_initial - moisture_profile[-1]:.0f} g/kg of moisture from monsoon air.")
 print(f"This is why Cherrapunji/Mawsynram get >11,000 mm/year.")
 print(f"Tawang's water supply depends entirely on orographic precipitation.")`,
       challenge: 'Add wind direction variability: model how shifting monsoon winds (from SE to SW over the season) change the rainfall distribution across the mountain. Show how Tawang\'s rainfall depends critically on wind direction relative to the terrain orientation.',
@@ -488,11 +488,11 @@ print("Fog Harvesting Design for Tawang:")
 print(f"  Optimal mesh shade coefficient: {optimal_shade*100:.0f}%")
 print(f"  Fiber diameter: 0.5mm")
 print(f"  Collection efficiency (20μm drops, 3 m/s): {collection_efficiency(Stk_typical)*100:.0f}%")
-print(f"\\\nExpected yield (1m² collector):")
+print(f"\\nExpected yield (1m² collector):")
 for lwc in [0.1, 0.2, 0.3]:
     y = lwc * 3.0 * 1.0 * 0.25 * 3600 * 8 / 1000
     print(f"  LWC={lwc} g/m³, 3 m/s, 8 hrs: {y:.1f} L/day")
-print(f"\\\nAnnual fog potential: ~{sum(fog_hours)} fog-hours")
+print(f"\\nAnnual fog potential: ~{sum(fog_hours)} fog-hours")
 print(f"A 10m² collector could yield 30-100 L/day during fog season.")
 print(f"The cloud weaver's clouds become Tawang's water supply.")`,
       challenge: 'Design a complete fog harvesting installation for a Tawang monastery: specify the number and size of collectors needed to supply 500 liters/day for 50 people. Include seasonal variation and a storage tank design for rainless, foggy winter months.',
@@ -563,9 +563,9 @@ ax2.plot(cloud_bases, drip_rates, color='#22c55e', linewidth=2.5)
 ax2.fill_between(cloud_bases, 0, drip_rates, color='#22c55e', alpha=0.15)
 ax2.axvline(forest_alt, color='#fbbf24', linewidth=2, linestyle='--',
             label=f'Forest altitude ({forest_alt}m)')
-ax2.annotate('Cloud below forest\\\n= fog drip', xy=(1500, 2.5),
+ax2.annotate('Cloud below forest\\n= fog drip', xy=(1500, 2.5),
             color='#22c55e', fontsize=9, fontweight='bold')
-ax2.annotate('Cloud above forest\\\n= no fog drip', xy=(2500, 0.3),
+ax2.annotate('Cloud above forest\\n= no fog drip', xy=(2500, 0.3),
             color='#ef4444', fontsize=9, fontweight='bold')
 ax2.set_xlabel('Cloud base altitude (m)', color='white')
 ax2.set_ylabel('Fog drip rate (mm/day)', color='white')
@@ -618,7 +618,7 @@ ax4.set_ylabel('Species richness (% of baseline)', color='white')
 ax4.set_title('Biodiversity Response to Fog Loss', color='white', fontsize=11)
 ax4.legend(fontsize=9, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax4.tick_params(colors='gray')
-ax4.annotate('Epiphytes decline first\\\n(direct fog dependence)',
+ax4.annotate('Epiphytes decline first\\n(direct fog dependence)',
             xy=(60, 77), xytext=(30, 50), color='#22c55e', fontsize=9,
             arrowprops=dict(arrowstyle='->', color='#22c55e'))
 
@@ -636,7 +636,7 @@ print(f"  Current cloud base: {current_cb}m")
 print(f"  Forest altitude: {forest_alt}m")
 print(f"  Cloud contact lost at: +{critical_warming:.1f}°C warming")
 print(f"  Cloud lift rate: ~175m per °C")
-print(f"\\\nCloud forests are climate change sentinels.")
+print(f"\\nCloud forests are climate change sentinels.")
 print(f"A {critical_warming:.1f}°C warming could end fog input to Tawang's forests.")`,
       challenge: 'Model the interaction between deforestation and cloud formation: forests release moisture through transpiration, which contributes to cloud formation in a feedback loop. Show how removing the forest reduces cloud formation, which further dries the remaining forest — a deforestation-drought positive feedback.',
       successHint: 'Cloud forests are among Earth\'s most endangered ecosystems because they depend on a specific atmospheric condition — cloud contact at their altitude — that climate change is systematically shifting. Understanding the physics of this dependence is essential for conservation planning.',
@@ -700,8 +700,8 @@ ax_twin.plot(distances, moisture_along_path, color='#3b82f6', linewidth=2.5, lin
 ax_twin.fill_between(distances, 0, moisture_along_path, color='#3b82f6', alpha=0.1)
 
 # Labels
-ax.text(100, 200, 'Bay of\\\nBengal', color='#3b82f6', fontsize=10, fontweight='bold')
-ax.text(500, 200, 'Assam\\\nPlains', color='#22c55e', fontsize=10, fontweight='bold')
+ax.text(100, 200, 'Bay of\\nBengal', color='#3b82f6', fontsize=10, fontweight='bold')
+ax.text(500, 200, 'Assam\\nPlains', color='#22c55e', fontsize=10, fontweight='bold')
 ax.text(1200, 3000, 'Tawang', color='#fbbf24', fontsize=10, fontweight='bold')
 # Wind arrows
 for x_pos in range(100, 1400, 200):
@@ -960,7 +960,7 @@ print(f"Annual AR statistics for Tawang region:")
 print(f"  Total AR events: ~{sum(ar_events):.0f}")
 print(f"  Peak month: July ({ar_events[6]:.1f} events)")
 print(f"  ARs deliver ~{sum(e*r for e,r in zip(ar_events, ar_rain_pct))/sum(ar_events):.0f}% of monsoon rainfall")
-print(f"\\\nARs are both blessing (water supply) and curse (flood risk).")
+print(f"\\nARs are both blessing (water supply) and curse (flood risk).")
 print(f"The cloud weaver's heaviest clouds are atmospheric rivers made visible.")`,
       challenge: 'Build an AR early warning system: use the IVT time series and its rate of change to predict AR arrival 12-24 hours in advance. Implement a simple threshold-based warning system with green/yellow/orange/red alerts and estimate its false alarm rate from the simulated data.',
       successHint: 'Atmospheric rivers are one of the most important discoveries in modern meteorology. They explain why extreme rainfall events are concentrated in time and space, and why mountain regions like Tawang experience both devastating floods and essential water supply from the same atmospheric phenomenon.',

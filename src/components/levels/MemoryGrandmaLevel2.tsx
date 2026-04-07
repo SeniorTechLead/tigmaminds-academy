@@ -523,8 +523,8 @@ AI is getting closer to some human-like memory properties (retrieval-augmented g
 import matplotlib.pyplot as plt
 
 # Radar chart: Human vs AI memory capabilities
-categories = ['Capacity', 'Accuracy', 'Speed', 'Context\\\nunderstanding', 'Creativity', 'Emotional\\\ntagging',
-              'One-shot\\\nlearning', 'Forgetting\\\n(adaptive)', 'Embodied\\\nmemory']
+categories = ['Capacity', 'Accuracy', 'Speed', 'Context\\nunderstanding', 'Creativity', 'Emotional\\ntagging',
+              'One-shot\\nlearning', 'Forgetting\\n(adaptive)', 'Embodied\\nmemory']
 N = len(categories)
 
 # Scores (0-10)
@@ -678,7 +678,7 @@ ax2.fill_between(days, baseline, optimized, alpha=0.1, color='#22c55e')
 
 # Calculate area between curves (total "extra memory")
 area = np.trapz(optimized - baseline, days)
-ax2.text(15, 50, f'Extra memory:\\\n{area:.0f} %-days', color='#f59e0b', fontsize=12,
+ax2.text(15, 50, f'Extra memory:\\n{area:.0f} %-days', color='#f59e0b', fontsize=12,
          ha='center', fontweight='bold',
          bbox=dict(boxstyle='round', facecolor='#1f2937', edgecolor='#f59e0b'))
 

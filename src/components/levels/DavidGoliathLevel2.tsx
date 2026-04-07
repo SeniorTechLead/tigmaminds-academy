@@ -253,7 +253,7 @@ scenarios = [
 for t_stop, label in scenarios:
     f = p / t_stop
     plt.plot(t_stop*1000, f, 'ro', markersize=10)
-    plt.annotate(f'{label}\\\n{f:.0f} N', xy=(t_stop*1000, f),
+    plt.annotate(f'{label}\\n{f:.0f} N', xy=(t_stop*1000, f),
                  xytext=(t_stop*1000*1.5, f*1.3), fontsize=9,
                  color='cyan', arrowprops=dict(arrowstyle='->', color='cyan'))
 

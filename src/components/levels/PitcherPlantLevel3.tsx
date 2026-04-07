@@ -143,7 +143,7 @@ print("Annual nitrogen budget:")
 print(f"  Soil supply: {total_soil:.1f} mg N/year")
 print(f"  Insect supply: {total_insect:.1f} mg N/year")
 print(f"  Insect N is {total_insect/(total_soil+total_insect)*100:.0f}% of total intake")
-print(f"\\\nFinal biomass:")
+print(f"\\nFinal biomass:")
 print(f"  Pitcher plant: {biomass_carn[-1]:.1f} (started at {biomass_carn[0]:.1f})")
 print(f"  Normal plant: {biomass_norm[-1]:.1f} (started at {biomass_norm[0]:.1f})")
 print(f"  Advantage: {(biomass_carn[-1]/biomass_norm[-1] - 1)*100:.0f}% more biomass from carnivory")`,
@@ -309,10 +309,10 @@ print("Annual nitrogen availability:")
 print(f"  Normal soil: {avail_n.mean():.1f} mg N/kg (mean)")
 print(f"  Bog soil: {avail_b.mean():.1f} mg N/kg (mean)")
 print(f"  Ratio: {avail_n.mean()/max(avail_b.mean(),0.01):.1f}x more in normal soil")
-print(f"\\\nOrganic matter trend:")
+print(f"\\nOrganic matter trend:")
 print(f"  Normal: {org_n[-1]:.0f} mg/kg (decomposition keeps up)")
 print(f"  Bog: {org_b[-1]:.0f} mg/kg (accumulating -> peat formation)")
-print(f"\\\nThis nitrogen scarcity is why pitcher plants evolved carnivory.")`,
+print(f"\\nThis nitrogen scarcity is why pitcher plants evolved carnivory.")`,
       challenge: 'Add a "pH effect" parameter: in bogs, pH is 3.5 (vs 6.5 in normal soil). Enzyme activity drops exponentially below pH 5. How does explicit pH modeling change the nitrogen availability gap?',
       successHint: 'Bogs are nitrogen prisons: organic matter accumulates because decomposition is blocked, and the nitrogen locked inside cannot be recycled. Carnivorous plants bypass this bottleneck entirely by harvesting nitrogen from mobile animals.',
     },

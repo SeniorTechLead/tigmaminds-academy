@@ -172,8 +172,8 @@ ax.set_ylabel('Air mass above (kg/m²)', color='white')
 ax.set_title('Weight of air column above', color='white', fontsize=11)
 
 ax.text(4, mass_above[0] * 0.7,
-        f'Sea level: {mass_above[0]:.0f} kg/m²\\\n'
-        f'4500m: {mass_above[np.argmin(np.abs(altitude-4500))]:.0f} kg/m²\\\n'
+        f'Sea level: {mass_above[0]:.0f} kg/m²\\n'
+        f'4500m: {mass_above[np.argmin(np.abs(altitude-4500))]:.0f} kg/m²\\n'
         f'That is {mass_above[0]-mass_above[np.argmin(np.abs(altitude-4500))]:.0f} kg/m² LESS',
         color='white', fontsize=8, bbox=dict(boxstyle='round', facecolor='#1f2937', edgecolor='#22c55e'))
 
@@ -444,7 +444,7 @@ cascade_colors = ['#22c55e', '#3b82f6', '#06b6d4', '#f59e0b', '#ef4444', '#a855f
 
 for alt, color in zip(altitudes_demo, cascade_colors):
     idx = np.argmin(np.abs(altitude - alt))
-    stages = ['Atmosphere', 'Trachea\\\n(humidified)', 'Alveoli', 'Arterial\\\nblood']
+    stages = ['Atmosphere', 'Trachea\\n(humidified)', 'Alveoli', 'Arterial\\nblood']
     values = [
         f_O2 * P_atm_kPa[idx],
         PiO2[idx],
@@ -495,7 +495,7 @@ ax.scatter(PAO2_at_45, hemoglobin_saturation(max(PAO2_at_45, 0.1), 3.5),
 ax.scatter(PAO2_at_45, hemoglobin_saturation(max(PAO2_at_45, 0.1), 2.8),
            c='#f59e0b', s=100, zorder=5, edgecolors='white')
 ax.axvline(PAO2_at_45, color='gray', linestyle=':', alpha=0.3)
-ax.text(PAO2_at_45 + 0.3, 40, f'4500m\\\nPAO2={PAO2_at_45:.1f}kPa',
+ax.text(PAO2_at_45 + 0.3, 40, f'4500m\\nPAO2={PAO2_at_45:.1f}kPa',
         color='gray', fontsize=8)
 
 ax.set_xlabel('O2 partial pressure (kPa)', color='white')
@@ -542,11 +542,11 @@ for i, alt in enumerate([0, 3000, 4500, 6000]):
     ]:
         ax.bar(i, val, bottom=bottom, color=color, alpha=0.8, width=0.6)
         if val > 3:
-            ax.text(i, bottom + val/2, f'{name}\\n{val:.1f}', ha='center',
+            ax.text(i, bottom + val/2, f'{name}\n{val:.1f}', ha='center',
                     va='center', color='white', fontsize=6)
         bottom += val
 
-    ax.text(i, bottom + 2, f'{alt}m\\n({P_total:.0f}kPa)', ha='center',
+    ax.text(i, bottom + 2, f'{alt}m\n({P_total:.0f}kPa)', ha='center',
             color='white', fontsize=7)
 
 ax.set_xticks(range(4))
@@ -676,7 +676,7 @@ cbar.ax.tick_params(colors='gray')
 
 # Mark typical snow leopard conditions
 ax.scatter(-15, 40, c='#f59e0b', s=100, zorder=5, edgecolors='white', linewidths=2)
-ax.annotate('Typical\\\nhunt', (-15, 40), textcoords="offset points",
+ax.annotate('Typical\\nhunt', (-15, 40), textcoords="offset points",
             xytext=(10, 10), color='#f59e0b', fontsize=8)
 
 ax.set_xlabel('Air temperature (°C)', color='white')
@@ -918,10 +918,10 @@ ax.set_facecolor('#111827')
 ax.tick_params(colors='gray')
 
 scenarios = [
-    ('Clear, calm\\\nnight', 0, 0, -20),
-    ('Clear, windy\\\nnight', 0, 30, -20),
-    ('Cloudy, calm\\\nnight', 1.0, 0, -15),
-    ('Clear\\\ndaytime*', 0, 15, -10),
+    ('Clear, calm\\nnight', 0, 0, -20),
+    ('Clear, windy\\nnight', 0, 30, -20),
+    ('Cloudy, calm\\nnight', 1.0, 0, -15),
+    ('Clear\\ndaytime*', 0, 15, -10),
 ]
 
 for i, (name, cc, wind, T_a) in enumerate(scenarios):
@@ -977,9 +977,9 @@ ax.tick_params(colors='gray')
 
 shelter_types = [
     ('Open sky', 223, 0, '#ef4444'),
-    ('Under rock\\\noverhang', 263, 0.8, '#f59e0b'),
-    ('Cave\\\nentrance', 270, 0.95, '#22c55e'),
-    ('Deep\\\ncave', 275, 1.0, '#3b82f6'),
+    ('Under rock\\noverhang', 263, 0.8, '#f59e0b'),
+    ('Cave\\nentrance', 270, 0.95, '#22c55e'),
+    ('Deep\\ncave', 275, 1.0, '#3b82f6'),
 ]
 
 for name, T_surround, wind_block, color in shelter_types:
@@ -1190,8 +1190,8 @@ ax = axes[1, 1]
 ax.set_facecolor('#111827')
 ax.tick_params(colors='gray')
 
-features = ['Pale fur\\\n(UV reflect)', 'Dark skin\\\n(melanin)', 'Nictitating\\\nmembrane',
-            'Low body\\\nprofile', 'Crepuscular\\\nhunting']
+features = ['Pale fur\\n(UV reflect)', 'Dark skin\\n(melanin)', 'Nictitating\\nmembrane',
+            'Low body\\nprofile', 'Crepuscular\\nhunting']
 protection = [70, 90, 95, 40, 80]  # % UV reduction from each
 feat_colors = ['#f59e0b', '#a855f7', '#3b82f6', '#22c55e', '#06b6d4']
 

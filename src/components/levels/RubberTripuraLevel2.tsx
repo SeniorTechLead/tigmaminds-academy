@@ -133,7 +133,7 @@ for ax, (name, params), color in zip(axes, distributions.items(), colors):
     ax.axvline(x=Mw/1000, color='#ef4444', linestyle='--', linewidth=2, label=f'Mw={Mw/1000:.0f}k')
 
     ax.set_xlabel('MW (×1000 g/mol)', color='white', fontsize=9)
-    ax.set_title(f'{name}\\\nPDI = {PDI:.2f}', color='white', fontsize=10)
+    ax.set_title(f'{name}\\nPDI = {PDI:.2f}', color='white', fontsize=10)
     ax.legend(facecolor='#374151', labelcolor='white', fontsize=7)
 
 axes[0].set_ylabel('Number of chains', color='white', fontsize=10)
@@ -209,7 +209,7 @@ def draw_network(ax, n_chains, n_crosslinks, title):
 
     ax.set_xlim(0, 10)
     ax.set_ylim(0, 10)
-    ax.set_title(f'{title}\\\n{n_crosslinks} cross-links', color='white', fontsize=10)
+    ax.set_title(f'{title}\\n{n_crosslinks} cross-links', color='white', fontsize=10)
     ax.set_aspect('equal')
 
 fig, axes = plt.subplots(1, 3, figsize=(14, 4.5))
@@ -316,8 +316,8 @@ ax.legend(facecolor='#374151', labelcolor='white', fontsize=8)
 ax.set_xlim(-100, 200)
 
 # Annotate regions
-ax.text(-80, 5e9, 'GLASSY\\\n(brittle)', color='#9ca3af', fontsize=10, ha='center')
-ax.text(50, 5e5, 'RUBBERY\\\n(elastic)', color='#9ca3af', fontsize=10, ha='center')
+ax.text(-80, 5e9, 'GLASSY\\n(brittle)', color='#9ca3af', fontsize=10, ha='center')
+ax.text(50, 5e5, 'RUBBERY\\n(elastic)', color='#9ca3af', fontsize=10, ha='center')
 
 plt.tight_layout()
 plt.savefig('thermal.png', dpi=100, facecolor='#1f2937')
@@ -327,7 +327,7 @@ print("Glass transition temperatures:")
 for name, p in rubbers.items():
     safe_range = f"{p['Tg'] + 20}°C to 150°C"
     print(f"  {name:<25}: Tg = {p['Tg']}°C, safe use: {safe_range}")
-print("\\\nSilicone has the widest usable range (-100°C to 200°C).")
+print("\\nSilicone has the widest usable range (-100°C to 200°C).")
 print("Natural rubber is ideal for Tripura's tropical climate.")`,
       challenge: 'Plot the loss tangent (tan delta) at the glass transition. This peaks at Tg and indicates energy dissipation. Use a Gaussian peak centred at Tg.',
       successHint: 'The glass transition is the most important single number for any rubber product. It determines whether the material works in winter, in the tropics, or in space.',
@@ -413,7 +413,7 @@ for T in [10, 20, 25, 30, 40, 50, 60, 70]:
     print(f"  {T:>3d}°C: {lt:>8.1f} years")
 
 # 10-degree rule verification
-print("\\\n10-DEGREE RULE VERIFICATION:")
+print("\\n10-DEGREE RULE VERIFICATION:")
 for T in [20, 30, 40, 50]:
     r1 = degradation_rate(T)
     r2 = degradation_rate(T + 10)
