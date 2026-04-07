@@ -712,7 +712,7 @@ plt.show()
 
 print("\\nHabitat determines destiny:")
 print("  Active restoration protects the deer by growing their habitat.")
-print("  Dam reform alone stabilizes but doesn\'t improve.")
+print("  Dam reform alone stabilizes but doesn't improve.")
 print("  Status quo = slow extinction. Climate change = fast extinction.")`,
       challenge: 'Design a "combined" scenario: active restoration for 20 years, then budget cuts force a return to status quo. What does the population trajectory look like? Is 20 years of restoration enough to build a self-sustaining population?',
       successHint: 'Coupled population-habitat models are the gold standard for conservation planning under uncertainty. They reveal that protecting a species requires protecting its habitat trajectory, not just its current population.',

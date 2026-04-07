@@ -617,7 +617,7 @@ print("Species oxygen thresholds:")
 for name, _, km, pcrit, _ in species:
     print(f"  {name}: Km={km} mg/L, Pcrit={pcrit} mg/L")
 print()
-print("This explains why fish jump at dawn — it\'s when DO is lowest.")
+print("This explains why fish jump at dawn — it's when DO is lowest.")
 print("Jumping either aerates local water or lets fish gulp air directly.")`,
       challenge: 'Add water temperature as a confounding variable: warmer water holds less DO AND increases fish metabolic demand. Model how a 3°C temperature increase (climate warming) changes the daily DO minimum and shifts the peak jumping hour earlier.',
       successHint: 'The connection between dissolved oxygen and fish behavior is a textbook example of how physics (gas solubility), chemistry (oxidation/reduction), biology (respiration), and ecology (diel cycles) all intersect. Fish jumping at dawn is not a mystery — it is a predictable response to the daily oxygen minimum.',

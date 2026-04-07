@@ -846,7 +846,7 @@ for rate, label, color in zip(relaxation_rates, labels_r, colors_r):
     angle = initial_angle + 60 * (1 - np.exp(-rate * cycles))
     ax3.plot(cycles, angle, color=color, linewidth=2, label=label)
 ax3.axhline(30, color='gray', linestyle=':', linewidth=0.5)
-ax3.text(50, 32, 'Won\'t fold flat anymore', color='gray', fontsize=8)
+ax3.text(50, 32, "Won't fold flat anymore", color='gray', fontsize=8)
 ax3.set_xlabel('Open-close cycles', color='white')
 ax3.set_ylabel('Residual crease angle (°)', color='white')
 ax3.set_title('Crease Degradation Over Time', color='white', fontsize=12, fontweight='bold')
@@ -1042,7 +1042,7 @@ print(f"\\nSpecific strength comparison:")
 for mat, ss in sorted(zip(names, specific_strength), key=lambda x: -x[1]):
     print(f"  {mat:<20}: {ss:.0f} MPa·m³/kg")
 print(f"\\nBamboo outer layer rivals steel in specific strength")
-print(f"while weighing 10x less — nature\'s optimal structural material!")`,
+print(f"while weighing 10x less — nature's optimal structural material!")`,
       challenge: 'Model the splitting failure mode of bamboo ribs. When a lateral force is applied (e.g., wind catching the umbrella at an angle), calculate the transverse stress that could cause splitting and determine the maximum safe lateral load.',
       successHint: 'You have analyzed bamboo as an engineering material — a functionally graded composite that rivals modern materials in specific strength. Understanding bamboo mechanics explains why it has been used for umbrella frames for centuries.',
     },

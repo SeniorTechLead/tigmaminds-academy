@@ -707,7 +707,7 @@ print(f"  Radiative forcing: {dF:.2f} W/m^2")
 print()
 print("This is why aerosol-cloud interactions are the largest")
 print("uncertainty in climate projections. The same physics that")
-print("controls whether a cloud rains also controls Earth\'s energy budget.")`,
+print("controls whether a cloud rains also controls Earth's energy budget.")`,
       challenge: 'Add a ship track simulation: model a line of enhanced CCN (1000/cm^3) embedded in clean marine air (100/cm^3). Create a 2D plot showing cloud albedo across the domain, with the ship track visible as a bright line. This replicates what satellites actually observe.',
       successHint: 'Aerosol-cloud interactions connect air pollution, cloud seeding, and climate change into a single physical framework. Understanding the Twomey effect means understanding that every time we change aerosol concentrations — whether by seeding a cloud or by burning fossil fuels — we alter the planet\'s reflectivity.',
     },

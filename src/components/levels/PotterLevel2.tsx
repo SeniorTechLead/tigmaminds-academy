@@ -62,7 +62,7 @@ ax1.text(62, 800, 'Mullite\\n(3Al₂O₃·2SiO₂)', color='#22c55e', fontsize=8
 potter_rect = plt.Rectangle((10, 700), 25, 600, fill=False, edgecolor='#f59e0b',
                               linewidth=2, linestyle='--')
 ax1.add_patch(potter_rect)
-ax1.text(22, 650, 'Potter\'s zone', color='#f59e0b', fontsize=9, ha='center')
+ax1.text(22, 650, "Potter's zone", color='#f59e0b', fontsize=9, ha='center')
 
 ax1.set_xlabel('Al₂O₃ content (%)', color='white')
 ax1.set_ylabel('Temperature (°C)', color='white')

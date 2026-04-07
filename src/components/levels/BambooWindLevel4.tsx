@@ -194,7 +194,7 @@ class BambooFlute:
                 hole_d = self.hole_diameters[i]
                 tube_d = self.inner_radius * 2
 
-                # Correction factor: small holes don\'t fully terminate the column
+                # Correction factor: small holes don't fully terminate the column
                 # Effective shortening depends on (hole_d / tube_d)^2
                 correction_factor = min((hole_d / tube_d) ** 2, 1.0)
 

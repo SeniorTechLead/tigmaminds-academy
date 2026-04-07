@@ -28,7 +28,7 @@ import matplotlib.pyplot as plt
 # --- Meteoroid atmospheric entry simulation ---
 def atmospheric_entry(mass_kg, velocity_ms, diameter_m, density_kg_m3,
                       heat_ablation_J_kg, entry_angle_deg=45, Cd=1.5, Ch=0.1):
-    """Simulate meteoroid entry through Earth\'s atmosphere."""
+    """Simulate meteoroid entry through Earth's atmosphere."""
     dt = 0.001  # seconds
     g = 9.81
     R_earth = 6.371e6
@@ -1156,7 +1156,7 @@ ax.set_facecolor('#111827')
 n_meteoroids = 1000
 a_met = np.random.uniform(1.5, 3.5, n_meteoroids)
 e_met = np.abs(np.random.normal(0.15, 0.15, n_meteoroids))
-# Only those that cross Earth\'s orbit
+# Only those that cross Earth's orbit
 earth_crossers = perihelion(a_met, e_met) <= 1.0
 a_ec = a_met[earth_crossers]; e_ec = e_met[earth_crossers]
 

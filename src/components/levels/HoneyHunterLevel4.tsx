@@ -227,7 +227,7 @@ def simulate_colony(pesticide_impact=0, varroa_load=0, habitat_loss=0, label='')
         lifespan = summer_lifespan if 60 < day < 300 else winter_lifespan
         daily_deaths = adults / lifespan * np.random.uniform(0.9, 1.1)
 
-        # Navigation loss (bees that can\'t find home)
+        # Navigation loss (bees that can't find home)
         if 60 < day < 300:
             lost_foragers = adults * 0.35 * pesticide_impact * 0.02
             daily_deaths += lost_foragers

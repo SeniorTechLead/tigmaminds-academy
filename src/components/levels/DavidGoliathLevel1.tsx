@@ -99,9 +99,9 @@ y_tangent = y_rel + vy * t_line
 
 plt.figure(figsize=(8, 8))
 plt.plot(x_circle, y_circle, 'c--', alpha=0.5, label='Circular path')
-plt.plot(0, 0, 'ko', markersize=10, label='David\\'s hand')
+plt.plot(0, 0, 'ko', markersize=10, label='David\'s hand')
 plt.plot(x_rel, y_rel, 'ro', markersize=12, label='Release point')
-plt.plot(x_tangent, y_tangent, 'r-', linewidth=3, label='Stone\\'s path')
+plt.plot(x_tangent, y_tangent, 'r-', linewidth=3, label='Stone\'s path')
 plt.arrow(x_rel, y_rel, vx*0.02, vy*0.02, head_width=0.08,
           color='red', linewidth=2)
 plt.plot([0, x_rel], [0, y_rel], 'gray', linewidth=1, linestyle=':')

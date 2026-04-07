@@ -265,7 +265,7 @@ dist, prev, path, steps = dijkstra_traced(source, target)
 
 fig, axes = plt.subplots(2, 3, figsize=(16, 10))
 fig.patch.set_facecolor('#1f2937')
-fig.suptitle('Dijkstra\\'s Algorithm: Sualkuchi → Kunming', color='white', fontsize=14, fontweight='bold')
+fig.suptitle('Dijkstra\'s Algorithm: Sualkuchi → Kunming', color='white', fontsize=14, fontweight='bold')
 for ax in axes.flat:
     ax.set_facecolor('#111827')
     ax.tick_params(colors='gray')

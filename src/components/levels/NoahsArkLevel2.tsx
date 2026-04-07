@@ -33,10 +33,10 @@ import matplotlib.pyplot as plt
 
 # Estimated land vertebrate species
 groups = {
-    "Mammals":     6,495,
-    "Birds":      11,000,
-    "Reptiles":   11,700,
-    "Amphibians":  8,400,
+    "Mammals":     6495,
+    "Birds":      11000,
+    "Reptiles":   11700,
+    "Amphibians":  8400,
 }
 
 total = sum(groups.values())
@@ -347,7 +347,7 @@ def food_kg_day(mass):
     return 70 * mass**0.75 / 3000
 
 print("=" * 72)
-print(f"{'NOAH\\'S ARK — PASSENGER MANIFEST':^72}")
+print(f"{'NOAH\'S ARK — PASSENGER MANIFEST':^72}")
 print("=" * 72)
 print(f"{'Category':<10} {'Species':>8} {'Animals':>8} {'Mass(t)':>10} "
       f"{'Food/day':>10} {'Area(m²)':>10}")

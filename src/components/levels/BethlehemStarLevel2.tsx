@@ -127,7 +127,7 @@ plt.axhline(0, color='#94a3b8', linewidth=1, linestyle='--')
 
 plt.xlabel('Time (years)', fontsize=12)
 plt.ylabel('Apparent angular velocity (°/year)', fontsize=12)
-plt.title('Jupiter\\'s Apparent Motion — Retrograde Periods', fontsize=14)
+plt.title('Jupiter\'s Apparent Motion — Retrograde Periods', fontsize=14)
 plt.legend(fontsize=10)
 plt.grid(alpha=0.3)
 plt.show()
@@ -271,7 +271,7 @@ print(f"Maximum: +{eot_spencer[max_idx]:.1f} min on day {days[max_idx]} (~Nov {d
 print(f"Minimum: {eot_spencer[min_idx]:.1f} min on day {days[min_idx]} (~Feb {days[min_idx]-31})")
 print()
 print("For navigation: 1 minute of time error = 0.25° longitude error")
-print(f"Max error: {abs(eot_spencer[max_idx]) * 0.25:.1f}° longitude = ~{abs(eot_spencer[max_idx]) * 0.25 * 111 * np.cos(np.radians(32)):.0f} km at Bethlehem\\'s latitude")`,
+print(f"Max error: {abs(eot_spencer[max_idx]) * 0.25:.1f}° longitude = ~{abs(eot_spencer[max_idx]) * 0.25 * 111 * np.cos(np.radians(32)):.0f} km at Bethlehem\'s latitude")`,
       challenge: 'Plot the eccentricity component and obliquity component separately. Which one contributes more to the equation of time? When do they reinforce each other, and when do they cancel?',
       successHint: 'The equation of time connects orbital mechanics (Kepler’s laws) to practical navigation. It explains why the earliest sunset does not fall on the shortest day, why the latest sunrise does not match the winter solstice, and why ancient astronomers needed mathematical tables to navigate accurately.',
     },
@@ -343,7 +343,7 @@ plt.annotate('Ecliptic Pole', (0, 0), textcoords="offset points",
 
 plt.xlabel('Degrees', fontsize=12)
 plt.ylabel('Degrees', fontsize=12)
-plt.title('Precession: Earth\\'s North Pole Traces a Circle in 26,000 Years', fontsize=13)
+plt.title('Precession: Earth\'s North Pole Traces a Circle in 26,000 Years', fontsize=13)
 plt.gca().set_aspect('equal')
 plt.grid(alpha=0.2)
 plt.show()

@@ -280,7 +280,7 @@ def evaluate(L, B, D, alpha=1.0):
     max_disp = RHO * V_max
     cargo = max_disp - HULL_MASS
     if cargo < MIN_CARGO:
-        return None  # can\'t carry enough
+        return None  # can't carry enough
     total = HULL_MASS + MIN_CARGO
     # Find draft for this load
     drafts = np.linspace(0.01, D, 200)
@@ -427,7 +427,7 @@ def hull_performance(params):
     V = L * 2 * np.trapz(y, z)
     total_mass = HULL_MASS + 200  # minimum cargo
 
-    if V * RHO < total_mass: return 1e6  # can\'t float
+    if V * RHO < total_mass: return 1e6  # can't float
 
     # Find draft
     drafts = np.linspace(0.01, D, 200)

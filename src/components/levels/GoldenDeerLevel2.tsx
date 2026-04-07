@@ -783,7 +783,7 @@ ax3.text(540, 0.05, 'Visible', color='gray', ha='center', fontsize=8)
 
 ax3.set_xlabel('Wavelength (nm)', color='white')
 ax3.set_ylabel('Relative intensity / response', color='white')
-ax3.set_title('Solar Panel: Capturing the Sun\\'s Light', color='white', fontsize=10)
+ax3.set_title('Solar Panel: Capturing the Sun\'s Light', color='white', fontsize=10)
 ax3.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
 ax3.tick_params(colors='gray')
 

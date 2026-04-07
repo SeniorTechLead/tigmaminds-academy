@@ -1,6 +1,6 @@
 import { Award, Briefcase, Users } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 export default function Hero() {
   const [currentWord, setCurrentWord] = useState(0);
@@ -50,8 +50,7 @@ export default function Hero() {
               >
                 Explore Courses
               </button>
-              <Link
-                to="/about"
+              <Link href="/about"
                 className="border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-6 sm:px-8 py-3 sm:py-4 rounded-lg hover:border-blue-600 hover:text-blue-600 dark:hover:border-blue-400 dark:hover:text-blue-400 transition-all font-semibold text-center"
               >
                 Learn More

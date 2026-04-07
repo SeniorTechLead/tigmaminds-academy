@@ -1004,7 +1004,7 @@ print(f"  Net CRF: {CRF_net[assam_lon_idx, assam_idx]:+.1f} W/m²")
 print()
 print("Clouds currently cool Earth by ~20 W/m² on average.")
 print("A 10% change = ±2 W/m² — comparable to doubling CO₂.")
-print("The cloud namer watches Earth\'s most powerful thermostat.")`,
+print("The cloud namer watches Earth's most powerful thermostat.")`,
       challenge: 'Simulate a seasonal analysis: compute CRF for June-August (monsoon) vs December-February (winter) over the Indian subcontinent. Show how the monsoon cloud regime changes the regional energy budget.',
       successHint: 'Cloud radiative forcing is directly measurable from space, making it one of the most important observational constraints on climate models. The CERES dataset has transformed our understanding of Earth\'s energy balance and revealed the outsized role that clouds play in determining our planet\'s temperature.',
     },

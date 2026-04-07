@@ -473,7 +473,7 @@ iss_data = [
 ]
 
 # Print comparison table
-print(f"{'Metric':<30} {'Noah\\'s Ark':<28} {'ISS'}")
+print(f"{'Metric':<30} {'Noah\'s Ark':<28} {'ISS'}")
 print("=" * 85)
 for m, a, i in zip(metrics, ark_data, iss_data):
     print(f"{m:<30} {a:<28} {i}")

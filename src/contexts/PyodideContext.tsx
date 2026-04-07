@@ -61,7 +61,7 @@ export function PyodideProvider({ children }: { children: ReactNode }) {
         notify();
         await pyodide.loadPackage('micropip');
         const micropip = pyodide.pyimport('micropip');
-        for (const pkg of ['numpy', 'matplotlib']) {
+        for (const pkg of ['numpy', 'matplotlib', 'sqlite3']) {
           try { await micropip.install(pkg); }
           catch { await pyodide.loadPackage(pkg).catch(() => {}); }
         }

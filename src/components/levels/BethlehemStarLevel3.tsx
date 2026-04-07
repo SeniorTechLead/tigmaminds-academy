@@ -253,7 +253,7 @@ for e, color, label in [(0.0, '#67e8f9', 'Circle'),
 
 axes[0].plot(0, 0, 'o', color='#fbbf24', markersize=8, zorder=10)
 axes[0].set_aspect('equal')
-axes[0].set_title('Orbits from Newton\\'s Gravity', fontsize=13)
+axes[0].set_title('Orbits from Newton\'s Gravity', fontsize=13)
 axes[0].legend(fontsize=9)
 axes[0].grid(alpha=0.2)
 
@@ -264,7 +264,7 @@ if len(areas) > 2:
     axes[1].axhline(np.mean(areas), color='#fbbf24', linewidth=2, linestyle='--', label=f'Mean area = {np.mean(areas):.3f}')
     axes[1].set_xlabel('Time chunk (1/12 orbit)', fontsize=12)
     axes[1].set_ylabel('Area swept', fontsize=12)
-    axes[1].set_title('Kepler\\'s 2nd Law: Equal Areas?', fontsize=13)
+    axes[1].set_title('Kepler\'s 2nd Law: Equal Areas?', fontsize=13)
     axes[1].legend(fontsize=9)
     axes[1].grid(alpha=0.3)
 
@@ -272,7 +272,7 @@ plt.tight_layout()
 plt.show()
 
 # Verify Kepler's 3rd law
-print("Kepler\\'s 3rd Law verification:")
+print("Kepler\'s 3rd Law verification:")
 for a in [0.5, 1.0, 2.0, 5.0, 10.0]:
     xs, ys, areas, T = simulate_orbit(a, 0.1, dt=0.0001)
     print(f"  a = {a:5.1f} AU: T = {T:.4f} yr, T² = {T**2:.3f}, a³ = {a**3:.3f}, ratio = {T**2/a**3:.6f}")`,
@@ -460,14 +460,14 @@ t_pts = np.linspace(0, 60, len(perturbation))
 ax2.plot(t_pts, perturbation, linewidth=1.5, color='#ef4444')
 ax2.set_xlabel('Time (years)', fontsize=12)
 ax2.set_ylabel('Position difference (AU)', fontsize=12)
-ax2.set_title('Saturn\\'s Perturbation by Jupiter', fontsize=13)
+ax2.set_title('Saturn\'s Perturbation by Jupiter', fontsize=13)
 ax2.grid(alpha=0.3)
 
 plt.tight_layout()
 plt.show()
 
 print(f"Max perturbation over 60 years: {np.max(perturbation):.4f} AU")
-print(f"That\\'s {np.max(perturbation) * 1.496e8:.0f} km — measurable even in ancient times")`,
+print(f"That\'s {np.max(perturbation) * 1.496e8:.0f} km — measurable even in ancient times")`,
       challenge: 'Add Earth to the simulation (a = 1.0 AU) and see how it is perturbed by Jupiter. Is Earth’s perturbation larger or smaller than Saturn’s? Why?',
       successHint: 'Perturbation theory is where orbital mechanics meets real-world complexity. The three-body problem has no closed-form solution — numerical simulation is the only way to track the full gravitational dance. This is what modern ephemeris services (JPL Horizons) compute for every planet, asteroid, and spacecraft.',
     },

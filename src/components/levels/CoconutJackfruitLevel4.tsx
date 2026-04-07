@@ -364,7 +364,7 @@ class LinearRegression:
             pred = X @ self.w
             error = pred - y
             mse = np.mean(error**2)
-            reg_loss = self.l2_lambda * np.sum(self.w[1:]**2)  # don\'t regularize bias
+            reg_loss = self.l2_lambda * np.sum(self.w[1:]**2)  # don't regularize bias
             self.loss_history.append(mse + reg_loss)
 
             # Gradient

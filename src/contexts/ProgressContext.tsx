@@ -49,6 +49,7 @@ const ProgressContext = createContext<ProgressContextType | undefined>(undefined
 
 // Local storage helpers
 function loadLocal(): Record<string, LessonProgress> {
+  if (typeof window === 'undefined') return {};
   try {
     const saved = localStorage.getItem('tma_progress');
     if (!saved) return {};
@@ -84,16 +85,19 @@ async function saveToSupabase(userId: string, slug: string, progress: LessonProg
     return;
   }
   try {
-    const { error } = await supabase.from('user_progress').upsert({
+    const row: Record<string, unknown> = {
       user_id: userId,
-      lesson_id: lesson.id,
       lesson_slug: slug,
       levels_completed: progress.levelsCompleted,
       level_details: progress.levels,
       completed_at: progress.completedAt,
-    }, { onConflict: 'user_id,lesson_slug' });
+    };
+    // Only include lesson_id if the lesson exists in the DB (avoids FK violation for client-only lessons)
+    if (lesson.id) row.lesson_id = lesson.id;
 
-    if (error) {
+    const { error } = await supabase.from('user_progress').upsert(row, { onConflict: 'user_id,lesson_slug' });
+
+    if (error && !error.message.includes('foreign key')) {
       console.error(`[Progress] Failed to save ${slug}:`, error.message);
     }
   } catch (err) {
@@ -105,7 +109,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth();
   const [progress, setProgress] = useState<Record<string, LessonProgress>>(loadLocal);
   const [syncing, setSyncing] = useState(false);
-  const [studentName, setStudentNameState] = useState(() => localStorage.getItem('tma_student_name') || '');
+  const [studentName, setStudentNameState] = useState(() => typeof window !== 'undefined' ? localStorage.getItem('tma_student_name') || '' : '');
 
   const setStudentName = useCallback((name: string) => {
     setStudentNameState(name);

@@ -375,6 +375,10 @@ for e in range(n_elements):
     # Transformation to global coordinates
     T = np.array([
         [ c*c,  c*s, -c*c, -c*s],
+        [ c*s,  s*s, -c*s, -s*s],
+        [-c*c, -c*s,  c*c,  c*s],
+        [-c*s, -s*s,  c*s,  s*s],
+    ])
 
 print("\n[Full visualization in playground]")`,
       challenge: 'Add more nodes to the mesh (try n_nodes = 50 and 100). How does the stress distribution change? Does the solution converge? Plot stress vs mesh refinement to demonstrate FEA convergence.',

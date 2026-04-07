@@ -681,7 +681,7 @@ ax.set_xlim(-0.5, 6)
 ax.set_ylim(-0.5, 4)
 ax.set_aspect('equal')
 ax.set_title(f'Golden Ratio (φ = {phi:.3f})', color='white', fontsize=12)
-ax.text(2.5, -0.3, 'Each rectangle\'s width/height ≈ φ', color='white', ha='center', fontsize=9)
+ax.text(2.5, -0.3, "Each rectangle's width/height ≈ φ", color='white', ha='center', fontsize=9)
 ax.set_xticks([]); ax.set_yticks([])
 
 plt.tight_layout()

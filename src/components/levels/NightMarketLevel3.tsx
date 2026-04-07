@@ -73,7 +73,7 @@ goods = {
 
 fig, axes = plt.subplots(2, 2, figsize=(14, 10))
 fig.patch.set_facecolor('#1f2937')
-fig.suptitle('Supply & Demand at Ima Keithel (Mothers\\' Market)',
+fig.suptitle('Supply & Demand at Ima Keithel (Mothers\' Market)',
              color='white', fontsize=14, fontweight='bold')
 for ax in axes.flat:
     ax.set_facecolor('#111827')

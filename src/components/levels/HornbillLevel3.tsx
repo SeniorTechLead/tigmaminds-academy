@@ -769,7 +769,7 @@ for rd, col, lbl in zip(densities_test, colors_test, labels_test):
     print(f"{lbl:<30} {E_v:>10.2f} {s_v:>18.1f} {m_v:>10.0f}")
 print()
 print("The hornbill casque at ~25% relative density is 75% lighter than solid bone")
-print("while retaining enough strength for territorial combat. Nature\'s engineering.")`,
+print("while retaining enough strength for territorial combat. Nature's engineering.")`,
       challenge: 'Model the casque as a 2D grid of cells (like a honeycomb cross-section). Apply a point load at the top and compute stress distribution by propagating forces through the cell walls. Visualize which cells carry the most stress.',
       successHint: 'Cellular structures appear everywhere in nature — bird bones, plant stems, coral, trabecular bone. The Gibson-Ashby scaling laws give us a simple but powerful framework to understand why nature overwhelmingly favors hollow over solid construction.',
     },

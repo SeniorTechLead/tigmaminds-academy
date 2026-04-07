@@ -288,7 +288,7 @@ ax1.axis('off')
 # Cayley table (multiplication table of D4)
 ax2.set_facecolor('#111827')
 # Simplified: just show the structure
-short_names = ['e', 'r', 'r²', 'r³', 'h', 'v', 'd', 'd\'']
+short_names = ['e', 'r', 'r²', 'r³', 'h', 'v', 'd', "d'"]
 table_data = np.array([
     [0,1,2,3,4,5,6,7],
     [1,2,3,0,6,7,5,4],

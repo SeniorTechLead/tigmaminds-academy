@@ -382,7 +382,7 @@ for d, label in [(80, 'Vernal Eq'), (172, 'Summer Sol'),
              ha='center', rotation=0)
 
 ax1.set_ylabel('Declination (°)', color='#e2e8f0')
-ax1.set_title('Sun\\'s Declination Through the Year', color='white')
+ax1.set_title('Sun\'s Declination Through the Year', color='white')
 
 # Zodiac markers
 for i, sign in enumerate(zodiac):

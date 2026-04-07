@@ -184,7 +184,7 @@ ax1.set_facecolor('#111827')
 colors = ['#22c55e', '#3b82f6', '#f59e0b', '#a855f7', '#ef4444', '#ec4899']
 bars = ax1.barh(list(sorted_results.keys()), list(sorted_results.values()), color=colors)
 ax1.set_xlabel('Total score', color='white')
-ax1.set_title('Prisoner\\'s Dilemma Tournament Results', color='white', fontsize=12)
+ax1.set_title('Prisoner\'s Dilemma Tournament Results', color='white', fontsize=12)
 ax1.tick_params(colors='gray')
 ax1.set_yticklabels(list(sorted_results.keys()), color='white')
 for bar, score in zip(bars, sorted_results.values()):

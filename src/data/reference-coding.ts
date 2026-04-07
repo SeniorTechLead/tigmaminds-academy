@@ -1650,6 +1650,7 @@ print(f"Kaziranga avg: {result:.0f} kg")  # 4600 kg`,
         },
       },
       {
+        id: 'html-responsive',
         title: 'Responsive Design — One Page, Every Screen',
         beginnerContent:
           'People visit websites from phones, tablets, laptops, and giant monitors. Responsive design ' +
@@ -2415,6 +2416,7 @@ console.log("Bad data errors:", badErrors);`,
           '`let data: any = 5;\ndata = "hello";  // No error — any accepts anything\ndata.foo.bar;    // No error at compile time — crashes at runtime`',
       },
       {
+        id: 'ts-arrays',
         title: 'Arrays and Objects',
         beginnerContent:
           '**Arrays** hold lists of values. You specify the type of the elements:\n\n' +
@@ -2924,6 +2926,7 @@ const el: FrozenElephant = {
         },
       },
       {
+        id: 'arduino-setup',
         title: 'The setup() and loop() Mental Model',
         beginnerContent:
           'Every Arduino program (called a "sketch") has exactly two required functions. `setup()` ' +
@@ -7685,6 +7688,21 @@ def fibonacci(n):
     return a
 
 print(fibonacci(10))  # 55`,
+      },
+      {
+        id: 'error-correction',
+        title: 'Error Detection and Correction — Finding and Fixing Mistakes in Data',
+        beginnerContent:
+          'When you send a text message, the data travels as electrical signals, radio waves, or light pulses. Along the way, noise can flip a 0 to a 1 or vice versa. How does the receiver know if the message arrived correctly?\n\n' +
+          'The simplest method is a **parity bit**. Count the number of 1s in your data. If it\'s odd, add a 1 at the end to make it even. If it\'s even, add a 0. The receiver counts the 1s and checks parity. If it\'s odd, an error occurred. Example: data = 1011001 (four 1s, even) → send 10110010. If it arrives as 10110110 (a bit flipped), the receiver counts five 1s (odd) and knows something went wrong.\n\n' +
+          'Parity can **detect** a single error but cannot **correct** it — you know something is wrong, but not which bit flipped. To correct errors, you need more redundancy.\n\n' +
+          '**Check yourself:** If two bits flip simultaneously, does a single parity bit detect the error? (No — two flips cancel out, keeping parity even. The error goes undetected.)',
+        intermediateContent:
+          'The **Hamming code** can both detect and correct single-bit errors. The idea: add multiple parity bits, each covering a different subset of data bits. When an error occurs, the pattern of parity failures (the **syndrome**) pinpoints the exact position of the bad bit.\n\n' +
+          'Hamming(7,4) encodes 4 data bits into 7 bits (3 parity bits added). The overhead is 3/7 = 43%, but you gain the ability to correct any single-bit error automatically. QR codes, RAM modules (ECC memory), and satellite communication all use variants of this principle.\n\n' +
+          'The **ikat weaving** of Pochampally uses a similar idea: the weaver plans the pattern as a binary grid (dye/no-dye) and the resist-tie placement must be error-free because a single misplaced tie corrupts the pattern irreversibly. Traditional weavers developed mental "checksums" — counting ties per row — that parallel parity checking.',
+        advancedContent:
+          'Modern error correction uses **Reed-Solomon codes**, which operate on blocks of symbols (not individual bits). RS(255,223) — used in CDs, DVDs, QR codes, and deep-space communication — encodes 223 data bytes into 255 bytes (32 check bytes). It can correct up to 16 symbol errors per block, handling burst errors from scratches or signal fades. The math uses **Galois field arithmetic** (GF(2⁸)) where addition is XOR and multiplication uses polynomial arithmetic modulo an irreducible polynomial. The **Shannon limit** (channel capacity C = B·log₂(1 + SNR)) sets the theoretical maximum data rate for a given noise level. LDPC and Turbo codes approach within 0.1 dB of Shannon\'s limit and are used in 5G, Wi-Fi 6, and satellite links.',
       },
     ],
   },

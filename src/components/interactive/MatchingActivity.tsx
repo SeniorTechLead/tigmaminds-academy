@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CheckCircle } from 'lucide-react';
 
 interface Props {
@@ -11,14 +11,17 @@ export default function MatchingActivity({ pairs, title }: Props) {
   const [selectedLeft, setSelectedLeft] = useState<number | null>(null);
   const [wrongPair, setWrongPair] = useState<[number, number] | null>(null);
 
-  const shuffledRight = useState(() => {
+  // Start with identity order (matches server render), then shuffle on client
+  const [shuffledRight, setShuffledRight] = useState(() => pairs.map((_, i) => i));
+
+  useEffect(() => {
     const indices = pairs.map((_, i) => i);
     for (let i = indices.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [indices[i], indices[j]] = [indices[j], indices[i]];
     }
-    return indices;
-  })[0];
+    setShuffledRight(indices);
+  }, [pairs.length]);
 
   const handleRightClick = (rightIndex: number) => {
     if (selectedLeft === null) return;

@@ -13,10 +13,12 @@ const PrefsContext = createContext<PrefsContextType | undefined>(undefined);
 
 export function PrefsProvider({ children }: { children: ReactNode }) {
   const [editorTheme, setEditorThemeState] = useState<EditorTheme>(() => {
+    if (typeof window === 'undefined') return 'dark';
     return (localStorage.getItem('editorTheme') as EditorTheme) || 'dark';
   });
 
   const [soundEnabled, setSoundEnabledState] = useState(() => {
+    if (typeof window === 'undefined') return true;
     const saved = localStorage.getItem('soundEnabled');
     return saved === null ? true : saved === 'true';
   });

@@ -192,7 +192,7 @@ vis_min, vis_max = 400, 700
 
 fig, axes = plt.subplots(2, 2, figsize=(14, 10))
 fig.patch.set_facecolor('#1f2937')
-fig.suptitle('Cold Light: Why Fireflies Don\\'t Burn',
+fig.suptitle('Cold Light: Why Fireflies Don\'t Burn',
              color='white', fontsize=14, fontweight='bold')
 
 # Panel 1: Planck spectra vs firefly emission

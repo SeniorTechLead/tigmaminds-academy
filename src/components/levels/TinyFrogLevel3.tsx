@@ -160,7 +160,7 @@ breathing_ratio = o2_supply / o2_demand  # higher = skin breathing more sufficie
 
 fig, axes = plt.subplots(2, 3, figsize=(16, 10))
 fig.patch.set_facecolor('#1f2937')
-fig.suptitle('Surface Area to Volume: The Tiny Frog\'s Challenge', color='white', fontsize=14, fontweight='bold')
+fig.suptitle("Surface Area to Volume: The Tiny Frog's Challenge", color='white', fontsize=14, fontweight='bold')
 for ax in axes.flat:
     ax.set_facecolor('#111827')
     ax.tick_params(colors='gray')

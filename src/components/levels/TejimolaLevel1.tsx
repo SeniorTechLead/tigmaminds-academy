@@ -385,7 +385,7 @@ for bar, count in zip(bars1, counts.values()):
 # Real tulsi
 ax2.set_facecolor('#111827')
 bars2 = ax2.bar(real_tulsi.keys(), real_tulsi.values(), color=[colors_map[b] for b in real_tulsi.keys()])
-ax2.set_title('Real Tulsi DNA (Chargaff\\'s rules)', color='white', fontsize=11)
+ax2.set_title('Real Tulsi DNA (Chargaff\'s rules)', color='white', fontsize=11)
 ax2.set_ylabel('Percentage', color='white')
 ax2.tick_params(colors='gray')
 for bar, pct in zip(bars2, real_tulsi.values()):

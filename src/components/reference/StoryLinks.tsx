@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { lessons } from '../../data/lessons';
 
 interface Props {
@@ -31,7 +31,7 @@ export default function StoryLinks({ slugs }: Props) {
         {matched.map(({ slug, title, icon: Icon }) => (
           <Link
             key={slug}
-            to={`/lessons/${slug}`}
+            href={`/lessons/${slug}`}
             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium
               bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300
               hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"

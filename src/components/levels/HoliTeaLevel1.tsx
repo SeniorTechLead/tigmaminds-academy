@@ -263,7 +263,7 @@ ax1.set_xlabel('Year (BCE for negative)', color='white')
 ax1.set_title('5000 Years of Dye History', color='white', fontsize=13)
 ax1.tick_params(colors='gray')
 ax1.axvline(1856, color='#d946ef', linestyle='--', linewidth=1)
-ax1.text(1856, len(events), 'Perkin\'s\naccident', color='#d946ef', fontsize=9, ha='center')
+ax1.text(1856, len(events), "Perkin's\naccident", color='#d946ef', fontsize=9, ha='center')
 
 # Natural vs Synthetic comparison
 ax2.set_facecolor('#111827')

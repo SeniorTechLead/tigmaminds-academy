@@ -613,7 +613,7 @@ ax.annotate('Kangto Peak\\n(7,090m)', xy=(195, 6500), xytext=(150, 6800),
 
 ax.set_xlabel('Distance from Brahmaputra (km)', color='white')
 ax.set_ylabel('Elevation (m)', color='white')
-ax.set_title('Elevation: World\'s Steepest Gradient', color='white', fontsize=12)
+ax.set_title("Elevation: World's Steepest Gradient", color='white', fontsize=12)
 ax.tick_params(colors='gray')
 
 # 2. Rainfall comparison
@@ -698,7 +698,7 @@ for i, name in enumerate(reg_names):
     ax.annotate(name, (area_pct[i], species[i]), xytext=(8, 5), textcoords='offset points',
                color=colors_bio[i], fontsize=9)
 
-ax.set_xlabel('% of India\'s area', color='white')
+ax.set_xlabel("% of India's area", color='white')
 ax.set_ylabel('Species per 1000 km²', color='white')
 ax.set_title('Biodiversity: NE India Punches Above Its Weight', color='white', fontsize=12)
 ax.tick_params(colors='gray')

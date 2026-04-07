@@ -106,7 +106,7 @@ for f in fracs:
 
 ax.plot(fracs * 100, stiffness, color='#ef4444', linewidth=2.5, label='Stiffness (GPa)')
 ax.set_xlabel('Crystalline Fraction (%)', color='white')
-ax.set_ylabel('Young\'s Modulus (GPa)', color='white')
+ax.set_ylabel("Young's Modulus (GPa)", color='white')
 ax.set_title('Stiffness vs Crystallinity', color='white', fontsize=11)
 ax2 = ax.twinx()
 ax2.plot(fracs * 100, toughness, color='#22c55e', linewidth=2.5, label='Toughness')
@@ -419,7 +419,7 @@ for i, (name, color) in enumerate(zip(names, colors_mat)):
                 xytext=(8, 5), color=color, fontsize=7, fontweight='bold')
 ax.set_xscale('log')
 ax.set_yscale('log')
-ax.set_xlabel('Young\\'s Modulus (GPa)', color='white')
+ax.set_xlabel('Young\'s Modulus (GPa)', color='white')
 ax.set_ylabel('Tensile Strength (MPa)', color='white')
 ax.set_title('Ashby Plot: Strength vs Stiffness', color='white', fontsize=11)
 

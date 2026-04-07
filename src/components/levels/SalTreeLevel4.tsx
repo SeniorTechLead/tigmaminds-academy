@@ -595,7 +595,7 @@ for cp in carbon_prices:
         base_econ = scenarios[idx][1][2][-1]
         scaled = base_econ * cp / carbon_price
         final_revenues[name_s].append(scaled)
-    # BAU doesn\'t benefit from carbon price
+    # BAU doesn't benefit from carbon price
     final_revenues['Business as usual'].append(s_bau[2][-1])
     final_revenues['Reforestation+'].append(s_refor[2][-1] * cp / carbon_price)
 

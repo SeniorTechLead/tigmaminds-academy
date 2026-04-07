@@ -728,7 +728,7 @@ ax2.annotate('Golden deer\\nreflection peak', xy=(585, 0.85),
 
 ax2.set_xlabel('Wavelength (nm)', color='white')
 ax2.set_ylabel('Relative intensity', color='white')
-ax2.set_title('Visible Spectrum — The Sun\\'s Output Peaks Here', color='white', fontsize=12)
+ax2.set_title('Visible Spectrum — The Sun\'s Output Peaks Here', color='white', fontsize=12)
 ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax2.tick_params(colors='gray')
 

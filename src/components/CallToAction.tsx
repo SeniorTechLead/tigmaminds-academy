@@ -1,5 +1,5 @@
 import { ArrowRight, Sparkles, Target, TrendingUp } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 export default function CallToAction() {
   return (
@@ -49,8 +49,7 @@ export default function CallToAction() {
         </div>
 
         <div className="text-center">
-          <Link
-            to="/contact"
+          <Link href="/contact"
             className="inline-flex items-center gap-3 bg-white text-blue-700 px-10 py-5 rounded-full hover:bg-blue-50 transition-all transform hover:scale-105 shadow-2xl font-bold text-lg group"
           >
             <span>Start Your Journey Today</span>

@@ -183,8 +183,8 @@ def search_author(name):
     for category, authors in library.items():
         if name in authors:
             info = authors[name]
-            return f"Found in {category}: {name} of {info['birthplace']}, " \\
-                   f"{info['scrolls']} scrolls: {', '.join(info['works'])}"
+            return (f"Found in {category}: {name} of {info['birthplace']}, "
+                   f"{info['scrolls']} scrolls: {', '.join(info['works'])}")
     return f"'{name}' not found in the catalogue."
 
 print(f"\\n{search_author('Euclid')}")

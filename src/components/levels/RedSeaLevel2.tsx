@@ -128,7 +128,7 @@ fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(10, 8), sharex=True)
 ax1.plot(x, width, linewidth=2, color='#06b6d4')
 ax1.fill_between(x, width, alpha=0.15, color='#06b6d4')
 ax1.set_ylabel('Channel width (m)', fontsize=10)
-ax1.set_title('Bernoulli\\'s Principle: Faster Flow = Lower Pressure', fontsize=13)
+ax1.set_title('Bernoulli\'s Principle: Faster Flow = Lower Pressure', fontsize=13)
 ax1.grid(alpha=0.3)
 
 ax2.plot(x, v, linewidth=2.5, color='#ef4444')
@@ -461,7 +461,7 @@ colors = ['#f97316', '#3b82f6', '#06b6d4', '#ef4444', '#8b5cf6']
 plt.figure(figsize=(10, 5))
 bars = plt.bar(names, values, color=colors, width=0.6, edgecolor='white', linewidth=0.5)
 plt.ylabel('Energy (Gigajoules)', fontsize=11)
-plt.title('Energy Budget: Where Does the Wind\\'s Energy Go?', fontsize=13)
+plt.title('Energy Budget: Where Does the Wind\'s Energy Go?', fontsize=13)
 plt.xticks(fontsize=9, rotation=15)
 plt.grid(axis='y', alpha=0.3)
 

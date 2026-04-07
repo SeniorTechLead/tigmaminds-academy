@@ -139,7 +139,7 @@ cities = [
     ('Babylon', 32.5, 'Starting point (scholars/astronomers)'),
     ('Palmyra', 34.5, 'Desert trading post'),
     ('Damascus', 33.5, 'Major city on the route'),
-    ('Jerusalem', 31.8, 'King Herod\\'s palace'),
+    ('Jerusalem', 31.8, 'King Herod\'s palace'),
     ('Bethlehem', 31.7, 'Destination'),
 ]
 
@@ -154,7 +154,7 @@ for name, lat, desc in cities:
 
 plt.xlabel('Latitude (° North)', fontsize=12)
 plt.ylabel('Polaris altitude above horizon (°)', fontsize=12)
-plt.title('The Magi\\'s GPS: Polaris Height = Latitude', fontsize=14)
+plt.title('The Magi\'s GPS: Polaris Height = Latitude', fontsize=14)
 plt.legend(fontsize=10)
 plt.grid(alpha=0.3)
 plt.show()
@@ -209,7 +209,7 @@ for i, name in enumerate(planets):
 
 plt.xlabel('a³ (AU³)', fontsize=12)
 plt.ylabel('T² (years²)', fontsize=12)
-plt.title('Kepler\\'s Third Law: T² = a³', fontsize=14)
+plt.title('Kepler\'s Third Law: T² = a³', fontsize=14)
 plt.legend(fontsize=10)
 plt.grid(alpha=0.3)
 plt.show()
@@ -219,7 +219,7 @@ for i in range(len(planets)):
     ratio = T_squared[i] / a_cubed[i]
     print(f"  {planets[i]:10s} {a_AU[i]:7.3f}  {T_years[i]:7.3f}  {a_cubed[i]:9.3f}  {T_squared[i]:9.3f}  {ratio:.4f}")
 print()
-print("The ratio T²/a³ ≈ 1.000 for every planet. That\\'s Kepler\\'s law.")`,
+print("The ratio T²/a³ ≈ 1.000 for every planet. That\'s Kepler\'s law.")`,
       challenge: 'Add Uranus (a = 19.19 AU, T = 84.01 years) and Neptune (a = 30.07 AU, T = 164.8 years) to the plot. Do they still fall on the same line? Try predicting the period of an asteroid at 2.8 AU.',
       successHint: 'Kepler’s third law connects time and space with a single equation. It predicted Neptune’s existence before anyone saw it, and it is used today to calculate orbits of exoplanets around distant stars.',
     },

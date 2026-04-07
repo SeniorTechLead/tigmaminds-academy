@@ -489,7 +489,7 @@ tuber_counts = tuber_multiplication(5)
 
 fig, axes = plt.subplots(2, 3, figsize=(15, 9))
 fig.patch.set_facecolor('#1f2937')
-fig.suptitle('Vegetative Propagation: Nature\'s Cloning Strategies',
+fig.suptitle("Vegetative Propagation: Nature's Cloning Strategies",
              color='white', fontsize=14, fontweight='bold', y=0.98)
 
 for ax in axes.flat:

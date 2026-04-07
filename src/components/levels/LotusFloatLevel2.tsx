@@ -184,7 +184,7 @@ for name, r_um, color in plants:
 
 ax1.set_xlabel('Tube radius (micrometers)', color='white')
 ax1.set_ylabel('Capillary rise height (m)', color='white')
-ax1.set_title('Jurin\'s Law: Height vs Tube Radius', color='white', fontsize=13)
+ax1.set_title("Jurin's Law: Height vs Tube Radius", color='white', fontsize=13)
 ax1.tick_params(colors='gray')
 
 # Water transport in plants: capillary + transpiration
@@ -297,7 +297,7 @@ bars = ax1.bar(mat_names, thetas, color=mat_colors, width=0.6)
 ax1.axhline(90, color='white', linestyle='--', linewidth=1, label='Hydrophilic/phobic boundary')
 ax1.axhline(150, color='#22c55e', linestyle='--', linewidth=1, label='Superhydrophobic threshold')
 ax1.set_ylabel('Contact angle (degrees)', color='white')
-ax1.set_title('Contact Angle by Material (Young\'s Equation)', color='white', fontsize=12)
+ax1.set_title("Contact Angle by Material (Young's Equation)", color='white', fontsize=12)
 ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=9)
 ax1.tick_params(colors='gray')
 ax1.set_xticklabels(mat_names, color='white', fontsize=8, rotation=15)

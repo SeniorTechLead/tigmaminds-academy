@@ -1,5 +1,5 @@
-import { useState, Suspense } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect, Suspense } from 'react';
+import Link from 'next/link';
 import { BookOpen, HelpCircle, CheckCircle, XCircle, Sparkles, ArrowRight, Lightbulb, Globe, Library, Compass } from 'lucide-react';
 import type { Lesson } from '../data/lessons';
 import { getLessonBySlug } from '../data/lessons';
@@ -62,7 +62,7 @@ export default function Level0Listener({ lesson }: Props) {
   const { recordQuizScore, recordLevelViewed } = useProgress();
 
   // Record that Level 0 was viewed
-  useState(() => { recordLevelViewed(lesson.slug, 0); });
+  useEffect(() => { recordLevelViewed(lesson.slug, 0); }, [lesson.slug]);
 
   const concepts = lesson.level0?.concepts;
   const realWorldFacts: string[] = (lesson.stem as any)?.realWorld ?? [];
@@ -377,7 +377,7 @@ export default function Level0Listener({ lesson }: Props) {
               return (
                 <Link
                   key={ref.slug}
-                  to={`/reference/${ref.slug}`}
+                  href={`/library/${ref.slug}`}
                   target="_blank"
                   className="flex items-start gap-3 p-3 rounded-xl bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-100 dark:border-indigo-800 hover:border-indigo-300 dark:hover:border-indigo-600 transition-colors group"
                 >
@@ -406,7 +406,7 @@ export default function Level0Listener({ lesson }: Props) {
               return (
                 <Link
                   key={next.slug}
-                  to={`/lessons/${next.slug}`}
+                  href={`/lessons/${next.slug}`}
                   target="_blank"
                   className="flex items-start gap-3 p-3 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800 hover:border-emerald-300 dark:hover:border-emerald-600 transition-colors group"
                 >

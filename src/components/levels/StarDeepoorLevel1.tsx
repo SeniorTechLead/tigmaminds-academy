@@ -288,7 +288,7 @@ while h > 0 and v > 100 and m > 0.01:
 
 fig, axes = plt.subplots(2, 2, figsize=(14, 8))
 fig.patch.set_facecolor('#1f2937')
-fig.suptitle('Meteor Descent Through Earth\\'s Atmosphere', color='white', fontsize=14, y=1.02)
+fig.suptitle('Meteor Descent Through Earth\'s Atmosphere', color='white', fontsize=14, y=1.02)
 
 # Altitude vs time
 ax = axes[0, 0]

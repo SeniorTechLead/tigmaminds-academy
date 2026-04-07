@@ -56,7 +56,7 @@ for R, color in zip(resistances, colors_r):
 
 ax1.set_xlabel('Voltage (V)', color='white')
 ax1.set_ylabel('Current (mA)', color='white')
-ax1.set_title('Ohm\\'s Law: I = V/R', color='white', fontsize=13)
+ax1.set_title('Ohm\'s Law: I = V/R', color='white', fontsize=13)
 ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
 ax1.tick_params(colors='gray')
 

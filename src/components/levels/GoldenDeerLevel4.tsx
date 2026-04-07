@@ -510,7 +510,7 @@ print("True lines: ", [f"{l[0]:.1f}nm" for l in true_lines])
 print()
 print("Key insight: as noise increases, weak lines get lost first.")
 print("The H-alpha (656.3nm) and Na D (589.0nm) survive high noise")
-print("because they\'re the strongest lines. Weak lines like H-delta")
+print("because they're the strongest lines. Weak lines like H-delta")
 print("(410.2nm, intensity=0.15) vanish into the noise floor.")
 print()
 print("This is why astronomers need dark skies and long exposures:")
@@ -846,7 +846,7 @@ ax2.set_title('Matched Reference Lines (bright=matched, faint=unmatched)',
 ax2.set_yticks([])
 ax2.tick_params(colors='gray')
 
-# --- Panel 3: Residual (what\'s unexplained) ---
+# --- Panel 3: Residual (what's unexplained) ---
 ax3 = fig.add_subplot(gs[2], sharex=ax1)
 ax3.set_facecolor('#111827')
 

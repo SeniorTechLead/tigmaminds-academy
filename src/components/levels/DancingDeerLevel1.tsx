@@ -347,7 +347,7 @@ axes[1].set_title(f'Degraded section\\nRichness: {len(degraded)} species', color
 
 # Comparison bar chart
 axes[2].set_facecolor('#111827')
-metrics = ['Shannon (H\\')', 'Simpson (1-D)']
+metrics = ['Shannon (H\')', 'Simpson (1-D)']
 healthy_vals = [h_shannon, h_simpson]
 degraded_vals = [d_shannon, d_simpson]
 
