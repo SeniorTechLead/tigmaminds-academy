@@ -245,16 +245,18 @@ function SplitPane({ code, lineCount, onCodeChange, onKeyDown, textareaRef, outp
           {running && <Loader2 className="w-3 h-3 text-emerald-400 animate-spin" />}
         </div>
         <div className="flex-1 overflow-y-auto">
-          {output ? (
-            <pre className={`px-4 py-3 text-sm font-mono whitespace-pre-wrap ${dark ? 'text-emerald-300' : 'text-emerald-700'}`}>{output}</pre>
-          ) : imageOutput ? (
-            <div className="p-4 flex justify-center">
-              <img src={imageOutput} alt="Plot" className="max-w-full rounded-lg" />
-            </div>
-          ) : (
+          {!output && !imageOutput && (
             <p className={`px-4 py-3 text-xs italic ${dark ? 'text-gray-600' : 'text-gray-400'}`}>
               {!pyReady ? 'Click "Load Python" above, then click "Run" to execute the code.' : 'Click "Run" to execute the code.'}
             </p>
+          )}
+          {imageOutput && (
+            <div className="p-4 flex justify-center">
+              <img src={imageOutput} alt="Plot" className="max-w-full rounded-lg" />
+            </div>
+          )}
+          {output && (
+            <pre className={`px-4 py-3 text-sm font-mono whitespace-pre-wrap ${dark ? 'text-emerald-300' : 'text-emerald-700'}`}>{output}</pre>
           )}
         </div>
       </div>
