@@ -50,22 +50,22 @@ ax.plot(T, DO_max, color='#3b82f6', linewidth=2.5, label='Max dissolved O₂ (sa
 # Stress zone
 ax.axhline(y=4, color='#ef4444', linestyle='--', linewidth=1.5, label='Fish stress threshold (4 mg/L)')
 ax.fill_between(T, 0, 4, color='#ef4444', alpha=0.1)
-ax.text(35, 2, 'DANGER\\nZONE', color='#ef4444', fontsize=12, fontweight='bold', ha='center')
+ax.text(35, 2, 'DANGER\\\nZONE', color='#ef4444', fontsize=12, fontweight='bold', ha='center')
 
 # Comfortable zone
 ax.fill_between(T, 4, DO_max, where=(DO_max > 4), color='#22c55e', alpha=0.08)
-ax.text(10, 10, 'Comfortable\\nfor most fish', color='#22c55e', fontsize=10, ha='center')
+ax.text(10, 10, 'Comfortable\\\nfor most fish', color='#22c55e', fontsize=10, ha='center')
 
 # Mark Barak River summer temperature
 ax.axvline(x=30, color='#f59e0b', linestyle=':', linewidth=1.5)
-ax.annotate('Barak River\\nsummer (~30°C)', xy=(30, 7.5), xytext=(33, 10),
+ax.annotate('Barak River\\\nsummer (~30°C)', xy=(30, 7.5), xytext=(33, 10),
             arrowprops=dict(arrowstyle='->', color='#f59e0b'),
             color='#f59e0b', fontsize=9)
 
 # Mark specific temperatures
 for temp, do_val, name in [(5, 12.8, 'Winter stream'), (20, 9.1, 'Spring'), (30, 7.5, 'Summer'), (35, 6.9, 'Heat wave')]:
     ax.plot(temp, do_val, 'o', color='#f59e0b', markersize=8)
-    ax.annotate(f'{name}\\n{do_val} mg/L', xy=(temp, do_val), xytext=(temp, do_val + 0.8),
+    ax.annotate(f'{name}\\\n{do_val} mg/L', xy=(temp, do_val), xytext=(temp, do_val + 0.8),
                 ha='center', fontsize=7, color='white')
 
 ax.set_xlabel('Water Temperature (°C)', color='white', fontsize=12)
@@ -320,7 +320,7 @@ plt.tight_layout()
 plt.show()
 
 n_stressed = stressed_days.sum()
-print(f"\\nANOMALY REPORT:")
+print(f"\\\nANOMALY REPORT:")
 print(f"  Days below stress threshold: {n_stressed} / 365 ({n_stressed/365*100:.1f}%)")
 print(f"  Pollution events detected: {len(events)}")
 print(f"  Lowest DO recorded: {DO.min():.1f} mg/L on day {DO.argmin()}")

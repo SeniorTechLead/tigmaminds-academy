@@ -109,21 +109,21 @@ treatments = [
     HeatTreatment("Water quench", 1100, 24, 200),
 ]
 
-print("=== Steel Properties Calculator — Architecture ===\\n")
+print("=== Steel Properties Calculator — Architecture ===\\\n")
 print("--- Alloys ---")
 for a in alloys:
     print(f"  {a.name:<18} CE={a.carbon_equivalent():.2f}  Ms={a.martensite_start_temp():.0f}°C")
 
-print("\\n--- Heat Treatments ---")
+print("\\\n--- Heat Treatments ---")
 for ht in treatments:
     print(f"  {ht.name:<18} {ht.austenitize_T}°C × {ht.hold_hours}h → {ht.quench_severity()}")
 
-print("\\n--- Microstructure (placeholder) ---")
+print("\\\n--- Microstructure (placeholder) ---")
 ms = Microstructure(pearlite=0.4, cementite=0.15, bainite=0.05)
 print(f"  Dominant phase: {ms.dominant_phase()}")
 print(f"  Phases: P={ms.pearlite:.0%} B={ms.bainite:.0%} M={ms.martensite:.0%} "
       f"C={ms.cementite:.0%} F={ms.ferrite:.0%}")
-print("\\nArchitecture ready. Next: connect alloy + treatment → microstructure prediction.")`,
+print("\\\nArchitecture ready. Next: connect alloy + treatment → microstructure prediction.")`,
       challenge: 'Add a method `is_wootz_candidate()` to the Alloy class that returns True if the composition falls within the historical wootz window: C 1.0-2.0%, V 0.01-0.05%, P < 0.04%. Test it on all four alloys. This kind of validation method prevents users from running nonsensical simulations.',
       successHint: 'Good system design makes everything else easier. You defined three classes with clear responsibilities and clean interfaces. This is the foundation of all professional software — from game engines to financial models to the steel industry\'s own JMatPro and Thermo-Calc software.',
     },
@@ -223,7 +223,7 @@ def predict_microstructure(alloy, treatment):
 # Test: wootz alloy with different heat treatments
 wootz = Alloy("Wootz", C=1.5, V=0.03, Mn=0.3, Si=0.2)
 print(f"=== Phase Prediction for {wootz.name} ({wootz.C}% C) ===")
-print(f"Martensite start: {wootz.Ms_temp():.0f}°C\\n")
+print(f"Martensite start: {wootz.Ms_temp():.0f}°C\\\n")
 
 rates = [0.05, 0.1, 0.5, 1.0, 2.0, 5.0, 10, 50, 100, 500]
 print(f"{'Rate °C/s':<10} {'Pearlite':>9} {'Bainite':>9} {'Martens':>9} "
@@ -238,7 +238,7 @@ for rate in rates:
           f"{phases['ferrite']:>8.0%} {vb:>7.2f}")
 
 # Compare alloys at wootz cooling rate (0.5°C/s)
-print("\\n=== Different Alloys at 0.5°C/s (Wootz Cooling Rate) ===")
+print("\\\n=== Different Alloys at 0.5°C/s (Wootz Cooling Rate) ===")
 alloys = [
     Alloy("Mild", C=0.2, Mn=0.5),
     Alloy("Medium C", C=0.5, Mn=0.4),
@@ -323,7 +323,7 @@ def calculate_properties(phases, arrangement="banded"):
             "UTS": uts, "ductility": ductility * 100}
 
 # Test with various microstructures
-print("=== Property Calculator Results ===\\n")
+print("=== Property Calculator Results ===\\\n")
 
 test_cases = [
     ("Pure ferrite (annealed iron)",
@@ -349,7 +349,7 @@ for name, phases, arr in test_cases:
           f"{props['toughness']:>5.1f} {props['UTS']:>5.0f} {props['ductility']:>5.1f}")
 
 # The critical role of arrangement
-print("\\n=== Arrangement Effect (Same Phases, Different Structure) ===")
+print("\\\n=== Arrangement Effect (Same Phases, Different Structure) ===")
 wootz_phases = {"ferrite": 0, "pearlite": 0.65, "bainite": 0.05,
                 "martensite": 0, "cementite": 0.30}
 
@@ -358,7 +358,7 @@ for arr in ["banded", "random", "network"]:
     print(f"  {arr:<10}: Toughness = {props['toughness']:>6.1f} J  "
           f"({'Wootz blade' if arr == 'banded' else 'Cast steel' if arr == 'random' else 'White cast iron'})")
 
-print("\\nSame chemistry. Same phase fractions. 8× toughness difference.")
+print("\\\nSame chemistry. Same phase fractions. 8× toughness difference.")
 print("Arrangement is the wootz secret — and it's what the smiths controlled.")`,
       challenge: 'Add a "blade suitability score" that penalises extremes: hardness below 300 HV (too soft to hold an edge), toughness below 15 J (too brittle to survive impact), and ductility below 2% (will snap). What microstructure maximises the blade score? How close is it to the historical wootz composition?',
       successHint: 'You built a property calculator that maps microstructure to mechanical performance — the same function that steel mills use to certify their products meet specification. The key insight: arrangement matters as much as composition. This is why processing (heat treatment, forging) is as important as chemistry in metallurgy.',
@@ -452,7 +452,7 @@ for C in np.arange(0.5, 2.05, 0.1):
                     best_config = results[-1]
 
 print(f"=== Wootz Blade Optimisation ===")
-print(f"Searched {len(results):,} configurations\\n")
+print(f"Searched {len(results):,} configurations\\\n")
 
 # Top 10
 sorted_r = sorted(results, key=lambda r: r[8], reverse=True)
@@ -463,7 +463,7 @@ for r in sorted_r[:10]:
           f"{r[4]:>4.0f} {r[5]:>5.1f} {r[6]:>4.1f} {r[7]:>.0%} {r[8]:>5.3f}")
 
 b = best_config
-print(f"\\n{'='*48}")
+print(f"\\\n{'='*48}")
 print(f"OPTIMAL BLADE CONFIGURATION")
 print(f"{'='*48}")
 print(f"  Carbon:    {b[0]:.1f}%")
@@ -477,7 +477,7 @@ print(f"  Cementite: {b[7]:.0%}")
 print(f"  Score:     {b[8]:.3f}")
 
 # Historical comparison
-print(f"\\n--- Historical Wootz: 1.5%C, 0.03%V, 0.3%Mn, 0.5°C/s ---")
+print(f"\\\n--- Historical Wootz: 1.5%C, 0.03%V, 0.3%Mn, 0.5°C/s ---")
 P,B,M,Ce,F = predict_phases(1.5, 0.03, 0.3, 0.5)
 HV, tough, duct = calc_props(P,B,M,Ce,F)
 hs = blade_score(HV, tough, duct, Ce, 0.03)

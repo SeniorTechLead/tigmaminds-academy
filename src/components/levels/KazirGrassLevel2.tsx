@@ -88,8 +88,8 @@ ax.plot(N_range, growth_rate, color='#22c55e', linewidth=2)
 ax.fill_between(N_range, growth_rate, alpha=0.15, color='#22c55e')
 ax.axvline(K/2, color='#f59e0b', linestyle='--', linewidth=1)
 ax.axvline(K, color='#ef4444', linestyle='--', linewidth=1)
-ax.text(K/2, max(growth_rate) * 1.05, f'N=K/2={K//2}\\n(max growth)', color='#f59e0b', fontsize=9, ha='center')
-ax.text(K, -3, f'N=K={K}\\n(equilibrium)', color='#ef4444', fontsize=9, ha='center')
+ax.text(K/2, max(growth_rate) * 1.05, f'N=K/2={K//2}\\\n(max growth)', color='#f59e0b', fontsize=9, ha='center')
+ax.text(K, -3, f'N=K={K}\\\n(equilibrium)', color='#ef4444', fontsize=9, ha='center')
 ax.axhline(0, color='gray', linewidth=0.5)
 ax.set_xlabel('Population size', color='white')
 ax.set_ylabel('Population growth rate (dN/dt)', color='white')
@@ -306,7 +306,7 @@ intensity = H * fuel_load * R
 ax.plot(heights * 100, intensity, color='#ef4444', linewidth=2)
 ax.fill_between(heights * 100, intensity, alpha=0.15, color='#ef4444')
 ax.axhspan(500, 2000, alpha=0.1, color='#22c55e')
-ax.text(300, 1200, 'Prescribed\\nburn range', color='#22c55e', fontsize=10, ha='center')
+ax.text(300, 1200, 'Prescribed\\\nburn range', color='#22c55e', fontsize=10, ha='center')
 ax.set_xlabel('Grass height (cm)', color='white')
 ax.set_ylabel('Fire intensity (kW/m)', color='white')
 ax.set_title('Fire Intensity vs Grass Height (5 m/s wind)', color='white', fontsize=12)
@@ -336,7 +336,7 @@ w_fuel = 1.5
 head_I = H * w_fuel * headfire_ros
 back_I = H * w_fuel * backfire_ros
 
-fire_types = ['Backfire\\n(against wind)', 'Flank fire\\n(perpendicular)', 'Headfire\\n(with wind)']
+fire_types = ['Backfire\\\n(against wind)', 'Flank fire\\\n(perpendicular)', 'Headfire\\\n(with wind)']
 intensities = [back_I, (head_I + back_I) / 2, head_I]
 fire_colors = ['#22c55e', '#f59e0b', '#ef4444']
 bars = ax.bar(range(3), intensities, color=fire_colors, alpha=0.8)
@@ -359,7 +359,7 @@ for surface_T, label, c in [(300, 'Headfire', '#ef4444'), (150, 'Backfire', '#22
 ax.axhline(2, color='#f59e0b', linestyle='--', linewidth=1)
 ax.text(250, 2.2, 'Meristem depth (2cm)', color='#f59e0b', fontsize=9)
 ax.axvline(60, color='gray', linestyle=':', linewidth=0.5)
-ax.text(65, 8, 'Lethal for\\nmeristems', color='gray', fontsize=8)
+ax.text(65, 8, 'Lethal for\\\nmeristems', color='gray', fontsize=8)
 ax.invert_yaxis()
 ax.set_xlabel('Temperature (deg C)', color='white')
 ax.set_ylabel('Depth below surface (cm)', color='white')
@@ -462,7 +462,7 @@ ax.tick_params(colors='gray')
 # 3. Cost-effectiveness
 ax = axes[1, 0]
 ax.set_facecolor('#111827')
-strategy_names = ['No action', 'Manual', 'Fire', 'Combined', 'Combined\\n+biocontrol']
+strategy_names = ['No action', 'Manual', 'Fire', 'Combined', 'Combined\\\n+biocontrol']
 final_cover = [s[1][-1] for s in strategies]
 effectiveness = [max(0, strategies[0][1][-1] - fc) for fc in final_cover]
 colors_s = ['#ef4444', '#f59e0b', '#22c55e', '#3b82f6', '#a855f7']
@@ -598,7 +598,7 @@ ax.tick_params(colors='gray')
 # Area statistics
 ax = axes[1, 1]
 ax.set_facecolor('#111827')
-land_names = ['Water', 'Short\\ngrass', 'Tall\\ngrass', 'Forest', 'Mimosa', 'Burned']
+land_names = ['Water', 'Short\\\ngrass', 'Tall\\\ngrass', 'Forest', 'Mimosa', 'Burned']
 land_areas = [np.sum(landscape == i) / (size*size) * 100 for i in range(6)]
 land_colors_list = list(class_colors.values())
 bars = ax.bar(land_names, land_areas, color=land_colors_list, alpha=0.8)

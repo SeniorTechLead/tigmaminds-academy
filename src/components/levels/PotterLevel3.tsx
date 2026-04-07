@@ -89,7 +89,7 @@ for name, props in minerals.items():
     sa = props['surface_area']
     optimal = 10 + sa * 0.04
     print(f"  {name}: optimal water = {optimal:.0f}%, surface area = {sa} m2/g, CEC = {props['cec']} meq/100g")
-print("\\nHigher surface area minerals need more water but are more plastic.")
+print("\\\nHigher surface area minerals need more water but are more plastic.")
 print("Potters blend clays to balance workability and fired strength.")`,
       challenge: 'Add a fourth clay mineral "Vermiculite" with surface_area=600, cec=150, layer_charge=0.7. How does its workability window compare to montmorillonite?',
       successHint: 'Understanding clay at the molecular level explains why different pottery traditions use different clays. Assamese potters prefer kaolinite-rich clays because they are forgiving — a wide workability window and minimal shrinkage during firing.',
@@ -235,7 +235,7 @@ print("Kiln thermodynamics summary:")
 print(f"  Wall thickness: {wall_thickness*100:.1f} cm")
 print(f"  Peak surface-center lag: {max(np.array(surface_temps) - np.array(center_temps)):.0f}°C")
 print(f"  Thermal diffusivity: {alpha:.2e} m²/s")
-print(f"\\nRadiation dominates above ~500°C — this is why kiln color matters.")`,
+print(f"\\\nRadiation dominates above ~500°C — this is why kiln color matters.")`,
       challenge: 'Double the wall thickness to 2 cm and rerun. How much longer does the center take to reach peak temperature? What does this tell you about optimal pottery wall thickness?',
       successHint: 'Thermal gradients cause stress. Thin walls heat evenly but are fragile; thick walls are strong but crack during firing. Every potter navigates this tradeoff, whether they know the physics or not.',
     },
@@ -313,7 +313,7 @@ axes[0, 1].plot(temp, volume_change * 100, color='#f59e0b', linewidth=2)
 axes[0, 1].fill_between(temp, volume_change * 100, alpha=0.3, color='#f59e0b')
 axes[0, 1].axhline(0, color='gray', linewidth=0.5)
 axes[0, 1].axvline(573, color='#ef4444', linestyle='--', alpha=0.7, linewidth=1)
-axes[0, 1].annotate('Quartz\\ninversion', xy=(573, 0.5), color='#ef4444', fontsize=8, ha='center')
+axes[0, 1].annotate('Quartz\\\ninversion', xy=(573, 0.5), color='#ef4444', fontsize=8, ha='center')
 axes[0, 1].set_xlabel('Temperature (°C)', color='white')
 axes[0, 1].set_ylabel('Volume change (%)', color='white')
 axes[0, 1].set_title('Dimensional changes during firing', color='white', fontsize=11)
@@ -366,7 +366,7 @@ print("  450-700°C: Kaolinite dehydroxylation → metakaolin (endothermic)")
 print("  573°C: Quartz α→β inversion (0.45% volume change)")
 print("  950-1100°C: Mullite crystallization (exothermic)")
 print("  >1000°C: Glass phase forms, sintering closes pores")
-print("\\nEach transformation is irreversible — clay becomes ceramic permanently.")`,
+print("\\\nEach transformation is irreversible — clay becomes ceramic permanently.")`,
       challenge: 'Add a cooling curve analysis: plot the reverse quartz inversion at 573°C during cooling. Why is this transition equally dangerous during cooling? What happens if you cool too fast?',
       successHint: 'Phase transformations are the bridge between chemistry and engineering. Understanding them explains why certain temperatures are critical, why firing schedules exist, and why a 10°C mistake can ruin an entire kiln load.',
     },
@@ -484,7 +484,7 @@ axes[1, 1].legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor=
 plt.tight_layout()
 plt.show()
 
-print(f"\\nFracture analysis:")
+print(f"\\\nFracture analysis:")
 print(f"  Critical flaw size at 40 MPa: {(K_IC / (40 * 1.12))**2 / np.pi * 1e6:.1f} μm")
 print(f"  Safe heating rate (95% survival): {safe_rate:.0f}°C/hour")
 print(f"  Max ΔT before fracture: {R_param:.0f}°C")`,
@@ -927,7 +927,7 @@ print(f"  Samples: {total} from {len(unique_labels)} traditions")
 print(f"  Elements measured: {len(elements)}")
 print(f"  PC1 explains {var_explained[0]:.1f}%, PC2 explains {var_explained[1]:.1f}%")
 print(f"  Leave-one-out NN classification accuracy: {accuracy:.1f}%")
-print(f"\\nTop PC1 drivers: {elements[np.argmax(np.abs(loadings[:, 0]))]}, {elements[np.argsort(np.abs(loadings[:, 0]))[-2]]}")
+print(f"\\\nTop PC1 drivers: {elements[np.argmax(np.abs(loadings[:, 0]))]}, {elements[np.argsort(np.abs(loadings[:, 0]))[-2]]}")
 print(f"Top PC2 drivers: {elements[np.argmax(np.abs(loadings[:, 1]))]}, {elements[np.argsort(np.abs(loadings[:, 1]))[-2]]}")`,
       challenge: 'Add 5 "mystery sherds" with compositions intermediate between two traditions. Can the PCA still classify them? What does ambiguity in classification suggest about ancient trade or clay mixing?',
       successHint: 'PCA on ceramic compositions is identical mathematically to PCA on gene expression, stock returns, or image pixels. The technique transcends domains — learn it once for pottery, apply it anywhere.',

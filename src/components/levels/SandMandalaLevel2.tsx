@@ -389,7 +389,7 @@ for ax, depth in zip(axes, [0, 1, 3, 5]):
     ax.plot(pts[:, 0], pts[:, 1], color='#3498db',
             linewidth=0.8)
     n_sides = 3 * 4**depth
-    ax.set_title(f'Depth {depth}\\n{n_sides} sides',
+    ax.set_title(f'Depth {depth}\\\n{n_sides} sides',
                  fontsize=9)
     ax.set_aspect('equal'); ax.axis('off')
 

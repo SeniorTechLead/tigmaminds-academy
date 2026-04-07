@@ -209,7 +209,7 @@ ax2.text(1, 0.5, '0°C', color='#3b82f6', fontsize=8)
 # Mark freezing level
 freeze_alt = 15 / 6.5
 ax2.plot(0, freeze_alt, 'o', color='#3b82f6', markersize=8)
-ax2.annotate(f'Freezing level\\n{freeze_alt:.1f} km', xy=(0, freeze_alt),
+ax2.annotate(f'Freezing level\\\n{freeze_alt:.1f} km', xy=(0, freeze_alt),
              xytext=(10, freeze_alt+1), color='#3b82f6', fontsize=8,
              arrowprops=dict(arrowstyle='->', color='#3b82f6'))
 
@@ -616,7 +616,7 @@ ax.bar(x + w, delhi, w, color='#f59e0b', label='Delhi', alpha=0.8)
 
 # Monsoon onset markers
 ax.axvline(x=5, color='#ef4444', linestyle='--', alpha=0.5)
-ax.text(5.1, 2500, 'Monsoon\\nonset', color='#ef4444', fontsize=8)
+ax.text(5.1, 2500, 'Monsoon\\\nonset', color='#ef4444', fontsize=8)
 ax.axvline(x=9, color='#a855f7', linestyle='--', alpha=0.5)
 ax.text(9.1, 2500, 'Withdrawal', color='#a855f7', fontsize=8)
 
@@ -656,8 +656,8 @@ for d in np.arange(24, 38, 2):
     for y in np.arange(y_top, terrain[np.argmin(np.abs(distance-d))] + 50, -100):
         ax.plot([d, d-0.5], [y, y-80], color='#3b82f6', linewidth=0.8, alpha=0.5)
 
-ax.text(10, 500, 'Moist monsoon\\nwind from\\nBay of Bengal', color='#22c55e', fontsize=9, ha='center')
-ax.text(30, 2200, 'Extreme\\norographic\\nlifting', color='#ef4444', fontsize=9, ha='center')
+ax.text(10, 500, 'Moist monsoon\\\nwind from\\\nBay of Bengal', color='#22c55e', fontsize=9, ha='center')
+ax.text(30, 2200, 'Extreme\\\norographic\\\nlifting', color='#ef4444', fontsize=9, ha='center')
 ax.text(50, 1800, 'CHERRAPUNJI', color='white', fontsize=10, fontweight='bold', ha='center')
 
 ax.set_xlabel('Distance from Bangladesh border (km)', color='white')

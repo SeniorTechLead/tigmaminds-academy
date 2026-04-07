@@ -312,7 +312,7 @@ ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
 # Plot 6: World seed vaults map (simplified as bar chart)
 ax = axes[1, 2]
-vaults = ['Svalbard\\n(Norway)', 'NBPGR\\n(India)', 'Fort Collins\\n(USA)', 'Kunming\\n(China)', 'Tsukuba\\n(Japan)']
+vaults = ['Svalbard\\\n(Norway)', 'NBPGR\\\n(India)', 'Fort Collins\\\n(USA)', 'Kunming\\\n(China)', 'Tsukuba\\\n(Japan)']
 accessions = [1200000, 435000, 600000, 82000, 220000]
 colors_vaults = ['#3b82f6', '#f59e0b', '#22c55e', '#ef4444', '#a855f7']
 bars = ax.bar(vaults, np.array(accessions) / 1000, color=colors_vaults, edgecolor='none', width=0.6)
@@ -454,11 +454,11 @@ ax.set_title('Redundancy Saves Diversity', color='white', fontsize=11)
 # Plot 3: Timeline of real gene bank losses
 ax = axes[0, 2]
 events = [
-    (2003, 'Iraq gene bank\\nlooted', '#ef4444'),
-    (2006, 'Philippines\\nflood', '#f59e0b'),
-    (2012, 'Syria (ICARDA)\\ncivil war', '#ef4444'),
-    (2015, 'Svalbard\\nwithdrawal!', '#22c55e'),
-    (2020, 'COVID disrupts\\nmaintenance', '#a855f7'),
+    (2003, 'Iraq gene bank\\\nlooted', '#ef4444'),
+    (2006, 'Philippines\\\nflood', '#f59e0b'),
+    (2012, 'Syria (ICARDA)\\\ncivil war', '#ef4444'),
+    (2015, 'Svalbard\\\nwithdrawal!', '#22c55e'),
+    (2020, 'COVID disrupts\\\nmaintenance', '#a855f7'),
 ]
 for yr, label, color in events:
     ax.plot(yr, 0.5, 'o', color=color, markersize=12)
@@ -844,7 +844,7 @@ ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
 # Plot 3: Historical crop losses
 ax = axes[0, 2]
-events = ['Irish Potato\\n1845', 'US Corn\\n1970', 'Gros Michel\\nBanana 1950', 'Rice Blast\\n1975']
+events = ['Irish Potato\\\n1845', 'US Corn\\\n1970', 'Gros Michel\\\nBanana 1950', 'Rice Blast\\\n1975']
 losses = [100, 15, 95, 30]  # percent
 colors_loss = ['#ef4444', '#f59e0b', '#ef4444', '#3b82f6']
 bars = ax.bar(events, losses, color=colors_loss, edgecolor='none', width=0.6)
@@ -856,7 +856,7 @@ ax.set_title('Historical Genetic Uniformity Disasters', color='white', fontsize=
 
 # Plot 4: Diversity loss through domestication
 ax = axes[1, 0]
-stages = ['Wild\\nancestor', 'Early\\ndomestic.', 'Landrace\\nera', 'Green\\nRevolution', 'Modern\\nbreeding']
+stages = ['Wild\\\nancestor', 'Early\\\ndomestic.', 'Landrace\\\nera', 'Green\\\nRevolution', 'Modern\\\nbreeding']
 diversity = [100, 60, 45, 20, 12]
 colors_stage = ['#22c55e', '#3b82f6', '#f59e0b', '#ef4444', '#a855f7']
 ax.bar(stages, diversity, color=colors_stage, edgecolor='none', width=0.6)

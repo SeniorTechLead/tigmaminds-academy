@@ -141,7 +141,7 @@ for sx in [2, 8]:
     t = plt.Polygon([[sx-0.3, 2.7], [sx+0.3, 2.7], [sx, 2.2]], color='#64748b')
     ax.add_patch(t)
 ax.annotate('', xy=(5, 3), xytext=(5, 4.5), arrowprops=dict(arrowstyle='->', color='#ef4444', lw=2))
-ax.text(5, 1.5, 'Top: compression\\nBottom: tension', ha='center', color='#f59e0b', fontsize=8)
+ax.text(5, 1.5, 'Top: compression\\\nBottom: tension', ha='center', color='#f59e0b', fontsize=8)
 ax.text(5, 5, 'Simple, short spans', ha='center', color='gray', fontsize=8)
 
 # 2. Arch bridge
@@ -161,7 +161,7 @@ for i in range(1, 6):
     dy = -np.sin(t) * 0.3
     ax.annotate('', xy=(x + dx, y + dy), xytext=(x - dx, y - dy),
                 arrowprops=dict(arrowstyle='->', color='#f59e0b', lw=1.5))
-ax.text(5, 1.2, 'All compression\\nalong the curve', ha='center', color='#f59e0b', fontsize=8)
+ax.text(5, 1.2, 'All compression\\\nalong the curve', ha='center', color='#f59e0b', fontsize=8)
 ax.text(5, 5.5, 'Strong, medium spans', ha='center', color='gray', fontsize=8)
 
 # 3. Suspension bridge
@@ -180,7 +180,7 @@ ax.plot([1, 9], [2.5, 2.5], color='#94a3b8', linewidth=3)
 for hx in np.linspace(2, 8, 7):
     hy = 6 - 2.5 * ((hx - 5) / 4) ** 2 + 1
     ax.plot([hx, hx], [2.5, hy], color='#3b82f6', linewidth=0.8, alpha=0.6)
-ax.text(5, 1.2, 'Cables: tension\\nTowers: compression', ha='center', color='#3b82f6', fontsize=8)
+ax.text(5, 1.2, 'Cables: tension\\\nTowers: compression', ha='center', color='#3b82f6', fontsize=8)
 ax.text(5, 7.2, 'Longest spans possible', ha='center', color='gray', fontsize=8)
 
 # 4. Truss bridge
@@ -195,7 +195,7 @@ for i in range(7):
     ax.plot([x, x], [2.5, 4.5], color='#a855f7', linewidth=1.5)
     if i < 6:
         ax.plot([x, x + 1], [2.5, 4.5], color='#a855f7', linewidth=1, alpha=0.7)
-ax.text(5, 1.2, 'Triangles: rigid\\nPure comp/tension', ha='center', color='#a855f7', fontsize=8)
+ax.text(5, 1.2, 'Triangles: rigid\\\nPure comp/tension', ha='center', color='#a855f7', fontsize=8)
 ax.text(5, 5.5, 'Material-efficient', ha='center', color='gray', fontsize=8)
 
 # 5. Living root bridge
@@ -216,7 +216,7 @@ for tx in [1.5, 8.5]:
     ax.plot([tx, tx], [2, 6], color='#166534', linewidth=6, alpha=0.5)
     circle = plt.Circle((tx, 6.5), 1, color='#22c55e', alpha=0.3)
     ax.add_patch(circle)
-ax.text(5, 1, 'Self-repairing\\nGets stronger with age', ha='center', color='#22c55e', fontsize=8)
+ax.text(5, 1, 'Self-repairing\\\nGets stronger with age', ha='center', color='#22c55e', fontsize=8)
 ax.text(5, 7.5, '500+ years old', ha='center', color='gray', fontsize=8)
 
 # 6. Comparison chart
@@ -267,7 +267,7 @@ print("  Suspension: Longest spans possible with cables (< 2000m)")`,
 import matplotlib.pyplot as plt
 
 # Material properties
-materials = ['Concrete', 'Steel', 'Wood\\n(along grain)', 'Ficus\\nRoots', 'Bamboo']
+materials = ['Concrete', 'Steel', 'Wood\\\n(along grain)', 'Ficus\\\nRoots', 'Bamboo']
 
 # Tensile strength (MPa)
 tensile = [3, 250, 50, 15, 40]
@@ -544,10 +544,10 @@ ax.plot(years, root_strength, color='#22c55e', linewidth=2.5,
 
 # Mark events
 ax.axvline(usage_start, color='#22c55e', linewidth=0.8, linestyle=':', alpha=0.5)
-ax.annotate('Bridge becomes\\nwalkable', xy=(usage_start, 30), color='#22c55e', fontsize=8)
+ax.annotate('Bridge becomes\\\nwalkable', xy=(usage_start, 30), color='#22c55e', fontsize=8)
 for ry in [75, 150]:
     ax.axvline(ry, color='#3b82f6', linewidth=0.8, linestyle=':', alpha=0.5)
-    ax.annotate(f'Major repair\\n($$$$)', xy=(ry, 80), color='#3b82f6', fontsize=8)
+    ax.annotate(f'Major repair\\\n($$$$)', xy=(ry, 80), color='#3b82f6', fontsize=8)
 
 # Crossover point
 crossover = np.argmin(np.abs(root_strength - steel_strength_maintained))
@@ -628,8 +628,8 @@ The living root bridges sit at the intersection of traditional ecological knowle
 import matplotlib.pyplot as plt
 
 # Comparison: Conventional vs Bio-engineered approaches
-categories = ['Construction\\nSpeed', 'Initial\\nStrength', 'Long-term\\nDurability',
-              'Self-\\nRepair', 'Carbon\\nFootprint', 'Material\\nCost', 'Adaptability']
+categories = ['Construction\\\nSpeed', 'Initial\\\nStrength', 'Long-term\\\nDurability',
+              'Self-\\\nRepair', 'Carbon\\\nFootprint', 'Material\\\nCost', 'Adaptability']
 N = len(categories)
 
 approaches = {
@@ -681,15 +681,15 @@ ax2 = fig.add_subplot(122)
 ax2.set_facecolor('#111827')
 
 tech_timeline = {
-    'Stone arch\\n(3000 BCE)': (-3000, '#94a3b8'),
-    'Living root\\n(~500 yrs ago)': (-500, '#22c55e'),
-    'Steel truss\\n(1840s)': (1840, '#3b82f6'),
-    'Reinforced\\nconcrete (1850s)': (1850, '#64748b'),
-    'Suspension\\n(1880s)': (1880, '#8b5cf6'),
-    'Bamboo\\ncomposite (2000s)': (2000, '#ef4444'),
-    'Mycelium\\nbrick (2010s)': (2010, '#a855f7'),
-    'Bacterial\\nconcrete (2020s)': (2020, '#f59e0b'),
-    'Synthetic bio\\nstructures (2030s?)': (2030, '#22d3ee'),
+    'Stone arch\\\n(3000 BCE)': (-3000, '#94a3b8'),
+    'Living root\\\n(~500 yrs ago)': (-500, '#22c55e'),
+    'Steel truss\\\n(1840s)': (1840, '#3b82f6'),
+    'Reinforced\\\nconcrete (1850s)': (1850, '#64748b'),
+    'Suspension\\\n(1880s)': (1880, '#8b5cf6'),
+    'Bamboo\\\ncomposite (2000s)': (2000, '#ef4444'),
+    'Mycelium\\\nbrick (2010s)': (2010, '#a855f7'),
+    'Bacterial\\\nconcrete (2020s)': (2020, '#f59e0b'),
+    'Synthetic bio\\\nstructures (2030s?)': (2030, '#22d3ee'),
 }
 
 y_positions = np.arange(len(tech_timeline))

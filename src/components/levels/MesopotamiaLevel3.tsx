@@ -91,7 +91,7 @@ z, snapshots = solve_salt_transport(
 )
 
 print("=== Salt Concentration Profile Over Time ===")
-print(f"Depth range: 0-{depth}m | Irrigation salt: 1.5 g/L\\n")
+print(f"Depth range: 0-{depth}m | Irrigation salt: 1.5 g/L\\\n")
 
 for day, c_profile in snapshots:
     label = f"Day {day:>5}" if day < 365 else f"Year {day/365:.0f}   "
@@ -104,7 +104,7 @@ for day, c_profile in snapshots:
           f"Peak: {max_salt:>5.2f} g/L at {max_depth:.1f}m")
 
 # Salt mass balance
-print("\\n=== Salt Mass Balance After 5 Years ===")
+print("\\\n=== Salt Mass Balance After 5 Years ===")
 final_c = snapshots[-1][1]
 dz_val = depth / n_layers
 porosity = 0.4
@@ -116,7 +116,7 @@ print(f"Net accumulation:        {salt_mass - initial_mass:.0f} g/m² "
       f"({(salt_mass/initial_mass - 1)*100:.0f}% increase)")
 
 # Convert to EC (electrical conductivity) for agronomic interpretation
-print("\\n=== Root Zone Salinity (EC) Over Time ===")
+print("\\\n=== Root Zone Salinity (EC) Over Time ===")
 for day, c_profile in snapshots:
     root_c = np.mean(c_profile[:15])
     ec_ds_m = root_c * 1.56  # approximate conversion: g/L to dS/m
@@ -185,7 +185,7 @@ ec_map = idw_interpolation(sample_x, sample_y, sample_ec, xx, yy)
 
 # Classification
 print("=== GIS Salinisation Risk Map ===")
-print(f"Area: 10 km × 10 km | Resolution: 200 m | Samples: {n_samples}\\n")
+print(f"Area: 10 km × 10 km | Resolution: 200 m | Samples: {n_samples}\\\n")
 
 thresholds = [
     (0, 2, "Low risk (all crops safe)"),
@@ -207,14 +207,14 @@ for low, high, label in thresholds:
     print(f"{label:<40} {pct:>6.1f}% {area:>8.1f}  {bar}")
 
 # Spatial statistics
-print(f"\\n=== Spatial Statistics ===")
+print(f"\\\n=== Spatial Statistics ===")
 print(f"Mean EC: {np.mean(ec_map):.1f} dS/m")
 print(f"Std EC:  {np.std(ec_map):.1f} dS/m")
 print(f"Min EC:  {np.min(ec_map):.1f} dS/m (best area)")
 print(f"Max EC:  {np.max(ec_map):.1f} dS/m (worst area)")
 
 # Transect along canal (y=5)
-print(f"\\n=== Salinity Transect Along Main Canal (y = 5 km) ===")
+print(f"\\\n=== Salinity Transect Along Main Canal (y = 5 km) ===")
 canal_row = grid_size // 2
 print(f"{'Distance (km)':>14} {'EC (dS/m)':>10} {'Risk':<20}")
 print("-" * 46)
@@ -224,7 +224,7 @@ for j in range(0, grid_size, 5):
     print(f"{x_grid[j]:>12.1f} {ec:>8.1f} {risk:<20}")
 
 # Remediation priority
-print(f"\\n=== Remediation Priority Zones ===")
+print(f"\\\n=== Remediation Priority Zones ===")
 severe_mask = ec_map >= 8
 if np.any(severe_mask):
     severe_y, severe_x = np.where(severe_mask)
@@ -335,7 +335,7 @@ results = simulate_economy(
 yrs, yield_t, salinity, surplus, canal_cond, population = results
 
 print("=== Mesopotamian Agricultural Economy Simulation ===")
-print(f"Period: {abs(years[0])}-{abs(years[-1])} BCE\\n")
+print(f"Period: {abs(years[0])}-{abs(years[-1])} BCE\\\n")
 
 print(f"{'Year BCE':>9} {'Yield t/ha':>11} {'Salt dS/m':>10} {'Surplus':>8} "
       f"{'Canal%':>7} {'Pop Idx':>8} {'Status':<14}")
@@ -352,7 +352,7 @@ for i in range(0, len(years), 5):
 # Find collapse point
 collapse_idx = np.argmax(surplus < 0) if np.any(surplus < 0) else -1
 if collapse_idx > 0:
-    print(f"\\n=== Collapse Analysis ===")
+    print(f"\\\n=== Collapse Analysis ===")
     print(f"Surplus turns negative: {abs(years[collapse_idx])} BCE")
     print(f"Salinity at collapse: {salinity[collapse_idx]:.1f} dS/m")
     print(f"Canal condition at collapse: {canal_cond[collapse_idx]*100:.0f}%")
@@ -361,7 +361,7 @@ if collapse_idx > 0:
           f"{abs(years[collapse_idx] - years[0])} years")
 
 # Sensitivity analysis
-print(f"\\n=== Sensitivity: What If Maintenance Were Higher? ===")
+print(f"\\\n=== Sensitivity: What If Maintenance Were Higher? ===")
 for maint in [0.1, 0.2, 0.3, 0.5, 0.7]:
     _, _, salt, surp, _, pop = simulate_economy(
         years, 2.5, 1.2, 10, maint, 0.03, 0.02)
@@ -435,13 +435,13 @@ reconstructed = np.polyval(coeffs, tree_ring)
 
 # Report
 print("=== Mesopotamian Climate Reconstruction ===")
-print(f"Period: {years_bp[0]}-{years_bp[-1]} BCE | {n_years} years\\n")
+print(f"Period: {years_bp[0]}-{years_bp[-1]} BCE | {n_years} years\\\n")
 
 print("Proxy calibration (tree ring -> rainfall):")
 print(f"  Slope: {coeffs[0]:.1f} mm per ring-width unit")
 print(f"  Intercept: {coeffs[1]:.1f} mm")
 cal_r2 = np.corrcoef(cal_tree, cal_rainfall)[0,1]**2
-print(f"  R² = {cal_r2:.3f}\\n")
+print(f"  R² = {cal_r2:.3f}\\\n")
 
 # Century averages
 print(f"{'Period BCE':<16} {'True Rain':>10} {'Recon Rain':>11} {'δ¹⁸O':>7} {'Status':<16}")
@@ -460,7 +460,7 @@ for start in range(4500, 1500, -200):
           f"{d18o_avg:>6.1f} {status:<16}")
 
 # Detect the 4.2ka event
-print("\\n=== 4.2 ka Drought Event Detection ===")
+print("\\\n=== 4.2 ka Drought Event Detection ===")
 window = 100
 running_mean = np.convolve(reconstructed, np.ones(window)/window, mode='same')
 long_mean = np.mean(reconstructed)
@@ -536,7 +536,7 @@ water_qualities = [
     ("Brackish well", 5.0),
 ]
 
-print("=== Leaching Requirement (%) by Crop and Water Quality ===\\n")
+print("=== Leaching Requirement (%) by Crop and Water Quality ===\\\n")
 header = f"{'Crop':<14}" + "".join(f"{w[0]:>16}" for w in water_qualities)
 print(header)
 print("-" * len(header))
@@ -552,7 +552,7 @@ for crop_name, ec_t, et in crops:
     print(row)
 
 # Reclamation simulation
-print("\\n=== Reclamation of Salinised Field ===")
+print("\\\n=== Reclamation of Salinised Field ===")
 initial_ec = 25.0  # severely salinised (dS/m)
 target_ec = 4.0    # safe for barley
 root_depth = 1.0   # metre
@@ -561,7 +561,7 @@ water_ec = 1.0     # reclamation water quality
 
 print(f"Initial soil EC: {initial_ec} dS/m")
 print(f"Target EC: {target_ec} dS/m")
-print(f"Water quality: {water_ec} dS/m\\n")
+print(f"Water quality: {water_ec} dS/m\\\n")
 
 # Each leaching event: soil_ec_new = soil_ec × (1 - efficiency) + water_ec × efficiency
 # where efficiency depends on water applied / pore volume
@@ -593,13 +593,13 @@ for le in leaching_events:
               "Improving" if le["soil_ec"] < initial_ec * 0.7 else "Still high")
     print(f"{le['event']:>6} {le['total_water_mm']:>10} mm {le['soil_ec']:>8.1f} {status:<16}")
 
-print(f"\\nTotal water for reclamation: {total_water} mm = {total_water/1000:.1f} m depth")
+print(f"\\\nTotal water for reclamation: {total_water} mm = {total_water/1000:.1f} m depth")
 print(f"This equals {total_water / (root_depth * porosity * 1000):.1f} pore volumes")
 print(f"At 10 mm/day drainage capacity: {total_water / 10:.0f} days = "
       f"{total_water / 10 / 30:.0f} months")
 
 # Cost comparison
-print("\\n=== Reclamation Cost vs Abandonment ===")
+print("\\\n=== Reclamation Cost vs Abandonment ===")
 water_cost_per_m3 = 0.05  # $ per m³
 drain_install_per_ha = 3000  # $
 reclaim_water_m3 = total_water * 10  # mm to m³/ha
@@ -613,7 +613,7 @@ print(f"Reclamation water: {reclaim_water_m3:.0f} m³/ha = \{reclaim_water_cost:
 print(f"Total cost: \{total_reclaim:.0f}/ha")
 print(f"Annual crop value: \{annual_crop_value}/ha")
 print(f"Payback period: {payback:.1f} years")
-print(f"\\nVerdict: {'Economically viable' if payback < 10 else 'Marginal'} "
+print(f"\\\nVerdict: {'Economically viable' if payback < 10 else 'Marginal'} "
       f"— reclamation pays for itself in {payback:.0f} years")`,
       challenge: 'What happens if you use drainage water (EC = 3 dS/m) instead of fresh water for reclamation? How many more leaching events are needed? Is it still economically viable? In water-scarce regions, this is a real dilemma — fresh water is too valuable for leaching, but salty water extends the reclamation timeline dramatically.',
       successHint: 'You now understand the complete lifecycle of irrigated agriculture in arid climates: water brings salt, evaporation concentrates it, drainage removes it, and leaching reclaims damaged land. The FAO leaching requirement is used by every irrigation engineer in the world. The tragedy of Mesopotamia was not ignorance — it was the absence of drainage technology that wouldn\'t be invented for another 3,500 years.',

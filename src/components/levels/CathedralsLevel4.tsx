@@ -97,7 +97,7 @@ CATHEDRALS = {
         "Beauvais", 72, 15, 48, 2.0, 12, 2.2, 8, 7, 0.35),
 }
 
-print("=== Cathedral Force Simulator — System Architecture ===\\n")
+print("=== Cathedral Force Simulator — System Architecture ===\\\n")
 print("Subsystems:")
 print("  1. CathedralGeometry — shared geometric model")
 print("  2. ForceBalance — arch thrust, buttress, pier analysis")
@@ -257,28 +257,28 @@ class ForceBalance:
         b = self.buttress_contribution()
         p = self.pier_stress()
 
-        print(f"\\n{'='*55}")
+        print(f"\\\n{'='*55}")
         print(f"  FORCE BALANCE: {self.geo.name}")
         print(f"{'='*55}")
-        print(f"\\n[Vault Thrust]")
+        print(f"\\\n[Vault Thrust]")
         print(f"  Load: {t['w_kn_per_m']:.1f} kN/m")
         print(f"  Horizontal thrust: {t['H_kn']:.1f} kN")
         print(f"  Vertical reaction: {t['V_kn']:.1f} kN")
 
-        print(f"\\n[Wall Stability]")
+        print(f"\\\n[Wall Stability]")
         print(f"  Overturning moment: {w['M_overturn']:.0f} kN·m")
         print(f"  Restoring (wall): {w['M_restore_wall']:.0f} kN·m")
         print(f"  Restoring (vault): {w['M_restore_vault']:.0f} kN·m")
         print(f"  FoS (wall only): {w['fos_wall_only']:.2f} "
               f"{'OK' if w['fos_wall_only'] > 1 else 'UNSTABLE'}")
 
-        print(f"\\n[Flying Buttress]")
+        print(f"\\\n[Flying Buttress]")
         print(f"  Buttress weight: {b['buttress_weight_kn']:.0f} kN")
         print(f"  Inward force: {b['H_buttress_kn']:.0f} kN")
         print(f"  FoS (with buttress): {b['fos_with_buttress']:.2f} "
               f"{'SAFE' if b['fos_with_buttress'] > 2 else 'MARGINAL' if b['fos_with_buttress'] > 1 else 'FAIL'}")
 
-        print(f"\\n[Pier Stress]")
+        print(f"\\\n[Pier Stress]")
         print(f"  Total vertical: {p['total_vertical_kn']:.0f} kN")
         print(f"  Pier stress: {p['stress_mpa']:.1f} MPa "
               f"(stone limit: {self.stone_strength/1e6:.0f} MPa)")
@@ -414,7 +414,7 @@ plans = {
 }
 
 print("=== Vault Height Optimisation ===")
-print(f"Constraints: FoS >= 2.0, pier utilisation <= 80%\\n")
+print(f"Constraints: FoS >= 2.0, pier utilisation <= 80%\\\n")
 
 for name, geo in plans.items():
     opt = VaultOptimiser(geo)
@@ -569,21 +569,21 @@ class AcousticPredictor:
         sti_f, qual_f = self.speech_intelligibility(500)
         bpm, note_dur = self.optimal_music_tempo()
 
-        print(f"\\n{'='*50}")
+        print(f"\\\n{'='*50}")
         print(f"  ACOUSTIC ANALYSIS: {self.geo.name}")
         print(f"{'='*50}")
-        print(f"\\nVolume: {self.geo.volume:,.0f} m³")
-        print(f"\\n[Reverberation Time (RT60)]")
+        print(f"\\\nVolume: {self.geo.volume:,.0f} m³")
+        print(f"\\\n[Reverberation Time (RT60)]")
         print(f"  Empty: {rt_empty:.1f} s")
         print(f"  With 500 people: {rt_full:.1f} s")
         print(f"  Ideal for chant: 4-6 s")
         print(f"  Ideal for speech: 1-2 s")
 
-        print(f"\\n[Speech Intelligibility]")
+        print(f"\\\n[Speech Intelligibility]")
         print(f"  Empty: STI={sti_e:.2f} ({qual_e})")
         print(f"  Full: STI={sti_f:.2f} ({qual_f})")
 
-        print(f"\\n[Music]")
+        print(f"\\\n[Music]")
         print(f"  Max clear tempo: {bpm:.0f} BPM")
         print(f"  Min note duration: {note_dur:.2f} s")
         print(f"  Best suited for: ", end="")
@@ -594,7 +594,7 @@ class AcousticPredictor:
         else:
             print("Orchestral, spoken word")
 
-        print(f"\\n[Room Modes (below 100 Hz)]")
+        print(f"\\\n[Room Modes (below 100 Hz)]")
         print(f"  Total modes: {len(modes)}")
         print(f"  {'Mode':>12} {'Freq (Hz)':>10} {'Type':>12}")
         for m in modes[:10]:
@@ -781,7 +781,7 @@ skills = [
 for skill, detail in skills:
     print(f"  * {skill}: {detail}")
 
-print("\\n" + "=" * 60)`,
+print("\\\n" + "=" * 60)`,
       challenge: 'Turn this into a real portfolio piece by adding a "Design Your Own Cathedral" section: given a budget of 100,000 cost units and a target RT60 of 5.0 seconds, find the optimal combination of nave dimensions, vault height, and window fraction that maximises interior volume while meeting all structural and acoustic constraints. This is the real challenge of cathedral design — balancing ambition, physics, and resources.',
       successHint: 'You\'ve completed a full engineering simulation project: system design, subsystem implementation, integration, validation, and documentation. This is the workflow of every engineering consulting firm and research lab — the tools are more sophisticated, but the process is identical. Your Cathedral Force Simulator demonstrates structural mechanics, acoustics, optimisation, and software engineering — a genuine portfolio project.',
     },

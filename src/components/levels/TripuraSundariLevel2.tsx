@@ -66,7 +66,7 @@ ax.plot(x, z_surface, color='#34d399', linewidth=2)
 temple_x = wavelength / 4  # first anticline crest
 ax.plot(temple_x, z_surface[int(temple_x / 60 * 500)] + 0.05, '^',
         color='#ef4444', markersize=15, zorder=5)
-ax.annotate('Tripura Sundari\\nTemple', xy=(temple_x, 0.15),
+ax.annotate('Tripura Sundari\\\nTemple', xy=(temple_x, 0.15),
             color='#ef4444', fontsize=10, ha='center', fontweight='bold')
 
 # Labels

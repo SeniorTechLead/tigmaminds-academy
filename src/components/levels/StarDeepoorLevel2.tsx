@@ -57,7 +57,7 @@ star_data = [
 for mass, name, color in star_data:
     lifetime = 10 * mass**(-2.5)
     ax1.plot(mass, lifetime, 'o', color=color, markersize=10, zorder=5, edgecolors='white')
-    ax1.annotate(f'{name}\\n{lifetime:.1f} Gyr' if lifetime > 0.01 else f'{name}\\n{lifetime*1000:.0f} Myr',
+    ax1.annotate(f'{name}\\\n{lifetime:.1f} Gyr' if lifetime > 0.01 else f'{name}\\\n{lifetime*1000:.0f} Myr',
                 xy=(mass, lifetime), xytext=(mass * 1.5, lifetime * 2),
                 color=color, fontsize=8, arrowprops=dict(arrowstyle='->', color=color, lw=0.8))
 
@@ -328,7 +328,7 @@ def plot_emission(ax, lines, element_name, color):
     for name, wl in lines.items():
         line = np.exp(-0.5 * ((wavelengths - wl) / 0.5) ** 2)
         ax.fill_between(wavelengths, line, color=color, alpha=0.7)
-        ax.annotate(f'{name}\\n{wl}nm', xy=(wl, 1.05), ha='center', fontsize=6,
+        ax.annotate(f'{name}\\\n{wl}nm', xy=(wl, 1.05), ha='center', fontsize=6,
                     color='white', fontweight='bold')
 
     ax.set_xlim(380, 700)
@@ -491,7 +491,7 @@ for i, color in enumerate(colors_sector):
         ax.fill(sector_x, sector_y, color=color, alpha=0.2)
 
 ax.set_aspect('equal')
-ax.set_title('Kepler\'s 2nd Law:\\nEqual Areas in Equal Times', color='white', fontsize=10)
+ax.set_title('Kepler\'s 2nd Law:\\\nEqual Areas in Equal Times', color='white', fontsize=10)
 ax.tick_params(colors='gray')
 ax.set_xlim(-4, 2); ax.set_ylim(-3, 3)
 
@@ -731,7 +731,7 @@ telescopes = [
 for d, name, color in telescopes:
     power = (d / 0.007)**2
     ax.plot(d, power, 'o', color=color, markersize=8, zorder=5)
-    ax.annotate(f'{name}\\n{d}m', xy=(d, power), xytext=(d + 1, power * 2),
+    ax.annotate(f'{name}\\\n{d}m', xy=(d, power), xytext=(d + 1, power * 2),
                 color=color, fontsize=7, arrowprops=dict(arrowstyle='->', color=color, lw=0.8))
 
 ax.set_xlabel('Mirror diameter (m)', color='white')
@@ -766,7 +766,7 @@ ax.tick_params(colors='gray')
 ax = axes[1, 0]
 ax.set_facecolor('#111827')
 
-bands = ['Gamma\\nray', 'X-ray', 'UV', 'Visible', 'Near-IR', 'Mid-IR', 'Radio']
+bands = ['Gamma\\\nray', 'X-ray', 'UV', 'Visible', 'Near-IR', 'Mid-IR', 'Radio']
 ground_access = [0, 0, 0.2, 1.0, 0.7, 0.1, 0.9]
 space_access = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
 

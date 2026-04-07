@@ -108,7 +108,7 @@ for site_id in range(1, 5):
 db.commit()
 
 # Analysis queries
-print("=== PRAYER FLAG WEATHERING STUDY — SIKKIM ===\\n")
+print("=== PRAYER FLAG WEATHERING STUDY — SIKKIM ===\\\n")
 
 # Site comparison
 print("--- Average ΔE at 12 Months by Site ---")
@@ -124,7 +124,7 @@ for name, alt, de, ts in c.fetchall():
     print(f"  {name:25s} ({alt}m): ΔE={de:5.1f}  Strength={ts:4.0f} MPa")
 
 # Material comparison
-print("\\n--- Material × Dye Performance (ΔE at 12mo, all sites) ---")
+print("\\\n--- Material × Dye Performance (ΔE at 12mo, all sites) ---")
 c.execute('''
     SELECT sa.material, sa.dye_type, ROUND(AVG(m.delta_e), 1), COUNT(*)
     FROM samples sa JOIN measurements m ON sa.id = m.sample_id
@@ -136,7 +136,7 @@ for mat, dye, de, n in c.fetchall():
     print(f"  {mat:10s} + {dye:10s}: ΔE = {de:5.1f} (n={n})")
 
 # Color stability ranking
-print("\\n--- Color Stability (ΔE at 12mo, natural cotton) ---")
+print("\\\n--- Color Stability (ΔE at 12mo, natural cotton) ---")
 c.execute('''
     SELECT sa.color, ROUND(AVG(m.delta_e), 1)
     FROM samples sa JOIN measurements m ON sa.id = m.sample_id
@@ -148,7 +148,7 @@ for color, de in c.fetchall():
     print(f"  {color:8s}: ΔE = {de:5.1f}  {bar}")
 
 # Worst performing combination
-print("\\n--- Most Degraded Sample ---")
+print("\\\n--- Most Degraded Sample ---")
 c.execute('''
     SELECT s.name, sa.material, sa.dye_type, sa.color, m.delta_e, m.tensile_strength_mpa
     FROM measurements m
@@ -457,7 +457,7 @@ for scenario, mat, dye, lifetime in scenarios:
 db.commit()
 
 # Analysis
-print("=== PRAYER FLAG LIFECYCLE ANALYSIS (10-year basis) ===\\n")
+print("=== PRAYER FLAG LIFECYCLE ANALYSIS (10-year basis) ===\\\n")
 print(f"{'Scenario':20s} {'Material':20s} {'Life':>5} {'Flags':>6} {'CO₂(kg)':>8} {'Water(L)':>9} {'Chem(g)':>8} {'End-of-Life'}")
 print("-" * 100)
 
@@ -466,7 +466,7 @@ for row in c.fetchall():
     print(f"{row[0]:20s} {row[1]:20s} {row[3]:>4.0f}m {row[4]:>6} {row[5]:>8.1f} {row[6]:>9.0f} {row[7]:>8.0f} {row[8]}")
 
 # Scoring
-print("\\n=== SUSTAINABILITY SCORING (lower = better) ===\\n")
+print("\\\n=== SUSTAINABILITY SCORING (lower = better) ===\\\n")
 c.execute('SELECT scenario, total_co2, total_water, total_chemical_waste, end_of_life_impact FROM lifecycle')
 rows = c.fetchall()
 
@@ -484,7 +484,7 @@ for row in rows:
     print(f"  {scenario:20s} [{bar}] {total_score:.0f}/100")
     print(f"    CO₂:{co2_score:.0f} Water:{water_score:.0f} Chem:{chem_score:.0f} EoL:{eol_score:.0f}")
 
-print("\\n--- RECOMMENDATION ---")
+print("\\\n--- RECOMMENDATION ---")
 print("Hemp with natural dyes: lowest overall impact")
 print("  + Biodegrades naturally (aligns with prayer flag tradition)")
 print("  + Low water and chemical use")
@@ -619,7 +619,7 @@ designs = [
     ('Balanced optimal', ['HALS UV stabilizer', 'Alum mordant (improved)', 'Hemp blend (30%)']),
 ]
 
-print("=== PRAYER FLAG DESIGN OPTIMIZATION ===\\n")
+print("=== PRAYER FLAG DESIGN OPTIMIZATION ===\\\n")
 print(f"{'Design':30s} {'Cost%':>6} {'Color':>7} {'Str':>7} {'Life':>6} {'Bio':>5} {'Trad':>5} {'Score':>7}")
 print("-" * 80)
 
@@ -678,7 +678,7 @@ plt.show()
 
 # Winner
 best = max(all_results, key=lambda x: x[1]['score'])
-print(f"\\n=== RECOMMENDED DESIGN: {best[0]} ===")
+print(f"\\\n=== RECOMMENDED DESIGN: {best[0]} ===")
 print(f"Score: {best[1]['score']:.1f}")
 print(f"Predicted lifetime: {best[1]['lifetime']:.1f} months")
 print(f"Cost increase: {best[1]['cost']:.0f}%")

@@ -341,7 +341,7 @@ rt4 = calc_rt60(s4, volume)
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 5))
 
-scenarios = ['Empty\\n(marble)', 'Half\\ncarpet', 'Carpet +\\n500 people', 'Carpet +\\npeople +\\ndome treat.']
+scenarios = ['Empty\\\n(marble)', 'Half\\\ncarpet', 'Carpet +\\\n500 people', 'Carpet +\\\npeople +\\\ndome treat.']
 rts = [rt1, rt2, rt3, rt4]
 colors = ['#ef4444', '#f59e0b', '#3b82f6', '#10b981']
 

@@ -49,7 +49,7 @@ for name, props in fuels.items():
     print(f"{name:<22} {props['heat_mj_kg']:>12} {props['ignition_C']:>12} {air:>22}")
 
 # Fire triangle analysis
-print(f"\\n=== Fire Suppression Methods ===")
+print(f"\\\n=== Fire Suppression Methods ===")
 methods = [
     ("Water spray", "Removes HEAT", "Cools fuel below ignition temp",
      "Fails if fuel reacts with water (grease, metals, Greek Fire)"),
@@ -69,7 +69,7 @@ for method, side, how, limit in methods:
     print(f"{method:<20} {side:>14} {how:<35} {limit}")
 
 # Why Greek Fire defeated all methods
-print(f"\\n=== Why Greek Fire Was Inextinguishable ===")
+print(f"\\\n=== Why Greek Fire Was Inextinguishable ===")
 gf_components = [
     ("Naphtha (petroleum)", "FUEL", "Burns intensely, sticks to surfaces"),
     ("Pine resin", "ADHESIVE", "Makes the mixture sticky — can't be scraped off"),
@@ -82,13 +82,13 @@ print("-" * 65)
 for comp, role, effect in gf_components:
     print(f"{comp:<22} {role:>10} {effect}")
 
-print(f"\\nAttack with water: FAILS — quicklime + water → heat → reignition")
+print(f"\\\nAttack with water: FAILS — quicklime + water → heat → reignition")
 print(f"Smother with blanket: FAILS — sticky liquid flows around the blanket")
 print(f"Remove fuel: FAILS — resin adheres to surfaces, can't be removed")
 print(f"Cut off air: FAILS — saltpetre may provide internal oxygen")
 
 # Energy calculation
-print(f"\\n=== Greek Fire Energy Estimate ===")
+print(f"\\\n=== Greek Fire Energy Estimate ===")
 gf_mass_kg = 5  # typical siphon load
 naphtha_fraction = 0.6
 gf_energy = gf_mass_kg * naphtha_fraction * 44  # MJ
@@ -140,7 +140,7 @@ def temperature_rise(heat_kj, mass_water_g, specific_heat=4.184):
 
 # Quicklime-water reaction
 print("=== Quicklime + Water Reaction ===")
-print("CaO + H₂O → Ca(OH)₂ + 65 kJ/mol\\n")
+print("CaO + H₂O → Ca(OH)₂ + 65 kJ/mol\\\n")
 
 masses = [10, 50, 100, 500, 1000]
 print(f"{'CaO (g)':>8} {'Heat (kJ)':>10} {'Water boiled (mL)':>18} {'ΔT of 1L water':>16}")
@@ -153,7 +153,7 @@ for m in masses:
     print(f"{m:>6} g {heat:>8.0f} {water_boiled:>16.0f} {delta_t:>14.0f}°C")
 
 # Compare exothermic reactions
-print(f"\\n=== Exothermic Reaction Comparison ===")
+print(f"\\\n=== Exothermic Reaction Comparison ===")
 reactions = [
     ("CaO + H₂O (quicklime)", 56, 65, "Greek Fire reactivation"),
     ("NaOH + H₂O (lye dissolving)", 40, 45, "Drain cleaner heating"),
@@ -172,9 +172,9 @@ for name, mw, enthalpy, app in reactions:
     print(f"{name:<30} {enthalpy:>6} {kj_per_kg:>6.0f} {app}")
 
 # Greek Fire scenario simulation
-print(f"\\n=== Greek Fire Scenario: Water on Burning Ship ===")
+print(f"\\\n=== Greek Fire Scenario: Water on Burning Ship ===")
 print(f"A sailor throws 10 litres of water on burning Greek Fire")
-print(f"containing 500g of quicklime:\\n")
+print(f"containing 500g of quicklime:\\\n")
 
 # Step 1: Water cools the fire temporarily
 water_mass_g = 10000
@@ -194,7 +194,7 @@ naphtha_ignition = 250  # °C
 print(f"Step 3: Naphtha ignition temperature = {naphtha_ignition}°C")
 print(f"        Heat from quicklime pushes surrounding temperature above this")
 print(f"        → Fire REIGNITES, now fed by even more heat")
-print(f"\\nResult: The water made the fire WORSE. The sailor's instinct")
+print(f"\\\nResult: The water made the fire WORSE. The sailor's instinct")
 print(f"to fight fire with water was exactly what the Byzantines designed for.")`,
       challenge: 'Self-heating coffee cans use quicklime + water to warm the drink. If a can contains 50g of CaO and 300 mL of water, what temperature does the coffee reach (starting at 20°C)? Is it hot enough to drink comfortably (~60°C)? This is the same chemistry as Greek Fire, just slower and controlled.',
       successHint: 'You modeled exothermic reactions quantitatively — calculating heat output, temperature changes, and comparing reaction intensities. The same thermochemistry is used in every chemical plant, power station, and rocket engine. The key formula: heat = moles × enthalpy. Simple, powerful, universal.',
@@ -264,9 +264,9 @@ for atm in [1, 2, 3, 4, 5]:
     print(f"{atm:>13} {vel:>13.1f} {range_15:>11.1f} m {range_30:>11.1f} m")
 
 # Nozzle diameter effect
-print(f"\\n=== Nozzle Size vs Flow Rate (at 3 atm) ===")
+print(f"\\\n=== Nozzle Size vs Flow Rate (at 3 atm) ===")
 vel_3atm = jet_velocity(3 * 101325, naphtha_density)
-print(f"Jet velocity at 3 atm: {vel_3atm:.1f} m/s\\n")
+print(f"Jet velocity at 3 atm: {vel_3atm:.1f} m/s\\\n")
 
 print(f"{'Nozzle ∅ (cm)':>14} {'Flow (L/s)':>11} {'Burn time (5L)':>15} {'Jet width':>10}")
 print("-" * 52)
@@ -278,7 +278,7 @@ for diam_cm in [1, 2, 3, 4, 5]:
     print(f"{diam_cm:>12} cm {flow:>9.2f} {burn_time:>13.1f} s {diam_cm:>8} cm")
 
 # Complete siphon specification
-print(f"\\n=== Historical Greek Fire Siphon Spec ===")
+print(f"\\\n=== Historical Greek Fire Siphon Spec ===")
 spec = {
     "Tank capacity": "5-10 litres",
     "Operating pressure": "~3 atmospheres",
@@ -294,7 +294,7 @@ for key, val in spec.items():
     print(f"  {key:<20} {val}")
 
 # Trajectory visualization (text-based)
-print(f"\\n=== Jet Trajectory at 3 atm, 15° angle ===")
+print(f"\\\n=== Jet Trajectory at 3 atm, 15° angle ===")
 vel = vel_3atm
 angle = 15
 g = 9.81
@@ -313,7 +313,7 @@ for t in np.arange(0, 2.0, 0.2):
         print(f"{t:>6.1f} {x:>6.1f} {y:>6.1f} {speed:>10.1f}")
 
 total_range = projectile_range(vel, angle)
-print(f"\\nTotal range: {total_range:.1f} m")
+print(f"\\\nTotal range: {total_range:.1f} m")
 print(f"Time of flight: {(vy + np.sqrt(vy**2 + 2*g*2))/g:.2f} s")`,
       challenge: 'Modern fire trucks can project water 30+ metres using pumps at 10 atm. Calculate the jet velocity and compare with the Greek Fire siphon. How much more pressure would the Byzantines need to match a modern fire truck\'s range? (About 10× more — which their bronze pumps couldn\'t achieve.)',
       successHint: 'You applied Bernoulli\'s equation and projectile motion to model an ancient weapon system — the same physics used to design fire hoses, paint sprayers, fuel injectors, and water jet cutters. Fluid dynamics and projectile motion are two of the most practical branches of physics.',
@@ -422,22 +422,22 @@ for name, c, h, mw in fuels:
     actual_str = f"{actual}" if isinstance(actual, int) else actual
     print(f"{name:<22} {e_in:>10.0f} {e_out:>10.0f} {net:>11.0f} {kj_kg:>6.0f} {actual_str:>8}")
 
-print(f"\\n* Ethanol has an O-H and C-O bond that affect the calculation")
+print(f"\\\n* Ethanol has an O-H and C-O bond that affect the calculation")
 print(f"** Hydrogen has no carbon — bonds broken: H-H + O=O; formed: 2×O-H")
 
 # Why petroleum fuels are so energetic
-print(f"\\n=== Why Petroleum Burns So Hot ===")
+print(f"\\\n=== Why Petroleum Burns So Hot ===")
 print(f"The secret: C-H bonds are relatively WEAK (413 kJ/mol)")
 print(f"but the products (C=O at 805, O-H at 463) are very STRONG.")
 print(f"Breaking weak bonds and forming strong ones = lots of net energy.")
-print(f"\\nCompare:")
+print(f"\\\nCompare:")
 print(f"  C-H bond (broken): {BOND_ENERGIES['C-H']} kJ/mol — easy to break")
 print(f"  C=O bond (formed): {BOND_ENERGIES['C=O']} kJ/mol — hard to break")
 print(f"  Difference: {BOND_ENERGIES['C=O'] - BOND_ENERGIES['C-H']} kJ/mol NET per C-H converted to C=O")
 print(f"  This energy difference is what powers combustion.")
 
 # Greek Fire energy analysis
-print(f"\\n=== Greek Fire Energy Budget ===")
+print(f"\\\n=== Greek Fire Energy Budget ===")
 gf_mass_kg = 5
 naphtha_fraction = 0.6
 naphtha_mass = gf_mass_kg * naphtha_fraction
@@ -508,18 +508,18 @@ def recipe_search_space():
 variables, total_recipes = recipe_search_space()
 
 print("=== Greek Fire Recipe Search Space ===")
-print(f"\\n{'Variable':<25} {'Options':>8} {'Description'}")
+print(f"\\\n{'Variable':<25} {'Options':>8} {'Description'}")
 print("-" * 65)
 
 for name, options, desc in variables:
     print(f"{name:<25} {options:>6} {desc}")
 
-print(f"\\nTotal possible recipes: {total_recipes:,}")
+print(f"\\\nTotal possible recipes: {total_recipes:,}")
 print(f"At 1 experiment per day: {total_recipes/365:.0f} years of testing")
 print(f"At 10 experiments per day: {total_recipes/3650:.0f} years")
 
 # How the Byzantines might have found the recipe
-print(f"\\n=== How the Byzantines Likely Found It ===")
+print(f"\\\n=== How the Byzantines Likely Found It ===")
 print(f"Not by systematic search (too many combinations), but by:")
 print(f"  1. Starting with known incendiary mixtures (naphtha + resin)")
 print(f"  2. Accidental discovery (adding quicklime, observing water reaction)")
@@ -539,7 +539,7 @@ def guided_search(space_size, n_trials, reduction_factor=10):
     effective_space = space_size / reduction_factor
     return 1 - (1 - 1/effective_space) ** n_trials
 
-print(f"\\n=== Random vs Guided Search ===")
+print(f"\\\n=== Random vs Guided Search ===")
 print(f"{'Experiments':>12} {'Random P(find)':>16} {'Expert-guided':>14}")
 print("-" * 44)
 
@@ -548,11 +548,11 @@ for n in [10, 100, 1000, 5000, 10000, 50000]:
     p_guided = guided_search(total_recipes, n) * 100
     print(f"{n:>10,} {p_random:>14.4f}% {p_guided:>12.2f}%")
 
-print(f"\\nEven with expert guidance, you need ~{total_recipes//100:,} experiments")
+print(f"\\\nEven with expert guidance, you need ~{total_recipes//100:,} experiments")
 print(f"to have a good chance of finding the recipe.")
 
 # Modern reconstruction attempts
-print(f"\\n=== Modern Reconstruction Attempts ===")
+print(f"\\\n=== Modern Reconstruction Attempts ===")
 attempts = [
     ("Haldon & Byrne (1977)", "Naphtha + quicklime + resin", "Burns on water ✓, sticky ✓, jet ✗"),
     ("Partington (1999)", "Naphtha + saltpetre + resin", "Jet ✓, water-resistant ✗"),
@@ -566,7 +566,7 @@ for team, recipe, result in attempts:
     print(f"{team:<28} {recipe:<30} {result}")
 
 # The lesson
-print(f"\\n=== What Greek Fire Teaches About Knowledge ===")
+print(f"\\\n=== What Greek Fire Teaches About Knowledge ===")
 lessons = [
     "Written descriptions ≠ reproducible recipes (tacit knowledge matters)",
     "800 years of secrecy shows knowledge CAN be kept secret",
@@ -648,7 +648,7 @@ fire_classes = {
     },
 }
 
-print("=== Fire Classification System ===\\n")
+print("=== Fire Classification System ===\\\n")
 
 for cls, info in fire_classes.items():
     print(f"CLASS {cls}: {info['name']}")
@@ -678,13 +678,13 @@ methods = [
     ("Wet chemical", "UNKNOWN", "Not available in 678 CE; might react with quicklime"),
 ]
 
-print(f"\\n{'Method':<16} {'Result':>8} {'Why'}")
+print(f"\\\n{'Method':<16} {'Result':>8} {'Why'}")
 print("-" * 70)
 for method, result, reason in methods:
     print(f"{method:<16} {result:>8} {reason}")
 
 # Suppression effectiveness matrix
-print(f"\\n=== Extinguisher Effectiveness Matrix ===")
+print(f"\\\n=== Extinguisher Effectiveness Matrix ===")
 print(f"{'Extinguisher':<18}", end="")
 for cls in fire_classes:
     print(f" Class {cls:>3}", end="")
@@ -706,10 +706,10 @@ for ext, ratings in extinguishers.items():
         print(f" {ratings[cls]:>7}", end="")
     print()
 
-print(f"\\n✓✓✓ = Highly effective | ✓✓ = Effective | ✓ = Marginal | ✗ = Ineffective/Dangerous")
+print(f"\\\n✓✓✓ = Highly effective | ✓✓ = Effective | ✓ = Marginal | ✗ = Ineffective/Dangerous")
 
 # Quiz
-print(f"\\n=== Safety Quiz ===")
+print(f"\\\n=== Safety Quiz ===")
 scenarios = [
     ("Campfire out of control", "A", "Water or dirt"),
     ("Oil pan fire in kitchen", "K", "Lid, baking soda, or K-class extinguisher"),

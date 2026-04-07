@@ -95,7 +95,7 @@ total_colonies = [2.4, 2.3, 2.3, 2.5, 2.7, 2.5, 2.6, 2.7, 2.7, 2.8, 2.8, 2.7, 2.
 print("CCD analysis:")
 print(f"  Mean winter loss rate: {np.mean(loss_rates):.1f}% (pre-CCD: ~15%)")
 print(f"  Colonies exceeding stress threshold: {ccd_cases.sum()/len(ccd_cases)*100:.0f}%")
-print(f"\\nNo single factor causes CCD — it's the combination that matters.")`,
+print(f"\\\nNo single factor causes CCD — it's the combination that matters.")`,
       challenge: 'If you could reduce ONE stress factor to zero, which would save the most colonies? Run the simulation with each factor zeroed and compare CCD rates.',
       successHint: 'CCD taught the scientific community that complex ecological problems rarely have simple causes. The multi-factor analysis framework developed for CCD is now applied to coral reef bleaching, amphibian declines, and other "mystery" die-offs.',
     },
@@ -275,17 +275,17 @@ print(f"  Peak traffic: {bees_out.max():.0f} bees/day")`,
 np.random.seed(42)
 
 metrics = {
-    'Honey yield\\n(kg/year)': {'Urban': 55, 'Rural': 25},
-    'Winter\\nsurvival (%)': {'Urban': 85, 'Rural': 70},
-    'Pesticide\\nresidues (ppb)': {'Urban': 3, 'Rural': 12},
-    'Forage\\ndiversity\\n(species)': {'Urban': 150, 'Rural': 30},
-    'Foraging\\nseason (days)': {'Urban': 240, 'Rural': 200},
+    'Honey yield\\\n(kg/year)': {'Urban': 55, 'Rural': 25},
+    'Winter\\\nsurvival (%)': {'Urban': 85, 'Rural': 70},
+    'Pesticide\\\nresidues (ppb)': {'Urban': 3, 'Rural': 12},
+    'Forage\\\ndiversity\\\n(species)': {'Urban': 150, 'Rural': 30},
+    'Foraging\\\nseason (days)': {'Urban': 240, 'Rural': 200},
 }
 
 
 print(f"Optimal hive density: {optimal}/km²")
 print(f"At optimal: {yield_per_colony[optimal-1]:.0f} kg/colony, {total_yield[optimal-1]:.0f} kg/km² total")
-print(f"\\nCities can be BETTER for bees than pesticide-heavy farmland.")`,
+print(f"\\\nCities can be BETTER for bees than pesticide-heavy farmland.")`,
       challenge: 'Design a bee-friendly city: given a 5 km² area, plan hive placement, flower strips, and water sources to maximize colony health while respecting a 15-hive/km² density limit.',
       successHint: 'Urban beekeeping challenges the assumption that nature belongs only in the countryside. Cities can be havens for pollinators when designed with biodiversity in mind. Green roofs, wildflower verges, and community hives are ecological infrastructure that benefits humans and bees alike.',
     },

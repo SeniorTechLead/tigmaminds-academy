@@ -64,7 +64,7 @@ for day in range(30):
     bar = "#" * int(illumination / 5)
     print(f" {day:2d}  | {illumination:5.1f}% {bar:20s} | {phase_name}")
 
-print(f"\\nFull cycle: {synodic_month} days")
+print(f"\\\nFull cycle: {synodic_month} days")
 print("The illumination follows a smooth cosine curve.")`,
       challenge: 'Modify the code to show TWO consecutive lunar cycles (60 days). Verify that the pattern repeats perfectly.',
       successHint: 'The Moon phase cycle is one of the oldest observed patterns in nature. Every lunar calendar — including the one that governs Kharchi Puja — is built on this 29.53-day rhythm.',
@@ -124,7 +124,7 @@ for year in range(1, 21):
     drift_months = total_drift / 29.5306
     print(f"{year:4d} | {total_drift:12.1f} | {drift_months:14.2f} | {leap}")
 
-print(f"\\nWithout correction: {total_drift:.0f} days drift in 20 years")
+print(f"\\\nWithout correction: {total_drift:.0f} days drift in 20 years")
 print(f"That is {total_drift/29.5306:.1f} lunar months of drift")
 print(f"Leap months added (lunisolar): {leap_months_added}")
 print(f"Remaining drift after correction: {corrected_drift:.1f} days")`,
@@ -200,7 +200,7 @@ for day, etype, dist in eclipses:
         quality = "Penumbral"
     print(f"{day:5d} | {month:6.1f} | {etype:>6} | {dist:8.1f}° | {quality}")
 
-print(f"\\nTotal eclipses in 2 years: {len(eclipses)}")
+print(f"\\\nTotal eclipses in 2 years: {len(eclipses)}")
 print(f"Solar: {sum(1 for _,t,_ in eclipses if t=='SOLAR')}")
 print(f"Lunar: {sum(1 for _,t,_ in eclipses if t=='LUNAR')}")
 print("Typical: 4-7 eclipses per 2 years (matches reality)")`,
@@ -258,7 +258,7 @@ for p in [10, 15, 20, 25, 27.32, 30, 50, 100]:
     syn = 1 / (1/p - 1/P_earth)
     print(f"{p:12.2f} | {syn:11.2f} | {syn - p:10.2f}")
 
-print("\\nThe closer the sidereal period to Earth's period,")
+print("\\\nThe closer the sidereal period to Earth's period,")
 print("the longer the synodic month becomes!")`,
       challenge: 'Mars has a sidereal period of 687 days. What is the synodic period of Mars (time between oppositions as seen from Earth)? Use the same formula.',
       successHint: 'The synodic-sidereal relationship is universal — it applies to every planet and moon in the solar system. It is a beautiful example of how relative motion creates observable phenomena.',

@@ -109,7 +109,7 @@ cursor.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name"
 tables = cursor.fetchall()
 
 print("=== Library of Alexandria — Database Schema ===")
-print(f"\\nTables created: {len(tables)}")
+print(f"\\\nTables created: {len(tables)}")
 for t in tables:
     print(f"  - {t[0]}")
     cursor.execute(f"PRAGMA table_info({t[0]})")
@@ -372,7 +372,7 @@ cursor.executemany('INSERT INTO scrolls VALUES (?,?,?,?,?,?,?)', scrolls)
 refs = [(1,7,1,'extends'),(2,8,4,'cites'),(3,12,1,'extends'),(4,11,10,'supersedes'),(5,11,1,'cites'),(6,9,1,'applies'),(7,5,4,'extends'),(8,6,5,'cites'),(9,23,1,'applies'),(10,24,10,'cites'),(11,17,1,'applies'),(12,19,9,'extends'),(13,15,13,'extends'),(14,14,13,'extends'),(15,22,4,'cites'),(16,21,5,'cites')]
 cursor.executemany('INSERT INTO cross_references VALUES (?,?,?,?)', refs)
 
-print("=== Analytical Queries: Interrogating the Library ===\\n")
+print("=== Analytical Queries: Interrogating the Library ===\\\n")
 
 # ─────────────────────────────────────────────────────────
 # QUERY 1: Which category has the most scrolls?
@@ -393,7 +393,7 @@ for row in cursor.fetchall():
 # ─────────────────────────────────────────────────────────
 # QUERY 2: Most cross-referenced works
 # ─────────────────────────────────────────────────────────
-print(f"\\nQ2: Most cross-referenced works (JOIN + GROUP BY)")
+print(f"\\\nQ2: Most cross-referenced works (JOIN + GROUP BY)")
 print("-" * 55)
 cursor.execute('''
     SELECT s.title, a.name, COUNT(*) AS times_cited
@@ -411,7 +411,7 @@ for row in cursor.fetchall():
 # ─────────────────────────────────────────────────────────
 # QUERY 3: Timeline of works by century
 # ─────────────────────────────────────────────────────────
-print(f"\\nQ3: Works by century (date arithmetic + GROUP BY)")
+print(f"\\\nQ3: Works by century (date arithmetic + GROUP BY)")
 print("-" * 55)
 cursor.execute('''
     SELECT
@@ -439,7 +439,7 @@ for row in cursor.fetchall():
 # ─────────────────────────────────────────────────────────
 # QUERY 4: Orphaned works — never cited by anyone
 # ─────────────────────────────────────────────────────────
-print(f"\\nQ4: Orphaned works — never referenced (LEFT JOIN + IS NULL)")
+print(f"\\\nQ4: Orphaned works — never referenced (LEFT JOIN + IS NULL)")
 print("-" * 55)
 cursor.execute('''
     SELECT s.title, a.name
@@ -458,7 +458,7 @@ print(f"  These are the most vulnerable to permanent loss.")
 # ─────────────────────────────────────────────────────────
 # QUERY 5: Highest-impact single work (most outgoing refs)
 # ─────────────────────────────────────────────────────────
-print(f"\\nQ5: Works that cite the most other works (knowledge synthesisers)")
+print(f"\\\nQ5: Works that cite the most other works (knowledge synthesisers)")
 print("-" * 55)
 cursor.execute('''
     SELECT s.title, a.name, COUNT(*) AS refs_out
@@ -472,7 +472,7 @@ cursor.execute('''
 for row in cursor.fetchall():
     print(f"  {row[0]:30s} by {row[1]:15s} references {row[2]} other works")
 
-print(f"\\n{'='*55}")
+print(f"\\\n{'='*55}")
 print("SQL revealed the hidden structure of the library.")
 print("Euclid's Elements is the most-cited work — the bedrock")
 print("on which mathematics, astronomy, and engineering all rest.")
@@ -531,7 +531,7 @@ cursor.executemany('INSERT INTO cross_references VALUES (?,?,?,?)', refs)
 
 def library_report(cursor, label):
     """Generate a snapshot of the library's state."""
-    print(f"\\n{'='*60}")
+    print(f"\\\n{'='*60}")
     print(f"  LIBRARY STATUS: {label}")
     print(f"{'='*60}")
 
@@ -545,14 +545,14 @@ def library_report(cursor, label):
         FROM scrolls s JOIN categories c ON s.category_id = c.id
         GROUP BY c.name ORDER BY COUNT(*) DESC
     ''')
-    print(f"\\n  {'Category':18s} {'Works':>5s} {'Volumes':>8s}")
+    print(f"\\\n  {'Category':18s} {'Works':>5s} {'Volumes':>8s}")
     print(f"  {'-'*18} {'-'*5} {'-'*8}")
     for row in cursor.fetchall():
         print(f"  {row[0]:18s} {row[1]:5d} {row[2]:8d}")
 
     cursor.execute('SELECT COUNT(*) FROM cross_references')
     refs = cursor.fetchone()[0]
-    print(f"\\n  Active cross-references: {refs}")
+    print(f"\\\n  Active cross-references: {refs}")
 
     # Broken references (citing or cited scroll no longer exists)
     cursor.execute('''
@@ -587,7 +587,7 @@ baseline_works, baseline_vols, baseline_refs = library_report(
 # EVENT 1: Caesar's fire, 48 BCE
 # Harbor warehouses burned. Works stored there are lost.
 # ============================================================
-print(f"\\n\\n>>> EVENT 1: Caesar's Fire (48 BCE)")
+print(f"\\\n\\\n>>> EVENT 1: Caesar's Fire (48 BCE)")
 print(f"    Fire spreads to harbor warehouses...")
 
 cursor.execute('''
@@ -620,7 +620,7 @@ post_caesar_works, post_caesar_vols, post_caesar_refs = library_report(
 # EVENT 2: Theophilus's decree, 391 CE
 # The Serapeum collection is demolished.
 # ============================================================
-print(f"\\n\\n>>> EVENT 2: Theophilus's Decree (391 CE)")
+print(f"\\\n\\\n>>> EVENT 2: Theophilus's Decree (391 CE)")
 print(f"    The Serapeum temple-library is demolished...")
 
 cursor.execute('''
@@ -652,7 +652,7 @@ post_theophilus_works, post_theophilus_vols, post_theophilus_refs = library_repo
 # ============================================================
 # CUMULATIVE DAMAGE SUMMARY
 # ============================================================
-print(f"\\n\\n{'='*60}")
+print(f"\\\n\\\n{'='*60}")
 print(f"  CUMULATIVE DAMAGE REPORT")
 print(f"{'='*60}")
 total_lost = baseline_works - post_theophilus_works
@@ -663,7 +663,7 @@ print(f"  Volumes lost:         {total_vols_lost:3d} / {baseline_vols} ({100*tot
 print(f"  References lost:      {total_refs_lost:3d} / {baseline_refs} ({100*total_refs_lost/baseline_refs:.0f}%)")
 
 # Which categories lost the highest percentage?
-print(f"\\n  Impact by category:")
+print(f"\\\n  Impact by category:")
 for cat_id, cat_name in categories:
     cursor.execute('SELECT COUNT(*) FROM scrolls WHERE category_id = ?', (cat_id,))
     remaining = cursor.fetchone()[0]
@@ -673,7 +673,7 @@ for cat_id, cat_name in categories:
     if lost > 0:
         print(f"    {cat_name:18s}: lost {lost}/{original} works ({pct:.0f}%)")
 
-print(f"\\nKnowledge is a network. Destroying nodes destroys connections.")
+print(f"\\\nKnowledge is a network. Destroying nodes destroys connections.")
 print(f"The damage is always greater than the count of lost scrolls.")
 
 conn.close()`,

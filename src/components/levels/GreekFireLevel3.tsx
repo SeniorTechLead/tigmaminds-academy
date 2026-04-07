@@ -109,7 +109,7 @@ if len(flame_positions) > 2:
     valid = positions > 0.01
     if np.sum(valid) > 1:
         speed = np.polyfit(times[valid], positions[valid], 1)[0] * 1000  # m/s
-        print(f"\\nEstimated flame speed: {speed:.2f} m/s")
+        print(f"\\\nEstimated flame speed: {speed:.2f} m/s")
         print(f"(Typical naphtha: 0.4-0.6 m/s | Hydrogen: 2-3 m/s)")`,
       challenge: 'Add a "water barrier" at x = 0.5m — a 2cm region with very high heat capacity (simulating a soaked area). Does the flame front slow down, stop, or push through? What thickness of water barrier is needed to stop Greek Fire? (Hint: quicklime releases heat in the wet zone.)',
       successHint: 'You just built a computational fluid dynamics (CFD) combustion model — the same class of simulation used to design jet engines, predict wildfire spread, and model explosions. The finite difference method for PDEs is one of the most widely used numerical techniques in all of engineering.',
@@ -168,7 +168,7 @@ gamma_lv_water = 72  # mN/m — water for comparison
 
 print("=== Wetting Analysis: Greek Fire vs Water ===")
 print(f"Greek Fire surface tension: {gamma_lv_fire} mN/m")
-print(f"Water surface tension: {gamma_lv_water} mN/m\\n")
+print(f"Water surface tension: {gamma_lv_water} mN/m\\\n")
 print(f"{'Surface':<20} {'θ fire (°)':>10} {'θ water (°)':>12} {'S_fire':>8} {'W_adh fire':>12}")
 print("-" * 64)
 
@@ -187,8 +187,8 @@ for name, props in surfaces.items():
     print(f"{name:<20} {theta_fire:>8.1f} {theta_water:>10.1f} {S_fire:>8.1f} {W_adh:>10.1f} {wets}")
 
 # Adhesive force vs gravity (can fire drip off a vertical surface?)
-print("\\n=== Adhesion vs Gravity on Vertical Surfaces ===")
-print("Can Greek Fire cling to a vertical hull?\\n")
+print("\\\n=== Adhesion vs Gravity on Vertical Surfaces ===")
+print("Can Greek Fire cling to a vertical hull?\\\n")
 
 for thickness_mm in [0.5, 1.0, 2.0, 5.0, 10.0]:
     t = thickness_mm / 1000  # metres
@@ -299,7 +299,7 @@ for i, r in enumerate(recipes):
 
 print(f"=== Greek Fire Recipe Optimisation ===")
 print(f"Tested {n_recipes} random recipes")
-print(f"Pareto-optimal recipes: {len(pareto)}\\n")
+print(f"Pareto-optimal recipes: {len(pareto)}\\\n")
 
 # Show top recipes by different priorities
 priorities = [
@@ -430,7 +430,7 @@ def simulate_engagement(byzantine, arab, initial_distance=200):
 
 # Run multiple engagements with varying conditions
 print("=== Naval Engagement Simulation ===")
-print("Byzantine Dromon vs Arab Galley — 200 engagements\\n")
+print("Byzantine Dromon vs Arab Galley — 200 engagements\\\n")
 
 byz_wins = 0
 arab_wins = 0
@@ -457,7 +457,7 @@ print(f"Arab wins:      {arab_wins} ({arab_wins/2:.0f}%)")
 print(f"Draws:          {draws} ({draws/2:.0f}%)")
 
 # Detailed single engagement
-print("\\n=== Detailed Engagement Log ===")
+print("\\\n=== Detailed Engagement Log ===")
 byz = Ship("Dromon", 7, 500, True, 40, 25, 0.3)
 arab = Ship("Galley", 5, 400, False, countermeasures=0.2)
 log, byz_end, arab_end = simulate_engagement(byz, arab, 200)
@@ -469,7 +469,7 @@ for entry in log:
           f"{entry['arab_hp']:>7.0f} {entry['fire']:>5.1f} {entry['fuel']:>5.0f}L")
 
 winner = "Byzantine" if arab_end.hp <= 0 else "Arab" if byz_end.hp <= 0 else "Draw"
-print(f"\\nResult: {winner} victory")`,
+print(f"\\\nResult: {winner} victory")`,
       challenge: 'Add wind direction as a factor: tailwind doubles siphon range (fire carries further) but headwind halves it. Run 200 engagements with random wind. How much does a favourable wind change the win rate? This explains why Byzantine admirals chose to attack downwind.',
       successHint: 'Agent-based combat simulation is used by every modern military for training, doctrine development, and weapons evaluation. The same techniques model epidemics (agents = people), traffic (agents = cars), and financial markets (agents = traders). Emergent behaviour from simple rules is one of the deepest ideas in computational science.',
     },
@@ -546,7 +546,7 @@ def simulate_secrecy(uses_per_decade=2, decades=70, weapon_power=100):
 
 # Compare strategies: rare use vs frequent use
 print("=== Game Theory of Weapon Secrecy ===")
-print("Simulating 700 years (70 decades) of Greek Fire\\n")
+print("Simulating 700 years (70 decades) of Greek Fire\\\n")
 
 strategies = [
     ("Conservative (1 use/decade)", 1),
@@ -573,7 +573,7 @@ for name, uses in strategies:
           f"{np.mean(np.array(secret_durations) >= 500)*100:>10.0f}%")
 
 # Detailed timeline for moderate strategy
-print("\\n=== Detailed Timeline (Moderate Strategy) ===")
+print("\\\n=== Detailed Timeline (Moderate Strategy) ===")
 _, history = simulate_secrecy(uses_per_decade=3, decades=70)
 print(f"{'Decade':>8} {'Year':>6} {'Secrecy':>8} {'Intel':>8} {'Deter':>8} {'Combat':>8}")
 print("-" * 48)
@@ -583,7 +583,7 @@ for h in history[::5]:  # every 50 years
           f"{h['deterrence']:>7.0f} {h['combat']:>7.0f}")
 
 # Information value calculation
-print("\\n=== Value of Information Asymmetry ===")
+print("\\\n=== Value of Information Asymmetry ===")
 with_secret, _ = simulate_secrecy(uses_per_decade=3)
 # Without secrecy (enemy knows everything)
 without = 3 * 100 * 70  # just combat value, no deterrence

@@ -157,7 +157,7 @@ ax.fill_between(speeds_kmh, te_capped / 1000, alpha=0.15, color='#ef4444')
 v_trans = power_w / te_dry
 ax.axvline(v_trans * 3.6, color='#f59e0b', linestyle=':', linewidth=1.5)
 ax.text(v_trans * 3.6 + 0.5, te_dry / 1000 * 0.5,
-        f'Transition\\n{v_trans*3.6:.1f} km/h', color='#f59e0b', fontsize=9)
+        f'Transition\\\n{v_trans*3.6:.1f} km/h', color='#f59e0b', fontsize=9)
 
 ax.set_xlabel('Speed (km/h)', color='white')
 ax.set_ylabel('Tractive effort (kN)', color='white')
@@ -168,7 +168,7 @@ ax.tick_params(colors='gray')
 plt.tight_layout()
 plt.show()
 
-print(f"\\nKey derived values:")
+print(f"\\\nKey derived values:")
 print(f"  Total mass: {total_mass:,.0f} kg ({total_mass/1000:.1f} tonnes)")
 print(f"  Max TE (dry): {te_dry:,.0f} N ({te_dry/1000:.1f} kN)")
 print(f"  Max TE (wet): {te_wet:,.0f} N ({te_wet/1000:.1f} kN)")
@@ -412,7 +412,7 @@ ax.text(0.5, 19, 'Typical DHR speed: 18 km/h', color='gray', fontsize=9)
 for gr, name in [(2.0, 'Sukna'), (4.0, 'Tindharia'), (5.5, 'Batasia')]:
     v_eq = equilibrium_speed(gr)
     ax.plot(gr, v_eq * 3.6, 'o', color='#ef4444', markersize=8)
-    ax.annotate(f'{name}\\n{gr}% = {v_eq*3.6:.0f} km/h',
+    ax.annotate(f'{name}\\\n{gr}% = {v_eq*3.6:.0f} km/h',
                 xy=(gr, v_eq * 3.6), xytext=(gr + 0.3, v_eq * 3.6 + 8),
                 color='white', fontsize=8,
                 arrowprops=dict(arrowstyle='->', color='gray'))
@@ -567,7 +567,7 @@ optimal_idx = np.argmin(total_time)
 opt_grad = gradients_test[optimal_idx]
 opt_time = total_time[optimal_idx]
 ax.plot(opt_grad, opt_time, 'o', color='#f59e0b', markersize=10, zorder=5)
-ax.annotate(f'Optimal: {opt_grad:.1f}% gradient\\n{opt_time:.1f} hours',
+ax.annotate(f'Optimal: {opt_grad:.1f}% gradient\\\n{opt_time:.1f} hours',
             xy=(opt_grad, opt_time), xytext=(opt_grad + 1.5, opt_time + 1),
             color='#f59e0b', fontsize=10,
             arrowprops=dict(arrowstyle='->', color='#f59e0b'))
@@ -581,10 +581,10 @@ ax.tick_params(colors='gray')
 # 4. Compare three real routes
 ax = axes[1, 1]; ax.set_facecolor('#111827')
 routes = [
-    ('DHR actual\\n(mixed 2-5.5%)', 88, 7.0, 5),
-    ('Direct 3%\\n(no switchbacks)', elev_gain/0.03/1000, 0, 0),
-    ('Direct 6%\\n(with switchbacks)', elev_gain/0.06/1000, 0, 12),
-    ('Gentle 1.5%\\n(long route)', elev_gain/0.015/1000, 0, 0),
+    ('DHR actual\\\n(mixed 2-5.5%)', 88, 7.0, 5),
+    ('Direct 3%\\\n(no switchbacks)', elev_gain/0.03/1000, 0, 0),
+    ('Direct 6%\\\n(with switchbacks)', elev_gain/0.06/1000, 0, 12),
+    ('Gentle 1.5%\\\n(long route)', elev_gain/0.015/1000, 0, 0),
 ]
 x_pos = np.arange(len(routes))
 times = []
@@ -601,7 +601,7 @@ colors_bar = ['#f59e0b', '#22c55e', '#ef4444', '#3b82f6']
 bars = ax.bar(x_pos, times, 0.6, color=colors_bar)
 for bar, t, (name, length, _, _) in zip(bars, times, routes):
     ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.15,
-            f'{t:.1f}h\\n{length:.0f}km', ha='center', color='white', fontsize=9)
+            f'{t:.1f}h\\\n{length:.0f}km', ha='center', color='white', fontsize=9)
 
 ax.set_xticks(x_pos)
 ax.set_xticklabels([r[0] for r in routes], color='white', fontsize=8)
@@ -616,7 +616,7 @@ print(f"Optimal gradient: {opt_grad:.1f}%")
 print(f"  Track length: {elev_gain / (opt_grad/100) / 1000:.0f} km")
 print(f"  Speed: {eq_speed(opt_grad)*3.6:.0f} km/h")
 print(f"  Journey time: {opt_time:.1f} hours")
-print(f"\\nDHR chose mixed gradients (2-5.5%) with switchbacks and loops,")
+print(f"\\\nDHR chose mixed gradients (2-5.5%) with switchbacks and loops,")
 print(f"achieving a 7-hour journey over 88 km. This is close to optimal.")`,
       challenge: 'Add a fuel consumption dimension to the analysis. Steeper gradients consume more coal per km (higher force at lower speed means lower efficiency). Find the gradient that minimizes total fuel consumption for the 2,000 m climb.',
       successHint: 'Switchbacks and loops are not compromises; they are the optimal engineering solution for climbing mountains by rail. The DHR engineers in the 1880s solved this optimization problem empirically, arriving at almost exactly the same answer that our simulation finds computationally.',
@@ -682,8 +682,8 @@ for name, cond in conditions.items():
 # Shade acceleration/deceleration zones for dry condition
 dry_speeds = np.array([eq_speed_cond(gr, 0.28) for gr in gradients])
 ax.fill_between(gradients, 0, dry_speeds * 3.6, alpha=0.08, color='#22c55e')
-ax.text(1, 5, 'ACCELERATION\\nZONE', color='#22c55e', fontsize=10, alpha=0.7)
-ax.text(5, 35, 'DECELERATION\\nZONE', color='#ef4444', fontsize=10, alpha=0.7)
+ax.text(1, 5, 'ACCELERATION\\\nZONE', color='#22c55e', fontsize=10, alpha=0.7)
+ax.text(5, 35, 'DECELERATION\\\nZONE', color='#ef4444', fontsize=10, alpha=0.7)
 
 ax.axhline(5, color='gray', linestyle=':', linewidth=1, alpha=0.5)
 ax.text(7, 6, 'Min viable speed', color='gray', fontsize=8)
@@ -760,8 +760,8 @@ exhaust_heat = coal_energy * 0.70
 radiation_heat = coal_energy * 0.12
 friction_loss = coal_energy * 0.10 - total_useful
 
-categories = ['Coal input', 'Exhaust\\nheat', 'Radiation', 'Mech.\\nfriction',
-              'Gravity\\nwork', 'Rolling\\nfriction', 'Aero\\ndrag']
+categories = ['Coal input', 'Exhaust\\\nheat', 'Radiation', 'Mech.\\\nfriction',
+              'Gravity\\\nwork', 'Rolling\\\nfriction', 'Aero\\\ndrag']
 values = [coal_energy, exhaust_heat, radiation_heat * 1000 / 1000,
           max(friction_loss, 0), e_gravity[-1], e_roll[-1], e_drag[-1]]
 bar_colors = ['#f59e0b', '#ef4444', '#ef4444', '#ef4444',

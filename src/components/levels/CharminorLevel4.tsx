@@ -378,7 +378,7 @@ for r in results[::3]:  # every 3rd entry
           f"{'Yes' if r['gps'] else 'No':>5}")
 
 errors = [r["error"] for r in results]
-print(f"\nAverage error: {np.mean(errors):.1f} m")
+print(f"\\nAverage error: {np.mean(errors):.1f} m")
 print(f"Max error: {np.max(errors):.1f} m")
 print(f"GPS availability: {sum(1 for r in results if r['gps'])/len(results)*100:.0f}%")
 

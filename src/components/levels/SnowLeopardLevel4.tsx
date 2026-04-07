@@ -353,9 +353,9 @@ h = np.linspace(0, 8586, 500)
 
 # --- Altitude markers ---
 markers = [
-    (3000, 'Snow leopard\\nlower range', '#22c55e'),
+    (3000, 'Snow leopard\\\nlower range', '#22c55e'),
     (5150, 'Base camp', '#3b82f6'),
-    (5500, 'Snow leopard\\nupper range', '#22c55e'),
+    (5500, 'Snow leopard\\\nupper range', '#22c55e'),
     (6800, 'Camp 2', '#f59e0b'),
     (8000, 'Death zone', '#ef4444'),
     (8586, 'Summit', '#a855f7'),
@@ -405,7 +405,7 @@ plt.show()
 print("Annotated Altitude Zones")
 print("=" * 55)
 for alt, label, _ in markers:
-    lbl = label.replace('\\n', ' ')
+    lbl = label.replace('\\\n', ' ')
     print(f"  {alt:>5} m  {lbl:<22} "
           f"O2={o2_pp(alt)/133.322:>5.0f} mmHg  "
           f"Boil={boil_pt(alt):.0f} C")`,
@@ -518,7 +518,7 @@ for n, a, m, p, e in zip(names, alts, measured,
           f"{p:>9.0f} Pa {e:>+6.1f}%")
 
 rmse = np.sqrt(np.mean((predicted - measured)**2))
-print(f"\\nRMSE: {rmse:.0f} Pa ({rmse/P0*100:.2f}% of P0)")
+print(f"\\\nRMSE: {rmse:.0f} Pa ({rmse/P0*100:.2f}% of P0)")
 print(f"Max error: {max(abs(errors)):.1f}%")`,
       challenge: 'Implement a lapse-rate corrected model that uses T(h) = 288.15 - 0.0065*h instead of constant temperature. The pressure integral becomes P = P0 * (1 - 0.0065*h/288.15)^(g*M/(R*0.0065)). Compare the errors of both models. Which stations show the biggest improvement?',
       successHint: 'You now know exactly how accurate your model is: within 2-4% for most stations, with systematic over-prediction due to the isothermal assumption. A validated model is a trustworthy model.',

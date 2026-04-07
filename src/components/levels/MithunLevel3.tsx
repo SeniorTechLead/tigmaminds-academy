@@ -301,7 +301,7 @@ width = 0.35
 bars1 = ax.bar(x_pos - width/2, nat_records[-1], width, color='#22c55e', label='Natural (gen 200)', edgecolor='none')
 bars2 = ax.bar(x_pos + width/2, art_records[-1], width, color='#3b82f6', label='Artificial (gen 200)', edgecolor='none')
 ax.set_xticks(x_pos)
-ax.set_xticklabels([n.replace(' ', '\\n') for n in sim_nat.trait_names], color='white', fontsize=7)
+ax.set_xticklabels([n.replace(' ', '\\\n') for n in sim_nat.trait_names], color='white', fontsize=7)
 ax.axhline(0, color='gray', linestyle=':', linewidth=1)
 ax.set_ylabel('Trait value (std units)', color='white')
 ax.set_title('Final trait values: two selection regimes', color='white', fontsize=11)
@@ -810,7 +810,7 @@ for comp, label, color in zip(components, comp_labels, comp_colors):
     bottom_neg += np.array(neg_vals)
 
 ax.set_xticks(x)
-ax.set_xticklabels([s.replace(' (', '\\n(') for s in systems], color='white', fontsize=7)
+ax.set_xticklabels([s.replace(' (', '\\\n(') for s in systems], color='white', fontsize=7)
 ax.set_ylabel('kg CO2e per animal per year', color='white')
 ax.set_title('Emission components by livestock system', color='white', fontsize=11)
 ax.legend(fontsize=6, facecolor='#1f2937', edgecolor='gray', labelcolor='white', ncol=2)

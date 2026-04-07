@@ -398,10 +398,10 @@ ax.set_title('Impact Energy vs Size', color='white', fontsize=11)
 
 # Mark famous events
 events = [
-    (0.02, 'Deepor Beel\\n(football)', '#f59e0b'),
-    (20, 'Chelyabinsk\\n2013', '#3b82f6'),
-    (50, 'Tunguska\\n1908', '#22c55e'),
-    (10000, 'Chicxulub\\n(dinosaurs)', '#a855f7'),
+    (0.02, 'Deepor Beel\\\n(football)', '#f59e0b'),
+    (20, 'Chelyabinsk\\\n2013', '#3b82f6'),
+    (50, 'Tunguska\\\n1908', '#22c55e'),
+    (10000, 'Chicxulub\\\n(dinosaurs)', '#a855f7'),
 ]
 for d, label, color in events:
     e = 0.5 * (4/3)*np.pi*(d/2)**3 * density * velocity**2 / 4.184e9
@@ -437,9 +437,9 @@ ax.set_ylabel('Average interval (years)', color='white')
 ax.set_title('How Often Do Impacts Happen?', color='white', fontsize=11)
 ax.tick_params(colors='gray')
 
-labels_freq = ['Dust\\n(daily)', 'Pebble\\n(weekly)', 'Rock\\n(yearly)', 'Car\\n(decade)',
-               'House\\n(century)', 'Tunguska\\n(10,000 yr)', 'City-killer\\n(500,000 yr)',
-               'Chicxulub\\n(100M yr)']
+labels_freq = ['Dust\\\n(daily)', 'Pebble\\\n(weekly)', 'Rock\\\n(yearly)', 'Car\\\n(decade)',
+               'House\\\n(century)', 'Tunguska\\\n(10,000 yr)', 'City-killer\\\n(500,000 yr)',
+               'Chicxulub\\\n(100M yr)']
 for s, i, label in zip(sizes, intervals, labels_freq):
     ax.annotate(label, xy=(s, i), xytext=(s*2.5, i*0.5),
                 color='white', fontsize=6)

@@ -536,7 +536,7 @@ ax1.set_ylabel('km', color='white')
 ax1.tick_params(colors='gray')
 
 # Mitigation strategies comparison
-strategies = ['No action', 'SMS alerts', 'Bee fences', 'Crop buffer', 'Corridor\\nrestoration', 'Combined']
+strategies = ['No action', 'SMS alerts', 'Bee fences', 'Crop buffer', 'Corridor\\\nrestoration', 'Combined']
 conflict_reduction = [0, 30, 45, 35, 60, 85]  # % reduction
 cost_per_year = [0, 2, 8, 5, 15, 25]  # lakhs
 

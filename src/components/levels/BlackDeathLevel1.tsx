@@ -78,7 +78,7 @@ print("=== Black Death SIR Simulation ===")
 print(f"City population: {N:,}")
 print(f"Initial infected: {I0}")
 print(f"R0 = {R0_value}, beta = {beta:.4f}, gamma = {gamma:.4f}")
-print(f"\\n--- Epidemic Timeline ---")
+print(f"\\\n--- Epidemic Timeline ---")
 
 milestones = [0.01, 0.05, 0.10, 0.25, 0.50]
 for frac in milestones:
@@ -87,17 +87,17 @@ for frac in milestones:
     if idx > 0:
         print(f"  {frac*100:>5.0f}% infected by day {t[idx]:.0f}")
 
-print(f"\\n--- Peak ---")
+print(f"\\\n--- Peak ---")
 print(f"  Peak infected on day {peak_day:.0f}")
 print(f"  Peak simultaneous cases: {peak_infected:,.0f} ({peak_infected/N*100:.1f}%)")
 
-print(f"\\n--- Final Toll ---")
+print(f"\\\n--- Final Toll ---")
 print(f"  Total infected: {final_recovered:,.0f} ({final_recovered/N*100:.1f}%)")
 print(f"  Dead (60% fatality): {dead:,.0f}")
 print(f"  Survived with immunity: {survived:,.0f}")
 print(f"  Never infected: {S[-1]:,.0f}")
 
-print(f"\\n--- Epidemic Curve (weekly snapshots) ---")
+print(f"\\\n--- Epidemic Curve (weekly snapshots) ---")
 print(f"{'Day':>5} {'Susceptible':>12} {'Infected':>10} {'Removed':>10}")
 print("-" * 40)
 for day in range(0, days + 1, 7):
@@ -107,7 +107,7 @@ for day in range(0, days + 1, 7):
         print("  (epidemic ended)")
         break
 
-print(f"\\nThe Black Death didn't stop because of medicine.")
+print(f"\\\nThe Black Death didn't stop because of medicine.")
 print(f"It stopped because {final_recovered/N*100:.0f}% of the population")
 print(f"had already been infected — the fire ran out of fuel.")`,
       challenge: 'Change the case fatality rate to 95% (pneumonic plague) and re-run the simulation. The total infected stays the same — only the death count changes. Why? Because transmission dynamics depend on beta and gamma, not on whether victims die or recover. The SIR model treats death and recovery identically — both remove people from the transmission chain.',
@@ -161,8 +161,8 @@ N = 100_000
 gamma = 1 / 7  # 7-day infectious period
 
 # Compare different R0 values
-print("=== How R0 Determines Everything ===\\n")
-print(f"Population: {N:,} | Infectious period: 7 days\\n")
+print("=== How R0 Determines Everything ===\\\n")
+print(f"Population: {N:,} | Infectious period: 7 days\\\n")
 print(f"{'R0':>4} {'Total Infected':>16} {'Peak Cases':>12} "
       f"{'Peak Day':>10} {'Herd Imm.':>10}")
 print("-" * 56)
@@ -176,7 +176,7 @@ for R0 in [0.8, 1.0, 1.5, 2.0, 3.0, 4.0, 5.0]:
           f" {result['herd_immunity']:>8.0%}")
 
 # Real disease comparisons
-print(f"\\n=== R0 of Real Diseases ===\\n")
+print(f"\\\n=== R0 of Real Diseases ===\\\n")
 diseases = [
     ("Measles", 15.0, "Airborne virus"),
     ("Smallpox", 6.0, "Airborne/contact"),
@@ -195,9 +195,9 @@ for name, r0, route in diseases:
     print(f"{name:<25} {r0:>5.1f} {hi:>10} {route}")
 
 # The effective R during an epidemic
-print(f"\\n=== Effective R During the Black Death ===\\n")
+print(f"\\\n=== Effective R During the Black Death ===\\\n")
 print(f"R_effective = R0 * (S/N)")
-print(f"As susceptible people are removed, R_eff drops.\\n")
+print(f"As susceptible people are removed, R_eff drops.\\\n")
 
 R0 = 4.0
 print(f"{'% Susceptible':>15} {'R_effective':>12} {'Status'}")
@@ -207,9 +207,9 @@ for s_frac in [1.0, 0.9, 0.75, 0.5, 0.25, 0.10]:
     status = "GROWING" if r_eff > 1 else "DECLINING" if r_eff < 1 else "PEAK"
     print(f"{s_frac*100:>13.0f}% {r_eff:>12.2f} {status:>12}")
 
-print(f"\\nR_eff crosses 1.0 when S/N = 1/R0 = {1/R0:.0%}")
+print(f"\\\nR_eff crosses 1.0 when S/N = 1/R0 = {1/R0:.0%}")
 print(f"This is the herd immunity threshold: {(1-1/R0):.0%} must be immune.")
-print(f"\\nThe Black Death reached this threshold through mass death.")
+print(f"\\\nThe Black Death reached this threshold through mass death.")
 print(f"Modern vaccines reach it through controlled immunization.")`,
       challenge: 'Calculate how many people would need to be vaccinated to prevent a plague epidemic. With R₀ = 4, you need 75% vaccination coverage. But vaccines aren\'t 100% effective — if the plague vaccine is 85% effective, what coverage percentage do you actually need? (Answer: 75% / 0.85 = 88.2% — nearly everyone.)',
       successHint: 'You calculated the most important number in epidemiology. R₀ governed every pandemic decision during COVID-19 — lockdowns, mask mandates, and vaccination targets were all based on driving the effective R below 1. The same mathematics that explains the Black Death guided the 21st-century pandemic response.',
@@ -271,8 +271,8 @@ def plague_chain_model(N, days, interventions):
 N = 100_000
 days = 365
 
-print("=== Chain of Infection: Breaking Links ===\\n")
-print("The 6 links: Pathogen → Reservoir → Exit → Transmission → Entry → Host\\n")
+print("=== Chain of Infection: Breaking Links ===\\\n")
+print("The 6 links: Pathogen → Reservoir → Exit → Transmission → Entry → Host\\\n")
 
 # Scenario definitions
 scenarios = [
@@ -304,7 +304,7 @@ for name, interventions, note in scenarios:
     print(f"{name:<40} {r_eff:>6.2f} {total:>10,.0f} {deaths:>10,.0f}")
 
 # Link-by-link analysis
-print(f"\\n=== Which Link is Weakest? ===\\n")
+print(f"\\\n=== Which Link is Weakest? ===\\\n")
 links = [
     ("Pathogen (antibiotics)", {'flea_control': 0.1, 'quarantine': 0.1},
      "Kills Y. pestis directly — not available until 1940s"),
@@ -332,7 +332,7 @@ for name, intervention, description in links:
     print(f"{name:<30} {r_eff:>6.2f} {saved:>12,.0f}")
     print(f"  → {description}")
 
-print(f"\\n--- Key Insight ---")
+print(f"\\\n--- Key Insight ---")
 print(f"You don't need to understand the pathogen to stop it.")
 print(f"Venice stopped plague with quarantine 500 years before")
 print(f"anyone identified Yersinia pestis under a microscope.")
@@ -399,8 +399,8 @@ gamma = 1 / 7
 R0 = 4.0
 
 # Compare quarantine strategies
-print("=== Venetian Quarantine Mathematics ===\\n")
-print(f"Population: {N:,} | R0 = {R0} | Infectious period = 7 days\\n")
+print("=== Venetian Quarantine Mathematics ===\\\n")
+print(f"Population: {N:,} | R0 = {R0} | Infectious period = 7 days\\\n")
 
 strategies = [
     ("No quarantine", 0.0, 0),
@@ -421,12 +421,12 @@ for name, coverage, delay in strategies:
     print(f"{name:<45} {r_eff:>6.2f} {total:>10,.0f} {dead:>8,.0f}")
 
 # The 40-day calculation
-print(f"\\n=== Why 40 Days? ===\\n")
+print(f"\\\n=== Why 40 Days? ===\\\n")
 print(f"Plague timeline for an infected person:")
 print(f"  Incubation: 2-6 days (infected but no symptoms)")
 print(f"  Illness onset: day 3-7")
 print(f"  Death or recovery: day 7-14")
-print(f"  Maximum possible infectious period: ~21 days\\n")
+print(f"  Maximum possible infectious period: ~21 days\\\n")
 
 for q_days in [7, 14, 21, 30, 40, 60]:
     # Probability of undetected case passing through
@@ -438,12 +438,12 @@ for q_days in [7, 14, 21, 30, 40, 60]:
     print(f"  {q_days:>2} days: P(undetected) = {prob_no_symptoms:.2e}"
           f"  Safety margin: {safety_margin:>+3d} days  [{status}]")
 
-print(f"\\nVenice chose 40 days: P(undetected) = {np.exp(-40/4):.2e}")
+print(f"\\\nVenice chose 40 days: P(undetected) = {np.exp(-40/4):.2e}")
 print(f"That's a 1-in-22,000 chance of missing a case — extremely safe.")
 
 # Flatten the curve demonstration
-print(f"\\n=== Flattening the Curve ===\\n")
-print(f"Without quarantine vs. Venice-style (75% quarantine):\\n")
+print(f"\\\n=== Flattening the Curve ===\\\n")
+print(f"Without quarantine vs. Venice-style (75% quarantine):\\\n")
 
 no_q, _ = sir_quarantine(N, R0, gamma, 0.0, 0)
 venice, _ = sir_quarantine(N, R0, gamma, 0.75, 3)
@@ -458,7 +458,7 @@ for i in range(min(len(no_q), len(venice), 30)):
     if nq_I > 5 or v_I > 5:
         print(f"{week:>5} {nq_I:>12,.0f} {v_I:>12,.0f} {reduction:>8.0f}%")
 
-print(f"\\nQuarantine flattens and delays the peak, buying time")
+print(f"\\\nQuarantine flattens and delays the peak, buying time")
 print(f"for the population to develop partial herd immunity.")`,
       challenge: 'Venice was a port city — new infections could arrive on every ship. Modify the model to add a constant inflow of 2 infected people per week from arriving ships. How does this change the quarantine coverage needed? (Hint: with ongoing importation, R_eff < 1 is not enough — you also need to quarantine arrivals.)',
       successHint: 'You modeled the mathematics behind the world\'s first public health policy. The same quarantine math was used for Ebola containment in West Africa, COVID-19 travel bans, and even agricultural quarantines that prevent plant diseases from crossing borders. Venice invented epidemiological mathematics 600 years before the field existed.',
@@ -535,8 +535,8 @@ arrival_day = {c: float('inf') for c in city_names}
 arrival_day['Caffa'] = 0  # origin
 
 # BFS-like spread with travel times and stochastic delay
-print("=== The Black Death: Geographic Spread ===\\n")
-print("Starting point: Caffa (Crimea), October 1347\\n")
+print("=== The Black Death: Geographic Spread ===\\\n")
+print("Starting point: Caffa (Crimea), October 1347\\\n")
 
 # Dijkstra-like spread through trade network
 changed = True
@@ -568,7 +568,7 @@ for city, day in sorted_cities:
     print(f"{city:<14} {day:>10.0f} {month:>5} {year} {pop:>9,}")
 
 # Local epidemic in each city
-print(f"\\n=== Local Epidemics ===\\n")
+print(f"\\\n=== Local Epidemics ===\\\n")
 print(f"{'City':<14} {'Peak Day':>9} {'Dead (60%)':>12} {'% Killed':>9}")
 print("-" * 47)
 
@@ -594,9 +594,9 @@ for city, start_day in sorted_cities:
     pct = dead / pop * 100
     print(f"{city:<14} {start_day + peak_day:>7.0f} {dead:>10,.0f} {pct:>7.1f}%")
 
-print(f"\\n{'TOTAL':<14} {'':>9} {total_dead:>10,.0f}"
+print(f"\\\n{'TOTAL':<14} {'':>9} {total_dead:>10,.0f}"
       f" {total_dead/total_pop*100:>7.1f}%")
-print(f"\\nThe wave took ~{sorted_cities[-1][1]/30:.0f} months to cross Europe")
+print(f"\\\nThe wave took ~{sorted_cities[-1][1]/30:.0f} months to cross Europe")
 print(f"Speed: governed by trade routes, not random diffusion")`,
       challenge: 'What if Messina had refused entry to the Genoese galleys in October 1347? Modify the simulation to remove the Caffa-Messina route and see how long the plague would have been delayed. (It would have arrived via a different route — but even a few months\' delay could have saved tens of thousands of lives.)',
       successHint: 'You simulated epidemic geography — the same network models used to predict COVID-19 spread via air travel, track influenza across continents, and plan vaccine distribution. Modern epidemiologists use airline passenger data instead of medieval trade routes, but the mathematics is identical: reaction (local epidemic) plus diffusion (movement between cities).',
@@ -660,13 +660,13 @@ for year in range(1, years):
     if year in plague_years:
         P[year] *= (1 - plague_years[year])
 
-print("=== Population Recovery After the Black Death ===\\n")
+print("=== Population Recovery After the Black Death ===\\\n")
 print(f"Pre-plague population (1340): {P_pre:>14,}")
 print(f"Plague mortality: {mortality:.0%}")
 print(f"Post-plague population (1350): {P_post:>13,}")
 print(f"Carrying capacity: {K:>22,}")
 
-print(f"\\n--- Recovery Timeline ---\\n")
+print(f"\\\n--- Recovery Timeline ---\\\n")
 print(f"{'Year':>6} {'Population':>14} {'% of Pre-Plague':>16} {'Event'}")
 print("-" * 56)
 
@@ -693,13 +693,13 @@ for year in range(0, years, 10):
 # Find recovery year
 for i in range(years):
     if P[i] >= P_pre * 0.95:
-        print(f"\\n95% recovery reached by ~{1350 + i}")
+        print(f"\\\n95% recovery reached by ~{1350 + i}")
         print(f"Time to recover: ~{i} years")
         break
 
 # === Economic Model ===
-print(f"\\n=== Economics of the Labor Shortage ===\\n")
-print(f"With {mortality:.0%} fewer workers, labor supply crashed.\\n")
+print(f"\\\n=== Economics of the Labor Shortage ===\\\n")
+print(f"With {mortality:.0%} fewer workers, labor supply crashed.\\\n")
 
 # Simple supply-demand wage model
 labor_pre = 1.0  # normalized pre-plague labor supply
@@ -727,7 +727,7 @@ for year in range(0, 200, 10):
           f" {land_per_worker:>10.2f}x {status}")
 
 # === Social Changes ===
-print(f"\\n=== Social Consequences ===\\n")
+print(f"\\\n=== Social Consequences ===\\\n")
 changes = [
     (1349, "Flagellant movement", "Religious response to plague"),
     (1351, "Statute of Laborers", "England: wage freeze attempt — FAILED"),
@@ -743,7 +743,7 @@ changes = [
 for year, event, description in changes:
     pop_ratio = P[year - 1350] / P_pre if year >= 1350 else 1.0
     print(f"  {year}: {event}")
-    print(f"         {description} (pop: {pop_ratio:.0%} of pre-plague)\\n")
+    print(f"         {description} (pop: {pop_ratio:.0%} of pre-plague)\\\n")
 
 print(f"The Black Death killed millions — but it also ended feudalism,")
 print(f"raised wages, empowered workers, and drove innovation.")

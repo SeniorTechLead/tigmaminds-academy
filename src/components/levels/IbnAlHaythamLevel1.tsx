@@ -187,7 +187,7 @@ ax2.grid(alpha=0.3)
 plt.tight_layout()
 plt.show()
 
-print("\\nKey insight: there is no free lunch in optics.")
+print("\\\nKey insight: there is no free lunch in optics.")
 print("More light = more blur. This is why lenses were invented.")`,
       challenge: 'Change box_depth to 1.0 m (a bigger box). How does the image size change? How does the optimal pinhole diameter change? Why?',
       successHint: 'The camera obscura demonstrates every principle of geometric optics in one device: straight-line propagation, image inversion, the brightness-sharpness trade-off, and magnification. Ibn al-Haytham used it to prove his theory — and it evolved directly into the modern camera.',
@@ -493,7 +493,7 @@ for i in range(len(predicted_images)):
 
 residuals = measured_images - np.array(predicted_images)
 rms_error = np.sqrt(np.mean(residuals**2))
-print(f"\\nRMS error: {rms_error:.4f} m")
+print(f"\\\nRMS error: {rms_error:.4f} m")
 print(f"This is {rms_error*1000:.1f} mm — within measurement precision.")
 print("The straight-line hypothesis is NOT refuted by the data.")
 print()

@@ -55,7 +55,7 @@ for salt in salts:
     print(row)
 
 # Crop tolerance thresholds (in dS/m and equivalent osmotic pressure)
-print("\\n=== Crop Salt Tolerance Thresholds ===")
+print("\\\n=== Crop Salt Tolerance Thresholds ===")
 crops = [
     ("Wheat (modern)", 6.0, "Sensitive"),
     ("Barley",         8.0, "Tolerant"),
@@ -73,7 +73,7 @@ for crop, threshold, rating in crops:
     print(f"{crop:<24} {threshold:>12.1f} {osm_atm:>12.1f} {rating:<12}")
 
 # Mesopotamian timeline: salt accumulation over centuries
-print("\\n=== Simulated Salt Buildup in Southern Mesopotamia ===")
+print("\\\n=== Simulated Salt Buildup in Southern Mesopotamia ===")
 years = np.arange(0, 2001, 200)
 # Salt accumulates roughly linearly without drainage
 initial_ec = 1.0  # dS/m
@@ -142,7 +142,7 @@ initial_ca = 85  # % of exchange sites occupied by Ca2+
 
 # Compare different irrigation water qualities
 print("=== Cation Exchange Under Irrigation ===")
-print(f"Soil CEC: {cec} meq/100g | Initial Ca: {initial_ca}%\\n")
+print(f"Soil CEC: {cec} meq/100g | Initial Ca: {initial_ca}%\\\n")
 
 water_qualities = [
     ("Low-salt river water", 2),
@@ -251,12 +251,12 @@ for m in months:
     print(f"{m['name']:<6} {m['temp']:>5} {m['rh']:>5} {m['wind']:>5.1f} {m['rad']:>5} "
           f"{et0:>7.1f} {monthly_et:>9.0f}  {bar}")
 
-print(f"\\nAnnual ET₀: {annual_et:.0f} mm = {annual_et/1000:.1f} m of water per m² per year")
+print(f"\\\nAnnual ET₀: {annual_et:.0f} mm = {annual_et/1000:.1f} m of water per m² per year")
 print(f"Annual rainfall in southern Mesopotamia: ~150 mm")
 print(f"Deficit: {annual_et - 150:.0f} mm — ALL must come from irrigation")
 
 # Salt accumulation model
-print("\\n=== Salt Accumulation from Irrigation ===")
+print("\\\n=== Salt Accumulation from Irrigation ===")
 salt_conc = 0.5  # g/L in canal water
 print(f"Irrigation water salinity: {salt_conc} g/L")
 print(f"{'Month':<6} {'ET mm/d':>8} {'Salt deposited g/m²/d':>22} {'Monthly kg/ha':>14}")
@@ -269,7 +269,7 @@ for m in months:
     annual_salt += salt_monthly
     print(f"{m['name']:<6} {et0:>6.1f} {salt_per_day:>20.1f} {salt_monthly:>12.0f}")
 
-print(f"\\nAnnual salt deposition: {annual_salt:.0f} kg/ha = {annual_salt/1000:.1f} tonnes/ha")
+print(f"\\\nAnnual salt deposition: {annual_salt:.0f} kg/ha = {annual_salt/1000:.1f} tonnes/ha")
 print("Without drainage, this salt stays permanently in the root zone.")`,
       challenge: 'Crop ET is lower than reference ET by a "crop coefficient" (K_c): ET_crop = K_c \u00D7 ET\u2080. For barley, K_c varies from 0.3 (seedling) to 1.15 (mid-season) to 0.25 (harvest). Modify the model to show actual barley water demand by month, assuming planting in November and harvest in April. How does this change the salt accumulation estimate?',
       successHint: 'The Penman-Monteith equation is used by every irrigation engineer, hydrologist, and climate modeller in the world. FAO uses it to estimate global crop water requirements. You now understand the physics behind water demand — the same physics that drove Mesopotamian salinisation and that governs every irrigated farm on Earth today.',
@@ -325,7 +325,7 @@ soils = [
 h = 0.6  # water table 0.6m above drains (target: keep below 1.2m depth)
 
 print("=== Drainage Rate vs Drain Spacing ===")
-print(f"Water table height above drains: {h} m\\n")
+print(f"Water table height above drains: {h} m\\\n")
 
 spacings = [10, 15, 20, 30, 50, 75, 100]
 header = f"{'Soil Type':<26}" + "".join(f"{s:>6}m" for s in spacings)
@@ -339,7 +339,7 @@ for soil in soils:
     print(row)
 
 # Required spacing for target drainage
-print("\\n=== Required Drain Spacing for Target Drainage ===")
+print("\\\n=== Required Drain Spacing for Target Drainage ===")
 target_rates = [2.0, 4.0, 6.0, 8.0]  # mm/day
 print(f"{'Soil Type':<26}" + "".join(f"{t:>6.0f}mm/d" for t in target_rates))
 print("-" * 52)
@@ -351,9 +351,9 @@ for soil in soils:
     print(row)
 
 # Cost analysis
-print("\\n=== Drainage Cost per Hectare ===")
+print("\\\n=== Drainage Cost per Hectare ===")
 cost_per_m = 15  # cost per metre of drain pipe installed
-print(f"Drain pipe cost: {cost_per_m} units/m\\n")
+print(f"Drain pipe cost: {cost_per_m} units/m\\\n")
 meso_soil = soils[4]  # Mesopotamian alluvial
 for target_q in target_rates:
     L = required_spacing(meso_soil["K1"], meso_soil["K2"], meso_soil["d"], h, target_q)
@@ -415,7 +415,7 @@ wheat_fractions = np.array(wheat_fractions)
 
 # Bin data by century for trend analysis
 print("=== Mesopotamian Agricultural Data Analysis ===")
-print(f"Records analysed: {n_records} cuneiform tablets\\n")
+print(f"Records analysed: {n_records} cuneiform tablets\\\n")
 
 centuries = np.arange(start_year, end_year, 200)
 print(f"{'Period':<16} {'N records':>9} {'Mean Yield':>11} {'Wheat %':>9} {'Status':<16}")
@@ -439,7 +439,7 @@ for c_start in centuries:
     print(f"{label:<16} {n:>7} {mean_yield:>9.0f} L/ha {mean_wheat:>7.0f}% {status:<16}")
 
 # Linear regression for trend
-print("\\n=== Trend Analysis (Linear Regression) ===")
+print("\\\n=== Trend Analysis (Linear Regression) ===")
 x = years - years[0]  # years since start
 coeffs = np.polyfit(x, barley_yields, 1)
 slope = coeffs[0]
@@ -454,11 +454,11 @@ print(f"At this rate, yield reaches zero around {start_year + int(-intercept/slo
 
 # Correlation between wheat fraction and yield
 corr = np.corrcoef(wheat_fractions, barley_yields)[0, 1]
-print(f"\\nCorrelation: wheat fraction vs barley yield = {corr:.3f}")
+print(f"\\\nCorrelation: wheat fraction vs barley yield = {corr:.3f}")
 print("(Both decline together — driven by the same cause: salinisation)")
 
 # Detect inflection point
-print("\\n=== Detecting the Crisis Onset ===")
+print("\\\n=== Detecting the Crisis Onset ===")
 window = 20
 for i in range(window, len(barley_yields) - window):
     before = np.mean(barley_yields[i-window:i])

@@ -60,7 +60,7 @@ ax1.tick_params(colors='gray')
 for T, label in [(35, 'Cool skin'), (37, 'Normal'), (40, 'Hot ears')]:
     P = epsilon * sigma * (T + 273.15)**4
     ax1.scatter(T, P, s=80, color='#f59e0b', zorder=5, edgecolors='white')
-    ax1.annotate(f'{label}\\n{P:.0f} W/m²', xy=(T, P), xytext=(T+1, P+10),
+    ax1.annotate(f'{label}\\\n{P:.0f} W/m²', xy=(T, P), xytext=(T+1, P+10),
                 color='#f59e0b', fontsize=9)
 
 # 2. Net radiation: day vs night

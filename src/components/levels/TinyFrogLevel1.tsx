@@ -32,7 +32,7 @@ NE India is an amphibian hotspot with over 100 described frog species, including
 import matplotlib.pyplot as plt
 
 # Amphibian diversity and decline
-orders = ['Frogs\\n(Anura)', 'Salamanders\\n(Urodela)', 'Caecilians\\n(Gymnophiona)']
+orders = ['Frogs\\\n(Anura)', 'Salamanders\\\n(Urodela)', 'Caecilians\\\n(Gymnophiona)']
 species_counts = [7300, 750, 215]
 threatened_pct = [41, 51, 45]
 
@@ -72,7 +72,7 @@ ax2.plot(decades, pop_index, color='#22c55e', linewidth=2)
 ax2.fill_between(decades, pop_index, alpha=0.15, color='#22c55e')
 ax2.axhline(100, color='gray', linestyle=':', linewidth=0.5)
 
-ax2.annotate('Chytrid fungus\\nspread globally', xy=(1990, pop_index[10]),
+ax2.annotate('Chytrid fungus\\\nspread globally', xy=(1990, pop_index[10]),
              xytext=(1995, 80), color='#ef4444', fontsize=8,
              arrowprops=dict(arrowstyle='->', color='#ef4444'))
 
@@ -235,9 +235,9 @@ ax1.plot(body_length, water_loss / water_loss[0] * 100, color='#3b82f6', linewid
 
 # Mark key species sizes
 species = [
-    (7.7, 'Paedophryne\\n(smallest)', '#ef4444'),
-    (12, 'NE India\\nminiature', '#f59e0b'),
-    (30, 'Common\\ntree frog', '#22c55e'),
+    (7.7, 'Paedophryne\\\n(smallest)', '#ef4444'),
+    (12, 'NE India\\\nminiature', '#f59e0b'),
+    (30, 'Common\\\ntree frog', '#22c55e'),
     (80, 'Bullfrog', '#3b82f6'),
 ]
 for size, name, color in species:
@@ -254,7 +254,7 @@ ax1.tick_params(colors='gray')
 
 # What miniaturized frogs lose
 ax2.set_facecolor('#111827')
-features = ['Toe\\ncount', 'Teeth', 'Middle\\near bone', 'Finger\\npads', 'Egg\\ncount', 'Color\\npatterns']
+features = ['Toe\\\ncount', 'Teeth', 'Middle\\\near bone', 'Finger\\\npads', 'Egg\\\ncount', 'Color\\\npatterns']
 normal_frog = [10, 10, 10, 10, 10, 10]
 mini_frog = [7, 3, 2, 6, 2, 5]
 
@@ -348,7 +348,7 @@ ax1.tick_params(colors='gray')
 
 # Mark animals
 animals = [(2, 'Flea'), (8, 'Tiny frog'), (30, 'Tree frog'),
-           (80, 'Bullfrog'), (150, 'Human\\n(scaled)')]
+           (80, 'Bullfrog'), (150, 'Human\\\n(scaled)')]
 for size, name in animals:
     idx = np.argmin(np.abs(body_length - size))
     ax1.plot(size, volume[idx]/volume[0], 'o', color='#f59e0b', markersize=6)
@@ -534,12 +534,12 @@ import matplotlib.pyplot as plt
 
 # Biodiversity hotspot data (selected)
 hotspots = {
-    'Indo-Burma\\n(incl. NE India)': {'plant_spp': 13500, 'endemic': 7000, 'habitat_left': 5, 'vertebrates': 2185},
-    'Sundaland\\n(SE Asia)': {'plant_spp': 25000, 'endemic': 15000, 'habitat_left': 7, 'vertebrates': 1800},
+    'Indo-Burma\\\n(incl. NE India)': {'plant_spp': 13500, 'endemic': 7000, 'habitat_left': 5, 'vertebrates': 2185},
+    'Sundaland\\\n(SE Asia)': {'plant_spp': 25000, 'endemic': 15000, 'habitat_left': 7, 'vertebrates': 1800},
     'Tropical Andes': {'plant_spp': 30000, 'endemic': 15000, 'habitat_left': 25, 'vertebrates': 3400},
     'Madagascar': {'plant_spp': 12000, 'endemic': 9700, 'habitat_left': 10, 'vertebrates': 370},
-    'Western Ghats\\n(India)': {'plant_spp': 5916, 'endemic': 3049, 'habitat_left': 7, 'vertebrates': 1073},
-    'Eastern\\nHimalayas': {'plant_spp': 10000, 'endemic': 3160, 'habitat_left': 25, 'vertebrates': 977},
+    'Western Ghats\\\n(India)': {'plant_spp': 5916, 'endemic': 3049, 'habitat_left': 7, 'vertebrates': 1073},
+    'Eastern\\\nHimalayas': {'plant_spp': 10000, 'endemic': 3160, 'habitat_left': 25, 'vertebrates': 977},
 }
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
@@ -552,13 +552,13 @@ colors = ['#ef4444', '#f59e0b', '#22c55e', '#a855f7', '#3b82f6', '#6366f1']
 for i, (name, data) in enumerate(hotspots.items()):
     ax1.scatter(data['habitat_left'], data['plant_spp'], s=data['endemic']/30,
                 color=colors[i], edgecolor='white', linewidth=1, zorder=5)
-    ax1.annotate(name.replace('\\n', ' '), xy=(data['habitat_left'], data['plant_spp']),
+    ax1.annotate(name.replace('\\\n', ' '), xy=(data['habitat_left'], data['plant_spp']),
                  xytext=(data['habitat_left']+1, data['plant_spp']+500),
                  color=colors[i], fontsize=7)
 
 ax1.set_xlabel('Original habitat remaining (%)', color='white')
 ax1.set_ylabel('Total plant species', color='white')
-ax1.set_title('Biodiversity Hotspots: Species vs Habitat Loss\\n(bubble = endemic species)',
+ax1.set_title('Biodiversity Hotspots: Species vs Habitat Loss\\\n(bubble = endemic species)',
               color='white', fontsize=11)
 ax1.tick_params(colors='gray')
 ax1.invert_xaxis()  # Less habitat = worse

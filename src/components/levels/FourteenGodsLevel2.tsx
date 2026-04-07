@@ -67,7 +67,7 @@ for d, name, illum in phases:
 
 # Kharchi Puja marker
 ax.plot(kharchi_day, kharchi_illum, '*', color='#f59e0b', markersize=18, zorder=6)
-ax.annotate(f'Kharchi Puja\\n(day {kharchi_day:.0f}, {kharchi_illum:.0f}%)',
+ax.annotate(f'Kharchi Puja\\\n(day {kharchi_day:.0f}, {kharchi_illum:.0f}%)',
             xy=(kharchi_day, kharchi_illum), xytext=(kharchi_day - 3, kharchi_illum + 12),
             color='#f59e0b', fontsize=10, fontweight='bold',
             arrowprops=dict(arrowstyle='->', color='#f59e0b'))
@@ -263,7 +263,7 @@ ax.set_ylim(-0.5, 0.8)
 ax.axhline(y=0, color='#9ca3af', alpha=0.3)
 
 # Mark the 3-Saros return
-ax.annotate('3 Saros ≈ return\\nto same region',
+ax.annotate('3 Saros ≈ return\\\nto same region',
             xy=(lons[3], 0), xytext=(lons[3], 0.5),
             color='#f59e0b', fontsize=10, ha='center',
             arrowprops=dict(arrowstyle='->', color='#f59e0b'))

@@ -469,7 +469,7 @@ for hull, name, color in zip(hulls, hull_names, hull_colors):
     ax.bar(name.split('(')[0].strip(),
            Rt_per_tonne, color=color, alpha=0.8)
     ax.text(name.split('(')[0].strip(), Rt_per_tonne + 10,
-            f'{Rt_per_tonne:.0f} N/t\\n{cargo/1000:.1f}t cargo',
+            f'{Rt_per_tonne:.0f} N/t\\\n{cargo/1000:.1f}t cargo',
             ha='center', color='white', fontsize=7)
 
 ax.set_ylabel('Resistance per tonne cargo (N/t)', color='white')
@@ -1431,7 +1431,7 @@ ax.set_xlabel('Length (m)', color='white')
 ax.set_ylabel('Half-beam (m)', color='white')
 ax.set_title('Hull plan view', color='white', fontsize=11)
 ax.set_aspect('equal')
-ax.text(design['L']/2, 0, f'L={design["L"]}m\\nB={design["B"]}m',
+ax.text(design['L']/2, 0, f'L={design["L"]}m\\\nB={design["B"]}m',
         ha='center', va='center', color='white', fontsize=8)
 
 # Plot 2: Resistance breakdown
@@ -1450,7 +1450,7 @@ ax.fill_between(speeds, [r/1000 for r in Rf_a],
 ax.fill_between(speeds, [(rf+rv)/1000 for rf, rv in zip(Rf_a, Rv_a)],
                 [r/1000 for r in Rt_a], alpha=0.4, color='#ef4444', label='Wave')
 ax.axvline(V_design, color='white', linestyle='--', alpha=0.5)
-ax.text(V_design + 0.1, max(Rt_a)/1000 * 0.8, f'Design\\nspeed', color='white', fontsize=8)
+ax.text(V_design + 0.1, max(Rt_a)/1000 * 0.8, f'Design\\\nspeed', color='white', fontsize=8)
 
 ax.set_xlabel('Speed (m/s)', color='white')
 ax.set_ylabel('Resistance (kN)', color='white')
@@ -1552,9 +1552,9 @@ ax.set_facecolor('#111827')
 ax.tick_params(colors='gray')
 
 compare = {
-    'Traditional\\nwooden': {'cargo': 3, 'speed': 2, 'fuel_eff': 4, 'stability': 5, 'cost': 9},
-    'Steel\\nbarge': {'cargo': 8, 'speed': 3, 'fuel_eff': 5, 'stability': 7, 'cost': 4},
-    'Our\\ndesign': {'cargo': 7, 'speed': 7, 'fuel_eff': 8, 'stability': 8, 'cost': 6},
+    'Traditional\\\nwooden': {'cargo': 3, 'speed': 2, 'fuel_eff': 4, 'stability': 5, 'cost': 9},
+    'Steel\\\nbarge': {'cargo': 8, 'speed': 3, 'fuel_eff': 5, 'stability': 7, 'cost': 4},
+    'Our\\\ndesign': {'cargo': 7, 'speed': 7, 'fuel_eff': 8, 'stability': 8, 'cost': 6},
 }
 
 metrics_cmp = ['cargo', 'speed', 'fuel_eff', 'stability', 'cost']
@@ -1565,7 +1565,7 @@ x_cmp = np.arange(len(metrics_cmp))
 width = 0.25
 for i, (name, scores) in enumerate(compare.items()):
     vals = [scores[m] for m in metrics_cmp]
-    ax.bar(x_cmp + i * width, vals, width, color=cmp_colors[i], alpha=0.8, label=name.replace('\\n', ' '))
+    ax.bar(x_cmp + i * width, vals, width, color=cmp_colors[i], alpha=0.8, label=name.replace('\\\n', ' '))
 
 ax.set_xticks(x_cmp + width)
 ax.set_xticklabels(labels_cmp, color='white', fontsize=8)

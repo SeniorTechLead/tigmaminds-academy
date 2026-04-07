@@ -75,7 +75,7 @@ cities = [
 ]
 sim = PandemicSimulator(plague, cities)
 sim.summary()
-print("\\nArchitecture ready. Next: implement the epidemic engine.")`,
+print("\\\nArchitecture ready. Next: implement the epidemic engine.")`,
       challenge: 'Add a "port_city" boolean to the City class. Port cities have 2x trade volume (more ships, more rats, more fleas). How does this change the simulation design? Consider: should the Disease class also have a "vector_multiplier" for port cities where rat populations are higher?',
       successHint: 'Good system design makes everything else easier. You defined three clean classes — Disease, City, and PandemicSimulator — that encapsulate their data and expose clear interfaces. This is the same architecture used by professional epidemic simulation software like GLEAM and EpiSim.',
     },
@@ -157,7 +157,7 @@ eng = Engine(cities)
 eng.cities["Messina"].seed(20); eng.cities["Messina"].arrival = 0
 eng.run(365)
 
-print("=== Black Death: Medieval Europe (365 days) ===\\n")
+print("=== Black Death: Medieval Europe (365 days) ===\\\n")
 print(f"{'City':<12} {'Arrival':>8} {'Peak Day':>9} {'Dead':>8} {'Mortality':>10}")
 print("-" * 49)
 for n in ["Messina","Genoa","Venice","Florence","Marseille","Paris","London","Vienna"]:
@@ -166,7 +166,7 @@ for n in ["Messina","Genoa","Venice","Florence","Marseille","Paris","London","Vi
     print(f"{n:<12} {arr:>8} {peak:>7} {c.dead:>7,.0f} {c.dead/c.pop*100:>8.1f}%")
 td = sum(c.dead for c in eng.cities.values())
 tp = sum(c.pop for c in eng.cities.values())
-print(f"\\nTotal: {td:,.0f} dead ({td/tp*100:.1f}%). Plague spread west along trade routes.")`,
+print(f"\\\nTotal: {td:,.0f} dead ({td/tp*100:.1f}%). Plague spread west along trade routes.")`,
       challenge: 'Seed a SECOND introduction: Constantinople (100 infected) on day 30. The historical Black Death entered Europe from multiple directions — through both Italian and Byzantine ports. How does a two-front invasion change the timing for Vienna and Paris?',
       successHint: 'You built a metapopulation epidemic engine — the same architecture used by the GLEAM model (Global Epidemic and Mobility Model) that tracks influenza and COVID-19 across the world\'s airline network. The core idea — SEIR within cities, stochastic spillover between cities — scales from medieval trade routes to modern air travel.',
     },
@@ -243,7 +243,7 @@ scenarios = [("No intervention",[]),("Early quarantine (day 14)",[("quarantine",
     ("Antibiotics (day 30)",[("treatment",30,0.1)]),
     ("Combined",[("quarantine",14),("treatment",14,0.1)])]
 
-print("=== Intervention Testing: Black Death Counterfactuals ===\\n")
+print("=== Intervention Testing: Black Death Counterfactuals ===\\\n")
 print(f"{'Scenario':<30} {'Deaths':>8} {'Mort%':>7} {'vs Base':>9}")
 print("-" * 56)
 base = None
@@ -253,7 +253,7 @@ for name, intv in scenarios:
     red = (1 - dead/base)*100 if base > 0 else 0
     print(f"{name:<30} {dead:>7,.0f} {dead/pop*100:>5.1f}% {red:>+7.1f}%")
 
-print(f"\\nEarly quarantine vastly outperforms late. Combined is optimal.")
+print(f"\\\nEarly quarantine vastly outperforms late. Combined is optimal.")
 print(f"Milan's day-14 quarantine was the best available medieval strategy.")`,
       challenge: 'Add a "selective quarantine" strategy: quarantine ONLY cities that have confirmed cases, starting 7 days after their first case. Compare this against blanket quarantine. Selective quarantine is more economically sustainable — but does it save as many lives? This is the lockdown debate that played out during COVID-19.',
       successHint: 'Counterfactual analysis is how epidemiologists evaluate past policy decisions and plan for future pandemics. The Imperial College COVID-19 model (Ferguson et al., March 2020) — which influenced lockdown decisions worldwide — used exactly this approach: run the model with and without interventions, compare death tolls.',
@@ -302,7 +302,7 @@ def economic_model(mortality_data, years=200):
 mort = {"Florence": 0.50, "Paris": 0.40, "London": 0.35, "Milan*": 0.15}
 results = economic_model(mort)
 
-print("=== Black Death: 200-Year Economic Impact ===\\n")
+print("=== Black Death: 200-Year Economic Impact ===\\\n")
 for offset in [0, 25, 50, 100, 200]:
     yr = 1348 + offset
     print(f"--- {yr} (plague +{offset}yr) ---")
@@ -323,7 +323,7 @@ for city in ["Florence", "Paris", "London", "Milan*"]:
         if serf10 == "—" and t["serfdom"] < 10: serf10 = str(t["year"])
     print(f"{city:<12} {pop_yr:>10} {serf50:>10} {serf10:>10}")
 
-print(f"\\nParadox: cities that suffered most gained freedom fastest.")
+print(f"\\\nParadox: cities that suffered most gained freedom fastest.")
 print(f"Milan (quarantined, low mortality) retained serfdom longest.")`,
       challenge: 'Add Eastern Europe to the model with a "lord power" parameter that resists wage increases and maintains serfdom even when labour is scarce. In Eastern Europe, the "second serfdom" actually STRENGTHENED after the plague — lords had enough military power to force serfs to stay. Model this by capping wage increases at 110% when lord_power > 0.7. This explains the Great Divergence between Western and Eastern European development.',
       successHint: 'You built a coupled bio-economic model that reproduces one of the most important economic transitions in history. The same framework — epidemic modelling driving economic projections — was used to estimate that COVID-19 would cause $12.5 trillion in global GDP losses. Understanding how biological shocks cascade through economies is a critical skill for policy analysis.',
@@ -408,7 +408,7 @@ skills = [
 print("PORTFOLIO SKILLS:")
 for skill, detail in skills:
     print(f"  {skill}: {detail}")
-print("\\nDemonstrates: system design, stochastic modelling, historical")
+print("\\\nDemonstrates: system design, stochastic modelling, historical")
 print("validation, intervention testing, cross-domain analysis.")`,
       challenge: 'Add your name, date, and a 2-sentence CV summary to the documentation. Then add one more section: "Lessons from History" — 3-5 bullet points connecting the Black Death to modern pandemic preparedness. What would you advise a city planning for the next pandemic, based on what your simulator revealed? This transforms technical analysis into actionable policy advice — the ultimate goal of computational epidemiology.',
       successHint: 'You have completed a full capstone project: system design, epidemic engine, intervention testing, economic modelling, and documentation. This is a portfolio-grade demonstration of computational epidemiology, software engineering, and data-driven policy analysis. The same skills and tools are used by the WHO, CDC, and academic research groups to prepare for future pandemics.',

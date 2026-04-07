@@ -242,7 +242,7 @@ plt.show()
 
 print("=== Aroma Evolution with Temperature ===")
 for t in [20, 40, 60, 80, 100]:
-    print(f"\\nAt {t}°C:")
+    print(f"\\\nAt {t}°C:")
     for name, data in compounds.items():
         T_k = t + 273.15
         T_bp = data["bp"] + 273.15
@@ -380,7 +380,7 @@ print(f"Average oil yield: {oil_yield.mean():.1f}%")
 print(f"Average cineole: {cineole.mean():.0f}%")
 premium_mask = np.array([g == 'Premium' for g in grades])
 if premium_mask.any():
-    print(f"\\nPremium farms are at: {altitude[premium_mask].mean():.0f}m avg altitude")
+    print(f"\\\nPremium farms are at: {altitude[premium_mask].mean():.0f}m avg altitude")
     print(f"  with {shade[premium_mask].mean():.0f}% shade and {rainfall[premium_mask].mean():.0f}mm rainfall")`,
       challenge: 'Add a "climate change" scenario: increase temperature by 2°C (shifts optimal altitude up by 300m). How many farms drop from Premium to Standard grade?',
       successHint: 'You have created a multi-factor terroir analysis using scatter plots with color coding — the same visualization technique used in agronomy and flavor science. The premium cardamom zone is surprisingly narrow: only specific combinations of altitude, rainfall, and shade produce the best oil.',
@@ -524,7 +524,7 @@ plt.show()
 print("=== Fraction Composition ===")
 for frac_name, (t_lo, t_hi) in fractions.items():
     mask = (temp_ramp >= t_lo) & (temp_ramp < t_hi)
-    print(f"\\n{frac_name}:")
+    print(f"\\\n{frac_name}:")
     for name in compounds:
         amt = distillate_composition[name][mask].sum()
         print(f"  {name:25s}: {amt:.1f}%")`,
@@ -568,7 +568,7 @@ The aroma profile of Sikkim large cardamom differs from southern green cardamom:
 import matplotlib.pyplot as plt
 
 # Aroma descriptors and compound correlations
-descriptors = ['Fresh/\nCooling', 'Sweet/\nFloral', 'Woody/\nSpicy', 'Citrus', 'Herbal/\nGreen',
+descriptors = ['Fresh/\\nCooling', 'Sweet/\\nFloral', 'Woody/\\nSpicy', 'Citrus', 'Herbal/\\nGreen',
                'Smoky', 'Camphor', 'Balsamic']
 
 # Scores (0-10) for different origins
@@ -613,11 +613,11 @@ ax2 = fig.add_subplot(122)
 ax2.set_facecolor('#1f2937')
 
 compound_map = {
-    '1,8-Cineole\n(35%)': [9, 2, 3, 1, 2, 0, 8, 3],
-    'Terpinyl\nacetate (30%)': [3, 8, 2, 2, 3, 0, 2, 7],
-    'Limonene\n(8%)': [2, 1, 1, 9, 2, 0, 1, 1],
-    'Linalool\n(5%)': [1, 9, 1, 2, 4, 0, 1, 3],
-    'Smoke\ncompounds': [0, 0, 5, 0, 1, 10, 2, 2],
+    '1,8-Cineole\\n(35%)': [9, 2, 3, 1, 2, 0, 8, 3],
+    'Terpinyl\\nacetate (30%)': [3, 8, 2, 2, 3, 0, 2, 7],
+    'Limonene\\n(8%)': [2, 1, 1, 9, 2, 0, 1, 1],
+    'Linalool\\n(5%)': [1, 9, 1, 2, 4, 0, 1, 3],
+    'Smoke\\ncompounds': [0, 0, 5, 0, 1, 10, 2, 2],
 }
 
 x = np.arange(len(descriptors))
@@ -629,7 +629,7 @@ for i, (comp, scores) in enumerate(compound_map.items()):
             alpha=0.8, label=comp)
 
 ax2.set_xticks(x)
-ax2.set_xticklabels([d.replace('\\n', ' ') for d in descriptors], fontsize=7,
+ax2.set_xticklabels([d.replace('\\\n', ' ') for d in descriptors], fontsize=7,
                      rotation=45, ha='right', color='white')
 ax2.set_ylabel('Contribution Score', color='white', fontsize=11)
 ax2.set_title('Which Compound Causes Which Aroma?', color='white', fontsize=12, fontweight='bold')
@@ -641,14 +641,14 @@ plt.tight_layout()
 plt.savefig('aroma_wheel.png', dpi=100, facecolor='#1f2937')
 plt.show()
 
-print("=== Aroma Profile Comparison ===\\n")
+print("=== Aroma Profile Comparison ===\\\n")
 for origin, scores in profiles.items():
-    dominant = descriptors[scores.index(max(scores))].replace('\\n', ' ')
+    dominant = descriptors[scores.index(max(scores))].replace('\\\n', ' ')
     print(f"{origin:20s} — Dominant: {dominant} (score {max(scores)})")
     overall = sum(scores) / len(scores)
     print(f"{'':20s}   Complexity: {overall:.1f}/10")
 
-print("\\nSikkim's signature: high smoky + camphor notes from fire-curing")
+print("\\\nSikkim's signature: high smoky + camphor notes from fire-curing")
 print("This is what makes it irreplaceable in Tibetan butter tea and biryani")`,
       challenge: 'Add a "synthetic cardamom flavoring" profile (high cineole 10, everything else 2-3). How different does it look on the radar chart? Why do chefs prefer natural cardamom?',
       successHint: 'You have created radar charts — the standard visualization for sensory analysis in food science. The overlay clearly shows what makes Sikkim cardamom unique: the smoky, camphor-forward profile from fire-curing. The compound-to-descriptor mapping connects chemistry to sensation.',

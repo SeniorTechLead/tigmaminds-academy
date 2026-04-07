@@ -127,7 +127,7 @@ ax3.set_ylabel('Lapse rate (°C/km)', color='white')
 ax3.set_title('Saturated vs Dry Adiabatic Lapse Rate', color='white', fontsize=11)
 ax3.legend(fontsize=9, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax3.tick_params(colors='gray')
-ax3.annotate('Warm air: more moisture\\n→ more latent heat\\n→ lower SALR',
+ax3.annotate('Warm air: more moisture\\\n→ more latent heat\\\n→ lower SALR',
             xy=(30, salr_values[np.argmin(np.abs(temp_range - 30))]),
             xytext=(10, 4), color='#fbbf24', fontsize=9,
             arrowprops=dict(arrowstyle='->', color='#fbbf24'))
@@ -163,11 +163,11 @@ print(f"  DALR = g/cp = {g}/{cp} × 1000 = {DALR:.1f}°C/km")
 print(f"  SALR at 0°C:  {saturated_lapse_rate(0):.1f}°C/km")
 print(f"  SALR at 20°C: {saturated_lapse_rate(20):.1f}°C/km")
 print(f"  SALR at 35°C: {saturated_lapse_rate(35):.1f}°C/km")
-print(f"\\nFor today's conditions (T={T_surface}°C, RH={RH}%):")
+print(f"\\\nFor today's conditions (T={T_surface}°C, RH={RH}%):")
 print(f"  Dew point: {Td:.1f}°C")
 print(f"  Cloud base (LCL): {LCL:.0f}m ({LCL/1000:.1f}km)")
 print(f"  Cloud base temperature: {T_surface - DALR * LCL/1000:.1f}°C")
-print(f"\\nStability:")
+print(f"\\\nStability:")
 print(f"  If ELR < SALR → Absolutely stable (no convection)")
 print(f"  If SALR < ELR < DALR → Conditionally unstable")
 print(f"  If ELR > DALR → Absolutely unstable (strong convection)")`,

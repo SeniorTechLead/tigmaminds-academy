@@ -63,14 +63,14 @@ ax.plot(carbon, eutectoid, 'w--', linewidth=1.5)
 
 # Eutectoid point
 ax.scatter([0.76], [727], color='white', s=100, zorder=5)
-ax.annotate('Eutectoid\\n0.76% C, 727°C', xy=(0.76, 727), xytext=(1.2, 770),
+ax.annotate('Eutectoid\\\n0.76% C, 727°C', xy=(0.76, 727), xytext=(1.2, 770),
             color='white', fontsize=10, arrowprops=dict(arrowstyle='->', color='white'))
 
 # Naga dao steel
 dao_carbon = 0.5
 ax.axvline(x=dao_carbon, color='#f59e0b', linestyle=':', linewidth=2)
 ax.scatter([dao_carbon], [800], color='#f59e0b', s=150, marker='*', zorder=6, edgecolors='white')
-ax.annotate('Naga Dao\\n0.5% C', xy=(dao_carbon, 800), xytext=(0.1, 900),
+ax.annotate('Naga Dao\\\n0.5% C', xy=(dao_carbon, 800), xytext=(0.1, 900),
             color='#f59e0b', fontsize=12, fontweight='bold',
             arrowprops=dict(arrowstyle='->', color='#f59e0b', lw=2))
 
@@ -79,7 +79,7 @@ temps = [25, 800, 800, 25]
 carbons = [dao_carbon] * 4
 ax.annotate('', xy=(dao_carbon, 25), xytext=(dao_carbon, 800),
             arrowprops=dict(arrowstyle='<->', color='#10b981', lw=2, linestyle='--'))
-ax.text(dao_carbon + 0.05, 400, 'Heat\\ntreat\\nrange', color='#10b981', fontsize=9)
+ax.text(dao_carbon + 0.05, 400, 'Heat\\\ntreat\\\nrange', color='#10b981', fontsize=9)
 
 ax.set_xlabel('Carbon Content (wt%)', color='white', fontsize=12)
 ax.set_ylabel('Temperature (°C)', color='white', fontsize=12)
@@ -184,7 +184,7 @@ cb2.ax.yaxis.label.set_color('white'); cb2.ax.tick_params(colors='white')
 # Naga dao zone
 rect = plt.Rectangle((40, 200), 30, 80, fill=False, edgecolor='#10b981', linewidth=2, linestyle='--')
 axes[1].add_patch(rect)
-axes[1].text(55, 320, 'Naga dao\nsweet spot', color='#10b981', ha='center', fontsize=10, fontweight='bold')
+axes[1].text(55, 320, 'Naga dao\\nsweet spot', color='#10b981', ha='center', fontsize=10, fontweight='bold')
 
 axes[1].set_xlabel('Carbon Content (%×100)', color='white', fontsize=11)
 axes[1].set_ylabel('Temper Temperature (°C)', color='white', fontsize=11)
@@ -312,7 +312,7 @@ plt.suptitle('Blade Edge Retention: Sharpness vs Durability', color='white', fon
 plt.tight_layout()
 plt.show()
 
-print(f"\\nBest AVERAGE performance over 1000 cuts: {max(avg_sharpnesses, key=lambda x: x[1])[0]}")
+print(f"\\\nBest AVERAGE performance over 1000 cuts: {max(avg_sharpnesses, key=lambda x: x[1])[0]}")
 print(f"Longest useful life: {max(useful_lifetimes, key=lambda x: x[1])[0]}")`,
       challenge: 'Add a "resharpening" event every 500 cuts (sharpness jumps back to 90% of original). Which blade benefits most from periodic resharpening? How does this change the ranking?',
       successHint: 'Edge retention analysis confirms what Naga blacksmiths know empirically: a moderately hard blade with a working-angle bevel provides the best all-day performance. Peak sharpness matters less than sustained sharpness.',
@@ -380,7 +380,7 @@ for i, temp in enumerate(temps):
 
 # Zone labels
 zones = [
-    (300, 'Black heat\n(no glow)', 'white'),
+    (300, 'Black heat\\n(no glow)', 'white'),
     (550, 'Faint red', 'white'),
     (700, 'Dark cherry', 'white'),
     (800, 'Cherry red', 'black'),
@@ -416,7 +416,7 @@ operations = [
 ]
 for i, (name, lo, hi, color) in enumerate(operations):
     axes[1,0].barh(i, hi-lo, left=lo, color=color, height=0.6, edgecolor='white', linewidth=0.5)
-    axes[1,0].text(lo + (hi-lo)/2, i, f'{name}\n{lo}-{hi}°C', ha='center', va='center', color='white', fontsize=8, fontweight='bold')
+    axes[1,0].text(lo + (hi-lo)/2, i, f'{name}\\n{lo}-{hi}°C', ha='center', va='center', color='white', fontsize=8, fontweight='bold')
 
 axes[1,0].set_xlabel('Temperature (°C)', color='white', fontsize=10)
 axes[1,0].set_title('Forging Operations by Temperature', color='white', fontsize=12, fontweight='bold')
@@ -549,7 +549,7 @@ print("  Wrought iron: long straight sparks, few forks → NOT good for dao")
 print("  Mild steel: some forking, moderate length → usable but soft")
 print("  Medium carbon: bushy forks, bright bursts → IDEAL for dao")
 print("  High carbon: complex flowers, very bright → good edge but brittle")
-print("\\nThe blacksmith grinds a corner of scrap metal and reads its identity")
+print("\\\nThe blacksmith grinds a corner of scrap metal and reads its identity")
 print("in the spark pattern — no laboratory needed, just trained eyes.")`,
       challenge: 'Simulate testing an unknown metal sample. Generate a random carbon content between 0.1% and 1.0%, show the spark pattern, and ask the user to guess the carbon content from the visual pattern.',
       successHint: 'Spark testing demonstrates that traditional metallurgical knowledge is grounded in real physics. The spark pattern directly reflects carbon content because carbon\'s combustion energy drives the micro-explosions visible as forks and flowers.',

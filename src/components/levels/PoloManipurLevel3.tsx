@@ -160,7 +160,7 @@ for idx, (title, masses, v0, e) in enumerate(scenarios):
     x = range(len(masses))
     ax.bar(x, final, color=colors_b[:len(masses)], edgecolor='white', linewidth=0.5)
     ax.set_xticks(x)
-    ax.set_xticklabels([f'Ball {i+1}\\n{m:.2f}kg' for i, m in enumerate(masses)], fontsize=7, color='white')
+    ax.set_xticklabels([f'Ball {i+1}\\\n{m:.2f}kg' for i, m in enumerate(masses)], fontsize=7, color='white')
     ax.set_title(title, color='white', fontsize=10, fontweight='bold')
     ax.set_ylabel('Final velocity (m/s)', color='white')
     ax.tick_params(colors='white')
@@ -171,7 +171,7 @@ for idx, (title, masses, v0, e) in enumerate(scenarios):
     p_after = sum(m*v for m, v in zip(masses, final))
     ke_before = 0.5 * masses[0] * v0**2
     ke_after = sum(0.5*m*v**2 for m, v in zip(masses, final))
-    ax.text(0.98, 0.95, f'p: {p_after:.2f}/{p_before:.2f}\nKE: {ke_after:.1f}/{ke_before:.1f}',
+    ax.text(0.98, 0.95, f'p: {p_after:.2f}/{p_before:.2f}\\nKE: {ke_after:.1f}/{ke_before:.1f}',
             transform=ax.transAxes, ha='right', va='top', color='white', fontsize=7,
             bbox=dict(boxstyle='round', facecolor='#374151', alpha=0.8))
 
@@ -180,7 +180,7 @@ plt.tight_layout()
 plt.savefig('collision_chain.png', dpi=100, bbox_inches='tight', facecolor='#1f2937')
 plt.show()
 
-print("=== Collision Chain Results ===\\n")
+print("=== Collision Chain Results ===\\\n")
 for title, masses, v0, e in scenarios:
     history = collision_chain(masses, v0, e)
     final = history[-1]
@@ -501,7 +501,7 @@ ax1.tick_params(colors='white')
 ax1.legend(facecolor='#374151', edgecolor='#4b5563', labelcolor='white')
 
 # Win probabilities
-labels = [f'{team_a.name}\nwins', 'Draw', f'{team_b.name}\nwins']
+labels = [f'{team_a.name}\\nwins', 'Draw', f'{team_b.name}\\nwins']
 sizes = [results['a_wins'], results['draws'], results['b_wins']]
 colors_pie = ['#34d399', '#f59e0b', '#ef4444']
 ax2.bar(labels, sizes, color=colors_pie, edgecolor='white', linewidth=0.5)
@@ -515,11 +515,11 @@ plt.tight_layout()
 plt.savefig('monte_carlo.png', dpi=100, bbox_inches='tight', facecolor='#1f2937')
 plt.show()
 
-print(f"=== Monte Carlo Results ({n_matches} matches) ===\\n")
+print(f"=== Monte Carlo Results ({n_matches} matches) ===\\\n")
 print(f"{team_a.name} wins: {results['a_wins']} ({results['a_wins']/n_matches:.1%})")
 print(f"{team_b.name} wins: {results['b_wins']} ({results['b_wins']/n_matches:.1%})")
 print(f"Draws: {results['draws']} ({results['draws']/n_matches:.1%})")
-print(f"\\nAvg score: {np.mean(total_scores):.1f} total goals per match")
+print(f"\\\nAvg score: {np.mean(total_scores):.1f} total goals per match")
 print(f"Avg margin: {np.mean(np.abs(score_diffs)):.1f} goals")`,
       challenge: 'What accuracy improvement would Assam need to have a 50/50 chance against Manipur? Sweep accuracy from 0.40 to 0.50 and find the crossover point.',
       successHint: 'Monte Carlo simulation is used in finance (option pricing), physics (particle interactions), engineering (reliability analysis), and AI (game playing). You just applied it to predict sports outcomes.',

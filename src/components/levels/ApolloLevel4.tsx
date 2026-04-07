@@ -90,7 +90,7 @@ csm = Spacecraft("CSM (Columbia)", 11_900, 18_410, sps_engine)
 lm_descent = Spacecraft("LM descent stage", 2_150, 8_200, dps_engine)
 lm_ascent = Spacecraft("LM ascent stage", 2_150, 2_353, aps_engine)
 
-print("=== Orbital Transfer Calculator — System Architecture ===\\n")
+print("=== Orbital Transfer Calculator — System Architecture ===\\\n")
 print("Orbits:")
 print(f"  {leo}")
 print(f"  {lunar_orbit}")
@@ -188,7 +188,7 @@ phases = [
 
 total_dv = sum(p[1] for p in phases)
 
-print("=== Apollo Mission Delta-V Budget ===\\n")
+print("=== Apollo Mission Delta-V Budget ===\\\n")
 print(f"{'Phase':<34} {'Delta-v (m/s)':>14} {'Coast (hr)':>11}")
 print("-" * 61)
 for name, dv, coast in phases:
@@ -197,10 +197,10 @@ for name, dv, coast in phases:
 print("-" * 61)
 print(f"{'TOTAL':34} {total_dv:>12.0f}")
 
-print(f"\\nTranslunar coast time: {t_coast/3600:.1f} hours ({t_coast/3600/24:.1f} days)")
+print(f"\\\nTranslunar coast time: {t_coast/3600:.1f} hours ({t_coast/3600/24:.1f} days)")
 
 # Compare with Apollo 11 actual values
-print("\\n--- Validation against Apollo 11 ---")
+print("\\\n--- Validation against Apollo 11 ---")
 apollo_actual = {"TLI": 3100, "LOI": 900, "Descent": 1700, "Ascent": 1900, "TEI": 900}
 computed = {"TLI": dv_tli, "LOI": dv_loi, "Descent": dv_descent,
             "Ascent": dv_ascent, "TEI": dv_tei}
@@ -302,7 +302,7 @@ def apollo_throttle(t, alt, vel):
 initial_alt = 15_000  # m
 initial_vel = 50       # m/s downward at start of powered descent
 
-print("=== Powered Descent Simulator ===\\n")
+print("=== Powered Descent Simulator ===\\\n")
 
 # Normal descent
 result = simulate_descent(initial_alt, initial_vel, apollo_throttle)
@@ -317,14 +317,14 @@ print(f"  Fuel margin:        {result['fuel'][idx]/FUEL_MASS*100:.1f}%")
 result_alarm = simulate_descent(initial_alt, initial_vel, apollo_throttle,
                                 alarm_time=120, alarm_duration=8)
 idx_a = np.argmin(result_alarm["alt"])
-print("\\n--- 1202 alarm scenario (8s pause at t=120) ---")
+print("\\\n--- 1202 alarm scenario (8s pause at t=120) ---")
 print(f"  Touchdown time:     {result_alarm['t'][idx_a]:.0f} s")
 print(f"  Touchdown velocity: {result_alarm['vel'][idx_a]:.1f} m/s")
 print(f"  Fuel remaining:     {result_alarm['fuel'][idx_a]:.0f} kg")
 print(f"  Fuel margin:        {result_alarm['fuel'][idx_a]/FUEL_MASS*100:.1f}%")
 
 fuel_penalty = result["fuel"][idx] - result_alarm["fuel"][idx_a]
-print(f"\\n  Extra fuel used due to alarm: {fuel_penalty:.0f} kg")
+print(f"\\\n  Extra fuel used due to alarm: {fuel_penalty:.0f} kg")
 print(f"  Apollo 11 actual fuel at touchdown: ~360 kg (13 seconds of hover)")
 if result_alarm["vel"][idx_a] < 2.0:
     print("  Status: SOFT LANDING — mission success")
@@ -426,10 +426,10 @@ for name, tm, dv, note in phases:
 
 print("-" * 68)
 print(f"Total: {t/3600:.1f}h ({t/3600/24:.1f}d) | delta-v: {total_dv} m/s")
-print(f"\\nFuel remaining:")
+print(f"\\\nFuel remaining:")
 for tank, f in fuel_left.items():
     print(f"  {tank:<10}: {f:>7.0f} kg")
-print(f"\\nApollo 11 actual: 195.3h | Computed: {t/3600:.1f}h")`,
+print(f"\\\nApollo 11 actual: 195.3h | Computed: {t/3600:.1f}h")`,
       challenge: 'Add a contingency analysis: what if LOI requires 10% more delta-v than planned (rougher capture trajectory)? Recompute the entire timeline downstream — does the CSM have enough fuel for TEI? What is the remaining margin? This is exactly the analysis Mission Control ran for every "what if" scenario.',
       successHint: 'You have built a complete mission computer — tracking mass, fuel, time, and delta-v through every phase of an Apollo-class mission. The sequential computation, where each phase inherits state from the previous one, is exactly how real mission planning software works. Your timeline matches Apollo 11 within a few hours — remarkably close for a simplified model.',
     },
@@ -479,7 +479,7 @@ for qty, (comp, act) in validation.items():
     errors.append(err)
     print(f"{qty:<28} {comp:>9.1f} {act:>9.1f} {err:>5.1f}%")
 
-print(f"\\nMean error: {np.mean(errors):.1f}% | Max: {np.max(errors):.1f}%")
+print(f"\\\nMean error: {np.mean(errors):.1f}% | Max: {np.max(errors):.1f}%")
 print(f"Status: {'PASS' if np.max(errors) < 20 else 'REVIEW'}")
 
 print("""
@@ -513,7 +513,7 @@ skills = [
 ]
 for s, d in skills:
     print(f"  * {s}: {d}")
-print("\\n" + "=" * 64)
+print("\\\n" + "=" * 64)
 print("         Project completed — all systems nominal.")
 print("=" * 64)`,
       challenge: 'Turn this into a real portfolio piece. Add a section comparing your simplified model to what NASA actually used (patched conics, numerical integration, Monte Carlo trajectory analysis). List three specific ways you would improve the model with another week of work. This document — plus your code from all four levels — demonstrates real aerospace engineering skills.',

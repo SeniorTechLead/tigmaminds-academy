@@ -82,7 +82,7 @@ class HelmetImpactModel:
             # Approximate hemisphere shell volume
             r_outer = self.head_radius + sum(l['thickness'] for l in self.layers)
 
-print("\n[Full visualization in playground]")`,
+print("\\n[Full visualization in playground]")`,
       challenge: 'Add a fourth layer: a MIPS (Multi-directional Impact Protection System) liner between the EPS foam and comfort padding. MIPS adds ~3mm of low-friction material with very low crush stress (10 kPa). How does it affect the total energy capacity?',
       successHint: 'The model definition is the foundation. We have established the physical parameters, test standards, and energy budget. Next steps will add dynamic simulation, deceleration curves, and HIC calculation to turn this into a real safety analyzer.',
     },
@@ -154,7 +154,7 @@ def simulate_impact(head_mass, drop_height, foam_thickness, foam_plateau_stress,
 
         F_total = F_foam + F_shell
 
-print("\n[Full visualization in playground]")`,
+print("\\n[Full visualization in playground]")`,
       challenge: 'Vary foam thickness from 15mm to 35mm for the medium foam design. Find the minimum thickness that passes CPSC. This is the thickness-weight tradeoff every helmet designer faces.',
       successHint: 'You now have a dynamic impact simulator. The deceleration profile is what safety labs actually measure with accelerometers during certification. Next we add the HIC calculation that determines pass/fail in most modern standards.',
     },
@@ -234,7 +234,7 @@ def eps_foam_stress_scalar(strain, plateau_stress):
     elif strain < 0.7:
         pass
 
-print("\n[Full visualization in playground]")`,
+print("\\n[Full visualization in playground]")`,
       challenge: 'Implement HIC36 (36ms window) in addition to HIC15. For which helmet designs do the two metrics diverge most? HIC36 is used in some automotive standards and tends to give higher values for longer-duration impacts.',
       successHint: 'HIC is the industry-standard safety metric used by every helmet manufacturer and automobile safety engineer. You just implemented the exact same calculation that NHTSA and CPSC labs use. Next we will use this tool to systematically optimize a helmet design.',
     },
@@ -305,7 +305,7 @@ def quick_simulate(head_mass, drop_height, foam_thickness, plateau_stress, conta
         else:
             hic = duration * (avg_a ** 2.5)
 
-print("\n[Full visualization in playground]")`,
+print("\\n[Full visualization in playground]")`,
       challenge: 'Add a third design variable: contact area (which depends on shell stiffness and anvil shape). Scan contact areas from 40 cm^2 to 120 cm^2 and show how the optimal density-thickness combination shifts. This reveals why shell design matters as much as foam design.',
       successHint: 'You have just performed the same parametric optimization that professional helmet engineers do with commercial FEA software. The design map visualization is a standard tool in engineering — it shows at a glance where the safe designs live and where the boundaries are.',
     },
@@ -374,7 +374,7 @@ def full_simulate(head_mass, drop_height, foam_thick, plateau_stress, contact_ar
         'a_g': a_arr,
     }
 
-print("\n[Full visualization in playground]")`,
+print("\\n[Full visualization in playground]")`,
       challenge: 'Add a "wet" condition where the shell-foam interface has reduced friction, allowing the helmet to slide on the anvil. Model this as a 30% increase in contact area (force spreads more). How does this affect pass/fail rates? Some standards require wet testing.',
       successHint: 'Multi-condition certification is why helmet design is genuinely difficult. A design that is optimal for one condition is often suboptimal for another. The art of helmet engineering is finding the best compromise across ALL conditions — exactly what the woodpecker skull achieves naturally.',
     },
@@ -445,7 +445,7 @@ def simulate_helmet(head_mass, drop_height, foam_thick, plateau_stress,
 
         a = F_total / head_mass
 
-print("\n[Full visualization in playground]")`,
+print("\\n[Full visualization in playground]")`,
       challenge: 'Add a cost model: dense foam costs more than light foam, the hyoid reinforcement adds $3 per helmet, and viscoelastic materials add $5. Find the design that minimizes cost while passing all tests. This is the real engineering optimization — safety at minimum cost.',
       successHint: 'You have built a complete Helmet Safety Analyzer from scratch — impact physics, dynamic simulation, HIC calculation, multi-condition testing, and bio-inspired optimization. This is genuine engineering work. The woodpecker story that started as a children\'s tale has become a masterclass in biomechanics, materials science, and computational engineering.',
     },

@@ -203,7 +203,7 @@ for ax, thresh in zip(axes[1:], [80, 110, 140]):
     mask = field[:, :, 1] > thresh
     ax.imshow(mask, cmap='Greens')
     detected = np.sum(mask)
-    ax.set_title(f'Green > {thresh}\\n({detected} pixels)', color='white', fontsize=9)
+    ax.set_title(f'Green > {thresh}\\\n({detected} pixels)', color='white', fontsize=9)
 
 for ax in axes:
     ax.tick_params(colors='gray', labelsize=6)

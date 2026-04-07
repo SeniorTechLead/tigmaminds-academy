@@ -77,7 +77,7 @@ class LightPollutionMapper:
         self.region = region
         self.resolution = resolution_deg  # degrees per pixel
 
-print("\n[Full visualization in playground]")`,
+print("\\n[Full visualization in playground]")`,
       challenge: 'Add terrain data to the mapper: approximate elevation for each grid cell (Ziro at ~1500m, Brahmaputra valley at ~50m, Tawang at ~3048m). Higher elevation means less atmosphere above, which affects both natural sky brightness and light pollution propagation.',
       successHint: 'Good project design means thinking through the entire pipeline before writing a single line of processing code. The architecture you defined here will guide the next five mini-lessons.',
     },
@@ -144,7 +144,7 @@ class VIIRSSimulator:
 
         # Add background: natural airglow + scattered galactic light
 
-print("\n[Full visualization in playground]")`,
+print("\\n[Full visualization in playground]")`,
       challenge: 'Add a cloud masking step: generate random cloud cover (more clouds during monsoon months), flag contaminated pixels, and show how monthly compositing with cloud rejection produces cleaner maps than simple averaging.',
       successHint: 'Working with satellite imagery is the foundation of modern environmental monitoring. The same skills apply to deforestation tracking, urbanization mapping, and disaster response. Nighttime lights are just one application of a universal remote sensing workflow.',
     },
@@ -211,7 +211,7 @@ def radiance_to_bortle(radiance_nw, elevation_km=0, aerosol_tau=0.15):
 radiances = np.logspace(-1, 3, 500)  # 0.1 to 1000 nW/cm²/sr
 
 
-print("\n[Full visualization in playground]")`,
+print("\\n[Full visualization in playground]")`,
       challenge: 'Implement the distance-dependent light pollution model: for each pixel, sum the contributions from ALL cities weighted by 1/d^2.5, then convert. Show how Itanagar (close) contributes more to Ziro\'s sky brightness than Guwahati (far) despite Guwahati being much larger.',
       successHint: 'The radiance-to-magnitude conversion is where physics meets practical measurement. Getting it right means your maps can be validated against ground-truth SQM readings. Getting it wrong means your Bortle classifications are meaningless.',
     },
@@ -278,7 +278,7 @@ def rad_to_sb(rad, elev_km=0.5, tau=0.12):
 
 sky_brightness = rad_to_sb(radiance)
 
-print("\n[Full visualization in playground]")`,
+print("\\n[Full visualization in playground]")`,
       challenge: 'Add gradient analysis: compute |grad(sky_brightness)| across the map and identify the steepest gradient zones. These are the boundaries of light domes. Overlay gradient vectors on the contour map to show the "direction of darkness" — which way to travel from any point to find darker sky.',
       successHint: 'Contour maps transform raw data into spatial intelligence. A policymaker who cannot read a data table can immediately understand a contour map showing that Ziro Valley sits inside a protective ring of darkness that is being eroded from the south.',
     },
@@ -345,7 +345,7 @@ def pixel_trend(time_series, years):
     """Fit linear trend to a pixel's time series. Returns slope and R²."""
     x = years - years[0]
 
-print("\n[Full visualization in playground]")`,
+print("\\n[Full visualization in playground]")`,
       challenge: 'Add seasonal decomposition: separate the annual signal into trend + seasonal + residual components. NE India has strong monsoon seasonality that affects satellite measurements. Show the monsoon dip in "measurable" radiance (clouds block ground lights) and demonstrate that deseasonalized trends give more accurate growth rates.',
       successHint: 'Trend analysis turns snapshots into narratives. A single map shows where light pollution is. A trend analysis shows where it is going. Projections with policy scenarios turn science into action items for decision-makers.',
     },
@@ -412,7 +412,7 @@ class DarkSiteAssessment:
         if self.city_dist < 50:
             recs.append(f"SHIELD: {self.nearest_city} ({self.city_dist:.0f}km) needs lighting ordinance")
 
-print("\n[Full visualization in playground]")`,
+print("\\n[Full visualization in playground]")`,
       challenge: 'Add an economic analysis: estimate the eco-tourism potential of each dark sky site based on accessibility, existing infrastructure, and sky quality. Calculate the cost-benefit ratio of lighting ordinance enforcement versus tourism revenue from astro-tourism. Real dark sky reserves like NamibRand and Aoraki Mackenzie generate significant economic returns.',
       successHint: 'You have built a complete scientific tool from first principles: physics, data processing, spatial analysis, trend detection, and policy recommendations. This is real-world conservation science. The same methodology is used by professional researchers, but you built it from scratch and understand every step. That is the difference between using a tool and being an engineer.',
     },

@@ -90,7 +90,7 @@ print(f"Equilibrium: P={p_eq:.1f}₹, Q={q_eq:.0f}kg")
 print(f"Consumer surplus: ~{CS:.0f}₹")
 print(f"Producer surplus: ~{PS:.0f}₹")
 print(f"Total surplus: ~{CS+PS:.0f}₹")
-print(f"\\nAfter bad harvest: P={p_eq_new:.1f}₹ (+{p_eq_new-p_eq:.1f}), Q={q_eq_new:.0f}kg ({q_eq_new-q_eq:.0f})")`,
+print(f"\\\nAfter bad harvest: P={p_eq_new:.1f}₹ (+{p_eq_new-p_eq:.1f}), Q={q_eq_new:.0f}kg ({q_eq_new-q_eq:.0f})")`,
       challenge: 'Model a demand shock: a festival increases demand by 50%. Shift the demand curve right and find the new equilibrium. Plot both the old and new equilibria.',
       successHint: 'Supply and demand curves are the most fundamental graphs in economics. You just visualised market equilibrium, surplus, and supply shocks — the tools economists use to analyse real markets.',
     },
@@ -178,7 +178,7 @@ plt.savefig('basket.png', dpi=100, bbox_inches='tight', facecolor='#1f2937')
 plt.show()
 
 # Top associations
-print("=== Top Product Associations ===\\n")
+print("=== Top Product Associations ===\\\n")
 pairs = []
 for i in range(n_products):
     for j in range(i+1, n_products):
@@ -337,8 +337,8 @@ plt.show()
 idx_max_profit = np.argmax(profit)
 print(f"Revenue-maximising price: {p_revenue_max:.2f}₹ → Revenue = {p_revenue_max*(a-b*p_revenue_max):.0f}₹")
 print(f"Profit-maximising price:  {p_profit_max:.2f}₹ → Profit = {profit[idx_max_profit]:.0f}₹")
-print(f"\\nAt max profit: Q = {quantity[idx_max_profit]:.0f}kg, Rev = {revenue[idx_max_profit]:.0f}₹, Margin = {margin_pct[idx_max_profit]:.1f}%")
-print(f"\\nKey insight: profit is maximised at a HIGHER price than revenue!")
+print(f"\\\nAt max profit: Q = {quantity[idx_max_profit]:.0f}kg, Rev = {revenue[idx_max_profit]:.0f}₹, Margin = {margin_pct[idx_max_profit]:.1f}%")
+print(f"\\\nKey insight: profit is maximised at a HIGHER price than revenue!")
 print(f"This is because costs are avoided on the units you don't sell.")`,
       challenge: 'If the vendor has fixed costs of 500₹/day (rent + transport), how does this change the break-even point? At what minimum price does the vendor make any profit at all?',
       successHint: 'Revenue optimisation is used by every business. Airlines, hotels, and ride-sharing apps use dynamic versions of this model to adjust prices in real time. You just derived the fundamental theory.',

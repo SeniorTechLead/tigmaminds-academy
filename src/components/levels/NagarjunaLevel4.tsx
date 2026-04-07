@@ -112,7 +112,7 @@ for r, name in zip(results, months):
     print(f"{name:<5} {r['volume']:>9.1f} {r['level']:>9.1f} {r['head']:>8.1f} "
           f"{r['power_mw']:>6.0f}MW {r['energy_gwh']:>6.1f} {r['inflow']:>6.1f}")
 
-print(f"\nTotal annual energy: {total_energy:,.0f} GWh")
+print(f"\\nTotal annual energy: {total_energy:,.0f} GWh")
 cap_factor = total_energy / (816 * 8.76)
 print(f"Capacity factor: {cap_factor:.1%}")
 print(f"Year-end reservoir: {results[-1]['volume']:.1f} km^3 "
@@ -235,7 +235,7 @@ for hour, demand in enumerate(hourly_demand_frac):
     daily_energy += best_p / 1000  # GWh
     print(f"{hour:>4}:00 {demand*100:>6.0f}% {Q:>6.0f} {best_n:>9} {best_p:>8.1f} MW")
 
-print(f"\nDaily energy: {daily_energy:.1f} GWh")`,
+print(f"\\nDaily energy: {daily_energy:.1f} GWh")`,
       challenge: 'What if 2 turbines are shut for maintenance? Rerun the optimization with only 6 available turbines. At what total flow does the 6-turbine plant become bottlenecked (unable to pass all available water)? How much energy is lost per day during peak monsoon?',
       successHint: 'Unit commitment optimization is solved daily by every power plant in the world. The same mathematical framework applies to thermal plants (which turbines to fire up), wind farms (which turbines to curtail), and battery storage systems (when to charge and discharge).',
     },
@@ -592,7 +592,7 @@ for r in results:
           f"{r['env']:>5.0f} {r['irrig']:>6.0f} {r['power_flow']:>6.0f} "
           f"{r['flood']:>6.0f} {r['power_mw']:>5.0f} {r['energy']:>5.1f}")
 
-print(f"\nAnnual energy: {energy:,.0f} GWh")
+print(f"\\nAnnual energy: {energy:,.0f} GWh")
 print(f"Annual revenue: \{revenue:,.0f}")
 print(f"Capacity factor: {energy / (816 * 8.76):.1%}")
 print(f"Year-end storage: {results[-1]['vol']:.1f} km^3 ({results[-1]['vol']/11.5*100:.0f}%)")

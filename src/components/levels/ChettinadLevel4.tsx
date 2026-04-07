@@ -705,12 +705,12 @@ class TradeDashboard:
 
         # Financial summary
         cash_pct = self.cash / self.total_capital * 100
-        print(f"\\n  FINANCIAL POSITION:")
+        print(f"\\\n  FINANCIAL POSITION:")
         print(f"    Cash: ${self.cash:,.0f} ({cash_pct:.0f}% of capital)")
         print(f"    Active shipments: {self.active_shipments}")
 
         # Market signals
-        print(f"\\n  MARKET SIGNALS:")
+        print(f"\\\n  MARKET SIGNALS:")
         header = "    Spice        Price  6mo Avg  Signal       Deviation"
         print(header)
         print("    " + "-" * 52)
@@ -729,7 +729,7 @@ class TradeDashboard:
                 sell_list.append(spice)
 
         # Inventory status
-        print(f"\\n  INVENTORY STATUS:")
+        print(f"\\\n  INVENTORY STATUS:")
         header2 = "    Spice        Stock(kg)  Capacity  Fill%   Status"
         print(header2)
         print("    " + "-" * 48)
@@ -742,7 +742,7 @@ class TradeDashboard:
                   f"{fill:>4.0f}%   {status}  {alert}")
 
         # Recommendations
-        print(f"\\n  RECOMMENDATIONS:")
+        print(f"\\\n  RECOMMENDATIONS:")
         if buy_list:
             print(f"    BUY: {', '.join(buy_list)} (prices below average)")
         if sell_list:
@@ -750,7 +750,7 @@ class TradeDashboard:
 
         # Risk summary
         total_risk = 1 - np.prod([1 - r for r in self.route_risks.values()])
-        print(f"\\n  RISK EXPOSURE:")
+        print(f"\\\n  RISK EXPOSURE:")
         print(f"    Portfolio risk index: {total_risk:.1%}")
         for route, risk in self.route_risks.items():
             print(f"    {route}: {risk:.1%} loss probability")
@@ -761,7 +761,7 @@ class TradeDashboard:
         if len(buy_list) > 0: score += 1
         if total_risk < 0.10: score += 1
         overall = ["CAUTION", "MODERATE", "FAVORABLE", "EXCELLENT"][score]
-        print(f"\\n  OVERALL TRADING CONDITIONS: {overall}")
+        print(f"\\\n  OVERALL TRADING CONDITIONS: {overall}")
         print("=" * 60)
 
 dashboard = TradeDashboard()

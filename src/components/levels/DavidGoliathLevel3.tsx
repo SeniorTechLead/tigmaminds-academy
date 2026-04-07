@@ -241,7 +241,7 @@ materials = [(0.1, 'Clay/tissue'), (0.3, 'Stone on bone'),
 for e, name in materials:
     ea = KE_initial * (1 - e**2)
     plt.plot(e, ea, 'wo', markersize=8)
-    plt.annotate(f'{name}\\n{ea:.1f} J absorbed',
+    plt.annotate(f'{name}\\\n{ea:.1f} J absorbed',
                  xy=(e, ea), xytext=(e+0.05, ea+1),
                  fontsize=9, color='yellow',
                  arrowprops=dict(arrowstyle='->', color='yellow'))
@@ -299,7 +299,7 @@ print(f"Pendulum swings to height: {h_max*100:.2f} cm")
 
 # Step 3: Recover original speed from measured height
 v_recovered = (m_stone + M_bob) / m_stone * np.sqrt(2 * g * h_max)
-print(f"\\nRecovered speed: {v_recovered:.2f} m/s (actual: {v_stone})")
+print(f"\\\nRecovered speed: {v_recovered:.2f} m/s (actual: {v_stone})")
 print(f"Error: {abs(v_recovered - v_stone):.6f} m/s")
 
 # Plot: speed recovery for different swing heights
@@ -385,7 +385,7 @@ plt.title('Kinetic Chain: How Each Segment Adds Speed', fontsize=14)
 plt.grid(axis='y', alpha=0.3)
 plt.show()
 
-print(f"\\nFinal release speed: {v_cumulative:.1f} m/s "
+print(f"\\\nFinal release speed: {v_cumulative:.1f} m/s "
       f"({v_cumulative*3.6:.0f} km/h)")
 print(f"The sling alone contributes {segments[-2][2]*segments[-1][1]:.1f} m/s "
       f"— {100*segments[-2][2]*segments[-1][1]/v_cumulative:.0f}% of total!")`,

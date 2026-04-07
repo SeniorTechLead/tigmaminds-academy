@@ -67,9 +67,9 @@ ax1.tick_params(colors='gray')
 
 # Agriculture origins map (simplified bar chart)
 ax2.set_facecolor('#111827')
-origins = ['Fertile\\nCrescent', 'China', 'Mesoamerica', 'Andes', 'Sub-Saharan\\nAfrica', 'E. North\\nAmerica', 'New Guinea']
+origins = ['Fertile\\\nCrescent', 'China', 'Mesoamerica', 'Andes', 'Sub-Saharan\\\nAfrica', 'E. North\\\nAmerica', 'New Guinea']
 dates_bce = [10000, 8000, 7000, 8000, 5000, 4000, 7000]
-crops = ['Wheat,\\nbarley', 'Rice,\\nmillet', 'Corn,\\nsquash', 'Potato', 'Sorghum,\\nyams', 'Sunflower', 'Taro,\\nbanana']
+crops = ['Wheat,\\\nbarley', 'Rice,\\\nmillet', 'Corn,\\\nsquash', 'Potato', 'Sorghum,\\\nyams', 'Sunflower', 'Taro,\\\nbanana']
 colors_orig = ['#f59e0b', '#ef4444', '#22c55e', '#a855f7', '#3b82f6', '#ec4899', '#14b8a6']
 
 bars = ax2.barh(origins, dates_bce, color=colors_orig, height=0.6)
@@ -246,7 +246,7 @@ import matplotlib.pyplot as plt
 
 # Paddy vs Upland rice comparison
 
-categories = ['Yield\\n(t/ha)', 'Water\\nneeded', 'Labor\\nintensity', 'Weed\\ncontrol', 'Drought\\ntolerance', 'Methane\\nemissions']
+categories = ['Yield\\\n(t/ha)', 'Water\\\nneeded', 'Labor\\\nintensity', 'Weed\\\ncontrol', 'Drought\\\ntolerance', 'Methane\\\nemissions']
 paddy_scores = [9, 2, 7, 9, 2, 2]  # higher = better for all except methane
 upland_scores = [4, 8, 4, 4, 8, 9]
 
@@ -398,7 +398,7 @@ fig.patch.set_facecolor('#1f2937')
 ax1.set_facecolor('#111827')
 ax1.fill_between(weeks, ideal_depth, alpha=0.3, color='#3b82f6', label='Target water depth')
 ax1.plot(weeks, ideal_depth, color='#3b82f6', linewidth=2)
-stages = ['Prep', 'Trans-\\nplant', 'Vegetative growth', 'Flower', 'Grain fill', 'Drain']
+stages = ['Prep', 'Trans-\\\nplant', 'Vegetative growth', 'Flower', 'Grain fill', 'Drain']
 stage_weeks = [1, 3, 7, 12, 16, 19]
 for sw, name in zip(stage_weeks, stages):
     ax1.annotate(name, xy=(sw, ideal_depth[sw] + 0.5), color='white', fontsize=8,
@@ -446,7 +446,7 @@ for i in range(n_terraces):
     for rx in np.linspace(x_start + 0.2, x_start + 1.6, 5):
         ax3.plot([rx, rx], [y_start + 0.3, y_start + 0.8], color='#22c55e', linewidth=1.5)
 
-ax3.annotate('Spring/rain\\nwater input', xy=(0, n_terraces * 1.5 + 1),
+ax3.annotate('Spring/rain\\\nwater input', xy=(0, n_terraces * 1.5 + 1),
              color='#3b82f6', fontsize=10, ha='center')
 ax3.annotate('Gravity flow', xy=(6, 5), color='#3b82f6', fontsize=9, ha='center')
 ax3.set_title('Terraced Paddy System (Cross-Section)', color='white', fontsize=12)
@@ -456,7 +456,7 @@ ax3.axis('off')
 
 # Water use efficiency comparison
 ax4.set_facecolor('#111827')
-methods = ['Traditional\\nflooding', 'AWD\\n(alt. wet/dry)', 'SRI\\n(system of rice)', 'Drip\\nirrigation', 'Upland\\n(rainfed)']
+methods = ['Traditional\\\nflooding', 'AWD\\\n(alt. wet/dry)', 'SRI\\\n(system of rice)', 'Drip\\\nirrigation', 'Upland\\\n(rainfed)']
 water_use = [1500, 1050, 900, 700, 600]  # mm per season
 yield_vals = [5.0, 5.0, 5.5, 4.0, 2.0]  # tonnes/ha
 wue = [y / (w/1000) for y, w in zip(yield_vals, water_use)]  # kg grain per m3 water
@@ -586,7 +586,7 @@ ax4.set_xlabel('Year', color='white')
 ax4.set_ylabel('Traditional varieties in cultivation', color='white')
 ax4.set_title('Biodiversity Loss (and Recent Recovery)', color='white', fontsize=12)
 ax4.tick_params(colors='gray')
-ax4.annotate('Conservation\\nefforts begin', xy=(2010, 400), xytext=(2000, 1500),
+ax4.annotate('Conservation\\\nefforts begin', xy=(2010, 400), xytext=(2000, 1500),
              color='#22c55e', fontsize=9, arrowprops=dict(arrowstyle='->', color='#22c55e'))
 
 plt.tight_layout()
@@ -710,7 +710,7 @@ ax3.set_xlim(2005, 2055)
 
 # Environmental impact reduction
 ax4.set_facecolor('#111827')
-metrics = ['Water use', 'Methane\\nemissions', 'Fertilizer\\nneeded', 'Pesticide\\nuse', 'Biodiversity\\nimpact']
+metrics = ['Water use', 'Methane\\\nemissions', 'Fertilizer\\\nneeded', 'Pesticide\\\nuse', 'Biodiversity\\\nimpact']
 current_impact = [100, 100, 100, 100, 100]
 future_impact = [60, 40, 70, 50, 30]  # % of current
 

@@ -170,7 +170,7 @@ for ax, (n, name, color) in zip(axes, polygons):
             alpha=0.4)
 
     interior = (n - 2) * 180 / n
-    ax.set_title(f'{name}\\n{interior:.0f} per angle',
+    ax.set_title(f'{name}\\\n{interior:.0f} per angle',
                  fontsize=10)
     ax.set_xlim(-1.3, 1.3); ax.set_ylim(-1.3, 1.3)
     ax.set_aspect('equal'); ax.axis('off')
@@ -247,7 +247,7 @@ ax.set_aspect('equal'); ax.axis('off')
 ax.set_title('Hexagonal Tessellation', fontsize=13)
 plt.show()
 
-print("\\nOnly 3 regular polygons tile alone: 3, 4, 6 sides.")`,
+print("\\\nOnly 3 regular polygons tile alone: 3, 4, 6 sides.")`,
       challenge: 'Create a tessellation using octagons and squares together. Place octagons on a grid and fill the gaps with small squares. Hint: an octagon has interior angle 135 degrees. Two octagons plus one square at a vertex: 135 + 135 + 90 = 360.',
       successHint: 'Tessellation is where art meets arithmetic. The 360-degree rule is a simple but powerful constraint that determines which patterns can fill space — from monastery floors to honeycombs to crystal structures.',
     },

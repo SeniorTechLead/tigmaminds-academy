@@ -853,7 +853,7 @@ for name, warming in scenarios.items():
     T_2085 = base_temp + warming[6]
     sr = sex_ratio(T_2085)
     resilient &= (sr > 0.3) & (sr < 0.7) & (slope > 3) & (slope < 20)
-print(f"\\nClimate-resilient sites (viable under ALL scenarios in 2085):")
+print(f"\\\nClimate-resilient sites (viable under ALL scenarios in 2085):")
 print(f"  {resilient.sum()} cells ({resilient.sum()/(size*size)*100:.1f}% of landscape)")
 if resilient.sum() > 0:
     resilient_elevations = elevation[resilient]
@@ -1020,7 +1020,7 @@ plt.colorbar(im, ax=ax, label='% Female')
 # Plot 3: Intervention comparison
 ax = axes[0, 2]
 ax.set_facecolor('#111827')
-interventions = ['None', 'Shade\n(-2°C)', 'Fence\n(-0.3 risk)', 'Both']
+interventions = ['None', 'Shade\\n(-2°C)', 'Fence\\n(-0.3 risk)', 'Both']
 comps = [composite, comp_shade, comp_fence, comp_both]
 viable_areas = [((sr > 0.3) & (sr < 0.7)).mean()*100 for sr in [sex_ratio, sr_shade, sr_fence, sr_both]]
 mean_scores = [c.mean() for c in comps]
@@ -1088,13 +1088,13 @@ plt.tight_layout()
 plt.show()
 
 print("=== NEST SITE SELECTOR: COMPLETE ANALYSIS ===")
-print(f"\\nTop 5 recommended sites:")
+print(f"\\\nTop 5 recommended sites:")
 for i, s in enumerate(top_sites[:5]):
     print(f"  #{i+1}: Score={s['score']:.3f}, Elev={s['elevation']:.0f}m, Temp={s['temperature']:.1f}°C")
-print(f"\\nIntervention analysis:")
+print(f"\\\nIntervention analysis:")
 for name, va in zip(interventions, viable_areas):
     print(f"  {name.replace(chr(10),' ')}: {va:.0f}% viable area")
-print(f"\\nConservation recommendations:")
+print(f"\\\nConservation recommendations:")
 best_intervention = ['None', 'Shade', 'Fence', 'Both'][np.argmax(viable_areas)]
 print(f"  Best single intervention: {best_intervention}")
 print(f"  Most weight-sensitive factor: {w_names[np.argmax(np.abs(sensitivities))]}")

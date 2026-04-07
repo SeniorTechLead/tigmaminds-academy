@@ -91,7 +91,7 @@ def gothic_arch_voussoirs(span_m, height_m, n_voussoirs_per_side=12, thickness_m
     # Summary
     total_stones = 2 * n_voussoirs_per_side + 1  # +1 for keystone
     total_mass = total_stones * (voussoirs[0]["width"]/1000 * thickness_m * 0.5) * 2500
-    print(f"\\nTotal voussoirs (both sides + keystone): {total_stones}")
+    print(f"\\\nTotal voussoirs (both sides + keystone): {total_stones}")
     print(f"Estimated total arch mass: {total_mass:.0f} kg")
 
     return voussoirs
@@ -100,7 +100,7 @@ def gothic_arch_voussoirs(span_m, height_m, n_voussoirs_per_side=12, thickness_m
 voussoirs = gothic_arch_voussoirs(span_m=8.0, height_m=12.0, n_voussoirs_per_side=14)
 
 # Compare arch types
-print("\\n=== Arch Type Comparison ===")
+print("\\\n=== Arch Type Comparison ===")
 for name, span, height in [
     ("Romanesque (semicircular)", 8.0, 4.0),
     ("Lancet (narrow pointed)", 6.0, 14.0),
@@ -194,7 +194,7 @@ cathedrals = [
     ("Romanesque (no buttress)", 20, 3.5, 10, False, 0, 0),
 ]
 
-print("=== Cathedral Moment Equilibrium Analysis ===\\n")
+print("=== Cathedral Moment Equilibrium Analysis ===\\\n")
 print(f"{'Cathedral':<26} {'H(m)':>5} {'Thrust':>7} {'M_over':>8} "
       f"{'M_rest':>8} {'FoS':>6} {'Status':>8}")
 print("-" * 72)
@@ -206,7 +206,7 @@ for name, h, t, span, butt, angle, bw in cathedrals:
           f"{r['M_restore_total']:>7.0f} {r['fos']:>5.2f} {status:>8}")
 
 # Show buttress impact
-print("\\n=== Effect of Flying Buttresses (Chartres) ===")
+print("\\\n=== Effect of Flying Buttresses (Chartres) ===")
 for butt_weight in [0, 100, 200, 300, 400, 500]:
     r = moment_analysis(36, 2.5, 16, butt_weight > 0, 55, butt_weight)
     print(f"Buttress weight: {butt_weight:>4} kN  "
@@ -275,7 +275,7 @@ colorants = {
 thickness = 3.0  # mm — typical medieval glass
 
 print("=== Stained Glass Transmission Spectra ===")
-print(f"Glass thickness: {thickness} mm\\n")
+print(f"Glass thickness: {thickness} mm\\\n")
 
 for name, absorbers in colorants.items():
     transmissions = [beer_lambert(w, absorbers, thickness) for w in wavelengths]
@@ -298,7 +298,7 @@ for name, absorbers in colorants.items():
           f"Peak: {peak_wl:.0f}nm ({color}) at {peak_t:.1%}")
 
 # Effect of glass thickness on colour intensity
-print("\\n=== Thickness vs Colour Intensity (Cobalt Blue) ===")
+print("\\\n=== Thickness vs Colour Intensity (Cobalt Blue) ===")
 cobalt = colorants["Cobalt blue"]
 for t in [1, 2, 3, 4, 5, 8, 10]:
     trans = [beer_lambert(w, cobalt, t) for w in wavelengths]
@@ -417,7 +417,7 @@ glass_alpha = 0.04    # stained glass
 wood_alpha = 0.10     # wooden pews
 congregation = 0.60   # seated people absorb well
 
-print("=== Cathedral Acoustics: Sabine RT60 ===\\n")
+print("=== Cathedral Acoustics: Sabine RT60 ===\\\n")
 print(f"{'Cathedral':<20} {'Volume':>8} {'RT60 (empty)':>13} {'RT60 (full)':>12}")
 print("-" * 55)
 
@@ -445,7 +445,7 @@ for name, dims in cathedrals.items():
 
     print(f"{name:<20} {V:>7,} m³ {rt_empty:>10.1f} s {rt_full:>10.1f} s")
 
-print("\\nIdeal RT60: chant 4-6s, organ 3-5s, speech 1-2s")`,
+print("\\\nIdeal RT60: chant 4-6s, organ 3-5s, speech 1-2s")`,
       challenge: 'Sainte-Chapelle is famous for being almost entirely glass (75% of wall area is stained glass windows). Recalculate its RT60 with 75% glass walls. How does replacing stone with glass change the acoustics? Why does Sainte-Chapelle sound "brighter" than Chartres?',
       successHint: 'Acoustic ray tracing and the Sabine equation are the tools that every acoustic engineer uses to design concert halls, recording studios, and lecture theatres. You just applied them to medieval cathedrals — spaces that were designed by intuition and trial-and-error to achieve acoustics that modern engineers struggle to replicate.',
     },
@@ -546,7 +546,7 @@ tasks = {
 
 cp, total, schedule = critical_path(tasks)
 
-print("=== Chartres Cathedral Construction Schedule ===\\n")
+print("=== Chartres Cathedral Construction Schedule ===\\\n")
 print(f"{'Task':<26} {'Dur':>4} {'Start':>6} {'End':>6} {'Float':>6} {'Critical':>9}")
 print("-" * 60)
 
@@ -554,12 +554,12 @@ for name, dur, es, ls, ft, crit in schedule:
     marker = ">>>" if crit else ""
     print(f"{name:<26} {dur:>3}yr {es:>5.0f} {es+dur:>5.0f} {ft:>5.0f}yr {marker:>8}")
 
-print(f"\\nCritical path: {' -> '.join(cp)}")
+print(f"\\\nCritical path: {' -> '.join(cp)}")
 print(f"Minimum construction time: {total:.0f} years")
 print(f"Tasks on critical path: {len(cp)} of {len(tasks)}")
 
 # Compare with actual construction times
-print("\\n=== Historical Construction Durations ===")
+print("\\\n=== Historical Construction Durations ===")
 cathedrals = [
     ("Chartres (rebuild)", 1194, 1220, "Fast — parallel teams"),
     ("Notre-Dame de Paris", 1163, 1345, "182 years — many pauses"),

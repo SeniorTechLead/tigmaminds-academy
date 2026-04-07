@@ -53,7 +53,7 @@ for p in pairs:
     print(f"{p['label']}: σ={p['sig']:.2f} Å, ε={p['eps']:.3f} eV, r_eq={r_eq:.3f} Å")
 
 # Energy vs distance
-print("\\n=== Potential Energy vs Distance (eV) ===")
+print("\\\n=== Potential Energy vs Distance (eV) ===")
 distances = np.arange(2.0, 5.5, 0.25)
 print(f"{'r (Å)':<8}", end="")
 for p in pairs:
@@ -71,7 +71,7 @@ for r in distances:
     print()
 
 # 1D molecular dynamics: chain of 10 Fe atoms with 1 C interstitial
-print("\\n=== 1D MD: Iron Chain with Carbon Interstitial ===")
+print("\\\n=== 1D MD: Iron Chain with Carbon Interstitial ===")
 n_fe = 10
 spacing = 2.55  # Angstroms (equilibrium Fe-Fe)
 positions = np.array([i * spacing for i in range(n_fe)], dtype=float)
@@ -79,7 +79,7 @@ positions = np.array([i * spacing for i in range(n_fe)], dtype=float)
 # Insert carbon at interstitial site (between atom 4 and 5)
 c_pos = 4.5 * spacing
 print(f"Initial Fe spacing: {spacing:.2f} Å")
-print(f"Carbon inserted at: {c_pos:.2f} Å\\n")
+print(f"Carbon inserted at: {c_pos:.2f} Å\\\n")
 
 # Calculate forces and displacements (one relaxation step)
 forces = np.zeros(n_fe)
@@ -97,7 +97,7 @@ for i in range(n_fe):
     disp = forces[i] * 0.1  # simplified: displacement proportional to force
     print(f"Fe-{i:<3} {positions[i]:>9.2f} {r_fc:>9.2f} {forces[i]:>12.4f} {disp:>12.4f} Å")
 
-print("\\nAtoms near the carbon are pushed away — lattice distortion!")
+print("\\\nAtoms near the carbon are pushed away — lattice distortion!")
 print("This local strain field is the atomic origin of solid-solution hardening.")`,
       challenge: 'Extend the simulation to run 100 relaxation steps (update positions by a fraction of the force each step). Track the total energy of the system. Does it decrease? (It should — the system is relaxing toward equilibrium.) What is the final displacement of the atoms nearest to the carbon?',
       successHint: 'You just ran a simplified molecular dynamics simulation — the same technique used by materials scientists to study crack propagation, phase transformations, and surface catalysis. Real MD simulations use millions of atoms and sophisticated potentials (EAM for metals), but the core principle is identical: compute forces from potentials, update positions, repeat.',
@@ -157,7 +157,7 @@ def simulate_turing_1d(n_cells=200, n_steps=2000, Da=0.01, Di=0.05,
 
 # Run simulation
 print("=== Turing Pattern Simulation (1D Damask Model) ===")
-print("Simulating carbon redistribution during slow cooling...\\n")
+print("Simulating carbon redistribution during slow cooling...\\\n")
 
 a, b = simulate_turing_1d()
 
@@ -179,12 +179,12 @@ for i in range(0, len(pattern_line), 50):
 # Statistics
 high_c = np.sum(a > 0.7)
 low_c = np.sum(a < 0.3)
-print(f"\\nCarbide-rich zones: {high_c} cells ({high_c/len(a)*100:.0f}%)")
+print(f"\\\nCarbide-rich zones: {high_c} cells ({high_c/len(a)*100:.0f}%)")
 print(f"Matrix zones:       {low_c} cells ({low_c/len(a)*100:.0f}%)")
 print(f"Band spacing: ~{len(a) / max(1, high_c // 3):.0f} cells")
 
 # Effect of diffusion ratio on pattern
-print("\\n=== Effect of Diffusion Ratio on Pattern ===")
+print("\\\n=== Effect of Diffusion Ratio on Pattern ===")
 print(f"{'Da':>6} {'Di':>6} {'Ratio':>6} {'Bands':>7} {'Spacing':>8} {'Pattern'}")
 print("-" * 55)
 
@@ -203,7 +203,7 @@ for Da, Di in [(0.005, 0.05), (0.01, 0.05), (0.02, 0.05),
     mini = "".join("#" if v > 0.7 else "." for v in a_test[::5])[:30]
     print(f"{Da:>6.3f} {Di:>6.3f} {Di/Da:>5.0f}× {n_bands:>5} {spacing:>7.0f} {mini}")
 
-print("\\nHigher Di/Da ratio → more defined, evenly spaced bands.")
+print("\\\nHigher Di/Da ratio → more defined, evenly spaced bands.")
 print("This matches wootz: slow carbon clustering + fast depletion = clear damask.")`,
       challenge: 'Modify the simulation to 2D (e.g., 50x50 grid) using a 2D Laplacian. What 2D patterns emerge? You should see spots or stripes depending on the parameters. Compare your results to photographs of real wootz damask patterns — the resemblance is striking.',
       successHint: 'You just simulated a Turing pattern — one of the most beautiful results in mathematical biology and materials science. The same equations describe leopard spots, fish stripes, chemical oscillations, and now you know they also describe the damask pattern that made wootz steel legendary.',
@@ -273,7 +273,7 @@ for name, E, H in phases:
     print(f"{name:<28} {E:>6} {H:>6.1f} {hm:>5.0f}nm {hf:>5.0f}nm {Pm:>6.2f}mN {S:>6.2f}")
 
 # Simulated line scan across wootz surface
-print("\\n=== Nano-Indentation Line Scan (50 indents, 2μm spacing) ===")
+print("\\\n=== Nano-Indentation Line Scan (50 indents, 2μm spacing) ===")
 np.random.seed(42)
 n_indents = 50
 band_period = 8  # indents between bands
@@ -300,7 +300,7 @@ for i in range(n_indents):
         print(f"{i*2:>8}μm {H:>7.1f} {E:>7.0f} {phase:>11}  {bar}")
 
 hardness_map = np.array(hardness_map)
-print(f"\\nLine scan statistics:")
+print(f"\\\nLine scan statistics:")
 print(f"  Mean hardness: {np.mean(hardness_map):.1f} GPa")
 print(f"  Carbide bands: {np.mean(hardness_map[hardness_map > 8]):.1f} GPa")
 print(f"  Matrix:        {np.mean(hardness_map[hardness_map < 8]):.1f} GPa")
@@ -361,7 +361,7 @@ route = [
 
 # Normal supply conditions
 print("=== Wootz Steel Trade Route Economics ===")
-print("\\n--- Normal Supply ---")
+print("\\\n--- Normal Supply ---")
 results = simulate_trade_route(route, base_price=1.0)
 print(f"{'Node':<22} {'Added Cost':>10} {'Markup%':>8} {'Price':>8} {'Cum Margin':>10}")
 print("-" * 60)
@@ -369,7 +369,7 @@ for r in results:
     print(f"{r['node']:<22} {r['cost']:>8.1f} {r['markup']:>7.0f}% {r['price']:>7.1f} {r['margin']:>9.0f}%")
 
 # Supply disruption scenarios
-print("\\n=== Impact of Supply Disruptions ===")
+print("\\\n=== Impact of Supply Disruptions ===")
 scenarios = [
     ("Normal supply", 1.0),
     ("Moderate shortage", 0.6),
@@ -386,7 +386,7 @@ for name, supply in scenarios:
     print(f"{name:<22} {final:>10.1f} {final/baseline:>12.1f}×")
 
 # Profit distribution
-print("\\n=== Profit Distribution Along Route ===")
+print("\\\n=== Profit Distribution Along Route ===")
 print("(Who captures the most value?)")
 results = simulate_trade_route(route, 1.0)
 prev_price = 1.0
@@ -467,7 +467,7 @@ for year in years:
     print(f"{combined:>9.1%} {status:<15}")
 
 # Monte Carlo: when does production cease?
-print("\\n=== Monte Carlo: Year of Final Production ===")
+print("\\\n=== Monte Carlo: Year of Final Production ===")
 n_sims = 1000
 cessation_years = []
 
@@ -497,7 +497,7 @@ print(f"Latest (95th pctile):  {np.percentile(cessation_years, 95):.0f}")
 print(f"Historical last production: ~1820 (matches model)")
 
 # What-if analysis
-print("\\n=== What If? Counterfactual Analysis ===")
+print("\\\n=== What If? Counterfactual Analysis ===")
 print("What if one factor had been preserved?")
 for preserved_name in factors:
     years_saved = []

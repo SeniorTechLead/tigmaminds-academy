@@ -258,7 +258,7 @@ for y in depths_test:
 y_c = (Q**2 / g) ** (1/3)
 v_c = Q / y_c
 E_c = specific_energy(y_c, v_c)
-print(f"\nCritical depth: {y_c:.2f} m (Fr = 1.0)")
+print(f"\\nCritical depth: {y_c:.2f} m (Fr = 1.0)")
 print(f"Critical velocity: {v_c:.2f} m/s")
 print(f"Minimum energy: {E_c:.3f} m")
 
@@ -357,7 +357,7 @@ for pos in range(school_size):
 
 avg_drag = total_drag / school_size
 avg_savings = (1 - avg_drag / solo) * 100
-print(f"\nAverage school drag: {avg_drag:.4f} N (savings: {avg_savings:.1f}%)")
+print(f"\\nAverage school drag: {avg_drag:.4f} N (savings: {avg_savings:.1f}%)")
 
 # Migration energy comparison
 print()
@@ -380,7 +380,7 @@ print(f"Distance: {distance} km at {v} m/s")
 print(f"Solo:   {E_solo:.0f} kJ ({E_solo/fat_energy:.0f} g fat)")
 print(f"School: {E_school:.0f} kJ ({E_school/fat_energy:.0f} g fat)")
 print(f"Fat saved per fish: {(E_solo-E_school)/fat_energy:.0f} g")
-print(f"\nFor a school of 10,000 fish:")
+print(f"\\nFor a school of 10,000 fish:")
 print(f"Total fat saved: {(E_solo-E_school)/fat_energy*10000/1000:.0f} kg!")`,
       challenge: 'Model a "rotating leadership" strategy where the leader swaps every 10 minutes. Compare the energy distribution to a fixed-leader school. Does rotating leadership make the school more equitable? What is the optimal rotation period?',
       successHint: 'Schooling hydrodynamics is an active research field with applications in autonomous vehicle platoons (truck convoys save fuel by drafting), drone swarm design, and wind farm layout (wake interactions between turbines). The physics of swimming together transfers directly to engineering challenges.',

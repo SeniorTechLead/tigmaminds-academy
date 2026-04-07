@@ -435,7 +435,7 @@ ax.tick_params(colors='gray')
 # 3. Production statistics
 ax = axes[2]
 ax.set_facecolor('#111827')
-machines = ['Hand\\nknitting', 'Flat\\nmachine', 'Circular\\n(small)', 'Circular\\n(large)', 'Whole\\ngarment']
+machines = ['Hand\\\nknitting', 'Flat\\\nmachine', 'Circular\\\n(small)', 'Circular\\\n(large)', 'Whole\\\ngarment']
 speed_m_hr = [0.05, 5, 15, 30, 2]  # metres per hour
 garments_day = [0.3, 20, 80, 200, 50]  # equivalent garments
 

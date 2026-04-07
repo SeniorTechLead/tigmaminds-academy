@@ -160,7 +160,7 @@ plt.legend(fontsize=9)
 plt.grid(axis='x', alpha=0.3)
 plt.show()
 
-print(f"\\nA 747’s Re is {res[4]/res[0]:,.0f}x a paper airplane’s!")
+print(f"\\\nA 747’s Re is {res[4]/res[0]:,.0f}x a paper airplane’s!")
 print(f"This is why model testing must account for scale effects.")`,
       challenge: 'At 12 km altitude, ρ drops to 0.36 kg/m³ and μ to 1.42×10⁻⁵. Recalculate Re for the 747 at cruise altitude. How does it compare to sea level?',
       successHint: 'Reynolds number is the single most important dimensionless number in fluid mechanics. It tells you whether flow is laminar or turbulent, determines drag characteristics, and governs scale effects. Every aerodynamicist’s first question about a flow: "What is the Reynolds number?"',
@@ -234,7 +234,7 @@ print("=== Flight Regimes ===")
 for m, name in [(0.3, 'Low subsonic'), (0.85, 'High subsonic'), (1.0, 'Sonic'), (1.5, 'Supersonic'), (5.0, 'Hypersonic')]:
     v = m * 340
     print(f"  Mach {m:.1f} ({name:20s}): {v:.0f} m/s = {v*3.6:.0f} km/h")
-print(f"\\nSweep delays drag divergence by factor cos(sweep):")
+print(f"\\\nSweep delays drag divergence by factor cos(sweep):")
 print(f"  30° sweep: effective Mach reduced by {(1-np.cos(np.radians(30)))*100:.0f}%")
 print(f"  45° sweep: effective Mach reduced by {(1-np.cos(np.radians(45)))*100:.0f}%")`,
       challenge: 'At what altitude does the speed of sound change? (a = 20.05√T where T is temperature in Kelvin). Plot the speed of sound from sea level to 20 km using the ISA temperature model.',
@@ -489,9 +489,9 @@ mass_ratio = np.exp(dv_total / ve)
 payload = 10000  # 10 tonnes
 fuel_mass = payload * (mass_ratio - 1)
 
-print(f"\\nPeak altitude: {peak_alt:.0f} km")
+print(f"\\\nPeak altitude: {peak_alt:.0f} km")
 print(f"Flight time: {flight_time/60:.1f} minutes")
-print(f"\\n=== Fuel Budget ===")
+print(f"\\\n=== Fuel Budget ===")
 print(f"Δv (launch + landing + losses): {dv_total:.0f} m/s")
 print(f"Mass ratio needed: {mass_ratio:.1f}")
 print(f"For {payload/1000:.0f}t payload: {fuel_mass/1000:.0f}t fuel needed")

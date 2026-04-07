@@ -61,7 +61,7 @@ engines = [
 ]
 
 print("=== Tsiolkovsky Rocket Equation Calculator ===")
-print(f"\\nMass ratios (initial/final) for different missions and engines:")
+print(f"\\\nMass ratios (initial/final) for different missions and engines:")
 print(f"{'Mission':<28}", end="")
 for name, _ in engines:
     print(f" {name[:12]:>13}", end="")
@@ -79,7 +79,7 @@ for mission, dv in missions:
     print()
 
 # Detailed Saturn V analysis
-print("\\n=== Saturn V Fuel Analysis ===")
+print("\\\n=== Saturn V Fuel Analysis ===")
 saturn_v_mass_kg = 2970000  # 2,970 tonnes
 payload_to_moon = 45000     # 45 tonnes (CSM + LM)
 
@@ -93,13 +93,13 @@ burn_rate_kg_s = 13000  # 13 tonnes per second (first stage)
 stage1_burn_s = 168     # seconds
 stage1_fuel = burn_rate_kg_s * stage1_burn_s
 
-print(f"\\nFirst stage:")
+print(f"\\\nFirst stage:")
 print(f"  Burn rate: {burn_rate_kg_s/1000:.0f} tonnes/second")
 print(f"  Burn time: {stage1_burn_s} seconds ({stage1_burn_s/60:.1f} minutes)")
 print(f"  Fuel consumed: {stage1_fuel/1000:,.0f} tonnes ({stage1_fuel/saturn_v_mass_kg*100:.0f}% of total)")
 
 # Why staging helps
-print("\\n=== Why Staging Helps ===")
+print("\\\n=== Why Staging Helps ===")
 print("Single stage to orbit (no staging):")
 single_ratio = rocket_equation(9.4, 4.4)
 print(f"  Mass ratio: {single_ratio:.0f}:1 — impractical")
@@ -181,13 +181,13 @@ dv1, dv2, transfer_time = hohmann_transfer(r_LEO, r_Moon)
 print("=== Hohmann Transfer: Earth to Moon ===")
 print(f"Starting orbit: {LEO_altitude/1000:.0f} km altitude (LEO)")
 print(f"Destination: {r_Moon/1000:.0f} km (Moon's orbit)")
-print(f"\\nFirst burn (departure): Δv = {dv1:.0f} m/s ({dv1/1000:.2f} km/s)")
+print(f"\\\nFirst burn (departure): Δv = {dv1:.0f} m/s ({dv1/1000:.2f} km/s)")
 print(f"Second burn (arrival):  Δv = {dv2:.0f} m/s ({dv2/1000:.2f} km/s)")
 print(f"Total Δv: {(dv1+dv2):.0f} m/s ({(dv1+dv2)/1000:.2f} km/s)")
 print(f"Transfer time: {transfer_time/3600:.1f} hours ({transfer_time/86400:.1f} days)")
 
 # Compare with other destinations
-print("\\n=== Hohmann Transfers to Various Destinations ===")
+print("\\\n=== Hohmann Transfers to Various Destinations ===")
 destinations = [
     ("ISS (400 km)", R_earth + 400000),
     ("Geostationary (35,786 km)", R_earth + 35786000),
@@ -203,13 +203,13 @@ for name, r2 in destinations[:3]:
     print(f"{name:<28} {(d1+d2)/1000:>8.2f} km/s {t/3600:>9.1f} hrs")
 
 # Orbital velocities at key points
-print("\\n=== Orbital Velocities ===")
+print("\\\n=== Orbital Velocities ===")
 for name, r in [("LEO (200 km)", r_LEO), ("Moon's orbit", r_Moon)]:
     v = orbital_velocity(r)
     print(f"{name:<28} v = {v:.0f} m/s ({v/1000:.2f} km/s)")
 
 # Apollo 11 timeline
-print("\\n=== Apollo 11 Timeline ===")
+print("\\\n=== Apollo 11 Timeline ===")
 events = [
     ("Launch", "July 16, 13:32 UTC", "Saturn V ignites, 7.5 million pounds of thrust"),
     ("LEO insertion", "July 16, 13:44 UTC", "In orbit at 185 km, v = 7.79 km/s"),
@@ -323,7 +323,7 @@ print(f"Total CPU demand: {total_demand} ms ({total_demand/agc.cpu_budget*100:.0
 print(f"Overloaded: {'YES' if total_demand > agc.cpu_budget else 'No'}")
 
 # Run scheduling cycles
-print(f"\\n{'Cycle':<20} {'Alarm':>6} {'CPU Used':>9} {'Running':>40} {'Dropped':>20}")
+print(f"\\\n{'Cycle':<20} {'Alarm':>6} {'CPU Used':>9} {'Running':>40} {'Dropped':>20}")
 print("-" * 97)
 
 scenarios = [
@@ -346,12 +346,12 @@ for i, scenario in enumerate(scenarios):
           f"{running:>40} {dropped:>20}")
 
 # What would happen WITHOUT priority scheduling?
-print(f"\\n=== Without Priority Scheduling ===")
+print(f"\\\n=== Without Priority Scheduling ===")
 print(f"CPU demand: {total_demand} ms > budget: {agc.cpu_budget} ms")
 print(f"Result: COMPUTER CRASH — all tasks fail")
 print(f"Navigation, throttle control, altitude radar — ALL LOST")
 print(f"The Lunar Module crashes into the Moon at 150 km/h")
-print(f"\\nWith priority scheduling: critical tasks keep running,")
+print(f"\\\nWith priority scheduling: critical tasks keep running,")
 print(f"non-critical tasks are gracefully dropped, crew is alerted.")
 print(f"The 1202 alarm saved the mission.")`,
       challenge: 'What if the display update task was marked as critical? Now the scheduler can\'t drop it to save CPU. What happens? (The system can\'t fit all critical tasks in the budget — a real emergency. This is why marking everything as "critical" defeats the purpose of priority scheduling.)',
@@ -408,7 +408,7 @@ for h_km in [0, 10, 100, 200, 400, 1000, 10000, 35786, 384400]:
     print(f"{label:<20} {g:>8.3f} {pct:>12.1f}%")
 
 # Orbital velocities and periods
-print(f"\\n=== Orbital Parameters ===")
+print(f"\\\n=== Orbital Parameters ===")
 print(f"{'Location':<24} {'Altitude':>10} {'Velocity':>10} {'Period':>12}")
 print("-" * 58)
 
@@ -430,7 +430,7 @@ for name, h_km, M, R in orbits:
     print(f"{name:<24} {h_km:>8} km {v/1000:>8.2f} km/s {T_str:>12}")
 
 # Newton's cannonball
-print(f"\\n=== Newton's Cannonball ===")
+print(f"\\\n=== Newton's Cannonball ===")
 print(f"Fire a ball from a mountaintop at different speeds:")
 h_mountain = 100000  # 100 km (edge of space)
 for v_kmh in [1000, 5000, 10000, 20000, 28000, 40000]:
@@ -560,7 +560,7 @@ for entry in log:
 
 # Final stats
 final = log[-1]
-print(f"\\n=== Touchdown ===")
+print(f"\\\n=== Touchdown ===")
 print(f"Time: {final['time']:.0f} seconds ({final['time']/60:.1f} minutes)")
 print(f"Final velocity: ↓{final['v_down']:.1f} m/s, →{final['v_horiz']:.1f} m/s")
 print(f"Fuel remaining: {final['fuel_kg']:.0f} kg ({final['fuel_sec']:.0f} seconds)")
@@ -697,7 +697,7 @@ print()
 agc.report()
 
 # Hamilton's legacy in numbers
-print("\\n=== Margaret Hamilton's Legacy ===")
+print("\\\n=== Margaret Hamilton's Legacy ===")
 legacy = [
     ("Apollo software", "145,000 lines of code"),
     ("Written in", "Assembly language (lowest level)"),

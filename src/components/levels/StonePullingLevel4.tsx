@@ -134,11 +134,11 @@ for table in ['stones','paths','events','measurements']:
     count = c.execute(f'SELECT COUNT(*) FROM {table}').fetchone()[0]
     print(f"Table '{table}': {count} records")
 
-print("\\nStone inventory:")
+print("\\\nStone inventory:")
 for row in c.execute('SELECT name, mass_kg, rock_type FROM stones ORDER BY mass_kg DESC'):
     print(f"  {row[0]:25s} | {row[1]:>7,.0f} kg | {row[2]}")
 
-print("\\nEvent summary:")
+print("\\\nEvent summary:")
 for row in c.execute('''SELECT e.event_date, e.village, s.name, e.n_pullers,
                         CASE WHEN e.success THEN 'Success' ELSE 'FAILED' END
                         FROM events e JOIN stones s ON e.stone_id=s.stone_id ORDER BY e.event_date'''):
@@ -223,7 +223,7 @@ for name, mass, ppl, tech, kpp, _ in rows:
     print(f"  {name:>23} | {mass:>6,.0f} | {ppl:>5} | {kpp:>8.1f} | {tech} {bar}")
 
 # ANALYSIS 2: Technique comparison
-print(f"\\nANALYSIS 2: Technique Effectiveness")
+print(f"\\\nANALYSIS 2: Technique Effectiveness")
 print("=" * 65)
 rows = c.execute('''
     SELECT e.technique,
@@ -244,7 +244,7 @@ for tech, events, success, eff, speed in rows:
     print(f"  {tech:>23} | {events:>5} | {success}/{events} ({rate:.0f}%) | {eff:>8.1f} | {speed:>8.1f}")
 
 # ANALYSIS 3: Failure analysis
-print(f"\\nANALYSIS 3: Failure Analysis")
+print(f"\\\nANALYSIS 3: Failure Analysis")
 print("=" * 65)
 rows = c.execute('''
     SELECT s.name, s.rock_type, s.tensile_strength_mpa,
@@ -263,7 +263,7 @@ for name, rock, strength, slope, tech, roller in rows:
     print(f"    Recommendation: Use granite for slopes > 4° or add more rollers")
 
 # ANALYSIS 4: Lubrication impact
-print(f"\\nANALYSIS 4: Lubrication Impact")
+print(f"\\\nANALYSIS 4: Lubrication Impact")
 print("=" * 65)
 rows = c.execute('''
     SELECT e.lubrication,
@@ -347,7 +347,7 @@ def generate_plan(mass, distance, elevation, rock_type='granite', surface='packe
     plan.append("=" * 60)
     plan.append("    STONE-PULLING EVENT PLAN")
     plan.append("=" * 60)
-    plan.append(f"\\n  Stone: {mass:,.0f} kg ({rock_type})")
+    plan.append(f"\\\n  Stone: {mass:,.0f} kg ({rock_type})")
     plan.append(f"  Path: {distance:.0f} m, {elevation:.0f} m elevation gain")
     plan.append(f"  Surface: {surface}")
 
@@ -365,7 +365,7 @@ def generate_plan(mass, distance, elevation, rock_type='granite', surface='packe
         eff_mu = 0.12
         roller_d = max(10, mass / 400)
 
-    plan.append(f"\\n[TECHNIQUE]")
+    plan.append(f"\\\n[TECHNIQUE]")
     plan.append(f"  Recommended: {technique}")
     plan.append(f"  Roller diameter: {roller_d:.0f} cm minimum")
 
@@ -374,7 +374,7 @@ def generate_plan(mass, distance, elevation, rock_type='granite', surface='packe
     slope_deg = math.degrees(slope_rad)
     F_pull = mass * g * (math.sin(slope_rad) + eff_mu * math.cos(slope_rad))
 
-    plan.append(f"\\n[FORCE ANALYSIS]")
+    plan.append(f"\\\n[FORCE ANALYSIS]")
     plan.append(f"  Average slope: {slope_deg:.1f}°")
     plan.append(f"  Pull force needed: {F_pull/1000:.1f} kN")
 
@@ -385,7 +385,7 @@ def generate_plan(mass, distance, elevation, rock_type='granite', surface='packe
     n_total = n_people_pulling + n_support
     n_teams = max(2, n_total // 20)
 
-    plan.append(f"\\n[WORKFORCE]")
+    plan.append(f"\\\n[WORKFORCE]")
     plan.append(f"  Pullers needed: {n_people_pulling}")
     plan.append(f"  Support crew (rollers/guides): {n_support}")
     plan.append(f"  Total: {n_total} people in {n_teams} teams")
@@ -398,7 +398,7 @@ def generate_plan(mass, distance, elevation, rock_type='granite', surface='packe
     fatigue_factor = 1.5  # add 50% for fatigue and breaks
     time_hours = time_seconds / 3600 * fatigue_factor
 
-    plan.append(f"\\n[TIME ESTIMATE]")
+    plan.append(f"\\\n[TIME ESTIMATE]")
     plan.append(f"  Total work: {total_work/1e6:.2f} MJ")
     plan.append(f"  Estimated duration: {time_hours:.1f} hours (including breaks)")
     if distance > 500:
@@ -421,13 +421,13 @@ def generate_plan(mass, distance, elevation, rock_type='granite', surface='packe
         risks.append(('LOW', 'Standard pull with manageable risks'))
 
     risk_level = risks[0][0]  # highest risk
-    plan.append(f"\\n[RISK ASSESSMENT]")
+    plan.append(f"\\\n[RISK ASSESSMENT]")
     for level, desc in risks:
         marker = "!!!" if level == 'CRITICAL' else "! " if level == 'HIGH' else "  "
         plan.append(f"  {marker} [{level:>8}] {desc}")
 
     # 6. Preparation checklist
-    plan.append(f"\\n[PREPARATION CHECKLIST]")
+    plan.append(f"\\\n[PREPARATION CHECKLIST]")
     prep_items = [
         f"[ ] Cut {int(distance/1.5)} logs, diameter ≥ {roller_d:.0f} cm",
         f"[ ] Prepare path surface ({surface})",
@@ -445,9 +445,9 @@ def generate_plan(mass, distance, elevation, rock_type='granite', surface='packe
     for item in prep_items:
         plan.append(f"  {item}")
 
-    plan.append(f"\\n{'=' * 60}")
+    plan.append(f"\\\n{'=' * 60}")
 
-    plan_text = "\\n".join(plan)
+    plan_text = "\\\n".join(plan)
 
     # Store plan in database
     c.execute('''INSERT INTO generated_plans
@@ -473,7 +473,7 @@ for mass, dist, elev, rock, surface in scenarios:
     print()
 
 # Summary from database
-print("\\nALL GENERATED PLANS SUMMARY:")
+print("\\\nALL GENERATED PLANS SUMMARY:")
 print("-" * 70)
 rows = c.execute('SELECT stone_mass, distance, elevation, recommended_people, estimated_hours, risk_level FROM generated_plans').fetchall()
 for mass, dist, elev, ppl, hrs, risk in rows:
@@ -653,7 +653,7 @@ print(f"  Success rate: {success.mean()*100:.1f}%")
 print(f"  Time: median {p50:.1f}h | 90th %ile {p90:.1f}h | 95th %ile {p95:.1f}h")
 print(f"  Rain events: {rained.sum()} ({rained.mean()*100:.0f}%)")
 print(f"  Equipment failures: {equip.sum()} ({equip.mean()*100:.0f}%)")
-print(f"\\nPlanning recommendation:")
+print(f"\\\nPlanning recommendation:")
 print(f"  Plan for {p90:.1f} hours (covers 90% of scenarios)")
 print(f"  Prepare {int(n_people * 1.2)} people (20% buffer for fatigue/absence)")`,
       challenge: 'Add a "team coordination" uncertainty: if teams are poorly synchronized (random 0-50% force reduction at any moment), how does this affect completion time? What is the minimum coordination quality needed for 95% success rate?',
@@ -748,7 +748,7 @@ print("╚═══════════════════════�
 all_data = []
 
 for stone_id, stone_name, mass, rock, strength in stones:
-    print(f"\\n━━━ {stone_name} ({mass:,.0f} kg, {rock}) ━━━")
+    print(f"\\\n━━━ {stone_name} ({mass:,.0f} kg, {rock}) ━━━")
     for scenario_name, dist, elev, mu in scenarios:
         phys = PhysicsEngine(mass, dist, elev, mu)
         n_min = phys.min_people()
@@ -818,7 +818,7 @@ x = np.arange(len(times_est))
 axes[0,2].bar(x - 0.15, times_est, width=0.3, color='#60a5fa', label='Expected', alpha=0.8)
 axes[0,2].bar(x + 0.15, times_90, width=0.3, color='#f87171', label='90th %ile', alpha=0.8)
 axes[0,2].set_xticks(x)
-axes[0,2].set_xticklabels([f'{d[0][:3]}\\n{d[1][:3]}' for d in all_data], fontsize=6)
+axes[0,2].set_xticklabels([f'{d[0][:3]}\\\n{d[1][:3]}' for d in all_data], fontsize=6)
 axes[0,2].set_ylabel('Hours', color='white', fontsize=10)
 axes[0,2].set_title('Time Estimates', color='white', fontsize=11, fontweight='bold')
 axes[0,2].legend(facecolor='#374151', edgecolor='#4b5563', labelcolor='white', fontsize=8)
@@ -858,7 +858,7 @@ plt.tight_layout()
 plt.show()
 
 # Final summary from database
-print("\\n" + "=" * 60)
+print("\\\n" + "=" * 60)
 print("DATABASE SUMMARY")
 rows = c.execute('''SELECT s.name, COUNT(*), ROUND(AVG(a.success_prob),1),
                     MIN(a.risk), MAX(a.risk)
@@ -868,7 +868,7 @@ for name, n, avg_prob, min_risk, max_risk in rows:
     print(f"  {name}: {n} scenarios analyzed | Avg success: {avg_prob}% | Risk range: {min_risk}-{max_risk}")
 
 conn.close()
-print("\\n  Toolkit complete. All analyses stored in database.")`,
+print("\\\n  Toolkit complete. All analyses stored in database.")`,
       challenge: 'Extend the toolkit to generate a printable PDF-style report (as formatted text output) summarizing all results with recommendations for the village council.',
       successHint: 'You have built a complete engineering software system from scratch: database, physics engine, planner, Monte Carlo simulator, and visualization dashboard. This is professional-grade engineering practice applied to an ancient tradition.',
     },

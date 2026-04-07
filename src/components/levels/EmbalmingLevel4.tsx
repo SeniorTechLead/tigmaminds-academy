@@ -105,24 +105,24 @@ environments = {
 }
 
 # Display the system architecture
-print("=== Preservation Simulator — System Architecture ===\\n")
+print("=== Preservation Simulator — System Architecture ===\\\n")
 print("TISSUES:")
 for key, t in tissues.items():
     print(f"  {t.name:<14} {t.mass_g:>5}g  water={t.water_pct}%  "
           f"enzymes={t.enzyme_activity}  bacteria={t.bacterial_load:.0e}")
 
-print("\\nDESICCANTS:")
+print("\\\nDESICCANTS:")
 for key, d in desiccants.items():
     print(f"  {d.name:<14} rate={d.absorption_rate}  capacity={d.max_capacity}%  "
           f"antibac={d.antibacterial}  pH={d.pH}")
 
-print("\\nENVIRONMENTS:")
+print("\\\nENVIRONMENTS:")
 for key, e in environments.items():
     evap = e.evaporation_factor()
     print(f"  {e.name:<20} {e.temp:>3}°C  RH={e.humidity}%  "
           f"O₂={e.oxygen}%  evap_factor={evap:.2f}")
 
-print("\\nNext step: Build the desiccation engine connecting these classes.")`,
+print("\\\nNext step: Build the desiccation engine connecting these classes.")`,
       challenge: 'Add a Resin class with properties: viscosity, antibacterial_score, sealing_effectiveness, and volatility_half_life. Define at least three resins (conifer, pistacia, beeswax) with realistic values. This will be integrated into the full simulator as the final preservation layer.',
       successHint: 'Good system design makes everything else easier. You defined three classes with clear responsibilities: Tissue holds biological state, Desiccant manages the drying agent, and Environment controls ambient conditions. This separation lets you mix and match any tissue with any desiccant in any environment — combinatorial power from clean design.',
     },
@@ -230,7 +230,7 @@ configs = [
      Environment("Desert", 40, 10, 2.0)),
 ]
 
-print("=== Desiccation Engine — Coupled Osmosis + Evaporation ===\\n")
+print("=== Desiccation Engine — Coupled Osmosis + Evaporation ===\\\n")
 print(f"{'Configuration':<34} ", end="")
 for d in [0, 5, 10, 20, 30, 40, 60]:
     print(f"{'Day '+str(d):>7}", end="")
@@ -252,8 +252,8 @@ for name, tissue, desiccant, env in configs:
     print(row)
 
 # Analyse coupling effect
-print("\\n=== Osmosis vs Evaporation Dominance ===")
-print("Which process is the bottleneck?\\n")
+print("\\\n=== Osmosis vs Evaporation Dominance ===")
+print("Which process is the bottleneck?\\\n")
 
 for name, tissue, desiccant, env in configs:
     osmotic_power = desiccant.osmotic_strength * 0.8
@@ -380,7 +380,7 @@ protocols = [
      make_water(72, 12, 0.008), make_salt(2, 3.0), lambda h: 0, 1e12, 2),
 ]
 
-print("=== Bacterial Population Dynamics During Embalming ===\\n")
+print("=== Bacterial Population Dynamics During Embalming ===\\\n")
 print(f"{'Treatment':<30} ", end="")
 checkpoints = [0, 6, 12, 24, 48, 120, 240, 480]
 for cp in checkpoints:
@@ -417,7 +417,7 @@ for name, water_fn, salt_fn, resin_fn, init_cfu, gen_t in protocols:
     print(row)
 
 # Phase analysis
-print("\\n=== Bacterial Growth Phases (Full Royal Protocol) ===")
+print("\\\n=== Bacterial Growth Phases (Full Royal Protocol) ===")
 bacteria = simulate_preservation(
     "Royal", 1e3, 6,
     make_water(70, 8, 0.015), make_salt(1, 5.0), make_resin(240, 0.8), 30, 480
@@ -513,7 +513,7 @@ scenarios = [
     ("Natural mummy (no treatment)",    40, 0.60, 100,  30, 20),
 ]
 
-print("=== Multi-Millennium Preservation Predictor ===\\n")
+print("=== Multi-Millennium Preservation Predictor ===\\\n")
 
 # Summary table
 time_points = [100, 500, 1000, 2000, 3000, 5000]
@@ -533,7 +533,7 @@ for name, init_q, stability, resin_hl, temp, humid in scenarios:
     print(row)
 
 # Detailed analysis for royal tomb
-print("\\n=== Detailed Degradation: Royal Tomb (Sealed) ===")
+print("\\\n=== Detailed Degradation: Royal Tomb (Sealed) ===")
 h = preservation_predictor(95, 0.95, 2000, 22, 15)
 print(f"{'Year':>6} {'Quality':>9} {'Collagen':>10} {'Resin Seal':>11} {'Status'}")
 print("-" * 48)
@@ -551,7 +551,7 @@ for i in range(len(h["year"])):
         print(f"{yr:>6} {q:>8.1f}% {c:>9.1f}% {r:>10.1f}% {status}")
 
 # Sensitivity analysis
-print("\\n=== Sensitivity: What Matters Most for 3000-Year Survival? ===")
+print("\\\n=== Sensitivity: What Matters Most for 3000-Year Survival? ===")
 baseline = preservation_predictor(95, 0.95, 2000, 22, 15)
 baseline_val = baseline["quality"][-1]
 
@@ -563,7 +563,7 @@ factors = [
     ("Humidity 15→60%",        95, 0.95, 2000, 22, 60),
 ]
 
-print(f"Baseline quality at 5000 years: {baseline_val:.1f}%\\n")
+print(f"Baseline quality at 5000 years: {baseline_val:.1f}%\\\n")
 for name, *params in factors:
     h = preservation_predictor(*params)
     val = h["quality"][-1]

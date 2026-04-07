@@ -112,15 +112,15 @@ compartments = [
 ]
 
 # System overview
-print("=== Ship Design Calculator — Architecture ===\\n")
+print("=== Ship Design Calculator — Architecture ===\\\n")
 print(f"Hull: {hull.name}")
 print(f"  Dimensions: {hull.L}m × {hull.B}m × {hull.D}m (draft {hull.T}m)")
 print(f"  Displacement: {hull.displacement():,.0f} tonnes")
 print(f"  Waterplane area: {hull.waterplane_area():,.0f} m²")
-print(f"\\nSail plan: {len(sails)} masts")
+print(f"\\\nSail plan: {len(sails)} masts")
 total_sail = sum(s.area for s in sails)
 print(f"  Total sail area: {total_sail:,.0f} m²")
-print(f"\\nCompartments: {len(compartments)}")
+print(f"\\\nCompartments: {len(compartments)}")
 total_cargo = sum(c.capacity_tonnes() for c in compartments)
 for c in compartments:
     print(f"  {c.name:<20} {c.volume():>6.0f} m³  {c.capacity_tonnes():>6.0f}t ({c.purpose})")
@@ -231,7 +231,7 @@ class BuoyancyEngine:
 # Analyse Zheng He's treasure ship
 engine = BuoyancyEngine(120, 50, 12, "junk")
 
-print("=== Buoyancy Engine: Treasure Ship ===\\n")
+print("=== Buoyancy Engine: Treasure Ship ===\\\n")
 
 # Draft vs displacement curve
 print(f"{'Draft (m)':<10} {'Volume (m³)':>12} {'Disp (t)':>10} {'KB (m)':>8} {'BM (m)':>8}")
@@ -244,7 +244,7 @@ for T in np.arange(1, 10.1, 1):
     print(f"{T:<9.1f} {vol:>11.0f} {disp:>9.0f} {kb:>7.2f} {bm:>7.1f}")
 
 # Find draft for different loading conditions
-print("\\n=== Loading Conditions ===")
+print("\\\n=== Loading Conditions ===")
 conditions = [
     ("Light ship (empty)", 8000),
     ("Half cargo", 14000),
@@ -262,7 +262,7 @@ for name, weight in conditions:
           f"Freeboard: {freeboard:.1f}m [{safe}]")
 
 # Compare hull shapes
-print("\\n=== Hull Shape Comparison (same dimensions) ===")
+print("\\\n=== Hull Shape Comparison (same dimensions) ===")
 print(f"{'Shape':<12} {'Vol at 7.5m':>12} {'Disp (t)':>10} {'KB (m)':>8} {'BM (m)':>8}")
 print("-" * 52)
 for shape in ["junk", "caravel", "galleon"]:
@@ -360,7 +360,7 @@ class StructuralAnalyser:
 # Analyse the treasure ship
 analyser = StructuralAnalyser(120, 50, 12, 20000)
 
-print("=== Structural Analysis: Zheng He Treasure Ship ===\\n")
+print("=== Structural Analysis: Zheng He Treasure Ship ===\\\n")
 
 # Compare still water, hogging, and sagging
 conditions = [
@@ -375,7 +375,7 @@ Z = analyser.hull_section_modulus(plank_t)
 wood_strength = 20  # MPa (effective hull girder strength)
 
 print(f"Hull section modulus: {Z:.1f} m³")
-print(f"Wood effective strength: {wood_strength} MPa\\n")
+print(f"Wood effective strength: {wood_strength} MPa\\\n")
 
 for name, wave, cargo in conditions:
     x, shear, moment = analyser.bending_moment(wave, cargo)
@@ -506,9 +506,9 @@ class PerformancePredictor:
 # Treasure ship performance
 ship = PerformancePredictor(120, 50, 7.5, 20000, 3000, 500)
 
-print("=== Performance Prediction: Zheng He Treasure Ship ===\\n")
+print("=== Performance Prediction: Zheng He Treasure Ship ===\\\n")
 print(f"Hull speed: {ship.hull_speed_knots():.1f} knots")
-print(f"Wetted surface: {ship.wetted_surface():,.0f} m²\\n")
+print(f"Wetted surface: {ship.wetted_surface():,.0f} m²\\\n")
 
 # Speed vs wind
 print("=== Speed vs Wind Conditions ===")
@@ -522,7 +522,7 @@ for wind in [8, 12, 15, 20, 25]:
             print(f"{wind:<10} {angle:>4}° {drive/1000:>9.1f} {speed:>9.1f}")
 
 # Speed-resistance curve
-print("\\n=== Resistance vs Speed ===")
+print("\\\n=== Resistance vs Speed ===")
 print(f"{'Speed (kt)':<12} {'R_total (kN)':>13} {'Power (kW)':>11} {'% hull spd':>11}")
 print("-" * 49)
 hull_spd = ship.hull_speed_knots()
@@ -533,7 +533,7 @@ for v in [2, 3, 4, 5, 6, 8, 10, 15]:
     print(f"{v:<11} {R/1000:>11.1f} {P:>9.1f} {pct:>9.0f}%")
 
 # Range and endurance
-print("\\n=== Range and Endurance ===")
+print("\\\n=== Range and Endurance ===")
 provisions = 3000  # tonnes
 for speed in [3, 4, 5, 6]:
     range_nm = ship.range_nm(speed, provisions)
@@ -542,7 +542,7 @@ for speed in [3, 4, 5, 6]:
           f"({range_nm * 1.852:,.0f} km) | endurance = {days:.0f} days")
 
 # Cargo capacity analysis
-print("\\n=== Maximum Cargo (maintaining 2m freeboard) ===")
+print("\\\n=== Maximum Cargo (maintaining 2m freeboard) ===")
 max_draft = 12 - 2  # 2m minimum freeboard
 max_disp = 120 * 50 * max_draft * 0.55 * 1025 / 1000
 ship_weight = 8000  # light ship weight

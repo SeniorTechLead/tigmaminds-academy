@@ -233,9 +233,9 @@ plt.show()
 print("=" * 65)
 print("    CLOUD TYPE DECISION TREE CLASSIFIER — REPORT")
 print("=" * 65)
-print(f"\\nDataset: {len(X)} samples, {len(classes)} classes, {len(feature_names)} features")
+print(f"\\\nDataset: {len(X)} samples, {len(classes)} classes, {len(feature_names)} features")
 print(f"Train/test split: {n_train}/{len(X)-n_train}")
-print(f"\\nOverall test accuracy: {accuracy:.1%}")
+print(f"\\\nOverall test accuracy: {accuracy:.1%}")
 print(f"Best tree depth: {best_depth} (test acc: {max(test_accs):.1%})")
 print()
 print("Per-class metrics:")
@@ -249,11 +249,11 @@ for cls in classes:
     recall = true_pos / max(actual_pos, 1)
     print(f"{cls:<18} {precision:>9.0%} {recall:>9.0%} {actual_pos:>8}")
 
-print(f"\\nFeature importance (split frequency):")
+print(f"\\\nFeature importance (split frequency):")
 for name, imp in sorted(zip(feature_names, feat_importance), key=lambda x: -x[1]):
     print(f"  {name:<25} {imp:.0%}")
 
-print(f"\\nThe tree's first split reveals the most informative feature for")
+print(f"\\\nThe tree's first split reveals the most informative feature for")
 print(f"distinguishing cloud types — the algorithmic cloud namer's key insight.")`,
       challenge: 'Implement a random forest by building 10 decision trees, each trained on a bootstrap sample of the data with a random subset of features at each split. Combine their predictions by majority vote and show how the ensemble outperforms any individual tree.',
       successHint: 'You have built a machine learning classifier from first principles — no libraries, just numpy. The decision tree is the foundation of many powerful algorithms (random forests, gradient boosting). Your cloud classifier translates the cloud namer\'s experiential knowledge into a reproducible, automated system.',

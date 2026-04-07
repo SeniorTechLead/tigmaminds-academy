@@ -506,7 +506,7 @@ cities = [(50, 'Nearby city'), (150, 'Regional capital'), (300, 'Distant city')]
 for d, name in cities:
     ws = d/v_s - (sensor_dist/v_p + processing_time + d/v_alert)
     ax2.plot(d, ws, 'o', color='#f59e0b', markersize=8)
-    ax2.annotate(f'{name}\\n{ws:.0f}s warning', xy=(d, ws), xytext=(d + 15, ws + 5),
+    ax2.annotate(f'{name}\\\n{ws:.0f}s warning', xy=(d, ws), xytext=(d + 15, ws + 5),
                  color='#f59e0b', fontsize=9, fontweight='bold')
 
 ax2.set_xlabel('Distance from epicentre (km)', color='white')

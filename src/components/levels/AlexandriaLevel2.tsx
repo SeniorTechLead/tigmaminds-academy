@@ -87,24 +87,24 @@ print(f"Entries: {catalogue.count}")
 print(f"Load factor: {catalogue.load_factor():.2f}")
 
 # Show bucket distribution
-print("\\nBucket distribution:")
+print("\\\nBucket distribution:")
 lengths = [len(slot) for slot in catalogue.slots]
 for i, slot in enumerate(catalogue.slots):
     bar = "#" * len(slot)
     names = ", ".join(k for k, v in slot)
     print(f"  Slot {i:>2}: {bar:<6} {names}")
 
-print(f"\\nMax chain length: {max(lengths)} (ideal = 1)")
+print(f"\\\nMax chain length: {max(lengths)} (ideal = 1)")
 print(f"Empty slots: {lengths.count(0)} of {catalogue.size}")
 
 # Lookup test
-print("\\n=== Lookup Tests ===")
+print("\\\n=== Lookup Tests ===")
 for query in ["Euclid", "Archimedes", "Plato"]:
     result = catalogue.lookup(query)
     print(f"  lookup('{query}'): {result or 'NOT FOUND'}")
 
 # Collision analysis for different table sizes
-print("\\n=== Load Factor vs Collisions ===")
+print("\\\n=== Load Factor vs Collisions ===")
 for size in [8, 16, 32, 64, 128]:
     ht = ScrollHashTable(size=size)
     for author, work in scrolls:
@@ -179,7 +179,7 @@ for n in sizes:
           f" {lin:>12.0f}ms")
 
 # Space usage analysis
-print("\\n=== B-Tree Space Overhead ===")
+print("\\\n=== B-Tree Space Overhead ===")
 record_size_bytes = 200  # author + title + metadata
 for order in [10, 50, 100, 500]:
     n = 400_000  # Alexandria's collection
@@ -192,7 +192,7 @@ for order in [10, 50, 100, 500]:
           f"total size: {total_mb:.1f} MB")
 
 # Insertion cost: splitting nodes
-print("\\n=== B-Tree Node Splits During Bulk Insert ===")
+print("\\\n=== B-Tree Node Splits During Bulk Insert ===")
 for order in [10, 50, 100, 500]:
     splits = 0
     node_count = 1
@@ -282,7 +282,7 @@ for iteration in range(30):
         break
 
 # Final rankings
-print("\\n=== PageRank Rankings (Alexandria Knowledge Network) ===")
+print("\\\n=== PageRank Rankings (Alexandria Knowledge Network) ===")
 ranked = sorted(range(n), key=lambda i: rank[i], reverse=True)
 for pos, i in enumerate(ranked):
     in_citations = int(adj[i].sum())
@@ -292,7 +292,7 @@ for pos, i in enumerate(ranked):
           f"cited_by={in_citations}  cites={out_citations}  {bar}")
 
 # Betweenness centrality (simplified: count shortest paths through each node)
-print("\\n=== Betweenness Centrality (Bridge Scholars) ===")
+print("\\\n=== Betweenness Centrality (Bridge Scholars) ===")
 # Floyd-Warshall for all-pairs shortest paths
 dist = np.full((n, n), np.inf)
 np.fill_diagonal(dist, 0)
@@ -398,7 +398,7 @@ for subj, count in sorted(subjects.items(), key=lambda x: -x[1]):
     print(f"  {subj:<18} {count:>6,} ({pct:>4.1f}%) {bar}")
 
 # Model progressive destruction
-print("\\n=== Entropy During Progressive Destruction ===")
+print("\\\n=== Entropy During Progressive Destruction ===")
 print("(What if scrolls are lost category by category?)")
 
 destruction_order = [
@@ -422,7 +422,7 @@ for subj in destruction_order:
     print(f"  Lost {subj:<24} {new_total:>8,} {new_entropy:>8.3f} {new_entropy/new_max:>9.1%}")
 
 # Compare to other ancient libraries
-print("\\n=== Comparative Library Entropy ===")
+print("\\\n=== Comparative Library Entropy ===")
 libraries = {
     "Alexandria (peak)": [35000, 28000, 32000, 45000, 55000, 40000, 20000, 15000, 25000, 30000],
     "Athens (Lyceum)": [15000, 5000, 3000, 40000, 20000, 10000, 2000, 1000, 5000, 8000],
@@ -509,14 +509,14 @@ codes = get_codes(tree)
 
 print("=== Huffman Coding for Ancient Greek Text ===")
 print(f"Alphabet size: {len(greek_freqs)} symbols")
-print(f"Total characters: {total_chars:,}\\n")
+print(f"Total characters: {total_chars:,}\\\n")
 
 # Fixed-length comparison
 fixed_bits = int(np.ceil(np.log2(len(greek_freqs))))
 print(f"Fixed-length encoding: {fixed_bits} bits per symbol")
 
 # Huffman statistics
-print(f"\\n{'Symbol':<12} {'Freq':>6} {'Prob':>6} {'Code':<16} {'Bits':>4}")
+print(f"\\\n{'Symbol':<12} {'Freq':>6} {'Prob':>6} {'Code':<16} {'Bits':>4}")
 print("-" * 48)
 sorted_syms = sorted(greek_freqs.items(), key=lambda x: -x[1])
 for sym, freq in sorted_syms:
@@ -530,7 +530,7 @@ avg_bits = sum(len(codes[s]) * f / total_chars
 entropy = -sum((f/total_chars) * np.log2(f/total_chars)
                for f in greek_freqs.values() if f > 0)
 
-print(f"\\n=== Compression Results ===")
+print(f"\\\n=== Compression Results ===")
 print(f"Shannon entropy:       {entropy:.3f} bits/symbol (theoretical minimum)")
 print(f"Huffman average:       {avg_bits:.3f} bits/symbol")
 print(f"Fixed-length:          {fixed_bits:.3f} bits/symbol")
@@ -542,7 +542,7 @@ print(f"Space saved:           {(1 - avg_bits/fixed_bits):.1%}")
 scrolls_chars = 400_000 * 15_000  # 400k scrolls × 15k chars average
 fixed_gb = scrolls_chars * fixed_bits / 8 / 1e9
 huffman_gb = scrolls_chars * avg_bits / 8 / 1e9
-print(f"\\n=== Full Library Storage ===")
+print(f"\\\n=== Full Library Storage ===")
 print(f"Total characters: {scrolls_chars:,.0f}")
 print(f"Fixed encoding:  {fixed_gb:.2f} GB")
 print(f"Huffman encoding: {huffman_gb:.2f} GB")

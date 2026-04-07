@@ -160,7 +160,7 @@ materials = [
 ]
 
 print("=== Wall Degradation Simulation ===")
-print(f"200 runs per material | 500-year horizon\\n")
+print(f"200 runs per material | 500-year horizon\\\n")
 
 for mat in materials:
     sim = WallSimulation(mat)
@@ -251,7 +251,7 @@ for r in results:
 viable = [r for r in results if r["survival"] > 90]
 if viable:
     best = min(viable, key=lambda r: r["cost_per_year"])
-    print(f"\\n{'=' * 65}")
+    print(f"\\\n{'=' * 65}")
     print(f"RECOMMENDATION: {best['name']}")
     print(f"{'=' * 65}")
     print(f"  Meets {target_lifespan}-year target with {best['survival']:.0f}% confidence")
@@ -259,7 +259,7 @@ if viable:
     print(f"  Cost efficiency: {best['cost_per_year']:.1f} units per year of service")
     print(f"  10th percentile (worst case): {best['p10']:.0f} years")
 else:
-    print("\\nNo material meets the target with >90% confidence.")
+    print("\\\nNo material meets the target with >90% confidence.")
     print("Consider composite designs or increased wall thickness.")`,
       challenge: 'The report currently optimises for cost per year. Add a "risk premium" — penalise materials with high variance (large gap between 10th and 90th percentile). A client might prefer a more predictable lifespan even at higher cost. How does the recommendation change?',
       successHint: 'Congratulations — you built a complete engineering analysis tool: from material properties through Monte Carlo simulation to a comparative report with a data-driven recommendation. This is exactly how real structural engineering decisions are made — the same process, just with more sophisticated models and larger datasets.',

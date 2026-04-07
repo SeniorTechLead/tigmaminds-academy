@@ -37,7 +37,7 @@ products = [
     ('Coriander',  10, 30, 60, 9),
 ]
 
-print("=== Ima Keithel Daily Profit Report ===\\n")
+print("=== Ima Keithel Daily Profit Report ===\\\n")
 print(f"{'Product':<12} {'Bought':>7} {'Cost':>7} {'Sold':>6} {'Revenue':>8} {'Profit':>7} {'Margin':>7}")
 print("-" * 60)
 
@@ -60,7 +60,7 @@ for name, bought, buy_price, sell_price, sold in products:
 total_profit = total_revenue - total_cost
 print("-" * 60)
 print(f"{'TOTAL':<12} {'':>7} {total_cost:>6}₹ {'':>6} {total_revenue:>7}₹ {total_profit:>6}₹ {total_profit/total_revenue*100:>5.1f}%")
-print(f"\\nDaily profit: {total_profit}₹")
+print(f"\\\nDaily profit: {total_profit}₹")
 print(f"If she works 25 days/month: {total_profit * 25:,}₹/month")`,
       challenge: 'Add transport cost (200 rupees/day) and stall rent (150 rupees/day) as fixed costs. Recalculate the true profit. What percentage do fixed costs eat from the margin?',
       successHint: 'Profit calculation is the most fundamental concept in economics. Every business in the world — from Ima Keithel stalls to multinational corporations — starts here.',
@@ -94,7 +94,7 @@ demand = [max(0, 500 - 8 * p) for p in prices]
 # Q_supply = -100 + 6 * price
 supply = [max(0, -100 + 6 * p) for p in prices]
 
-print("=== Tomato Supply & Demand at Ima Keithel ===\\n")
+print("=== Tomato Supply & Demand at Ima Keithel ===\\\n")
 print(f"{'Price (₹/kg)':>12} {'Demand (kg)':>12} {'Supply (kg)':>12} {'Surplus/Shortage':>16}")
 print("-" * 55)
 
@@ -111,7 +111,7 @@ for p, d, s in zip(prices, demand, supply):
 # 500 - 8p = -100 + 6p → 600 = 14p → p = 42.86
 p_eq = 600 / 14
 q_eq = 500 - 8 * p_eq
-print(f"\\nExact equilibrium: {p_eq:.2f} ₹/kg, {q_eq:.0f} kg traded")
+print(f"\\\nExact equilibrium: {p_eq:.2f} ₹/kg, {q_eq:.0f} kg traded")
 print(f"At equilibrium, vendors earn: {p_eq * q_eq:.0f}₹ total revenue")`,
       challenge: 'If the government sets a maximum price of 30 rupees/kg (a price ceiling), calculate the shortage. How many kg of demand go unmet?',
       successHint: 'Supply and demand is the most powerful idea in economics. It explains prices for everything from tomatoes to houses to labour. You just found the equilibrium — the invisible hand at work.',
@@ -146,8 +146,8 @@ products = {
     'Fish':       {'base_price': 150, 'base_qty': 80, 'elasticity': 0.6},
 }
 
-print("=== Price Elasticity at Ima Keithel ===\\n")
-print("Effect of a 10% price increase:\\n")
+print("=== Price Elasticity at Ima Keithel ===\\\n")
+print("Effect of a 10% price increase:\\\n")
 print(f"{'Product':<12} {'Old Price':>9} {'New Price':>9} {'Old Qty':>8} {'New Qty':>8} {'Old Rev':>8} {'New Rev':>8} {'Change':>7}")
 print("-" * 75)
 
@@ -168,10 +168,10 @@ for name, data in products.items():
     category = 'inelastic' if e < 1 else 'elastic' if e > 1 else 'unit'
     print(f"{name:<12} {p0:>7}₹ {p1:>7.0f}₹ {q0:>6} {q1:>6.0f} {rev0:>7}₹ {rev1:>7.0f}₹ {rev_change:>+5.1f}%")
 
-print("\\n--- Key insight ---")
+print("\\\n--- Key insight ---")
 print("Inelastic goods (E<1): raising price INCREASES revenue")
 print("Elastic goods (E>1):   raising price DECREASES revenue")
-print("\\nSmart vendors raise prices on rice (inelastic)")
+print("\\\nSmart vendors raise prices on rice (inelastic)")
 print("and lower prices on silk (elastic, to attract more buyers)")`,
       challenge: 'Find the revenue-maximising price for silk cloth. Try price increases from 0% to 50% in steps of 5%. At what price is revenue highest?',
       successHint: 'Price elasticity is how companies like Amazon and airlines set prices. Inelastic goods get premium prices. Elastic goods get competitive prices. You now understand the strategic logic behind pricing.',
@@ -200,7 +200,7 @@ cost_per_kg = 20           # same for all vendors
 total_demand = 500         # kg per day
 months = 24
 
-print("=== Ima Keithel Competition Over 2 Years ===\\n")
+print("=== Ima Keithel Competition Over 2 Years ===\\\n")
 print(f"{'Month':>5} {'Vendors':>8} {'Price':>7} {'Qty/vendor':>11} {'Revenue':>8} {'Profit':>7} {'Entry':>6}")
 print("-" * 58)
 
@@ -234,7 +234,7 @@ for month in range(1, months + 1):
 
     n_vendors = max(5, n_vendors + new_vendors)
 
-print(f"\\nStarted with {n_vendors_initial} vendors, ended with {n_vendors}")
+print(f"\\\nStarted with {n_vendors_initial} vendors, ended with {n_vendors}")
 print(f"Final profit per vendor: {profit:.0f}₹/day")
 print("In perfect competition, economic profit → 0 over time")`,
       challenge: 'What if the government limits the market to 15 vendors (an entry barrier)? Run the simulation again. How does the price and profit differ from the free-entry model?',
@@ -300,7 +300,7 @@ days = 30
 
 vendors = [Vendor(f"Ima-{i+1}", "tomatoes", 20) for i in range(n_vendors)]
 
-print("=== Invisible Hand Simulation: 30 Days ===\\n")
+print("=== Invisible Hand Simulation: 30 Days ===\\\n")
 print(f"{'Day':>4} {'Avg Price':>9} {'Min Price':>9} {'Max Price':>9} {'Price Spread':>12}")
 print("-" * 48)
 
@@ -328,7 +328,7 @@ for day in range(1, days + 1):
     if day % 5 == 0 or day <= 3:
         print(f"{day:>4} {sum(prices)/len(prices):>8.1f}₹ {min(prices):>8.1f}₹ {max(prices):>8.1f}₹ {max(prices)-min(prices):>10.1f}₹")
 
-print(f"\\n--- After 30 days ---")
+print(f"\\\n--- After 30 days ---")
 prices = sorted([(v.name, v.price, v.sales, v.profit) for v in vendors], key=lambda x: -x[2])
 print(f"{'Vendor':<10} {'Price':>7} {'Sales':>6} {'Profit':>7}")
 for name, price, sales, profit in prices[:5]:
@@ -337,7 +337,7 @@ print("...")
 for name, price, sales, profit in prices[-3:]:
     print(f"{name:<10} {price:>6.1f}₹ {sales:>6} {profit:>6.0f}₹")
 
-print(f"\\nPrice convergence: spread went from {20:.0f}₹ to {max(prices, key=lambda x:x[1])[1]-min(prices, key=lambda x:x[1])[1]:.1f}₹")
+print(f"\\\nPrice convergence: spread went from {20:.0f}₹ to {max(prices, key=lambda x:x[1])[1]-min(prices, key=lambda x:x[1])[1]:.1f}₹")
 print("The invisible hand drives prices toward equilibrium!")`,
       challenge: 'Add a "dishonest vendor" who sells lower quality at the same price. What happens when buyers can detect quality 50% of the time? Does the market punish dishonesty?',
       successHint: 'The invisible hand is one of the most important ideas in human history. Markets coordinate millions of decisions without central planning. Ima Keithel is living proof that this works — and has worked for 500 years.',

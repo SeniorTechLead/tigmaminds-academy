@@ -61,7 +61,7 @@ for i in range(len(pH_range) - 1):
 for food, ph in foods.items():
     ax1.plot(ph, 0, 'v', color='white', markersize=8)
     y_offset = 0.5 if list(foods.keys()).index(food) % 2 == 0 else -0.5
-    ax1.annotate(f'{food}\\n(pH {ph})', xy=(ph, 0), xytext=(ph, y_offset),
+    ax1.annotate(f'{food}\\\n(pH {ph})', xy=(ph, 0), xytext=(ph, y_offset),
                 color='white', fontsize=7, ha='center', va='center',
                 arrowprops=dict(arrowstyle='->', color='gray', lw=0.5))
 
@@ -359,7 +359,7 @@ ax1.text(0.5, 2e6, 'Infectious dose (~10⁶)', color='#ef4444', fontsize=9)
 
 # 2-hour rule visualization
 ax1.axvline(2, color='gray', linestyle='--', linewidth=1)
-ax1.text(2.2, 1e9, '2-hour\\nrule', color='gray', fontsize=8)
+ax1.text(2.2, 1e9, '2-hour\\\nrule', color='gray', fontsize=8)
 
 # Temperature danger zone
 ax2.set_facecolor('#111827')
@@ -374,7 +374,7 @@ for i, t in enumerate(temp_range):
 ax2.fill_between(temp_range, growth_rate_curve, alpha=0.3, color='#ef4444')
 ax2.plot(temp_range, growth_rate_curve, color='#ef4444', linewidth=2)
 ax2.axvspan(5, 60, alpha=0.1, color='#ef4444')
-ax2.text(32, 0.85, 'DANGER ZONE\\n(5°C - 60°C)', ha='center', color='#ef4444', fontsize=11, fontweight='bold')
+ax2.text(32, 0.85, 'DANGER ZONE\\\n(5°C - 60°C)', ha='center', color='#ef4444', fontsize=11, fontweight='bold')
 
 ax2.axvline(5, color='#3b82f6', linestyle='--', linewidth=1)
 ax2.text(3, 0.5, '5°C', color='#3b82f6', fontsize=9, ha='right')
@@ -445,11 +445,11 @@ ax1.fill_between(radii * 100, sa_to_v, alpha=0.15, color='#f59e0b')
 kitchen_r = 0.1  # 10cm pot radius
 factory_r = 0.5  # 50cm tank radius
 ax1.plot(kitchen_r * 100, 3/kitchen_r, 'o', color='#22c55e', markersize=10, zorder=5)
-ax1.annotate(f'Kitchen pot\\n(SA/V = {3/kitchen_r:.0f}/m)', xy=(kitchen_r*100, 3/kitchen_r),
+ax1.annotate(f'Kitchen pot\\\n(SA/V = {3/kitchen_r:.0f}/m)', xy=(kitchen_r*100, 3/kitchen_r),
             xytext=(kitchen_r*100 + 10, 3/kitchen_r + 5), color='#22c55e', fontsize=9,
             arrowprops=dict(arrowstyle='->', color='#22c55e'))
 ax1.plot(factory_r * 100, 3/factory_r, 'o', color='#ef4444', markersize=10, zorder=5)
-ax1.annotate(f'Factory tank\\n(SA/V = {3/factory_r:.0f}/m)', xy=(factory_r*100, 3/factory_r),
+ax1.annotate(f'Factory tank\\\n(SA/V = {3/factory_r:.0f}/m)', xy=(factory_r*100, 3/factory_r),
             xytext=(factory_r*100 + 10, 3/factory_r + 3), color='#ef4444', fontsize=9,
             arrowprops=dict(arrowstyle='->', color='#ef4444'))
 
@@ -471,7 +471,7 @@ ax2.set_title('Time to Heat Center (quadratic with radius)', color='white', font
 ax2.tick_params(colors='gray')
 
 # Scale comparison
-scales = ['Grandmother\\n(10cm pot)', 'Restaurant\\n(30cm pot)', 'Factory\\n(50cm tank)']
+scales = ['Grandmother\\\n(10cm pot)', 'Restaurant\\\n(30cm pot)', 'Factory\\\n(50cm tank)']
 times_relative = [(0.1/0.05)**2, (0.3/0.05)**2, (0.5/0.05)**2]
 ax2_inset = ax2.inset_axes([0.45, 0.4, 0.5, 0.5])
 ax2_inset.set_facecolor('#111827')
@@ -542,7 +542,7 @@ for label, params in concentrations.items():
 
 # Mark ideal zone
 ax1.axhspan(0.5, 1.5, alpha=0.1, color='#22c55e')
-ax1.text(4, 1.0, 'Ideal: thin enough to burst,\\nthick enough to hold', color='#22c55e',
+ax1.text(4, 1.0, 'Ideal: thin enough to burst,\\\nthick enough to hold', color='#22c55e',
          fontsize=8, ha='right')
 
 ax1.set_xlabel('Time in calcium bath (minutes)', color='white')

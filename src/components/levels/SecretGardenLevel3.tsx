@@ -102,7 +102,7 @@ print(f"  Total outflow (natural):  {Qout_nat.sum():>6.0f} mm/year")
 print(f"  Total outflow (barrage):  {Qout_bar.sum():>6.0f} mm/year")
 print(f"  Net annual ΔS (natural):  {dS_natural.sum():>+6.0f} mm/year")
 print(f"  Net annual ΔS (barrage):  {dS_barrage.sum():>+6.0f} mm/year")
-print(f"\\nThe barrage retains {(dS_barrage.sum() - dS_natural.sum()):.0f} mm more water annually.")
+print(f"\\\nThe barrage retains {(dS_barrage.sum() - dS_natural.sum()):.0f} mm more water annually.")
 print("This excess waterlogging is decomposing the phumdis — Loktak's floating gardens.")`,
       challenge: 'Add a groundwater seepage term (G) that varies seasonally — higher when lake levels are high. Recalculate the budget and see how groundwater acts as a natural buffer.',
       successHint: 'The water budget is the fundamental equation of hydrology. Every wetland, lake, and river system obeys it. Understanding it explains why dams, barrages, and climate change all have such profound effects on aquatic ecosystems.',
@@ -241,7 +241,7 @@ for name, org, wat, gas in stages:
     status = "SINKING" if rho >= rho_water else ""
     print(f"{name:<16} {rho:>8.0f} {frac:>9.1%} {fb:>8.2f} m  {status}")
 
-print(f"\\nAfter {tau} years of waterlogging, freeboard drops to {freeboard_t[tau]*100:.1f} cm")
+print(f"\\\nAfter {tau} years of waterlogging, freeboard drops to {freeboard_t[tau]*100:.1f} cm")
 print(f"After 40 years: {freeboard_t[40]*100:.1f} cm — Loktak's phumdis are in crisis.")
 print("The Ithai Barrage was built in 1983 — that's ~40 years of permanent waterlogging.")`,
       challenge: 'Model the effect of seasonal water level fluctuations (±1m) on phumdi health. Compare a natural regime (lake drops 1m in dry season, phumdis ground on sediment) vs the barrage regime (constant high water). Show how grounding replenishes nutrients.',
@@ -386,7 +386,7 @@ print("-" * 50)
 print(f"{'DO (mg/L)':<12} {'>7':>12} {'4-7':>12} {'<4':>12}")
 print(f"{'BOD₅ (mg/L)':<12} {'<2':>12} {'2-10':>12} {'>10':>12}")
 print(f"{'pH':<12} {'6.5-8.5':>12} {'5.5-9.0':>12} {'<5.5 or >9':>12}")
-print(f"\\nLoktak Lake under phumdis: DO ≈ 2-4 mg/L, BOD ≈ 8-15, pH ≈ 5.5-6.5")
+print(f"\\\nLoktak Lake under phumdis: DO ≈ 2-4 mg/L, BOD ≈ 8-15, pH ≈ 5.5-6.5")
 print("The phumdis create low-oxygen acidic microhabitats — stressful but unique.")`,
       challenge: 'Add a simulation of eutrophication: model how increasing nutrient input (nitrogen, phosphorus) drives algal growth, which initially increases DO (photosynthesis) but then crashes it when algae die and decompose. Plot the boom-bust cycle.',
       successHint: 'DO, BOD, and pH are the vital signs of aquatic ecosystems. The Streeter-Phelps equation, published in 1925, was one of the first mathematical models in environmental science and is still used today to predict the impact of pollution on rivers and lakes.',
@@ -469,7 +469,7 @@ ax3.bar(x_pos - w/2, grazer_e, w, color='#22c55e', alpha=0.8, label='Grazer path
 ax3.bar(x_pos + w/2, detrital_e, w, color='#a855f7', alpha=0.8, label='Detrital pathway')
 ax3.set_yscale('log')
 ax3.set_xticks(x_pos)
-ax3.set_xticklabels(['Level 1\\n(producers)', 'Level 2\\n(consumers)', 'Level 3\\n(predators)'], fontsize=9)
+ax3.set_xticklabels(['Level 1\\\n(producers)', 'Level 2\\\n(consumers)', 'Level 3\\\n(predators)'], fontsize=9)
 ax3.set_ylabel('Energy (kcal/m²/yr)', color='white')
 ax3.set_title('Grazer vs Detritivore Pathways', color='white', fontsize=11)
 ax3.legend(fontsize=9, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
@@ -507,7 +507,7 @@ for name, data in trophic_levels.items():
 print()
 print(f"Only {10/10000:.2%} of producer energy reaches top predators.")
 print(f"A 200 km² lake supports ~{200e6 * 10 / 1e6 / 365 / 3:.0f} otters (rough estimate).")
-print(f"\\nPhumdi degradation shifts the base from macrophytes to phytoplankton,")
+print(f"\\\nPhumdi degradation shifts the base from macrophytes to phytoplankton,")
 print(f"favoring turbidity-tolerant species and threatening clear-water specialists.")`,
       challenge: 'Add species diversity to the model. Within each trophic level, model 3-5 species competing for energy. Show how removing one key species (e.g., a phumdi-dependent fish) cascades through the web.',
       successHint: 'Food webs quantify the architecture of ecosystems. The 10% rule and energy pyramids explain fundamental ecological patterns — why predators are rare, why ecosystems have limited food chain length, and why losing producers (like phumdis) threatens everything above them.',
@@ -621,7 +621,7 @@ ax3.axhspan(50, 70, alpha=0.1, color='#f59e0b', label='Eutrophic (50-70)')
 ax3.axhspan(70, 100, alpha=0.1, color='#ef4444', label='Hypereutrophic (>70)')
 # Mark Loktak
 ax3.axvline(65, color='#fbbf24', linewidth=2, linestyle='--')
-ax3.text(67, 80, 'Loktak\\nLake', color='#fbbf24', fontsize=10, fontweight='bold')
+ax3.text(67, 80, 'Loktak\\\nLake', color='#fbbf24', fontsize=10, fontweight='bold')
 ax3.set_xlabel('Total Phosphorus (μg/L)', color='white')
 ax3.set_ylabel('Carlson TSI', color='white')
 ax3.set_title('Carlson Trophic State Index', color='white', fontsize=11)
@@ -640,7 +640,7 @@ ax4.plot(decades, nutrient_load, color='#ef4444', linewidth=2, label='Nutrient l
 ax4.plot(decades, fish_diversity, color='#3b82f6', linewidth=2, label='Fish species (#)')
 ax4.plot(decades, phumdi_area, color='#22c55e', linewidth=2, label='Phumdi area (km²)')
 ax4.axvline(1983, color='#fbbf24', linewidth=1, linestyle='--')
-ax4.text(1984, 55, 'Ithai\\nBarrage', color='#fbbf24', fontsize=9)
+ax4.text(1984, 55, 'Ithai\\\nBarrage', color='#fbbf24', fontsize=9)
 ax4.set_xlabel('Year', color='white')
 ax4.set_ylabel('Value', color='white')
 ax4.set_title('Loktak Lake Long-Term Degradation', color='white', fontsize=11)
@@ -656,7 +656,7 @@ print()
 print("Carlson Trophic State Index for Loktak Lake:")
 print(f"  Total P ≈ 65 μg/L → TSI ≈ {14.42 * np.log(65) + 4.15:.0f}")
 print(f"  Classification: Eutrophic (approaching hypereutrophic)")
-print(f"\\nLoktak has lost an estimated 70% of its submerged plant diversity since 1983.")
+print(f"\\\nLoktak has lost an estimated 70% of its submerged plant diversity since 1983.")
 print(f"Eutrophication + altered hydrology = double threat to the floating garden.")`,
       challenge: 'Add a remediation scenario: model what happens if nutrient loading is reduced by 50% starting in 2025. How many years does it take for the lake to recover? Include internal phosphorus loading (P released from sediments) as a factor that slows recovery.',
       successHint: 'Eutrophication is a global crisis — it affects lakes, rivers, estuaries, and even coastal oceans (dead zones). The physics and chemistry are straightforward, but the management is complex because nutrients come from diffuse sources across entire watersheds. Understanding the cascade is the first step to stopping it.',
@@ -808,7 +808,7 @@ ax3.tick_params(colors='gray')
 # Plot 4: Management intervention comparison
 ax4 = axes[1, 1]
 ax4.set_facecolor('#111827')
-interventions = ['Do nothing', 'Barrage\\nmodification', 'Nutrient\\nreduction', 'Combined\\nplan']
+interventions = ['Do nothing', 'Barrage\\\nmodification', 'Nutrient\\\nreduction', 'Combined\\\nplan']
 whi_2030 = [28, 42, 38, 58]
 colors = ['#ef4444', '#f59e0b', '#f59e0b', '#22c55e']
 bars = ax4.bar(interventions, whi_2030, color=colors, alpha=0.8, edgecolor='white', linewidth=0.5)
@@ -834,8 +834,8 @@ current_vals = {'DO': '5.2 mg/L', 'BOD': '8.5 mg/L', 'pH': '6.3',
 for name in scores_now:
     score, weight = scores_now[name]
     print(f"{name:<20} {current_vals[name]:>10} {score:>7.0f} {weight:>7.0%}")
-print(f"\\nOverall WHI: {whi_now:.0f}/100 — {'Poor' if whi_now < 40 else 'Fair' if whi_now < 60 else 'Good'}")
-print(f"\\nKey finding: No single intervention is sufficient.")
+print(f"\\\nOverall WHI: {whi_now:.0f}/100 — {'Poor' if whi_now < 40 else 'Fair' if whi_now < 60 else 'Good'}")
+print(f"\\\nKey finding: No single intervention is sufficient.")
 print(f"Only a combined plan (hydrology + nutrients) can push WHI above 'Fair'.")
 print(f"Loktak's secret garden needs integrated science-based management to survive.")`,
       challenge: 'Add a sensitivity analysis: which indicator has the greatest influence on the overall WHI? Vary each indicator independently and plot how the WHI changes. This tells managers where to invest limited resources for maximum impact.',

@@ -67,7 +67,7 @@ for name in planets:
     print(f"{name:<10} {x:>8.3f} {y:>8.3f} {r:>8.3f} {v:>8.1f} deg")
 
 # Show Kepler convergence for Mars
-print("\\nKepler's equation convergence (Mars, e=0.0934):")
+print("\\\nKepler's equation convergence (Mars, e=0.0934):")
 M = np.radians(120); E = M
 for i in range(6):
     res = M - E + 0.0934 * np.sin(E)
@@ -76,7 +76,7 @@ for i in range(6):
     print(f"  Iter {i+1}: E={np.degrees(E):.8f} deg, residual={abs(res):.2e}")
 
 # Venus distance over time
-print("\\n=== Venus-Earth Distance (sampled) ===")
+print("\\\n=== Venus-Earth Distance (sampled) ===")
 for d in range(day, day + 1200, 100):
     xv, yv, _, _ = planet_pos("Venus", d)
     xe, ye, _, _ = planet_pos("Earth", d)
@@ -114,7 +114,7 @@ for name, p in [("Synodic",SYNODIC),("Sidereal",SIDEREAL),
                 ("Draconic",DRACONIC),("Anomalistic",ANOMALISTIC)]:
     print(f"  {name:<14} {p:.6f} days")
 
-print(f"\\nSynodic - Sidereal = {SYNODIC-SIDEREAL:.4f}d (Sun catch-up)")
+print(f"\\\nSynodic - Sidereal = {SYNODIC-SIDEREAL:.4f}d (Sun catch-up)")
 print(f"Sidereal - Draconic = {SIDEREAL-DRACONIC:.4f}d (node regression)")
 
 # Eclipse season geometry
@@ -123,26 +123,26 @@ node_rate = 360.0 / (18.613 * 365.25)  # deg/day
 sun_rate = 360.0 / 365.25
 relative_rate = sun_rate + node_rate
 eclipse_season = 2 * ECLIPSE_LIMIT / relative_rate
-print(f"\\n=== Eclipse Geometry ===")
+print(f"\\\n=== Eclipse Geometry ===")
 print(f"Eclipse season: {eclipse_season:.1f} days")
 print(f"Eclipse half-year: {180.0/relative_rate:.1f} days (Maya: ~177)")
 
 # Saros verification
 s_syn = 223 * SYNODIC; s_dra = 242 * DRACONIC; s_ano = 239 * ANOMALISTIC
-print(f"\\n=== Saros Cycle ===")
+print(f"\\\n=== Saros Cycle ===")
 print(f"223 synodic:     {s_syn:.2f} days")
 print(f"242 draconic:    {s_dra:.2f} days  (diff: {abs(s_syn-s_dra):.2f}d)")
 print(f"239 anomalistic: {s_ano:.2f} days  (diff: {abs(s_syn-s_ano):.2f}d)")
 
 # Maya cycle
 maya = 11960
-print(f"\\n=== Maya 11,960-Day Cycle ===")
+print(f"\\\n=== Maya 11,960-Day Cycle ===")
 print(f"Synodic months: {maya/SYNODIC:.2f} (Maya: 405)")
 print(f"Draconic months: {maya/DRACONIC:.2f}")
 print(f"Error: {abs(maya - round(maya/DRACONIC)*DRACONIC):.2f} days over {maya/365.25:.1f} yr")
 
 # Predict eclipse windows
-print(f"\\n=== Eclipse Windows (next 730 days) ===")
+print(f"\\\n=== Eclipse Windows (next 730 days) ===")
 print(f"{'Day':>6} {'Node dist':>10} {'Type':>8}")
 for day in range(730):
     syn_phase = (day / SYNODIC) % 1.0
@@ -201,7 +201,7 @@ caracol = [
 ]
 
 tol = 2.0
-print(f"\\n=== Alignments (tolerance +/-{tol} deg) ===")
+print(f"\\\n=== Alignments (tolerance +/-{tol} deg) ===")
 n_match = 0
 for sl_name, sl_az in caracol:
     for tg_name, tg_az in targets:
@@ -213,7 +213,7 @@ for sl_name, sl_az in caracol:
 
 n_sl = len(caracol); n_tg = len(targets)
 p_single = 2*tol/360; expected = n_sl * n_tg * p_single
-print(f"\\n=== Significance ===")
+print(f"\\\n=== Significance ===")
 print(f"Pairs tested: {n_sl*n_tg}  Expected random: {expected:.1f}  Observed: {n_match}")
 
 # Monte Carlo
@@ -256,19 +256,19 @@ print("=== Random vs Systematic Error ===")
 for label, data in [("Random only", obs_random), ("Random + systematic", obs_biased)]:
     m = np.mean(data); s = np.std(data, ddof=1); se = s/np.sqrt(len(data))
     ci = 1.96 * se; bias = m - TRUE_VENUS
-    print(f"\\n{label}:")
+    print(f"\\\n{label}:")
     print(f"  Mean: {m:.4f}  Std error: {se:.4f}  95% CI: [{m-ci:.4f}, {m+ci:.4f}]")
     print(f"  Bias: {bias:+.4f}d  True in CI: {'YES' if abs(bias)<ci else 'NO'}")
 
 # Error accumulation
-print("\\n=== Error Accumulation Over Venus Cycles ===")
+print("\\\n=== Error Accumulation Over Venus Cycles ===")
 print(f"{'Cycles':>8} {'Drift (days)':>14} {'Drift (hours)':>14}")
 for n in [1, 5, 13, 25, 50, 65]:
     drift = n * (MAYA_VENUS - TRUE_VENUS)
     print(f"{n:>8} {drift:>+12.2f}d {drift*24:>+12.1f}h")
 
 # Maya correction scheme
-print("\\n=== Dresden Codex Correction Scheme ===")
+print("\\\n=== Dresden Codex Correction Scheme ===")
 corrections = {9: 8, 24: 8, 49: 8, 65: 8}
 running_maya = 0; running_true = 0.0
 print(f"{'Cycle':>6} {'Maya':>8} {'True':>10} {'Error':>8} {'Corr':>6}")
@@ -280,11 +280,11 @@ for cyc in range(1, 66):
         err = running_maya - running_true
         print(f"{cyc:>6} {running_maya:>8} {running_true:>8.1f} {err:>+7.2f}d {corr:>4}d")
 
-print(f"\\nFinal error with corrections: {running_maya-running_true:+.2f}d")
+print(f"\\\nFinal error with corrections: {running_maya-running_true:+.2f}d")
 print(f"Without corrections: {65*MAYA_VENUS-65*TRUE_VENUS:+.2f}d")
 
 # Confidence intervals for all Maya periods
-print("\\n=== Maya Period Confidence Intervals ===")
+print("\\\n=== Maya Period Confidence Intervals ===")
 for name, true_v, n_cyc in [("Venus",583.9214,65),("Mars",779.9361,42),
                               ("Lunar month",29.53059,405)]:
     ep_err = 1.0  # endpoint error
@@ -315,7 +315,7 @@ for name, true_v, n_cyc in [("Venus",583.9214,65),("Mars",779.9361,42),
 TROPICAL_YEAR = 365.2422; SYNODIC_MONTH = 29.53059
 print(f"=== The Calendar Problem ===")
 print(f"Months per year: {TROPICAL_YEAR/SYNODIC_MONTH:.6f}")
-print(f"Gap: {(TROPICAL_YEAR/SYNODIC_MONTH - 12)*SYNODIC_MONTH:.2f} extra days\\n")
+print(f"Gap: {(TROPICAL_YEAR/SYNODIC_MONTH - 12)*SYNODIC_MONTH:.2f} extra days\\\n")
 
 cals = {
     "Gregorian":  365.2425, "Maya Haab'": 365.0,
@@ -328,7 +328,7 @@ for name, yd in cals.items():
     print(f"{name:<14} {yd:>8.4f} {d:>+9.4f}d {d*100:>+10.2f}d")
 
 # Metonic cycle
-print(f"\\n=== Metonic Cycle ===")
+print(f"\\\n=== Metonic Cycle ===")
 solar_19 = 19 * TROPICAL_YEAR; lunar_235 = 235 * SYNODIC_MONTH
 print(f"19 years = {solar_19:.2f}d  |  235 months = {lunar_235:.2f}d")
 print(f"Difference: {abs(solar_19-lunar_235):.2f}d ({abs(solar_19-lunar_235)/19*60:.1f} min/yr)")
@@ -343,7 +343,7 @@ def greg_to_maya(year, month, day):
     u = r//20; ki = r%20
     return md, (b, k, t, u, ki)
 
-print(f"\\n=== Key Dates in Maya Long Count ===")
+print(f"\\\n=== Key Dates in Maya Long Count ===")
 dates = [(2026,4,5,"Today"),(2012,12,21,"13 Baktun"),(2000,1,1,"Y2K"),
          (1969,7,20,"Moon landing"),(1492,10,12,"Columbus")]
 print(f"{'Event':<20} {'Gregorian':<12} {'Long Count':<16} {'Days':>10}")
@@ -352,7 +352,7 @@ for y,m,d,label in dates:
     print(f"{label:<20} {y}-{m:02d}-{d:02d}    {'.'.join(str(x) for x in lc):<16} {md:>10,}")
 
 # Ramadan drift
-print(f"\\n=== Ramadan Through the Seasons ===")
+print(f"\\\n=== Ramadan Through the Seasons ===")
 drift_yr = TROPICAL_YEAR - 354.37
 seasons = {0:"Jan",1:"Feb",2:"Mar",3:"Apr",4:"May",5:"Jun",
            6:"Jul",7:"Aug",8:"Sep",9:"Oct",10:"Nov",11:"Dec"}

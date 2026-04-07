@@ -65,7 +65,7 @@ for name, m, p, t in profiles:
     print(f"{name:<30} {m*100:>8.1f}% {t*100:>8.1f}% {cl:>9.3f}")
 
 # Pressure distribution for NACA 2412 at 5 degrees
-print("\\n=== Pressure Distribution: NACA 2412 at alpha=5 deg ===")
+print("\\\n=== Pressure Distribution: NACA 2412 at alpha=5 deg ===")
 x, yc, yt = naca_4digit(0.02, 0.40, 0.12)
 alpha = 5 * np.pi / 180
 
@@ -80,7 +80,7 @@ for i in range(0, len(x), 10):
     dcp = cp_lower[i] - cp_upper[i]
     print(f"{x[i]:>5.2f} {cp_upper[i]:>9.3f} {cp_lower[i]:>9.3f} {dcp:>9.3f}")
 
-print("\\nNegative Cp_upper = suction (lift). The leading edge has the")
+print("\\\nNegative Cp_upper = suction (lift). The leading edge has the")
 print("strongest suction — this is where most lift is generated.")`,
       challenge: 'Add a NACA 2406 (thin wing like a bird feather) to the comparison. Thin airfoils have less drag but are structurally weaker. At what thickness does the wing become too flimsy to support a human pilot? Leonardo faced exactly this trade-off — his wood-and-fabric wings were thin but flexible.',
       successHint: 'NACA airfoil profiles are the foundation of aerospace engineering. Every wing on every aircraft was designed starting from these shapes. You just computed what wind tunnel engineers measured experimentally for decades — thin airfoil theory replaced thousands of hours of testing.',
@@ -138,7 +138,7 @@ for ar in [3, 5, 7, 10, 14, 18, 25]:
     print(f"{ar:>4} {span:>7.1f} {cl:>6.2f} {cdi:>7.4f} {cd0:>7.4f} {drag:>8.1f} {ld_ratio:>5.1f}")
 
 # Speed sweep for AR=8 (Leonardo-style) vs AR=18 (modern glider)
-print("\\n=== Drag vs Speed: Leonardo (AR=8) vs Modern Glider (AR=18) ===")
+print("\\\n=== Drag vs Speed: Leonardo (AR=8) vs Modern Glider (AR=18) ===")
 print(f"{'Speed':>6} {'Drag AR=8':>10} {'Drag AR=18':>11} {'Saving':>8}")
 print("-" * 37)
 for v in [6, 8, 10, 12, 15, 20]:
@@ -147,7 +147,7 @@ for v in [6, 8, 10, 12, 15, 20]:
     saving = (1 - d18 / d8) * 100
     print(f"{v:>4}m/s {d8:>9.1f}N {d18:>9.1f}N {saving:>6.0f}%")
 
-print("\\nHigher AR dramatically reduces drag at low speeds —")
+print("\\\nHigher AR dramatically reduces drag at low speeds —")
 print("exactly where human-powered flight would need to operate.")`,
       challenge: 'Wingtip devices (winglets) effectively increase the Oswald efficiency factor from ~0.85 to ~0.95. Add winglets to the AR=8 Leonardo wing and compare its drag to the plain AR=8 wing. How much drag reduction do winglets provide? Modern airliners save 3-5% fuel with winglets — you\'re calculating the same benefit.',
       successHint: 'Induced drag is the reason aircraft wings look the way they do. Every wing is a compromise between aspect ratio (less drag) and structural weight (shorter wings are lighter). Understanding this trade-off is the core of wing design — from Leonardo\'s ornithopter to the Boeing 787.',
@@ -215,7 +215,7 @@ for label, watts in human_power.items():
     print(f"  {label}: {watts} W")
 
 # Detailed power curve for Leonardo vs Gossamer
-print("\\n=== Power Curve: Leonardo vs Gossamer Albatross ===")
+print("\\\n=== Power Curve: Leonardo vs Gossamer Albatross ===")
 print(f"{'Speed':>7} {'Leo Power':>10} {'Goss Power':>11} {'Ratio':>7}")
 print("-" * 37)
 for v in [5, 7, 9, 11, 13, 15, 18, 22]:
@@ -224,7 +224,7 @@ for v in [5, 7, 9, 11, 13, 15, 18, 22]:
     ratio = p_leo / p_goss if p_goss > 0 else float('inf')
     print(f"{v:>5}m/s {p_leo:>9.0f}W {p_goss:>9.0f}W {ratio:>6.1f}x")
 
-print("\\nLeonardo's design needs 5-10x more power than the Gossamer Albatross.")
+print("\\\nLeonardo's design needs 5-10x more power than the Gossamer Albatross.")
 print("Human-powered flight requires extreme efficiency — every gram and every")
 print("percentage of drag counts.")`,
       challenge: 'Calculate how much the ornithopter\'s mass would need to decrease (keeping the same wing) to bring minimum power below 250 W. Then calculate how much the wing area would need to increase (keeping the same mass). Which is more practical? Leonardo had neither ultralight materials nor enormous wings.',
@@ -289,7 +289,7 @@ total_lift = mass * g  # 1177 N
 span = 10        # m (estimated from Leonardo's sketches)
 
 print("=== Wing Spar Bending Analysis ===")
-print(f"Mass: {mass} kg | Lift: {total_lift:.0f} N | Span: {span} m\\n")
+print(f"Mass: {mass} kg | Lift: {total_lift:.0f} N | Span: {span} m\\\n")
 
 for dist in ["uniform", "elliptical", "triangular"]:
     y, M = spar_bending_moment(span, total_lift, dist)
@@ -299,7 +299,7 @@ for dist in ["uniform", "elliptical", "triangular"]:
     print(f"  Tip moment:  {M[-1]:>8.1f} N·m")
 
 # Can Leonardo's wooden spar handle it?
-print("\\n=== Spar Stress Check ===")
+print("\\\n=== Spar Stress Check ===")
 # Assume circular wooden spar
 materials = [
     ("Poplar (Leonardo's likely choice)", 40, 300),   # yield MPa, density kg/m³
@@ -309,7 +309,7 @@ materials = [
 ]
 
 root_moment = spar_bending_moment(span, total_lift, "elliptical")[1][0]
-print(f"Root bending moment (elliptical): {root_moment:.0f} N·m\\n")
+print(f"Root bending moment (elliptical): {root_moment:.0f} N·m\\\n")
 
 print(f"{'Material':<36} {'Min dia':>8} {'Mass/m':>8} {'Status':>10}")
 print("-" * 64)
@@ -369,7 +369,7 @@ for name, mass, span, area in birds:
     print(f"{name:<22} {mass:>5.3f} {span:>5.2f} {area:>5.3f} {wl:>8.1f} {ar:>5.1f}")
 
 # Square-cube law: scaling analysis
-print("\\n=== Square-Cube Law: Scaling Birds to Human Size ===")
+print("\\\n=== Square-Cube Law: Scaling Birds to Human Size ===")
 ref_mass = 1.2    # hawk
 ref_area = 0.24   # hawk wing area
 ref_span = 1.30   # hawk wingspan
@@ -389,7 +389,7 @@ print(f"  Wing loading: {scaled_wl:.0f} N/m²")
 
 # What area do we ACTUALLY need?
 target_wl = [30, 50, 80, 120]
-print(f"\\n=== Required Wing Area for {human_mass} kg at Target Wing Loadings ===")
+print(f"\\\n=== Required Wing Area for {human_mass} kg at Target Wing Loadings ===")
 for wl in target_wl:
     area_needed = human_mass * 9.81 / wl
     span_needed = np.sqrt(area_needed * 10)  # assume AR=10
@@ -397,7 +397,7 @@ for wl in target_wl:
     print(f"  WL={wl:>3} N/m²: area={area_needed:>5.1f} m², span~{span_needed:.1f} m  ({feasibility})")
 
 # Power to fly: larger birds need more power per kg
-print("\\n=== Metabolic Power vs Mass (Scaling Law) ===")
+print("\\\n=== Metabolic Power vs Mass (Scaling Law) ===")
 print("Flight power scales as mass^(7/6) — larger = disproportionately harder")
 for name, mass, span, area in birds:
     power_per_kg = 10 * mass**(1.0/6.0)  # simplified scaling law W/kg

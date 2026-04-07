@@ -78,7 +78,7 @@ ax.set_xlabel('Strain (%)', color='white')
 ax.set_ylabel('Stress (MPa)', color='white')
 ax.set_title('Stress-Strain: Reeled vs Spun', color='white', fontsize=11)
 ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax.annotate('Property trade-off\\nfor ethical choice', xy=(15, 300),
+ax.annotate('Property trade-off\\\nfor ethical choice', xy=(15, 300),
             color='#f59e0b', fontsize=9, fontweight='bold')
 
 # Plot 2: Fiber length distribution
@@ -91,12 +91,12 @@ ax.set_xlabel('Fiber length (cm)', color='white')
 ax.set_ylabel('Count', color='white')
 ax.set_title('Spun Silk Fiber Length Distribution', color='white', fontsize=11)
 ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax.annotate(f'Reeled: single {400}m\\nfilament (off chart →)',
+ax.annotate(f'Reeled: single {400}m\\\nfilament (off chart →)',
             xy=(max(spun_lengths_cm) * 0.6, 40), color='#ef4444', fontsize=9)
 
 # Plot 3: Property comparison radar
 ax = axes[0, 2]
-properties = ['Tensile\\nstrength', 'Softness', 'Drape', 'Warmth', 'Durability', 'Sheen']
+properties = ['Tensile\\\nstrength', 'Softness', 'Drape', 'Warmth', 'Durability', 'Sheen']
 reeled_vals = [0.9, 0.5, 0.9, 0.4, 0.8, 0.95]
 spun_vals =   [0.5, 0.9, 0.6, 0.9, 0.6, 0.3]
 x = np.arange(len(properties))
@@ -128,7 +128,7 @@ for i, p in enumerate(pupae_killed):
 
 # Plot 5: Global silk production breakdown
 ax = axes[1, 1]
-types = ['Mulberry\\n(B. mori)', 'Eri\\n(S. ricini)', 'Tasar\\n(A. mylitta)', 'Muga\\n(A. assam.)']
+types = ['Mulberry\\\n(B. mori)', 'Eri\\\n(S. ricini)', 'Tasar\\\n(A. mylitta)', 'Muga\\\n(A. assam.)']
 production_tonnes = [150000, 5000, 2000, 150]
 colors_silk = ['#e5e7eb', '#22c55e', '#f59e0b', '#fbbf24']
 ax.bar(range(len(types)), production_tonnes, color=colors_silk, edgecolor='none', width=0.6)
@@ -142,7 +142,7 @@ for i, t in enumerate(production_tonnes):
 
 # Plot 6: Applications comparison
 ax = axes[1, 2]
-apps = ['Luxury\\nfashion', 'Thermal\\nwear', 'Medical\\ntextile', 'Upholstery', 'Industrial']
+apps = ['Luxury\\\nfashion', 'Thermal\\\nwear', 'Medical\\\ntextile', 'Upholstery', 'Industrial']
 reeled_suit = [0.95, 0.3, 0.7, 0.8, 0.6]
 spun_suit =   [0.4, 0.95, 0.8, 0.5, 0.3]
 x = np.arange(len(apps))
@@ -292,12 +292,12 @@ ax = axes[0, 1]
 # Show decision logic at each ecdysone pulse
 molt_days = [6, 11, 17, 24, 35, 50]
 molt_jh = [np.interp(d, t, jh) for d in molt_days]
-molt_types = ['Larval\\nmolt', 'Larval\\nmolt', 'Larval\\nmolt', 'Larval\\nmolt',
+molt_types = ['Larval\\\nmolt', 'Larval\\\nmolt', 'Larval\\\nmolt', 'Larval\\\nmolt',
               'Pupation', 'Emergence']
 colors_molt = ['#22c55e', '#22c55e', '#22c55e', '#22c55e', '#f59e0b', '#a855f7']
 ax.bar(range(len(molt_days)), molt_jh, color=colors_molt, edgecolor='none', width=0.6)
 ax.set_xticks(range(len(molt_days)))
-ax.set_xticklabels([f'Day {d}\\n{mt}' for d, mt in zip(molt_days, molt_types)],
+ax.set_xticklabels([f'Day {d}\\\n{mt}' for d, mt in zip(molt_days, molt_types)],
                     color='white', fontsize=7)
 ax.set_ylabel('JH level at molt', color='white')
 ax.set_title('JH Level Determines Molt Outcome', color='white', fontsize=11)
@@ -311,7 +311,7 @@ ax.plot(t, silk_rate, color='#f59e0b', linewidth=2)
 ax.set_xlabel('Days', color='white')
 ax.set_ylabel('Silk production rate (a.u.)', color='white')
 ax.set_title('Silk Production Window', color='white', fontsize=11)
-ax.annotate('Silk spinning\\nphase', xy=(32, 80), color='white', fontsize=10, fontweight='bold')
+ax.annotate('Silk spinning\\\nphase', xy=(32, 80), color='white', fontsize=10, fontweight='bold')
 total_silk = np.trapz(silk_rate, t)
 ax.text(50, 60, f'Total silk: {total_silk:.0f} units', color='#f59e0b', fontsize=10)
 
@@ -333,7 +333,7 @@ ax = axes[1, 1]
 silk_normal = np.trapz(silk_rate, t)
 silk_ext_total = np.trapz(silk_ext[:len(t2)], t2)
 silk_early_total = np.trapz(silk_early[:len(t3)], t3)
-scenarios = ['Normal', 'Extended JH\\n(+7 days)', 'Early drop\\n(-7 days)']
+scenarios = ['Normal', 'Extended JH\\\n(+7 days)', 'Early drop\\\n(-7 days)']
 yields = [silk_normal, silk_ext_total, silk_early_total]
 colors_sc = ['#22c55e', '#3b82f6', '#ef4444']
 ax.bar(range(len(scenarios)), yields, color=colors_sc, edgecolor='none', width=0.6)
@@ -352,7 +352,7 @@ ax = axes[1, 2]
 # Simplified signaling pathway diagram
 pathway_y = [0.9, 0.7, 0.5, 0.3, 0.1]
 pathway_labels = ['Brain (PTTH)', 'Prothoracic gland', 'Ecdysone synthesis',
-                  'Nuclear receptor (EcR)', 'Gene activation\\n→ molt/metamorphosis']
+                  'Nuclear receptor (EcR)', 'Gene activation\\\n→ molt/metamorphosis']
 for i, (y, label) in enumerate(zip(pathway_y, pathway_labels)):
     color = ['#a855f7', '#3b82f6', '#ef4444', '#f59e0b', '#22c55e'][i]
     ax.add_patch(plt.Rectangle((0.15, y - 0.07), 0.7, 0.12, facecolor=color,
@@ -364,7 +364,7 @@ for i, (y, label) in enumerate(zip(pathway_y, pathway_labels)):
                     arrowprops=dict(arrowstyle='->', color='white', lw=2),
                     xycoords='axes fraction', textcoords='axes fraction')
 # JH inhibition arrow
-ax.annotate('JH\\nINHIBITS', xy=(0.85, 0.3), xytext=(0.95, 0.6),
+ax.annotate('JH\\\nINHIBITS', xy=(0.85, 0.3), xytext=(0.95, 0.6),
             arrowprops=dict(arrowstyle='->', color='#22c55e', lw=2),
             xycoords='axes fraction', textcoords='axes fraction',
             color='#22c55e', fontsize=8, fontweight='bold', ha='center')
@@ -519,7 +519,7 @@ for i, name in enumerate(names):
     r = np.sqrt(denier[i]) * 5
     circle = plt.Circle((i * 25 + 15, 50), r, color=colors_f[i], alpha=0.7)
     ax.add_patch(circle)
-    ax.text(i * 25 + 15, 15, f'{name}\\n{denier[i]:.1f}d',
+    ax.text(i * 25 + 15, 15, f'{name}\\\n{denier[i]:.1f}d',
             ha='center', color='white', fontsize=7)
 ax.set_xlim(0, len(names) * 25 + 10)
 ax.set_ylim(0, 100)
@@ -528,7 +528,7 @@ ax.set_xticks([]); ax.set_yticks([])
 
 # Plot 6: Application suitability matrix
 ax = axes[1, 2]
-applications = ['Winter\\nwear', 'Summer\\nwear', 'Luxury\\nfabric', 'Work\\nwear', 'Medical']
+applications = ['Winter\\\nwear', 'Summer\\\nwear', 'Luxury\\\nfabric', 'Work\\\nwear', 'Medical']
 fibers_show = ['Eri silk', 'Bombyx silk', 'Cotton', 'Wool', 'Polyester']
 suitability = np.array([
     [0.95, 0.6, 0.5, 0.5, 0.7],  # Eri
@@ -704,7 +704,7 @@ ax.text(7, 200, 'Best zone', color='#22c55e', fontsize=9, fontweight='bold')
 
 # Plot 6: Garment lifecycle phases breakdown
 ax = axes[1, 2]
-phases = ['Raw\\nmaterial', 'Production', 'Dyeing', 'Manufact.', 'Use\\n(washing)', 'End of\\nlife']
+phases = ['Raw\\\nmaterial', 'Production', 'Dyeing', 'Manufact.', 'Use\\\n(washing)', 'End of\\\nlife']
 # CO2 breakdown per phase for Eri silk garment (estimated, kg CO2e)
 eri_phases = [2, 3, 1, 1, 4, 0.5]
 cotton_phases = [1, 1, 2, 1, 8, 0.5]
@@ -720,7 +720,7 @@ ax.set_xticklabels(phases, color='white', fontsize=8)
 ax.set_ylabel('CO₂ (kg per garment)', color='white')
 ax.set_title('Carbon by Lifecycle Phase', color='white', fontsize=11)
 ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax.annotate('Use phase\\ndominates!', xy=(4, 7), color='#f59e0b', fontsize=9, fontweight='bold')
+ax.annotate('Use phase\\\ndominates!', xy=(4, 7), color='#f59e0b', fontsize=9, fontweight='bold')
 
 plt.tight_layout()
 plt.show()
@@ -899,7 +899,7 @@ ax.bar(x, co2_uses, 0.6, bottom=co2_prods, color='#f59e0b', label='Use (washing)
 bottoms = [p + u for p, u in zip(co2_prods, co2_uses)]
 ax.bar(x, co2_eols, 0.6, bottom=bottoms, color='#ef4444', label='End of life', edgecolor='none')
 ax.set_xticks(x)
-ax.set_xticklabels([n.split()[0] + '\\n' + n.split()[-1] for n in garment_names],
+ax.set_xticklabels([n.split()[0] + '\\\n' + n.split()[-1] for n in garment_names],
                     color='white', fontsize=8)
 ax.set_ylabel('kg CO₂e per year of warmth', color='white')
 ax.set_title('Carbon Footprint (functional unit)', color='white', fontsize=11)
@@ -912,7 +912,7 @@ water_uses = [results[n]['water_use'] for n in garment_names]
 ax.bar(x, water_prods, 0.6, color='#3b82f6', label='Production', edgecolor='none')
 ax.bar(x, water_uses, 0.6, bottom=water_prods, color='#06b6d4', label='Use (washing)', edgecolor='none')
 ax.set_xticks(x)
-ax.set_xticklabels([n.split()[0] + '\\n' + n.split()[-1] for n in garment_names],
+ax.set_xticklabels([n.split()[0] + '\\\n' + n.split()[-1] for n in garment_names],
                     color='white', fontsize=8)
 ax.set_ylabel('Liters per year of warmth', color='white')
 ax.set_title('Water Footprint (functional unit)', color='white', fontsize=11)
@@ -923,11 +923,11 @@ ax = axes[0, 2]
 micro = [results[n]['microplastic_g_yr'] for n in garment_names]
 ax.bar(x, micro, 0.6, color=colors_g, edgecolor='none')
 ax.set_xticks(x)
-ax.set_xticklabels([n.split()[0] + '\\n' + n.split()[-1] for n in garment_names],
+ax.set_xticklabels([n.split()[0] + '\\\n' + n.split()[-1] for n in garment_names],
                     color='white', fontsize=8)
 ax.set_ylabel('Microplastic release (g/year)', color='white')
 ax.set_title('Microplastic Pollution', color='white', fontsize=11)
-ax.annotate('Only synthetic\\nfibers release\\nmicroplastic', xy=(3, micro[3] * 0.7),
+ax.annotate('Only synthetic\\\nfibers release\\\nmicroplastic', xy=(3, micro[3] * 0.7),
             color='#ef4444', fontsize=9, fontweight='bold')
 
 # Plot 4: Sensitivity to lifespan
@@ -941,7 +941,7 @@ ax.set_xlabel('Garment lifespan (years)', color='white')
 ax.set_ylabel('CO₂ per year of warmth (kg)', color='white')
 ax.set_title('Sensitivity: Lifespan Effect', color='white', fontsize=11)
 ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax.annotate('Longer lifespan →\\nlower annual impact', xy=(15, 1), color='#f59e0b', fontsize=9)
+ax.annotate('Longer lifespan →\\\nlower annual impact', xy=(15, 1), color='#f59e0b', fontsize=9)
 
 # Plot 5: Uncertainty analysis (Monte Carlo)
 ax = axes[1, 1]

@@ -83,7 +83,7 @@ beta = 0.4
 gamma = 0.1  # ~10 day infection duration
 
 print("=== Stochastic SIR: Hospital Ward (N=30) ===")
-print(f"beta={beta}, gamma={gamma}, R0={beta/gamma:.1f}\\n")
+print(f"beta={beta}, gamma={gamma}, R0={beta/gamma:.1f}\\\n")
 
 # Homogeneous population
 runs_homo = stochastic_sir(N, I0, beta, gamma, 60, n_runs=50)
@@ -101,14 +101,14 @@ runs_hetero = stochastic_sir(N, I0, beta, gamma, 60, n_runs=50,
 peaks_hetero = [r["peak_I"] for r in runs_hetero]
 totals_hetero = [r["total_infected"] for r in runs_hetero]
 
-print("\\n--- Heterogeneous (Superspreaders) ---")
+print("\\\n--- Heterogeneous (Superspreaders) ---")
 print(f"Median peak infected: {np.median(peaks_hetero):.0f}")
 print(f"Median total infected: {np.median(totals_hetero):.0f}")
 print(f"Outbreaks that fizzled (<5 total): {sum(1 for t in totals_hetero if t < 5)}/{len(totals_hetero)}")
 
 # Show one sample trajectory
 sample = runs_hetero[0]
-print(f"\\n--- Sample Trajectory (heterogeneous) ---")
+print(f"\\\n--- Sample Trajectory (heterogeneous) ---")
 print(f"{'Day':>4} {'S':>4} {'I':>4} {'R':>4}")
 for d in range(0, 61, 5):
     print(f"{d:>4} {sample['S'][d]:>4} {sample['I'][d]:>4} {sample['R'][d]:>4}")`,
@@ -211,7 +211,7 @@ strategies = [
 
 n_rounds = 100
 print("=== Antibiotic Stewardship Game Theory ===")
-print(f"{n_rounds} rounds per matchup\\n")
+print(f"{n_rounds} rounds per matchup\\\n")
 
 print(f"{'Match':<40} {'A Total':>8} {'B Total':>8} {'Final R%':>9}")
 print("-" * 67)
@@ -225,13 +225,13 @@ for i, (name_a, strat_a) in enumerate(strategies):
         print(f"{match_name:<40} {sum(pa):>7.0f} {sum(pb):>7.0f} {res[-1]*100:>7.1f}%")
 
 # Detailed look at the key matchup
-print("\\n=== Detailed: Tit-for-Tat vs Resistance-Aware ===")
+print("\\\n=== Detailed: Tit-for-Tat vs Resistance-Aware ===")
 pa, pb, res, ha, hb = antibiotic_game(n_rounds, tit_for_tat, resistance_aware)
 print(f"{'Round':>6} {'A':>4} {'B':>4} {'A Pay':>7} {'B Pay':>7} {'Resist%':>8}")
 for r in [0, 10, 20, 30, 50, 70, 90, 99]:
     print(f"{r:>6} {ha[r]:>4} {hb[r]:>4} {pa[r]:>6.1f} {pb[r]:>6.1f} {res[r]*100:>7.1f}%")
 
-print(f"\\nTotal A: {sum(pa):.0f} | Total B: {sum(pb):.0f}")
+print(f"\\\nTotal A: {sum(pa):.0f} | Total B: {sum(pb):.0f}")
 print(f"Lesson: cooperation (mutual stewardship) beats defection long-term")`,
       challenge: 'Add a "policy" mechanism: if resistance exceeds 20%, both hospitals are forced to steward for the next 10 rounds (regulatory intervention). How does this external constraint change outcomes? This models real-world antibiotic restriction policies imposed by public health authorities.',
       successHint: 'The antibiotic stewardship game is a real-world tragedy of the commons playing out in hospitals globally. Game theory doesn\'t just describe the problem — it identifies solutions: mechanism design, repeated interactions, and reputation effects can shift the Nash equilibrium from mutual defection to mutual cooperation. This is active research in health economics.',
@@ -308,7 +308,7 @@ def bioreactor_parameters(volume_L, P_per_V=2000, vessel_type="stirred_tank"):
 volumes = [1, 10, 100, 1000, 10000, 100000]
 
 print("=== Bioreactor Scale-Up Analysis ===")
-print(f"Constant P/V = 2000 W/m³ across all scales\\n")
+print(f"Constant P/V = 2000 W/m³ across all scales\\\n")
 
 print(f"{'Volume':>10} {'Power':>8} {'RPM':>6} {'Tip Spd':>8} "
       f"{'kLa':>6} {'OTR':>8} {'Mix Time':>10}")
@@ -323,7 +323,7 @@ for V in volumes:
           f"{p['OTR_mg_L_hr']:>7.1f} {p['mixing_time_s']:>9.1f}")
 
 # Penicillin yield model
-print("\\n=== Penicillin Yield vs Scale ===")
+print("\\\n=== Penicillin Yield vs Scale ===")
 print(f"{'Volume':>10} {'Yield (mg/L)':>13} {'Total (g)':>10} {'Patients/batch':>15}")
 for V in volumes:
     p = bioreactor_parameters(V)
@@ -433,7 +433,7 @@ regimens = [
 total_hr = 72  # 3 days
 
 print("=== PKPD Simulation: Dosing Regimen Comparison ===")
-print(f"Pathogen MIC: {mic} mg/L | Initial burden: {pd['N0']:.0e} CFU\\n")
+print(f"Pathogen MIC: {mic} mg/L | Initial burden: {pd['N0']:.0e} CFU\\\n")
 
 print(f"{'Regimen':<16} {'%T>MIC':>7} {'Cmax':>7} {'Cmin':>7} "
       f"{'Log kill 24h':>12} {'Log kill 72h':>12}")
@@ -460,7 +460,7 @@ for name, dose, interval in regimens:
           f"{log_kill_24:>10.1f} {log_kill_72:>10.1f}")
 
 # Detailed trajectory for best regimen
-print("\\n=== Detailed Trajectory: 500mg q6h ===")
+print("\\\n=== Detailed Trajectory: 500mg q6h ===")
 time, conc, bact = pkpd_simulation(500, 6, total_hr, mic, pk, pd)
 print(f"{'Hour':>5} {'Conc (mg/L)':>12} {'Bacteria':>14} {'Log CFU':>8} {'Status':>12}")
 print("-" * 53)
@@ -585,7 +585,7 @@ class HospitalNetwork:
 net = HospitalNetwork(n_patients=24, n_nurses=4, n_shared_spaces=2)
 
 print("=== Hospital Contact Network Analysis ===")
-print(f"Nodes: {net.n_nodes} (24 patients, 4 nurses, 2 shared spaces)\\n")
+print(f"Nodes: {net.n_nodes} (24 patients, 4 nurses, 2 shared spaces)\\\n")
 
 # Network statistics
 print(f"{'Node':>5} {'Type':<10} {'Degree':>7} {'Betweenness':>12}")
@@ -599,7 +599,7 @@ for i in range(net.n_nodes):
         print(f"{i:>5} {net.types[i]:<10} {d:>5.0f} {b:>10.2f}")
 
 # Simulate outbreaks with different interventions
-print("\\n=== Outbreak Simulation (100 runs each) ===")
+print("\\\n=== Outbreak Simulation (100 runs each) ===")
 scenarios = [
     ("No intervention", 0.0),
     ("50% hand hygiene", 0.5),

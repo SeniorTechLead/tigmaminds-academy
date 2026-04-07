@@ -122,7 +122,7 @@ ax2.set_ylabel('Fundamental freq (Hz)', color='gray')
 # Annotate the range
 f_cold = BambooFlute(tube_length=0.40, temperature=5).fundamental_frequency()
 f_hot = BambooFlute(tube_length=0.40, temperature=40).fundamental_frequency()
-ax2.annotate(f'{f_hot - f_cold:.1f} Hz drift\n(5C to 40C)',
+ax2.annotate(f'{f_hot - f_cold:.1f} Hz drift\\n(5C to 40C)',
              xy=(22, (f_cold + f_hot)/2), fontsize=10, color='#f59e0b',
              ha='center')
 
@@ -293,7 +293,7 @@ for i, (pos, diam) in enumerate(zip(hole_positions, hole_diameters)):
     circle = plt.Circle((pos * 100, tube_y), diam * 100 * 3,
                          facecolor='#1f2937', edgecolor='white', linewidth=1.5)
     ax3.add_patch(circle)
-    ax3.text(pos * 100, tube_y - 0.25, f'H{i+1}\\n{pos*100:.1f}cm',
+    ax3.text(pos * 100, tube_y - 0.25, f'H{i+1}\\\n{pos*100:.1f}cm',
              ha='center', fontsize=7, color='gray')
 
 ax3.set_xlim(-2, flute.tube_length * 100 + 2)
@@ -314,7 +314,7 @@ for i, f in enumerate(note_freqs):
                 xytext=(0, 12), fontsize=8, color='white', ha='center')
 
 ax4.set_xticks(range(len(names)))
-ax4.set_xticklabels([n.replace(' ', '\\n') for n in names], fontsize=7, color='gray')
+ax4.set_xticklabels([n.replace(' ', '\\\n') for n in names], fontsize=7, color='gray')
 ax4.set_ylabel('Frequency (Hz)', color='gray')
 ax4.set_title('Scale produced by sequential fingerings', color='white', fontsize=11)
 

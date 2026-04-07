@@ -144,7 +144,7 @@ print("=" * 55)
 for name, d, rho, v in cases:
     r = calc.full(d, rho, v)
     print(f"{name}: crater={r['crater_D']:.0f}m, E={r['energy_Mt']:.2e}Mt, survived={r['surv']*100:.1f}%")
-print(f"\\nMonte Carlo 95% CI for 100m stone: {np.percentile(mc_craters,5):.0f}-{np.percentile(mc_craters,95):.0f}m")`,
+print(f"\\\nMonte Carlo 95% CI for 100m stone: {np.percentile(mc_craters,5):.0f}-{np.percentile(mc_craters,95):.0f}m")`,
       challenge: `Add tsunami computation for ocean impacts: compute wave height vs distance accounting for water depth and coastal amplification.`,
       successHint: `The integrated calculator connects every aspect of impact science into a single deployable tool. This is real planetary defense technology.`,
     },
@@ -354,11 +354,11 @@ ax.tick_params(colors='gray')
 
 ax = axes[1,2]; ax.set_facecolor('#111827')
 ax.axis('off')
-txt = f"SHOCK ANALYSIS (50m at 15 km/s)\\n{'='*35}\\n\\n"
-txt += f"Contact pressure: {P0:.0f} GPa\\n\\n"
+txt = f"SHOCK ANALYSIS (50m at 15 km/s)\\\n{'='*35}\\\n\\\n"
+txt += f"Contact pressure: {P0:.0f} GPa\\\n\\\n"
 for zn, (pth, col) in zones.items():
     r_z = a * (P0/pth)**(1/2.5) if pth < P0 else 0
-    txt += f"{zn} (>{pth} GPa): {r_z:.0f}m\\n"
+    txt += f"{zn} (>{pth} GPa): {r_z:.0f}m\\\n"
 ax.text(0.05, 0.95, txt, transform=ax.transAxes, fontsize=9, color='white',
         verticalalignment='top', fontfamily='monospace')
 
@@ -443,7 +443,7 @@ ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax.tick_params(colors='gray')
 
 ax = axes[1,1]; ax.set_facecolor('#111827')
-cats = ['1m\\n(daily)', '10m\\n(yearly)', '30m\\n(century)', '100m\\n(10ky)', '1km\\n(500ky)']
+cats = ['1m\\\n(daily)', '10m\\\n(yearly)', '30m\\\n(century)', '100m\\\n(10ky)', '1km\\\n(500ky)']
 cat_d = [1, 10, 30, 100, 1000]
 cat_Mt = [damage(d)[1] for d in cat_d]
 cat_colors = ['#22c55e','#22c55e','#f59e0b','#ef4444','#ef4444']
@@ -588,11 +588,11 @@ plt.colorbar(im, ax=ax, shrink=0.8)
 
 ax = axes[1,2]; ax.set_facecolor('#111827')
 ax.axis('off')
-txt = f"STREWN FIELD SUMMARY\\n{'='*30}\\n\\n"
-txt += f"Fragments: {len(frags)}\\n"
-txt += f"Largest: {frags[0]:.1f} kg\\n"
-txt += f"Field: {a_e:.1f} x {b_e:.1f} km\\n"
-txt += f"Largest at: ({lx[0]:.1f}, {ly[0]:.1f}) km\\n"
+txt = f"STREWN FIELD SUMMARY\\\n{'='*30}\\\n\\\n"
+txt += f"Fragments: {len(frags)}\\\n"
+txt += f"Largest: {frags[0]:.1f} kg\\\n"
+txt += f"Field: {a_e:.1f} x {b_e:.1f} km\\\n"
+txt += f"Largest at: ({lx[0]:.1f}, {ly[0]:.1f}) km\\\n"
 ax.text(0.05, 0.95, txt, transform=ax.transAxes, fontsize=10, color='white',
         verticalalignment='top', fontfamily='monospace')
 
@@ -701,23 +701,23 @@ ax.set_title('Atmospheric Filter', color='white'); ax.tick_params(colors='gray')
 
 ax = axes[1,2]; ax.set_facecolor('#111827')
 ax.axis('off')
-rpt = f"IMPACT CRATER CALCULATOR v1.0\\n{'='*35}\\n\\n"
-rpt += f"Input: {r['d']}m, {r['rho']}kg/m3, {r['v']/1000:.0f}km/s\\n"
-rpt += f"Mass: {r['mass']:.2e} kg\\n"
-rpt += f"Survived: {r['surv']*100:.1f}%\\n"
-rpt += f"Ground vel: {r['vg']/1000:.1f} km/s\\n\\n"
-rpt += f"Crater: {r['crater']:.0f}m (95%CI: {np.percentile(mc_c,5):.0f}-{np.percentile(mc_c,95):.0f})\\n"
-rpt += f"Energy: {r['Mt']:.1f} Mt\\n"
-rpt += f"Fireball: {r['fireball']:.1f} km\\n"
-rpt += f"Blast (5psi): {r['blast5']:.1f} km\\n"
-rpt += f"Frequency: 1/{1/r['freq']:.0f} yr\\n"
+rpt = f"IMPACT CRATER CALCULATOR v1.0\\\n{'='*35}\\\n\\\n"
+rpt += f"Input: {r['d']}m, {r['rho']}kg/m3, {r['v']/1000:.0f}km/s\\\n"
+rpt += f"Mass: {r['mass']:.2e} kg\\\n"
+rpt += f"Survived: {r['surv']*100:.1f}%\\\n"
+rpt += f"Ground vel: {r['vg']/1000:.1f} km/s\\\n\\\n"
+rpt += f"Crater: {r['crater']:.0f}m (95%CI: {np.percentile(mc_c,5):.0f}-{np.percentile(mc_c,95):.0f})\\\n"
+rpt += f"Energy: {r['Mt']:.1f} Mt\\\n"
+rpt += f"Fireball: {r['fireball']:.1f} km\\\n"
+rpt += f"Blast (5psi): {r['blast5']:.1f} km\\\n"
+rpt += f"Frequency: 1/{1/r['freq']:.0f} yr\\\n"
 ax.text(0.02,0.98,rpt,transform=ax.transAxes,fontsize=8,color='white',verticalalignment='top',fontfamily='monospace')
 
 plt.tight_layout()
 plt.show()
 
 print(rpt)
-print("\\nCAPSTONE COMPLETE")
+print("\\\nCAPSTONE COMPLETE")
 print("="*55)
 print("You built an Impact Crater Calculator from scratch:")
 print("  1. Atmospheric entry with ablation")

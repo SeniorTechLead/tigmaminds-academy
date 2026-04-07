@@ -217,7 +217,7 @@ print(f"At -10°C:")
 print(f"  Stretched: {posture_totals[0]:.1f} W")
 print(f"  Curled:    {posture_totals[1]:.1f} W ({(1-posture_totals[1]/posture_totals[0])*100:.0f}% reduction)")
 print(f"  +Tail:     {posture_totals[2]:.1f} W ({(1-posture_totals[2]/posture_totals[0])*100:.0f}% reduction)")
-print(f"\\nTail-wrapping saves {(posture_totals[0]-posture_totals[2])*24*3600/4184:.0f} kcal/day!")`,
+print(f"\\\nTail-wrapping saves {(posture_totals[0]-posture_totals[2])*24*3600/4184:.0f} kcal/day!")`,
       challenge: 'Add vasoconstriction: reduce the face/ear and paw temperature from 38°C to 15°C in the curled+tail posture. How much additional heat is saved?',
       successHint: 'You have built a body-region heat loss model with posture adjustment. The stacked area chart clearly shows that the face and paws contribute disproportionately to heat loss. The tail-wrap behavior saves enough energy to cover hours of foraging — a real survival advantage.',
     },
@@ -497,7 +497,7 @@ for name in all_temps:
 
 hollow_save = (np.mean(np.maximum(body_temp - all_temps['Exposed canopy'], 0) / insulation_r) -
               np.mean(np.maximum(body_temp - all_temps['Tree hollow'], 0) / insulation_r))
-print(f"\\nSleeping in a hollow vs exposed saves {hollow_save*24*3600/4184:.0f} kcal/day!")`,
+print(f"\\\nSleeping in a hollow vs exposed saves {hollow_save*24*3600/4184:.0f} kcal/day!")`,
       challenge: 'Add a "logged tree" scenario: remove the tree hollow option and force the panda to sleep at mid-canopy. What is the energy cost of losing that shelter?',
       successHint: 'You have created a complete microclimate analysis with optimal location mapping. The tree hollow is clearly the best thermal shelter, saving hundreds of calories per day. This is why old-growth forest with large hollow trees is critical red panda habitat — young replanted forests lack these thermal refuges.',
     },
@@ -631,7 +631,7 @@ for w, area in zip(warmings, hab_areas):
     pct = area / hab_areas[0] * 100
     print(f"+{w}°C warming: {area:.0f} units ({pct:.0f}% of current)")
 
-print(f"\\nSikkim's ~250 red pandas already occupy fragmented habitat.")
+print(f"\\\nSikkim's ~250 red pandas already occupy fragmented habitat.")
 print(f"Losing 50%+ of suitable area could fragment populations beyond recovery.")`,
       challenge: 'Add a bamboo die-off event at year 2050 that eliminates bamboo between 3,000-3,500 m for 5 years. How does this affect the habitat suitability curve during the die-off?',
       successHint: 'You have modeled the altitude squeeze — one of the most important concepts in conservation biology under climate change. The nonlinear relationship between warming and habitat loss means that the difference between 1.5°C and 3°C of warming is not twice the impact — it could be the difference between survival and extinction for the red panda.',

@@ -154,11 +154,11 @@ ax1.tick_params(colors='gray')
 
 # Annotate key points
 ax1.axvline(0.1, color='gray', linestyle=':', alpha=0.3)
-ax1.text(0.12, 1e-4, 'Typical leaf\\nthickness', color='gray', fontsize=8)
+ax1.text(0.12, 1e-4, 'Typical leaf\\\nthickness', color='gray', fontsize=8)
 
 # Leaf adaptation comparison
 ax2.set_facecolor('#111827')
-adaptations = ['Leaf\\nthickness', 'Cuticle\\nthickness', 'Stomata\\ndensity', 'Aerenchyma\\nvolume', 'Stem\\nrigidity']
+adaptations = ['Leaf\\\nthickness', 'Cuticle\\\nthickness', 'Stomata\\\ndensity', 'Aerenchyma\\\nvolume', 'Stem\\\nrigidity']
 land_values = [8, 9, 7, 2, 9]
 water_values = [3, 2, 1, 9, 3]
 
@@ -245,7 +245,7 @@ ax1.text(2, 12, '90% removal', color='gray', fontsize=8)
 
 # Ecosystem services valuation
 ax2.set_facecolor('#111827')
-services = ['Water\\nfiltration', 'Flood\\ncontrol', 'Carbon\\nstorage', 'Fisheries', 'Biodiversity', 'Recreation']
+services = ['Water\\\nfiltration', 'Flood\\\ncontrol', 'Carbon\\\nstorage', 'Fisheries', 'Biodiversity', 'Recreation']
 values = [4500, 3200, 2800, 1500, 1200, 800]  # $/hectare/year (estimates)
 
 bars = ax2.barh(services, values, color=['#3b82f6', '#22c55e', '#854d0e', '#f59e0b', '#a855f7', '#ef4444'])
@@ -502,14 +502,14 @@ ax1.set_facecolor('#111827')
 ax1.plot(years, area_km2, 'o-', color='#3b82f6', linewidth=2, markersize=6)
 ax1.fill_between(years, area_km2, alpha=0.1, color='#3b82f6')
 ax1.axvline(1983, color='#ef4444', linestyle='--', linewidth=1)
-ax1.text(1984, 490, 'Ithai Barrage\\nbuilt (1983)', color='#ef4444', fontsize=9)
+ax1.text(1984, 490, 'Ithai Barrage\\\nbuilt (1983)', color='#ef4444', fontsize=9)
 ax1.set_xlabel('Year', color='white')
 ax1.set_ylabel('Lake area (km²)', color='white')
 ax1.set_title('Loktak Lake: Shrinking Over Time', color='white', fontsize=12)
 ax1.tick_params(colors='gray')
 
 pct_loss = (1 - area_km2[-1]/area_km2[0]) * 100
-ax1.text(2000, 460, f'{pct_loss:.0f}% area lost\\nsince 1970', color='#ef4444', fontsize=10)
+ax1.text(2000, 460, f'{pct_loss:.0f}% area lost\\\nsince 1970', color='#ef4444', fontsize=10)
 
 # Eutrophication model
 # Nutrient input vs algal bloom threshold

@@ -801,7 +801,7 @@ ax2.legend(loc='upper right', fontsize=8, facecolor='#1f2937', edgecolor='gray',
 # Annotate optimal point
 opt_waste = nv.expected_waste(Q_star)
 opt_stockout = (1 - scipy_stats.norm.cdf((Q_star - nv.demand_mean) / nv.demand_std)) * 100
-ax.text(Q_star + 0.5, opt_waste + 0.3, f'Waste: {opt_waste:.1f} kg\\nStockout: {opt_stockout:.0f}%',
+ax.text(Q_star + 0.5, opt_waste + 0.3, f'Waste: {opt_waste:.1f} kg\\\nStockout: {opt_stockout:.0f}%',
         color='#f59e0b', fontsize=9)
 
 # Plot 4: Adaptive stocking (varies with predicted demand)
@@ -938,7 +938,7 @@ class MarketDashboard:
 
         fig = plt.figure(figsize=(20, 13))
         fig.patch.set_facecolor('#1f2937')
-        fig.suptitle('IMA KEITHEL MARKET INTELLIGENCE DASHBOARD\\n'
+        fig.suptitle('IMA KEITHEL MARKET INTELLIGENCE DASHBOARD\\\n'
                      'Date: April 15 | Cheiraoba in 3 days | Weather: Clear',
                      color='white', fontsize=16, fontweight='bold')
 
@@ -1012,7 +1012,7 @@ class MarketDashboard:
 
         bars = ax3.bar(range(7), fish_7day, color=[alert_colors.get(a, '#22c55e') for a in alerts],
                       edgecolor='none')
-        day_labels = ['Today', '+1', '+2', '+3\\nCheiraoba', '+4', '+5', '+6']
+        day_labels = ['Today', '+1', '+2', '+3\\\nCheiraoba', '+4', '+5', '+6']
         ax3.set_xticks(range(7))
         ax3.set_xticklabels(day_labels, color='white', fontsize=8)
         for i, (b, a) in enumerate(zip(bars, alerts)):

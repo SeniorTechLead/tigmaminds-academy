@@ -86,7 +86,7 @@ for name, I, y, A in comparison:
     print(f"  {name:<25} I = {I:>9.0f} cm^4  stress = {stress:>6.0f} MPa")
 
 ratio = comparison[1][1] / comparison[0][1]
-print(f"\\nThe I-beam has {ratio:.0f}x the moment of inertia with the same weight!")
+print(f"\\\nThe I-beam has {ratio:.0f}x the moment of inertia with the same weight!")
 print("This is why every bridge in the world uses I-shaped girders.")`,
       challenge: 'Design an optimal I-beam for M = 13000 kN*m with stress below 160 MPa. Vary the flange width, flange thickness, web height, and web thickness. Find the lightest cross-section that meets the stress requirement. This is a real structural optimization problem.',
       successHint: 'The flexure formula and the concept of moment of inertia are the two most important equations in structural engineering. Every beam, column, and girder in every building and bridge is designed using these exact calculations.',
@@ -420,7 +420,7 @@ for name in sorted(forces.keys()):
 # Summary
 tension_members = [f for f in forces.values() if f["type"] == "Tension"]
 compression_members = [f for f in forces.values() if f["type"] == "Compression"]
-print(f"\\nTension members: {len(tension_members)}")
+print(f"\\\nTension members: {len(tension_members)}")
 print(f"Compression members: {len(compression_members)}")
 print(f"Max tension: {max(f['force_kN'] for f in tension_members):.0f} kN")
 print(f"Max compression: {min(f['force_kN'] for f in compression_members):.0f} kN")`,
@@ -503,7 +503,7 @@ for speed_kmh in [10, 20, 30, 40, 50, 60, 80, 100, 120]:
 # Critical speed
 critical_speed_ms = f1 * joint_spacing
 critical_speed_kmh = critical_speed_ms * 3.6
-print(f"\\nCritical speed for resonance: {critical_speed_kmh:.0f} km/h")
+print(f"\\\nCritical speed for resonance: {critical_speed_kmh:.0f} km/h")
 print(f"Pamban Bridge speed limit: 30 km/h (well below critical)")
 
 # Wind gust frequencies

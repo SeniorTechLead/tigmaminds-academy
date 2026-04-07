@@ -207,7 +207,7 @@ print(f"The energy is released as heat, not captured as electricity.")
 # How much energy is "wasted" darkening a vase?
 moles_zn = 0.05  # approximate moles of Zn dissolved
 energy_j = V_bidri * 2 * F * moles_zn
-print(f"\nEnergy released darkening a vase: {energy_j:.0f} J = {energy_j/4.184:.0f} cal")
+print(f"\\nEnergy released darkening a vase: {energy_j:.0f} J = {energy_j/4.184:.0f} cal")
 print(f"Enough to heat {energy_j/(4.184*1000*1):.1f} mL of water by 1 degree C")`,
       challenge: 'Design a "Bidriware battery" using zinc and silver electrodes (since both metals are present in the artwork). What voltage would it produce? If the silver inlay weighs 5 grams, how many amp-hours of capacity would this battery have? (Hint: Ag^+ + e^- -> Ag, so 107.87 g of Ag = 1 Faraday = 26.8 Ah.)',
       successHint: 'Electrochemical cells are the basis of ALL batteries — from the zinc-carbon cells in a TV remote to the lithium-ion cells in your phone. The voltage calculation E = E_cathode - E_anode that you just used is the same equation battery engineers use to design every battery on Earth.',

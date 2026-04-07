@@ -116,7 +116,7 @@ ax.tick_params(colors='gray')
 # Optical parameters comparison
 ax = axes[1, 0]
 ax.set_facecolor('#111827')
-params = ['Pupil area\n(mm²)', 'Rod density\n(×1000/mm²)', 'Summation\n(rods/cell)', 'Effective\ngain']
+params = ['Pupil area\\n(mm²)', 'Rod density\\n(×1000/mm²)', 'Summation\\n(rods/cell)', 'Effective\\ngain']
 owl_vals = [owl.pupil_area, owl.rod_density/1000, owl.summation,
             owl.pupil_area * owl.qe * owl.summation * owl.tapetum]
 human_vals = [human.pupil_area, human.rod_density/1000, human.summation,
@@ -158,7 +158,7 @@ print("Night vision comparison:")
 for eye, md in zip(eyes, min_detectable):
     advantage = md / min_detectable[1]  # relative to human
     print(f"  {eye.name}: threshold = {md:.1e} cd/m² ({1/advantage:.0f}x more sensitive than human)")
-print(f"\\nOwl advantage over human: {min_detectable[1]/min_detectable[0]:.0f}x in detection threshold")`,
+print(f"\\\nOwl advantage over human: {min_detectable[1]/min_detectable[0]:.0f}x in detection threshold")`,
       challenge: 'Model the effect of light pollution: what light level renders the owl\'s advantage negligible (both owl and human can detect equally well)? At what city luminance does the owl\'s hunting ability degrade?',
       successHint: 'The owl\'s visual system is the product of millions of years of optimization for low-light hunting. Understanding the physics reveals why each adaptation exists — and predicts how artificial light disrupts nocturnal ecology.',
     },
@@ -351,7 +351,7 @@ print(f"  ILD: {ild:.1f} dB")
 print(f"  Estimated azimuth: {az:.1f}°, elevation: {el:.1f}°")
 print(f"  Position error: {err:.1f} cm")
 print(f"  Mean error across field: {error_map[error_map>0].mean():.1f} cm")
-print(f"\\n  A mouse body is ~5 cm. Owl accuracy (~{err:.0f} cm) is sufficient for a strike.")`,
+print(f"\\\n  A mouse body is ~5 cm. Owl accuracy (~{err:.0f} cm) is sufficient for a strike.")`,
       challenge: 'Model the effect of making ears symmetric (remove the 1.5 cm offset). Recompute the ILD map — it should become nearly flat in the vertical dimension, eliminating elevation localization. This proves why asymmetric ears are essential.',
       successHint: 'The owl\'s asymmetric ears solve a problem that engineers face in sonar and radar: localizing a target in 3D with only two sensors. The biological solution predates human engineering by millions of years.',
     },
@@ -485,7 +485,7 @@ def total_spl(spl):
     return 10 * np.log10(np.sum(10 ** (spl / 10)))
 
 levels = [total_spl(spl_base), total_spl(spl_s), total_spl(spl_sv), total_spl(spl_svf)]
-labels = ['No mods', '+ Serrations', '+ Velvet', '+ Fringe\n(full owl)']
+labels = ['No mods', '+ Serrations', '+ Velvet', '+ Fringe\\n(full owl)']
 reductions = [0] + [levels[0] - l for l in levels[1:]]
 bars = ax.bar(labels, reductions, color=['#ef4444', '#f59e0b', '#3b82f6', '#22c55e'],
               edgecolor='none', width=0.5)
@@ -820,7 +820,7 @@ ax.invert_yaxis()
 # Owl vs Crow comparison
 ax = axes[1, 0]
 ax.set_facecolor('#111827')
-metrics = ['EQ', 'Brain/body %', 'Neuron density\n(relative)', 'Problem-\nsolving score', 'Tool use\nscore']
+metrics = ['EQ', 'Brain/body %', 'Neuron density\\n(relative)', 'Problem-\\nsolving score', 'Tool use\\nscore']
 owl_scores = [1.5, 1.7, 0.8, 0.3, 0.0]  # relative scores
 crow_scores = [2.5, 2.0, 1.5, 0.9, 0.8]
 x = np.arange(len(metrics))
@@ -949,7 +949,7 @@ for i, (sp, color) in enumerate(zip(sp_names[:4], sp_colors[:4])):
     ax.plot(angles, vals, 'o-', color=color, linewidth=1.5, label=sp, markersize=4)
     ax.fill(angles, vals, color=color, alpha=0.05)
 ax.set_xticks(angles[:-1])
-ax.set_xticklabels([t.replace('_', '\n')[:10] for t in test_names], color='white', fontsize=6)
+ax.set_xticklabels([t.replace('_', '\\n')[:10] for t in test_names], color='white', fontsize=6)
 ax.set_ylim(0, 11)
 ax.set_title('Cognitive test profiles', color='white', fontsize=11)
 ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=7, loc='upper right')
@@ -982,19 +982,19 @@ ax.tick_params(colors='gray')
 ax = axes[1, 0]
 ax.set_facecolor('#111827')
 ax.axis('off')
-report = "WHO IS THE WISEST?\n" + "=" * 45 + "\n\n"
+report = "WHO IS THE WISEST?\\n" + "=" * 45 + "\\n\\n"
 for wname, ranking in rankings.items():
-    report += f"{wname}:\n"
+    report += f"{wname}:\\n"
     for rank, (sp, score) in enumerate(ranking[:3], 1):
         medal = ['1st', '2nd', '3rd'][rank-1]
-        report += f"  {medal}: {sp} (score: {score:.1f})\n"
-    report += "\n"
-report += "KEY INSIGHT:\n"
-report += "The 'wisest' animal depends entirely\n"
-report += "on which cognitive dimensions you value.\n"
-report += "Owls win on sensory mastery.\n"
-report += "Crows win on cognitive flexibility.\n"
-report += "Dogs win on social intelligence.\n"
+        report += f"  {medal}: {sp} (score: {score:.1f})\\n"
+    report += "\\n"
+report += "KEY INSIGHT:\\n"
+report += "The 'wisest' animal depends entirely\\n"
+report += "on which cognitive dimensions you value.\\n"
+report += "Owls win on sensory mastery.\\n"
+report += "Crows win on cognitive flexibility.\\n"
+report += "Dogs win on social intelligence.\\n"
 report += "There is no single 'smartest' animal."
 ax.text(0.05, 0.95, report, transform=ax.transAxes, fontsize=9,
         verticalalignment='top', fontfamily='monospace', color='#22c55e')
@@ -1003,12 +1003,12 @@ ax.text(0.05, 0.95, report, transform=ax.transAxes, fontsize=9,
 ax = axes[1, 1]
 ax.set_facecolor('#111827')
 eco_demands = {
-    'Owl\n(nocturnal hunter)': [9, 2, 1, 8],
-    'Crow\n(social forager)':  [4, 9, 8, 5],
-    'Parrot\n(social frugivore)':[3, 8, 9, 4],
-    'Dog\n(pack predator)':    [5, 6, 9, 6],
+    'Owl\\n(nocturnal hunter)': [9, 2, 1, 8],
+    'Crow\\n(social forager)':  [4, 9, 8, 5],
+    'Parrot\\n(social frugivore)':[3, 8, 9, 4],
+    'Dog\\n(pack predator)':    [5, 6, 9, 6],
 }
-eco_axes = ['Sensory\nprecision', 'Problem\nsolving', 'Social\nskills', 'Spatial\nawareness']
+eco_axes = ['Sensory\\nprecision', 'Problem\\nsolving', 'Social\\nskills', 'Spatial\\nawareness']
 x = np.arange(len(eco_axes))
 for i, (sp, vals) in enumerate(eco_demands.items()):
     ax.plot(x, vals, 'o-', color=sp_colors[i], linewidth=2, markersize=8, label=sp)

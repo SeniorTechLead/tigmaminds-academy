@@ -250,7 +250,7 @@ if path:
     direct = city.heuristic(start, goal)
     efficiency = direct / cost * 100
 
-    print(f"\\nPath length: {len(path)} steps")
+    print(f"\\\nPath length: {len(path)} steps")
     print(f"Path cost: {cost:.1f} units")
     print(f"Direct distance: {direct:.1f} units")
     print(f"Route efficiency: {efficiency:.1f}%")

@@ -227,7 +227,7 @@ for label, (fx, fy, desc) in features.items():
     idx_x = int(fx/6*(grid_size-1))
     print(f"  {label}: {desc} — elevation {terrain[idx_y, idx_x]:.0f}m")
 
-print(f"\\nRoute comparison (D→A):")
+print(f"\\\nRoute comparison (D→A):")
 print(f"  Direct: {direct_dist[-1]:.0f}m, max gradient: {direct_gradient:.0f}%")
 print(f"  Ridge:  {ridge_dist[-1]:.0f}m, max gradient: {ridge_gradient:.0f}%")
 print(f"  Ridge is {ridge_dist[-1]/direct_dist[-1]:.1f}× longer but {direct_gradient/ridge_gradient:.1f}× gentler")`,

@@ -53,7 +53,7 @@ axes[0].grid(alpha=0.3)
 
 # Mark the Tawang bell
 axes[0].scatter([200], [v_sound/200], color='#f59e0b', s=80, zorder=5)
-axes[0].annotate('Tawang bell\\n200 Hz, λ=1.72m', xy=(200, v_sound/200),
+axes[0].annotate('Tawang bell\\\n200 Hz, λ=1.72m', xy=(200, v_sound/200),
                 xytext=(400, v_sound/200 + 3), fontsize=9, color='lightgray',
                 arrowprops=dict(arrowstyle='->', color='lightgray'))
 
@@ -270,7 +270,7 @@ colors = ['#10b981' if l < 70 else '#f59e0b' if l < 85 else '#ef4444' for l in l
 
 ax1.barh(names, levels, color=colors, height=0.6)
 ax1.axvline(85, color='red', linewidth=1.5, linestyle='--', alpha=0.5)
-ax1.text(86, 0.5, 'Damage\\nthreshold', color='red', fontsize=8)
+ax1.text(86, 0.5, 'Damage\\\nthreshold', color='red', fontsize=8)
 ax1.set_xlabel('Loudness (dB)', fontsize=11)
 ax1.set_title('Sound Levels of Monastery Bells in Context', fontsize=12)
 ax1.grid(axis='x', alpha=0.3)
@@ -290,7 +290,7 @@ ax2.grid(alpha=0.3)
 for db_val, label in [(0, '0 dB'), (60, '60 dB'), (95, '95 dB (bell)'), (120, '120 dB')]:
     I = 1e-12 * 10 ** (db_val / 10)
     ax2.scatter([db_val], [I], color='white', edgecolor='#a855f7', s=60, zorder=5, linewidth=2)
-    ax2.annotate(f'{label}\\n{I:.1e} W/m²', xy=(db_val, I),
+    ax2.annotate(f'{label}\\\n{I:.1e} W/m²', xy=(db_val, I),
                 xytext=(db_val + 5, I * 5), fontsize=8, color='lightgray',
                 arrowprops=dict(arrowstyle='->', color='lightgray'))
 
@@ -365,9 +365,9 @@ ax2.fill_between(freqs_range, ratio, 1, where=ratio > 1,
 ax2.fill_between(freqs_range, ratio, 1, where=ratio < 1,
                  color='#ef4444', alpha=0.1)
 
-ax2.annotate('Strong diffraction\\n(sound fills room)', xy=(100, 3),
+ax2.annotate('Strong diffraction\\\n(sound fills room)', xy=(100, 3),
             fontsize=9, color='#10b981')
-ax2.annotate('Weak diffraction\\n(sound is directional)', xy=(2000, 0.3),
+ax2.annotate('Weak diffraction\\\n(sound is directional)', xy=(2000, 0.3),
             fontsize=9, color='#ef4444')
 
 ax2.set_xlabel('Frequency (Hz)', fontsize=10)
@@ -436,7 +436,7 @@ for d, label in [(1, '1m (bell tower)'), (50, '50m (courtyard)'),
                  (500, '500m (village)'), (5000, '5km (yak herders)')]:
     db_val = dB_at_1m - 20 * np.log10(d) - absorption_rate * d
     ax.scatter([d], [db_val], color='white', edgecolor='#ef4444', s=60, zorder=5, linewidth=2)
-    ax.annotate(f'{label}\\n{db_val:.0f} dB', xy=(d, db_val),
+    ax.annotate(f'{label}\\\n{db_val:.0f} dB', xy=(d, db_val),
                xytext=(d * 1.5, db_val + 5), fontsize=8, color='lightgray',
                arrowprops=dict(arrowstyle='->', color='lightgray'))
 
