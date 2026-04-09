@@ -1,0 +1,1726 @@
+// ============================================================
+// PRACTICE PROBLEMS — Statistics & Distributions (Part 3)
+//
+// Poisson Distribution, Exponential Distribution, Chi-Squared
+// 50 problems per section, difficulty 1/2/3, with step-by-step
+// hand solutions, visuals, and Python code variants.
+// ============================================================
+
+import type { PracticeSet } from './reference';
+
+// ─── 1. Poisson Distribution ──────────────────────────────────
+
+export const practicePoissonDistribution: PracticeSet = {
+  title: 'Practice — Poisson Distribution',
+  problems: [
+    // ── Easy (1-17) ────────────────────────────────────────
+    {
+      id: 'poi-01', difficulty: 1,
+      question: 'A call centre receives an average of **2 calls per minute** (λ = 2). What is P(X = 0) — the probability of **no calls** in a given minute?',
+      visual: { kind: 'waiting', avgMinutes: 0.5 },
+      steps: [
+        { label: 'Formula', content: 'P(X = k) = λ^k · e^(−λ) / k!' },
+        { label: 'Substitute k = 0', content: 'P(X = 0) = 2⁰ · e^(−2) / 0!' },
+        { label: 'Simplify', content: '= 1 · 0.1353 / 1 = **0.1353**' },
+      ],
+      answer: '0.1353',
+      code: 'import math\nlam = 2\nk = 0\n# Compute P(X = 0)\n',
+      codeSolution: 'import math\nlam = 2\nk = 0\nprob = (lam**k) * math.exp(-lam) / math.factorial(k)\nprint(f"P(X = {k}) = {prob:.4f}")',
+    },
+    {
+      id: 'poi-02', difficulty: 1,
+      question: 'Using λ = 2, compute **P(X = 1)** — exactly one call in a minute.',
+      steps: [
+        { label: 'Formula', content: 'P(X = 1) = 2¹ · e^(−2) / 1!' },
+        { label: 'Compute', content: '= 2 · 0.1353 / 1 = **0.2707**' },
+      ],
+      answer: '0.2707',
+    },
+    {
+      id: 'poi-03', difficulty: 1,
+      question: 'Using λ = 2, compute **P(X = 2)**.',
+      steps: [
+        { label: 'Formula', content: 'P(X = 2) = 2² · e^(−2) / 2!' },
+        { label: 'Compute', content: '= 4 · 0.1353 / 2 = **0.2707**' },
+      ],
+      answer: '0.2707',
+    },
+    {
+      id: 'poi-04', difficulty: 1,
+      question: 'A book has an average of **3 typos per page** (λ = 3). What is P(X = 0) — a page with **no typos**?',
+      steps: [
+        { label: 'Formula', content: 'P(X = 0) = 3⁰ · e^(−3) / 0!' },
+        { label: 'Compute', content: '= 1 · 0.0498 / 1 = **0.0498**' },
+      ],
+      answer: '0.0498',
+    },
+    {
+      id: 'poi-05', difficulty: 1,
+      question: 'For a Poisson distribution with λ = 5, what is the **mean**?',
+      hint: 'For Poisson, mean = λ.',
+      steps: [
+        { label: 'Property', content: 'For any Poisson distribution, **Mean = λ**.' },
+        { label: 'Answer', content: 'Mean = **5**' },
+      ],
+      answer: '5',
+    },
+    {
+      id: 'poi-06', difficulty: 1,
+      question: 'For a Poisson distribution with λ = 5, what is the **variance**?',
+      hint: 'For Poisson, variance also equals λ.',
+      steps: [
+        { label: 'Property', content: 'For Poisson, **Variance = λ** (same as the mean!).' },
+        { label: 'Answer', content: 'Variance = **5**' },
+      ],
+      answer: '5',
+    },
+    {
+      id: 'poi-07', difficulty: 1,
+      question: 'A traffic light sees an average of **4 cars per minute**. What is P(X = 3)?',
+      visual: { kind: 'waiting', avgMinutes: 0.25 },
+      steps: [
+        { label: 'Setup', content: 'λ = 4, k = 3' },
+        { label: 'Compute λ^k', content: '4³ = 64' },
+        { label: 'Compute k!', content: '3! = 6' },
+        { label: 'Apply formula', content: 'P(X = 3) = 64 · 0.0183 / 6 = 1.1712 / 6 = **0.1954**' },
+      ],
+      answer: '0.1954',
+      code: 'import math\nlam = 4\nk = 3\n# Compute P(X = 3)\n',
+      codeSolution: 'import math\nlam = 4\nk = 3\nprob = (lam**k) * math.exp(-lam) / math.factorial(k)\nprint(f"P(X = {k}) = {prob:.4f}")',
+    },
+    {
+      id: 'poi-08', difficulty: 1,
+      question: 'A shop averages **1 customer per 10 minutes**. What is λ for a 10-minute window?',
+      steps: [
+        { label: 'Identify the rate', content: 'λ = average count per interval = **1**' },
+        { label: 'Insight', content: 'λ is simply the average number of events in the time window you are studying.' },
+      ],
+      answer: '1',
+    },
+    {
+      id: 'poi-09', difficulty: 1,
+      question: 'With λ = 1, compute **P(X = 0)** — no customers in 10 minutes.',
+      steps: [
+        { label: 'Formula', content: 'P(X = 0) = 1⁰ · e^(−1) / 0!' },
+        { label: 'Compute', content: '= 1 · 0.3679 / 1 = **0.3679**' },
+      ],
+      answer: '0.3679',
+    },
+    {
+      id: 'poi-10', difficulty: 1,
+      question: 'With λ = 1, compute **P(X = 1)** — exactly one customer in 10 minutes.',
+      steps: [
+        { label: 'Formula', content: 'P(X = 1) = 1¹ · e^(−1) / 1!' },
+        { label: 'Compute', content: '= 1 · 0.3679 / 1 = **0.3679**' },
+      ],
+      answer: '0.3679',
+    },
+    {
+      id: 'poi-11', difficulty: 1,
+      question: 'An email server receives **5 spam emails per hour** on average. What is P(X = 5)?',
+      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5','6','7','8'], values: [0.0067, 0.0337, 0.0842, 0.1404, 0.1755, 0.1755, 0.1462, 0.1044, 0.0653] },
+      steps: [
+        { label: 'Setup', content: 'λ = 5, k = 5' },
+        { label: 'Compute λ^k', content: '5⁵ = 3125' },
+        { label: 'Compute k!', content: '5! = 120' },
+        { label: 'Apply formula', content: 'P(X = 5) = 3125 · 0.0067 / 120 = 20.9375 / 120 = **0.1755**' },
+      ],
+      answer: '0.1755',
+    },
+    {
+      id: 'poi-12', difficulty: 1,
+      question: 'Compute **P(X = 4)** when λ = 3.',
+      steps: [
+        { label: 'Setup', content: 'λ = 3, k = 4' },
+        { label: 'λ^k', content: '3⁴ = 81' },
+        { label: 'k!', content: '4! = 24' },
+        { label: 'Formula', content: 'P(X = 4) = 81 · 0.0498 / 24 = 4.0338 / 24 = **0.1681**' },
+      ],
+      answer: '0.1681',
+    },
+    {
+      id: 'poi-13', difficulty: 1,
+      question: 'A printer produces an average of **2 misprints per 100 pages**. What is the probability of **exactly 2 misprints** in the next 100 pages?',
+      steps: [
+        { label: 'Setup', content: 'λ = 2, k = 2' },
+        { label: 'Compute', content: 'P(X = 2) = 2² · e^(−2) / 2! = 4 · 0.1353 / 2 = **0.2707**' },
+      ],
+      answer: '0.2707',
+    },
+    {
+      id: 'poi-14', difficulty: 1,
+      question: 'What is the **standard deviation** of a Poisson distribution with λ = 4?',
+      steps: [
+        { label: 'Property', content: 'Variance = λ = 4' },
+        { label: 'Standard deviation', content: 'σ = √λ = √4 = **2**' },
+      ],
+      answer: '2',
+    },
+    {
+      id: 'poi-15', difficulty: 1,
+      question: 'Compute **P(X = 3)** when λ = 3.',
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 3 }, markX: 3 },
+      steps: [
+        { label: 'Setup', content: 'λ = 3, k = 3' },
+        { label: 'Compute', content: 'P(X = 3) = 3³ · e^(−3) / 3! = 27 · 0.0498 / 6 = 1.3446 / 6 = **0.2240**' },
+      ],
+      answer: '0.2240',
+    },
+    {
+      id: 'poi-16', difficulty: 1,
+      question: 'Build the probability table for λ = 2 from k = 0 to k = 4.',
+      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4'], values: [0.1353, 0.2707, 0.2707, 0.1804, 0.0902] },
+      steps: [
+        { label: 'P(X=0)', content: '2⁰ · e^(−2) / 0! = 0.1353' },
+        { label: 'P(X=1)', content: '2¹ · e^(−2) / 1! = 0.2707' },
+        { label: 'P(X=2)', content: '2² · e^(−2) / 2! = 0.2707' },
+        { label: 'P(X=3)', content: '2³ · e^(−2) / 3! = 8 · 0.1353 / 6 = 0.1804' },
+        { label: 'P(X=4)', content: '2⁴ · e^(−2) / 4! = 16 · 0.1353 / 24 = **0.0902**' },
+      ],
+      answer: 'See table: 0.1353, 0.2707, 0.2707, 0.1804, 0.0902',
+      code: 'import math\nlam = 2\n# Build the table for k = 0..4\nfor k in range(5):\n    pass  # compute P(X=k)\n',
+      codeSolution: 'import math\nlam = 2\nfor k in range(5):\n    prob = (lam**k) * math.exp(-lam) / math.factorial(k)\n    print(f"P(X={k}) = {prob:.4f}")',
+    },
+    {
+      id: 'poi-17', difficulty: 1,
+      question: 'A hospital emergency room sees **6 patients per hour** on average. What is the probability of seeing **exactly 6 patients** in a given hour?',
+      steps: [
+        { label: 'Setup', content: 'λ = 6, k = 6' },
+        { label: 'λ^k', content: '6⁶ = 46656' },
+        { label: 'k!', content: '6! = 720' },
+        { label: 'e^(−6)', content: 'e^(−6) = e^(−3) · e^(−3) ≈ 0.0498 · 0.0498 ≈ 0.00248' },
+        { label: 'Result', content: 'P(X = 6) = 46656 · 0.00248 / 720 = 115.71 / 720 = **0.1606**' },
+      ],
+      answer: '0.1606',
+    },
+
+    // ── Medium (18-34) ─────────────────────────────────────
+    {
+      id: 'poi-18', difficulty: 2,
+      question: 'With λ = 2, compute **P(X ≥ 3)** using the complement.',
+      steps: [
+        { label: 'Complement rule', content: 'P(X ≥ 3) = 1 − P(X ≤ 2) = 1 − [P(0) + P(1) + P(2)]' },
+        { label: 'From the table', content: 'P(0) = 0.1353, P(1) = 0.2707, P(2) = 0.2707' },
+        { label: 'Sum', content: 'P(X ≤ 2) = 0.1353 + 0.2707 + 0.2707 = 0.6767' },
+        { label: 'Complement', content: 'P(X ≥ 3) = 1 − 0.6767 = **0.3233**' },
+      ],
+      answer: '0.3233',
+      code: 'import math\nlam = 2\n# Compute P(X >= 3) using complement\n',
+      codeSolution: 'import math\nlam = 2\np_le_2 = sum((lam**k) * math.exp(-lam) / math.factorial(k) for k in range(3))\nprint(f"P(X >= 3) = {1 - p_le_2:.4f}")',
+    },
+    {
+      id: 'poi-19', difficulty: 2,
+      question: 'A website averages **3 errors per day**. What is P(X ≥ 1) — at least one error?',
+      steps: [
+        { label: 'Complement', content: 'P(X ≥ 1) = 1 − P(X = 0)' },
+        { label: 'P(X = 0)', content: '= e^(−3) = 0.0498' },
+        { label: 'Result', content: 'P(X ≥ 1) = 1 − 0.0498 = **0.9502**' },
+      ],
+      answer: '0.9502',
+    },
+    {
+      id: 'poi-20', difficulty: 2,
+      question: 'Two independent sources emit events at rates λ₁ = 2 and λ₂ = 3 per hour. If we combine both, what is the **total rate** and P(X = 0) in one hour?',
+      steps: [
+        { label: 'Combine rates', content: 'λ_total = λ₁ + λ₂ = 2 + 3 = **5**' },
+        { label: 'P(X = 0)', content: 'P(X = 0) = e^(−5) = **0.0067**' },
+        { label: 'Insight', content: 'Sum of independent Poisson variables is also Poisson with λ = λ₁ + λ₂.' },
+      ],
+      answer: 'λ_total = 5; P(X = 0) = 0.0067',
+    },
+    {
+      id: 'poi-21', difficulty: 2,
+      question: 'Accidents at a junction average **1.5 per month**. What is the probability of **more than 2 accidents** next month?',
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 1.5 }, markX: 2, shadeFrom: 3, shadeTo: 10 },
+      steps: [
+        { label: 'Setup', content: 'λ = 1.5, need P(X > 2) = 1 − P(X ≤ 2)' },
+        { label: 'P(X=0)', content: '= e^(−1.5) ≈ 0.2231' },
+        { label: 'P(X=1)', content: '= 1.5 · 0.2231 / 1 = 0.3347' },
+        { label: 'P(X=2)', content: '= 1.5² · 0.2231 / 2 = 2.25 · 0.2231 / 2 = 0.2510' },
+        { label: 'Sum', content: 'P(X ≤ 2) = 0.2231 + 0.3347 + 0.2510 = 0.8088' },
+        { label: 'Complement', content: 'P(X > 2) = 1 − 0.8088 = **0.1912**' },
+      ],
+      answer: '0.1912',
+    },
+    {
+      id: 'poi-22', difficulty: 2,
+      question: 'A server averages 4 crashes per year. What is the probability of **no crashes in 6 months**?',
+      steps: [
+        { label: 'Rescale λ', content: '4 per year → λ = 4 × 0.5 = **2** per 6 months' },
+        { label: 'P(X = 0)', content: '= e^(−2) = **0.1353**' },
+      ],
+      answer: '0.1353',
+    },
+    {
+      id: 'poi-23', difficulty: 2,
+      question: 'You observe 50 events in 10 hours. Estimate λ (events per hour) and compute P(X = 3) for a single hour.',
+      steps: [
+        { label: 'Estimate λ', content: 'λ̂ = 50 / 10 = **5** events per hour' },
+        { label: 'P(X = 3)', content: '= 5³ · e^(−5) / 3! = 125 · 0.0067 / 6 = 0.8375 / 6 = **0.1396**' },
+      ],
+      answer: 'λ̂ = 5; P(X = 3) ≈ 0.1396',
+      code: 'import math\nevents = 50\nhours = 10\n# Estimate lambda and compute P(X=3)\n',
+      codeSolution: 'import math\nevents = 50\nhours = 10\nlam = events / hours\nk = 3\nprob = (lam**k) * math.exp(-lam) / math.factorial(k)\nprint(f"lambda = {lam}, P(X={k}) = {prob:.4f}")',
+    },
+    {
+      id: 'poi-24', difficulty: 2,
+      question: 'A factory produces defects at λ = 2 per batch. If 100 batches are inspected and 20 have zero defects, does this match the Poisson prediction?',
+      steps: [
+        { label: 'Expected P(X=0)', content: 'P(X = 0) = e^(−2) = 0.1353' },
+        { label: 'Expected count', content: '100 × 0.1353 = **13.53 batches** with zero defects' },
+        { label: 'Observed', content: '20 batches had zero defects' },
+        { label: 'Comparison', content: '20 is noticeably higher than 13.5 — the observed rate of defect-free batches exceeds the Poisson prediction. The process may be more variable, or λ may be overestimated.' },
+      ],
+      answer: 'Expected ≈ 13.5 vs observed 20 — does not match well',
+    },
+    {
+      id: 'poi-25', difficulty: 2,
+      question: 'Why use Poisson rather than binomial when n = 1000 and p = 0.002?',
+      steps: [
+        { label: 'Check conditions', content: 'n is large (1000), p is small (0.002), and np = 2 is moderate.' },
+        { label: 'Poisson approximation', content: 'When n → ∞ and p → 0 with np = λ constant, Binomial(n, p) → Poisson(λ).' },
+        { label: 'Practical benefit', content: 'Computing C(1000, k) is hard; Poisson with λ = 2 is much simpler.' },
+      ],
+      answer: 'n large, p small, np = λ = 2 is moderate → Poisson is a simpler approximation',
+    },
+    {
+      id: 'poi-26', difficulty: 2,
+      question: 'Compare Binomial(n=1000, p=0.002) with Poisson(λ=2) for k=0,1,2. How close are they?',
+      steps: [
+        { label: 'Poisson P(0)', content: 'e^(−2) = 0.1353' },
+        { label: 'Poisson P(1)', content: '2 · e^(−2) = 0.2707' },
+        { label: 'Poisson P(2)', content: '2 · e^(−2) = 0.2707' },
+        { label: 'Binomial P(0)', content: '(1−0.002)^1000 = 0.998^1000 ≈ 0.1353' },
+        { label: 'Binomial P(1)', content: 'C(1000,1) · 0.002 · 0.998^999 ≈ 0.2707' },
+        { label: 'Comparison', content: 'Both match to 4 decimal places — the approximation is excellent.' },
+      ],
+      answer: 'Values agree to 4 decimal places (0.1353, 0.2707, 0.2707)',
+      code: 'import math\n# Compare Binomial(1000, 0.002) vs Poisson(2) for k=0,1,2\nn, p = 1000, 0.002\nlam = n * p\n# Your code here\n',
+      codeSolution: 'import math\nn, p = 1000, 0.002\nlam = n * p\nfor k in range(3):\n    binom = math.comb(n, k) * (p**k) * ((1-p)**(n-k))\n    poiss = (lam**k) * math.exp(-lam) / math.factorial(k)\n    print(f"k={k}: Binomial={binom:.4f}, Poisson={poiss:.4f}")',
+    },
+    {
+      id: 'poi-27', difficulty: 2,
+      question: 'A hospital has two departments — ER sees 8 patients/hour, Urgent Care sees 5 patients/hour. What is the probability that **both together** see exactly 10 patients in a given hour?',
+      steps: [
+        { label: 'Combine', content: 'λ_total = 8 + 5 = 13' },
+        { label: 'P(X = 10)', content: '= 13^10 · e^(−13) / 10!' },
+        { label: 'Compute pieces', content: '13^10 ≈ 1.37858 × 10^11, e^(−13) ≈ 2.2603 × 10^(−6), 10! = 3628800' },
+        { label: 'Result', content: '= (1.37858 × 10^11)(2.2603 × 10^(−6)) / 3628800 ≈ 311574 / 3628800 ≈ **0.0859**' },
+      ],
+      answer: '≈ 0.0859',
+    },
+    {
+      id: 'poi-28', difficulty: 2,
+      question: 'Emails arrive at λ = 4 per hour. What is the probability of **at most 2** emails in an hour?',
+      steps: [
+        { label: 'Need P(X ≤ 2)', content: 'P(0) + P(1) + P(2)' },
+        { label: 'P(0)', content: '= e^(−4) = 0.0183' },
+        { label: 'P(1)', content: '= 4 · 0.0183 = 0.0733' },
+        { label: 'P(2)', content: '= 16 · 0.0183 / 2 = 0.1465' },
+        { label: 'Sum', content: '0.0183 + 0.0733 + 0.1465 = **0.2381**' },
+      ],
+      answer: '0.2381',
+    },
+    {
+      id: 'poi-29', difficulty: 2,
+      question: 'A counting process has λ = 3 per minute. What is λ for a **5-minute window**, and P(X = 10) in that window?',
+      steps: [
+        { label: 'Rescale', content: 'λ_5min = 3 × 5 = **15**' },
+        { label: 'P(X = 10)', content: '= 15^10 · e^(−15) / 10!' },
+        { label: 'Pieces', content: '15^10 ≈ 5.7665 × 10^11, e^(−15) ≈ 3.059 × 10^(−7), 10! = 3628800' },
+        { label: 'Result', content: '≈ (5.7665 × 10^11)(3.059 × 10^(−7)) / 3628800 ≈ 176,296 / 3628800 ≈ **0.0486**' },
+      ],
+      answer: '≈ 0.0486',
+      code: 'import math\nlam_per_min = 3\nwindow = 5  # minutes\nk = 10\n# Compute P(X = 10) in a 5-minute window\n',
+      codeSolution: 'import math\nlam_per_min = 3\nwindow = 5\nlam = lam_per_min * window\nk = 10\nprob = (lam**k) * math.exp(-lam) / math.factorial(k)\nprint(f"lambda={lam}, P(X={k}) = {prob:.4f}")',
+    },
+    {
+      id: 'poi-30', difficulty: 2,
+      question: 'Data: in 20 one-hour periods, you observe counts [3, 1, 4, 2, 5, 0, 3, 2, 2, 4, 1, 3, 6, 2, 1, 3, 2, 4, 3, 1]. Estimate λ.',
+      steps: [
+        { label: 'Sum', content: '3+1+4+2+5+0+3+2+2+4+1+3+6+2+1+3+2+4+3+1 = **51**' },
+        { label: 'Sample mean', content: 'λ̂ = x̄ = 51 / 20 = **2.55**' },
+        { label: 'Insight', content: 'For Poisson data, the MLE of λ is simply the sample mean.' },
+      ],
+      answer: 'λ̂ = 2.55',
+    },
+    {
+      id: 'poi-31', difficulty: 2,
+      question: 'With λ = 3, build P(X = k) for k = 0 to 5 and verify the probabilities nearly sum to 1.',
+      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5'], values: [0.0498, 0.1494, 0.2240, 0.2240, 0.1680, 0.1008] },
+      steps: [
+        { label: 'P(0)', content: '0.0498' },
+        { label: 'P(1)', content: '3 · 0.0498 = 0.1494' },
+        { label: 'P(2)', content: '9 · 0.0498 / 2 = 0.2240' },
+        { label: 'P(3)', content: '27 · 0.0498 / 6 = 0.2240' },
+        { label: 'P(4)', content: '81 · 0.0498 / 24 = 0.1680' },
+        { label: 'P(5)', content: '243 · 0.0498 / 120 = 0.1008' },
+        { label: 'Sum', content: '0.0498 + 0.1494 + 0.2240 + 0.2240 + 0.1680 + 0.1008 = **0.9160** (remaining 0.084 is in k ≥ 6)' },
+      ],
+      answer: 'Sum for k=0..5 ≈ 0.916; remainder in tail',
+    },
+    {
+      id: 'poi-32', difficulty: 2,
+      question: 'A rare disease has an incidence of 1 in 10000 people. In a city of 50000, what is the expected number of cases and the probability of **zero cases**?',
+      steps: [
+        { label: 'Rate', content: 'λ = 50000 × (1/10000) = **5**' },
+        { label: 'P(X=0)', content: '= e^(−5) = **0.0067**' },
+        { label: 'Interpretation', content: 'There is only a 0.67% chance of zero cases — we almost certainly see some.' },
+      ],
+      answer: 'Expected = 5; P(zero) = 0.0067',
+    },
+    {
+      id: 'poi-33', difficulty: 2,
+      question: 'Why is the Poisson distribution **not** appropriate for modelling the number of goals a specific footballer scores per season?',
+      steps: [
+        { label: 'Key assumption', content: 'Poisson requires events to occur independently at a constant rate.' },
+        { label: 'Violation', content: 'A footballer\'s scoring rate depends on form, opponents, injuries — the rate is **not constant** and events are **not independent** (confidence effects).' },
+        { label: 'Better model', content: 'A negative binomial or mixed Poisson model can handle over-dispersion (variance > mean).' },
+      ],
+      answer: 'Rate is not constant and events are not independent — Poisson assumptions violated',
+    },
+    {
+      id: 'poi-34', difficulty: 2,
+      question: 'Earthquakes of magnitude ≥ 5 occur at an average rate of 2 per week in a region. What is the probability of **3 or more** in a given week?',
+      visual: { kind: 'waiting', avgMinutes: 5040, markTime: 5040 },
+      steps: [
+        { label: 'Setup', content: 'λ = 2, need P(X ≥ 3) = 1 − P(X ≤ 2)' },
+        { label: 'P(0)', content: '0.1353' },
+        { label: 'P(1)', content: '0.2707' },
+        { label: 'P(2)', content: '0.2707' },
+        { label: 'P(X ≤ 2)', content: '= 0.6767' },
+        { label: 'Result', content: 'P(X ≥ 3) = 1 − 0.6767 = **0.3233**' },
+      ],
+      answer: '0.3233',
+      code: 'import math\nlam = 2\n# P(X >= 3)\n',
+      codeSolution: 'import math\nlam = 2\np_le_2 = sum((lam**k) * math.exp(-lam) / math.factorial(k) for k in range(3))\nprint(f"P(X >= 3) = {1 - p_le_2:.4f}")',
+    },
+
+    // ── Hard (35-50) ───────────────────────────────────────
+    {
+      id: 'poi-35', difficulty: 3,
+      question: 'Derive the Poisson distribution as the **limit of the binomial**. Start with Binomial(n, p) where p = λ/n and let n → ∞.',
+      steps: [
+        { label: 'Binomial formula', content: 'P(X = k) = C(n,k) · p^k · (1−p)^(n−k)' },
+        { label: 'Substitute p = λ/n', content: '= C(n,k) · (λ/n)^k · (1 − λ/n)^(n−k)' },
+        { label: 'Expand C(n,k)', content: 'C(n,k) = n(n−1)...(n−k+1) / k! → n^k / k! as n → ∞' },
+        { label: 'Combine with (λ/n)^k', content: '(n^k / k!) · (λ^k / n^k) = λ^k / k!' },
+        { label: 'Limit of (1−λ/n)^(n−k)', content: '(1 − λ/n)^n → e^(−λ) and (1 − λ/n)^(−k) → 1' },
+        { label: 'Result', content: 'P(X = k) → **λ^k · e^(−λ) / k!** — the Poisson PMF.' },
+      ],
+      answer: 'Binomial(n, λ/n) → Poisson(λ) as n → ∞',
+    },
+    {
+      id: 'poi-36', difficulty: 3,
+      question: 'Show that the **MLE** (maximum likelihood estimator) of λ for Poisson data x₁, x₂, ..., xn is λ̂ = x̄.',
+      steps: [
+        { label: 'Likelihood', content: 'L(λ) = ∏ᵢ (λ^xᵢ · e^(−λ) / xᵢ!)' },
+        { label: 'Log-likelihood', content: 'ℓ(λ) = (∑xᵢ) ln λ − nλ − ∑ ln(xᵢ!)' },
+        { label: 'Differentiate', content: 'dℓ/dλ = (∑xᵢ) / λ − n' },
+        { label: 'Set to zero', content: '(∑xᵢ) / λ = n → λ̂ = (∑xᵢ) / n = **x̄**' },
+        { label: 'Second derivative check', content: 'd²ℓ/dλ² = −(∑xᵢ) / λ² < 0 → it is a maximum.' },
+      ],
+      answer: 'λ̂ = x̄ (sample mean)',
+    },
+    {
+      id: 'poi-37', difficulty: 3,
+      question: 'Given data: [2, 0, 3, 1, 4, 2, 1, 3, 2, 2]. Test whether the data plausibly come from a Poisson distribution by checking whether **variance ≈ mean**.',
+      steps: [
+        { label: 'Mean', content: 'x̄ = (2+0+3+1+4+2+1+3+2+2)/10 = 20/10 = **2.0**' },
+        { label: 'Variance', content: 'Deviations²: 0, 4, 1, 1, 4, 0, 1, 1, 0, 0 → sum = 12' },
+        { label: 'Sample variance', content: 's² = 12 / 9 = **1.333**' },
+        { label: 'Dispersion index', content: 'I = s² / x̄ = 1.333 / 2.0 = **0.667**' },
+        { label: 'Interpretation', content: 'For Poisson, we expect I ≈ 1. Here I = 0.667 (under-dispersed). The data is slightly more regular than Poisson would predict, but with n = 10, this is not a strong deviation.' },
+      ],
+      answer: 'Mean = 2.0, Variance = 1.333, dispersion index = 0.667 — mild under-dispersion',
+      code: 'data = [2, 0, 3, 1, 4, 2, 1, 3, 2, 2]\n# Compute mean, variance, and dispersion index\n',
+      codeSolution: 'data = [2, 0, 3, 1, 4, 2, 1, 3, 2, 2]\nn = len(data)\nmean = sum(data) / n\nvar = sum((x - mean)**2 for x in data) / (n - 1)\nprint(f"Mean = {mean:.2f}")\nprint(f"Variance = {var:.3f}")\nprint(f"Dispersion index = {var/mean:.3f}")',
+    },
+    {
+      id: 'poi-38', difficulty: 3,
+      question: 'Explain the connection between the **Poisson process** and the **exponential distribution** for inter-arrival times.',
+      steps: [
+        { label: 'Poisson process', content: 'If events occur at a constant rate λ per unit time (Poisson process), the count in any interval of length t is Poisson(λt).' },
+        { label: 'Inter-arrival time', content: 'Let T = time between consecutive events. We want P(T > t).' },
+        { label: 'Derivation', content: 'P(T > t) = P(0 events in [0,t]) = e^(−λt)' },
+        { label: 'CDF', content: 'P(T ≤ t) = 1 − e^(−λt) — this is the **exponential CDF** with rate λ.' },
+        { label: 'Summary', content: 'Poisson counts ↔ exponential waits. They are two views of the same process.' },
+      ],
+      answer: 'Poisson counts and exponential inter-arrival times are dual descriptions of the same process',
+    },
+    {
+      id: 'poi-39', difficulty: 3,
+      question: 'Prove that for a Poisson distribution, **E[X] = λ** directly from the PMF.',
+      steps: [
+        { label: 'Definition', content: 'E[X] = ∑_{k=0}^∞ k · λ^k · e^(−λ) / k!' },
+        { label: 'k=0 term vanishes', content: 'When k=0, the term is 0. Start from k=1.' },
+        { label: 'Simplify k/k!', content: 'k/k! = 1/(k−1)! so E[X] = e^(−λ) ∑_{k=1}^∞ λ^k / (k−1)!' },
+        { label: 'Reindex', content: 'Let j = k−1: E[X] = e^(−λ) ∑_{j=0}^∞ λ^(j+1) / j! = λ · e^(−λ) ∑_{j=0}^∞ λ^j / j!' },
+        { label: 'Recognise series', content: '∑ λ^j / j! = e^λ' },
+        { label: 'Result', content: 'E[X] = λ · e^(−λ) · e^λ = **λ**' },
+      ],
+      answer: 'E[X] = λ',
+    },
+    {
+      id: 'poi-40', difficulty: 3,
+      question: 'Prove that for a Poisson distribution, **Var(X) = λ**.',
+      steps: [
+        { label: 'Strategy', content: 'Use Var(X) = E[X(X−1)] + E[X] − (E[X])²' },
+        { label: 'Compute E[X(X−1)]', content: '= ∑ k(k−1) λ^k e^(−λ) / k! = λ² · e^(−λ) ∑_{j=0}^∞ λ^j / j! = λ²' },
+        { label: 'Assemble', content: 'Var(X) = λ² + λ − λ² = **λ**' },
+      ],
+      answer: 'Var(X) = λ',
+    },
+    {
+      id: 'poi-41', difficulty: 3,
+      question: 'A radioactive source emits particles at λ = 4 per second. A detector has a **dead time** of 0.1 s after each detection (cannot register a new particle). Approximately how many particles per second are actually detected?',
+      steps: [
+        { label: 'Model', content: 'True rate λ = 4/s. After each detection, 0.1 s is lost.' },
+        { label: 'Detected rate formula', content: 'λ_det = λ / (1 + λ · τ) where τ = dead time' },
+        { label: 'Compute', content: 'λ_det = 4 / (1 + 4 · 0.1) = 4 / 1.4 = **2.857 per second**' },
+        { label: 'Insight', content: 'Dead time causes the measured rate to be lower than the true rate — a common correction in nuclear physics.' },
+      ],
+      answer: '≈ 2.86 detected per second',
+    },
+    {
+      id: 'poi-42', difficulty: 3,
+      question: 'You observe the following counts over 100 intervals: 0 events (15 times), 1 event (30 times), 2 events (25 times), 3 events (18 times), 4 events (8 times), 5+ events (4 times). Estimate λ and perform a **goodness-of-fit** test at α = 0.05.',
+      steps: [
+        { label: 'Estimate λ', content: 'Total events = 0·15 + 1·30 + 2·25 + 3·18 + 4·8 + 5·4 = 0+30+50+54+32+20 = 186, so λ̂ = 186/100 = **1.86**' },
+        { label: 'Expected counts', content: 'E(0)=100·e^(−1.86) ≈ 15.57, E(1)=100·1.86·e^(−1.86) ≈ 28.96, E(2)=100·1.86²·e^(−1.86)/2 ≈ 26.93, E(3)≈16.70, E(4)≈7.77, E(5+)≈4.08' },
+        { label: 'χ² statistic', content: '∑(O−E)²/E = (15−15.57)²/15.57 + (30−28.96)²/28.96 + (25−26.93)²/26.93 + (18−16.70)²/16.70 + (8−7.77)²/7.77 + (4−4.08)²/4.08' },
+        { label: 'Calculate', content: '≈ 0.021 + 0.037 + 0.138 + 0.101 + 0.007 + 0.002 = **0.306**' },
+        { label: 'Degrees of freedom', content: 'df = 6 categories − 1 (estimated λ) − 1 = **4**' },
+        { label: 'Decision', content: 'χ²(4, 0.05) = 9.49. Since 0.306 ≪ 9.49, we **fail to reject** H₀ — the Poisson model fits well.' },
+      ],
+      answer: 'χ² = 0.306, df = 4, critical = 9.49 → fail to reject; Poisson fits',
+      code: 'import math\nobserved = [15, 30, 25, 18, 8, 4]\n# Estimate lambda, compute expected, run chi-squared test\n',
+      codeSolution: 'import math\nobserved = [15, 30, 25, 18, 8, 4]\nn = sum(observed)\ntotal_events = sum(k * observed[k] for k in range(5)) + 5 * observed[5]\nlam = total_events / n\nprint(f"lambda = {lam:.2f}")\nexpected = []\nfor k in range(5):\n    e = n * (lam**k) * math.exp(-lam) / math.factorial(k)\n    expected.append(e)\nexpected.append(n - sum(expected))  # 5+ bucket\nchi2 = sum((o - e)**2 / e for o, e in zip(observed, expected))\nprint(f"Chi-squared = {chi2:.3f}")\nprint(f"df = {len(observed) - 2}, critical value (0.05) = 9.49")\nprint("Fail to reject H0" if chi2 < 9.49 else "Reject H0")',
+    },
+    {
+      id: 'poi-43', difficulty: 3,
+      question: 'If X ~ Poisson(λ₁) and Y ~ Poisson(λ₂) are independent, show that X + Y ~ Poisson(λ₁ + λ₂) using **moment generating functions** (MGFs).',
+      steps: [
+        { label: 'MGF of Poisson(λ)', content: 'M_X(t) = E[e^(tX)] = exp(λ(e^t − 1))' },
+        { label: 'MGF of X + Y', content: 'M_{X+Y}(t) = M_X(t) · M_Y(t) (independence)' },
+        { label: 'Multiply', content: '= exp(λ₁(e^t − 1)) · exp(λ₂(e^t − 1)) = exp((λ₁ + λ₂)(e^t − 1))' },
+        { label: 'Recognise', content: 'This is the MGF of **Poisson(λ₁ + λ₂)**.' },
+        { label: 'Uniqueness', content: 'Since MGFs uniquely determine distributions, X + Y ~ Poisson(λ₁ + λ₂). ∎' },
+      ],
+      answer: 'X + Y ~ Poisson(λ₁ + λ₂)',
+    },
+    {
+      id: 'poi-44', difficulty: 3,
+      question: 'A Poisson process has rate λ = 10 per hour. What is the probability that the **time to the 3rd event** is less than 15 minutes? (Hint: this is a Gamma distribution.)',
+      steps: [
+        { label: 'Key insight', content: 'The time to the k-th event in a Poisson process is Gamma(k, λ). Equivalently, T₃ ≤ 0.25 hours iff the count in [0, 0.25] is ≥ 3.' },
+        { label: 'Reframe', content: 'X ~ Poisson(λ · 0.25) = Poisson(2.5). Need P(X ≥ 3).' },
+        { label: 'P(X ≤ 2)', content: 'P(0) = e^(−2.5) ≈ 0.0821, P(1) = 2.5·0.0821 ≈ 0.2052, P(2) = 3.125·0.0821 ≈ 0.2565' },
+        { label: 'Sum', content: 'P(X ≤ 2) = 0.0821 + 0.2052 + 0.2565 = 0.5438' },
+        { label: 'Result', content: 'P(T₃ ≤ 0.25) = P(X ≥ 3) = 1 − 0.5438 = **0.4562**' },
+      ],
+      answer: '≈ 0.456',
+    },
+    {
+      id: 'poi-45', difficulty: 3,
+      question: 'Explain why the Poisson distribution is **right-skewed** and how its skewness changes as λ increases.',
+      steps: [
+        { label: 'Skewness formula', content: 'For Poisson(λ), skewness = 1 / √λ.' },
+        { label: 'Small λ', content: 'When λ = 1, skewness = 1 — strongly right-skewed (most mass near 0).' },
+        { label: 'Large λ', content: 'When λ = 100, skewness = 0.1 — nearly symmetric.' },
+        { label: 'Limit', content: 'As λ → ∞, Poisson(λ) → Normal(λ, λ) by the CLT — skewness → 0.' },
+      ],
+      answer: 'Skewness = 1/√λ → 0 as λ → ∞; approaches normal',
+    },
+    {
+      id: 'poi-46', difficulty: 3,
+      question: 'A website receives hits at λ = 100 per minute. Use the **normal approximation** to estimate P(X > 110).',
+      steps: [
+        { label: 'Approximation', content: 'For large λ, Poisson(λ) ≈ Normal(μ = λ, σ² = λ)' },
+        { label: 'Standardise', content: 'Z = (110 − 100) / √100 = 10/10 = **1.0**' },
+        { label: 'Look up', content: 'P(Z > 1.0) ≈ **0.1587**' },
+      ],
+      answer: '≈ 0.159',
+    },
+    {
+      id: 'poi-47', difficulty: 3,
+      question: 'Derive the **probability generating function** (PGF) of X ~ Poisson(λ) and use it to find E[X] and Var(X).',
+      steps: [
+        { label: 'PGF definition', content: 'G(s) = E[s^X] = ∑ s^k · λ^k e^(−λ) / k! = e^(−λ) ∑ (sλ)^k / k! = **e^(λ(s−1))**' },
+        { label: 'E[X]', content: "G'(s) = λ · e^(λ(s−1)). At s=1: G'(1) = λ · e^0 = **λ**" },
+        { label: 'E[X(X−1)]', content: "G''(s) = λ² · e^(λ(s−1)). At s=1: G''(1) = **λ²**" },
+        { label: 'Var(X)', content: "Var(X) = G''(1) + G'(1) − [G'(1)]² = λ² + λ − λ² = **λ**" },
+      ],
+      answer: 'PGF = e^(λ(s−1)); E[X] = λ, Var(X) = λ',
+    },
+    {
+      id: 'poi-48', difficulty: 3,
+      question: 'Compare the Poisson model to the **negative binomial** for over-dispersed count data. When would you choose each?',
+      steps: [
+        { label: 'Poisson', content: 'Assumes variance = mean. Simple, one parameter (λ).' },
+        { label: 'Negative binomial', content: 'Has two parameters; allows variance > mean (over-dispersion).' },
+        { label: 'When to use Poisson', content: 'When the variance/mean ratio (dispersion index) ≈ 1.' },
+        { label: 'When to switch', content: 'When data shows **over-dispersion** (variance ≫ mean), NB captures the extra variability. Common in ecological counts, insurance claims, and web traffic.' },
+        { label: 'Test', content: 'Fit both models, compare AIC, or use a likelihood ratio test.' },
+      ],
+      answer: 'Poisson when variance ≈ mean; negative binomial when variance > mean (over-dispersion)',
+    },
+    {
+      id: 'poi-49', difficulty: 3,
+      question: 'In a Poisson process with rate λ, given that **exactly 1 event** occurred in [0, T], show that the event time is **uniformly distributed** on [0, T].',
+      steps: [
+        { label: 'Setup', content: 'Condition on N(T) = 1. Let S₁ be the event time. Find P(S₁ ≤ s | N(T) = 1).' },
+        { label: 'Joint reasoning', content: 'P(S₁ ≤ s, N(T) = 1) = P(1 event in [0,s], 0 events in (s,T])' },
+        { label: 'Compute', content: '= (λs · e^(−λs)) · e^(−λ(T−s)) = λs · e^(−λT)' },
+        { label: 'Divide by P(N(T)=1)', content: 'P(N(T) = 1) = λT · e^(−λT)' },
+        { label: 'Result', content: 'P(S₁ ≤ s | N(T) = 1) = λs · e^(−λT) / (λT · e^(−λT)) = **s/T**' },
+        { label: 'Conclusion', content: 'This is the CDF of Uniform(0, T). ∎' },
+      ],
+      answer: 'S₁ | N(T)=1 ~ Uniform(0, T)',
+    },
+    {
+      id: 'poi-50', difficulty: 3,
+      question: 'A store records customer arrivals over 200 one-minute intervals. The counts are: 0 events (10), 1 event (35), 2 events (50), 3 events (45), 4 events (30), 5 events (18), 6+ events (12). Does a Poisson model fit? Perform a full **chi-squared goodness-of-fit test** at α = 0.05.',
+      steps: [
+        { label: 'Estimate λ', content: 'Total events = 0·10+1·35+2·50+3·45+4·30+5·18+6·12 = 0+35+100+135+120+90+72 = 552. λ̂ = 552/200 = **2.76**' },
+        { label: 'Expected counts', content: 'Using Poisson(2.76): E(0)=200·e^(−2.76)≈12.63, E(1)≈34.85, E(2)≈48.10, E(3)≈44.25, E(4)≈30.53, E(5)≈16.85, E(6+)≈200−187.21≈12.79' },
+        { label: 'χ² terms', content: '(10−12.63)²/12.63 + (35−34.85)²/34.85 + (50−48.10)²/48.10 + (45−44.25)²/44.25 + (30−30.53)²/30.53 + (18−16.85)²/16.85 + (12−12.79)²/12.79' },
+        { label: 'Compute', content: '≈ 0.548 + 0.001 + 0.075 + 0.013 + 0.009 + 0.079 + 0.049 = **0.774**' },
+        { label: 'df', content: '7 categories − 1 (λ estimated) − 1 = **5**' },
+        { label: 'Decision', content: 'χ²(5, 0.05) = 11.07. Since 0.774 ≪ 11.07, we **fail to reject** — Poisson fits well.' },
+      ],
+      answer: 'χ² ≈ 0.77, df = 5, critical = 11.07 → fail to reject; Poisson fits',
+      code: 'import math\nobserved = [10, 35, 50, 45, 30, 18, 12]\nn = 200\n# Full goodness-of-fit test\n',
+      codeSolution: 'import math\nobserved = [10, 35, 50, 45, 30, 18, 12]\nn = sum(observed)\ntotal = sum(k*observed[k] for k in range(6)) + 6*observed[6]\nlam = total / n\nprint(f"lambda = {lam:.2f}")\nexpected = []\nfor k in range(6):\n    e = n * (lam**k) * math.exp(-lam) / math.factorial(k)\n    expected.append(e)\nexpected.append(n - sum(expected))\nchi2 = sum((o-e)**2/e for o, e in zip(observed, expected))\ndf = len(observed) - 2\nprint(f"Chi-squared = {chi2:.3f}, df = {df}")\nprint("Fail to reject H0" if chi2 < 11.07 else "Reject H0")',
+    },
+  ],
+};
+
+
+// ─── 2. Exponential Distribution ──────────────────────────────
+
+export const practiceExponentialDistribution: PracticeSet = {
+  title: 'Practice — Exponential Distribution',
+  problems: [
+    // ── Easy (1-17) ────────────────────────────────────────
+    {
+      id: 'exp-01', difficulty: 1,
+      question: 'A bus arrives every **10 minutes** on average. What is the rate parameter λ?',
+      visual: { kind: 'waiting', avgMinutes: 10 },
+      steps: [
+        { label: 'Relationship', content: 'Mean = 1/λ, so λ = 1/mean' },
+        { label: 'Compute', content: 'λ = 1/10 = **0.1 per minute**' },
+      ],
+      answer: '0.1 per minute',
+    },
+    {
+      id: 'exp-02', difficulty: 1,
+      question: 'With λ = 0.1 per minute, what is P(wait ≤ 10 minutes)?',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 0.1 }, markX: 10 },
+      steps: [
+        { label: 'CDF', content: 'P(T ≤ t) = 1 − e^(−λt)' },
+        { label: 'Substitute', content: 'P(T ≤ 10) = 1 − e^(−0.1 × 10) = 1 − e^(−1)' },
+        { label: 'Compute', content: '= 1 − 0.3679 = **0.6321**' },
+      ],
+      answer: '0.6321',
+    },
+    {
+      id: 'exp-03', difficulty: 1,
+      question: 'With λ = 0.1 per minute, what is P(wait > 10 minutes)?',
+      steps: [
+        { label: 'Survival function', content: 'P(T > t) = e^(−λt)' },
+        { label: 'Compute', content: 'P(T > 10) = e^(−1) = **0.3679**' },
+      ],
+      answer: '0.3679',
+    },
+    {
+      id: 'exp-04', difficulty: 1,
+      question: 'A light bulb has a mean lifetime of **1000 hours**. What is λ?',
+      steps: [
+        { label: 'Formula', content: 'λ = 1/mean = 1/1000' },
+        { label: 'Answer', content: 'λ = **0.001 per hour**' },
+      ],
+      answer: '0.001 per hour',
+    },
+    {
+      id: 'exp-05', difficulty: 1,
+      question: 'With λ = 0.001 per hour, what is P(bulb lasts more than 500 hours)?',
+      steps: [
+        { label: 'Formula', content: 'P(T > 500) = e^(−0.001 × 500) = e^(−0.5)' },
+        { label: 'Compute', content: '= **0.6065**' },
+      ],
+      answer: '0.6065',
+    },
+    {
+      id: 'exp-06', difficulty: 1,
+      question: 'Customers arrive at a rate of **2 per hour**. What is the mean time between arrivals?',
+      steps: [
+        { label: 'Formula', content: 'Mean = 1/λ = 1/2' },
+        { label: 'Answer', content: '**0.5 hours** (30 minutes)' },
+      ],
+      answer: '30 minutes',
+    },
+    {
+      id: 'exp-07', difficulty: 1,
+      question: 'With λ = 2 per hour, what is P(next customer arrives within 15 minutes)?',
+      visual: { kind: 'waiting', avgMinutes: 30, markTime: 15 },
+      steps: [
+        { label: 'Convert', content: '15 minutes = 0.25 hours' },
+        { label: 'CDF', content: 'P(T ≤ 0.25) = 1 − e^(−2 × 0.25) = 1 − e^(−0.5)' },
+        { label: 'Compute', content: '= 1 − 0.6065 = **0.3935**' },
+      ],
+      answer: '0.3935',
+      code: 'import math\nlam = 2  # per hour\nt = 0.25  # hours (15 min)\n# Compute P(T <= t)\n',
+      codeSolution: 'import math\nlam = 2\nt = 0.25\nprob = 1 - math.exp(-lam * t)\nprint(f"P(T <= {t}) = {prob:.4f}")',
+    },
+    {
+      id: 'exp-08', difficulty: 1,
+      question: 'Write the **PDF** of an exponential distribution with λ = 3.',
+      steps: [
+        { label: 'General PDF', content: 'f(t) = λ · e^(−λt) for t ≥ 0' },
+        { label: 'Substitute', content: 'f(t) = **3 · e^(−3t)** for t ≥ 0' },
+      ],
+      answer: 'f(t) = 3e^(−3t) for t ≥ 0',
+    },
+    {
+      id: 'exp-09', difficulty: 1,
+      question: 'With λ = 0.5 per minute, compute P(T ≤ 3 minutes).',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 0.5 }, markX: 3 },
+      steps: [
+        { label: 'CDF', content: 'P(T ≤ 3) = 1 − e^(−0.5 × 3) = 1 − e^(−1.5)' },
+        { label: 'Compute', content: '= 1 − 0.2231 = **0.7769**' },
+      ],
+      answer: '0.7769',
+    },
+    {
+      id: 'exp-10', difficulty: 1,
+      question: 'A server processes requests with mean service time **2 seconds**. What is P(service time > 4 seconds)?',
+      steps: [
+        { label: 'Rate', content: 'λ = 1/2 = 0.5 per second' },
+        { label: 'Compute', content: 'P(T > 4) = e^(−0.5 × 4) = e^(−2) = **0.1353**' },
+      ],
+      answer: '0.1353',
+    },
+    {
+      id: 'exp-11', difficulty: 1,
+      question: 'What is the **variance** of an exponential distribution with λ = 4?',
+      steps: [
+        { label: 'Formula', content: 'Var(T) = 1/λ²' },
+        { label: 'Compute', content: '= 1/16 = **0.0625**' },
+      ],
+      answer: '0.0625',
+    },
+    {
+      id: 'exp-12', difficulty: 1,
+      question: 'What is the **standard deviation** of Exp(λ = 4)?',
+      steps: [
+        { label: 'SD = 1/λ', content: 'For exponential, SD = mean = 1/λ' },
+        { label: 'Compute', content: '= 1/4 = **0.25**' },
+      ],
+      answer: '0.25',
+    },
+    {
+      id: 'exp-13', difficulty: 1,
+      question: 'Compute the **median** of Exp(λ = 2).',
+      hint: 'Set P(T ≤ m) = 0.5 and solve for m.',
+      steps: [
+        { label: 'Set up', content: '1 − e^(−2m) = 0.5' },
+        { label: 'Solve', content: 'e^(−2m) = 0.5 → −2m = ln(0.5) → m = −ln(0.5)/2' },
+        { label: 'Compute', content: 'm = 0.6931/2 = **0.3466**' },
+      ],
+      answer: '0.3466',
+    },
+    {
+      id: 'exp-14', difficulty: 1,
+      question: 'With λ = 1, compute P(T ≤ 2).',
+      steps: [
+        { label: 'CDF', content: 'P(T ≤ 2) = 1 − e^(−1 × 2) = 1 − e^(−2)' },
+        { label: 'Compute', content: '= 1 − 0.1353 = **0.8647**' },
+      ],
+      answer: '0.8647',
+    },
+    {
+      id: 'exp-15', difficulty: 1,
+      question: 'Find P(1 ≤ T ≤ 3) when λ = 1.',
+      steps: [
+        { label: 'Formula', content: 'P(a ≤ T ≤ b) = e^(−λa) − e^(−λb)' },
+        { label: 'Compute', content: '= e^(−1) − e^(−3) = 0.3679 − 0.0498 = **0.3181**' },
+      ],
+      answer: '0.3181',
+      code: 'import math\nlam = 1\n# Compute P(1 <= T <= 3)\n',
+      codeSolution: 'import math\nlam = 1\nprob = math.exp(-lam * 1) - math.exp(-lam * 3)\nprint(f"P(1 <= T <= 3) = {prob:.4f}")',
+    },
+    {
+      id: 'exp-16', difficulty: 1,
+      question: 'A radioactive atom has a half-life of 5 minutes. What is λ?',
+      steps: [
+        { label: 'Relationship', content: 'Half-life t½ = ln(2)/λ, so λ = ln(2)/t½' },
+        { label: 'Compute', content: 'λ = 0.6931/5 = **0.1386 per minute**' },
+      ],
+      answer: '0.1386 per minute',
+    },
+    {
+      id: 'exp-17', difficulty: 1,
+      question: 'Evaluate the PDF f(t) = 2e^(−2t) at t = 0, t = 0.5, and t = 1.',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 2 } },
+      steps: [
+        { label: 'f(0)', content: '2 · e^0 = **2**' },
+        { label: 'f(0.5)', content: '2 · e^(−1) = 2 · 0.3679 = **0.7358**' },
+        { label: 'f(1)', content: '2 · e^(−2) = 2 · 0.1353 = **0.2707**' },
+      ],
+      answer: 'f(0) = 2, f(0.5) = 0.7358, f(1) = 0.2707',
+    },
+
+    // ── Medium (18-34) ─────────────────────────────────────
+    {
+      id: 'exp-18', difficulty: 2,
+      question: 'A call centre has mean wait time 5 minutes. You have already waited 3 minutes. What is the probability of waiting **at least 5 more** minutes? Use the **memoryless property**.',
+      visual: { kind: 'waiting', avgMinutes: 5, markTime: 8 },
+      steps: [
+        { label: 'Memoryless property', content: 'P(T > s + t | T > s) = P(T > t)' },
+        { label: 'Apply', content: 'P(T > 8 | T > 3) = P(T > 5) = e^(−5/5) = e^(−1) = **0.3679**' },
+        { label: 'Insight', content: 'The past 3 minutes of waiting do not change the probability — the exponential "forgets" the past.' },
+      ],
+      answer: '0.3679',
+    },
+    {
+      id: 'exp-19', difficulty: 2,
+      question: 'Prove the **memoryless property** algebraically: show P(T > s+t | T > s) = P(T > t).',
+      steps: [
+        { label: 'Left side', content: 'P(T > s+t | T > s) = P(T > s+t) / P(T > s)' },
+        { label: 'Substitute', content: '= e^(−λ(s+t)) / e^(−λs)' },
+        { label: 'Simplify', content: '= e^(−λs−λt) / e^(−λs) = e^(−λt)' },
+        { label: 'Right side', content: 'P(T > t) = e^(−λt)' },
+        { label: 'Conclusion', content: 'They are equal. ∎' },
+      ],
+      answer: 'P(T > s+t | T > s) = e^(−λt) = P(T > t)',
+    },
+    {
+      id: 'exp-20', difficulty: 2,
+      question: 'Two machines fail independently. Machine A has mean time to failure 100 hours (λ_A = 0.01), Machine B has mean 200 hours (λ_B = 0.005). What is P(**either** fails within 50 hours)?',
+      steps: [
+        { label: 'Min of exponentials', content: 'Time until first failure = min(T_A, T_B) ~ Exp(λ_A + λ_B)' },
+        { label: 'Combined rate', content: 'λ = 0.01 + 0.005 = **0.015**' },
+        { label: 'P(first failure ≤ 50)', content: '= 1 − e^(−0.015 × 50) = 1 − e^(−0.75)' },
+        { label: 'Compute', content: '≈ 1 − 0.4724 = **0.5276**' },
+      ],
+      answer: '≈ 0.5276',
+      code: 'import math\nlam_a, lam_b = 0.01, 0.005\nt = 50\n# P(either fails within t hours)\n',
+      codeSolution: 'import math\nlam_a, lam_b = 0.01, 0.005\nlam = lam_a + lam_b\nt = 50\nprob = 1 - math.exp(-lam * t)\nprint(f"P(first failure <= {t}) = {prob:.4f}")',
+    },
+    {
+      id: 'exp-21', difficulty: 2,
+      question: 'Prove that the **minimum** of two independent exponentials Exp(λ₁) and Exp(λ₂) is Exp(λ₁ + λ₂).',
+      steps: [
+        { label: 'Let M = min(T₁, T₂)', content: 'P(M > t) = P(T₁ > t AND T₂ > t)' },
+        { label: 'Independence', content: '= P(T₁ > t) · P(T₂ > t) = e^(−λ₁t) · e^(−λ₂t)' },
+        { label: 'Combine', content: '= e^(−(λ₁+λ₂)t)' },
+        { label: 'Recognise', content: 'This is the survival function of **Exp(λ₁ + λ₂)**. ∎' },
+      ],
+      answer: 'min(T₁, T₂) ~ Exp(λ₁ + λ₂)',
+    },
+    {
+      id: 'exp-22', difficulty: 2,
+      question: 'A doctor sees patients with exponential consultation time, mean 15 minutes. What is the probability a consultation takes **between 10 and 20 minutes**?',
+      steps: [
+        { label: 'Rate', content: 'λ = 1/15 ≈ 0.0667' },
+        { label: 'Formula', content: 'P(10 ≤ T ≤ 20) = e^(−λ·10) − e^(−λ·20)' },
+        { label: 'Compute', content: '= e^(−0.667) − e^(−1.333) ≈ 0.5134 − 0.2636 = **0.2498**' },
+      ],
+      answer: '≈ 0.250',
+    },
+    {
+      id: 'exp-23', difficulty: 2,
+      question: 'Compare the exponential distribution to a **uniform** distribution both with mean 10 minutes. Which gives a higher probability of waiting more than 20 minutes?',
+      steps: [
+        { label: 'Exponential', content: 'P(T > 20) = e^(−20/10) = e^(−2) = 0.1353' },
+        { label: 'Uniform', content: 'Uniform(0, 20) has mean 10. P(T > 20) = **0** (no wait can exceed 20).' },
+        { label: 'Conclusion', content: 'The exponential gives **0.1353** — it has a long tail. The uniform has a hard cutoff.' },
+      ],
+      answer: 'Exponential: 13.5%; Uniform: 0%. Exponential has the heavier tail.',
+    },
+    {
+      id: 'exp-24', difficulty: 2,
+      question: 'Given observed wait times [3.2, 1.1, 0.5, 7.8, 2.4, 4.6, 0.9, 5.3, 1.7, 3.5] (in minutes), find the **MLE** of λ.',
+      steps: [
+        { label: 'Sum', content: '3.2+1.1+0.5+7.8+2.4+4.6+0.9+5.3+1.7+3.5 = **31.0**' },
+        { label: 'Sample mean', content: 'x̄ = 31.0/10 = **3.1**' },
+        { label: 'MLE', content: 'λ̂ = 1/x̄ = 1/3.1 = **0.3226 per minute**' },
+      ],
+      answer: 'λ̂ ≈ 0.323 per minute',
+      code: 'data = [3.2, 1.1, 0.5, 7.8, 2.4, 4.6, 0.9, 5.3, 1.7, 3.5]\n# Compute MLE of lambda\n',
+      codeSolution: 'data = [3.2, 1.1, 0.5, 7.8, 2.4, 4.6, 0.9, 5.3, 1.7, 3.5]\nmean = sum(data) / len(data)\nlam_hat = 1 / mean\nprint(f"x_bar = {mean:.2f}")\nprint(f"lambda_hat = {lam_hat:.4f}")',
+    },
+    {
+      id: 'exp-25', difficulty: 2,
+      question: 'A website has mean time between visits of 2 seconds. What is P(gap between visits exceeds 5 seconds)?',
+      steps: [
+        { label: 'Rate', content: 'λ = 1/2 = 0.5 per second' },
+        { label: 'Compute', content: 'P(T > 5) = e^(−0.5 × 5) = e^(−2.5) ≈ **0.0821**' },
+      ],
+      answer: '≈ 0.082',
+    },
+    {
+      id: 'exp-26', difficulty: 2,
+      question: 'Find the **90th percentile** of Exp(λ = 0.5).',
+      steps: [
+        { label: 'Set up', content: 'P(T ≤ t₀.₉) = 0.9 → 1 − e^(−0.5t) = 0.9' },
+        { label: 'Solve', content: 'e^(−0.5t) = 0.1 → −0.5t = ln(0.1) = −2.3026' },
+        { label: 'Compute', content: 't = 2.3026/0.5 = **4.605**' },
+      ],
+      answer: '4.605',
+    },
+    {
+      id: 'exp-27', difficulty: 2,
+      question: 'Derive the CDF of the exponential from the **Poisson process**. If events occur at rate λ, show P(T₁ ≤ t) = 1 − e^(−λt).',
+      steps: [
+        { label: 'Logic', content: 'T₁ = time to first event. T₁ > t means zero events in [0, t].' },
+        { label: 'Poisson', content: 'P(0 events in [0,t]) = e^(−λt)' },
+        { label: 'Complement', content: 'P(T₁ ≤ t) = 1 − P(T₁ > t) = 1 − e^(−λt)' },
+        { label: 'Result', content: 'This is exactly the CDF of **Exp(λ)**. ∎' },
+      ],
+      answer: 'P(T₁ ≤ t) = 1 − e^(−λt)',
+    },
+    {
+      id: 'exp-28', difficulty: 2,
+      question: 'Verify that ∫₀^∞ λe^(−λt) dt = 1 (the PDF integrates to 1).',
+      steps: [
+        { label: 'Integral', content: '∫₀^∞ λe^(−λt) dt' },
+        { label: 'Antiderivative', content: '= [−e^(−λt)]₀^∞' },
+        { label: 'Evaluate', content: '= (0) − (−1) = **1** ✓' },
+      ],
+      answer: '1',
+    },
+    {
+      id: 'exp-29', difficulty: 2,
+      question: 'Derive E[T] for Exp(λ) using integration by parts.',
+      steps: [
+        { label: 'Setup', content: 'E[T] = ∫₀^∞ t · λe^(−λt) dt' },
+        { label: 'Integration by parts', content: 'Let u = t, dv = λe^(−λt)dt → du = dt, v = −e^(−λt)' },
+        { label: 'Apply', content: '= [−te^(−λt)]₀^∞ + ∫₀^∞ e^(−λt) dt' },
+        { label: 'First term', content: '[−te^(−λt)]₀^∞ = 0 − 0 = 0' },
+        { label: 'Second term', content: '∫₀^∞ e^(−λt) dt = 1/λ' },
+        { label: 'Result', content: 'E[T] = **1/λ**' },
+      ],
+      answer: 'E[T] = 1/λ',
+    },
+    {
+      id: 'exp-30', difficulty: 2,
+      question: 'A machine has λ = 0.02 failures per hour. The company wants at least 95% reliability over a shift. How long can the shift be?',
+      steps: [
+        { label: 'Reliability', content: 'P(T > t) ≥ 0.95 → e^(−0.02t) ≥ 0.95' },
+        { label: 'Solve', content: '−0.02t ≥ ln(0.95) = −0.0513' },
+        { label: 'Compute', content: 't ≤ 0.0513/0.02 = **2.565 hours**' },
+      ],
+      answer: '≤ 2.57 hours (about 2 hours 34 minutes)',
+    },
+    {
+      id: 'exp-31', difficulty: 2,
+      question: 'Three servers, each with independent failure rate λ = 0.01 per hour, run in parallel. What is P(all three fail within 100 hours)?',
+      steps: [
+        { label: 'Each server', content: 'P(fail within 100) = 1 − e^(−0.01 × 100) = 1 − e^(−1) = 0.6321' },
+        { label: 'All three', content: 'P(all fail) = 0.6321³ = **0.2526**' },
+      ],
+      answer: '≈ 0.253',
+      code: 'import math\nlam = 0.01\nt = 100\n# P(all 3 servers fail within t hours)\n',
+      codeSolution: 'import math\nlam = 0.01\nt = 100\np_one = 1 - math.exp(-lam * t)\np_all = p_one ** 3\nprint(f"P(one fails) = {p_one:.4f}")\nprint(f"P(all 3 fail) = {p_all:.4f}")',
+    },
+    {
+      id: 'exp-32', difficulty: 2,
+      question: 'The exponential is the **only** continuous distribution with the memoryless property. If a distribution has P(T > s+t | T > s) = P(T > t) for all s,t > 0, show its survival function must be e^(−λt).',
+      steps: [
+        { label: 'Let S(t) = P(T > t)', content: 'The memoryless property says S(s+t) = S(s) · S(t).' },
+        { label: 'Functional equation', content: 'This is Cauchy\'s functional equation for continuous monotone functions.' },
+        { label: 'Solution', content: 'The only continuous solution with S(0) = 1 and S decreasing is S(t) = e^(−λt) for some λ > 0.' },
+        { label: 'Conclusion', content: 'Therefore T ~ Exp(λ). ∎' },
+      ],
+      answer: 'S(s+t) = S(s)S(t) → S(t) = e^(−λt) by Cauchy\'s equation',
+    },
+    {
+      id: 'exp-33', difficulty: 2,
+      question: 'A queue has exponential service times with mean 4 minutes. What is P(a customer is served in **under 2 minutes**)?',
+      visual: { kind: 'waiting', avgMinutes: 4, markTime: 2 },
+      steps: [
+        { label: 'Rate', content: 'λ = 1/4 = 0.25 per minute' },
+        { label: 'CDF', content: 'P(T ≤ 2) = 1 − e^(−0.25 × 2) = 1 − e^(−0.5)' },
+        { label: 'Compute', content: '= 1 − 0.6065 = **0.3935**' },
+      ],
+      answer: '0.3935',
+    },
+    {
+      id: 'exp-34', difficulty: 2,
+      question: 'Compute E[T²] for Exp(λ) and use it to find Var(T).',
+      steps: [
+        { label: 'E[T²]', content: '∫₀^∞ t² · λe^(−λt) dt = 2/λ² (by integration by parts twice)' },
+        { label: 'Var(T)', content: '= E[T²] − (E[T])² = 2/λ² − 1/λ² = **1/λ²**' },
+      ],
+      answer: 'Var(T) = 1/λ²',
+    },
+
+    // ── Hard (35-50) ───────────────────────────────────────
+    {
+      id: 'exp-35', difficulty: 3,
+      question: 'Derive the **MLE** of λ for exponential data t₁, t₂, ..., tₙ.',
+      steps: [
+        { label: 'Likelihood', content: 'L(λ) = ∏ λe^(−λtᵢ) = λⁿ · e^(−λ ∑tᵢ)' },
+        { label: 'Log-likelihood', content: 'ℓ(λ) = n ln λ − λ ∑tᵢ' },
+        { label: 'Differentiate', content: 'dℓ/dλ = n/λ − ∑tᵢ' },
+        { label: 'Set to zero', content: 'n/λ = ∑tᵢ → λ̂ = n / ∑tᵢ = **1/t̄**' },
+        { label: 'Verify maximum', content: 'd²ℓ/dλ² = −n/λ² < 0 ✓' },
+      ],
+      answer: 'λ̂ = 1/t̄',
+    },
+    {
+      id: 'exp-36', difficulty: 3,
+      question: 'Show that if T ~ Exp(λ), then **⌈T⌉** (ceiling, i.e., the integer part rounded up) follows a **geometric distribution**.',
+      steps: [
+        { label: 'Define', content: 'Let K = ⌈T⌉. Then K = k iff k−1 < T ≤ k, for k = 1, 2, ...' },
+        { label: 'Probability', content: 'P(K = k) = P(T ≤ k) − P(T ≤ k−1) = e^(−λ(k−1)) − e^(−λk)' },
+        { label: 'Factor', content: '= e^(−λ(k−1)) (1 − e^(−λ)) = (e^(−λ))^(k−1) · (1 − e^(−λ))' },
+        { label: 'Recognise', content: 'Let p = 1 − e^(−λ). Then P(K = k) = (1−p)^(k−1) · p — this is **Geometric(p)**. ∎' },
+      ],
+      answer: '⌈T⌉ ~ Geometric(p = 1 − e^(−λ))',
+    },
+    {
+      id: 'exp-37', difficulty: 3,
+      question: 'Two buses come independently — Bus A every 10 minutes on average, Bus B every 15 minutes. What is the expected time until **any** bus arrives?',
+      steps: [
+        { label: 'Rates', content: 'λ_A = 1/10, λ_B = 1/15' },
+        { label: 'Min of exponentials', content: 'Combined rate λ = 1/10 + 1/15 = 3/30 + 2/30 = 5/30 = 1/6' },
+        { label: 'Mean of min', content: 'E[min] = 1/λ = **6 minutes**' },
+      ],
+      answer: '6 minutes',
+    },
+    {
+      id: 'exp-38', difficulty: 3,
+      question: 'In the previous problem, given that a bus arrives, what is the **probability it is Bus A**?',
+      steps: [
+        { label: 'Thinning property', content: 'P(Bus A arrives first) = λ_A / (λ_A + λ_B)' },
+        { label: 'Compute', content: '= (1/10) / (1/6) = (1/10) · (6/1) = **3/5 = 0.6**' },
+      ],
+      answer: '0.6 (60%)',
+    },
+    {
+      id: 'exp-39', difficulty: 3,
+      question: 'Explain when the exponential model **fails**. Why is it not suitable for modeling the lifetime of a car tire?',
+      steps: [
+        { label: 'Key assumption', content: 'Exponential assumes a **constant failure rate** — no ageing (memoryless).' },
+        { label: 'Tire reality', content: 'Tires wear out over time — the hazard rate **increases** with age.' },
+        { label: 'Better model', content: 'A **Weibull distribution** with shape parameter > 1 captures increasing hazard.' },
+        { label: 'When exponential works', content: 'Electronic components in their "useful life" phase (constant random failure) or inter-arrival times in a Poisson process.' },
+      ],
+      answer: 'Exponential assumes constant hazard (no wear-out); tires degrade, so use Weibull',
+    },
+    {
+      id: 'exp-40', difficulty: 3,
+      question: 'Derive the **moment generating function** (MGF) of Exp(λ) and use it to find E[T] and E[T²].',
+      steps: [
+        { label: 'MGF', content: 'M(s) = E[e^(sT)] = ∫₀^∞ e^(st) · λe^(−λt) dt = λ ∫₀^∞ e^(−(λ−s)t) dt' },
+        { label: 'Evaluate', content: '= λ / (λ − s) for s < λ' },
+        { label: "M'(s)", content: "= λ / (λ − s)². At s = 0: M'(0) = λ/λ² = **1/λ** = E[T]" },
+        { label: "M''(s)", content: "= 2λ / (λ − s)³. At s = 0: M''(0) = 2λ/λ³ = **2/λ²** = E[T²]" },
+      ],
+      answer: 'MGF = λ/(λ−s); E[T] = 1/λ, E[T²] = 2/λ²',
+    },
+    {
+      id: 'exp-41', difficulty: 3,
+      question: 'Show that the **hazard function** h(t) of the exponential distribution is constant.',
+      steps: [
+        { label: 'Definition', content: 'h(t) = f(t) / S(t) where f is the PDF and S is the survival function' },
+        { label: 'Compute', content: 'h(t) = λe^(−λt) / e^(−λt) = **λ**' },
+        { label: 'Interpretation', content: 'The failure rate is constant at all times — this is the defining property of the exponential.' },
+      ],
+      answer: 'h(t) = λ (constant)',
+    },
+    {
+      id: 'exp-42', difficulty: 3,
+      question: 'Generate 1000 exponential random variables with λ = 2 using the **inverse transform method**. Verify the sample mean ≈ 1/λ = 0.5.',
+      steps: [
+        { label: 'Inverse CDF', content: 'If U ~ Uniform(0,1), then T = −ln(1 − U)/λ ~ Exp(λ).' },
+        { label: 'Equivalently', content: 'T = −ln(U)/λ also works since 1−U has the same distribution as U.' },
+        { label: 'Expected mean', content: 'E[T] = 1/λ = 1/2 = 0.5' },
+      ],
+      answer: 'Sample mean ≈ 0.5',
+      code: 'import random\nimport math\nlam = 2\nn = 1000\n# Generate exponential RVs using inverse transform\n',
+      codeSolution: 'import random\nimport math\nlam = 2\nn = 1000\nrandom.seed(42)\nsamples = [-math.log(random.random()) / lam for _ in range(n)]\nmean = sum(samples) / n\nprint(f"Sample mean = {mean:.4f} (expected {1/lam:.4f})")',
+    },
+    {
+      id: 'exp-43', difficulty: 3,
+      question: 'If T₁ and T₂ are independent Exp(λ), find the distribution of **T₁ + T₂**.',
+      steps: [
+        { label: 'Convolution', content: 'The sum of two independent Exp(λ) is Gamma(2, λ).' },
+        { label: 'PDF', content: 'f(t) = λ²t · e^(−λt) for t ≥ 0' },
+        { label: 'Verify mean', content: 'E[T₁ + T₂] = 2/λ ✓' },
+        { label: 'Verify variance', content: 'Var = 2/λ² ✓' },
+        { label: 'Insight', content: 'More generally, the sum of n independent Exp(λ) is Gamma(n, λ), also called the Erlang distribution.' },
+      ],
+      answer: 'T₁ + T₂ ~ Gamma(2, λ) with PDF λ²t·e^(−λt)',
+    },
+    {
+      id: 'exp-44', difficulty: 3,
+      question: 'A system has 3 components in **series** (all must work). Each has independent exponential lifetime with rates λ₁ = 0.01, λ₂ = 0.02, λ₃ = 0.03 per hour. Find the system MTTF.',
+      steps: [
+        { label: 'Series system', content: 'System fails when the first component fails → min of three exponentials.' },
+        { label: 'Combined rate', content: 'λ_sys = 0.01 + 0.02 + 0.03 = **0.06**' },
+        { label: 'MTTF', content: '= 1/λ_sys = 1/0.06 = **16.67 hours**' },
+      ],
+      answer: 'MTTF ≈ 16.67 hours',
+    },
+    {
+      id: 'exp-45', difficulty: 3,
+      question: 'For 2 components in **parallel** (system works if at least one works), each Exp(λ), find P(system survives past time t).',
+      steps: [
+        { label: 'System fails', content: 'Only when both fail: P(system fails by t) = P(T₁ ≤ t) · P(T₂ ≤ t)' },
+        { label: 'Compute', content: '= (1 − e^(−λt))²' },
+        { label: 'Survival', content: 'P(system survives past t) = 1 − (1 − e^(−λt))²' },
+        { label: 'Expand', content: '= 2e^(−λt) − e^(−2λt)' },
+        { label: 'Note', content: 'This is NOT exponential — the parallel system is more reliable than a single component.' },
+      ],
+      answer: 'P(survive) = 2e^(−λt) − e^(−2λt)',
+    },
+    {
+      id: 'exp-46', difficulty: 3,
+      question: 'Find the **MTTF of a 2-component parallel system** where each is Exp(λ).',
+      steps: [
+        { label: 'From survival function', content: 'R(t) = 2e^(−λt) − e^(−2λt)' },
+        { label: 'MTTF formula', content: 'MTTF = ∫₀^∞ R(t) dt = ∫₀^∞ [2e^(−λt) − e^(−2λt)] dt' },
+        { label: 'Integrate', content: '= 2/λ − 1/(2λ) = **3/(2λ)**' },
+        { label: 'Compare to single', content: 'Single component MTTF = 1/λ. Parallel system = 3/(2λ) = 1.5× better.' },
+      ],
+      answer: 'MTTF = 3/(2λ)',
+      code: 'import math\nlam = 0.1  # example rate\n# Compute MTTF for parallel system\n',
+      codeSolution: 'import math\nlam = 0.1\nmttf_single = 1 / lam\nmttf_parallel = 3 / (2 * lam)\nprint(f"Single MTTF = {mttf_single:.2f}")\nprint(f"Parallel MTTF = {mttf_parallel:.2f}")\nprint(f"Improvement = {mttf_parallel/mttf_single:.2f}x")',
+    },
+    {
+      id: 'exp-47', difficulty: 3,
+      question: 'Show that the **entropy** of Exp(λ) is 1 + ln(1/λ) = 1 − ln λ.',
+      steps: [
+        { label: 'Entropy definition', content: 'H = −∫₀^∞ f(t) ln f(t) dt where f(t) = λe^(−λt)' },
+        { label: 'ln f(t)', content: '= ln λ − λt' },
+        { label: 'Compute', content: 'H = −∫₀^∞ λe^(−λt) [ln λ − λt] dt' },
+        { label: 'Split', content: '= −ln λ · 1 + λ · E[T] = −ln λ + λ · (1/λ) = −ln λ + 1' },
+        { label: 'Result', content: 'H = **1 − ln λ** = 1 + ln(1/λ)' },
+      ],
+      answer: 'H = 1 − ln λ',
+    },
+    {
+      id: 'exp-48', difficulty: 3,
+      question: 'The exponential distribution is the **maximum entropy** distribution among all continuous distributions on [0, ∞) with a given mean. What does this imply practically?',
+      steps: [
+        { label: 'Maximum entropy', content: 'Among all non-negative distributions with mean 1/λ, Exp(λ) contains the **least information** (most uncertainty).' },
+        { label: 'Practical implication', content: 'If all you know is the average waiting time and events are non-negative, the exponential is the most "conservative" (least-assuming) model.' },
+        { label: 'Bayesian view', content: 'Using the exponential is equivalent to saying "I make no assumptions beyond the mean" — maximum ignorance.' },
+      ],
+      answer: 'Exponential is the least-assuming model given only the mean; maximum uncertainty',
+    },
+    {
+      id: 'exp-49', difficulty: 3,
+      question: 'A server processes jobs with exponential service time (mean 2 min). Jobs arrive as a Poisson process at 20 per hour. What fraction of time is the server **idle**? (This is the M/M/1 queue.)',
+      steps: [
+        { label: 'Service rate', content: 'μ = 1/2 per minute = 30 per hour' },
+        { label: 'Arrival rate', content: 'λ = 20 per hour' },
+        { label: 'Utilisation', content: 'ρ = λ/μ = 20/30 = 2/3' },
+        { label: 'Idle fraction', content: '= 1 − ρ = 1 − 2/3 = **1/3 ≈ 0.333**' },
+      ],
+      answer: '1/3 (≈ 33.3% idle)',
+    },
+    {
+      id: 'exp-50', difficulty: 3,
+      question: 'Fit an exponential model to wait times [0.3, 1.2, 0.8, 2.1, 0.5, 3.4, 0.1, 1.5, 0.9, 0.7] and test if the model is appropriate by comparing the sample variance to 1/λ².',
+      steps: [
+        { label: 'Sample mean', content: 'x̄ = (0.3+1.2+0.8+2.1+0.5+3.4+0.1+1.5+0.9+0.7)/10 = 11.5/10 = **1.15**' },
+        { label: 'λ̂', content: '= 1/1.15 = **0.8696**' },
+        { label: 'Expected variance', content: '1/λ² = 1/0.8696² = 1/0.7562 = **1.3224**' },
+        { label: 'Sample variance', content: 'Deviations²: 0.7225, 0.0025, 0.1225, 0.9025, 0.4225, 5.0625, 1.1025, 0.1225, 0.0625, 0.2025 → sum = 8.725' },
+        { label: 'Compute s²', content: 's² = 8.725/9 = **0.9694**' },
+        { label: 'Compare', content: 's² = 0.97 vs expected 1.32. The sample variance is somewhat lower, but with n=10 this is within normal sampling variability. The exponential model is reasonable.' },
+      ],
+      answer: 'λ̂ ≈ 0.87; s² = 0.97 vs expected 1.32 — reasonable fit for n=10',
+      code: 'data = [0.3, 1.2, 0.8, 2.1, 0.5, 3.4, 0.1, 1.5, 0.9, 0.7]\n# Fit exponential and check variance\n',
+      codeSolution: 'data = [0.3, 1.2, 0.8, 2.1, 0.5, 3.4, 0.1, 1.5, 0.9, 0.7]\nn = len(data)\nmean = sum(data) / n\nlam = 1 / mean\nsample_var = sum((x - mean)**2 for x in data) / (n - 1)\nexpected_var = 1 / lam**2\nprint(f"lambda = {lam:.4f}")\nprint(f"Sample variance = {sample_var:.4f}")\nprint(f"Expected variance (1/lambda^2) = {expected_var:.4f}")\nprint(f"Ratio = {sample_var / expected_var:.3f}")',
+    },
+  ],
+};
+
+
+// ─── 3. Chi-Squared Tests ─────────────────────────────────────
+
+export const practiceChiSquared: PracticeSet = {
+  title: 'Practice — Chi-Squared Tests',
+  problems: [
+    // ── Easy (1-17) ────────────────────────────────────────
+    {
+      id: 'chi-01', difficulty: 1,
+      question: 'A coin is flipped 100 times: 58 heads, 42 tails. Compute the **χ² statistic** to test if the coin is fair.',
+      visual: { kind: 'coins', count: 100, heads: 58 },
+      steps: [
+        { label: 'Expected', content: 'If fair: E(heads) = 50, E(tails) = 50' },
+        { label: 'χ² formula', content: 'χ² = ∑ (O − E)² / E' },
+        { label: 'Compute', content: '= (58−50)²/50 + (42−50)²/50 = 64/50 + 64/50 = 1.28 + 1.28 = **2.56**' },
+      ],
+      answer: '2.56',
+    },
+    {
+      id: 'chi-02', difficulty: 1,
+      question: 'For the coin test above (χ² = 2.56, df = 1), the critical value at α = 0.05 is **3.84**. Is the result significant?',
+      steps: [
+        { label: 'Compare', content: '2.56 < 3.84' },
+        { label: 'Decision', content: '**Fail to reject** H₀ — there is not enough evidence to say the coin is unfair.' },
+      ],
+      answer: 'Not significant (2.56 < 3.84)',
+    },
+    {
+      id: 'chi-03', difficulty: 1,
+      question: 'What are the **degrees of freedom** for a goodness-of-fit test with 2 categories (heads/tails)?',
+      steps: [
+        { label: 'Formula', content: 'df = (number of categories) − 1' },
+        { label: 'Compute', content: 'df = 2 − 1 = **1**' },
+      ],
+      answer: '1',
+    },
+    {
+      id: 'chi-04', difficulty: 1,
+      question: 'A die is rolled 60 times. Expected frequency for each face?',
+      visual: { kind: 'dice', count: 60, values: [1,2,3,4,5,6] },
+      steps: [
+        { label: 'Fair die', content: 'Each face has probability 1/6' },
+        { label: 'Expected count', content: '60 × (1/6) = **10** for each face' },
+      ],
+      answer: '10 per face',
+    },
+    {
+      id: 'chi-05', difficulty: 1,
+      question: 'Die rolled 60 times: observed [8, 12, 10, 11, 9, 10]. Compute χ².',
+      visual: { kind: 'dice', count: 60, values: [8,12,10,11,9,10] },
+      steps: [
+        { label: 'Expected', content: '10 for each face' },
+        { label: 'Terms', content: '(8−10)²/10 + (12−10)²/10 + (10−10)²/10 + (11−10)²/10 + (9−10)²/10 + (10−10)²/10' },
+        { label: 'Compute', content: '= 4/10 + 4/10 + 0 + 1/10 + 1/10 + 0 = 0.4 + 0.4 + 0 + 0.1 + 0.1 + 0 = **1.0**' },
+      ],
+      answer: '1.0',
+    },
+    {
+      id: 'chi-06', difficulty: 1,
+      question: 'For the die test (χ² = 1.0, df = 5), the critical value at α = 0.05 is **11.07**. Is the die fair?',
+      steps: [
+        { label: 'Compare', content: '1.0 ≪ 11.07' },
+        { label: 'Decision', content: '**Fail to reject** H₀ — no evidence the die is unfair.' },
+      ],
+      answer: 'Not significant (1.0 < 11.07) — die appears fair',
+    },
+    {
+      id: 'chi-07', difficulty: 1,
+      question: 'What is the critical value of χ² for df = 2 at α = 0.05?',
+      steps: [
+        { label: 'Table lookup', content: 'df=1 → 3.84, df=2 → 5.99, df=3 → 7.81, df=4 → 9.49, df=5 → 11.07' },
+        { label: 'Answer', content: '**5.99**' },
+      ],
+      answer: '5.99',
+    },
+    {
+      id: 'chi-08', difficulty: 1,
+      question: 'A bag of candy claims 30% red, 30% blue, 40% green. You sample 100 candies: 35 red, 25 blue, 40 green. Compute χ².',
+      visual: { kind: 'bar-chart', labels: ['Red','Blue','Green'], values: [35,25,40] },
+      steps: [
+        { label: 'Expected', content: 'E(red)=30, E(blue)=30, E(green)=40' },
+        { label: 'χ²', content: '= (35−30)²/30 + (25−30)²/30 + (40−40)²/40' },
+        { label: 'Compute', content: '= 25/30 + 25/30 + 0 = 0.833 + 0.833 + 0 = **1.667**' },
+      ],
+      answer: '1.667',
+      code: 'observed = [35, 25, 40]\nexpected = [30, 30, 40]\n# Compute chi-squared\n',
+      codeSolution: 'observed = [35, 25, 40]\nexpected = [30, 30, 40]\nchi2 = sum((o - e)**2 / e for o, e in zip(observed, expected))\nprint(f"Chi-squared = {chi2:.3f}")',
+    },
+    {
+      id: 'chi-09', difficulty: 1,
+      question: 'For the candy test (χ² = 1.667, df = 2, critical = 5.99), is the distribution as claimed?',
+      steps: [
+        { label: 'Compare', content: '1.667 < 5.99' },
+        { label: 'Decision', content: '**Fail to reject** — no significant difference from claimed proportions.' },
+      ],
+      answer: 'Not significant — distribution matches claim',
+    },
+    {
+      id: 'chi-10', difficulty: 1,
+      question: 'Compute the degrees of freedom for a goodness-of-fit test with **6 categories** (die faces).',
+      steps: [
+        { label: 'Formula', content: 'df = k − 1 where k = number of categories' },
+        { label: 'Compute', content: 'df = 6 − 1 = **5**' },
+      ],
+      answer: '5',
+    },
+    {
+      id: 'chi-11', difficulty: 1,
+      question: 'A coin is flipped 200 times: 110 heads, 90 tails. Compute χ².',
+      visual: { kind: 'coins', count: 200, heads: 110 },
+      steps: [
+        { label: 'Expected', content: 'E(H) = 100, E(T) = 100' },
+        { label: 'χ²', content: '= (110−100)²/100 + (90−100)²/100 = 100/100 + 100/100 = **2.0**' },
+      ],
+      answer: '2.0',
+    },
+    {
+      id: 'chi-12', difficulty: 1,
+      question: 'Is χ² = 2.0 with df = 1 significant at α = 0.05? At α = 0.10 (critical = 2.71)?',
+      steps: [
+        { label: 'At α = 0.05', content: '2.0 < 3.84 → **Not significant**' },
+        { label: 'At α = 0.10', content: '2.0 < 2.71 → **Not significant** even at 10%' },
+      ],
+      answer: 'Not significant at either level',
+    },
+    {
+      id: 'chi-13', difficulty: 1,
+      question: 'Die rolled 120 times: observed [25, 17, 19, 22, 18, 19]. Compute χ².',
+      visual: { kind: 'dice', count: 120, values: [25,17,19,22,18,19] },
+      steps: [
+        { label: 'Expected', content: '120/6 = 20 per face' },
+        { label: 'Terms', content: '(25−20)²/20 + (17−20)²/20 + (19−20)²/20 + (22−20)²/20 + (18−20)²/20 + (19−20)²/20' },
+        { label: 'Compute', content: '= 25/20 + 9/20 + 1/20 + 4/20 + 4/20 + 1/20 = 1.25+0.45+0.05+0.2+0.2+0.05 = **2.2**' },
+      ],
+      answer: '2.2',
+    },
+    {
+      id: 'chi-14', difficulty: 1,
+      question: 'What does a **larger χ² value** indicate?',
+      steps: [
+        { label: 'Interpretation', content: 'A larger χ² means the observed data deviates **more** from what was expected.' },
+        { label: 'Implication', content: 'The larger it is relative to the critical value, the stronger the evidence **against** the null hypothesis.' },
+      ],
+      answer: 'Larger χ² = greater discrepancy between observed and expected',
+    },
+    {
+      id: 'chi-15', difficulty: 1,
+      question: 'Can χ² ever be **negative**?',
+      steps: [
+        { label: 'Formula', content: 'χ² = ∑ (O − E)² / E' },
+        { label: 'Reasoning', content: '(O − E)² is always ≥ 0 and E > 0, so each term is ≥ 0.' },
+        { label: 'Answer', content: '**No** — χ² is always ≥ 0. It equals 0 only when O = E for every category.' },
+      ],
+      answer: 'No — χ² is always non-negative',
+    },
+    {
+      id: 'chi-16', difficulty: 1,
+      question: 'A teacher claims equal preference among 4 colours. Survey of 80 students: Red 25, Blue 20, Green 18, Yellow 17. Compute χ².',
+      visual: { kind: 'bar-chart', labels: ['Red','Blue','Green','Yellow'], values: [25,20,18,17] },
+      steps: [
+        { label: 'Expected', content: '80/4 = 20 per colour' },
+        { label: 'χ²', content: '= (25−20)²/20 + (20−20)²/20 + (18−20)²/20 + (17−20)²/20' },
+        { label: 'Compute', content: '= 25/20 + 0 + 4/20 + 9/20 = 1.25 + 0 + 0.2 + 0.45 = **1.9**' },
+      ],
+      answer: '1.9',
+    },
+    {
+      id: 'chi-17', difficulty: 1,
+      question: 'For the colour test (χ² = 1.9, df = 3, critical = 7.81), is the preference equal?',
+      steps: [
+        { label: 'Compare', content: '1.9 < 7.81' },
+        { label: 'Decision', content: '**Fail to reject** — no significant evidence of unequal preference.' },
+      ],
+      answer: 'Not significant — preferences appear equal',
+    },
+
+    // ── Medium (18-34) ─────────────────────────────────────
+    {
+      id: 'chi-18', difficulty: 2,
+      question: 'A spinner has 5 equal sectors. In 200 spins, you get [45, 38, 42, 36, 39]. Test at α = 0.05.',
+      visual: { kind: 'bar-chart', labels: ['1','2','3','4','5'], values: [45,38,42,36,39] },
+      steps: [
+        { label: 'Expected', content: '200/5 = 40 per sector' },
+        { label: 'χ²', content: '= (45−40)²/40 + (38−40)²/40 + (42−40)²/40 + (36−40)²/40 + (39−40)²/40' },
+        { label: 'Compute', content: '= 25/40 + 4/40 + 4/40 + 16/40 + 1/40 = 0.625+0.1+0.1+0.4+0.025 = **1.25**' },
+        { label: 'df', content: '5 − 1 = 4, critical = 9.49' },
+        { label: 'Decision', content: '1.25 < 9.49 → **Fail to reject** — spinner appears fair.' },
+      ],
+      answer: 'χ² = 1.25, df = 4, not significant',
+      code: 'observed = [45, 38, 42, 36, 39]\nn = sum(observed)\nk = len(observed)\n# Test goodness-of-fit\n',
+      codeSolution: 'observed = [45, 38, 42, 36, 39]\nn = sum(observed)\nk = len(observed)\nexpected = [n / k] * k\nchi2 = sum((o - e)**2 / e for o, e in zip(observed, expected))\ndf = k - 1\nprint(f"Chi-squared = {chi2:.3f}, df = {df}")\nprint(f"Critical value (alpha=0.05) = 9.49")\nprint("Fail to reject H0" if chi2 < 9.49 else "Reject H0")',
+    },
+    {
+      id: 'chi-19', difficulty: 2,
+      question: 'Blood type distribution claim: O=45%, A=40%, B=10%, AB=5%. Sample of 200: O=100, A=70, B=20, AB=10. Test at α = 0.05.',
+      steps: [
+        { label: 'Expected', content: 'E(O)=90, E(A)=80, E(B)=20, E(AB)=10' },
+        { label: 'χ²', content: '= (100−90)²/90 + (70−80)²/80 + (20−20)²/20 + (10−10)²/10' },
+        { label: 'Compute', content: '= 100/90 + 100/80 + 0 + 0 = 1.111 + 1.250 = **2.361**' },
+        { label: 'df', content: '4 − 1 = 3, critical = 7.81' },
+        { label: 'Decision', content: '2.361 < 7.81 → **Fail to reject** — distribution matches claim.' },
+      ],
+      answer: 'χ² = 2.361, df = 3, not significant',
+    },
+    {
+      id: 'chi-20', difficulty: 2,
+      question: 'Set up a **2×2 contingency table**: 200 people surveyed on exercise (Yes/No) and illness (Sick/Healthy). Data: Exercise+Healthy=70, Exercise+Sick=30, NoExercise+Healthy=40, NoExercise+Sick=60. Compute expected values.',
+      steps: [
+        { label: 'Table', content: '|  | Healthy | Sick | Total |\n|---|---|---|---|\n| Exercise | 70 | 30 | 100 |\n| No Exercise | 40 | 60 | 100 |\n| Total | 110 | 90 | 200 |' },
+        { label: 'Expected formula', content: 'E = (Row total × Column total) / Grand total' },
+        { label: 'E(Ex, Healthy)', content: '= 100 × 110 / 200 = **55**' },
+        { label: 'E(Ex, Sick)', content: '= 100 × 90 / 200 = **45**' },
+        { label: 'E(NoEx, Healthy)', content: '= 100 × 110 / 200 = **55**' },
+        { label: 'E(NoEx, Sick)', content: '= 100 × 90 / 200 = **45**' },
+      ],
+      answer: 'Expected: 55, 45, 55, 45',
+    },
+    {
+      id: 'chi-21', difficulty: 2,
+      question: 'From the previous table, compute χ² and test independence at α = 0.05.',
+      steps: [
+        { label: 'χ²', content: '= (70−55)²/55 + (30−45)²/45 + (40−55)²/55 + (60−45)²/45' },
+        { label: 'Compute', content: '= 225/55 + 225/45 + 225/55 + 225/45 = 4.091 + 5.000 + 4.091 + 5.000 = **18.182**' },
+        { label: 'df', content: '(2−1)(2−1) = 1, critical = 3.84' },
+        { label: 'Decision', content: '18.182 ≫ 3.84 → **Reject** H₀ — exercise and health are **not independent**.' },
+      ],
+      answer: 'χ² = 18.18, df = 1, significant — variables are associated',
+      code: '# 2x2 table: [[70,30],[40,60]]\nobserved = [[70, 30], [40, 60]]\n# Compute expected values and chi-squared\n',
+      codeSolution: 'observed = [[70, 30], [40, 60]]\nn = sum(sum(row) for row in observed)\nrow_totals = [sum(row) for row in observed]\ncol_totals = [sum(observed[r][c] for r in range(2)) for c in range(2)]\nchi2 = 0\nfor r in range(2):\n    for c in range(2):\n        e = row_totals[r] * col_totals[c] / n\n        chi2 += (observed[r][c] - e)**2 / e\ndf = (2-1) * (2-1)\nprint(f"Chi-squared = {chi2:.3f}, df = {df}")\nprint("Reject H0" if chi2 > 3.84 else "Fail to reject H0")',
+    },
+    {
+      id: 'chi-22', difficulty: 2,
+      question: 'What is the df for a **2×2 contingency table**? What about a 3×4 table?',
+      steps: [
+        { label: 'Formula', content: 'df = (rows − 1)(columns − 1)' },
+        { label: '2×2', content: 'df = (2−1)(2−1) = **1**' },
+        { label: '3×4', content: 'df = (3−1)(4−1) = 2 × 3 = **6**' },
+      ],
+      answer: '2×2: df = 1; 3×4: df = 6',
+    },
+    {
+      id: 'chi-23', difficulty: 2,
+      question: 'A die is rolled 300 times: [60, 45, 55, 40, 52, 48]. Test fairness at α = 0.05.',
+      visual: { kind: 'dice', count: 300, values: [60,45,55,40,52,48] },
+      steps: [
+        { label: 'Expected', content: '300/6 = 50 per face' },
+        { label: 'χ²', content: '= (60−50)²/50 + (45−50)²/50 + (55−50)²/50 + (40−50)²/50 + (52−50)²/50 + (48−50)²/50' },
+        { label: 'Compute', content: '= 100/50 + 25/50 + 25/50 + 100/50 + 4/50 + 4/50 = 2+0.5+0.5+2+0.08+0.08 = **5.16**' },
+        { label: 'df = 5, critical = 11.07', content: '5.16 < 11.07 → **Fail to reject** — die appears fair.' },
+      ],
+      answer: 'χ² = 5.16, df = 5, not significant',
+    },
+    {
+      id: 'chi-24', difficulty: 2,
+      question: 'Survey: preferred subject by gender. Boys: Math=40, Science=30, English=30. Girls: Math=25, Science=35, English=40. Test independence at α = 0.05.',
+      visual: { kind: 'bar-chart', labels: ['Math','Science','English'], values: [65, 65, 70] },
+      steps: [
+        { label: 'Table totals', content: 'Boys=100, Girls=100, Total=200. Columns: Math=65, Science=65, English=70' },
+        { label: 'Expected values', content: 'E(Boys,Math)=100·65/200=32.5, E(Boys,Sci)=32.5, E(Boys,Eng)=35. Same for Girls.' },
+        { label: 'χ²', content: '= (40−32.5)²/32.5 + (30−32.5)²/32.5 + (30−35)²/35 + (25−32.5)²/32.5 + (35−32.5)²/32.5 + (40−35)²/35' },
+        { label: 'Compute', content: '= 56.25/32.5 + 6.25/32.5 + 25/35 + 56.25/32.5 + 6.25/32.5 + 25/35' },
+        { label: 'Sum', content: '= 1.731 + 0.192 + 0.714 + 1.731 + 0.192 + 0.714 = **5.274**' },
+        { label: 'df = (2−1)(3−1) = 2', content: 'Critical = 5.99. Since 5.274 < 5.99 → **Fail to reject** — barely not significant.' },
+      ],
+      answer: 'χ² = 5.27, df = 2, not significant (just barely at α = 0.05)',
+    },
+    {
+      id: 'chi-25', difficulty: 2,
+      question: 'When should you combine categories? If an expected count is **less than 5**, what should you do?',
+      steps: [
+        { label: 'Rule of thumb', content: 'χ² test requires all expected counts ≥ 5.' },
+        { label: 'Solution', content: '**Merge** adjacent categories until all expected counts ≥ 5.' },
+        { label: 'Alternative', content: 'Use **Fisher\'s exact test** (for 2×2 tables) or simulation-based tests for small samples.' },
+      ],
+      answer: 'Merge categories to ensure E ≥ 5, or use Fisher\'s exact test',
+    },
+    {
+      id: 'chi-26', difficulty: 2,
+      question: 'A loaded die is tested with 600 rolls: [80, 90, 110, 120, 100, 100]. Test at α = 0.01.',
+      steps: [
+        { label: 'Expected', content: '600/6 = 100 per face' },
+        { label: 'χ²', content: '= (80−100)²/100 + (90−100)²/100 + (110−100)²/100 + (120−100)²/100 + 0 + 0' },
+        { label: 'Compute', content: '= 400/100 + 100/100 + 100/100 + 400/100 = 4+1+1+4 = **10.0**' },
+        { label: 'df = 5', content: 'Critical at α=0.01 for df=5 is **15.09**' },
+        { label: 'Decision', content: '10.0 < 15.09 → **Fail to reject** at α = 0.01 (but would reject at α = 0.10 where critical = 9.24).' },
+      ],
+      answer: 'χ² = 10.0, df = 5, not significant at α = 0.01',
+      code: 'observed = [80, 90, 110, 120, 100, 100]\nexpected = [100] * 6\n# Test at alpha = 0.01\n',
+      codeSolution: 'observed = [80, 90, 110, 120, 100, 100]\nexpected = [100] * 6\nchi2 = sum((o - e)**2 / e for o, e in zip(observed, expected))\ndf = len(observed) - 1\nprint(f"Chi-squared = {chi2:.1f}, df = {df}")\nprint(f"Critical (alpha=0.01, df=5) = 15.09")\nprint("Reject" if chi2 > 15.09 else "Fail to reject")',
+    },
+    {
+      id: 'chi-27', difficulty: 2,
+      question: 'Day of the week for births (700 births): Mon=90, Tue=110, Wed=105, Thu=100, Fri=108, Sat=95, Sun=92. Are births uniformly distributed?',
+      steps: [
+        { label: 'Expected', content: '700/7 = 100 per day' },
+        { label: 'χ²', content: '= (90−100)²/100 + (110−100)²/100 + (105−100)²/100 + 0 + (108−100)²/100 + (95−100)²/100 + (92−100)²/100' },
+        { label: 'Compute', content: '= 1 + 1 + 0.25 + 0 + 0.64 + 0.25 + 0.64 = **3.78**' },
+        { label: 'df = 6, critical = 12.59', content: '3.78 < 12.59 → **Fail to reject** — births appear uniformly distributed by day.' },
+      ],
+      answer: 'χ² = 3.78, df = 6, not significant',
+    },
+    {
+      id: 'chi-28', difficulty: 2,
+      question: 'What is the **Yates correction** for continuity, and when is it used?',
+      steps: [
+        { label: 'Formula', content: 'χ²_Yates = ∑ (|O − E| − 0.5)² / E' },
+        { label: 'When', content: 'Applied to **2×2 tables** (df=1) to correct for the discrete-to-continuous approximation.' },
+        { label: 'Effect', content: 'Makes the test more **conservative** (harder to reject H₀), which is appropriate when sample sizes are small to moderate.' },
+      ],
+      answer: 'Subtract 0.5 from |O−E| before squaring; used for 2×2 tables',
+    },
+    {
+      id: 'chi-29', difficulty: 2,
+      question: 'Apply Yates correction to the coin test: 100 flips, 58 heads, 42 tails.',
+      steps: [
+        { label: 'Without Yates', content: 'χ² = 2.56 (computed earlier)' },
+        { label: 'With Yates', content: 'χ² = (|58−50| − 0.5)²/50 + (|42−50| − 0.5)²/50' },
+        { label: 'Compute', content: '= (7.5)²/50 + (7.5)²/50 = 56.25/50 + 56.25/50 = 1.125 + 1.125 = **2.25**' },
+        { label: 'Compare', content: '2.25 < 3.84 → still not significant (and slightly more conservative).' },
+      ],
+      answer: '2.25 (with Yates) vs 2.56 (without)',
+    },
+    {
+      id: 'chi-30', difficulty: 2,
+      question: 'Compute the **expected values** for this 2×3 table: | | A | B | C | Total |\n|---|---|---|---|---|\n| Group 1 | 30 | 20 | 10 | 60 |\n| Group 2 | 20 | 30 | 30 | 80 |\n| Total | 50 | 50 | 40 | 140 |',
+      steps: [
+        { label: 'E(G1,A)', content: '60×50/140 = **21.43**' },
+        { label: 'E(G1,B)', content: '60×50/140 = **21.43**' },
+        { label: 'E(G1,C)', content: '60×40/140 = **17.14**' },
+        { label: 'E(G2,A)', content: '80×50/140 = **28.57**' },
+        { label: 'E(G2,B)', content: '80×50/140 = **28.57**' },
+        { label: 'E(G2,C)', content: '80×40/140 = **22.86**' },
+      ],
+      answer: 'G1: 21.43, 21.43, 17.14; G2: 28.57, 28.57, 22.86',
+    },
+    {
+      id: 'chi-31', difficulty: 2,
+      question: 'Using the expected values from the previous problem, compute χ² and test independence.',
+      steps: [
+        { label: 'χ² terms', content: '(30−21.43)²/21.43 + (20−21.43)²/21.43 + (10−17.14)²/17.14 + (20−28.57)²/28.57 + (30−28.57)²/28.57 + (30−22.86)²/22.86' },
+        { label: 'Compute', content: '= 73.44/21.43 + 2.04/21.43 + 51.00/17.14 + 73.44/28.57 + 2.04/28.57 + 51.00/22.86' },
+        { label: 'Sum', content: '= 3.427 + 0.095 + 2.976 + 2.570 + 0.071 + 2.231 = **11.370**' },
+        { label: 'df = (2−1)(3−1) = 2', content: 'Critical = 5.99. Since 11.37 > 5.99 → **Reject** H₀ — groups differ in distribution.' },
+      ],
+      answer: 'χ² = 11.37, df = 2, significant — groups are not independent',
+      code: 'observed = [[30, 20, 10], [20, 30, 30]]\n# Compute expected and chi-squared for 2x3 table\n',
+      codeSolution: 'observed = [[30, 20, 10], [20, 30, 30]]\nrows, cols = len(observed), len(observed[0])\nn = sum(sum(r) for r in observed)\nrow_tot = [sum(r) for r in observed]\ncol_tot = [sum(observed[r][c] for r in range(rows)) for c in range(cols)]\nchi2 = 0\nfor r in range(rows):\n    for c in range(cols):\n        e = row_tot[r] * col_tot[c] / n\n        chi2 += (observed[r][c] - e)**2 / e\ndf = (rows - 1) * (cols - 1)\nprint(f"Chi-squared = {chi2:.3f}, df = {df}")\nprint("Reject H0" if chi2 > 5.99 else "Fail to reject H0")',
+    },
+    {
+      id: 'chi-32', difficulty: 2,
+      question: 'Explain the difference between a **goodness-of-fit** test and a **test of independence**.',
+      steps: [
+        { label: 'Goodness-of-fit', content: 'One variable — tests if observed frequencies match a **theoretical distribution** (e.g., is this die fair?).' },
+        { label: 'Test of independence', content: 'Two variables — tests if the variables are **associated** in a contingency table (e.g., does gender affect subject preference?).' },
+        { label: 'Both use χ²', content: 'Same formula ∑(O−E)²/E, but df and expected values differ.' },
+      ],
+      answer: 'GoF: one variable vs theory; Independence: two variables vs each other',
+    },
+    {
+      id: 'chi-33', difficulty: 2,
+      question: 'A store tracks customer preference by time of day. Morning: Coffee=80, Tea=40. Afternoon: Coffee=50, Tea=30. Test if preference depends on time.',
+      steps: [
+        { label: 'Table', content: '| | Coffee | Tea | Total |\n|---|---|---|---|\n| AM | 80 | 40 | 120 |\n| PM | 50 | 30 | 80 |\n| Total | 130 | 70 | 200 |' },
+        { label: 'Expected', content: 'E(AM,C)=120·130/200=78, E(AM,T)=42, E(PM,C)=52, E(PM,T)=28' },
+        { label: 'χ²', content: '= (80−78)²/78 + (40−42)²/42 + (50−52)²/52 + (30−28)²/28' },
+        { label: 'Compute', content: '= 4/78 + 4/42 + 4/52 + 4/28 = 0.051+0.095+0.077+0.143 = **0.366**' },
+        { label: 'df = 1, critical = 3.84', content: '0.366 < 3.84 → **Fail to reject** — preference does not depend on time of day.' },
+      ],
+      answer: 'χ² = 0.37, df = 1, not significant',
+    },
+    {
+      id: 'chi-34', difficulty: 2,
+      question: 'What is the relationship between a **2×2 χ² test** and the **Z-test for two proportions**?',
+      steps: [
+        { label: 'Connection', content: 'For a 2×2 table, the χ² statistic equals **Z²** (the squared Z-test statistic).' },
+        { label: 'df = 1', content: 'χ²₁ = Z² — a chi-squared with 1 df is the square of a standard normal.' },
+        { label: 'Equivalence', content: 'Both tests give the same p-value for two-sided tests. The Z-test additionally allows one-sided tests.' },
+      ],
+      answer: 'χ²₁ = Z²; same p-value for two-sided tests',
+    },
+
+    // ── Hard (35-50) ───────────────────────────────────────
+    {
+      id: 'chi-35', difficulty: 3,
+      question: 'Show that Z² ~ χ²₁. That is, if Z ~ N(0,1), then Z² has a chi-squared distribution with 1 degree of freedom.',
+      steps: [
+        { label: 'CDF of Z²', content: 'P(Z² ≤ x) = P(−√x ≤ Z ≤ √x) = 2Φ(√x) − 1 for x > 0' },
+        { label: 'PDF of Z²', content: 'Differentiate: f(x) = d/dx [2Φ(√x) − 1] = 2 · φ(√x) · 1/(2√x)' },
+        { label: 'Substitute', content: '= (1/√x) · (1/√(2π)) · e^(−x/2)' },
+        { label: 'Simplify', content: '= (1/(√(2π))) · x^(−1/2) · e^(−x/2) = x^(1/2 − 1) · e^(−x/2) / (2^(1/2) · Γ(1/2))' },
+        { label: 'Recognise', content: 'This is the PDF of **χ²(1)** — Gamma(1/2, 1/2). ∎' },
+      ],
+      answer: 'Z² ~ χ²₁ (proven via PDF derivation)',
+    },
+    {
+      id: 'chi-36', difficulty: 3,
+      question: 'Perform a full **3×3 contingency table** test. Treatment (A/B/C) vs Outcome (Good/Fair/Poor).\n\n| | Good | Fair | Poor |\n|---|---|---|---|\n| A | 50 | 30 | 20 |\n| B | 40 | 35 | 25 |\n| C | 30 | 25 | 45 |',
+      steps: [
+        { label: 'Totals', content: 'Row: A=100, B=100, C=100. Col: Good=120, Fair=90, Poor=90. N=300.' },
+        { label: 'Expected', content: 'E = Row × Col / 300. E(A,Good)=40, E(A,Fair)=30, E(A,Poor)=30. E(B,Good)=40, E(B,Fair)=30, E(B,Poor)=30. E(C,Good)=40, E(C,Fair)=30, E(C,Poor)=30.' },
+        { label: 'χ² terms (A)', content: '(50−40)²/40 + (30−30)²/30 + (20−30)²/30 = 2.5 + 0 + 3.333' },
+        { label: 'χ² terms (B)', content: '(40−40)²/40 + (35−30)²/30 + (25−30)²/30 = 0 + 0.833 + 0.833' },
+        { label: 'χ² terms (C)', content: '(30−40)²/40 + (25−30)²/30 + (45−30)²/30 = 2.5 + 0.833 + 7.5' },
+        { label: 'Total χ²', content: '= 2.5 + 0 + 3.333 + 0 + 0.833 + 0.833 + 2.5 + 0.833 + 7.5 = **18.332**' },
+        { label: 'df = (3−1)(3−1) = 4', content: 'Critical = 9.49. Since 18.33 > 9.49 → **Reject** H₀ — treatment and outcome are associated.' },
+      ],
+      answer: 'χ² = 18.33, df = 4, significant — treatments differ in outcomes',
+      code: 'observed = [[50,30,20],[40,35,25],[30,25,45]]\n# Full 3x3 chi-squared test\n',
+      codeSolution: 'observed = [[50,30,20],[40,35,25],[30,25,45]]\nrows, cols = 3, 3\nn = sum(sum(r) for r in observed)\nrt = [sum(r) for r in observed]\nct = [sum(observed[r][c] for r in range(rows)) for c in range(cols)]\nchi2 = 0\nfor r in range(rows):\n    for c in range(cols):\n        e = rt[r] * ct[c] / n\n        chi2 += (observed[r][c] - e)**2 / e\ndf = (rows-1)*(cols-1)\nprint(f"Chi-squared = {chi2:.3f}, df = {df}")\nprint("Reject H0" if chi2 > 9.49 else "Fail to reject")',
+    },
+    {
+      id: 'chi-37', difficulty: 3,
+      question: 'When should you use **Fisher\'s exact test** instead of χ²?',
+      steps: [
+        { label: 'Small samples', content: 'When any **expected count < 5**, the χ² approximation is unreliable.' },
+        { label: 'Fisher\'s exact test', content: 'Computes the exact probability under H₀ using the hypergeometric distribution. Works for 2×2 tables.' },
+        { label: 'Calculation', content: 'P = (a+b)!(c+d)!(a+c)!(b+d)! / (n! · a! · b! · c! · d!) where a,b,c,d are cell counts.' },
+        { label: 'When to prefer χ²', content: 'When all expected counts ≥ 5 and the table is larger than 2×2, χ² is simpler and sufficient.' },
+      ],
+      answer: 'Use Fisher when expected counts < 5 or sample is very small; exact for 2×2 tables',
+    },
+    {
+      id: 'chi-38', difficulty: 3,
+      question: 'Explain the **Bonferroni correction** when performing multiple χ² tests.',
+      steps: [
+        { label: 'Problem', content: 'If you run k independent tests at α = 0.05, the probability of at least one false positive is 1 − (1−0.05)^k.' },
+        { label: 'For k=10', content: 'P(at least one false positive) = 1 − 0.95^10 ≈ 0.40 (40%)!' },
+        { label: 'Bonferroni correction', content: 'Use α\' = α/k for each individual test.' },
+        { label: 'Example', content: 'With k=10 tests and α=0.05: test each at α\'=0.005. This controls the **family-wise error rate** at 0.05.' },
+        { label: 'Trade-off', content: 'Bonferroni is conservative — it reduces power (ability to detect real effects).' },
+      ],
+      answer: 'Test each at α/k to maintain overall α; conservative but controls family-wise error',
+    },
+    {
+      id: 'chi-39', difficulty: 3,
+      question: 'A 2×2 table with very small counts: | | Yes | No |\n|---|---|---|\n| Treated | 4 | 1 |\n| Control | 1 | 4 |\n\nCompute Fisher\'s exact test p-value.',
+      steps: [
+        { label: 'Setup', content: 'a=4, b=1, c=1, d=4, n=10. Row totals: 5,5. Column totals: 5,5.' },
+        { label: 'Formula', content: 'P = C(5,4)·C(5,1) / C(10,5) for this particular table' },
+        { label: 'Compute this table', content: 'C(5,4)=5, C(5,1)=5, C(10,5)=252. P = 5·5/252 = 25/252 = **0.0992**' },
+        { label: 'More extreme table', content: '[[5,0],[0,5]]: P = C(5,5)·C(5,0)/252 = 1/252 = 0.0040' },
+        { label: 'One-sided p-value', content: '0.0992 + 0.0040 = **0.1032**' },
+        { label: 'Two-sided p-value', content: 'By symmetry, p = 2 × 0.1032 = **0.2063** (or sum all tables with P ≤ P_observed)' },
+      ],
+      answer: 'Two-sided p ≈ 0.206 — not significant at α = 0.05',
+    },
+    {
+      id: 'chi-40', difficulty: 3,
+      question: 'Derive the **expected value** E[χ²] under H₀ for a goodness-of-fit test with k categories.',
+      steps: [
+        { label: 'Setup', content: 'Under H₀, each Oᵢ ~ Multinomial with E[Oᵢ] = Eᵢ = npᵢ' },
+        { label: 'Each term', content: 'E[(Oᵢ − Eᵢ)²/Eᵢ] = Var(Oᵢ)/Eᵢ = npᵢ(1−pᵢ)/(npᵢ) = 1 − pᵢ' },
+        { label: 'Sum', content: 'E[χ²] ≈ ∑(1 − pᵢ) = k − ∑pᵢ = k − 1' },
+        { label: 'Result', content: 'E[χ²] = **k − 1 = df** under H₀. This is a property of the χ² distribution.' },
+        { label: 'Note', content: 'This is approximate (ignores covariance terms), but the result is exact for the χ² distribution.' },
+      ],
+      answer: 'E[χ²] = df = k − 1 under H₀',
+    },
+    {
+      id: 'chi-41', difficulty: 3,
+      question: 'Compute the **effect size** (Cramér\'s V) for the exercise/health 2×2 table (χ² = 18.18, n = 200).',
+      steps: [
+        { label: 'Formula', content: 'V = √(χ²/(n · min(r−1, c−1)))' },
+        { label: 'For 2×2', content: 'min(r−1, c−1) = min(1,1) = 1' },
+        { label: 'Compute', content: 'V = √(18.18/200) = √0.0909 = **0.302**' },
+        { label: 'Interpretation', content: 'V = 0.30 is a **medium** effect (0.1 = small, 0.3 = medium, 0.5 = large for 2×2).' },
+      ],
+      answer: "Cramér's V = 0.302 (medium effect)",
+    },
+    {
+      id: 'chi-42', difficulty: 3,
+      question: 'Run a **χ² test for homogeneity**: are two populations distributed the same way?\n\nPopulation 1 (n=150): A=50, B=60, C=40.\nPopulation 2 (n=150): A=40, B=50, C=60.',
+      steps: [
+        { label: 'Table', content: '| | A | B | C | Total |\n|---|---|---|---|---|\n| Pop 1 | 50 | 60 | 40 | 150 |\n| Pop 2 | 40 | 50 | 60 | 150 |\n| Total | 90 | 110 | 100 | 300 |' },
+        { label: 'Expected', content: 'E(1,A)=150·90/300=45, E(1,B)=55, E(1,C)=50. Same for Pop 2.' },
+        { label: 'χ²', content: '= (50−45)²/45 + (60−55)²/55 + (40−50)²/50 + (40−45)²/45 + (50−55)²/55 + (60−50)²/50' },
+        { label: 'Compute', content: '= 25/45 + 25/55 + 100/50 + 25/45 + 25/55 + 100/50 = 0.556+0.455+2.0+0.556+0.455+2.0 = **6.022**' },
+        { label: 'df = (2−1)(3−1) = 2', content: 'Critical = 5.99. Since 6.022 > 5.99 → **Reject** (barely) — populations differ.' },
+      ],
+      answer: 'χ² = 6.02, df = 2, significant — populations are not homogeneous',
+    },
+    {
+      id: 'chi-43', difficulty: 3,
+      question: 'What is the **likelihood ratio test** (G-test) alternative to χ²? Compute G for the coin example (58 heads, 42 tails out of 100).',
+      steps: [
+        { label: 'G-test formula', content: 'G = 2 ∑ Oᵢ · ln(Oᵢ/Eᵢ)' },
+        { label: 'Compute', content: 'G = 2[58 · ln(58/50) + 42 · ln(42/50)]' },
+        { label: 'Values', content: '= 2[58 · ln(1.16) + 42 · ln(0.84)]' },
+        { label: 'Logarithms', content: '= 2[58 · 0.1484 + 42 · (−0.1744)]' },
+        { label: 'Sum', content: '= 2[8.607 − 7.325] = 2 · 1.282 = **2.564**' },
+        { label: 'Compare to χ²', content: 'Pearson χ² = 2.56. Very similar! G-test and χ² agree closely for moderate samples.' },
+      ],
+      answer: 'G = 2.564 (nearly identical to χ² = 2.56)',
+    },
+    {
+      id: 'chi-44', difficulty: 3,
+      question: 'Explain the relationship between the **chi-squared distribution** and the **gamma distribution**.',
+      steps: [
+        { label: 'Chi-squared', content: 'χ²(k) = sum of k independent standard normal squared variables.' },
+        { label: 'As Gamma', content: 'χ²(k) = Gamma(k/2, 1/2) — shape α = k/2, rate β = 1/2.' },
+        { label: 'PDF', content: 'f(x) = x^(k/2−1) · e^(−x/2) / (2^(k/2) · Γ(k/2))' },
+        { label: 'Special cases', content: 'χ²(2) = Exp(1/2) (exponential). χ²(1) = Gamma(1/2, 1/2).' },
+      ],
+      answer: 'χ²(k) = Gamma(k/2, 1/2); for k=2, it is exponential',
+    },
+    {
+      id: 'chi-45', difficulty: 3,
+      question: 'A **multinomial goodness-of-fit** test: n = 500 observations across 5 categories with claimed proportions [0.1, 0.2, 0.3, 0.25, 0.15]. Observed: [60, 95, 140, 130, 75]. Test at α = 0.05.',
+      steps: [
+        { label: 'Expected', content: 'E = [50, 100, 150, 125, 75]' },
+        { label: 'χ²', content: '= (60−50)²/50 + (95−100)²/100 + (140−150)²/150 + (130−125)²/125 + (75−75)²/75' },
+        { label: 'Compute', content: '= 100/50 + 25/100 + 100/150 + 25/125 + 0 = 2.0 + 0.25 + 0.667 + 0.2 + 0 = **3.117**' },
+        { label: 'df = 5−1 = 4', content: 'Critical = 9.49. Since 3.117 < 9.49 → **Fail to reject**.' },
+      ],
+      answer: 'χ² = 3.12, df = 4, not significant — data fits claimed proportions',
+      code: 'observed = [60, 95, 140, 130, 75]\nproportions = [0.1, 0.2, 0.3, 0.25, 0.15]\nn = 500\n# Goodness-of-fit test\n',
+      codeSolution: 'observed = [60, 95, 140, 130, 75]\nproportions = [0.1, 0.2, 0.3, 0.25, 0.15]\nn = 500\nexpected = [n * p for p in proportions]\nchi2 = sum((o - e)**2 / e for o, e in zip(observed, expected))\ndf = len(observed) - 1\nprint(f"Chi-squared = {chi2:.3f}, df = {df}")\nprint(f"Critical (alpha=0.05) = 9.49")\nprint("Reject H0" if chi2 > 9.49 else "Fail to reject H0")',
+    },
+    {
+      id: 'chi-46', difficulty: 3,
+      question: 'What happens to the **power** of a χ² test as sample size increases? If the true proportions are [0.18, 0.17, 0.17, 0.16, 0.16, 0.16] (slightly unfair die), how large must n be for 80% power?',
+      steps: [
+        { label: 'Non-centrality parameter', content: 'λ = n · ∑(pᵢ − 1/6)² / (1/6)' },
+        { label: 'Compute effect', content: 'Deviations from 1/6 ≈ 0.1667: (0.18−.1667)²+...≈ 0.0133²+0.0033²+0.0033²+(−0.0067)²+(−0.0067)²+(−0.0067)² ≈ 0.0001769+0.0000109+... ≈ 0.000360' },
+        { label: 'λ per observation', content: '≈ 0.000360 / 0.1667 ≈ 0.00216' },
+        { label: 'For 80% power', content: 'Need λ ≈ 13.2 (for df=5, α=0.05). So n ≈ 13.2 / 0.00216 ≈ **6,111**.' },
+        { label: 'Insight', content: 'Detecting a very slight bias requires a very large sample — power increases with n.' },
+      ],
+      answer: '≈ 6,000+ rolls needed to detect this slight bias with 80% power',
+    },
+    {
+      id: 'chi-47', difficulty: 3,
+      question: 'Explain how to use **residuals** to identify which cells contribute most to a significant χ². Compute standardised residuals for the 3×3 treatment table (problem chi-36).',
+      steps: [
+        { label: 'Standardised residual', content: 'r = (O − E) / √E' },
+        { label: 'For Treatment A', content: 'Good: (50−40)/√40 = 1.58, Fair: (30−30)/√30 = 0, Poor: (20−30)/√30 = −1.83' },
+        { label: 'For Treatment B', content: 'Good: 0, Fair: (35−30)/√30 = 0.91, Poor: (25−30)/√30 = −0.91' },
+        { label: 'For Treatment C', content: 'Good: (30−40)/√40 = −1.58, Fair: (25−30)/√30 = −0.91, Poor: (45−30)/√30 = **2.74**' },
+        { label: 'Interpretation', content: 'The largest residual is Treatment C, Poor outcome (r = 2.74 > 2). This cell drives the significance — Treatment C has **many more poor outcomes** than expected.' },
+      ],
+      answer: 'Largest residual: Treatment C, Poor = 2.74 (main contributor to significance)',
+    },
+    {
+      id: 'chi-48', difficulty: 3,
+      question: 'Explain the **McNemar test** for paired 2×2 data. When is it used instead of χ²?',
+      steps: [
+        { label: 'Scenario', content: 'Before/after measurements on the **same subjects** (e.g., opinion before and after a campaign).' },
+        { label: 'Table', content: '| | After Yes | After No |\n|---|---|---|\n| Before Yes | a | b |\n| Before No | c | d |' },
+        { label: 'Test statistic', content: 'McNemar χ² = (b − c)² / (b + c) with df = 1' },
+        { label: 'Key insight', content: 'Only the **discordant pairs** (b and c) matter — concordant pairs (a, d) provide no information about change.' },
+        { label: 'When to use', content: 'When observations are **paired** (same subjects measured twice), making standard χ² inappropriate.' },
+      ],
+      answer: 'McNemar: (b−c)²/(b+c) for paired 2×2 data; only discordant pairs matter',
+    },
+    {
+      id: 'chi-49', difficulty: 3,
+      question: 'A genetics experiment predicts a **9:3:3:1** ratio. From 160 offspring: 86, 35, 26, 13. Test at α = 0.05.',
+      steps: [
+        { label: 'Expected', content: 'Total = 160. Ratios sum to 16. E = [160·9/16, 160·3/16, 160·3/16, 160·1/16] = [90, 30, 30, 10]' },
+        { label: 'χ²', content: '= (86−90)²/90 + (35−30)²/30 + (26−30)²/30 + (13−10)²/10' },
+        { label: 'Compute', content: '= 16/90 + 25/30 + 16/30 + 9/10 = 0.178 + 0.833 + 0.533 + 0.900 = **2.444**' },
+        { label: 'df = 3, critical = 7.81', content: '2.444 < 7.81 → **Fail to reject** — data is consistent with 9:3:3:1 ratio.' },
+      ],
+      answer: 'χ² = 2.44, df = 3, not significant — consistent with Mendelian 9:3:3:1',
+      code: 'observed = [86, 35, 26, 13]\nratios = [9, 3, 3, 1]\nn = sum(observed)\n# Test against expected ratio\n',
+      codeSolution: 'observed = [86, 35, 26, 13]\nratios = [9, 3, 3, 1]\nn = sum(observed)\nr_total = sum(ratios)\nexpected = [n * r / r_total for r in ratios]\nchi2 = sum((o - e)**2 / e for o, e in zip(observed, expected))\ndf = len(observed) - 1\nprint(f"Expected: {expected}")\nprint(f"Chi-squared = {chi2:.3f}, df = {df}")\nprint("Reject" if chi2 > 7.81 else "Fail to reject")',
+    },
+    {
+      id: 'chi-50', difficulty: 3,
+      question: 'Simulate the χ² distribution: generate 10,000 values of χ²₅ by summing 5 squared standard normals each time. Verify the mean ≈ 5 and variance ≈ 10.',
+      steps: [
+        { label: 'Method', content: 'For each trial: draw Z₁,...,Z₅ ~ N(0,1), compute χ² = Z₁² + ... + Z₅².' },
+        { label: 'Expected mean', content: 'E[χ²₅] = df = **5**' },
+        { label: 'Expected variance', content: 'Var[χ²₅] = 2·df = **10**' },
+        { label: 'Verification', content: 'With 10,000 samples, the sample mean and variance should be close to 5 and 10.' },
+      ],
+      answer: 'Mean ≈ 5, Variance ≈ 10',
+      code: 'import random\nimport math\nn = 10000\ndf = 5\n# Simulate chi-squared distribution\n',
+      codeSolution: 'import random\nimport math\nrandom.seed(42)\nn = 10000\ndf = 5\nsamples = []\nfor _ in range(n):\n    chi2 = sum(random.gauss(0,1)**2 for _ in range(df))\n    samples.append(chi2)\nmean = sum(samples) / n\nvar = sum((x - mean)**2 for x in samples) / (n - 1)\nprint(f"Mean = {mean:.3f} (expected {df})")\nprint(f"Variance = {var:.3f} (expected {2*df})")',
+    },
+  ],
+};
