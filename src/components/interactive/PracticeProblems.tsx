@@ -276,15 +276,13 @@ export default function PracticeProblems({ practice }: Props) {
             </button>
           )}
 
-          {/* Code practice toggle */}
-          {problem.code && (
-            <button
-              onClick={() => { setShowCode(!showCode); setShowCodeSolution(false); }}
-              className="px-3 py-1.5 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
-            >
-              {showCode ? 'Hide Code' : 'Try in Python'}
-            </button>
-          )}
+          {/* Code practice toggle — always available */}
+          <button
+            onClick={() => { setShowCode(!showCode); setShowCodeSolution(false); }}
+            className="px-3 py-1.5 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+          >
+            {showCode ? 'Hide Code' : 'Try in Python'}
+          </button>
 
           {/* Navigation */}
           <div className="flex gap-1 ml-auto">
@@ -305,10 +303,13 @@ export default function PracticeProblems({ practice }: Props) {
           </div>
         </div>
 
-        {/* Code section */}
-        {showCode && problem.code && (
+        {/* Code section — always available, uses custom starter or generic */}
+        {showCode && (
           <div className="mt-3">
-            <PythonPlayground starterCode={problem.code} title="Solve it in Python" />
+            <PythonPlayground
+              starterCode={problem.code ?? '# Solve this problem in Python\n\n# Your code here\n'}
+              title="Solve it in Python"
+            />
             {problem.codeSolution && !showCodeSolution && (
               <button
                 onClick={() => setShowCodeSolution(true)}
