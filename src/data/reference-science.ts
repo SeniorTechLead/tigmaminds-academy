@@ -1,4 +1,5 @@
 import type { ReferenceGuide } from './reference';
+import { practiceMeanMedianMode } from './practice-statistics';
 
 export const scienceReferences: ReferenceGuide[] = [
   // ──────────────────────────────────────────────────────────────
@@ -4316,6 +4317,7 @@ export const scienceReferences: ReferenceGuide[] = [
           '**M-estimators** iteratively down-weight points far from the centre. Huber\'s method: treat points within 1.345σ normally, ' +
           'but limit the influence of points beyond that threshold. After a few iterations, the estimate converges to a robust centre.',
         interactive: { type: 'python-playground' as const, props: { starterCode: '# Compute summary statistics\ndata = [45, 67, 72, 72, 78, 81, 95]\n\nmean = sum(data) / len(data)\nsorted_d = sorted(data)\nn = len(sorted_d)\nmedian = sorted_d[n//2] if n % 2 else (sorted_d[n//2-1] + sorted_d[n//2]) / 2\n\n# Mode: most common value\nfrom collections import Counter\nmode = Counter(data).most_common(1)[0][0]\n\nprint(f"Data: {data}")\nprint(f"Mean:   {mean:.1f}")\nprint(f"Median: {median}")\nprint(f"Mode:   {mode}")\nprint(f"Range:  {max(data) - min(data)}")\n\n# Add an outlier and watch the mean shift!\ndata2 = data + [5]\nmean2 = sum(data2) / len(data2)\nprint(f"\\nWith outlier 5: mean = {mean2:.1f}")', title: 'Try it — Summary Statistics' } },
+        practice: practiceMeanMedianMode,
       },
       {
         title: 'Standard Deviation & Variance',
@@ -4795,13 +4797,14 @@ export const scienceReferences: ReferenceGuide[] = [
           'df = 4 − 1 = 3. Threshold = 7.81. Since 2.00 < 7.81 → **fail to reject**. The observed counts are consistent with equal distribution. ' +
           'The differences (30 vs 25, 20 vs 25) are small enough to be explained by random chance.\n\n' +
           '**Test of independence — is gender related to tea preference?**\n\n' +
-          '| | Chai | Green | Coffee | Total |\n' +
-          '|--|------|-------|--------|-------|\n' +
+          '| Gender | Chai | Green Tea | Coffee | Total |\n' +
+          '|--------|------|-----------|--------|-------|\n' +
           '| Male | 40 | 15 | 25 | 80 |\n' +
           '| Female | 30 | 25 | 15 | 70 |\n' +
           '| Total | 70 | 40 | 40 | 150 |\n\n' +
-          'If gender and preference are independent, the expected count for Male+Chai = (80 × 70)/150 = **37.3**. ' +
-          'Compute (O−E)²/E for all 6 cells and sum them. Compare to the threshold for df = (2−1)(3−1) = 2.',
+          'If gender and preference are independent, the expected count for any cell = (row total × column total) / grand total.\n\n' +
+          'Expected Male + Chai = (80 × 70) / 150 = **37.3**. But we observed 40. Is that difference meaningful?\n\n' +
+          'Compute (O−E)²/E for all 6 data cells (not the totals) and sum them. Compare to the threshold for df = (rows−1) × (columns−1) = (2−1)(3−1) = 2. Threshold at α=0.05 is 5.99.',
         advancedContent:
           '**Where the chi-squared distribution comes from — built from normals:**\n\n' +
           'If Z ~ N(0,1), then Z² has a new distribution. What is it?\n\n' +
