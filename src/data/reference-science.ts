@@ -4409,46 +4409,62 @@ export const scienceReferences: ReferenceGuide[] = [
           'z = (130-100)/15 = 2.0. Area to the left of z=2 is 0.9772, so area to the right is 1 - 0.9772 = **2.28%**.\n\n' +
           '*See also: The Gaussian distribution in Machine Learning — how it is used in classification, anomaly detection, and Bayesian inference.*',
         advancedContent:
-          '**Where the bell curve formula comes from:**\n\n' +
-          '`f(x) = (1 / (σ√(2π))) × exp(−(x−μ)² / (2σ²))`\n\n' +
-          'This looks mysterious. Here\'s the logic behind each piece:\n\n' +
-          '1. **exp(−x²)** is the basic bell shape — it\'s the unique function that is its own Fourier transform\n' +
-          '2. **−(x−μ)²** shifts the bell to centre at μ\n' +
-          '3. **/(2σ²)** controls the width — larger σ makes the bell wider\n' +
-          '4. **1/(σ√(2π))** is the normalising constant that makes the total area = 1\n\n' +
-          '**Proving the total area = 1** requires a clever trick (the Gaussian integral):\n\n' +
-          'Let I = ∫₋∞^∞ e^(−x²) dx. Then I² = ∫∫ e^(−x²−y²) dx dy. Switch to polar coordinates: x² + y² = r², dx dy = r dr dθ.\n' +
-          'I² = ∫₀^(2π) ∫₀^∞ e^(−r²) × r dr dθ = 2π × [−½ e^(−r²)]₀^∞ = 2π × ½ = π. So I = √π.\n' +
-          'Therefore ∫₋∞^∞ e^(−x²/(2σ²)) dx = σ√(2π), confirming the normalisation constant.\n\n' +
-          '**The integral has no closed form** — you cannot write ∫e^(−x²) dx in terms of elementary functions. ' +
-          'This is why we need z-tables or the error function erf(x). Every z-table entry was computed numerically.\n\n' +
-          '**Multivariate normal — extending to 2+ variables:**\n\n' +
-          'For d dimensions, μ becomes a vector and σ² becomes a covariance matrix Σ. The Mahalanobis distance ' +
-          'D = √((x−μ)ᵀ Σ⁻¹ (x−μ)) generalises the z-score: it accounts for different scales AND correlations between variables. ' +
-          'Points at equal D form ellipsoids (the contour lines). This is the foundation of the Kalman filter — ' +
-          'the algorithm GPS uses to fuse noisy sensor readings into a smooth position estimate.',
+          '**Building the bell curve formula from scratch:**\n\n' +
+          'We want a function f(x) that:\n' +
+          '- Is highest at the centre (x = μ)\n' +
+          '- Falls off symmetrically on both sides\n' +
+          '- Falls off FASTER the further you go (not linearly — exponentially)\n' +
+          '- Has total area under the curve = 1 (it\'s a probability distribution)\n\n' +
+          '**Step 1 — Start with the simplest bell shape:** f(x) = e^(−x²)\n\n' +
+          'Why e^(−x²)? Because:\n' +
+          '- At x = 0: e⁰ = 1 (the peak)\n' +
+          '- At x = 1: e⁻¹ ≈ 0.37\n' +
+          '- At x = 2: e⁻⁴ ≈ 0.018\n' +
+          '- At x = 3: e⁻⁹ ≈ 0.00012\n' +
+          'It drops fast and is always positive — a bell shape.\n\n' +
+          '**Step 2 — Centre it at μ:** Replace x with (x − μ): f(x) = e^(−(x−μ)²)\n\n' +
+          '**Step 3 — Control the width with σ:** Replace (x−μ)² with (x−μ)²/(2σ²). ' +
+          'Larger σ → denominator grows → exponent shrinks → the bell is wider.\n\n' +
+          'Now: f(x) = e^(−(x−μ)² / (2σ²))\n\n' +
+          '**Step 4 — Make the total area = 1:** The area under e^(−(x−μ)²/(2σ²)) turns out to be σ√(2π). ' +
+          'Divide by this to normalise:\n\n' +
+          '**f(x) = (1 / (σ√(2π))) × e^(−(x−μ)² / (2σ²))**\n\n' +
+          'Every piece has a purpose. Nothing is arbitrary.\n\n' +
+          '**Why does the area equal σ√(2π)?**\n\n' +
+          'Let I = ∫₋∞^∞ e^(−x²) dx. We cannot solve this integral directly (it has no formula in terms of elementary functions). ' +
+          'But here is a trick: compute I² instead.\n\n' +
+          'I² = (∫e^(−x²) dx)(∫e^(−y²) dy) = ∫∫ e^(−x²−y²) dx dy\n\n' +
+          'Now switch to polar coordinates (r, θ): x² + y² = r², and the area element dx dy becomes r dr dθ.\n\n' +
+          'I² = ∫₀^(2π) ∫₀^∞ e^(−r²) r dr dθ = 2π × ∫₀^∞ r e^(−r²) dr\n\n' +
+          'The inner integral: let u = r², du = 2r dr → ∫₀^∞ r e^(−r²) dr = ½ ∫₀^∞ e^(−u) du = ½\n\n' +
+          'So I² = 2π × ½ = π. Therefore **I = √π**.\n\n' +
+          'Substituting back: ∫₋∞^∞ e^(−(x−μ)²/(2σ²)) dx = σ√(2π), confirming our normalising constant. ∎\n\n' +
+          '**The Central Limit Theorem — why the bell curve is everywhere:**\n\n' +
+          'A person\'s height is the sum of many tiny independent effects: hundreds of genes, nutrition, sleep, exercise. ' +
+          'The CLT says: when you add many independent random contributions, the sum tends toward a normal distribution — ' +
+          'regardless of how each individual contribution is distributed. This is why heights, test score averages, measurement errors, ' +
+          'and manufacturing tolerances are all approximately normal.',
         diagram: 'GaussianExplorerDiagram',
         interactive: { type: 'python-playground' as const, props: { starterCode: 'import math\n\ndef normal_pdf(x, mu, sigma):\n    coeff = 1 / (sigma * math.sqrt(2 * math.pi))\n    exponent = -((x - mu) ** 2) / (2 * sigma ** 2)\n    return coeff * math.exp(exponent)\n\nmu, sigma = 152, 6  # Women\'s heights in cm\n\nprint(f"Normal distribution: mu={mu}, sigma={sigma}")\nprint(f"\\nHeight  PDF value")\nprint("-" * 22)\nfor h in range(136, 170, 2):\n    pdf = normal_pdf(h, mu, sigma)\n    bar = "#" * int(pdf * 300)\n    print(f"  {h} cm  {bar}")\n\nprint(f"\\n68% range: {mu-sigma} to {mu+sigma} cm")\nprint(f"95% range: {mu-2*sigma} to {mu+2*sigma} cm")', title: 'Try it — Normal Distribution' } },
       },
       {
         title: 'Binomial Distribution',
         beginnerContent:
-          '**When you repeat the same yes/no experiment many times:**\n\n' +
-          'The binomial distribution counts the number of "successes" in n independent trials, each with probability p.\n\n' +
-          '`P(k successes) = C(n, k) * p^k * (1-p)^(n-k)`\n\n' +
-          '**Example: Flip a fair coin 10 times**\n\n' +
-          '| k (heads) | P(k) | Approx |\n' +
-          '|-----------|------|--------|\n' +
-          '| 0 | C(10,0)(0.5)^10 | 0.001 |\n' +
-          '| 3 | C(10,3)(0.5)^10 | 0.117 |\n' +
-          '| 5 | C(10,5)(0.5)^10 | 0.246 |\n' +
-          '| 7 | C(10,7)(0.5)^10 | 0.117 |\n' +
-          '| 10 | C(10,10)(0.5)^10 | 0.001 |\n\n' +
-          '**Key formulas:**\n\n' +
-          '- Mean: `mu = n * p`\n' +
-          '- Standard deviation: `sigma = sqrt(n * p * (1-p))`\n\n' +
-          'For 10 coin flips: mean = 5 heads, sigma = 1.58.\n\n' +
-          '**Real-world uses:** Quality control (defective items per batch), medical trials (patients who respond to treatment), weather (number of rainy days in a month).',
+          '**Building the formula piece by piece — not memorising it.**\n\n' +
+          'Suppose you flip a coin 3 times. What is the probability of getting exactly 2 heads?\n\n' +
+          '**Step 1 — List the ways to get 2 heads out of 3 flips:**\n' +
+          'HHT, HTH, THH — there are **3 ways**. (This is C(3,2) = 3.)\n\n' +
+          '**Step 2 — What is the probability of any ONE of these sequences?**\n' +
+          'Each flip is independent. P(HHT) = P(H) × P(H) × P(T) = 0.5 × 0.5 × 0.5 = 0.125.\n' +
+          'Notice: that is p² × (1−p)¹ — two heads and one tail.\n\n' +
+          '**Step 3 — Combine:** 3 ways × 0.125 each = **0.375**.\n\n' +
+          'Now generalise: for n flips, k heads:\n' +
+          '- Number of ways to arrange k heads in n positions = **C(n, k)**\n' +
+          '- Probability of any one arrangement = **pᵏ × (1−p)ⁿ⁻ᵏ**\n' +
+          '- Total: **P(X = k) = C(n, k) × pᵏ × (1−p)ⁿ⁻ᵏ**\n\n' +
+          'Each piece has a reason. C(n,k) counts arrangements. pᵏ is the probability of k successes. (1−p)ⁿ⁻ᵏ is the probability of the remaining failures.\n\n' +
+          '**Check yourself:** P(exactly 2 heads in 3 fair coin flips) = C(3,2) × 0.5² × 0.5¹ = 3 × 0.25 × 0.5 = **0.375** ✓\n\n' +
+          '**Mean = n × p** (10 flips of a fair coin → expect 5 heads). **Std dev = √(np(1−p))** (= √2.5 ≈ 1.58 for this example).',
         intermediateContent:
           '**Conditions for binomial distribution:**\n\n' +
           '1. Fixed number of trials (n)\n' +
@@ -4546,23 +4562,26 @@ export const scienceReferences: ReferenceGuide[] = [
       {
         title: 'The Poisson Distribution',
         beginnerContent:
-          '**Counts rare events in a fixed interval.**\n\n' +
-          'How many customers arrive per hour? How many typos per page? How many earthquakes per year?\n\n' +
-          '**Key properties:**\n\n' +
-          '- Events happen **independently**\n' +
-          '- The average rate (λ) is **constant**\n' +
-          '- Two events can\'t happen at the exact same instant\n\n' +
-          '**Formula:** `P(X = k) = (λᵏ × e⁻λ) / k!`\n\n' +
-          '**Example:** A shop averages 3 customers per hour (λ = 3)\n\n' +
-          '| Customers (k) | P(X = k) |\n' +
-          '|---------------|----------|\n' +
-          '| 0 | 5.0% |\n' +
-          '| 1 | 14.9% |\n' +
-          '| 2 | 22.4% |\n' +
-          '| 3 | 22.4% |\n' +
-          '| 4 | 16.8% |\n' +
-          '| 5 | 10.1% |\n\n' +
-          '**Mean = λ, Variance = λ** — unique to Poisson: the mean and variance are always equal.',
+          '**Where the Poisson formula comes from — step by step.**\n\n' +
+          'A shop averages 3 customers per hour. What is the probability that exactly 0 customers arrive in an hour? Exactly 1? Exactly 5?\n\n' +
+          '**The idea:** Divide the hour into tiny slices. If you split 1 hour into n = 1000 tiny intervals (each 3.6 seconds), ' +
+          'each slice either has a customer (probability p = 3/1000 = 0.003) or doesn\'t. This is a binomial problem: n = 1000 trials, p = 0.003.\n\n' +
+          'But computing C(1000, k) × 0.003ᵏ × 0.997¹⁰⁰⁰⁻ᵏ is painful. As n → ∞ and p → 0 (with np = λ = 3 held constant), the binomial simplifies:\n\n' +
+          '- C(n,k) ≈ nᵏ/k! (when n is huge and k is small)\n' +
+          '- pᵏ = (λ/n)ᵏ = λᵏ/nᵏ\n' +
+          '- (1−λ/n)ⁿ⁻ᵏ → e⁻λ (the definition of e)\n\n' +
+          'Multiply: (nᵏ/k!) × (λᵏ/nᵏ) × e⁻λ = **λᵏ e⁻λ / k!**\n\n' +
+          'That is the Poisson formula. It is not dropped from the sky — it is the binomial formula for many trials with rare events.\n\n' +
+          '**Computing by hand for λ = 3:**\n\n' +
+          '| k | λᵏ | k! | e⁻³ ≈ 0.0498 | P(X=k) = λᵏe⁻λ/k! |\n' +
+          '|---|-----|-----|---------------|--------------------|\n' +
+          '| 0 | 1 | 1 | 0.0498 | **5.0%** |\n' +
+          '| 1 | 3 | 1 | 0.0498 | **14.9%** |\n' +
+          '| 2 | 9 | 2 | 0.0498 | **22.4%** |\n' +
+          '| 3 | 27 | 6 | 0.0498 | **22.4%** |\n' +
+          '| 4 | 81 | 24 | 0.0498 | **16.8%** |\n' +
+          '| 5 | 243 | 120 | 0.0498 | **10.1%** |\n\n' +
+          '**Unique property:** Mean = λ = 3, Variance = λ = 3. The mean and variance are ALWAYS equal for Poisson. If you observe data where the variance is much larger than the mean, the Poisson model does not fit (look at negative binomial instead).',
         intermediateContent:
           '**Poisson as a limit of Binomial:**\n\n' +
           'When n is large, p is small, and λ = np is moderate:\n\n' +
@@ -4589,19 +4608,27 @@ export const scienceReferences: ReferenceGuide[] = [
       {
         title: 'The Exponential Distribution',
         beginnerContent:
-          '**Models waiting times between events.**\n\n' +
-          'If events happen at a Poisson rate of λ per unit time, the **time between events** follows an Exponential distribution.\n\n' +
-          '**Real examples:**\n\n' +
-          '- Time between customer arrivals\n' +
-          '- Time until a lightbulb burns out\n' +
-          '- Time between earthquakes\n\n' +
-          '**Key formula:** `P(T ≤ t) = 1 − e⁻λᵗ`\n\n' +
-          '**Mean waiting time:** `1/λ`\n\n' +
-          '**Example:** Buses arrive every 10 minutes on average (λ = 1/10 per minute)\n\n' +
-          '- P(wait ≤ 5 min) = 1 − e⁻⁰·⁵ ≈ **39.3%**\n' +
-          '- P(wait ≤ 10 min) = 1 − e⁻¹ ≈ **63.2%**\n' +
-          '- P(wait ≤ 20 min) = 1 − e⁻² ≈ **86.5%**\n\n' +
-          '**Memoryless property:** If you\'ve already waited 5 minutes, the probability of waiting 5 more is the same as if you just arrived. The past doesn\'t help predict the future.',
+          '**How long until the next event? Building the formula from a question.**\n\n' +
+          'Buses arrive at a rate of about 6 per hour (one every 10 minutes on average). You just arrived at the stop. How long will you wait?\n\n' +
+          'The waiting time is NOT fixed at 10 minutes. Sometimes a bus comes in 2 minutes, sometimes you wait 20. The exponential distribution describes this randomness.\n\n' +
+          '**Deriving the formula from common sense:**\n\n' +
+          'What is the probability of waiting MORE than t minutes? That means zero buses in t minutes. ' +
+          'If buses arrive randomly at rate λ per minute (λ = 1/10 = 0.1), the Poisson probability of zero events in time t is:\n\n' +
+          'P(zero buses in t min) = e⁻λᵗ\n\n' +
+          'So P(wait > t) = e⁻λᵗ, which means:\n' +
+          '**P(wait ≤ t) = 1 − e⁻λᵗ**\n\n' +
+          'That is the entire formula, and it came from the question "what does zero events look like?"\n\n' +
+          '**Calculating by hand:**\n\n' +
+          '| Wait time | P(wait ≤ t) = 1 − e⁻⁰·¹ᵗ | In words |\n' +
+          '|-----------|---------------------------|----------|\n' +
+          '| 5 min | 1 − e⁻⁰·⁵ = 1 − 0.607 = **39%** | Only a 39% chance in the first 5 min |\n' +
+          '| 10 min | 1 − e⁻¹ = 1 − 0.368 = **63%** | Even at the "average" time, 37% still waiting |\n' +
+          '| 20 min | 1 − e⁻² = 1 − 0.135 = **86%** | Need twice the average for 86% confidence |\n' +
+          '| 30 min | 1 − e⁻³ = 1 − 0.050 = **95%** | Three times the average for 95% |\n\n' +
+          'Notice: even at the "average" waiting time (10 min), there is still a **37% chance** you are still waiting. That feels counterintuitive — but the distribution is skewed right (long tail).\n\n' +
+          '**The memoryless property — the strangest fact:**\n\n' +
+          'You have already waited 15 minutes. What is the probability of waiting 5 MORE minutes? Answer: **exactly the same as if you just arrived** (39%). ' +
+          'The bus does not "owe" you anything for your past wait. The exponential distribution is the ONLY continuous distribution with this property.',
         intermediateContent:
           '**PDF:** `f(t) = λe⁻λᵗ` for t ≥ 0\n\n' +
           '**CDF:** `F(t) = 1 − e⁻λᵗ`\n\n' +
