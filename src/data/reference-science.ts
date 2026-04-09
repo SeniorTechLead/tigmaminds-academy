@@ -1,5 +1,7 @@
 import type { ReferenceGuide } from './reference';
-import { practiceMeanMedianMode } from './practice-statistics';
+import { practiceMeanMedianMode, practiceStdDevVariance, practiceNormalDistribution } from './practice-statistics';
+import { practiceBinomialDistribution, practiceCorrelationRegression } from './practice-statistics-2';
+import { practicePoissonDistribution, practiceExponentialDistribution, practiceChiSquared } from './practice-statistics-3';
 
 export const scienceReferences: ReferenceGuide[] = [
   // ──────────────────────────────────────────────────────────────
@@ -4401,6 +4403,7 @@ export const scienceReferences: ReferenceGuide[] = [
           '| 4 | 93.8% | 99.99% |\n\n' +
           'Chebyshev is weak but universal — it works for skewed, multimodal, ANY shape. The normal rule (68-95-99.7) is tighter but only works for bell curves.',
         interactive: { type: 'python-playground' as const, props: { starterCode: 'import math\n\ndata = [2, 4, 4, 4, 5, 5, 7, 9]\nn = len(data)\nmean = sum(data) / n\n\n# Variance and standard deviation\nvar_pop = sum((x - mean)**2 for x in data) / n\nvar_sample = sum((x - mean)**2 for x in data) / (n - 1)\nsd = math.sqrt(var_pop)\n\nprint(f"Data: {data}")\nprint(f"Mean: {mean}")\nprint(f"Population variance: {var_pop}")\nprint(f"Sample variance: {var_sample:.2f}")\nprint(f"Std deviation: {sd:.2f}")\n\n# Z-scores\nprint("\\nZ-scores:")\nfor x in data:\n    z = (x - mean) / sd\n    print(f"  x={x}  z={z:+.2f}")', title: 'Try it — Variance & Std Dev' } },
+        practice: practiceStdDevVariance,
       },
       {
         title: 'The Normal (Gaussian) Distribution',
@@ -4478,6 +4481,7 @@ export const scienceReferences: ReferenceGuide[] = [
           'and manufacturing tolerances are all approximately normal.',
         diagram: 'GaussianExplorerDiagram',
         interactive: { type: 'python-playground' as const, props: { starterCode: 'import math\n\ndef normal_pdf(x, mu, sigma):\n    coeff = 1 / (sigma * math.sqrt(2 * math.pi))\n    exponent = -((x - mu) ** 2) / (2 * sigma ** 2)\n    return coeff * math.exp(exponent)\n\nmu, sigma = 152, 6  # Women\'s heights in cm\n\nprint(f"Normal distribution: mu={mu}, sigma={sigma}")\nprint(f"\\nHeight  PDF value")\nprint("-" * 22)\nfor h in range(136, 170, 2):\n    pdf = normal_pdf(h, mu, sigma)\n    bar = "#" * int(pdf * 300)\n    print(f"  {h} cm  {bar}")\n\nprint(f"\\n68% range: {mu-sigma} to {mu+sigma} cm")\nprint(f"95% range: {mu-2*sigma} to {mu+2*sigma} cm")', title: 'Try it — Normal Distribution' } },
+        practice: practiceNormalDistribution,
       },
       {
         title: 'Binomial Distribution',
@@ -4542,6 +4546,7 @@ export const scienceReferences: ReferenceGuide[] = [
           'Computing Binomial(10000, 0.0002) requires factorials of 10000. Poisson(2) gives the same answer with a pocket calculator: ' +
           'P(X=k) = 2ᵏ e⁻² / k!. The derivation (shown in the Poisson section) replaces C(n,k)pᵏ(1−p)ⁿ⁻ᵏ with λᵏe⁻λ/k! as n→∞.',
         interactive: { type: 'python-playground' as const, props: { starterCode: 'import math\n\ndef binomial_pmf(n, k, p):\n    comb = math.factorial(n) // (math.factorial(k) * math.factorial(n - k))\n    return comb * p**k * (1 - p)**(n - k)\n\nn, p = 10, 0.5  # 10 coin flips, fair coin\nprint(f"Binomial(n={n}, p={p})")\nprint(f"Mean = {n*p}, SD = {math.sqrt(n*p*(1-p)):.2f}")\nprint()\nfor k in range(n + 1):\n    prob = binomial_pmf(n, k, p)\n    bar = "#" * int(prob * 80)\n    print(f"  k={k:>2}  P={prob:.4f}  {bar}")', title: 'Try it — Binomial Distribution' } },
+        practice: practiceBinomialDistribution,
       },
       {
         title: 'Correlation & Regression',
@@ -4623,6 +4628,7 @@ export const scienceReferences: ReferenceGuide[] = [
           'r² = (sum of products)² / (sum of x-squares × sum of y-squares) = 24.75² / (1368.75 × 0.45) = 612.56 / 615.94 = **0.995**\n\n' +
           'Rainfall explains **99.5%** of the variation in yield. Only 0.5% is unexplained (noise, measurement error, other factors).',
         interactive: { type: 'python-playground' as const, props: { starterCode: '# Simple linear regression from scratch\nrain = [180, 210, 160, 195, 220, 175, 200]\nyield_t = [3.2, 3.8, 2.9, 3.5, 4.1, 3.0, 3.6]\nn = len(rain)\n\n# Calculate means\nx_bar = sum(rain) / n\ny_bar = sum(yield_t) / n\n\n# Slope and intercept\nnum = sum(rain[i]*yield_t[i] for i in range(n)) - n*x_bar*y_bar\nden = sum(rain[i]**2 for i in range(n)) - n*x_bar**2\nm = num / den\nb = y_bar - m * x_bar\n\n# Correlation coefficient\nss_xy = num\nss_xx = den\nss_yy = sum(yield_t[i]**2 for i in range(n)) - n*y_bar**2\nr = ss_xy / (ss_xx * ss_yy) ** 0.5\n\nprint(f"Best-fit line: y = {m:.4f}x + {b:.2f}")\nprint(f"Correlation r = {r:.3f}")\nprint(f"R-squared = {r**2:.3f}")\nprint(f"\\nPredicted yield at 190cm rain: {m*190+b:.2f} tonnes/ha")', title: 'Try it — Regression' } },
+        practice: practiceCorrelationRegression,
       },
       {
         title: 'The Poisson Distribution',
@@ -4684,6 +4690,7 @@ export const scienceReferences: ReferenceGuide[] = [
           'That waiting time is Exponential(λ). The Poisson counts events; the Exponential measures the gap between them. ' +
           'They are two sides of the same process — see the Exponential section for the full derivation.',
         interactive: { type: 'python-playground' as const, props: { starterCode: 'import numpy as np\n\n# Poisson distribution\nlam = 3  # average rate\n\ndef poisson_pmf(k, lam):\n    return (lam**k * np.exp(-lam)) / np.math.factorial(k)\n\nprint(f"Poisson(lambda={lam})")\nprint(f"Mean = {lam}, Variance = {lam}")\nprint()\nprint("k  | P(X=k)  | Cumulative")\nprint("-" * 30)\ncum = 0\nfor k in range(11):\n    p = poisson_pmf(k, lam)\n    cum += p\n    bar = "#" * int(p * 50)\n    print(f"{k:>2} | {p:.4f}  | {cum:.4f}  {bar}")', title: 'Try it — Poisson' } },
+        practice: practicePoissonDistribution,
       },
       {
         title: 'The Exponential Distribution',
@@ -4746,6 +4753,7 @@ export const scienceReferences: ReferenceGuide[] = [
           '3. Set derivative to zero: dl/dλ = n/λ − Σtᵢ = 0\n' +
           '4. Solve: **λ̂ = n / Σtᵢ = 1/t̄** — the reciprocal of the sample mean ∎',
         interactive: { type: 'python-playground' as const, props: { starterCode: 'import numpy as np\n\n# Exponential distribution: waiting times\nlam = 0.1  # rate: 1 bus per 10 minutes\nmean_wait = 1 / lam\n\nprint(f"Rate: {lam} per minute")\nprint(f"Mean wait: {mean_wait} minutes")\nprint()\n\n# Probability of waiting at most t minutes\nfor t in [5, 10, 15, 20, 30]:\n    p = 1 - np.exp(-lam * t)\n    print(f"P(wait <= {t:>2} min) = {p:.1%}")\n\n# Simulate 1000 waits\nwaits = np.random.exponential(mean_wait, 1000)\nprint(f"\\nSimulated mean wait: {waits.mean():.1f} min")\nprint(f"Simulated std dev:   {waits.std():.1f} min")', title: 'Try it — Exponential' } },
+        practice: practiceExponentialDistribution,
       },
       {
         title: 'Chi-Squared & Hypothesis Testing',
@@ -4827,6 +4835,7 @@ export const scienceReferences: ReferenceGuide[] = [
           '| **F(m,n)** | (χ²ₘ/m) / (χ²ₙ/n) | Comparing two variances (ANOVA, regression overall F-test) |\n\n' +
           'The t-distribution with k → ∞ converges to the normal. This is why z-tests and t-tests give the same answer for large samples.',
         interactive: { type: 'python-playground' as const, props: { starterCode: 'import numpy as np\n\n# Chi-squared test: is this coin fair?\nobserved = [60, 40]  # 60 heads, 40 tails\nexpected = [50, 50]  # fair coin\n\nchi2 = sum((o - e)**2 / e for o, e in zip(observed, expected))\ndf = len(observed) - 1\n\nprint("Chi-squared goodness of fit")\nprint(f"Observed: {observed}")\nprint(f"Expected: {expected}")\nprint(f"Chi-squared = {chi2:.2f}")\nprint(f"Degrees of freedom = {df}")\nprint()\n\n# Critical values (alpha = 0.05)\ncritical = {1: 3.84, 2: 5.99, 3: 7.81, 4: 9.49}\ncv = critical.get(df, 3.84)\nprint(f"Critical value (df={df}, alpha=0.05) = {cv}")\nprint(f"Result: {\"REJECT H0 - significant!\" if chi2 > cv else \"Fail to reject H0\"}")', title: 'Try it — Chi-Squared' } },
+        practice: practiceChiSquared,
       },
     ],
   },
