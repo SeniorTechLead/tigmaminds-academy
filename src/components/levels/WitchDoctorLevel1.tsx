@@ -103,7 +103,7 @@ active_compound = 17
 # Step 3: Test each, split again
 # Step 4: Pure compound
 
-steps = ['Crude extract', 'Fraction B\n(of 4)', 'Sub-fraction B3\n(of 4)', 'Compound 17\n(pure)']
+steps = ['Crude extract', 'Fraction B\\n(of 4)', 'Sub-fraction B3\\n(of 4)', 'Compound 17\\n(pure)']
 n_compounds_at_step = [32, 8, 2, 1]
 activity = [100, 95, 92, 100]  # % activity relative to crude
 purity = [3.1, 12.5, 50, 100]  # % purity

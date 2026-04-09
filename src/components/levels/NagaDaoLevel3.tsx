@@ -185,10 +185,10 @@ ax1.axhline(y=Ms, color='#60a5fa', linewidth=2, label=f'Ms = {Ms}°C')
 ax1.axhline(y=Mf, color='#60a5fa', linewidth=2, linestyle='--', label=f'Mf = {Mf}°C')
 
 # Fill regions
-ax1.text(5, 650, 'PEARLITE\n(soft)', color='#f87171', fontsize=10, ha='center', fontweight='bold')
-ax1.text(10, 430, 'BAINITE\n(hard, tough)', color='#f59e0b', fontsize=10, ha='center', fontweight='bold')
-ax1.text(0.3, 250, 'MARTENSITE\n(very hard)', color='#60a5fa', fontsize=10, ha='center', fontweight='bold')
-ax1.text(0.1, 700, 'AUSTENITE\n(unstable)', color='white', fontsize=10, ha='center', alpha=0.5)
+ax1.text(5, 650, 'PEARLITE\\n(soft)', color='#f87171', fontsize=10, ha='center', fontweight='bold')
+ax1.text(10, 430, 'BAINITE\\n(hard, tough)', color='#f59e0b', fontsize=10, ha='center', fontweight='bold')
+ax1.text(0.3, 250, 'MARTENSITE\\n(very hard)', color='#60a5fa', fontsize=10, ha='center', fontweight='bold')
+ax1.text(0.1, 700, 'AUSTENITE\\n(unstable)', color='white', fontsize=10, ha='center', alpha=0.5)
 
 # Cooling curves
 cooling_rates = [
@@ -217,7 +217,7 @@ bar_colors = ['#9ca3af', '#a78bfa', '#10b981', '#60a5fa']
 
 bars = ax2.bar(methods, hardness, color=bar_colors, edgecolor='white', linewidth=0.5, width=0.6)
 for bar, h, phase in zip(bars, hardness, phases):
-    ax2.text(bar.get_x() + bar.get_width()/2, h + 1, f'{h} HRC\n{phase}',
+    ax2.text(bar.get_x() + bar.get_width()/2, h + 1, f'{h} HRC\\n{phase}',
              ha='center', color='white', fontsize=9)
 
 ax2.set_ylabel('Hardness (HRC)', color='white', fontsize=11)
@@ -346,8 +346,8 @@ axes[1].fill_betweenx(y, hardness, 30, alpha=0.2, color='#f59e0b')
 axes[1].set_xlabel('Hardness (HRC)', color='white', fontsize=10)
 axes[1].set_ylabel('Height: Edge → Spine (mm)', color='white', fontsize=10)
 axes[1].set_title('Differential Temper Profile', color='white', fontsize=12, fontweight='bold')
-axes[1].text(55, 5, 'Hard edge\n(wear resistant)', color='#f87171', fontsize=9, ha='center')
-axes[1].text(42, 35, 'Tough spine\n(impact resistant)', color='#10b981', fontsize=9, ha='center')
+axes[1].text(55, 5, 'Hard edge\\n(wear resistant)', color='#f87171', fontsize=9, ha='center')
+axes[1].text(42, 35, 'Tough spine\\n(impact resistant)', color='#10b981', fontsize=9, ha='center')
 for s in ['top','right']: axes[1].spines[s].set_visible(False)
 for s in ['bottom','left']: axes[1].spines[s].set_color('white')
 
@@ -437,7 +437,7 @@ conditions = [
 for name, gs, color in conditions:
     ys = sigma_0 + k_hp / np.sqrt(gs)
     axes[0,0].scatter([gs], [ys], s=100, color=color, edgecolors='white', zorder=5)
-    axes[0,0].annotate(f'{name}\n{ys:.0f} MPa', (gs, ys), textcoords="offset points",
+    axes[0,0].annotate(f'{name}\\n{ys:.0f} MPa', (gs, ys), textcoords="offset points",
                        xytext=(10, 5), color=color, fontsize=8)
 
 # Simulate grain structures using random Voronoi points
@@ -477,7 +477,7 @@ def draw_grains(ax, n_grains, title, size=10):
     avg_area = size**2 / n_grains
     avg_diameter = np.sqrt(avg_area) * 1000 / size  # convert to μm scale
     strength = sigma_0 + k_hp / np.sqrt(avg_diameter)
-    ax.set_title(f'{title}\n~{n_grains} grains, σ_y ≈ {strength:.0f} MPa',
+    ax.set_title(f'{title}\\n~{n_grains} grains, σ_y ≈ {strength:.0f} MPa',
                  color='white', fontsize=10, fontweight='bold')
     ax.set_xticks([]); ax.set_yticks([])
 

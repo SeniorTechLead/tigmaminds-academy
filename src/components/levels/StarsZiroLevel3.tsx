@@ -27,6 +27,7 @@ There is a critical distinction between **apparent magnitude** (how bright a sta
       checkAnswer: 'The difference is 5.0 magnitudes. Since 5 magnitudes = a factor of exactly 100 in brightness, star A is 100 times brighter than star B. You can also compute it: 2.512^5 = 100. This is why a magnitude +6 star (the faintest visible to the naked eye) receives 100 times less light than a magnitude +1 star.',
       codeIntro: 'Build the magnitude scale from scratch: convert between magnitudes and fluxes, compute distance moduli, and plot a magnitude comparison chart for famous stars.',
       code: `import numpy as np
+import matplotlib.pyplot as plt
 
 # Pogson's ratio
 POGSON = 100 ** (1/5)  # ~2.512
@@ -66,7 +67,40 @@ for name, app, abso in stars:
     else:
         print(f"{name:<22} {app:>8.2f} {'---':>8} {'---':>12} {'1.0x (limit)':>14}")
 
-# --- Plot 1: Magnitude scale visualization ---
+# --- Magnitude scale visualization ---
+fig, ax = plt.subplots(1, 1, figsize=(12, 6))
+fig.patch.set_facecolor('#0d1117')
+ax.set_facecolor('#0a0a1a')
+ax.tick_params(colors='gray')
+
+star_names = [s[0] for s in stars]
+app_mags = [s[1] for s in stars]
+star_colors_map = {
+    'Sirius': '#aaccff', 'Vega': '#bbddff', 'Canopus': '#ffeecc',
+    'Betelgeuse': '#ff6644', 'Rigel': '#99bbff', 'Deneb': '#bbccff',
+    'Polaris': '#ffddaa', 'Ziro naked-eye limit': '#555555',
+}
+
+for i, (name, app, abso) in enumerate(stars):
+    # Size proportional to brightness
+    brightness = 10 ** ((6.5 - app) / 2.5)
+    size = max(20, min(300, brightness * 2))
+    color = star_colors_map.get(name, '#ffffff')
+    ax.scatter(app, i, s=size, c=color, zorder=5, edgecolors='white', linewidths=0.3, alpha=0.9)
+    label_x = app + 0.3 if app < 4 else app - 0.3
+    ha = 'left' if app < 4 else 'right'
+    ax.text(label_x, i, name, color='white', fontsize=8, va='center', ha=ha)
+
+ax.set_xlabel('Apparent Magnitude (brighter -->)', color='white')
+ax.set_yticks([])
+ax.invert_xaxis()
+ax.set_title('Magnitude Scale — Famous Stars Visible from Ziro Valley',
+             color='white', fontsize=13, fontweight='bold')
+ax.axvline(6.5, color='#ef4444', linestyle='--', linewidth=1, alpha=0.5)
+ax.text(6.5, len(stars)-0.5, 'Naked-eye limit', color='#ef4444', fontsize=8, ha='center')
+
+plt.tight_layout()
+plt.show()
 
 print()
 print(f"Pogson's ratio: {POGSON:.4f}")
@@ -136,10 +170,34 @@ for r0 in r0_values:
 
 # Extended source (planet) — averages over disk
 planet_brightness = {}
+planet_disk_pixels = 5  # planet subtends ~5 coherence cells
 for r0 in r0_values:
     brightness = []
+    for _ in range(n_frames):
+        screen = generate_phase_screen(64, r0)
+        # Extended source: average over disk area reduces fluctuations
+        patches = [np.var(screen[28+di:36+di, 28+dj:36+dj])
+                   for di in range(-2, 3) for dj in range(-2, 3)]
+        phase_var = np.mean(patches)
+        intensity = np.exp(-phase_var / 2) + 0.1 * np.random.randn() * (0.05 / r0) / np.sqrt(planet_disk_pixels)
+        brightness.append(max(0.1, intensity))
+    planet_brightness[r0] = np.array(brightness)
 
-print("\n[Full visualization in playground]")`,
+print("=== ATMOSPHERIC SCINTILLATION SIMULATION ===")
+print(f"\\nSimulated {n_frames} frames over {time_axis[-1]:.0f} seconds")
+print(f"\\n{'Conditions':<28} {'Fried r0':>9} {'Star scint.':>12} {'Planet scint.':>14} {'Ratio':>8}")
+print("-" * 74)
+for r0, label in zip(r0_values, labels):
+    star_sci = np.std(star_brightness[r0]) / np.mean(star_brightness[r0])
+    planet_sci = np.std(planet_brightness[r0]) / np.mean(planet_brightness[r0])
+    ratio = star_sci / planet_sci if planet_sci > 0 else float('inf')
+    print(f"{label:<28} {r0*100:>7.0f} cm {star_sci:>11.3f} {planet_sci:>13.3f} {ratio:>7.1f}x")
+
+print(f"\\nScintillation index = std(brightness) / mean(brightness)")
+print(f"Stars (point sources) twinkle {np.std(star_brightness[0.05])/np.mean(star_brightness[0.05]) / (np.std(planet_brightness[0.05])/np.mean(planet_brightness[0.05])):.1f}x more than planets in city conditions")
+print(f"\\nZiro Valley (r0=20cm) has {np.std(star_brightness[0.05])/np.mean(star_brightness[0.05]) / (np.std(star_brightness[0.20])/np.mean(star_brightness[0.20])):.1f}x less star scintillation than a city")
+print(f"This is why stars appear steadier from mountain valleys — larger r0")
+print(f"means larger coherence cells, less wavefront distortion, less twinkling.")`,
       challenge: 'Add a simulation for a telescope with adaptive optics: at each timestep, subtract the mean phase from the screen (simulating a tip-tilt corrector). How much does this reduce the scintillation index? Real AO systems correct hundreds of modes.',
       successHint: 'Understanding atmospheric seeing is what separates casual stargazers from serious astronomers. Every telescope observation is a battle against the atmosphere. Sites like Ziro Valley win that battle through geography alone.',
     },
@@ -196,9 +254,10 @@ led_cool_scattered = led_cool_spec * rayleigh
 led_warm_scattered = led_warm_spec * rayleigh
 
 # Total scattered light (integral)
-sodium_total = np.trapz(sodium_scattered, wavelengths)
-led_cool_total = np.trapz(led_cool_scattered, wavelengths)
-led_warm_total = np.trapz(led_warm_scattered, wavelengths)
+_integrate = lambda y, x: np.sum(0.5 * (y[:-1] + y[1:]) * np.diff(x))
+sodium_total = _integrate(sodium_scattered, wavelengths)
+led_cool_total = _integrate(led_cool_scattered, wavelengths)
+led_warm_total = _integrate(led_warm_scattered, wavelengths)
 
 # Normalize to sodium = 1
 norm = sodium_total
@@ -206,7 +265,33 @@ sodium_total /= norm
 led_cool_total /= norm
 led_warm_total /= norm
 
-print("\n[Full visualization in playground]")`,
+print("=== LIGHT POLLUTION: LAMP SPECTRUM vs SCATTERING ===")
+print(f"\\nRayleigh scattering (lambda^-4) favors short wavelengths:")
+print(f"  Blue (450nm): {rayleigh_scattering(np.array([450.0]))[0]:.2f}x relative to green")
+print(f"  Green (550nm): {rayleigh_scattering(np.array([550.0]))[0]:.2f}x (reference)")
+print(f"  Sodium (589nm): {rayleigh_scattering(np.array([589.0]))[0]:.2f}x")
+print(f"  Red (650nm): {rayleigh_scattering(np.array([650.0]))[0]:.2f}x")
+
+print(f"\\nTotal scattered light by lamp type (normalized to sodium = 1.00):")
+print(f"  Sodium (LPS):   {sodium_total:.2f}  (narrow 589nm emission)")
+print(f"  Warm white LED: {led_warm_total:.2f}  (reduced blue, more amber)")
+print(f"  Cool white LED: {led_cool_total:.2f}  (strong blue peak at 450nm)")
+print(f"\\nCool LEDs scatter {led_cool_total/sodium_total:.1f}x more light than sodium lamps!")
+print(f"Warm LEDs scatter {led_warm_total/sodium_total:.1f}x more than sodium.")
+
+# Sky brightness vs distance from light source
+distances_km = np.array([1, 5, 10, 20, 50, 100])
+print(f"\\nSky brightness falloff with distance (cool LED, 100k population):")
+print(f"  {'Distance':>10} {'Radiance':>12} {'Sky mag':>10}")
+print(f"  {'-'*35}")
+base_radiance = 100  # nW/cm²/sr at source
+for d in distances_km:
+    rad = base_radiance / d**2.5
+    sb = -2.5 * np.log10(rad + 0.17) + 26.33  # add natural background
+    print(f"  {d:>8} km {rad:>10.3f} nW {sb:>8.1f}")
+print(f"\\nLight pollution reaches 50-100 km from a city of 100,000.")
+print(f"Switching to warm LEDs or sodium reduces scatter, but shielding")
+print(f"(preventing upward light) is the most effective single intervention.")`,
       challenge: 'Add Mie scattering to the model with a humidity parameter (0 = dry, 1 = monsoon). Show how the relative advantage of sodium vs LED changes with humidity. In humid conditions, the wavelength advantage of sodium diminishes because Mie scattering is wavelength-independent.',
       successHint: 'Light pollution is a solvable problem. Unlike other forms of pollution, it disappears the instant you turn off the light. Understanding the physics empowers you to advocate for better lighting policies — shielded fixtures, warm color temperatures, and dark sky preserves like Ziro Valley.',
     },
@@ -273,7 +358,34 @@ locations = {
 
 np.random.seed(42)
 
-print("\n[Full visualization in playground]")`,
+print("=== BORTLE SCALE & SKY QUALITY MEASUREMENT ===")
+print(f"\\n{'Bortle':>6} {'Name':<32} {'SQM range':>14} {'Lim mag':>8} {'Stars visible':>14}")
+print("-" * 78)
+for cls in range(1, 10):
+    d = bortle_data[cls]
+    print(f"{cls:>6} {d['name']:<32} {d['sqm_min']:.2f}-{d['sqm_max']:.2f} {d['limiting_mag']:>8.1f} {d['stars_visible']:>14,}")
+
+print(f"\\n--- SQM Readings for NE India Locations ---")
+print(f"\\n{'Location':<35} {'SQM (mean)':>11} {'SQM (std)':>10} {'Bortle':>7} {'Stars':>8} {'Quality':<20}")
+print("-" * 95)
+
+for loc_name, (sqm_mean, sqm_std) in locations.items():
+    readings = np.random.normal(sqm_mean, sqm_std, 30)
+    mean_reading = np.mean(readings)
+    bortle = classify_bortle(mean_reading)
+    data = bortle_data[bortle]
+    stars = estimate_stars_visible(data['limiting_mag'])
+    print(f"{loc_name:<35} {mean_reading:>9.2f} {np.std(readings):>10.2f} {bortle:>7} {stars:>7,} {data['name']:<20}")
+
+ziro_sqm = np.random.normal(21.7, 0.15, 30)
+delhi_sqm = np.random.normal(16.5, 0.5, 30)
+ziro_stars = estimate_stars_visible(bortle_data[classify_bortle(np.mean(ziro_sqm))]['limiting_mag'])
+delhi_stars = estimate_stars_visible(bortle_data[classify_bortle(np.mean(delhi_sqm))]['limiting_mag'])
+
+print(f"\\nZiro Valley vs Delhi:")
+print(f"  Ziro: ~{ziro_stars:,} stars visible (Bortle {classify_bortle(np.mean(ziro_sqm))})")
+print(f"  Delhi: ~{delhi_stars:,} stars visible (Bortle {classify_bortle(np.mean(delhi_sqm))})")
+print(f"  Ziro shows {ziro_stars/max(1,delhi_stars):.0f}x more stars than Delhi!")`,
       challenge: 'Build an interactive Bortle classifier: given a set of yes/no observational questions (Can you see the Milky Way? Is it structured? Can you see zodiacal light?), determine the Bortle class without an SQM. This is how amateur astronomers classify sites in the field.',
       successHint: 'The Bortle scale transforms subjective impressions ("nice sky" vs "amazing sky") into reproducible science. Documenting Ziro Valley as a Bortle 2 site creates a scientific record that can drive dark sky conservation policy.',
     },
@@ -339,8 +451,48 @@ def aperture_photometry(image, cx, cy, r_aperture=10, r_inner=15, r_outer=25):
     net_flux = star_sum - n_star_pixels * sky_per_pixel
 
     # SNR estimation
+    signal = net_flux
+    noise = np.sqrt(np.abs(net_flux) + n_star_pixels * (sky_per_pixel + 10 + 5**2))
+    snr = signal / noise if noise > 0 else 0
 
-print("\n[Full visualization in playground]")`,
+    return net_flux, sky_per_pixel, snr, n_star_pixels
+
+# --- Run photometry under different sky conditions ---
+sky_levels = [
+    ('Ziro Valley (Bortle 2)', 50),
+    ('Rural site (Bortle 4)', 200),
+    ('Suburban (Bortle 6)', 1000),
+    ('City center (Bortle 8)', 5000),
+]
+
+star_fluxes = [1000, 5000, 10000, 50000]
+
+print("=== CCD PHOTOMETRY SIMULATION ===")
+print(f"\\nStar image: 100x100 pixels, FWHM=3.0 pixels")
+print(f"Aperture radius=10px, sky annulus 15-25px")
+print(f"\\n--- SNR vs Sky Brightness ---")
+print(f"\\n{'Sky condition':<28} {'Sky bg':>7} {'Star=1k':>9} {'Star=5k':>9} {'Star=10k':>9} {'Star=50k':>9}")
+print("-" * 75)
+
+for sky_name, sky_bg in sky_levels:
+    snr_row = []
+    for sflux in star_fluxes:
+        img, _, _ = generate_star_image(star_flux=sflux, sky_brightness=sky_bg)
+        flux, sky_per_px, snr, n_pix = aperture_photometry(img, 50, 50)
+        snr_row.append(snr)
+    print(f"{sky_name:<28} {sky_bg:>7} {snr_row[0]:>9.1f} {snr_row[1]:>9.1f} {snr_row[2]:>9.1f} {snr_row[3]:>9.1f}")
+
+# Show a detailed example
+print(f"\\n--- Detailed Example: 10,000-photon star ---")
+for sky_name, sky_bg in sky_levels:
+    img, _, _ = generate_star_image(star_flux=10000, sky_brightness=sky_bg)
+    flux, sky_per_px, snr, n_pix = aperture_photometry(img, 50, 50)
+    mag_err = 1.0857 / snr if snr > 0 else float('inf')
+    print(f"  {sky_name:<28}: SNR={snr:>6.1f}, mag uncertainty=+/-{mag_err:.3f}")
+
+print(f"\\nKey insight: sky background is the dominant noise source for faint stars.")
+print(f"A dark site like Ziro (Bortle 2) gives 2-3x better SNR than a suburb,")
+print(f"enabling detection of stars that are invisible from light-polluted sites.")`,
       challenge: 'Implement differential photometry: add a second "comparison star" to the image and measure the brightness ratio between target and comparison. Show that atmospheric variations (simulate by multiplying the whole image by a random factor each frame) cancel out in the ratio.',
       successHint: 'Photometry is the workhorse of observational astronomy. Exoplanet discoveries, supernova classifications, and asteroid surveys all depend on measuring brightness precisely. A dark sky like Ziro Valley gives every observation a head start in SNR.',
     },
@@ -357,6 +509,7 @@ The **Hertzsprung-Russell (HR) diagram** plots luminosity (or absolute magnitude
       checkAnswer: 'Since luminosity L = 4*pi*R^2*sigma*T^4 and both have the same L: R_Y/R_X = (T_X/T_Y)^2 = (30000/3800)^2 = 62.3. Star Y (the M star) has a radius 62 times larger than star X. This is why cool luminous stars are called "giants" — the only way to be luminous at low temperature is to have an enormous surface area.',
       codeIntro: 'Build a Hertzsprung-Russell diagram from stellar data, color-code by spectral type, and trace the main sequence, giant branch, and white dwarf region.',
       code: `import numpy as np
+import matplotlib.pyplot as plt
 
 np.random.seed(42)
 
@@ -408,7 +561,104 @@ famous_stars = [
     ('Vega', 9602, 0.58, '#ffffff'),
 ]
 
-print("\n[Full visualization in playground]")`,
+# --- HR Diagram Visualization ---
+fig, ax = plt.subplots(1, 1, figsize=(12, 8))
+fig.patch.set_facecolor('#0a0a1a')
+ax.set_facecolor('#0a0a1a')
+ax.tick_params(colors='gray')
+
+# Plot main sequence by spectral type color
+type_colors = {'O': '#9bb0ff', 'B': '#aabfff', 'A': '#cad7ff',
+               'F': '#f8f7ff', 'G': '#fff4ea', 'K': '#ffd2a1', 'M': '#ffcc6f'}
+for i, (temp, mag, label) in enumerate(zip(ms_temps, ms_mags, ms_labels)):
+    ax.scatter(temp, mag, s=15, c=type_colors.get(label, '#ffffff'), alpha=0.6, edgecolors='none')
+
+# Red giants
+ax.scatter(giant_temps, giant_mags, s=40, c='#ff6600', alpha=0.5,
+           edgecolors='none', label='Red giants')
+
+# White dwarfs
+ax.scatter(wd_temps, wd_mags, s=10, c='#ccccff', alpha=0.6,
+           edgecolors='none', label='White dwarfs')
+
+# Famous stars
+for name, temp, mag, color in famous_stars:
+    ax.scatter(temp, mag, s=120, c=color, edgecolors='white', linewidths=1, zorder=10)
+    offset = 0.5 if mag > 0 else -0.5
+    ax.text(temp * 1.05, mag + offset, name, color='white', fontsize=8, fontweight='bold')
+
+# Region labels
+ax.text(25000, -7, 'SUPERGIANTS', color='#ff8888', fontsize=10, fontweight='bold', alpha=0.5)
+ax.text(3200, -2, 'RED\\nGIANTS', color='#ff6600', fontsize=9, fontweight='bold', alpha=0.5)
+ax.text(15000, 11, 'WHITE\\nDWARFS', color='#ccccff', fontsize=9, fontweight='bold', alpha=0.5)
+ax.text(6000, 6, 'MAIN\\nSEQUENCE', color='#ffff88', fontsize=9, fontweight='bold', alpha=0.3, rotation=-30)
+
+# Spectral type labels at top
+for stype, data in spectral_types.items():
+    mid_temp = sum(data['temp_range']) / 2
+    ax.text(mid_temp, -8.5, stype, color=type_colors[stype], fontsize=10,
+            fontweight='bold', ha='center')
+
+ax.set_xscale('log')
+ax.invert_xaxis()
+ax.invert_yaxis()
+ax.set_xlabel('Temperature (K) — hot to cool -->', color='white', fontsize=11)
+ax.set_ylabel('Absolute Magnitude (brighter -->)', color='white', fontsize=11)
+ax.set_title('Hertzsprung-Russell Diagram — Stars Above Ziro Valley',
+             color='white', fontsize=14, fontweight='bold')
+ax.legend(fontsize=8, facecolor='#1a1a2e', edgecolor='gray', labelcolor='white', loc='lower left')
+ax.set_xlim(50000, 2500)
+ax.set_ylim(16, -9)
+
+plt.tight_layout()
+plt.show()
+
+print("=== HERTZSPRUNG-RUSSELL DIAGRAM DATA ===")
+print(f"\\nGenerated {len(ms_temps)} main sequence + {len(giant_temps)} red giants + {len(wd_temps)} white dwarfs")
+
+print(f"\\n--- Main Sequence by Spectral Type ---")
+print(f"{'Type':>5} {'Temp range (K)':>16} {'Abs mag range':>14} {'Count':>6} {'Example':>12}")
+print("-" * 58)
+for stype, data in spectral_types.items():
+    mask = [l == stype for l in ms_labels]
+    count = sum(mask)
+    t_lo, t_hi = data['temp_range']
+    m_lo, m_hi = data['abs_mag_range']
+    print(f"{stype:>5} {t_lo:>7,}-{t_hi:>6,} {m_lo:>6.1f} to {m_hi:>5.1f} {count:>6}", end="")
+    if stype == 'G':
+        print("  (Sun = G2V)")
+    elif stype == 'M':
+        print("  (most common)")
+    elif stype == 'O':
+        print("  (rarest, hottest)")
+    else:
+        print()
+
+print(f"\\n--- Famous Stars on the HR Diagram ---")
+print(f"{'Star':<15} {'Temp (K)':>9} {'Abs mag':>8} {'Category':<20}")
+print("-" * 55)
+for name, temp, mag, color in famous_stars:
+    if mag < -3:
+        cat = "Supergiant"
+    elif mag < 2:
+        cat = "Giant / bright MS"
+    elif mag < 7:
+        cat = "Main sequence"
+    else:
+        cat = "White dwarf"
+    print(f"{name:<15} {temp:>9,} {mag:>8.2f} {cat:<20}")
+
+print(f"\\n--- HR Diagram Regions ---")
+print(f"  Main sequence: {len(ms_temps)} stars (diagonal band, H-fusing)")
+print(f"  Red giants:    {len(giant_temps)} stars (cool but luminous, expanded envelopes)")
+print(f"  White dwarfs:  {len(wd_temps)} stars (hot but dim, Earth-sized remnants)")
+
+print(f"\\nRadius comparison at same luminosity (abs mag = -5.5):")
+temp_hot = 30000
+temp_cool = 3500
+ratio = (temp_hot / temp_cool) ** 2
+print(f"  B-type star ({temp_hot}K) vs M-supergiant ({temp_cool}K): R_cool/R_hot = {ratio:.0f}x")
+print(f"  Betelgeuse is ~{ratio:.0f}x the radius of a hot star at the same luminosity!")`,
       challenge: 'Add stellar evolution tracks to the HR diagram: show how a Sun-like star moves from the main sequence to the red giant branch to the white dwarf region. Plot the track as a colored path with arrows showing the direction of evolution.',
       successHint: 'The HR diagram is to astronomy what the periodic table is to chemistry — a single visualization that organizes an entire field. Every star you see from Ziro Valley has a place on this diagram, and that place tells you its mass, temperature, size, age, and fate.',
     },

@@ -108,7 +108,7 @@ for i, (load, col) in enumerate(zip(loads, colors)):
     # Water shading
     ax4.fill([-1, 1, 1, -1], [hull_bottom, hull_bottom, y_offset, y_offset],
              color='#3b82f6', alpha=0.1)
-    ax4.text(0.8, y_offset + 0.1, f'{load} kg\ndraft={d*100:.1f}cm',
+    ax4.text(0.8, y_offset + 0.1, f'{load} kg\\ndraft={d*100:.1f}cm',
              color=col, fontsize=8, fontweight='bold')
 ax4.set_xlim(-1.2, 1.8)
 ax4.set_title('Hull cross-sections at different loads', color='white', fontsize=11)

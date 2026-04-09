@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { supabase } from '../lib/supabase';
 
-const INSTITUTION_TYPES = ['School (K-12)', 'College / University', 'NGO / Non-Profit', 'Government Body', 'Corporate / CSR', 'Other'] as const;
+const INSTITUTION_TYPES = ['School (K-12)', 'College / University', 'Employer / Hiring Partner', 'NGO / Non-Profit', 'Government Body', 'Corporate / CSR', 'Other'] as const;
 
 function PartnerForm() {
   const [form, setForm] = useState({
@@ -128,10 +128,18 @@ export default function PartnerPage() {
         <div className="max-w-5xl mx-auto text-center">
           <p className="text-amber-400 font-semibold text-sm uppercase tracking-wide mb-3">Partnerships</p>
           <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">Bring STEM Storytelling to Your Institution</h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
             130+ lessons connecting folklore and mythology to real science, engineering, and code.
             Designed for classrooms, labs, and self-paced learning.
           </p>
+          <div className="flex justify-center gap-3">
+            <span className="px-5 py-2.5 bg-white text-gray-900 rounded-full font-semibold text-sm">
+              Schools & Institutions
+            </span>
+            <Link href="/partner/employers" className="px-5 py-2.5 bg-gray-700 hover:bg-gray-600 text-gray-300 hover:text-white rounded-full font-medium text-sm transition-colors">
+              Employers & Hiring
+            </Link>
+          </div>
         </div>
       </section>
 

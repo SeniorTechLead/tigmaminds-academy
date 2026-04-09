@@ -14,18 +14,28 @@ export default function AuthPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState('');
-  const { user, signIn, signUp, signInWithGoogle } = useAuth();
+  const { user, profile, hasRole, signIn, signUp, signInWithGoogle } = useAuth();
   const [googleRedirecting, setGoogleRedirecting] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const returnTo = searchParams?.get('returnTo') || '/lessons';
+  const explicitReturnTo = searchParams?.get('returnTo');
 
-  // If user is already signed in (e.g., after Google OAuth redirect), go to returnTo
+  // If user is already signed in, route based on role or explicit returnTo
   useEffect(() => {
-    if (user) {
-      router.push(returnTo, { replace: true });
+    if (!user) return;
+    if (explicitReturnTo) {
+      router.push(explicitReturnTo, { replace: true });
+      return;
     }
-  }, [user, router, returnTo]);
+    // Role-based default routing (priority order)
+    if (hasRole('admin') || hasRole('teacher')) {
+      router.push('/program/mentor', { replace: true });
+    } else if (hasRole('parent')) {
+      router.push('/program/parent', { replace: true });
+    } else {
+      router.push('/lessons', { replace: true });
+    }
+  }, [user, profile, router, explicitReturnTo]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -51,8 +51,8 @@ forces = [
     (0, 0.65, 0, 1.2, '#22c55e', 'Lift'),      # up
     (0, 0.65, 0, -1.0, '#3b82f6', 'Weight'),    # down
     (0, 0.65, -0.8, 0, '#f59e0b', 'Drag'),      # backward
-    (0, 0.65, 0.6, -0.5, '#a855f7', 'String\ntension'), # string
-    (0, 0.65, 1.0, 0.3, '#06b6d4', 'Wind\nforce'),      # wind
+    (0, 0.65, 0.6, -0.5, '#a855f7', 'String\\ntension'), # string
+    (0, 0.65, 1.0, 0.3, '#06b6d4', 'Wind\\nforce'),      # wind
 ]
 for x, y, dx, dy, color, label in forces:
     ax1.annotate('', xy=(x+dx*0.8, y+dy*0.8), xytext=(x, y),
@@ -95,7 +95,7 @@ ax2.plot(string_angles, lift_to_drag, color='#f59e0b', linewidth=2.5, linestyle=
 # Mark optimal angle
 opt_idx = np.argmax(lift_to_drag)
 ax2.axvline(string_angles[opt_idx], color='gray', linestyle=':', alpha=0.3)
-ax2.text(string_angles[opt_idx]+1, lift_to_drag.max()*0.9, f'Best angle\n~{string_angles[opt_idx]:.0f}°',
+ax2.text(string_angles[opt_idx]+1, lift_to_drag.max()*0.9, f'Best angle\\n~{string_angles[opt_idx]:.0f}°',
          color='#f59e0b', fontsize=9)
 
 ax2.set_xlabel('String angle from horizontal (°)', color='white')
@@ -180,9 +180,9 @@ for xi in [2, 5, 8]:
                 arrowprops=dict(arrowstyle='->', color='#06b6d4', lw=1.5))
 
 # Pressure color
-ax.text(2, 1.7, 'High P\nSlow', color='#ef4444', fontsize=8, ha='center')
-ax.text(5, 0.8, 'Low P\nFast', color='#22c55e', fontsize=8, ha='center')
-ax.text(8, 1.7, 'High P\nSlow', color='#ef4444', fontsize=8, ha='center')
+ax.text(2, 1.7, 'High P\\nSlow', color='#ef4444', fontsize=8, ha='center')
+ax.text(5, 0.8, 'Low P\\nFast', color='#22c55e', fontsize=8, ha='center')
+ax.text(8, 1.7, 'High P\\nSlow', color='#ef4444', fontsize=8, ha='center')
 
 ax.set_xlim(0, 10); ax.set_ylim(-2, 2)
 ax.set_title('Bernoulli: Fast Flow = Low Pressure', color='white', fontsize=11)
@@ -218,7 +218,7 @@ Cd_aoa = 0.02 + 0.005 * aoa**2  # drag increases with AoA²
 ax.plot(aoa, Cl_aoa, color='#22c55e', linewidth=2.5, label='Lift coeff (Cₗ)')
 ax.plot(aoa, Cd_aoa, color='#ef4444', linewidth=2.5, label='Drag coeff (Cd)')
 ax.axvline(15, color='#f59e0b', linewidth=1.5, linestyle='--')
-ax.text(15.5, 1.0, 'STALL!\nLift collapses', color='#f59e0b', fontsize=9)
+ax.text(15.5, 1.0, 'STALL!\\nLift collapses', color='#f59e0b', fontsize=9)
 ax.axhline(0, color='gray', linewidth=0.5, alpha=0.3)
 
 ax.set_xlabel('Angle of attack (°)', color='white')
@@ -305,7 +305,7 @@ designs = {
 }
 
 categories = ['stability', 'maneuver', 'light_wind', 'strong_wind', 'ease']
-cat_labels = ['Stability', 'Maneuver-\nability', 'Light\nwind', 'Strong\nwind', 'Ease of\nuse']
+cat_labels = ['Stability', 'Maneuver-\\nability', 'Light\\nwind', 'Strong\\nwind', 'Ease of\\nuse']
 N = len(categories)
 angles = np.linspace(0, 2*np.pi, N, endpoint=False).tolist()
 angles += angles[:1]
@@ -484,7 +484,7 @@ for i, (code, name, color) in enumerate(airfoils):
             color=color, alpha=0.3)
     ax.plot(np.concatenate([xu, xl[::-1]]), np.concatenate([yu, yl[::-1]]) + offset,
             color=color, linewidth=1.5)
-    ax.text(-0.15, offset, f'NACA {code}\n{name}', color=color, fontsize=8, va='center')
+    ax.text(-0.15, offset, f'NACA {code}\\n{name}', color=color, fontsize=8, va='center')
 
 ax.set_xlim(-0.25, 1.1); ax.set_aspect('equal')
 ax.set_title('NACA Airfoil Shapes', color='white', fontsize=11)
@@ -516,10 +516,10 @@ ax.tick_params(colors='gray')
 # --- Bird wing comparison ---
 ax = axes[1, 0]; ax.set_facecolor('#111827')
 birds = {
-    'Eagle\n(soaring)': {'span': 2.0, 'area': 0.6, 'AR': 6.7, 'speed': 15, 'color': '#f59e0b'},
-    'Sparrow\n(flapping)': {'span': 0.22, 'area': 0.01, 'AR': 4.8, 'speed': 10, 'color': '#22c55e'},
-    'Albatross\n(gliding)': {'span': 3.4, 'area': 0.6, 'AR': 19.3, 'speed': 20, 'color': '#3b82f6'},
-    'Hummingbird\n(hovering)': {'span': 0.1, 'area': 0.002, 'AR': 5.0, 'speed': 0, 'color': '#ef4444'},
+    'Eagle\\n(soaring)': {'span': 2.0, 'area': 0.6, 'AR': 6.7, 'speed': 15, 'color': '#f59e0b'},
+    'Sparrow\\n(flapping)': {'span': 0.22, 'area': 0.01, 'AR': 4.8, 'speed': 10, 'color': '#22c55e'},
+    'Albatross\\n(gliding)': {'span': 3.4, 'area': 0.6, 'AR': 19.3, 'speed': 20, 'color': '#3b82f6'},
+    'Hummingbird\\n(hovering)': {'span': 0.1, 'area': 0.002, 'AR': 5.0, 'speed': 0, 'color': '#ef4444'},
 }
 names = list(birds.keys())
 ARs = [birds[n]['AR'] for n in names]
@@ -625,9 +625,9 @@ ax.plot(aoa, Cd, color='#ef4444', linewidth=2.5, label='Drag (Cd)')
 
 # Stall region
 ax.axvspan(14, 25, alpha=0.1, color='#ef4444')
-ax.text(18, 1.2, 'STALL\nREGION', color='#ef4444', fontsize=11, fontweight='bold', ha='center')
+ax.text(18, 1.2, 'STALL\\nREGION', color='#ef4444', fontsize=11, fontweight='bold', ha='center')
 ax.axvline(14, color='#f59e0b', linewidth=2, linestyle='--')
-ax.text(14.5, 0.5, 'Critical AoA\n(~14°)', color='#f59e0b', fontsize=9)
+ax.text(14.5, 0.5, 'Critical AoA\\n(~14°)', color='#f59e0b', fontsize=9)
 
 ax.set_xlabel('Angle of attack (°)', color='white')
 ax.set_ylabel('Coefficient', color='white')
@@ -659,7 +659,7 @@ for i, (angle, flow_type, y_off) in enumerate([(5, 'Attached', 1.5), (12, 'Parti
             y_stream = y_off + y_s + 0.2*np.sin(np.pi*x_s) + turbulence
         ax.plot(x_s, y_stream, color='#06b6d4', linewidth=0.5, alpha=0.5)
 
-    ax.text(-0.6, y_off, f'{angle}°\n{flow_type}', color='white', fontsize=8, va='center')
+    ax.text(-0.6, y_off, f'{angle}°\\n{flow_type}', color='white', fontsize=8, va='center')
 
 ax.set_xlim(-0.8, 1.5); ax.set_ylim(-2.5, 2.5)
 ax.set_title('Airflow at Different Angles', color='white', fontsize=11)

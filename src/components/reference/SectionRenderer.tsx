@@ -16,6 +16,7 @@ import LogicGateSimulator from '../interactive/LogicGateSimulator';
 import SqlPlayground from '../SqlPlayground';
 import TsPlayground from '../TsPlayground';
 import HtmlPlayground from '../HtmlPlayground';
+import PythonPlayground from '../PythonPlayground';
 import { useAuth } from '../../contexts/AuthContext';
 import SignUpGate from '../SignUpGate';
 
@@ -187,6 +188,8 @@ function renderInteractive(config: NonNullable<ReferenceSection['interactive']>)
       return <TsPlayground starterCode={config.props.starterCode as string} title={config.props.title as string | undefined} />;
     case 'html-playground':
       return <HtmlPlayground starterCode={config.props.starterCode as string} title={config.props.title as string | undefined} />;
+    case 'python-playground':
+      return <PythonPlayground starterCode={config.props.starterCode as string} title={config.props.title as string | undefined} />;
     default:
       return null;
   }

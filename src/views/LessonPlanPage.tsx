@@ -50,12 +50,13 @@ function savePlanLocal(plan: PlanMap) {
 
 async function savePlanDB(userId: string, plan: PlanMap) {
   try {
-    await supabase.from('user_plans').upsert({
+    const { error } = await supabase.from('user_plans').upsert({
       user_id: userId,
       lesson_entries: [...plan.entries()].map(([slug, { id, addedAt }]) => ({ id, slug, addedAt })),
       updated_at: new Date().toISOString(),
     }, { onConflict: 'user_id' });
-  } catch {}
+    if (error) console.warn('[Plan] Save failed:', error.message);
+  } catch (err) { console.warn('[Plan] Save error:', err); }
 }
 
 /* ── Per-level progress dots ── */
@@ -88,24 +89,26 @@ function saveStreakLocal(data: StreakData) {
 
 async function loadStreakDB(userId: string): Promise<StreakData | null> {
   try {
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from('user_plans')
       .select('streak_data')
       .eq('user_id', userId)
       .maybeSingle();
+    if (error) console.warn('[Streak] Load failed:', error.message);
     if (data?.streak_data) return data.streak_data as StreakData;
-  } catch {}
+  } catch (err) { console.warn('[Streak] Load error:', err); }
   return null;
 }
 
 async function saveStreakDB(userId: string, streak: StreakData) {
   try {
-    await supabase.from('user_plans').upsert({
+    const { error } = await supabase.from('user_plans').upsert({
       user_id: userId,
       streak_data: streak,
       updated_at: new Date().toISOString(),
     }, { onConflict: 'user_id' });
-  } catch {}
+    if (error) console.warn('[Streak] Save failed:', error.message);
+  } catch (err) { console.warn('[Streak] Save error:', err); }
 }
 
 function mergeStreaks(a: StreakData, b: StreakData): StreakData {
@@ -216,6 +219,7 @@ const LEARNING_GOALS = [
     color: 'from-blue-400 to-indigo-500',
     slugs: ['girl-who-spoke-to-elephants', 'orange-sunsets-assam', 'firefly-festival-of-majuli', 'why-the-muga-silk-is-golden', 'old-banyan-trees-stories'],
     skills: ['Python', 'Variables', 'Loops', 'Functions'],
+    prerequisite: { name: 'Python Basics', href: '/learn/python-basics', desc: 'Complete this 2-hour course first if you have never coded before' },
   },
   {
     id: 'data-science',
@@ -225,6 +229,7 @@ const LEARNING_GOALS = [
     color: 'from-emerald-400 to-teal-500',
     slugs: ['fishermans-daughter-storm', 'snow-leopards-promise', 'monsoon-home', 'dragonfly-and-the-paddy-field', 'map-makers-granddaughter'],
     skills: ['NumPy', 'Matplotlib', 'Data Analysis', 'Statistics'],
+    prerequisite: { name: 'Python Basics', href: '/learn/python-basics', desc: 'Covers variables through numpy — everything you need for data science stories' },
   },
   {
     id: 'biology-ecology',
@@ -252,6 +257,7 @@ const LEARNING_GOALS = [
     color: 'from-rose-400 to-pink-500',
     slugs: ['firefly-festival-of-majuli', 'river-dolphins-secret', 'music-dimasa', 'tigers-whisker', 'singing-bamboo'],
     skills: ['Arduino', 'Circuits', 'Sensors'],
+    prerequisite: { name: 'Arduino Basics', href: '/learn/arduino-basics', desc: 'Learn setup/loop, LEDs, input, and Serial — everything you need for electronics stories' },
   },
   {
     id: 'mythology-stem',
@@ -644,6 +650,17 @@ export default function LessonPlanPage() {
                             </button>
                             {isExpanded && (
                               <div className="border-t border-gray-100 dark:border-gray-700 px-5 pb-5">
+                                {'prerequisite' in goal && (goal as any).prerequisite && (
+                                  <Link href={(goal as any).prerequisite.href}
+                                    className="flex items-center gap-3 mt-3 mb-2 p-3 rounded-xl bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 hover:border-amber-400 dark:hover:border-amber-600 transition-colors">
+                                    <span className="text-amber-500 text-lg">📚</span>
+                                    <div className="flex-1">
+                                      <p className="text-sm font-semibold text-amber-700 dark:text-amber-300">Start with: {(goal as any).prerequisite.name}</p>
+                                      <p className="text-xs text-gray-500 dark:text-gray-400">{(goal as any).prerequisite.desc}</p>
+                                    </div>
+                                    <ArrowRight className="w-4 h-4 text-amber-500 flex-shrink-0" />
+                                  </Link>
+                                )}
                                 <div className="flex items-center justify-between py-3">
                                   <span className="text-xs text-gray-500 dark:text-gray-400">{goalLessons.length} stories</span>
                                   <button onClick={() => addGoal(goal.slugs)} className="text-xs font-semibold text-amber-600 dark:text-amber-400 hover:underline">Add all to plan</button>
@@ -719,6 +736,17 @@ export default function LessonPlanPage() {
                         {/* Expanded: show individual stories */}
                         {isExpanded && (
                           <div className="border-t border-gray-100 dark:border-gray-700 px-5 pb-5">
+                            {'prerequisite' in goal && (goal as any).prerequisite && (
+                              <Link href={(goal as any).prerequisite.href}
+                                className="flex items-center gap-3 mt-3 mb-2 p-3 rounded-xl bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 hover:border-amber-400 dark:hover:border-amber-600 transition-colors">
+                                <span className="text-amber-500 text-lg">📚</span>
+                                <div className="flex-1">
+                                  <p className="text-sm font-semibold text-amber-700 dark:text-amber-300">Start with: {(goal as any).prerequisite.name}</p>
+                                  <p className="text-xs text-gray-500 dark:text-gray-400">{(goal as any).prerequisite.desc}</p>
+                                </div>
+                                <ArrowRight className="w-4 h-4 text-amber-500 flex-shrink-0" />
+                              </Link>
+                            )}
                             <div className="flex items-center justify-between py-3">
                               <span className="text-xs text-gray-500 dark:text-gray-400">{goalLessons.length} stories &middot; ~{goalLessons.length * 12} hours</span>
                               <button

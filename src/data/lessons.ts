@@ -2061,7 +2061,7 @@ Because the earth carries every voice — if you are patient enough to listen.
     skillTags: [{ discipline: 'AI & Machine Learning', skill: 'Machine Learning', tools: ['scikit-learn', 'NumPy'], application: 'Acoustic analysis' }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
     learningTracks: ['AI & Data' as Track],
     estimatedHours: 12,
-    playground: 'elephant',
+    playground: 'girl-who-spoke-to-elephants',
     level0: {
       concepts: [
         {
@@ -2257,7 +2257,7 @@ Every monsoon, when the power goes out on Majuli, the fireflies still come. The 
     skillTags: [{ discipline: 'Electronics & Hardware', skill: 'Arduino', tools: ['Digital I/O'], application: 'Bioluminescence' }, { discipline: 'Electronics & Hardware', skill: 'Circuit Design', tools: ['Breadboard prototyping'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
     learningTracks: ['Robotics & Electronics' as Track],
     estimatedHours: 12,
-    playground: 'firefly' as const,
+    playground: 'firefly-festival-of-majuli' as const,
     lesson: {
       objectives: [
         'Explain how bioluminescence works at a chemical level (luciferin + luciferase + oxygen)',
@@ -2481,7 +2481,7 @@ The river dolphin had taught him her secret: the world speaks to those who close
     skillTags: [{ discipline: 'Electronics & Hardware', skill: 'Arduino', tools: ['Analog I/O'], application: 'Sonar detection' }, { discipline: 'Electronics & Hardware', skill: 'Sensors', tools: ['Ultrasonic'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
     learningTracks: ['Robotics & Electronics' as Track],
     estimatedHours: 12,
-    playground: 'dolphin' as const,
+    playground: 'river-dolphins-secret' as const,
     level0: {
       concepts: [
         {
@@ -2684,7 +2684,7 @@ His mother smiled. "You didn't build it from nothing, Dipankar. You built it fro
     skillTags: [{ discipline: 'Programming', skill: 'Databases', tools: ['SQL', 'Data modeling'] }, { discipline: 'Programming', skill: 'Web Development', tools: ['HTML/CSS', 'JavaScript', 'TypeScript'] }],
     learningTracks: ['Web Development' as Track],
     estimatedHours: 12,
-    playground: 'library' as const,
+    playground: 'boy-who-built-a-library' as const,
         level0: {
       concepts: [
         {
@@ -2890,7 +2890,7 @@ And if her wings catch the light just right, and you see that flash of impossibl
     skillTags: [{ discipline: 'AI & Machine Learning', skill: 'Computer Vision', tools: ['OpenCV', 'NumPy'], application: 'Crop monitoring' }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
     learningTracks: ['AI & Data' as Track],
     estimatedHours: 12,
-    playground: 'dragonfly' as const,
+    playground: 'dragonfly-and-the-paddy-field' as const,
     level0: {
       concepts: [
         {
@@ -3071,7 +3071,7 @@ To this day, **muga silk** is found only in Assam — the only golden silk in th
     skillTags: [{ discipline: 'Scientific Modeling', skill: 'Chemical simulation', tools: ['Materials science'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
     learningTracks: ['Science & Lab' as Track],
     estimatedHours: 12,
-    playground: 'muga' as const,
+    playground: 'why-the-muga-silk-is-golden' as const,
     lesson: {
       objectives: [
         'Describe the biology of silk production — from silkworm diet to protein extrusion',
@@ -3331,7 +3331,7 @@ Tejimola's story tells us that kindness cannot be killed. You can bury it. You c
     skillTags: [{ discipline: 'Scientific Modeling', skill: 'Biological simulation', tools: ['Genetics & evolution'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
     learningTracks: ['Science & Lab' as Track],
     estimatedHours: 12,
-    playground: 'tejimola' as const,
+    playground: 'tejimola-the-girl-who-became-a-plant' as const,
     level0: {
       concepts: [
         {
@@ -3544,7 +3544,7 @@ The spring still flows. If you climb Nilachal Hill past the Kamakhya temple and 
     skillTags: [{ discipline: 'Scientific Modeling', skill: 'Physics simulation', tools: ['Optics & light'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
     learningTracks: ['Science & Lab' as Track],
     estimatedHours: 12,
-    playground: 'golden-deer' as const,
+    playground: 'golden-deer-of-kamakhya' as const,
     level0: {
       concepts: [
         {
@@ -3721,7 +3721,7 @@ The clouds, of course, don't answer. But Dawan is certain they appreciate being 
     skillTags: [{ discipline: 'Scientific Modeling', skill: 'Physics simulation', tools: ['Mechanics'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
     learningTracks: ['Science & Lab' as Track],
     estimatedHours: 12,
-    playground: 'clouds' as const,
+    playground: 'boy-who-talked-to-clouds' as const,
     level0: {
       concepts: [
         {
@@ -3907,7 +3907,7 @@ Majuli is not just an island. It is a reminder that everything borrowed is worth
     skillTags: [{ discipline: 'Scientific Modeling', skill: 'Earth science simulation', tools: ['Geological processes'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
     learningTracks: ['Science & Lab' as Track],
     estimatedHours: 12,
-    playground: 'majuli' as const,
+    playground: 'how-majuli-island-was-born' as const,
     level0: {
       concepts: [
         {
@@ -4098,7 +4098,7 @@ Vini held a bamboo tube of black rice to her ear, as if listening for the story 
     skillTags: [{ discipline: 'Scientific Modeling', skill: 'Physics simulation', tools: ['Acoustics & sound'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
     learningTracks: ['Science & Lab' as Track],
     estimatedHours: 12,
-    playground: 'bamboo-flute' as const,
+    playground: 'bamboo-flute-of-nagaland' as const,
     level0: {
       concepts: [
         {
@@ -4297,7 +4297,7 @@ Tomba grew up to become a healer himself — one who always asked before he pick
     skillTags: [{ discipline: 'Data Science', skill: 'Data Analysis', tools: ['Pandas', 'NumPy', 'Statistics'], application: 'Population trends' }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
     learningTracks: ['Science & Lab' as Track],
     estimatedHours: 12,
-    playground: 'dancing-deer' as const,
+    playground: 'dancing-deer-of-loktak-lake' as const,
     level0: {
       concepts: [
         {
@@ -4496,7 +4496,7 @@ Ka Thaïng's grandchildren walked to school dry-footed. Five hundred years later
     skillTags: [{ discipline: 'Scientific Modeling', skill: 'Biological simulation', tools: ['Population dynamics'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
     learningTracks: ['Science & Lab' as Track],
     estimatedHours: 12,
-    playground: 'bridge' as const,
+    playground: 'bridge-that-grew' as const,
     level0: {
       concepts: [
         {
@@ -11551,294 +11551,6 @@ plt.show()  # How many days until the grass recovers?`,
     },
   },
   {
-    id: 61,
-    slug: 'banyan-tree',
-    tradition: 'Northeast India',
-    story: { title: 'The Old Banyan Tree\'s Stories', tagline: 'A tree that lives for centuries — the biology of longevity.', content: `
-**The Oldest Resident**
-
-In a village near **Sivasagar**, Assam, there stands a **banyan tree** so old and so large that its aerial roots have become trunks, and its trunks have become a small forest. The villagers say it was planted two hundred years ago, though nobody remembers by whom.
-
-The tree has a name. The villagers call it **Borua Bor Gos** — the Great Old Tree. It covers an area as large as a school playground, and its shade is so deep and cool that even in the burning heat of April, the ground beneath it stays damp.
-
-A girl named **Dimpi** liked to sit in the crook of Borua Bor Gos's lowest branch, her feet dangling, her notebook open on her knees. She was twelve and wanted to be a writer, but she never knew what to write about.
-
-"I wish I had stories," she said aloud one evening.
-
-And the tree answered.
-
-**The Tree Speaks**
-
-The voice was deep and slow, like the creaking of ancient wood. It came from everywhere and nowhere — from the roots, the bark, the leaves.
-
-*"You want stories? I have two hundred years of them."*
-
-Dimpi nearly fell off the branch. "You can talk?"
-
-*"I've always been able to talk. But only children who sit still long enough can hear me. Adults are too busy."*
-
-Dimpi gripped the branch and leaned in. "Tell me a story."
-
-*"Which one? I have seen the **Ahom kings** ride past on elephants. I have seen the **Brahmaputra** flood so high that fish swam through my branches. I have watched British soldiers march down the road and freedom fighters march after them. I have sheltered a hundred monsoons, a thousand weddings, and more arguments between neighbours than I care to count."*
-
-**The Flood Story**
-
-*"In 1950,"* said the tree, *"the great earthquake came. The ground shook so hard that my roots hummed like a tuning fork. Then the river rose — not slowly, the way it does in monsoon, but all at once, a wall of brown water that swallowed the fields in minutes."*
-
-*"The villagers climbed into my branches. Forty-three people — men, women, children, even two goats and a cat. They stayed in my arms for three days while the water swirled below. I held them. I didn't let a single branch break, though some were so heavy with people that they bent to the water."*
-
-*"On the third day, the water receded. The people climbed down, and every one of them touched my trunk and said thank you. That was the proudest day of my two hundred years."*
-
-Dimpi was writing furiously. "What else?"
-
-**The Wedding Story**
-
-*"In 1985, a young couple from the village wanted to marry, but the girl's family said the boy was too poor. They came to me at midnight and held their wedding under my branches with only the stars and the fireflies as witnesses. The boy tied a thread around my trunk as a promise. The thread is still there — look, that ridge in my bark, that's where the thread grew into me."*
-
-Dimpi ran her fingers over the ridge. It was smooth and old and real.
-
-*"They've been married forty-one years now. They still come and sit under me on their anniversary. He brings her tea. She brings him paan. They don't say much. They don't need to."*
-
-**The Children's Story**
-
-*"But my favourite stories,"* said the tree, *"are about the children. I have watched five generations of children grow up under my shade. They climb my branches and think they've conquered the world. They hide behind my trunks during games of hide-and-seek. They carve their names into my bark — which hurts, by the way — and come back twenty years later to show their own children."*
-
-*"Right now, there's a girl named Dimpi sitting on my branch, writing stories. In twenty years, she'll bring her daughter here and say, 'This is where I became a writer.' And I'll still be here, waiting, with another two hundred years of stories to tell."*
-
-Dimpi closed her notebook. Her eyes were shining. "Thank you," she whispered.
-
-*"Don't thank me,"* said the tree. *"Just write it down. That's what stories are for — so the things that happened don't disappear when the ones who remember them are gone."*
-
-Dimpi climbed down from the branch, walked home in the golden evening light, and began to write. She wrote all night. And when she finally slept, she dreamed of a tree that held forty-three people in a flood and never let go.
-
-*The end.*` },
-    stem: {
-      title: 'Tree Biology & Longevity',
-      description: 'A tree that lives for centuries — the biology of longevity.',
-      icon: TreePine,
-      color: 'from-green-500 to-emerald-600',
-      skills: ['Understand aerial root systems and how banyan trees expand horizontally', 'Analyze carbon sequestration rates for large individual trees', 'Model how a single tree creates a micro-ecosystem supporting hundreds of species', 'Calculate canopy area and its effect on local temperature and humidity'],
-      project: {
-        title: 'Measure a Tree\'s Ecosystem Services',
-        description: 'Quantify how much carbon a large tree stores, how much shade it provides, and how many species depend on it.',
-        steps: [
-          'Measure or estimate a large local tree\'s trunk diameter, height, and canopy spread',
-          'Calculate its biomass and carbon content using allometric equations',
-          'Measure the temperature difference between under-canopy and open sun at the same time',
-          'Count the number of visible species living in or on the tree (birds, insects, epiphytes, fungi)',
-          'Calculate the tree\'s annual carbon sequestration and the monetary value of its ecosystem services',
-        ],
-      },
-      realWorld: [
-        'Urban foresters measure canopy cover to quantify cooling benefits and reduce urban heat islands',
-        'Ecologists study keystone trees like banyans that support entire food webs',
-        'Architects design buildings with living root bridges and green canopies inspired by banyan structure',
-      ],
-    },
-    illustration: '/content/illustrations/old-banyan-tree.webp',
-    track: 'school',
-    subjects: ['Biology', 'Botany', 'Environmental Science'] as Subject[],
-    toolSkills: ['Python' as Skill, 'Scientific Modeling' as Skill],
-    skillTags: [{ discipline: 'Scientific Modeling', skill: 'Biological simulation', tools: ['Plant growth'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
-    learningTracks: ['Science & Lab' as Track],
-    estimatedHours: 12,
-    playground: 'banyan-tree' as const,
-    level0: {
-      vocabulary: [
-        ['Photosynthesis', 'The process plants use to convert sunlight, water, and CO₂ into sugar and oxygen'],
-        ['Chlorophyll', 'The green pigment in plants that absorbs sunlight for photosynthesis'],
-        ['Vegetative propagation', 'Growing a new plant from a fragment of the parent — without seeds'],
-        ['Totipotent', 'A cell that can develop into any cell type — plant cells have this superpower'],
-        ['Cell wall', 'A rigid outer layer made of cellulose that gives plant cells their shape and strength'],
-      ],
-      trueFalse: [
-        { statement: 'Plants eat soil to get their food.', isTrue: false, explanation: 'Plants make their own food through photosynthesis using sunlight, water, and CO₂ from air. The soil provides minerals and water, but the actual "food" (sugar) is manufactured inside the leaves using solar energy.' },
-        { statement: 'A single plant cell can grow into an entire new plant.', isTrue: true, explanation: 'Unlike most animal cells, many plant cells are totipotent — they retain the ability to become any cell type. This is why you can grow a new plant from a cutting — the cut stem cells reorganize into roots, stems, and leaves.' },
-        { statement: 'All plants reproduce using seeds.', isTrue: false, explanation: 'Many plants can also reproduce vegetatively — through cuttings, runners, tubers, or bulbs. Every banana plant in your grocery store is a clone, grown from a cutting rather than a seed.' },
-      ],
-      facts: [
-        'Photosynthesis produces all the oxygen we breathe. Every other breath you take comes from algae and plants splitting water molecules apart.',
-        'The world\'s largest organism is a clonal colony of aspen trees in Utah called "Pando" — 47,000 tree stems all connected by a single root system, weighing 6,600 tonnes.',
-        'Tulsi (holy basil) contains eugenol, a natural antiseptic. Traditional medicine used it for centuries — modern science has confirmed its antimicrobial properties.',
-      ],
-      offlineActivity: 'Take a cutting from a plant (a small piece of stem with a few leaves). Place it in a glass of water on a windowsill. Check every day — within a week, you should see tiny roots forming. You\'re witnessing vegetative propagation — the same process that makes Tejimola\'s story biologically plausible.',
-      concepts: [
-        {
-          title: 'Strangler Growth Strategy',
-          paragraphs: [
-          'Banyan trees (*Ficus benghalensis*) begin life as **epiphytes** — seeds deposited by birds in the crotch of a host tree, high above the forest floor. The seedling sends roots downward along the host trunk while its crown grows upward toward the light. As the aerial roots reach the ground and thicken, they gradually envelop the host trunk in a lattice of roots.',
-          'Over decades, the banyan\'s roots fuse together and tighten around the host, cutting off its nutrient and water supply (a process called **girdling**). The host tree eventually dies and decomposes, leaving the banyan standing as a hollow-cored, free-standing tree supported by its own root lattice. This strategy is called **strangler fig** growth, and it evolved to solve a critical problem: reaching light in dense tropical forests without competing for ground-level root space.',
-          'The Great Banyan in Howrah, near Kolkata, is estimated to be 250+ years old. It has over 3,600 aerial roots that have descended to the ground and thickened into prop roots, giving it the appearance of a small forest. Its canopy covers approximately 14,500 square meters. The original trunk was damaged by disease and removed in 1925 — but the tree lives on through its network of aerial roots, making it effectively immortal as long as some roots survive.',
-          ],
-          keyIdea: 'Banyans start as epiphytes and slowly strangle their host tree with descending aerial roots. Once the host dies, the banyan stands alone — potentially immortal through its ever-expanding root network.',
-        },
-        {
-          title: 'Aerial Roots: Defying Gravity',
-          paragraphs: [
-          '**Aerial roots** are roots that grow in the air rather than in soil. In banyan trees, they initiate from branches, grow downward under gravity, and upon reaching the ground, penetrate the soil and begin absorbing water and nutrients. Each grounded aerial root functions as an independent trunk, allowing the canopy to expand far beyond what a single trunk could support.',
-          'The growth of aerial roots is controlled by the plant hormone **auxin**, which is produced in shoot tips and moves downward through the plant. High auxin concentration promotes root initiation. In the humid tropical air, aerial roots absorb atmospheric moisture through specialized surface tissue (velamen), allowing them to grow several meters through the air before reaching ground.',
-          'Structurally, aerial roots that reach the ground undergo **secondary thickening** — the same process that makes tree trunks wider. They develop bark, wood, and transport tissue, eventually becoming indistinguishable from a normal trunk. A single banyan tree can develop hundreds of these prop roots, each capable of supporting a section of the canopy independently. If a major branch is lost to storms, the tree survives because each section is self-supporting.',
-          ],
-          keyIdea: 'Aerial roots grow from branches toward the ground, driven by auxin. Once grounded, they thicken into self-supporting trunks, allowing banyan trees to expand indefinitely and survive the loss of major limbs.',
-        },
-        {
-          title: 'Keystone Species: The Forest Depends on Figs',
-          paragraphs: [
-          'Ecologists classify banyan and other fig trees as **keystone species** — organisms whose ecological impact is disproportionately large relative to their abundance. Figs fruit year-round (unlike most tropical trees, which fruit seasonally), providing a critical food source during periods when nothing else is available. This makes figs the "famine food" that sustains fruit-eating animals through lean months.',
-          'A single large banyan tree can produce hundreds of kilograms of figs per year, supporting dozens of bird species, fruit bats, monkeys, squirrels, and insects. The fig-pollinator mutualism is extraordinarily specific: each of the 750+ *Ficus* species is pollinated by its own dedicated species of tiny **fig wasp**. The wasp reproduces only inside the fig; the fig can be pollinated only by its wasp. Neither can survive without the other.',
-          'If fig trees disappear from a tropical forest, the cascading effects are catastrophic. The birds and mammals that depend on figs during food scarcity starve or migrate. Those animals are seed dispersers for hundreds of other tree species, so forest regeneration slows dramatically. The fig wasp mutualisms collapse. Studies have shown that removing figs from tropical forests can reduce vertebrate diversity by 50-70%, confirming their keystone status.',
-          ],
-          keyIdea: 'Fig trees are keystone species because they fruit year-round, sustaining wildlife during food scarcity. Each fig species has a dedicated pollinator wasp — a mutualism so specific that losing one means losing the other.',
-          diagram: 'FoodWebDiagram',
-        },
-      ],
-    },
-  },
-  {
-    id: 62,
-    slug: 'basket-weaver',
-    tradition: 'Northeast India',
-    story: { title: 'The Basket Weaver\'s Song', tagline: 'The mathematics of weaving patterns.', content: `
-**The Girl with Two Loves**
-
-In a small village near **Imphal**, where the hills fold into each other like sleeping animals, there lived a girl named **Thoibi** who loved two things: **weaving** and **music**.
-
-Her mother was the finest basket weaver in the village. She wove baskets from bamboo strips so thin they bent like grass, creating patterns that looked like the scales of a fish or the petals of a lotus. Thoibi had learned to weave from her, and by the age of ten, her baskets were almost as good as her mother's.
-
-But Thoibi also loved the **pena** — the one-stringed fiddle that travelling musicians played at festivals. The sound of the pena made her heart ache in a way she couldn't explain, as if the instrument were singing a song she almost remembered.
-
-"You must choose," said her mother one morning. "Weaving takes your whole mind. You cannot weave and play music. Your hands will get confused."
-
-**The Travelling Musician**
-
-That autumn, a pena player came to the village for the **Lai Haraoba** festival. His name was **Tomba**, and he was old, with fingers so crooked they looked like bamboo roots. But when he played, the whole village stopped to listen.
-
-Thoibi sat at his feet during every performance. After the last one, she gathered her courage. "Pena-tompok," she said, "will you teach me to play?"
-
-Tomba looked at her hands. "You are a weaver," he said. It wasn't a question — he could see the calluses.
-
-"Yes. My mother says I must choose between weaving and music."
-
-Tomba smiled, showing gaps where teeth used to be. "Your mother is wise, but she is wrong about this one thing. Come, bring me one of your baskets."
-
-**The Hidden Pattern**
-
-Thoibi brought her finest basket — a round, lidded container with a pattern of interlocking diamonds. Tomba held it up and turned it slowly in the firelight.
-
-"Tell me," he said, "when you weave, do you count?"
-
-"Of course," said Thoibi. "Over two, under one. Over two, under one. Then shift by one and repeat. That's how you make the diamond pattern."
-
-"Over two, under one. Over two, under one," Tomba repeated — but this time he *sang* the words, tapping his foot. The counting became a rhythm. The rhythm became a melody. The pattern of the basket became a **song**.
-
-Thoibi's eyes went wide. "They're the same," she breathed. "The weaving pattern and the music pattern — they're the same thing."
-
-"Everything beautiful has a pattern," said Tomba. "The dancer counts steps. The drummer counts beats. The weaver counts strands. The numbers are the same — only the material changes."
-
-**The New Weave**
-
-Tomba stayed in the village for a week, and every evening he taught Thoibi to play the pena. She learned quickly — her weaver's fingers were already used to counting, to rhythm, to repetition. The patterns she had woven into bamboo, she now wove into sound.
-
-And something surprising happened. Her baskets got *better*. When she wove now, she hummed the pena melodies, and the music kept her counting steady, her rhythm even, her patterns flawless. The weaving fed the music, and the music fed the weaving.
-
-Her mother picked up a new basket Thoibi had made and turned it over in her hands. The pattern was more complex than anything she had seen — diamonds within diamonds, each one perfectly aligned.
-
-"How did you do this?" her mother asked.
-
-"I sang it first," said Thoibi.
-
-**The Weaver's Song**
-
-When Tomba left the village, he gave Thoibi his old pena. "You don't need to choose," he said. "A weaver who plays music makes better baskets. A musician who weaves makes better songs. The world doesn't ask you to be one thing."
-
-Thoibi grew up to be both — the finest basket weaver and the finest pena player in her village. And she taught her own daughters the same lesson: that the rhythm of the loom and the rhythm of the song are sisters, born from the same counting, the same patience, the same love of pattern.
-
-In Manipur, they still say that the best weavers are the ones who sing while they work. Now you know why.
-
-*The end.*` },
-    stem: {
-      title: 'Mathematics of Weaving & Patterns',
-      description: 'The mathematics of weaving patterns.',
-      icon: Sparkles,
-      color: 'from-amber-400 to-orange-500',
-      skills: ['Analyze tessellation patterns and their mathematical properties', 'Calculate material efficiency: how much bamboo is needed for a given basket size', 'Model the structural strength of woven vs solid materials', 'Understand how curvature is achieved through flat weaving techniques'],
-      project: {
-        title: 'Design a Basket and Calculate Its Geometry',
-        description: 'Design a basket shape, calculate the required strip lengths and weave pattern, then build it and compare with your predictions.',
-        steps: [
-          'Choose a basket shape (cylinder, bowl, or rectangular) and define its dimensions',
-          'Calculate the number of strips and their lengths needed for the chosen weave pattern',
-          'Estimate the total material (length of bamboo strip) required',
-          'Build the basket from paper strips following your pattern plan',
-          'Compare actual material used with your calculation and discuss sources of waste',
-        ],
-      },
-      realWorld: [
-        'Composite material engineers study woven structures for lightweight, strong panels in aircraft',
-        'Packaging designers use woven and corrugated structures for crush-resistant containers',
-        'Digital artists use procedural weaving algorithms to generate realistic textile textures in films',
-      ],
-    },
-    illustration: '/content/illustrations/basket-weavers-song.webp',
-    track: 'school',
-    subjects: ['Biology', 'Materials Science'] as Subject[],
-    toolSkills: ['Python' as Skill, 'Scientific Modeling' as Skill],
-    skillTags: [{ discipline: 'Scientific Modeling', skill: 'Chemical simulation', tools: ['Materials science'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
-    learningTracks: ['Science & Lab' as Track],
-    estimatedHours: 12,
-    playground: 'basket-weaver' as const,
-    level0: {
-      vocabulary: [
-        ['Photosynthesis', 'The process plants use to convert sunlight, water, and CO₂ into sugar and oxygen'],
-        ['Chlorophyll', 'The green pigment in plants that absorbs sunlight for photosynthesis'],
-        ['Vegetative propagation', 'Growing a new plant from a fragment of the parent — without seeds'],
-        ['Totipotent', 'A cell that can develop into any cell type — plant cells have this superpower'],
-        ['Cell wall', 'A rigid outer layer made of cellulose that gives plant cells their shape and strength'],
-      ],
-      trueFalse: [
-        { statement: 'Plants eat soil to get their food.', isTrue: false, explanation: 'Plants make their own food through photosynthesis using sunlight, water, and CO₂ from air. The soil provides minerals and water, but the actual "food" (sugar) is manufactured inside the leaves using solar energy.' },
-        { statement: 'A single plant cell can grow into an entire new plant.', isTrue: true, explanation: 'Unlike most animal cells, many plant cells are totipotent — they retain the ability to become any cell type. This is why you can grow a new plant from a cutting — the cut stem cells reorganize into roots, stems, and leaves.' },
-        { statement: 'All plants reproduce using seeds.', isTrue: false, explanation: 'Many plants can also reproduce vegetatively — through cuttings, runners, tubers, or bulbs. Every banana plant in your grocery store is a clone, grown from a cutting rather than a seed.' },
-      ],
-      facts: [
-        'Photosynthesis produces all the oxygen we breathe. Every other breath you take comes from algae and plants splitting water molecules apart.',
-        'The world\'s largest organism is a clonal colony of aspen trees in Utah called "Pando" — 47,000 tree stems all connected by a single root system, weighing 6,600 tonnes.',
-        'Tulsi (holy basil) contains eugenol, a natural antiseptic. Traditional medicine used it for centuries — modern science has confirmed its antimicrobial properties.',
-      ],
-      offlineActivity: 'Take a cutting from a plant (a small piece of stem with a few leaves). Place it in a glass of water on a windowsill. Check every day — within a week, you should see tiny roots forming. You\'re witnessing vegetative propagation — the same process that makes Tejimola\'s story biologically plausible.',
-      concepts: [
-        {
-          title: 'Tensile Strength of Natural Fibers',
-          paragraphs: [
-          '**Tensile strength** measures the maximum pulling force a material can withstand before breaking, typically expressed in megapascals (MPa). Bamboo fiber has a tensile strength of 350-500 MPa — comparable to some low-grade steels. Cane and rattan, commonly used in basket weaving, range from 100-250 MPa. These natural fibers are remarkably strong relative to their weight.',
-          'Why are plant fibers strong? The answer lies in **cellulose** — long-chain glucose polymers bundled into microfibrils, spirally wound inside each plant cell like the cables of a suspension bridge. The angle of the cellulose spiral (the **microfibril angle**) determines stiffness: a steep angle (like bamboo) produces stiff, strong fibers; a shallow angle produces flexible, extensible fibers. Nature tunes this angle for each plant\'s structural needs.',
-          'Basket weavers intuitively exploit these material properties. They choose stiff, high-tensile fibers for the **warp** (structural framework) and more flexible fibers for the **weft** (woven elements). Soaking fibers in water before weaving makes them temporarily more flexible (water acts as a plasticizer between cellulose chains), allowing tight curves without cracking. Once dried, the fibers regain their stiffness, locking the weave in place.',
-          ],
-          keyIdea: 'Natural plant fibers derive their strength from cellulose microfibrils wound at specific angles inside each cell. Bamboo achieves tensile strengths comparable to low-grade steel while being far lighter.',
-        },
-        {
-          title: 'Weave Patterns and Structural Engineering',
-          paragraphs: [
-          'The pattern of interlacing in a basket determines its strength, flexibility, and function. The simplest pattern, **plain weave** (over one, under one, repeat), produces a tight, strong fabric with minimal flexibility. **Twill weave** (over two, under one) creates diagonal lines and is more flexible. **Hexagonal (honeycomb) weave** produces the highest strength-to-weight ratio and is used where stiffness matters most.',
-          'These patterns are not just craft tradition — they are engineering decisions. A plain weave has the maximum number of interlacing points, creating the most friction between fibers. This makes it resistant to deformation but also stiff and inflexible. A twill weave has fewer interlacing points, allowing the structure to flex and drape — useful for baskets that need to accommodate irregularly shaped contents.',
-          'Modern composite materials (carbon fiber, fiberglass, Kevlar) use exactly the same weave patterns. Aircraft wings use carbon fiber in twill and satin weaves; bulletproof vests use Kevlar in plain weave for maximum resistance to penetration. The basket weaver and the aerospace engineer are applying the same structural principles, separated by materials but united by geometry.',
-          ],
-          keyIdea: 'Weave patterns control the tradeoff between stiffness and flexibility. Plain weave maximizes interlacing points for strength; twill weave sacrifices some strength for flexibility. These same patterns are used in aerospace composites.',
-        },
-        {
-          title: 'Natural Polymers: Why Plants Make Great Materials',
-          paragraphs: [
-          'Plant fibers are **natural polymers** — materials made of long, repeating molecular chains. **Cellulose** (the structural backbone) is a polymer of glucose. **Lignin** (which makes wood hard) is a complex cross-linked polymer that fills the gaps between cellulose fibers, acting as a biological adhesive. **Hemicellulose** links cellulose to lignin, creating a three-component composite.',
-          'This cellulose-hemicellulose-lignin composite is remarkably similar to artificial fiber-reinforced composites: cellulose fibers act as the reinforcement (like carbon or glass fibers), lignin acts as the matrix (like epoxy resin), and hemicellulose is the coupling agent that bonds them together. The result is a material that is strong in tension (cellulose), rigid in compression (lignin), and tough (resistant to cracking because crack propagation is deflected at fiber-matrix boundaries).',
-          'Unlike synthetic polymers (plastics), natural polymers are **biodegradable** — microorganisms produce enzymes (cellulases, ligninases) that break them down into simple sugars and CO₂. A discarded bamboo basket decomposes completely in 2-5 years, returning its carbon to the ecosystem. A plastic bag takes 500-1,000 years. This renewability and biodegradability make plant fibers increasingly attractive as humanity seeks alternatives to petroleum-based materials.',
-          ],
-          keyIdea: 'Plant fibers are natural composites of cellulose (reinforcement), lignin (matrix), and hemicellulose (bonding agent) — architecturally identical to synthetic fiber-reinforced composites but fully biodegradable.',
-          diagram: 'PolymerChainDiagram',
-        },
-      ],
-    },
-  },
-  {
     id: 63,
     slug: 'seed-keeper',
     tradition: 'Northeast India',
@@ -12728,138 +12440,6 @@ plt.show()  # When does Pfr cross the threshold?`,
           ],
           keyIdea: 'Plants release scent on a circadian schedule, concentrating production when pollinators are active. This saves energy while maximizing pollination.',
           diagram: 'JasmineScentClockDiagram',
-        },
-      ],
-    },
-  },
-  {
-    id: 68,
-    slug: 'woodpecker-drum',
-    tradition: 'Northeast India',
-    story: { title: 'The Woodpecker\'s Drum', tagline: 'Drumming without brain damage — impact biomechanics.', content: `
-**The Idea**
-
-It was the **barking deer** who had the idea. He had been listening to the sounds of the forest in **Manas National Park** — the whoops of gibbons, the trills of sunbirds, the rumble of elephants — and one morning he said, "We should put all these sounds together. We should have a concert."
-
-The animals were excited. Everyone wanted to perform. The **hoolock gibbon** volunteered to sing — his whooping call could carry across five kilometres of forest. The **cicadas** offered their buzzing chorus. The **elephants** would provide the bass with their deep rumbles. The **frogs** of the marshland promised a rhythm section of croaks and chirps.
-
-"But who will keep the beat?" asked the old **langur**, who had once watched humans play drums at a village festival. "Music without a beat is just noise."
-
-**The Audition**
-
-Several animals tried. The elephant stomped his foot, but the ground shook so much that the frogs bounced out of their puddles. The barking deer barked rhythmically, but his bark was too sharp and made the birds flinch. The wild boar tried tapping a hollow log with his snout, but he kept getting distracted by grubs inside it.
-
-Then, from high in a **sal tree**, came a sound: **tak-tak-tak-tak-tak**. Steady. Precise. Musical. Everyone looked up.
-
-A **greater flameback woodpecker** — golden-backed, red-crested, magnificent — was drumming on a dead branch. His beak struck the wood in a perfect rhythm, fast enough to sound like a drumroll, steady enough to march to.
-
-"That's it!" cried the langur. "That's the beat we need!"
-
-**Rehearsal in the Canopy**
-
-The woodpecker, whose name was **Thoka**, was flattered but nervous. "I just drum to find insects," he said. "I've never played for an audience."
-
-"You've been playing for the whole forest every day," said the langur. "You just didn't know we were listening."
-
-The rehearsals began. Thoka drummed a steady *tak-tak-tak* on the sal tree. The gibbons timed their whoops to his beat. The cicadas buzzed in between. The frogs filled the gaps with short, sharp chirps. The elephants rumbled on the downbeat, like a bass drum at the bottom of an orchestra.
-
-It was rough at first. The gibbons came in too early. The frogs couldn't agree on which croak to use. The elephants rumbled too loud and drowned everyone out. But Thoka kept drumming, steady and patient, and one by one the other animals found their place in the rhythm.
-
-**The Concert**
-
-On the night of the full moon, the animals of Manas gathered in a forest clearing. The moon hung low and golden, casting long shadows through the sal and teak trees. Fireflies drifted like floating candles.
-
-Thoka began. **Tak-tak-tak-tak-tak.** The rhythm filled the clearing, steady as a heartbeat. Then the frogs joined — *croak-croak, chirp*. Then the cicadas — a rising buzz that swelled and faded. Then the gibbons — long, soaring whoops that sailed over the treetops like songs from another world.
-
-And beneath it all, the elephants rumbled — a sound so deep you felt it in your bones rather than heard it in your ears.
-
-The forest concert lasted until dawn. No one clapped — animals don't clap — but the silence that followed was the deepest, most respectful silence the forest had ever known.
-
-**The Drummer's Gift**
-
-After that night, the animals of Manas held a concert every full moon. And every time, Thoka the woodpecker started it. He was never the loudest, never the most melodic, never the most spectacular. But without his steady drumming, the music fell apart. He was the heartbeat of the forest — the one who kept everyone together.
-
-If you visit Manas National Park and listen carefully, you'll hear Thoka's descendants drumming in the sal trees. *Tak-tak-tak-tak-tak.* It sounds like a bird looking for insects. But the animals know better. It's the drummer warming up, keeping the beat, holding the forest together — one steady tap at a time.
-
-*The end.*` },
-    stem: {
-      title: 'Biomechanics & Skull Design',
-      description: 'Drumming without brain damage — impact biomechanics.',
-      icon: Construction,
-      color: 'from-red-400 to-orange-500',
-      skills: ['Understand impact biomechanics: force, impulse, and energy dissipation', 'Analyze the multi-layered shock absorption system in woodpecker skulls', 'Model repeated impact stress and fatigue in biological vs engineered materials', 'Calculate the g-forces involved in pecking at 20 strikes per second'],
-      project: {
-        title: 'Design a Bio-Inspired Shock Absorber',
-        description: 'Study the woodpecker\'s shock absorption system and design a simple prototype that protects a fragile object from impact.',
-        steps: [
-          'Research the 4 key shock-absorbing features: spongy bone, hyoid bone, beak-brain gap, and thick skull',
-          'Design a protective housing for a raw egg using layered materials mimicking these features',
-          'Drop the egg (in its housing) from increasing heights and record the maximum safe height',
-          'Compare with an unprotected egg and a standard bubble-wrap protection',
-          'Explain which biological feature each material layer mimics and why the design works',
-        ],
-      },
-      realWorld: [
-        'Helmet manufacturers study woodpecker cranial design for improved impact protection',
-        'Hard drive engineers designed shock-resistant drives inspired by woodpecker impact absorption',
-        'Sports medicine researchers apply biomechanical impact models to reduce concussion in athletes',
-      ],
-    },
-    illustration: '/content/illustrations/woodpeckers-drum.webp',
-    track: 'school',
-    subjects: ['Biology', 'Materials Science', 'Zoology'] as Subject[],
-    toolSkills: ['Python' as Skill, 'Scientific Modeling' as Skill],
-    skillTags: [{ discipline: 'Scientific Modeling', skill: 'Physics simulation', tools: ['Mechanics'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
-    learningTracks: ['Science & Lab' as Track],
-    estimatedHours: 12,
-    playground: 'woodpecker-drum' as const,
-    level0: {
-      vocabulary: [
-        ['Photosynthesis', 'The process plants use to convert sunlight, water, and CO₂ into sugar and oxygen'],
-        ['Chlorophyll', 'The green pigment in plants that absorbs sunlight for photosynthesis'],
-        ['Vegetative propagation', 'Growing a new plant from a fragment of the parent — without seeds'],
-        ['Totipotent', 'A cell that can develop into any cell type — plant cells have this superpower'],
-        ['Cell wall', 'A rigid outer layer made of cellulose that gives plant cells their shape and strength'],
-      ],
-      trueFalse: [
-        { statement: 'Plants eat soil to get their food.', isTrue: false, explanation: 'Plants make their own food through photosynthesis using sunlight, water, and CO₂ from air. The soil provides minerals and water, but the actual "food" (sugar) is manufactured inside the leaves using solar energy.' },
-        { statement: 'A single plant cell can grow into an entire new plant.', isTrue: true, explanation: 'Unlike most animal cells, many plant cells are totipotent — they retain the ability to become any cell type. This is why you can grow a new plant from a cutting — the cut stem cells reorganize into roots, stems, and leaves.' },
-        { statement: 'All plants reproduce using seeds.', isTrue: false, explanation: 'Many plants can also reproduce vegetatively — through cuttings, runners, tubers, or bulbs. Every banana plant in your grocery store is a clone, grown from a cutting rather than a seed.' },
-      ],
-      facts: [
-        'Photosynthesis produces all the oxygen we breathe. Every other breath you take comes from algae and plants splitting water molecules apart.',
-        'The world\'s largest organism is a clonal colony of aspen trees in Utah called "Pando" — 47,000 tree stems all connected by a single root system, weighing 6,600 tonnes.',
-        'Tulsi (holy basil) contains eugenol, a natural antiseptic. Traditional medicine used it for centuries — modern science has confirmed its antimicrobial properties.',
-      ],
-      offlineActivity: 'Take a cutting from a plant (a small piece of stem with a few leaves). Place it in a glass of water on a windowsill. Check every day — within a week, you should see tiny roots forming. You\'re witnessing vegetative propagation — the same process that makes Tejimola\'s story biologically plausible.',
-      concepts: [
-        {
-          title: 'Shock Absorption in the Woodpecker Skull',
-          paragraphs: [
-          'A woodpecker strikes a tree at speeds up to 7 meters per second, decelerating from full speed to zero in about half a millisecond. This generates forces of **1,200-1,400 G** (where G is the acceleration due to gravity). For comparison, a human concussion typically occurs at just 80-100 G. How does the woodpecker avoid brain injury?',
-          'The woodpecker skull has multiple shock-absorption mechanisms working in concert. The **hyoid bone** (a structure that wraps around the skull from the base of the beak, over the cranium, and back to the right nostril) acts as a seatbelt for the brain, distributing impact forces around the skull rather than concentrating them on one spot. The skull bones are **spongy** (trabecular) rather than dense, absorbing energy through controlled micro-deformation.',
-          'The beak itself is a layered composite: a hard outer sheath of keratin over a porous bone core. The outer layer is stiffer than the inner layer, creating a gradient that progressively decelerates the impact. Additionally, the beak and brain are slightly misaligned — the force vector passes below the center of the brain, converting straight-line deceleration into a slight rotation rather than direct compression.',
-          ],
-          keyIdea: 'Woodpeckers survive 1,200+ G impacts through multiple mechanisms: the hyoid bone distributes force, spongy skull bones absorb energy, and the beak-brain misalignment converts linear deceleration into less harmful rotation.',
-        },
-        {
-          title: 'Skull Design: Engineering Against Concussion',
-          paragraphs: [
-          'The woodpecker\'s skull is a masterclass in **impact engineering**. Unlike the human skull (where a thin layer of fluid separates brain from bone, allowing the brain to slosh and slam against the skull wall during impact), the woodpecker\'s brain fits tightly in its cranial cavity with almost no cerebrospinal fluid gap. This tight fit prevents the brain from accelerating independently of the skull — the brain and skull decelerate as one unit.',
-          'The skull plates are of unequal thickness — thicker at the front (impact zone) and thinner at the back. This asymmetry directs stress waves around and away from the brain. The lower jaw (mandible) is longer and stronger than the upper jaw, absorbing a disproportionate share of the impact force and channeling it into the massive neck muscles rather than into the cranium.',
-          'These design principles have inspired human protective equipment. Researchers at the University of California, Berkeley used woodpecker skull geometry to design a new shock-absorbing material for football helmets. By mimicking the graduated density (hard exterior, spongy interior) and the tight fit (no gap between brain and skull), they achieved a 50% reduction in impact force transmitted to a model brain.',
-          ],
-          keyIdea: 'The woodpecker brain fits tightly in its skull with no fluid gap, preventing independent brain movement. Unequal skull thickness directs stress waves away from the brain — principles now applied to improved helmet design.',
-        },
-        {
-          title: 'G-Forces: Measuring Extreme Deceleration',
-          paragraphs: [
-          '**G-force** measures acceleration relative to Earth\'s gravity. Standing still, you experience 1 G. A roller coaster might briefly reach 3-5 G. Fighter pilots black out at about 9 G because blood is forced away from the brain. A car crash at 50 km/h generates about 30 G. A woodpecker experiences 1,200-1,400 G with each strike, 20 times per second, totaling 12,000 impacts per day.',
-          'G-force alone does not determine injury — **duration** matters critically. A very high G-force for a very short time (microseconds) can be survivable because tissues do not have time to deform significantly. The woodpecker\'s 1,200 G impacts last only about 0.5 milliseconds each. If the same deceleration lasted 10 milliseconds (still very brief by human perception), the woodpecker\'s brain would be destroyed. This is why the hard, stiff beak transmits force so quickly — short duration is protective.',
-          'The concept of **impulse** (force multiplied by time) captures this tradeoff. Crumple zones in cars extend the deceleration time, reducing peak G-force for the same speed change. Airbags do the same. The woodpecker uses the opposite strategy — extremely short impact time. Both approaches reduce injury, but through opposite mechanisms: crumple zones minimize peak force; the woodpecker minimizes deformation time.',
-          ],
-          keyIdea: 'G-force injury depends on both magnitude and duration. Woodpeckers survive extreme G-forces because each impact lasts only 0.5 milliseconds — too brief for significant brain deformation to occur.',
-          diagram: 'NewtonForceDiagram',
         },
       ],
     },

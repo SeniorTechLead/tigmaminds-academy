@@ -2,11 +2,14 @@ import { createContext, useContext, useState, useEffect, ReactNode } from 'react
 import { supabase } from '../lib/supabase';
 import type { User, Session } from '@supabase/supabase-js';
 
+export type UserRole = 'student' | 'teacher' | 'admin' | 'parent';
+
 interface UserProfile {
   id: string;
   display_name: string | null;
   avatar_url: string | null;
-  role: 'student' | 'teacher' | 'admin';
+  role: UserRole;              // legacy single role (kept for backward compat)
+  roles: UserRole[];           // array of all roles
 }
 
 interface AuthContextType {
@@ -14,6 +17,8 @@ interface AuthContextType {
   profile: UserProfile | null;
   session: Session | null;
   loading: boolean;
+  /** Check if user has a specific role */
+  hasRole: (role: UserRole) => boolean;
   signUp: (email: string, password: string, displayName?: string) => Promise<{ error: string | null }>;
   signIn: (email: string, password: string) => Promise<{ error: string | null }>;
   signInWithGoogle: (returnTo?: string) => Promise<void>;
@@ -31,14 +36,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Fetch user profile
+  // Fetch user profile and compute roles array
   const fetchProfile = async (userId: string) => {
     const { data } = await supabase
       .from('user_profiles')
       .select('*')
       .eq('id', userId)
       .maybeSingle();
-    if (data) setProfile(data);
+    if (data) {
+      // Build roles array from DB roles column (TEXT[]) or fall back to single role
+      const dbRoles: UserRole[] = data.roles || [data.role || 'student'];
+      setProfile({ ...data, roles: dbRoles });
+    }
+  };
+
+  const hasRole = (role: UserRole): boolean => {
+    return profile?.roles?.includes(role) ?? false;
   };
 
   useEffect(() => {
@@ -143,7 +156,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, profile, session, loading, signUp, signIn, signInWithGoogle, signOut, updateProfile, updateEmail, updatePassword }}>
+    <AuthContext.Provider value={{ user, profile, session, loading, hasRole, signUp, signIn, signInWithGoogle, signOut, updateProfile, updateEmail, updatePassword }}>
       {children}
     </AuthContext.Provider>
   );

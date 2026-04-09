@@ -2,8 +2,8 @@ import { useState, useRef, useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import {
   Play, RotateCcw, Loader2, CheckCircle, XCircle, Terminal, Lock,
-  ChevronDown, Filter, Search, BookOpen, Zap, Sparkles,
-  ArrowRight, Sun, Moon, Maximize2, Minimize2, GripHorizontal,
+  ChevronDown, ChevronUp, Filter, Search, BookOpen, Zap, Sparkles,
+  ArrowRight, Sun, Moon, Maximize2, Minimize2, GripHorizontal, Table2,
 } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -106,6 +106,33 @@ function HintPanel({ tier }: { tier: ProblemTier }) {
   );
 }
 
+/** Render a JSON array-of-arrays as a compact table (for SQL expected/got output) */
+function SqlMiniTable({ json, isDark, color }: { json: string; isDark: boolean; color: 'green' | 'red' }) {
+  try {
+    const parsed = JSON.parse(json);
+    if (!Array.isArray(parsed) || parsed.length === 0 || !Array.isArray(parsed[0])) return <span className="break-all">{json}</span>;
+    const accent = color === 'green'
+      ? (isDark ? 'border-emerald-700' : 'border-emerald-300')
+      : (isDark ? 'border-red-700' : 'border-red-300');
+    const textColor = color === 'green'
+      ? (isDark ? 'text-emerald-400' : 'text-emerald-700')
+      : (isDark ? 'text-red-400' : 'text-red-700');
+    return (
+      <table className={`mt-1 text-xs font-mono border-collapse border ${accent} ${textColor}`}>
+        <tbody>
+          {parsed.map((row: any[], ri: number) => (
+            <tr key={ri}>
+              {row.map((cell, ci) => (
+                <td key={ci} className={`px-2 py-0.5 border ${accent}`}>{cell === null ? 'NULL' : String(cell)}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  } catch { return <span className="break-all">{json}</span>; }
+}
+
 /* ══════════════════════════════════════════
    Problem Solver — the code editor + test runner
    ══════════════════════════════════════════ */
@@ -117,6 +144,8 @@ function ProblemSolver({ problem, tier, onBack }: { problem: Problem; tier: Prob
   const [results, setResults] = useState<TestResult[]>([]);
   const [output, setOutput] = useState('');
   const [sqlResultDisplay, setSqlResultDisplay] = useState<{ columns: string[]; rows: any[][] } | null>(null);
+  const [schemaOpen, setSchemaOpen] = useState(false);
+  const [schemaData, setSchemaData] = useState<{ table: string; columns: { name: string; type: string; pk: boolean; notnull: boolean }[] }[]>([]);
   const { pyodideRef, load: loadPyodide, state: pyCtxState, loadProgress: pyLoadProgress } = usePyodide();
   const { load: loadSqlJs, runSql, resetDb, state: sqlCtxState, loadProgress: sqlLoadProgress } = useSqlJs();
   const { load: loadTs, runTs, state: tsCtxState, loadProgress: tsLoadProgress } = useTs();
@@ -536,6 +565,34 @@ function ProblemSolver({ problem, tier, onBack }: { problem: Problem; tier: Prob
 
   const runTests = isArduino ? runArduinoTests : isHtml ? runHtmlTests : isTs ? runTsTests : isSql ? runSqlTests : runPythonTests;
 
+  const toggleSqlSchema = useCallback(async () => {
+    if (!schemaOpen && schemaData.length === 0) {
+      const db = await loadSqlJs();
+      if (!db) return;
+      const tableNames = db.exec("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name");
+      if (tableNames.length > 0) {
+        const result: typeof schemaData = [];
+        for (const row of tableNames[0].values) {
+          const tbl = String(row[0]);
+          const info = db.exec(`PRAGMA table_info("${tbl}")`);
+          if (info.length > 0) {
+            result.push({
+              table: tbl,
+              columns: info[0].values.map((r: any[]) => ({
+                name: String(r[1]),
+                type: String(r[2] || 'TEXT'),
+                pk: r[5] === 1,
+                notnull: r[3] === 1,
+              })),
+            });
+          }
+        }
+        setSchemaData(result);
+      }
+    }
+    setSchemaOpen(o => !o);
+  }, [schemaOpen, schemaData.length, loadSqlJs]);
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Tab') {
       e.preventDefault();
@@ -604,7 +661,7 @@ function ProblemSolver({ problem, tier, onBack }: { problem: Problem; tier: Prob
           <div className="flex items-center gap-2">
             <Terminal className={`w-4 h-4 ${isDark ? 'text-emerald-400' : 'text-emerald-600'}`} />
             <span className={`text-sm font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>Solution</span>
-            {pyState === 'ready' && <span className="text-xs text-emerald-400 bg-emerald-900/30 px-2 py-0.5 rounded-full">Ready</span>}
+            {pyState === 'ready' && <span className={`text-xs px-2 py-0.5 rounded-full ${isDark ? 'text-emerald-400 bg-emerald-900/30' : 'text-emerald-700 bg-emerald-100'}`}>Ready</span>}
           </div>
           <div className="flex items-center gap-2">
             <button onClick={() => { setCode(tier.starterCode); setResults([]); setOutput(''); }} className="flex items-center gap-1 px-2 py-1.5 text-gray-400 hover:text-white text-xs transition-colors" title="Reset">
@@ -627,6 +684,40 @@ function ProblemSolver({ problem, tier, onBack }: { problem: Problem; tier: Prob
         {pyState === 'loading' && loadProgress && (
           <div className="px-4 py-2 bg-gray-800 border-b border-gray-700 text-sm text-amber-400 flex items-center gap-2 flex-shrink-0">
             <Loader2 className="w-3.5 h-3.5 animate-spin" /> {loadProgress}
+          </div>
+        )}
+
+        {/* SQL Schema panel */}
+        {isSql && (
+          <div className={`border-b ${isDark ? 'border-gray-700' : 'border-gray-200'}`}>
+            <button
+              onClick={toggleSqlSchema}
+              className={`w-full px-4 py-1.5 flex items-center gap-2 text-xs font-medium transition-colors ${isDark ? 'text-gray-400 hover:text-gray-200 hover:bg-gray-800/50' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'}`}
+            >
+              <Table2 className="w-3 h-3" />
+              Schema
+              {schemaOpen ? <ChevronUp className="w-3 h-3 ml-auto" /> : <ChevronDown className="w-3 h-3 ml-auto" />}
+            </button>
+            {schemaOpen && (
+              <div className={`px-4 pb-3 grid grid-cols-2 gap-3 ${isDark ? 'bg-gray-800/30' : 'bg-gray-50/50'}`}>
+                {schemaData.map(t => (
+                  <div key={t.table}>
+                    <p className={`text-xs font-bold font-mono mb-1 ${isDark ? 'text-cyan-400' : 'text-cyan-700'}`}>{t.table}</p>
+                    {t.columns.map(c => (
+                      <div key={c.name} className="flex items-center gap-1.5 text-xs font-mono leading-5">
+                        {c.pk && <span className={`text-[9px] px-1 rounded ${isDark ? 'bg-amber-900/50 text-amber-400' : 'bg-amber-100 text-amber-700'}`}>PK</span>}
+                        <span className={isDark ? 'text-gray-300' : 'text-gray-700'}>{c.name}</span>
+                        <span className={isDark ? 'text-gray-600' : 'text-gray-400'}>{c.type}</span>
+                        {c.notnull && <span className={`text-[9px] ${isDark ? 'text-red-500' : 'text-red-400'}`}>NOT NULL</span>}
+                      </div>
+                    ))}
+                  </div>
+                ))}
+                {schemaData.length === 0 && (
+                  <p className={`text-xs col-span-2 ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>Loading schema...</p>
+                )}
+              </div>
+            )}
           </div>
         )}
 
@@ -683,9 +774,9 @@ function ProblemSolver({ problem, tier, onBack }: { problem: Problem; tier: Prob
                 <div className="min-w-0 flex-1">
                   <p className={`text-sm font-medium ${r.passed ? 'text-gray-700 dark:text-gray-300' : 'text-red-700 dark:text-red-300'}`}>{r.label}</p>
                   {!r.passed && (
-                    <div className="mt-2 text-xs font-mono space-y-1">
-                      <p className="text-gray-500 dark:text-gray-400">Expected: <span className="text-emerald-600 dark:text-emerald-400 break-all">{r.expected}</span></p>
-                      <p className="text-gray-500 dark:text-gray-400">Got: <span className="text-red-600 dark:text-red-400 break-all">{r.actual}</span></p>
+                    <div className={`mt-2 text-xs font-mono ${isSql ? 'space-y-3' : 'space-y-1'}`}>
+                      <div className="text-gray-500 dark:text-gray-400">Expected: {isSql ? <SqlMiniTable json={r.expected} isDark={isDark} color="green" /> : <span className="text-emerald-600 dark:text-emerald-400 break-all">{r.expected}</span>}</div>
+                      <div className="text-gray-500 dark:text-gray-400">Got: {isSql ? <SqlMiniTable json={r.actual} isDark={isDark} color="red" /> : <span className="text-red-600 dark:text-red-400 break-all">{r.actual}</span>}</div>
                     </div>
                   )}
                 </div>

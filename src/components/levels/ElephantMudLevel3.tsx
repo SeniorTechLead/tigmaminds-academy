@@ -511,7 +511,7 @@ def generate_wrinkle_pattern(size=50, n_centers=200, crack_width=0.3):
 # Generate patterns with different wrinkle densities
 sizes = [50, 50, 50]
 densities = [50, 200, 500]  # number of growth centers
-names = ['Young elephant\n(few wrinkles)', 'Adult elephant\n(moderate)', 'Old elephant\n(dense wrinkles)']
+names = ['Young elephant\\n(few wrinkles)', 'Adult elephant\\n(moderate)', 'Old elephant\\n(dense wrinkles)']
 
 fig, axes = plt.subplots(2, 3, figsize=(15, 10))
 fig.patch.set_facecolor('#1f2937')
@@ -536,7 +536,7 @@ for col, (n_centers, name) in enumerate(zip(densities, names)):
     ax = axes[0, col]
     ax.set_facecolor('#111827')
     ax.imshow(pattern, cmap='bone_r', interpolation='nearest')
-    ax.set_title(f'{name}\nCrack fraction: {crack_frac:.1%}', color='white', fontsize=10)
+    ax.set_title(f'{name}\\nCrack fraction: {crack_frac:.1%}', color='white', fontsize=10)
     ax.set_xticks([])
     ax.set_yticks([])
 

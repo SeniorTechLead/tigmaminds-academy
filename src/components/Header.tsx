@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { Menu, X, User, LogOut, Sun, Moon } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { Menu, X, User, Sun, Moon, ChevronDown } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 
 function useTheme() {
@@ -22,17 +22,27 @@ function useTheme() {
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user, profile, signOut } = useAuth();
+  const { user, profile, hasRole, signOut } = useAuth();
   const { dark, toggle: toggleTheme } = useTheme();
 
   const navigation = [
-    { name: 'Home', href: '/' },
-    { name: 'Programs', href: '/programs' },
+    { name: 'Start Here', href: '/start', children: [
+      { name: 'Find Your Path', href: '/start' },
+      { name: 'Python Basics', href: '/learn/python-basics' },
+      { name: 'Web Basics', href: '/learn/web-basics' },
+      { name: 'SQL Basics', href: '/learn/sql-basics' },
+      { name: 'Arduino Basics', href: '/learn/arduino-basics' },
+    ] },
+    { name: 'Programs', href: '/programs', children: [
+      { name: 'Overview', href: '/programs' },
+      { name: '12-Month School Curriculum', href: '/curriculum' },
+      { name: '24-Week Bootcamp Curriculum', href: '/curriculum/bootcamp' },
+      { name: 'Capstones', href: '/capstones' },
+    ] },
     { name: 'Lessons', href: '/lessons' },
-    { name: 'Capstones', href: '/capstones' },
     { name: 'Library', href: '/library' },
     { name: 'Playground', href: '/playground' },
-  ];
+  ] as const;
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm shadow-sm transition-colors">
@@ -52,14 +62,47 @@ export default function Header() {
 
           <div className="hidden lg:flex items-center space-x-6">
             {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 font-medium transition-colors relative group"
-              >
-                {item.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-500 group-hover:w-full transition-all duration-300"></span>
-              </Link>
+              'children' in item && item.children ? (
+                <div key={item.name} className="relative group/drop">
+                  <button className={`flex items-center gap-1 font-medium transition-colors ${
+                    item.name === 'Start Here'
+                      ? 'text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 font-semibold bg-emerald-50 dark:bg-emerald-900/20 px-3 py-1 rounded-full'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400'
+                  }`}>
+                    {item.name}
+                    <ChevronDown className="w-3.5 h-3.5" />
+                  </button>
+                  <div className="absolute top-full left-0 pt-2 hidden group-hover/drop:block z-50">
+                    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 py-2 min-w-[180px]">
+                      {item.children.map((child: any) => (
+                        <Link
+                          key={child.name}
+                          href={child.coming ? '#' : child.href}
+                          className={`block px-4 py-2 text-sm transition-colors ${child.coming
+                            ? 'text-gray-400 dark:text-gray-500 cursor-default'
+                            : 'text-gray-700 dark:text-gray-300 hover:bg-amber-50 dark:hover:bg-gray-700 hover:text-amber-600 dark:hover:text-amber-400'
+                          }`}
+                        >
+                          {child.name}
+                          {child.coming && <span className="ml-2 text-[10px] text-gray-400 bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">Soon</span>}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={item.name === 'Start Here'
+                    ? 'text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 font-semibold bg-emerald-50 dark:bg-emerald-900/20 px-3 py-1 rounded-full transition-colors'
+                    : 'text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 font-medium transition-colors relative group'
+                  }
+                >
+                  {item.name}
+                  {item.name !== 'Start Here' && <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-500 group-hover:w-full transition-all duration-300"></span>}
+                </Link>
+              )
             ))}
 
             <button
@@ -73,19 +116,47 @@ export default function Header() {
 
             {user ? (
               <div className="flex items-center gap-3">
-                <Link href="/plan"
-                  className="text-sm text-gray-600 dark:text-gray-400 hover:text-amber-600 dark:hover:text-amber-400 font-medium"
-                >
-                  My Plan
-                </Link>
-                <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 px-3 py-1.5 rounded-full">
-                  <User className="w-4 h-4 text-amber-600" />
-                  <Link href="/account" className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 transition-colors" title="Account settings">
-                    {profile?.display_name || user.email?.split('@')[0]}
-                  </Link>
-                  <button onClick={signOut} className="text-gray-400 hover:text-red-500 transition-colors" title="Sign out">
-                    <LogOut className="w-4 h-4" />
+                {/* Role-aware context switcher */}
+                <div className="relative group/ctx">
+                  <button className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 px-3 py-1.5 rounded-full">
+                    <User className="w-4 h-4 text-amber-600" />
+                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{profile?.display_name || user.email?.split('@')[0]}</span>
+                    <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
                   </button>
+                  <div className="absolute top-full right-0 pt-2 hidden group-hover/ctx:block z-50">
+                    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 py-2 min-w-[200px]">
+                      {hasRole('admin') && (
+                        <Link href="/program/mentor" className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                          <span className="w-2 h-2 rounded-full bg-red-500" />
+                          Admin
+                        </Link>
+                      )}
+                      {hasRole('teacher') && !hasRole('admin') && (
+                        <Link href="/program/mentor" className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                          <span className="w-2 h-2 rounded-full bg-purple-500" />
+                          Mentor
+                        </Link>
+                      )}
+                      <Link href="/plan" className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                        <span className="w-2 h-2 rounded-full bg-amber-500" />
+                        Student
+                      </Link>
+                      {hasRole('parent') && (
+                        <Link href="/program/parent" className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                          <span className="w-2 h-2 rounded-full bg-blue-500" />
+                          Parent / Guardian
+                        </Link>
+                      )}
+                      {/* Divider */}
+                      <div className="border-t border-gray-100 dark:border-gray-700 my-1" />
+                      <Link href="/account" className="flex items-center gap-3 px-4 py-2 text-sm text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                        Account Settings
+                      </Link>
+                      <button onClick={signOut} className="w-full flex items-center gap-3 px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors text-left">
+                        Sign Out
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             ) : (
@@ -114,11 +185,30 @@ export default function Header() {
         {isMenuOpen && (
           <div className="lg:hidden py-4 space-y-3 animate-fade-in">
             {navigation.map((item) => (
-              <Link key={item.name} href={item.href}
-                className="block text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 font-medium py-2 hover:bg-gray-50 dark:hover:bg-gray-800 px-4 rounded-lg transition-colors"
-                onClick={() => setIsMenuOpen(false)}>
-                {item.name}
-              </Link>
+              'children' in item && item.children ? (
+                <div key={item.name}>
+                  <p className="px-4 py-2 text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider">{item.name}</p>
+                  {item.children.map((child: any) => (
+                    <Link key={child.name} href={child.coming ? '#' : child.href}
+                      className={`block py-2 px-8 text-sm ${child.coming
+                        ? 'text-gray-400 dark:text-gray-500'
+                        : 'text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-gray-50 dark:hover:bg-gray-800'
+                      } rounded-lg transition-colors`}
+                      onClick={() => !child.coming && setIsMenuOpen(false)}>
+                      {child.name}{child.coming && <span className="ml-2 text-[10px] text-gray-400 bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">Soon</span>}
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <Link key={item.name} href={item.href}
+                  className={item.name === 'Start Here'
+                    ? 'block text-emerald-700 dark:text-emerald-400 font-semibold py-2 px-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg transition-colors'
+                    : 'block text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 font-medium py-2 hover:bg-gray-50 dark:hover:bg-gray-800 px-4 rounded-lg transition-colors'
+                  }
+                  onClick={() => setIsMenuOpen(false)}>
+                  {item.name}
+                </Link>
+              )
             ))}
             <button
               onClick={toggleTheme}

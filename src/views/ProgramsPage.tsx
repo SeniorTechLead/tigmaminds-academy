@@ -120,7 +120,7 @@ const faqs = [
 ];
 
 function WaitlistForm({ isIndia }: { isIndia: boolean }) {
-  const [form, setForm] = useState({ parentName: '', email: '', childAge: '', city: '', role: '' });
+  const [form, setForm] = useState({ parentName: '', email: '', phone: '', childAge: '', city: '', role: '', callback: false });
   const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
@@ -168,7 +168,7 @@ function WaitlistForm({ isIndia }: { isIndia: boolean }) {
         <h3 className="text-xl font-bold text-gray-900 dark:text-white">Join the Workshop Waitlist</h3>
       </div>
       <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
-        We're launching mentor-led workshops in Guwahati and Thiruvananthapuram — 24-week bootcamps for career changers and 12-month programs for students. Small cohorts, dedicated mentors, real outcomes.
+        Mentor-led workshops in Guwahati and Thiruvananthapuram — 24-week bootcamps for career changers and 12-month programs for students. Small cohorts, dedicated mentors, real outcomes.
       </p>
 
       {status === 'error' && (
@@ -387,10 +387,16 @@ function BootcampCard({ isIndia }: { isIndia: boolean }) {
         <li className="flex items-start gap-2"><span className="text-sky-500 mt-0.5">✓</span> Job referral network</li>
       </ul>
 
-      <button onClick={() => setExpanded(!expanded)}
-        className="mt-4 flex items-center gap-1.5 text-xs font-semibold text-sky-600 dark:text-sky-400 hover:underline">
-        {expanded ? 'Hide' : 'See'} full curriculum <ChevronDown className={`w-3.5 h-3.5 transition-transform ${expanded ? 'rotate-180' : ''}`} />
-      </button>
+      <div className="mt-4 flex items-center gap-4">
+        <Link href="/curriculum/bootcamp"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-600 dark:text-sky-400 hover:underline">
+          View full 24-week curriculum <ArrowRight className="w-3.5 h-3.5" />
+        </Link>
+        <button onClick={() => setExpanded(!expanded)}
+          className="flex items-center gap-1.5 text-xs font-semibold text-gray-500 dark:text-gray-400 hover:underline">
+          {expanded ? 'Hide' : 'Preview'} tracks <ChevronDown className={`w-3.5 h-3.5 transition-transform ${expanded ? 'rotate-180' : ''}`} />
+        </button>
+      </div>
 
       {expanded && (
         <div className="mt-4 border-t border-sky-100 dark:border-sky-900 pt-4">
@@ -471,10 +477,16 @@ function SchoolProgramCard({ isIndia }: { isIndia: boolean }) {
         <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span> Progress reports for parents &amp; schools</li>
       </ul>
 
-      <button onClick={() => setExpanded(!expanded)}
-        className="mt-4 flex items-center gap-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:underline">
-        {expanded ? 'Hide' : 'See'} full curriculum <ChevronDown className={`w-3.5 h-3.5 transition-transform ${expanded ? 'rotate-180' : ''}`} />
-      </button>
+      <div className="mt-4 flex items-center gap-4">
+        <Link href="/curriculum"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:underline">
+          View full 48-week curriculum <ArrowRight className="w-3.5 h-3.5" />
+        </Link>
+        <button onClick={() => setExpanded(!expanded)}
+          className="flex items-center gap-1.5 text-xs font-semibold text-gray-500 dark:text-gray-400 hover:underline">
+          {expanded ? 'Hide' : 'Preview'} tracks <ChevronDown className={`w-3.5 h-3.5 transition-transform ${expanded ? 'rotate-180' : ''}`} />
+        </button>
+      </div>
 
       {expanded && (
         <div className="mt-4 border-t border-emerald-100 dark:border-emerald-900 pt-4">
@@ -534,20 +546,17 @@ export default function ProgramsPage() {
       <Header />
 
       {/* ── Hero ── */}
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-amber-50 via-white to-orange-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800">
+      <section className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-amber-50 via-white to-orange-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
-            Learn STEM through<br />
-            <span className="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">stories that stay with you</span>
+          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
+            Three ways to learn
           </h1>
-          <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 mb-8">
-            Ages 10+ &middot; No experience needed &middot; Start free
+          <p className="text-lg text-gray-600 dark:text-gray-300 mb-2">
+            Self-paced online, 12-month school program, or 24-week career bootcamp.
           </p>
-          <Link href="/lessons"
-            className="inline-flex items-center bg-gradient-to-r from-amber-500 to-orange-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl hover:scale-105 transition-all"
-          >
-            Browse Free Lessons <ArrowRight className="ml-2 w-5 h-5" />
-          </Link>
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            All paths start free. Upgrade when you are ready.
+          </p>
         </div>
       </section>
 
@@ -568,174 +577,67 @@ export default function ProgramsPage() {
         </div>
       )}
 
-      {/* ── Two Tracks ── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-amber-50/30 dark:from-gray-900 dark:to-gray-800/30">
+      {/* ── Three Paths ── */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 text-center">Two Tracks</h2>
-          <p className="text-gray-600 dark:text-gray-400 text-center mb-12 max-w-2xl mx-auto">Both tracks use the same story-driven curriculum. Choose the format that fits your goals.</p>
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Online Self-Paced */}
-            <SelfPacedCard isIndia={isIndia} />
-            {/* Mentor-Led Workshops */}
-            <div className="rounded-2xl border-2 border-amber-300 dark:border-amber-700 p-8 bg-amber-50/50 dark:bg-amber-900/10">
-              <div className="w-12 h-12 rounded-xl bg-amber-100 dark:bg-amber-900/40 flex items-center justify-center mb-4">
-                <Users className="w-6 h-6 text-amber-600 dark:text-amber-400" />
+          <div className="grid md:grid-cols-3 gap-6">
+            {/* Self-Paced */}
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 flex flex-col">
+              <span className="text-3xl mb-3">📚</span>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Self-Paced Online</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 flex-1">
+                {lessons.length}+ story-driven lessons. Start free with Level 0, upgrade for full coding access. Learn at your own speed.
+              </p>
+              <div className="text-sm text-gray-500 mb-4">
+                <span className="font-semibold text-gray-900 dark:text-white">Free</span> or <span className="font-semibold text-gray-900 dark:text-white">{isIndia ? '₹1,999' : '$24'}/mo</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Mentor-Led Workshops</h3>
-              <p className="text-gray-600 dark:text-gray-400 text-sm mb-6">Everything online, plus a mentor, a cohort, and real-world outcomes. Two formats:</p>
+              <Link href="/lessons" className="inline-flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 text-sm font-semibold hover:bg-amber-200 dark:hover:bg-amber-800/30 transition-colors">
+                Browse Lessons <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
 
-              {/* Sub-track: Bootcamp */}
-              <BootcampCard isIndia={isIndia} />
+            {/* School Program */}
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 border-2 border-emerald-200 dark:border-emerald-800 flex flex-col">
+              <span className="text-3xl mb-3">🏫</span>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">12-Month School Program</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 flex-1">
+                Structured 48-week curriculum with a dedicated mentor. Small cohorts (max 12), hands-on hardware, monthly project showcases. Grades 6-12.
+              </p>
+              <div className="text-sm text-gray-500 mb-4">
+                <span className="font-semibold text-gray-900 dark:text-white">{isIndia ? '₹9,999' : '$59'}/mo</span> &middot; 4 tracks available
+              </div>
+              <Link href="/curriculum" className="inline-flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold transition-colors">
+                View 48-Week Curriculum <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
 
-              {/* Sub-track: School Program */}
-              <SchoolProgramCard isIndia={isIndia} />
-
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">Both formats: {isIndia ? '₹9,999' : '$59'}/mo — coming to select cities</p>
-              <a href="#waitlist" className="inline-flex items-center gap-1.5 text-sm text-amber-600 dark:text-amber-400 hover:underline font-medium">
-                Join the waitlist <ArrowRight className="w-3.5 h-3.5" />
-              </a>
+            {/* Bootcamp */}
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 border-2 border-purple-200 dark:border-purple-800 flex flex-col relative">
+              <div className="absolute -top-3 left-4 bg-purple-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full">Early Bird</div>
+              <span className="text-3xl mb-3">🚀</span>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">24-Week Bootcamp</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 flex-1">
+                Intensive career training. Full-Stack, AI/ML, or Cloud/DevOps. Production portfolio, mock interviews, employer introductions. Career changers &amp; grads.
+              </p>
+              <div className="text-sm text-gray-500 mb-4">
+                <span className="line-through text-gray-400">{isIndia ? '₹19,999' : '$119'}/mo</span>{' '}
+                <span className="font-semibold text-purple-700 dark:text-purple-300">{isIndia ? '₹14,999' : '$89'}/mo</span>
+              </div>
+              <Link href="/curriculum/bootcamp" className="inline-flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-sm font-semibold transition-colors">
+                View 24-Week Curriculum <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── What Students Will Build ── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800/50">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 text-center">What Students Will Build</h2>
-          <p className="text-gray-600 dark:text-gray-300 text-center mb-12 max-w-2xl mx-auto">
-            Real capstone projects from real lessons. Each one starts with a story and ends with working code.
-          </p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {capstoneProjects.map((proj) => (
-              <Link
-                key={proj.slug}
-                href={`/lessons/${proj.slug}`}
-                className="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700 hover:shadow-lg hover:border-amber-200 dark:hover:border-amber-800 transition-all group block"
-              >
-                <div className={`h-2 w-16 rounded-full bg-gradient-to-r ${proj.color} mb-4`} />
-                <p className="text-xs font-semibold text-amber-600 dark:text-amber-400 uppercase tracking-wide mb-2">
-                  {proj.story}
-                </p>
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
-                  {proj.project}
-                </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
-                  {proj.description}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {proj.skills.map((skill) => (
-                    <span key={skill} className="text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-1 rounded-full">
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Who Is This For ── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
+      {/* ── Pricing Detail ── */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800/50">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-12 text-center">Who Is This For</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {audiences.map((aud) => {
-              const Icon = aud.icon;
-              return (
-                <div key={aud.title} className="text-center">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center mx-auto mb-4">
-                    <Icon className="w-7 h-7 text-white" />
-                  </div>
-                  <h3 className="text-base font-bold text-gray-900 dark:text-white mb-2">{aud.title}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{aud.desc}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 text-center">Pricing</h2>
+          <p className="text-gray-600 dark:text-gray-400 text-center mb-10">Start free. Upgrade when you are ready.</p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
 
-      {/* ── How It Works ── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-12 text-center">How It Works</h2>
-          <div className="space-y-8">
-            {steps.map((step) => (
-              <div key={step.num} className="flex gap-5 items-start">
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white font-bold text-lg">
-                  {step.num}
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">{step.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-300">{step.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── What You Get (Free) ── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
-        <div className="max-w-5xl mx-auto">
-          <div className="flex items-center gap-3 justify-center mb-10">
-            <Unlock className="w-6 h-6 text-emerald-500" />
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white">What You Get — Free</h2>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { icon: BookOpen, title: `${lessons.length}+ illustrated stories`, desc: 'From Northeast India, Hindu, Buddhist, Christian, and Islamic traditions — each one a doorway into real science.' },
-              { icon: FlaskConical, title: 'Level 0 for every story', desc: 'The science explained through the story, with diagrams. No code required — just curiosity.' },
-              { icon: Sparkles, title: 'First 2 concepts free', desc: 'Try the first two concepts of each lesson. Sign up to continue — no credit card needed.' },
-              { icon: BarChart3, title: '90+ reference topics', desc: 'An interactive library covering physics, biology, chemistry, math, and coding.' },
-              { icon: Code2, title: 'In-browser Python', desc: 'Run code right in the browser. No installation, no setup, no barriers.' },
-              { icon: Award, title: 'No credit card needed', desc: 'Create a free account and start learning immediately.' },
-            ].map((item) => {
-              const Icon = item.icon;
-              return (
-                <div key={item.title} className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-green-500 flex items-center justify-center mb-4">
-                    <Icon className="w-5 h-5 text-white" />
-                  </div>
-                  <h3 className="text-base font-bold text-gray-900 dark:text-white mb-2">{item.title}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{item.desc}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ── What You Get (Enrolled) ── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-amber-50/40 dark:from-gray-900 dark:to-gray-800/40">
-        <div className="max-w-5xl mx-auto">
-          <div className="flex items-center gap-3 justify-center mb-10">
-            <Lock className="w-6 h-6 text-amber-500" />
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white">What You Get — Enrolled</h2>
-          </div>
-          <div className="grid sm:grid-cols-2 gap-6 mb-10">
-            {[
-              { icon: Rocket, title: 'All 5 levels per story', desc: 'Listener, Explorer, Builder, Engineer, Creator — go from zero knowledge to a finished project.' },
-              { icon: Code2, title: 'Hands-on Python projects', desc: 'Build real programs: simulators, classifiers, data visualizers, and interactive tools.' },
-              { icon: Wrench, title: 'Interactive tools', desc: 'Beat machine, logic gate simulator, Gaussian explorer, and more — learn by doing.' },
-              { icon: Award, title: 'Progress tracking', desc: 'See where you are, what you\'ve completed, and what comes next.' },
-            ].map((item) => {
-              const Icon = item.icon;
-              return (
-                <div key={item.title} className="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center mb-4">
-                    <Icon className="w-5 h-5 text-white" />
-                  </div>
-                  <h3 className="text-base font-bold text-gray-900 dark:text-white mb-2">{item.title}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{item.desc}</p>
-                </div>
-              );
-            })}
-          </div>
-          {/* Pricing */}
-          <div id="pricing" className="grid md:grid-cols-3 gap-6 mt-12 scroll-mt-24">
             {/* Free */}
             <div className="rounded-2xl border-2 border-gray-200 dark:border-gray-700 p-6 bg-white dark:bg-gray-800 text-center">
               <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">Free</h3>
@@ -745,23 +647,25 @@ export default function ProgramsPage() {
                 <li className="flex items-start gap-2"><span className="text-emerald-500">✓</span> All {lessons.length}+ stories</li>
                 <li className="flex items-start gap-2"><span className="text-emerald-500">✓</span> Level 0 — first 2 concepts</li>
                 <li className="flex items-start gap-2"><span className="text-emerald-500">✓</span> Reference library previews</li>
+                <li className="flex items-start gap-2"><span className="text-emerald-500">✓</span> Python/Web/SQL/Arduino basics courses</li>
               </ul>
               <Link href="/lessons" className="block w-full py-2.5 rounded-xl bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 text-sm font-semibold hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
                 Browse Lessons
               </Link>
             </div>
+
             {/* Online */}
             <div className="rounded-2xl border-2 border-amber-400 dark:border-amber-600 p-6 bg-amber-50/50 dark:bg-amber-900/10 text-center relative">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full">Most Popular</div>
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">Online</h3>
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1 mt-1">Online</h3>
               <p className="text-3xl font-bold text-gray-900 dark:text-white mb-1">{isIndia ? '₹1,999' : '$24'}<span className="text-base font-normal text-gray-500">/mo</span></p>
               <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">or {isIndia ? '₹19,999/year' : '$239/year'} (2 months free)</p>
               <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-2 text-left mb-6">
                 <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> Everything in Free, plus:</li>
                 <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> All 5 levels per story</li>
-                <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> Python coding projects</li>
-                <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> Interactive tools</li>
-                <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> Progress tracking</li>
+                <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> {problems.length}+ coding problems</li>
+                <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> Full reference library</li>
+                <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> Progress tracking &amp; certificates</li>
               </ul>
               {hasActiveSubscription && currentPlan === 'online' ? (
                 <div className="py-2.5 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-sm font-semibold text-center">
@@ -771,28 +675,47 @@ export default function ProgramsPage() {
                 <CheckoutButton plan="online_monthly" label="Subscribe — Monthly" />
               )}
             </div>
-            {/* In-Person */}
-            <div className="rounded-2xl border-2 border-purple-200 dark:border-purple-800 p-6 bg-white dark:bg-gray-800 text-center">
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">Mentor-Led</h3>
+
+            {/* School Program */}
+            <div className="rounded-2xl border-2 border-emerald-200 dark:border-emerald-800 p-6 bg-white dark:bg-gray-800 text-center">
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">School Program</h3>
               <p className="text-3xl font-bold text-gray-900 dark:text-white mb-1">{isIndia ? '₹9,999' : '$59'}<span className="text-base font-normal text-gray-500">/mo</span></p>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Bootcamp (24 wks) or School Program (12 mo)</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">12 months &middot; Grades 6-12</p>
               <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-2 text-left mb-6">
-                <li className="flex items-start gap-2"><span className="text-purple-500">✓</span> Everything in Online, plus:</li>
-                <li className="flex items-start gap-2"><span className="text-purple-500">✓</span> Dedicated mentor &amp; small cohort (max 12)</li>
-                <li className="flex items-start gap-2"><span className="text-purple-500">✓</span> Weekly code reviews &amp; feedback</li>
-                <li className="flex items-start gap-2"><span className="text-purple-500">✓</span> Portfolio projects (bootcamp) or lab experiments (school)</li>
-                <li className="flex items-start gap-2"><span className="text-purple-500">✓</span> Mock interviews &amp; job referrals (bootcamp)</li>
-                <li className="flex items-start gap-2"><span className="text-purple-500">✓</span> Progress reports (school)</li>
+                <li className="flex items-start gap-2"><span className="text-emerald-500">✓</span> Everything in Online, plus:</li>
+                <li className="flex items-start gap-2"><span className="text-emerald-500">✓</span> Dedicated mentor &amp; cohort (max 12)</li>
+                <li className="flex items-start gap-2"><span className="text-emerald-500">✓</span> Hands-on hardware &amp; sensors</li>
+                <li className="flex items-start gap-2"><span className="text-emerald-500">✓</span> Monthly project showcases</li>
+                <li className="flex items-start gap-2"><span className="text-emerald-500">✓</span> Parent progress reports</li>
               </ul>
-              <p className="text-xs text-gray-400 dark:text-gray-500 mb-4">Coming to select cities — join the waitlist</p>
-              <a href="#waitlist" className="block w-full py-2.5 rounded-xl bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-sm font-semibold hover:bg-purple-200 dark:hover:bg-purple-800/30 transition-colors">
+              <Link href="/curriculum" className="block text-xs text-emerald-600 dark:text-emerald-400 hover:underline mb-3">View 48-week curriculum →</Link>
+              <a href="#waitlist" className="block w-full py-2.5 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-sm font-semibold hover:bg-emerald-200 dark:hover:bg-emerald-800/30 transition-colors">
                 Join Waitlist
+              </a>
+            </div>
+
+            {/* Bootcamp */}
+            <div className="rounded-2xl border-2 border-purple-300 dark:border-purple-700 p-6 bg-white dark:bg-gray-800 text-center relative">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-purple-600 text-white text-[10px] font-bold px-3 py-1 rounded-full">Early Bird — 24 Seats</div>
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1 mt-1">Bootcamp</h3>
+              <p className="text-sm text-gray-400 line-through">{isIndia ? '₹19,999/mo' : '$119/mo'}</p>
+              <p className="text-3xl font-bold text-purple-700 dark:text-purple-300 mb-1">{isIndia ? '₹14,999' : '$89'}<span className="text-base font-normal text-gray-500">/mo</span></p>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">24 weeks &middot; Career changers</p>
+              <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-2 text-left mb-6">
+                <li className="flex items-start gap-2"><span className="text-purple-500">✓</span> Full-Stack, AI/ML, or Cloud/DevOps</li>
+                <li className="flex items-start gap-2"><span className="text-purple-500">✓</span> Dedicated mentor &amp; cohort (max 15)</li>
+                <li className="flex items-start gap-2"><span className="text-purple-500">✓</span> 8+ portfolio projects</li>
+                <li className="flex items-start gap-2"><span className="text-purple-500">✓</span> Mock interviews &amp; job referrals</li>
+                <li className="flex items-start gap-2"><span className="text-purple-500">✓</span> Hardware kit included</li>
+              </ul>
+              <Link href="/curriculum/bootcamp" className="block text-xs text-purple-600 dark:text-purple-400 hover:underline mb-3">View 24-week curriculum →</Link>
+              <a href="#waitlist" className="block w-full py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-sm font-semibold transition-colors">
+                Join Early Bird
               </a>
             </div>
           </div>
         </div>
       </section>
-
       {/* ── Waitlist ── */}
       <section id="waitlist" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900 scroll-mt-24">
         <div className="max-w-2xl mx-auto">
@@ -812,45 +735,6 @@ export default function ProgramsPage() {
         </div>
       </section>
 
-      {/* ── Partner With Us ── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800/50">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">Partner With Us</h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Bring story-driven STEM education to your school, college, or organization. We work with institutions across India to integrate our curriculum.
-            </p>
-          </div>
-          <div className="grid sm:grid-cols-3 gap-6 mb-10">
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
-              <div className="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center mb-3">
-                <span className="text-xl">🏫</span>
-              </div>
-              <h3 className="font-bold text-gray-900 dark:text-white mb-2">Schools</h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400">12-month STEM program that fits alongside your existing curriculum. Teacher training included.</p>
-            </div>
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
-              <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-3">
-                <span className="text-xl">🎓</span>
-              </div>
-              <h3 className="font-bold text-gray-900 dark:text-white mb-2">Colleges</h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Project-based bootcamp tracks for CS, engineering, and science departments. Real-world portfolio outcomes.</p>
-            </div>
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
-              <div className="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center mb-3">
-                <span className="text-xl">🤝</span>
-              </div>
-              <h3 className="font-bold text-gray-900 dark:text-white mb-2">NGOs & Government</h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Subsidized access for underserved communities. We partner with organizations working in rural education.</p>
-            </div>
-          </div>
-          <div className="text-center">
-            <Link href="/partner" className="inline-flex items-center gap-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-8 py-3 rounded-full font-semibold hover:opacity-90 transition-opacity">
-              Learn More & Apply <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </div>
-      </section>
 
       {/* ── Footer CTA ── */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-amber-500 to-orange-500">

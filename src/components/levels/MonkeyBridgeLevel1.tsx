@@ -207,10 +207,10 @@ for h, label, color in layers:
 # Species by layer
 ax2.set_facecolor('#111827')
 species_data = {
-    'Emergent\n(40-45m)': ['Hornbills', 'Eagles'],
-    'Upper canopy\n(20-40m)': ['Gibbons', 'Langurs', 'Macaques'],
-    'Understory\n(5-20m)': ['Civets', 'Tree frogs', 'Snakes'],
-    'Forest floor\n(0-5m)': ['Deer', 'Porcupines', 'Beetles'],
+    'Emergent\\n(40-45m)': ['Hornbills', 'Eagles'],
+    'Upper canopy\\n(20-40m)': ['Gibbons', 'Langurs', 'Macaques'],
+    'Understory\\n(5-20m)': ['Civets', 'Tree frogs', 'Snakes'],
+    'Forest floor\\n(0-5m)': ['Deer', 'Porcupines', 'Beetles'],
 }
 
 y_positions = [42, 30, 15, 3]

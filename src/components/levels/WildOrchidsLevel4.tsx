@@ -606,8 +606,8 @@ ax.tick_params(colors='gray')
 # Orchid survival under different scenarios
 ax = axes[1, 1]
 ax.set_facecolor('#111827')
-scenarios = ['Intact\nforest', 'Random\n10% loss', 'Random\n30% loss',
-             'Target\ntop 3 hubs', 'Target\ntop 5 hubs']
+scenarios = ['Intact\\nforest', 'Random\\n10% loss', 'Random\\n30% loss',
+             'Target\\ntop 3 hubs', 'Target\\ntop 5 hubs']
 orchid_survival = []
 
 # Intact
@@ -876,7 +876,7 @@ mean_cc = np.mean([0])  # simplified
 resilience = threshold_idx / n_t if threshold_idx > 0 else 1.0
 orchid_coverage = sum(1 for c in dep_counts if c > 0) / n_o
 
-health_metrics = ['Connectivity', 'Density', 'Resilience', 'Orchid\ncoverage']
+health_metrics = ['Connectivity', 'Density', 'Resilience', 'Orchid\\ncoverage']
 health_values = [orig_lcc/n_all, density*10, resilience, orchid_coverage]
 health_colors = ['#22c55e' if v > 0.5 else '#f59e0b' if v > 0.3 else '#ef4444' for v in health_values]
 

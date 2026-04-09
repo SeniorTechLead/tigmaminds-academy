@@ -215,6 +215,7 @@ x = 42
 print(isinstance(x, int))        # True
 print(isinstance(x, (int, float)))  # True (either type)
 print(isinstance("hi", str))     # True`,
+        interactive: { type: 'python-playground' as const, props: { starterCode: '# Try it: create your own variables\nname = "your name here"\nage = 14\nprint(f"Hi, I am {name} and I am {age} years old")\nprint(f"Next year I will be {age + 1}")\nprint(f"Type of name: {type(name).__name__}")\nprint(f"Type of age: {type(age).__name__}")', title: 'Try it — Variables' } },
       },
       {
         id: 'py-strings',
@@ -333,6 +334,7 @@ scores = [85, 92, 78, 95, 88]
 print(min(scores))   # 78
 print(max(scores))   # 95
 print(sum(scores))   # 438`,
+        interactive: { type: 'python-playground' as const, props: { starterCode: '# Try it: make a list and explore it\nfruits = ["mango", "banana", "apple", "guava"]\nprint("All fruits:", fruits)\nprint("First:", fruits[0])\nprint("Last:", fruits[-1])\n\nfruits.append("papaya")\nprint("After append:", fruits)\nprint("Count:", len(fruits))\n\n# Try sorting\nfruits.sort()\nprint("Sorted:", fruits)', title: 'Try it — Lists' } },
       },
       {
         id: 'py-conditionals',
@@ -390,6 +392,7 @@ def classify(magnitude):
     return "major"          # no need for else — earlier returns handle it
 
 print(classify(5.5))  # "moderate"`,
+        interactive: { type: 'python-playground' as const, props: { starterCode: '# Try it: change the temperature and see what happens\ntemperature = 28\n\nif temperature > 35:\n    print("Too hot!")\nelif temperature > 25:\n    print("Warm and pleasant")\nelif temperature > 15:\n    print("Cool")\nelse:\n    print("Cold!")\n\n# Try changing temperature to 40, 10, or -5', title: 'Try it — Conditionals' } },
       },
       {
         id: 'py-loops',
@@ -477,6 +480,7 @@ for g in growth:
     else:
         current_streak = 0
 print(f"Longest growth streak: {longest_streak}")  # 3`,
+        interactive: { type: 'python-playground' as const, props: { starterCode: '# Try it: loops in action\nanimals = ["elephant", "tiger", "rhino", "deer"]\n\n# for loop\nfor animal in animals:\n    print(f"I saw a {animal}!")\n\nprint()\n\n# range loop\ntotal = 0\nfor i in range(1, 11):\n    total += i\nprint(f"Sum of 1 to 10 = {total}")', title: 'Try it — Loops' } },
       },
       {
         id: 'py-functions',
@@ -566,6 +570,7 @@ print(double(7))  # 14
 animals = [("elephant", 4500), ("dolphin", 150), ("rhino", 2200)]
 by_weight = sorted(animals, key=lambda a: a[1])
 print(by_weight[0])  # ('dolphin', 150)`,
+        interactive: { type: 'python-playground' as const, props: { starterCode: '# Try it: write and call your own function\ndef greet(name, times=1):\n    for _ in range(times):\n        print(f"Hello, {name}!")\n\ngreet("Tara")\ngreet("Kavitha", 3)\n\n# Now write a function that calculates area\ndef area_circle(radius):\n    return 3.14159 * radius ** 2\n\nprint(f"Area of radius 5: {area_circle(5):.2f}")', title: 'Try it — Functions' } },
       },
       {
         id: 'py-dicts',

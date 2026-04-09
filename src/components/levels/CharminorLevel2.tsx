@@ -83,7 +83,7 @@ result = trilaterate(towers[0][1], distances[0],
                      towers[1][1], distances[1],
                      towers[2][1], distances[2])
 
-print(f"\nTrilaterated position: ({result[0]:.4f}, {result[1]:.4f})")
+print(f"\\nTrilaterated position: ({result[0]:.4f}, {result[1]:.4f})")
 error = np.sqrt((result[0]-true_pos[0])**2 + (result[1]-true_pos[1])**2)
 print(f"Error: {error:.6f} km = {error*1000:.2f} m")
 
@@ -434,7 +434,7 @@ for name, eff in routes:
     extra = actual_dist - direct
     print(f"{name:<25} {eff:>8}% {time_min:>10.1f} {extra:>8.1f}")
 
-print(f"\n* Based on {speed} km/h flight speed, direct distance {direct:.1f} km")`,
+print(f"\\n* Based on {speed} km/h flight speed, direct distance {direct:.1f} km")`,
       challenge: 'Generate a random "exploration flight" where the pigeon deviates from the direct path: at each step, it flies 0.5 km in a direction that is the correct bearing +/- 30 degrees of random error. Simulate 100 such flights and calculate the average arrival time and route efficiency.',
       successHint: 'Waypoint navigation is used by every aircraft, ship, drone, and autonomous vehicle in the world. The flight management system in a commercial aircraft stores hundreds of waypoints and calculates legs between them continuously. You just built a simplified version of the same system.',
     },

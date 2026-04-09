@@ -1064,20 +1064,20 @@ class BirdCensusAnalyzer:
         lines.append("=" * 60)
         lines.append("     BIRD CENSUS ANALYZER — FINAL REPORT")
         lines.append("=" * 60)
-        lines.append(f"\n--- POPULATION ---")
+        lines.append(f"\\n--- POPULATION ---")
         lines.append(f"Total estimated abundance: {pop_results['total']:.0f}")
         lines.append(f"Detection probability: {pop_results['detection_prob']:.2f}")
         lines.append(f"Sites surveyed: {len(pop_results['abundance'])}")
-        lines.append(f"\n--- HABITAT MODEL ---")
+        lines.append(f"\\n--- HABITAT MODEL ---")
         lines.append(f"R-squared: {hab_results['r_squared']:.3f}")
-        lines.append(f"\n--- DIVERSITY ---")
+        lines.append(f"\\n--- DIVERSITY ---")
         lines.append(f"Mean richness: {div_results['richness'].mean():.1f}")
         lines.append(f"Mean Shannon H': {div_results['shannon'].mean():.2f}")
         lines.append(f"Mean Simpson (1-D): {div_results['simpson'].mean():.2f}")
-        lines.append(f"\n--- PRIORITY ---")
+        lines.append(f"\\n--- PRIORITY ---")
         for name, scores in priority_results.items():
             lines.append(f"{name}: mean={scores.mean():.3f}, max={scores.max():.3f}")
-        return "\n".join(lines)
+        return "\\n".join(lines)
 
 
 # ============================================================

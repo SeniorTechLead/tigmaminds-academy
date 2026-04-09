@@ -555,7 +555,6 @@ We will also add a **full-range visualization** that plots all three curves from
       checkAnswer: 'First, find the O2 partial pressure at 5,000 m: 0.2095 * P(5000) = about 11,200 Pa = 84 mmHg. Then find the total pressure at 7,500 m: P(7500) = about 38,500 Pa, giving ambient O2 of 0.2095 * 38,500 = 8,066 Pa = 60 mmHg. The deficit is 84 - 60 = 24 mmHg. The supplemental O2 system must deliver enough pure oxygen to raise the inspired O2 from 60 to 84 mmHg, which requires a flow rate of about 2 L/min with a standard mask (since pure O2 at that pressure provides roughly 12 mmHg per L/min of flow).',
       codeIntro: 'Assemble the complete Altitude Effects Calculator with user input, full visualization, and physiological assessment.',
       code: `import numpy as np
-import matplotlib.pyplot as plt
 
 # === Core functions ===
 P0, M, g, R, T_atm = 101325, 0.02896, 9.81, 8.314, 288.15
@@ -573,86 +572,75 @@ def boil_pt(h):
     return (1/inv_T) - 273.15
 
 def classify_zone(h):
-    if h < 2400: return "Safe zone", "#22c55e"
-    if h < 5000: return "Caution zone", "#fbbf24"
-    if h < 8000: return "Danger zone", "#f59e0b"
-    return "DEATH ZONE", "#ef4444"
+    if h < 2400: return "Safe zone"
+    if h < 5000: return "Caution zone"
+    if h < 8000: return "Danger zone"
+    return "DEATH ZONE"
 
 # === User input altitude ===
 user_alt = 4500  # Change this to explore!
 
-# === Full visualization ===
-h = np.linspace(0, 8586, 500)
-fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(10, 10),
-                                      sharex=True)
-fig.patch.set_facecolor('#1f2937')
-fig.suptitle(f'Altitude Effects Calculator | Input: {user_alt} m',
-             color='white', fontsize=14, fontweight='bold')
+# === Full text-based altitude profile ===
+print("=" * 55)
+print("  ALTITUDE EFFECTS — PROFILE (0 to 8586 m)")
+print("=" * 55)
+sample_alts = [0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 8586]
+print(f"{'Alt (m)':>8}  {'Press (kPa)':>11}  {'O2 (mmHg)':>10}  {'Boil (C)':>9}")
+print("-" * 44)
+for alt in sample_alts:
+    p_kpa = pressure(alt) / 1000
+    o2_mmhg = o2_pp(alt) / 133.322
+    bp_c = boil_pt(alt)
+    marker = " <<<" if alt == user_alt else ""
+    print(f"{alt:>8}  {p_kpa:>11.1f}  {o2_mmhg:>10.1f}  {bp_c:>9.1f}{marker}")
 
-for ax in (ax1, ax2, ax3):
-    ax.set_facecolor('#111827')
-    ax.tick_params(colors='gray')
-    ax.grid(True, alpha=0.12, color='gray')
-    ax.axvspan(3.0, 5.5, alpha=0.06, color='#22c55e')
-    ax.axvspan(8.0, 8.6, alpha=0.12, color='#ef4444')
-    ax.axvline(user_alt/1000, color='white', ls='-', lw=1.5,
-               alpha=0.8)
-
-ax1.plot(h/1000, pressure(h)/1000, color='#3b82f6', lw=2.5)
-ax1.scatter([user_alt/1000], [pressure(user_alt)/1000],
-            color='white', s=100, zorder=5, edgecolors='#3b82f6')
-ax1.set_ylabel('Pressure (kPa)', color='white')
-
-po2 = o2_pp(h) / 133.322
-ax2.plot(h/1000, po2, color='#22c55e', lw=2.5)
-ax2.scatter([user_alt/1000], [o2_pp(user_alt)/133.322],
-            color='white', s=100, zorder=5, edgecolors='#22c55e')
-ax2.axhline(110, color='#fbbf24', ls='--', lw=0.8, alpha=0.6)
-ax2.axhline(70, color='#ef4444', ls='--', lw=0.8, alpha=0.6)
-ax2.set_ylabel('O2 (mmHg)', color='white')
-
-ax3.plot(h/1000, boil_pt(h), color='#f59e0b', lw=2.5)
-ax3.scatter([user_alt/1000], [boil_pt(user_alt)],
-            color='white', s=100, zorder=5, edgecolors='#f59e0b')
-ax3.set_ylabel('Boiling point (C)', color='white')
-ax3.set_xlabel('Altitude (km)', color='white')
-
-plt.tight_layout(rect=[0, 0, 1, 0.95])
-plt.show()
-
-# === Comprehensive report ===
-zone, _ = classify_zone(user_alt)
+# === Comprehensive report for user altitude ===
+zone = classify_zone(user_alt)
 p = pressure(user_alt)
 po2_val = o2_pp(user_alt)
 bp = boil_pt(user_alt)
 o2_pct = (po2_val / o2_pp(0)) * 100
 
-print("=" * 55)
+print("\\n" + "=" * 55)
 print("  ALTITUDE EFFECTS CALCULATOR — REPORT")
 print("=" * 55)
 print(f"  Input altitude:    {user_alt:,} m")
 print(f"  Zone:              {zone}")
 print(f"  Pressure:          {p:,.0f} Pa ({p/1000:.1f} kPa)")
-print(f"  O2 partial press.: {po2_val:,.0f} Pa "
-      f"({po2_val/133.322:.0f} mmHg)")
+print(f"  O2 partial press.: {po2_val:,.0f} Pa ({po2_val/133.322:.0f} mmHg)")
 print(f"  O2 vs sea level:   {o2_pct:.1f}%")
 print(f"  Boiling point:     {bp:.1f} C")
+
+if o2_pct < 50:
+    print("  *** SEVERE hypoxia risk — supplemental O2 required ***")
+elif o2_pct < 70:
+    print("  ** Moderate hypoxia — acclimatization essential **")
+else:
+    print("  Mild or no hypoxia risk at this altitude.")
 print("-" * 55)
 
-# Comparison table
+# === Comparison table ===
 refs = [('Sea level', 0), ('Tawang', 3048),
         ('Snow leopard (low)', 3000),
         ('Your altitude', user_alt),
         ('Snow leopard (high)', 5500),
         ('Base camp', 5150), ('Death zone', 8000),
         ('Summit', 8586)]
-print(f"{'Location':<22} {'Alt':>6} {'O2%':>6} {'Boil':>6}")
+print(f"\\n{'Location':<22} {'Alt':>6} {'O2%':>6} {'Boil':>6}")
 print("-" * 44)
 for name, alt in sorted(refs, key=lambda x: x[1]):
     pct = (o2_pp(alt) / o2_pp(0)) * 100
     tag = " <--" if alt == user_alt else ""
-    print(f"{name:<22} {alt:>5}m {pct:>5.0f}% "
-          f"{boil_pt(alt):>5.1f}C{tag}")`,
+    print(f"{name:<22} {alt:>5}m {pct:>5.0f}% {boil_pt(alt):>5.1f}C{tag}")
+
+# === Altitude cost: sea level vs user altitude ===
+o2_drop = o2_pp(0)/133.322 - o2_pp(user_alt)/133.322
+bp_drop = boil_pt(0) - boil_pt(user_alt)
+accl_days = max(0, (user_alt - 3000) / 300) if user_alt > 3000 else 0
+print(f"\\n--- Altitude cost (sea level -> {user_alt} m) ---")
+print(f"  O2 drop:          {o2_drop:.1f} mmHg")
+print(f"  Boiling pt drop:  {bp_drop:.1f} C")
+print(f"  Est. acclimatize: {accl_days:.0f} days")`,
       challenge: 'Add a function that takes two altitudes and computes the "altitude cost" of moving between them: the change in O2 partial pressure, the change in boiling point, and an estimated time to acclimatize (roughly 1 day per 300 m above 3,000 m). Print a travel advisory for a trek from 3,000 m to 5,500 m.',
       successHint: 'You have built a complete, validated Altitude Effects Calculator from scratch -- starting from a single equation (the barometric formula) and ending with a tool that produces visualizations, comparisons, and physiological assessments. This is what real scientific software looks like: physics in, decisions out.',
       practice: [

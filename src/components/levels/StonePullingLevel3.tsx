@@ -616,7 +616,7 @@ def bending_analysis(n_supports, L, w_per_m, h, b):
 
 w_per_m = weight / length  # load per meter
 
-print(f"\n{'Supports':>10} | {'Span':>6} | {'M_max':>8} | {'Stress':>8} | {'SF':>5} | {'Status':>10}")
+print(f"\\n{'Supports':>10} | {'Span':>6} | {'M_max':>8} | {'Stress':>8} | {'SF':>5} | {'Status':>10}")
 print("-" * 60)
 
 configs = [2, 3, 4, 5, 6, 8, 10]

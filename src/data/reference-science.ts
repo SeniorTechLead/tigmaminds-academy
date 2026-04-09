@@ -854,7 +854,7 @@ export const scienceReferences: ReferenceGuide[] = [
     category: 'math',
     icon: '🔢',
     tagline: 'Fibonacci spirals, tessellations, fractals, and the hidden math in flowers and honeycombs.',
-    relatedStories: ['basket-weavers-song', 'the-magic-japi-hat', 'basket-weaver'],
+    relatedStories: ['basket-weavers-song', 'the-magic-japi-hat'],
     understand: [
       {
         title: 'Mathematics Is the Language of Nature',
@@ -2092,51 +2092,200 @@ export const scienceReferences: ReferenceGuide[] = [
       {
         title: 'Variables and Expressions',
         beginnerContent:
-          'A variable is simply a letter — like x, y, or n — that stands in for a number you do not yet know. Think of it as an empty box waiting to be filled. When you write the expression 3x + 2, you are saying "take some number, multiply it by 3, and then add 2." The beauty of algebra is that this single expression describes infinitely many calculations at once: if x = 1 the result is 5, if x = 10 the result is 32, and if x = −4 the result is −10.\n\nAn algebraic expression combines variables, numbers (called constants or coefficients), and operations like addition, subtraction, multiplication, and division. The coefficient is the number attached to a variable — in 7y the coefficient is 7. A term is a single piece of an expression separated by + or − signs: the expression 4x² − 3x + 9 has three terms. Like terms share the same variable raised to the same power, so 5x and −2x are like terms (and can be combined into 3x), but 5x and 5x² are not.\n\nLet us evaluate 3x + 2 when x = 5. Substitute 5 wherever you see x: 3(5) + 2 = 15 + 2 = 17. This process — plugging in a value and simplifying — is called evaluation. It is the bridge between abstract algebra and concrete arithmetic. Every formula you will ever use in science or engineering, from distance = speed × time to E = mc², is an algebraic expression waiting for you to substitute values and evaluate.',
+          '**What is a variable?**\n\n' +
+          'A variable is a letter (like `x`, `y`, or `n`) that stands for a number you don\'t know yet. Think of it as an **empty box** waiting to be filled.\n\n' +
+          '**What is an expression?**\n\n' +
+          'When you write `3x + 2`, you\'re saying:\n\n' +
+          '- Take some number\n' +
+          '- Multiply it by 3\n' +
+          '- Add 2\n\n' +
+          'One expression describes **infinitely many** calculations:\n\n' +
+          '- If x = 1 → result is **5**\n' +
+          '- If x = 10 → result is **32**\n' +
+          '- If x = −4 → result is **−10**\n\n' +
+          '**Key vocabulary:**\n\n' +
+          '- **Coefficient** — the number attached to a variable. In `7y`, the coefficient is 7\n' +
+          '- **Term** — a piece of an expression. `4x² − 3x + 9` has **three terms**\n' +
+          '- **Like terms** — same variable, same power. `5x` and `−2x` are like terms (combine to `3x`). `5x` and `5x²` are NOT\n\n' +
+          '**Try it: Evaluate 3x + 2 when x = 5**\n\n' +
+          '1. Replace x with 5: `3(5) + 2`\n' +
+          '2. Multiply: `15 + 2`\n' +
+          '3. Add: **17** ✓\n\n' +
+          'Every formula in science — `distance = speed × time`, `E = mc²` — is an algebraic expression waiting for values.',
         intermediateContent:
-          'Evaluating expressions follows the order of operations: **PEMDAS/BODMAS** — Parentheses/Brackets first, then Exponents/Orders, then Multiplication and Division (left to right), then Addition and Subtraction (left to right). Worked example: evaluate 2(3x − 1)² + 5 when x = 2. Step 1: inner parentheses: 3(2) − 1 = 5. Step 2: exponent: 5² = 25. Step 3: multiply: 2 × 25 = 50. Step 4: add: 50 + 5 = **55**. Common mistake: 2(3x − 1)² ≠ (2·3x − 2·1)² — the exponent applies before the coefficient.',
+          '**Order of operations (PEMDAS/BODMAS):**\n\n' +
+          '1. **P**arentheses / **B**rackets\n' +
+          '2. **E**xponents / **O**rders\n' +
+          '3. **M**ultiplication and **D**ivision (left to right)\n' +
+          '4. **A**ddition and **S**ubtraction (left to right)\n\n' +
+          '**Worked example:** Evaluate `2(3x − 1)² + 5` when x = 2\n\n' +
+          '| Step | Operation | Result |\n' +
+          '|------|-----------|--------|\n' +
+          '| 1 | Inner parentheses: 3(2) − 1 | 5 |\n' +
+          '| 2 | Exponent: 5² | 25 |\n' +
+          '| 3 | Multiply: 2 × 25 | 50 |\n' +
+          '| 4 | Add: 50 + 5 | **55** |\n\n' +
+          '⚠️ **Common mistake:** `2(3x − 1)² ≠ (6x − 2)²` — the exponent applies before the coefficient.',
         advancedContent:
-          'In abstract algebra, variables generalize beyond numbers. A **polynomial ring** R[x] consists of all polynomials with coefficients from R. The Fundamental Theorem of Algebra states every polynomial of degree n over the complex numbers has exactly n roots (counted with multiplicity). Algebraic structures like groups, rings, and fields generalize the rules of arithmetic — addition and multiplication become abstract operations satisfying axioms like associativity, commutativity, and distributivity. This abstraction is the foundation of modern cryptography, coding theory, and quantum computing.',
-        diagram: 'BalanceScaleDiagram',
+          'In abstract algebra, variables generalize beyond numbers:\n\n' +
+          '- A **polynomial ring** `R[x]` consists of all polynomials with coefficients from R\n' +
+          '- The **Fundamental Theorem of Algebra** states every degree-n polynomial has exactly n complex roots\n' +
+          '- **Groups, rings, and fields** generalize arithmetic — addition and multiplication become abstract operations satisfying axioms (associativity, commutativity, distributivity)\n\n' +
+          'This abstraction powers modern **cryptography**, **coding theory**, and **quantum computing**.',
+        diagram: 'ExpressionEvaluatorDiagram',
+        interactive: { type: 'python-playground' as const, props: { starterCode: '# Try evaluating expressions yourself\nx = 5\nprint(f"3x + 2 = {3*x + 2}")\nprint(f"x² - 4 = {x**2 - 4}")\nprint(f"(x + 1)(x - 1) = {(x+1)*(x-1)}")\n\n# Change x and run again!', title: 'Try it — Expressions' } },
       },
       {
         title: 'Solving Linear Equations',
         beginnerContent:
-          'An equation is a statement that two expressions are equal, and solving it means finding the value of the variable that makes the statement true. The golden rule is: whatever you do to one side, you must do to the other side. This keeps the equation balanced, like a seesaw with equal weights on both ends.\n\nLet us solve 2x + 3 = 11 step by step. First, subtract 3 from both sides to begin isolating the variable: 2x + 3 − 3 = 11 − 3, which simplifies to 2x = 8. Next, divide both sides by 2: 2x ÷ 2 = 8 ÷ 2, giving x = 4. Always check your answer by substituting back into the original equation: 2(4) + 3 = 8 + 3 = 11. Since 11 = 11 is true, x = 4 is correct.\n\nMore complex equations may require distributing (expanding brackets), combining like terms, or moving variable terms to one side. For example, to solve 3(x − 2) + 4 = 2x + 5, first distribute: 3x − 6 + 4 = 2x + 5, then combine like terms: 3x − 2 = 2x + 5, then subtract 2x from both sides: x − 2 = 5, and finally add 2: x = 7. The strategy is always the same — use inverse operations to peel away the layers around the variable until it stands alone.',
+          '**The golden rule:** Whatever you do to one side, you must do to the other.\n\n' +
+          'Think of it as a **seesaw** — both sides must stay balanced.\n\n' +
+          '**Example: Solve 2x + 3 = 11**\n\n' +
+          '| Step | What we do | Left side | Right side |\n' +
+          '|------|-----------|-----------|------------|\n' +
+          '| Start | | 2x + 3 | 11 |\n' +
+          '| 1 | Subtract 3 | 2x | 8 |\n' +
+          '| 2 | Divide by 2 | x | **4** |\n' +
+          '| Check | Plug back in | 2(4) + 3 = 11 | ✓ |\n\n' +
+          '**More complex example: 3(x − 2) + 4 = 2x + 5**\n\n' +
+          '1. **Distribute:** 3x − 6 + 4 = 2x + 5\n' +
+          '2. **Combine like terms:** 3x − 2 = 2x + 5\n' +
+          '3. **Subtract 2x:** x − 2 = 5\n' +
+          '4. **Add 2:** x = **7** ✓\n\n' +
+          'The strategy is always the same: use **inverse operations** to peel away layers until the variable stands alone.',
         intermediateContent:
-          'Systems of two linear equations can be solved by substitution or elimination. Example: 2x + 3y = 12 and x − y = 1. From the second equation: x = y + 1. Substitute into the first: 2(y + 1) + 3y = 12 → 2y + 2 + 3y = 12 → 5y = 10 → y = 2, then x = 3. Check: 2(3) + 3(2) = 12 ✓ and 3 − 2 = 1 ✓. The elimination method: multiply the second equation by 3 to get 3x − 3y = 3, then add to the first: 5x = 15, x = 3. Both methods always give the same answer.',
+          '**Systems of equations** — two equations, two unknowns:\n\n' +
+          '`2x + 3y = 12` and `x − y = 1`\n\n' +
+          '**Method 1: Substitution**\n\n' +
+          '1. From equation 2: `x = y + 1`\n' +
+          '2. Substitute: `2(y + 1) + 3y = 12`\n' +
+          '3. Solve: `5y = 10` → `y = 2`, then `x = 3`\n\n' +
+          '**Method 2: Elimination**\n\n' +
+          '1. Multiply equation 2 by 3: `3x − 3y = 3`\n' +
+          '2. Add to equation 1: `5x = 15` → `x = 3`\n\n' +
+          '**Check:** 2(3) + 3(2) = 12 ✓ and 3 − 2 = 1 ✓',
         advancedContent:
-          'A system of m linear equations in n unknowns can be represented as a matrix equation **Ax = b** and solved using Gaussian elimination — systematically reducing the augmented matrix [A|b] to row echelon form. The system has a unique solution when rank(A) = n, infinitely many solutions when rank(A) < n and is consistent, or no solution when inconsistent. Cramer\'s Rule solves n×n systems using determinants: xᵢ = det(Aᵢ)/det(A), where Aᵢ replaces column i with b. For large systems, iterative methods like Gauss-Seidel converge faster than direct methods and are used in engineering simulations with millions of equations.',
+          'A system of m equations in n unknowns → matrix equation **Ax = b**\n\n' +
+          '- Solved via **Gaussian elimination** (row echelon form)\n' +
+          '- Unique solution when `rank(A) = n`\n' +
+          '- Infinite solutions when `rank(A) < n` (consistent)\n' +
+          '- No solution when inconsistent\n\n' +
+          '**Cramer\'s Rule:** `xᵢ = det(Aᵢ)/det(A)` — elegant but `O(n!)`, impractical for large systems.\n\n' +
+          'For millions of equations (engineering simulations), use iterative methods like **Gauss-Seidel**.',
+        diagram: 'EquationBalanceScaleDiagram',
+        interactive: { type: 'python-playground' as const, props: { starterCode: '# Solve equations with Python\n# 2x + 3 = 11\nx = (11 - 3) / 2\nprint(f"2x + 3 = 11  →  x = {x}")\n\n# Check: does it work?\nprint(f"Check: 2({x}) + 3 = {2*x + 3}")\n\n# Try solving: 5x - 7 = 18\nx2 = (18 + 7) / 5\nprint(f"\\n5x - 7 = 18  →  x = {x2}")', title: 'Try it — Equations' } },
       },
       {
         title: 'Inequalities',
         beginnerContent:
-          'An inequality compares two expressions using < (less than), > (greater than), ≤ (less than or equal to), or ≥ (greater than or equal to). Unlike equations, which have a single solution (or a finite number of solutions), inequalities often have infinitely many solutions. For example, x > 3 is satisfied by 3.1, 4, 100, and every other number greater than 3. You solve inequalities using the same operations as equations with one critical exception: when you multiply or divide both sides by a negative number, you must flip the inequality sign. For example, solving −2x > 6 requires dividing by −2, which flips > to <, giving x < −3.\n\nThe solution set of an inequality can be shown on a number line. An open circle at a point means "not included" (strict inequality, < or >), while a filled circle means "included" (≤ or ≥). The solution x < −3 is drawn as an open circle at −3 with a ray extending to the left toward negative infinity. Compound inequalities like −1 ≤ x < 5 define a segment of the number line — a filled circle at −1, an open circle at 5, with the line shaded between them.',
+          '**Inequality symbols:**\n\n' +
+          '| Symbol | Meaning | Example |\n' +
+          '|--------|---------|--------|\n' +
+          '| `<` | less than | x < 5 |\n' +
+          '| `>` | greater than | x > 3 |\n' +
+          '| `≤` | less than or equal | x ≤ 10 |\n' +
+          '| `≥` | greater than or equal | x ≥ 0 |\n\n' +
+          'Unlike equations (one answer), inequalities have **infinitely many** solutions. `x > 3` is satisfied by 3.1, 4, 100, and every number greater than 3.\n\n' +
+          '**Solving:** Same rules as equations, with one exception:\n\n' +
+          '⚠️ **Multiply or divide by a negative → FLIP the sign**\n\n' +
+          '- Solve `−2x > 6`\n' +
+          '- Divide by −2 and flip: `x < −3`\n\n' +
+          '**Number line notation:**\n\n' +
+          '- **Open circle** ○ = not included (`<` or `>`)\n' +
+          '- **Filled circle** ● = included (`≤` or `≥`)\n' +
+          '- Arrow shows the direction of solutions',
         intermediateContent:
-          'Compound inequalities define intervals: "−2 < x ≤ 5" means x is between −2 (exclusive) and 5 (inclusive), written in interval notation as (−2, 5]. To solve |2x − 3| > 7: split into 2x − 3 > 7 (giving x > 5) OR 2x − 3 < −7 (giving x < −2). The solution is x < −2 or x > 5, written (−∞, −2) ∪ (5, ∞). Absolute value inequalities always split into two cases: |expression| < k means −k < expression < k, while |expression| > k means expression < −k OR expression > k.',
+          '**Compound inequalities** define intervals:\n\n' +
+          '- `−2 < x ≤ 5` → interval notation: `(−2, 5]`\n' +
+          '- Means: x is between −2 (exclusive) and 5 (inclusive)\n\n' +
+          '**Absolute value inequalities** split into two cases:\n\n' +
+          '- `|expr| < k` means `−k < expr < k`\n' +
+          '- `|expr| > k` means `expr < −k OR expr > k`\n\n' +
+          '**Example:** Solve `|2x − 3| > 7`\n\n' +
+          '- Case 1: `2x − 3 > 7` → `x > 5`\n' +
+          '- Case 2: `2x − 3 < −7` → `x < −2`\n' +
+          '- Solution: `(−∞, −2) ∪ (5, ∞)`',
         advancedContent:
-          'Linear programming optimizes a linear objective function subject to linear inequality constraints. The feasible region (set of points satisfying all constraints) is a convex polygon, and the Simplex algorithm (Dantzig, 1947) proves the optimal solution always occurs at a vertex. This powers logistics, scheduling, and resource allocation in industry. Non-linear inequalities lead to convex optimization — minimizing a convex function over a convex set — which underpins modern machine learning. Support vector machines find the optimal separating hyperplane by solving a quadratic programming problem with inequality constraints.',
-        diagram: 'NumberLineDiagram',
+          '**Linear programming** optimizes a linear function subject to inequality constraints:\n\n' +
+          '- The feasible region is a **convex polygon**\n' +
+          '- The **Simplex algorithm** (Dantzig, 1947) proves the optimum occurs at a vertex\n' +
+          '- Powers logistics, scheduling, and resource allocation\n\n' +
+          '**Convex optimization** (non-linear inequalities) underpins modern ML — support vector machines find the optimal separating hyperplane via quadratic programming.',
+        diagram: 'InequalityNumberLineDiagram',
       },
       {
         title: 'The Coordinate Plane',
         beginnerContent:
-          'The coordinate plane (also called the Cartesian plane, after René Descartes) is formed by two perpendicular number lines: the horizontal x-axis and the vertical y-axis. They cross at the origin, the point (0, 0). Every point on the plane is described by an ordered pair (x, y) — move x units right (or left if negative) from the origin, then y units up (or down if negative). The plane is divided into four quadrants: Quadrant I (x > 0, y > 0) is the upper right, Quadrant II (x < 0, y > 0) is the upper left, Quadrant III (x < 0, y < 0) is the lower left, and Quadrant IV (x > 0, y < 0) is the lower right.\n\nPlotting points turns abstract numbers into visual geometry. Plot (2, 3), (−1, 4), and (0, −2), and you have three distinct locations in space. Connect a sequence of points and you can draw shapes — a triangle, a rectangle, or any polygon. The coordinate plane is the foundation of graphing functions, analyzing data, and building computer graphics. Every pixel on your screen has coordinates, and every map you have ever used is a coordinate system in disguise.',
+          '**Two perpendicular number lines create a map for numbers:**\n\n' +
+          '- **x-axis** — horizontal (left/right)\n' +
+          '- **y-axis** — vertical (up/down)\n' +
+          '- **Origin** — where they cross: `(0, 0)`\n\n' +
+          'Every point is an **ordered pair** `(x, y)`:\n\n' +
+          '1. Move x units right (or left if negative)\n' +
+          '2. Move y units up (or down if negative)\n\n' +
+          '**Four quadrants:**\n\n' +
+          '| Quadrant | x | y | Location |\n' +
+          '|----------|---|---|----------|\n' +
+          '| I | + | + | Upper right |\n' +
+          '| II | − | + | Upper left |\n' +
+          '| III | − | − | Lower left |\n' +
+          '| IV | + | − | Lower right |\n\n' +
+          '**Why it matters:** Every pixel on your screen has coordinates. Every map is a coordinate system. Every graph in science plots data on this plane.',
         intermediateContent:
-          'The distance formula d = √[(x₂−x₁)² + (y₂−y₁)²] is the Pythagorean theorem applied to coordinates. Example: distance from (1, 2) to (4, 6) = √[(4−1)² + (6−2)²] = √[9 + 16] = √25 = **5 units**. The midpoint formula M = ((x₁+x₂)/2, (y₁+y₂)/2) gives the center: M = ((1+4)/2, (2+6)/2) = (2.5, 4). To show that three points form a right triangle, verify that the squares of two sides sum to the square of the third: if AB² + BC² = AC², the angle at B is 90°.',
+          '**Distance formula** (Pythagorean theorem on coordinates):\n\n' +
+          '`d = √[(x₂−x₁)² + (y₂−y₁)²]`\n\n' +
+          '**Example:** Distance from (1, 2) to (4, 6):\n\n' +
+          '`d = √[(4−1)² + (6−2)²] = √[9 + 16] = √25 = 5 units`\n\n' +
+          '**Midpoint formula:**\n\n' +
+          '`M = ((x₁+x₂)/2, (y₁+y₂)/2)`\n\n' +
+          'Example: M = ((1+4)/2, (2+6)/2) = **(2.5, 4)**\n\n' +
+          '**Right triangle test:** If AB² + BC² = AC², the angle at B is 90°.',
         advancedContent:
-          'The coordinate plane extends naturally to 3D (x, y, z) and then to n dimensions. In n-dimensional space, the distance between points is d = √[Σ(xᵢ − yᵢ)²] — the Euclidean norm. Machine learning operates in high-dimensional spaces where each feature is a dimension: an image of 100×100 pixels lives in a 10,000-dimensional space. The "curse of dimensionality" means that in high dimensions, almost all points are approximately equidistant — intuitions from 2D and 3D break down completely. Dimensionality reduction techniques like PCA project high-dimensional data onto lower-dimensional subspaces that capture the most variance.',
+          'The coordinate plane extends to **n dimensions**:\n\n' +
+          '- 3D: `d = √[(x₂−x₁)² + (y₂−y₁)² + (z₂−z₁)²]`\n' +
+          '- nD: `d = √[Σ(xᵢ − yᵢ)²]` — the Euclidean norm\n\n' +
+          'Machine learning operates in **high-dimensional spaces** where each feature is a dimension. A 100×100 image = 10,000 dimensions.\n\n' +
+          '**Curse of dimensionality:** In high dimensions, nearly all points are equidistant. 2D/3D intuition breaks down. **PCA** projects high-D data onto meaningful lower-D subspaces.',
         diagram: 'CoordinatePlaneDiagram',
+        interactive: { type: 'python-playground' as const, props: { starterCode: 'import numpy as np\n\n# Distance between two points\np1 = np.array([1, 2])\np2 = np.array([4, 6])\n\ndistance = np.sqrt(np.sum((p2 - p1)**2))\nmidpoint = (p1 + p2) / 2\n\nprint(f"Point 1: {p1}")\nprint(f"Point 2: {p2}")\nprint(f"Distance: {distance}")\nprint(f"Midpoint: {midpoint}")', title: 'Try it — Coordinates' } },
       },
       {
         title: 'Linear Equations and Graphs',
         beginnerContent:
-          'A linear equation in two variables has the form y = mx + b, and its graph is always a straight line. The parameter m is the slope — it tells you how steep the line is and in which direction it tilts. A positive slope means the line rises from left to right; a negative slope means it falls. The slope is calculated as the "rise over run": m = (y₂ − y₁) / (x₂ − x₁) between any two points on the line. A slope of 2 means that for every 1 unit you move to the right, the line goes up by 2 units.\n\nThe parameter b is the y-intercept — the point where the line crosses the y-axis. When x = 0, y = b, so the line passes through the point (0, b). For example, the equation y = 3x − 1 has a slope of 3 and crosses the y-axis at (0, −1). To graph it, start at (0, −1), then use the slope to find another point: go 1 unit right and 3 units up to reach (1, 2). Draw a straight line through these points and extend it in both directions.\n\nTwo lines in the same plane either intersect at exactly one point (if they have different slopes), are parallel and never meet (same slope, different y-intercepts), or are the same line (same slope and same y-intercept). The intersection point of two lines is the solution to a system of two linear equations — a concept you will use constantly in science and engineering to find where two conditions are simultaneously satisfied.',
+          '**Every linear equation graphs as a straight line:**\n\n' +
+          '`y = mx + b`\n\n' +
+          'Two parameters control the line:\n\n' +
+          '- **m (slope)** — how steep. Positive = rises, negative = falls\n' +
+          '- **b (y-intercept)** — where the line crosses the y-axis\n\n' +
+          '**What is slope?**\n\n' +
+          'Slope = **rise ÷ run** = `(y₂ − y₁) / (x₂ − x₁)`\n\n' +
+          '- Slope of 2 → go 1 right, go 2 up\n' +
+          '- Slope of −1 → go 1 right, go 1 down\n' +
+          '- Slope of 0 → flat horizontal line\n\n' +
+          '**How to graph y = 3x − 1:**\n\n' +
+          '1. Start at the y-intercept: `(0, −1)`\n' +
+          '2. Use slope (3): go 1 right, 3 up → `(1, 2)`\n' +
+          '3. Draw a straight line through both points\n\n' +
+          '**Two lines can:**\n\n' +
+          '- **Intersect** at one point (different slopes)\n' +
+          '- Be **parallel** (same slope, different b)\n' +
+          '- Be the **same line** (same slope AND same b)',
         intermediateContent:
-          'The slope between two points (x₁, y₁) and (x₂, y₂) is m = (y₂ − y₁)/(x₂ − x₁). Parallel lines have equal slopes; perpendicular lines have slopes that multiply to −1 (m₁ × m₂ = −1). Example: a line with slope 3 is perpendicular to a line with slope −1/3. To find the equation of a line through (2, 5) with slope 4: use point-slope form y − 5 = 4(x − 2), giving y = 4x − 3. The x-intercept (where y = 0) is at x = 3/4 = 0.75.',
+          '**Key relationships:**\n\n' +
+          '- **Parallel lines:** equal slopes (`m₁ = m₂`)\n' +
+          '- **Perpendicular lines:** slopes multiply to −1 (`m₁ × m₂ = −1`)\n\n' +
+          '**Point-slope form:** Given point `(2, 5)` and slope `4`:\n\n' +
+          '`y − 5 = 4(x − 2)` → `y = 4x − 3`\n\n' +
+          '**x-intercept** (where y = 0): set y = 0 and solve for x.\n\n' +
+          'For `y = 4x − 3`: `0 = 4x − 3` → `x = 0.75`',
         advancedContent:
-          'In higher mathematics, linear equations generalize to **linear algebra** — the study of vector spaces, linear maps, and matrices. A system of n linear equations in n unknowns defines a linear transformation from Rⁿ to Rⁿ, and solving it means finding the inverse transformation. The determinant tells you whether the inverse exists (det ≠ 0) and by how much the transformation scales areas/volumes. Eigenvalues and eigenvectors — solutions to Ax = λx — reveal the fundamental modes of linear systems and are central to Google\'s PageRank, quantum mechanics, and vibration analysis.',
-        diagram: 'LinearGraphDiagram',
+          'Linear equations generalize to **linear algebra:**\n\n' +
+          '- n equations in n unknowns → linear transformation from Rⁿ to Rⁿ\n' +
+          '- **Determinant** tells if the inverse exists and how areas/volumes scale\n' +
+          '- **Eigenvalues/eigenvectors** (solutions to `Ax = λx`) reveal fundamental modes\n\n' +
+          'Applications: Google\'s **PageRank**, **quantum mechanics**, vibration analysis, computer graphics.',
+        diagram: 'SlopeExplorerDiagram',
+        interactive: { type: 'python-playground' as const, props: { starterCode: 'import numpy as np\n\n# Explore y = mx + b\nm = 2    # slope\nb = -1   # y-intercept\n\nx_vals = np.array([-3, -2, -1, 0, 1, 2, 3])\ny_vals = m * x_vals + b\n\nprint(f"y = {m}x + {b}")\nprint("  x  |   y")\nprint("-" * 14)\nfor xi, yi in zip(x_vals, y_vals):\n    print(f"  {xi:>2} | {yi:>4}")\n\n# Try changing m and b!', title: 'Try it — Linear Graphs' } },
       },
     ],
   },
@@ -2156,51 +2305,198 @@ export const scienceReferences: ReferenceGuide[] = [
       {
         title: 'Types of Angles',
         beginnerContent:
-          'An angle is formed where two rays (or line segments) meet at a common point called the vertex. Angles are measured in degrees (°), and the type of angle depends on its size. An acute angle is less than 90° — think of the narrow tip of a bamboo leaf. A right angle is exactly 90°, forming a perfect L-shape; it is the cornerstone of construction, ensuring walls are perpendicular to floors. An obtuse angle is between 90° and 180° — wider than a right angle but not yet flat. A straight angle is exactly 180°, forming a straight line. A reflex angle is greater than 180° but less than 360°, curving more than halfway around.\n\nTo measure an angle, place the centre point of a protractor on the vertex and align one ray with the 0° baseline. Read where the other ray crosses the protractor scale. Complementary angles add up to 90° (like 30° and 60°), while supplementary angles add up to 180° (like 110° and 70°). Vertical angles — the pairs of opposite angles formed when two lines cross — are always equal. These relationships are the building blocks of every geometric proof.',
+          '**What is an angle?**\n\n' +
+          'An angle forms where two rays meet at a common point called the **vertex**. Angles are measured in degrees (°).\n\n' +
+          '**Angle types by size:**\n\n' +
+          '| Type | Range | Example |\n' +
+          '|------|-------|---------|\n' +
+          '| Acute | 0° < angle < 90° | Tip of a bamboo leaf |\n' +
+          '| Right | exactly 90° | Corner of a book |\n' +
+          '| Obtuse | 90° < angle < 180° | Open laptop lid |\n' +
+          '| Straight | exactly 180° | A flat line |\n' +
+          '| Reflex | 180° < angle < 360° | More than halfway around |\n\n' +
+          '**How to measure:** Place a protractor\'s centre on the vertex, align one ray with 0°, and read where the other ray crosses.\n\n' +
+          '**Key angle relationships:**\n\n' +
+          '- **Complementary** — two angles that add to 90° (e.g. 30° + 60°)\n' +
+          '- **Supplementary** — two angles that add to 180° (e.g. 110° + 70°)\n' +
+          '- **Vertical angles** — opposite angles where two lines cross. Always equal\n\n' +
+          'These relationships are the building blocks of every geometric proof.',
         intermediateContent:
-          'Angle relationships unlock many geometry problems. **Vertical angles** (formed by intersecting lines) are always equal. **Alternate interior angles** (formed by a transversal crossing parallel lines) are equal. **Co-interior angles** (same-side interior) are supplementary (sum to 180°). Worked example: if two parallel lines are cut by a transversal and one angle is 65°, the alternate interior angle is also 65°, and the co-interior angle is 180° − 65° = 115°. These relationships let you find unknown angles in complex figures with just one known angle.',
+          '**Angle relationships with parallel lines:**\n\n' +
+          'When a transversal crosses two parallel lines, several angle pairs form:\n\n' +
+          '| Relationship | Rule |\n' +
+          '|-------------|------|\n' +
+          '| Vertical angles | Always equal |\n' +
+          '| Alternate interior angles | Equal |\n' +
+          '| Co-interior (same-side) angles | Sum to 180° |\n' +
+          '| Corresponding angles | Equal |\n\n' +
+          '**Worked example:** Two parallel lines cut by a transversal, one angle = 65°:\n\n' +
+          '| Angle type | Value | Why |\n' +
+          '|-----------|-------|-----|\n' +
+          '| Alternate interior | 65° | Equal to given |\n' +
+          '| Co-interior | 115° | 180° − 65° |\n' +
+          '| Corresponding | 65° | Equal to given |\n\n' +
+          'With just **one known angle**, you can find every angle in the figure.',
         advancedContent:
-          'In non-Euclidean geometry, angle rules change dramatically. On a sphere (elliptic geometry), the angles of a triangle sum to MORE than 180° — a triangle on Earth\'s surface with vertices at the North Pole, the equator at 0°, and the equator at 90°E has three 90° angles, totaling 270°. On a hyperbolic surface (saddle shape), angles sum to LESS than 180°. The angular excess (or deficit) is proportional to the triangle\'s area — this is the Gauss-Bonnet theorem, linking local geometry to global topology. GPS satellites must account for the non-Euclidean geometry of spacetime (general relativity) to achieve metre-level accuracy.',
-        diagram: 'AngleTypesDiagram',
+          '**Non-Euclidean geometry changes the rules:**\n\n' +
+          '- **Spherical (elliptic)** — triangle angles sum to MORE than 180°. A triangle with vertices at the North Pole, equator at 0°, and equator at 90°E has three 90° angles, totaling 270°\n' +
+          '- **Hyperbolic (saddle)** — triangle angles sum to LESS than 180°\n' +
+          '- The angular excess (or deficit) is proportional to the triangle\'s area — the **Gauss-Bonnet theorem** links local geometry to global topology\n\n' +
+          'GPS satellites must account for non-Euclidean spacetime geometry (general relativity) to achieve metre-level accuracy.',
+        diagram: 'AngleExplorerDiagram',
       },
       {
         title: 'Triangles and the Pythagorean Theorem',
         beginnerContent:
-          'A triangle is the simplest polygon — three sides, three angles, always summing to exactly 180°. Triangles are classified by their sides: an equilateral triangle has three equal sides (and three 60° angles), an isosceles triangle has two equal sides (and two equal base angles), and a scalene triangle has no equal sides. They are also classified by their angles: acute (all angles < 90°), right (one angle = 90°), or obtuse (one angle > 90°).\n\nThe Pythagorean theorem is one of the most important results in all of mathematics. For any right triangle, if the two shorter sides (legs) have lengths a and b, and the longest side (the hypotenuse, opposite the right angle) has length c, then a² + b² = c². This is not just a formula to memorise — it can be proven visually. Arrange four identical right triangles around a square with side length c. The total area of the large square is (a + b)², which equals a² + 2ab + b². The four triangles together have area 4 × (½ab) = 2ab. The inner square has area c². Since the large square equals the four triangles plus the inner square: a² + 2ab + b² = 2ab + c², and subtracting 2ab from both sides gives a² + b² = c².\n\nThe theorem lets you find any missing side of a right triangle. If a ladder 5 metres long leans against a wall with its base 3 metres from the wall, the height it reaches is √(5² − 3²) = √(25 − 9) = √16 = 4 metres. The converse is equally useful: if three sides satisfy a² + b² = c², the triangle must be a right triangle. The classic 3-4-5 triple (3² + 4² = 9 + 16 = 25 = 5²) has been used by builders for thousands of years to create perfect right angles.',
+          '**The simplest polygon:** A triangle has three sides, three angles, always summing to exactly **180°**.\n\n' +
+          '**Classification by sides:**\n\n' +
+          '| Type | Sides | Angles |\n' +
+          '|------|-------|--------|\n' +
+          '| Equilateral | All 3 equal | All 60° |\n' +
+          '| Isosceles | 2 equal | 2 equal base angles |\n' +
+          '| Scalene | None equal | All different |\n\n' +
+          '**Classification by angles:** acute (all < 90°), right (one = 90°), obtuse (one > 90°).\n\n' +
+          '**The Pythagorean Theorem**\n\n' +
+          'For any right triangle with legs `a` and `b` and hypotenuse `c`:\n\n' +
+          '`a² + b² = c²`\n\n' +
+          '**Example: Ladder against a wall**\n\n' +
+          '| Step | Operation | Result |\n' +
+          '|------|-----------|--------|\n' +
+          '| Given | Ladder = 5 m, base = 3 m | |\n' +
+          '| Formula | height = sqrt(5² − 3²) | |\n' +
+          '| Compute | sqrt(25 − 9) = sqrt(16) | **4 metres** |\n\n' +
+          '**The converse:** If three sides satisfy a² + b² = c², the triangle must be a right triangle. The classic **3-4-5 triple** (9 + 16 = 25) has been used by builders for thousands of years to create perfect right angles.',
         intermediateContent:
-          'Pythagorean triples are integer solutions to a² + b² = c². The first few: (3,4,5), (5,12,13), (8,15,17), (7,24,25). Every triple is either primitive (GCD = 1) or a multiple of a primitive triple. All primitive triples have the form a = m²−n², b = 2mn, c = m²+n² where m > n > 0, GCD(m,n) = 1, and m−n is odd. Example: m=2, n=1 gives (3,4,5); m=3, n=2 gives (5,12,13). Worked problem: a 13-meter ladder leans against a wall with its base 5 meters away. Height reached: √(13² − 5²) = √(169 − 25) = √144 = **12 meters**.',
+          '**Pythagorean triples** are integer solutions to a² + b² = c²:\n\n' +
+          '| Triple | Check |\n' +
+          '|--------|-------|\n' +
+          '| (3, 4, 5) | 9 + 16 = 25 |\n' +
+          '| (5, 12, 13) | 25 + 144 = 169 |\n' +
+          '| (8, 15, 17) | 64 + 225 = 289 |\n' +
+          '| (7, 24, 25) | 49 + 576 = 625 |\n\n' +
+          '**Generating primitive triples:** `a = m²−n²`, `b = 2mn`, `c = m²+n²` where m > n > 0, GCD(m,n) = 1, and m−n is odd.\n\n' +
+          '- m=2, n=1 gives (3, 4, 5)\n' +
+          '- m=3, n=2 gives (5, 12, 13)\n\n' +
+          '**Worked problem:** A 13 m ladder, base 5 m from wall. Height = sqrt(13² − 5²) = sqrt(169 − 25) = sqrt(144) = **12 metres**.',
         advancedContent:
-          'The Pythagorean theorem generalizes in several directions. The **law of cosines** (c² = a² + b² − 2ab·cos C) works for ANY triangle — when C = 90°, cos 90° = 0 and it reduces to the Pythagorean theorem. In n dimensions, the distance formula d² = Σ(xᵢ − yᵢ)² is the n-dimensional Pythagorean theorem. In **Fermat\'s Last Theorem** (proved by Andrew Wiles in 1995 after 358 years), the equation aⁿ + bⁿ = cⁿ has no positive integer solutions for n > 2. The proof used deep connections between elliptic curves and modular forms — mathematics far beyond anything Fermat himself could have known.',
-        diagram: 'PythagoreanDiagram',
+          '**Generalizations of the Pythagorean theorem:**\n\n' +
+          '- **Law of cosines:** `c² = a² + b² − 2ab·cos C` works for ANY triangle. When C = 90°, cos 90° = 0 and it reduces to the Pythagorean theorem\n' +
+          '- **n-dimensional distance:** `d² = sum of (xi − yi)²` — the n-dimensional Pythagorean theorem\n' +
+          '- **Fermat\'s Last Theorem** (proved by Andrew Wiles in 1995 after 358 years): `a^n + b^n = c^n` has no positive integer solutions for n > 2\n\n' +
+          'The proof used deep connections between elliptic curves and modular forms — mathematics far beyond anything Fermat himself could have known.',
+        diagram: 'TriangleExplorerDiagram',
       },
       {
         title: 'Circles',
         beginnerContent:
-          'A circle is the set of all points that are the same distance from a central point. That distance is the radius (r). The diameter (d) is twice the radius — it is the longest possible straight line across the circle, passing through the centre. The circumference is the distance around the circle, calculated as C = 2πr (or equivalently πd). The area enclosed by the circle is A = πr². The number π (pi) is approximately 3.14159 and is defined as the ratio of any circle\'s circumference to its diameter — a constant that is the same for every circle in the universe, from a coin to a planet\'s orbit.\n\nA chord is any straight line segment connecting two points on the circle; the diameter is the longest possible chord. A tangent is a line that touches the circle at exactly one point, and it is always perpendicular to the radius drawn to that point. An arc is a portion of the circumference, and a sector (like a slice of pie) is the region between two radii and the arc they enclose. The area of a sector with central angle θ (in degrees) is (θ/360) × πr². These properties appear everywhere — in wheel design, gear ratios, clock faces, satellite orbits, and the circular cross-sections of bamboo used to build traditional Assamese homes.',
+          '**What is a circle?**\n\n' +
+          'A circle is the set of all points equidistant from a centre point. That distance is the **radius** (r).\n\n' +
+          '**Key measurements:**\n\n' +
+          '| Property | Formula | Notes |\n' +
+          '|----------|---------|-------|\n' +
+          '| Diameter | d = 2r | Longest line through centre |\n' +
+          '| Circumference | C = 2 pi r | Distance around |\n' +
+          '| Area | A = pi r² | Space enclosed |\n\n' +
+          'The number **pi** is approximately 3.14159 — the ratio of any circle\'s circumference to its diameter.\n\n' +
+          '**Circle vocabulary:**\n\n' +
+          '- **Chord** — a line segment connecting two points on the circle (diameter = longest chord)\n' +
+          '- **Tangent** — a line touching the circle at exactly one point, always perpendicular to the radius at that point\n' +
+          '- **Arc** — a portion of the circumference\n' +
+          '- **Sector** — the "pie slice" between two radii and the arc they enclose\n\n' +
+          '**Sector area:** `(angle/360) x pi r²`\n\n' +
+          'These properties appear everywhere — wheel design, gear ratios, clock faces, satellite orbits, and the circular cross-sections of bamboo used in traditional Assamese homes.',
         intermediateContent:
-          'The arc length of a sector with central angle θ (in radians) and radius r is s = rθ. The area of that sector is A = ½r²θ. Worked example: a pizza slice with radius 15 cm and central angle 45° (= π/4 radians). Arc length = 15 × π/4 ≈ **11.78 cm**. Sector area = ½ × 15² × π/4 ≈ **88.36 cm²**. The inscribed angle theorem states that an angle inscribed in a circle is half the central angle subtending the same arc. An angle inscribed in a semicircle is always 90° (Thales\' theorem) — this is how builders check right angles using a string and three pegs.',
+          '**Arc length and sector area (radians):**\n\n' +
+          '- Arc length: `s = r x theta`\n' +
+          '- Sector area: `A = (1/2) r² theta`\n\n' +
+          '**Worked example:** A pizza slice with r = 15 cm and angle = 45° (= pi/4 radians):\n\n' +
+          '| Quantity | Calculation | Result |\n' +
+          '|----------|------------|--------|\n' +
+          '| Arc length | 15 x pi/4 | **11.78 cm** |\n' +
+          '| Sector area | (1/2)(225)(pi/4) | **88.36 cm²** |\n\n' +
+          '**Key theorems:**\n\n' +
+          '- **Inscribed angle theorem** — an inscribed angle is half the central angle subtending the same arc\n' +
+          '- **Thales\' theorem** — an angle inscribed in a semicircle is always 90°',
         advancedContent:
-          'The equation of a circle centered at (h, k) with radius r is (x−h)² + (y−k)² = r². In the complex plane, a circle of radius r centered at z₀ is |z − z₀| = r. **Apollonius circles** — loci of points whose distance ratio to two fixed points is constant — appear in electromagnetic field theory and optics. The **isoperimetric inequality** proves that among all closed curves of a given perimeter, the circle encloses the maximum area: A ≤ P²/(4π), with equality only for a circle. This is why soap bubbles are spherical — surface tension minimizes surface area for a given volume.',
+          '**Circle equation:** `(x−h)² + (y−k)² = r²` for centre (h, k).\n\n' +
+          'In the complex plane, a circle of radius r centred at z0 is `|z − z0| = r`.\n\n' +
+          '- **Apollonius circles** — loci where the distance ratio to two fixed points is constant — appear in electromagnetic field theory and optics\n' +
+          '- **Isoperimetric inequality** — among all closed curves of a given perimeter, the circle encloses maximum area: `A <= P²/(4 pi)`, with equality only for a circle\n\n' +
+          'This is why soap bubbles are spherical — surface tension minimizes surface area for a given volume.',
         diagram: 'CirclePropertiesDiagram',
       },
       {
         title: '3D Shapes: Volume and Surface Area',
         beginnerContent:
-          'Extending geometry into three dimensions lets us measure volume (how much space a shape occupies) and surface area (the total area of all outer faces). A cube with side length s has volume s³ and surface area 6s². A rectangular box (cuboid) with length l, width w, and height h has volume lwh and surface area 2(lw + lh + wh). These formulas are used constantly — from calculating how much water a tank holds to determining how much paint is needed to cover a room.\n\nA cylinder (like a tin can) with radius r and height h has volume πr²h (the area of the circular base times the height) and surface area 2πr² + 2πrh (two circular caps plus the curved side, which unrolls into a rectangle). A sphere with radius r has volume (4/3)πr³ and surface area 4πr². A cone with base radius r and height h has volume (1/3)πr²h — exactly one-third of the cylinder that encloses it — and lateral surface area πr√(r² + h²), where √(r² + h²) is the slant height.\n\nWorked example: A cylindrical water drum has radius 0.5 m and height 1.2 m. Its volume is π(0.5)²(1.2) = π(0.25)(1.2) = 0.3π ≈ 0.942 cubic metres, or about 942 litres. Its total surface area is 2π(0.25) + 2π(0.5)(1.2) = 0.5π + 1.2π = 1.7π ≈ 5.34 square metres. Knowing volume tells you how much water it holds; knowing surface area tells you how much sheet metal is needed to build it.',
+          '**Why 3D matters:** Volume tells you how much space a shape occupies. Surface area tells you how much material covers it.\n\n' +
+          '**Key formulas:**\n\n' +
+          '| Shape | Volume | Surface Area |\n' +
+          '|-------|--------|--------------|\n' +
+          '| Cube (side s) | s³ | 6s² |\n' +
+          '| Box (l, w, h) | lwh | 2(lw + lh + wh) |\n' +
+          '| Cylinder (r, h) | pi r²h | 2 pi r² + 2 pi rh |\n' +
+          '| Sphere (r) | (4/3) pi r³ | 4 pi r² |\n' +
+          '| Cone (r, h) | (1/3) pi r²h | pi r sqrt(r²+h²) + pi r² |\n\n' +
+          '**Worked example: Cylindrical water drum** (r = 0.5 m, h = 1.2 m)\n\n' +
+          '| Step | Calculation | Result |\n' +
+          '|------|------------|--------|\n' +
+          '| Volume | pi(0.25)(1.2) | 0.942 m³ (about 942 litres) |\n' +
+          '| Surface area | 2 pi(0.25) + 2 pi(0.5)(1.2) | 5.34 m² |\n\n' +
+          'Volume tells you how much water it holds; surface area tells you how much sheet metal you need to build it.',
         intermediateContent:
-          'For composite shapes, break them into simpler pieces. Example: a silo is a cylinder (radius 3 m, height 8 m) topped with a hemisphere (radius 3 m). Cylinder volume = π(3)²(8) = 72π ≈ 226.2 m³. Hemisphere volume = (2/3)π(3)³ = 18π ≈ 56.5 m³. Total volume ≈ **282.7 m³**. Surface area: cylinder lateral = 2π(3)(8) = 48π, one circular base = 9π, hemisphere = 2π(9) = 18π. Total ≈ 75π ≈ **235.6 m²** (no top circle since the hemisphere replaces it).',
+          '**Composite shapes:** Break them into simpler pieces.\n\n' +
+          '**Example:** A silo = cylinder (r = 3 m, h = 8 m) + hemisphere (r = 3 m)\n\n' +
+          '| Part | Volume |\n' +
+          '|------|--------|\n' +
+          '| Cylinder | pi(9)(8) = 72 pi = 226.2 m³ |\n' +
+          '| Hemisphere | (2/3) pi(27) = 18 pi = 56.5 m³ |\n' +
+          '| **Total** | **282.7 m³** |\n\n' +
+          '| Part | Surface Area |\n' +
+          '|------|-------------|\n' +
+          '| Cylinder lateral | 2 pi(3)(8) = 48 pi |\n' +
+          '| Base circle | pi(9) = 9 pi |\n' +
+          '| Hemisphere | 2 pi(9) = 18 pi |\n' +
+          '| **Total** | **75 pi = 235.6 m²** |\n\n' +
+          'No top circle — the hemisphere replaces it.',
         advancedContent:
-          'Cavalieri\'s principle states that two solids with equal cross-sectional areas at every height have equal volumes. This is why a slanted cylinder (oblique) has the same volume as a right cylinder of the same height and base. In higher dimensions, the volume of an n-dimensional sphere of radius r is Vₙ = πⁿ/²rⁿ / Γ(n/2 + 1). Remarkably, this peaks at n ≈ 5.26 and then decreases — a 100-dimensional unit sphere has essentially zero volume. This counterintuitive result is another manifestation of the curse of dimensionality and explains why high-dimensional data clusters near the surface of hyperspheres.',
+          '**Cavalieri\'s principle:** Two solids with equal cross-sectional areas at every height have equal volumes. A slanted (oblique) cylinder has the same volume as a right cylinder of the same height and base.\n\n' +
+          'In higher dimensions, the volume of an n-dimensional sphere of radius r is `Vn = pi^(n/2) r^n / Gamma(n/2 + 1)`. Remarkably, this peaks at n = 5.26 and then decreases — a 100-dimensional unit sphere has essentially zero volume. This counterintuitive result is another manifestation of the **curse of dimensionality**.',
         diagram: 'Volume3DDiagram',
+        interactive: { type: 'python-playground' as const, props: { starterCode: 'import math\n\n# Calculate area and perimeter of common shapes\nradius = 5\nprint("--- Circle (radius = 5) ---")\nprint(f"Area = {math.pi * radius**2:.2f}")\nprint(f"Circumference = {2 * math.pi * radius:.2f}")\n\nprint("\\n--- Right triangle (a=3, b=4) ---")\na, b = 3, 4\nc = math.sqrt(a**2 + b**2)\nprint(f"Hypotenuse = {c}")\nprint(f"Area = {0.5 * a * b}")\nprint(f"Perimeter = {a + b + c}")\n\nprint("\\n--- Cylinder (r=0.5, h=1.2) ---")\nr, h = 0.5, 1.2\nprint(f"Volume = {math.pi * r**2 * h:.3f} m^3")\nprint(f"  = {math.pi * r**2 * h * 1000:.0f} litres")', title: 'Try it — Areas & Volumes' } },
       },
       {
         title: 'Transformations',
         beginnerContent:
-          'A geometric transformation changes the position, size, or orientation of a shape. The three rigid transformations — translation, rotation, and reflection — preserve the shape and size (the image is congruent to the original). A translation slides every point the same distance in the same direction, like pushing a book across a table. A rotation turns the shape around a fixed point (the centre of rotation) by a given angle — a quarter turn is 90°, a half turn is 180°. A reflection flips the shape across a line (the mirror line), producing a mirror image.\n\nSymmetry is a transformation that maps a shape onto itself. A shape has line symmetry (or reflective symmetry) if you can fold it along a line and both halves match perfectly — a butterfly has one line of symmetry down its centre. A shape has rotational symmetry if you can rotate it less than 360° and it looks the same — a square has rotational symmetry of order 4 (it looks identical after 90°, 180°, 270°, and 360° rotations). The traditional Assamese japi hat has beautiful rotational symmetry: its conical shape and woven patterns repeat evenly around the central axis, so rotating it by certain angles produces an indistinguishable result. Recognising symmetry simplifies calculations — if a shape is symmetric, you only need to analyse half of it and mirror the result.',
+          '**What is a transformation?**\n\n' +
+          'A geometric transformation changes the position, size, or orientation of a shape.\n\n' +
+          '**Rigid transformations** (preserve shape and size):\n\n' +
+          '| Transformation | What it does | Everyday example |\n' +
+          '|---------------|-------------|------------------|\n' +
+          '| Translation | Slides every point the same distance | Pushing a book across a table |\n' +
+          '| Rotation | Turns around a fixed point | A clock hand spinning |\n' +
+          '| Reflection | Flips across a mirror line | Your reflection in water |\n\n' +
+          '**Symmetry** is a transformation that maps a shape onto itself:\n\n' +
+          '- **Line symmetry** — fold along a line and both halves match (a butterfly has 1 line of symmetry)\n' +
+          '- **Rotational symmetry** — rotate less than 360° and it looks the same (a square has order 4: it matches at 90°, 180°, 270°, 360°)\n\n' +
+          'The traditional Assamese **japi hat** has beautiful rotational symmetry: its woven patterns repeat evenly around the central axis. Recognising symmetry simplifies calculations — analyse half the shape and mirror the result.',
         intermediateContent:
-          'Every rigid transformation can be described by coordinates. A translation by (a, b) maps (x, y) → (x+a, y+b). A reflection across the x-axis maps (x, y) → (x, −y). A rotation by angle θ about the origin maps (x, y) → (x cos θ − y sin θ, x sin θ + y cos θ). Example: rotate (3, 4) by 90° counterclockwise: (3·cos90° − 4·sin90°, 3·sin90° + 4·cos90°) = (3·0 − 4·1, 3·1 + 4·0) = **(−4, 3)**. A dilation (scaling) by factor k from the origin maps (x, y) → (kx, ky), preserving shape but not size.',
+          '**Coordinate descriptions:**\n\n' +
+          '| Transformation | Rule |\n' +
+          '|---------------|------|\n' +
+          '| Translation by (a, b) | (x, y) -> (x+a, y+b) |\n' +
+          '| Reflect across x-axis | (x, y) -> (x, -y) |\n' +
+          '| Rotate by theta about origin | (x, y) -> (x cos theta - y sin theta, x sin theta + y cos theta) |\n' +
+          '| Dilation by factor k | (x, y) -> (kx, ky) |\n\n' +
+          '**Example:** Rotate (3, 4) by 90° counterclockwise:\n\n' +
+          '`(3 cos 90° - 4 sin 90°, 3 sin 90° + 4 cos 90°) = (0 - 4, 3 + 0) =` **(−4, 3)**\n\n' +
+          'A dilation preserves shape but not size — it produces **similar** figures.',
         advancedContent:
-          'The set of all symmetries of a figure forms an algebraic structure called a **group**. A square has 8 symmetries (4 rotations + 4 reflections) forming the dihedral group D₄. The classification of all possible 2D repeating patterns (wallpaper groups) shows exactly **17 distinct symmetry groups** exist — proven in 1891 by Fedorov. Islamic geometric art at the Alhambra palace contains examples of all 17 groups, achieved empirically centuries before the mathematical proof. In 3D, there are exactly 230 space groups, classifying all possible crystal structures — this classification is the foundation of crystallography and materials science.',
+          '**Symmetry groups:**\n\n' +
+          'The set of all symmetries of a figure forms an algebraic structure called a **group**.\n\n' +
+          '- A square has 8 symmetries (4 rotations + 4 reflections) forming the dihedral group **D4**\n' +
+          '- The classification of all 2D repeating patterns (wallpaper groups) shows exactly **17 distinct symmetry groups** — proven in 1891 by Fedorov\n' +
+          '- Islamic geometric art at the Alhambra palace contains all 17 groups, achieved empirically centuries before the mathematical proof\n' +
+          '- In 3D, there are exactly **230 space groups**, classifying all possible crystal structures — the foundation of crystallography',
         diagram: 'TransformationsDiagram',
       },
     ],
@@ -2285,50 +2581,181 @@ export const scienceReferences: ReferenceGuide[] = [
       {
         title: 'What Is Probability?',
         beginnerContent:
-          'Probability measures how likely an event is to occur, expressed as a number between 0 (impossible) and 1 (certain). The basic formula is P(event) = number of favorable outcomes / total number of possible outcomes. When you flip a fair coin, there are 2 possible outcomes (heads, tails) and 1 favorable outcome for heads, so P(heads) = 1/2 = 0.5. When you roll a standard die, P(rolling a 4) = 1/6 ≈ 0.167, and P(rolling an even number) = 3/6 = 1/2. The set of all possible outcomes is called the sample space — for a coin it is {H, T}, for a die it is {1, 2, 3, 4, 5, 6}.\n\nProbabilities can also be expressed as percentages (multiply by 100) or odds. The complement of an event — everything that is not the event — has probability 1 − P(event). If the probability of rain tomorrow is 0.3, the probability of no rain is 0.7. Probabilities of all possible outcomes in a sample space always sum to exactly 1. This seemingly simple framework underpins weather forecasting, medical diagnosis, insurance pricing, game design, and every machine learning algorithm — they are all, at their core, making probabilistic predictions.',
+          '**The basics:**\n\n' +
+          'Probability measures how likely an event is, as a number between **0** (impossible) and **1** (certain).\n\n' +
+          '`P(event) = favourable outcomes / total outcomes`\n\n' +
+          '**Examples:**\n\n' +
+          '| Experiment | Favourable | Total | Probability |\n' +
+          '|-----------|-----------|-------|-------------|\n' +
+          '| Coin flip: heads | 1 | 2 | 1/2 = 0.5 |\n' +
+          '| Die roll: a 4 | 1 | 6 | 1/6 = 0.167 |\n' +
+          '| Die roll: even | 3 | 6 | 1/2 = 0.5 |\n\n' +
+          'The set of all possible outcomes is the **sample space** — for a coin it is {H, T}, for a die it is {1, 2, 3, 4, 5, 6}.\n\n' +
+          '**Key rules:**\n\n' +
+          '- Probabilities can be expressed as fractions, decimals, or percentages\n' +
+          '- **Complement:** P(NOT event) = 1 − P(event). If P(rain) = 0.3, then P(no rain) = 0.7\n' +
+          '- All probabilities in a sample space sum to exactly **1**\n\n' +
+          'This framework underpins weather forecasting, medical diagnosis, insurance pricing, and every machine learning algorithm.',
         intermediateContent:
-          'The addition rule for mutually exclusive events: P(A or B) = P(A) + P(B). For non-exclusive events: P(A or B) = P(A) + P(B) − P(A and B). Example: drawing from a standard deck, P(heart or queen) = 13/52 + 4/52 − 1/52 = 16/52 = 4/13 (subtract the queen of hearts, counted twice). The complementary counting trick: P(at least one heads in 3 flips) = 1 − P(no heads) = 1 − (1/2)³ = 1 − 1/8 = **7/8**. This is often easier than computing the event directly.',
+          '**Addition rules:**\n\n' +
+          '- **Mutually exclusive:** `P(A or B) = P(A) + P(B)`\n' +
+          '- **Non-exclusive:** `P(A or B) = P(A) + P(B) - P(A and B)`\n\n' +
+          '**Example:** Drawing from a standard deck, P(heart or queen):\n\n' +
+          '| Part | Count | Probability |\n' +
+          '|------|-------|-------------|\n' +
+          '| Hearts | 13 | 13/52 |\n' +
+          '| Queens | 4 | 4/52 |\n' +
+          '| Queen of hearts (overlap) | 1 | -1/52 |\n' +
+          '| **Total** | **16** | **16/52 = 4/13** |\n\n' +
+          '**Complementary counting trick:** P(at least one heads in 3 flips) = 1 - P(no heads) = 1 - (1/2)³ = **7/8**. Often easier than computing the event directly.',
         advancedContent:
-          'Probability theory rests on Kolmogorov\'s axioms (1933): (1) P(E) ≥ 0 for any event E, (2) P(sample space) = 1, (3) for mutually exclusive events, P(E₁ ∪ E₂ ∪ ...) = ΣP(Eᵢ). From these three axioms, all probability theory follows — including Bayes\' theorem, the law of large numbers, and the central limit theorem. The **measure-theoretic** foundation extends probability to continuous distributions and infinite sample spaces. The Borel-Cantelli lemma, a cornerstone result, determines when events "almost surely" occur infinitely often — used in the convergence proofs behind machine learning algorithms.',
-        diagram: 'ProbabilityScaleDiagram',
+          '**Kolmogorov\'s axioms (1933)** — the foundation:\n\n' +
+          '1. P(E) >= 0 for any event E\n' +
+          '2. P(sample space) = 1\n' +
+          '3. For mutually exclusive events: P(E1 U E2 U ...) = sum of P(Ei)\n\n' +
+          'From these three axioms, ALL probability theory follows — Bayes\' theorem, the law of large numbers, and the central limit theorem.\n\n' +
+          'The **measure-theoretic** foundation extends probability to continuous distributions and infinite sample spaces. The **Borel-Cantelli lemma** determines when events "almost surely" occur infinitely often — used in convergence proofs behind ML algorithms.',
+        diagram: 'ProbabilityDiceDiagram',
+        interactive: { type: 'python-playground' as const, props: { starterCode: 'import random\n\n# Simulate rolling two dice 10,000 times\ntrials = 10000\ncount_seven = 0\nfor _ in range(trials):\n    d1 = random.randint(1, 6)\n    d2 = random.randint(1, 6)\n    if d1 + d2 == 7:\n        count_seven += 1\n\ntheory = 6/36  # 6 ways to make 7 out of 36\nprint(f"P(sum = 7) theory:  {theory:.4f}")\nprint(f"P(sum = 7) simulated: {count_seven/trials:.4f}")\nprint(f"Trials: {trials}")', title: 'Try it — Dice Probability' } },
       },
       {
         title: 'Permutations and Combinations',
         beginnerContent:
-          'Counting the number of ways to arrange or select items is the heart of combinatorics. When the order matters, you are counting permutations. The number of ways to arrange r items chosen from n distinct items is nPr = n! / (n − r)!, where n! (n factorial) means n × (n − 1) × (n − 2) × … × 1. For example, the number of ways to award gold, silver, and bronze medals to 3 out of 10 athletes is 10P3 = 10! / 7! = 10 × 9 × 8 = 720. Each different ordering counts as a distinct arrangement.\n\nWhen the order does not matter, you are counting combinations. The number of ways to choose r items from n (without regard to order) is nCr = n! / (r!(n − r)!). Using the same 10 athletes, the number of ways to select a 3-person team (where it does not matter who is "first") is 10C3 = 10! / (3! × 7!) = 720 / 6 = 120. Notice that nCr = nPr / r!, because each combination of r items can be arranged in r! different orders.\n\nA practical example: you have 8 books and want to display 3 on a shelf. If the order on the shelf matters (left to right), you need permutations: 8P3 = 8 × 7 × 6 = 336 arrangements. If you just want to choose which 3 books to display (order irrelevant), you need combinations: 8C3 = 336 / 6 = 56 selections. The question "does order matter?" is always the first question to ask in any counting problem.',
+          '**The first question:** Does order matter?\n\n' +
+          '**Permutations** (order matters):\n\n' +
+          '`nPr = n! / (n - r)!`\n\n' +
+          'where `n!` = n x (n-1) x (n-2) x ... x 1\n\n' +
+          '**Example:** Award gold, silver, bronze to 3 of 10 athletes:\n\n' +
+          '`10P3 = 10! / 7! = 10 x 9 x 8 =` **720** arrangements\n\n' +
+          '**Combinations** (order does NOT matter):\n\n' +
+          '`nCr = n! / (r!(n - r)!)`\n\n' +
+          '**Example:** Select a 3-person team from 10:\n\n' +
+          '`10C3 = 720 / 6 =` **120** selections\n\n' +
+          '**Why the difference?** Each combination of 3 people can be ordered in `3! = 6` ways, so `nCr = nPr / r!`.\n\n' +
+          '**Practical example:** Display 3 of 8 books on a shelf:\n\n' +
+          '| Question | Formula | Answer |\n' +
+          '|----------|---------|--------|\n' +
+          '| Order on shelf matters? | 8P3 = 8 x 7 x 6 | 336 |\n' +
+          '| Just choosing which 3? | 8C3 = 336 / 6 | 56 |',
         intermediateContent:
-          'Permutations with repetition: n^r arrangements when you can repeat items. Example: a 4-digit PIN from digits 0-9 = 10⁴ = **10,000** possibilities. Combinations with repetition (stars and bars): C(n+r−1, r) ways to choose r items from n types with repetition. Distributing 10 identical chocolates among 3 children = C(10+3−1, 10) = C(12, 10) = **66 ways**. Pascal\'s triangle encodes combinations: row n contains C(n,0), C(n,1), ..., C(n,n). Each entry is the sum of the two entries above it: C(n,r) = C(n−1,r−1) + C(n−1,r).',
+          '**With repetition:**\n\n' +
+          '| Type | Formula | Example |\n' +
+          '|------|---------|--------|\n' +
+          '| Permutations w/ repetition | n^r | 4-digit PIN from 0-9: 10^4 = **10,000** |\n' +
+          '| Combinations w/ repetition (stars & bars) | C(n+r-1, r) | 10 chocolates among 3 kids: C(12,10) = **66** |\n\n' +
+          '**Pascal\'s triangle** encodes combinations: row n contains C(n,0), C(n,1), ..., C(n,n). Each entry is the sum of the two above it:\n\n' +
+          '`C(n, r) = C(n-1, r-1) + C(n-1, r)`',
         advancedContent:
-          'The **binomial theorem** uses combinations: (a + b)ⁿ = Σ C(n,k) aⁿ⁻ᵏ bᵏ. The coefficient of x³ in (2x + 3)⁵ is C(5,3)(2x)³(3)² = 10 × 8x³ × 9 = 720x³. In combinatorics, the **pigeonhole principle** proves existence results: if n+1 pigeons occupy n holes, some hole has ≥ 2 pigeons. This simple idea proves that in any group of 13 people, at least 2 share a birth month. Generating functions encode counting sequences as power series: the generating function for combinations is (1 + x)ⁿ = Σ C(n,k) xᵏ — a powerful tool that transforms combinatorial problems into algebraic ones.',
+          '**Binomial theorem:** `(a + b)^n = sum of C(n,k) a^(n-k) b^k`\n\n' +
+          'The coefficient of x³ in (2x + 3)⁵ = C(5,3)(2x)³(3)² = 10 x 8x³ x 9 = 720x³.\n\n' +
+          '**Pigeonhole principle:** If n+1 pigeons occupy n holes, some hole has >= 2 pigeons. This proves: in any group of 13 people, at least 2 share a birth month.\n\n' +
+          '**Generating functions** encode counting sequences as power series: `(1 + x)^n = sum of C(n,k) x^k` — transforming combinatorial problems into algebraic ones.',
         diagram: 'CombinatoricsGridDiagram',
       },
       {
         title: 'Independent vs Dependent Events',
         beginnerContent:
-          'Two events are independent if the occurrence of one does not affect the probability of the other. Flipping a coin twice is a classic example — getting heads on the first flip does not change the probability of heads on the second flip. For independent events, the probability of both occurring is the product of their individual probabilities: P(A and B) = P(A) × P(B). The probability of flipping heads twice in a row is 1/2 × 1/2 = 1/4. The probability of rolling a 6 on a die three times in a row is 1/6 × 1/6 × 1/6 = 1/216.\n\nDependent events are different — the outcome of the first event changes the probabilities for the second. Drawing cards from a deck without replacement is the standard example. The probability of drawing an ace from a full deck is 4/52 = 1/13. If you drew an ace and did not put it back, the probability of drawing a second ace is now 3/51 (only 3 aces remain in 51 cards). The probability of drawing two aces in a row without replacement is (4/52) × (3/51) = 12/2652 ≈ 0.0045, or about 1 in 221. With replacement (putting the first card back), it would be (4/52) × (4/52) = 16/2704 ≈ 0.0059. The distinction between independent and dependent events is crucial in real-world situations — the probability that a second monsoon storm hits Assam this week depends heavily on whether a first storm already formed, making these events dependent.',
+          '**Independent events:** One event does NOT affect the other.\n\n' +
+          '`P(A and B) = P(A) x P(B)`\n\n' +
+          '| Scenario | Calculation | Result |\n' +
+          '|----------|-----------|--------|\n' +
+          '| Heads twice in a row | 1/2 x 1/2 | 1/4 |\n' +
+          '| Roll 6 three times | (1/6)³ | 1/216 |\n\n' +
+          'Flipping a coin twice: the first flip has zero effect on the second.\n\n' +
+          '**Dependent events:** The first outcome changes the second\'s probability.\n\n' +
+          '**Example: Drawing aces without replacement**\n\n' +
+          '| Draw | Aces left | Cards left | Probability |\n' +
+          '|------|----------|-----------|-------------|\n' +
+          '| 1st ace | 4 | 52 | 4/52 |\n' +
+          '| 2nd ace | 3 | 51 | 3/51 |\n' +
+          '| **Both** | | | **(4/52)(3/51) = 1/221** |\n\n' +
+          'With replacement it would be (4/52)² = 1/169. The distinction matters in real-world situations — the probability of a second monsoon storm depends heavily on whether a first already formed.',
         intermediateContent:
-          'The multiplication rule for independent events extends to any number of events: P(A₁ and A₂ and ... and Aₙ) = P(A₁) × P(A₂) × ... × P(Aₙ). Example: the probability of rolling a 6 five times in a row = (1/6)⁵ = 1/7776 ≈ 0.000129. For dependent events, use the chain rule: P(A and B and C) = P(A) × P(B|A) × P(C|A and B). Drawing 3 aces in a row from a deck without replacement: (4/52)(3/51)(2/50) = 24/132,600 ≈ **1 in 5,525**.',
+          '**Multiplication rule for many events:**\n\n' +
+          '- **Independent:** `P(A1 and A2 and ... An) = P(A1) x P(A2) x ... x P(An)`\n' +
+          '- Rolling a 6 five times: (1/6)^5 = 1/7776 = 0.000129\n\n' +
+          '**Dependent (chain rule):** `P(A and B and C) = P(A) x P(B|A) x P(C|A and B)`\n\n' +
+          'Drawing 3 aces without replacement: (4/52)(3/51)(2/50) = 24/132,600 = **1 in 5,525**.',
         advancedContent:
-          'The concept of independence is subtle and powerful. **Pairwise independence** does not imply mutual independence — three events can be pairwise independent yet dependent as a group. Conditional independence (A ⊥ B | C) means A and B are independent given knowledge of C — this is the foundation of Bayesian networks, graphical models used in medical diagnosis, spam filtering, and causal inference. The **Markov property** (the future depends only on the present, not the past) is a special case of conditional independence that enables efficient computation in chains of dependent events — from weather forecasting to DNA sequence analysis.',
+          '**Subtleties of independence:**\n\n' +
+          '- **Pairwise independence** does NOT imply mutual independence — three events can be pairwise independent yet dependent as a group\n' +
+          '- **Conditional independence** (A independent of B given C) is the foundation of **Bayesian networks** — graphical models used in medical diagnosis, spam filtering, and causal inference\n' +
+          '- The **Markov property** (future depends only on present, not past) is a special case enabling efficient computation in chains of dependent events — from weather forecasting to DNA analysis',
         diagram: 'TreeDiagramProbability',
       },
       {
         title: 'Conditional Probability',
         beginnerContent:
-          'Conditional probability asks: given that one event has already occurred, what is the probability of another? It is written P(A|B), read as "the probability of A given B." The formula is P(A|B) = P(A and B) / P(B). If 60% of students pass maths (event M) and 40% pass both maths and science (event M ∩ S), then P(S|M) = 0.40 / 0.60 = 2/3 — two-thirds of the students who passed maths also passed science.\n\nBayes\' theorem is the crown jewel of conditional probability. It lets you reverse the conditioning: if you know P(B|A), you can find P(A|B). The formula is P(A|B) = P(B|A) × P(A) / P(B). A famous application is medical testing. Suppose a disease affects 1 in 1000 people (P(disease) = 0.001). A test is 99% accurate — if you have the disease, it correctly says positive 99% of the time (P(positive|disease) = 0.99), and if you do not have it, it correctly says negative 99% of the time (P(negative|no disease) = 0.99, so P(positive|no disease) = 0.01). If you test positive, what is the probability you actually have the disease?\n\nUsing Bayes\' theorem: P(disease|positive) = (0.99 × 0.001) / ((0.99 × 0.001) + (0.01 × 0.999)) = 0.00099 / (0.00099 + 0.00999) = 0.00099 / 0.01098 ≈ 0.09, or about 9%. This shockingly low number — a 99%-accurate test yields only a 9% chance of actually having the disease — occurs because the disease is so rare that false positives vastly outnumber true positives. This counterintuitive result is why doctors often require a second, confirmatory test and why understanding conditional probability is essential for interpreting real-world data.',
+          '**The question:** Given that B happened, what is the chance of A?\n\n' +
+          '`P(A|B) = P(A and B) / P(B)`\n\n' +
+          '**Example:** 60% of students pass maths, 40% pass both maths and science.\n\n' +
+          'P(science | passed maths) = 0.40 / 0.60 = **2/3**\n\n' +
+          '**Bayes\' Theorem — reversing the condition:**\n\n' +
+          '`P(A|B) = P(B|A) x P(A) / P(B)`\n\n' +
+          '**Famous example: Medical testing**\n\n' +
+          '| Given | Value |\n' +
+          '|-------|-------|\n' +
+          '| Disease prevalence | 1 in 1000 (0.001) |\n' +
+          '| Test accuracy (true positive) | 99% |\n' +
+          '| False positive rate | 1% |\n\n' +
+          '**If you test positive, what is the chance you actually have it?**\n\n' +
+          '| Step | Calculation |\n' +
+          '|------|------------|\n' +
+          '| True positives | 0.99 x 0.001 = 0.00099 |\n' +
+          '| False positives | 0.01 x 0.999 = 0.00999 |\n' +
+          '| P(disease given positive) | 0.00099 / 0.01098 = **~9%** |\n\n' +
+          'A 99%-accurate test yields only a 9% chance of actually having the disease. The disease is so rare that false positives vastly outnumber true positives.\n\n' +
+          'This is why doctors require confirmatory tests and why understanding conditional probability is essential for interpreting data.',
         intermediateContent:
-          'Bayes\' theorem in its odds form is particularly intuitive: posterior odds = prior odds × likelihood ratio. If the prior probability of disease is 1/1000, the prior odds are 1:999. The test has a true positive rate of 99% and false positive rate of 1%, giving a likelihood ratio of 0.99/0.01 = 99. Posterior odds = (1/999) × 99 = 99/999 ≈ 1:10, so P(disease|positive) ≈ 1/11 ≈ 9%. This form makes it clear that the test "updates" your belief by a factor of 99, but the low base rate still dominates.',
+          '**Bayes\' theorem in odds form:**\n\n' +
+          '`posterior odds = prior odds x likelihood ratio`\n\n' +
+          '| Step | Value |\n' +
+          '|------|-------|\n' +
+          '| Prior odds (disease) | 1 : 999 |\n' +
+          '| Likelihood ratio | 0.99 / 0.01 = 99 |\n' +
+          '| Posterior odds | (1/999) x 99 = 99:999 = ~1:10 |\n' +
+          '| P(disease given positive) | ~1/11 = **~9%** |\n\n' +
+          'The test "updates" your belief by a factor of 99, but the low base rate still dominates.',
         advancedContent:
-          'Bayesian inference, built on Bayes\' theorem, treats probability as a degree of belief that is updated as new evidence arrives. The prior distribution encodes what you know before seeing data; the likelihood function describes how probable the observed data is under each hypothesis; the posterior distribution combines both. **Markov Chain Monte Carlo (MCMC)** methods sample from posterior distributions that are too complex to compute analytically — enabling Bayesian analysis in climate modeling, genomics, and astrophysics. The philosophical debate between Bayesian and frequentist statistics centers on whether probability is subjective (degree of belief) or objective (long-run frequency).',
+          '**Bayesian inference** treats probability as a degree of belief, updated as evidence arrives:\n\n' +
+          '- **Prior distribution** — what you know before data\n' +
+          '- **Likelihood function** — how probable the data is under each hypothesis\n' +
+          '- **Posterior distribution** — combines both\n\n' +
+          '**Markov Chain Monte Carlo (MCMC)** methods sample from posterior distributions too complex for analytical computation — enabling Bayesian analysis in climate modeling, genomics, and astrophysics.\n\n' +
+          'The Bayesian vs frequentist debate: is probability subjective (degree of belief) or objective (long-run frequency)?',
       },
       {
         title: 'Expected Value',
         beginnerContent:
-          'The expected value (EV) is the long-run average outcome of a random process, calculated as the sum of each possible outcome multiplied by its probability. For a fair six-sided die, EV = 1(1/6) + 2(1/6) + 3(1/6) + 4(1/6) + 5(1/6) + 6(1/6) = 21/6 = 3.5. You will never roll a 3.5 on any single roll, but over thousands of rolls, the average will converge to 3.5. This is the law of large numbers in action.\n\nExpected value is the rational basis for decision-making under uncertainty. Suppose someone offers you a dice game: roll a 6 and win ₹100, roll anything else and pay ₹20. Should you play? The EV is (1/6)(100) + (5/6)(−20) = 16.67 − 16.67 = 0. The expected value is exactly zero — in the long run, you neither gain nor lose, so the game is fair. If the payout for a 6 were ₹150, the EV would be (1/6)(150) + (5/6)(−20) = 25 − 16.67 = +8.33 per game — a positive expected value, meaning you should play. Insurance companies, casinos, and stock traders all build their strategies around expected value calculations, always seeking situations where the EV is in their favour.',
+          '**What is expected value?**\n\n' +
+          'The long-run average outcome: sum each outcome times its probability.\n\n' +
+          '**Example: Fair die**\n\n' +
+          '`EV = 1(1/6) + 2(1/6) + 3(1/6) + 4(1/6) + 5(1/6) + 6(1/6) = 3.5`\n\n' +
+          'You never roll 3.5, but over thousands of rolls the average converges there (the **law of large numbers**).\n\n' +
+          '**Should you play this game?**\n\n' +
+          'Roll a 6 = win 100 rupees. Anything else = pay 20 rupees.\n\n' +
+          '| Outcome | Probability | Payout |\n' +
+          '|---------|-----------|--------|\n' +
+          '| Roll 6 | 1/6 | +100 |\n' +
+          '| Not 6 | 5/6 | -20 |\n' +
+          '| **EV** | | **(1/6)(100) + (5/6)(-20) = 0** |\n\n' +
+          'EV = 0 means the game is **fair**. If the payout were 150, EV = +8.33 per game — play it!\n\n' +
+          'Insurance companies, casinos, and stock traders all build strategies around EV, always seeking positive expected value.',
         intermediateContent:
-          'The variance Var(X) = E[(X − μ)²] = E[X²] − (E[X])² measures the spread of outcomes around the mean. The standard deviation σ = √Var(X) has the same units as X. For a fair die: E[X²] = (1+4+9+16+25+36)/6 = 91/6, so Var(X) = 91/6 − (3.5)² = 91/6 − 12.25 = 2.917, and σ ≈ 1.71. The **Chebyshev inequality** guarantees P(|X − μ| ≥ kσ) ≤ 1/k² for any distribution — at least 75% of data lies within 2σ of the mean, regardless of the distribution shape.',
+          '**Variance and standard deviation:**\n\n' +
+          '`Var(X) = E[(X - mu)²] = E[X²] - (E[X])²`\n\n' +
+          '`sigma = sqrt(Var(X))`\n\n' +
+          '**Example: Fair die**\n\n' +
+          '| Step | Calculation | Result |\n' +
+          '|------|------------|--------|\n' +
+          '| E[X²] | (1+4+9+16+25+36)/6 | 91/6 |\n' +
+          '| Var(X) | 91/6 - (3.5)² | 2.917 |\n' +
+          '| sigma | sqrt(2.917) | **1.71** |\n\n' +
+          '**Chebyshev inequality:** `P(|X - mu| >= k*sigma) <= 1/k²` — at least 75% of data lies within 2 sigma of the mean, for ANY distribution.',
         advancedContent:
-          'The **central limit theorem (CLT)** states that the mean of n independent, identically distributed random variables converges to a normal distribution as n → ∞, regardless of the original distribution. This is why the bell curve appears everywhere — exam scores, measurement errors, biological variations. For practical purposes, n ≥ 30 usually suffices. The **law of large numbers** guarantees that the sample mean converges to the expected value. Together, CLT and LLN form the theoretical foundation of statistics, polling, quality control, and Monte Carlo simulation — any time you average many independent measurements to get a reliable estimate.',
+          '**Central Limit Theorem (CLT):** The mean of n independent, identically distributed random variables converges to a **normal distribution** as n approaches infinity, regardless of the original distribution.\n\n' +
+          'This is why the bell curve appears everywhere — exam scores, measurement errors, biological variations. For practical purposes, n >= 30 usually suffices.\n\n' +
+          'The **law of large numbers** guarantees the sample mean converges to the expected value. Together, CLT and LLN form the theoretical foundation of statistics, polling, quality control, and Monte Carlo simulation.',
         diagram: 'ExpectedValueDiagram',
       },
     ],
@@ -3384,40 +3811,157 @@ export const scienceReferences: ReferenceGuide[] = [
       {
         title: 'Distance Between Two Points',
         beginnerContent:
-          'The Cartesian coordinate system, invented by Rene Descartes in 1637, places every point on a plane at the intersection of two numbers: an x-coordinate (horizontal position) and a y-coordinate (vertical position). The distance between two points (x₁, y₁) and (x₂, y₂) is derived directly from the Pythagorean theorem: d = √[(x₂ − x₁)² + (y₂ − y₁)²]. The horizontal difference (x₂ − x₁) and vertical difference (y₂ − y₁) form the two legs of a right triangle, and the distance is the hypotenuse.\n\nFor example, the straight-line distance between Guwahati (roughly at coordinates 91.7°E, 26.1°N on a flat projection) and Jorhat (94.2°E, 26.8°N) can be estimated using this formula. The longitude difference is 2.5° and the latitude difference is 0.7°. At this latitude, 1° of longitude is approximately 100 km and 1° of latitude is about 111 km, so the distance is approximately √[(250)² + (78)²] = √[62,500 + 6,084] = √68,584 ≈ 262 km. The actual road distance is longer because roads curve, but the straight-line distance formula gives the "as the crow flies" answer. GPS navigation systems use a spherical version of this formula (the Haversine formula) to calculate distances on Earth\'s curved surface, but for small distances within a region like Assam, the flat Cartesian approximation works remarkably well.',
+          '**The Cartesian coordinate system** (Descartes, 1637) places every point on a plane using two numbers: **x** (horizontal) and **y** (vertical).\n\n' +
+          '**Distance formula** (from the Pythagorean theorem):\n\n' +
+          '`d = sqrt[(x2 - x1)² + (y2 - y1)²]`\n\n' +
+          'The horizontal and vertical differences form the legs of a right triangle; the distance is the hypotenuse.\n\n' +
+          '**Example: Guwahati to Jorhat**\n\n' +
+          '| City | Approx. coordinates |\n' +
+          '|------|--------------------|\n' +
+          '| Guwahati | (91.7°E, 26.1°N) |\n' +
+          '| Jorhat | (94.2°E, 26.8°N) |\n\n' +
+          '| Step | Calculation | Result |\n' +
+          '|------|------------|--------|\n' +
+          '| Longitude diff | 2.5° x 100 km/° | 250 km |\n' +
+          '| Latitude diff | 0.7° x 111 km/° | 78 km |\n' +
+          '| Distance | sqrt(250² + 78²) | **~262 km** |\n\n' +
+          'GPS uses the spherical **haversine formula** for curved-surface accuracy, but for short distances within Assam the flat approximation works well.',
         intermediateContent:
-          'The distance formula extends to 3D: d = √[(x₂−x₁)² + (y₂−y₁)² + (z₂−z₁)²]. Worked example: distance between two GPS points at (91.7°E, 26.1°N, 50m altitude) and (94.2°E, 26.8°N, 100m altitude). Converting to approximate meters: Δx ≈ 2.5° × 100 km = 250 km, Δy ≈ 0.7° × 111 km = 78 km, Δz = 0.05 km. Distance ≈ √(250² + 78² + 0.05²) ≈ **261.9 km**. The altitude contribution is negligible — horizontal distances dominate for surface navigation.',
+          '**3D distance formula:**\n\n' +
+          '`d = sqrt[(x2-x1)² + (y2-y1)² + (z2-z1)²]`\n\n' +
+          '**Worked example:** Two GPS points including altitude:\n\n' +
+          '| Component | Difference |\n' +
+          '|-----------|----------|\n' +
+          '| dx | 2.5° x 100 km = 250 km |\n' +
+          '| dy | 0.7° x 111 km = 78 km |\n' +
+          '| dz | 0.05 km |\n' +
+          '| **Distance** | **~261.9 km** |\n\n' +
+          'The altitude contribution is negligible — horizontal distances dominate for surface navigation.',
         advancedContent:
-          'On Earth\'s curved surface, the flat-plane distance formula becomes increasingly inaccurate over large distances. The **haversine formula** accounts for curvature: d = 2R·arcsin(√[sin²(Δφ/2) + cos φ₁ cos φ₂ sin²(Δλ/2)]), where R ≈ 6,371 km. For Guwahati to Delhi (~1,800 km), the flat approximation overestimates by ~0.3%. For intercontinental distances, the error grows: London to Sydney (flat: ~16,500 km, great circle: ~16,983 km — the flat estimate is paradoxically shorter because it cuts through the Earth). **Vincenty\'s formulae** improve accuracy to millimeters by using an ellipsoidal Earth model.',
-        diagram: 'DistanceFormulaDiagram',
+          '**Why flat-plane breaks down at scale:**\n\n' +
+          'The **haversine formula** accounts for Earth\'s curvature:\n\n' +
+          '`d = 2R * arcsin(sqrt[sin²(dphi/2) + cos(phi1) cos(phi2) sin²(dlambda/2)])`\n\n' +
+          'where R = 6,371 km.\n\n' +
+          '| Route | Flat approx | Great circle | Error |\n' +
+          '|-------|-----------|-------------|-------|\n' +
+          '| Guwahati-Delhi (~1,800 km) | ~0.3% | baseline | small |\n' +
+          '| London-Sydney | ~16,500 km | ~16,983 km | significant |\n\n' +
+          '**Vincenty\'s formulae** improve accuracy to millimetres using an ellipsoidal Earth model.',
+        diagram: 'CoordinatePlaneDiagram',
+        interactive: { type: 'python-playground' as const, props: { starterCode: 'import math\n\n# Distance and midpoint calculator\nx1, y1 = 1, 2\nx2, y2 = 4, 6\n\ndist = math.sqrt((x2-x1)**2 + (y2-y1)**2)\nmid_x = (x1 + x2) / 2\nmid_y = (y1 + y2) / 2\nslope = (y2 - y1) / (x2 - x1)\n\nprint(f"Point A: ({x1}, {y1})")\nprint(f"Point B: ({x2}, {y2})")\nprint(f"Distance: {dist:.2f}")\nprint(f"Midpoint: ({mid_x}, {mid_y})")\nprint(f"Slope: {slope:.2f}")\n\n# Try your own points!\n# Change x1,y1 and x2,y2 above', title: 'Try it — Distance & Midpoint' } },
       },
       {
         title: 'Midpoint and Slope',
         beginnerContent:
-          'The midpoint of a line segment connecting (x₁, y₁) and (x₂, y₂) is simply the average of the coordinates: M = ((x₁ + x₂)/2, (y₁ + y₂)/2). This is the exact center of the segment. If a bridge is to be built connecting two villages on opposite banks of the Brahmaputra, and the banks are at coordinates (2, 5) and (8, 11), the midpoint of the bridge — where the central support pillar would stand — is at ((2+8)/2, (5+11)/2) = (5, 8).\n\nThe slope of a line measures its steepness: m = (y₂ − y₁)/(x₂ − x₁) = rise/run. A horizontal line has slope 0, a line rising at 45° has slope 1, and a vertical line has undefined slope (division by zero, since the run is zero). Positive slope means the line rises from left to right; negative slope means it falls. Parallel lines have equal slopes. Perpendicular lines have slopes that are negative reciprocals of each other: if one line has slope m, a perpendicular line has slope −1/m. So a line with slope 2 is perpendicular to a line with slope −1/2. This relationship is essential in engineering — when a surveyor in the Karbi Anglong district maps a road and needs to plan a perpendicular intersection, the slope relationship tells them the exact angle. The slope concept extends to calculus, where the instantaneous slope of a curve at any point is found using derivatives.',
+          '**Midpoint formula — the average of the coordinates:**\n\n' +
+          '`M = ((x1 + x2)/2, (y1 + y2)/2)`\n\n' +
+          '**Example:** Bridge between villages at (2, 5) and (8, 11).\n\n' +
+          'Midpoint = ((2+8)/2, (5+11)/2) = **(5, 8)** — where the central support pillar stands.\n\n' +
+          '**Slope — the steepness of a line:**\n\n' +
+          '`m = (y2 - y1) / (x2 - x1) = rise / run`\n\n' +
+          '| Slope value | Meaning |\n' +
+          '|------------|--------|\n' +
+          '| Positive | Line rises left to right |\n' +
+          '| Negative | Line falls left to right |\n' +
+          '| Zero | Horizontal line |\n' +
+          '| Undefined | Vertical line (run = 0) |\n' +
+          '| 1 | 45° angle |\n\n' +
+          '**Key relationships:**\n\n' +
+          '- **Parallel lines** have equal slopes\n' +
+          '- **Perpendicular lines** have slopes that multiply to -1: if one has slope m, the other has slope -1/m\n\n' +
+          'A line with slope 2 is perpendicular to a line with slope -1/2.',
         intermediateContent:
-          'Slopes of parallel and perpendicular lines have algebraic relationships. Two lines y = m₁x + b₁ and y = m₂x + b₂ are parallel iff m₁ = m₂, and perpendicular iff m₁ × m₂ = −1. Example: line L₁ passes through (1, 3) and (4, 9), so m₁ = (9−3)/(4−1) = 2. A line perpendicular to L₁ has slope m₂ = −1/2. If it passes through (4, 9): y − 9 = −½(x − 4), giving y = −x/2 + 11. The angle between two lines with slopes m₁ and m₂ is θ = arctan|(m₁ − m₂)/(1 + m₁m₂)|.',
+          '**Worked example:**\n\n' +
+          'Line L1 passes through (1, 3) and (4, 9), so m1 = (9-3)/(4-1) = 2.\n\n' +
+          '| Task | Calculation | Result |\n' +
+          '|------|------------|--------|\n' +
+          '| Perpendicular slope | m2 = -1/m1 | -1/2 |\n' +
+          '| Line through (4, 9) | y - 9 = -1/2(x - 4) | y = -x/2 + 11 |\n\n' +
+          '**Angle between two lines:** `theta = arctan(|(m1 - m2) / (1 + m1*m2)|)`',
         advancedContent:
-          'The slope concept leads directly to the derivative in calculus. The slope of the secant line between (x, f(x)) and (x+h, f(x+h)) is [f(x+h) − f(x)]/h. As h → 0, this becomes the instantaneous slope — the derivative f\'(x). For the parabola y = x², the derivative is 2x, meaning the slope at x = 3 is 6 and at x = −1 is −2. The tangent line at (3, 9) is y − 9 = 6(x − 3), or y = 6x − 9. This bridge between algebra and calculus is why coordinate geometry is called "analytic geometry" — it analyzes geometric problems using algebraic (and eventually calculus) techniques.',
+          '**From slope to calculus:**\n\n' +
+          'The slope of the secant line between (x, f(x)) and (x+h, f(x+h)) is `[f(x+h) - f(x)]/h`. As h approaches 0, this becomes the **derivative** f\'(x) — the instantaneous slope.\n\n' +
+          '**Example:** For y = x², the derivative is 2x:\n\n' +
+          '- At x = 3: slope = 6\n' +
+          '- At x = -1: slope = -2\n' +
+          '- Tangent line at (3, 9): y = 6x - 9\n\n' +
+          'This bridge between algebra and calculus is why coordinate geometry is called **analytic geometry**.',
       },
       {
         title: 'Equation of a Line',
         beginnerContent:
-          'Every straight line on the coordinate plane can be described by an equation. The slope-intercept form, y = mx + b, is the most intuitive: m is the slope (how steep the line is) and b is the y-intercept (where the line crosses the y-axis). A line with slope 3 and y-intercept −2 is y = 3x − 2. Plug in any x-value and you get the corresponding y-value — the equation generates every point on the line.\n\nThe point-slope form, y − y₁ = m(x − x₁), is useful when you know the slope and one point on the line. If a drone surveying paddy fields in Nagaon district flies along a path that passes through the point (4, 7) with a slope of −0.5 (descending gently), its path follows y − 7 = −0.5(x − 4), which simplifies to y = −0.5x + 9. The general form Ax + By + C = 0 can represent any line, including vertical lines (which slope-intercept form cannot). Two non-parallel lines always intersect at exactly one point, which you find by solving their equations simultaneously. If line 1 is y = 2x + 1 and line 2 is y = −x + 7, setting them equal gives 2x + 1 = −x + 7, so 3x = 6, x = 2, and y = 5. The intersection point (2, 5) is the unique solution. This technique — solving systems of linear equations — is the foundation of linear algebra and is used millions of times per second in computer graphics, GPS triangulation, and the mapping algorithms used by drones flying over Northeast India\'s terrain.',
+          '**Three forms of a line equation:**\n\n' +
+          '| Form | Equation | Best for |\n' +
+          '|------|---------|----------|\n' +
+          '| Slope-intercept | y = mx + b | Graphing (m = slope, b = y-intercept) |\n' +
+          '| Point-slope | y - y1 = m(x - x1) | When you know slope + one point |\n' +
+          '| General | Ax + By + C = 0 | Any line, including vertical |\n\n' +
+          '**Example:** A line with slope 3 and y-intercept -2 is `y = 3x - 2`. Plug in any x to get y.\n\n' +
+          '**Point-slope example:** A drone passes through (4, 7) descending at slope -0.5:\n\n' +
+          '`y - 7 = -0.5(x - 4)` which simplifies to `y = -0.5x + 9`\n\n' +
+          '**Finding where two lines meet:**\n\n' +
+          'Line 1: y = 2x + 1, Line 2: y = -x + 7\n\n' +
+          '| Step | Operation | Result |\n' +
+          '|------|-----------|--------|\n' +
+          '| Set equal | 2x + 1 = -x + 7 | |\n' +
+          '| Solve | 3x = 6 | x = 2 |\n' +
+          '| Substitute | y = 2(2) + 1 | y = 5 |\n' +
+          '| **Intersection** | | **(2, 5)** |\n\n' +
+          'This technique — solving systems of linear equations — is the foundation of linear algebra and is used millions of times per second in computer graphics and GPS.',
         intermediateContent:
-          'Three forms of a line equation serve different purposes. Slope-intercept y = mx + b is best for graphing. Point-slope y − y₁ = m(x − x₁) is best when you know a point and slope. Standard form Ax + By = C (with integer A, B, C) is best for systems of equations. Converting between them: 3x − 2y = 12 → y = (3/2)x − 6 (slope-intercept). The distance from a point (x₀, y₀) to a line Ax + By + C = 0 is d = |Ax₀ + By₀ + C| / √(A² + B²). Example: distance from (3, 1) to 4x − 3y + 2 = 0 is |12 − 3 + 2|/√(16+9) = 11/5 = **2.2 units**.',
+          '**Choosing the right form:**\n\n' +
+          '| Form | Best use case |\n' +
+          '|------|-------------|\n' +
+          '| Slope-intercept | Quick graphing |\n' +
+          '| Point-slope | Given a point and slope |\n' +
+          '| Standard (Ax + By = C) | Systems of equations |\n\n' +
+          '**Converting:** 3x - 2y = 12 becomes y = (3/2)x - 6 in slope-intercept form.\n\n' +
+          '**Distance from a point to a line:**\n\n' +
+          '`d = |Ax0 + By0 + C| / sqrt(A² + B²)`\n\n' +
+          'Example: distance from (3, 1) to 4x - 3y + 2 = 0 is |12 - 3 + 2|/sqrt(16+9) = 11/5 = **2.2 units**.',
         advancedContent:
-          'Linear regression — fitting the "best" line through scattered data points — minimizes the sum of squared vertical distances (least squares). For n data points, the best-fit slope is m = [nΣxᵢyᵢ − ΣxᵢΣyᵢ] / [nΣxᵢ² − (Σxᵢ)²] and intercept b = ȳ − mx̄. The correlation coefficient r (ranging from −1 to +1) measures how tightly the data clusters around the line. In multiple regression, y = b₀ + b₁x₁ + b₂x₂ + ... + bₙxₙ, the "line" becomes a hyperplane in n+1 dimensions. This is the mathematical foundation of predictive modeling in science, economics, and machine learning.',
+          '**Linear regression — fitting the "best" line:**\n\n' +
+          'Minimize the sum of squared vertical distances (least squares).\n\n' +
+          '- Best-fit slope: `m = [n*sum(xi*yi) - sum(xi)*sum(yi)] / [n*sum(xi²) - (sum(xi))²]`\n' +
+          '- Intercept: `b = y_bar - m*x_bar`\n' +
+          '- **Correlation coefficient** r (from -1 to +1) measures how tightly data clusters around the line\n\n' +
+          'In **multiple regression**, y = b0 + b1*x1 + b2*x2 + ... + bn*xn — the "line" becomes a hyperplane. This is the mathematical foundation of predictive modeling in science, economics, and machine learning.',
         diagram: 'SlopeInterceptDiagram',
       },
       {
         title: 'Conic Sections',
         beginnerContent:
-          'When you slice a cone with a flat plane at different angles, you get four different curves called conic sections: circles, ellipses, parabolas, and hyperbolas. A horizontal cut produces a circle. A tilted cut produces an ellipse. A cut parallel to the side of the cone produces a parabola. A cut steeper than the side of the cone produces a hyperbola. Each has a standard equation. A circle centered at the origin with radius r is x² + y² = r². An ellipse centered at the origin is x²/a² + y²/b² = 1, where a and b are the semi-major and semi-minor axes. A parabola opening upward with vertex at the origin is y = (1/4p)x², where p is the distance from vertex to focus.\n\nConic sections appear throughout science and engineering. Every planet orbits the Sun in an ellipse (Kepler\'s First Law) — Earth\'s orbit has a semi-major axis of about 149.6 million km and an eccentricity of 0.017, making it very nearly circular. Satellite dishes and car headlights use parabolic reflectors because a parabola reflects all incoming parallel rays to a single focus point — maximising signal strength or light concentration. The cooling towers of power plants are hyperboloids (3D hyperbolas) because the shape provides structural strength with minimal material. Even the trajectory of a ball thrown across a field in Assam follows a parabolic path (neglecting air resistance): if you throw a cricket ball at 20 m/s at a 45° angle, its path is a perfect parabola reaching a maximum height of about 10.2 metres and landing 40.8 metres away.',
+          '**Slicing a cone at different angles produces four curves:**\n\n' +
+          '| Cut angle | Shape | Standard equation |\n' +
+          '|-----------|-------|------------------|\n' +
+          '| Horizontal | Circle | x² + y² = r² |\n' +
+          '| Tilted | Ellipse | x²/a² + y²/b² = 1 |\n' +
+          '| Parallel to side | Parabola | y = (1/4p)x² |\n' +
+          '| Steeper than side | Hyperbola | x²/a² - y²/b² = 1 |\n\n' +
+          '**Where conics appear in the real world:**\n\n' +
+          '- **Ellipses** — every planet orbits the Sun in an ellipse (Kepler\'s First Law). Earth\'s orbit has eccentricity 0.017, nearly circular\n' +
+          '- **Parabolas** — satellite dishes and headlights use parabolic reflectors (all parallel rays focus to one point)\n' +
+          '- **Hyperbolas** — power plant cooling towers use the shape for structural strength with minimal material\n\n' +
+          'Even a cricket ball thrown at 45° follows a parabolic path (neglecting air resistance) — reaching ~10.2 m high and landing ~40.8 m away at 20 m/s.',
         intermediateContent:
-          'Each conic section has a focus-directrix definition: the set of points where the ratio of distance-to-focus over distance-to-directrix equals the eccentricity e. Circle: e = 0. Ellipse: 0 < e < 1. Parabola: e = 1. Hyperbola: e > 1. Earth\'s orbit has e = 0.017 (nearly circular); Halley\'s Comet has e = 0.967 (extremely elongated ellipse). Worked example: a parabolic satellite dish has equation y = x²/40. The focus is at (0, 10), meaning the receiver should be placed 10 cm above the center of the dish.',
+          '**Focus-directrix definition:** The ratio of distance-to-focus over distance-to-directrix equals the **eccentricity** e.\n\n' +
+          '| Conic | Eccentricity | Example |\n' +
+          '|-------|-----------|---------|\n' +
+          '| Circle | e = 0 | Perfect circle |\n' +
+          '| Ellipse | 0 < e < 1 | Earth orbit (e = 0.017) |\n' +
+          '| Parabola | e = 1 | Projectile path |\n' +
+          '| Hyperbola | e > 1 | Escape trajectory |\n\n' +
+          'Halley\'s Comet has e = 0.967 — an extremely elongated ellipse.\n\n' +
+          '**Worked example:** A parabolic satellite dish y = x²/40 has focus at (0, 10). The receiver should be placed **10 cm above the centre**.',
         advancedContent:
-          'Conic sections are the solution curves of second-degree polynomial equations Ax² + Bxy + Cy² + Dx + Ey + F = 0. The discriminant B² − 4AC determines the type: negative = ellipse (or circle if A = C and B = 0), zero = parabola, positive = hyperbola. In projective geometry, all conics are equivalent — a circle viewed at an angle becomes an ellipse, and at the right angle, a parabola or hyperbola. Kepler\'s laws of planetary motion state that orbits are conic sections with the Sun at one focus. The vis-viva equation v² = GM(2/r − 1/a) relates orbital speed to position — used by mission planners to calculate trajectory corrections for spacecraft.',
+          '**General second-degree equation:** `Ax² + Bxy + Cy² + Dx + Ey + F = 0`\n\n' +
+          'The discriminant B² - 4AC determines the type:\n\n' +
+          '| Discriminant | Conic |\n' +
+          '|-------------|-------|\n' +
+          '| Negative | Ellipse (circle if A=C, B=0) |\n' +
+          '| Zero | Parabola |\n' +
+          '| Positive | Hyperbola |\n\n' +
+          'In **projective geometry**, all conics are equivalent — a circle viewed at an angle becomes an ellipse. Kepler\'s laws state orbits are conics with the Sun at one focus. The **vis-viva equation** `v² = GM(2/r - 1/a)` relates orbital speed to position — used for spacecraft trajectory corrections.',
         diagram: 'ConicSectionsDiagram',
       },
     ],
@@ -3510,50 +4054,552 @@ export const scienceReferences: ReferenceGuide[] = [
       {
         title: 'Limits — Approaching Without Arriving',
         beginnerContent:
-          'A limit describes what value a function approaches as its input gets closer and closer to a particular point — even if the function never actually reaches that value. Consider the function f(x) = (x² − 1)/(x − 1). At x = 1, you get 0/0 — undefined. But as x approaches 1 (from, say, 0.9, 0.99, 0.999...), f(x) approaches 2 (1.9, 1.99, 1.999...). We write lim(x→1) (x²−1)/(x−1) = 2. Algebraically, we can factor the numerator: (x²−1)/(x−1) = (x+1)(x−1)/(x−1) = x+1, which equals 2 when x = 1. The limit tells us the function "wants" to be 2 at x = 1, even though it technically has a hole there.\n\nLimits are the foundation upon which all of calculus is built. Without limits, you cannot rigorously define derivatives or integrals. The famous limit lim(x→0) sin(x)/x = 1 is essential for deriving the derivatives of trigonometric functions. Limits also capture the idea of infinity: lim(x→∞) 1/x = 0 tells us that 1/x gets arbitrarily close to zero as x grows without bound, but never actually reaches it. The formal epsilon-delta definition of limits, developed by Cauchy and Weierstrass in the 19th century, replaced centuries of hand-waving about "infinitely small quantities" with rigorous mathematics. For every epsilon > 0, there exists a delta > 0 such that |f(x) − L| < epsilon whenever 0 < |x − c| < delta. This technical definition may seem daunting, but its power is that it puts calculus on an unshakeable logical foundation.',
+          '**What is a limit?**\n\n' +
+          'A limit describes what value a function **approaches** as its input gets closer to a point — even if the function never reaches that value.\n\n' +
+          '**Example:** `f(x) = (x² - 1)/(x - 1)`\n\n' +
+          '| x | f(x) |\n' +
+          '|---|------|\n' +
+          '| 0.9 | 1.9 |\n' +
+          '| 0.99 | 1.99 |\n' +
+          '| 0.999 | 1.999 |\n' +
+          '| 1.0 | **undefined** (0/0) |\n\n' +
+          'We write: `lim(x->1) (x²-1)/(x-1) = 2`\n\n' +
+          '**Algebraically:** Factor the numerator: `(x+1)(x-1)/(x-1) = x+1`, which equals 2 at x = 1. The limit tells us the function "wants" to be 2, even though it has a hole there.\n\n' +
+          '**Why limits matter:**\n\n' +
+          '- Without limits, you cannot define derivatives or integrals\n' +
+          '- `lim(x->0) sin(x)/x = 1` — essential for trig derivatives\n' +
+          '- `lim(x->infinity) 1/x = 0` — captures the idea of infinity\n\n' +
+          'Limits are the **foundation** upon which ALL of calculus is built.',
         intermediateContent:
-          'Evaluating limits often requires algebraic manipulation. For lim(x→4) (x²-16)/(x-4): factor as (x+4)(x-4), cancel, giving lim(x→4)(x+4) = **8**. L\'Hôpital\'s Rule handles 0/0 or ∞/∞ forms: lim(x→0) sin(x)/x = lim(x→0) cos(x)/1 = 1 (differentiate top and bottom). For lim(x→∞) (3x²+1)/(5x²-2): divide all terms by x², giving (3+1/x²)/(5-2/x²) → **3/5** as x → ∞. One-sided limits matter: lim(x→0⁺) 1/x = +∞ but lim(x→0⁻) 1/x = -∞.',
+          '**Techniques for evaluating limits:**\n\n' +
+          '| Technique | Example | Result |\n' +
+          '|-----------|---------|--------|\n' +
+          '| Factoring | lim(x->4) (x²-16)/(x-4) = lim(x+4) | **8** |\n' +
+          '| L\'Hopital\'s Rule (0/0 or inf/inf) | lim(x->0) sin(x)/x = cos(x)/1 | **1** |\n' +
+          '| Divide by highest power | lim(x->inf) (3x²+1)/(5x²-2) | **3/5** |\n\n' +
+          '**One-sided limits matter:**\n\n' +
+          '- `lim(x->0+) 1/x = +infinity`\n' +
+          '- `lim(x->0-) 1/x = -infinity`\n\n' +
+          'If left and right limits disagree, the two-sided limit does not exist.',
         advancedContent:
-          'The ε-δ definition of continuity requires that for every ε > 0, there exists δ > 0 such that |x - c| < δ implies |f(x) - f(c)| < ε. The **Intermediate Value Theorem** (continuous f on [a,b] with f(a) < k < f(b) implies f(c) = k for some c in (a,b)) proves roots exist. The **Squeeze Theorem** (if g(x) ≤ f(x) ≤ h(x) and lim g = lim h = L, then lim f = L) proves lim(x→0) x²sin(1/x) = 0. These foundations, developed by Cauchy and Weierstrass, resolved centuries of confusion about infinitesimals.',
+          '**Rigorous foundations:**\n\n' +
+          'The epsilon-delta definition: for every epsilon > 0, there exists delta > 0 such that |x - c| < delta implies |f(x) - f(c)| < epsilon.\n\n' +
+          '**Key theorems built on limits:**\n\n' +
+          '- **Intermediate Value Theorem** — continuous f on [a,b] with f(a) < k < f(b) implies f(c) = k for some c in (a,b). Proves roots exist\n' +
+          '- **Squeeze Theorem** — if g(x) <= f(x) <= h(x) and lim g = lim h = L, then lim f = L. Proves lim(x->0) x²sin(1/x) = 0\n\n' +
+          'Developed by Cauchy and Weierstrass, these foundations resolved centuries of confusion about infinitesimals.',
         diagram: 'LimitDiagram',
       },
       {
         title: 'Derivatives — The Slope at a Point',
         beginnerContent:
-          'The derivative of a function at a point is the slope of the tangent line to the function\'s graph at that point. It measures the instantaneous rate of change — how fast the output is changing relative to the input at that exact moment. If you plot the height of a bamboo shoot over time, the derivative at any point tells you how fast the bamboo is growing right then. If a Muga moth caterpillar\'s weight over 30 days is described by some curve, the derivative tells you the rate of weight gain at each day.\n\nFormally, the derivative is defined as a limit: f\'(x) = lim(h→0) [f(x+h) − f(x)] / h. This is the slope of the secant line between points x and x+h as h shrinks to zero, morphing the secant into a tangent. For f(x) = x², the derivative is f\'(x) = lim(h→0) [(x+h)² − x²]/h = lim(h→0) [2xh + h²]/h = lim(h→0) (2x + h) = 2x. So the slope of y = x² at x = 3 is 2(3) = 6 — the curve is rising 6 units vertically for every 1 unit horizontally at that point. At x = 0, the derivative is 0 — the curve is momentarily flat, which corresponds to the bottom of the parabola. The derivative is positive where the function is increasing, negative where it is decreasing, and zero at peaks and valleys (local maxima and minima). This is why derivatives are central to optimisation — finding the values of x where f\'(x) = 0 locates the highest and lowest points of any smooth function.',
+          '**What is a derivative?**\n\n' +
+          'The derivative measures the **instantaneous rate of change** — how fast the output changes relative to the input at one exact moment.\n\n' +
+          'If you plot bamboo height over time, the derivative at any point tells you how fast it is growing **right then**.\n\n' +
+          '**Formal definition:**\n\n' +
+          '`f\'(x) = lim(h->0) [f(x+h) - f(x)] / h`\n\n' +
+          '**Worked example:** f(x) = x²\n\n' +
+          '| Step | Calculation |\n' +
+          '|------|------------|\n' +
+          '| Expand | [(x+h)² - x²]/h |\n' +
+          '| Simplify | [2xh + h²]/h = 2x + h |\n' +
+          '| Take limit | h -> 0: **f\'(x) = 2x** |\n\n' +
+          '**What the derivative tells you:**\n\n' +
+          '| At x = | f\'(x) = 2x | Meaning |\n' +
+          '|--------|-----------|--------|\n' +
+          '| 3 | 6 | Rising steeply |\n' +
+          '| 0 | 0 | Momentarily flat (bottom of parabola) |\n' +
+          '| -2 | -4 | Falling |\n\n' +
+          '- f\'(x) > 0 → function is **increasing**\n' +
+          '- f\'(x) < 0 → function is **decreasing**\n' +
+          '- f\'(x) = 0 → **peak, valley, or inflection point**\n\n' +
+          'Finding where f\'(x) = 0 locates maxima and minima — the heart of **optimisation**.',
         intermediateContent:
-          'Common derivatives to memorize: d/dx(xⁿ) = nxⁿ⁻¹, d/dx(sin x) = cos x, d/dx(cos x) = -sin x, d/dx(eˣ) = eˣ, d/dx(ln x) = 1/x, d/dx(tan x) = sec²x. Worked optimization: maximize the area of a rectangle inscribed in a semicircle of radius r. Let x = half-width, y = height = √(r²-x²). Area A = 2xy = 2x√(r²-x²). Set dA/dx = 0 to get x = r/√2, y = r/√2, so maximum area = **r²**. The second derivative test confirms this is a maximum.',
+          '**Derivatives to know:**\n\n' +
+          '| Function | Derivative |\n' +
+          '|----------|----------|\n' +
+          '| x^n | n*x^(n-1) |\n' +
+          '| sin x | cos x |\n' +
+          '| cos x | -sin x |\n' +
+          '| e^x | e^x |\n' +
+          '| ln x | 1/x |\n' +
+          '| tan x | sec²x |\n\n' +
+          '**Worked optimisation:** Maximise area of a rectangle in a semicircle of radius r.\n\n' +
+          '| Step | Work |\n' +
+          '|------|------|\n' +
+          '| Setup | A = 2x * sqrt(r²-x²) |\n' +
+          '| Set dA/dx = 0 | x = r/sqrt(2) |\n' +
+          '| Max area | **r²** |\n\n' +
+          'Second derivative test confirms it is a maximum.',
         advancedContent:
-          'The derivative has profound physical meanings: position → velocity → acceleration is a chain of successive derivatives. **Related rates** problems use the chain rule: if a balloon\'s volume V = (4/3)πr³ inflates at dV/dt = 100 cm³/s, then dr/dt = (dV/dt)/(4πr²). When r = 10 cm: dr/dt = 100/(400π) ≈ 0.08 cm/s. **Taylor series** f(x) = Σ f^(n)(a)(x-a)ⁿ/n! approximate any smooth function as a polynomial — the foundation of how calculators compute sin, cos, eˣ, and ln.',
-        diagram: 'TangentLineDiagram',
+          '**Physical meaning chain:** position -> velocity -> acceleration (successive derivatives).\n\n' +
+          '**Related rates** use the chain rule: if a balloon\'s volume V = (4/3)pi*r³ inflates at dV/dt = 100 cm³/s:\n\n' +
+          '`dr/dt = (dV/dt) / (4*pi*r²)`\n\n' +
+          'When r = 10 cm: dr/dt = 100/(400pi) = 0.08 cm/s.\n\n' +
+          '**Taylor series:** `f(x) = sum of f^(n)(a)(x-a)^n / n!` approximates any smooth function as a polynomial — how calculators compute sin, cos, e^x, and ln.',
+        diagram: 'DerivativeVisualizerDiagram',
+        interactive: { type: 'python-playground' as const, props: { starterCode: '# Explore derivatives numerically\ndef f(x):\n    return x**3 - 3*x + 1\n\ndef derivative(f, x, h=0.0001):\n    return (f(x + h) - f(x)) / h\n\nprint("x     f(x)    f\'(x)")\nprint("-" * 28)\nfor x in [-2, -1, 0, 1, 2, 3]:\n    print(f"{x:>3}   {f(x):>6.1f}   {derivative(f, x):>6.1f}")\n\n# Where is f\'(x) = 0? (peaks/valleys)\n# Try changing f(x) above!', title: 'Try it — Derivatives' } },
       },
       {
         title: 'Rules of Differentiation',
         beginnerContent:
-          'Rather than computing limits from scratch every time, mathematicians have derived rules that make differentiation fast and mechanical. The power rule is the workhorse: if f(x) = xⁿ, then f\'(x) = nxⁿ⁻¹. So the derivative of x³ is 3x², the derivative of x⁷ is 7x⁶, and the derivative of x^(1/2) = √x is (1/2)x^(−1/2) = 1/(2√x). Constants vanish: the derivative of 5 is 0 (constants do not change). The sum rule says the derivative of a sum is the sum of derivatives: (f + g)\' = f\' + g\'. The constant multiple rule says (cf)\' = cf\'.\n\nThe product rule handles multiplication: (fg)\' = f\'g + fg\'. The quotient rule handles division: (f/g)\' = (f\'g − fg\')/g². The chain rule handles composition — a function inside a function: if y = f(g(x)), then dy/dx = f\'(g(x)) x g\'(x). For example, if y = (3x + 1)⁵, let u = 3x + 1, so y = u⁵. Then dy/du = 5u⁴ and du/dx = 3, giving dy/dx = 5(3x+1)⁴ x 3 = 15(3x+1)⁴. Special derivatives include: d/dx(sin x) = cos x, d/dx(cos x) = −sin x, d/dx(eˣ) = eˣ (the exponential function is its own derivative — a remarkable property), and d/dx(ln x) = 1/x. With these rules, you can differentiate virtually any function built from elementary pieces, enabling engineers to calculate rates of change for river flow in the Siang, population growth models for one-horned rhinos in Kaziranga, or the cooling curve of a freshly brewed cup of Assam tea.',
+          '**Rather than computing limits every time, use these rules:**\n\n' +
+          '**The power rule** (the workhorse):\n\n' +
+          '`d/dx(x^n) = n*x^(n-1)`\n\n' +
+          '| Function | Derivative |\n' +
+          '|----------|----------|\n' +
+          '| x³ | 3x² |\n' +
+          '| x⁷ | 7x⁶ |\n' +
+          '| sqrt(x) = x^(1/2) | (1/2)x^(-1/2) = 1/(2*sqrt(x)) |\n' +
+          '| constant (e.g. 5) | 0 |\n\n' +
+          '**Combining functions:**\n\n' +
+          '| Rule | Formula | Example |\n' +
+          '|------|---------|--------|\n' +
+          '| Sum | (f+g)\' = f\' + g\' | (x² + 3x)\' = 2x + 3 |\n' +
+          '| Constant multiple | (cf)\' = cf\' | (5x³)\' = 15x² |\n' +
+          '| Product | (fg)\' = f\'g + fg\' | (x*sin x)\' = sin x + x*cos x |\n' +
+          '| Quotient | (f/g)\' = (f\'g - fg\')/g² | |\n' +
+          '| Chain | dy/dx = f\'(g(x)) * g\'(x) | |\n\n' +
+          '**Chain rule example:** y = (3x + 1)⁵\n\n' +
+          'Let u = 3x + 1, so y = u⁵. Then dy/du = 5u⁴, du/dx = 3.\n\n' +
+          '`dy/dx = 5(3x+1)⁴ * 3 = 15(3x+1)⁴`\n\n' +
+          '**Special derivatives:** d/dx(sin x) = cos x, d/dx(e^x) = e^x (the exponential is its own derivative!), d/dx(ln x) = 1/x.',
         intermediateContent:
-          'The chain rule is essential for nested functions. Example: d/dx[sin(x³)] = cos(x³) × 3x². For d/dx[e^(2x+1)] = e^(2x+1) × 2. Product rule: d/dx[x² sin x] = 2x sin x + x² cos x. Quotient rule: d/dx[sin x/x²] = (x² cos x − 2x sin x)/x⁴ = (x cos x − 2 sin x)/x³. Implicit differentiation handles equations like x² + y² = 25: differentiate both sides with respect to x: 2x + 2y(dy/dx) = 0, so dy/dx = −x/y. At (3, 4): dy/dx = −3/4.',
+          '**Chain rule in action:**\n\n' +
+          '| Expression | Derivative |\n' +
+          '|-----------|----------|\n' +
+          '| sin(x³) | cos(x³) * 3x² |\n' +
+          '| e^(2x+1) | e^(2x+1) * 2 |\n' +
+          '| x² sin x (product) | 2x sin x + x² cos x |\n\n' +
+          '**Implicit differentiation:** For x² + y² = 25, differentiate both sides:\n\n' +
+          '2x + 2y(dy/dx) = 0, so dy/dx = -x/y. At (3, 4): dy/dx = **-3/4**.',
         advancedContent:
-          'Automatic differentiation (AD) — used in all modern deep learning frameworks (PyTorch, TensorFlow) — computes exact derivatives of arbitrary computational graphs by applying the chain rule mechanically through the computation. Forward-mode AD propagates derivatives alongside function values; reverse-mode AD (backpropagation) propagates derivatives backward from the output. For a neural network with millions of parameters, reverse-mode AD computes the gradient of the loss function with respect to ALL parameters in roughly the same time as one forward evaluation — this efficiency is what makes training deep networks feasible.',
+          '**Automatic differentiation (AD)** — used in PyTorch, TensorFlow — computes exact derivatives of arbitrary computational graphs via the chain rule.\n\n' +
+          '- **Forward-mode AD** propagates derivatives alongside values\n' +
+          '- **Reverse-mode AD** (backpropagation) propagates derivatives backward from output\n\n' +
+          'For a neural network with millions of parameters, reverse-mode AD computes the gradient of the loss with respect to ALL parameters in roughly the same time as one forward evaluation — this efficiency makes training deep networks feasible.',
       },
       {
         title: 'Integration — Area Under a Curve',
         beginnerContent:
-          'Integration is the reverse of differentiation. Where the derivative breaks a curve into slopes, the integral adds up infinitely many thin slices to find the total area under a curve. The definite integral from a to b of f(x) dx represents the signed area between the function f(x), the x-axis, and the vertical lines x = a and x = b. "Signed" means area above the x-axis is positive and area below is negative.\n\nThe process starts by dividing the interval [a, b] into n thin rectangles, each of width delta-x = (b−a)/n. The height of each rectangle is f(x_i) at some point x_i within the strip. The sum of all rectangle areas is a Riemann sum — an approximation. As n approaches infinity and delta-x approaches 0, the Riemann sum converges to the exact integral. For example, the area under y = x² from x = 0 to x = 3 is [x³/3] evaluated from 0 to 3 = 27/3 − 0 = 9 square units. The antiderivative of x² is x³/3 because d/dx(x³/3) = x² — integration and differentiation are inverse operations.\n\nIntegration has immense practical value. The volume of water flowing through a cross-section of the Brahmaputra per second is found by integrating the velocity profile across the river\'s width and depth. The total distance travelled by a vehicle is the integral of its velocity function over time. The total energy delivered by a solar panel over a day is the integral of its power output curve. In statistics, the probability of a continuous random variable falling in a range is the integral of its probability density function over that range — the famous bell curve of the normal distribution has total area exactly equal to 1.',
+          '**Integration is the reverse of differentiation.**\n\n' +
+          'Where derivatives break a curve into slopes, integrals add up infinitely many thin slices to find the **total area** under a curve.\n\n' +
+          '**The definite integral** from a to b of f(x) represents the signed area between f(x) and the x-axis. "Signed" means area above the axis is positive, below is negative.\n\n' +
+          '**How it works:**\n\n' +
+          '1. Divide [a, b] into n thin rectangles (width = (b-a)/n)\n' +
+          '2. Sum all rectangle areas (Riemann sum)\n' +
+          '3. As n approaches infinity, the sum converges to the exact integral\n\n' +
+          '**Example:** Area under y = x² from x = 0 to x = 3:\n\n' +
+          '| Step | Work |\n' +
+          '|------|------|\n' +
+          '| Antiderivative of x² | x³/3 |\n' +
+          '| Evaluate at bounds | [3³/3] - [0³/3] |\n' +
+          '| Result | 9 - 0 = **9 square units** |\n\n' +
+          '`d/dx(x³/3) = x²` — integration and differentiation are **inverse operations**.\n\n' +
+          '**Real-world uses:** Water flow rate in the Brahmaputra (integrate velocity), distance from velocity, energy from power output, probability from density functions.',
         intermediateContent:
-          'Basic antiderivatives: ∫xⁿ dx = xⁿ⁺¹/(n+1) + C (n ≠ -1), ∫sin x dx = -cos x + C, ∫cos x dx = sin x + C, ∫eˣ dx = eˣ + C, ∫1/x dx = ln|x| + C. Worked definite integral: ∫₀² (3x² + 2x) dx = [x³ + x²]₀² = (8 + 4) - 0 = **12**. Substitution method: ∫cos(3x) dx → let u = 3x, du = 3dx → (1/3)∫cos u du = sin(3x)/3 + C. The trapezoidal rule approximates integrals numerically.',
+          '**Basic antiderivatives:**\n\n' +
+          '| Function | Antiderivative |\n' +
+          '|----------|---------------|\n' +
+          '| x^n | x^(n+1)/(n+1) + C (n != -1) |\n' +
+          '| sin x | -cos x + C |\n' +
+          '| cos x | sin x + C |\n' +
+          '| e^x | e^x + C |\n' +
+          '| 1/x | ln(|x|) + C |\n\n' +
+          '**Worked integral:** integral from 0 to 2 of (3x² + 2x) dx = [x³ + x²] from 0 to 2 = (8 + 4) - 0 = **12**.\n\n' +
+          '**Substitution:** integral of cos(3x) dx -> let u = 3x, du = 3dx -> (1/3) * sin(3x) + C.',
         advancedContent:
-          'Integration techniques beyond substitution include integration by parts (∫u dv = uv - ∫v du), partial fractions (decomposing rational functions), and trigonometric substitution. Not all functions have closed-form antiderivatives: ∫e^(-x²) dx (the Gaussian integral) cannot be expressed in elementary functions, yet equals √π/2 from 0 to ∞. **Numerical integration** methods (Simpson\'s rule, Gaussian quadrature, Monte Carlo) handle functions that resist analytical methods. Monte Carlo integration is powerful in high dimensions — it estimates ∫f dV by averaging f over random sample points.',
+          '**Advanced techniques:**\n\n' +
+          '- **Integration by parts:** integral(u dv) = uv - integral(v du)\n' +
+          '- **Partial fractions** — decompose rational functions\n' +
+          '- **Trig substitution** — for integrals involving sqrt(a²-x²)\n\n' +
+          'Not all functions have closed-form antiderivatives: integral(e^(-x²)) dx (the Gaussian integral) cannot be expressed in elementary functions, yet equals sqrt(pi)/2 from 0 to infinity.\n\n' +
+          '**Numerical integration** (Simpson\'s rule, Gaussian quadrature, Monte Carlo) handles functions that resist analytical methods. Monte Carlo is especially powerful in high dimensions.',
         diagram: 'AreaUnderCurveDiagram',
+        interactive: { type: 'python-playground' as const, props: { starterCode: 'import math\n\n# Numerical integration (trapezoidal rule)\ndef f(x):\n    return x**2\n\na, b = 0, 3\nn = 1000\ndx = (b - a) / n\ntotal = 0\nfor i in range(n):\n    x0 = a + i * dx\n    x1 = x0 + dx\n    total += (f(x0) + f(x1)) / 2 * dx\n\nprint(f"Integral of x^2 from {a} to {b}:")\nprint(f"  Numerical: {total:.4f}")\nprint(f"  Exact:     {b**3/3 - a**3/3:.4f}")\n\n# Try changing f(x) to x**3, math.sin(x), etc.', title: 'Try it — Integration' } },
       },
       {
         title: 'The Fundamental Theorem of Calculus',
         beginnerContent:
-          'The Fundamental Theorem of Calculus (FTC) is the most important result in calculus — it formally links differentiation and integration as inverse operations. It has two parts. Part 1 states: if F(x) equals the integral from a to x of f(t) dt (the area under f from a to x, treated as a function of the upper limit x), then F\'(x) = f(x). In plain language: the rate of change of the accumulated area under a curve at any point equals the height of the curve at that point. If you are filling a tank and the water level\'s height traces a curve f(t), the rate at which the total volume grows equals the current cross-sectional area.\n\nPart 2 states: the integral from a to b of f(x) dx equals F(b) − F(a), where F is any antiderivative of f. This is the practical power — it means you can evaluate a definite integral by finding an antiderivative and subtracting its values at the endpoints, rather than computing a limit of Riemann sums. Without the FTC, calculating the integral from 0 to 10 of x³ dx would require computing the limit of a sum of millions of thin rectangles. With the FTC, you simply note that an antiderivative of x³ is x⁴/4, so the integral is 10⁴/4 − 0⁴/4 = 2,500.\n\nThe FTC was developed independently by Isaac Newton and Gottfried Leibniz in the late 1600s, triggering one of the most bitter priority disputes in the history of science. Newton called his version "the method of fluxions"; Leibniz introduced the integral notation we still use today. The theorem unified two problems that had been studied separately for centuries — finding tangent lines (differentiation) and finding areas (integration) — revealing them as two sides of the same coin. This unification is the reason calculus was able to transform physics, engineering, economics, and biology, providing the mathematical language to describe any quantity that changes continuously — from the flow rate of the Brahmaputra to the growth rate of a bamboo forest.',
+          '**The most important result in calculus** — it formally links differentiation and integration as inverse operations.\n\n' +
+          '**Part 1:** If F(x) = integral from a to x of f(t) dt, then F\'(x) = f(x).\n\n' +
+          'In plain language: the rate of change of the accumulated area under a curve equals the height of the curve at that point.\n\n' +
+          '**Part 2:** integral from a to b of f(x) dx = F(b) - F(a)\n\n' +
+          'where F is any antiderivative of f.\n\n' +
+          '**This is the practical power:** evaluate integrals by finding an antiderivative and subtracting endpoint values — no need for Riemann sums.\n\n' +
+          '**Example:**\n\n' +
+          '| Step | Work |\n' +
+          '|------|------|\n' +
+          '| integral of x³ from 0 to 10 | Antiderivative: x⁴/4 |\n' +
+          '| Evaluate | 10⁴/4 - 0⁴/4 = **2,500** |\n\n' +
+          '**Historical note:** Developed independently by Newton ("method of fluxions") and Leibniz (integral notation we still use) in the late 1600s, triggering one of science\'s most bitter priority disputes.\n\n' +
+          'The FTC unified two problems studied separately for centuries — finding tangent lines (differentiation) and finding areas (integration) — revealing them as two sides of the same coin.',
         intermediateContent:
-          'The FTC in action: to find the area under y = x³ from x = 1 to x = 4, find the antiderivative F(x) = x⁴/4, then compute F(4) − F(1) = 256/4 − 1/4 = 64 − 0.25 = **63.75 square units**. For velocity v(t) = 3t² + 2t (m/s), the distance traveled from t = 0 to t = 5 is ∫₀⁵ (3t² + 2t) dt = [t³ + t²]₀⁵ = 125 + 25 = **150 metres**. The FTC also gives d/dx[∫₀ˣ sin(t²) dt] = sin(x²) — differentiation undoes integration.',
+          '**FTC in action:**\n\n' +
+          '| Problem | Antiderivative | Evaluation | Result |\n' +
+          '|---------|---------------|-----------|--------|\n' +
+          '| integral of x³ from 1 to 4 | x⁴/4 | 256/4 - 1/4 | **63.75** sq units |\n' +
+          '| Distance: v(t) = 3t²+2t, t=0..5 | t³+t² | 125+25 - 0 | **150 metres** |\n\n' +
+          'The FTC also gives: `d/dx[integral from 0 to x of sin(t²) dt] = sin(x²)` — differentiation undoes integration.',
         advancedContent:
-          'The FTC extends to multiple dimensions via Stokes\' theorem and the divergence theorem — deep results connecting integrals over boundaries to integrals over interiors. In physics, Gauss\'s law (∮E·dA = Q/ε₀) relates the electric flux through a closed surface to the enclosed charge — it is the divergence theorem applied to electromagnetism. Green\'s theorem relates a line integral around a closed curve to a double integral over the enclosed region. These generalizations form the mathematical backbone of fluid dynamics, electromagnetism, and general relativity.',
+          '**Generalizations to multiple dimensions:**\n\n' +
+          '- **Stokes\' theorem** and **divergence theorem** connect integrals over boundaries to integrals over interiors\n' +
+          '- **Gauss\'s law:** the electric flux through a closed surface equals the enclosed charge divided by epsilon-0 — the divergence theorem applied to electromagnetism\n' +
+          '- **Green\'s theorem** relates a line integral around a closed curve to a double integral over the enclosed region\n\n' +
+          'These generalizations form the mathematical backbone of fluid dynamics, electromagnetism, and general relativity.',
+      },
+    ],
+  },
+
+  // ──────────────────────────────────────────────────────────────
+  // Statistics & Distributions (Math 7b)
+  // ──────────────────────────────────────────────────────────────
+  {
+    slug: 'statistics-and-distributions',
+    title: 'Statistics & Distributions',
+    category: 'math',
+    icon: '📈',
+    tagline: 'From averages to bell curves — the math that describes uncertainty and variation.',
+    relatedStories: ['fishermans-daughter-storm', 'snow-leopards-promise', 'honey-hunters-lesson'],
+    understand: [
+      {
+        title: 'Mean, Median, Mode & Range',
+        beginnerContent:
+          '**Four ways to summarise a dataset:**\n\n' +
+          '| Measure | Definition | Example (data: 2, 3, 5, 5, 8, 12) |\n' +
+          '|---------|-----------|-------------------------------------|\n' +
+          '| Mean | Sum of all values / count | (2+3+5+5+8+12)/6 = **5.83** |\n' +
+          '| Median | Middle value (sorted) | (5+5)/2 = **5** |\n' +
+          '| Mode | Most frequent value | **5** (appears twice) |\n' +
+          '| Range | Highest - lowest | 12 - 2 = **10** |\n\n' +
+          '**When to use which:**\n\n' +
+          '- **Mean** — best for symmetric data without outliers\n' +
+          '- **Median** — best when outliers exist (e.g. income data: a few billionaires skew the mean)\n' +
+          '- **Mode** — best for categorical data (e.g. most popular tea flavour in Assam)\n\n' +
+          '**Example: Exam scores** 45, 67, 72, 72, 78, 81, 95\n\n' +
+          '- Mean = 72.9, Median = 72, Mode = 72\n' +
+          '- All three agree here because the data is roughly symmetric\n\n' +
+          'Now add one outlier (a student scoring 5): Mean drops to 64.4, but Median only shifts to 72. The median is **robust** to outliers.',
+        intermediateContent:
+          '**Weighted mean:**\n\n' +
+          '`weighted mean = sum(wi * xi) / sum(wi)`\n\n' +
+          'Used when values have different importance. If your final grade is 30% homework, 30% midterm, 40% final:\n\n' +
+          '| Component | Score | Weight |\n' +
+          '|-----------|-------|--------|\n' +
+          '| Homework | 85 | 0.30 |\n' +
+          '| Midterm | 70 | 0.30 |\n' +
+          '| Final | 90 | 0.40 |\n' +
+          '| **Weighted mean** | | **82.5** |\n\n' +
+          '**Percentiles and quartiles:**\n\n' +
+          '- **Q1** (25th percentile) — 25% of data falls below\n' +
+          '- **Q2** (50th percentile) = Median\n' +
+          '- **Q3** (75th percentile) — 75% of data falls below\n' +
+          '- **IQR** = Q3 - Q1 — the middle 50% of data\n' +
+          '- Outliers are typically defined as values beyond Q1 - 1.5*IQR or Q3 + 1.5*IQR',
+        advancedContent:
+          '**Robust statistics** resist the influence of outliers:\n\n' +
+          '- The **trimmed mean** discards the top and bottom k% before averaging\n' +
+          '- The **median absolute deviation (MAD)** replaces standard deviation for skewed distributions: MAD = median(|xi - median(x)|)\n' +
+          '- **M-estimators** (Huber, Tukey biweight) down-weight outliers using iteratively reweighted least squares\n\n' +
+          'In high-dimensional data, the **geometric median** (minimises sum of Euclidean distances rather than squared distances) is more robust than the coordinate-wise median — used in federated learning to resist adversarial updates from compromised nodes.',
+        interactive: { type: 'python-playground' as const, props: { starterCode: '# Compute summary statistics\ndata = [45, 67, 72, 72, 78, 81, 95]\n\nmean = sum(data) / len(data)\nsorted_d = sorted(data)\nn = len(sorted_d)\nmedian = sorted_d[n//2] if n % 2 else (sorted_d[n//2-1] + sorted_d[n//2]) / 2\n\n# Mode: most common value\nfrom collections import Counter\nmode = Counter(data).most_common(1)[0][0]\n\nprint(f"Data: {data}")\nprint(f"Mean:   {mean:.1f}")\nprint(f"Median: {median}")\nprint(f"Mode:   {mode}")\nprint(f"Range:  {max(data) - min(data)}")\n\n# Add an outlier and watch the mean shift!\ndata2 = data + [5]\nmean2 = sum(data2) / len(data2)\nprint(f"\\nWith outlier 5: mean = {mean2:.1f}")', title: 'Try it — Summary Statistics' } },
+      },
+      {
+        title: 'Standard Deviation & Variance',
+        beginnerContent:
+          '**The mean tells you the centre. Standard deviation tells you the spread.**\n\n' +
+          'Two classes can have the same mean test score (75) but very different spreads:\n\n' +
+          '- Class A: 70, 73, 75, 77, 80 — scores clustered tightly\n' +
+          '- Class B: 50, 60, 75, 90, 100 — scores spread widely\n\n' +
+          '**Variance** = average of squared distances from the mean:\n\n' +
+          '`Var = sum of (xi - mean)² / n`\n\n' +
+          '**Standard deviation** = square root of variance:\n\n' +
+          '`sigma = sqrt(Var)`\n\n' +
+          '**Worked example:** Data = {2, 4, 4, 4, 5, 5, 7, 9}\n\n' +
+          '| Step | Calculation | Result |\n' +
+          '|------|------------|--------|\n' +
+          '| Mean | 40/8 | 5 |\n' +
+          '| Squared deviations | (2-5)² + (4-5)² + ... + (9-5)² | 32 |\n' +
+          '| Variance | 32/8 | 4 |\n' +
+          '| Standard deviation | sqrt(4) | **2** |\n\n' +
+          'A small sigma means data is clustered near the mean. A large sigma means data is spread out.',
+        intermediateContent:
+          '**Population vs sample:**\n\n' +
+          '| | Variance formula | When to use |\n' +
+          '|--|-----------------|-------------|\n' +
+          '| Population | sum(xi - mu)² / N | You have ALL data |\n' +
+          '| Sample | sum(xi - x_bar)² / (n-1) | You have a subset |\n\n' +
+          'The (n-1) in the sample formula is **Bessel\'s correction** — it compensates for the fact that a sample underestimates the true spread.\n\n' +
+          '**The empirical rule** (for bell-shaped data):\n\n' +
+          '| Range | Percentage of data |\n' +
+          '|-------|-------------------|\n' +
+          '| within 1 sigma | ~68% |\n' +
+          '| within 2 sigma | ~95% |\n' +
+          '| within 3 sigma | ~99.7% |\n\n' +
+          '**Z-score** standardises any value: `z = (x - mean) / sigma`. A z-score of 2 means the value is 2 standard deviations above the mean.',
+        advancedContent:
+          '**Variance of combined distributions:**\n\n' +
+          '- If X and Y are independent: Var(X + Y) = Var(X) + Var(Y)\n' +
+          '- Var(aX + b) = a² Var(X)\n\n' +
+          'The **coefficient of variation** (CV = sigma/mean) allows comparison of spread between datasets with different units or scales — rainfall variability across monsoon years vs. temperature variability.\n\n' +
+          '**Chebyshev\'s inequality** (works for ANY distribution): at least `1 - 1/k²` of data lies within k standard deviations. For k=2: at least 75%. For k=3: at least 89%. No normality assumption needed.',
+        interactive: { type: 'python-playground' as const, props: { starterCode: 'import math\n\ndata = [2, 4, 4, 4, 5, 5, 7, 9]\nn = len(data)\nmean = sum(data) / n\n\n# Variance and standard deviation\nvar_pop = sum((x - mean)**2 for x in data) / n\nvar_sample = sum((x - mean)**2 for x in data) / (n - 1)\nsd = math.sqrt(var_pop)\n\nprint(f"Data: {data}")\nprint(f"Mean: {mean}")\nprint(f"Population variance: {var_pop}")\nprint(f"Sample variance: {var_sample:.2f}")\nprint(f"Std deviation: {sd:.2f}")\n\n# Z-scores\nprint("\\nZ-scores:")\nfor x in data:\n    z = (x - mean) / sd\n    print(f"  x={x}  z={z:+.2f}")', title: 'Try it — Variance & Std Dev' } },
+      },
+      {
+        title: 'The Normal (Gaussian) Distribution',
+        beginnerContent:
+          '**The bell curve** is the most important distribution in statistics.\n\n' +
+          'Many natural measurements — heights, test scores, measurement errors, biological variations — cluster around a central value with symmetric tails.\n\n' +
+          '**The normal distribution is defined by two parameters:**\n\n' +
+          '- **mu** (mean) — the centre of the bell\n' +
+          '- **sigma** (standard deviation) — the width of the bell\n\n' +
+          '**Key properties:**\n\n' +
+          '| Property | Value |\n' +
+          '|----------|-------|\n' +
+          '| Symmetric about | mu |\n' +
+          '| Total area under curve | exactly 1 |\n' +
+          '| Within 1 sigma | 68.3% of data |\n' +
+          '| Within 2 sigma | 95.4% of data |\n' +
+          '| Within 3 sigma | 99.7% of data |\n\n' +
+          '**Example:** Heights of adult women in India: mean = 152 cm, sigma = 6 cm.\n\n' +
+          '- 68% are between 146 and 158 cm\n' +
+          '- 95% are between 140 and 164 cm\n' +
+          '- A woman 170 cm tall is (170-152)/6 = 3 sigma above the mean — in the tallest 0.15%\n\n' +
+          '**Why it appears everywhere:** The **Central Limit Theorem** says that the average of many independent random effects tends toward a normal distribution, regardless of the original distribution.',
+        intermediateContent:
+          '**The standard normal distribution** has mean = 0 and sigma = 1.\n\n' +
+          'Any normal distribution can be standardised using: `z = (x - mu) / sigma`\n\n' +
+          '**Using z-scores to find probabilities:**\n\n' +
+          '| z-score | Area to the left | Meaning |\n' +
+          '|---------|-----------------|--------|\n' +
+          '| -2.0 | 0.0228 | Bottom 2.3% |\n' +
+          '| -1.0 | 0.1587 | Bottom 15.9% |\n' +
+          '| 0.0 | 0.5000 | Exactly at the mean |\n' +
+          '| +1.0 | 0.8413 | Top 15.9% |\n' +
+          '| +2.0 | 0.9772 | Top 2.3% |\n\n' +
+          '**Example:** IQ scores are normally distributed with mean = 100, sigma = 15. What percentage score above 130?\n\n' +
+          'z = (130-100)/15 = 2.0. Area to the left of z=2 is 0.9772, so area to the right is 1 - 0.9772 = **2.28%**.\n\n' +
+          '*See also: The Gaussian distribution in Machine Learning — how it is used in classification, anomaly detection, and Bayesian inference.*',
+        advancedContent:
+          '**The probability density function:**\n\n' +
+          '`f(x) = (1 / (sigma * sqrt(2*pi))) * exp(-(x-mu)² / (2*sigma²))`\n\n' +
+          'The integral of this from -infinity to +infinity equals exactly 1, but it has no closed-form antiderivative — hence the need for z-tables or numerical methods.\n\n' +
+          '**Multivariate normal distribution** in d dimensions is parameterised by a mean vector mu and covariance matrix Sigma. The Mahalanobis distance `sqrt((x-mu)^T Sigma^-1 (x-mu))` generalises the z-score to multiple correlated variables — used in anomaly detection, pattern recognition, and the Kalman filter (GPS, spacecraft navigation).\n\n' +
+          '**Q-Q plots** compare observed quantiles against theoretical normal quantiles — deviations from a straight line reveal non-normality (heavy tails, skew, multimodality).',
+        diagram: 'GaussianExplorerDiagram',
+        interactive: { type: 'python-playground' as const, props: { starterCode: 'import math\n\ndef normal_pdf(x, mu, sigma):\n    coeff = 1 / (sigma * math.sqrt(2 * math.pi))\n    exponent = -((x - mu) ** 2) / (2 * sigma ** 2)\n    return coeff * math.exp(exponent)\n\nmu, sigma = 152, 6  # Women\'s heights in cm\n\nprint(f"Normal distribution: mu={mu}, sigma={sigma}")\nprint(f"\\nHeight  PDF value")\nprint("-" * 22)\nfor h in range(136, 170, 2):\n    pdf = normal_pdf(h, mu, sigma)\n    bar = "#" * int(pdf * 300)\n    print(f"  {h} cm  {bar}")\n\nprint(f"\\n68% range: {mu-sigma} to {mu+sigma} cm")\nprint(f"95% range: {mu-2*sigma} to {mu+2*sigma} cm")', title: 'Try it — Normal Distribution' } },
+      },
+      {
+        title: 'Binomial Distribution',
+        beginnerContent:
+          '**When you repeat the same yes/no experiment many times:**\n\n' +
+          'The binomial distribution counts the number of "successes" in n independent trials, each with probability p.\n\n' +
+          '`P(k successes) = C(n, k) * p^k * (1-p)^(n-k)`\n\n' +
+          '**Example: Flip a fair coin 10 times**\n\n' +
+          '| k (heads) | P(k) | Approx |\n' +
+          '|-----------|------|--------|\n' +
+          '| 0 | C(10,0)(0.5)^10 | 0.001 |\n' +
+          '| 3 | C(10,3)(0.5)^10 | 0.117 |\n' +
+          '| 5 | C(10,5)(0.5)^10 | 0.246 |\n' +
+          '| 7 | C(10,7)(0.5)^10 | 0.117 |\n' +
+          '| 10 | C(10,10)(0.5)^10 | 0.001 |\n\n' +
+          '**Key formulas:**\n\n' +
+          '- Mean: `mu = n * p`\n' +
+          '- Standard deviation: `sigma = sqrt(n * p * (1-p))`\n\n' +
+          'For 10 coin flips: mean = 5 heads, sigma = 1.58.\n\n' +
+          '**Real-world uses:** Quality control (defective items per batch), medical trials (patients who respond to treatment), weather (number of rainy days in a month).',
+        intermediateContent:
+          '**Conditions for binomial distribution:**\n\n' +
+          '1. Fixed number of trials (n)\n' +
+          '2. Each trial has exactly two outcomes (success/failure)\n' +
+          '3. Probability p is constant across trials\n' +
+          '4. Trials are independent\n\n' +
+          '**Normal approximation:** When n is large and p is not extreme, the binomial approximates a normal distribution with mu = np and sigma = sqrt(np(1-p)). Rule of thumb: use when np >= 5 AND n(1-p) >= 5.\n\n' +
+          '**Example:** A vaccine is 80% effective. In a group of 100 people, what is the probability that 85 or more are protected?\n\n' +
+          '| Step | Calculation |\n' +
+          '|------|------------|\n' +
+          '| mu = np | 100 * 0.8 = 80 |\n' +
+          '| sigma | sqrt(100 * 0.8 * 0.2) = 4 |\n' +
+          '| z-score for 85 | (85 - 80) / 4 = 1.25 |\n' +
+          '| P(X >= 85) | 1 - 0.8944 = **~10.6%** |',
+        advancedContent:
+          '**Related distributions:**\n\n' +
+          '- **Geometric** — number of trials until the first success: P(X = k) = (1-p)^(k-1) * p\n' +
+          '- **Negative binomial** — trials until r-th success\n' +
+          '- **Poisson** — limit of binomial as n -> infinity, p -> 0, np = lambda. Used for rare events: radioactive decays, server requests, typos per page\n\n' +
+          'The **Poisson limit theorem:** If X ~ Binomial(n, p) with n large and p small, then X is approximately Poisson(lambda = np). P(X = k) = lambda^k * e^(-lambda) / k!.',
+        interactive: { type: 'python-playground' as const, props: { starterCode: 'import math\n\ndef binomial_pmf(n, k, p):\n    comb = math.factorial(n) // (math.factorial(k) * math.factorial(n - k))\n    return comb * p**k * (1 - p)**(n - k)\n\nn, p = 10, 0.5  # 10 coin flips, fair coin\nprint(f"Binomial(n={n}, p={p})")\nprint(f"Mean = {n*p}, SD = {math.sqrt(n*p*(1-p)):.2f}")\nprint()\nfor k in range(n + 1):\n    prob = binomial_pmf(n, k, p)\n    bar = "#" * int(prob * 80)\n    print(f"  k={k:>2}  P={prob:.4f}  {bar}")', title: 'Try it — Binomial Distribution' } },
+      },
+      {
+        title: 'Correlation & Regression',
+        beginnerContent:
+          '**Do two variables move together?**\n\n' +
+          'Correlation measures the **strength and direction** of the linear relationship between two variables.\n\n' +
+          '**Correlation coefficient r** ranges from -1 to +1:\n\n' +
+          '| r value | Meaning |\n' +
+          '|---------|--------|\n' +
+          '| +1 | Perfect positive (both rise together) |\n' +
+          '| +0.8 | Strong positive |\n' +
+          '| 0 | No linear relationship |\n' +
+          '| -0.6 | Moderate negative |\n' +
+          '| -1 | Perfect negative (one rises as the other falls) |\n\n' +
+          '**Examples:**\n\n' +
+          '- Study hours vs exam score: strong positive (r = 0.85)\n' +
+          '- Temperature vs hot tea sales: negative (r = -0.7)\n' +
+          '- Shoe size vs IQ: no correlation (r = 0.02)\n\n' +
+          '**The critical warning:**\n\n' +
+          'Correlation does NOT imply causation. Ice cream sales and drowning deaths are positively correlated — but ice cream does not cause drowning. Both increase in summer (the **confounding variable**).\n\n' +
+          '**Linear regression** finds the best-fit line through the data: `y = mx + b`, where m is the slope and b is the y-intercept.',
+        intermediateContent:
+          '**Least squares regression:**\n\n' +
+          'The "best-fit" line minimises the sum of squared vertical distances from points to the line.\n\n' +
+          '| Formula | Expression |\n' +
+          '|---------|----------|\n' +
+          '| Slope m | [n*sum(xi*yi) - sum(xi)*sum(yi)] / [n*sum(xi²) - (sum(xi))²] |\n' +
+          '| Intercept b | y_bar - m * x_bar |\n' +
+          '| r² (coefficient of determination) | Proportion of variance explained by the line |\n\n' +
+          '**Example:** Does rainfall predict rice yield?\n\n' +
+          '| Year | Rain (cm) | Yield (tonnes/ha) |\n' +
+          '|------|-----------|------------------|\n' +
+          '| 2020 | 180 | 3.2 |\n' +
+          '| 2021 | 210 | 3.8 |\n' +
+          '| 2022 | 160 | 2.9 |\n' +
+          '| 2023 | 195 | 3.5 |\n\n' +
+          'If r² = 0.92, rainfall explains **92%** of the variation in yield. The remaining 8% comes from other factors (soil, fertiliser, pests).',
+        advancedContent:
+          '**Multiple regression** extends to many predictors:\n\n' +
+          '`y = b0 + b1*x1 + b2*x2 + ... + bn*xn`\n\n' +
+          'The "line" becomes a hyperplane in n+1 dimensions. Solved via the **normal equations:** `b = (X^T X)^(-1) X^T y`.\n\n' +
+          '**Diagnostics:**\n\n' +
+          '- **Residual plots** should show random scatter (not patterns)\n' +
+          '- **Multicollinearity** (correlated predictors) inflates coefficient variance — check using VIF (variance inflation factor)\n' +
+          '- **Overfitting** occurs when the model captures noise rather than signal — use cross-validation or regularisation (Ridge, Lasso)\n\n' +
+          '**Logistic regression** models binary outcomes (yes/no) using P(y=1) = 1/(1 + e^(-z)) — the foundation of classification in machine learning.',
+        interactive: { type: 'python-playground' as const, props: { starterCode: '# Simple linear regression from scratch\nrain = [180, 210, 160, 195, 220, 175, 200]\nyield_t = [3.2, 3.8, 2.9, 3.5, 4.1, 3.0, 3.6]\nn = len(rain)\n\n# Calculate means\nx_bar = sum(rain) / n\ny_bar = sum(yield_t) / n\n\n# Slope and intercept\nnum = sum(rain[i]*yield_t[i] for i in range(n)) - n*x_bar*y_bar\nden = sum(rain[i]**2 for i in range(n)) - n*x_bar**2\nm = num / den\nb = y_bar - m * x_bar\n\n# Correlation coefficient\nss_xy = num\nss_xx = den\nss_yy = sum(yield_t[i]**2 for i in range(n)) - n*y_bar**2\nr = ss_xy / (ss_xx * ss_yy) ** 0.5\n\nprint(f"Best-fit line: y = {m:.4f}x + {b:.2f}")\nprint(f"Correlation r = {r:.3f}")\nprint(f"R-squared = {r**2:.3f}")\nprint(f"\\nPredicted yield at 190cm rain: {m*190+b:.2f} tonnes/ha")', title: 'Try it — Regression' } },
+      },
+      {
+        title: 'The Poisson Distribution',
+        beginnerContent:
+          '**Counts rare events in a fixed interval.**\n\n' +
+          'How many customers arrive per hour? How many typos per page? How many earthquakes per year?\n\n' +
+          '**Key properties:**\n\n' +
+          '- Events happen **independently**\n' +
+          '- The average rate (λ) is **constant**\n' +
+          '- Two events can\'t happen at the exact same instant\n\n' +
+          '**Formula:** `P(X = k) = (λᵏ × e⁻λ) / k!`\n\n' +
+          '**Example:** A shop averages 3 customers per hour (λ = 3)\n\n' +
+          '| Customers (k) | P(X = k) |\n' +
+          '|---------------|----------|\n' +
+          '| 0 | 5.0% |\n' +
+          '| 1 | 14.9% |\n' +
+          '| 2 | 22.4% |\n' +
+          '| 3 | 22.4% |\n' +
+          '| 4 | 16.8% |\n' +
+          '| 5 | 10.1% |\n\n' +
+          '**Mean = λ, Variance = λ** — unique to Poisson: the mean and variance are always equal.',
+        intermediateContent:
+          '**Poisson as a limit of Binomial:**\n\n' +
+          'When n is large, p is small, and λ = np is moderate:\n\n' +
+          '`Binomial(n, p) → Poisson(λ)` as n → ∞, p → 0\n\n' +
+          '**Example:** 1000 emails, each has 0.2% chance of being spam. Expected spam = 1000 × 0.002 = 2.\n\n' +
+          '- Binomial: P(X=3) = C(1000,3) × 0.002³ × 0.998⁹⁹⁷ ≈ 0.1804\n' +
+          '- Poisson: P(X=3) = (2³ × e⁻²) / 3! = 0.1804 ✓\n\n' +
+          '**Sum property:** If X ~ Poisson(λ₁) and Y ~ Poisson(λ₂), then X + Y ~ Poisson(λ₁ + λ₂)\n\n' +
+          '**When to use Poisson vs Binomial:**\n\n' +
+          '- Binomial: fixed number of trials, known probability\n' +
+          '- Poisson: counting events in continuous time/space, known rate',
+        advancedContent:
+          '**Derivation from Binomial:**\n\n' +
+          'Start with `P(X=k) = C(n,k) × pᵏ × (1-p)ⁿ⁻ᵏ`\n\n' +
+          'Substitute p = λ/n:\n\n' +
+          '1. `C(n,k) = n!/(k!(n-k)!)` → `nᵏ/k!` as n → ∞\n' +
+          '2. `pᵏ = (λ/n)ᵏ = λᵏ/nᵏ`\n' +
+          '3. `(1-λ/n)ⁿ⁻ᵏ → e⁻λ` as n → ∞\n\n' +
+          'Combining: `P(X=k) → (nᵏ/k!) × (λᵏ/nᵏ) × e⁻λ = λᵏe⁻λ/k!` ∎\n\n' +
+          '**Poisson process:** Events in continuous time with rate λ. The inter-arrival times follow an **Exponential(λ)** distribution — the continuous analog. The number of events in interval [0,t] follows Poisson(λt).\n\n' +
+          '**Applications:** Queuing theory (M/M/1 queues), network packet arrivals, radioactive decay, insurance claim modeling.',
+        interactive: { type: 'python-playground' as const, props: { starterCode: 'import numpy as np\n\n# Poisson distribution\nlam = 3  # average rate\n\ndef poisson_pmf(k, lam):\n    return (lam**k * np.exp(-lam)) / np.math.factorial(k)\n\nprint(f"Poisson(lambda={lam})")\nprint(f"Mean = {lam}, Variance = {lam}")\nprint()\nprint("k  | P(X=k)  | Cumulative")\nprint("-" * 30)\ncum = 0\nfor k in range(11):\n    p = poisson_pmf(k, lam)\n    cum += p\n    bar = "#" * int(p * 50)\n    print(f"{k:>2} | {p:.4f}  | {cum:.4f}  {bar}")', title: 'Try it — Poisson' } },
+      },
+      {
+        title: 'The Exponential Distribution',
+        beginnerContent:
+          '**Models waiting times between events.**\n\n' +
+          'If events happen at a Poisson rate of λ per unit time, the **time between events** follows an Exponential distribution.\n\n' +
+          '**Real examples:**\n\n' +
+          '- Time between customer arrivals\n' +
+          '- Time until a lightbulb burns out\n' +
+          '- Time between earthquakes\n\n' +
+          '**Key formula:** `P(T ≤ t) = 1 − e⁻λᵗ`\n\n' +
+          '**Mean waiting time:** `1/λ`\n\n' +
+          '**Example:** Buses arrive every 10 minutes on average (λ = 1/10 per minute)\n\n' +
+          '- P(wait ≤ 5 min) = 1 − e⁻⁰·⁵ ≈ **39.3%**\n' +
+          '- P(wait ≤ 10 min) = 1 − e⁻¹ ≈ **63.2%**\n' +
+          '- P(wait ≤ 20 min) = 1 − e⁻² ≈ **86.5%**\n\n' +
+          '**Memoryless property:** If you\'ve already waited 5 minutes, the probability of waiting 5 more is the same as if you just arrived. The past doesn\'t help predict the future.',
+        intermediateContent:
+          '**PDF:** `f(t) = λe⁻λᵗ` for t ≥ 0\n\n' +
+          '**CDF:** `F(t) = 1 − e⁻λᵗ`\n\n' +
+          '**Mean = 1/λ, Variance = 1/λ²**\n\n' +
+          '**Memoryless property (formal):** `P(T > s+t | T > s) = P(T > t)`\n\n' +
+          'The exponential is the **only** continuous memoryless distribution.\n\n' +
+          '**Connection to Poisson:** If N(t) ~ Poisson(λt), the inter-arrival times Tᵢ are iid Exp(λ). Conversely, if waiting times are Exp(λ), the count process is Poisson.\n\n' +
+          '**Minimum of exponentials:** If T₁ ~ Exp(λ₁) and T₂ ~ Exp(λ₂), then min(T₁,T₂) ~ Exp(λ₁+λ₂) — the first of two independent events happens at the combined rate.',
+        advancedContent:
+          '**Derivation from Poisson:**\n\n' +
+          'P(T > t) = P(no events in [0,t]) = P(N(t) = 0) = e⁻λᵗ\n\n' +
+          'Therefore P(T ≤ t) = 1 − e⁻λᵗ, and differentiating gives f(t) = λe⁻λᵗ ∎\n\n' +
+          '**Generalizations:**\n\n' +
+          '- **Gamma(α, λ)** — sum of α independent Exp(λ) variables. Models the time until the α-th event.\n' +
+          '- **Weibull(k, λ)** — generalized exponential where failure rate changes with time. k=1 is exponential, k>1 models wear-out failure.\n' +
+          '- **Erlang(k, λ)** — Gamma with integer α, used in queuing theory.\n\n' +
+          '**Maximum likelihood:** Given observations t₁,...,tₙ, the MLE for λ is `λ̂ = n / Σtᵢ` — simply the reciprocal of the sample mean.',
+        interactive: { type: 'python-playground' as const, props: { starterCode: 'import numpy as np\n\n# Exponential distribution: waiting times\nlam = 0.1  # rate: 1 bus per 10 minutes\nmean_wait = 1 / lam\n\nprint(f"Rate: {lam} per minute")\nprint(f"Mean wait: {mean_wait} minutes")\nprint()\n\n# Probability of waiting at most t minutes\nfor t in [5, 10, 15, 20, 30]:\n    p = 1 - np.exp(-lam * t)\n    print(f"P(wait <= {t:>2} min) = {p:.1%}")\n\n# Simulate 1000 waits\nwaits = np.random.exponential(mean_wait, 1000)\nprint(f"\\nSimulated mean wait: {waits.mean():.1f} min")\nprint(f"Simulated std dev:   {waits.std():.1f} min")', title: 'Try it — Exponential' } },
+      },
+      {
+        title: 'Chi-Squared & Hypothesis Testing',
+        beginnerContent:
+          '**Is the difference real, or just random chance?**\n\n' +
+          'You flip a coin 100 times and get 60 heads. Is the coin unfair, or did you just get lucky?\n\n' +
+          '**Hypothesis testing answers this:**\n\n' +
+          '1. **Null hypothesis (H₀):** "Nothing unusual is happening" (coin is fair)\n' +
+          '2. **Alternative (H₁):** "Something is different" (coin is biased)\n' +
+          '3. **Collect data** and calculate a test statistic\n' +
+          '4. **p-value:** probability of seeing data this extreme if H₀ is true\n' +
+          '5. If p-value < 0.05, **reject H₀** — the result is "statistically significant"\n\n' +
+          '**Chi-squared test** checks if observed frequencies match expected frequencies:\n\n' +
+          '`χ² = Σ (observed − expected)² / expected`\n\n' +
+          '**Example:** 100 coin flips, 60 heads, 40 tails\n\n' +
+          '- Expected: 50 heads, 50 tails\n' +
+          '- χ² = (60−50)²/50 + (40−50)²/50 = 2 + 2 = **4.0**\n' +
+          '- Critical value (1 df, α=0.05): 3.84\n' +
+          '- 4.0 > 3.84 → **reject H₀** — the coin appears biased',
+        intermediateContent:
+          '**The chi-squared distribution:**\n\n' +
+          'If Z₁, Z₂, ..., Zₖ are independent standard normal variables, then:\n\n' +
+          '`χ²ₖ = Z₁² + Z₂² + ... + Zₖ²`\n\n' +
+          '- **k** is the degrees of freedom (df)\n' +
+          '- Mean = k, Variance = 2k\n' +
+          '- Skewed right (always positive)\n\n' +
+          '**Goodness of fit test:**\n\n' +
+          '| Category | Observed | Expected | (O−E)²/E |\n' +
+          '|----------|----------|----------|-----------|\n' +
+          '| A | 30 | 25 | 1.00 |\n' +
+          '| B | 20 | 25 | 1.00 |\n' +
+          '| C | 25 | 25 | 0.00 |\n' +
+          '| D | 25 | 25 | 0.00 |\n' +
+          '| **Total** | 100 | 100 | **χ² = 2.00** |\n\n' +
+          'df = categories − 1 = 3. Critical value at α=0.05: 7.81. Since 2.00 < 7.81, **fail to reject H₀**.\n\n' +
+          '**Test of independence:** Are two categorical variables related? Build a contingency table, compute expected frequencies as (row total × column total) / grand total.',
+        advancedContent:
+          '**Derivation:** The chi-squared distribution with k degrees of freedom has PDF:\n\n' +
+          '`f(x) = x^(k/2-1) × e^(-x/2) / (2^(k/2) × Γ(k/2))` for x > 0\n\n' +
+          'This is a special case of the **Gamma distribution**: χ²ₖ = Gamma(k/2, 1/2).\n\n' +
+          '**Connection to the normal:** If X ~ N(μ,σ²), then (X−μ)²/σ² ~ χ²₁. This is why the chi-squared appears in variance estimation: `(n−1)s²/σ² ~ χ²ₙ₋₁`.\n\n' +
+          '**Related distributions:**\n\n' +
+          '- **t-distribution:** Z/√(χ²ₖ/k) ~ t(k) — used for small-sample means\n' +
+          '- **F-distribution:** (χ²ₘ/m) / (χ²ₙ/n) ~ F(m,n) — used in ANOVA\n\n' +
+          '**Pearson\'s theorem:** Under H₀, the χ² statistic converges to a χ² distribution as sample size → ∞. This is why the test works — we compare the observed statistic to the known distribution to get a p-value.',
+        interactive: { type: 'python-playground' as const, props: { starterCode: 'import numpy as np\n\n# Chi-squared test: is this coin fair?\nobserved = [60, 40]  # 60 heads, 40 tails\nexpected = [50, 50]  # fair coin\n\nchi2 = sum((o - e)**2 / e for o, e in zip(observed, expected))\ndf = len(observed) - 1\n\nprint("Chi-squared goodness of fit")\nprint(f"Observed: {observed}")\nprint(f"Expected: {expected}")\nprint(f"Chi-squared = {chi2:.2f}")\nprint(f"Degrees of freedom = {df}")\nprint()\n\n# Critical values (alpha = 0.05)\ncritical = {1: 3.84, 2: 5.99, 3: 7.81, 4: 9.49}\ncv = critical.get(df, 3.84)\nprint(f"Critical value (df={df}, alpha=0.05) = {cv}")\nprint(f"Result: {\"REJECT H0 - significant!\" if chi2 > cv else \"Fail to reject H0\"}")', title: 'Try it — Chi-Squared' } },
       },
     ],
   },

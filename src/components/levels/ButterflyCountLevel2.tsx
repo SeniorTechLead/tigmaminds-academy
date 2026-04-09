@@ -573,8 +573,8 @@ ax2.fill_between(temp_range, pred - 1.96*se_pred, pred + 1.96*se_pred,
                 alpha=0.2, color='#ef4444', label='95% prediction interval')
 ax2.axvspan(15, 18, alpha=0.1, color='#f59e0b')
 ax2.axvspan(35, 38, alpha=0.1, color='#f59e0b')
-ax2.text(16, 30, 'Extrapolation\n(risky!)', color='#f59e0b', fontsize=8, ha='center')
-ax2.text(37, 30, 'Extrapolation\n(risky!)', color='#f59e0b', fontsize=8, ha='center')
+ax2.text(16, 30, 'Extrapolation\\n(risky!)', color='#f59e0b', fontsize=8, ha='center')
+ax2.text(37, 30, 'Extrapolation\\n(risky!)', color='#f59e0b', fontsize=8, ha='center')
 ax2.set_xlabel('Temperature (°C)', color='white')
 ax2.set_ylabel('Predicted count', color='white')
 ax2.set_title('Prediction with Uncertainty', color='white', fontsize=12)
@@ -727,7 +727,7 @@ monthly_totals = [total[:30].sum(), total[30:60].sum(), total[60:].sum()]
 months = ['Month 1', 'Month 2', 'Month 3']
 ax4.bar(months, monthly_totals, color='#ef4444', alpha=0.8)
 ax4.set_ylim(monthly_totals[0] * 0.9, max(monthly_totals) * 1.05)
-ax4.set_title('BAD: Y-axis starts at 90%\n(exaggerates differences)', color='#ef4444', fontsize=10)
+ax4.set_title('BAD: Y-axis starts at 90%\\n(exaggerates differences)', color='#ef4444', fontsize=10)
 ax4.tick_params(colors='gray')
 ax4.set_xticklabels(months, color='white')
 
@@ -736,7 +736,7 @@ ax5 = fig.add_subplot(2, 3, 5)
 ax5.set_facecolor('#111827')
 ax5.bar(months, monthly_totals, color='#22c55e', alpha=0.8)
 ax5.set_ylim(0, max(monthly_totals) * 1.1)
-ax5.set_title('GOOD: Y-axis starts at 0\n(honest comparison)', color='#22c55e', fontsize=10)
+ax5.set_title('GOOD: Y-axis starts at 0\\n(honest comparison)', color='#22c55e', fontsize=10)
 ax5.tick_params(colors='gray')
 ax5.set_xticklabels(months, color='white')
 

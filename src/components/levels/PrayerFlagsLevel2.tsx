@@ -593,7 +593,7 @@ if t50_natural:
 if t50_synthetic:
     ax.bar(x[:len(t50_synthetic)] + width/2, t50_synthetic, width, color='#3b82f6', alpha=0.8, label='Synthetic')
 ax.set_xticks(x[:max(len(name_natural), len(name_synthetic))])
-labels = [f'{n}\n{s}' if i < len(name_synthetic) else n
+labels = [f'{n}\\n{s}' if i < len(name_synthetic) else n
           for i, (n, s) in enumerate(zip(name_natural + ['']*(5-len(name_natural)),
                                           name_synthetic + ['']*(5-len(name_synthetic))))]
 ax.set_xticklabels(name_natural, fontsize=7, rotation=30, ha='right', color='white')

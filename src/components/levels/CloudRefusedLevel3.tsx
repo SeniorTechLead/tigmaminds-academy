@@ -286,7 +286,7 @@ growth_rate = (e_liq - e_ic) / e_ic  # proportional to growth rate
 ax.plot(temps, growth_rate * 100, color='#a855f7', linewidth=2)
 ax.fill_between(temps, 0, growth_rate * 100, alpha=0.15, color='#a855f7')
 ax.axvline(x=-15, color='#ef4444', linewidth=1.5, linestyle='--', alpha=0.7)
-ax.text(-14.5, growth_rate.max() * 90, 'Dendrite\ngrowth\nregime', color='#ef4444', fontsize=9)
+ax.text(-14.5, growth_rate.max() * 90, 'Dendrite\\ngrowth\\nregime', color='#ef4444', fontsize=9)
 ax.set_xlabel('Temperature (C)', color='white')
 ax.set_ylabel('Ice growth driving force (%)', color='white')
 ax.set_title('Optimal seeding temperature', color='white', fontsize=12, fontweight='bold')
@@ -625,7 +625,7 @@ for N_val, label, color in [(100, 'Clean marine', '#3b82f6'), (1000, 'Polluted',
     _, _, _, alb, _ = cloud_properties(N_val * 1e6)
     ax.axvline(x=N_val, color=color, linewidth=1, linestyle='--', alpha=0.5)
     ax.plot(N_val, alb, 'o', color=color, markersize=8, zorder=5)
-    ax.annotate(f'{label}\nA={alb:.2f}', xy=(N_val, alb),
+    ax.annotate(f'{label}\\nA={alb:.2f}', xy=(N_val, alb),
                 xytext=(N_val * 2, alb - 0.05), color=color, fontsize=9)
 
 # Panel 4: Precipitation efficiency vs CCN

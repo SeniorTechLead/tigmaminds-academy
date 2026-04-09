@@ -312,7 +312,7 @@ ax2.tick_params(colors='gray')
 # Plot 5: Composite material properties
 ax = axes[1, 1]
 ax.set_facecolor('#111827')
-materials = ['Keratin\n(outer)', 'Bone\n(inner)', 'Composite\n(shell)', 'Steel\n(reference)']
+materials = ['Keratin\\n(outer)', 'Bone\\n(inner)', 'Composite\\n(shell)', 'Steel\\n(reference)']
 youngs = [3, 18, 12, 200]  # GPa (approximate)
 toughness = [50, 5, 30, 100]  # kJ/m² (approximate)
 x = np.arange(len(materials))
@@ -497,7 +497,7 @@ ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 # Plot 6: Management strategies comparison
 ax = axes[1, 2]
 ax.set_facecolor('#111827')
-strategies = ['No action', 'Shade\nstructures', 'Water\ncooling', 'Higher\naltitude', 'Incubation\ncontrol']
+strategies = ['No action', 'Shade\\nstructures', 'Water\\ncooling', 'Higher\\naltitude', 'Incubation\\ncontrol']
 base_ratio = sex_ratio(31) * 100  # current hot beach
 ratios_strat = [
     base_ratio,

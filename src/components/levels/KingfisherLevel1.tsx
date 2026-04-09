@@ -453,7 +453,7 @@ examples = [
 
 for i, (year, name, source, color) in enumerate(examples):
     ax1.plot(year, i, 'o', color=color, markersize=12)
-    ax1.text(year + 2, i, f'{name}\n({source})', va='center', color='white', fontsize=8)
+    ax1.text(year + 2, i, f'{name}\\n({source})', va='center', color='white', fontsize=8)
     ax1.axhline(i, color='#4b5563', alpha=0.1, linewidth=0.5)
 
 ax1.set_xlabel('Year', color='white')

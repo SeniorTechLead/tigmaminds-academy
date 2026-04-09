@@ -213,7 +213,7 @@ for name, eta in components:
         cumulative *= eta
         print(f"{name:<35} {eta*100:>9.1f}% {cumulative*100:>10.1f}% {loss:>8.1f}")
 
-print(f"\nNet power output: {P_available * eta_total / 1e6:.1f} MW per turbine")
+print(f"\\nNet power output: {P_available * eta_total / 1e6:.1f} MW per turbine")
 print(f"Total plant ({8} turbines): {8 * P_available * eta_total / 1e6:.0f} MW")`,
       challenge: 'If the guide vane angle is misset, c_theta1 is 10% less than ideal. How much power is lost? Now calculate: if bearing friction doubles (eta_mechanical drops to 0.98), how does total efficiency change? Which loss has bigger impact?',
       successHint: 'The Euler turbomachinery equation governs every rotating fluid machine: turbines, pumps, compressors, fans, and jet engines. The efficiency breakdown analysis you performed is how power plant operators monitor turbine health — a drop in any component signals a maintenance need.',
@@ -337,7 +337,7 @@ print(f"Inlet blade angle: {inlet['beta1']:.1f} degrees")
 
 # Outlet for zero swirl
 outlet = velocity_triangle_outlet(Q, D2, b2, u2, -20)
-print(f"\nOutlet exit swirl: {outlet['c_theta2']:.1f} m/s")
+print(f"\\nOutlet exit swirl: {outlet['c_theta2']:.1f} m/s")
 print(f"Outlet blade angle: {outlet['beta2']:.1f} degrees")`,
       challenge: 'At partial load (Q = 50 m^3/s instead of 100), the guide vane angle changes. What alpha1 is needed to maintain the same blade inlet angle beta1? (The blade angle is fixed — you can only adjust the guide vanes.) This is how turbines maintain efficiency at partial load.',
       successHint: 'Velocity triangle analysis is the core tool of turbomachinery design. Every jet engine, gas turbine, pump, and hydroelectric turbine is designed using velocity triangles. You just performed the same analysis that GE, Siemens, and Andritz engineers use when designing turbines.',
@@ -419,7 +419,7 @@ for i, (month, frac) in enumerate(zip(months, monthly_flow_fraction)):
     annual_energy += energy_gwh
     print(f"{month:<6} {frac*100:>6.0f}% {flow:>12.0f} {out['P_total_MW']:>11.0f} {energy_gwh:>13.1f}")
 
-print(f"\nAnnual generation: {annual_energy:,.0f} GWh")
+print(f"\\nAnnual generation: {annual_energy:,.0f} GWh")
 capacity_factor = annual_energy / (result["P_total_MW"] * 8.76)
 print(f"Capacity factor: {capacity_factor:.1%}")
 

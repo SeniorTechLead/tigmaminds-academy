@@ -72,7 +72,7 @@ export default function TsPlayground({ starterCode, title = 'TypeScript Playgrou
           <span className="text-blue-500 font-bold text-sm">TS</span>
           <span className={`text-sm font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>{title}</span>
           {ready && (
-            <span className="text-xs text-emerald-400 bg-emerald-900/30 px-2 py-0.5 rounded-full">Ready</span>
+            <span className={`text-xs px-2 py-0.5 rounded-full ${isDark ? 'text-emerald-400 bg-emerald-900/30' : 'text-emerald-700 bg-emerald-100'}`}>Ready</span>
           )}
         </div>
         <div className="flex items-center gap-2">

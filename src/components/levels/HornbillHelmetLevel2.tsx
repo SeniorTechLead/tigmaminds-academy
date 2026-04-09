@@ -87,8 +87,8 @@ axes[0].legend(facecolor='#374151', edgecolor='#4b5563', labelcolor='white', fon
 
 # Mark regions on first material
 axes[0].annotate('Elastic', xy=(2, 0.3), color='white', fontsize=9)
-axes[0].annotate('Plateau\n(energy absorption)', xy=(30, 0.4), color='white', fontsize=9)
-axes[0].annotate('Densification\n(danger!)', xy=(75, 2.5), color='white', fontsize=9)
+axes[0].annotate('Plateau\\n(energy absorption)', xy=(30, 0.4), color='white', fontsize=9)
+axes[0].annotate('Densification\\n(danger!)', xy=(75, 2.5), color='white', fontsize=9)
 
 axes[1].set_xlabel('Compression (%)', color='white', fontsize=11)
 axes[1].set_ylabel('Cumulative Energy (MJ/m³)', color='white', fontsize=11)

@@ -145,7 +145,7 @@ for depth in range(0, dam_height + 1, 10):
 # Calculate where the resultant force acts
 # For triangular pressure distribution, resultant acts at 2/3 depth
 resultant_depth = 2.0 / 3.0 * dam_height
-print(f"\nResultant force acts at {resultant_depth:.0f} m depth")
+print(f"\\nResultant force acts at {resultant_depth:.0f} m depth")
 print(f"  (2/3 of dam height — because pressure distribution is triangular)")`,
       challenge: 'Design a hydraulic system that can lift a 2000 kg car (force needed = 2000 * 9.81 = 19,620 N) using a hand pump where you push with 100 N. What must the piston area ratio be? If the small piston has area 2 cm^2, what is the large piston area?',
       successHint: 'Pascal law is the foundation of all hydraulic machinery: car brakes, construction equipment, aircraft control surfaces, and dam sluice gates. Every time you press your car brake pedal, you are using Pascal law to multiply your foot force into enough stopping power to halt a 2-tonne vehicle.',
@@ -310,7 +310,7 @@ for h in range(0, max_depth + 1, 10):
 # Full reservoir volumes
 full_v = v_valley(max_depth, length) / 1e9
 full_u = u_valley(max_depth, length) / 1e9
-print(f"\nFull reservoir: V-valley = {full_v:.1f} km^3, U-valley = {full_u:.1f} km^3")
+print(f"\\nFull reservoir: V-valley = {full_v:.1f} km^3, U-valley = {full_u:.1f} km^3")
 print(f"Actual Nagarjuna Sagar capacity: ~11.5 km^3")
 
 print()

@@ -81,9 +81,46 @@ def simulate_tree(age, noise_level=0.15):
     basal = 0.0008 * age**0.85 * np.random.lognormal(0, 0.2)
     height = 25 * (1 - np.exp(-0.008 * age)) * np.random.uniform(0.85, 1.15)
     density = min(1, 0.3 + 0.5 * (1 - np.exp(-0.01 * age)) + np.random.normal(0, 0.05))
+    return TreeMeasurement(canopy, pillars, basal, height, density, known_age=age)
 
+calibration_trees = [simulate_tree(a) for a in cal_ages]
+X = np.array([t.feature_vector() for t in calibration_trees])
+log_y = np.log(cal_ages)
 
-print("\n[Full visualization available in the playground]")`,
+# Fit ridge regression: log(age) = X @ w
+X_aug = np.column_stack([np.ones(n_cal), X])
+lam = 1.0
+XtX = X_aug.T @ X_aug + lam * np.eye(X_aug.shape[1])
+w = np.linalg.solve(XtX, X_aug.T @ log_y)
+
+# Predict and evaluate
+pred_log = X_aug @ w
+pred_ages = np.exp(pred_log)
+residuals = cal_ages - pred_ages
+rmse = np.sqrt(np.mean(residuals**2))
+mae = np.mean(np.abs(residuals))
+
+print("Tree Age Estimator — Stage 1: Calibration")
+print("=" * 50)
+print(f"Calibration trees: {n_cal}")
+print(f"Age range: {cal_ages.min():.0f} to {cal_ages.max():.0f} years")
+print(f"Features: 7 (log-transformed allometrics + interactions)")
+print(f"Model: Ridge regression (lambda={lam})")
+print()
+print(f"Training RMSE: {rmse:.1f} years")
+print(f"Training MAE:  {mae:.1f} years")
+print(f"Relative error: {np.mean(np.abs(residuals)/cal_ages)*100:.1f}%")
+print()
+print("Feature weights (regression coefficients):")
+names = ['bias', 'log(canopy)', 'log(pillars)', 'log(basal)', 'log(height)',
+         'crown_density', 'canopy*pillars', 'basal_density']
+for n, c in zip(names, w):
+    print(f"  {n:20s}: {c:+.4f}")
+print()
+print("Sample predictions:")
+for i in [0, 25, 50, 75, 99]:
+    print(f"  Tree {i}: actual={cal_ages[i]:.0f}y, predicted={pred_ages[i]:.0f}y, "
+          f"error={residuals[i]:+.0f}y")`,
       challenge: 'Split the data into trees < 200 years and trees > 200 years. Train separate models for each group. Does specialized modeling improve accuracy for ancient trees?',
       successHint: 'Stage 1 is complete — you have a calibrated model trained on multiple allometric features.',
     },
@@ -161,8 +198,48 @@ def kfold_cv(X_base, y_true, log_y_true, k=5):
         w = np.linalg.lstsq(X_tr_aug, ly_tr, rcond=None)[0]
         models_preds['Log-linear'][test_idx] = np.exp(X_te_aug @ w)
 
+        # Ridge regression (lambda=1)
+        lam = 1.0
+        XtX = X_tr_aug.T @ X_tr_aug + lam * np.eye(X_tr_aug.shape[1])
+        w_r = np.linalg.solve(XtX, X_tr_aug.T @ ly_tr)
+        models_preds['Ridge'][test_idx] = np.exp(X_te_aug @ w_r)
 
-print("\n[Full visualization available in the playground]")`,
+        # Polynomial (degree 2 on top features)
+        X_tr_poly = np.column_stack([X_tr, X_tr[:, :3]**2])
+        X_te_poly = np.column_stack([X_te, X_te[:, :3]**2])
+        X_tr_poly_aug = np.column_stack([np.ones(len(X_tr_poly)), X_tr_poly])
+        X_te_poly_aug = np.column_stack([np.ones(len(X_te_poly)), X_te_poly])
+        w_p = np.linalg.lstsq(X_tr_poly_aug, ly_tr, rcond=None)[0]
+        models_preds['Polynomial'][test_idx] = np.exp(X_te_poly_aug @ w_p)
+
+    return models_preds
+
+cv_preds = kfold_cv(X, y, log_y, k=5)
+
+print("Tree Age Estimator — Stage 2: Cross-Validation")
+print("=" * 50)
+print(f"Method: {5}-fold cross-validation on {len(y)} trees")
+print()
+best_rmse = float('inf')
+best_model = ''
+for model_name, preds in cv_preds.items():
+    rmse = np.sqrt(np.mean((preds - y)**2))
+    mae = np.mean(np.abs(preds - y))
+    rel_err = np.mean(np.abs(preds - y) / y) * 100
+    if rmse < best_rmse:
+        best_rmse = rmse
+        best_model = model_name
+    print(f"{model_name}:")
+    print(f"  CV RMSE: {rmse:.1f} years")
+    print(f"  CV MAE:  {mae:.1f} years")
+    print(f"  Mean relative error: {rel_err:.1f}%")
+    print()
+print(f"Best model: {best_model} (RMSE = {best_rmse:.1f} years)")
+print()
+print("Sample predictions (Ridge):")
+ridge_preds = cv_preds['Ridge']
+for i in [0, 25, 50, 75, 99]:
+    print(f"  Tree {i}: actual={y[i]:.0f}y, predicted={ridge_preds[i]:.0f}y")`,
       challenge: 'Implement leave-one-out cross-validation (k=n) and compare its RMSE estimate to 5-fold. Is the additional computation worth the potentially better estimate?',
       successHint: 'Stage 2 is complete — you have a cross-validated model selection with diagnostic plots.',
     },
@@ -240,9 +317,38 @@ def bootstrap_predict(X_cal, log_y_cal, x_new, n_bootstrap=500):
         'point': np.median(predictions),
         'mean': np.mean(predictions),
         'ci_lower': np.percentile(predictions, 2.5),
-        }
+        'ci_upper': np.percentile(predictions, 97.5),
+        'std': np.std(predictions),
+        'samples': predictions,
+    }
 
-print("\n[Full visualization available in the playground]")`,
+# Test trees with known properties
+test_trees = [
+    ('Young roadside banyan', 30),
+    ('Village square banyan', 120),
+    ('Temple compound banyan', 280),
+    ('Ancient heritage banyan', 450),
+]
+
+print("Tree Age Estimator — Stage 3: Bootstrap Prediction")
+print("=" * 55)
+print(f"Bootstrap iterations: 500")
+print(f"Calibration set: {n_cal} trees")
+print()
+
+for name, true_age in test_trees:
+    x_new = sim_features(true_age)
+    result = bootstrap_predict(X_cal, log_y_cal, x_new, n_bootstrap=500)
+    ci_width = result['ci_upper'] - result['ci_lower']
+    print(f"{name} (true age: {true_age}y):")
+    print(f"  Point estimate: {result['point']:.0f} years")
+    print(f"  95% CI: [{result['ci_lower']:.0f}, {result['ci_upper']:.0f}] years")
+    print(f"  CI width: {ci_width:.0f} years ({ci_width/result['point']*100:.0f}% of estimate)")
+    print(f"  True age {'inside' if result['ci_lower'] <= true_age <= result['ci_upper'] else 'OUTSIDE'} CI")
+    print()
+
+print("Key insight: uncertainty grows with age — ancient trees have wider CIs")
+print("because the calibration data is sparser at extreme ages.")`,
       challenge: 'Test the effect of calibration dataset size on CI width: run the bootstrap with n=30, 60, and 100 calibration trees. How does the CI for the ancient temple banyan change? At what n does the CI stabilize?',
       successHint: 'Stage 3 is complete — you have bootstrap confidence intervals for honest uncertainty quantification.',
     },
@@ -320,8 +426,56 @@ def monte_carlo_propagation(canopy, pillars, basal, height, density, n_samples=1
         c_noisy = max(0.5, canopy * (1 + np.random.normal(0, MEASUREMENT_ERRORS['canopy'])))
         p_noisy = max(0, pillars * (1 + np.random.normal(0, MEASUREMENT_ERRORS['pillars'])))
         b_noisy = max(0.001, basal * (1 + np.random.normal(0, MEASUREMENT_ERRORS['basal'])))
+        h_noisy = max(1, height * (1 + np.random.normal(0, MEASUREMENT_ERRORS['height'])))
+        d_noisy = min(1, max(0, density * (1 + np.random.normal(0, MEASUREMENT_ERRORS['density']))))
 
-print("\n[Full visualization available in the playground]")`,
+        x = raw_to_features(c_noisy, p_noisy, b_noisy, h_noisy, d_noisy)
+        x_aug = np.concatenate([[1], x])
+        pred = np.exp(x_aug @ w_model)
+        predictions.append(pred)
+
+    predictions = np.array(predictions)
+    return {
+        'point': np.median(predictions),
+        'ci_lower': np.percentile(predictions, 2.5),
+        'ci_upper': np.percentile(predictions, 97.5),
+        'std': np.std(predictions),
+    }
+
+def quality_score(canopy, pillars, basal, height, density):
+    """Score measurement quality 0-100 based on consistency checks."""
+    score = 100
+    if canopy < 5: score -= 20     # suspiciously small
+    if pillars == 0: score -= 15    # no pillars counted?
+    if height > 30: score -= 10     # banyans rarely exceed 30m
+    if density < 0.2 or density > 0.98: score -= 10
+    if basal > 0.1 * canopy: score -= 10  # ratio check
+    return max(0, score)
+
+# Test on sample trees
+test_cases = [
+    ('Heritage banyan', 45.0, 150, 3.5, 22.0, 0.85),
+    ('Village banyan', 28.0, 45, 1.2, 20.0, 0.75),
+    ('Young roadside', 8.0, 3, 0.08, 12.0, 0.55),
+    ('Ancient giant', 65.0, 280, 8.5, 24.0, 0.92),
+]
+
+print("Tree Age Estimator — Stage 4: Error Propagation")
+print("=" * 55)
+print(f"Monte Carlo samples: 1000 per tree")
+print(f"Measurement error model: canopy {MEASUREMENT_ERRORS['canopy']:.0%}, "
+      f"pillars {MEASUREMENT_ERRORS['pillars']:.0%}, height {MEASUREMENT_ERRORS['height']:.0%}")
+print()
+
+for name, c, p, b, h, d in test_cases:
+    result = monte_carlo_propagation(c, p, b, h, d)
+    qs = quality_score(c, p, b, h, d)
+    ci_width = result['ci_upper'] - result['ci_lower']
+    print(f"{name} (canopy={c}m, pillars={p}):")
+    print(f"  Age estimate: {result['point']:.0f}y [{result['ci_lower']:.0f}, {result['ci_upper']:.0f}]")
+    print(f"  Measurement uncertainty: +/-{result['std']:.0f} years")
+    print(f"  Quality score: {qs}/100")
+    print()`,
       challenge: 'Identify which measurement contributes most to prediction uncertainty: run Monte Carlo with only one measurement varied at a time (all others fixed). Which measurement, when uncertain, causes the widest age CI?',
       successHint: 'Stage 4 is complete — you have Monte Carlo error propagation and quality scoring for honest field-deployable predictions.',
     },
@@ -400,13 +554,65 @@ def generate_recommendations(age_est, ci_lower, ci_upper, quality_score,
     if n_pillars > 50:
         recs.append(f"STRUCTURAL: {n_pillars} pillar roots provide good redundancy — "
                     f"monitor for root cutting by construction")
+    elif n_pillars < 10:
+        recs.append(f"STRUCTURAL: Only {n_pillars} pillar roots — tree may be vulnerable "
+                    f"to wind damage, consider support structures")
 
-print("\n[Full visualization available in the playground]")`,
+    if canopy_diam > 40:
+        recs.append(f"ECOLOGICAL: {canopy_diam:.0f}m canopy supports significant "
+                    f"biodiversity — protect as micro-habitat")
+
+    if quality_score < 60:
+        recs.append(f"DATA: Measurement quality score {quality_score}/100 is low — "
+                    f"recommend resurvey with better equipment")
+
+    return recs
+
+# Assess 8 test trees
+test_trees = [
+    {'name': 'Kamakhya Temple', 'age_samples': np.random.normal(420, 60, 1000),
+     'age_est': 420, 'ci': (345, 510), 'quality': 85, 'pillars': 185, 'canopy': 52},
+    {'name': 'Jorhat College', 'age_samples': np.random.normal(280, 50, 1000),
+     'age_est': 280, 'ci': (195, 370), 'quality': 78, 'pillars': 95, 'canopy': 38},
+    {'name': 'Kaziranga Gate', 'age_samples': np.random.normal(150, 40, 1000),
+     'age_est': 150, 'ci': (85, 225), 'quality': 70, 'pillars': 30, 'canopy': 25},
+    {'name': 'Sivasagar Road', 'age_samples': np.random.normal(90, 30, 1000),
+     'age_est': 90, 'ci': (40, 145), 'quality': 65, 'pillars': 12, 'canopy': 15},
+    {'name': 'Majuli Island', 'age_samples': np.random.normal(350, 70, 1000),
+     'age_est': 350, 'ci': (230, 475), 'quality': 60, 'pillars': 120, 'canopy': 45},
+    {'name': 'Tezpur Park', 'age_samples': np.random.normal(200, 45, 1000),
+     'age_est': 200, 'ci': (120, 285), 'quality': 82, 'pillars': 55, 'canopy': 30},
+    {'name': 'Dibrugarh School', 'age_samples': np.random.normal(60, 20, 1000),
+     'age_est': 60, 'ci': (25, 100), 'quality': 90, 'pillars': 5, 'canopy': 10},
+    {'name': 'Nagaon Highway', 'age_samples': np.random.normal(45, 15, 1000),
+     'age_est': 45, 'ci': (20, 75), 'quality': 55, 'pillars': 2, 'canopy': 8},
+]
+
+print("Tree Age Estimator — Stage 5: Heritage Classification")
+print("=" * 60)
+print()
+
+for tree in test_trees:
+    cls = classify_heritage(tree['age_samples'])
+    recs = generate_recommendations(
+        tree['age_est'], tree['ci'][0], tree['ci'][1],
+        tree['quality'], tree['pillars'], tree['canopy'], cls)
+
+    print(f"{tree['name']}:")
+    print(f"  Age: {tree['age_est']}y ({tree['ci'][0]}-{tree['ci'][1]})")
+    print(f"  Classification: {cls['classification']} ({cls['confidence']:.0%} confidence)"
+          f"{' [BORDERLINE]' if cls['borderline'] else ''}")
+    for grade, prob in cls['probabilities'].items():
+        if prob > 0.01:
+            print(f"    {grade}: {prob:.0%}")
+    for rec in recs[:2]:
+        print(f"  -> {rec}")
+    print()`,
       challenge: 'Add a "threat proximity" layer: assign each tree a distance to the nearest planned construction project. Trees with high heritage grade AND close threat proximity should be flagged as "URGENT" in the recommendations. How many of the 8 trees become urgent?',
       successHint: 'Stage 5 is complete — you have probabilistic heritage classification with evidence-backed conservation recommendations.',
     },
     {
-      title: 'Stage 6: Complete report generation and system documentation',
+      title: 'Capstone Deliverable: Writing a Conservation Assessment Report',
       concept: `The final stage produces the deliverable: a comprehensive Tree Age Estimator report for each assessed banyan. The report includes all six pipeline stages, from raw measurements to conservation recommendations, with full traceability.
 
 A professional report must be:
@@ -427,52 +633,146 @@ This is real conservation science: rigorous analysis presented honestly for deci
       storyConnection: 'The story banyan has been protected by community sentiment for generations. But development pressure is increasing. A scientific report — with age estimate, confidence interval, heritage classification, ecological value, and specific protection recommendations — transforms community sentiment into legal-grade evidence. The report is the bridge between the story reverence and modern conservation law.',
       checkQuestion: 'Why must the report include methodology limitations even when the model performs well?',
       checkAnswer: 'A model that works well in Assam may fail in Kerala because rainfall, soil, and temperature differences alter allometric relationships. Without stating this limitation, a conservation agency might apply the model inappropriately and make wrong decisions. Similarly, if someone pruned a tree extensively, its canopy diameter would underpredict its age. Stating limitations protects both the trees (from under-classification) and the scientists (from overconfident claims). Honest science is credible science.',
-      codeIntro: 'Generate the complete Tree Age Estimator report with all stages, visualizations, and documentation.',
+      codeIntro: 'Use the full pipeline to generate a professional conservation assessment report for a real banyan tree. The report must stand on its own — a reader who never ran your code should understand every conclusion, its confidence, and what to do next.',
       code: `import numpy as np
 
 np.random.seed(42)
 
 # ============================================================
-# CAPSTONE COMPLETE: Full Report Generation
+# CAPSTONE DELIVERABLE: Conservation Assessment Report
 # ============================================================
+# A professional report has: subject, methods, results,
+# uncertainty, recommendations, and limitations.
+# This code generates one from pipeline data.
 
-# Simulated assessment results
-tree_report = {
+# --- Assessment data (from Stages 1-5) ---
+tree = {
     'name': 'Great Banyan of Kamakhya',
     'location': 'Kamakhya Temple grounds, Guwahati, Assam',
-    'gps': '26.1664°N, 91.7042°E',
+    'gps': '26.1664 N, 91.7042 E',
     'survey_date': '2024-02-15',
-    'measurements': {
-        'canopy_diameter': 52.3,
-        'pillar_roots': 185,
-        'total_basal_area': 4.8,
-        'height': 23.5,
-        'crown_density': 0.87,
-    },
-    'age_estimate': 420,
-    'ci_95': (345, 510),
-    'model': 'Ridge regression (CV RMSE=42y)',
-    'quality_score': 85,
-    'heritage': {'grade': 'Grade A', 'confidence': 0.89, 'borderline': False},
-    'grade_probs': {'Grade A': 0.89, 'Grade B': 0.11, 'Notable': 0.0, 'Unclassified': 0.0},
+    'surveyor': 'Field team A (2 observers)',
+    'canopy_diameter': 52.3,
+    'pillar_roots': 185,
+    'total_basal_area': 4.8,
+    'height': 23.5,
+    'crown_density': 0.87,
 }
 
-# --- Generate comprehensive report ---
+analysis = {
+    'age_estimate': 420,
+    'ci_lower': 345,
+    'ci_upper': 510,
+    'model': 'Ridge regression',
+    'cv_rmse': 42,
+    'bootstrap_n': 500,
+    'mc_samples': 1000,
+    'quality_score': 85,
+    'grade': 'Grade A',
+    'grade_confidence': 0.89,
+    'grade_probs': {'Grade A': 0.89, 'Grade B': 0.11, 'Notable': 0.00},
+    'borderline': False,
+}
 
+# --- Section 1: Header and subject ---
+SEP = "=" * 65
+THIN = "-" * 65
+print(SEP)
+print("   HERITAGE TREE CONSERVATION ASSESSMENT")
+print(SEP)
+print(f"Subject:  {tree['name']}")
+print(f"Location: {tree['location']}")
+print(f"GPS:      {tree['gps']}")
+print(f"Date:     {tree['survey_date']}")
+print(f"Team:     {tree['surveyor']}")
 print()
-print("CAPSTONE COMPLETE")
-print("=" * 65)
-print("You built a Tree Age Estimator from scratch:")
-print("  1. Calibration dataset with realistic allometric relationships")
-print("  2. Cross-validated model selection (3 model types compared)")
-print("  3. Bootstrap confidence intervals for honest uncertainty")
-print("  4. Monte Carlo error propagation with quality scoring")
-print("  5. Heritage classification with probabilistic grade assignment")
-print("  6. Comprehensive report with recommendations and limitations")
+
+# --- Section 2: Field measurements ---
+print(THIN)
+print("FIELD MEASUREMENTS")
+print(THIN)
+print(f"  Canopy diameter:    {tree['canopy_diameter']:.1f} m")
+print(f"  Pillar roots:       {tree['pillar_roots']}")
+print(f"  Total basal area:   {tree['total_basal_area']:.1f} m2")
+print(f"  Height:             {tree['height']:.1f} m")
+print(f"  Crown density:      {tree['crown_density']:.0%}")
+qs = analysis['quality_score']
+print(f"  Data quality score: {qs}/100 ({'Good' if qs >= 80 else 'Acceptable' if qs >= 60 else 'Low'})")
 print()
-print("Skills demonstrated: allometric scaling, regression, cross-validation,")
-print("bootstrap inference, error propagation, classification, conservation")
-print("science, scientific reporting.")`,
+
+# --- Section 3: Age estimate with uncertainty ---
+print(THIN)
+print("AGE ESTIMATE")
+print(THIN)
+a = analysis
+ci_width = a['ci_upper'] - a['ci_lower']
+rel_uncertainty = ci_width / a['age_estimate'] * 100
+print(f"  Point estimate:   {a['age_estimate']} years")
+print(f"  95% confidence:   {a['ci_lower']} - {a['ci_upper']} years")
+print(f"  Uncertainty:      +/- {ci_width//2} years ({rel_uncertainty:.0f}% of estimate)")
+print(f"  Method:           {a['model']} (CV RMSE = {a['cv_rmse']} years)")
+print(f"  Bootstrap:        {a['bootstrap_n']} iterations")
+print(f"  Error propagation: {a['mc_samples']} Monte Carlo samples")
+print()
+
+# --- Section 4: Heritage classification ---
+print(THIN)
+print("HERITAGE CLASSIFICATION")
+print(THIN)
+print(f"  Assigned grade:   {a['grade']} ({a['grade_confidence']:.0%} confidence)")
+for grade, prob in a['grade_probs'].items():
+    if prob > 0:
+        bar = '#' * int(prob * 40)
+        print(f"    {grade:15s} {prob:5.0%} {bar}")
+if a['borderline']:
+    print("  ** BORDERLINE — expert review recommended **")
+print()
+
+# --- Section 5: Recommendations ---
+print(THIN)
+print("RECOMMENDATIONS")
+print(THIN)
+recs = []
+if a['grade'] == 'Grade A':
+    recs.append(f"PROTECT: Apply for heritage tree status under Assam "
+                f"Tree Preservation Act. Establish {30}m buffer zone.")
+if tree['pillar_roots'] > 50:
+    recs.append(f"MONITOR: {tree['pillar_roots']} pillar roots provide "
+                f"structural redundancy. Inspect annually for root "
+                f"cutting by construction.")
+if tree['canopy_diameter'] > 40:
+    recs.append(f"ECOLOGY: {tree['canopy_diameter']:.0f}m canopy is a "
+                f"significant micro-habitat. Survey epiphytes and "
+                f"nesting birds before any nearby development.")
+recs.append(f"RESURVEY: Schedule follow-up in 3 years to track "
+            f"growth rate and detect decline early.")
+for i, rec in enumerate(recs, 1):
+    print(f"  {i}. {rec}")
+print()
+
+# --- Section 6: Methodology limitations ---
+print(THIN)
+print("LIMITATIONS")
+print(THIN)
+limitations = [
+    "Allometric model calibrated on Assam banyans (n=100). "
+    "Applying to other regions may introduce bias.",
+    "Model assumes natural, unpruned growth. Human "
+    "intervention (root cutting, irrigation) violates assumptions.",
+    f"Trees older than 500y are underrepresented in "
+    f"calibration data. The upper CI ({a['ci_upper']}y) "
+    f"approaches this boundary.",
+    "Measurement uncertainty assumes independent Gaussian "
+    "errors. Systematic surveyor bias is not modeled.",
+]
+for i, lim in enumerate(limitations, 1):
+    print(f"  {i}. {lim}")
+print()
+
+print(SEP)
+print("  Report generated by Tree Age Estimator v1.0")
+print(f"  Assessment date: {tree['survey_date']}")
+print(SEP)`,
       challenge: 'Build a batch assessment mode: generate 50 random trees, assess all of them, and produce a summary dashboard showing the distribution of heritage grades across the population. What fraction of the region banyan population qualifies as Grade A?',
       successHint: 'You have completed a full capstone project: from field measurements to a documented heritage classification report. This is the shape of real conservation science — combining ecology, statistics, and policy into actionable recommendations. The Tree Age Estimator is portfolio-ready.',
     },

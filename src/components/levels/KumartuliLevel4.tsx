@@ -310,7 +310,7 @@ for i, (force, mtype) in enumerate(zip(forces, types)):
     if f_kN > max_tension: max_tension = f_kN
     if f_kN < max_compress: max_compress = f_kN
 
-print(f"\nMax tension:     {max_tension:.2f} kN")
+print(f"\\nMax tension:     {max_tension:.2f} kN")
 print(f"Max compression: {max_compress:.2f} kN")
 
 # Displacement summary
@@ -326,7 +326,7 @@ for nid in top:
     max_disp = max(max_disp, abs(dy))
     print(f"  Node {nid}: dx = {dx:.2f} mm, dy = {dy:.2f} mm")
 
-print(f"\nMax vertical displacement: {max_disp:.2f} mm")
+print(f"\\nMax vertical displacement: {max_disp:.2f} mm")
 print(f"Limit (L/360): {span*1000/360:.1f} mm")
 print(f"Status: {'OK' if max_disp < span*1000/360 else 'EXCEEDS LIMIT'}")`,
       challenge: 'Increase the load to 8 kN per node (heavy decorations). Does the deflection exceed L/360? Try increasing the bamboo diameter from 10 cm to 12 cm and re-run. What is the minimum diameter that keeps deflection within limits?',
@@ -428,7 +428,7 @@ print(f"Members MARGINAL: {len(marginal)}")
 print(f"Members FAILING:  {len(failing)}")
 
 if failing:
-    print("\nMembers needing upgrade:")
+    print("\\nMembers needing upgrade:")
     for r in failing:
         upgrade_factor = r["dcr"]
         new_dia = 10 * np.sqrt(upgrade_factor)
@@ -703,7 +703,7 @@ for stage, hours in zip(stages, hours_per_stage):
           f"Cumulative: {total_hours} hours")
 
 days = np.ceil(total_hours / 8)
-print(f"\nTotal: {total_hours} hours ({days:.0f} working days)")
+print(f"\\nTotal: {total_hours} hours ({days:.0f} working days)")
 print(f"Crew: {crew_size} workers")
 print(f"Person-hours: {total_hours * crew_size}")
 

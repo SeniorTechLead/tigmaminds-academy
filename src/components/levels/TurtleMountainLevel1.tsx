@@ -49,7 +49,7 @@ for radius_km, name, color, desc in layers:
     ax1.fill(x, y, color=color, alpha=0.6)
     # Label
     r_label = (radius_km / 6371) * 0.85 if radius_km > 1000 else 0.05
-    ax1.text(r_label * 0.7, r_label * 0.3, f'{name}\n{radius_km}km',
+    ax1.text(r_label * 0.7, r_label * 0.3, f'{name}\\n{radius_km}km',
              color='white', fontsize=7, ha='center', fontweight='bold')
 
 ax1.set_aspect('equal')

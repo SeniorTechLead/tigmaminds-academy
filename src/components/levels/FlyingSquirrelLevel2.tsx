@@ -178,7 +178,7 @@ colors_p = [p['color'] for p in pilots.values()]
 x = np.arange(len(names))
 ax1.bar(x, stall_speeds, color=colors_p, alpha=0.8, edgecolor='white', linewidth=0.5)
 for i, (ss, wl) in enumerate(zip(stall_speeds, wing_loadings)):
-    ax1.text(i, ss + 1, f'{ss:.0f} m/s\n({ss*3.6:.0f} km/h)', ha='center', color='white', fontsize=7)
+    ax1.text(i, ss + 1, f'{ss:.0f} m/s\\n({ss*3.6:.0f} km/h)', ha='center', color='white', fontsize=7)
 
 ax1.axhline(5, color='#22c55e', linestyle=':', alpha=0.3)
 ax1.text(6.5, 6, 'Survivable landing speed (~5 m/s)', color='#22c55e', fontsize=8)
@@ -448,7 +448,7 @@ ax.tick_params(colors='gray')
 ax = axes[0, 1]
 ax.set_facecolor('#111827')
 
-drone_types = ['Quadcopter\n(battery)', 'Fixed-wing\n(battery)', 'Glider\n(no thermal)', 'Glider\n(thermal soaring)']
+drone_types = ['Quadcopter\\n(battery)', 'Fixed-wing\\n(battery)', 'Glider\\n(no thermal)', 'Glider\\n(thermal soaring)']
 endurance_hrs = [0.5, 2, 4, 48]  # hours
 range_km = [5, 50, 80, 500]
 colors_drone = ['#ef4444', '#f59e0b', '#22c55e', '#3b82f6']
@@ -721,7 +721,7 @@ milestones = [
 
 for i, (year, name, inspiration, color) in enumerate(milestones):
     ax.plot(year, i, 'o', color=color, markersize=12)
-    ax.text(year + 3, i, f'{name}\n({inspiration})', va='center', color='white', fontsize=8)
+    ax.text(year + 3, i, f'{name}\\n({inspiration})', va='center', color='white', fontsize=8)
     ax.axhline(i, color='#4b5563', alpha=0.1, linewidth=0.5)
 
 ax.set_xlabel('Year', color='white')

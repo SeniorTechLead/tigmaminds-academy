@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback, useContext, useEffect } from 'react';
-import { Play, Loader2, CheckCircle, RotateCcw, HelpCircle, ChevronDown, ChevronUp, Sparkles, GripHorizontal, Maximize2, Minimize2, Moon, Sun } from 'lucide-react';
+import { Play, Loader2, CheckCircle, RotateCcw, HelpCircle, ChevronDown, ChevronUp, Sparkles, GripHorizontal, Maximize2, Minimize2, Moon, Sun, Copy, Check } from 'lucide-react';
 import DiagramZoom from './DiagramZoom';
 import { usePyodide } from '../contexts/PyodideContext';
 import { usePrefs } from '../contexts/PrefsContext';
@@ -127,6 +127,7 @@ function SplitPane({ code, lineCount, onCodeChange, onKeyDown, textareaRef, outp
   onToggleTheme: () => void;
 }) {
   const [expanded, setExpanded] = useState(false);
+  const [copied, setCopied] = useState(false);
   const [splitRatio, setSplitRatio] = useState(0.6); // 60% code, 40% output
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -243,6 +244,15 @@ function SplitPane({ code, lineCount, onCodeChange, onKeyDown, textareaRef, outp
         <div className={`flex items-center gap-2 px-4 py-1.5 border-b flex-shrink-0 ${dark ? 'bg-gray-800/80 border-gray-700' : 'bg-gray-100 border-gray-300'}`}>
           <span className={`text-[10px] font-bold uppercase tracking-wider ${dark ? 'text-gray-500' : 'text-gray-400'}`}>Output</span>
           {running && <Loader2 className="w-3 h-3 text-emerald-400 animate-spin" />}
+          {output && (
+            <button
+              onClick={() => { navigator.clipboard.writeText(output); setCopied(true); setTimeout(() => setCopied(false), 1500); }}
+              className={`ml-auto p-1 rounded transition-colors ${dark ? 'hover:bg-gray-700 text-gray-500 hover:text-gray-300' : 'hover:bg-gray-200 text-gray-400 hover:text-gray-600'}`}
+              title="Copy output"
+            >
+              {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+            </button>
+          )}
         </div>
         <div className="flex-1 overflow-y-auto">
           {!output && !imageOutput && (
@@ -623,7 +633,16 @@ len(plt.get_fignums()) > 0
 
                         {pOutput && (
                           <div className={`border-t ${isDark ? 'border-gray-700 bg-gray-900' : 'border-gray-300 bg-gray-50'}`}>
-                            <pre className={`px-4 py-3 text-sm font-mono whitespace-pre-wrap max-h-[120px] overflow-y-auto ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>{pOutput}</pre>
+                            <div className="flex items-start">
+                              <pre className={`flex-1 px-4 py-3 text-sm font-mono whitespace-pre-wrap max-h-[120px] overflow-y-auto ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>{pOutput}</pre>
+                              <button
+                                onClick={() => navigator.clipboard.writeText(pOutput)}
+                                className={`flex-shrink-0 p-1.5 m-1 rounded transition-colors ${isDark ? 'hover:bg-gray-700 text-gray-500 hover:text-gray-300' : 'hover:bg-gray-200 text-gray-400 hover:text-gray-600'}`}
+                                title="Copy output"
+                              >
+                                <Copy className="w-3.5 h-3.5" />
+                              </button>
+                            </div>
                           </div>
                         )}
                         {pImage && (

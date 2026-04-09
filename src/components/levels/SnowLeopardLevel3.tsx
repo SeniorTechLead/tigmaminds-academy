@@ -542,11 +542,11 @@ for i, alt in enumerate([0, 3000, 4500, 6000]):
     ]:
         ax.bar(i, val, bottom=bottom, color=color, alpha=0.8, width=0.6)
         if val > 3:
-            ax.text(i, bottom + val/2, f'{name}\n{val:.1f}', ha='center',
+            ax.text(i, bottom + val/2, f'{name}\\n{val:.1f}', ha='center',
                     va='center', color='white', fontsize=6)
         bottom += val
 
-    ax.text(i, bottom + 2, f'{alt}m\n({P_total:.0f}kPa)', ha='center',
+    ax.text(i, bottom + 2, f'{alt}m\\n({P_total:.0f}kPa)', ha='center',
             color='white', fontsize=7)
 
 ax.set_xticks(range(4))
