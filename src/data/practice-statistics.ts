@@ -35,6 +35,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Step 3: Read it', content: 'Median = **5**' },
       ],
       answer: '5',
+      code: '# Find the median of: 3, 8, 1, 5, 9\ndata = [3, 8, 1, 5, 9]\n\n# Your code here\n',
+      codeSolution: 'data = [3, 8, 1, 5, 9]\nsorted_data = sorted(data)\nn = len(sorted_data)\nmedian = sorted_data[n // 2]\nprint(f\"Median = {median}\")',
     },
     {
       id: 'mmm-03', difficulty: 1,
@@ -44,6 +46,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Step 2: Most frequent wins', content: 'Mode = **5** (appears 3 times)' },
       ],
       answer: '5',
+      code: '# Find the mode of: 2, 5, 3, 5, 7, 5, 1\ndata = [2, 5, 3, 5, 7, 5, 1]\n\n# Your code here\n',
+      codeSolution: 'from collections import Counter\ndata = [2, 5, 3, 5, 7, 5, 1]\ncounts = Counter(data)\nmode = counts.most_common(1)[0][0]\nprint(f\"Mode = {mode}\")',
     },
     {
       id: 'mmm-04', difficulty: 1,
@@ -54,6 +58,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Step 3: Subtract', content: 'Range = 45 − 8 = **37**' },
       ],
       answer: '37',
+      code: '# Find the range of: 12, 45, 23, 8, 31\ndata = [12, 45, 23, 8, 31]\n\n# Your code here\n',
+      codeSolution: 'data = [12, 45, 23, 8, 31]\nrange_val = max(data) - min(data)\nprint(f\"Range = {range_val}\")',
     },
     {
       id: 'mmm-05', difficulty: 1,
@@ -65,6 +71,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Insight', content: 'When all values are equal, the mean equals that value.' },
       ],
       answer: '20',
+      code: '# Find the mean of: 20, 20, 20, 20, 20\ndata = [20, 20, 20, 20, 20]\n\n# Your code here\n',
+      codeSolution: 'data = [20, 20, 20, 20, 20]\nmean = sum(data) / len(data)\nprint(f\"Mean = {mean}\")',
     },
     {
       id: 'mmm-06', difficulty: 1,
@@ -76,6 +84,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Step 3: Average them', content: '(20 + 30) ÷ 2 = **25**' },
       ],
       answer: '25',
+      code: '# Find the median of: 10, 20, 30, 40\ndata = [10, 20, 30, 40]\n\n# Your code here\n',
+      codeSolution: 'data = [10, 20, 30, 40]\nsorted_data = sorted(data)\nn = len(sorted_data)\nmedian = (sorted_data[n//2 - 1] + sorted_data[n//2]) / 2\nprint(f\"Median = {median}\")',
     },
     {
       id: 'mmm-07', difficulty: 1,
@@ -96,6 +106,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Step 2: No value repeats', content: 'There is **no mode** — all values are equally common' },
       ],
       answer: 'No mode',
+      code: '# Find the mode of: 1, 2, 3, 4, 5\ndata = [1, 2, 3, 4, 5]\n\n# Your code here\n',
+      codeSolution: 'from collections import Counter\ndata = [1, 2, 3, 4, 5]\ncounts = Counter(data)\nmax_count = max(counts.values())\nif max_count == 1:\n    print(\"No mode\")\nelse:\n    modes = [k for k, v in counts.items() if v == max_count]\n    print(f\"Mode = {modes}\")',
     },
     {
       id: 'mmm-09', difficulty: 1,
@@ -106,6 +118,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Step 2: Divide by 5', content: '16 ÷ 5 = **3.2**' },
       ],
       answer: '3.2',
+      code: '# Find the mean of die rolls: 3, 5, 2, 5, 1\nrolls = [3, 5, 2, 5, 1]\n\n# Your code here\n',
+      codeSolution: 'rolls = [3, 5, 2, 5, 1]\nmean = sum(rolls) / len(rolls)\nprint(f\"Mean = {mean}\")',
     },
     {
       id: 'mmm-10', difficulty: 1,
@@ -116,6 +130,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Step 3: Read', content: 'Median = **400**' },
       ],
       answer: '400',
+      code: '# Find the median of: 100, 200, 300, 400, 500, 600, 700\ndata = [100, 200, 300, 400, 500, 600, 700]\n\n# Your code here\n',
+      codeSolution: 'data = [100, 200, 300, 400, 500, 600, 700]\nsorted_data = sorted(data)\nmedian = sorted_data[len(sorted_data) // 2]\nprint(f\"Median = {median}\")',
     },
     {
       id: 'mmm-11', difficulty: 1,
@@ -126,6 +142,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Step 3: Range', content: '33 − 27 = **6°C**' },
       ],
       answer: '6',
+      code: '# Find the range of temperatures\ntemps = [28, 31, 27, 33, 29, 30, 32]\n\n# Your code here\n',
+      codeSolution: 'temps = [28, 31, 27, 33, 29, 30, 32]\nrange_val = max(temps) - min(temps)\nprint(f\"Range = {range_val}\")',
     },
     {
       id: 'mmm-12', difficulty: 1,
@@ -138,6 +156,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Insight', content: 'The outlier (100) dragged the mean up to 20.8, but the median stayed at 1. The median is robust to outliers.' },
       ],
       answer: 'Mean = 20.8, Median = 1',
+      code: '# Find mean and median of: 1, 1, 1, 1, 100\ndata = [1, 1, 1, 1, 100]\n\n# Your code here\n',
+      codeSolution: 'data = [1, 1, 1, 1, 100]\nmean = sum(data) / len(data)\nsorted_data = sorted(data)\nmedian = sorted_data[len(sorted_data) // 2]\nprint(f\"Mean = {mean}\")\nprint(f\"Median = {median}\")',
     },
     {
       id: 'mmm-13', difficulty: 1,
@@ -148,6 +168,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Step 2', content: '6/10 = **0.6** or **60%**' },
       ],
       answer: '0.6 (60%)',
+      code: '# 6 heads out of 10 flips\nheads = 6\ntotal = 10\n\n# Your code here\n',
+      codeSolution: 'heads = 6\ntotal = 10\nfraction = heads / total\nprint(f\"{fraction} ({fraction*100:.0f}%)\")',
     },
     {
       id: 'mmm-14', difficulty: 1,
@@ -157,6 +179,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Step 2: Most frequent', content: 'Mode = **red**' },
       ],
       answer: 'red',
+      code: '# Find the mode of colors\ncolors = [\'red\', \'blue\', \'red\', \'green\', \'red\', \'blue\']\n\n# Your code here\n',
+      codeSolution: 'from collections import Counter\ncolors = [\'red\', \'blue\', \'red\', \'green\', \'red\', \'blue\']\nmode = Counter(colors).most_common(1)[0][0]\nprint(f\"Mode = {mode}\")',
     },
     {
       id: 'mmm-15', difficulty: 1,
@@ -167,6 +191,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Insight', content: 'Adding a value equal to the mean does not change the mean.' },
       ],
       answer: 'Mean stays at 10',
+      code: '# Data: 5, 10, 15. Add 10. How does the mean change?\noriginal = [5, 10, 15]\nnew_value = 10\n\n# Your code here\n',
+      codeSolution: 'original = [5, 10, 15]\nnew_value = 10\nmean_before = sum(original) / len(original)\nupdated = original + [new_value]\nmean_after = sum(updated) / len(updated)\nprint(f\"Before: {mean_before}\")\nprint(f\"After:  {mean_after}\")\nprint(f\"Mean stays at {mean_after}\")',
     },
     {
       id: 'mmm-16', difficulty: 1,
@@ -177,6 +203,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Step 2: Mean', content: '(1+13+7)/3 = 21/3 = **7**' },
       ],
       answer: '7',
+      code: '# Cards: A=1, K=13, 7. Find the mean\nvalues = [1, 13, 7]\n\n# Your code here\n',
+      codeSolution: 'values = [1, 13, 7]  # A, K, 7\nmean = sum(values) / len(values)\nprint(f\"Mean = {mean}\")',
     },
     {
       id: 'mmm-17', difficulty: 1,
@@ -188,6 +216,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Answer', content: '**Yes.** It happens when data is symmetric around its most common value.' },
       ],
       answer: 'Yes — when data is symmetric',
+      code: '# Can mean, median, and mode all be the same?\ndata = [1, 2, 3, 3, 3, 4, 5]\n\n# Your code here\n',
+      codeSolution: 'from collections import Counter\ndata = [1, 2, 3, 3, 3, 4, 5]\nmean = sum(data) / len(data)\nsorted_d = sorted(data)\nmedian = sorted_d[len(sorted_d) // 2]\nmode = Counter(data).most_common(1)[0][0]\nprint(f\"Mean = {mean}, Median = {median}, Mode = {mode}\")\nprint(f\"All equal: {mean == median == mode}\")',
     },
 
     // ── Medium (18-34) ─────────────────────────────────────
@@ -212,6 +242,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Step 3', content: '? = **12**' },
       ],
       answer: '12',
+      code: '# The median of 5 numbers is 12: 3, 8, ?, 15, 20\n\n# Your code here\n',
+      codeSolution: '# Median of 5 sorted numbers is the 3rd value\nmissing = 12  # median IS the 3rd value\nprint(f\"Missing number = {missing}\")',
     },
     {
       id: 'mmm-20', difficulty: 2,
@@ -236,6 +268,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Step 3: Check weights', content: '0.4 + 0.3 + 0.2 + 0.1 = 1.0 ✓ (weights sum to 1)' },
       ],
       answer: '78.5',
+      code: '# Weighted mean of exam sections\nscores = [80, 70, 90, 75]\nweights = [0.4, 0.3, 0.2, 0.1]\n\n# Your code here\n',
+      codeSolution: 'scores = [80, 70, 90, 75]\nweights = [0.4, 0.3, 0.2, 0.1]\nweighted_mean = sum(s * w for s, w in zip(scores, weights))\nprint(f\"Weighted mean = {weighted_mean}\")',
     },
     {
       id: 'mmm-22', difficulty: 2,
@@ -246,6 +280,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Answer', content: '**Yes.** This is common in income data, where a few high earners pull the mean above the median.' },
       ],
       answer: 'Yes — the data is right-skewed',
+      code: '# Mode=15, Median=20. Can mean be 25?\ndata = [15, 15, 20, 25, 50]\n\n# Your code here\n',
+      codeSolution: 'from collections import Counter\ndata = [15, 15, 20, 25, 50]\nmean = sum(data) / len(data)\nsorted_d = sorted(data)\nmedian = sorted_d[len(sorted_d) // 2]\nmode = Counter(data).most_common(1)[0][0]\nprint(f\"Mean = {mean}, Median = {median}, Mode = {mode}\")\nprint(\"Yes — right-skewed data can have mode < median < mean\")',
     },
     {
       id: 'mmm-23', difficulty: 2,
@@ -260,6 +296,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Step 5: Mode', content: '7 appears most (6 ways). Mode = **7**' },
       ],
       answer: 'Mean = 7, Median = 7, Mode = 7',
+      code: '# Mean, median, mode of all two-dice sums\n\n# Your code here\n',
+      codeSolution: 'from collections import Counter\nsums = [i + j for i in range(1, 7) for j in range(1, 7)]\nmean = sum(sums) / len(sums)\nsorted_sums = sorted(sums)\nn = len(sorted_sums)\nmedian = (sorted_sums[n//2 - 1] + sorted_sums[n//2]) / 2\nmode = Counter(sums).most_common(1)[0][0]\nprint(f\"Mean = {mean}, Median = {median}, Mode = {mode}\")',
     },
     {
       id: 'mmm-24', difficulty: 2,
@@ -270,6 +308,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Step 3: New mean', content: '100 ÷ 9 = **11.1**' },
       ],
       answer: '11.1',
+      code: '# Mean of 10 numbers is 15. Remove 50. New mean?\nn = 10\noriginal_mean = 15\nremoved = 50\n\n# Your code here\n',
+      codeSolution: 'n = 10\noriginal_mean = 15\nremoved = 50\ntotal = n * original_mean\nnew_total = total - removed\nnew_mean = new_total / (n - 1)\nprint(f\"New mean = {new_mean:.1f}\")',
     },
     {
       id: 'mmm-25', difficulty: 2,
@@ -281,6 +321,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Step 4: IQR = Q3 − Q1', content: '23.5 − 10 = **13.5**' },
       ],
       answer: 'IQR = 13.5',
+      code: '# Find the IQR of: 5, 8, 12, 15, 18, 22, 25, 30\ndata = [5, 8, 12, 15, 18, 22, 25, 30]\n\n# Your code here\n',
+      codeSolution: 'data = [5, 8, 12, 15, 18, 22, 25, 30]\nsorted_d = sorted(data)\nn = len(sorted_d)\nlower = sorted_d[:n//2]\nupper = sorted_d[n//2:]\nq1 = (lower[len(lower)//2 - 1] + lower[len(lower)//2]) / 2\nq3 = (upper[len(upper)//2 - 1] + upper[len(upper)//2]) / 2\niqr = q3 - q1\nprint(f\"Q1 = {q1}, Q3 = {q3}\")\nprint(f\"IQR = {iqr}\")',
     },
     {
       id: 'mmm-26', difficulty: 2,
@@ -292,6 +334,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Insight', content: 'The festival day inflated the regular mean by 20. The trimmed mean (49.6) better represents a "normal" day.' },
       ],
       answer: 'Mean = 70.4, Trimmed mean = 49.6',
+      code: '# Mean and trimmed mean\ncustomers = [45, 52, 48, 51, 47, 200, 50]\n\n# Your code here\n',
+      codeSolution: 'customers = [45, 52, 48, 51, 47, 200, 50]\nmean = sum(customers) / len(customers)\nsorted_c = sorted(customers)\ntrimmed = sorted_c[1:-1]\ntrimmed_mean = sum(trimmed) / len(trimmed)\nprint(f\"Mean = {mean:.1f}\")\nprint(f\"Trimmed mean = {trimmed_mean:.1f}\")',
     },
     {
       id: 'mmm-27', difficulty: 2,
@@ -302,6 +346,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Step 3', content: 'B: range 80 → values are between ~10 and ~90. Very spread out.' },
       ],
       answer: 'Dataset A is more consistent (range = 10)',
+      code: '# Compare consistency: same mean, different ranges\nmean_a, range_a = 50, 10\nmean_b, range_b = 50, 80\n\n# Your code here\n',
+      codeSolution: 'mean_a, range_a = 50, 10\nmean_b, range_b = 50, 80\nprint(f\"Dataset A: mean={mean_a}, range={range_a}\")\nprint(f\"Dataset B: mean={mean_b}, range={range_b}\")\nprint(\"Dataset A is more consistent (smaller range)\")',
     },
     {
       id: 'mmm-28', difficulty: 2,
@@ -312,6 +358,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Real-world example', content: 'Heights of all adults: two peaks (one for men, one for women) → bimodal distribution.' },
       ],
       answer: 'Yes — called bimodal',
+      code: '# Can a dataset have two modes?\ndata = [2, 2, 2, 5, 5, 5, 8]\n\n# Your code here\n',
+      codeSolution: 'from collections import Counter\ndata = [2, 2, 2, 5, 5, 5, 8]\ncounts = Counter(data)\nmax_freq = max(counts.values())\nmodes = [k for k, v in counts.items() if v == max_freq]\nprint(f\"Modes: {modes} (bimodal, each appears {max_freq} times)\")',
     },
     {
       id: 'mmm-29', difficulty: 2,
@@ -325,6 +373,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Step 6: Outlier fences', content: 'Lower: 44 − 1.5×76 = −70. Upper: 120 + 1.5×76 = 234. No values outside → **no outliers**.' },
       ],
       answer: 'Mean = 85.1, Median = 78, No outliers',
+      code: '# Cricket scores — mean, median, outliers\nscores = [45, 120, 32, 88, 155, 12, 67, 95, 200, 78, 44]\n\n# Your code here\n',
+      codeSolution: 'scores = [45, 120, 32, 88, 155, 12, 67, 95, 200, 78, 44]\nmean = sum(scores) / len(scores)\nsorted_s = sorted(scores)\nmedian = sorted_s[len(sorted_s) // 2]\nn = len(sorted_s)\nlower = sorted_s[:n//2]\nupper = sorted_s[n//2+1:]\nq1 = lower[len(lower)//2]\nq3 = upper[len(upper)//2]\niqr = q3 - q1\nlf = q1 - 1.5 * iqr\nuf = q3 + 1.5 * iqr\noutliers = [x for x in sorted_s if x < lf or x > uf]\nprint(f\"Mean = {mean:.1f}, Median = {median}\")\nprint(f\"Outliers: {outliers if outliers else \"None\"}\")',
     },
     {
       id: 'mmm-30', difficulty: 2,
@@ -336,6 +386,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Step 4: Mean height of girls', content: '3030 ÷ 20 = **151.5 cm**' },
       ],
       answer: '151.5 cm',
+      code: '# Mean height of girls\ntotal_students = 30\nclass_mean = 155\nboys_n, boys_mean = 10, 162\n\n# Your code here\n',
+      codeSolution: 'total_students = 30\nclass_mean = 155\nboys_n, boys_mean = 10, 162\ngirls_n = total_students - boys_n\ngirls_mean = (total_students * class_mean - boys_n * boys_mean) / girls_n\nprint(f\"Girls\' mean height = {girls_mean} cm\")',
     },
     {
       id: 'mmm-31', difficulty: 2,
@@ -348,6 +400,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Step 4: Mode', content: '7 appears twice → Mode = **7**' },
       ],
       answer: 'Mean = 8.2, Median = 7, Mode = 7',
+      code: '# Cards: 3, 7, 7, J(11), K(13). Mean, median, mode\nvalues = [3, 7, 7, 11, 13]\n\n# Your code here\n',
+      codeSolution: 'from collections import Counter\nvalues = [3, 7, 7, 11, 13]\nmean = sum(values) / len(values)\nsorted_v = sorted(values)\nmedian = sorted_v[len(sorted_v) // 2]\nmode = Counter(values).most_common(1)[0][0]\nprint(f\"Mean = {mean}, Median = {median}, Mode = {mode}\")',
     },
     {
       id: 'mmm-32', difficulty: 2,
@@ -360,6 +414,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Insight', content: 'The one long wait (15 min) pulled the mean up. The median (4 min) is more typical.' },
       ],
       answer: 'Mean = 5.6 min, Median = 4 min',
+      code: '# Bus wait times — mean and median\nwaits = [3, 8, 2, 15, 4, 6, 1]\n\n# Your code here\n',
+      codeSolution: 'waits = [3, 8, 2, 15, 4, 6, 1]\nmean = sum(waits) / len(waits)\nsorted_w = sorted(waits)\nmedian = sorted_w[len(sorted_w) // 2]\nprint(f\"Mean = {mean:.1f} min\")\nprint(f\"Median = {median} min\")',
     },
     {
       id: 'mmm-33', difficulty: 2,
@@ -372,6 +428,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Rule', content: 'Adding k to every value increases the mean by k.' },
       ],
       answer: '15',
+      code: '# Mean of {a,b,c} is 10. Mean of {a+5,b+5,c+5}?\noriginal_mean = 10\nshift = 5\n\n# Your code here\n',
+      codeSolution: 'original_mean = 10\nshift = 5\nnew_mean = original_mean + shift\nprint(f\"New mean = {new_mean}\")',
     },
     {
       id: 'mmm-34', difficulty: 2,
@@ -383,6 +441,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Rule', content: 'Multiplying every value by k multiplies the mean by k.' },
       ],
       answer: '20',
+      code: '# Mean of {a,b,c} is 10. Mean of {2a,2b,2c}?\noriginal_mean = 10\nfactor = 2\n\n# Your code here\n',
+      codeSolution: 'original_mean = 10\nfactor = 2\nnew_mean = original_mean * factor\nprint(f\"New mean = {new_mean}\")',
     },
 
     // ── Hard (35-50) ───────────────────────────────────────
@@ -407,6 +467,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Step 3: Missing score', content: '750 − 675 = **75**' },
       ],
       answer: '75',
+      code: '# What must the 10th student score?\nscores = [60, 65, 70, 72, 75, 78, 80, 85, 90]\ntarget_mean = 75\n\n# Your code here\n',
+      codeSolution: 'scores = [60, 65, 70, 72, 75, 78, 80, 85, 90]\ntarget_mean = 75\nneeded = target_mean * 10 - sum(scores)\nprint(f\"10th student must score: {needed}\")',
     },
     {
       id: 'mmm-37', difficulty: 3,
@@ -418,6 +480,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Why this matters', content: 'This is exactly why we cannot use "average deviation" to measure spread — it is always zero. We must square the deviations first (→ variance).' },
       ],
       answer: '0 (always)',
+      code: '# Sum of deviations from mean = 0\ndata = [3, 7, 5]\n\n# Your code here\n',
+      codeSolution: 'data = [3, 7, 5]\nmean = sum(data) / len(data)\ndeviations = [x - mean for x in data]\nprint(f\"Deviations: {deviations}\")\nprint(f\"Sum = {sum(deviations)}\")',
     },
     {
       id: 'mmm-38', difficulty: 3,
@@ -428,6 +492,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Step 3: The shape', content: 'Income is **right-skewed** (long tail of high earners). For skewed data: mean > median > mode (for right skew). Use the median.' },
       ],
       answer: 'Median (₹1,20,000) — right-skewed data makes the mean misleading',
+      code: '# GDP per capita vs median income\ngdp_per_capita = 172000\nmedian_income = 120000\n\n# Your code here\n',
+      codeSolution: 'gdp_per_capita = 172000\nmedian_income = 120000\nprint(f\"GDP per capita (mean): {gdp_per_capita:,}\")\nprint(f\"Median income: {median_income:,}\")\nprint(\"Median is more representative — income is right-skewed\")',
     },
     {
       id: 'mmm-39', difficulty: 3,
@@ -441,6 +507,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Step 5: Check', content: 'Data: 2, 5, 5, 8, 10. Mean = 30/5 = 6 ✓ Median = 5 ✓ Mode = 5 ✓ Range = 8 ✓' },
       ],
       answer: '{2, 5, 5, 8, 10}',
+      code: '# Find 5 whole numbers: mean=6, median=5, mode=5, range=8\n\n# Your code here\n',
+      codeSolution: 'from collections import Counter\ndata = [2, 5, 5, 8, 10]\nmean = sum(data) / len(data)\nmedian = sorted(data)[2]\nmode = Counter(data).most_common(1)[0][0]\nr = max(data) - min(data)\nprint(f\"Data: {data}\")\nprint(f\"Mean={mean}, Median={median}, Mode={mode}, Range={r}\")',
     },
     {
       id: 'mmm-40', difficulty: 3,
@@ -451,6 +519,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Step 3: Corrected mean', content: '4950 ÷ 100 = **49.5**' },
       ],
       answer: '49.5',
+      code: '# Correct a recording error\nn = 100\noriginal_mean = 50\nwrong, correct = 90, 40\n\n# Your code here\n',
+      codeSolution: 'n = 100\noriginal_mean = 50\nwrong, correct = 90, 40\ncorrected_mean = (n * original_mean - wrong + correct) / n\nprint(f\"Corrected mean = {corrected_mean}\")',
     },
     {
       id: 'mmm-41', difficulty: 3,
@@ -475,6 +545,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Step 3: Convert back', content: '300 seconds = **5:00** (5 minutes exactly)' },
       ],
       answer: '5:00 (300 seconds)',
+      code: '# Runner\'s split times — find mean\nsplits_sec = [320, 290, 310, 280, 300]\n\n# Your code here\n',
+      codeSolution: 'splits_sec = [320, 290, 310, 280, 300]\nmean_sec = sum(splits_sec) / len(splits_sec)\nmins = int(mean_sec // 60)\nsecs = int(mean_sec % 60)\nprint(f\"Mean = {mean_sec} sec = {mins}:{secs:02d}\")',
     },
     {
       id: 'mmm-43', difficulty: 3,
@@ -500,6 +572,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Step 3: The mode is more informative', content: 'Modes are 10 and 90. This bimodal data is best described by two modes, not one center measure.' },
       ],
       answer: 'Bimodal data — the median falls between two clusters where no data exists',
+      code: '# Bimodal data — median is misleading\ndata = [10, 10, 10, 10, 50, 90, 90, 90, 90]\n\n# Your code here\n',
+      codeSolution: 'from collections import Counter\ndata = [10, 10, 10, 10, 50, 90, 90, 90, 90]\nmean = sum(data) / len(data)\nmedian = sorted(data)[len(data) // 2]\nprint(f\"Mean = {mean:.1f}, Median = {median}\")\nprint(\"Data is bimodal — modes at 10 and 90\")',
     },
     {
       id: 'mmm-45', difficulty: 3,
@@ -510,6 +584,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Step 3: Needed in 2 innings', content: '600 − 450 = **150 runs** (average 75 per innings)' },
       ],
       answer: '150 runs total (75 per innings)',
+      code: '# Batting average problem\ncurrent_avg = 45.0\ninnings = 10\ntarget_avg = 50.0\n\n# Your code here\n',
+      codeSolution: 'current_avg = 45.0\ninnings = 10\ntarget_avg = 50.0\nneeded = target_avg * 12 - current_avg * innings\nprint(f\"Runs needed in 2 innings: {needed:.0f}\")\nprint(f\"Average per innings: {needed/2:.0f}\")',
     },
     {
       id: 'mmm-46', difficulty: 3,
@@ -520,6 +596,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Insight', content: 'One outlier changed the mean from 100 to 1099 (11× increase!) but the median barely moved. This is why the median is robust.' },
       ],
       answer: 'Mean ≈ 1099, Median ≈ 100',
+      code: '# Extreme value effect on mean vs median\nn = 1000\nold_mean = 100\nnew_value = 1000000\n\n# Your code here\n',
+      codeSolution: 'n = 1000\nold_mean = 100\nnew_value = 1000000\nnew_mean = (n * old_mean + new_value) / (n + 1)\nprint(f\"New mean: {new_mean:.0f}\")\nprint(\"Median barely changes (still ~100)\")',
     },
     {
       id: 'mmm-47', difficulty: 3,
@@ -533,6 +611,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Why not 45?', content: 'You spent MORE TIME at the slower speed (2 hrs vs 1 hr), so the average is pulled toward 30. The arithmetic mean (45) wrongly assumes equal time at each speed.' },
       ],
       answer: '40 km/h (harmonic mean)',
+      code: '# Harmonic mean of speeds\ndist1, speed1 = 60, 30\ndist2, speed2 = 60, 60\n\n# Your code here\n',
+      codeSolution: 'dist1, speed1 = 60, 30\ndist2, speed2 = 60, 60\ntotal_dist = dist1 + dist2\ntotal_time = dist1/speed1 + dist2/speed2\navg_speed = total_dist / total_time\nprint(f\"Average speed = {avg_speed} km/h\")',
     },
     {
       id: 'mmm-48', difficulty: 3,
@@ -559,6 +639,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Note', content: 'If the data is bell-shaped (normal), ~95% (about 47–48 students) would be in this range. Chebyshev gives a weaker but guaranteed bound.' },
       ],
       answer: 'At least 38 students (75% by Chebyshev)',
+      code: '# Chebyshev\'s inequality\nn = 50\nmean = 68\nsigma = 12\nk = 2\n\n# Your code here\n',
+      codeSolution: 'n = 50\nmean = 68\nsigma = 12\nk = 2\nmin_frac = 1 - 1/k**2\nprint(f\"At least {min_frac:.0%} within +/-{k} sigma\")\nprint(f\"At least {min_frac * n:.0f} students\")',
     },
     {
       id: 'mmm-50', difficulty: 3,
@@ -570,6 +652,8 @@ export const practiceMeanMedianMode: PracticeSet = {
         { label: 'Better example', content: 'Scores: 20, 25, 30, 90, 95. Median = 30, Mean = 52. Scoring 35 is above the median (30) but below the mean (52). The claim is FALSE.' },
       ],
       answer: 'No — in skewed data, mean and median differ, so above-median does not guarantee above-mean',
+      code: '# Above median vs above mean\nscores = [20, 25, 30, 90, 95]\n\n# Your code here\n',
+      codeSolution: 'scores = [20, 25, 30, 90, 95]\nmean = sum(scores) / len(scores)\nmedian = sorted(scores)[len(scores) // 2]\nprint(f\"Mean = {mean}, Median = {median}\")\nprint(\"Above-median does NOT guarantee above-mean\")',
     },
   ],
 };
@@ -602,6 +686,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 2: Take square root', content: '√8 = **2.83** (rounded to 2 decimal places)' },
       ],
       answer: 'σ ≈ 2.83',
+      code: '# Population std dev of: 2, 4, 6, 8, 10\ndata = [2, 4, 6, 8, 10]\n\n# Your code here\n',
+      codeSolution: 'data = [2, 4, 6, 8, 10]\nmean = sum(data) / len(data)\nvar = sum((x - mean)**2 for x in data) / len(data)\nprint(f\"Population std dev = {var**0.5:.2f}\")',
     },
     {
       id: 'sd-03', difficulty: 1,
@@ -614,6 +700,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Insight', content: 'If all values are identical, there is zero spread — variance = 0.' },
       ],
       answer: 'σ² = 0',
+      code: '# Population variance of: 5, 5, 5, 5, 5\ndata = [5, 5, 5, 5, 5]\n\n# Your code here\n',
+      codeSolution: 'data = [5, 5, 5, 5, 5]\nmean = sum(data) / len(data)\nvar = sum((x - mean)**2 for x in data) / len(data)\nprint(f\"Population variance = {var}\")',
     },
     {
       id: 'sd-04', difficulty: 1,
@@ -624,6 +712,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 3: Divide by N', content: '16 ÷ 4 = **4**' },
       ],
       answer: 'σ² = 4',
+      code: '# Population variance of: 3, 7, 7, 3\ndata = [3, 7, 7, 3]\n\n# Your code here\n',
+      codeSolution: 'data = [3, 7, 7, 3]\nmean = sum(data) / len(data)\nvar = sum((x - mean)**2 for x in data) / len(data)\nprint(f\"Population variance = {var}\")',
     },
     {
       id: 'sd-05', difficulty: 1,
@@ -633,6 +723,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 2: Compute', content: '√25 = **5**' },
       ],
       answer: 'σ = 5',
+      code: '# Variance is 25. What is std dev?\nvariance = 25\n\n# Your code here\n',
+      codeSolution: 'import math\nvariance = 25\nprint(f\"Std dev = {math.sqrt(variance)}\")',
     },
     {
       id: 'sd-06', difficulty: 1,
@@ -643,6 +735,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Interpretation', content: '85 is 1.5 standard deviations above the mean.' },
       ],
       answer: 'z = 1.5',
+      code: '# z-score: x=85, mu=70, sigma=10\nx, mu, sigma = 85, 70, 10\n\n# Your code here\n',
+      codeSolution: 'x, mu, sigma = 85, 70, 10\nz = (x - mu) / sigma\nprint(f\"z = {z}\")',
     },
     {
       id: 'sd-07', difficulty: 1,
@@ -652,6 +746,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Interpretation', content: '60 is 2 standard deviations below the mean.' },
       ],
       answer: 'z = −2',
+      code: '# z-score: x=60, mu=70, sigma=5\nx, mu, sigma = 60, 70, 5\n\n# Your code here\n',
+      codeSolution: 'x, mu, sigma = 60, 70, 5\nz = (x - mu) / sigma\nprint(f\"z = {z}\")',
     },
     {
       id: 'sd-08', difficulty: 1,
@@ -662,6 +758,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 3: Divide by N', content: '8 ÷ 3 = **2.67** (rounded)' },
       ],
       answer: 'σ² ≈ 2.67',
+      code: '# Population variance of: 10, 12, 14\ndata = [10, 12, 14]\n\n# Your code here\n',
+      codeSolution: 'data = [10, 12, 14]\nmean = sum(data) / len(data)\nvar = sum((x - mean)**2 for x in data) / len(data)\nprint(f\"Population variance = {var:.2f}\")',
     },
     {
       id: 'sd-09', difficulty: 1,
@@ -684,6 +782,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 1: z = (x − μ) / σ', content: 'z = (78 − 72) / 4 = 6/4 = **1.5**' },
       ],
       answer: 'z = 1.5',
+      code: '# z-score: x=78, mu=72, sigma=4\nx, mu, sigma = 78, 72, 4\n\n# Your code here\n',
+      codeSolution: 'x, mu, sigma = 78, 72, 4\nz = (x - mu) / sigma\nprint(f\"z = {z}\")',
     },
     {
       id: 'sd-11', difficulty: 1,
@@ -693,6 +793,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 2: Conclusion', content: 'The value **equals the mean**.' },
       ],
       answer: 'The data value is exactly equal to the mean',
+      code: '# What does z=0 mean?\nz, mu, sigma = 0, 50, 10\n\n# Your code here\n',
+      codeSolution: 'z, mu, sigma = 0, 50, 10\nx = mu + z * sigma\nprint(f\"z=0 means x = {x} (equal to the mean)\")',
     },
     {
       id: 'sd-12', difficulty: 1,
@@ -704,6 +806,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 3: Divide by N', content: '10/5 = **2**' },
       ],
       answer: 'σ² = 2',
+      code: '# Population variance of: 2, 3, 4, 5, 6\nrolls = [2, 3, 4, 5, 6]\n\n# Your code here\n',
+      codeSolution: 'rolls = [2, 3, 4, 5, 6]\nmean = sum(rolls) / len(rolls)\nvar = sum((x - mean)**2 for x in rolls) / len(rolls)\nprint(f\"Population variance = {var}\")',
     },
     {
       id: 'sd-13', difficulty: 1,
@@ -716,6 +820,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 4: Std dev', content: '√2500 = **50**' },
       ],
       answer: 'σ = 50',
+      code: '# Population std dev of: 100, 100, 100, 200, 200, 200\ndata = [100, 100, 100, 200, 200, 200]\n\n# Your code here\n',
+      codeSolution: 'data = [100, 100, 100, 200, 200, 200]\nmean = sum(data) / len(data)\nvar = sum((x - mean)**2 for x in data) / len(data)\nprint(f\"Population std dev = {var**0.5}\")',
     },
     {
       id: 'sd-14', difficulty: 1,
@@ -725,6 +831,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 2: Substitute', content: 'x = 40 + (−1.5)(8) = 40 − 12 = **28**' },
       ],
       answer: 'x = 28',
+      code: '# Find x given z=-1.5, mu=40, sigma=8\nz, mu, sigma = -1.5, 40, 8\n\n# Your code here\n',
+      codeSolution: 'z, mu, sigma = -1.5, 40, 8\nx = mu + z * sigma\nprint(f\"x = {x}\")',
     },
     {
       id: 'sd-15', difficulty: 1,
@@ -735,6 +843,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 3: Divide by N', content: '50/2 = **25**' },
       ],
       answer: 'σ² = 25',
+      code: '# Population variance of: 0, 10\ndata = [0, 10]\n\n# Your code here\n',
+      codeSolution: 'data = [0, 10]\nmean = sum(data) / len(data)\nvar = sum((x - mean)**2 for x in data) / len(data)\nprint(f\"Population variance = {var}\")',
     },
     {
       id: 'sd-16', difficulty: 1,
@@ -746,6 +856,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Comparison', content: 'B has greater spread (variance 66.67 vs 0).' },
       ],
       answer: 'Dataset B has greater spread (σ² ≈ 66.67 vs 0)',
+      code: '# Compare spread: A={10,10,10} vs B={0,10,20}\na = [10, 10, 10]\nb = [0, 10, 20]\n\n# Your code here\n',
+      codeSolution: 'def pvar(d):\n    m = sum(d)/len(d)\n    return sum((x-m)**2 for x in d)/len(d)\na = [10, 10, 10]\nb = [0, 10, 20]\nprint(f\"Var(A) = {pvar(a)}\")\nprint(f\"Var(B) = {pvar(b):.2f}\")\nprint(\"B has greater spread\")',
     },
     {
       id: 'sd-17', difficulty: 1,
@@ -755,6 +867,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 2: Larger |z| = further from mean', content: 'The student with z = 2.0 is further from the mean.' },
       ],
       answer: 'The student with z = 2.0 (2 standard deviations away vs 0.5)',
+      code: '# Who scored further from mean?\nz1, z2 = 2.0, -0.5\n\n# Your code here\n',
+      codeSolution: 'z1, z2 = 2.0, -0.5\nprint(f\"|z1| = {abs(z1)}, |z2| = {abs(z2)}\")\nprint(f\"z={z1} is further from the mean\")',
     },
     // ── Medium (18-34) ─────────────────────────────────────
     {
@@ -779,6 +893,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 3: Apply empirical rule', content: 'Within ±2σ → approximately **95%** of data' },
       ],
       answer: '≈ 95%',
+      code: '# Empirical rule: N(100,15). % between 70-130?\nmu, sigma = 100, 15\n\n# Your code here\n',
+      codeSolution: 'mu, sigma = 100, 15\nz_lo = (70 - mu) / sigma\nz_hi = (130 - mu) / sigma\nprint(f\"z: {z_lo} to {z_hi}\")\nprint(\"Within +/-2 sigma -> ~95%\")',
     },
     {
       id: 'sd-20', difficulty: 2,
@@ -788,6 +904,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 2: Empirical rule', content: 'Within ±1σ → about **68%**' },
       ],
       answer: '≈ 68%',
+      code: '# Bolts: N(10.0, 0.2). % between 9.8-10.2?\nmu, sigma = 10.0, 0.2\n\n# Your code here\n',
+      codeSolution: 'mu, sigma = 10.0, 0.2\nz_lo = (9.8 - mu) / sigma\nz_hi = (10.2 - mu) / sigma\nprint(f\"z: {z_lo} to {z_hi}\")\nprint(\"Within +/-1 sigma -> ~68%\")',
     },
     {
       id: 'sd-21', difficulty: 2,
@@ -799,6 +917,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 4: Compare', content: 'A has higher relative variability (20% vs 15%) despite B having a larger absolute σ.' },
       ],
       answer: 'CV(A) = 20%, CV(B) = 15%. Dataset A has more relative spread.',
+      code: '# Coefficient of variation\nmean_a, sigma_a = 50, 10\nmean_b, sigma_b = 200, 30\n\n# Your code here\n',
+      codeSolution: 'mean_a, sigma_a = 50, 10\nmean_b, sigma_b = 200, 30\ncv_a = sigma_a / mean_a * 100\ncv_b = sigma_b / mean_b * 100\nprint(f\"CV(A) = {cv_a}%, CV(B) = {cv_b}%\")\nprint(\"A has higher relative variability\")',
     },
     {
       id: 'sd-22', difficulty: 2,
@@ -809,6 +929,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Example', content: 'If original data {1,2,3} has σ² = 2/3, then {3,6,9} has σ² = 9×(2/3) = **6** and σ = 3×√(2/3) ≈ **2.45**.' },
       ],
       answer: 'Variance is multiplied by 9; std dev is multiplied by 3',
+      code: '# Multiply by 3 — effect on variance\ndata = [1, 2, 3]\nfactor = 3\n\n# Your code here\n',
+      codeSolution: 'data = [1, 2, 3]\nfactor = 3\ndef pvar(d):\n    m=sum(d)/len(d)\n    return sum((x-m)**2 for x in d)/len(d)\nprint(f\"Original var = {pvar(data):.4f}\")\nprint(f\"New var = {pvar([x*factor for x in data]):.4f}\")\nprint(f\"Ratio = {factor}^2 = {factor**2}\")',
     },
     {
       id: 'sd-23', difficulty: 2,
@@ -818,6 +940,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 2: Why?', content: 'Adding a constant shifts all values by the same amount. The spread (distances between values) stays the same.' },
       ],
       answer: 'Both variance and standard deviation remain unchanged',
+      code: '# Add 5 — effect on variance\ndata = [1, 2, 3]\nshift = 5\n\n# Your code here\n',
+      codeSolution: 'data = [1, 2, 3]\nshift = 5\ndef pvar(d):\n    m=sum(d)/len(d)\n    return sum((x-m)**2 for x in d)/len(d)\nprint(f\"Original var = {pvar(data):.4f}\")\nprint(f\"After +{shift}: var = {pvar([x+shift for x in data]):.4f}\")\nprint(\"Variance unchanged by adding a constant\")',
     },
     {
       id: 'sd-24', difficulty: 2,
@@ -827,6 +951,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 2: Empirical rule', content: '95% within ±2σ means 5% outside. By symmetry, 2.5% above +2σ.' },
       ],
       answer: '≈ 2.5%',
+      code: '# N(50,5). % above 60?\nmu, sigma = 50, 5\n\n# Your code here\n',
+      codeSolution: 'mu, sigma = 50, 5\nz = (60 - mu) / sigma\nprint(f\"z = {z}\")\nprint(\"~2.5% above +2 sigma\")',
     },
     {
       id: 'sd-25', difficulty: 2,
@@ -837,6 +963,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 3: Compare', content: 'Alice\'s z-score (2.0) > Bob\'s (1.5). Alice performed better relative to her class.' },
       ],
       answer: 'Alice (z = 2.0 vs z = 1.5)',
+      code: '# Compare z-scores: Alice vs Bob\nalice = (85, 75, 5)\nbob = (92, 80, 8)\n\n# Your code here\n',
+      codeSolution: 'za = (85 - 75) / 5\nzb = (92 - 80) / 8\nprint(f\"Alice z = {za}, Bob z = {zb}\")\nprint(\"Alice performed better relative to her class\")',
     },
     {
       id: 'sd-26', difficulty: 2,
@@ -861,6 +989,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 3: Outside ±1σ', content: '**160** (z = −1.67) and **180** (z = +1.67)' },
       ],
       answer: '160 cm and 180 cm are more than 1σ from the mean',
+      code: '# Which heights are >1 sigma from mean?\nheights = [160, 165, 168, 170, 172, 175, 180]\nmu, sigma = 170, 6\n\n# Your code here\n',
+      codeSolution: 'heights = [160, 165, 168, 170, 172, 175, 180]\nmu, sigma = 170, 6\nfor h in heights:\n    z = (h - mu) / sigma\n    tag = \" <-- outside\" if abs(z) > 1 else \"\"\n    print(f\"{h} cm: z={z:.2f}{tag}\")',
     },
     {
       id: 'sd-28', difficulty: 2,
@@ -870,6 +1000,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 2: Solve for σ', content: '25% = (σ/200) × 100% → σ = 200 × 0.25 = **50**' },
       ],
       answer: 'σ = 50',
+      code: '# Find sigma given CV=25%, mean=200\ncv, mu = 25, 200\n\n# Your code here\n',
+      codeSolution: 'cv, mu = 25, 200\nsigma = mu * cv / 100\nprint(f\"Sigma = {sigma}\")',
     },
     {
       id: 'sd-29', difficulty: 2,
@@ -880,6 +1012,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 3: Upper bound', content: '500 + 3(100) = **800**' },
       ],
       answer: 'Between 200 and 800',
+      code: '# 99.7% range for N(500, 100)\nmu, sigma = 500, 100\n\n# Your code here\n',
+      codeSolution: 'mu, sigma = 500, 100\nprint(f\"99.7% between {mu - 3*sigma} and {mu + 3*sigma}\")',
     },
     {
       id: 'sd-30', difficulty: 2,
@@ -893,6 +1027,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 5: ±2σ range', content: '75 ± 2(12.91) = 49.18 to 100.82. All values fall within this range — no outliers.' },
       ],
       answer: 'σ ≈ 12.91. No scores are beyond ±2σ.',
+      code: '# Pop std dev of exam scores\nscores = [55, 60, 65, 70, 75, 80, 85, 90, 95]\n\n# Your code here\n',
+      codeSolution: 'scores = [55, 60, 65, 70, 75, 80, 85, 90, 95]\nmean = sum(scores) / len(scores)\nvar = sum((x - mean)**2 for x in scores) / len(scores)\nstd = var ** 0.5\nprint(f\"Std dev = {std:.2f}\")\noutside = [x for x in scores if abs(x - mean) > 2*std]\nprint(f\"Beyond +/-2 sigma: {outside if outside else \"None\"}\")',
     },
     {
       id: 'sd-31', difficulty: 2,
@@ -904,6 +1040,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 3: Sample variance (N−1)', content: '25.5/5 = **5.1**' },
       ],
       answer: 's² = 5.1',
+      code: '# Sample variance of: 1, 1, 6, 6, 3, 4\nrolls = [1, 1, 6, 6, 3, 4]\n\n# Your code here\n',
+      codeSolution: 'rolls = [1, 1, 6, 6, 3, 4]\nmean = sum(rolls) / len(rolls)\nsvar = sum((x-mean)**2 for x in rolls) / (len(rolls)-1)\nprint(f\"Sample variance = {svar}\")',
     },
     {
       id: 'sd-32', difficulty: 2,
@@ -914,6 +1052,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 3: Compare', content: 'Fund B has higher CV (30% vs 25%), so it has more risk per unit of return.' },
       ],
       answer: 'Fund B is riskier (CV = 30% vs 25%)',
+      code: '# Compare risk using CV\nmean_a, s_a = 8, 2\nmean_b, s_b = 20, 6\n\n# Your code here\n',
+      codeSolution: 'mean_a, s_a = 8, 2\nmean_b, s_b = 20, 6\ncv_a = s_a/mean_a*100\ncv_b = s_b/mean_b*100\nprint(f\"CV(A)={cv_a}%, CV(B)={cv_b}%\")\nprint(\"Fund B is riskier (higher CV)\")',
     },
     {
       id: 'sd-33', difficulty: 2,
@@ -924,6 +1064,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 3: P(−1 < Z < 2)', content: '0.9772 − 0.1587 = **0.8185** ≈ **81.85%**' },
       ],
       answer: '≈ 81.85%',
+      code: '# N(300,40). P(260 < X < 380)?\nmu, sigma = 300, 40\n\n# Your code here\n',
+      codeSolution: 'from statistics import NormalDist\nd = NormalDist(mu=300, sigma=40)\nprob = d.cdf(380) - d.cdf(260)\nprint(f\"P(260 < X < 380) = {prob:.4f} = {prob*100:.2f}%\")',
     },
     {
       id: 'sd-34', difficulty: 2,
@@ -951,6 +1093,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Key insight', content: 'The constant b cancels out (shifting doesn\'t change spread). Only the scaling factor a matters, and it gets squared.' },
       ],
       answer: 'Var(aX + b) = a²·Var(X). Adding b has no effect; multiplying by a scales variance by a².',
+      code: '# Verify Var(aX+b) = a^2 * Var(X)\ndata = [1, 2, 3, 4, 5]\na, b = 3, 10\n\n# Your code here\n',
+      codeSolution: 'data = [1, 2, 3, 4, 5]\na, b = 3, 10\ndef pvar(d):\n    m=sum(d)/len(d)\n    return sum((x-m)**2 for x in d)/len(d)\nprint(f\"Var(X) = {pvar(data)}\")\nprint(f\"Var({a}X+{b}) = {pvar([a*x+b for x in data])}\")\nprint(f\"{a}^2 * Var(X) = {a**2 * pvar(data)}\")',
     },
     {
       id: 'sd-36', difficulty: 3,
@@ -962,6 +1106,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Note', content: 'Chebyshev works for ANY distribution — not just normal. The empirical rule (99.7%) only applies to normal distributions.' },
       ],
       answer: 'At least 88.9% (by Chebyshev\'s inequality)',
+      code: '# Chebyshev: mu=50, sigma=10, range 20-80\nmu, sigma = 50, 10\n\n# Your code here\n',
+      codeSolution: 'mu, sigma = 50, 10\nk = (80 - mu) / sigma\nprint(f\"k = {k}\")\nprint(f\"At least {1 - 1/k**2:.1%} within [{20}, {80}]\")',
     },
     {
       id: 'sd-37', difficulty: 3,
@@ -972,6 +1118,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Interpretation', content: 'At least **55.6%** of any dataset lies within ±1.5σ. Compare to the empirical rule for normal data: ≈ 86.6%.' },
       ],
       answer: 'At least 55.6%',
+      code: '# Chebyshev: fraction within 1.5 sigma\nk = 1.5\n\n# Your code here\n',
+      codeSolution: 'k = 1.5\nprint(f\"At least {1 - 1/k**2:.1%} within +/-{k} sigma\")',
     },
     {
       id: 'sd-38', difficulty: 3,
@@ -984,6 +1132,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 5: Verdict', content: 'The empirical rule says ≈ 68% within ±1σ but we have 90%. The data is heavily right-skewed — NOT normal. The empirical rule is **inappropriate** here.' },
       ],
       answer: 'No — the data is extremely skewed, not normal. The empirical rule only applies to approximately normal distributions.',
+      code: '# Is empirical rule OK for [1,1,1,1,1,1,1,1,1,100]?\ndata = [1]*9 + [100]\n\n# Your code here\n',
+      codeSolution: 'data = [1]*9 + [100]\nmean = sum(data)/len(data)\nstd = (sum((x-mean)**2 for x in data)/len(data))**0.5\nwithin = sum(1 for x in data if abs(x-mean) <= std)\nprint(f\"Mean={mean}, Std={std:.1f}\")\nprint(f\"Within +/-1 sigma: {within}/{len(data)} = {within/len(data):.0%}\")\nprint(\"Empirical rule says 68% but actual is 90% — NOT normal\")',
     },
     {
       id: 'sd-39', difficulty: 3,
@@ -997,6 +1147,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 6: Try {7, 9, 10, 11, 13}', content: 'Mean = 50/5 = 10. Deviations: 9+1+0+1+9 = 20. σ² = 20/5 = **4**. σ = **2** ✓' },
       ],
       answer: 'One solution: {7, 9, 10, 11, 13} (others exist)',
+      code: '# Construct: mean=10, std=2\n\n# Your code here\n',
+      codeSolution: 'data = [7, 9, 10, 11, 13]\nmean = sum(data)/len(data)\nstd = (sum((x-mean)**2 for x in data)/len(data))**0.5\nprint(f\"Data: {data}\")\nprint(f\"Mean = {mean}, Std dev = {std}\")',
     },
     {
       id: 'sd-40', difficulty: 3,
@@ -1008,6 +1160,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 4: Substitute μ = E[X]', content: '= E[X²] − 2(E[X])² + (E[X])² = E[X²] − (E[X])²' },
       ],
       answer: 'Var(X) = E[X²] − (E[X])². This is often easier to compute than the definitional formula.',
+      code: '# Verify Var(X) = E[X^2] - (E[X])^2\ndata = [2, 4, 6]\n\n# Your code here\n',
+      codeSolution: 'data = [2, 4, 6]\nmean = sum(data)/len(data)\ne_x2 = sum(x**2 for x in data)/len(data)\nvar_def = sum((x-mean)**2 for x in data)/len(data)\nvar_comp = e_x2 - mean**2\nprint(f\"Var (definition) = {var_def:.4f}\")\nprint(f\"Var (E[X^2]-E[X]^2) = {var_comp:.4f}\")',
     },
     {
       id: 'sd-41', difficulty: 3,
@@ -1020,6 +1174,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 5: Combined σ', content: '√136.6 ≈ **$11.69k**' },
       ],
       answer: 'Combined σ² = 136.6 ($k²), σ ≈ $11.69k',
+      code: '# Combined variance of two divisions\nn_a, m_a, s_a = 30, 50, 5\nn_b, m_b, s_b = 20, 70, 8\n\n# Your code here\n',
+      codeSolution: 'n_a, m_a, s_a = 30, 50, 5\nn_b, m_b, s_b = 20, 70, 8\nn = n_a + n_b\ncm = (n_a*m_a + n_b*m_b) / n\nwithin = n_a*s_a**2 + n_b*s_b**2\nbetween = n_a*(m_a-cm)**2 + n_b*(m_b-cm)**2\ncv = (within + between) / n\nprint(f\"Combined var = {cv:.1f}, std = {cv**0.5:.2f}\")',
     },
     {
       id: 'sd-42', difficulty: 3,
@@ -1030,6 +1186,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 3: Every xᵢ = μ', content: 'All data values are **identical** — they all equal the mean.' },
       ],
       answer: 'All values in the dataset are identical.',
+      code: '# What does std dev = 0 mean?\ndata = [7, 7, 7, 7, 7]\n\n# Your code here\n',
+      codeSolution: 'data = [7, 7, 7, 7, 7]\nstd = (sum((x-sum(data)/len(data))**2 for x in data)/len(data))**0.5\nprint(f\"Std dev = {std}\")\nprint(\"All values are identical\")',
     },
     {
       id: 'sd-43', difficulty: 3,
@@ -1041,6 +1199,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Mathematical fact', content: 'E[s²] = σ² only when dividing by N−1. Dividing by N gives E[σ̂²] = ((N−1)/N)·σ², which is biased low.' },
       ],
       answer: 'N−1 corrects for the bias introduced by using the sample mean. The sample has N−1 independent deviations (degrees of freedom).',
+      code: '# Bessel\'s correction with N=2\na, b = 10, 20\n\n# Your code here\n',
+      codeSolution: 'a, b = 10, 20\nm = (a+b)/2\npv = ((a-m)**2 + (b-m)**2) / 2\nsv = ((a-m)**2 + (b-m)**2) / 1\nprint(f\"Pop var (N): {pv}\")\nprint(f\"Sample var (N-1): {sv}\")\nprint(\"Sample var is larger, correcting for bias\")',
     },
     {
       id: 'sd-44', difficulty: 3,
@@ -1053,6 +1213,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Verdict', content: 'With a strong outlier, **IQR** is the better measure — it\'s resistant to extreme values.' },
       ],
       answer: 'Use IQR (= 11.5). The outlier 250 inflates the std dev to 69.5, which is misleading.',
+      code: '# Std dev vs IQR with outlier\nincomes = [30, 35, 40, 42, 45, 48, 50, 250]\n\n# Your code here\n',
+      codeSolution: 'incomes = [30, 35, 40, 42, 45, 48, 50, 250]\nmean = sum(incomes)/len(incomes)\nstd = (sum((x-mean)**2 for x in incomes)/len(incomes))**0.5\ns = sorted(incomes)\nq1 = (s[1]+s[2])/2\nq3 = (s[5]+s[6])/2\nprint(f\"Std dev = {std:.1f}\")\nprint(f\"IQR = {q3-q1}\")\nprint(\"IQR better represents spread with outlier\")',
     },
     {
       id: 'sd-45', difficulty: 3,
@@ -1064,6 +1226,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 4: Tighter bound', content: 'Variance is maximized when data is split: half at a, half at b. Then μ = (a+b)/2 and σ² = ((b−a)/2)² = R²/4. So σ ≤ R/2.' },
       ],
       answer: 'σ ≤ R/2. Equality holds when exactly half the data is at each extreme.',
+      code: '# Verify: std dev <= range/2\ndata = [3, 3, 7, 7]\n\n# Your code here\n',
+      codeSolution: 'data = [3, 3, 7, 7]\nr = max(data)-min(data)\nm = sum(data)/len(data)\nstd = (sum((x-m)**2 for x in data)/len(data))**0.5\nprint(f\"Range/2 = {r/2}, Std = {std}\")\nprint(f\"Std <= Range/2: {std <= r/2}\")',
     },
     {
       id: 'sd-46', difficulty: 3,
@@ -1074,6 +1238,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 3: Compute', content: '1/(2.5²) = 1/6.25 = **0.16** = at most **16%**' },
       ],
       answer: 'At most 16% (by Chebyshev\'s inequality)',
+      code: '# Chebyshev: max P(|X-mu| >= 50), sigma=20\nsigma = 20\ndist = 50\n\n# Your code here\n',
+      codeSolution: 'sigma = 20\ndist = 50\nk = dist / sigma\nprint(f\"k = {k}\")\nprint(f\"Max probability = 1/k^2 = {1/k**2:.2f} = {1/k**2*100:.0f}%\")',
     },
     {
       id: 'sd-47', difficulty: 3,
@@ -1100,6 +1266,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Result', content: 'Var(X+Y) = Var(X) + Var(Y)' },
       ],
       answer: 'Var(X+Y) = Var(X) + Var(Y). The cross-term vanishes because independence implies Cov(X,Y) = 0.',
+      code: '# Verify Var(X+Y) = Var(X) + Var(Y)\nimport random\n\n# Your code here\n',
+      codeSolution: 'import random\nrandom.seed(42)\nX = [random.gauss(0, 3) for _ in range(10000)]\nY = [random.gauss(0, 4) for _ in range(10000)]\nZ = [x+y for x,y in zip(X,Y)]\ndef v(d):\n    m=sum(d)/len(d)\n    return sum((x-m)**2 for x in d)/len(d)\nprint(f\"Var(X)={v(X):.1f}, Var(Y)={v(Y):.1f}\")\nprint(f\"Var(X+Y)={v(Z):.1f} (expect ~25)\")',
     },
     {
       id: 'sd-49', difficulty: 3,
@@ -1110,6 +1278,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Step 3: Solve', content: 'Adding: 2μ = 160, so μ = **80**. Subtracting: 4σ = 40, so σ = **10**.' },
       ],
       answer: 'Mean = 80, Standard deviation = 10',
+      code: '# Design test: 95% between 60-100\nlow, high = 60, 100\n\n# Your code here\n',
+      codeSolution: 'low, high = 60, 100\nmu = (low+high)/2\nsigma = (high-low)/4\nprint(f\"Mean = {mu}, Std dev = {sigma}\")',
     },
     {
       id: 'sd-50', difficulty: 3,
@@ -1123,6 +1293,8 @@ export const practiceStdDevVariance: PracticeSet = {
         { label: 'Definitive answer', content: 'Yes! Mean and σ do NOT uniquely determine the distribution shape.\nA = {1, 1, 1, 1, 1, 11} has mean=2.67, bimodal/skewed.\nSimplest proof: uniform {1,2,3,4,5} vs {1,1,3,5,5} — same mean (3) and same σ² = 2 ÷ — adjust values to match. The point: infinitely many distributions share the same mean and variance.' },
       ],
       answer: 'Yes. Mean and standard deviation only capture center and spread, not shape. E.g., a symmetric dataset and a skewed dataset can share the same mean and σ.',
+      code: '# Same mean and std, different shapes?\na = [2, 4, 6, 8, 10]\n\n# Your code here\n',
+      codeSolution: 'a = [2, 4, 6, 8, 10]\nm = sum(a)/len(a)\nstd = (sum((x-m)**2 for x in a)/len(a))**0.5\nprint(f\"A={a}: mean={m}, std={std:.2f}\")\nprint(\"Yes — different distributions can share same mean and std\")',
     },
   ],
 };
@@ -1142,6 +1314,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 2: Apply rule', content: 'Within ±1σ → about **68%**.' },
       ],
       answer: '≈ 68%',
+      code: '# N(50,10). % between 40-60?\nmu, sigma = 50, 10\n\n# Your code here\n',
+      codeSolution: 'mu, sigma = 50, 10\nprint(f\"z: {(40-mu)/sigma} to {(60-mu)/sigma}\")\nprint(\"Within +/-1 sigma -> ~68%\")',
     },
     {
       id: 'nd-02', difficulty: 1,
@@ -1152,6 +1326,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 2: Apply rule', content: 'Within ±2σ → about **95%**.' },
       ],
       answer: '≈ 95%',
+      code: '# N(100,15). % between 70-130?\nmu, sigma = 100, 15\n\n# Your code here\n',
+      codeSolution: 'mu, sigma = 100, 15\nprint(f\"z: {(70-mu)/sigma} to {(130-mu)/sigma}\")\nprint(\"Within +/-2 sigma -> ~95%\")',
     },
     {
       id: 'nd-03', difficulty: 1,
@@ -1160,6 +1336,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 1: Formula', content: 'z = (x − μ)/σ = (82 − 75)/7 = **1.0**' },
       ],
       answer: 'z = 1.0',
+      code: '# z-score: x=82, mu=75, sigma=7\nx, mu, sigma = 82, 75, 7\n\n# Your code here\n',
+      codeSolution: 'x, mu, sigma = 82, 75, 7\nprint(f\"z = {(x-mu)/sigma:.1f}\")',
     },
     {
       id: 'nd-04', difficulty: 1,
@@ -1168,6 +1346,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 1: Formula', content: 'z = (120 − 150)/20 = −30/20 = **−1.5**' },
       ],
       answer: 'z = −1.5',
+      code: '# z-score: x=120, mu=150, sigma=20\nx, mu, sigma = 120, 150, 20\n\n# Your code here\n',
+      codeSolution: 'x, mu, sigma = 120, 150, 20\nprint(f\"z = {(x-mu)/sigma}\")',
     },
     {
       id: 'nd-05', difficulty: 1,
@@ -1178,6 +1358,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 2: Also', content: 'For a normal distribution, mean = median = mode. They all coincide at the peak.' },
       ],
       answer: 'The peak is at the mean (μ). Mean = median = mode for a normal distribution.',
+      code: '# Where is the peak of a normal curve?\n\n# Your code here\n',
+      codeSolution: 'print(\"The peak is at the mean (mu)\")\nprint(\"For normal: mean = median = mode\")',
     },
     {
       id: 'nd-06', difficulty: 1,
@@ -1187,6 +1369,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 2: Apply rule', content: 'Within ±3σ → about **99.7%**.' },
       ],
       answer: '≈ 99.7%',
+      code: '# N(500,100). % between 200-800?\nmu, sigma = 500, 100\n\n# Your code here\n',
+      codeSolution: 'mu, sigma = 500, 100\nprint(f\"z: {(200-mu)/sigma} to {(800-mu)/sigma}\")\nprint(\"Within +/-3 sigma -> ~99.7%\")',
     },
     {
       id: 'nd-07', difficulty: 1,
@@ -1196,6 +1380,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 2: Meaning', content: 'A z-score of 0 means the student scored exactly at the mean — right in the middle.' },
       ],
       answer: 'z = 0 (the student scored exactly at the mean)',
+      code: '# z-score when scoring at the mean\nx, mu, sigma = 70, 70, 10\n\n# Your code here\n',
+      codeSolution: 'x, mu, sigma = 70, 70, 10\nprint(f\"z = {(x-mu)/sigma} (exactly at the mean)\")',
     },
     {
       id: 'nd-08', difficulty: 1,
@@ -1205,6 +1391,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 2: Higher |z| = more unusual', content: 'z = +2.5 is further from the mean, so it is **more unusual**.' },
       ],
       answer: 'z = +2.5 is more unusual (further from the mean)',
+      code: '# More unusual: z=+2.5 or z=-1.8?\nz1, z2 = 2.5, -1.8\n\n# Your code here\n',
+      codeSolution: 'z1, z2 = 2.5, -1.8\nprint(f\"|z1|={abs(z1)}, |z2|={abs(z2)}\")\nprint(f\"z={z1} is more unusual\")',
     },
     {
       id: 'nd-09', difficulty: 1,
@@ -1215,6 +1403,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 2: Empirical rule', content: 'Within ±1σ → about **68%**.' },
       ],
       answer: '≈ 68%',
+      code: '# Heights N(170,8). % between 162-178?\nmu, sigma = 170, 8\n\n# Your code here\n',
+      codeSolution: 'mu, sigma = 170, 8\nprint(f\"z: {(162-mu)/sigma} to {(178-mu)/sigma}\")\nprint(\"Within +/-1 sigma -> ~68%\")',
     },
     {
       id: 'nd-10', difficulty: 1,
@@ -1224,6 +1414,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 2: Empirical rule', content: '99.7% within ±3σ → 0.3% outside → 0.15% above +3σ.' },
       ],
       answer: '≈ 0.15%',
+      code: '# N(30,5). % above 45?\nmu, sigma = 30, 5\n\n# Your code here\n',
+      codeSolution: 'mu, sigma = 30, 5\nprint(f\"z = {(45-mu)/sigma}\")\nprint(\"Above +3 sigma -> ~0.15%\")',
     },
     {
       id: 'nd-11', difficulty: 1,
@@ -1233,6 +1425,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 2: Empirical rule', content: 'Within ±2σ → about **95%**.' },
       ],
       answer: '≈ 95%',
+      code: '# Oranges: N(200,30). % between 140-260?\nmu, sigma = 200, 30\n\n# Your code here\n',
+      codeSolution: 'mu, sigma = 200, 30\nprint(f\"z: {(140-mu)/sigma} to {(260-mu)/sigma}\")\nprint(\"Within +/-2 sigma -> ~95%\")',
     },
     {
       id: 'nd-12', difficulty: 1,
@@ -1242,6 +1436,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 2: Therefore', content: 'Exactly **50%** of data is above the mean and 50% below.' },
       ],
       answer: 'True — the normal curve is symmetric, so exactly 50% lies above (and 50% below) the mean.',
+      code: '# Is 50% above the mean?\n\n# Your code here\n',
+      codeSolution: 'from statistics import NormalDist\nd = NormalDist(mu=100, sigma=15)\nprint(f\"P(X > mu) = {1 - d.cdf(100):.4f}\")\nprint(\"True — symmetric, 50% above mean\")',
     },
     {
       id: 'nd-13', difficulty: 1,
@@ -1250,6 +1446,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 1: z = (35 − 40)/2.5', content: '= −5/2.5 = **−2.0**' },
       ],
       answer: 'z = −2.0',
+      code: '# z-score: x=35, mu=40, sigma=2.5\nx, mu, sigma = 35, 40, 2.5\n\n# Your code here\n',
+      codeSolution: 'x, mu, sigma = 35, 40, 2.5\nprint(f\"z = {(x-mu)/sigma}\")',
     },
     {
       id: 'nd-14', difficulty: 1,
@@ -1258,6 +1456,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 1: Reverse z formula', content: 'x = μ + z·σ = 50 + 1.0×12 = **62**' },
       ],
       answer: 'x = 62',
+      code: '# Reverse z: find x\nz, mu, sigma = 1.0, 50, 12\n\n# Your code here\n',
+      codeSolution: 'z, mu, sigma = 1.0, 50, 12\nx = mu + z * sigma\nprint(f\"x = {x}\")',
     },
     {
       id: 'nd-15', difficulty: 1,
@@ -1268,6 +1468,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 2: Empirical rule', content: 'About **68%** within ±1σ.' },
       ],
       answer: '≈ 68%',
+      code: '# Standard normal: % between -1 and +1?\n\n# Your code here\n',
+      codeSolution: 'from statistics import NormalDist\nd = NormalDist()\nprob = d.cdf(1) - d.cdf(-1)\nprint(f\"P(-1<Z<1) = {prob:.4f} = {prob*100:.2f}%\")',
     },
     {
       id: 'nd-16', difficulty: 1,
@@ -1277,6 +1479,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 2: Visual', content: 'Since total area = 1, a narrow curve must be **tall**.' },
       ],
       answer: 'Tall and narrow. Smaller σ means less spread, so the curve is more concentrated.',
+      code: '# Small sigma -> what shape?\n\n# Your code here\n',
+      codeSolution: 'from statistics import NormalDist\nd1 = NormalDist(0, 1)\nd3 = NormalDist(0, 3)\nprint(f\"sigma=1 peak: {d1.pdf(0):.4f}\")\nprint(f\"sigma=3 peak: {d3.pdf(0):.4f}\")\nprint(\"Smaller sigma -> taller, narrower\")',
     },
     {
       id: 'nd-17', difficulty: 1,
@@ -1286,6 +1490,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 2: Interpretation', content: 'z = 2.0 means 2 std deviations above the mean. Only about 2.5% of people have temperatures this high or higher.' },
       ],
       answer: 'z = 2.0 — yes, this is unusual (only ~2.5% of values are this high or above)',
+      code: '# Body temp N(98.6, 0.7). Is 100.0 unusual?\nx, mu, sigma = 100.0, 98.6, 0.7\n\n# Your code here\n',
+      codeSolution: 'from statistics import NormalDist\nx, mu, sigma = 100.0, 98.6, 0.7\nz = (x-mu)/sigma\np = 1 - NormalDist(mu, sigma).cdf(x)\nprint(f\"z = {z:.1f}\")\nprint(f\"Only {p:.1%} this high or higher — unusual\")',
     },
     // ── Medium (18-34) ─────────────────────────────────────
     {
@@ -1297,6 +1503,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 2: Compute', content: '1 − 0.8413 = **0.1587** = 15.87%' },
       ],
       answer: 'P(Z > 1.0) = 0.1587 (15.87%)',
+      code: '# P(Z > 1.0)\n\n# Your code here\n',
+      codeSolution: 'p = 1 - 0.8413\nprint(f\"P(Z > 1.0) = {p:.4f} = {p*100:.2f}%\")',
     },
     {
       id: 'nd-19', difficulty: 2,
@@ -1307,6 +1515,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 2: Compute', content: 'P(Z < 1.5) − P(Z < −1.0) = 0.9332 − 0.1587 = **0.7745**' },
       ],
       answer: 'P(−1.0 < Z < 1.5) = 0.7745 (77.45%)',
+      code: '# P(-1.0 < Z < 1.5)\n\n# Your code here\n',
+      codeSolution: 'from statistics import NormalDist\nd = NormalDist()\nprob = d.cdf(1.5) - d.cdf(-1.0)\nprint(f\"P(-1<Z<1.5) = {prob:.4f} = {prob*100:.2f}%\")',
     },
     {
       id: 'nd-20', difficulty: 2,
@@ -1329,6 +1539,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 2: Convert to IQ', content: 'x = μ + z·σ = 100 + 1.28×15 = 100 + 19.2 = **119.2**' },
       ],
       answer: 'IQ ≈ 119 separates the top 10%',
+      code: '# IQ: N(100,15). Top 10% cutoff?\nmu, sigma = 100, 15\n\n# Your code here\n',
+      codeSolution: 'from statistics import NormalDist\nd = NormalDist(mu=100, sigma=15)\nprint(f\"Top 10% cutoff: IQ = {d.inv_cdf(0.90):.1f}\")',
     },
     {
       id: 'nd-22', difficulty: 2,
@@ -1339,6 +1551,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 2: Subtract', content: 'P(0 < Z < 2.0) = P(Z < 2.0) − P(Z < 0) = 0.9772 − 0.5 = **0.4772**' },
       ],
       answer: 'P(0 < Z < 2.0) = 0.4772 (47.72%)',
+      code: '# P(0 < Z < 2.0)\n\n# Your code here\n',
+      codeSolution: 'from statistics import NormalDist\nd = NormalDist()\nprob = d.cdf(2.0) - d.cdf(0)\nprint(f\"P(0<Z<2) = {prob:.4f} = {prob*100:.2f}%\")',
     },
     {
       id: 'nd-23', difficulty: 2,
@@ -1349,6 +1563,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 3: Answer', content: 'About **2.28%** of bottles are rejected.' },
       ],
       answer: '≈ 2.28% of bottles are rejected',
+      code: '# Bottles: N(500,8). Rejected if < 484?\nmu, sigma = 500, 8\n\n# Your code here\n',
+      codeSolution: 'from statistics import NormalDist\nd = NormalDist(mu=500, sigma=8)\nprint(f\"P(X<484) = {d.cdf(484):.4f} = {d.cdf(484)*100:.2f}%\")',
     },
     {
       id: 'nd-24', difficulty: 2,
@@ -1359,6 +1575,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 3: Percentiles', content: 'Alex: P(Z < 1.33) ≈ 0.908 (91st percentile). Jamie: P(Z < 2.5) = 0.9938 (99th percentile).' },
       ],
       answer: 'Jamie is at a higher percentile (99th vs 91st) despite a lower raw score',
+      code: '# Compare percentiles: Alex vs Jamie\n\n# Your code here\n',
+      codeSolution: 'from statistics import NormalDist\nza = (88-80)/6\nzj = (75-65)/4\nd = NormalDist()\nprint(f\"Alex: z={za:.2f}, pctl={d.cdf(za):.1%}\")\nprint(f\"Jamie: z={zj:.2f}, pctl={d.cdf(zj):.1%}\")',
     },
     {
       id: 'nd-25', difficulty: 2,
@@ -1369,6 +1587,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 2: Compute', content: '0.9938 − 0.0668 = **0.9270** = 92.70%' },
       ],
       answer: 'P(−1.5 < Z < 2.5) = 0.9270 (92.70%)',
+      code: '# P(-1.5 < Z < 2.5)\n\n# Your code here\n',
+      codeSolution: 'from statistics import NormalDist\nd = NormalDist()\nprob = d.cdf(2.5) - d.cdf(-1.5)\nprint(f\"P(-1.5<Z<2.5) = {prob:.4f} = {prob*100:.2f}%\")',
     },
     {
       id: 'nd-26', difficulty: 2,
@@ -1378,6 +1598,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 2: P(X < 36)', content: 'P(Z < −2.0) = 1 − 0.9772 = **0.0228** = 2.28%' },
       ],
       answer: '≈ 2.28% of batteries fail the guarantee',
+      code: '# Battery: N(48,6). Fail if < 36 hours?\nmu, sigma = 48, 6\n\n# Your code here\n',
+      codeSolution: 'from statistics import NormalDist\nd = NormalDist(mu=48, sigma=6)\nprint(f\"P(X<36) = {d.cdf(36):.4f} = {d.cdf(36)*100:.2f}%\")',
     },
     {
       id: 'nd-27', difficulty: 2,
@@ -1388,6 +1610,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 3: Compare', content: 'The woman (z=1.6) is relatively taller within her group than the man (z=1.33).' },
       ],
       answer: 'The woman is relatively taller (z = 1.6 vs z = 1.33)',
+      code: '# Relative height: woman vs man\n\n# Your code here\n',
+      codeSolution: 'zw = (68-64)/2.5\nzm = (74-70)/3\nprint(f\"Woman z={zw}, Man z={zm:.2f}\")\nprint(\"Woman is relatively taller\")',
     },
     {
       id: 'nd-28', difficulty: 2,
@@ -1397,6 +1621,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 2: Convert', content: 'x = μ + z·σ = 200 + 0.675×40 = 200 + 27 = **227**' },
       ],
       answer: '75th percentile = 227',
+      code: '# 75th percentile of N(200,40)\nmu, sigma = 200, 40\n\n# Your code here\n',
+      codeSolution: 'from statistics import NormalDist\nd = NormalDist(mu=200, sigma=40)\nprint(f\"75th percentile = {d.inv_cdf(0.75):.0f}\")',
     },
     {
       id: 'nd-29', difficulty: 2,
@@ -1407,6 +1633,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 3: Round up', content: 'Minimum score for an A: **87**' },
       ],
       answer: 'Minimum A score ≈ 87',
+      code: '# Top 5% gets A: N(72,9)\nmu, sigma = 72, 9\n\n# Your code here\n',
+      codeSolution: 'from statistics import NormalDist\nd = NormalDist(mu=72, sigma=9)\nprint(f\"Min A score = {d.inv_cdf(0.95):.1f}\")',
     },
     {
       id: 'nd-30', difficulty: 2,
@@ -1416,6 +1644,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 2: Read', content: 'P(Z < 0.5) = **0.6915** = 69.15%' },
       ],
       answer: 'P(Z > −0.5) = 0.6915 (69.15%)',
+      code: '# P(Z > -0.5)\n\n# Your code here\n',
+      codeSolution: 'from statistics import NormalDist\nd = NormalDist()\nprint(f\"P(Z>-0.5) = {1-d.cdf(-0.5):.4f} = {(1-d.cdf(-0.5))*100:.2f}%\")',
     },
     {
       id: 'nd-31', difficulty: 2,
@@ -1438,6 +1668,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 3: Number of bulbs', content: '200 × 0.0228 = **4.56** ≈ about **5 bulbs**' },
       ],
       answer: '≈ 5 out of 200 bulbs',
+      code: '# Bulbs: N(1000,100). Of 200, how many > 1200?\n\n# Your code here\n',
+      codeSolution: 'from statistics import NormalDist\nd = NormalDist(mu=1000, sigma=100)\np = 1 - d.cdf(1200)\nprint(f\"P(X>1200) = {p:.4f}\")\nprint(f\"Expected: {p*200:.1f} out of 200\")',
     },
     {
       id: 'nd-33', difficulty: 2,
@@ -1447,6 +1679,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 2: Convert', content: 'x = 50 + 1.0×5 = **55**' },
       ],
       answer: 'x = 55 (the 84.13th percentile)',
+      code: '# N(50,5). 84.13th percentile?\nmu, sigma = 50, 5\n\n# Your code here\n',
+      codeSolution: 'from statistics import NormalDist\nd = NormalDist(mu=50, sigma=5)\nprint(f\"84.13th percentile = {d.inv_cdf(0.8413):.0f}\")',
     },
     {
       id: 'nd-34', difficulty: 2,
@@ -1457,6 +1691,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 2: P(−1 < Z < 1)', content: 'P(Z<1) − P(Z<−1) = 0.8413 − 0.1587 = **0.6826** ≈ 68.26%.' },
       ],
       answer: 'P(220 < X < 280) ≈ 0.6826 (68.26%)',
+      code: '# Reaction times: N(250,30). P(220<X<280)?\nmu, sigma = 250, 30\n\n# Your code here\n',
+      codeSolution: 'from statistics import NormalDist\nd = NormalDist(mu=250, sigma=30)\nprob = d.cdf(280) - d.cdf(220)\nprint(f\"P(220<X<280) = {prob:.4f} = {prob*100:.2f}%\")',
     },
     // ── Hard (35-50) ───────────────────────────────────────
     {
@@ -1469,6 +1705,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 4: Distribution', content: 'X̄ ~ N(80, 2) approximately.' },
       ],
       answer: 'X̄ ~ N(80, 2). The sample mean has the same center but much less spread (σ/√n = 2).',
+      code: '# CLT: mu=80, sigma=12, n=36\nmu, sigma, n = 80, 12, 36\n\n# Your code here\n',
+      codeSolution: 'mu, sigma, n = 80, 12, 36\nse = sigma / n**0.5\nprint(f\"X-bar ~ N({mu}, {se:.1f})\")\nprint(f\"Std error = {se}\")',
     },
     {
       id: 'nd-36', difficulty: 3,
@@ -1480,6 +1718,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Contrast', content: 'For a single bolt: P(9.8 < X < 10.2) with z = ±0.4, giving only about 31%. Sampling greatly reduces uncertainty!' },
       ],
       answer: '≈ 95.44% (much higher than the 31% for a single bolt)',
+      code: '# Bolts: N(10,0.5), n=25. P(9.8<X-bar<10.2)?\n\n# Your code here\n',
+      codeSolution: 'from statistics import NormalDist\nse = 0.5 / 25**0.5\nd = NormalDist(mu=10.0, sigma=se)\nprob = d.cdf(10.2) - d.cdf(9.8)\nprint(f\"SE={se}, P={prob:.4f} = {prob*100:.2f}%\")',
     },
     {
       id: 'nd-37', difficulty: 3,
@@ -1490,6 +1730,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 3: Round', content: 'A score of at least **706** is needed.' },
       ],
       answer: 'Minimum score ≈ 706',
+      code: '# Scholarship: top 2% of N(500,100)\n\n# Your code here\n',
+      codeSolution: 'from statistics import NormalDist\nd = NormalDist(mu=500, sigma=100)\nprint(f\"Min score = {d.inv_cdf(0.98):.1f}\")',
     },
     {
       id: 'nd-38', difficulty: 3,
@@ -1501,6 +1743,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Interpretation', content: 'Only a 2.28% chance of getting a sample mean this low or lower. This is quite unusual — the trees in this park may genuinely be shorter than average.' },
       ],
       answer: 'P(X̄ ≤ 13) ≈ 0.0228 (2.28%). This is unusual — suggests these trees may come from a different population.',
+      code: '# Trees: N(15,3), n=9. P(X-bar<=13)?\n\n# Your code here\n',
+      codeSolution: 'from statistics import NormalDist\nse = 3 / 9**0.5\nd = NormalDist(mu=15, sigma=se)\nprint(f\"SE={se}, P(X-bar<=13) = {d.cdf(13):.4f}\")',
     },
     {
       id: 'nd-39', difficulty: 3,
@@ -1512,6 +1756,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Interpretation', content: 'We are 95% confident the true population mean lies between 81.08 and 88.92.' },
       ],
       answer: '95% CI: (81.08, 88.92)',
+      code: '# 95% CI: sigma=20, n=100, x_bar=85\nsigma, n, x_bar = 20, 100, 85\n\n# Your code here\n',
+      codeSolution: 'sigma, n, x_bar = 20, 100, 85\nse = sigma / n**0.5\nme = 1.96 * se\nprint(f\"95% CI: ({x_bar-me:.2f}, {x_bar+me:.2f})\")',
     },
     {
       id: 'nd-40', difficulty: 3,
@@ -1523,6 +1769,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Key insight', content: 'To halve the width, you need to **quadruple** n (because of the √n in the denominator).' },
       ],
       answer: 'Larger n → narrower CI. To halve the width, quadruple n.',
+      code: '# How does n affect CI width?\nsigma = 10\n\n# Your code here\n',
+      codeSolution: 'sigma = 10\nfor n in [25, 100, 400, 1600]:\n    w = 2 * 1.96 * sigma / n**0.5\n    print(f\"n={n}: width={w:.2f}\")\nprint(\"Quadruple n to halve width\")',
     },
     {
       id: 'nd-41', difficulty: 3,
@@ -1533,6 +1781,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 3: Parameters of X̄', content: 'μ_X̄ = 30, σ_X̄ = 15/√50 ≈ 2.12. The empirical rule applies to this sampling distribution.' },
       ],
       answer: 'Not for individual values (skewed). Yes for X̄ with n=50 (CLT makes the sampling distribution approximately normal).',
+      code: '# CLT for skewed data\nmu, sigma, n = 30, 15, 50\n\n# Your code here\n',
+      codeSolution: 'mu, sigma, n = 30, 15, 50\nse = sigma / n**0.5\nprint(f\"Individual: skewed, mu={mu}, sigma={sigma}\")\nprint(f\"X-bar: ~Normal({mu}, {se:.2f})\")',
     },
     {
       id: 'nd-42', difficulty: 3,
@@ -1556,6 +1806,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 3: P(Total > 505)', content: 'P(Z > 1.67) ≈ 1 − 0.9525 = **0.0475** ≈ 4.75%' },
       ],
       answer: '≈ 4.75% chance the total weight exceeds 505 kg',
+      code: '# Packages: N(5,0.3), n=100. P(total>505)?\n\n# Your code here\n',
+      codeSolution: 'from statistics import NormalDist\ntotal_mu = 100 * 5.0\ntotal_sigma = 100**0.5 * 0.3\nd = NormalDist(mu=total_mu, sigma=total_sigma)\nprint(f\"Total ~ N({total_mu}, {total_sigma})\")\nprint(f\"P(total>505) = {1-d.cdf(505):.4f}\")',
     },
     {
       id: 'nd-44', difficulty: 3,
@@ -1567,6 +1819,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 4: F cutoff (10th percentile)', content: 'x = 72 + (−1.28)×9 = 72 − 11.52 = **60.5**' },
       ],
       answer: 'A: ≥ 84, B: 77–83, C: 67–76, D: 61–66, F: ≤ 60',
+      code: '# Grading on curve: N(72,9)\n\n# Your code here\n',
+      codeSolution: 'from statistics import NormalDist\nd = NormalDist(mu=72, sigma=9)\nprint(f\"A: >= {d.inv_cdf(0.90):.1f}\")\nprint(f\"B: >= {d.inv_cdf(0.70):.1f}\")\nprint(f\"D: >= {d.inv_cdf(0.10):.1f}\")\nprint(f\"F: < {d.inv_cdf(0.10):.1f}\")',
     },
     {
       id: 'nd-45', difficulty: 3,
@@ -1578,6 +1832,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Key warning', content: 'Applying z-tables or the 68-95-99.7 rule to non-normal data gives **wrong answers**. Always check normality first (histogram, Q-Q plot).' },
       ],
       answer: 'Income (right-skewed), earthquake magnitudes (power law), family size (discrete, bounded at 0). Normal assumptions fail for all three.',
+      code: '# Non-normal data examples\n\n# Your code here\n',
+      codeSolution: 'import random\nrandom.seed(42)\ndata = [random.expovariate(1/50000) for _ in range(1000)]\nm = sum(data)/len(data)\nmed = sorted(data)[500]\nprint(f\"Income-like: mean={m:.0f}, median={med:.0f}\")\nprint(\"Mean > Median -> right-skewed, NOT normal\")',
     },
     {
       id: 'nd-46', difficulty: 3,
@@ -1588,6 +1844,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Comparison', content: 'Machine B produces far fewer rejects (0.13% vs 15.87%) due to both higher mean and lower σ.' },
       ],
       answer: 'Machine B: only 0.13% rejects vs Machine A\'s 15.87%',
+      code: '# Machines: A:N(500,10), B:N(505,5). Rejects<490?\n\n# Your code here\n',
+      codeSolution: 'from statistics import NormalDist\na = NormalDist(mu=500, sigma=10)\nb = NormalDist(mu=505, sigma=5)\nprint(f\"A rejects: {a.cdf(490)*100:.2f}%\")\nprint(f\"B rejects: {b.cdf(490)*100:.2f}%\")',
     },
     {
       id: 'nd-47', difficulty: 3,
@@ -1600,6 +1858,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Significance', content: 'This is why 1.96 is the magic number for 95% confidence intervals!' },
       ],
       answer: 'P = 0.95 (95%). This is the foundation of the 95% confidence interval.',
+      code: '# P(mu-1.96*sigma < X < mu+1.96*sigma)\n\n# Your code here\n',
+      codeSolution: 'from statistics import NormalDist\nd = NormalDist()\nprob = d.cdf(1.96) - d.cdf(-1.96)\nprint(f\"P(-1.96<Z<1.96) = {prob:.4f}\")\nprint(\"This is why 1.96 = 95% CI\")',
     },
     {
       id: 'nd-48', difficulty: 3,
@@ -1610,6 +1870,8 @@ export const practiceNormalDistribution: PracticeSet = {
         { label: 'Step 3: Probability', content: 'P(−2.04 < Z < 2.04) ≈ 0.9793 − 0.0207 = **0.9586** ≈ 95.9%' },
       ],
       answer: '≈ 95.9% probability the sample proportion is within ±0.05 of the true value',
+      code: '# CLT for proportions: p=0.60, n=400\nimport math\np, n = 0.60, 400\n\n# Your code here\n',
+      codeSolution: 'import math\nfrom statistics import NormalDist\np, n = 0.60, 400\nse = math.sqrt(p*(1-p)/n)\nd = NormalDist(mu=p, sigma=se)\nprob = d.cdf(0.65) - d.cdf(0.55)\nprint(f\"SE={se:.4f}\")\nprint(f\"P(0.55<p-hat<0.65) = {prob:.4f} = {prob*100:.1f}%\")',
     },
     {
       id: 'nd-49', difficulty: 3,
