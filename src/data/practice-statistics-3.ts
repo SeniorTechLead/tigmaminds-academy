@@ -35,6 +35,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Compute', content: '= 2 · 0.1353 / 1 = **0.2707**' },
       ],
       answer: '0.2707',
+      code: 'import math\nlam = 2\nk = 1\n# Your code here\n',
+      codeSolution: 'import math\nlam = 2\nk = 1\nprob = (lam**k) * math.exp(-lam) / math.factorial(k)\nprint(f"P(X = {k}) = {prob:.4f}")',
     },
     {
       id: 'poi-03', difficulty: 1,
@@ -44,6 +46,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Compute', content: '= 4 · 0.1353 / 2 = **0.2707**' },
       ],
       answer: '0.2707',
+      code: 'import math\nlam = 2\nk = 2\n# Your code here\n',
+      codeSolution: 'import math\nlam = 2\nk = 2\nprob = (lam**k) * math.exp(-lam) / math.factorial(k)\nprint(f"P(X = {k}) = {prob:.4f}")',
     },
     {
       id: 'poi-04', difficulty: 1,
@@ -53,6 +57,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Compute', content: '= 1 · 0.0498 / 1 = **0.0498**' },
       ],
       answer: '0.0498',
+      code: 'import math\nlam = 3\nk = 0\n# Your code here\n',
+      codeSolution: 'import math\nlam = 3\nk = 0\nprob = (lam**k) * math.exp(-lam) / math.factorial(k)\nprint(f"P(X = {k}) = {prob:.4f}")',
     },
     {
       id: 'poi-05', difficulty: 1,
@@ -63,6 +69,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Answer', content: 'Mean = **5**' },
       ],
       answer: '5',
+      code: 'lam = 5\n# Your code here\n',
+      codeSolution: 'lam = 5\nprint(f"Mean = {lam}")',
     },
     {
       id: 'poi-06', difficulty: 1,
@@ -73,6 +81,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Answer', content: 'Variance = **5**' },
       ],
       answer: '5',
+      code: 'lam = 5\n# Your code here\n',
+      codeSolution: 'lam = 5\nprint(f"Variance = {lam}")',
     },
     {
       id: 'poi-07', difficulty: 1,
@@ -96,6 +106,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Insight', content: 'λ is simply the average number of events in the time window you are studying.' },
       ],
       answer: '1',
+      code: '# Your code here\n',
+      codeSolution: 'lam = 1  # 1 customer per 10-minute window\nprint(f"lambda = {lam}")',
     },
     {
       id: 'poi-09', difficulty: 1,
@@ -105,6 +117,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Compute', content: '= 1 · 0.3679 / 1 = **0.3679**' },
       ],
       answer: '0.3679',
+      code: 'import math\nlam = 1\nk = 0\n# Your code here\n',
+      codeSolution: 'import math\nlam = 1\nk = 0\nprob = (lam**k) * math.exp(-lam) / math.factorial(k)\nprint(f"P(X = {k}) = {prob:.4f}")',
     },
     {
       id: 'poi-10', difficulty: 1,
@@ -114,6 +128,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Compute', content: '= 1 · 0.3679 / 1 = **0.3679**' },
       ],
       answer: '0.3679',
+      code: 'import math\nlam = 1\nk = 1\n# Your code here\n',
+      codeSolution: 'import math\nlam = 1\nk = 1\nprob = (lam**k) * math.exp(-lam) / math.factorial(k)\nprint(f"P(X = {k}) = {prob:.4f}")',
     },
     {
       id: 'poi-11', difficulty: 1,
@@ -126,6 +142,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Apply formula', content: 'P(X = 5) = 3125 · 0.0067 / 120 = 20.9375 / 120 = **0.1755**' },
       ],
       answer: '0.1755',
+      code: 'import math\nlam = 5\nk = 5\n# Your code here\n',
+      codeSolution: 'import math\nlam = 5\nk = 5\nprob = (lam**k) * math.exp(-lam) / math.factorial(k)\nprint(f"P(X = {k}) = {prob:.4f}")',
     },
     {
       id: 'poi-12', difficulty: 1,
@@ -137,6 +155,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Formula', content: 'P(X = 4) = 81 · 0.0498 / 24 = 4.0338 / 24 = **0.1681**' },
       ],
       answer: '0.1681',
+      code: 'import math\nlam = 3\nk = 4\n# Your code here\n',
+      codeSolution: 'import math\nlam = 3\nk = 4\nprob = (lam**k) * math.exp(-lam) / math.factorial(k)\nprint(f"P(X = {k}) = {prob:.4f}")',
     },
     {
       id: 'poi-13', difficulty: 1,
@@ -146,6 +166,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Compute', content: 'P(X = 2) = 2² · e^(−2) / 2! = 4 · 0.1353 / 2 = **0.2707**' },
       ],
       answer: '0.2707',
+      code: 'import math\nlam = 2\nk = 2\n# Your code here\n',
+      codeSolution: 'import math\nlam = 2\nk = 2\nprob = (lam**k) * math.exp(-lam) / math.factorial(k)\nprint(f"P(X = {k}) = {prob:.4f}")',
     },
     {
       id: 'poi-14', difficulty: 1,
@@ -155,6 +177,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Standard deviation', content: 'σ = √λ = √4 = **2**' },
       ],
       answer: '2',
+      code: 'import math\nlam = 4\n# Your code here\n',
+      codeSolution: 'import math\nlam = 4\nsd = math.sqrt(lam)\nprint(f"SD = {sd:.0f}")',
     },
     {
       id: 'poi-15', difficulty: 1,
@@ -165,6 +189,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Compute', content: 'P(X = 3) = 3³ · e^(−3) / 3! = 27 · 0.0498 / 6 = 1.3446 / 6 = **0.2240**' },
       ],
       answer: '0.2240',
+      code: 'import math\nlam = 3\nk = 3\n# Your code here\n',
+      codeSolution: 'import math\nlam = 3\nk = 3\nprob = (lam**k) * math.exp(-lam) / math.factorial(k)\nprint(f"P(X = {k}) = {prob:.4f}")',
     },
     {
       id: 'poi-16', difficulty: 1,
@@ -192,6 +218,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Result', content: 'P(X = 6) = 46656 · 0.00248 / 720 = 115.71 / 720 = **0.1606**' },
       ],
       answer: '0.1606',
+      code: 'import math\nlam = 6\nk = 6\n# Your code here\n',
+      codeSolution: 'import math\nlam = 6\nk = 6\nprob = (lam**k) * math.exp(-lam) / math.factorial(k)\nprint(f"P(X = {k}) = {prob:.4f}")',
     },
 
     // ── Medium (18-34) ─────────────────────────────────────
@@ -217,6 +245,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Result', content: 'P(X ≥ 1) = 1 − 0.0498 = **0.9502**' },
       ],
       answer: '0.9502',
+      code: 'import math\nlam = 3\n# Your code here\n',
+      codeSolution: 'import math\nlam = 3\np0 = math.exp(-lam)\nprint(f"P(X >= 1) = {1 - p0:.4f}")',
     },
     {
       id: 'poi-20', difficulty: 2,
@@ -227,6 +257,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Insight', content: 'Sum of independent Poisson variables is also Poisson with λ = λ₁ + λ₂.' },
       ],
       answer: 'λ_total = 5; P(X = 0) = 0.0067',
+      code: 'import math\nlam1, lam2 = 2, 3\n# Your code here\n',
+      codeSolution: 'import math\nlam1, lam2 = 2, 3\nlam_total = lam1 + lam2\np0 = math.exp(-lam_total)\nprint(f"lambda_total = {lam_total}")\nprint(f"P(X = 0) = {p0:.4f}")',
     },
     {
       id: 'poi-21', difficulty: 2,
@@ -241,6 +273,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Complement', content: 'P(X > 2) = 1 − 0.8088 = **0.1912**' },
       ],
       answer: '0.1912',
+      code: 'import math\nlam = 1.5\n# Your code here\n',
+      codeSolution: 'import math\nlam = 1.5\np_le_2 = sum((lam**k) * math.exp(-lam) / math.factorial(k) for k in range(3))\nprint(f"P(X > 2) = {1 - p_le_2:.4f}")',
     },
     {
       id: 'poi-22', difficulty: 2,
@@ -250,6 +284,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'P(X = 0)', content: '= e^(−2) = **0.1353**' },
       ],
       answer: '0.1353',
+      code: 'import math\nlam_year = 4\n# Your code here\n',
+      codeSolution: 'import math\nlam_year = 4\nlam = lam_year * 0.5\nprob = math.exp(-lam)\nprint(f"lambda (6 months) = {lam}")\nprint(f"P(X = 0) = {prob:.4f}")',
     },
     {
       id: 'poi-23', difficulty: 2,
@@ -272,6 +308,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Comparison', content: '20 is noticeably higher than 13.5 — the observed rate of defect-free batches exceeds the Poisson prediction. The process may be more variable, or λ may be overestimated.' },
       ],
       answer: 'Expected ≈ 13.5 vs observed 20 — does not match well',
+      code: 'import math\nlam = 2\nn_batches = 100\n# Your code here\n',
+      codeSolution: 'import math\nlam = 2\nn_batches = 100\np0 = math.exp(-lam)\nexpected_zero = n_batches * p0\nprint(f"Expected zero-defect batches = {expected_zero:.2f}")\nprint(f"Observed = 20")',
     },
     {
       id: 'poi-25', difficulty: 2,
@@ -282,6 +320,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Practical benefit', content: 'Computing C(1000, k) is hard; Poisson with λ = 2 is much simpler.' },
       ],
       answer: 'n large, p small, np = λ = 2 is moderate → Poisson is a simpler approximation',
+      code: 'import math\nn, p = 1000, 0.002\n# Your code here\n',
+      codeSolution: 'import math\nn, p = 1000, 0.002\nlam = n * p\nprint(f"np = lambda = {lam}")\nfor k in range(4):\n    binom = math.comb(n, k) * (p**k) * ((1-p)**(n-k))\n    poiss = (lam**k) * math.exp(-lam) / math.factorial(k)\n    print(f"k={k}: Binom={binom:.4f}, Poisson={poiss:.4f}")',
     },
     {
       id: 'poi-26', difficulty: 2,
@@ -308,6 +348,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Result', content: '= (1.37858 × 10^11)(2.2603 × 10^(−6)) / 3628800 ≈ 311574 / 3628800 ≈ **0.0859**' },
       ],
       answer: '≈ 0.0859',
+      code: 'import math\nlam1, lam2 = 8, 5\nk = 10\n# Your code here\n',
+      codeSolution: 'import math\nlam1, lam2 = 8, 5\nlam = lam1 + lam2\nk = 10\nprob = (lam**k) * math.exp(-lam) / math.factorial(k)\nprint(f"lambda = {lam}, P(X = {k}) = {prob:.4f}")',
     },
     {
       id: 'poi-28', difficulty: 2,
@@ -320,6 +362,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Sum', content: '0.0183 + 0.0733 + 0.1465 = **0.2381**' },
       ],
       answer: '0.2381',
+      code: 'import math\nlam = 4\n# Your code here\n',
+      codeSolution: 'import math\nlam = 4\np_le_2 = sum((lam**k) * math.exp(-lam) / math.factorial(k) for k in range(3))\nprint(f"P(X <= 2) = {p_le_2:.4f}")',
     },
     {
       id: 'poi-29', difficulty: 2,
@@ -343,6 +387,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Insight', content: 'For Poisson data, the MLE of λ is simply the sample mean.' },
       ],
       answer: 'λ̂ = 2.55',
+      code: 'data = [3,1,4,2,5,0,3,2,2,4,1,3,6,2,1,3,2,4,3,1]\n# Your code here\n',
+      codeSolution: 'data = [3,1,4,2,5,0,3,2,2,4,1,3,6,2,1,3,2,4,3,1]\nlam_hat = sum(data) / len(data)\nprint(f"lambda_hat = {lam_hat:.2f}")',
     },
     {
       id: 'poi-31', difficulty: 2,
@@ -358,6 +404,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Sum', content: '0.0498 + 0.1494 + 0.2240 + 0.2240 + 0.1680 + 0.1008 = **0.9160** (remaining 0.084 is in k ≥ 6)' },
       ],
       answer: 'Sum for k=0..5 ≈ 0.916; remainder in tail',
+      code: 'import math\nlam = 3\n# Your code here\n',
+      codeSolution: 'import math\nlam = 3\ntotal = 0\nfor k in range(6):\n    p = (lam**k) * math.exp(-lam) / math.factorial(k)\n    total += p\n    print(f"P(X={k}) = {p:.4f}")\nprint(f"Sum = {total:.4f}")',
     },
     {
       id: 'poi-32', difficulty: 2,
@@ -368,6 +416,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Interpretation', content: 'There is only a 0.67% chance of zero cases — we almost certainly see some.' },
       ],
       answer: 'Expected = 5; P(zero) = 0.0067',
+      code: 'import math\npop = 50000\nrate = 1/10000\n# Your code here\n',
+      codeSolution: 'import math\npop = 50000\nrate = 1/10000\nlam = pop * rate\np0 = math.exp(-lam)\nprint(f"Expected cases = {lam}")\nprint(f"P(zero cases) = {p0:.4f}")',
     },
     {
       id: 'poi-33', difficulty: 2,
@@ -378,6 +428,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Better model', content: 'A negative binomial or mixed Poisson model can handle over-dispersion (variance > mean).' },
       ],
       answer: 'Rate is not constant and events are not independent — Poisson assumptions violated',
+      code: '# Your code here\n',
+      codeSolution: '# Demonstrate over-dispersion: Poisson has variance = mean\nimport random\nrandom.seed(42)\nscores = []\nfor season in range(100):\n    lam = random.uniform(1, 15)\n    goals = sum(1 for _ in range(100) if random.random() < lam/100)\n    scores.append(goals)\nmean = sum(scores) / len(scores)\nvar = sum((x - mean)**2 for x in scores) / (len(scores) - 1)\nprint(f"Mean = {mean:.2f}, Variance = {var:.2f}")\nprint(f"Variance/Mean = {var/mean:.2f} (should be ~1 for Poisson)")',
     },
     {
       id: 'poi-34', difficulty: 2,
@@ -409,6 +461,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Result', content: 'P(X = k) → **λ^k · e^(−λ) / k!** — the Poisson PMF.' },
       ],
       answer: 'Binomial(n, λ/n) → Poisson(λ) as n → ∞',
+      code: 'import math\n# Your code here\n',
+      codeSolution: 'import math\nlam = 3\nfor n in [10, 100, 1000, 10000]:\n    p = lam / n\n    vals = [math.comb(n, k) * (p**k) * ((1-p)**(n-k)) for k in range(4)]\n    print(f"n={n:>5}: " + " ".join(f"P({k})={v:.4f}" for k, v in enumerate(vals)))\nprint("Poisson: " + " ".join(f"P({k})={(lam**k)*math.exp(-lam)/math.factorial(k):.4f}" for k in range(4)))',
     },
     {
       id: 'poi-36', difficulty: 3,
@@ -421,6 +475,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Second derivative check', content: 'd²ℓ/dλ² = −(∑xᵢ) / λ² < 0 → it is a maximum.' },
       ],
       answer: 'λ̂ = x̄ (sample mean)',
+      code: 'import math\n# Your code here\n',
+      codeSolution: 'import math\ndata = [2, 3, 1, 4, 0, 3, 2, 1, 5, 2]\nx_bar = sum(data) / len(data)\nprint(f"MLE of lambda = x_bar = {x_bar}")\nfor lam in [x_bar - 0.5, x_bar, x_bar + 0.5]:\n    ll = sum(x * math.log(lam) - lam - math.lgamma(x+1) for x in data)\n    print(f"lambda={lam:.1f}, log-likelihood={ll:.3f}")',
     },
     {
       id: 'poi-37', difficulty: 3,
@@ -447,6 +503,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Summary', content: 'Poisson counts ↔ exponential waits. They are two views of the same process.' },
       ],
       answer: 'Poisson counts and exponential inter-arrival times are dual descriptions of the same process',
+      code: 'import math\n# Your code here\n',
+      codeSolution: 'import math\nlam = 2\nfor t in [0.5, 1.0, 2.0, 3.0]:\n    p_zero = math.exp(-lam * t)\n    print(f"t={t}: P(0 events)={p_zero:.4f} = P(T>{t})={p_zero:.4f}")',
     },
     {
       id: 'poi-39', difficulty: 3,
@@ -460,6 +518,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Result', content: 'E[X] = λ · e^(−λ) · e^λ = **λ**' },
       ],
       answer: 'E[X] = λ',
+      code: 'import math\n# Your code here\n',
+      codeSolution: 'import math\nlam = 4\nex = sum(k * (lam**k) * math.exp(-lam) / math.factorial(k) for k in range(50))\nprint(f"E[X] = {ex:.6f} (expected {lam})")',
     },
     {
       id: 'poi-40', difficulty: 3,
@@ -470,6 +530,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Assemble', content: 'Var(X) = λ² + λ − λ² = **λ**' },
       ],
       answer: 'Var(X) = λ',
+      code: 'import math\n# Your code here\n',
+      codeSolution: 'import math\nlam = 4\nex = sum(k * (lam**k) * math.exp(-lam) / math.factorial(k) for k in range(50))\nex2 = sum(k**2 * (lam**k) * math.exp(-lam) / math.factorial(k) for k in range(50))\nvar = ex2 - ex**2\nprint(f"E[X] = {ex:.6f}")\nprint(f"Var(X) = {var:.6f} (expected {lam})")',
     },
     {
       id: 'poi-41', difficulty: 3,
@@ -481,6 +543,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Insight', content: 'Dead time causes the measured rate to be lower than the true rate — a common correction in nuclear physics.' },
       ],
       answer: '≈ 2.86 detected per second',
+      code: 'lam = 4\ntau = 0.1\n# Your code here\n',
+      codeSolution: 'lam = 4\ntau = 0.1\nlam_det = lam / (1 + lam * tau)\nprint(f"Detected rate = {lam_det:.3f} per second")',
     },
     {
       id: 'poi-42', difficulty: 3,
@@ -508,6 +572,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Uniqueness', content: 'Since MGFs uniquely determine distributions, X + Y ~ Poisson(λ₁ + λ₂). ∎' },
       ],
       answer: 'X + Y ~ Poisson(λ₁ + λ₂)',
+      code: 'import math\nimport random\n# Your code here\n',
+      codeSolution: 'import math\nimport random\nrandom.seed(42)\ndef poisson_sample(lam):\n    L = math.exp(-lam)\n    k, p = 0, 1.0\n    while p > L:\n        k += 1\n        p *= random.random()\n    return k - 1\nsums = [poisson_sample(3) + poisson_sample(4) for _ in range(10000)]\nmean = sum(sums) / len(sums)\nvar = sum((x - mean)**2 for x in sums) / (len(sums) - 1)\nprint(f"Mean = {mean:.3f} (expected 7)")\nprint(f"Var  = {var:.3f} (expected 7)")',
     },
     {
       id: 'poi-44', difficulty: 3,
@@ -520,6 +586,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Result', content: 'P(T₃ ≤ 0.25) = P(X ≥ 3) = 1 − 0.5438 = **0.4562**' },
       ],
       answer: '≈ 0.456',
+      code: 'import math\nlam = 10\nt = 0.25\n# Your code here\n',
+      codeSolution: 'import math\nlam = 10\nt = 0.25\nlam_t = lam * t\np_le_2 = sum((lam_t**k) * math.exp(-lam_t) / math.factorial(k) for k in range(3))\nprint(f"P(T3 <= 15 min) = P(X >= 3) = {1 - p_le_2:.4f}")',
     },
     {
       id: 'poi-45', difficulty: 3,
@@ -531,6 +599,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Limit', content: 'As λ → ∞, Poisson(λ) → Normal(λ, λ) by the CLT — skewness → 0.' },
       ],
       answer: 'Skewness = 1/√λ → 0 as λ → ∞; approaches normal',
+      code: 'import math\n# Your code here\n',
+      codeSolution: 'import math\nfor lam in [1, 4, 25, 100]:\n    skew = 1 / math.sqrt(lam)\n    print(f"lambda={lam:>3}: skewness = {skew:.4f}")',
     },
     {
       id: 'poi-46', difficulty: 3,
@@ -541,6 +611,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Look up', content: 'P(Z > 1.0) ≈ **0.1587**' },
       ],
       answer: '≈ 0.159',
+      code: 'import math\nlam = 100\nx = 110\n# Your code here\n',
+      codeSolution: 'import math\nlam = 100\nx = 110\nz = (x - lam) / math.sqrt(lam)\np = 0.5 * math.erfc(z / math.sqrt(2))\nprint(f"Z = {z:.2f}")\nprint(f"P(X > {x}) = {p:.4f}")',
     },
     {
       id: 'poi-47', difficulty: 3,
@@ -552,6 +624,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Var(X)', content: "Var(X) = G''(1) + G'(1) − [G'(1)]² = λ² + λ − λ² = **λ**" },
       ],
       answer: 'PGF = e^(λ(s−1)); E[X] = λ, Var(X) = λ',
+      code: 'import math\n# Your code here\n',
+      codeSolution: 'import math\nlam = 3\ns = 0.5\ng_direct = sum((s**k) * (lam**k) * math.exp(-lam) / math.factorial(k) for k in range(50))\ng_formula = math.exp(lam * (s - 1))\nprint(f"G({s}) direct  = {g_direct:.6f}")\nprint(f"G({s}) formula = {g_formula:.6f}")\nprint(f"E[X] = lambda = {lam}")\nprint(f"Var(X) = lambda = {lam}")',
     },
     {
       id: 'poi-48', difficulty: 3,
@@ -564,6 +638,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Test', content: 'Fit both models, compare AIC, or use a likelihood ratio test.' },
       ],
       answer: 'Poisson when variance ≈ mean; negative binomial when variance > mean (over-dispersion)',
+      code: '# Your code here\n',
+      codeSolution: '# Demonstrate over-dispersion detection\npoisson_data = [3, 2, 4, 3, 5, 2, 3, 4, 3, 1]\nmean_p = sum(poisson_data) / len(poisson_data)\nvar_p = sum((x - mean_p)**2 for x in poisson_data) / (len(poisson_data) - 1)\nprint(f"Poisson-like: mean={mean_p:.2f}, var={var_p:.2f}, ratio={var_p/mean_p:.2f}")\nod_data = [0, 0, 1, 0, 12, 0, 1, 0, 8, 0]\nmean_o = sum(od_data) / len(od_data)\nvar_o = sum((x - mean_o)**2 for x in od_data) / (len(od_data) - 1)\nprint(f"Over-dispersed: mean={mean_o:.2f}, var={var_o:.2f}, ratio={var_o/mean_o:.2f}")',
     },
     {
       id: 'poi-49', difficulty: 3,
@@ -577,6 +653,8 @@ export const practicePoissonDistribution: PracticeSet = {
         { label: 'Conclusion', content: 'This is the CDF of Uniform(0, T). ∎' },
       ],
       answer: 'S₁ | N(T)=1 ~ Uniform(0, T)',
+      code: 'import random\nimport math\n# Your code here\n',
+      codeSolution: 'import random\nimport math\nrandom.seed(42)\nlam, T = 5, 1.0\nevent_times = []\nfor _ in range(100000):\n    t, times = 0, []\n    while True:\n        t -= math.log(random.random()) / lam\n        if t > T: break\n        times.append(t)\n    if len(times) == 1:\n        event_times.append(times[0])\nmean = sum(event_times) / len(event_times)\nprint(f"Mean event time = {mean:.4f} (expected {T/2:.4f} for Uniform)")',
     },
     {
       id: 'poi-50', difficulty: 3,
@@ -612,6 +690,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Compute', content: 'λ = 1/10 = **0.1 per minute**' },
       ],
       answer: '0.1 per minute',
+      code: 'mean = 10\n# Your code here\n',
+      codeSolution: 'mean = 10\nlam = 1 / mean\nprint(f"lambda = {lam} per minute")',
     },
     {
       id: 'exp-02', difficulty: 1,
@@ -623,6 +703,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Compute', content: '= 1 − 0.3679 = **0.6321**' },
       ],
       answer: '0.6321',
+      code: 'import math\nlam = 0.1\nt = 10\n# Your code here\n',
+      codeSolution: 'import math\nlam = 0.1\nt = 10\nprob = 1 - math.exp(-lam * t)\nprint(f"P(T <= {t}) = {prob:.4f}")',
     },
     {
       id: 'exp-03', difficulty: 1,
@@ -632,6 +714,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Compute', content: 'P(T > 10) = e^(−1) = **0.3679**' },
       ],
       answer: '0.3679',
+      code: 'import math\nlam = 0.1\nt = 10\n# Your code here\n',
+      codeSolution: 'import math\nlam = 0.1\nt = 10\nprob = math.exp(-lam * t)\nprint(f"P(T > {t}) = {prob:.4f}")',
     },
     {
       id: 'exp-04', difficulty: 1,
@@ -641,6 +725,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Answer', content: 'λ = **0.001 per hour**' },
       ],
       answer: '0.001 per hour',
+      code: 'mean = 1000\n# Your code here\n',
+      codeSolution: 'mean = 1000\nlam = 1 / mean\nprint(f"lambda = {lam} per hour")',
     },
     {
       id: 'exp-05', difficulty: 1,
@@ -650,6 +736,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Compute', content: '= **0.6065**' },
       ],
       answer: '0.6065',
+      code: 'import math\nlam = 0.001\nt = 500\n# Your code here\n',
+      codeSolution: 'import math\nlam = 0.001\nt = 500\nprob = math.exp(-lam * t)\nprint(f"P(T > {t}) = {prob:.4f}")',
     },
     {
       id: 'exp-06', difficulty: 1,
@@ -659,6 +747,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Answer', content: '**0.5 hours** (30 minutes)' },
       ],
       answer: '30 minutes',
+      code: 'lam = 2\n# Your code here\n',
+      codeSolution: 'lam = 2\nmean = 1 / lam\nprint(f"Mean = {mean} hours = {mean * 60} minutes")',
     },
     {
       id: 'exp-07', difficulty: 1,
@@ -681,6 +771,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Substitute', content: 'f(t) = **3 · e^(−3t)** for t ≥ 0' },
       ],
       answer: 'f(t) = 3e^(−3t) for t ≥ 0',
+      code: 'import math\nlam = 3\n# Your code here\n',
+      codeSolution: 'import math\nlam = 3\nfor t in [0, 0.5, 1.0, 2.0]:\n    pdf = lam * math.exp(-lam * t)\n    print(f"f({t}) = {pdf:.4f}")',
     },
     {
       id: 'exp-09', difficulty: 1,
@@ -691,6 +783,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Compute', content: '= 1 − 0.2231 = **0.7769**' },
       ],
       answer: '0.7769',
+      code: 'import math\nlam = 0.5\nt = 3\n# Your code here\n',
+      codeSolution: 'import math\nlam = 0.5\nt = 3\nprob = 1 - math.exp(-lam * t)\nprint(f"P(T <= {t}) = {prob:.4f}")',
     },
     {
       id: 'exp-10', difficulty: 1,
@@ -700,6 +794,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Compute', content: 'P(T > 4) = e^(−0.5 × 4) = e^(−2) = **0.1353**' },
       ],
       answer: '0.1353',
+      code: 'import math\nmean = 2\nt = 4\n# Your code here\n',
+      codeSolution: 'import math\nmean = 2\nlam = 1 / mean\nt = 4\nprob = math.exp(-lam * t)\nprint(f"P(T > {t}) = {prob:.4f}")',
     },
     {
       id: 'exp-11', difficulty: 1,
@@ -709,6 +805,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Compute', content: '= 1/16 = **0.0625**' },
       ],
       answer: '0.0625',
+      code: 'lam = 4\n# Your code here\n',
+      codeSolution: 'lam = 4\nvar = 1 / lam**2\nprint(f"Var(T) = {var}")',
     },
     {
       id: 'exp-12', difficulty: 1,
@@ -718,6 +816,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Compute', content: '= 1/4 = **0.25**' },
       ],
       answer: '0.25',
+      code: 'lam = 4\n# Your code here\n',
+      codeSolution: 'lam = 4\nsd = 1 / lam\nprint(f"SD = {sd}")',
     },
     {
       id: 'exp-13', difficulty: 1,
@@ -729,6 +829,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Compute', content: 'm = 0.6931/2 = **0.3466**' },
       ],
       answer: '0.3466',
+      code: 'import math\nlam = 2\n# Your code here\n',
+      codeSolution: 'import math\nlam = 2\nmedian = math.log(2) / lam\nprint(f"Median = {median:.4f}")',
     },
     {
       id: 'exp-14', difficulty: 1,
@@ -738,6 +840,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Compute', content: '= 1 − 0.1353 = **0.8647**' },
       ],
       answer: '0.8647',
+      code: 'import math\nlam = 1\nt = 2\n# Your code here\n',
+      codeSolution: 'import math\nlam = 1\nt = 2\nprob = 1 - math.exp(-lam * t)\nprint(f"P(T <= {t}) = {prob:.4f}")',
     },
     {
       id: 'exp-15', difficulty: 1,
@@ -758,6 +862,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Compute', content: 'λ = 0.6931/5 = **0.1386 per minute**' },
       ],
       answer: '0.1386 per minute',
+      code: 'import math\nhalf_life = 5\n# Your code here\n',
+      codeSolution: 'import math\nhalf_life = 5\nlam = math.log(2) / half_life\nprint(f"lambda = {lam:.4f} per minute")',
     },
     {
       id: 'exp-17', difficulty: 1,
@@ -769,6 +875,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'f(1)', content: '2 · e^(−2) = 2 · 0.1353 = **0.2707**' },
       ],
       answer: 'f(0) = 2, f(0.5) = 0.7358, f(1) = 0.2707',
+      code: 'import math\nlam = 2\n# Your code here\n',
+      codeSolution: 'import math\nlam = 2\nfor t in [0, 0.5, 1.0]:\n    pdf = lam * math.exp(-lam * t)\n    print(f"f({t}) = {pdf:.4f}")',
     },
 
     // ── Medium (18-34) ─────────────────────────────────────
@@ -782,6 +890,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Insight', content: 'The past 3 minutes of waiting do not change the probability — the exponential "forgets" the past.' },
       ],
       answer: '0.3679',
+      code: 'import math\nmean = 5\n# Your code here\n',
+      codeSolution: 'import math\nlam = 1 / 5\nprob = math.exp(-lam * 5)\nprint(f"P(wait >= 5 more min) = {prob:.4f}")',
     },
     {
       id: 'exp-19', difficulty: 2,
@@ -794,6 +904,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Conclusion', content: 'They are equal. ∎' },
       ],
       answer: 'P(T > s+t | T > s) = e^(−λt) = P(T > t)',
+      code: 'import math\n# Your code here\n',
+      codeSolution: 'import math\nlam = 0.5\ns, t = 3, 5\nleft = math.exp(-lam * (s + t)) / math.exp(-lam * s)\nright = math.exp(-lam * t)\nprint(f"P(T>{s+t}|T>{s}) = {left:.6f}")\nprint(f"P(T>{t})         = {right:.6f}")\nprint(f"Equal: {abs(left - right) < 1e-10}")',
     },
     {
       id: 'exp-20', difficulty: 2,
@@ -818,6 +930,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Recognise', content: 'This is the survival function of **Exp(λ₁ + λ₂)**. ∎' },
       ],
       answer: 'min(T₁, T₂) ~ Exp(λ₁ + λ₂)',
+      code: 'import math\nimport random\n# Your code here\n',
+      codeSolution: 'import math\nimport random\nrandom.seed(42)\nlam1, lam2 = 2, 3\nsamples = [min(-math.log(random.random())/lam1, -math.log(random.random())/lam2) for _ in range(10000)]\nmean = sum(samples) / len(samples)\nprint(f"Sample mean of min = {mean:.4f}")\nprint(f"Expected 1/(lam1+lam2) = {1/(lam1+lam2):.4f}")',
     },
     {
       id: 'exp-22', difficulty: 2,
@@ -828,6 +942,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Compute', content: '= e^(−0.667) − e^(−1.333) ≈ 0.5134 − 0.2636 = **0.2498**' },
       ],
       answer: '≈ 0.250',
+      code: 'import math\nmean = 15\n# Your code here\n',
+      codeSolution: 'import math\nlam = 1 / 15\nprob = math.exp(-lam * 10) - math.exp(-lam * 20)\nprint(f"P(10 <= T <= 20) = {prob:.4f}")',
     },
     {
       id: 'exp-23', difficulty: 2,
@@ -838,6 +954,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Conclusion', content: 'The exponential gives **0.1353** — it has a long tail. The uniform has a hard cutoff.' },
       ],
       answer: 'Exponential: 13.5%; Uniform: 0%. Exponential has the heavier tail.',
+      code: 'import math\n# Your code here\n',
+      codeSolution: 'import math\nlam = 1 / 10\np_exp = math.exp(-lam * 20)\nprint(f"Exponential P(T > 20) = {p_exp:.4f}")\nprint(f"Uniform P(T > 20) = 0")',
     },
     {
       id: 'exp-24', difficulty: 2,
@@ -859,6 +977,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Compute', content: 'P(T > 5) = e^(−0.5 × 5) = e^(−2.5) ≈ **0.0821**' },
       ],
       answer: '≈ 0.082',
+      code: 'import math\nlam = 0.5\nt = 5\n# Your code here\n',
+      codeSolution: 'import math\nlam = 0.5\nt = 5\nprob = math.exp(-lam * t)\nprint(f"P(T > {t}) = {prob:.4f}")',
     },
     {
       id: 'exp-26', difficulty: 2,
@@ -869,6 +989,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Compute', content: 't = 2.3026/0.5 = **4.605**' },
       ],
       answer: '4.605',
+      code: 'import math\nlam = 0.5\n# Your code here\n',
+      codeSolution: 'import math\nlam = 0.5\nt90 = -math.log(0.1) / lam\nprint(f"90th percentile = {t90:.3f}")',
     },
     {
       id: 'exp-27', difficulty: 2,
@@ -880,6 +1002,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Result', content: 'This is exactly the CDF of **Exp(λ)**. ∎' },
       ],
       answer: 'P(T₁ ≤ t) = 1 − e^(−λt)',
+      code: 'import math\n# Your code here\n',
+      codeSolution: 'import math\nlam = 2\nfor t in [0.5, 1.0, 2.0]:\n    p_zero = math.exp(-lam * t)\n    cdf = 1 - p_zero\n    print(f"t={t}: P(0 events)={p_zero:.4f}, CDF={cdf:.4f}")',
     },
     {
       id: 'exp-28', difficulty: 2,
@@ -890,6 +1014,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Evaluate', content: '= (0) − (−1) = **1** ✓' },
       ],
       answer: '1',
+      code: 'import math\n# Your code here\n',
+      codeSolution: 'import math\nlam = 3\ndt = 0.001\ntotal = sum(lam * math.exp(-lam * t) * dt for t in [i * dt for i in range(100000)])\nprint(f"Integral = {total:.6f} (expected 1.0)")',
     },
     {
       id: 'exp-29', difficulty: 2,
@@ -903,6 +1029,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Result', content: 'E[T] = **1/λ**' },
       ],
       answer: 'E[T] = 1/λ',
+      code: 'import math\n# Your code here\n',
+      codeSolution: 'import math\nlam = 3\ndt = 0.001\net = sum(t * lam * math.exp(-lam * t) * dt for t in [i * dt for i in range(100000)])\nprint(f"E[T] = {et:.6f} (expected {1/lam:.6f})")',
     },
     {
       id: 'exp-30', difficulty: 2,
@@ -913,6 +1041,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Compute', content: 't ≤ 0.0513/0.02 = **2.565 hours**' },
       ],
       answer: '≤ 2.57 hours (about 2 hours 34 minutes)',
+      code: 'import math\nlam = 0.02\n# Your code here\n',
+      codeSolution: 'import math\nlam = 0.02\nt_max = -math.log(0.95) / lam\nprint(f"Max shift = {t_max:.3f} hours = {t_max*60:.0f} minutes")',
     },
     {
       id: 'exp-31', difficulty: 2,
@@ -935,6 +1065,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Conclusion', content: 'Therefore T ~ Exp(λ). ∎' },
       ],
       answer: 'S(s+t) = S(s)S(t) → S(t) = e^(−λt) by Cauchy\'s equation',
+      code: 'import math\n# Your code here\n',
+      codeSolution: 'import math\nlam = 2\nfor s in [1, 2, 3]:\n    for t in [1, 2]:\n        left = math.exp(-lam * (s + t))\n        right = math.exp(-lam * s) * math.exp(-lam * t)\n        print(f"S({s}+{t})={left:.6f}, S({s})*S({t})={right:.6f}")',
     },
     {
       id: 'exp-33', difficulty: 2,
@@ -946,6 +1078,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Compute', content: '= 1 − 0.6065 = **0.3935**' },
       ],
       answer: '0.3935',
+      code: 'import math\nlam = 0.25\nt = 2\n# Your code here\n',
+      codeSolution: 'import math\nlam = 0.25\nt = 2\nprob = 1 - math.exp(-lam * t)\nprint(f"P(T <= {t}) = {prob:.4f}")',
     },
     {
       id: 'exp-34', difficulty: 2,
@@ -955,6 +1089,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Var(T)', content: '= E[T²] − (E[T])² = 2/λ² − 1/λ² = **1/λ²**' },
       ],
       answer: 'Var(T) = 1/λ²',
+      code: 'import math\n# Your code here\n',
+      codeSolution: 'import math\nlam = 3\ndt = 0.001\net2 = sum((t**2) * lam * math.exp(-lam * t) * dt for t in [i*dt for i in range(100000)])\nvar = et2 - (1/lam)**2\nprint(f"E[T^2] = {et2:.6f} (expected {2/lam**2:.6f})")\nprint(f"Var(T) = {var:.6f} (expected {1/lam**2:.6f})")',
     },
 
     // ── Hard (35-50) ───────────────────────────────────────
@@ -969,6 +1105,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Verify maximum', content: 'd²ℓ/dλ² = −n/λ² < 0 ✓' },
       ],
       answer: 'λ̂ = 1/t̄',
+      code: 'import math\n# Your code here\n',
+      codeSolution: 'import math\ndata = [0.5, 1.2, 0.8, 2.1, 0.3]\nt_bar = sum(data) / len(data)\nlam_hat = 1 / t_bar\nprint(f"t_bar = {t_bar:.3f}")\nprint(f"lambda_hat = {lam_hat:.4f}")\nfor lam in [lam_hat - 0.5, lam_hat, lam_hat + 0.5]:\n    ll = len(data) * math.log(lam) - lam * sum(data)\n    print(f"lam={lam:.2f}, log-L={ll:.3f}")',
     },
     {
       id: 'exp-36', difficulty: 3,
@@ -980,6 +1118,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Recognise', content: 'Let p = 1 − e^(−λ). Then P(K = k) = (1−p)^(k−1) · p — this is **Geometric(p)**. ∎' },
       ],
       answer: '⌈T⌉ ~ Geometric(p = 1 − e^(−λ))',
+      code: 'import math\nimport random\n# Your code here\n',
+      codeSolution: 'import math\nimport random\nfrom collections import Counter\nrandom.seed(42)\nlam = 1.5\np = 1 - math.exp(-lam)\nsamples = [math.ceil(-math.log(random.random()) / lam) for _ in range(10000)]\ncounts = Counter(samples)\nfor k in range(1, 6):\n    obs = counts.get(k, 0) / 10000\n    exp = (1 - p)**(k-1) * p\n    print(f"k={k}: observed={obs:.4f}, Geometric={exp:.4f}")',
     },
     {
       id: 'exp-37', difficulty: 3,
@@ -990,6 +1130,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Mean of min', content: 'E[min] = 1/λ = **6 minutes**' },
       ],
       answer: '6 minutes',
+      code: 'import math\nlam_a = 1/10\nlam_b = 1/15\n# Your code here\n',
+      codeSolution: 'import math\nlam_a = 1/10\nlam_b = 1/15\nlam_total = lam_a + lam_b\nmean_wait = 1 / lam_total\nprint(f"Expected wait = {mean_wait:.1f} minutes")',
     },
     {
       id: 'exp-38', difficulty: 3,
@@ -999,6 +1141,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Compute', content: '= (1/10) / (1/6) = (1/10) · (6/1) = **3/5 = 0.6**' },
       ],
       answer: '0.6 (60%)',
+      code: 'lam_a = 1/10\nlam_b = 1/15\n# Your code here\n',
+      codeSolution: 'lam_a = 1/10\nlam_b = 1/15\np_a_first = lam_a / (lam_a + lam_b)\nprint(f"P(Bus A first) = {p_a_first:.4f}")',
     },
     {
       id: 'exp-39', difficulty: 3,
@@ -1010,6 +1154,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'When exponential works', content: 'Electronic components in their "useful life" phase (constant random failure) or inter-arrival times in a Poisson process.' },
       ],
       answer: 'Exponential assumes constant hazard (no wear-out); tires degrade, so use Weibull',
+      code: 'import math\n# Your code here\n',
+      codeSolution: 'import math\nlam = 0.1\nfor t in [10, 100, 500, 1000]:\n    hazard = lam\n    survival = math.exp(-lam * t)\n    print(f"t={t:>4}: hazard={hazard}, survival={survival:.4f}")\nprint("Tire hazard INCREASES with age - exponential is wrong")',
     },
     {
       id: 'exp-40', difficulty: 3,
@@ -1021,6 +1167,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: "M''(s)", content: "= 2λ / (λ − s)³. At s = 0: M''(0) = 2λ/λ³ = **2/λ²** = E[T²]" },
       ],
       answer: 'MGF = λ/(λ−s); E[T] = 1/λ, E[T²] = 2/λ²',
+      code: 'import math\n# Your code here\n',
+      codeSolution: 'import math\nlam = 3\ndt = 0.0001\nfor s in [0.5, 1.0, 2.0]:\n    mgf_num = sum(math.exp(s*t)*lam*math.exp(-lam*t)*dt for t in [i*dt for i in range(200000)])\n    mgf_formula = lam / (lam - s)\n    print(f"s={s}: numerical={mgf_num:.4f}, formula={mgf_formula:.4f}")',
     },
     {
       id: 'exp-41', difficulty: 3,
@@ -1031,6 +1179,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Interpretation', content: 'The failure rate is constant at all times — this is the defining property of the exponential.' },
       ],
       answer: 'h(t) = λ (constant)',
+      code: 'import math\n# Your code here\n',
+      codeSolution: 'import math\nlam = 2\nfor t in [0.1, 1, 5, 10]:\n    f_t = lam * math.exp(-lam * t)\n    s_t = math.exp(-lam * t)\n    h_t = f_t / s_t\n    print(f"t={t}: h(t) = {h_t:.4f} (always {lam})")',
     },
     {
       id: 'exp-42', difficulty: 3,
@@ -1055,6 +1205,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Insight', content: 'More generally, the sum of n independent Exp(λ) is Gamma(n, λ), also called the Erlang distribution.' },
       ],
       answer: 'T₁ + T₂ ~ Gamma(2, λ) with PDF λ²t·e^(−λt)',
+      code: 'import math\nimport random\n# Your code here\n',
+      codeSolution: 'import math\nimport random\nrandom.seed(42)\nlam = 2\nsums = [(-math.log(random.random())/lam) + (-math.log(random.random())/lam) for _ in range(10000)]\nmean = sum(sums) / len(sums)\nvar = sum((x - mean)**2 for x in sums) / (len(sums) - 1)\nprint(f"Mean = {mean:.4f} (expected {2/lam:.4f})")\nprint(f"Var  = {var:.4f} (expected {2/lam**2:.4f})")',
     },
     {
       id: 'exp-44', difficulty: 3,
@@ -1065,6 +1217,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'MTTF', content: '= 1/λ_sys = 1/0.06 = **16.67 hours**' },
       ],
       answer: 'MTTF ≈ 16.67 hours',
+      code: 'lam1, lam2, lam3 = 0.01, 0.02, 0.03\n# Your code here\n',
+      codeSolution: 'lam1, lam2, lam3 = 0.01, 0.02, 0.03\nlam_sys = lam1 + lam2 + lam3\nmttf = 1 / lam_sys\nprint(f"System rate = {lam_sys}")\nprint(f"MTTF = {mttf:.2f} hours")',
     },
     {
       id: 'exp-45', difficulty: 3,
@@ -1077,6 +1231,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Note', content: 'This is NOT exponential — the parallel system is more reliable than a single component.' },
       ],
       answer: 'P(survive) = 2e^(−λt) − e^(−2λt)',
+      code: 'import math\nlam = 0.1\n# Your code here\n',
+      codeSolution: 'import math\nlam = 0.1\nfor t in [5, 10, 15, 20]:\n    p_survive = 2 * math.exp(-lam * t) - math.exp(-2 * lam * t)\n    p_single = math.exp(-lam * t)\n    print(f"t={t:>2}: single={p_single:.4f}, parallel={p_survive:.4f}")',
     },
     {
       id: 'exp-46', difficulty: 3,
@@ -1102,6 +1258,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Result', content: 'H = **1 − ln λ** = 1 + ln(1/λ)' },
       ],
       answer: 'H = 1 − ln λ',
+      code: 'import math\n# Your code here\n',
+      codeSolution: 'import math\nfor lam in [0.5, 1, 2, 5]:\n    h = 1 - math.log(lam)\n    print(f"lambda={lam}: entropy = {h:.4f}")',
     },
     {
       id: 'exp-48', difficulty: 3,
@@ -1112,6 +1270,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Bayesian view', content: 'Using the exponential is equivalent to saying "I make no assumptions beyond the mean" — maximum ignorance.' },
       ],
       answer: 'Exponential is the least-assuming model given only the mean; maximum uncertainty',
+      code: 'import math\n# Your code here\n',
+      codeSolution: 'import math\nmean = 2\nlam = 1 / mean\nh_exp = 1 + math.log(mean)\nprint(f"Exponential entropy = {h_exp:.4f}")\nprint(f"Max entropy among all non-negative distributions with mean {mean}")',
     },
     {
       id: 'exp-49', difficulty: 3,
@@ -1123,6 +1283,8 @@ export const practiceExponentialDistribution: PracticeSet = {
         { label: 'Idle fraction', content: '= 1 − ρ = 1 − 2/3 = **1/3 ≈ 0.333**' },
       ],
       answer: '1/3 (≈ 33.3% idle)',
+      code: 'mu = 30\nlam = 20\n# Your code here\n',
+      codeSolution: 'mu = 30\nlam = 20\nrho = lam / mu\nidle = 1 - rho\nprint(f"Utilisation = {rho:.4f}")\nprint(f"Idle fraction = {idle:.4f} ({idle*100:.1f}%)")',
     },
     {
       id: 'exp-50', difficulty: 3,
@@ -1159,6 +1321,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'Compute', content: '= (58−50)²/50 + (42−50)²/50 = 64/50 + 64/50 = 1.28 + 1.28 = **2.56**' },
       ],
       answer: '2.56',
+      code: 'observed = [58, 42]\nexpected = [50, 50]\n# Your code here\n',
+      codeSolution: 'observed = [58, 42]\nexpected = [50, 50]\nchi2 = sum((o - e)**2 / e for o, e in zip(observed, expected))\nprint(f"Chi-squared = {chi2:.2f}")',
     },
     {
       id: 'chi-02', difficulty: 1,
@@ -1168,6 +1332,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'Decision', content: '**Fail to reject** H₀ — there is not enough evidence to say the coin is unfair.' },
       ],
       answer: 'Not significant (2.56 < 3.84)',
+      code: 'chi2 = 2.56\ncritical = 3.84\n# Your code here\n',
+      codeSolution: 'chi2 = 2.56\ncritical = 3.84\nprint(f"chi2={chi2} vs critical={critical}")\nprint("Reject H0" if chi2 > critical else "Fail to reject H0")',
     },
     {
       id: 'chi-03', difficulty: 1,
@@ -1177,6 +1343,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'Compute', content: 'df = 2 − 1 = **1**' },
       ],
       answer: '1',
+      code: 'k = 2\n# Your code here\n',
+      codeSolution: 'k = 2\ndf = k - 1\nprint(f"df = {df}")',
     },
     {
       id: 'chi-04', difficulty: 1,
@@ -1187,6 +1355,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'Expected count', content: '60 × (1/6) = **10** for each face' },
       ],
       answer: '10 per face',
+      code: 'n = 60\nfaces = 6\n# Your code here\n',
+      codeSolution: 'n = 60\nfaces = 6\nexpected = n / faces\nprint(f"Expected per face = {expected:.0f}")',
     },
     {
       id: 'chi-05', difficulty: 1,
@@ -1198,6 +1368,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'Compute', content: '= 4/10 + 4/10 + 0 + 1/10 + 1/10 + 0 = 0.4 + 0.4 + 0 + 0.1 + 0.1 + 0 = **1.0**' },
       ],
       answer: '1.0',
+      code: 'observed = [8, 12, 10, 11, 9, 10]\nexpected = [10] * 6\n# Your code here\n',
+      codeSolution: 'observed = [8, 12, 10, 11, 9, 10]\nexpected = [10] * 6\nchi2 = sum((o - e)**2 / e for o, e in zip(observed, expected))\nprint(f"Chi-squared = {chi2:.1f}")',
     },
     {
       id: 'chi-06', difficulty: 1,
@@ -1207,6 +1379,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'Decision', content: '**Fail to reject** H₀ — no evidence the die is unfair.' },
       ],
       answer: 'Not significant (1.0 < 11.07) — die appears fair',
+      code: 'chi2 = 1.0\ncritical = 11.07\n# Your code here\n',
+      codeSolution: 'chi2 = 1.0\ncritical = 11.07\nprint("Reject H0" if chi2 > critical else "Fail to reject H0")',
     },
     {
       id: 'chi-07', difficulty: 1,
@@ -1216,6 +1390,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'Answer', content: '**5.99**' },
       ],
       answer: '5.99',
+      code: '# Your code here\n',
+      codeSolution: 'critical = {1: 3.84, 2: 5.99, 3: 7.81, 4: 9.49, 5: 11.07}\nfor df, cv in critical.items():\n    print(f"df={df}: critical = {cv}")',
     },
     {
       id: 'chi-08', difficulty: 1,
@@ -1238,6 +1414,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'Decision', content: '**Fail to reject** — no significant difference from claimed proportions.' },
       ],
       answer: 'Not significant — distribution matches claim',
+      code: 'chi2 = 1.667\ndf = 2\ncritical = 5.99\n# Your code here\n',
+      codeSolution: 'chi2 = 1.667\ndf = 2\ncritical = 5.99\nprint(f"chi2={chi2:.3f}, df={df}, critical={critical}")\nprint("Reject H0" if chi2 > critical else "Fail to reject H0")',
     },
     {
       id: 'chi-10', difficulty: 1,
@@ -1247,6 +1425,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'Compute', content: 'df = 6 − 1 = **5**' },
       ],
       answer: '5',
+      code: 'k = 6\n# Your code here\n',
+      codeSolution: 'k = 6\ndf = k - 1\nprint(f"df = {df}")',
     },
     {
       id: 'chi-11', difficulty: 1,
@@ -1257,6 +1437,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'χ²', content: '= (110−100)²/100 + (90−100)²/100 = 100/100 + 100/100 = **2.0**' },
       ],
       answer: '2.0',
+      code: 'observed = [110, 90]\nexpected = [100, 100]\n# Your code here\n',
+      codeSolution: 'observed = [110, 90]\nexpected = [100, 100]\nchi2 = sum((o - e)**2 / e for o, e in zip(observed, expected))\nprint(f"Chi-squared = {chi2:.1f}")',
     },
     {
       id: 'chi-12', difficulty: 1,
@@ -1266,6 +1448,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'At α = 0.10', content: '2.0 < 2.71 → **Not significant** even at 10%' },
       ],
       answer: 'Not significant at either level',
+      code: 'chi2 = 2.0\n# Your code here\n',
+      codeSolution: 'chi2 = 2.0\nfor alpha, cv in [(0.05, 3.84), (0.10, 2.71)]:\n    result = "Reject" if chi2 > cv else "Fail to reject"\n    print(f"alpha={alpha}: {chi2} vs {cv} -> {result}")',
     },
     {
       id: 'chi-13', difficulty: 1,
@@ -1277,6 +1461,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'Compute', content: '= 25/20 + 9/20 + 1/20 + 4/20 + 4/20 + 1/20 = 1.25+0.45+0.05+0.2+0.2+0.05 = **2.2**' },
       ],
       answer: '2.2',
+      code: 'observed = [25, 17, 19, 22, 18, 19]\nexpected = [20] * 6\n# Your code here\n',
+      codeSolution: 'observed = [25, 17, 19, 22, 18, 19]\nexpected = [20] * 6\nchi2 = sum((o - e)**2 / e for o, e in zip(observed, expected))\nprint(f"Chi-squared = {chi2:.1f}")',
     },
     {
       id: 'chi-14', difficulty: 1,
@@ -1286,6 +1472,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'Implication', content: 'The larger it is relative to the critical value, the stronger the evidence **against** the null hypothesis.' },
       ],
       answer: 'Larger χ² = greater discrepancy between observed and expected',
+      code: '# Your code here\n',
+      codeSolution: 'observed_close = [52, 48]\nobserved_far = [70, 30]\nexpected = [50, 50]\nchi2_close = sum((o-e)**2/e for o,e in zip(observed_close, expected))\nchi2_far = sum((o-e)**2/e for o,e in zip(observed_far, expected))\nprint(f"Close: chi2 = {chi2_close:.2f}")\nprint(f"Far:   chi2 = {chi2_far:.2f}")',
     },
     {
       id: 'chi-15', difficulty: 1,
@@ -1296,6 +1484,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'Answer', content: '**No** — χ² is always ≥ 0. It equals 0 only when O = E for every category.' },
       ],
       answer: 'No — χ² is always non-negative',
+      code: '# Your code here\n',
+      codeSolution: 'for o, e in [(8, 10), (12, 10), (10, 10)]:\n    term = (o - e)**2 / e\n    print(f"O={o}, E={e}: (O-E)^2/E = {term:.3f} >= 0")',
     },
     {
       id: 'chi-16', difficulty: 1,
@@ -1307,6 +1497,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'Compute', content: '= 25/20 + 0 + 4/20 + 9/20 = 1.25 + 0 + 0.2 + 0.45 = **1.9**' },
       ],
       answer: '1.9',
+      code: 'observed = [25, 20, 18, 17]\nexpected = [20] * 4\n# Your code here\n',
+      codeSolution: 'observed = [25, 20, 18, 17]\nexpected = [20] * 4\nchi2 = sum((o - e)**2 / e for o, e in zip(observed, expected))\nprint(f"Chi-squared = {chi2:.1f}")',
     },
     {
       id: 'chi-17', difficulty: 1,
@@ -1316,6 +1508,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'Decision', content: '**Fail to reject** — no significant evidence of unequal preference.' },
       ],
       answer: 'Not significant — preferences appear equal',
+      code: 'chi2 = 1.9\ndf = 3\ncritical = 7.81\n# Your code here\n',
+      codeSolution: 'chi2 = 1.9\ndf = 3\ncritical = 7.81\nprint(f"chi2={chi2}, df={df}, critical={critical}")\nprint("Reject H0" if chi2 > critical else "Fail to reject H0")',
     },
 
     // ── Medium (18-34) ─────────────────────────────────────
@@ -1345,6 +1539,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'Decision', content: '2.361 < 7.81 → **Fail to reject** — distribution matches claim.' },
       ],
       answer: 'χ² = 2.361, df = 3, not significant',
+      code: 'observed = [100, 70, 20, 10]\nproportions = [0.45, 0.40, 0.10, 0.05]\nn = 200\n# Your code here\n',
+      codeSolution: 'observed = [100, 70, 20, 10]\nproportions = [0.45, 0.40, 0.10, 0.05]\nn = 200\nexpected = [n * p for p in proportions]\nchi2 = sum((o - e)**2 / e for o, e in zip(observed, expected))\ndf = len(observed) - 1\nprint(f"Chi-squared = {chi2:.3f}, df = {df}")\nprint("Reject H0" if chi2 > 7.81 else "Fail to reject H0")',
     },
     {
       id: 'chi-20', difficulty: 2,
@@ -1358,6 +1554,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'E(NoEx, Sick)', content: '= 100 × 90 / 200 = **45**' },
       ],
       answer: 'Expected: 55, 45, 55, 45',
+      code: 'observed = [[70, 30], [40, 60]]\n# Your code here\n',
+      codeSolution: 'observed = [[70, 30], [40, 60]]\nn = sum(sum(row) for row in observed)\nrt = [sum(row) for row in observed]\nct = [sum(observed[r][c] for r in range(2)) for c in range(2)]\nfor r in range(2):\n    for c in range(2):\n        e = rt[r] * ct[c] / n\n        print(f"E[{r},{c}] = {e:.2f}")',
     },
     {
       id: 'chi-21', difficulty: 2,
@@ -1381,6 +1579,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: '3×4', content: 'df = (3−1)(4−1) = 2 × 3 = **6**' },
       ],
       answer: '2×2: df = 1; 3×4: df = 6',
+      code: '# Your code here\n',
+      codeSolution: 'for rows, cols in [(2, 2), (3, 4)]:\n    df = (rows - 1) * (cols - 1)\n    print(f"{rows}x{cols} table: df = {df}")',
     },
     {
       id: 'chi-23', difficulty: 2,
@@ -1393,6 +1593,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'df = 5, critical = 11.07', content: '5.16 < 11.07 → **Fail to reject** — die appears fair.' },
       ],
       answer: 'χ² = 5.16, df = 5, not significant',
+      code: 'observed = [60, 45, 55, 40, 52, 48]\nexpected = [50] * 6\n# Your code here\n',
+      codeSolution: 'observed = [60, 45, 55, 40, 52, 48]\nexpected = [50] * 6\nchi2 = sum((o - e)**2 / e for o, e in zip(observed, expected))\ndf = len(observed) - 1\nprint(f"Chi-squared = {chi2:.2f}, df = {df}")\nprint("Reject H0" if chi2 > 11.07 else "Fail to reject H0")',
     },
     {
       id: 'chi-24', difficulty: 2,
@@ -1407,6 +1609,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'df = (2−1)(3−1) = 2', content: 'Critical = 5.99. Since 5.274 < 5.99 → **Fail to reject** — barely not significant.' },
       ],
       answer: 'χ² = 5.27, df = 2, not significant (just barely at α = 0.05)',
+      code: 'observed = [[40, 30, 30], [25, 35, 40]]\n# Your code here\n',
+      codeSolution: 'observed = [[40, 30, 30], [25, 35, 40]]\nrows, cols = len(observed), len(observed[0])\nn = sum(sum(r) for r in observed)\nrt = [sum(r) for r in observed]\nct = [sum(observed[r][c] for r in range(rows)) for c in range(cols)]\nchi2 = 0\nfor r in range(rows):\n    for c in range(cols):\n        e = rt[r] * ct[c] / n\n        chi2 += (observed[r][c] - e)**2 / e\ndf = (rows - 1) * (cols - 1)\nprint(f"Chi-squared = {chi2:.3f}, df = {df}")',
     },
     {
       id: 'chi-25', difficulty: 2,
@@ -1417,6 +1621,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'Alternative', content: 'Use **Fisher\'s exact test** (for 2×2 tables) or simulation-based tests for small samples.' },
       ],
       answer: 'Merge categories to ensure E ≥ 5, or use Fisher\'s exact test',
+      code: '# Your code here\n',
+      codeSolution: 'observed = [45, 38, 10, 5, 2]\nn = sum(observed)\nk = len(observed)\nexpected = [n / k] * k\nfor i, e in enumerate(expected):\n    ok = "OK" if e >= 5 else "TOO LOW"\n    print(f"Category {i}: expected = {e:.1f} {ok}")',
     },
     {
       id: 'chi-26', difficulty: 2,
@@ -1442,6 +1648,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'df = 6, critical = 12.59', content: '3.78 < 12.59 → **Fail to reject** — births appear uniformly distributed by day.' },
       ],
       answer: 'χ² = 3.78, df = 6, not significant',
+      code: 'observed = [90, 110, 105, 100, 108, 95, 92]\nexpected = [100] * 7\n# Your code here\n',
+      codeSolution: 'observed = [90, 110, 105, 100, 108, 95, 92]\nexpected = [100] * 7\nchi2 = sum((o - e)**2 / e for o, e in zip(observed, expected))\ndf = len(observed) - 1\nprint(f"Chi-squared = {chi2:.2f}, df = {df}")',
     },
     {
       id: 'chi-28', difficulty: 2,
@@ -1452,6 +1660,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'Effect', content: 'Makes the test more **conservative** (harder to reject H₀), which is appropriate when sample sizes are small to moderate.' },
       ],
       answer: 'Subtract 0.5 from |O−E| before squaring; used for 2×2 tables',
+      code: '# Your code here\n',
+      codeSolution: 'observed = [58, 42]\nexpected = [50, 50]\nchi2_reg = sum((o-e)**2/e for o,e in zip(observed, expected))\nchi2_yates = sum((abs(o-e)-0.5)**2/e for o,e in zip(observed, expected))\nprint(f"Without Yates: {chi2_reg:.2f}")\nprint(f"With Yates:    {chi2_yates:.2f}")',
     },
     {
       id: 'chi-29', difficulty: 2,
@@ -1463,6 +1673,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'Compare', content: '2.25 < 3.84 → still not significant (and slightly more conservative).' },
       ],
       answer: '2.25 (with Yates) vs 2.56 (without)',
+      code: 'observed = [58, 42]\nexpected = [50, 50]\n# Your code here\n',
+      codeSolution: 'observed = [58, 42]\nexpected = [50, 50]\nchi2_yates = sum((abs(o-e)-0.5)**2/e for o,e in zip(observed, expected))\nprint(f"Chi-squared (Yates) = {chi2_yates:.2f}")',
     },
     {
       id: 'chi-30', difficulty: 2,
@@ -1476,6 +1688,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'E(G2,C)', content: '80×40/140 = **22.86**' },
       ],
       answer: 'G1: 21.43, 21.43, 17.14; G2: 28.57, 28.57, 22.86',
+      code: 'observed = [[30, 20, 10], [20, 30, 30]]\n# Your code here\n',
+      codeSolution: 'observed = [[30, 20, 10], [20, 30, 30]]\nrows, cols = len(observed), len(observed[0])\nn = sum(sum(r) for r in observed)\nrt = [sum(r) for r in observed]\nct = [sum(observed[r][c] for r in range(rows)) for c in range(cols)]\nfor r in range(rows):\n    for c in range(cols):\n        e = rt[r] * ct[c] / n\n        print(f"E[G{r+1},{c}] = {e:.2f}")',
     },
     {
       id: 'chi-31', difficulty: 2,
@@ -1499,6 +1713,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'Both use χ²', content: 'Same formula ∑(O−E)²/E, but df and expected values differ.' },
       ],
       answer: 'GoF: one variable vs theory; Independence: two variables vs each other',
+      code: '# Your code here\n',
+      codeSolution: '# GoF: one variable vs theory\nobserved = [8, 12, 10, 11, 9, 10]\nexpected = [10] * 6\ndf_gof = len(observed) - 1\nchi2 = sum((o-e)**2/e for o,e in zip(observed, expected))\nprint(f"GoF test: chi2={chi2:.1f}, df={df_gof}")\nprint(f"Independence test: df = (r-1)(c-1)")',
     },
     {
       id: 'chi-33', difficulty: 2,
@@ -1511,6 +1727,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'df = 1, critical = 3.84', content: '0.366 < 3.84 → **Fail to reject** — preference does not depend on time of day.' },
       ],
       answer: 'χ² = 0.37, df = 1, not significant',
+      code: 'observed = [[80, 40], [50, 30]]\n# Your code here\n',
+      codeSolution: 'observed = [[80, 40], [50, 30]]\nn = sum(sum(row) for row in observed)\nrt = [sum(row) for row in observed]\nct = [sum(observed[r][c] for r in range(2)) for c in range(2)]\nchi2 = 0\nfor r in range(2):\n    for c in range(2):\n        e = rt[r] * ct[c] / n\n        chi2 += (observed[r][c] - e)**2 / e\nprint(f"Chi-squared = {chi2:.3f}, df = 1")\nprint("Reject H0" if chi2 > 3.84 else "Fail to reject H0")',
     },
     {
       id: 'chi-34', difficulty: 2,
@@ -1521,6 +1739,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'Equivalence', content: 'Both tests give the same p-value for two-sided tests. The Z-test additionally allows one-sided tests.' },
       ],
       answer: 'χ²₁ = Z²; same p-value for two-sided tests',
+      code: 'import math\n# Your code here\n',
+      codeSolution: 'import math\nn1, n2, x1, x2 = 100, 100, 70, 40\np1, p2 = x1/n1, x2/n2\np_pool = (x1+x2) / (n1+n2)\nz = (p1 - p2) / math.sqrt(p_pool*(1-p_pool)*(1/n1+1/n2))\nprint(f"Z = {z:.4f}")\nprint(f"Z^2 = {z**2:.3f}")',
     },
 
     // ── Hard (35-50) ───────────────────────────────────────
@@ -1535,6 +1755,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'Recognise', content: 'This is the PDF of **χ²(1)** — Gamma(1/2, 1/2). ∎' },
       ],
       answer: 'Z² ~ χ²₁ (proven via PDF derivation)',
+      code: 'import random\nimport math\n# Your code here\n',
+      codeSolution: 'import random\nimport math\nrandom.seed(42)\nsamples = [random.gauss(0,1)**2 for _ in range(10000)]\nmean = sum(samples) / len(samples)\nvar = sum((x-mean)**2 for x in samples) / (len(samples)-1)\nprint(f"Mean of Z^2 = {mean:.4f} (expected 1)")\nprint(f"Var of Z^2  = {var:.4f} (expected 2)")',
     },
     {
       id: 'chi-36', difficulty: 3,
@@ -1562,6 +1784,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'When to prefer χ²', content: 'When all expected counts ≥ 5 and the table is larger than 2×2, χ² is simpler and sufficient.' },
       ],
       answer: 'Use Fisher when expected counts < 5 or sample is very small; exact for 2×2 tables',
+      code: 'import math\n# Your code here\n',
+      codeSolution: 'import math\na, b, c, d = 4, 1, 1, 4\nn = a + b + c + d\np = (math.factorial(a+b) * math.factorial(c+d) * math.factorial(a+c) * math.factorial(b+d)) / (math.factorial(n) * math.factorial(a) * math.factorial(b) * math.factorial(c) * math.factorial(d))\nprint(f"P(this table) = {p:.4f}")',
     },
     {
       id: 'chi-38', difficulty: 3,
@@ -1574,6 +1798,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'Trade-off', content: 'Bonferroni is conservative — it reduces power (ability to detect real effects).' },
       ],
       answer: 'Test each at α/k to maintain overall α; conservative but controls family-wise error',
+      code: '# Your code here\n',
+      codeSolution: 'alpha = 0.05\nfor k in [1, 5, 10, 20]:\n    alpha_adj = alpha / k\n    p_fp = 1 - (1 - alpha)**k\n    print(f"k={k:>2}: P(false pos)={p_fp:.3f}, Bonferroni alpha={alpha_adj:.4f}")',
     },
     {
       id: 'chi-39', difficulty: 3,
@@ -1587,6 +1813,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'Two-sided p-value', content: 'By symmetry, p = 2 × 0.1032 = **0.2063** (or sum all tables with P ≤ P_observed)' },
       ],
       answer: 'Two-sided p ≈ 0.206 — not significant at α = 0.05',
+      code: 'import math\n# Your code here\n',
+      codeSolution: 'import math\ndef hypergeom_pmf(a, b, c, d):\n    n = a+b+c+d\n    return (math.comb(a+b, a) * math.comb(c+d, c)) / math.comb(n, a+c)\nfor a in range(6):\n    b, c, d = 5-a, 5-a, a\n    p = hypergeom_pmf(a, b, c, d)\n    print(f"[[{a},{b}],[{c},{d}]]: P = {p:.4f}")\np_one = hypergeom_pmf(4,1,1,4) + hypergeom_pmf(5,0,0,5)\nprint(f"One-sided p = {p_one:.4f}")',
     },
     {
       id: 'chi-40', difficulty: 3,
@@ -1599,6 +1827,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'Note', content: 'This is approximate (ignores covariance terms), but the result is exact for the χ² distribution.' },
       ],
       answer: 'E[χ²] = df = k − 1 under H₀',
+      code: 'import random\n# Your code here\n',
+      codeSolution: 'import random\nrandom.seed(42)\nk = 4\nn = 100\ndf = k - 1\nchi2_vals = []\nfor _ in range(10000):\n    counts = [0]*k\n    for _ in range(n): counts[random.randint(0,k-1)] += 1\n    exp = n/k\n    chi2_vals.append(sum((c-exp)**2/exp for c in counts))\nmean = sum(chi2_vals)/len(chi2_vals)\nprint(f"E[chi2] = {mean:.3f} (expected df = {df})")',
     },
     {
       id: 'chi-41', difficulty: 3,
@@ -1610,6 +1840,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'Interpretation', content: 'V = 0.30 is a **medium** effect (0.1 = small, 0.3 = medium, 0.5 = large for 2×2).' },
       ],
       answer: "Cramér's V = 0.302 (medium effect)",
+      code: 'import math\nchi2 = 18.18\nn = 200\n# Your code here\n',
+      codeSolution: 'import math\nchi2 = 18.18\nn = 200\nv = math.sqrt(chi2 / (n * min(2-1, 2-1)))\nprint(f"Cramers V = {v:.3f}")',
     },
     {
       id: 'chi-42', difficulty: 3,
@@ -1622,6 +1854,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'df = (2−1)(3−1) = 2', content: 'Critical = 5.99. Since 6.022 > 5.99 → **Reject** (barely) — populations differ.' },
       ],
       answer: 'χ² = 6.02, df = 2, significant — populations are not homogeneous',
+      code: 'observed = [[50, 60, 40], [40, 50, 60]]\n# Your code here\n',
+      codeSolution: 'observed = [[50, 60, 40], [40, 50, 60]]\nrows, cols = len(observed), len(observed[0])\nn = sum(sum(r) for r in observed)\nrt = [sum(r) for r in observed]\nct = [sum(observed[r][c] for r in range(rows)) for c in range(cols)]\nchi2 = 0\nfor r in range(rows):\n    for c in range(cols):\n        e = rt[r] * ct[c] / n\n        chi2 += (observed[r][c] - e)**2 / e\ndf = (rows-1)*(cols-1)\nprint(f"Chi-squared = {chi2:.3f}, df = {df}")',
     },
     {
       id: 'chi-43', difficulty: 3,
@@ -1635,6 +1869,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'Compare to χ²', content: 'Pearson χ² = 2.56. Very similar! G-test and χ² agree closely for moderate samples.' },
       ],
       answer: 'G = 2.564 (nearly identical to χ² = 2.56)',
+      code: 'import math\nobserved = [58, 42]\nexpected = [50, 50]\n# Your code here\n',
+      codeSolution: 'import math\nobserved = [58, 42]\nexpected = [50, 50]\nG = 2 * sum(o * math.log(o/e) for o, e in zip(observed, expected))\nchi2 = sum((o-e)**2/e for o,e in zip(observed, expected))\nprint(f"G-test = {G:.3f}")\nprint(f"Chi-squared = {chi2:.3f}")',
     },
     {
       id: 'chi-44', difficulty: 3,
@@ -1646,6 +1882,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'Special cases', content: 'χ²(2) = Exp(1/2) (exponential). χ²(1) = Gamma(1/2, 1/2).' },
       ],
       answer: 'χ²(k) = Gamma(k/2, 1/2); for k=2, it is exponential',
+      code: 'import random\nimport math\n# Your code here\n',
+      codeSolution: 'import random\nimport math\nrandom.seed(42)\nk = 4\nsamples = [sum(random.gauss(0,1)**2 for _ in range(k)) for _ in range(10000)]\nmean = sum(samples)/len(samples)\nvar = sum((x-mean)**2 for x in samples)/(len(samples)-1)\nprint(f"chi2({k}): mean={mean:.3f} (expected {k}), var={var:.3f} (expected {2*k})")',
     },
     {
       id: 'chi-45', difficulty: 3,
@@ -1671,6 +1909,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'Insight', content: 'Detecting a very slight bias requires a very large sample — power increases with n.' },
       ],
       answer: '≈ 6,000+ rolls needed to detect this slight bias with 80% power',
+      code: 'import math\n# Your code here\n',
+      codeSolution: 'import math\ntrue_p = [0.18, 0.17, 0.17, 0.16, 0.16, 0.16]\nnull_p = [1/6] * 6\nfor n in [100, 500, 1000, 5000, 10000]:\n    chi2 = n * sum((tp - np_)**2 / np_ for tp, np_ in zip(true_p, null_p))\n    print(f"n={n:>5}: chi2 = {chi2:.2f} (critical=11.07)")',
     },
     {
       id: 'chi-47', difficulty: 3,
@@ -1683,6 +1923,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'Interpretation', content: 'The largest residual is Treatment C, Poor outcome (r = 2.74 > 2). This cell drives the significance — Treatment C has **many more poor outcomes** than expected.' },
       ],
       answer: 'Largest residual: Treatment C, Poor = 2.74 (main contributor to significance)',
+      code: 'import math\nobserved = [[50,30,20],[40,35,25],[30,25,45]]\n# Your code here\n',
+      codeSolution: 'import math\nobserved = [[50,30,20],[40,35,25],[30,25,45]]\nexpected = [[40,30,30],[40,30,30],[40,30,30]]\nlabels = ["A","B","C"]\ncols = ["Good","Fair","Poor"]\nfor r in range(3):\n    for c in range(3):\n        resid = (observed[r][c]-expected[r][c])/math.sqrt(expected[r][c])\n        flag = " ***" if abs(resid)>2 else ""\n        print(f"{labels[r]},{cols[c]}: r={resid:.2f}{flag}")',
     },
     {
       id: 'chi-48', difficulty: 3,
@@ -1695,6 +1937,8 @@ export const practiceChiSquared: PracticeSet = {
         { label: 'When to use', content: 'When observations are **paired** (same subjects measured twice), making standard χ² inappropriate.' },
       ],
       answer: 'McNemar: (b−c)²/(b+c) for paired 2×2 data; only discordant pairs matter',
+      code: '# Your code here\n',
+      codeSolution: 'a, b, c, d = 40, 15, 5, 40\nchi2_mcnemar = (b - c)**2 / (b + c)\nprint(f"Discordant: b={b}, c={c}")\nprint(f"McNemar chi2 = {chi2_mcnemar:.3f}")\nprint("Reject H0" if chi2_mcnemar > 3.84 else "Fail to reject H0")',
     },
     {
       id: 'chi-49', difficulty: 3,

@@ -34,6 +34,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 2: Substitute', content: 'C(8,2) = 8! / (2! × 6!) = (8 × 7) / (2 × 1) = **28**' },
       ],
       answer: '28',
+      code: '# Compute C(8, 2)\nfrom math import comb\n\n# Your code here\n',
+      codeSolution: 'from math import comb\n\nresult = comb(8, 2)\nprint(f"C(8,2) = {result}")',
     },
     {
       id: 'bin-03', difficulty: 1,
@@ -44,6 +46,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 2: C(6,6)', content: 'C(6,6) = 1 (there is exactly one way to choose everything)' },
       ],
       answer: 'Both equal 1',
+      code: '# Compute C(6, 0) and C(6, 6)\nfrom math import comb\n\n# Your code here\n',
+      codeSolution: 'from math import comb\n\nprint(f"C(6,0) = {comb(6, 0)}")\nprint(f"C(6,6) = {comb(6, 6)}")',
     },
     {
       id: 'bin-04', difficulty: 1,
@@ -54,6 +58,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 2: Compute', content: 'P(X=0) = C(4,0) × 0.5⁰ × 0.5⁴ = 1 × 1 × 0.0625 = **0.0625**' },
       ],
       answer: '0.0625',
+      code: '# Compute P(X=0) for 4 fair coin flips\nfrom math import comb\n\n# Your code here\n',
+      codeSolution: 'from math import comb\n\nn, k, p = 4, 0, 0.5\nprob = comb(n, k) * p**k * (1-p)**(n-k)\nprint(f"P(X=0) = {prob}")',
     },
     {
       id: 'bin-05', difficulty: 1,
@@ -63,6 +69,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 2: Substitute', content: 'Mean = 20 × 0.3 = **6**' },
       ],
       answer: '6',
+      code: '# Compute mean of Binomial(20, 0.3)\n# Your code here\n',
+      codeSolution: 'n, p = 20, 0.3\nmean = n * p\nprint(f"Mean = {mean}")',
     },
     {
       id: 'bin-06', difficulty: 1,
@@ -72,6 +80,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 2: Substitute', content: 'σ = √(50 × 0.4 × 0.6) = √12 ≈ **3.464**' },
       ],
       answer: '≈ 3.464',
+      code: '# Compute std dev of Binomial(50, 0.4)\nimport math\n\n# Your code here\n',
+      codeSolution: 'import math\n\nn, p = 50, 0.4\nstd = math.sqrt(n * p * (1 - p))\nprint(f"SD = {std:.3f}")',
     },
     {
       id: 'bin-07', difficulty: 1,
@@ -83,6 +93,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 3: Apply formula', content: 'P(X=1) = 3 × (1/6)¹ × (5/6)² = 3 × (1/6) × (25/36) = 75/216 ≈ **0.3472**' },
       ],
       answer: '75/216 ≈ 0.347',
+      code: '# P(exactly 1 six) in 3 rolls of a fair die\nfrom math import comb\n\n# Your code here\n',
+      codeSolution: 'from math import comb\nfrom fractions import Fraction\n\nn, k = 3, 1\np = Fraction(1, 6)\nprob = comb(n, k) * p**k * (1-p)**(n-k)\nprint(f"P(X=1) = {prob} = {float(prob):.4f}")',
     },
     {
       id: 'bin-08', difficulty: 1,
@@ -92,6 +104,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 2: Simplify', content: '(10 × 9 × 8) / (3 × 2 × 1) = 720 / 6 = **120**' },
       ],
       answer: '120',
+      code: '# Compute C(10, 3)\nfrom math import comb\n\n# Your code here\n',
+      codeSolution: 'from math import comb\n\nresult = comb(10, 3)\nprint(f"C(10,3) = {result}")',
     },
     {
       id: 'bin-09', difficulty: 1,
@@ -102,6 +116,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 3: Compute', content: 'P(X=2) = 15 × 0.25² × 0.75⁴ = 15 × 0.0625 × 0.3164 ≈ **0.2966**' },
       ],
       answer: '≈ 0.297',
+      code: '# P(exactly 2 correct) guessing on 6 MCQs\nfrom math import comb\n\n# Your code here\n',
+      codeSolution: 'from math import comb\n\nn, k, p = 6, 2, 0.25\nprob = comb(n, k) * p**k * (1-p)**(n-k)\nprint(f"P(X=2) = {prob:.4f}")',
     },
     {
       id: 'bin-10', difficulty: 1,
@@ -112,6 +128,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 2: Compute', content: 'P(X=6) = C(6,6) × 0.5⁶ = 1 × 0.015625 = **0.015625**' },
       ],
       answer: '1/64 ≈ 0.0156',
+      code: '# P(all heads) in 6 fair coin flips\nfrom math import comb\n\n# Your code here\n',
+      codeSolution: 'from math import comb\nfrom fractions import Fraction\n\nn, k, p = 6, 6, Fraction(1, 2)\nprob = comb(n, k) * p**k * (1-p)**(n-k)\nprint(f"P(X=6) = {prob} = {float(prob):.6f}")',
     },
     {
       id: 'bin-11', difficulty: 1,
@@ -131,6 +149,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 1: Recall conditions', content: 'A binomial experiment requires: (1) fixed number of trials, (2) two outcomes per trial, (3) constant probability, (4) **independent trials**.' },
       ],
       answer: 'True',
+      code: '# Verify binomial independence requirement\n# Your code here\n',
+      codeSolution: 'import random\nrandom.seed(42)\nn_trials = 100000\nn, p = 10, 0.5\ncounts = [0] * (n + 1)\nfor _ in range(n_trials):\n    heads = sum(1 for _ in range(n) if random.random() < p)\n    counts[heads] += 1\nprint("Simulated (independent trials):")\nfor k in range(n + 1):\n    print(f"  P(X={k}) = {counts[k]/n_trials:.4f}")\nprint("True: Binomial requires independent trials.")',
     },
     {
       id: 'bin-13', difficulty: 1,
@@ -142,6 +162,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 3: Add', content: '1/32 + 1/32 = 2/32 = **1/16 = 0.0625**' },
       ],
       answer: '1/16 = 0.0625',
+      code: '# P(5 heads) + P(0 heads) for 5 fair coin flips\nfrom math import comb\n\n# Your code here\n',
+      codeSolution: 'from math import comb\n\nn, p = 5, 0.5\np5 = comb(n, 5) * p**5 * (1-p)**0\np0 = comb(n, 0) * p**0 * (1-p)**5\nresult = p5 + p0\nprint(f"P(X=5) + P(X=0) = {p5} + {p0} = {result}")',
     },
     {
       id: 'bin-14', difficulty: 1,
@@ -150,6 +172,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 1: Formula', content: 'C(7,4) = 7! / (4! × 3!) = (7 × 6 × 5) / (3 × 2 × 1) = 210 / 6 = **35**' },
       ],
       answer: '35',
+      code: '# Compute C(7, 4)\nfrom math import comb\n\n# Your code here\n',
+      codeSolution: 'from math import comb\n\nresult = comb(7, 4)\nprint(f"C(7,4) = {result}")',
     },
     {
       id: 'bin-15', difficulty: 1,
@@ -159,6 +183,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 2: Variance', content: 'σ² = np(1−p) = 10 × 0.7 × 0.3 = **2.1**' },
       ],
       answer: 'Mean = 7, Variance = 2.1',
+      code: '# Mean and variance of Binomial(10, 0.7)\n# Your code here\n',
+      codeSolution: 'n, p = 10, 0.7\nmean = n * p\nvariance = n * p * (1 - p)\nprint(f"Mean = {mean}")\nprint(f"Variance = {variance}")',
     },
     {
       id: 'bin-16', difficulty: 1,
@@ -169,6 +195,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 2: Compute', content: 'P(X=4) = 70 × 0.5⁴ × 0.5⁴ = 70 × (1/256) = 70/256 ≈ **0.2734**' },
       ],
       answer: '70/256 ≈ 0.273',
+      code: '# P(X=4) for Binomial(8, 0.5)\nfrom math import comb\n\n# Your code here\n',
+      codeSolution: 'from math import comb\nfrom fractions import Fraction\n\nn, k, p = 8, 4, Fraction(1, 2)\nprob = comb(n, k) * p**k * (1-p)**(n-k)\nprint(f"P(X=4) = {prob} = {float(prob):.4f}")',
     },
     {
       id: 'bin-17', difficulty: 1,
@@ -179,6 +207,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 3: Compute', content: 'P(X=3) = 10 × 0.6³ × 0.4² = 10 × 0.216 × 0.16 = **0.3456**' },
       ],
       answer: '≈ 0.346',
+      code: '# P(exactly 3 makes) in 5 free throws, p=0.6\nfrom math import comb\n\n# Your code here\n',
+      codeSolution: 'from math import comb\n\nn, k, p = 5, 3, 0.6\nprob = comb(n, k) * p**k * (1-p)**(n-k)\nprint(f"P(X=3) = {prob:.4f}")',
     },
 
     // ── Medium (18-34) ─────────────────────────────────────
@@ -205,6 +235,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 3: Evaluate', content: '0.95²⁰ ≈ **0.3585**' },
       ],
       answer: '≈ 0.359',
+      code: '# P(0 defectives) in batch of 20, defect rate 5%\nfrom math import comb\n\n# Your code here\n',
+      codeSolution: 'from math import comb\n\nn, k, p = 20, 0, 0.05\nprob = comb(n, k) * p**k * (1-p)**(n-k)\nprint(f"P(X=0) = {prob:.4f}")',
     },
     {
       id: 'bin-20', difficulty: 2,
@@ -215,6 +247,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 3: Add', content: '0.3585 + 0.3774 ≈ **0.7359**' },
       ],
       answer: '≈ 0.736',
+      code: '# P(at most 1 defective) in batch of 20, defect rate 5%\nfrom math import comb\n\n# Your code here\n',
+      codeSolution: 'from math import comb\n\nn, p = 20, 0.05\nprob = sum(comb(n, k) * p**k * (1-p)**(n-k) for k in range(0, 2))\nprint(f"P(X <= 1) = {prob:.4f}")',
     },
     {
       id: 'bin-21', difficulty: 2,
@@ -225,6 +259,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 3: Compute', content: 'P(X=10) = 3003 × 0.55¹⁰ × 0.45⁵ = 3003 × 0.002533 × 0.01845 ≈ **0.1404**' },
       ],
       answer: '≈ 0.140',
+      code: '# P(exactly 10 support) out of 15, p=0.55\nfrom math import comb\n\n# Your code here\n',
+      codeSolution: 'from math import comb\n\nn, k, p = 15, 10, 0.55\nprob = comb(n, k) * p**k * (1-p)**(n-k)\nprint(f"P(X=10) = {prob:.4f}")',
     },
     {
       id: 'bin-22', difficulty: 2,
@@ -237,6 +273,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 3: Look up z-table', content: 'P(Z ≥ 0.9) = 1 − 0.8159 = **0.1841**' },
       ],
       answer: '≈ 0.184',
+      code: '# Normal approx for P(X >= 55), Binomial(100, 0.5)\nfrom math import sqrt, erf\n\n# Your code here\n',
+      codeSolution: 'from math import sqrt, erf\n\nn, p = 100, 0.5\nmu = n * p\nsigma = sqrt(n * p * (1 - p))\ndef phi(x):\n    return 0.5 * (1 + erf(x / sqrt(2)))\nz = (54.5 - mu) / sigma\nprob = 1 - phi(z)\nprint(f"P(X >= 55) approx {prob:.4f}")',
     },
     {
       id: 'bin-23', difficulty: 2,
@@ -248,6 +286,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 3: Std dev', content: 'σ = √(12 × 1/6 × 5/6) = √(10/6) ≈ **1.291**' },
       ],
       answer: 'Mean = 2, SD ≈ 1.291',
+      code: '# Expected sixes and std dev for 12 rolls\nimport math\n\n# Your code here\n',
+      codeSolution: 'import math\nn = 12\np = 1/6\nmean = n * p\nstd = math.sqrt(n * p * (1 - p))\nprint(f"Mean = {mean:.4f}")\nprint(f"SD = {std:.3f}")',
     },
     {
       id: 'bin-24', difficulty: 2,
@@ -260,6 +300,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 5: Sum', content: '0.2965 + 0.1977 + 0.0576 ≈ **0.5518**' },
       ],
       answer: '≈ 0.552',
+      code: '# P(at least 6 germinate) out of 8, p=0.7\nfrom math import comb\n\n# Your code here\n',
+      codeSolution: 'from math import comb\n\nn, p = 8, 0.7\nprob = sum(comb(n, k) * p**k * (1-p)**(n-k) for k in range(6, 9))\nprint(f"P(X >= 6) = {prob:.4f}")',
     },
     {
       id: 'bin-25', difficulty: 2,
@@ -269,6 +311,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 2: Compute', content: 'P(X=15) = 0.9¹⁵ ≈ **0.2059**' },
       ],
       answer: '≈ 0.206',
+      code: '# P(all 15 protected), p=0.9\n# Your code here\n',
+      codeSolution: 'n, p = 15, 0.9\nprob = p ** n\nprint(f"P(X=15) = {prob:.4f}")',
     },
     {
       id: 'bin-26', difficulty: 2,
@@ -294,6 +338,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 2: Sum', content: '0.125 + 0.375 + 0.375 + 0.125 = **1.000** ✓' },
       ],
       answer: '1.000 (verified)',
+      code: '# Verify binomial probs sum to 1 for n=3, p=0.5\nfrom math import comb\n\n# Your code here\n',
+      codeSolution: 'from math import comb\n\nn, p = 3, 0.5\ntotal = 0\nfor k in range(n + 1):\n    prob = comb(n, k) * p**k * (1-p)**(n-k)\n    total += prob\n    print(f"P(X={k}) = {prob:.4f}")\nprint(f"Sum = {total:.4f}")',
       visual: { kind: 'bar-chart', labels: ['0','1','2','3'], values: [0.125,0.375,0.375,0.125] },
     },
     {
@@ -306,6 +352,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 3: Subtract', content: '1 − 0.6035 ≈ **0.3965**' },
       ],
       answer: '≈ 0.397',
+      code: '# P(at least 1 defective) in 25 items, 2% defect\nfrom math import comb\n\n# Your code here\n',
+      codeSolution: 'from math import comb\n\nn, p = 25, 0.02\np_zero = comb(n, 0) * p**0 * (1-p)**n\nprob = 1 - p_zero\nprint(f"P(X >= 1) = 1 - {p_zero:.4f} = {prob:.4f}")',
     },
     {
       id: 'bin-29', difficulty: 2,
@@ -317,6 +365,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 3: From z-table', content: 'P(−2.1 ≤ Z ≤ 2.1) = 2 × 0.4821 ≈ **0.9643**' },
       ],
       answer: '≈ 0.964',
+      code: '# Normal approx for P(40<=X<=60), Binomial(100,0.5)\nfrom math import sqrt, erf\n\n# Your code here\n',
+      codeSolution: 'from math import sqrt, erf\n\nn, p = 100, 0.5\nmu = n * p\nsigma = sqrt(n * p * (1 - p))\ndef phi(x):\n    return 0.5 * (1 + erf(x / sqrt(2)))\nz1 = (39.5 - mu) / sigma\nz2 = (60.5 - mu) / sigma\nprob = phi(z2) - phi(z1)\nprint(f"P(40 <= X <= 60) approx {prob:.4f}")',
     },
     {
       id: 'bin-30', difficulty: 2,
@@ -339,6 +389,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 3: Parameters', content: 'X ≈ N(6, √4.8) = N(6, 2.19)' },
       ],
       answer: 'Yes; approximately N(6, 2.19)',
+      code: '# Check normal approx for Binomial(30, 0.2)\nimport math\n\n# Your code here\n',
+      codeSolution: 'import math\n\nn, p = 30, 0.2\nnp_val = n * p\nnq_val = n * (1 - p)\nmu = np_val\nsigma = math.sqrt(n * p * (1 - p))\nprint(f"np = {np_val}, n(1-p) = {nq_val}")\nprint(f"Both >= 5? {np_val >= 5 and nq_val >= 5}")\nprint(f"Approx: N({mu}, {sigma:.2f})")',
     },
     {
       id: 'bin-32', difficulty: 2,
@@ -350,6 +402,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 3: Compute', content: 'P(X=2) = 10 × 0.25² × 0.75³ = 10 × 0.0625 × 0.4219 ≈ **0.2637**' },
       ],
       answer: '≈ 0.264',
+      code: '# P(exactly 2 hearts) in 5 draws with replacement\nfrom math import comb\n\n# Your code here\n',
+      codeSolution: 'from math import comb\n\nn, k, p = 5, 2, 0.25\nprob = comb(n, k) * p**k * (1-p)**(n-k)\nprint(f"P(X=2) = {prob:.4f}")',
     },
     {
       id: 'bin-33', difficulty: 2,
@@ -360,6 +414,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 3: Compute', content: 'P(X=3) = 35 × 0.3³ × 0.7⁴ = 35 × 0.027 × 0.2401 ≈ **0.2269**' },
       ],
       answer: '≈ 0.227',
+      code: '# P(rain on exactly 3 of 7 days), p=0.3\nfrom math import comb\n\n# Your code here\n',
+      codeSolution: 'from math import comb\n\nn, k, p = 7, 3, 0.3\nprob = comb(n, k) * p**k * (1-p)**(n-k)\nprint(f"P(X=3) = {prob:.4f}")',
     },
     {
       id: 'bin-34', difficulty: 2,
@@ -371,6 +427,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 4: Sum', content: '0.2541 + 0.2965 ≈ **0.5506**' },
       ],
       answer: '≈ 0.551',
+      code: '# P(within 1 SD of mean) for Binomial(8, 0.7)\nfrom math import comb, sqrt\n\n# Your code here\n',
+      codeSolution: 'from math import comb, sqrt\n\nn, p = 8, 0.7\nmu = n * p\nsigma = sqrt(n * p * (1 - p))\nlow = mu - sigma\nhigh = mu + sigma\nprint(f"Mean={mu}, SD={sigma:.3f}, Range=({low:.3f},{high:.3f})")\nprob = sum(comb(n, k) * p**k * (1-p)**(n-k) for k in range(n+1) if low <= k <= high)\nprint(f"P(within 1 SD) = {prob:.4f}")',
     },
 
     // ── Hard (35-50) ───────────────────────────────────────
@@ -383,6 +441,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 3: Linearity of expectation', content: 'E[X] = E[X₁] + E[X₂] + … + E[Xₙ] = **np** ∎' },
       ],
       answer: 'E[X] = np',
+      code: '# Verify E[X] = np using simulation\n# Your code here\n',
+      codeSolution: 'import random\nrandom.seed(42)\nn, p = 20, 0.3\nprint(f"Theory: E[X] = n*p = {n*p}")\ntrials = 100000\ntotal = sum(sum(1 for _ in range(n) if random.random() < p) for _ in range(trials))\nprint(f"Simulated mean = {total/trials:.3f}")',
     },
     {
       id: 'bin-36', difficulty: 3,
@@ -393,6 +453,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 3: Conclusion', content: 'Var(X) = np(1−p), so σ = **√(np(1−p))** ∎' },
       ],
       answer: 'Var(X) = np(1−p)',
+      code: '# Verify Var(X) = np(1-p) via simulation\n# Your code here\n',
+      codeSolution: 'import random, math\nrandom.seed(42)\nn, p = 20, 0.3\nvar_theory = n * p * (1 - p)\nprint(f"Theory: Var = {var_theory}, SD = {math.sqrt(var_theory):.4f}")\ntrials = 100000\nvals = [sum(1 for _ in range(n) if random.random() < p) for _ in range(trials)]\nmean = sum(vals)/trials\nvar_sim = sum((v-mean)**2 for v in vals)/trials\nprint(f"Simulated: Var = {var_sim:.3f}")',
     },
     {
       id: 'bin-37', difficulty: 3,
@@ -416,6 +478,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 3: z-table', content: 'P(Z < −1.56) ≈ **0.0594**' },
       ],
       answer: '≈ 0.059',
+      code: '# Normal approx: P(X<120), Binomial(200,0.65)\nfrom math import sqrt, erf\n\n# Your code here\n',
+      codeSolution: 'from math import sqrt, erf\n\nn, p = 200, 0.65\nmu = n * p\nsigma = sqrt(n * p * (1 - p))\ndef phi(x):\n    return 0.5 * (1 + erf(x / sqrt(2)))\nz = (119.5 - mu) / sigma\nprob = phi(z)\nprint(f"mu={mu}, sigma={sigma:.3f}, z={z:.3f}")\nprint(f"P(X < 120) approx {prob:.4f}")',
     },
     {
       id: 'bin-39', difficulty: 3,
@@ -439,6 +503,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 3: Compare', content: 'Both equal n! / (k!(n−k)!), so **C(n,k) = C(n, n−k)** ∎' },
       ],
       answer: 'C(n,k) = C(n, n−k) (proven)',
+      code: '# Verify C(n,k) = C(n,n-k)\nfrom math import comb\n\n# Your code here\n',
+      codeSolution: 'from math import comb\n\nfor n in range(1, 11):\n    for k in range(n + 1):\n        assert comb(n, k) == comb(n, n-k)\nprint("Verified: C(n,k) = C(n,n-k) for n=1..10")\nfor n, k in [(5,2),(8,3),(10,4)]:\n    print(f"C({n},{k})={comb(n,k)}, C({n},{n-k})={comb(n,n-k)}")',
     },
     {
       id: 'bin-41', difficulty: 3,
@@ -450,6 +516,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 4: Round down', content: 'n ≤ **10** (since n must be a whole number)' },
       ],
       answer: 'Maximum batch size = 10',
+      code: '# Max batch size so P(0 defectives)>=0.90\nimport math\n\n# Your code here\n',
+      codeSolution: 'import math\n\np_defect = 0.01\nthreshold = 0.90\nn = math.floor(math.log(threshold) / math.log(1 - p_defect))\nprint(f"Max batch size = {n}")\nprint(f"P(0 def) at n={n}: {(1-p_defect)**n:.4f}")\nprint(f"P(0 def) at n={n+1}: {(1-p_defect)**(n+1):.4f}")',
     },
     {
       id: 'bin-42', difficulty: 3,
@@ -460,6 +528,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 3: Solve', content: '0.25/n ≤ 0.0004 → n ≥ 0.25/0.0004 = **625**' },
       ],
       answer: 'n ≥ 625',
+      code: '# Min n so SD of sample proportion <= 0.02\nimport math\n\n# Your code here\n',
+      codeSolution: 'import math\n\np = 0.5\nmax_sd = 0.02\nn = math.ceil(p * (1 - p) / max_sd**2)\nprint(f"Minimum n = {n}")\nsd = math.sqrt(p * (1 - p) / n)\nprint(f"SD(p-hat) at n={n}: {sd:.6f}")',
     },
     {
       id: 'bin-43', difficulty: 3,
@@ -471,6 +541,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 3: Conclusion', content: 'Probabilities increase up to k = ⌊(n+1)p − 1⌋ = ⌊(n+1)p⌋ − 1, so the mode is at **⌊(n+1)p⌋** or **⌊(n+1)p⌋ − 1** (tie when (n+1)p is an integer). ∎' },
       ],
       answer: 'Mode is at ⌊(n+1)p⌋ or ⌊(n+1)p⌋ − 1',
+      code: '# Find mode of Binomial(n, p)\nfrom math import comb, floor\n\n# Your code here\n',
+      codeSolution: 'from math import comb, floor\n\ndef binom_mode(n, p):\n    probs = [comb(n,k)*p**k*(1-p)**(n-k) for k in range(n+1)]\n    mx = max(probs)\n    return [k for k,pr in enumerate(probs) if abs(pr-mx)<1e-12]\n\nfor n, p in [(10,0.3),(10,0.5),(6,0.4),(20,0.7)]:\n    modes = binom_mode(n, p)\n    fv = (n+1)*p\n    print(f"Bin({n},{p}): mode={modes}, (n+1)p={fv:.1f}, floor={floor(fv)}")',
     },
     {
       id: 'bin-44', difficulty: 3,
@@ -482,6 +554,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 4: Total', content: '0.2 + 2.0 = **2.2** misclassified emails' },
       ],
       answer: '2.2 emails expected misclassified',
+      code: '# Expected misclassified emails\n# Your code here\n',
+      codeSolution: 'total = 50\nspam = total * 0.20\nnonspam = total * 0.80\nmissed_spam = spam * 0.02\nmissed_nonspam = nonspam * 0.05\nprint(f"Expected misclassified = {missed_spam} + {missed_nonspam} = {missed_spam + missed_nonspam}")',
     },
     {
       id: 'bin-45', difficulty: 3,
@@ -492,6 +566,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 3: P(5 flips for 3rd head)', content: 'Need exactly 2 heads in first 4 flips AND heads on flip 5: C(4,2) × 0.5⁴ × 0.5 = 6 × 0.5⁵ = 6/32 = **3/16 = 0.1875**' },
       ],
       answer: 'Negative Binomial; P = 3/16 = 0.1875',
+      code: '# Negative binomial: P(3rd head on flip 5)\nfrom math import comb\n\n# Your code here\n',
+      codeSolution: 'from math import comb\nfrom fractions import Fraction\n\nr, n = 3, 5\np = Fraction(1, 2)\nprob = comb(n-1, r-1) * p**r * (1-p)**(n-r)\nprint(f"P(3rd head on flip 5) = {prob} = {float(prob):.4f}")',
     },
     {
       id: 'bin-46', difficulty: 3,
@@ -502,6 +578,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 3: Binomial part', content: 'P(X=1) from Binomial(10, 0.03) = C(10,1) × 0.03 × 0.97⁹ = 10 × 0.03 × 0.7602 ≈ **0.2281**' },
       ],
       answer: 'P(from A | defective) ≈ 0.474; P(1 defective in 10) ≈ 0.228',
+      code: '# Bayes + binomial: factory defect problem\nfrom math import comb\n\n# Your code here\n',
+      codeSolution: 'from math import comb\n\np_d_a, p_d_b = 0.03, 0.05\np_a, p_b = 0.60, 0.40\np_d = p_d_a*p_a + p_d_b*p_b\np_a_d = (p_d_a*p_a)/p_d\nprint(f"P(A|defective) = {p_a_d:.4f}")\nn, k, p = 10, 1, 0.03\nprob = comb(n,k)*p**k*(1-p)**(n-k)\nprint(f"P(1 defective in 10) = {prob:.4f}")',
     },
     {
       id: 'bin-47', difficulty: 3,
@@ -527,6 +605,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 4: Probability', content: 'P(Z < −0.94) ≈ **0.174**' },
       ],
       answer: '≈ 0.174 (about 17.4% chance the poll gets it wrong)',
+      code: '# Normal approx: P(poll<50%), Bin(500,0.52)\nfrom math import sqrt, erf\n\n# Your code here\n',
+      codeSolution: 'from math import sqrt, erf\n\nn, p = 500, 0.52\nmu = n * p\nsigma = sqrt(n * p * (1 - p))\ndef phi(x):\n    return 0.5 * (1 + erf(x / sqrt(2)))\nz = (249.5 - mu) / sigma\nprob = phi(z)\nprint(f"mu={mu}, sigma={sigma:.2f}")\nprint(f"P(poll < 50%) approx {prob:.4f}")',
     },
     {
       id: 'bin-49', difficulty: 3,
@@ -538,6 +618,8 @@ export const practiceBinomialDistribution: PracticeSet = {
         { label: 'Step 4: Verify variance', content: 'Var(X) = E[X²] − (E[X])² = n²p² − np² + np − n²p² = np(1−p) ✓' },
       ],
       answer: 'E[X] = np, E[X²] = n²p² − np² + np',
+      code: '# Verify MGF E[X] and E[X^2] for Binomial\nfrom math import comb\n\n# Your code here\n',
+      codeSolution: 'from math import comb\n\nn, p = 10, 0.4\nex = sum(k*comb(n,k)*p**k*(1-p)**(n-k) for k in range(n+1))\nex2 = sum(k**2*comb(n,k)*p**k*(1-p)**(n-k) for k in range(n+1))\nvar = ex2 - ex**2\nprint(f"E[X]={ex:.4f} (np={n*p})")\nprint(f"E[X^2]={ex2:.4f}")\nprint(f"Var={var:.4f} (np(1-p)={n*p*(1-p):.4f})")',
     },
     {
       id: 'bin-50', difficulty: 3,
@@ -572,6 +654,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 2: Classify', content: 'This is a **positive correlation**.' },
       ],
       answer: 'Positive correlation',
+      code: '# Demonstrate positive correlation\n# Your code here\n',
+      codeSolution: 'hours = [1, 2, 3, 4, 5]\nscores = [50, 55, 65, 70, 85]\nn = len(hours)\nhb = sum(hours)/n\nsb = sum(scores)/n\nnum = sum((h-hb)*(s-sb) for h,s in zip(hours, scores))\nden = (sum((h-hb)**2 for h in hours)*sum((s-sb)**2 for s in scores))**0.5\nr = num/den\nprint(f"r = {r:.4f} (positive correlation)")',
     },
     {
       id: 'cor-02', difficulty: 1,
@@ -581,6 +665,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 2: Classify', content: 'This is a **negative correlation**.' },
       ],
       answer: 'Negative correlation',
+      code: '# Demonstrate negative correlation\n# Your code here\n',
+      codeSolution: 'temp = [10, 20, 30, 40, 50]\nhot_choc = [100, 80, 50, 30, 10]\nn = len(temp)\ntb = sum(temp)/n\nhb = sum(hot_choc)/n\nnum = sum((t-tb)*(h-hb) for t,h in zip(temp, hot_choc))\nden = (sum((t-tb)**2 for t in temp)*sum((h-hb)**2 for h in hot_choc))**0.5\nr = num/den\nprint(f"r = {r:.4f} (negative correlation)")',
     },
     {
       id: 'cor-03', difficulty: 1,
@@ -590,6 +676,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 2: Classify', content: 'This is **no correlation** (r ≈ 0).' },
       ],
       answer: 'No correlation',
+      code: '# Demonstrate no correlation\n# Your code here\n',
+      codeSolution: 'import random\nrandom.seed(42)\nshoe = [7,8,9,10,11,12,8,9,10,11]\niq = [random.randint(85,130) for _ in shoe]\nn = len(shoe)\nsb = sum(shoe)/n\nib = sum(iq)/n\nnum = sum((s-sb)*(i-ib) for s,i in zip(shoe, iq))\nden = (sum((s-sb)**2 for s in shoe)*sum((i-ib)**2 for i in iq))**0.5\nr = num/den\nprint(f"r = {r:.4f} (approximately no correlation)")',
     },
     {
       id: 'cor-04', difficulty: 1,
@@ -599,6 +687,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 2: Magnitude', content: '|−0.85| = 0.85, which is close to 1 → strong.' },
       ],
       answer: 'Strong negative correlation',
+      code: '# Classify r = -0.85\n# Your code here\n',
+      codeSolution: 'r = -0.85\nmag = abs(r)\nstrength = "strong" if mag>0.7 else "moderate" if mag>0.4 else "weak"\nprint(f"r={r}, |r|={mag}")\nprint(f"{strength.capitalize()} negative correlation")',
     },
     {
       id: 'cor-05', difficulty: 1,
@@ -608,6 +698,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 2: Magnitude', content: '0.12 is close to 0 → very weak.' },
       ],
       answer: 'Weak positive correlation (nearly none)',
+      code: '# Classify r = 0.12\n# Your code here\n',
+      codeSolution: 'r = 0.12\nmag = abs(r)\nstrength = "strong" if mag>0.7 else "moderate" if mag>0.4 else "weak"\nprint(f"r={r}, |r|={mag}")\nprint(f"{strength.capitalize()} positive correlation (nearly none)")',
     },
     {
       id: 'cor-06', difficulty: 1,
@@ -616,6 +708,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 1: Substitute', content: 'ŷ = 2.5(4) + 10 = 10 + 10 = **20**' },
       ],
       answer: '20',
+      code: '# Predict y when x=4 using y=2.5x+10\n# Your code here\n',
+      codeSolution: 'x = 4\ny_hat = 2.5*x + 10\nprint(f"y = 2.5({x}) + 10 = {y_hat}")',
     },
     {
       id: 'cor-07', difficulty: 1,
@@ -624,6 +718,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 1: Substitute', content: 'ŷ = −3(12) + 50 = −36 + 50 = **14**' },
       ],
       answer: '14',
+      code: '# Predict y when x=12 using y=-3x+50\n# Your code here\n',
+      codeSolution: 'x = 12\ny_hat = -3*x + 50\nprint(f"y = -3({x}) + 50 = {y_hat}")',
     },
     {
       id: 'cor-08', difficulty: 1,
@@ -632,6 +728,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 1: Convert', content: 'r² = 0.81 → **81%** of the variation in y is explained by x.' },
       ],
       answer: '81%',
+      code: '# Interpret r-squared = 0.81\n# Your code here\n',
+      codeSolution: 'r_sq = 0.81\nprint(f"r-squared = {r_sq}")\nprint(f"{r_sq*100}% of variation in y explained by x")',
     },
     {
       id: 'cor-09', difficulty: 1,
@@ -641,6 +739,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 2: Interpret', content: '36% of the variation in y is explained by x.' },
       ],
       answer: 'r² = 0.36 (36%)',
+      code: '# Compute r-squared from r = 0.6\n# Your code here\n',
+      codeSolution: 'r = 0.6\nr_sq = r**2\nprint(f"r = {r}")\nprint(f"r-squared = {r_sq}")\nprint(f"{r_sq*100:.0f}% of variation in y explained by x")',
     },
     {
       id: 'cor-10', difficulty: 1,
@@ -650,6 +750,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 2: Answer', content: '**No**, r is always between −1 and +1 inclusive.' },
       ],
       answer: 'No, −1 ≤ r ≤ 1',
+      code: '# Verify r is bounded between -1 and 1\n# Your code here\n',
+      codeSolution: 'import random\nrandom.seed(42)\nfor trial in range(5):\n    x = [random.random() for _ in range(20)]\n    y = [random.random() for _ in range(20)]\n    n = len(x)\n    xb, yb = sum(x)/n, sum(y)/n\n    num = sum((xi-xb)*(yi-yb) for xi,yi in zip(x,y))\n    sx = sum((xi-xb)**2 for xi in x)\n    sy = sum((yi-yb)**2 for yi in y)\n    r = num/(sx*sy)**0.5\n    print(f"Trial {trial+1}: r={r:.4f}, -1<=r<=1: {-1<=r<=1}")',
     },
     {
       id: 'cor-11', difficulty: 1,
@@ -659,6 +761,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 2: Implication', content: 'r² = 1 → 100% of the variation in y is explained by x.' },
       ],
       answer: 'Perfect positive linear relationship',
+      code: '# Demonstrate r = 1 (perfect positive linear)\n# Your code here\n',
+      codeSolution: 'x = [1, 2, 3, 4, 5]\ny = [3, 5, 7, 9, 11]\nn = len(x)\nxb, yb = sum(x)/n, sum(y)/n\nnum = sum((xi-xb)*(yi-yb) for xi,yi in zip(x,y))\nsx = sum((xi-xb)**2 for xi in x)\nsy = sum((yi-yb)**2 for yi in y)\nr = num/(sx*sy)**0.5\nprint(f"r = {r:.4f}")\nprint("Perfect positive linear relationship")',
     },
     {
       id: 'cor-12', difficulty: 1,
@@ -668,6 +772,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 2: Interpretation', content: 'For each unit increase in x, ŷ increases by 1.5 units on average.' },
       ],
       answer: 'Slope = 1.5; y increases by 1.5 for each unit increase in x',
+      code: '# Identify slope of y = 1.5x + 3\n# Your code here\n',
+      codeSolution: 'slope = 1.5\nintercept = 3\nprint(f"Slope = {slope}")\nprint(f"For each unit increase in x, y increases by {slope}")\nfor x in [0,1,2,3]:\n    print(f"  x={x}: y = {slope*x+intercept}")',
     },
     {
       id: 'cor-13', difficulty: 1,
@@ -677,6 +783,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 2: Interpretation', content: 'When x = 0, the predicted value of y is 3.' },
       ],
       answer: 'y-intercept = 3; predicted y when x = 0',
+      code: '# Identify y-intercept of y = 1.5x + 3\n# Your code here\n',
+      codeSolution: 'slope = 1.5\nintercept = 3\nprint(f"y-intercept = {intercept}")\nprint(f"When x=0, predicted y = {slope*0+intercept}")',
     },
     {
       id: 'cor-14', difficulty: 1,
@@ -687,6 +795,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 2: Confounding variable', content: '**Hot weather** is a lurking variable — it increases both ice cream sales and swimming (hence drowning).' },
       ],
       answer: 'No — confounding variable (hot weather) explains both',
+      code: '# Demonstrate confounding variable\n# Your code here\n',
+      codeSolution: 'temp = [30,50,70,90,70,40]\nice = [100,200,400,600,350,150]\ndrown = [5,10,25,40,20,8]\nn = len(temp)\ndef corr(a,b):\n    ab,bb=sum(a)/n,sum(b)/n\n    num=sum((x-ab)*(y-bb) for x,y in zip(a,b))\n    return num/(sum((x-ab)**2 for x in a)*sum((y-bb)**2 for y in b))**0.5\nprint(f"r(temp,ice)={corr(temp,ice):.3f}")\nprint(f"r(temp,drown)={corr(temp,drown):.3f}")\nprint(f"r(ice,drown)={corr(ice,drown):.3f}")\nprint("Temperature is the confounder")',
     },
     {
       id: 'cor-15', difficulty: 1,
@@ -697,6 +807,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 3: Interpret', content: 'Positive residual → the actual value is above the regression line.' },
       ],
       answer: 'Residual = 3',
+      code: '# Compute residual: actual=25, predicted=22\n# Your code here\n',
+      codeSolution: 'actual = 25\npredicted = 22\nresidual = actual - predicted\nprint(f"Residual = {actual} - {predicted} = {residual}")',
     },
     {
       id: 'cor-16', difficulty: 1,
@@ -706,6 +818,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 2: Property', content: 'The least-squares regression line **always** passes through (x̄, ȳ).' },
       ],
       answer: 'Yes — the regression line always passes through (x̄, ȳ)',
+      code: '# Verify regression passes through (x_bar, y_bar)\n# Your code here\n',
+      codeSolution: 'slope, intercept = 0.8, 5\nx_bar, y_bar = 10, 13\ny_at_xbar = slope*x_bar + intercept\nprint(f"y at x_bar={x_bar}: {y_at_xbar}")\nprint(f"y_bar = {y_bar}")\nprint(f"Passes through (x_bar, y_bar)? {abs(y_at_xbar-y_bar)<1e-10}")',
     },
     {
       id: 'cor-17', difficulty: 1,
@@ -715,6 +829,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 2: Conclusion', content: 'r = −0.75 indicates a **stronger** linear relationship (sign indicates direction, not strength).' },
       ],
       answer: 'r = −0.75 is stronger',
+      code: '# Compare strength of r=-0.75 and r=0.60\n# Your code here\n',
+      codeSolution: 'r1, r2 = -0.75, 0.60\nprint(f"r={r1}: |r|={abs(r1)}")\nprint(f"r={r2}: |r|={abs(r2)}")\nstronger = r1 if abs(r1)>abs(r2) else r2\nprint(f"r={stronger} is stronger (larger magnitude)")',
     },
 
     // ── Medium (18-34) ─────────────────────────────────────
@@ -743,6 +859,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 3: Equation', content: 'ŷ = **0.6x + 2.2**' },
       ],
       answer: 'ŷ = 0.6x + 2.2',
+      code: '# Regression line for x=[1,2,3,4,5], y=[2,4,5,4,5]\n# Your code here\n',
+      codeSolution: 'x = [1,2,3,4,5]\ny = [2,4,5,4,5]\nn = len(x)\nxb, yb = sum(x)/n, sum(y)/n\nnum = sum((xi-xb)*(yi-yb) for xi,yi in zip(x,y))\nden = sum((xi-xb)**2 for xi in x)\nb = num/den\na = yb - b*xb\nprint(f"Slope b = {b}")\nprint(f"Intercept a = {a}")\nprint(f"y = {b}x + {a}")',
     },
     {
       id: 'cor-20', difficulty: 2,
@@ -754,6 +872,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 3: Sum check', content: '−0.8 + 0.6 + 1.0 + (−0.6) + (−0.2) = **0** ✓ (residuals always sum to 0)' },
       ],
       answer: 'Residuals: −0.8, 0.6, 1.0, −0.6, −0.2 (sum = 0)',
+      code: '# Compute residuals for y = 0.6x + 2.2\n# Your code here\n',
+      codeSolution: 'x = [1,2,3,4,5]\ny = [2,4,5,4,5]\nb, a = 0.6, 2.2\nresiduals = []\nfor xi,yi in zip(x,y):\n    yh = b*xi + a\n    r = yi - yh\n    residuals.append(r)\n    print(f"x={xi}: y={yi}, yhat={yh:.1f}, residual={r:.1f}")\nprint(f"Sum of residuals = {sum(residuals):.10f}")',
     },
     {
       id: 'cor-21', difficulty: 2,
@@ -767,6 +887,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 5: r', content: 'r = −250 / √(500 × 125) = −250/250 = **−1.000**' },
       ],
       answer: 'r = −1 (perfect negative linear relationship)',
+      code: '# Compute r for x=[10,20,30,40], y=[25,20,15,10]\n# Your code here\n',
+      codeSolution: 'x = [10,20,30,40]\ny = [25,20,15,10]\nn = len(x)\nxb, yb = sum(x)/n, sum(y)/n\nnum = sum((xi-xb)*(yi-yb) for xi,yi in zip(x,y))\nsx = sum((xi-xb)**2 for xi in x)\nsy = sum((yi-yb)**2 for yi in y)\nr = num/(sx*sy)**0.5\nprint(f"r = {r:.4f}")',
     },
     {
       id: 'cor-22', difficulty: 2,
@@ -781,6 +903,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 6: Predict', content: 'ŷ(7) = 0.8(7) + 2.2 = 5.6 + 2.2 = **7.8**' },
       ],
       answer: 'ŷ = 0.8x + 2.2; prediction at x=7 is 7.8',
+      code: '# Regression and prediction for given data\n# Your code here\n',
+      codeSolution: 'x = [2,4,6,8,10]\ny = [3,7,5,11,9]\nn = len(x)\nxb, yb = sum(x)/n, sum(y)/n\nnum = sum((xi-xb)*(yi-yb) for xi,yi in zip(x,y))\nden = sum((xi-xb)**2 for xi in x)\nb = num/den\na = yb - b*xb\nprint(f"y = {b}x + {a}")\nprint(f"At x=7: y = {b*7+a}")',
     },
     {
       id: 'cor-23', difficulty: 2,
@@ -791,6 +915,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 3: Correct statement', content: 'There is a strong positive association, but a controlled experiment would be needed to establish causation.' },
       ],
       answer: 'Correlation does not imply causation; confounders and reverse causality are possible',
+      code: '# Demonstrate correlation != causation\n# Your code here\n',
+      codeSolution: 'r = 0.95\nprint(f"r = {r} (strong positive)")\nprint(f"r-squared = {r**2:.4f}")\nprint("But correlation != causation:")\nprint("1. Reverse causation possible")\nprint("2. Confounding variables may exist")\nprint("3. Need controlled experiment")',
     },
     {
       id: 'cor-24', difficulty: 2,
@@ -801,6 +927,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 3: Interpret r²', content: '81% of the variation in body fat is explained by exercise hours.' },
       ],
       answer: 'r² = 0.81; 81% of body fat variation explained by exercise',
+      code: '# Compute r-squared from r = -0.9\n# Your code here\n',
+      codeSolution: 'r = -0.9\nr_sq = r**2\nprint(f"r = {r}")\nprint(f"r-squared = {r_sq}")\nprint(f"{r_sq*100:.0f}% of body fat variation explained by exercise")',
     },
     {
       id: 'cor-25', difficulty: 2,
@@ -825,6 +953,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 3: Lesson', content: 'Always check for outliers before relying on r. A **scatter plot** is essential.' },
       ],
       answer: 'Yes — a single outlier can drastically change r',
+      code: '# Show outlier effect on r\n# Your code here\n',
+      codeSolution: 'def calc_r(x,y):\n    n=len(x); xb=sum(x)/n; yb=sum(y)/n\n    num=sum((xi-xb)*(yi-yb) for xi,yi in zip(x,y))\n    sx=sum((xi-xb)**2 for xi in x)\n    sy=sum((yi-yb)**2 for yi in y)\n    return num/(sx*sy)**0.5\nx = [1,2,3,4,5]\ny = [2,4,6,8,10]\nprint(f"Without outlier: r = {calc_r(x,y):.4f}")\nprint(f"With outlier (3,100): r = {calc_r(x+[3],y+[100]):.4f}")',
     },
     {
       id: 'cor-27', difficulty: 2,
@@ -835,6 +965,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 3: Assessment', content: 'Moderate fit — some of the variation remains unexplained.' },
       ],
       answer: 'r² ≈ 0.60; moderate fit, 60% of variation explained',
+      code: '# Compute r-squared from r = 0.775\n# Your code here\n',
+      codeSolution: 'r = 0.775\nr_sq = r**2\nprint(f"r = {r}")\nprint(f"r-squared = {r_sq:.4f}")\nprint(f"{r_sq*100:.1f}% of variation in y explained by x")',
     },
     {
       id: 'cor-28', difficulty: 2,
@@ -844,6 +976,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 2: Regression line changes', content: 'The slope and intercept of the regression line **do** change, but r stays the same.' },
       ],
       answer: 'No, r stays the same (it is symmetric)',
+      code: '# Verify r is symmetric: r(x,y) = r(y,x)\n# Your code here\n',
+      codeSolution: 'def calc_r(x,y):\n    n=len(x); xb=sum(x)/n; yb=sum(y)/n\n    num=sum((xi-xb)*(yi-yb) for xi,yi in zip(x,y))\n    sx=sum((xi-xb)**2 for xi in x)\n    sy=sum((yi-yb)**2 for yi in y)\n    return num/(sx*sy)**0.5\nx = [1,2,3,4,5]\ny = [2,5,4,8,9]\nprint(f"r(x,y) = {calc_r(x,y):.6f}")\nprint(f"r(y,x) = {calc_r(y,x):.6f}")\nprint(f"Equal? {abs(calc_r(x,y)-calc_r(y,x))<1e-10}")',
     },
     {
       id: 'cor-29', difficulty: 2,
@@ -874,6 +1008,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 6: Equation', content: 'Weight = **1.2 × Height − 136.6**' },
       ],
       answer: 'Weight = 1.2 × Height − 136.6',
+      code: '# Regression: weight from height\n# Your code here\n',
+      codeSolution: 'heights = [160,165,170,175,180]\nweights = [55,62,68,72,80]\nn = len(heights)\nxb, yb = sum(heights)/n, sum(weights)/n\nnum = sum((x-xb)*(y-yb) for x,y in zip(heights, weights))\nden = sum((x-xb)**2 for x in heights)\nb = num/den\na = yb - b*xb\nprint(f"Weight = {b}*Height + {a}")\nfor h in [165,172,180]:\n    print(f"  Height={h}: weight={b*h+a:.1f}")',
     },
     {
       id: 'cor-31', difficulty: 2,
@@ -883,6 +1019,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 2: Confounding variable', content: '**City size (population)** is the confounding variable. Larger cities have more fire stations AND more fires.' },
       ],
       answer: 'No — city size is the confounding variable',
+      code: '# Confounding variable: fire stations vs fires\n# Your code here\n',
+      codeSolution: 'def calc_r(a,b):\n    n=len(a); ab=sum(a)/n; bb=sum(b)/n\n    num=sum((x-ab)*(y-bb) for x,y in zip(a,b))\n    return num/(sum((x-ab)**2 for x in a)*sum((y-bb)**2 for y in b))**0.5\npop = [50,100,200,500,1000]\nstations = [2,4,8,20,40]\nfires = [10,25,45,120,250]\nprint(f"r(stations,fires) = {calc_r(stations,fires):.4f}")\nprint(f"r(pop,stations) = {calc_r(pop,stations):.4f}")\nprint(f"r(pop,fires) = {calc_r(pop,fires):.4f}")\nprint("City size is the confounding variable")',
     },
     {
       id: 'cor-32', difficulty: 2,
@@ -893,6 +1031,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 3: Conclusion', content: 'It is **not appropriate** to predict at x = 50 with confidence.' },
       ],
       answer: 'No — extrapolation beyond data range is unreliable',
+      code: '# Demonstrate extrapolation danger\n# Your code here\n',
+      codeSolution: 'b, a = 2, 1\ndata_range = (5, 25)\nx_pred = 50\ny_pred = b*x_pred + a\nprint(f"y = {b}x + {a}")\nprint(f"Data range: x in [{data_range[0]},{data_range[1]}]")\nprint(f"At x={x_pred}: y={y_pred}")\nprint(f"x={x_pred} is {x_pred-data_range[1]} beyond range")\nprint("WARNING: Extrapolation - unreliable")',
     },
     {
       id: 'cor-33', difficulty: 2,
@@ -903,6 +1043,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 3: Note', content: 'Multiplying by a negative constant would flip the sign of r.' },
       ],
       answer: 'r stays the same (multiplying by a positive constant does not change r)',
+      code: '# Show positive scaling preserves r\n# Your code here\n',
+      codeSolution: 'def calc_r(x,y):\n    n=len(x); xb=sum(x)/n; yb=sum(y)/n\n    num=sum((xi-xb)*(yi-yb) for xi,yi in zip(x,y))\n    sx=sum((xi-xb)**2 for xi in x)\n    sy=sum((yi-yb)**2 for yi in y)\n    return num/(sx*sy)**0.5\nx = [1,2,3,4,5]\ny = [3,5,4,8,9]\nprint(f"Original: r = {calc_r(x,y):.6f}")\nprint(f"x*2: r = {calc_r([2*xi for xi in x],y):.6f}")\nprint("r unchanged by positive scaling")',
     },
     {
       id: 'cor-34', difficulty: 2,
@@ -914,6 +1056,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 3: Assessment', content: 'Despite r ≈ 0.98, the relationship is quadratic, not linear. A linear model would systematically mispredict. **A high r does not guarantee linearity.**' },
       ],
       answer: 'r ≈ 0.981 but the relationship is quadratic — linear model is inappropriate',
+      code: '# Compute r for quadratic data y = x^2\n# Your code here\n',
+      codeSolution: 'x = [1,2,3,4,5]\ny = [1,4,9,16,25]\nn = len(x)\nxb, yb = sum(x)/n, sum(y)/n\nnum = sum((xi-xb)*(yi-yb) for xi,yi in zip(x,y))\nsx = sum((xi-xb)**2 for xi in x)\nsy = sum((yi-yb)**2 for yi in y)\nr = num/(sx*sy)**0.5\nprint(f"r = {r:.4f}")\nprint("Despite r near 1, y=x^2 is quadratic")\nprint("High r does not guarantee linearity")',
     },
 
     // ── Hard (35-50) ───────────────────────────────────────
@@ -940,6 +1084,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 3: Conclusion', content: 'When x = x̄, the predicted value is ȳ, so the line passes through (x̄, ȳ). ∎' },
       ],
       answer: 'Proven: substituting x̄ gives ŷ = ȳ',
+      code: '# Verify regression passes through (x_bar, y_bar)\n# Your code here\n',
+      codeSolution: 'x = [2,4,6,8,10]\ny = [3,7,5,11,9]\nn = len(x)\nxb, yb = sum(x)/n, sum(y)/n\nnum = sum((xi-xb)*(yi-yb) for xi,yi in zip(x,y))\nden = sum((xi-xb)**2 for xi in x)\nb = num/den\na = yb - b*xb\nprint(f"y = {b}x + {a}")\nprint(f"x_bar={xb}, y_bar={yb}")\nprint(f"y at x_bar: {b*xb+a}")\nprint(f"Equals y_bar? {abs(b*xb+a-yb)<1e-10}")',
     },
     {
       id: 'cor-37', difficulty: 3,
@@ -951,6 +1097,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 4: Conclude', content: 'Since r² ≤ 1, we have **−1 ≤ r ≤ 1**. ∎' },
       ],
       answer: 'Proven via Cauchy-Schwarz: r² ≤ 1 implies −1 ≤ r ≤ 1',
+      code: '# Verify |r|<=1 with random data\n# Your code here\n',
+      codeSolution: 'import random\nrandom.seed(42)\nfor trial in range(10):\n    n = random.randint(5,50)\n    x = [random.gauss(0,1) for _ in range(n)]\n    y = [random.gauss(0,1) for _ in range(n)]\n    xb, yb = sum(x)/n, sum(y)/n\n    num = sum((xi-xb)*(yi-yb) for xi,yi in zip(x,y))\n    sx = sum((xi-xb)**2 for xi in x)\n    sy = sum((yi-yb)**2 for yi in y)\n    r = num/(sx*sy)**0.5\n    print(f"n={n:2d}: r={r:+.4f}, |r|<=1: {abs(r)<=1+1e-10}")',
     },
     {
       id: 'cor-38', difficulty: 3,
@@ -962,6 +1110,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 4: Key insight', content: 'The grouping variable (which group) acts as a confounding variable that reverses the apparent relationship.' },
       ],
       answer: 'Subgroups can show opposite trends from the combined data when a confounding variable creates different clusters',
+      code: '# Demonstrate Simpson\\\'s Paradox\n# Your code here\n',
+      codeSolution: 'def calc_r(x,y):\n    n=len(x); xb=sum(x)/n; yb=sum(y)/n\n    num=sum((xi-xb)*(yi-yb) for xi,yi in zip(x,y))\n    sx=sum((xi-xb)**2 for xi in x)\n    sy=sum((yi-yb)**2 for yi in y)\n    return num/(sx*sy)**0.5\nxa, ya = [1,2,3], [10,12,14]\nxb, yb = [7,8,9], [2,4,6]\nprint(f"Group A: r = {calc_r(xa,ya):.4f}")\nprint(f"Group B: r = {calc_r(xb,yb):.4f}")\nprint(f"Combined: r = {calc_r(xa+xb,ya+yb):.4f}")\nprint("Subgroup trends reversed in combined data!")',
     },
     {
       id: 'cor-39', difficulty: 3,
@@ -973,6 +1123,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 4: Solve', content: 'b = Σ(xᵢ−x̄)(yᵢ−ȳ) / Σ(xᵢ−x̄)². Second derivative = 2Σ(xᵢ−x̄)² > 0 → minimum. ∎' },
       ],
       answer: 'Proven by calculus: setting dSSR/db = 0 gives the OLS formula',
+      code: '# Verify OLS minimizes SSR\n# Your code here\n',
+      codeSolution: 'x = [1,2,3,4,5]\ny = [2,4,5,4,5]\nn = len(x)\nxb, yb = sum(x)/n, sum(y)/n\nnum = sum((xi-xb)*(yi-yb) for xi,yi in zip(x,y))\nden = sum((xi-xb)**2 for xi in x)\nb_ols = num/den\ndef ssr(b):\n    a = yb - b*xb\n    return sum((yi-b*xi-a)**2 for xi,yi in zip(x,y))\nprint(f"OLS b={b_ols:.4f}, SSR={ssr(b_ols):.4f}")\nfor bt in [0.0,0.3,0.6,0.9,1.2]:\n    print(f"b={bt:.1f}: SSR={ssr(bt):.4f}")\nprint(f"OLS slope gives minimum SSR")',
     },
     {
       id: 'cor-40', difficulty: 3,
@@ -985,6 +1137,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 5: Conclude', content: '1 − SSR/SST = SSE/SST = r². ∎' },
       ],
       answer: 'Proven: r² = SSE/SST = 1 − SSR/SST',
+      code: '# Verify r^2 = 1 - SSR/SST\n# Your code here\n',
+      codeSolution: 'x = [1,2,3,4,5]\ny = [2,4,5,4,5]\nn = len(x)\nxb, yb = sum(x)/n, sum(y)/n\nnum = sum((xi-xb)*(yi-yb) for xi,yi in zip(x,y))\nsx = sum((xi-xb)**2 for xi in x)\nsy = sum((yi-yb)**2 for yi in y)\nr = num/(sx*sy)**0.5\nb = num/sx\na = yb - b*xb\nsst = sum((yi-yb)**2 for yi in y)\nssr = sum((yi-b*xi-a)**2 for xi,yi in zip(x,y))\nprint(f"r^2 = {r**2:.4f}")\nprint(f"1 - SSR/SST = {1-ssr/sst:.4f}")\nprint(f"Match? {abs(r**2-(1-ssr/sst))<1e-10}")',
     },
     {
       id: 'cor-41', difficulty: 3,
@@ -995,6 +1149,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 3: Lesson', content: 'r and the regression equation alone are insufficient. **Always visualize data** — summary statistics can mask non-linearity, outliers, and clustering.' },
       ],
       answer: 'Summary statistics hide data structure; always visualize before fitting',
+      code: '# Demonstrate Anscombe\\\'s quartet concept\n# Your code here\n',
+      codeSolution: 'def stats(x,y):\n    n=len(x); xb=sum(x)/n; yb=sum(y)/n\n    num=sum((xi-xb)*(yi-yb) for xi,yi in zip(x,y))\n    sx=sum((xi-xb)**2 for xi in x)\n    sy=sum((yi-yb)**2 for yi in y)\n    r=num/(sx*sy)**0.5; b=num/sx; a=yb-b*xb\n    return r,b,a\nx1=[10,8,13,9,11,14,6,4,12,7,5]\ny1=[8.04,6.95,7.58,8.81,8.33,9.96,7.24,4.26,10.84,4.82,5.68]\nr1,b1,a1 = stats(x1,y1)\nprint(f"r={r1:.3f}, y={b1:.3f}x+{a1:.3f}")\nprint("Same stats but different patterns possible")\nprint("Always visualize before fitting!")',
     },
     {
       id: 'cor-42', difficulty: 3,
@@ -1021,6 +1177,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 4: Lesson', content: 'r only measures LINEAR relationships. A perfect nonlinear relationship can give r = 0.' },
       ],
       answer: 'r = 0 despite a perfect quadratic relationship',
+      code: '# Compute r for perfect parabola y = x^2\n# Your code here\n',
+      codeSolution: 'x = [-3,-2,-1,0,1,2,3]\ny = [9,4,1,0,1,4,9]\nn = len(x)\nxb, yb = sum(x)/n, sum(y)/n\nnum = sum((xi-xb)*(yi-yb) for xi,yi in zip(x,y))\nsx = sum((xi-xb)**2 for xi in x)\nsy = sum((yi-yb)**2 for yi in y)\nr = num/(sx*sy)**0.5 if sx*sy>0 else 0\nprint(f"r = {r:.4f}")\nprint("y=x^2 is perfect, but r=0")\nprint("Pearson r only detects LINEAR relationships")',
     },
     {
       id: 'cor-44', difficulty: 3,
@@ -1032,6 +1190,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 4: Compare slopes', content: 'Slopes are r(σy/σx) and (1/r)(σy/σx). Equal iff r = 1/r → r² = 1 → **|r| = 1**. ∎' },
       ],
       answer: 'The two regression lines coincide iff |r| = 1',
+      code: '# Compare y-on-x vs x-on-y regression lines\n# Your code here\n',
+      codeSolution: 'x = [1,2,3,4,5]\ny = [2,5,4,8,9]\nn = len(x)\nxb, yb = sum(x)/n, sum(y)/n\nsxy = sum((xi-xb)*(yi-yb) for xi,yi in zip(x,y))\nsxx = sum((xi-xb)**2 for xi in x)\nsyy = sum((yi-yb)**2 for yi in y)\nr = sxy/(sxx*syy)**0.5\nb1 = sxy/sxx\na1 = yb - b1*xb\nb2 = sxy/syy\na2 = xb - b2*yb\nprint(f"r = {r:.4f}")\nprint(f"y on x: y = {b1:.3f}x + {a1:.3f}")\nprint(f"x on y: x = {b2:.3f}y + {a2:.3f}")\nprint("Lines coincide only when |r|=1")',
     },
     {
       id: 'cor-45', difficulty: 3,
@@ -1046,6 +1206,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 6: Pattern', content: 'Residuals show a U-shape (positive, negative, negative, negative, negative, negative, positive) suggesting the relationship is **curvilinear**, not linear. An exponential or quadratic model would be more appropriate.' },
       ],
       answer: 'ŷ ≈ 9.86x − 27.86; U-shaped residuals suggest nonlinearity',
+      code: '# Regression with residual analysis\n# Your code here\n',
+      codeSolution: 'x = [10,15,20,25,30,35,40]\ny = [100,120,150,200,250,310,400]\nn = len(x)\nxb, yb = sum(x)/n, sum(y)/n\nnum = sum((xi-xb)*(yi-yb) for xi,yi in zip(x,y))\nden = sum((xi-xb)**2 for xi in x)\nb = num/den\na = yb - b*xb\nprint(f"y = {b:.2f}x + {a:.2f}")\nfor xi,yi in zip(x,y):\n    yh = b*xi+a\n    print(f"x={xi}: y={yi}, yhat={yh:.1f}, resid={yi-yh:.1f}")\nprint("U-shaped residuals suggest nonlinearity")',
     },
     {
       id: 'cor-46', difficulty: 3,
@@ -1058,6 +1220,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 4: r', content: 'r = 40/√(20×80) = 40/√1600 = 40/40 = **1** ∎' },
       ],
       answer: 'r = 1 because all points lie exactly on y = 2x + 1',
+      code: '# Verify r=1 for data on line y=2x+1\n# Your code here\n',
+      codeSolution: 'x = [2,4,6,8]\ny = [5,9,13,17]\nn = len(x)\nxb, yb = sum(x)/n, sum(y)/n\nnum = sum((xi-xb)*(yi-yb) for xi,yi in zip(x,y))\nsx = sum((xi-xb)**2 for xi in x)\nsy = sum((yi-yb)**2 for yi in y)\nr = num/(sx*sy)**0.5\nprint(f"r = {r:.6f}")\nfor xi,yi in zip(x,y):\n    print(f"  x={xi}: 2*{xi}+1={2*xi+1}, y={yi}, match={2*xi+1==yi}")',
     },
     {
       id: 'cor-47', difficulty: 3,
@@ -1069,6 +1233,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 4: Key point', content: 'High-leverage points can either reinforce or distort the trend, depending on their y-value.' },
       ],
       answer: 'High leverage (extreme x) amplifies influence; (20,11) flattens the line while (20,50) steepens it',
+      code: '# Demonstrate leverage in regression\n# Your code here\n',
+      codeSolution: 'def regress(x,y):\n    n=len(x); xb=sum(x)/n; yb=sum(y)/n\n    sp=sum((xi-xb)*(yi-yb) for xi,yi in zip(x,y))\n    sx=sum((xi-xb)**2 for xi in x)\n    b=sp/sx; a=yb-b*xb\n    return b,a\nbx,by = [1,2,3,4],[3,5,7,9]\nb0,a0 = regress(bx,by)\nprint(f"No outlier: y={b0:.2f}x+{a0:.2f}")\nb1,a1 = regress(bx+[20],by+[11])\nprint(f"With (20,11): y={b1:.3f}x+{a1:.3f} (flattened)")\nb2,a2 = regress(bx+[20],by+[50])\nprint(f"With (20,50): y={b2:.3f}x+{a2:.3f} (steepened)")',
     },
     {
       id: 'cor-48', difficulty: 3,
@@ -1079,6 +1245,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 3: Substitute', content: 'Σyᵢ − bΣxᵢ − (Σyᵢ − bΣxᵢ) = **0** ∎' },
       ],
       answer: 'Proven: residuals sum to 0 by the definition of the intercept',
+      code: '# Verify residuals sum to zero\n# Your code here\n',
+      codeSolution: 'x = [1,2,3,4,5]\ny = [2,4,5,4,5]\nn = len(x)\nxb, yb = sum(x)/n, sum(y)/n\nnum = sum((xi-xb)*(yi-yb) for xi,yi in zip(x,y))\nden = sum((xi-xb)**2 for xi in x)\nb = num/den\na = yb - b*xb\nresids = [yi-(b*xi+a) for xi,yi in zip(x,y)]\nfor xi,yi,r in zip(x,y,resids):\n    print(f"x={xi}: residual={r:.4f}")\nprint(f"Sum = {sum(resids):.10f}")',
     },
     {
       id: 'cor-49', difficulty: 3,
@@ -1089,6 +1257,8 @@ export const practiceCorrelationRegression: PracticeSet = {
         { label: 'Step 3: Independence', content: 'Independence implies r = 0, but r = 0 does NOT imply independence (converse is false).' },
       ],
       answer: 'No; r = 0 only means no linear relationship. Y = X² gives r = 0 but total dependence.',
+      code: '# Show r=0 does not imply independence\n# Your code here\n',
+      codeSolution: 'x = list(range(-10, 11))\ny = [xi**2 for xi in x]\nn = len(x)\nxb, yb = sum(x)/n, sum(y)/n\nnum = sum((xi-xb)*(yi-yb) for xi,yi in zip(x,y))\nsx = sum((xi-xb)**2 for xi in x)\nsy = sum((yi-yb)**2 for yi in y)\nr = num/(sx*sy)**0.5 if sx*sy>0 else 0\nprint(f"Y=X^2: perfect dependence")\nprint(f"But r = {r:.6f}")\nprint("r=0 means no LINEAR relationship, not independence")',
     },
     {
       id: 'cor-50', difficulty: 3,
