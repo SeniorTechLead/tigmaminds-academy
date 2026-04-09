@@ -1924,6 +1924,7 @@ export const practiceNormalDistribution: PracticeSet = {
     {
       id: 'nd-44', difficulty: 3,
       question: 'A professor grades on a curve: the top 10% get A, the next 20% get B, the middle 40% get C, the next 20% get D, and the bottom 10% get F. If scores are N(μ=72, σ=9), find the score cutoffs.\n\nUse: z₉₀ = 1.28, z₇₀ = 0.524, z₃₀ = −0.524, z₁₀ = −1.28.',
+      visual: { kind: 'distribution', type: 'normal', params: { mu: 72, sigma: 9 }, shadeFrom: 67.3, shadeTo: 83.5 },
       steps: [
         { label: 'Step 1: A cutoff (90th percentile)', content: 'x = 72 + 1.28×9 = 72 + 11.52 = **83.5**' },
         { label: 'Step 2: B cutoff (70th percentile)', content: 'x = 72 + 0.524×9 = 72 + 4.72 = **76.7**' },
@@ -1937,6 +1938,7 @@ export const practiceNormalDistribution: PracticeSet = {
     {
       id: 'nd-45', difficulty: 3,
       question: 'Why is the normal distribution sometimes a poor model? Give three real-world examples where data is NOT normal.',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 0.00002 } },
       steps: [
         { label: 'Example 1: Income', content: 'Income is **right-skewed** — a few very high earners pull the tail right. The mean is much higher than the median.' },
         { label: 'Example 2: Earthquake magnitudes', content: 'Follow a **power law** (Gutenberg-Richter law). Many small quakes, very few large ones. Not symmetric.' },
@@ -1950,6 +1952,7 @@ export const practiceNormalDistribution: PracticeSet = {
     {
       id: 'nd-46', difficulty: 3,
       question: 'Two machines fill cereal boxes.\n- Machine A: N(μ=500 g, σ=10 g)\n- Machine B: N(μ=505 g, σ=5 g)\n\nBoxes under 490 g are rejected. Which machine produces fewer rejects?',
+      visual: { kind: 'distribution', type: 'normal', params: { mu: 500, sigma: 10 }, markX: 490, shadeFrom: 460, shadeTo: 490 },
       steps: [
         { label: 'Machine A: P(X < 490)', content: 'z = (490−500)/10 = −1.0. P(Z < −1.0) = **0.1587** = 15.87%' },
         { label: 'Machine B: P(X < 490)', content: 'z = (490−505)/5 = −3.0. P(Z < −3.0) = **0.0013** = 0.13%' },
@@ -1962,6 +1965,7 @@ export const practiceNormalDistribution: PracticeSet = {
     {
       id: 'nd-47', difficulty: 3,
       question: 'A random variable X ~ N(μ, σ²). Derive P(μ − 1.96σ < X < μ + 1.96σ) using the z-transformation.',
+      visual: { kind: 'distribution', type: 'normal', params: { mu: 0, sigma: 1 }, shadeFrom: -1.96, shadeTo: 1.96 },
       steps: [
         { label: 'Step 1: Standardize', content: 'Z = (X − μ)/σ. If μ − 1.96σ < X < μ + 1.96σ, then −1.96 < Z < 1.96.' },
         { label: 'Step 2: From z-table', content: 'P(Z < 1.96) ≈ 0.975' },
@@ -1976,6 +1980,7 @@ export const practiceNormalDistribution: PracticeSet = {
     {
       id: 'nd-48', difficulty: 3,
       question: 'A poll surveys 400 people. The true proportion who support a policy is p = 0.60. By the CLT, what is the probability that the sample proportion p̂ is between 0.55 and 0.65?',
+      visual: { kind: 'distribution', type: 'normal', params: { mu: 0.60, sigma: 0.0245 }, shadeFrom: 0.55, shadeTo: 0.65 },
       steps: [
         { label: 'Step 1: σ_p̂', content: 'σ_p̂ = √(p(1−p)/n) = √(0.6×0.4/400) = √(0.0006) = **0.0245**' },
         { label: 'Step 2: z-scores', content: 'z₁ = (0.55−0.60)/0.0245 = −2.04. z₂ = (0.65−0.60)/0.0245 = 2.04.' },
@@ -2001,6 +2006,7 @@ export const practiceNormalDistribution: PracticeSet = {
     {
       id: 'nd-50', difficulty: 3,
       question: 'A company claims its delivery times are N(μ=3 days, σ=0.5 days). A customer tracks 16 deliveries and finds a sample mean of 3.4 days. Is this evidence against the company\'s claim? (Use a significance level of 5%.)',
+      visual: { kind: 'distribution', type: 'normal', params: { mu: 3, sigma: 0.125 }, markX: 3.4, shadeFrom: 3.4, shadeTo: 3.8 },
       steps: [
         { label: 'Step 1: Set up hypothesis', content: 'H₀: μ = 3.0. H₁: μ > 3.0 (one-tailed test).' },
         { label: 'Step 2: Standard error', content: 'σ_X̄ = 0.5/√16 = 0.5/4 = **0.125**' },
