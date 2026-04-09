@@ -4510,13 +4510,25 @@ export const scienceReferences: ReferenceGuide[] = [
           '| z-score for 85 | (85 - 80) / 4 = 1.25 |\n' +
           '| P(X >= 85) | 1 - 0.8944 = **~10.6%** |',
         advancedContent:
-          '**Deriving the mean of the binomial distribution:**\n\n' +
-          'X = number of successes in n trials. Write X = X₁ + X₂ + ... + Xₙ, where Xᵢ = 1 if trial i succeeds, 0 otherwise.\n\n' +
-          'E[Xᵢ] = 1×p + 0×(1−p) = p\n\n' +
-          'By linearity of expectation: E[X] = E[X₁] + E[X₂] + ... + E[Xₙ] = **np** ∎\n\n' +
-          '**Deriving the variance:**\n\n' +
-          'Var(Xᵢ) = E[Xᵢ²] − (E[Xᵢ])² = p − p² = p(1−p)\n\n' +
-          'Since trials are independent: Var(X) = Var(X₁) + ... + Var(Xₙ) = **np(1−p)** ∎\n\n' +
+          '**Deriving the mean — why is the average number of heads = np?**\n\n' +
+          'Think of each flip as its own mini-variable: Xᵢ = 1 if heads, 0 if tails.\n\n' +
+          'Total heads X = X₁ + X₂ + ... + Xₙ (just add up the 1s).\n\n' +
+          'The average value of one flip:\n' +
+          'E[Xᵢ] = (value if heads) × P(heads) + (value if tails) × P(tails) = 1 × p + 0 × (1−p) = **p**\n\n' +
+          'For a fair coin: E[Xᵢ] = 0.5. Makes sense — half the time you get 1, half you get 0.\n\n' +
+          'The average total = sum of individual averages:\n' +
+          'E[X] = E[X₁] + E[X₂] + ... + E[Xₙ] = p + p + ... + p = **np** ∎\n\n' +
+          'For 10 fair flips: E[X] = 10 × 0.5 = **5 heads**.\n' +
+          'For 100 flips of a biased coin (p = 0.7): E[X] = 100 × 0.7 = **70 heads**.\n\n' +
+          '**Deriving the variance — why Var = np(1−p):**\n\n' +
+          'The variance of ONE flip (Xᵢ is 0 or 1):\n\n' +
+          'E[Xᵢ²] = 1² × p + 0² × (1−p) = p. (Squaring 0 or 1 gives 0 or 1 — no change.)\n\n' +
+          'Var(Xᵢ) = E[Xᵢ²] − (E[Xᵢ])² = p − p² = **p(1−p)**\n\n' +
+          'For a fair coin: 0.5 × 0.5 = 0.25 — maximum uncertainty.\n' +
+          'For p = 0.99: 0.99 × 0.01 = 0.0099 — almost no uncertainty (you nearly always get heads).\n\n' +
+          'Since flips are independent, variances add:\n' +
+          'Var(X) = n × p(1−p) = **np(1−p)** ∎\n\n' +
+          'For 10 fair flips: Var = 10 × 0.25 = 2.5. Std dev = √2.5 ≈ **1.58** heads.\n\n' +
           '**The geometric distribution — derived from binomial thinking:**\n\n' +
           '"How many trials until the first success?" If each trial has probability p:\n' +
           '- Success on trial 1: P = p\n' +
@@ -4548,7 +4560,8 @@ export const scienceReferences: ReferenceGuide[] = [
           '- Shoe size vs IQ: no correlation (r = 0.02)\n\n' +
           '**The critical warning:**\n\n' +
           'Correlation does NOT imply causation. Ice cream sales and drowning deaths are positively correlated — but ice cream does not cause drowning. Both increase in summer (the **confounding variable**).\n\n' +
-          '**Linear regression** finds the best-fit line through the data: `y = mx + b`, where m is the slope and b is the y-intercept.',
+          '**Linear regression** draws the straight line that best fits the data — the one that comes as close as possible to all the points at once. ' +
+          'Once you have that line, you can use it to predict: "if x increases by 10, how much does y change?" The intermediate and advanced sections show exactly how to compute it.',
         intermediateContent:
           '**What "best-fit" means — and why we square the errors:**\n\n' +
           'You draw a line through your data. Some points are above the line (positive error), some below (negative error). ' +
