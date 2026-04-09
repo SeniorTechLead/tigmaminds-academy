@@ -81,8 +81,54 @@ class HelmetImpactModel:
         for layer in self.layers:
             # Approximate hemisphere shell volume
             r_outer = self.head_radius + sum(l['thickness'] for l in self.layers)
+            r_inner = r_outer - layer['thickness']
+            vol = (2/3) * np.pi * (r_outer**3 - r_inner**3)
+            total += layer['density'] * vol
+        return total
 
-print("\n[Full visualization in playground]")`,
+    def total_energy_capacity(self):
+        """Estimate max energy the helmet can absorb before bottoming out."""
+        total = 0
+        for layer in self.layers:
+            # Energy = stress * strain_max * volume (simplified)
+            strain_max = 0.7  # densification onset
+            vol = layer['thickness'] * np.pi * self.head_radius**2 * 0.5
+            total += layer['crush_stress'] * strain_max * vol
+        return total
+
+# Build a standard bicycle helmet
+helmet = HelmetImpactModel("Standard Bicycle Helmet")
+helmet.add_layer("Polycarbonate shell", thickness_mm=1.5, density_kg_m3=1200,
+                 crush_stress_kPa=50000, youngs_modulus_MPa=2400, color='#3b82f6')
+helmet.add_layer("EPS foam liner", thickness_mm=25, density_kg_m3=80,
+                 crush_stress_kPa=800, youngs_modulus_MPa=15, color='#f59e0b')
+helmet.add_layer("Comfort padding", thickness_mm=5, density_kg_m3=30,
+                 crush_stress_kPa=50, youngs_modulus_MPa=0.5, color='#22c55e')
+
+print("HELMET SAFETY ANALYZER — Step 1: Impact Model")
+print("=" * 60)
+print(f"Helmet: {helmet.name}")
+print()
+print("Layer Properties:")
+print(f"{'Layer':<25} {'Thick (mm)':>10} {'Density':>10} {'Crush (kPa)':>12}")
+print("-" * 60)
+for layer in helmet.layers:
+    print(f"{layer['name']:<25} {layer['thickness']*1000:>10.1f} {layer['density']:>10.0f} {layer['crush_stress']/1000:>12.0f}")
+print()
+print(f"Total helmet mass: {helmet.total_helmet_mass():.0f} g")
+print(f"Total energy capacity: {helmet.total_energy_capacity():.1f} J")
+print()
+print("Test Standard Impact Conditions:")
+print(f"{'Standard':<25} {'Height (m)':>10} {'Velocity (m/s)':>15} {'Energy (J)':>10}")
+print("-" * 63)
+for name, std in helmet.standards.items():
+    cond = helmet.impact_conditions(std['drop_height'])
+    print(f"{name:<25} {cond['height']:>10.2f} {cond['velocity']:>15.2f} {cond['energy']:>10.1f}")
+print()
+energy_cpsc = helmet.impact_conditions(2.0)['energy']
+capacity = helmet.total_energy_capacity()
+margin = (capacity - energy_cpsc) / energy_cpsc * 100
+print(f"CPSC energy demand: {energy_cpsc:.1f} J | Helmet capacity: {capacity:.1f} J | Margin: {margin:+.0f}%")`,
       challenge: 'Add a fourth layer: a MIPS (Multi-directional Impact Protection System) liner between the EPS foam and comfort padding. MIPS adds ~3mm of low-friction material with very low crush stress (10 kPa). How does it affect the total energy capacity?',
       successHint: 'The model definition is the foundation. We have established the physical parameters, test standards, and energy budget. Next steps will add dynamic simulation, deceleration curves, and HIC calculation to turn this into a real safety analyzer.',
     },
@@ -154,7 +200,56 @@ def simulate_impact(head_mass, drop_height, foam_thickness, foam_plateau_stress,
 
         F_total = F_foam + F_shell
 
-print("\n[Full visualization in playground]")`,
+        # Equation of motion
+        a = F_total / head_mass
+        v -= a * dt
+        x += max(v, 0) * dt
+        t += dt
+
+        t_list.append(t)
+        v_list.append(v)
+        x_list.append(x)
+        a_list.append(a)
+        F_list.append(F_total)
+
+    return {
+        't': np.array(t_list), 'v': np.array(v_list),
+        'x': np.array(x_list), 'a': np.array(a_list),
+        'F': np.array(F_list),
+    }
+
+# Run simulations for three foam densities
+g_val = 9.81
+head_mass = 5.0
+drop_height = 2.0  # CPSC standard
+contact_area = 80e-4  # 80 cm^2
+
+foam_configs = [
+    ("Soft foam (40 g/L)", 0.025, 400e3),
+    ("Medium foam (80 g/L)", 0.025, 800e3),
+    ("Stiff foam (120 g/L)", 0.025, 1200e3),
+]
+
+print("HELMET SAFETY ANALYZER — Step 2: Dynamic Impact Simulation")
+print("=" * 60)
+print(f"Drop height: {drop_height} m | Head mass: {head_mass} kg")
+print(f"Impact velocity: {np.sqrt(2*g_val*drop_height):.2f} m/s")
+print(f"Impact energy: {0.5*head_mass*2*g_val*drop_height:.1f} J")
+print()
+print(f"{'Foam Design':<25} {'Peak g':>8} {'Crush (mm)':>11} {'Duration (ms)':>14} {'Bottomed?':>10}")
+print("-" * 72)
+for name, thickness, plateau in foam_configs:
+    result = simulate_impact(head_mass, drop_height, thickness, plateau, contact_area)
+    peak_g = np.max(result['a']) / g_val
+    crush_mm = np.max(result['x']) * 1000
+    duration_ms = result['t'][-1] * 1000
+    bottomed = "YES" if crush_mm > thickness * 1000 * 0.9 else "No"
+    print(f"{name:<25} {peak_g:>8.0f} {crush_mm:>11.1f} {duration_ms:>14.2f} {bottomed:>10}")
+
+print()
+print("Key insight: softer foam extends duration but risks bottoming out.")
+print("Stiffer foam limits crush but increases peak g-force.")
+print("The optimal foam balances these tradeoffs — just like the woodpecker skull.")`,
       challenge: 'Vary foam thickness from 15mm to 35mm for the medium foam design. Find the minimum thickness that passes CPSC. This is the thickness-weight tradeoff every helmet designer faces.',
       successHint: 'You now have a dynamic impact simulator. The deceleration profile is what safety labs actually measure with accelerometers during certification. Next we add the HIC calculation that determines pass/fail in most modern standards.',
     },
@@ -232,9 +327,64 @@ def eps_foam_stress_scalar(strain, plateau_stress):
     if strain < 0.05:
         return (plateau_stress / 0.03) * strain
     elif strain < 0.7:
-        pass
+        return plateau_stress * (1 + 0.3 * (strain - 0.05))
+    else:
+        p = plateau_stress * (1 + 0.3 * 0.65)
+        return p * np.exp(5 * (strain - 0.7))
 
-print("\n[Full visualization in playground]")`,
+def simulate_for_hic(head_mass, drop_height, foam_thickness, plateau_stress, contact_area):
+    """Run impact sim and return time + acceleration arrays."""
+    g = 9.81
+    v = np.sqrt(2 * g * drop_height)
+    dt = 5e-6
+    t_list, a_list = [], []
+    x, t_val = 0, 0
+    while v > 0 and t_val < 0.02:
+        strain = min(x / foam_thickness, 0.95)
+        stress = eps_foam_stress_scalar(strain, plateau_stress)
+        F = stress * contact_area
+        a = F / head_mass
+        v -= a * dt
+        x += max(v, 0) * dt
+        t_val += dt
+        t_list.append(t_val)
+        a_list.append(a / g)
+    return np.array(t_list), np.array(a_list)
+
+# Test HIC on three foam designs
+g_val = 9.81
+head_mass = 5.0
+drop_height = 2.0
+contact_area = 80e-4
+
+foam_tests = [
+    ("Soft (400 kPa)", 0.025, 400e3),
+    ("Medium (800 kPa)", 0.025, 800e3),
+    ("Stiff (1200 kPa)", 0.025, 1200e3),
+]
+
+print("HELMET SAFETY ANALYZER — Step 3: HIC Calculation")
+print("=" * 60)
+print(f"Using HIC15 (15 ms window) — the CPSC/EN 1078 standard metric")
+print()
+print(f"{'Foam Design':<22} {'Peak g':>8} {'HIC15':>10} {'Window (ms)':>12} {'Pass?':>8}")
+print("-" * 63)
+for name, thickness, plateau in foam_tests:
+    t_arr, a_arr = simulate_for_hic(head_mass, drop_height, thickness, plateau, contact_area)
+    peak_g = np.max(a_arr)
+    # Downsample for HIC computation speed
+    step = max(1, len(t_arr) // 500)
+    hic_val, t1, t2 = compute_HIC(t_arr[::step], a_arr[::step], max_window=0.015)
+    window_ms = (t2 - t1) * 1000
+    pass_hic = hic_val < 1000
+    pass_g = peak_g < 300
+    status = "PASS" if (pass_hic and pass_g) else "FAIL"
+    print(f"{name:<22} {peak_g:>8.0f} {hic_val:>10.0f} {window_ms:>12.2f} {status:>8}")
+
+print()
+print("HIC accounts for BOTH magnitude and duration of acceleration.")
+print("A helmet can have low peak g but high HIC if deceleration is sustained.")
+print("The 2.5 exponent makes HIC very sensitive to acceleration spikes.")`,
       challenge: 'Implement HIC36 (36ms window) in addition to HIC15. For which helmet designs do the two metrics diverge most? HIC36 is used in some automotive standards and tends to give higher values for longer-duration impacts.',
       successHint: 'HIC is the industry-standard safety metric used by every helmet manufacturer and automobile safety engineer. You just implemented the exact same calculation that NHTSA and CPSC labs use. Next we will use this tool to systematically optimize a helmet design.',
     },
@@ -255,6 +405,7 @@ We will create a **design map** — a 2D grid showing HIC and peak g for every c
       checkAnswer: 'Increase foam density slightly to 70 g/L (adds minimal weight since density increase is small). Or keep 60 g/L but increase thickness to 27 mm. The density increase is usually preferred because it does not change the helmet profile. Another option: improve the shell to spread the load over a larger contact area, which reduces stress without changing foam properties. Real designers use all three levers simultaneously.',
       codeIntro: 'Create a parametric design map scanning foam density and thickness to find the optimal helmet configuration.',
       code: `import numpy as np
+import matplotlib.pyplot as plt
 
 # === HELMET SAFETY ANALYZER: Step 4 — Design Optimization ===
 
@@ -305,7 +456,115 @@ def quick_simulate(head_mass, drop_height, foam_thickness, plateau_stress, conta
         else:
             hic = duration * (avg_a ** 2.5)
 
-print("\n[Full visualization in playground]")`,
+    return {'peak_g': peak_a / g, 'HIC': hic, 'crush_pct': x / foam_thickness * 100}
+
+# Parametric design scan
+densities = np.arange(40, 160, 10)  # g/L
+thicknesses = np.arange(15, 40, 2.5)  # mm
+
+# Map density to plateau stress: stress(kPa) ~ 10 * density(g/L)
+head_mass = 5.0
+drop_height = 2.0
+contact_area = 80e-4
+g_val = 9.81
+
+print("HELMET SAFETY ANALYZER — Step 4: Design Optimization")
+print("=" * 60)
+print(f"Scanning {len(densities)} densities x {len(thicknesses)} thicknesses = {len(densities)*len(thicknesses)} designs")
+print(f"Pass criteria: HIC < 1000 AND peak g < 300")
+print()
+
+best_design = None
+best_weight = float('inf')
+results_grid = []
+
+for density in densities:
+    for thick in thicknesses:
+        plateau = density * 10 * 1000  # density(g/L) -> plateau(Pa)
+        foam_thick = thick / 1000
+        res = quick_simulate(head_mass, drop_height, foam_thick, plateau, contact_area)
+        passes = res['peak_g'] < 300 and res['HIC'] < 1000 and res['crush_pct'] < 90
+        # Weight estimate (hemisphere shell volume)
+        weight = density * foam_thick * 0.03 * 1000  # simplified relative weight
+        if passes and weight < best_weight:
+            best_weight = weight
+            best_design = (density, thick, res)
+        results_grid.append((density, thick, res['peak_g'], res['HIC'], res['crush_pct'], passes))
+
+# --- Parametric Design Map Visualization ---
+fig, axes = plt.subplots(1, 2, figsize=(14, 6))
+fig.patch.set_facecolor('#0d1117')
+fig.suptitle('Parametric Design Map — Helmet Optimization',
+             color='white', fontsize=14, fontweight='bold')
+
+for ax in axes:
+    ax.set_facecolor('#111827')
+    ax.tick_params(colors='gray')
+
+# Build 2D arrays for heatmap
+nd = len(densities)
+nt = len(thicknesses)
+hic_map = np.zeros((nt, nd))
+pass_map = np.zeros((nt, nd))
+for k, (d, th, pg, hic, cr, p) in enumerate(results_grid):
+    di = list(densities).index(d)
+    ti = list(thicknesses).index(th)
+    hic_map[ti, di] = hic
+    pass_map[ti, di] = 1 if p else 0
+
+# Panel 1: HIC heatmap with pass/fail overlay
+ax = axes[0]
+im = ax.imshow(hic_map, cmap='RdYlGn_r', aspect='auto', origin='lower',
+               extent=[densities[0], densities[-1], thicknesses[0], thicknesses[-1]])
+# Overlay pass/fail boundary
+ax.contour(densities, thicknesses, pass_map, levels=[0.5],
+           colors=['white'], linewidths=2, linestyles='--')
+if best_design:
+    ax.plot(best_design[0], best_design[1], '*', color='#f59e0b', markersize=15, zorder=10)
+    ax.text(best_design[0]+3, best_design[1]+1, 'OPTIMAL', color='#f59e0b', fontsize=8, fontweight='bold')
+plt.colorbar(im, ax=ax, label='HIC value')
+ax.set_xlabel('Foam density (g/L)', color='white')
+ax.set_ylabel('Foam thickness (mm)', color='white')
+ax.set_title('HIC Map (dashed = pass/fail boundary)', color='white', fontsize=11)
+
+# Panel 2: Pass/fail map
+ax = axes[1]
+colors_pf = ['#ef4444', '#22c55e']
+from matplotlib.colors import ListedColormap
+cmap_pf = ListedColormap(colors_pf)
+ax.imshow(pass_map, cmap=cmap_pf, aspect='auto', origin='lower',
+          extent=[densities[0], densities[-1], thicknesses[0], thicknesses[-1]])
+if best_design:
+    ax.plot(best_design[0], best_design[1], '*', color='white', markersize=15, zorder=10)
+ax.set_xlabel('Foam density (g/L)', color='white')
+ax.set_ylabel('Foam thickness (mm)', color='white')
+ax.set_title(f'Pass/Fail ({sum(1 for r in results_grid if r[5])}/{len(results_grid)} pass)',
+             color='white', fontsize=11)
+
+plt.tight_layout()
+plt.show()
+
+# Count pass/fail
+n_pass = sum(1 for r in results_grid if r[5])
+n_fail = len(results_grid) - n_pass
+
+print(f"Results: {n_pass} designs PASS, {n_fail} designs FAIL")
+print()
+
+# Show boundary designs (just barely passing)
+print("Sample designs near the pass/fail boundary:")
+print(f"{'Density (g/L)':>13} {'Thick (mm)':>11} {'Peak g':>8} {'HIC':>8} {'Crush%':>8} {'Status':>8}")
+print("-" * 60)
+for d, th, pg, hic, cr, p in results_grid:
+    if 700 < hic < 1300 or 250 < pg < 350:
+        status = "PASS" if p else "FAIL"
+        print(f"{d:>13.0f} {th:>11.1f} {pg:>8.0f} {hic:>8.0f} {cr:>8.1f} {status:>8}")
+
+if best_design:
+    d, th, res = best_design
+    print()
+    print(f"OPTIMAL (lightest passing): {d:.0f} g/L, {th:.1f} mm")
+    print(f"  Peak g: {res['peak_g']:.0f} | HIC: {res['HIC']:.0f} | Crush: {res['crush_pct']:.1f}%")`,
       challenge: 'Add a third design variable: contact area (which depends on shell stiffness and anvil shape). Scan contact areas from 40 cm^2 to 120 cm^2 and show how the optimal density-thickness combination shifts. This reveals why shell design matters as much as foam design.',
       successHint: 'You have just performed the same parametric optimization that professional helmet engineers do with commercial FEA software. The design map visualization is a standard tool in engineering — it shows at a glance where the safe designs live and where the boundaries are.',
     },
@@ -374,7 +633,60 @@ def full_simulate(head_mass, drop_height, foam_thick, plateau_stress, contact_ar
         'a_g': a_arr,
     }
 
-print("\n[Full visualization in playground]")`,
+# Define test conditions
+head_mass = 5.0
+foam_thick = 0.025  # 25 mm
+base_plateau = 800e3  # 80 g/L foam
+base_area = 80e-4  # 80 cm^2
+
+test_conditions = [
+    # (name, drop_height, area_multiplier, stiffness_multiplier)
+    ("Flat anvil, 20C (room)", 2.0, 1.0, 1.0),
+    ("Flat anvil, -20C (cold)", 2.0, 1.0, 1.4),
+    ("Flat anvil, 50C (hot)", 2.0, 1.0, 0.65),
+    ("Curbstone anvil, 20C", 1.5, 0.5, 1.0),
+    ("Curbstone anvil, -20C", 1.5, 0.5, 1.4),
+    ("Curbstone anvil, 50C", 1.5, 0.5, 0.65),
+    ("Hemispheric anvil, 20C", 1.5, 0.25, 1.0),
+    ("Hemispheric anvil, -20C", 1.5, 0.25, 1.4),
+]
+
+print("HELMET SAFETY ANALYZER — Step 5: Multi-Standard Certification")
+print("=" * 65)
+print(f"Base design: 80 g/L EPS, 25 mm thick, 80 cm^2 contact area")
+print(f"Pass criteria: peak g < 300, HIC < 1000, crush < 90%")
+print()
+print(f"{'Test Condition':<30} {'Peak g':>7} {'HIC':>7} {'Crush%':>7} {'Result':>8}")
+print("-" * 62)
+
+all_pass = True
+worst_test = ""
+worst_hic = 0
+
+for name, height, area_mult, stiff_mult in test_conditions:
+    res = full_simulate(head_mass, height, foam_thick,
+                        base_plateau * stiff_mult, base_area * area_mult)
+    pg = res['peak_g']
+    hic = res['HIC']
+    cr = res['crush_pct']
+    passed = pg < 300 and hic < 1000 and cr < 90
+    status = "PASS" if passed else "FAIL"
+    if not passed:
+        all_pass = False
+    if hic > worst_hic:
+        worst_hic = hic
+        worst_test = name
+    print(f"{name:<30} {pg:>7.0f} {hic:>7.0f} {cr:>7.1f} {status:>8}")
+
+print()
+if all_pass:
+    print("CERTIFICATION: ALL TESTS PASSED")
+else:
+    print("CERTIFICATION: FAILED — design must be revised")
+print(f"Worst-case test: {worst_test} (HIC = {worst_hic:.0f})")
+print()
+print("Cold + small anvil is almost always the limiting condition.")
+print("This is why real helmets are over-designed for room-temperature flat tests.")`,
       challenge: 'Add a "wet" condition where the shell-foam interface has reduced friction, allowing the helmet to slide on the anvil. Model this as a 30% increase in contact area (force spreads more). How does this affect pass/fail rates? Some standards require wet testing.',
       successHint: 'Multi-condition certification is why helmet design is genuinely difficult. A design that is optimal for one condition is often suboptimal for another. The art of helmet engineering is finding the best compromise across ALL conditions — exactly what the woodpecker skull achieves naturally.',
     },
@@ -444,8 +756,103 @@ def simulate_helmet(head_mass, drop_height, foam_thick, plateau_stress,
         F_total = F + F_damping
 
         a = F_total / head_mass
+        if a > peak_a:
+            peak_a = a
+        v -= a * dt
+        x += max(v, 0) * dt
+        t_val += dt
+        t_list.append(t_val)
+        a_list.append(a / g)
 
-print("\n[Full visualization in playground]")`,
+    a_arr = np.array(a_list)
+    n_window = min(int(0.015 / dt), len(a_arr))
+    if n_window > 1 and len(a_arr) > n_window:
+        rolling_avg = np.convolve(a_arr, np.ones(n_window)/n_window, mode='valid')
+        max_avg = np.max(rolling_avg)
+        hic = min(n_window * dt, 0.015) * (max_avg ** 2.5)
+    else:
+        hic = 0
+    return {
+        'peak_g': peak_a / g, 'HIC': hic,
+        'crush_pct': x / foam_thick * 100,
+        'duration_ms': t_val * 1000,
+    }
+
+# Define conventional vs bio-inspired helmet
+head_mass = 5.0
+drop_height = 2.0
+foam_thick = 0.025
+contact_area = 80e-4
+
+# Test conditions: (name, height, area_mult, stiffness_mult)
+conditions = [
+    ("Flat 20C", 2.0, 1.0, 1.0),
+    ("Flat -20C", 2.0, 1.0, 1.4),
+    ("Flat 50C", 2.0, 1.0, 0.65),
+    ("Curbstone 20C", 1.5, 0.5, 1.0),
+    ("Curbstone -20C", 1.5, 0.5, 1.4),
+    ("Hemispheric 20C", 1.5, 0.25, 1.0),
+]
+
+# Conventional helmet: uniform 80 g/L EPS
+plateau_conv = 800e3
+
+# Bio-inspired helmet: graded foam, hyoid reinforcement, viscoelastic damping
+outer_plateau = 1200e3  # 120 g/L outer
+inner_plateau = 400e3   # 40 g/L inner
+
+print("HELMET SAFETY REPORT — Conventional vs Bio-Inspired Design")
+print("=" * 70)
+print()
+print("Design A: Conventional — uniform 80 g/L EPS foam")
+print("Design B: Bio-inspired — graded density + hyoid + viscoelastic damping")
+print()
+
+# Run all tests for both designs
+print(f"{'Condition':<20} {'| Conv Peak g':>13} {'HIC':>7} {'Pass':>6} {'| Bio Peak g':>12} {'HIC':>7} {'Pass':>6}")
+print("-" * 74)
+
+conv_passes = 0
+bio_passes = 0
+n_tests = len(conditions)
+
+for name, h, a_mult, s_mult in conditions:
+    area = contact_area * a_mult
+
+    # Conventional
+    res_c = simulate_helmet(head_mass, h, foam_thick, plateau_conv * s_mult,
+                            area, graded=False)
+    c_pass = res_c['peak_g'] < 300 and res_c['HIC'] < 1000
+    if c_pass: conv_passes += 1
+
+    # Bio-inspired: graded foam + hyoid (1.3x area) + damping (1.5x)
+    res_b = simulate_helmet(head_mass, h, foam_thick, plateau_conv * s_mult,
+                            area, graded=True,
+                            outer_plateau=outer_plateau * s_mult,
+                            inner_plateau=inner_plateau * s_mult,
+                            hyoid_factor=1.3, damping_factor=1.5)
+    b_pass = res_b['peak_g'] < 300 and res_b['HIC'] < 1000
+    if b_pass: bio_passes += 1
+
+    c_status = "PASS" if c_pass else "FAIL"
+    b_status = "PASS" if b_pass else "FAIL"
+    print(f"{name:<20} | {res_c['peak_g']:>10.0f} {res_c['HIC']:>7.0f} {c_status:>6} | {res_b['peak_g']:>9.0f} {res_b['HIC']:>7.0f} {b_status:>6}")
+
+print()
+print(f"Conventional: {conv_passes}/{n_tests} tests passed")
+print(f"Bio-inspired: {bio_passes}/{n_tests} tests passed")
+print()
+print("Bio-inspired advantages from woodpecker design principles:")
+print("  1. Graded density: stiff outer layer spreads load, soft inner cushions brain")
+print("  2. Hyoid effect: 30% larger effective contact area redistributes force")
+print("  3. Viscoelastic damping: velocity-dependent resistance absorbs high-rate impacts")
+print()
+if bio_passes > conv_passes:
+    print(f"The bio-inspired design passes {bio_passes - conv_passes} more test(s).")
+    print("Nature's 50-million-year R&D program outperforms conventional engineering.")
+elif bio_passes == conv_passes:
+    print("Both designs pass the same number of tests, but the bio-inspired")
+    print("design has lower peak g and HIC values — a larger safety margin.")`,
       challenge: 'Add a cost model: dense foam costs more than light foam, the hyoid reinforcement adds $3 per helmet, and viscoelastic materials add $5. Find the design that minimizes cost while passing all tests. This is the real engineering optimization — safety at minimum cost.',
       successHint: 'You have built a complete Helmet Safety Analyzer from scratch — impact physics, dynamic simulation, HIC calculation, multi-condition testing, and bio-inspired optimization. This is genuine engineering work. The woodpecker story that started as a children\'s tale has become a masterclass in biomechanics, materials science, and computational engineering.',
     },

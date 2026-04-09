@@ -41,7 +41,7 @@ years = np.array([2001, 2005, 2010, 2015, 2018, 2020, 2022])
 forest_loss_mha = [5.8, 7.2, 7.0, 8.0, 7.5, 6.8, 6.6]  # million hectares/year
 
 # Causes of deforestation (global average)
-causes = ['Agriculture\n(crops)', 'Agriculture\n(livestock)', 'Logging', 'Infrastructure', 'Fire\n(human-set)', 'Other']
+causes = ['Agriculture\\n(crops)', 'Agriculture\\n(livestock)', 'Logging', 'Infrastructure', 'Fire\\n(human-set)', 'Other']
 cause_pct = [35, 30, 15, 8, 7, 5]
 cause_colors = ['#22c55e', '#3b82f6', '#f59e0b', '#ef4444', '#a855f7', '#6b7280']
 
@@ -567,7 +567,7 @@ ax1.set_ylim(0, 105)
 
 # Benefits distribution
 ax2.set_facecolor('#111827')
-management = ['Open\nAccess', 'Government', 'Community\nForestry', 'Sacred\nGrove']
+management = ['Open\\nAccess', 'Government', 'Community\\nForestry', 'Sacred\\nGrove']
 benefits = {
     'Timber income': [8, 5, 7, 0],
     'Forest products': [3, 2, 8, 1],

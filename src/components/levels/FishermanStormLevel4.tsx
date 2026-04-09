@@ -82,8 +82,59 @@ def generate_bob_cyclone(name, year, season):
     # Genesis location
     if season == 'pre-monsoon':
         lat0 = np.random.uniform(8, 13)
+        lon0 = np.random.uniform(84, 92)
+    else:
+        lat0 = np.random.uniform(7, 14)
+        lon0 = np.random.uniform(82, 90)
 
-print("\n[Code trimmed — run in Level 2+ for full visualization]")`,
+    n_steps = np.random.randint(20, 60)
+    lats, lons = [lat0], [lon0]
+    base_dlat = np.random.uniform(0.15, 0.35)
+    base_dlon = np.random.uniform(-0.25, -0.05)
+    for i in range(1, n_steps):
+        dlat = base_dlat * (max(0.3, 1 - 0.05*(lats[-1]-18)) if lats[-1]>18 else 1)
+        dlon = base_dlon + (0.02*(lats[-1]-18) if lats[-1]>18 else 0)
+        dlat += np.random.normal(0, 0.08)
+        dlon += np.random.normal(0, 0.08)
+        new_lat, new_lon = lats[-1]+dlat, lons[-1]+dlon
+        if new_lat > 26 or new_lon < 78 or new_lon > 100: break
+        lats.append(new_lat); lons.append(new_lon)
+
+    n = len(lats)
+    times = np.arange(n) * 6
+    peak_idx = np.random.randint(n//3, 2*n//3)
+    max_wind = np.random.choice([25,30,35,40,45,50,55,60,65,70],
+                                 p=[.15,.15,.15,.15,.12,.10,.08,.05,.03,.02])
+    winds = np.zeros(n)
+    for i in range(n):
+        if i <= peak_idx: winds[i] = 15 + (max_wind-15)*(i/peak_idx)**1.5
+        else: winds[i] = max(max_wind*(1-((i-peak_idx)/(n-peak_idx))**1.2), 10)
+    winds = np.clip(winds + np.random.normal(0, 2, n), 10, 80)
+    pressures = 1013 - 0.7 * winds
+    return CycloneTrack(name, year, season, lats, lons, winds, pressures, times)
+
+# Generate dataset
+cyclones = []
+for yr in range(2000, 2024):
+    for s in ['pre-monsoon', 'post-monsoon']:
+        n_storms = np.random.randint(1, 4)
+        for j in range(n_storms):
+            cyclones.append(generate_bob_cyclone(f"BOB-{yr}-{s[:3].upper()}-{j+1}", yr, s))
+
+print("Bay of Bengal Cyclone Dataset")
+print("=" * 45)
+print(f"Total cyclones generated: {len(cyclones)}")
+cats = [c.category() for c in cyclones]
+for cat in range(6):
+    count = cats.count(cat)
+    if count > 0:
+        label = f"Cat {cat}" if cat > 0 else "TD/TS"
+        print(f"  {label}: {count} ({count/len(cyclones)*100:.0f}%)")
+print()
+landfalls = [c for c in cyclones if c.landfall_point() is not None]
+print(f"Storms making landfall: {len(landfalls)}")
+print(f"Average track length: {np.mean([c.n_points for c in cyclones]):.0f} positions")
+print(f"Average lifespan: {np.mean([c.times[-1] for c in cyclones]):.0f} hours")`,
       challenge: 'Enhance the data generator to include rapid intensification events (wind speed increase of 15+ m/s in 24 hours). What fraction of your cyclones undergo RI? How does this compare to the observed ~10-15% rate in the Bay of Bengal?',
       successHint: 'Good synthetic data is the foundation of any analysis tool. By calibrating your generator to real statistics, you can test algorithms without needing access to restricted operational datasets. This is a standard technique in meteorological research.',
     },
@@ -153,8 +204,62 @@ def generate_bob_cyclone(name, year, season):
             decay = (i - peak_idx) / (n - peak_idx)
             winds[i] = max(max_wind * (1 - decay**1.2), 10)
     winds = np.clip(winds + np.random.normal(0, 2, n), 10, 80)
+    pressures = 1013 - 0.7 * winds
+    return CycloneTrack(name, year, season, lats, lons, winds, pressures, times)
 
-print("\n[Code trimmed — run in Level 2+ for full visualization]")`,
+cyclones = []
+for yr in range(2000, 2024):
+    for s in ['pre-monsoon', 'post-monsoon']:
+        for j in range(np.random.randint(1, 4)):
+            cyclones.append(generate_bob_cyclone(f"BOB-{yr}-{s[:3].upper()}-{j+1}", yr, s))
+
+# Track density on 2-degree grid
+lat_bins = np.arange(5, 27, 2)
+lon_bins = np.arange(75, 101, 2)
+density = np.zeros((len(lat_bins)-1, len(lon_bins)-1))
+motion_dlat = np.zeros_like(density)
+motion_dlon = np.zeros_like(density)
+motion_count = np.zeros_like(density)
+
+for c in cyclones:
+    for k in range(c.n_points):
+        li = np.searchsorted(lat_bins, c.lats[k]) - 1
+        lj = np.searchsorted(lon_bins, c.lons[k]) - 1
+        if 0 <= li < density.shape[0] and 0 <= lj < density.shape[1]:
+            density[li, lj] += 1
+            if k < c.n_points - 1:
+                motion_dlat[li, lj] += c.lats[k+1] - c.lats[k]
+                motion_dlon[li, lj] += c.lons[k+1] - c.lons[k]
+                motion_count[li, lj] += 1
+
+mask = motion_count > 0
+motion_dlat[mask] /= motion_count[mask]
+motion_dlon[mask] /= motion_count[mask]
+
+print("Bay of Bengal Cyclone Climatology")
+print("=" * 50)
+print(f"Dataset: {len(cyclones)} cyclones (2000-2023)")
+print()
+print("Seasonal distribution:")
+pre = sum(1 for c in cyclones if c.season == 'pre-monsoon')
+post = len(cyclones) - pre
+print(f"  Pre-monsoon (Apr-Jun):  {pre} ({pre/len(cyclones)*100:.0f}%)")
+print(f"  Post-monsoon (Oct-Dec): {post} ({post/len(cyclones)*100:.0f}%)")
+print()
+peak_cell = np.unravel_index(density.argmax(), density.shape)
+print(f"Highest track density: {density.max():.0f} positions")
+print(f"  at {lat_bins[peak_cell[0]]}-{lat_bins[peak_cell[0]+1]}°N, "
+      f"{lon_bins[peak_cell[1]]}-{lon_bins[peak_cell[1]+1]}°E")
+print()
+print("Average motion vectors (top 5 busiest cells):")
+flat_idx = np.argsort(density.ravel())[::-1][:5]
+for idx in flat_idx:
+    i, j = np.unravel_index(idx, density.shape)
+    if motion_count[i, j] > 0:
+        speed = np.sqrt(motion_dlat[i, j]**2 + motion_dlon[i, j]**2) * 111 / 6
+        print(f"  {lat_bins[i]:.0f}-{lat_bins[i+1]:.0f}°N, {lon_bins[j]:.0f}-{lon_bins[j+1]:.0f}°E: "
+              f"dlat={motion_dlat[i,j]:+.2f}°, dlon={motion_dlon[i,j]:+.2f}° per 6h "
+              f"(~{speed:.0f} km/h)")`,
       challenge: 'Compute the "return period" for different intensity thresholds at a specific coastal grid cell (e.g., near Kolkata at 88°E, 22°N). How often does a Cat 3+ cyclone pass within 200 km? Express it as "once every N years."',
       successHint: 'Climatology is the foundation of probabilistic forecasting. Every number you computed — average motion, track density, intensity distribution — feeds directly into the prediction model. Without climatology, prediction is just extrapolation. With it, prediction becomes informed estimation.',
     },
@@ -222,9 +327,47 @@ default_dlat = np.mean(clim_dlat[mask]) if mask.any() else 0.2
 default_dlon = np.mean(clim_dlon[mask]) if mask.any() else -0.1
 
 def get_climatology(lat, lon):
-    pass
+    """Look up average motion vector for a grid cell."""
+    li = np.searchsorted(lat_bins, lat) - 1
+    lj = np.searchsorted(lon_bins, lon) - 1
+    if 0 <= li < clim_dlat.shape[0] and 0 <= lj < clim_dlat.shape[1] and clim_count[li, lj] > 0:
+        return clim_dlat[li, lj], clim_dlon[li, lj]
+    return default_dlat, default_dlon
 
-print("\n[Code trimmed — run in Level 2+ for full visualization]")`,
+def cliper_forecast(lats, lons, n_ahead=12):
+    """CLIPER: blend persistence with climatology."""
+    # Persistence from last 3 points
+    p_dlat = (lats[-1] - lats[-3]) / 2
+    p_dlon = (lons[-1] - lons[-3]) / 2
+    fc_lats, fc_lons = [lats[-1]], [lons[-1]]
+    for t in range(1, n_ahead + 1):
+        alpha = 0.8 * np.exp(-t / 8.0)  # persistence weight decays
+        c_dlat, c_dlon = get_climatology(fc_lats[-1], fc_lons[-1])
+        dlat = alpha * p_dlat + (1 - alpha) * c_dlat
+        dlon = alpha * p_dlon + (1 - alpha) * c_dlon
+        fc_lats.append(fc_lats[-1] + dlat)
+        fc_lons.append(fc_lons[-1] + dlon)
+    return np.array(fc_lats), np.array(fc_lons)
+
+# Evaluate on test cyclones
+print("CLIPER Track Forecast Evaluation")
+print("=" * 50)
+print(f"Training set: {len(train_cyclones)} cyclones")
+print(f"Test set: {len(test_cyclones)} cyclones")
+print(f"Climatology grid: {clim_dlat.shape[0]}x{clim_dlat.shape[1]} cells")
+print(f"Default motion: dlat={default_dlat:+.3f}°, dlon={default_dlon:+.3f}° per step")
+print()
+
+horizons = [2, 4, 8, 12]
+for tc_idx, (lats, lons) in enumerate(test_cyclones):
+    if len(lats) < 16: continue
+    fc_lats, fc_lons = cliper_forecast(lats[:4], lons[:4], n_ahead=12)
+    print(f"Cyclone {tc_idx + 1} (starts at {lats[0]:.1f}°N, {lons[0]:.1f}°E):")
+    for h in horizons:
+        if 4 + h < len(lats) and h < len(fc_lats):
+            err_km = np.sqrt((fc_lats[h]-lats[4+h])**2 + (fc_lons[h]-lons[4+h])**2) * 111
+            print(f"  {h*6:2d}h forecast error: {err_km:.0f} km")
+    print()`,
       challenge: 'Implement an "analog" forecaster: find the 3 most similar historical tracks (based on recent motion and position), and average their future paths. Compare it to CLIPER. Does the analog method beat CLIPER?',
       successHint: 'CLIPER is elegant in its simplicity — two ingredients, one blending formula, and it provides a surprisingly good baseline. This is a recurring lesson in forecasting: simple models calibrated to good data often outperform complex models trained on poor data. Always benchmark against the simple baseline first.',
     },
@@ -288,11 +431,42 @@ y = wind_true
 X_train, X_test = X[:n_train], X[n_train:]
 y_train, y_test = y[:n_train], y[n_train:]
 
-# Multiple linear regression from scratch
+# Multiple linear regression from scratch (normal equation)
 def fit_linear_regression(X, y):
-    pass
+    """Fit y = X @ beta using the normal equation."""
+    X_b = np.column_stack([np.ones(len(X)), X])  # add bias
+    beta = np.linalg.lstsq(X_b, y, rcond=None)[0]
+    return beta
 
-print("\n[Code trimmed — run in Level 2+ for full visualization]")`,
+beta = fit_linear_regression(X_train, y_train)
+
+# Predict on test set
+X_test_b = np.column_stack([np.ones(len(X_test)), X_test])
+y_pred = X_test_b @ beta
+
+# Evaluate
+rmse = np.sqrt(np.mean((y_pred - y_test)**2))
+mae = np.mean(np.abs(y_pred - y_test))
+persistence_rmse = np.sqrt(np.mean((np.mean(y_train) - y_test)**2))
+
+print("Statistical Intensity Estimation Model")
+print("=" * 50)
+print(f"Training samples: {n_train}, Test samples: {len(y_test)}")
+print()
+print("Regression coefficients:")
+labels = ['Bias', 'SST (°C)', 'Shear (m/s)', 'Dist land (km)', 'OHC (kJ/cm²)']
+for name, coef in zip(labels, beta):
+    print(f"  {name:20s}: {coef:+.4f}")
+print()
+print("Physical interpretation:")
+print(f"  +1°C SST -> {beta[1]:+.1f} m/s wind (warm = stronger)")
+print(f"  +1 m/s shear -> {beta[2]:+.1f} m/s wind (shear = weaker)")
+print(f"  +100 km from land -> {beta[3]*100:+.1f} m/s wind")
+print()
+print(f"Test RMSE: {rmse:.1f} m/s")
+print(f"Test MAE:  {mae:.1f} m/s")
+print(f"Climatology baseline RMSE: {persistence_rmse:.1f} m/s")
+print(f"Skill over baseline: {(1 - rmse/persistence_rmse)*100:.0f}%")`,
       challenge: 'Add a "rapid intensification" detector: flag samples where intensity increases by more than 15 m/s in 24 hours. What environmental conditions are associated with RI events? Build a logistic regression classifier to predict RI probability.',
       successHint: 'Intensity forecasting is the hardest problem in tropical meteorology. Even with satellites, AI, and supercomputers, 24-hour intensity forecasts still have average errors of 5-10 m/s. Understanding the key predictors — SST, shear, ocean heat content — is the first step toward reducing those errors.',
     },
@@ -358,9 +532,24 @@ scenarios = {
     'Aila 2009':  {'p': 968, 'v': 40, 'depth': 20, 'width': 280e3, 'tide': 0.8,
                    'observed_surge': 3.0, 'deaths': 339},
     'Amphan 2020': {'p': 920, 'v': 85, 'depth': 25, 'width': 300e3, 'tide': 0.2,
-    }}
+                     'observed_surge': 5.0, 'deaths': 128},
+}
 
-print("\n[Code trimmed — run in Level 2+ for full visualization]")`,
+print("Storm Surge Impact Calculator")
+print("=" * 55)
+print()
+for name, s in scenarios.items():
+    result = compute_total_surge(s['p'], s['v'], s['depth'], s['width'], s['tide'])
+    print(f"{name}:")
+    print(f"  Pressure: {s['p']} hPa, Wind: {s['v']} m/s")
+    print(f"  Inverse barometer: {result['inverse_barometer']:.2f} m")
+    print(f"  Wind setup:        {result['wind_setup']:.2f} m")
+    print(f"  Wave setup:        {result['wave_setup']:.2f} m")
+    print(f"  Tide:              {result['tide']:.2f} m")
+    print(f"  TOTAL predicted:   {result['total']:.1f} m")
+    print(f"  Observed surge:    {s['observed_surge']:.1f} m")
+    print(f"  Deaths:            {s['deaths']:,}")
+    print()`,
       challenge: 'Add sea level rise to the analysis: for each historical cyclone, compute how much higher the surge would be with +0.5m SLR (projected for 2070). Which cities face the largest increase in risk? Express the risk change as a percentage of current surge.',
       successHint: 'Storm surge estimation closes the loop between atmospheric science and human safety. The same physics that governs pressure gradients and wind stress determines whether a fishing village floods or stays dry. Accurate surge models, combined with early warning, have already saved hundreds of thousands of lives in the Bay of Bengal.',
     },
@@ -379,6 +568,7 @@ The key lesson is integration. Each component alone is incomplete. A track forec
       checkAnswer: 'Risk is very high. The cyclone is already Cat 3 (50 m/s), the environment favors further intensification (warm SST, low shear), and the CLIPER track points at the most surge-vulnerable coast on Earth. Expected surge: 4-7 meters on the shallow northern Bay shelf, arriving in ~25 hours. Missing information: (1) the current tide state — high tide at landfall would add 0.5-1m; (2) current river levels — monsoon-swollen Brahmaputra would compound the surge; (3) ensemble forecast spread — how confident is the CLIPER track? (4) local bathymetry at the exact landfall point; (5) whether evacuation has begun. The physical forecast is only useful if it reaches the people who need to act on it.',
       codeIntro: 'Build the integrated cyclone tracker dashboard: a single visualization that shows the full analysis pipeline from track to impact for a simulated Bay of Bengal cyclone.',
       code: `import numpy as np
+import matplotlib.pyplot as plt
 from matplotlib.patches import Circle
 from matplotlib.collections import LineCollection
 
@@ -389,20 +579,17 @@ np.random.seed(42)
 # ============================================================
 
 # --- Simulate a "live" cyclone approaching the BoB coast ---
-# Current position: central Bay of Bengal, moving NW
 known_lats = np.array([10.0, 10.8, 11.5, 12.3, 13.0, 13.8, 14.5, 15.2])
 known_lons = np.array([89.0, 88.5, 88.1, 87.6, 87.2, 86.7, 86.3, 85.8])
 known_winds = np.array([25, 30, 35, 42, 48, 55, 58, 62])
 known_pressures = 1013 - 0.7 * known_winds
+known_times = np.arange(len(known_lats)) * 6  # hours
 
 # --- CLIPER Track Forecast ---
 def cliper_forecast(lats, lons, n_ahead=16):
-    # Persistence from last 3 points
     p_dlat = (lats[-1] - lats[-3]) / 2
     p_dlon = (lons[-1] - lons[-3]) / 2
-    # BoB climatology: NW motion with recurvature
     c_dlat, c_dlon = 0.22, -0.12
-
     fc_lats, fc_lons = [lats[-1]], [lons[-1]]
     for t in range(1, n_ahead + 1):
         alpha = 0.8 * np.exp(-t / 8.0)
@@ -413,23 +600,242 @@ def cliper_forecast(lats, lons, n_ahead=16):
     return np.array(fc_lats), np.array(fc_lons)
 
 fc_lats, fc_lons = cliper_forecast(known_lats, known_lons, n_ahead=16)
+fc_times = known_times[-1] + np.arange(len(fc_lats)) * 6
 
 # --- Intensity forecast along track ---
 def forecast_intensity(fc_lats, fc_lons, current_wind=62):
-    """Simplified intensity forecast based on SST and distance from land."""
     winds = [current_wind]
     for i in range(1, len(fc_lats)):
         lat, lon = fc_lats[i], fc_lons[i]
-        # SST decreases with latitude (simplified)
         sst = 30.0 - 0.3 * (lat - 10)
-        # Shear increases with latitude
         shear = 5 + 1.5 * (lat - 10)
-        # Distance from land (rough: lon < 84 or lat > 21 is near land)
         dist_land = min(abs(lon - 82) * 111, abs(21 - lat) * 111, 500)
+        sst_factor = max(0, (sst - 26.5)) * 2.0
+        shear_factor = -shear * 0.8
+        land_factor = -max(0, (200 - dist_land) / 200) * 10
+        tendency = sst_factor + shear_factor + land_factor
+        winds.append(np.clip(winds[-1] + tendency * 0.3, 10, 80))
+    return np.array(winds)
 
-        # Intensity tendency
+fc_winds = forecast_intensity(fc_lats, fc_lons, current_wind=known_winds[-1])
+fc_pressures = 1013 - 0.7 * fc_winds
 
-print("\n[Code trimmed — run in Level 2+ for full visualization]")`,
+# --- Storm surge model ---
+def compute_surge(v_max, p_center, shelf_depth=25, shelf_width=300e3,
+                  tide=0.5, Cd=0.002, rho_air=1.2, rho_water=1025, g=9.81):
+    ib = 0.01 * (1013 - p_center)
+    tau = Cd * rho_air * v_max**2
+    wind_surge = tau * shelf_width / (rho_water * g * shelf_depth)
+    return ib + wind_surge * 1.15 + tide
+
+# Find landfall
+landfall_idx = None
+for i in range(len(fc_lats)):
+    if fc_lats[i] > 20:
+        landfall_idx = i
+        break
+
+# ============================================================
+# DASHBOARD VISUALIZATION (2x3 grid)
+# ============================================================
+fig, axes = plt.subplots(2, 3, figsize=(16, 10))
+fig.patch.set_facecolor('#0d1117')
+fig.suptitle('CYCLONE TRACKER DASHBOARD — Bay of Bengal',
+             color='white', fontsize=14, fontweight='bold', y=0.98)
+
+for ax in axes.flat:
+    ax.set_facecolor('#111827')
+    ax.tick_params(colors='gray')
+
+# --- Panel 1: Track Map ---
+ax = axes[0, 0]
+# Coastline approximation (India east coast)
+coast_lats = [8, 10, 13, 15, 17, 19, 21, 22, 23]
+coast_lons = [77, 80, 80, 81, 83, 85, 87, 88, 89]
+ax.plot(coast_lons, coast_lats, 'o-', color='#4b5563', markersize=2, linewidth=1.5, label='Coast')
+ax.fill_betweenx(coast_lats, 75, coast_lons, color='#1c1917', alpha=0.5)
+
+# Known track (color by intensity)
+for i in range(len(known_lats)-1):
+    color = '#ef4444' if known_winds[i] >= 50 else '#f59e0b' if known_winds[i] >= 33 else '#22c55e'
+    ax.plot(known_lons[i:i+2], known_lats[i:i+2], '-', color=color, linewidth=3)
+ax.plot(known_lons, known_lats, 'o', color='white', markersize=4, zorder=5)
+
+# Forecast track (dashed, color by intensity)
+for i in range(len(fc_lats)-1):
+    color = '#ef4444' if fc_winds[i] >= 50 else '#f59e0b' if fc_winds[i] >= 33 else '#22c55e'
+    ax.plot(fc_lons[i:i+2], fc_lats[i:i+2], '--', color=color, linewidth=2, alpha=0.7)
+ax.plot(fc_lons[::4], fc_lats[::4], 's', color='#60a5fa', markersize=5, alpha=0.7)
+
+# Current position marker
+ax.plot(known_lons[-1], known_lats[-1], '*', color='#f59e0b', markersize=15, zorder=10)
+
+# Landfall marker
+if landfall_idx:
+    ax.plot(fc_lons[landfall_idx], fc_lats[landfall_idx], 'X', color='#ef4444', markersize=12, zorder=10)
+
+ax.set_xlim(78, 95)
+ax.set_ylim(7, 24)
+ax.set_xlabel('Longitude (°E)', color='white')
+ax.set_ylabel('Latitude (°N)', color='white')
+ax.set_title('Track & Forecast', color='white', fontsize=11)
+ax.set_aspect('equal')
+
+# --- Panel 2: Intensity Timeline ---
+ax = axes[0, 1]
+all_times = np.concatenate([known_times, fc_times[1:]])
+all_winds = np.concatenate([known_winds, fc_winds[1:]])
+all_press = np.concatenate([known_pressures, fc_pressures[1:]])
+
+ax.plot(known_times, known_winds, '-o', color='#ef4444', linewidth=2, markersize=4, label='Observed')
+ax.plot(fc_times, fc_winds, '--s', color='#ef4444', linewidth=1.5, markersize=3, alpha=0.6, label='Forecast')
+ax2 = ax.twinx()
+ax2.plot(known_times, known_pressures, '-o', color='#3b82f6', linewidth=2, markersize=4)
+ax2.plot(fc_times, fc_pressures, '--s', color='#3b82f6', linewidth=1.5, markersize=3, alpha=0.6)
+ax2.set_ylabel('Pressure (hPa)', color='#3b82f6')
+ax2.tick_params(colors='#3b82f6')
+
+# Category thresholds
+for cat, v, c in [(1, 33, '#f59e0b'), (3, 50, '#ef4444'), (5, 70, '#dc2626')]:
+    ax.axhline(v, color=c, linewidth=0.5, linestyle=':', alpha=0.5)
+    ax.text(all_times[-1]+2, v, f'Cat{cat}', color=c, fontsize=7, va='center')
+
+if landfall_idx:
+    ax.axvline(fc_times[landfall_idx], color='#ef4444', linewidth=1, linestyle='--', alpha=0.5)
+    ax.text(fc_times[landfall_idx], max(all_winds)*0.95, 'Landfall', color='#ef4444', fontsize=8, ha='center')
+
+ax.set_xlabel('Hours since genesis', color='white')
+ax.set_ylabel('Wind speed (m/s)', color='#ef4444')
+ax.tick_params(colors='#ef4444')
+ax.set_title('Intensity & Pressure', color='white', fontsize=11)
+ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
+
+# --- Panel 3: Environmental Conditions ---
+ax = axes[0, 2]
+fc_sst = [30.0 - 0.3 * (lat - 10) for lat in fc_lats]
+fc_shear = [5 + 1.5 * (lat - 10) for lat in fc_lats]
+fc_dist = [min(abs(lon - 82)*111, abs(21-lat)*111, 500) for lat, lon in zip(fc_lats, fc_lons)]
+
+ax.plot(fc_times, fc_sst, '-', color='#ef4444', linewidth=2, label='SST (°C)')
+ax.axhline(26.5, color='#ef4444', linewidth=0.5, linestyle=':', alpha=0.5)
+ax.text(fc_times[0], 26.7, '26.5°C threshold', color='#ef4444', fontsize=7)
+
+ax_s = ax.twinx()
+ax_s.plot(fc_times, fc_shear, '-', color='#a855f7', linewidth=2, label='Shear (m/s)')
+ax_s.set_ylabel('Wind shear (m/s)', color='#a855f7')
+ax_s.tick_params(colors='#a855f7')
+
+ax.set_xlabel('Forecast hour', color='white')
+ax.set_ylabel('SST (°C)', color='#ef4444')
+ax.tick_params(colors='#ef4444')
+ax.set_title('Environment Along Track', color='white', fontsize=11)
+ax.legend(loc='upper left', fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
+ax_s.legend(loc='upper right', fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
+
+# --- Panel 4: Surge Risk at Landfall ---
+ax = axes[1, 0]
+wind_range = np.linspace(20, 80, 50)
+surge_bob = [compute_surge(v, 1013-0.7*v, shelf_depth=25, shelf_width=300e3) for v in wind_range]
+surge_steep = [compute_surge(v, 1013-0.7*v, shelf_depth=100, shelf_width=50e3) for v in wind_range]
+
+ax.plot(wind_range, surge_bob, '-', color='#ef4444', linewidth=2.5, label='Bay of Bengal (shallow)')
+ax.plot(wind_range, surge_steep, '-', color='#3b82f6', linewidth=2, label='Steep shelf')
+ax.fill_between(wind_range, surge_bob, surge_steep, color='#ef4444', alpha=0.1)
+
+if landfall_idx:
+    lf_surge = compute_surge(fc_winds[landfall_idx], fc_pressures[landfall_idx])
+    ax.plot(fc_winds[landfall_idx], lf_surge, '*', color='#f59e0b', markersize=15, zorder=10,
+            label=f'This cyclone: {lf_surge:.1f}m')
+
+ax.axhline(3, color='#f59e0b', linewidth=0.5, linestyle='--', alpha=0.5)
+ax.text(75, 3.2, 'Danger: 3m', color='#f59e0b', fontsize=7)
+ax.set_xlabel('Max wind (m/s)', color='white')
+ax.set_ylabel('Surge height (m)', color='white')
+ax.set_title('Storm Surge vs Wind Speed', color='white', fontsize=11)
+ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
+
+# --- Panel 5: Uncertainty Cone ---
+ax = axes[1, 1]
+# Simple uncertainty: grows with forecast lead time
+for sigma_mult in [2.0, 1.0, 0.5]:
+    upper_lats = fc_lats + sigma_mult * np.arange(len(fc_lats)) * 0.08
+    lower_lats = fc_lats - sigma_mult * np.arange(len(fc_lats)) * 0.08
+    upper_lons = fc_lons + sigma_mult * np.arange(len(fc_lats)) * 0.06
+    lower_lons = fc_lons - sigma_mult * np.arange(len(fc_lats)) * 0.06
+    alpha = 0.15 if sigma_mult > 1 else 0.25
+    ax.fill_between(fc_times, lower_lats, upper_lats, color='#ef4444', alpha=alpha)
+
+ax.plot(known_times, known_lats, '-o', color='white', linewidth=2, markersize=4, label='Observed')
+ax.plot(fc_times, fc_lats, '--', color='#ef4444', linewidth=2, label='Forecast')
+
+if landfall_idx:
+    ax.axhline(20, color='#f59e0b', linewidth=1, linestyle=':', alpha=0.5)
+    ax.text(fc_times[0], 20.3, 'Coastline (~20°N)', color='#f59e0b', fontsize=8)
+
+ax.set_xlabel('Hours', color='white')
+ax.set_ylabel('Latitude (°N)', color='white')
+ax.set_title('Forecast Uncertainty Cone', color='white', fontsize=11)
+ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
+
+# --- Panel 6: Risk Summary ---
+ax = axes[1, 2]
+ax.axis('off')
+
+def cat_from_wind(v):
+    if v >= 70: return 5
+    if v >= 58: return 4
+    if v >= 50: return 3
+    if v >= 43: return 2
+    if v >= 33: return 1
+    return 0
+
+curr_cat = cat_from_wind(known_winds[-1])
+lf_text = "N/A"
+surge_text = "N/A"
+risk_color = '#22c55e'
+risk_level = 'MODERATE'
+
+if landfall_idx:
+    lf_cat = cat_from_wind(fc_winds[landfall_idx])
+    lf_surge = compute_surge(fc_winds[landfall_idx], fc_pressures[landfall_idx])
+    lf_text = f"{fc_lats[landfall_idx]:.1f}°N, {fc_lons[landfall_idx]:.1f}°E in ~{landfall_idx*6}h"
+    surge_text = f"{lf_surge:.1f}m (Cat {lf_cat} at landfall)"
+    if lf_surge > 5: risk_level, risk_color = 'EXTREME', '#dc2626'
+    elif lf_surge > 3: risk_level, risk_color = 'VERY HIGH', '#ef4444'
+    elif lf_surge > 1: risk_level, risk_color = 'HIGH', '#f59e0b'
+
+report = (
+    f"RISK ASSESSMENT\\n"
+    f"{'='*35}\\n\\n"
+    f"Current: {known_lats[-1]:.1f}°N {known_lons[-1]:.1f}°E\\n"
+    f"Category: {curr_cat} ({known_winds[-1]} m/s)\\n"
+    f"Pressure: {known_pressures[-1]:.0f} hPa\\n\\n"
+    f"Landfall: {lf_text}\\n"
+    f"Surge: {surge_text}\\n\\n"
+    f"Risk: {risk_level}\\n"
+)
+
+ax.text(0.05, 0.95, report, transform=ax.transAxes, color='white',
+        fontsize=10, va='top', fontfamily='monospace',
+        bbox=dict(boxstyle='round,pad=0.5', facecolor='#0d1117',
+                  edgecolor=risk_color, linewidth=2, alpha=0.9))
+
+# Risk level badge
+ax.text(0.5, 0.08, risk_level, transform=ax.transAxes, ha='center',
+        color='white', fontsize=18, fontweight='bold',
+        bbox=dict(boxstyle='round,pad=0.3', facecolor=risk_color, alpha=0.9))
+
+plt.tight_layout()
+plt.show()
+
+# Text summary
+print("CYCLONE TRACKER — FORECAST SUMMARY")
+print("=" * 45)
+print(f"Current: {known_lats[-1]:.1f}°N, {known_lons[-1]:.1f}°E | Cat {curr_cat} | {known_winds[-1]} m/s")
+if landfall_idx:
+    print(f"Landfall: ~{landfall_idx*6}h | Surge: {lf_surge:.1f}m | Risk: {risk_level}")
+else:
+    print("Forecast: remains offshore")`,
       challenge: 'Add a "what-if" module: allow the user to change the cyclone\'s current intensity and direction, and show how the risk assessment changes in real time. This is how emergency managers use operational tools — exploring scenarios to make evacuation decisions.',
       successHint: 'You have built a cyclone tracker from scratch — data generation, climatological analysis, track prediction, intensity estimation, surge calculation, and integrated visualization. Every component connects atmospheric physics to human safety. The fisherman\'s daughter\'s village deserves this tool. Across the Bay of Bengal, systems built on these same principles save thousands of lives every cyclone season.',
     },

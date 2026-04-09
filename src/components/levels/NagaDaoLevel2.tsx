@@ -184,7 +184,7 @@ cb2.ax.yaxis.label.set_color('white'); cb2.ax.tick_params(colors='white')
 # Naga dao zone
 rect = plt.Rectangle((40, 200), 30, 80, fill=False, edgecolor='#10b981', linewidth=2, linestyle='--')
 axes[1].add_patch(rect)
-axes[1].text(55, 320, 'Naga dao\nsweet spot', color='#10b981', ha='center', fontsize=10, fontweight='bold')
+axes[1].text(55, 320, 'Naga dao\\nsweet spot', color='#10b981', ha='center', fontsize=10, fontweight='bold')
 
 axes[1].set_xlabel('Carbon Content (%×100)', color='white', fontsize=11)
 axes[1].set_ylabel('Temper Temperature (°C)', color='white', fontsize=11)
@@ -380,7 +380,7 @@ for i, temp in enumerate(temps):
 
 # Zone labels
 zones = [
-    (300, 'Black heat\n(no glow)', 'white'),
+    (300, 'Black heat\\n(no glow)', 'white'),
     (550, 'Faint red', 'white'),
     (700, 'Dark cherry', 'white'),
     (800, 'Cherry red', 'black'),
@@ -416,7 +416,7 @@ operations = [
 ]
 for i, (name, lo, hi, color) in enumerate(operations):
     axes[1,0].barh(i, hi-lo, left=lo, color=color, height=0.6, edgecolor='white', linewidth=0.5)
-    axes[1,0].text(lo + (hi-lo)/2, i, f'{name}\n{lo}-{hi}°C', ha='center', va='center', color='white', fontsize=8, fontweight='bold')
+    axes[1,0].text(lo + (hi-lo)/2, i, f'{name}\\n{lo}-{hi}°C', ha='center', va='center', color='white', fontsize=8, fontweight='bold')
 
 axes[1,0].set_xlabel('Temperature (°C)', color='white', fontsize=10)
 axes[1,0].set_title('Forging Operations by Temperature', color='white', fontsize=12, fontweight='bold')

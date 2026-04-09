@@ -274,20 +274,19 @@ export default function ReferencePage() {
                                 {allSections.map((section, i) => (
                                   <li key={i}>
                                     <a
-                                      href={section.id ? `#${section.id}` : `#ref-${guide.slug}`}
+                                      href={`#${section.id || `section-${guide.slug}-${i}`}`}
                                       onClick={(e) => {
                                         e.preventDefault();
                                         setShowIndex(false);
                                         setJumpToSlug(guide.slug);
-                                        if (section.id) {
-                                          setTimeout(() => {
-                                            const el = document.getElementById(section.id!);
-                                            if (el) {
-                                              const top = el.getBoundingClientRect().top + window.scrollY - 120;
-                                              window.scrollTo({ top, behavior: 'smooth' });
-                                            }
-                                          }, 600);
-                                        }
+                                        const sectionId = section.id || `section-${guide.slug}-${i}`;
+                                        setTimeout(() => {
+                                          const el = document.getElementById(sectionId);
+                                          if (el) {
+                                            const top = el.getBoundingClientRect().top + window.scrollY - 120;
+                                            window.scrollTo({ top, behavior: 'smooth' });
+                                          }
+                                        }, 600);
                                       }}
                                       className="text-xs text-gray-500 dark:text-gray-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
                                     >

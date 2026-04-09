@@ -614,9 +614,9 @@ ax.tick_params(colors='gray')
 
 # Section labels
 sections = [
-    (850, 3500, 'YARLUNG TSANGPO\n(Tibet)', '#60a5fa'),
-    (1850, 2500, 'SIANG\n(Gorge)', '#ef4444'),
-    (2350, 500, 'BRAHMAPUTRA\n(Assam)', '#22c55e'),
+    (850, 3500, 'YARLUNG TSANGPO\\n(Tibet)', '#60a5fa'),
+    (1850, 2500, 'SIANG\\n(Gorge)', '#ef4444'),
+    (2350, 500, 'BRAHMAPUTRA\\n(Assam)', '#22c55e'),
     (2800, 200, 'DELTA', '#f59e0b'),
 ]
 for x, y, label, color in sections:
@@ -646,7 +646,7 @@ ax = axes[3]
 ax.set_facecolor('#111827')
 ax.plot(distance, sed_conc, color='#ef4444', linewidth=2)
 ax.fill_between(distance, sed_conc, alpha=0.15, color='#ef4444')
-ax.set_ylabel('Sediment conc.\n(kg/m³)', color='white')
+ax.set_ylabel('Sediment conc.\\n(kg/m³)', color='white')
 ax.set_xlabel('Distance from source (km)', color='white')
 ax.tick_params(colors='gray')
 

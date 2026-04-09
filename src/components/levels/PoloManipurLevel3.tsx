@@ -171,7 +171,7 @@ for idx, (title, masses, v0, e) in enumerate(scenarios):
     p_after = sum(m*v for m, v in zip(masses, final))
     ke_before = 0.5 * masses[0] * v0**2
     ke_after = sum(0.5*m*v**2 for m, v in zip(masses, final))
-    ax.text(0.98, 0.95, f'p: {p_after:.2f}/{p_before:.2f}\nKE: {ke_after:.1f}/{ke_before:.1f}',
+    ax.text(0.98, 0.95, f'p: {p_after:.2f}/{p_before:.2f}\\nKE: {ke_after:.1f}/{ke_before:.1f}',
             transform=ax.transAxes, ha='right', va='top', color='white', fontsize=7,
             bbox=dict(boxstyle='round', facecolor='#374151', alpha=0.8))
 
@@ -501,7 +501,7 @@ ax1.tick_params(colors='white')
 ax1.legend(facecolor='#374151', edgecolor='#4b5563', labelcolor='white')
 
 # Win probabilities
-labels = [f'{team_a.name}\nwins', 'Draw', f'{team_b.name}\nwins']
+labels = [f'{team_a.name}\\nwins', 'Draw', f'{team_b.name}\\nwins']
 sizes = [results['a_wins'], results['draws'], results['b_wins']]
 colors_pie = ['#34d399', '#f59e0b', '#ef4444']
 ax2.bar(labels, sizes, color=colors_pie, edgecolor='white', linewidth=0.5)

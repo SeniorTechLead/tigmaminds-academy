@@ -7,6 +7,17 @@ const getLessonBySlug = async (slug: string) => {
   return lookup(slug);
 };
 
+// Redirect deleted/renamed slugs to their canonical versions
+const SLUG_REDIRECTS: Record<string, string> = {
+  'banyan-tree': 'old-banyan-trees-stories',
+  'basket-weaver': 'basket-weavers-song',
+  'woodpecker-drum': 'woodpeckers-drum',
+};
+
+function canonicalSlug(slug: string): string {
+  return SLUG_REDIRECTS[slug] || slug;
+}
+
 interface LevelDetail {
   viewed?: boolean;         // opened the level tab
   quizScore?: number;       // quiz score (Level 0)
@@ -56,7 +67,8 @@ function loadLocal(): Record<string, LessonProgress> {
     // Migrate old format
     const parsed = JSON.parse(saved);
     const migrated: Record<string, LessonProgress> = {};
-    for (const [slug, data] of Object.entries(parsed)) {
+    for (const [rawSlug, data] of Object.entries(parsed)) {
+      const slug = canonicalSlug(rawSlug);
       const d = data as any;
       if (d.levelsCompleted) {
         // Ensure levels field exists (migration from pre-granular format)
@@ -137,8 +149,9 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
         if (data && data.length > 0) {
           const dbProgress: Record<string, LessonProgress> = {};
           for (const row of data) {
-            dbProgress[row.lesson_slug] = {
-              slug: row.lesson_slug,
+            const slug = canonicalSlug(row.lesson_slug);
+            dbProgress[slug] = {
+              slug,
               levelsCompleted: row.levels_completed || [],
               levels: row.level_details || {},
               completedAt: row.completed_at,
@@ -228,7 +241,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
           if (user) {
             supabase.from('user_plans').upsert({
               user_id: user.id, streak_data: next, updated_at: new Date().toISOString(),
-            }, { onConflict: 'user_id' }).catch(() => {});
+            }, { onConflict: 'user_id' }).catch((err) => console.warn('[Progress] Streak save failed:', err));
           }
         }
       } catch {}

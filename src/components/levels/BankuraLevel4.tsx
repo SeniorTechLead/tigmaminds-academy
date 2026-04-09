@@ -135,7 +135,7 @@ peak_pot = max(l["T_pot"] for l in log)
 peak_gas = max(l["T_gas"] for l in log)
 total_fuel = sum(bankura_fuel(l["t_h"]) * 0.5 for l in log)
 
-print(f"\nPeak pottery temperature: {peak_pot:.0f} C")
+print(f"\\nPeak pottery temperature: {peak_pot:.0f} C")
 print(f"Peak gas temperature:    {peak_gas:.0f} C")
 print(f"Total fuel consumed: {total_fuel:.0f} kg wood")
 
@@ -274,7 +274,7 @@ print(f"{'Total fuel (kg)':<20} {trad_result['total_fuel']:>10.0f} {best_result[
 
 fuel_saved = trad_result['total_fuel'] - best_result['total_fuel']
 cost_saved = fuel_saved * 5
-print(f"\nFuel saved per firing: {fuel_saved:.0f} kg")
+print(f"\\nFuel saved per firing: {fuel_saved:.0f} kg")
 print(f"Cost saved per firing: Rs {cost_saved:.0f}")
 print(f"Annual savings (100 firings): Rs {cost_saved * 100:,.0f}")
 
@@ -375,7 +375,7 @@ print(f"{'Unaccounted':<28} {unaccounted:>6.0f} {unaccounted/audit.total_input*1
 print(f"{'TOTAL':<28} {audit.total_input:>6.0f}")
 
 efficiency = losses["Useful (pottery)"] / audit.total_input * 100
-print(f"\nKiln efficiency: {efficiency:.1f}%")
+print(f"\\nKiln efficiency: {efficiency:.1f}%")
 
 # Improvement opportunities
 print()
@@ -579,7 +579,7 @@ for name, thick, fe in batch:
           f"{q['strength']:>8.1f} MPa")
 
 yield_pct = grades_ok / len(batch) * 100
-print(f"\nBatch yield: {grades_ok}/{len(batch)} pieces OK ({yield_pct:.0f}%)")
+print(f"\\nBatch yield: {grades_ok}/{len(batch)} pieces OK ({yield_pct:.0f}%)")
 print("The thick panel is at highest risk — consider a slower ramp rate.")`,
       challenge: 'The potter receives a rush order for 20 "Grade A" horses (4 cm thick) and 5 large panels (8 cm thick) in the same batch. Design a firing schedule that achieves Grade A for the horses while keeping crack risk below 20% for the panels. What compromise in ramp rate is needed? Does the longer firing time eat into the profit?',
       successHint: 'Quality prediction models are the backbone of modern manufacturing. Semiconductor fabs, pharmaceutical plants, food processing, and automotive factories all use similar models to predict product quality from process parameters. The ability to simulate before manufacturing — "virtual prototyping" — saves enormous time and resources. You just built this capability for Bankura terracotta.',

@@ -259,8 +259,8 @@ axes[0,0].plot(x, wave_speed, color='#10b981', linewidth=2.5)
 axes[0,0].set_xlabel('Depth (mm)', color='white', fontsize=10)
 axes[0,0].set_ylabel('Wave Speed (m/s)', color='white', fontsize=10)
 axes[0,0].set_title('Speed of Sound Through Casque', color='white', fontsize=12, fontweight='bold')
-axes[0,0].text(2, 2500, 'Dense shell\n(fast)', color='#10b981', fontsize=9)
-axes[0,0].text(10, 500, 'Porous core\n(slow)', color='#10b981', fontsize=9)
+axes[0,0].text(2, 2500, 'Dense shell\\n(fast)', color='#10b981', fontsize=9)
+axes[0,0].text(10, 500, 'Porous core\\n(slow)', color='#10b981', fontsize=9)
 
 # Impedance profile
 axes[0,1].plot(x, impedance / 1e6, color='#f59e0b', linewidth=2.5)
@@ -438,7 +438,7 @@ axes[2].set_ylabel('Peak Transmitted Force (N)', color='white', fontsize=10)
 axes[2].set_title('Protection Comparison', color='white', fontsize=12, fontweight='bold')
 
 for i, (p, m) in enumerate(zip(peaks, masses)):
-    axes[2].text(i, p + 5, f'{p:.0f}N\n{m*1000:.1f}g', ha='center', color='white', fontsize=8)
+    axes[2].text(i, p + 5, f'{p:.0f}N\\n{m*1000:.1f}g', ha='center', color='white', fontsize=8)
 
 plt.suptitle('Casque Gradient Optimization', color='white', fontsize=14, fontweight='bold', y=1.02)
 plt.tight_layout()
@@ -766,7 +766,7 @@ for i, r in enumerate(results):
 axes[1,0].axhline(y=safety_limit, color='#f87171', linestyle='--', alpha=0.5)
 axes[1,0].axvline(x=400, color='#f87171', linestyle='--', alpha=0.5)
 axes[1,0].fill_between([0, 400], 0, safety_limit, alpha=0.05, color='#10b981')
-axes[1,0].text(200, 1500, 'FEASIBLE\nREGION', ha='center', color='#10b981', fontsize=12, alpha=0.5)
+axes[1,0].text(200, 1500, 'FEASIBLE\\nREGION', ha='center', color='#10b981', fontsize=12, alpha=0.5)
 axes[1,0].set_xlabel('Mass (g)', color='white', fontsize=10)
 axes[1,0].set_ylabel('Peak Force (N)', color='white', fontsize=10)
 axes[1,0].set_title('Design Space', color='white', fontsize=12, fontweight='bold')

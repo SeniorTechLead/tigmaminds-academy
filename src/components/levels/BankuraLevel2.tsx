@@ -67,7 +67,7 @@ for r in reactions:
     remaining_mass -= mass_loss
     total_energy += E if r.endothermic else -E
 
-print(f"\n{'TOTALS':<28} {'':>10} {total_energy:>8.1f} MJ "
+print(f"\\n{'TOTALS':<28} {'':>10} {total_energy:>8.1f} MJ "
       f"{clay_mass - remaining_mass:>7.1f} kg")
 print(f"Final mass: {remaining_mass:.1f} kg ({remaining_mass/clay_mass*100:.0f}% of original)")
 

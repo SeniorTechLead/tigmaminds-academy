@@ -1233,7 +1233,7 @@ true_rhythmic_total = sum(1 for l in qc_labels if l != 'Non-rhythmic')
 false_pos = sum(1 for i in rhythmic_idx if qc_labels[i] == 'Non-rhythmic')
 false_neg = true_rhythmic_total - true_rhythmic_detected
 
-metrics_names = ['Sensitivity', 'Specificity', 'PPV', 'Detection\nrate']
+metrics_names = ['Sensitivity', 'Specificity', 'PPV', 'Detection\\nrate']
 sensitivity = true_rhythmic_detected / max(true_rhythmic_total, 1)
 n_true_nr = sum(1 for l in qc_labels if l == 'Non-rhythmic')
 true_neg = n_true_nr - false_pos

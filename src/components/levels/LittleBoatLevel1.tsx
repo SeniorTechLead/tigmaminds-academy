@@ -68,12 +68,12 @@ ax2.plot(boat_x + [boat_x[0]], boat_y + [boat_y[0]], color='#f59e0b', linewidth=
 # Weight arrow (down)
 ax2.annotate('', xy=(0, -1.5), xytext=(0, 0),
             arrowprops=dict(arrowstyle='->', color='#ef4444', lw=3))
-ax2.text(0.3, -0.8, 'Weight\n(gravity)', color='#ef4444', fontsize=10)
+ax2.text(0.3, -0.8, 'Weight\\n(gravity)', color='#ef4444', fontsize=10)
 
 # Buoyant force arrow (up)
 ax2.annotate('', xy=(0, 1.5), xytext=(0, 0),
             arrowprops=dict(arrowstyle='->', color='#22c55e', lw=3))
-ax2.text(0.3, 0.8, 'Buoyant\nforce', color='#22c55e', fontsize=10)
+ax2.text(0.3, 0.8, 'Buoyant\\nforce', color='#22c55e', fontsize=10)
 
 ax2.set_title('Forces on a Floating Boat', color='white', fontsize=13)
 ax2.tick_params(colors='gray')

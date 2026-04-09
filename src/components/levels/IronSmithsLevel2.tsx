@@ -56,16 +56,16 @@ solidus = np.where(c <= 0.77, 1538 - (1538-727) * c / 2.14,
 # Draw phase regions
 # Ferrite region
 ax.fill_between([0, 0.02, 0.02, 0], [0, 0, 727, 912], color='#34d399', alpha=0.3)
-ax.text(0.005, 400, 'α\n(Ferrite)', color='#34d399', fontsize=11, fontweight='bold', ha='center')
+ax.text(0.005, 400, 'α\\n(Ferrite)', color='#34d399', fontsize=11, fontweight='bold', ha='center')
 
 # Austenite region
 ax.fill_between(c[c<=0.77], a3[c<=0.77], 1538, color='#60a5fa', alpha=0.2)
 ax.fill_between(c[c>=0.77], acm[c>=0.77], liquidus[c>=0.77], color='#60a5fa', alpha=0.2, where=~np.isnan(acm[c>=0.77]))
-ax.text(0.5, 1000, 'γ\n(Austenite)', color='#60a5fa', fontsize=13, fontweight='bold', ha='center')
+ax.text(0.5, 1000, 'γ\\n(Austenite)', color='#60a5fa', fontsize=13, fontweight='bold', ha='center')
 
 # Pearlite/ferrite+cementite region
 ax.fill_between([0, 2.14, 2.14, 0], [0, 0, 727, 727], color='#fbbf24', alpha=0.15)
-ax.text(1.0, 350, 'Ferrite + Cementite\n(Pearlite below 0.77%C)', color='#fbbf24', fontsize=10, ha='center')
+ax.text(1.0, 350, 'Ferrite + Cementite\\n(Pearlite below 0.77%C)', color='#fbbf24', fontsize=10, ha='center')
 
 # Phase boundary lines
 ax.plot(c[c<=0.77], a3[c<=0.77], color='#34d399', linewidth=2.5, label='A₃ line')
@@ -246,10 +246,10 @@ ax1.plot(carbon, hv_tempered, color='#fbbf24', linewidth=2.5, label='Quenched + 
 
 # Application zones
 apps = [
-    (0.05, 0.25, 'Structural\nsteel', '#34d399'),
-    (0.25, 0.55, 'Axles,\ngears', '#60a5fa'),
-    (0.55, 0.85, 'Blades,\nsprings', '#fbbf24'),
-    (0.85, 1.2, 'Tool\nsteel', '#f87171'),
+    (0.05, 0.25, 'Structural\\nsteel', '#34d399'),
+    (0.25, 0.55, 'Axles,\\ngears', '#60a5fa'),
+    (0.55, 0.85, 'Blades,\\nsprings', '#fbbf24'),
+    (0.85, 1.2, 'Tool\\nsteel', '#f87171'),
 ]
 for x1, x2, label, color in apps:
     ax1.axvspan(x1, x2, alpha=0.08, color=color)

@@ -435,13 +435,13 @@ for name, d in designs.items():
 ax = axes[1, 1]
 ax.set_facecolor('#111827')
 applications = [
-    (1997, 'Lotus effect\ndiscovered', '#22c55e'),
-    (2003, 'Lotusan\npaint', '#3b82f6'),
-    (2005, 'Self-cleaning\nglass', '#f59e0b'),
-    (2008, 'NanoTex\ntextiles', '#a855f7'),
-    (2012, 'Anti-ice\ncoatings', '#ef4444'),
-    (2018, 'Medical\nimplants', '#06b6d4'),
-    (2023, 'Smart responsive\nsurfaces', '#f59e0b'),
+    (1997, 'Lotus effect\\ndiscovered', '#22c55e'),
+    (2003, 'Lotusan\\npaint', '#3b82f6'),
+    (2005, 'Self-cleaning\\nglass', '#f59e0b'),
+    (2008, 'NanoTex\\ntextiles', '#a855f7'),
+    (2012, 'Anti-ice\\ncoatings', '#ef4444'),
+    (2018, 'Medical\\nimplants', '#06b6d4'),
+    (2023, 'Smart responsive\\nsurfaces', '#f59e0b'),
 ]
 
 for year, label, color in applications:
@@ -575,7 +575,7 @@ ax.tick_params(colors='gray')
 ax = axes[0, 1]
 ax.set_facecolor('#111827')
 fluxes = [flux_aerenchyma * 1e6, flux_water_only * 1e6]
-labels = ['With\naerenchy.', 'Water\nonly']
+labels = ['With\\naerenchy.', 'Water\\nonly']
 colors = ['#22c55e', '#ef4444']
 bars = ax.bar(labels, fluxes, color=colors, edgecolor='none', width=0.5)
 ax.set_ylabel('O2 flux (μmol/s)', color='white')

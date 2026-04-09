@@ -18,7 +18,7 @@ export type ReferenceCategory =
   | 'conservation' | 'health-medicine' | 'agriculture';
 
 export interface InteractiveConfig {
-  type: 'matching' | 'true-false' | 'slider' | 'did-you-know' | 'tone-player' | 'interval-player' | 'beat-machine' | 'harmonics-explorer' | 'gaussian-explorer' | 'contour-explainer' | 'logic-gate-simulator' | 'sql-playground' | 'ts-playground' | 'html-playground';
+  type: 'matching' | 'true-false' | 'slider' | 'did-you-know' | 'tone-player' | 'interval-player' | 'beat-machine' | 'harmonics-explorer' | 'gaussian-explorer' | 'contour-explainer' | 'logic-gate-simulator' | 'sql-playground' | 'ts-playground' | 'html-playground' | 'python-playground';
   props: Record<string, unknown>;
 }
 

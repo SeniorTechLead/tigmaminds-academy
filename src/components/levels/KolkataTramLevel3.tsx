@@ -73,7 +73,7 @@ def analyse_system(stages, input_kW, label):
         energy = energy_out
 
     overall = energy / input_kW
-    print(f"\n{'TOTAL':<26} {overall:>4.0%} {input_kW:>6.1f} {energy:>7.1f} {total_loss:>8.1f}")
+    print(f"\\n{'TOTAL':<26} {overall:>4.0%} {input_kW:>6.1f} {energy:>7.1f} {total_loss:>8.1f}")
     print(f"Power at wheels: {energy:.1f} kW ({overall*100:.1f}% of input)")
     return energy, overall
 
@@ -100,7 +100,7 @@ classic_annual = annual_kWh * fleet * (1 - e_classic) * cost
 modern_annual = annual_kWh * fleet * (1 - e_modern) * cost
 savings = classic_annual - modern_annual
 
-print(f"\nAnnual electricity wasted (fleet of {fleet}):")
+print(f"\\nAnnual electricity wasted (fleet of {fleet}):")
 print(f"  Classic: Rs {classic_annual/1e7:.1f} crore")
 print(f"  Modern:  Rs {modern_annual/1e7:.1f} crore")
 print(f"  Savings: Rs {savings/1e7:.1f} crore per year")`,
@@ -217,7 +217,7 @@ for log in time_log:
           f"{log['type']:>6} {log['E_rec']:>8.1f} kJ")
 
 regen_pct = E_recovered / KE_initial * 100
-print(f"\nInitial KE: {KE_initial:.1f} kJ")
+print(f"\\nInitial KE: {KE_initial:.1f} kJ")
 print(f"Recovered: {E_recovered:.1f} kJ ({regen_pct:.1f}%)")
 print(f"Mech brakes: {E_mech_brake:.1f} kJ")
 
@@ -446,7 +446,7 @@ for hour, n_active in enumerate(hourly_trams):
     if 5 <= hour <= 22:
         print(f"{hour:>4} {n_active:>6} {avg_mw:>8.2f} {peak_mw:>8.2f}")
 
-print(f"\nDaily energy: {daily_energy:.1f} MWh")
+print(f"\\nDaily energy: {daily_energy:.1f} MWh")
 print(f"Peak demand:  {peak_demand:.2f} MW")
 
 # Cost analysis
@@ -457,11 +457,11 @@ monthly_energy_cost = daily_energy * 1000 * 30 * energy_rate
 monthly_demand_cost = peak_demand * 1000 * demand_rate
 total_monthly = monthly_energy_cost + monthly_demand_cost
 
-print(f"\n=== Monthly Electricity Bill ===")
+print(f"\\n=== Monthly Electricity Bill ===")
 print(f"Energy charge: Rs {monthly_energy_cost/1e5:.1f} lakh")
 print(f"Demand charge: Rs {monthly_demand_cost/1e5:.1f} lakh")
 print(f"Total:         Rs {total_monthly/1e5:.1f} lakh")
-print(f"\nDemand charge is {monthly_demand_cost/total_monthly*100:.0f}% of total!")
+print(f"\\nDemand charge is {monthly_demand_cost/total_monthly*100:.0f}% of total!")
 print("Reducing peak demand saves more than reducing total energy.")`,
       challenge: 'Add a 2 MW battery at each of the 5 substations. The battery absorbs excess regenerated energy and releases it during peak demand, shaving the peak by up to 2 MW. Calculate the new demand charge and the battery payback period (assume Rs 1 crore per MW of battery capacity).',
       successHint: 'Grid interaction and demand management are among the most important topics in modern energy engineering. Smart grids, electric vehicle charging, and renewable energy integration all face the same challenge: matching time-varying supply with time-varying demand while minimising peak stress on the grid.',

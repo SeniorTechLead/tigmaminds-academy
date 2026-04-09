@@ -477,8 +477,8 @@ ax1.contour(X, Y, Z, levels=10, colors='white', linewidths=0.5, alpha=0.3)
 plt.colorbar(cf, ax=ax1, label='Fitness')
 
 # Mark peaks and species
-peaks = [(3, 2, 'Dendrobium\n(bee)'), (7, 8, 'Aerides\n(moth)'),
-         (2, 6, 'Bulbophyllum\n(fly)'), (6, 4, 'Coelogyne\n(beetle)')]
+peaks = [(3, 2, 'Dendrobium\\n(bee)'), (7, 8, 'Aerides\\n(moth)'),
+         (2, 6, 'Bulbophyllum\\n(fly)'), (6, 4, 'Coelogyne\\n(beetle)')]
 for px, py, name in peaks:
     ax1.plot(px, py, '*', color='white', markersize=15)
     ax1.annotate(name, xy=(px, py), xytext=(px+0.5, py+0.5),

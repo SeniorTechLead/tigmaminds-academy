@@ -122,7 +122,7 @@ ax2.set_ylabel('Fundamental freq (Hz)', color='gray')
 # Annotate the range
 f_cold = BambooFlute(tube_length=0.40, temperature=5).fundamental_frequency()
 f_hot = BambooFlute(tube_length=0.40, temperature=40).fundamental_frequency()
-ax2.annotate(f'{f_hot - f_cold:.1f} Hz drift\n(5C to 40C)',
+ax2.annotate(f'{f_hot - f_cold:.1f} Hz drift\\n(5C to 40C)',
              xy=(22, (f_cold + f_hot)/2), fontsize=10, color='#f59e0b',
              ha='center')
 

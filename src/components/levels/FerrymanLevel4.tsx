@@ -774,7 +774,7 @@ ax.axhline(1.0, color='white', linestyle='--', alpha=0.5, label='Constraint boun
 
 for bar, a, l, p in zip(bars, achieved_vals, limits, passed):
     ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.05,
-            f'{a:.2f}\n({"PASS" if p else "FAIL"})',
+            f'{a:.2f}\\n({"PASS" if p else "FAIL"})',
             ha='center', va='bottom', color='white', fontsize=8)
 
 ax.set_ylabel('Achieved / Required', color='white')

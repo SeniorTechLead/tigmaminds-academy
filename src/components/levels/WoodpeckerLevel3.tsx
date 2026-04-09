@@ -44,6 +44,11 @@ scenarios = [
     ("Human head (with helmet)", dt_helmet, '#22c55e'),
 ]
 
+# Energy calculations
+E_per_strike = 0.5 * mass * v_impact**2
+strikes_per_sec = 20  # typical drumming rate
+total_strikes = strikes_per_sec * 3600 * 8  # 8 hours of drumming
+total_energy = np.cumsum(np.ones(total_strikes) * E_per_strike)
 
 print("Impact Mechanics Summary:")
 print(f"{'Scenario':<30} {'dt (ms)':>10} {'Peak F (N)':>12} {'Peak g':>10}")
@@ -77,6 +82,7 @@ The relationship between stress and strain defines material behavior. In the **e
       checkAnswer: 'Bone B deforms 4 times more than Bone A. Since stress is the same (same force, same area), and strain = stress / E, the bone with the lower modulus (B, at 5 GPa) has 4x the strain of the stiffer bone (A, at 20 GPa). This is why the woodpecker has different modulus values at different locations — stiff where rigidity matters, compliant where absorption matters.',
       codeIntro: 'Plot stress-strain curves for different biological materials found in a woodpecker skull and calculate deformation under impact loading.',
       code: `import numpy as np
+import matplotlib.pyplot as plt
 
 # Material properties (biological tissues in woodpecker skull)
 materials = {
@@ -88,6 +94,62 @@ materials = {
     'Muscle/tendon': {'E': 0.5e9, 'yield_stress': 30e6, 'color': '#06b6d4'},
 }
 
+# Impact conditions
+F_impact = 700  # N (typical woodpecker impact force)
+area = 0.5e-4  # 0.5 cm^2 beak contact area
+stress_applied = F_impact / area  # Pa
+layer_thickness = 0.002  # 2 mm typical layer thickness
+
+# Calculate deformations for each material
+names = list(materials.keys())
+deformations_um = []
+for name in names:
+    E = materials[name]['E']
+    strain_val = stress_applied / E
+    deform = strain_val * layer_thickness * 1e6  # convert to micrometers
+    deformations_um.append(deform)
+
+# --- Stress-Strain Curves Visualization ---
+fig, axes = plt.subplots(1, 2, figsize=(14, 6))
+fig.patch.set_facecolor('#0d1117')
+fig.suptitle('Stress-Strain Properties of Woodpecker Skull Materials',
+             color='white', fontsize=14, fontweight='bold')
+
+for ax in axes:
+    ax.set_facecolor('#111827')
+    ax.tick_params(colors='gray')
+
+# Panel 1: Stress-strain curves (linear elastic to yield)
+ax = axes[0]
+for name, props in materials.items():
+    E = props['E']
+    yield_s = props['yield_stress']
+    max_strain = yield_s / E * 1.2
+    strain = np.linspace(0, max_strain, 100)
+    stress = np.minimum(E * strain, yield_s)
+    ax.plot(strain * 100, stress / 1e6, '-', color=props['color'], linewidth=2, label=name)
+    # Mark yield point
+    ax.plot(yield_s / E * 100, yield_s / 1e6, 'o', color=props['color'], markersize=5)
+
+ax.set_xlabel('Strain (%)', color='white')
+ax.set_ylabel('Stress (MPa)', color='white')
+ax.set_title('Stress-Strain Curves to Yield', color='white', fontsize=11)
+ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
+
+# Panel 2: Deformation comparison at impact stress
+ax = axes[1]
+bar_colors = [materials[n]['color'] for n in names]
+ax.barh(names, deformations_um, color=bar_colors, height=0.6, edgecolor='none')
+for i, d in enumerate(deformations_um):
+    label = f'{d:.1f} um' if d < 1000 else f'{d/1000:.1f} mm'
+    ax.text(max(d * 1.05, max(deformations_um) * 0.02), i, label,
+            va='center', color='white', fontsize=8)
+ax.set_xlabel('Deformation (micrometers)', color='white')
+ax.set_title(f'Deformation at {stress_applied/1e6:.0f} MPa Impact', color='white', fontsize=11)
+ax.set_xscale('log')
+
+plt.tight_layout()
+plt.show()
 
 print("Stress-Strain Analysis of Woodpecker Skull:")
 print(f"Applied stress: {stress_applied/1e6:.1f} MPa (from {F_impact}N over {area*1e4:.0f} cm^2)")
@@ -99,7 +161,8 @@ for name, deform in zip(names, deformations_um):
     strain_val = stress_applied / E
     print(f"{name:<20} {E/1e9:>10.3f} {strain_val:>12.6f} {deform:>14.1f}")
 print()
-print("Brain tissue deforms 5 MILLION times more than cranial bone!")
+ratio = deformations_um[names.index('Brain tissue')] / deformations_um[names.index('Cranial bone')]
+print(f"Brain tissue deforms {ratio:,.0f}x more than cranial bone!")
 print("The layered structure acts as a series of mechanical filters,")
 print("each absorbing energy before it reaches the brain.")`,
       challenge: 'Add a "steel" material (E = 200 GPa, yield = 250 MPa) and a "rubber" material (E = 0.01 GPa, yield = 10 MPa) to the comparison. Where would an ideal helmet material sit on this spectrum?',
@@ -173,8 +236,32 @@ for i in range(1, n_steps):
 
         F_transmitted[j, i] = F_ext
 
+        # Equation of motion: m*a = F_ext - k*x - c*v
+        a = (F_ext - k * x[j, i-1] - c * v[j, i-1]) / m
+        v[j, i] = v[j, i-1] + a * dt
+        x[j, i] = x[j, i-1] + v[j, i] * dt
 
-print("\n[Full visualization in playground]")`,
+# Analyze peak forces at each layer
+print("Multi-Layer Shock Absorption Analysis")
+print("=" * 60)
+print(f"Input pulse: {F_peak} N peak, {pulse_duration*1000:.1f} ms duration")
+print()
+print(f"{'Layer':<30} {'Peak Force (N)':>14} {'Attenuation':>12}")
+print("-" * 60)
+input_peak = np.max(np.abs(F_input))
+for j in range(n_layers):
+    peak_f = np.max(np.abs(F_transmitted[j]))
+    atten = (1 - peak_f / input_peak) * 100 if input_peak > 0 else 0
+    print(f"{layers[j]['name']:<30} {peak_f:>14.1f} {atten:>11.1f}%")
+
+brain_peak = np.max(np.abs(F_transmitted[-1]))
+print()
+print(f"Force reaching brain: {brain_peak:.1f} N ({brain_peak/input_peak*100:.1f}% of input)")
+print(f"Total attenuation: {(1 - brain_peak/input_peak)*100:.1f}%")
+print()
+print("Each layer acts as a mechanical low-pass filter.")
+print("Spongy bone and CSF provide the most damping — they convert")
+print("kinetic energy into heat through viscous dissipation.")`,
       challenge: 'Remove the spongy bone layer from the simulation (set its damping to near zero). How much more force reaches the brain? This models what happens with a concussion — when the absorption system fails.',
       successHint: 'Multi-stage energy absorption is the core principle behind all protective equipment. Motorcycle helmets use the same layered approach: hard shell, EPS foam, comfort liner, and a gap for the skull. The woodpecker invented this design millions of years ago.',
     },
@@ -218,8 +305,30 @@ y_wp = r_wp * np.sin(theta)
 thickness_sphere = np.ones_like(theta) * 2.0  # uniform 2 mm
 thickness_wp = 2.0 + 2.0 * np.cos(theta / 2) ** 4  # thicker at front (theta=0)
 
+# Apply impact force at front (theta=0) and compute stress = F / (thickness * unit_width)
+F_impact = 500  # N impact force
+unit_width = 0.01  # 10 mm out-of-plane width
+
+# Stress distribution: force attenuates with angular distance from impact
+# Model as cosine decay from impact point
+force_distribution = np.maximum(np.cos(theta), 0)  # force only on front hemisphere
+force_distribution = force_distribution / (np.sum(force_distribution) * (theta[1] - theta[0]))
+force_per_unit = F_impact * force_distribution
+
+stress_sphere = force_per_unit / (thickness_sphere / 1000 * unit_width)
+stress_wp = force_per_unit / (thickness_wp / 1000 * unit_width)
 
 print("Skull Biomechanics Summary:")
+print()
+print("Geometry comparison (spherical vs woodpecker skull):")
+print(f"{'Location':<20} {'Sphere thick (mm)':>18} {'WP thick (mm)':>14} {'Sphere stress':>14} {'WP stress':>12}")
+print("-" * 82)
+sample_angles = [0, 30, 60, 90, 150, 180]
+for deg in sample_angles:
+    idx = int(deg / 360 * len(theta)) % len(theta)
+    label = f"{deg} deg ({'front' if deg == 0 else 'side' if deg == 90 else 'back' if deg == 180 else ''})"
+    print(f"{label:<20} {thickness_sphere[idx]:>18.1f} {thickness_wp[idx]:>14.1f} {stress_sphere[idx]/1e6:>13.2f}M {stress_wp[idx]/1e6:>11.2f}M")
+
 print()
 print("Geometric optimizations in the woodpecker skull:")
 print("1. Elongated shape reduces stress concentration at impact point")
@@ -228,7 +337,9 @@ print("3. Tight brain fit: 1mm CSF gap vs ~3mm in humans")
 print("4. Perfect beak alignment eliminates rotational acceleration")
 print("5. Hyoid bone wraps entire skull for force redistribution")
 print()
-print(f"Peak stress ratio (woodpecker/spherical): {np.max(stress_wp)/np.max(stress_sphere):.2f}")
+ratio = np.max(stress_wp[stress_wp < np.inf]) / np.max(stress_sphere[stress_sphere < np.inf]) if np.max(stress_sphere) > 0 else 0
+print(f"Peak stress ratio (woodpecker/spherical): {ratio:.2f}")
+print(f"The thicker front of the woodpecker skull reduces peak stress by {(1-ratio)*100:.0f}%")
 print(f"A 15-degree off-center strike creates {np.sin(np.radians(15))*1200:.0f}g rotational component")
 print("This is why woodpeckers NEVER strike at an angle.")`,
       challenge: 'Modify the skull shape to be more extreme — use b_wp = 0.6 for a very elongated skull. Does the stress distribution improve or worsen? Find the optimal asymmetry parameter that minimizes peak stress at the impact point.',
@@ -303,7 +414,24 @@ print(f"Instantaneous modulus: {E_inst/1e9:.2f} GPa (stiff during impact)")
 print(f"Relaxed modulus: {E_R/1e9:.2f} GPa (soft at equilibrium)")
 print(f"Ratio: {E_inst/E_R:.1f}x stiffer during impact than at rest")
 
-print("\n[Full visualization in playground]")`,
+# Analyze peak stress per strike and recovery
+strike_times = np.arange(0.01, t_total, strike_period)
+print()
+print(f"{'Strike #':<10} {'Peak Stress (MPa)':>18} {'Residual Before (MPa)':>22} {'Recovery %':>12}")
+print("-" * 65)
+for idx, st in enumerate(strike_times):
+    strike_mask = (t >= st) & (t < st + strike_duration)
+    peak_s = np.max(np.abs(stress[strike_mask])) if np.any(strike_mask) else 0
+    # Residual just before this strike
+    pre_idx = np.searchsorted(t, st) - 1
+    residual = abs(stress[max(0, pre_idx)])
+    recovery = (1 - residual / peak_s) * 100 if peak_s > 0 else 100
+    print(f"{idx+1:<10} {peak_s/1e6:>18.3f} {residual/1e6:>22.3f} {recovery:>11.1f}%")
+
+print()
+print(f"The material recovers ~{100 - abs(stress[np.searchsorted(t, 0.06)])/np.max(np.abs(stress))*100:.0f}% between strikes at 20 Hz.")
+print("This tuned recovery is why woodpeckers drum at exactly this frequency.")
+print("Faster drumming would accumulate residual stress and cause damage.")`,
       challenge: 'Modify the viscosity (eta) to find the relaxation time that would make 50 Hz drumming safe (less than 20% residual stress). How does this change the instantaneous stiffness of the material?',
       successHint: 'Viscoelasticity is everywhere in biology — skin, cartilage, tendons, blood vessel walls. It is also the basis of engineered materials like memory foam, polymer dashpots in buildings, and the EPS foam in bicycle helmets. Understanding rate-dependent behavior is essential for any impact protection design.',
     },
@@ -326,6 +454,7 @@ For a woodpecker skull FEA model, researchers use CT scans to get the geometry, 
       checkAnswer: '300 nodes x 2 DOF = 600 equations. The stiffness matrix [K_global] is 600x600. Each triangular element contributes a 6x6 local stiffness matrix (3 nodes x 2 DOF). The assembly process maps these local matrices into the global matrix at the correct positions. Modern FEA models of skulls use millions of elements, producing millions of equations that require parallel computing.',
       codeIntro: 'Build a simplified 2D finite element analysis of a skull cross-section under impact loading, visualizing stress distribution.',
       code: `import numpy as np
+import matplotlib.pyplot as plt
 
 # Simplified 2D FEA: bar elements forming a skull-like arch
 # Each bar element has stiffness k = E*A/L
@@ -380,7 +509,126 @@ for e in range(n_elements):
         [-c*s, -s*s,  c*s,  s*s],
     ])
 
-print("\n[Full visualization in playground]")`,
+    # Assemble into global stiffness matrix
+    dofs = [2*n1, 2*n1+1, 2*n2, 2*n2+1]
+    for ii in range(4):
+        for jj in range(4):
+            K_global[dofs[ii], dofs[jj]] += k * T[ii, jj]
+
+# Apply boundary conditions: fix both ends (nodes 0 and n_nodes-1)
+# Apply impact force at the top node (closest to angle pi/2)
+top_node = n_nodes // 2
+F_global = np.zeros(n_dof)
+F_global[2 * top_node + 1] = -500  # 500 N downward impact
+
+# Fix boundary nodes
+fixed_dofs = [0, 1, 2*(n_nodes-1), 2*(n_nodes-1)+1]
+free_dofs = [i for i in range(n_dof) if i not in fixed_dofs]
+
+K_free = K_global[np.ix_(free_dofs, free_dofs)]
+F_free = F_global[free_dofs]
+
+# Solve for displacements
+u_free = np.linalg.solve(K_free, F_free)
+u_global = np.zeros(n_dof)
+for i, d in enumerate(free_dofs):
+    u_global[d] = u_free[i]
+
+# Compute element stresses
+element_stresses = []
+for e in range(n_elements):
+    n1, n2 = e, e + 1
+    L = element_lengths[e]
+    ang = element_angles_local[e]
+    c_a = np.cos(ang)
+    s_a = np.sin(ang)
+    du = u_global[2*n2] - u_global[2*n1]
+    dv = u_global[2*n2+1] - u_global[2*n1+1]
+    axial_disp = c_a * du + s_a * dv
+    strain_e = axial_disp / L
+    stress_e = E_profile[e] * strain_e
+    element_stresses.append(stress_e)
+
+element_stresses = np.array(element_stresses)
+
+# Print FEA results
+# --- FEA Visualization ---
+fig, axes = plt.subplots(1, 2, figsize=(14, 6))
+fig.patch.set_facecolor('#0d1117')
+fig.suptitle('FEA: Skull Arch Stress Distribution Under Impact',
+             color='white', fontsize=14, fontweight='bold')
+
+for ax in axes:
+    ax.set_facecolor('#111827')
+    ax.tick_params(colors='gray')
+
+# Panel 1: Deformed mesh colored by stress
+ax = axes[0]
+max_stress = np.max(np.abs(element_stresses))
+scale = 500  # displacement magnification
+for e in range(n_elements):
+    n1, n2 = e, e + 1
+    # Original
+    ax.plot([nodes[n1,0], nodes[n2,0]], [nodes[n1,1], nodes[n2,1]],
+            '-', color='#374151', linewidth=1, alpha=0.4)
+    # Deformed and colored by stress
+    x1d = nodes[n1,0] + u_global[2*n1] * scale
+    y1d = nodes[n1,1] + u_global[2*n1+1] * scale
+    x2d = nodes[n2,0] + u_global[2*n2] * scale
+    y2d = nodes[n2,1] + u_global[2*n2+1] * scale
+    stress_norm = np.abs(element_stresses[e]) / max_stress
+    color = plt.cm.hot(stress_norm)
+    ax.plot([x1d, x2d], [y1d, y2d], '-', color=color, linewidth=2 + thickness_profile[e] * 500)
+
+# Impact point
+ax.plot(nodes[top_node, 0], nodes[top_node, 1], 'v', color='#ef4444', markersize=12, zorder=10)
+ax.text(nodes[top_node, 0], nodes[top_node, 1] + 0.003, '500N', ha='center', color='#ef4444', fontsize=9)
+# Fixed supports
+for fix_n in [0, n_nodes - 1]:
+    ax.plot(nodes[fix_n, 0], nodes[fix_n, 1], 's', color='#3b82f6', markersize=8, zorder=10)
+ax.set_xlabel('X (m)', color='white')
+ax.set_ylabel('Y (m)', color='white')
+ax.set_title('Deformed mesh (color = stress)', color='white', fontsize=11)
+ax.set_aspect('equal')
+
+# Panel 2: Stress distribution along arch
+ax = axes[1]
+element_angles_deg = [np.degrees(angles[e] + (angles[e+1]-angles[e])/2) for e in range(n_elements)]
+ax.fill_between(element_angles_deg, 0, np.abs(element_stresses)/1e6,
+                color='#ef4444', alpha=0.3)
+ax.plot(element_angles_deg, np.abs(element_stresses)/1e6, 'o-', color='#ef4444',
+        linewidth=2, markersize=4)
+ax.axhline(np.mean(np.abs(element_stresses))/1e6, color='#f59e0b',
+           linestyle='--', linewidth=1, label='Mean stress')
+ax.set_xlabel('Position along arch (degrees)', color='white')
+ax.set_ylabel('Stress (MPa)', color='white')
+ax.set_title('Stress Distribution', color='white', fontsize=11)
+ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
+
+plt.tight_layout()
+plt.show()
+
+print("2D Finite Element Analysis: Skull Arch Under Impact")
+print("=" * 60)
+print(f"Mesh: {n_nodes} nodes, {n_elements} bar elements")
+print(f"DOF: {n_dof} total, {len(free_dofs)} free, {len(fixed_dofs)} fixed")
+print(f"Applied load: 500 N at top node (node {top_node})")
+print()
+print(f"{'Element':<10} {'Angle (deg)':>12} {'Stress (MPa)':>14} {'Thickness (mm)':>16}")
+print("-" * 55)
+for e in range(n_elements):
+    ang_deg = np.degrees(angles[e] + (angles[e+1] - angles[e])/2)
+    print(f"{e:<10} {ang_deg:>12.1f} {element_stresses[e]/1e6:>14.2f} {thickness_profile[e]*1000:>16.2f}")
+
+print()
+top_disp = np.sqrt(u_global[2*top_node]**2 + u_global[2*top_node+1]**2)
+print(f"Peak displacement at impact point: {top_disp*1e6:.1f} micrometers")
+print(f"Peak stress: {np.max(np.abs(element_stresses))/1e6:.2f} MPa (element {np.argmax(np.abs(element_stresses))})")
+print(f"Min stress: {np.min(np.abs(element_stresses))/1e6:.2f} MPa")
+print()
+print("The variable thickness and modulus distribute stress away from")
+print("the impact point — thicker, softer elements near the top absorb")
+print("more energy, reducing peak stress at the supports.")`,
       challenge: 'Add more nodes to the mesh (try n_nodes = 50 and 100). How does the stress distribution change? Does the solution converge? Plot stress vs mesh refinement to demonstrate FEA convergence.',
       successHint: 'You just built a finite element solver from scratch. Commercial FEA software like ANSYS, Abaqus, and COMSOL do exactly this, but with millions of 3D elements, nonlinear materials, and dynamic loading. The principles are identical — discretize, assemble, solve. You now understand the engine behind every structural simulation in engineering.',
     },

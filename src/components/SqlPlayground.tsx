@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
-import { Play, RotateCcw, Loader2, Database, Sun, Moon, RefreshCw } from 'lucide-react';
+import { Play, RotateCcw, Loader2, Database, Sun, Moon, RefreshCw, ChevronDown, ChevronUp, Table2 } from 'lucide-react';
 import { usePrefs } from '../contexts/PrefsContext';
 import { useSqlJs, SqlResult } from '../contexts/SqlJsContext';
 
@@ -20,6 +20,8 @@ export default function SqlPlayground({ starterCode, title = 'SQL Playground' }:
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [running, setRunning] = useState(false);
+  const [schemaOpen, setSchemaOpen] = useState(false);
+  const [schema, setSchema] = useState<{ table: string; columns: { name: string; type: string; pk: boolean; notnull: boolean }[] }[]>([]);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const sqlState = running ? 'running' : ctxState;
@@ -61,6 +63,36 @@ export default function SqlPlayground({ starterCode, title = 'SQL Playground' }:
     setMessage('Database reset to sample data.');
     setError('');
   }, [resetDb]);
+
+  const loadSchema = useCallback(async () => {
+    const db = await load();
+    if (!db) return;
+    // Query schema directly from the db object (not via runSql which may see stale ref)
+    const tableNames = db.exec("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name");
+    if (!tableNames.length) return;
+    const result: typeof schema = [];
+    for (const row of tableNames[0].values) {
+      const tableName = String(row[0]);
+      const info = db.exec(`PRAGMA table_info("${tableName}")`);
+      if (info.length > 0) {
+        result.push({
+          table: tableName,
+          columns: info[0].values.map((r: any[]) => ({
+            name: String(r[1]),
+            type: String(r[2] || 'TEXT'),
+            pk: r[5] === 1,
+            notnull: r[3] === 1,
+          })),
+        });
+      }
+    }
+    setSchema(result);
+  }, [load]);
+
+  const toggleSchema = useCallback(() => {
+    if (!schemaOpen && schema.length === 0) loadSchema();
+    setSchemaOpen(o => !o);
+  }, [schemaOpen, schema.length, loadSchema]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Tab') {
@@ -127,6 +159,38 @@ export default function SqlPlayground({ starterCode, title = 'SQL Playground' }:
           <Loader2 className="w-3.5 h-3.5 animate-spin" /> {loadProgress}
         </div>
       )}
+
+      {/* Schema panel */}
+      <div className={`border-b ${isDark ? 'border-gray-700' : 'border-gray-200'}`}>
+        <button
+          onClick={toggleSchema}
+          className={`w-full px-4 py-1.5 flex items-center gap-2 text-xs font-medium transition-colors ${isDark ? 'text-gray-400 hover:text-gray-200 hover:bg-gray-800/50' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'}`}
+        >
+          <Table2 className="w-3 h-3" />
+          Schema
+          {schemaOpen ? <ChevronUp className="w-3 h-3 ml-auto" /> : <ChevronDown className="w-3 h-3 ml-auto" />}
+        </button>
+        {schemaOpen && (
+          <div className={`px-4 pb-3 grid grid-cols-2 gap-3 ${isDark ? 'bg-gray-800/30' : 'bg-gray-50/50'}`}>
+            {schema.map(t => (
+              <div key={t.table}>
+                <p className={`text-xs font-bold font-mono mb-1 ${isDark ? 'text-cyan-400' : 'text-cyan-700'}`}>{t.table}</p>
+                {t.columns.map(c => (
+                  <div key={c.name} className="flex items-center gap-1.5 text-xs font-mono leading-5">
+                    {c.pk && <span className={`text-[9px] px-1 rounded ${isDark ? 'bg-amber-900/50 text-amber-400' : 'bg-amber-100 text-amber-700'}`}>PK</span>}
+                    <span className={isDark ? 'text-gray-300' : 'text-gray-700'}>{c.name}</span>
+                    <span className={isDark ? 'text-gray-600' : 'text-gray-400'}>{c.type}</span>
+                    {c.notnull && <span className={`text-[9px] ${isDark ? 'text-red-500' : 'text-red-400'}`}>NOT NULL</span>}
+                  </div>
+                ))}
+              </div>
+            ))}
+            {schema.length === 0 && (
+              <p className={`text-xs ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>Click Run SQL first to load the database.</p>
+            )}
+          </div>
+        )}
+      </div>
 
       {/* Editor */}
       <div className="flex">

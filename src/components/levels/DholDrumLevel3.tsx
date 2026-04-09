@@ -107,10 +107,10 @@ plt.show()
 
 # Frequency ratios (inharmonicity)
 f0 = modes[0][2]
-print(f"\nFrequency ratios (relative to fundamental {f0:.0f} Hz):")
+print(f"\\nFrequency ratios (relative to fundamental {f0:.0f} Hz):")
 for m, n, f in modes:
     print(f"  ({m},{n}): {f/f0:.3f}")
-print("\nNote: ratios are NOT integer multiples — drums are inharmonic")
+print("\\nNote: ratios are NOT integer multiples — drums are inharmonic")
 print("This is why drums have 'pitch' but not clear 'notes' like strings")`,
       challenge: "Add a second membrane (the other side of the dhol) with different tension and coupling. How does the coupled system change the frequency spectrum? Do new resonances appear?",
       successHint: "You can now model circular membrane vibration modes and compute natural frequencies — the physics of drum acoustics.",
@@ -527,7 +527,7 @@ print("Drum tuning parameters:")
 for note, freq in target_notes.items():
     T = tuner.tune_to_frequency(freq)
     print(f"  {note} ({freq:.1f} Hz): tension = {T:.0f} N/m")
-print(f"\nTemperature sensitivity: {abs(drift_pct[0] - drift_pct[-1])/(temp_range[-1]-temp_range[0]):.2f}% per °C")`,
+print(f"\\nTemperature sensitivity: {abs(drift_pct[0] - drift_pct[-1])/(temp_range[-1]-temp_range[0]):.2f}% per °C")`,
       challenge: "Model a drum with 8 individually adjustable tuning lugs. Simulate what happens when one lug is 20% loose while the rest are correct. Visualize the resulting non-uniform tension field and predict the beating frequency.",
       successHint: "You can now model drum tuning — connecting tension, temperature, and frequency into a complete acoustic prediction system.",
     },

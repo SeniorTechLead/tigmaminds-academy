@@ -36,10 +36,10 @@ import matplotlib.pyplot as plt
 # Simulated interaction energies (kJ/mol)
 # More negative = stronger attraction = more mixing
 pairs = {
-    "Water-Water\n(polar-polar)": -20.0,
-    "Oil-Oil\n(nonpolar-nonpolar)": -5.0,
-    "Water-Ethanol\n(polar-polar)": -18.0,
-    "Oil-Water\n(polar-nonpolar)": -0.5,
+    "Water-Water\\n(polar-polar)": -20.0,
+    "Oil-Oil\\n(nonpolar-nonpolar)": -5.0,
+    "Water-Ethanol\\n(polar-polar)": -18.0,
+    "Oil-Water\\n(polar-nonpolar)": -0.5,
 }
 
 names = list(pairs.keys())

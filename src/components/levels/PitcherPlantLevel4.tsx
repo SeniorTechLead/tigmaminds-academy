@@ -897,10 +897,10 @@ metrics_text = f"""CLASSIFICATION REPORT
 {'Class':<12} {'Prec':>6} {'Recall':>6} {'F1':>6} {'Support':>8}
 {'-'*40}"""
 for c in range(4):
-    metrics_text += f"\n{class_names[c]:<12} {precision[c]:>6.2f} {recall[c]:>6.2f} {f1[c]:>6.2f} {conf[c].sum():>8}"
-metrics_text += f"\n{'-'*40}"
-metrics_text += f"\n{'Macro avg':<12} {precision.mean():>6.2f} {recall.mean():>6.2f} {f1.mean():>6.2f} {conf.sum():>8}"
-metrics_text += f"\n{'Accuracy':<12} {'':>6} {'':>6} {np.mean(all_preds==all_true):>6.2f} {len(all_true):>8}"
+    metrics_text += f"\\n{class_names[c]:<12} {precision[c]:>6.2f} {recall[c]:>6.2f} {f1[c]:>6.2f} {conf[c].sum():>8}"
+metrics_text += f"\\n{'-'*40}"
+metrics_text += f"\\n{'Macro avg':<12} {precision.mean():>6.2f} {recall.mean():>6.2f} {f1.mean():>6.2f} {conf.sum():>8}"
+metrics_text += f"\\n{'Accuracy':<12} {'':>6} {'':>6} {np.mean(all_preds==all_true):>6.2f} {len(all_true):>8}"
 
 axes[1, 2].text(0.05, 0.95, metrics_text, transform=axes[1, 2].transAxes,
                  fontsize=8, color='#22c55e', family='monospace', verticalalignment='top')

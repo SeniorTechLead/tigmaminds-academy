@@ -130,7 +130,7 @@ for ax, step_idx in zip(axes.flat, show_steps):
 
         ax.scatter(x, y, s=250, color=color, zorder=5, edgecolors='white', linewidth=1.5)
         d_str = f'{d:.0f}' if d < float('inf') else '?'
-        ax.annotate(f'{name}\n{d_str}', (x, y), ha='center', va='center', color='white',
+        ax.annotate(f'{name}\\n{d_str}', (x, y), ha='center', va='center', color='white',
                     fontsize=8, fontweight='bold')
 
     ax.set_title(f'Step {step_idx+1}: Visit {step["node"]} (dist={step["dist"]:.0f})',

@@ -1020,7 +1020,7 @@ plt.colorbar(im, ax=ax, label='% Female')
 # Plot 3: Intervention comparison
 ax = axes[0, 2]
 ax.set_facecolor('#111827')
-interventions = ['None', 'Shade\n(-2°C)', 'Fence\n(-0.3 risk)', 'Both']
+interventions = ['None', 'Shade\\n(-2°C)', 'Fence\\n(-0.3 risk)', 'Both']
 comps = [composite, comp_shade, comp_fence, comp_both]
 viable_areas = [((sr > 0.3) & (sr < 0.7)).mean()*100 for sr in [sex_ratio, sr_shade, sr_fence, sr_both]]
 mean_scores = [c.mean() for c in comps]

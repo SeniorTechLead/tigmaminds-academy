@@ -57,7 +57,7 @@ const registry: Record<string, LevelComponents> = {
   'map-maker': {Level1: lazy(() => import('./MapMakerLevel1')), Level2: lazy(() => import('./MapMakerLevel2')), Level3: lazy(() => import('./MapMakerLevel3')), Level4: lazy(() => import('./MapMakerLevel4')) },
   'bamboo-grows-fast': {Level1: lazy(() => import('./BambooGrowthLevel1')), Level2: lazy(() => import('./BambooGrowthLevel2')), Level3: lazy(() => import('./BambooGrowthLevel3')), Level4: lazy(() => import('./BambooGrowthLevel4')) },
   'kite-festival': {Level1: lazy(() => import('./KiteFestivalLevel1')), Level2: lazy(() => import('./KiteFestivalLevel2')), Level3: lazy(() => import('./KiteFestivalLevel3')), Level4: lazy(() => import('./KiteFestivalLevel4')) },
-  'banyan-tree': { Level1: lazy(() => import('./BanyanTreeLevel1')), Level2: lazy(() => import('./BanyanTreeLevel2')) },
+
   'holi-tea-gardens': {Level1: lazy(() => import('./HoliTeaLevel1')), Level2: lazy(() => import('./HoliTeaLevel2')), Level3: lazy(() => import('./HoliTeaLevel3')), Level4: lazy(() => import('./HoliTeaLevel4')) },
   'kaziranga-grass': {Level1: lazy(() => import('./KazirGrassLevel1')), Level2: lazy(() => import('./KazirGrassLevel2')), Level3: lazy(() => import('./KazirGrassLevel3')), Level4: lazy(() => import('./KazirGrassLevel4')) },
   'postman-hills': {Level1: lazy(() => import('./PostmanHillsLevel1')), Level2: lazy(() => import('./PostmanHillsLevel2')), Level3: lazy(() => import('./PostmanHillsLevel3')), Level4: lazy(() => import('./PostmanHillsLevel4')) },
@@ -77,13 +77,13 @@ const registry: Record<string, LevelComponents> = {
   'firewalker': {Level1: lazy(() => import('./FirewalkerLevel1')), Level2: lazy(() => import('./FirewalkerLevel2')), Level3: lazy(() => import('./FirewalkerLevel3')), Level4: lazy(() => import('./FirewalkerLevel4')) },
   'frogs-sing-rain': {Level1: lazy(() => import('./FrogSingLevel1')), Level2: lazy(() => import('./FrogSingLevel2')), Level3: lazy(() => import('./FrogSingLevel3')), Level4: lazy(() => import('./FrogSingLevel4')) },
   'cloud-namer': {Level1: lazy(() => import('./CloudNamerLevel1')), Level2: lazy(() => import('./CloudNamerLevel2')), Level3: lazy(() => import('./CloudNamerLevel3')), Level4: lazy(() => import('./CloudNamerLevel4')) },
-  'basket-weaver': { Level1: lazy(() => import('./BasketWeaverLevel1')), Level2: lazy(() => import('./BasketWeaverLevel2')) },
+
   'seed-keeper': {Level1: lazy(() => import('./SeedKeeperLevel1')), Level2: lazy(() => import('./SeedKeeperLevel2')), Level3: lazy(() => import('./SeedKeeperLevel3')), Level4: lazy(() => import('./SeedKeeperLevel4')) },
   'kingfisher-blue': {Level1: lazy(() => import('./KingfisherLevel1')), Level2: lazy(() => import('./KingfisherLevel2')), Level3: lazy(() => import('./KingfisherLevel3')), Level4: lazy(() => import('./KingfisherLevel4')) },
   'owl-wisest': {Level1: lazy(() => import('./OwlLevel1')), Level2: lazy(() => import('./OwlLevel2')), Level3: lazy(() => import('./OwlLevel3')), Level4: lazy(() => import('./OwlLevel4')) },
   'flying-squirrel': {Level1: lazy(() => import('./LittleBoatLevel1')), Level2: lazy(() => import('./LittleBoatLevel2')), Level3: lazy(() => import('./FlyingSquirrelLevel3')), Level4: lazy(() => import('./FlyingSquirrelLevel4')) },
   'night-jasmine': {Level1: lazy(() => import('./NightJasmineLevel1')), Level2: lazy(() => import('./NightJasmineLevel2')), Level3: lazy(() => import('./NightJasmineLevel3')), Level4: lazy(() => import('./NightJasmineLevel4')) },
-  'woodpecker-drum': { Level1: lazy(() => import('./WoodpeckerLevel1')), Level2: lazy(() => import('./WoodpeckerLevel2')) },
+
   'tiger-whisker': { Level1: lazy(() => import('./TigerWhiskerLevel1')), Level2: lazy(() => import('./TigerWhiskerLevel2')) },
   'river-braid': { Level1: lazy(() => import('./RiverBraidLevel1')), Level2: lazy(() => import('./RiverBraidLevel2')) },
   'lotus-float': {Level1: lazy(() => import('./LotusFloatLevel1')), Level2: lazy(() => import('./LotusFloatLevel2')), Level3: lazy(() => import('./LotusFloatLevel3')), Level4: lazy(() => import('./LotusFloatLevel4')) },

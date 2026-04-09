@@ -970,7 +970,7 @@ Species targets:"""
 
 for i, sp_name in enumerate(sp_names):
     status = '\✓' if achieved[i] >= targets[i] else '\✗'
-    summary_text += f"\n  {sp_name}: {achieved[i]:.0f}% ({status} target: {targets[i]:.0f}%)"
+    summary_text += f"\\n  {sp_name}: {achieved[i]:.0f}% ({status} target: {targets[i]:.0f}%)"
 
 summary_text += f"""
 

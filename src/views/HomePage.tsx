@@ -191,6 +191,47 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Featured: 12-Month Curriculum Journey */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-amber-50/50 to-white dark:from-amber-900/10 dark:to-gray-900">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-8">
+            <span className="inline-block text-[11px] font-bold text-amber-600 dark:text-amber-400 bg-amber-100 dark:bg-amber-900/30 px-3 py-1 rounded-full uppercase tracking-wider mb-4">12-Month School Program</span>
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              From Blinking LED to <span className="text-gradient">Autonomous Robot</span>
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              In 12 months, your child learns Python AND Arduino — and builds a robot that sees, thinks, and moves on its own.
+            </p>
+          </div>
+
+          {/* Month-by-month journey */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
+            {[
+              { month: 'Months 1-3', title: 'Circuits & Code', desc: 'First LED blink, first Python program, sensors reading the real world', icon: '💡' },
+              { month: 'Months 4-6', title: 'Data & Dashboards', desc: 'Arduino collects data, Python visualizes it — live sensor dashboards', icon: '📊' },
+              { month: 'Months 7-9', title: 'Smart Robots', desc: 'Motors, wheels, obstacle avoidance — Python AI brain controls Arduino body', icon: '🤖' },
+              { month: 'Months 10-12', title: 'AI Capstone', desc: 'Machine learning on sensor data, wireless control, graduation showcase', icon: '🎓' },
+            ].map((phase, i) => (
+              <div key={i} className="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 text-center hover:shadow-lg transition-shadow">
+                <span className="text-3xl block mb-3">{phase.icon}</span>
+                <p className="text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider">{phase.month}</p>
+                <h3 className="text-lg font-bold text-gray-900 dark:text-white mt-1 mb-2">{phase.title}</h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{phase.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <Link href="/curriculum"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-lg shadow-amber-500/25 transition-all hover:-translate-y-0.5"
+            >
+              View Full 48-Week Curriculum <ArrowRight className="w-5 h-5" />
+            </Link>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-3">4 tracks available: Robotics, Python & AI, Creative Coding, or Combined</p>
+          </div>
+        </div>
+      </section>
+
       {/* Illustrated CTA Banner */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="absolute inset-0">

@@ -522,10 +522,10 @@ trade_volume = [0.5, 1, 2, 5, 15, 50, 150, 500, 4000, 8000, 18000, 22000]
 
 # Key events
 events = [
-    (1498, 'Vasco da Gama\nreaches India', 0.4),
-    (1869, 'Suez Canal\nopens', 12),
-    (1956, 'Container\nshipping invented', 120),
-    (1995, 'WTO\nestablished', 5000),
+    (1498, 'Vasco da Gama\\nreaches India', 0.4),
+    (1869, 'Suez Canal\\nopens', 12),
+    (1956, 'Container\\nshipping invented', 120),
+    (1995, 'WTO\\nestablished', 5000),
 ]
 
 fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 8))

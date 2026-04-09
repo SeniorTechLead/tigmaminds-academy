@@ -568,7 +568,7 @@ The aroma profile of Sikkim large cardamom differs from southern green cardamom:
 import matplotlib.pyplot as plt
 
 # Aroma descriptors and compound correlations
-descriptors = ['Fresh/\nCooling', 'Sweet/\nFloral', 'Woody/\nSpicy', 'Citrus', 'Herbal/\nGreen',
+descriptors = ['Fresh/\\nCooling', 'Sweet/\\nFloral', 'Woody/\\nSpicy', 'Citrus', 'Herbal/\\nGreen',
                'Smoky', 'Camphor', 'Balsamic']
 
 # Scores (0-10) for different origins
@@ -613,11 +613,11 @@ ax2 = fig.add_subplot(122)
 ax2.set_facecolor('#1f2937')
 
 compound_map = {
-    '1,8-Cineole\n(35%)': [9, 2, 3, 1, 2, 0, 8, 3],
-    'Terpinyl\nacetate (30%)': [3, 8, 2, 2, 3, 0, 2, 7],
-    'Limonene\n(8%)': [2, 1, 1, 9, 2, 0, 1, 1],
-    'Linalool\n(5%)': [1, 9, 1, 2, 4, 0, 1, 3],
-    'Smoke\ncompounds': [0, 0, 5, 0, 1, 10, 2, 2],
+    '1,8-Cineole\\n(35%)': [9, 2, 3, 1, 2, 0, 8, 3],
+    'Terpinyl\\nacetate (30%)': [3, 8, 2, 2, 3, 0, 2, 7],
+    'Limonene\\n(8%)': [2, 1, 1, 9, 2, 0, 1, 1],
+    'Linalool\\n(5%)': [1, 9, 1, 2, 4, 0, 1, 3],
+    'Smoke\\ncompounds': [0, 0, 5, 0, 1, 10, 2, 2],
 }
 
 x = np.arange(len(descriptors))

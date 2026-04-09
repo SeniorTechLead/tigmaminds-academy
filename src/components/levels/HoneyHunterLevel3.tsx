@@ -89,8 +89,62 @@ for day in range(days):
 
     # Deaths
     lifespan = worker_lifespan(day)
+    daily_deaths = adults / lifespan * np.random.uniform(0.9, 1.1)
 
-print("\n[Full visualization in playground]")`,
+    # New adults emerging from brood pipeline
+    new_adults = brood[0]
+    brood = np.roll(brood, -1)
+    brood[-1] = surviving_eggs
+
+    adults = max(100, adults + new_adults - daily_deaths)
+
+    # Swarming check
+    if adults > swarm_threshold and not swarmed and day > 120 and day < 200:
+        adults *= (1 - swarm_fraction)
+        swarmed = True
+        swarm_day = day
+
+    population.append(adults)
+    egg_rates.append(eggs)
+    death_rates.append(daily_deaths)
+
+population = np.array(population)
+egg_rates = np.array(egg_rates)
+
+print("=== Bee Colony Annual Dynamics ===")
+print(f"Starting population: 10,000 workers")
+print(f"Peak population: {population.max():.0f} workers (day {np.argmax(population)})")
+print(f"Minimum population: {population.min():.0f} workers (day {np.argmin(population)})")
+if swarmed:
+    print(f"\\nSwarming event on day {swarm_day} — colony split in half!")
+    print(f"Population just before swarm: {swarm_threshold}+")
+    print(f"Population just after swarm: {population[swarm_day]:.0f}")
+else:
+    print(f"\\nNo swarming occurred (never exceeded {swarm_threshold} threshold)")
+
+print(f"\\n--- Seasonal breakdown ---")
+spring = population[59:151]
+summer = population[151:243]
+fall = population[243:334]
+winter = np.concatenate([population[334:], population[:59]])
+print(f"Spring avg (day 60-150): {spring.mean():.0f} workers")
+print(f"Summer avg (day 151-242): {summer.mean():.0f} workers")
+print(f"Fall avg (day 243-333):   {fall.mean():.0f} workers")
+print(f"Winter avg (day 334-59):  {winter.mean():.0f} workers")
+
+print(f"\\n--- Egg laying ---")
+print(f"Peak egg rate: {egg_rates.max():.0f} eggs/day (day {np.argmax(egg_rates)})")
+print(f"Total eggs laid: {egg_rates.sum():.0f}")
+print(f"Days with zero eggs: {np.sum(egg_rates < 1)}")
+
+end_pop = population[-1]
+print(f"\\nEnd-of-year population: {end_pop:.0f} workers")
+if end_pop > 15000:
+    print("Colony is healthy — strong winter cluster expected.")
+elif end_pop > 8000:
+    print("Colony is marginal — may struggle through a harsh winter.")
+else:
+    print("Colony is weak — high risk of winter collapse.")`,
       challenge: 'Increase queen_max_eggs to 2500 (a productive queen) and decrease summer_lifespan to 35 (harder foraging conditions). How does this change the balance? What determines whether the colony can survive winter?',
       successHint: 'Colony dynamics is the foundation of apiculture (beekeeping) and crucial for understanding pollination services. The model you built captures why colony losses spike when any one parameter shifts — the colony is a finely balanced system.',
     },
@@ -167,8 +221,52 @@ def individual_fitness(n_females, fecundity=5, survival=0.3):
     for _ in range(n_females):
         offspring = np.random.poisson(fecundity)
         survivors = np.random.binomial(offspring, survival)
+        total_offspring += survivors
+    return total_offspring
 
-print("\n[Full visualization in playground]")`,
+def colony_fitness(n_females, queen_fecundity=50, queen_survival=0.5):
+    """One queen reproduces; all others help raise offspring."""
+    offspring = np.random.poisson(queen_fecundity)
+    # More helpers = better survival (diminishing returns)
+    helper_boost = min(0.9, queen_survival + 0.02 * (n_females - 1))
+    survivors = np.random.binomial(offspring, helper_boost)
+    return survivors
+
+# --- Print relatedness analysis ---
+print("=== Haplodiploidy Relatedness Analysis ===")
+print(f"{'Mates':>6}  {'Sister r':>10}  {'Mother-Daughter r':>18}  {'B/C threshold':>14}")
+print("-" * 55)
+for n in [1, 2, 5, 10, 15, 20]:
+    rel = compute_relatedness(n)
+    threshold = 1 / rel['r_sisters']
+    print(f"{n:>6}  {rel['r_sisters']:>10.3f}  {rel['r_mother_daughter']:>18.3f}  {threshold:>14.2f}")
+
+print(f"\\n--- Key insight ---")
+r1 = compute_relatedness(1)
+print(f"Single-mated queen: sisters share r = {r1['r_sisters']:.2f}")
+print(f"  Workers are MORE related to sisters ({r1['r_sisters']:.2f}) than to own daughters (0.50)")
+print(f"  -> Altruism evolves easily (B/C > {1/r1['r_sisters']:.2f})")
+
+r10 = compute_relatedness(10)
+print(f"\\nQueen mated with 10 males: sisters share r = {r10['r_sisters']:.2f}")
+print(f"  Workers are LESS related to sisters ({r10['r_sisters']:.2f}) than to own daughters (0.50)")
+print(f"  -> Queen pheromones must suppress worker reproduction")
+
+# --- Colony vs individual fitness comparison ---
+print(f"\\n=== Colony vs Individual Reproduction ===")
+n_females = 20
+n_trials = 500
+indiv_results = [individual_fitness(n_females) for _ in range(n_trials)]
+colony_results = [colony_fitness(n_females) for _ in range(n_trials)]
+
+print(f"With {n_females} females, averaged over {n_trials} trials:")
+print(f"  Individual strategy: {np.mean(indiv_results):.1f} +/- {np.std(indiv_results):.1f} total surviving offspring")
+print(f"  Colony strategy:     {np.mean(colony_results):.1f} +/- {np.std(colony_results):.1f} total surviving offspring")
+ratio = np.mean(colony_results) / np.mean(indiv_results)
+print(f"  Colony advantage:    {ratio:.2f}x more offspring")
+print(f"\\nEven though only 1 queen reproduces, cooperative care")
+print(f"produces {ratio:.1f}x more surviving offspring than every")
+print(f"female reproducing alone. This is why eusociality evolves.")`,
       challenge: 'What happens to eusociality if a mutation makes workers reproduce at 50% queen efficiency instead of being sterile? Model the genetic conflict and predict whether the colony would fragment. (Hint: this is worker policing.)',
       successHint: 'Hamilton\'s rule and kin selection theory earned W.D. Hamilton a place among the most important evolutionary biologists of the 20th century. Understanding why bees cooperate reveals a deep truth: what looks like altruism is actually genetic self-interest at a different level.',
     },
@@ -245,7 +343,54 @@ def decode_dance(dance_angle, waggle_duration, hive_x, hive_y, sun_azimuth_deg,
 # Setup
 hive = (0, 0)  # hive at origin
 
-print("\n[Full visualization in playground]")`,
+# --- Test with known food sources ---
+food_sources = [
+    ('Wildflower meadow', 2000, 1500),   # 2km north, 1.5km east
+    ('Orchard', -500, 3000),              # 0.5km west, 3km north
+    ('Garden', 800, -400),                # 0.8km east, 0.4km south
+]
+sun_azimuth = 150  # sun in the SSE (afternoon)
+
+print("=== Waggle Dance Communication System ===")
+print(f"Hive location: (0, 0)")
+print(f"Sun azimuth: {sun_azimuth} degrees (SSE)")
+print()
+
+for name, fx, fy in food_sources:
+    dance = encode_dance(fx, fy, hive[0], hive[1], sun_azimuth)
+    print(f"--- {name} at ({fx}m, {fy}m) ---")
+    print(f"  Distance: {dance['distance']:.0f} m")
+    print(f"  Food azimuth: {dance['food_azimuth']:.1f} degrees")
+    print(f"  Dance angle (relative to vertical): {dance['dance_angle']:.1f} degrees")
+    print(f"  Waggle duration: {dance['waggle_duration']:.2f} seconds")
+    print()
+
+# --- Decode with noise: simulate 20 follower bees ---
+print("=== Decoding Error Analysis ===")
+print(f"Encoding the Wildflower meadow (2000m, 1500m)...")
+dance = encode_dance(2000, 1500, 0, 0, sun_azimuth)
+
+errors = []
+for i in range(20):
+    est_x, est_y, est_dist, est_az = decode_dance(
+        dance['dance_angle'], dance['waggle_duration'],
+        0, 0, sun_azimuth
+    )
+    error = np.sqrt((est_x - 2000)**2 + (est_y - 1500)**2)
+    errors.append(error)
+
+errors = np.array(errors)
+print(f"20 follower bees decoded the dance:")
+print(f"  Mean position error: {errors.mean():.0f} m")
+print(f"  Max position error:  {errors.max():.0f} m")
+print(f"  Min position error:  {errors.min():.0f} m")
+print(f"  Std deviation:       {errors.std():.0f} m")
+
+actual_dist = np.sqrt(2000**2 + 1500**2)
+print(f"\\nActual distance to food: {actual_dist:.0f} m")
+print(f"Error as % of distance: {errors.mean()/actual_dist*100:.1f}%")
+print(f"\\nThe +/-15 degree noise creates a search cone ~{2*actual_dist*np.sin(np.radians(15)):.0f}m")
+print(f"wide at the target distance. Bees spiral-search within this cone.")`,
       challenge: 'Simulate a "lying dance" — a bee dances for a food source that has been exhausted. Model how quickly the colony wastes foraging effort following stale dances, and how the colony self-corrects when scouts return empty-handed.',
       successHint: 'The waggle dance is information theory in action. The bee compresses a 2D location into two scalar values (angle, duration) with known noise characteristics. Karl von Frisch\'s decoding of this system earned the 1973 Nobel Prize and changed how we think about animal communication.',
     },
@@ -319,9 +464,70 @@ for t in range(n_timesteps):
                                                 patches['quality'][p])
 
     # Average return across habitat (the threshold from MVT)
-    mean_return = np.mean(marginal_returns[marginal_returns > 0])
+    mean_return = np.mean(marginal_returns[marginal_returns > 0]) if np.any(marginal_returns > 0) else 0.01
 
-print("\n[Full visualization in playground]")`,
+    for bee in range(n_bees):
+        patch = bee_patches[bee]
+
+        if is_scout[bee]:
+            # Scouts explore randomly
+            new_patch = np.random.randint(0, n_patches)
+            bee_patches[bee] = new_patch
+            patch = new_patch
+
+        # Forage at current patch
+        mr = marginal_returns[patch]
+        collected = mr * np.random.uniform(0.8, 1.2)
+        nectar_taken = min(collected, current_nectar[patch] / max(1, np.sum(bee_patches == patch)))
+        current_nectar[patch] = max(0, current_nectar[patch] - nectar_taken)
+        timestep_collection += nectar_taken
+
+        # MVT decision: leave if marginal return < average
+        if not is_scout[bee] and mr < mean_return * 0.8:
+            # Switch to best-advertised patch (waggle dance recruitment)
+            best_patch = np.argmax(marginal_returns)
+            bee_patches[bee] = best_patch
+
+    # Nectar renewal
+    for p in range(n_patches):
+        current_nectar[p] = min(patches['initial_nectar'][p],
+                                current_nectar[p] + patches['renewal_rate'][p])
+
+    total_collected[t] = timestep_collection
+    for p in range(n_patches):
+        patch_visitors[t, p] = np.sum(bee_patches == p)
+    colony_efficiency.append(timestep_collection / n_bees)
+    nectar_history.append(current_nectar.copy())
+
+nectar_history = np.array(nectar_history)
+
+print("=== Foraging Optimization Results ===")
+print(f"{n_bees} bees foraging across {n_patches} patches over {n_timesteps} timesteps")
+print(f"Scout fraction: 15%\\n")
+
+print("--- Patch summary ---")
+print(f"{'Patch':<14} {'Init Nectar':>11} {'Quality':>8} {'Avg Visitors':>13} {'Final Nectar':>13}")
+print("-" * 62)
+for p in range(n_patches):
+    avg_vis = patch_visitors[:, p].mean()
+    print(f"{patches['name'][p]:<14} {patches['initial_nectar'][p]:>11.0f} {patches['quality'][p]:>8.2f} {avg_vis:>13.1f} {current_nectar[p]:>13.1f}")
+
+print(f"\\n--- Colony performance ---")
+print(f"Total nectar collected: {total_collected.sum():.0f} units")
+print(f"Average per timestep:   {total_collected.mean():.1f} units")
+print(f"Peak collection:        {total_collected.max():.1f} units (timestep {np.argmax(total_collected)})")
+print(f"Average efficiency:     {np.mean(colony_efficiency):.2f} units/bee/timestep")
+
+# Show how bees redistributed over time
+print(f"\\n--- Bee redistribution (MVT in action) ---")
+print(f"Initial distribution: roughly equal ({n_bees // n_patches} per patch)")
+print(f"Final distribution:")
+for p in range(n_patches):
+    n_final = int(patch_visitors[-1, p])
+    bar = '#' * (n_final // 2)
+    print(f"  {patches['name'][p]:<14}: {n_final:>3} bees {bar}")
+print(f"\\nBees concentrate on high-quality patches (Meadow, Wildflowers)")
+print(f"and abandon depleted ones — the marginal value theorem in action.")`,
       challenge: 'Add a new patch that appears at timestep 50 with very high quality (1.0) and high nectar (2000). How quickly does the colony discover and exploit it? How does the scout fraction affect discovery speed?',
       successHint: 'Bee foraging algorithms inspired real optimization methods: Artificial Bee Colony (ABC) optimization, Swarm Intelligence, and the Explore-Exploit trade-off in reinforcement learning. The bees solved multi-armed bandits millions of years before computer scientists formalized the problem.',
     },
@@ -395,8 +601,55 @@ def compute_nestedness(matrix):
                 if min_deg > 0:
                     paired_overlaps += overlap / min_deg
                     total_pairs += 1
+    return paired_overlaps / total_pairs if total_pairs > 0 else 0
 
-print("\n[Full visualization in playground]")`,
+nestedness = compute_nestedness(interaction)
+
+# Vulnerability: plants with only 1 pollinator
+vulnerable_plants = [i for i in range(n_plants) if plant_degree[i] == 1]
+sole_pollinators = set()
+for p in vulnerable_plants:
+    sole_poll = np.where(interaction[:, p] == 1)[0][0]
+    sole_pollinators.add(sole_poll)
+
+# --- Simulate removal of most-connected pollinator ---
+most_connected = np.argmax(bee_degree)
+reduced = interaction.copy()
+reduced[most_connected, :] = 0
+plants_lost = [p for p in range(n_plants) if np.sum(reduced[:, p]) == 0]
+
+print("=== Pollination Network Analysis ===")
+print(f"Network: {n_bees} bee species x {n_plants} plant species")
+print(f"Total interactions: {np.sum(interaction)}")
+print(f"Connectance: {connectance:.3f} ({connectance*100:.1f}% of possible links)")
+print(f"Nestedness (NODF): {nestedness:.3f}")
+
+print(f"\\n--- Pollinator degree (plants visited) ---")
+sorted_bees = np.argsort(-bee_degree)
+for b in sorted_bees:
+    role = " [GENERALIST]" if bee_degree[b] > np.median(bee_degree) else " [specialist]"
+    sole_marker = " ** sole pollinator" if b in sole_pollinators else ""
+    print(f"  {bee_names[b]:<20}: {bee_degree[b]:>2} plants{role}{sole_marker}")
+
+print(f"\\n--- Plant vulnerability ---")
+print(f"Plants with only 1 pollinator: {len(vulnerable_plants)} out of {n_plants}")
+if vulnerable_plants:
+    for p in vulnerable_plants:
+        sole = np.where(interaction[:, p] == 1)[0][0]
+        print(f"  {plant_names[p]} -> sole pollinator: {bee_names[sole]}")
+
+print(f"\\n--- Keystone removal simulation ---")
+print(f"Removing most-connected bee: {bee_names[most_connected]} (degree {bee_degree[most_connected]})")
+if plants_lost:
+    print(f"  Plants losing ALL pollinators: {len(plants_lost)}")
+    for p in plants_lost:
+        print(f"    {plant_names[p]} -> EXTINCT (no remaining pollinators)")
+else:
+    print(f"  No plants lose all pollinators (network is resilient)")
+
+new_connectance = np.sum(reduced) / ((n_bees - 1) * n_plants)
+print(f"  Connectance drops: {connectance:.3f} -> {new_connectance:.3f}")
+print(f"\\nConclusion: {'HIGH' if len(plants_lost) > 2 else 'MODERATE' if len(plants_lost) > 0 else 'LOW'} vulnerability to keystone loss")`,
       challenge: 'Make the network more nested by ensuring every specialist bee only visits plants also visited by generalists. How does this change the robustness to CCD? Compare with a "random" network of the same connectance.',
       successHint: 'Pollination network analysis is critical for agricultural policy. Researchers use exactly these methods to predict the economic impact of pollinator loss — estimated at $235-577 billion per year globally. The honey hunter\'s lesson extends to all of agriculture: protect the pollinators, protect the food supply.',
     },

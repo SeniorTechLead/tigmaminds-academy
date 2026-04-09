@@ -571,12 +571,12 @@ for name, data in terpenes.items():
     idx = np.argmin(np.abs(total_P - 760))
     dist_temp = temps[idx]
     ax.scatter([dist_temp], [760], color=data['color'], s=100, zorder=5, edgecolors='white')
-    ax.annotate(f'{name[:8]}\n{dist_temp:.1f}°C', (dist_temp, 770),
+    ax.annotate(f'{name[:8]}\\n{dist_temp:.1f}°C', (dist_temp, 770),
                color=data['color'], fontsize=8, ha='center')
 
 # Pure water boiling
 ax.scatter([100], [760], color='cyan', s=100, zorder=5, edgecolors='white', marker='s')
-ax.annotate('Pure water\n100.0°C', (100, 770), color='cyan', fontsize=8, ha='center')
+ax.annotate('Pure water\\n100.0°C', (100, 770), color='cyan', fontsize=8, ha='center')
 
 ax.axhline(y=760, color='white', linestyle='--', alpha=0.5)
 ax.set_xlim(95, 101)

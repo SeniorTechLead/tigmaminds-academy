@@ -237,6 +237,57 @@ export default function LessonPage() {
       {/* Level tabs + content */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
           <div className="max-w-4xl mx-auto">
+            {/* Prerequisites section */}
+            {(() => {
+              const arduinoSlugs = ['river-dolphins-secret', 'fireflies-dont-burn', 'firefly-festival-of-majuli', 'music-dimasa', 'tigers-whisker', 'singing-bamboo'];
+              const htmlSlugs = ['boy-who-built-a-library'];
+              const codingPrereq = arduinoSlugs.includes(lesson.slug)
+                ? { name: 'Arduino Basics', href: '/learn/arduino-basics' }
+                : htmlSlugs.includes(lesson.slug)
+                ? { name: 'Web Basics', href: '/learn/web-basics' }
+                : { name: 'Python Basics', href: '/learn/python-basics' };
+
+              // Find stories that list this one in their nextLessons (= this story's prerequisites)
+              const priorStories = lessons.filter(l =>
+                l.level0?.nextLessons?.some((nl: { slug: string }) => nl.slug === lesson.slug)
+              ).slice(0, 3);
+
+              const hasPrereqs = priorStories.length > 0;
+
+              return hasPrereqs ? (
+                <div className="mb-10 p-5 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700">
+                  <h3 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-3 flex items-center gap-2">
+                    <ListChecks className="w-4 h-4" /> Before you start
+                  </h3>
+                  <div className="space-y-2">
+                    <Link href={`${codingPrereq.href}?from=${lesson.slug}`}
+                      className="flex items-center gap-3 p-3 rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 hover:border-amber-400 dark:hover:border-amber-600 transition-colors">
+                      <span className="text-amber-500">📚</span>
+                      <div className="flex-1">
+                        <p className="text-sm font-medium text-gray-900 dark:text-white">{codingPrereq.name}</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">Prerequisite coding course</p>
+                      </div>
+                      <ArrowRight className="w-4 h-4 text-gray-400" />
+                    </Link>
+                    {priorStories.map(ps => {
+                      const reason = ps.level0?.nextLessons?.find((nl: { slug: string; reason: string }) => nl.slug === lesson.slug)?.reason;
+                      return (
+                        <Link key={ps.slug} href={`/lessons/${ps.slug}`}
+                          className="flex items-center gap-3 p-3 rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 hover:border-emerald-400 dark:hover:border-emerald-600 transition-colors">
+                          <span className="text-emerald-500">📖</span>
+                          <div className="flex-1">
+                            <p className="text-sm font-medium text-gray-900 dark:text-white">{ps.story.title}</p>
+                            {reason && <p className="text-xs text-gray-500 dark:text-gray-400">{reason}</p>}
+                          </div>
+                          <ArrowRight className="w-4 h-4 text-gray-400" />
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : null;
+            })()}
+
             <div className="flex items-center gap-3 mb-4">
               <Gamepad2 className="w-6 h-6 text-emerald-500" />
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Try It Yourself</h2>
@@ -310,7 +361,27 @@ export default function LessonPage() {
               return (
                 <Suspense fallback={<div className="text-center py-8"><div className="w-8 h-8 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto" /></div>}>
                   {activeLevel === 'listener' && <Level0Listener lesson={lesson} />}
-                  {activeLevel === 'explorer' && Level1 && <Level1 />}
+                  {activeLevel === 'explorer' && Level1 && (() => {
+                    const arduinoSlugs = ['river-dolphins-secret', 'fireflies-dont-burn'];
+                    const htmlSlugs = ['boy-who-built-a-library'];
+                    const prereq = arduinoSlugs.includes(lesson.slug)
+                      ? { name: 'Arduino Basics', href: '/learn/arduino-basics', lessons: '6' }
+                      : htmlSlugs.includes(lesson.slug)
+                      ? { name: 'Web Basics', href: '/learn/web-basics', lessons: '8' }
+                      : { name: 'Python Basics', href: '/learn/python-basics', lessons: '8' };
+                    return (
+                      <>
+                        <div className="mb-6 p-4 rounded-xl bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 flex items-center gap-3">
+                          <span className="text-amber-600 dark:text-amber-400 text-lg">💡</span>
+                          <p className="text-sm text-gray-700 dark:text-gray-300">
+                            <span className="font-semibold">New to coding?</span>{' '}
+                            Complete the <a href={`${prereq.href}?from=${lesson.slug}`} className="text-amber-700 dark:text-amber-400 underline font-medium">{prereq.name}</a> course first — {prereq.lessons} short lessons that teach you everything you need for Level 1.
+                          </p>
+                        </div>
+                        <Level1 />
+                      </>
+                    );
+                  })()}
                   {activeLevel === 'builder' && Level2 && <Level2 />}
                   {activeLevel === 'explorer' && !Level1 && (
                     <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 text-center">

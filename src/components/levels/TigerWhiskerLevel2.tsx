@@ -331,8 +331,8 @@ for bar, val in zip(bars, channels):
 ax2.set_facecolor('#111827')
 years = [1998, 2004, 2012, 2015, 2018, 2020, 2023, 2025]
 channel_counts = [1, 4, 16, 32, 32, 64, 96, 128]
-milestones = ['First nerve\nstimulation', 'Targeted\nreinnervation', 'Utah array\ncortical', 'DARPA\nLUKE arm',
-              'e-dermis\ntexture', '64-ch\ncortical', 'BrainGate\ntouch', 'Next-gen\nprosthetics']
+milestones = ['First nerve\\nstimulation', 'Targeted\\nreinnervation', 'Utah array\\ncortical', 'DARPA\\nLUKE arm',
+              'e-dermis\\ntexture', '64-ch\\ncortical', 'BrainGate\\ntouch', 'Next-gen\\nprosthetics']
 
 ax2.plot(years, channel_counts, 'o-', color='#22c55e', linewidth=2, markersize=8)
 for y, c, m in zip(years, channel_counts, milestones):

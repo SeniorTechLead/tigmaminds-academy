@@ -263,7 +263,7 @@ ax1.set_xlabel('Year (BCE for negative)', color='white')
 ax1.set_title('5000 Years of Dye History', color='white', fontsize=13)
 ax1.tick_params(colors='gray')
 ax1.axvline(1856, color='#d946ef', linestyle='--', linewidth=1)
-ax1.text(1856, len(events), "Perkin's\naccident", color='#d946ef', fontsize=9, ha='center')
+ax1.text(1856, len(events), "Perkin's\\naccident", color='#d946ef', fontsize=9, ha='center')
 
 # Natural vs Synthetic comparison
 ax2.set_facecolor('#111827')
@@ -369,7 +369,7 @@ for ax, (name, (acid, neutral, base)) in zip(axes, indicators.items()):
 # Add pH labels to bottom axis
 axes[-1].set_xlabel('pH', color='white', fontsize=12)
 for pH_val, label in [(2, 'Lemon'), (3, 'Vinegar'), (5, 'Tea'), (7, 'Water'),
-                       (9, 'Baking\nsoda'), (13, 'Bleach')]:
+                       (9, 'Baking\\nsoda'), (13, 'Bleach')]:
     axes[-1].axvline(pH_val, color='white', linewidth=0.5, alpha=0.5)
     axes[-1].text(pH_val, -0.3, label, color='white', fontsize=7, ha='center')
 
@@ -528,7 +528,7 @@ ax1.set_ylim(0, 11)
 
 # Detection methods
 ax2.set_facecolor('#111827')
-tests = ['Water\ndissolve', 'Skin\nstain', 'Spectro-\nphotometry', 'Heavy\nmetal test', 'pH\ntest']
+tests = ['Water\\ndissolve', 'Skin\\nstain', 'Spectro-\\nphotometry', 'Heavy\\nmetal test', 'pH\\ntest']
 natural_result = [3, 2, 5, 1, 6]    # characteristic value (0-10 scale)
 industrial_result = [9, 8, 8, 7, 9]
 

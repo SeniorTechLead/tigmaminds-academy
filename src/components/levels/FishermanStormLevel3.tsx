@@ -132,9 +132,29 @@ def simulate_parcels(use_coriolis=True, friction=0.00001):
 traj_no_cor = simulate_parcels(use_coriolis=False)
 traj_cor = simulate_parcels(use_coriolis=True)
 
-
-
-print("\n[Code trimmed — run in Level 2+ for full visualization]")`,
+print("Coriolis Effect on Cyclone Formation")
+print("=" * 50)
+print(f"Latitude: {lat}°N")
+print(f"Coriolis parameter f = {f:.6f} rad/s")
+print(f"Parcels simulated: {len(traj_cor)}")
+print(f"Time steps: {n_steps} x {dt:.0f}s = {n_steps*dt/3600:.1f} hours")
+print()
+print("WITHOUT Coriolis (straight inflow):")
+for i, t in enumerate(traj_no_cor[:4]):
+    final_r = np.sqrt(t[-1][0]**2 + t[-1][1]**2) / 1000
+    print(f"  Parcel {i}: final distance from center = {final_r:.0f} km")
+print()
+print("WITH Coriolis (spiral formation):")
+for i, t in enumerate(traj_cor[:4]):
+    final_r = np.sqrt(t[-1][0]**2 + t[-1][1]**2) / 1000
+    # Compute angular displacement
+    start_angle = np.arctan2(t[0][1], t[0][0])
+    end_angle = np.arctan2(t[-1][1], t[-1][0])
+    rotation = np.degrees(end_angle - start_angle)
+    print(f"  Parcel {i}: final distance = {final_r:.0f} km, rotation = {rotation:.0f}°")
+print()
+print("Coriolis deflects parcels into counterclockwise rotation (Northern Hemisphere).")
+print("This is how a low-pressure system becomes a spinning cyclone.")`,
       challenge: 'Change the latitude to -20 (Southern Hemisphere) and observe the direction of rotation. Then try lat=2 (near equator) — can a cyclone form? What happens to the trajectories?',
       successHint: 'The Coriolis effect is subtle — only 0.00007 radians per second — but over hundreds of kilometers and many hours, it bends wind into the spiral patterns visible from space. Understanding this "fictitious force" is key to understanding every large-scale weather system on Earth.',
     },
@@ -264,12 +284,38 @@ results = {}
 for label, pert in [('Control', 0.0), ('Perturbed (+0.01m)', 0.01)]:
     h = create_initial_condition(pert)
     snapshots = [h.copy()]
-    f = 5e-5  # Coriolis parameter
+    f_cor = 5e-5  # Coriolis parameter
+
+    # Geostrophic wind from pressure gradient
+    u = np.zeros_like(h)
+    v = np.zeros_like(h)
+    u[1:-1, :] = -(h[2:, :] - h[:-2, :]) / (2 * dy * f_cor)
+    v[:, 1:-1] = (h[:, 2:] - h[:, :-2]) / (2 * dx * f_cor)
 
     for step in range(n_steps):
-        pass
+        h = simple_advection_step(h, u, v, dt, dx, dy)
+        if step % 50 == 0:
+            snapshots.append(h.copy())
 
-print("\n[Code trimmed — run in Level 2+ for full visualization]")`,
+    results[label] = snapshots
+
+print("Numerical Weather Prediction: Chaos Demonstration")
+print("=" * 55)
+print(f"Grid: {nx}x{ny} cells, domain: {Lx/1e3:.0f} x {Ly/1e3:.0f} km")
+print(f"Time step: {dt:.0f}s, total steps: {n_steps} ({n_steps*dt/3600:.1f} hours)")
+print()
+# Compare final states
+ctrl_final = results['Control'][-1]
+pert_final = results['Perturbed (+0.01m)'][-1]
+diff = np.abs(ctrl_final - pert_final)
+print(f"Initial perturbation: 0.01 m (one centimeter!)")
+print(f"Final difference: max = {diff.max():.2f} m, mean = {diff.mean():.2f} m")
+print(f"Amplification factor: {diff.max() / 0.01:.0f}x")
+print()
+print("This is chaos: a 1 cm perturbation grows into")
+print(f"a {diff.max():.0f} m difference after {n_steps*dt/3600:.1f} hours.")
+print("This is why weather forecasts degrade — and why")
+print("ensemble methods (running many perturbed simulations) are essential.")`,
       challenge: 'Run an "ensemble" of 10 simulations with random perturbations of different magnitudes (0.001 to 0.1 m). At each time snapshot, compute the ensemble spread. How quickly does the spread saturate?',
       successHint: 'Numerical weather prediction is humanity\'s most successful application of physics to prediction. Yet chaos guarantees a fundamental limit. The art of forecasting is quantifying uncertainty honestly — telling a fisherman not just "the storm is coming" but "there is a 70% chance it hits within 100 km of here."',
     },
@@ -333,10 +379,30 @@ categories = {
 
 dx = x_offshore[1] - x_offshore[0]
 
+print("Storm Surge Analysis: Shelf Geometry Effect")
+print("=" * 55)
+print()
+for cat_name, params in categories.items():
+    wind = params['wind']
+    dp = params['dp']
+    tau = rho_air * Cd * wind**2
+    print(f"{cat_name}:")
 
-print("Storm Surge Analysis")
+    # Bay of Bengal (shallow shelf)
+    bob_surge = compute_surge(bob_depth, dx, tau, dp)
+    print(f"  Bay of Bengal (shallow shelf): {bob_surge[0]:.1f} m at coast")
 
-print("\n[Code trimmed — run in Level 2+ for full visualization]")`,
+    # Steep shelf
+    steep_surge = compute_surge(steep_depth, dx, tau, dp)
+    print(f"  Steep shelf (Pacific-type):    {steep_surge[0]:.1f} m at coast")
+
+    ratio = bob_surge[0] / max(steep_surge[0], 0.01)
+    print(f"  Amplification factor:          {ratio:.1f}x")
+    print()
+
+print("The Bay of Bengal's wide, shallow shelf amplifies surge enormously.")
+print("This is why the same cyclone is far deadlier here than on steep coasts.")
+print("Bhola 1970: 10m surge, 300,000+ dead — geometry is destiny.")`,
       challenge: 'Add a river channel to the model: a 2 km-wide section where the depth is only 3m (simulating the Brahmaputra mouth). How does the surge funnel up the channel compared to the open coast?',
       successHint: 'Storm surge is a problem of geometry as much as meteorology. The same cyclone can produce a 2-meter surge on one coast and a 10-meter surge on another. For Brahmaputra delta communities, the gentle shelf and funnel-shaped coastline multiply every storm into a potential catastrophe.',
     },
@@ -381,6 +447,16 @@ warming_values = [0, 1.5, 2.0, 3.0, 4.0]
 # SST range
 sst_range = np.linspace(24, 34, 100)
 
+# Simulate distribution of storm intensities to estimate Cat 4+ fraction
+np.random.seed(42)
+n_storms = 10000
+base_sst_mean = 28.0
+sst_samples_current = np.random.normal(base_sst_mean, 1.5, n_storms)
+sst_samples_future = np.random.normal(base_sst_mean + 2.0, 1.5, n_storms)
+vmax_current = np.array([max_potential_intensity(s) for s in sst_samples_current])
+vmax_future = np.array([max_potential_intensity(s) for s in sst_samples_future])
+cat4_current = np.mean(vmax_current > 64) * 100
+cat4_future = np.mean(vmax_future > 64) * 100
 
 print("Climate Change & Cyclone Intensity")
 print("=" * 50)

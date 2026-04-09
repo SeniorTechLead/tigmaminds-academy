@@ -157,7 +157,7 @@ angular = 1 + np.cos(theta)**2
 ax.plot(np.degrees(theta), angular, color='#f59e0b', linewidth=2.5)
 ax.fill_between(np.degrees(theta), angular, alpha=0.15, color='#f59e0b')
 ax.axvline(90, color='#ef4444', linewidth=1.5, linestyle='--')
-ax.text(92, 1.5, '90°: deepest blue,\nmost polarized', color='#ef4444', fontsize=8)
+ax.text(92, 1.5, '90°: deepest blue,\\nmost polarized', color='#ef4444', fontsize=8)
 ax.set_xlabel('Scattering angle (°)', color='white')
 ax.set_ylabel('Intensity (1 + cos²θ)', color='white')
 ax.set_title('Angular Distribution', color='white', fontsize=11)
@@ -480,7 +480,7 @@ for i, T in enumerate(t_range):
 for T, label in [(1800,'Candle'),(2700,'Bulb'),(5778,'Sun'),(6500,'D65'),(10000,'Sky')]:
     idx = np.argmin(np.abs(t_range-T))
     ax2.axvline(idx, color='white', linewidth=0.5, linestyle=':')
-    ax2.text(idx+0.5, 3.2, f'{T}K\n{label}', ha='center', color='white', fontsize=7)
+    ax2.text(idx+0.5, 3.2, f'{T}K\\n{label}', ha='center', color='white', fontsize=7)
 ax2.set_xlim(0,n_t); ax2.set_ylim(-.3,4.5)
 ax2.text(5,-.2,'Warm →',color='#ef4444',fontsize=9)
 ax2.text(n_t-7,-.2,'← Cool',color='#3b82f6',fontsize=9)
@@ -556,7 +556,7 @@ ax.plot(conc, A_at_500, color='#22c55e', linewidth=2.5)
 ax.plot(2.3, 2.3, 'o', color='#ef4444', markersize=10, zorder=5)
 ax.plot([2.3,2.3],[0,2.3], '--', color='#ef4444', linewidth=1)
 ax.plot([0,2.3],[2.3,2.3], '--', color='#ef4444', linewidth=1)
-ax.annotate('Unknown:\nA=2.3 → c=2.3', xy=(2.3,2.3), xytext=(3.2,3),
+ax.annotate('Unknown:\\nA=2.3 → c=2.3', xy=(2.3,2.3), xytext=(3.2,3),
             color='#ef4444', fontsize=9, arrowprops=dict(arrowstyle='->', color='#ef4444'))
 ax.set_xlabel('Concentration', color='white')
 ax.set_ylabel('Absorbance', color='white')

@@ -204,8 +204,8 @@ export default function CareersPage() {
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">What You Get</h2>
           <div className="grid sm:grid-cols-3 gap-6 mt-8">
             <div className="bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-100 dark:border-gray-700">
-              <p className="text-2xl font-bold text-gray-900 dark:text-white mb-1">₹500–800</p>
-              <p className="text-sm text-gray-500 dark:text-gray-400">per hour, based on experience</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white mb-1">Competitive</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">hourly compensation, discussed during application</p>
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-100 dark:border-gray-700">
               <p className="text-2xl font-bold text-gray-900 dark:text-white mb-1">Flexible</p>

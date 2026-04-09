@@ -250,7 +250,7 @@ ax2.set_aspect('equal')
 
 # Time budget pie chart
 ax3.set_facecolor('#111827')
-activities = ['At nest', 'Foraging\n(fig tree 1)', 'Foraging\n(fig tree 2)', 'Foraging\n(fig tree 3)', 'In transit']
+activities = ['At nest', 'Foraging\\n(fig tree 1)', 'Foraging\\n(fig tree 2)', 'Foraging\\n(fig tree 3)', 'In transit']
 time_pct = [35, 18, 18, 17, 12]
 colors_pie = ['#ef4444', '#22c55e', '#f59e0b', '#a855f7', '#6b7280']
 wedges, texts, autotexts = ax3.pie(time_pct, labels=activities, autopct='%1.0f%%',
@@ -431,7 +431,7 @@ for key in ['fledge', 'juv', 'adult', 'clutch']:
 
 colors_sens = ['#3b82f6', '#f59e0b', '#ef4444', '#22c55e']
 bars = ax4.bar(param_names, sensitivities, color=colors_sens, edgecolor='none')
-ax4.set_ylabel('Change in growth rate\nfrom ±20% change', color='white')
+ax4.set_ylabel('Change in growth rate\\nfrom ±20% change', color='white')
 ax4.set_title('Sensitivity Analysis: What Matters Most?', color='white', fontsize=12)
 ax4.tick_params(colors='gray')
 
@@ -687,7 +687,7 @@ true_occ = true_presence.mean()
 obs_occ = observed.mean()
 corrected_occ = obs_occ / p_detect.mean()
 
-bars = ax2.bar(['True\noccupancy', 'Observed\n(1 visit)', 'Observed\n(3 visits)', 'Corrected\nestimate'],
+bars = ax2.bar(['True\\noccupancy', 'Observed\\n(1 visit)', 'Observed\\n(3 visits)', 'Corrected\\nestimate'],
               [true_occ, detections[:, 0].mean(), obs_occ, min(corrected_occ, 1.0)],
               color=['#3b82f6', '#ef4444', '#f59e0b', '#22c55e'], edgecolor='none')
 ax2.set_ylabel('Occupancy rate', color='white')
@@ -699,7 +699,7 @@ for bar in bars:
 
 # Feature importance (what predicts hornbill presence?)
 ax3.set_facecolor('#111827')
-features = ['Canopy cover', 'Tree age', 'Fragment size', 'Distance\nto road']
+features = ['Canopy cover', 'Tree age', 'Fragment size', 'Distance\\nto road']
 # Simple correlation with true presence
 importances = [
     np.corrcoef(canopy_cover, true_presence)[0, 1],
@@ -863,7 +863,7 @@ for dt in time_windows[detections]:
 
 true_negatives = len(energy) - true_positives - false_positives - false_negatives
 
-labels = ['True\npositives', 'False\npositives', 'False\nnegatives', 'True\nnegatives']
+labels = ['True\\npositives', 'False\\npositives', 'False\\nnegatives', 'True\\nnegatives']
 values = [true_positives, false_positives, false_negatives, max(true_negatives, 0)]
 colors_cm = ['#22c55e', '#ef4444', '#f59e0b', '#3b82f6']
 
