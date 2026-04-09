@@ -4324,18 +4324,37 @@ export const scienceReferences: ReferenceGuide[] = [
           'Two classes can have the same mean test score (75) but very different spreads:\n\n' +
           '- Class A: 70, 73, 75, 77, 80 — scores clustered tightly\n' +
           '- Class B: 50, 60, 75, 90, 100 — scores spread widely\n\n' +
-          '**Variance** = average of squared distances from the mean:\n\n' +
-          '`Var = sum of (xi - mean)² / n`\n\n' +
-          '**Standard deviation** = square root of variance:\n\n' +
-          '`sigma = sqrt(Var)`\n\n' +
-          '**Worked example:** Data = {2, 4, 4, 4, 5, 5, 7, 9}\n\n' +
-          '| Step | Calculation | Result |\n' +
-          '|------|------------|--------|\n' +
-          '| Mean | 40/8 | 5 |\n' +
-          '| Squared deviations | (2-5)² + (4-5)² + ... + (9-5)² | 32 |\n' +
-          '| Variance | 32/8 | 4 |\n' +
-          '| Standard deviation | sqrt(4) | **2** |\n\n' +
-          'A small sigma means data is clustered near the mean. A large sigma means data is spread out.',
+          'How do we measure "how spread out"? Here is the idea, built step by step.\n\n' +
+          '**Step 1 — Find the mean.** Data = {2, 4, 4, 4, 5, 5, 7, 9}. Mean = (2+4+4+4+5+5+7+9)/8 = 40/8 = **5**.\n\n' +
+          '**Step 2 — How far is each value from the mean?**\n\n' +
+          '| Value | Distance from mean (value − 5) |\n' +
+          '|-------|-------------------------------|\n' +
+          '| 2 | 2 − 5 = **−3** |\n' +
+          '| 4 | 4 − 5 = **−1** |\n' +
+          '| 4 | 4 − 5 = **−1** |\n' +
+          '| 4 | 4 − 5 = **−1** |\n' +
+          '| 5 | 5 − 5 = **0** |\n' +
+          '| 5 | 5 − 5 = **0** |\n' +
+          '| 7 | 7 − 5 = **+2** |\n' +
+          '| 9 | 9 − 5 = **+4** |\n\n' +
+          'Problem: if we add these up, the negatives cancel the positives (−3 −1 −1 −1 +0 +0 +2 +4 = 0). The average distance appears to be zero, even though the data is clearly spread out.\n\n' +
+          '**Step 3 — Square each distance to make them all positive:**\n\n' +
+          '| Value | Distance | Distance² |\n' +
+          '|-------|----------|----------|\n' +
+          '| 2 | −3 | 9 |\n' +
+          '| 4 | −1 | 1 |\n' +
+          '| 4 | −1 | 1 |\n' +
+          '| 4 | −1 | 1 |\n' +
+          '| 5 | 0 | 0 |\n' +
+          '| 5 | 0 | 0 |\n' +
+          '| 7 | +2 | 4 |\n' +
+          '| 9 | +4 | 16 |\n' +
+          '| **Sum** | | **32** |\n\n' +
+          '**Step 4 — Variance** = average of squared distances = 32/8 = **4**.\n\n' +
+          '**Step 5 — Standard deviation** = square root of variance = √4 = **2**.\n\n' +
+          'Why take the square root? Because we squared the distances in Step 3, and the square root brings us back to the original units. ' +
+          'Variance is in "squared units" (if data is in kg, variance is in kg²). Standard deviation is back in kg — much easier to interpret.\n\n' +
+          'A standard deviation of 2 means: most values are within about 2 units of the mean.',
         intermediateContent:
           '**Why divide by (n−1) instead of n for samples?**\n\n' +
           'When you compute the mean from a sample, you used the data to estimate the centre. ' +
@@ -4384,24 +4403,27 @@ export const scienceReferences: ReferenceGuide[] = [
       {
         title: 'The Normal (Gaussian) Distribution',
         beginnerContent:
-          '**The bell curve** is the most important distribution in statistics.\n\n' +
-          'Many natural measurements — heights, test scores, measurement errors, biological variations — cluster around a central value with symmetric tails.\n\n' +
-          '**The normal distribution is defined by two parameters:**\n\n' +
-          '- **mu** (mean) — the centre of the bell\n' +
-          '- **sigma** (standard deviation) — the width of the bell\n\n' +
-          '**Key properties:**\n\n' +
-          '| Property | Value |\n' +
-          '|----------|-------|\n' +
-          '| Symmetric about | mu |\n' +
-          '| Total area under curve | exactly 1 |\n' +
-          '| Within 1 sigma | 68.3% of data |\n' +
-          '| Within 2 sigma | 95.4% of data |\n' +
-          '| Within 3 sigma | 99.7% of data |\n\n' +
-          '**Example:** Heights of adult women in India: mean = 152 cm, sigma = 6 cm.\n\n' +
-          '- 68% are between 146 and 158 cm\n' +
-          '- 95% are between 140 and 164 cm\n' +
-          '- A woman 170 cm tall is (170-152)/6 = 3 sigma above the mean — in the tallest 0.15%\n\n' +
-          '**Why it appears everywhere:** The **Central Limit Theorem** says that the average of many independent random effects tends toward a normal distribution, regardless of the original distribution.',
+          '**Why does the bell curve keep appearing everywhere?**\n\n' +
+          'Measure the height of 1000 women. Most cluster around 152 cm. A few are very short (135 cm), a few very tall (170 cm), ' +
+          'but the further from the centre, the rarer the values. Plot a histogram and it looks like a bell.\n\n' +
+          'Measure 1000 exam scores. Same bell shape. Measure 1000 rice grain weights. Same bell. Why?\n\n' +
+          '**Because each measurement is the sum of many tiny random effects.** A woman\'s height depends on hundreds of genes, nutrition, sleep, illness, exercise — ' +
+          'each nudging her height slightly up or slightly down. Most of those random nudges cancel out (some up, some down), ' +
+          'so most women end up near the average. Occasionally all the nudges align in the same direction — producing a very tall or very short person. But that is rare.\n\n' +
+          'This is the **Central Limit Theorem** in plain language: add up many independent random effects, and the total forms a bell curve. ' +
+          'It works regardless of what each individual effect looks like.\n\n' +
+          '**The bell curve is described by just two numbers:**\n\n' +
+          '- **μ (mean)** — the centre of the bell. Where most values cluster.\n' +
+          '- **σ (standard deviation)** — the width. Small σ = narrow bell (values are tight). Large σ = wide bell (values are spread).\n\n' +
+          '**How to use the 68-95-99.7 rule:**\n\n' +
+          'Heights of adult women in India: μ = 152 cm, σ = 6 cm.\n\n' +
+          '| Range | Heights | What it means |\n' +
+          '|-------|---------|---------------|\n' +
+          '| μ ± 1σ | 146 to 158 cm | **68%** of women (about 2 out of 3) |\n' +
+          '| μ ± 2σ | 140 to 164 cm | **95%** of women (nearly all) |\n' +
+          '| μ ± 3σ | 134 to 170 cm | **99.7%** of women (all but 3 in 1000) |\n\n' +
+          'A woman who is 170 cm tall: how unusual is she? She is (170 − 152)/6 = **3σ above the mean** — taller than 99.85% of women. ' +
+          'Only about 1.5 in 1000 women are that tall.',
         intermediateContent:
           '**The standard normal distribution** has mean = 0 and sigma = 1.\n\n' +
           'Any normal distribution can be standardised using: `z = (x - mu) / sigma`\n\n' +
@@ -4714,37 +4736,59 @@ export const scienceReferences: ReferenceGuide[] = [
         title: 'Chi-Squared & Hypothesis Testing',
         beginnerContent:
           '**Is the difference real, or just random chance?**\n\n' +
-          'You flip a coin 100 times and get 60 heads. Is the coin unfair, or did you just get lucky?\n\n' +
-          '**Hypothesis testing answers this:**\n\n' +
-          '1. **Null hypothesis (H₀):** "Nothing unusual is happening" (coin is fair)\n' +
-          '2. **Alternative (H₁):** "Something is different" (coin is biased)\n' +
-          '3. **Collect data** and calculate a test statistic\n' +
-          '4. **p-value:** probability of seeing data this extreme if H₀ is true\n' +
-          '5. If p-value < 0.05, **reject H₀** — the result is "statistically significant"\n\n' +
-          '**Chi-squared test** checks if observed frequencies match expected frequencies:\n\n' +
-          '`χ² = Σ (observed − expected)² / expected`\n\n' +
-          '**Example:** 100 coin flips, 60 heads, 40 tails\n\n' +
-          '- Expected: 50 heads, 50 tails\n' +
-          '- χ² = (60−50)²/50 + (40−50)²/50 = 2 + 2 = **4.0**\n' +
-          '- Critical value (1 df, α=0.05): 3.84\n' +
-          '- 4.0 > 3.84 → **reject H₀** — the coin appears biased',
+          'You flip a coin 100 times and get 60 heads. Is the coin unfair, or did you just get lucky? A fair coin COULD give 60 heads — it is unlikely but not impossible. How do we decide?\n\n' +
+          '**The idea: measure how far the results are from what we expected.**\n\n' +
+          'If the coin is fair, we expect 50 heads and 50 tails. We got 60 heads and 40 tails. The differences are:\n\n' +
+          '| | Observed | Expected | Difference |\n' +
+          '|--|----------|----------|------------|\n' +
+          '| Heads | 60 | 50 | +10 |\n' +
+          '| Tails | 40 | 50 | −10 |\n\n' +
+          'But how big is "10 off"? If we expected 50, being 10 off is a 20% deviation. If we expected 500, being 10 off is only 2%. ' +
+          'The size of the discrepancy depends on what you expected.\n\n' +
+          '**Building the χ² statistic step by step:**\n\n' +
+          'For each category: square the difference (to make negatives positive), then divide by expected (to scale by what was expected):\n\n' +
+          '| | (Observed − Expected)² | ÷ Expected | Contribution |\n' +
+          '|--|----------------------|------------|-------------|\n' +
+          '| Heads | (60 − 50)² = 100 | ÷ 50 | **2.0** |\n' +
+          '| Tails | (40 − 50)² = 100 | ÷ 50 | **2.0** |\n' +
+          '| | | **Total χ²** | **4.0** |\n\n' +
+          'The bigger χ² is, the more the data deviates from expectation.\n\n' +
+          '**Is 4.0 big enough to conclude the coin is unfair?**\n\n' +
+          'We compare χ² to a threshold. For this test (2 categories − 1 = 1 degree of freedom), the threshold at the 5% significance level is **3.84**.\n\n' +
+          'Our χ² = 4.0 > 3.84 → the probability of getting this result from a fair coin is less than 5%. We reject the fair-coin hypothesis — this coin appears biased.\n\n' +
+          'If we had gotten 55 heads: χ² = (55−50)²/50 + (45−50)²/50 = 0.5 + 0.5 = **1.0**. Since 1.0 < 3.84, we would NOT reject — 55 heads is well within the range of normal luck.',
         intermediateContent:
-          '**The chi-squared distribution:**\n\n' +
-          'If Z₁, Z₂, ..., Zₖ are independent standard normal variables, then:\n\n' +
-          '`χ²ₖ = Z₁² + Z₂² + ... + Zₖ²`\n\n' +
-          '- **k** is the degrees of freedom (df)\n' +
-          '- Mean = k, Variance = 2k\n' +
-          '- Skewed right (always positive)\n\n' +
-          '**Goodness of fit test:**\n\n' +
-          '| Category | Observed | Expected | (O−E)²/E |\n' +
-          '|----------|----------|----------|-----------|\n' +
-          '| A | 30 | 25 | 1.00 |\n' +
-          '| B | 20 | 25 | 1.00 |\n' +
-          '| C | 25 | 25 | 0.00 |\n' +
-          '| D | 25 | 25 | 0.00 |\n' +
-          '| **Total** | 100 | 100 | **χ² = 2.00** |\n\n' +
-          'df = categories − 1 = 3. Critical value at α=0.05: 7.81. Since 2.00 < 7.81, **fail to reject H₀**.\n\n' +
-          '**Test of independence:** Are two categorical variables related? Build a contingency table, compute expected frequencies as (row total × column total) / grand total.',
+          '**Degrees of freedom — why "categories minus 1"?**\n\n' +
+          'With 100 coin flips and 2 categories (heads, tails), if you know heads = 60, you automatically know tails = 40. ' +
+          'Only ONE number is free to vary — the other is forced. So df = 2 − 1 = **1**.\n\n' +
+          'With 4 blood types and 100 people: if you know A=30, B=20, C=25, then D must be 25. Three numbers are free, one is forced. df = 4 − 1 = **3**.\n\n' +
+          '**More degrees of freedom → higher threshold.** A bigger χ² is needed to be "significant" because more categories naturally produce more variation.\n\n' +
+          '| df | Critical value (α=0.05) |\n' +
+          '|----|------------------------|\n' +
+          '| 1 | 3.84 |\n' +
+          '| 2 | 5.99 |\n' +
+          '| 3 | 7.81 |\n' +
+          '| 5 | 11.07 |\n' +
+          '| 10 | 18.31 |\n\n' +
+          '**Goodness-of-fit worked example: are blood types equally distributed?**\n\n' +
+          'Test 100 people. If all four types are equally likely, expect 25 each.\n\n' +
+          '| Type | Observed | Expected | (O−E)² | (O−E)²/E |\n' +
+          '|------|----------|----------|--------|----------|\n' +
+          '| A | 30 | 25 | 25 | 1.00 |\n' +
+          '| B | 20 | 25 | 25 | 1.00 |\n' +
+          '| AB | 25 | 25 | 0 | 0.00 |\n' +
+          '| O | 25 | 25 | 0 | 0.00 |\n' +
+          '| | | | **χ²** | **2.00** |\n\n' +
+          'df = 4 − 1 = 3. Threshold = 7.81. Since 2.00 < 7.81 → **fail to reject**. The observed counts are consistent with equal distribution. ' +
+          'The differences (30 vs 25, 20 vs 25) are small enough to be explained by random chance.\n\n' +
+          '**Test of independence — is gender related to tea preference?**\n\n' +
+          '| | Chai | Green | Coffee | Total |\n' +
+          '|--|------|-------|--------|-------|\n' +
+          '| Male | 40 | 15 | 25 | 80 |\n' +
+          '| Female | 30 | 25 | 15 | 70 |\n' +
+          '| Total | 70 | 40 | 40 | 150 |\n\n' +
+          'If gender and preference are independent, the expected count for Male+Chai = (80 × 70)/150 = **37.3**. ' +
+          'Compute (O−E)²/E for all 6 cells and sum them. Compare to the threshold for df = (2−1)(3−1) = 2.',
         advancedContent:
           '**Where the chi-squared distribution comes from — built from normals:**\n\n' +
           'If Z ~ N(0,1), then Z² has a new distribution. What is it?\n\n' +
