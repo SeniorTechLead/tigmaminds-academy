@@ -64,6 +64,7 @@ export const practiceBinomialDistribution: PracticeSet = {
     {
       id: 'bin-05', difficulty: 1,
       question: 'A binomial experiment has n = 20 and p = 0.3. Find the **mean**.',
+      visual: { kind: 'distribution', type: 'binomial', params: { n: 20, p: 0.3 } },
       steps: [
         { label: 'Step 1: Formula', content: 'Mean = n × p' },
         { label: 'Step 2: Substitute', content: 'Mean = 20 × 0.3 = **6**' },
@@ -75,6 +76,7 @@ export const practiceBinomialDistribution: PracticeSet = {
     {
       id: 'bin-06', difficulty: 1,
       question: 'A binomial experiment has n = 50 and p = 0.4. Find the **standard deviation**.',
+      visual: { kind: 'distribution', type: 'binomial', params: { n: 50, p: 0.4 } },
       steps: [
         { label: 'Step 1: Formula', content: 'σ = √(n × p × (1 − p))' },
         { label: 'Step 2: Substitute', content: 'σ = √(50 × 0.4 × 0.6) = √12 ≈ **3.464**' },
@@ -110,6 +112,7 @@ export const practiceBinomialDistribution: PracticeSet = {
     {
       id: 'bin-09', difficulty: 1,
       question: 'A multiple-choice test has **6 questions**, each with 4 options. If you guess randomly, what is P(getting exactly 2 correct)?',
+      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5','6'], values: [0.178,0.356,0.297,0.132,0.033,0.004,0.000], highlight: 2 },
       steps: [
         { label: 'Step 1: Parameters', content: 'n = 6, k = 2, p = 1/4 = 0.25' },
         { label: 'Step 2: C(6,2)', content: 'C(6,2) = 15' },
@@ -134,6 +137,7 @@ export const practiceBinomialDistribution: PracticeSet = {
     {
       id: 'bin-11', difficulty: 1,
       question: 'A binomial experiment has n = 100 and p = 0.5. What are the **mean** and **standard deviation**?',
+      visual: { kind: 'distribution', type: 'binomial', params: { n: 100, p: 0.5 } },
       steps: [
         { label: 'Step 1: Mean', content: 'μ = np = 100 × 0.5 = **50**' },
         { label: 'Step 2: Std dev', content: 'σ = √(npq) = √(100 × 0.5 × 0.5) = √25 = **5**' },
@@ -178,6 +182,7 @@ export const practiceBinomialDistribution: PracticeSet = {
     {
       id: 'bin-15', difficulty: 1,
       question: 'A binomial distribution has n = 10, p = 0.7. Find the **mean** and **variance**.',
+      visual: { kind: 'distribution', type: 'binomial', params: { n: 10, p: 0.7 } },
       steps: [
         { label: 'Step 1: Mean', content: 'μ = np = 10 × 0.7 = **7**' },
         { label: 'Step 2: Variance', content: 'σ² = np(1−p) = 10 × 0.7 × 0.3 = **2.1**' },
@@ -201,6 +206,7 @@ export const practiceBinomialDistribution: PracticeSet = {
     {
       id: 'bin-17', difficulty: 1,
       question: 'A basketball player makes 60% of free throws. In **5 attempts**, what is P(exactly 3 makes)?',
+      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5'], values: [0.010,0.077,0.230,0.346,0.259,0.078], highlight: 3 },
       steps: [
         { label: 'Step 1: Parameters', content: 'n = 5, k = 3, p = 0.6' },
         { label: 'Step 2: C(5,3)', content: 'C(5,3) = 10' },
@@ -215,6 +221,7 @@ export const practiceBinomialDistribution: PracticeSet = {
     {
       id: 'bin-18', difficulty: 2,
       question: 'A drug is effective for 80% of patients. In a trial of **10 patients**, what is P(at least 8 respond)?',
+      visual: { kind: 'distribution', type: 'binomial', params: { n: 10, p: 0.8 }, shadeFrom: 8, shadeTo: 10 },
       steps: [
         { label: 'Step 1: "At least 8" means P(X≥8)', content: 'P(X≥8) = P(X=8) + P(X=9) + P(X=10)' },
         { label: 'Step 2: P(X=8)', content: 'C(10,8) × 0.8⁸ × 0.2² = 45 × 0.1678 × 0.04 ≈ 0.3020' },
@@ -229,6 +236,7 @@ export const practiceBinomialDistribution: PracticeSet = {
     {
       id: 'bin-19', difficulty: 2,
       question: 'A factory produces items with a **5% defect rate**. In a batch of 20, what is P(exactly 0 defectives)?',
+      visual: { kind: 'distribution', type: 'binomial', params: { n: 20, p: 0.05 }, markX: 0 },
       steps: [
         { label: 'Step 1: Parameters', content: 'n = 20, k = 0, p = 0.05' },
         { label: 'Step 2: Compute', content: 'P(X=0) = C(20,0) × 0.05⁰ × 0.95²⁰ = 1 × 1 × 0.95²⁰' },
@@ -241,6 +249,7 @@ export const practiceBinomialDistribution: PracticeSet = {
     {
       id: 'bin-20', difficulty: 2,
       question: 'In the same factory (5% defect rate, batch of 20), what is P(**at most 1** defective)?',
+      visual: { kind: 'distribution', type: 'binomial', params: { n: 20, p: 0.05 }, shadeFrom: 0, shadeTo: 1 },
       steps: [
         { label: 'Step 1: P(X≤1) = P(X=0) + P(X=1)', content: 'P(X=0) = 0.95²⁰ ≈ 0.3585' },
         { label: 'Step 2: P(X=1)', content: 'C(20,1) × 0.05 × 0.95¹⁹ = 20 × 0.05 × 0.3774 ≈ 0.3774' },
@@ -253,6 +262,7 @@ export const practiceBinomialDistribution: PracticeSet = {
     {
       id: 'bin-21', difficulty: 2,
       question: 'An election poll shows 55% support for a candidate. In a random sample of **15 voters**, what is P(exactly 10 support)?',
+      visual: { kind: 'distribution', type: 'binomial', params: { n: 15, p: 0.55 }, markX: 10 },
       steps: [
         { label: 'Step 1: Parameters', content: 'n = 15, k = 10, p = 0.55' },
         { label: 'Step 2: C(15,10)', content: 'C(15,10) = C(15,5) = 3003' },
@@ -292,6 +302,7 @@ export const practiceBinomialDistribution: PracticeSet = {
     {
       id: 'bin-24', difficulty: 2,
       question: '70% of seeds germinate. You plant **8 seeds**. What is P(at least 6 germinate)?',
+      visual: { kind: 'distribution', type: 'binomial', params: { n: 8, p: 0.7 }, shadeFrom: 6, shadeTo: 8 },
       steps: [
         { label: 'Step 1: P(X≥6) = P(6) + P(7) + P(8)', content: 'n = 8, p = 0.7' },
         { label: 'Step 2: P(X=6)', content: 'C(8,6) × 0.7⁶ × 0.3² = 28 × 0.1176 × 0.09 ≈ 0.2965' },
@@ -306,6 +317,7 @@ export const practiceBinomialDistribution: PracticeSet = {
     {
       id: 'bin-25', difficulty: 2,
       question: 'A vaccine has a 90% effectiveness rate. In a group of **15 vaccinated people** exposed to a virus, what is P(all 15 are protected)?',
+      visual: { kind: 'distribution', type: 'binomial', params: { n: 15, p: 0.9 }, markX: 15 },
       steps: [
         { label: 'Step 1: Parameters', content: 'n = 15, k = 15, p = 0.9' },
         { label: 'Step 2: Compute', content: 'P(X=15) = 0.9¹⁵ ≈ **0.2059**' },
@@ -345,6 +357,7 @@ export const practiceBinomialDistribution: PracticeSet = {
     {
       id: 'bin-28', difficulty: 2,
       question: 'A quality inspector selects **25 items** from a production line with a 2% defect rate. What is P(at least 1 defective)?',
+      visual: { kind: 'distribution', type: 'binomial', params: { n: 25, p: 0.02 }, shadeFrom: 1, shadeTo: 25 },
       hint: 'Use the complement: P(at least 1) = 1 − P(0).',
       steps: [
         { label: 'Step 1: Complement', content: 'P(X ≥ 1) = 1 − P(X = 0)' },
@@ -371,6 +384,7 @@ export const practiceBinomialDistribution: PracticeSet = {
     {
       id: 'bin-30', difficulty: 2,
       question: 'A basketball player has a 40% three-point shooting rate. In **10 attempts**, what is P(making 5 or more)?',
+      visual: { kind: 'distribution', type: 'binomial', params: { n: 10, p: 0.4 }, shadeFrom: 5, shadeTo: 10 },
       steps: [
         { label: 'Step 1: Parameters', content: 'n = 10, p = 0.4, need P(X ≥ 5)' },
         { label: 'Step 2: Compute each', content: 'P(5) ≈ 0.2007, P(6) ≈ 0.1115, P(7) ≈ 0.0425, P(8) ≈ 0.0106, P(9) ≈ 0.0016, P(10) ≈ 0.0001' },
@@ -383,6 +397,7 @@ export const practiceBinomialDistribution: PracticeSet = {
     {
       id: 'bin-31', difficulty: 2,
       question: 'In a binomial experiment with n = 30 and p = 0.2, is the **normal approximation** appropriate? If yes, state the approximate distribution.',
+      visual: { kind: 'distribution', type: 'normal', params: { mean: 6, std: 2.19 } },
       steps: [
         { label: 'Step 1: Check np and n(1−p)', content: 'np = 30 × 0.2 = 6, n(1−p) = 30 × 0.8 = 24' },
         { label: 'Step 2: Rule of thumb', content: 'Both np ≥ 5 and n(1−p) ≥ 5 → **Yes**, the normal approximation is appropriate' },
@@ -408,6 +423,7 @@ export const practiceBinomialDistribution: PracticeSet = {
     {
       id: 'bin-33', difficulty: 2,
       question: 'A weather forecast says 30% chance of rain each day. In a **7-day** week, what is P(rain on exactly 3 days)?',
+      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5','6','7'], values: [0.082,0.247,0.318,0.227,0.097,0.025,0.004,0.000], highlight: 3 },
       steps: [
         { label: 'Step 1: Parameters', content: 'n = 7, k = 3, p = 0.3' },
         { label: 'Step 2: C(7,3)', content: 'C(7,3) = 35' },
@@ -420,6 +436,7 @@ export const practiceBinomialDistribution: PracticeSet = {
     {
       id: 'bin-34', difficulty: 2,
       question: 'A biased coin has P(heads) = 0.7. It is flipped **8 times**. Find the probability the number of heads is within one standard deviation of the mean.',
+      visual: { kind: 'coins', count: 8 },
       steps: [
         { label: 'Step 1: Mean and SD', content: 'μ = 8 × 0.7 = 5.6, σ = √(8 × 0.7 × 0.3) = √1.68 ≈ 1.296' },
         { label: 'Step 2: Range', content: 'μ − σ ≈ 4.3, μ + σ ≈ 6.9 → whole values 5 and 6' },
@@ -459,6 +476,7 @@ export const practiceBinomialDistribution: PracticeSet = {
     {
       id: 'bin-37', difficulty: 3,
       question: 'Show that as n → ∞ and p → 0 with np = λ fixed, Binomial(n, p) approaches **Poisson(λ)**. Demonstrate with n = 1000, p = 0.003 (λ = 3): compare P(X = 2) under both distributions.',
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 3 }, markX: 2 },
       steps: [
         { label: 'Step 1: Binomial P(X=2)', content: 'C(1000,2) × 0.003² × 0.997⁹⁹⁸ = 499500 × 0.000009 × 0.0498 ≈ 0.2240' },
         { label: 'Step 2: Poisson P(X=2)', content: 'e⁻³ × 3² / 2! = 0.0498 × 9 / 2 = 0.2240' },
@@ -484,6 +502,7 @@ export const practiceBinomialDistribution: PracticeSet = {
     {
       id: 'bin-39', difficulty: 3,
       question: 'An airline overbooks a 200-seat flight, selling **215 tickets**, knowing that each passenger has a 95% chance of showing up. What is the approximate probability of overbooking (more than 200 show up)?',
+      visual: { kind: 'distribution', type: 'normal', params: { mean: 204.25, std: 3.196 }, markX: 200, shadeFrom: 200, shadeTo: 215 },
       steps: [
         { label: 'Step 1: Parameters', content: 'n = 215, p = 0.95, μ = 204.25, σ = √(215 × 0.95 × 0.05) ≈ 3.196' },
         { label: 'Step 2: Need P(X > 200)', content: 'With continuity correction: P(X ≥ 201) ≈ P(Z ≥ (200.5 − 204.25)/3.196)' },
@@ -509,6 +528,7 @@ export const practiceBinomialDistribution: PracticeSet = {
     {
       id: 'bin-41', difficulty: 3,
       question: 'A manufacturer wants P(0 defectives in a batch) to be **at least 0.90**. If the defect rate is 1%, what is the **maximum batch size**?',
+      visual: { kind: 'bar-chart', labels: ['n=5','n=8','n=10','n=11','n=15'], values: [0.951,0.923,0.904,0.895,0.860] },
       steps: [
         { label: 'Step 1: Set up inequality', content: 'P(X=0) = 0.99ⁿ ≥ 0.90' },
         { label: 'Step 2: Take logarithm', content: 'n × ln(0.99) ≥ ln(0.90)' },
@@ -547,6 +567,7 @@ export const practiceBinomialDistribution: PracticeSet = {
     {
       id: 'bin-44', difficulty: 3,
       question: 'A spam filter correctly identifies spam 98% of the time and correctly identifies non-spam 95% of the time. If 20% of emails are spam, and the filter processes **50 emails**, what is the expected number of **misclassified** emails?',
+      visual: { kind: 'bar-chart', labels: ['Missed spam','Missed non-spam','Total misclassified'], values: [0.2,2.0,2.2] },
       steps: [
         { label: 'Step 1: Misclassification rates', content: 'P(miss spam) = 0.02, P(miss non-spam) = 0.05' },
         { label: 'Step 2: Expected spam emails', content: '50 × 0.20 = 10 spam, 50 × 0.80 = 40 non-spam' },
@@ -560,6 +581,7 @@ export const practiceBinomialDistribution: PracticeSet = {
     {
       id: 'bin-45', difficulty: 3,
       question: 'You flip a coin until you get **3 heads**. This is NOT binomial — explain why. Then identify the correct distribution and find P(it takes exactly 5 flips).',
+      visual: { kind: 'coins', count: 5, heads: 3 },
       steps: [
         { label: 'Step 1: Why not binomial', content: 'The number of trials is NOT fixed — it varies. Binomial requires a fixed n.' },
         { label: 'Step 2: Correct distribution', content: 'This is the **Negative Binomial** distribution: waiting for the r-th success.' },
@@ -572,6 +594,7 @@ export const practiceBinomialDistribution: PracticeSet = {
     {
       id: 'bin-46', difficulty: 3,
       question: 'Two factories supply widgets. Factory A (60% of supply) has 3% defect rate; Factory B (40%) has 5% defect rate. A random widget is defective. What is P(it came from Factory A)? Then: in a batch of **10** from Factory A, what is P(exactly 1 defective)?',
+      visual: { kind: 'bar-chart', labels: ['P(D|A)×P(A)','P(D|B)×P(B)'], values: [0.018,0.020] },
       steps: [
         { label: 'Step 1: Bayes\' theorem', content: 'P(A|D) = P(D|A)P(A) / P(D) = (0.03 × 0.60) / (0.03 × 0.60 + 0.05 × 0.40)' },
         { label: 'Step 2: Compute', content: 'P(A|D) = 0.018 / (0.018 + 0.020) = 0.018 / 0.038 ≈ **0.4737**' },
@@ -649,6 +672,7 @@ export const practiceCorrelationRegression: PracticeSet = {
     {
       id: 'cor-01', difficulty: 1,
       question: 'As study hours increase, test scores increase. Is this a **positive**, **negative**, or **no** correlation?',
+      visual: { kind: 'scatter', points: [[1,50],[2,55],[3,65],[4,70],[5,85]], showLine: true },
       steps: [
         { label: 'Step 1: Direction', content: 'Both variables increase together.' },
         { label: 'Step 2: Classify', content: 'This is a **positive correlation**.' },
@@ -660,6 +684,7 @@ export const practiceCorrelationRegression: PracticeSet = {
     {
       id: 'cor-02', difficulty: 1,
       question: 'As the temperature outside increases, the amount of hot chocolate sold decreases. What type of correlation is this?',
+      visual: { kind: 'scatter', points: [[10,100],[20,80],[30,50],[40,30],[50,10]], showLine: true },
       steps: [
         { label: 'Step 1: Direction', content: 'One variable increases while the other decreases.' },
         { label: 'Step 2: Classify', content: 'This is a **negative correlation**.' },
@@ -671,6 +696,7 @@ export const practiceCorrelationRegression: PracticeSet = {
     {
       id: 'cor-03', difficulty: 1,
       question: 'A student\'s shoe size and their IQ. What type of correlation would you expect?',
+      visual: { kind: 'scatter', points: [[7,105],[8,95],[9,120],[10,100],[11,110],[12,90],[8,115],[9,95],[10,125],[11,100]] },
       steps: [
         { label: 'Step 1: Think about connection', content: 'Shoe size has no logical relationship to intelligence.' },
         { label: 'Step 2: Classify', content: 'This is **no correlation** (r ≈ 0).' },
@@ -682,6 +708,7 @@ export const practiceCorrelationRegression: PracticeSet = {
     {
       id: 'cor-04', difficulty: 1,
       question: 'An r value of **−0.85** indicates what kind of correlation?',
+      visual: { kind: 'scatter', points: [[1,90],[2,82],[3,75],[4,65],[5,60],[6,50],[7,45],[8,35]] },
       steps: [
         { label: 'Step 1: Sign', content: 'Negative sign → variables move in opposite directions.' },
         { label: 'Step 2: Magnitude', content: '|−0.85| = 0.85, which is close to 1 → strong.' },
@@ -693,6 +720,7 @@ export const practiceCorrelationRegression: PracticeSet = {
     {
       id: 'cor-05', difficulty: 1,
       question: 'An r value of **0.12** indicates what kind of correlation?',
+      visual: { kind: 'scatter', points: [[1,5],[2,8],[3,3],[4,7],[5,6],[6,4],[7,9],[8,5],[9,7],[10,6]] },
       steps: [
         { label: 'Step 1: Sign', content: 'Positive.' },
         { label: 'Step 2: Magnitude', content: '0.12 is close to 0 → very weak.' },
@@ -704,6 +732,7 @@ export const practiceCorrelationRegression: PracticeSet = {
     {
       id: 'cor-06', difficulty: 1,
       question: 'The regression equation is ŷ = 2.5x + 10. Predict ŷ when x = 4.',
+      visual: { kind: 'scatter', points: [[1,12.5],[2,15],[3,17.5],[4,20],[5,22.5]], showLine: true },
       steps: [
         { label: 'Step 1: Substitute', content: 'ŷ = 2.5(4) + 10 = 10 + 10 = **20**' },
       ],
@@ -714,6 +743,7 @@ export const practiceCorrelationRegression: PracticeSet = {
     {
       id: 'cor-07', difficulty: 1,
       question: 'The regression equation is ŷ = −3x + 50. Predict ŷ when x = 12.',
+      visual: { kind: 'scatter', points: [[2,44],[5,35],[8,26],[12,14],[15,5]], showLine: true },
       steps: [
         { label: 'Step 1: Substitute', content: 'ŷ = −3(12) + 50 = −36 + 50 = **14**' },
       ],
@@ -756,6 +786,7 @@ export const practiceCorrelationRegression: PracticeSet = {
     {
       id: 'cor-11', difficulty: 1,
       question: 'What does it mean when r = 1?',
+      visual: { kind: 'scatter', points: [[1,3],[2,5],[3,7],[4,9],[5,11]], showLine: true },
       steps: [
         { label: 'Step 1: Perfect positive', content: 'All data points lie exactly on a straight line with positive slope.' },
         { label: 'Step 2: Implication', content: 'r² = 1 → 100% of the variation in y is explained by x.' },
@@ -767,6 +798,7 @@ export const practiceCorrelationRegression: PracticeSet = {
     {
       id: 'cor-12', difficulty: 1,
       question: 'Given the regression line ŷ = 1.5x + 3, what is the **slope** and what does it mean?',
+      visual: { kind: 'scatter', points: [[0,3],[1,4.5],[2,6],[3,7.5],[4,9]], showLine: true },
       steps: [
         { label: 'Step 1: Identify slope', content: 'Slope = **1.5**' },
         { label: 'Step 2: Interpretation', content: 'For each unit increase in x, ŷ increases by 1.5 units on average.' },
@@ -778,6 +810,7 @@ export const practiceCorrelationRegression: PracticeSet = {
     {
       id: 'cor-13', difficulty: 1,
       question: 'Given the regression line ŷ = 1.5x + 3, what is the **y-intercept** and what does it mean?',
+      visual: { kind: 'scatter', points: [[0,3],[1,4.5],[2,6],[3,7.5],[4,9]], showLine: true },
       steps: [
         { label: 'Step 1: Identify intercept', content: 'y-intercept = **3**' },
         { label: 'Step 2: Interpretation', content: 'When x = 0, the predicted value of y is 3.' },
@@ -789,6 +822,7 @@ export const practiceCorrelationRegression: PracticeSet = {
     {
       id: 'cor-14', difficulty: 1,
       question: 'A study finds that ice cream sales and drowning rates are positively correlated. Does eating ice cream **cause** drowning?',
+      visual: { kind: 'scatter', points: [[100,5],[200,10],[400,25],[600,40],[350,20],[150,8]], showLine: true },
       hint: 'Think about what other variable might affect both.',
       steps: [
         { label: 'Step 1: Correlation ≠ Causation', content: 'A positive correlation does not imply causation.' },
@@ -801,6 +835,7 @@ export const practiceCorrelationRegression: PracticeSet = {
     {
       id: 'cor-15', difficulty: 1,
       question: 'If the actual value is y = 25 and the predicted value is ŷ = 22, what is the **residual**?',
+      visual: { kind: 'scatter', points: [[3,22],[3,25]], showLine: true },
       steps: [
         { label: 'Step 1: Formula', content: 'Residual = y − ŷ' },
         { label: 'Step 2: Compute', content: '25 − 22 = **3**' },
@@ -813,6 +848,7 @@ export const practiceCorrelationRegression: PracticeSet = {
     {
       id: 'cor-16', difficulty: 1,
       question: 'The regression equation is ŷ = 0.8x + 5. If x̄ = 10 and ȳ = 13, does the regression line pass through the point (x̄, ȳ)?',
+      visual: { kind: 'scatter', points: [[2,6.6],[6,9.8],[10,13],[14,16.2],[18,19.4]], showLine: true },
       steps: [
         { label: 'Step 1: Check', content: 'ŷ at x̄ = 0.8(10) + 5 = 8 + 5 = 13 = ȳ ✓' },
         { label: 'Step 2: Property', content: 'The least-squares regression line **always** passes through (x̄, ȳ).' },
@@ -909,6 +945,7 @@ export const practiceCorrelationRegression: PracticeSet = {
     {
       id: 'cor-23', difficulty: 2,
       question: 'A researcher finds r = 0.95 between hours of TV watched and GPA. A reporter writes: "TV watching destroys grades." What is wrong with this conclusion?',
+      visual: { kind: 'scatter', points: [[1,3.8],[2,3.5],[3,3.2],[5,2.8],[6,2.5],[8,2.0]], showLine: true },
       steps: [
         { label: 'Step 1: Correlation ≠ Causation', content: 'r = 0.95 shows a strong positive correlation, but does NOT prove causation.' },
         { label: 'Step 2: Possible issues', content: '(1) Reverse causation: students with low GPAs might watch more TV. (2) Confounding variables: socioeconomic background, study habits, etc.' },
@@ -921,6 +958,7 @@ export const practiceCorrelationRegression: PracticeSet = {
     {
       id: 'cor-24', difficulty: 2,
       question: 'If r = −0.9 for the relationship between exercise (hours/week) and body fat percentage, what is r²? Interpret both.',
+      visual: { kind: 'scatter', points: [[1,30],[2,27],[3,24],[5,20],[7,15],[10,10]], showLine: true },
       steps: [
         { label: 'Step 1: r²', content: 'r² = (−0.9)² = **0.81**' },
         { label: 'Step 2: Interpret r', content: 'Strong negative relationship: more exercise is associated with lower body fat.' },
@@ -947,6 +985,7 @@ export const practiceCorrelationRegression: PracticeSet = {
     {
       id: 'cor-26', difficulty: 2,
       question: 'A dataset has r = 0.7. A new data point that is an **outlier** is added. Can this single point change r to near 0? Explain.',
+      visual: { kind: 'scatter', points: [[1,2],[2,4],[3,6],[4,8],[5,10],[3,100]] },
       steps: [
         { label: 'Step 1: Yes, it can', content: 'A single outlier can dramatically change r, especially in small datasets.' },
         { label: 'Step 2: Example', content: 'If x = [1,2,3,4,5], y = [2,4,6,8,10] gives r = 1.0, adding (3, 100) would pull r toward 0.' },
@@ -1014,6 +1053,7 @@ export const practiceCorrelationRegression: PracticeSet = {
     {
       id: 'cor-31', difficulty: 2,
       question: 'Identify the **confounding variable**: Cities with more fire stations tend to have more fires. Does building more fire stations cause fires?',
+      visual: { kind: 'scatter', points: [[2,10],[4,25],[8,45],[20,120],[40,250]], showLine: true },
       steps: [
         { label: 'Step 1: No', content: 'Building fire stations does not cause fires.' },
         { label: 'Step 2: Confounding variable', content: '**City size (population)** is the confounding variable. Larger cities have more fire stations AND more fires.' },
@@ -1025,6 +1065,7 @@ export const practiceCorrelationRegression: PracticeSet = {
     {
       id: 'cor-32', difficulty: 2,
       question: 'A dataset has the regression equation ŷ = 2x + 1. The data range for x is [5, 25]. Is it appropriate to predict ŷ at x = 50?',
+      visual: { kind: 'scatter', points: [[5,11],[10,21],[15,31],[20,41],[25,51]], showLine: true },
       steps: [
         { label: 'Step 1: Extrapolation', content: 'x = 50 is far outside the data range [5, 25].' },
         { label: 'Step 2: Danger', content: 'This is **extrapolation** — the linear relationship may not hold beyond the observed range.' },
@@ -1103,6 +1144,7 @@ export const practiceCorrelationRegression: PracticeSet = {
     {
       id: 'cor-38', difficulty: 3,
       question: '**Simpson\'s Paradox**: Group A has r = 0.8, Group B has r = 0.7. When combined, r = −0.3. Explain how this is possible with an example.',
+      visual: { kind: 'scatter', points: [[1,10],[2,12],[3,14],[7,2],[8,4],[9,6]] },
       steps: [
         { label: 'Step 1: Setup', content: 'Suppose Group A: x = [1,2,3], y = [10,12,14] (positive trend, high values). Group B: x = [7,8,9], y = [2,4,6] (positive trend, low values).' },
         { label: 'Step 2: Within groups', content: 'Both groups show positive correlation.' },
@@ -1226,6 +1268,7 @@ export const practiceCorrelationRegression: PracticeSet = {
     {
       id: 'cor-47', difficulty: 3,
       question: 'Explain the concept of **leverage** in regression. Given x = [1, 2, 3, 4, 20] and y = [3, 5, 7, 9, 11], how does the point (20, 11) affect the regression compared to (20, 50)?',
+      visual: { kind: 'scatter', points: [[1,3],[2,5],[3,7],[4,9],[20,11]] },
       steps: [
         { label: 'Step 1: Leverage', content: 'A point has high leverage if its x-value is far from x̄. High-leverage points strongly influence the slope.' },
         { label: 'Step 2: With (20, 11)', content: 'x̄ = 6, so (20, 11) has high leverage. Without it, slope ≈ 2, intercept ≈ 1. With it, the slope is pulled toward the flat line connecting (6, 7) to (20, 11), giving b ≈ 0.52.' },
@@ -1251,6 +1294,7 @@ export const practiceCorrelationRegression: PracticeSet = {
     {
       id: 'cor-49', difficulty: 3,
       question: 'Two variables X and Y have r = 0. Does this mean X and Y are **independent**? Provide a counterexample.',
+      visual: { kind: 'scatter', points: [[-3,9],[-2,4],[-1,1],[0,0],[1,1],[2,4],[3,9]] },
       steps: [
         { label: 'Step 1: No', content: 'r = 0 means no **linear** relationship, but there could be a nonlinear one.' },
         { label: 'Step 2: Counterexample', content: 'Let X ~ Uniform(−1, 1) and Y = X². Then E[XY] = E[X³] = 0 and E[X]E[Y] = 0, so Cov(X,Y) = 0 and r = 0. But Y is completely determined by X — they are maximally dependent.' },
