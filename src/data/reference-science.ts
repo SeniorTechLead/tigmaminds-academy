@@ -4297,11 +4297,24 @@ export const scienceReferences: ReferenceGuide[] = [
           '- **IQR** = Q3 - Q1 — the middle 50% of data\n' +
           '- Outliers are typically defined as values beyond Q1 - 1.5*IQR or Q3 + 1.5*IQR',
         advancedContent:
-          '**Robust statistics** resist the influence of outliers:\n\n' +
-          '- The **trimmed mean** discards the top and bottom k% before averaging\n' +
-          '- The **median absolute deviation (MAD)** replaces standard deviation for skewed distributions: MAD = median(|xi - median(x)|)\n' +
-          '- **M-estimators** (Huber, Tukey biweight) down-weight outliers using iteratively reweighted least squares\n\n' +
-          'In high-dimensional data, the **geometric median** (minimises sum of Euclidean distances rather than squared distances) is more robust than the coordinate-wise median — used in federated learning to resist adversarial updates from compromised nodes.',
+          '**Robust statistics — worked example with MAD:**\n\n' +
+          'Data: 12, 14, 13, 15, 14, **100**, 13, 11 (one outlier at 100)\n\n' +
+          '| Measure | Calculation | Result | Affected by outlier? |\n' +
+          '|---------|------------|--------|---------------------|\n' +
+          '| Mean | (12+14+13+15+14+100+13+11)/8 | **24.0** | Yes — dragged up by 16 |\n' +
+          '| Median | sort → middle of 12,13,13,14,14,15,100 | **13.5** | No |\n' +
+          '| Std dev | | **29.2** | Yes — massively inflated |\n' +
+          '| MAD | median of |12−13.5|, |14−13.5|, ..., |100−13.5| | **1.0** | No |\n\n' +
+          '**MAD step by step:**\n' +
+          '1. Median of data = 13.5\n' +
+          '2. Absolute deviations: |12−13.5|=1.5, |14−13.5|=0.5, |13−13.5|=0.5, |15−13.5|=1.5, |14−13.5|=0.5, |100−13.5|=86.5, |13−13.5|=0.5, |11−13.5|=2.5\n' +
+          '3. Median of those deviations: sort → 0.5, 0.5, 0.5, 0.5, **1.0**, 1.5, 1.5, 2.5, 86.5 → MAD = **1.0**\n' +
+          '4. Scaled MAD = 1.0 × 1.4826 = **1.48** (scale factor makes it comparable to std dev for normal data)\n\n' +
+          '**Trimmed mean (10% trim):** Sort data, discard lowest 10% and highest 10%, average the rest. ' +
+          'For our 8 values: discard 1 lowest (11) and 1 highest (100) → mean of [12,13,13,14,14,15] = **13.5**. ' +
+          'The outlier is gone.\n\n' +
+          '**M-estimators** iteratively down-weight points far from the centre. Huber\'s method: treat points within 1.345σ normally, ' +
+          'but limit the influence of points beyond that threshold. After a few iterations, the estimate converges to a robust centre.',
         interactive: { type: 'python-playground' as const, props: { starterCode: '# Compute summary statistics\ndata = [45, 67, 72, 72, 78, 81, 95]\n\nmean = sum(data) / len(data)\nsorted_d = sorted(data)\nn = len(sorted_d)\nmedian = sorted_d[n//2] if n % 2 else (sorted_d[n//2-1] + sorted_d[n//2]) / 2\n\n# Mode: most common value\nfrom collections import Counter\nmode = Counter(data).most_common(1)[0][0]\n\nprint(f"Data: {data}")\nprint(f"Mean:   {mean:.1f}")\nprint(f"Median: {median}")\nprint(f"Mode:   {mode}")\nprint(f"Range:  {max(data) - min(data)}")\n\n# Add an outlier and watch the mean shift!\ndata2 = data + [5]\nmean2 = sum(data2) / len(data2)\nprint(f"\\nWith outlier 5: mean = {mean2:.1f}")', title: 'Try it — Summary Statistics' } },
       },
       {
@@ -4338,11 +4351,26 @@ export const scienceReferences: ReferenceGuide[] = [
           '| within 3 sigma | ~99.7% |\n\n' +
           '**Z-score** standardises any value: `z = (x - mean) / sigma`. A z-score of 2 means the value is 2 standard deviations above the mean.',
         advancedContent:
-          '**Variance of combined distributions:**\n\n' +
-          '- If X and Y are independent: Var(X + Y) = Var(X) + Var(Y)\n' +
-          '- Var(aX + b) = a² Var(X)\n\n' +
-          'The **coefficient of variation** (CV = sigma/mean) allows comparison of spread between datasets with different units or scales — rainfall variability across monsoon years vs. temperature variability.\n\n' +
-          '**Chebyshev\'s inequality** (works for ANY distribution): at least `1 - 1/k²` of data lies within k standard deviations. For k=2: at least 75%. For k=3: at least 89%. No normality assumption needed.',
+          '**Variance rules — derived, not memorised:**\n\n' +
+          '**Rule 1: Var(aX + b) = a² Var(X)**\n\n' +
+          'Adding a constant b shifts all values but doesn\'t change spread → Var unchanged. ' +
+          'Multiplying by a scales every deviation by a → squared deviations scale by a².\n\n' +
+          'Example: Convert temperatures from °C to °F: F = 1.8C + 32. If Var(C) = 25, then Var(F) = 1.8² × 25 = **81**.\n\n' +
+          '**Rule 2: Var(X + Y) = Var(X) + Var(Y) (if independent)**\n\n' +
+          'Your exam has two sections. Section A has σ = 5 points, Section B has σ = 8 points. ' +
+          'Total variance = 25 + 64 = 89. Total σ = √89 ≈ **9.4 points** (NOT 5 + 8 = 13!).\n\n' +
+          'Standard deviations don\'t add directly — variances do. This is why portfolio diversification works: ' +
+          'combining uncorrelated investments reduces total risk (σ of portfolio < sum of individual σs).\n\n' +
+          '**Chebyshev\'s inequality — proof sketch:**\n\n' +
+          'For ANY distribution: P(|X − μ| ≥ kσ) ≤ 1/k²\n\n' +
+          'Proof: Var(X) = E[(X−μ)²] ≥ E[(X−μ)² × 1(|X−μ| ≥ kσ)] ≥ k²σ² × P(|X−μ| ≥ kσ). ' +
+          'Divide both sides by k²σ²: P(|X−μ| ≥ kσ) ≤ σ²/(k²σ²) = 1/k². ∎\n\n' +
+          '| k | At least this fraction within kσ | Normal distribution (actual) |\n' +
+          '|---|---|---|\n' +
+          '| 2 | 75% | 95.4% |\n' +
+          '| 3 | 88.9% | 99.7% |\n' +
+          '| 4 | 93.8% | 99.99% |\n\n' +
+          'Chebyshev is weak but universal — it works for skewed, multimodal, ANY shape. The normal rule (68-95-99.7) is tighter but only works for bell curves.',
         interactive: { type: 'python-playground' as const, props: { starterCode: 'import math\n\ndata = [2, 4, 4, 4, 5, 5, 7, 9]\nn = len(data)\nmean = sum(data) / n\n\n# Variance and standard deviation\nvar_pop = sum((x - mean)**2 for x in data) / n\nvar_sample = sum((x - mean)**2 for x in data) / (n - 1)\nsd = math.sqrt(var_pop)\n\nprint(f"Data: {data}")\nprint(f"Mean: {mean}")\nprint(f"Population variance: {var_pop}")\nprint(f"Sample variance: {var_sample:.2f}")\nprint(f"Std deviation: {sd:.2f}")\n\n# Z-scores\nprint("\\nZ-scores:")\nfor x in data:\n    z = (x - mean) / sd\n    print(f"  x={x}  z={z:+.2f}")', title: 'Try it — Variance & Std Dev' } },
       },
       {
@@ -4381,11 +4409,24 @@ export const scienceReferences: ReferenceGuide[] = [
           'z = (130-100)/15 = 2.0. Area to the left of z=2 is 0.9772, so area to the right is 1 - 0.9772 = **2.28%**.\n\n' +
           '*See also: The Gaussian distribution in Machine Learning — how it is used in classification, anomaly detection, and Bayesian inference.*',
         advancedContent:
-          '**The probability density function:**\n\n' +
-          '`f(x) = (1 / (sigma * sqrt(2*pi))) * exp(-(x-mu)² / (2*sigma²))`\n\n' +
-          'The integral of this from -infinity to +infinity equals exactly 1, but it has no closed-form antiderivative — hence the need for z-tables or numerical methods.\n\n' +
-          '**Multivariate normal distribution** in d dimensions is parameterised by a mean vector mu and covariance matrix Sigma. The Mahalanobis distance `sqrt((x-mu)^T Sigma^-1 (x-mu))` generalises the z-score to multiple correlated variables — used in anomaly detection, pattern recognition, and the Kalman filter (GPS, spacecraft navigation).\n\n' +
-          '**Q-Q plots** compare observed quantiles against theoretical normal quantiles — deviations from a straight line reveal non-normality (heavy tails, skew, multimodality).',
+          '**Where the bell curve formula comes from:**\n\n' +
+          '`f(x) = (1 / (σ√(2π))) × exp(−(x−μ)² / (2σ²))`\n\n' +
+          'This looks mysterious. Here\'s the logic behind each piece:\n\n' +
+          '1. **exp(−x²)** is the basic bell shape — it\'s the unique function that is its own Fourier transform\n' +
+          '2. **−(x−μ)²** shifts the bell to centre at μ\n' +
+          '3. **/(2σ²)** controls the width — larger σ makes the bell wider\n' +
+          '4. **1/(σ√(2π))** is the normalising constant that makes the total area = 1\n\n' +
+          '**Proving the total area = 1** requires a clever trick (the Gaussian integral):\n\n' +
+          'Let I = ∫₋∞^∞ e^(−x²) dx. Then I² = ∫∫ e^(−x²−y²) dx dy. Switch to polar coordinates: x² + y² = r², dx dy = r dr dθ.\n' +
+          'I² = ∫₀^(2π) ∫₀^∞ e^(−r²) × r dr dθ = 2π × [−½ e^(−r²)]₀^∞ = 2π × ½ = π. So I = √π.\n' +
+          'Therefore ∫₋∞^∞ e^(−x²/(2σ²)) dx = σ√(2π), confirming the normalisation constant.\n\n' +
+          '**The integral has no closed form** — you cannot write ∫e^(−x²) dx in terms of elementary functions. ' +
+          'This is why we need z-tables or the error function erf(x). Every z-table entry was computed numerically.\n\n' +
+          '**Multivariate normal — extending to 2+ variables:**\n\n' +
+          'For d dimensions, μ becomes a vector and σ² becomes a covariance matrix Σ. The Mahalanobis distance ' +
+          'D = √((x−μ)ᵀ Σ⁻¹ (x−μ)) generalises the z-score: it accounts for different scales AND correlations between variables. ' +
+          'Points at equal D form ellipsoids (the contour lines). This is the foundation of the Kalman filter — ' +
+          'the algorithm GPS uses to fuse noisy sensor readings into a smooth position estimate.',
         diagram: 'GaussianExplorerDiagram',
         interactive: { type: 'python-playground' as const, props: { starterCode: 'import math\n\ndef normal_pdf(x, mu, sigma):\n    coeff = 1 / (sigma * math.sqrt(2 * math.pi))\n    exponent = -((x - mu) ** 2) / (2 * sigma ** 2)\n    return coeff * math.exp(exponent)\n\nmu, sigma = 152, 6  # Women\'s heights in cm\n\nprint(f"Normal distribution: mu={mu}, sigma={sigma}")\nprint(f"\\nHeight  PDF value")\nprint("-" * 22)\nfor h in range(136, 170, 2):\n    pdf = normal_pdf(h, mu, sigma)\n    bar = "#" * int(pdf * 300)\n    print(f"  {h} cm  {bar}")\n\nprint(f"\\n68% range: {mu-sigma} to {mu+sigma} cm")\nprint(f"95% range: {mu-2*sigma} to {mu+2*sigma} cm")', title: 'Try it — Normal Distribution' } },
       },
@@ -4423,11 +4464,23 @@ export const scienceReferences: ReferenceGuide[] = [
           '| z-score for 85 | (85 - 80) / 4 = 1.25 |\n' +
           '| P(X >= 85) | 1 - 0.8944 = **~10.6%** |',
         advancedContent:
-          '**Related distributions:**\n\n' +
-          '- **Geometric** — number of trials until the first success: P(X = k) = (1-p)^(k-1) * p\n' +
-          '- **Negative binomial** — trials until r-th success\n' +
-          '- **Poisson** — limit of binomial as n -> infinity, p -> 0, np = lambda. Used for rare events: radioactive decays, server requests, typos per page\n\n' +
-          'The **Poisson limit theorem:** If X ~ Binomial(n, p) with n large and p small, then X is approximately Poisson(lambda = np). P(X = k) = lambda^k * e^(-lambda) / k!.',
+          '**Deriving the mean of the binomial distribution:**\n\n' +
+          'X = number of successes in n trials. Write X = X₁ + X₂ + ... + Xₙ, where Xᵢ = 1 if trial i succeeds, 0 otherwise.\n\n' +
+          'E[Xᵢ] = 1×p + 0×(1−p) = p\n\n' +
+          'By linearity of expectation: E[X] = E[X₁] + E[X₂] + ... + E[Xₙ] = **np** ∎\n\n' +
+          '**Deriving the variance:**\n\n' +
+          'Var(Xᵢ) = E[Xᵢ²] − (E[Xᵢ])² = p − p² = p(1−p)\n\n' +
+          'Since trials are independent: Var(X) = Var(X₁) + ... + Var(Xₙ) = **np(1−p)** ∎\n\n' +
+          '**The geometric distribution — derived from binomial thinking:**\n\n' +
+          '"How many trials until the first success?" If each trial has probability p:\n' +
+          '- Success on trial 1: P = p\n' +
+          '- Success on trial 2 (fail then succeed): P = (1−p)×p\n' +
+          '- Success on trial k: P = (1−p)^(k−1) × p\n\n' +
+          'Mean waiting time = 1/p. If a bus comes with probability 0.1 each minute, you wait on average 10 minutes.\n\n' +
+          '**The Poisson limit — why rare events follow Poisson:**\n\n' +
+          'In 10,000 emails, each has 0.02% chance of being phishing. n = 10000, p = 0.0002, λ = np = 2. ' +
+          'Computing Binomial(10000, 0.0002) requires factorials of 10000. Poisson(2) gives the same answer with a pocket calculator: ' +
+          'P(X=k) = 2ᵏ e⁻² / k!. The derivation (shown in the Poisson section) replaces C(n,k)pᵏ(1−p)ⁿ⁻ᵏ with λᵏe⁻λ/k! as n→∞.',
         interactive: { type: 'python-playground' as const, props: { starterCode: 'import math\n\ndef binomial_pmf(n, k, p):\n    comb = math.factorial(n) // (math.factorial(k) * math.factorial(n - k))\n    return comb * p**k * (1 - p)**(n - k)\n\nn, p = 10, 0.5  # 10 coin flips, fair coin\nprint(f"Binomial(n={n}, p={p})")\nprint(f"Mean = {n*p}, SD = {math.sqrt(n*p*(1-p)):.2f}")\nprint()\nfor k in range(n + 1):\n    prob = binomial_pmf(n, k, p)\n    bar = "#" * int(prob * 80)\n    print(f"  k={k:>2}  P={prob:.4f}  {bar}")', title: 'Try it — Binomial Distribution' } },
       },
       {
@@ -4467,14 +4520,27 @@ export const scienceReferences: ReferenceGuide[] = [
           '| 2023 | 195 | 3.5 |\n\n' +
           'If r² = 0.92, rainfall explains **92%** of the variation in yield. The remaining 8% comes from other factors (soil, fertiliser, pests).',
         advancedContent:
-          '**Multiple regression** extends to many predictors:\n\n' +
-          '`y = b0 + b1*x1 + b2*x2 + ... + bn*xn`\n\n' +
-          'The "line" becomes a hyperplane in n+1 dimensions. Solved via the **normal equations:** `b = (X^T X)^(-1) X^T y`.\n\n' +
-          '**Diagnostics:**\n\n' +
-          '- **Residual plots** should show random scatter (not patterns)\n' +
-          '- **Multicollinearity** (correlated predictors) inflates coefficient variance — check using VIF (variance inflation factor)\n' +
-          '- **Overfitting** occurs when the model captures noise rather than signal — use cross-validation or regularisation (Ridge, Lasso)\n\n' +
-          '**Logistic regression** models binary outcomes (yes/no) using P(y=1) = 1/(1 + e^(-z)) — the foundation of classification in machine learning.',
+          '**Deriving the least-squares slope by hand:**\n\n' +
+          'We want the line y = mx + b that minimises S = Σ(yᵢ − mxᵢ − b)².\n\n' +
+          '1. Take ∂S/∂b = 0: −2Σ(yᵢ − mxᵢ − b) = 0 → b = ȳ − mx̄\n' +
+          '2. Take ∂S/∂m = 0: −2Σxᵢ(yᵢ − mxᵢ − b) = 0\n' +
+          '3. Substitute b from step 1 and simplify:\n\n' +
+          '**m = Σ(xᵢ − x̄)(yᵢ − ȳ) / Σ(xᵢ − x̄)²** ∎\n\n' +
+          'This is the covariance of x and y divided by the variance of x: m = Cov(x,y)/Var(x).\n\n' +
+          '**Worked example with our rainfall/yield data:**\n\n' +
+          '| xᵢ−x̄ | yᵢ−ȳ | (xᵢ−x̄)(yᵢ−ȳ) | (xᵢ−x̄)² |\n' +
+          '|--------|--------|----------------|----------|\n' +
+          '| −6.25 | −0.15 | 0.94 | 39.06 |\n' +
+          '| 23.75 | 0.45 | 10.69 | 564.06 |\n' +
+          '| −26.25 | −0.45 | 11.81 | 689.06 |\n' +
+          '| 8.75 | 0.15 | 1.31 | 76.56 |\n' +
+          '| **Sum** | | **24.75** | **1368.75** |\n\n' +
+          'm = 24.75/1368.75 = **0.0181** tonnes per cm of rain.\n\n' +
+          '**Multiple regression — the matrix form:**\n\n' +
+          'With many predictors: **b = (XᵀX)⁻¹Xᵀy**. Each coefficient bᵢ measures the effect of predictor xᵢ ' +
+          'AFTER controlling for all other predictors. If rainfall and fertiliser both predict yield, the regression separates their individual contributions.\n\n' +
+          '**Residual diagnostics:** Plot residuals (yᵢ − ŷᵢ) vs fitted values. Random scatter = good model. ' +
+          'A funnel shape = variance increases with y (heteroscedasticity). A curve = the relationship isn\'t linear (try adding x² term).',
         interactive: { type: 'python-playground' as const, props: { starterCode: '# Simple linear regression from scratch\nrain = [180, 210, 160, 195, 220, 175, 200]\nyield_t = [3.2, 3.8, 2.9, 3.5, 4.1, 3.0, 3.6]\nn = len(rain)\n\n# Calculate means\nx_bar = sum(rain) / n\ny_bar = sum(yield_t) / n\n\n# Slope and intercept\nnum = sum(rain[i]*yield_t[i] for i in range(n)) - n*x_bar*y_bar\nden = sum(rain[i]**2 for i in range(n)) - n*x_bar**2\nm = num / den\nb = y_bar - m * x_bar\n\n# Correlation coefficient\nss_xy = num\nss_xx = den\nss_yy = sum(yield_t[i]**2 for i in range(n)) - n*y_bar**2\nr = ss_xy / (ss_xx * ss_yy) ** 0.5\n\nprint(f"Best-fit line: y = {m:.4f}x + {b:.2f}")\nprint(f"Correlation r = {r:.3f}")\nprint(f"R-squared = {r**2:.3f}")\nprint(f"\\nPredicted yield at 190cm rain: {m*190+b:.2f} tonnes/ha")', title: 'Try it — Regression' } },
       },
       {
@@ -4545,14 +4611,24 @@ export const scienceReferences: ReferenceGuide[] = [
           '**Connection to Poisson:** If N(t) ~ Poisson(λt), the inter-arrival times Tᵢ are iid Exp(λ). Conversely, if waiting times are Exp(λ), the count process is Poisson.\n\n' +
           '**Minimum of exponentials:** If T₁ ~ Exp(λ₁) and T₂ ~ Exp(λ₂), then min(T₁,T₂) ~ Exp(λ₁+λ₂) — the first of two independent events happens at the combined rate.',
         advancedContent:
-          '**Derivation from Poisson:**\n\n' +
-          'P(T > t) = P(no events in [0,t]) = P(N(t) = 0) = e⁻λᵗ\n\n' +
-          'Therefore P(T ≤ t) = 1 − e⁻λᵗ, and differentiating gives f(t) = λe⁻λᵗ ∎\n\n' +
-          '**Generalizations:**\n\n' +
-          '- **Gamma(α, λ)** — sum of α independent Exp(λ) variables. Models the time until the α-th event.\n' +
-          '- **Weibull(k, λ)** — generalized exponential where failure rate changes with time. k=1 is exponential, k>1 models wear-out failure.\n' +
-          '- **Erlang(k, λ)** — Gamma with integer α, used in queuing theory.\n\n' +
-          '**Maximum likelihood:** Given observations t₁,...,tₙ, the MLE for λ is `λ̂ = n / Σtᵢ` — simply the reciprocal of the sample mean.',
+          '**Derivation from Poisson — step by step:**\n\n' +
+          'T = time until first event. If events follow a Poisson process with rate λ:\n\n' +
+          '1. P(T > t) = P(zero events in interval [0, t])\n' +
+          '2. From Poisson: P(N(t) = 0) = (λt)⁰ × e⁻λᵗ / 0! = e⁻λᵗ\n' +
+          '3. CDF: P(T ≤ t) = 1 − P(T > t) = 1 − e⁻λᵗ\n' +
+          '4. Differentiate to get PDF: f(t) = d/dt [1 − e⁻λᵗ] = **λe⁻λᵗ** ∎\n\n' +
+          '**Deriving the mean by integration:**\n\n' +
+          'E[T] = ∫₀^∞ t × λe⁻λᵗ dt. Integrate by parts (u = t, dv = λe⁻λᵗdt):\n\n' +
+          '= [−te⁻λᵗ]₀^∞ + ∫₀^∞ e⁻λᵗ dt = 0 + [−(1/λ)e⁻λᵗ]₀^∞ = **1/λ** ∎\n\n' +
+          '**Proving the memoryless property:**\n\n' +
+          'P(T > s+t | T > s) = P(T > s+t) / P(T > s) = e⁻λ⁽ˢ⁺ᵗ⁾ / e⁻λˢ = e⁻λᵗ = P(T > t) ∎\n\n' +
+          'The exponential is the ONLY continuous distribution with this property. It follows directly from the exponent rule e^(a+b) = e^a × e^b.\n\n' +
+          '**Maximum likelihood estimation — deriving the estimator:**\n\n' +
+          'Given data t₁, t₂, ..., tₙ from Exp(λ):\n' +
+          '1. Likelihood: L(λ) = Π λe⁻λtᵢ = λⁿ e⁻λΣtᵢ\n' +
+          '2. Log-likelihood: l(λ) = n ln(λ) − λΣtᵢ\n' +
+          '3. Set derivative to zero: dl/dλ = n/λ − Σtᵢ = 0\n' +
+          '4. Solve: **λ̂ = n / Σtᵢ = 1/t̄** — the reciprocal of the sample mean ∎',
         interactive: { type: 'python-playground' as const, props: { starterCode: 'import numpy as np\n\n# Exponential distribution: waiting times\nlam = 0.1  # rate: 1 bus per 10 minutes\nmean_wait = 1 / lam\n\nprint(f"Rate: {lam} per minute")\nprint(f"Mean wait: {mean_wait} minutes")\nprint()\n\n# Probability of waiting at most t minutes\nfor t in [5, 10, 15, 20, 30]:\n    p = 1 - np.exp(-lam * t)\n    print(f"P(wait <= {t:>2} min) = {p:.1%}")\n\n# Simulate 1000 waits\nwaits = np.random.exponential(mean_wait, 1000)\nprint(f"\\nSimulated mean wait: {waits.mean():.1f} min")\nprint(f"Simulated std dev:   {waits.std():.1f} min")', title: 'Try it — Exponential' } },
       },
       {
@@ -4591,14 +4667,26 @@ export const scienceReferences: ReferenceGuide[] = [
           'df = categories − 1 = 3. Critical value at α=0.05: 7.81. Since 2.00 < 7.81, **fail to reject H₀**.\n\n' +
           '**Test of independence:** Are two categorical variables related? Build a contingency table, compute expected frequencies as (row total × column total) / grand total.',
         advancedContent:
-          '**Derivation:** The chi-squared distribution with k degrees of freedom has PDF:\n\n' +
-          '`f(x) = x^(k/2-1) × e^(-x/2) / (2^(k/2) × Γ(k/2))` for x > 0\n\n' +
-          'This is a special case of the **Gamma distribution**: χ²ₖ = Gamma(k/2, 1/2).\n\n' +
-          '**Connection to the normal:** If X ~ N(μ,σ²), then (X−μ)²/σ² ~ χ²₁. This is why the chi-squared appears in variance estimation: `(n−1)s²/σ² ~ χ²ₙ₋₁`.\n\n' +
-          '**Related distributions:**\n\n' +
-          '- **t-distribution:** Z/√(χ²ₖ/k) ~ t(k) — used for small-sample means\n' +
-          '- **F-distribution:** (χ²ₘ/m) / (χ²ₙ/n) ~ F(m,n) — used in ANOVA\n\n' +
-          '**Pearson\'s theorem:** Under H₀, the χ² statistic converges to a χ² distribution as sample size → ∞. This is why the test works — we compare the observed statistic to the known distribution to get a p-value.',
+          '**Where the chi-squared distribution comes from — built from normals:**\n\n' +
+          'If Z ~ N(0,1), then Z² has a new distribution. What is it?\n\n' +
+          '1. Z is symmetric around 0 → Z² is always positive\n' +
+          '2. Small values of |Z| are common → Z² is right-skewed\n' +
+          '3. This distribution is χ² with 1 degree of freedom\n\n' +
+          'Add k independent copies: χ²ₖ = Z₁² + Z₂² + ... + Zₖ². The mean = k, variance = 2k.\n\n' +
+          '**Why it appears in variance estimation:**\n\n' +
+          'The sample variance s² = Σ(xᵢ − x̄)²/(n−1). Each (xᵢ − x̄)/σ is approximately standard normal, ' +
+          'so Σ((xᵢ − x̄)/σ)² is a sum of squared normals → chi-squared. The mean x̄ "uses up" one degree of freedom, ' +
+          'leaving n−1. Therefore (n−1)s²/σ² ~ χ²ₙ₋₁.\n\n' +
+          '**This gives us a confidence interval for the variance:**\n\n' +
+          'If sample s² = 16 with n = 25 (so df = 24):\n' +
+          '- χ²₀.₀₂₅ = 39.36 (upper), χ²₀.₉₇₅ = 12.40 (lower) — from tables\n' +
+          '- 95% CI for σ²: [(n−1)s²/χ²_upper, (n−1)s²/χ²_lower] = [24×16/39.36, 24×16/12.40] = [**9.76, 30.97**]\n\n' +
+          '**The family of distributions built from chi-squared:**\n\n' +
+          '| Distribution | Definition | Used for |\n' +
+          '|---|---|---|\n' +
+          '| **t(k)** | Z / √(χ²ₖ/k) | Small-sample means (n < 30). Wider tails than normal. |\n' +
+          '| **F(m,n)** | (χ²ₘ/m) / (χ²ₙ/n) | Comparing two variances (ANOVA, regression overall F-test) |\n\n' +
+          'The t-distribution with k → ∞ converges to the normal. This is why z-tests and t-tests give the same answer for large samples.',
         interactive: { type: 'python-playground' as const, props: { starterCode: 'import numpy as np\n\n# Chi-squared test: is this coin fair?\nobserved = [60, 40]  # 60 heads, 40 tails\nexpected = [50, 50]  # fair coin\n\nchi2 = sum((o - e)**2 / e for o, e in zip(observed, expected))\ndf = len(observed) - 1\n\nprint("Chi-squared goodness of fit")\nprint(f"Observed: {observed}")\nprint(f"Expected: {expected}")\nprint(f"Chi-squared = {chi2:.2f}")\nprint(f"Degrees of freedom = {df}")\nprint()\n\n# Critical values (alpha = 0.05)\ncritical = {1: 3.84, 2: 5.99, 3: 7.81, 4: 9.49}\ncv = critical.get(df, 3.84)\nprint(f"Critical value (df={df}, alpha=0.05) = {cv}")\nprint(f"Result: {\"REJECT H0 - significant!\" if chi2 > cv else \"Fail to reject H0\"}")', title: 'Try it — Chi-Squared' } },
       },
     ],
@@ -4622,7 +4710,23 @@ export const scienceReferences: ReferenceGuide[] = [
         intermediateContent:
           'Vector operations with components: given **a** = (3, -2) and **b** = (1, 5), then a + b = (4, 3), a - b = (2, -7), 3a = (9, -6). Magnitude: |a| = √(9+4) = √13 ≈ 3.61. Unit vector: â = (3/√13, -2/√13). Dot product: a·b = 3(1) + (-2)(5) = -7. Since a·b < 0, the angle between them is obtuse. The exact angle: cos θ = -7/(√13 × √26) = -7/√338, so θ ≈ **112.4°**.',
         advancedContent:
-          'In physics and engineering, vectors transform under coordinate rotations — this property formally defines what a vector is. **Tensors** generalize vectors: a scalar is rank-0, a vector is rank-1, a matrix is rank-2, and higher-rank tensors describe stress, strain, and electromagnetic fields. The stress tensor σᵢⱼ at a point in a material encodes the force per unit area on every possible internal surface — essential to structural engineering, fluid dynamics, and general relativity (where spacetime curvature is described by the rank-4 Riemann tensor).',
+          '**Tensors — what they actually are, not just the name:**\n\n' +
+          'A scalar (temperature: 25°C) is a single number — rank 0. A vector (velocity: 3 m/s east, 4 m/s north) is a list of numbers — rank 1. ' +
+          'A matrix is a grid of numbers — rank 2. The pattern continues: rank 3, 4, ...\n\n' +
+          '**The stress tensor — a rank-2 example you can feel:**\n\n' +
+          'Squeeze a rubber block. At every point inside, forces act on every possible internal surface. ' +
+          'The stress tensor σᵢⱼ is a 3×3 matrix:\n\n' +
+          '| | Force in x | Force in y | Force in z |\n' +
+          '|---|---|---|---|\n' +
+          '| Surface facing x | σ_xx (compression) | σ_xy (shear) | σ_xz (shear) |\n' +
+          '| Surface facing y | σ_yx (shear) | σ_yy (compression) | σ_yz (shear) |\n' +
+          '| Surface facing z | σ_zx (shear) | σ_zy (shear) | σ_zz (compression) |\n\n' +
+          'The diagonal entries are compression/tension. The off-diagonal entries are shear (sliding forces). ' +
+          'This 3×3 matrix at every point is what structural engineers compute to know if a bridge will hold.\n\n' +
+          '**Why "tensor" and not just "matrix"?** A tensor has a specific transformation rule under coordinate rotation. ' +
+          'If you rotate your coordinate axes, the components change but the physical quantity (stress, curvature) stays the same. ' +
+          'A random 3×3 matrix of numbers is NOT a tensor — it must transform correctly. This rule is what makes tensors useful in physics: ' +
+          'the laws of physics don\'t depend on which direction you call "x."',
         diagram: 'VectorAdditionDiagram',
       },
       {
@@ -4632,7 +4736,24 @@ export const scienceReferences: ReferenceGuide[] = [
         intermediateContent:
           'The cross product **a × b** gives a vector perpendicular to both inputs. For a = (2, 3, 0) and b = (0, 1, 4): a × b = (3×4 − 0×1, 0×0 − 2×4, 2×1 − 3×0) = **(12, −8, 2)**. Its magnitude |a × b| = √(144+64+4) = √212 ≈ 14.56 equals the area of the parallelogram spanned by a and b. The scalar triple product a·(b × c) gives the volume of the parallelepiped. Right-hand rule: curl the fingers of your right hand from a toward b — your thumb points in the direction of a × b.',
         advancedContent:
-          'In computer graphics, normal vectors (computed via cross products of edge vectors) determine how surfaces reflect light — the dot product of the normal with the light direction gives the brightness at each point (Lambert\'s cosine law). Homogeneous coordinates add a 4th component to 3D vectors, enabling translation (not just rotation and scaling) to be expressed as matrix multiplication. The **quaternion** system (4D extension of complex numbers) represents 3D rotations without gimbal lock — used in game engines, drone flight controllers, and spacecraft attitude determination. Quaternion rotation requires only 4 numbers vs. 9 for a rotation matrix, with smoother interpolation.',
+          '**Lambert\'s cosine law — how dot products light 3D scenes:**\n\n' +
+          'A surface faces direction **n** (the normal vector). Light comes from direction **L**. How bright is the surface?\n\n' +
+          'Brightness = max(0, **n** · **L**) = max(0, |n||L|cos θ)\n\n' +
+          'When θ = 0° (light hits straight on): cos 0 = 1 → full brightness.\n' +
+          'When θ = 90° (light grazes the surface): cos 90 = 0 → no illumination.\n\n' +
+          'This single dot product is computed for every pixel in every frame of every 3D game — billions of times per second. The normal vector at each vertex is the cross product of the triangle\'s two edge vectors.\n\n' +
+          '**Homogeneous coordinates — the trick that makes translation a matrix multiply:**\n\n' +
+          'Rotation and scaling are matrix multiplications, but translation (moving) is addition: x\' = x + dx. ' +
+          'This inconsistency is annoying. Fix: add a 4th coordinate (w=1) to every 3D point: (x, y, z, 1).\n\n' +
+          'Now translation is also a matrix multiply:\n' +
+          '[1 0 0 dx] [x]   [x+dx]\n' +
+          '[0 1 0 dy] [y] = [y+dy]\n' +
+          '[0 0 1 dz] [z]   [z+dz]\n' +
+          '[0 0 0  1] [1]   [  1 ]\n\n' +
+          'ALL transformations (rotate, scale, translate, perspective projection) become 4×4 matrix multiplications. ' +
+          'Chain them: T_total = T_translate × T_rotate × T_scale. GPUs are built to multiply 4×4 matrices at extreme speed because of this.\n\n' +
+          '**Quaternions** (4D numbers q = w + xi + yj + zk) represent rotations with 4 numbers instead of 9 (rotation matrix). ' +
+          'Advantage: smooth interpolation between rotations (SLERP) without gimbal lock — essential for drone flight controllers and game cameras.',
       },
       {
         title: 'Matrices and Multiplication',
@@ -4641,7 +4762,21 @@ export const scienceReferences: ReferenceGuide[] = [
         intermediateContent:
           'The determinant of a 2×2 matrix [a b; c d] is ad − bc. If det = 0, the matrix is singular (no inverse, the transformation collapses 2D to a line or point). For [3 1; 2 4]: det = 12 − 2 = 10, inverse = (1/10)[4 −1; −2 3]. Check: [3 1; 2 4] × (1/10)[4 −1; −2 3] = [1 0; 0 1] ✓. Solving Ax = b: if A = [2 1; 5 3] and b = [8; 19], then x = A⁻¹b = [3 −1; −5 2][8; 19] = [24−19; −40+38] = **(5, −2)**.',
         advancedContent:
-          'The **eigenvalue decomposition** A = PDP⁻¹ (where D is diagonal with eigenvalues and P contains eigenvectors) reveals the fundamental behavior of a matrix. Eigenvalues of the Google PageRank matrix determine website rankings; eigenvalues of a vibrating structure determine its natural frequencies; eigenvalues of a population matrix determine growth rates. The **Singular Value Decomposition (SVD)** A = UΣVᵀ works for ANY matrix (even non-square) and is the foundation of data compression (keep only the largest singular values), recommendation systems (Netflix), and principal component analysis in statistics.',
+          '**Eigenvalues — finding them by hand for a 2×2 matrix:**\n\n' +
+          'Given A = [4 1; 2 3]. An eigenvector **v** satisfies A**v** = λ**v** — the matrix only stretches it, no rotation.\n\n' +
+          '1. Rewrite: (A − λI)**v** = 0. For a non-zero solution, det(A − λI) = 0.\n' +
+          '2. det([4−λ, 1; 2, 3−λ]) = (4−λ)(3−λ) − 2 = λ² − 7λ + 10 = 0\n' +
+          '3. Factor: (λ−5)(λ−2) = 0 → **λ₁ = 5, λ₂ = 2**\n\n' +
+          'For λ₁ = 5: (A−5I)**v** = [−1, 1; 2, −2]**v** = 0 → v₁ = (1, 1)\n' +
+          'For λ₂ = 2: (A−2I)**v** = [2, 1; 2, 1]**v** = 0 → v₂ = (1, −2)\n\n' +
+          '**Interpretation:** A stretches the direction (1,1) by factor 5 and the direction (1,−2) by factor 2. Any input vector decomposes into these two directions.\n\n' +
+          '**SVD — works for ANY matrix (even non-square):**\n\n' +
+          'A = UΣVᵀ, where U and V are rotation matrices and Σ is diagonal (singular values).\n\n' +
+          '**Image compression example:** A 1000×1000 grayscale image has 1 million values. SVD decomposes it into singular values σ₁ ≥ σ₂ ≥ ... ≥ σ₁₀₀₀. ' +
+          'Keep only the top 50: the reconstructed image uses 50×(1000+1000+1) ≈ 100,000 values — 10× compression — ' +
+          'and looks nearly identical because the discarded singular values were tiny (they captured noise, not structure).\n\n' +
+          '**PageRank:** Google models the web as a matrix where entry Aᵢⱼ = probability of clicking from page j to page i. ' +
+          'The dominant eigenvector (λ = 1) gives the steady-state probability of being on each page — that\'s the page ranking.',
         diagram: 'MatrixMultiplicationDiagram',
       },
       {
