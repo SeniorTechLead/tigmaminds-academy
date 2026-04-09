@@ -17,6 +17,7 @@ import SqlPlayground from '../SqlPlayground';
 import TsPlayground from '../TsPlayground';
 import HtmlPlayground from '../HtmlPlayground';
 import PythonPlayground from '../PythonPlayground';
+import PracticeProblems from '../interactive/PracticeProblems';
 import { useAuth } from '../../contexts/AuthContext';
 import SignUpGate from '../SignUpGate';
 
@@ -283,6 +284,19 @@ export default function SectionRenderer({ section, level = 0 }: Props) {
             <SignUpGate message="Sign up free to use interactive tools" compact />
           ) : (
             renderInteractive(section.interactive)
+          )}
+        </div>
+      )}
+
+      {/* Practice problems — button-accessed, not inline */}
+      {section.practice && (
+        <div className="mt-3">
+          {!isSignedIn ? (
+            <SignUpGate message="Sign up free to practice problems" compact />
+          ) : (
+            <ClientOnly>
+              <PracticeProblems practice={section.practice} />
+            </ClientOnly>
           )}
         </div>
       )}

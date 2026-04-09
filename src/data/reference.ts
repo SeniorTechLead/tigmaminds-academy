@@ -22,6 +22,41 @@ export interface InteractiveConfig {
   props: Record<string, unknown>;
 }
 
+// ─── Practice Problems ─────────────────────────────────────
+
+export interface PracticeProblemStep {
+  label: string;        // "Step 1: Find the mean"
+  content: string;      // Markdown — rendered with bold/code/tables
+}
+
+export type ProblemVisualType =
+  | { kind: 'dice'; count: number; values?: number[] }
+  | { kind: 'coins'; count: number; heads?: number }
+  | { kind: 'cards'; drawn: string[] }                         // e.g. ["A♠","K♥","3♦"]
+  | { kind: 'bar-chart'; labels: string[]; values: number[]; highlight?: number }
+  | { kind: 'waiting'; avgMinutes: number; markTime?: number } // animated queue/timeline
+  | { kind: 'scatter'; points: [number, number][]; showLine?: boolean }
+  | { kind: 'distribution'; type: 'normal' | 'binomial' | 'poisson' | 'exponential' | 'chi-squared'; params: Record<string, number>; markX?: number; shadeFrom?: number; shadeTo?: number };
+
+export interface PracticeProblem {
+  id: string;
+  difficulty: 1 | 2 | 3;
+  question: string;                    // Markdown
+  hint?: string;
+  steps: PracticeProblemStep[];        // step-by-step hand solution
+  answer: string;                      // display-friendly final answer
+  visual?: ProblemVisualType;
+  code?: string;                       // Python starter code (for code practice variant)
+  codeSolution?: string;               // Python solution (revealed on request)
+}
+
+export interface PracticeSet {
+  title: string;                       // "Practice — Mean, Median, Mode"
+  problems: PracticeProblem[];
+}
+
+// ─── Reference Section ─────────────────────────────────────
+
 export interface ReferenceSection {
   id?: string;                // unique section identifier (e.g., 'py-strings', 'algo-binary-search')
   title: string;
@@ -31,6 +66,7 @@ export interface ReferenceSection {
   code?: string;
   diagram?: string;           // key into DiagramRegistry
   interactive?: InteractiveConfig;
+  practice?: PracticeSet;            // optional practice problems (accessed via button, not inline)
 }
 
 export interface ReferenceGuide {
