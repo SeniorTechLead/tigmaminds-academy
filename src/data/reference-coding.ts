@@ -3181,7 +3181,24 @@ void loop() {
         intermediateContent:
           'NumPy arrays vs Python lists: np.arange(1_000_000).sum() runs **50-100× faster** than sum(range(1_000_000)) because NumPy uses compiled C loops on contiguous memory. Array creation: np.zeros((3,4)), np.ones(5), np.linspace(0, 2*np.pi, 100), np.random.randn(1000). Array attributes: a.shape, a.dtype, a.ndim, a.size. Reshaping: np.arange(12).reshape(3,4). Broadcasting: a * 2 doubles every element; a + np.array([1,2,3,4]) adds to every row.',
         advancedContent:
-          'NumPy\'s vectorized operations replace Python loops with C-compiled array expressions. Matrix operations: A @ B (multiply), np.linalg.inv(A), np.linalg.eig(A), np.linalg.svd(A). np.fft.fft(signal) computes the FFT. Memory layout (row-major vs column-major) affects cache performance — iterating the wrong axis can be 10× slower. Advanced indexing: a[a > threshold] (boolean mask), a[indices] (fancy indexing), np.where(condition, x, y). Structured arrays store heterogeneous data (names, weights, coordinates) in contiguous memory for efficient processing.',
+          '**Linear algebra in NumPy — the operations behind ML:**\n\n' +
+          '| Operation | Code | What it does |\n' +
+          '|---|---|---|\n' +
+          '| Matrix multiply | A @ B | Rows of A dot columns of B — core of neural networks |\n' +
+          '| Inverse | np.linalg.inv(A) | A⁻¹ such that A @ A⁻¹ = I — used in least-squares regression |\n' +
+          '| Eigenvalues | np.linalg.eig(A) | Finds directions where A only scales (no rotation) — PCA |\n' +
+          '| SVD | np.linalg.svd(A) | Decomposes any matrix into rotation × stretch × rotation — image compression, recommendation systems |\n' +
+          '| FFT | np.fft.fft(signal) | Converts time-domain signal to frequency spectrum |\n\n' +
+          '**Memory layout matters for speed:**\n' +
+          'A 2D array can be stored row-by-row (C order, default) or column-by-column (Fortran order). ' +
+          'CPUs load data in chunks (cache lines). If you iterate along the contiguous axis, each cache load gets you 8 useful values. ' +
+          'If you iterate the wrong way, each cache load gets 1 useful value and 7 wasted ones → 3-10× slower.\n\n' +
+          '**Practical rule:** If your array is C-order (default), iterate over rows (axis=1) for fast inner loops. ' +
+          'If operations are slow, check with `a.flags` — if C_CONTIGUOUS is False, call `np.ascontiguousarray(a)` to fix it.\n\n' +
+          '**Advanced indexing:**\n' +
+          '- Boolean mask: `a[a > threshold]` — select elements matching a condition\n' +
+          '- Fancy indexing: `a[[0, 3, 7]]` — select specific indices\n' +
+          '- np.where(condition, x, y) — element-wise if/else: `np.where(temps > 30, "hot", "ok")`',
         diagram: 'NumPyRulerDiagram',
       },
       {
@@ -3198,7 +3215,27 @@ void loop() {
         intermediateContent:
           'NumPy achieves 50-100× speed over Python lists through: (1) contiguous memory layout (no pointer chasing), (2) compiled C/Fortran inner loops (no Python interpreter overhead), (3) SIMD instructions (Single Instruction Multiple Data — process 4-8 numbers simultaneously). Benchmark: squaring 1 million numbers — Python list: ~150ms, NumPy: ~1.5ms. The speedup increases with array size because the fixed overhead of calling NumPy becomes negligible. Memory efficiency: a Python list of 1M integers uses ~28 MB (each int is a 28-byte object), while a NumPy int64 array uses ~8 MB (raw 8-byte values in contiguous memory).',
         advancedContent:
-          'NumPy delegates heavy computation to optimized libraries: BLAS (Basic Linear Algebra Subprograms) for matrix multiplication, LAPACK for eigenvalues and decompositions. These libraries use cache-blocking (processing data in chunks that fit in CPU cache), loop unrolling, and architecture-specific SIMD instructions. Intel\'s MKL and OpenBLAS provide multithreaded implementations. np.dot(A, B) for 1000×1000 matrices runs in ~20ms using these optimized kernels — a naive Python triple loop would take ~3 hours. Understanding this stack matters when debugging performance: if NumPy is slow, check whether you\'re accidentally creating Python loops instead of vectorized operations.',
+          '**The performance stack under NumPy:**\n\n' +
+          'When you write `A @ B` for 1000×1000 matrices, NumPy doesn\'t use Python at all. It calls down through layers of optimization:\n\n' +
+          '```\n' +
+          'Your code: A @ B (Python)\n' +
+          '  → NumPy C code: selects the right BLAS routine\n' +
+          '    → BLAS library (OpenBLAS or Intel MKL): dgemm\n' +
+          '      → Cache-blocked loops (process 64×64 tiles that fit in L1 cache)\n' +
+          '        → SIMD instructions (process 4-8 multiplications simultaneously)\n' +
+          '          → Multiple CPU cores (if MKL/OpenBLAS is multithreaded)\n' +
+          '```\n\n' +
+          '**The speed difference is staggering:**\n' +
+          '| Method | 1000×1000 matrix multiply | Why |\n' +
+          '|---|---|---|\n' +
+          '| Python triple loop | ~3 hours | Interpreter overhead per operation |\n' +
+          '| NumPy (OpenBLAS) | ~20 ms | Compiled C with SIMD + cache blocking |\n' +
+          '| Speedup | **~500,000×** | |\n\n' +
+          '**Debugging slow NumPy code:**\n' +
+          'If your NumPy code is slow, you almost certainly have an accidental Python loop. Common culprits:\n' +
+          '- `for i in range(len(a)): result[i] = a[i] * b[i]` → replace with `result = a * b`\n' +
+          '- Appending to a list in a loop, then converting → pre-allocate with np.empty() and fill\n' +
+          '- Calling a Python function per element → use np.vectorize() (still slow) or rewrite as array operations',
         interactive: {
           type: 'true-false',
           props: {
@@ -3222,7 +3259,27 @@ void loop() {
         intermediateContent:
           'Array creation patterns: np.zeros((rows, cols)) for initialized arrays, np.empty((rows, cols)) for uninitialized (faster but contains garbage), np.full((3,3), 7) for a specific value, np.eye(n) for identity matrix, np.diag([1,2,3]) for diagonal matrix. Random: np.random.seed(42) for reproducibility, np.random.randint(0, 100, size=(5,5)) for integers, np.random.normal(mean, std, size) for Gaussian. Structured arrays: dt = np.dtype([("name", "U20"), ("weight", "f4")]); data = np.array([("Ranga", 4500)], dtype=dt) — named fields like a database row.',
         advancedContent:
-          'Memory layout: np.array([[1,2],[3,4]], order="C") stores rows contiguously (C order), while order="F" stores columns contiguously (Fortran order). Iterating along the contiguous axis is 3-10× faster due to CPU cache behavior. np.ascontiguousarray() converts layout. Views vs copies: slicing creates a view (shared memory): b = a[::2] modifies a. np.copy() creates an independent copy. Check with np.shares_memory(a, b). Memory-mapped files (np.memmap) work with datasets larger than RAM — the OS pages data in/out of memory transparently.',
+          '**Views vs copies — the most common NumPy bug:**\n\n' +
+          'Slicing an array creates a **view** — a window into the same memory, not a separate copy:\n' +
+          '```\n' +
+          'a = np.array([10, 20, 30, 40, 50])\n' +
+          'b = a[1:4]    # b is a VIEW of a\n' +
+          'b[0] = 999    # THIS MODIFIES a!\n' +
+          'print(a)      # [10, 999, 30, 40, 50]  — surprise!\n' +
+          '```\n' +
+          'Fix: `b = a[1:4].copy()` creates an independent copy. Check with `np.shares_memory(a, b)`.\n\n' +
+          '**Rules of thumb:**\n' +
+          '- Basic slicing (a[1:4], a[::2]) → **view** (fast, shares memory)\n' +
+          '- Fancy indexing (a[[0, 2, 4]]) → **copy** (new memory)\n' +
+          '- Boolean indexing (a[a > 3]) → **copy**\n' +
+          '- Reshape → **view** (if possible) or copy (if memory layout requires it)\n\n' +
+          '**Memory-mapped files — when data exceeds RAM:**\n' +
+          'A satellite image might be 50 GB. np.memmap maps the file directly to virtual memory:\n' +
+          '```\n' +
+          'data = np.memmap("satellite.dat", dtype="float32", mode="r", shape=(100000, 50000))\n' +
+          'patch = data[1000:1100, 2000:2100]  # only this 100×100 patch is loaded into RAM\n' +
+          '```\n' +
+          'The OS transparently pages data in/out — you write normal NumPy code, but only the accessed slices actually occupy RAM.',
       },
       {
         title: 'Math on Entire Arrays — No Loops Needed',
@@ -3236,7 +3293,29 @@ void loop() {
         intermediateContent:
           'Element-wise operations: a + b, a * b, a ** 2, np.sqrt(a), np.sin(a) all operate on every element without loops. Comparison: a > 5 returns a boolean array. Aggregation: a.sum(), a.mean(), a.max(), a.min(), a.std() — add axis= parameter for row/column operations: a.sum(axis=0) sums each column, axis=1 sums each row. Universal functions (ufuncs) like np.add, np.multiply accept an out= parameter for in-place operation, avoiding temporary array allocation.',
         advancedContent:
-          'Broadcasting rules: when operating on arrays of different shapes, NumPy automatically expands dimensions. Rules: (1) prepend 1s to the shorter shape, (2) dimensions of size 1 stretch to match the other. Example: (3,4) + (4,) → (3,4) + (1,4) → (3,4) — each row gets the (4,) array added. (3,1) + (1,4) → (3,4) — outer product-like behavior. Broadcasting avoids creating large temporary arrays: centering data (a - a.mean(axis=0)) broadcasts the mean across all rows without copying. Einstein summation (np.einsum("ij,jk->ik", A, B)) provides a powerful notation for complex tensor operations.',
+          '**Broadcasting rules — how NumPy handles mismatched shapes:**\n\n' +
+          'When you add a (3,4) array to a (4,) array, NumPy doesn\'t crash — it "broadcasts" the smaller array to match.\n\n' +
+          '**The two rules:**\n' +
+          '1. If shapes have different numbers of dimensions, prepend 1s to the shorter shape: (4,) becomes (1,4)\n' +
+          '2. Dimensions of size 1 stretch to match the other: (1,4) stretches to (3,4)\n\n' +
+          '**Step-by-step example:**\n' +
+          '```\n' +
+          'data = np.array([[1,2,3,4],    # shape (3,4)\n' +
+          '                 [5,6,7,8],\n' +
+          '                 [9,10,11,12]])\n' +
+          'row_means = data.mean(axis=0)   # shape (4,) → [5.0, 6.0, 7.0, 8.0]\n' +
+          'centered = data - row_means     # (3,4) - (4,) → (3,4) - (1,4) → (3,4)\n' +
+          '```\n' +
+          'Each row has the column mean subtracted — WITHOUT creating a (3,4) temporary copy of row_means. Broadcasting operates element-by-element using the original (4,) array.\n\n' +
+          '**Outer product via broadcasting:**\n' +
+          '```\n' +
+          'a = np.array([1,2,3]).reshape(3,1)  # shape (3,1)\n' +
+          'b = np.array([10,20,30,40])          # shape (4,)\n' +
+          'result = a * b                       # (3,1) × (1,4) → (3,4) multiplication table\n' +
+          '```\n\n' +
+          '**Einstein summation** — a compact notation for complex operations:\n' +
+          '`np.einsum("ij,jk->ik", A, B)` = matrix multiplication. "ij,jk->ik" means: sum over shared index j, keep i and k. ' +
+          'Einsum can express matrix multiply, trace, transpose, outer product, and batch operations in one line.',
       },
       {
         title: 'Filtering Data — Boolean Indexing',
@@ -3250,7 +3329,23 @@ void loop() {
         intermediateContent:
           'Statistical operations: weights = np.array([4500, 3200, 4800, 5100, 3800]). Mean: np.mean(weights) = **4280**. Median: np.median(weights) = 4500. Std dev: np.std(weights) ≈ 716. Percentiles: np.percentile(weights, 75) = 4800. Sorting: np.sort(weights). Argmax: np.argmax(weights) = 3 (index of 5100). Boolean indexing: heavy = weights[weights > 4000] → [4500, 4800, 5100]. These operations run on entire arrays without Python loops.',
         advancedContent:
-          'Real-world data analysis: loading CSV with np.genfromtxt("data.csv", delimiter=",", skip_header=1). Handling missing values: np.nanmean(data) ignores NaN. Linear regression via least squares: β = (XᵀX)⁻¹Xᵀy, computed as np.linalg.lstsq(X, y). Image processing: a grayscale image is a 2D array; image[100:200, 50:150] crops; np.mean(image, axis=0) averages along rows. Memory-mapped arrays (np.memmap) handle datasets larger than RAM by mapping file contents directly to memory.',
+          '**Linear regression with NumPy — the math behind "best fit line":**\n\n' +
+          'Given data points (x₁,y₁)…(xₙ,yₙ), find the line y = β₀ + β₁x that minimizes the sum of squared errors.\n\n' +
+          'The solution: **β = (XᵀX)⁻¹ Xᵀy**, where X is the design matrix (column of 1s + column of x values).\n\n' +
+          '**Worked example in NumPy:**\n' +
+          '```\n' +
+          'x = np.array([1, 2, 3, 4, 5])     # study hours\n' +
+          'y = np.array([52, 58, 65, 70, 78]) # exam scores\n' +
+          'X = np.column_stack([np.ones(5), x])  # [[1,1],[1,2],[1,3],[1,4],[1,5]]\n' +
+          'beta = np.linalg.lstsq(X, y, rcond=None)[0]\n' +
+          '# beta[0] = intercept ≈ 44.6, beta[1] = slope ≈ 6.4\n' +
+          '# Interpretation: each extra study hour ≈ +6.4 points\n' +
+          '```\n\n' +
+          '**Image processing — images are just arrays:**\n' +
+          'A 640×480 grayscale photo is a (480, 640) array of integers 0-255. ' +
+          'Cropping: `image[100:200, 50:150]`. Brightening: `np.clip(image + 50, 0, 255)`. ' +
+          'Blurring: convolve with a 3×3 averaging kernel. Edge detection: convolve with a Sobel kernel. ' +
+          'A color image is (480, 640, 3) — the third axis is [R, G, B]. Grayscale conversion: `0.299*R + 0.587*G + 0.114*B` (human eye sensitivity).',
       },
       {
         title: 'Real-World Data Shapes',
@@ -3264,7 +3359,34 @@ void loop() {
         intermediateContent:
           'Data dimensionality: 1D array = time series or sensor readings, 2D = spreadsheet/table or grayscale image, 3D = color image (height × width × channels) or time series of 2D frames, 4D = batch of images (batch × height × width × channels). Reshape without copying: a.reshape(3, -1) infers the second dimension. Transpose: a.T swaps axes. Stacking: np.vstack((a, b)) vertical, np.hstack horizontal, np.concatenate along any axis. The shape attribute is your most-used diagnostic tool — print(data.shape) should be your first debugging step.',
         advancedContent:
-          'The NumPy → Pandas → scikit-learn pipeline: NumPy arrays hold the numerical data, Pandas DataFrames add labeled columns and handle missing values (NaN), scikit-learn models accept NumPy arrays or DataFrames for training. Image data flows: file → PIL/OpenCV → np.array → normalize to 0-1 → reshape for model. Audio: file → scipy.io.wavfile → np.array → FFT/spectrogram → feature extraction. Geospatial: rasterio reads GeoTIFF satellite images as NumPy arrays with coordinate metadata. Understanding how data flows between these libraries is as important as knowing any single library.',
+          '**The data pipeline — how NumPy connects to everything:**\n\n' +
+          'NumPy is the foundation layer. Every data science library in Python converts to/from NumPy arrays:\n\n' +
+          '**Tabular data pipeline:**\n' +
+          '```\n' +
+          'CSV file → pandas.read_csv() → DataFrame (labeled columns, handles NaN)\n' +
+          '  → df.values → NumPy array → scikit-learn model.fit(X, y)\n' +
+          '```\n\n' +
+          '**Image pipeline:**\n' +
+          '```\n' +
+          'JPEG/PNG → PIL.Image.open() or cv2.imread() → np.array\n' +
+          '  → shape: (height, width, 3) with dtype uint8 (0-255)\n' +
+          '  → normalize: image / 255.0 → float64 (0.0-1.0)\n' +
+          '  → reshape for model: (batch, channels, height, width) for PyTorch\n' +
+          '```\n\n' +
+          '**Audio pipeline:**\n' +
+          '```\n' +
+          'WAV file → scipy.io.wavfile.read() → (sample_rate, np.array)\n' +
+          '  → shape: (num_samples,) for mono, (num_samples, 2) for stereo\n' +
+          '  → np.fft.fft() → frequency spectrum\n' +
+          '  → scipy.signal.spectrogram() → time-frequency representation\n' +
+          '```\n\n' +
+          '**Satellite/GIS pipeline:**\n' +
+          '```\n' +
+          'GeoTIFF → rasterio.open() → np.array + coordinate metadata\n' +
+          '  → shape: (bands, height, width) — bands might be [Red, Green, Blue, NIR, SWIR]\n' +
+          '  → NDVI = (NIR - Red) / (NIR + Red) → vegetation health map\n' +
+          '```\n\n' +
+          'The pattern: every domain loads data into NumPy arrays, then the same tools (statistics, linear algebra, FFT, ML) work regardless of source.',
         interactive: {
           type: 'matching',
           props: {
@@ -3382,7 +3504,16 @@ print(f"Correlation study hours vs scores: {r:.3f}")`,
         intermediateContent:
           'Pearson correlation r measures linear association: r = Σ[(xᵢ-x̄)(yᵢ-ȳ)] / √[Σ(xᵢ-x̄)² × Σ(yᵢ-ȳ)²]. r = +1 (perfect positive), r = 0 (no linear relationship), r = -1 (perfect negative). Example: elephant height vs weight r ≈ 0.85 (strong positive). **Correlation ≠ causation**: ice cream sales and drowning deaths are correlated (both increase in summer) but ice cream doesn\'t cause drowning — the confounding variable is temperature. Always ask: is there a plausible mechanism? Could a third variable explain both?',
         advancedContent:
-          'Spearman rank correlation measures monotonic (not necessarily linear) association — based on the ranks of values rather than the values themselves. It is robust to outliers and works for non-linear relationships. In research, partial correlation controls for confounding variables: the partial correlation between ice cream and drowning, controlling for temperature, is near zero. Multiple regression separates the contributions of several predictors simultaneously. Granger causality tests whether past values of X improve predictions of Y beyond what past values of Y alone provide — a temporal (not true causal) test used in economics and neuroscience.',
+          '**Spearman vs Pearson — choosing the right correlation:**\n\n' +
+          'Pearson r measures LINEAR association. Spearman rₛ measures MONOTONIC association (any consistently increasing/decreasing relationship, even curved).\n\n' +
+          '**When they differ:** If study hours vs scores follows a curve (diminishing returns — going from 1→2 hours helps a lot, ' +
+          '7→8 hours barely helps), Pearson might give r = 0.85, but Spearman gives rₛ = 0.98 — correctly detecting the near-perfect monotonic trend.\n\n' +
+          '**How Spearman works:** Replace each value with its rank (1st, 2nd, 3rd…), then compute Pearson r on the ranks. ' +
+          'Ranks are immune to outliers — a temperature of 9999°C just becomes "rank 1" instead of distorting the entire calculation.\n\n' +
+          '**Partial correlation — removing confounders:**\n' +
+          'Ice cream sales correlate with drowning (r ≈ 0.85). But both are driven by temperature. ' +
+          'Partial correlation removes the effect of temperature from both variables, then measures what is left. ' +
+          'Formula: r₁₂.₃ = (r₁₂ − r₁₃ × r₂₃) / √((1−r₁₃²)(1−r₂₃²)). The result: r ≈ 0.05 — the apparent correlation vanishes.',
         code: `import numpy as np
 
 temps = np.array([22, 28, 35, 19, 31, 40, 27, 33, 18, 29])
@@ -3511,7 +3642,23 @@ print(f"Hottest day: #{hottest_day + 1} ({daily_avg[hottest_day]:.1f}°C)")`,
         intermediateContent:
           'Anscombe\'s quartet: four datasets with identical statistical summaries (mean, variance, correlation, regression line) but completely different visual patterns — one linear, one curved, one with an outlier, one vertical cluster. Without plotting, you would think they are identical. The data literacy principle: **always plot your data before computing statistics**. Matplotlib\'s `plt.scatter(x, y)` takes seconds and can reveal patterns, outliers, and non-linearities that summary statistics hide. Box plots (`plt.boxplot(data)`) show median, quartiles, and outliers in one compact visualization.',
         advancedContent:
-          'Edward Tufte\'s principles of graphical excellence: maximize the data-ink ratio (remove chartjunk — unnecessary gridlines, 3D effects, decorative elements), show the data above all else, and avoid distorting what the data say. The **lie factor** = (size of effect shown in graphic) / (size of effect in data) — it should be close to 1. Common distortions: truncated y-axes that exaggerate small changes, 3D pie charts where perspective distorts proportions, and dual y-axes that imply false correlations. Choosing the right chart type: use line charts for time series, scatter plots for relationships, bar charts for comparisons, and histograms for distributions.',
+          '**Tufte\'s principles — how to lie (and not lie) with charts:**\n\n' +
+          'Edward Tufte defined the **lie factor** = (size of effect shown in graphic) / (size of effect in data). It should be close to 1.0.\n\n' +
+          '**Common distortions:**\n' +
+          '| Trick | What it does | Example |\n' +
+          '|---|---|---|\n' +
+          '| Truncated y-axis | Start y at 98 instead of 0 → a 2% drop looks like a cliff | News channels showing stock market "crashes" |\n' +
+          '| 3D pie chart | Perspective makes front slices look bigger | Company reports making their market share look larger |\n' +
+          '| Dual y-axes | Overlay two unrelated series and imply correlation | "Ice cream sales" vs "shark attacks" — both rise in summer |\n' +
+          '| Area/bubble scaling | Double the radius → 4× the area → perception mismatch | Infographics comparing budgets with circle sizes |\n\n' +
+          '**The data-ink ratio:** Every pixel should show data or help interpret it. Remove: background colors, decorative images, 3D effects, redundant gridlines. ' +
+          'Keep: data points, axis labels, titles, legends. The best chart is the simplest one that communicates the insight.\n\n' +
+          '**Chart type decision tree:**\n' +
+          '- Showing change over time → **line chart**\n' +
+          '- Comparing two variables → **scatter plot**\n' +
+          '- Comparing categories → **bar chart** (horizontal if labels are long)\n' +
+          '- Showing distribution → **histogram** or **box plot**\n' +
+          '- Showing parts of whole → **stacked bar** (avoid pie charts — humans judge angles poorly)',
         diagram: 'CorrelationDiagram',
       },
       {
@@ -3528,7 +3675,21 @@ print(f"Hottest day: #{hottest_day + 1} ({daily_avg[hottest_day]:.1f}°C)")`,
         intermediateContent:
           'Essential plot types: plt.plot(x, y) (line), plt.scatter(x, y, c=colors, s=sizes), plt.bar(categories, values), plt.hist(data, bins=30), plt.imshow(matrix, cmap="viridis"). Multi-panel: fig, axes = plt.subplots(2, 2, figsize=(10, 8)). Always label axes: ax.set_xlabel("Distance (km)"), ax.set_ylabel("Count"), ax.set_title("Elephant Sightings"). Save with plt.savefig("plot.png", dpi=150, bbox_inches="tight"). Use plt.tight_layout() to prevent overlapping labels.',
         advancedContent:
-          'Publication-quality figures: set font sizes (plt.rcParams["font.size"] = 12), use colorblind-friendly palettes (viridis, cividis), add error bars (ax.errorbar(x, y, yerr=errors)). **Seaborn** provides statistical visualization: sns.heatmap(corr, annot=True), sns.violinplot(x="species", y="weight", data=df), sns.pairplot(df). For interactive exploration, **Plotly** creates zoomable, hoverable charts. **Altair** uses a declarative grammar of graphics. Each library has strengths: matplotlib for full control, seaborn for statistics, plotly for interactivity, altair for rapid exploration.',
+          '**When to use which Python plotting library:**\n\n' +
+          '| Library | Best for | Syntax | Output |\n' +
+          '|---|---|---|---|\n' +
+          '| **Matplotlib** | Full control, publication figures, custom layouts | Verbose but flexible | Static PNG/SVG/PDF |\n' +
+          '| **Seaborn** | Statistical plots (violin, heatmap, pair plots) | `sns.heatmap(corr, annot=True)` — one line | Static (built on matplotlib) |\n' +
+          '| **Plotly** | Interactive exploration (zoom, hover, tooltips) | `px.scatter(df, x="weight", y="height", color="species")` | HTML, runs in browser |\n' +
+          '| **Altair** | Declarative grammar of graphics (describe WHAT, not HOW) | `alt.Chart(df).mark_point().encode(x="x", y="y")` | HTML/SVG |\n\n' +
+          '**Seaborn\'s statistical plots — what matplotlib can\'t do easily:**\n' +
+          '- `sns.violinplot(x="species", y="weight", data=df)` — shows the full distribution shape, not just box/whisker\n' +
+          '- `sns.pairplot(df)` — scatter plots of every variable pair + histograms on diagonal. One line reveals ALL pairwise relationships.\n' +
+          '- `sns.heatmap(df.corr(), annot=True, cmap="coolwarm")` — correlation matrix with numbers overlaid\n\n' +
+          '**The typical workflow:**\n' +
+          '1. **Explore** with seaborn/plotly (fast, interactive)\n' +
+          '2. **Publish** with matplotlib (full control over fonts, layout, LaTeX labels)\n' +
+          '3. **Present** with plotly/altair (interactive dashboards)',
         diagram: 'HistogramDiagram',
         interactive: {
           type: 'matching',
@@ -3557,7 +3718,31 @@ print(f"Hottest day: #{hottest_day + 1} ({daily_avg[hottest_day]:.1f}°C)")`,
         intermediateContent:
           'Every matplotlib figure has a hierarchy: **Figure** (the canvas) → **Axes** (a single plot within the figure) → plot elements (lines, markers, text, legends). The object-oriented interface: fig, ax = plt.subplots(). ax.plot(x, y) adds a line. ax.set_xlabel(), ax.set_ylabel(), ax.set_title() label it. ax.legend() shows a key. ax.set_xlim(0, 100), ax.set_ylim(0, 50) control axis ranges. fig.savefig("plot.png", dpi=150) saves. The difference: plt.plot() is the quick "state-based" interface; ax.plot() is the explicit OO interface — use OO for anything beyond a quick look.',
         advancedContent:
-          'Customization layers: rcParams set global defaults (plt.rcParams["font.family"] = "serif"), style sheets (plt.style.use("ggplot")) apply themed presets, and per-element kwargs override everything. Axes positioning: fig.add_axes([left, bottom, width, height]) for arbitrary placement (values 0-1 relative to figure). GridSpec provides flexible multi-panel layouts: gs = fig.add_gridspec(3, 3); ax1 = fig.add_subplot(gs[0, :]); ax2 = fig.add_subplot(gs[1:, 0]). Animation: FuncAnimation(fig, update, frames=100) creates animated plots — useful for real-time sensor data visualization.',
+          '**Advanced layouts — when subplots aren\'t enough:**\n\n' +
+          'Standard `plt.subplots(2, 3)` creates a regular grid. For irregular layouts (one wide plot on top, two smaller plots below), use GridSpec:\n' +
+          '```\n' +
+          'fig = plt.figure(figsize=(12, 8))\n' +
+          'gs = fig.add_gridspec(2, 2, height_ratios=[1, 2])\n' +
+          'ax_top = fig.add_subplot(gs[0, :])    # spans full width\n' +
+          'ax_bl = fig.add_subplot(gs[1, 0])     # bottom-left\n' +
+          'ax_br = fig.add_subplot(gs[1, 1])     # bottom-right\n' +
+          '```\n\n' +
+          '**The three customization layers (from broad to specific):**\n' +
+          '1. **rcParams** — global defaults: `plt.rcParams["font.size"] = 12` affects ALL future plots\n' +
+          '2. **Style sheets** — themed presets: `plt.style.use("ggplot")` or `plt.style.use("seaborn-v0_8")` applies a complete visual theme\n' +
+          '3. **Per-element kwargs** — override anything: `ax.plot(x, y, color="red", linewidth=3, alpha=0.7)`\n\n' +
+          'Each layer overrides the previous. A style sheet sets defaults; individual plot calls override the style.\n\n' +
+          '**Animation — plots that move:**\n' +
+          '```\n' +
+          'from matplotlib.animation import FuncAnimation\n' +
+          'fig, ax = plt.subplots()\n' +
+          'line, = ax.plot([], [])\n' +
+          'def update(frame):\n' +
+          '    line.set_data(x[:frame], y[:frame])\n' +
+          '    return line,\n' +
+          'anim = FuncAnimation(fig, update, frames=100, interval=50)\n' +
+          '```\n' +
+          'Use cases: real-time sensor dashboards, animated scatter plots showing data arriving over time, wave simulations.',
         diagram: 'PlotAnatomyDiagram',
       },
       {
@@ -3573,7 +3758,26 @@ print(f"Hottest day: #{hottest_day + 1} ({daily_avg[hottest_day]:.1f}°C)")`,
         intermediateContent:
           'Color palettes: sequential (light→dark for ordered data: "viridis", "plasma"), diverging (two-color gradient for data with a meaningful center: "coolwarm", "RdBu"), qualitative (distinct colors for categories: "Set2", "tab10"). **Colorblind-safe**: viridis, cividis (avoid red-green). Set color with c= or color= parameter. Marker styles: "o" (circle), "s" (square), "^" (triangle), "+" (plus). Line styles: "-" (solid), "--" (dashed), ":" (dotted). Alpha transparency (alpha=0.5) helps with overlapping data points in scatter plots.',
         advancedContent:
-          'Effective data visualization follows principles: (1) data-ink ratio — maximize information per pixel, minimize decoration; (2) small multiples — repeated similar charts for comparison (use plt.subplots with shared axes); (3) annotation — ax.annotate("Peak", xy=(x, y), arrowprops=dict(arrowstyle="->")) draws attention to key features. Color perception: luminance (brightness) should encode the quantitative dimension because it is perceived linearly, while hue (color) should encode categories. Tools like ColorBrewer (colorbrewer2.org) provide tested palettes. Always include a colorbar for colormapped plots (plt.colorbar()).',
+          '**Color perception science — why viridis is better than rainbow:**\n\n' +
+          'The human eye perceives luminance (brightness) linearly, but hue (color) unevenly. The "jet" / "rainbow" colormap has perceptual ' +
+          'nonuniformities — yellow and cyan bands create false contours that don\'t exist in the data.\n\n' +
+          '**Viridis was designed to be:**\n' +
+          '1. **Perceptually uniform** — equal data steps = equal visual steps\n' +
+          '2. **Colorblind-safe** — still readable by deuteranopes (red-green blind)\n' +
+          '3. **Black-and-white printable** — luminance increases monotonically\n\n' +
+          '**Design rules for color:**\n' +
+          '- **Quantitative data** → sequential colormap (viridis, plasma) — luminance encodes the value\n' +
+          '- **Diverging data** (deviation from center) → diverging colormap (coolwarm, RdBu) — two hues diverge from a neutral midpoint\n' +
+          '- **Categories** → qualitative colormap (Set2, tab10) — distinct hues, similar brightness\n\n' +
+          '**Annotation — guiding the reader\'s eye:**\n' +
+          '```\n' +
+          'ax.annotate("Peak: 42°C",\n' +
+          '    xy=(peak_x, peak_y),           # point to annotate\n' +
+          '    xytext=(peak_x + 5, peak_y + 3), # text position\n' +
+          '    arrowprops=dict(arrowstyle="->", color="red"),\n' +
+          '    fontsize=11, fontweight="bold")\n' +
+          '```\n' +
+          'Annotations turn data exploration into storytelling — they answer "what should I notice?" for the viewer.',
         interactive: {
           type: 'true-false',
           props: {
@@ -3597,7 +3801,23 @@ print(f"Hottest day: #{hottest_day + 1} ({daily_avg[hottest_day]:.1f}°C)")`,
         intermediateContent:
           'Publication workflow: (1) fig, ax = plt.subplots(figsize=(6, 4)) for journal-width figure, (2) set font: plt.rcParams.update({"font.size": 11, "font.family": "serif"}), (3) use LaTeX labels: ax.set_xlabel(r"Temperature ($^\\circ$C)"), (4) add error bars: ax.errorbar(x, y, yerr=err, fmt="o", capsize=3), (5) tight_layout() prevents clipping, (6) save as vector: fig.savefig("fig.pdf") for journals or fig.savefig("fig.svg") for web. PDF/SVG scale perfectly at any size; use PNG (dpi=300) only when vector is not supported.',
         advancedContent:
-          'Reproducible figures: save the plotting script alongside the figure so colleagues can modify it. Matplotlib backends: "Agg" (non-interactive, for scripts/servers), "TkAgg" (interactive window), "WebAgg" (browser-based). Jupyter integration: %matplotlib inline for static, %matplotlib widget for interactive. For interactive dashboards, consider Dash (Plotly), Streamlit, or Panel — they wrap matplotlib/plotly in web apps with sliders, dropdowns, and real-time updates. Publishing: many journals accept matplotlib figures directly; Nature and Science have specific style guides that can be encoded as matplotlib style sheets.',
+          '**From script to dashboard — making figures interactive:**\n\n' +
+          'Matplotlib creates static images. For interactive exploration, you need a framework:\n\n' +
+          '| Tool | What it does | Best for |\n' +
+          '|---|---|---|\n' +
+          '| **Streamlit** | Turns Python scripts into web apps. Add `st.slider()` and your matplotlib plot updates live | Quick internal tools, prototypes |\n' +
+          '| **Dash (Plotly)** | Full web app framework with callbacks. More control, more code | Production dashboards |\n' +
+          '| **Jupyter widgets** | `%matplotlib widget` makes plots zoomable/pannable in notebooks | Exploration during analysis |\n' +
+          '| **Panel** | Works with any plotting library, integrates with Jupyter | Linking multiple plot types |\n\n' +
+          '**Matplotlib backends — what renders your plot:**\n' +
+          '- **Agg** (default): renders to PNG in memory. Use for scripts, servers, and saved files. No window pops up.\n' +
+          '- **TkAgg**: opens an interactive window with zoom/pan tools. Use for desktop exploration.\n' +
+          '- **WebAgg**: renders in the browser. Use for remote servers.\n\n' +
+          '**Reproducibility:** Always save the script that generated a figure alongside the figure itself. ' +
+          'A paper reviewer asks "what happens if you change the bin width?" — re-run the script with one parameter changed. ' +
+          'Journals like Nature have specific style guides (font sizes, figure widths, color requirements). ' +
+          'Encode these as a matplotlib style sheet file (.mplstyle) and apply with `plt.style.use("nature.mplstyle")` — ' +
+          'every figure in your paper automatically conforms.',
         diagram: 'PlotAnatomyDiagram',
       },
     ],
@@ -3822,7 +4042,23 @@ plt.show()`,
         intermediateContent:
           'The ML pipeline: (1) Collect data → (2) Clean/preprocess → (3) Split train/test (80/20) → (4) Choose model → (5) Train → (6) Evaluate → (7) Tune hyperparameters → (8) Deploy. **Overfitting**: model memorizes training data but fails on new data. Signs: high training accuracy, low test accuracy. Remedies: more data, simpler model, regularization, dropout. **Underfitting**: model too simple. The learning curve (plot accuracy vs training set size) diagnoses which problem you have.',
         advancedContent:
-          'The **bias-variance tradeoff**: bias = error from oversimplifying, variance = error from over-sensitivity to training data. Total error = bias² + variance + irreducible noise. A linear model has high bias but low variance. A deep neural network has low bias but high variance. **Regularization** (L1/L2 penalties) and **ensemble methods** (random forests average many trees) navigate this tradeoff. The No Free Lunch theorem proves no single algorithm is best for all problems — domain knowledge guides model selection.',
+          '**The bias-variance tradeoff — the fundamental tension in ML:**\n\n' +
+          'Every model\'s expected error decomposes into three parts:\n' +
+          '**Total Error = Bias² + Variance + Irreducible Noise**\n\n' +
+          '| Term | What it means | When it\'s high |\n' +
+          '|---|---|---|\n' +
+          '| **Bias** | Error from oversimplifying | Model too simple (linear model on curved data) |\n' +
+          '| **Variance** | Error from sensitivity to specific training data | Model too complex (memorizes noise) |\n' +
+          '| **Noise** | Randomness in the data itself | Cannot be reduced by any model |\n\n' +
+          '**Concrete example:** You classify elephant moods. A linear model draws a straight line — always gets ~70% ' +
+          '(high bias, misses the curve). A k-NN with k=1 memorizes every training rumble — gets 100% on training, 60% on test ' +
+          '(high variance, overfits to noise). The sweet spot: k=5 gets 85% on both (balanced).\n\n' +
+          '**How regularization helps:** L2 regularization adds λ × Σwᵢ² to the loss function. Large weights (which create sharp, ' +
+          'noisy decision boundaries) get penalized. The model settles on smaller, smoother weights. λ controls the tradeoff: ' +
+          'λ = 0 → no regularization (risk overfitting), λ = ∞ → all weights zero (underfitting). Cross-validation finds the best λ.\n\n' +
+          '**The No Free Lunch theorem:** No single algorithm is best for all problems. Linear models win on small, clean data. ' +
+          'Random forests win on messy tabular data. Neural networks win on images and text. Domain knowledge — not algorithm hype — ' +
+          'should guide your choice.',
         diagram: 'DogVsCatDiagram',
       },
       {
@@ -3851,7 +4087,20 @@ plt.show()`,
         intermediateContent:
           'Classification assigns items to categories: spam/not-spam, cat/dog, elephant/rhino. Regression predicts continuous values: temperature tomorrow, elephant weight from height. The difference matters because they use different loss functions: classification minimizes misclassification rate (or cross-entropy), regression minimizes squared error. A classifier\'s output is a category label (or probability per category); a regressor\'s output is a number. Some algorithms (decision trees, neural networks) can do both.',
         advancedContent:
-          'The relationship between classification and function approximation: a classifier learns a decision boundary — a surface in feature space that separates classes. A linear classifier\'s boundary is a hyperplane (line in 2D, plane in 3D). A decision tree\'s boundary is a set of axis-aligned rectangular regions. A neural network\'s boundary can be arbitrarily complex. The universal approximation theorem states that a neural network with one hidden layer can approximate any continuous function — but it says nothing about how large the layer must be or how to find the right weights.',
+          '**Decision boundaries — what each algorithm actually draws:**\n\n' +
+          'Every classifier learns a boundary in feature space. The shape of that boundary determines what the model can and cannot learn:\n\n' +
+          '| Algorithm | Boundary shape | Strength | Weakness |\n' +
+          '|---|---|---|---|\n' +
+          '| Linear (logistic regression) | Straight line / flat plane | Fast, interpretable, few parameters | Can\'t separate curved or nested classes |\n' +
+          '| Decision tree | Axis-aligned rectangles (staircase pattern) | Handles non-linear data, interpretable rules | Overfits, boundaries always parallel to axes |\n' +
+          '| k-NN | Irregular, adapts to local data density | No training needed, any shape | Slow at prediction, sensitive to noise |\n' +
+          '| Neural network | Arbitrarily complex curves | Can learn ANY boundary | Needs lots of data, hard to interpret |\n\n' +
+          '**The universal approximation theorem:** A neural network with a single hidden layer of sufficient width can approximate ANY ' +
+          'continuous function to arbitrary accuracy. This sounds magical, but the theorem has two crucial gaps:\n' +
+          '1. "Sufficient width" — it says nothing about HOW many neurons you need. For some functions, the required width is astronomically large.\n' +
+          '2. It says nothing about whether gradient descent can FIND the right weights. The function exists in theory; finding it in practice is the hard part.\n\n' +
+          'This is why deep networks (many layers) work better than wide-shallow ones in practice — depth creates compositional features ' +
+          '(edges → textures → parts → objects) that are exponentially more efficient than trying to do everything in one layer.',
         diagram: 'PostmanSortingDiagram',
       },
       {
@@ -3877,7 +4126,24 @@ plt.show()`,
         intermediateContent:
           'Supervised learning provides labeled examples: (input, correct_output) pairs. The model adjusts its internal parameters to minimize the difference between its predictions and the correct outputs. This is analogous to a teacher showing flashcards with pictures (inputs) and names (labels). With enough examples, the model generalizes — it correctly labels inputs it has never seen before. The critical question is: did it learn the concept, or just memorize the examples?',
         advancedContent:
-          'Unsupervised learning finds structure without labels: clustering groups similar items (k-means, DBSCAN), dimensionality reduction finds compact representations (PCA, t-SNE), and anomaly detection identifies outliers. Self-supervised learning creates its own labels from data structure — BERT masks random words and predicts them, learning language representation. Contrastive learning (SimCLR) learns image features by maximizing agreement between different augmentations of the same image. These methods are essential when labeled data is scarce or expensive.',
+          '**Unsupervised learning — finding structure without answers:**\n\n' +
+          'In supervised learning, every example has a label. In unsupervised learning, you have data but no labels — ' +
+          'the algorithm must discover structure on its own.\n\n' +
+          '**K-means clustering (step by step):**\n' +
+          '1. Choose K (number of clusters). Place K random "centroids" in feature space.\n' +
+          '2. Assign each data point to the nearest centroid.\n' +
+          '3. Move each centroid to the mean of its assigned points.\n' +
+          '4. Repeat steps 2-3 until centroids stop moving.\n\n' +
+          'Example: 500 unlabeled elephant GPS positions cluster into K=3 groups → the algorithm discovers "watering hole," ' +
+          '"feeding ground," and "resting area" without ever being told these categories exist.\n\n' +
+          '**Self-supervised learning — creating your own labels:**\n' +
+          'BERT takes a sentence like "The elephant [MASK] because it was frightened." It hides (masks) a random word and tries to predict it ("ran"). ' +
+          'The correct answer is already in the data — no human labeling needed. After training on billions of sentences, ' +
+          'BERT\'s internal representations encode grammar, meaning, and even reasoning.\n\n' +
+          '**Contrastive learning (SimCLR) for images:**\n' +
+          'Take one elephant photo. Create two augmented versions (crop, rotate, color-shift). Train the network to produce SIMILAR embeddings ' +
+          'for the two augmentations but DIFFERENT embeddings from other images. The network learns "what makes an elephant look like an elephant" ' +
+          'without a single label. After this pretraining, fine-tuning with just 10 labeled images per species can match the accuracy of training from scratch with 1,000.',
       },
       {
         title: 'Features — The Lightbulb Moment',
@@ -3906,7 +4172,23 @@ plt.show()`,
         intermediateContent:
           'Feature engineering transforms raw data into model inputs. For elephant tracking: GPS → distance_to_water, vegetation_density, time_of_day, season. **One-hot encoding**: species=["Asian","African"] → [1,0] or [0,1]. Feature scaling: StandardScaler (mean=0, std=1) or MinMaxScaler (0-1). Gradient descent: w_new = w_old - lr × ∂loss/∂w. Learning rate too high → diverges; too low → slow. Feature selection removes irrelevant inputs that add noise without improving predictions.',
         advancedContent:
-          'Transfer learning reuses pretrained models: ResNet on ImageNet can be fine-tuned for elephant ID with ~500 images. **SHAP values** provide game-theory-based explanations for individual predictions. **Bayesian optimization** efficiently searches hyperparameter space. Neural Architecture Search (NAS) uses ML to design ML architectures. The feature importance hierarchy often reveals surprises — in wildlife tracking, time-of-day may matter more than GPS location because animal behavior follows circadian patterns. Domain expertise combined with automated feature selection produces the best models.',
+          '**Transfer learning — why you rarely train from scratch:**\n\n' +
+          'Training a model to recognize elephants from 500 photos seems impossible — most models need millions of images. ' +
+          'The trick: start with a model (ResNet, EfficientNet) already trained on ImageNet (14 million images, 1000 categories). ' +
+          'Its early layers already know edges, textures, and shapes. Freeze those layers, replace the final layer with your 3-class output (Asian, African, juvenile), ' +
+          'and train on your 500 photos. The frozen layers provide features; your small dataset teaches the final classification.\n\n' +
+          '**SHAP values — explaining individual predictions:**\n' +
+          'Your model says this rumble is "danger." Why? SHAP (SHapley Additive exPlanations) computes each feature\'s contribution:\n' +
+          '- Base prediction (average across all data): 33% danger\n' +
+          '- Frequency = 45 Hz: +25% (low frequency → danger)\n' +
+          '- Pulse rate = 3.8: +22% (fast pulses → danger)\n' +
+          '- Amplitude = 1.2: +12% (loud → danger)\n' +
+          '- Final prediction: 92% danger\n\n' +
+          'SHAP values are based on cooperative game theory (Shapley, 1953 Nobel laureate). For each prediction, they satisfy three properties: ' +
+          'the contributions sum to the prediction, identical features get identical values, and irrelevant features get zero. ' +
+          'This makes them the gold standard for model interpretability — regulators (GDPR "right to explanation") increasingly require them.\n\n' +
+          '**Domain surprise:** In wildlife tracking models, SHAP often reveals that time-of-day matters more than GPS location — ' +
+          'because animal behavior follows circadian rhythms. The model learned what domain experts already knew, but quantified it.',
         diagram: 'FeatureWeightsDiagram',
       },
       {
@@ -3924,7 +4206,25 @@ plt.show()`,
         intermediateContent:
           'A feature vector is a list of numbers describing an observation. For an elephant: [weight_kg, height_m, tusk_length_cm, ear_area_m2, age_years] = [4500, 2.8, 60, 1.2, 25]. Each number is a dimension in feature space — this elephant is a point in 5D space. Similar elephants are nearby points; different species are far apart. Feature engineering chooses which measurements matter: tusk_length distinguishes Asian from African elephants, but tail_length probably does not. Good features make classification easy; poor features make it impossible regardless of the algorithm.',
         advancedContent:
-          'Feature spaces can be visualized using dimensionality reduction. PCA (Principal Component Analysis) projects high-dimensional data onto the 2-3 directions of maximum variance. t-SNE and UMAP create 2D maps that preserve local neighborhoods — similar points stay close. These visualizations reveal cluster structure, outliers, and class overlap before training any model. In deep learning, the network learns its own features: early layers detect edges and textures, middle layers detect parts (ears, trunks), and final layers detect whole objects — automatically constructing a feature hierarchy from raw pixels.',
+          '**PCA — Principal Component Analysis, step by step:**\n\n' +
+          'You have 50 features describing each elephant. Many are correlated (height and weight move together). PCA finds the directions ' +
+          'of maximum variance and projects the data onto them:\n\n' +
+          '1. Center the data (subtract the mean of each feature)\n' +
+          '2. Compute the covariance matrix (50×50 — how each feature varies with every other)\n' +
+          '3. Find eigenvectors (directions of maximum variance) and eigenvalues (how much variance in each direction)\n' +
+          '4. Sort by eigenvalue. The top 2-3 eigenvectors capture most of the variance.\n' +
+          '5. Project all data onto these 2-3 directions → you can now plot it on screen\n\n' +
+          'If the first two components capture 85% of variance, you have compressed 50 dimensions into 2 with only 15% information loss.\n\n' +
+          '**t-SNE and UMAP — for visualization, not analysis:**\n' +
+          'PCA preserves global structure (big distances). t-SNE and UMAP preserve local neighborhoods (similar points stay close, but clusters may be placed arbitrarily). ' +
+          'Use them to VISUALIZE clusters and outliers before training — but do not draw conclusions about distances between clusters.\n\n' +
+          '**Deep learning\'s automatic feature hierarchy:**\n' +
+          'A CNN trained on wildlife camera trap images builds its own features:\n' +
+          '- Layer 1: edges, textures (fur patterns, vegetation)\n' +
+          '- Layer 2: parts (ears, trunks, tails, legs)\n' +
+          '- Layer 3: whole objects (elephant, rhino, deer)\n\n' +
+          'This hierarchy emerges automatically from the data — no human engineer picks the features. This is why deep learning dominates image and audio tasks: ' +
+          'it discovers features that humans would never think to code.',
         diagram: 'FeatureExtractionDiagram',
       },
       {
@@ -3945,7 +4245,23 @@ plt.show()`,
         intermediateContent:
           'In supervised learning, each training example has a **label** — the correct answer the model should learn to predict. For classification: labels are categories (elephant, rhino, deer). For regression: labels are numbers (weight: 4500 kg). Labels can be hard to obtain: labeling 10,000 camera trap images requires human experts to examine each one. **Active learning** selects the most informative unlabeled examples for human annotation, reducing labeling effort by 50-80%. **Weak supervision** uses heuristic labeling functions (if image is near water AND large body → probably elephant) to generate approximate labels at scale.',
         advancedContent:
-          'Label quality directly impacts model quality — "garbage in, garbage out." Inter-annotator agreement (Cohen\'s kappa) measures labeling consistency between humans. For ambiguous tasks (sentiment analysis, medical diagnosis), even expert humans disagree ~10-20% of the time — this sets an upper bound on model accuracy. **Label noise** (incorrect labels in training data) degrades performance; noise-robust loss functions (symmetric cross-entropy, generalized cross-entropy) and co-teaching (two models filter each other\'s noisy labels) help. **Semi-supervised learning** leverages large amounts of unlabeled data alongside small labeled sets — FixMatch achieves near-supervised accuracy with only 7 labeled images per class on CIFAR-10.',
+          '**The ceiling on model accuracy — human disagreement:**\n\n' +
+          'Two experts listen to the same elephant rumble. One labels it "nervous," the other "calm." They disagree 15% of the time. ' +
+          'No model can reliably exceed 85% accuracy on this task — the labels themselves are noisy. ' +
+          'Cohen\'s kappa measures this: κ = (observed agreement − chance agreement) / (1 − chance agreement). ' +
+          'κ > 0.8 = strong agreement. κ < 0.6 = task is ambiguous and model accuracy has a low ceiling.\n\n' +
+          '**Handling noisy labels:**\n' +
+          '- **Co-teaching:** Train two models simultaneously. Each model selects "clean" training examples for the other ' +
+          '(samples where both models agree on the label). Noisy labels are implicitly discarded.\n' +
+          '- **Label smoothing:** Instead of training on hard labels [1, 0, 0], use soft labels [0.9, 0.05, 0.05]. ' +
+          'This prevents the model from becoming overconfident on potentially mislabeled examples.\n\n' +
+          '**Semi-supervised learning — using unlabeled data:**\n' +
+          'You have 50 labeled camera trap images and 10,000 unlabeled ones. FixMatch combines two ideas:\n' +
+          '1. For a labeled image: train normally (compute loss, update weights)\n' +
+          '2. For an unlabeled image: augment it weakly (flip/crop). If the model is >95% confident in its prediction, ' +
+          'use that prediction as a "pseudo-label." Then augment the same image strongly (color distort, cutout) ' +
+          'and train on it with the pseudo-label.\n\n' +
+          'Result: near-supervised accuracy with 7 labeled images per class — because the unlabeled data teaches the model about the structure of the input space.',
       },
       {
         title: 'Training vs Testing — Why You Hide the Exam',
@@ -3962,7 +4278,20 @@ plt.show()`,
         intermediateContent:
           'The train-test split prevents self-deception. If you evaluate on the same data you trained on, a model that memorized everything scores 100% — but fails on new data. The standard split: 80% train, 20% test. Never let the model see test data during training. **Cross-validation** (k-fold): divide data into k parts, train on k-1, test on 1, rotate k times. Average the k scores for a robust estimate. 5-fold or 10-fold is standard. Stratified splits ensure each fold has the same class proportions as the full dataset.',
         advancedContent:
-          'Data leakage occurs when information from the test set contaminates training — invalidating results. Common sources: (1) normalizing before splitting (the mean/std includes test data), (2) feature selection on the full dataset, (3) duplicate data points in both sets. Always split first, then preprocess. Time series data requires chronological splits (train on past, test on future) — random splits leak future information. In production, model monitoring detects **data drift** (input distribution changes) and **concept drift** (the relationship between inputs and outputs changes) — triggering retraining when performance degrades.',
+          '**Data leakage — the silent killer of ML projects:**\n\n' +
+          'Your model gets 99% accuracy in development but 60% in production. The likely cause: information from the test set leaked into training.\n\n' +
+          '**Three common leakage sources:**\n' +
+          '1. **Preprocessing before splitting:** You compute mean/std on the FULL dataset (including test), then normalize. ' +
+          'The test set\'s statistics influenced training. Fix: split first, fit scaler on train only, then transform both.\n' +
+          '2. **Feature selection on the full dataset:** You find the top 10 features using all data, including test. ' +
+          'Those features were selected partly because they fit the test data. Fix: feature selection inside cross-validation.\n' +
+          '3. **Duplicate data in both sets:** Two camera trap photos of the same elephant 1 second apart are nearly identical. ' +
+          'If one is in train and the other in test, the model "memorizes" the elephant. Fix: deduplicate or group by individual before splitting.\n\n' +
+          '**Time series leakage:** If you randomly shuffle weather data and split 80/20, some Tuesday data ends up in training ' +
+          'and the preceding Monday in test — the model "knows the future." Fix: chronological split (train on Jan-Oct, test on Nov-Dec).\n\n' +
+          '**Production drift:** Once deployed, the world changes. Data drift: camera angles change after sensor replacement. ' +
+          'Concept drift: a new elephant species enters the reserve. Monitor prediction confidence over time — ' +
+          'if average confidence drops or predictions shift, trigger retraining with fresh data.',
         diagram: 'TrainTestSplitDiagram',
       },
       {
@@ -3983,7 +4312,20 @@ plt.show()`,
         intermediateContent:
           'KNN algorithm: for a new data point, (1) compute distance to all training points, (2) find the k closest, (3) majority vote determines the class. Distance metric matters: Euclidean (straight line), Manhattan (city blocks), cosine (angle between vectors — common for text). k=1 is noisy (single neighbor decides), k=too large includes distant irrelevant points. Typical: k=5 or k=√n. Feature scaling is critical: if weight is 3000-5000 and height is 1-3, distance is dominated by weight. Standardize first.',
         advancedContent:
-          'KNN is a "lazy learner" — it stores all training data and computes at prediction time (no training phase). This makes prediction slow for large datasets: O(nd) per query for n training points in d dimensions. KD-trees and ball trees speed this to O(d·log n) for low-dimensional data but degrade in high dimensions. For very large datasets, approximate nearest neighbor methods (Annoy, FAISS, ScaNN) trade exact results for massive speedups — enabling billion-scale similarity search for recommendation engines and image retrieval systems.',
+          '**Why k-NN is slow and how to fix it:**\n\n' +
+          'k-NN has NO training phase — it simply stores all training data. At prediction time, it computes distance to every stored point: O(n × d) per query. ' +
+          'For n = 1 million points in d = 100 dimensions, that is 100 million operations per prediction.\n\n' +
+          '**KD-trees — divide and conquer in feature space:**\n' +
+          'A KD-tree recursively splits the space along one feature at a time (like a decision tree, but for proximity search). ' +
+          'Query time drops to O(d × log n) — for 1 million points, ~20 comparisons instead of 1 million. ' +
+          'But in high dimensions (d > 20), KD-trees degrade to brute force because every split becomes ineffective (curse of dimensionality).\n\n' +
+          '**Approximate nearest neighbors (ANN) for billion-scale:**\n' +
+          'Spotify recommends songs from a catalog of 100 million tracks. Exact k-NN is impossible at this scale. ' +
+          'ANN methods trade exact results for 100× speedup:\n' +
+          '- **FAISS** (Facebook): Compresses vectors with product quantization, searches only nearby clusters. Query time: ~1 ms for 1 billion vectors.\n' +
+          '- **Annoy** (Spotify): Builds a forest of random projection trees. Each tree splits the space with random hyperplanes. At query time, search multiple trees and merge results.\n\n' +
+          'The accuracy tradeoff: ANN finds the true nearest neighbor ~95% of the time (the other 5% are very close neighbors). ' +
+          'For recommendations and image search, this is perfectly acceptable — the 2nd-nearest neighbor is almost as good.',
         diagram: 'KNNClassificationDiagram',
       },
       {
@@ -4001,7 +4343,25 @@ plt.show()`,
         intermediateContent:
           'Overfitting signs: training accuracy is high but test accuracy is much lower — the gap between them indicates the degree of overfitting. A model that achieves 99% training accuracy but only 60% test accuracy has memorized the training data. Remedies: (1) more training data, (2) simpler model (fewer parameters), (3) regularization (add a penalty for large weights), (4) dropout (randomly disable neurons during training), (5) early stopping (stop training when validation loss starts increasing).',
         advancedContent:
-          'The bias-variance decomposition: Expected Error = Bias² + Variance + Irreducible Noise. High bias (underfitting): model is too simple — increase complexity, add features, train longer. High variance (overfitting): model is too sensitive to training data — get more data, simplify, regularize. Learning curves plot performance vs training set size: if train and test curves converge at high error → high bias; if they stay far apart → high variance. Ensemble methods (bagging reduces variance, boosting reduces bias) systematically address these issues.',
+          '**Learning curves — your diagnostic tool for overfitting vs underfitting:**\n\n' +
+          'Plot model accuracy (y-axis) vs training set size (x-axis) for BOTH training and test sets:\n\n' +
+          '**Pattern 1 — High variance (overfitting):**\n' +
+          '- Training accuracy: 98% (nearly perfect)\n' +
+          '- Test accuracy: 65% (large gap)\n' +
+          '- The gap narrows as you add more training data\n' +
+          '- Fix: get more data, simplify model, add regularization, try dropout\n\n' +
+          '**Pattern 2 — High bias (underfitting):**\n' +
+          '- Training accuracy: 72%\n' +
+          '- Test accuracy: 70% (small gap, but both are bad)\n' +
+          '- More data does NOT help — both curves plateau at low accuracy\n' +
+          '- Fix: more complex model, add features, train longer, reduce regularization\n\n' +
+          '**Ensemble methods — systematic fixes:**\n' +
+          '- **Bagging** (Random Forest): Train many models on random subsets of data, average their predictions. ' +
+          'Each model overfits differently → averaging cancels the noise. Reduces variance.\n' +
+          '- **Boosting** (XGBoost): Train models sequentially. Each new model focuses on the examples the previous models got WRONG. ' +
+          'Gradually fills in the mistakes. Reduces bias.\n\n' +
+          'In practice, gradient boosting (XGBoost, LightGBM) wins most Kaggle competitions on tabular data. ' +
+          'Random forests are harder to misconfigure and a safer default for beginners.',
       },
       {
         title: 'Accuracy, Precision, Recall — Did It Actually Work?',
@@ -4020,7 +4380,22 @@ plt.show()`,
         intermediateContent:
           'For binary classification (elephant/not-elephant): **Accuracy** = (TP + TN) / total — misleading when classes are imbalanced (99% "not elephant" in camera traps → always predicting "not elephant" gives 99% accuracy). **Precision** = TP / (TP + FP) — of all predicted elephants, how many were real? **Recall** = TP / (TP + FN) — of all real elephants, how many did we detect? **F1 score** = 2 × (Precision × Recall) / (Precision + Recall) — harmonic mean balancing both. For conservation: high recall is critical (missing a real elephant is worse than a false alarm).',
         advancedContent:
-          'The **ROC curve** plots True Positive Rate (recall) vs False Positive Rate at every classification threshold. AUC (Area Under the ROC Curve) summarizes: AUC = 1.0 is perfect, 0.5 is random guessing. The **precision-recall curve** is more informative for imbalanced datasets. At each threshold, different precision-recall tradeoffs are available — choosing the threshold is a business decision. In medical screening: high recall (catch all disease cases) even at the cost of lower precision (more false positives requiring follow-up tests). In spam filtering: high precision (never lose real email) with acceptable recall.',
+          '**ROC curves — understanding the threshold tradeoff:**\n\n' +
+          'Your model outputs a probability (say, 73% chance this is a danger signal). You choose a threshold to decide: ' +
+          'above 50%? Above 80%? The threshold changes the precision-recall balance.\n\n' +
+          '**How the ROC curve works:**\n' +
+          'At threshold 0%: everything is labeled "danger" → TPR = 100% (catch all real dangers), FPR = 100% (every calm signal is a false alarm).\n' +
+          'At threshold 100%: nothing is labeled "danger" → TPR = 0%, FPR = 0%.\n' +
+          'Between: each threshold gives a different (FPR, TPR) point. Plot them all → ROC curve.\n\n' +
+          '**AUC interpretation:**\n' +
+          '- AUC = 1.0: perfect separation (a threshold exists where TPR = 100% and FPR = 0%)\n' +
+          '- AUC = 0.5: random guessing (the curve follows the diagonal)\n' +
+          '- AUC = 0.85: good model. Interpretation: pick a random danger signal and a random calm signal. There is an 85% chance the model assigns a higher probability to the danger signal.\n\n' +
+          '**When to use precision-recall curves instead:**\n' +
+          'ROC curves can be misleading when classes are imbalanced. If 99% of signals are calm, even a high FPR means few actual false alarms in absolute terms — ' +
+          'the ROC looks great. Precision-recall curves expose this by focusing on the rare class.\n\n' +
+          '**Choosing the threshold is a business decision:** In conservation (danger detection), set threshold low → high recall (catch every threat), accept false alarms. ' +
+          'In spam filtering, set threshold high → high precision (never lose real email), accept some spam slipping through.',
       },
       {
         title: 'The Confusion Matrix — Where Mistakes Live',
@@ -4037,7 +4412,21 @@ plt.show()`,
         intermediateContent:
           'A confusion matrix is a table where rows represent actual classes and columns represent predicted classes. For 3 classes (elephant, rhino, deer), a 3×3 matrix shows counts for each actual→predicted combination. The diagonal shows correct predictions; off-diagonal elements show specific error patterns. If the model often confuses elephants with rhinos (high count in elephant-row, rhino-column), that reveals which classes need better features. Normalize rows to get per-class accuracy rates.',
         advancedContent:
-          'Multi-class metrics extend binary concepts: macro-average computes metric per class then averages (treats all classes equally), micro-average pools all predictions (dominated by the majority class), weighted average accounts for class sizes. Cohen\'s kappa adjusts for chance agreement — important when classes are imbalanced. In multi-label classification (an image can contain both elephant AND rhino), each sample can have multiple correct labels — the Hamming loss measures the fraction of labels that are incorrect.',
+          '**Multi-class averaging — which metric to report:**\n\n' +
+          'With 3 classes (elephant 100 examples, rhino 20, deer 80), per-class precision might be [0.95, 0.70, 0.90]. ' +
+          'How do you report a single number?\n\n' +
+          '| Method | Calculation | Result | Use when… |\n' +
+          '|---|---|---|---|\n' +
+          '| **Macro** | (0.95 + 0.70 + 0.90) / 3 | 0.85 | All classes equally important (conservation: rare rhino matters as much as common elephant) |\n' +
+          '| **Weighted** | (0.95×100 + 0.70×20 + 0.90×80) / 200 | 0.91 | Performance proportional to class frequency |\n' +
+          '| **Micro** | Pool all TP/FP globally | 0.90 | Dominated by majority class — can hide poor performance on rare classes |\n\n' +
+          '**Cohen\'s kappa — is your model better than random?**\n' +
+          'If 80% of signals are "calm," a model that always guesses "calm" gets 80% accuracy but κ = 0 (no better than chance). ' +
+          'κ = (observed accuracy − chance accuracy) / (1 − chance accuracy). κ > 0.8 means strong agreement beyond chance.\n\n' +
+          '**Multi-label vs multi-class:** Multi-class = exactly ONE label per image (elephant OR rhino OR deer). ' +
+          'Multi-label = multiple labels per image (elephant AND near water AND nighttime). A camera trap image can trigger all three. ' +
+          'Hamming loss = fraction of labels wrong: if the model predicts [elephant: yes, water: yes, night: no] but truth is [elephant: yes, water: no, night: no], ' +
+          'Hamming loss = 1/3 (one label wrong out of three).',
         interactive: {
           type: 'matching',
           props: {
@@ -4073,7 +4462,25 @@ plt.show()`,
         intermediateContent:
           'ML applications across domains: **Computer Vision** — image classification, object detection, face recognition, medical imaging (detecting tumors in X-rays). **Natural Language Processing** — translation, sentiment analysis, chatbots, text summarization. **Audio** — speech recognition, music recommendation, species identification from calls. **Tabular data** — fraud detection, credit scoring, weather prediction. **Robotics** — navigation, grasping, autonomous driving. The same fundamental algorithms (neural networks, trees, SVMs) adapt to all these domains through appropriate feature engineering and architecture choices.',
         advancedContent:
-          'The ML deployment cycle: (1) offline training on historical data, (2) model validation on held-out test set, (3) A/B testing against the current system with real users, (4) gradual rollout with monitoring, (5) continuous retraining as new data arrives. **MLOps** tools (MLflow, Weights & Biases, Kubeflow) track experiments, version models, and automate deployment. Edge deployment (running models on devices like phones, drones, or Arduino-class hardware) uses model compression: quantization (32-bit → 8-bit weights), pruning (removing unimportant connections), and knowledge distillation (training a small "student" model to mimic a large "teacher").',
+          '**The ML deployment pipeline — from notebook to production:**\n\n' +
+          '| Stage | What happens | Tools |\n' +
+          '|---|---|---|\n' +
+          '| 1. Train | Train on historical data, track experiments | MLflow, Weights & Biases |\n' +
+          '| 2. Validate | Test on held-out set, check for leakage | Cross-validation, stratified splits |\n' +
+          '| 3. A/B test | Deploy to 5% of users, compare against current system | Feature flags, statistical significance |\n' +
+          '| 4. Rollout | Gradually increase traffic (5% → 25% → 100%) | Kubernetes, load balancers |\n' +
+          '| 5. Monitor | Track prediction confidence, accuracy, latency | Grafana, custom dashboards |\n' +
+          '| 6. Retrain | When drift is detected, retrain on recent data | Automated pipelines (Kubeflow) |\n\n' +
+          '**Edge deployment — running ML on a drone or phone:**\n' +
+          'A wildlife drone cannot stream video to a cloud server (no internet in the forest). The model must run ON the drone.\n\n' +
+          '**Model compression techniques:**\n' +
+          '- **Quantization:** Replace 32-bit floating-point weights with 8-bit integers. Model size: 400 MB → 100 MB. ' +
+          'Speed: 2-4× faster. Accuracy loss: <1%. This is how ML runs on phones.\n' +
+          '- **Pruning:** Remove weights close to zero (they contribute almost nothing). A typical neural network is 90% zeros after pruning — ' +
+          'sparse matrix operations skip the zeros entirely.\n' +
+          '- **Knowledge distillation:** Train a large "teacher" model (ResNet-152, 230 MB). Then train a small "student" model (MobileNet, 14 MB) ' +
+          'to mimic the teacher\'s outputs. The student learns the teacher\'s "dark knowledge" — subtle probability distributions over classes — ' +
+          'and achieves 95% of the teacher\'s accuracy at 1/16th the size.',
       },
       // ── Beyond k-NN: Other Algorithms (visual) ──────────────
       {
@@ -4093,7 +4500,21 @@ plt.show()`,
         intermediateContent:
           'A decision tree asks a sequence of binary questions to classify data. At each node, it picks the feature and threshold that best separates the classes. "Best" is measured by information gain (decrease in entropy) or Gini impurity. For elephant classification: "Is weight > 4000 kg?" → Yes branch: "Is ear area > 1.5 m²?" → African. Trees are interpretable — you can follow the decision path for any prediction. But single trees overfit easily — deep trees memorize training data.',
         advancedContent:
-          'Random forests and gradient boosting overcome single-tree weaknesses. **Random Forest**: train many trees on random subsets of data and features, then majority-vote. Reduces variance while maintaining low bias. **Gradient Boosting** (XGBoost, LightGBM): train trees sequentially, each correcting the errors of the previous ensemble. Often the top performer on tabular data. Feature importance: count how often each feature is used for splitting (or measure the total impurity reduction). SHAP values provide theoretically grounded feature importance that satisfies uniqueness, symmetry, and additivity axioms.',
+          '**Random Forest — how averaging cures overfitting:**\n\n' +
+          'A single decision tree overfits easily (it memorizes training noise). A random forest builds 100-1000 trees, each different:\n' +
+          '1. Each tree trains on a random 63% of data (bootstrap sample — sampling with replacement)\n' +
+          '2. At each split, only a random subset of features is considered (√d features for classification)\n' +
+          '3. For a new prediction, all trees vote. Majority wins.\n\n' +
+          'Each tree overfits in a DIFFERENT way (different data, different features). Averaging cancels the noise — like asking 100 people to estimate a jar of marbles. Individual guesses are wild, but the average is remarkably accurate.\n\n' +
+          '**Gradient Boosting — sequentially fixing mistakes:**\n' +
+          '1. Tree 1: Fits the data, gets some predictions wrong\n' +
+          '2. Tree 2: Fits the RESIDUALS (errors) of Tree 1 — focusing on what Tree 1 got wrong\n' +
+          '3. Tree 3: Fits the residuals of Trees 1+2 combined\n' +
+          '4. Final prediction = Tree 1 + 0.1×Tree 2 + 0.1×Tree 3 + … (the 0.1 learning rate prevents overfitting)\n\n' +
+          'XGBoost and LightGBM are optimized implementations. On tabular data (spreadsheet-like), they consistently beat neural networks — ' +
+          'this is why Kaggle competitions on tabular data are dominated by gradient boosting, not deep learning.\n\n' +
+          '**Feature importance from trees:** Count how often each feature is used for splitting across all trees, ' +
+          'weighted by the impurity reduction at each split. The top features are the ones the forest relies on most.',
         diagram: 'DecisionTreeDiagram',
       },
       {
@@ -4112,7 +4533,23 @@ plt.show()`,
         intermediateContent:
           'The univariate Gaussian PDF is f(x) = (1/σ√2π) × e^(-(x-μ)²/2σ²). The key insight: 68% of data falls within ±1σ of the mean, 95% within ±2σ, and 99.7% within ±3σ (the "68-95-99.7 rule"). For two variables, the bivariate Gaussian introduces a **correlation coefficient** ρ that controls how the ellipse tilts. When ρ=0, variables are independent and the contours are axis-aligned. The covariance matrix Σ encodes both the spread (σ values) and the correlation (ρ). Its eigenvectors are the principal axes of the ellipse — the "natural" directions of the data.',
         advancedContent:
-          'The multivariate Gaussian in k dimensions: f(x) = (2π)^(-k/2) |Σ|^(-1/2) exp(-½(x-μ)ᵀΣ⁻¹(x-μ)). The quadratic form (x-μ)ᵀΣ⁻¹(x-μ) is the **Mahalanobis distance** squared — a distance metric that accounts for correlation and scale. Points at equal Mahalanobis distance form ellipsoids. The precision matrix Σ⁻¹ appears in Gaussian Naive Bayes, Gaussian Mixture Models, and the loss functions of many deep learning systems. PCA is equivalent to rotating coordinates to diagonalize Σ — the eigenvectors become the new axes and the eigenvalues the variance along each.',
+          '**The multivariate Gaussian — from 1D bell to nD ellipsoid:**\n\n' +
+          'In 1D: f(x) = (1/σ√2π) exp(-(x-μ)²/2σ²). The exponent -(x-μ)²/2σ² measures "how many standard deviations from the mean."\n\n' +
+          'In k dimensions, this generalizes to:\n' +
+          'f(x) = (2π)^(-k/2) |Σ|^(-1/2) exp(-½(x-μ)ᵀ Σ⁻¹ (x-μ))\n\n' +
+          'The key quantity is the **Mahalanobis distance**: D² = (x-μ)ᵀ Σ⁻¹ (x-μ). It replaces (x-μ)²/σ² from 1D.\n\n' +
+          '**Why Mahalanobis, not Euclidean?**\n' +
+          'Elephant weight varies by 1000s of kg; ear width by cm. Euclidean distance is dominated by weight. ' +
+          'Mahalanobis accounts for scale AND correlation: it stretches/rotates the space so all features contribute equally. ' +
+          'Points at equal Mahalanobis distance form ellipsoids (the contour lines).\n\n' +
+          '**The connection to PCA:**\n' +
+          'PCA diagonalizes the covariance matrix: Σ = PDP^T, where P is the eigenvector matrix and D contains eigenvalues. ' +
+          'In the rotated coordinate system, the Gaussian is axis-aligned — each dimension is independent. ' +
+          'The eigenvalues are the variance along each principal direction. Large eigenvalue → data stretches far in that direction → important. ' +
+          'Small eigenvalue → data is thin → can be discarded (dimensionality reduction).\n\n' +
+          '**Where this appears in ML:** Gaussian Naive Bayes assumes Σ is diagonal (features independent). ' +
+          'Gaussian Mixture Models allow arbitrary Σ per cluster. ' +
+          'The loss function of a Variational Autoencoder penalizes deviation from a standard Gaussian — forcing the latent space to be smooth and continuous.',
         interactive: { type: 'gaussian-explorer' as const, props: {} },
       },
       {
@@ -4130,7 +4567,22 @@ plt.show()`,
         intermediateContent:
           'Decision boundaries in Gaussian classifiers follow from equating the log-likelihoods of two classes: log p(x|class A) = log p(x|class B). For equal covariance matrices, this simplifies to a **linear boundary** (LDA). For unequal covariances, the boundary becomes **quadratic** (QDA) — a curve that follows the shape of the contours. Gaussian Mixture Models allow each class to have multiple Gaussian components, creating complex multi-modal decision regions.',
         advancedContent:
-          'The information geometry viewpoint: the space of Gaussian distributions forms a Riemannian manifold where the Fisher information matrix defines the metric. The KL divergence between two Gaussians: KL(p||q) = ½[tr(Σq⁻¹Σp) + (μq-μp)ᵀΣq⁻¹(μq-μp) - k + ln(|Σq|/|Σp|)]. Contour plot visualization is the primary diagnostic tool for variational inference, where the approximate posterior (often a Gaussian) is compared against the true posterior. In normalizing flows, a simple Gaussian is warped through invertible transformations — the contour plot evolves from circles to arbitrarily complex shapes.',
+          '**KL divergence — measuring how different two distributions are:**\n\n' +
+          'You have two Gaussian models for elephant weight: model P (from a 2020 survey) and model Q (from a 2025 survey). ' +
+          'How different are they? KL divergence measures this.\n\n' +
+          'For two univariate Gaussians: KL(P||Q) = log(σ_Q/σ_P) + (σ_P² + (μ_P−μ_Q)²)/(2σ_Q²) − ½\n\n' +
+          '**Worked example:** P: μ=4000, σ=500. Q: μ=4200, σ=600.\n' +
+          'KL(P||Q) = log(600/500) + (250000 + 40000)/720000 − 0.5 = 0.182 + 0.403 − 0.5 = **0.085 nats**\n' +
+          'Small KL → the distributions are similar. Large KL → they differ significantly.\n\n' +
+          '**Warning: KL is NOT symmetric.** KL(P||Q) ≠ KL(Q||P). KL(P||Q) asks "how surprised would I be by data from P if I expected Q?" ' +
+          'This asymmetry matters: in variational inference, KL(approximate || true) tends to underestimate uncertainty (the approximate distribution is too narrow), ' +
+          'while KL(true || approximate) tends to spread too wide.\n\n' +
+          '**Where this shows up in practice:**\n' +
+          '- **Variational Autoencoders:** The loss = reconstruction error + KL(learned distribution || standard Gaussian). ' +
+          'The KL term keeps the latent space organized.\n' +
+          '- **Normalizing flows:** Start with a simple Gaussian. Warp it through a series of invertible transformations. ' +
+          'Each transformation bends the contour lines into more complex shapes. The final distribution can match any target — ' +
+          'the contour plot evolves from perfect circles to arbitrarily complex curves, step by step.',
         interactive: { type: 'contour-explainer' as const, props: {} },
       },
       {
@@ -4148,7 +4600,22 @@ plt.show()`,
         intermediateContent:
           'A linear classifier draws a straight boundary: w₁x₁ + w₂x₂ + b = 0. Points on one side are class A, the other side class B. The weights w₁, w₂ determine the boundary\'s angle; the bias b shifts it. Logistic regression uses the sigmoid function σ(z) = 1/(1+e^(-z)) to convert the linear score to a probability: P(class=1) = σ(w·x + b). Training minimizes cross-entropy loss: L = -Σ[y·log(ŷ) + (1-y)·log(1-ŷ)]. Linear classifiers are fast, interpretable, and work well when classes are linearly separable.',
         advancedContent:
-          'Support Vector Machines (SVM) find the maximum-margin hyperplane — the boundary with the largest gap between classes. Support vectors are the closest points to the boundary. The **kernel trick** maps data to higher dimensions where linear separation is possible: the RBF kernel K(x,y) = exp(-γ||x-y||²) effectively creates infinite-dimensional features without computing them explicitly. SVMs remain competitive for small-to-medium datasets with clear margins. For high-dimensional data (text classification), linear SVMs are surprisingly effective because the curse of dimensionality makes most data approximately linearly separable.',
+          '**Support Vector Machines — finding the widest possible boundary:**\n\n' +
+          'Many lines can separate two classes. SVM finds the one with the **maximum margin** — the largest gap between the boundary and the nearest data points (called support vectors).\n\n' +
+          '**Why margin matters:** A wide margin means the model is confident — small perturbations in the data won\'t change the classification. A narrow margin means the model is on a knife-edge.\n\n' +
+          '**The kernel trick — when data isn\'t linearly separable:**\n' +
+          'Imagine calm rumbles in a circle surrounded by a ring of danger rumbles. No straight line can separate them. ' +
+          'The kernel trick adds a new dimension: z = x² + y². In this 3D space, the calm cluster rises into a hill ' +
+          'while danger stays flat — now a horizontal plane separates them.\n\n' +
+          'The brilliant part: the RBF kernel K(x,y) = exp(-γ||x-y||²) computes dot products in an INFINITE-dimensional space ' +
+          'without ever constructing the coordinates. The algorithm only needs dot products between points, not the points themselves.\n\n' +
+          '**When to use SVMs:**\n' +
+          '| Scenario | SVM vs alternatives |\n' +
+          '|---|---|\n' +
+          '| Small dataset (<10K samples), clear margin | SVM often wins |\n' +
+          '| Text classification (high dimensions, sparse) | Linear SVM is surprisingly effective |\n' +
+          '| Large dataset, complex patterns | Neural networks or gradient boosting usually win |\n' +
+          '| Need probability outputs | SVM gives distances to boundary, not probabilities (Platt scaling can convert, but adds complexity) |',
         diagram: 'LinearClassifierDiagram',
       },
       {
@@ -4171,7 +4638,24 @@ plt.show()`,
         intermediateContent:
           'A neural network chains layers of linear transformations with nonlinear activations. Layer output: y = activation(W·x + b). Common activations: ReLU (max(0, x) — simple, fast, standard), sigmoid (squashes to 0-1, used for output probabilities), softmax (multi-class probabilities). A 2-layer network: input → hidden layer (64 neurons, ReLU) → output layer (num_classes, softmax). Training uses backpropagation: compute loss, propagate gradients backward through all layers, update weights via gradient descent.',
         advancedContent:
-          'Deep learning architectures: **CNNs** (Convolutional Neural Networks) apply learned filters to detect spatial features — dominant for images. **RNNs/LSTMs** process sequential data (text, time series) by maintaining hidden state. **Transformers** use self-attention to process entire sequences in parallel — GPT, BERT, and all modern LLMs are transformers. **GANs** (Generative Adversarial Networks) generate realistic images by training two networks against each other. **Diffusion models** (DALL-E, Stable Diffusion) generate images by learning to reverse a noise-adding process. Each architecture matches the structure of specific data types.',
+          '**Deep learning architectures — which one for which data:**\n\n' +
+          '| Architecture | How it works | Best for | Key insight |\n' +
+          '|---|---|---|---|\n' +
+          '| **CNN** | Small filters (3×3) slide across the image, detecting patterns at each location | Images, video, spectrogram audio | Translation invariance — a cat in the corner is the same cat in the center |\n' +
+          '| **RNN/LSTM** | Processes one time step at a time, passing a hidden state forward | Time series, sensor data | Memory — the hidden state carries information from earlier in the sequence |\n' +
+          '| **Transformer** | Every element attends to every other element simultaneously | Text, translation, code, long sequences | Parallelism + long-range attention (no forgetting distant context) |\n\n' +
+          '**Generative models — creating new data:**\n\n' +
+          '**GANs (Generative Adversarial Networks):**\n' +
+          '- Generator: creates fake images from random noise\n' +
+          '- Discriminator: tries to distinguish fake from real\n' +
+          '- They train against each other. The generator gets better at fooling the discriminator; the discriminator gets better at catching fakes.\n' +
+          '- Result: the generator produces images indistinguishable from real data.\n' +
+          '- Problem: training is unstable (mode collapse — generator learns to produce only one type of image).\n\n' +
+          '**Diffusion models (DALL-E, Stable Diffusion):**\n' +
+          '- Forward: gradually add noise to a real image until it becomes pure static (100 steps)\n' +
+          '- Reverse: train a neural network to predict and remove one step of noise at a time\n' +
+          '- Generation: start from pure noise, denoise 100 times → photorealistic image\n' +
+          '- More stable than GANs, higher quality, but slower to generate (many denoising steps).',
         diagram: 'NeuralNetworkDiagram',
       },
       {
@@ -4195,7 +4679,24 @@ plt.show()`,
         intermediateContent:
           'Transformers process input through self-attention: each token attends to every other token, computing a weighted sum where weights reflect relevance. Attention(Q,K,V) = softmax(QKᵀ/√d)V, where Q (queries), K (keys), V (values) are learned projections of the input. Multi-head attention runs several attention functions in parallel, capturing different types of relationships. The transformer architecture: input embedding → positional encoding → N × (multi-head attention + feed-forward network + layer normalization) → output.',
         advancedContent:
-          'Scaling laws: transformer performance improves predictably with model size, dataset size, and compute budget — following power laws. GPT-4 has ~1.7 trillion parameters trained on trillions of tokens. Emergent abilities appear at scale: chain-of-thought reasoning, in-context learning, and instruction following emerge in large models but are absent in small ones. Fine-tuning adapts pretrained models: RLHF (Reinforcement Learning from Human Feedback) aligns language models with human preferences. LoRA (Low-Rank Adaptation) fine-tunes models efficiently by training only small rank-decomposition matrices, reducing GPU memory by 10×.',
+          '**Scaling laws — why bigger models keep getting smarter:**\n\n' +
+          'Transformer performance follows predictable power laws:\n' +
+          '- Loss ∝ 1/N^0.07 (N = number of parameters)\n' +
+          '- Loss ∝ 1/D^0.10 (D = dataset size in tokens)\n' +
+          '- Loss ∝ 1/C^0.05 (C = compute budget in FLOPS)\n\n' +
+          'Double the parameters → loss drops by ~5%. This is why labs scale models from millions to billions to trillions of parameters — ' +
+          'the returns are diminishing but predictable.\n\n' +
+          '**Emergent abilities — qualitative jumps at scale:**\n' +
+          'Small models (100M parameters): autocomplete, simple grammar. Medium (1B): coherent paragraphs. Large (100B+): ' +
+          'chain-of-thought reasoning, arithmetic, code generation, in-context learning (performing tasks from a few examples in the prompt, ' +
+          'without any weight updates). These abilities appear suddenly — they are absent at smaller scales and "emerge" past certain thresholds.\n\n' +
+          '**Fine-tuning for alignment:**\n' +
+          '1. **RLHF:** Show the model two responses to the same question. A human rates which is better. ' +
+          'Train a "reward model" on these preferences, then fine-tune the language model to maximize the reward. ' +
+          'This is how chat models learn to be helpful, harmless, and honest.\n\n' +
+          '2. **LoRA (Low-Rank Adaptation):** Full fine-tuning updates all weights (billions of parameters, huge GPU memory). ' +
+          'LoRA freezes the original weights and adds tiny trainable matrices (rank 4-16) at each layer. ' +
+          'These matrices learn the task-specific adjustment. Result: 10× less GPU memory, similar performance.',
         diagram: 'TransformerAttentionDiagram',
       },
     ],
@@ -4658,7 +5159,19 @@ plt.show()`,
         intermediateContent:
           'Electricity is the flow of electrons through a conductor. **Voltage** (V) is the "pressure" pushing electrons — like water pressure in a pipe. **Current** (I, in Amperes) is the flow rate — how many electrons pass per second. **Resistance** (R, in Ohms) opposes flow — like a narrow pipe. Ohm\'s Law: V = I × R. A 9V battery with a 1kΩ resistor: I = 9/1000 = 9 mA. Power: P = V × I = 9 × 0.009 = 0.081 W. An AA battery can supply about 1.5V at up to 500 mA for a few hours.',
         advancedContent:
-          'At the atomic level, electrons in metals are delocalized (shared across the crystal lattice) and drift under applied voltage. The drift velocity is surprisingly slow (~0.1 mm/s for typical current), but the electric field propagates at near light speed — which is why a light switch works instantly. Semiconductors (silicon, germanium) have controllable conductivity: doping with phosphorus (extra electrons → n-type) or boron (missing electrons → p-type) creates the building blocks of transistors. A MOSFET transistor acts as a voltage-controlled switch — the basis of all modern digital electronics, with chips containing billions of transistors.',
+          '**Drift velocity vs signal speed — why the light switch works instantly:**\n\n' +
+          'Individual electrons in a copper wire crawl at ~0.1 mm/s (drift velocity). A wire 3 meters long would take ' +
+          '~8 hours for an electron to traverse. Yet when you flip a switch, the light turns on instantly. Why?\n\n' +
+          'The electric field propagates at ~2/3 the speed of light through the wire. Think of a tube full of marbles: push one in at one end ' +
+          'and one immediately pops out the other end. No marble travelled the full length, but the SIGNAL did. ' +
+          'Each electron only moves a tiny bit, but they all start moving at once.\n\n' +
+          '**Semiconductors — the material that made computers possible:**\n' +
+          'Pure silicon barely conducts. But add tiny amounts of impurities (doping):\n' +
+          '- **Phosphorus** (5 valence electrons in a 4-electron lattice) → extra free electrons → **n-type** (negative carriers)\n' +
+          '- **Boron** (3 valence electrons) → missing electrons ("holes") → **p-type** (positive carriers)\n\n' +
+          'Put n-type and p-type together → **p-n junction** (a diode). Stack them differently → **transistor** (a voltage-controlled switch). ' +
+          'A MOSFET has three terminals: source, drain, gate. Apply voltage to the gate → current flows between source and drain. ' +
+          'Remove voltage → current stops. This ON/OFF switching IS the 1/0 of digital logic. Modern chips pack billions of these on a fingernail-sized die.',
         diagram: 'StaticElectricityDiagram',
       },
       {
@@ -4686,7 +5199,16 @@ plt.show()`,
         intermediateContent:
           'Ohm\'s Law: **V = IR**. A 220Ω resistor with 5V across it draws I = 5/220 = 22.7 mA. Power: P = VI = I²R = V²/R. That resistor dissipates P = 5²/220 = 0.114 W — a 1/4W resistor is sufficient. For an LED: forward voltage ~2V, desired current ~20 mA. Series resistor R = (5V − 2V)/0.02A = **150Ω**. Resistor color code: brown-black-brown = 100Ω, red-violet-red = 2,700Ω = 2.7 kΩ. Kirchhoff\'s Voltage Law: voltages around a closed loop sum to zero. Kirchhoff\'s Current Law: currents entering a node equal currents leaving.',
         advancedContent:
-          'Real circuit analysis uses Thévenin\'s theorem: any linear circuit with two terminals can be replaced by a single voltage source V_th in series with a resistance R_th. To find V_th: open-circuit the terminals and measure voltage. To find R_th: set all independent sources to zero (voltage sources → short, current sources → open) and measure resistance. This simplifies complex networks to a single equivalent circuit — essential for impedance matching, where maximum power transfer occurs when load resistance equals source resistance. Superposition applies to linear circuits: the response to multiple sources equals the sum of responses to each source individually.',
+          '**Thévenin\'s theorem — simplifying any circuit to two components:**\n\n' +
+          'Any circuit (no matter how complex) connected to two terminals can be replaced by a single voltage source V_th in series with a resistance R_th.\n\n' +
+          '**Worked example:** A circuit has a 12V battery, a 4Ω resistor in series, and a 6Ω resistor in parallel with the output terminals.\n' +
+          '1. **Find V_th** (open-circuit voltage): Remove the load. Current flows through 4Ω only (6Ω has no current path). ' +
+          'Voltage divider: V_th = 12V × 6/(4+6) = **7.2V**\n' +
+          '2. **Find R_th** (equivalent resistance): Set voltage source to zero (replace with wire). ' +
+          '4Ω and 6Ω are now in parallel: R_th = (4 × 6)/(4 + 6) = **2.4Ω**\n' +
+          '3. **Result:** The entire circuit looks like a 7.2V source with a 2.4Ω series resistance.\n' +
+          '4. **Use it:** Connect a 2.4Ω load → current = 7.2/(2.4+2.4) = 1.5A. Power in load = 1.5² × 2.4 = **5.4W**.\n\n' +
+          '**Maximum power transfer:** When R_load = R_th, the load receives maximum power. This is why audio amplifiers are impedance-matched to speakers (8Ω amp → 8Ω speaker) and why antenna impedance must match the transmission line (50Ω).',
         diagram: 'CircuitDiagram',
         interactive: {
           type: 'slider',
@@ -4707,7 +5229,24 @@ plt.show()`,
         intermediateContent:
           'An LED (Light Emitting Diode) has a fixed forward voltage drop (red: ~2V, green: ~2.2V, blue/white: ~3.3V) and no internal current limiting. Without a resistor, current is limited only by wire and battery resistance — far too much, destroying the LED instantly. The series resistor limits current to a safe level (typically 10-20 mA). Formula: R = (V_supply - V_LED) / I_desired. For a red LED on 5V at 15 mA: R = (5 - 2) / 0.015 = **200Ω** (use standard 220Ω). Brightness is proportional to current up to the rated maximum.',
         advancedContent:
-          'LEDs are semiconductor devices: when current flows through the p-n junction, electrons recombine with holes, releasing energy as photons. The photon wavelength (color) depends on the bandgap energy of the semiconductor material: GaP (green, 2.26 eV), GaAsP (red/yellow), InGaN (blue/UV, 2.6-3.4 eV). White LEDs use a blue InGaN chip coated with yellow phosphor — the combination appears white. LED efficiency (lumens/watt) has improved dramatically: from 1 lm/W (1960s) to 200+ lm/W (current), surpassing incandescent (15 lm/W) and fluorescent (100 lm/W). OLEDs (organic LEDs) use thin organic films and can be made flexible — enabling foldable screens.',
+          '**How LEDs make light — the physics of the p-n junction:**\n\n' +
+          'An LED is a p-n junction. When current flows forward, electrons from the n-side cross into the p-side. ' +
+          'Each electron "falls" into a hole, releasing energy as a photon. The photon\'s wavelength (color) is determined by the bandgap energy: E = hf = hc/λ.\n\n' +
+          '| Material | Bandgap (eV) | Color | Forward voltage |\n' +
+          '|---|---|---|---|\n' +
+          '| GaP | 2.26 | Green | ~2.2V |\n' +
+          '| GaAsP | 1.8-2.0 | Red/Yellow | ~1.8-2.0V |\n' +
+          '| InGaN | 2.6-3.4 | Blue/UV | ~3.0-3.4V |\n\n' +
+          '**How white LEDs work:** A blue InGaN chip (emits blue light at ~450 nm) is coated with yellow phosphor. ' +
+          'The phosphor absorbs some blue photons and re-emits them as yellow. Blue + yellow = white (to human eyes). ' +
+          'The blue/yellow ratio determines the "color temperature" — more blue = "cool white," more yellow = "warm white."\n\n' +
+          '**The efficiency revolution:**\n' +
+          '| Technology | Efficiency (lumens/watt) | Heat waste |\n' +
+          '|---|---|---|\n' +
+          '| Incandescent (1879) | 15 lm/W | 95% of energy is heat |\n' +
+          '| Fluorescent (1930s) | 100 lm/W | Contains mercury |\n' +
+          '| LED (2020s) | 200+ lm/W | Minimal heat, no mercury |\n\n' +
+          'LED lighting is the single largest energy-saving technology adopted in the 21st century.',
         diagram: 'OhmsLawDiagram',
       },
       {
@@ -4720,7 +5259,24 @@ plt.show()`,
         intermediateContent:
           'PWM (Pulse Width Modulation) switches a digital pin between HIGH and LOW very rapidly. The duty cycle (% of time HIGH) determines the average voltage. 50% duty → average 2.5V (on a 5V Arduino). analogWrite(pin, 127) = 50% duty (127/255). At 490 Hz, each cycle is ~2 ms — your eye sees only the average brightness. PWM controls LED brightness (analogWrite(3, 64) = dim), motor speed (via a transistor), and servo position (servo angle ∝ pulse width between 1-2 ms). It does NOT produce true analog voltage — use an RC filter to smooth if needed.',
         advancedContent:
-          'PWM resolution: Arduino\'s 8-bit PWM gives 256 brightness levels — usually enough. ESP32 offers 16-bit PWM (65,536 levels) for smoother fading. PWM frequency selection: too low → visible flicker in LEDs, audible whine in motors; too high → switching losses in transistors. For RGB LED color mixing, use 3 PWM channels: analogWrite(redPin, r); analogWrite(greenPin, g); analogWrite(bluePin, b); where r,g,b are 0-255. This is the same principle as screen pixels — additive color mixing from three independently controlled light sources.',
+          '**PWM frequency and resolution — the engineering tradeoffs:**\n\n' +
+          '| Parameter | Arduino Uno | ESP32 | Effect |\n' +
+          '|---|---|---|---|\n' +
+          '| Resolution | 8-bit (256 levels) | Up to 16-bit (65,536 levels) | More levels = smoother fading |\n' +
+          '| Default frequency | 490 Hz (pins 3,9,10,11) or 976 Hz (pins 5,6) | Configurable 1 Hz - 40 MHz | Higher = less flicker |\n\n' +
+          '**Frequency tradeoffs:**\n' +
+          '- Too low (<100 Hz): visible LED flicker, audible motor whine (human hearing starts at ~20 Hz)\n' +
+          '- Sweet spot (1-20 kHz): no visible flicker, no audible whine\n' +
+          '- Too high (>100 kHz): switching losses heat up the transistor (energy wasted charging/discharging gate capacitance)\n\n' +
+          '**RGB color mixing with 3 PWM channels:**\n' +
+          '```\n' +
+          'analogWrite(redPin, 255);   // full red\n' +
+          'analogWrite(greenPin, 128); // half green\n' +
+          'analogWrite(bluePin, 0);    // no blue\n' +
+          '// Result: orange (red + some green)\n' +
+          '```\n' +
+          'This is additive color mixing — the same principle behind every pixel on your phone screen. ' +
+          'With 256 levels per channel, you get 256³ = 16.7 million possible colors — the same "16 million colors" advertised for displays.',
         interactive: {
           type: 'true-false',
           props: {
@@ -5129,7 +5685,21 @@ void loop() {
         intermediateContent:
           'Descriptive statistics: **center** (mean, median, mode) and **spread** (range, IQR, variance, std dev). For elephant weights [3200, 3800, 4500, 4800, 5100]: mean = 4280, median = 4500, range = 1900, IQR = 1000, σ ≈ 716. The median is more robust to outliers — adding a 10,000 kg outlier shifts mean to 5233 but median only to 4650. **Correlation** (r = -1 to +1) measures linear association but NOT causation: ice cream sales and drownings both rise in summer, but ice cream doesn\'t cause drowning.',
         advancedContent:
-          'Inferential statistics draws conclusions about populations from samples. The **Central Limit Theorem**: sample means are approximately normal regardless of population distribution, with SE = σ/√n. A 95% confidence interval: x̄ ± 1.96 × SE. The p-value is the probability of observing your result if the null hypothesis were true. The **replication crisis** showed many p < 0.05 results fail to replicate — leading to calls for pre-registration, larger samples, effect sizes, and Bayesian methods. Always report confidence intervals alongside p-values.',
+          '**The Central Limit Theorem (CLT) — why it works:**\n\n' +
+          'Take ANY population (skewed, bimodal, uniform — it does not matter). Draw samples of size n and compute each sample\'s mean. ' +
+          'As n grows, those sample means form a normal distribution centered on the true population mean μ, with standard error SE = σ/√n.\n\n' +
+          '**Worked example:** Elephant weights in Kaziranga are right-skewed (many small juveniles, few large bulls), with μ = 3200 kg, σ = 1400 kg. ' +
+          'You weigh n = 49 randomly chosen elephants. The sampling distribution of the mean has SE = 1400/√49 = 200 kg. ' +
+          'A 95% confidence interval: x̄ ± 1.96 × 200 = x̄ ± 392 kg. If your sample mean is 3350, the interval is [2958, 3742] — ' +
+          'you are 95% confident the true population mean lies in this range.\n\n' +
+          '**What a p-value actually means:** Suppose you test whether a new elephant diet increases weight. Null hypothesis H₀: no effect (mean difference = 0). ' +
+          'You measure a mean increase of 150 kg. The p-value = P(seeing ≥150 kg increase | H₀ is true). If p = 0.03, that means: ' +
+          'IF the diet has zero effect, there is only a 3% chance of seeing this large a difference by random sampling alone. ' +
+          'It does NOT mean "3% chance the diet doesn\'t work."\n\n' +
+          '**The replication crisis:** In 2015, the Open Science Collaboration tried to reproduce 100 published psychology studies. Only 36% replicated. ' +
+          'Root causes: small sample sizes (low statistical power), p-hacking (testing many hypotheses and reporting only the significant one), ' +
+          'publication bias (journals only publish positive results). Fixes: pre-registration (declare your hypothesis before collecting data), ' +
+          'report effect sizes (HOW BIG is the difference, not just "is it nonzero"), and use confidence intervals alongside p-values.',
         interactive: {
           type: 'true-false',
           props: {
@@ -5154,7 +5724,23 @@ void loop() {
         intermediateContent:
           'Weighted mean accounts for unequal importance: if three exams are weighted 20%, 30%, 50% with scores 75, 80, 90: weighted mean = 0.20(75) + 0.30(80) + 0.50(90) = 15 + 24 + 45 = **84** (vs simple mean of 81.7). The geometric mean is appropriate for multiplicative quantities: investment returns of +20%, −10%, +15% over 3 years → geometric mean = (1.20 × 0.90 × 1.15)^(1/3) − 1 = (1.242)^(1/3) − 1 ≈ **7.5%** per year. The harmonic mean applies to rates: driving 60 km at 40 km/h and 60 km at 60 km/h → harmonic mean speed = 2/(1/40 + 1/60) = **48 km/h** (not 50).',
         advancedContent:
-          'The **empirical rule** (68-95-99.7 rule) for normal distributions: ~68% of data falls within 1σ of the mean, ~95% within 2σ, ~99.7% within 3σ. If elephant weights are normally distributed with μ=4280 kg, σ=716 kg, then 95% of elephants weigh between 4280 ± 2(716) = 2848 to 5712 kg. Z-scores standardize any normal distribution: z = (x − μ)/σ. An elephant weighing 5700 kg has z = (5700−4280)/716 = 1.98, meaning it is heavier than ~97.6% of the population (from the z-table). Skewed distributions (income, city sizes) are better described by the median and IQR, or by log-transforming to achieve approximate normality.',
+          '**Z-scores — standardizing any distribution:**\n\n' +
+          'A z-score tells you how many standard deviations a value is from the mean: **z = (x − μ) / σ**. ' +
+          'This converts ANY normal distribution to the standard normal (μ=0, σ=1), so you can use one universal table.\n\n' +
+          '**Step-by-step:** Elephant weights: μ = 4280 kg, σ = 716 kg. An elephant weighs 5700 kg.\n' +
+          '1. z = (5700 − 4280) / 716 = 1420 / 716 = **1.98**\n' +
+          '2. From the z-table: P(Z < 1.98) = 0.9761\n' +
+          '3. Interpretation: this elephant is heavier than **97.6%** of the population\n\n' +
+          '**The 68-95-99.7 rule (empirical rule):**\n' +
+          '| Range | % of data | Elephant weights (μ=4280, σ=716) |\n' +
+          '|---|---|---|\n' +
+          '| μ ± 1σ | ~68% | 3564 – 4996 kg |\n' +
+          '| μ ± 2σ | ~95% | 2848 – 5712 kg |\n' +
+          '| μ ± 3σ | ~99.7% | 2132 – 6428 kg |\n\n' +
+          'An elephant below 2132 kg or above 6428 kg is a 1-in-370 event — investigate (calf? measurement error?).\n\n' +
+          '**When the normal model fails:** Income, city populations, and earthquake magnitudes are right-skewed — the mean is pulled ' +
+          'higher than the median by extreme values. For these, either use median + IQR (non-parametric), or log-transform the data ' +
+          '(log-income IS approximately normal) and apply z-scores to the transformed values.',
         diagram: 'MeanMedianModeDiagram',
       },
       {
@@ -5170,7 +5756,22 @@ void loop() {
         intermediateContent:
           'Variance = average of squared deviations from the mean: σ² = Σ(xᵢ - x̄)² / n. Standard deviation σ = √(variance) — in the same units as the data. For weights [3200, 3800, 4500, 4800, 5100], mean = 4280: deviations = [-1080, -480, 220, 520, 820], squared = [1166400, 230400, 48400, 270400, 672400], mean of squares = 477600, σ = √477600 ≈ **691 kg**. Small σ means data clusters tightly around the mean; large σ means wide spread. Rule of thumb: ~68% of data falls within ±1σ of the mean for normal distributions.',
         advancedContent:
-          'Population σ divides by n; sample standard deviation s divides by n-1 (Bessel\'s correction) because a sample underestimates variability. The coefficient of variation (CV = σ/μ × 100%) allows comparing spread across different scales: elephant weights (σ=700, μ=4300, CV=16%) vs mouse weights (σ=3, μ=25, CV=12%) — mice are relatively less variable. In quality control, Six Sigma means the process spread is so tight that defects occur only at 6 standard deviations from the mean — 3.4 defects per million. The Chebyshev inequality (≥ 1-1/k² of data within k standard deviations) holds for ANY distribution, not just normal.',
+          '**Bessel\'s correction — why divide by n-1:**\n\n' +
+          'When you compute variance from a sample, you already used the sample to estimate the mean x̄. That "uses up" one degree of freedom — ' +
+          'the deviations from x̄ are constrained (they must sum to zero). Dividing by n would systematically underestimate the true population variance. ' +
+          'Dividing by n-1 corrects this bias.\n\n' +
+          '**Worked example:** Population [2, 4, 6, 8, 10] has μ = 6, σ² = Σ(xᵢ-6)²/5 = 8.0. ' +
+          'Take sample [2, 6, 10]: x̄ = 6, Σ(xᵢ-6)² = 32. Biased: 32/3 = 10.67. Corrected: 32/2 = **16.0**. ' +
+          'The corrected value (s² = 16.0) overshoots this particular sample, but on average across all possible samples of size 3, ' +
+          's² = Σ(xᵢ-x̄)²/(n-1) gives exactly σ² = 8.0. That is what "unbiased" means.\n\n' +
+          '**Coefficient of variation (CV)** — comparing apples to elephants:\n' +
+          'CV = (σ/μ) × 100% normalizes spread by the mean. Elephant weights: σ=700 kg, μ=4300 kg → CV = 16%. ' +
+          'Mouse weights: σ=3 g, μ=25 g → CV = 12%. Despite 700 kg vs 3 g variation, mice are relatively MORE consistent.\n\n' +
+          '**Chebyshev\'s inequality** — works for ANY distribution:\n' +
+          'At least (1 - 1/k²) of data falls within k standard deviations of the mean. ' +
+          'At k=2: ≥ 75%. At k=3: ≥ 89%. At k=10: ≥ 99%. ' +
+          'Unlike the 68-95-99.7 rule (which requires normality), Chebyshev holds for skewed, multimodal, or any distribution whatsoever. ' +
+          'This is why quality control\'s Six Sigma (k=6, ≥ 97.2%) is meaningful even when the process distribution is unknown.',
         diagram: 'StdDevDiagram',
       },
       {
@@ -5186,7 +5787,23 @@ void loop() {
         intermediateContent:
           'A histogram groups data into bins (ranges) and counts how many values fall in each bin. More bins = more detail but noisier; fewer bins = smoother but lose detail. Sturges\' rule: bins ≈ 1 + 3.322 × log₂(n). For n=100: ~8 bins. Distribution shapes: **symmetric** (bell-shaped normal), **right-skewed** (long tail to the right — income, house prices), **left-skewed** (long tail to the left — age at death in developed countries), **bimodal** (two peaks — mixed populations). Always check the histogram before computing mean/std — a bimodal distribution\'s mean falls between the peaks where few data points actually exist.',
         advancedContent:
-          'Kernel Density Estimation (KDE) produces a smooth continuous estimate of the probability distribution, avoiding the arbitrary binning of histograms. Each data point is replaced by a small "kernel" (usually Gaussian), and the sum of all kernels creates the density curve. Bandwidth selection controls smoothness: too narrow → noisy, too wide → oversmoothed. The Q-Q plot (quantile-quantile) compares your data distribution against a theoretical one (usually normal): if the points follow a straight line, the data is approximately normal. Departures from the line reveal skewness, heavy tails, or outliers — more informative than any single test statistic.',
+          '**Kernel Density Estimation (KDE) — replacing histograms with smooth curves:**\n\n' +
+          'A histogram\'s shape depends on arbitrary choices: bin width and bin edges. Shift the bins by half a width and the shape changes. ' +
+          'KDE eliminates this by placing a small bell curve (kernel) at each data point, then summing them all.\n\n' +
+          '**How it works:** For n data points x₁…xₙ, the density estimate at any point x is:\n' +
+          'f̂(x) = (1/nh) Σ K((x − xᵢ)/h), where K is the kernel function (usually Gaussian) and h is the **bandwidth**.\n\n' +
+          '**Bandwidth h controls everything:**\n' +
+          '- h too small → every data point creates its own spike (overfitting, noisy)\n' +
+          '- h too large → real features (bimodality, skewness) get smoothed away\n' +
+          '- Silverman\'s rule of thumb: h ≈ 1.06 × σ × n^(-1/5) — good starting point for normal-ish data\n\n' +
+          '**Q-Q plots — testing normality visually:**\n' +
+          'Sort your n data values. For each, compute the theoretical quantile: where WOULD the kth-smallest value be if the data were perfectly normal? ' +
+          'Plot observed vs theoretical. A straight diagonal line = normal distribution. Deviations tell you exactly what is wrong:\n' +
+          '- S-curve bending up at both ends → **heavy tails** (more extreme values than normal)\n' +
+          '- Curve below the line at the right → **right skew** (long tail to the right)\n' +
+          '- Staircase pattern → **discrete data** (few unique values)\n' +
+          '- Single point far from the line → **outlier**\n\n' +
+          'A Q-Q plot is more informative than any normality test (Shapiro-Wilk, Anderson-Darling) because it shows WHERE the distribution deviates, not just whether it does.',
         diagram: 'HistogramDiagram',
       },
       {
@@ -5202,7 +5819,22 @@ void loop() {
         intermediateContent:
           'An outlier is a data point far from the others. Detection methods: **IQR method** — compute Q1 (25th percentile), Q3 (75th), IQR = Q3 - Q1. Points below Q1 - 1.5×IQR or above Q3 + 1.5×IQR are outliers. For elephant weights: Q1=3800, Q3=4800, IQR=1000. Outlier thresholds: below 2300 or above 6300. **Z-score method**: |z| > 3 (more than 3 standard deviations from mean) flags outliers. Always investigate before removing — outliers might be errors (sensor malfunction) or genuine discoveries (unusually large elephant).',
         advancedContent:
-          'Robust statistics are less sensitive to outliers: the median (vs mean), the MAD (Median Absolute Deviation, vs standard deviation), and the trimmed mean (discard top/bottom 5% before averaging). In machine learning, outlier detection algorithms (Isolation Forest, Local Outlier Factor, DBSCAN) identify anomalous points in multi-dimensional data — used for fraud detection, network intrusion detection, and quality control. The Mahalanobis distance accounts for correlations between features, identifying multivariate outliers that appear normal when each feature is examined individually.',
+          '**Robust statistics — measures that resist outliers:**\n\n' +
+          '| Fragile measure | Robust alternative | How it works |\n' +
+          '|---|---|---|\n' +
+          '| Mean | **Trimmed mean** | Discard top/bottom 5-25% of data, then average the rest |\n' +
+          '| Standard deviation | **MAD** (Median Absolute Deviation) | median(|xᵢ − median(x)|) × 1.4826 |\n' +
+          '| Mean | **Winsorized mean** | Replace extremes with boundary values instead of discarding |\n\n' +
+          '**Worked example (MAD):** Data: [12, 14, 13, 15, 14, 100, 13, 11]. Median = 13.5. ' +
+          'Absolute deviations from median: [1.5, 0.5, 0.5, 1.5, 0.5, 86.5, 0.5, 2.5]. ' +
+          'MAD = median of deviations = 1.0. Scaled MAD = 1.0 × 1.4826 = **1.48**. ' +
+          'Compare to SD = 29.6 — the outlier (100) inflated SD by 20×, but MAD barely noticed.\n\n' +
+          '**Mahalanobis distance — catching multivariate outliers:**\n' +
+          'A student with height 175 cm is normal. Weight 90 kg is normal. But 175 cm AND 90 kg might be unusual IF those two variables are correlated. ' +
+          'Mahalanobis distance accounts for correlations: D² = (x - μ)ᵀ Σ⁻¹ (x - μ), where Σ is the covariance matrix. ' +
+          'Points with D² exceeding the chi-squared critical value (df = number of variables) are multivariate outliers. ' +
+          'This is the foundation of Isolation Forest and Local Outlier Factor in ML-based fraud detection — ' +
+          'fraudulent transactions look normal on each feature alone but are unusual in combination.',
         diagram: 'StdDevDiagram',
       },
       {
@@ -5217,7 +5849,28 @@ void loop() {
         intermediateContent:
           'Sampling methods: **random sampling** gives every member an equal chance. **Stratified sampling** divides into subgroups and samples each proportionally. **Systematic sampling** selects every kth member. Margin of error for proportions: MoE ≈ 1/√n for 95% confidence. A poll of n=1000 has MoE ≈ ±3.2%. To halve the margin, quadruple the sample. **Convenience sampling** (surveying whoever is easiest to reach) introduces bias. **Cluster sampling** randomly selects groups (villages, schools) then surveys everyone within — practical when populations are geographically dispersed.',
         advancedContent:
-          'Selection bias occurs when samples do not represent the population. Survivorship bias analyzes only "survivors" — studying only successful startups overestimates success factors. The Literary Digest poll (1936) predicted Landon over Roosevelt because its sample skewed wealthy (telephone/car owners). Statistical power = P(detecting a real effect) = 1 - β. For α=0.05 and medium effect, you need n≈64 per group. Underpowered studies produce unreliable results. **Bootstrap resampling** (randomly sampling with replacement from your data, thousands of times) estimates confidence intervals without assumptions about the population distribution.',
+          '**Statistical power — the probability of detecting a real effect:**\n\n' +
+          'You design an experiment to test whether a new teaching method improves test scores. Power = P(correctly rejecting H₀ when the effect is real) = 1 − β.\n\n' +
+          '**The four knobs of power:**\n' +
+          '| Factor | Increase it → power… | Practical implication |\n' +
+          '|---|---|---|\n' +
+          '| Sample size n | Goes up | More students in your study |\n' +
+          '| Effect size d | Goes up | The method truly makes a big difference |\n' +
+          '| Significance level α | Goes up | Accept more false positives (risky) |\n' +
+          '| Variability σ | Goes DOWN | Less noise in measurements |\n\n' +
+          '**Rule of thumb:** For α = 0.05, 80% power, and a "medium" effect (d = 0.5), you need n ≈ 64 per group. ' +
+          'Most published studies use n = 20-30 — grossly underpowered. An underpowered study that finds p < 0.05 likely ' +
+          'overestimates the true effect size (winner\'s curse).\n\n' +
+          '**Bootstrap resampling — confidence intervals without assumptions:**\n' +
+          'You have data: [23, 45, 67, 12, 89, 34, 56]. You want a confidence interval for the median but don\'t know the population distribution.\n' +
+          '1. Resample WITH replacement: draw 7 values randomly from your data (e.g., [45, 12, 89, 89, 34, 23, 45])\n' +
+          '2. Compute the median of this resample: 45\n' +
+          '3. Repeat 10,000 times, collecting 10,000 medians\n' +
+          '4. Sort them. The 250th and 9750th values give the 95% confidence interval\n\n' +
+          'No assumptions about normality. Works for ANY statistic (median, trimmed mean, ratio, correlation). ' +
+          'This is why bootstrap is the default tool in modern data science when theoretical distributions are unknown.\n\n' +
+          '**Survivorship bias:** Studying only successful startups (the "survivors") overestimates the importance of their strategies. ' +
+          'The 1936 Literary Digest poll predicted Landon over Roosevelt by surveying telephone/car owners — a biased sample that missed lower-income voters who overwhelmingly supported Roosevelt.',
         interactive: {
           type: 'true-false',
           props: {
@@ -5240,7 +5893,23 @@ void loop() {
         intermediateContent:
           'Pearson r measures linear association: r = +1 (perfect positive line), 0 (no linear pattern), -1 (perfect negative). Compute from paired data: r = Σ[(xᵢ-x̄)(yᵢ-ȳ)] / √[Σ(xᵢ-x̄)² × Σ(yᵢ-ȳ)²]. **Correlation ≠ causation**: ice cream sales and drowning deaths correlate (confounding variable: temperature). r² (coefficient of determination) tells you what fraction of variation in y is explained by x: r = 0.9 means r² = 0.81, so 81% of the variation is explained. Always visualize with a scatter plot — non-linear relationships, outliers, and clusters can hide behind a single number.',
         advancedContent:
-          'Spearman rank correlation measures monotonic (not just linear) association using ranks instead of values — robust to outliers. Kendall\'s tau is another rank-based measure, preferred for small samples. Partial correlation controls for confounding: the partial correlation between ice cream and drowning, controlling for temperature, is near zero. In practice, multiple regression (y = b₀ + b₁x₁ + b₂x₂ + ...) separates the contributions of multiple predictors. Granger causality tests whether past X values improve predictions of Y — a temporal (not true causal) test used in economics and neuroscience.',
+          '**Spearman rank correlation — when the relationship is monotonic but not linear:**\n\n' +
+          'Pearson r only catches linear relationships. If study hours vs score follows a curve (diminishing returns), ' +
+          'Pearson r might be 0.7 even though the relationship is nearly perfect. Spearman replaces each value with its rank, ' +
+          'then computes Pearson r on the ranks.\n\n' +
+          '**Worked example:** Study hours: [1, 2, 3, 4, 5]. Scores: [50, 70, 82, 88, 90]. The relationship curves (diminishing returns). ' +
+          'Pearson r = 0.96. Spearman rₛ = 1.0 (perfect monotonic — every rank increase in hours gives a rank increase in score). ' +
+          'Spearman correctly identifies the perfect monotonic relationship that Pearson underestimates.\n\n' +
+          '**Partial correlation — unmasking confounders:**\n' +
+          'Ice cream sales and drowning deaths correlate at r = 0.85. But both are caused by hot weather. ' +
+          'Partial correlation controls for temperature: r(ice cream, drowning | temperature) ≈ 0.02. ' +
+          'The formula: r₁₂.₃ = (r₁₂ − r₁₃ × r₂₃) / √((1−r₁₃²)(1−r₂₃²)). ' +
+          'If r(ice cream, temp) = 0.90 and r(drowning, temp) = 0.88: ' +
+          'r₁₂.₃ = (0.85 − 0.90 × 0.88) / √((1−0.81)(1−0.77)) = (0.85 − 0.792) / √(0.19 × 0.23) = 0.058 / 0.209 ≈ **0.28** — ' +
+          'the apparent strong correlation nearly vanishes once temperature is controlled.\n\n' +
+          '**Multiple regression** extends this to many variables simultaneously: ' +
+          'y = b₀ + b₁x₁ + b₂x₂ + … Each coefficient bᵢ represents the effect of xᵢ AFTER controlling for all other variables. ' +
+          'This is the workhorse of observational science — when you cannot run experiments, regression is the next best tool for disentangling causes.',
         diagram: 'CorrelationDiagram',
         interactive: {
           type: 'matching',
@@ -5269,7 +5938,20 @@ void loop() {
         intermediateContent:
           'A contour line connects all points at the same value of a function f(x,y). For a bivariate Gaussian, contour lines are ellipses defined by (x-μ)ᵀΣ⁻¹(x-μ) = c for constant c. The **eigenvalues** of the covariance matrix Σ determine the lengths of the ellipse axes, and the **eigenvectors** determine the tilt angle. When ρ=0, the eigenvalues are σₓ² and σᵧ² and the axes are aligned with x and y. When ρ≠0, the major axis tilts at angle θ = ½ arctan(2ρσₓσᵧ/(σₓ²-σᵧ²)). The Mahalanobis distance from the center to any contour line determines the probability enclosed within that contour.',
         advancedContent:
-          'In higher dimensions, contour "lines" become contour **surfaces** (hyperellipsoids). Gaussian Mixture Models (GMMs) combine multiple Gaussians, each with its own mean, covariance, and weight — the resulting contour plot shows multiple overlapping elliptical regions. The EM algorithm iteratively refines these parameters. In Bayesian inference, posterior contour plots reveal parameter uncertainty: the 95% **credible region** (the contour enclosing 95% of the posterior mass) is the Bayesian analog of a confidence interval. Kernel Density Estimation produces non-parametric contour plots from raw data — useful when the true distribution is not Gaussian.',
+          '**Gaussian Mixture Models (GMMs) — when one bell curve isn\'t enough:**\n\n' +
+          'Real data often has multiple clusters. Heights of "all adults" is bimodal (male and female peaks). ' +
+          'A GMM models this as a weighted sum of K Gaussians: p(x) = Σ wₖ × N(x | μₖ, Σₖ), where each component has its own mean, covariance, and weight wₖ (with Σwₖ = 1).\n\n' +
+          '**The EM algorithm finds the components:**\n' +
+          '1. **E-step:** For each data point, compute the probability it belongs to each cluster (soft assignment)\n' +
+          '2. **M-step:** Update each cluster\'s mean, covariance, and weight using those probabilities\n' +
+          '3. Repeat until convergence. Each iteration increases the likelihood — guaranteed.\n\n' +
+          '**Reading the contour plot:** Each Gaussian component produces elliptical contours. ' +
+          'Overlapping ellipses show where clusters blend. The contour where two components\' densities are equal is the decision boundary.\n\n' +
+          '**Bayesian credible regions on contour plots:**\n' +
+          'When estimating two parameters (e.g., mean μ and variance σ² of elephant weights), the posterior distribution ' +
+          'is a 2D surface. The 95% credible region — the smallest contour enclosing 95% of the posterior mass — is the Bayesian analog of a confidence region. ' +
+          'Unlike frequentist confidence regions, the Bayesian credible region has a direct probability interpretation: ' +
+          '"there is a 95% probability the true parameters lie inside this ellipse."',
         interactive: { type: 'contour-explainer' as const, props: {} },
       },
       {
@@ -5300,12 +5982,24 @@ void loop() {
           'Drugs like warfarin have a narrow therapeutic index (~2), while penicillin\'s is very wide (~100). ' +
           'Log-dose plots spread out the low-dose region, making EC50 easier to read visually.',
         advancedContent:
-          'The four-parameter logistic (4PL) model generalizes the Hill equation: E = bottom + (top - bottom) / ' +
-          '(1 + (EC50/D)ⁿ). Fitting uses nonlinear least squares (Levenberg-Marquardt). For combination ' +
-          'therapies, the **Bliss independence** model predicts combined effect as E_AB = E_A + E_B - E_A×E_B; ' +
-          'deviations indicate synergy or antagonism. The **isobologram** plots equi-effective dose pairs — ' +
-          'concave curves indicate synergy. Population PK/PD models add inter-individual variability using ' +
-          'mixed-effects modeling (NONMEM), enabling personalized dosing from sparse clinical data.',
+          '**The 4-parameter logistic (4PL) model — fitting real dose-response data:**\n\n' +
+          'E = bottom + (top − bottom) / (1 + (EC50/D)ⁿ)\n\n' +
+          '| Parameter | What it controls | Example value |\n' +
+          '|---|---|---|\n' +
+          '| bottom | Baseline response (no drug) | 5% cell survival |\n' +
+          '| top | Maximum response (saturating dose) | 95% cell survival |\n' +
+          '| EC50 | Dose for half-maximal effect | 0.3 μg/mL |\n' +
+          '| n (Hill coefficient) | Steepness of the curve | n=1 (gradual), n=4 (switch-like) |\n\n' +
+          '**Fitting the curve:** Nonlinear least squares (Levenberg-Marquardt algorithm) minimizes Σ(observed − predicted)². ' +
+          'You supply data points (dose, response) and initial guesses for the 4 parameters. The algorithm iteratively adjusts them. ' +
+          'R² > 0.95 indicates a good fit. If the residuals show a pattern, the 4PL model may be wrong.\n\n' +
+          '**Drug combinations — synergy or antagonism?**\n' +
+          'The Bliss independence model predicts the expected combined effect if two drugs act independently: ' +
+          'E_AB = E_A + E_B − E_A × E_B. Worked example: Drug A kills 40% of cells. Drug B kills 30%. ' +
+          'Expected combined (independent): 0.4 + 0.3 − 0.4×0.3 = **58%**. ' +
+          'If the actual combined effect is 80% → **synergy** (the drugs help each other). ' +
+          'If it is 45% → **antagonism** (they interfere). ' +
+          'The isobologram plots dose pairs that achieve a fixed effect (e.g., 50% kill): concave = synergy, convex = antagonism, straight line = independence.',
       },
       {
         title: 'Monte Carlo Simulation',
@@ -5336,13 +6030,25 @@ void loop() {
           'needed for a given accuracy. In finance, the Black-Scholes model prices options analytically, ' +
           'but Monte Carlo handles path-dependent options (Asian, barrier) where no closed-form exists.',
         advancedContent:
-          'Monte Carlo integration extends to high-dimensional integrals where deterministic quadrature ' +
-          'fails due to the **curse of dimensionality**. Markov Chain Monte Carlo (MCMC) methods — ' +
-          'Metropolis-Hastings, Gibbs sampling, Hamiltonian Monte Carlo — sample from complex posterior ' +
-          'distributions by constructing a Markov chain whose stationary distribution is the target. ' +
-          'Convergence diagnostics (Gelman-Rubin R̂, effective sample size) determine when the chain ' +
-          'has mixed sufficiently. Quasi-Monte Carlo uses low-discrepancy sequences (Sobol, Halton) ' +
-          'instead of pseudorandom numbers, achieving convergence rates of O(1/N) vs O(1/√N).',
+          '**MCMC — Markov Chain Monte Carlo, step by step:**\n\n' +
+          'Problem: You need to sample from a complex probability distribution p(x) that you can evaluate but can\'t directly sample from ' +
+          '(e.g., a Bayesian posterior with 50 parameters).\n\n' +
+          '**Metropolis-Hastings algorithm:**\n' +
+          '1. Start at some position x₀\n' +
+          '2. Propose a random step: x* = x₀ + noise (e.g., Gaussian noise)\n' +
+          '3. Compute acceptance ratio: α = p(x*) / p(x₀)\n' +
+          '4. If α ≥ 1: ACCEPT (move to x*) — we moved to a higher-probability region\n' +
+          '5. If α < 1: Accept with probability α (flip a biased coin). Otherwise STAY at x₀\n' +
+          '6. Repeat thousands of times. The visited positions form samples from p(x)\n\n' +
+          '**Why this works:** Steps 4-5 ensure the chain spends more time in high-probability regions ' +
+          '(it always accepts uphill moves, sometimes accepts downhill). Over time, the histogram of visited positions converges to p(x).\n\n' +
+          '**Convergence diagnostics:**\n' +
+          '- **Burn-in:** Discard the first ~1000 samples (the chain hasn\'t found the high-probability region yet)\n' +
+          '- **Gelman-Rubin R̂:** Run multiple chains from different starting points. If they all converge to the same distribution, R̂ ≈ 1.0. If R̂ > 1.1, the chains haven\'t mixed — run longer\n' +
+          '- **Effective sample size:** Consecutive MCMC samples are correlated (each step is small). 10,000 samples might contain only ~500 effectively independent samples\n\n' +
+          '**The curse of dimensionality:** In 100 dimensions, a grid with 10 points per dimension needs 10¹⁰⁰ evaluations. ' +
+          'Monte Carlo needs only O(1/ε²) samples regardless of dimension — this is why MCMC is the standard tool for Bayesian inference ' +
+          'in climate models (millions of parameters), genomics (thousands of genes), and astrophysics (galaxy formation models).',
       },
       {
         title: 'Bayesian Inference',
@@ -5372,13 +6078,26 @@ void loop() {
           'independent positive test, the new prior becomes 0.0098 and the posterior jumps to about 50%. ' +
           'A third positive test brings it to ~99%. Each piece of evidence updates the prior iteratively.',
         advancedContent:
-          'In continuous settings, Bayes\' theorem becomes p(θ|x) = p(x|θ)p(θ)/p(x), where p(θ) is the ' +
-          'prior density, p(x|θ) is the likelihood function, and p(x) = ∫p(x|θ)p(θ)dθ is the marginal ' +
-          'likelihood (evidence). Conjugate priors yield closed-form posteriors: Beta-Binomial for ' +
-          'proportions, Normal-Normal for means, Gamma-Poisson for rates. When conjugacy fails, MCMC ' +
-          'or variational inference approximate the posterior. The Bayesian approach naturally quantifies ' +
-          'uncertainty through credible intervals and handles small samples gracefully by incorporating ' +
-          'prior knowledge — unlike frequentist methods which rely solely on observed data.',
+          '**Conjugate priors — when Bayesian updating has a closed-form solution:**\n\n' +
+          'A conjugate prior is a prior distribution that, when combined with a specific likelihood, produces a posterior in the same family. ' +
+          'This gives you an exact answer without MCMC.\n\n' +
+          '**Worked example (Beta-Binomial):** You want to estimate the probability p that an elephant calf survives its first year in Kaziranga.\n' +
+          '- **Prior:** You believe p is around 0.7 but aren\'t sure. Use Beta(7, 3) — this encodes "roughly 7 successes out of 10 trials" worth of prior belief.\n' +
+          '- **Data:** You observe 18 surviving calves out of 22 births.\n' +
+          '- **Posterior:** Beta(7 + 18, 3 + 4) = Beta(25, 7). The posterior mean = 25/(25+7) = **0.78**.\n' +
+          '- **95% credible interval:** [0.62, 0.90] — there is a 95% probability the true survival rate lies in this range.\n\n' +
+          'The prior "pulled" the estimate from the raw data proportion (18/22 = 0.82) toward the prior mean (0.70). ' +
+          'With more data, the prior matters less — after 200 observations, the posterior is dominated by the data.\n\n' +
+          '**Common conjugate pairs:**\n' +
+          '| Data type | Likelihood | Conjugate prior | Posterior |\n' +
+          '|---|---|---|---|\n' +
+          '| Coin flips, survival | Binomial | Beta(a, b) | Beta(a + successes, b + failures) |\n' +
+          '| Measurements | Normal (known σ) | Normal(μ₀, σ₀²) | Normal(weighted avg, smaller variance) |\n' +
+          '| Event counts (per year) | Poisson | Gamma(α, β) | Gamma(α + Σxᵢ, β + n) |\n\n' +
+          '**When conjugacy fails:** Most real problems (multivariate, hierarchical models with 50+ parameters) have no conjugate solution. ' +
+          'Then you use MCMC to sample from the posterior (see Monte Carlo section above) or **variational inference** — ' +
+          'which approximates the posterior with a simpler distribution by minimizing KL divergence. ' +
+          'Variational inference is faster but less accurate; MCMC is exact but slower. Modern tools (Stan, PyMC, NumPyro) handle both.',
       },
     ],
 
@@ -5556,7 +6275,24 @@ print(f"Each extra hour ≈ +{m:.1f} points on the exam")`,
         intermediateContent:
           'A sine wave y = A sin(2πft + φ) has amplitude A, frequency f (Hz), and phase φ (radians). Period T = 1/f. Angular frequency ω = 2πf. For 440 Hz (middle A): T = 2.27 ms, ω = 2764.6 rad/s. Wavelength λ = v/f: sound at 440 Hz in air (343 m/s): λ = 0.78 m. Light at 5×10¹⁴ Hz: λ = 600 nm (orange). The unit circle connection: sin(θ) = y-coordinate of a point moving around a unit circle at constant angular velocity ω — the projection of circular motion onto a straight line is a sine wave.',
         advancedContent:
-          'Sine waves are eigenfunctions of linear time-invariant (LTI) systems: input sine → output sine of same frequency, changed only in amplitude and phase. This is why Fourier analysis works — decompose any signal into sines, process each independently. The Hilbert transform produces the analytic signal z(t) = x(t) + iH{x(t)}, whose magnitude is the envelope and whose phase derivative is the instantaneous frequency. Applications: AM radio demodulation, vibration analysis, and the mathematical basis of signal processing in MRI, radar, and telecommunications.',
+          '**Why sine waves are special — eigenfunctions of LTI systems:**\n\n' +
+          'A Linear Time-Invariant (LTI) system (any circuit, filter, or acoustic space) has a remarkable property: ' +
+          'if you put a pure sine wave in, you get a pure sine wave out — same frequency, only the amplitude and phase change. ' +
+          'No other waveform has this property.\n\n' +
+          '**Why Fourier analysis works — the consequence:**\n' +
+          'Any signal (voice, music, sensor data) can be decomposed into a sum of sine waves at different frequencies. ' +
+          'Since each sine passes through an LTI system independently, you can:\n' +
+          '1. Decompose the input into sine components (FFT)\n' +
+          '2. Multiply each component by the system\'s gain at that frequency\n' +
+          '3. Shift each component by the system\'s phase delay at that frequency\n' +
+          '4. Add them back up to get the output\n\n' +
+          'This is called the **frequency response** approach and is the foundation of ALL signal processing.\n\n' +
+          '**The Hilbert transform — extracting the envelope:**\n' +
+          'An AM radio signal is a high-frequency carrier (say 1 MHz) whose amplitude varies slowly (the audio). ' +
+          'The Hilbert transform creates the "analytic signal" z(t) = x(t) + iH{x(t)}. Its magnitude |z(t)| is the envelope ' +
+          '(the slowly-varying audio), and the rate of change of its phase gives the instantaneous frequency. ' +
+          'This is how AM radio demodulation works, how vibration analysts extract machine fault signatures, ' +
+          'and how MRI reconstructs images from radio-frequency signals bouncing off hydrogen atoms in your body.',
         diagram: 'UnitCircleDiagram',
       },
       {
@@ -5571,7 +6307,22 @@ print(f"Each extra hour ≈ +{m:.1f} points on the exam")`,
         intermediateContent:
           'Musical intervals are frequency ratios: octave = 2:1, fifth = 3:2, fourth = 4:3. Equal temperament: 12 semitones, each 2^(1/12) ≈ 1.0595. Note formula: f = 440 × 2^((n-69)/12) for MIDI note n. Middle C (n=60): f ≈ **261.6 Hz**. The mel scale models human pitch perception (roughly logarithmic). Cent = 1/100 of a semitone: 1200 cents per octave. Tuning systems (Pythagorean, just intonation, equal temperament) make different tradeoffs between pure intervals and transposability.',
         advancedContent:
-          'Pitch perception uses place coding (basilar membrane location) above ~4 kHz and temporal coding (neural firing sync) below. The **missing fundamental**: hearing 200, 300, 400 Hz → brain perceives 100 Hz (absent). Autocorrelation pitch detection finds the period at which a signal matches its delayed copy. Absolute pitch (the ability to name any note without a reference) affects ~1 in 10,000 people and appears to require both genetic predisposition and early musical training. The cochlear implant — which directly stimulates auditory neurons with electrode arrays — must encode frequency information for pitch perception, a major challenge in implant design.',
+          '**How the ear distinguishes frequencies — two mechanisms:**\n\n' +
+          '**Place coding (above ~4 kHz):** The basilar membrane in the cochlea vibrates at different locations for different frequencies — ' +
+          'high frequencies near the base (stiff end), low frequencies near the apex (floppy end). Each location has hair cells that fire ' +
+          'when their spot vibrates. The brain reads which hair cells fire to determine the frequency.\n\n' +
+          '**Temporal coding (below ~4 kHz):** Neurons fire in sync with the wave\'s peaks. A 200 Hz tone causes neurons to fire ' +
+          'every 5 ms (1/200 s). The brain measures the time between spikes to determine the frequency. Above ~4 kHz, ' +
+          'neurons can\'t fire fast enough to keep up, so only place coding works.\n\n' +
+          '**The missing fundamental — the brain fills in gaps:**\n' +
+          'Play 200 Hz, 300 Hz, and 400 Hz together. These are the 2nd, 3rd, and 4th harmonics of 100 Hz. ' +
+          'Your brain perceives 100 Hz — a pitch that isn\'t physically present. This is how telephone calls work: ' +
+          'phone lines cut off below ~300 Hz, yet you hear bass voices clearly because the harmonics are present ' +
+          'and your brain reconstructs the missing fundamental.\n\n' +
+          '**Autocorrelation pitch detection (used in software):**\n' +
+          'Take a snippet of audio. Shift a copy of it by delay τ. Multiply and sum (correlate). ' +
+          'The delay τ that gives the highest correlation equals the period T. Frequency = 1/T. ' +
+          'This is how guitar tuner apps work — they use autocorrelation to find the fundamental frequency of the string.',
         diagram: 'SineWaveDiagram',
       },
       {
@@ -5586,7 +6337,23 @@ print(f"Each extra hour ≈ +{m:.1f} points on the exam")`,
         intermediateContent:
           'Amplitude A is the peak value of the wave — half the distance from trough to crest. For sound, amplitude determines loudness; for light, it determines brightness; for a pendulum, it is the maximum displacement. The energy carried by a wave is proportional to A² — doubling the amplitude quadruples the energy. Decibels (dB) measure loudness on a logarithmic scale: dB = 20 × log₁₀(A/A_ref). Doubling the amplitude adds ~6 dB. The human hearing range spans ~120 dB — from a pin drop (0 dB) to a jet engine (120 dB), a factor of 10⁶ in amplitude.',
         advancedContent:
-          'RMS (Root Mean Square) amplitude is the standard measure for AC signals: A_rms = A_peak / √2 for a sine wave. India\'s 230V mains supply has V_peak ≈ 325V but V_rms = 230V — the RMS value matches the equivalent DC power. For complex waveforms, Parseval\'s theorem states that total power equals the sum of power at each frequency: ΣA²ₙ in the time domain equals Σ|X(f)|² in the frequency domain. This connects amplitude analysis to spectral analysis — the power at each frequency contributes to the total signal power.',
+          '**RMS amplitude — measuring the "effective" strength of a varying signal:**\n\n' +
+          'A sine wave swings between +A and −A. Its simple average is zero (positive and negative cancel). ' +
+          'But it clearly carries energy. The RMS (Root Mean Square) solves this:\n' +
+          '1. Square every value (makes all positive)\n' +
+          '2. Take the mean of the squares\n' +
+          '3. Take the square root\n\n' +
+          'For a sine wave: A_rms = A_peak / √2 ≈ 0.707 × A_peak.\n\n' +
+          '**Worked example — Indian mains electricity:**\n' +
+          'India\'s supply is rated "230V" — that is the RMS voltage. The actual voltage swings between ' +
+          '+325V and −325V (V_peak = 230 × √2 ≈ 325V), 50 times per second. The RMS value means: ' +
+          'this AC supply delivers the same power as a 230V DC battery. A 100W bulb draws the same power either way.\n\n' +
+          '**Parseval\'s theorem — energy conservation across domains:**\n' +
+          'Total signal energy = Σ(amplitude²) in the time domain = Σ|X(f)|² in the frequency domain. ' +
+          'In words: the energy you see in the waveform must equal the energy you see in the spectrum. ' +
+          'Practical use: if you filter out a frequency band (e.g., noise above 10 kHz), you can calculate exactly how much ' +
+          'energy you removed by summing |X(f)|² in that band. This is the mathematical foundation of equalizers, ' +
+          'noise reduction, and audio compression (MP3 removes frequencies your ear can\'t detect, preserving the energy you can hear).',
         interactive: {
           type: 'slider',
           props: {
@@ -5609,7 +6376,23 @@ print(f"Each extra hour ≈ +{m:.1f} points on the exam")`,
         intermediateContent:
           'Phase φ shifts a sine wave in time: y = sin(2πft + φ). φ = 0 starts at zero crossing (rising). φ = π/2 starts at the peak (= cosine). φ = π starts at zero (falling). φ = 3π/2 starts at the trough. Two waves at the same frequency with different phases: Δφ = 0 → perfectly in sync (constructive interference, double amplitude). Δφ = π → perfectly opposite (destructive interference, cancel out). Phase difference is measured in degrees or radians: 90° = π/2 rad, 180° = π rad.',
         advancedContent:
-          'In electronics, phase relationships are critical for AC circuit analysis. A capacitor\'s current leads its voltage by 90° (π/2); an inductor\'s current lags by 90°. This is represented using complex impedance: Z_C = 1/(jωC), Z_L = jωL, where j = √(-1). Phasor diagrams show amplitude as length and phase as angle. In stereophonic audio, phase differences between left and right channels create the perception of sound source location. Noise-canceling headphones detect ambient sound, invert its phase (add π), and play the result — the two waves destructively interfere, reducing ambient noise by 20-30 dB.',
+          '**Phase in AC circuits — why capacitors and inductors shift phase:**\n\n' +
+          'Apply a sine-wave voltage to a capacitor. The current flows BEFORE the voltage peaks (the capacitor charges, ' +
+          'current is highest when voltage is changing fastest, which is at the zero crossing). Current leads voltage by 90°.\n\n' +
+          'For an inductor, the opposite: the inductor resists changes in current, so current peaks AFTER voltage. ' +
+          'Current lags voltage by 90°.\n\n' +
+          '**Complex impedance — the math that makes this tractable:**\n' +
+          'Instead of tracking phase shifts with trigonometry, engineers use complex numbers:\n' +
+          '- Resistor: Z_R = R (real — no phase shift)\n' +
+          '- Capacitor: Z_C = 1/(jωC) (imaginary — 90° phase lead in current)\n' +
+          '- Inductor: Z_L = jωL (imaginary — 90° phase lag in current)\n\n' +
+          'where j = √(−1) and ω = 2πf. A series RLC circuit has Z_total = R + jωL + 1/(jωC). ' +
+          'At resonance (ωL = 1/ωC), the imaginary parts cancel: Z = R (purely real, no phase shift). ' +
+          'This is how a radio tuner selects one station — the RLC circuit resonates at the desired frequency.\n\n' +
+          '**Noise cancellation — destructive interference in practice:**\n' +
+          'A microphone picks up ambient noise x(t). The headphone generates −x(t) (same waveform, phase-shifted by π). ' +
+          'At your ear: x(t) + (−x(t)) = 0. In practice, the cancellation is imperfect (delay, microphone position) ' +
+          'but achieves 20-30 dB reduction — making a subway sound like a quiet room.',
         diagram: 'PhaseDiagram',
       },
       {
@@ -5625,7 +6408,21 @@ print(f"Each extra hour ≈ +{m:.1f} points on the exam")`,
         intermediateContent:
           'A musical note is not a single frequency but a fundamental plus harmonics. A violin A4 (440 Hz) contains harmonics at 880, 1320, 1760, 2200 Hz — integer multiples of the fundamental. The relative amplitudes of harmonics determine timbre (tone color): a flute has weak harmonics (nearly pure sine), while a trumpet has strong upper harmonics (bright, brassy). Fourier analysis decomposes any periodic waveform into its harmonic components. A square wave = fundamental + 1/3 × 3rd harmonic + 1/5 × 5th + 1/7 × 7th + ... (only odd harmonics).',
         advancedContent:
-          'Inharmonicity occurs when overtones deviate from integer multiples — piano strings exhibit this because their stiffness causes higher modes to vibrate slightly faster than integer multiples. This is why pianos use "stretch tuning" (octaves slightly wider than 2:1). Bells have strongly inharmonic partials, which is why they produce a complex, clangorous sound. Synthesizers recreate any timbre by additively combining sine waves (additive synthesis) or starting with a harmonically rich waveform and filtering out unwanted harmonics (subtractive synthesis). FM synthesis (Yamaha DX7) creates complex spectra by modulating the frequency of one sine wave with another — generating sidebands at non-integer frequency ratios.',
+          '**Inharmonicity — why pianos need "stretch tuning":**\n\n' +
+          'An ideal string has harmonics at exact integer multiples: f, 2f, 3f, 4f… But real piano strings have stiffness ' +
+          '(they resist bending), which makes higher harmonics vibrate slightly FASTER than integer multiples. ' +
+          'The formula: fₙ = n × f₁ × √(1 + B × n²), where B is the inharmonicity coefficient. ' +
+          'For a piano\'s middle C (f₁ ≈ 262 Hz), the 8th harmonic might be at 2104 Hz instead of the ideal 2096 Hz — ' +
+          '8 Hz sharp. Piano tuners compensate by tuning octaves slightly wider than 2:1 ("stretch tuning") ' +
+          'so that the harmonics of lower notes align with the fundamentals of higher notes.\n\n' +
+          '**Three approaches to building sound from sine waves:**\n\n' +
+          '| Method | How it works | Character |\n' +
+          '|---|---|---|\n' +
+          '| **Additive synthesis** | Add sine waves: A₁sin(f₁t) + A₂sin(2f₁t) + … Control each harmonic\'s amplitude and frequency independently | Clean, precise — organs, flutes |\n' +
+          '| **Subtractive synthesis** | Start with a harmonically rich wave (sawtooth = all harmonics, square = odd harmonics). Remove unwanted harmonics with a filter | Warm, analog — bass, pads |\n' +
+          '| **FM synthesis** | Modulate one sine wave\'s frequency with another: y = sin(2πf_c × t + β × sin(2πf_m × t)). Generates sidebands at f_c ± n×f_m | Metallic, bell-like, electric piano |\n\n' +
+          'The Yamaha DX7 (1983) used FM synthesis with 6 operators (sine wave generators). By varying the modulation index β and operator routing, ' +
+          'it could mimic bells (inharmonic sidebands), brass (many harmonics), and electric pianos — all from pure sine waves.',
         diagram: 'MusicalWavesDiagram',
       },
       {
@@ -5640,7 +6437,19 @@ print(f"Each extra hour ≈ +{m:.1f} points on the exam")`,
         intermediateContent:
           'When two sine waves of slightly different frequencies (f₁ and f₂) combine, the result pulsates at the **beat frequency** = |f₁ - f₂|. Example: 440 Hz + 442 Hz → you hear 441 Hz (average) with 2 beats per second (2 Hz pulsation). Musicians use beats to tune instruments: play two notes that should be identical, listen for beats, adjust until beats disappear (frequencies match). The mathematical explanation: sin(2πf₁t) + sin(2πf₂t) = 2cos(2π(f₁-f₂)t/2) × sin(2π(f₁+f₂)t/2) — the product of a slow envelope and a fast carrier.',
         advancedContent:
-          'Beat frequencies have practical applications beyond tuning. In radio engineering, heterodyning mixes a signal with a local oscillator to shift frequencies: the beat frequency (difference) moves a high-frequency radio signal down to an audible or processable range — this is how AM radios, spectrum analyzers, and radar receivers work. Binaural beats (slightly different frequencies in each ear) create a perceived beat in the brain — studied (with mixed scientific evidence) for effects on meditation and focus. In acoustics, room modes create standing wave beats when reflections interfere, causing certain frequencies to be louder or quieter at specific locations.',
+          '**Heterodyning — how radios tune stations:**\n\n' +
+          'Your local FM station broadcasts at, say, 98.3 MHz. Your radio generates a local oscillator at 108.8 MHz. ' +
+          'Mixing these two creates a beat frequency at the difference: 108.8 − 98.3 = 10.5 MHz (the "intermediate frequency" or IF). ' +
+          'Every station gets converted to the same IF, regardless of its broadcast frequency — then a single IF filter/amplifier handles them all.\n\n' +
+          '**The math:** sin(f₁t) × sin(f₂t) = ½[cos((f₁−f₂)t) − cos((f₁+f₂)t)]. ' +
+          'The sum frequency (207.1 MHz) is filtered out; the difference frequency (10.5 MHz) is kept. ' +
+          'Tuning the radio = changing the local oscillator frequency.\n\n' +
+          '**Room modes — why bass sounds uneven in rooms:**\n' +
+          'Sound reflects off walls. At certain frequencies, the reflected wave perfectly reinforces or cancels the original. ' +
+          'For a room L meters long, standing waves form at f = n × v/(2L), where v = 343 m/s and n = 1, 2, 3…\n\n' +
+          'Example: Room length 4 m. First mode: f = 343/(2×4) = **42.9 Hz** (deep bass). At this frequency, the center of the room ' +
+          'has maximum pressure variation (loud) while ¼ and ¾ positions have minimum (quiet). This is why your subwoofer sounds different ' +
+          'depending on where you sit. Acoustic treatment (bass traps in corners) absorbs these standing waves to even out the response.',
         diagram: 'AmplitudeModDiagram',
         interactive: {
           type: 'matching',
@@ -7892,12 +8701,17 @@ print(fibonacci(10))  # 55`,
           'So the binary number 1010 1111 becomes AF in hex. Programmers use hex because it is compact yet maps ' +
           'directly to binary — every color code like #FF6600 is really 24 bits of red, green, and blue.',
         advancedContent:
-          'At the transistor level, a switch is a MOSFET (Metal-Oxide-Semiconductor Field-Effect Transistor). ' +
-          'When voltage is applied to the gate terminal, the channel between source and drain becomes conductive — ' +
-          'the switch is "on." Modern processors use complementary pairs (CMOS): an nMOS transistor pulls the ' +
-          'output low (0) while a pMOS pulls it high (1). This complementary design means current only flows ' +
-          'during switching, dramatically reducing power consumption. A single transistor in a modern chip is ' +
-          'about 5 nanometers wide — roughly 10 atoms across. A human hair is 80,000 nm wide.',
+          '**CMOS — why modern chips barely use power when idle:**\n\n' +
+          'A CMOS inverter (the simplest circuit) uses two transistors:\n' +
+          '- **pMOS** (connected to power V_DD): conducts when gate input is LOW → pulls output HIGH\n' +
+          '- **nMOS** (connected to ground): conducts when gate input is HIGH → pulls output LOW\n\n' +
+          'The critical insight: when input is stable (either HIGH or LOW), exactly one transistor is ON and the other is OFF. ' +
+          'There is NO path from power to ground → **zero static current**. Current only flows briefly during switching ' +
+          '(both transistors partially ON). This is why a chip with 25 billion transistors doesn\'t melt — most are idle at any moment.\n\n' +
+          '**Power equation:** P = C × V² × f, where C = capacitance (wire/gate loading), V = supply voltage, f = switching frequency. ' +
+          'This is why reducing voltage from 5V to 1V cuts power by 25× (V² term). Modern chips run at 0.7-1.0V.\n\n' +
+          '**Scale comparison:** A transistor in a 3nm chip is ~10 atoms wide. A red blood cell is ~7000 nm. ' +
+          'A human hair is ~80,000 nm. You could fit 25,000 transistors across a hair\'s width.',
       },
       {
         title: 'AND Gate — Both Must Be True',
@@ -7921,11 +8735,23 @@ print(fibonacci(10))  # 55`,
           '**idempotent** (A · A = A), **commutative** (A · B = B · A), and **associative** ' +
           '((A · B) · C = A · (B · C)). These let you simplify complex expressions.',
         advancedContent:
-          'A CMOS AND gate is built by cascading a NAND gate (2 pMOS in parallel + 2 nMOS in series) followed by ' +
-          'an inverter. The NAND+NOT combination uses 6 transistors. In practice, NAND gates are the fundamental ' +
-          'building block in CMOS logic because they are faster and use fewer transistors than direct AND implementations. ' +
-          'AND gates with more than 2 inputs exist: a 3-input AND (A · B · C) outputs 1 only when all three ' +
-          'inputs are 1. In Verilog: `assign out = a & b;`. In VHDL: `out <= a AND b;`.',
+          '**Why NAND is king in real chip design:**\n\n' +
+          'You might expect an AND gate to be simpler than NAND. In CMOS, it is the opposite:\n' +
+          '- **NAND gate:** 2 pMOS in parallel + 2 nMOS in series = **4 transistors**. Output is LOW only when BOTH inputs are HIGH.\n' +
+          '- **AND gate:** NAND + inverter = 4 + 2 = **6 transistors**. More transistors = slower, more area, more power.\n\n' +
+          'This is why chip designers think in NAND, not AND. When you write `a AND b` in a hardware description language, ' +
+          'the synthesis tool actually builds a NAND followed by a NOT.\n\n' +
+          '**Hardware description languages:**\n' +
+          '```\n' +
+          '// Verilog (C-like syntax)\n' +
+          'assign out = a & b;        // AND\n' +
+          'assign out = ~(a & b);     // NAND\n' +
+          '\n' +
+          '-- VHDL (Ada-like syntax)\n' +
+          'out <= a AND b;            -- AND\n' +
+          'out <= NOT(a AND b);       -- NAND\n' +
+          '```\n' +
+          'These languages describe WHAT the circuit does (not HOW to build it). Synthesis tools automatically optimize the gate-level implementation.',
         diagram: 'LogicGateSymbolsDiagram',
       },
       {
@@ -7950,10 +8776,18 @@ print(fibonacci(10))  # 55`,
           'A · (B + C) = A·B + A·C (just like regular algebra). The **absorption law** simplifies: ' +
           'A + A·B = A (if A is true, the whole thing is true regardless of B).',
         advancedContent:
-          'A CMOS OR gate uses a NOR gate followed by an inverter (4+2 = 6 transistors). Like AND, OR gates in ' +
-          'real chips are usually built from NOR + NOT. The **inclusive OR** (standard OR) differs from **exclusive OR** (XOR): ' +
-          'inclusive OR includes the case where both inputs are 1. In natural language, "or" is often exclusive ' +
-          '("soup or salad" — you pick one), but in digital logic, OR is always inclusive unless explicitly XOR.',
+          '**CMOS OR gate — built from NOR + NOT (6 transistors):**\n\n' +
+          'Just like AND is NAND+NOT, OR is NOR+NOT. The NOR gate itself is 4 transistors (2 pMOS in series + 2 nMOS in parallel ' +
+          '— the exact dual of NAND). Adding the inverter makes 6 total.\n\n' +
+          '**Inclusive OR vs Exclusive OR — a source of bugs:**\n' +
+          'In logic: OR always means "one or both." A + B = 1 when A=1, B=1. But in English, "or" is often exclusive: ' +
+          '"soup or salad" means pick ONE, not both. This mismatch causes programming bugs:\n' +
+          '```\n' +
+          'if (user.isAdmin OR user.isOwner)  // inclusive: admins AND owners both pass\n' +
+          'if (user.isAdmin XOR user.isOwner) // exclusive: only those who are one but NOT both\n' +
+          '```\n' +
+          'In most code, you want inclusive OR (`||` in most languages). XOR is reserved for specific tasks: ' +
+          'bit toggling, swap without temp variable (`a ^= b; b ^= a; a ^= b;`), and cryptography.',
       },
       {
         title: 'NOT Gate — The Inverter',
@@ -7974,11 +8808,19 @@ print(fibonacci(10))  # 55`,
           'triangle pointing right with a small circle (bubble) at the output. That bubble is the universal symbol ' +
           'for inversion — you will see it on NAND, NOR, and XNOR gates too.',
         advancedContent:
-          'A CMOS inverter is the simplest CMOS circuit: one pMOS transistor connected to V_DD (power) and one nMOS ' +
-          'connected to ground. When input is high, nMOS conducts (output pulled low). When input is low, pMOS conducts ' +
-          '(output pulled high). The inverter is the basis of all CMOS logic. Its **voltage transfer characteristic** ' +
-          '(VTC) curve shows a sharp transition between high and low output — the steeper the curve, the better ' +
-          'the noise margin. Fan-out (how many gates one inverter can drive) is limited by capacitive loading.',
+          '**The CMOS inverter — understanding noise margin:**\n\n' +
+          'The voltage transfer characteristic (VTC) plots output voltage vs input voltage. Ideally it is a vertical cliff: ' +
+          'below the threshold → output is V_DD (HIGH), above → output is 0V (LOW). In reality, the transition is steep but not vertical.\n\n' +
+          '**Noise margin** = how much noise a signal can tolerate without being misread:\n' +
+          '- V_IL (max input voltage that counts as LOW): ~0.3 × V_DD\n' +
+          '- V_IH (min input voltage that counts as HIGH): ~0.7 × V_DD\n' +
+          '- Noise margin LOW: V_IL − 0V. Noise margin HIGH: V_DD − V_IH.\n\n' +
+          'For a 3.3V chip: anything below ~1V is reliably LOW, above ~2.3V is reliably HIGH. The gap between 1V and 2.3V is the "uncertain" zone — ' +
+          'this is why digital signals use full swings (0V or 3.3V) and avoid lingering in the middle.\n\n' +
+          '**Fan-out** — how many gates can one output drive:\n' +
+          'Each gate input has capacitance (~1-5 fF). The driving gate must charge all these capacitors. ' +
+          'More loads = slower switching (RC delay). A typical CMOS gate can drive ~4-10 gates. For higher fan-out, insert a buffer (two inverters in series) ' +
+          'that provides more driving current.',
       },
       {
         title: 'NAND and NOR — The Universal Gates',
@@ -8002,11 +8844,18 @@ print(fibonacci(10))  # 55`,
           '¬(A · B) = ¬A + ¬B. Similarly, NOR is universal: NOT from NOR(A, A), OR from ' +
           'NOR-then-NOR-as-NOT, AND from NOT-each-then-NOR.',
         advancedContent:
-          'NAND-only design is not just theoretical — it is standard practice in VLSI. The 7400 series TTL ' +
-          'chip (quad 2-input NAND) was the workhorse of early digital design. Modern FPGA look-up tables (LUTs) ' +
-          'can implement any Boolean function of N inputs, effectively acting as programmable universal gates. ' +
-          'In NAND flash memory (used in SSDs and USB drives), the name comes from the NAND gate structure used ' +
-          'to connect floating-gate transistors in series, enabling high-density storage.',
+          '**NAND universality in practice — from 1960s chips to modern FPGAs:**\n\n' +
+          'The 7400 chip (1966) contained four 2-input NAND gates on a single IC. Engineers wired them into any logic function needed. ' +
+          'This was the building block of early computers, calculators, and industrial controllers.\n\n' +
+          '**FPGAs — programmable universal gates:**\n' +
+          'A modern FPGA contains thousands of Look-Up Tables (LUTs). Each LUT stores the truth table for ANY Boolean function of N inputs ' +
+          '(typically N=4 or N=6). You write your logic in Verilog/VHDL, the compiler maps it to LUT configurations, and the FPGA is reprogrammed in seconds. ' +
+          'This is how prototype chips are tested before committing to expensive silicon fabrication.\n\n' +
+          '**NAND flash memory — why your SSD is named after a gate:**\n' +
+          'In NAND flash, floating-gate transistors are connected in series (like a NAND gate — all must conduct for current to flow). ' +
+          'Each transistor stores one bit: a charged floating gate = 0, uncharged = 1. The series connection allows very dense packing — ' +
+          'modern 3D NAND stacks 200+ layers vertically, storing up to 4 bits per transistor (QLC). ' +
+          'A 1 TB SSD contains roughly 8 trillion of these NAND cells.',
       },
       {
         title: 'XOR — The Odd One Out',
@@ -8030,11 +8879,20 @@ print(fibonacci(10))  # 55`,
           'if you XOR a message with a key to encrypt, XOR-ing the ciphertext with the same key decrypts it. ' +
           'XNOR (the complement of XOR) outputs 1 when inputs are the **same** — it is an equality detector.',
         advancedContent:
-          'XOR has deep connections to modular arithmetic: A ⊕ B is addition modulo 2. The parity of a binary ' +
-          'number (odd or even number of 1s) equals the XOR of all its bits. This is the basis of **parity check** ' +
-          'error detection: append a bit so the total number of 1s is always even. If any single bit flips during ' +
-          'transmission, the parity changes and the error is detected. **Hamming codes** extend this idea to not ' +
-          'just detect but also correct single-bit errors using multiple parity bits at specific positions.',
+          '**XOR = addition modulo 2 — and why that matters for error detection:**\n\n' +
+          '0 ⊕ 0 = 0, 0 ⊕ 1 = 1, 1 ⊕ 0 = 1, 1 ⊕ 1 = 0. This is exactly addition with "carry discarded" (mod 2).\n\n' +
+          '**Parity check — detecting single-bit errors:**\n' +
+          'You want to send the byte 10110010 over a noisy wire. XOR all bits: 1⊕0⊕1⊕1⊕0⊕0⊕1⊕0 = 0 (even parity). ' +
+          'Append a parity bit = 0: send 101100100. The receiver XORs all 9 bits. If the result is 0, no error detected. ' +
+          'If a single bit flipped during transmission: 1011**1**0100, XOR = 1 — error detected! But parity can\'t tell you WHICH bit flipped.\n\n' +
+          '**Hamming codes — detecting AND correcting errors:**\n' +
+          'Place parity bits at positions 1, 2, 4, 8… (powers of 2). Each parity bit covers a specific set of data bits:\n' +
+          '- Bit 1 checks positions 1,3,5,7,9,11…\n' +
+          '- Bit 2 checks positions 2,3,6,7,10,11…\n' +
+          '- Bit 4 checks positions 4,5,6,7,12,13…\n\n' +
+          'If a bit flips, the parity checks that fail point to the exact position. For example: checks 1 and 4 fail, others pass → ' +
+          'the error is at position 1+4 = **5**. Flip bit 5 to correct it. This is how ECC (Error-Correcting Code) RAM works — ' +
+          'every 64 bits of data gets 8 Hamming bits, silently correcting single-bit errors caused by cosmic rays or electrical noise.',
       },
       {
         title: 'Combining Gates — Building an Adder',
@@ -8054,11 +8912,28 @@ print(fibonacci(10))  # 55`,
           'parallel using **generate** (G = A · B) and **propagate** (P = A ⊕ B) signals: C_i = G_i + P_i · C_{i-1}. ' +
           'This reduces addition time from O(N) to O(log N) gate delays.',
         advancedContent:
-          'Modern CPUs use a hierarchy of adder architectures. Carry-select adders compute both the carry=0 and carry=1 ' +
-          'results simultaneously, then multiplex the correct one when the actual carry arrives. Kogge-Stone and ' +
-          'Brent-Kung adders are parallel-prefix adder topologies that optimize for speed and area in VLSI. ' +
-          'Multiplication is implemented using arrays of full adders (Wallace tree or Dadda tree multipliers) that ' +
-          'reduce partial products in parallel. Division uses iterative algorithms like SRT (Sweeney-Robertson-Tocher).',
+          '**Carry-select adder — computing both answers in advance:**\n\n' +
+          'A ripple-carry adder is slow: the carry must propagate through all N bits sequentially. ' +
+          'A carry-select adder splits the bits into blocks and computes each block TWICE — once assuming carry-in = 0, ' +
+          'once assuming carry-in = 1. When the actual carry arrives, a multiplexer selects the correct result instantly. ' +
+          'Cost: 2× the gates but much faster (O(√N) delay instead of O(N)).\n\n' +
+          '**How hardware multiplication works:**\n' +
+          'Multiply 1011 × 1101 (11 × 13 = 143). Just like long multiplication in decimal:\n' +
+          '```\n' +
+          '    1011  (11)\n' +
+          '  × 1101  (13)\n' +
+          '  ------\n' +
+          '    1011  (1011 × 1)\n' +
+          '   0000   (1011 × 0, shifted left 1)\n' +
+          '  1011    (1011 × 1, shifted left 2)\n' +
+          ' 1011     (1011 × 1, shifted left 3)\n' +
+          '--------\n' +
+          '10001111  (143)\n' +
+          '```\n' +
+          'Each row is a "partial product" (AND of one multiplier bit with the multiplicand). ' +
+          'A Wallace tree adds all partial products in parallel using layers of full adders, reducing ' +
+          'an N-bit multiplication from O(N²) sequential additions to O(log N) layers. ' +
+          'A 64-bit multiply completes in ~3 clock cycles on a modern CPU.',
         diagram: 'LogicHalfAdderDiagram',
         interactive: {
           type: 'logic-gate-simulator' as const,
@@ -8085,17 +8960,27 @@ print(fibonacci(10))  # 55`,
           '(guessing which way an if-statement will go to avoid stalling the pipeline). Clock speeds are measured ' +
           'in GHz — a 3 GHz CPU completes 3 billion cycles per second.',
         advancedContent:
-          'Moore\'s Law is approaching physical limits as transistors shrink to atomic scales. Below ~3 nm, ' +
-          'quantum tunneling causes electrons to leak through barriers, increasing power consumption and errors. ' +
-          'The industry is responding with **3D stacking** (building upward instead of shrinking laterally), ' +
-          '**chiplet architectures** (connecting multiple smaller dies), and exploring **new computing paradigms**: ' +
-          'quantum computing (using superposition and entanglement for exponential parallelism on specific problems), ' +
-          'neuromorphic computing (hardware that mimics neural networks), and optical computing (using photons ' +
-          'instead of electrons). Gate-level design today uses Hardware Description Languages (Verilog, VHDL) and ' +
-          'synthesis tools that automatically convert high-level descriptions into optimized gate-level netlists, ' +
-          'then map them to specific transistor layouts on silicon. A **Karnaugh map** (K-map) is a visual method ' +
-          'for simplifying Boolean expressions: group adjacent 1s in a truth table grid to find minimal ' +
-          'sum-of-products or product-of-sums forms, reducing gate count and propagation delay.',
+          '**The end of Moore\'s Law — and what comes next:**\n\n' +
+          '| Node size | Year | Transistors | Key challenge |\n' +
+          '|---|---|---|---|\n' +
+          '| 90 nm | 2004 | ~100 million | Leakage current begins |\n' +
+          '| 22 nm | 2012 | ~1 billion | FinFET 3D transistors needed |\n' +
+          '| 5 nm | 2020 | ~15 billion | EUV lithography required |\n' +
+          '| 2 nm | 2025 | ~50 billion | Gate-all-around transistors |\n' +
+          '| <1 nm | ??? | ??? | Quantum tunneling makes scaling impossible |\n\n' +
+          '**Below ~3 nm, quantum tunneling** causes electrons to "leak" through barriers that should stop them — ' +
+          'like a ball rolling through a wall instead of bouncing off. This increases power consumption and causes random bit errors.\n\n' +
+          '**Three responses to the wall:**\n' +
+          '1. **3D stacking:** Instead of shrinking transistors, stack chips vertically. Apple\'s M3 Ultra bonds two M3 Max dies. ' +
+          'HBM (High Bandwidth Memory) stacks 8-12 memory dies.\n' +
+          '2. **Chiplets:** Build small, specialized dies and connect them on a package (AMD\'s Zen 4: 5nm compute chiplets + 6nm I/O die). ' +
+          'Cheaper than one giant chip because small dies have higher yield.\n' +
+          '3. **New paradigms:** Quantum computing (exponential parallelism for specific problems like factoring, optimization), ' +
+          'neuromorphic chips (Intel Loihi: hardware neurons that fire like brain cells, 1000× more energy-efficient for ML inference).\n\n' +
+          '**Karnaugh maps — simplifying Boolean expressions visually:**\n' +
+          'Write the truth table as a grid where adjacent cells differ by one bit. Group adjacent 1s into rectangles (sizes 1,2,4,8…). ' +
+          'Each group becomes one term in the simplified expression. A 4-variable function that needs 8 AND-OR terms might simplify to 2. ' +
+          'Fewer terms = fewer gates = faster, cheaper, less power.',
         diagram: 'LogicProcessorDiagram',
       },
     ],
