@@ -5010,7 +5010,26 @@ export const scienceReferences: ReferenceGuide[] = [
         intermediateContent:
           'Composing transformations = multiplying matrices. To rotate 45° then scale by 2: R = [cos45° -sin45°; sin45° cos45°] = [0.707 -0.707; 0.707 0.707], S = [2 0; 0 2]. Combined: SR = [1.414 -1.414; 1.414 1.414]. Apply to point (1, 0): SR × [1; 0] = **(1.414, 1.414)**. Order matters: RS ≠ SR. In computer graphics, transformation matrices are applied right-to-left.',
         advancedContent:
-          'Modern GPU architectures process transformation matrices in parallel across thousands of cores. A typical video game frame transforms millions of vertices through model, view, and projection matrices at 60+ fps. The perspective projection matrix maps 3D points to 2D screen coordinates while encoding depth. In machine learning, a neural network layer computes y = σ(Wx + b), where W is a weight matrix. Training adjusts W via gradient descent — the gradient is computed through chains of matrix multiplications (backpropagation).',
+          '**Composing transformations — why order matters, worked by hand:**\n\n' +
+          'Rotate 90° then scale by 2 vs scale by 2 then rotate 90°. Are they the same?\n\n' +
+          'Rotation 90°: R = [0, −1; 1, 0]. Scaling by 2: S = [2, 0; 0, 2].\n\n' +
+          '**Option 1: Rotate first, then scale (SR):**\n' +
+          'SR = [2,0; 0,2] × [0,−1; 1,0] = [0,−2; 2,0]\n' +
+          'Apply to (1, 0): [0,−2; 2,0] × [1; 0] = **(0, 2)**\n\n' +
+          '**Option 2: Scale first, then rotate (RS):**\n' +
+          'RS = [0,−1; 1,0] × [2,0; 0,2] = [0,−2; 2,0]\n\n' +
+          'Same result here! But that is because scaling is uniform (same factor both directions). Try non-uniform scaling:\n\n' +
+          'S = [3, 0; 0, 1] (stretch x by 3, keep y). Now:\n' +
+          'SR = [3,0; 0,1] × [0,−1; 1,0] = [0,−3; 1,0]. Apply to (1,0): **(0, 1)**\n' +
+          'RS = [0,−1; 1,0] × [3,0; 0,1] = [0,−1; 3,0]. Apply to (1,0): **(0, 3)**\n\n' +
+          'Different! Order matters when transformations are non-uniform.\n\n' +
+          '**Neural networks are matrix transformations:**\n\n' +
+          'A neural network layer: y = activation(W × x + b)\n\n' +
+          'The weight matrix W transforms the input vector x into a new space. For a layer with 784 inputs (a 28×28 image flattened) and 128 neurons:\n' +
+          '- W is 128 × 784 (128 rows, 784 columns)\n' +
+          '- x is 784 × 1 (the input)\n' +
+          '- W × x = 128 × 1 (the output — 128 features extracted from the image)\n\n' +
+          'Each row of W is a "template" the neuron looks for. Training adjusts W so these templates detect useful features (edges, curves, textures).',
         diagram: 'TransformationMatrixDiagram',
         interactive: {
           type: 'matching',
