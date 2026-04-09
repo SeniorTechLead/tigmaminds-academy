@@ -2,6 +2,8 @@ import type { ReferenceGuide } from './reference';
 import { practiceMeanMedianMode, practiceStdDevVariance, practiceNormalDistribution } from './practice-statistics';
 import { practiceBinomialDistribution, practiceCorrelationRegression } from './practice-statistics-2';
 import { practicePoissonDistribution, practiceExponentialDistribution, practiceChiSquared } from './practice-statistics-3';
+import { practiceProbability } from './practice-probability';
+import { practiceMatrices } from './practice-matrices';
 
 export const scienceReferences: ReferenceGuide[] = [
   // ──────────────────────────────────────────────────────────────
@@ -2836,6 +2838,7 @@ export const scienceReferences: ReferenceGuide[] = [
           'E[total matches] = E[X₁] + E[X₂] + ... + E[X₅₂] = 52 × (1/52) = **1**.\n\n' +
           'On average, exactly 1 card is in the right position — no matter how many cards there are! (For n cards, the answer is always 1.)',
         diagram: 'ExpectedValueDiagram',
+        practice: practiceProbability,
       },
     ],
   },
@@ -5043,6 +5046,7 @@ export const scienceReferences: ReferenceGuide[] = [
             ],
           },
         },
+        practice: practiceMatrices,
       },
     ],
   },

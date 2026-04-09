@@ -30,6 +30,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-02', difficulty: 1,
       question: 'Using λ = 2, compute **P(X = 1)** — exactly one call in a minute.',
+      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5','6','7','8'], values: [0.1353, 0.2707, 0.2707, 0.1804, 0.0902, 0.0361, 0.0120, 0.0034, 0.0009], highlight: 1 },
       steps: [
         { label: 'Formula', content: 'P(X = 1) = 2¹ · e^(−2) / 1!' },
         { label: 'Compute', content: '= 2 · 0.1353 / 1 = **0.2707**' },
@@ -41,6 +42,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-03', difficulty: 1,
       question: 'Using λ = 2, compute **P(X = 2)**.',
+      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5','6','7','8'], values: [0.1353, 0.2707, 0.2707, 0.1804, 0.0902, 0.0361, 0.0120, 0.0034, 0.0009], highlight: 2 },
       steps: [
         { label: 'Formula', content: 'P(X = 2) = 2² · e^(−2) / 2!' },
         { label: 'Compute', content: '= 4 · 0.1353 / 2 = **0.2707**' },
@@ -52,6 +54,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-04', difficulty: 1,
       question: 'A book has an average of **3 typos per page** (λ = 3). What is P(X = 0) — a page with **no typos**?',
+      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5','6','7','8'], values: [0.0498, 0.1494, 0.2240, 0.2240, 0.1680, 0.1008, 0.0504, 0.0216, 0.0081], highlight: 0 },
       steps: [
         { label: 'Formula', content: 'P(X = 0) = 3⁰ · e^(−3) / 0!' },
         { label: 'Compute', content: '= 1 · 0.0498 / 1 = **0.0498**' },
@@ -63,6 +66,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-05', difficulty: 1,
       question: 'For a Poisson distribution with λ = 5, what is the **mean**?',
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 5 } },
       hint: 'For Poisson, mean = λ.',
       steps: [
         { label: 'Property', content: 'For any Poisson distribution, **Mean = λ**.' },
@@ -75,6 +79,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-06', difficulty: 1,
       question: 'For a Poisson distribution with λ = 5, what is the **variance**?',
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 5 } },
       hint: 'For Poisson, variance also equals λ.',
       steps: [
         { label: 'Property', content: 'For Poisson, **Variance = λ** (same as the mean!).' },
@@ -101,6 +106,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-08', difficulty: 1,
       question: 'A shop averages **1 customer per 10 minutes**. What is λ for a 10-minute window?',
+      visual: { kind: 'waiting', avgMinutes: 10 },
       steps: [
         { label: 'Identify the rate', content: 'λ = average count per interval = **1**' },
         { label: 'Insight', content: 'λ is simply the average number of events in the time window you are studying.' },
@@ -112,6 +118,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-09', difficulty: 1,
       question: 'With λ = 1, compute **P(X = 0)** — no customers in 10 minutes.',
+      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5','6','7','8'], values: [0.3679, 0.3679, 0.1839, 0.0613, 0.0153, 0.0031, 0.0005, 0.0001, 0.0000], highlight: 0 },
       steps: [
         { label: 'Formula', content: 'P(X = 0) = 1⁰ · e^(−1) / 0!' },
         { label: 'Compute', content: '= 1 · 0.3679 / 1 = **0.3679**' },
@@ -123,6 +130,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-10', difficulty: 1,
       question: 'With λ = 1, compute **P(X = 1)** — exactly one customer in 10 minutes.',
+      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5','6','7','8'], values: [0.3679, 0.3679, 0.1839, 0.0613, 0.0153, 0.0031, 0.0005, 0.0001, 0.0000], highlight: 1 },
       steps: [
         { label: 'Formula', content: 'P(X = 1) = 1¹ · e^(−1) / 1!' },
         { label: 'Compute', content: '= 1 · 0.3679 / 1 = **0.3679**' },
@@ -148,6 +156,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-12', difficulty: 1,
       question: 'Compute **P(X = 4)** when λ = 3.',
+      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5','6','7','8'], values: [0.0498, 0.1494, 0.2240, 0.2240, 0.1680, 0.1008, 0.0504, 0.0216, 0.0081], highlight: 4 },
       steps: [
         { label: 'Setup', content: 'λ = 3, k = 4' },
         { label: 'λ^k', content: '3⁴ = 81' },
@@ -161,6 +170,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-13', difficulty: 1,
       question: 'A printer produces an average of **2 misprints per 100 pages**. What is the probability of **exactly 2 misprints** in the next 100 pages?',
+      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5','6','7','8'], values: [0.1353, 0.2707, 0.2707, 0.1804, 0.0902, 0.0361, 0.0120, 0.0034, 0.0009], highlight: 2 },
       steps: [
         { label: 'Setup', content: 'λ = 2, k = 2' },
         { label: 'Compute', content: 'P(X = 2) = 2² · e^(−2) / 2! = 4 · 0.1353 / 2 = **0.2707**' },
@@ -172,6 +182,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-14', difficulty: 1,
       question: 'What is the **standard deviation** of a Poisson distribution with λ = 4?',
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 4 } },
       steps: [
         { label: 'Property', content: 'Variance = λ = 4' },
         { label: 'Standard deviation', content: 'σ = √λ = √4 = **2**' },
@@ -210,6 +221,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-17', difficulty: 1,
       question: 'A hospital emergency room sees **6 patients per hour** on average. What is the probability of seeing **exactly 6 patients** in a given hour?',
+      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5','6','7','8'], values: [0.0025, 0.0149, 0.0446, 0.0892, 0.1339, 0.1606, 0.1606, 0.1377, 0.1033], highlight: 6 },
       steps: [
         { label: 'Setup', content: 'λ = 6, k = 6' },
         { label: 'λ^k', content: '6⁶ = 46656' },
@@ -226,6 +238,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-18', difficulty: 2,
       question: 'With λ = 2, compute **P(X ≥ 3)** using the complement.',
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 2 }, shadeFrom: 3, shadeTo: 10 },
       steps: [
         { label: 'Complement rule', content: 'P(X ≥ 3) = 1 − P(X ≤ 2) = 1 − [P(0) + P(1) + P(2)]' },
         { label: 'From the table', content: 'P(0) = 0.1353, P(1) = 0.2707, P(2) = 0.2707' },
@@ -239,6 +252,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-19', difficulty: 2,
       question: 'A website averages **3 errors per day**. What is P(X ≥ 1) — at least one error?',
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 3 }, shadeFrom: 1, shadeTo: 15 },
       steps: [
         { label: 'Complement', content: 'P(X ≥ 1) = 1 − P(X = 0)' },
         { label: 'P(X = 0)', content: '= e^(−3) = 0.0498' },
@@ -251,6 +265,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-20', difficulty: 2,
       question: 'Two independent sources emit events at rates λ₁ = 2 and λ₂ = 3 per hour. If we combine both, what is the **total rate** and P(X = 0) in one hour?',
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 5 }, markX: 0 },
       steps: [
         { label: 'Combine rates', content: 'λ_total = λ₁ + λ₂ = 2 + 3 = **5**' },
         { label: 'P(X = 0)', content: 'P(X = 0) = e^(−5) = **0.0067**' },
@@ -279,6 +294,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-22', difficulty: 2,
       question: 'A server averages 4 crashes per year. What is the probability of **no crashes in 6 months**?',
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 2 }, markX: 0 },
       steps: [
         { label: 'Rescale λ', content: '4 per year → λ = 4 × 0.5 = **2** per 6 months' },
         { label: 'P(X = 0)', content: '= e^(−2) = **0.1353**' },
@@ -290,6 +306,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-23', difficulty: 2,
       question: 'You observe 50 events in 10 hours. Estimate λ (events per hour) and compute P(X = 3) for a single hour.',
+      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5','6','7','8'], values: [0.0067, 0.0337, 0.0842, 0.1404, 0.1755, 0.1755, 0.1462, 0.1044, 0.0653], highlight: 3 },
       steps: [
         { label: 'Estimate λ', content: 'λ̂ = 50 / 10 = **5** events per hour' },
         { label: 'P(X = 3)', content: '= 5³ · e^(−5) / 3! = 125 · 0.0067 / 6 = 0.8375 / 6 = **0.1396**' },
@@ -301,6 +318,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-24', difficulty: 2,
       question: 'A factory produces defects at λ = 2 per batch. If 100 batches are inspected and 20 have zero defects, does this match the Poisson prediction?',
+      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5'], values: [0.1353, 0.2707, 0.2707, 0.1804, 0.0902, 0.0361] },
       steps: [
         { label: 'Expected P(X=0)', content: 'P(X = 0) = e^(−2) = 0.1353' },
         { label: 'Expected count', content: '100 × 0.1353 = **13.53 batches** with zero defects' },
@@ -314,6 +332,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-25', difficulty: 2,
       question: 'Why use Poisson rather than binomial when n = 1000 and p = 0.002?',
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 2 } },
       steps: [
         { label: 'Check conditions', content: 'n is large (1000), p is small (0.002), and np = 2 is moderate.' },
         { label: 'Poisson approximation', content: 'When n → ∞ and p → 0 with np = λ constant, Binomial(n, p) → Poisson(λ).' },
@@ -326,6 +345,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-26', difficulty: 2,
       question: 'Compare Binomial(n=1000, p=0.002) with Poisson(λ=2) for k=0,1,2. How close are they?',
+      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5'], values: [0.1353, 0.2707, 0.2707, 0.1804, 0.0902, 0.0361] },
       steps: [
         { label: 'Poisson P(0)', content: 'e^(−2) = 0.1353' },
         { label: 'Poisson P(1)', content: '2 · e^(−2) = 0.2707' },
@@ -341,6 +361,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-27', difficulty: 2,
       question: 'A hospital has two departments — ER sees 8 patients/hour, Urgent Care sees 5 patients/hour. What is the probability that **both together** see exactly 10 patients in a given hour?',
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 13 }, markX: 10 },
       steps: [
         { label: 'Combine', content: 'λ_total = 8 + 5 = 13' },
         { label: 'P(X = 10)', content: '= 13^10 · e^(−13) / 10!' },
@@ -354,6 +375,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-28', difficulty: 2,
       question: 'Emails arrive at λ = 4 per hour. What is the probability of **at most 2** emails in an hour?',
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 4 }, shadeFrom: 0, shadeTo: 2 },
       steps: [
         { label: 'Need P(X ≤ 2)', content: 'P(0) + P(1) + P(2)' },
         { label: 'P(0)', content: '= e^(−4) = 0.0183' },
@@ -368,6 +390,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-29', difficulty: 2,
       question: 'A counting process has λ = 3 per minute. What is λ for a **5-minute window**, and P(X = 10) in that window?',
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 15 }, markX: 10 },
       steps: [
         { label: 'Rescale', content: 'λ_5min = 3 × 5 = **15**' },
         { label: 'P(X = 10)', content: '= 15^10 · e^(−15) / 10!' },
@@ -381,6 +404,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-30', difficulty: 2,
       question: 'Data: in 20 one-hour periods, you observe counts [3, 1, 4, 2, 5, 0, 3, 2, 2, 4, 1, 3, 6, 2, 1, 3, 2, 4, 3, 1]. Estimate λ.',
+      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5','6'], values: [1, 4, 5, 5, 3, 1, 1] },
       steps: [
         { label: 'Sum', content: '3+1+4+2+5+0+3+2+2+4+1+3+6+2+1+3+2+4+3+1 = **51**' },
         { label: 'Sample mean', content: 'λ̂ = x̄ = 51 / 20 = **2.55**' },
@@ -410,6 +434,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-32', difficulty: 2,
       question: 'A rare disease has an incidence of 1 in 10000 people. In a city of 50000, what is the expected number of cases and the probability of **zero cases**?',
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 5 }, markX: 0 },
       steps: [
         { label: 'Rate', content: 'λ = 50000 × (1/10000) = **5**' },
         { label: 'P(X=0)', content: '= e^(−5) = **0.0067**' },
@@ -422,6 +447,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-33', difficulty: 2,
       question: 'Why is the Poisson distribution **not** appropriate for modelling the number of goals a specific footballer scores per season?',
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 5 } },
       steps: [
         { label: 'Key assumption', content: 'Poisson requires events to occur independently at a constant rate.' },
         { label: 'Violation', content: 'A footballer\'s scoring rate depends on form, opponents, injuries — the rate is **not constant** and events are **not independent** (confidence effects).' },
@@ -452,6 +478,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-35', difficulty: 3,
       question: 'Derive the Poisson distribution as the **limit of the binomial**. Start with Binomial(n, p) where p = λ/n and let n → ∞.',
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 3 } },
       steps: [
         { label: 'Binomial formula', content: 'P(X = k) = C(n,k) · p^k · (1−p)^(n−k)' },
         { label: 'Substitute p = λ/n', content: '= C(n,k) · (λ/n)^k · (1 − λ/n)^(n−k)' },
@@ -467,6 +494,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-36', difficulty: 3,
       question: 'Show that the **MLE** (maximum likelihood estimator) of λ for Poisson data x₁, x₂, ..., xn is λ̂ = x̄.',
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 2 } },
       steps: [
         { label: 'Likelihood', content: 'L(λ) = ∏ᵢ (λ^xᵢ · e^(−λ) / xᵢ!)' },
         { label: 'Log-likelihood', content: 'ℓ(λ) = (∑xᵢ) ln λ − nλ − ∑ ln(xᵢ!)' },
@@ -481,6 +509,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-37', difficulty: 3,
       question: 'Given data: [2, 0, 3, 1, 4, 2, 1, 3, 2, 2]. Test whether the data plausibly come from a Poisson distribution by checking whether **variance ≈ mean**.',
+      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4'], values: [1, 2, 4, 2, 1] },
       steps: [
         { label: 'Mean', content: 'x̄ = (2+0+3+1+4+2+1+3+2+2)/10 = 20/10 = **2.0**' },
         { label: 'Variance', content: 'Deviations²: 0, 4, 1, 1, 4, 0, 1, 1, 0, 0 → sum = 12' },
@@ -495,6 +524,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-38', difficulty: 3,
       question: 'Explain the connection between the **Poisson process** and the **exponential distribution** for inter-arrival times.',
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 2 } },
       steps: [
         { label: 'Poisson process', content: 'If events occur at a constant rate λ per unit time (Poisson process), the count in any interval of length t is Poisson(λt).' },
         { label: 'Inter-arrival time', content: 'Let T = time between consecutive events. We want P(T > t).' },
@@ -509,6 +539,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-39', difficulty: 3,
       question: 'Prove that for a Poisson distribution, **E[X] = λ** directly from the PMF.',
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 4 } },
       steps: [
         { label: 'Definition', content: 'E[X] = ∑_{k=0}^∞ k · λ^k · e^(−λ) / k!' },
         { label: 'k=0 term vanishes', content: 'When k=0, the term is 0. Start from k=1.' },
@@ -524,6 +555,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-40', difficulty: 3,
       question: 'Prove that for a Poisson distribution, **Var(X) = λ**.',
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 4 } },
       steps: [
         { label: 'Strategy', content: 'Use Var(X) = E[X(X−1)] + E[X] − (E[X])²' },
         { label: 'Compute E[X(X−1)]', content: '= ∑ k(k−1) λ^k e^(−λ) / k! = λ² · e^(−λ) ∑_{j=0}^∞ λ^j / j! = λ²' },
@@ -536,6 +568,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-41', difficulty: 3,
       question: 'A radioactive source emits particles at λ = 4 per second. A detector has a **dead time** of 0.1 s after each detection (cannot register a new particle). Approximately how many particles per second are actually detected?',
+      visual: { kind: 'waiting', avgMinutes: 0.25 },
       steps: [
         { label: 'Model', content: 'True rate λ = 4/s. After each detection, 0.1 s is lost.' },
         { label: 'Detected rate formula', content: 'λ_det = λ / (1 + λ · τ) where τ = dead time' },
@@ -549,6 +582,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-42', difficulty: 3,
       question: 'You observe the following counts over 100 intervals: 0 events (15 times), 1 event (30 times), 2 events (25 times), 3 events (18 times), 4 events (8 times), 5+ events (4 times). Estimate λ and perform a **goodness-of-fit** test at α = 0.05.',
+      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5+'], values: [15, 30, 25, 18, 8, 4] },
       steps: [
         { label: 'Estimate λ', content: 'Total events = 0·15 + 1·30 + 2·25 + 3·18 + 4·8 + 5·4 = 0+30+50+54+32+20 = 186, so λ̂ = 186/100 = **1.86**' },
         { label: 'Expected counts', content: 'E(0)=100·e^(−1.86) ≈ 15.57, E(1)=100·1.86·e^(−1.86) ≈ 28.96, E(2)=100·1.86²·e^(−1.86)/2 ≈ 26.93, E(3)≈16.70, E(4)≈7.77, E(5+)≈4.08' },
@@ -564,6 +598,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-43', difficulty: 3,
       question: 'If X ~ Poisson(λ₁) and Y ~ Poisson(λ₂) are independent, show that X + Y ~ Poisson(λ₁ + λ₂) using **moment generating functions** (MGFs).',
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 7 } },
       steps: [
         { label: 'MGF of Poisson(λ)', content: 'M_X(t) = E[e^(tX)] = exp(λ(e^t − 1))' },
         { label: 'MGF of X + Y', content: 'M_{X+Y}(t) = M_X(t) · M_Y(t) (independence)' },
@@ -578,6 +613,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-44', difficulty: 3,
       question: 'A Poisson process has rate λ = 10 per hour. What is the probability that the **time to the 3rd event** is less than 15 minutes? (Hint: this is a Gamma distribution.)',
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 2.5 }, shadeFrom: 3, shadeTo: 15 },
       steps: [
         { label: 'Key insight', content: 'The time to the k-th event in a Poisson process is Gamma(k, λ). Equivalently, T₃ ≤ 0.25 hours iff the count in [0, 0.25] is ≥ 3.' },
         { label: 'Reframe', content: 'X ~ Poisson(λ · 0.25) = Poisson(2.5). Need P(X ≥ 3).' },
@@ -592,6 +628,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-45', difficulty: 3,
       question: 'Explain why the Poisson distribution is **right-skewed** and how its skewness changes as λ increases.',
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 1 } },
       steps: [
         { label: 'Skewness formula', content: 'For Poisson(λ), skewness = 1 / √λ.' },
         { label: 'Small λ', content: 'When λ = 1, skewness = 1 — strongly right-skewed (most mass near 0).' },
@@ -605,6 +642,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-46', difficulty: 3,
       question: 'A website receives hits at λ = 100 per minute. Use the **normal approximation** to estimate P(X > 110).',
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 100 }, markX: 110 },
       steps: [
         { label: 'Approximation', content: 'For large λ, Poisson(λ) ≈ Normal(μ = λ, σ² = λ)' },
         { label: 'Standardise', content: 'Z = (110 − 100) / √100 = 10/10 = **1.0**' },
@@ -617,6 +655,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-47', difficulty: 3,
       question: 'Derive the **probability generating function** (PGF) of X ~ Poisson(λ) and use it to find E[X] and Var(X).',
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 3 } },
       steps: [
         { label: 'PGF definition', content: 'G(s) = E[s^X] = ∑ s^k · λ^k e^(−λ) / k! = e^(−λ) ∑ (sλ)^k / k! = **e^(λ(s−1))**' },
         { label: 'E[X]', content: "G'(s) = λ · e^(λ(s−1)). At s=1: G'(1) = λ · e^0 = **λ**" },
@@ -630,6 +669,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-48', difficulty: 3,
       question: 'Compare the Poisson model to the **negative binomial** for over-dispersed count data. When would you choose each?',
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 3 } },
       steps: [
         { label: 'Poisson', content: 'Assumes variance = mean. Simple, one parameter (λ).' },
         { label: 'Negative binomial', content: 'Has two parameters; allows variance > mean (over-dispersion).' },
@@ -644,6 +684,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-49', difficulty: 3,
       question: 'In a Poisson process with rate λ, given that **exactly 1 event** occurred in [0, T], show that the event time is **uniformly distributed** on [0, T].',
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 5 }, markX: 1 },
       steps: [
         { label: 'Setup', content: 'Condition on N(T) = 1. Let S₁ be the event time. Find P(S₁ ≤ s | N(T) = 1).' },
         { label: 'Joint reasoning', content: 'P(S₁ ≤ s, N(T) = 1) = P(1 event in [0,s], 0 events in (s,T])' },
@@ -659,6 +700,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-50', difficulty: 3,
       question: 'A store records customer arrivals over 200 one-minute intervals. The counts are: 0 events (10), 1 event (35), 2 events (50), 3 events (45), 4 events (30), 5 events (18), 6+ events (12). Does a Poisson model fit? Perform a full **chi-squared goodness-of-fit test** at α = 0.05.',
+      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5','6+'], values: [10, 35, 50, 45, 30, 18, 12] },
       steps: [
         { label: 'Estimate λ', content: 'Total events = 0·10+1·35+2·50+3·45+4·30+5·18+6·12 = 0+35+100+135+120+90+72 = 552. λ̂ = 552/200 = **2.76**' },
         { label: 'Expected counts', content: 'Using Poisson(2.76): E(0)=200·e^(−2.76)≈12.63, E(1)≈34.85, E(2)≈48.10, E(3)≈44.25, E(4)≈30.53, E(5)≈16.85, E(6+)≈200−187.21≈12.79' },
@@ -709,6 +751,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-03', difficulty: 1,
       question: 'With λ = 0.1 per minute, what is P(wait > 10 minutes)?',
+      visual: { kind: 'waiting', avgMinutes: 10, markTime: 10 },
       steps: [
         { label: 'Survival function', content: 'P(T > t) = e^(−λt)' },
         { label: 'Compute', content: 'P(T > 10) = e^(−1) = **0.3679**' },
@@ -720,6 +763,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-04', difficulty: 1,
       question: 'A light bulb has a mean lifetime of **1000 hours**. What is λ?',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 0.001 } },
       steps: [
         { label: 'Formula', content: 'λ = 1/mean = 1/1000' },
         { label: 'Answer', content: 'λ = **0.001 per hour**' },
@@ -731,6 +775,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-05', difficulty: 1,
       question: 'With λ = 0.001 per hour, what is P(bulb lasts more than 500 hours)?',
+      visual: { kind: 'waiting', avgMinutes: 1000, markTime: 500 },
       steps: [
         { label: 'Formula', content: 'P(T > 500) = e^(−0.001 × 500) = e^(−0.5)' },
         { label: 'Compute', content: '= **0.6065**' },
@@ -742,6 +787,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-06', difficulty: 1,
       question: 'Customers arrive at a rate of **2 per hour**. What is the mean time between arrivals?',
+      visual: { kind: 'waiting', avgMinutes: 30 },
       steps: [
         { label: 'Formula', content: 'Mean = 1/λ = 1/2' },
         { label: 'Answer', content: '**0.5 hours** (30 minutes)' },
@@ -766,6 +812,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-08', difficulty: 1,
       question: 'Write the **PDF** of an exponential distribution with λ = 3.',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 3 } },
       steps: [
         { label: 'General PDF', content: 'f(t) = λ · e^(−λt) for t ≥ 0' },
         { label: 'Substitute', content: 'f(t) = **3 · e^(−3t)** for t ≥ 0' },
@@ -789,6 +836,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-10', difficulty: 1,
       question: 'A server processes requests with mean service time **2 seconds**. What is P(service time > 4 seconds)?',
+      visual: { kind: 'waiting', avgMinutes: 2, markTime: 4 },
       steps: [
         { label: 'Rate', content: 'λ = 1/2 = 0.5 per second' },
         { label: 'Compute', content: 'P(T > 4) = e^(−0.5 × 4) = e^(−2) = **0.1353**' },
@@ -800,6 +848,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-11', difficulty: 1,
       question: 'What is the **variance** of an exponential distribution with λ = 4?',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 4 } },
       steps: [
         { label: 'Formula', content: 'Var(T) = 1/λ²' },
         { label: 'Compute', content: '= 1/16 = **0.0625**' },
@@ -811,6 +860,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-12', difficulty: 1,
       question: 'What is the **standard deviation** of Exp(λ = 4)?',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 4 } },
       steps: [
         { label: 'SD = 1/λ', content: 'For exponential, SD = mean = 1/λ' },
         { label: 'Compute', content: '= 1/4 = **0.25**' },
@@ -822,6 +872,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-13', difficulty: 1,
       question: 'Compute the **median** of Exp(λ = 2).',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 2 }, markX: 0.3466 },
       hint: 'Set P(T ≤ m) = 0.5 and solve for m.',
       steps: [
         { label: 'Set up', content: '1 − e^(−2m) = 0.5' },
@@ -835,6 +886,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-14', difficulty: 1,
       question: 'With λ = 1, compute P(T ≤ 2).',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 1 }, markX: 2, shadeFrom: 0, shadeTo: 2 },
       steps: [
         { label: 'CDF', content: 'P(T ≤ 2) = 1 − e^(−1 × 2) = 1 − e^(−2)' },
         { label: 'Compute', content: '= 1 − 0.1353 = **0.8647**' },
@@ -846,6 +898,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-15', difficulty: 1,
       question: 'Find P(1 ≤ T ≤ 3) when λ = 1.',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 1 }, shadeFrom: 1, shadeTo: 3 },
       steps: [
         { label: 'Formula', content: 'P(a ≤ T ≤ b) = e^(−λa) − e^(−λb)' },
         { label: 'Compute', content: '= e^(−1) − e^(−3) = 0.3679 − 0.0498 = **0.3181**' },
@@ -857,6 +910,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-16', difficulty: 1,
       question: 'A radioactive atom has a half-life of 5 minutes. What is λ?',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 0.1386 } },
       steps: [
         { label: 'Relationship', content: 'Half-life t½ = ln(2)/λ, so λ = ln(2)/t½' },
         { label: 'Compute', content: 'λ = 0.6931/5 = **0.1386 per minute**' },
@@ -896,6 +950,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-19', difficulty: 2,
       question: 'Prove the **memoryless property** algebraically: show P(T > s+t | T > s) = P(T > t).',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 0.5 } },
       steps: [
         { label: 'Left side', content: 'P(T > s+t | T > s) = P(T > s+t) / P(T > s)' },
         { label: 'Substitute', content: '= e^(−λ(s+t)) / e^(−λs)' },
@@ -910,6 +965,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-20', difficulty: 2,
       question: 'Two machines fail independently. Machine A has mean time to failure 100 hours (λ_A = 0.01), Machine B has mean 200 hours (λ_B = 0.005). What is P(**either** fails within 50 hours)?',
+      visual: { kind: 'waiting', avgMinutes: 66.7, markTime: 50 },
       steps: [
         { label: 'Min of exponentials', content: 'Time until first failure = min(T_A, T_B) ~ Exp(λ_A + λ_B)' },
         { label: 'Combined rate', content: 'λ = 0.01 + 0.005 = **0.015**' },
@@ -923,6 +979,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-21', difficulty: 2,
       question: 'Prove that the **minimum** of two independent exponentials Exp(λ₁) and Exp(λ₂) is Exp(λ₁ + λ₂).',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 5 } },
       steps: [
         { label: 'Let M = min(T₁, T₂)', content: 'P(M > t) = P(T₁ > t AND T₂ > t)' },
         { label: 'Independence', content: '= P(T₁ > t) · P(T₂ > t) = e^(−λ₁t) · e^(−λ₂t)' },
@@ -936,6 +993,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-22', difficulty: 2,
       question: 'A doctor sees patients with exponential consultation time, mean 15 minutes. What is the probability a consultation takes **between 10 and 20 minutes**?',
+      visual: { kind: 'waiting', avgMinutes: 15, markTime: 20 },
       steps: [
         { label: 'Rate', content: 'λ = 1/15 ≈ 0.0667' },
         { label: 'Formula', content: 'P(10 ≤ T ≤ 20) = e^(−λ·10) − e^(−λ·20)' },
@@ -948,6 +1006,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-23', difficulty: 2,
       question: 'Compare the exponential distribution to a **uniform** distribution both with mean 10 minutes. Which gives a higher probability of waiting more than 20 minutes?',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 0.1 }, markX: 20 },
       steps: [
         { label: 'Exponential', content: 'P(T > 20) = e^(−20/10) = e^(−2) = 0.1353' },
         { label: 'Uniform', content: 'Uniform(0, 20) has mean 10. P(T > 20) = **0** (no wait can exceed 20).' },
@@ -960,6 +1019,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-24', difficulty: 2,
       question: 'Given observed wait times [3.2, 1.1, 0.5, 7.8, 2.4, 4.6, 0.9, 5.3, 1.7, 3.5] (in minutes), find the **MLE** of λ.',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 0.3226 } },
       steps: [
         { label: 'Sum', content: '3.2+1.1+0.5+7.8+2.4+4.6+0.9+5.3+1.7+3.5 = **31.0**' },
         { label: 'Sample mean', content: 'x̄ = 31.0/10 = **3.1**' },
@@ -972,6 +1032,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-25', difficulty: 2,
       question: 'A website has mean time between visits of 2 seconds. What is P(gap between visits exceeds 5 seconds)?',
+      visual: { kind: 'waiting', avgMinutes: 2, markTime: 5 },
       steps: [
         { label: 'Rate', content: 'λ = 1/2 = 0.5 per second' },
         { label: 'Compute', content: 'P(T > 5) = e^(−0.5 × 5) = e^(−2.5) ≈ **0.0821**' },
@@ -983,6 +1044,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-26', difficulty: 2,
       question: 'Find the **90th percentile** of Exp(λ = 0.5).',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 0.5 }, markX: 4.605, shadeFrom: 0, shadeTo: 4.605 },
       steps: [
         { label: 'Set up', content: 'P(T ≤ t₀.₉) = 0.9 → 1 − e^(−0.5t) = 0.9' },
         { label: 'Solve', content: 'e^(−0.5t) = 0.1 → −0.5t = ln(0.1) = −2.3026' },
@@ -995,6 +1057,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-27', difficulty: 2,
       question: 'Derive the CDF of the exponential from the **Poisson process**. If events occur at rate λ, show P(T₁ ≤ t) = 1 − e^(−λt).',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 2 } },
       steps: [
         { label: 'Logic', content: 'T₁ = time to first event. T₁ > t means zero events in [0, t].' },
         { label: 'Poisson', content: 'P(0 events in [0,t]) = e^(−λt)' },
@@ -1008,6 +1071,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-28', difficulty: 2,
       question: 'Verify that ∫₀^∞ λe^(−λt) dt = 1 (the PDF integrates to 1).',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 3 } },
       steps: [
         { label: 'Integral', content: '∫₀^∞ λe^(−λt) dt' },
         { label: 'Antiderivative', content: '= [−e^(−λt)]₀^∞' },
@@ -1020,6 +1084,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-29', difficulty: 2,
       question: 'Derive E[T] for Exp(λ) using integration by parts.',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 3 } },
       steps: [
         { label: 'Setup', content: 'E[T] = ∫₀^∞ t · λe^(−λt) dt' },
         { label: 'Integration by parts', content: 'Let u = t, dv = λe^(−λt)dt → du = dt, v = −e^(−λt)' },
@@ -1035,6 +1100,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-30', difficulty: 2,
       question: 'A machine has λ = 0.02 failures per hour. The company wants at least 95% reliability over a shift. How long can the shift be?',
+      visual: { kind: 'waiting', avgMinutes: 50, markTime: 2.57 },
       steps: [
         { label: 'Reliability', content: 'P(T > t) ≥ 0.95 → e^(−0.02t) ≥ 0.95' },
         { label: 'Solve', content: '−0.02t ≥ ln(0.95) = −0.0513' },
@@ -1047,6 +1113,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-31', difficulty: 2,
       question: 'Three servers, each with independent failure rate λ = 0.01 per hour, run in parallel. What is P(all three fail within 100 hours)?',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 0.01 }, markX: 100 },
       steps: [
         { label: 'Each server', content: 'P(fail within 100) = 1 − e^(−0.01 × 100) = 1 − e^(−1) = 0.6321' },
         { label: 'All three', content: 'P(all fail) = 0.6321³ = **0.2526**' },
@@ -1058,6 +1125,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-32', difficulty: 2,
       question: 'The exponential is the **only** continuous distribution with the memoryless property. If a distribution has P(T > s+t | T > s) = P(T > t) for all s,t > 0, show its survival function must be e^(−λt).',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 2 } },
       steps: [
         { label: 'Let S(t) = P(T > t)', content: 'The memoryless property says S(s+t) = S(s) · S(t).' },
         { label: 'Functional equation', content: 'This is Cauchy\'s functional equation for continuous monotone functions.' },
@@ -1084,6 +1152,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-34', difficulty: 2,
       question: 'Compute E[T²] for Exp(λ) and use it to find Var(T).',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 3 } },
       steps: [
         { label: 'E[T²]', content: '∫₀^∞ t² · λe^(−λt) dt = 2/λ² (by integration by parts twice)' },
         { label: 'Var(T)', content: '= E[T²] − (E[T])² = 2/λ² − 1/λ² = **1/λ²**' },
@@ -1097,6 +1166,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-35', difficulty: 3,
       question: 'Derive the **MLE** of λ for exponential data t₁, t₂, ..., tₙ.',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 1 } },
       steps: [
         { label: 'Likelihood', content: 'L(λ) = ∏ λe^(−λtᵢ) = λⁿ · e^(−λ ∑tᵢ)' },
         { label: 'Log-likelihood', content: 'ℓ(λ) = n ln λ − λ ∑tᵢ' },
@@ -1111,6 +1181,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-36', difficulty: 3,
       question: 'Show that if T ~ Exp(λ), then **⌈T⌉** (ceiling, i.e., the integer part rounded up) follows a **geometric distribution**.',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 1.5 } },
       steps: [
         { label: 'Define', content: 'Let K = ⌈T⌉. Then K = k iff k−1 < T ≤ k, for k = 1, 2, ...' },
         { label: 'Probability', content: 'P(K = k) = P(T ≤ k) − P(T ≤ k−1) = e^(−λ(k−1)) − e^(−λk)' },
@@ -1124,6 +1195,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-37', difficulty: 3,
       question: 'Two buses come independently — Bus A every 10 minutes on average, Bus B every 15 minutes. What is the expected time until **any** bus arrives?',
+      visual: { kind: 'waiting', avgMinutes: 6 },
       steps: [
         { label: 'Rates', content: 'λ_A = 1/10, λ_B = 1/15' },
         { label: 'Min of exponentials', content: 'Combined rate λ = 1/10 + 1/15 = 3/30 + 2/30 = 5/30 = 1/6' },
@@ -1136,6 +1208,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-38', difficulty: 3,
       question: 'In the previous problem, given that a bus arrives, what is the **probability it is Bus A**?',
+      visual: { kind: 'waiting', avgMinutes: 6 },
       steps: [
         { label: 'Thinning property', content: 'P(Bus A arrives first) = λ_A / (λ_A + λ_B)' },
         { label: 'Compute', content: '= (1/10) / (1/6) = (1/10) · (6/1) = **3/5 = 0.6**' },
@@ -1147,6 +1220,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-39', difficulty: 3,
       question: 'Explain when the exponential model **fails**. Why is it not suitable for modeling the lifetime of a car tire?',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 0.1 } },
       steps: [
         { label: 'Key assumption', content: 'Exponential assumes a **constant failure rate** — no ageing (memoryless).' },
         { label: 'Tire reality', content: 'Tires wear out over time — the hazard rate **increases** with age.' },
@@ -1160,6 +1234,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-40', difficulty: 3,
       question: 'Derive the **moment generating function** (MGF) of Exp(λ) and use it to find E[T] and E[T²].',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 3 } },
       steps: [
         { label: 'MGF', content: 'M(s) = E[e^(sT)] = ∫₀^∞ e^(st) · λe^(−λt) dt = λ ∫₀^∞ e^(−(λ−s)t) dt' },
         { label: 'Evaluate', content: '= λ / (λ − s) for s < λ' },
@@ -1173,6 +1248,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-41', difficulty: 3,
       question: 'Show that the **hazard function** h(t) of the exponential distribution is constant.',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 2 } },
       steps: [
         { label: 'Definition', content: 'h(t) = f(t) / S(t) where f is the PDF and S is the survival function' },
         { label: 'Compute', content: 'h(t) = λe^(−λt) / e^(−λt) = **λ**' },
@@ -1185,6 +1261,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-42', difficulty: 3,
       question: 'Generate 1000 exponential random variables with λ = 2 using the **inverse transform method**. Verify the sample mean ≈ 1/λ = 0.5.',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 2 } },
       steps: [
         { label: 'Inverse CDF', content: 'If U ~ Uniform(0,1), then T = −ln(1 − U)/λ ~ Exp(λ).' },
         { label: 'Equivalently', content: 'T = −ln(U)/λ also works since 1−U has the same distribution as U.' },
@@ -1197,6 +1274,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-43', difficulty: 3,
       question: 'If T₁ and T₂ are independent Exp(λ), find the distribution of **T₁ + T₂**.',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 2 } },
       steps: [
         { label: 'Convolution', content: 'The sum of two independent Exp(λ) is Gamma(2, λ).' },
         { label: 'PDF', content: 'f(t) = λ²t · e^(−λt) for t ≥ 0' },
@@ -1211,6 +1289,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-44', difficulty: 3,
       question: 'A system has 3 components in **series** (all must work). Each has independent exponential lifetime with rates λ₁ = 0.01, λ₂ = 0.02, λ₃ = 0.03 per hour. Find the system MTTF.',
+      visual: { kind: 'waiting', avgMinutes: 16.67 },
       steps: [
         { label: 'Series system', content: 'System fails when the first component fails → min of three exponentials.' },
         { label: 'Combined rate', content: 'λ_sys = 0.01 + 0.02 + 0.03 = **0.06**' },
@@ -1223,6 +1302,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-45', difficulty: 3,
       question: 'For 2 components in **parallel** (system works if at least one works), each Exp(λ), find P(system survives past time t).',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 0.1 } },
       steps: [
         { label: 'System fails', content: 'Only when both fail: P(system fails by t) = P(T₁ ≤ t) · P(T₂ ≤ t)' },
         { label: 'Compute', content: '= (1 − e^(−λt))²' },
@@ -1237,6 +1317,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-46', difficulty: 3,
       question: 'Find the **MTTF of a 2-component parallel system** where each is Exp(λ).',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 0.1 } },
       steps: [
         { label: 'From survival function', content: 'R(t) = 2e^(−λt) − e^(−2λt)' },
         { label: 'MTTF formula', content: 'MTTF = ∫₀^∞ R(t) dt = ∫₀^∞ [2e^(−λt) − e^(−2λt)] dt' },
@@ -1250,6 +1331,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-47', difficulty: 3,
       question: 'Show that the **entropy** of Exp(λ) is 1 + ln(1/λ) = 1 − ln λ.',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 1 } },
       steps: [
         { label: 'Entropy definition', content: 'H = −∫₀^∞ f(t) ln f(t) dt where f(t) = λe^(−λt)' },
         { label: 'ln f(t)', content: '= ln λ − λt' },
@@ -1264,6 +1346,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-48', difficulty: 3,
       question: 'The exponential distribution is the **maximum entropy** distribution among all continuous distributions on [0, ∞) with a given mean. What does this imply practically?',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 0.5 } },
       steps: [
         { label: 'Maximum entropy', content: 'Among all non-negative distributions with mean 1/λ, Exp(λ) contains the **least information** (most uncertainty).' },
         { label: 'Practical implication', content: 'If all you know is the average waiting time and events are non-negative, the exponential is the most "conservative" (least-assuming) model.' },
@@ -1276,6 +1359,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-49', difficulty: 3,
       question: 'A server processes jobs with exponential service time (mean 2 min). Jobs arrive as a Poisson process at 20 per hour. What fraction of time is the server **idle**? (This is the M/M/1 queue.)',
+      visual: { kind: 'waiting', avgMinutes: 2, markTime: 5 },
       steps: [
         { label: 'Service rate', content: 'μ = 1/2 per minute = 30 per hour' },
         { label: 'Arrival rate', content: 'λ = 20 per hour' },
@@ -1289,6 +1373,7 @@ export const practiceExponentialDistribution: PracticeSet = {
     {
       id: 'exp-50', difficulty: 3,
       question: 'Fit an exponential model to wait times [0.3, 1.2, 0.8, 2.1, 0.5, 3.4, 0.1, 1.5, 0.9, 0.7] and test if the model is appropriate by comparing the sample variance to 1/λ².',
+      visual: { kind: 'distribution', type: 'exponential', params: { lambda: 0.8696 } },
       steps: [
         { label: 'Sample mean', content: 'x̄ = (0.3+1.2+0.8+2.1+0.5+3.4+0.1+1.5+0.9+0.7)/10 = 11.5/10 = **1.15**' },
         { label: 'λ̂', content: '= 1/1.15 = **0.8696**' },
@@ -1327,6 +1412,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-02', difficulty: 1,
       question: 'For the coin test above (χ² = 2.56, df = 1), the critical value at α = 0.05 is **3.84**. Is the result significant?',
+      visual: { kind: 'coins', count: 100, heads: 58 },
       steps: [
         { label: 'Compare', content: '2.56 < 3.84' },
         { label: 'Decision', content: '**Fail to reject** H₀ — there is not enough evidence to say the coin is unfair.' },
@@ -1338,6 +1424,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-03', difficulty: 1,
       question: 'What are the **degrees of freedom** for a goodness-of-fit test with 2 categories (heads/tails)?',
+      visual: { kind: 'coins', count: 100, heads: 50 },
       steps: [
         { label: 'Formula', content: 'df = (number of categories) − 1' },
         { label: 'Compute', content: 'df = 2 − 1 = **1**' },
@@ -1374,6 +1461,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-06', difficulty: 1,
       question: 'For the die test (χ² = 1.0, df = 5), the critical value at α = 0.05 is **11.07**. Is the die fair?',
+      visual: { kind: 'dice', count: 60, values: [8,12,10,11,9,10] },
       steps: [
         { label: 'Compare', content: '1.0 ≪ 11.07' },
         { label: 'Decision', content: '**Fail to reject** H₀ — no evidence the die is unfair.' },
@@ -1385,6 +1473,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-07', difficulty: 1,
       question: 'What is the critical value of χ² for df = 2 at α = 0.05?',
+      visual: { kind: 'distribution', type: 'chi-squared', params: { df: 2 }, markX: 5.99 },
       steps: [
         { label: 'Table lookup', content: 'df=1 → 3.84, df=2 → 5.99, df=3 → 7.81, df=4 → 9.49, df=5 → 11.07' },
         { label: 'Answer', content: '**5.99**' },
@@ -1409,6 +1498,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-09', difficulty: 1,
       question: 'For the candy test (χ² = 1.667, df = 2, critical = 5.99), is the distribution as claimed?',
+      visual: { kind: 'bar-chart', labels: ['Red','Blue','Green'], values: [35,25,40] },
       steps: [
         { label: 'Compare', content: '1.667 < 5.99' },
         { label: 'Decision', content: '**Fail to reject** — no significant difference from claimed proportions.' },
@@ -1420,6 +1510,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-10', difficulty: 1,
       question: 'Compute the degrees of freedom for a goodness-of-fit test with **6 categories** (die faces).',
+      visual: { kind: 'dice', count: 6 },
       steps: [
         { label: 'Formula', content: 'df = k − 1 where k = number of categories' },
         { label: 'Compute', content: 'df = 6 − 1 = **5**' },
@@ -1443,6 +1534,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-12', difficulty: 1,
       question: 'Is χ² = 2.0 with df = 1 significant at α = 0.05? At α = 0.10 (critical = 2.71)?',
+      visual: { kind: 'coins', count: 200, heads: 110 },
       steps: [
         { label: 'At α = 0.05', content: '2.0 < 3.84 → **Not significant**' },
         { label: 'At α = 0.10', content: '2.0 < 2.71 → **Not significant** even at 10%' },
@@ -1467,6 +1559,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-14', difficulty: 1,
       question: 'What does a **larger χ² value** indicate?',
+      visual: { kind: 'distribution', type: 'chi-squared', params: { df: 1 } },
       steps: [
         { label: 'Interpretation', content: 'A larger χ² means the observed data deviates **more** from what was expected.' },
         { label: 'Implication', content: 'The larger it is relative to the critical value, the stronger the evidence **against** the null hypothesis.' },
@@ -1478,6 +1571,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-15', difficulty: 1,
       question: 'Can χ² ever be **negative**?',
+      visual: { kind: 'distribution', type: 'chi-squared', params: { df: 1 } },
       steps: [
         { label: 'Formula', content: 'χ² = ∑ (O − E)² / E' },
         { label: 'Reasoning', content: '(O − E)² is always ≥ 0 and E > 0, so each term is ≥ 0.' },
@@ -1503,6 +1597,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-17', difficulty: 1,
       question: 'For the colour test (χ² = 1.9, df = 3, critical = 7.81), is the preference equal?',
+      visual: { kind: 'bar-chart', labels: ['Red','Blue','Green','Yellow'], values: [25,20,18,17] },
       steps: [
         { label: 'Compare', content: '1.9 < 7.81' },
         { label: 'Decision', content: '**Fail to reject** — no significant evidence of unequal preference.' },
@@ -1531,6 +1626,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-19', difficulty: 2,
       question: 'Blood type distribution claim: O=45%, A=40%, B=10%, AB=5%. Sample of 200: O=100, A=70, B=20, AB=10. Test at α = 0.05.',
+      visual: { kind: 'bar-chart', labels: ['O','A','B','AB'], values: [100,70,20,10] },
       steps: [
         { label: 'Expected', content: 'E(O)=90, E(A)=80, E(B)=20, E(AB)=10' },
         { label: 'χ²', content: '= (100−90)²/90 + (70−80)²/80 + (20−20)²/20 + (10−10)²/10' },
@@ -1545,6 +1641,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-20', difficulty: 2,
       question: 'Set up a **2×2 contingency table**: 200 people surveyed on exercise (Yes/No) and illness (Sick/Healthy). Data: Exercise+Healthy=70, Exercise+Sick=30, NoExercise+Healthy=40, NoExercise+Sick=60. Compute expected values.',
+      visual: { kind: 'bar-chart', labels: ['Ex+Healthy','Ex+Sick','NoEx+Healthy','NoEx+Sick'], values: [70,30,40,60] },
       steps: [
         { label: 'Table', content: '|  | Healthy | Sick | Total |\n|---|---|---|---|\n| Exercise | 70 | 30 | 100 |\n| No Exercise | 40 | 60 | 100 |\n| Total | 110 | 90 | 200 |' },
         { label: 'Expected formula', content: 'E = (Row total × Column total) / Grand total' },
@@ -1560,6 +1657,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-21', difficulty: 2,
       question: 'From the previous table, compute χ² and test independence at α = 0.05.',
+      visual: { kind: 'bar-chart', labels: ['Ex+Healthy','Ex+Sick','NoEx+Healthy','NoEx+Sick'], values: [70,30,40,60] },
       steps: [
         { label: 'χ²', content: '= (70−55)²/55 + (30−45)²/45 + (40−55)²/55 + (60−45)²/45' },
         { label: 'Compute', content: '= 225/55 + 225/45 + 225/55 + 225/45 = 4.091 + 5.000 + 4.091 + 5.000 = **18.182**' },
@@ -1573,6 +1671,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-22', difficulty: 2,
       question: 'What is the df for a **2×2 contingency table**? What about a 3×4 table?',
+      visual: { kind: 'distribution', type: 'chi-squared', params: { df: 6 } },
       steps: [
         { label: 'Formula', content: 'df = (rows − 1)(columns − 1)' },
         { label: '2×2', content: 'df = (2−1)(2−1) = **1**' },
@@ -1615,6 +1714,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-25', difficulty: 2,
       question: 'When should you combine categories? If an expected count is **less than 5**, what should you do?',
+      visual: { kind: 'bar-chart', labels: ['1','2','3','4','5'], values: [45,38,10,5,2] },
       steps: [
         { label: 'Rule of thumb', content: 'χ² test requires all expected counts ≥ 5.' },
         { label: 'Solution', content: '**Merge** adjacent categories until all expected counts ≥ 5.' },
@@ -1627,6 +1727,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-26', difficulty: 2,
       question: 'A loaded die is tested with 600 rolls: [80, 90, 110, 120, 100, 100]. Test at α = 0.01.',
+      visual: { kind: 'dice', count: 600, values: [80,90,110,120,100,100] },
       steps: [
         { label: 'Expected', content: '600/6 = 100 per face' },
         { label: 'χ²', content: '= (80−100)²/100 + (90−100)²/100 + (110−100)²/100 + (120−100)²/100 + 0 + 0' },
@@ -1641,6 +1742,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-27', difficulty: 2,
       question: 'Day of the week for births (700 births): Mon=90, Tue=110, Wed=105, Thu=100, Fri=108, Sat=95, Sun=92. Are births uniformly distributed?',
+      visual: { kind: 'bar-chart', labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'], values: [90,110,105,100,108,95,92] },
       steps: [
         { label: 'Expected', content: '700/7 = 100 per day' },
         { label: 'χ²', content: '= (90−100)²/100 + (110−100)²/100 + (105−100)²/100 + 0 + (108−100)²/100 + (95−100)²/100 + (92−100)²/100' },
@@ -1654,6 +1756,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-28', difficulty: 2,
       question: 'What is the **Yates correction** for continuity, and when is it used?',
+      visual: { kind: 'coins', count: 100, heads: 58 },
       steps: [
         { label: 'Formula', content: 'χ²_Yates = ∑ (|O − E| − 0.5)² / E' },
         { label: 'When', content: 'Applied to **2×2 tables** (df=1) to correct for the discrete-to-continuous approximation.' },
@@ -1666,6 +1769,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-29', difficulty: 2,
       question: 'Apply Yates correction to the coin test: 100 flips, 58 heads, 42 tails.',
+      visual: { kind: 'coins', count: 100, heads: 58 },
       steps: [
         { label: 'Without Yates', content: 'χ² = 2.56 (computed earlier)' },
         { label: 'With Yates', content: 'χ² = (|58−50| − 0.5)²/50 + (|42−50| − 0.5)²/50' },
@@ -1679,6 +1783,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-30', difficulty: 2,
       question: 'Compute the **expected values** for this 2×3 table: | | A | B | C | Total |\n|---|---|---|---|---|\n| Group 1 | 30 | 20 | 10 | 60 |\n| Group 2 | 20 | 30 | 30 | 80 |\n| Total | 50 | 50 | 40 | 140 |',
+      visual: { kind: 'bar-chart', labels: ['G1-A','G1-B','G1-C','G2-A','G2-B','G2-C'], values: [30,20,10,20,30,30] },
       steps: [
         { label: 'E(G1,A)', content: '60×50/140 = **21.43**' },
         { label: 'E(G1,B)', content: '60×50/140 = **21.43**' },
@@ -1694,6 +1799,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-31', difficulty: 2,
       question: 'Using the expected values from the previous problem, compute χ² and test independence.',
+      visual: { kind: 'bar-chart', labels: ['G1-A','G1-B','G1-C','G2-A','G2-B','G2-C'], values: [30,20,10,20,30,30] },
       steps: [
         { label: 'χ² terms', content: '(30−21.43)²/21.43 + (20−21.43)²/21.43 + (10−17.14)²/17.14 + (20−28.57)²/28.57 + (30−28.57)²/28.57 + (30−22.86)²/22.86' },
         { label: 'Compute', content: '= 73.44/21.43 + 2.04/21.43 + 51.00/17.14 + 73.44/28.57 + 2.04/28.57 + 51.00/22.86' },
@@ -1707,6 +1813,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-32', difficulty: 2,
       question: 'Explain the difference between a **goodness-of-fit** test and a **test of independence**.',
+      visual: { kind: 'distribution', type: 'chi-squared', params: { df: 5 } },
       steps: [
         { label: 'Goodness-of-fit', content: 'One variable — tests if observed frequencies match a **theoretical distribution** (e.g., is this die fair?).' },
         { label: 'Test of independence', content: 'Two variables — tests if the variables are **associated** in a contingency table (e.g., does gender affect subject preference?).' },
@@ -1719,6 +1826,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-33', difficulty: 2,
       question: 'A store tracks customer preference by time of day. Morning: Coffee=80, Tea=40. Afternoon: Coffee=50, Tea=30. Test if preference depends on time.',
+      visual: { kind: 'bar-chart', labels: ['AM-Coffee','AM-Tea','PM-Coffee','PM-Tea'], values: [80,40,50,30] },
       steps: [
         { label: 'Table', content: '| | Coffee | Tea | Total |\n|---|---|---|---|\n| AM | 80 | 40 | 120 |\n| PM | 50 | 30 | 80 |\n| Total | 130 | 70 | 200 |' },
         { label: 'Expected', content: 'E(AM,C)=120·130/200=78, E(AM,T)=42, E(PM,C)=52, E(PM,T)=28' },
@@ -1733,6 +1841,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-34', difficulty: 2,
       question: 'What is the relationship between a **2×2 χ² test** and the **Z-test for two proportions**?',
+      visual: { kind: 'distribution', type: 'chi-squared', params: { df: 1 } },
       steps: [
         { label: 'Connection', content: 'For a 2×2 table, the χ² statistic equals **Z²** (the squared Z-test statistic).' },
         { label: 'df = 1', content: 'χ²₁ = Z² — a chi-squared with 1 df is the square of a standard normal.' },
@@ -1747,6 +1856,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-35', difficulty: 3,
       question: 'Show that Z² ~ χ²₁. That is, if Z ~ N(0,1), then Z² has a chi-squared distribution with 1 degree of freedom.',
+      visual: { kind: 'distribution', type: 'chi-squared', params: { df: 1 } },
       steps: [
         { label: 'CDF of Z²', content: 'P(Z² ≤ x) = P(−√x ≤ Z ≤ √x) = 2Φ(√x) − 1 for x > 0' },
         { label: 'PDF of Z²', content: 'Differentiate: f(x) = d/dx [2Φ(√x) − 1] = 2 · φ(√x) · 1/(2√x)' },
@@ -1761,6 +1871,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-36', difficulty: 3,
       question: 'Perform a full **3×3 contingency table** test. Treatment (A/B/C) vs Outcome (Good/Fair/Poor).\n\n| | Good | Fair | Poor |\n|---|---|---|---|\n| A | 50 | 30 | 20 |\n| B | 40 | 35 | 25 |\n| C | 30 | 25 | 45 |',
+      visual: { kind: 'bar-chart', labels: ['A-Good','A-Fair','A-Poor','B-Good','B-Fair','B-Poor','C-Good','C-Fair','C-Poor'], values: [50,30,20,40,35,25,30,25,45] },
       steps: [
         { label: 'Totals', content: 'Row: A=100, B=100, C=100. Col: Good=120, Fair=90, Poor=90. N=300.' },
         { label: 'Expected', content: 'E = Row × Col / 300. E(A,Good)=40, E(A,Fair)=30, E(A,Poor)=30. E(B,Good)=40, E(B,Fair)=30, E(B,Poor)=30. E(C,Good)=40, E(C,Fair)=30, E(C,Poor)=30.' },
@@ -1777,6 +1888,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-37', difficulty: 3,
       question: 'When should you use **Fisher\'s exact test** instead of χ²?',
+      visual: { kind: 'distribution', type: 'chi-squared', params: { df: 1 } },
       steps: [
         { label: 'Small samples', content: 'When any **expected count < 5**, the χ² approximation is unreliable.' },
         { label: 'Fisher\'s exact test', content: 'Computes the exact probability under H₀ using the hypergeometric distribution. Works for 2×2 tables.' },
@@ -1790,6 +1902,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-38', difficulty: 3,
       question: 'Explain the **Bonferroni correction** when performing multiple χ² tests.',
+      visual: { kind: 'distribution', type: 'chi-squared', params: { df: 5 } },
       steps: [
         { label: 'Problem', content: 'If you run k independent tests at α = 0.05, the probability of at least one false positive is 1 − (1−0.05)^k.' },
         { label: 'For k=10', content: 'P(at least one false positive) = 1 − 0.95^10 ≈ 0.40 (40%)!' },
@@ -1804,6 +1917,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-39', difficulty: 3,
       question: 'A 2×2 table with very small counts: | | Yes | No |\n|---|---|---|\n| Treated | 4 | 1 |\n| Control | 1 | 4 |\n\nCompute Fisher\'s exact test p-value.',
+      visual: { kind: 'bar-chart', labels: ['Treated-Yes','Treated-No','Control-Yes','Control-No'], values: [4,1,1,4] },
       steps: [
         { label: 'Setup', content: 'a=4, b=1, c=1, d=4, n=10. Row totals: 5,5. Column totals: 5,5.' },
         { label: 'Formula', content: 'P = C(5,4)·C(5,1) / C(10,5) for this particular table' },
@@ -1819,6 +1933,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-40', difficulty: 3,
       question: 'Derive the **expected value** E[χ²] under H₀ for a goodness-of-fit test with k categories.',
+      visual: { kind: 'distribution', type: 'chi-squared', params: { df: 3 } },
       steps: [
         { label: 'Setup', content: 'Under H₀, each Oᵢ ~ Multinomial with E[Oᵢ] = Eᵢ = npᵢ' },
         { label: 'Each term', content: 'E[(Oᵢ − Eᵢ)²/Eᵢ] = Var(Oᵢ)/Eᵢ = npᵢ(1−pᵢ)/(npᵢ) = 1 − pᵢ' },
@@ -1833,6 +1948,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-41', difficulty: 3,
       question: 'Compute the **effect size** (Cramér\'s V) for the exercise/health 2×2 table (χ² = 18.18, n = 200).',
+      visual: { kind: 'bar-chart', labels: ['Ex+Healthy','Ex+Sick','NoEx+Healthy','NoEx+Sick'], values: [70,30,40,60] },
       steps: [
         { label: 'Formula', content: 'V = √(χ²/(n · min(r−1, c−1)))' },
         { label: 'For 2×2', content: 'min(r−1, c−1) = min(1,1) = 1' },
@@ -1846,6 +1962,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-42', difficulty: 3,
       question: 'Run a **χ² test for homogeneity**: are two populations distributed the same way?\n\nPopulation 1 (n=150): A=50, B=60, C=40.\nPopulation 2 (n=150): A=40, B=50, C=60.',
+      visual: { kind: 'bar-chart', labels: ['P1-A','P1-B','P1-C','P2-A','P2-B','P2-C'], values: [50,60,40,40,50,60] },
       steps: [
         { label: 'Table', content: '| | A | B | C | Total |\n|---|---|---|---|---|\n| Pop 1 | 50 | 60 | 40 | 150 |\n| Pop 2 | 40 | 50 | 60 | 150 |\n| Total | 90 | 110 | 100 | 300 |' },
         { label: 'Expected', content: 'E(1,A)=150·90/300=45, E(1,B)=55, E(1,C)=50. Same for Pop 2.' },
@@ -1860,6 +1977,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-43', difficulty: 3,
       question: 'What is the **likelihood ratio test** (G-test) alternative to χ²? Compute G for the coin example (58 heads, 42 tails out of 100).',
+      visual: { kind: 'coins', count: 100, heads: 58 },
       steps: [
         { label: 'G-test formula', content: 'G = 2 ∑ Oᵢ · ln(Oᵢ/Eᵢ)' },
         { label: 'Compute', content: 'G = 2[58 · ln(58/50) + 42 · ln(42/50)]' },
@@ -1875,6 +1993,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-44', difficulty: 3,
       question: 'Explain the relationship between the **chi-squared distribution** and the **gamma distribution**.',
+      visual: { kind: 'distribution', type: 'chi-squared', params: { df: 4 } },
       steps: [
         { label: 'Chi-squared', content: 'χ²(k) = sum of k independent standard normal squared variables.' },
         { label: 'As Gamma', content: 'χ²(k) = Gamma(k/2, 1/2) — shape α = k/2, rate β = 1/2.' },
@@ -1888,6 +2007,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-45', difficulty: 3,
       question: 'A **multinomial goodness-of-fit** test: n = 500 observations across 5 categories with claimed proportions [0.1, 0.2, 0.3, 0.25, 0.15]. Observed: [60, 95, 140, 130, 75]. Test at α = 0.05.',
+      visual: { kind: 'bar-chart', labels: ['Cat1','Cat2','Cat3','Cat4','Cat5'], values: [60,95,140,130,75] },
       steps: [
         { label: 'Expected', content: 'E = [50, 100, 150, 125, 75]' },
         { label: 'χ²', content: '= (60−50)²/50 + (95−100)²/100 + (140−150)²/150 + (130−125)²/125 + (75−75)²/75' },
@@ -1901,6 +2021,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-46', difficulty: 3,
       question: 'What happens to the **power** of a χ² test as sample size increases? If the true proportions are [0.18, 0.17, 0.17, 0.16, 0.16, 0.16] (slightly unfair die), how large must n be for 80% power?',
+      visual: { kind: 'distribution', type: 'chi-squared', params: { df: 5 }, markX: 11.07 },
       steps: [
         { label: 'Non-centrality parameter', content: 'λ = n · ∑(pᵢ − 1/6)² / (1/6)' },
         { label: 'Compute effect', content: 'Deviations from 1/6 ≈ 0.1667: (0.18−.1667)²+...≈ 0.0133²+0.0033²+0.0033²+(−0.0067)²+(−0.0067)²+(−0.0067)² ≈ 0.0001769+0.0000109+... ≈ 0.000360' },
@@ -1915,6 +2036,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-47', difficulty: 3,
       question: 'Explain how to use **residuals** to identify which cells contribute most to a significant χ². Compute standardised residuals for the 3×3 treatment table (problem chi-36).',
+      visual: { kind: 'bar-chart', labels: ['A-Good','A-Fair','A-Poor','B-Good','B-Fair','B-Poor','C-Good','C-Fair','C-Poor'], values: [50,30,20,40,35,25,30,25,45] },
       steps: [
         { label: 'Standardised residual', content: 'r = (O − E) / √E' },
         { label: 'For Treatment A', content: 'Good: (50−40)/√40 = 1.58, Fair: (30−30)/√30 = 0, Poor: (20−30)/√30 = −1.83' },
@@ -1929,6 +2051,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-48', difficulty: 3,
       question: 'Explain the **McNemar test** for paired 2×2 data. When is it used instead of χ²?',
+      visual: { kind: 'bar-chart', labels: ['Yes→Yes','Yes→No','No→Yes','No→No'], values: [40,15,5,40] },
       steps: [
         { label: 'Scenario', content: 'Before/after measurements on the **same subjects** (e.g., opinion before and after a campaign).' },
         { label: 'Table', content: '| | After Yes | After No |\n|---|---|---|\n| Before Yes | a | b |\n| Before No | c | d |' },
@@ -1943,6 +2066,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-49', difficulty: 3,
       question: 'A genetics experiment predicts a **9:3:3:1** ratio. From 160 offspring: 86, 35, 26, 13. Test at α = 0.05.',
+      visual: { kind: 'bar-chart', labels: ['Phenotype 1','Phenotype 2','Phenotype 3','Phenotype 4'], values: [86,35,26,13] },
       steps: [
         { label: 'Expected', content: 'Total = 160. Ratios sum to 16. E = [160·9/16, 160·3/16, 160·3/16, 160·1/16] = [90, 30, 30, 10]' },
         { label: 'χ²', content: '= (86−90)²/90 + (35−30)²/30 + (26−30)²/30 + (13−10)²/10' },
@@ -1956,6 +2080,7 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-50', difficulty: 3,
       question: 'The χ² distribution with k degrees of freedom is defined as χ²ₖ = Z₁² + Z₂² + ... + Zₖ², where each Zᵢ is a standard normal. For k = 5, derive the mean and variance of χ²₅ from the properties of Z².',
+      visual: { kind: 'distribution', type: 'chi-squared', params: { df: 5 } },
       steps: [
         { label: 'Step 1: Mean of Z²', content: 'If Z ~ N(0,1), then E[Z²] = Var(Z) + (E[Z])² = 1 + 0 = **1**' },
         { label: 'Step 2: Mean of χ²₅', content: 'E[χ²₅] = E[Z₁²] + E[Z₂²] + ... + E[Z₅²] = 1 + 1 + 1 + 1 + 1 = **5**' },
