@@ -4337,19 +4337,27 @@ export const scienceReferences: ReferenceGuide[] = [
           '| Standard deviation | sqrt(4) | **2** |\n\n' +
           'A small sigma means data is clustered near the mean. A large sigma means data is spread out.',
         intermediateContent:
-          '**Population vs sample:**\n\n' +
-          '| | Variance formula | When to use |\n' +
-          '|--|-----------------|-------------|\n' +
-          '| Population | sum(xi - mu)² / N | You have ALL data |\n' +
-          '| Sample | sum(xi - x_bar)² / (n-1) | You have a subset |\n\n' +
-          'The (n-1) in the sample formula is **Bessel\'s correction** — it compensates for the fact that a sample underestimates the true spread.\n\n' +
-          '**The empirical rule** (for bell-shaped data):\n\n' +
-          '| Range | Percentage of data |\n' +
-          '|-------|-------------------|\n' +
-          '| within 1 sigma | ~68% |\n' +
-          '| within 2 sigma | ~95% |\n' +
-          '| within 3 sigma | ~99.7% |\n\n' +
-          '**Z-score** standardises any value: `z = (x - mean) / sigma`. A z-score of 2 means the value is 2 standard deviations above the mean.',
+          '**Why divide by (n−1) instead of n for samples?**\n\n' +
+          'When you compute the mean from a sample, you used the data to estimate the centre. ' +
+          'The deviations from THAT estimated mean are systematically smaller than the deviations from the TRUE population mean ' +
+          '(because x̄ is the value that minimises the sum of squared deviations — that is literally what the mean does). ' +
+          'Dividing by (n−1) instead of n compensates for this underestimate.\n\n' +
+          'Concrete example: True population = {1, 2, 3, 4, 5}. True mean = 3. True variance = ((−2)² + (−1)² + 0² + 1² + 2²)/5 = 10/5 = **2.0**.\n\n' +
+          'Take a sample: {1, 3, 5}. Sample mean = 3. Deviations: (−2)² + 0² + 2² = 8.\n' +
+          '- Divide by n=3: 8/3 = 2.67 (too high this time, but on average across many samples, dividing by n underestimates)\n' +
+          '- Divide by n−1=2: 8/2 = **4.0** (this is the unbiased sample variance — on average it equals the true value)\n\n' +
+          '**The empirical rule — what "within 1σ" means concretely:**\n\n' +
+          'For bell-shaped data with mean = 75, σ = 10:\n\n' +
+          '| Range | Scores | % of students |\n' +
+          '|-------|--------|---------------|\n' +
+          '| μ ± 1σ | 65 to 85 | ~68% (about 2 out of 3) |\n' +
+          '| μ ± 2σ | 55 to 95 | ~95% (nearly everyone) |\n' +
+          '| μ ± 3σ | 45 to 105 | ~99.7% (all but 3 in 1000) |\n\n' +
+          '**Z-scores — "how many standard deviations from the mean?"**\n\n' +
+          'z = (your value − mean) / σ. A student scoring 95 on the exam above: z = (95−75)/10 = **+2.0**. ' +
+          'They are 2 standard deviations above average — better than about 97.7% of students.\n\n' +
+          'A student scoring 60: z = (60−75)/10 = **−1.5**. They are 1.5σ below average — better than about 6.7% of students.\n\n' +
+          'Z-scores let you compare across different scales. A z=+1.5 in maths and z=+1.5 in science mean equally good performance, even if the raw scores and spreads are different.',
         advancedContent:
           '**Variance rules — derived, not memorised:**\n\n' +
           '**Rule 1: Var(aX + b) = a² Var(X)**\n\n' +
@@ -4520,43 +4528,63 @@ export const scienceReferences: ReferenceGuide[] = [
           'Correlation does NOT imply causation. Ice cream sales and drowning deaths are positively correlated — but ice cream does not cause drowning. Both increase in summer (the **confounding variable**).\n\n' +
           '**Linear regression** finds the best-fit line through the data: `y = mx + b`, where m is the slope and b is the y-intercept.',
         intermediateContent:
-          '**Least squares regression:**\n\n' +
-          'The "best-fit" line minimises the sum of squared vertical distances from points to the line.\n\n' +
-          '| Formula | Expression |\n' +
-          '|---------|----------|\n' +
-          '| Slope m | [n*sum(xi*yi) - sum(xi)*sum(yi)] / [n*sum(xi²) - (sum(xi))²] |\n' +
-          '| Intercept b | y_bar - m * x_bar |\n' +
-          '| r² (coefficient of determination) | Proportion of variance explained by the line |\n\n' +
-          '**Example:** Does rainfall predict rice yield?\n\n' +
+          '**What "best-fit" means — and why we square the errors:**\n\n' +
+          'You draw a line through your data. Some points are above the line (positive error), some below (negative error). ' +
+          'If you just add the errors, positives and negatives cancel — even a terrible line can have total error = 0.\n\n' +
+          'Fix: **square** each error first. Then all errors are positive. The best line minimises the total of these squared errors. ' +
+          'That is "least squares."\n\n' +
+          '**Computing the slope — what the formula actually does:**\n\n' +
+          'The slope measures: "when x goes up by 1, how much does y go up?" To find this:\n' +
+          '1. For each point, ask: is x above or below average? Is y above or below average?\n' +
+          '2. Multiply those two deviations together\n' +
+          '3. If x is above average AND y is above average (both positive), the product is positive → they move together\n' +
+          '4. If x is above average but y is below (opposite signs), the product is negative → they move apart\n' +
+          '5. The slope = (sum of these products) / (sum of x-deviations squared)\n\n' +
+          'The advanced section computes this for a real rainfall/yield dataset.\n\n' +
+          '**Example data — does rainfall predict rice yield?**\n\n' +
           '| Year | Rain (cm) | Yield (tonnes/ha) |\n' +
           '|------|-----------|------------------|\n' +
           '| 2020 | 180 | 3.2 |\n' +
           '| 2021 | 210 | 3.8 |\n' +
           '| 2022 | 160 | 2.9 |\n' +
           '| 2023 | 195 | 3.5 |\n\n' +
-          'If r² = 0.92, rainfall explains **92%** of the variation in yield. The remaining 8% comes from other factors (soil, fertiliser, pests).',
+          'More rain → more yield in every row. That is strong positive correlation.\n\n' +
+          '**r² (r-squared)** tells you what fraction of y\'s variation is explained by x. ' +
+          'r² = 0.92 means rainfall explains 92% of yield variation. The other 8% comes from soil, fertiliser, pests, etc.',
         advancedContent:
-          '**Deriving the least-squares slope by hand:**\n\n' +
-          'We want the line y = mx + b that minimises S = Σ(yᵢ − mxᵢ − b)².\n\n' +
-          '1. Take ∂S/∂b = 0: −2Σ(yᵢ − mxᵢ − b) = 0 → b = ȳ − mx̄\n' +
-          '2. Take ∂S/∂m = 0: −2Σxᵢ(yᵢ − mxᵢ − b) = 0\n' +
-          '3. Substitute b from step 1 and simplify:\n\n' +
-          '**m = Σ(xᵢ − x̄)(yᵢ − ȳ) / Σ(xᵢ − x̄)²** ∎\n\n' +
-          'This is the covariance of x and y divided by the variance of x: m = Cov(x,y)/Var(x).\n\n' +
-          '**Worked example with our rainfall/yield data:**\n\n' +
-          '| xᵢ−x̄ | yᵢ−ȳ | (xᵢ−x̄)(yᵢ−ȳ) | (xᵢ−x̄)² |\n' +
-          '|--------|--------|----------------|----------|\n' +
-          '| −6.25 | −0.15 | 0.94 | 39.06 |\n' +
-          '| 23.75 | 0.45 | 10.69 | 564.06 |\n' +
-          '| −26.25 | −0.45 | 11.81 | 689.06 |\n' +
-          '| 8.75 | 0.15 | 1.31 | 76.56 |\n' +
-          '| **Sum** | | **24.75** | **1368.75** |\n\n' +
-          'm = 24.75/1368.75 = **0.0181** tonnes per cm of rain.\n\n' +
-          '**Multiple regression — the matrix form:**\n\n' +
-          'With many predictors: **b = (XᵀX)⁻¹Xᵀy**. Each coefficient bᵢ measures the effect of predictor xᵢ ' +
-          'AFTER controlling for all other predictors. If rainfall and fertiliser both predict yield, the regression separates their individual contributions.\n\n' +
-          '**Residual diagnostics:** Plot residuals (yᵢ − ŷᵢ) vs fitted values. Random scatter = good model. ' +
-          'A funnel shape = variance increases with y (heteroscedasticity). A curve = the relationship isn\'t linear (try adding x² term).',
+          '**Computing the best-fit line from scratch — every step shown.**\n\n' +
+          'Using our rainfall/yield data. First, compute the means:\n\n' +
+          'x̄ = (180 + 210 + 160 + 195) / 4 = 745/4 = **186.25 cm**\n' +
+          'ȳ = (3.2 + 3.8 + 2.9 + 3.5) / 4 = 13.4/4 = **3.35 tonnes/ha**\n\n' +
+          '**Step 1 — For each data point, compute how far it is from the mean:**\n\n' +
+          '| Year | Rainfall xᵢ | xᵢ − x̄ | Yield yᵢ | yᵢ − ȳ |\n' +
+          '|------|------------|---------|----------|--------|\n' +
+          '| 2020 | 180 | −6.25 | 3.2 | −0.15 |\n' +
+          '| 2021 | 210 | +23.75 | 3.8 | +0.45 |\n' +
+          '| 2022 | 160 | −26.25 | 2.9 | −0.45 |\n' +
+          '| 2023 | 195 | +8.75 | 3.5 | +0.15 |\n\n' +
+          'Notice: when rainfall is below average (negative), yield is also below average (negative). They move together — that is positive correlation.\n\n' +
+          '**Step 2 — Multiply each pair of deviations, and square the x-deviations:**\n\n' +
+          '| xᵢ − x̄ | yᵢ − ȳ | Product (xᵢ−x̄)(yᵢ−ȳ) | Squared (xᵢ−x̄)² |\n' +
+          '|---------|--------|----------------------|------------------|\n' +
+          '| −6.25 | −0.15 | (−6.25)(−0.15) = +0.94 | 39.06 |\n' +
+          '| +23.75 | +0.45 | (+23.75)(+0.45) = +10.69 | 564.06 |\n' +
+          '| −26.25 | −0.45 | (−26.25)(−0.45) = +11.81 | 689.06 |\n' +
+          '| +8.75 | +0.15 | (+8.75)(+0.15) = +1.31 | 76.56 |\n' +
+          '| | | **Sum = 24.75** | **Sum = 1368.75** |\n\n' +
+          'All products are positive (when both deviations have the same sign, the product is positive). Strong positive correlation.\n\n' +
+          '**Step 3 — The slope:** m = sum of products / sum of squares = 24.75 / 1368.75 = **0.0181**\n\n' +
+          'This means: every extra centimetre of rainfall adds 0.0181 tonnes/ha of yield.\n\n' +
+          '**Step 4 — The intercept:** The line must pass through the point (x̄, ȳ).\n\n' +
+          'b = ȳ − m × x̄ = 3.35 − 0.0181 × 186.25 = 3.35 − 3.37 = **−0.02**\n\n' +
+          '**The line:** yield = 0.0181 × rainfall − 0.02\n\n' +
+          '**Step 5 — Predict:** If rainfall next year is 200 cm:\n\n' +
+          'yield = 0.0181 × 200 − 0.02 = **3.60 tonnes/ha**\n\n' +
+          'Sanity check: our closest data point is 195 cm → 3.5 tonnes. 5 more cm of rain → 0.0181 × 5 = 0.09 more yield → 3.59. Close to our prediction of 3.60 ✓\n\n' +
+          '**Step 6 — How good is the line? Computing r²:**\n\n' +
+          'We need one more column: Σ(yᵢ−ȳ)² = (−0.15)² + (0.45)² + (−0.45)² + (0.15)² = 0.0225 + 0.2025 + 0.2025 + 0.0225 = **0.45**\n\n' +
+          'r² = (sum of products)² / (sum of x-squares × sum of y-squares) = 24.75² / (1368.75 × 0.45) = 612.56 / 615.94 = **0.995**\n\n' +
+          'Rainfall explains **99.5%** of the variation in yield. Only 0.5% is unexplained (noise, measurement error, other factors).',
         interactive: { type: 'python-playground' as const, props: { starterCode: '# Simple linear regression from scratch\nrain = [180, 210, 160, 195, 220, 175, 200]\nyield_t = [3.2, 3.8, 2.9, 3.5, 4.1, 3.0, 3.6]\nn = len(rain)\n\n# Calculate means\nx_bar = sum(rain) / n\ny_bar = sum(yield_t) / n\n\n# Slope and intercept\nnum = sum(rain[i]*yield_t[i] for i in range(n)) - n*x_bar*y_bar\nden = sum(rain[i]**2 for i in range(n)) - n*x_bar**2\nm = num / den\nb = y_bar - m * x_bar\n\n# Correlation coefficient\nss_xy = num\nss_xx = den\nss_yy = sum(yield_t[i]**2 for i in range(n)) - n*y_bar**2\nr = ss_xy / (ss_xx * ss_yy) ** 0.5\n\nprint(f"Best-fit line: y = {m:.4f}x + {b:.2f}")\nprint(f"Correlation r = {r:.3f}")\nprint(f"R-squared = {r**2:.3f}")\nprint(f"\\nPredicted yield at 190cm rain: {m*190+b:.2f} tonnes/ha")', title: 'Try it — Regression' } },
       },
       {
@@ -4594,15 +4622,30 @@ export const scienceReferences: ReferenceGuide[] = [
           '- Binomial: fixed number of trials, known probability\n' +
           '- Poisson: counting events in continuous time/space, known rate',
         advancedContent:
-          '**Derivation from Binomial:**\n\n' +
-          'Start with `P(X=k) = C(n,k) × pᵏ × (1-p)ⁿ⁻ᵏ`\n\n' +
-          'Substitute p = λ/n:\n\n' +
-          '1. `C(n,k) = n!/(k!(n-k)!)` → `nᵏ/k!` as n → ∞\n' +
-          '2. `pᵏ = (λ/n)ᵏ = λᵏ/nᵏ`\n' +
-          '3. `(1-λ/n)ⁿ⁻ᵏ → e⁻λ` as n → ∞\n\n' +
-          'Combining: `P(X=k) → (nᵏ/k!) × (λᵏ/nᵏ) × e⁻λ = λᵏe⁻λ/k!` ∎\n\n' +
-          '**Poisson process:** Events in continuous time with rate λ. The inter-arrival times follow an **Exponential(λ)** distribution — the continuous analog. The number of events in interval [0,t] follows Poisson(λt).\n\n' +
-          '**Applications:** Queuing theory (M/M/1 queues), network packet arrivals, radioactive decay, insurance claim modeling.',
+          '**The Binomial → Poisson limit — showing every algebra step.**\n\n' +
+          'Start with binomial: P(X=k) = C(n,k) × pᵏ × (1−p)ⁿ⁻ᵏ. Substitute p = λ/n.\n\n' +
+          '**Piece 1 — What happens to C(n,k)?**\n\n' +
+          'C(n,k) = n! / (k!(n−k)!) = [n × (n−1) × (n−2) × ... × (n−k+1)] / k!\n\n' +
+          'That is k terms in the numerator. When n is huge and k is small (say k=3, n=1,000,000):\n' +
+          'n × (n−1) × (n−2) ≈ n × n × n = n³ = nᵏ\n\n' +
+          'So C(n,k) ≈ nᵏ / k!\n\n' +
+          '**Piece 2 — What happens to pᵏ?**\n\n' +
+          'p = λ/n, so pᵏ = (λ/n)ᵏ = λᵏ/nᵏ\n\n' +
+          '**Piece 3 — What happens to (1−p)ⁿ⁻ᵏ?**\n\n' +
+          '(1 − λ/n)ⁿ⁻ᵏ. As n → ∞, the (−k) in the exponent doesn\'t matter (it is tiny compared to n).\n' +
+          'So this becomes (1 − λ/n)ⁿ, which is the definition of e⁻λ.\n\n' +
+          '(Why? Because eˣ = lim_{n→∞} (1 + x/n)ⁿ. Set x = −λ and you get e⁻λ.)\n\n' +
+          '**Multiply the three pieces:**\n\n' +
+          '(nᵏ/k!) × (λᵏ/nᵏ) × e⁻λ\n\n' +
+          'The nᵏ in the numerator and denominator cancel:\n\n' +
+          '= **λᵏ × e⁻λ / k!** ∎\n\n' +
+          '**Verify with numbers.** λ = 3, k = 2:\n' +
+          'P(X=2) = 3² × e⁻³ / 2! = 9 × 0.0498 / 2 = 0.4482 / 2 = **0.224**\n\n' +
+          'From the table in the beginner section: P(X=2) = 22.4% ✓\n\n' +
+          '**Connection to the Exponential distribution:**\n\n' +
+          'If customers arrive at a Poisson rate of λ = 3 per hour, how long do you wait for the NEXT customer? ' +
+          'That waiting time is Exponential(λ). The Poisson counts events; the Exponential measures the gap between them. ' +
+          'They are two sides of the same process — see the Exponential section for the full derivation.',
         interactive: { type: 'python-playground' as const, props: { starterCode: 'import numpy as np\n\n# Poisson distribution\nlam = 3  # average rate\n\ndef poisson_pmf(k, lam):\n    return (lam**k * np.exp(-lam)) / np.math.factorial(k)\n\nprint(f"Poisson(lambda={lam})")\nprint(f"Mean = {lam}, Variance = {lam}")\nprint()\nprint("k  | P(X=k)  | Cumulative")\nprint("-" * 30)\ncum = 0\nfor k in range(11):\n    p = poisson_pmf(k, lam)\n    cum += p\n    bar = "#" * int(p * 50)\n    print(f"{k:>2} | {p:.4f}  | {cum:.4f}  {bar}")', title: 'Try it — Poisson' } },
       },
       {
@@ -4630,13 +4673,22 @@ export const scienceReferences: ReferenceGuide[] = [
           'You have already waited 15 minutes. What is the probability of waiting 5 MORE minutes? Answer: **exactly the same as if you just arrived** (39%). ' +
           'The bus does not "owe" you anything for your past wait. The exponential distribution is the ONLY continuous distribution with this property.',
         intermediateContent:
-          '**PDF:** `f(t) = λe⁻λᵗ` for t ≥ 0\n\n' +
-          '**CDF:** `F(t) = 1 − e⁻λᵗ`\n\n' +
-          '**Mean = 1/λ, Variance = 1/λ²**\n\n' +
-          '**Memoryless property (formal):** `P(T > s+t | T > s) = P(T > t)`\n\n' +
-          'The exponential is the **only** continuous memoryless distribution.\n\n' +
-          '**Connection to Poisson:** If N(t) ~ Poisson(λt), the inter-arrival times Tᵢ are iid Exp(λ). Conversely, if waiting times are Exp(λ), the count process is Poisson.\n\n' +
-          '**Minimum of exponentials:** If T₁ ~ Exp(λ₁) and T₂ ~ Exp(λ₂), then min(T₁,T₂) ~ Exp(λ₁+λ₂) — the first of two independent events happens at the combined rate.',
+          '**From CDF to PDF — what "density" means:**\n\n' +
+          'We already know the CDF: P(wait ≤ t) = 1 − e⁻λᵗ. The PDF is the slope of the CDF — it tells you how likely you are to get a bus at EXACTLY time t (per unit time).\n\n' +
+          'Slope of CDF = derivative: f(t) = d/dt [1 − e⁻λᵗ] = λe⁻λᵗ\n\n' +
+          'At t = 0: f(0) = λ = 0.1 per minute. Buses are most likely to arrive right away (the rate is highest at the start).\n' +
+          'At t = 10: f(10) = 0.1 × e⁻¹ = 0.037 per minute. Still possible, but much less likely.\n' +
+          'At t = 30: f(30) = 0.1 × e⁻³ = 0.005 per minute. Very unlikely you are still waiting.\n\n' +
+          'The PDF drops off exponentially — hence the name.\n\n' +
+          '**Mean and variance:**\n\n' +
+          '- Mean waiting time = 1/λ. If λ = 0.1 buses/min, average wait = 10 min.\n' +
+          '- Variance = 1/λ² = 100 min². Std dev = 1/λ = 10 min.\n' +
+          '- Notice: the std dev equals the mean! This means the spread is as wide as the average — lots of variability.\n\n' +
+          '**Proving memoryless — the algebra is one line:**\n\n' +
+          'P(wait > 15+5 | already waited > 15) = P(wait > 20) / P(wait > 15) = e⁻²·⁰ / e⁻¹·⁵ = e⁻⁰·⁵ = P(wait > 5) ✓\n\n' +
+          'The e⁻λˢ in the numerator and denominator partially cancel because e^(a+b) = e^a × e^b. This is the ONLY function where that cancellation works perfectly — which is why exponential is the ONLY memoryless continuous distribution.\n\n' +
+          '**A practical consequence:** Two bus routes pass your stop. Route A comes every 10 min (λ₁ = 0.1), Route B every 15 min (λ₂ = 0.067). ' +
+          'How long until ANY bus arrives? The combined rate is λ₁ + λ₂ = 0.167 per min, so you wait on average 1/0.167 = **6 minutes** — faster than either route alone.',
         advancedContent:
           '**Derivation from Poisson — step by step:**\n\n' +
           'T = time until first event. If events follow a Poisson process with rate λ:\n\n' +
