@@ -139,6 +139,7 @@ const lazyMap: Record<string, () => Promise<{ default: ComponentType<any> }>> = 
   BoatRiverDiagram: () => import('../diagrams/BoatRiverDiagram'),
   VectorsSectionDiagrams: () => import('../diagrams/VectorsSectionDiagrams'),
   DotProductAngleDiagram: () => import('../diagrams/DotProductAngleDiagram'),
+  MatrixTransformDiagram: () => import('../diagrams/MatrixTransformDiagram'),
   AdaptationDiagram: () => import('../diagrams/AdaptationDiagram'),
   AngleTypesDiagram: () => import('../diagrams/AngleTypesDiagram'),
   AreaUnderCurveDiagram: () => import('../diagrams/AreaUnderCurveDiagram'),
