@@ -4933,9 +4933,59 @@ export const scienceReferences: ReferenceGuide[] = [
       {
         title: 'Vectors — Magnitude and Direction',
         beginnerContent:
-          'A vector is a quantity that has both magnitude (size) and direction. Velocity is a vector: "60 km/h northeast" is fundamentally different from "60 km/h south," even though the speed is the same. Force, displacement, acceleration, and electric fields are all vectors. By contrast, scalar quantities like temperature, mass, and speed have magnitude only. On a coordinate plane, a vector is represented as an arrow from one point to another, or equivalently as an ordered pair (or triple in 3D): the vector v = (3, 4) points 3 units right and 4 units up from its starting point.\n\nThe magnitude (length) of a vector v = (a, b) is |v| = √(a² + b²), directly from the Pythagorean theorem. So |(3, 4)| = √(9 + 16) = √25 = 5. The direction is given by the angle θ = arctan(b/a) measured from the positive x-axis. A unit vector has magnitude 1 and is used to indicate direction only: the unit vector in the direction of (3, 4) is (3/5, 4/5). In wildlife tracking — like monitoring one-horned rhinos in Kaziranga — GPS collars record position vectors at regular intervals. The difference between successive positions gives displacement vectors, from which researchers calculate the animal\'s velocity, the total distance covered, and movement patterns that reveal territorial behavior, feeding routes, and responses to flooding during the Brahmaputra\'s monsoon spate.',
+          '**A boat is crossing the Brahmaputra.**\n\n' +
+          'The motor pushes the boat north at 8 km/h. The river current pushes it east at 3 km/h. Where does the boat actually go?\n\n' +
+          'You cannot answer this with a single number. You need TWO pieces of information: **how fast** and **which direction**. That is what a vector is — a quantity with both magnitude (size) and direction.\n\n' +
+          '**Representing the boat as a vector:**\n\n' +
+          'Motor: (0, 8) — 0 km/h east, 8 km/h north\n' +
+          'Current: (3, 0) — 3 km/h east, 0 km/h north\n\n' +
+          'The boat\'s actual motion = motor + current = (0+3, 8+0) = **(3, 8)** — it moves 3 km/h east AND 8 km/h north simultaneously.\n\n' +
+          '**How fast is the boat actually going?**\n\n' +
+          'The boat moves 3 east and 8 north. Draw a right triangle:\n\n' +
+          '| | Value |\n' +
+          '|--|-------|\n' +
+          '| Horizontal leg | 3 km/h |\n' +
+          '| Vertical leg | 8 km/h |\n' +
+          '| Hypotenuse (Pythagorean theorem) | √(3² + 8²) = √(9 + 64) = √73 ≈ **8.5 km/h** |\n\n' +
+          'That is the **magnitude** of the vector — the length of the arrow.\n\n' +
+          '**What direction is it going?**\n\n' +
+          'The angle from east: θ = arctan(8/3) ≈ **69°** north of east.\n\n' +
+          '**Try a simpler example:** v = (3, 4)\n\n' +
+          '| Step | Calculation |\n' +
+          '|------|------------|\n' +
+          '| Draw | 3 units right, 4 units up |\n' +
+          '| Magnitude | √(3² + 4²) = √(9+16) = √25 = **5** |\n' +
+          '| Direction | arctan(4/3) ≈ **53°** from horizontal |\n\n' +
+          'Notice: 3, 4, 5 is a Pythagorean triple — the magnitude comes out to a whole number.\n\n' +
+          '**Scalars vs vectors:**\n\n' +
+          '| Scalar (just a number) | Vector (number + direction) |\n' +
+          '|----------------------|---------------------------|\n' +
+          '| Temperature: 28°C | Velocity: 8 km/h northeast |\n' +
+          '| Mass: 50 kg | Force: 100 N downward |\n' +
+          '| Speed: 60 km/h | Displacement: 5 km east |',
         intermediateContent:
-          'Vector operations with components: given **a** = (3, -2) and **b** = (1, 5), then a + b = (4, 3), a - b = (2, -7), 3a = (9, -6). Magnitude: |a| = √(9+4) = √13 ≈ 3.61. Unit vector: â = (3/√13, -2/√13). Dot product: a·b = 3(1) + (-2)(5) = -7. Since a·b < 0, the angle between them is obtuse. The exact angle: cos θ = -7/(√13 × √26) = -7/√338, so θ ≈ **112.4°**.',
+          '**Working with vectors — one operation at a time.**\n\n' +
+          'Let **a** = (3, −2) and **b** = (1, 5).\n\n' +
+          '**Addition** — add the matching components:\n\n' +
+          'a + b = (3+1, −2+5) = **(4, 3)**\n\n' +
+          'Geometrically: walk along **a**, then walk along **b**. You end up at (4, 3).\n\n' +
+          '**Subtraction** — subtract the matching components:\n\n' +
+          'a − b = (3−1, −2−5) = **(2, −7)**\n\n' +
+          '**Scalar multiplication** — multiply every component:\n\n' +
+          '3**a** = (3×3, 3×(−2)) = **(9, −6)** — same direction, 3× longer.\n\n' +
+          '**Magnitude** — length of the vector:\n\n' +
+          '|**a**| = √(3² + (−2)²) = √(9 + 4) = √13 ≈ **3.61**\n\n' +
+          '**Unit vector** — direction only (magnitude = 1):\n\n' +
+          'â = **a** / |**a**| = (3/√13, −2/√13) ≈ (0.832, −0.555). Check: √(0.832² + 0.555²) = √(0.692 + 0.308) = √1 = **1** ✓\n\n' +
+          '**Dot product** — a single number that measures how aligned two vectors are:\n\n' +
+          '**a** · **b** = 3×1 + (−2)×5 = 3 + (−10) = **−7**\n\n' +
+          '| Dot product | Meaning |\n' +
+          '|------------|--------|\n' +
+          '| Positive | Vectors point in roughly the same direction |\n' +
+          '| Zero | Vectors are perpendicular (90°) |\n' +
+          '| Negative | Vectors point in roughly opposite directions |\n\n' +
+          'Since **a** · **b** = −7 (negative), the angle between them is **obtuse** (> 90°).\n\n' +
+          'The exact angle: cos θ = (a·b) / (|a| × |b|) = −7 / (√13 × √26) = −7 / √338 ≈ −0.381, so θ ≈ **112°**.',
         advancedContent:
           '**Tensors — what they actually are, not just the name:**\n\n' +
           'A scalar (temperature: 25°C) is a single number — rank 0. A vector (velocity: 3 m/s east, 4 m/s north) is a list of numbers — rank 1. ' +
@@ -4959,7 +5009,32 @@ export const scienceReferences: ReferenceGuide[] = [
       {
         title: 'Vector Operations',
         beginnerContent:
-          'Vectors combine through addition, subtraction, and two types of multiplication. Vector addition is done component by component: (2, 5) + (3, −1) = (5, 4). Geometrically, you place the tail of the second vector at the head of the first — the result runs from the start of the first to the end of the second (the parallelogram law). If a boat on the Brahmaputra has a motor pushing it at (0, 8) km/h (due north) and the river current is (3, 0) km/h (due east), the actual velocity is (3, 8) km/h, with a speed of √(9 + 64) = √73 ≈ 8.5 km/h at an angle of arctan(8/3) ≈ 69° from east — the boat drifts downstream while moving across.\n\nThe dot product of two vectors a = (a₁, a₂) and b = (b₁, b₂) is a·b = a₁b₁ + a₂b₂, producing a scalar (number). It equals |a||b|cos θ, where θ is the angle between them. The dot product is zero when vectors are perpendicular (cos 90° = 0) and maximum when they are parallel (cos 0° = 1). This makes it invaluable for checking orthogonality and computing projections. In machine learning — such as the AI models used for elephant tracking in the story — the dot product measures how similar two feature vectors are: a high dot product means the features point in similar directions in high-dimensional space, suggesting the data points are similar.\n\nThe cross product (defined for 3D vectors) produces a new vector perpendicular to both inputs: a x b = (a₂b₃ − a₃b₂, a₃b₁ − a₁b₃, a₁b₂ − a₂b₁). Its magnitude equals the area of the parallelogram formed by the two vectors. Cross products appear in physics (torque = r x F, magnetic force = qv x B) and in computer graphics, where they calculate surface normals for lighting and shading in 3D rendered scenes.',
+          '**The dot product — "how similar are two vectors?"**\n\n' +
+          'You have two vectors: **a** = (2, 3) and **b** = (4, 1). The dot product multiplies matching components and adds:\n\n' +
+          '**a** · **b** = 2×4 + 3×1 = 8 + 3 = **11**\n\n' +
+          'That is it. Multiply the x\'s together, multiply the y\'s together, add.\n\n' +
+          '**What does the number 11 mean?** It tells you how much the two vectors "agree" — how much they point in the same direction.\n\n' +
+          '| If the dot product is... | The vectors are... | Example |\n' +
+          '|-------------------------|-------------------|--------|\n' +
+          '| Large and positive | Pointing in similar directions | (1,0) · (1,0) = 1 |\n' +
+          '| Zero | Perpendicular (at 90°) | (1,0) · (0,1) = 0 |\n' +
+          '| Negative | Pointing in opposite-ish directions | (1,0) · (−1,0) = −1 |\n\n' +
+          '**Finding the angle between two vectors:**\n\n' +
+          'cos θ = (**a** · **b**) / (|**a**| × |**b**|)\n\n' +
+          '|**a**| = √(4+9) = √13 ≈ 3.61. |**b**| = √(16+1) = √17 ≈ 4.12.\n\n' +
+          'cos θ = 11 / (3.61 × 4.12) = 11 / 14.87 = 0.74. θ = arccos(0.74) ≈ **42°** — they point in somewhat similar directions.\n\n' +
+          '**Checking perpendicularity** (critical for ML):\n\n' +
+          'Are (3, 4) and (−4, 3) perpendicular? Dot product = 3×(−4) + 4×3 = −12 + 12 = **0**. Yes — perpendicular. ✓\n\n' +
+          '**Why ML cares:** In machine learning, each data point is a vector of features. The dot product measures similarity. Two elephant rumbles with similar frequency and amplitude have a large dot product → likely the same mood. Two with opposite patterns have a negative dot product → different moods.\n\n' +
+          '**The cross product (3D only) — finding the direction perpendicular to two vectors:**\n\n' +
+          'Given **a** = (1, 2, 3) and **b** = (4, 5, 6):\n\n' +
+          '| Component | Calculation | Result |\n' +
+          '|-----------|------------|--------|\n' +
+          '| x | 2×6 − 3×5 | 12 − 15 = **−3** |\n' +
+          '| y | 3×4 − 1×6 | 12 − 6 = **6** |\n' +
+          '| z | 1×5 − 2×4 | 5 − 8 = **−3** |\n\n' +
+          '**a** × **b** = (−3, 6, −3) — this vector is perpendicular to BOTH **a** and **b**.\n\n' +
+          'Verify: (−3, 6, −3) · (1, 2, 3) = −3 + 12 − 9 = **0** ✓ Perpendicular!',
         intermediateContent:
           'The cross product **a × b** gives a vector perpendicular to both inputs. For a = (2, 3, 0) and b = (0, 1, 4): a × b = (3×4 − 0×1, 0×0 − 2×4, 2×1 − 3×0) = **(12, −8, 2)**. Its magnitude |a × b| = √(144+64+4) = √212 ≈ 14.56 equals the area of the parallelogram spanned by a and b. The scalar triple product a·(b × c) gives the volume of the parallelepiped. Right-hand rule: curl the fingers of your right hand from a toward b — your thumb points in the direction of a × b.',
         advancedContent:
@@ -4985,7 +5060,39 @@ export const scienceReferences: ReferenceGuide[] = [
       {
         title: 'Matrices and Multiplication',
         beginnerContent:
-          'A matrix is a rectangular array of numbers arranged in rows and columns. A 2x3 matrix has 2 rows and 3 columns. Matrices are added element by element (only matrices of the same dimensions can be added). Matrix multiplication is more involved: to multiply an m x n matrix A by an n x p matrix B, the number of columns in A must equal the number of rows in B, and the result is an m x p matrix C where each element C_ij is the dot product of row i of A with column j of B.\n\nFor example: [1 2; 3 4] x [5 6; 7 8] = [1x5+2x7, 1x6+2x8; 3x5+4x7, 3x6+4x8] = [19, 22; 43, 50]. Matrix multiplication is not commutative — AB ≠ BA in general. This matters because the order of operations matters: rotating an image and then scaling it produces a different result from scaling first and then rotating.\n\nSystems of linear equations can be written compactly as a matrix equation Ax = b and solved by finding A\'s inverse: x = A⁻¹b. The inverse of a 2x2 matrix [a b; c d] is (1/(ad−bc)) x [d −b; −c a], provided the determinant ad−bc ≠ 0. If the determinant is zero, the matrix is singular and the system either has no solution or infinitely many. In the drone-based paddy field surveys described in the dragonfly story, image data is stored as matrices (each pixel is an element), and image processing operations — blurring, sharpening, edge detection — are all matrix multiplications with specific filter matrices called kernels.',
+          '**What is a matrix? A grid of numbers — and why it matters.**\n\n' +
+          'Exam scores for 3 students in 2 subjects:\n\n' +
+          '| | Maths | Science |\n' +
+          '|--|-------|--------|\n' +
+          '| Anu | 80 | 70 |\n' +
+          '| Bina | 90 | 85 |\n' +
+          '| Charu | 75 | 95 |\n\n' +
+          'This table IS a matrix: A = [80 70; 90 85; 75 95]. It has 3 rows and 2 columns — a "3×2 matrix."\n\n' +
+          '**Matrix multiplication — step by step:**\n\n' +
+          'Multiply A = [1 2; 3 4] by B = [5 6; 7 8]. The rule: each entry in the result is a **dot product** of a row from A with a column from B.\n\n' +
+          '| Result entry | Row from A | Column from B | Dot product |\n' +
+          '|-------------|-----------|--------------|------------|\n' +
+          '| Top-left | (1, 2) | (5, 7) | 1×5 + 2×7 = **19** |\n' +
+          '| Top-right | (1, 2) | (6, 8) | 1×6 + 2×8 = **22** |\n' +
+          '| Bottom-left | (3, 4) | (5, 7) | 3×5 + 4×7 = **43** |\n' +
+          '| Bottom-right | (3, 4) | (6, 8) | 3×6 + 4×8 = **50** |\n\n' +
+          'Result: [19 22; 43 50]\n\n' +
+          '**The determinant — does the matrix "squish" space?**\n\n' +
+          'For [a b; c d]: det = ad − bc\n\n' +
+          'For [3 1; 2 4]: det = 3×4 − 1×2 = 12 − 2 = **10**\n\n' +
+          'What does 10 mean? The matrix stretches areas by a factor of 10. A 1×1 square becomes a parallelogram with area 10.\n' +
+          'If det = 0, the matrix squishes everything to a line — it destroys information and cannot be undone (no inverse).\n\n' +
+          '**The inverse — undoing a transformation:**\n\n' +
+          'For [3 1; 2 4]: inverse = (1/det) × [d −b; −c a] = (1/10) × [4 −1; −2 3]\n\n' +
+          '**Verify:** [3 1; 2 4] × (1/10)[4 −1; −2 3]\n' +
+          '= (1/10)[3×4+1×(−2), 3×(−1)+1×3; 2×4+4×(−2), 2×(−1)+4×3]\n' +
+          '= (1/10)[10 0; 0 10] = [1 0; 0 1] ✓ — the identity matrix (does nothing).\n\n' +
+          '**Solving equations with matrices:**\n\n' +
+          '2 apples + 1 banana = ₹8. 5 apples + 3 bananas = ₹19. What does each cost?\n\n' +
+          'Write as: [2 1; 5 3] × [apple; banana] = [8; 19]\n\n' +
+          'Inverse of [2 1; 5 3]: det = 6−5 = 1. Inverse = [3 −1; −5 2].\n\n' +
+          '[apple; banana] = [3 −1; −5 2] × [8; 19] = [24−19; −40+38] = **[5; −2]**\n\n' +
+          'Apple = ₹5, banana = ... ₹−2? That means our data is inconsistent (or bananas are giving you a refund). In real problems, check that the answer makes sense!',
         intermediateContent:
           'The determinant of a 2×2 matrix [a b; c d] is ad − bc. If det = 0, the matrix is singular (no inverse, the transformation collapses 2D to a line or point). For [3 1; 2 4]: det = 12 − 2 = 10, inverse = (1/10)[4 −1; −2 3]. Check: [3 1; 2 4] × (1/10)[4 −1; −2 3] = [1 0; 0 1] ✓. Solving Ax = b: if A = [2 1; 5 3] and b = [8; 19], then x = A⁻¹b = [3 −1; −5 2][8; 19] = [24−19; −40+38] = **(5, −2)**.',
         advancedContent:
@@ -5009,9 +5116,39 @@ export const scienceReferences: ReferenceGuide[] = [
       {
         title: 'Transformations — Matrices in Action',
         beginnerContent:
-          'One of the most powerful applications of matrices is geometric transformation. Every point (x, y) in 2D can be represented as a column vector [x; y], and multiplying it by a 2x2 matrix produces a transformed point. The matrix [cos θ, −sin θ; sin θ, cos θ] rotates a point by angle θ around the origin. The matrix [sx 0; 0 sy] scales by factors sx and sy. The matrix [1 0; 0 −1] reflects across the x-axis. Any sequence of rotations, scalings, reflections, and shears can be combined into a single matrix by multiplying the individual transformation matrices together — and applying that single matrix to every point is vastly faster than applying each transformation separately.\n\nThis is exactly how computer graphics work. Every 3D video game, every animated film, every CAD program represents objects as collections of vertices (points) and transforms them using 4x4 matrices (the extra dimension handles translation via homogeneous coordinates). A drone camera surveying Kaziranga\'s floodplains captures images that must be corrected for the drone\'s tilt, rotation, and altitude — each correction is a matrix transformation applied to every pixel. In machine learning, neural networks are fundamentally chains of matrix multiplications with nonlinear activation functions between layers. When the AI in the elephant-tracking story analyses camera trap images, it multiplies the image matrix by weight matrices in each neural network layer, transforming raw pixel values into high-level features — "trunk," "ear shape," "tusk pattern" — that identify individual elephants. Modern GPUs (Graphics Processing Units) are designed specifically to perform millions of matrix multiplications per second, which is why the same hardware that renders video games also trains AI models.',
+          '**What happens when you multiply a matrix by a point?**\n\n' +
+          'Start with the point (1, 0) — one unit to the right of the origin.\n\n' +
+          '**Scaling:** Multiply by [2 0; 0 3]:\n\n' +
+          '[2 0; 0 3] × [1; 0] = [2×1 + 0×0; 0×1 + 3×0] = **(2, 0)** — stretched 2× horizontally.\n\n' +
+          'Try (0, 1): [2 0; 0 3] × [0; 1] = **(0, 3)** — stretched 3× vertically.\n\n' +
+          'The matrix [2 0; 0 3] scales x by 2 and y by 3. The diagonal entries are the scale factors.\n\n' +
+          '**Rotation by 90°:** The rotation matrix for 90° is [0 −1; 1 0].\n\n' +
+          '[0 −1; 1 0] × [1; 0] = [0×1 + (−1)×0; 1×1 + 0×0] = **(0, 1)** — the point moved from "east" to "north." ✓\n\n' +
+          '[0 −1; 1 0] × [0; 1] = [0×0 + (−1)×1; 1×0 + 0×1] = **(−1, 0)** — "north" moved to "west." ✓\n\n' +
+          '**Reflection across x-axis:** [1 0; 0 −1]\n\n' +
+          '[1 0; 0 −1] × [3; 4] = **(3, −4)** — x stays, y flips. Like looking in a puddle.\n\n' +
+          '**The key idea:** A 2×2 matrix transforms EVERY point in the plane. Multiply each point by the matrix → the whole image rotates, scales, reflects, or shears.\n\n' +
+          '**Why this matters for ML:**\n\n' +
+          'A neural network layer does exactly this: y = W × x (plus a bias and activation function). The weight matrix W transforms the input vector x into a new representation. ' +
+          'An image enters as a vector of pixel values. After multiplying by the first weight matrix, it becomes a vector of "edge features." After the second matrix, "shape features." After the third, "object features." Each matrix transformation reveals more abstract patterns.',
         intermediateContent:
-          'Composing transformations = multiplying matrices. To rotate 45° then scale by 2: R = [cos45° -sin45°; sin45° cos45°] = [0.707 -0.707; 0.707 0.707], S = [2 0; 0 2]. Combined: SR = [1.414 -1.414; 1.414 1.414]. Apply to point (1, 0): SR × [1; 0] = **(1.414, 1.414)**. Order matters: RS ≠ SR. In computer graphics, transformation matrices are applied right-to-left.',
+          '**Composing two transformations — do them one at a time, then as one matrix.**\n\n' +
+          'Rotate the point (1, 0) by 90°, then scale by 2.\n\n' +
+          '**Step by step (two separate operations):**\n\n' +
+          '| Step | Matrix | Input | Output |\n' +
+          '|------|--------|-------|--------|\n' +
+          '| 1. Rotate 90° | [0 −1; 1 0] | (1, 0) | (0, 1) |\n' +
+          '| 2. Scale ×2 | [2 0; 0 2] | (0, 1) | **(0, 2)** |\n\n' +
+          '**As a single matrix (multiply the two matrices):**\n\n' +
+          'Combined = Scale × Rotate = [2 0; 0 2] × [0 −1; 1 0]\n\n' +
+          '| Entry | Calculation | Result |\n' +
+          '|-------|-----------|--------|\n' +
+          '| Top-left | 2×0 + 0×1 | 0 |\n' +
+          '| Top-right | 2×(−1) + 0×0 | −2 |\n' +
+          '| Bottom-left | 0×0 + 2×1 | 2 |\n' +
+          '| Bottom-right | 0×(−1) + 2×0 | 0 |\n\n' +
+          'Combined = [0 −2; 2 0]. Apply: [0 −2; 2 0] × [1; 0] = **(0, 2)** ✓ Same answer!\n\n' +
+          'The single matrix [0 −2; 2 0] does both operations at once. This is why games and ML use matrix composition — multiply 10 transformation matrices into one, then apply that one matrix to millions of points.',
         advancedContent:
           '**Composing transformations — why order matters, worked by hand:**\n\n' +
           'Rotate 90° then scale by 2 vs scale by 2 then rotate 90°. Are they the same?\n\n' +
