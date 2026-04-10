@@ -4941,7 +4941,8 @@ export const scienceReferences: ReferenceGuide[] = [
           'Current: (3, 0) — 3 km/h east, 0 km/h north\n\n' +
           'The boat\'s actual motion = motor + current = (0+3, 8+0) = **(3, 8)** — it moves 3 km/h east AND 8 km/h north simultaneously.\n\n' +
           '**How fast is the boat actually going?**\n\n' +
-          'The boat moves 3 east and 8 north. Draw a right triangle:\n\n' +
+          'The boat moves 3 east and 8 north — a right triangle:\n\n' +
+          '[diagram:BoatRiverDiagram]\n\n' +
           '| | Value |\n' +
           '|--|-------|\n' +
           '| Horizontal leg | 3 km/h |\n' +
@@ -4962,7 +4963,9 @@ export const scienceReferences: ReferenceGuide[] = [
           '|----------------------|---------------------------|\n' +
           '| Temperature: 28°C | Velocity: 8 km/h northeast |\n' +
           '| Mass: 50 kg | Force: 100 N downward |\n' +
-          '| Speed: 60 km/h | Displacement: 5 km east |',
+          '| Speed: 60 km/h | Displacement: 5 km east |\n\n' +
+          '**Now try it yourself — drag the vectors and watch the math update:**\n\n' +
+          '[diagram:VectorBoatDiagram]',
         intermediateContent:
           '**Working with vectors — one operation at a time.**\n\n' +
           'Let **a** = (3, −2) and **b** = (1, 5).\n\n' +
@@ -5004,7 +5007,6 @@ export const scienceReferences: ReferenceGuide[] = [
           'If you rotate your coordinate axes, the components change but the physical quantity (stress, curvature) stays the same. ' +
           'A random 3×3 matrix of numbers is NOT a tensor — it must transform correctly. This rule is what makes tensors useful in physics: ' +
           'the laws of physics don\'t depend on which direction you call "x."',
-        diagram: 'VectorsSectionDiagrams',
       },
       {
         title: 'Vector Operations',

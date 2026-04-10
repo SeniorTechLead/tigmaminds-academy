@@ -108,9 +108,32 @@ function renderTable(text: string, key: number) {
   );
 }
 
+function InlineDiagram({ name }: { name: string }) {
+  const Comp = diagramRegistry[name];
+  if (!Comp) return null;
+  return (
+    <ClientOnly>
+      <DiagramErrorBoundary>
+        <Suspense fallback={<div className="h-48 rounded-xl bg-gray-100 dark:bg-gray-700/30 animate-pulse my-3" />}>
+          <div className="my-3">
+            <DiagramZoom>
+              <Comp />
+            </DiagramZoom>
+          </div>
+        </Suspense>
+      </DiagramErrorBoundary>
+    </ClientOnly>
+  );
+}
+
 function renderContent(content: string) {
   const paragraphs = content.split('\n\n');
   return paragraphs.map((p, i) => {
+    // Inline diagram marker: [diagram:ComponentName]
+    const diagramMatch = p.trim().match(/^\[diagram:(\w+)\]$/);
+    if (diagramMatch) {
+      return <InlineDiagram key={i} name={diagramMatch[1]} />;
+    }
     if (isMarkdownTable(p)) {
       return renderTable(p, i);
     }
