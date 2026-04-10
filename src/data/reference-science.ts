@@ -5004,7 +5004,7 @@ export const scienceReferences: ReferenceGuide[] = [
           'If you rotate your coordinate axes, the components change but the physical quantity (stress, curvature) stays the same. ' +
           'A random 3×3 matrix of numbers is NOT a tensor — it must transform correctly. This rule is what makes tensors useful in physics: ' +
           'the laws of physics don\'t depend on which direction you call "x."',
-        diagram: 'VectorAdditionDiagram',
+        diagram: 'VectorBoatDiagram',
       },
       {
         title: 'Vector Operations',
