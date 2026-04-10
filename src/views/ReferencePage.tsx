@@ -22,11 +22,13 @@ export default function ReferencePage() {
   const [showIndex, setShowIndex] = useState(false);
   const [jumpToSlug, setJumpToSlug] = useState<string | null>(null);
   const [forceExpandSlug, setForceExpandSlug] = useState<string | null>(null);
-  const [level, setLevel] = useState<ReferenceLevel>(() => {
-    if (typeof window === 'undefined') return 0;
+  const [level, setLevel] = useState<ReferenceLevel>(0);
+
+  // Restore saved level after hydration to avoid server/client mismatch
+  useEffect(() => {
     const saved = localStorage.getItem('tma_ref_level');
-    return saved ? (parseInt(saved) as ReferenceLevel) : 0;
-  });
+    if (saved) setLevel(parseInt(saved) as ReferenceLevel);
+  }, []);
 
   // When navigating directly to a guide via slug, clear filters and scroll to it
   useEffect(() => {
