@@ -230,6 +230,21 @@ export default function SectionRenderer({ section, level = 0 }: Props) {
         {section.title}
       </h4>
 
+      {/* Diagram — FIRST, before content, so the visual grounds the explanation */}
+      {DiagramComponent && (
+        <ClientOnly>
+          <DiagramErrorBoundary>
+            <Suspense fallback={<div className="h-48 rounded-xl bg-gray-100 dark:bg-gray-700/30 animate-pulse mt-3" />}>
+              <div className="mb-3">
+                <DiagramZoom>
+                  <DiagramComponent />
+                </DiagramZoom>
+              </div>
+            </Suspense>
+          </DiagramErrorBoundary>
+        </ClientOnly>
+      )}
+
       {/* Beginner — everyone sees this */}
       {section.beginnerContent && renderContent(section.beginnerContent)}
 
@@ -260,21 +275,6 @@ export default function SectionRenderer({ section, level = 0 }: Props) {
             {section.code}
           </pre>
         </div>
-      )}
-
-      {/* Diagram — client-only to avoid hydration mismatch with lazy imports */}
-      {DiagramComponent && (
-        <ClientOnly>
-          <DiagramErrorBoundary>
-            <Suspense fallback={<div className="h-48 rounded-xl bg-gray-100 dark:bg-gray-700/30 animate-pulse mt-3" />}>
-              <div className="mt-3">
-                <DiagramZoom>
-                  <DiagramComponent />
-                </DiagramZoom>
-              </div>
-            </Suspense>
-          </DiagramErrorBoundary>
-        </ClientOnly>
       )}
 
       {/* Interactive widget — gate rich tools for non-signed-in users */}
