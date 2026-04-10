@@ -5086,6 +5086,8 @@ export const scienceReferences: ReferenceGuide[] = [
           'For [3 1; 2 4]: det = 3×4 − 1×2 = 12 − 2 = **10**\n\n' +
           'What does 10 mean? The matrix stretches areas by a factor of 10. A 1×1 square becomes a parallelogram with area 10.\n' +
           'If det = 0, the matrix squishes everything to a line — it destroys information and cannot be undone (no inverse).\n\n' +
+          '**See it — click different transformations and watch the area change:**\n\n' +
+          '[diagram:MatrixTransformDiagram]\n\n' +
           '**The inverse — undoing a transformation:**\n\n' +
           'For [3 1; 2 4]: inverse = (1/det) × [d −b; −c a] = (1/10) × [4 −1; −2 3]\n\n' +
           '**Verify:** [3 1; 2 4] × (1/10)[4 −1; −2 3]\n' +
