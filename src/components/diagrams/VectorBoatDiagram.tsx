@@ -141,17 +141,28 @@ export default function VectorBoatDiagram() {
           />
         )}
 
-        {/* Info panel */}
-        <rect x={W - 175} y={10} width="165" height="120" rx="8" fill="white" fillOpacity="0.9" stroke="#e2e8f0" className="dark:fill-gray-800/90 dark:stroke-gray-700" />
-        <text x={W - 165} y={30} className="fill-blue-600 dark:fill-blue-400 text-[12px] font-bold">A = ({a.x}, {a.y})</text>
-        <text x={W - 165} y={48} className="fill-green-600 dark:fill-green-400 text-[12px] font-bold">B = ({b.x}, {b.y})</text>
-        <line x1={W - 170} y1={55} x2={W - 15} y2={55} stroke="#e2e8f0" strokeWidth="1" />
-        <text x={W - 165} y={72} className="fill-red-600 dark:fill-red-400 text-[13px] font-bold">R = A + B = ({r.x}, {r.y})</text>
-        <text x={W - 165} y={92} className="fill-gray-600 dark:fill-gray-300 text-[11px]">|R| = √({r.x}²+{r.y}²) ≈ {magR.toFixed(2)}</text>
-        <text x={W - 165} y={108} className="fill-amber-600 dark:fill-amber-400 text-[11px]">θ = {angleR.toFixed(1)}° from east</text>
-        <text x={W - 165} y={124} className="fill-gray-400 text-[9px]">|A| = {magA.toFixed(2)}, |B| = {magB.toFixed(2)}</text>
       </svg>
 
+      {/* Info panel — outside SVG so it never overlaps the drawing */}
+      <div className="mt-2 grid grid-cols-3 gap-2 text-center text-xs">
+        <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-2">
+          <div className="font-bold text-blue-600 dark:text-blue-400">A = ({a.x}, {a.y})</div>
+          <div className="text-gray-500 dark:text-gray-400">|A| = {magA.toFixed(2)}</div>
+        </div>
+        <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-2">
+          <div className="font-bold text-green-600 dark:text-green-400">B = ({b.x}, {b.y})</div>
+          <div className="text-gray-500 dark:text-gray-400">|B| = {magB.toFixed(2)}</div>
+        </div>
+        <div className="bg-red-50 dark:bg-red-900/20 rounded-lg p-2">
+          <div className="font-bold text-red-600 dark:text-red-400">R = ({r.x}, {r.y})</div>
+          <div className="text-gray-500 dark:text-gray-400">|R| = {magR.toFixed(2)}</div>
+        </div>
+      </div>
+      <div className="mt-1 text-center text-xs text-gray-600 dark:text-gray-400">
+        |R| = √({r.x}² + {r.y}²) = √{(r.x * r.x + r.y * r.y).toFixed(1)} ≈ <span className="font-bold">{magR.toFixed(2)}</span>
+        <span className="mx-2">·</span>
+        <span className="text-amber-600 dark:text-amber-400">θ = {angleR.toFixed(1)}°</span>
+      </div>
       <div className="text-center mt-1">
         <span className="text-[10px] text-gray-500 dark:text-gray-400">Drag the </span>
         <span className="text-[10px] text-blue-600 dark:text-blue-400 font-semibold">blue</span>
