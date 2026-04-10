@@ -5025,6 +5025,8 @@ export const scienceReferences: ReferenceGuide[] = [
           'cos θ = (**a** · **b**) / (|**a**| × |**b**|)\n\n' +
           '|**a**| = √(4+9) = √13 ≈ 3.61. |**b**| = √(16+1) = √17 ≈ 4.12.\n\n' +
           'cos θ = 11 / (3.61 × 4.12) = 11 / 14.87 = 0.74. θ = arccos(0.74) ≈ **42°** — they point in somewhat similar directions.\n\n' +
+          '**Try it — drag the vectors and watch the angle and dot product change:**\n\n' +
+          '[diagram:DotProductAngleDiagram]\n\n' +
           '**Checking perpendicularity** (critical for ML):\n\n' +
           'Are (3, 4) and (−4, 3) perpendicular? Dot product = 3×(−4) + 4×3 = −12 + 12 = **0**. Yes — perpendicular. ✓\n\n' +
           '**Why ML cares:** In machine learning, each data point is a vector of features. The dot product measures similarity. Two elephant rumbles with similar frequency and amplitude have a large dot product → likely the same mood. Two with opposite patterns have a negative dot product → different moods.\n\n' +
@@ -5037,7 +5039,6 @@ export const scienceReferences: ReferenceGuide[] = [
           '| z | 1×5 − 2×4 | 5 − 8 = **−3** |\n\n' +
           '**a** × **b** = (−3, 6, −3) — this vector is perpendicular to BOTH **a** and **b**.\n\n' +
           'Verify: (−3, 6, −3) · (1, 2, 3) = −3 + 12 − 9 = **0** ✓ Perpendicular!',
-        diagram: 'DotProductAngleDiagram',
         intermediateContent:
           'The cross product **a × b** gives a vector perpendicular to both inputs. For a = (2, 3, 0) and b = (0, 1, 4): a × b = (3×4 − 0×1, 0×0 − 2×4, 2×1 − 3×0) = **(12, −8, 2)**. Its magnitude |a × b| = √(144+64+4) = √212 ≈ 14.56 equals the area of the parallelogram spanned by a and b. The scalar triple product a·(b × c) gives the volume of the parallelepiped. Right-hand rule: curl the fingers of your right hand from a toward b — your thumb points in the direction of a × b.',
         advancedContent:
@@ -5131,6 +5132,8 @@ export const scienceReferences: ReferenceGuide[] = [
           '**Reflection across x-axis:** [1 0; 0 −1]\n\n' +
           '[1 0; 0 −1] × [3; 4] = **(3, −4)** — x stays, y flips. Like looking in a puddle.\n\n' +
           '**The key idea:** A 2×2 matrix transforms EVERY point in the plane. Multiply each point by the matrix → the whole image rotates, scales, reflects, or shears.\n\n' +
+          '**Try each transformation — click the buttons and watch the shape change:**\n\n' +
+          '[diagram:MatrixTransformDiagram]\n\n' +
           '**Why this matters for ML:**\n\n' +
           'A neural network layer does exactly this: y = W × x (plus a bias and activation function). The weight matrix W transforms the input vector x into a new representation. ' +
           'An image enters as a vector of pixel values. After multiplying by the first weight matrix, it becomes a vector of "edge features." After the second matrix, "shape features." After the third, "object features." Each matrix transformation reveals more abstract patterns.',
