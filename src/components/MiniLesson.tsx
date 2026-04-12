@@ -393,11 +393,31 @@ len(plt.get_fignums()) > 0
           {hasRun && <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0" />}
         </div>
 
-        {/* Concept explanation */}
-        <div
-          className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4"
-          dangerouslySetInnerHTML={{ __html: renderMarkdown(conceptText) }}
-        />
+        {/* Concept explanation — with inline diagram at [diagram] marker */}
+        {conceptText.includes('[diagram]') ? (
+          <>
+            {conceptText.split('[diagram]').map((part, idx) => (
+              <div key={idx}>
+                {part.trim() && (
+                  <div
+                    className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4"
+                    dangerouslySetInnerHTML={{ __html: renderMarkdown(part.trim()) }}
+                  />
+                )}
+                {idx === 0 && diagram && (
+                  <div className="my-4">
+                    <DiagramZoom>{diagram}</DiagramZoom>
+                  </div>
+                )}
+              </div>
+            ))}
+          </>
+        ) : (
+          <div
+            className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4"
+            dangerouslySetInnerHTML={{ __html: renderMarkdown(conceptText) }}
+          />
+        )}
 
         {/* Analogy callout */}
         {analogy && (
@@ -443,8 +463,8 @@ len(plt.get_fignums()) > 0
         )}
       </div>
 
-      {/* ===== DIAGRAM ===== */}
-      {diagram && (
+      {/* ===== DIAGRAM (only if not already inlined via [diagram] marker) ===== */}
+      {diagram && !conceptText.includes('[diagram]') && (
         <div className="px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
           <DiagramZoom>
             {diagram}

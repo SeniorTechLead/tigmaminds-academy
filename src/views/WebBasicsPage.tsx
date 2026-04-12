@@ -4,6 +4,7 @@ import HtmlPlayground from '../components/HtmlPlayground';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useBasicsProgress } from '../contexts/BasicsProgressContext';
+import { HTMLTagsDiagram, HTMLStructureDiagram, CSSBoxModelDiagram, FlexboxDiagram, DOMManipulationDiagram, EventListenerDiagram, ComponentDiagram, TodoDataFlowDiagram } from '../components/diagrams/WebBasicsDiagrams';
 
 const lessons = [
   {
@@ -1288,10 +1289,16 @@ export default function WebBasicsPage() {
           {lessons.map((lesson, i) => {
             const done = isLessonComplete(COURSE_SLUG, i);
             return (
-            <div key={i}>
+            <div key={i} id={`lesson-${i}`}>
               {/* Lesson header — always visible */}
               <button
-                onClick={() => setExpandedLesson(expandedLesson === i ? null : i)}
+                onClick={() => {
+                  const opening = expandedLesson !== i;
+                  setExpandedLesson(opening ? i : null);
+                  if (opening) {
+                    setTimeout(() => document.getElementById(`lesson-${i}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+                  }
+                }}
                 className={`w-full text-left px-6 py-4 rounded-xl border transition-all flex items-center gap-4
                   ${expandedLesson === i
                     ? 'bg-blue-50 dark:bg-blue-900/20 border-blue-300 dark:border-blue-700'
@@ -1313,7 +1320,7 @@ export default function WebBasicsPage() {
                   <p className={`font-semibold ${expandedLesson === i ? 'text-blue-700 dark:text-blue-300' : done ? 'text-blue-700 dark:text-blue-300' : 'text-gray-900 dark:text-white'}`}>
                     {lesson.title}
                   </p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 truncate">{lesson.analogy.slice(0, 80)}...</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">{lesson.analogy}</p>
                 </div>
                 {done && expandedLesson !== i && <span className="text-xs font-semibold text-blue-600 dark:text-blue-400 flex-shrink-0">Complete</span>}
                 <ChevronRight className={`w-5 h-5 text-gray-400 transition-transform ${expandedLesson === i ? 'rotate-90' : ''}`} />
@@ -1331,6 +1338,16 @@ export default function WebBasicsPage() {
                       {lesson.concept}
                     </div>
                   </div>
+
+                  {/* Interactive diagram — visualizes the concept */}
+                  {i === 0 && <HTMLTagsDiagram />}
+                  {i === 1 && <HTMLStructureDiagram />}
+                  {i === 2 && <CSSBoxModelDiagram />}
+                  {i === 3 && <FlexboxDiagram />}
+                  {i === 4 && <DOMManipulationDiagram />}
+                  {i === 5 && <EventListenerDiagram />}
+                  {i === 6 && <ComponentDiagram />}
+                  {i === 7 && <TodoDataFlowDiagram />}
 
                   {/* Analogy */}
                   <div className="bg-amber-50 dark:bg-amber-900/10 rounded-xl p-5 border border-amber-200 dark:border-amber-800">

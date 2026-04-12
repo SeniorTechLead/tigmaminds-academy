@@ -18,6 +18,8 @@ const lessons = [
 
 Think of \`print()\` as raising your hand and saying something out loud. Whatever you put inside the parentheses, Python will show it to you.
 
+[diagram]
+
 Text must go inside **quotes** — either single quotes \`'hello'\` or double quotes \`"hello"\`. Without quotes, Python thinks you're referring to a variable (we'll learn about those next).
 
 You can print multiple things by separating them with commas: \`print("My name is", "Tara")\` — Python adds a space between them automatically.`,
@@ -46,6 +48,8 @@ print("The honey hunter found", 3, "hives today.")`,
   {
     title: 'Variables — giving names to things',
     concept: `A **variable** is a name that stores a value. Think of it as a labeled box: you put something in, and later you can use the label to get it back.
+
+[diagram]
 
 \`\`\`
 name = "Kavitha"
@@ -98,6 +102,8 @@ print(greeting)`,
 heights = [2.1, 3.5, 5.0, 4.2, 6.1]
 animals = ["elephant", "tiger", "rhino"]
 \`\`\`
+
+[diagram]
 
 Each item has a position called an **index**, starting from **0** (not 1!):
 - \`animals[0]\` is \`"elephant"\`
@@ -153,6 +159,8 @@ for animal in ["elephant", "tiger", "rhino"]:
 \`\`\`
 
 This prints each animal on its own line. The indented code (4 spaces) is the **body** of the loop — it runs once per item.
+
+[diagram]
 
 \`range(n)\` generates numbers 0 through n-1:
 - \`range(5)\` gives 0, 1, 2, 3, 4
@@ -210,6 +218,8 @@ temperature = 35
 if temperature > 30:
     print("Too hot for fieldwork!")
 \`\`\`
+
+[diagram]
 
 You can add alternatives with **elif** (else if) and **else**:
 
@@ -292,6 +302,8 @@ def greet(name):
 greet("Tara")   # prints: Hello, Tara!
 greet("Kavitha") # prints: Hello, Kavitha!
 \`\`\`
+
+[diagram]
 
 Functions take **parameters** (inputs) and can **return** a result:
 
@@ -385,6 +397,8 @@ print(temps - 10)      # [2, 4, 1, 5, 3, 0, 4] — subtract from ALL
 
 With regular lists, you would need a loop to subtract 10 from each item. With numpy, you just write \`temps - 10\` and it applies to every element. This is called **vectorized operations**.
 
+[diagram]
+
 Key numpy tools:
 - \`np.array([...])\` — create an array
 - \`np.arange(start, stop, step)\` — like range() but returns an array
@@ -451,6 +465,8 @@ print(f"Biggest day-to-day cooling: {daily_change.min():.1f} C")`,
   {
     title: 'Your first plot — making data visible',
     concept: `Numbers in a table are hard to read. A **plot** turns data into a picture that reveals patterns instantly.
+
+[diagram]
 
 **Matplotlib** is Python's plotting library:
 
@@ -642,10 +658,16 @@ export default function PythonBasicsPage() {
           {lessons.map((lesson, i) => {
             const done = isLessonComplete(COURSE_SLUG, i);
             return (
-            <div key={i}>
+            <div key={i} id={`lesson-${i}`}>
               {/* Lesson header — always visible */}
               <button
-                onClick={() => setExpandedLesson(expandedLesson === i ? null : i)}
+                onClick={() => {
+                  const opening = expandedLesson !== i;
+                  setExpandedLesson(opening ? i : null);
+                  if (opening) {
+                    setTimeout(() => document.getElementById(`lesson-${i}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+                  }
+                }}
                 className={`w-full text-left px-6 py-4 rounded-xl border transition-all flex items-center gap-4
                   ${expandedLesson === i
                     ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-300 dark:border-emerald-700'
@@ -667,7 +689,7 @@ export default function PythonBasicsPage() {
                   <p className={`font-semibold ${expandedLesson === i ? 'text-emerald-700 dark:text-emerald-300' : done ? 'text-emerald-700 dark:text-emerald-300' : 'text-gray-900 dark:text-white'}`}>
                     {lesson.title}
                   </p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 truncate">{lesson.codeIntro}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">{lesson.codeIntro}</p>
                 </div>
                 {done && expandedLesson !== i && <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 flex-shrink-0">Complete</span>}
                 <ChevronRight className={`w-5 h-5 text-gray-400 transition-transform ${expandedLesson === i ? 'rotate-90' : ''}`} />
